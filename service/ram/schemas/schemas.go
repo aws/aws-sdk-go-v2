@@ -4,2846 +4,2775 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptResourceShareInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AcceptResourceShareInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eAcceptResourceShareInvitation                                                    smithy.SchemaExtensions
+	eAssociateResourceShare                                                           smithy.SchemaExtensions
+	eAssociateResourceSharePermission                                                 smithy.SchemaExtensions
+	eCreatePermission                                                                 smithy.SchemaExtensions
+	eCreatePermissionVersion                                                          smithy.SchemaExtensions
+	eCreateResourceShare                                                              smithy.SchemaExtensions
+	eDeletePermission                                                                 smithy.SchemaExtensions
+	eDeletePermissionVersion                                                          smithy.SchemaExtensions
+	eDeleteResourceShare                                                              smithy.SchemaExtensions
+	eDisassociateResourceShare                                                        smithy.SchemaExtensions
+	eDisassociateResourceSharePermission                                              smithy.SchemaExtensions
+	eEnableSharingWithAwsOrganization                                                 smithy.SchemaExtensions
+	eGetPermission                                                                    smithy.SchemaExtensions
+	eGetResourcePolicies                                                              smithy.SchemaExtensions
+	eGetResourceShareAssociations                                                     smithy.SchemaExtensions
+	eGetResourceShareInvitations                                                      smithy.SchemaExtensions
+	eGetResourceShares                                                                smithy.SchemaExtensions
+	eListPendingInvitationResources                                                   smithy.SchemaExtensions
+	eListPermissionAssociations                                                       smithy.SchemaExtensions
+	eListPermissions                                                                  smithy.SchemaExtensions
+	eListPermissionVersions                                                           smithy.SchemaExtensions
+	eListPrincipals                                                                   smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWork                                            smithy.SchemaExtensions
+	eListResources                                                                    smithy.SchemaExtensions
+	eListResourceSharePermissions                                                     smithy.SchemaExtensions
+	eListResourceTypes                                                                smithy.SchemaExtensions
+	eListSourceAssociations                                                           smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicy                                               smithy.SchemaExtensions
+	ePromoteResourceShareCreatedFromPolicy                                            smithy.SchemaExtensions
+	eRejectResourceShareInvitation                                                    smithy.SchemaExtensions
+	eReplacePermissionAssociations                                                    smithy.SchemaExtensions
+	eSetDefaultPermissionVersion                                                      smithy.SchemaExtensions
+	eTagResource                                                                      smithy.SchemaExtensions
+	eUntagResource                                                                    smithy.SchemaExtensions
+	eUpdatePermission                                                                 smithy.SchemaExtensions
+	eUpdateResourceShare                                                              smithy.SchemaExtensions
+	e_AmazonResourceSharing                                                           smithy.SchemaExtensions
+	eAssociatedPermission                                                             smithy.SchemaExtensions
+	eAssociatedPermission_arn                                                         smithy.SchemaExtensions
+	eAssociatedPermission_permissionVersion                                           smithy.SchemaExtensions
+	eAssociatedPermission_defaultVersion                                              smithy.SchemaExtensions
+	eAssociatedPermission_resourceType                                                smithy.SchemaExtensions
+	eAssociatedPermission_status                                                      smithy.SchemaExtensions
+	eAssociatedPermission_featureSet                                                  smithy.SchemaExtensions
+	eAssociatedPermission_lastUpdatedTime                                             smithy.SchemaExtensions
+	eAssociatedPermission_resourceShareArn                                            smithy.SchemaExtensions
+	eAssociatedPermission_permissionTemplateParameters                                smithy.SchemaExtensions
+	e_AssociatedPermissionList                                                        smithy.SchemaExtensions
+	e_AssociatedPermissionList_member                                                 smithy.SchemaExtensions
+	eAssociatedSource                                                                 smithy.SchemaExtensions
+	eAssociatedSource_resourceShareArn                                                smithy.SchemaExtensions
+	eAssociatedSource_sourceId                                                        smithy.SchemaExtensions
+	eAssociatedSource_sourceType                                                      smithy.SchemaExtensions
+	eAssociatedSource_status                                                          smithy.SchemaExtensions
+	eAssociatedSource_lastUpdatedTime                                                 smithy.SchemaExtensions
+	eAssociatedSource_creationTime                                                    smithy.SchemaExtensions
+	eAssociatedSource_statusMessage                                                   smithy.SchemaExtensions
+	e_AssociatedSourceList                                                            smithy.SchemaExtensions
+	e_AssociatedSourceList_member                                                     smithy.SchemaExtensions
+	e_Boolean                                                                         smithy.SchemaExtensions
+	e_DateTime                                                                        smithy.SchemaExtensions
+	eIdempotentParameterMismatchException                                             smithy.SchemaExtensions
+	eIdempotentParameterMismatchException_message                                     smithy.SchemaExtensions
+	e_Integer                                                                         smithy.SchemaExtensions
+	eInvalidClientTokenException                                                      smithy.SchemaExtensions
+	eInvalidClientTokenException_message                                              smithy.SchemaExtensions
+	eInvalidMaxResultsException                                                       smithy.SchemaExtensions
+	eInvalidMaxResultsException_message                                               smithy.SchemaExtensions
+	eInvalidNextTokenException                                                        smithy.SchemaExtensions
+	eInvalidNextTokenException_message                                                smithy.SchemaExtensions
+	eInvalidParameterException                                                        smithy.SchemaExtensions
+	eInvalidParameterException_message                                                smithy.SchemaExtensions
+	eInvalidPolicyException                                                           smithy.SchemaExtensions
+	eInvalidPolicyException_message                                                   smithy.SchemaExtensions
+	eInvalidResourceTypeException                                                     smithy.SchemaExtensions
+	eInvalidResourceTypeException_message                                             smithy.SchemaExtensions
+	eInvalidStateTransitionException                                                  smithy.SchemaExtensions
+	eInvalidStateTransitionException_message                                          smithy.SchemaExtensions
+	eMalformedArnException                                                            smithy.SchemaExtensions
+	eMalformedArnException_message                                                    smithy.SchemaExtensions
+	eMalformedPolicyTemplateException                                                 smithy.SchemaExtensions
+	eMalformedPolicyTemplateException_message                                         smithy.SchemaExtensions
+	e_MaxResults                                                                      smithy.SchemaExtensions
+	eMissingRequiredParameterException                                                smithy.SchemaExtensions
+	eMissingRequiredParameterException_message                                        smithy.SchemaExtensions
+	eOperationNotPermittedException                                                   smithy.SchemaExtensions
+	eOperationNotPermittedException_message                                           smithy.SchemaExtensions
+	ePermissionAlreadyExistsException                                                 smithy.SchemaExtensions
+	ePermissionAlreadyExistsException_message                                         smithy.SchemaExtensions
+	ePermissionArnAndTemplateParameters                                               smithy.SchemaExtensions
+	ePermissionArnAndTemplateParameters_permissionArn                                 smithy.SchemaExtensions
+	ePermissionArnAndTemplateParameters_permissionTemplateParameters                  smithy.SchemaExtensions
+	e_PermissionArnAndTemplateParametersList                                          smithy.SchemaExtensions
+	e_PermissionArnAndTemplateParametersList_member                                   smithy.SchemaExtensions
+	e_PermissionArnList                                                               smithy.SchemaExtensions
+	e_PermissionArnList_member                                                        smithy.SchemaExtensions
+	ePermissionFeatureSet                                                             smithy.SchemaExtensions
+	ePermissionFeatureSet_CREATED_FROM_POLICY                                         smithy.SchemaExtensions
+	ePermissionFeatureSet_PROMOTING_TO_STANDARD                                       smithy.SchemaExtensions
+	ePermissionFeatureSet_STANDARD                                                    smithy.SchemaExtensions
+	ePermissionLimitExceededException                                                 smithy.SchemaExtensions
+	ePermissionLimitExceededException_message                                         smithy.SchemaExtensions
+	e_PermissionName                                                                  smithy.SchemaExtensions
+	ePermissionStatus                                                                 smithy.SchemaExtensions
+	ePermissionStatus_ATTACHABLE                                                      smithy.SchemaExtensions
+	ePermissionStatus_UNATTACHABLE                                                    smithy.SchemaExtensions
+	ePermissionStatus_DELETING                                                        smithy.SchemaExtensions
+	ePermissionStatus_DELETED                                                         smithy.SchemaExtensions
+	ePermissionStatus_DEPRECATED                                                      smithy.SchemaExtensions
+	ePermissionTemplateParameter                                                      smithy.SchemaExtensions
+	ePermissionTemplateParameter_name                                                 smithy.SchemaExtensions
+	ePermissionTemplateParameter_type                                                 smithy.SchemaExtensions
+	ePermissionTemplateParameter_description                                          smithy.SchemaExtensions
+	ePermissionTemplateParameter_values                                               smithy.SchemaExtensions
+	ePermissionTemplateParameterDeclaration                                           smithy.SchemaExtensions
+	ePermissionTemplateParameterDeclaration_name                                      smithy.SchemaExtensions
+	ePermissionTemplateParameterDeclaration_type                                      smithy.SchemaExtensions
+	ePermissionTemplateParameterDeclaration_description                               smithy.SchemaExtensions
+	e_PermissionTemplateParameterDeclarationList                                      smithy.SchemaExtensions
+	e_PermissionTemplateParameterDeclarationList_member                               smithy.SchemaExtensions
+	ePermissionTemplateParameterInput                                                 smithy.SchemaExtensions
+	ePermissionTemplateParameterInput_name                                            smithy.SchemaExtensions
+	ePermissionTemplateParameterInput_values                                          smithy.SchemaExtensions
+	e_PermissionTemplateParameterInputList                                            smithy.SchemaExtensions
+	e_PermissionTemplateParameterInputList_member                                     smithy.SchemaExtensions
+	e_PermissionTemplateParameterList                                                 smithy.SchemaExtensions
+	e_PermissionTemplateParameterList_member                                          smithy.SchemaExtensions
+	ePermissionTemplateParameterType                                                  smithy.SchemaExtensions
+	ePermissionTemplateParameterType_STRING                                           smithy.SchemaExtensions
+	ePermissionTemplateParameterType_STRING_LIST                                      smithy.SchemaExtensions
+	e_PermissionTemplateParameterValueList                                            smithy.SchemaExtensions
+	e_PermissionTemplateParameterValueList_member                                     smithy.SchemaExtensions
+	ePermissionType                                                                   smithy.SchemaExtensions
+	ePermissionType_CUSTOMER_MANAGED                                                  smithy.SchemaExtensions
+	ePermissionType_AWS_MANAGED                                                       smithy.SchemaExtensions
+	ePermissionTypeFilter                                                             smithy.SchemaExtensions
+	ePermissionTypeFilter_ALL                                                         smithy.SchemaExtensions
+	ePermissionTypeFilter_AWS_MANAGED                                                 smithy.SchemaExtensions
+	ePermissionTypeFilter_CUSTOMER_MANAGED                                            smithy.SchemaExtensions
+	ePermissionVersionsLimitExceededException                                         smithy.SchemaExtensions
+	ePermissionVersionsLimitExceededException_message                                 smithy.SchemaExtensions
+	e_Policy                                                                          smithy.SchemaExtensions
+	e_PolicyList                                                                      smithy.SchemaExtensions
+	e_PolicyList_member                                                               smithy.SchemaExtensions
+	ePrincipal                                                                        smithy.SchemaExtensions
+	ePrincipal_id                                                                     smithy.SchemaExtensions
+	ePrincipal_resourceShareArn                                                       smithy.SchemaExtensions
+	ePrincipal_creationTime                                                           smithy.SchemaExtensions
+	ePrincipal_lastUpdatedTime                                                        smithy.SchemaExtensions
+	ePrincipal_external                                                               smithy.SchemaExtensions
+	e_PrincipalArnOrIdList                                                            smithy.SchemaExtensions
+	e_PrincipalArnOrIdList_member                                                     smithy.SchemaExtensions
+	e_PrincipalList                                                                   smithy.SchemaExtensions
+	e_PrincipalList_member                                                            smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork                                                smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_id                                             smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_fromPermissionArn                              smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_fromPermissionVersion                          smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_toPermissionArn                                smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_toPermissionVersion                            smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_permissionTemplateParameters                   smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_status                                         smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_statusMessage                                  smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_creationTime                                   smithy.SchemaExtensions
+	eReplacePermissionAssociationsWork_lastUpdatedTime                                smithy.SchemaExtensions
+	e_ReplacePermissionAssociationsWorkIdList                                         smithy.SchemaExtensions
+	e_ReplacePermissionAssociationsWorkIdList_member                                  smithy.SchemaExtensions
+	e_ReplacePermissionAssociationsWorkList                                           smithy.SchemaExtensions
+	e_ReplacePermissionAssociationsWorkList_member                                    smithy.SchemaExtensions
+	eReplacePermissionAssociationsWorkStatus                                          smithy.SchemaExtensions
+	eReplacePermissionAssociationsWorkStatus_IN_PROGRESS                              smithy.SchemaExtensions
+	eReplacePermissionAssociationsWorkStatus_COMPLETED                                smithy.SchemaExtensions
+	eReplacePermissionAssociationsWorkStatus_FAILED                                   smithy.SchemaExtensions
+	eResource                                                                         smithy.SchemaExtensions
+	eResource_arn                                                                     smithy.SchemaExtensions
+	eResource_type                                                                    smithy.SchemaExtensions
+	eResource_resourceShareArn                                                        smithy.SchemaExtensions
+	eResource_resourceGroupArn                                                        smithy.SchemaExtensions
+	eResource_status                                                                  smithy.SchemaExtensions
+	eResource_statusMessage                                                           smithy.SchemaExtensions
+	eResource_creationTime                                                            smithy.SchemaExtensions
+	eResource_lastUpdatedTime                                                         smithy.SchemaExtensions
+	eResource_resourceRegionScope                                                     smithy.SchemaExtensions
+	e_ResourceArnList                                                                 smithy.SchemaExtensions
+	e_ResourceArnList_member                                                          smithy.SchemaExtensions
+	eResourceArnNotFoundException                                                     smithy.SchemaExtensions
+	eResourceArnNotFoundException_message                                             smithy.SchemaExtensions
+	e_ResourceList                                                                    smithy.SchemaExtensions
+	e_ResourceList_member                                                             smithy.SchemaExtensions
+	eResourceOwner                                                                    smithy.SchemaExtensions
+	eResourceOwner_SELF                                                               smithy.SchemaExtensions
+	eResourceOwner_OTHER_ACCOUNTS                                                     smithy.SchemaExtensions
+	eResourceRegionScope                                                              smithy.SchemaExtensions
+	eResourceRegionScope_REGIONAL                                                     smithy.SchemaExtensions
+	eResourceRegionScope_GLOBAL                                                       smithy.SchemaExtensions
+	eResourceRegionScopeFilter                                                        smithy.SchemaExtensions
+	eResourceRegionScopeFilter_ALL                                                    smithy.SchemaExtensions
+	eResourceRegionScopeFilter_REGIONAL                                               smithy.SchemaExtensions
+	eResourceRegionScopeFilter_GLOBAL                                                 smithy.SchemaExtensions
+	eResourceShare                                                                    smithy.SchemaExtensions
+	eResourceShare_resourceShareArn                                                   smithy.SchemaExtensions
+	eResourceShare_name                                                               smithy.SchemaExtensions
+	eResourceShare_owningAccountId                                                    smithy.SchemaExtensions
+	eResourceShare_allowExternalPrincipals                                            smithy.SchemaExtensions
+	eResourceShare_status                                                             smithy.SchemaExtensions
+	eResourceShare_statusMessage                                                      smithy.SchemaExtensions
+	eResourceShare_tags                                                               smithy.SchemaExtensions
+	eResourceShare_creationTime                                                       smithy.SchemaExtensions
+	eResourceShare_lastUpdatedTime                                                    smithy.SchemaExtensions
+	eResourceShare_featureSet                                                         smithy.SchemaExtensions
+	eResourceShare_resourceShareConfiguration                                         smithy.SchemaExtensions
+	e_ResourceShareArnList                                                            smithy.SchemaExtensions
+	e_ResourceShareArnList_member                                                     smithy.SchemaExtensions
+	eResourceShareAssociation                                                         smithy.SchemaExtensions
+	eResourceShareAssociation_resourceShareArn                                        smithy.SchemaExtensions
+	eResourceShareAssociation_resourceShareName                                       smithy.SchemaExtensions
+	eResourceShareAssociation_associatedEntity                                        smithy.SchemaExtensions
+	eResourceShareAssociation_associationType                                         smithy.SchemaExtensions
+	eResourceShareAssociation_status                                                  smithy.SchemaExtensions
+	eResourceShareAssociation_statusMessage                                           smithy.SchemaExtensions
+	eResourceShareAssociation_creationTime                                            smithy.SchemaExtensions
+	eResourceShareAssociation_lastUpdatedTime                                         smithy.SchemaExtensions
+	eResourceShareAssociation_external                                                smithy.SchemaExtensions
+	e_ResourceShareAssociationList                                                    smithy.SchemaExtensions
+	e_ResourceShareAssociationList_member                                             smithy.SchemaExtensions
+	eResourceShareAssociationStatus                                                   smithy.SchemaExtensions
+	eResourceShareAssociationStatus_ASSOCIATING                                       smithy.SchemaExtensions
+	eResourceShareAssociationStatus_ASSOCIATED                                        smithy.SchemaExtensions
+	eResourceShareAssociationStatus_FAILED                                            smithy.SchemaExtensions
+	eResourceShareAssociationStatus_DISASSOCIATING                                    smithy.SchemaExtensions
+	eResourceShareAssociationStatus_DISASSOCIATED                                     smithy.SchemaExtensions
+	eResourceShareAssociationStatus_SUSPENDED                                         smithy.SchemaExtensions
+	eResourceShareAssociationStatus_SUSPENDING                                        smithy.SchemaExtensions
+	eResourceShareAssociationStatus_RESTORING                                         smithy.SchemaExtensions
+	eResourceShareAssociationType                                                     smithy.SchemaExtensions
+	eResourceShareAssociationType_PRINCIPAL                                           smithy.SchemaExtensions
+	eResourceShareAssociationType_RESOURCE                                            smithy.SchemaExtensions
+	eResourceShareAssociationType_SOURCE                                              smithy.SchemaExtensions
+	eResourceShareConfiguration                                                       smithy.SchemaExtensions
+	eResourceShareConfiguration_retainSharingOnAccountLeaveOrganization               smithy.SchemaExtensions
+	eResourceShareFeatureSet                                                          smithy.SchemaExtensions
+	eResourceShareFeatureSet_CREATED_FROM_POLICY                                      smithy.SchemaExtensions
+	eResourceShareFeatureSet_PROMOTING_TO_STANDARD                                    smithy.SchemaExtensions
+	eResourceShareFeatureSet_STANDARD                                                 smithy.SchemaExtensions
+	eResourceShareInvitation                                                          smithy.SchemaExtensions
+	eResourceShareInvitation_resourceShareInvitationArn                               smithy.SchemaExtensions
+	eResourceShareInvitation_resourceShareName                                        smithy.SchemaExtensions
+	eResourceShareInvitation_resourceShareArn                                         smithy.SchemaExtensions
+	eResourceShareInvitation_senderAccountId                                          smithy.SchemaExtensions
+	eResourceShareInvitation_receiverAccountId                                        smithy.SchemaExtensions
+	eResourceShareInvitation_invitationTimestamp                                      smithy.SchemaExtensions
+	eResourceShareInvitation_status                                                   smithy.SchemaExtensions
+	eResourceShareInvitation_resourceShareAssociations                                smithy.SchemaExtensions
+	eResourceShareInvitation_receiverArn                                              smithy.SchemaExtensions
+	eResourceShareInvitationAlreadyAcceptedException                                  smithy.SchemaExtensions
+	eResourceShareInvitationAlreadyAcceptedException_message                          smithy.SchemaExtensions
+	eResourceShareInvitationAlreadyRejectedException                                  smithy.SchemaExtensions
+	eResourceShareInvitationAlreadyRejectedException_message                          smithy.SchemaExtensions
+	e_ResourceShareInvitationArnList                                                  smithy.SchemaExtensions
+	e_ResourceShareInvitationArnList_member                                           smithy.SchemaExtensions
+	eResourceShareInvitationArnNotFoundException                                      smithy.SchemaExtensions
+	eResourceShareInvitationArnNotFoundException_message                              smithy.SchemaExtensions
+	eResourceShareInvitationExpiredException                                          smithy.SchemaExtensions
+	eResourceShareInvitationExpiredException_message                                  smithy.SchemaExtensions
+	e_ResourceShareInvitationList                                                     smithy.SchemaExtensions
+	e_ResourceShareInvitationList_member                                              smithy.SchemaExtensions
+	eResourceShareInvitationStatus                                                    smithy.SchemaExtensions
+	eResourceShareInvitationStatus_PENDING                                            smithy.SchemaExtensions
+	eResourceShareInvitationStatus_ACCEPTED                                           smithy.SchemaExtensions
+	eResourceShareInvitationStatus_REJECTED                                           smithy.SchemaExtensions
+	eResourceShareInvitationStatus_EXPIRED                                            smithy.SchemaExtensions
+	eResourceShareLimitExceededException                                              smithy.SchemaExtensions
+	eResourceShareLimitExceededException_message                                      smithy.SchemaExtensions
+	e_ResourceShareList                                                               smithy.SchemaExtensions
+	e_ResourceShareList_member                                                        smithy.SchemaExtensions
+	eResourceSharePermissionDetail                                                    smithy.SchemaExtensions
+	eResourceSharePermissionDetail_arn                                                smithy.SchemaExtensions
+	eResourceSharePermissionDetail_version                                            smithy.SchemaExtensions
+	eResourceSharePermissionDetail_defaultVersion                                     smithy.SchemaExtensions
+	eResourceSharePermissionDetail_name                                               smithy.SchemaExtensions
+	eResourceSharePermissionDetail_resourceType                                       smithy.SchemaExtensions
+	eResourceSharePermissionDetail_permission                                         smithy.SchemaExtensions
+	eResourceSharePermissionDetail_permissionTemplateParameters                       smithy.SchemaExtensions
+	eResourceSharePermissionDetail_creationTime                                       smithy.SchemaExtensions
+	eResourceSharePermissionDetail_lastUpdatedTime                                    smithy.SchemaExtensions
+	eResourceSharePermissionDetail_isResourceTypeDefault                              smithy.SchemaExtensions
+	eResourceSharePermissionDetail_permissionType                                     smithy.SchemaExtensions
+	eResourceSharePermissionDetail_featureSet                                         smithy.SchemaExtensions
+	eResourceSharePermissionDetail_status                                             smithy.SchemaExtensions
+	eResourceSharePermissionDetail_tags                                               smithy.SchemaExtensions
+	eResourceSharePermissionDetail_resourceOwner                                      smithy.SchemaExtensions
+	e_ResourceSharePermissionList                                                     smithy.SchemaExtensions
+	e_ResourceSharePermissionList_member                                              smithy.SchemaExtensions
+	eResourceSharePermissionSummary                                                   smithy.SchemaExtensions
+	eResourceSharePermissionSummary_arn                                               smithy.SchemaExtensions
+	eResourceSharePermissionSummary_version                                           smithy.SchemaExtensions
+	eResourceSharePermissionSummary_defaultVersion                                    smithy.SchemaExtensions
+	eResourceSharePermissionSummary_name                                              smithy.SchemaExtensions
+	eResourceSharePermissionSummary_resourceType                                      smithy.SchemaExtensions
+	eResourceSharePermissionSummary_status                                            smithy.SchemaExtensions
+	eResourceSharePermissionSummary_creationTime                                      smithy.SchemaExtensions
+	eResourceSharePermissionSummary_lastUpdatedTime                                   smithy.SchemaExtensions
+	eResourceSharePermissionSummary_isResourceTypeDefault                             smithy.SchemaExtensions
+	eResourceSharePermissionSummary_permissionType                                    smithy.SchemaExtensions
+	eResourceSharePermissionSummary_featureSet                                        smithy.SchemaExtensions
+	eResourceSharePermissionSummary_permissionTemplateParameters                      smithy.SchemaExtensions
+	eResourceSharePermissionSummary_tags                                              smithy.SchemaExtensions
+	eResourceSharePermissionSummary_resourceOwner                                     smithy.SchemaExtensions
+	eResourceShareStatus                                                              smithy.SchemaExtensions
+	eResourceShareStatus_PENDING                                                      smithy.SchemaExtensions
+	eResourceShareStatus_ACTIVE                                                       smithy.SchemaExtensions
+	eResourceShareStatus_FAILED                                                       smithy.SchemaExtensions
+	eResourceShareStatus_DELETING                                                     smithy.SchemaExtensions
+	eResourceShareStatus_DELETED                                                      smithy.SchemaExtensions
+	eResourceStatus                                                                   smithy.SchemaExtensions
+	eResourceStatus_AVAILABLE                                                         smithy.SchemaExtensions
+	eResourceStatus_ZONAL_RESOURCE_INACCESSIBLE                                       smithy.SchemaExtensions
+	eResourceStatus_LIMIT_EXCEEDED                                                    smithy.SchemaExtensions
+	eResourceStatus_UNAVAILABLE                                                       smithy.SchemaExtensions
+	eResourceStatus_PENDING                                                           smithy.SchemaExtensions
+	eServerInternalException                                                          smithy.SchemaExtensions
+	eServerInternalException_message                                                  smithy.SchemaExtensions
+	eServiceNameAndResourceType                                                       smithy.SchemaExtensions
+	eServiceNameAndResourceType_resourceType                                          smithy.SchemaExtensions
+	eServiceNameAndResourceType_serviceName                                           smithy.SchemaExtensions
+	eServiceNameAndResourceType_resourceRegionScope                                   smithy.SchemaExtensions
+	e_ServiceNameAndResourceTypeList                                                  smithy.SchemaExtensions
+	e_ServiceNameAndResourceTypeList_member                                           smithy.SchemaExtensions
+	eServiceUnavailableException                                                      smithy.SchemaExtensions
+	eServiceUnavailableException_message                                              smithy.SchemaExtensions
+	e_SourceArnOrAccountList                                                          smithy.SchemaExtensions
+	e_SourceArnOrAccountList_member                                                   smithy.SchemaExtensions
+	e_String                                                                          smithy.SchemaExtensions
+	eTag                                                                              smithy.SchemaExtensions
+	eTag_key                                                                          smithy.SchemaExtensions
+	eTag_value                                                                        smithy.SchemaExtensions
+	eTagFilter                                                                        smithy.SchemaExtensions
+	eTagFilter_tagKey                                                                 smithy.SchemaExtensions
+	eTagFilter_tagValues                                                              smithy.SchemaExtensions
+	e_TagFilters                                                                      smithy.SchemaExtensions
+	e_TagFilters_member                                                               smithy.SchemaExtensions
+	e_TagKey                                                                          smithy.SchemaExtensions
+	e_TagKeyList                                                                      smithy.SchemaExtensions
+	e_TagKeyList_member                                                               smithy.SchemaExtensions
+	eTagLimitExceededException                                                        smithy.SchemaExtensions
+	eTagLimitExceededException_message                                                smithy.SchemaExtensions
+	e_TagList                                                                         smithy.SchemaExtensions
+	e_TagList_member                                                                  smithy.SchemaExtensions
+	eTagPolicyViolationException                                                      smithy.SchemaExtensions
+	eTagPolicyViolationException_message                                              smithy.SchemaExtensions
+	e_TagValue                                                                        smithy.SchemaExtensions
+	e_TagValueList                                                                    smithy.SchemaExtensions
+	e_TagValueList_member                                                             smithy.SchemaExtensions
+	eThrottlingException                                                              smithy.SchemaExtensions
+	eThrottlingException_message                                                      smithy.SchemaExtensions
+	eUnknownResourceException                                                         smithy.SchemaExtensions
+	eUnknownResourceException_message                                                 smithy.SchemaExtensions
+	eUnmatchedPolicyPermissionException                                               smithy.SchemaExtensions
+	eUnmatchedPolicyPermissionException_message                                       smithy.SchemaExtensions
+	eUpdatePermissionStatus                                                           smithy.SchemaExtensions
+	eUpdatePermissionStatus_ATTACHABLE                                                smithy.SchemaExtensions
+	eUpdatePermissionStatus_DEPRECATED                                                smithy.SchemaExtensions
+	eAcceptResourceShareInvitationRequest                                             smithy.SchemaExtensions
+	eAcceptResourceShareInvitationRequest_resourceShareInvitationArn                  smithy.SchemaExtensions
+	eAcceptResourceShareInvitationRequest_clientToken                                 smithy.SchemaExtensions
+	eAcceptResourceShareInvitationResponse                                            smithy.SchemaExtensions
+	eAcceptResourceShareInvitationResponse_resourceShareInvitation                    smithy.SchemaExtensions
+	eAcceptResourceShareInvitationResponse_clientToken                                smithy.SchemaExtensions
+	eAssociateResourceShareRequest                                                    smithy.SchemaExtensions
+	eAssociateResourceShareRequest_resourceShareArn                                   smithy.SchemaExtensions
+	eAssociateResourceShareRequest_resourceArns                                       smithy.SchemaExtensions
+	eAssociateResourceShareRequest_principals                                         smithy.SchemaExtensions
+	eAssociateResourceShareRequest_clientToken                                        smithy.SchemaExtensions
+	eAssociateResourceShareRequest_sources                                            smithy.SchemaExtensions
+	eAssociateResourceShareResponse                                                   smithy.SchemaExtensions
+	eAssociateResourceShareResponse_resourceShareAssociations                         smithy.SchemaExtensions
+	eAssociateResourceShareResponse_clientToken                                       smithy.SchemaExtensions
+	eAssociateResourceSharePermissionRequest                                          smithy.SchemaExtensions
+	eAssociateResourceSharePermissionRequest_resourceShareArn                         smithy.SchemaExtensions
+	eAssociateResourceSharePermissionRequest_permissionArn                            smithy.SchemaExtensions
+	eAssociateResourceSharePermissionRequest_permissionTemplateParameters             smithy.SchemaExtensions
+	eAssociateResourceSharePermissionRequest_replace                                  smithy.SchemaExtensions
+	eAssociateResourceSharePermissionRequest_clientToken                              smithy.SchemaExtensions
+	eAssociateResourceSharePermissionRequest_permissionVersion                        smithy.SchemaExtensions
+	eAssociateResourceSharePermissionResponse                                         smithy.SchemaExtensions
+	eAssociateResourceSharePermissionResponse_returnValue                             smithy.SchemaExtensions
+	eAssociateResourceSharePermissionResponse_clientToken                             smithy.SchemaExtensions
+	eCreatePermissionRequest                                                          smithy.SchemaExtensions
+	eCreatePermissionRequest_name                                                     smithy.SchemaExtensions
+	eCreatePermissionRequest_resourceType                                             smithy.SchemaExtensions
+	eCreatePermissionRequest_policyTemplate                                           smithy.SchemaExtensions
+	eCreatePermissionRequest_permissionTemplateParameters                             smithy.SchemaExtensions
+	eCreatePermissionRequest_clientToken                                              smithy.SchemaExtensions
+	eCreatePermissionRequest_tags                                                     smithy.SchemaExtensions
+	eCreatePermissionResponse                                                         smithy.SchemaExtensions
+	eCreatePermissionResponse_permission                                              smithy.SchemaExtensions
+	eCreatePermissionResponse_clientToken                                             smithy.SchemaExtensions
+	eCreatePermissionVersionRequest                                                   smithy.SchemaExtensions
+	eCreatePermissionVersionRequest_permissionArn                                     smithy.SchemaExtensions
+	eCreatePermissionVersionRequest_policyTemplate                                    smithy.SchemaExtensions
+	eCreatePermissionVersionRequest_permissionTemplateParameters                      smithy.SchemaExtensions
+	eCreatePermissionVersionRequest_clientToken                                       smithy.SchemaExtensions
+	eCreatePermissionVersionResponse                                                  smithy.SchemaExtensions
+	eCreatePermissionVersionResponse_permission                                       smithy.SchemaExtensions
+	eCreatePermissionVersionResponse_clientToken                                      smithy.SchemaExtensions
+	eCreateResourceShareRequest                                                       smithy.SchemaExtensions
+	eCreateResourceShareRequest_name                                                  smithy.SchemaExtensions
+	eCreateResourceShareRequest_resourceArns                                          smithy.SchemaExtensions
+	eCreateResourceShareRequest_principals                                            smithy.SchemaExtensions
+	eCreateResourceShareRequest_tags                                                  smithy.SchemaExtensions
+	eCreateResourceShareRequest_allowExternalPrincipals                               smithy.SchemaExtensions
+	eCreateResourceShareRequest_clientToken                                           smithy.SchemaExtensions
+	eCreateResourceShareRequest_permissionArns                                        smithy.SchemaExtensions
+	eCreateResourceShareRequest_sources                                               smithy.SchemaExtensions
+	eCreateResourceShareRequest_permissionTemplateParameters                          smithy.SchemaExtensions
+	eCreateResourceShareRequest_resourceShareConfiguration                            smithy.SchemaExtensions
+	eCreateResourceShareResponse                                                      smithy.SchemaExtensions
+	eCreateResourceShareResponse_resourceShare                                        smithy.SchemaExtensions
+	eCreateResourceShareResponse_clientToken                                          smithy.SchemaExtensions
+	eDeletePermissionRequest                                                          smithy.SchemaExtensions
+	eDeletePermissionRequest_permissionArn                                            smithy.SchemaExtensions
+	eDeletePermissionRequest_clientToken                                              smithy.SchemaExtensions
+	eDeletePermissionResponse                                                         smithy.SchemaExtensions
+	eDeletePermissionResponse_returnValue                                             smithy.SchemaExtensions
+	eDeletePermissionResponse_clientToken                                             smithy.SchemaExtensions
+	eDeletePermissionResponse_permissionStatus                                        smithy.SchemaExtensions
+	eDeletePermissionVersionRequest                                                   smithy.SchemaExtensions
+	eDeletePermissionVersionRequest_permissionArn                                     smithy.SchemaExtensions
+	eDeletePermissionVersionRequest_permissionVersion                                 smithy.SchemaExtensions
+	eDeletePermissionVersionRequest_clientToken                                       smithy.SchemaExtensions
+	eDeletePermissionVersionResponse                                                  smithy.SchemaExtensions
+	eDeletePermissionVersionResponse_returnValue                                      smithy.SchemaExtensions
+	eDeletePermissionVersionResponse_clientToken                                      smithy.SchemaExtensions
+	eDeletePermissionVersionResponse_permissionStatus                                 smithy.SchemaExtensions
+	eDeleteResourceShareRequest                                                       smithy.SchemaExtensions
+	eDeleteResourceShareRequest_resourceShareArn                                      smithy.SchemaExtensions
+	eDeleteResourceShareRequest_clientToken                                           smithy.SchemaExtensions
+	eDeleteResourceShareResponse                                                      smithy.SchemaExtensions
+	eDeleteResourceShareResponse_returnValue                                          smithy.SchemaExtensions
+	eDeleteResourceShareResponse_clientToken                                          smithy.SchemaExtensions
+	eDisassociateResourceShareRequest                                                 smithy.SchemaExtensions
+	eDisassociateResourceShareRequest_resourceShareArn                                smithy.SchemaExtensions
+	eDisassociateResourceShareRequest_resourceArns                                    smithy.SchemaExtensions
+	eDisassociateResourceShareRequest_principals                                      smithy.SchemaExtensions
+	eDisassociateResourceShareRequest_clientToken                                     smithy.SchemaExtensions
+	eDisassociateResourceShareRequest_sources                                         smithy.SchemaExtensions
+	eDisassociateResourceShareResponse                                                smithy.SchemaExtensions
+	eDisassociateResourceShareResponse_resourceShareAssociations                      smithy.SchemaExtensions
+	eDisassociateResourceShareResponse_clientToken                                    smithy.SchemaExtensions
+	eDisassociateResourceSharePermissionRequest                                       smithy.SchemaExtensions
+	eDisassociateResourceSharePermissionRequest_resourceShareArn                      smithy.SchemaExtensions
+	eDisassociateResourceSharePermissionRequest_permissionArn                         smithy.SchemaExtensions
+	eDisassociateResourceSharePermissionRequest_clientToken                           smithy.SchemaExtensions
+	eDisassociateResourceSharePermissionResponse                                      smithy.SchemaExtensions
+	eDisassociateResourceSharePermissionResponse_returnValue                          smithy.SchemaExtensions
+	eDisassociateResourceSharePermissionResponse_clientToken                          smithy.SchemaExtensions
+	eEnableSharingWithAwsOrganizationRequest                                          smithy.SchemaExtensions
+	eEnableSharingWithAwsOrganizationResponse                                         smithy.SchemaExtensions
+	eEnableSharingWithAwsOrganizationResponse_returnValue                             smithy.SchemaExtensions
+	eGetPermissionRequest                                                             smithy.SchemaExtensions
+	eGetPermissionRequest_permissionArn                                               smithy.SchemaExtensions
+	eGetPermissionRequest_permissionVersion                                           smithy.SchemaExtensions
+	eGetPermissionRequest_permissionTemplateParameters                                smithy.SchemaExtensions
+	eGetPermissionResponse                                                            smithy.SchemaExtensions
+	eGetPermissionResponse_permission                                                 smithy.SchemaExtensions
+	eGetResourcePoliciesRequest                                                       smithy.SchemaExtensions
+	eGetResourcePoliciesRequest_resourceArns                                          smithy.SchemaExtensions
+	eGetResourcePoliciesRequest_principal                                             smithy.SchemaExtensions
+	eGetResourcePoliciesRequest_nextToken                                             smithy.SchemaExtensions
+	eGetResourcePoliciesRequest_maxResults                                            smithy.SchemaExtensions
+	eGetResourcePoliciesResponse                                                      smithy.SchemaExtensions
+	eGetResourcePoliciesResponse_policies                                             smithy.SchemaExtensions
+	eGetResourcePoliciesResponse_nextToken                                            smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest                                              smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest_associationType                              smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest_resourceShareArns                            smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest_resourceArn                                  smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest_principal                                    smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest_associationStatus                            smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest_nextToken                                    smithy.SchemaExtensions
+	eGetResourceShareAssociationsRequest_maxResults                                   smithy.SchemaExtensions
+	eGetResourceShareAssociationsResponse                                             smithy.SchemaExtensions
+	eGetResourceShareAssociationsResponse_resourceShareAssociations                   smithy.SchemaExtensions
+	eGetResourceShareAssociationsResponse_nextToken                                   smithy.SchemaExtensions
+	eGetResourceShareInvitationsRequest                                               smithy.SchemaExtensions
+	eGetResourceShareInvitationsRequest_resourceShareInvitationArns                   smithy.SchemaExtensions
+	eGetResourceShareInvitationsRequest_resourceShareArns                             smithy.SchemaExtensions
+	eGetResourceShareInvitationsRequest_nextToken                                     smithy.SchemaExtensions
+	eGetResourceShareInvitationsRequest_maxResults                                    smithy.SchemaExtensions
+	eGetResourceShareInvitationsResponse                                              smithy.SchemaExtensions
+	eGetResourceShareInvitationsResponse_resourceShareInvitations                     smithy.SchemaExtensions
+	eGetResourceShareInvitationsResponse_nextToken                                    smithy.SchemaExtensions
+	eGetResourceSharesRequest                                                         smithy.SchemaExtensions
+	eGetResourceSharesRequest_resourceShareArns                                       smithy.SchemaExtensions
+	eGetResourceSharesRequest_resourceShareStatus                                     smithy.SchemaExtensions
+	eGetResourceSharesRequest_resourceOwner                                           smithy.SchemaExtensions
+	eGetResourceSharesRequest_name                                                    smithy.SchemaExtensions
+	eGetResourceSharesRequest_tagFilters                                              smithy.SchemaExtensions
+	eGetResourceSharesRequest_nextToken                                               smithy.SchemaExtensions
+	eGetResourceSharesRequest_maxResults                                              smithy.SchemaExtensions
+	eGetResourceSharesRequest_permissionArn                                           smithy.SchemaExtensions
+	eGetResourceSharesRequest_permissionVersion                                       smithy.SchemaExtensions
+	eGetResourceSharesResponse                                                        smithy.SchemaExtensions
+	eGetResourceSharesResponse_resourceShares                                         smithy.SchemaExtensions
+	eGetResourceSharesResponse_nextToken                                              smithy.SchemaExtensions
+	eListPendingInvitationResourcesRequest                                            smithy.SchemaExtensions
+	eListPendingInvitationResourcesRequest_resourceShareInvitationArn                 smithy.SchemaExtensions
+	eListPendingInvitationResourcesRequest_nextToken                                  smithy.SchemaExtensions
+	eListPendingInvitationResourcesRequest_maxResults                                 smithy.SchemaExtensions
+	eListPendingInvitationResourcesRequest_resourceRegionScope                        smithy.SchemaExtensions
+	eListPendingInvitationResourcesResponse                                           smithy.SchemaExtensions
+	eListPendingInvitationResourcesResponse_resources                                 smithy.SchemaExtensions
+	eListPendingInvitationResourcesResponse_nextToken                                 smithy.SchemaExtensions
+	eListPermissionAssociationsRequest                                                smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_permissionArn                                  smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_permissionVersion                              smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_associationStatus                              smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_resourceType                                   smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_featureSet                                     smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_defaultVersion                                 smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_resourceOwner                                  smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_resourceShareArn                               smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_nextToken                                      smithy.SchemaExtensions
+	eListPermissionAssociationsRequest_maxResults                                     smithy.SchemaExtensions
+	eListPermissionAssociationsResponse                                               smithy.SchemaExtensions
+	eListPermissionAssociationsResponse_permissions                                   smithy.SchemaExtensions
+	eListPermissionAssociationsResponse_nextToken                                     smithy.SchemaExtensions
+	eListPermissionsRequest                                                           smithy.SchemaExtensions
+	eListPermissionsRequest_resourceType                                              smithy.SchemaExtensions
+	eListPermissionsRequest_resourceOwner                                             smithy.SchemaExtensions
+	eListPermissionsRequest_nextToken                                                 smithy.SchemaExtensions
+	eListPermissionsRequest_maxResults                                                smithy.SchemaExtensions
+	eListPermissionsRequest_permissionType                                            smithy.SchemaExtensions
+	eListPermissionsRequest_permissionStatus                                          smithy.SchemaExtensions
+	eListPermissionsResponse                                                          smithy.SchemaExtensions
+	eListPermissionsResponse_permissions                                              smithy.SchemaExtensions
+	eListPermissionsResponse_nextToken                                                smithy.SchemaExtensions
+	eListPermissionVersionsRequest                                                    smithy.SchemaExtensions
+	eListPermissionVersionsRequest_permissionArn                                      smithy.SchemaExtensions
+	eListPermissionVersionsRequest_nextToken                                          smithy.SchemaExtensions
+	eListPermissionVersionsRequest_maxResults                                         smithy.SchemaExtensions
+	eListPermissionVersionsResponse                                                   smithy.SchemaExtensions
+	eListPermissionVersionsResponse_permissions                                       smithy.SchemaExtensions
+	eListPermissionVersionsResponse_nextToken                                         smithy.SchemaExtensions
+	eListPrincipalsRequest                                                            smithy.SchemaExtensions
+	eListPrincipalsRequest_resourceOwner                                              smithy.SchemaExtensions
+	eListPrincipalsRequest_resourceArn                                                smithy.SchemaExtensions
+	eListPrincipalsRequest_principals                                                 smithy.SchemaExtensions
+	eListPrincipalsRequest_resourceType                                               smithy.SchemaExtensions
+	eListPrincipalsRequest_resourceShareArns                                          smithy.SchemaExtensions
+	eListPrincipalsRequest_nextToken                                                  smithy.SchemaExtensions
+	eListPrincipalsRequest_maxResults                                                 smithy.SchemaExtensions
+	eListPrincipalsResponse                                                           smithy.SchemaExtensions
+	eListPrincipalsResponse_principals                                                smithy.SchemaExtensions
+	eListPrincipalsResponse_nextToken                                                 smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkRequest                                     smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkRequest_workIds                             smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkRequest_status                              smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkRequest_nextToken                           smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkRequest_maxResults                          smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkResponse                                    smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks smithy.SchemaExtensions
+	eListReplacePermissionAssociationsWorkResponse_nextToken                          smithy.SchemaExtensions
+	eListResourceSharePermissionsRequest                                              smithy.SchemaExtensions
+	eListResourceSharePermissionsRequest_resourceShareArn                             smithy.SchemaExtensions
+	eListResourceSharePermissionsRequest_nextToken                                    smithy.SchemaExtensions
+	eListResourceSharePermissionsRequest_maxResults                                   smithy.SchemaExtensions
+	eListResourceSharePermissionsResponse                                             smithy.SchemaExtensions
+	eListResourceSharePermissionsResponse_permissions                                 smithy.SchemaExtensions
+	eListResourceSharePermissionsResponse_nextToken                                   smithy.SchemaExtensions
+	eListResourcesRequest                                                             smithy.SchemaExtensions
+	eListResourcesRequest_resourceOwner                                               smithy.SchemaExtensions
+	eListResourcesRequest_principal                                                   smithy.SchemaExtensions
+	eListResourcesRequest_resourceType                                                smithy.SchemaExtensions
+	eListResourcesRequest_resourceArns                                                smithy.SchemaExtensions
+	eListResourcesRequest_resourceShareArns                                           smithy.SchemaExtensions
+	eListResourcesRequest_nextToken                                                   smithy.SchemaExtensions
+	eListResourcesRequest_maxResults                                                  smithy.SchemaExtensions
+	eListResourcesRequest_resourceRegionScope                                         smithy.SchemaExtensions
+	eListResourcesResponse                                                            smithy.SchemaExtensions
+	eListResourcesResponse_resources                                                  smithy.SchemaExtensions
+	eListResourcesResponse_nextToken                                                  smithy.SchemaExtensions
+	eListResourceTypesRequest                                                         smithy.SchemaExtensions
+	eListResourceTypesRequest_nextToken                                               smithy.SchemaExtensions
+	eListResourceTypesRequest_maxResults                                              smithy.SchemaExtensions
+	eListResourceTypesRequest_resourceRegionScope                                     smithy.SchemaExtensions
+	eListResourceTypesResponse                                                        smithy.SchemaExtensions
+	eListResourceTypesResponse_resourceTypes                                          smithy.SchemaExtensions
+	eListResourceTypesResponse_nextToken                                              smithy.SchemaExtensions
+	eListSourceAssociationsRequest                                                    smithy.SchemaExtensions
+	eListSourceAssociationsRequest_resourceShareArns                                  smithy.SchemaExtensions
+	eListSourceAssociationsRequest_sourceId                                           smithy.SchemaExtensions
+	eListSourceAssociationsRequest_sourceType                                         smithy.SchemaExtensions
+	eListSourceAssociationsRequest_associationStatus                                  smithy.SchemaExtensions
+	eListSourceAssociationsRequest_nextToken                                          smithy.SchemaExtensions
+	eListSourceAssociationsRequest_maxResults                                         smithy.SchemaExtensions
+	eListSourceAssociationsResponse                                                   smithy.SchemaExtensions
+	eListSourceAssociationsResponse_sourceAssociations                                smithy.SchemaExtensions
+	eListSourceAssociationsResponse_nextToken                                         smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicyRequest                                        smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicyRequest_permissionArn                          smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicyRequest_name                                   smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicyRequest_clientToken                            smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicyResponse                                       smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicyResponse_permission                            smithy.SchemaExtensions
+	ePromotePermissionCreatedFromPolicyResponse_clientToken                           smithy.SchemaExtensions
+	ePromoteResourceShareCreatedFromPolicyRequest                                     smithy.SchemaExtensions
+	ePromoteResourceShareCreatedFromPolicyRequest_resourceShareArn                    smithy.SchemaExtensions
+	ePromoteResourceShareCreatedFromPolicyResponse                                    smithy.SchemaExtensions
+	ePromoteResourceShareCreatedFromPolicyResponse_returnValue                        smithy.SchemaExtensions
+	eRejectResourceShareInvitationRequest                                             smithy.SchemaExtensions
+	eRejectResourceShareInvitationRequest_resourceShareInvitationArn                  smithy.SchemaExtensions
+	eRejectResourceShareInvitationRequest_clientToken                                 smithy.SchemaExtensions
+	eRejectResourceShareInvitationResponse                                            smithy.SchemaExtensions
+	eRejectResourceShareInvitationResponse_resourceShareInvitation                    smithy.SchemaExtensions
+	eRejectResourceShareInvitationResponse_clientToken                                smithy.SchemaExtensions
+	eReplacePermissionAssociationsRequest                                             smithy.SchemaExtensions
+	eReplacePermissionAssociationsRequest_fromPermissionArn                           smithy.SchemaExtensions
+	eReplacePermissionAssociationsRequest_fromPermissionVersion                       smithy.SchemaExtensions
+	eReplacePermissionAssociationsRequest_toPermissionArn                             smithy.SchemaExtensions
+	eReplacePermissionAssociationsRequest_permissionTemplateParameters                smithy.SchemaExtensions
+	eReplacePermissionAssociationsRequest_clientToken                                 smithy.SchemaExtensions
+	eReplacePermissionAssociationsResponse                                            smithy.SchemaExtensions
+	eReplacePermissionAssociationsResponse_replacePermissionAssociationsWork          smithy.SchemaExtensions
+	eReplacePermissionAssociationsResponse_clientToken                                smithy.SchemaExtensions
+	eSetDefaultPermissionVersionRequest                                               smithy.SchemaExtensions
+	eSetDefaultPermissionVersionRequest_permissionArn                                 smithy.SchemaExtensions
+	eSetDefaultPermissionVersionRequest_permissionVersion                             smithy.SchemaExtensions
+	eSetDefaultPermissionVersionRequest_clientToken                                   smithy.SchemaExtensions
+	eSetDefaultPermissionVersionResponse                                              smithy.SchemaExtensions
+	eSetDefaultPermissionVersionResponse_returnValue                                  smithy.SchemaExtensions
+	eSetDefaultPermissionVersionResponse_clientToken                                  smithy.SchemaExtensions
+	eTagResourceRequest                                                               smithy.SchemaExtensions
+	eTagResourceRequest_resourceShareArn                                              smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                          smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                                   smithy.SchemaExtensions
+	eTagResourceResponse                                                              smithy.SchemaExtensions
+	eUntagResourceRequest                                                             smithy.SchemaExtensions
+	eUntagResourceRequest_resourceShareArn                                            smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                                     smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                                 smithy.SchemaExtensions
+	eUntagResourceResponse                                                            smithy.SchemaExtensions
+	eUpdatePermissionRequest                                                          smithy.SchemaExtensions
+	eUpdatePermissionRequest_permissionArn                                            smithy.SchemaExtensions
+	eUpdatePermissionRequest_status                                                   smithy.SchemaExtensions
+	eUpdatePermissionRequest_clientToken                                              smithy.SchemaExtensions
+	eUpdatePermissionResponse                                                         smithy.SchemaExtensions
+	eUpdatePermissionResponse_clientToken                                             smithy.SchemaExtensions
+	eUpdatePermissionResponse_permissionStatus                                        smithy.SchemaExtensions
+	eUpdateResourceShareRequest                                                       smithy.SchemaExtensions
+	eUpdateResourceShareRequest_resourceShareArn                                      smithy.SchemaExtensions
+	eUpdateResourceShareRequest_name                                                  smithy.SchemaExtensions
+	eUpdateResourceShareRequest_allowExternalPrincipals                               smithy.SchemaExtensions
+	eUpdateResourceShareRequest_clientToken                                           smithy.SchemaExtensions
+	eUpdateResourceShareResponse                                                      smithy.SchemaExtensions
+	eUpdateResourceShareResponse_resourceShare                                        smithy.SchemaExtensions
+	eUpdateResourceShareResponse_clientToken                                          smithy.SchemaExtensions
+)
+
+var (
+	iAcceptResourceShareInvitation                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AcceptResourceShareInvitation"}
+	iAssociateResourceShare                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociateResourceShare"}
+	iAssociateResourceSharePermission                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociateResourceSharePermission"}
+	iCreatePermission                                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreatePermission"}
+	iCreatePermissionVersion                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreatePermissionVersion"}
+	iCreateResourceShare                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreateResourceShare"}
+	iDeletePermission                                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeletePermission"}
+	iDeletePermissionVersion                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeletePermissionVersion"}
+	iDeleteResourceShare                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeleteResourceShare"}
+	iDisassociateResourceShare                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DisassociateResourceShare"}
+	iDisassociateResourceSharePermission             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DisassociateResourceSharePermission"}
+	iEnableSharingWithAwsOrganization                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "EnableSharingWithAwsOrganization"}
+	iGetPermission                                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetPermission"}
+	iGetResourcePolicies                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourcePolicies"}
+	iGetResourceShareAssociations                    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceShareAssociations"}
+	iGetResourceShareInvitations                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceShareInvitations"}
+	iGetResourceShares                               = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceShares"}
+	iListPendingInvitationResources                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPendingInvitationResources"}
+	iListPermissionAssociations                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionAssociations"}
+	iListPermissions                                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissions"}
+	iListPermissionVersions                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionVersions"}
+	iListPrincipals                                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPrincipals"}
+	iListReplacePermissionAssociationsWork           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListReplacePermissionAssociationsWork"}
+	iListResources                                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResources"}
+	iListResourceSharePermissions                    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourceSharePermissions"}
+	iListResourceTypes                               = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourceTypes"}
+	iListSourceAssociations                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListSourceAssociations"}
+	iPromotePermissionCreatedFromPolicy              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PromotePermissionCreatedFromPolicy"}
+	iPromoteResourceShareCreatedFromPolicy           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PromoteResourceShareCreatedFromPolicy"}
+	iRejectResourceShareInvitation                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "RejectResourceShareInvitation"}
+	iReplacePermissionAssociations                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ReplacePermissionAssociations"}
+	iSetDefaultPermissionVersion                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "SetDefaultPermissionVersion"}
+	iTagResource                                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagResource"}
+	iUntagResource                                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UntagResource"}
+	iUpdatePermission                                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UpdatePermission"}
+	iUpdateResourceShare                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UpdateResourceShare"}
+	i_AmazonResourceSharing                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AmazonResourceSharing"}
+	iAssociatedPermission                            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociatedPermission"}
+	i_AssociatedPermissionList                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociatedPermissionList"}
+	iAssociatedSource                                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociatedSource"}
+	i_AssociatedSourceList                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociatedSourceList"}
+	i_Boolean                                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "Boolean"}
+	i_DateTime                                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DateTime"}
+	iIdempotentParameterMismatchException            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "IdempotentParameterMismatchException"}
+	i_Integer                                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "Integer"}
+	iInvalidClientTokenException                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "InvalidClientTokenException"}
+	iInvalidMaxResultsException                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "InvalidMaxResultsException"}
+	iInvalidNextTokenException                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "InvalidNextTokenException"}
+	iInvalidParameterException                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "InvalidParameterException"}
+	iInvalidPolicyException                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "InvalidPolicyException"}
+	iInvalidResourceTypeException                    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "InvalidResourceTypeException"}
+	iInvalidStateTransitionException                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "InvalidStateTransitionException"}
+	iMalformedArnException                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "MalformedArnException"}
+	iMalformedPolicyTemplateException                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "MalformedPolicyTemplateException"}
+	i_MaxResults                                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "MaxResults"}
+	iMissingRequiredParameterException               = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "MissingRequiredParameterException"}
+	iOperationNotPermittedException                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "OperationNotPermittedException"}
+	iPermissionAlreadyExistsException                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionAlreadyExistsException"}
+	iPermissionArnAndTemplateParameters              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionArnAndTemplateParameters"}
+	i_PermissionArnAndTemplateParametersList         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionArnAndTemplateParametersList"}
+	i_PermissionArnList                              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionArnList"}
+	iPermissionFeatureSet                            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionFeatureSet"}
+	iPermissionLimitExceededException                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionLimitExceededException"}
+	i_PermissionName                                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionName"}
+	iPermissionStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionStatus"}
+	iPermissionTemplateParameter                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameter"}
+	iPermissionTemplateParameterDeclaration          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameterDeclaration"}
+	i_PermissionTemplateParameterDeclarationList     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameterDeclarationList"}
+	iPermissionTemplateParameterInput                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameterInput"}
+	i_PermissionTemplateParameterInputList           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameterInputList"}
+	i_PermissionTemplateParameterList                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameterList"}
+	iPermissionTemplateParameterType                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameterType"}
+	i_PermissionTemplateParameterValueList           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTemplateParameterValueList"}
+	iPermissionType                                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionType"}
+	iPermissionTypeFilter                            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionTypeFilter"}
+	iPermissionVersionsLimitExceededException        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PermissionVersionsLimitExceededException"}
+	i_Policy                                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "Policy"}
+	i_PolicyList                                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PolicyList"}
+	iPrincipal                                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "Principal"}
+	i_PrincipalArnOrIdList                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PrincipalArnOrIdList"}
+	i_PrincipalList                                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PrincipalList"}
+	iReplacePermissionAssociationsWork               = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ReplacePermissionAssociationsWork"}
+	i_ReplacePermissionAssociationsWorkIdList        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ReplacePermissionAssociationsWorkIdList"}
+	i_ReplacePermissionAssociationsWorkList          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ReplacePermissionAssociationsWorkList"}
+	iReplacePermissionAssociationsWorkStatus         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ReplacePermissionAssociationsWorkStatus"}
+	iResource                                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "Resource"}
+	i_ResourceArnList                                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceArnList"}
+	iResourceArnNotFoundException                    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceArnNotFoundException"}
+	i_ResourceList                                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceList"}
+	iResourceOwner                                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceOwner"}
+	iResourceRegionScope                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceRegionScope"}
+	iResourceRegionScopeFilter                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceRegionScopeFilter"}
+	iResourceShare                                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShare"}
+	i_ResourceShareArnList                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareArnList"}
+	iResourceShareAssociation                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareAssociation"}
+	i_ResourceShareAssociationList                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareAssociationList"}
+	iResourceShareAssociationStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareAssociationStatus"}
+	iResourceShareAssociationType                    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareAssociationType"}
+	iResourceShareConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareConfiguration"}
+	iResourceShareFeatureSet                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareFeatureSet"}
+	iResourceShareInvitation                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitation"}
+	iResourceShareInvitationAlreadyAcceptedException = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitationAlreadyAcceptedException"}
+	iResourceShareInvitationAlreadyRejectedException = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitationAlreadyRejectedException"}
+	i_ResourceShareInvitationArnList                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitationArnList"}
+	iResourceShareInvitationArnNotFoundException     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitationArnNotFoundException"}
+	iResourceShareInvitationExpiredException         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitationExpiredException"}
+	i_ResourceShareInvitationList                    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitationList"}
+	iResourceShareInvitationStatus                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareInvitationStatus"}
+	iResourceShareLimitExceededException             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareLimitExceededException"}
+	i_ResourceShareList                              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareList"}
+	iResourceSharePermissionDetail                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceSharePermissionDetail"}
+	i_ResourceSharePermissionList                    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceSharePermissionList"}
+	iResourceSharePermissionSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceSharePermissionSummary"}
+	iResourceShareStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceShareStatus"}
+	iResourceStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ResourceStatus"}
+	iServerInternalException                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ServerInternalException"}
+	iServiceNameAndResourceType                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ServiceNameAndResourceType"}
+	i_ServiceNameAndResourceTypeList                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ServiceNameAndResourceTypeList"}
+	iServiceUnavailableException                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ServiceUnavailableException"}
+	i_SourceArnOrAccountList                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "SourceArnOrAccountList"}
+	i_String                                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "String"}
+	iTag                                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "Tag"}
+	iTagFilter                                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagFilter"}
+	i_TagFilters                                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagFilters"}
+	i_TagKey                                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagKey"}
+	i_TagKeyList                                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagKeyList"}
+	iTagLimitExceededException                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagLimitExceededException"}
+	i_TagList                                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagList"}
+	iTagPolicyViolationException                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagPolicyViolationException"}
+	i_TagValue                                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagValue"}
+	i_TagValueList                                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagValueList"}
+	iThrottlingException                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ThrottlingException"}
+	iUnknownResourceException                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UnknownResourceException"}
+	iUnmatchedPolicyPermissionException              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UnmatchedPolicyPermissionException"}
+	iUpdatePermissionStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UpdatePermissionStatus"}
+	iAcceptResourceShareInvitationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AcceptResourceShareInvitationRequest"}
+	iAcceptResourceShareInvitationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AcceptResourceShareInvitationResponse"}
+	iAssociateResourceShareRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociateResourceShareRequest"}
+	iAssociateResourceShareResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociateResourceShareResponse"}
+	iAssociateResourceSharePermissionRequest         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociateResourceSharePermissionRequest"}
+	iAssociateResourceSharePermissionResponse        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "AssociateResourceSharePermissionResponse"}
+	iCreatePermissionRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreatePermissionRequest"}
+	iCreatePermissionResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreatePermissionResponse"}
+	iCreatePermissionVersionRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreatePermissionVersionRequest"}
+	iCreatePermissionVersionResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreatePermissionVersionResponse"}
+	iCreateResourceShareRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreateResourceShareRequest"}
+	iCreateResourceShareResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "CreateResourceShareResponse"}
+	iDeletePermissionRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeletePermissionRequest"}
+	iDeletePermissionResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeletePermissionResponse"}
+	iDeletePermissionVersionRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeletePermissionVersionRequest"}
+	iDeletePermissionVersionResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeletePermissionVersionResponse"}
+	iDeleteResourceShareRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeleteResourceShareRequest"}
+	iDeleteResourceShareResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DeleteResourceShareResponse"}
+	iDisassociateResourceShareRequest                = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DisassociateResourceShareRequest"}
+	iDisassociateResourceShareResponse               = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DisassociateResourceShareResponse"}
+	iDisassociateResourceSharePermissionRequest      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DisassociateResourceSharePermissionRequest"}
+	iDisassociateResourceSharePermissionResponse     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "DisassociateResourceSharePermissionResponse"}
+	iEnableSharingWithAwsOrganizationRequest         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "EnableSharingWithAwsOrganizationRequest"}
+	iEnableSharingWithAwsOrganizationResponse        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "EnableSharingWithAwsOrganizationResponse"}
+	iGetPermissionRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetPermissionRequest"}
+	iGetPermissionResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetPermissionResponse"}
+	iGetResourcePoliciesRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourcePoliciesRequest"}
+	iGetResourcePoliciesResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourcePoliciesResponse"}
+	iGetResourceShareAssociationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceShareAssociationsRequest"}
+	iGetResourceShareAssociationsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceShareAssociationsResponse"}
+	iGetResourceShareInvitationsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceShareInvitationsRequest"}
+	iGetResourceShareInvitationsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceShareInvitationsResponse"}
+	iGetResourceSharesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceSharesRequest"}
+	iGetResourceSharesResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "GetResourceSharesResponse"}
+	iListPendingInvitationResourcesRequest           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPendingInvitationResourcesRequest"}
+	iListPendingInvitationResourcesResponse          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPendingInvitationResourcesResponse"}
+	iListPermissionAssociationsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionAssociationsRequest"}
+	iListPermissionAssociationsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionAssociationsResponse"}
+	iListPermissionsRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionsRequest"}
+	iListPermissionsResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionsResponse"}
+	iListPermissionVersionsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionVersionsRequest"}
+	iListPermissionVersionsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPermissionVersionsResponse"}
+	iListPrincipalsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPrincipalsRequest"}
+	iListPrincipalsResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListPrincipalsResponse"}
+	iListReplacePermissionAssociationsWorkRequest    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListReplacePermissionAssociationsWorkRequest"}
+	iListReplacePermissionAssociationsWorkResponse   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListReplacePermissionAssociationsWorkResponse"}
+	iListResourceSharePermissionsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourceSharePermissionsRequest"}
+	iListResourceSharePermissionsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourceSharePermissionsResponse"}
+	iListResourcesRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourcesRequest"}
+	iListResourcesResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourcesResponse"}
+	iListResourceTypesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourceTypesRequest"}
+	iListResourceTypesResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListResourceTypesResponse"}
+	iListSourceAssociationsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListSourceAssociationsRequest"}
+	iListSourceAssociationsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ListSourceAssociationsResponse"}
+	iPromotePermissionCreatedFromPolicyRequest       = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PromotePermissionCreatedFromPolicyRequest"}
+	iPromotePermissionCreatedFromPolicyResponse      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PromotePermissionCreatedFromPolicyResponse"}
+	iPromoteResourceShareCreatedFromPolicyRequest    = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PromoteResourceShareCreatedFromPolicyRequest"}
+	iPromoteResourceShareCreatedFromPolicyResponse   = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "PromoteResourceShareCreatedFromPolicyResponse"}
+	iRejectResourceShareInvitationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "RejectResourceShareInvitationRequest"}
+	iRejectResourceShareInvitationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "RejectResourceShareInvitationResponse"}
+	iReplacePermissionAssociationsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ReplacePermissionAssociationsRequest"}
+	iReplacePermissionAssociationsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "ReplacePermissionAssociationsResponse"}
+	iSetDefaultPermissionVersionRequest              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "SetDefaultPermissionVersionRequest"}
+	iSetDefaultPermissionVersionResponse             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "SetDefaultPermissionVersionResponse"}
+	iTagResourceRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagResourceRequest"}
+	iTagResourceResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "TagResourceResponse"}
+	iUntagResourceRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UntagResourceResponse"}
+	iUpdatePermissionRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UpdatePermissionRequest"}
+	iUpdatePermissionResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UpdatePermissionResponse"}
+	iUpdateResourceShareRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UpdateResourceShareRequest"}
+	iUpdateResourceShareResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.ram", Name: "UpdateResourceShareResponse"}
+	pUnit                                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/acceptresourceshareinvitation",
-	Code: 200})
-
-var AssociateResourceShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociateResourceShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/associateresourceshare",
-	Code: 200})
-
-var AssociateResourceSharePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociateResourceSharePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/associateresourcesharepermission",
-	Code: 200})
-
-var CreatePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreatePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createpermission",
-	Code: 200})
-
-var CreatePermissionVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreatePermissionVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createpermissionversion",
-	Code: 200})
-
-var CreateResourceShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreateResourceShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createresourceshare",
-	Code: 200})
-
-var DeletePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeletePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/deletepermission",
-	Code: 200})
-
-var DeletePermissionVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeletePermissionVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/deletepermissionversion",
-	Code: 200})
-
-var DeleteResourceShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeleteResourceShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/deleteresourceshare",
-	Code: 200})
-
-var DisassociateResourceShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DisassociateResourceShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/disassociateresourceshare",
-	Code: 200})
-
-var DisassociateResourceSharePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DisassociateResourceSharePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/disassociateresourcesharepermission",
-	Code: 200})
-
-var EnableSharingWithAwsOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "EnableSharingWithAwsOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/enablesharingwithawsorganization",
-	Code: 200})
-
-var GetPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetPermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getpermission",
-	Code: 200})
-
-var GetResourcePolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourcePolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getresourcepolicies",
-	Code: 200})
-
-var GetResourceShareAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceShareAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getresourceshareassociations",
-	Code: 200})
-
-var GetResourceShareInvitations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceShareInvitations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getresourceshareinvitations",
-	Code: 200})
-
-var GetResourceShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceShares",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getresourceshares",
-	Code: 200})
-
-var ListPendingInvitationResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPendingInvitationResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listpendinginvitationresources",
-	Code: 200})
-
-var ListPermissionAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listpermissionassociations",
-	Code: 200})
-
-var ListPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listpermissions",
-	Code: 200})
-
-var ListPermissionVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listpermissionversions",
-	Code: 200})
-
-var ListPrincipals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPrincipals",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listprincipals",
-	Code: 200})
-
-var ListReplacePermissionAssociationsWork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListReplacePermissionAssociationsWork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listreplacepermissionassociationswork",
-	Code: 200})
-
-var ListResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listresources",
-	Code: 200})
-
-var ListResourceSharePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourceSharePermissions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listresourcesharepermissions",
-	Code: 200})
-
-var ListResourceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourceTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listresourcetypes",
-	Code: 200})
-
-var ListSourceAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListSourceAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listsourceassociations",
-	Code: 200})
-
-var PromotePermissionCreatedFromPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PromotePermissionCreatedFromPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/promotepermissioncreatedfrompolicy",
-	Code: 200})
-
-var PromoteResourceShareCreatedFromPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PromoteResourceShareCreatedFromPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/promoteresourcesharecreatedfrompolicy",
-	Code: 200})
-
-var RejectResourceShareInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "RejectResourceShareInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/rejectresourceshareinvitation",
-	Code: 200})
-
-var ReplacePermissionAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ReplacePermissionAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/replacepermissionassociations",
-	Code: 200})
-
-var SetDefaultPermissionVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "SetDefaultPermissionVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/setdefaultpermissionversion",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tagresource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/untagresource",
-	Code: 200})
-
-var UpdatePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UpdatePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updatepermission",
-	Code: 200})
-
-var UpdateResourceShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UpdateResourceShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateresourceshare",
-	Code: 200})
-
-var _AmazonResourceSharing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AmazonResourceSharing",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonResourceSharing = smithy.NewServiceSchema(_AmazonResourceSharing, "2018-01-04")
-
-var AssociatedPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociatedPermission",
-}, smithy.ShapeTypeStructure, 9)
-var AssociatedPermission_arn *smithy.Schema
-
-var AssociatedPermission_permissionVersion *smithy.Schema
-
-var AssociatedPermission_defaultVersion *smithy.Schema
-
-var AssociatedPermission_resourceType *smithy.Schema
-
-var AssociatedPermission_status *smithy.Schema
-
-var AssociatedPermission_featureSet *smithy.Schema
-
-var AssociatedPermission_lastUpdatedTime *smithy.Schema
-
-var AssociatedPermission_resourceShareArn *smithy.Schema
-
-var AssociatedPermission_permissionTemplateParameters *smithy.Schema
-
-var _AssociatedPermissionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociatedPermissionList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedPermissionList_member *smithy.Schema
-
-var AssociatedSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociatedSource",
-}, smithy.ShapeTypeStructure, 7)
-var AssociatedSource_resourceShareArn *smithy.Schema
-
-var AssociatedSource_sourceId *smithy.Schema
-
-var AssociatedSource_sourceType *smithy.Schema
-
-var AssociatedSource_status *smithy.Schema
-
-var AssociatedSource_lastUpdatedTime *smithy.Schema
-
-var AssociatedSource_creationTime *smithy.Schema
-
-var AssociatedSource_statusMessage *smithy.Schema
-
-var _AssociatedSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociatedSourceList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedSourceList_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "IdempotentParameterMismatch",
-		StatusCode: 400})
-var IdempotentParameterMismatchException_message *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvalidClientTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "InvalidClientTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidClientToken",
-		StatusCode: 400})
-var InvalidClientTokenException_message *smithy.Schema
-
-var InvalidMaxResultsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "InvalidMaxResultsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidMaxResults",
-		StatusCode: 400})
-var InvalidMaxResultsException_message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
-		StatusCode: 400})
-var InvalidNextTokenException_message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
-		StatusCode: 400})
-var InvalidParameterException_message *smithy.Schema
-
-var InvalidPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "InvalidPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidPolicy",
-		StatusCode: 400})
-var InvalidPolicyException_message *smithy.Schema
-
-var InvalidResourceTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "InvalidResourceTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceType.Unknown",
-		StatusCode: 400})
-var InvalidResourceTypeException_message *smithy.Schema
-
-var InvalidStateTransitionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "InvalidStateTransitionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidStateTransitionException.Unknown",
-		StatusCode: 400})
-var InvalidStateTransitionException_message *smithy.Schema
-
-var MalformedArnException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "MalformedArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidArn.Malformed",
-		StatusCode: 400})
-var MalformedArnException_message *smithy.Schema
-
-var MalformedPolicyTemplateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "MalformedPolicyTemplateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "MalformedPolicyTemplateException",
-		StatusCode: 400})
-var MalformedPolicyTemplateException_message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MissingRequiredParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "MissingRequiredParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "MissingRequiredParameter",
-		StatusCode: 400})
-var MissingRequiredParameterException_message *smithy.Schema
-
-var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
-		StatusCode: 400})
-var OperationNotPermittedException_message *smithy.Schema
-
-var PermissionAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "PermissionAlreadyExistsException",
-		StatusCode: 409})
-var PermissionAlreadyExistsException_message *smithy.Schema
-
-var PermissionArnAndTemplateParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionArnAndTemplateParameters",
-}, smithy.ShapeTypeStructure, 2)
-var PermissionArnAndTemplateParameters_permissionArn *smithy.Schema
-
-var PermissionArnAndTemplateParameters_permissionTemplateParameters *smithy.Schema
-
-var _PermissionArnAndTemplateParametersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionArnAndTemplateParametersList",
-}, smithy.ShapeTypeList, 1)
-var _PermissionArnAndTemplateParametersList_member *smithy.Schema
-
-var _PermissionArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionArnList",
-}, smithy.ShapeTypeList, 1)
-var _PermissionArnList_member *smithy.Schema
-
-var PermissionFeatureSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionFeatureSet",
-}, smithy.ShapeTypeEnum, 3)
-var PermissionFeatureSet_CREATED_FROM_POLICY *smithy.Schema
-
-var PermissionFeatureSet_PROMOTING_TO_STANDARD *smithy.Schema
-
-var PermissionFeatureSet_STANDARD *smithy.Schema
-
-var PermissionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PermissionLimitExceededException",
-		StatusCode: 400})
-var PermissionLimitExceededException_message *smithy.Schema
-
-var _PermissionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionName",
-}, smithy.ShapeTypeString, 0)
-
-var PermissionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionStatus",
-}, smithy.ShapeTypeEnum, 5)
-var PermissionStatus_ATTACHABLE *smithy.Schema
-
-var PermissionStatus_UNATTACHABLE *smithy.Schema
-
-var PermissionStatus_DELETING *smithy.Schema
-
-var PermissionStatus_DELETED *smithy.Schema
-
-var PermissionStatus_DEPRECATED *smithy.Schema
-
-var PermissionTemplateParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameter",
-}, smithy.ShapeTypeStructure, 4)
-var PermissionTemplateParameter_name *smithy.Schema
-
-var PermissionTemplateParameter_type *smithy.Schema
-
-var PermissionTemplateParameter_description *smithy.Schema
-
-var PermissionTemplateParameter_values *smithy.Schema
-
-var PermissionTemplateParameterDeclaration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameterDeclaration",
-}, smithy.ShapeTypeStructure, 3)
-var PermissionTemplateParameterDeclaration_name *smithy.Schema
-
-var PermissionTemplateParameterDeclaration_type *smithy.Schema
-
-var PermissionTemplateParameterDeclaration_description *smithy.Schema
-
-var _PermissionTemplateParameterDeclarationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameterDeclarationList",
-}, smithy.ShapeTypeList, 1)
-var _PermissionTemplateParameterDeclarationList_member *smithy.Schema
-
-var PermissionTemplateParameterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameterInput",
-}, smithy.ShapeTypeStructure, 2)
-var PermissionTemplateParameterInput_name *smithy.Schema
-
-var PermissionTemplateParameterInput_values *smithy.Schema
-
-var _PermissionTemplateParameterInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameterInputList",
-}, smithy.ShapeTypeList, 1)
-var _PermissionTemplateParameterInputList_member *smithy.Schema
-
-var _PermissionTemplateParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameterList",
-}, smithy.ShapeTypeList, 1)
-var _PermissionTemplateParameterList_member *smithy.Schema
-
-var PermissionTemplateParameterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameterType",
-}, smithy.ShapeTypeEnum, 2)
-var PermissionTemplateParameterType_STRING *smithy.Schema
-
-var PermissionTemplateParameterType_STRING_LIST *smithy.Schema
-
-var _PermissionTemplateParameterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTemplateParameterValueList",
-}, smithy.ShapeTypeList, 1)
-var _PermissionTemplateParameterValueList_member *smithy.Schema
-
-var PermissionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionType",
-}, smithy.ShapeTypeEnum, 2)
-var PermissionType_CUSTOMER_MANAGED *smithy.Schema
-
-var PermissionType_AWS_MANAGED *smithy.Schema
-
-var PermissionTypeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionTypeFilter",
-}, smithy.ShapeTypeEnum, 3)
-var PermissionTypeFilter_ALL *smithy.Schema
-
-var PermissionTypeFilter_AWS_MANAGED *smithy.Schema
-
-var PermissionTypeFilter_CUSTOMER_MANAGED *smithy.Schema
-
-var PermissionVersionsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PermissionVersionsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PermissionVersionsLimitExceededException",
-		StatusCode: 400})
-var PermissionVersionsLimitExceededException_message *smithy.Schema
-
-var _Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "Policy",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PolicyList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyList_member *smithy.Schema
-
-var Principal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "Principal",
-}, smithy.ShapeTypeStructure, 5)
-var Principal_id *smithy.Schema
-
-var Principal_resourceShareArn *smithy.Schema
-
-var Principal_creationTime *smithy.Schema
-
-var Principal_lastUpdatedTime *smithy.Schema
-
-var Principal_external *smithy.Schema
-
-var _PrincipalArnOrIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PrincipalArnOrIdList",
-}, smithy.ShapeTypeList, 1)
-var _PrincipalArnOrIdList_member *smithy.Schema
-
-var _PrincipalList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PrincipalList",
-}, smithy.ShapeTypeList, 1)
-var _PrincipalList_member *smithy.Schema
-
-var ReplacePermissionAssociationsWork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ReplacePermissionAssociationsWork",
-}, smithy.ShapeTypeStructure, 10)
-var ReplacePermissionAssociationsWork_id *smithy.Schema
-
-var ReplacePermissionAssociationsWork_fromPermissionArn *smithy.Schema
-
-var ReplacePermissionAssociationsWork_fromPermissionVersion *smithy.Schema
-
-var ReplacePermissionAssociationsWork_toPermissionArn *smithy.Schema
-
-var ReplacePermissionAssociationsWork_toPermissionVersion *smithy.Schema
-
-var ReplacePermissionAssociationsWork_permissionTemplateParameters *smithy.Schema
-
-var ReplacePermissionAssociationsWork_status *smithy.Schema
-
-var ReplacePermissionAssociationsWork_statusMessage *smithy.Schema
-
-var ReplacePermissionAssociationsWork_creationTime *smithy.Schema
-
-var ReplacePermissionAssociationsWork_lastUpdatedTime *smithy.Schema
-
-var _ReplacePermissionAssociationsWorkIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ReplacePermissionAssociationsWorkIdList",
-}, smithy.ShapeTypeList, 1)
-var _ReplacePermissionAssociationsWorkIdList_member *smithy.Schema
-
-var _ReplacePermissionAssociationsWorkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ReplacePermissionAssociationsWorkList",
-}, smithy.ShapeTypeList, 1)
-var _ReplacePermissionAssociationsWorkList_member *smithy.Schema
-
-var ReplacePermissionAssociationsWorkStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ReplacePermissionAssociationsWorkStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ReplacePermissionAssociationsWorkStatus_IN_PROGRESS *smithy.Schema
-
-var ReplacePermissionAssociationsWorkStatus_COMPLETED *smithy.Schema
-
-var ReplacePermissionAssociationsWorkStatus_FAILED *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 9)
-var Resource_arn *smithy.Schema
-
-var Resource_type *smithy.Schema
-
-var Resource_resourceShareArn *smithy.Schema
-
-var Resource_resourceGroupArn *smithy.Schema
-
-var Resource_status *smithy.Schema
-
-var Resource_statusMessage *smithy.Schema
-
-var Resource_creationTime *smithy.Schema
-
-var Resource_lastUpdatedTime *smithy.Schema
-
-var Resource_resourceRegionScope *smithy.Schema
-
-var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArnList_member *smithy.Schema
-
-var ResourceArnNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceArnNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceArn.NotFound",
-		StatusCode: 400})
-var ResourceArnNotFoundException_message *smithy.Schema
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceOwner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceOwner",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceOwner_SELF *smithy.Schema
-
-var ResourceOwner_OTHER_ACCOUNTS *smithy.Schema
-
-var ResourceRegionScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceRegionScope",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceRegionScope_REGIONAL *smithy.Schema
-
-var ResourceRegionScope_GLOBAL *smithy.Schema
-
-var ResourceRegionScopeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceRegionScopeFilter",
-}, smithy.ShapeTypeEnum, 3)
-var ResourceRegionScopeFilter_ALL *smithy.Schema
-
-var ResourceRegionScopeFilter_REGIONAL *smithy.Schema
-
-var ResourceRegionScopeFilter_GLOBAL *smithy.Schema
-
-var ResourceShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShare",
-}, smithy.ShapeTypeStructure, 11)
-var ResourceShare_resourceShareArn *smithy.Schema
-
-var ResourceShare_name *smithy.Schema
-
-var ResourceShare_owningAccountId *smithy.Schema
-
-var ResourceShare_allowExternalPrincipals *smithy.Schema
-
-var ResourceShare_status *smithy.Schema
-
-var ResourceShare_statusMessage *smithy.Schema
-
-var ResourceShare_tags *smithy.Schema
-
-var ResourceShare_creationTime *smithy.Schema
-
-var ResourceShare_lastUpdatedTime *smithy.Schema
-
-var ResourceShare_featureSet *smithy.Schema
-
-var ResourceShare_resourceShareConfiguration *smithy.Schema
-
-var _ResourceShareArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceShareArnList_member *smithy.Schema
-
-var ResourceShareAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareAssociation",
-}, smithy.ShapeTypeStructure, 9)
-var ResourceShareAssociation_resourceShareArn *smithy.Schema
-
-var ResourceShareAssociation_resourceShareName *smithy.Schema
-
-var ResourceShareAssociation_associatedEntity *smithy.Schema
-
-var ResourceShareAssociation_associationType *smithy.Schema
-
-var ResourceShareAssociation_status *smithy.Schema
-
-var ResourceShareAssociation_statusMessage *smithy.Schema
-
-var ResourceShareAssociation_creationTime *smithy.Schema
-
-var ResourceShareAssociation_lastUpdatedTime *smithy.Schema
-
-var ResourceShareAssociation_external *smithy.Schema
-
-var _ResourceShareAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceShareAssociationList_member *smithy.Schema
-
-var ResourceShareAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareAssociationStatus",
-}, smithy.ShapeTypeEnum, 8)
-var ResourceShareAssociationStatus_ASSOCIATING *smithy.Schema
-
-var ResourceShareAssociationStatus_ASSOCIATED *smithy.Schema
-
-var ResourceShareAssociationStatus_FAILED *smithy.Schema
-
-var ResourceShareAssociationStatus_DISASSOCIATING *smithy.Schema
-
-var ResourceShareAssociationStatus_DISASSOCIATED *smithy.Schema
-
-var ResourceShareAssociationStatus_SUSPENDED *smithy.Schema
-
-var ResourceShareAssociationStatus_SUSPENDING *smithy.Schema
-
-var ResourceShareAssociationStatus_RESTORING *smithy.Schema
-
-var ResourceShareAssociationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareAssociationType",
-}, smithy.ShapeTypeEnum, 3)
-var ResourceShareAssociationType_PRINCIPAL *smithy.Schema
-
-var ResourceShareAssociationType_RESOURCE *smithy.Schema
-
-var ResourceShareAssociationType_SOURCE *smithy.Schema
-
-var ResourceShareConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ResourceShareConfiguration_retainSharingOnAccountLeaveOrganization *smithy.Schema
-
-var ResourceShareFeatureSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareFeatureSet",
-}, smithy.ShapeTypeEnum, 3)
-var ResourceShareFeatureSet_CREATED_FROM_POLICY *smithy.Schema
-
-var ResourceShareFeatureSet_PROMOTING_TO_STANDARD *smithy.Schema
-
-var ResourceShareFeatureSet_STANDARD *smithy.Schema
-
-var ResourceShareInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitation",
-}, smithy.ShapeTypeStructure, 9)
-var ResourceShareInvitation_resourceShareInvitationArn *smithy.Schema
-
-var ResourceShareInvitation_resourceShareName *smithy.Schema
-
-var ResourceShareInvitation_resourceShareArn *smithy.Schema
-
-var ResourceShareInvitation_senderAccountId *smithy.Schema
-
-var ResourceShareInvitation_receiverAccountId *smithy.Schema
-
-var ResourceShareInvitation_invitationTimestamp *smithy.Schema
-
-var ResourceShareInvitation_status *smithy.Schema
-
-var ResourceShareInvitation_resourceShareAssociations *smithy.Schema
-
-var ResourceShareInvitation_receiverArn *smithy.Schema
-
-var ResourceShareInvitationAlreadyAcceptedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitationAlreadyAcceptedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.AlreadyAccepted",
-		StatusCode: 400})
-var ResourceShareInvitationAlreadyAcceptedException_message *smithy.Schema
-
-var ResourceShareInvitationAlreadyRejectedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitationAlreadyRejectedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.AlreadyRejected",
-		StatusCode: 400})
-var ResourceShareInvitationAlreadyRejectedException_message *smithy.Schema
-
-var _ResourceShareInvitationArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitationArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceShareInvitationArnList_member *smithy.Schema
-
-var ResourceShareInvitationArnNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitationArnNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.NotFound",
-		StatusCode: 400})
-var ResourceShareInvitationArnNotFoundException_message *smithy.Schema
-
-var ResourceShareInvitationExpiredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitationExpiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.Expired",
-		StatusCode: 400})
-var ResourceShareInvitationExpiredException_message *smithy.Schema
-
-var _ResourceShareInvitationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitationList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceShareInvitationList_member *smithy.Schema
-
-var ResourceShareInvitationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareInvitationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ResourceShareInvitationStatus_PENDING *smithy.Schema
-
-var ResourceShareInvitationStatus_ACCEPTED *smithy.Schema
-
-var ResourceShareInvitationStatus_REJECTED *smithy.Schema
-
-var ResourceShareInvitationStatus_EXPIRED *smithy.Schema
-
-var ResourceShareLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceShareLimitExceeded",
-		StatusCode: 400})
-var ResourceShareLimitExceededException_message *smithy.Schema
-
-var _ResourceShareList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceShareList_member *smithy.Schema
-
-var ResourceSharePermissionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceSharePermissionDetail",
-}, smithy.ShapeTypeStructure, 15)
-var ResourceSharePermissionDetail_arn *smithy.Schema
-
-var ResourceSharePermissionDetail_version *smithy.Schema
-
-var ResourceSharePermissionDetail_defaultVersion *smithy.Schema
-
-var ResourceSharePermissionDetail_name *smithy.Schema
-
-var ResourceSharePermissionDetail_resourceType *smithy.Schema
-
-var ResourceSharePermissionDetail_permission *smithy.Schema
-
-var ResourceSharePermissionDetail_permissionTemplateParameters *smithy.Schema
-
-var ResourceSharePermissionDetail_creationTime *smithy.Schema
-
-var ResourceSharePermissionDetail_lastUpdatedTime *smithy.Schema
-
-var ResourceSharePermissionDetail_isResourceTypeDefault *smithy.Schema
-
-var ResourceSharePermissionDetail_permissionType *smithy.Schema
-
-var ResourceSharePermissionDetail_featureSet *smithy.Schema
-
-var ResourceSharePermissionDetail_status *smithy.Schema
-
-var ResourceSharePermissionDetail_tags *smithy.Schema
-
-var ResourceSharePermissionDetail_resourceOwner *smithy.Schema
-
-var _ResourceSharePermissionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceSharePermissionList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSharePermissionList_member *smithy.Schema
-
-var ResourceSharePermissionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceSharePermissionSummary",
-}, smithy.ShapeTypeStructure, 14)
-var ResourceSharePermissionSummary_arn *smithy.Schema
-
-var ResourceSharePermissionSummary_version *smithy.Schema
-
-var ResourceSharePermissionSummary_defaultVersion *smithy.Schema
-
-var ResourceSharePermissionSummary_name *smithy.Schema
-
-var ResourceSharePermissionSummary_resourceType *smithy.Schema
-
-var ResourceSharePermissionSummary_status *smithy.Schema
-
-var ResourceSharePermissionSummary_creationTime *smithy.Schema
-
-var ResourceSharePermissionSummary_lastUpdatedTime *smithy.Schema
-
-var ResourceSharePermissionSummary_isResourceTypeDefault *smithy.Schema
-
-var ResourceSharePermissionSummary_permissionType *smithy.Schema
-
-var ResourceSharePermissionSummary_featureSet *smithy.Schema
-
-var ResourceSharePermissionSummary_permissionTemplateParameters *smithy.Schema
-
-var ResourceSharePermissionSummary_tags *smithy.Schema
-
-var ResourceSharePermissionSummary_resourceOwner *smithy.Schema
-
-var ResourceShareStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceShareStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ResourceShareStatus_PENDING *smithy.Schema
-
-var ResourceShareStatus_ACTIVE *smithy.Schema
-
-var ResourceShareStatus_FAILED *smithy.Schema
-
-var ResourceShareStatus_DELETING *smithy.Schema
-
-var ResourceShareStatus_DELETED *smithy.Schema
-
-var ResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ResourceStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ResourceStatus_AVAILABLE *smithy.Schema
-
-var ResourceStatus_ZONAL_RESOURCE_INACCESSIBLE *smithy.Schema
-
-var ResourceStatus_LIMIT_EXCEEDED *smithy.Schema
-
-var ResourceStatus_UNAVAILABLE *smithy.Schema
-
-var ResourceStatus_PENDING *smithy.Schema
-
-var ServerInternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ServerInternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalError",
-		StatusCode: 500})
-var ServerInternalException_message *smithy.Schema
-
-var ServiceNameAndResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ServiceNameAndResourceType",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceNameAndResourceType_resourceType *smithy.Schema
-
-var ServiceNameAndResourceType_serviceName *smithy.Schema
-
-var ServiceNameAndResourceType_resourceRegionScope *smithy.Schema
-
-var _ServiceNameAndResourceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ServiceNameAndResourceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceNameAndResourceTypeList_member *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503},
-	&smithytraits.AWSQueryError{ErrorCode: "Unavailable",
-		StatusCode: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var _SourceArnOrAccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "SourceArnOrAccountList",
-}, smithy.ShapeTypeList, 1)
-var _SourceArnOrAccountList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var TagFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagFilter",
-}, smithy.ShapeTypeStructure, 2)
-var TagFilter_tagKey *smithy.Schema
-
-var TagFilter_tagValues *smithy.Schema
-
-var _TagFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagFilters",
-}, smithy.ShapeTypeList, 1)
-var _TagFilters_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TagLimitExceeded",
-		StatusCode: 400})
-var TagLimitExceededException_message *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TagPolicyViolationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagPolicyViolationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TagPolicyViolation",
-		StatusCode: 400})
-var TagPolicyViolationException_message *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TagValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagValueList",
-}, smithy.ShapeTypeList, 1)
-var _TagValueList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
-		StatusCode: 429})
-var ThrottlingException_message *smithy.Schema
-
-var UnknownResourceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UnknownResourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareArn.NotFound",
-		StatusCode: 400})
-var UnknownResourceException_message *smithy.Schema
-
-var UnmatchedPolicyPermissionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UnmatchedPolicyPermissionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "UnmatchedPolicyPermissionException",
-		StatusCode: 400})
-var UnmatchedPolicyPermissionException_message *smithy.Schema
-
-var UpdatePermissionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UpdatePermissionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var UpdatePermissionStatus_ATTACHABLE *smithy.Schema
-
-var UpdatePermissionStatus_DEPRECATED *smithy.Schema
-
-var AcceptResourceShareInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AcceptResourceShareInvitationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AcceptResourceShareInvitationRequest_resourceShareInvitationArn *smithy.Schema
-
-var AcceptResourceShareInvitationRequest_clientToken *smithy.Schema
-
-var AcceptResourceShareInvitationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AcceptResourceShareInvitationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AcceptResourceShareInvitationResponse_resourceShareInvitation *smithy.Schema
-
-var AcceptResourceShareInvitationResponse_clientToken *smithy.Schema
-
-var AssociateResourceShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociateResourceShareRequest",
-}, smithy.ShapeTypeStructure, 5)
-var AssociateResourceShareRequest_resourceShareArn *smithy.Schema
-
-var AssociateResourceShareRequest_resourceArns *smithy.Schema
-
-var AssociateResourceShareRequest_principals *smithy.Schema
-
-var AssociateResourceShareRequest_clientToken *smithy.Schema
-
-var AssociateResourceShareRequest_sources *smithy.Schema
-
-var AssociateResourceShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociateResourceShareResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateResourceShareResponse_resourceShareAssociations *smithy.Schema
-
-var AssociateResourceShareResponse_clientToken *smithy.Schema
-
-var AssociateResourceSharePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociateResourceSharePermissionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var AssociateResourceSharePermissionRequest_resourceShareArn *smithy.Schema
-
-var AssociateResourceSharePermissionRequest_permissionArn *smithy.Schema
-
-var AssociateResourceSharePermissionRequest_permissionTemplateParameters *smithy.Schema
-
-var AssociateResourceSharePermissionRequest_replace *smithy.Schema
-
-var AssociateResourceSharePermissionRequest_clientToken *smithy.Schema
-
-var AssociateResourceSharePermissionRequest_permissionVersion *smithy.Schema
-
-var AssociateResourceSharePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "AssociateResourceSharePermissionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateResourceSharePermissionResponse_returnValue *smithy.Schema
-
-var AssociateResourceSharePermissionResponse_clientToken *smithy.Schema
-
-var CreatePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreatePermissionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreatePermissionRequest_name *smithy.Schema
-
-var CreatePermissionRequest_resourceType *smithy.Schema
-
-var CreatePermissionRequest_policyTemplate *smithy.Schema
-
-var CreatePermissionRequest_permissionTemplateParameters *smithy.Schema
-
-var CreatePermissionRequest_clientToken *smithy.Schema
-
-var CreatePermissionRequest_tags *smithy.Schema
-
-var CreatePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreatePermissionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePermissionResponse_permission *smithy.Schema
-
-var CreatePermissionResponse_clientToken *smithy.Schema
-
-var CreatePermissionVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreatePermissionVersionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePermissionVersionRequest_permissionArn *smithy.Schema
-
-var CreatePermissionVersionRequest_policyTemplate *smithy.Schema
-
-var CreatePermissionVersionRequest_permissionTemplateParameters *smithy.Schema
-
-var CreatePermissionVersionRequest_clientToken *smithy.Schema
-
-var CreatePermissionVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreatePermissionVersionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePermissionVersionResponse_permission *smithy.Schema
-
-var CreatePermissionVersionResponse_clientToken *smithy.Schema
-
-var CreateResourceShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreateResourceShareRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateResourceShareRequest_name *smithy.Schema
-
-var CreateResourceShareRequest_resourceArns *smithy.Schema
-
-var CreateResourceShareRequest_principals *smithy.Schema
-
-var CreateResourceShareRequest_tags *smithy.Schema
-
-var CreateResourceShareRequest_allowExternalPrincipals *smithy.Schema
-
-var CreateResourceShareRequest_clientToken *smithy.Schema
-
-var CreateResourceShareRequest_permissionArns *smithy.Schema
-
-var CreateResourceShareRequest_sources *smithy.Schema
-
-var CreateResourceShareRequest_permissionTemplateParameters *smithy.Schema
-
-var CreateResourceShareRequest_resourceShareConfiguration *smithy.Schema
-
-var CreateResourceShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "CreateResourceShareResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateResourceShareResponse_resourceShare *smithy.Schema
-
-var CreateResourceShareResponse_clientToken *smithy.Schema
-
-var DeletePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeletePermissionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePermissionRequest_permissionArn *smithy.Schema
-
-var DeletePermissionRequest_clientToken *smithy.Schema
-
-var DeletePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeletePermissionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeletePermissionResponse_returnValue *smithy.Schema
-
-var DeletePermissionResponse_clientToken *smithy.Schema
-
-var DeletePermissionResponse_permissionStatus *smithy.Schema
-
-var DeletePermissionVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeletePermissionVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeletePermissionVersionRequest_permissionArn *smithy.Schema
-
-var DeletePermissionVersionRequest_permissionVersion *smithy.Schema
-
-var DeletePermissionVersionRequest_clientToken *smithy.Schema
-
-var DeletePermissionVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeletePermissionVersionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeletePermissionVersionResponse_returnValue *smithy.Schema
-
-var DeletePermissionVersionResponse_clientToken *smithy.Schema
-
-var DeletePermissionVersionResponse_permissionStatus *smithy.Schema
-
-var DeleteResourceShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeleteResourceShareRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourceShareRequest_resourceShareArn *smithy.Schema
-
-var DeleteResourceShareRequest_clientToken *smithy.Schema
-
-var DeleteResourceShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DeleteResourceShareResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourceShareResponse_returnValue *smithy.Schema
-
-var DeleteResourceShareResponse_clientToken *smithy.Schema
-
-var DisassociateResourceShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DisassociateResourceShareRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DisassociateResourceShareRequest_resourceShareArn *smithy.Schema
-
-var DisassociateResourceShareRequest_resourceArns *smithy.Schema
-
-var DisassociateResourceShareRequest_principals *smithy.Schema
-
-var DisassociateResourceShareRequest_clientToken *smithy.Schema
-
-var DisassociateResourceShareRequest_sources *smithy.Schema
-
-var DisassociateResourceShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DisassociateResourceShareResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateResourceShareResponse_resourceShareAssociations *smithy.Schema
-
-var DisassociateResourceShareResponse_clientToken *smithy.Schema
-
-var DisassociateResourceSharePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DisassociateResourceSharePermissionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateResourceSharePermissionRequest_resourceShareArn *smithy.Schema
-
-var DisassociateResourceSharePermissionRequest_permissionArn *smithy.Schema
-
-var DisassociateResourceSharePermissionRequest_clientToken *smithy.Schema
-
-var DisassociateResourceSharePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "DisassociateResourceSharePermissionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateResourceSharePermissionResponse_returnValue *smithy.Schema
-
-var DisassociateResourceSharePermissionResponse_clientToken *smithy.Schema
-
-var EnableSharingWithAwsOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "EnableSharingWithAwsOrganizationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableSharingWithAwsOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "EnableSharingWithAwsOrganizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var EnableSharingWithAwsOrganizationResponse_returnValue *smithy.Schema
-
-var GetPermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetPermissionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetPermissionRequest_permissionArn *smithy.Schema
-
-var GetPermissionRequest_permissionVersion *smithy.Schema
-
-var GetPermissionRequest_permissionTemplateParameters *smithy.Schema
-
-var GetPermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetPermissionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPermissionResponse_permission *smithy.Schema
-
-var GetResourcePoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourcePoliciesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetResourcePoliciesRequest_resourceArns *smithy.Schema
-
-var GetResourcePoliciesRequest_principal *smithy.Schema
-
-var GetResourcePoliciesRequest_nextToken *smithy.Schema
-
-var GetResourcePoliciesRequest_maxResults *smithy.Schema
-
-var GetResourcePoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourcePoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePoliciesResponse_policies *smithy.Schema
-
-var GetResourcePoliciesResponse_nextToken *smithy.Schema
-
-var GetResourceShareAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceShareAssociationsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var GetResourceShareAssociationsRequest_associationType *smithy.Schema
-
-var GetResourceShareAssociationsRequest_resourceShareArns *smithy.Schema
-
-var GetResourceShareAssociationsRequest_resourceArn *smithy.Schema
-
-var GetResourceShareAssociationsRequest_principal *smithy.Schema
-
-var GetResourceShareAssociationsRequest_associationStatus *smithy.Schema
-
-var GetResourceShareAssociationsRequest_nextToken *smithy.Schema
-
-var GetResourceShareAssociationsRequest_maxResults *smithy.Schema
-
-var GetResourceShareAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceShareAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceShareAssociationsResponse_resourceShareAssociations *smithy.Schema
-
-var GetResourceShareAssociationsResponse_nextToken *smithy.Schema
-
-var GetResourceShareInvitationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceShareInvitationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetResourceShareInvitationsRequest_resourceShareInvitationArns *smithy.Schema
-
-var GetResourceShareInvitationsRequest_resourceShareArns *smithy.Schema
-
-var GetResourceShareInvitationsRequest_nextToken *smithy.Schema
-
-var GetResourceShareInvitationsRequest_maxResults *smithy.Schema
-
-var GetResourceShareInvitationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceShareInvitationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceShareInvitationsResponse_resourceShareInvitations *smithy.Schema
-
-var GetResourceShareInvitationsResponse_nextToken *smithy.Schema
-
-var GetResourceSharesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceSharesRequest",
-}, smithy.ShapeTypeStructure, 9)
-var GetResourceSharesRequest_resourceShareArns *smithy.Schema
-
-var GetResourceSharesRequest_resourceShareStatus *smithy.Schema
-
-var GetResourceSharesRequest_resourceOwner *smithy.Schema
-
-var GetResourceSharesRequest_name *smithy.Schema
-
-var GetResourceSharesRequest_tagFilters *smithy.Schema
-
-var GetResourceSharesRequest_nextToken *smithy.Schema
-
-var GetResourceSharesRequest_maxResults *smithy.Schema
-
-var GetResourceSharesRequest_permissionArn *smithy.Schema
-
-var GetResourceSharesRequest_permissionVersion *smithy.Schema
-
-var GetResourceSharesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "GetResourceSharesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceSharesResponse_resourceShares *smithy.Schema
-
-var GetResourceSharesResponse_nextToken *smithy.Schema
-
-var ListPendingInvitationResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPendingInvitationResourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListPendingInvitationResourcesRequest_resourceShareInvitationArn *smithy.Schema
-
-var ListPendingInvitationResourcesRequest_nextToken *smithy.Schema
-
-var ListPendingInvitationResourcesRequest_maxResults *smithy.Schema
-
-var ListPendingInvitationResourcesRequest_resourceRegionScope *smithy.Schema
-
-var ListPendingInvitationResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPendingInvitationResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPendingInvitationResourcesResponse_resources *smithy.Schema
-
-var ListPendingInvitationResourcesResponse_nextToken *smithy.Schema
-
-var ListPermissionAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionAssociationsRequest",
-}, smithy.ShapeTypeStructure, 10)
-var ListPermissionAssociationsRequest_permissionArn *smithy.Schema
-
-var ListPermissionAssociationsRequest_permissionVersion *smithy.Schema
-
-var ListPermissionAssociationsRequest_associationStatus *smithy.Schema
-
-var ListPermissionAssociationsRequest_resourceType *smithy.Schema
-
-var ListPermissionAssociationsRequest_featureSet *smithy.Schema
-
-var ListPermissionAssociationsRequest_defaultVersion *smithy.Schema
-
-var ListPermissionAssociationsRequest_resourceOwner *smithy.Schema
-
-var ListPermissionAssociationsRequest_resourceShareArn *smithy.Schema
-
-var ListPermissionAssociationsRequest_nextToken *smithy.Schema
-
-var ListPermissionAssociationsRequest_maxResults *smithy.Schema
-
-var ListPermissionAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPermissionAssociationsResponse_permissions *smithy.Schema
-
-var ListPermissionAssociationsResponse_nextToken *smithy.Schema
-
-var ListPermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListPermissionsRequest_resourceType *smithy.Schema
-
-var ListPermissionsRequest_resourceOwner *smithy.Schema
-
-var ListPermissionsRequest_nextToken *smithy.Schema
-
-var ListPermissionsRequest_maxResults *smithy.Schema
-
-var ListPermissionsRequest_permissionType *smithy.Schema
-
-var ListPermissionsRequest_permissionStatus *smithy.Schema
-
-var ListPermissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPermissionsResponse_permissions *smithy.Schema
-
-var ListPermissionsResponse_nextToken *smithy.Schema
-
-var ListPermissionVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPermissionVersionsRequest_permissionArn *smithy.Schema
-
-var ListPermissionVersionsRequest_nextToken *smithy.Schema
-
-var ListPermissionVersionsRequest_maxResults *smithy.Schema
-
-var ListPermissionVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPermissionVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPermissionVersionsResponse_permissions *smithy.Schema
-
-var ListPermissionVersionsResponse_nextToken *smithy.Schema
-
-var ListPrincipalsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPrincipalsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListPrincipalsRequest_resourceOwner *smithy.Schema
-
-var ListPrincipalsRequest_resourceArn *smithy.Schema
-
-var ListPrincipalsRequest_principals *smithy.Schema
-
-var ListPrincipalsRequest_resourceType *smithy.Schema
-
-var ListPrincipalsRequest_resourceShareArns *smithy.Schema
-
-var ListPrincipalsRequest_nextToken *smithy.Schema
-
-var ListPrincipalsRequest_maxResults *smithy.Schema
-
-var ListPrincipalsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListPrincipalsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPrincipalsResponse_principals *smithy.Schema
-
-var ListPrincipalsResponse_nextToken *smithy.Schema
-
-var ListReplacePermissionAssociationsWorkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListReplacePermissionAssociationsWorkRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListReplacePermissionAssociationsWorkRequest_workIds *smithy.Schema
-
-var ListReplacePermissionAssociationsWorkRequest_status *smithy.Schema
-
-var ListReplacePermissionAssociationsWorkRequest_nextToken *smithy.Schema
-
-var ListReplacePermissionAssociationsWorkRequest_maxResults *smithy.Schema
-
-var ListReplacePermissionAssociationsWorkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListReplacePermissionAssociationsWorkResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks *smithy.Schema
-
-var ListReplacePermissionAssociationsWorkResponse_nextToken *smithy.Schema
-
-var ListResourceSharePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourceSharePermissionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourceSharePermissionsRequest_resourceShareArn *smithy.Schema
-
-var ListResourceSharePermissionsRequest_nextToken *smithy.Schema
-
-var ListResourceSharePermissionsRequest_maxResults *smithy.Schema
-
-var ListResourceSharePermissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourceSharePermissionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSharePermissionsResponse_permissions *smithy.Schema
-
-var ListResourceSharePermissionsResponse_nextToken *smithy.Schema
-
-var ListResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourcesRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListResourcesRequest_resourceOwner *smithy.Schema
-
-var ListResourcesRequest_principal *smithy.Schema
-
-var ListResourcesRequest_resourceType *smithy.Schema
-
-var ListResourcesRequest_resourceArns *smithy.Schema
-
-var ListResourcesRequest_resourceShareArns *smithy.Schema
-
-var ListResourcesRequest_nextToken *smithy.Schema
-
-var ListResourcesRequest_maxResults *smithy.Schema
-
-var ListResourcesRequest_resourceRegionScope *smithy.Schema
-
-var ListResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourcesResponse_resources *smithy.Schema
-
-var ListResourcesResponse_nextToken *smithy.Schema
-
-var ListResourceTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourceTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourceTypesRequest_nextToken *smithy.Schema
-
-var ListResourceTypesRequest_maxResults *smithy.Schema
-
-var ListResourceTypesRequest_resourceRegionScope *smithy.Schema
-
-var ListResourceTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListResourceTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceTypesResponse_resourceTypes *smithy.Schema
-
-var ListResourceTypesResponse_nextToken *smithy.Schema
-
-var ListSourceAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListSourceAssociationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListSourceAssociationsRequest_resourceShareArns *smithy.Schema
-
-var ListSourceAssociationsRequest_sourceId *smithy.Schema
-
-var ListSourceAssociationsRequest_sourceType *smithy.Schema
-
-var ListSourceAssociationsRequest_associationStatus *smithy.Schema
-
-var ListSourceAssociationsRequest_nextToken *smithy.Schema
-
-var ListSourceAssociationsRequest_maxResults *smithy.Schema
-
-var ListSourceAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ListSourceAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSourceAssociationsResponse_sourceAssociations *smithy.Schema
-
-var ListSourceAssociationsResponse_nextToken *smithy.Schema
-
-var PromotePermissionCreatedFromPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PromotePermissionCreatedFromPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PromotePermissionCreatedFromPolicyRequest_permissionArn *smithy.Schema
-
-var PromotePermissionCreatedFromPolicyRequest_name *smithy.Schema
-
-var PromotePermissionCreatedFromPolicyRequest_clientToken *smithy.Schema
-
-var PromotePermissionCreatedFromPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PromotePermissionCreatedFromPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PromotePermissionCreatedFromPolicyResponse_permission *smithy.Schema
-
-var PromotePermissionCreatedFromPolicyResponse_clientToken *smithy.Schema
-
-var PromoteResourceShareCreatedFromPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PromoteResourceShareCreatedFromPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PromoteResourceShareCreatedFromPolicyRequest_resourceShareArn *smithy.Schema
-
-var PromoteResourceShareCreatedFromPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "PromoteResourceShareCreatedFromPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PromoteResourceShareCreatedFromPolicyResponse_returnValue *smithy.Schema
-
-var RejectResourceShareInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "RejectResourceShareInvitationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RejectResourceShareInvitationRequest_resourceShareInvitationArn *smithy.Schema
-
-var RejectResourceShareInvitationRequest_clientToken *smithy.Schema
-
-var RejectResourceShareInvitationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "RejectResourceShareInvitationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RejectResourceShareInvitationResponse_resourceShareInvitation *smithy.Schema
-
-var RejectResourceShareInvitationResponse_clientToken *smithy.Schema
-
-var ReplacePermissionAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ReplacePermissionAssociationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ReplacePermissionAssociationsRequest_fromPermissionArn *smithy.Schema
-
-var ReplacePermissionAssociationsRequest_fromPermissionVersion *smithy.Schema
-
-var ReplacePermissionAssociationsRequest_toPermissionArn *smithy.Schema
-
-var ReplacePermissionAssociationsRequest_permissionTemplateParameters *smithy.Schema
-
-var ReplacePermissionAssociationsRequest_clientToken *smithy.Schema
-
-var ReplacePermissionAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "ReplacePermissionAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ReplacePermissionAssociationsResponse_replacePermissionAssociationsWork *smithy.Schema
-
-var ReplacePermissionAssociationsResponse_clientToken *smithy.Schema
-
-var SetDefaultPermissionVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "SetDefaultPermissionVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SetDefaultPermissionVersionRequest_permissionArn *smithy.Schema
-
-var SetDefaultPermissionVersionRequest_permissionVersion *smithy.Schema
-
-var SetDefaultPermissionVersionRequest_clientToken *smithy.Schema
-
-var SetDefaultPermissionVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "SetDefaultPermissionVersionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SetDefaultPermissionVersionResponse_returnValue *smithy.Schema
-
-var SetDefaultPermissionVersionResponse_clientToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var TagResourceRequest_resourceShareArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UntagResourceRequest_resourceShareArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdatePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UpdatePermissionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePermissionRequest_permissionArn *smithy.Schema
-
-var UpdatePermissionRequest_status *smithy.Schema
-
-var UpdatePermissionRequest_clientToken *smithy.Schema
-
-var UpdatePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UpdatePermissionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdatePermissionResponse_clientToken *smithy.Schema
-
-var UpdatePermissionResponse_permissionStatus *smithy.Schema
-
-var UpdateResourceShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UpdateResourceShareRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateResourceShareRequest_resourceShareArn *smithy.Schema
-
-var UpdateResourceShareRequest_name *smithy.Schema
-
-var UpdateResourceShareRequest_allowExternalPrincipals *smithy.Schema
-
-var UpdateResourceShareRequest_clientToken *smithy.Schema
-
-var UpdateResourceShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ram",
-	Name:      "UpdateResourceShareResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateResourceShareResponse_resourceShare *smithy.Schema
-
-var UpdateResourceShareResponse_clientToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	PermissionFeatureSet_CREATED_FROM_POLICY = PermissionFeatureSet.AddMember("CREATED_FROM_POLICY", smithyprelude.Unit)
-
-	PermissionFeatureSet_PROMOTING_TO_STANDARD = PermissionFeatureSet.AddMember("PROMOTING_TO_STANDARD", smithyprelude.Unit)
-
-	PermissionFeatureSet_STANDARD = PermissionFeatureSet.AddMember("STANDARD", smithyprelude.Unit)
-
-	PermissionTemplateParameterType_STRING = PermissionTemplateParameterType.AddMember("STRING", smithyprelude.Unit)
-
-	PermissionTemplateParameterType_STRING_LIST = PermissionTemplateParameterType.AddMember("STRING_LIST", smithyprelude.Unit)
-
-	_PermissionTemplateParameterValueList_member = _PermissionTemplateParameterValueList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	PermissionTemplateParameter_name = PermissionTemplateParameter.AddMember("name", _String)
-
-	PermissionTemplateParameter_type = PermissionTemplateParameter.AddMember("type", PermissionTemplateParameterType)
-
-	PermissionTemplateParameter_description = PermissionTemplateParameter.AddMember("description", _String)
-
-	PermissionTemplateParameter_values = PermissionTemplateParameter.AddMember("values", _PermissionTemplateParameterValueList)
-
-	_PermissionTemplateParameterList_member = _PermissionTemplateParameterList.AddMember("member", PermissionTemplateParameter, &smithytraits.XMLName{Name: "item"})
-
-	AssociatedPermission_arn = AssociatedPermission.AddMember("arn", _String)
-
-	AssociatedPermission_permissionVersion = AssociatedPermission.AddMember("permissionVersion", _String)
-
-	AssociatedPermission_defaultVersion = AssociatedPermission.AddMember("defaultVersion", _Boolean)
-
-	AssociatedPermission_resourceType = AssociatedPermission.AddMember("resourceType", _String)
-
-	AssociatedPermission_status = AssociatedPermission.AddMember("status", _String)
-
-	AssociatedPermission_featureSet = AssociatedPermission.AddMember("featureSet", PermissionFeatureSet)
-
-	AssociatedPermission_lastUpdatedTime = AssociatedPermission.AddMember("lastUpdatedTime", _DateTime)
-
-	AssociatedPermission_resourceShareArn = AssociatedPermission.AddMember("resourceShareArn", _String)
-
-	AssociatedPermission_permissionTemplateParameters = AssociatedPermission.AddMember("permissionTemplateParameters", _PermissionTemplateParameterList)
-
-	_AssociatedPermissionList_member = _AssociatedPermissionList.AddMember("member", AssociatedPermission, &smithytraits.XMLName{Name: "item"})
-
-	AssociatedSource_resourceShareArn = AssociatedSource.AddMember("resourceShareArn", _String)
-
-	AssociatedSource_sourceId = AssociatedSource.AddMember("sourceId", _String)
-
-	AssociatedSource_sourceType = AssociatedSource.AddMember("sourceType", _String)
-
-	AssociatedSource_status = AssociatedSource.AddMember("status", _String)
-
-	AssociatedSource_lastUpdatedTime = AssociatedSource.AddMember("lastUpdatedTime", _DateTime)
-
-	AssociatedSource_creationTime = AssociatedSource.AddMember("creationTime", _DateTime)
-
-	AssociatedSource_statusMessage = AssociatedSource.AddMember("statusMessage", _String)
-
-	_AssociatedSourceList_member = _AssociatedSourceList.AddMember("member", AssociatedSource, &smithytraits.XMLName{Name: "item"})
-
-	IdempotentParameterMismatchException_message = IdempotentParameterMismatchException.AddMember("message", _String)
-
-	InvalidClientTokenException_message = InvalidClientTokenException.AddMember("message", _String)
-
-	InvalidMaxResultsException_message = InvalidMaxResultsException.AddMember("message", _String)
-
-	InvalidNextTokenException_message = InvalidNextTokenException.AddMember("message", _String)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", _String)
-
-	InvalidPolicyException_message = InvalidPolicyException.AddMember("message", _String)
-
-	InvalidResourceTypeException_message = InvalidResourceTypeException.AddMember("message", _String)
-
-	InvalidStateTransitionException_message = InvalidStateTransitionException.AddMember("message", _String)
-
-	MalformedArnException_message = MalformedArnException.AddMember("message", _String)
-
-	MalformedPolicyTemplateException_message = MalformedPolicyTemplateException.AddMember("message", _String)
-
-	MissingRequiredParameterException_message = MissingRequiredParameterException.AddMember("message", _String)
-
-	OperationNotPermittedException_message = OperationNotPermittedException.AddMember("message", _String)
-
-	PermissionAlreadyExistsException_message = PermissionAlreadyExistsException.AddMember("message", _String)
-
-	PermissionTemplateParameterInput_name = PermissionTemplateParameterInput.AddMember("name", _String)
-
-	PermissionTemplateParameterInput_values = PermissionTemplateParameterInput.AddMember("values", _PermissionTemplateParameterValueList)
-
-	_PermissionTemplateParameterInputList_member = _PermissionTemplateParameterInputList.AddMember("member", PermissionTemplateParameterInput, &smithytraits.XMLName{Name: "item"})
-
-	PermissionArnAndTemplateParameters_permissionArn = PermissionArnAndTemplateParameters.AddMember("permissionArn", _String)
-
-	PermissionArnAndTemplateParameters_permissionTemplateParameters = PermissionArnAndTemplateParameters.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
-
-	_PermissionArnAndTemplateParametersList_member = _PermissionArnAndTemplateParametersList.AddMember("member", PermissionArnAndTemplateParameters, &smithytraits.XMLName{Name: "item"})
-
-	_PermissionArnList_member = _PermissionArnList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	PermissionLimitExceededException_message = PermissionLimitExceededException.AddMember("message", _String)
-
-	PermissionStatus_ATTACHABLE = PermissionStatus.AddMember("ATTACHABLE", smithyprelude.Unit)
-
-	PermissionStatus_UNATTACHABLE = PermissionStatus.AddMember("UNATTACHABLE", smithyprelude.Unit)
-
-	PermissionStatus_DELETING = PermissionStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	PermissionStatus_DELETED = PermissionStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	PermissionStatus_DEPRECATED = PermissionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	PermissionTemplateParameterDeclaration_name = PermissionTemplateParameterDeclaration.AddMember("name", _String)
-
-	PermissionTemplateParameterDeclaration_type = PermissionTemplateParameterDeclaration.AddMember("type", PermissionTemplateParameterType)
-
-	PermissionTemplateParameterDeclaration_description = PermissionTemplateParameterDeclaration.AddMember("description", _String)
-
-	_PermissionTemplateParameterDeclarationList_member = _PermissionTemplateParameterDeclarationList.AddMember("member", PermissionTemplateParameterDeclaration, &smithytraits.XMLName{Name: "item"})
-
-	PermissionType_CUSTOMER_MANAGED = PermissionType.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
-
-	PermissionType_AWS_MANAGED = PermissionType.AddMember("AWS_MANAGED", smithyprelude.Unit)
-
-	PermissionTypeFilter_ALL = PermissionTypeFilter.AddMember("ALL", smithyprelude.Unit)
-
-	PermissionTypeFilter_AWS_MANAGED = PermissionTypeFilter.AddMember("AWS_MANAGED", smithyprelude.Unit)
-
-	PermissionTypeFilter_CUSTOMER_MANAGED = PermissionTypeFilter.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
-
-	PermissionVersionsLimitExceededException_message = PermissionVersionsLimitExceededException.AddMember("message", _String)
-
-	_PolicyList_member = _PolicyList.AddMember("member", _Policy, &smithytraits.XMLName{Name: "item"})
-
-	Principal_id = Principal.AddMember("id", _String)
-
-	Principal_resourceShareArn = Principal.AddMember("resourceShareArn", _String)
-
-	Principal_creationTime = Principal.AddMember("creationTime", _DateTime)
-
-	Principal_lastUpdatedTime = Principal.AddMember("lastUpdatedTime", _DateTime)
-
-	Principal_external = Principal.AddMember("external", _Boolean)
-
-	_PrincipalArnOrIdList_member = _PrincipalArnOrIdList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	_PrincipalList_member = _PrincipalList.AddMember("member", Principal, &smithytraits.XMLName{Name: "item"})
-
-	ReplacePermissionAssociationsWorkStatus_IN_PROGRESS = ReplacePermissionAssociationsWorkStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ReplacePermissionAssociationsWorkStatus_COMPLETED = ReplacePermissionAssociationsWorkStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ReplacePermissionAssociationsWorkStatus_FAILED = ReplacePermissionAssociationsWorkStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ReplacePermissionAssociationsWork_id = ReplacePermissionAssociationsWork.AddMember("id", _String)
-
-	ReplacePermissionAssociationsWork_fromPermissionArn = ReplacePermissionAssociationsWork.AddMember("fromPermissionArn", _String)
-
-	ReplacePermissionAssociationsWork_fromPermissionVersion = ReplacePermissionAssociationsWork.AddMember("fromPermissionVersion", _String)
-
-	ReplacePermissionAssociationsWork_toPermissionArn = ReplacePermissionAssociationsWork.AddMember("toPermissionArn", _String)
-
-	ReplacePermissionAssociationsWork_toPermissionVersion = ReplacePermissionAssociationsWork.AddMember("toPermissionVersion", _String)
-
-	ReplacePermissionAssociationsWork_permissionTemplateParameters = ReplacePermissionAssociationsWork.AddMember("permissionTemplateParameters", _PermissionTemplateParameterList)
-
-	ReplacePermissionAssociationsWork_status = ReplacePermissionAssociationsWork.AddMember("status", ReplacePermissionAssociationsWorkStatus)
-
-	ReplacePermissionAssociationsWork_statusMessage = ReplacePermissionAssociationsWork.AddMember("statusMessage", _String)
-
-	ReplacePermissionAssociationsWork_creationTime = ReplacePermissionAssociationsWork.AddMember("creationTime", _DateTime)
-
-	ReplacePermissionAssociationsWork_lastUpdatedTime = ReplacePermissionAssociationsWork.AddMember("lastUpdatedTime", _DateTime)
-
-	_ReplacePermissionAssociationsWorkIdList_member = _ReplacePermissionAssociationsWorkIdList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	_ReplacePermissionAssociationsWorkList_member = _ReplacePermissionAssociationsWorkList.AddMember("member", ReplacePermissionAssociationsWork, &smithytraits.XMLName{Name: "item"})
-
-	ResourceStatus_AVAILABLE = ResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ResourceStatus_ZONAL_RESOURCE_INACCESSIBLE = ResourceStatus.AddMember("ZONAL_RESOURCE_INACCESSIBLE", smithyprelude.Unit)
-
-	ResourceStatus_LIMIT_EXCEEDED = ResourceStatus.AddMember("LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ResourceStatus_UNAVAILABLE = ResourceStatus.AddMember("UNAVAILABLE", smithyprelude.Unit)
-
-	ResourceStatus_PENDING = ResourceStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ResourceRegionScope_REGIONAL = ResourceRegionScope.AddMember("REGIONAL", smithyprelude.Unit)
-
-	ResourceRegionScope_GLOBAL = ResourceRegionScope.AddMember("GLOBAL", smithyprelude.Unit)
-
-	Resource_arn = Resource.AddMember("arn", _String)
-
-	Resource_type = Resource.AddMember("type", _String)
-
-	Resource_resourceShareArn = Resource.AddMember("resourceShareArn", _String)
-
-	Resource_resourceGroupArn = Resource.AddMember("resourceGroupArn", _String)
-
-	Resource_status = Resource.AddMember("status", ResourceStatus)
-
-	Resource_statusMessage = Resource.AddMember("statusMessage", _String)
-
-	Resource_creationTime = Resource.AddMember("creationTime", _DateTime)
-
-	Resource_lastUpdatedTime = Resource.AddMember("lastUpdatedTime", _DateTime)
-
-	Resource_resourceRegionScope = Resource.AddMember("resourceRegionScope", ResourceRegionScope)
-
-	_ResourceArnList_member = _ResourceArnList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	ResourceArnNotFoundException_message = ResourceArnNotFoundException.AddMember("message", _String)
-
-	_ResourceList_member = _ResourceList.AddMember("member", Resource, &smithytraits.XMLName{Name: "item"})
-
-	ResourceOwner_SELF = ResourceOwner.AddMember("SELF", smithyprelude.Unit)
-
-	ResourceOwner_OTHER_ACCOUNTS = ResourceOwner.AddMember("OTHER_ACCOUNTS", smithyprelude.Unit)
-
-	ResourceRegionScopeFilter_ALL = ResourceRegionScopeFilter.AddMember("ALL", smithyprelude.Unit)
-
-	ResourceRegionScopeFilter_REGIONAL = ResourceRegionScopeFilter.AddMember("REGIONAL", smithyprelude.Unit)
-
-	ResourceRegionScopeFilter_GLOBAL = ResourceRegionScopeFilter.AddMember("GLOBAL", smithyprelude.Unit)
-
-	ResourceShareStatus_PENDING = ResourceShareStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ResourceShareStatus_ACTIVE = ResourceShareStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ResourceShareStatus_FAILED = ResourceShareStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ResourceShareStatus_DELETING = ResourceShareStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ResourceShareStatus_DELETED = ResourceShareStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ResourceShareFeatureSet_CREATED_FROM_POLICY = ResourceShareFeatureSet.AddMember("CREATED_FROM_POLICY", smithyprelude.Unit)
-
-	ResourceShareFeatureSet_PROMOTING_TO_STANDARD = ResourceShareFeatureSet.AddMember("PROMOTING_TO_STANDARD", smithyprelude.Unit)
-
-	ResourceShareFeatureSet_STANDARD = ResourceShareFeatureSet.AddMember("STANDARD", smithyprelude.Unit)
-
-	ResourceShareConfiguration_retainSharingOnAccountLeaveOrganization = ResourceShareConfiguration.AddMember("retainSharingOnAccountLeaveOrganization", _Boolean)
-
-	ResourceShare_resourceShareArn = ResourceShare.AddMember("resourceShareArn", _String)
-
-	ResourceShare_name = ResourceShare.AddMember("name", _String)
-
-	ResourceShare_owningAccountId = ResourceShare.AddMember("owningAccountId", _String)
-
-	ResourceShare_allowExternalPrincipals = ResourceShare.AddMember("allowExternalPrincipals", _Boolean)
-
-	ResourceShare_status = ResourceShare.AddMember("status", ResourceShareStatus)
-
-	ResourceShare_statusMessage = ResourceShare.AddMember("statusMessage", _String)
-
-	ResourceShare_tags = ResourceShare.AddMember("tags", _TagList)
-
-	ResourceShare_creationTime = ResourceShare.AddMember("creationTime", _DateTime)
-
-	ResourceShare_lastUpdatedTime = ResourceShare.AddMember("lastUpdatedTime", _DateTime)
-
-	ResourceShare_featureSet = ResourceShare.AddMember("featureSet", ResourceShareFeatureSet)
-
-	ResourceShare_resourceShareConfiguration = ResourceShare.AddMember("resourceShareConfiguration", ResourceShareConfiguration)
-
-	_ResourceShareArnList_member = _ResourceShareArnList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	ResourceShareAssociationType_PRINCIPAL = ResourceShareAssociationType.AddMember("PRINCIPAL", smithyprelude.Unit)
-
-	ResourceShareAssociationType_RESOURCE = ResourceShareAssociationType.AddMember("RESOURCE", smithyprelude.Unit)
-
-	ResourceShareAssociationType_SOURCE = ResourceShareAssociationType.AddMember("SOURCE", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_ASSOCIATING = ResourceShareAssociationStatus.AddMember("ASSOCIATING", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_ASSOCIATED = ResourceShareAssociationStatus.AddMember("ASSOCIATED", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_FAILED = ResourceShareAssociationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_DISASSOCIATING = ResourceShareAssociationStatus.AddMember("DISASSOCIATING", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_DISASSOCIATED = ResourceShareAssociationStatus.AddMember("DISASSOCIATED", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_SUSPENDED = ResourceShareAssociationStatus.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_SUSPENDING = ResourceShareAssociationStatus.AddMember("SUSPENDING", smithyprelude.Unit)
-
-	ResourceShareAssociationStatus_RESTORING = ResourceShareAssociationStatus.AddMember("RESTORING", smithyprelude.Unit)
-
-	ResourceShareAssociation_resourceShareArn = ResourceShareAssociation.AddMember("resourceShareArn", _String)
-
-	ResourceShareAssociation_resourceShareName = ResourceShareAssociation.AddMember("resourceShareName", _String)
-
-	ResourceShareAssociation_associatedEntity = ResourceShareAssociation.AddMember("associatedEntity", _String)
-
-	ResourceShareAssociation_associationType = ResourceShareAssociation.AddMember("associationType", ResourceShareAssociationType)
-
-	ResourceShareAssociation_status = ResourceShareAssociation.AddMember("status", ResourceShareAssociationStatus)
-
-	ResourceShareAssociation_statusMessage = ResourceShareAssociation.AddMember("statusMessage", _String)
-
-	ResourceShareAssociation_creationTime = ResourceShareAssociation.AddMember("creationTime", _DateTime)
-
-	ResourceShareAssociation_lastUpdatedTime = ResourceShareAssociation.AddMember("lastUpdatedTime", _DateTime)
-
-	ResourceShareAssociation_external = ResourceShareAssociation.AddMember("external", _Boolean)
-
-	_ResourceShareAssociationList_member = _ResourceShareAssociationList.AddMember("member", ResourceShareAssociation, &smithytraits.XMLName{Name: "item"})
-
-	ResourceShareInvitationStatus_PENDING = ResourceShareInvitationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ResourceShareInvitationStatus_ACCEPTED = ResourceShareInvitationStatus.AddMember("ACCEPTED", smithyprelude.Unit)
-
-	ResourceShareInvitationStatus_REJECTED = ResourceShareInvitationStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	ResourceShareInvitationStatus_EXPIRED = ResourceShareInvitationStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	ResourceShareInvitation_resourceShareInvitationArn = ResourceShareInvitation.AddMember("resourceShareInvitationArn", _String)
-
-	ResourceShareInvitation_resourceShareName = ResourceShareInvitation.AddMember("resourceShareName", _String)
-
-	ResourceShareInvitation_resourceShareArn = ResourceShareInvitation.AddMember("resourceShareArn", _String)
-
-	ResourceShareInvitation_senderAccountId = ResourceShareInvitation.AddMember("senderAccountId", _String)
-
-	ResourceShareInvitation_receiverAccountId = ResourceShareInvitation.AddMember("receiverAccountId", _String)
-
-	ResourceShareInvitation_invitationTimestamp = ResourceShareInvitation.AddMember("invitationTimestamp", _DateTime)
-
-	ResourceShareInvitation_status = ResourceShareInvitation.AddMember("status", ResourceShareInvitationStatus)
-
-	ResourceShareInvitation_resourceShareAssociations = ResourceShareInvitation.AddMember("resourceShareAssociations", _ResourceShareAssociationList)
-
-	ResourceShareInvitation_receiverArn = ResourceShareInvitation.AddMember("receiverArn", _String)
-
-	ResourceShareInvitationAlreadyAcceptedException_message = ResourceShareInvitationAlreadyAcceptedException.AddMember("message", _String)
-
-	ResourceShareInvitationAlreadyRejectedException_message = ResourceShareInvitationAlreadyRejectedException.AddMember("message", _String)
-
-	_ResourceShareInvitationArnList_member = _ResourceShareInvitationArnList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	ResourceShareInvitationArnNotFoundException_message = ResourceShareInvitationArnNotFoundException.AddMember("message", _String)
-
-	ResourceShareInvitationExpiredException_message = ResourceShareInvitationExpiredException.AddMember("message", _String)
-
-	_ResourceShareInvitationList_member = _ResourceShareInvitationList.AddMember("member", ResourceShareInvitation, &smithytraits.XMLName{Name: "item"})
-
-	ResourceShareLimitExceededException_message = ResourceShareLimitExceededException.AddMember("message", _String)
-
-	_ResourceShareList_member = _ResourceShareList.AddMember("member", ResourceShare, &smithytraits.XMLName{Name: "item"})
-
-	ResourceSharePermissionDetail_arn = ResourceSharePermissionDetail.AddMember("arn", _String)
-
-	ResourceSharePermissionDetail_version = ResourceSharePermissionDetail.AddMember("version", _String)
-
-	ResourceSharePermissionDetail_defaultVersion = ResourceSharePermissionDetail.AddMember("defaultVersion", _Boolean)
-
-	ResourceSharePermissionDetail_name = ResourceSharePermissionDetail.AddMember("name", _String)
-
-	ResourceSharePermissionDetail_resourceType = ResourceSharePermissionDetail.AddMember("resourceType", _String)
-
-	ResourceSharePermissionDetail_permission = ResourceSharePermissionDetail.AddMember("permission", _String)
-
-	ResourceSharePermissionDetail_permissionTemplateParameters = ResourceSharePermissionDetail.AddMember("permissionTemplateParameters", _PermissionTemplateParameterDeclarationList)
-
-	ResourceSharePermissionDetail_creationTime = ResourceSharePermissionDetail.AddMember("creationTime", _DateTime)
-
-	ResourceSharePermissionDetail_lastUpdatedTime = ResourceSharePermissionDetail.AddMember("lastUpdatedTime", _DateTime)
-
-	ResourceSharePermissionDetail_isResourceTypeDefault = ResourceSharePermissionDetail.AddMember("isResourceTypeDefault", _Boolean)
-
-	ResourceSharePermissionDetail_permissionType = ResourceSharePermissionDetail.AddMember("permissionType", PermissionType)
-
-	ResourceSharePermissionDetail_featureSet = ResourceSharePermissionDetail.AddMember("featureSet", PermissionFeatureSet)
-
-	ResourceSharePermissionDetail_status = ResourceSharePermissionDetail.AddMember("status", PermissionStatus)
-
-	ResourceSharePermissionDetail_tags = ResourceSharePermissionDetail.AddMember("tags", _TagList)
-
-	ResourceSharePermissionDetail_resourceOwner = ResourceSharePermissionDetail.AddMember("resourceOwner", ResourceOwner)
-
-	ResourceSharePermissionSummary_arn = ResourceSharePermissionSummary.AddMember("arn", _String)
-
-	ResourceSharePermissionSummary_version = ResourceSharePermissionSummary.AddMember("version", _String)
-
-	ResourceSharePermissionSummary_defaultVersion = ResourceSharePermissionSummary.AddMember("defaultVersion", _Boolean)
-
-	ResourceSharePermissionSummary_name = ResourceSharePermissionSummary.AddMember("name", _String)
-
-	ResourceSharePermissionSummary_resourceType = ResourceSharePermissionSummary.AddMember("resourceType", _String)
-
-	ResourceSharePermissionSummary_status = ResourceSharePermissionSummary.AddMember("status", _String)
-
-	ResourceSharePermissionSummary_creationTime = ResourceSharePermissionSummary.AddMember("creationTime", _DateTime)
-
-	ResourceSharePermissionSummary_lastUpdatedTime = ResourceSharePermissionSummary.AddMember("lastUpdatedTime", _DateTime)
-
-	ResourceSharePermissionSummary_isResourceTypeDefault = ResourceSharePermissionSummary.AddMember("isResourceTypeDefault", _Boolean)
-
-	ResourceSharePermissionSummary_permissionType = ResourceSharePermissionSummary.AddMember("permissionType", PermissionType)
-
-	ResourceSharePermissionSummary_featureSet = ResourceSharePermissionSummary.AddMember("featureSet", PermissionFeatureSet)
-
-	ResourceSharePermissionSummary_permissionTemplateParameters = ResourceSharePermissionSummary.AddMember("permissionTemplateParameters", _PermissionTemplateParameterList)
-
-	ResourceSharePermissionSummary_tags = ResourceSharePermissionSummary.AddMember("tags", _TagList)
-
-	ResourceSharePermissionSummary_resourceOwner = ResourceSharePermissionSummary.AddMember("resourceOwner", ResourceOwner)
-
-	_ResourceSharePermissionList_member = _ResourceSharePermissionList.AddMember("member", ResourceSharePermissionSummary, &smithytraits.XMLName{Name: "item"})
-
-	ServerInternalException_message = ServerInternalException.AddMember("message", _String)
-
-	ServiceNameAndResourceType_resourceType = ServiceNameAndResourceType.AddMember("resourceType", _String)
-
-	ServiceNameAndResourceType_serviceName = ServiceNameAndResourceType.AddMember("serviceName", _String)
-
-	ServiceNameAndResourceType_resourceRegionScope = ServiceNameAndResourceType.AddMember("resourceRegionScope", ResourceRegionScope)
-
-	_ServiceNameAndResourceTypeList_member = _ServiceNameAndResourceTypeList.AddMember("member", ServiceNameAndResourceType, &smithytraits.XMLName{Name: "item"})
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _String)
-
-	_SourceArnOrAccountList_member = _SourceArnOrAccountList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
-
-	_TagValueList_member = _TagValueList.AddMember("member", _TagValue)
-
-	TagFilter_tagKey = TagFilter.AddMember("tagKey", _TagKey)
-
-	TagFilter_tagValues = TagFilter.AddMember("tagValues", _TagValueList)
-
-	_TagFilters_member = _TagFilters.AddMember("member", TagFilter)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TagLimitExceededException_message = TagLimitExceededException.AddMember("message", _String)
-
-	TagPolicyViolationException_message = TagPolicyViolationException.AddMember("message", _String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	UnknownResourceException_message = UnknownResourceException.AddMember("message", _String)
-
-	UnmatchedPolicyPermissionException_message = UnmatchedPolicyPermissionException.AddMember("message", _String)
-
-	UpdatePermissionStatus_ATTACHABLE = UpdatePermissionStatus.AddMember("ATTACHABLE", smithyprelude.Unit)
-
-	UpdatePermissionStatus_DEPRECATED = UpdatePermissionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	AcceptResourceShareInvitationRequest_resourceShareInvitationArn = AcceptResourceShareInvitationRequest.AddMember("resourceShareInvitationArn", _String)
-
-	AcceptResourceShareInvitationRequest_clientToken = AcceptResourceShareInvitationRequest.AddMember("clientToken", _String)
-
-	AcceptResourceShareInvitationResponse_resourceShareInvitation = AcceptResourceShareInvitationResponse.AddMember("resourceShareInvitation", ResourceShareInvitation)
-
-	AcceptResourceShareInvitationResponse_clientToken = AcceptResourceShareInvitationResponse.AddMember("clientToken", _String)
-
-	AssociateResourceShareRequest_resourceShareArn = AssociateResourceShareRequest.AddMember("resourceShareArn", _String)
-
-	AssociateResourceShareRequest_resourceArns = AssociateResourceShareRequest.AddMember("resourceArns", _ResourceArnList)
-
-	AssociateResourceShareRequest_principals = AssociateResourceShareRequest.AddMember("principals", _PrincipalArnOrIdList)
-
-	AssociateResourceShareRequest_clientToken = AssociateResourceShareRequest.AddMember("clientToken", _String)
-
-	AssociateResourceShareRequest_sources = AssociateResourceShareRequest.AddMember("sources", _SourceArnOrAccountList)
-
-	AssociateResourceShareResponse_resourceShareAssociations = AssociateResourceShareResponse.AddMember("resourceShareAssociations", _ResourceShareAssociationList)
-
-	AssociateResourceShareResponse_clientToken = AssociateResourceShareResponse.AddMember("clientToken", _String)
-
-	AssociateResourceSharePermissionRequest_resourceShareArn = AssociateResourceSharePermissionRequest.AddMember("resourceShareArn", _String)
-
-	AssociateResourceSharePermissionRequest_permissionArn = AssociateResourceSharePermissionRequest.AddMember("permissionArn", _String)
-
-	AssociateResourceSharePermissionRequest_permissionTemplateParameters = AssociateResourceSharePermissionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
-
-	AssociateResourceSharePermissionRequest_replace = AssociateResourceSharePermissionRequest.AddMember("replace", _Boolean)
-
-	AssociateResourceSharePermissionRequest_clientToken = AssociateResourceSharePermissionRequest.AddMember("clientToken", _String)
-
-	AssociateResourceSharePermissionRequest_permissionVersion = AssociateResourceSharePermissionRequest.AddMember("permissionVersion", _Integer)
-
-	AssociateResourceSharePermissionResponse_returnValue = AssociateResourceSharePermissionResponse.AddMember("returnValue", _Boolean)
-
-	AssociateResourceSharePermissionResponse_clientToken = AssociateResourceSharePermissionResponse.AddMember("clientToken", _String)
-
-	CreatePermissionRequest_name = CreatePermissionRequest.AddMember("name", _PermissionName)
-
-	CreatePermissionRequest_resourceType = CreatePermissionRequest.AddMember("resourceType", _String)
-
-	CreatePermissionRequest_policyTemplate = CreatePermissionRequest.AddMember("policyTemplate", _Policy)
-
-	CreatePermissionRequest_permissionTemplateParameters = CreatePermissionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterDeclarationList)
-
-	CreatePermissionRequest_clientToken = CreatePermissionRequest.AddMember("clientToken", _String)
-
-	CreatePermissionRequest_tags = CreatePermissionRequest.AddMember("tags", _TagList)
-
-	CreatePermissionResponse_permission = CreatePermissionResponse.AddMember("permission", ResourceSharePermissionSummary)
-
-	CreatePermissionResponse_clientToken = CreatePermissionResponse.AddMember("clientToken", _String)
-
-	CreatePermissionVersionRequest_permissionArn = CreatePermissionVersionRequest.AddMember("permissionArn", _String)
-
-	CreatePermissionVersionRequest_policyTemplate = CreatePermissionVersionRequest.AddMember("policyTemplate", _Policy)
-
-	CreatePermissionVersionRequest_permissionTemplateParameters = CreatePermissionVersionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterDeclarationList)
-
-	CreatePermissionVersionRequest_clientToken = CreatePermissionVersionRequest.AddMember("clientToken", _String)
-
-	CreatePermissionVersionResponse_permission = CreatePermissionVersionResponse.AddMember("permission", ResourceSharePermissionDetail)
-
-	CreatePermissionVersionResponse_clientToken = CreatePermissionVersionResponse.AddMember("clientToken", _String)
-
-	CreateResourceShareRequest_name = CreateResourceShareRequest.AddMember("name", _String)
-
-	CreateResourceShareRequest_resourceArns = CreateResourceShareRequest.AddMember("resourceArns", _ResourceArnList)
-
-	CreateResourceShareRequest_principals = CreateResourceShareRequest.AddMember("principals", _PrincipalArnOrIdList)
-
-	CreateResourceShareRequest_tags = CreateResourceShareRequest.AddMember("tags", _TagList)
-
-	CreateResourceShareRequest_allowExternalPrincipals = CreateResourceShareRequest.AddMember("allowExternalPrincipals", _Boolean)
-
-	CreateResourceShareRequest_clientToken = CreateResourceShareRequest.AddMember("clientToken", _String)
-
-	CreateResourceShareRequest_permissionArns = CreateResourceShareRequest.AddMember("permissionArns", _PermissionArnList)
-
-	CreateResourceShareRequest_sources = CreateResourceShareRequest.AddMember("sources", _SourceArnOrAccountList)
-
-	CreateResourceShareRequest_permissionTemplateParameters = CreateResourceShareRequest.AddMember("permissionTemplateParameters", _PermissionArnAndTemplateParametersList)
-
-	CreateResourceShareRequest_resourceShareConfiguration = CreateResourceShareRequest.AddMember("resourceShareConfiguration", ResourceShareConfiguration)
-
-	CreateResourceShareResponse_resourceShare = CreateResourceShareResponse.AddMember("resourceShare", ResourceShare)
-
-	CreateResourceShareResponse_clientToken = CreateResourceShareResponse.AddMember("clientToken", _String)
-
-	DeletePermissionRequest_permissionArn = DeletePermissionRequest.AddMember("permissionArn", _String, &smithytraits.HTTPQuery{Name: "permissionArn"})
-
-	DeletePermissionRequest_clientToken = DeletePermissionRequest.AddMember("clientToken", _String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeletePermissionResponse_returnValue = DeletePermissionResponse.AddMember("returnValue", _Boolean, &smithytraits.XMLName{Name: "return"})
-
-	DeletePermissionResponse_clientToken = DeletePermissionResponse.AddMember("clientToken", _String)
-
-	DeletePermissionResponse_permissionStatus = DeletePermissionResponse.AddMember("permissionStatus", PermissionStatus)
-
-	DeletePermissionVersionRequest_permissionArn = DeletePermissionVersionRequest.AddMember("permissionArn", _String, &smithytraits.HTTPQuery{Name: "permissionArn"})
-
-	DeletePermissionVersionRequest_permissionVersion = DeletePermissionVersionRequest.AddMember("permissionVersion", _Integer, &smithytraits.HTTPQuery{Name: "permissionVersion"})
-
-	DeletePermissionVersionRequest_clientToken = DeletePermissionVersionRequest.AddMember("clientToken", _String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeletePermissionVersionResponse_returnValue = DeletePermissionVersionResponse.AddMember("returnValue", _Boolean, &smithytraits.XMLName{Name: "return"})
-
-	DeletePermissionVersionResponse_clientToken = DeletePermissionVersionResponse.AddMember("clientToken", _String)
-
-	DeletePermissionVersionResponse_permissionStatus = DeletePermissionVersionResponse.AddMember("permissionStatus", PermissionStatus)
-
-	DeleteResourceShareRequest_resourceShareArn = DeleteResourceShareRequest.AddMember("resourceShareArn", _String, &smithytraits.HTTPQuery{Name: "resourceShareArn"})
-
-	DeleteResourceShareRequest_clientToken = DeleteResourceShareRequest.AddMember("clientToken", _String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteResourceShareResponse_returnValue = DeleteResourceShareResponse.AddMember("returnValue", _Boolean, &smithytraits.XMLName{Name: "return"})
-
-	DeleteResourceShareResponse_clientToken = DeleteResourceShareResponse.AddMember("clientToken", _String)
-
-	DisassociateResourceShareRequest_resourceShareArn = DisassociateResourceShareRequest.AddMember("resourceShareArn", _String)
-
-	DisassociateResourceShareRequest_resourceArns = DisassociateResourceShareRequest.AddMember("resourceArns", _ResourceArnList)
-
-	DisassociateResourceShareRequest_principals = DisassociateResourceShareRequest.AddMember("principals", _PrincipalArnOrIdList)
-
-	DisassociateResourceShareRequest_clientToken = DisassociateResourceShareRequest.AddMember("clientToken", _String)
-
-	DisassociateResourceShareRequest_sources = DisassociateResourceShareRequest.AddMember("sources", _SourceArnOrAccountList)
-
-	DisassociateResourceShareResponse_resourceShareAssociations = DisassociateResourceShareResponse.AddMember("resourceShareAssociations", _ResourceShareAssociationList)
-
-	DisassociateResourceShareResponse_clientToken = DisassociateResourceShareResponse.AddMember("clientToken", _String)
-
-	DisassociateResourceSharePermissionRequest_resourceShareArn = DisassociateResourceSharePermissionRequest.AddMember("resourceShareArn", _String)
-
-	DisassociateResourceSharePermissionRequest_permissionArn = DisassociateResourceSharePermissionRequest.AddMember("permissionArn", _String)
-
-	DisassociateResourceSharePermissionRequest_clientToken = DisassociateResourceSharePermissionRequest.AddMember("clientToken", _String)
-
-	DisassociateResourceSharePermissionResponse_returnValue = DisassociateResourceSharePermissionResponse.AddMember("returnValue", _Boolean)
-
-	DisassociateResourceSharePermissionResponse_clientToken = DisassociateResourceSharePermissionResponse.AddMember("clientToken", _String)
-
-	EnableSharingWithAwsOrganizationResponse_returnValue = EnableSharingWithAwsOrganizationResponse.AddMember("returnValue", _Boolean, &smithytraits.XMLName{Name: "return"})
-
-	GetPermissionRequest_permissionArn = GetPermissionRequest.AddMember("permissionArn", _String)
-
-	GetPermissionRequest_permissionVersion = GetPermissionRequest.AddMember("permissionVersion", _Integer)
-
-	GetPermissionRequest_permissionTemplateParameters = GetPermissionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
-
-	GetPermissionResponse_permission = GetPermissionResponse.AddMember("permission", ResourceSharePermissionDetail)
-
-	GetResourcePoliciesRequest_resourceArns = GetResourcePoliciesRequest.AddMember("resourceArns", _ResourceArnList)
-
-	GetResourcePoliciesRequest_principal = GetResourcePoliciesRequest.AddMember("principal", _String)
-
-	GetResourcePoliciesRequest_nextToken = GetResourcePoliciesRequest.AddMember("nextToken", _String)
-
-	GetResourcePoliciesRequest_maxResults = GetResourcePoliciesRequest.AddMember("maxResults", _MaxResults)
-
-	GetResourcePoliciesResponse_policies = GetResourcePoliciesResponse.AddMember("policies", _PolicyList)
-
-	GetResourcePoliciesResponse_nextToken = GetResourcePoliciesResponse.AddMember("nextToken", _String)
-
-	GetResourceShareAssociationsRequest_associationType = GetResourceShareAssociationsRequest.AddMember("associationType", ResourceShareAssociationType)
-
-	GetResourceShareAssociationsRequest_resourceShareArns = GetResourceShareAssociationsRequest.AddMember("resourceShareArns", _ResourceShareArnList)
-
-	GetResourceShareAssociationsRequest_resourceArn = GetResourceShareAssociationsRequest.AddMember("resourceArn", _String)
-
-	GetResourceShareAssociationsRequest_principal = GetResourceShareAssociationsRequest.AddMember("principal", _String)
-
-	GetResourceShareAssociationsRequest_associationStatus = GetResourceShareAssociationsRequest.AddMember("associationStatus", ResourceShareAssociationStatus)
-
-	GetResourceShareAssociationsRequest_nextToken = GetResourceShareAssociationsRequest.AddMember("nextToken", _String)
-
-	GetResourceShareAssociationsRequest_maxResults = GetResourceShareAssociationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetResourceShareAssociationsResponse_resourceShareAssociations = GetResourceShareAssociationsResponse.AddMember("resourceShareAssociations", _ResourceShareAssociationList)
-
-	GetResourceShareAssociationsResponse_nextToken = GetResourceShareAssociationsResponse.AddMember("nextToken", _String)
-
-	GetResourceShareInvitationsRequest_resourceShareInvitationArns = GetResourceShareInvitationsRequest.AddMember("resourceShareInvitationArns", _ResourceShareInvitationArnList)
-
-	GetResourceShareInvitationsRequest_resourceShareArns = GetResourceShareInvitationsRequest.AddMember("resourceShareArns", _ResourceShareArnList)
-
-	GetResourceShareInvitationsRequest_nextToken = GetResourceShareInvitationsRequest.AddMember("nextToken", _String)
-
-	GetResourceShareInvitationsRequest_maxResults = GetResourceShareInvitationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetResourceShareInvitationsResponse_resourceShareInvitations = GetResourceShareInvitationsResponse.AddMember("resourceShareInvitations", _ResourceShareInvitationList)
-
-	GetResourceShareInvitationsResponse_nextToken = GetResourceShareInvitationsResponse.AddMember("nextToken", _String)
-
-	GetResourceSharesRequest_resourceShareArns = GetResourceSharesRequest.AddMember("resourceShareArns", _ResourceShareArnList)
-
-	GetResourceSharesRequest_resourceShareStatus = GetResourceSharesRequest.AddMember("resourceShareStatus", ResourceShareStatus)
-
-	GetResourceSharesRequest_resourceOwner = GetResourceSharesRequest.AddMember("resourceOwner", ResourceOwner)
-
-	GetResourceSharesRequest_name = GetResourceSharesRequest.AddMember("name", _String)
-
-	GetResourceSharesRequest_tagFilters = GetResourceSharesRequest.AddMember("tagFilters", _TagFilters)
-
-	GetResourceSharesRequest_nextToken = GetResourceSharesRequest.AddMember("nextToken", _String)
-
-	GetResourceSharesRequest_maxResults = GetResourceSharesRequest.AddMember("maxResults", _MaxResults)
-
-	GetResourceSharesRequest_permissionArn = GetResourceSharesRequest.AddMember("permissionArn", _String)
-
-	GetResourceSharesRequest_permissionVersion = GetResourceSharesRequest.AddMember("permissionVersion", _Integer)
-
-	GetResourceSharesResponse_resourceShares = GetResourceSharesResponse.AddMember("resourceShares", _ResourceShareList)
-
-	GetResourceSharesResponse_nextToken = GetResourceSharesResponse.AddMember("nextToken", _String)
-
-	ListPendingInvitationResourcesRequest_resourceShareInvitationArn = ListPendingInvitationResourcesRequest.AddMember("resourceShareInvitationArn", _String)
-
-	ListPendingInvitationResourcesRequest_nextToken = ListPendingInvitationResourcesRequest.AddMember("nextToken", _String)
-
-	ListPendingInvitationResourcesRequest_maxResults = ListPendingInvitationResourcesRequest.AddMember("maxResults", _MaxResults)
-
-	ListPendingInvitationResourcesRequest_resourceRegionScope = ListPendingInvitationResourcesRequest.AddMember("resourceRegionScope", ResourceRegionScopeFilter)
-
-	ListPendingInvitationResourcesResponse_resources = ListPendingInvitationResourcesResponse.AddMember("resources", _ResourceList)
-
-	ListPendingInvitationResourcesResponse_nextToken = ListPendingInvitationResourcesResponse.AddMember("nextToken", _String)
-
-	ListPermissionAssociationsRequest_permissionArn = ListPermissionAssociationsRequest.AddMember("permissionArn", _String)
-
-	ListPermissionAssociationsRequest_permissionVersion = ListPermissionAssociationsRequest.AddMember("permissionVersion", _Integer)
-
-	ListPermissionAssociationsRequest_associationStatus = ListPermissionAssociationsRequest.AddMember("associationStatus", ResourceShareAssociationStatus)
-
-	ListPermissionAssociationsRequest_resourceType = ListPermissionAssociationsRequest.AddMember("resourceType", _String)
-
-	ListPermissionAssociationsRequest_featureSet = ListPermissionAssociationsRequest.AddMember("featureSet", PermissionFeatureSet)
-
-	ListPermissionAssociationsRequest_defaultVersion = ListPermissionAssociationsRequest.AddMember("defaultVersion", _Boolean)
-
-	ListPermissionAssociationsRequest_resourceOwner = ListPermissionAssociationsRequest.AddMember("resourceOwner", ResourceOwner)
-
-	ListPermissionAssociationsRequest_resourceShareArn = ListPermissionAssociationsRequest.AddMember("resourceShareArn", _String)
-
-	ListPermissionAssociationsRequest_nextToken = ListPermissionAssociationsRequest.AddMember("nextToken", _String)
-
-	ListPermissionAssociationsRequest_maxResults = ListPermissionAssociationsRequest.AddMember("maxResults", _MaxResults)
-
-	ListPermissionAssociationsResponse_permissions = ListPermissionAssociationsResponse.AddMember("permissions", _AssociatedPermissionList)
-
-	ListPermissionAssociationsResponse_nextToken = ListPermissionAssociationsResponse.AddMember("nextToken", _String)
-
-	ListPermissionsRequest_resourceType = ListPermissionsRequest.AddMember("resourceType", _String)
-
-	ListPermissionsRequest_resourceOwner = ListPermissionsRequest.AddMember("resourceOwner", ResourceOwner)
-
-	ListPermissionsRequest_nextToken = ListPermissionsRequest.AddMember("nextToken", _String)
-
-	ListPermissionsRequest_maxResults = ListPermissionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListPermissionsRequest_permissionType = ListPermissionsRequest.AddMember("permissionType", PermissionTypeFilter)
-
-	ListPermissionsRequest_permissionStatus = ListPermissionsRequest.AddMember("permissionStatus", PermissionStatus)
-
-	ListPermissionsResponse_permissions = ListPermissionsResponse.AddMember("permissions", _ResourceSharePermissionList)
-
-	ListPermissionsResponse_nextToken = ListPermissionsResponse.AddMember("nextToken", _String)
-
-	ListPermissionVersionsRequest_permissionArn = ListPermissionVersionsRequest.AddMember("permissionArn", _String)
-
-	ListPermissionVersionsRequest_nextToken = ListPermissionVersionsRequest.AddMember("nextToken", _String)
-
-	ListPermissionVersionsRequest_maxResults = ListPermissionVersionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListPermissionVersionsResponse_permissions = ListPermissionVersionsResponse.AddMember("permissions", _ResourceSharePermissionList)
-
-	ListPermissionVersionsResponse_nextToken = ListPermissionVersionsResponse.AddMember("nextToken", _String)
-
-	ListPrincipalsRequest_resourceOwner = ListPrincipalsRequest.AddMember("resourceOwner", ResourceOwner)
-
-	ListPrincipalsRequest_resourceArn = ListPrincipalsRequest.AddMember("resourceArn", _String)
-
-	ListPrincipalsRequest_principals = ListPrincipalsRequest.AddMember("principals", _PrincipalArnOrIdList)
-
-	ListPrincipalsRequest_resourceType = ListPrincipalsRequest.AddMember("resourceType", _String)
-
-	ListPrincipalsRequest_resourceShareArns = ListPrincipalsRequest.AddMember("resourceShareArns", _ResourceShareArnList)
-
-	ListPrincipalsRequest_nextToken = ListPrincipalsRequest.AddMember("nextToken", _String)
-
-	ListPrincipalsRequest_maxResults = ListPrincipalsRequest.AddMember("maxResults", _MaxResults)
-
-	ListPrincipalsResponse_principals = ListPrincipalsResponse.AddMember("principals", _PrincipalList)
-
-	ListPrincipalsResponse_nextToken = ListPrincipalsResponse.AddMember("nextToken", _String)
-
-	ListReplacePermissionAssociationsWorkRequest_workIds = ListReplacePermissionAssociationsWorkRequest.AddMember("workIds", _ReplacePermissionAssociationsWorkIdList)
-
-	ListReplacePermissionAssociationsWorkRequest_status = ListReplacePermissionAssociationsWorkRequest.AddMember("status", ReplacePermissionAssociationsWorkStatus)
-
-	ListReplacePermissionAssociationsWorkRequest_nextToken = ListReplacePermissionAssociationsWorkRequest.AddMember("nextToken", _String)
-
-	ListReplacePermissionAssociationsWorkRequest_maxResults = ListReplacePermissionAssociationsWorkRequest.AddMember("maxResults", _MaxResults)
-
-	ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks = ListReplacePermissionAssociationsWorkResponse.AddMember("replacePermissionAssociationsWorks", _ReplacePermissionAssociationsWorkList)
-
-	ListReplacePermissionAssociationsWorkResponse_nextToken = ListReplacePermissionAssociationsWorkResponse.AddMember("nextToken", _String)
-
-	ListResourceSharePermissionsRequest_resourceShareArn = ListResourceSharePermissionsRequest.AddMember("resourceShareArn", _String)
-
-	ListResourceSharePermissionsRequest_nextToken = ListResourceSharePermissionsRequest.AddMember("nextToken", _String)
-
-	ListResourceSharePermissionsRequest_maxResults = ListResourceSharePermissionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListResourceSharePermissionsResponse_permissions = ListResourceSharePermissionsResponse.AddMember("permissions", _ResourceSharePermissionList)
-
-	ListResourceSharePermissionsResponse_nextToken = ListResourceSharePermissionsResponse.AddMember("nextToken", _String)
-
-	ListResourcesRequest_resourceOwner = ListResourcesRequest.AddMember("resourceOwner", ResourceOwner)
-
-	ListResourcesRequest_principal = ListResourcesRequest.AddMember("principal", _String)
-
-	ListResourcesRequest_resourceType = ListResourcesRequest.AddMember("resourceType", _String)
-
-	ListResourcesRequest_resourceArns = ListResourcesRequest.AddMember("resourceArns", _ResourceArnList)
-
-	ListResourcesRequest_resourceShareArns = ListResourcesRequest.AddMember("resourceShareArns", _ResourceShareArnList)
-
-	ListResourcesRequest_nextToken = ListResourcesRequest.AddMember("nextToken", _String)
-
-	ListResourcesRequest_maxResults = ListResourcesRequest.AddMember("maxResults", _MaxResults)
-
-	ListResourcesRequest_resourceRegionScope = ListResourcesRequest.AddMember("resourceRegionScope", ResourceRegionScopeFilter)
-
-	ListResourcesResponse_resources = ListResourcesResponse.AddMember("resources", _ResourceList)
-
-	ListResourcesResponse_nextToken = ListResourcesResponse.AddMember("nextToken", _String)
-
-	ListResourceTypesRequest_nextToken = ListResourceTypesRequest.AddMember("nextToken", _String)
-
-	ListResourceTypesRequest_maxResults = ListResourceTypesRequest.AddMember("maxResults", _MaxResults)
-
-	ListResourceTypesRequest_resourceRegionScope = ListResourceTypesRequest.AddMember("resourceRegionScope", ResourceRegionScopeFilter)
-
-	ListResourceTypesResponse_resourceTypes = ListResourceTypesResponse.AddMember("resourceTypes", _ServiceNameAndResourceTypeList)
-
-	ListResourceTypesResponse_nextToken = ListResourceTypesResponse.AddMember("nextToken", _String)
-
-	ListSourceAssociationsRequest_resourceShareArns = ListSourceAssociationsRequest.AddMember("resourceShareArns", _ResourceShareArnList)
-
-	ListSourceAssociationsRequest_sourceId = ListSourceAssociationsRequest.AddMember("sourceId", _String)
-
-	ListSourceAssociationsRequest_sourceType = ListSourceAssociationsRequest.AddMember("sourceType", _String)
-
-	ListSourceAssociationsRequest_associationStatus = ListSourceAssociationsRequest.AddMember("associationStatus", ResourceShareAssociationStatus)
-
-	ListSourceAssociationsRequest_nextToken = ListSourceAssociationsRequest.AddMember("nextToken", _String)
-
-	ListSourceAssociationsRequest_maxResults = ListSourceAssociationsRequest.AddMember("maxResults", _MaxResults)
-
-	ListSourceAssociationsResponse_sourceAssociations = ListSourceAssociationsResponse.AddMember("sourceAssociations", _AssociatedSourceList)
-
-	ListSourceAssociationsResponse_nextToken = ListSourceAssociationsResponse.AddMember("nextToken", _String)
-
-	PromotePermissionCreatedFromPolicyRequest_permissionArn = PromotePermissionCreatedFromPolicyRequest.AddMember("permissionArn", _String)
-
-	PromotePermissionCreatedFromPolicyRequest_name = PromotePermissionCreatedFromPolicyRequest.AddMember("name", _String)
-
-	PromotePermissionCreatedFromPolicyRequest_clientToken = PromotePermissionCreatedFromPolicyRequest.AddMember("clientToken", _String)
-
-	PromotePermissionCreatedFromPolicyResponse_permission = PromotePermissionCreatedFromPolicyResponse.AddMember("permission", ResourceSharePermissionSummary)
-
-	PromotePermissionCreatedFromPolicyResponse_clientToken = PromotePermissionCreatedFromPolicyResponse.AddMember("clientToken", _String)
-
-	PromoteResourceShareCreatedFromPolicyRequest_resourceShareArn = PromoteResourceShareCreatedFromPolicyRequest.AddMember("resourceShareArn", _String, &smithytraits.HTTPQuery{Name: "resourceShareArn"})
-
-	PromoteResourceShareCreatedFromPolicyResponse_returnValue = PromoteResourceShareCreatedFromPolicyResponse.AddMember("returnValue", _Boolean, &smithytraits.XMLName{Name: "return"})
-
-	RejectResourceShareInvitationRequest_resourceShareInvitationArn = RejectResourceShareInvitationRequest.AddMember("resourceShareInvitationArn", _String)
-
-	RejectResourceShareInvitationRequest_clientToken = RejectResourceShareInvitationRequest.AddMember("clientToken", _String)
-
-	RejectResourceShareInvitationResponse_resourceShareInvitation = RejectResourceShareInvitationResponse.AddMember("resourceShareInvitation", ResourceShareInvitation)
-
-	RejectResourceShareInvitationResponse_clientToken = RejectResourceShareInvitationResponse.AddMember("clientToken", _String)
-
-	ReplacePermissionAssociationsRequest_fromPermissionArn = ReplacePermissionAssociationsRequest.AddMember("fromPermissionArn", _String)
-
-	ReplacePermissionAssociationsRequest_fromPermissionVersion = ReplacePermissionAssociationsRequest.AddMember("fromPermissionVersion", _Integer)
-
-	ReplacePermissionAssociationsRequest_toPermissionArn = ReplacePermissionAssociationsRequest.AddMember("toPermissionArn", _String)
-
-	ReplacePermissionAssociationsRequest_permissionTemplateParameters = ReplacePermissionAssociationsRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
-
-	ReplacePermissionAssociationsRequest_clientToken = ReplacePermissionAssociationsRequest.AddMember("clientToken", _String)
-
-	ReplacePermissionAssociationsResponse_replacePermissionAssociationsWork = ReplacePermissionAssociationsResponse.AddMember("replacePermissionAssociationsWork", ReplacePermissionAssociationsWork)
-
-	ReplacePermissionAssociationsResponse_clientToken = ReplacePermissionAssociationsResponse.AddMember("clientToken", _String)
-
-	SetDefaultPermissionVersionRequest_permissionArn = SetDefaultPermissionVersionRequest.AddMember("permissionArn", _String)
-
-	SetDefaultPermissionVersionRequest_permissionVersion = SetDefaultPermissionVersionRequest.AddMember("permissionVersion", _Integer)
-
-	SetDefaultPermissionVersionRequest_clientToken = SetDefaultPermissionVersionRequest.AddMember("clientToken", _String)
-
-	SetDefaultPermissionVersionResponse_returnValue = SetDefaultPermissionVersionResponse.AddMember("returnValue", _Boolean, &smithytraits.XMLName{Name: "return"})
-
-	SetDefaultPermissionVersionResponse_clientToken = SetDefaultPermissionVersionResponse.AddMember("clientToken", _String)
-
-	TagResourceRequest_resourceShareArn = TagResourceRequest.AddMember("resourceShareArn", _String)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _String)
-
-	UntagResourceRequest_resourceShareArn = UntagResourceRequest.AddMember("resourceShareArn", _String)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _String)
-
-	UpdatePermissionRequest_permissionArn = UpdatePermissionRequest.AddMember("permissionArn", _String)
-
-	UpdatePermissionRequest_status = UpdatePermissionRequest.AddMember("status", UpdatePermissionStatus)
-
-	UpdatePermissionRequest_clientToken = UpdatePermissionRequest.AddMember("clientToken", _String)
-
-	UpdatePermissionResponse_clientToken = UpdatePermissionResponse.AddMember("clientToken", _String)
-
-	UpdatePermissionResponse_permissionStatus = UpdatePermissionResponse.AddMember("permissionStatus", UpdatePermissionStatus)
-
-	UpdateResourceShareRequest_resourceShareArn = UpdateResourceShareRequest.AddMember("resourceShareArn", _String)
-
-	UpdateResourceShareRequest_name = UpdateResourceShareRequest.AddMember("name", _String)
-
-	UpdateResourceShareRequest_allowExternalPrincipals = UpdateResourceShareRequest.AddMember("allowExternalPrincipals", _Boolean)
-
-	UpdateResourceShareRequest_clientToken = UpdateResourceShareRequest.AddMember("clientToken", _String)
-
-	UpdateResourceShareResponse_resourceShare = UpdateResourceShareResponse.AddMember("resourceShare", ResourceShare)
-
-	UpdateResourceShareResponse_clientToken = UpdateResourceShareResponse.AddMember("clientToken", _String)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "item"}}, DirectMask: 0x8}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "IdempotentParameterMismatch",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidClientToken",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidMaxResults",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidPolicy",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidResourceType.Unknown",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidStateTransitionException.Unknown",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidArn.Malformed",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "MalformedPolicyTemplateException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "MissingRequiredParameter",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PermissionAlreadyExistsException",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PermissionLimitExceededException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PermissionVersionsLimitExceededException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidResourceArn.NotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.AlreadyAccepted",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.AlreadyRejected",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.NotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.Expired",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceShareLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalError",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Unavailable",
+	StatusCode: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TagLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TagPolicyViolation",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareArn.NotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "UnmatchedPolicyPermissionException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "permissionArn"}}, DirectMask: 0x10}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clientToken"}}, DirectMask: 0x10}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "return"}}, DirectMask: 0x8}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "permissionVersion"}}, DirectMask: 0x10}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceShareArn"}}, DirectMask: 0x10}
+
+var mAssociatedPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedPermission_arn, &sAssociatedPermission_permissionVersion, &sAssociatedPermission_defaultVersion, &sAssociatedPermission_resourceType, &sAssociatedPermission_status, &sAssociatedPermission_featureSet, &sAssociatedPermission_lastUpdatedTime, &sAssociatedPermission_resourceShareArn, &sAssociatedPermission_permissionTemplateParameters}, Hash: &hAssociatedPermission}
+var m_AssociatedPermissionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedPermissionList_member}}
+var mAssociatedSource = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedSource_resourceShareArn, &sAssociatedSource_sourceId, &sAssociatedSource_sourceType, &sAssociatedSource_status, &sAssociatedSource_lastUpdatedTime, &sAssociatedSource_creationTime, &sAssociatedSource_statusMessage}}
+var m_AssociatedSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedSourceList_member}}
+var mIdempotentParameterMismatchException = smithy.SchemaMembers{List: []*smithy.Schema{&sIdempotentParameterMismatchException_message}}
+var mInvalidClientTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidClientTokenException_message}}
+var mInvalidMaxResultsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidMaxResultsException_message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_message}}
+var mInvalidPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPolicyException_message}}
+var mInvalidResourceTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidResourceTypeException_message}}
+var mInvalidStateTransitionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateTransitionException_message}}
+var mMalformedArnException = smithy.SchemaMembers{List: []*smithy.Schema{&sMalformedArnException_message}}
+var mMalformedPolicyTemplateException = smithy.SchemaMembers{List: []*smithy.Schema{&sMalformedPolicyTemplateException_message}}
+var mMissingRequiredParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingRequiredParameterException_message}}
+var mOperationNotPermittedException = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationNotPermittedException_message}}
+var mPermissionAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionAlreadyExistsException_message}}
+var mPermissionArnAndTemplateParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionArnAndTemplateParameters_permissionArn, &sPermissionArnAndTemplateParameters_permissionTemplateParameters}}
+var m_PermissionArnAndTemplateParametersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermissionArnAndTemplateParametersList_member}}
+var m_PermissionArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermissionArnList_member}}
+var mPermissionFeatureSet = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionFeatureSet_CREATED_FROM_POLICY, &sPermissionFeatureSet_PROMOTING_TO_STANDARD, &sPermissionFeatureSet_STANDARD}}
+var mPermissionLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionLimitExceededException_message}}
+var mPermissionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionStatus_ATTACHABLE, &sPermissionStatus_UNATTACHABLE, &sPermissionStatus_DELETING, &sPermissionStatus_DELETED, &sPermissionStatus_DEPRECATED}}
+var mPermissionTemplateParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionTemplateParameter_name, &sPermissionTemplateParameter_type, &sPermissionTemplateParameter_description, &sPermissionTemplateParameter_values}}
+var mPermissionTemplateParameterDeclaration = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionTemplateParameterDeclaration_name, &sPermissionTemplateParameterDeclaration_type, &sPermissionTemplateParameterDeclaration_description}}
+var m_PermissionTemplateParameterDeclarationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermissionTemplateParameterDeclarationList_member}}
+var mPermissionTemplateParameterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionTemplateParameterInput_name, &sPermissionTemplateParameterInput_values}}
+var m_PermissionTemplateParameterInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermissionTemplateParameterInputList_member}}
+var m_PermissionTemplateParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermissionTemplateParameterList_member}}
+var mPermissionTemplateParameterType = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionTemplateParameterType_STRING, &sPermissionTemplateParameterType_STRING_LIST}}
+var m_PermissionTemplateParameterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermissionTemplateParameterValueList_member}}
+var mPermissionType = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionType_CUSTOMER_MANAGED, &sPermissionType_AWS_MANAGED}}
+var mPermissionTypeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionTypeFilter_ALL, &sPermissionTypeFilter_AWS_MANAGED, &sPermissionTypeFilter_CUSTOMER_MANAGED}}
+var mPermissionVersionsLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionVersionsLimitExceededException_message}}
+var m_PolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyList_member}}
+var mPrincipal = smithy.SchemaMembers{List: []*smithy.Schema{&sPrincipal_id, &sPrincipal_resourceShareArn, &sPrincipal_creationTime, &sPrincipal_lastUpdatedTime, &sPrincipal_external}}
+var m_PrincipalArnOrIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PrincipalArnOrIdList_member}}
+var m_PrincipalList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PrincipalList_member}}
+var mReplacePermissionAssociationsWork = smithy.SchemaMembers{List: []*smithy.Schema{&sReplacePermissionAssociationsWork_id, &sReplacePermissionAssociationsWork_fromPermissionArn, &sReplacePermissionAssociationsWork_fromPermissionVersion, &sReplacePermissionAssociationsWork_toPermissionArn, &sReplacePermissionAssociationsWork_toPermissionVersion, &sReplacePermissionAssociationsWork_permissionTemplateParameters, &sReplacePermissionAssociationsWork_status, &sReplacePermissionAssociationsWork_statusMessage, &sReplacePermissionAssociationsWork_creationTime, &sReplacePermissionAssociationsWork_lastUpdatedTime}, Hash: &hReplacePermissionAssociationsWork}
+var m_ReplacePermissionAssociationsWorkIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplacePermissionAssociationsWorkIdList_member}}
+var m_ReplacePermissionAssociationsWorkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplacePermissionAssociationsWorkList_member}}
+var mReplacePermissionAssociationsWorkStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sReplacePermissionAssociationsWorkStatus_IN_PROGRESS, &sReplacePermissionAssociationsWorkStatus_COMPLETED, &sReplacePermissionAssociationsWorkStatus_FAILED}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_arn, &sResource_type, &sResource_resourceShareArn, &sResource_resourceGroupArn, &sResource_status, &sResource_statusMessage, &sResource_creationTime, &sResource_lastUpdatedTime, &sResource_resourceRegionScope}, Hash: &hResource}
+var m_ResourceArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceArnList_member}}
+var mResourceArnNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceArnNotFoundException_message}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceOwner = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceOwner_SELF, &sResourceOwner_OTHER_ACCOUNTS}}
+var mResourceRegionScope = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceRegionScope_REGIONAL, &sResourceRegionScope_GLOBAL}}
+var mResourceRegionScopeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceRegionScopeFilter_ALL, &sResourceRegionScopeFilter_REGIONAL, &sResourceRegionScopeFilter_GLOBAL}}
+var mResourceShare = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShare_resourceShareArn, &sResourceShare_name, &sResourceShare_owningAccountId, &sResourceShare_allowExternalPrincipals, &sResourceShare_status, &sResourceShare_statusMessage, &sResourceShare_tags, &sResourceShare_creationTime, &sResourceShare_lastUpdatedTime, &sResourceShare_featureSet, &sResourceShare_resourceShareConfiguration}, Hash: &hResourceShare}
+var m_ResourceShareArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceShareArnList_member}}
+var mResourceShareAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareAssociation_resourceShareArn, &sResourceShareAssociation_resourceShareName, &sResourceShareAssociation_associatedEntity, &sResourceShareAssociation_associationType, &sResourceShareAssociation_status, &sResourceShareAssociation_statusMessage, &sResourceShareAssociation_creationTime, &sResourceShareAssociation_lastUpdatedTime, &sResourceShareAssociation_external}, Hash: &hResourceShareAssociation}
+var m_ResourceShareAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceShareAssociationList_member}}
+var mResourceShareAssociationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareAssociationStatus_ASSOCIATING, &sResourceShareAssociationStatus_ASSOCIATED, &sResourceShareAssociationStatus_FAILED, &sResourceShareAssociationStatus_DISASSOCIATING, &sResourceShareAssociationStatus_DISASSOCIATED, &sResourceShareAssociationStatus_SUSPENDED, &sResourceShareAssociationStatus_SUSPENDING, &sResourceShareAssociationStatus_RESTORING}}
+var mResourceShareAssociationType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareAssociationType_PRINCIPAL, &sResourceShareAssociationType_RESOURCE, &sResourceShareAssociationType_SOURCE}}
+var mResourceShareConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareConfiguration_retainSharingOnAccountLeaveOrganization}}
+var mResourceShareFeatureSet = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareFeatureSet_CREATED_FROM_POLICY, &sResourceShareFeatureSet_PROMOTING_TO_STANDARD, &sResourceShareFeatureSet_STANDARD}}
+var mResourceShareInvitation = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareInvitation_resourceShareInvitationArn, &sResourceShareInvitation_resourceShareName, &sResourceShareInvitation_resourceShareArn, &sResourceShareInvitation_senderAccountId, &sResourceShareInvitation_receiverAccountId, &sResourceShareInvitation_invitationTimestamp, &sResourceShareInvitation_status, &sResourceShareInvitation_resourceShareAssociations, &sResourceShareInvitation_receiverArn}, Hash: &hResourceShareInvitation}
+var mResourceShareInvitationAlreadyAcceptedException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareInvitationAlreadyAcceptedException_message}}
+var mResourceShareInvitationAlreadyRejectedException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareInvitationAlreadyRejectedException_message}}
+var m_ResourceShareInvitationArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceShareInvitationArnList_member}}
+var mResourceShareInvitationArnNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareInvitationArnNotFoundException_message}}
+var mResourceShareInvitationExpiredException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareInvitationExpiredException_message}}
+var m_ResourceShareInvitationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceShareInvitationList_member}}
+var mResourceShareInvitationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareInvitationStatus_PENDING, &sResourceShareInvitationStatus_ACCEPTED, &sResourceShareInvitationStatus_REJECTED, &sResourceShareInvitationStatus_EXPIRED}}
+var mResourceShareLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareLimitExceededException_message}}
+var m_ResourceShareList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceShareList_member}}
+var mResourceSharePermissionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSharePermissionDetail_arn, &sResourceSharePermissionDetail_version, &sResourceSharePermissionDetail_defaultVersion, &sResourceSharePermissionDetail_name, &sResourceSharePermissionDetail_resourceType, &sResourceSharePermissionDetail_permission, &sResourceSharePermissionDetail_permissionTemplateParameters, &sResourceSharePermissionDetail_creationTime, &sResourceSharePermissionDetail_lastUpdatedTime, &sResourceSharePermissionDetail_isResourceTypeDefault, &sResourceSharePermissionDetail_permissionType, &sResourceSharePermissionDetail_featureSet, &sResourceSharePermissionDetail_status, &sResourceSharePermissionDetail_tags, &sResourceSharePermissionDetail_resourceOwner}, Hash: &hResourceSharePermissionDetail}
+var m_ResourceSharePermissionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSharePermissionList_member}}
+var mResourceSharePermissionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSharePermissionSummary_arn, &sResourceSharePermissionSummary_version, &sResourceSharePermissionSummary_defaultVersion, &sResourceSharePermissionSummary_name, &sResourceSharePermissionSummary_resourceType, &sResourceSharePermissionSummary_status, &sResourceSharePermissionSummary_creationTime, &sResourceSharePermissionSummary_lastUpdatedTime, &sResourceSharePermissionSummary_isResourceTypeDefault, &sResourceSharePermissionSummary_permissionType, &sResourceSharePermissionSummary_featureSet, &sResourceSharePermissionSummary_permissionTemplateParameters, &sResourceSharePermissionSummary_tags, &sResourceSharePermissionSummary_resourceOwner}, Hash: &hResourceSharePermissionSummary}
+var mResourceShareStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareStatus_PENDING, &sResourceShareStatus_ACTIVE, &sResourceShareStatus_FAILED, &sResourceShareStatus_DELETING, &sResourceShareStatus_DELETED}}
+var mResourceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceStatus_AVAILABLE, &sResourceStatus_ZONAL_RESOURCE_INACCESSIBLE, &sResourceStatus_LIMIT_EXCEEDED, &sResourceStatus_UNAVAILABLE, &sResourceStatus_PENDING}}
+var mServerInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sServerInternalException_message}}
+var mServiceNameAndResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceNameAndResourceType_resourceType, &sServiceNameAndResourceType_serviceName, &sServiceNameAndResourceType_resourceRegionScope}}
+var m_ServiceNameAndResourceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceNameAndResourceTypeList_member}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var m_SourceArnOrAccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceArnOrAccountList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var mTagFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTagFilter_tagKey, &sTagFilter_tagValues}}
+var m_TagFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagFilters_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var mTagLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagLimitExceededException_message}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTagPolicyViolationException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagPolicyViolationException_message}}
+var m_TagValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagValueList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUnknownResourceException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnknownResourceException_message}}
+var mUnmatchedPolicyPermissionException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnmatchedPolicyPermissionException_message}}
+var mUpdatePermissionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePermissionStatus_ATTACHABLE, &sUpdatePermissionStatus_DEPRECATED}}
+var mAcceptResourceShareInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptResourceShareInvitationRequest_resourceShareInvitationArn, &sAcceptResourceShareInvitationRequest_clientToken}}
+var mAcceptResourceShareInvitationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptResourceShareInvitationResponse_resourceShareInvitation, &sAcceptResourceShareInvitationResponse_clientToken}}
+var mAssociateResourceShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourceShareRequest_resourceShareArn, &sAssociateResourceShareRequest_resourceArns, &sAssociateResourceShareRequest_principals, &sAssociateResourceShareRequest_clientToken, &sAssociateResourceShareRequest_sources}}
+var mAssociateResourceShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourceShareResponse_resourceShareAssociations, &sAssociateResourceShareResponse_clientToken}}
+var mAssociateResourceSharePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourceSharePermissionRequest_resourceShareArn, &sAssociateResourceSharePermissionRequest_permissionArn, &sAssociateResourceSharePermissionRequest_permissionTemplateParameters, &sAssociateResourceSharePermissionRequest_replace, &sAssociateResourceSharePermissionRequest_clientToken, &sAssociateResourceSharePermissionRequest_permissionVersion}}
+var mAssociateResourceSharePermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourceSharePermissionResponse_returnValue, &sAssociateResourceSharePermissionResponse_clientToken}}
+var mCreatePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePermissionRequest_name, &sCreatePermissionRequest_resourceType, &sCreatePermissionRequest_policyTemplate, &sCreatePermissionRequest_permissionTemplateParameters, &sCreatePermissionRequest_clientToken, &sCreatePermissionRequest_tags}}
+var mCreatePermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePermissionResponse_permission, &sCreatePermissionResponse_clientToken}}
+var mCreatePermissionVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePermissionVersionRequest_permissionArn, &sCreatePermissionVersionRequest_policyTemplate, &sCreatePermissionVersionRequest_permissionTemplateParameters, &sCreatePermissionVersionRequest_clientToken}}
+var mCreatePermissionVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePermissionVersionResponse_permission, &sCreatePermissionVersionResponse_clientToken}}
+var mCreateResourceShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceShareRequest_name, &sCreateResourceShareRequest_resourceArns, &sCreateResourceShareRequest_principals, &sCreateResourceShareRequest_tags, &sCreateResourceShareRequest_allowExternalPrincipals, &sCreateResourceShareRequest_clientToken, &sCreateResourceShareRequest_permissionArns, &sCreateResourceShareRequest_sources, &sCreateResourceShareRequest_permissionTemplateParameters, &sCreateResourceShareRequest_resourceShareConfiguration}, Hash: &hCreateResourceShareRequest}
+var mCreateResourceShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceShareResponse_resourceShare, &sCreateResourceShareResponse_clientToken}}
+var mDeletePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePermissionRequest_permissionArn, &sDeletePermissionRequest_clientToken}}
+var mDeletePermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePermissionResponse_returnValue, &sDeletePermissionResponse_clientToken, &sDeletePermissionResponse_permissionStatus}}
+var mDeletePermissionVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePermissionVersionRequest_permissionArn, &sDeletePermissionVersionRequest_permissionVersion, &sDeletePermissionVersionRequest_clientToken}}
+var mDeletePermissionVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePermissionVersionResponse_returnValue, &sDeletePermissionVersionResponse_clientToken, &sDeletePermissionVersionResponse_permissionStatus}}
+var mDeleteResourceShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceShareRequest_resourceShareArn, &sDeleteResourceShareRequest_clientToken}}
+var mDeleteResourceShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceShareResponse_returnValue, &sDeleteResourceShareResponse_clientToken}}
+var mDisassociateResourceShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourceShareRequest_resourceShareArn, &sDisassociateResourceShareRequest_resourceArns, &sDisassociateResourceShareRequest_principals, &sDisassociateResourceShareRequest_clientToken, &sDisassociateResourceShareRequest_sources}}
+var mDisassociateResourceShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourceShareResponse_resourceShareAssociations, &sDisassociateResourceShareResponse_clientToken}}
+var mDisassociateResourceSharePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourceSharePermissionRequest_resourceShareArn, &sDisassociateResourceSharePermissionRequest_permissionArn, &sDisassociateResourceSharePermissionRequest_clientToken}}
+var mDisassociateResourceSharePermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourceSharePermissionResponse_returnValue, &sDisassociateResourceSharePermissionResponse_clientToken}}
+var mEnableSharingWithAwsOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableSharingWithAwsOrganizationResponse_returnValue}}
+var mGetPermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPermissionRequest_permissionArn, &sGetPermissionRequest_permissionVersion, &sGetPermissionRequest_permissionTemplateParameters}}
+var mGetPermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPermissionResponse_permission}}
+var mGetResourcePoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePoliciesRequest_resourceArns, &sGetResourcePoliciesRequest_principal, &sGetResourcePoliciesRequest_nextToken, &sGetResourcePoliciesRequest_maxResults}}
+var mGetResourcePoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePoliciesResponse_policies, &sGetResourcePoliciesResponse_nextToken}}
+var mGetResourceShareAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceShareAssociationsRequest_associationType, &sGetResourceShareAssociationsRequest_resourceShareArns, &sGetResourceShareAssociationsRequest_resourceArn, &sGetResourceShareAssociationsRequest_principal, &sGetResourceShareAssociationsRequest_associationStatus, &sGetResourceShareAssociationsRequest_nextToken, &sGetResourceShareAssociationsRequest_maxResults}}
+var mGetResourceShareAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceShareAssociationsResponse_resourceShareAssociations, &sGetResourceShareAssociationsResponse_nextToken}}
+var mGetResourceShareInvitationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceShareInvitationsRequest_resourceShareInvitationArns, &sGetResourceShareInvitationsRequest_resourceShareArns, &sGetResourceShareInvitationsRequest_nextToken, &sGetResourceShareInvitationsRequest_maxResults}}
+var mGetResourceShareInvitationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceShareInvitationsResponse_resourceShareInvitations, &sGetResourceShareInvitationsResponse_nextToken}}
+var mGetResourceSharesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSharesRequest_resourceShareArns, &sGetResourceSharesRequest_resourceShareStatus, &sGetResourceSharesRequest_resourceOwner, &sGetResourceSharesRequest_name, &sGetResourceSharesRequest_tagFilters, &sGetResourceSharesRequest_nextToken, &sGetResourceSharesRequest_maxResults, &sGetResourceSharesRequest_permissionArn, &sGetResourceSharesRequest_permissionVersion}, Hash: &hGetResourceSharesRequest}
+var mGetResourceSharesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSharesResponse_resourceShares, &sGetResourceSharesResponse_nextToken}}
+var mListPendingInvitationResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPendingInvitationResourcesRequest_resourceShareInvitationArn, &sListPendingInvitationResourcesRequest_nextToken, &sListPendingInvitationResourcesRequest_maxResults, &sListPendingInvitationResourcesRequest_resourceRegionScope}}
+var mListPendingInvitationResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPendingInvitationResourcesResponse_resources, &sListPendingInvitationResourcesResponse_nextToken}}
+var mListPermissionAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPermissionAssociationsRequest_permissionArn, &sListPermissionAssociationsRequest_permissionVersion, &sListPermissionAssociationsRequest_associationStatus, &sListPermissionAssociationsRequest_resourceType, &sListPermissionAssociationsRequest_featureSet, &sListPermissionAssociationsRequest_defaultVersion, &sListPermissionAssociationsRequest_resourceOwner, &sListPermissionAssociationsRequest_resourceShareArn, &sListPermissionAssociationsRequest_nextToken, &sListPermissionAssociationsRequest_maxResults}, Hash: &hListPermissionAssociationsRequest}
+var mListPermissionAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPermissionAssociationsResponse_permissions, &sListPermissionAssociationsResponse_nextToken}}
+var mListPermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPermissionsRequest_resourceType, &sListPermissionsRequest_resourceOwner, &sListPermissionsRequest_nextToken, &sListPermissionsRequest_maxResults, &sListPermissionsRequest_permissionType, &sListPermissionsRequest_permissionStatus}}
+var mListPermissionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPermissionsResponse_permissions, &sListPermissionsResponse_nextToken}}
+var mListPermissionVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPermissionVersionsRequest_permissionArn, &sListPermissionVersionsRequest_nextToken, &sListPermissionVersionsRequest_maxResults}}
+var mListPermissionVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPermissionVersionsResponse_permissions, &sListPermissionVersionsResponse_nextToken}}
+var mListPrincipalsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPrincipalsRequest_resourceOwner, &sListPrincipalsRequest_resourceArn, &sListPrincipalsRequest_principals, &sListPrincipalsRequest_resourceType, &sListPrincipalsRequest_resourceShareArns, &sListPrincipalsRequest_nextToken, &sListPrincipalsRequest_maxResults}}
+var mListPrincipalsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPrincipalsResponse_principals, &sListPrincipalsResponse_nextToken}}
+var mListReplacePermissionAssociationsWorkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplacePermissionAssociationsWorkRequest_workIds, &sListReplacePermissionAssociationsWorkRequest_status, &sListReplacePermissionAssociationsWorkRequest_nextToken, &sListReplacePermissionAssociationsWorkRequest_maxResults}}
+var mListReplacePermissionAssociationsWorkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks, &sListReplacePermissionAssociationsWorkResponse_nextToken}}
+var mListResourceSharePermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSharePermissionsRequest_resourceShareArn, &sListResourceSharePermissionsRequest_nextToken, &sListResourceSharePermissionsRequest_maxResults}}
+var mListResourceSharePermissionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSharePermissionsResponse_permissions, &sListResourceSharePermissionsResponse_nextToken}}
+var mListResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesRequest_resourceOwner, &sListResourcesRequest_principal, &sListResourcesRequest_resourceType, &sListResourcesRequest_resourceArns, &sListResourcesRequest_resourceShareArns, &sListResourcesRequest_nextToken, &sListResourcesRequest_maxResults, &sListResourcesRequest_resourceRegionScope}}
+var mListResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesResponse_resources, &sListResourcesResponse_nextToken}}
+var mListResourceTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceTypesRequest_nextToken, &sListResourceTypesRequest_maxResults, &sListResourceTypesRequest_resourceRegionScope}}
+var mListResourceTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceTypesResponse_resourceTypes, &sListResourceTypesResponse_nextToken}}
+var mListSourceAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceAssociationsRequest_resourceShareArns, &sListSourceAssociationsRequest_sourceId, &sListSourceAssociationsRequest_sourceType, &sListSourceAssociationsRequest_associationStatus, &sListSourceAssociationsRequest_nextToken, &sListSourceAssociationsRequest_maxResults}}
+var mListSourceAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceAssociationsResponse_sourceAssociations, &sListSourceAssociationsResponse_nextToken}}
+var mPromotePermissionCreatedFromPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPromotePermissionCreatedFromPolicyRequest_permissionArn, &sPromotePermissionCreatedFromPolicyRequest_name, &sPromotePermissionCreatedFromPolicyRequest_clientToken}}
+var mPromotePermissionCreatedFromPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPromotePermissionCreatedFromPolicyResponse_permission, &sPromotePermissionCreatedFromPolicyResponse_clientToken}}
+var mPromoteResourceShareCreatedFromPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPromoteResourceShareCreatedFromPolicyRequest_resourceShareArn}}
+var mPromoteResourceShareCreatedFromPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPromoteResourceShareCreatedFromPolicyResponse_returnValue}}
+var mRejectResourceShareInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectResourceShareInvitationRequest_resourceShareInvitationArn, &sRejectResourceShareInvitationRequest_clientToken}}
+var mRejectResourceShareInvitationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectResourceShareInvitationResponse_resourceShareInvitation, &sRejectResourceShareInvitationResponse_clientToken}}
+var mReplacePermissionAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReplacePermissionAssociationsRequest_fromPermissionArn, &sReplacePermissionAssociationsRequest_fromPermissionVersion, &sReplacePermissionAssociationsRequest_toPermissionArn, &sReplacePermissionAssociationsRequest_permissionTemplateParameters, &sReplacePermissionAssociationsRequest_clientToken}}
+var mReplacePermissionAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sReplacePermissionAssociationsResponse_replacePermissionAssociationsWork, &sReplacePermissionAssociationsResponse_clientToken}}
+var mSetDefaultPermissionVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSetDefaultPermissionVersionRequest_permissionArn, &sSetDefaultPermissionVersionRequest_permissionVersion, &sSetDefaultPermissionVersionRequest_clientToken}}
+var mSetDefaultPermissionVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSetDefaultPermissionVersionResponse_returnValue, &sSetDefaultPermissionVersionResponse_clientToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceShareArn, &sTagResourceRequest_tags, &sTagResourceRequest_resourceArn}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceShareArn, &sUntagResourceRequest_tagKeys, &sUntagResourceRequest_resourceArn}}
+var mUpdatePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePermissionRequest_permissionArn, &sUpdatePermissionRequest_status, &sUpdatePermissionRequest_clientToken}}
+var mUpdatePermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePermissionResponse_clientToken, &sUpdatePermissionResponse_permissionStatus}}
+var mUpdateResourceShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceShareRequest_resourceShareArn, &sUpdateResourceShareRequest_name, &sUpdateResourceShareRequest_allowExternalPrincipals, &sUpdateResourceShareRequest_clientToken}}
+var mUpdateResourceShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceShareResponse_resourceShare, &sUpdateResourceShareResponse_clientToken}}
+
+var hAssociatedPermission = smithy.MemberHash{Seed: 12, Slots: []uint16{
+	0, 0, 8, 0, 1, 7, 0, 0, 0, 0, 0, 2, 5, 0, 3, 0, 0, 0, 9, 0, 0, 0, 0, 4,
+	0, 0, 6, 0, 0, 0, 0, 0,
+}}
+var hReplacePermissionAssociationsWork = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 4, 0, 6, 0, 0, 3, 0, 0, 8, 9, 0, 0, 0, 10,
+	0, 0, 2, 5, 0, 0, 0, 0,
+}}
+var hResource = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	1, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5, 0, 2, 6, 0, 0,
+	0, 7, 0, 3, 9, 0, 0, 0,
+}}
+var hResourceShare = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	7, 4, 2, 0, 0, 0, 0, 5, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 11, 0, 0, 3, 0,
+	9, 10, 0, 1, 0, 0, 0, 0,
+}}
+var hResourceShareAssociation = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 3, 2, 6, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 4, 0, 9, 0, 0, 5, 0,
+	0, 0, 8, 0, 0, 1, 0, 0,
+}}
+var hResourceShareInvitation = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	3, 8, 0, 0, 5, 0, 2, 0, 0, 7, 1, 0, 0, 0, 0, 9, 0, 4, 0, 0, 0, 0, 0, 6,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hResourceSharePermissionDetail = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	3, 1, 0, 12, 13, 14, 0, 0, 0, 0, 11, 0, 0, 7, 15, 0, 5, 0, 0, 9, 0, 10, 0, 0,
+	8, 6, 0, 0, 0, 0, 2, 4,
+}}
+var hResourceSharePermissionSummary = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	3, 1, 0, 11, 6, 13, 0, 0, 0, 0, 10, 0, 0, 12, 14, 0, 5, 0, 0, 8, 0, 9, 0, 0,
+	7, 0, 0, 0, 0, 0, 2, 4,
+}}
+var hCreateResourceShareRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	6, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 5, 7, 0, 10, 0, 0, 0, 8, 9,
+	2, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hGetResourceSharesRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	9, 3, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2, 0, 0, 0, 0, 0, 8, 0, 0, 0,
+	0, 6, 0, 5, 0, 0, 0, 0,
+}}
+var hListPermissionAssociationsRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 2, 0, 6, 0, 0, 8, 0, 4, 3, 0, 1, 10, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0,
+	9, 0, 0, 0, 7, 0, 0, 0,
+}}
+
+var sAcceptResourceShareInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptResourceShareInvitation, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAcceptResourceShareInvitation})
+var sAssociateResourceShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceShare, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociateResourceShare})
+var sAssociateResourceSharePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceSharePermission, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eAssociateResourceSharePermission})
+var sCreatePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePermission, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreatePermission})
+var sCreatePermissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePermissionVersion, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreatePermissionVersion})
+var sCreateResourceShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceShare, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateResourceShare})
+var sDeletePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermission, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeletePermission})
+var sDeletePermissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionVersion, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeletePermissionVersion})
+var sDeleteResourceShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceShare, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourceShare})
+var sDisassociateResourceShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceShare, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateResourceShare})
+var sDisassociateResourceSharePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceSharePermission, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateResourceSharePermission})
+var sEnableSharingWithAwsOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableSharingWithAwsOrganization, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eEnableSharingWithAwsOrganization})
+var sGetPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPermission, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetPermission})
+var sGetResourcePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicies, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicies})
+var sGetResourceShareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceShareAssociations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetResourceShareAssociations})
+var sGetResourceShareInvitations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceShareInvitations, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetResourceShareInvitations})
+var sGetResourceShares = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceShares, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetResourceShares})
+var sListPendingInvitationResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPendingInvitationResources, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListPendingInvitationResources})
+var sListPermissionAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionAssociations, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListPermissionAssociations})
+var sListPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissions, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListPermissions})
+var sListPermissionVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionVersions, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListPermissionVersions})
+var sListPrincipals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrincipals, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListPrincipals})
+var sListReplacePermissionAssociationsWork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplacePermissionAssociationsWork, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListReplacePermissionAssociationsWork})
+var sListResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResources, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListResources})
+var sListResourceSharePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSharePermissions, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListResourceSharePermissions})
+var sListResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTypes, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListResourceTypes})
+var sListSourceAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceAssociations, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eListSourceAssociations})
+var sPromotePermissionCreatedFromPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromotePermissionCreatedFromPolicy, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ePromotePermissionCreatedFromPolicy})
+var sPromoteResourceShareCreatedFromPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteResourceShareCreatedFromPolicy, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ePromoteResourceShareCreatedFromPolicy})
+var sRejectResourceShareInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectResourceShareInvitation, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eRejectResourceShareInvitation})
+var sReplacePermissionAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacePermissionAssociations, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eReplacePermissionAssociations})
+var sSetDefaultPermissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetDefaultPermissionVersion, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eSetDefaultPermissionVersion})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdatePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePermission, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePermission})
+var sUpdateResourceShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceShare, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eUpdateResourceShare})
+var s_AmazonResourceSharing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceSharing, Type: smithy.ShapeTypeService, Ext: &e_AmazonResourceSharing})
+var sAssociatedPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedPermission, Members: &mAssociatedPermission, Type: smithy.ShapeTypeStructure, Ext: &eAssociatedPermission})
+var sAssociatedPermission_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedPermission_arn})
+var sAssociatedPermission_permissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedPermission_permissionVersion})
+var sAssociatedPermission_defaultVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociatedPermission_defaultVersion})
+var sAssociatedPermission_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedPermission_resourceType})
+var sAssociatedPermission_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedPermission_status})
+var sAssociatedPermission_featureSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "featureSet", ID: &iPermissionFeatureSet, Members: &mPermissionFeatureSet, Type: smithy.ShapeTypeEnum, Ext: &eAssociatedPermission_featureSet})
+var sAssociatedPermission_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eAssociatedPermission_lastUpdatedTime})
+var sAssociatedPermission_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedPermission_resourceShareArn})
+var sAssociatedPermission_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterList, Members: &m_PermissionTemplateParameterList, Type: smithy.ShapeTypeList, Ext: &eAssociatedPermission_permissionTemplateParameters})
+var s_AssociatedPermissionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedPermissionList, Members: &m_AssociatedPermissionList, Type: smithy.ShapeTypeList, Ext: &e_AssociatedPermissionList})
+var s_AssociatedPermissionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedPermission, Members: &mAssociatedPermission, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_AssociatedPermissionList_member})
+var sAssociatedSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedSource, Members: &mAssociatedSource, Type: smithy.ShapeTypeStructure, Ext: &eAssociatedSource})
+var sAssociatedSource_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedSource_resourceShareArn})
+var sAssociatedSource_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedSource_sourceId})
+var sAssociatedSource_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedSource_sourceType})
+var sAssociatedSource_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedSource_status})
+var sAssociatedSource_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eAssociatedSource_lastUpdatedTime})
+var sAssociatedSource_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eAssociatedSource_creationTime})
+var sAssociatedSource_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociatedSource_statusMessage})
+var s_AssociatedSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedSourceList, Members: &m_AssociatedSourceList, Type: smithy.ShapeTypeList, Ext: &e_AssociatedSourceList})
+var s_AssociatedSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedSource, Members: &mAssociatedSource, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_AssociatedSourceList_member})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var sIdempotentParameterMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotentParameterMismatchException, Members: &mIdempotentParameterMismatchException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eIdempotentParameterMismatchException})
+var sIdempotentParameterMismatchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eIdempotentParameterMismatchException_message})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInvalidClientTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientTokenException, Members: &mInvalidClientTokenException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eInvalidClientTokenException})
+var sInvalidClientTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidClientTokenException_message})
+var sInvalidMaxResultsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxResultsException, Members: &mInvalidMaxResultsException, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eInvalidMaxResultsException})
+var sInvalidMaxResultsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidMaxResultsException_message})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidNextTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_message})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sInvalidPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPolicyException, Members: &mInvalidPolicyException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPolicyException})
+var sInvalidPolicyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidPolicyException_message})
+var sInvalidResourceTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceTypeException, Members: &mInvalidResourceTypeException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eInvalidResourceTypeException})
+var sInvalidResourceTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidResourceTypeException_message})
+var sInvalidStateTransitionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateTransitionException, Members: &mInvalidStateTransitionException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStateTransitionException})
+var sInvalidStateTransitionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidStateTransitionException_message})
+var sMalformedArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedArnException, Members: &mMalformedArnException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eMalformedArnException})
+var sMalformedArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMalformedArnException_message})
+var sMalformedPolicyTemplateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedPolicyTemplateException, Members: &mMalformedPolicyTemplateException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eMalformedPolicyTemplateException})
+var sMalformedPolicyTemplateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMalformedPolicyTemplateException_message})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMissingRequiredParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingRequiredParameterException, Members: &mMissingRequiredParameterException, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eMissingRequiredParameterException})
+var sMissingRequiredParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMissingRequiredParameterException_message})
+var sOperationNotPermittedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotPermittedException, Members: &mOperationNotPermittedException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eOperationNotPermittedException})
+var sOperationNotPermittedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOperationNotPermittedException_message})
+var sPermissionAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionAlreadyExistsException, Members: &mPermissionAlreadyExistsException, Traits: &t49, Type: smithy.ShapeTypeStructure, Ext: &ePermissionAlreadyExistsException})
+var sPermissionAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionAlreadyExistsException_message})
+var sPermissionArnAndTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionArnAndTemplateParameters, Members: &mPermissionArnAndTemplateParameters, Type: smithy.ShapeTypeStructure, Ext: &ePermissionArnAndTemplateParameters})
+var sPermissionArnAndTemplateParameters_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionArnAndTemplateParameters_permissionArn})
+var sPermissionArnAndTemplateParameters_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterInputList, Members: &m_PermissionTemplateParameterInputList, Type: smithy.ShapeTypeList, Ext: &ePermissionArnAndTemplateParameters_permissionTemplateParameters})
+var s_PermissionArnAndTemplateParametersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionArnAndTemplateParametersList, Members: &m_PermissionArnAndTemplateParametersList, Type: smithy.ShapeTypeList, Ext: &e_PermissionArnAndTemplateParametersList})
+var s_PermissionArnAndTemplateParametersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermissionArnAndTemplateParameters, Members: &mPermissionArnAndTemplateParameters, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_PermissionArnAndTemplateParametersList_member})
+var s_PermissionArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionArnList, Members: &m_PermissionArnList, Type: smithy.ShapeTypeList, Ext: &e_PermissionArnList})
+var s_PermissionArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PermissionArnList_member})
+var sPermissionFeatureSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionFeatureSet, Members: &mPermissionFeatureSet, Type: smithy.ShapeTypeEnum, Ext: &ePermissionFeatureSet})
+var sPermissionFeatureSet_CREATED_FROM_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_FROM_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionFeatureSet_CREATED_FROM_POLICY})
+var sPermissionFeatureSet_PROMOTING_TO_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROMOTING_TO_STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionFeatureSet_PROMOTING_TO_STANDARD})
+var sPermissionFeatureSet_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionFeatureSet_STANDARD})
+var sPermissionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionLimitExceededException, Members: &mPermissionLimitExceededException, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &ePermissionLimitExceededException})
+var sPermissionLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionLimitExceededException_message})
+var s_PermissionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionName, Type: smithy.ShapeTypeString, Ext: &e_PermissionName})
+var sPermissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionStatus, Members: &mPermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &ePermissionStatus})
+var sPermissionStatus_ATTACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionStatus_ATTACHABLE})
+var sPermissionStatus_UNATTACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNATTACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionStatus_UNATTACHABLE})
+var sPermissionStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionStatus_DELETING})
+var sPermissionStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionStatus_DELETED})
+var sPermissionStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionStatus_DEPRECATED})
+var sPermissionTemplateParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionTemplateParameter, Members: &mPermissionTemplateParameter, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTemplateParameter})
+var sPermissionTemplateParameter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionTemplateParameter_name})
+var sPermissionTemplateParameter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iPermissionTemplateParameterType, Members: &mPermissionTemplateParameterType, Type: smithy.ShapeTypeEnum, Ext: &ePermissionTemplateParameter_type})
+var sPermissionTemplateParameter_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionTemplateParameter_description})
+var sPermissionTemplateParameter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_PermissionTemplateParameterValueList, Members: &m_PermissionTemplateParameterValueList, Type: smithy.ShapeTypeList, Ext: &ePermissionTemplateParameter_values})
+var sPermissionTemplateParameterDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionTemplateParameterDeclaration, Members: &mPermissionTemplateParameterDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTemplateParameterDeclaration})
+var sPermissionTemplateParameterDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionTemplateParameterDeclaration_name})
+var sPermissionTemplateParameterDeclaration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iPermissionTemplateParameterType, Members: &mPermissionTemplateParameterType, Type: smithy.ShapeTypeEnum, Ext: &ePermissionTemplateParameterDeclaration_type})
+var sPermissionTemplateParameterDeclaration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionTemplateParameterDeclaration_description})
+var s_PermissionTemplateParameterDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionTemplateParameterDeclarationList, Members: &m_PermissionTemplateParameterDeclarationList, Type: smithy.ShapeTypeList, Ext: &e_PermissionTemplateParameterDeclarationList})
+var s_PermissionTemplateParameterDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermissionTemplateParameterDeclaration, Members: &mPermissionTemplateParameterDeclaration, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_PermissionTemplateParameterDeclarationList_member})
+var sPermissionTemplateParameterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionTemplateParameterInput, Members: &mPermissionTemplateParameterInput, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTemplateParameterInput})
+var sPermissionTemplateParameterInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionTemplateParameterInput_name})
+var sPermissionTemplateParameterInput_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_PermissionTemplateParameterValueList, Members: &m_PermissionTemplateParameterValueList, Type: smithy.ShapeTypeList, Ext: &ePermissionTemplateParameterInput_values})
+var s_PermissionTemplateParameterInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionTemplateParameterInputList, Members: &m_PermissionTemplateParameterInputList, Type: smithy.ShapeTypeList, Ext: &e_PermissionTemplateParameterInputList})
+var s_PermissionTemplateParameterInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermissionTemplateParameterInput, Members: &mPermissionTemplateParameterInput, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_PermissionTemplateParameterInputList_member})
+var s_PermissionTemplateParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionTemplateParameterList, Members: &m_PermissionTemplateParameterList, Type: smithy.ShapeTypeList, Ext: &e_PermissionTemplateParameterList})
+var s_PermissionTemplateParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermissionTemplateParameter, Members: &mPermissionTemplateParameter, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_PermissionTemplateParameterList_member})
+var sPermissionTemplateParameterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionTemplateParameterType, Members: &mPermissionTemplateParameterType, Type: smithy.ShapeTypeEnum, Ext: &ePermissionTemplateParameterType})
+var sPermissionTemplateParameterType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTemplateParameterType_STRING})
+var sPermissionTemplateParameterType_STRING_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTemplateParameterType_STRING_LIST})
+var s_PermissionTemplateParameterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionTemplateParameterValueList, Members: &m_PermissionTemplateParameterValueList, Type: smithy.ShapeTypeList, Ext: &e_PermissionTemplateParameterValueList})
+var s_PermissionTemplateParameterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PermissionTemplateParameterValueList_member})
+var sPermissionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionType, Members: &mPermissionType, Type: smithy.ShapeTypeEnum, Ext: &ePermissionType})
+var sPermissionType_CUSTOMER_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionType_CUSTOMER_MANAGED})
+var sPermissionType_AWS_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionType_AWS_MANAGED})
+var sPermissionTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionTypeFilter, Members: &mPermissionTypeFilter, Type: smithy.ShapeTypeEnum, Ext: &ePermissionTypeFilter})
+var sPermissionTypeFilter_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTypeFilter_ALL})
+var sPermissionTypeFilter_AWS_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTypeFilter_AWS_MANAGED})
+var sPermissionTypeFilter_CUSTOMER_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermissionTypeFilter_CUSTOMER_MANAGED})
+var sPermissionVersionsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionVersionsLimitExceededException, Members: &mPermissionVersionsLimitExceededException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &ePermissionVersionsLimitExceededException})
+var sPermissionVersionsLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePermissionVersionsLimitExceededException_message})
+var s_Policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &e_Policy})
+var s_PolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyList, Members: &m_PolicyList, Type: smithy.ShapeTypeList, Ext: &e_PolicyList})
+var s_PolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Policy, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PolicyList_member})
+var sPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrincipal, Members: &mPrincipal, Type: smithy.ShapeTypeStructure, Ext: &ePrincipal})
+var sPrincipal_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePrincipal_id})
+var sPrincipal_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePrincipal_resourceShareArn})
+var sPrincipal_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ePrincipal_creationTime})
+var sPrincipal_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ePrincipal_lastUpdatedTime})
+var sPrincipal_external = smithy.NewStaticSchema(smithy.StaticSchema{Member: "external", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePrincipal_external})
+var s_PrincipalArnOrIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrincipalArnOrIdList, Members: &m_PrincipalArnOrIdList, Type: smithy.ShapeTypeList, Ext: &e_PrincipalArnOrIdList})
+var s_PrincipalArnOrIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PrincipalArnOrIdList_member})
+var s_PrincipalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrincipalList, Members: &m_PrincipalList, Type: smithy.ShapeTypeList, Ext: &e_PrincipalList})
+var s_PrincipalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPrincipal, Members: &mPrincipal, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_PrincipalList_member})
+var sReplacePermissionAssociationsWork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacePermissionAssociationsWork, Members: &mReplacePermissionAssociationsWork, Type: smithy.ShapeTypeStructure, Ext: &eReplacePermissionAssociationsWork})
+var sReplacePermissionAssociationsWork_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsWork_id})
+var sReplacePermissionAssociationsWork_fromPermissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromPermissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsWork_fromPermissionArn})
+var sReplacePermissionAssociationsWork_fromPermissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromPermissionVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsWork_fromPermissionVersion})
+var sReplacePermissionAssociationsWork_toPermissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toPermissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsWork_toPermissionArn})
+var sReplacePermissionAssociationsWork_toPermissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toPermissionVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsWork_toPermissionVersion})
+var sReplacePermissionAssociationsWork_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterList, Members: &m_PermissionTemplateParameterList, Type: smithy.ShapeTypeList, Ext: &eReplacePermissionAssociationsWork_permissionTemplateParameters})
+var sReplacePermissionAssociationsWork_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iReplacePermissionAssociationsWorkStatus, Members: &mReplacePermissionAssociationsWorkStatus, Type: smithy.ShapeTypeEnum, Ext: &eReplacePermissionAssociationsWork_status})
+var sReplacePermissionAssociationsWork_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsWork_statusMessage})
+var sReplacePermissionAssociationsWork_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eReplacePermissionAssociationsWork_creationTime})
+var sReplacePermissionAssociationsWork_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eReplacePermissionAssociationsWork_lastUpdatedTime})
+var s_ReplacePermissionAssociationsWorkIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplacePermissionAssociationsWorkIdList, Members: &m_ReplacePermissionAssociationsWorkIdList, Type: smithy.ShapeTypeList, Ext: &e_ReplacePermissionAssociationsWorkIdList})
+var s_ReplacePermissionAssociationsWorkIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_ReplacePermissionAssociationsWorkIdList_member})
+var s_ReplacePermissionAssociationsWorkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplacePermissionAssociationsWorkList, Members: &m_ReplacePermissionAssociationsWorkList, Type: smithy.ShapeTypeList, Ext: &e_ReplacePermissionAssociationsWorkList})
+var s_ReplacePermissionAssociationsWorkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplacePermissionAssociationsWork, Members: &mReplacePermissionAssociationsWork, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_ReplacePermissionAssociationsWorkList_member})
+var sReplacePermissionAssociationsWorkStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacePermissionAssociationsWorkStatus, Members: &mReplacePermissionAssociationsWorkStatus, Type: smithy.ShapeTypeEnum, Ext: &eReplacePermissionAssociationsWorkStatus})
+var sReplacePermissionAssociationsWorkStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplacePermissionAssociationsWorkStatus_IN_PROGRESS})
+var sReplacePermissionAssociationsWorkStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplacePermissionAssociationsWorkStatus_COMPLETED})
+var sReplacePermissionAssociationsWorkStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplacePermissionAssociationsWorkStatus_FAILED})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &eResource})
+var sResource_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResource_arn})
+var sResource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResource_type})
+var sResource_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResource_resourceShareArn})
+var sResource_resourceGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceGroupArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResource_resourceGroupArn})
+var sResource_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eResource_status})
+var sResource_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResource_statusMessage})
+var sResource_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResource_creationTime})
+var sResource_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResource_lastUpdatedTime})
+var sResource_resourceRegionScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRegionScope", ID: &iResourceRegionScope, Members: &mResourceRegionScope, Type: smithy.ShapeTypeEnum, Ext: &eResource_resourceRegionScope})
+var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &e_ResourceArnList})
+var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_ResourceArnList_member})
+var sResourceArnNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceArnNotFoundException, Members: &mResourceArnNotFoundException, Traits: &t52, Type: smithy.ShapeTypeStructure, Ext: &eResourceArnNotFoundException})
+var sResourceArnNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceArnNotFoundException_message})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &e_ResourceList})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceList_member})
+var sResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eResourceOwner})
+var sResourceOwner_SELF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceOwner_SELF})
+var sResourceOwner_OTHER_ACCOUNTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER_ACCOUNTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceOwner_OTHER_ACCOUNTS})
+var sResourceRegionScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceRegionScope, Members: &mResourceRegionScope, Type: smithy.ShapeTypeEnum, Ext: &eResourceRegionScope})
+var sResourceRegionScope_REGIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceRegionScope_REGIONAL})
+var sResourceRegionScope_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceRegionScope_GLOBAL})
+var sResourceRegionScopeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceRegionScopeFilter, Members: &mResourceRegionScopeFilter, Type: smithy.ShapeTypeEnum, Ext: &eResourceRegionScopeFilter})
+var sResourceRegionScopeFilter_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceRegionScopeFilter_ALL})
+var sResourceRegionScopeFilter_REGIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceRegionScopeFilter_REGIONAL})
+var sResourceRegionScopeFilter_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceRegionScopeFilter_GLOBAL})
+var sResourceShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShare, Members: &mResourceShare, Type: smithy.ShapeTypeStructure, Ext: &eResourceShare})
+var sResourceShare_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShare_resourceShareArn})
+var sResourceShare_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShare_name})
+var sResourceShare_owningAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owningAccountId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShare_owningAccountId})
+var sResourceShare_allowExternalPrincipals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowExternalPrincipals", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResourceShare_allowExternalPrincipals})
+var sResourceShare_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iResourceShareStatus, Members: &mResourceShareStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceShare_status})
+var sResourceShare_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShare_statusMessage})
+var sResourceShare_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eResourceShare_tags})
+var sResourceShare_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceShare_creationTime})
+var sResourceShare_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceShare_lastUpdatedTime})
+var sResourceShare_featureSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "featureSet", ID: &iResourceShareFeatureSet, Members: &mResourceShareFeatureSet, Type: smithy.ShapeTypeEnum, Ext: &eResourceShare_featureSet})
+var sResourceShare_resourceShareConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareConfiguration", ID: &iResourceShareConfiguration, Members: &mResourceShareConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eResourceShare_resourceShareConfiguration})
+var s_ResourceShareArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceShareArnList, Members: &m_ResourceShareArnList, Type: smithy.ShapeTypeList, Ext: &e_ResourceShareArnList})
+var s_ResourceShareArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_ResourceShareArnList_member})
+var sResourceShareAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareAssociation, Members: &mResourceShareAssociation, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociation})
+var sResourceShareAssociation_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareAssociation_resourceShareArn})
+var sResourceShareAssociation_resourceShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareAssociation_resourceShareName})
+var sResourceShareAssociation_associatedEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedEntity", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareAssociation_associatedEntity})
+var sResourceShareAssociation_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iResourceShareAssociationType, Members: &mResourceShareAssociationType, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareAssociation_associationType})
+var sResourceShareAssociation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iResourceShareAssociationStatus, Members: &mResourceShareAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareAssociation_status})
+var sResourceShareAssociation_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareAssociation_statusMessage})
+var sResourceShareAssociation_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceShareAssociation_creationTime})
+var sResourceShareAssociation_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceShareAssociation_lastUpdatedTime})
+var sResourceShareAssociation_external = smithy.NewStaticSchema(smithy.StaticSchema{Member: "external", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResourceShareAssociation_external})
+var s_ResourceShareAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceShareAssociationList, Members: &m_ResourceShareAssociationList, Type: smithy.ShapeTypeList, Ext: &e_ResourceShareAssociationList})
+var s_ResourceShareAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceShareAssociation, Members: &mResourceShareAssociation, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceShareAssociationList_member})
+var sResourceShareAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareAssociationStatus, Members: &mResourceShareAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareAssociationStatus})
+var sResourceShareAssociationStatus_ASSOCIATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_ASSOCIATING})
+var sResourceShareAssociationStatus_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_ASSOCIATED})
+var sResourceShareAssociationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_FAILED})
+var sResourceShareAssociationStatus_DISASSOCIATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISASSOCIATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_DISASSOCIATING})
+var sResourceShareAssociationStatus_DISASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_DISASSOCIATED})
+var sResourceShareAssociationStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_SUSPENDED})
+var sResourceShareAssociationStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_SUSPENDING})
+var sResourceShareAssociationStatus_RESTORING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTORING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationStatus_RESTORING})
+var sResourceShareAssociationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareAssociationType, Members: &mResourceShareAssociationType, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareAssociationType})
+var sResourceShareAssociationType_PRINCIPAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRINCIPAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationType_PRINCIPAL})
+var sResourceShareAssociationType_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationType_RESOURCE})
+var sResourceShareAssociationType_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareAssociationType_SOURCE})
+var sResourceShareConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareConfiguration, Members: &mResourceShareConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareConfiguration})
+var sResourceShareConfiguration_retainSharingOnAccountLeaveOrganization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retainSharingOnAccountLeaveOrganization", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResourceShareConfiguration_retainSharingOnAccountLeaveOrganization})
+var sResourceShareFeatureSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareFeatureSet, Members: &mResourceShareFeatureSet, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareFeatureSet})
+var sResourceShareFeatureSet_CREATED_FROM_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_FROM_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareFeatureSet_CREATED_FROM_POLICY})
+var sResourceShareFeatureSet_PROMOTING_TO_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROMOTING_TO_STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareFeatureSet_PROMOTING_TO_STANDARD})
+var sResourceShareFeatureSet_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareFeatureSet_STANDARD})
+var sResourceShareInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareInvitation, Members: &mResourceShareInvitation, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitation})
+var sResourceShareInvitation_resourceShareInvitationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitation_resourceShareInvitationArn})
+var sResourceShareInvitation_resourceShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitation_resourceShareName})
+var sResourceShareInvitation_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitation_resourceShareArn})
+var sResourceShareInvitation_senderAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "senderAccountId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitation_senderAccountId})
+var sResourceShareInvitation_receiverAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "receiverAccountId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitation_receiverAccountId})
+var sResourceShareInvitation_invitationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invitationTimestamp", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceShareInvitation_invitationTimestamp})
+var sResourceShareInvitation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iResourceShareInvitationStatus, Members: &mResourceShareInvitationStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareInvitation_status})
+var sResourceShareInvitation_resourceShareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareAssociations", ID: &i_ResourceShareAssociationList, Members: &m_ResourceShareAssociationList, Type: smithy.ShapeTypeList, Ext: &eResourceShareInvitation_resourceShareAssociations})
+var sResourceShareInvitation_receiverArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "receiverArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitation_receiverArn})
+var sResourceShareInvitationAlreadyAcceptedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareInvitationAlreadyAcceptedException, Members: &mResourceShareInvitationAlreadyAcceptedException, Traits: &t53, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationAlreadyAcceptedException})
+var sResourceShareInvitationAlreadyAcceptedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitationAlreadyAcceptedException_message})
+var sResourceShareInvitationAlreadyRejectedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareInvitationAlreadyRejectedException, Members: &mResourceShareInvitationAlreadyRejectedException, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationAlreadyRejectedException})
+var sResourceShareInvitationAlreadyRejectedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitationAlreadyRejectedException_message})
+var s_ResourceShareInvitationArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceShareInvitationArnList, Members: &m_ResourceShareInvitationArnList, Type: smithy.ShapeTypeList, Ext: &e_ResourceShareInvitationArnList})
+var s_ResourceShareInvitationArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_ResourceShareInvitationArnList_member})
+var sResourceShareInvitationArnNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareInvitationArnNotFoundException, Members: &mResourceShareInvitationArnNotFoundException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationArnNotFoundException})
+var sResourceShareInvitationArnNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitationArnNotFoundException_message})
+var sResourceShareInvitationExpiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareInvitationExpiredException, Members: &mResourceShareInvitationExpiredException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationExpiredException})
+var sResourceShareInvitationExpiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareInvitationExpiredException_message})
+var s_ResourceShareInvitationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceShareInvitationList, Members: &m_ResourceShareInvitationList, Type: smithy.ShapeTypeList, Ext: &e_ResourceShareInvitationList})
+var s_ResourceShareInvitationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceShareInvitation, Members: &mResourceShareInvitation, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceShareInvitationList_member})
+var sResourceShareInvitationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareInvitationStatus, Members: &mResourceShareInvitationStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareInvitationStatus})
+var sResourceShareInvitationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationStatus_PENDING})
+var sResourceShareInvitationStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationStatus_ACCEPTED})
+var sResourceShareInvitationStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationStatus_REJECTED})
+var sResourceShareInvitationStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareInvitationStatus_EXPIRED})
+var sResourceShareLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareLimitExceededException, Members: &mResourceShareLimitExceededException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareLimitExceededException})
+var sResourceShareLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceShareLimitExceededException_message})
+var s_ResourceShareList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceShareList, Members: &m_ResourceShareList, Type: smithy.ShapeTypeList, Ext: &e_ResourceShareList})
+var s_ResourceShareList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceShare, Members: &mResourceShare, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceShareList_member})
+var sResourceSharePermissionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSharePermissionDetail, Members: &mResourceSharePermissionDetail, Type: smithy.ShapeTypeStructure, Ext: &eResourceSharePermissionDetail})
+var sResourceSharePermissionDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionDetail_arn})
+var sResourceSharePermissionDetail_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionDetail_version})
+var sResourceSharePermissionDetail_defaultVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResourceSharePermissionDetail_defaultVersion})
+var sResourceSharePermissionDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionDetail_name})
+var sResourceSharePermissionDetail_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionDetail_resourceType})
+var sResourceSharePermissionDetail_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionDetail_permission})
+var sResourceSharePermissionDetail_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterDeclarationList, Members: &m_PermissionTemplateParameterDeclarationList, Type: smithy.ShapeTypeList, Ext: &eResourceSharePermissionDetail_permissionTemplateParameters})
+var sResourceSharePermissionDetail_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceSharePermissionDetail_creationTime})
+var sResourceSharePermissionDetail_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceSharePermissionDetail_lastUpdatedTime})
+var sResourceSharePermissionDetail_isResourceTypeDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isResourceTypeDefault", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResourceSharePermissionDetail_isResourceTypeDefault})
+var sResourceSharePermissionDetail_permissionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionType", ID: &iPermissionType, Members: &mPermissionType, Type: smithy.ShapeTypeEnum, Ext: &eResourceSharePermissionDetail_permissionType})
+var sResourceSharePermissionDetail_featureSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "featureSet", ID: &iPermissionFeatureSet, Members: &mPermissionFeatureSet, Type: smithy.ShapeTypeEnum, Ext: &eResourceSharePermissionDetail_featureSet})
+var sResourceSharePermissionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPermissionStatus, Members: &mPermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceSharePermissionDetail_status})
+var sResourceSharePermissionDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eResourceSharePermissionDetail_tags})
+var sResourceSharePermissionDetail_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eResourceSharePermissionDetail_resourceOwner})
+var s_ResourceSharePermissionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSharePermissionList, Members: &m_ResourceSharePermissionList, Type: smithy.ShapeTypeList, Ext: &e_ResourceSharePermissionList})
+var s_ResourceSharePermissionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSharePermissionSummary, Members: &mResourceSharePermissionSummary, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceSharePermissionList_member})
+var sResourceSharePermissionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSharePermissionSummary, Members: &mResourceSharePermissionSummary, Type: smithy.ShapeTypeStructure, Ext: &eResourceSharePermissionSummary})
+var sResourceSharePermissionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionSummary_arn})
+var sResourceSharePermissionSummary_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionSummary_version})
+var sResourceSharePermissionSummary_defaultVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResourceSharePermissionSummary_defaultVersion})
+var sResourceSharePermissionSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionSummary_name})
+var sResourceSharePermissionSummary_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionSummary_resourceType})
+var sResourceSharePermissionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceSharePermissionSummary_status})
+var sResourceSharePermissionSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceSharePermissionSummary_creationTime})
+var sResourceSharePermissionSummary_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceSharePermissionSummary_lastUpdatedTime})
+var sResourceSharePermissionSummary_isResourceTypeDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isResourceTypeDefault", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResourceSharePermissionSummary_isResourceTypeDefault})
+var sResourceSharePermissionSummary_permissionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionType", ID: &iPermissionType, Members: &mPermissionType, Type: smithy.ShapeTypeEnum, Ext: &eResourceSharePermissionSummary_permissionType})
+var sResourceSharePermissionSummary_featureSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "featureSet", ID: &iPermissionFeatureSet, Members: &mPermissionFeatureSet, Type: smithy.ShapeTypeEnum, Ext: &eResourceSharePermissionSummary_featureSet})
+var sResourceSharePermissionSummary_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterList, Members: &m_PermissionTemplateParameterList, Type: smithy.ShapeTypeList, Ext: &eResourceSharePermissionSummary_permissionTemplateParameters})
+var sResourceSharePermissionSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eResourceSharePermissionSummary_tags})
+var sResourceSharePermissionSummary_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eResourceSharePermissionSummary_resourceOwner})
+var sResourceShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareStatus, Members: &mResourceShareStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceShareStatus})
+var sResourceShareStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareStatus_PENDING})
+var sResourceShareStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareStatus_ACTIVE})
+var sResourceShareStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareStatus_FAILED})
+var sResourceShareStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareStatus_DELETING})
+var sResourceShareStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareStatus_DELETED})
+var sResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceStatus})
+var sResourceStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_AVAILABLE})
+var sResourceStatus_ZONAL_RESOURCE_INACCESSIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_RESOURCE_INACCESSIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_ZONAL_RESOURCE_INACCESSIBLE})
+var sResourceStatus_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_LIMIT_EXCEEDED})
+var sResourceStatus_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_UNAVAILABLE})
+var sResourceStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_PENDING})
+var sServerInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerInternalException, Members: &mServerInternalException, Traits: &t58, Type: smithy.ShapeTypeStructure, Ext: &eServerInternalException})
+var sServerInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServerInternalException_message})
+var sServiceNameAndResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNameAndResourceType, Members: &mServiceNameAndResourceType, Type: smithy.ShapeTypeStructure, Ext: &eServiceNameAndResourceType})
+var sServiceNameAndResourceType_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceNameAndResourceType_resourceType})
+var sServiceNameAndResourceType_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceNameAndResourceType_serviceName})
+var sServiceNameAndResourceType_resourceRegionScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRegionScope", ID: &iResourceRegionScope, Members: &mResourceRegionScope, Type: smithy.ShapeTypeEnum, Ext: &eServiceNameAndResourceType_resourceRegionScope})
+var s_ServiceNameAndResourceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceNameAndResourceTypeList, Members: &m_ServiceNameAndResourceTypeList, Type: smithy.ShapeTypeList, Ext: &e_ServiceNameAndResourceTypeList})
+var s_ServiceNameAndResourceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceNameAndResourceType, Members: &mServiceNameAndResourceType, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceNameAndResourceTypeList_member})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var s_SourceArnOrAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceArnOrAccountList, Members: &m_SourceArnOrAccountList, Type: smithy.ShapeTypeList, Ext: &e_SourceArnOrAccountList})
+var s_SourceArnOrAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_SourceArnOrAccountList_member})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var sTagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure, Ext: &eTagFilter})
+var sTagFilter_tagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKey", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTagFilter_tagKey})
+var sTagFilter_tagValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagValues", ID: &i_TagValueList, Members: &m_TagValueList, Type: smithy.ShapeTypeList, Ext: &eTagFilter_tagValues})
+var s_TagFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagFilters, Members: &m_TagFilters, Type: smithy.ShapeTypeList, Ext: &e_TagFilters})
+var s_TagFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure, Ext: &e_TagFilters_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var sTagLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagLimitExceededException, Members: &mTagLimitExceededException, Traits: &t60, Type: smithy.ShapeTypeStructure, Ext: &eTagLimitExceededException})
+var sTagLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTagLimitExceededException_message})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTagPolicyViolationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPolicyViolationException, Members: &mTagPolicyViolationException, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eTagPolicyViolationException})
+var sTagPolicyViolationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTagPolicyViolationException_message})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TagValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValueList, Members: &m_TagValueList, Type: smithy.ShapeTypeList, Ext: &e_TagValueList})
+var s_TagValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValueList_member})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t62, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sUnknownResourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnknownResourceException, Members: &mUnknownResourceException, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eUnknownResourceException})
+var sUnknownResourceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnknownResourceException_message})
+var sUnmatchedPolicyPermissionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnmatchedPolicyPermissionException, Members: &mUnmatchedPolicyPermissionException, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eUnmatchedPolicyPermissionException})
+var sUnmatchedPolicyPermissionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnmatchedPolicyPermissionException_message})
+var sUpdatePermissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePermissionStatus, Members: &mUpdatePermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePermissionStatus})
+var sUpdatePermissionStatus_ATTACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePermissionStatus_ATTACHABLE})
+var sUpdatePermissionStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePermissionStatus_DEPRECATED})
+var sAcceptResourceShareInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptResourceShareInvitationRequest, Members: &mAcceptResourceShareInvitationRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptResourceShareInvitationRequest})
+var sAcceptResourceShareInvitationRequest_resourceShareInvitationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAcceptResourceShareInvitationRequest_resourceShareInvitationArn})
+var sAcceptResourceShareInvitationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAcceptResourceShareInvitationRequest_clientToken})
+var sAcceptResourceShareInvitationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptResourceShareInvitationResponse, Members: &mAcceptResourceShareInvitationResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptResourceShareInvitationResponse})
+var sAcceptResourceShareInvitationResponse_resourceShareInvitation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitation", ID: &iResourceShareInvitation, Members: &mResourceShareInvitation, Type: smithy.ShapeTypeStructure, Ext: &eAcceptResourceShareInvitationResponse_resourceShareInvitation})
+var sAcceptResourceShareInvitationResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAcceptResourceShareInvitationResponse_clientToken})
+var sAssociateResourceShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceShareRequest, Members: &mAssociateResourceShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceShareRequest})
+var sAssociateResourceShareRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceShareRequest_resourceShareArn})
+var sAssociateResourceShareRequest_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eAssociateResourceShareRequest_resourceArns})
+var sAssociateResourceShareRequest_principals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principals", ID: &i_PrincipalArnOrIdList, Members: &m_PrincipalArnOrIdList, Type: smithy.ShapeTypeList, Ext: &eAssociateResourceShareRequest_principals})
+var sAssociateResourceShareRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceShareRequest_clientToken})
+var sAssociateResourceShareRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_SourceArnOrAccountList, Members: &m_SourceArnOrAccountList, Type: smithy.ShapeTypeList, Ext: &eAssociateResourceShareRequest_sources})
+var sAssociateResourceShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceShareResponse, Members: &mAssociateResourceShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceShareResponse})
+var sAssociateResourceShareResponse_resourceShareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareAssociations", ID: &i_ResourceShareAssociationList, Members: &m_ResourceShareAssociationList, Type: smithy.ShapeTypeList, Ext: &eAssociateResourceShareResponse_resourceShareAssociations})
+var sAssociateResourceShareResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceShareResponse_clientToken})
+var sAssociateResourceSharePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceSharePermissionRequest, Members: &mAssociateResourceSharePermissionRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceSharePermissionRequest})
+var sAssociateResourceSharePermissionRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceSharePermissionRequest_resourceShareArn})
+var sAssociateResourceSharePermissionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceSharePermissionRequest_permissionArn})
+var sAssociateResourceSharePermissionRequest_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterInputList, Members: &m_PermissionTemplateParameterInputList, Type: smithy.ShapeTypeList, Ext: &eAssociateResourceSharePermissionRequest_permissionTemplateParameters})
+var sAssociateResourceSharePermissionRequest_replace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replace", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociateResourceSharePermissionRequest_replace})
+var sAssociateResourceSharePermissionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceSharePermissionRequest_clientToken})
+var sAssociateResourceSharePermissionRequest_permissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionVersion", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssociateResourceSharePermissionRequest_permissionVersion})
+var sAssociateResourceSharePermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceSharePermissionResponse, Members: &mAssociateResourceSharePermissionResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceSharePermissionResponse})
+var sAssociateResourceSharePermissionResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociateResourceSharePermissionResponse_returnValue})
+var sAssociateResourceSharePermissionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceSharePermissionResponse_clientToken})
+var sCreatePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePermissionRequest, Members: &mCreatePermissionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePermissionRequest})
+var sCreatePermissionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PermissionName, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionRequest_name})
+var sCreatePermissionRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionRequest_resourceType})
+var sCreatePermissionRequest_policyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplate", ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionRequest_policyTemplate})
+var sCreatePermissionRequest_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterDeclarationList, Members: &m_PermissionTemplateParameterDeclarationList, Type: smithy.ShapeTypeList, Ext: &eCreatePermissionRequest_permissionTemplateParameters})
+var sCreatePermissionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionRequest_clientToken})
+var sCreatePermissionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreatePermissionRequest_tags})
+var sCreatePermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePermissionResponse, Members: &mCreatePermissionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePermissionResponse})
+var sCreatePermissionResponse_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &iResourceSharePermissionSummary, Members: &mResourceSharePermissionSummary, Type: smithy.ShapeTypeStructure, Ext: &eCreatePermissionResponse_permission})
+var sCreatePermissionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionResponse_clientToken})
+var sCreatePermissionVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePermissionVersionRequest, Members: &mCreatePermissionVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePermissionVersionRequest})
+var sCreatePermissionVersionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionVersionRequest_permissionArn})
+var sCreatePermissionVersionRequest_policyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplate", ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionVersionRequest_policyTemplate})
+var sCreatePermissionVersionRequest_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterDeclarationList, Members: &m_PermissionTemplateParameterDeclarationList, Type: smithy.ShapeTypeList, Ext: &eCreatePermissionVersionRequest_permissionTemplateParameters})
+var sCreatePermissionVersionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionVersionRequest_clientToken})
+var sCreatePermissionVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePermissionVersionResponse, Members: &mCreatePermissionVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePermissionVersionResponse})
+var sCreatePermissionVersionResponse_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &iResourceSharePermissionDetail, Members: &mResourceSharePermissionDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreatePermissionVersionResponse_permission})
+var sCreatePermissionVersionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePermissionVersionResponse_clientToken})
+var sCreateResourceShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceShareRequest, Members: &mCreateResourceShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceShareRequest})
+var sCreateResourceShareRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateResourceShareRequest_name})
+var sCreateResourceShareRequest_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eCreateResourceShareRequest_resourceArns})
+var sCreateResourceShareRequest_principals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principals", ID: &i_PrincipalArnOrIdList, Members: &m_PrincipalArnOrIdList, Type: smithy.ShapeTypeList, Ext: &eCreateResourceShareRequest_principals})
+var sCreateResourceShareRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateResourceShareRequest_tags})
+var sCreateResourceShareRequest_allowExternalPrincipals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowExternalPrincipals", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateResourceShareRequest_allowExternalPrincipals})
+var sCreateResourceShareRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateResourceShareRequest_clientToken})
+var sCreateResourceShareRequest_permissionArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArns", ID: &i_PermissionArnList, Members: &m_PermissionArnList, Type: smithy.ShapeTypeList, Ext: &eCreateResourceShareRequest_permissionArns})
+var sCreateResourceShareRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_SourceArnOrAccountList, Members: &m_SourceArnOrAccountList, Type: smithy.ShapeTypeList, Ext: &eCreateResourceShareRequest_sources})
+var sCreateResourceShareRequest_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionArnAndTemplateParametersList, Members: &m_PermissionArnAndTemplateParametersList, Type: smithy.ShapeTypeList, Ext: &eCreateResourceShareRequest_permissionTemplateParameters})
+var sCreateResourceShareRequest_resourceShareConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareConfiguration", ID: &iResourceShareConfiguration, Members: &mResourceShareConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceShareRequest_resourceShareConfiguration})
+var sCreateResourceShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceShareResponse, Members: &mCreateResourceShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceShareResponse})
+var sCreateResourceShareResponse_resourceShare = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShare", ID: &iResourceShare, Members: &mResourceShare, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceShareResponse_resourceShare})
+var sCreateResourceShareResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateResourceShareResponse_clientToken})
+var sDeletePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionRequest, Members: &mDeletePermissionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePermissionRequest})
+var sDeletePermissionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eDeletePermissionRequest_permissionArn})
+var sDeletePermissionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeletePermissionRequest_clientToken})
+var sDeletePermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionResponse, Members: &mDeletePermissionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePermissionResponse})
+var sDeletePermissionResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Traits: &t67, Type: smithy.ShapeTypeBoolean, Ext: &eDeletePermissionResponse_returnValue})
+var sDeletePermissionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeletePermissionResponse_clientToken})
+var sDeletePermissionResponse_permissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionStatus", ID: &iPermissionStatus, Members: &mPermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeletePermissionResponse_permissionStatus})
+var sDeletePermissionVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionVersionRequest, Members: &mDeletePermissionVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePermissionVersionRequest})
+var sDeletePermissionVersionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eDeletePermissionVersionRequest_permissionArn})
+var sDeletePermissionVersionRequest_permissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionVersion", ID: &i_Integer, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eDeletePermissionVersionRequest_permissionVersion})
+var sDeletePermissionVersionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeletePermissionVersionRequest_clientToken})
+var sDeletePermissionVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionVersionResponse, Members: &mDeletePermissionVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePermissionVersionResponse})
+var sDeletePermissionVersionResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Traits: &t67, Type: smithy.ShapeTypeBoolean, Ext: &eDeletePermissionVersionResponse_returnValue})
+var sDeletePermissionVersionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeletePermissionVersionResponse_clientToken})
+var sDeletePermissionVersionResponse_permissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionStatus", ID: &iPermissionStatus, Members: &mPermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeletePermissionVersionResponse_permissionStatus})
+var sDeleteResourceShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceShareRequest, Members: &mDeleteResourceShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceShareRequest})
+var sDeleteResourceShareRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceShareRequest_resourceShareArn})
+var sDeleteResourceShareRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceShareRequest_clientToken})
+var sDeleteResourceShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceShareResponse, Members: &mDeleteResourceShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceShareResponse})
+var sDeleteResourceShareResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Traits: &t67, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteResourceShareResponse_returnValue})
+var sDeleteResourceShareResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceShareResponse_clientToken})
+var sDisassociateResourceShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceShareRequest, Members: &mDisassociateResourceShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceShareRequest})
+var sDisassociateResourceShareRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceShareRequest_resourceShareArn})
+var sDisassociateResourceShareRequest_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eDisassociateResourceShareRequest_resourceArns})
+var sDisassociateResourceShareRequest_principals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principals", ID: &i_PrincipalArnOrIdList, Members: &m_PrincipalArnOrIdList, Type: smithy.ShapeTypeList, Ext: &eDisassociateResourceShareRequest_principals})
+var sDisassociateResourceShareRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceShareRequest_clientToken})
+var sDisassociateResourceShareRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_SourceArnOrAccountList, Members: &m_SourceArnOrAccountList, Type: smithy.ShapeTypeList, Ext: &eDisassociateResourceShareRequest_sources})
+var sDisassociateResourceShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceShareResponse, Members: &mDisassociateResourceShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceShareResponse})
+var sDisassociateResourceShareResponse_resourceShareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareAssociations", ID: &i_ResourceShareAssociationList, Members: &m_ResourceShareAssociationList, Type: smithy.ShapeTypeList, Ext: &eDisassociateResourceShareResponse_resourceShareAssociations})
+var sDisassociateResourceShareResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceShareResponse_clientToken})
+var sDisassociateResourceSharePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceSharePermissionRequest, Members: &mDisassociateResourceSharePermissionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceSharePermissionRequest})
+var sDisassociateResourceSharePermissionRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceSharePermissionRequest_resourceShareArn})
+var sDisassociateResourceSharePermissionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceSharePermissionRequest_permissionArn})
+var sDisassociateResourceSharePermissionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceSharePermissionRequest_clientToken})
+var sDisassociateResourceSharePermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceSharePermissionResponse, Members: &mDisassociateResourceSharePermissionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceSharePermissionResponse})
+var sDisassociateResourceSharePermissionResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDisassociateResourceSharePermissionResponse_returnValue})
+var sDisassociateResourceSharePermissionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceSharePermissionResponse_clientToken})
+var sEnableSharingWithAwsOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableSharingWithAwsOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableSharingWithAwsOrganizationRequest})
+var sEnableSharingWithAwsOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableSharingWithAwsOrganizationResponse, Members: &mEnableSharingWithAwsOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eEnableSharingWithAwsOrganizationResponse})
+var sEnableSharingWithAwsOrganizationResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Traits: &t67, Type: smithy.ShapeTypeBoolean, Ext: &eEnableSharingWithAwsOrganizationResponse_returnValue})
+var sGetPermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPermissionRequest, Members: &mGetPermissionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPermissionRequest})
+var sGetPermissionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetPermissionRequest_permissionArn})
+var sGetPermissionRequest_permissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionVersion", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eGetPermissionRequest_permissionVersion})
+var sGetPermissionRequest_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterInputList, Members: &m_PermissionTemplateParameterInputList, Type: smithy.ShapeTypeList, Ext: &eGetPermissionRequest_permissionTemplateParameters})
+var sGetPermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPermissionResponse, Members: &mGetPermissionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPermissionResponse})
+var sGetPermissionResponse_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &iResourceSharePermissionDetail, Members: &mResourceSharePermissionDetail, Type: smithy.ShapeTypeStructure, Ext: &eGetPermissionResponse_permission})
+var sGetResourcePoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePoliciesRequest, Members: &mGetResourcePoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePoliciesRequest})
+var sGetResourcePoliciesRequest_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eGetResourcePoliciesRequest_resourceArns})
+var sGetResourcePoliciesRequest_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourcePoliciesRequest_principal})
+var sGetResourcePoliciesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourcePoliciesRequest_nextToken})
+var sGetResourcePoliciesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetResourcePoliciesRequest_maxResults})
+var sGetResourcePoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePoliciesResponse, Members: &mGetResourcePoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePoliciesResponse})
+var sGetResourcePoliciesResponse_policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policies", ID: &i_PolicyList, Members: &m_PolicyList, Type: smithy.ShapeTypeList, Ext: &eGetResourcePoliciesResponse_policies})
+var sGetResourcePoliciesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourcePoliciesResponse_nextToken})
+var sGetResourceShareAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceShareAssociationsRequest, Members: &mGetResourceShareAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceShareAssociationsRequest})
+var sGetResourceShareAssociationsRequest_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iResourceShareAssociationType, Members: &mResourceShareAssociationType, Type: smithy.ShapeTypeEnum, Ext: &eGetResourceShareAssociationsRequest_associationType})
+var sGetResourceShareAssociationsRequest_resourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArns", ID: &i_ResourceShareArnList, Members: &m_ResourceShareArnList, Type: smithy.ShapeTypeList, Ext: &eGetResourceShareAssociationsRequest_resourceShareArns})
+var sGetResourceShareAssociationsRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceShareAssociationsRequest_resourceArn})
+var sGetResourceShareAssociationsRequest_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceShareAssociationsRequest_principal})
+var sGetResourceShareAssociationsRequest_associationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationStatus", ID: &iResourceShareAssociationStatus, Members: &mResourceShareAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetResourceShareAssociationsRequest_associationStatus})
+var sGetResourceShareAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceShareAssociationsRequest_nextToken})
+var sGetResourceShareAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetResourceShareAssociationsRequest_maxResults})
+var sGetResourceShareAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceShareAssociationsResponse, Members: &mGetResourceShareAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceShareAssociationsResponse})
+var sGetResourceShareAssociationsResponse_resourceShareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareAssociations", ID: &i_ResourceShareAssociationList, Members: &m_ResourceShareAssociationList, Type: smithy.ShapeTypeList, Ext: &eGetResourceShareAssociationsResponse_resourceShareAssociations})
+var sGetResourceShareAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceShareAssociationsResponse_nextToken})
+var sGetResourceShareInvitationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceShareInvitationsRequest, Members: &mGetResourceShareInvitationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceShareInvitationsRequest})
+var sGetResourceShareInvitationsRequest_resourceShareInvitationArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitationArns", ID: &i_ResourceShareInvitationArnList, Members: &m_ResourceShareInvitationArnList, Type: smithy.ShapeTypeList, Ext: &eGetResourceShareInvitationsRequest_resourceShareInvitationArns})
+var sGetResourceShareInvitationsRequest_resourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArns", ID: &i_ResourceShareArnList, Members: &m_ResourceShareArnList, Type: smithy.ShapeTypeList, Ext: &eGetResourceShareInvitationsRequest_resourceShareArns})
+var sGetResourceShareInvitationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceShareInvitationsRequest_nextToken})
+var sGetResourceShareInvitationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetResourceShareInvitationsRequest_maxResults})
+var sGetResourceShareInvitationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceShareInvitationsResponse, Members: &mGetResourceShareInvitationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceShareInvitationsResponse})
+var sGetResourceShareInvitationsResponse_resourceShareInvitations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitations", ID: &i_ResourceShareInvitationList, Members: &m_ResourceShareInvitationList, Type: smithy.ShapeTypeList, Ext: &eGetResourceShareInvitationsResponse_resourceShareInvitations})
+var sGetResourceShareInvitationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceShareInvitationsResponse_nextToken})
+var sGetResourceSharesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSharesRequest, Members: &mGetResourceSharesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceSharesRequest})
+var sGetResourceSharesRequest_resourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArns", ID: &i_ResourceShareArnList, Members: &m_ResourceShareArnList, Type: smithy.ShapeTypeList, Ext: &eGetResourceSharesRequest_resourceShareArns})
+var sGetResourceSharesRequest_resourceShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareStatus", ID: &iResourceShareStatus, Members: &mResourceShareStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetResourceSharesRequest_resourceShareStatus})
+var sGetResourceSharesRequest_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eGetResourceSharesRequest_resourceOwner})
+var sGetResourceSharesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceSharesRequest_name})
+var sGetResourceSharesRequest_tagFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagFilters", ID: &i_TagFilters, Members: &m_TagFilters, Type: smithy.ShapeTypeList, Ext: &eGetResourceSharesRequest_tagFilters})
+var sGetResourceSharesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceSharesRequest_nextToken})
+var sGetResourceSharesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetResourceSharesRequest_maxResults})
+var sGetResourceSharesRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceSharesRequest_permissionArn})
+var sGetResourceSharesRequest_permissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionVersion", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eGetResourceSharesRequest_permissionVersion})
+var sGetResourceSharesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSharesResponse, Members: &mGetResourceSharesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceSharesResponse})
+var sGetResourceSharesResponse_resourceShares = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShares", ID: &i_ResourceShareList, Members: &m_ResourceShareList, Type: smithy.ShapeTypeList, Ext: &eGetResourceSharesResponse_resourceShares})
+var sGetResourceSharesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetResourceSharesResponse_nextToken})
+var sListPendingInvitationResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPendingInvitationResourcesRequest, Members: &mListPendingInvitationResourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPendingInvitationResourcesRequest})
+var sListPendingInvitationResourcesRequest_resourceShareInvitationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPendingInvitationResourcesRequest_resourceShareInvitationArn})
+var sListPendingInvitationResourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPendingInvitationResourcesRequest_nextToken})
+var sListPendingInvitationResourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPendingInvitationResourcesRequest_maxResults})
+var sListPendingInvitationResourcesRequest_resourceRegionScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRegionScope", ID: &iResourceRegionScopeFilter, Members: &mResourceRegionScopeFilter, Type: smithy.ShapeTypeEnum, Ext: &eListPendingInvitationResourcesRequest_resourceRegionScope})
+var sListPendingInvitationResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPendingInvitationResourcesResponse, Members: &mListPendingInvitationResourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPendingInvitationResourcesResponse})
+var sListPendingInvitationResourcesResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eListPendingInvitationResourcesResponse_resources})
+var sListPendingInvitationResourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPendingInvitationResourcesResponse_nextToken})
+var sListPermissionAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionAssociationsRequest, Members: &mListPermissionAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPermissionAssociationsRequest})
+var sListPermissionAssociationsRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionAssociationsRequest_permissionArn})
+var sListPermissionAssociationsRequest_permissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionVersion", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListPermissionAssociationsRequest_permissionVersion})
+var sListPermissionAssociationsRequest_associationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationStatus", ID: &iResourceShareAssociationStatus, Members: &mResourceShareAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eListPermissionAssociationsRequest_associationStatus})
+var sListPermissionAssociationsRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionAssociationsRequest_resourceType})
+var sListPermissionAssociationsRequest_featureSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "featureSet", ID: &iPermissionFeatureSet, Members: &mPermissionFeatureSet, Type: smithy.ShapeTypeEnum, Ext: &eListPermissionAssociationsRequest_featureSet})
+var sListPermissionAssociationsRequest_defaultVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListPermissionAssociationsRequest_defaultVersion})
+var sListPermissionAssociationsRequest_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eListPermissionAssociationsRequest_resourceOwner})
+var sListPermissionAssociationsRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionAssociationsRequest_resourceShareArn})
+var sListPermissionAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionAssociationsRequest_nextToken})
+var sListPermissionAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPermissionAssociationsRequest_maxResults})
+var sListPermissionAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionAssociationsResponse, Members: &mListPermissionAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPermissionAssociationsResponse})
+var sListPermissionAssociationsResponse_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &i_AssociatedPermissionList, Members: &m_AssociatedPermissionList, Type: smithy.ShapeTypeList, Ext: &eListPermissionAssociationsResponse_permissions})
+var sListPermissionAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionAssociationsResponse_nextToken})
+var sListPermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionsRequest, Members: &mListPermissionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPermissionsRequest})
+var sListPermissionsRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionsRequest_resourceType})
+var sListPermissionsRequest_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eListPermissionsRequest_resourceOwner})
+var sListPermissionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionsRequest_nextToken})
+var sListPermissionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPermissionsRequest_maxResults})
+var sListPermissionsRequest_permissionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionType", ID: &iPermissionTypeFilter, Members: &mPermissionTypeFilter, Type: smithy.ShapeTypeEnum, Ext: &eListPermissionsRequest_permissionType})
+var sListPermissionsRequest_permissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionStatus", ID: &iPermissionStatus, Members: &mPermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &eListPermissionsRequest_permissionStatus})
+var sListPermissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionsResponse, Members: &mListPermissionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPermissionsResponse})
+var sListPermissionsResponse_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &i_ResourceSharePermissionList, Members: &m_ResourceSharePermissionList, Type: smithy.ShapeTypeList, Ext: &eListPermissionsResponse_permissions})
+var sListPermissionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionsResponse_nextToken})
+var sListPermissionVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionVersionsRequest, Members: &mListPermissionVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPermissionVersionsRequest})
+var sListPermissionVersionsRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionVersionsRequest_permissionArn})
+var sListPermissionVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionVersionsRequest_nextToken})
+var sListPermissionVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPermissionVersionsRequest_maxResults})
+var sListPermissionVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPermissionVersionsResponse, Members: &mListPermissionVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPermissionVersionsResponse})
+var sListPermissionVersionsResponse_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &i_ResourceSharePermissionList, Members: &m_ResourceSharePermissionList, Type: smithy.ShapeTypeList, Ext: &eListPermissionVersionsResponse_permissions})
+var sListPermissionVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPermissionVersionsResponse_nextToken})
+var sListPrincipalsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrincipalsRequest, Members: &mListPrincipalsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPrincipalsRequest})
+var sListPrincipalsRequest_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eListPrincipalsRequest_resourceOwner})
+var sListPrincipalsRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPrincipalsRequest_resourceArn})
+var sListPrincipalsRequest_principals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principals", ID: &i_PrincipalArnOrIdList, Members: &m_PrincipalArnOrIdList, Type: smithy.ShapeTypeList, Ext: &eListPrincipalsRequest_principals})
+var sListPrincipalsRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPrincipalsRequest_resourceType})
+var sListPrincipalsRequest_resourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArns", ID: &i_ResourceShareArnList, Members: &m_ResourceShareArnList, Type: smithy.ShapeTypeList, Ext: &eListPrincipalsRequest_resourceShareArns})
+var sListPrincipalsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPrincipalsRequest_nextToken})
+var sListPrincipalsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPrincipalsRequest_maxResults})
+var sListPrincipalsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrincipalsResponse, Members: &mListPrincipalsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPrincipalsResponse})
+var sListPrincipalsResponse_principals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principals", ID: &i_PrincipalList, Members: &m_PrincipalList, Type: smithy.ShapeTypeList, Ext: &eListPrincipalsResponse_principals})
+var sListPrincipalsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPrincipalsResponse_nextToken})
+var sListReplacePermissionAssociationsWorkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplacePermissionAssociationsWorkRequest, Members: &mListReplacePermissionAssociationsWorkRequest, Type: smithy.ShapeTypeStructure, Ext: &eListReplacePermissionAssociationsWorkRequest})
+var sListReplacePermissionAssociationsWorkRequest_workIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workIds", ID: &i_ReplacePermissionAssociationsWorkIdList, Members: &m_ReplacePermissionAssociationsWorkIdList, Type: smithy.ShapeTypeList, Ext: &eListReplacePermissionAssociationsWorkRequest_workIds})
+var sListReplacePermissionAssociationsWorkRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iReplacePermissionAssociationsWorkStatus, Members: &mReplacePermissionAssociationsWorkStatus, Type: smithy.ShapeTypeEnum, Ext: &eListReplacePermissionAssociationsWorkRequest_status})
+var sListReplacePermissionAssociationsWorkRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReplacePermissionAssociationsWorkRequest_nextToken})
+var sListReplacePermissionAssociationsWorkRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListReplacePermissionAssociationsWorkRequest_maxResults})
+var sListReplacePermissionAssociationsWorkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplacePermissionAssociationsWorkResponse, Members: &mListReplacePermissionAssociationsWorkResponse, Type: smithy.ShapeTypeStructure, Ext: &eListReplacePermissionAssociationsWorkResponse})
+var sListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replacePermissionAssociationsWorks", ID: &i_ReplacePermissionAssociationsWorkList, Members: &m_ReplacePermissionAssociationsWorkList, Type: smithy.ShapeTypeList, Ext: &eListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks})
+var sListReplacePermissionAssociationsWorkResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReplacePermissionAssociationsWorkResponse_nextToken})
+var sListResourceSharePermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSharePermissionsRequest, Members: &mListResourceSharePermissionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResourceSharePermissionsRequest})
+var sListResourceSharePermissionsRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourceSharePermissionsRequest_resourceShareArn})
+var sListResourceSharePermissionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourceSharePermissionsRequest_nextToken})
+var sListResourceSharePermissionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListResourceSharePermissionsRequest_maxResults})
+var sListResourceSharePermissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSharePermissionsResponse, Members: &mListResourceSharePermissionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResourceSharePermissionsResponse})
+var sListResourceSharePermissionsResponse_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &i_ResourceSharePermissionList, Members: &m_ResourceSharePermissionList, Type: smithy.ShapeTypeList, Ext: &eListResourceSharePermissionsResponse_permissions})
+var sListResourceSharePermissionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourceSharePermissionsResponse_nextToken})
+var sListResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesRequest, Members: &mListResourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesRequest})
+var sListResourcesRequest_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &iResourceOwner, Members: &mResourceOwner, Type: smithy.ShapeTypeEnum, Ext: &eListResourcesRequest_resourceOwner})
+var sListResourcesRequest_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourcesRequest_principal})
+var sListResourcesRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourcesRequest_resourceType})
+var sListResourcesRequest_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eListResourcesRequest_resourceArns})
+var sListResourcesRequest_resourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArns", ID: &i_ResourceShareArnList, Members: &m_ResourceShareArnList, Type: smithy.ShapeTypeList, Ext: &eListResourcesRequest_resourceShareArns})
+var sListResourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourcesRequest_nextToken})
+var sListResourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListResourcesRequest_maxResults})
+var sListResourcesRequest_resourceRegionScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRegionScope", ID: &iResourceRegionScopeFilter, Members: &mResourceRegionScopeFilter, Type: smithy.ShapeTypeEnum, Ext: &eListResourcesRequest_resourceRegionScope})
+var sListResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesResponse, Members: &mListResourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesResponse})
+var sListResourcesResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eListResourcesResponse_resources})
+var sListResourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourcesResponse_nextToken})
+var sListResourceTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTypesRequest, Members: &mListResourceTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResourceTypesRequest})
+var sListResourceTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourceTypesRequest_nextToken})
+var sListResourceTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListResourceTypesRequest_maxResults})
+var sListResourceTypesRequest_resourceRegionScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRegionScope", ID: &iResourceRegionScopeFilter, Members: &mResourceRegionScopeFilter, Type: smithy.ShapeTypeEnum, Ext: &eListResourceTypesRequest_resourceRegionScope})
+var sListResourceTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTypesResponse, Members: &mListResourceTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResourceTypesResponse})
+var sListResourceTypesResponse_resourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTypes", ID: &i_ServiceNameAndResourceTypeList, Members: &m_ServiceNameAndResourceTypeList, Type: smithy.ShapeTypeList, Ext: &eListResourceTypesResponse_resourceTypes})
+var sListResourceTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListResourceTypesResponse_nextToken})
+var sListSourceAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceAssociationsRequest, Members: &mListSourceAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSourceAssociationsRequest})
+var sListSourceAssociationsRequest_resourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArns", ID: &i_ResourceShareArnList, Members: &m_ResourceShareArnList, Type: smithy.ShapeTypeList, Ext: &eListSourceAssociationsRequest_resourceShareArns})
+var sListSourceAssociationsRequest_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSourceAssociationsRequest_sourceId})
+var sListSourceAssociationsRequest_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSourceAssociationsRequest_sourceType})
+var sListSourceAssociationsRequest_associationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationStatus", ID: &iResourceShareAssociationStatus, Members: &mResourceShareAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eListSourceAssociationsRequest_associationStatus})
+var sListSourceAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSourceAssociationsRequest_nextToken})
+var sListSourceAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListSourceAssociationsRequest_maxResults})
+var sListSourceAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceAssociationsResponse, Members: &mListSourceAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSourceAssociationsResponse})
+var sListSourceAssociationsResponse_sourceAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAssociations", ID: &i_AssociatedSourceList, Members: &m_AssociatedSourceList, Type: smithy.ShapeTypeList, Ext: &eListSourceAssociationsResponse_sourceAssociations})
+var sListSourceAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSourceAssociationsResponse_nextToken})
+var sPromotePermissionCreatedFromPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromotePermissionCreatedFromPolicyRequest, Members: &mPromotePermissionCreatedFromPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePromotePermissionCreatedFromPolicyRequest})
+var sPromotePermissionCreatedFromPolicyRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePromotePermissionCreatedFromPolicyRequest_permissionArn})
+var sPromotePermissionCreatedFromPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePromotePermissionCreatedFromPolicyRequest_name})
+var sPromotePermissionCreatedFromPolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePromotePermissionCreatedFromPolicyRequest_clientToken})
+var sPromotePermissionCreatedFromPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromotePermissionCreatedFromPolicyResponse, Members: &mPromotePermissionCreatedFromPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePromotePermissionCreatedFromPolicyResponse})
+var sPromotePermissionCreatedFromPolicyResponse_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &iResourceSharePermissionSummary, Members: &mResourceSharePermissionSummary, Type: smithy.ShapeTypeStructure, Ext: &ePromotePermissionCreatedFromPolicyResponse_permission})
+var sPromotePermissionCreatedFromPolicyResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePromotePermissionCreatedFromPolicyResponse_clientToken})
+var sPromoteResourceShareCreatedFromPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteResourceShareCreatedFromPolicyRequest, Members: &mPromoteResourceShareCreatedFromPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePromoteResourceShareCreatedFromPolicyRequest})
+var sPromoteResourceShareCreatedFromPolicyRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ePromoteResourceShareCreatedFromPolicyRequest_resourceShareArn})
+var sPromoteResourceShareCreatedFromPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteResourceShareCreatedFromPolicyResponse, Members: &mPromoteResourceShareCreatedFromPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePromoteResourceShareCreatedFromPolicyResponse})
+var sPromoteResourceShareCreatedFromPolicyResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Traits: &t67, Type: smithy.ShapeTypeBoolean, Ext: &ePromoteResourceShareCreatedFromPolicyResponse_returnValue})
+var sRejectResourceShareInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectResourceShareInvitationRequest, Members: &mRejectResourceShareInvitationRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectResourceShareInvitationRequest})
+var sRejectResourceShareInvitationRequest_resourceShareInvitationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRejectResourceShareInvitationRequest_resourceShareInvitationArn})
+var sRejectResourceShareInvitationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRejectResourceShareInvitationRequest_clientToken})
+var sRejectResourceShareInvitationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectResourceShareInvitationResponse, Members: &mRejectResourceShareInvitationResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectResourceShareInvitationResponse})
+var sRejectResourceShareInvitationResponse_resourceShareInvitation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareInvitation", ID: &iResourceShareInvitation, Members: &mResourceShareInvitation, Type: smithy.ShapeTypeStructure, Ext: &eRejectResourceShareInvitationResponse_resourceShareInvitation})
+var sRejectResourceShareInvitationResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRejectResourceShareInvitationResponse_clientToken})
+var sReplacePermissionAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacePermissionAssociationsRequest, Members: &mReplacePermissionAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eReplacePermissionAssociationsRequest})
+var sReplacePermissionAssociationsRequest_fromPermissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromPermissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsRequest_fromPermissionArn})
+var sReplacePermissionAssociationsRequest_fromPermissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromPermissionVersion", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eReplacePermissionAssociationsRequest_fromPermissionVersion})
+var sReplacePermissionAssociationsRequest_toPermissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toPermissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsRequest_toPermissionArn})
+var sReplacePermissionAssociationsRequest_permissionTemplateParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionTemplateParameters", ID: &i_PermissionTemplateParameterInputList, Members: &m_PermissionTemplateParameterInputList, Type: smithy.ShapeTypeList, Ext: &eReplacePermissionAssociationsRequest_permissionTemplateParameters})
+var sReplacePermissionAssociationsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsRequest_clientToken})
+var sReplacePermissionAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacePermissionAssociationsResponse, Members: &mReplacePermissionAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eReplacePermissionAssociationsResponse})
+var sReplacePermissionAssociationsResponse_replacePermissionAssociationsWork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replacePermissionAssociationsWork", ID: &iReplacePermissionAssociationsWork, Members: &mReplacePermissionAssociationsWork, Type: smithy.ShapeTypeStructure, Ext: &eReplacePermissionAssociationsResponse_replacePermissionAssociationsWork})
+var sReplacePermissionAssociationsResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplacePermissionAssociationsResponse_clientToken})
+var sSetDefaultPermissionVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetDefaultPermissionVersionRequest, Members: &mSetDefaultPermissionVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eSetDefaultPermissionVersionRequest})
+var sSetDefaultPermissionVersionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSetDefaultPermissionVersionRequest_permissionArn})
+var sSetDefaultPermissionVersionRequest_permissionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionVersion", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eSetDefaultPermissionVersionRequest_permissionVersion})
+var sSetDefaultPermissionVersionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSetDefaultPermissionVersionRequest_clientToken})
+var sSetDefaultPermissionVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetDefaultPermissionVersionResponse, Members: &mSetDefaultPermissionVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eSetDefaultPermissionVersionResponse})
+var sSetDefaultPermissionVersionResponse_returnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnValue", ID: &i_Boolean, Traits: &t67, Type: smithy.ShapeTypeBoolean, Ext: &eSetDefaultPermissionVersionResponse_returnValue})
+var sSetDefaultPermissionVersionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSetDefaultPermissionVersionResponse_clientToken})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceShareArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceShareArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdatePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePermissionRequest, Members: &mUpdatePermissionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePermissionRequest})
+var sUpdatePermissionRequest_permissionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdatePermissionRequest_permissionArn})
+var sUpdatePermissionRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iUpdatePermissionStatus, Members: &mUpdatePermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePermissionRequest_status})
+var sUpdatePermissionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdatePermissionRequest_clientToken})
+var sUpdatePermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePermissionResponse, Members: &mUpdatePermissionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePermissionResponse})
+var sUpdatePermissionResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdatePermissionResponse_clientToken})
+var sUpdatePermissionResponse_permissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionStatus", ID: &iUpdatePermissionStatus, Members: &mUpdatePermissionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePermissionResponse_permissionStatus})
+var sUpdateResourceShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceShareRequest, Members: &mUpdateResourceShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceShareRequest})
+var sUpdateResourceShareRequest_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceShareRequest_resourceShareArn})
+var sUpdateResourceShareRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceShareRequest_name})
+var sUpdateResourceShareRequest_allowExternalPrincipals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowExternalPrincipals", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateResourceShareRequest_allowExternalPrincipals})
+var sUpdateResourceShareRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceShareRequest_clientToken})
+var sUpdateResourceShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceShareResponse, Members: &mUpdateResourceShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceShareResponse})
+var sUpdateResourceShareResponse_resourceShare = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShare", ID: &iResourceShare, Members: &mResourceShare, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceShareResponse_resourceShare})
+var sUpdateResourceShareResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceShareResponse_clientToken})
+
+var AcceptResourceShareInvitation = &sAcceptResourceShareInvitation
+
+var AssociateResourceShare = &sAssociateResourceShare
+
+var AssociateResourceSharePermission = &sAssociateResourceSharePermission
+
+var CreatePermission = &sCreatePermission
+
+var CreatePermissionVersion = &sCreatePermissionVersion
+
+var CreateResourceShare = &sCreateResourceShare
+
+var DeletePermission = &sDeletePermission
+
+var DeletePermissionVersion = &sDeletePermissionVersion
+
+var DeleteResourceShare = &sDeleteResourceShare
+
+var DisassociateResourceShare = &sDisassociateResourceShare
+
+var DisassociateResourceSharePermission = &sDisassociateResourceSharePermission
+
+var EnableSharingWithAwsOrganization = &sEnableSharingWithAwsOrganization
+
+var GetPermission = &sGetPermission
+
+var GetResourcePolicies = &sGetResourcePolicies
+
+var GetResourceShareAssociations = &sGetResourceShareAssociations
+
+var GetResourceShareInvitations = &sGetResourceShareInvitations
+
+var GetResourceShares = &sGetResourceShares
+
+var ListPendingInvitationResources = &sListPendingInvitationResources
+
+var ListPermissionAssociations = &sListPermissionAssociations
+
+var ListPermissions = &sListPermissions
+
+var ListPermissionVersions = &sListPermissionVersions
+
+var ListPrincipals = &sListPrincipals
+
+var ListReplacePermissionAssociationsWork = &sListReplacePermissionAssociationsWork
+
+var ListResources = &sListResources
+
+var ListResourceSharePermissions = &sListResourceSharePermissions
+
+var ListResourceTypes = &sListResourceTypes
+
+var ListSourceAssociations = &sListSourceAssociations
+
+var PromotePermissionCreatedFromPolicy = &sPromotePermissionCreatedFromPolicy
+
+var PromoteResourceShareCreatedFromPolicy = &sPromoteResourceShareCreatedFromPolicy
+
+var RejectResourceShareInvitation = &sRejectResourceShareInvitation
+
+var ReplacePermissionAssociations = &sReplacePermissionAssociations
+
+var SetDefaultPermissionVersion = &sSetDefaultPermissionVersion
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdatePermission = &sUpdatePermission
+
+var UpdateResourceShare = &sUpdateResourceShare
+
+var _AmazonResourceSharing = &s_AmazonResourceSharing
+
+var AssociatedPermission = &sAssociatedPermission
+var AssociatedPermission_arn = &sAssociatedPermission_arn
+var AssociatedPermission_permissionVersion = &sAssociatedPermission_permissionVersion
+var AssociatedPermission_defaultVersion = &sAssociatedPermission_defaultVersion
+var AssociatedPermission_resourceType = &sAssociatedPermission_resourceType
+var AssociatedPermission_status = &sAssociatedPermission_status
+var AssociatedPermission_featureSet = &sAssociatedPermission_featureSet
+var AssociatedPermission_lastUpdatedTime = &sAssociatedPermission_lastUpdatedTime
+var AssociatedPermission_resourceShareArn = &sAssociatedPermission_resourceShareArn
+var AssociatedPermission_permissionTemplateParameters = &sAssociatedPermission_permissionTemplateParameters
+
+var _AssociatedPermissionList = &s_AssociatedPermissionList
+var _AssociatedPermissionList_member = &s_AssociatedPermissionList_member
+
+var AssociatedSource = &sAssociatedSource
+var AssociatedSource_resourceShareArn = &sAssociatedSource_resourceShareArn
+var AssociatedSource_sourceId = &sAssociatedSource_sourceId
+var AssociatedSource_sourceType = &sAssociatedSource_sourceType
+var AssociatedSource_status = &sAssociatedSource_status
+var AssociatedSource_lastUpdatedTime = &sAssociatedSource_lastUpdatedTime
+var AssociatedSource_creationTime = &sAssociatedSource_creationTime
+var AssociatedSource_statusMessage = &sAssociatedSource_statusMessage
+
+var _AssociatedSourceList = &s_AssociatedSourceList
+var _AssociatedSourceList_member = &s_AssociatedSourceList_member
+
+var _Boolean = &s_Boolean
+
+var _DateTime = &s_DateTime
+
+var IdempotentParameterMismatchException = &sIdempotentParameterMismatchException
+var IdempotentParameterMismatchException_message = &sIdempotentParameterMismatchException_message
+
+var _Integer = &s_Integer
+
+var InvalidClientTokenException = &sInvalidClientTokenException
+var InvalidClientTokenException_message = &sInvalidClientTokenException_message
+
+var InvalidMaxResultsException = &sInvalidMaxResultsException
+var InvalidMaxResultsException_message = &sInvalidMaxResultsException_message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_message = &sInvalidNextTokenException_message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_message = &sInvalidParameterException_message
+
+var InvalidPolicyException = &sInvalidPolicyException
+var InvalidPolicyException_message = &sInvalidPolicyException_message
+
+var InvalidResourceTypeException = &sInvalidResourceTypeException
+var InvalidResourceTypeException_message = &sInvalidResourceTypeException_message
+
+var InvalidStateTransitionException = &sInvalidStateTransitionException
+var InvalidStateTransitionException_message = &sInvalidStateTransitionException_message
+
+var MalformedArnException = &sMalformedArnException
+var MalformedArnException_message = &sMalformedArnException_message
+
+var MalformedPolicyTemplateException = &sMalformedPolicyTemplateException
+var MalformedPolicyTemplateException_message = &sMalformedPolicyTemplateException_message
+
+var _MaxResults = &s_MaxResults
+
+var MissingRequiredParameterException = &sMissingRequiredParameterException
+var MissingRequiredParameterException_message = &sMissingRequiredParameterException_message
+
+var OperationNotPermittedException = &sOperationNotPermittedException
+var OperationNotPermittedException_message = &sOperationNotPermittedException_message
+
+var PermissionAlreadyExistsException = &sPermissionAlreadyExistsException
+var PermissionAlreadyExistsException_message = &sPermissionAlreadyExistsException_message
+
+var PermissionArnAndTemplateParameters = &sPermissionArnAndTemplateParameters
+var PermissionArnAndTemplateParameters_permissionArn = &sPermissionArnAndTemplateParameters_permissionArn
+var PermissionArnAndTemplateParameters_permissionTemplateParameters = &sPermissionArnAndTemplateParameters_permissionTemplateParameters
+
+var _PermissionArnAndTemplateParametersList = &s_PermissionArnAndTemplateParametersList
+var _PermissionArnAndTemplateParametersList_member = &s_PermissionArnAndTemplateParametersList_member
+
+var _PermissionArnList = &s_PermissionArnList
+var _PermissionArnList_member = &s_PermissionArnList_member
+
+var PermissionFeatureSet = &sPermissionFeatureSet
+var PermissionFeatureSet_CREATED_FROM_POLICY = &sPermissionFeatureSet_CREATED_FROM_POLICY
+var PermissionFeatureSet_PROMOTING_TO_STANDARD = &sPermissionFeatureSet_PROMOTING_TO_STANDARD
+var PermissionFeatureSet_STANDARD = &sPermissionFeatureSet_STANDARD
+
+var PermissionLimitExceededException = &sPermissionLimitExceededException
+var PermissionLimitExceededException_message = &sPermissionLimitExceededException_message
+
+var _PermissionName = &s_PermissionName
+
+var PermissionStatus = &sPermissionStatus
+var PermissionStatus_ATTACHABLE = &sPermissionStatus_ATTACHABLE
+var PermissionStatus_UNATTACHABLE = &sPermissionStatus_UNATTACHABLE
+var PermissionStatus_DELETING = &sPermissionStatus_DELETING
+var PermissionStatus_DELETED = &sPermissionStatus_DELETED
+var PermissionStatus_DEPRECATED = &sPermissionStatus_DEPRECATED
+
+var PermissionTemplateParameter = &sPermissionTemplateParameter
+var PermissionTemplateParameter_name = &sPermissionTemplateParameter_name
+var PermissionTemplateParameter_type = &sPermissionTemplateParameter_type
+var PermissionTemplateParameter_description = &sPermissionTemplateParameter_description
+var PermissionTemplateParameter_values = &sPermissionTemplateParameter_values
+
+var PermissionTemplateParameterDeclaration = &sPermissionTemplateParameterDeclaration
+var PermissionTemplateParameterDeclaration_name = &sPermissionTemplateParameterDeclaration_name
+var PermissionTemplateParameterDeclaration_type = &sPermissionTemplateParameterDeclaration_type
+var PermissionTemplateParameterDeclaration_description = &sPermissionTemplateParameterDeclaration_description
+
+var _PermissionTemplateParameterDeclarationList = &s_PermissionTemplateParameterDeclarationList
+var _PermissionTemplateParameterDeclarationList_member = &s_PermissionTemplateParameterDeclarationList_member
+
+var PermissionTemplateParameterInput = &sPermissionTemplateParameterInput
+var PermissionTemplateParameterInput_name = &sPermissionTemplateParameterInput_name
+var PermissionTemplateParameterInput_values = &sPermissionTemplateParameterInput_values
+
+var _PermissionTemplateParameterInputList = &s_PermissionTemplateParameterInputList
+var _PermissionTemplateParameterInputList_member = &s_PermissionTemplateParameterInputList_member
+
+var _PermissionTemplateParameterList = &s_PermissionTemplateParameterList
+var _PermissionTemplateParameterList_member = &s_PermissionTemplateParameterList_member
+
+var PermissionTemplateParameterType = &sPermissionTemplateParameterType
+var PermissionTemplateParameterType_STRING = &sPermissionTemplateParameterType_STRING
+var PermissionTemplateParameterType_STRING_LIST = &sPermissionTemplateParameterType_STRING_LIST
+
+var _PermissionTemplateParameterValueList = &s_PermissionTemplateParameterValueList
+var _PermissionTemplateParameterValueList_member = &s_PermissionTemplateParameterValueList_member
+
+var PermissionType = &sPermissionType
+var PermissionType_CUSTOMER_MANAGED = &sPermissionType_CUSTOMER_MANAGED
+var PermissionType_AWS_MANAGED = &sPermissionType_AWS_MANAGED
+
+var PermissionTypeFilter = &sPermissionTypeFilter
+var PermissionTypeFilter_ALL = &sPermissionTypeFilter_ALL
+var PermissionTypeFilter_AWS_MANAGED = &sPermissionTypeFilter_AWS_MANAGED
+var PermissionTypeFilter_CUSTOMER_MANAGED = &sPermissionTypeFilter_CUSTOMER_MANAGED
+
+var PermissionVersionsLimitExceededException = &sPermissionVersionsLimitExceededException
+var PermissionVersionsLimitExceededException_message = &sPermissionVersionsLimitExceededException_message
+
+var _Policy = &s_Policy
+
+var _PolicyList = &s_PolicyList
+var _PolicyList_member = &s_PolicyList_member
+
+var Principal = &sPrincipal
+var Principal_id = &sPrincipal_id
+var Principal_resourceShareArn = &sPrincipal_resourceShareArn
+var Principal_creationTime = &sPrincipal_creationTime
+var Principal_lastUpdatedTime = &sPrincipal_lastUpdatedTime
+var Principal_external = &sPrincipal_external
+
+var _PrincipalArnOrIdList = &s_PrincipalArnOrIdList
+var _PrincipalArnOrIdList_member = &s_PrincipalArnOrIdList_member
+
+var _PrincipalList = &s_PrincipalList
+var _PrincipalList_member = &s_PrincipalList_member
+
+var ReplacePermissionAssociationsWork = &sReplacePermissionAssociationsWork
+var ReplacePermissionAssociationsWork_id = &sReplacePermissionAssociationsWork_id
+var ReplacePermissionAssociationsWork_fromPermissionArn = &sReplacePermissionAssociationsWork_fromPermissionArn
+var ReplacePermissionAssociationsWork_fromPermissionVersion = &sReplacePermissionAssociationsWork_fromPermissionVersion
+var ReplacePermissionAssociationsWork_toPermissionArn = &sReplacePermissionAssociationsWork_toPermissionArn
+var ReplacePermissionAssociationsWork_toPermissionVersion = &sReplacePermissionAssociationsWork_toPermissionVersion
+var ReplacePermissionAssociationsWork_permissionTemplateParameters = &sReplacePermissionAssociationsWork_permissionTemplateParameters
+var ReplacePermissionAssociationsWork_status = &sReplacePermissionAssociationsWork_status
+var ReplacePermissionAssociationsWork_statusMessage = &sReplacePermissionAssociationsWork_statusMessage
+var ReplacePermissionAssociationsWork_creationTime = &sReplacePermissionAssociationsWork_creationTime
+var ReplacePermissionAssociationsWork_lastUpdatedTime = &sReplacePermissionAssociationsWork_lastUpdatedTime
+
+var _ReplacePermissionAssociationsWorkIdList = &s_ReplacePermissionAssociationsWorkIdList
+var _ReplacePermissionAssociationsWorkIdList_member = &s_ReplacePermissionAssociationsWorkIdList_member
+
+var _ReplacePermissionAssociationsWorkList = &s_ReplacePermissionAssociationsWorkList
+var _ReplacePermissionAssociationsWorkList_member = &s_ReplacePermissionAssociationsWorkList_member
+
+var ReplacePermissionAssociationsWorkStatus = &sReplacePermissionAssociationsWorkStatus
+var ReplacePermissionAssociationsWorkStatus_IN_PROGRESS = &sReplacePermissionAssociationsWorkStatus_IN_PROGRESS
+var ReplacePermissionAssociationsWorkStatus_COMPLETED = &sReplacePermissionAssociationsWorkStatus_COMPLETED
+var ReplacePermissionAssociationsWorkStatus_FAILED = &sReplacePermissionAssociationsWorkStatus_FAILED
+
+var Resource = &sResource
+var Resource_arn = &sResource_arn
+var Resource_type = &sResource_type
+var Resource_resourceShareArn = &sResource_resourceShareArn
+var Resource_resourceGroupArn = &sResource_resourceGroupArn
+var Resource_status = &sResource_status
+var Resource_statusMessage = &sResource_statusMessage
+var Resource_creationTime = &sResource_creationTime
+var Resource_lastUpdatedTime = &sResource_lastUpdatedTime
+var Resource_resourceRegionScope = &sResource_resourceRegionScope
+
+var _ResourceArnList = &s_ResourceArnList
+var _ResourceArnList_member = &s_ResourceArnList_member
+
+var ResourceArnNotFoundException = &sResourceArnNotFoundException
+var ResourceArnNotFoundException_message = &sResourceArnNotFoundException_message
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceOwner = &sResourceOwner
+var ResourceOwner_SELF = &sResourceOwner_SELF
+var ResourceOwner_OTHER_ACCOUNTS = &sResourceOwner_OTHER_ACCOUNTS
+
+var ResourceRegionScope = &sResourceRegionScope
+var ResourceRegionScope_REGIONAL = &sResourceRegionScope_REGIONAL
+var ResourceRegionScope_GLOBAL = &sResourceRegionScope_GLOBAL
+
+var ResourceRegionScopeFilter = &sResourceRegionScopeFilter
+var ResourceRegionScopeFilter_ALL = &sResourceRegionScopeFilter_ALL
+var ResourceRegionScopeFilter_REGIONAL = &sResourceRegionScopeFilter_REGIONAL
+var ResourceRegionScopeFilter_GLOBAL = &sResourceRegionScopeFilter_GLOBAL
+
+var ResourceShare = &sResourceShare
+var ResourceShare_resourceShareArn = &sResourceShare_resourceShareArn
+var ResourceShare_name = &sResourceShare_name
+var ResourceShare_owningAccountId = &sResourceShare_owningAccountId
+var ResourceShare_allowExternalPrincipals = &sResourceShare_allowExternalPrincipals
+var ResourceShare_status = &sResourceShare_status
+var ResourceShare_statusMessage = &sResourceShare_statusMessage
+var ResourceShare_tags = &sResourceShare_tags
+var ResourceShare_creationTime = &sResourceShare_creationTime
+var ResourceShare_lastUpdatedTime = &sResourceShare_lastUpdatedTime
+var ResourceShare_featureSet = &sResourceShare_featureSet
+var ResourceShare_resourceShareConfiguration = &sResourceShare_resourceShareConfiguration
+
+var _ResourceShareArnList = &s_ResourceShareArnList
+var _ResourceShareArnList_member = &s_ResourceShareArnList_member
+
+var ResourceShareAssociation = &sResourceShareAssociation
+var ResourceShareAssociation_resourceShareArn = &sResourceShareAssociation_resourceShareArn
+var ResourceShareAssociation_resourceShareName = &sResourceShareAssociation_resourceShareName
+var ResourceShareAssociation_associatedEntity = &sResourceShareAssociation_associatedEntity
+var ResourceShareAssociation_associationType = &sResourceShareAssociation_associationType
+var ResourceShareAssociation_status = &sResourceShareAssociation_status
+var ResourceShareAssociation_statusMessage = &sResourceShareAssociation_statusMessage
+var ResourceShareAssociation_creationTime = &sResourceShareAssociation_creationTime
+var ResourceShareAssociation_lastUpdatedTime = &sResourceShareAssociation_lastUpdatedTime
+var ResourceShareAssociation_external = &sResourceShareAssociation_external
+
+var _ResourceShareAssociationList = &s_ResourceShareAssociationList
+var _ResourceShareAssociationList_member = &s_ResourceShareAssociationList_member
+
+var ResourceShareAssociationStatus = &sResourceShareAssociationStatus
+var ResourceShareAssociationStatus_ASSOCIATING = &sResourceShareAssociationStatus_ASSOCIATING
+var ResourceShareAssociationStatus_ASSOCIATED = &sResourceShareAssociationStatus_ASSOCIATED
+var ResourceShareAssociationStatus_FAILED = &sResourceShareAssociationStatus_FAILED
+var ResourceShareAssociationStatus_DISASSOCIATING = &sResourceShareAssociationStatus_DISASSOCIATING
+var ResourceShareAssociationStatus_DISASSOCIATED = &sResourceShareAssociationStatus_DISASSOCIATED
+var ResourceShareAssociationStatus_SUSPENDED = &sResourceShareAssociationStatus_SUSPENDED
+var ResourceShareAssociationStatus_SUSPENDING = &sResourceShareAssociationStatus_SUSPENDING
+var ResourceShareAssociationStatus_RESTORING = &sResourceShareAssociationStatus_RESTORING
+
+var ResourceShareAssociationType = &sResourceShareAssociationType
+var ResourceShareAssociationType_PRINCIPAL = &sResourceShareAssociationType_PRINCIPAL
+var ResourceShareAssociationType_RESOURCE = &sResourceShareAssociationType_RESOURCE
+var ResourceShareAssociationType_SOURCE = &sResourceShareAssociationType_SOURCE
+
+var ResourceShareConfiguration = &sResourceShareConfiguration
+var ResourceShareConfiguration_retainSharingOnAccountLeaveOrganization = &sResourceShareConfiguration_retainSharingOnAccountLeaveOrganization
+
+var ResourceShareFeatureSet = &sResourceShareFeatureSet
+var ResourceShareFeatureSet_CREATED_FROM_POLICY = &sResourceShareFeatureSet_CREATED_FROM_POLICY
+var ResourceShareFeatureSet_PROMOTING_TO_STANDARD = &sResourceShareFeatureSet_PROMOTING_TO_STANDARD
+var ResourceShareFeatureSet_STANDARD = &sResourceShareFeatureSet_STANDARD
+
+var ResourceShareInvitation = &sResourceShareInvitation
+var ResourceShareInvitation_resourceShareInvitationArn = &sResourceShareInvitation_resourceShareInvitationArn
+var ResourceShareInvitation_resourceShareName = &sResourceShareInvitation_resourceShareName
+var ResourceShareInvitation_resourceShareArn = &sResourceShareInvitation_resourceShareArn
+var ResourceShareInvitation_senderAccountId = &sResourceShareInvitation_senderAccountId
+var ResourceShareInvitation_receiverAccountId = &sResourceShareInvitation_receiverAccountId
+var ResourceShareInvitation_invitationTimestamp = &sResourceShareInvitation_invitationTimestamp
+var ResourceShareInvitation_status = &sResourceShareInvitation_status
+var ResourceShareInvitation_resourceShareAssociations = &sResourceShareInvitation_resourceShareAssociations
+var ResourceShareInvitation_receiverArn = &sResourceShareInvitation_receiverArn
+
+var ResourceShareInvitationAlreadyAcceptedException = &sResourceShareInvitationAlreadyAcceptedException
+var ResourceShareInvitationAlreadyAcceptedException_message = &sResourceShareInvitationAlreadyAcceptedException_message
+
+var ResourceShareInvitationAlreadyRejectedException = &sResourceShareInvitationAlreadyRejectedException
+var ResourceShareInvitationAlreadyRejectedException_message = &sResourceShareInvitationAlreadyRejectedException_message
+
+var _ResourceShareInvitationArnList = &s_ResourceShareInvitationArnList
+var _ResourceShareInvitationArnList_member = &s_ResourceShareInvitationArnList_member
+
+var ResourceShareInvitationArnNotFoundException = &sResourceShareInvitationArnNotFoundException
+var ResourceShareInvitationArnNotFoundException_message = &sResourceShareInvitationArnNotFoundException_message
+
+var ResourceShareInvitationExpiredException = &sResourceShareInvitationExpiredException
+var ResourceShareInvitationExpiredException_message = &sResourceShareInvitationExpiredException_message
+
+var _ResourceShareInvitationList = &s_ResourceShareInvitationList
+var _ResourceShareInvitationList_member = &s_ResourceShareInvitationList_member
+
+var ResourceShareInvitationStatus = &sResourceShareInvitationStatus
+var ResourceShareInvitationStatus_PENDING = &sResourceShareInvitationStatus_PENDING
+var ResourceShareInvitationStatus_ACCEPTED = &sResourceShareInvitationStatus_ACCEPTED
+var ResourceShareInvitationStatus_REJECTED = &sResourceShareInvitationStatus_REJECTED
+var ResourceShareInvitationStatus_EXPIRED = &sResourceShareInvitationStatus_EXPIRED
+
+var ResourceShareLimitExceededException = &sResourceShareLimitExceededException
+var ResourceShareLimitExceededException_message = &sResourceShareLimitExceededException_message
+
+var _ResourceShareList = &s_ResourceShareList
+var _ResourceShareList_member = &s_ResourceShareList_member
+
+var ResourceSharePermissionDetail = &sResourceSharePermissionDetail
+var ResourceSharePermissionDetail_arn = &sResourceSharePermissionDetail_arn
+var ResourceSharePermissionDetail_version = &sResourceSharePermissionDetail_version
+var ResourceSharePermissionDetail_defaultVersion = &sResourceSharePermissionDetail_defaultVersion
+var ResourceSharePermissionDetail_name = &sResourceSharePermissionDetail_name
+var ResourceSharePermissionDetail_resourceType = &sResourceSharePermissionDetail_resourceType
+var ResourceSharePermissionDetail_permission = &sResourceSharePermissionDetail_permission
+var ResourceSharePermissionDetail_permissionTemplateParameters = &sResourceSharePermissionDetail_permissionTemplateParameters
+var ResourceSharePermissionDetail_creationTime = &sResourceSharePermissionDetail_creationTime
+var ResourceSharePermissionDetail_lastUpdatedTime = &sResourceSharePermissionDetail_lastUpdatedTime
+var ResourceSharePermissionDetail_isResourceTypeDefault = &sResourceSharePermissionDetail_isResourceTypeDefault
+var ResourceSharePermissionDetail_permissionType = &sResourceSharePermissionDetail_permissionType
+var ResourceSharePermissionDetail_featureSet = &sResourceSharePermissionDetail_featureSet
+var ResourceSharePermissionDetail_status = &sResourceSharePermissionDetail_status
+var ResourceSharePermissionDetail_tags = &sResourceSharePermissionDetail_tags
+var ResourceSharePermissionDetail_resourceOwner = &sResourceSharePermissionDetail_resourceOwner
+
+var _ResourceSharePermissionList = &s_ResourceSharePermissionList
+var _ResourceSharePermissionList_member = &s_ResourceSharePermissionList_member
+
+var ResourceSharePermissionSummary = &sResourceSharePermissionSummary
+var ResourceSharePermissionSummary_arn = &sResourceSharePermissionSummary_arn
+var ResourceSharePermissionSummary_version = &sResourceSharePermissionSummary_version
+var ResourceSharePermissionSummary_defaultVersion = &sResourceSharePermissionSummary_defaultVersion
+var ResourceSharePermissionSummary_name = &sResourceSharePermissionSummary_name
+var ResourceSharePermissionSummary_resourceType = &sResourceSharePermissionSummary_resourceType
+var ResourceSharePermissionSummary_status = &sResourceSharePermissionSummary_status
+var ResourceSharePermissionSummary_creationTime = &sResourceSharePermissionSummary_creationTime
+var ResourceSharePermissionSummary_lastUpdatedTime = &sResourceSharePermissionSummary_lastUpdatedTime
+var ResourceSharePermissionSummary_isResourceTypeDefault = &sResourceSharePermissionSummary_isResourceTypeDefault
+var ResourceSharePermissionSummary_permissionType = &sResourceSharePermissionSummary_permissionType
+var ResourceSharePermissionSummary_featureSet = &sResourceSharePermissionSummary_featureSet
+var ResourceSharePermissionSummary_permissionTemplateParameters = &sResourceSharePermissionSummary_permissionTemplateParameters
+var ResourceSharePermissionSummary_tags = &sResourceSharePermissionSummary_tags
+var ResourceSharePermissionSummary_resourceOwner = &sResourceSharePermissionSummary_resourceOwner
+
+var ResourceShareStatus = &sResourceShareStatus
+var ResourceShareStatus_PENDING = &sResourceShareStatus_PENDING
+var ResourceShareStatus_ACTIVE = &sResourceShareStatus_ACTIVE
+var ResourceShareStatus_FAILED = &sResourceShareStatus_FAILED
+var ResourceShareStatus_DELETING = &sResourceShareStatus_DELETING
+var ResourceShareStatus_DELETED = &sResourceShareStatus_DELETED
+
+var ResourceStatus = &sResourceStatus
+var ResourceStatus_AVAILABLE = &sResourceStatus_AVAILABLE
+var ResourceStatus_ZONAL_RESOURCE_INACCESSIBLE = &sResourceStatus_ZONAL_RESOURCE_INACCESSIBLE
+var ResourceStatus_LIMIT_EXCEEDED = &sResourceStatus_LIMIT_EXCEEDED
+var ResourceStatus_UNAVAILABLE = &sResourceStatus_UNAVAILABLE
+var ResourceStatus_PENDING = &sResourceStatus_PENDING
+
+var ServerInternalException = &sServerInternalException
+var ServerInternalException_message = &sServerInternalException_message
+
+var ServiceNameAndResourceType = &sServiceNameAndResourceType
+var ServiceNameAndResourceType_resourceType = &sServiceNameAndResourceType_resourceType
+var ServiceNameAndResourceType_serviceName = &sServiceNameAndResourceType_serviceName
+var ServiceNameAndResourceType_resourceRegionScope = &sServiceNameAndResourceType_resourceRegionScope
+
+var _ServiceNameAndResourceTypeList = &s_ServiceNameAndResourceTypeList
+var _ServiceNameAndResourceTypeList_member = &s_ServiceNameAndResourceTypeList_member
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var _SourceArnOrAccountList = &s_SourceArnOrAccountList
+var _SourceArnOrAccountList_member = &s_SourceArnOrAccountList_member
+
+var _String = &s_String
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var TagFilter = &sTagFilter
+var TagFilter_tagKey = &sTagFilter_tagKey
+var TagFilter_tagValues = &sTagFilter_tagValues
+
+var _TagFilters = &s_TagFilters
+var _TagFilters_member = &s_TagFilters_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var TagLimitExceededException = &sTagLimitExceededException
+var TagLimitExceededException_message = &sTagLimitExceededException_message
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TagPolicyViolationException = &sTagPolicyViolationException
+var TagPolicyViolationException_message = &sTagPolicyViolationException_message
+
+var _TagValue = &s_TagValue
+
+var _TagValueList = &s_TagValueList
+var _TagValueList_member = &s_TagValueList_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var UnknownResourceException = &sUnknownResourceException
+var UnknownResourceException_message = &sUnknownResourceException_message
+
+var UnmatchedPolicyPermissionException = &sUnmatchedPolicyPermissionException
+var UnmatchedPolicyPermissionException_message = &sUnmatchedPolicyPermissionException_message
+
+var UpdatePermissionStatus = &sUpdatePermissionStatus
+var UpdatePermissionStatus_ATTACHABLE = &sUpdatePermissionStatus_ATTACHABLE
+var UpdatePermissionStatus_DEPRECATED = &sUpdatePermissionStatus_DEPRECATED
+
+var AcceptResourceShareInvitationRequest = &sAcceptResourceShareInvitationRequest
+var AcceptResourceShareInvitationRequest_resourceShareInvitationArn = &sAcceptResourceShareInvitationRequest_resourceShareInvitationArn
+var AcceptResourceShareInvitationRequest_clientToken = &sAcceptResourceShareInvitationRequest_clientToken
+
+var AcceptResourceShareInvitationResponse = &sAcceptResourceShareInvitationResponse
+var AcceptResourceShareInvitationResponse_resourceShareInvitation = &sAcceptResourceShareInvitationResponse_resourceShareInvitation
+var AcceptResourceShareInvitationResponse_clientToken = &sAcceptResourceShareInvitationResponse_clientToken
+
+var AssociateResourceShareRequest = &sAssociateResourceShareRequest
+var AssociateResourceShareRequest_resourceShareArn = &sAssociateResourceShareRequest_resourceShareArn
+var AssociateResourceShareRequest_resourceArns = &sAssociateResourceShareRequest_resourceArns
+var AssociateResourceShareRequest_principals = &sAssociateResourceShareRequest_principals
+var AssociateResourceShareRequest_clientToken = &sAssociateResourceShareRequest_clientToken
+var AssociateResourceShareRequest_sources = &sAssociateResourceShareRequest_sources
+
+var AssociateResourceShareResponse = &sAssociateResourceShareResponse
+var AssociateResourceShareResponse_resourceShareAssociations = &sAssociateResourceShareResponse_resourceShareAssociations
+var AssociateResourceShareResponse_clientToken = &sAssociateResourceShareResponse_clientToken
+
+var AssociateResourceSharePermissionRequest = &sAssociateResourceSharePermissionRequest
+var AssociateResourceSharePermissionRequest_resourceShareArn = &sAssociateResourceSharePermissionRequest_resourceShareArn
+var AssociateResourceSharePermissionRequest_permissionArn = &sAssociateResourceSharePermissionRequest_permissionArn
+var AssociateResourceSharePermissionRequest_permissionTemplateParameters = &sAssociateResourceSharePermissionRequest_permissionTemplateParameters
+var AssociateResourceSharePermissionRequest_replace = &sAssociateResourceSharePermissionRequest_replace
+var AssociateResourceSharePermissionRequest_clientToken = &sAssociateResourceSharePermissionRequest_clientToken
+var AssociateResourceSharePermissionRequest_permissionVersion = &sAssociateResourceSharePermissionRequest_permissionVersion
+
+var AssociateResourceSharePermissionResponse = &sAssociateResourceSharePermissionResponse
+var AssociateResourceSharePermissionResponse_returnValue = &sAssociateResourceSharePermissionResponse_returnValue
+var AssociateResourceSharePermissionResponse_clientToken = &sAssociateResourceSharePermissionResponse_clientToken
+
+var CreatePermissionRequest = &sCreatePermissionRequest
+var CreatePermissionRequest_name = &sCreatePermissionRequest_name
+var CreatePermissionRequest_resourceType = &sCreatePermissionRequest_resourceType
+var CreatePermissionRequest_policyTemplate = &sCreatePermissionRequest_policyTemplate
+var CreatePermissionRequest_permissionTemplateParameters = &sCreatePermissionRequest_permissionTemplateParameters
+var CreatePermissionRequest_clientToken = &sCreatePermissionRequest_clientToken
+var CreatePermissionRequest_tags = &sCreatePermissionRequest_tags
+
+var CreatePermissionResponse = &sCreatePermissionResponse
+var CreatePermissionResponse_permission = &sCreatePermissionResponse_permission
+var CreatePermissionResponse_clientToken = &sCreatePermissionResponse_clientToken
+
+var CreatePermissionVersionRequest = &sCreatePermissionVersionRequest
+var CreatePermissionVersionRequest_permissionArn = &sCreatePermissionVersionRequest_permissionArn
+var CreatePermissionVersionRequest_policyTemplate = &sCreatePermissionVersionRequest_policyTemplate
+var CreatePermissionVersionRequest_permissionTemplateParameters = &sCreatePermissionVersionRequest_permissionTemplateParameters
+var CreatePermissionVersionRequest_clientToken = &sCreatePermissionVersionRequest_clientToken
+
+var CreatePermissionVersionResponse = &sCreatePermissionVersionResponse
+var CreatePermissionVersionResponse_permission = &sCreatePermissionVersionResponse_permission
+var CreatePermissionVersionResponse_clientToken = &sCreatePermissionVersionResponse_clientToken
+
+var CreateResourceShareRequest = &sCreateResourceShareRequest
+var CreateResourceShareRequest_name = &sCreateResourceShareRequest_name
+var CreateResourceShareRequest_resourceArns = &sCreateResourceShareRequest_resourceArns
+var CreateResourceShareRequest_principals = &sCreateResourceShareRequest_principals
+var CreateResourceShareRequest_tags = &sCreateResourceShareRequest_tags
+var CreateResourceShareRequest_allowExternalPrincipals = &sCreateResourceShareRequest_allowExternalPrincipals
+var CreateResourceShareRequest_clientToken = &sCreateResourceShareRequest_clientToken
+var CreateResourceShareRequest_permissionArns = &sCreateResourceShareRequest_permissionArns
+var CreateResourceShareRequest_sources = &sCreateResourceShareRequest_sources
+var CreateResourceShareRequest_permissionTemplateParameters = &sCreateResourceShareRequest_permissionTemplateParameters
+var CreateResourceShareRequest_resourceShareConfiguration = &sCreateResourceShareRequest_resourceShareConfiguration
+
+var CreateResourceShareResponse = &sCreateResourceShareResponse
+var CreateResourceShareResponse_resourceShare = &sCreateResourceShareResponse_resourceShare
+var CreateResourceShareResponse_clientToken = &sCreateResourceShareResponse_clientToken
+
+var DeletePermissionRequest = &sDeletePermissionRequest
+var DeletePermissionRequest_permissionArn = &sDeletePermissionRequest_permissionArn
+var DeletePermissionRequest_clientToken = &sDeletePermissionRequest_clientToken
+
+var DeletePermissionResponse = &sDeletePermissionResponse
+var DeletePermissionResponse_returnValue = &sDeletePermissionResponse_returnValue
+var DeletePermissionResponse_clientToken = &sDeletePermissionResponse_clientToken
+var DeletePermissionResponse_permissionStatus = &sDeletePermissionResponse_permissionStatus
+
+var DeletePermissionVersionRequest = &sDeletePermissionVersionRequest
+var DeletePermissionVersionRequest_permissionArn = &sDeletePermissionVersionRequest_permissionArn
+var DeletePermissionVersionRequest_permissionVersion = &sDeletePermissionVersionRequest_permissionVersion
+var DeletePermissionVersionRequest_clientToken = &sDeletePermissionVersionRequest_clientToken
+
+var DeletePermissionVersionResponse = &sDeletePermissionVersionResponse
+var DeletePermissionVersionResponse_returnValue = &sDeletePermissionVersionResponse_returnValue
+var DeletePermissionVersionResponse_clientToken = &sDeletePermissionVersionResponse_clientToken
+var DeletePermissionVersionResponse_permissionStatus = &sDeletePermissionVersionResponse_permissionStatus
+
+var DeleteResourceShareRequest = &sDeleteResourceShareRequest
+var DeleteResourceShareRequest_resourceShareArn = &sDeleteResourceShareRequest_resourceShareArn
+var DeleteResourceShareRequest_clientToken = &sDeleteResourceShareRequest_clientToken
+
+var DeleteResourceShareResponse = &sDeleteResourceShareResponse
+var DeleteResourceShareResponse_returnValue = &sDeleteResourceShareResponse_returnValue
+var DeleteResourceShareResponse_clientToken = &sDeleteResourceShareResponse_clientToken
+
+var DisassociateResourceShareRequest = &sDisassociateResourceShareRequest
+var DisassociateResourceShareRequest_resourceShareArn = &sDisassociateResourceShareRequest_resourceShareArn
+var DisassociateResourceShareRequest_resourceArns = &sDisassociateResourceShareRequest_resourceArns
+var DisassociateResourceShareRequest_principals = &sDisassociateResourceShareRequest_principals
+var DisassociateResourceShareRequest_clientToken = &sDisassociateResourceShareRequest_clientToken
+var DisassociateResourceShareRequest_sources = &sDisassociateResourceShareRequest_sources
+
+var DisassociateResourceShareResponse = &sDisassociateResourceShareResponse
+var DisassociateResourceShareResponse_resourceShareAssociations = &sDisassociateResourceShareResponse_resourceShareAssociations
+var DisassociateResourceShareResponse_clientToken = &sDisassociateResourceShareResponse_clientToken
+
+var DisassociateResourceSharePermissionRequest = &sDisassociateResourceSharePermissionRequest
+var DisassociateResourceSharePermissionRequest_resourceShareArn = &sDisassociateResourceSharePermissionRequest_resourceShareArn
+var DisassociateResourceSharePermissionRequest_permissionArn = &sDisassociateResourceSharePermissionRequest_permissionArn
+var DisassociateResourceSharePermissionRequest_clientToken = &sDisassociateResourceSharePermissionRequest_clientToken
+
+var DisassociateResourceSharePermissionResponse = &sDisassociateResourceSharePermissionResponse
+var DisassociateResourceSharePermissionResponse_returnValue = &sDisassociateResourceSharePermissionResponse_returnValue
+var DisassociateResourceSharePermissionResponse_clientToken = &sDisassociateResourceSharePermissionResponse_clientToken
+
+var EnableSharingWithAwsOrganizationRequest = &sEnableSharingWithAwsOrganizationRequest
+
+var EnableSharingWithAwsOrganizationResponse = &sEnableSharingWithAwsOrganizationResponse
+var EnableSharingWithAwsOrganizationResponse_returnValue = &sEnableSharingWithAwsOrganizationResponse_returnValue
+
+var GetPermissionRequest = &sGetPermissionRequest
+var GetPermissionRequest_permissionArn = &sGetPermissionRequest_permissionArn
+var GetPermissionRequest_permissionVersion = &sGetPermissionRequest_permissionVersion
+var GetPermissionRequest_permissionTemplateParameters = &sGetPermissionRequest_permissionTemplateParameters
+
+var GetPermissionResponse = &sGetPermissionResponse
+var GetPermissionResponse_permission = &sGetPermissionResponse_permission
+
+var GetResourcePoliciesRequest = &sGetResourcePoliciesRequest
+var GetResourcePoliciesRequest_resourceArns = &sGetResourcePoliciesRequest_resourceArns
+var GetResourcePoliciesRequest_principal = &sGetResourcePoliciesRequest_principal
+var GetResourcePoliciesRequest_nextToken = &sGetResourcePoliciesRequest_nextToken
+var GetResourcePoliciesRequest_maxResults = &sGetResourcePoliciesRequest_maxResults
+
+var GetResourcePoliciesResponse = &sGetResourcePoliciesResponse
+var GetResourcePoliciesResponse_policies = &sGetResourcePoliciesResponse_policies
+var GetResourcePoliciesResponse_nextToken = &sGetResourcePoliciesResponse_nextToken
+
+var GetResourceShareAssociationsRequest = &sGetResourceShareAssociationsRequest
+var GetResourceShareAssociationsRequest_associationType = &sGetResourceShareAssociationsRequest_associationType
+var GetResourceShareAssociationsRequest_resourceShareArns = &sGetResourceShareAssociationsRequest_resourceShareArns
+var GetResourceShareAssociationsRequest_resourceArn = &sGetResourceShareAssociationsRequest_resourceArn
+var GetResourceShareAssociationsRequest_principal = &sGetResourceShareAssociationsRequest_principal
+var GetResourceShareAssociationsRequest_associationStatus = &sGetResourceShareAssociationsRequest_associationStatus
+var GetResourceShareAssociationsRequest_nextToken = &sGetResourceShareAssociationsRequest_nextToken
+var GetResourceShareAssociationsRequest_maxResults = &sGetResourceShareAssociationsRequest_maxResults
+
+var GetResourceShareAssociationsResponse = &sGetResourceShareAssociationsResponse
+var GetResourceShareAssociationsResponse_resourceShareAssociations = &sGetResourceShareAssociationsResponse_resourceShareAssociations
+var GetResourceShareAssociationsResponse_nextToken = &sGetResourceShareAssociationsResponse_nextToken
+
+var GetResourceShareInvitationsRequest = &sGetResourceShareInvitationsRequest
+var GetResourceShareInvitationsRequest_resourceShareInvitationArns = &sGetResourceShareInvitationsRequest_resourceShareInvitationArns
+var GetResourceShareInvitationsRequest_resourceShareArns = &sGetResourceShareInvitationsRequest_resourceShareArns
+var GetResourceShareInvitationsRequest_nextToken = &sGetResourceShareInvitationsRequest_nextToken
+var GetResourceShareInvitationsRequest_maxResults = &sGetResourceShareInvitationsRequest_maxResults
+
+var GetResourceShareInvitationsResponse = &sGetResourceShareInvitationsResponse
+var GetResourceShareInvitationsResponse_resourceShareInvitations = &sGetResourceShareInvitationsResponse_resourceShareInvitations
+var GetResourceShareInvitationsResponse_nextToken = &sGetResourceShareInvitationsResponse_nextToken
+
+var GetResourceSharesRequest = &sGetResourceSharesRequest
+var GetResourceSharesRequest_resourceShareArns = &sGetResourceSharesRequest_resourceShareArns
+var GetResourceSharesRequest_resourceShareStatus = &sGetResourceSharesRequest_resourceShareStatus
+var GetResourceSharesRequest_resourceOwner = &sGetResourceSharesRequest_resourceOwner
+var GetResourceSharesRequest_name = &sGetResourceSharesRequest_name
+var GetResourceSharesRequest_tagFilters = &sGetResourceSharesRequest_tagFilters
+var GetResourceSharesRequest_nextToken = &sGetResourceSharesRequest_nextToken
+var GetResourceSharesRequest_maxResults = &sGetResourceSharesRequest_maxResults
+var GetResourceSharesRequest_permissionArn = &sGetResourceSharesRequest_permissionArn
+var GetResourceSharesRequest_permissionVersion = &sGetResourceSharesRequest_permissionVersion
+
+var GetResourceSharesResponse = &sGetResourceSharesResponse
+var GetResourceSharesResponse_resourceShares = &sGetResourceSharesResponse_resourceShares
+var GetResourceSharesResponse_nextToken = &sGetResourceSharesResponse_nextToken
+
+var ListPendingInvitationResourcesRequest = &sListPendingInvitationResourcesRequest
+var ListPendingInvitationResourcesRequest_resourceShareInvitationArn = &sListPendingInvitationResourcesRequest_resourceShareInvitationArn
+var ListPendingInvitationResourcesRequest_nextToken = &sListPendingInvitationResourcesRequest_nextToken
+var ListPendingInvitationResourcesRequest_maxResults = &sListPendingInvitationResourcesRequest_maxResults
+var ListPendingInvitationResourcesRequest_resourceRegionScope = &sListPendingInvitationResourcesRequest_resourceRegionScope
+
+var ListPendingInvitationResourcesResponse = &sListPendingInvitationResourcesResponse
+var ListPendingInvitationResourcesResponse_resources = &sListPendingInvitationResourcesResponse_resources
+var ListPendingInvitationResourcesResponse_nextToken = &sListPendingInvitationResourcesResponse_nextToken
+
+var ListPermissionAssociationsRequest = &sListPermissionAssociationsRequest
+var ListPermissionAssociationsRequest_permissionArn = &sListPermissionAssociationsRequest_permissionArn
+var ListPermissionAssociationsRequest_permissionVersion = &sListPermissionAssociationsRequest_permissionVersion
+var ListPermissionAssociationsRequest_associationStatus = &sListPermissionAssociationsRequest_associationStatus
+var ListPermissionAssociationsRequest_resourceType = &sListPermissionAssociationsRequest_resourceType
+var ListPermissionAssociationsRequest_featureSet = &sListPermissionAssociationsRequest_featureSet
+var ListPermissionAssociationsRequest_defaultVersion = &sListPermissionAssociationsRequest_defaultVersion
+var ListPermissionAssociationsRequest_resourceOwner = &sListPermissionAssociationsRequest_resourceOwner
+var ListPermissionAssociationsRequest_resourceShareArn = &sListPermissionAssociationsRequest_resourceShareArn
+var ListPermissionAssociationsRequest_nextToken = &sListPermissionAssociationsRequest_nextToken
+var ListPermissionAssociationsRequest_maxResults = &sListPermissionAssociationsRequest_maxResults
+
+var ListPermissionAssociationsResponse = &sListPermissionAssociationsResponse
+var ListPermissionAssociationsResponse_permissions = &sListPermissionAssociationsResponse_permissions
+var ListPermissionAssociationsResponse_nextToken = &sListPermissionAssociationsResponse_nextToken
+
+var ListPermissionsRequest = &sListPermissionsRequest
+var ListPermissionsRequest_resourceType = &sListPermissionsRequest_resourceType
+var ListPermissionsRequest_resourceOwner = &sListPermissionsRequest_resourceOwner
+var ListPermissionsRequest_nextToken = &sListPermissionsRequest_nextToken
+var ListPermissionsRequest_maxResults = &sListPermissionsRequest_maxResults
+var ListPermissionsRequest_permissionType = &sListPermissionsRequest_permissionType
+var ListPermissionsRequest_permissionStatus = &sListPermissionsRequest_permissionStatus
+
+var ListPermissionsResponse = &sListPermissionsResponse
+var ListPermissionsResponse_permissions = &sListPermissionsResponse_permissions
+var ListPermissionsResponse_nextToken = &sListPermissionsResponse_nextToken
+
+var ListPermissionVersionsRequest = &sListPermissionVersionsRequest
+var ListPermissionVersionsRequest_permissionArn = &sListPermissionVersionsRequest_permissionArn
+var ListPermissionVersionsRequest_nextToken = &sListPermissionVersionsRequest_nextToken
+var ListPermissionVersionsRequest_maxResults = &sListPermissionVersionsRequest_maxResults
+
+var ListPermissionVersionsResponse = &sListPermissionVersionsResponse
+var ListPermissionVersionsResponse_permissions = &sListPermissionVersionsResponse_permissions
+var ListPermissionVersionsResponse_nextToken = &sListPermissionVersionsResponse_nextToken
+
+var ListPrincipalsRequest = &sListPrincipalsRequest
+var ListPrincipalsRequest_resourceOwner = &sListPrincipalsRequest_resourceOwner
+var ListPrincipalsRequest_resourceArn = &sListPrincipalsRequest_resourceArn
+var ListPrincipalsRequest_principals = &sListPrincipalsRequest_principals
+var ListPrincipalsRequest_resourceType = &sListPrincipalsRequest_resourceType
+var ListPrincipalsRequest_resourceShareArns = &sListPrincipalsRequest_resourceShareArns
+var ListPrincipalsRequest_nextToken = &sListPrincipalsRequest_nextToken
+var ListPrincipalsRequest_maxResults = &sListPrincipalsRequest_maxResults
+
+var ListPrincipalsResponse = &sListPrincipalsResponse
+var ListPrincipalsResponse_principals = &sListPrincipalsResponse_principals
+var ListPrincipalsResponse_nextToken = &sListPrincipalsResponse_nextToken
+
+var ListReplacePermissionAssociationsWorkRequest = &sListReplacePermissionAssociationsWorkRequest
+var ListReplacePermissionAssociationsWorkRequest_workIds = &sListReplacePermissionAssociationsWorkRequest_workIds
+var ListReplacePermissionAssociationsWorkRequest_status = &sListReplacePermissionAssociationsWorkRequest_status
+var ListReplacePermissionAssociationsWorkRequest_nextToken = &sListReplacePermissionAssociationsWorkRequest_nextToken
+var ListReplacePermissionAssociationsWorkRequest_maxResults = &sListReplacePermissionAssociationsWorkRequest_maxResults
+
+var ListReplacePermissionAssociationsWorkResponse = &sListReplacePermissionAssociationsWorkResponse
+var ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks = &sListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks
+var ListReplacePermissionAssociationsWorkResponse_nextToken = &sListReplacePermissionAssociationsWorkResponse_nextToken
+
+var ListResourceSharePermissionsRequest = &sListResourceSharePermissionsRequest
+var ListResourceSharePermissionsRequest_resourceShareArn = &sListResourceSharePermissionsRequest_resourceShareArn
+var ListResourceSharePermissionsRequest_nextToken = &sListResourceSharePermissionsRequest_nextToken
+var ListResourceSharePermissionsRequest_maxResults = &sListResourceSharePermissionsRequest_maxResults
+
+var ListResourceSharePermissionsResponse = &sListResourceSharePermissionsResponse
+var ListResourceSharePermissionsResponse_permissions = &sListResourceSharePermissionsResponse_permissions
+var ListResourceSharePermissionsResponse_nextToken = &sListResourceSharePermissionsResponse_nextToken
+
+var ListResourcesRequest = &sListResourcesRequest
+var ListResourcesRequest_resourceOwner = &sListResourcesRequest_resourceOwner
+var ListResourcesRequest_principal = &sListResourcesRequest_principal
+var ListResourcesRequest_resourceType = &sListResourcesRequest_resourceType
+var ListResourcesRequest_resourceArns = &sListResourcesRequest_resourceArns
+var ListResourcesRequest_resourceShareArns = &sListResourcesRequest_resourceShareArns
+var ListResourcesRequest_nextToken = &sListResourcesRequest_nextToken
+var ListResourcesRequest_maxResults = &sListResourcesRequest_maxResults
+var ListResourcesRequest_resourceRegionScope = &sListResourcesRequest_resourceRegionScope
+
+var ListResourcesResponse = &sListResourcesResponse
+var ListResourcesResponse_resources = &sListResourcesResponse_resources
+var ListResourcesResponse_nextToken = &sListResourcesResponse_nextToken
+
+var ListResourceTypesRequest = &sListResourceTypesRequest
+var ListResourceTypesRequest_nextToken = &sListResourceTypesRequest_nextToken
+var ListResourceTypesRequest_maxResults = &sListResourceTypesRequest_maxResults
+var ListResourceTypesRequest_resourceRegionScope = &sListResourceTypesRequest_resourceRegionScope
+
+var ListResourceTypesResponse = &sListResourceTypesResponse
+var ListResourceTypesResponse_resourceTypes = &sListResourceTypesResponse_resourceTypes
+var ListResourceTypesResponse_nextToken = &sListResourceTypesResponse_nextToken
+
+var ListSourceAssociationsRequest = &sListSourceAssociationsRequest
+var ListSourceAssociationsRequest_resourceShareArns = &sListSourceAssociationsRequest_resourceShareArns
+var ListSourceAssociationsRequest_sourceId = &sListSourceAssociationsRequest_sourceId
+var ListSourceAssociationsRequest_sourceType = &sListSourceAssociationsRequest_sourceType
+var ListSourceAssociationsRequest_associationStatus = &sListSourceAssociationsRequest_associationStatus
+var ListSourceAssociationsRequest_nextToken = &sListSourceAssociationsRequest_nextToken
+var ListSourceAssociationsRequest_maxResults = &sListSourceAssociationsRequest_maxResults
+
+var ListSourceAssociationsResponse = &sListSourceAssociationsResponse
+var ListSourceAssociationsResponse_sourceAssociations = &sListSourceAssociationsResponse_sourceAssociations
+var ListSourceAssociationsResponse_nextToken = &sListSourceAssociationsResponse_nextToken
+
+var PromotePermissionCreatedFromPolicyRequest = &sPromotePermissionCreatedFromPolicyRequest
+var PromotePermissionCreatedFromPolicyRequest_permissionArn = &sPromotePermissionCreatedFromPolicyRequest_permissionArn
+var PromotePermissionCreatedFromPolicyRequest_name = &sPromotePermissionCreatedFromPolicyRequest_name
+var PromotePermissionCreatedFromPolicyRequest_clientToken = &sPromotePermissionCreatedFromPolicyRequest_clientToken
+
+var PromotePermissionCreatedFromPolicyResponse = &sPromotePermissionCreatedFromPolicyResponse
+var PromotePermissionCreatedFromPolicyResponse_permission = &sPromotePermissionCreatedFromPolicyResponse_permission
+var PromotePermissionCreatedFromPolicyResponse_clientToken = &sPromotePermissionCreatedFromPolicyResponse_clientToken
+
+var PromoteResourceShareCreatedFromPolicyRequest = &sPromoteResourceShareCreatedFromPolicyRequest
+var PromoteResourceShareCreatedFromPolicyRequest_resourceShareArn = &sPromoteResourceShareCreatedFromPolicyRequest_resourceShareArn
+
+var PromoteResourceShareCreatedFromPolicyResponse = &sPromoteResourceShareCreatedFromPolicyResponse
+var PromoteResourceShareCreatedFromPolicyResponse_returnValue = &sPromoteResourceShareCreatedFromPolicyResponse_returnValue
+
+var RejectResourceShareInvitationRequest = &sRejectResourceShareInvitationRequest
+var RejectResourceShareInvitationRequest_resourceShareInvitationArn = &sRejectResourceShareInvitationRequest_resourceShareInvitationArn
+var RejectResourceShareInvitationRequest_clientToken = &sRejectResourceShareInvitationRequest_clientToken
+
+var RejectResourceShareInvitationResponse = &sRejectResourceShareInvitationResponse
+var RejectResourceShareInvitationResponse_resourceShareInvitation = &sRejectResourceShareInvitationResponse_resourceShareInvitation
+var RejectResourceShareInvitationResponse_clientToken = &sRejectResourceShareInvitationResponse_clientToken
+
+var ReplacePermissionAssociationsRequest = &sReplacePermissionAssociationsRequest
+var ReplacePermissionAssociationsRequest_fromPermissionArn = &sReplacePermissionAssociationsRequest_fromPermissionArn
+var ReplacePermissionAssociationsRequest_fromPermissionVersion = &sReplacePermissionAssociationsRequest_fromPermissionVersion
+var ReplacePermissionAssociationsRequest_toPermissionArn = &sReplacePermissionAssociationsRequest_toPermissionArn
+var ReplacePermissionAssociationsRequest_permissionTemplateParameters = &sReplacePermissionAssociationsRequest_permissionTemplateParameters
+var ReplacePermissionAssociationsRequest_clientToken = &sReplacePermissionAssociationsRequest_clientToken
+
+var ReplacePermissionAssociationsResponse = &sReplacePermissionAssociationsResponse
+var ReplacePermissionAssociationsResponse_replacePermissionAssociationsWork = &sReplacePermissionAssociationsResponse_replacePermissionAssociationsWork
+var ReplacePermissionAssociationsResponse_clientToken = &sReplacePermissionAssociationsResponse_clientToken
+
+var SetDefaultPermissionVersionRequest = &sSetDefaultPermissionVersionRequest
+var SetDefaultPermissionVersionRequest_permissionArn = &sSetDefaultPermissionVersionRequest_permissionArn
+var SetDefaultPermissionVersionRequest_permissionVersion = &sSetDefaultPermissionVersionRequest_permissionVersion
+var SetDefaultPermissionVersionRequest_clientToken = &sSetDefaultPermissionVersionRequest_clientToken
+
+var SetDefaultPermissionVersionResponse = &sSetDefaultPermissionVersionResponse
+var SetDefaultPermissionVersionResponse_returnValue = &sSetDefaultPermissionVersionResponse_returnValue
+var SetDefaultPermissionVersionResponse_clientToken = &sSetDefaultPermissionVersionResponse_clientToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceShareArn = &sTagResourceRequest_resourceShareArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceShareArn = &sUntagResourceRequest_resourceShareArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdatePermissionRequest = &sUpdatePermissionRequest
+var UpdatePermissionRequest_permissionArn = &sUpdatePermissionRequest_permissionArn
+var UpdatePermissionRequest_status = &sUpdatePermissionRequest_status
+var UpdatePermissionRequest_clientToken = &sUpdatePermissionRequest_clientToken
+
+var UpdatePermissionResponse = &sUpdatePermissionResponse
+var UpdatePermissionResponse_clientToken = &sUpdatePermissionResponse_clientToken
+var UpdatePermissionResponse_permissionStatus = &sUpdatePermissionResponse_permissionStatus
+
+var UpdateResourceShareRequest = &sUpdateResourceShareRequest
+var UpdateResourceShareRequest_resourceShareArn = &sUpdateResourceShareRequest_resourceShareArn
+var UpdateResourceShareRequest_name = &sUpdateResourceShareRequest_name
+var UpdateResourceShareRequest_allowExternalPrincipals = &sUpdateResourceShareRequest_allowExternalPrincipals
+var UpdateResourceShareRequest_clientToken = &sUpdateResourceShareRequest_clientToken
+
+var UpdateResourceShareResponse = &sUpdateResourceShareResponse
+var UpdateResourceShareResponse_resourceShare = &sUpdateResourceShareResponse_resourceShare
+var UpdateResourceShareResponse_clientToken = &sUpdateResourceShareResponse_clientToken
+
+var AmazonResourceSharing = &smithy.ServiceSchema{Schema: &s_AmazonResourceSharing, Version: "2018-01-04"}

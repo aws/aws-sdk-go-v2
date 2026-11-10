@@ -7,256 +7,257 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var SendSerialConsoleSSHPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SendSerialConsoleSSHPublicKey",
-}, smithy.ShapeTypeOperation, 0)
+var (
+	eSendSerialConsoleSSHPublicKey                      smithy.SchemaExtensions
+	eSendSSHPublicKey                                   smithy.SchemaExtensions
+	e_AWSEC2InstanceConnectService                      smithy.SchemaExtensions
+	eAuthException                                      smithy.SchemaExtensions
+	eAuthException_Message                              smithy.SchemaExtensions
+	e_AvailabilityZone                                  smithy.SchemaExtensions
+	eEC2InstanceNotFoundException                       smithy.SchemaExtensions
+	eEC2InstanceNotFoundException_Message               smithy.SchemaExtensions
+	eEC2InstanceStateInvalidException                   smithy.SchemaExtensions
+	eEC2InstanceStateInvalidException_Message           smithy.SchemaExtensions
+	eEC2InstanceTypeInvalidException                    smithy.SchemaExtensions
+	eEC2InstanceTypeInvalidException_Message            smithy.SchemaExtensions
+	eEC2InstanceUnavailableException                    smithy.SchemaExtensions
+	eEC2InstanceUnavailableException_Message            smithy.SchemaExtensions
+	e_InstanceId                                        smithy.SchemaExtensions
+	e_InstanceOSUser                                    smithy.SchemaExtensions
+	eInvalidArgsException                               smithy.SchemaExtensions
+	eInvalidArgsException_Message                       smithy.SchemaExtensions
+	e_RequestId                                         smithy.SchemaExtensions
+	eSerialConsoleAccessDisabledException               smithy.SchemaExtensions
+	eSerialConsoleAccessDisabledException_Message       smithy.SchemaExtensions
+	eSerialConsoleSessionLimitExceededException         smithy.SchemaExtensions
+	eSerialConsoleSessionLimitExceededException_Message smithy.SchemaExtensions
+	eSerialConsoleSessionUnavailableException           smithy.SchemaExtensions
+	eSerialConsoleSessionUnavailableException_Message   smithy.SchemaExtensions
+	eSerialConsoleSessionUnsupportedException           smithy.SchemaExtensions
+	eSerialConsoleSessionUnsupportedException_Message   smithy.SchemaExtensions
+	e_SerialPort                                        smithy.SchemaExtensions
+	eServiceException                                   smithy.SchemaExtensions
+	eServiceException_Message                           smithy.SchemaExtensions
+	e_SSHPublicKey                                      smithy.SchemaExtensions
+	e_String                                            smithy.SchemaExtensions
+	e_Success                                           smithy.SchemaExtensions
+	eThrottlingException                                smithy.SchemaExtensions
+	eThrottlingException_Message                        smithy.SchemaExtensions
+	eSendSerialConsoleSSHPublicKeyRequest               smithy.SchemaExtensions
+	eSendSerialConsoleSSHPublicKeyRequest_InstanceId    smithy.SchemaExtensions
+	eSendSerialConsoleSSHPublicKeyRequest_SerialPort    smithy.SchemaExtensions
+	eSendSerialConsoleSSHPublicKeyRequest_SSHPublicKey  smithy.SchemaExtensions
+	eSendSerialConsoleSSHPublicKeyResponse              smithy.SchemaExtensions
+	eSendSerialConsoleSSHPublicKeyResponse_RequestId    smithy.SchemaExtensions
+	eSendSerialConsoleSSHPublicKeyResponse_Success      smithy.SchemaExtensions
+	eSendSSHPublicKeyRequest                            smithy.SchemaExtensions
+	eSendSSHPublicKeyRequest_InstanceId                 smithy.SchemaExtensions
+	eSendSSHPublicKeyRequest_InstanceOSUser             smithy.SchemaExtensions
+	eSendSSHPublicKeyRequest_SSHPublicKey               smithy.SchemaExtensions
+	eSendSSHPublicKeyRequest_AvailabilityZone           smithy.SchemaExtensions
+	eSendSSHPublicKeyResponse                           smithy.SchemaExtensions
+	eSendSSHPublicKeyResponse_RequestId                 smithy.SchemaExtensions
+	eSendSSHPublicKeyResponse_Success                   smithy.SchemaExtensions
+)
 
-var SendSSHPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SendSSHPublicKey",
-}, smithy.ShapeTypeOperation, 0)
+var (
+	iSendSerialConsoleSSHPublicKey              = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SendSerialConsoleSSHPublicKey"}
+	iSendSSHPublicKey                           = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SendSSHPublicKey"}
+	i_AWSEC2InstanceConnectService              = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "AWSEC2InstanceConnectService"}
+	iAuthException                              = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "AuthException"}
+	i_AvailabilityZone                          = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "AvailabilityZone"}
+	iEC2InstanceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "EC2InstanceNotFoundException"}
+	iEC2InstanceStateInvalidException           = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "EC2InstanceStateInvalidException"}
+	iEC2InstanceTypeInvalidException            = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "EC2InstanceTypeInvalidException"}
+	iEC2InstanceUnavailableException            = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "EC2InstanceUnavailableException"}
+	i_InstanceId                                = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "InstanceId"}
+	i_InstanceOSUser                            = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "InstanceOSUser"}
+	iInvalidArgsException                       = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "InvalidArgsException"}
+	i_RequestId                                 = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "RequestId"}
+	iSerialConsoleAccessDisabledException       = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SerialConsoleAccessDisabledException"}
+	iSerialConsoleSessionLimitExceededException = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SerialConsoleSessionLimitExceededException"}
+	iSerialConsoleSessionUnavailableException   = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SerialConsoleSessionUnavailableException"}
+	iSerialConsoleSessionUnsupportedException   = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SerialConsoleSessionUnsupportedException"}
+	i_SerialPort                                = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SerialPort"}
+	iServiceException                           = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "ServiceException"}
+	i_SSHPublicKey                              = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SSHPublicKey"}
+	i_String                                    = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "String"}
+	i_Success                                   = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "Success"}
+	iThrottlingException                        = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "ThrottlingException"}
+	iSendSerialConsoleSSHPublicKeyRequest       = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SendSerialConsoleSSHPublicKeyRequest"}
+	iSendSerialConsoleSSHPublicKeyResponse      = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SendSerialConsoleSSHPublicKeyResponse"}
+	iSendSSHPublicKeyRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SendSSHPublicKeyRequest"}
+	iSendSSHPublicKeyResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.ec2instanceconnect", Name: "SendSSHPublicKeyResponse"}
+)
 
-var _AWSEC2InstanceConnectService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "AWSEC2InstanceConnectService",
-}, smithy.ShapeTypeService, 0)
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Forbidden",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EC2InstanceNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EC2InstanceStateInvalid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EC2InstanceTypeInvalid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EC2InstanceUnavailable",
+	StatusCode: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidArguments",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SerialConsoleAccessDisabled",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionUnavailable",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionUnsupported",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServerError",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyRequests",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
 
-var AWSEC2InstanceConnectService = smithy.NewServiceSchema(_AWSEC2InstanceConnectService, "2018-04-02")
+var mAuthException = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthException_Message}}
+var mEC2InstanceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2InstanceNotFoundException_Message}}
+var mEC2InstanceStateInvalidException = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2InstanceStateInvalidException_Message}}
+var mEC2InstanceTypeInvalidException = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2InstanceTypeInvalidException_Message}}
+var mEC2InstanceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2InstanceUnavailableException_Message}}
+var mInvalidArgsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArgsException_Message}}
+var mSerialConsoleAccessDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sSerialConsoleAccessDisabledException_Message}}
+var mSerialConsoleSessionLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sSerialConsoleSessionLimitExceededException_Message}}
+var mSerialConsoleSessionUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sSerialConsoleSessionUnavailableException_Message}}
+var mSerialConsoleSessionUnsupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sSerialConsoleSessionUnsupportedException_Message}}
+var mServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceException_Message}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mSendSerialConsoleSSHPublicKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendSerialConsoleSSHPublicKeyRequest_InstanceId, &sSendSerialConsoleSSHPublicKeyRequest_SerialPort, &sSendSerialConsoleSSHPublicKeyRequest_SSHPublicKey}}
+var mSendSerialConsoleSSHPublicKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSendSerialConsoleSSHPublicKeyResponse_RequestId, &sSendSerialConsoleSSHPublicKeyResponse_Success}}
+var mSendSSHPublicKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendSSHPublicKeyRequest_InstanceId, &sSendSSHPublicKeyRequest_InstanceOSUser, &sSendSSHPublicKeyRequest_SSHPublicKey, &sSendSSHPublicKeyRequest_AvailabilityZone}}
+var mSendSSHPublicKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSendSSHPublicKeyResponse_RequestId, &sSendSSHPublicKeyResponse_Success}}
 
-var AuthException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "AuthException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "Forbidden",
-		StatusCode: 403})
-var AuthException_Message *smithy.Schema
+var sSendSerialConsoleSSHPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendSerialConsoleSSHPublicKey, Type: smithy.ShapeTypeOperation, Ext: &eSendSerialConsoleSSHPublicKey})
+var sSendSSHPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendSSHPublicKey, Type: smithy.ShapeTypeOperation, Ext: &eSendSSHPublicKey})
+var s_AWSEC2InstanceConnectService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSEC2InstanceConnectService, Type: smithy.ShapeTypeService, Ext: &e_AWSEC2InstanceConnectService})
+var sAuthException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthException, Members: &mAuthException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAuthException})
+var sAuthException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAuthException_Message})
+var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZone})
+var sEC2InstanceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2InstanceNotFoundException, Members: &mEC2InstanceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEC2InstanceNotFoundException})
+var sEC2InstanceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEC2InstanceNotFoundException_Message})
+var sEC2InstanceStateInvalidException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2InstanceStateInvalidException, Members: &mEC2InstanceStateInvalidException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eEC2InstanceStateInvalidException})
+var sEC2InstanceStateInvalidException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEC2InstanceStateInvalidException_Message})
+var sEC2InstanceTypeInvalidException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2InstanceTypeInvalidException, Members: &mEC2InstanceTypeInvalidException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eEC2InstanceTypeInvalidException})
+var sEC2InstanceTypeInvalidException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEC2InstanceTypeInvalidException_Message})
+var sEC2InstanceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2InstanceUnavailableException, Members: &mEC2InstanceUnavailableException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eEC2InstanceUnavailableException})
+var sEC2InstanceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEC2InstanceUnavailableException_Message})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var s_InstanceOSUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceOSUser, Type: smithy.ShapeTypeString, Ext: &e_InstanceOSUser})
+var sInvalidArgsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgsException, Members: &mInvalidArgsException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArgsException})
+var sInvalidArgsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidArgsException_Message})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &e_RequestId})
+var sSerialConsoleAccessDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSerialConsoleAccessDisabledException, Members: &mSerialConsoleAccessDisabledException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eSerialConsoleAccessDisabledException})
+var sSerialConsoleAccessDisabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSerialConsoleAccessDisabledException_Message})
+var sSerialConsoleSessionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSerialConsoleSessionLimitExceededException, Members: &mSerialConsoleSessionLimitExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eSerialConsoleSessionLimitExceededException})
+var sSerialConsoleSessionLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSerialConsoleSessionLimitExceededException_Message})
+var sSerialConsoleSessionUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSerialConsoleSessionUnavailableException, Members: &mSerialConsoleSessionUnavailableException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eSerialConsoleSessionUnavailableException})
+var sSerialConsoleSessionUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSerialConsoleSessionUnavailableException_Message})
+var sSerialConsoleSessionUnsupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSerialConsoleSessionUnsupportedException, Members: &mSerialConsoleSessionUnsupportedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eSerialConsoleSessionUnsupportedException})
+var sSerialConsoleSessionUnsupportedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSerialConsoleSessionUnsupportedException_Message})
+var s_SerialPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SerialPort, Type: smithy.ShapeTypeInteger, Ext: &e_SerialPort})
+var sServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceException, Members: &mServiceException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eServiceException})
+var sServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceException_Message})
+var s_SSHPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SSHPublicKey, Type: smithy.ShapeTypeString, Ext: &e_SSHPublicKey})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_Success = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Success, Type: smithy.ShapeTypeBoolean, Ext: &e_Success})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sSendSerialConsoleSSHPublicKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendSerialConsoleSSHPublicKeyRequest, Members: &mSendSerialConsoleSSHPublicKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendSerialConsoleSSHPublicKeyRequest})
+var sSendSerialConsoleSSHPublicKeyRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eSendSerialConsoleSSHPublicKeyRequest_InstanceId})
+var sSendSerialConsoleSSHPublicKeyRequest_SerialPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialPort", ID: &i_SerialPort, Type: smithy.ShapeTypeInteger, Ext: &eSendSerialConsoleSSHPublicKeyRequest_SerialPort})
+var sSendSerialConsoleSSHPublicKeyRequest_SSHPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSHPublicKey", ID: &i_SSHPublicKey, Type: smithy.ShapeTypeString, Ext: &eSendSerialConsoleSSHPublicKeyRequest_SSHPublicKey})
+var sSendSerialConsoleSSHPublicKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendSerialConsoleSSHPublicKeyResponse, Members: &mSendSerialConsoleSSHPublicKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendSerialConsoleSSHPublicKeyResponse})
+var sSendSerialConsoleSSHPublicKeyResponse_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eSendSerialConsoleSSHPublicKeyResponse_RequestId})
+var sSendSerialConsoleSSHPublicKeyResponse_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Success", ID: &i_Success, Type: smithy.ShapeTypeBoolean, Ext: &eSendSerialConsoleSSHPublicKeyResponse_Success})
+var sSendSSHPublicKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendSSHPublicKeyRequest, Members: &mSendSSHPublicKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendSSHPublicKeyRequest})
+var sSendSSHPublicKeyRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eSendSSHPublicKeyRequest_InstanceId})
+var sSendSSHPublicKeyRequest_InstanceOSUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceOSUser", ID: &i_InstanceOSUser, Type: smithy.ShapeTypeString, Ext: &eSendSSHPublicKeyRequest_InstanceOSUser})
+var sSendSSHPublicKeyRequest_SSHPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSHPublicKey", ID: &i_SSHPublicKey, Type: smithy.ShapeTypeString, Ext: &eSendSSHPublicKeyRequest_SSHPublicKey})
+var sSendSSHPublicKeyRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eSendSSHPublicKeyRequest_AvailabilityZone})
+var sSendSSHPublicKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendSSHPublicKeyResponse, Members: &mSendSSHPublicKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendSSHPublicKeyResponse})
+var sSendSSHPublicKeyResponse_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eSendSSHPublicKeyResponse_RequestId})
+var sSendSSHPublicKeyResponse_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Success", ID: &i_Success, Type: smithy.ShapeTypeBoolean, Ext: &eSendSSHPublicKeyResponse_Success})
 
-var _AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "AvailabilityZone",
-}, smithy.ShapeTypeString, 0)
+var SendSerialConsoleSSHPublicKey = &sSendSerialConsoleSSHPublicKey
 
-var EC2InstanceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "EC2InstanceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceNotFound",
-		StatusCode: 404})
-var EC2InstanceNotFoundException_Message *smithy.Schema
+var SendSSHPublicKey = &sSendSSHPublicKey
 
-var EC2InstanceStateInvalidException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "EC2InstanceStateInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceStateInvalid",
-		StatusCode: 400})
-var EC2InstanceStateInvalidException_Message *smithy.Schema
+var _AWSEC2InstanceConnectService = &s_AWSEC2InstanceConnectService
 
-var EC2InstanceTypeInvalidException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "EC2InstanceTypeInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceTypeInvalid",
-		StatusCode: 400})
-var EC2InstanceTypeInvalidException_Message *smithy.Schema
+var AuthException = &sAuthException
+var AuthException_Message = &sAuthException_Message
 
-var EC2InstanceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "EC2InstanceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503},
-	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceUnavailable",
-		StatusCode: 503})
-var EC2InstanceUnavailableException_Message *smithy.Schema
+var _AvailabilityZone = &s_AvailabilityZone
 
-var _InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "InstanceId",
-}, smithy.ShapeTypeString, 0)
+var EC2InstanceNotFoundException = &sEC2InstanceNotFoundException
+var EC2InstanceNotFoundException_Message = &sEC2InstanceNotFoundException_Message
 
-var _InstanceOSUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "InstanceOSUser",
-}, smithy.ShapeTypeString, 0)
+var EC2InstanceStateInvalidException = &sEC2InstanceStateInvalidException
+var EC2InstanceStateInvalidException_Message = &sEC2InstanceStateInvalidException_Message
 
-var InvalidArgsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "InvalidArgsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidArguments",
-		StatusCode: 400})
-var InvalidArgsException_Message *smithy.Schema
+var EC2InstanceTypeInvalidException = &sEC2InstanceTypeInvalidException
+var EC2InstanceTypeInvalidException_Message = &sEC2InstanceTypeInvalidException_Message
 
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
+var EC2InstanceUnavailableException = &sEC2InstanceUnavailableException
+var EC2InstanceUnavailableException_Message = &sEC2InstanceUnavailableException_Message
 
-var SerialConsoleAccessDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SerialConsoleAccessDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleAccessDisabled",
-		StatusCode: 403})
-var SerialConsoleAccessDisabledException_Message *smithy.Schema
+var _InstanceId = &s_InstanceId
 
-var SerialConsoleSessionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SerialConsoleSessionLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionLimitExceeded",
-		StatusCode: 400})
-var SerialConsoleSessionLimitExceededException_Message *smithy.Schema
+var _InstanceOSUser = &s_InstanceOSUser
 
-var SerialConsoleSessionUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SerialConsoleSessionUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionUnavailable",
-		StatusCode: 500})
-var SerialConsoleSessionUnavailableException_Message *smithy.Schema
+var InvalidArgsException = &sInvalidArgsException
+var InvalidArgsException_Message = &sInvalidArgsException_Message
 
-var SerialConsoleSessionUnsupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SerialConsoleSessionUnsupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionUnsupported",
-		StatusCode: 400})
-var SerialConsoleSessionUnsupportedException_Message *smithy.Schema
+var _RequestId = &s_RequestId
 
-var _SerialPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SerialPort",
-}, smithy.ShapeTypeInteger, 0)
+var SerialConsoleAccessDisabledException = &sSerialConsoleAccessDisabledException
+var SerialConsoleAccessDisabledException_Message = &sSerialConsoleAccessDisabledException_Message
 
-var ServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServerError",
-		StatusCode: 500})
-var ServiceException_Message *smithy.Schema
+var SerialConsoleSessionLimitExceededException = &sSerialConsoleSessionLimitExceededException
+var SerialConsoleSessionLimitExceededException_Message = &sSerialConsoleSessionLimitExceededException_Message
 
-var _SSHPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SSHPublicKey",
-}, smithy.ShapeTypeString, 0)
+var SerialConsoleSessionUnavailableException = &sSerialConsoleSessionUnavailableException
+var SerialConsoleSessionUnavailableException_Message = &sSerialConsoleSessionUnavailableException_Message
 
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
+var SerialConsoleSessionUnsupportedException = &sSerialConsoleSessionUnsupportedException
+var SerialConsoleSessionUnsupportedException_Message = &sSerialConsoleSessionUnsupportedException_Message
 
-var _Success = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "Success",
-}, smithy.ShapeTypeBoolean, 0)
+var _SerialPort = &s_SerialPort
 
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyRequests",
-		StatusCode: 429})
-var ThrottlingException_Message *smithy.Schema
+var ServiceException = &sServiceException
+var ServiceException_Message = &sServiceException_Message
 
-var SendSerialConsoleSSHPublicKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SendSerialConsoleSSHPublicKeyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SendSerialConsoleSSHPublicKeyRequest_InstanceId *smithy.Schema
+var _SSHPublicKey = &s_SSHPublicKey
 
-var SendSerialConsoleSSHPublicKeyRequest_SerialPort *smithy.Schema
+var _String = &s_String
 
-var SendSerialConsoleSSHPublicKeyRequest_SSHPublicKey *smithy.Schema
+var _Success = &s_Success
 
-var SendSerialConsoleSSHPublicKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SendSerialConsoleSSHPublicKeyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SendSerialConsoleSSHPublicKeyResponse_RequestId *smithy.Schema
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
 
-var SendSerialConsoleSSHPublicKeyResponse_Success *smithy.Schema
+var SendSerialConsoleSSHPublicKeyRequest = &sSendSerialConsoleSSHPublicKeyRequest
+var SendSerialConsoleSSHPublicKeyRequest_InstanceId = &sSendSerialConsoleSSHPublicKeyRequest_InstanceId
+var SendSerialConsoleSSHPublicKeyRequest_SerialPort = &sSendSerialConsoleSSHPublicKeyRequest_SerialPort
+var SendSerialConsoleSSHPublicKeyRequest_SSHPublicKey = &sSendSerialConsoleSSHPublicKeyRequest_SSHPublicKey
 
-var SendSSHPublicKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SendSSHPublicKeyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SendSSHPublicKeyRequest_InstanceId *smithy.Schema
+var SendSerialConsoleSSHPublicKeyResponse = &sSendSerialConsoleSSHPublicKeyResponse
+var SendSerialConsoleSSHPublicKeyResponse_RequestId = &sSendSerialConsoleSSHPublicKeyResponse_RequestId
+var SendSerialConsoleSSHPublicKeyResponse_Success = &sSendSerialConsoleSSHPublicKeyResponse_Success
 
-var SendSSHPublicKeyRequest_InstanceOSUser *smithy.Schema
+var SendSSHPublicKeyRequest = &sSendSSHPublicKeyRequest
+var SendSSHPublicKeyRequest_InstanceId = &sSendSSHPublicKeyRequest_InstanceId
+var SendSSHPublicKeyRequest_InstanceOSUser = &sSendSSHPublicKeyRequest_InstanceOSUser
+var SendSSHPublicKeyRequest_SSHPublicKey = &sSendSSHPublicKeyRequest_SSHPublicKey
+var SendSSHPublicKeyRequest_AvailabilityZone = &sSendSSHPublicKeyRequest_AvailabilityZone
 
-var SendSSHPublicKeyRequest_SSHPublicKey *smithy.Schema
+var SendSSHPublicKeyResponse = &sSendSSHPublicKeyResponse
+var SendSSHPublicKeyResponse_RequestId = &sSendSSHPublicKeyResponse_RequestId
+var SendSSHPublicKeyResponse_Success = &sSendSSHPublicKeyResponse_Success
 
-var SendSSHPublicKeyRequest_AvailabilityZone *smithy.Schema
-
-var SendSSHPublicKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ec2instanceconnect",
-	Name:      "SendSSHPublicKeyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SendSSHPublicKeyResponse_RequestId *smithy.Schema
-
-var SendSSHPublicKeyResponse_Success *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AuthException_Message = AuthException.AddMember("Message", _String)
-
-	EC2InstanceNotFoundException_Message = EC2InstanceNotFoundException.AddMember("Message", _String)
-
-	EC2InstanceStateInvalidException_Message = EC2InstanceStateInvalidException.AddMember("Message", _String)
-
-	EC2InstanceTypeInvalidException_Message = EC2InstanceTypeInvalidException.AddMember("Message", _String)
-
-	EC2InstanceUnavailableException_Message = EC2InstanceUnavailableException.AddMember("Message", _String)
-
-	InvalidArgsException_Message = InvalidArgsException.AddMember("Message", _String)
-
-	SerialConsoleAccessDisabledException_Message = SerialConsoleAccessDisabledException.AddMember("Message", _String)
-
-	SerialConsoleSessionLimitExceededException_Message = SerialConsoleSessionLimitExceededException.AddMember("Message", _String)
-
-	SerialConsoleSessionUnavailableException_Message = SerialConsoleSessionUnavailableException.AddMember("Message", _String)
-
-	SerialConsoleSessionUnsupportedException_Message = SerialConsoleSessionUnsupportedException.AddMember("Message", _String)
-
-	ServiceException_Message = ServiceException.AddMember("Message", _String)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _String)
-
-	SendSerialConsoleSSHPublicKeyRequest_InstanceId = SendSerialConsoleSSHPublicKeyRequest.AddMember("InstanceId", _InstanceId)
-
-	SendSerialConsoleSSHPublicKeyRequest_SerialPort = SendSerialConsoleSSHPublicKeyRequest.AddMember("SerialPort", _SerialPort)
-
-	SendSerialConsoleSSHPublicKeyRequest_SSHPublicKey = SendSerialConsoleSSHPublicKeyRequest.AddMember("SSHPublicKey", _SSHPublicKey)
-
-	SendSerialConsoleSSHPublicKeyResponse_RequestId = SendSerialConsoleSSHPublicKeyResponse.AddMember("RequestId", _RequestId)
-
-	SendSerialConsoleSSHPublicKeyResponse_Success = SendSerialConsoleSSHPublicKeyResponse.AddMember("Success", _Success)
-
-	SendSSHPublicKeyRequest_InstanceId = SendSSHPublicKeyRequest.AddMember("InstanceId", _InstanceId)
-
-	SendSSHPublicKeyRequest_InstanceOSUser = SendSSHPublicKeyRequest.AddMember("InstanceOSUser", _InstanceOSUser)
-
-	SendSSHPublicKeyRequest_SSHPublicKey = SendSSHPublicKeyRequest.AddMember("SSHPublicKey", _SSHPublicKey)
-
-	SendSSHPublicKeyRequest_AvailabilityZone = SendSSHPublicKeyRequest.AddMember("AvailabilityZone", _AvailabilityZone)
-
-	SendSSHPublicKeyResponse_RequestId = SendSSHPublicKeyResponse.AddMember("RequestId", _RequestId)
-
-	SendSSHPublicKeyResponse_Success = SendSSHPublicKeyResponse.AddMember("Success", _Success)
-
-}
+var AWSEC2InstanceConnectService = &smithy.ServiceSchema{Schema: &s_AWSEC2InstanceConnectService, Version: "2018-04-02"}

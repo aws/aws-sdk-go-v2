@@ -4,824 +4,854 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/connections/{clientId}",
-	Code: 200})
+var (
+	eDeleteConnection                                smithy.SchemaExtensions
+	eDeleteThingShadow                               smithy.SchemaExtensions
+	eGetConnection                                   smithy.SchemaExtensions
+	eGetRetainedMessage                              smithy.SchemaExtensions
+	eGetThingShadow                                  smithy.SchemaExtensions
+	eListNamedShadowsForThing                        smithy.SchemaExtensions
+	eListRetainedMessages                            smithy.SchemaExtensions
+	eListSubscriptions                               smithy.SchemaExtensions
+	ePublish                                         smithy.SchemaExtensions
+	eSendDirectMessage                               smithy.SchemaExtensions
+	eUpdateThingShadow                               smithy.SchemaExtensions
+	e_IotMoonrakerService                            smithy.SchemaExtensions
+	e_CleanSession                                   smithy.SchemaExtensions
+	e_ClientId                                       smithy.SchemaExtensions
+	e_Confirmation                                   smithy.SchemaExtensions
+	eConflictException                               smithy.SchemaExtensions
+	eConflictException_message                       smithy.SchemaExtensions
+	e_Connected                                      smithy.SchemaExtensions
+	e_ContentType                                    smithy.SchemaExtensions
+	e_CorrelationData                                smithy.SchemaExtensions
+	e_DisconnectReason                               smithy.SchemaExtensions
+	e_errorMessage                                   smithy.SchemaExtensions
+	eForbiddenException                              smithy.SchemaExtensions
+	eForbiddenException_message                      smithy.SchemaExtensions
+	eGatewayTimeoutException                         smithy.SchemaExtensions
+	eGatewayTimeoutException_message                 smithy.SchemaExtensions
+	e_IncludeSocketInformation                       smithy.SchemaExtensions
+	eInternalFailureException                        smithy.SchemaExtensions
+	eInternalFailureException_message                smithy.SchemaExtensions
+	eInvalidRequestException                         smithy.SchemaExtensions
+	eInvalidRequestException_message                 smithy.SchemaExtensions
+	e_JsonDocument                                   smithy.SchemaExtensions
+	e_KeepAliveDuration                              smithy.SchemaExtensions
+	e_MaxResults                                     smithy.SchemaExtensions
+	e_MessageExpiry                                  smithy.SchemaExtensions
+	eMethodNotAllowedException                       smithy.SchemaExtensions
+	eMethodNotAllowedException_message               smithy.SchemaExtensions
+	e_NamedShadowList                                smithy.SchemaExtensions
+	e_NamedShadowList_member                         smithy.SchemaExtensions
+	e_NextToken                                      smithy.SchemaExtensions
+	e_PageSize                                       smithy.SchemaExtensions
+	e_Payload                                        smithy.SchemaExtensions
+	ePayloadFormatIndicator                          smithy.SchemaExtensions
+	ePayloadFormatIndicator_UNSPECIFIED_BYTES        smithy.SchemaExtensions
+	ePayloadFormatIndicator_UTF8_DATA                smithy.SchemaExtensions
+	e_PayloadSize                                    smithy.SchemaExtensions
+	e_PreventWillMessage                             smithy.SchemaExtensions
+	e_Qos                                            smithy.SchemaExtensions
+	eRequestEntityTooLargeException                  smithy.SchemaExtensions
+	eRequestEntityTooLargeException_message          smithy.SchemaExtensions
+	eResourceNotFoundException                       smithy.SchemaExtensions
+	eResourceNotFoundException_message               smithy.SchemaExtensions
+	e_ResponseMessage                                smithy.SchemaExtensions
+	e_ResponseTopic                                  smithy.SchemaExtensions
+	e_Retain                                         smithy.SchemaExtensions
+	e_RetainedMessageList                            smithy.SchemaExtensions
+	e_RetainedMessageList_member                     smithy.SchemaExtensions
+	eRetainedMessageSummary                          smithy.SchemaExtensions
+	eRetainedMessageSummary_topic                    smithy.SchemaExtensions
+	eRetainedMessageSummary_payloadSize              smithy.SchemaExtensions
+	eRetainedMessageSummary_qos                      smithy.SchemaExtensions
+	eRetainedMessageSummary_lastModifiedTime         smithy.SchemaExtensions
+	eServiceUnavailableException                     smithy.SchemaExtensions
+	eServiceUnavailableException_message             smithy.SchemaExtensions
+	e_SessionExpiry                                  smithy.SchemaExtensions
+	e_ShadowName                                     smithy.SchemaExtensions
+	e_SourceIp                                       smithy.SchemaExtensions
+	e_SourcePort                                     smithy.SchemaExtensions
+	e_SubscriptionList                               smithy.SchemaExtensions
+	e_SubscriptionList_member                        smithy.SchemaExtensions
+	eSubscriptionSummary                             smithy.SchemaExtensions
+	eSubscriptionSummary_topicFilter                 smithy.SchemaExtensions
+	eSubscriptionSummary_qos                         smithy.SchemaExtensions
+	e_SynthesizedJsonUserProperties                  smithy.SchemaExtensions
+	e_TargetIp                                       smithy.SchemaExtensions
+	e_TargetPort                                     smithy.SchemaExtensions
+	e_ThingName                                      smithy.SchemaExtensions
+	eThrottlingException                             smithy.SchemaExtensions
+	eThrottlingException_message                     smithy.SchemaExtensions
+	e_TimeoutInSeconds                               smithy.SchemaExtensions
+	e_Timestamp                                      smithy.SchemaExtensions
+	e_Topic                                          smithy.SchemaExtensions
+	e_TopicFilter                                    smithy.SchemaExtensions
+	e_TraceId                                        smithy.SchemaExtensions
+	eUnauthorizedException                           smithy.SchemaExtensions
+	eUnauthorizedException_message                   smithy.SchemaExtensions
+	eUnsupportedDocumentEncodingException            smithy.SchemaExtensions
+	eUnsupportedDocumentEncodingException_message    smithy.SchemaExtensions
+	e_UserPropertiesBlob                             smithy.SchemaExtensions
+	e_VpcEndpointId                                  smithy.SchemaExtensions
+	eDeleteConnectionRequest                         smithy.SchemaExtensions
+	eDeleteConnectionRequest_clientId                smithy.SchemaExtensions
+	eDeleteConnectionRequest_cleanSession            smithy.SchemaExtensions
+	eDeleteConnectionRequest_preventWillMessage      smithy.SchemaExtensions
+	eDeleteThingShadowRequest                        smithy.SchemaExtensions
+	eDeleteThingShadowRequest_thingName              smithy.SchemaExtensions
+	eDeleteThingShadowRequest_shadowName             smithy.SchemaExtensions
+	eDeleteThingShadowResponse                       smithy.SchemaExtensions
+	eDeleteThingShadowResponse_payload               smithy.SchemaExtensions
+	eGetConnectionRequest                            smithy.SchemaExtensions
+	eGetConnectionRequest_clientId                   smithy.SchemaExtensions
+	eGetConnectionRequest_includeSocketInformation   smithy.SchemaExtensions
+	eGetConnectionResponse                           smithy.SchemaExtensions
+	eGetConnectionResponse_connected                 smithy.SchemaExtensions
+	eGetConnectionResponse_thingName                 smithy.SchemaExtensions
+	eGetConnectionResponse_cleanSession              smithy.SchemaExtensions
+	eGetConnectionResponse_sourceIp                  smithy.SchemaExtensions
+	eGetConnectionResponse_sourcePort                smithy.SchemaExtensions
+	eGetConnectionResponse_targetIp                  smithy.SchemaExtensions
+	eGetConnectionResponse_targetPort                smithy.SchemaExtensions
+	eGetConnectionResponse_keepAliveDuration         smithy.SchemaExtensions
+	eGetConnectionResponse_connectedSince            smithy.SchemaExtensions
+	eGetConnectionResponse_disconnectedSince         smithy.SchemaExtensions
+	eGetConnectionResponse_disconnectReason          smithy.SchemaExtensions
+	eGetConnectionResponse_sessionExpiry             smithy.SchemaExtensions
+	eGetConnectionResponse_clientId                  smithy.SchemaExtensions
+	eGetConnectionResponse_vpcEndpointId             smithy.SchemaExtensions
+	eGetRetainedMessageRequest                       smithy.SchemaExtensions
+	eGetRetainedMessageRequest_topic                 smithy.SchemaExtensions
+	eGetRetainedMessageResponse                      smithy.SchemaExtensions
+	eGetRetainedMessageResponse_topic                smithy.SchemaExtensions
+	eGetRetainedMessageResponse_payload              smithy.SchemaExtensions
+	eGetRetainedMessageResponse_qos                  smithy.SchemaExtensions
+	eGetRetainedMessageResponse_lastModifiedTime     smithy.SchemaExtensions
+	eGetRetainedMessageResponse_userProperties       smithy.SchemaExtensions
+	eGetThingShadowRequest                           smithy.SchemaExtensions
+	eGetThingShadowRequest_thingName                 smithy.SchemaExtensions
+	eGetThingShadowRequest_shadowName                smithy.SchemaExtensions
+	eGetThingShadowResponse                          smithy.SchemaExtensions
+	eGetThingShadowResponse_payload                  smithy.SchemaExtensions
+	eListNamedShadowsForThingRequest                 smithy.SchemaExtensions
+	eListNamedShadowsForThingRequest_thingName       smithy.SchemaExtensions
+	eListNamedShadowsForThingRequest_nextToken       smithy.SchemaExtensions
+	eListNamedShadowsForThingRequest_pageSize        smithy.SchemaExtensions
+	eListNamedShadowsForThingResponse                smithy.SchemaExtensions
+	eListNamedShadowsForThingResponse_results        smithy.SchemaExtensions
+	eListNamedShadowsForThingResponse_nextToken      smithy.SchemaExtensions
+	eListNamedShadowsForThingResponse_timestamp      smithy.SchemaExtensions
+	eListRetainedMessagesRequest                     smithy.SchemaExtensions
+	eListRetainedMessagesRequest_nextToken           smithy.SchemaExtensions
+	eListRetainedMessagesRequest_maxResults          smithy.SchemaExtensions
+	eListRetainedMessagesResponse                    smithy.SchemaExtensions
+	eListRetainedMessagesResponse_retainedTopics     smithy.SchemaExtensions
+	eListRetainedMessagesResponse_nextToken          smithy.SchemaExtensions
+	eListSubscriptionsRequest                        smithy.SchemaExtensions
+	eListSubscriptionsRequest_clientId               smithy.SchemaExtensions
+	eListSubscriptionsRequest_nextToken              smithy.SchemaExtensions
+	eListSubscriptionsRequest_maxResults             smithy.SchemaExtensions
+	eListSubscriptionsResponse                       smithy.SchemaExtensions
+	eListSubscriptionsResponse_subscriptions         smithy.SchemaExtensions
+	eListSubscriptionsResponse_nextToken             smithy.SchemaExtensions
+	ePublishRequest                                  smithy.SchemaExtensions
+	ePublishRequest_topic                            smithy.SchemaExtensions
+	ePublishRequest_qos                              smithy.SchemaExtensions
+	ePublishRequest_retain                           smithy.SchemaExtensions
+	ePublishRequest_payload                          smithy.SchemaExtensions
+	ePublishRequest_userProperties                   smithy.SchemaExtensions
+	ePublishRequest_payloadFormatIndicator           smithy.SchemaExtensions
+	ePublishRequest_contentType                      smithy.SchemaExtensions
+	ePublishRequest_responseTopic                    smithy.SchemaExtensions
+	ePublishRequest_correlationData                  smithy.SchemaExtensions
+	ePublishRequest_messageExpiry                    smithy.SchemaExtensions
+	eSendDirectMessageRequest                        smithy.SchemaExtensions
+	eSendDirectMessageRequest_clientId               smithy.SchemaExtensions
+	eSendDirectMessageRequest_topic                  smithy.SchemaExtensions
+	eSendDirectMessageRequest_contentType            smithy.SchemaExtensions
+	eSendDirectMessageRequest_responseTopic          smithy.SchemaExtensions
+	eSendDirectMessageRequest_confirmation           smithy.SchemaExtensions
+	eSendDirectMessageRequest_timeout                smithy.SchemaExtensions
+	eSendDirectMessageRequest_payload                smithy.SchemaExtensions
+	eSendDirectMessageRequest_userProperties         smithy.SchemaExtensions
+	eSendDirectMessageRequest_payloadFormatIndicator smithy.SchemaExtensions
+	eSendDirectMessageRequest_correlationData        smithy.SchemaExtensions
+	eSendDirectMessageResponse                       smithy.SchemaExtensions
+	eSendDirectMessageResponse_message               smithy.SchemaExtensions
+	eSendDirectMessageResponse_traceId               smithy.SchemaExtensions
+	eUpdateThingShadowRequest                        smithy.SchemaExtensions
+	eUpdateThingShadowRequest_thingName              smithy.SchemaExtensions
+	eUpdateThingShadowRequest_shadowName             smithy.SchemaExtensions
+	eUpdateThingShadowRequest_payload                smithy.SchemaExtensions
+	eUpdateThingShadowResponse                       smithy.SchemaExtensions
+	eUpdateThingShadowResponse_payload               smithy.SchemaExtensions
+)
 
-var DeleteThingShadow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteThingShadow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+var (
+	iDeleteConnection                     = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "DeleteConnection"}
+	iDeleteThingShadow                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "DeleteThingShadow"}
+	iGetConnection                        = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetConnection"}
+	iGetRetainedMessage                   = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetRetainedMessage"}
+	iGetThingShadow                       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetThingShadow"}
+	iListNamedShadowsForThing             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListNamedShadowsForThing"}
+	iListRetainedMessages                 = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListRetainedMessages"}
+	iListSubscriptions                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListSubscriptions"}
+	iPublish                              = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Publish"}
+	iSendDirectMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SendDirectMessage"}
+	iUpdateThingShadow                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "UpdateThingShadow"}
+	i_IotMoonrakerService                 = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "IotMoonrakerService"}
+	i_CleanSession                        = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "CleanSession"}
+	i_ClientId                            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ClientId"}
+	i_Confirmation                        = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Confirmation"}
+	iConflictException                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ConflictException"}
+	i_Connected                           = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Connected"}
+	i_ContentType                         = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ContentType"}
+	i_CorrelationData                     = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "CorrelationData"}
+	i_DisconnectReason                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "DisconnectReason"}
+	i_errorMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "errorMessage"}
+	iForbiddenException                   = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ForbiddenException"}
+	iGatewayTimeoutException              = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GatewayTimeoutException"}
+	i_IncludeSocketInformation            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "IncludeSocketInformation"}
+	iInternalFailureException             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "InternalFailureException"}
+	iInvalidRequestException              = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "InvalidRequestException"}
+	i_JsonDocument                        = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "JsonDocument"}
+	i_KeepAliveDuration                   = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "KeepAliveDuration"}
+	i_MaxResults                          = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "MaxResults"}
+	i_MessageExpiry                       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "MessageExpiry"}
+	iMethodNotAllowedException            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "MethodNotAllowedException"}
+	i_NamedShadowList                     = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "NamedShadowList"}
+	i_NextToken                           = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "NextToken"}
+	i_PageSize                            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "PageSize"}
+	i_Payload                             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Payload"}
+	iPayloadFormatIndicator               = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "PayloadFormatIndicator"}
+	i_PayloadSize                         = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "PayloadSize"}
+	i_PreventWillMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "PreventWillMessage"}
+	i_Qos                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Qos"}
+	iRequestEntityTooLargeException       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "RequestEntityTooLargeException"}
+	iResourceNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ResourceNotFoundException"}
+	i_ResponseMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ResponseMessage"}
+	i_ResponseTopic                       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ResponseTopic"}
+	i_Retain                              = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Retain"}
+	i_RetainedMessageList                 = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "RetainedMessageList"}
+	iRetainedMessageSummary               = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "RetainedMessageSummary"}
+	iServiceUnavailableException          = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ServiceUnavailableException"}
+	i_SessionExpiry                       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SessionExpiry"}
+	i_ShadowName                          = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ShadowName"}
+	i_SourceIp                            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SourceIp"}
+	i_SourcePort                          = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SourcePort"}
+	i_SubscriptionList                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SubscriptionList"}
+	iSubscriptionSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SubscriptionSummary"}
+	i_SynthesizedJsonUserProperties       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SynthesizedJsonUserProperties"}
+	i_TargetIp                            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "TargetIp"}
+	i_TargetPort                          = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "TargetPort"}
+	i_ThingName                           = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ThingName"}
+	iThrottlingException                  = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ThrottlingException"}
+	i_TimeoutInSeconds                    = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "TimeoutInSeconds"}
+	i_Timestamp                           = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Timestamp"}
+	i_Topic                               = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "Topic"}
+	i_TopicFilter                         = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "TopicFilter"}
+	i_TraceId                             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "TraceId"}
+	iUnauthorizedException                = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "UnauthorizedException"}
+	iUnsupportedDocumentEncodingException = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "UnsupportedDocumentEncodingException"}
+	i_UserPropertiesBlob                  = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "UserPropertiesBlob"}
+	i_VpcEndpointId                       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "VpcEndpointId"}
+	iDeleteConnectionRequest              = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "DeleteConnectionRequest"}
+	iDeleteThingShadowRequest             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "DeleteThingShadowRequest"}
+	iDeleteThingShadowResponse            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "DeleteThingShadowResponse"}
+	iGetConnectionRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetConnectionRequest"}
+	iGetConnectionResponse                = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetConnectionResponse"}
+	iGetRetainedMessageRequest            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetRetainedMessageRequest"}
+	iGetRetainedMessageResponse           = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetRetainedMessageResponse"}
+	iGetThingShadowRequest                = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetThingShadowRequest"}
+	iGetThingShadowResponse               = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "GetThingShadowResponse"}
+	iListNamedShadowsForThingRequest      = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListNamedShadowsForThingRequest"}
+	iListNamedShadowsForThingResponse     = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListNamedShadowsForThingResponse"}
+	iListRetainedMessagesRequest          = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListRetainedMessagesRequest"}
+	iListRetainedMessagesResponse         = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListRetainedMessagesResponse"}
+	iListSubscriptionsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListSubscriptionsRequest"}
+	iListSubscriptionsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "ListSubscriptionsResponse"}
+	iPublishRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "PublishRequest"}
+	iSendDirectMessageRequest             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SendDirectMessageRequest"}
+	iSendDirectMessageResponse            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "SendDirectMessageResponse"}
+	iUpdateThingShadowRequest             = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "UpdateThingShadowRequest"}
+	iUpdateThingShadowResponse            = smithy.ShapeName{Namespace: "com.amazonaws.iotdataplane", Name: "UpdateThingShadowResponse"}
+	pUnit                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/connections/{clientId}",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/things/{thingName}/shadow",
-	Code: 200})
-
-var GetConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/connections/{clientId}",
-	Code: 200})
-
-var GetRetainedMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetRetainedMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/retainedMessage/{topic}",
-	Code: 200})
-
-var GetThingShadow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetThingShadow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/things/{thingName}/shadow",
-	Code: 200})
-
-var ListNamedShadowsForThing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListNamedShadowsForThing",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/things/shadow/ListNamedShadowsForThing/{thingName}",
-	Code: 200})
-
-var ListRetainedMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListRetainedMessages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/retainedMessage",
-	Code: 200})
-
-var ListSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListSubscriptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/connections/{clientId}/subscriptions",
-	Code: 200})
-
-var Publish = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Publish",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/topics/{topic}",
-	Code: 200})
-
-var SendDirectMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SendDirectMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/connections/{clientId}/messages",
-	Code: 200})
-
-var UpdateThingShadow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UpdateThingShadow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/things/{thingName}/shadow",
-	Code: 200})
-
-var _IotMoonrakerService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "IotMoonrakerService",
-}, smithy.ShapeTypeService, 0)
-
-var IotMoonrakerService = smithy.NewServiceSchema(_IotMoonrakerService, "2015-05-28")
-
-var _CleanSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "CleanSession",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var _Confirmation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Confirmation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _Connected = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Connected",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _CorrelationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "CorrelationData",
-}, smithy.ShapeTypeString, 0)
-
-var _DisconnectReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DisconnectReason",
-}, smithy.ShapeTypeString, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var GatewayTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GatewayTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 504})
-var GatewayTimeoutException_message *smithy.Schema
-
-var _IncludeSocketInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "IncludeSocketInformation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_message *smithy.Schema
-
-var _JsonDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "JsonDocument",
-}, smithy.ShapeTypeBlob, 0)
-
-var _KeepAliveDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "KeepAliveDuration",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MessageExpiry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "MessageExpiry",
-}, smithy.ShapeTypeLong, 0)
-
-var MethodNotAllowedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "MethodNotAllowedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 405})
-var MethodNotAllowedException_message *smithy.Schema
-
-var _NamedShadowList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "NamedShadowList",
-}, smithy.ShapeTypeList, 1)
-var _NamedShadowList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Payload",
-}, smithy.ShapeTypeBlob, 0)
-
-var PayloadFormatIndicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PayloadFormatIndicator",
-}, smithy.ShapeTypeEnum, 2)
-var PayloadFormatIndicator_UNSPECIFIED_BYTES *smithy.Schema
-
-var PayloadFormatIndicator_UTF8_DATA *smithy.Schema
-
-var _PayloadSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PayloadSize",
-}, smithy.ShapeTypeLong, 0)
-
-var _PreventWillMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PreventWillMessage",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Qos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Qos",
-}, smithy.ShapeTypeInteger, 0)
-
-var RequestEntityTooLargeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "RequestEntityTooLargeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 413})
-var RequestEntityTooLargeException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _ResponseMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ResponseMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ResponseTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ResponseTopic",
-}, smithy.ShapeTypeString, 0)
-
-var _Retain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Retain",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _RetainedMessageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "RetainedMessageList",
-}, smithy.ShapeTypeList, 1)
-var _RetainedMessageList_member *smithy.Schema
-
-var RetainedMessageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "RetainedMessageSummary",
-}, smithy.ShapeTypeStructure, 4)
-var RetainedMessageSummary_topic *smithy.Schema
-
-var RetainedMessageSummary_payloadSize *smithy.Schema
-
-var RetainedMessageSummary_qos *smithy.Schema
-
-var RetainedMessageSummary_lastModifiedTime *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var _SessionExpiry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SessionExpiry",
-}, smithy.ShapeTypeLong, 0)
-
-var _ShadowName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ShadowName",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SourceIp",
-}, smithy.ShapeTypeString, 0)
-
-var _SourcePort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SourcePort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SubscriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SubscriptionList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionList_member *smithy.Schema
-
-var SubscriptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SubscriptionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SubscriptionSummary_topicFilter *smithy.Schema
-
-var SubscriptionSummary_qos *smithy.Schema
-
-var _SynthesizedJsonUserProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SynthesizedJsonUserProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var _TargetIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TargetIp",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TargetPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ThingName",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _TimeoutInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TimeoutInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeLong, 0)
-
-var _Topic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Topic",
-}, smithy.ShapeTypeString, 0)
-
-var _TopicFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TopicFilter",
-}, smithy.ShapeTypeString, 0)
-
-var _TraceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TraceId",
-}, smithy.ShapeTypeString, 0)
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var UnsupportedDocumentEncodingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UnsupportedDocumentEncodingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 415})
-var UnsupportedDocumentEncodingException_message *smithy.Schema
-
-var _UserPropertiesBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UserPropertiesBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteConnectionRequest_clientId *smithy.Schema
-
-var DeleteConnectionRequest_cleanSession *smithy.Schema
-
-var DeleteConnectionRequest_preventWillMessage *smithy.Schema
-
-var DeleteThingShadowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteThingShadowRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteThingShadowRequest_thingName *smithy.Schema
-
-var DeleteThingShadowRequest_shadowName *smithy.Schema
-
-var DeleteThingShadowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteThingShadowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteThingShadowResponse_payload *smithy.Schema
-
-var GetConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetConnectionRequest_clientId *smithy.Schema
-
-var GetConnectionRequest_includeSocketInformation *smithy.Schema
-
-var GetConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetConnectionResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetConnectionResponse_connected *smithy.Schema
-
-var GetConnectionResponse_thingName *smithy.Schema
-
-var GetConnectionResponse_cleanSession *smithy.Schema
-
-var GetConnectionResponse_sourceIp *smithy.Schema
-
-var GetConnectionResponse_sourcePort *smithy.Schema
-
-var GetConnectionResponse_targetIp *smithy.Schema
-
-var GetConnectionResponse_targetPort *smithy.Schema
-
-var GetConnectionResponse_keepAliveDuration *smithy.Schema
-
-var GetConnectionResponse_connectedSince *smithy.Schema
-
-var GetConnectionResponse_disconnectedSince *smithy.Schema
-
-var GetConnectionResponse_disconnectReason *smithy.Schema
-
-var GetConnectionResponse_sessionExpiry *smithy.Schema
-
-var GetConnectionResponse_clientId *smithy.Schema
-
-var GetConnectionResponse_vpcEndpointId *smithy.Schema
-
-var GetRetainedMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetRetainedMessageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRetainedMessageRequest_topic *smithy.Schema
-
-var GetRetainedMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetRetainedMessageResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetRetainedMessageResponse_topic *smithy.Schema
-
-var GetRetainedMessageResponse_payload *smithy.Schema
-
-var GetRetainedMessageResponse_qos *smithy.Schema
-
-var GetRetainedMessageResponse_lastModifiedTime *smithy.Schema
-
-var GetRetainedMessageResponse_userProperties *smithy.Schema
-
-var GetThingShadowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetThingShadowRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetThingShadowRequest_thingName *smithy.Schema
-
-var GetThingShadowRequest_shadowName *smithy.Schema
-
-var GetThingShadowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetThingShadowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetThingShadowResponse_payload *smithy.Schema
-
-var ListNamedShadowsForThingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListNamedShadowsForThingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNamedShadowsForThingRequest_thingName *smithy.Schema
-
-var ListNamedShadowsForThingRequest_nextToken *smithy.Schema
-
-var ListNamedShadowsForThingRequest_pageSize *smithy.Schema
-
-var ListNamedShadowsForThingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListNamedShadowsForThingResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListNamedShadowsForThingResponse_results *smithy.Schema
-
-var ListNamedShadowsForThingResponse_nextToken *smithy.Schema
-
-var ListNamedShadowsForThingResponse_timestamp *smithy.Schema
-
-var ListRetainedMessagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListRetainedMessagesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRetainedMessagesRequest_nextToken *smithy.Schema
-
-var ListRetainedMessagesRequest_maxResults *smithy.Schema
-
-var ListRetainedMessagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListRetainedMessagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRetainedMessagesResponse_retainedTopics *smithy.Schema
-
-var ListRetainedMessagesResponse_nextToken *smithy.Schema
-
-var ListSubscriptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListSubscriptionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSubscriptionsRequest_clientId *smithy.Schema
-
-var ListSubscriptionsRequest_nextToken *smithy.Schema
-
-var ListSubscriptionsRequest_maxResults *smithy.Schema
-
-var ListSubscriptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListSubscriptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsResponse_subscriptions *smithy.Schema
-
-var ListSubscriptionsResponse_nextToken *smithy.Schema
-
-var PublishRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PublishRequest",
-}, smithy.ShapeTypeStructure, 10)
-var PublishRequest_topic *smithy.Schema
-
-var PublishRequest_qos *smithy.Schema
-
-var PublishRequest_retain *smithy.Schema
-
-var PublishRequest_payload *smithy.Schema
-
-var PublishRequest_userProperties *smithy.Schema
-
-var PublishRequest_payloadFormatIndicator *smithy.Schema
-
-var PublishRequest_contentType *smithy.Schema
-
-var PublishRequest_responseTopic *smithy.Schema
-
-var PublishRequest_correlationData *smithy.Schema
-
-var PublishRequest_messageExpiry *smithy.Schema
-
-var SendDirectMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SendDirectMessageRequest",
-}, smithy.ShapeTypeStructure, 10)
-var SendDirectMessageRequest_clientId *smithy.Schema
-
-var SendDirectMessageRequest_topic *smithy.Schema
-
-var SendDirectMessageRequest_contentType *smithy.Schema
-
-var SendDirectMessageRequest_responseTopic *smithy.Schema
-
-var SendDirectMessageRequest_confirmation *smithy.Schema
-
-var SendDirectMessageRequest_timeout *smithy.Schema
-
-var SendDirectMessageRequest_payload *smithy.Schema
-
-var SendDirectMessageRequest_userProperties *smithy.Schema
-
-var SendDirectMessageRequest_payloadFormatIndicator *smithy.Schema
-
-var SendDirectMessageRequest_correlationData *smithy.Schema
-
-var SendDirectMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SendDirectMessageResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SendDirectMessageResponse_message *smithy.Schema
-
-var SendDirectMessageResponse_traceId *smithy.Schema
-
-var UpdateThingShadowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UpdateThingShadowRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateThingShadowRequest_thingName *smithy.Schema
-
-var UpdateThingShadowRequest_shadowName *smithy.Schema
-
-var UpdateThingShadowRequest_payload *smithy.Schema
-
-var UpdateThingShadowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UpdateThingShadowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateThingShadowResponse_payload *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ConflictException_message = ConflictException.AddMember("message", _errorMessage)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", _errorMessage)
-
-	GatewayTimeoutException_message = GatewayTimeoutException.AddMember("message", _errorMessage)
-
-	InternalFailureException_message = InternalFailureException.AddMember("message", _errorMessage)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _errorMessage)
-
-	MethodNotAllowedException_message = MethodNotAllowedException.AddMember("message", _errorMessage)
-
-	_NamedShadowList_member = _NamedShadowList.AddMember("member", _ShadowName)
-
-	PayloadFormatIndicator_UNSPECIFIED_BYTES = PayloadFormatIndicator.AddMember("UNSPECIFIED_BYTES", smithyprelude.Unit)
-
-	PayloadFormatIndicator_UTF8_DATA = PayloadFormatIndicator.AddMember("UTF8_DATA", smithyprelude.Unit)
-
-	RequestEntityTooLargeException_message = RequestEntityTooLargeException.AddMember("message", _errorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _errorMessage)
-
-	RetainedMessageSummary_topic = RetainedMessageSummary.AddMember("topic", _Topic)
-
-	RetainedMessageSummary_payloadSize = RetainedMessageSummary.AddMember("payloadSize", _PayloadSize)
-
-	RetainedMessageSummary_qos = RetainedMessageSummary.AddMember("qos", _Qos)
-
-	RetainedMessageSummary_lastModifiedTime = RetainedMessageSummary.AddMember("lastModifiedTime", _Timestamp)
-
-	_RetainedMessageList_member = _RetainedMessageList.AddMember("member", RetainedMessageSummary)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _errorMessage)
-
-	SubscriptionSummary_topicFilter = SubscriptionSummary.AddMember("topicFilter", _TopicFilter)
-
-	SubscriptionSummary_qos = SubscriptionSummary.AddMember("qos", _Qos)
-
-	_SubscriptionList_member = _SubscriptionList.AddMember("member", SubscriptionSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _errorMessage)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", _errorMessage)
-
-	UnsupportedDocumentEncodingException_message = UnsupportedDocumentEncodingException.AddMember("message", _errorMessage)
-
-	DeleteConnectionRequest_clientId = DeleteConnectionRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	DeleteConnectionRequest_cleanSession = DeleteConnectionRequest.AddMember("cleanSession", _CleanSession, &smithytraits.HTTPQuery{Name: "cleanSession"})
-
-	DeleteConnectionRequest_preventWillMessage = DeleteConnectionRequest.AddMember("preventWillMessage", _PreventWillMessage, &smithytraits.HTTPQuery{Name: "preventWillMessage"})
-
-	DeleteThingShadowRequest_thingName = DeleteThingShadowRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	DeleteThingShadowRequest_shadowName = DeleteThingShadowRequest.AddMember("shadowName", _ShadowName, &smithytraits.HTTPQuery{Name: "name"})
-
-	DeleteThingShadowResponse_payload = DeleteThingShadowResponse.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
-	GetConnectionRequest_clientId = GetConnectionRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	GetConnectionRequest_includeSocketInformation = GetConnectionRequest.AddMember("includeSocketInformation", _IncludeSocketInformation, &smithytraits.HTTPQuery{Name: "includeSocketInformation"})
-
-	GetConnectionResponse_connected = GetConnectionResponse.AddMember("connected", _Connected)
-
-	GetConnectionResponse_thingName = GetConnectionResponse.AddMember("thingName", _ThingName)
-
-	GetConnectionResponse_cleanSession = GetConnectionResponse.AddMember("cleanSession", _CleanSession)
-
-	GetConnectionResponse_sourceIp = GetConnectionResponse.AddMember("sourceIp", _SourceIp)
-
-	GetConnectionResponse_sourcePort = GetConnectionResponse.AddMember("sourcePort", _SourcePort)
-
-	GetConnectionResponse_targetIp = GetConnectionResponse.AddMember("targetIp", _TargetIp)
-
-	GetConnectionResponse_targetPort = GetConnectionResponse.AddMember("targetPort", _TargetPort)
-
-	GetConnectionResponse_keepAliveDuration = GetConnectionResponse.AddMember("keepAliveDuration", _KeepAliveDuration)
-
-	GetConnectionResponse_connectedSince = GetConnectionResponse.AddMember("connectedSince", _Timestamp)
-
-	GetConnectionResponse_disconnectedSince = GetConnectionResponse.AddMember("disconnectedSince", _Timestamp)
-
-	GetConnectionResponse_disconnectReason = GetConnectionResponse.AddMember("disconnectReason", _DisconnectReason)
-
-	GetConnectionResponse_sessionExpiry = GetConnectionResponse.AddMember("sessionExpiry", _SessionExpiry)
-
-	GetConnectionResponse_clientId = GetConnectionResponse.AddMember("clientId", _ClientId)
-
-	GetConnectionResponse_vpcEndpointId = GetConnectionResponse.AddMember("vpcEndpointId", _VpcEndpointId)
-
-	GetRetainedMessageRequest_topic = GetRetainedMessageRequest.AddMember("topic", _Topic, &smithytraits.HTTPLabel{})
-
-	GetRetainedMessageResponse_topic = GetRetainedMessageResponse.AddMember("topic", _Topic)
-
-	GetRetainedMessageResponse_payload = GetRetainedMessageResponse.AddMember("payload", _Payload)
-
-	GetRetainedMessageResponse_qos = GetRetainedMessageResponse.AddMember("qos", _Qos)
-
-	GetRetainedMessageResponse_lastModifiedTime = GetRetainedMessageResponse.AddMember("lastModifiedTime", _Timestamp)
-
-	GetRetainedMessageResponse_userProperties = GetRetainedMessageResponse.AddMember("userProperties", _UserPropertiesBlob)
-
-	GetThingShadowRequest_thingName = GetThingShadowRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	GetThingShadowRequest_shadowName = GetThingShadowRequest.AddMember("shadowName", _ShadowName, &smithytraits.HTTPQuery{Name: "name"})
-
-	GetThingShadowResponse_payload = GetThingShadowResponse.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
-	ListNamedShadowsForThingRequest_thingName = ListNamedShadowsForThingRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	ListNamedShadowsForThingRequest_nextToken = ListNamedShadowsForThingRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNamedShadowsForThingRequest_pageSize = ListNamedShadowsForThingRequest.AddMember("pageSize", _PageSize, &smithytraits.HTTPQuery{Name: "pageSize"})
-
-	ListNamedShadowsForThingResponse_results = ListNamedShadowsForThingResponse.AddMember("results", _NamedShadowList)
-
-	ListNamedShadowsForThingResponse_nextToken = ListNamedShadowsForThingResponse.AddMember("nextToken", _NextToken)
-
-	ListNamedShadowsForThingResponse_timestamp = ListNamedShadowsForThingResponse.AddMember("timestamp", _Timestamp)
-
-	ListRetainedMessagesRequest_nextToken = ListRetainedMessagesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRetainedMessagesRequest_maxResults = ListRetainedMessagesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRetainedMessagesResponse_retainedTopics = ListRetainedMessagesResponse.AddMember("retainedTopics", _RetainedMessageList)
-
-	ListRetainedMessagesResponse_nextToken = ListRetainedMessagesResponse.AddMember("nextToken", _NextToken)
-
-	ListSubscriptionsRequest_clientId = ListSubscriptionsRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	ListSubscriptionsRequest_nextToken = ListSubscriptionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSubscriptionsRequest_maxResults = ListSubscriptionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSubscriptionsResponse_subscriptions = ListSubscriptionsResponse.AddMember("subscriptions", _SubscriptionList)
-
-	ListSubscriptionsResponse_nextToken = ListSubscriptionsResponse.AddMember("nextToken", _NextToken)
-
-	PublishRequest_topic = PublishRequest.AddMember("topic", _Topic, &smithytraits.HTTPLabel{})
-
-	PublishRequest_qos = PublishRequest.AddMember("qos", _Qos, &smithytraits.HTTPQuery{Name: "qos"})
-
-	PublishRequest_retain = PublishRequest.AddMember("retain", _Retain, &smithytraits.HTTPQuery{Name: "retain"})
-
-	PublishRequest_payload = PublishRequest.AddMember("payload", _Payload, &smithytraits.HTTPPayload{})
-
-	PublishRequest_userProperties = PublishRequest.AddMember("userProperties", _SynthesizedJsonUserProperties, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-user-properties"})
-
-	PublishRequest_payloadFormatIndicator = PublishRequest.AddMember("payloadFormatIndicator", PayloadFormatIndicator, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-payload-format-indicator"})
-
-	PublishRequest_contentType = PublishRequest.AddMember("contentType", _ContentType, &smithytraits.HTTPQuery{Name: "contentType"})
-
-	PublishRequest_responseTopic = PublishRequest.AddMember("responseTopic", _ResponseTopic, &smithytraits.HTTPQuery{Name: "responseTopic"})
-
-	PublishRequest_correlationData = PublishRequest.AddMember("correlationData", _CorrelationData, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-correlation-data"})
-
-	PublishRequest_messageExpiry = PublishRequest.AddMember("messageExpiry", _MessageExpiry, &smithytraits.HTTPQuery{Name: "messageExpiry"})
-
-	SendDirectMessageRequest_clientId = SendDirectMessageRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	SendDirectMessageRequest_topic = SendDirectMessageRequest.AddMember("topic", _Topic, &smithytraits.HTTPQuery{Name: "topic"})
-
-	SendDirectMessageRequest_contentType = SendDirectMessageRequest.AddMember("contentType", _ContentType, &smithytraits.HTTPQuery{Name: "contentType"})
-
-	SendDirectMessageRequest_responseTopic = SendDirectMessageRequest.AddMember("responseTopic", _ResponseTopic, &smithytraits.HTTPQuery{Name: "responseTopic"})
-
-	SendDirectMessageRequest_confirmation = SendDirectMessageRequest.AddMember("confirmation", _Confirmation, &smithytraits.HTTPQuery{Name: "confirmation"})
-
-	SendDirectMessageRequest_timeout = SendDirectMessageRequest.AddMember("timeout", _TimeoutInSeconds, &smithytraits.HTTPQuery{Name: "timeout"})
-
-	SendDirectMessageRequest_payload = SendDirectMessageRequest.AddMember("payload", _Payload, &smithytraits.HTTPPayload{})
-
-	SendDirectMessageRequest_userProperties = SendDirectMessageRequest.AddMember("userProperties", _SynthesizedJsonUserProperties, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-user-properties"})
-
-	SendDirectMessageRequest_payloadFormatIndicator = SendDirectMessageRequest.AddMember("payloadFormatIndicator", PayloadFormatIndicator, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-payload-format-indicator"})
-
-	SendDirectMessageRequest_correlationData = SendDirectMessageRequest.AddMember("correlationData", _CorrelationData, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-correlation-data"})
-
-	SendDirectMessageResponse_message = SendDirectMessageResponse.AddMember("message", _ResponseMessage)
-
-	SendDirectMessageResponse_traceId = SendDirectMessageResponse.AddMember("traceId", _TraceId)
-
-	UpdateThingShadowRequest_thingName = UpdateThingShadowRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	UpdateThingShadowRequest_shadowName = UpdateThingShadowRequest.AddMember("shadowName", _ShadowName, &smithytraits.HTTPQuery{Name: "name"})
-
-	UpdateThingShadowRequest_payload = UpdateThingShadowRequest.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
-	UpdateThingShadowResponse_payload = UpdateThingShadowResponse.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 504}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 405}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 413}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 415}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "cleanSession"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "preventWillMessage"}}, DirectMask: 0x10}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeSocketInformation"}}, DirectMask: 0x10}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "pageSize"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "qos"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "retain"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-user-properties"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-payload-format-indicator"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "contentType"}}, DirectMask: 0x10}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "responseTopic"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-correlation-data"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "messageExpiry"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "topic"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "confirmation"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "timeout"}}, DirectMask: 0x10}
+
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_message}}
+var mGatewayTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayTimeoutException_message}}
+var mInternalFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalFailureException_message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_message}}
+var mMethodNotAllowedException = smithy.SchemaMembers{List: []*smithy.Schema{&sMethodNotAllowedException_message}}
+var m_NamedShadowList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamedShadowList_member}}
+var mPayloadFormatIndicator = smithy.SchemaMembers{List: []*smithy.Schema{&sPayloadFormatIndicator_UNSPECIFIED_BYTES, &sPayloadFormatIndicator_UTF8_DATA}}
+var mRequestEntityTooLargeException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestEntityTooLargeException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var m_RetainedMessageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RetainedMessageList_member}}
+var mRetainedMessageSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRetainedMessageSummary_topic, &sRetainedMessageSummary_payloadSize, &sRetainedMessageSummary_qos, &sRetainedMessageSummary_lastModifiedTime}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var m_SubscriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriptionList_member}}
+var mSubscriptionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionSummary_topicFilter, &sSubscriptionSummary_qos}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mUnsupportedDocumentEncodingException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedDocumentEncodingException_message}}
+var mDeleteConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionRequest_clientId, &sDeleteConnectionRequest_cleanSession, &sDeleteConnectionRequest_preventWillMessage}}
+var mDeleteThingShadowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteThingShadowRequest_thingName, &sDeleteThingShadowRequest_shadowName}}
+var mDeleteThingShadowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteThingShadowResponse_payload}}
+var mGetConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionRequest_clientId, &sGetConnectionRequest_includeSocketInformation}}
+var mGetConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionResponse_connected, &sGetConnectionResponse_thingName, &sGetConnectionResponse_cleanSession, &sGetConnectionResponse_sourceIp, &sGetConnectionResponse_sourcePort, &sGetConnectionResponse_targetIp, &sGetConnectionResponse_targetPort, &sGetConnectionResponse_keepAliveDuration, &sGetConnectionResponse_connectedSince, &sGetConnectionResponse_disconnectedSince, &sGetConnectionResponse_disconnectReason, &sGetConnectionResponse_sessionExpiry, &sGetConnectionResponse_clientId, &sGetConnectionResponse_vpcEndpointId}, Hash: &hGetConnectionResponse}
+var mGetRetainedMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRetainedMessageRequest_topic}}
+var mGetRetainedMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRetainedMessageResponse_topic, &sGetRetainedMessageResponse_payload, &sGetRetainedMessageResponse_qos, &sGetRetainedMessageResponse_lastModifiedTime, &sGetRetainedMessageResponse_userProperties}}
+var mGetThingShadowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetThingShadowRequest_thingName, &sGetThingShadowRequest_shadowName}}
+var mGetThingShadowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetThingShadowResponse_payload}}
+var mListNamedShadowsForThingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamedShadowsForThingRequest_thingName, &sListNamedShadowsForThingRequest_nextToken, &sListNamedShadowsForThingRequest_pageSize}}
+var mListNamedShadowsForThingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamedShadowsForThingResponse_results, &sListNamedShadowsForThingResponse_nextToken, &sListNamedShadowsForThingResponse_timestamp}}
+var mListRetainedMessagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRetainedMessagesRequest_nextToken, &sListRetainedMessagesRequest_maxResults}}
+var mListRetainedMessagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRetainedMessagesResponse_retainedTopics, &sListRetainedMessagesResponse_nextToken}}
+var mListSubscriptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsRequest_clientId, &sListSubscriptionsRequest_nextToken, &sListSubscriptionsRequest_maxResults}}
+var mListSubscriptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsResponse_subscriptions, &sListSubscriptionsResponse_nextToken}}
+var mPublishRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishRequest_topic, &sPublishRequest_qos, &sPublishRequest_retain, &sPublishRequest_payload, &sPublishRequest_userProperties, &sPublishRequest_payloadFormatIndicator, &sPublishRequest_contentType, &sPublishRequest_responseTopic, &sPublishRequest_correlationData, &sPublishRequest_messageExpiry}, Hash: &hPublishRequest}
+var mSendDirectMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendDirectMessageRequest_clientId, &sSendDirectMessageRequest_topic, &sSendDirectMessageRequest_contentType, &sSendDirectMessageRequest_responseTopic, &sSendDirectMessageRequest_confirmation, &sSendDirectMessageRequest_timeout, &sSendDirectMessageRequest_payload, &sSendDirectMessageRequest_userProperties, &sSendDirectMessageRequest_payloadFormatIndicator, &sSendDirectMessageRequest_correlationData}, Hash: &hSendDirectMessageRequest}
+var mSendDirectMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSendDirectMessageResponse_message, &sSendDirectMessageResponse_traceId}}
+var mUpdateThingShadowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateThingShadowRequest_thingName, &sUpdateThingShadowRequest_shadowName, &sUpdateThingShadowRequest_payload}}
+var mUpdateThingShadowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateThingShadowResponse_payload}}
+
+var hGetConnectionResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 8, 4, 0, 0, 2, 12, 0, 0, 0, 0, 0, 14, 1, 0, 0, 0, 7, 10, 6, 0, 11, 0, 0,
+	13, 0, 5, 0, 3, 0, 9, 0,
+}}
+var hPublishRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 2, 0, 1, 0, 10, 0, 0, 0, 0, 0, 7, 5, 9, 8, 0, 0, 0, 0, 6, 0,
+	0, 0, 4, 3, 0, 0, 0, 0,
+}}
+var hSendDirectMessageRequest = smithy.MemberHash{Seed: 19, Slots: []uint16{
+	9, 0, 2, 0, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 6, 4,
+	5, 8, 7, 0, 0, 0, 0, 0,
+}}
+
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConnection})
+var sDeleteThingShadow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteThingShadow, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteThingShadow})
+var sGetConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnection, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetConnection})
+var sGetRetainedMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRetainedMessage, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetRetainedMessage})
+var sGetThingShadow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThingShadow, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetThingShadow})
+var sListNamedShadowsForThing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamedShadowsForThing, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListNamedShadowsForThing})
+var sListRetainedMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetainedMessages, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListRetainedMessages})
+var sListSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptions, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListSubscriptions})
+var sPublish = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublish, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ePublish})
+var sSendDirectMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendDirectMessage, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eSendDirectMessage})
+var sUpdateThingShadow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThingShadow, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eUpdateThingShadow})
+var s_IotMoonrakerService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IotMoonrakerService, Type: smithy.ShapeTypeService, Ext: &e_IotMoonrakerService})
+var s_CleanSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CleanSession, Type: smithy.ShapeTypeBoolean, Ext: &e_CleanSession})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &e_ClientId})
+var s_Confirmation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Confirmation, Type: smithy.ShapeTypeBoolean, Ext: &e_Confirmation})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_Connected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Connected, Type: smithy.ShapeTypeBoolean, Ext: &e_Connected})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &e_ContentType})
+var s_CorrelationData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CorrelationData, Type: smithy.ShapeTypeString, Ext: &e_CorrelationData})
+var s_DisconnectReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisconnectReason, Type: smithy.ShapeTypeString, Ext: &e_DisconnectReason})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_message})
+var sGatewayTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayTimeoutException, Members: &mGatewayTimeoutException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eGatewayTimeoutException})
+var sGatewayTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eGatewayTimeoutException_message})
+var s_IncludeSocketInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeSocketInformation, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeSocketInformation})
+var sInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailureException, Members: &mInternalFailureException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eInternalFailureException})
+var sInternalFailureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalFailureException_message})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var s_JsonDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonDocument, Type: smithy.ShapeTypeBlob, Ext: &e_JsonDocument})
+var s_KeepAliveDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeepAliveDuration, Type: smithy.ShapeTypeInteger, Ext: &e_KeepAliveDuration})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MessageExpiry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageExpiry, Type: smithy.ShapeTypeLong, Ext: &e_MessageExpiry})
+var sMethodNotAllowedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMethodNotAllowedException, Members: &mMethodNotAllowedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eMethodNotAllowedException})
+var sMethodNotAllowedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eMethodNotAllowedException_message})
+var s_NamedShadowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamedShadowList, Members: &m_NamedShadowList, Type: smithy.ShapeTypeList, Ext: &e_NamedShadowList})
+var s_NamedShadowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ShadowName, Type: smithy.ShapeTypeString, Ext: &e_NamedShadowList_member})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &e_PageSize})
+var s_Payload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Payload, Type: smithy.ShapeTypeBlob, Ext: &e_Payload})
+var sPayloadFormatIndicator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadFormatIndicator, Members: &mPayloadFormatIndicator, Type: smithy.ShapeTypeEnum, Ext: &ePayloadFormatIndicator})
+var sPayloadFormatIndicator_UNSPECIFIED_BYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSPECIFIED_BYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePayloadFormatIndicator_UNSPECIFIED_BYTES})
+var sPayloadFormatIndicator_UTF8_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UTF8_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePayloadFormatIndicator_UTF8_DATA})
+var s_PayloadSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PayloadSize, Type: smithy.ShapeTypeLong, Ext: &e_PayloadSize})
+var s_PreventWillMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreventWillMessage, Type: smithy.ShapeTypeBoolean, Ext: &e_PreventWillMessage})
+var s_Qos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Qos, Type: smithy.ShapeTypeInteger, Ext: &e_Qos})
+var sRequestEntityTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestEntityTooLargeException, Members: &mRequestEntityTooLargeException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eRequestEntityTooLargeException})
+var sRequestEntityTooLargeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eRequestEntityTooLargeException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_ResponseMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseMessage, Type: smithy.ShapeTypeString, Ext: &e_ResponseMessage})
+var s_ResponseTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseTopic, Type: smithy.ShapeTypeString, Ext: &e_ResponseTopic})
+var s_Retain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Retain, Type: smithy.ShapeTypeBoolean, Ext: &e_Retain})
+var s_RetainedMessageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetainedMessageList, Members: &m_RetainedMessageList, Type: smithy.ShapeTypeList, Ext: &e_RetainedMessageList})
+var s_RetainedMessageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRetainedMessageSummary, Members: &mRetainedMessageSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RetainedMessageList_member})
+var sRetainedMessageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetainedMessageSummary, Members: &mRetainedMessageSummary, Type: smithy.ShapeTypeStructure, Ext: &eRetainedMessageSummary})
+var sRetainedMessageSummary_topic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topic", ID: &i_Topic, Type: smithy.ShapeTypeString, Ext: &eRetainedMessageSummary_topic})
+var sRetainedMessageSummary_payloadSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payloadSize", ID: &i_PayloadSize, Type: smithy.ShapeTypeLong, Ext: &eRetainedMessageSummary_payloadSize})
+var sRetainedMessageSummary_qos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qos", ID: &i_Qos, Type: smithy.ShapeTypeInteger, Ext: &eRetainedMessageSummary_qos})
+var sRetainedMessageSummary_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeLong, Ext: &eRetainedMessageSummary_lastModifiedTime})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var s_SessionExpiry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionExpiry, Type: smithy.ShapeTypeLong, Ext: &e_SessionExpiry})
+var s_ShadowName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShadowName, Type: smithy.ShapeTypeString, Ext: &e_ShadowName})
+var s_SourceIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceIp, Type: smithy.ShapeTypeString, Ext: &e_SourceIp})
+var s_SourcePort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourcePort, Type: smithy.ShapeTypeInteger, Ext: &e_SourcePort})
+var s_SubscriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionList, Members: &m_SubscriptionList, Type: smithy.ShapeTypeList, Ext: &e_SubscriptionList})
+var s_SubscriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SubscriptionList_member})
+var sSubscriptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionSummary})
+var sSubscriptionSummary_topicFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topicFilter", ID: &i_TopicFilter, Type: smithy.ShapeTypeString, Ext: &eSubscriptionSummary_topicFilter})
+var sSubscriptionSummary_qos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qos", ID: &i_Qos, Type: smithy.ShapeTypeInteger, Ext: &eSubscriptionSummary_qos})
+var s_SynthesizedJsonUserProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonUserProperties, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_SynthesizedJsonUserProperties})
+var s_TargetIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIp, Type: smithy.ShapeTypeString, Ext: &e_TargetIp})
+var s_TargetPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetPort, Type: smithy.ShapeTypeInteger, Ext: &e_TargetPort})
+var s_ThingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &e_ThingName})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_TimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeoutInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_TimeoutInSeconds})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeLong, Ext: &e_Timestamp})
+var s_Topic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Topic, Type: smithy.ShapeTypeString, Ext: &e_Topic})
+var s_TopicFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicFilter, Type: smithy.ShapeTypeString, Ext: &e_TopicFilter})
+var s_TraceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TraceId, Type: smithy.ShapeTypeString, Ext: &e_TraceId})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sUnsupportedDocumentEncodingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedDocumentEncodingException, Members: &mUnsupportedDocumentEncodingException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedDocumentEncodingException})
+var sUnsupportedDocumentEncodingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eUnsupportedDocumentEncodingException_message})
+var s_UserPropertiesBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserPropertiesBlob, Type: smithy.ShapeTypeBlob, Ext: &e_UserPropertiesBlob})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointId})
+var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectionRequest})
+var sDeleteConnectionRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectionRequest_clientId})
+var sDeleteConnectionRequest_cleanSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cleanSession", ID: &i_CleanSession, Traits: &t25, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteConnectionRequest_cleanSession})
+var sDeleteConnectionRequest_preventWillMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preventWillMessage", ID: &i_PreventWillMessage, Traits: &t26, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteConnectionRequest_preventWillMessage})
+var sDeleteThingShadowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteThingShadowRequest, Members: &mDeleteThingShadowRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteThingShadowRequest})
+var sDeleteThingShadowRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eDeleteThingShadowRequest_thingName})
+var sDeleteThingShadowRequest_shadowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shadowName", ID: &i_ShadowName, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDeleteThingShadowRequest_shadowName})
+var sDeleteThingShadowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteThingShadowResponse, Members: &mDeleteThingShadowResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteThingShadowResponse})
+var sDeleteThingShadowResponse_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JsonDocument, Traits: &t28, Type: smithy.ShapeTypeBlob, Ext: &eDeleteThingShadowResponse_payload})
+var sGetConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionRequest, Members: &mGetConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionRequest})
+var sGetConnectionRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eGetConnectionRequest_clientId})
+var sGetConnectionRequest_includeSocketInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeSocketInformation", ID: &i_IncludeSocketInformation, Traits: &t29, Type: smithy.ShapeTypeBoolean, Ext: &eGetConnectionRequest_includeSocketInformation})
+var sGetConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionResponse, Members: &mGetConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionResponse})
+var sGetConnectionResponse_connected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connected", ID: &i_Connected, Type: smithy.ShapeTypeBoolean, Ext: &eGetConnectionResponse_connected})
+var sGetConnectionResponse_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &eGetConnectionResponse_thingName})
+var sGetConnectionResponse_cleanSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cleanSession", ID: &i_CleanSession, Type: smithy.ShapeTypeBoolean, Ext: &eGetConnectionResponse_cleanSession})
+var sGetConnectionResponse_sourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceIp", ID: &i_SourceIp, Type: smithy.ShapeTypeString, Ext: &eGetConnectionResponse_sourceIp})
+var sGetConnectionResponse_sourcePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourcePort", ID: &i_SourcePort, Type: smithy.ShapeTypeInteger, Ext: &eGetConnectionResponse_sourcePort})
+var sGetConnectionResponse_targetIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIp", ID: &i_TargetIp, Type: smithy.ShapeTypeString, Ext: &eGetConnectionResponse_targetIp})
+var sGetConnectionResponse_targetPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPort", ID: &i_TargetPort, Type: smithy.ShapeTypeInteger, Ext: &eGetConnectionResponse_targetPort})
+var sGetConnectionResponse_keepAliveDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepAliveDuration", ID: &i_KeepAliveDuration, Type: smithy.ShapeTypeInteger, Ext: &eGetConnectionResponse_keepAliveDuration})
+var sGetConnectionResponse_connectedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectedSince", ID: &i_Timestamp, Type: smithy.ShapeTypeLong, Ext: &eGetConnectionResponse_connectedSince})
+var sGetConnectionResponse_disconnectedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disconnectedSince", ID: &i_Timestamp, Type: smithy.ShapeTypeLong, Ext: &eGetConnectionResponse_disconnectedSince})
+var sGetConnectionResponse_disconnectReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disconnectReason", ID: &i_DisconnectReason, Type: smithy.ShapeTypeString, Ext: &eGetConnectionResponse_disconnectReason})
+var sGetConnectionResponse_sessionExpiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionExpiry", ID: &i_SessionExpiry, Type: smithy.ShapeTypeLong, Ext: &eGetConnectionResponse_sessionExpiry})
+var sGetConnectionResponse_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &eGetConnectionResponse_clientId})
+var sGetConnectionResponse_vpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eGetConnectionResponse_vpcEndpointId})
+var sGetRetainedMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRetainedMessageRequest, Members: &mGetRetainedMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRetainedMessageRequest})
+var sGetRetainedMessageRequest_topic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topic", ID: &i_Topic, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eGetRetainedMessageRequest_topic})
+var sGetRetainedMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRetainedMessageResponse, Members: &mGetRetainedMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRetainedMessageResponse})
+var sGetRetainedMessageResponse_topic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topic", ID: &i_Topic, Type: smithy.ShapeTypeString, Ext: &eGetRetainedMessageResponse_topic})
+var sGetRetainedMessageResponse_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_Payload, Type: smithy.ShapeTypeBlob, Ext: &eGetRetainedMessageResponse_payload})
+var sGetRetainedMessageResponse_qos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qos", ID: &i_Qos, Type: smithy.ShapeTypeInteger, Ext: &eGetRetainedMessageResponse_qos})
+var sGetRetainedMessageResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeLong, Ext: &eGetRetainedMessageResponse_lastModifiedTime})
+var sGetRetainedMessageResponse_userProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userProperties", ID: &i_UserPropertiesBlob, Type: smithy.ShapeTypeBlob, Ext: &eGetRetainedMessageResponse_userProperties})
+var sGetThingShadowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThingShadowRequest, Members: &mGetThingShadowRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetThingShadowRequest})
+var sGetThingShadowRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eGetThingShadowRequest_thingName})
+var sGetThingShadowRequest_shadowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shadowName", ID: &i_ShadowName, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eGetThingShadowRequest_shadowName})
+var sGetThingShadowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThingShadowResponse, Members: &mGetThingShadowResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetThingShadowResponse})
+var sGetThingShadowResponse_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JsonDocument, Traits: &t28, Type: smithy.ShapeTypeBlob, Ext: &eGetThingShadowResponse_payload})
+var sListNamedShadowsForThingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamedShadowsForThingRequest, Members: &mListNamedShadowsForThingRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNamedShadowsForThingRequest})
+var sListNamedShadowsForThingRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListNamedShadowsForThingRequest_thingName})
+var sListNamedShadowsForThingRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListNamedShadowsForThingRequest_nextToken})
+var sListNamedShadowsForThingRequest_pageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pageSize", ID: &i_PageSize, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eListNamedShadowsForThingRequest_pageSize})
+var sListNamedShadowsForThingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamedShadowsForThingResponse, Members: &mListNamedShadowsForThingResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNamedShadowsForThingResponse})
+var sListNamedShadowsForThingResponse_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_NamedShadowList, Members: &m_NamedShadowList, Type: smithy.ShapeTypeList, Ext: &eListNamedShadowsForThingResponse_results})
+var sListNamedShadowsForThingResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNamedShadowsForThingResponse_nextToken})
+var sListNamedShadowsForThingResponse_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeLong, Ext: &eListNamedShadowsForThingResponse_timestamp})
+var sListRetainedMessagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetainedMessagesRequest, Members: &mListRetainedMessagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRetainedMessagesRequest})
+var sListRetainedMessagesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListRetainedMessagesRequest_nextToken})
+var sListRetainedMessagesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t32, Type: smithy.ShapeTypeInteger, Ext: &eListRetainedMessagesRequest_maxResults})
+var sListRetainedMessagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetainedMessagesResponse, Members: &mListRetainedMessagesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRetainedMessagesResponse})
+var sListRetainedMessagesResponse_retainedTopics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retainedTopics", ID: &i_RetainedMessageList, Members: &m_RetainedMessageList, Type: smithy.ShapeTypeList, Ext: &eListRetainedMessagesResponse_retainedTopics})
+var sListRetainedMessagesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRetainedMessagesResponse_nextToken})
+var sListSubscriptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsRequest, Members: &mListSubscriptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsRequest})
+var sListSubscriptionsRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsRequest_clientId})
+var sListSubscriptionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsRequest_nextToken})
+var sListSubscriptionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t32, Type: smithy.ShapeTypeInteger, Ext: &eListSubscriptionsRequest_maxResults})
+var sListSubscriptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsResponse, Members: &mListSubscriptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsResponse})
+var sListSubscriptionsResponse_subscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptions", ID: &i_SubscriptionList, Members: &m_SubscriptionList, Type: smithy.ShapeTypeList, Ext: &eListSubscriptionsResponse_subscriptions})
+var sListSubscriptionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsResponse_nextToken})
+var sPublishRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishRequest, Members: &mPublishRequest, Type: smithy.ShapeTypeStructure, Ext: &ePublishRequest})
+var sPublishRequest_topic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topic", ID: &i_Topic, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ePublishRequest_topic})
+var sPublishRequest_qos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qos", ID: &i_Qos, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &ePublishRequest_qos})
+var sPublishRequest_retain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retain", ID: &i_Retain, Traits: &t34, Type: smithy.ShapeTypeBoolean, Ext: &ePublishRequest_retain})
+var sPublishRequest_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_Payload, Traits: &t28, Type: smithy.ShapeTypeBlob, Ext: &ePublishRequest_payload})
+var sPublishRequest_userProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userProperties", ID: &i_SynthesizedJsonUserProperties, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePublishRequest_userProperties})
+var sPublishRequest_payloadFormatIndicator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payloadFormatIndicator", ID: &iPayloadFormatIndicator, Members: &mPayloadFormatIndicator, Traits: &t36, Type: smithy.ShapeTypeEnum, Ext: &ePublishRequest_payloadFormatIndicator})
+var sPublishRequest_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_ContentType, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ePublishRequest_contentType})
+var sPublishRequest_responseTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseTopic", ID: &i_ResponseTopic, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ePublishRequest_responseTopic})
+var sPublishRequest_correlationData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "correlationData", ID: &i_CorrelationData, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ePublishRequest_correlationData})
+var sPublishRequest_messageExpiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageExpiry", ID: &i_MessageExpiry, Traits: &t40, Type: smithy.ShapeTypeLong, Ext: &ePublishRequest_messageExpiry})
+var sSendDirectMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendDirectMessageRequest, Members: &mSendDirectMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendDirectMessageRequest})
+var sSendDirectMessageRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageRequest_clientId})
+var sSendDirectMessageRequest_topic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topic", ID: &i_Topic, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageRequest_topic})
+var sSendDirectMessageRequest_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_ContentType, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageRequest_contentType})
+var sSendDirectMessageRequest_responseTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseTopic", ID: &i_ResponseTopic, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageRequest_responseTopic})
+var sSendDirectMessageRequest_confirmation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmation", ID: &i_Confirmation, Traits: &t42, Type: smithy.ShapeTypeBoolean, Ext: &eSendDirectMessageRequest_confirmation})
+var sSendDirectMessageRequest_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &i_TimeoutInSeconds, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eSendDirectMessageRequest_timeout})
+var sSendDirectMessageRequest_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_Payload, Traits: &t28, Type: smithy.ShapeTypeBlob, Ext: &eSendDirectMessageRequest_payload})
+var sSendDirectMessageRequest_userProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userProperties", ID: &i_SynthesizedJsonUserProperties, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageRequest_userProperties})
+var sSendDirectMessageRequest_payloadFormatIndicator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payloadFormatIndicator", ID: &iPayloadFormatIndicator, Members: &mPayloadFormatIndicator, Traits: &t36, Type: smithy.ShapeTypeEnum, Ext: &eSendDirectMessageRequest_payloadFormatIndicator})
+var sSendDirectMessageRequest_correlationData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "correlationData", ID: &i_CorrelationData, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageRequest_correlationData})
+var sSendDirectMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendDirectMessageResponse, Members: &mSendDirectMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendDirectMessageResponse})
+var sSendDirectMessageResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ResponseMessage, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageResponse_message})
+var sSendDirectMessageResponse_traceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "traceId", ID: &i_TraceId, Type: smithy.ShapeTypeString, Ext: &eSendDirectMessageResponse_traceId})
+var sUpdateThingShadowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThingShadowRequest, Members: &mUpdateThingShadowRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThingShadowRequest})
+var sUpdateThingShadowRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eUpdateThingShadowRequest_thingName})
+var sUpdateThingShadowRequest_shadowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shadowName", ID: &i_ShadowName, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUpdateThingShadowRequest_shadowName})
+var sUpdateThingShadowRequest_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JsonDocument, Traits: &t28, Type: smithy.ShapeTypeBlob, Ext: &eUpdateThingShadowRequest_payload})
+var sUpdateThingShadowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThingShadowResponse, Members: &mUpdateThingShadowResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThingShadowResponse})
+var sUpdateThingShadowResponse_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JsonDocument, Traits: &t28, Type: smithy.ShapeTypeBlob, Ext: &eUpdateThingShadowResponse_payload})
+
+var DeleteConnection = &sDeleteConnection
+
+var DeleteThingShadow = &sDeleteThingShadow
+
+var GetConnection = &sGetConnection
+
+var GetRetainedMessage = &sGetRetainedMessage
+
+var GetThingShadow = &sGetThingShadow
+
+var ListNamedShadowsForThing = &sListNamedShadowsForThing
+
+var ListRetainedMessages = &sListRetainedMessages
+
+var ListSubscriptions = &sListSubscriptions
+
+var Publish = &sPublish
+
+var SendDirectMessage = &sSendDirectMessage
+
+var UpdateThingShadow = &sUpdateThingShadow
+
+var _IotMoonrakerService = &s_IotMoonrakerService
+
+var _CleanSession = &s_CleanSession
+
+var _ClientId = &s_ClientId
+
+var _Confirmation = &s_Confirmation
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _Connected = &s_Connected
+
+var _ContentType = &s_ContentType
+
+var _CorrelationData = &s_CorrelationData
+
+var _DisconnectReason = &s_DisconnectReason
+
+var _errorMessage = &s_errorMessage
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_message = &sForbiddenException_message
+
+var GatewayTimeoutException = &sGatewayTimeoutException
+var GatewayTimeoutException_message = &sGatewayTimeoutException_message
+
+var _IncludeSocketInformation = &s_IncludeSocketInformation
+
+var InternalFailureException = &sInternalFailureException
+var InternalFailureException_message = &sInternalFailureException_message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_message = &sInvalidRequestException_message
+
+var _JsonDocument = &s_JsonDocument
+
+var _KeepAliveDuration = &s_KeepAliveDuration
+
+var _MaxResults = &s_MaxResults
+
+var _MessageExpiry = &s_MessageExpiry
+
+var MethodNotAllowedException = &sMethodNotAllowedException
+var MethodNotAllowedException_message = &sMethodNotAllowedException_message
+
+var _NamedShadowList = &s_NamedShadowList
+var _NamedShadowList_member = &s_NamedShadowList_member
+
+var _NextToken = &s_NextToken
+
+var _PageSize = &s_PageSize
+
+var _Payload = &s_Payload
+
+var PayloadFormatIndicator = &sPayloadFormatIndicator
+var PayloadFormatIndicator_UNSPECIFIED_BYTES = &sPayloadFormatIndicator_UNSPECIFIED_BYTES
+var PayloadFormatIndicator_UTF8_DATA = &sPayloadFormatIndicator_UTF8_DATA
+
+var _PayloadSize = &s_PayloadSize
+
+var _PreventWillMessage = &s_PreventWillMessage
+
+var _Qos = &s_Qos
+
+var RequestEntityTooLargeException = &sRequestEntityTooLargeException
+var RequestEntityTooLargeException_message = &sRequestEntityTooLargeException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _ResponseMessage = &s_ResponseMessage
+
+var _ResponseTopic = &s_ResponseTopic
+
+var _Retain = &s_Retain
+
+var _RetainedMessageList = &s_RetainedMessageList
+var _RetainedMessageList_member = &s_RetainedMessageList_member
+
+var RetainedMessageSummary = &sRetainedMessageSummary
+var RetainedMessageSummary_topic = &sRetainedMessageSummary_topic
+var RetainedMessageSummary_payloadSize = &sRetainedMessageSummary_payloadSize
+var RetainedMessageSummary_qos = &sRetainedMessageSummary_qos
+var RetainedMessageSummary_lastModifiedTime = &sRetainedMessageSummary_lastModifiedTime
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var _SessionExpiry = &s_SessionExpiry
+
+var _ShadowName = &s_ShadowName
+
+var _SourceIp = &s_SourceIp
+
+var _SourcePort = &s_SourcePort
+
+var _SubscriptionList = &s_SubscriptionList
+var _SubscriptionList_member = &s_SubscriptionList_member
+
+var SubscriptionSummary = &sSubscriptionSummary
+var SubscriptionSummary_topicFilter = &sSubscriptionSummary_topicFilter
+var SubscriptionSummary_qos = &sSubscriptionSummary_qos
+
+var _SynthesizedJsonUserProperties = &s_SynthesizedJsonUserProperties
+
+var _TargetIp = &s_TargetIp
+
+var _TargetPort = &s_TargetPort
+
+var _ThingName = &s_ThingName
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _TimeoutInSeconds = &s_TimeoutInSeconds
+
+var _Timestamp = &s_Timestamp
+
+var _Topic = &s_Topic
+
+var _TopicFilter = &s_TopicFilter
+
+var _TraceId = &s_TraceId
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
+
+var UnsupportedDocumentEncodingException = &sUnsupportedDocumentEncodingException
+var UnsupportedDocumentEncodingException_message = &sUnsupportedDocumentEncodingException_message
+
+var _UserPropertiesBlob = &s_UserPropertiesBlob
+
+var _VpcEndpointId = &s_VpcEndpointId
+
+var DeleteConnectionRequest = &sDeleteConnectionRequest
+var DeleteConnectionRequest_clientId = &sDeleteConnectionRequest_clientId
+var DeleteConnectionRequest_cleanSession = &sDeleteConnectionRequest_cleanSession
+var DeleteConnectionRequest_preventWillMessage = &sDeleteConnectionRequest_preventWillMessage
+
+var DeleteThingShadowRequest = &sDeleteThingShadowRequest
+var DeleteThingShadowRequest_thingName = &sDeleteThingShadowRequest_thingName
+var DeleteThingShadowRequest_shadowName = &sDeleteThingShadowRequest_shadowName
+
+var DeleteThingShadowResponse = &sDeleteThingShadowResponse
+var DeleteThingShadowResponse_payload = &sDeleteThingShadowResponse_payload
+
+var GetConnectionRequest = &sGetConnectionRequest
+var GetConnectionRequest_clientId = &sGetConnectionRequest_clientId
+var GetConnectionRequest_includeSocketInformation = &sGetConnectionRequest_includeSocketInformation
+
+var GetConnectionResponse = &sGetConnectionResponse
+var GetConnectionResponse_connected = &sGetConnectionResponse_connected
+var GetConnectionResponse_thingName = &sGetConnectionResponse_thingName
+var GetConnectionResponse_cleanSession = &sGetConnectionResponse_cleanSession
+var GetConnectionResponse_sourceIp = &sGetConnectionResponse_sourceIp
+var GetConnectionResponse_sourcePort = &sGetConnectionResponse_sourcePort
+var GetConnectionResponse_targetIp = &sGetConnectionResponse_targetIp
+var GetConnectionResponse_targetPort = &sGetConnectionResponse_targetPort
+var GetConnectionResponse_keepAliveDuration = &sGetConnectionResponse_keepAliveDuration
+var GetConnectionResponse_connectedSince = &sGetConnectionResponse_connectedSince
+var GetConnectionResponse_disconnectedSince = &sGetConnectionResponse_disconnectedSince
+var GetConnectionResponse_disconnectReason = &sGetConnectionResponse_disconnectReason
+var GetConnectionResponse_sessionExpiry = &sGetConnectionResponse_sessionExpiry
+var GetConnectionResponse_clientId = &sGetConnectionResponse_clientId
+var GetConnectionResponse_vpcEndpointId = &sGetConnectionResponse_vpcEndpointId
+
+var GetRetainedMessageRequest = &sGetRetainedMessageRequest
+var GetRetainedMessageRequest_topic = &sGetRetainedMessageRequest_topic
+
+var GetRetainedMessageResponse = &sGetRetainedMessageResponse
+var GetRetainedMessageResponse_topic = &sGetRetainedMessageResponse_topic
+var GetRetainedMessageResponse_payload = &sGetRetainedMessageResponse_payload
+var GetRetainedMessageResponse_qos = &sGetRetainedMessageResponse_qos
+var GetRetainedMessageResponse_lastModifiedTime = &sGetRetainedMessageResponse_lastModifiedTime
+var GetRetainedMessageResponse_userProperties = &sGetRetainedMessageResponse_userProperties
+
+var GetThingShadowRequest = &sGetThingShadowRequest
+var GetThingShadowRequest_thingName = &sGetThingShadowRequest_thingName
+var GetThingShadowRequest_shadowName = &sGetThingShadowRequest_shadowName
+
+var GetThingShadowResponse = &sGetThingShadowResponse
+var GetThingShadowResponse_payload = &sGetThingShadowResponse_payload
+
+var ListNamedShadowsForThingRequest = &sListNamedShadowsForThingRequest
+var ListNamedShadowsForThingRequest_thingName = &sListNamedShadowsForThingRequest_thingName
+var ListNamedShadowsForThingRequest_nextToken = &sListNamedShadowsForThingRequest_nextToken
+var ListNamedShadowsForThingRequest_pageSize = &sListNamedShadowsForThingRequest_pageSize
+
+var ListNamedShadowsForThingResponse = &sListNamedShadowsForThingResponse
+var ListNamedShadowsForThingResponse_results = &sListNamedShadowsForThingResponse_results
+var ListNamedShadowsForThingResponse_nextToken = &sListNamedShadowsForThingResponse_nextToken
+var ListNamedShadowsForThingResponse_timestamp = &sListNamedShadowsForThingResponse_timestamp
+
+var ListRetainedMessagesRequest = &sListRetainedMessagesRequest
+var ListRetainedMessagesRequest_nextToken = &sListRetainedMessagesRequest_nextToken
+var ListRetainedMessagesRequest_maxResults = &sListRetainedMessagesRequest_maxResults
+
+var ListRetainedMessagesResponse = &sListRetainedMessagesResponse
+var ListRetainedMessagesResponse_retainedTopics = &sListRetainedMessagesResponse_retainedTopics
+var ListRetainedMessagesResponse_nextToken = &sListRetainedMessagesResponse_nextToken
+
+var ListSubscriptionsRequest = &sListSubscriptionsRequest
+var ListSubscriptionsRequest_clientId = &sListSubscriptionsRequest_clientId
+var ListSubscriptionsRequest_nextToken = &sListSubscriptionsRequest_nextToken
+var ListSubscriptionsRequest_maxResults = &sListSubscriptionsRequest_maxResults
+
+var ListSubscriptionsResponse = &sListSubscriptionsResponse
+var ListSubscriptionsResponse_subscriptions = &sListSubscriptionsResponse_subscriptions
+var ListSubscriptionsResponse_nextToken = &sListSubscriptionsResponse_nextToken
+
+var PublishRequest = &sPublishRequest
+var PublishRequest_topic = &sPublishRequest_topic
+var PublishRequest_qos = &sPublishRequest_qos
+var PublishRequest_retain = &sPublishRequest_retain
+var PublishRequest_payload = &sPublishRequest_payload
+var PublishRequest_userProperties = &sPublishRequest_userProperties
+var PublishRequest_payloadFormatIndicator = &sPublishRequest_payloadFormatIndicator
+var PublishRequest_contentType = &sPublishRequest_contentType
+var PublishRequest_responseTopic = &sPublishRequest_responseTopic
+var PublishRequest_correlationData = &sPublishRequest_correlationData
+var PublishRequest_messageExpiry = &sPublishRequest_messageExpiry
+
+var SendDirectMessageRequest = &sSendDirectMessageRequest
+var SendDirectMessageRequest_clientId = &sSendDirectMessageRequest_clientId
+var SendDirectMessageRequest_topic = &sSendDirectMessageRequest_topic
+var SendDirectMessageRequest_contentType = &sSendDirectMessageRequest_contentType
+var SendDirectMessageRequest_responseTopic = &sSendDirectMessageRequest_responseTopic
+var SendDirectMessageRequest_confirmation = &sSendDirectMessageRequest_confirmation
+var SendDirectMessageRequest_timeout = &sSendDirectMessageRequest_timeout
+var SendDirectMessageRequest_payload = &sSendDirectMessageRequest_payload
+var SendDirectMessageRequest_userProperties = &sSendDirectMessageRequest_userProperties
+var SendDirectMessageRequest_payloadFormatIndicator = &sSendDirectMessageRequest_payloadFormatIndicator
+var SendDirectMessageRequest_correlationData = &sSendDirectMessageRequest_correlationData
+
+var SendDirectMessageResponse = &sSendDirectMessageResponse
+var SendDirectMessageResponse_message = &sSendDirectMessageResponse_message
+var SendDirectMessageResponse_traceId = &sSendDirectMessageResponse_traceId
+
+var UpdateThingShadowRequest = &sUpdateThingShadowRequest
+var UpdateThingShadowRequest_thingName = &sUpdateThingShadowRequest_thingName
+var UpdateThingShadowRequest_shadowName = &sUpdateThingShadowRequest_shadowName
+var UpdateThingShadowRequest_payload = &sUpdateThingShadowRequest_payload
+
+var UpdateThingShadowResponse = &sUpdateThingShadowResponse
+var UpdateThingShadowResponse_payload = &sUpdateThingShadowResponse_payload
+
+var IotMoonrakerService = &smithy.ServiceSchema{Schema: &s_IotMoonrakerService, Version: "2015-05-28"}

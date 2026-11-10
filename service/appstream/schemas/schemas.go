@@ -4,6312 +4,6032 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateAppBlockBuilderAppBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateAppBlockBuilderAppBlock",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateApplicationFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateApplicationFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateApplicationToEntitlement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateApplicationToEntitlement",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateSoftwareToImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateSoftwareToImageBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchAssociateUserStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "BatchAssociateUserStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchDisassociateUserStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "BatchDisassociateUserStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var CopyImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CopyImage",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAppBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlock",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAppBlockBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAppBlockBuilderStreamingURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockBuilderStreamingURL",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDirectoryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateDirectoryConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEntitlement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateEntitlement",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateExportImageTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateExportImageTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImageBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateImageBuilderStreamingURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImageBuilderStreamingURL",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateImportedImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImportedImage",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateStreamingURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateStreamingURL",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateThemeForStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateThemeForStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateUpdatedImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUpdatedImage",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateUsageReportSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUsageReportSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAppBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteAppBlock",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAppBlockBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteAppBlockBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDirectoryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteDirectoryConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEntitlement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteEntitlement",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImage",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImageBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteImagePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImagePermissions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteThemeForStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteThemeForStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteUsageReportSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteUsageReportSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAppBlockBuilderAppBlockAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlockBuilderAppBlockAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAppBlockBuilders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlockBuilders",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAppBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlocks",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeApplicationFleetAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeApplicationFleetAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeApplications",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAppLicenseUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppLicenseUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDirectoryConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeDirectoryConfigs",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEntitlements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeEntitlements",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFleets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeFleets",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeImageBuilders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImageBuilders",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeImagePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImagePermissions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImages",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeSessions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSoftwareAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeSoftwareAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeStacks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeStacks",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeThemeForStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeThemeForStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUsageReportSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUsageReportSubscriptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUsers",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUserStackAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUserStackAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisableUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateAppBlockBuilderAppBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateAppBlockBuilderAppBlock",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateApplicationFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateApplicationFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateApplicationFromEntitlement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateApplicationFromEntitlement",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateSoftwareFromImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateSoftwareFromImageBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var DrainSessionInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DrainSessionInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EnableUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExpireSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ExpireSession",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetExportImageTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "GetExportImageTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAssociatedFleets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListAssociatedFleets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAssociatedStacks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListAssociatedStacks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEntitledApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListEntitledApplications",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExportImageTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListExportImageTasks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartAppBlockBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartAppBlockBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartImageBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSoftwareDeploymentToImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartSoftwareDeploymentToImageBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopAppBlockBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopAppBlockBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopImageBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAppBlockBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateAppBlockBuilder",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDirectoryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateDirectoryConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEntitlement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateEntitlement",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateImagePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateImagePermissions",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateThemeForStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateThemeForStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var _PhotonAdminProxyService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "PhotonAdminProxyService",
-}, smithy.ShapeTypeService, 0)
-
-var PhotonAdminProxyService = smithy.NewServiceSchema(_PhotonAdminProxyService, "2016-12-01")
-
-var AccessEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AccessEndpoint",
-}, smithy.ShapeTypeStructure, 2)
-var AccessEndpoint_EndpointType *smithy.Schema
-
-var AccessEndpoint_VpceId *smithy.Schema
-
-var _AccessEndpointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AccessEndpointList",
-}, smithy.ShapeTypeList, 1)
-var _AccessEndpointList_member *smithy.Schema
-
-var AccessEndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AccessEndpointType",
-}, smithy.ShapeTypeEnum, 1)
-var AccessEndpointType_STREAMING *smithy.Schema
-
-var _AccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AccountName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AccountPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AccountPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Action",
-}, smithy.ShapeTypeEnum, 8)
-var Action_CLIPBOARD_COPY_FROM_LOCAL_DEVICE *smithy.Schema
-
-var Action_CLIPBOARD_COPY_TO_LOCAL_DEVICE *smithy.Schema
-
-var Action_FILE_UPLOAD *smithy.Schema
-
-var Action_FILE_DOWNLOAD *smithy.Schema
-
-var Action_PRINTING_TO_LOCAL_DEVICE *smithy.Schema
-
-var Action_DOMAIN_PASSWORD_SIGNIN *smithy.Schema
-
-var Action_DOMAIN_SMART_CARD_SIGNIN *smithy.Schema
-
-var Action_AUTO_TIME_ZONE_REDIRECTION *smithy.Schema
-
-var _AdminAppLicenseUsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AdminAppLicenseUsageList",
-}, smithy.ShapeTypeList, 1)
-var _AdminAppLicenseUsageList_member *smithy.Schema
-
-var AdminAppLicenseUsageRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AdminAppLicenseUsageRecord",
-}, smithy.ShapeTypeStructure, 7)
-var AdminAppLicenseUsageRecord_UserArn *smithy.Schema
-
-var AdminAppLicenseUsageRecord_BillingPeriod *smithy.Schema
-
-var AdminAppLicenseUsageRecord_OwnerAWSAccountId *smithy.Schema
-
-var AdminAppLicenseUsageRecord_SubscriptionFirstUsedDate *smithy.Schema
-
-var AdminAppLicenseUsageRecord_SubscriptionLastUsedDate *smithy.Schema
-
-var AdminAppLicenseUsageRecord_LicenseType *smithy.Schema
-
-var AdminAppLicenseUsageRecord_UserId *smithy.Schema
-
-var AgentAccessConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AgentAccessConfig",
-}, smithy.ShapeTypeStructure, 6)
-var AgentAccessConfig_Settings *smithy.Schema
-
-var AgentAccessConfig_S3BucketArn *smithy.Schema
-
-var AgentAccessConfig_ScreenshotsUploadEnabled *smithy.Schema
-
-var AgentAccessConfig_ScreenResolution *smithy.Schema
-
-var AgentAccessConfig_ScreenImageFormat *smithy.Schema
-
-var AgentAccessConfig_UserControlMode *smithy.Schema
-
-var AgentAccessConfigForUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AgentAccessConfigForUpdate",
-}, smithy.ShapeTypeStructure, 6)
-var AgentAccessConfigForUpdate_Settings *smithy.Schema
-
-var AgentAccessConfigForUpdate_S3BucketArn *smithy.Schema
-
-var AgentAccessConfigForUpdate_ScreenshotsUploadEnabled *smithy.Schema
-
-var AgentAccessConfigForUpdate_ScreenResolution *smithy.Schema
-
-var AgentAccessConfigForUpdate_ScreenImageFormat *smithy.Schema
-
-var AgentAccessConfigForUpdate_UserControlMode *smithy.Schema
-
-var AgentAccessSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AgentAccessSetting",
-}, smithy.ShapeTypeStructure, 2)
-var AgentAccessSetting_AgentAction *smithy.Schema
-
-var AgentAccessSetting_Permission *smithy.Schema
-
-var _AgentAccessSettingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AgentAccessSettingList",
-}, smithy.ShapeTypeList, 1)
-var _AgentAccessSettingList_member *smithy.Schema
-
-var AgentAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AgentAction",
-}, smithy.ShapeTypeEnum, 3)
-var AgentAction_COMPUTER_VISION *smithy.Schema
-
-var AgentAction_COMPUTER_INPUT *smithy.Schema
-
-var AgentAction_FORWARD_MCP_TOOLS *smithy.Schema
-
-var AgentSoftwareVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AgentSoftwareVersion",
-}, smithy.ShapeTypeEnum, 2)
-var AgentSoftwareVersion_CURRENT_LATEST *smithy.Schema
-
-var AgentSoftwareVersion_ALWAYS_LATEST *smithy.Schema
-
-var _AmiName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AmiName",
-}, smithy.ShapeTypeString, 0)
-
-var AppBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlock",
-}, smithy.ShapeTypeStructure, 11)
-var AppBlock_Name *smithy.Schema
-
-var AppBlock_Arn *smithy.Schema
-
-var AppBlock_Description *smithy.Schema
-
-var AppBlock_DisplayName *smithy.Schema
-
-var AppBlock_SourceS3Location *smithy.Schema
-
-var AppBlock_SetupScriptDetails *smithy.Schema
-
-var AppBlock_CreatedTime *smithy.Schema
-
-var AppBlock_PostSetupScriptDetails *smithy.Schema
-
-var AppBlock_PackagingType *smithy.Schema
-
-var AppBlock_State *smithy.Schema
-
-var AppBlock_AppBlockErrors *smithy.Schema
-
-var AppBlockBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilder",
-}, smithy.ShapeTypeStructure, 15)
-var AppBlockBuilder_Arn *smithy.Schema
-
-var AppBlockBuilder_Name *smithy.Schema
-
-var AppBlockBuilder_DisplayName *smithy.Schema
-
-var AppBlockBuilder_Description *smithy.Schema
-
-var AppBlockBuilder_Platform *smithy.Schema
-
-var AppBlockBuilder_InstanceType *smithy.Schema
-
-var AppBlockBuilder_EnableDefaultInternetAccess *smithy.Schema
-
-var AppBlockBuilder_IamRoleArn *smithy.Schema
-
-var AppBlockBuilder_VpcConfig *smithy.Schema
-
-var AppBlockBuilder_State *smithy.Schema
-
-var AppBlockBuilder_CreatedTime *smithy.Schema
-
-var AppBlockBuilder_AppBlockBuilderErrors *smithy.Schema
-
-var AppBlockBuilder_StateChangeReason *smithy.Schema
-
-var AppBlockBuilder_AccessEndpoints *smithy.Schema
-
-var AppBlockBuilder_DisableIMDSV1 *smithy.Schema
-
-var AppBlockBuilderAppBlockAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderAppBlockAssociation",
-}, smithy.ShapeTypeStructure, 2)
-var AppBlockBuilderAppBlockAssociation_AppBlockArn *smithy.Schema
-
-var AppBlockBuilderAppBlockAssociation_AppBlockBuilderName *smithy.Schema
-
-var _AppBlockBuilderAppBlockAssociationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderAppBlockAssociationsList",
-}, smithy.ShapeTypeList, 1)
-var _AppBlockBuilderAppBlockAssociationsList_member *smithy.Schema
-
-var AppBlockBuilderAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderAttribute",
-}, smithy.ShapeTypeEnum, 3)
-var AppBlockBuilderAttribute_IAM_ROLE_ARN *smithy.Schema
-
-var AppBlockBuilderAttribute_ACCESS_ENDPOINTS *smithy.Schema
-
-var AppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS *smithy.Schema
-
-var _AppBlockBuilderAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderAttributes",
-}, smithy.ShapeTypeList, 1)
-var _AppBlockBuilderAttributes_member *smithy.Schema
-
-var _AppBlockBuilderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderList",
-}, smithy.ShapeTypeList, 1)
-var _AppBlockBuilderList_member *smithy.Schema
-
-var AppBlockBuilderPlatformType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderPlatformType",
-}, smithy.ShapeTypeEnum, 1)
-var AppBlockBuilderPlatformType_WINDOWS_SERVER_2019 *smithy.Schema
-
-var AppBlockBuilderState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderState",
-}, smithy.ShapeTypeEnum, 4)
-var AppBlockBuilderState_STARTING *smithy.Schema
-
-var AppBlockBuilderState_RUNNING *smithy.Schema
-
-var AppBlockBuilderState_STOPPING *smithy.Schema
-
-var AppBlockBuilderState_STOPPED *smithy.Schema
-
-var AppBlockBuilderStateChangeReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderStateChangeReason",
-}, smithy.ShapeTypeStructure, 2)
-var AppBlockBuilderStateChangeReason_Code *smithy.Schema
-
-var AppBlockBuilderStateChangeReason_Message *smithy.Schema
-
-var AppBlockBuilderStateChangeReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockBuilderStateChangeReasonCode",
-}, smithy.ShapeTypeEnum, 1)
-var AppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR *smithy.Schema
-
-var _AppBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlocks",
-}, smithy.ShapeTypeList, 1)
-var _AppBlocks_member *smithy.Schema
-
-var AppBlockState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppBlockState",
-}, smithy.ShapeTypeEnum, 2)
-var AppBlockState_INACTIVE *smithy.Schema
-
-var AppBlockState_ACTIVE *smithy.Schema
-
-var _AppCatalogConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppCatalogConfig",
-}, smithy.ShapeTypeList, 1)
-var _AppCatalogConfig_member *smithy.Schema
-
-var _AppDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var Application = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Application",
-}, smithy.ShapeTypeStructure, 15)
-var Application_Name *smithy.Schema
-
-var Application_DisplayName *smithy.Schema
-
-var Application_IconURL *smithy.Schema
-
-var Application_LaunchPath *smithy.Schema
-
-var Application_LaunchParameters *smithy.Schema
-
-var Application_Enabled *smithy.Schema
-
-var Application_Metadata *smithy.Schema
-
-var Application_WorkingDirectory *smithy.Schema
-
-var Application_Description *smithy.Schema
-
-var Application_Arn *smithy.Schema
-
-var Application_AppBlockArn *smithy.Schema
-
-var Application_IconS3Location *smithy.Schema
-
-var Application_Platforms *smithy.Schema
-
-var Application_InstanceFamilies *smithy.Schema
-
-var Application_CreatedTime *smithy.Schema
-
-var ApplicationAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ApplicationAttribute",
-}, smithy.ShapeTypeEnum, 2)
-var ApplicationAttribute_LAUNCH_PARAMETERS *smithy.Schema
-
-var ApplicationAttribute_WORKING_DIRECTORY *smithy.Schema
-
-var _ApplicationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ApplicationAttributes",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationAttributes_member *smithy.Schema
-
-var ApplicationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ApplicationConfig",
-}, smithy.ShapeTypeStructure, 7, &smithytraits.Sensitive{})
-var ApplicationConfig_Name *smithy.Schema
-
-var ApplicationConfig_DisplayName *smithy.Schema
-
-var ApplicationConfig_AbsoluteAppPath *smithy.Schema
-
-var ApplicationConfig_AbsoluteIconPath *smithy.Schema
-
-var ApplicationConfig_AbsoluteManifestPath *smithy.Schema
-
-var ApplicationConfig_WorkingDirectory *smithy.Schema
-
-var ApplicationConfig_LaunchParameters *smithy.Schema
-
-var ApplicationFleetAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ApplicationFleetAssociation",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationFleetAssociation_FleetName *smithy.Schema
-
-var ApplicationFleetAssociation_ApplicationArn *smithy.Schema
-
-var _ApplicationFleetAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ApplicationFleetAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationFleetAssociationList_member *smithy.Schema
-
-var _Applications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Applications",
-}, smithy.ShapeTypeList, 1)
-var _Applications_member *smithy.Schema
-
-var ApplicationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ApplicationSettings",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationSettings_Enabled *smithy.Schema
-
-var ApplicationSettings_SettingsGroup *smithy.Schema
-
-var ApplicationSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ApplicationSettingsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ApplicationSettingsResponse_Enabled *smithy.Schema
-
-var ApplicationSettingsResponse_SettingsGroup *smithy.Schema
-
-var ApplicationSettingsResponse_S3BucketName *smithy.Schema
-
-var _AppName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppName",
-}, smithy.ShapeTypeString, 0)
-
-var _AppstreamAgentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppstreamAgentVersion",
-}, smithy.ShapeTypeString, 0)
-
-var AppVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AppVisibility",
-}, smithy.ShapeTypeEnum, 2)
-var AppVisibility_ALL *smithy.Schema
-
-var AppVisibility_ASSOCIATED *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _ArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ArnList",
-}, smithy.ShapeTypeList, 1)
-var _ArnList_member *smithy.Schema
-
-var AuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AuthenticationType",
-}, smithy.ShapeTypeEnum, 4)
-var AuthenticationType_API *smithy.Schema
-
-var AuthenticationType_SAML *smithy.Schema
-
-var AuthenticationType_USERPOOL *smithy.Schema
-
-var AuthenticationType_AWS_AD *smithy.Schema
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AwsAccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AwsAccountIdList_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "BooleanObject",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CertificateBasedAuthProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CertificateBasedAuthProperties",
-}, smithy.ShapeTypeStructure, 2)
-var CertificateBasedAuthProperties_Status *smithy.Schema
-
-var CertificateBasedAuthProperties_CertificateAuthorityArn *smithy.Schema
-
-var CertificateBasedAuthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CertificateBasedAuthStatus",
-}, smithy.ShapeTypeEnum, 3)
-var CertificateBasedAuthStatus_DISABLED *smithy.Schema
-
-var CertificateBasedAuthStatus_ENABLED *smithy.Schema
-
-var CertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK *smithy.Schema
-
-var ComputeCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ComputeCapacity",
-}, smithy.ShapeTypeStructure, 2)
-var ComputeCapacity_DesiredInstances *smithy.Schema
-
-var ComputeCapacity_DesiredSessions *smithy.Schema
-
-var ComputeCapacityStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ComputeCapacityStatus",
-}, smithy.ShapeTypeStructure, 11)
-var ComputeCapacityStatus_Desired *smithy.Schema
-
-var ComputeCapacityStatus_Running *smithy.Schema
-
-var ComputeCapacityStatus_InUse *smithy.Schema
-
-var ComputeCapacityStatus_Available *smithy.Schema
-
-var ComputeCapacityStatus_DesiredUserSessions *smithy.Schema
-
-var ComputeCapacityStatus_AvailableUserSessions *smithy.Schema
-
-var ComputeCapacityStatus_ActiveUserSessions *smithy.Schema
-
-var ComputeCapacityStatus_ActualUserSessions *smithy.Schema
-
-var ComputeCapacityStatus_Draining *smithy.Schema
-
-var ComputeCapacityStatus_DrainModeActiveUserSessions *smithy.Schema
-
-var ComputeCapacityStatus_DrainModeUnusedUserSessions *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ContentRedirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ContentRedirection",
-}, smithy.ShapeTypeStructure, 1)
-var ContentRedirection_HostToClient *smithy.Schema
-
-var _DescribeImagesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImagesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DirectoryConfig",
-}, smithy.ShapeTypeStructure, 5)
-var DirectoryConfig_DirectoryName *smithy.Schema
-
-var DirectoryConfig_OrganizationalUnitDistinguishedNames *smithy.Schema
-
-var DirectoryConfig_ServiceAccountCredentials *smithy.Schema
-
-var DirectoryConfig_CreatedTime *smithy.Schema
-
-var DirectoryConfig_CertificateBasedAuthProperties *smithy.Schema
-
-var _DirectoryConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DirectoryConfigList",
-}, smithy.ShapeTypeList, 1)
-var _DirectoryConfigList_member *smithy.Schema
-
-var _DirectoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DirectoryName",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DirectoryNameList",
-}, smithy.ShapeTypeList, 1)
-var _DirectoryNameList_member *smithy.Schema
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _Domain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Domain",
-}, smithy.ShapeTypeString, 0)
-
-var DomainJoinInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DomainJoinInfo",
-}, smithy.ShapeTypeStructure, 2)
-var DomainJoinInfo_DirectoryName *smithy.Schema
-
-var DomainJoinInfo_OrganizationalUnitDistinguishedName *smithy.Schema
-
-var _DomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DomainList",
-}, smithy.ShapeTypeList, 1)
-var _DomainList_member *smithy.Schema
-
-var DryRunOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DryRunOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 412})
-var DryRunOperationException_Message *smithy.Schema
-
-var DynamicAppProvidersEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DynamicAppProvidersEnabled",
-}, smithy.ShapeTypeEnum, 2)
-var DynamicAppProvidersEnabled_ENABLED *smithy.Schema
-
-var DynamicAppProvidersEnabled_DISABLED *smithy.Schema
-
-var _EmbedHostDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EmbedHostDomain",
-}, smithy.ShapeTypeString, 0)
-
-var _EmbedHostDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EmbedHostDomains",
-}, smithy.ShapeTypeList, 1)
-var _EmbedHostDomains_member *smithy.Schema
-
-var EntitledApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EntitledApplication",
-}, smithy.ShapeTypeStructure, 1)
-var EntitledApplication_ApplicationIdentifier *smithy.Schema
-
-var _EntitledApplicationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EntitledApplicationList",
-}, smithy.ShapeTypeList, 1)
-var _EntitledApplicationList_member *smithy.Schema
-
-var Entitlement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Entitlement",
-}, smithy.ShapeTypeStructure, 7)
-var Entitlement_Name *smithy.Schema
-
-var Entitlement_StackName *smithy.Schema
-
-var Entitlement_Description *smithy.Schema
-
-var Entitlement_AppVisibility *smithy.Schema
-
-var Entitlement_Attributes *smithy.Schema
-
-var Entitlement_CreatedTime *smithy.Schema
-
-var Entitlement_LastModifiedTime *smithy.Schema
-
-var EntitlementAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EntitlementAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var EntitlementAlreadyExistsException_Message *smithy.Schema
-
-var EntitlementAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EntitlementAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var EntitlementAttribute_Name *smithy.Schema
-
-var EntitlementAttribute_Value *smithy.Schema
-
-var _EntitlementAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EntitlementAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _EntitlementAttributeList_member *smithy.Schema
-
-var _EntitlementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EntitlementList",
-}, smithy.ShapeTypeList, 1)
-var _EntitlementList_member *smithy.Schema
-
-var EntitlementNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EntitlementNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var EntitlementNotFoundException_Message *smithy.Schema
-
-var ErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetails_ErrorCode *smithy.Schema
-
-var ErrorDetails_ErrorMessage *smithy.Schema
-
-var _ErrorDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ErrorDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _ErrorDetailsList_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExportImageTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ExportImageTask",
-}, smithy.ShapeTypeStructure, 9)
-var ExportImageTask_TaskId *smithy.Schema
-
-var ExportImageTask_ImageArn *smithy.Schema
-
-var ExportImageTask_AmiName *smithy.Schema
-
-var ExportImageTask_CreatedDate *smithy.Schema
-
-var ExportImageTask_AmiDescription *smithy.Schema
-
-var ExportImageTask_State *smithy.Schema
-
-var ExportImageTask_AmiId *smithy.Schema
-
-var ExportImageTask_TagSpecifications *smithy.Schema
-
-var ExportImageTask_ErrorDetails *smithy.Schema
-
-var _ExportImageTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ExportImageTasks",
-}, smithy.ShapeTypeList, 1)
-var _ExportImageTasks_member *smithy.Schema
-
-var ExportImageTaskState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ExportImageTaskState",
-}, smithy.ShapeTypeEnum, 4)
-var ExportImageTaskState_EXPORTING *smithy.Schema
-
-var ExportImageTaskState_COMPLETED *smithy.Schema
-
-var ExportImageTaskState_FAILED *smithy.Schema
-
-var ExportImageTaskState_TIMED_OUT *smithy.Schema
-
-var _FeedbackURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FeedbackURL",
-}, smithy.ShapeTypeString, 0)
-
-var _FilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FilePath",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Name *smithy.Schema
-
-var Filter_Values *smithy.Schema
-
-var _FilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var Fleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Fleet",
-}, smithy.ShapeTypeStructure, 27)
-var Fleet_Arn *smithy.Schema
-
-var Fleet_Name *smithy.Schema
-
-var Fleet_DisplayName *smithy.Schema
-
-var Fleet_Description *smithy.Schema
-
-var Fleet_ImageName *smithy.Schema
-
-var Fleet_ImageArn *smithy.Schema
-
-var Fleet_InstanceType *smithy.Schema
-
-var Fleet_FleetType *smithy.Schema
-
-var Fleet_ComputeCapacityStatus *smithy.Schema
-
-var Fleet_MaxUserDurationInSeconds *smithy.Schema
-
-var Fleet_DisconnectTimeoutInSeconds *smithy.Schema
-
-var Fleet_State *smithy.Schema
-
-var Fleet_VpcConfig *smithy.Schema
-
-var Fleet_CreatedTime *smithy.Schema
-
-var Fleet_FleetErrors *smithy.Schema
-
-var Fleet_EnableDefaultInternetAccess *smithy.Schema
-
-var Fleet_DomainJoinInfo *smithy.Schema
-
-var Fleet_IdleDisconnectTimeoutInSeconds *smithy.Schema
-
-var Fleet_IamRoleArn *smithy.Schema
-
-var Fleet_StreamView *smithy.Schema
-
-var Fleet_Platform *smithy.Schema
-
-var Fleet_MaxConcurrentSessions *smithy.Schema
-
-var Fleet_UsbDeviceFilterStrings *smithy.Schema
-
-var Fleet_SessionScriptS3Location *smithy.Schema
-
-var Fleet_MaxSessionsPerInstance *smithy.Schema
-
-var Fleet_RootVolumeConfig *smithy.Schema
-
-var Fleet_DisableIMDSV1 *smithy.Schema
-
-var FleetAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetAttribute",
-}, smithy.ShapeTypeEnum, 8)
-var FleetAttribute_VPC_CONFIGURATION *smithy.Schema
-
-var FleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS *smithy.Schema
-
-var FleetAttribute_DOMAIN_JOIN_INFO *smithy.Schema
-
-var FleetAttribute_IAM_ROLE_ARN *smithy.Schema
-
-var FleetAttribute_USB_DEVICE_FILTER_STRINGS *smithy.Schema
-
-var FleetAttribute_SESSION_SCRIPT_S3_LOCATION *smithy.Schema
-
-var FleetAttribute_MAX_SESSIONS_PER_INSTANCE *smithy.Schema
-
-var FleetAttribute_VOLUME_CONFIGURATION *smithy.Schema
-
-var _FleetAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetAttributes",
-}, smithy.ShapeTypeList, 1)
-var _FleetAttributes_member *smithy.Schema
-
-var FleetError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetError",
-}, smithy.ShapeTypeStructure, 2)
-var FleetError_ErrorCode *smithy.Schema
-
-var FleetError_ErrorMessage *smithy.Schema
-
-var FleetErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetErrorCode",
-}, smithy.ShapeTypeEnum, 31)
-var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION *smithy.Schema
-
-var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION *smithy.Schema
-
-var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION *smithy.Schema
-
-var FleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED *smithy.Schema
-
-var FleetErrorCode_INTERNAL_SERVICE_ERROR *smithy.Schema
-
-var FleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING *smithy.Schema
-
-var FleetErrorCode_MACHINE_ROLE_IS_MISSING *smithy.Schema
-
-var FleetErrorCode_STS_DISABLED_IN_REGION *smithy.Schema
-
-var FleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES *smithy.Schema
-
-var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION *smithy.Schema
-
-var FleetErrorCode_SUBNET_NOT_FOUND *smithy.Schema
-
-var FleetErrorCode_IMAGE_NOT_FOUND *smithy.Schema
-
-var FleetErrorCode_INVALID_SUBNET_CONFIGURATION *smithy.Schema
-
-var FleetErrorCode_SECURITY_GROUPS_NOT_FOUND *smithy.Schema
-
-var FleetErrorCode_IGW_NOT_ATTACHED *smithy.Schema
-
-var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION *smithy.Schema
-
-var FleetErrorCode_FLEET_STOPPED *smithy.Schema
-
-var FleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED *smithy.Schema
-
-var FleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR *smithy.Schema
-
-var FleetErrorCode_VALIDATION_ERROR *smithy.Schema
-
-var _FleetErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetErrors",
-}, smithy.ShapeTypeList, 1)
-var _FleetErrors_member *smithy.Schema
-
-var _FleetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetList",
-}, smithy.ShapeTypeList, 1)
-var _FleetList_member *smithy.Schema
-
-var FleetState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetState",
-}, smithy.ShapeTypeEnum, 4)
-var FleetState_STARTING *smithy.Schema
-
-var FleetState_RUNNING *smithy.Schema
-
-var FleetState_STOPPING *smithy.Schema
-
-var FleetState_STOPPED *smithy.Schema
-
-var FleetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "FleetType",
-}, smithy.ShapeTypeEnum, 3)
-var FleetType_ALWAYS_ON *smithy.Schema
-
-var FleetType_ON_DEMAND *smithy.Schema
-
-var FleetType_ELASTIC *smithy.Schema
-
-var Image = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Image",
-}, smithy.ShapeTypeStructure, 24)
-var Image_Name *smithy.Schema
-
-var Image_Arn *smithy.Schema
-
-var Image_BaseImageArn *smithy.Schema
-
-var Image_DisplayName *smithy.Schema
-
-var Image_State *smithy.Schema
-
-var Image_Visibility *smithy.Schema
-
-var Image_ImageBuilderSupported *smithy.Schema
-
-var Image_ImageBuilderName *smithy.Schema
-
-var Image_Platform *smithy.Schema
-
-var Image_Description *smithy.Schema
-
-var Image_StateChangeReason *smithy.Schema
-
-var Image_Applications *smithy.Schema
-
-var Image_CreatedTime *smithy.Schema
-
-var Image_PublicBaseImageReleasedDate *smithy.Schema
-
-var Image_AppstreamAgentVersion *smithy.Schema
-
-var Image_ImagePermissions *smithy.Schema
-
-var Image_ImageErrors *smithy.Schema
-
-var Image_LatestAppstreamAgentVersion *smithy.Schema
-
-var Image_SupportedInstanceFamilies *smithy.Schema
-
-var Image_DynamicAppProvidersEnabled *smithy.Schema
-
-var Image_ImageSharedWithOthers *smithy.Schema
-
-var Image_ManagedSoftwareIncluded *smithy.Schema
-
-var Image_ImageType *smithy.Schema
-
-var Image_ImageSoftwareMetadata *smithy.Schema
-
-var ImageBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageBuilder",
-}, smithy.ShapeTypeStructure, 21)
-var ImageBuilder_Name *smithy.Schema
-
-var ImageBuilder_Arn *smithy.Schema
-
-var ImageBuilder_ImageArn *smithy.Schema
-
-var ImageBuilder_Description *smithy.Schema
-
-var ImageBuilder_DisplayName *smithy.Schema
-
-var ImageBuilder_VpcConfig *smithy.Schema
-
-var ImageBuilder_InstanceType *smithy.Schema
-
-var ImageBuilder_Platform *smithy.Schema
-
-var ImageBuilder_IamRoleArn *smithy.Schema
-
-var ImageBuilder_State *smithy.Schema
-
-var ImageBuilder_StateChangeReason *smithy.Schema
-
-var ImageBuilder_CreatedTime *smithy.Schema
-
-var ImageBuilder_EnableDefaultInternetAccess *smithy.Schema
-
-var ImageBuilder_DomainJoinInfo *smithy.Schema
-
-var ImageBuilder_NetworkAccessConfiguration *smithy.Schema
-
-var ImageBuilder_ImageBuilderErrors *smithy.Schema
-
-var ImageBuilder_AppstreamAgentVersion *smithy.Schema
-
-var ImageBuilder_AccessEndpoints *smithy.Schema
-
-var ImageBuilder_RootVolumeConfig *smithy.Schema
-
-var ImageBuilder_LatestAppstreamAgentVersion *smithy.Schema
-
-var ImageBuilder_DisableIMDSV1 *smithy.Schema
-
-var _ImageBuilderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageBuilderList",
-}, smithy.ShapeTypeList, 1)
-var _ImageBuilderList_member *smithy.Schema
-
-var ImageBuilderState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageBuilderState",
-}, smithy.ShapeTypeEnum, 14)
-var ImageBuilderState_PENDING *smithy.Schema
-
-var ImageBuilderState_UPDATING_AGENT *smithy.Schema
-
-var ImageBuilderState_RUNNING *smithy.Schema
-
-var ImageBuilderState_STOPPING *smithy.Schema
-
-var ImageBuilderState_STOPPED *smithy.Schema
-
-var ImageBuilderState_REBOOTING *smithy.Schema
-
-var ImageBuilderState_SNAPSHOTTING *smithy.Schema
-
-var ImageBuilderState_DELETING *smithy.Schema
-
-var ImageBuilderState_FAILED *smithy.Schema
-
-var ImageBuilderState_UPDATING *smithy.Schema
-
-var ImageBuilderState_PENDING_QUALIFICATION *smithy.Schema
-
-var ImageBuilderState_PENDING_SYNCING_APPS *smithy.Schema
-
-var ImageBuilderState_SYNCING_APPS *smithy.Schema
-
-var ImageBuilderState_PENDING_IMAGE_IMPORT *smithy.Schema
-
-var ImageBuilderStateChangeReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageBuilderStateChangeReason",
-}, smithy.ShapeTypeStructure, 2)
-var ImageBuilderStateChangeReason_Code *smithy.Schema
-
-var ImageBuilderStateChangeReason_Message *smithy.Schema
-
-var ImageBuilderStateChangeReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageBuilderStateChangeReasonCode",
-}, smithy.ShapeTypeEnum, 2)
-var ImageBuilderStateChangeReasonCode_INTERNAL_ERROR *smithy.Schema
-
-var ImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE *smithy.Schema
-
-var _ImageImportDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageImportDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ImageImportDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageImportDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _ImageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageList",
-}, smithy.ShapeTypeList, 1)
-var _ImageList_member *smithy.Schema
-
-var ImagePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImagePermissions",
-}, smithy.ShapeTypeStructure, 2)
-var ImagePermissions_allowFleet *smithy.Schema
-
-var ImagePermissions_allowImageBuilder *smithy.Schema
-
-var ImageSharedWithOthers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageSharedWithOthers",
-}, smithy.ShapeTypeEnum, 2)
-var ImageSharedWithOthers_TRUE *smithy.Schema
-
-var ImageSharedWithOthers_FALSE *smithy.Schema
-
-var ImageSoftwareMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageSoftwareMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var ImageSoftwareMetadata_nvidiaGridDriverVersion *smithy.Schema
-
-var ImageState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageState",
-}, smithy.ShapeTypeEnum, 8)
-var ImageState_PENDING *smithy.Schema
-
-var ImageState_AVAILABLE *smithy.Schema
-
-var ImageState_FAILED *smithy.Schema
-
-var ImageState_COPYING *smithy.Schema
-
-var ImageState_DELETING *smithy.Schema
-
-var ImageState_CREATING *smithy.Schema
-
-var ImageState_IMPORTING *smithy.Schema
-
-var ImageState_VALIDATING *smithy.Schema
-
-var ImageStateChangeReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageStateChangeReason",
-}, smithy.ShapeTypeStructure, 2)
-var ImageStateChangeReason_Code *smithy.Schema
-
-var ImageStateChangeReason_Message *smithy.Schema
-
-var ImageStateChangeReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageStateChangeReasonCode",
-}, smithy.ShapeTypeEnum, 5)
-var ImageStateChangeReasonCode_INTERNAL_ERROR *smithy.Schema
-
-var ImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE *smithy.Schema
-
-var ImageStateChangeReasonCode_IMAGE_COPY_FAILURE *smithy.Schema
-
-var ImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE *smithy.Schema
-
-var ImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE *smithy.Schema
-
-var ImageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ImageType",
-}, smithy.ShapeTypeEnum, 3)
-var ImageType_CUSTOM *smithy.Schema
-
-var ImageType_NATIVE *smithy.Schema
-
-var ImageType_BYOL *smithy.Schema
-
-var IncompatibleImageException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "IncompatibleImageException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var IncompatibleImageException_Message *smithy.Schema
-
-var InstanceDrainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "InstanceDrainStatus",
-}, smithy.ShapeTypeEnum, 3)
-var InstanceDrainStatus_ACTIVE *smithy.Schema
-
-var InstanceDrainStatus_DRAINING *smithy.Schema
-
-var InstanceDrainStatus_NOT_APPLICABLE *smithy.Schema
-
-var _InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "InstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvalidAccountStatusException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "InvalidAccountStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidAccountStatusException_Message *smithy.Schema
-
-var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterCombinationException_Message *smithy.Schema
-
-var InvalidRoleException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "InvalidRoleException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRoleException_Message *smithy.Schema
-
-var LastReportGenerationExecutionError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "LastReportGenerationExecutionError",
-}, smithy.ShapeTypeStructure, 2)
-var LastReportGenerationExecutionError_ErrorCode *smithy.Schema
-
-var LastReportGenerationExecutionError_ErrorMessage *smithy.Schema
-
-var _LastReportGenerationExecutionErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "LastReportGenerationExecutionErrors",
-}, smithy.ShapeTypeList, 1)
-var _LastReportGenerationExecutionErrors_member *smithy.Schema
-
-var LatestAppstreamAgentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "LatestAppstreamAgentVersion",
-}, smithy.ShapeTypeEnum, 2)
-var LatestAppstreamAgentVersion_TRUE *smithy.Schema
-
-var LatestAppstreamAgentVersion_FALSE *smithy.Schema
-
-var _LaunchParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "LaunchParameters",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MessageAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "MessageAction",
-}, smithy.ShapeTypeEnum, 2)
-var MessageAction_SUPPRESS *smithy.Schema
-
-var MessageAction_RESEND *smithy.Schema
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Metadata",
-}, smithy.ShapeTypeMap, 2)
-var _Metadata_key *smithy.Schema
-
-var _Metadata_value *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkAccessConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "NetworkAccessConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var NetworkAccessConfiguration_EniPrivateIpAddress *smithy.Schema
-
-var NetworkAccessConfiguration_EniIpv6Addresses *smithy.Schema
-
-var NetworkAccessConfiguration_EniId *smithy.Schema
-
-var _NvidiaGridDriverVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "NvidiaGridDriverVersion",
-}, smithy.ShapeTypeString, 0)
-
-var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var OperationNotPermittedException_Message *smithy.Schema
-
-var _OrganizationalUnitDistinguishedName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "OrganizationalUnitDistinguishedName",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationalUnitDistinguishedNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "OrganizationalUnitDistinguishedNamesList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationalUnitDistinguishedNamesList_member *smithy.Schema
-
-var PackagingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "PackagingType",
-}, smithy.ShapeTypeEnum, 2)
-var PackagingType_CUSTOM *smithy.Schema
-
-var PackagingType_APPSTREAM2 *smithy.Schema
-
-var Permission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Permission",
-}, smithy.ShapeTypeEnum, 2)
-var Permission_ENABLED *smithy.Schema
-
-var Permission_DISABLED *smithy.Schema
-
-var _PhotonAmiId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "PhotonAmiId",
-}, smithy.ShapeTypeString, 0)
-
-var _Platforms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Platforms",
-}, smithy.ShapeTypeList, 1)
-var _Platforms_member *smithy.Schema
-
-var PlatformType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "PlatformType",
-}, smithy.ShapeTypeEnum, 10)
-var PlatformType_WINDOWS *smithy.Schema
-
-var PlatformType_WINDOWS_SERVER_2016 *smithy.Schema
-
-var PlatformType_WINDOWS_SERVER_2019 *smithy.Schema
-
-var PlatformType_WINDOWS_SERVER_2022 *smithy.Schema
-
-var PlatformType_WINDOWS_SERVER_2025 *smithy.Schema
-
-var PlatformType_WINDOWS_11 *smithy.Schema
-
-var PlatformType_AMAZON_LINUX2 *smithy.Schema
-
-var PlatformType_RHEL8 *smithy.Schema
-
-var PlatformType_ROCKY_LINUX8 *smithy.Schema
-
-var PlatformType_UBUNTU_PRO_2404 *smithy.Schema
-
-var PreferredProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "PreferredProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var PreferredProtocol_TCP *smithy.Schema
-
-var PreferredProtocol_UDP *smithy.Schema
-
-var _RedirectURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "RedirectURL",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "RegionName",
-}, smithy.ShapeTypeString, 0)
-
-var RequestLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "RequestLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var RequestLimitExceededException_Message *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var ResourceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ResourceError",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceError_ErrorCode *smithy.Schema
-
-var ResourceError_ErrorMessage *smithy.Schema
-
-var ResourceError_ErrorTimestamp *smithy.Schema
-
-var _ResourceErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ResourceErrors",
-}, smithy.ShapeTypeList, 1)
-var _ResourceErrors_member *smithy.Schema
-
-var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotAvailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ResourceNotAvailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceNotAvailableException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RuntimeValidationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "RuntimeValidationConfig",
-}, smithy.ShapeTypeStructure, 1)
-var RuntimeValidationConfig_IntendedInstanceType *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3BucketArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "S3BucketArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "S3Location",
-}, smithy.ShapeTypeStructure, 2)
-var S3Location_S3Bucket *smithy.Schema
-
-var S3Location_S3Key *smithy.Schema
-
-var ScreenImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ScreenImageFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ScreenImageFormat_PNG *smithy.Schema
-
-var ScreenImageFormat_JPEG *smithy.Schema
-
-var ScreenResolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ScreenResolution",
-}, smithy.ShapeTypeEnum, 1)
-var ScreenResolution_W_1280xH_720 *smithy.Schema
-
-var ScriptDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ScriptDetails",
-}, smithy.ShapeTypeStructure, 4)
-var ScriptDetails_ScriptS3Location *smithy.Schema
-
-var ScriptDetails_ExecutablePath *smithy.Schema
-
-var ScriptDetails_ExecutableParameters *smithy.Schema
-
-var ScriptDetails_TimeoutInSeconds *smithy.Schema
-
-var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SecurityGroupIdList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIdList_member *smithy.Schema
-
-var ServiceAccountCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ServiceAccountCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceAccountCredentials_AccountName *smithy.Schema
-
-var ServiceAccountCredentials_AccountPassword *smithy.Schema
-
-var Session = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Session",
-}, smithy.ShapeTypeStructure, 12)
-var Session_Id *smithy.Schema
-
-var Session_UserId *smithy.Schema
-
-var Session_StackName *smithy.Schema
-
-var Session_FleetName *smithy.Schema
-
-var Session_State *smithy.Schema
-
-var Session_ConnectionState *smithy.Schema
-
-var Session_StartTime *smithy.Schema
-
-var Session_MaxExpirationTime *smithy.Schema
-
-var Session_AuthenticationType *smithy.Schema
-
-var Session_NetworkAccessConfiguration *smithy.Schema
-
-var Session_InstanceId *smithy.Schema
-
-var Session_InstanceDrainStatus *smithy.Schema
-
-var SessionConnectionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SessionConnectionState",
-}, smithy.ShapeTypeEnum, 2)
-var SessionConnectionState_CONNECTED *smithy.Schema
-
-var SessionConnectionState_NOT_CONNECTED *smithy.Schema
-
-var _SessionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SessionList",
-}, smithy.ShapeTypeList, 1)
-var _SessionList_member *smithy.Schema
-
-var SessionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SessionState",
-}, smithy.ShapeTypeEnum, 3)
-var SessionState_ACTIVE *smithy.Schema
-
-var SessionState_PENDING *smithy.Schema
-
-var SessionState_EXPIRED *smithy.Schema
-
-var _SettingsGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SettingsGroup",
-}, smithy.ShapeTypeString, 0)
-
-var SharedImagePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SharedImagePermissions",
-}, smithy.ShapeTypeStructure, 2)
-var SharedImagePermissions_sharedAccountId *smithy.Schema
-
-var SharedImagePermissions_imagePermissions *smithy.Schema
-
-var _SharedImagePermissionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SharedImagePermissionsList",
-}, smithy.ShapeTypeList, 1)
-var _SharedImagePermissionsList_member *smithy.Schema
-
-var SoftwareAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SoftwareAssociations",
-}, smithy.ShapeTypeStructure, 3)
-var SoftwareAssociations_SoftwareName *smithy.Schema
-
-var SoftwareAssociations_Status *smithy.Schema
-
-var SoftwareAssociations_DeploymentError *smithy.Schema
-
-var _SoftwareAssociationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SoftwareAssociationsList",
-}, smithy.ShapeTypeList, 1)
-var _SoftwareAssociationsList_member *smithy.Schema
-
-var SoftwareDeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SoftwareDeploymentStatus",
-}, smithy.ShapeTypeEnum, 7)
-var SoftwareDeploymentStatus_STAGED_FOR_INSTALLATION *smithy.Schema
-
-var SoftwareDeploymentStatus_PENDING_INSTALLATION *smithy.Schema
-
-var SoftwareDeploymentStatus_INSTALLED *smithy.Schema
-
-var SoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION *smithy.Schema
-
-var SoftwareDeploymentStatus_PENDING_UNINSTALLATION *smithy.Schema
-
-var SoftwareDeploymentStatus_FAILED_TO_INSTALL *smithy.Schema
-
-var SoftwareDeploymentStatus_FAILED_TO_UNINSTALL *smithy.Schema
-
-var Stack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Stack",
-}, smithy.ShapeTypeStructure, 17)
-var Stack_Arn *smithy.Schema
-
-var Stack_Name *smithy.Schema
-
-var Stack_Description *smithy.Schema
-
-var Stack_DisplayName *smithy.Schema
-
-var Stack_CreatedTime *smithy.Schema
-
-var Stack_StorageConnectors *smithy.Schema
-
-var Stack_RedirectURL *smithy.Schema
-
-var Stack_FeedbackURL *smithy.Schema
-
-var Stack_StackErrors *smithy.Schema
-
-var Stack_UserSettings *smithy.Schema
-
-var Stack_ApplicationSettings *smithy.Schema
-
-var Stack_AccessEndpoints *smithy.Schema
-
-var Stack_EmbedHostDomains *smithy.Schema
-
-var Stack_StreamingExperienceSettings *smithy.Schema
-
-var Stack_ContentRedirection *smithy.Schema
-
-var Stack_AgentAccessConfig *smithy.Schema
-
-var Stack_StorageConnectorAuthentication *smithy.Schema
-
-var StackAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StackAttribute",
-}, smithy.ShapeTypeEnum, 15)
-var StackAttribute_STORAGE_CONNECTORS *smithy.Schema
-
-var StackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS *smithy.Schema
-
-var StackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE *smithy.Schema
-
-var StackAttribute_STORAGE_CONNECTOR_ONE_DRIVE *smithy.Schema
-
-var StackAttribute_REDIRECT_URL *smithy.Schema
-
-var StackAttribute_FEEDBACK_URL *smithy.Schema
-
-var StackAttribute_THEME_NAME *smithy.Schema
-
-var StackAttribute_USER_SETTINGS *smithy.Schema
-
-var StackAttribute_EMBED_HOST_DOMAINS *smithy.Schema
-
-var StackAttribute_IAM_ROLE_ARN *smithy.Schema
-
-var StackAttribute_ACCESS_ENDPOINTS *smithy.Schema
-
-var StackAttribute_STREAMING_EXPERIENCE_SETTINGS *smithy.Schema
-
-var StackAttribute_CONTENT_REDIRECTION *smithy.Schema
-
-var StackAttribute_AGENT_ACCESS_CONFIG *smithy.Schema
-
-var StackAttribute_STORAGE_CONNECTOR_AUTHENTICATION *smithy.Schema
-
-var _StackAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StackAttributes",
-}, smithy.ShapeTypeList, 1)
-var _StackAttributes_member *smithy.Schema
-
-var StackError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StackError",
-}, smithy.ShapeTypeStructure, 2)
-var StackError_ErrorCode *smithy.Schema
-
-var StackError_ErrorMessage *smithy.Schema
-
-var StackErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StackErrorCode",
-}, smithy.ShapeTypeEnum, 2)
-var StackErrorCode_STORAGE_CONNECTOR_ERROR *smithy.Schema
-
-var StackErrorCode_INTERNAL_SERVICE_ERROR *smithy.Schema
-
-var _StackErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StackErrors",
-}, smithy.ShapeTypeList, 1)
-var _StackErrors_member *smithy.Schema
-
-var _StackList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StackList",
-}, smithy.ShapeTypeList, 1)
-var _StackList_member *smithy.Schema
-
-var StorageConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StorageConnector",
-}, smithy.ShapeTypeStructure, 4)
-var StorageConnector_ConnectorType *smithy.Schema
-
-var StorageConnector_ResourceIdentifier *smithy.Schema
-
-var StorageConnector_Domains *smithy.Schema
-
-var StorageConnector_DomainsRequireAdminConsent *smithy.Schema
-
-var StorageConnectorAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StorageConnectorAuthentication",
-}, smithy.ShapeTypeEnum, 2)
-var StorageConnectorAuthentication_FORCE_REAUTHENTICATION *smithy.Schema
-
-var StorageConnectorAuthentication_REUSE_CREDENTIALS *smithy.Schema
-
-var _StorageConnectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StorageConnectorList",
-}, smithy.ShapeTypeList, 1)
-var _StorageConnectorList_member *smithy.Schema
-
-var StorageConnectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StorageConnectorType",
-}, smithy.ShapeTypeEnum, 3)
-var StorageConnectorType_HOMEFOLDERS *smithy.Schema
-
-var StorageConnectorType_GOOGLE_DRIVE *smithy.Schema
-
-var StorageConnectorType_ONE_DRIVE *smithy.Schema
-
-var StreamingExperienceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StreamingExperienceSettings",
-}, smithy.ShapeTypeStructure, 1)
-var StreamingExperienceSettings_PreferredProtocol *smithy.Schema
-
-var _StreamingUrlUserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StreamingUrlUserId",
-}, smithy.ShapeTypeString, 0)
-
-var StreamView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StreamView",
-}, smithy.ShapeTypeEnum, 2)
-var StreamView_APP *smithy.Schema
-
-var StreamView_DESKTOP *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SubnetIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "SubnetIdList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIdList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Theme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Theme",
-}, smithy.ShapeTypeStructure, 8)
-var Theme_StackName *smithy.Schema
-
-var Theme_State *smithy.Schema
-
-var Theme_ThemeTitleText *smithy.Schema
-
-var Theme_ThemeStyling *smithy.Schema
-
-var Theme_ThemeFooterLinks *smithy.Schema
-
-var Theme_ThemeOrganizationLogoURL *smithy.Schema
-
-var Theme_ThemeFaviconURL *smithy.Schema
-
-var Theme_CreatedTime *smithy.Schema
-
-var ThemeAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeAttribute",
-}, smithy.ShapeTypeEnum, 1)
-var ThemeAttribute_FOOTER_LINKS *smithy.Schema
-
-var _ThemeAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeAttributes",
-}, smithy.ShapeTypeList, 1)
-var _ThemeAttributes_member *smithy.Schema
-
-var ThemeFooterLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeFooterLink",
-}, smithy.ShapeTypeStructure, 2)
-var ThemeFooterLink_DisplayName *smithy.Schema
-
-var ThemeFooterLink_FooterLinkURL *smithy.Schema
-
-var _ThemeFooterLinkDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeFooterLinkDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _ThemeFooterLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeFooterLinks",
-}, smithy.ShapeTypeList, 1)
-var _ThemeFooterLinks_member *smithy.Schema
-
-var _ThemeFooterLinkURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeFooterLinkURL",
-}, smithy.ShapeTypeString, 0)
-
-var ThemeState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeState",
-}, smithy.ShapeTypeEnum, 2)
-var ThemeState_ENABLED *smithy.Schema
-
-var ThemeState_DISABLED *smithy.Schema
-
-var ThemeStyling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeStyling",
-}, smithy.ShapeTypeEnum, 4)
-var ThemeStyling_LIGHT_BLUE *smithy.Schema
-
-var ThemeStyling_BLUE *smithy.Schema
-
-var ThemeStyling_PINK *smithy.Schema
-
-var ThemeStyling_RED *smithy.Schema
-
-var _ThemeTitleText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ThemeTitleText",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _UrlPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UrlPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _UrlPatternList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UrlPatternList",
-}, smithy.ShapeTypeList, 1)
-var _UrlPatternList_member *smithy.Schema
-
-var UrlRedirectionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UrlRedirectionConfig",
-}, smithy.ShapeTypeStructure, 3)
-var UrlRedirectionConfig_Enabled *smithy.Schema
-
-var UrlRedirectionConfig_AllowedUrls *smithy.Schema
-
-var UrlRedirectionConfig_DeniedUrls *smithy.Schema
-
-var UsageReportExecutionErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UsageReportExecutionErrorCode",
-}, smithy.ShapeTypeEnum, 3)
-var UsageReportExecutionErrorCode_RESOURCE_NOT_FOUND *smithy.Schema
-
-var UsageReportExecutionErrorCode_ACCESS_DENIED *smithy.Schema
-
-var UsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR *smithy.Schema
-
-var UsageReportSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UsageReportSchedule",
-}, smithy.ShapeTypeEnum, 1)
-var UsageReportSchedule_DAILY *smithy.Schema
-
-var UsageReportSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UsageReportSubscription",
-}, smithy.ShapeTypeStructure, 4)
-var UsageReportSubscription_S3BucketName *smithy.Schema
-
-var UsageReportSubscription_Schedule *smithy.Schema
-
-var UsageReportSubscription_LastGeneratedReportDate *smithy.Schema
-
-var UsageReportSubscription_SubscriptionErrors *smithy.Schema
-
-var _UsageReportSubscriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UsageReportSubscriptionList",
-}, smithy.ShapeTypeList, 1)
-var _UsageReportSubscriptionList_member *smithy.Schema
-
-var _UsbDeviceFilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UsbDeviceFilterString",
-}, smithy.ShapeTypeString, 0)
-
-var _UsbDeviceFilterStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UsbDeviceFilterStrings",
-}, smithy.ShapeTypeList, 1)
-var _UsbDeviceFilterStrings_member *smithy.Schema
-
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 8)
-var User_Arn *smithy.Schema
-
-var User_UserName *smithy.Schema
-
-var User_Enabled *smithy.Schema
-
-var User_Status *smithy.Schema
-
-var User_FirstName *smithy.Schema
-
-var User_LastName *smithy.Schema
-
-var User_CreatedTime *smithy.Schema
-
-var User_AuthenticationType *smithy.Schema
-
-var _UserAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserAttributeValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var UserControlMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserControlMode",
-}, smithy.ShapeTypeEnum, 3)
-var UserControlMode_VIEW_ONLY *smithy.Schema
-
-var UserControlMode_VIEW_STOP *smithy.Schema
-
-var UserControlMode_DISABLED *smithy.Schema
-
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0)
-
-var _UserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserList",
-}, smithy.ShapeTypeList, 1)
-var _UserList_member *smithy.Schema
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var UserSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserSetting",
-}, smithy.ShapeTypeStructure, 3)
-var UserSetting_Action *smithy.Schema
-
-var UserSetting_Permission *smithy.Schema
-
-var UserSetting_MaximumLength *smithy.Schema
-
-var _UserSettingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserSettingList",
-}, smithy.ShapeTypeList, 1)
-var _UserSettingList_member *smithy.Schema
-
-var UserStackAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserStackAssociation",
-}, smithy.ShapeTypeStructure, 4)
-var UserStackAssociation_StackName *smithy.Schema
-
-var UserStackAssociation_UserName *smithy.Schema
-
-var UserStackAssociation_AuthenticationType *smithy.Schema
-
-var UserStackAssociation_SendEmailNotification *smithy.Schema
-
-var UserStackAssociationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserStackAssociationError",
-}, smithy.ShapeTypeStructure, 3)
-var UserStackAssociationError_UserStackAssociation *smithy.Schema
-
-var UserStackAssociationError_ErrorCode *smithy.Schema
-
-var UserStackAssociationError_ErrorMessage *smithy.Schema
-
-var UserStackAssociationErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserStackAssociationErrorCode",
-}, smithy.ShapeTypeEnum, 4)
-var UserStackAssociationErrorCode_STACK_NOT_FOUND *smithy.Schema
-
-var UserStackAssociationErrorCode_USER_NAME_NOT_FOUND *smithy.Schema
-
-var UserStackAssociationErrorCode_DIRECTORY_NOT_FOUND *smithy.Schema
-
-var UserStackAssociationErrorCode_INTERNAL_ERROR *smithy.Schema
-
-var _UserStackAssociationErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserStackAssociationErrorList",
-}, smithy.ShapeTypeList, 1)
-var _UserStackAssociationErrorList_member *smithy.Schema
-
-var _UserStackAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UserStackAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _UserStackAssociationList_member *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var VisibilityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "VisibilityType",
-}, smithy.ShapeTypeEnum, 3)
-var VisibilityType_PUBLIC *smithy.Schema
-
-var VisibilityType_PRIVATE *smithy.Schema
-
-var VisibilityType_SHARED *smithy.Schema
-
-var VolumeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "VolumeConfig",
-}, smithy.ShapeTypeStructure, 1)
-var VolumeConfig_VolumeSizeInGb *smithy.Schema
-
-var VpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "VpcConfig",
-}, smithy.ShapeTypeStructure, 2)
-var VpcConfig_SubnetIds *smithy.Schema
-
-var VpcConfig_SecurityGroupIds *smithy.Schema
-
-var _WorkspaceImageId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "WorkspaceImageId",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateAppBlockBuilderAppBlockRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateAppBlockBuilderAppBlockRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateAppBlockBuilderAppBlockRequest_AppBlockArn *smithy.Schema
-
-var AssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName *smithy.Schema
-
-var AssociateAppBlockBuilderAppBlockResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateAppBlockBuilderAppBlockResult",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation *smithy.Schema
-
-var AssociateApplicationFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateApplicationFleetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateApplicationFleetRequest_FleetName *smithy.Schema
-
-var AssociateApplicationFleetRequest_ApplicationArn *smithy.Schema
-
-var AssociateApplicationFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateApplicationFleetResult",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateApplicationFleetResult_ApplicationFleetAssociation *smithy.Schema
-
-var AssociateApplicationToEntitlementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateApplicationToEntitlementRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateApplicationToEntitlementRequest_StackName *smithy.Schema
-
-var AssociateApplicationToEntitlementRequest_EntitlementName *smithy.Schema
-
-var AssociateApplicationToEntitlementRequest_ApplicationIdentifier *smithy.Schema
-
-var AssociateApplicationToEntitlementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateApplicationToEntitlementResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateFleetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateFleetRequest_FleetName *smithy.Schema
-
-var AssociateFleetRequest_StackName *smithy.Schema
-
-var AssociateFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateFleetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateSoftwareToImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateSoftwareToImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateSoftwareToImageBuilderRequest_ImageBuilderName *smithy.Schema
-
-var AssociateSoftwareToImageBuilderRequest_SoftwareNames *smithy.Schema
-
-var AssociateSoftwareToImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "AssociateSoftwareToImageBuilderResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchAssociateUserStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "BatchAssociateUserStackRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchAssociateUserStackRequest_UserStackAssociations *smithy.Schema
-
-var BatchAssociateUserStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "BatchAssociateUserStackResult",
-}, smithy.ShapeTypeStructure, 1)
-var BatchAssociateUserStackResult_errors *smithy.Schema
-
-var BatchDisassociateUserStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "BatchDisassociateUserStackRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDisassociateUserStackRequest_UserStackAssociations *smithy.Schema
-
-var BatchDisassociateUserStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "BatchDisassociateUserStackResult",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDisassociateUserStackResult_errors *smithy.Schema
-
-var CopyImageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CopyImageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CopyImageRequest_SourceImageName *smithy.Schema
-
-var CopyImageRequest_DestinationImageName *smithy.Schema
-
-var CopyImageRequest_DestinationRegion *smithy.Schema
-
-var CopyImageRequest_DestinationImageDescription *smithy.Schema
-
-var CopyImageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CopyImageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CopyImageResponse_DestinationImageName *smithy.Schema
-
-var CreateAppBlockBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockBuilderRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateAppBlockBuilderRequest_Name *smithy.Schema
-
-var CreateAppBlockBuilderRequest_Description *smithy.Schema
-
-var CreateAppBlockBuilderRequest_DisplayName *smithy.Schema
-
-var CreateAppBlockBuilderRequest_Tags *smithy.Schema
-
-var CreateAppBlockBuilderRequest_Platform *smithy.Schema
-
-var CreateAppBlockBuilderRequest_InstanceType *smithy.Schema
-
-var CreateAppBlockBuilderRequest_VpcConfig *smithy.Schema
-
-var CreateAppBlockBuilderRequest_EnableDefaultInternetAccess *smithy.Schema
-
-var CreateAppBlockBuilderRequest_IamRoleArn *smithy.Schema
-
-var CreateAppBlockBuilderRequest_AccessEndpoints *smithy.Schema
-
-var CreateAppBlockBuilderRequest_DisableIMDSV1 *smithy.Schema
-
-var CreateAppBlockBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAppBlockBuilderResult_AppBlockBuilder *smithy.Schema
-
-var CreateAppBlockBuilderStreamingURLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockBuilderStreamingURLRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName *smithy.Schema
-
-var CreateAppBlockBuilderStreamingURLRequest_Validity *smithy.Schema
-
-var CreateAppBlockBuilderStreamingURLResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockBuilderStreamingURLResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAppBlockBuilderStreamingURLResult_StreamingURL *smithy.Schema
-
-var CreateAppBlockBuilderStreamingURLResult_Expires *smithy.Schema
-
-var CreateAppBlockRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateAppBlockRequest_Name *smithy.Schema
-
-var CreateAppBlockRequest_Description *smithy.Schema
-
-var CreateAppBlockRequest_DisplayName *smithy.Schema
-
-var CreateAppBlockRequest_SourceS3Location *smithy.Schema
-
-var CreateAppBlockRequest_SetupScriptDetails *smithy.Schema
-
-var CreateAppBlockRequest_Tags *smithy.Schema
-
-var CreateAppBlockRequest_PostSetupScriptDetails *smithy.Schema
-
-var CreateAppBlockRequest_PackagingType *smithy.Schema
-
-var CreateAppBlockResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateAppBlockResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAppBlockResult_AppBlock *smithy.Schema
-
-var CreateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateApplicationRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateApplicationRequest_Name *smithy.Schema
-
-var CreateApplicationRequest_DisplayName *smithy.Schema
-
-var CreateApplicationRequest_Description *smithy.Schema
-
-var CreateApplicationRequest_IconS3Location *smithy.Schema
-
-var CreateApplicationRequest_LaunchPath *smithy.Schema
-
-var CreateApplicationRequest_WorkingDirectory *smithy.Schema
-
-var CreateApplicationRequest_LaunchParameters *smithy.Schema
-
-var CreateApplicationRequest_Platforms *smithy.Schema
-
-var CreateApplicationRequest_InstanceFamilies *smithy.Schema
-
-var CreateApplicationRequest_AppBlockArn *smithy.Schema
-
-var CreateApplicationRequest_Tags *smithy.Schema
-
-var CreateApplicationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateApplicationResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateApplicationResult_Application *smithy.Schema
-
-var CreateDirectoryConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateDirectoryConfigRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDirectoryConfigRequest_DirectoryName *smithy.Schema
-
-var CreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames *smithy.Schema
-
-var CreateDirectoryConfigRequest_ServiceAccountCredentials *smithy.Schema
-
-var CreateDirectoryConfigRequest_CertificateBasedAuthProperties *smithy.Schema
-
-var CreateDirectoryConfigResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateDirectoryConfigResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDirectoryConfigResult_DirectoryConfig *smithy.Schema
-
-var CreateEntitlementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateEntitlementRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateEntitlementRequest_Name *smithy.Schema
-
-var CreateEntitlementRequest_StackName *smithy.Schema
-
-var CreateEntitlementRequest_Description *smithy.Schema
-
-var CreateEntitlementRequest_AppVisibility *smithy.Schema
-
-var CreateEntitlementRequest_Attributes *smithy.Schema
-
-var CreateEntitlementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateEntitlementResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEntitlementResult_Entitlement *smithy.Schema
-
-var CreateExportImageTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateExportImageTaskRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateExportImageTaskRequest_ImageName *smithy.Schema
-
-var CreateExportImageTaskRequest_AmiName *smithy.Schema
-
-var CreateExportImageTaskRequest_IamRoleArn *smithy.Schema
-
-var CreateExportImageTaskRequest_TagSpecifications *smithy.Schema
-
-var CreateExportImageTaskRequest_AmiDescription *smithy.Schema
-
-var CreateExportImageTaskResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateExportImageTaskResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateExportImageTaskResult_ExportImageTask *smithy.Schema
-
-var CreateFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateFleetRequest",
-}, smithy.ShapeTypeStructure, 24)
-var CreateFleetRequest_Name *smithy.Schema
-
-var CreateFleetRequest_ImageName *smithy.Schema
-
-var CreateFleetRequest_ImageArn *smithy.Schema
-
-var CreateFleetRequest_InstanceType *smithy.Schema
-
-var CreateFleetRequest_FleetType *smithy.Schema
-
-var CreateFleetRequest_ComputeCapacity *smithy.Schema
-
-var CreateFleetRequest_VpcConfig *smithy.Schema
-
-var CreateFleetRequest_MaxUserDurationInSeconds *smithy.Schema
-
-var CreateFleetRequest_DisconnectTimeoutInSeconds *smithy.Schema
-
-var CreateFleetRequest_Description *smithy.Schema
-
-var CreateFleetRequest_DisplayName *smithy.Schema
-
-var CreateFleetRequest_EnableDefaultInternetAccess *smithy.Schema
-
-var CreateFleetRequest_DomainJoinInfo *smithy.Schema
-
-var CreateFleetRequest_Tags *smithy.Schema
-
-var CreateFleetRequest_IdleDisconnectTimeoutInSeconds *smithy.Schema
-
-var CreateFleetRequest_IamRoleArn *smithy.Schema
-
-var CreateFleetRequest_StreamView *smithy.Schema
-
-var CreateFleetRequest_Platform *smithy.Schema
-
-var CreateFleetRequest_MaxConcurrentSessions *smithy.Schema
-
-var CreateFleetRequest_UsbDeviceFilterStrings *smithy.Schema
-
-var CreateFleetRequest_SessionScriptS3Location *smithy.Schema
-
-var CreateFleetRequest_MaxSessionsPerInstance *smithy.Schema
-
-var CreateFleetRequest_RootVolumeConfig *smithy.Schema
-
-var CreateFleetRequest_DisableIMDSV1 *smithy.Schema
-
-var CreateFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateFleetResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFleetResult_Fleet *smithy.Schema
-
-var CreateImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 17)
-var CreateImageBuilderRequest_Name *smithy.Schema
-
-var CreateImageBuilderRequest_ImageName *smithy.Schema
-
-var CreateImageBuilderRequest_ImageArn *smithy.Schema
-
-var CreateImageBuilderRequest_InstanceType *smithy.Schema
-
-var CreateImageBuilderRequest_Description *smithy.Schema
-
-var CreateImageBuilderRequest_DisplayName *smithy.Schema
-
-var CreateImageBuilderRequest_VpcConfig *smithy.Schema
-
-var CreateImageBuilderRequest_IamRoleArn *smithy.Schema
-
-var CreateImageBuilderRequest_EnableDefaultInternetAccess *smithy.Schema
-
-var CreateImageBuilderRequest_DomainJoinInfo *smithy.Schema
-
-var CreateImageBuilderRequest_AppstreamAgentVersion *smithy.Schema
-
-var CreateImageBuilderRequest_Tags *smithy.Schema
-
-var CreateImageBuilderRequest_AccessEndpoints *smithy.Schema
-
-var CreateImageBuilderRequest_RootVolumeConfig *smithy.Schema
-
-var CreateImageBuilderRequest_SoftwaresToInstall *smithy.Schema
-
-var CreateImageBuilderRequest_SoftwaresToUninstall *smithy.Schema
-
-var CreateImageBuilderRequest_DisableIMDSV1 *smithy.Schema
-
-var CreateImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImageBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateImageBuilderResult_ImageBuilder *smithy.Schema
-
-var CreateImageBuilderStreamingURLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImageBuilderStreamingURLRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateImageBuilderStreamingURLRequest_Name *smithy.Schema
-
-var CreateImageBuilderStreamingURLRequest_Validity *smithy.Schema
-
-var CreateImageBuilderStreamingURLResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImageBuilderStreamingURLResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreateImageBuilderStreamingURLResult_StreamingURL *smithy.Schema
-
-var CreateImageBuilderStreamingURLResult_Expires *smithy.Schema
-
-var CreateImportedImageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImportedImageRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateImportedImageRequest_Name *smithy.Schema
-
-var CreateImportedImageRequest_SourceAmiId *smithy.Schema
-
-var CreateImportedImageRequest_WorkspaceImageId *smithy.Schema
-
-var CreateImportedImageRequest_IamRoleArn *smithy.Schema
-
-var CreateImportedImageRequest_Description *smithy.Schema
-
-var CreateImportedImageRequest_DisplayName *smithy.Schema
-
-var CreateImportedImageRequest_Tags *smithy.Schema
-
-var CreateImportedImageRequest_RuntimeValidationConfig *smithy.Schema
-
-var CreateImportedImageRequest_AgentSoftwareVersion *smithy.Schema
-
-var CreateImportedImageRequest_AppCatalogConfig *smithy.Schema
-
-var CreateImportedImageRequest_DryRun *smithy.Schema
-
-var CreateImportedImageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateImportedImageResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateImportedImageResult_Image *smithy.Schema
-
-var CreateStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateStackRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreateStackRequest_Name *smithy.Schema
-
-var CreateStackRequest_Description *smithy.Schema
-
-var CreateStackRequest_DisplayName *smithy.Schema
-
-var CreateStackRequest_StorageConnectors *smithy.Schema
-
-var CreateStackRequest_RedirectURL *smithy.Schema
-
-var CreateStackRequest_FeedbackURL *smithy.Schema
-
-var CreateStackRequest_UserSettings *smithy.Schema
-
-var CreateStackRequest_ApplicationSettings *smithy.Schema
-
-var CreateStackRequest_Tags *smithy.Schema
-
-var CreateStackRequest_AccessEndpoints *smithy.Schema
-
-var CreateStackRequest_EmbedHostDomains *smithy.Schema
-
-var CreateStackRequest_StreamingExperienceSettings *smithy.Schema
-
-var CreateStackRequest_ContentRedirection *smithy.Schema
-
-var CreateStackRequest_AgentAccessConfig *smithy.Schema
-
-var CreateStackRequest_StorageConnectorAuthentication *smithy.Schema
-
-var CreateStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateStackResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateStackResult_Stack *smithy.Schema
-
-var CreateStreamingURLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateStreamingURLRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateStreamingURLRequest_StackName *smithy.Schema
-
-var CreateStreamingURLRequest_FleetName *smithy.Schema
-
-var CreateStreamingURLRequest_UserId *smithy.Schema
-
-var CreateStreamingURLRequest_ApplicationId *smithy.Schema
-
-var CreateStreamingURLRequest_Validity *smithy.Schema
-
-var CreateStreamingURLRequest_SessionContext *smithy.Schema
-
-var CreateStreamingURLResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateStreamingURLResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreateStreamingURLResult_StreamingURL *smithy.Schema
-
-var CreateStreamingURLResult_Expires *smithy.Schema
-
-var CreateThemeForStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateThemeForStackRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateThemeForStackRequest_StackName *smithy.Schema
-
-var CreateThemeForStackRequest_FooterLinks *smithy.Schema
-
-var CreateThemeForStackRequest_TitleText *smithy.Schema
-
-var CreateThemeForStackRequest_ThemeStyling *smithy.Schema
-
-var CreateThemeForStackRequest_OrganizationLogoS3Location *smithy.Schema
-
-var CreateThemeForStackRequest_FaviconS3Location *smithy.Schema
-
-var CreateThemeForStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateThemeForStackResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateThemeForStackResult_Theme *smithy.Schema
-
-var CreateUpdatedImageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUpdatedImageRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateUpdatedImageRequest_existingImageName *smithy.Schema
-
-var CreateUpdatedImageRequest_newImageName *smithy.Schema
-
-var CreateUpdatedImageRequest_newImageDescription *smithy.Schema
-
-var CreateUpdatedImageRequest_newImageDisplayName *smithy.Schema
-
-var CreateUpdatedImageRequest_newImageTags *smithy.Schema
-
-var CreateUpdatedImageRequest_dryRun *smithy.Schema
-
-var CreateUpdatedImageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUpdatedImageResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreateUpdatedImageResult_image *smithy.Schema
-
-var CreateUpdatedImageResult_canUpdateImage *smithy.Schema
-
-var CreateUsageReportSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUsageReportSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateUsageReportSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUsageReportSubscriptionResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreateUsageReportSubscriptionResult_S3BucketName *smithy.Schema
-
-var CreateUsageReportSubscriptionResult_Schedule *smithy.Schema
-
-var CreateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUserRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateUserRequest_UserName *smithy.Schema
-
-var CreateUserRequest_MessageAction *smithy.Schema
-
-var CreateUserRequest_FirstName *smithy.Schema
-
-var CreateUserRequest_LastName *smithy.Schema
-
-var CreateUserRequest_AuthenticationType *smithy.Schema
-
-var CreateUserResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "CreateUserResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAppBlockBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteAppBlockBuilderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAppBlockBuilderRequest_Name *smithy.Schema
-
-var DeleteAppBlockBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteAppBlockBuilderResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAppBlockRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteAppBlockRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAppBlockRequest_Name *smithy.Schema
-
-var DeleteAppBlockResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteAppBlockResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApplicationRequest_Name *smithy.Schema
-
-var DeleteApplicationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteApplicationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDirectoryConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteDirectoryConfigRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectoryConfigRequest_DirectoryName *smithy.Schema
-
-var DeleteDirectoryConfigResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteDirectoryConfigResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEntitlementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteEntitlementRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteEntitlementRequest_Name *smithy.Schema
-
-var DeleteEntitlementRequest_StackName *smithy.Schema
-
-var DeleteEntitlementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteEntitlementResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteFleetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFleetRequest_Name *smithy.Schema
-
-var DeleteFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteFleetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteImageBuilderRequest_Name *smithy.Schema
-
-var DeleteImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImageBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteImageBuilderResult_ImageBuilder *smithy.Schema
-
-var DeleteImageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteImageRequest_Name *smithy.Schema
-
-var DeleteImageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImageResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteImageResult_Image *smithy.Schema
-
-var DeleteImagePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImagePermissionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteImagePermissionsRequest_Name *smithy.Schema
-
-var DeleteImagePermissionsRequest_SharedAccountId *smithy.Schema
-
-var DeleteImagePermissionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteImagePermissionsResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteStackRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteStackRequest_Name *smithy.Schema
-
-var DeleteStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteStackResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteThemeForStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteThemeForStackRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteThemeForStackRequest_StackName *smithy.Schema
-
-var DeleteThemeForStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteThemeForStackResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteUsageReportSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteUsageReportSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteUsageReportSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteUsageReportSubscriptionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteUserRequest_UserName *smithy.Schema
-
-var DeleteUserRequest_AuthenticationType *smithy.Schema
-
-var DeleteUserResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DeleteUserResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeAppBlockBuilderAppBlockAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlockBuilderAppBlockAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn *smithy.Schema
-
-var DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName *smithy.Schema
-
-var DescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults *smithy.Schema
-
-var DescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken *smithy.Schema
-
-var DescribeAppBlockBuilderAppBlockAssociationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlockBuilderAppBlockAssociationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations *smithy.Schema
-
-var DescribeAppBlockBuilderAppBlockAssociationsResult_NextToken *smithy.Schema
-
-var DescribeAppBlockBuildersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlockBuildersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAppBlockBuildersRequest_Names *smithy.Schema
-
-var DescribeAppBlockBuildersRequest_NextToken *smithy.Schema
-
-var DescribeAppBlockBuildersRequest_MaxResults *smithy.Schema
-
-var DescribeAppBlockBuildersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlockBuildersResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAppBlockBuildersResult_AppBlockBuilders *smithy.Schema
-
-var DescribeAppBlockBuildersResult_NextToken *smithy.Schema
-
-var DescribeAppBlocksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlocksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAppBlocksRequest_Arns *smithy.Schema
-
-var DescribeAppBlocksRequest_NextToken *smithy.Schema
-
-var DescribeAppBlocksRequest_MaxResults *smithy.Schema
-
-var DescribeAppBlocksResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppBlocksResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAppBlocksResult_AppBlocks *smithy.Schema
-
-var DescribeAppBlocksResult_NextToken *smithy.Schema
-
-var DescribeApplicationFleetAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeApplicationFleetAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeApplicationFleetAssociationsRequest_FleetName *smithy.Schema
-
-var DescribeApplicationFleetAssociationsRequest_ApplicationArn *smithy.Schema
-
-var DescribeApplicationFleetAssociationsRequest_MaxResults *smithy.Schema
-
-var DescribeApplicationFleetAssociationsRequest_NextToken *smithy.Schema
-
-var DescribeApplicationFleetAssociationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeApplicationFleetAssociationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations *smithy.Schema
-
-var DescribeApplicationFleetAssociationsResult_NextToken *smithy.Schema
-
-var DescribeApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeApplicationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeApplicationsRequest_Arns *smithy.Schema
-
-var DescribeApplicationsRequest_NextToken *smithy.Schema
-
-var DescribeApplicationsRequest_MaxResults *smithy.Schema
-
-var DescribeApplicationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeApplicationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeApplicationsResult_Applications *smithy.Schema
-
-var DescribeApplicationsResult_NextToken *smithy.Schema
-
-var DescribeAppLicenseUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppLicenseUsageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAppLicenseUsageRequest_BillingPeriod *smithy.Schema
-
-var DescribeAppLicenseUsageRequest_MaxResults *smithy.Schema
-
-var DescribeAppLicenseUsageRequest_NextToken *smithy.Schema
-
-var DescribeAppLicenseUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeAppLicenseUsageResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAppLicenseUsageResult_AppLicenseUsages *smithy.Schema
-
-var DescribeAppLicenseUsageResult_NextToken *smithy.Schema
-
-var DescribeDirectoryConfigsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeDirectoryConfigsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeDirectoryConfigsRequest_DirectoryNames *smithy.Schema
-
-var DescribeDirectoryConfigsRequest_MaxResults *smithy.Schema
-
-var DescribeDirectoryConfigsRequest_NextToken *smithy.Schema
-
-var DescribeDirectoryConfigsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeDirectoryConfigsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDirectoryConfigsResult_DirectoryConfigs *smithy.Schema
-
-var DescribeDirectoryConfigsResult_NextToken *smithy.Schema
-
-var DescribeEntitlementsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeEntitlementsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEntitlementsRequest_Name *smithy.Schema
-
-var DescribeEntitlementsRequest_StackName *smithy.Schema
-
-var DescribeEntitlementsRequest_NextToken *smithy.Schema
-
-var DescribeEntitlementsRequest_MaxResults *smithy.Schema
-
-var DescribeEntitlementsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeEntitlementsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEntitlementsResult_Entitlements *smithy.Schema
-
-var DescribeEntitlementsResult_NextToken *smithy.Schema
-
-var DescribeFleetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeFleetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFleetsRequest_Names *smithy.Schema
-
-var DescribeFleetsRequest_NextToken *smithy.Schema
-
-var DescribeFleetsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeFleetsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFleetsResult_Fleets *smithy.Schema
-
-var DescribeFleetsResult_NextToken *smithy.Schema
-
-var DescribeImageBuildersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImageBuildersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeImageBuildersRequest_Names *smithy.Schema
-
-var DescribeImageBuildersRequest_MaxResults *smithy.Schema
-
-var DescribeImageBuildersRequest_NextToken *smithy.Schema
-
-var DescribeImageBuildersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImageBuildersResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeImageBuildersResult_ImageBuilders *smithy.Schema
-
-var DescribeImageBuildersResult_NextToken *smithy.Schema
-
-var DescribeImagePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImagePermissionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeImagePermissionsRequest_Name *smithy.Schema
-
-var DescribeImagePermissionsRequest_MaxResults *smithy.Schema
-
-var DescribeImagePermissionsRequest_SharedAwsAccountIds *smithy.Schema
-
-var DescribeImagePermissionsRequest_NextToken *smithy.Schema
-
-var DescribeImagePermissionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImagePermissionsResult",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeImagePermissionsResult_Name *smithy.Schema
-
-var DescribeImagePermissionsResult_SharedImagePermissionsList *smithy.Schema
-
-var DescribeImagePermissionsResult_NextToken *smithy.Schema
-
-var DescribeImagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImagesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeImagesRequest_Names *smithy.Schema
-
-var DescribeImagesRequest_Arns *smithy.Schema
-
-var DescribeImagesRequest_Type *smithy.Schema
-
-var DescribeImagesRequest_NextToken *smithy.Schema
-
-var DescribeImagesRequest_MaxResults *smithy.Schema
-
-var DescribeImagesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeImagesResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeImagesResult_Images *smithy.Schema
-
-var DescribeImagesResult_NextToken *smithy.Schema
-
-var DescribeSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeSessionsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeSessionsRequest_StackName *smithy.Schema
-
-var DescribeSessionsRequest_FleetName *smithy.Schema
-
-var DescribeSessionsRequest_UserId *smithy.Schema
-
-var DescribeSessionsRequest_NextToken *smithy.Schema
-
-var DescribeSessionsRequest_Limit *smithy.Schema
-
-var DescribeSessionsRequest_AuthenticationType *smithy.Schema
-
-var DescribeSessionsRequest_InstanceId *smithy.Schema
-
-var DescribeSessionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeSessionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSessionsResult_Sessions *smithy.Schema
-
-var DescribeSessionsResult_NextToken *smithy.Schema
-
-var DescribeSoftwareAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeSoftwareAssociationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSoftwareAssociationsRequest_AssociatedResource *smithy.Schema
-
-var DescribeSoftwareAssociationsRequest_MaxResults *smithy.Schema
-
-var DescribeSoftwareAssociationsRequest_NextToken *smithy.Schema
-
-var DescribeSoftwareAssociationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeSoftwareAssociationsResult",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSoftwareAssociationsResult_AssociatedResource *smithy.Schema
-
-var DescribeSoftwareAssociationsResult_SoftwareAssociations *smithy.Schema
-
-var DescribeSoftwareAssociationsResult_NextToken *smithy.Schema
-
-var DescribeStacksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeStacksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeStacksRequest_Names *smithy.Schema
-
-var DescribeStacksRequest_NextToken *smithy.Schema
-
-var DescribeStacksResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeStacksResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeStacksResult_Stacks *smithy.Schema
-
-var DescribeStacksResult_NextToken *smithy.Schema
-
-var DescribeThemeForStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeThemeForStackRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeThemeForStackRequest_StackName *smithy.Schema
-
-var DescribeThemeForStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeThemeForStackResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeThemeForStackResult_Theme *smithy.Schema
-
-var DescribeUsageReportSubscriptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUsageReportSubscriptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUsageReportSubscriptionsRequest_MaxResults *smithy.Schema
-
-var DescribeUsageReportSubscriptionsRequest_NextToken *smithy.Schema
-
-var DescribeUsageReportSubscriptionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUsageReportSubscriptionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUsageReportSubscriptionsResult_UsageReportSubscriptions *smithy.Schema
-
-var DescribeUsageReportSubscriptionsResult_NextToken *smithy.Schema
-
-var DescribeUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUsersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeUsersRequest_AuthenticationType *smithy.Schema
-
-var DescribeUsersRequest_MaxResults *smithy.Schema
-
-var DescribeUsersRequest_NextToken *smithy.Schema
-
-var DescribeUsersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUsersResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUsersResult_Users *smithy.Schema
-
-var DescribeUsersResult_NextToken *smithy.Schema
-
-var DescribeUserStackAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUserStackAssociationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeUserStackAssociationsRequest_StackName *smithy.Schema
-
-var DescribeUserStackAssociationsRequest_UserName *smithy.Schema
-
-var DescribeUserStackAssociationsRequest_AuthenticationType *smithy.Schema
-
-var DescribeUserStackAssociationsRequest_MaxResults *smithy.Schema
-
-var DescribeUserStackAssociationsRequest_NextToken *smithy.Schema
-
-var DescribeUserStackAssociationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DescribeUserStackAssociationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUserStackAssociationsResult_UserStackAssociations *smithy.Schema
-
-var DescribeUserStackAssociationsResult_NextToken *smithy.Schema
-
-var DisableUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisableUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisableUserRequest_UserName *smithy.Schema
-
-var DisableUserRequest_AuthenticationType *smithy.Schema
-
-var DisableUserResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisableUserResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateAppBlockBuilderAppBlockRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateAppBlockBuilderAppBlockRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateAppBlockBuilderAppBlockRequest_AppBlockArn *smithy.Schema
-
-var DisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName *smithy.Schema
-
-var DisassociateAppBlockBuilderAppBlockResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateAppBlockBuilderAppBlockResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateApplicationFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateApplicationFleetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateApplicationFleetRequest_FleetName *smithy.Schema
-
-var DisassociateApplicationFleetRequest_ApplicationArn *smithy.Schema
-
-var DisassociateApplicationFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateApplicationFleetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateApplicationFromEntitlementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateApplicationFromEntitlementRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateApplicationFromEntitlementRequest_StackName *smithy.Schema
-
-var DisassociateApplicationFromEntitlementRequest_EntitlementName *smithy.Schema
-
-var DisassociateApplicationFromEntitlementRequest_ApplicationIdentifier *smithy.Schema
-
-var DisassociateApplicationFromEntitlementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateApplicationFromEntitlementResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateFleetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateFleetRequest_FleetName *smithy.Schema
-
-var DisassociateFleetRequest_StackName *smithy.Schema
-
-var DisassociateFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateFleetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateSoftwareFromImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateSoftwareFromImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateSoftwareFromImageBuilderRequest_ImageBuilderName *smithy.Schema
-
-var DisassociateSoftwareFromImageBuilderRequest_SoftwareNames *smithy.Schema
-
-var DisassociateSoftwareFromImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DisassociateSoftwareFromImageBuilderResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DrainSessionInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DrainSessionInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DrainSessionInstanceRequest_SessionId *smithy.Schema
-
-var DrainSessionInstanceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "DrainSessionInstanceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EnableUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EnableUserRequest_UserName *smithy.Schema
-
-var EnableUserRequest_AuthenticationType *smithy.Schema
-
-var EnableUserResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "EnableUserResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var ExpireSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ExpireSessionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ExpireSessionRequest_SessionId *smithy.Schema
-
-var ExpireSessionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ExpireSessionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetExportImageTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "GetExportImageTaskRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetExportImageTaskRequest_TaskId *smithy.Schema
-
-var GetExportImageTaskResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "GetExportImageTaskResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetExportImageTaskResult_ExportImageTask *smithy.Schema
-
-var ListAssociatedFleetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListAssociatedFleetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedFleetsRequest_StackName *smithy.Schema
-
-var ListAssociatedFleetsRequest_NextToken *smithy.Schema
-
-var ListAssociatedFleetsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListAssociatedFleetsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedFleetsResult_Names *smithy.Schema
-
-var ListAssociatedFleetsResult_NextToken *smithy.Schema
-
-var ListAssociatedStacksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListAssociatedStacksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedStacksRequest_FleetName *smithy.Schema
-
-var ListAssociatedStacksRequest_NextToken *smithy.Schema
-
-var ListAssociatedStacksResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListAssociatedStacksResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedStacksResult_Names *smithy.Schema
-
-var ListAssociatedStacksResult_NextToken *smithy.Schema
-
-var ListEntitledApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListEntitledApplicationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEntitledApplicationsRequest_StackName *smithy.Schema
-
-var ListEntitledApplicationsRequest_EntitlementName *smithy.Schema
-
-var ListEntitledApplicationsRequest_NextToken *smithy.Schema
-
-var ListEntitledApplicationsRequest_MaxResults *smithy.Schema
-
-var ListEntitledApplicationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListEntitledApplicationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListEntitledApplicationsResult_EntitledApplications *smithy.Schema
-
-var ListEntitledApplicationsResult_NextToken *smithy.Schema
-
-var ListExportImageTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListExportImageTasksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExportImageTasksRequest_Filters *smithy.Schema
-
-var ListExportImageTasksRequest_MaxResults *smithy.Schema
-
-var ListExportImageTasksRequest_NextToken *smithy.Schema
-
-var ListExportImageTasksResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListExportImageTasksResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListExportImageTasksResult_ExportImageTasks *smithy.Schema
-
-var ListExportImageTasksResult_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var StartAppBlockBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartAppBlockBuilderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartAppBlockBuilderRequest_Name *smithy.Schema
-
-var StartAppBlockBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartAppBlockBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var StartAppBlockBuilderResult_AppBlockBuilder *smithy.Schema
-
-var StartFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartFleetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartFleetRequest_Name *smithy.Schema
-
-var StartFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartFleetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartImageBuilderRequest_Name *smithy.Schema
-
-var StartImageBuilderRequest_AppstreamAgentVersion *smithy.Schema
-
-var StartImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartImageBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var StartImageBuilderResult_ImageBuilder *smithy.Schema
-
-var StartSoftwareDeploymentToImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartSoftwareDeploymentToImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName *smithy.Schema
-
-var StartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments *smithy.Schema
-
-var StartSoftwareDeploymentToImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StartSoftwareDeploymentToImageBuilderResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopAppBlockBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopAppBlockBuilderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopAppBlockBuilderRequest_Name *smithy.Schema
-
-var StopAppBlockBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopAppBlockBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var StopAppBlockBuilderResult_AppBlockBuilder *smithy.Schema
-
-var StopFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopFleetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopFleetRequest_Name *smithy.Schema
-
-var StopFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopFleetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopImageBuilderRequest_Name *smithy.Schema
-
-var StopImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "StopImageBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var StopImageBuilderResult_ImageBuilder *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAppBlockBuilderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateAppBlockBuilderRequest",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateAppBlockBuilderRequest_Name *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_Description *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_DisplayName *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_Platform *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_InstanceType *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_VpcConfig *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_EnableDefaultInternetAccess *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_IamRoleArn *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_AccessEndpoints *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_AttributesToDelete *smithy.Schema
-
-var UpdateAppBlockBuilderRequest_DisableIMDSV1 *smithy.Schema
-
-var UpdateAppBlockBuilderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateAppBlockBuilderResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAppBlockBuilderResult_AppBlockBuilder *smithy.Schema
-
-var UpdateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateApplicationRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateApplicationRequest_Name *smithy.Schema
-
-var UpdateApplicationRequest_DisplayName *smithy.Schema
-
-var UpdateApplicationRequest_Description *smithy.Schema
-
-var UpdateApplicationRequest_IconS3Location *smithy.Schema
-
-var UpdateApplicationRequest_LaunchPath *smithy.Schema
-
-var UpdateApplicationRequest_WorkingDirectory *smithy.Schema
-
-var UpdateApplicationRequest_LaunchParameters *smithy.Schema
-
-var UpdateApplicationRequest_AppBlockArn *smithy.Schema
-
-var UpdateApplicationRequest_AttributesToDelete *smithy.Schema
-
-var UpdateApplicationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateApplicationResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateApplicationResult_Application *smithy.Schema
-
-var UpdateDirectoryConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateDirectoryConfigRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDirectoryConfigRequest_DirectoryName *smithy.Schema
-
-var UpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames *smithy.Schema
-
-var UpdateDirectoryConfigRequest_ServiceAccountCredentials *smithy.Schema
-
-var UpdateDirectoryConfigRequest_CertificateBasedAuthProperties *smithy.Schema
-
-var UpdateDirectoryConfigResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateDirectoryConfigResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDirectoryConfigResult_DirectoryConfig *smithy.Schema
-
-var UpdateEntitlementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateEntitlementRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateEntitlementRequest_Name *smithy.Schema
-
-var UpdateEntitlementRequest_StackName *smithy.Schema
-
-var UpdateEntitlementRequest_Description *smithy.Schema
-
-var UpdateEntitlementRequest_AppVisibility *smithy.Schema
-
-var UpdateEntitlementRequest_Attributes *smithy.Schema
-
-var UpdateEntitlementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateEntitlementResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEntitlementResult_Entitlement *smithy.Schema
-
-var UpdateFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateFleetRequest",
-}, smithy.ShapeTypeStructure, 24)
-var UpdateFleetRequest_ImageName *smithy.Schema
-
-var UpdateFleetRequest_ImageArn *smithy.Schema
-
-var UpdateFleetRequest_Name *smithy.Schema
-
-var UpdateFleetRequest_InstanceType *smithy.Schema
-
-var UpdateFleetRequest_ComputeCapacity *smithy.Schema
-
-var UpdateFleetRequest_VpcConfig *smithy.Schema
-
-var UpdateFleetRequest_MaxUserDurationInSeconds *smithy.Schema
-
-var UpdateFleetRequest_DisconnectTimeoutInSeconds *smithy.Schema
-
-var UpdateFleetRequest_DeleteVpcConfig *smithy.Schema
-
-var UpdateFleetRequest_Description *smithy.Schema
-
-var UpdateFleetRequest_DisplayName *smithy.Schema
-
-var UpdateFleetRequest_EnableDefaultInternetAccess *smithy.Schema
-
-var UpdateFleetRequest_DomainJoinInfo *smithy.Schema
-
-var UpdateFleetRequest_IdleDisconnectTimeoutInSeconds *smithy.Schema
-
-var UpdateFleetRequest_AttributesToDelete *smithy.Schema
-
-var UpdateFleetRequest_IamRoleArn *smithy.Schema
-
-var UpdateFleetRequest_StreamView *smithy.Schema
-
-var UpdateFleetRequest_Platform *smithy.Schema
-
-var UpdateFleetRequest_MaxConcurrentSessions *smithy.Schema
-
-var UpdateFleetRequest_UsbDeviceFilterStrings *smithy.Schema
-
-var UpdateFleetRequest_SessionScriptS3Location *smithy.Schema
-
-var UpdateFleetRequest_MaxSessionsPerInstance *smithy.Schema
-
-var UpdateFleetRequest_RootVolumeConfig *smithy.Schema
-
-var UpdateFleetRequest_DisableIMDSV1 *smithy.Schema
-
-var UpdateFleetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateFleetResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFleetResult_Fleet *smithy.Schema
-
-var UpdateImagePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateImagePermissionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateImagePermissionsRequest_Name *smithy.Schema
-
-var UpdateImagePermissionsRequest_SharedAccountId *smithy.Schema
-
-var UpdateImagePermissionsRequest_ImagePermissions *smithy.Schema
-
-var UpdateImagePermissionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateImagePermissionsResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateStackRequest",
-}, smithy.ShapeTypeStructure, 16)
-var UpdateStackRequest_DisplayName *smithy.Schema
-
-var UpdateStackRequest_Description *smithy.Schema
-
-var UpdateStackRequest_Name *smithy.Schema
-
-var UpdateStackRequest_StorageConnectors *smithy.Schema
-
-var UpdateStackRequest_DeleteStorageConnectors *smithy.Schema
-
-var UpdateStackRequest_RedirectURL *smithy.Schema
-
-var UpdateStackRequest_FeedbackURL *smithy.Schema
-
-var UpdateStackRequest_AttributesToDelete *smithy.Schema
-
-var UpdateStackRequest_UserSettings *smithy.Schema
-
-var UpdateStackRequest_ApplicationSettings *smithy.Schema
-
-var UpdateStackRequest_AccessEndpoints *smithy.Schema
-
-var UpdateStackRequest_EmbedHostDomains *smithy.Schema
-
-var UpdateStackRequest_StreamingExperienceSettings *smithy.Schema
-
-var UpdateStackRequest_ContentRedirection *smithy.Schema
-
-var UpdateStackRequest_AgentAccessConfig *smithy.Schema
-
-var UpdateStackRequest_StorageConnectorAuthentication *smithy.Schema
-
-var UpdateStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateStackResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateStackResult_Stack *smithy.Schema
-
-var UpdateThemeForStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateThemeForStackRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateThemeForStackRequest_StackName *smithy.Schema
-
-var UpdateThemeForStackRequest_FooterLinks *smithy.Schema
-
-var UpdateThemeForStackRequest_TitleText *smithy.Schema
-
-var UpdateThemeForStackRequest_ThemeStyling *smithy.Schema
-
-var UpdateThemeForStackRequest_OrganizationLogoS3Location *smithy.Schema
-
-var UpdateThemeForStackRequest_FaviconS3Location *smithy.Schema
-
-var UpdateThemeForStackRequest_State *smithy.Schema
-
-var UpdateThemeForStackRequest_AttributesToDelete *smithy.Schema
-
-var UpdateThemeForStackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appstream",
-	Name:      "UpdateThemeForStackResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateThemeForStackResult_Theme *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessEndpointType_STREAMING = AccessEndpointType.AddMember("STREAMING", smithyprelude.Unit)
-
-	AccessEndpoint_EndpointType = AccessEndpoint.AddMember("EndpointType", AccessEndpointType)
-
-	AccessEndpoint_VpceId = AccessEndpoint.AddMember("VpceId", _String)
-
-	_AccessEndpointList_member = _AccessEndpointList.AddMember("member", AccessEndpoint)
-
-	Action_CLIPBOARD_COPY_FROM_LOCAL_DEVICE = Action.AddMember("CLIPBOARD_COPY_FROM_LOCAL_DEVICE", smithyprelude.Unit)
-
-	Action_CLIPBOARD_COPY_TO_LOCAL_DEVICE = Action.AddMember("CLIPBOARD_COPY_TO_LOCAL_DEVICE", smithyprelude.Unit)
-
-	Action_FILE_UPLOAD = Action.AddMember("FILE_UPLOAD", smithyprelude.Unit)
-
-	Action_FILE_DOWNLOAD = Action.AddMember("FILE_DOWNLOAD", smithyprelude.Unit)
-
-	Action_PRINTING_TO_LOCAL_DEVICE = Action.AddMember("PRINTING_TO_LOCAL_DEVICE", smithyprelude.Unit)
-
-	Action_DOMAIN_PASSWORD_SIGNIN = Action.AddMember("DOMAIN_PASSWORD_SIGNIN", smithyprelude.Unit)
-
-	Action_DOMAIN_SMART_CARD_SIGNIN = Action.AddMember("DOMAIN_SMART_CARD_SIGNIN", smithyprelude.Unit)
-
-	Action_AUTO_TIME_ZONE_REDIRECTION = Action.AddMember("AUTO_TIME_ZONE_REDIRECTION", smithyprelude.Unit)
-
-	AdminAppLicenseUsageRecord_UserArn = AdminAppLicenseUsageRecord.AddMember("UserArn", _String)
-
-	AdminAppLicenseUsageRecord_BillingPeriod = AdminAppLicenseUsageRecord.AddMember("BillingPeriod", _String)
-
-	AdminAppLicenseUsageRecord_OwnerAWSAccountId = AdminAppLicenseUsageRecord.AddMember("OwnerAWSAccountId", _AwsAccountId)
-
-	AdminAppLicenseUsageRecord_SubscriptionFirstUsedDate = AdminAppLicenseUsageRecord.AddMember("SubscriptionFirstUsedDate", _Timestamp)
-
-	AdminAppLicenseUsageRecord_SubscriptionLastUsedDate = AdminAppLicenseUsageRecord.AddMember("SubscriptionLastUsedDate", _Timestamp)
-
-	AdminAppLicenseUsageRecord_LicenseType = AdminAppLicenseUsageRecord.AddMember("LicenseType", _String)
-
-	AdminAppLicenseUsageRecord_UserId = AdminAppLicenseUsageRecord.AddMember("UserId", _String)
-
-	_AdminAppLicenseUsageList_member = _AdminAppLicenseUsageList.AddMember("member", AdminAppLicenseUsageRecord)
-
-	AgentAction_COMPUTER_VISION = AgentAction.AddMember("COMPUTER_VISION", smithyprelude.Unit)
-
-	AgentAction_COMPUTER_INPUT = AgentAction.AddMember("COMPUTER_INPUT", smithyprelude.Unit)
-
-	AgentAction_FORWARD_MCP_TOOLS = AgentAction.AddMember("FORWARD_MCP_TOOLS", smithyprelude.Unit)
-
-	Permission_ENABLED = Permission.AddMember("ENABLED", smithyprelude.Unit)
-
-	Permission_DISABLED = Permission.AddMember("DISABLED", smithyprelude.Unit)
-
-	AgentAccessSetting_AgentAction = AgentAccessSetting.AddMember("AgentAction", AgentAction)
-
-	AgentAccessSetting_Permission = AgentAccessSetting.AddMember("Permission", Permission)
-
-	_AgentAccessSettingList_member = _AgentAccessSettingList.AddMember("member", AgentAccessSetting)
-
-	ScreenResolution_W_1280xH_720 = ScreenResolution.AddMember("W_1280xH_720", smithyprelude.Unit)
-
-	ScreenImageFormat_PNG = ScreenImageFormat.AddMember("PNG", smithyprelude.Unit)
-
-	ScreenImageFormat_JPEG = ScreenImageFormat.AddMember("JPEG", smithyprelude.Unit)
-
-	UserControlMode_VIEW_ONLY = UserControlMode.AddMember("VIEW_ONLY", smithyprelude.Unit)
-
-	UserControlMode_VIEW_STOP = UserControlMode.AddMember("VIEW_STOP", smithyprelude.Unit)
-
-	UserControlMode_DISABLED = UserControlMode.AddMember("DISABLED", smithyprelude.Unit)
-
-	AgentAccessConfig_Settings = AgentAccessConfig.AddMember("Settings", _AgentAccessSettingList)
-
-	AgentAccessConfig_S3BucketArn = AgentAccessConfig.AddMember("S3BucketArn", _S3BucketArn)
-
-	AgentAccessConfig_ScreenshotsUploadEnabled = AgentAccessConfig.AddMember("ScreenshotsUploadEnabled", _BooleanObject)
-
-	AgentAccessConfig_ScreenResolution = AgentAccessConfig.AddMember("ScreenResolution", ScreenResolution)
-
-	AgentAccessConfig_ScreenImageFormat = AgentAccessConfig.AddMember("ScreenImageFormat", ScreenImageFormat)
-
-	AgentAccessConfig_UserControlMode = AgentAccessConfig.AddMember("UserControlMode", UserControlMode)
-
-	AgentAccessConfigForUpdate_Settings = AgentAccessConfigForUpdate.AddMember("Settings", _AgentAccessSettingList)
-
-	AgentAccessConfigForUpdate_S3BucketArn = AgentAccessConfigForUpdate.AddMember("S3BucketArn", _S3BucketArn)
-
-	AgentAccessConfigForUpdate_ScreenshotsUploadEnabled = AgentAccessConfigForUpdate.AddMember("ScreenshotsUploadEnabled", _BooleanObject)
-
-	AgentAccessConfigForUpdate_ScreenResolution = AgentAccessConfigForUpdate.AddMember("ScreenResolution", ScreenResolution)
-
-	AgentAccessConfigForUpdate_ScreenImageFormat = AgentAccessConfigForUpdate.AddMember("ScreenImageFormat", ScreenImageFormat)
-
-	AgentAccessConfigForUpdate_UserControlMode = AgentAccessConfigForUpdate.AddMember("UserControlMode", UserControlMode)
-
-	AgentSoftwareVersion_CURRENT_LATEST = AgentSoftwareVersion.AddMember("CURRENT_LATEST", smithyprelude.Unit)
-
-	AgentSoftwareVersion_ALWAYS_LATEST = AgentSoftwareVersion.AddMember("ALWAYS_LATEST", smithyprelude.Unit)
-
-	S3Location_S3Bucket = S3Location.AddMember("S3Bucket", _S3Bucket)
-
-	S3Location_S3Key = S3Location.AddMember("S3Key", _S3Key)
-
-	ScriptDetails_ScriptS3Location = ScriptDetails.AddMember("ScriptS3Location", S3Location)
-
-	ScriptDetails_ExecutablePath = ScriptDetails.AddMember("ExecutablePath", _String)
-
-	ScriptDetails_ExecutableParameters = ScriptDetails.AddMember("ExecutableParameters", _String)
-
-	ScriptDetails_TimeoutInSeconds = ScriptDetails.AddMember("TimeoutInSeconds", _Integer)
-
-	PackagingType_CUSTOM = PackagingType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	PackagingType_APPSTREAM2 = PackagingType.AddMember("APPSTREAM2", smithyprelude.Unit)
-
-	AppBlockState_INACTIVE = AppBlockState.AddMember("INACTIVE", smithyprelude.Unit)
-
-	AppBlockState_ACTIVE = AppBlockState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ErrorDetails_ErrorCode = ErrorDetails.AddMember("ErrorCode", _String)
-
-	ErrorDetails_ErrorMessage = ErrorDetails.AddMember("ErrorMessage", _String)
-
-	_ErrorDetailsList_member = _ErrorDetailsList.AddMember("member", ErrorDetails)
-
-	AppBlock_Name = AppBlock.AddMember("Name", _String)
-
-	AppBlock_Arn = AppBlock.AddMember("Arn", _Arn)
-
-	AppBlock_Description = AppBlock.AddMember("Description", _String)
-
-	AppBlock_DisplayName = AppBlock.AddMember("DisplayName", _String)
-
-	AppBlock_SourceS3Location = AppBlock.AddMember("SourceS3Location", S3Location)
-
-	AppBlock_SetupScriptDetails = AppBlock.AddMember("SetupScriptDetails", ScriptDetails)
-
-	AppBlock_CreatedTime = AppBlock.AddMember("CreatedTime", _Timestamp)
-
-	AppBlock_PostSetupScriptDetails = AppBlock.AddMember("PostSetupScriptDetails", ScriptDetails)
-
-	AppBlock_PackagingType = AppBlock.AddMember("PackagingType", PackagingType)
-
-	AppBlock_State = AppBlock.AddMember("State", AppBlockState)
-
-	AppBlock_AppBlockErrors = AppBlock.AddMember("AppBlockErrors", _ErrorDetailsList)
-
-	AppBlockBuilderPlatformType_WINDOWS_SERVER_2019 = AppBlockBuilderPlatformType.AddMember("WINDOWS_SERVER_2019", smithyprelude.Unit)
-
-	_SubnetIdList_member = _SubnetIdList.AddMember("member", _String)
-
-	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", _String)
-
-	VpcConfig_SubnetIds = VpcConfig.AddMember("SubnetIds", _SubnetIdList)
-
-	VpcConfig_SecurityGroupIds = VpcConfig.AddMember("SecurityGroupIds", _SecurityGroupIdList)
-
-	AppBlockBuilderState_STARTING = AppBlockBuilderState.AddMember("STARTING", smithyprelude.Unit)
-
-	AppBlockBuilderState_RUNNING = AppBlockBuilderState.AddMember("RUNNING", smithyprelude.Unit)
-
-	AppBlockBuilderState_STOPPING = AppBlockBuilderState.AddMember("STOPPING", smithyprelude.Unit)
-
-	AppBlockBuilderState_STOPPED = AppBlockBuilderState.AddMember("STOPPED", smithyprelude.Unit)
-
-	FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION = FleetErrorCode.AddMember("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", smithyprelude.Unit)
-
-	FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION = FleetErrorCode.AddMember("IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", smithyprelude.Unit)
-
-	FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION = FleetErrorCode.AddMember("IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", smithyprelude.Unit)
-
-	FleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED = FleetErrorCode.AddMember("NETWORK_INTERFACE_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	FleetErrorCode_INTERNAL_SERVICE_ERROR = FleetErrorCode.AddMember("INTERNAL_SERVICE_ERROR", smithyprelude.Unit)
-
-	FleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING = FleetErrorCode.AddMember("IAM_SERVICE_ROLE_IS_MISSING", smithyprelude.Unit)
-
-	FleetErrorCode_MACHINE_ROLE_IS_MISSING = FleetErrorCode.AddMember("MACHINE_ROLE_IS_MISSING", smithyprelude.Unit)
-
-	FleetErrorCode_STS_DISABLED_IN_REGION = FleetErrorCode.AddMember("STS_DISABLED_IN_REGION", smithyprelude.Unit)
-
-	FleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES = FleetErrorCode.AddMember("SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", smithyprelude.Unit)
-
-	FleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION = FleetErrorCode.AddMember("IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", smithyprelude.Unit)
-
-	FleetErrorCode_SUBNET_NOT_FOUND = FleetErrorCode.AddMember("SUBNET_NOT_FOUND", smithyprelude.Unit)
-
-	FleetErrorCode_IMAGE_NOT_FOUND = FleetErrorCode.AddMember("IMAGE_NOT_FOUND", smithyprelude.Unit)
-
-	FleetErrorCode_INVALID_SUBNET_CONFIGURATION = FleetErrorCode.AddMember("INVALID_SUBNET_CONFIGURATION", smithyprelude.Unit)
-
-	FleetErrorCode_SECURITY_GROUPS_NOT_FOUND = FleetErrorCode.AddMember("SECURITY_GROUPS_NOT_FOUND", smithyprelude.Unit)
-
-	FleetErrorCode_IGW_NOT_ATTACHED = FleetErrorCode.AddMember("IGW_NOT_ATTACHED", smithyprelude.Unit)
-
-	FleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION = FleetErrorCode.AddMember("IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", smithyprelude.Unit)
-
-	FleetErrorCode_FLEET_STOPPED = FleetErrorCode.AddMember("FLEET_STOPPED", smithyprelude.Unit)
-
-	FleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE = FleetErrorCode.AddMember("FLEET_INSTANCE_PROVISIONING_FAILURE", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_ACCESS_DENIED", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_LOGON_FAILURE", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_INVALID_PARAMETER", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_MORE_DATA", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_NOT_SUPPORTED", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME = FleetErrorCode.AddMember("DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED = FleetErrorCode.AddMember("DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED = FleetErrorCode.AddMember("DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED = FleetErrorCode.AddMember("DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", smithyprelude.Unit)
-
-	FleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR = FleetErrorCode.AddMember("DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", smithyprelude.Unit)
-
-	FleetErrorCode_VALIDATION_ERROR = FleetErrorCode.AddMember("VALIDATION_ERROR", smithyprelude.Unit)
-
-	ResourceError_ErrorCode = ResourceError.AddMember("ErrorCode", FleetErrorCode)
-
-	ResourceError_ErrorMessage = ResourceError.AddMember("ErrorMessage", _String)
-
-	ResourceError_ErrorTimestamp = ResourceError.AddMember("ErrorTimestamp", _Timestamp)
-
-	_ResourceErrors_member = _ResourceErrors.AddMember("member", ResourceError)
-
-	AppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR = AppBlockBuilderStateChangeReasonCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	AppBlockBuilderStateChangeReason_Code = AppBlockBuilderStateChangeReason.AddMember("Code", AppBlockBuilderStateChangeReasonCode)
-
-	AppBlockBuilderStateChangeReason_Message = AppBlockBuilderStateChangeReason.AddMember("Message", _String)
-
-	AppBlockBuilder_Arn = AppBlockBuilder.AddMember("Arn", _Arn)
-
-	AppBlockBuilder_Name = AppBlockBuilder.AddMember("Name", _String)
-
-	AppBlockBuilder_DisplayName = AppBlockBuilder.AddMember("DisplayName", _String)
-
-	AppBlockBuilder_Description = AppBlockBuilder.AddMember("Description", _String)
-
-	AppBlockBuilder_Platform = AppBlockBuilder.AddMember("Platform", AppBlockBuilderPlatformType)
-
-	AppBlockBuilder_InstanceType = AppBlockBuilder.AddMember("InstanceType", _String)
-
-	AppBlockBuilder_EnableDefaultInternetAccess = AppBlockBuilder.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	AppBlockBuilder_IamRoleArn = AppBlockBuilder.AddMember("IamRoleArn", _Arn)
-
-	AppBlockBuilder_VpcConfig = AppBlockBuilder.AddMember("VpcConfig", VpcConfig)
-
-	AppBlockBuilder_State = AppBlockBuilder.AddMember("State", AppBlockBuilderState)
-
-	AppBlockBuilder_CreatedTime = AppBlockBuilder.AddMember("CreatedTime", _Timestamp)
-
-	AppBlockBuilder_AppBlockBuilderErrors = AppBlockBuilder.AddMember("AppBlockBuilderErrors", _ResourceErrors)
-
-	AppBlockBuilder_StateChangeReason = AppBlockBuilder.AddMember("StateChangeReason", AppBlockBuilderStateChangeReason)
-
-	AppBlockBuilder_AccessEndpoints = AppBlockBuilder.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	AppBlockBuilder_DisableIMDSV1 = AppBlockBuilder.AddMember("DisableIMDSV1", _BooleanObject)
-
-	AppBlockBuilderAppBlockAssociation_AppBlockArn = AppBlockBuilderAppBlockAssociation.AddMember("AppBlockArn", _Arn)
-
-	AppBlockBuilderAppBlockAssociation_AppBlockBuilderName = AppBlockBuilderAppBlockAssociation.AddMember("AppBlockBuilderName", _Name)
-
-	_AppBlockBuilderAppBlockAssociationsList_member = _AppBlockBuilderAppBlockAssociationsList.AddMember("member", AppBlockBuilderAppBlockAssociation)
-
-	AppBlockBuilderAttribute_IAM_ROLE_ARN = AppBlockBuilderAttribute.AddMember("IAM_ROLE_ARN", smithyprelude.Unit)
-
-	AppBlockBuilderAttribute_ACCESS_ENDPOINTS = AppBlockBuilderAttribute.AddMember("ACCESS_ENDPOINTS", smithyprelude.Unit)
-
-	AppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS = AppBlockBuilderAttribute.AddMember("VPC_CONFIGURATION_SECURITY_GROUP_IDS", smithyprelude.Unit)
-
-	_AppBlockBuilderAttributes_member = _AppBlockBuilderAttributes.AddMember("member", AppBlockBuilderAttribute)
-
-	_AppBlockBuilderList_member = _AppBlockBuilderList.AddMember("member", AppBlockBuilder)
-
-	_AppBlocks_member = _AppBlocks.AddMember("member", AppBlock)
-
-	ApplicationConfig_Name = ApplicationConfig.AddMember("Name", _AppName)
-
-	ApplicationConfig_DisplayName = ApplicationConfig.AddMember("DisplayName", _AppDisplayName)
-
-	ApplicationConfig_AbsoluteAppPath = ApplicationConfig.AddMember("AbsoluteAppPath", _FilePath)
-
-	ApplicationConfig_AbsoluteIconPath = ApplicationConfig.AddMember("AbsoluteIconPath", _FilePath)
-
-	ApplicationConfig_AbsoluteManifestPath = ApplicationConfig.AddMember("AbsoluteManifestPath", _FilePath)
-
-	ApplicationConfig_WorkingDirectory = ApplicationConfig.AddMember("WorkingDirectory", _FilePath)
-
-	ApplicationConfig_LaunchParameters = ApplicationConfig.AddMember("LaunchParameters", _LaunchParameters)
-
-	_AppCatalogConfig_member = _AppCatalogConfig.AddMember("member", ApplicationConfig)
-
-	_Metadata_key = _Metadata.AddMember("key", _String)
-
-	_Metadata_value = _Metadata.AddMember("value", _String)
-
-	PlatformType_WINDOWS = PlatformType.AddMember("WINDOWS", smithyprelude.Unit)
-
-	PlatformType_WINDOWS_SERVER_2016 = PlatformType.AddMember("WINDOWS_SERVER_2016", smithyprelude.Unit)
-
-	PlatformType_WINDOWS_SERVER_2019 = PlatformType.AddMember("WINDOWS_SERVER_2019", smithyprelude.Unit)
-
-	PlatformType_WINDOWS_SERVER_2022 = PlatformType.AddMember("WINDOWS_SERVER_2022", smithyprelude.Unit)
-
-	PlatformType_WINDOWS_SERVER_2025 = PlatformType.AddMember("WINDOWS_SERVER_2025", smithyprelude.Unit)
-
-	PlatformType_WINDOWS_11 = PlatformType.AddMember("WINDOWS_11", smithyprelude.Unit)
-
-	PlatformType_AMAZON_LINUX2 = PlatformType.AddMember("AMAZON_LINUX2", smithyprelude.Unit)
-
-	PlatformType_RHEL8 = PlatformType.AddMember("RHEL8", smithyprelude.Unit)
-
-	PlatformType_ROCKY_LINUX8 = PlatformType.AddMember("ROCKY_LINUX8", smithyprelude.Unit)
-
-	PlatformType_UBUNTU_PRO_2404 = PlatformType.AddMember("UBUNTU_PRO_2404", smithyprelude.Unit)
-
-	_Platforms_member = _Platforms.AddMember("member", PlatformType)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	Application_Name = Application.AddMember("Name", _String)
-
-	Application_DisplayName = Application.AddMember("DisplayName", _String)
-
-	Application_IconURL = Application.AddMember("IconURL", _String)
-
-	Application_LaunchPath = Application.AddMember("LaunchPath", _String)
-
-	Application_LaunchParameters = Application.AddMember("LaunchParameters", _String)
-
-	Application_Enabled = Application.AddMember("Enabled", _Boolean)
-
-	Application_Metadata = Application.AddMember("Metadata", _Metadata)
-
-	Application_WorkingDirectory = Application.AddMember("WorkingDirectory", _String)
-
-	Application_Description = Application.AddMember("Description", _String)
-
-	Application_Arn = Application.AddMember("Arn", _Arn)
-
-	Application_AppBlockArn = Application.AddMember("AppBlockArn", _Arn)
-
-	Application_IconS3Location = Application.AddMember("IconS3Location", S3Location)
-
-	Application_Platforms = Application.AddMember("Platforms", _Platforms)
-
-	Application_InstanceFamilies = Application.AddMember("InstanceFamilies", _StringList)
-
-	Application_CreatedTime = Application.AddMember("CreatedTime", _Timestamp)
-
-	ApplicationAttribute_LAUNCH_PARAMETERS = ApplicationAttribute.AddMember("LAUNCH_PARAMETERS", smithyprelude.Unit)
-
-	ApplicationAttribute_WORKING_DIRECTORY = ApplicationAttribute.AddMember("WORKING_DIRECTORY", smithyprelude.Unit)
-
-	_ApplicationAttributes_member = _ApplicationAttributes.AddMember("member", ApplicationAttribute)
-
-	ApplicationFleetAssociation_FleetName = ApplicationFleetAssociation.AddMember("FleetName", _String)
-
-	ApplicationFleetAssociation_ApplicationArn = ApplicationFleetAssociation.AddMember("ApplicationArn", _Arn)
-
-	_ApplicationFleetAssociationList_member = _ApplicationFleetAssociationList.AddMember("member", ApplicationFleetAssociation)
-
-	_Applications_member = _Applications.AddMember("member", Application)
-
-	ApplicationSettings_Enabled = ApplicationSettings.AddMember("Enabled", _Boolean)
-
-	ApplicationSettings_SettingsGroup = ApplicationSettings.AddMember("SettingsGroup", _SettingsGroup)
-
-	ApplicationSettingsResponse_Enabled = ApplicationSettingsResponse.AddMember("Enabled", _Boolean)
-
-	ApplicationSettingsResponse_SettingsGroup = ApplicationSettingsResponse.AddMember("SettingsGroup", _SettingsGroup)
-
-	ApplicationSettingsResponse_S3BucketName = ApplicationSettingsResponse.AddMember("S3BucketName", _String)
-
-	AppVisibility_ALL = AppVisibility.AddMember("ALL", smithyprelude.Unit)
-
-	AppVisibility_ASSOCIATED = AppVisibility.AddMember("ASSOCIATED", smithyprelude.Unit)
-
-	_ArnList_member = _ArnList.AddMember("member", _Arn)
-
-	AuthenticationType_API = AuthenticationType.AddMember("API", smithyprelude.Unit)
-
-	AuthenticationType_SAML = AuthenticationType.AddMember("SAML", smithyprelude.Unit)
-
-	AuthenticationType_USERPOOL = AuthenticationType.AddMember("USERPOOL", smithyprelude.Unit)
-
-	AuthenticationType_AWS_AD = AuthenticationType.AddMember("AWS_AD", smithyprelude.Unit)
-
-	_AwsAccountIdList_member = _AwsAccountIdList.AddMember("member", _AwsAccountId)
-
-	CertificateBasedAuthStatus_DISABLED = CertificateBasedAuthStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	CertificateBasedAuthStatus_ENABLED = CertificateBasedAuthStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	CertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK = CertificateBasedAuthStatus.AddMember("ENABLED_NO_DIRECTORY_LOGIN_FALLBACK", smithyprelude.Unit)
-
-	CertificateBasedAuthProperties_Status = CertificateBasedAuthProperties.AddMember("Status", CertificateBasedAuthStatus)
-
-	CertificateBasedAuthProperties_CertificateAuthorityArn = CertificateBasedAuthProperties.AddMember("CertificateAuthorityArn", _Arn)
-
-	ComputeCapacity_DesiredInstances = ComputeCapacity.AddMember("DesiredInstances", _Integer)
-
-	ComputeCapacity_DesiredSessions = ComputeCapacity.AddMember("DesiredSessions", _Integer)
-
-	ComputeCapacityStatus_Desired = ComputeCapacityStatus.AddMember("Desired", _Integer)
-
-	ComputeCapacityStatus_Running = ComputeCapacityStatus.AddMember("Running", _Integer)
-
-	ComputeCapacityStatus_InUse = ComputeCapacityStatus.AddMember("InUse", _Integer)
-
-	ComputeCapacityStatus_Available = ComputeCapacityStatus.AddMember("Available", _Integer)
-
-	ComputeCapacityStatus_DesiredUserSessions = ComputeCapacityStatus.AddMember("DesiredUserSessions", _Integer)
-
-	ComputeCapacityStatus_AvailableUserSessions = ComputeCapacityStatus.AddMember("AvailableUserSessions", _Integer)
-
-	ComputeCapacityStatus_ActiveUserSessions = ComputeCapacityStatus.AddMember("ActiveUserSessions", _Integer)
-
-	ComputeCapacityStatus_ActualUserSessions = ComputeCapacityStatus.AddMember("ActualUserSessions", _Integer)
-
-	ComputeCapacityStatus_Draining = ComputeCapacityStatus.AddMember("Draining", _Integer)
-
-	ComputeCapacityStatus_DrainModeActiveUserSessions = ComputeCapacityStatus.AddMember("DrainModeActiveUserSessions", _Integer)
-
-	ComputeCapacityStatus_DrainModeUnusedUserSessions = ComputeCapacityStatus.AddMember("DrainModeUnusedUserSessions", _Integer)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _ErrorMessage)
-
-	_UrlPatternList_member = _UrlPatternList.AddMember("member", _UrlPattern)
-
-	UrlRedirectionConfig_Enabled = UrlRedirectionConfig.AddMember("Enabled", _BooleanObject)
-
-	UrlRedirectionConfig_AllowedUrls = UrlRedirectionConfig.AddMember("AllowedUrls", _UrlPatternList)
-
-	UrlRedirectionConfig_DeniedUrls = UrlRedirectionConfig.AddMember("DeniedUrls", _UrlPatternList)
-
-	ContentRedirection_HostToClient = ContentRedirection.AddMember("HostToClient", UrlRedirectionConfig)
-
-	_OrganizationalUnitDistinguishedNamesList_member = _OrganizationalUnitDistinguishedNamesList.AddMember("member", _OrganizationalUnitDistinguishedName)
-
-	ServiceAccountCredentials_AccountName = ServiceAccountCredentials.AddMember("AccountName", _AccountName)
-
-	ServiceAccountCredentials_AccountPassword = ServiceAccountCredentials.AddMember("AccountPassword", _AccountPassword)
-
-	DirectoryConfig_DirectoryName = DirectoryConfig.AddMember("DirectoryName", _DirectoryName)
-
-	DirectoryConfig_OrganizationalUnitDistinguishedNames = DirectoryConfig.AddMember("OrganizationalUnitDistinguishedNames", _OrganizationalUnitDistinguishedNamesList)
-
-	DirectoryConfig_ServiceAccountCredentials = DirectoryConfig.AddMember("ServiceAccountCredentials", ServiceAccountCredentials)
-
-	DirectoryConfig_CreatedTime = DirectoryConfig.AddMember("CreatedTime", _Timestamp)
-
-	DirectoryConfig_CertificateBasedAuthProperties = DirectoryConfig.AddMember("CertificateBasedAuthProperties", CertificateBasedAuthProperties)
-
-	_DirectoryConfigList_member = _DirectoryConfigList.AddMember("member", DirectoryConfig)
-
-	_DirectoryNameList_member = _DirectoryNameList.AddMember("member", _DirectoryName)
-
-	DomainJoinInfo_DirectoryName = DomainJoinInfo.AddMember("DirectoryName", _DirectoryName)
-
-	DomainJoinInfo_OrganizationalUnitDistinguishedName = DomainJoinInfo.AddMember("OrganizationalUnitDistinguishedName", _OrganizationalUnitDistinguishedName)
-
-	_DomainList_member = _DomainList.AddMember("member", _Domain)
-
-	DryRunOperationException_Message = DryRunOperationException.AddMember("Message", _ErrorMessage)
-
-	DynamicAppProvidersEnabled_ENABLED = DynamicAppProvidersEnabled.AddMember("ENABLED", smithyprelude.Unit)
-
-	DynamicAppProvidersEnabled_DISABLED = DynamicAppProvidersEnabled.AddMember("DISABLED", smithyprelude.Unit)
-
-	_EmbedHostDomains_member = _EmbedHostDomains.AddMember("member", _EmbedHostDomain)
-
-	EntitledApplication_ApplicationIdentifier = EntitledApplication.AddMember("ApplicationIdentifier", _String)
-
-	_EntitledApplicationList_member = _EntitledApplicationList.AddMember("member", EntitledApplication)
-
-	EntitlementAttribute_Name = EntitlementAttribute.AddMember("Name", _String)
-
-	EntitlementAttribute_Value = EntitlementAttribute.AddMember("Value", _String)
-
-	_EntitlementAttributeList_member = _EntitlementAttributeList.AddMember("member", EntitlementAttribute)
-
-	Entitlement_Name = Entitlement.AddMember("Name", _Name)
-
-	Entitlement_StackName = Entitlement.AddMember("StackName", _Name)
-
-	Entitlement_Description = Entitlement.AddMember("Description", _Description)
-
-	Entitlement_AppVisibility = Entitlement.AddMember("AppVisibility", AppVisibility)
-
-	Entitlement_Attributes = Entitlement.AddMember("Attributes", _EntitlementAttributeList)
-
-	Entitlement_CreatedTime = Entitlement.AddMember("CreatedTime", _Timestamp)
-
-	Entitlement_LastModifiedTime = Entitlement.AddMember("LastModifiedTime", _Timestamp)
-
-	EntitlementAlreadyExistsException_Message = EntitlementAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	_EntitlementList_member = _EntitlementList.AddMember("member", Entitlement)
-
-	EntitlementNotFoundException_Message = EntitlementNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ExportImageTaskState_EXPORTING = ExportImageTaskState.AddMember("EXPORTING", smithyprelude.Unit)
-
-	ExportImageTaskState_COMPLETED = ExportImageTaskState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ExportImageTaskState_FAILED = ExportImageTaskState.AddMember("FAILED", smithyprelude.Unit)
-
-	ExportImageTaskState_TIMED_OUT = ExportImageTaskState.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ExportImageTask_TaskId = ExportImageTask.AddMember("TaskId", _UUID)
-
-	ExportImageTask_ImageArn = ExportImageTask.AddMember("ImageArn", _Arn)
-
-	ExportImageTask_AmiName = ExportImageTask.AddMember("AmiName", _AmiName)
-
-	ExportImageTask_CreatedDate = ExportImageTask.AddMember("CreatedDate", _Timestamp)
-
-	ExportImageTask_AmiDescription = ExportImageTask.AddMember("AmiDescription", _Description)
-
-	ExportImageTask_State = ExportImageTask.AddMember("State", ExportImageTaskState)
-
-	ExportImageTask_AmiId = ExportImageTask.AddMember("AmiId", _PhotonAmiId)
-
-	ExportImageTask_TagSpecifications = ExportImageTask.AddMember("TagSpecifications", _Tags)
-
-	ExportImageTask_ErrorDetails = ExportImageTask.AddMember("ErrorDetails", _ErrorDetailsList)
-
-	_ExportImageTasks_member = _ExportImageTasks.AddMember("member", ExportImageTask)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
-
-	Filter_Name = Filter.AddMember("Name", _FilterName)
-
-	Filter_Values = Filter.AddMember("Values", _FilterValues)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	FleetType_ALWAYS_ON = FleetType.AddMember("ALWAYS_ON", smithyprelude.Unit)
-
-	FleetType_ON_DEMAND = FleetType.AddMember("ON_DEMAND", smithyprelude.Unit)
-
-	FleetType_ELASTIC = FleetType.AddMember("ELASTIC", smithyprelude.Unit)
-
-	FleetState_STARTING = FleetState.AddMember("STARTING", smithyprelude.Unit)
-
-	FleetState_RUNNING = FleetState.AddMember("RUNNING", smithyprelude.Unit)
-
-	FleetState_STOPPING = FleetState.AddMember("STOPPING", smithyprelude.Unit)
-
-	FleetState_STOPPED = FleetState.AddMember("STOPPED", smithyprelude.Unit)
-
-	FleetError_ErrorCode = FleetError.AddMember("ErrorCode", FleetErrorCode)
-
-	FleetError_ErrorMessage = FleetError.AddMember("ErrorMessage", _String)
-
-	_FleetErrors_member = _FleetErrors.AddMember("member", FleetError)
-
-	StreamView_APP = StreamView.AddMember("APP", smithyprelude.Unit)
-
-	StreamView_DESKTOP = StreamView.AddMember("DESKTOP", smithyprelude.Unit)
-
-	_UsbDeviceFilterStrings_member = _UsbDeviceFilterStrings.AddMember("member", _UsbDeviceFilterString)
-
-	VolumeConfig_VolumeSizeInGb = VolumeConfig.AddMember("VolumeSizeInGb", _Integer)
-
-	Fleet_Arn = Fleet.AddMember("Arn", _Arn)
-
-	Fleet_Name = Fleet.AddMember("Name", _String)
-
-	Fleet_DisplayName = Fleet.AddMember("DisplayName", _String)
-
-	Fleet_Description = Fleet.AddMember("Description", _String)
-
-	Fleet_ImageName = Fleet.AddMember("ImageName", _String)
-
-	Fleet_ImageArn = Fleet.AddMember("ImageArn", _Arn)
-
-	Fleet_InstanceType = Fleet.AddMember("InstanceType", _String)
-
-	Fleet_FleetType = Fleet.AddMember("FleetType", FleetType)
-
-	Fleet_ComputeCapacityStatus = Fleet.AddMember("ComputeCapacityStatus", ComputeCapacityStatus)
-
-	Fleet_MaxUserDurationInSeconds = Fleet.AddMember("MaxUserDurationInSeconds", _Integer)
-
-	Fleet_DisconnectTimeoutInSeconds = Fleet.AddMember("DisconnectTimeoutInSeconds", _Integer)
-
-	Fleet_State = Fleet.AddMember("State", FleetState)
-
-	Fleet_VpcConfig = Fleet.AddMember("VpcConfig", VpcConfig)
-
-	Fleet_CreatedTime = Fleet.AddMember("CreatedTime", _Timestamp)
-
-	Fleet_FleetErrors = Fleet.AddMember("FleetErrors", _FleetErrors)
-
-	Fleet_EnableDefaultInternetAccess = Fleet.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	Fleet_DomainJoinInfo = Fleet.AddMember("DomainJoinInfo", DomainJoinInfo)
-
-	Fleet_IdleDisconnectTimeoutInSeconds = Fleet.AddMember("IdleDisconnectTimeoutInSeconds", _Integer)
-
-	Fleet_IamRoleArn = Fleet.AddMember("IamRoleArn", _Arn)
-
-	Fleet_StreamView = Fleet.AddMember("StreamView", StreamView)
-
-	Fleet_Platform = Fleet.AddMember("Platform", PlatformType)
-
-	Fleet_MaxConcurrentSessions = Fleet.AddMember("MaxConcurrentSessions", _Integer)
-
-	Fleet_UsbDeviceFilterStrings = Fleet.AddMember("UsbDeviceFilterStrings", _UsbDeviceFilterStrings)
-
-	Fleet_SessionScriptS3Location = Fleet.AddMember("SessionScriptS3Location", S3Location)
-
-	Fleet_MaxSessionsPerInstance = Fleet.AddMember("MaxSessionsPerInstance", _Integer)
-
-	Fleet_RootVolumeConfig = Fleet.AddMember("RootVolumeConfig", VolumeConfig)
-
-	Fleet_DisableIMDSV1 = Fleet.AddMember("DisableIMDSV1", _BooleanObject)
-
-	FleetAttribute_VPC_CONFIGURATION = FleetAttribute.AddMember("VPC_CONFIGURATION", smithyprelude.Unit)
-
-	FleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS = FleetAttribute.AddMember("VPC_CONFIGURATION_SECURITY_GROUP_IDS", smithyprelude.Unit)
-
-	FleetAttribute_DOMAIN_JOIN_INFO = FleetAttribute.AddMember("DOMAIN_JOIN_INFO", smithyprelude.Unit)
-
-	FleetAttribute_IAM_ROLE_ARN = FleetAttribute.AddMember("IAM_ROLE_ARN", smithyprelude.Unit)
-
-	FleetAttribute_USB_DEVICE_FILTER_STRINGS = FleetAttribute.AddMember("USB_DEVICE_FILTER_STRINGS", smithyprelude.Unit)
-
-	FleetAttribute_SESSION_SCRIPT_S3_LOCATION = FleetAttribute.AddMember("SESSION_SCRIPT_S3_LOCATION", smithyprelude.Unit)
-
-	FleetAttribute_MAX_SESSIONS_PER_INSTANCE = FleetAttribute.AddMember("MAX_SESSIONS_PER_INSTANCE", smithyprelude.Unit)
-
-	FleetAttribute_VOLUME_CONFIGURATION = FleetAttribute.AddMember("VOLUME_CONFIGURATION", smithyprelude.Unit)
-
-	_FleetAttributes_member = _FleetAttributes.AddMember("member", FleetAttribute)
-
-	_FleetList_member = _FleetList.AddMember("member", Fleet)
-
-	ImageState_PENDING = ImageState.AddMember("PENDING", smithyprelude.Unit)
-
-	ImageState_AVAILABLE = ImageState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ImageState_FAILED = ImageState.AddMember("FAILED", smithyprelude.Unit)
-
-	ImageState_COPYING = ImageState.AddMember("COPYING", smithyprelude.Unit)
-
-	ImageState_DELETING = ImageState.AddMember("DELETING", smithyprelude.Unit)
-
-	ImageState_CREATING = ImageState.AddMember("CREATING", smithyprelude.Unit)
-
-	ImageState_IMPORTING = ImageState.AddMember("IMPORTING", smithyprelude.Unit)
-
-	ImageState_VALIDATING = ImageState.AddMember("VALIDATING", smithyprelude.Unit)
-
-	VisibilityType_PUBLIC = VisibilityType.AddMember("PUBLIC", smithyprelude.Unit)
-
-	VisibilityType_PRIVATE = VisibilityType.AddMember("PRIVATE", smithyprelude.Unit)
-
-	VisibilityType_SHARED = VisibilityType.AddMember("SHARED", smithyprelude.Unit)
-
-	ImageStateChangeReasonCode_INTERNAL_ERROR = ImageStateChangeReasonCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	ImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE = ImageStateChangeReasonCode.AddMember("IMAGE_BUILDER_NOT_AVAILABLE", smithyprelude.Unit)
-
-	ImageStateChangeReasonCode_IMAGE_COPY_FAILURE = ImageStateChangeReasonCode.AddMember("IMAGE_COPY_FAILURE", smithyprelude.Unit)
-
-	ImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE = ImageStateChangeReasonCode.AddMember("IMAGE_UPDATE_FAILURE", smithyprelude.Unit)
-
-	ImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE = ImageStateChangeReasonCode.AddMember("IMAGE_IMPORT_FAILURE", smithyprelude.Unit)
-
-	ImageStateChangeReason_Code = ImageStateChangeReason.AddMember("Code", ImageStateChangeReasonCode)
-
-	ImageStateChangeReason_Message = ImageStateChangeReason.AddMember("Message", _String)
-
-	ImagePermissions_allowFleet = ImagePermissions.AddMember("allowFleet", _BooleanObject)
-
-	ImagePermissions_allowImageBuilder = ImagePermissions.AddMember("allowImageBuilder", _BooleanObject)
-
-	LatestAppstreamAgentVersion_TRUE = LatestAppstreamAgentVersion.AddMember("TRUE", smithyprelude.Unit)
-
-	LatestAppstreamAgentVersion_FALSE = LatestAppstreamAgentVersion.AddMember("FALSE", smithyprelude.Unit)
-
-	ImageSharedWithOthers_TRUE = ImageSharedWithOthers.AddMember("TRUE", smithyprelude.Unit)
-
-	ImageSharedWithOthers_FALSE = ImageSharedWithOthers.AddMember("FALSE", smithyprelude.Unit)
-
-	ImageType_CUSTOM = ImageType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	ImageType_NATIVE = ImageType.AddMember("NATIVE", smithyprelude.Unit)
-
-	ImageType_BYOL = ImageType.AddMember("BYOL", smithyprelude.Unit)
-
-	ImageSoftwareMetadata_nvidiaGridDriverVersion = ImageSoftwareMetadata.AddMember("nvidiaGridDriverVersion", _NvidiaGridDriverVersion)
-
-	Image_Name = Image.AddMember("Name", _String)
-
-	Image_Arn = Image.AddMember("Arn", _Arn)
-
-	Image_BaseImageArn = Image.AddMember("BaseImageArn", _Arn)
-
-	Image_DisplayName = Image.AddMember("DisplayName", _String)
-
-	Image_State = Image.AddMember("State", ImageState)
-
-	Image_Visibility = Image.AddMember("Visibility", VisibilityType)
-
-	Image_ImageBuilderSupported = Image.AddMember("ImageBuilderSupported", _Boolean)
-
-	Image_ImageBuilderName = Image.AddMember("ImageBuilderName", _String)
-
-	Image_Platform = Image.AddMember("Platform", PlatformType)
-
-	Image_Description = Image.AddMember("Description", _String)
-
-	Image_StateChangeReason = Image.AddMember("StateChangeReason", ImageStateChangeReason)
-
-	Image_Applications = Image.AddMember("Applications", _Applications)
-
-	Image_CreatedTime = Image.AddMember("CreatedTime", _Timestamp)
-
-	Image_PublicBaseImageReleasedDate = Image.AddMember("PublicBaseImageReleasedDate", _Timestamp)
-
-	Image_AppstreamAgentVersion = Image.AddMember("AppstreamAgentVersion", _AppstreamAgentVersion)
-
-	Image_ImagePermissions = Image.AddMember("ImagePermissions", ImagePermissions)
-
-	Image_ImageErrors = Image.AddMember("ImageErrors", _ResourceErrors)
-
-	Image_LatestAppstreamAgentVersion = Image.AddMember("LatestAppstreamAgentVersion", LatestAppstreamAgentVersion)
-
-	Image_SupportedInstanceFamilies = Image.AddMember("SupportedInstanceFamilies", _StringList)
-
-	Image_DynamicAppProvidersEnabled = Image.AddMember("DynamicAppProvidersEnabled", DynamicAppProvidersEnabled)
-
-	Image_ImageSharedWithOthers = Image.AddMember("ImageSharedWithOthers", ImageSharedWithOthers)
-
-	Image_ManagedSoftwareIncluded = Image.AddMember("ManagedSoftwareIncluded", _Boolean)
-
-	Image_ImageType = Image.AddMember("ImageType", ImageType)
-
-	Image_ImageSoftwareMetadata = Image.AddMember("ImageSoftwareMetadata", ImageSoftwareMetadata)
-
-	ImageBuilderState_PENDING = ImageBuilderState.AddMember("PENDING", smithyprelude.Unit)
-
-	ImageBuilderState_UPDATING_AGENT = ImageBuilderState.AddMember("UPDATING_AGENT", smithyprelude.Unit)
-
-	ImageBuilderState_RUNNING = ImageBuilderState.AddMember("RUNNING", smithyprelude.Unit)
-
-	ImageBuilderState_STOPPING = ImageBuilderState.AddMember("STOPPING", smithyprelude.Unit)
-
-	ImageBuilderState_STOPPED = ImageBuilderState.AddMember("STOPPED", smithyprelude.Unit)
-
-	ImageBuilderState_REBOOTING = ImageBuilderState.AddMember("REBOOTING", smithyprelude.Unit)
-
-	ImageBuilderState_SNAPSHOTTING = ImageBuilderState.AddMember("SNAPSHOTTING", smithyprelude.Unit)
-
-	ImageBuilderState_DELETING = ImageBuilderState.AddMember("DELETING", smithyprelude.Unit)
-
-	ImageBuilderState_FAILED = ImageBuilderState.AddMember("FAILED", smithyprelude.Unit)
-
-	ImageBuilderState_UPDATING = ImageBuilderState.AddMember("UPDATING", smithyprelude.Unit)
-
-	ImageBuilderState_PENDING_QUALIFICATION = ImageBuilderState.AddMember("PENDING_QUALIFICATION", smithyprelude.Unit)
-
-	ImageBuilderState_PENDING_SYNCING_APPS = ImageBuilderState.AddMember("PENDING_SYNCING_APPS", smithyprelude.Unit)
-
-	ImageBuilderState_SYNCING_APPS = ImageBuilderState.AddMember("SYNCING_APPS", smithyprelude.Unit)
-
-	ImageBuilderState_PENDING_IMAGE_IMPORT = ImageBuilderState.AddMember("PENDING_IMAGE_IMPORT", smithyprelude.Unit)
-
-	ImageBuilderStateChangeReasonCode_INTERNAL_ERROR = ImageBuilderStateChangeReasonCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	ImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE = ImageBuilderStateChangeReasonCode.AddMember("IMAGE_UNAVAILABLE", smithyprelude.Unit)
-
-	ImageBuilderStateChangeReason_Code = ImageBuilderStateChangeReason.AddMember("Code", ImageBuilderStateChangeReasonCode)
-
-	ImageBuilderStateChangeReason_Message = ImageBuilderStateChangeReason.AddMember("Message", _String)
-
-	NetworkAccessConfiguration_EniPrivateIpAddress = NetworkAccessConfiguration.AddMember("EniPrivateIpAddress", _String)
-
-	NetworkAccessConfiguration_EniIpv6Addresses = NetworkAccessConfiguration.AddMember("EniIpv6Addresses", _StringList)
-
-	NetworkAccessConfiguration_EniId = NetworkAccessConfiguration.AddMember("EniId", _String)
-
-	ImageBuilder_Name = ImageBuilder.AddMember("Name", _String)
-
-	ImageBuilder_Arn = ImageBuilder.AddMember("Arn", _Arn)
-
-	ImageBuilder_ImageArn = ImageBuilder.AddMember("ImageArn", _Arn)
-
-	ImageBuilder_Description = ImageBuilder.AddMember("Description", _String)
-
-	ImageBuilder_DisplayName = ImageBuilder.AddMember("DisplayName", _String)
-
-	ImageBuilder_VpcConfig = ImageBuilder.AddMember("VpcConfig", VpcConfig)
-
-	ImageBuilder_InstanceType = ImageBuilder.AddMember("InstanceType", _String)
-
-	ImageBuilder_Platform = ImageBuilder.AddMember("Platform", PlatformType)
-
-	ImageBuilder_IamRoleArn = ImageBuilder.AddMember("IamRoleArn", _Arn)
-
-	ImageBuilder_State = ImageBuilder.AddMember("State", ImageBuilderState)
-
-	ImageBuilder_StateChangeReason = ImageBuilder.AddMember("StateChangeReason", ImageBuilderStateChangeReason)
-
-	ImageBuilder_CreatedTime = ImageBuilder.AddMember("CreatedTime", _Timestamp)
-
-	ImageBuilder_EnableDefaultInternetAccess = ImageBuilder.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	ImageBuilder_DomainJoinInfo = ImageBuilder.AddMember("DomainJoinInfo", DomainJoinInfo)
-
-	ImageBuilder_NetworkAccessConfiguration = ImageBuilder.AddMember("NetworkAccessConfiguration", NetworkAccessConfiguration)
-
-	ImageBuilder_ImageBuilderErrors = ImageBuilder.AddMember("ImageBuilderErrors", _ResourceErrors)
-
-	ImageBuilder_AppstreamAgentVersion = ImageBuilder.AddMember("AppstreamAgentVersion", _AppstreamAgentVersion)
-
-	ImageBuilder_AccessEndpoints = ImageBuilder.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	ImageBuilder_RootVolumeConfig = ImageBuilder.AddMember("RootVolumeConfig", VolumeConfig)
-
-	ImageBuilder_LatestAppstreamAgentVersion = ImageBuilder.AddMember("LatestAppstreamAgentVersion", LatestAppstreamAgentVersion)
-
-	ImageBuilder_DisableIMDSV1 = ImageBuilder.AddMember("DisableIMDSV1", _BooleanObject)
-
-	_ImageBuilderList_member = _ImageBuilderList.AddMember("member", ImageBuilder)
-
-	_ImageList_member = _ImageList.AddMember("member", Image)
-
-	IncompatibleImageException_Message = IncompatibleImageException.AddMember("Message", _ErrorMessage)
-
-	InstanceDrainStatus_ACTIVE = InstanceDrainStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	InstanceDrainStatus_DRAINING = InstanceDrainStatus.AddMember("DRAINING", smithyprelude.Unit)
-
-	InstanceDrainStatus_NOT_APPLICABLE = InstanceDrainStatus.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
-
-	InvalidAccountStatusException_Message = InvalidAccountStatusException.AddMember("Message", _ErrorMessage)
-
-	InvalidParameterCombinationException_Message = InvalidParameterCombinationException.AddMember("Message", _ErrorMessage)
-
-	InvalidRoleException_Message = InvalidRoleException.AddMember("Message", _ErrorMessage)
-
-	UsageReportExecutionErrorCode_RESOURCE_NOT_FOUND = UsageReportExecutionErrorCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	UsageReportExecutionErrorCode_ACCESS_DENIED = UsageReportExecutionErrorCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	UsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR = UsageReportExecutionErrorCode.AddMember("INTERNAL_SERVICE_ERROR", smithyprelude.Unit)
-
-	LastReportGenerationExecutionError_ErrorCode = LastReportGenerationExecutionError.AddMember("ErrorCode", UsageReportExecutionErrorCode)
-
-	LastReportGenerationExecutionError_ErrorMessage = LastReportGenerationExecutionError.AddMember("ErrorMessage", _String)
-
-	_LastReportGenerationExecutionErrors_member = _LastReportGenerationExecutionErrors.AddMember("member", LastReportGenerationExecutionError)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	MessageAction_SUPPRESS = MessageAction.AddMember("SUPPRESS", smithyprelude.Unit)
-
-	MessageAction_RESEND = MessageAction.AddMember("RESEND", smithyprelude.Unit)
-
-	OperationNotPermittedException_Message = OperationNotPermittedException.AddMember("Message", _ErrorMessage)
-
-	PreferredProtocol_TCP = PreferredProtocol.AddMember("TCP", smithyprelude.Unit)
-
-	PreferredProtocol_UDP = PreferredProtocol.AddMember("UDP", smithyprelude.Unit)
-
-	RequestLimitExceededException_Message = RequestLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotAvailableException_Message = ResourceNotAvailableException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	RuntimeValidationConfig_IntendedInstanceType = RuntimeValidationConfig.AddMember("IntendedInstanceType", _InstanceType)
-
-	SessionState_ACTIVE = SessionState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SessionState_PENDING = SessionState.AddMember("PENDING", smithyprelude.Unit)
-
-	SessionState_EXPIRED = SessionState.AddMember("EXPIRED", smithyprelude.Unit)
-
-	SessionConnectionState_CONNECTED = SessionConnectionState.AddMember("CONNECTED", smithyprelude.Unit)
-
-	SessionConnectionState_NOT_CONNECTED = SessionConnectionState.AddMember("NOT_CONNECTED", smithyprelude.Unit)
-
-	Session_Id = Session.AddMember("Id", _String)
-
-	Session_UserId = Session.AddMember("UserId", _UserId)
-
-	Session_StackName = Session.AddMember("StackName", _String)
-
-	Session_FleetName = Session.AddMember("FleetName", _String)
-
-	Session_State = Session.AddMember("State", SessionState)
-
-	Session_ConnectionState = Session.AddMember("ConnectionState", SessionConnectionState)
-
-	Session_StartTime = Session.AddMember("StartTime", _Timestamp)
-
-	Session_MaxExpirationTime = Session.AddMember("MaxExpirationTime", _Timestamp)
-
-	Session_AuthenticationType = Session.AddMember("AuthenticationType", AuthenticationType)
-
-	Session_NetworkAccessConfiguration = Session.AddMember("NetworkAccessConfiguration", NetworkAccessConfiguration)
-
-	Session_InstanceId = Session.AddMember("InstanceId", _String)
-
-	Session_InstanceDrainStatus = Session.AddMember("InstanceDrainStatus", InstanceDrainStatus)
-
-	_SessionList_member = _SessionList.AddMember("member", Session)
-
-	SharedImagePermissions_sharedAccountId = SharedImagePermissions.AddMember("sharedAccountId", _AwsAccountId)
-
-	SharedImagePermissions_imagePermissions = SharedImagePermissions.AddMember("imagePermissions", ImagePermissions)
-
-	_SharedImagePermissionsList_member = _SharedImagePermissionsList.AddMember("member", SharedImagePermissions)
-
-	SoftwareDeploymentStatus_STAGED_FOR_INSTALLATION = SoftwareDeploymentStatus.AddMember("STAGED_FOR_INSTALLATION", smithyprelude.Unit)
-
-	SoftwareDeploymentStatus_PENDING_INSTALLATION = SoftwareDeploymentStatus.AddMember("PENDING_INSTALLATION", smithyprelude.Unit)
-
-	SoftwareDeploymentStatus_INSTALLED = SoftwareDeploymentStatus.AddMember("INSTALLED", smithyprelude.Unit)
-
-	SoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION = SoftwareDeploymentStatus.AddMember("STAGED_FOR_UNINSTALLATION", smithyprelude.Unit)
-
-	SoftwareDeploymentStatus_PENDING_UNINSTALLATION = SoftwareDeploymentStatus.AddMember("PENDING_UNINSTALLATION", smithyprelude.Unit)
-
-	SoftwareDeploymentStatus_FAILED_TO_INSTALL = SoftwareDeploymentStatus.AddMember("FAILED_TO_INSTALL", smithyprelude.Unit)
-
-	SoftwareDeploymentStatus_FAILED_TO_UNINSTALL = SoftwareDeploymentStatus.AddMember("FAILED_TO_UNINSTALL", smithyprelude.Unit)
-
-	SoftwareAssociations_SoftwareName = SoftwareAssociations.AddMember("SoftwareName", _String)
-
-	SoftwareAssociations_Status = SoftwareAssociations.AddMember("Status", SoftwareDeploymentStatus)
-
-	SoftwareAssociations_DeploymentError = SoftwareAssociations.AddMember("DeploymentError", _ErrorDetailsList)
-
-	_SoftwareAssociationsList_member = _SoftwareAssociationsList.AddMember("member", SoftwareAssociations)
-
-	StorageConnectorType_HOMEFOLDERS = StorageConnectorType.AddMember("HOMEFOLDERS", smithyprelude.Unit)
-
-	StorageConnectorType_GOOGLE_DRIVE = StorageConnectorType.AddMember("GOOGLE_DRIVE", smithyprelude.Unit)
-
-	StorageConnectorType_ONE_DRIVE = StorageConnectorType.AddMember("ONE_DRIVE", smithyprelude.Unit)
-
-	StorageConnector_ConnectorType = StorageConnector.AddMember("ConnectorType", StorageConnectorType)
-
-	StorageConnector_ResourceIdentifier = StorageConnector.AddMember("ResourceIdentifier", _ResourceIdentifier)
-
-	StorageConnector_Domains = StorageConnector.AddMember("Domains", _DomainList)
-
-	StorageConnector_DomainsRequireAdminConsent = StorageConnector.AddMember("DomainsRequireAdminConsent", _DomainList)
-
-	_StorageConnectorList_member = _StorageConnectorList.AddMember("member", StorageConnector)
-
-	StackErrorCode_STORAGE_CONNECTOR_ERROR = StackErrorCode.AddMember("STORAGE_CONNECTOR_ERROR", smithyprelude.Unit)
-
-	StackErrorCode_INTERNAL_SERVICE_ERROR = StackErrorCode.AddMember("INTERNAL_SERVICE_ERROR", smithyprelude.Unit)
-
-	StackError_ErrorCode = StackError.AddMember("ErrorCode", StackErrorCode)
-
-	StackError_ErrorMessage = StackError.AddMember("ErrorMessage", _String)
-
-	_StackErrors_member = _StackErrors.AddMember("member", StackError)
-
-	UserSetting_Action = UserSetting.AddMember("Action", Action)
-
-	UserSetting_Permission = UserSetting.AddMember("Permission", Permission)
-
-	UserSetting_MaximumLength = UserSetting.AddMember("MaximumLength", _Integer)
-
-	_UserSettingList_member = _UserSettingList.AddMember("member", UserSetting)
-
-	StreamingExperienceSettings_PreferredProtocol = StreamingExperienceSettings.AddMember("PreferredProtocol", PreferredProtocol)
-
-	StorageConnectorAuthentication_FORCE_REAUTHENTICATION = StorageConnectorAuthentication.AddMember("FORCE_REAUTHENTICATION", smithyprelude.Unit)
-
-	StorageConnectorAuthentication_REUSE_CREDENTIALS = StorageConnectorAuthentication.AddMember("REUSE_CREDENTIALS", smithyprelude.Unit)
-
-	Stack_Arn = Stack.AddMember("Arn", _Arn)
-
-	Stack_Name = Stack.AddMember("Name", _String)
-
-	Stack_Description = Stack.AddMember("Description", _String)
-
-	Stack_DisplayName = Stack.AddMember("DisplayName", _String)
-
-	Stack_CreatedTime = Stack.AddMember("CreatedTime", _Timestamp)
-
-	Stack_StorageConnectors = Stack.AddMember("StorageConnectors", _StorageConnectorList)
-
-	Stack_RedirectURL = Stack.AddMember("RedirectURL", _RedirectURL)
-
-	Stack_FeedbackURL = Stack.AddMember("FeedbackURL", _FeedbackURL)
-
-	Stack_StackErrors = Stack.AddMember("StackErrors", _StackErrors)
-
-	Stack_UserSettings = Stack.AddMember("UserSettings", _UserSettingList)
-
-	Stack_ApplicationSettings = Stack.AddMember("ApplicationSettings", ApplicationSettingsResponse)
-
-	Stack_AccessEndpoints = Stack.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	Stack_EmbedHostDomains = Stack.AddMember("EmbedHostDomains", _EmbedHostDomains)
-
-	Stack_StreamingExperienceSettings = Stack.AddMember("StreamingExperienceSettings", StreamingExperienceSettings)
-
-	Stack_ContentRedirection = Stack.AddMember("ContentRedirection", ContentRedirection)
-
-	Stack_AgentAccessConfig = Stack.AddMember("AgentAccessConfig", AgentAccessConfig)
-
-	Stack_StorageConnectorAuthentication = Stack.AddMember("StorageConnectorAuthentication", StorageConnectorAuthentication)
-
-	StackAttribute_STORAGE_CONNECTORS = StackAttribute.AddMember("STORAGE_CONNECTORS", smithyprelude.Unit)
-
-	StackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS = StackAttribute.AddMember("STORAGE_CONNECTOR_HOMEFOLDERS", smithyprelude.Unit)
-
-	StackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE = StackAttribute.AddMember("STORAGE_CONNECTOR_GOOGLE_DRIVE", smithyprelude.Unit)
-
-	StackAttribute_STORAGE_CONNECTOR_ONE_DRIVE = StackAttribute.AddMember("STORAGE_CONNECTOR_ONE_DRIVE", smithyprelude.Unit)
-
-	StackAttribute_REDIRECT_URL = StackAttribute.AddMember("REDIRECT_URL", smithyprelude.Unit)
-
-	StackAttribute_FEEDBACK_URL = StackAttribute.AddMember("FEEDBACK_URL", smithyprelude.Unit)
-
-	StackAttribute_THEME_NAME = StackAttribute.AddMember("THEME_NAME", smithyprelude.Unit)
-
-	StackAttribute_USER_SETTINGS = StackAttribute.AddMember("USER_SETTINGS", smithyprelude.Unit)
-
-	StackAttribute_EMBED_HOST_DOMAINS = StackAttribute.AddMember("EMBED_HOST_DOMAINS", smithyprelude.Unit)
-
-	StackAttribute_IAM_ROLE_ARN = StackAttribute.AddMember("IAM_ROLE_ARN", smithyprelude.Unit)
-
-	StackAttribute_ACCESS_ENDPOINTS = StackAttribute.AddMember("ACCESS_ENDPOINTS", smithyprelude.Unit)
-
-	StackAttribute_STREAMING_EXPERIENCE_SETTINGS = StackAttribute.AddMember("STREAMING_EXPERIENCE_SETTINGS", smithyprelude.Unit)
-
-	StackAttribute_CONTENT_REDIRECTION = StackAttribute.AddMember("CONTENT_REDIRECTION", smithyprelude.Unit)
-
-	StackAttribute_AGENT_ACCESS_CONFIG = StackAttribute.AddMember("AGENT_ACCESS_CONFIG", smithyprelude.Unit)
-
-	StackAttribute_STORAGE_CONNECTOR_AUTHENTICATION = StackAttribute.AddMember("STORAGE_CONNECTOR_AUTHENTICATION", smithyprelude.Unit)
-
-	_StackAttributes_member = _StackAttributes.AddMember("member", StackAttribute)
-
-	_StackList_member = _StackList.AddMember("member", Stack)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThemeState_ENABLED = ThemeState.AddMember("ENABLED", smithyprelude.Unit)
-
-	ThemeState_DISABLED = ThemeState.AddMember("DISABLED", smithyprelude.Unit)
-
-	ThemeStyling_LIGHT_BLUE = ThemeStyling.AddMember("LIGHT_BLUE", smithyprelude.Unit)
-
-	ThemeStyling_BLUE = ThemeStyling.AddMember("BLUE", smithyprelude.Unit)
-
-	ThemeStyling_PINK = ThemeStyling.AddMember("PINK", smithyprelude.Unit)
-
-	ThemeStyling_RED = ThemeStyling.AddMember("RED", smithyprelude.Unit)
-
-	ThemeFooterLink_DisplayName = ThemeFooterLink.AddMember("DisplayName", _ThemeFooterLinkDisplayName)
-
-	ThemeFooterLink_FooterLinkURL = ThemeFooterLink.AddMember("FooterLinkURL", _ThemeFooterLinkURL)
-
-	_ThemeFooterLinks_member = _ThemeFooterLinks.AddMember("member", ThemeFooterLink)
-
-	Theme_StackName = Theme.AddMember("StackName", _Name)
-
-	Theme_State = Theme.AddMember("State", ThemeState)
-
-	Theme_ThemeTitleText = Theme.AddMember("ThemeTitleText", _ThemeTitleText)
-
-	Theme_ThemeStyling = Theme.AddMember("ThemeStyling", ThemeStyling)
-
-	Theme_ThemeFooterLinks = Theme.AddMember("ThemeFooterLinks", _ThemeFooterLinks)
-
-	Theme_ThemeOrganizationLogoURL = Theme.AddMember("ThemeOrganizationLogoURL", _String)
-
-	Theme_ThemeFaviconURL = Theme.AddMember("ThemeFaviconURL", _String)
-
-	Theme_CreatedTime = Theme.AddMember("CreatedTime", _Timestamp)
-
-	ThemeAttribute_FOOTER_LINKS = ThemeAttribute.AddMember("FOOTER_LINKS", smithyprelude.Unit)
-
-	_ThemeAttributes_member = _ThemeAttributes.AddMember("member", ThemeAttribute)
-
-	UsageReportSchedule_DAILY = UsageReportSchedule.AddMember("DAILY", smithyprelude.Unit)
-
-	UsageReportSubscription_S3BucketName = UsageReportSubscription.AddMember("S3BucketName", _String)
-
-	UsageReportSubscription_Schedule = UsageReportSubscription.AddMember("Schedule", UsageReportSchedule)
-
-	UsageReportSubscription_LastGeneratedReportDate = UsageReportSubscription.AddMember("LastGeneratedReportDate", _Timestamp)
-
-	UsageReportSubscription_SubscriptionErrors = UsageReportSubscription.AddMember("SubscriptionErrors", _LastReportGenerationExecutionErrors)
-
-	_UsageReportSubscriptionList_member = _UsageReportSubscriptionList.AddMember("member", UsageReportSubscription)
-
-	User_Arn = User.AddMember("Arn", _Arn)
-
-	User_UserName = User.AddMember("UserName", _Username)
-
-	User_Enabled = User.AddMember("Enabled", _Boolean)
-
-	User_Status = User.AddMember("Status", _String)
-
-	User_FirstName = User.AddMember("FirstName", _UserAttributeValue)
-
-	User_LastName = User.AddMember("LastName", _UserAttributeValue)
-
-	User_CreatedTime = User.AddMember("CreatedTime", _Timestamp)
-
-	User_AuthenticationType = User.AddMember("AuthenticationType", AuthenticationType)
-
-	_UserList_member = _UserList.AddMember("member", User)
-
-	UserStackAssociation_StackName = UserStackAssociation.AddMember("StackName", _String)
-
-	UserStackAssociation_UserName = UserStackAssociation.AddMember("UserName", _Username)
-
-	UserStackAssociation_AuthenticationType = UserStackAssociation.AddMember("AuthenticationType", AuthenticationType)
-
-	UserStackAssociation_SendEmailNotification = UserStackAssociation.AddMember("SendEmailNotification", _Boolean)
-
-	UserStackAssociationErrorCode_STACK_NOT_FOUND = UserStackAssociationErrorCode.AddMember("STACK_NOT_FOUND", smithyprelude.Unit)
-
-	UserStackAssociationErrorCode_USER_NAME_NOT_FOUND = UserStackAssociationErrorCode.AddMember("USER_NAME_NOT_FOUND", smithyprelude.Unit)
-
-	UserStackAssociationErrorCode_DIRECTORY_NOT_FOUND = UserStackAssociationErrorCode.AddMember("DIRECTORY_NOT_FOUND", smithyprelude.Unit)
-
-	UserStackAssociationErrorCode_INTERNAL_ERROR = UserStackAssociationErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	UserStackAssociationError_UserStackAssociation = UserStackAssociationError.AddMember("UserStackAssociation", UserStackAssociation)
-
-	UserStackAssociationError_ErrorCode = UserStackAssociationError.AddMember("ErrorCode", UserStackAssociationErrorCode)
-
-	UserStackAssociationError_ErrorMessage = UserStackAssociationError.AddMember("ErrorMessage", _String)
-
-	_UserStackAssociationErrorList_member = _UserStackAssociationErrorList.AddMember("member", UserStackAssociationError)
-
-	_UserStackAssociationList_member = _UserStackAssociationList.AddMember("member", UserStackAssociation)
-
-	AssociateAppBlockBuilderAppBlockRequest_AppBlockArn = AssociateAppBlockBuilderAppBlockRequest.AddMember("AppBlockArn", _Arn)
-
-	AssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName = AssociateAppBlockBuilderAppBlockRequest.AddMember("AppBlockBuilderName", _Name)
-
-	AssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation = AssociateAppBlockBuilderAppBlockResult.AddMember("AppBlockBuilderAppBlockAssociation", AppBlockBuilderAppBlockAssociation)
-
-	AssociateApplicationFleetRequest_FleetName = AssociateApplicationFleetRequest.AddMember("FleetName", _Name)
-
-	AssociateApplicationFleetRequest_ApplicationArn = AssociateApplicationFleetRequest.AddMember("ApplicationArn", _Arn)
-
-	AssociateApplicationFleetResult_ApplicationFleetAssociation = AssociateApplicationFleetResult.AddMember("ApplicationFleetAssociation", ApplicationFleetAssociation)
-
-	AssociateApplicationToEntitlementRequest_StackName = AssociateApplicationToEntitlementRequest.AddMember("StackName", _Name)
-
-	AssociateApplicationToEntitlementRequest_EntitlementName = AssociateApplicationToEntitlementRequest.AddMember("EntitlementName", _Name)
-
-	AssociateApplicationToEntitlementRequest_ApplicationIdentifier = AssociateApplicationToEntitlementRequest.AddMember("ApplicationIdentifier", _String)
-
-	AssociateFleetRequest_FleetName = AssociateFleetRequest.AddMember("FleetName", _String)
-
-	AssociateFleetRequest_StackName = AssociateFleetRequest.AddMember("StackName", _String)
-
-	AssociateSoftwareToImageBuilderRequest_ImageBuilderName = AssociateSoftwareToImageBuilderRequest.AddMember("ImageBuilderName", _Name)
-
-	AssociateSoftwareToImageBuilderRequest_SoftwareNames = AssociateSoftwareToImageBuilderRequest.AddMember("SoftwareNames", _StringList)
-
-	BatchAssociateUserStackRequest_UserStackAssociations = BatchAssociateUserStackRequest.AddMember("UserStackAssociations", _UserStackAssociationList)
-
-	BatchAssociateUserStackResult_errors = BatchAssociateUserStackResult.AddMember("errors", _UserStackAssociationErrorList)
-
-	BatchDisassociateUserStackRequest_UserStackAssociations = BatchDisassociateUserStackRequest.AddMember("UserStackAssociations", _UserStackAssociationList)
-
-	BatchDisassociateUserStackResult_errors = BatchDisassociateUserStackResult.AddMember("errors", _UserStackAssociationErrorList)
-
-	CopyImageRequest_SourceImageName = CopyImageRequest.AddMember("SourceImageName", _Name)
-
-	CopyImageRequest_DestinationImageName = CopyImageRequest.AddMember("DestinationImageName", _Name)
-
-	CopyImageRequest_DestinationRegion = CopyImageRequest.AddMember("DestinationRegion", _RegionName)
-
-	CopyImageRequest_DestinationImageDescription = CopyImageRequest.AddMember("DestinationImageDescription", _Description)
-
-	CopyImageResponse_DestinationImageName = CopyImageResponse.AddMember("DestinationImageName", _Name)
-
-	CreateAppBlockBuilderRequest_Name = CreateAppBlockBuilderRequest.AddMember("Name", _Name)
-
-	CreateAppBlockBuilderRequest_Description = CreateAppBlockBuilderRequest.AddMember("Description", _Description)
-
-	CreateAppBlockBuilderRequest_DisplayName = CreateAppBlockBuilderRequest.AddMember("DisplayName", _DisplayName)
-
-	CreateAppBlockBuilderRequest_Tags = CreateAppBlockBuilderRequest.AddMember("Tags", _Tags)
-
-	CreateAppBlockBuilderRequest_Platform = CreateAppBlockBuilderRequest.AddMember("Platform", AppBlockBuilderPlatformType)
-
-	CreateAppBlockBuilderRequest_InstanceType = CreateAppBlockBuilderRequest.AddMember("InstanceType", _String)
-
-	CreateAppBlockBuilderRequest_VpcConfig = CreateAppBlockBuilderRequest.AddMember("VpcConfig", VpcConfig)
-
-	CreateAppBlockBuilderRequest_EnableDefaultInternetAccess = CreateAppBlockBuilderRequest.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	CreateAppBlockBuilderRequest_IamRoleArn = CreateAppBlockBuilderRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateAppBlockBuilderRequest_AccessEndpoints = CreateAppBlockBuilderRequest.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	CreateAppBlockBuilderRequest_DisableIMDSV1 = CreateAppBlockBuilderRequest.AddMember("DisableIMDSV1", _BooleanObject)
-
-	CreateAppBlockBuilderResult_AppBlockBuilder = CreateAppBlockBuilderResult.AddMember("AppBlockBuilder", AppBlockBuilder)
-
-	CreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName = CreateAppBlockBuilderStreamingURLRequest.AddMember("AppBlockBuilderName", _Name)
-
-	CreateAppBlockBuilderStreamingURLRequest_Validity = CreateAppBlockBuilderStreamingURLRequest.AddMember("Validity", _Long)
-
-	CreateAppBlockBuilderStreamingURLResult_StreamingURL = CreateAppBlockBuilderStreamingURLResult.AddMember("StreamingURL", _String)
-
-	CreateAppBlockBuilderStreamingURLResult_Expires = CreateAppBlockBuilderStreamingURLResult.AddMember("Expires", _Timestamp)
-
-	CreateAppBlockRequest_Name = CreateAppBlockRequest.AddMember("Name", _Name)
-
-	CreateAppBlockRequest_Description = CreateAppBlockRequest.AddMember("Description", _Description)
-
-	CreateAppBlockRequest_DisplayName = CreateAppBlockRequest.AddMember("DisplayName", _DisplayName)
-
-	CreateAppBlockRequest_SourceS3Location = CreateAppBlockRequest.AddMember("SourceS3Location", S3Location)
-
-	CreateAppBlockRequest_SetupScriptDetails = CreateAppBlockRequest.AddMember("SetupScriptDetails", ScriptDetails)
-
-	CreateAppBlockRequest_Tags = CreateAppBlockRequest.AddMember("Tags", _Tags)
-
-	CreateAppBlockRequest_PostSetupScriptDetails = CreateAppBlockRequest.AddMember("PostSetupScriptDetails", ScriptDetails)
-
-	CreateAppBlockRequest_PackagingType = CreateAppBlockRequest.AddMember("PackagingType", PackagingType)
-
-	CreateAppBlockResult_AppBlock = CreateAppBlockResult.AddMember("AppBlock", AppBlock)
-
-	CreateApplicationRequest_Name = CreateApplicationRequest.AddMember("Name", _Name)
-
-	CreateApplicationRequest_DisplayName = CreateApplicationRequest.AddMember("DisplayName", _DisplayName)
-
-	CreateApplicationRequest_Description = CreateApplicationRequest.AddMember("Description", _Description)
-
-	CreateApplicationRequest_IconS3Location = CreateApplicationRequest.AddMember("IconS3Location", S3Location)
-
-	CreateApplicationRequest_LaunchPath = CreateApplicationRequest.AddMember("LaunchPath", _String)
-
-	CreateApplicationRequest_WorkingDirectory = CreateApplicationRequest.AddMember("WorkingDirectory", _String)
-
-	CreateApplicationRequest_LaunchParameters = CreateApplicationRequest.AddMember("LaunchParameters", _String)
-
-	CreateApplicationRequest_Platforms = CreateApplicationRequest.AddMember("Platforms", _Platforms)
-
-	CreateApplicationRequest_InstanceFamilies = CreateApplicationRequest.AddMember("InstanceFamilies", _StringList)
-
-	CreateApplicationRequest_AppBlockArn = CreateApplicationRequest.AddMember("AppBlockArn", _Arn)
-
-	CreateApplicationRequest_Tags = CreateApplicationRequest.AddMember("Tags", _Tags)
-
-	CreateApplicationResult_Application = CreateApplicationResult.AddMember("Application", Application)
-
-	CreateDirectoryConfigRequest_DirectoryName = CreateDirectoryConfigRequest.AddMember("DirectoryName", _DirectoryName)
-
-	CreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames = CreateDirectoryConfigRequest.AddMember("OrganizationalUnitDistinguishedNames", _OrganizationalUnitDistinguishedNamesList)
-
-	CreateDirectoryConfigRequest_ServiceAccountCredentials = CreateDirectoryConfigRequest.AddMember("ServiceAccountCredentials", ServiceAccountCredentials)
-
-	CreateDirectoryConfigRequest_CertificateBasedAuthProperties = CreateDirectoryConfigRequest.AddMember("CertificateBasedAuthProperties", CertificateBasedAuthProperties)
-
-	CreateDirectoryConfigResult_DirectoryConfig = CreateDirectoryConfigResult.AddMember("DirectoryConfig", DirectoryConfig)
-
-	CreateEntitlementRequest_Name = CreateEntitlementRequest.AddMember("Name", _Name)
-
-	CreateEntitlementRequest_StackName = CreateEntitlementRequest.AddMember("StackName", _Name)
-
-	CreateEntitlementRequest_Description = CreateEntitlementRequest.AddMember("Description", _Description)
-
-	CreateEntitlementRequest_AppVisibility = CreateEntitlementRequest.AddMember("AppVisibility", AppVisibility)
-
-	CreateEntitlementRequest_Attributes = CreateEntitlementRequest.AddMember("Attributes", _EntitlementAttributeList)
-
-	CreateEntitlementResult_Entitlement = CreateEntitlementResult.AddMember("Entitlement", Entitlement)
-
-	CreateExportImageTaskRequest_ImageName = CreateExportImageTaskRequest.AddMember("ImageName", _Name)
-
-	CreateExportImageTaskRequest_AmiName = CreateExportImageTaskRequest.AddMember("AmiName", _AmiName)
-
-	CreateExportImageTaskRequest_IamRoleArn = CreateExportImageTaskRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateExportImageTaskRequest_TagSpecifications = CreateExportImageTaskRequest.AddMember("TagSpecifications", _Tags)
-
-	CreateExportImageTaskRequest_AmiDescription = CreateExportImageTaskRequest.AddMember("AmiDescription", _Description)
-
-	CreateExportImageTaskResult_ExportImageTask = CreateExportImageTaskResult.AddMember("ExportImageTask", ExportImageTask)
-
-	CreateFleetRequest_Name = CreateFleetRequest.AddMember("Name", _Name)
-
-	CreateFleetRequest_ImageName = CreateFleetRequest.AddMember("ImageName", _Name)
-
-	CreateFleetRequest_ImageArn = CreateFleetRequest.AddMember("ImageArn", _Arn)
-
-	CreateFleetRequest_InstanceType = CreateFleetRequest.AddMember("InstanceType", _String)
-
-	CreateFleetRequest_FleetType = CreateFleetRequest.AddMember("FleetType", FleetType)
-
-	CreateFleetRequest_ComputeCapacity = CreateFleetRequest.AddMember("ComputeCapacity", ComputeCapacity)
-
-	CreateFleetRequest_VpcConfig = CreateFleetRequest.AddMember("VpcConfig", VpcConfig)
-
-	CreateFleetRequest_MaxUserDurationInSeconds = CreateFleetRequest.AddMember("MaxUserDurationInSeconds", _Integer)
-
-	CreateFleetRequest_DisconnectTimeoutInSeconds = CreateFleetRequest.AddMember("DisconnectTimeoutInSeconds", _Integer)
-
-	CreateFleetRequest_Description = CreateFleetRequest.AddMember("Description", _Description)
-
-	CreateFleetRequest_DisplayName = CreateFleetRequest.AddMember("DisplayName", _DisplayName)
-
-	CreateFleetRequest_EnableDefaultInternetAccess = CreateFleetRequest.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	CreateFleetRequest_DomainJoinInfo = CreateFleetRequest.AddMember("DomainJoinInfo", DomainJoinInfo)
-
-	CreateFleetRequest_Tags = CreateFleetRequest.AddMember("Tags", _Tags)
-
-	CreateFleetRequest_IdleDisconnectTimeoutInSeconds = CreateFleetRequest.AddMember("IdleDisconnectTimeoutInSeconds", _Integer)
-
-	CreateFleetRequest_IamRoleArn = CreateFleetRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateFleetRequest_StreamView = CreateFleetRequest.AddMember("StreamView", StreamView)
-
-	CreateFleetRequest_Platform = CreateFleetRequest.AddMember("Platform", PlatformType)
-
-	CreateFleetRequest_MaxConcurrentSessions = CreateFleetRequest.AddMember("MaxConcurrentSessions", _Integer)
-
-	CreateFleetRequest_UsbDeviceFilterStrings = CreateFleetRequest.AddMember("UsbDeviceFilterStrings", _UsbDeviceFilterStrings)
-
-	CreateFleetRequest_SessionScriptS3Location = CreateFleetRequest.AddMember("SessionScriptS3Location", S3Location)
-
-	CreateFleetRequest_MaxSessionsPerInstance = CreateFleetRequest.AddMember("MaxSessionsPerInstance", _Integer)
-
-	CreateFleetRequest_RootVolumeConfig = CreateFleetRequest.AddMember("RootVolumeConfig", VolumeConfig)
-
-	CreateFleetRequest_DisableIMDSV1 = CreateFleetRequest.AddMember("DisableIMDSV1", _BooleanObject)
-
-	CreateFleetResult_Fleet = CreateFleetResult.AddMember("Fleet", Fleet)
-
-	CreateImageBuilderRequest_Name = CreateImageBuilderRequest.AddMember("Name", _Name)
-
-	CreateImageBuilderRequest_ImageName = CreateImageBuilderRequest.AddMember("ImageName", _String)
-
-	CreateImageBuilderRequest_ImageArn = CreateImageBuilderRequest.AddMember("ImageArn", _Arn)
-
-	CreateImageBuilderRequest_InstanceType = CreateImageBuilderRequest.AddMember("InstanceType", _String)
-
-	CreateImageBuilderRequest_Description = CreateImageBuilderRequest.AddMember("Description", _Description)
-
-	CreateImageBuilderRequest_DisplayName = CreateImageBuilderRequest.AddMember("DisplayName", _DisplayName)
-
-	CreateImageBuilderRequest_VpcConfig = CreateImageBuilderRequest.AddMember("VpcConfig", VpcConfig)
-
-	CreateImageBuilderRequest_IamRoleArn = CreateImageBuilderRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateImageBuilderRequest_EnableDefaultInternetAccess = CreateImageBuilderRequest.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	CreateImageBuilderRequest_DomainJoinInfo = CreateImageBuilderRequest.AddMember("DomainJoinInfo", DomainJoinInfo)
-
-	CreateImageBuilderRequest_AppstreamAgentVersion = CreateImageBuilderRequest.AddMember("AppstreamAgentVersion", _AppstreamAgentVersion)
-
-	CreateImageBuilderRequest_Tags = CreateImageBuilderRequest.AddMember("Tags", _Tags)
-
-	CreateImageBuilderRequest_AccessEndpoints = CreateImageBuilderRequest.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	CreateImageBuilderRequest_RootVolumeConfig = CreateImageBuilderRequest.AddMember("RootVolumeConfig", VolumeConfig)
-
-	CreateImageBuilderRequest_SoftwaresToInstall = CreateImageBuilderRequest.AddMember("SoftwaresToInstall", _StringList)
-
-	CreateImageBuilderRequest_SoftwaresToUninstall = CreateImageBuilderRequest.AddMember("SoftwaresToUninstall", _StringList)
-
-	CreateImageBuilderRequest_DisableIMDSV1 = CreateImageBuilderRequest.AddMember("DisableIMDSV1", _BooleanObject)
-
-	CreateImageBuilderResult_ImageBuilder = CreateImageBuilderResult.AddMember("ImageBuilder", ImageBuilder)
-
-	CreateImageBuilderStreamingURLRequest_Name = CreateImageBuilderStreamingURLRequest.AddMember("Name", _String)
-
-	CreateImageBuilderStreamingURLRequest_Validity = CreateImageBuilderStreamingURLRequest.AddMember("Validity", _Long)
-
-	CreateImageBuilderStreamingURLResult_StreamingURL = CreateImageBuilderStreamingURLResult.AddMember("StreamingURL", _String)
-
-	CreateImageBuilderStreamingURLResult_Expires = CreateImageBuilderStreamingURLResult.AddMember("Expires", _Timestamp)
-
-	CreateImportedImageRequest_Name = CreateImportedImageRequest.AddMember("Name", _Name)
-
-	CreateImportedImageRequest_SourceAmiId = CreateImportedImageRequest.AddMember("SourceAmiId", _PhotonAmiId)
-
-	CreateImportedImageRequest_WorkspaceImageId = CreateImportedImageRequest.AddMember("WorkspaceImageId", _WorkspaceImageId)
-
-	CreateImportedImageRequest_IamRoleArn = CreateImportedImageRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateImportedImageRequest_Description = CreateImportedImageRequest.AddMember("Description", _ImageImportDescription)
-
-	CreateImportedImageRequest_DisplayName = CreateImportedImageRequest.AddMember("DisplayName", _ImageImportDisplayName)
-
-	CreateImportedImageRequest_Tags = CreateImportedImageRequest.AddMember("Tags", _Tags)
-
-	CreateImportedImageRequest_RuntimeValidationConfig = CreateImportedImageRequest.AddMember("RuntimeValidationConfig", RuntimeValidationConfig)
-
-	CreateImportedImageRequest_AgentSoftwareVersion = CreateImportedImageRequest.AddMember("AgentSoftwareVersion", AgentSoftwareVersion)
-
-	CreateImportedImageRequest_AppCatalogConfig = CreateImportedImageRequest.AddMember("AppCatalogConfig", _AppCatalogConfig)
-
-	CreateImportedImageRequest_DryRun = CreateImportedImageRequest.AddMember("DryRun", _Boolean)
-
-	CreateImportedImageResult_Image = CreateImportedImageResult.AddMember("Image", Image)
-
-	CreateStackRequest_Name = CreateStackRequest.AddMember("Name", _Name)
-
-	CreateStackRequest_Description = CreateStackRequest.AddMember("Description", _Description)
-
-	CreateStackRequest_DisplayName = CreateStackRequest.AddMember("DisplayName", _DisplayName)
-
-	CreateStackRequest_StorageConnectors = CreateStackRequest.AddMember("StorageConnectors", _StorageConnectorList)
-
-	CreateStackRequest_RedirectURL = CreateStackRequest.AddMember("RedirectURL", _RedirectURL)
-
-	CreateStackRequest_FeedbackURL = CreateStackRequest.AddMember("FeedbackURL", _FeedbackURL)
-
-	CreateStackRequest_UserSettings = CreateStackRequest.AddMember("UserSettings", _UserSettingList)
-
-	CreateStackRequest_ApplicationSettings = CreateStackRequest.AddMember("ApplicationSettings", ApplicationSettings)
-
-	CreateStackRequest_Tags = CreateStackRequest.AddMember("Tags", _Tags)
-
-	CreateStackRequest_AccessEndpoints = CreateStackRequest.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	CreateStackRequest_EmbedHostDomains = CreateStackRequest.AddMember("EmbedHostDomains", _EmbedHostDomains)
-
-	CreateStackRequest_StreamingExperienceSettings = CreateStackRequest.AddMember("StreamingExperienceSettings", StreamingExperienceSettings)
-
-	CreateStackRequest_ContentRedirection = CreateStackRequest.AddMember("ContentRedirection", ContentRedirection)
-
-	CreateStackRequest_AgentAccessConfig = CreateStackRequest.AddMember("AgentAccessConfig", AgentAccessConfig)
-
-	CreateStackRequest_StorageConnectorAuthentication = CreateStackRequest.AddMember("StorageConnectorAuthentication", StorageConnectorAuthentication)
-
-	CreateStackResult_Stack = CreateStackResult.AddMember("Stack", Stack)
-
-	CreateStreamingURLRequest_StackName = CreateStreamingURLRequest.AddMember("StackName", _String)
-
-	CreateStreamingURLRequest_FleetName = CreateStreamingURLRequest.AddMember("FleetName", _String)
-
-	CreateStreamingURLRequest_UserId = CreateStreamingURLRequest.AddMember("UserId", _StreamingUrlUserId)
-
-	CreateStreamingURLRequest_ApplicationId = CreateStreamingURLRequest.AddMember("ApplicationId", _String)
-
-	CreateStreamingURLRequest_Validity = CreateStreamingURLRequest.AddMember("Validity", _Long)
-
-	CreateStreamingURLRequest_SessionContext = CreateStreamingURLRequest.AddMember("SessionContext", _String)
-
-	CreateStreamingURLResult_StreamingURL = CreateStreamingURLResult.AddMember("StreamingURL", _String)
-
-	CreateStreamingURLResult_Expires = CreateStreamingURLResult.AddMember("Expires", _Timestamp)
-
-	CreateThemeForStackRequest_StackName = CreateThemeForStackRequest.AddMember("StackName", _Name)
-
-	CreateThemeForStackRequest_FooterLinks = CreateThemeForStackRequest.AddMember("FooterLinks", _ThemeFooterLinks)
-
-	CreateThemeForStackRequest_TitleText = CreateThemeForStackRequest.AddMember("TitleText", _ThemeTitleText)
-
-	CreateThemeForStackRequest_ThemeStyling = CreateThemeForStackRequest.AddMember("ThemeStyling", ThemeStyling)
-
-	CreateThemeForStackRequest_OrganizationLogoS3Location = CreateThemeForStackRequest.AddMember("OrganizationLogoS3Location", S3Location)
-
-	CreateThemeForStackRequest_FaviconS3Location = CreateThemeForStackRequest.AddMember("FaviconS3Location", S3Location)
-
-	CreateThemeForStackResult_Theme = CreateThemeForStackResult.AddMember("Theme", Theme)
-
-	CreateUpdatedImageRequest_existingImageName = CreateUpdatedImageRequest.AddMember("existingImageName", _Name)
-
-	CreateUpdatedImageRequest_newImageName = CreateUpdatedImageRequest.AddMember("newImageName", _Name)
-
-	CreateUpdatedImageRequest_newImageDescription = CreateUpdatedImageRequest.AddMember("newImageDescription", _Description)
-
-	CreateUpdatedImageRequest_newImageDisplayName = CreateUpdatedImageRequest.AddMember("newImageDisplayName", _DisplayName)
-
-	CreateUpdatedImageRequest_newImageTags = CreateUpdatedImageRequest.AddMember("newImageTags", _Tags)
-
-	CreateUpdatedImageRequest_dryRun = CreateUpdatedImageRequest.AddMember("dryRun", _Boolean)
-
-	CreateUpdatedImageResult_image = CreateUpdatedImageResult.AddMember("image", Image)
-
-	CreateUpdatedImageResult_canUpdateImage = CreateUpdatedImageResult.AddMember("canUpdateImage", _Boolean)
-
-	CreateUsageReportSubscriptionResult_S3BucketName = CreateUsageReportSubscriptionResult.AddMember("S3BucketName", _String)
-
-	CreateUsageReportSubscriptionResult_Schedule = CreateUsageReportSubscriptionResult.AddMember("Schedule", UsageReportSchedule)
-
-	CreateUserRequest_UserName = CreateUserRequest.AddMember("UserName", _Username)
-
-	CreateUserRequest_MessageAction = CreateUserRequest.AddMember("MessageAction", MessageAction)
-
-	CreateUserRequest_FirstName = CreateUserRequest.AddMember("FirstName", _UserAttributeValue)
-
-	CreateUserRequest_LastName = CreateUserRequest.AddMember("LastName", _UserAttributeValue)
-
-	CreateUserRequest_AuthenticationType = CreateUserRequest.AddMember("AuthenticationType", AuthenticationType)
-
-	DeleteAppBlockBuilderRequest_Name = DeleteAppBlockBuilderRequest.AddMember("Name", _Name)
-
-	DeleteAppBlockRequest_Name = DeleteAppBlockRequest.AddMember("Name", _Name)
-
-	DeleteApplicationRequest_Name = DeleteApplicationRequest.AddMember("Name", _Name)
-
-	DeleteDirectoryConfigRequest_DirectoryName = DeleteDirectoryConfigRequest.AddMember("DirectoryName", _DirectoryName)
-
-	DeleteEntitlementRequest_Name = DeleteEntitlementRequest.AddMember("Name", _Name)
-
-	DeleteEntitlementRequest_StackName = DeleteEntitlementRequest.AddMember("StackName", _Name)
-
-	DeleteFleetRequest_Name = DeleteFleetRequest.AddMember("Name", _String)
-
-	DeleteImageBuilderRequest_Name = DeleteImageBuilderRequest.AddMember("Name", _Name)
-
-	DeleteImageBuilderResult_ImageBuilder = DeleteImageBuilderResult.AddMember("ImageBuilder", ImageBuilder)
-
-	DeleteImageRequest_Name = DeleteImageRequest.AddMember("Name", _Name)
-
-	DeleteImageResult_Image = DeleteImageResult.AddMember("Image", Image)
-
-	DeleteImagePermissionsRequest_Name = DeleteImagePermissionsRequest.AddMember("Name", _Name)
-
-	DeleteImagePermissionsRequest_SharedAccountId = DeleteImagePermissionsRequest.AddMember("SharedAccountId", _AwsAccountId)
-
-	DeleteStackRequest_Name = DeleteStackRequest.AddMember("Name", _String)
-
-	DeleteThemeForStackRequest_StackName = DeleteThemeForStackRequest.AddMember("StackName", _Name)
-
-	DeleteUserRequest_UserName = DeleteUserRequest.AddMember("UserName", _Username)
-
-	DeleteUserRequest_AuthenticationType = DeleteUserRequest.AddMember("AuthenticationType", AuthenticationType)
-
-	DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn = DescribeAppBlockBuilderAppBlockAssociationsRequest.AddMember("AppBlockArn", _Arn)
-
-	DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName = DescribeAppBlockBuilderAppBlockAssociationsRequest.AddMember("AppBlockBuilderName", _Name)
-
-	DescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults = DescribeAppBlockBuilderAppBlockAssociationsRequest.AddMember("MaxResults", _Integer)
-
-	DescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken = DescribeAppBlockBuilderAppBlockAssociationsRequest.AddMember("NextToken", _String)
-
-	DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations = DescribeAppBlockBuilderAppBlockAssociationsResult.AddMember("AppBlockBuilderAppBlockAssociations", _AppBlockBuilderAppBlockAssociationsList)
-
-	DescribeAppBlockBuilderAppBlockAssociationsResult_NextToken = DescribeAppBlockBuilderAppBlockAssociationsResult.AddMember("NextToken", _String)
-
-	DescribeAppBlockBuildersRequest_Names = DescribeAppBlockBuildersRequest.AddMember("Names", _StringList)
-
-	DescribeAppBlockBuildersRequest_NextToken = DescribeAppBlockBuildersRequest.AddMember("NextToken", _String)
-
-	DescribeAppBlockBuildersRequest_MaxResults = DescribeAppBlockBuildersRequest.AddMember("MaxResults", _Integer)
-
-	DescribeAppBlockBuildersResult_AppBlockBuilders = DescribeAppBlockBuildersResult.AddMember("AppBlockBuilders", _AppBlockBuilderList)
-
-	DescribeAppBlockBuildersResult_NextToken = DescribeAppBlockBuildersResult.AddMember("NextToken", _String)
-
-	DescribeAppBlocksRequest_Arns = DescribeAppBlocksRequest.AddMember("Arns", _ArnList)
-
-	DescribeAppBlocksRequest_NextToken = DescribeAppBlocksRequest.AddMember("NextToken", _String)
-
-	DescribeAppBlocksRequest_MaxResults = DescribeAppBlocksRequest.AddMember("MaxResults", _Integer)
-
-	DescribeAppBlocksResult_AppBlocks = DescribeAppBlocksResult.AddMember("AppBlocks", _AppBlocks)
-
-	DescribeAppBlocksResult_NextToken = DescribeAppBlocksResult.AddMember("NextToken", _String)
-
-	DescribeApplicationFleetAssociationsRequest_FleetName = DescribeApplicationFleetAssociationsRequest.AddMember("FleetName", _Name)
-
-	DescribeApplicationFleetAssociationsRequest_ApplicationArn = DescribeApplicationFleetAssociationsRequest.AddMember("ApplicationArn", _Arn)
-
-	DescribeApplicationFleetAssociationsRequest_MaxResults = DescribeApplicationFleetAssociationsRequest.AddMember("MaxResults", _Integer)
-
-	DescribeApplicationFleetAssociationsRequest_NextToken = DescribeApplicationFleetAssociationsRequest.AddMember("NextToken", _String)
-
-	DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations = DescribeApplicationFleetAssociationsResult.AddMember("ApplicationFleetAssociations", _ApplicationFleetAssociationList)
-
-	DescribeApplicationFleetAssociationsResult_NextToken = DescribeApplicationFleetAssociationsResult.AddMember("NextToken", _String)
-
-	DescribeApplicationsRequest_Arns = DescribeApplicationsRequest.AddMember("Arns", _ArnList)
-
-	DescribeApplicationsRequest_NextToken = DescribeApplicationsRequest.AddMember("NextToken", _String)
-
-	DescribeApplicationsRequest_MaxResults = DescribeApplicationsRequest.AddMember("MaxResults", _Integer)
-
-	DescribeApplicationsResult_Applications = DescribeApplicationsResult.AddMember("Applications", _Applications)
-
-	DescribeApplicationsResult_NextToken = DescribeApplicationsResult.AddMember("NextToken", _String)
-
-	DescribeAppLicenseUsageRequest_BillingPeriod = DescribeAppLicenseUsageRequest.AddMember("BillingPeriod", _String)
-
-	DescribeAppLicenseUsageRequest_MaxResults = DescribeAppLicenseUsageRequest.AddMember("MaxResults", _Integer)
-
-	DescribeAppLicenseUsageRequest_NextToken = DescribeAppLicenseUsageRequest.AddMember("NextToken", _String)
-
-	DescribeAppLicenseUsageResult_AppLicenseUsages = DescribeAppLicenseUsageResult.AddMember("AppLicenseUsages", _AdminAppLicenseUsageList)
-
-	DescribeAppLicenseUsageResult_NextToken = DescribeAppLicenseUsageResult.AddMember("NextToken", _String)
-
-	DescribeDirectoryConfigsRequest_DirectoryNames = DescribeDirectoryConfigsRequest.AddMember("DirectoryNames", _DirectoryNameList)
-
-	DescribeDirectoryConfigsRequest_MaxResults = DescribeDirectoryConfigsRequest.AddMember("MaxResults", _Integer)
-
-	DescribeDirectoryConfigsRequest_NextToken = DescribeDirectoryConfigsRequest.AddMember("NextToken", _String)
-
-	DescribeDirectoryConfigsResult_DirectoryConfigs = DescribeDirectoryConfigsResult.AddMember("DirectoryConfigs", _DirectoryConfigList)
-
-	DescribeDirectoryConfigsResult_NextToken = DescribeDirectoryConfigsResult.AddMember("NextToken", _String)
-
-	DescribeEntitlementsRequest_Name = DescribeEntitlementsRequest.AddMember("Name", _Name)
-
-	DescribeEntitlementsRequest_StackName = DescribeEntitlementsRequest.AddMember("StackName", _Name)
-
-	DescribeEntitlementsRequest_NextToken = DescribeEntitlementsRequest.AddMember("NextToken", _String)
-
-	DescribeEntitlementsRequest_MaxResults = DescribeEntitlementsRequest.AddMember("MaxResults", _Integer)
-
-	DescribeEntitlementsResult_Entitlements = DescribeEntitlementsResult.AddMember("Entitlements", _EntitlementList)
-
-	DescribeEntitlementsResult_NextToken = DescribeEntitlementsResult.AddMember("NextToken", _String)
-
-	DescribeFleetsRequest_Names = DescribeFleetsRequest.AddMember("Names", _StringList)
-
-	DescribeFleetsRequest_NextToken = DescribeFleetsRequest.AddMember("NextToken", _String)
-
-	DescribeFleetsResult_Fleets = DescribeFleetsResult.AddMember("Fleets", _FleetList)
-
-	DescribeFleetsResult_NextToken = DescribeFleetsResult.AddMember("NextToken", _String)
-
-	DescribeImageBuildersRequest_Names = DescribeImageBuildersRequest.AddMember("Names", _StringList)
-
-	DescribeImageBuildersRequest_MaxResults = DescribeImageBuildersRequest.AddMember("MaxResults", _Integer)
-
-	DescribeImageBuildersRequest_NextToken = DescribeImageBuildersRequest.AddMember("NextToken", _String)
-
-	DescribeImageBuildersResult_ImageBuilders = DescribeImageBuildersResult.AddMember("ImageBuilders", _ImageBuilderList)
-
-	DescribeImageBuildersResult_NextToken = DescribeImageBuildersResult.AddMember("NextToken", _String)
-
-	DescribeImagePermissionsRequest_Name = DescribeImagePermissionsRequest.AddMember("Name", _Name)
-
-	DescribeImagePermissionsRequest_MaxResults = DescribeImagePermissionsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeImagePermissionsRequest_SharedAwsAccountIds = DescribeImagePermissionsRequest.AddMember("SharedAwsAccountIds", _AwsAccountIdList)
-
-	DescribeImagePermissionsRequest_NextToken = DescribeImagePermissionsRequest.AddMember("NextToken", _String)
-
-	DescribeImagePermissionsResult_Name = DescribeImagePermissionsResult.AddMember("Name", _Name)
-
-	DescribeImagePermissionsResult_SharedImagePermissionsList = DescribeImagePermissionsResult.AddMember("SharedImagePermissionsList", _SharedImagePermissionsList)
-
-	DescribeImagePermissionsResult_NextToken = DescribeImagePermissionsResult.AddMember("NextToken", _String)
-
-	DescribeImagesRequest_Names = DescribeImagesRequest.AddMember("Names", _StringList)
-
-	DescribeImagesRequest_Arns = DescribeImagesRequest.AddMember("Arns", _ArnList)
-
-	DescribeImagesRequest_Type = DescribeImagesRequest.AddMember("Type", VisibilityType)
-
-	DescribeImagesRequest_NextToken = DescribeImagesRequest.AddMember("NextToken", _String)
-
-	DescribeImagesRequest_MaxResults = DescribeImagesRequest.AddMember("MaxResults", _DescribeImagesMaxResults)
-
-	DescribeImagesResult_Images = DescribeImagesResult.AddMember("Images", _ImageList)
-
-	DescribeImagesResult_NextToken = DescribeImagesResult.AddMember("NextToken", _String)
-
-	DescribeSessionsRequest_StackName = DescribeSessionsRequest.AddMember("StackName", _Name)
-
-	DescribeSessionsRequest_FleetName = DescribeSessionsRequest.AddMember("FleetName", _Name)
-
-	DescribeSessionsRequest_UserId = DescribeSessionsRequest.AddMember("UserId", _UserId)
-
-	DescribeSessionsRequest_NextToken = DescribeSessionsRequest.AddMember("NextToken", _String)
-
-	DescribeSessionsRequest_Limit = DescribeSessionsRequest.AddMember("Limit", _Integer)
-
-	DescribeSessionsRequest_AuthenticationType = DescribeSessionsRequest.AddMember("AuthenticationType", AuthenticationType)
-
-	DescribeSessionsRequest_InstanceId = DescribeSessionsRequest.AddMember("InstanceId", _String)
-
-	DescribeSessionsResult_Sessions = DescribeSessionsResult.AddMember("Sessions", _SessionList)
-
-	DescribeSessionsResult_NextToken = DescribeSessionsResult.AddMember("NextToken", _String)
-
-	DescribeSoftwareAssociationsRequest_AssociatedResource = DescribeSoftwareAssociationsRequest.AddMember("AssociatedResource", _Arn)
-
-	DescribeSoftwareAssociationsRequest_MaxResults = DescribeSoftwareAssociationsRequest.AddMember("MaxResults", _Integer)
-
-	DescribeSoftwareAssociationsRequest_NextToken = DescribeSoftwareAssociationsRequest.AddMember("NextToken", _String)
-
-	DescribeSoftwareAssociationsResult_AssociatedResource = DescribeSoftwareAssociationsResult.AddMember("AssociatedResource", _Arn)
-
-	DescribeSoftwareAssociationsResult_SoftwareAssociations = DescribeSoftwareAssociationsResult.AddMember("SoftwareAssociations", _SoftwareAssociationsList)
-
-	DescribeSoftwareAssociationsResult_NextToken = DescribeSoftwareAssociationsResult.AddMember("NextToken", _String)
-
-	DescribeStacksRequest_Names = DescribeStacksRequest.AddMember("Names", _StringList)
-
-	DescribeStacksRequest_NextToken = DescribeStacksRequest.AddMember("NextToken", _String)
-
-	DescribeStacksResult_Stacks = DescribeStacksResult.AddMember("Stacks", _StackList)
-
-	DescribeStacksResult_NextToken = DescribeStacksResult.AddMember("NextToken", _String)
-
-	DescribeThemeForStackRequest_StackName = DescribeThemeForStackRequest.AddMember("StackName", _Name)
-
-	DescribeThemeForStackResult_Theme = DescribeThemeForStackResult.AddMember("Theme", Theme)
-
-	DescribeUsageReportSubscriptionsRequest_MaxResults = DescribeUsageReportSubscriptionsRequest.AddMember("MaxResults", _Integer)
-
-	DescribeUsageReportSubscriptionsRequest_NextToken = DescribeUsageReportSubscriptionsRequest.AddMember("NextToken", _String)
-
-	DescribeUsageReportSubscriptionsResult_UsageReportSubscriptions = DescribeUsageReportSubscriptionsResult.AddMember("UsageReportSubscriptions", _UsageReportSubscriptionList)
-
-	DescribeUsageReportSubscriptionsResult_NextToken = DescribeUsageReportSubscriptionsResult.AddMember("NextToken", _String)
-
-	DescribeUsersRequest_AuthenticationType = DescribeUsersRequest.AddMember("AuthenticationType", AuthenticationType)
-
-	DescribeUsersRequest_MaxResults = DescribeUsersRequest.AddMember("MaxResults", _Integer)
-
-	DescribeUsersRequest_NextToken = DescribeUsersRequest.AddMember("NextToken", _String)
-
-	DescribeUsersResult_Users = DescribeUsersResult.AddMember("Users", _UserList)
-
-	DescribeUsersResult_NextToken = DescribeUsersResult.AddMember("NextToken", _String)
-
-	DescribeUserStackAssociationsRequest_StackName = DescribeUserStackAssociationsRequest.AddMember("StackName", _String)
-
-	DescribeUserStackAssociationsRequest_UserName = DescribeUserStackAssociationsRequest.AddMember("UserName", _Username)
-
-	DescribeUserStackAssociationsRequest_AuthenticationType = DescribeUserStackAssociationsRequest.AddMember("AuthenticationType", AuthenticationType)
-
-	DescribeUserStackAssociationsRequest_MaxResults = DescribeUserStackAssociationsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeUserStackAssociationsRequest_NextToken = DescribeUserStackAssociationsRequest.AddMember("NextToken", _String)
-
-	DescribeUserStackAssociationsResult_UserStackAssociations = DescribeUserStackAssociationsResult.AddMember("UserStackAssociations", _UserStackAssociationList)
-
-	DescribeUserStackAssociationsResult_NextToken = DescribeUserStackAssociationsResult.AddMember("NextToken", _String)
-
-	DisableUserRequest_UserName = DisableUserRequest.AddMember("UserName", _Username)
-
-	DisableUserRequest_AuthenticationType = DisableUserRequest.AddMember("AuthenticationType", AuthenticationType)
-
-	DisassociateAppBlockBuilderAppBlockRequest_AppBlockArn = DisassociateAppBlockBuilderAppBlockRequest.AddMember("AppBlockArn", _Arn)
-
-	DisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName = DisassociateAppBlockBuilderAppBlockRequest.AddMember("AppBlockBuilderName", _Name)
-
-	DisassociateApplicationFleetRequest_FleetName = DisassociateApplicationFleetRequest.AddMember("FleetName", _Name)
-
-	DisassociateApplicationFleetRequest_ApplicationArn = DisassociateApplicationFleetRequest.AddMember("ApplicationArn", _Arn)
-
-	DisassociateApplicationFromEntitlementRequest_StackName = DisassociateApplicationFromEntitlementRequest.AddMember("StackName", _Name)
-
-	DisassociateApplicationFromEntitlementRequest_EntitlementName = DisassociateApplicationFromEntitlementRequest.AddMember("EntitlementName", _Name)
-
-	DisassociateApplicationFromEntitlementRequest_ApplicationIdentifier = DisassociateApplicationFromEntitlementRequest.AddMember("ApplicationIdentifier", _String)
-
-	DisassociateFleetRequest_FleetName = DisassociateFleetRequest.AddMember("FleetName", _String)
-
-	DisassociateFleetRequest_StackName = DisassociateFleetRequest.AddMember("StackName", _String)
-
-	DisassociateSoftwareFromImageBuilderRequest_ImageBuilderName = DisassociateSoftwareFromImageBuilderRequest.AddMember("ImageBuilderName", _Name)
-
-	DisassociateSoftwareFromImageBuilderRequest_SoftwareNames = DisassociateSoftwareFromImageBuilderRequest.AddMember("SoftwareNames", _StringList)
-
-	DrainSessionInstanceRequest_SessionId = DrainSessionInstanceRequest.AddMember("SessionId", _String)
-
-	EnableUserRequest_UserName = EnableUserRequest.AddMember("UserName", _Username)
-
-	EnableUserRequest_AuthenticationType = EnableUserRequest.AddMember("AuthenticationType", AuthenticationType)
-
-	ExpireSessionRequest_SessionId = ExpireSessionRequest.AddMember("SessionId", _String)
-
-	GetExportImageTaskRequest_TaskId = GetExportImageTaskRequest.AddMember("TaskId", _UUID)
-
-	GetExportImageTaskResult_ExportImageTask = GetExportImageTaskResult.AddMember("ExportImageTask", ExportImageTask)
-
-	ListAssociatedFleetsRequest_StackName = ListAssociatedFleetsRequest.AddMember("StackName", _String)
-
-	ListAssociatedFleetsRequest_NextToken = ListAssociatedFleetsRequest.AddMember("NextToken", _String)
-
-	ListAssociatedFleetsResult_Names = ListAssociatedFleetsResult.AddMember("Names", _StringList)
-
-	ListAssociatedFleetsResult_NextToken = ListAssociatedFleetsResult.AddMember("NextToken", _String)
-
-	ListAssociatedStacksRequest_FleetName = ListAssociatedStacksRequest.AddMember("FleetName", _String)
-
-	ListAssociatedStacksRequest_NextToken = ListAssociatedStacksRequest.AddMember("NextToken", _String)
-
-	ListAssociatedStacksResult_Names = ListAssociatedStacksResult.AddMember("Names", _StringList)
-
-	ListAssociatedStacksResult_NextToken = ListAssociatedStacksResult.AddMember("NextToken", _String)
-
-	ListEntitledApplicationsRequest_StackName = ListEntitledApplicationsRequest.AddMember("StackName", _Name)
-
-	ListEntitledApplicationsRequest_EntitlementName = ListEntitledApplicationsRequest.AddMember("EntitlementName", _Name)
-
-	ListEntitledApplicationsRequest_NextToken = ListEntitledApplicationsRequest.AddMember("NextToken", _String)
-
-	ListEntitledApplicationsRequest_MaxResults = ListEntitledApplicationsRequest.AddMember("MaxResults", _Integer)
-
-	ListEntitledApplicationsResult_EntitledApplications = ListEntitledApplicationsResult.AddMember("EntitledApplications", _EntitledApplicationList)
-
-	ListEntitledApplicationsResult_NextToken = ListEntitledApplicationsResult.AddMember("NextToken", _String)
-
-	ListExportImageTasksRequest_Filters = ListExportImageTasksRequest.AddMember("Filters", _Filters)
-
-	ListExportImageTasksRequest_MaxResults = ListExportImageTasksRequest.AddMember("MaxResults", _MaxResults)
-
-	ListExportImageTasksRequest_NextToken = ListExportImageTasksRequest.AddMember("NextToken", _String)
-
-	ListExportImageTasksResult_ExportImageTasks = ListExportImageTasksResult.AddMember("ExportImageTasks", _ExportImageTasks)
-
-	ListExportImageTasksResult_NextToken = ListExportImageTasksResult.AddMember("NextToken", _String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	StartAppBlockBuilderRequest_Name = StartAppBlockBuilderRequest.AddMember("Name", _Name)
-
-	StartAppBlockBuilderResult_AppBlockBuilder = StartAppBlockBuilderResult.AddMember("AppBlockBuilder", AppBlockBuilder)
-
-	StartFleetRequest_Name = StartFleetRequest.AddMember("Name", _String)
-
-	StartImageBuilderRequest_Name = StartImageBuilderRequest.AddMember("Name", _String)
-
-	StartImageBuilderRequest_AppstreamAgentVersion = StartImageBuilderRequest.AddMember("AppstreamAgentVersion", _AppstreamAgentVersion)
-
-	StartImageBuilderResult_ImageBuilder = StartImageBuilderResult.AddMember("ImageBuilder", ImageBuilder)
-
-	StartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName = StartSoftwareDeploymentToImageBuilderRequest.AddMember("ImageBuilderName", _Name)
-
-	StartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments = StartSoftwareDeploymentToImageBuilderRequest.AddMember("RetryFailedDeployments", _Boolean)
-
-	StopAppBlockBuilderRequest_Name = StopAppBlockBuilderRequest.AddMember("Name", _Name)
-
-	StopAppBlockBuilderResult_AppBlockBuilder = StopAppBlockBuilderResult.AddMember("AppBlockBuilder", AppBlockBuilder)
-
-	StopFleetRequest_Name = StopFleetRequest.AddMember("Name", _String)
-
-	StopImageBuilderRequest_Name = StopImageBuilderRequest.AddMember("Name", _String)
-
-	StopImageBuilderResult_ImageBuilder = StopImageBuilderResult.AddMember("ImageBuilder", ImageBuilder)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateAppBlockBuilderRequest_Name = UpdateAppBlockBuilderRequest.AddMember("Name", _Name)
-
-	UpdateAppBlockBuilderRequest_Description = UpdateAppBlockBuilderRequest.AddMember("Description", _Description)
-
-	UpdateAppBlockBuilderRequest_DisplayName = UpdateAppBlockBuilderRequest.AddMember("DisplayName", _DisplayName)
-
-	UpdateAppBlockBuilderRequest_Platform = UpdateAppBlockBuilderRequest.AddMember("Platform", PlatformType)
-
-	UpdateAppBlockBuilderRequest_InstanceType = UpdateAppBlockBuilderRequest.AddMember("InstanceType", _String)
-
-	UpdateAppBlockBuilderRequest_VpcConfig = UpdateAppBlockBuilderRequest.AddMember("VpcConfig", VpcConfig)
-
-	UpdateAppBlockBuilderRequest_EnableDefaultInternetAccess = UpdateAppBlockBuilderRequest.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	UpdateAppBlockBuilderRequest_IamRoleArn = UpdateAppBlockBuilderRequest.AddMember("IamRoleArn", _Arn)
-
-	UpdateAppBlockBuilderRequest_AccessEndpoints = UpdateAppBlockBuilderRequest.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	UpdateAppBlockBuilderRequest_AttributesToDelete = UpdateAppBlockBuilderRequest.AddMember("AttributesToDelete", _AppBlockBuilderAttributes)
-
-	UpdateAppBlockBuilderRequest_DisableIMDSV1 = UpdateAppBlockBuilderRequest.AddMember("DisableIMDSV1", _BooleanObject)
-
-	UpdateAppBlockBuilderResult_AppBlockBuilder = UpdateAppBlockBuilderResult.AddMember("AppBlockBuilder", AppBlockBuilder)
-
-	UpdateApplicationRequest_Name = UpdateApplicationRequest.AddMember("Name", _Name)
-
-	UpdateApplicationRequest_DisplayName = UpdateApplicationRequest.AddMember("DisplayName", _DisplayName)
-
-	UpdateApplicationRequest_Description = UpdateApplicationRequest.AddMember("Description", _Description)
-
-	UpdateApplicationRequest_IconS3Location = UpdateApplicationRequest.AddMember("IconS3Location", S3Location)
-
-	UpdateApplicationRequest_LaunchPath = UpdateApplicationRequest.AddMember("LaunchPath", _String)
-
-	UpdateApplicationRequest_WorkingDirectory = UpdateApplicationRequest.AddMember("WorkingDirectory", _String)
-
-	UpdateApplicationRequest_LaunchParameters = UpdateApplicationRequest.AddMember("LaunchParameters", _String)
-
-	UpdateApplicationRequest_AppBlockArn = UpdateApplicationRequest.AddMember("AppBlockArn", _Arn)
-
-	UpdateApplicationRequest_AttributesToDelete = UpdateApplicationRequest.AddMember("AttributesToDelete", _ApplicationAttributes)
-
-	UpdateApplicationResult_Application = UpdateApplicationResult.AddMember("Application", Application)
-
-	UpdateDirectoryConfigRequest_DirectoryName = UpdateDirectoryConfigRequest.AddMember("DirectoryName", _DirectoryName)
-
-	UpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames = UpdateDirectoryConfigRequest.AddMember("OrganizationalUnitDistinguishedNames", _OrganizationalUnitDistinguishedNamesList)
-
-	UpdateDirectoryConfigRequest_ServiceAccountCredentials = UpdateDirectoryConfigRequest.AddMember("ServiceAccountCredentials", ServiceAccountCredentials)
-
-	UpdateDirectoryConfigRequest_CertificateBasedAuthProperties = UpdateDirectoryConfigRequest.AddMember("CertificateBasedAuthProperties", CertificateBasedAuthProperties)
-
-	UpdateDirectoryConfigResult_DirectoryConfig = UpdateDirectoryConfigResult.AddMember("DirectoryConfig", DirectoryConfig)
-
-	UpdateEntitlementRequest_Name = UpdateEntitlementRequest.AddMember("Name", _Name)
-
-	UpdateEntitlementRequest_StackName = UpdateEntitlementRequest.AddMember("StackName", _Name)
-
-	UpdateEntitlementRequest_Description = UpdateEntitlementRequest.AddMember("Description", _Description)
-
-	UpdateEntitlementRequest_AppVisibility = UpdateEntitlementRequest.AddMember("AppVisibility", AppVisibility)
-
-	UpdateEntitlementRequest_Attributes = UpdateEntitlementRequest.AddMember("Attributes", _EntitlementAttributeList)
-
-	UpdateEntitlementResult_Entitlement = UpdateEntitlementResult.AddMember("Entitlement", Entitlement)
-
-	UpdateFleetRequest_ImageName = UpdateFleetRequest.AddMember("ImageName", _String)
-
-	UpdateFleetRequest_ImageArn = UpdateFleetRequest.AddMember("ImageArn", _Arn)
-
-	UpdateFleetRequest_Name = UpdateFleetRequest.AddMember("Name", _Name)
-
-	UpdateFleetRequest_InstanceType = UpdateFleetRequest.AddMember("InstanceType", _String)
-
-	UpdateFleetRequest_ComputeCapacity = UpdateFleetRequest.AddMember("ComputeCapacity", ComputeCapacity)
-
-	UpdateFleetRequest_VpcConfig = UpdateFleetRequest.AddMember("VpcConfig", VpcConfig)
-
-	UpdateFleetRequest_MaxUserDurationInSeconds = UpdateFleetRequest.AddMember("MaxUserDurationInSeconds", _Integer)
-
-	UpdateFleetRequest_DisconnectTimeoutInSeconds = UpdateFleetRequest.AddMember("DisconnectTimeoutInSeconds", _Integer)
-
-	UpdateFleetRequest_DeleteVpcConfig = UpdateFleetRequest.AddMember("DeleteVpcConfig", _Boolean)
-
-	UpdateFleetRequest_Description = UpdateFleetRequest.AddMember("Description", _Description)
-
-	UpdateFleetRequest_DisplayName = UpdateFleetRequest.AddMember("DisplayName", _DisplayName)
-
-	UpdateFleetRequest_EnableDefaultInternetAccess = UpdateFleetRequest.AddMember("EnableDefaultInternetAccess", _BooleanObject)
-
-	UpdateFleetRequest_DomainJoinInfo = UpdateFleetRequest.AddMember("DomainJoinInfo", DomainJoinInfo)
-
-	UpdateFleetRequest_IdleDisconnectTimeoutInSeconds = UpdateFleetRequest.AddMember("IdleDisconnectTimeoutInSeconds", _Integer)
-
-	UpdateFleetRequest_AttributesToDelete = UpdateFleetRequest.AddMember("AttributesToDelete", _FleetAttributes)
-
-	UpdateFleetRequest_IamRoleArn = UpdateFleetRequest.AddMember("IamRoleArn", _Arn)
-
-	UpdateFleetRequest_StreamView = UpdateFleetRequest.AddMember("StreamView", StreamView)
-
-	UpdateFleetRequest_Platform = UpdateFleetRequest.AddMember("Platform", PlatformType)
-
-	UpdateFleetRequest_MaxConcurrentSessions = UpdateFleetRequest.AddMember("MaxConcurrentSessions", _Integer)
-
-	UpdateFleetRequest_UsbDeviceFilterStrings = UpdateFleetRequest.AddMember("UsbDeviceFilterStrings", _UsbDeviceFilterStrings)
-
-	UpdateFleetRequest_SessionScriptS3Location = UpdateFleetRequest.AddMember("SessionScriptS3Location", S3Location)
-
-	UpdateFleetRequest_MaxSessionsPerInstance = UpdateFleetRequest.AddMember("MaxSessionsPerInstance", _Integer)
-
-	UpdateFleetRequest_RootVolumeConfig = UpdateFleetRequest.AddMember("RootVolumeConfig", VolumeConfig)
-
-	UpdateFleetRequest_DisableIMDSV1 = UpdateFleetRequest.AddMember("DisableIMDSV1", _BooleanObject)
-
-	UpdateFleetResult_Fleet = UpdateFleetResult.AddMember("Fleet", Fleet)
-
-	UpdateImagePermissionsRequest_Name = UpdateImagePermissionsRequest.AddMember("Name", _Name)
-
-	UpdateImagePermissionsRequest_SharedAccountId = UpdateImagePermissionsRequest.AddMember("SharedAccountId", _AwsAccountId)
-
-	UpdateImagePermissionsRequest_ImagePermissions = UpdateImagePermissionsRequest.AddMember("ImagePermissions", ImagePermissions)
-
-	UpdateStackRequest_DisplayName = UpdateStackRequest.AddMember("DisplayName", _DisplayName)
-
-	UpdateStackRequest_Description = UpdateStackRequest.AddMember("Description", _Description)
-
-	UpdateStackRequest_Name = UpdateStackRequest.AddMember("Name", _String)
-
-	UpdateStackRequest_StorageConnectors = UpdateStackRequest.AddMember("StorageConnectors", _StorageConnectorList)
-
-	UpdateStackRequest_DeleteStorageConnectors = UpdateStackRequest.AddMember("DeleteStorageConnectors", _Boolean)
-
-	UpdateStackRequest_RedirectURL = UpdateStackRequest.AddMember("RedirectURL", _RedirectURL)
-
-	UpdateStackRequest_FeedbackURL = UpdateStackRequest.AddMember("FeedbackURL", _FeedbackURL)
-
-	UpdateStackRequest_AttributesToDelete = UpdateStackRequest.AddMember("AttributesToDelete", _StackAttributes)
-
-	UpdateStackRequest_UserSettings = UpdateStackRequest.AddMember("UserSettings", _UserSettingList)
-
-	UpdateStackRequest_ApplicationSettings = UpdateStackRequest.AddMember("ApplicationSettings", ApplicationSettings)
-
-	UpdateStackRequest_AccessEndpoints = UpdateStackRequest.AddMember("AccessEndpoints", _AccessEndpointList)
-
-	UpdateStackRequest_EmbedHostDomains = UpdateStackRequest.AddMember("EmbedHostDomains", _EmbedHostDomains)
-
-	UpdateStackRequest_StreamingExperienceSettings = UpdateStackRequest.AddMember("StreamingExperienceSettings", StreamingExperienceSettings)
-
-	UpdateStackRequest_ContentRedirection = UpdateStackRequest.AddMember("ContentRedirection", ContentRedirection)
-
-	UpdateStackRequest_AgentAccessConfig = UpdateStackRequest.AddMember("AgentAccessConfig", AgentAccessConfigForUpdate)
-
-	UpdateStackRequest_StorageConnectorAuthentication = UpdateStackRequest.AddMember("StorageConnectorAuthentication", StorageConnectorAuthentication)
-
-	UpdateStackResult_Stack = UpdateStackResult.AddMember("Stack", Stack)
-
-	UpdateThemeForStackRequest_StackName = UpdateThemeForStackRequest.AddMember("StackName", _Name)
-
-	UpdateThemeForStackRequest_FooterLinks = UpdateThemeForStackRequest.AddMember("FooterLinks", _ThemeFooterLinks)
-
-	UpdateThemeForStackRequest_TitleText = UpdateThemeForStackRequest.AddMember("TitleText", _ThemeTitleText)
-
-	UpdateThemeForStackRequest_ThemeStyling = UpdateThemeForStackRequest.AddMember("ThemeStyling", ThemeStyling)
-
-	UpdateThemeForStackRequest_OrganizationLogoS3Location = UpdateThemeForStackRequest.AddMember("OrganizationLogoS3Location", S3Location)
-
-	UpdateThemeForStackRequest_FaviconS3Location = UpdateThemeForStackRequest.AddMember("FaviconS3Location", S3Location)
-
-	UpdateThemeForStackRequest_State = UpdateThemeForStackRequest.AddMember("State", ThemeState)
-
-	UpdateThemeForStackRequest_AttributesToDelete = UpdateThemeForStackRequest.AddMember("AttributesToDelete", _ThemeAttributes)
-
-	UpdateThemeForStackResult_Theme = UpdateThemeForStackResult.AddMember("Theme", Theme)
-
-}
+var (
+	eAssociateAppBlockBuilderAppBlock                                                      smithy.SchemaExtensions
+	eAssociateApplicationFleet                                                             smithy.SchemaExtensions
+	eAssociateApplicationToEntitlement                                                     smithy.SchemaExtensions
+	eAssociateFleet                                                                        smithy.SchemaExtensions
+	eAssociateSoftwareToImageBuilder                                                       smithy.SchemaExtensions
+	eBatchAssociateUserStack                                                               smithy.SchemaExtensions
+	eBatchDisassociateUserStack                                                            smithy.SchemaExtensions
+	eCopyImage                                                                             smithy.SchemaExtensions
+	eCreateAppBlock                                                                        smithy.SchemaExtensions
+	eCreateAppBlockBuilder                                                                 smithy.SchemaExtensions
+	eCreateAppBlockBuilderStreamingURL                                                     smithy.SchemaExtensions
+	eCreateApplication                                                                     smithy.SchemaExtensions
+	eCreateDirectoryConfig                                                                 smithy.SchemaExtensions
+	eCreateEntitlement                                                                     smithy.SchemaExtensions
+	eCreateExportImageTask                                                                 smithy.SchemaExtensions
+	eCreateFleet                                                                           smithy.SchemaExtensions
+	eCreateImageBuilder                                                                    smithy.SchemaExtensions
+	eCreateImageBuilderStreamingURL                                                        smithy.SchemaExtensions
+	eCreateImportedImage                                                                   smithy.SchemaExtensions
+	eCreateStack                                                                           smithy.SchemaExtensions
+	eCreateStreamingURL                                                                    smithy.SchemaExtensions
+	eCreateThemeForStack                                                                   smithy.SchemaExtensions
+	eCreateUpdatedImage                                                                    smithy.SchemaExtensions
+	eCreateUsageReportSubscription                                                         smithy.SchemaExtensions
+	eCreateUser                                                                            smithy.SchemaExtensions
+	eDeleteAppBlock                                                                        smithy.SchemaExtensions
+	eDeleteAppBlockBuilder                                                                 smithy.SchemaExtensions
+	eDeleteApplication                                                                     smithy.SchemaExtensions
+	eDeleteDirectoryConfig                                                                 smithy.SchemaExtensions
+	eDeleteEntitlement                                                                     smithy.SchemaExtensions
+	eDeleteFleet                                                                           smithy.SchemaExtensions
+	eDeleteImage                                                                           smithy.SchemaExtensions
+	eDeleteImageBuilder                                                                    smithy.SchemaExtensions
+	eDeleteImagePermissions                                                                smithy.SchemaExtensions
+	eDeleteStack                                                                           smithy.SchemaExtensions
+	eDeleteThemeForStack                                                                   smithy.SchemaExtensions
+	eDeleteUsageReportSubscription                                                         smithy.SchemaExtensions
+	eDeleteUser                                                                            smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociations                                           smithy.SchemaExtensions
+	eDescribeAppBlockBuilders                                                              smithy.SchemaExtensions
+	eDescribeAppBlocks                                                                     smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociations                                                  smithy.SchemaExtensions
+	eDescribeApplications                                                                  smithy.SchemaExtensions
+	eDescribeAppLicenseUsage                                                               smithy.SchemaExtensions
+	eDescribeDirectoryConfigs                                                              smithy.SchemaExtensions
+	eDescribeEntitlements                                                                  smithy.SchemaExtensions
+	eDescribeFleets                                                                        smithy.SchemaExtensions
+	eDescribeImageBuilders                                                                 smithy.SchemaExtensions
+	eDescribeImagePermissions                                                              smithy.SchemaExtensions
+	eDescribeImages                                                                        smithy.SchemaExtensions
+	eDescribeSessions                                                                      smithy.SchemaExtensions
+	eDescribeSoftwareAssociations                                                          smithy.SchemaExtensions
+	eDescribeStacks                                                                        smithy.SchemaExtensions
+	eDescribeThemeForStack                                                                 smithy.SchemaExtensions
+	eDescribeUsageReportSubscriptions                                                      smithy.SchemaExtensions
+	eDescribeUsers                                                                         smithy.SchemaExtensions
+	eDescribeUserStackAssociations                                                         smithy.SchemaExtensions
+	eDisableUser                                                                           smithy.SchemaExtensions
+	eDisassociateAppBlockBuilderAppBlock                                                   smithy.SchemaExtensions
+	eDisassociateApplicationFleet                                                          smithy.SchemaExtensions
+	eDisassociateApplicationFromEntitlement                                                smithy.SchemaExtensions
+	eDisassociateFleet                                                                     smithy.SchemaExtensions
+	eDisassociateSoftwareFromImageBuilder                                                  smithy.SchemaExtensions
+	eDrainSessionInstance                                                                  smithy.SchemaExtensions
+	eEnableUser                                                                            smithy.SchemaExtensions
+	eExpireSession                                                                         smithy.SchemaExtensions
+	eGetExportImageTask                                                                    smithy.SchemaExtensions
+	eListAssociatedFleets                                                                  smithy.SchemaExtensions
+	eListAssociatedStacks                                                                  smithy.SchemaExtensions
+	eListEntitledApplications                                                              smithy.SchemaExtensions
+	eListExportImageTasks                                                                  smithy.SchemaExtensions
+	eListTagsForResource                                                                   smithy.SchemaExtensions
+	eStartAppBlockBuilder                                                                  smithy.SchemaExtensions
+	eStartFleet                                                                            smithy.SchemaExtensions
+	eStartImageBuilder                                                                     smithy.SchemaExtensions
+	eStartSoftwareDeploymentToImageBuilder                                                 smithy.SchemaExtensions
+	eStopAppBlockBuilder                                                                   smithy.SchemaExtensions
+	eStopFleet                                                                             smithy.SchemaExtensions
+	eStopImageBuilder                                                                      smithy.SchemaExtensions
+	eTagResource                                                                           smithy.SchemaExtensions
+	eUntagResource                                                                         smithy.SchemaExtensions
+	eUpdateAppBlockBuilder                                                                 smithy.SchemaExtensions
+	eUpdateApplication                                                                     smithy.SchemaExtensions
+	eUpdateDirectoryConfig                                                                 smithy.SchemaExtensions
+	eUpdateEntitlement                                                                     smithy.SchemaExtensions
+	eUpdateFleet                                                                           smithy.SchemaExtensions
+	eUpdateImagePermissions                                                                smithy.SchemaExtensions
+	eUpdateStack                                                                           smithy.SchemaExtensions
+	eUpdateThemeForStack                                                                   smithy.SchemaExtensions
+	e_PhotonAdminProxyService                                                              smithy.SchemaExtensions
+	eAccessEndpoint                                                                        smithy.SchemaExtensions
+	eAccessEndpoint_EndpointType                                                           smithy.SchemaExtensions
+	eAccessEndpoint_VpceId                                                                 smithy.SchemaExtensions
+	e_AccessEndpointList                                                                   smithy.SchemaExtensions
+	e_AccessEndpointList_member                                                            smithy.SchemaExtensions
+	eAccessEndpointType                                                                    smithy.SchemaExtensions
+	eAccessEndpointType_STREAMING                                                          smithy.SchemaExtensions
+	e_AccountName                                                                          smithy.SchemaExtensions
+	e_AccountPassword                                                                      smithy.SchemaExtensions
+	eAction                                                                                smithy.SchemaExtensions
+	eAction_CLIPBOARD_COPY_FROM_LOCAL_DEVICE                                               smithy.SchemaExtensions
+	eAction_CLIPBOARD_COPY_TO_LOCAL_DEVICE                                                 smithy.SchemaExtensions
+	eAction_FILE_UPLOAD                                                                    smithy.SchemaExtensions
+	eAction_FILE_DOWNLOAD                                                                  smithy.SchemaExtensions
+	eAction_PRINTING_TO_LOCAL_DEVICE                                                       smithy.SchemaExtensions
+	eAction_DOMAIN_PASSWORD_SIGNIN                                                         smithy.SchemaExtensions
+	eAction_DOMAIN_SMART_CARD_SIGNIN                                                       smithy.SchemaExtensions
+	eAction_AUTO_TIME_ZONE_REDIRECTION                                                     smithy.SchemaExtensions
+	e_AdminAppLicenseUsageList                                                             smithy.SchemaExtensions
+	e_AdminAppLicenseUsageList_member                                                      smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord                                                            smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord_UserArn                                                    smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord_BillingPeriod                                              smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord_OwnerAWSAccountId                                          smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord_SubscriptionFirstUsedDate                                  smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord_SubscriptionLastUsedDate                                   smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord_LicenseType                                                smithy.SchemaExtensions
+	eAdminAppLicenseUsageRecord_UserId                                                     smithy.SchemaExtensions
+	eAgentAccessConfig                                                                     smithy.SchemaExtensions
+	eAgentAccessConfig_Settings                                                            smithy.SchemaExtensions
+	eAgentAccessConfig_S3BucketArn                                                         smithy.SchemaExtensions
+	eAgentAccessConfig_ScreenshotsUploadEnabled                                            smithy.SchemaExtensions
+	eAgentAccessConfig_ScreenResolution                                                    smithy.SchemaExtensions
+	eAgentAccessConfig_ScreenImageFormat                                                   smithy.SchemaExtensions
+	eAgentAccessConfig_UserControlMode                                                     smithy.SchemaExtensions
+	eAgentAccessConfigForUpdate                                                            smithy.SchemaExtensions
+	eAgentAccessConfigForUpdate_Settings                                                   smithy.SchemaExtensions
+	eAgentAccessConfigForUpdate_S3BucketArn                                                smithy.SchemaExtensions
+	eAgentAccessConfigForUpdate_ScreenshotsUploadEnabled                                   smithy.SchemaExtensions
+	eAgentAccessConfigForUpdate_ScreenResolution                                           smithy.SchemaExtensions
+	eAgentAccessConfigForUpdate_ScreenImageFormat                                          smithy.SchemaExtensions
+	eAgentAccessConfigForUpdate_UserControlMode                                            smithy.SchemaExtensions
+	eAgentAccessSetting                                                                    smithy.SchemaExtensions
+	eAgentAccessSetting_AgentAction                                                        smithy.SchemaExtensions
+	eAgentAccessSetting_Permission                                                         smithy.SchemaExtensions
+	e_AgentAccessSettingList                                                               smithy.SchemaExtensions
+	e_AgentAccessSettingList_member                                                        smithy.SchemaExtensions
+	eAgentAction                                                                           smithy.SchemaExtensions
+	eAgentAction_COMPUTER_VISION                                                           smithy.SchemaExtensions
+	eAgentAction_COMPUTER_INPUT                                                            smithy.SchemaExtensions
+	eAgentAction_FORWARD_MCP_TOOLS                                                         smithy.SchemaExtensions
+	eAgentSoftwareVersion                                                                  smithy.SchemaExtensions
+	eAgentSoftwareVersion_CURRENT_LATEST                                                   smithy.SchemaExtensions
+	eAgentSoftwareVersion_ALWAYS_LATEST                                                    smithy.SchemaExtensions
+	e_AmiName                                                                              smithy.SchemaExtensions
+	eAppBlock                                                                              smithy.SchemaExtensions
+	eAppBlock_Name                                                                         smithy.SchemaExtensions
+	eAppBlock_Arn                                                                          smithy.SchemaExtensions
+	eAppBlock_Description                                                                  smithy.SchemaExtensions
+	eAppBlock_DisplayName                                                                  smithy.SchemaExtensions
+	eAppBlock_SourceS3Location                                                             smithy.SchemaExtensions
+	eAppBlock_SetupScriptDetails                                                           smithy.SchemaExtensions
+	eAppBlock_CreatedTime                                                                  smithy.SchemaExtensions
+	eAppBlock_PostSetupScriptDetails                                                       smithy.SchemaExtensions
+	eAppBlock_PackagingType                                                                smithy.SchemaExtensions
+	eAppBlock_State                                                                        smithy.SchemaExtensions
+	eAppBlock_AppBlockErrors                                                               smithy.SchemaExtensions
+	eAppBlockBuilder                                                                       smithy.SchemaExtensions
+	eAppBlockBuilder_Arn                                                                   smithy.SchemaExtensions
+	eAppBlockBuilder_Name                                                                  smithy.SchemaExtensions
+	eAppBlockBuilder_DisplayName                                                           smithy.SchemaExtensions
+	eAppBlockBuilder_Description                                                           smithy.SchemaExtensions
+	eAppBlockBuilder_Platform                                                              smithy.SchemaExtensions
+	eAppBlockBuilder_InstanceType                                                          smithy.SchemaExtensions
+	eAppBlockBuilder_EnableDefaultInternetAccess                                           smithy.SchemaExtensions
+	eAppBlockBuilder_IamRoleArn                                                            smithy.SchemaExtensions
+	eAppBlockBuilder_VpcConfig                                                             smithy.SchemaExtensions
+	eAppBlockBuilder_State                                                                 smithy.SchemaExtensions
+	eAppBlockBuilder_CreatedTime                                                           smithy.SchemaExtensions
+	eAppBlockBuilder_AppBlockBuilderErrors                                                 smithy.SchemaExtensions
+	eAppBlockBuilder_StateChangeReason                                                     smithy.SchemaExtensions
+	eAppBlockBuilder_AccessEndpoints                                                       smithy.SchemaExtensions
+	eAppBlockBuilder_DisableIMDSV1                                                         smithy.SchemaExtensions
+	eAppBlockBuilderAppBlockAssociation                                                    smithy.SchemaExtensions
+	eAppBlockBuilderAppBlockAssociation_AppBlockArn                                        smithy.SchemaExtensions
+	eAppBlockBuilderAppBlockAssociation_AppBlockBuilderName                                smithy.SchemaExtensions
+	e_AppBlockBuilderAppBlockAssociationsList                                              smithy.SchemaExtensions
+	e_AppBlockBuilderAppBlockAssociationsList_member                                       smithy.SchemaExtensions
+	eAppBlockBuilderAttribute                                                              smithy.SchemaExtensions
+	eAppBlockBuilderAttribute_IAM_ROLE_ARN                                                 smithy.SchemaExtensions
+	eAppBlockBuilderAttribute_ACCESS_ENDPOINTS                                             smithy.SchemaExtensions
+	eAppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS                         smithy.SchemaExtensions
+	e_AppBlockBuilderAttributes                                                            smithy.SchemaExtensions
+	e_AppBlockBuilderAttributes_member                                                     smithy.SchemaExtensions
+	e_AppBlockBuilderList                                                                  smithy.SchemaExtensions
+	e_AppBlockBuilderList_member                                                           smithy.SchemaExtensions
+	eAppBlockBuilderPlatformType                                                           smithy.SchemaExtensions
+	eAppBlockBuilderPlatformType_WINDOWS_SERVER_2019                                       smithy.SchemaExtensions
+	eAppBlockBuilderState                                                                  smithy.SchemaExtensions
+	eAppBlockBuilderState_STARTING                                                         smithy.SchemaExtensions
+	eAppBlockBuilderState_RUNNING                                                          smithy.SchemaExtensions
+	eAppBlockBuilderState_STOPPING                                                         smithy.SchemaExtensions
+	eAppBlockBuilderState_STOPPED                                                          smithy.SchemaExtensions
+	eAppBlockBuilderStateChangeReason                                                      smithy.SchemaExtensions
+	eAppBlockBuilderStateChangeReason_Code                                                 smithy.SchemaExtensions
+	eAppBlockBuilderStateChangeReason_Message                                              smithy.SchemaExtensions
+	eAppBlockBuilderStateChangeReasonCode                                                  smithy.SchemaExtensions
+	eAppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR                                   smithy.SchemaExtensions
+	e_AppBlocks                                                                            smithy.SchemaExtensions
+	e_AppBlocks_member                                                                     smithy.SchemaExtensions
+	eAppBlockState                                                                         smithy.SchemaExtensions
+	eAppBlockState_INACTIVE                                                                smithy.SchemaExtensions
+	eAppBlockState_ACTIVE                                                                  smithy.SchemaExtensions
+	e_AppCatalogConfig                                                                     smithy.SchemaExtensions
+	e_AppCatalogConfig_member                                                              smithy.SchemaExtensions
+	e_AppDisplayName                                                                       smithy.SchemaExtensions
+	eApplication                                                                           smithy.SchemaExtensions
+	eApplication_Name                                                                      smithy.SchemaExtensions
+	eApplication_DisplayName                                                               smithy.SchemaExtensions
+	eApplication_IconURL                                                                   smithy.SchemaExtensions
+	eApplication_LaunchPath                                                                smithy.SchemaExtensions
+	eApplication_LaunchParameters                                                          smithy.SchemaExtensions
+	eApplication_Enabled                                                                   smithy.SchemaExtensions
+	eApplication_Metadata                                                                  smithy.SchemaExtensions
+	eApplication_WorkingDirectory                                                          smithy.SchemaExtensions
+	eApplication_Description                                                               smithy.SchemaExtensions
+	eApplication_Arn                                                                       smithy.SchemaExtensions
+	eApplication_AppBlockArn                                                               smithy.SchemaExtensions
+	eApplication_IconS3Location                                                            smithy.SchemaExtensions
+	eApplication_Platforms                                                                 smithy.SchemaExtensions
+	eApplication_InstanceFamilies                                                          smithy.SchemaExtensions
+	eApplication_CreatedTime                                                               smithy.SchemaExtensions
+	eApplicationAttribute                                                                  smithy.SchemaExtensions
+	eApplicationAttribute_LAUNCH_PARAMETERS                                                smithy.SchemaExtensions
+	eApplicationAttribute_WORKING_DIRECTORY                                                smithy.SchemaExtensions
+	e_ApplicationAttributes                                                                smithy.SchemaExtensions
+	e_ApplicationAttributes_member                                                         smithy.SchemaExtensions
+	eApplicationConfig                                                                     smithy.SchemaExtensions
+	eApplicationConfig_Name                                                                smithy.SchemaExtensions
+	eApplicationConfig_DisplayName                                                         smithy.SchemaExtensions
+	eApplicationConfig_AbsoluteAppPath                                                     smithy.SchemaExtensions
+	eApplicationConfig_AbsoluteIconPath                                                    smithy.SchemaExtensions
+	eApplicationConfig_AbsoluteManifestPath                                                smithy.SchemaExtensions
+	eApplicationConfig_WorkingDirectory                                                    smithy.SchemaExtensions
+	eApplicationConfig_LaunchParameters                                                    smithy.SchemaExtensions
+	eApplicationFleetAssociation                                                           smithy.SchemaExtensions
+	eApplicationFleetAssociation_FleetName                                                 smithy.SchemaExtensions
+	eApplicationFleetAssociation_ApplicationArn                                            smithy.SchemaExtensions
+	e_ApplicationFleetAssociationList                                                      smithy.SchemaExtensions
+	e_ApplicationFleetAssociationList_member                                               smithy.SchemaExtensions
+	e_Applications                                                                         smithy.SchemaExtensions
+	e_Applications_member                                                                  smithy.SchemaExtensions
+	eApplicationSettings                                                                   smithy.SchemaExtensions
+	eApplicationSettings_Enabled                                                           smithy.SchemaExtensions
+	eApplicationSettings_SettingsGroup                                                     smithy.SchemaExtensions
+	eApplicationSettingsResponse                                                           smithy.SchemaExtensions
+	eApplicationSettingsResponse_Enabled                                                   smithy.SchemaExtensions
+	eApplicationSettingsResponse_SettingsGroup                                             smithy.SchemaExtensions
+	eApplicationSettingsResponse_S3BucketName                                              smithy.SchemaExtensions
+	e_AppName                                                                              smithy.SchemaExtensions
+	e_AppstreamAgentVersion                                                                smithy.SchemaExtensions
+	eAppVisibility                                                                         smithy.SchemaExtensions
+	eAppVisibility_ALL                                                                     smithy.SchemaExtensions
+	eAppVisibility_ASSOCIATED                                                              smithy.SchemaExtensions
+	e_Arn                                                                                  smithy.SchemaExtensions
+	e_ArnList                                                                              smithy.SchemaExtensions
+	e_ArnList_member                                                                       smithy.SchemaExtensions
+	eAuthenticationType                                                                    smithy.SchemaExtensions
+	eAuthenticationType_API                                                                smithy.SchemaExtensions
+	eAuthenticationType_SAML                                                               smithy.SchemaExtensions
+	eAuthenticationType_USERPOOL                                                           smithy.SchemaExtensions
+	eAuthenticationType_AWS_AD                                                             smithy.SchemaExtensions
+	e_AwsAccountId                                                                         smithy.SchemaExtensions
+	e_AwsAccountIdList                                                                     smithy.SchemaExtensions
+	e_AwsAccountIdList_member                                                              smithy.SchemaExtensions
+	e_Boolean                                                                              smithy.SchemaExtensions
+	e_BooleanObject                                                                        smithy.SchemaExtensions
+	eCertificateBasedAuthProperties                                                        smithy.SchemaExtensions
+	eCertificateBasedAuthProperties_Status                                                 smithy.SchemaExtensions
+	eCertificateBasedAuthProperties_CertificateAuthorityArn                                smithy.SchemaExtensions
+	eCertificateBasedAuthStatus                                                            smithy.SchemaExtensions
+	eCertificateBasedAuthStatus_DISABLED                                                   smithy.SchemaExtensions
+	eCertificateBasedAuthStatus_ENABLED                                                    smithy.SchemaExtensions
+	eCertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK                        smithy.SchemaExtensions
+	eComputeCapacity                                                                       smithy.SchemaExtensions
+	eComputeCapacity_DesiredInstances                                                      smithy.SchemaExtensions
+	eComputeCapacity_DesiredSessions                                                       smithy.SchemaExtensions
+	eComputeCapacityStatus                                                                 smithy.SchemaExtensions
+	eComputeCapacityStatus_Desired                                                         smithy.SchemaExtensions
+	eComputeCapacityStatus_Running                                                         smithy.SchemaExtensions
+	eComputeCapacityStatus_InUse                                                           smithy.SchemaExtensions
+	eComputeCapacityStatus_Available                                                       smithy.SchemaExtensions
+	eComputeCapacityStatus_DesiredUserSessions                                             smithy.SchemaExtensions
+	eComputeCapacityStatus_AvailableUserSessions                                           smithy.SchemaExtensions
+	eComputeCapacityStatus_ActiveUserSessions                                              smithy.SchemaExtensions
+	eComputeCapacityStatus_ActualUserSessions                                              smithy.SchemaExtensions
+	eComputeCapacityStatus_Draining                                                        smithy.SchemaExtensions
+	eComputeCapacityStatus_DrainModeActiveUserSessions                                     smithy.SchemaExtensions
+	eComputeCapacityStatus_DrainModeUnusedUserSessions                                     smithy.SchemaExtensions
+	eConcurrentModificationException                                                       smithy.SchemaExtensions
+	eConcurrentModificationException_Message                                               smithy.SchemaExtensions
+	eContentRedirection                                                                    smithy.SchemaExtensions
+	eContentRedirection_HostToClient                                                       smithy.SchemaExtensions
+	e_DescribeImagesMaxResults                                                             smithy.SchemaExtensions
+	e_Description                                                                          smithy.SchemaExtensions
+	eDirectoryConfig                                                                       smithy.SchemaExtensions
+	eDirectoryConfig_DirectoryName                                                         smithy.SchemaExtensions
+	eDirectoryConfig_OrganizationalUnitDistinguishedNames                                  smithy.SchemaExtensions
+	eDirectoryConfig_ServiceAccountCredentials                                             smithy.SchemaExtensions
+	eDirectoryConfig_CreatedTime                                                           smithy.SchemaExtensions
+	eDirectoryConfig_CertificateBasedAuthProperties                                        smithy.SchemaExtensions
+	e_DirectoryConfigList                                                                  smithy.SchemaExtensions
+	e_DirectoryConfigList_member                                                           smithy.SchemaExtensions
+	e_DirectoryName                                                                        smithy.SchemaExtensions
+	e_DirectoryNameList                                                                    smithy.SchemaExtensions
+	e_DirectoryNameList_member                                                             smithy.SchemaExtensions
+	e_DisplayName                                                                          smithy.SchemaExtensions
+	e_Domain                                                                               smithy.SchemaExtensions
+	eDomainJoinInfo                                                                        smithy.SchemaExtensions
+	eDomainJoinInfo_DirectoryName                                                          smithy.SchemaExtensions
+	eDomainJoinInfo_OrganizationalUnitDistinguishedName                                    smithy.SchemaExtensions
+	e_DomainList                                                                           smithy.SchemaExtensions
+	e_DomainList_member                                                                    smithy.SchemaExtensions
+	eDryRunOperationException                                                              smithy.SchemaExtensions
+	eDryRunOperationException_Message                                                      smithy.SchemaExtensions
+	eDynamicAppProvidersEnabled                                                            smithy.SchemaExtensions
+	eDynamicAppProvidersEnabled_ENABLED                                                    smithy.SchemaExtensions
+	eDynamicAppProvidersEnabled_DISABLED                                                   smithy.SchemaExtensions
+	e_EmbedHostDomain                                                                      smithy.SchemaExtensions
+	e_EmbedHostDomains                                                                     smithy.SchemaExtensions
+	e_EmbedHostDomains_member                                                              smithy.SchemaExtensions
+	eEntitledApplication                                                                   smithy.SchemaExtensions
+	eEntitledApplication_ApplicationIdentifier                                             smithy.SchemaExtensions
+	e_EntitledApplicationList                                                              smithy.SchemaExtensions
+	e_EntitledApplicationList_member                                                       smithy.SchemaExtensions
+	eEntitlement                                                                           smithy.SchemaExtensions
+	eEntitlement_Name                                                                      smithy.SchemaExtensions
+	eEntitlement_StackName                                                                 smithy.SchemaExtensions
+	eEntitlement_Description                                                               smithy.SchemaExtensions
+	eEntitlement_AppVisibility                                                             smithy.SchemaExtensions
+	eEntitlement_Attributes                                                                smithy.SchemaExtensions
+	eEntitlement_CreatedTime                                                               smithy.SchemaExtensions
+	eEntitlement_LastModifiedTime                                                          smithy.SchemaExtensions
+	eEntitlementAlreadyExistsException                                                     smithy.SchemaExtensions
+	eEntitlementAlreadyExistsException_Message                                             smithy.SchemaExtensions
+	eEntitlementAttribute                                                                  smithy.SchemaExtensions
+	eEntitlementAttribute_Name                                                             smithy.SchemaExtensions
+	eEntitlementAttribute_Value                                                            smithy.SchemaExtensions
+	e_EntitlementAttributeList                                                             smithy.SchemaExtensions
+	e_EntitlementAttributeList_member                                                      smithy.SchemaExtensions
+	e_EntitlementList                                                                      smithy.SchemaExtensions
+	e_EntitlementList_member                                                               smithy.SchemaExtensions
+	eEntitlementNotFoundException                                                          smithy.SchemaExtensions
+	eEntitlementNotFoundException_Message                                                  smithy.SchemaExtensions
+	eErrorDetails                                                                          smithy.SchemaExtensions
+	eErrorDetails_ErrorCode                                                                smithy.SchemaExtensions
+	eErrorDetails_ErrorMessage                                                             smithy.SchemaExtensions
+	e_ErrorDetailsList                                                                     smithy.SchemaExtensions
+	e_ErrorDetailsList_member                                                              smithy.SchemaExtensions
+	e_ErrorMessage                                                                         smithy.SchemaExtensions
+	eExportImageTask                                                                       smithy.SchemaExtensions
+	eExportImageTask_TaskId                                                                smithy.SchemaExtensions
+	eExportImageTask_ImageArn                                                              smithy.SchemaExtensions
+	eExportImageTask_AmiName                                                               smithy.SchemaExtensions
+	eExportImageTask_CreatedDate                                                           smithy.SchemaExtensions
+	eExportImageTask_AmiDescription                                                        smithy.SchemaExtensions
+	eExportImageTask_State                                                                 smithy.SchemaExtensions
+	eExportImageTask_AmiId                                                                 smithy.SchemaExtensions
+	eExportImageTask_TagSpecifications                                                     smithy.SchemaExtensions
+	eExportImageTask_ErrorDetails                                                          smithy.SchemaExtensions
+	e_ExportImageTasks                                                                     smithy.SchemaExtensions
+	e_ExportImageTasks_member                                                              smithy.SchemaExtensions
+	eExportImageTaskState                                                                  smithy.SchemaExtensions
+	eExportImageTaskState_EXPORTING                                                        smithy.SchemaExtensions
+	eExportImageTaskState_COMPLETED                                                        smithy.SchemaExtensions
+	eExportImageTaskState_FAILED                                                           smithy.SchemaExtensions
+	eExportImageTaskState_TIMED_OUT                                                        smithy.SchemaExtensions
+	e_FeedbackURL                                                                          smithy.SchemaExtensions
+	e_FilePath                                                                             smithy.SchemaExtensions
+	eFilter                                                                                smithy.SchemaExtensions
+	eFilter_Name                                                                           smithy.SchemaExtensions
+	eFilter_Values                                                                         smithy.SchemaExtensions
+	e_FilterName                                                                           smithy.SchemaExtensions
+	e_Filters                                                                              smithy.SchemaExtensions
+	e_Filters_member                                                                       smithy.SchemaExtensions
+	e_FilterValue                                                                          smithy.SchemaExtensions
+	e_FilterValues                                                                         smithy.SchemaExtensions
+	e_FilterValues_member                                                                  smithy.SchemaExtensions
+	eFleet                                                                                 smithy.SchemaExtensions
+	eFleet_Arn                                                                             smithy.SchemaExtensions
+	eFleet_Name                                                                            smithy.SchemaExtensions
+	eFleet_DisplayName                                                                     smithy.SchemaExtensions
+	eFleet_Description                                                                     smithy.SchemaExtensions
+	eFleet_ImageName                                                                       smithy.SchemaExtensions
+	eFleet_ImageArn                                                                        smithy.SchemaExtensions
+	eFleet_InstanceType                                                                    smithy.SchemaExtensions
+	eFleet_FleetType                                                                       smithy.SchemaExtensions
+	eFleet_ComputeCapacityStatus                                                           smithy.SchemaExtensions
+	eFleet_MaxUserDurationInSeconds                                                        smithy.SchemaExtensions
+	eFleet_DisconnectTimeoutInSeconds                                                      smithy.SchemaExtensions
+	eFleet_State                                                                           smithy.SchemaExtensions
+	eFleet_VpcConfig                                                                       smithy.SchemaExtensions
+	eFleet_CreatedTime                                                                     smithy.SchemaExtensions
+	eFleet_FleetErrors                                                                     smithy.SchemaExtensions
+	eFleet_EnableDefaultInternetAccess                                                     smithy.SchemaExtensions
+	eFleet_DomainJoinInfo                                                                  smithy.SchemaExtensions
+	eFleet_IdleDisconnectTimeoutInSeconds                                                  smithy.SchemaExtensions
+	eFleet_IamRoleArn                                                                      smithy.SchemaExtensions
+	eFleet_StreamView                                                                      smithy.SchemaExtensions
+	eFleet_Platform                                                                        smithy.SchemaExtensions
+	eFleet_MaxConcurrentSessions                                                           smithy.SchemaExtensions
+	eFleet_UsbDeviceFilterStrings                                                          smithy.SchemaExtensions
+	eFleet_SessionScriptS3Location                                                         smithy.SchemaExtensions
+	eFleet_MaxSessionsPerInstance                                                          smithy.SchemaExtensions
+	eFleet_RootVolumeConfig                                                                smithy.SchemaExtensions
+	eFleet_DisableIMDSV1                                                                   smithy.SchemaExtensions
+	eFleetAttribute                                                                        smithy.SchemaExtensions
+	eFleetAttribute_VPC_CONFIGURATION                                                      smithy.SchemaExtensions
+	eFleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS                                   smithy.SchemaExtensions
+	eFleetAttribute_DOMAIN_JOIN_INFO                                                       smithy.SchemaExtensions
+	eFleetAttribute_IAM_ROLE_ARN                                                           smithy.SchemaExtensions
+	eFleetAttribute_USB_DEVICE_FILTER_STRINGS                                              smithy.SchemaExtensions
+	eFleetAttribute_SESSION_SCRIPT_S3_LOCATION                                             smithy.SchemaExtensions
+	eFleetAttribute_MAX_SESSIONS_PER_INSTANCE                                              smithy.SchemaExtensions
+	eFleetAttribute_VOLUME_CONFIGURATION                                                   smithy.SchemaExtensions
+	e_FleetAttributes                                                                      smithy.SchemaExtensions
+	e_FleetAttributes_member                                                               smithy.SchemaExtensions
+	eFleetError                                                                            smithy.SchemaExtensions
+	eFleetError_ErrorCode                                                                  smithy.SchemaExtensions
+	eFleetError_ErrorMessage                                                               smithy.SchemaExtensions
+	eFleetErrorCode                                                                        smithy.SchemaExtensions
+	eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION                           smithy.SchemaExtensions
+	eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION                             smithy.SchemaExtensions
+	eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION                             smithy.SchemaExtensions
+	eFleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED                                       smithy.SchemaExtensions
+	eFleetErrorCode_INTERNAL_SERVICE_ERROR                                                 smithy.SchemaExtensions
+	eFleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING                                            smithy.SchemaExtensions
+	eFleetErrorCode_MACHINE_ROLE_IS_MISSING                                                smithy.SchemaExtensions
+	eFleetErrorCode_STS_DISABLED_IN_REGION                                                 smithy.SchemaExtensions
+	eFleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES                                   smithy.SchemaExtensions
+	eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION                        smithy.SchemaExtensions
+	eFleetErrorCode_SUBNET_NOT_FOUND                                                       smithy.SchemaExtensions
+	eFleetErrorCode_IMAGE_NOT_FOUND                                                        smithy.SchemaExtensions
+	eFleetErrorCode_INVALID_SUBNET_CONFIGURATION                                           smithy.SchemaExtensions
+	eFleetErrorCode_SECURITY_GROUPS_NOT_FOUND                                              smithy.SchemaExtensions
+	eFleetErrorCode_IGW_NOT_ATTACHED                                                       smithy.SchemaExtensions
+	eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION               smithy.SchemaExtensions
+	eFleetErrorCode_FLEET_STOPPED                                                          smithy.SchemaExtensions
+	eFleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE                                    smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND                                       smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED                                        smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE                                        smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER                                    smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA                                            smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN                                       smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED                                        smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME                                smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED                               smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED                    smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED                                      smithy.SchemaExtensions
+	eFleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR                                     smithy.SchemaExtensions
+	eFleetErrorCode_VALIDATION_ERROR                                                       smithy.SchemaExtensions
+	e_FleetErrors                                                                          smithy.SchemaExtensions
+	e_FleetErrors_member                                                                   smithy.SchemaExtensions
+	e_FleetList                                                                            smithy.SchemaExtensions
+	e_FleetList_member                                                                     smithy.SchemaExtensions
+	eFleetState                                                                            smithy.SchemaExtensions
+	eFleetState_STARTING                                                                   smithy.SchemaExtensions
+	eFleetState_RUNNING                                                                    smithy.SchemaExtensions
+	eFleetState_STOPPING                                                                   smithy.SchemaExtensions
+	eFleetState_STOPPED                                                                    smithy.SchemaExtensions
+	eFleetType                                                                             smithy.SchemaExtensions
+	eFleetType_ALWAYS_ON                                                                   smithy.SchemaExtensions
+	eFleetType_ON_DEMAND                                                                   smithy.SchemaExtensions
+	eFleetType_ELASTIC                                                                     smithy.SchemaExtensions
+	eImage                                                                                 smithy.SchemaExtensions
+	eImage_Name                                                                            smithy.SchemaExtensions
+	eImage_Arn                                                                             smithy.SchemaExtensions
+	eImage_BaseImageArn                                                                    smithy.SchemaExtensions
+	eImage_DisplayName                                                                     smithy.SchemaExtensions
+	eImage_State                                                                           smithy.SchemaExtensions
+	eImage_Visibility                                                                      smithy.SchemaExtensions
+	eImage_ImageBuilderSupported                                                           smithy.SchemaExtensions
+	eImage_ImageBuilderName                                                                smithy.SchemaExtensions
+	eImage_Platform                                                                        smithy.SchemaExtensions
+	eImage_Description                                                                     smithy.SchemaExtensions
+	eImage_StateChangeReason                                                               smithy.SchemaExtensions
+	eImage_Applications                                                                    smithy.SchemaExtensions
+	eImage_CreatedTime                                                                     smithy.SchemaExtensions
+	eImage_PublicBaseImageReleasedDate                                                     smithy.SchemaExtensions
+	eImage_AppstreamAgentVersion                                                           smithy.SchemaExtensions
+	eImage_ImagePermissions                                                                smithy.SchemaExtensions
+	eImage_ImageErrors                                                                     smithy.SchemaExtensions
+	eImage_LatestAppstreamAgentVersion                                                     smithy.SchemaExtensions
+	eImage_SupportedInstanceFamilies                                                       smithy.SchemaExtensions
+	eImage_DynamicAppProvidersEnabled                                                      smithy.SchemaExtensions
+	eImage_ImageSharedWithOthers                                                           smithy.SchemaExtensions
+	eImage_ManagedSoftwareIncluded                                                         smithy.SchemaExtensions
+	eImage_ImageType                                                                       smithy.SchemaExtensions
+	eImage_ImageSoftwareMetadata                                                           smithy.SchemaExtensions
+	eImageBuilder                                                                          smithy.SchemaExtensions
+	eImageBuilder_Name                                                                     smithy.SchemaExtensions
+	eImageBuilder_Arn                                                                      smithy.SchemaExtensions
+	eImageBuilder_ImageArn                                                                 smithy.SchemaExtensions
+	eImageBuilder_Description                                                              smithy.SchemaExtensions
+	eImageBuilder_DisplayName                                                              smithy.SchemaExtensions
+	eImageBuilder_VpcConfig                                                                smithy.SchemaExtensions
+	eImageBuilder_InstanceType                                                             smithy.SchemaExtensions
+	eImageBuilder_Platform                                                                 smithy.SchemaExtensions
+	eImageBuilder_IamRoleArn                                                               smithy.SchemaExtensions
+	eImageBuilder_State                                                                    smithy.SchemaExtensions
+	eImageBuilder_StateChangeReason                                                        smithy.SchemaExtensions
+	eImageBuilder_CreatedTime                                                              smithy.SchemaExtensions
+	eImageBuilder_EnableDefaultInternetAccess                                              smithy.SchemaExtensions
+	eImageBuilder_DomainJoinInfo                                                           smithy.SchemaExtensions
+	eImageBuilder_NetworkAccessConfiguration                                               smithy.SchemaExtensions
+	eImageBuilder_ImageBuilderErrors                                                       smithy.SchemaExtensions
+	eImageBuilder_AppstreamAgentVersion                                                    smithy.SchemaExtensions
+	eImageBuilder_AccessEndpoints                                                          smithy.SchemaExtensions
+	eImageBuilder_RootVolumeConfig                                                         smithy.SchemaExtensions
+	eImageBuilder_LatestAppstreamAgentVersion                                              smithy.SchemaExtensions
+	eImageBuilder_DisableIMDSV1                                                            smithy.SchemaExtensions
+	e_ImageBuilderList                                                                     smithy.SchemaExtensions
+	e_ImageBuilderList_member                                                              smithy.SchemaExtensions
+	eImageBuilderState                                                                     smithy.SchemaExtensions
+	eImageBuilderState_PENDING                                                             smithy.SchemaExtensions
+	eImageBuilderState_UPDATING_AGENT                                                      smithy.SchemaExtensions
+	eImageBuilderState_RUNNING                                                             smithy.SchemaExtensions
+	eImageBuilderState_STOPPING                                                            smithy.SchemaExtensions
+	eImageBuilderState_STOPPED                                                             smithy.SchemaExtensions
+	eImageBuilderState_REBOOTING                                                           smithy.SchemaExtensions
+	eImageBuilderState_SNAPSHOTTING                                                        smithy.SchemaExtensions
+	eImageBuilderState_DELETING                                                            smithy.SchemaExtensions
+	eImageBuilderState_FAILED                                                              smithy.SchemaExtensions
+	eImageBuilderState_UPDATING                                                            smithy.SchemaExtensions
+	eImageBuilderState_PENDING_QUALIFICATION                                               smithy.SchemaExtensions
+	eImageBuilderState_PENDING_SYNCING_APPS                                                smithy.SchemaExtensions
+	eImageBuilderState_SYNCING_APPS                                                        smithy.SchemaExtensions
+	eImageBuilderState_PENDING_IMAGE_IMPORT                                                smithy.SchemaExtensions
+	eImageBuilderStateChangeReason                                                         smithy.SchemaExtensions
+	eImageBuilderStateChangeReason_Code                                                    smithy.SchemaExtensions
+	eImageBuilderStateChangeReason_Message                                                 smithy.SchemaExtensions
+	eImageBuilderStateChangeReasonCode                                                     smithy.SchemaExtensions
+	eImageBuilderStateChangeReasonCode_INTERNAL_ERROR                                      smithy.SchemaExtensions
+	eImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE                                   smithy.SchemaExtensions
+	e_ImageImportDescription                                                               smithy.SchemaExtensions
+	e_ImageImportDisplayName                                                               smithy.SchemaExtensions
+	e_ImageList                                                                            smithy.SchemaExtensions
+	e_ImageList_member                                                                     smithy.SchemaExtensions
+	eImagePermissions                                                                      smithy.SchemaExtensions
+	eImagePermissions_allowFleet                                                           smithy.SchemaExtensions
+	eImagePermissions_allowImageBuilder                                                    smithy.SchemaExtensions
+	eImageSharedWithOthers                                                                 smithy.SchemaExtensions
+	eImageSharedWithOthers_TRUE                                                            smithy.SchemaExtensions
+	eImageSharedWithOthers_FALSE                                                           smithy.SchemaExtensions
+	eImageSoftwareMetadata                                                                 smithy.SchemaExtensions
+	eImageSoftwareMetadata_nvidiaGridDriverVersion                                         smithy.SchemaExtensions
+	eImageState                                                                            smithy.SchemaExtensions
+	eImageState_PENDING                                                                    smithy.SchemaExtensions
+	eImageState_AVAILABLE                                                                  smithy.SchemaExtensions
+	eImageState_FAILED                                                                     smithy.SchemaExtensions
+	eImageState_COPYING                                                                    smithy.SchemaExtensions
+	eImageState_DELETING                                                                   smithy.SchemaExtensions
+	eImageState_CREATING                                                                   smithy.SchemaExtensions
+	eImageState_IMPORTING                                                                  smithy.SchemaExtensions
+	eImageState_VALIDATING                                                                 smithy.SchemaExtensions
+	eImageStateChangeReason                                                                smithy.SchemaExtensions
+	eImageStateChangeReason_Code                                                           smithy.SchemaExtensions
+	eImageStateChangeReason_Message                                                        smithy.SchemaExtensions
+	eImageStateChangeReasonCode                                                            smithy.SchemaExtensions
+	eImageStateChangeReasonCode_INTERNAL_ERROR                                             smithy.SchemaExtensions
+	eImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE                                smithy.SchemaExtensions
+	eImageStateChangeReasonCode_IMAGE_COPY_FAILURE                                         smithy.SchemaExtensions
+	eImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE                                       smithy.SchemaExtensions
+	eImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE                                       smithy.SchemaExtensions
+	eImageType                                                                             smithy.SchemaExtensions
+	eImageType_CUSTOM                                                                      smithy.SchemaExtensions
+	eImageType_NATIVE                                                                      smithy.SchemaExtensions
+	eImageType_BYOL                                                                        smithy.SchemaExtensions
+	eIncompatibleImageException                                                            smithy.SchemaExtensions
+	eIncompatibleImageException_Message                                                    smithy.SchemaExtensions
+	eInstanceDrainStatus                                                                   smithy.SchemaExtensions
+	eInstanceDrainStatus_ACTIVE                                                            smithy.SchemaExtensions
+	eInstanceDrainStatus_DRAINING                                                          smithy.SchemaExtensions
+	eInstanceDrainStatus_NOT_APPLICABLE                                                    smithy.SchemaExtensions
+	e_InstanceType                                                                         smithy.SchemaExtensions
+	e_Integer                                                                              smithy.SchemaExtensions
+	eInvalidAccountStatusException                                                         smithy.SchemaExtensions
+	eInvalidAccountStatusException_Message                                                 smithy.SchemaExtensions
+	eInvalidParameterCombinationException                                                  smithy.SchemaExtensions
+	eInvalidParameterCombinationException_Message                                          smithy.SchemaExtensions
+	eInvalidRoleException                                                                  smithy.SchemaExtensions
+	eInvalidRoleException_Message                                                          smithy.SchemaExtensions
+	eLastReportGenerationExecutionError                                                    smithy.SchemaExtensions
+	eLastReportGenerationExecutionError_ErrorCode                                          smithy.SchemaExtensions
+	eLastReportGenerationExecutionError_ErrorMessage                                       smithy.SchemaExtensions
+	e_LastReportGenerationExecutionErrors                                                  smithy.SchemaExtensions
+	e_LastReportGenerationExecutionErrors_member                                           smithy.SchemaExtensions
+	eLatestAppstreamAgentVersion                                                           smithy.SchemaExtensions
+	eLatestAppstreamAgentVersion_TRUE                                                      smithy.SchemaExtensions
+	eLatestAppstreamAgentVersion_FALSE                                                     smithy.SchemaExtensions
+	e_LaunchParameters                                                                     smithy.SchemaExtensions
+	eLimitExceededException                                                                smithy.SchemaExtensions
+	eLimitExceededException_Message                                                        smithy.SchemaExtensions
+	e_Long                                                                                 smithy.SchemaExtensions
+	e_MaxResults                                                                           smithy.SchemaExtensions
+	eMessageAction                                                                         smithy.SchemaExtensions
+	eMessageAction_SUPPRESS                                                                smithy.SchemaExtensions
+	eMessageAction_RESEND                                                                  smithy.SchemaExtensions
+	e_Metadata                                                                             smithy.SchemaExtensions
+	e_Metadata_key                                                                         smithy.SchemaExtensions
+	e_Metadata_value                                                                       smithy.SchemaExtensions
+	e_Name                                                                                 smithy.SchemaExtensions
+	eNetworkAccessConfiguration                                                            smithy.SchemaExtensions
+	eNetworkAccessConfiguration_EniPrivateIpAddress                                        smithy.SchemaExtensions
+	eNetworkAccessConfiguration_EniIpv6Addresses                                           smithy.SchemaExtensions
+	eNetworkAccessConfiguration_EniId                                                      smithy.SchemaExtensions
+	e_NvidiaGridDriverVersion                                                              smithy.SchemaExtensions
+	eOperationNotPermittedException                                                        smithy.SchemaExtensions
+	eOperationNotPermittedException_Message                                                smithy.SchemaExtensions
+	e_OrganizationalUnitDistinguishedName                                                  smithy.SchemaExtensions
+	e_OrganizationalUnitDistinguishedNamesList                                             smithy.SchemaExtensions
+	e_OrganizationalUnitDistinguishedNamesList_member                                      smithy.SchemaExtensions
+	ePackagingType                                                                         smithy.SchemaExtensions
+	ePackagingType_CUSTOM                                                                  smithy.SchemaExtensions
+	ePackagingType_APPSTREAM2                                                              smithy.SchemaExtensions
+	ePermission                                                                            smithy.SchemaExtensions
+	ePermission_ENABLED                                                                    smithy.SchemaExtensions
+	ePermission_DISABLED                                                                   smithy.SchemaExtensions
+	e_PhotonAmiId                                                                          smithy.SchemaExtensions
+	e_Platforms                                                                            smithy.SchemaExtensions
+	e_Platforms_member                                                                     smithy.SchemaExtensions
+	ePlatformType                                                                          smithy.SchemaExtensions
+	ePlatformType_WINDOWS                                                                  smithy.SchemaExtensions
+	ePlatformType_WINDOWS_SERVER_2016                                                      smithy.SchemaExtensions
+	ePlatformType_WINDOWS_SERVER_2019                                                      smithy.SchemaExtensions
+	ePlatformType_WINDOWS_SERVER_2022                                                      smithy.SchemaExtensions
+	ePlatformType_WINDOWS_SERVER_2025                                                      smithy.SchemaExtensions
+	ePlatformType_WINDOWS_11                                                               smithy.SchemaExtensions
+	ePlatformType_AMAZON_LINUX2                                                            smithy.SchemaExtensions
+	ePlatformType_RHEL8                                                                    smithy.SchemaExtensions
+	ePlatformType_ROCKY_LINUX8                                                             smithy.SchemaExtensions
+	ePlatformType_UBUNTU_PRO_2404                                                          smithy.SchemaExtensions
+	ePreferredProtocol                                                                     smithy.SchemaExtensions
+	ePreferredProtocol_TCP                                                                 smithy.SchemaExtensions
+	ePreferredProtocol_UDP                                                                 smithy.SchemaExtensions
+	e_RedirectURL                                                                          smithy.SchemaExtensions
+	e_RegionName                                                                           smithy.SchemaExtensions
+	eRequestLimitExceededException                                                         smithy.SchemaExtensions
+	eRequestLimitExceededException_Message                                                 smithy.SchemaExtensions
+	eResourceAlreadyExistsException                                                        smithy.SchemaExtensions
+	eResourceAlreadyExistsException_Message                                                smithy.SchemaExtensions
+	eResourceError                                                                         smithy.SchemaExtensions
+	eResourceError_ErrorCode                                                               smithy.SchemaExtensions
+	eResourceError_ErrorMessage                                                            smithy.SchemaExtensions
+	eResourceError_ErrorTimestamp                                                          smithy.SchemaExtensions
+	e_ResourceErrors                                                                       smithy.SchemaExtensions
+	e_ResourceErrors_member                                                                smithy.SchemaExtensions
+	e_ResourceIdentifier                                                                   smithy.SchemaExtensions
+	eResourceInUseException                                                                smithy.SchemaExtensions
+	eResourceInUseException_Message                                                        smithy.SchemaExtensions
+	eResourceNotAvailableException                                                         smithy.SchemaExtensions
+	eResourceNotAvailableException_Message                                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                                             smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                                     smithy.SchemaExtensions
+	eRuntimeValidationConfig                                                               smithy.SchemaExtensions
+	eRuntimeValidationConfig_IntendedInstanceType                                          smithy.SchemaExtensions
+	e_S3Bucket                                                                             smithy.SchemaExtensions
+	e_S3BucketArn                                                                          smithy.SchemaExtensions
+	e_S3Key                                                                                smithy.SchemaExtensions
+	eS3Location                                                                            smithy.SchemaExtensions
+	eS3Location_S3Bucket                                                                   smithy.SchemaExtensions
+	eS3Location_S3Key                                                                      smithy.SchemaExtensions
+	eScreenImageFormat                                                                     smithy.SchemaExtensions
+	eScreenImageFormat_PNG                                                                 smithy.SchemaExtensions
+	eScreenImageFormat_JPEG                                                                smithy.SchemaExtensions
+	eScreenResolution                                                                      smithy.SchemaExtensions
+	eScreenResolution_W_1280xH_720                                                         smithy.SchemaExtensions
+	eScriptDetails                                                                         smithy.SchemaExtensions
+	eScriptDetails_ScriptS3Location                                                        smithy.SchemaExtensions
+	eScriptDetails_ExecutablePath                                                          smithy.SchemaExtensions
+	eScriptDetails_ExecutableParameters                                                    smithy.SchemaExtensions
+	eScriptDetails_TimeoutInSeconds                                                        smithy.SchemaExtensions
+	e_SecurityGroupIdList                                                                  smithy.SchemaExtensions
+	e_SecurityGroupIdList_member                                                           smithy.SchemaExtensions
+	eServiceAccountCredentials                                                             smithy.SchemaExtensions
+	eServiceAccountCredentials_AccountName                                                 smithy.SchemaExtensions
+	eServiceAccountCredentials_AccountPassword                                             smithy.SchemaExtensions
+	eSession                                                                               smithy.SchemaExtensions
+	eSession_Id                                                                            smithy.SchemaExtensions
+	eSession_UserId                                                                        smithy.SchemaExtensions
+	eSession_StackName                                                                     smithy.SchemaExtensions
+	eSession_FleetName                                                                     smithy.SchemaExtensions
+	eSession_State                                                                         smithy.SchemaExtensions
+	eSession_ConnectionState                                                               smithy.SchemaExtensions
+	eSession_StartTime                                                                     smithy.SchemaExtensions
+	eSession_MaxExpirationTime                                                             smithy.SchemaExtensions
+	eSession_AuthenticationType                                                            smithy.SchemaExtensions
+	eSession_NetworkAccessConfiguration                                                    smithy.SchemaExtensions
+	eSession_InstanceId                                                                    smithy.SchemaExtensions
+	eSession_InstanceDrainStatus                                                           smithy.SchemaExtensions
+	eSessionConnectionState                                                                smithy.SchemaExtensions
+	eSessionConnectionState_CONNECTED                                                      smithy.SchemaExtensions
+	eSessionConnectionState_NOT_CONNECTED                                                  smithy.SchemaExtensions
+	e_SessionList                                                                          smithy.SchemaExtensions
+	e_SessionList_member                                                                   smithy.SchemaExtensions
+	eSessionState                                                                          smithy.SchemaExtensions
+	eSessionState_ACTIVE                                                                   smithy.SchemaExtensions
+	eSessionState_PENDING                                                                  smithy.SchemaExtensions
+	eSessionState_EXPIRED                                                                  smithy.SchemaExtensions
+	e_SettingsGroup                                                                        smithy.SchemaExtensions
+	eSharedImagePermissions                                                                smithy.SchemaExtensions
+	eSharedImagePermissions_sharedAccountId                                                smithy.SchemaExtensions
+	eSharedImagePermissions_imagePermissions                                               smithy.SchemaExtensions
+	e_SharedImagePermissionsList                                                           smithy.SchemaExtensions
+	e_SharedImagePermissionsList_member                                                    smithy.SchemaExtensions
+	eSoftwareAssociations                                                                  smithy.SchemaExtensions
+	eSoftwareAssociations_SoftwareName                                                     smithy.SchemaExtensions
+	eSoftwareAssociations_Status                                                           smithy.SchemaExtensions
+	eSoftwareAssociations_DeploymentError                                                  smithy.SchemaExtensions
+	e_SoftwareAssociationsList                                                             smithy.SchemaExtensions
+	e_SoftwareAssociationsList_member                                                      smithy.SchemaExtensions
+	eSoftwareDeploymentStatus                                                              smithy.SchemaExtensions
+	eSoftwareDeploymentStatus_STAGED_FOR_INSTALLATION                                      smithy.SchemaExtensions
+	eSoftwareDeploymentStatus_PENDING_INSTALLATION                                         smithy.SchemaExtensions
+	eSoftwareDeploymentStatus_INSTALLED                                                    smithy.SchemaExtensions
+	eSoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION                                    smithy.SchemaExtensions
+	eSoftwareDeploymentStatus_PENDING_UNINSTALLATION                                       smithy.SchemaExtensions
+	eSoftwareDeploymentStatus_FAILED_TO_INSTALL                                            smithy.SchemaExtensions
+	eSoftwareDeploymentStatus_FAILED_TO_UNINSTALL                                          smithy.SchemaExtensions
+	eStack                                                                                 smithy.SchemaExtensions
+	eStack_Arn                                                                             smithy.SchemaExtensions
+	eStack_Name                                                                            smithy.SchemaExtensions
+	eStack_Description                                                                     smithy.SchemaExtensions
+	eStack_DisplayName                                                                     smithy.SchemaExtensions
+	eStack_CreatedTime                                                                     smithy.SchemaExtensions
+	eStack_StorageConnectors                                                               smithy.SchemaExtensions
+	eStack_RedirectURL                                                                     smithy.SchemaExtensions
+	eStack_FeedbackURL                                                                     smithy.SchemaExtensions
+	eStack_StackErrors                                                                     smithy.SchemaExtensions
+	eStack_UserSettings                                                                    smithy.SchemaExtensions
+	eStack_ApplicationSettings                                                             smithy.SchemaExtensions
+	eStack_AccessEndpoints                                                                 smithy.SchemaExtensions
+	eStack_EmbedHostDomains                                                                smithy.SchemaExtensions
+	eStack_StreamingExperienceSettings                                                     smithy.SchemaExtensions
+	eStack_ContentRedirection                                                              smithy.SchemaExtensions
+	eStack_AgentAccessConfig                                                               smithy.SchemaExtensions
+	eStack_StorageConnectorAuthentication                                                  smithy.SchemaExtensions
+	eStackAttribute                                                                        smithy.SchemaExtensions
+	eStackAttribute_STORAGE_CONNECTORS                                                     smithy.SchemaExtensions
+	eStackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS                                          smithy.SchemaExtensions
+	eStackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE                                         smithy.SchemaExtensions
+	eStackAttribute_STORAGE_CONNECTOR_ONE_DRIVE                                            smithy.SchemaExtensions
+	eStackAttribute_REDIRECT_URL                                                           smithy.SchemaExtensions
+	eStackAttribute_FEEDBACK_URL                                                           smithy.SchemaExtensions
+	eStackAttribute_THEME_NAME                                                             smithy.SchemaExtensions
+	eStackAttribute_USER_SETTINGS                                                          smithy.SchemaExtensions
+	eStackAttribute_EMBED_HOST_DOMAINS                                                     smithy.SchemaExtensions
+	eStackAttribute_IAM_ROLE_ARN                                                           smithy.SchemaExtensions
+	eStackAttribute_ACCESS_ENDPOINTS                                                       smithy.SchemaExtensions
+	eStackAttribute_STREAMING_EXPERIENCE_SETTINGS                                          smithy.SchemaExtensions
+	eStackAttribute_CONTENT_REDIRECTION                                                    smithy.SchemaExtensions
+	eStackAttribute_AGENT_ACCESS_CONFIG                                                    smithy.SchemaExtensions
+	eStackAttribute_STORAGE_CONNECTOR_AUTHENTICATION                                       smithy.SchemaExtensions
+	e_StackAttributes                                                                      smithy.SchemaExtensions
+	e_StackAttributes_member                                                               smithy.SchemaExtensions
+	eStackError                                                                            smithy.SchemaExtensions
+	eStackError_ErrorCode                                                                  smithy.SchemaExtensions
+	eStackError_ErrorMessage                                                               smithy.SchemaExtensions
+	eStackErrorCode                                                                        smithy.SchemaExtensions
+	eStackErrorCode_STORAGE_CONNECTOR_ERROR                                                smithy.SchemaExtensions
+	eStackErrorCode_INTERNAL_SERVICE_ERROR                                                 smithy.SchemaExtensions
+	e_StackErrors                                                                          smithy.SchemaExtensions
+	e_StackErrors_member                                                                   smithy.SchemaExtensions
+	e_StackList                                                                            smithy.SchemaExtensions
+	e_StackList_member                                                                     smithy.SchemaExtensions
+	eStorageConnector                                                                      smithy.SchemaExtensions
+	eStorageConnector_ConnectorType                                                        smithy.SchemaExtensions
+	eStorageConnector_ResourceIdentifier                                                   smithy.SchemaExtensions
+	eStorageConnector_Domains                                                              smithy.SchemaExtensions
+	eStorageConnector_DomainsRequireAdminConsent                                           smithy.SchemaExtensions
+	eStorageConnectorAuthentication                                                        smithy.SchemaExtensions
+	eStorageConnectorAuthentication_FORCE_REAUTHENTICATION                                 smithy.SchemaExtensions
+	eStorageConnectorAuthentication_REUSE_CREDENTIALS                                      smithy.SchemaExtensions
+	e_StorageConnectorList                                                                 smithy.SchemaExtensions
+	e_StorageConnectorList_member                                                          smithy.SchemaExtensions
+	eStorageConnectorType                                                                  smithy.SchemaExtensions
+	eStorageConnectorType_HOMEFOLDERS                                                      smithy.SchemaExtensions
+	eStorageConnectorType_GOOGLE_DRIVE                                                     smithy.SchemaExtensions
+	eStorageConnectorType_ONE_DRIVE                                                        smithy.SchemaExtensions
+	eStreamingExperienceSettings                                                           smithy.SchemaExtensions
+	eStreamingExperienceSettings_PreferredProtocol                                         smithy.SchemaExtensions
+	e_StreamingUrlUserId                                                                   smithy.SchemaExtensions
+	eStreamView                                                                            smithy.SchemaExtensions
+	eStreamView_APP                                                                        smithy.SchemaExtensions
+	eStreamView_DESKTOP                                                                    smithy.SchemaExtensions
+	e_String                                                                               smithy.SchemaExtensions
+	e_StringList                                                                           smithy.SchemaExtensions
+	e_StringList_member                                                                    smithy.SchemaExtensions
+	e_SubnetIdList                                                                         smithy.SchemaExtensions
+	e_SubnetIdList_member                                                                  smithy.SchemaExtensions
+	e_TagKey                                                                               smithy.SchemaExtensions
+	e_TagKeyList                                                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                                                    smithy.SchemaExtensions
+	e_Tags                                                                                 smithy.SchemaExtensions
+	e_Tags_key                                                                             smithy.SchemaExtensions
+	e_Tags_value                                                                           smithy.SchemaExtensions
+	e_TagValue                                                                             smithy.SchemaExtensions
+	eTheme                                                                                 smithy.SchemaExtensions
+	eTheme_StackName                                                                       smithy.SchemaExtensions
+	eTheme_State                                                                           smithy.SchemaExtensions
+	eTheme_ThemeTitleText                                                                  smithy.SchemaExtensions
+	eTheme_ThemeStyling                                                                    smithy.SchemaExtensions
+	eTheme_ThemeFooterLinks                                                                smithy.SchemaExtensions
+	eTheme_ThemeOrganizationLogoURL                                                        smithy.SchemaExtensions
+	eTheme_ThemeFaviconURL                                                                 smithy.SchemaExtensions
+	eTheme_CreatedTime                                                                     smithy.SchemaExtensions
+	eThemeAttribute                                                                        smithy.SchemaExtensions
+	eThemeAttribute_FOOTER_LINKS                                                           smithy.SchemaExtensions
+	e_ThemeAttributes                                                                      smithy.SchemaExtensions
+	e_ThemeAttributes_member                                                               smithy.SchemaExtensions
+	eThemeFooterLink                                                                       smithy.SchemaExtensions
+	eThemeFooterLink_DisplayName                                                           smithy.SchemaExtensions
+	eThemeFooterLink_FooterLinkURL                                                         smithy.SchemaExtensions
+	e_ThemeFooterLinkDisplayName                                                           smithy.SchemaExtensions
+	e_ThemeFooterLinks                                                                     smithy.SchemaExtensions
+	e_ThemeFooterLinks_member                                                              smithy.SchemaExtensions
+	e_ThemeFooterLinkURL                                                                   smithy.SchemaExtensions
+	eThemeState                                                                            smithy.SchemaExtensions
+	eThemeState_ENABLED                                                                    smithy.SchemaExtensions
+	eThemeState_DISABLED                                                                   smithy.SchemaExtensions
+	eThemeStyling                                                                          smithy.SchemaExtensions
+	eThemeStyling_LIGHT_BLUE                                                               smithy.SchemaExtensions
+	eThemeStyling_BLUE                                                                     smithy.SchemaExtensions
+	eThemeStyling_PINK                                                                     smithy.SchemaExtensions
+	eThemeStyling_RED                                                                      smithy.SchemaExtensions
+	e_ThemeTitleText                                                                       smithy.SchemaExtensions
+	e_Timestamp                                                                            smithy.SchemaExtensions
+	e_UrlPattern                                                                           smithy.SchemaExtensions
+	e_UrlPatternList                                                                       smithy.SchemaExtensions
+	e_UrlPatternList_member                                                                smithy.SchemaExtensions
+	eUrlRedirectionConfig                                                                  smithy.SchemaExtensions
+	eUrlRedirectionConfig_Enabled                                                          smithy.SchemaExtensions
+	eUrlRedirectionConfig_AllowedUrls                                                      smithy.SchemaExtensions
+	eUrlRedirectionConfig_DeniedUrls                                                       smithy.SchemaExtensions
+	eUsageReportExecutionErrorCode                                                         smithy.SchemaExtensions
+	eUsageReportExecutionErrorCode_RESOURCE_NOT_FOUND                                      smithy.SchemaExtensions
+	eUsageReportExecutionErrorCode_ACCESS_DENIED                                           smithy.SchemaExtensions
+	eUsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR                                  smithy.SchemaExtensions
+	eUsageReportSchedule                                                                   smithy.SchemaExtensions
+	eUsageReportSchedule_DAILY                                                             smithy.SchemaExtensions
+	eUsageReportSubscription                                                               smithy.SchemaExtensions
+	eUsageReportSubscription_S3BucketName                                                  smithy.SchemaExtensions
+	eUsageReportSubscription_Schedule                                                      smithy.SchemaExtensions
+	eUsageReportSubscription_LastGeneratedReportDate                                       smithy.SchemaExtensions
+	eUsageReportSubscription_SubscriptionErrors                                            smithy.SchemaExtensions
+	e_UsageReportSubscriptionList                                                          smithy.SchemaExtensions
+	e_UsageReportSubscriptionList_member                                                   smithy.SchemaExtensions
+	e_UsbDeviceFilterString                                                                smithy.SchemaExtensions
+	e_UsbDeviceFilterStrings                                                               smithy.SchemaExtensions
+	e_UsbDeviceFilterStrings_member                                                        smithy.SchemaExtensions
+	eUser                                                                                  smithy.SchemaExtensions
+	eUser_Arn                                                                              smithy.SchemaExtensions
+	eUser_UserName                                                                         smithy.SchemaExtensions
+	eUser_Enabled                                                                          smithy.SchemaExtensions
+	eUser_Status                                                                           smithy.SchemaExtensions
+	eUser_FirstName                                                                        smithy.SchemaExtensions
+	eUser_LastName                                                                         smithy.SchemaExtensions
+	eUser_CreatedTime                                                                      smithy.SchemaExtensions
+	eUser_AuthenticationType                                                               smithy.SchemaExtensions
+	e_UserAttributeValue                                                                   smithy.SchemaExtensions
+	eUserControlMode                                                                       smithy.SchemaExtensions
+	eUserControlMode_VIEW_ONLY                                                             smithy.SchemaExtensions
+	eUserControlMode_VIEW_STOP                                                             smithy.SchemaExtensions
+	eUserControlMode_DISABLED                                                              smithy.SchemaExtensions
+	e_UserId                                                                               smithy.SchemaExtensions
+	e_UserList                                                                             smithy.SchemaExtensions
+	e_UserList_member                                                                      smithy.SchemaExtensions
+	e_Username                                                                             smithy.SchemaExtensions
+	eUserSetting                                                                           smithy.SchemaExtensions
+	eUserSetting_Action                                                                    smithy.SchemaExtensions
+	eUserSetting_Permission                                                                smithy.SchemaExtensions
+	eUserSetting_MaximumLength                                                             smithy.SchemaExtensions
+	e_UserSettingList                                                                      smithy.SchemaExtensions
+	e_UserSettingList_member                                                               smithy.SchemaExtensions
+	eUserStackAssociation                                                                  smithy.SchemaExtensions
+	eUserStackAssociation_StackName                                                        smithy.SchemaExtensions
+	eUserStackAssociation_UserName                                                         smithy.SchemaExtensions
+	eUserStackAssociation_AuthenticationType                                               smithy.SchemaExtensions
+	eUserStackAssociation_SendEmailNotification                                            smithy.SchemaExtensions
+	eUserStackAssociationError                                                             smithy.SchemaExtensions
+	eUserStackAssociationError_UserStackAssociation                                        smithy.SchemaExtensions
+	eUserStackAssociationError_ErrorCode                                                   smithy.SchemaExtensions
+	eUserStackAssociationError_ErrorMessage                                                smithy.SchemaExtensions
+	eUserStackAssociationErrorCode                                                         smithy.SchemaExtensions
+	eUserStackAssociationErrorCode_STACK_NOT_FOUND                                         smithy.SchemaExtensions
+	eUserStackAssociationErrorCode_USER_NAME_NOT_FOUND                                     smithy.SchemaExtensions
+	eUserStackAssociationErrorCode_DIRECTORY_NOT_FOUND                                     smithy.SchemaExtensions
+	eUserStackAssociationErrorCode_INTERNAL_ERROR                                          smithy.SchemaExtensions
+	e_UserStackAssociationErrorList                                                        smithy.SchemaExtensions
+	e_UserStackAssociationErrorList_member                                                 smithy.SchemaExtensions
+	e_UserStackAssociationList                                                             smithy.SchemaExtensions
+	e_UserStackAssociationList_member                                                      smithy.SchemaExtensions
+	e_UUID                                                                                 smithy.SchemaExtensions
+	eVisibilityType                                                                        smithy.SchemaExtensions
+	eVisibilityType_PUBLIC                                                                 smithy.SchemaExtensions
+	eVisibilityType_PRIVATE                                                                smithy.SchemaExtensions
+	eVisibilityType_SHARED                                                                 smithy.SchemaExtensions
+	eVolumeConfig                                                                          smithy.SchemaExtensions
+	eVolumeConfig_VolumeSizeInGb                                                           smithy.SchemaExtensions
+	eVpcConfig                                                                             smithy.SchemaExtensions
+	eVpcConfig_SubnetIds                                                                   smithy.SchemaExtensions
+	eVpcConfig_SecurityGroupIds                                                            smithy.SchemaExtensions
+	e_WorkspaceImageId                                                                     smithy.SchemaExtensions
+	eAssociateAppBlockBuilderAppBlockRequest                                               smithy.SchemaExtensions
+	eAssociateAppBlockBuilderAppBlockRequest_AppBlockArn                                   smithy.SchemaExtensions
+	eAssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName                           smithy.SchemaExtensions
+	eAssociateAppBlockBuilderAppBlockResult                                                smithy.SchemaExtensions
+	eAssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation             smithy.SchemaExtensions
+	eAssociateApplicationFleetRequest                                                      smithy.SchemaExtensions
+	eAssociateApplicationFleetRequest_FleetName                                            smithy.SchemaExtensions
+	eAssociateApplicationFleetRequest_ApplicationArn                                       smithy.SchemaExtensions
+	eAssociateApplicationFleetResult                                                       smithy.SchemaExtensions
+	eAssociateApplicationFleetResult_ApplicationFleetAssociation                           smithy.SchemaExtensions
+	eAssociateApplicationToEntitlementRequest                                              smithy.SchemaExtensions
+	eAssociateApplicationToEntitlementRequest_StackName                                    smithy.SchemaExtensions
+	eAssociateApplicationToEntitlementRequest_EntitlementName                              smithy.SchemaExtensions
+	eAssociateApplicationToEntitlementRequest_ApplicationIdentifier                        smithy.SchemaExtensions
+	eAssociateApplicationToEntitlementResult                                               smithy.SchemaExtensions
+	eAssociateFleetRequest                                                                 smithy.SchemaExtensions
+	eAssociateFleetRequest_FleetName                                                       smithy.SchemaExtensions
+	eAssociateFleetRequest_StackName                                                       smithy.SchemaExtensions
+	eAssociateFleetResult                                                                  smithy.SchemaExtensions
+	eAssociateSoftwareToImageBuilderRequest                                                smithy.SchemaExtensions
+	eAssociateSoftwareToImageBuilderRequest_ImageBuilderName                               smithy.SchemaExtensions
+	eAssociateSoftwareToImageBuilderRequest_SoftwareNames                                  smithy.SchemaExtensions
+	eAssociateSoftwareToImageBuilderResult                                                 smithy.SchemaExtensions
+	eBatchAssociateUserStackRequest                                                        smithy.SchemaExtensions
+	eBatchAssociateUserStackRequest_UserStackAssociations                                  smithy.SchemaExtensions
+	eBatchAssociateUserStackResult                                                         smithy.SchemaExtensions
+	eBatchAssociateUserStackResult_errors                                                  smithy.SchemaExtensions
+	eBatchDisassociateUserStackRequest                                                     smithy.SchemaExtensions
+	eBatchDisassociateUserStackRequest_UserStackAssociations                               smithy.SchemaExtensions
+	eBatchDisassociateUserStackResult                                                      smithy.SchemaExtensions
+	eBatchDisassociateUserStackResult_errors                                               smithy.SchemaExtensions
+	eCopyImageRequest                                                                      smithy.SchemaExtensions
+	eCopyImageRequest_SourceImageName                                                      smithy.SchemaExtensions
+	eCopyImageRequest_DestinationImageName                                                 smithy.SchemaExtensions
+	eCopyImageRequest_DestinationRegion                                                    smithy.SchemaExtensions
+	eCopyImageRequest_DestinationImageDescription                                          smithy.SchemaExtensions
+	eCopyImageResponse                                                                     smithy.SchemaExtensions
+	eCopyImageResponse_DestinationImageName                                                smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest                                                          smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_Name                                                     smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_Description                                              smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_DisplayName                                              smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_Tags                                                     smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_Platform                                                 smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_InstanceType                                             smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_VpcConfig                                                smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_EnableDefaultInternetAccess                              smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_IamRoleArn                                               smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_AccessEndpoints                                          smithy.SchemaExtensions
+	eCreateAppBlockBuilderRequest_DisableIMDSV1                                            smithy.SchemaExtensions
+	eCreateAppBlockBuilderResult                                                           smithy.SchemaExtensions
+	eCreateAppBlockBuilderResult_AppBlockBuilder                                           smithy.SchemaExtensions
+	eCreateAppBlockBuilderStreamingURLRequest                                              smithy.SchemaExtensions
+	eCreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName                          smithy.SchemaExtensions
+	eCreateAppBlockBuilderStreamingURLRequest_Validity                                     smithy.SchemaExtensions
+	eCreateAppBlockBuilderStreamingURLResult                                               smithy.SchemaExtensions
+	eCreateAppBlockBuilderStreamingURLResult_StreamingURL                                  smithy.SchemaExtensions
+	eCreateAppBlockBuilderStreamingURLResult_Expires                                       smithy.SchemaExtensions
+	eCreateAppBlockRequest                                                                 smithy.SchemaExtensions
+	eCreateAppBlockRequest_Name                                                            smithy.SchemaExtensions
+	eCreateAppBlockRequest_Description                                                     smithy.SchemaExtensions
+	eCreateAppBlockRequest_DisplayName                                                     smithy.SchemaExtensions
+	eCreateAppBlockRequest_SourceS3Location                                                smithy.SchemaExtensions
+	eCreateAppBlockRequest_SetupScriptDetails                                              smithy.SchemaExtensions
+	eCreateAppBlockRequest_Tags                                                            smithy.SchemaExtensions
+	eCreateAppBlockRequest_PostSetupScriptDetails                                          smithy.SchemaExtensions
+	eCreateAppBlockRequest_PackagingType                                                   smithy.SchemaExtensions
+	eCreateAppBlockResult                                                                  smithy.SchemaExtensions
+	eCreateAppBlockResult_AppBlock                                                         smithy.SchemaExtensions
+	eCreateApplicationRequest                                                              smithy.SchemaExtensions
+	eCreateApplicationRequest_Name                                                         smithy.SchemaExtensions
+	eCreateApplicationRequest_DisplayName                                                  smithy.SchemaExtensions
+	eCreateApplicationRequest_Description                                                  smithy.SchemaExtensions
+	eCreateApplicationRequest_IconS3Location                                               smithy.SchemaExtensions
+	eCreateApplicationRequest_LaunchPath                                                   smithy.SchemaExtensions
+	eCreateApplicationRequest_WorkingDirectory                                             smithy.SchemaExtensions
+	eCreateApplicationRequest_LaunchParameters                                             smithy.SchemaExtensions
+	eCreateApplicationRequest_Platforms                                                    smithy.SchemaExtensions
+	eCreateApplicationRequest_InstanceFamilies                                             smithy.SchemaExtensions
+	eCreateApplicationRequest_AppBlockArn                                                  smithy.SchemaExtensions
+	eCreateApplicationRequest_Tags                                                         smithy.SchemaExtensions
+	eCreateApplicationResult                                                               smithy.SchemaExtensions
+	eCreateApplicationResult_Application                                                   smithy.SchemaExtensions
+	eCreateDirectoryConfigRequest                                                          smithy.SchemaExtensions
+	eCreateDirectoryConfigRequest_DirectoryName                                            smithy.SchemaExtensions
+	eCreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames                     smithy.SchemaExtensions
+	eCreateDirectoryConfigRequest_ServiceAccountCredentials                                smithy.SchemaExtensions
+	eCreateDirectoryConfigRequest_CertificateBasedAuthProperties                           smithy.SchemaExtensions
+	eCreateDirectoryConfigResult                                                           smithy.SchemaExtensions
+	eCreateDirectoryConfigResult_DirectoryConfig                                           smithy.SchemaExtensions
+	eCreateEntitlementRequest                                                              smithy.SchemaExtensions
+	eCreateEntitlementRequest_Name                                                         smithy.SchemaExtensions
+	eCreateEntitlementRequest_StackName                                                    smithy.SchemaExtensions
+	eCreateEntitlementRequest_Description                                                  smithy.SchemaExtensions
+	eCreateEntitlementRequest_AppVisibility                                                smithy.SchemaExtensions
+	eCreateEntitlementRequest_Attributes                                                   smithy.SchemaExtensions
+	eCreateEntitlementResult                                                               smithy.SchemaExtensions
+	eCreateEntitlementResult_Entitlement                                                   smithy.SchemaExtensions
+	eCreateExportImageTaskRequest                                                          smithy.SchemaExtensions
+	eCreateExportImageTaskRequest_ImageName                                                smithy.SchemaExtensions
+	eCreateExportImageTaskRequest_AmiName                                                  smithy.SchemaExtensions
+	eCreateExportImageTaskRequest_IamRoleArn                                               smithy.SchemaExtensions
+	eCreateExportImageTaskRequest_TagSpecifications                                        smithy.SchemaExtensions
+	eCreateExportImageTaskRequest_AmiDescription                                           smithy.SchemaExtensions
+	eCreateExportImageTaskResult                                                           smithy.SchemaExtensions
+	eCreateExportImageTaskResult_ExportImageTask                                           smithy.SchemaExtensions
+	eCreateFleetRequest                                                                    smithy.SchemaExtensions
+	eCreateFleetRequest_Name                                                               smithy.SchemaExtensions
+	eCreateFleetRequest_ImageName                                                          smithy.SchemaExtensions
+	eCreateFleetRequest_ImageArn                                                           smithy.SchemaExtensions
+	eCreateFleetRequest_InstanceType                                                       smithy.SchemaExtensions
+	eCreateFleetRequest_FleetType                                                          smithy.SchemaExtensions
+	eCreateFleetRequest_ComputeCapacity                                                    smithy.SchemaExtensions
+	eCreateFleetRequest_VpcConfig                                                          smithy.SchemaExtensions
+	eCreateFleetRequest_MaxUserDurationInSeconds                                           smithy.SchemaExtensions
+	eCreateFleetRequest_DisconnectTimeoutInSeconds                                         smithy.SchemaExtensions
+	eCreateFleetRequest_Description                                                        smithy.SchemaExtensions
+	eCreateFleetRequest_DisplayName                                                        smithy.SchemaExtensions
+	eCreateFleetRequest_EnableDefaultInternetAccess                                        smithy.SchemaExtensions
+	eCreateFleetRequest_DomainJoinInfo                                                     smithy.SchemaExtensions
+	eCreateFleetRequest_Tags                                                               smithy.SchemaExtensions
+	eCreateFleetRequest_IdleDisconnectTimeoutInSeconds                                     smithy.SchemaExtensions
+	eCreateFleetRequest_IamRoleArn                                                         smithy.SchemaExtensions
+	eCreateFleetRequest_StreamView                                                         smithy.SchemaExtensions
+	eCreateFleetRequest_Platform                                                           smithy.SchemaExtensions
+	eCreateFleetRequest_MaxConcurrentSessions                                              smithy.SchemaExtensions
+	eCreateFleetRequest_UsbDeviceFilterStrings                                             smithy.SchemaExtensions
+	eCreateFleetRequest_SessionScriptS3Location                                            smithy.SchemaExtensions
+	eCreateFleetRequest_MaxSessionsPerInstance                                             smithy.SchemaExtensions
+	eCreateFleetRequest_RootVolumeConfig                                                   smithy.SchemaExtensions
+	eCreateFleetRequest_DisableIMDSV1                                                      smithy.SchemaExtensions
+	eCreateFleetResult                                                                     smithy.SchemaExtensions
+	eCreateFleetResult_Fleet                                                               smithy.SchemaExtensions
+	eCreateImageBuilderRequest                                                             smithy.SchemaExtensions
+	eCreateImageBuilderRequest_Name                                                        smithy.SchemaExtensions
+	eCreateImageBuilderRequest_ImageName                                                   smithy.SchemaExtensions
+	eCreateImageBuilderRequest_ImageArn                                                    smithy.SchemaExtensions
+	eCreateImageBuilderRequest_InstanceType                                                smithy.SchemaExtensions
+	eCreateImageBuilderRequest_Description                                                 smithy.SchemaExtensions
+	eCreateImageBuilderRequest_DisplayName                                                 smithy.SchemaExtensions
+	eCreateImageBuilderRequest_VpcConfig                                                   smithy.SchemaExtensions
+	eCreateImageBuilderRequest_IamRoleArn                                                  smithy.SchemaExtensions
+	eCreateImageBuilderRequest_EnableDefaultInternetAccess                                 smithy.SchemaExtensions
+	eCreateImageBuilderRequest_DomainJoinInfo                                              smithy.SchemaExtensions
+	eCreateImageBuilderRequest_AppstreamAgentVersion                                       smithy.SchemaExtensions
+	eCreateImageBuilderRequest_Tags                                                        smithy.SchemaExtensions
+	eCreateImageBuilderRequest_AccessEndpoints                                             smithy.SchemaExtensions
+	eCreateImageBuilderRequest_RootVolumeConfig                                            smithy.SchemaExtensions
+	eCreateImageBuilderRequest_SoftwaresToInstall                                          smithy.SchemaExtensions
+	eCreateImageBuilderRequest_SoftwaresToUninstall                                        smithy.SchemaExtensions
+	eCreateImageBuilderRequest_DisableIMDSV1                                               smithy.SchemaExtensions
+	eCreateImageBuilderResult                                                              smithy.SchemaExtensions
+	eCreateImageBuilderResult_ImageBuilder                                                 smithy.SchemaExtensions
+	eCreateImageBuilderStreamingURLRequest                                                 smithy.SchemaExtensions
+	eCreateImageBuilderStreamingURLRequest_Name                                            smithy.SchemaExtensions
+	eCreateImageBuilderStreamingURLRequest_Validity                                        smithy.SchemaExtensions
+	eCreateImageBuilderStreamingURLResult                                                  smithy.SchemaExtensions
+	eCreateImageBuilderStreamingURLResult_StreamingURL                                     smithy.SchemaExtensions
+	eCreateImageBuilderStreamingURLResult_Expires                                          smithy.SchemaExtensions
+	eCreateImportedImageRequest                                                            smithy.SchemaExtensions
+	eCreateImportedImageRequest_Name                                                       smithy.SchemaExtensions
+	eCreateImportedImageRequest_SourceAmiId                                                smithy.SchemaExtensions
+	eCreateImportedImageRequest_WorkspaceImageId                                           smithy.SchemaExtensions
+	eCreateImportedImageRequest_IamRoleArn                                                 smithy.SchemaExtensions
+	eCreateImportedImageRequest_Description                                                smithy.SchemaExtensions
+	eCreateImportedImageRequest_DisplayName                                                smithy.SchemaExtensions
+	eCreateImportedImageRequest_Tags                                                       smithy.SchemaExtensions
+	eCreateImportedImageRequest_RuntimeValidationConfig                                    smithy.SchemaExtensions
+	eCreateImportedImageRequest_AgentSoftwareVersion                                       smithy.SchemaExtensions
+	eCreateImportedImageRequest_AppCatalogConfig                                           smithy.SchemaExtensions
+	eCreateImportedImageRequest_DryRun                                                     smithy.SchemaExtensions
+	eCreateImportedImageResult                                                             smithy.SchemaExtensions
+	eCreateImportedImageResult_Image                                                       smithy.SchemaExtensions
+	eCreateStackRequest                                                                    smithy.SchemaExtensions
+	eCreateStackRequest_Name                                                               smithy.SchemaExtensions
+	eCreateStackRequest_Description                                                        smithy.SchemaExtensions
+	eCreateStackRequest_DisplayName                                                        smithy.SchemaExtensions
+	eCreateStackRequest_StorageConnectors                                                  smithy.SchemaExtensions
+	eCreateStackRequest_RedirectURL                                                        smithy.SchemaExtensions
+	eCreateStackRequest_FeedbackURL                                                        smithy.SchemaExtensions
+	eCreateStackRequest_UserSettings                                                       smithy.SchemaExtensions
+	eCreateStackRequest_ApplicationSettings                                                smithy.SchemaExtensions
+	eCreateStackRequest_Tags                                                               smithy.SchemaExtensions
+	eCreateStackRequest_AccessEndpoints                                                    smithy.SchemaExtensions
+	eCreateStackRequest_EmbedHostDomains                                                   smithy.SchemaExtensions
+	eCreateStackRequest_StreamingExperienceSettings                                        smithy.SchemaExtensions
+	eCreateStackRequest_ContentRedirection                                                 smithy.SchemaExtensions
+	eCreateStackRequest_AgentAccessConfig                                                  smithy.SchemaExtensions
+	eCreateStackRequest_StorageConnectorAuthentication                                     smithy.SchemaExtensions
+	eCreateStackResult                                                                     smithy.SchemaExtensions
+	eCreateStackResult_Stack                                                               smithy.SchemaExtensions
+	eCreateStreamingURLRequest                                                             smithy.SchemaExtensions
+	eCreateStreamingURLRequest_StackName                                                   smithy.SchemaExtensions
+	eCreateStreamingURLRequest_FleetName                                                   smithy.SchemaExtensions
+	eCreateStreamingURLRequest_UserId                                                      smithy.SchemaExtensions
+	eCreateStreamingURLRequest_ApplicationId                                               smithy.SchemaExtensions
+	eCreateStreamingURLRequest_Validity                                                    smithy.SchemaExtensions
+	eCreateStreamingURLRequest_SessionContext                                              smithy.SchemaExtensions
+	eCreateStreamingURLResult                                                              smithy.SchemaExtensions
+	eCreateStreamingURLResult_StreamingURL                                                 smithy.SchemaExtensions
+	eCreateStreamingURLResult_Expires                                                      smithy.SchemaExtensions
+	eCreateThemeForStackRequest                                                            smithy.SchemaExtensions
+	eCreateThemeForStackRequest_StackName                                                  smithy.SchemaExtensions
+	eCreateThemeForStackRequest_FooterLinks                                                smithy.SchemaExtensions
+	eCreateThemeForStackRequest_TitleText                                                  smithy.SchemaExtensions
+	eCreateThemeForStackRequest_ThemeStyling                                               smithy.SchemaExtensions
+	eCreateThemeForStackRequest_OrganizationLogoS3Location                                 smithy.SchemaExtensions
+	eCreateThemeForStackRequest_FaviconS3Location                                          smithy.SchemaExtensions
+	eCreateThemeForStackResult                                                             smithy.SchemaExtensions
+	eCreateThemeForStackResult_Theme                                                       smithy.SchemaExtensions
+	eCreateUpdatedImageRequest                                                             smithy.SchemaExtensions
+	eCreateUpdatedImageRequest_existingImageName                                           smithy.SchemaExtensions
+	eCreateUpdatedImageRequest_newImageName                                                smithy.SchemaExtensions
+	eCreateUpdatedImageRequest_newImageDescription                                         smithy.SchemaExtensions
+	eCreateUpdatedImageRequest_newImageDisplayName                                         smithy.SchemaExtensions
+	eCreateUpdatedImageRequest_newImageTags                                                smithy.SchemaExtensions
+	eCreateUpdatedImageRequest_dryRun                                                      smithy.SchemaExtensions
+	eCreateUpdatedImageResult                                                              smithy.SchemaExtensions
+	eCreateUpdatedImageResult_image                                                        smithy.SchemaExtensions
+	eCreateUpdatedImageResult_canUpdateImage                                               smithy.SchemaExtensions
+	eCreateUsageReportSubscriptionRequest                                                  smithy.SchemaExtensions
+	eCreateUsageReportSubscriptionResult                                                   smithy.SchemaExtensions
+	eCreateUsageReportSubscriptionResult_S3BucketName                                      smithy.SchemaExtensions
+	eCreateUsageReportSubscriptionResult_Schedule                                          smithy.SchemaExtensions
+	eCreateUserRequest                                                                     smithy.SchemaExtensions
+	eCreateUserRequest_UserName                                                            smithy.SchemaExtensions
+	eCreateUserRequest_MessageAction                                                       smithy.SchemaExtensions
+	eCreateUserRequest_FirstName                                                           smithy.SchemaExtensions
+	eCreateUserRequest_LastName                                                            smithy.SchemaExtensions
+	eCreateUserRequest_AuthenticationType                                                  smithy.SchemaExtensions
+	eCreateUserResult                                                                      smithy.SchemaExtensions
+	eDeleteAppBlockBuilderRequest                                                          smithy.SchemaExtensions
+	eDeleteAppBlockBuilderRequest_Name                                                     smithy.SchemaExtensions
+	eDeleteAppBlockBuilderResult                                                           smithy.SchemaExtensions
+	eDeleteAppBlockRequest                                                                 smithy.SchemaExtensions
+	eDeleteAppBlockRequest_Name                                                            smithy.SchemaExtensions
+	eDeleteAppBlockResult                                                                  smithy.SchemaExtensions
+	eDeleteApplicationRequest                                                              smithy.SchemaExtensions
+	eDeleteApplicationRequest_Name                                                         smithy.SchemaExtensions
+	eDeleteApplicationResult                                                               smithy.SchemaExtensions
+	eDeleteDirectoryConfigRequest                                                          smithy.SchemaExtensions
+	eDeleteDirectoryConfigRequest_DirectoryName                                            smithy.SchemaExtensions
+	eDeleteDirectoryConfigResult                                                           smithy.SchemaExtensions
+	eDeleteEntitlementRequest                                                              smithy.SchemaExtensions
+	eDeleteEntitlementRequest_Name                                                         smithy.SchemaExtensions
+	eDeleteEntitlementRequest_StackName                                                    smithy.SchemaExtensions
+	eDeleteEntitlementResult                                                               smithy.SchemaExtensions
+	eDeleteFleetRequest                                                                    smithy.SchemaExtensions
+	eDeleteFleetRequest_Name                                                               smithy.SchemaExtensions
+	eDeleteFleetResult                                                                     smithy.SchemaExtensions
+	eDeleteImageBuilderRequest                                                             smithy.SchemaExtensions
+	eDeleteImageBuilderRequest_Name                                                        smithy.SchemaExtensions
+	eDeleteImageBuilderResult                                                              smithy.SchemaExtensions
+	eDeleteImageBuilderResult_ImageBuilder                                                 smithy.SchemaExtensions
+	eDeleteImageRequest                                                                    smithy.SchemaExtensions
+	eDeleteImageRequest_Name                                                               smithy.SchemaExtensions
+	eDeleteImageResult                                                                     smithy.SchemaExtensions
+	eDeleteImageResult_Image                                                               smithy.SchemaExtensions
+	eDeleteImagePermissionsRequest                                                         smithy.SchemaExtensions
+	eDeleteImagePermissionsRequest_Name                                                    smithy.SchemaExtensions
+	eDeleteImagePermissionsRequest_SharedAccountId                                         smithy.SchemaExtensions
+	eDeleteImagePermissionsResult                                                          smithy.SchemaExtensions
+	eDeleteStackRequest                                                                    smithy.SchemaExtensions
+	eDeleteStackRequest_Name                                                               smithy.SchemaExtensions
+	eDeleteStackResult                                                                     smithy.SchemaExtensions
+	eDeleteThemeForStackRequest                                                            smithy.SchemaExtensions
+	eDeleteThemeForStackRequest_StackName                                                  smithy.SchemaExtensions
+	eDeleteThemeForStackResult                                                             smithy.SchemaExtensions
+	eDeleteUsageReportSubscriptionRequest                                                  smithy.SchemaExtensions
+	eDeleteUsageReportSubscriptionResult                                                   smithy.SchemaExtensions
+	eDeleteUserRequest                                                                     smithy.SchemaExtensions
+	eDeleteUserRequest_UserName                                                            smithy.SchemaExtensions
+	eDeleteUserRequest_AuthenticationType                                                  smithy.SchemaExtensions
+	eDeleteUserResult                                                                      smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsRequest                                    smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn                        smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName                smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults                         smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken                          smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsResult                                     smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations smithy.SchemaExtensions
+	eDescribeAppBlockBuilderAppBlockAssociationsResult_NextToken                           smithy.SchemaExtensions
+	eDescribeAppBlockBuildersRequest                                                       smithy.SchemaExtensions
+	eDescribeAppBlockBuildersRequest_Names                                                 smithy.SchemaExtensions
+	eDescribeAppBlockBuildersRequest_NextToken                                             smithy.SchemaExtensions
+	eDescribeAppBlockBuildersRequest_MaxResults                                            smithy.SchemaExtensions
+	eDescribeAppBlockBuildersResult                                                        smithy.SchemaExtensions
+	eDescribeAppBlockBuildersResult_AppBlockBuilders                                       smithy.SchemaExtensions
+	eDescribeAppBlockBuildersResult_NextToken                                              smithy.SchemaExtensions
+	eDescribeAppBlocksRequest                                                              smithy.SchemaExtensions
+	eDescribeAppBlocksRequest_Arns                                                         smithy.SchemaExtensions
+	eDescribeAppBlocksRequest_NextToken                                                    smithy.SchemaExtensions
+	eDescribeAppBlocksRequest_MaxResults                                                   smithy.SchemaExtensions
+	eDescribeAppBlocksResult                                                               smithy.SchemaExtensions
+	eDescribeAppBlocksResult_AppBlocks                                                     smithy.SchemaExtensions
+	eDescribeAppBlocksResult_NextToken                                                     smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsRequest                                           smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsRequest_FleetName                                 smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsRequest_ApplicationArn                            smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsRequest_MaxResults                                smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsRequest_NextToken                                 smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsResult                                            smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations               smithy.SchemaExtensions
+	eDescribeApplicationFleetAssociationsResult_NextToken                                  smithy.SchemaExtensions
+	eDescribeApplicationsRequest                                                           smithy.SchemaExtensions
+	eDescribeApplicationsRequest_Arns                                                      smithy.SchemaExtensions
+	eDescribeApplicationsRequest_NextToken                                                 smithy.SchemaExtensions
+	eDescribeApplicationsRequest_MaxResults                                                smithy.SchemaExtensions
+	eDescribeApplicationsResult                                                            smithy.SchemaExtensions
+	eDescribeApplicationsResult_Applications                                               smithy.SchemaExtensions
+	eDescribeApplicationsResult_NextToken                                                  smithy.SchemaExtensions
+	eDescribeAppLicenseUsageRequest                                                        smithy.SchemaExtensions
+	eDescribeAppLicenseUsageRequest_BillingPeriod                                          smithy.SchemaExtensions
+	eDescribeAppLicenseUsageRequest_MaxResults                                             smithy.SchemaExtensions
+	eDescribeAppLicenseUsageRequest_NextToken                                              smithy.SchemaExtensions
+	eDescribeAppLicenseUsageResult                                                         smithy.SchemaExtensions
+	eDescribeAppLicenseUsageResult_AppLicenseUsages                                        smithy.SchemaExtensions
+	eDescribeAppLicenseUsageResult_NextToken                                               smithy.SchemaExtensions
+	eDescribeDirectoryConfigsRequest                                                       smithy.SchemaExtensions
+	eDescribeDirectoryConfigsRequest_DirectoryNames                                        smithy.SchemaExtensions
+	eDescribeDirectoryConfigsRequest_MaxResults                                            smithy.SchemaExtensions
+	eDescribeDirectoryConfigsRequest_NextToken                                             smithy.SchemaExtensions
+	eDescribeDirectoryConfigsResult                                                        smithy.SchemaExtensions
+	eDescribeDirectoryConfigsResult_DirectoryConfigs                                       smithy.SchemaExtensions
+	eDescribeDirectoryConfigsResult_NextToken                                              smithy.SchemaExtensions
+	eDescribeEntitlementsRequest                                                           smithy.SchemaExtensions
+	eDescribeEntitlementsRequest_Name                                                      smithy.SchemaExtensions
+	eDescribeEntitlementsRequest_StackName                                                 smithy.SchemaExtensions
+	eDescribeEntitlementsRequest_NextToken                                                 smithy.SchemaExtensions
+	eDescribeEntitlementsRequest_MaxResults                                                smithy.SchemaExtensions
+	eDescribeEntitlementsResult                                                            smithy.SchemaExtensions
+	eDescribeEntitlementsResult_Entitlements                                               smithy.SchemaExtensions
+	eDescribeEntitlementsResult_NextToken                                                  smithy.SchemaExtensions
+	eDescribeFleetsRequest                                                                 smithy.SchemaExtensions
+	eDescribeFleetsRequest_Names                                                           smithy.SchemaExtensions
+	eDescribeFleetsRequest_NextToken                                                       smithy.SchemaExtensions
+	eDescribeFleetsResult                                                                  smithy.SchemaExtensions
+	eDescribeFleetsResult_Fleets                                                           smithy.SchemaExtensions
+	eDescribeFleetsResult_NextToken                                                        smithy.SchemaExtensions
+	eDescribeImageBuildersRequest                                                          smithy.SchemaExtensions
+	eDescribeImageBuildersRequest_Names                                                    smithy.SchemaExtensions
+	eDescribeImageBuildersRequest_MaxResults                                               smithy.SchemaExtensions
+	eDescribeImageBuildersRequest_NextToken                                                smithy.SchemaExtensions
+	eDescribeImageBuildersResult                                                           smithy.SchemaExtensions
+	eDescribeImageBuildersResult_ImageBuilders                                             smithy.SchemaExtensions
+	eDescribeImageBuildersResult_NextToken                                                 smithy.SchemaExtensions
+	eDescribeImagePermissionsRequest                                                       smithy.SchemaExtensions
+	eDescribeImagePermissionsRequest_Name                                                  smithy.SchemaExtensions
+	eDescribeImagePermissionsRequest_MaxResults                                            smithy.SchemaExtensions
+	eDescribeImagePermissionsRequest_SharedAwsAccountIds                                   smithy.SchemaExtensions
+	eDescribeImagePermissionsRequest_NextToken                                             smithy.SchemaExtensions
+	eDescribeImagePermissionsResult                                                        smithy.SchemaExtensions
+	eDescribeImagePermissionsResult_Name                                                   smithy.SchemaExtensions
+	eDescribeImagePermissionsResult_SharedImagePermissionsList                             smithy.SchemaExtensions
+	eDescribeImagePermissionsResult_NextToken                                              smithy.SchemaExtensions
+	eDescribeImagesRequest                                                                 smithy.SchemaExtensions
+	eDescribeImagesRequest_Names                                                           smithy.SchemaExtensions
+	eDescribeImagesRequest_Arns                                                            smithy.SchemaExtensions
+	eDescribeImagesRequest_Type                                                            smithy.SchemaExtensions
+	eDescribeImagesRequest_NextToken                                                       smithy.SchemaExtensions
+	eDescribeImagesRequest_MaxResults                                                      smithy.SchemaExtensions
+	eDescribeImagesResult                                                                  smithy.SchemaExtensions
+	eDescribeImagesResult_Images                                                           smithy.SchemaExtensions
+	eDescribeImagesResult_NextToken                                                        smithy.SchemaExtensions
+	eDescribeSessionsRequest                                                               smithy.SchemaExtensions
+	eDescribeSessionsRequest_StackName                                                     smithy.SchemaExtensions
+	eDescribeSessionsRequest_FleetName                                                     smithy.SchemaExtensions
+	eDescribeSessionsRequest_UserId                                                        smithy.SchemaExtensions
+	eDescribeSessionsRequest_NextToken                                                     smithy.SchemaExtensions
+	eDescribeSessionsRequest_Limit                                                         smithy.SchemaExtensions
+	eDescribeSessionsRequest_AuthenticationType                                            smithy.SchemaExtensions
+	eDescribeSessionsRequest_InstanceId                                                    smithy.SchemaExtensions
+	eDescribeSessionsResult                                                                smithy.SchemaExtensions
+	eDescribeSessionsResult_Sessions                                                       smithy.SchemaExtensions
+	eDescribeSessionsResult_NextToken                                                      smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsRequest                                                   smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsRequest_AssociatedResource                                smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsRequest_MaxResults                                        smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsRequest_NextToken                                         smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsResult                                                    smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsResult_AssociatedResource                                 smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsResult_SoftwareAssociations                               smithy.SchemaExtensions
+	eDescribeSoftwareAssociationsResult_NextToken                                          smithy.SchemaExtensions
+	eDescribeStacksRequest                                                                 smithy.SchemaExtensions
+	eDescribeStacksRequest_Names                                                           smithy.SchemaExtensions
+	eDescribeStacksRequest_NextToken                                                       smithy.SchemaExtensions
+	eDescribeStacksResult                                                                  smithy.SchemaExtensions
+	eDescribeStacksResult_Stacks                                                           smithy.SchemaExtensions
+	eDescribeStacksResult_NextToken                                                        smithy.SchemaExtensions
+	eDescribeThemeForStackRequest                                                          smithy.SchemaExtensions
+	eDescribeThemeForStackRequest_StackName                                                smithy.SchemaExtensions
+	eDescribeThemeForStackResult                                                           smithy.SchemaExtensions
+	eDescribeThemeForStackResult_Theme                                                     smithy.SchemaExtensions
+	eDescribeUsageReportSubscriptionsRequest                                               smithy.SchemaExtensions
+	eDescribeUsageReportSubscriptionsRequest_MaxResults                                    smithy.SchemaExtensions
+	eDescribeUsageReportSubscriptionsRequest_NextToken                                     smithy.SchemaExtensions
+	eDescribeUsageReportSubscriptionsResult                                                smithy.SchemaExtensions
+	eDescribeUsageReportSubscriptionsResult_UsageReportSubscriptions                       smithy.SchemaExtensions
+	eDescribeUsageReportSubscriptionsResult_NextToken                                      smithy.SchemaExtensions
+	eDescribeUsersRequest                                                                  smithy.SchemaExtensions
+	eDescribeUsersRequest_AuthenticationType                                               smithy.SchemaExtensions
+	eDescribeUsersRequest_MaxResults                                                       smithy.SchemaExtensions
+	eDescribeUsersRequest_NextToken                                                        smithy.SchemaExtensions
+	eDescribeUsersResult                                                                   smithy.SchemaExtensions
+	eDescribeUsersResult_Users                                                             smithy.SchemaExtensions
+	eDescribeUsersResult_NextToken                                                         smithy.SchemaExtensions
+	eDescribeUserStackAssociationsRequest                                                  smithy.SchemaExtensions
+	eDescribeUserStackAssociationsRequest_StackName                                        smithy.SchemaExtensions
+	eDescribeUserStackAssociationsRequest_UserName                                         smithy.SchemaExtensions
+	eDescribeUserStackAssociationsRequest_AuthenticationType                               smithy.SchemaExtensions
+	eDescribeUserStackAssociationsRequest_MaxResults                                       smithy.SchemaExtensions
+	eDescribeUserStackAssociationsRequest_NextToken                                        smithy.SchemaExtensions
+	eDescribeUserStackAssociationsResult                                                   smithy.SchemaExtensions
+	eDescribeUserStackAssociationsResult_UserStackAssociations                             smithy.SchemaExtensions
+	eDescribeUserStackAssociationsResult_NextToken                                         smithy.SchemaExtensions
+	eDisableUserRequest                                                                    smithy.SchemaExtensions
+	eDisableUserRequest_UserName                                                           smithy.SchemaExtensions
+	eDisableUserRequest_AuthenticationType                                                 smithy.SchemaExtensions
+	eDisableUserResult                                                                     smithy.SchemaExtensions
+	eDisassociateAppBlockBuilderAppBlockRequest                                            smithy.SchemaExtensions
+	eDisassociateAppBlockBuilderAppBlockRequest_AppBlockArn                                smithy.SchemaExtensions
+	eDisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName                        smithy.SchemaExtensions
+	eDisassociateAppBlockBuilderAppBlockResult                                             smithy.SchemaExtensions
+	eDisassociateApplicationFleetRequest                                                   smithy.SchemaExtensions
+	eDisassociateApplicationFleetRequest_FleetName                                         smithy.SchemaExtensions
+	eDisassociateApplicationFleetRequest_ApplicationArn                                    smithy.SchemaExtensions
+	eDisassociateApplicationFleetResult                                                    smithy.SchemaExtensions
+	eDisassociateApplicationFromEntitlementRequest                                         smithy.SchemaExtensions
+	eDisassociateApplicationFromEntitlementRequest_StackName                               smithy.SchemaExtensions
+	eDisassociateApplicationFromEntitlementRequest_EntitlementName                         smithy.SchemaExtensions
+	eDisassociateApplicationFromEntitlementRequest_ApplicationIdentifier                   smithy.SchemaExtensions
+	eDisassociateApplicationFromEntitlementResult                                          smithy.SchemaExtensions
+	eDisassociateFleetRequest                                                              smithy.SchemaExtensions
+	eDisassociateFleetRequest_FleetName                                                    smithy.SchemaExtensions
+	eDisassociateFleetRequest_StackName                                                    smithy.SchemaExtensions
+	eDisassociateFleetResult                                                               smithy.SchemaExtensions
+	eDisassociateSoftwareFromImageBuilderRequest                                           smithy.SchemaExtensions
+	eDisassociateSoftwareFromImageBuilderRequest_ImageBuilderName                          smithy.SchemaExtensions
+	eDisassociateSoftwareFromImageBuilderRequest_SoftwareNames                             smithy.SchemaExtensions
+	eDisassociateSoftwareFromImageBuilderResult                                            smithy.SchemaExtensions
+	eDrainSessionInstanceRequest                                                           smithy.SchemaExtensions
+	eDrainSessionInstanceRequest_SessionId                                                 smithy.SchemaExtensions
+	eDrainSessionInstanceResult                                                            smithy.SchemaExtensions
+	eEnableUserRequest                                                                     smithy.SchemaExtensions
+	eEnableUserRequest_UserName                                                            smithy.SchemaExtensions
+	eEnableUserRequest_AuthenticationType                                                  smithy.SchemaExtensions
+	eEnableUserResult                                                                      smithy.SchemaExtensions
+	eExpireSessionRequest                                                                  smithy.SchemaExtensions
+	eExpireSessionRequest_SessionId                                                        smithy.SchemaExtensions
+	eExpireSessionResult                                                                   smithy.SchemaExtensions
+	eGetExportImageTaskRequest                                                             smithy.SchemaExtensions
+	eGetExportImageTaskRequest_TaskId                                                      smithy.SchemaExtensions
+	eGetExportImageTaskResult                                                              smithy.SchemaExtensions
+	eGetExportImageTaskResult_ExportImageTask                                              smithy.SchemaExtensions
+	eListAssociatedFleetsRequest                                                           smithy.SchemaExtensions
+	eListAssociatedFleetsRequest_StackName                                                 smithy.SchemaExtensions
+	eListAssociatedFleetsRequest_NextToken                                                 smithy.SchemaExtensions
+	eListAssociatedFleetsResult                                                            smithy.SchemaExtensions
+	eListAssociatedFleetsResult_Names                                                      smithy.SchemaExtensions
+	eListAssociatedFleetsResult_NextToken                                                  smithy.SchemaExtensions
+	eListAssociatedStacksRequest                                                           smithy.SchemaExtensions
+	eListAssociatedStacksRequest_FleetName                                                 smithy.SchemaExtensions
+	eListAssociatedStacksRequest_NextToken                                                 smithy.SchemaExtensions
+	eListAssociatedStacksResult                                                            smithy.SchemaExtensions
+	eListAssociatedStacksResult_Names                                                      smithy.SchemaExtensions
+	eListAssociatedStacksResult_NextToken                                                  smithy.SchemaExtensions
+	eListEntitledApplicationsRequest                                                       smithy.SchemaExtensions
+	eListEntitledApplicationsRequest_StackName                                             smithy.SchemaExtensions
+	eListEntitledApplicationsRequest_EntitlementName                                       smithy.SchemaExtensions
+	eListEntitledApplicationsRequest_NextToken                                             smithy.SchemaExtensions
+	eListEntitledApplicationsRequest_MaxResults                                            smithy.SchemaExtensions
+	eListEntitledApplicationsResult                                                        smithy.SchemaExtensions
+	eListEntitledApplicationsResult_EntitledApplications                                   smithy.SchemaExtensions
+	eListEntitledApplicationsResult_NextToken                                              smithy.SchemaExtensions
+	eListExportImageTasksRequest                                                           smithy.SchemaExtensions
+	eListExportImageTasksRequest_Filters                                                   smithy.SchemaExtensions
+	eListExportImageTasksRequest_MaxResults                                                smithy.SchemaExtensions
+	eListExportImageTasksRequest_NextToken                                                 smithy.SchemaExtensions
+	eListExportImageTasksResult                                                            smithy.SchemaExtensions
+	eListExportImageTasksResult_ExportImageTasks                                           smithy.SchemaExtensions
+	eListExportImageTasksResult_NextToken                                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                                smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                           smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                                      smithy.SchemaExtensions
+	eStartAppBlockBuilderRequest                                                           smithy.SchemaExtensions
+	eStartAppBlockBuilderRequest_Name                                                      smithy.SchemaExtensions
+	eStartAppBlockBuilderResult                                                            smithy.SchemaExtensions
+	eStartAppBlockBuilderResult_AppBlockBuilder                                            smithy.SchemaExtensions
+	eStartFleetRequest                                                                     smithy.SchemaExtensions
+	eStartFleetRequest_Name                                                                smithy.SchemaExtensions
+	eStartFleetResult                                                                      smithy.SchemaExtensions
+	eStartImageBuilderRequest                                                              smithy.SchemaExtensions
+	eStartImageBuilderRequest_Name                                                         smithy.SchemaExtensions
+	eStartImageBuilderRequest_AppstreamAgentVersion                                        smithy.SchemaExtensions
+	eStartImageBuilderResult                                                               smithy.SchemaExtensions
+	eStartImageBuilderResult_ImageBuilder                                                  smithy.SchemaExtensions
+	eStartSoftwareDeploymentToImageBuilderRequest                                          smithy.SchemaExtensions
+	eStartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName                         smithy.SchemaExtensions
+	eStartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments                   smithy.SchemaExtensions
+	eStartSoftwareDeploymentToImageBuilderResult                                           smithy.SchemaExtensions
+	eStopAppBlockBuilderRequest                                                            smithy.SchemaExtensions
+	eStopAppBlockBuilderRequest_Name                                                       smithy.SchemaExtensions
+	eStopAppBlockBuilderResult                                                             smithy.SchemaExtensions
+	eStopAppBlockBuilderResult_AppBlockBuilder                                             smithy.SchemaExtensions
+	eStopFleetRequest                                                                      smithy.SchemaExtensions
+	eStopFleetRequest_Name                                                                 smithy.SchemaExtensions
+	eStopFleetResult                                                                       smithy.SchemaExtensions
+	eStopImageBuilderRequest                                                               smithy.SchemaExtensions
+	eStopImageBuilderRequest_Name                                                          smithy.SchemaExtensions
+	eStopImageBuilderResult                                                                smithy.SchemaExtensions
+	eStopImageBuilderResult_ImageBuilder                                                   smithy.SchemaExtensions
+	eTagResourceRequest                                                                    smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                                        smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                               smithy.SchemaExtensions
+	eTagResourceResponse                                                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                                                  smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                                      smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                          smithy.SchemaExtensions
+	eUntagResourceResponse                                                                 smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest                                                          smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_Name                                                     smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_Description                                              smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_DisplayName                                              smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_Platform                                                 smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_InstanceType                                             smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_VpcConfig                                                smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_EnableDefaultInternetAccess                              smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_IamRoleArn                                               smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_AccessEndpoints                                          smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_AttributesToDelete                                       smithy.SchemaExtensions
+	eUpdateAppBlockBuilderRequest_DisableIMDSV1                                            smithy.SchemaExtensions
+	eUpdateAppBlockBuilderResult                                                           smithy.SchemaExtensions
+	eUpdateAppBlockBuilderResult_AppBlockBuilder                                           smithy.SchemaExtensions
+	eUpdateApplicationRequest                                                              smithy.SchemaExtensions
+	eUpdateApplicationRequest_Name                                                         smithy.SchemaExtensions
+	eUpdateApplicationRequest_DisplayName                                                  smithy.SchemaExtensions
+	eUpdateApplicationRequest_Description                                                  smithy.SchemaExtensions
+	eUpdateApplicationRequest_IconS3Location                                               smithy.SchemaExtensions
+	eUpdateApplicationRequest_LaunchPath                                                   smithy.SchemaExtensions
+	eUpdateApplicationRequest_WorkingDirectory                                             smithy.SchemaExtensions
+	eUpdateApplicationRequest_LaunchParameters                                             smithy.SchemaExtensions
+	eUpdateApplicationRequest_AppBlockArn                                                  smithy.SchemaExtensions
+	eUpdateApplicationRequest_AttributesToDelete                                           smithy.SchemaExtensions
+	eUpdateApplicationResult                                                               smithy.SchemaExtensions
+	eUpdateApplicationResult_Application                                                   smithy.SchemaExtensions
+	eUpdateDirectoryConfigRequest                                                          smithy.SchemaExtensions
+	eUpdateDirectoryConfigRequest_DirectoryName                                            smithy.SchemaExtensions
+	eUpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames                     smithy.SchemaExtensions
+	eUpdateDirectoryConfigRequest_ServiceAccountCredentials                                smithy.SchemaExtensions
+	eUpdateDirectoryConfigRequest_CertificateBasedAuthProperties                           smithy.SchemaExtensions
+	eUpdateDirectoryConfigResult                                                           smithy.SchemaExtensions
+	eUpdateDirectoryConfigResult_DirectoryConfig                                           smithy.SchemaExtensions
+	eUpdateEntitlementRequest                                                              smithy.SchemaExtensions
+	eUpdateEntitlementRequest_Name                                                         smithy.SchemaExtensions
+	eUpdateEntitlementRequest_StackName                                                    smithy.SchemaExtensions
+	eUpdateEntitlementRequest_Description                                                  smithy.SchemaExtensions
+	eUpdateEntitlementRequest_AppVisibility                                                smithy.SchemaExtensions
+	eUpdateEntitlementRequest_Attributes                                                   smithy.SchemaExtensions
+	eUpdateEntitlementResult                                                               smithy.SchemaExtensions
+	eUpdateEntitlementResult_Entitlement                                                   smithy.SchemaExtensions
+	eUpdateFleetRequest                                                                    smithy.SchemaExtensions
+	eUpdateFleetRequest_ImageName                                                          smithy.SchemaExtensions
+	eUpdateFleetRequest_ImageArn                                                           smithy.SchemaExtensions
+	eUpdateFleetRequest_Name                                                               smithy.SchemaExtensions
+	eUpdateFleetRequest_InstanceType                                                       smithy.SchemaExtensions
+	eUpdateFleetRequest_ComputeCapacity                                                    smithy.SchemaExtensions
+	eUpdateFleetRequest_VpcConfig                                                          smithy.SchemaExtensions
+	eUpdateFleetRequest_MaxUserDurationInSeconds                                           smithy.SchemaExtensions
+	eUpdateFleetRequest_DisconnectTimeoutInSeconds                                         smithy.SchemaExtensions
+	eUpdateFleetRequest_DeleteVpcConfig                                                    smithy.SchemaExtensions
+	eUpdateFleetRequest_Description                                                        smithy.SchemaExtensions
+	eUpdateFleetRequest_DisplayName                                                        smithy.SchemaExtensions
+	eUpdateFleetRequest_EnableDefaultInternetAccess                                        smithy.SchemaExtensions
+	eUpdateFleetRequest_DomainJoinInfo                                                     smithy.SchemaExtensions
+	eUpdateFleetRequest_IdleDisconnectTimeoutInSeconds                                     smithy.SchemaExtensions
+	eUpdateFleetRequest_AttributesToDelete                                                 smithy.SchemaExtensions
+	eUpdateFleetRequest_IamRoleArn                                                         smithy.SchemaExtensions
+	eUpdateFleetRequest_StreamView                                                         smithy.SchemaExtensions
+	eUpdateFleetRequest_Platform                                                           smithy.SchemaExtensions
+	eUpdateFleetRequest_MaxConcurrentSessions                                              smithy.SchemaExtensions
+	eUpdateFleetRequest_UsbDeviceFilterStrings                                             smithy.SchemaExtensions
+	eUpdateFleetRequest_SessionScriptS3Location                                            smithy.SchemaExtensions
+	eUpdateFleetRequest_MaxSessionsPerInstance                                             smithy.SchemaExtensions
+	eUpdateFleetRequest_RootVolumeConfig                                                   smithy.SchemaExtensions
+	eUpdateFleetRequest_DisableIMDSV1                                                      smithy.SchemaExtensions
+	eUpdateFleetResult                                                                     smithy.SchemaExtensions
+	eUpdateFleetResult_Fleet                                                               smithy.SchemaExtensions
+	eUpdateImagePermissionsRequest                                                         smithy.SchemaExtensions
+	eUpdateImagePermissionsRequest_Name                                                    smithy.SchemaExtensions
+	eUpdateImagePermissionsRequest_SharedAccountId                                         smithy.SchemaExtensions
+	eUpdateImagePermissionsRequest_ImagePermissions                                        smithy.SchemaExtensions
+	eUpdateImagePermissionsResult                                                          smithy.SchemaExtensions
+	eUpdateStackRequest                                                                    smithy.SchemaExtensions
+	eUpdateStackRequest_DisplayName                                                        smithy.SchemaExtensions
+	eUpdateStackRequest_Description                                                        smithy.SchemaExtensions
+	eUpdateStackRequest_Name                                                               smithy.SchemaExtensions
+	eUpdateStackRequest_StorageConnectors                                                  smithy.SchemaExtensions
+	eUpdateStackRequest_DeleteStorageConnectors                                            smithy.SchemaExtensions
+	eUpdateStackRequest_RedirectURL                                                        smithy.SchemaExtensions
+	eUpdateStackRequest_FeedbackURL                                                        smithy.SchemaExtensions
+	eUpdateStackRequest_AttributesToDelete                                                 smithy.SchemaExtensions
+	eUpdateStackRequest_UserSettings                                                       smithy.SchemaExtensions
+	eUpdateStackRequest_ApplicationSettings                                                smithy.SchemaExtensions
+	eUpdateStackRequest_AccessEndpoints                                                    smithy.SchemaExtensions
+	eUpdateStackRequest_EmbedHostDomains                                                   smithy.SchemaExtensions
+	eUpdateStackRequest_StreamingExperienceSettings                                        smithy.SchemaExtensions
+	eUpdateStackRequest_ContentRedirection                                                 smithy.SchemaExtensions
+	eUpdateStackRequest_AgentAccessConfig                                                  smithy.SchemaExtensions
+	eUpdateStackRequest_StorageConnectorAuthentication                                     smithy.SchemaExtensions
+	eUpdateStackResult                                                                     smithy.SchemaExtensions
+	eUpdateStackResult_Stack                                                               smithy.SchemaExtensions
+	eUpdateThemeForStackRequest                                                            smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_StackName                                                  smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_FooterLinks                                                smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_TitleText                                                  smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_ThemeStyling                                               smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_OrganizationLogoS3Location                                 smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_FaviconS3Location                                          smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_State                                                      smithy.SchemaExtensions
+	eUpdateThemeForStackRequest_AttributesToDelete                                         smithy.SchemaExtensions
+	eUpdateThemeForStackResult                                                             smithy.SchemaExtensions
+	eUpdateThemeForStackResult_Theme                                                       smithy.SchemaExtensions
+)
+
+var (
+	iAssociateAppBlockBuilderAppBlock                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateAppBlockBuilderAppBlock"}
+	iAssociateApplicationFleet                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateApplicationFleet"}
+	iAssociateApplicationToEntitlement                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateApplicationToEntitlement"}
+	iAssociateFleet                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateFleet"}
+	iAssociateSoftwareToImageBuilder                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateSoftwareToImageBuilder"}
+	iBatchAssociateUserStack                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "BatchAssociateUserStack"}
+	iBatchDisassociateUserStack                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "BatchDisassociateUserStack"}
+	iCopyImage                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CopyImage"}
+	iCreateAppBlock                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlock"}
+	iCreateAppBlockBuilder                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockBuilder"}
+	iCreateAppBlockBuilderStreamingURL                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockBuilderStreamingURL"}
+	iCreateApplication                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateApplication"}
+	iCreateDirectoryConfig                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateDirectoryConfig"}
+	iCreateEntitlement                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateEntitlement"}
+	iCreateExportImageTask                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateExportImageTask"}
+	iCreateFleet                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateFleet"}
+	iCreateImageBuilder                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImageBuilder"}
+	iCreateImageBuilderStreamingURL                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImageBuilderStreamingURL"}
+	iCreateImportedImage                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImportedImage"}
+	iCreateStack                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateStack"}
+	iCreateStreamingURL                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateStreamingURL"}
+	iCreateThemeForStack                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateThemeForStack"}
+	iCreateUpdatedImage                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUpdatedImage"}
+	iCreateUsageReportSubscription                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUsageReportSubscription"}
+	iCreateUser                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUser"}
+	iDeleteAppBlock                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteAppBlock"}
+	iDeleteAppBlockBuilder                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteAppBlockBuilder"}
+	iDeleteApplication                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteApplication"}
+	iDeleteDirectoryConfig                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteDirectoryConfig"}
+	iDeleteEntitlement                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteEntitlement"}
+	iDeleteFleet                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteFleet"}
+	iDeleteImage                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImage"}
+	iDeleteImageBuilder                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImageBuilder"}
+	iDeleteImagePermissions                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImagePermissions"}
+	iDeleteStack                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteStack"}
+	iDeleteThemeForStack                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteThemeForStack"}
+	iDeleteUsageReportSubscription                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteUsageReportSubscription"}
+	iDeleteUser                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteUser"}
+	iDescribeAppBlockBuilderAppBlockAssociations        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlockBuilderAppBlockAssociations"}
+	iDescribeAppBlockBuilders                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlockBuilders"}
+	iDescribeAppBlocks                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlocks"}
+	iDescribeApplicationFleetAssociations               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeApplicationFleetAssociations"}
+	iDescribeApplications                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeApplications"}
+	iDescribeAppLicenseUsage                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppLicenseUsage"}
+	iDescribeDirectoryConfigs                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeDirectoryConfigs"}
+	iDescribeEntitlements                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeEntitlements"}
+	iDescribeFleets                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeFleets"}
+	iDescribeImageBuilders                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImageBuilders"}
+	iDescribeImagePermissions                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImagePermissions"}
+	iDescribeImages                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImages"}
+	iDescribeSessions                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeSessions"}
+	iDescribeSoftwareAssociations                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeSoftwareAssociations"}
+	iDescribeStacks                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeStacks"}
+	iDescribeThemeForStack                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeThemeForStack"}
+	iDescribeUsageReportSubscriptions                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUsageReportSubscriptions"}
+	iDescribeUsers                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUsers"}
+	iDescribeUserStackAssociations                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUserStackAssociations"}
+	iDisableUser                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisableUser"}
+	iDisassociateAppBlockBuilderAppBlock                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateAppBlockBuilderAppBlock"}
+	iDisassociateApplicationFleet                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateApplicationFleet"}
+	iDisassociateApplicationFromEntitlement             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateApplicationFromEntitlement"}
+	iDisassociateFleet                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateFleet"}
+	iDisassociateSoftwareFromImageBuilder               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateSoftwareFromImageBuilder"}
+	iDrainSessionInstance                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DrainSessionInstance"}
+	iEnableUser                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EnableUser"}
+	iExpireSession                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ExpireSession"}
+	iGetExportImageTask                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "GetExportImageTask"}
+	iListAssociatedFleets                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListAssociatedFleets"}
+	iListAssociatedStacks                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListAssociatedStacks"}
+	iListEntitledApplications                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListEntitledApplications"}
+	iListExportImageTasks                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListExportImageTasks"}
+	iListTagsForResource                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListTagsForResource"}
+	iStartAppBlockBuilder                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartAppBlockBuilder"}
+	iStartFleet                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartFleet"}
+	iStartImageBuilder                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartImageBuilder"}
+	iStartSoftwareDeploymentToImageBuilder              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartSoftwareDeploymentToImageBuilder"}
+	iStopAppBlockBuilder                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopAppBlockBuilder"}
+	iStopFleet                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopFleet"}
+	iStopImageBuilder                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopImageBuilder"}
+	iTagResource                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "TagResource"}
+	iUntagResource                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UntagResource"}
+	iUpdateAppBlockBuilder                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateAppBlockBuilder"}
+	iUpdateApplication                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateApplication"}
+	iUpdateDirectoryConfig                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateDirectoryConfig"}
+	iUpdateEntitlement                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateEntitlement"}
+	iUpdateFleet                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateFleet"}
+	iUpdateImagePermissions                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateImagePermissions"}
+	iUpdateStack                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateStack"}
+	iUpdateThemeForStack                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateThemeForStack"}
+	i_PhotonAdminProxyService                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "PhotonAdminProxyService"}
+	iAccessEndpoint                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AccessEndpoint"}
+	i_AccessEndpointList                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AccessEndpointList"}
+	iAccessEndpointType                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AccessEndpointType"}
+	i_AccountName                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AccountName"}
+	i_AccountPassword                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AccountPassword"}
+	iAction                                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Action"}
+	i_AdminAppLicenseUsageList                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AdminAppLicenseUsageList"}
+	iAdminAppLicenseUsageRecord                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AdminAppLicenseUsageRecord"}
+	iAgentAccessConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AgentAccessConfig"}
+	iAgentAccessConfigForUpdate                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AgentAccessConfigForUpdate"}
+	iAgentAccessSetting                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AgentAccessSetting"}
+	i_AgentAccessSettingList                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AgentAccessSettingList"}
+	iAgentAction                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AgentAction"}
+	iAgentSoftwareVersion                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AgentSoftwareVersion"}
+	i_AmiName                                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AmiName"}
+	iAppBlock                                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlock"}
+	iAppBlockBuilder                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilder"}
+	iAppBlockBuilderAppBlockAssociation                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderAppBlockAssociation"}
+	i_AppBlockBuilderAppBlockAssociationsList           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderAppBlockAssociationsList"}
+	iAppBlockBuilderAttribute                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderAttribute"}
+	i_AppBlockBuilderAttributes                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderAttributes"}
+	i_AppBlockBuilderList                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderList"}
+	iAppBlockBuilderPlatformType                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderPlatformType"}
+	iAppBlockBuilderState                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderState"}
+	iAppBlockBuilderStateChangeReason                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderStateChangeReason"}
+	iAppBlockBuilderStateChangeReasonCode               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockBuilderStateChangeReasonCode"}
+	i_AppBlocks                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlocks"}
+	iAppBlockState                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppBlockState"}
+	i_AppCatalogConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppCatalogConfig"}
+	i_AppDisplayName                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppDisplayName"}
+	iApplication                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Application"}
+	iApplicationAttribute                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ApplicationAttribute"}
+	i_ApplicationAttributes                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ApplicationAttributes"}
+	iApplicationConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ApplicationConfig"}
+	iApplicationFleetAssociation                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ApplicationFleetAssociation"}
+	i_ApplicationFleetAssociationList                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ApplicationFleetAssociationList"}
+	i_Applications                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Applications"}
+	iApplicationSettings                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ApplicationSettings"}
+	iApplicationSettingsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ApplicationSettingsResponse"}
+	i_AppName                                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppName"}
+	i_AppstreamAgentVersion                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppstreamAgentVersion"}
+	iAppVisibility                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AppVisibility"}
+	i_Arn                                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Arn"}
+	i_ArnList                                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ArnList"}
+	iAuthenticationType                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AuthenticationType"}
+	i_AwsAccountId                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AwsAccountId"}
+	i_AwsAccountIdList                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AwsAccountIdList"}
+	i_Boolean                                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Boolean"}
+	i_BooleanObject                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "BooleanObject"}
+	iCertificateBasedAuthProperties                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CertificateBasedAuthProperties"}
+	iCertificateBasedAuthStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CertificateBasedAuthStatus"}
+	iComputeCapacity                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ComputeCapacity"}
+	iComputeCapacityStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ComputeCapacityStatus"}
+	iConcurrentModificationException                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ConcurrentModificationException"}
+	iContentRedirection                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ContentRedirection"}
+	i_DescribeImagesMaxResults                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImagesMaxResults"}
+	i_Description                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Description"}
+	iDirectoryConfig                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DirectoryConfig"}
+	i_DirectoryConfigList                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DirectoryConfigList"}
+	i_DirectoryName                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DirectoryName"}
+	i_DirectoryNameList                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DirectoryNameList"}
+	i_DisplayName                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisplayName"}
+	i_Domain                                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Domain"}
+	iDomainJoinInfo                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DomainJoinInfo"}
+	i_DomainList                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DomainList"}
+	iDryRunOperationException                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DryRunOperationException"}
+	iDynamicAppProvidersEnabled                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DynamicAppProvidersEnabled"}
+	i_EmbedHostDomain                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EmbedHostDomain"}
+	i_EmbedHostDomains                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EmbedHostDomains"}
+	iEntitledApplication                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EntitledApplication"}
+	i_EntitledApplicationList                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EntitledApplicationList"}
+	iEntitlement                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Entitlement"}
+	iEntitlementAlreadyExistsException                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EntitlementAlreadyExistsException"}
+	iEntitlementAttribute                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EntitlementAttribute"}
+	i_EntitlementAttributeList                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EntitlementAttributeList"}
+	i_EntitlementList                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EntitlementList"}
+	iEntitlementNotFoundException                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EntitlementNotFoundException"}
+	iErrorDetails                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ErrorDetails"}
+	i_ErrorDetailsList                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ErrorDetailsList"}
+	i_ErrorMessage                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ErrorMessage"}
+	iExportImageTask                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ExportImageTask"}
+	i_ExportImageTasks                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ExportImageTasks"}
+	iExportImageTaskState                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ExportImageTaskState"}
+	i_FeedbackURL                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FeedbackURL"}
+	i_FilePath                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FilePath"}
+	iFilter                                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Filter"}
+	i_FilterName                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FilterName"}
+	i_Filters                                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Filters"}
+	i_FilterValue                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FilterValue"}
+	i_FilterValues                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FilterValues"}
+	iFleet                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Fleet"}
+	iFleetAttribute                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetAttribute"}
+	i_FleetAttributes                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetAttributes"}
+	iFleetError                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetError"}
+	iFleetErrorCode                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetErrorCode"}
+	i_FleetErrors                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetErrors"}
+	i_FleetList                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetList"}
+	iFleetState                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetState"}
+	iFleetType                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "FleetType"}
+	iImage                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Image"}
+	iImageBuilder                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageBuilder"}
+	i_ImageBuilderList                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageBuilderList"}
+	iImageBuilderState                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageBuilderState"}
+	iImageBuilderStateChangeReason                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageBuilderStateChangeReason"}
+	iImageBuilderStateChangeReasonCode                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageBuilderStateChangeReasonCode"}
+	i_ImageImportDescription                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageImportDescription"}
+	i_ImageImportDisplayName                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageImportDisplayName"}
+	i_ImageList                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageList"}
+	iImagePermissions                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImagePermissions"}
+	iImageSharedWithOthers                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageSharedWithOthers"}
+	iImageSoftwareMetadata                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageSoftwareMetadata"}
+	iImageState                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageState"}
+	iImageStateChangeReason                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageStateChangeReason"}
+	iImageStateChangeReasonCode                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageStateChangeReasonCode"}
+	iImageType                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ImageType"}
+	iIncompatibleImageException                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "IncompatibleImageException"}
+	iInstanceDrainStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "InstanceDrainStatus"}
+	i_InstanceType                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "InstanceType"}
+	i_Integer                                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Integer"}
+	iInvalidAccountStatusException                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "InvalidAccountStatusException"}
+	iInvalidParameterCombinationException               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "InvalidParameterCombinationException"}
+	iInvalidRoleException                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "InvalidRoleException"}
+	iLastReportGenerationExecutionError                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "LastReportGenerationExecutionError"}
+	i_LastReportGenerationExecutionErrors               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "LastReportGenerationExecutionErrors"}
+	iLatestAppstreamAgentVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "LatestAppstreamAgentVersion"}
+	i_LaunchParameters                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "LaunchParameters"}
+	iLimitExceededException                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "LimitExceededException"}
+	i_Long                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Long"}
+	i_MaxResults                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "MaxResults"}
+	iMessageAction                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "MessageAction"}
+	i_Metadata                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Metadata"}
+	i_Name                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Name"}
+	iNetworkAccessConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "NetworkAccessConfiguration"}
+	i_NvidiaGridDriverVersion                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "NvidiaGridDriverVersion"}
+	iOperationNotPermittedException                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "OperationNotPermittedException"}
+	i_OrganizationalUnitDistinguishedName               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "OrganizationalUnitDistinguishedName"}
+	i_OrganizationalUnitDistinguishedNamesList          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "OrganizationalUnitDistinguishedNamesList"}
+	iPackagingType                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "PackagingType"}
+	iPermission                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Permission"}
+	i_PhotonAmiId                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "PhotonAmiId"}
+	i_Platforms                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Platforms"}
+	iPlatformType                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "PlatformType"}
+	iPreferredProtocol                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "PreferredProtocol"}
+	i_RedirectURL                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "RedirectURL"}
+	i_RegionName                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "RegionName"}
+	iRequestLimitExceededException                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "RequestLimitExceededException"}
+	iResourceAlreadyExistsException                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ResourceAlreadyExistsException"}
+	iResourceError                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ResourceError"}
+	i_ResourceErrors                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ResourceErrors"}
+	i_ResourceIdentifier                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ResourceIdentifier"}
+	iResourceInUseException                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ResourceInUseException"}
+	iResourceNotAvailableException                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ResourceNotAvailableException"}
+	iResourceNotFoundException                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ResourceNotFoundException"}
+	iRuntimeValidationConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "RuntimeValidationConfig"}
+	i_S3Bucket                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "S3Bucket"}
+	i_S3BucketArn                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "S3BucketArn"}
+	i_S3Key                                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "S3Key"}
+	iS3Location                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "S3Location"}
+	iScreenImageFormat                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ScreenImageFormat"}
+	iScreenResolution                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ScreenResolution"}
+	iScriptDetails                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ScriptDetails"}
+	i_SecurityGroupIdList                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SecurityGroupIdList"}
+	iServiceAccountCredentials                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ServiceAccountCredentials"}
+	iSession                                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Session"}
+	iSessionConnectionState                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SessionConnectionState"}
+	i_SessionList                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SessionList"}
+	iSessionState                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SessionState"}
+	i_SettingsGroup                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SettingsGroup"}
+	iSharedImagePermissions                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SharedImagePermissions"}
+	i_SharedImagePermissionsList                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SharedImagePermissionsList"}
+	iSoftwareAssociations                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SoftwareAssociations"}
+	i_SoftwareAssociationsList                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SoftwareAssociationsList"}
+	iSoftwareDeploymentStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SoftwareDeploymentStatus"}
+	iStack                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Stack"}
+	iStackAttribute                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StackAttribute"}
+	i_StackAttributes                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StackAttributes"}
+	iStackError                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StackError"}
+	iStackErrorCode                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StackErrorCode"}
+	i_StackErrors                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StackErrors"}
+	i_StackList                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StackList"}
+	iStorageConnector                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StorageConnector"}
+	iStorageConnectorAuthentication                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StorageConnectorAuthentication"}
+	i_StorageConnectorList                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StorageConnectorList"}
+	iStorageConnectorType                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StorageConnectorType"}
+	iStreamingExperienceSettings                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StreamingExperienceSettings"}
+	i_StreamingUrlUserId                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StreamingUrlUserId"}
+	iStreamView                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StreamView"}
+	i_String                                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "String"}
+	i_StringList                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StringList"}
+	i_SubnetIdList                                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "SubnetIdList"}
+	i_TagKey                                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "TagKey"}
+	i_TagKeyList                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "TagKeyList"}
+	i_Tags                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Tags"}
+	i_TagValue                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "TagValue"}
+	iTheme                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Theme"}
+	iThemeAttribute                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeAttribute"}
+	i_ThemeAttributes                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeAttributes"}
+	iThemeFooterLink                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeFooterLink"}
+	i_ThemeFooterLinkDisplayName                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeFooterLinkDisplayName"}
+	i_ThemeFooterLinks                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeFooterLinks"}
+	i_ThemeFooterLinkURL                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeFooterLinkURL"}
+	iThemeState                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeState"}
+	iThemeStyling                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeStyling"}
+	i_ThemeTitleText                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ThemeTitleText"}
+	i_Timestamp                                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Timestamp"}
+	i_UrlPattern                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UrlPattern"}
+	i_UrlPatternList                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UrlPatternList"}
+	iUrlRedirectionConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UrlRedirectionConfig"}
+	iUsageReportExecutionErrorCode                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UsageReportExecutionErrorCode"}
+	iUsageReportSchedule                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UsageReportSchedule"}
+	iUsageReportSubscription                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UsageReportSubscription"}
+	i_UsageReportSubscriptionList                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UsageReportSubscriptionList"}
+	i_UsbDeviceFilterString                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UsbDeviceFilterString"}
+	i_UsbDeviceFilterStrings                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UsbDeviceFilterStrings"}
+	iUser                                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "User"}
+	i_UserAttributeValue                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserAttributeValue"}
+	iUserControlMode                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserControlMode"}
+	i_UserId                                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserId"}
+	i_UserList                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserList"}
+	i_Username                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "Username"}
+	iUserSetting                                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserSetting"}
+	i_UserSettingList                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserSettingList"}
+	iUserStackAssociation                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserStackAssociation"}
+	iUserStackAssociationError                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserStackAssociationError"}
+	iUserStackAssociationErrorCode                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserStackAssociationErrorCode"}
+	i_UserStackAssociationErrorList                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserStackAssociationErrorList"}
+	i_UserStackAssociationList                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UserStackAssociationList"}
+	i_UUID                                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UUID"}
+	iVisibilityType                                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "VisibilityType"}
+	iVolumeConfig                                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "VolumeConfig"}
+	iVpcConfig                                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "VpcConfig"}
+	i_WorkspaceImageId                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "WorkspaceImageId"}
+	iAssociateAppBlockBuilderAppBlockRequest            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateAppBlockBuilderAppBlockRequest"}
+	iAssociateAppBlockBuilderAppBlockResult             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateAppBlockBuilderAppBlockResult"}
+	iAssociateApplicationFleetRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateApplicationFleetRequest"}
+	iAssociateApplicationFleetResult                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateApplicationFleetResult"}
+	iAssociateApplicationToEntitlementRequest           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateApplicationToEntitlementRequest"}
+	iAssociateApplicationToEntitlementResult            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateApplicationToEntitlementResult"}
+	iAssociateFleetRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateFleetRequest"}
+	iAssociateFleetResult                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateFleetResult"}
+	iAssociateSoftwareToImageBuilderRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateSoftwareToImageBuilderRequest"}
+	iAssociateSoftwareToImageBuilderResult              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "AssociateSoftwareToImageBuilderResult"}
+	iBatchAssociateUserStackRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "BatchAssociateUserStackRequest"}
+	iBatchAssociateUserStackResult                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "BatchAssociateUserStackResult"}
+	iBatchDisassociateUserStackRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "BatchDisassociateUserStackRequest"}
+	iBatchDisassociateUserStackResult                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "BatchDisassociateUserStackResult"}
+	iCopyImageRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CopyImageRequest"}
+	iCopyImageResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CopyImageResponse"}
+	iCreateAppBlockBuilderRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockBuilderRequest"}
+	iCreateAppBlockBuilderResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockBuilderResult"}
+	iCreateAppBlockBuilderStreamingURLRequest           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockBuilderStreamingURLRequest"}
+	iCreateAppBlockBuilderStreamingURLResult            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockBuilderStreamingURLResult"}
+	iCreateAppBlockRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockRequest"}
+	iCreateAppBlockResult                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateAppBlockResult"}
+	iCreateApplicationRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateApplicationRequest"}
+	iCreateApplicationResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateApplicationResult"}
+	iCreateDirectoryConfigRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateDirectoryConfigRequest"}
+	iCreateDirectoryConfigResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateDirectoryConfigResult"}
+	iCreateEntitlementRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateEntitlementRequest"}
+	iCreateEntitlementResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateEntitlementResult"}
+	iCreateExportImageTaskRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateExportImageTaskRequest"}
+	iCreateExportImageTaskResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateExportImageTaskResult"}
+	iCreateFleetRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateFleetRequest"}
+	iCreateFleetResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateFleetResult"}
+	iCreateImageBuilderRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImageBuilderRequest"}
+	iCreateImageBuilderResult                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImageBuilderResult"}
+	iCreateImageBuilderStreamingURLRequest              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImageBuilderStreamingURLRequest"}
+	iCreateImageBuilderStreamingURLResult               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImageBuilderStreamingURLResult"}
+	iCreateImportedImageRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImportedImageRequest"}
+	iCreateImportedImageResult                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateImportedImageResult"}
+	iCreateStackRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateStackRequest"}
+	iCreateStackResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateStackResult"}
+	iCreateStreamingURLRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateStreamingURLRequest"}
+	iCreateStreamingURLResult                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateStreamingURLResult"}
+	iCreateThemeForStackRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateThemeForStackRequest"}
+	iCreateThemeForStackResult                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateThemeForStackResult"}
+	iCreateUpdatedImageRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUpdatedImageRequest"}
+	iCreateUpdatedImageResult                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUpdatedImageResult"}
+	iCreateUsageReportSubscriptionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUsageReportSubscriptionRequest"}
+	iCreateUsageReportSubscriptionResult                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUsageReportSubscriptionResult"}
+	iCreateUserRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUserRequest"}
+	iCreateUserResult                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "CreateUserResult"}
+	iDeleteAppBlockBuilderRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteAppBlockBuilderRequest"}
+	iDeleteAppBlockBuilderResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteAppBlockBuilderResult"}
+	iDeleteAppBlockRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteAppBlockRequest"}
+	iDeleteAppBlockResult                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteAppBlockResult"}
+	iDeleteApplicationRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteApplicationRequest"}
+	iDeleteApplicationResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteApplicationResult"}
+	iDeleteDirectoryConfigRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteDirectoryConfigRequest"}
+	iDeleteDirectoryConfigResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteDirectoryConfigResult"}
+	iDeleteEntitlementRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteEntitlementRequest"}
+	iDeleteEntitlementResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteEntitlementResult"}
+	iDeleteFleetRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteFleetRequest"}
+	iDeleteFleetResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteFleetResult"}
+	iDeleteImageBuilderRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImageBuilderRequest"}
+	iDeleteImageBuilderResult                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImageBuilderResult"}
+	iDeleteImageRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImageRequest"}
+	iDeleteImageResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImageResult"}
+	iDeleteImagePermissionsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImagePermissionsRequest"}
+	iDeleteImagePermissionsResult                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteImagePermissionsResult"}
+	iDeleteStackRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteStackRequest"}
+	iDeleteStackResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteStackResult"}
+	iDeleteThemeForStackRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteThemeForStackRequest"}
+	iDeleteThemeForStackResult                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteThemeForStackResult"}
+	iDeleteUsageReportSubscriptionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteUsageReportSubscriptionRequest"}
+	iDeleteUsageReportSubscriptionResult                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteUsageReportSubscriptionResult"}
+	iDeleteUserRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteUserRequest"}
+	iDeleteUserResult                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DeleteUserResult"}
+	iDescribeAppBlockBuilderAppBlockAssociationsRequest = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlockBuilderAppBlockAssociationsRequest"}
+	iDescribeAppBlockBuilderAppBlockAssociationsResult  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlockBuilderAppBlockAssociationsResult"}
+	iDescribeAppBlockBuildersRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlockBuildersRequest"}
+	iDescribeAppBlockBuildersResult                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlockBuildersResult"}
+	iDescribeAppBlocksRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlocksRequest"}
+	iDescribeAppBlocksResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppBlocksResult"}
+	iDescribeApplicationFleetAssociationsRequest        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeApplicationFleetAssociationsRequest"}
+	iDescribeApplicationFleetAssociationsResult         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeApplicationFleetAssociationsResult"}
+	iDescribeApplicationsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeApplicationsRequest"}
+	iDescribeApplicationsResult                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeApplicationsResult"}
+	iDescribeAppLicenseUsageRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppLicenseUsageRequest"}
+	iDescribeAppLicenseUsageResult                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeAppLicenseUsageResult"}
+	iDescribeDirectoryConfigsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeDirectoryConfigsRequest"}
+	iDescribeDirectoryConfigsResult                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeDirectoryConfigsResult"}
+	iDescribeEntitlementsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeEntitlementsRequest"}
+	iDescribeEntitlementsResult                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeEntitlementsResult"}
+	iDescribeFleetsRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeFleetsRequest"}
+	iDescribeFleetsResult                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeFleetsResult"}
+	iDescribeImageBuildersRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImageBuildersRequest"}
+	iDescribeImageBuildersResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImageBuildersResult"}
+	iDescribeImagePermissionsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImagePermissionsRequest"}
+	iDescribeImagePermissionsResult                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImagePermissionsResult"}
+	iDescribeImagesRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImagesRequest"}
+	iDescribeImagesResult                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeImagesResult"}
+	iDescribeSessionsRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeSessionsRequest"}
+	iDescribeSessionsResult                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeSessionsResult"}
+	iDescribeSoftwareAssociationsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeSoftwareAssociationsRequest"}
+	iDescribeSoftwareAssociationsResult                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeSoftwareAssociationsResult"}
+	iDescribeStacksRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeStacksRequest"}
+	iDescribeStacksResult                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeStacksResult"}
+	iDescribeThemeForStackRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeThemeForStackRequest"}
+	iDescribeThemeForStackResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeThemeForStackResult"}
+	iDescribeUsageReportSubscriptionsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUsageReportSubscriptionsRequest"}
+	iDescribeUsageReportSubscriptionsResult             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUsageReportSubscriptionsResult"}
+	iDescribeUsersRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUsersRequest"}
+	iDescribeUsersResult                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUsersResult"}
+	iDescribeUserStackAssociationsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUserStackAssociationsRequest"}
+	iDescribeUserStackAssociationsResult                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DescribeUserStackAssociationsResult"}
+	iDisableUserRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisableUserRequest"}
+	iDisableUserResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisableUserResult"}
+	iDisassociateAppBlockBuilderAppBlockRequest         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateAppBlockBuilderAppBlockRequest"}
+	iDisassociateAppBlockBuilderAppBlockResult          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateAppBlockBuilderAppBlockResult"}
+	iDisassociateApplicationFleetRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateApplicationFleetRequest"}
+	iDisassociateApplicationFleetResult                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateApplicationFleetResult"}
+	iDisassociateApplicationFromEntitlementRequest      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateApplicationFromEntitlementRequest"}
+	iDisassociateApplicationFromEntitlementResult       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateApplicationFromEntitlementResult"}
+	iDisassociateFleetRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateFleetRequest"}
+	iDisassociateFleetResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateFleetResult"}
+	iDisassociateSoftwareFromImageBuilderRequest        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateSoftwareFromImageBuilderRequest"}
+	iDisassociateSoftwareFromImageBuilderResult         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DisassociateSoftwareFromImageBuilderResult"}
+	iDrainSessionInstanceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DrainSessionInstanceRequest"}
+	iDrainSessionInstanceResult                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "DrainSessionInstanceResult"}
+	iEnableUserRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EnableUserRequest"}
+	iEnableUserResult                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "EnableUserResult"}
+	iExpireSessionRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ExpireSessionRequest"}
+	iExpireSessionResult                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ExpireSessionResult"}
+	iGetExportImageTaskRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "GetExportImageTaskRequest"}
+	iGetExportImageTaskResult                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "GetExportImageTaskResult"}
+	iListAssociatedFleetsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListAssociatedFleetsRequest"}
+	iListAssociatedFleetsResult                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListAssociatedFleetsResult"}
+	iListAssociatedStacksRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListAssociatedStacksRequest"}
+	iListAssociatedStacksResult                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListAssociatedStacksResult"}
+	iListEntitledApplicationsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListEntitledApplicationsRequest"}
+	iListEntitledApplicationsResult                     = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListEntitledApplicationsResult"}
+	iListExportImageTasksRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListExportImageTasksRequest"}
+	iListExportImageTasksResult                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListExportImageTasksResult"}
+	iListTagsForResourceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "ListTagsForResourceResponse"}
+	iStartAppBlockBuilderRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartAppBlockBuilderRequest"}
+	iStartAppBlockBuilderResult                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartAppBlockBuilderResult"}
+	iStartFleetRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartFleetRequest"}
+	iStartFleetResult                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartFleetResult"}
+	iStartImageBuilderRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartImageBuilderRequest"}
+	iStartImageBuilderResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartImageBuilderResult"}
+	iStartSoftwareDeploymentToImageBuilderRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartSoftwareDeploymentToImageBuilderRequest"}
+	iStartSoftwareDeploymentToImageBuilderResult        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StartSoftwareDeploymentToImageBuilderResult"}
+	iStopAppBlockBuilderRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopAppBlockBuilderRequest"}
+	iStopAppBlockBuilderResult                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopAppBlockBuilderResult"}
+	iStopFleetRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopFleetRequest"}
+	iStopFleetResult                                    = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopFleetResult"}
+	iStopImageBuilderRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopImageBuilderRequest"}
+	iStopImageBuilderResult                             = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "StopImageBuilderResult"}
+	iTagResourceRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "TagResourceRequest"}
+	iTagResourceResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "TagResourceResponse"}
+	iUntagResourceRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UntagResourceResponse"}
+	iUpdateAppBlockBuilderRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateAppBlockBuilderRequest"}
+	iUpdateAppBlockBuilderResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateAppBlockBuilderResult"}
+	iUpdateApplicationRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateApplicationRequest"}
+	iUpdateApplicationResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateApplicationResult"}
+	iUpdateDirectoryConfigRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateDirectoryConfigRequest"}
+	iUpdateDirectoryConfigResult                        = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateDirectoryConfigResult"}
+	iUpdateEntitlementRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateEntitlementRequest"}
+	iUpdateEntitlementResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateEntitlementResult"}
+	iUpdateFleetRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateFleetRequest"}
+	iUpdateFleetResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateFleetResult"}
+	iUpdateImagePermissionsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateImagePermissionsRequest"}
+	iUpdateImagePermissionsResult                       = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateImagePermissionsResult"}
+	iUpdateStackRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateStackRequest"}
+	iUpdateStackResult                                  = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateStackResult"}
+	iUpdateThemeForStackRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateThemeForStackRequest"}
+	iUpdateThemeForStackResult                          = smithy.ShapeName{Namespace: "com.amazonaws.appstream", Name: "UpdateThemeForStackResult"}
+	pUnit                                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 412}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessEndpoint_EndpointType, &sAccessEndpoint_VpceId}}
+var m_AccessEndpointList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessEndpointList_member}}
+var mAccessEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessEndpointType_STREAMING}}
+var mAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAction_CLIPBOARD_COPY_FROM_LOCAL_DEVICE, &sAction_CLIPBOARD_COPY_TO_LOCAL_DEVICE, &sAction_FILE_UPLOAD, &sAction_FILE_DOWNLOAD, &sAction_PRINTING_TO_LOCAL_DEVICE, &sAction_DOMAIN_PASSWORD_SIGNIN, &sAction_DOMAIN_SMART_CARD_SIGNIN, &sAction_AUTO_TIME_ZONE_REDIRECTION}}
+var m_AdminAppLicenseUsageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdminAppLicenseUsageList_member}}
+var mAdminAppLicenseUsageRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sAdminAppLicenseUsageRecord_UserArn, &sAdminAppLicenseUsageRecord_BillingPeriod, &sAdminAppLicenseUsageRecord_OwnerAWSAccountId, &sAdminAppLicenseUsageRecord_SubscriptionFirstUsedDate, &sAdminAppLicenseUsageRecord_SubscriptionLastUsedDate, &sAdminAppLicenseUsageRecord_LicenseType, &sAdminAppLicenseUsageRecord_UserId}}
+var mAgentAccessConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentAccessConfig_Settings, &sAgentAccessConfig_S3BucketArn, &sAgentAccessConfig_ScreenshotsUploadEnabled, &sAgentAccessConfig_ScreenResolution, &sAgentAccessConfig_ScreenImageFormat, &sAgentAccessConfig_UserControlMode}}
+var mAgentAccessConfigForUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentAccessConfigForUpdate_Settings, &sAgentAccessConfigForUpdate_S3BucketArn, &sAgentAccessConfigForUpdate_ScreenshotsUploadEnabled, &sAgentAccessConfigForUpdate_ScreenResolution, &sAgentAccessConfigForUpdate_ScreenImageFormat, &sAgentAccessConfigForUpdate_UserControlMode}}
+var mAgentAccessSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentAccessSetting_AgentAction, &sAgentAccessSetting_Permission}}
+var m_AgentAccessSettingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AgentAccessSettingList_member}}
+var mAgentAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentAction_COMPUTER_VISION, &sAgentAction_COMPUTER_INPUT, &sAgentAction_FORWARD_MCP_TOOLS}}
+var mAgentSoftwareVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentSoftwareVersion_CURRENT_LATEST, &sAgentSoftwareVersion_ALWAYS_LATEST}}
+var mAppBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlock_Name, &sAppBlock_Arn, &sAppBlock_Description, &sAppBlock_DisplayName, &sAppBlock_SourceS3Location, &sAppBlock_SetupScriptDetails, &sAppBlock_CreatedTime, &sAppBlock_PostSetupScriptDetails, &sAppBlock_PackagingType, &sAppBlock_State, &sAppBlock_AppBlockErrors}, Hash: &hAppBlock}
+var mAppBlockBuilder = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockBuilder_Arn, &sAppBlockBuilder_Name, &sAppBlockBuilder_DisplayName, &sAppBlockBuilder_Description, &sAppBlockBuilder_Platform, &sAppBlockBuilder_InstanceType, &sAppBlockBuilder_EnableDefaultInternetAccess, &sAppBlockBuilder_IamRoleArn, &sAppBlockBuilder_VpcConfig, &sAppBlockBuilder_State, &sAppBlockBuilder_CreatedTime, &sAppBlockBuilder_AppBlockBuilderErrors, &sAppBlockBuilder_StateChangeReason, &sAppBlockBuilder_AccessEndpoints, &sAppBlockBuilder_DisableIMDSV1}, Hash: &hAppBlockBuilder}
+var mAppBlockBuilderAppBlockAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockBuilderAppBlockAssociation_AppBlockArn, &sAppBlockBuilderAppBlockAssociation_AppBlockBuilderName}}
+var m_AppBlockBuilderAppBlockAssociationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppBlockBuilderAppBlockAssociationsList_member}}
+var mAppBlockBuilderAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockBuilderAttribute_IAM_ROLE_ARN, &sAppBlockBuilderAttribute_ACCESS_ENDPOINTS, &sAppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS}}
+var m_AppBlockBuilderAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppBlockBuilderAttributes_member}}
+var m_AppBlockBuilderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppBlockBuilderList_member}}
+var mAppBlockBuilderPlatformType = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockBuilderPlatformType_WINDOWS_SERVER_2019}}
+var mAppBlockBuilderState = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockBuilderState_STARTING, &sAppBlockBuilderState_RUNNING, &sAppBlockBuilderState_STOPPING, &sAppBlockBuilderState_STOPPED}}
+var mAppBlockBuilderStateChangeReason = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockBuilderStateChangeReason_Code, &sAppBlockBuilderStateChangeReason_Message}}
+var mAppBlockBuilderStateChangeReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR}}
+var m_AppBlocks = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppBlocks_member}}
+var mAppBlockState = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBlockState_INACTIVE, &sAppBlockState_ACTIVE}}
+var m_AppCatalogConfig = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppCatalogConfig_member}}
+var mApplication = smithy.SchemaMembers{List: []*smithy.Schema{&sApplication_Name, &sApplication_DisplayName, &sApplication_IconURL, &sApplication_LaunchPath, &sApplication_LaunchParameters, &sApplication_Enabled, &sApplication_Metadata, &sApplication_WorkingDirectory, &sApplication_Description, &sApplication_Arn, &sApplication_AppBlockArn, &sApplication_IconS3Location, &sApplication_Platforms, &sApplication_InstanceFamilies, &sApplication_CreatedTime}, Hash: &hApplication}
+var mApplicationAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationAttribute_LAUNCH_PARAMETERS, &sApplicationAttribute_WORKING_DIRECTORY}}
+var m_ApplicationAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationAttributes_member}}
+var mApplicationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationConfig_Name, &sApplicationConfig_DisplayName, &sApplicationConfig_AbsoluteAppPath, &sApplicationConfig_AbsoluteIconPath, &sApplicationConfig_AbsoluteManifestPath, &sApplicationConfig_WorkingDirectory, &sApplicationConfig_LaunchParameters}}
+var mApplicationFleetAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationFleetAssociation_FleetName, &sApplicationFleetAssociation_ApplicationArn}}
+var m_ApplicationFleetAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationFleetAssociationList_member}}
+var m_Applications = smithy.SchemaMembers{List: []*smithy.Schema{&s_Applications_member}}
+var mApplicationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationSettings_Enabled, &sApplicationSettings_SettingsGroup}}
+var mApplicationSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationSettingsResponse_Enabled, &sApplicationSettingsResponse_SettingsGroup, &sApplicationSettingsResponse_S3BucketName}}
+var mAppVisibility = smithy.SchemaMembers{List: []*smithy.Schema{&sAppVisibility_ALL, &sAppVisibility_ASSOCIATED}}
+var m_ArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArnList_member}}
+var mAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationType_API, &sAuthenticationType_SAML, &sAuthenticationType_USERPOOL, &sAuthenticationType_AWS_AD}}
+var m_AwsAccountIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsAccountIdList_member}}
+var mCertificateBasedAuthProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateBasedAuthProperties_Status, &sCertificateBasedAuthProperties_CertificateAuthorityArn}}
+var mCertificateBasedAuthStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateBasedAuthStatus_DISABLED, &sCertificateBasedAuthStatus_ENABLED, &sCertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK}}
+var mComputeCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeCapacity_DesiredInstances, &sComputeCapacity_DesiredSessions}}
+var mComputeCapacityStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeCapacityStatus_Desired, &sComputeCapacityStatus_Running, &sComputeCapacityStatus_InUse, &sComputeCapacityStatus_Available, &sComputeCapacityStatus_DesiredUserSessions, &sComputeCapacityStatus_AvailableUserSessions, &sComputeCapacityStatus_ActiveUserSessions, &sComputeCapacityStatus_ActualUserSessions, &sComputeCapacityStatus_Draining, &sComputeCapacityStatus_DrainModeActiveUserSessions, &sComputeCapacityStatus_DrainModeUnusedUserSessions}, Hash: &hComputeCapacityStatus}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mContentRedirection = smithy.SchemaMembers{List: []*smithy.Schema{&sContentRedirection_HostToClient}}
+var mDirectoryConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryConfig_DirectoryName, &sDirectoryConfig_OrganizationalUnitDistinguishedNames, &sDirectoryConfig_ServiceAccountCredentials, &sDirectoryConfig_CreatedTime, &sDirectoryConfig_CertificateBasedAuthProperties}}
+var m_DirectoryConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectoryConfigList_member}}
+var m_DirectoryNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectoryNameList_member}}
+var mDomainJoinInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainJoinInfo_DirectoryName, &sDomainJoinInfo_OrganizationalUnitDistinguishedName}}
+var m_DomainList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainList_member}}
+var mDryRunOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDryRunOperationException_Message}}
+var mDynamicAppProvidersEnabled = smithy.SchemaMembers{List: []*smithy.Schema{&sDynamicAppProvidersEnabled_ENABLED, &sDynamicAppProvidersEnabled_DISABLED}}
+var m_EmbedHostDomains = smithy.SchemaMembers{List: []*smithy.Schema{&s_EmbedHostDomains_member}}
+var mEntitledApplication = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitledApplication_ApplicationIdentifier}}
+var m_EntitledApplicationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntitledApplicationList_member}}
+var mEntitlement = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitlement_Name, &sEntitlement_StackName, &sEntitlement_Description, &sEntitlement_AppVisibility, &sEntitlement_Attributes, &sEntitlement_CreatedTime, &sEntitlement_LastModifiedTime}}
+var mEntitlementAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitlementAlreadyExistsException_Message}}
+var mEntitlementAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitlementAttribute_Name, &sEntitlementAttribute_Value}}
+var m_EntitlementAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntitlementAttributeList_member}}
+var m_EntitlementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntitlementList_member}}
+var mEntitlementNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitlementNotFoundException_Message}}
+var mErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetails_ErrorCode, &sErrorDetails_ErrorMessage}}
+var m_ErrorDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ErrorDetailsList_member}}
+var mExportImageTask = smithy.SchemaMembers{List: []*smithy.Schema{&sExportImageTask_TaskId, &sExportImageTask_ImageArn, &sExportImageTask_AmiName, &sExportImageTask_CreatedDate, &sExportImageTask_AmiDescription, &sExportImageTask_State, &sExportImageTask_AmiId, &sExportImageTask_TagSpecifications, &sExportImageTask_ErrorDetails}, Hash: &hExportImageTask}
+var m_ExportImageTasks = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExportImageTasks_member}}
+var mExportImageTaskState = smithy.SchemaMembers{List: []*smithy.Schema{&sExportImageTaskState_EXPORTING, &sExportImageTaskState_COMPLETED, &sExportImageTaskState_FAILED, &sExportImageTaskState_TIMED_OUT}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Name, &sFilter_Values}}
+var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_member}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mFleet = smithy.SchemaMembers{List: []*smithy.Schema{&sFleet_Arn, &sFleet_Name, &sFleet_DisplayName, &sFleet_Description, &sFleet_ImageName, &sFleet_ImageArn, &sFleet_InstanceType, &sFleet_FleetType, &sFleet_ComputeCapacityStatus, &sFleet_MaxUserDurationInSeconds, &sFleet_DisconnectTimeoutInSeconds, &sFleet_State, &sFleet_VpcConfig, &sFleet_CreatedTime, &sFleet_FleetErrors, &sFleet_EnableDefaultInternetAccess, &sFleet_DomainJoinInfo, &sFleet_IdleDisconnectTimeoutInSeconds, &sFleet_IamRoleArn, &sFleet_StreamView, &sFleet_Platform, &sFleet_MaxConcurrentSessions, &sFleet_UsbDeviceFilterStrings, &sFleet_SessionScriptS3Location, &sFleet_MaxSessionsPerInstance, &sFleet_RootVolumeConfig, &sFleet_DisableIMDSV1}, Hash: &hFleet}
+var mFleetAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetAttribute_VPC_CONFIGURATION, &sFleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS, &sFleetAttribute_DOMAIN_JOIN_INFO, &sFleetAttribute_IAM_ROLE_ARN, &sFleetAttribute_USB_DEVICE_FILTER_STRINGS, &sFleetAttribute_SESSION_SCRIPT_S3_LOCATION, &sFleetAttribute_MAX_SESSIONS_PER_INSTANCE, &sFleetAttribute_VOLUME_CONFIGURATION}}
+var m_FleetAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetAttributes_member}}
+var mFleetError = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetError_ErrorCode, &sFleetError_ErrorMessage}}
+var mFleetErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION, &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION, &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION, &sFleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED, &sFleetErrorCode_INTERNAL_SERVICE_ERROR, &sFleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING, &sFleetErrorCode_MACHINE_ROLE_IS_MISSING, &sFleetErrorCode_STS_DISABLED_IN_REGION, &sFleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES, &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION, &sFleetErrorCode_SUBNET_NOT_FOUND, &sFleetErrorCode_IMAGE_NOT_FOUND, &sFleetErrorCode_INVALID_SUBNET_CONFIGURATION, &sFleetErrorCode_SECURITY_GROUPS_NOT_FOUND, &sFleetErrorCode_IGW_NOT_ATTACHED, &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION, &sFleetErrorCode_FLEET_STOPPED, &sFleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE, &sFleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND, &sFleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED, &sFleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE, &sFleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER, &sFleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA, &sFleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN, &sFleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED, &sFleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME, &sFleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED, &sFleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED, &sFleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED, &sFleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR, &sFleetErrorCode_VALIDATION_ERROR}, Hash: &hFleetErrorCode}
+var m_FleetErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetErrors_member}}
+var m_FleetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetList_member}}
+var mFleetState = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetState_STARTING, &sFleetState_RUNNING, &sFleetState_STOPPING, &sFleetState_STOPPED}}
+var mFleetType = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetType_ALWAYS_ON, &sFleetType_ON_DEMAND, &sFleetType_ELASTIC}}
+var mImage = smithy.SchemaMembers{List: []*smithy.Schema{&sImage_Name, &sImage_Arn, &sImage_BaseImageArn, &sImage_DisplayName, &sImage_State, &sImage_Visibility, &sImage_ImageBuilderSupported, &sImage_ImageBuilderName, &sImage_Platform, &sImage_Description, &sImage_StateChangeReason, &sImage_Applications, &sImage_CreatedTime, &sImage_PublicBaseImageReleasedDate, &sImage_AppstreamAgentVersion, &sImage_ImagePermissions, &sImage_ImageErrors, &sImage_LatestAppstreamAgentVersion, &sImage_SupportedInstanceFamilies, &sImage_DynamicAppProvidersEnabled, &sImage_ImageSharedWithOthers, &sImage_ManagedSoftwareIncluded, &sImage_ImageType, &sImage_ImageSoftwareMetadata}, Hash: &hImage}
+var mImageBuilder = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBuilder_Name, &sImageBuilder_Arn, &sImageBuilder_ImageArn, &sImageBuilder_Description, &sImageBuilder_DisplayName, &sImageBuilder_VpcConfig, &sImageBuilder_InstanceType, &sImageBuilder_Platform, &sImageBuilder_IamRoleArn, &sImageBuilder_State, &sImageBuilder_StateChangeReason, &sImageBuilder_CreatedTime, &sImageBuilder_EnableDefaultInternetAccess, &sImageBuilder_DomainJoinInfo, &sImageBuilder_NetworkAccessConfiguration, &sImageBuilder_ImageBuilderErrors, &sImageBuilder_AppstreamAgentVersion, &sImageBuilder_AccessEndpoints, &sImageBuilder_RootVolumeConfig, &sImageBuilder_LatestAppstreamAgentVersion, &sImageBuilder_DisableIMDSV1}, Hash: &hImageBuilder}
+var m_ImageBuilderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImageBuilderList_member}}
+var mImageBuilderState = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBuilderState_PENDING, &sImageBuilderState_UPDATING_AGENT, &sImageBuilderState_RUNNING, &sImageBuilderState_STOPPING, &sImageBuilderState_STOPPED, &sImageBuilderState_REBOOTING, &sImageBuilderState_SNAPSHOTTING, &sImageBuilderState_DELETING, &sImageBuilderState_FAILED, &sImageBuilderState_UPDATING, &sImageBuilderState_PENDING_QUALIFICATION, &sImageBuilderState_PENDING_SYNCING_APPS, &sImageBuilderState_SYNCING_APPS, &sImageBuilderState_PENDING_IMAGE_IMPORT}, Hash: &hImageBuilderState}
+var mImageBuilderStateChangeReason = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBuilderStateChangeReason_Code, &sImageBuilderStateChangeReason_Message}}
+var mImageBuilderStateChangeReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBuilderStateChangeReasonCode_INTERNAL_ERROR, &sImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE}}
+var m_ImageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImageList_member}}
+var mImagePermissions = smithy.SchemaMembers{List: []*smithy.Schema{&sImagePermissions_allowFleet, &sImagePermissions_allowImageBuilder}}
+var mImageSharedWithOthers = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSharedWithOthers_TRUE, &sImageSharedWithOthers_FALSE}}
+var mImageSoftwareMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSoftwareMetadata_nvidiaGridDriverVersion}}
+var mImageState = smithy.SchemaMembers{List: []*smithy.Schema{&sImageState_PENDING, &sImageState_AVAILABLE, &sImageState_FAILED, &sImageState_COPYING, &sImageState_DELETING, &sImageState_CREATING, &sImageState_IMPORTING, &sImageState_VALIDATING}}
+var mImageStateChangeReason = smithy.SchemaMembers{List: []*smithy.Schema{&sImageStateChangeReason_Code, &sImageStateChangeReason_Message}}
+var mImageStateChangeReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sImageStateChangeReasonCode_INTERNAL_ERROR, &sImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE, &sImageStateChangeReasonCode_IMAGE_COPY_FAILURE, &sImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE, &sImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE}}
+var mImageType = smithy.SchemaMembers{List: []*smithy.Schema{&sImageType_CUSTOM, &sImageType_NATIVE, &sImageType_BYOL}}
+var mIncompatibleImageException = smithy.SchemaMembers{List: []*smithy.Schema{&sIncompatibleImageException_Message}}
+var mInstanceDrainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceDrainStatus_ACTIVE, &sInstanceDrainStatus_DRAINING, &sInstanceDrainStatus_NOT_APPLICABLE}}
+var mInvalidAccountStatusException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidAccountStatusException_Message}}
+var mInvalidParameterCombinationException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterCombinationException_Message}}
+var mInvalidRoleException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRoleException_Message}}
+var mLastReportGenerationExecutionError = smithy.SchemaMembers{List: []*smithy.Schema{&sLastReportGenerationExecutionError_ErrorCode, &sLastReportGenerationExecutionError_ErrorMessage}}
+var m_LastReportGenerationExecutionErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_LastReportGenerationExecutionErrors_member}}
+var mLatestAppstreamAgentVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sLatestAppstreamAgentVersion_TRUE, &sLatestAppstreamAgentVersion_FALSE}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mMessageAction = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageAction_SUPPRESS, &sMessageAction_RESEND}}
+var m_Metadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_Metadata_key, &s_Metadata_value}}
+var mNetworkAccessConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkAccessConfiguration_EniPrivateIpAddress, &sNetworkAccessConfiguration_EniIpv6Addresses, &sNetworkAccessConfiguration_EniId}}
+var mOperationNotPermittedException = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationNotPermittedException_Message}}
+var m_OrganizationalUnitDistinguishedNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationalUnitDistinguishedNamesList_member}}
+var mPackagingType = smithy.SchemaMembers{List: []*smithy.Schema{&sPackagingType_CUSTOM, &sPackagingType_APPSTREAM2}}
+var mPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sPermission_ENABLED, &sPermission_DISABLED}}
+var m_Platforms = smithy.SchemaMembers{List: []*smithy.Schema{&s_Platforms_member}}
+var mPlatformType = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformType_WINDOWS, &sPlatformType_WINDOWS_SERVER_2016, &sPlatformType_WINDOWS_SERVER_2019, &sPlatformType_WINDOWS_SERVER_2022, &sPlatformType_WINDOWS_SERVER_2025, &sPlatformType_WINDOWS_11, &sPlatformType_AMAZON_LINUX2, &sPlatformType_RHEL8, &sPlatformType_ROCKY_LINUX8, &sPlatformType_UBUNTU_PRO_2404}, Hash: &hPlatformType}
+var mPreferredProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sPreferredProtocol_TCP, &sPreferredProtocol_UDP}}
+var mRequestLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestLimitExceededException_Message}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_Message}}
+var mResourceError = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceError_ErrorCode, &sResourceError_ErrorMessage, &sResourceError_ErrorTimestamp}}
+var m_ResourceErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceErrors_member}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_Message}}
+var mResourceNotAvailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotAvailableException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRuntimeValidationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeValidationConfig_IntendedInstanceType}}
+var mS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Location_S3Bucket, &sS3Location_S3Key}}
+var mScreenImageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sScreenImageFormat_PNG, &sScreenImageFormat_JPEG}}
+var mScreenResolution = smithy.SchemaMembers{List: []*smithy.Schema{&sScreenResolution_W_1280xH_720}}
+var mScriptDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sScriptDetails_ScriptS3Location, &sScriptDetails_ExecutablePath, &sScriptDetails_ExecutableParameters, &sScriptDetails_TimeoutInSeconds}}
+var m_SecurityGroupIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIdList_member}}
+var mServiceAccountCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceAccountCredentials_AccountName, &sServiceAccountCredentials_AccountPassword}}
+var mSession = smithy.SchemaMembers{List: []*smithy.Schema{&sSession_Id, &sSession_UserId, &sSession_StackName, &sSession_FleetName, &sSession_State, &sSession_ConnectionState, &sSession_StartTime, &sSession_MaxExpirationTime, &sSession_AuthenticationType, &sSession_NetworkAccessConfiguration, &sSession_InstanceId, &sSession_InstanceDrainStatus}, Hash: &hSession}
+var mSessionConnectionState = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionConnectionState_CONNECTED, &sSessionConnectionState_NOT_CONNECTED}}
+var m_SessionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SessionList_member}}
+var mSessionState = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionState_ACTIVE, &sSessionState_PENDING, &sSessionState_EXPIRED}}
+var mSharedImagePermissions = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedImagePermissions_sharedAccountId, &sSharedImagePermissions_imagePermissions}}
+var m_SharedImagePermissionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SharedImagePermissionsList_member}}
+var mSoftwareAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&sSoftwareAssociations_SoftwareName, &sSoftwareAssociations_Status, &sSoftwareAssociations_DeploymentError}}
+var m_SoftwareAssociationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SoftwareAssociationsList_member}}
+var mSoftwareDeploymentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSoftwareDeploymentStatus_STAGED_FOR_INSTALLATION, &sSoftwareDeploymentStatus_PENDING_INSTALLATION, &sSoftwareDeploymentStatus_INSTALLED, &sSoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION, &sSoftwareDeploymentStatus_PENDING_UNINSTALLATION, &sSoftwareDeploymentStatus_FAILED_TO_INSTALL, &sSoftwareDeploymentStatus_FAILED_TO_UNINSTALL}}
+var mStack = smithy.SchemaMembers{List: []*smithy.Schema{&sStack_Arn, &sStack_Name, &sStack_Description, &sStack_DisplayName, &sStack_CreatedTime, &sStack_StorageConnectors, &sStack_RedirectURL, &sStack_FeedbackURL, &sStack_StackErrors, &sStack_UserSettings, &sStack_ApplicationSettings, &sStack_AccessEndpoints, &sStack_EmbedHostDomains, &sStack_StreamingExperienceSettings, &sStack_ContentRedirection, &sStack_AgentAccessConfig, &sStack_StorageConnectorAuthentication}, Hash: &hStack}
+var mStackAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sStackAttribute_STORAGE_CONNECTORS, &sStackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS, &sStackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE, &sStackAttribute_STORAGE_CONNECTOR_ONE_DRIVE, &sStackAttribute_REDIRECT_URL, &sStackAttribute_FEEDBACK_URL, &sStackAttribute_THEME_NAME, &sStackAttribute_USER_SETTINGS, &sStackAttribute_EMBED_HOST_DOMAINS, &sStackAttribute_IAM_ROLE_ARN, &sStackAttribute_ACCESS_ENDPOINTS, &sStackAttribute_STREAMING_EXPERIENCE_SETTINGS, &sStackAttribute_CONTENT_REDIRECTION, &sStackAttribute_AGENT_ACCESS_CONFIG, &sStackAttribute_STORAGE_CONNECTOR_AUTHENTICATION}, Hash: &hStackAttribute}
+var m_StackAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_StackAttributes_member}}
+var mStackError = smithy.SchemaMembers{List: []*smithy.Schema{&sStackError_ErrorCode, &sStackError_ErrorMessage}}
+var mStackErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sStackErrorCode_STORAGE_CONNECTOR_ERROR, &sStackErrorCode_INTERNAL_SERVICE_ERROR}}
+var m_StackErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_StackErrors_member}}
+var m_StackList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StackList_member}}
+var mStorageConnector = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageConnector_ConnectorType, &sStorageConnector_ResourceIdentifier, &sStorageConnector_Domains, &sStorageConnector_DomainsRequireAdminConsent}}
+var mStorageConnectorAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageConnectorAuthentication_FORCE_REAUTHENTICATION, &sStorageConnectorAuthentication_REUSE_CREDENTIALS}}
+var m_StorageConnectorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorageConnectorList_member}}
+var mStorageConnectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageConnectorType_HOMEFOLDERS, &sStorageConnectorType_GOOGLE_DRIVE, &sStorageConnectorType_ONE_DRIVE}}
+var mStreamingExperienceSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamingExperienceSettings_PreferredProtocol}}
+var mStreamView = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamView_APP, &sStreamView_DESKTOP}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_SubnetIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIdList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTheme = smithy.SchemaMembers{List: []*smithy.Schema{&sTheme_StackName, &sTheme_State, &sTheme_ThemeTitleText, &sTheme_ThemeStyling, &sTheme_ThemeFooterLinks, &sTheme_ThemeOrganizationLogoURL, &sTheme_ThemeFaviconURL, &sTheme_CreatedTime}}
+var mThemeAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sThemeAttribute_FOOTER_LINKS}}
+var m_ThemeAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThemeAttributes_member}}
+var mThemeFooterLink = smithy.SchemaMembers{List: []*smithy.Schema{&sThemeFooterLink_DisplayName, &sThemeFooterLink_FooterLinkURL}}
+var m_ThemeFooterLinks = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThemeFooterLinks_member}}
+var mThemeState = smithy.SchemaMembers{List: []*smithy.Schema{&sThemeState_ENABLED, &sThemeState_DISABLED}}
+var mThemeStyling = smithy.SchemaMembers{List: []*smithy.Schema{&sThemeStyling_LIGHT_BLUE, &sThemeStyling_BLUE, &sThemeStyling_PINK, &sThemeStyling_RED}}
+var m_UrlPatternList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UrlPatternList_member}}
+var mUrlRedirectionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUrlRedirectionConfig_Enabled, &sUrlRedirectionConfig_AllowedUrls, &sUrlRedirectionConfig_DeniedUrls}}
+var mUsageReportExecutionErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageReportExecutionErrorCode_RESOURCE_NOT_FOUND, &sUsageReportExecutionErrorCode_ACCESS_DENIED, &sUsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR}}
+var mUsageReportSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageReportSchedule_DAILY}}
+var mUsageReportSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageReportSubscription_S3BucketName, &sUsageReportSubscription_Schedule, &sUsageReportSubscription_LastGeneratedReportDate, &sUsageReportSubscription_SubscriptionErrors}}
+var m_UsageReportSubscriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UsageReportSubscriptionList_member}}
+var m_UsbDeviceFilterStrings = smithy.SchemaMembers{List: []*smithy.Schema{&s_UsbDeviceFilterStrings_member}}
+var mUser = smithy.SchemaMembers{List: []*smithy.Schema{&sUser_Arn, &sUser_UserName, &sUser_Enabled, &sUser_Status, &sUser_FirstName, &sUser_LastName, &sUser_CreatedTime, &sUser_AuthenticationType}}
+var mUserControlMode = smithy.SchemaMembers{List: []*smithy.Schema{&sUserControlMode_VIEW_ONLY, &sUserControlMode_VIEW_STOP, &sUserControlMode_DISABLED}}
+var m_UserList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserList_member}}
+var mUserSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sUserSetting_Action, &sUserSetting_Permission, &sUserSetting_MaximumLength}}
+var m_UserSettingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserSettingList_member}}
+var mUserStackAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sUserStackAssociation_StackName, &sUserStackAssociation_UserName, &sUserStackAssociation_AuthenticationType, &sUserStackAssociation_SendEmailNotification}}
+var mUserStackAssociationError = smithy.SchemaMembers{List: []*smithy.Schema{&sUserStackAssociationError_UserStackAssociation, &sUserStackAssociationError_ErrorCode, &sUserStackAssociationError_ErrorMessage}}
+var mUserStackAssociationErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sUserStackAssociationErrorCode_STACK_NOT_FOUND, &sUserStackAssociationErrorCode_USER_NAME_NOT_FOUND, &sUserStackAssociationErrorCode_DIRECTORY_NOT_FOUND, &sUserStackAssociationErrorCode_INTERNAL_ERROR}}
+var m_UserStackAssociationErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserStackAssociationErrorList_member}}
+var m_UserStackAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserStackAssociationList_member}}
+var mVisibilityType = smithy.SchemaMembers{List: []*smithy.Schema{&sVisibilityType_PUBLIC, &sVisibilityType_PRIVATE, &sVisibilityType_SHARED}}
+var mVolumeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeConfig_VolumeSizeInGb}}
+var mVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfig_SubnetIds, &sVpcConfig_SecurityGroupIds}}
+var mAssociateAppBlockBuilderAppBlockRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAppBlockBuilderAppBlockRequest_AppBlockArn, &sAssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName}}
+var mAssociateAppBlockBuilderAppBlockResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation}}
+var mAssociateApplicationFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateApplicationFleetRequest_FleetName, &sAssociateApplicationFleetRequest_ApplicationArn}}
+var mAssociateApplicationFleetResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateApplicationFleetResult_ApplicationFleetAssociation}}
+var mAssociateApplicationToEntitlementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateApplicationToEntitlementRequest_StackName, &sAssociateApplicationToEntitlementRequest_EntitlementName, &sAssociateApplicationToEntitlementRequest_ApplicationIdentifier}}
+var mAssociateFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateFleetRequest_FleetName, &sAssociateFleetRequest_StackName}}
+var mAssociateSoftwareToImageBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSoftwareToImageBuilderRequest_ImageBuilderName, &sAssociateSoftwareToImageBuilderRequest_SoftwareNames}}
+var mBatchAssociateUserStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateUserStackRequest_UserStackAssociations}}
+var mBatchAssociateUserStackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateUserStackResult_errors}}
+var mBatchDisassociateUserStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateUserStackRequest_UserStackAssociations}}
+var mBatchDisassociateUserStackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateUserStackResult_errors}}
+var mCopyImageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyImageRequest_SourceImageName, &sCopyImageRequest_DestinationImageName, &sCopyImageRequest_DestinationRegion, &sCopyImageRequest_DestinationImageDescription}}
+var mCopyImageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyImageResponse_DestinationImageName}}
+var mCreateAppBlockBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBlockBuilderRequest_Name, &sCreateAppBlockBuilderRequest_Description, &sCreateAppBlockBuilderRequest_DisplayName, &sCreateAppBlockBuilderRequest_Tags, &sCreateAppBlockBuilderRequest_Platform, &sCreateAppBlockBuilderRequest_InstanceType, &sCreateAppBlockBuilderRequest_VpcConfig, &sCreateAppBlockBuilderRequest_EnableDefaultInternetAccess, &sCreateAppBlockBuilderRequest_IamRoleArn, &sCreateAppBlockBuilderRequest_AccessEndpoints, &sCreateAppBlockBuilderRequest_DisableIMDSV1}, Hash: &hCreateAppBlockBuilderRequest}
+var mCreateAppBlockBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBlockBuilderResult_AppBlockBuilder}}
+var mCreateAppBlockBuilderStreamingURLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName, &sCreateAppBlockBuilderStreamingURLRequest_Validity}}
+var mCreateAppBlockBuilderStreamingURLResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBlockBuilderStreamingURLResult_StreamingURL, &sCreateAppBlockBuilderStreamingURLResult_Expires}}
+var mCreateAppBlockRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBlockRequest_Name, &sCreateAppBlockRequest_Description, &sCreateAppBlockRequest_DisplayName, &sCreateAppBlockRequest_SourceS3Location, &sCreateAppBlockRequest_SetupScriptDetails, &sCreateAppBlockRequest_Tags, &sCreateAppBlockRequest_PostSetupScriptDetails, &sCreateAppBlockRequest_PackagingType}}
+var mCreateAppBlockResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBlockResult_AppBlock}}
+var mCreateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationRequest_Name, &sCreateApplicationRequest_DisplayName, &sCreateApplicationRequest_Description, &sCreateApplicationRequest_IconS3Location, &sCreateApplicationRequest_LaunchPath, &sCreateApplicationRequest_WorkingDirectory, &sCreateApplicationRequest_LaunchParameters, &sCreateApplicationRequest_Platforms, &sCreateApplicationRequest_InstanceFamilies, &sCreateApplicationRequest_AppBlockArn, &sCreateApplicationRequest_Tags}, Hash: &hCreateApplicationRequest}
+var mCreateApplicationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationResult_Application}}
+var mCreateDirectoryConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryConfigRequest_DirectoryName, &sCreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames, &sCreateDirectoryConfigRequest_ServiceAccountCredentials, &sCreateDirectoryConfigRequest_CertificateBasedAuthProperties}}
+var mCreateDirectoryConfigResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryConfigResult_DirectoryConfig}}
+var mCreateEntitlementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEntitlementRequest_Name, &sCreateEntitlementRequest_StackName, &sCreateEntitlementRequest_Description, &sCreateEntitlementRequest_AppVisibility, &sCreateEntitlementRequest_Attributes}}
+var mCreateEntitlementResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEntitlementResult_Entitlement}}
+var mCreateExportImageTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExportImageTaskRequest_ImageName, &sCreateExportImageTaskRequest_AmiName, &sCreateExportImageTaskRequest_IamRoleArn, &sCreateExportImageTaskRequest_TagSpecifications, &sCreateExportImageTaskRequest_AmiDescription}}
+var mCreateExportImageTaskResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExportImageTaskResult_ExportImageTask}}
+var mCreateFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFleetRequest_Name, &sCreateFleetRequest_ImageName, &sCreateFleetRequest_ImageArn, &sCreateFleetRequest_InstanceType, &sCreateFleetRequest_FleetType, &sCreateFleetRequest_ComputeCapacity, &sCreateFleetRequest_VpcConfig, &sCreateFleetRequest_MaxUserDurationInSeconds, &sCreateFleetRequest_DisconnectTimeoutInSeconds, &sCreateFleetRequest_Description, &sCreateFleetRequest_DisplayName, &sCreateFleetRequest_EnableDefaultInternetAccess, &sCreateFleetRequest_DomainJoinInfo, &sCreateFleetRequest_Tags, &sCreateFleetRequest_IdleDisconnectTimeoutInSeconds, &sCreateFleetRequest_IamRoleArn, &sCreateFleetRequest_StreamView, &sCreateFleetRequest_Platform, &sCreateFleetRequest_MaxConcurrentSessions, &sCreateFleetRequest_UsbDeviceFilterStrings, &sCreateFleetRequest_SessionScriptS3Location, &sCreateFleetRequest_MaxSessionsPerInstance, &sCreateFleetRequest_RootVolumeConfig, &sCreateFleetRequest_DisableIMDSV1}, Hash: &hCreateFleetRequest}
+var mCreateFleetResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFleetResult_Fleet}}
+var mCreateImageBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImageBuilderRequest_Name, &sCreateImageBuilderRequest_ImageName, &sCreateImageBuilderRequest_ImageArn, &sCreateImageBuilderRequest_InstanceType, &sCreateImageBuilderRequest_Description, &sCreateImageBuilderRequest_DisplayName, &sCreateImageBuilderRequest_VpcConfig, &sCreateImageBuilderRequest_IamRoleArn, &sCreateImageBuilderRequest_EnableDefaultInternetAccess, &sCreateImageBuilderRequest_DomainJoinInfo, &sCreateImageBuilderRequest_AppstreamAgentVersion, &sCreateImageBuilderRequest_Tags, &sCreateImageBuilderRequest_AccessEndpoints, &sCreateImageBuilderRequest_RootVolumeConfig, &sCreateImageBuilderRequest_SoftwaresToInstall, &sCreateImageBuilderRequest_SoftwaresToUninstall, &sCreateImageBuilderRequest_DisableIMDSV1}, Hash: &hCreateImageBuilderRequest}
+var mCreateImageBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImageBuilderResult_ImageBuilder}}
+var mCreateImageBuilderStreamingURLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImageBuilderStreamingURLRequest_Name, &sCreateImageBuilderStreamingURLRequest_Validity}}
+var mCreateImageBuilderStreamingURLResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImageBuilderStreamingURLResult_StreamingURL, &sCreateImageBuilderStreamingURLResult_Expires}}
+var mCreateImportedImageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImportedImageRequest_Name, &sCreateImportedImageRequest_SourceAmiId, &sCreateImportedImageRequest_WorkspaceImageId, &sCreateImportedImageRequest_IamRoleArn, &sCreateImportedImageRequest_Description, &sCreateImportedImageRequest_DisplayName, &sCreateImportedImageRequest_Tags, &sCreateImportedImageRequest_RuntimeValidationConfig, &sCreateImportedImageRequest_AgentSoftwareVersion, &sCreateImportedImageRequest_AppCatalogConfig, &sCreateImportedImageRequest_DryRun}, Hash: &hCreateImportedImageRequest}
+var mCreateImportedImageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImportedImageResult_Image}}
+var mCreateStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStackRequest_Name, &sCreateStackRequest_Description, &sCreateStackRequest_DisplayName, &sCreateStackRequest_StorageConnectors, &sCreateStackRequest_RedirectURL, &sCreateStackRequest_FeedbackURL, &sCreateStackRequest_UserSettings, &sCreateStackRequest_ApplicationSettings, &sCreateStackRequest_Tags, &sCreateStackRequest_AccessEndpoints, &sCreateStackRequest_EmbedHostDomains, &sCreateStackRequest_StreamingExperienceSettings, &sCreateStackRequest_ContentRedirection, &sCreateStackRequest_AgentAccessConfig, &sCreateStackRequest_StorageConnectorAuthentication}, Hash: &hCreateStackRequest}
+var mCreateStackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStackResult_Stack}}
+var mCreateStreamingURLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStreamingURLRequest_StackName, &sCreateStreamingURLRequest_FleetName, &sCreateStreamingURLRequest_UserId, &sCreateStreamingURLRequest_ApplicationId, &sCreateStreamingURLRequest_Validity, &sCreateStreamingURLRequest_SessionContext}}
+var mCreateStreamingURLResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStreamingURLResult_StreamingURL, &sCreateStreamingURLResult_Expires}}
+var mCreateThemeForStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateThemeForStackRequest_StackName, &sCreateThemeForStackRequest_FooterLinks, &sCreateThemeForStackRequest_TitleText, &sCreateThemeForStackRequest_ThemeStyling, &sCreateThemeForStackRequest_OrganizationLogoS3Location, &sCreateThemeForStackRequest_FaviconS3Location}}
+var mCreateThemeForStackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateThemeForStackResult_Theme}}
+var mCreateUpdatedImageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUpdatedImageRequest_existingImageName, &sCreateUpdatedImageRequest_newImageName, &sCreateUpdatedImageRequest_newImageDescription, &sCreateUpdatedImageRequest_newImageDisplayName, &sCreateUpdatedImageRequest_newImageTags, &sCreateUpdatedImageRequest_dryRun}}
+var mCreateUpdatedImageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUpdatedImageResult_image, &sCreateUpdatedImageResult_canUpdateImage}}
+var mCreateUsageReportSubscriptionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUsageReportSubscriptionResult_S3BucketName, &sCreateUsageReportSubscriptionResult_Schedule}}
+var mCreateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserRequest_UserName, &sCreateUserRequest_MessageAction, &sCreateUserRequest_FirstName, &sCreateUserRequest_LastName, &sCreateUserRequest_AuthenticationType}}
+var mDeleteAppBlockBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAppBlockBuilderRequest_Name}}
+var mDeleteAppBlockRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAppBlockRequest_Name}}
+var mDeleteApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApplicationRequest_Name}}
+var mDeleteDirectoryConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectoryConfigRequest_DirectoryName}}
+var mDeleteEntitlementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEntitlementRequest_Name, &sDeleteEntitlementRequest_StackName}}
+var mDeleteFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFleetRequest_Name}}
+var mDeleteImageBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImageBuilderRequest_Name}}
+var mDeleteImageBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImageBuilderResult_ImageBuilder}}
+var mDeleteImageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImageRequest_Name}}
+var mDeleteImageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImageResult_Image}}
+var mDeleteImagePermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImagePermissionsRequest_Name, &sDeleteImagePermissionsRequest_SharedAccountId}}
+var mDeleteStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStackRequest_Name}}
+var mDeleteThemeForStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteThemeForStackRequest_StackName}}
+var mDeleteUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUserRequest_UserName, &sDeleteUserRequest_AuthenticationType}}
+var mDescribeAppBlockBuilderAppBlockAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn, &sDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName, &sDescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults, &sDescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken}}
+var mDescribeAppBlockBuilderAppBlockAssociationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations, &sDescribeAppBlockBuilderAppBlockAssociationsResult_NextToken}}
+var mDescribeAppBlockBuildersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppBlockBuildersRequest_Names, &sDescribeAppBlockBuildersRequest_NextToken, &sDescribeAppBlockBuildersRequest_MaxResults}}
+var mDescribeAppBlockBuildersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppBlockBuildersResult_AppBlockBuilders, &sDescribeAppBlockBuildersResult_NextToken}}
+var mDescribeAppBlocksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppBlocksRequest_Arns, &sDescribeAppBlocksRequest_NextToken, &sDescribeAppBlocksRequest_MaxResults}}
+var mDescribeAppBlocksResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppBlocksResult_AppBlocks, &sDescribeAppBlocksResult_NextToken}}
+var mDescribeApplicationFleetAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationFleetAssociationsRequest_FleetName, &sDescribeApplicationFleetAssociationsRequest_ApplicationArn, &sDescribeApplicationFleetAssociationsRequest_MaxResults, &sDescribeApplicationFleetAssociationsRequest_NextToken}}
+var mDescribeApplicationFleetAssociationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations, &sDescribeApplicationFleetAssociationsResult_NextToken}}
+var mDescribeApplicationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationsRequest_Arns, &sDescribeApplicationsRequest_NextToken, &sDescribeApplicationsRequest_MaxResults}}
+var mDescribeApplicationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationsResult_Applications, &sDescribeApplicationsResult_NextToken}}
+var mDescribeAppLicenseUsageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppLicenseUsageRequest_BillingPeriod, &sDescribeAppLicenseUsageRequest_MaxResults, &sDescribeAppLicenseUsageRequest_NextToken}}
+var mDescribeAppLicenseUsageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAppLicenseUsageResult_AppLicenseUsages, &sDescribeAppLicenseUsageResult_NextToken}}
+var mDescribeDirectoryConfigsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectoryConfigsRequest_DirectoryNames, &sDescribeDirectoryConfigsRequest_MaxResults, &sDescribeDirectoryConfigsRequest_NextToken}}
+var mDescribeDirectoryConfigsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectoryConfigsResult_DirectoryConfigs, &sDescribeDirectoryConfigsResult_NextToken}}
+var mDescribeEntitlementsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntitlementsRequest_Name, &sDescribeEntitlementsRequest_StackName, &sDescribeEntitlementsRequest_NextToken, &sDescribeEntitlementsRequest_MaxResults}}
+var mDescribeEntitlementsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntitlementsResult_Entitlements, &sDescribeEntitlementsResult_NextToken}}
+var mDescribeFleetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFleetsRequest_Names, &sDescribeFleetsRequest_NextToken}}
+var mDescribeFleetsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFleetsResult_Fleets, &sDescribeFleetsResult_NextToken}}
+var mDescribeImageBuildersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImageBuildersRequest_Names, &sDescribeImageBuildersRequest_MaxResults, &sDescribeImageBuildersRequest_NextToken}}
+var mDescribeImageBuildersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImageBuildersResult_ImageBuilders, &sDescribeImageBuildersResult_NextToken}}
+var mDescribeImagePermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImagePermissionsRequest_Name, &sDescribeImagePermissionsRequest_MaxResults, &sDescribeImagePermissionsRequest_SharedAwsAccountIds, &sDescribeImagePermissionsRequest_NextToken}}
+var mDescribeImagePermissionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImagePermissionsResult_Name, &sDescribeImagePermissionsResult_SharedImagePermissionsList, &sDescribeImagePermissionsResult_NextToken}}
+var mDescribeImagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImagesRequest_Names, &sDescribeImagesRequest_Arns, &sDescribeImagesRequest_Type, &sDescribeImagesRequest_NextToken, &sDescribeImagesRequest_MaxResults}}
+var mDescribeImagesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImagesResult_Images, &sDescribeImagesResult_NextToken}}
+var mDescribeSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSessionsRequest_StackName, &sDescribeSessionsRequest_FleetName, &sDescribeSessionsRequest_UserId, &sDescribeSessionsRequest_NextToken, &sDescribeSessionsRequest_Limit, &sDescribeSessionsRequest_AuthenticationType, &sDescribeSessionsRequest_InstanceId}}
+var mDescribeSessionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSessionsResult_Sessions, &sDescribeSessionsResult_NextToken}}
+var mDescribeSoftwareAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSoftwareAssociationsRequest_AssociatedResource, &sDescribeSoftwareAssociationsRequest_MaxResults, &sDescribeSoftwareAssociationsRequest_NextToken}}
+var mDescribeSoftwareAssociationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSoftwareAssociationsResult_AssociatedResource, &sDescribeSoftwareAssociationsResult_SoftwareAssociations, &sDescribeSoftwareAssociationsResult_NextToken}}
+var mDescribeStacksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStacksRequest_Names, &sDescribeStacksRequest_NextToken}}
+var mDescribeStacksResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStacksResult_Stacks, &sDescribeStacksResult_NextToken}}
+var mDescribeThemeForStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeThemeForStackRequest_StackName}}
+var mDescribeThemeForStackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeThemeForStackResult_Theme}}
+var mDescribeUsageReportSubscriptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUsageReportSubscriptionsRequest_MaxResults, &sDescribeUsageReportSubscriptionsRequest_NextToken}}
+var mDescribeUsageReportSubscriptionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUsageReportSubscriptionsResult_UsageReportSubscriptions, &sDescribeUsageReportSubscriptionsResult_NextToken}}
+var mDescribeUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUsersRequest_AuthenticationType, &sDescribeUsersRequest_MaxResults, &sDescribeUsersRequest_NextToken}}
+var mDescribeUsersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUsersResult_Users, &sDescribeUsersResult_NextToken}}
+var mDescribeUserStackAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserStackAssociationsRequest_StackName, &sDescribeUserStackAssociationsRequest_UserName, &sDescribeUserStackAssociationsRequest_AuthenticationType, &sDescribeUserStackAssociationsRequest_MaxResults, &sDescribeUserStackAssociationsRequest_NextToken}}
+var mDescribeUserStackAssociationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserStackAssociationsResult_UserStackAssociations, &sDescribeUserStackAssociationsResult_NextToken}}
+var mDisableUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableUserRequest_UserName, &sDisableUserRequest_AuthenticationType}}
+var mDisassociateAppBlockBuilderAppBlockRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateAppBlockBuilderAppBlockRequest_AppBlockArn, &sDisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName}}
+var mDisassociateApplicationFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateApplicationFleetRequest_FleetName, &sDisassociateApplicationFleetRequest_ApplicationArn}}
+var mDisassociateApplicationFromEntitlementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateApplicationFromEntitlementRequest_StackName, &sDisassociateApplicationFromEntitlementRequest_EntitlementName, &sDisassociateApplicationFromEntitlementRequest_ApplicationIdentifier}}
+var mDisassociateFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateFleetRequest_FleetName, &sDisassociateFleetRequest_StackName}}
+var mDisassociateSoftwareFromImageBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateSoftwareFromImageBuilderRequest_ImageBuilderName, &sDisassociateSoftwareFromImageBuilderRequest_SoftwareNames}}
+var mDrainSessionInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDrainSessionInstanceRequest_SessionId}}
+var mEnableUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableUserRequest_UserName, &sEnableUserRequest_AuthenticationType}}
+var mExpireSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExpireSessionRequest_SessionId}}
+var mGetExportImageTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExportImageTaskRequest_TaskId}}
+var mGetExportImageTaskResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExportImageTaskResult_ExportImageTask}}
+var mListAssociatedFleetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedFleetsRequest_StackName, &sListAssociatedFleetsRequest_NextToken}}
+var mListAssociatedFleetsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedFleetsResult_Names, &sListAssociatedFleetsResult_NextToken}}
+var mListAssociatedStacksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedStacksRequest_FleetName, &sListAssociatedStacksRequest_NextToken}}
+var mListAssociatedStacksResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedStacksResult_Names, &sListAssociatedStacksResult_NextToken}}
+var mListEntitledApplicationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitledApplicationsRequest_StackName, &sListEntitledApplicationsRequest_EntitlementName, &sListEntitledApplicationsRequest_NextToken, &sListEntitledApplicationsRequest_MaxResults}}
+var mListEntitledApplicationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitledApplicationsResult_EntitledApplications, &sListEntitledApplicationsResult_NextToken}}
+var mListExportImageTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExportImageTasksRequest_Filters, &sListExportImageTasksRequest_MaxResults, &sListExportImageTasksRequest_NextToken}}
+var mListExportImageTasksResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListExportImageTasksResult_ExportImageTasks, &sListExportImageTasksResult_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mStartAppBlockBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAppBlockBuilderRequest_Name}}
+var mStartAppBlockBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAppBlockBuilderResult_AppBlockBuilder}}
+var mStartFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartFleetRequest_Name}}
+var mStartImageBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImageBuilderRequest_Name, &sStartImageBuilderRequest_AppstreamAgentVersion}}
+var mStartImageBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImageBuilderResult_ImageBuilder}}
+var mStartSoftwareDeploymentToImageBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName, &sStartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments}}
+var mStopAppBlockBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopAppBlockBuilderRequest_Name}}
+var mStopAppBlockBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStopAppBlockBuilderResult_AppBlockBuilder}}
+var mStopFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopFleetRequest_Name}}
+var mStopImageBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopImageBuilderRequest_Name}}
+var mStopImageBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStopImageBuilderResult_ImageBuilder}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateAppBlockBuilderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAppBlockBuilderRequest_Name, &sUpdateAppBlockBuilderRequest_Description, &sUpdateAppBlockBuilderRequest_DisplayName, &sUpdateAppBlockBuilderRequest_Platform, &sUpdateAppBlockBuilderRequest_InstanceType, &sUpdateAppBlockBuilderRequest_VpcConfig, &sUpdateAppBlockBuilderRequest_EnableDefaultInternetAccess, &sUpdateAppBlockBuilderRequest_IamRoleArn, &sUpdateAppBlockBuilderRequest_AccessEndpoints, &sUpdateAppBlockBuilderRequest_AttributesToDelete, &sUpdateAppBlockBuilderRequest_DisableIMDSV1}, Hash: &hUpdateAppBlockBuilderRequest}
+var mUpdateAppBlockBuilderResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAppBlockBuilderResult_AppBlockBuilder}}
+var mUpdateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationRequest_Name, &sUpdateApplicationRequest_DisplayName, &sUpdateApplicationRequest_Description, &sUpdateApplicationRequest_IconS3Location, &sUpdateApplicationRequest_LaunchPath, &sUpdateApplicationRequest_WorkingDirectory, &sUpdateApplicationRequest_LaunchParameters, &sUpdateApplicationRequest_AppBlockArn, &sUpdateApplicationRequest_AttributesToDelete}, Hash: &hUpdateApplicationRequest}
+var mUpdateApplicationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationResult_Application}}
+var mUpdateDirectoryConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectoryConfigRequest_DirectoryName, &sUpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames, &sUpdateDirectoryConfigRequest_ServiceAccountCredentials, &sUpdateDirectoryConfigRequest_CertificateBasedAuthProperties}}
+var mUpdateDirectoryConfigResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectoryConfigResult_DirectoryConfig}}
+var mUpdateEntitlementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEntitlementRequest_Name, &sUpdateEntitlementRequest_StackName, &sUpdateEntitlementRequest_Description, &sUpdateEntitlementRequest_AppVisibility, &sUpdateEntitlementRequest_Attributes}}
+var mUpdateEntitlementResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEntitlementResult_Entitlement}}
+var mUpdateFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFleetRequest_ImageName, &sUpdateFleetRequest_ImageArn, &sUpdateFleetRequest_Name, &sUpdateFleetRequest_InstanceType, &sUpdateFleetRequest_ComputeCapacity, &sUpdateFleetRequest_VpcConfig, &sUpdateFleetRequest_MaxUserDurationInSeconds, &sUpdateFleetRequest_DisconnectTimeoutInSeconds, &sUpdateFleetRequest_DeleteVpcConfig, &sUpdateFleetRequest_Description, &sUpdateFleetRequest_DisplayName, &sUpdateFleetRequest_EnableDefaultInternetAccess, &sUpdateFleetRequest_DomainJoinInfo, &sUpdateFleetRequest_IdleDisconnectTimeoutInSeconds, &sUpdateFleetRequest_AttributesToDelete, &sUpdateFleetRequest_IamRoleArn, &sUpdateFleetRequest_StreamView, &sUpdateFleetRequest_Platform, &sUpdateFleetRequest_MaxConcurrentSessions, &sUpdateFleetRequest_UsbDeviceFilterStrings, &sUpdateFleetRequest_SessionScriptS3Location, &sUpdateFleetRequest_MaxSessionsPerInstance, &sUpdateFleetRequest_RootVolumeConfig, &sUpdateFleetRequest_DisableIMDSV1}, Hash: &hUpdateFleetRequest}
+var mUpdateFleetResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFleetResult_Fleet}}
+var mUpdateImagePermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateImagePermissionsRequest_Name, &sUpdateImagePermissionsRequest_SharedAccountId, &sUpdateImagePermissionsRequest_ImagePermissions}}
+var mUpdateStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStackRequest_DisplayName, &sUpdateStackRequest_Description, &sUpdateStackRequest_Name, &sUpdateStackRequest_StorageConnectors, &sUpdateStackRequest_DeleteStorageConnectors, &sUpdateStackRequest_RedirectURL, &sUpdateStackRequest_FeedbackURL, &sUpdateStackRequest_AttributesToDelete, &sUpdateStackRequest_UserSettings, &sUpdateStackRequest_ApplicationSettings, &sUpdateStackRequest_AccessEndpoints, &sUpdateStackRequest_EmbedHostDomains, &sUpdateStackRequest_StreamingExperienceSettings, &sUpdateStackRequest_ContentRedirection, &sUpdateStackRequest_AgentAccessConfig, &sUpdateStackRequest_StorageConnectorAuthentication}, Hash: &hUpdateStackRequest}
+var mUpdateStackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStackResult_Stack}}
+var mUpdateThemeForStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateThemeForStackRequest_StackName, &sUpdateThemeForStackRequest_FooterLinks, &sUpdateThemeForStackRequest_TitleText, &sUpdateThemeForStackRequest_ThemeStyling, &sUpdateThemeForStackRequest_OrganizationLogoS3Location, &sUpdateThemeForStackRequest_FaviconS3Location, &sUpdateThemeForStackRequest_State, &sUpdateThemeForStackRequest_AttributesToDelete}}
+var mUpdateThemeForStackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateThemeForStackResult_Theme}}
+
+var hAppBlock = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 11, 0, 0, 0, 0, 0, 10, 2, 4, 6, 0, 8,
+	9, 0, 7, 0, 0, 5, 0, 0,
+}}
+var hAppBlockBuilder = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	4, 13, 0, 10, 0, 3, 0, 0, 0, 0, 0, 2, 0, 6, 12, 0, 0, 11, 9, 0, 7, 8, 0, 0,
+	1, 15, 0, 0, 5, 0, 0, 14,
+}}
+var hApplication = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	12, 0, 13, 1, 2, 4, 0, 0, 0, 0, 0, 8, 0, 6, 5, 0, 14, 3, 0, 7, 9, 10, 15, 0,
+	0, 0, 0, 11, 0, 0, 0, 0,
+}}
+var hComputeCapacityStatus = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	4, 0, 0, 0, 5, 0, 0, 9, 0, 2, 0, 0, 11, 10, 0, 0, 1, 0, 0, 0, 0, 7, 8, 3,
+	0, 0, 6, 0, 0, 0, 0, 0,
+}}
+var hExportImageTask = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	6, 1, 0, 0, 9, 0, 0, 0, 2, 5, 0, 0, 4, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+	0, 8, 0, 0, 0, 0, 0, 0,
+}}
+var hFleet = smithy.MemberHash{Seed: 830, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 17, 0, 12, 21, 6, 3, 0, 0, 11, 23, 0, 0,
+	27, 24, 0, 9, 0, 19, 20, 0, 0, 0, 22, 0, 0, 4, 5, 18, 0, 0, 0, 26, 0, 14, 16, 0,
+	8, 7, 0, 0, 0, 0, 0, 0, 0, 13, 2, 0, 0, 15, 25, 10,
+}}
+var hFleetErrorCode = smithy.MemberHash{Seed: 14964, Slots: []uint16{
+	10, 0, 29, 13, 31, 0, 14, 24, 0, 0, 30, 0, 2, 0, 16, 0, 5, 19, 12, 0, 9, 0, 0, 0,
+	17, 27, 3, 0, 0, 0, 0, 0, 0, 23, 0, 0, 15, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 26,
+	0, 1, 0, 0, 20, 21, 8, 4, 28, 6, 0, 18, 25, 0, 7, 11,
+}}
+var hImage = smithy.MemberHash{Seed: 427, Slots: []uint16{
+	22, 0, 0, 7, 0, 17, 16, 20, 0, 18, 0, 3, 0, 0, 0, 0, 0, 0, 9, 0, 12, 0, 23, 0,
+	6, 0, 0, 0, 13, 0, 11, 0, 24, 0, 0, 19, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	8, 0, 0, 0, 15, 10, 2, 0, 0, 0, 0, 21, 0, 5, 14, 0,
+}}
+var hImageBuilder = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	4, 0, 0, 0, 0, 0, 0, 1, 0, 20, 0, 18, 10, 0, 0, 0, 12, 0, 0, 17, 13, 0, 0, 14,
+	0, 19, 0, 0, 9, 7, 0, 0, 5, 0, 0, 0, 0, 3, 0, 6, 0, 0, 0, 11, 16, 0, 21, 0,
+	2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 8, 0, 0,
+}}
+var hImageBuilderState = smithy.MemberHash{Seed: 52, Slots: []uint16{
+	13, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 12, 0, 4, 0, 8, 1, 3, 14, 5, 7,
+	0, 9, 0, 0, 0, 6, 11, 0,
+}}
+var hPlatformType = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 7, 5, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 9, 4, 0, 0, 0, 0, 0, 8, 0, 0,
+	0, 0, 0, 0, 0, 6, 2, 10,
+}}
+var hSession = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 6, 1, 3, 0, 0, 0, 0, 0, 0, 10, 0, 7, 0, 5, 0, 0, 0, 0, 0, 0, 8, 2,
+	4, 0, 0, 12, 11, 0, 0, 9,
+}}
+var hStack = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	9, 0, 0, 0, 2, 0, 8, 0, 0, 0, 0, 0, 0, 0, 14, 16, 0, 0, 0, 7, 4, 0, 12, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 15, 13, 0, 0, 11, 0, 0, 0, 10, 0, 0, 3, 6, 0, 0, 0,
+	0, 0, 0, 1, 0, 0, 0, 0, 0, 17, 5, 0, 0, 0, 0, 0,
+}}
+var hStackAttribute = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 13, 7, 8, 0, 0, 10, 12, 0, 0, 1, 0, 15, 14, 0, 11, 0, 9, 0, 0, 0, 0, 4, 3,
+	0, 6, 0, 2, 0, 0, 0, 5,
+}}
+var hCreateAppBlockBuilderRequest = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	6, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 7, 0, 0, 0, 8, 10, 0, 0, 0, 2, 0,
+	11, 5, 0, 9, 0, 0, 0, 4,
+}}
+var hCreateApplicationRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	4, 11, 8, 1, 2, 5, 0, 0, 0, 0, 0, 6, 0, 0, 7, 0, 9, 0, 0, 0, 3, 0, 0, 0,
+	0, 0, 0, 10, 0, 0, 0, 0,
+}}
+var hCreateFleetRequest = smithy.MemberHash{Seed: 12, Slots: []uint16{
+	0, 20, 6, 0, 0, 13, 0, 0, 17, 21, 0, 0, 8, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0,
+	0, 0, 16, 0, 0, 10, 0, 0, 0, 0, 0, 1, 15, 14, 0, 12, 0, 3, 0, 0, 0, 22, 23, 7,
+	19, 0, 0, 24, 0, 0, 9, 0, 0, 0, 0, 0, 4, 5, 2, 18,
+}}
+var hCreateImageBuilderRequest = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	4, 0, 0, 0, 14, 0, 0, 0, 3, 0, 6, 0, 0, 0, 0, 0, 0, 9, 13, 0, 0, 2, 5, 0,
+	0, 0, 0, 16, 0, 0, 0, 0, 0, 15, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 8, 0, 0, 11, 12,
+}}
+var hCreateImportedImageRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 5, 0, 0, 0, 0, 3, 0, 7, 1, 10, 11, 0, 6, 0, 0, 0, 0, 0,
+	0, 0, 9, 8, 0, 0, 0, 4,
+}}
+var hCreateStackRequest = smithy.MemberHash{Seed: 15, Slots: []uint16{
+	14, 1, 0, 0, 7, 0, 0, 0, 0, 8, 13, 4, 0, 12, 0, 0, 3, 2, 10, 0, 0, 0, 9, 0,
+	6, 5, 11, 0, 0, 0, 0, 15,
+}}
+var hUpdateAppBlockBuilderRequest = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 6, 0, 0, 0, 7, 9, 0, 0, 0, 2, 0,
+	11, 4, 0, 8, 0, 0, 0, 10,
+}}
+var hUpdateApplicationRequest = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 0, 0, 0, 1, 0, 0, 9, 0, 0, 0, 3, 0, 0, 6, 0, 0, 0, 5, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 4, 0, 0, 7,
+}}
+var hUpdateFleetRequest = smithy.MemberHash{Seed: 59, Slots: []uint16{
+	1, 0, 5, 13, 0, 0, 6, 16, 0, 0, 0, 21, 12, 0, 0, 11, 0, 0, 9, 14, 15, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 17, 0, 0, 8, 0, 24, 2, 0, 10, 0, 22, 0, 0, 0, 0, 0, 4, 19,
+	0, 23, 20, 0, 0, 0, 18, 7, 0, 0, 0, 0, 0, 3, 0, 0,
+}}
+var hUpdateStackRequest = smithy.MemberHash{Seed: 34, Slots: []uint16{
+	4, 0, 8, 14, 0, 16, 9, 0, 10, 12, 15, 0, 7, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 11,
+	0, 5, 0, 6, 2, 13, 0, 0,
+}}
+
+var sAssociateAppBlockBuilderAppBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAppBlockBuilderAppBlock, Type: smithy.ShapeTypeOperation, Ext: &eAssociateAppBlockBuilderAppBlock})
+var sAssociateApplicationFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationFleet, Type: smithy.ShapeTypeOperation, Ext: &eAssociateApplicationFleet})
+var sAssociateApplicationToEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationToEntitlement, Type: smithy.ShapeTypeOperation, Ext: &eAssociateApplicationToEntitlement})
+var sAssociateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFleet, Type: smithy.ShapeTypeOperation, Ext: &eAssociateFleet})
+var sAssociateSoftwareToImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSoftwareToImageBuilder, Type: smithy.ShapeTypeOperation, Ext: &eAssociateSoftwareToImageBuilder})
+var sBatchAssociateUserStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateUserStack, Type: smithy.ShapeTypeOperation, Ext: &eBatchAssociateUserStack})
+var sBatchDisassociateUserStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateUserStack, Type: smithy.ShapeTypeOperation, Ext: &eBatchDisassociateUserStack})
+var sCopyImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyImage, Type: smithy.ShapeTypeOperation, Ext: &eCopyImage})
+var sCreateAppBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlock, Type: smithy.ShapeTypeOperation, Ext: &eCreateAppBlock})
+var sCreateAppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockBuilder, Type: smithy.ShapeTypeOperation, Ext: &eCreateAppBlockBuilder})
+var sCreateAppBlockBuilderStreamingURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockBuilderStreamingURL, Type: smithy.ShapeTypeOperation, Ext: &eCreateAppBlockBuilderStreamingURL})
+var sCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplication, Type: smithy.ShapeTypeOperation, Ext: &eCreateApplication})
+var sCreateDirectoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryConfig, Type: smithy.ShapeTypeOperation, Ext: &eCreateDirectoryConfig})
+var sCreateEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEntitlement, Type: smithy.ShapeTypeOperation, Ext: &eCreateEntitlement})
+var sCreateExportImageTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExportImageTask, Type: smithy.ShapeTypeOperation, Ext: &eCreateExportImageTask})
+var sCreateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleet, Type: smithy.ShapeTypeOperation, Ext: &eCreateFleet})
+var sCreateImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImageBuilder, Type: smithy.ShapeTypeOperation, Ext: &eCreateImageBuilder})
+var sCreateImageBuilderStreamingURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImageBuilderStreamingURL, Type: smithy.ShapeTypeOperation, Ext: &eCreateImageBuilderStreamingURL})
+var sCreateImportedImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImportedImage, Type: smithy.ShapeTypeOperation, Ext: &eCreateImportedImage})
+var sCreateStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStack, Type: smithy.ShapeTypeOperation, Ext: &eCreateStack})
+var sCreateStreamingURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamingURL, Type: smithy.ShapeTypeOperation, Ext: &eCreateStreamingURL})
+var sCreateThemeForStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateThemeForStack, Type: smithy.ShapeTypeOperation, Ext: &eCreateThemeForStack})
+var sCreateUpdatedImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUpdatedImage, Type: smithy.ShapeTypeOperation, Ext: &eCreateUpdatedImage})
+var sCreateUsageReportSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUsageReportSubscription, Type: smithy.ShapeTypeOperation, Ext: &eCreateUsageReportSubscription})
+var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Type: smithy.ShapeTypeOperation, Ext: &eCreateUser})
+var sDeleteAppBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBlock, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAppBlock})
+var sDeleteAppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBlockBuilder, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAppBlockBuilder})
+var sDeleteApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplication, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApplication})
+var sDeleteDirectoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryConfig, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDirectoryConfig})
+var sDeleteEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntitlement, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEntitlement})
+var sDeleteFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFleet})
+var sDeleteImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImage, Type: smithy.ShapeTypeOperation, Ext: &eDeleteImage})
+var sDeleteImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageBuilder, Type: smithy.ShapeTypeOperation, Ext: &eDeleteImageBuilder})
+var sDeleteImagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImagePermissions, Type: smithy.ShapeTypeOperation, Ext: &eDeleteImagePermissions})
+var sDeleteStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStack, Type: smithy.ShapeTypeOperation, Ext: &eDeleteStack})
+var sDeleteThemeForStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteThemeForStack, Type: smithy.ShapeTypeOperation, Ext: &eDeleteThemeForStack})
+var sDeleteUsageReportSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUsageReportSubscription, Type: smithy.ShapeTypeOperation, Ext: &eDeleteUsageReportSubscription})
+var sDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUser, Type: smithy.ShapeTypeOperation, Ext: &eDeleteUser})
+var sDescribeAppBlockBuilderAppBlockAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlockBuilderAppBlockAssociations, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAppBlockBuilderAppBlockAssociations})
+var sDescribeAppBlockBuilders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlockBuilders, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAppBlockBuilders})
+var sDescribeAppBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlocks, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAppBlocks})
+var sDescribeApplicationFleetAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationFleetAssociations, Type: smithy.ShapeTypeOperation, Ext: &eDescribeApplicationFleetAssociations})
+var sDescribeApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplications, Type: smithy.ShapeTypeOperation, Ext: &eDescribeApplications})
+var sDescribeAppLicenseUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppLicenseUsage, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAppLicenseUsage})
+var sDescribeDirectoryConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoryConfigs, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDirectoryConfigs})
+var sDescribeEntitlements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntitlements, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEntitlements})
+var sDescribeFleets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFleets, Type: smithy.ShapeTypeOperation, Ext: &eDescribeFleets})
+var sDescribeImageBuilders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImageBuilders, Type: smithy.ShapeTypeOperation, Ext: &eDescribeImageBuilders})
+var sDescribeImagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImagePermissions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeImagePermissions})
+var sDescribeImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImages, Type: smithy.ShapeTypeOperation, Ext: &eDescribeImages})
+var sDescribeSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSessions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSessions})
+var sDescribeSoftwareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSoftwareAssociations, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSoftwareAssociations})
+var sDescribeStacks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStacks, Type: smithy.ShapeTypeOperation, Ext: &eDescribeStacks})
+var sDescribeThemeForStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeThemeForStack, Type: smithy.ShapeTypeOperation, Ext: &eDescribeThemeForStack})
+var sDescribeUsageReportSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUsageReportSubscriptions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeUsageReportSubscriptions})
+var sDescribeUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUsers, Type: smithy.ShapeTypeOperation, Ext: &eDescribeUsers})
+var sDescribeUserStackAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserStackAssociations, Type: smithy.ShapeTypeOperation, Ext: &eDescribeUserStackAssociations})
+var sDisableUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUser, Type: smithy.ShapeTypeOperation, Ext: &eDisableUser})
+var sDisassociateAppBlockBuilderAppBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAppBlockBuilderAppBlock, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateAppBlockBuilderAppBlock})
+var sDisassociateApplicationFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationFleet, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateApplicationFleet})
+var sDisassociateApplicationFromEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationFromEntitlement, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateApplicationFromEntitlement})
+var sDisassociateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFleet, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateFleet})
+var sDisassociateSoftwareFromImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSoftwareFromImageBuilder, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateSoftwareFromImageBuilder})
+var sDrainSessionInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDrainSessionInstance, Type: smithy.ShapeTypeOperation, Ext: &eDrainSessionInstance})
+var sEnableUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableUser, Type: smithy.ShapeTypeOperation, Ext: &eEnableUser})
+var sExpireSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpireSession, Type: smithy.ShapeTypeOperation, Ext: &eExpireSession})
+var sGetExportImageTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExportImageTask, Type: smithy.ShapeTypeOperation, Ext: &eGetExportImageTask})
+var sListAssociatedFleets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedFleets, Type: smithy.ShapeTypeOperation, Ext: &eListAssociatedFleets})
+var sListAssociatedStacks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedStacks, Type: smithy.ShapeTypeOperation, Ext: &eListAssociatedStacks})
+var sListEntitledApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitledApplications, Type: smithy.ShapeTypeOperation, Ext: &eListEntitledApplications})
+var sListExportImageTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExportImageTasks, Type: smithy.ShapeTypeOperation, Ext: &eListExportImageTasks})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartAppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAppBlockBuilder, Type: smithy.ShapeTypeOperation, Ext: &eStartAppBlockBuilder})
+var sStartFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFleet, Type: smithy.ShapeTypeOperation, Ext: &eStartFleet})
+var sStartImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImageBuilder, Type: smithy.ShapeTypeOperation, Ext: &eStartImageBuilder})
+var sStartSoftwareDeploymentToImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSoftwareDeploymentToImageBuilder, Type: smithy.ShapeTypeOperation, Ext: &eStartSoftwareDeploymentToImageBuilder})
+var sStopAppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAppBlockBuilder, Type: smithy.ShapeTypeOperation, Ext: &eStopAppBlockBuilder})
+var sStopFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFleet, Type: smithy.ShapeTypeOperation, Ext: &eStopFleet})
+var sStopImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopImageBuilder, Type: smithy.ShapeTypeOperation, Ext: &eStopImageBuilder})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppBlockBuilder, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAppBlockBuilder})
+var sUpdateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplication, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApplication})
+var sUpdateDirectoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectoryConfig, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDirectoryConfig})
+var sUpdateEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEntitlement, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEntitlement})
+var sUpdateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFleet})
+var sUpdateImagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImagePermissions, Type: smithy.ShapeTypeOperation, Ext: &eUpdateImagePermissions})
+var sUpdateStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStack, Type: smithy.ShapeTypeOperation, Ext: &eUpdateStack})
+var sUpdateThemeForStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThemeForStack, Type: smithy.ShapeTypeOperation, Ext: &eUpdateThemeForStack})
+var s_PhotonAdminProxyService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhotonAdminProxyService, Type: smithy.ShapeTypeService, Ext: &e_PhotonAdminProxyService})
+var sAccessEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessEndpoint, Members: &mAccessEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eAccessEndpoint})
+var sAccessEndpoint_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iAccessEndpointType, Members: &mAccessEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eAccessEndpoint_EndpointType})
+var sAccessEndpoint_VpceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessEndpoint_VpceId})
+var s_AccessEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &e_AccessEndpointList})
+var s_AccessEndpointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessEndpoint, Members: &mAccessEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_AccessEndpointList_member})
+var sAccessEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessEndpointType, Members: &mAccessEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eAccessEndpointType})
+var sAccessEndpointType_STREAMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREAMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessEndpointType_STREAMING})
+var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &e_AccountName})
+var s_AccountPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountPassword, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &e_AccountPassword})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeEnum, Ext: &eAction})
+var sAction_CLIPBOARD_COPY_FROM_LOCAL_DEVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_CLIPBOARD_COPY_FROM_LOCAL_DEVICE})
+var sAction_CLIPBOARD_COPY_TO_LOCAL_DEVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIPBOARD_COPY_TO_LOCAL_DEVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_CLIPBOARD_COPY_TO_LOCAL_DEVICE})
+var sAction_FILE_UPLOAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_UPLOAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_FILE_UPLOAD})
+var sAction_FILE_DOWNLOAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_DOWNLOAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_FILE_DOWNLOAD})
+var sAction_PRINTING_TO_LOCAL_DEVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRINTING_TO_LOCAL_DEVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_PRINTING_TO_LOCAL_DEVICE})
+var sAction_DOMAIN_PASSWORD_SIGNIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_PASSWORD_SIGNIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_DOMAIN_PASSWORD_SIGNIN})
+var sAction_DOMAIN_SMART_CARD_SIGNIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_SMART_CARD_SIGNIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_DOMAIN_SMART_CARD_SIGNIN})
+var sAction_AUTO_TIME_ZONE_REDIRECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO_TIME_ZONE_REDIRECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAction_AUTO_TIME_ZONE_REDIRECTION})
+var s_AdminAppLicenseUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdminAppLicenseUsageList, Members: &m_AdminAppLicenseUsageList, Type: smithy.ShapeTypeList, Ext: &e_AdminAppLicenseUsageList})
+var s_AdminAppLicenseUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdminAppLicenseUsageRecord, Members: &mAdminAppLicenseUsageRecord, Type: smithy.ShapeTypeStructure, Ext: &e_AdminAppLicenseUsageList_member})
+var sAdminAppLicenseUsageRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdminAppLicenseUsageRecord, Members: &mAdminAppLicenseUsageRecord, Type: smithy.ShapeTypeStructure, Ext: &eAdminAppLicenseUsageRecord})
+var sAdminAppLicenseUsageRecord_UserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAdminAppLicenseUsageRecord_UserArn})
+var sAdminAppLicenseUsageRecord_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAdminAppLicenseUsageRecord_BillingPeriod})
+var sAdminAppLicenseUsageRecord_OwnerAWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAWSAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eAdminAppLicenseUsageRecord_OwnerAWSAccountId})
+var sAdminAppLicenseUsageRecord_SubscriptionFirstUsedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionFirstUsedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAdminAppLicenseUsageRecord_SubscriptionFirstUsedDate})
+var sAdminAppLicenseUsageRecord_SubscriptionLastUsedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionLastUsedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAdminAppLicenseUsageRecord_SubscriptionLastUsedDate})
+var sAdminAppLicenseUsageRecord_LicenseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAdminAppLicenseUsageRecord_LicenseType})
+var sAdminAppLicenseUsageRecord_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAdminAppLicenseUsageRecord_UserId})
+var sAgentAccessConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentAccessConfig, Members: &mAgentAccessConfig, Type: smithy.ShapeTypeStructure, Ext: &eAgentAccessConfig})
+var sAgentAccessConfig_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &i_AgentAccessSettingList, Members: &m_AgentAccessSettingList, Type: smithy.ShapeTypeList, Ext: &eAgentAccessConfig_Settings})
+var sAgentAccessConfig_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eAgentAccessConfig_S3BucketArn})
+var sAgentAccessConfig_ScreenshotsUploadEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScreenshotsUploadEnabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eAgentAccessConfig_ScreenshotsUploadEnabled})
+var sAgentAccessConfig_ScreenResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScreenResolution", ID: &iScreenResolution, Members: &mScreenResolution, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessConfig_ScreenResolution})
+var sAgentAccessConfig_ScreenImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScreenImageFormat", ID: &iScreenImageFormat, Members: &mScreenImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessConfig_ScreenImageFormat})
+var sAgentAccessConfig_UserControlMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserControlMode", ID: &iUserControlMode, Members: &mUserControlMode, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessConfig_UserControlMode})
+var sAgentAccessConfigForUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentAccessConfigForUpdate, Members: &mAgentAccessConfigForUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAgentAccessConfigForUpdate})
+var sAgentAccessConfigForUpdate_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &i_AgentAccessSettingList, Members: &m_AgentAccessSettingList, Type: smithy.ShapeTypeList, Ext: &eAgentAccessConfigForUpdate_Settings})
+var sAgentAccessConfigForUpdate_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eAgentAccessConfigForUpdate_S3BucketArn})
+var sAgentAccessConfigForUpdate_ScreenshotsUploadEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScreenshotsUploadEnabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eAgentAccessConfigForUpdate_ScreenshotsUploadEnabled})
+var sAgentAccessConfigForUpdate_ScreenResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScreenResolution", ID: &iScreenResolution, Members: &mScreenResolution, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessConfigForUpdate_ScreenResolution})
+var sAgentAccessConfigForUpdate_ScreenImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScreenImageFormat", ID: &iScreenImageFormat, Members: &mScreenImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessConfigForUpdate_ScreenImageFormat})
+var sAgentAccessConfigForUpdate_UserControlMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserControlMode", ID: &iUserControlMode, Members: &mUserControlMode, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessConfigForUpdate_UserControlMode})
+var sAgentAccessSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentAccessSetting, Members: &mAgentAccessSetting, Type: smithy.ShapeTypeStructure, Ext: &eAgentAccessSetting})
+var sAgentAccessSetting_AgentAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentAction", ID: &iAgentAction, Members: &mAgentAction, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessSetting_AgentAction})
+var sAgentAccessSetting_Permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Permission", ID: &iPermission, Members: &mPermission, Type: smithy.ShapeTypeEnum, Ext: &eAgentAccessSetting_Permission})
+var s_AgentAccessSettingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentAccessSettingList, Members: &m_AgentAccessSettingList, Type: smithy.ShapeTypeList, Ext: &e_AgentAccessSettingList})
+var s_AgentAccessSettingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAgentAccessSetting, Members: &mAgentAccessSetting, Type: smithy.ShapeTypeStructure, Ext: &e_AgentAccessSettingList_member})
+var sAgentAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentAction, Members: &mAgentAction, Type: smithy.ShapeTypeEnum, Ext: &eAgentAction})
+var sAgentAction_COMPUTER_VISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPUTER_VISION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentAction_COMPUTER_VISION})
+var sAgentAction_COMPUTER_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPUTER_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentAction_COMPUTER_INPUT})
+var sAgentAction_FORWARD_MCP_TOOLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORWARD_MCP_TOOLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentAction_FORWARD_MCP_TOOLS})
+var sAgentSoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSoftwareVersion, Members: &mAgentSoftwareVersion, Type: smithy.ShapeTypeEnum, Ext: &eAgentSoftwareVersion})
+var sAgentSoftwareVersion_CURRENT_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CURRENT_LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentSoftwareVersion_CURRENT_LATEST})
+var sAgentSoftwareVersion_ALWAYS_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS_LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentSoftwareVersion_ALWAYS_LATEST})
+var s_AmiName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiName, Type: smithy.ShapeTypeString, Ext: &e_AmiName})
+var sAppBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlock, Members: &mAppBlock, Type: smithy.ShapeTypeStructure, Ext: &eAppBlock})
+var sAppBlock_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlock_Name})
+var sAppBlock_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppBlock_Arn})
+var sAppBlock_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlock_Description})
+var sAppBlock_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlock_DisplayName})
+var sAppBlock_SourceS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eAppBlock_SourceS3Location})
+var sAppBlock_SetupScriptDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SetupScriptDetails", ID: &iScriptDetails, Members: &mScriptDetails, Type: smithy.ShapeTypeStructure, Ext: &eAppBlock_SetupScriptDetails})
+var sAppBlock_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAppBlock_CreatedTime})
+var sAppBlock_PostSetupScriptDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostSetupScriptDetails", ID: &iScriptDetails, Members: &mScriptDetails, Type: smithy.ShapeTypeStructure, Ext: &eAppBlock_PostSetupScriptDetails})
+var sAppBlock_PackagingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackagingType", ID: &iPackagingType, Members: &mPackagingType, Type: smithy.ShapeTypeEnum, Ext: &eAppBlock_PackagingType})
+var sAppBlock_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iAppBlockState, Members: &mAppBlockState, Type: smithy.ShapeTypeEnum, Ext: &eAppBlock_State})
+var sAppBlock_AppBlockErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockErrors", ID: &i_ErrorDetailsList, Members: &m_ErrorDetailsList, Type: smithy.ShapeTypeList, Ext: &eAppBlock_AppBlockErrors})
+var sAppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockBuilder, Members: &mAppBlockBuilder, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilder})
+var sAppBlockBuilder_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilder_Arn})
+var sAppBlockBuilder_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilder_Name})
+var sAppBlockBuilder_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilder_DisplayName})
+var sAppBlockBuilder_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilder_Description})
+var sAppBlockBuilder_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iAppBlockBuilderPlatformType, Members: &mAppBlockBuilderPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockBuilder_Platform})
+var sAppBlockBuilder_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilder_InstanceType})
+var sAppBlockBuilder_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eAppBlockBuilder_EnableDefaultInternetAccess})
+var sAppBlockBuilder_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilder_IamRoleArn})
+var sAppBlockBuilder_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilder_VpcConfig})
+var sAppBlockBuilder_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iAppBlockBuilderState, Members: &mAppBlockBuilderState, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockBuilder_State})
+var sAppBlockBuilder_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAppBlockBuilder_CreatedTime})
+var sAppBlockBuilder_AppBlockBuilderErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderErrors", ID: &i_ResourceErrors, Members: &m_ResourceErrors, Type: smithy.ShapeTypeList, Ext: &eAppBlockBuilder_AppBlockBuilderErrors})
+var sAppBlockBuilder_StateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateChangeReason", ID: &iAppBlockBuilderStateChangeReason, Members: &mAppBlockBuilderStateChangeReason, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilder_StateChangeReason})
+var sAppBlockBuilder_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eAppBlockBuilder_AccessEndpoints})
+var sAppBlockBuilder_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eAppBlockBuilder_DisableIMDSV1})
+var sAppBlockBuilderAppBlockAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockBuilderAppBlockAssociation, Members: &mAppBlockBuilderAppBlockAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderAppBlockAssociation})
+var sAppBlockBuilderAppBlockAssociation_AppBlockArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilderAppBlockAssociation_AppBlockArn})
+var sAppBlockBuilderAppBlockAssociation_AppBlockBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilderAppBlockAssociation_AppBlockBuilderName})
+var s_AppBlockBuilderAppBlockAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppBlockBuilderAppBlockAssociationsList, Members: &m_AppBlockBuilderAppBlockAssociationsList, Type: smithy.ShapeTypeList, Ext: &e_AppBlockBuilderAppBlockAssociationsList})
+var s_AppBlockBuilderAppBlockAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppBlockBuilderAppBlockAssociation, Members: &mAppBlockBuilderAppBlockAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_AppBlockBuilderAppBlockAssociationsList_member})
+var sAppBlockBuilderAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockBuilderAttribute, Members: &mAppBlockBuilderAttribute, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockBuilderAttribute})
+var sAppBlockBuilderAttribute_IAM_ROLE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_ROLE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderAttribute_IAM_ROLE_ARN})
+var sAppBlockBuilderAttribute_ACCESS_ENDPOINTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_ENDPOINTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderAttribute_ACCESS_ENDPOINTS})
+var sAppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_CONFIGURATION_SECURITY_GROUP_IDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS})
+var s_AppBlockBuilderAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppBlockBuilderAttributes, Members: &m_AppBlockBuilderAttributes, Type: smithy.ShapeTypeList, Ext: &e_AppBlockBuilderAttributes})
+var s_AppBlockBuilderAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppBlockBuilderAttribute, Members: &mAppBlockBuilderAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_AppBlockBuilderAttributes_member})
+var s_AppBlockBuilderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppBlockBuilderList, Members: &m_AppBlockBuilderList, Type: smithy.ShapeTypeList, Ext: &e_AppBlockBuilderList})
+var s_AppBlockBuilderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppBlockBuilder, Members: &mAppBlockBuilder, Type: smithy.ShapeTypeStructure, Ext: &e_AppBlockBuilderList_member})
+var sAppBlockBuilderPlatformType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockBuilderPlatformType, Members: &mAppBlockBuilderPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockBuilderPlatformType})
+var sAppBlockBuilderPlatformType_WINDOWS_SERVER_2019 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2019", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderPlatformType_WINDOWS_SERVER_2019})
+var sAppBlockBuilderState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockBuilderState, Members: &mAppBlockBuilderState, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockBuilderState})
+var sAppBlockBuilderState_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderState_STARTING})
+var sAppBlockBuilderState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderState_RUNNING})
+var sAppBlockBuilderState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderState_STOPPING})
+var sAppBlockBuilderState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderState_STOPPED})
+var sAppBlockBuilderStateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockBuilderStateChangeReason, Members: &mAppBlockBuilderStateChangeReason, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderStateChangeReason})
+var sAppBlockBuilderStateChangeReason_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iAppBlockBuilderStateChangeReasonCode, Members: &mAppBlockBuilderStateChangeReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockBuilderStateChangeReason_Code})
+var sAppBlockBuilderStateChangeReason_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppBlockBuilderStateChangeReason_Message})
+var sAppBlockBuilderStateChangeReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockBuilderStateChangeReasonCode, Members: &mAppBlockBuilderStateChangeReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockBuilderStateChangeReasonCode})
+var sAppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR})
+var s_AppBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppBlocks, Members: &m_AppBlocks, Type: smithy.ShapeTypeList, Ext: &e_AppBlocks})
+var s_AppBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppBlock, Members: &mAppBlock, Type: smithy.ShapeTypeStructure, Ext: &e_AppBlocks_member})
+var sAppBlockState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBlockState, Members: &mAppBlockState, Type: smithy.ShapeTypeEnum, Ext: &eAppBlockState})
+var sAppBlockState_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockState_INACTIVE})
+var sAppBlockState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppBlockState_ACTIVE})
+var s_AppCatalogConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppCatalogConfig, Members: &m_AppCatalogConfig, Type: smithy.ShapeTypeList, Ext: &e_AppCatalogConfig})
+var s_AppCatalogConfig_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationConfig, Members: &mApplicationConfig, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &e_AppCatalogConfig_member})
+var s_AppDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppDisplayName, Type: smithy.ShapeTypeString, Ext: &e_AppDisplayName})
+var sApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure, Ext: &eApplication})
+var sApplication_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplication_Name})
+var sApplication_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplication_DisplayName})
+var sApplication_IconURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IconURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplication_IconURL})
+var sApplication_LaunchPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchPath", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplication_LaunchPath})
+var sApplication_LaunchParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchParameters", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplication_LaunchParameters})
+var sApplication_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eApplication_Enabled})
+var sApplication_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeMap, Ext: &eApplication_Metadata})
+var sApplication_WorkingDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingDirectory", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplication_WorkingDirectory})
+var sApplication_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplication_Description})
+var sApplication_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApplication_Arn})
+var sApplication_AppBlockArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApplication_AppBlockArn})
+var sApplication_IconS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IconS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eApplication_IconS3Location})
+var sApplication_Platforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platforms", ID: &i_Platforms, Members: &m_Platforms, Type: smithy.ShapeTypeList, Ext: &eApplication_Platforms})
+var sApplication_InstanceFamilies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceFamilies", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eApplication_InstanceFamilies})
+var sApplication_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eApplication_CreatedTime})
+var sApplicationAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationAttribute, Members: &mApplicationAttribute, Type: smithy.ShapeTypeEnum, Ext: &eApplicationAttribute})
+var sApplicationAttribute_LAUNCH_PARAMETERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAUNCH_PARAMETERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationAttribute_LAUNCH_PARAMETERS})
+var sApplicationAttribute_WORKING_DIRECTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKING_DIRECTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationAttribute_WORKING_DIRECTORY})
+var s_ApplicationAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationAttributes, Members: &m_ApplicationAttributes, Type: smithy.ShapeTypeList, Ext: &e_ApplicationAttributes})
+var s_ApplicationAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationAttribute, Members: &mApplicationAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_ApplicationAttributes_member})
+var sApplicationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationConfig, Members: &mApplicationConfig, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eApplicationConfig})
+var sApplicationConfig_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppName, Type: smithy.ShapeTypeString, Ext: &eApplicationConfig_Name})
+var sApplicationConfig_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_AppDisplayName, Type: smithy.ShapeTypeString, Ext: &eApplicationConfig_DisplayName})
+var sApplicationConfig_AbsoluteAppPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbsoluteAppPath", ID: &i_FilePath, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eApplicationConfig_AbsoluteAppPath})
+var sApplicationConfig_AbsoluteIconPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbsoluteIconPath", ID: &i_FilePath, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eApplicationConfig_AbsoluteIconPath})
+var sApplicationConfig_AbsoluteManifestPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbsoluteManifestPath", ID: &i_FilePath, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eApplicationConfig_AbsoluteManifestPath})
+var sApplicationConfig_WorkingDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingDirectory", ID: &i_FilePath, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eApplicationConfig_WorkingDirectory})
+var sApplicationConfig_LaunchParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchParameters", ID: &i_LaunchParameters, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eApplicationConfig_LaunchParameters})
+var sApplicationFleetAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationFleetAssociation, Members: &mApplicationFleetAssociation, Type: smithy.ShapeTypeStructure, Ext: &eApplicationFleetAssociation})
+var sApplicationFleetAssociation_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplicationFleetAssociation_FleetName})
+var sApplicationFleetAssociation_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApplicationFleetAssociation_ApplicationArn})
+var s_ApplicationFleetAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationFleetAssociationList, Members: &m_ApplicationFleetAssociationList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationFleetAssociationList})
+var s_ApplicationFleetAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationFleetAssociation, Members: &mApplicationFleetAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_ApplicationFleetAssociationList_member})
+var s_Applications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Applications, Members: &m_Applications, Type: smithy.ShapeTypeList, Ext: &e_Applications})
+var s_Applications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure, Ext: &e_Applications_member})
+var sApplicationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationSettings, Members: &mApplicationSettings, Type: smithy.ShapeTypeStructure, Ext: &eApplicationSettings})
+var sApplicationSettings_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationSettings_Enabled})
+var sApplicationSettings_SettingsGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SettingsGroup", ID: &i_SettingsGroup, Type: smithy.ShapeTypeString, Ext: &eApplicationSettings_SettingsGroup})
+var sApplicationSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationSettingsResponse, Members: &mApplicationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eApplicationSettingsResponse})
+var sApplicationSettingsResponse_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationSettingsResponse_Enabled})
+var sApplicationSettingsResponse_SettingsGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SettingsGroup", ID: &i_SettingsGroup, Type: smithy.ShapeTypeString, Ext: &eApplicationSettingsResponse_SettingsGroup})
+var sApplicationSettingsResponse_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplicationSettingsResponse_S3BucketName})
+var s_AppName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppName, Type: smithy.ShapeTypeString, Ext: &e_AppName})
+var s_AppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppstreamAgentVersion, Type: smithy.ShapeTypeString, Ext: &e_AppstreamAgentVersion})
+var sAppVisibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppVisibility, Members: &mAppVisibility, Type: smithy.ShapeTypeEnum, Ext: &eAppVisibility})
+var sAppVisibility_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppVisibility_ALL})
+var sAppVisibility_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppVisibility_ASSOCIATED})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_ArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &e_ArnList})
+var s_ArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_ArnList_member})
+var sAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticationType})
+var sAuthenticationType_API = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_API})
+var sAuthenticationType_SAML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_SAML})
+var sAuthenticationType_USERPOOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USERPOOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_USERPOOL})
+var sAuthenticationType_AWS_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_AD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_AWS_AD})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var s_AwsAccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountIdList, Members: &m_AwsAccountIdList, Type: smithy.ShapeTypeList, Ext: &e_AwsAccountIdList})
+var s_AwsAccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountIdList_member})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_BooleanObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanObject})
+var sCertificateBasedAuthProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateBasedAuthProperties, Members: &mCertificateBasedAuthProperties, Type: smithy.ShapeTypeStructure, Ext: &eCertificateBasedAuthProperties})
+var sCertificateBasedAuthProperties_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateBasedAuthStatus, Members: &mCertificateBasedAuthStatus, Type: smithy.ShapeTypeEnum, Ext: &eCertificateBasedAuthProperties_Status})
+var sCertificateBasedAuthProperties_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCertificateBasedAuthProperties_CertificateAuthorityArn})
+var sCertificateBasedAuthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateBasedAuthStatus, Members: &mCertificateBasedAuthStatus, Type: smithy.ShapeTypeEnum, Ext: &eCertificateBasedAuthStatus})
+var sCertificateBasedAuthStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateBasedAuthStatus_DISABLED})
+var sCertificateBasedAuthStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateBasedAuthStatus_ENABLED})
+var sCertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK})
+var sComputeCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeCapacity, Members: &mComputeCapacity, Type: smithy.ShapeTypeStructure, Ext: &eComputeCapacity})
+var sComputeCapacity_DesiredInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredInstances", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacity_DesiredInstances})
+var sComputeCapacity_DesiredSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacity_DesiredSessions})
+var sComputeCapacityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeCapacityStatus, Members: &mComputeCapacityStatus, Type: smithy.ShapeTypeStructure, Ext: &eComputeCapacityStatus})
+var sComputeCapacityStatus_Desired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Desired", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_Desired})
+var sComputeCapacityStatus_Running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Running", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_Running})
+var sComputeCapacityStatus_InUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InUse", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_InUse})
+var sComputeCapacityStatus_Available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Available", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_Available})
+var sComputeCapacityStatus_DesiredUserSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredUserSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_DesiredUserSessions})
+var sComputeCapacityStatus_AvailableUserSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailableUserSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_AvailableUserSessions})
+var sComputeCapacityStatus_ActiveUserSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveUserSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_ActiveUserSessions})
+var sComputeCapacityStatus_ActualUserSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualUserSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_ActualUserSessions})
+var sComputeCapacityStatus_Draining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draining", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_Draining})
+var sComputeCapacityStatus_DrainModeActiveUserSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DrainModeActiveUserSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_DrainModeActiveUserSessions})
+var sComputeCapacityStatus_DrainModeUnusedUserSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DrainModeUnusedUserSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eComputeCapacityStatus_DrainModeUnusedUserSessions})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_Message})
+var sContentRedirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentRedirection, Members: &mContentRedirection, Type: smithy.ShapeTypeStructure, Ext: &eContentRedirection})
+var sContentRedirection_HostToClient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostToClient", ID: &iUrlRedirectionConfig, Members: &mUrlRedirectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eContentRedirection_HostToClient})
+var s_DescribeImagesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeImagesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_DescribeImagesMaxResults})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDirectoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryConfig, Members: &mDirectoryConfig, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryConfig})
+var sDirectoryConfig_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eDirectoryConfig_DirectoryName})
+var sDirectoryConfig_OrganizationalUnitDistinguishedNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedNames", ID: &i_OrganizationalUnitDistinguishedNamesList, Members: &m_OrganizationalUnitDistinguishedNamesList, Type: smithy.ShapeTypeList, Ext: &eDirectoryConfig_OrganizationalUnitDistinguishedNames})
+var sDirectoryConfig_ServiceAccountCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceAccountCredentials", ID: &iServiceAccountCredentials, Members: &mServiceAccountCredentials, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryConfig_ServiceAccountCredentials})
+var sDirectoryConfig_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDirectoryConfig_CreatedTime})
+var sDirectoryConfig_CertificateBasedAuthProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateBasedAuthProperties", ID: &iCertificateBasedAuthProperties, Members: &mCertificateBasedAuthProperties, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryConfig_CertificateBasedAuthProperties})
+var s_DirectoryConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigList, Members: &m_DirectoryConfigList, Type: smithy.ShapeTypeList, Ext: &e_DirectoryConfigList})
+var s_DirectoryConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectoryConfig, Members: &mDirectoryConfig, Type: smithy.ShapeTypeStructure, Ext: &e_DirectoryConfigList_member})
+var s_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &e_DirectoryName})
+var s_DirectoryNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryNameList, Members: &m_DirectoryNameList, Type: smithy.ShapeTypeList, Ext: &e_DirectoryNameList})
+var s_DirectoryNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &e_DirectoryNameList_member})
+var s_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &e_DisplayName})
+var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &e_Domain})
+var sDomainJoinInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainJoinInfo, Members: &mDomainJoinInfo, Type: smithy.ShapeTypeStructure, Ext: &eDomainJoinInfo})
+var sDomainJoinInfo_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eDomainJoinInfo_DirectoryName})
+var sDomainJoinInfo_OrganizationalUnitDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedName", ID: &i_OrganizationalUnitDistinguishedName, Type: smithy.ShapeTypeString, Ext: &eDomainJoinInfo_OrganizationalUnitDistinguishedName})
+var s_DomainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainList, Members: &m_DomainList, Type: smithy.ShapeTypeList, Ext: &e_DomainList})
+var s_DomainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &e_DomainList_member})
+var sDryRunOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunOperationException, Members: &mDryRunOperationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eDryRunOperationException})
+var sDryRunOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDryRunOperationException_Message})
+var sDynamicAppProvidersEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynamicAppProvidersEnabled, Members: &mDynamicAppProvidersEnabled, Type: smithy.ShapeTypeEnum, Ext: &eDynamicAppProvidersEnabled})
+var sDynamicAppProvidersEnabled_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDynamicAppProvidersEnabled_ENABLED})
+var sDynamicAppProvidersEnabled_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDynamicAppProvidersEnabled_DISABLED})
+var s_EmbedHostDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbedHostDomain, Type: smithy.ShapeTypeString, Ext: &e_EmbedHostDomain})
+var s_EmbedHostDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbedHostDomains, Members: &m_EmbedHostDomains, Type: smithy.ShapeTypeList, Ext: &e_EmbedHostDomains})
+var s_EmbedHostDomains_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmbedHostDomain, Type: smithy.ShapeTypeString, Ext: &e_EmbedHostDomains_member})
+var sEntitledApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitledApplication, Members: &mEntitledApplication, Type: smithy.ShapeTypeStructure, Ext: &eEntitledApplication})
+var sEntitledApplication_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEntitledApplication_ApplicationIdentifier})
+var s_EntitledApplicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitledApplicationList, Members: &m_EntitledApplicationList, Type: smithy.ShapeTypeList, Ext: &e_EntitledApplicationList})
+var s_EntitledApplicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntitledApplication, Members: &mEntitledApplication, Type: smithy.ShapeTypeStructure, Ext: &e_EntitledApplicationList_member})
+var sEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &eEntitlement})
+var sEntitlement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eEntitlement_Name})
+var sEntitlement_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eEntitlement_StackName})
+var sEntitlement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eEntitlement_Description})
+var sEntitlement_AppVisibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppVisibility", ID: &iAppVisibility, Members: &mAppVisibility, Type: smithy.ShapeTypeEnum, Ext: &eEntitlement_AppVisibility})
+var sEntitlement_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_EntitlementAttributeList, Members: &m_EntitlementAttributeList, Type: smithy.ShapeTypeList, Ext: &eEntitlement_Attributes})
+var sEntitlement_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEntitlement_CreatedTime})
+var sEntitlement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEntitlement_LastModifiedTime})
+var sEntitlementAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlementAlreadyExistsException, Members: &mEntitlementAlreadyExistsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eEntitlementAlreadyExistsException})
+var sEntitlementAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eEntitlementAlreadyExistsException_Message})
+var sEntitlementAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlementAttribute, Members: &mEntitlementAttribute, Type: smithy.ShapeTypeStructure, Ext: &eEntitlementAttribute})
+var sEntitlementAttribute_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEntitlementAttribute_Name})
+var sEntitlementAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEntitlementAttribute_Value})
+var s_EntitlementAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitlementAttributeList, Members: &m_EntitlementAttributeList, Type: smithy.ShapeTypeList, Ext: &e_EntitlementAttributeList})
+var s_EntitlementAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntitlementAttribute, Members: &mEntitlementAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_EntitlementAttributeList_member})
+var s_EntitlementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitlementList, Members: &m_EntitlementList, Type: smithy.ShapeTypeList, Ext: &e_EntitlementList})
+var s_EntitlementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &e_EntitlementList_member})
+var sEntitlementNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlementNotFoundException, Members: &mEntitlementNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eEntitlementNotFoundException})
+var sEntitlementNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eEntitlementNotFoundException_Message})
+var sErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eErrorDetails})
+var sErrorDetails_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eErrorDetails_ErrorCode})
+var sErrorDetails_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eErrorDetails_ErrorMessage})
+var s_ErrorDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDetailsList, Members: &m_ErrorDetailsList, Type: smithy.ShapeTypeList, Ext: &e_ErrorDetailsList})
+var s_ErrorDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &e_ErrorDetailsList_member})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sExportImageTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportImageTask, Members: &mExportImageTask, Type: smithy.ShapeTypeStructure, Ext: &eExportImageTask})
+var sExportImageTask_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eExportImageTask_TaskId})
+var sExportImageTask_ImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExportImageTask_ImageArn})
+var sExportImageTask_AmiName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiName", ID: &i_AmiName, Type: smithy.ShapeTypeString, Ext: &eExportImageTask_AmiName})
+var sExportImageTask_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExportImageTask_CreatedDate})
+var sExportImageTask_AmiDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExportImageTask_AmiDescription})
+var sExportImageTask_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iExportImageTaskState, Members: &mExportImageTaskState, Type: smithy.ShapeTypeEnum, Ext: &eExportImageTask_State})
+var sExportImageTask_AmiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiId", ID: &i_PhotonAmiId, Type: smithy.ShapeTypeString, Ext: &eExportImageTask_AmiId})
+var sExportImageTask_TagSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagSpecifications", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eExportImageTask_TagSpecifications})
+var sExportImageTask_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &i_ErrorDetailsList, Members: &m_ErrorDetailsList, Type: smithy.ShapeTypeList, Ext: &eExportImageTask_ErrorDetails})
+var s_ExportImageTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportImageTasks, Members: &m_ExportImageTasks, Type: smithy.ShapeTypeList, Ext: &e_ExportImageTasks})
+var s_ExportImageTasks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExportImageTask, Members: &mExportImageTask, Type: smithy.ShapeTypeStructure, Ext: &e_ExportImageTasks_member})
+var sExportImageTaskState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportImageTaskState, Members: &mExportImageTaskState, Type: smithy.ShapeTypeEnum, Ext: &eExportImageTaskState})
+var sExportImageTaskState_EXPORTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportImageTaskState_EXPORTING})
+var sExportImageTaskState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportImageTaskState_COMPLETED})
+var sExportImageTaskState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportImageTaskState_FAILED})
+var sExportImageTaskState_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportImageTaskState_TIMED_OUT})
+var s_FeedbackURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeedbackURL, Type: smithy.ShapeTypeString, Ext: &e_FeedbackURL})
+var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &e_FilePath})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FilterName, Type: smithy.ShapeTypeString, Ext: &eFilter_Name})
+var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &eFilter_Values})
+var s_FilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterName, Type: smithy.ShapeTypeString, Ext: &e_FilterName})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &e_Filters})
+var s_Filters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_Filters_member})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &e_FilterValues})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValues_member})
+var sFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &eFleet})
+var sFleet_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eFleet_Arn})
+var sFleet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFleet_Name})
+var sFleet_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFleet_DisplayName})
+var sFleet_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFleet_Description})
+var sFleet_ImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFleet_ImageName})
+var sFleet_ImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eFleet_ImageArn})
+var sFleet_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFleet_InstanceType})
+var sFleet_FleetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetType", ID: &iFleetType, Members: &mFleetType, Type: smithy.ShapeTypeEnum, Ext: &eFleet_FleetType})
+var sFleet_ComputeCapacityStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeCapacityStatus", ID: &iComputeCapacityStatus, Members: &mComputeCapacityStatus, Type: smithy.ShapeTypeStructure, Ext: &eFleet_ComputeCapacityStatus})
+var sFleet_MaxUserDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUserDurationInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eFleet_MaxUserDurationInSeconds})
+var sFleet_DisconnectTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisconnectTimeoutInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eFleet_DisconnectTimeoutInSeconds})
+var sFleet_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iFleetState, Members: &mFleetState, Type: smithy.ShapeTypeEnum, Ext: &eFleet_State})
+var sFleet_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eFleet_VpcConfig})
+var sFleet_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFleet_CreatedTime})
+var sFleet_FleetErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetErrors", ID: &i_FleetErrors, Members: &m_FleetErrors, Type: smithy.ShapeTypeList, Ext: &eFleet_FleetErrors})
+var sFleet_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eFleet_EnableDefaultInternetAccess})
+var sFleet_DomainJoinInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinInfo", ID: &iDomainJoinInfo, Members: &mDomainJoinInfo, Type: smithy.ShapeTypeStructure, Ext: &eFleet_DomainJoinInfo})
+var sFleet_IdleDisconnectTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleDisconnectTimeoutInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eFleet_IdleDisconnectTimeoutInSeconds})
+var sFleet_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eFleet_IamRoleArn})
+var sFleet_StreamView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamView", ID: &iStreamView, Members: &mStreamView, Type: smithy.ShapeTypeEnum, Ext: &eFleet_StreamView})
+var sFleet_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eFleet_Platform})
+var sFleet_MaxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrentSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eFleet_MaxConcurrentSessions})
+var sFleet_UsbDeviceFilterStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsbDeviceFilterStrings", ID: &i_UsbDeviceFilterStrings, Members: &m_UsbDeviceFilterStrings, Type: smithy.ShapeTypeList, Ext: &eFleet_UsbDeviceFilterStrings})
+var sFleet_SessionScriptS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionScriptS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eFleet_SessionScriptS3Location})
+var sFleet_MaxSessionsPerInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSessionsPerInstance", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eFleet_MaxSessionsPerInstance})
+var sFleet_RootVolumeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeConfig", ID: &iVolumeConfig, Members: &mVolumeConfig, Type: smithy.ShapeTypeStructure, Ext: &eFleet_RootVolumeConfig})
+var sFleet_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eFleet_DisableIMDSV1})
+var sFleetAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetAttribute, Members: &mFleetAttribute, Type: smithy.ShapeTypeEnum, Ext: &eFleetAttribute})
+var sFleetAttribute_VPC_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_VPC_CONFIGURATION})
+var sFleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_CONFIGURATION_SECURITY_GROUP_IDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS})
+var sFleetAttribute_DOMAIN_JOIN_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_DOMAIN_JOIN_INFO})
+var sFleetAttribute_IAM_ROLE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_ROLE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_IAM_ROLE_ARN})
+var sFleetAttribute_USB_DEVICE_FILTER_STRINGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USB_DEVICE_FILTER_STRINGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_USB_DEVICE_FILTER_STRINGS})
+var sFleetAttribute_SESSION_SCRIPT_S3_LOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_SCRIPT_S3_LOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_SESSION_SCRIPT_S3_LOCATION})
+var sFleetAttribute_MAX_SESSIONS_PER_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_SESSIONS_PER_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_MAX_SESSIONS_PER_INSTANCE})
+var sFleetAttribute_VOLUME_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetAttribute_VOLUME_CONFIGURATION})
+var s_FleetAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetAttributes, Members: &m_FleetAttributes, Type: smithy.ShapeTypeList, Ext: &e_FleetAttributes})
+var s_FleetAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFleetAttribute, Members: &mFleetAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_FleetAttributes_member})
+var sFleetError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetError, Members: &mFleetError, Type: smithy.ShapeTypeStructure, Ext: &eFleetError})
+var sFleetError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iFleetErrorCode, Members: &mFleetErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eFleetError_ErrorCode})
+var sFleetError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFleetError_ErrorMessage})
+var sFleetErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetErrorCode, Members: &mFleetErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eFleetErrorCode})
+var sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION})
+var sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION})
+var sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION})
+var sFleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_INTERFACE_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED})
+var sFleetErrorCode_INTERNAL_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_INTERNAL_SERVICE_ERROR})
+var sFleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_SERVICE_ROLE_IS_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING})
+var sFleetErrorCode_MACHINE_ROLE_IS_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MACHINE_ROLE_IS_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_MACHINE_ROLE_IS_MISSING})
+var sFleetErrorCode_STS_DISABLED_IN_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STS_DISABLED_IN_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_STS_DISABLED_IN_REGION})
+var sFleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES})
+var sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION})
+var sFleetErrorCode_SUBNET_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_SUBNET_NOT_FOUND})
+var sFleetErrorCode_IMAGE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IMAGE_NOT_FOUND})
+var sFleetErrorCode_INVALID_SUBNET_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SUBNET_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_INVALID_SUBNET_CONFIGURATION})
+var sFleetErrorCode_SECURITY_GROUPS_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_GROUPS_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_SECURITY_GROUPS_NOT_FOUND})
+var sFleetErrorCode_IGW_NOT_ATTACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGW_NOT_ATTACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IGW_NOT_ATTACHED})
+var sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION})
+var sFleetErrorCode_FLEET_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLEET_STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_FLEET_STOPPED})
+var sFleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLEET_INSTANCE_PROVISIONING_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_LOGON_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_MORE_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED})
+var sFleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME})
+var sFleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED})
+var sFleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED})
+var sFleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED})
+var sFleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR})
+var sFleetErrorCode_VALIDATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetErrorCode_VALIDATION_ERROR})
+var s_FleetErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetErrors, Members: &m_FleetErrors, Type: smithy.ShapeTypeList, Ext: &e_FleetErrors})
+var s_FleetErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFleetError, Members: &mFleetError, Type: smithy.ShapeTypeStructure, Ext: &e_FleetErrors_member})
+var s_FleetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetList, Members: &m_FleetList, Type: smithy.ShapeTypeList, Ext: &e_FleetList})
+var s_FleetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &e_FleetList_member})
+var sFleetState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetState, Members: &mFleetState, Type: smithy.ShapeTypeEnum, Ext: &eFleetState})
+var sFleetState_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetState_STARTING})
+var sFleetState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetState_RUNNING})
+var sFleetState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetState_STOPPING})
+var sFleetState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetState_STOPPED})
+var sFleetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetType, Members: &mFleetType, Type: smithy.ShapeTypeEnum, Ext: &eFleetType})
+var sFleetType_ALWAYS_ON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS_ON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetType_ALWAYS_ON})
+var sFleetType_ON_DEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetType_ON_DEMAND})
+var sFleetType_ELASTIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELASTIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetType_ELASTIC})
+var sImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImage, Members: &mImage, Type: smithy.ShapeTypeStructure, Ext: &eImage})
+var sImage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImage_Name})
+var sImage_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eImage_Arn})
+var sImage_BaseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseImageArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eImage_BaseImageArn})
+var sImage_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImage_DisplayName})
+var sImage_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iImageState, Members: &mImageState, Type: smithy.ShapeTypeEnum, Ext: &eImage_State})
+var sImage_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibilityType, Members: &mVisibilityType, Type: smithy.ShapeTypeEnum, Ext: &eImage_Visibility})
+var sImage_ImageBuilderSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilderSupported", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eImage_ImageBuilderSupported})
+var sImage_ImageBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilderName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImage_ImageBuilderName})
+var sImage_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eImage_Platform})
+var sImage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImage_Description})
+var sImage_StateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateChangeReason", ID: &iImageStateChangeReason, Members: &mImageStateChangeReason, Type: smithy.ShapeTypeStructure, Ext: &eImage_StateChangeReason})
+var sImage_Applications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Applications", ID: &i_Applications, Members: &m_Applications, Type: smithy.ShapeTypeList, Ext: &eImage_Applications})
+var sImage_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eImage_CreatedTime})
+var sImage_PublicBaseImageReleasedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicBaseImageReleasedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eImage_PublicBaseImageReleasedDate})
+var sImage_AppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppstreamAgentVersion", ID: &i_AppstreamAgentVersion, Type: smithy.ShapeTypeString, Ext: &eImage_AppstreamAgentVersion})
+var sImage_ImagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImagePermissions", ID: &iImagePermissions, Members: &mImagePermissions, Type: smithy.ShapeTypeStructure, Ext: &eImage_ImagePermissions})
+var sImage_ImageErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageErrors", ID: &i_ResourceErrors, Members: &m_ResourceErrors, Type: smithy.ShapeTypeList, Ext: &eImage_ImageErrors})
+var sImage_LatestAppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestAppstreamAgentVersion", ID: &iLatestAppstreamAgentVersion, Members: &mLatestAppstreamAgentVersion, Type: smithy.ShapeTypeEnum, Ext: &eImage_LatestAppstreamAgentVersion})
+var sImage_SupportedInstanceFamilies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedInstanceFamilies", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eImage_SupportedInstanceFamilies})
+var sImage_DynamicAppProvidersEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicAppProvidersEnabled", ID: &iDynamicAppProvidersEnabled, Members: &mDynamicAppProvidersEnabled, Type: smithy.ShapeTypeEnum, Ext: &eImage_DynamicAppProvidersEnabled})
+var sImage_ImageSharedWithOthers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSharedWithOthers", ID: &iImageSharedWithOthers, Members: &mImageSharedWithOthers, Type: smithy.ShapeTypeEnum, Ext: &eImage_ImageSharedWithOthers})
+var sImage_ManagedSoftwareIncluded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedSoftwareIncluded", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eImage_ManagedSoftwareIncluded})
+var sImage_ImageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageType", ID: &iImageType, Members: &mImageType, Type: smithy.ShapeTypeEnum, Ext: &eImage_ImageType})
+var sImage_ImageSoftwareMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSoftwareMetadata", ID: &iImageSoftwareMetadata, Members: &mImageSoftwareMetadata, Type: smithy.ShapeTypeStructure, Ext: &eImage_ImageSoftwareMetadata})
+var sImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBuilder, Members: &mImageBuilder, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilder})
+var sImageBuilder_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_Name})
+var sImageBuilder_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_Arn})
+var sImageBuilder_ImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_ImageArn})
+var sImageBuilder_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_Description})
+var sImageBuilder_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_DisplayName})
+var sImageBuilder_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilder_VpcConfig})
+var sImageBuilder_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_InstanceType})
+var sImageBuilder_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eImageBuilder_Platform})
+var sImageBuilder_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_IamRoleArn})
+var sImageBuilder_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iImageBuilderState, Members: &mImageBuilderState, Type: smithy.ShapeTypeEnum, Ext: &eImageBuilder_State})
+var sImageBuilder_StateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateChangeReason", ID: &iImageBuilderStateChangeReason, Members: &mImageBuilderStateChangeReason, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilder_StateChangeReason})
+var sImageBuilder_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eImageBuilder_CreatedTime})
+var sImageBuilder_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eImageBuilder_EnableDefaultInternetAccess})
+var sImageBuilder_DomainJoinInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinInfo", ID: &iDomainJoinInfo, Members: &mDomainJoinInfo, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilder_DomainJoinInfo})
+var sImageBuilder_NetworkAccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAccessConfiguration", ID: &iNetworkAccessConfiguration, Members: &mNetworkAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilder_NetworkAccessConfiguration})
+var sImageBuilder_ImageBuilderErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilderErrors", ID: &i_ResourceErrors, Members: &m_ResourceErrors, Type: smithy.ShapeTypeList, Ext: &eImageBuilder_ImageBuilderErrors})
+var sImageBuilder_AppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppstreamAgentVersion", ID: &i_AppstreamAgentVersion, Type: smithy.ShapeTypeString, Ext: &eImageBuilder_AppstreamAgentVersion})
+var sImageBuilder_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eImageBuilder_AccessEndpoints})
+var sImageBuilder_RootVolumeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeConfig", ID: &iVolumeConfig, Members: &mVolumeConfig, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilder_RootVolumeConfig})
+var sImageBuilder_LatestAppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestAppstreamAgentVersion", ID: &iLatestAppstreamAgentVersion, Members: &mLatestAppstreamAgentVersion, Type: smithy.ShapeTypeEnum, Ext: &eImageBuilder_LatestAppstreamAgentVersion})
+var sImageBuilder_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eImageBuilder_DisableIMDSV1})
+var s_ImageBuilderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageBuilderList, Members: &m_ImageBuilderList, Type: smithy.ShapeTypeList, Ext: &e_ImageBuilderList})
+var s_ImageBuilderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImageBuilder, Members: &mImageBuilder, Type: smithy.ShapeTypeStructure, Ext: &e_ImageBuilderList_member})
+var sImageBuilderState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBuilderState, Members: &mImageBuilderState, Type: smithy.ShapeTypeEnum, Ext: &eImageBuilderState})
+var sImageBuilderState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_PENDING})
+var sImageBuilderState_UPDATING_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING_AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_UPDATING_AGENT})
+var sImageBuilderState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_RUNNING})
+var sImageBuilderState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_STOPPING})
+var sImageBuilderState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_STOPPED})
+var sImageBuilderState_REBOOTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REBOOTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_REBOOTING})
+var sImageBuilderState_SNAPSHOTTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOTTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_SNAPSHOTTING})
+var sImageBuilderState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_DELETING})
+var sImageBuilderState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_FAILED})
+var sImageBuilderState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_UPDATING})
+var sImageBuilderState_PENDING_QUALIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_QUALIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_PENDING_QUALIFICATION})
+var sImageBuilderState_PENDING_SYNCING_APPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_SYNCING_APPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_PENDING_SYNCING_APPS})
+var sImageBuilderState_SYNCING_APPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNCING_APPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_SYNCING_APPS})
+var sImageBuilderState_PENDING_IMAGE_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_IMAGE_IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderState_PENDING_IMAGE_IMPORT})
+var sImageBuilderStateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBuilderStateChangeReason, Members: &mImageBuilderStateChangeReason, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderStateChangeReason})
+var sImageBuilderStateChangeReason_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iImageBuilderStateChangeReasonCode, Members: &mImageBuilderStateChangeReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eImageBuilderStateChangeReason_Code})
+var sImageBuilderStateChangeReason_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageBuilderStateChangeReason_Message})
+var sImageBuilderStateChangeReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBuilderStateChangeReasonCode, Members: &mImageBuilderStateChangeReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eImageBuilderStateChangeReasonCode})
+var sImageBuilderStateChangeReasonCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderStateChangeReasonCode_INTERNAL_ERROR})
+var sImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE})
+var s_ImageImportDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageImportDescription, Type: smithy.ShapeTypeString, Ext: &e_ImageImportDescription})
+var s_ImageImportDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageImportDisplayName, Type: smithy.ShapeTypeString, Ext: &e_ImageImportDisplayName})
+var s_ImageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageList, Members: &m_ImageList, Type: smithy.ShapeTypeList, Ext: &e_ImageList})
+var s_ImageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImage, Members: &mImage, Type: smithy.ShapeTypeStructure, Ext: &e_ImageList_member})
+var sImagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImagePermissions, Members: &mImagePermissions, Type: smithy.ShapeTypeStructure, Ext: &eImagePermissions})
+var sImagePermissions_allowFleet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowFleet", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eImagePermissions_allowFleet})
+var sImagePermissions_allowImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowImageBuilder", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eImagePermissions_allowImageBuilder})
+var sImageSharedWithOthers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSharedWithOthers, Members: &mImageSharedWithOthers, Type: smithy.ShapeTypeEnum, Ext: &eImageSharedWithOthers})
+var sImageSharedWithOthers_TRUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSharedWithOthers_TRUE})
+var sImageSharedWithOthers_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSharedWithOthers_FALSE})
+var sImageSoftwareMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSoftwareMetadata, Members: &mImageSoftwareMetadata, Type: smithy.ShapeTypeStructure, Ext: &eImageSoftwareMetadata})
+var sImageSoftwareMetadata_nvidiaGridDriverVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nvidiaGridDriverVersion", ID: &i_NvidiaGridDriverVersion, Type: smithy.ShapeTypeString, Ext: &eImageSoftwareMetadata_nvidiaGridDriverVersion})
+var sImageState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageState, Members: &mImageState, Type: smithy.ShapeTypeEnum, Ext: &eImageState})
+var sImageState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_PENDING})
+var sImageState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_AVAILABLE})
+var sImageState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_FAILED})
+var sImageState_COPYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_COPYING})
+var sImageState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_DELETING})
+var sImageState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_CREATING})
+var sImageState_IMPORTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_IMPORTING})
+var sImageState_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageState_VALIDATING})
+var sImageStateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageStateChangeReason, Members: &mImageStateChangeReason, Type: smithy.ShapeTypeStructure, Ext: &eImageStateChangeReason})
+var sImageStateChangeReason_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iImageStateChangeReasonCode, Members: &mImageStateChangeReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eImageStateChangeReason_Code})
+var sImageStateChangeReason_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageStateChangeReason_Message})
+var sImageStateChangeReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageStateChangeReasonCode, Members: &mImageStateChangeReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eImageStateChangeReasonCode})
+var sImageStateChangeReasonCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageStateChangeReasonCode_INTERNAL_ERROR})
+var sImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_BUILDER_NOT_AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE})
+var sImageStateChangeReasonCode_IMAGE_COPY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_COPY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageStateChangeReasonCode_IMAGE_COPY_FAILURE})
+var sImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_UPDATE_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE})
+var sImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_IMPORT_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE})
+var sImageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageType, Members: &mImageType, Type: smithy.ShapeTypeEnum, Ext: &eImageType})
+var sImageType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageType_CUSTOM})
+var sImageType_NATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageType_NATIVE})
+var sImageType_BYOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageType_BYOL})
+var sIncompatibleImageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncompatibleImageException, Members: &mIncompatibleImageException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eIncompatibleImageException})
+var sIncompatibleImageException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eIncompatibleImageException_Message})
+var sInstanceDrainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceDrainStatus, Members: &mInstanceDrainStatus, Type: smithy.ShapeTypeEnum, Ext: &eInstanceDrainStatus})
+var sInstanceDrainStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstanceDrainStatus_ACTIVE})
+var sInstanceDrainStatus_DRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstanceDrainStatus_DRAINING})
+var sInstanceDrainStatus_NOT_APPLICABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPLICABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstanceDrainStatus_NOT_APPLICABLE})
+var s_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &e_InstanceType})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInvalidAccountStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAccountStatusException, Members: &mInvalidAccountStatusException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidAccountStatusException})
+var sInvalidAccountStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidAccountStatusException_Message})
+var sInvalidParameterCombinationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterCombinationException, Members: &mInvalidParameterCombinationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterCombinationException})
+var sInvalidParameterCombinationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterCombinationException_Message})
+var sInvalidRoleException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRoleException, Members: &mInvalidRoleException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRoleException})
+var sInvalidRoleException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRoleException_Message})
+var sLastReportGenerationExecutionError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLastReportGenerationExecutionError, Members: &mLastReportGenerationExecutionError, Type: smithy.ShapeTypeStructure, Ext: &eLastReportGenerationExecutionError})
+var sLastReportGenerationExecutionError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iUsageReportExecutionErrorCode, Members: &mUsageReportExecutionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eLastReportGenerationExecutionError_ErrorCode})
+var sLastReportGenerationExecutionError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLastReportGenerationExecutionError_ErrorMessage})
+var s_LastReportGenerationExecutionErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastReportGenerationExecutionErrors, Members: &m_LastReportGenerationExecutionErrors, Type: smithy.ShapeTypeList, Ext: &e_LastReportGenerationExecutionErrors})
+var s_LastReportGenerationExecutionErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLastReportGenerationExecutionError, Members: &mLastReportGenerationExecutionError, Type: smithy.ShapeTypeStructure, Ext: &e_LastReportGenerationExecutionErrors_member})
+var sLatestAppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLatestAppstreamAgentVersion, Members: &mLatestAppstreamAgentVersion, Type: smithy.ShapeTypeEnum, Ext: &eLatestAppstreamAgentVersion})
+var sLatestAppstreamAgentVersion_TRUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLatestAppstreamAgentVersion_TRUE})
+var sLatestAppstreamAgentVersion_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLatestAppstreamAgentVersion_FALSE})
+var s_LaunchParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchParameters, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &e_LaunchParameters})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMessageAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageAction, Members: &mMessageAction, Type: smithy.ShapeTypeEnum, Ext: &eMessageAction})
+var sMessageAction_SUPPRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPPRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessageAction_SUPPRESS})
+var sMessageAction_RESEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESEND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessageAction_RESEND})
+var s_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeMap, Ext: &e_Metadata})
+var s_Metadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Metadata_key})
+var s_Metadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Metadata_value})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var sNetworkAccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkAccessConfiguration, Members: &mNetworkAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNetworkAccessConfiguration})
+var sNetworkAccessConfiguration_EniPrivateIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniPrivateIpAddress", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNetworkAccessConfiguration_EniPrivateIpAddress})
+var sNetworkAccessConfiguration_EniIpv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIpv6Addresses", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eNetworkAccessConfiguration_EniIpv6Addresses})
+var sNetworkAccessConfiguration_EniId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNetworkAccessConfiguration_EniId})
+var s_NvidiaGridDriverVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NvidiaGridDriverVersion, Type: smithy.ShapeTypeString, Ext: &e_NvidiaGridDriverVersion})
+var sOperationNotPermittedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotPermittedException, Members: &mOperationNotPermittedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eOperationNotPermittedException})
+var sOperationNotPermittedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eOperationNotPermittedException_Message})
+var s_OrganizationalUnitDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnitDistinguishedName, Type: smithy.ShapeTypeString, Ext: &e_OrganizationalUnitDistinguishedName})
+var s_OrganizationalUnitDistinguishedNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnitDistinguishedNamesList, Members: &m_OrganizationalUnitDistinguishedNamesList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationalUnitDistinguishedNamesList})
+var s_OrganizationalUnitDistinguishedNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OrganizationalUnitDistinguishedName, Type: smithy.ShapeTypeString, Ext: &e_OrganizationalUnitDistinguishedNamesList_member})
+var sPackagingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackagingType, Members: &mPackagingType, Type: smithy.ShapeTypeEnum, Ext: &ePackagingType})
+var sPackagingType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackagingType_CUSTOM})
+var sPackagingType_APPSTREAM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPSTREAM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackagingType_APPSTREAM2})
+var sPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermission, Members: &mPermission, Type: smithy.ShapeTypeEnum, Ext: &ePermission})
+var sPermission_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermission_ENABLED})
+var sPermission_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePermission_DISABLED})
+var s_PhotonAmiId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhotonAmiId, Type: smithy.ShapeTypeString, Ext: &e_PhotonAmiId})
+var s_Platforms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Platforms, Members: &m_Platforms, Type: smithy.ShapeTypeList, Ext: &e_Platforms})
+var s_Platforms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &e_Platforms_member})
+var sPlatformType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &ePlatformType})
+var sPlatformType_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_WINDOWS})
+var sPlatformType_WINDOWS_SERVER_2016 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2016", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_WINDOWS_SERVER_2016})
+var sPlatformType_WINDOWS_SERVER_2019 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2019", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_WINDOWS_SERVER_2019})
+var sPlatformType_WINDOWS_SERVER_2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_WINDOWS_SERVER_2022})
+var sPlatformType_WINDOWS_SERVER_2025 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2025", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_WINDOWS_SERVER_2025})
+var sPlatformType_WINDOWS_11 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_11", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_WINDOWS_11})
+var sPlatformType_AMAZON_LINUX2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_LINUX2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_AMAZON_LINUX2})
+var sPlatformType_RHEL8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RHEL8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_RHEL8})
+var sPlatformType_ROCKY_LINUX8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROCKY_LINUX8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_ROCKY_LINUX8})
+var sPlatformType_UBUNTU_PRO_2404 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UBUNTU_PRO_2404", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_UBUNTU_PRO_2404})
+var sPreferredProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreferredProtocol, Members: &mPreferredProtocol, Type: smithy.ShapeTypeEnum, Ext: &ePreferredProtocol})
+var sPreferredProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreferredProtocol_TCP})
+var sPreferredProtocol_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreferredProtocol_UDP})
+var s_RedirectURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectURL, Type: smithy.ShapeTypeString, Ext: &e_RedirectURL})
+var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &e_RegionName})
+var sRequestLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestLimitExceededException, Members: &mRequestLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eRequestLimitExceededException})
+var sRequestLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRequestLimitExceededException_Message})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_Message})
+var sResourceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceError, Members: &mResourceError, Type: smithy.ShapeTypeStructure, Ext: &eResourceError})
+var sResourceError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iFleetErrorCode, Members: &mFleetErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eResourceError_ErrorCode})
+var sResourceError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceError_ErrorMessage})
+var sResourceError_ErrorTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceError_ErrorTimestamp})
+var s_ResourceErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceErrors, Members: &m_ResourceErrors, Type: smithy.ShapeTypeList, Ext: &e_ResourceErrors})
+var s_ResourceErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceError, Members: &mResourceError, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceErrors_member})
+var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ResourceIdentifier})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_Message})
+var sResourceNotAvailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotAvailableException, Members: &mResourceNotAvailableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotAvailableException})
+var sResourceNotAvailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotAvailableException_Message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sRuntimeValidationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeValidationConfig, Members: &mRuntimeValidationConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeValidationConfig})
+var sRuntimeValidationConfig_IntendedInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedInstanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eRuntimeValidationConfig_IntendedInstanceType})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var s_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &e_S3BucketArn})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eS3Location})
+var sS3Location_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eS3Location_S3Bucket})
+var sS3Location_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eS3Location_S3Key})
+var sScreenImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScreenImageFormat, Members: &mScreenImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eScreenImageFormat})
+var sScreenImageFormat_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScreenImageFormat_PNG})
+var sScreenImageFormat_JPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScreenImageFormat_JPEG})
+var sScreenResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScreenResolution, Members: &mScreenResolution, Type: smithy.ShapeTypeEnum, Ext: &eScreenResolution})
+var sScreenResolution_W_1280xH_720 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "W_1280xH_720", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScreenResolution_W_1280xH_720})
+var sScriptDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScriptDetails, Members: &mScriptDetails, Type: smithy.ShapeTypeStructure, Ext: &eScriptDetails})
+var sScriptDetails_ScriptS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScriptS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eScriptDetails_ScriptS3Location})
+var sScriptDetails_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eScriptDetails_ExecutablePath})
+var sScriptDetails_ExecutableParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutableParameters", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eScriptDetails_ExecutableParameters})
+var sScriptDetails_TimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eScriptDetails_TimeoutInSeconds})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIdList})
+var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIdList_member})
+var sServiceAccountCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceAccountCredentials, Members: &mServiceAccountCredentials, Type: smithy.ShapeTypeStructure, Ext: &eServiceAccountCredentials})
+var sServiceAccountCredentials_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_AccountName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eServiceAccountCredentials_AccountName})
+var sServiceAccountCredentials_AccountPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountPassword", ID: &i_AccountPassword, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eServiceAccountCredentials_AccountPassword})
+var sSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSession, Members: &mSession, Type: smithy.ShapeTypeStructure, Ext: &eSession})
+var sSession_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSession_Id})
+var sSession_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eSession_UserId})
+var sSession_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSession_StackName})
+var sSession_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSession_FleetName})
+var sSession_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeEnum, Ext: &eSession_State})
+var sSession_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iSessionConnectionState, Members: &mSessionConnectionState, Type: smithy.ShapeTypeEnum, Ext: &eSession_ConnectionState})
+var sSession_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSession_StartTime})
+var sSession_MaxExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxExpirationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSession_MaxExpirationTime})
+var sSession_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eSession_AuthenticationType})
+var sSession_NetworkAccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAccessConfiguration", ID: &iNetworkAccessConfiguration, Members: &mNetworkAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSession_NetworkAccessConfiguration})
+var sSession_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSession_InstanceId})
+var sSession_InstanceDrainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceDrainStatus", ID: &iInstanceDrainStatus, Members: &mInstanceDrainStatus, Type: smithy.ShapeTypeEnum, Ext: &eSession_InstanceDrainStatus})
+var sSessionConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionConnectionState, Members: &mSessionConnectionState, Type: smithy.ShapeTypeEnum, Ext: &eSessionConnectionState})
+var sSessionConnectionState_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionConnectionState_CONNECTED})
+var sSessionConnectionState_NOT_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionConnectionState_NOT_CONNECTED})
+var s_SessionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionList, Members: &m_SessionList, Type: smithy.ShapeTypeList, Ext: &e_SessionList})
+var s_SessionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSession, Members: &mSession, Type: smithy.ShapeTypeStructure, Ext: &e_SessionList_member})
+var sSessionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeEnum, Ext: &eSessionState})
+var sSessionState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionState_ACTIVE})
+var sSessionState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionState_PENDING})
+var sSessionState_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionState_EXPIRED})
+var s_SettingsGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SettingsGroup, Type: smithy.ShapeTypeString, Ext: &e_SettingsGroup})
+var sSharedImagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedImagePermissions, Members: &mSharedImagePermissions, Type: smithy.ShapeTypeStructure, Ext: &eSharedImagePermissions})
+var sSharedImagePermissions_sharedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eSharedImagePermissions_sharedAccountId})
+var sSharedImagePermissions_imagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePermissions", ID: &iImagePermissions, Members: &mImagePermissions, Type: smithy.ShapeTypeStructure, Ext: &eSharedImagePermissions_imagePermissions})
+var s_SharedImagePermissionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharedImagePermissionsList, Members: &m_SharedImagePermissionsList, Type: smithy.ShapeTypeList, Ext: &e_SharedImagePermissionsList})
+var s_SharedImagePermissionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSharedImagePermissions, Members: &mSharedImagePermissions, Type: smithy.ShapeTypeStructure, Ext: &e_SharedImagePermissionsList_member})
+var sSoftwareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSoftwareAssociations, Members: &mSoftwareAssociations, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareAssociations})
+var sSoftwareAssociations_SoftwareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSoftwareAssociations_SoftwareName})
+var sSoftwareAssociations_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSoftwareDeploymentStatus, Members: &mSoftwareDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eSoftwareAssociations_Status})
+var sSoftwareAssociations_DeploymentError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentError", ID: &i_ErrorDetailsList, Members: &m_ErrorDetailsList, Type: smithy.ShapeTypeList, Ext: &eSoftwareAssociations_DeploymentError})
+var s_SoftwareAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SoftwareAssociationsList, Members: &m_SoftwareAssociationsList, Type: smithy.ShapeTypeList, Ext: &e_SoftwareAssociationsList})
+var s_SoftwareAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSoftwareAssociations, Members: &mSoftwareAssociations, Type: smithy.ShapeTypeStructure, Ext: &e_SoftwareAssociationsList_member})
+var sSoftwareDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSoftwareDeploymentStatus, Members: &mSoftwareDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eSoftwareDeploymentStatus})
+var sSoftwareDeploymentStatus_STAGED_FOR_INSTALLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STAGED_FOR_INSTALLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareDeploymentStatus_STAGED_FOR_INSTALLATION})
+var sSoftwareDeploymentStatus_PENDING_INSTALLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_INSTALLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareDeploymentStatus_PENDING_INSTALLATION})
+var sSoftwareDeploymentStatus_INSTALLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTALLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareDeploymentStatus_INSTALLED})
+var sSoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STAGED_FOR_UNINSTALLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION})
+var sSoftwareDeploymentStatus_PENDING_UNINSTALLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_UNINSTALLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareDeploymentStatus_PENDING_UNINSTALLATION})
+var sSoftwareDeploymentStatus_FAILED_TO_INSTALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_TO_INSTALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareDeploymentStatus_FAILED_TO_INSTALL})
+var sSoftwareDeploymentStatus_FAILED_TO_UNINSTALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_TO_UNINSTALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareDeploymentStatus_FAILED_TO_UNINSTALL})
+var sStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStack, Members: &mStack, Type: smithy.ShapeTypeStructure, Ext: &eStack})
+var sStack_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStack_Arn})
+var sStack_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStack_Name})
+var sStack_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStack_Description})
+var sStack_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStack_DisplayName})
+var sStack_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStack_CreatedTime})
+var sStack_StorageConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConnectors", ID: &i_StorageConnectorList, Members: &m_StorageConnectorList, Type: smithy.ShapeTypeList, Ext: &eStack_StorageConnectors})
+var sStack_RedirectURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectURL", ID: &i_RedirectURL, Type: smithy.ShapeTypeString, Ext: &eStack_RedirectURL})
+var sStack_FeedbackURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackURL", ID: &i_FeedbackURL, Type: smithy.ShapeTypeString, Ext: &eStack_FeedbackURL})
+var sStack_StackErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackErrors", ID: &i_StackErrors, Members: &m_StackErrors, Type: smithy.ShapeTypeList, Ext: &eStack_StackErrors})
+var sStack_UserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSettings", ID: &i_UserSettingList, Members: &m_UserSettingList, Type: smithy.ShapeTypeList, Ext: &eStack_UserSettings})
+var sStack_ApplicationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSettings", ID: &iApplicationSettingsResponse, Members: &mApplicationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eStack_ApplicationSettings})
+var sStack_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eStack_AccessEndpoints})
+var sStack_EmbedHostDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmbedHostDomains", ID: &i_EmbedHostDomains, Members: &m_EmbedHostDomains, Type: smithy.ShapeTypeList, Ext: &eStack_EmbedHostDomains})
+var sStack_StreamingExperienceSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingExperienceSettings", ID: &iStreamingExperienceSettings, Members: &mStreamingExperienceSettings, Type: smithy.ShapeTypeStructure, Ext: &eStack_StreamingExperienceSettings})
+var sStack_ContentRedirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRedirection", ID: &iContentRedirection, Members: &mContentRedirection, Type: smithy.ShapeTypeStructure, Ext: &eStack_ContentRedirection})
+var sStack_AgentAccessConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentAccessConfig", ID: &iAgentAccessConfig, Members: &mAgentAccessConfig, Type: smithy.ShapeTypeStructure, Ext: &eStack_AgentAccessConfig})
+var sStack_StorageConnectorAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConnectorAuthentication", ID: &iStorageConnectorAuthentication, Members: &mStorageConnectorAuthentication, Type: smithy.ShapeTypeEnum, Ext: &eStack_StorageConnectorAuthentication})
+var sStackAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStackAttribute, Members: &mStackAttribute, Type: smithy.ShapeTypeEnum, Ext: &eStackAttribute})
+var sStackAttribute_STORAGE_CONNECTORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_CONNECTORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_STORAGE_CONNECTORS})
+var sStackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_CONNECTOR_HOMEFOLDERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS})
+var sStackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_CONNECTOR_GOOGLE_DRIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE})
+var sStackAttribute_STORAGE_CONNECTOR_ONE_DRIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_CONNECTOR_ONE_DRIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_STORAGE_CONNECTOR_ONE_DRIVE})
+var sStackAttribute_REDIRECT_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDIRECT_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_REDIRECT_URL})
+var sStackAttribute_FEEDBACK_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FEEDBACK_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_FEEDBACK_URL})
+var sStackAttribute_THEME_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THEME_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_THEME_NAME})
+var sStackAttribute_USER_SETTINGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_SETTINGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_USER_SETTINGS})
+var sStackAttribute_EMBED_HOST_DOMAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMBED_HOST_DOMAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_EMBED_HOST_DOMAINS})
+var sStackAttribute_IAM_ROLE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_ROLE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_IAM_ROLE_ARN})
+var sStackAttribute_ACCESS_ENDPOINTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_ENDPOINTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_ACCESS_ENDPOINTS})
+var sStackAttribute_STREAMING_EXPERIENCE_SETTINGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREAMING_EXPERIENCE_SETTINGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_STREAMING_EXPERIENCE_SETTINGS})
+var sStackAttribute_CONTENT_REDIRECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_REDIRECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_CONTENT_REDIRECTION})
+var sStackAttribute_AGENT_ACCESS_CONFIG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGENT_ACCESS_CONFIG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_AGENT_ACCESS_CONFIG})
+var sStackAttribute_STORAGE_CONNECTOR_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_CONNECTOR_AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackAttribute_STORAGE_CONNECTOR_AUTHENTICATION})
+var s_StackAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StackAttributes, Members: &m_StackAttributes, Type: smithy.ShapeTypeList, Ext: &e_StackAttributes})
+var s_StackAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStackAttribute, Members: &mStackAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_StackAttributes_member})
+var sStackError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStackError, Members: &mStackError, Type: smithy.ShapeTypeStructure, Ext: &eStackError})
+var sStackError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iStackErrorCode, Members: &mStackErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eStackError_ErrorCode})
+var sStackError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStackError_ErrorMessage})
+var sStackErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStackErrorCode, Members: &mStackErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eStackErrorCode})
+var sStackErrorCode_STORAGE_CONNECTOR_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_CONNECTOR_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackErrorCode_STORAGE_CONNECTOR_ERROR})
+var sStackErrorCode_INTERNAL_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStackErrorCode_INTERNAL_SERVICE_ERROR})
+var s_StackErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StackErrors, Members: &m_StackErrors, Type: smithy.ShapeTypeList, Ext: &e_StackErrors})
+var s_StackErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStackError, Members: &mStackError, Type: smithy.ShapeTypeStructure, Ext: &e_StackErrors_member})
+var s_StackList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StackList, Members: &m_StackList, Type: smithy.ShapeTypeList, Ext: &e_StackList})
+var s_StackList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStack, Members: &mStack, Type: smithy.ShapeTypeStructure, Ext: &e_StackList_member})
+var sStorageConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageConnector, Members: &mStorageConnector, Type: smithy.ShapeTypeStructure, Ext: &eStorageConnector})
+var sStorageConnector_ConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorType", ID: &iStorageConnectorType, Members: &mStorageConnectorType, Type: smithy.ShapeTypeEnum, Ext: &eStorageConnector_ConnectorType})
+var sStorageConnector_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eStorageConnector_ResourceIdentifier})
+var sStorageConnector_Domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domains", ID: &i_DomainList, Members: &m_DomainList, Type: smithy.ShapeTypeList, Ext: &eStorageConnector_Domains})
+var sStorageConnector_DomainsRequireAdminConsent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainsRequireAdminConsent", ID: &i_DomainList, Members: &m_DomainList, Type: smithy.ShapeTypeList, Ext: &eStorageConnector_DomainsRequireAdminConsent})
+var sStorageConnectorAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageConnectorAuthentication, Members: &mStorageConnectorAuthentication, Type: smithy.ShapeTypeEnum, Ext: &eStorageConnectorAuthentication})
+var sStorageConnectorAuthentication_FORCE_REAUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORCE_REAUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageConnectorAuthentication_FORCE_REAUTHENTICATION})
+var sStorageConnectorAuthentication_REUSE_CREDENTIALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REUSE_CREDENTIALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageConnectorAuthentication_REUSE_CREDENTIALS})
+var s_StorageConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageConnectorList, Members: &m_StorageConnectorList, Type: smithy.ShapeTypeList, Ext: &e_StorageConnectorList})
+var s_StorageConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStorageConnector, Members: &mStorageConnector, Type: smithy.ShapeTypeStructure, Ext: &e_StorageConnectorList_member})
+var sStorageConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageConnectorType, Members: &mStorageConnectorType, Type: smithy.ShapeTypeEnum, Ext: &eStorageConnectorType})
+var sStorageConnectorType_HOMEFOLDERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOMEFOLDERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageConnectorType_HOMEFOLDERS})
+var sStorageConnectorType_GOOGLE_DRIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOOGLE_DRIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageConnectorType_GOOGLE_DRIVE})
+var sStorageConnectorType_ONE_DRIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_DRIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageConnectorType_ONE_DRIVE})
+var sStreamingExperienceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingExperienceSettings, Members: &mStreamingExperienceSettings, Type: smithy.ShapeTypeStructure, Ext: &eStreamingExperienceSettings})
+var sStreamingExperienceSettings_PreferredProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredProtocol", ID: &iPreferredProtocol, Members: &mPreferredProtocol, Type: smithy.ShapeTypeEnum, Ext: &eStreamingExperienceSettings_PreferredProtocol})
+var s_StreamingUrlUserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingUrlUserId, Type: smithy.ShapeTypeString, Ext: &e_StreamingUrlUserId})
+var sStreamView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamView, Members: &mStreamView, Type: smithy.ShapeTypeEnum, Ext: &eStreamView})
+var sStreamView_APP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamView_APP})
+var sStreamView_DESKTOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESKTOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamView_DESKTOP})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_SubnetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &e_SubnetIdList})
+var s_SubnetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_SubnetIdList_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTheme, Members: &mTheme, Type: smithy.ShapeTypeStructure, Ext: &eTheme})
+var sTheme_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eTheme_StackName})
+var sTheme_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iThemeState, Members: &mThemeState, Type: smithy.ShapeTypeEnum, Ext: &eTheme_State})
+var sTheme_ThemeTitleText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThemeTitleText", ID: &i_ThemeTitleText, Type: smithy.ShapeTypeString, Ext: &eTheme_ThemeTitleText})
+var sTheme_ThemeStyling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThemeStyling", ID: &iThemeStyling, Members: &mThemeStyling, Type: smithy.ShapeTypeEnum, Ext: &eTheme_ThemeStyling})
+var sTheme_ThemeFooterLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThemeFooterLinks", ID: &i_ThemeFooterLinks, Members: &m_ThemeFooterLinks, Type: smithy.ShapeTypeList, Ext: &eTheme_ThemeFooterLinks})
+var sTheme_ThemeOrganizationLogoURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThemeOrganizationLogoURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTheme_ThemeOrganizationLogoURL})
+var sTheme_ThemeFaviconURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThemeFaviconURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTheme_ThemeFaviconURL})
+var sTheme_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTheme_CreatedTime})
+var sThemeAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThemeAttribute, Members: &mThemeAttribute, Type: smithy.ShapeTypeEnum, Ext: &eThemeAttribute})
+var sThemeAttribute_FOOTER_LINKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOOTER_LINKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThemeAttribute_FOOTER_LINKS})
+var s_ThemeAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeAttributes, Members: &m_ThemeAttributes, Type: smithy.ShapeTypeList, Ext: &e_ThemeAttributes})
+var s_ThemeAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThemeAttribute, Members: &mThemeAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_ThemeAttributes_member})
+var sThemeFooterLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThemeFooterLink, Members: &mThemeFooterLink, Type: smithy.ShapeTypeStructure, Ext: &eThemeFooterLink})
+var sThemeFooterLink_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_ThemeFooterLinkDisplayName, Type: smithy.ShapeTypeString, Ext: &eThemeFooterLink_DisplayName})
+var sThemeFooterLink_FooterLinkURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FooterLinkURL", ID: &i_ThemeFooterLinkURL, Type: smithy.ShapeTypeString, Ext: &eThemeFooterLink_FooterLinkURL})
+var s_ThemeFooterLinkDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeFooterLinkDisplayName, Type: smithy.ShapeTypeString, Ext: &e_ThemeFooterLinkDisplayName})
+var s_ThemeFooterLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeFooterLinks, Members: &m_ThemeFooterLinks, Type: smithy.ShapeTypeList, Ext: &e_ThemeFooterLinks})
+var s_ThemeFooterLinks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThemeFooterLink, Members: &mThemeFooterLink, Type: smithy.ShapeTypeStructure, Ext: &e_ThemeFooterLinks_member})
+var s_ThemeFooterLinkURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeFooterLinkURL, Type: smithy.ShapeTypeString, Ext: &e_ThemeFooterLinkURL})
+var sThemeState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThemeState, Members: &mThemeState, Type: smithy.ShapeTypeEnum, Ext: &eThemeState})
+var sThemeState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThemeState_ENABLED})
+var sThemeState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThemeState_DISABLED})
+var sThemeStyling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThemeStyling, Members: &mThemeStyling, Type: smithy.ShapeTypeEnum, Ext: &eThemeStyling})
+var sThemeStyling_LIGHT_BLUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIGHT_BLUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThemeStyling_LIGHT_BLUE})
+var sThemeStyling_BLUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThemeStyling_BLUE})
+var sThemeStyling_PINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThemeStyling_PINK})
+var sThemeStyling_RED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThemeStyling_RED})
+var s_ThemeTitleText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeTitleText, Type: smithy.ShapeTypeString, Ext: &e_ThemeTitleText})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_UrlPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlPattern, Type: smithy.ShapeTypeString, Ext: &e_UrlPattern})
+var s_UrlPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlPatternList, Members: &m_UrlPatternList, Type: smithy.ShapeTypeList, Ext: &e_UrlPatternList})
+var s_UrlPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UrlPattern, Type: smithy.ShapeTypeString, Ext: &e_UrlPatternList_member})
+var sUrlRedirectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUrlRedirectionConfig, Members: &mUrlRedirectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eUrlRedirectionConfig})
+var sUrlRedirectionConfig_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eUrlRedirectionConfig_Enabled})
+var sUrlRedirectionConfig_AllowedUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedUrls", ID: &i_UrlPatternList, Members: &m_UrlPatternList, Type: smithy.ShapeTypeList, Ext: &eUrlRedirectionConfig_AllowedUrls})
+var sUrlRedirectionConfig_DeniedUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeniedUrls", ID: &i_UrlPatternList, Members: &m_UrlPatternList, Type: smithy.ShapeTypeList, Ext: &eUrlRedirectionConfig_DeniedUrls})
+var sUsageReportExecutionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageReportExecutionErrorCode, Members: &mUsageReportExecutionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eUsageReportExecutionErrorCode})
+var sUsageReportExecutionErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUsageReportExecutionErrorCode_RESOURCE_NOT_FOUND})
+var sUsageReportExecutionErrorCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUsageReportExecutionErrorCode_ACCESS_DENIED})
+var sUsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR})
+var sUsageReportSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageReportSchedule, Members: &mUsageReportSchedule, Type: smithy.ShapeTypeEnum, Ext: &eUsageReportSchedule})
+var sUsageReportSchedule_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUsageReportSchedule_DAILY})
+var sUsageReportSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageReportSubscription, Members: &mUsageReportSubscription, Type: smithy.ShapeTypeStructure, Ext: &eUsageReportSubscription})
+var sUsageReportSubscription_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUsageReportSubscription_S3BucketName})
+var sUsageReportSubscription_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iUsageReportSchedule, Members: &mUsageReportSchedule, Type: smithy.ShapeTypeEnum, Ext: &eUsageReportSubscription_Schedule})
+var sUsageReportSubscription_LastGeneratedReportDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastGeneratedReportDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUsageReportSubscription_LastGeneratedReportDate})
+var sUsageReportSubscription_SubscriptionErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionErrors", ID: &i_LastReportGenerationExecutionErrors, Members: &m_LastReportGenerationExecutionErrors, Type: smithy.ShapeTypeList, Ext: &eUsageReportSubscription_SubscriptionErrors})
+var s_UsageReportSubscriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageReportSubscriptionList, Members: &m_UsageReportSubscriptionList, Type: smithy.ShapeTypeList, Ext: &e_UsageReportSubscriptionList})
+var s_UsageReportSubscriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUsageReportSubscription, Members: &mUsageReportSubscription, Type: smithy.ShapeTypeStructure, Ext: &e_UsageReportSubscriptionList_member})
+var s_UsbDeviceFilterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsbDeviceFilterString, Type: smithy.ShapeTypeString, Ext: &e_UsbDeviceFilterString})
+var s_UsbDeviceFilterStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsbDeviceFilterStrings, Members: &m_UsbDeviceFilterStrings, Type: smithy.ShapeTypeList, Ext: &e_UsbDeviceFilterStrings})
+var s_UsbDeviceFilterStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UsbDeviceFilterString, Type: smithy.ShapeTypeString, Ext: &e_UsbDeviceFilterStrings_member})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &eUser})
+var sUser_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUser_Arn})
+var sUser_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_Username, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_UserName})
+var sUser_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUser_Enabled})
+var sUser_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUser_Status})
+var sUser_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_UserAttributeValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_FirstName})
+var sUser_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_UserAttributeValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_LastName})
+var sUser_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUser_CreatedTime})
+var sUser_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eUser_AuthenticationType})
+var s_UserAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserAttributeValue, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &e_UserAttributeValue})
+var sUserControlMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserControlMode, Members: &mUserControlMode, Type: smithy.ShapeTypeEnum, Ext: &eUserControlMode})
+var sUserControlMode_VIEW_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIEW_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserControlMode_VIEW_ONLY})
+var sUserControlMode_VIEW_STOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIEW_STOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserControlMode_VIEW_STOP})
+var sUserControlMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserControlMode_DISABLED})
+var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &e_UserId})
+var s_UserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &e_UserList})
+var s_UserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &e_UserList_member})
+var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &e_Username})
+var sUserSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserSetting, Members: &mUserSetting, Type: smithy.ShapeTypeStructure, Ext: &eUserSetting})
+var sUserSetting_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeEnum, Ext: &eUserSetting_Action})
+var sUserSetting_Permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Permission", ID: &iPermission, Members: &mPermission, Type: smithy.ShapeTypeEnum, Ext: &eUserSetting_Permission})
+var sUserSetting_MaximumLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumLength", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUserSetting_MaximumLength})
+var s_UserSettingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserSettingList, Members: &m_UserSettingList, Type: smithy.ShapeTypeList, Ext: &e_UserSettingList})
+var s_UserSettingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserSetting, Members: &mUserSetting, Type: smithy.ShapeTypeStructure, Ext: &e_UserSettingList_member})
+var sUserStackAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserStackAssociation, Members: &mUserStackAssociation, Type: smithy.ShapeTypeStructure, Ext: &eUserStackAssociation})
+var sUserStackAssociation_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUserStackAssociation_StackName})
+var sUserStackAssociation_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_Username, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUserStackAssociation_UserName})
+var sUserStackAssociation_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eUserStackAssociation_AuthenticationType})
+var sUserStackAssociation_SendEmailNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendEmailNotification", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUserStackAssociation_SendEmailNotification})
+var sUserStackAssociationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserStackAssociationError, Members: &mUserStackAssociationError, Type: smithy.ShapeTypeStructure, Ext: &eUserStackAssociationError})
+var sUserStackAssociationError_UserStackAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserStackAssociation", ID: &iUserStackAssociation, Members: &mUserStackAssociation, Type: smithy.ShapeTypeStructure, Ext: &eUserStackAssociationError_UserStackAssociation})
+var sUserStackAssociationError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iUserStackAssociationErrorCode, Members: &mUserStackAssociationErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eUserStackAssociationError_ErrorCode})
+var sUserStackAssociationError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUserStackAssociationError_ErrorMessage})
+var sUserStackAssociationErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserStackAssociationErrorCode, Members: &mUserStackAssociationErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eUserStackAssociationErrorCode})
+var sUserStackAssociationErrorCode_STACK_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STACK_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserStackAssociationErrorCode_STACK_NOT_FOUND})
+var sUserStackAssociationErrorCode_USER_NAME_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_NAME_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserStackAssociationErrorCode_USER_NAME_NOT_FOUND})
+var sUserStackAssociationErrorCode_DIRECTORY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserStackAssociationErrorCode_DIRECTORY_NOT_FOUND})
+var sUserStackAssociationErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserStackAssociationErrorCode_INTERNAL_ERROR})
+var s_UserStackAssociationErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserStackAssociationErrorList, Members: &m_UserStackAssociationErrorList, Type: smithy.ShapeTypeList, Ext: &e_UserStackAssociationErrorList})
+var s_UserStackAssociationErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserStackAssociationError, Members: &mUserStackAssociationError, Type: smithy.ShapeTypeStructure, Ext: &e_UserStackAssociationErrorList_member})
+var s_UserStackAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserStackAssociationList, Members: &m_UserStackAssociationList, Type: smithy.ShapeTypeList, Ext: &e_UserStackAssociationList})
+var s_UserStackAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserStackAssociation, Members: &mUserStackAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_UserStackAssociationList_member})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_UUID})
+var sVisibilityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVisibilityType, Members: &mVisibilityType, Type: smithy.ShapeTypeEnum, Ext: &eVisibilityType})
+var sVisibilityType_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVisibilityType_PUBLIC})
+var sVisibilityType_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVisibilityType_PRIVATE})
+var sVisibilityType_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVisibilityType_SHARED})
+var sVolumeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeConfig, Members: &mVolumeConfig, Type: smithy.ShapeTypeStructure, Ext: &eVolumeConfig})
+var sVolumeConfig_VolumeSizeInGb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeInGb", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eVolumeConfig_VolumeSizeInGb})
+var sVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfig})
+var sVpcConfig_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &eVpcConfig_SubnetIds})
+var sVpcConfig_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eVpcConfig_SecurityGroupIds})
+var s_WorkspaceImageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceImageId, Type: smithy.ShapeTypeString, Ext: &e_WorkspaceImageId})
+var sAssociateAppBlockBuilderAppBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAppBlockBuilderAppBlockRequest, Members: &mAssociateAppBlockBuilderAppBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAppBlockBuilderAppBlockRequest})
+var sAssociateAppBlockBuilderAppBlockRequest_AppBlockArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAssociateAppBlockBuilderAppBlockRequest_AppBlockArn})
+var sAssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName})
+var sAssociateAppBlockBuilderAppBlockResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAppBlockBuilderAppBlockResult, Members: &mAssociateAppBlockBuilderAppBlockResult, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAppBlockBuilderAppBlockResult})
+var sAssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderAppBlockAssociation", ID: &iAppBlockBuilderAppBlockAssociation, Members: &mAppBlockBuilderAppBlockAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation})
+var sAssociateApplicationFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationFleetRequest, Members: &mAssociateApplicationFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApplicationFleetRequest})
+var sAssociateApplicationFleetRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAssociateApplicationFleetRequest_FleetName})
+var sAssociateApplicationFleetRequest_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAssociateApplicationFleetRequest_ApplicationArn})
+var sAssociateApplicationFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationFleetResult, Members: &mAssociateApplicationFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApplicationFleetResult})
+var sAssociateApplicationFleetResult_ApplicationFleetAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationFleetAssociation", ID: &iApplicationFleetAssociation, Members: &mApplicationFleetAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApplicationFleetResult_ApplicationFleetAssociation})
+var sAssociateApplicationToEntitlementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationToEntitlementRequest, Members: &mAssociateApplicationToEntitlementRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApplicationToEntitlementRequest})
+var sAssociateApplicationToEntitlementRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAssociateApplicationToEntitlementRequest_StackName})
+var sAssociateApplicationToEntitlementRequest_EntitlementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntitlementName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAssociateApplicationToEntitlementRequest_EntitlementName})
+var sAssociateApplicationToEntitlementRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateApplicationToEntitlementRequest_ApplicationIdentifier})
+var sAssociateApplicationToEntitlementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationToEntitlementResult, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApplicationToEntitlementResult})
+var sAssociateFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFleetRequest, Members: &mAssociateFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateFleetRequest})
+var sAssociateFleetRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateFleetRequest_FleetName})
+var sAssociateFleetRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateFleetRequest_StackName})
+var sAssociateFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eAssociateFleetResult})
+var sAssociateSoftwareToImageBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSoftwareToImageBuilderRequest, Members: &mAssociateSoftwareToImageBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSoftwareToImageBuilderRequest})
+var sAssociateSoftwareToImageBuilderRequest_ImageBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAssociateSoftwareToImageBuilderRequest_ImageBuilderName})
+var sAssociateSoftwareToImageBuilderRequest_SoftwareNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareNames", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eAssociateSoftwareToImageBuilderRequest_SoftwareNames})
+var sAssociateSoftwareToImageBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSoftwareToImageBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSoftwareToImageBuilderResult})
+var sBatchAssociateUserStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateUserStackRequest, Members: &mBatchAssociateUserStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateUserStackRequest})
+var sBatchAssociateUserStackRequest_UserStackAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserStackAssociations", ID: &i_UserStackAssociationList, Members: &m_UserStackAssociationList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateUserStackRequest_UserStackAssociations})
+var sBatchAssociateUserStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateUserStackResult, Members: &mBatchAssociateUserStackResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateUserStackResult})
+var sBatchAssociateUserStackResult_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_UserStackAssociationErrorList, Members: &m_UserStackAssociationErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateUserStackResult_errors})
+var sBatchDisassociateUserStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateUserStackRequest, Members: &mBatchDisassociateUserStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateUserStackRequest})
+var sBatchDisassociateUserStackRequest_UserStackAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserStackAssociations", ID: &i_UserStackAssociationList, Members: &m_UserStackAssociationList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateUserStackRequest_UserStackAssociations})
+var sBatchDisassociateUserStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateUserStackResult, Members: &mBatchDisassociateUserStackResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateUserStackResult})
+var sBatchDisassociateUserStackResult_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_UserStackAssociationErrorList, Members: &m_UserStackAssociationErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateUserStackResult_errors})
+var sCopyImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyImageRequest, Members: &mCopyImageRequest, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageRequest})
+var sCopyImageRequest_SourceImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceImageName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCopyImageRequest_SourceImageName})
+var sCopyImageRequest_DestinationImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationImageName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCopyImageRequest_DestinationImageName})
+var sCopyImageRequest_DestinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationRegion", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eCopyImageRequest_DestinationRegion})
+var sCopyImageRequest_DestinationImageDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationImageDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCopyImageRequest_DestinationImageDescription})
+var sCopyImageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyImageResponse, Members: &mCopyImageResponse, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageResponse})
+var sCopyImageResponse_DestinationImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationImageName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCopyImageResponse_DestinationImageName})
+var sCreateAppBlockBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockBuilderRequest, Members: &mCreateAppBlockBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockBuilderRequest})
+var sCreateAppBlockBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockBuilderRequest_Name})
+var sCreateAppBlockBuilderRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockBuilderRequest_Description})
+var sCreateAppBlockBuilderRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockBuilderRequest_DisplayName})
+var sCreateAppBlockBuilderRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateAppBlockBuilderRequest_Tags})
+var sCreateAppBlockBuilderRequest_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iAppBlockBuilderPlatformType, Members: &mAppBlockBuilderPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eCreateAppBlockBuilderRequest_Platform})
+var sCreateAppBlockBuilderRequest_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockBuilderRequest_InstanceType})
+var sCreateAppBlockBuilderRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockBuilderRequest_VpcConfig})
+var sCreateAppBlockBuilderRequest_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eCreateAppBlockBuilderRequest_EnableDefaultInternetAccess})
+var sCreateAppBlockBuilderRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockBuilderRequest_IamRoleArn})
+var sCreateAppBlockBuilderRequest_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eCreateAppBlockBuilderRequest_AccessEndpoints})
+var sCreateAppBlockBuilderRequest_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eCreateAppBlockBuilderRequest_DisableIMDSV1})
+var sCreateAppBlockBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockBuilderResult, Members: &mCreateAppBlockBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockBuilderResult})
+var sCreateAppBlockBuilderResult_AppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilder", ID: &iAppBlockBuilder, Members: &mAppBlockBuilder, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockBuilderResult_AppBlockBuilder})
+var sCreateAppBlockBuilderStreamingURLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockBuilderStreamingURLRequest, Members: &mCreateAppBlockBuilderStreamingURLRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockBuilderStreamingURLRequest})
+var sCreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName})
+var sCreateAppBlockBuilderStreamingURLRequest_Validity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validity", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateAppBlockBuilderStreamingURLRequest_Validity})
+var sCreateAppBlockBuilderStreamingURLResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockBuilderStreamingURLResult, Members: &mCreateAppBlockBuilderStreamingURLResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockBuilderStreamingURLResult})
+var sCreateAppBlockBuilderStreamingURLResult_StreamingURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockBuilderStreamingURLResult_StreamingURL})
+var sCreateAppBlockBuilderStreamingURLResult_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateAppBlockBuilderStreamingURLResult_Expires})
+var sCreateAppBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockRequest, Members: &mCreateAppBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockRequest})
+var sCreateAppBlockRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockRequest_Name})
+var sCreateAppBlockRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockRequest_Description})
+var sCreateAppBlockRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateAppBlockRequest_DisplayName})
+var sCreateAppBlockRequest_SourceS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockRequest_SourceS3Location})
+var sCreateAppBlockRequest_SetupScriptDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SetupScriptDetails", ID: &iScriptDetails, Members: &mScriptDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockRequest_SetupScriptDetails})
+var sCreateAppBlockRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateAppBlockRequest_Tags})
+var sCreateAppBlockRequest_PostSetupScriptDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostSetupScriptDetails", ID: &iScriptDetails, Members: &mScriptDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockRequest_PostSetupScriptDetails})
+var sCreateAppBlockRequest_PackagingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackagingType", ID: &iPackagingType, Members: &mPackagingType, Type: smithy.ShapeTypeEnum, Ext: &eCreateAppBlockRequest_PackagingType})
+var sCreateAppBlockResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBlockResult, Members: &mCreateAppBlockResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockResult})
+var sCreateAppBlockResult_AppBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlock", ID: &iAppBlock, Members: &mAppBlock, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBlockResult_AppBlock})
+var sCreateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationRequest, Members: &mCreateApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationRequest})
+var sCreateApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_Name})
+var sCreateApplicationRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_DisplayName})
+var sCreateApplicationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_Description})
+var sCreateApplicationRequest_IconS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IconS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationRequest_IconS3Location})
+var sCreateApplicationRequest_LaunchPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchPath", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_LaunchPath})
+var sCreateApplicationRequest_WorkingDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingDirectory", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_WorkingDirectory})
+var sCreateApplicationRequest_LaunchParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchParameters", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_LaunchParameters})
+var sCreateApplicationRequest_Platforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platforms", ID: &i_Platforms, Members: &m_Platforms, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationRequest_Platforms})
+var sCreateApplicationRequest_InstanceFamilies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceFamilies", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationRequest_InstanceFamilies})
+var sCreateApplicationRequest_AppBlockArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_AppBlockArn})
+var sCreateApplicationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateApplicationRequest_Tags})
+var sCreateApplicationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationResult, Members: &mCreateApplicationResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationResult})
+var sCreateApplicationResult_Application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Application", ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationResult_Application})
+var sCreateDirectoryConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryConfigRequest, Members: &mCreateDirectoryConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDirectoryConfigRequest})
+var sCreateDirectoryConfigRequest_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eCreateDirectoryConfigRequest_DirectoryName})
+var sCreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedNames", ID: &i_OrganizationalUnitDistinguishedNamesList, Members: &m_OrganizationalUnitDistinguishedNamesList, Type: smithy.ShapeTypeList, Ext: &eCreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames})
+var sCreateDirectoryConfigRequest_ServiceAccountCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceAccountCredentials", ID: &iServiceAccountCredentials, Members: &mServiceAccountCredentials, Type: smithy.ShapeTypeStructure, Ext: &eCreateDirectoryConfigRequest_ServiceAccountCredentials})
+var sCreateDirectoryConfigRequest_CertificateBasedAuthProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateBasedAuthProperties", ID: &iCertificateBasedAuthProperties, Members: &mCertificateBasedAuthProperties, Type: smithy.ShapeTypeStructure, Ext: &eCreateDirectoryConfigRequest_CertificateBasedAuthProperties})
+var sCreateDirectoryConfigResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryConfigResult, Members: &mCreateDirectoryConfigResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDirectoryConfigResult})
+var sCreateDirectoryConfigResult_DirectoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryConfig", ID: &iDirectoryConfig, Members: &mDirectoryConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDirectoryConfigResult_DirectoryConfig})
+var sCreateEntitlementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEntitlementRequest, Members: &mCreateEntitlementRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateEntitlementRequest})
+var sCreateEntitlementRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateEntitlementRequest_Name})
+var sCreateEntitlementRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateEntitlementRequest_StackName})
+var sCreateEntitlementRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateEntitlementRequest_Description})
+var sCreateEntitlementRequest_AppVisibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppVisibility", ID: &iAppVisibility, Members: &mAppVisibility, Type: smithy.ShapeTypeEnum, Ext: &eCreateEntitlementRequest_AppVisibility})
+var sCreateEntitlementRequest_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_EntitlementAttributeList, Members: &m_EntitlementAttributeList, Type: smithy.ShapeTypeList, Ext: &eCreateEntitlementRequest_Attributes})
+var sCreateEntitlementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEntitlementResult, Members: &mCreateEntitlementResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateEntitlementResult})
+var sCreateEntitlementResult_Entitlement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entitlement", ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &eCreateEntitlementResult_Entitlement})
+var sCreateExportImageTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExportImageTaskRequest, Members: &mCreateExportImageTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExportImageTaskRequest})
+var sCreateExportImageTaskRequest_ImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateExportImageTaskRequest_ImageName})
+var sCreateExportImageTaskRequest_AmiName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiName", ID: &i_AmiName, Type: smithy.ShapeTypeString, Ext: &eCreateExportImageTaskRequest_AmiName})
+var sCreateExportImageTaskRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateExportImageTaskRequest_IamRoleArn})
+var sCreateExportImageTaskRequest_TagSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagSpecifications", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateExportImageTaskRequest_TagSpecifications})
+var sCreateExportImageTaskRequest_AmiDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateExportImageTaskRequest_AmiDescription})
+var sCreateExportImageTaskResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExportImageTaskResult, Members: &mCreateExportImageTaskResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateExportImageTaskResult})
+var sCreateExportImageTaskResult_ExportImageTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportImageTask", ID: &iExportImageTask, Members: &mExportImageTask, Type: smithy.ShapeTypeStructure, Ext: &eCreateExportImageTaskResult_ExportImageTask})
+var sCreateFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleetRequest, Members: &mCreateFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetRequest})
+var sCreateFleetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_Name})
+var sCreateFleetRequest_ImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_ImageName})
+var sCreateFleetRequest_ImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_ImageArn})
+var sCreateFleetRequest_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_InstanceType})
+var sCreateFleetRequest_FleetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetType", ID: &iFleetType, Members: &mFleetType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFleetRequest_FleetType})
+var sCreateFleetRequest_ComputeCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeCapacity", ID: &iComputeCapacity, Members: &mComputeCapacity, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetRequest_ComputeCapacity})
+var sCreateFleetRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetRequest_VpcConfig})
+var sCreateFleetRequest_MaxUserDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUserDurationInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateFleetRequest_MaxUserDurationInSeconds})
+var sCreateFleetRequest_DisconnectTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisconnectTimeoutInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateFleetRequest_DisconnectTimeoutInSeconds})
+var sCreateFleetRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_Description})
+var sCreateFleetRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_DisplayName})
+var sCreateFleetRequest_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFleetRequest_EnableDefaultInternetAccess})
+var sCreateFleetRequest_DomainJoinInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinInfo", ID: &iDomainJoinInfo, Members: &mDomainJoinInfo, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetRequest_DomainJoinInfo})
+var sCreateFleetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateFleetRequest_Tags})
+var sCreateFleetRequest_IdleDisconnectTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleDisconnectTimeoutInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateFleetRequest_IdleDisconnectTimeoutInSeconds})
+var sCreateFleetRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_IamRoleArn})
+var sCreateFleetRequest_StreamView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamView", ID: &iStreamView, Members: &mStreamView, Type: smithy.ShapeTypeEnum, Ext: &eCreateFleetRequest_StreamView})
+var sCreateFleetRequest_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFleetRequest_Platform})
+var sCreateFleetRequest_MaxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrentSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateFleetRequest_MaxConcurrentSessions})
+var sCreateFleetRequest_UsbDeviceFilterStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsbDeviceFilterStrings", ID: &i_UsbDeviceFilterStrings, Members: &m_UsbDeviceFilterStrings, Type: smithy.ShapeTypeList, Ext: &eCreateFleetRequest_UsbDeviceFilterStrings})
+var sCreateFleetRequest_SessionScriptS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionScriptS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetRequest_SessionScriptS3Location})
+var sCreateFleetRequest_MaxSessionsPerInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSessionsPerInstance", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateFleetRequest_MaxSessionsPerInstance})
+var sCreateFleetRequest_RootVolumeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeConfig", ID: &iVolumeConfig, Members: &mVolumeConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetRequest_RootVolumeConfig})
+var sCreateFleetRequest_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFleetRequest_DisableIMDSV1})
+var sCreateFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleetResult, Members: &mCreateFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetResult})
+var sCreateFleetResult_Fleet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fleet", ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetResult_Fleet})
+var sCreateImageBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImageBuilderRequest, Members: &mCreateImageBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderRequest})
+var sCreateImageBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_Name})
+var sCreateImageBuilderRequest_ImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_ImageName})
+var sCreateImageBuilderRequest_ImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_ImageArn})
+var sCreateImageBuilderRequest_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_InstanceType})
+var sCreateImageBuilderRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_Description})
+var sCreateImageBuilderRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_DisplayName})
+var sCreateImageBuilderRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderRequest_VpcConfig})
+var sCreateImageBuilderRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_IamRoleArn})
+var sCreateImageBuilderRequest_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eCreateImageBuilderRequest_EnableDefaultInternetAccess})
+var sCreateImageBuilderRequest_DomainJoinInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinInfo", ID: &iDomainJoinInfo, Members: &mDomainJoinInfo, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderRequest_DomainJoinInfo})
+var sCreateImageBuilderRequest_AppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppstreamAgentVersion", ID: &i_AppstreamAgentVersion, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderRequest_AppstreamAgentVersion})
+var sCreateImageBuilderRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateImageBuilderRequest_Tags})
+var sCreateImageBuilderRequest_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eCreateImageBuilderRequest_AccessEndpoints})
+var sCreateImageBuilderRequest_RootVolumeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeConfig", ID: &iVolumeConfig, Members: &mVolumeConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderRequest_RootVolumeConfig})
+var sCreateImageBuilderRequest_SoftwaresToInstall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwaresToInstall", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateImageBuilderRequest_SoftwaresToInstall})
+var sCreateImageBuilderRequest_SoftwaresToUninstall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwaresToUninstall", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateImageBuilderRequest_SoftwaresToUninstall})
+var sCreateImageBuilderRequest_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eCreateImageBuilderRequest_DisableIMDSV1})
+var sCreateImageBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImageBuilderResult, Members: &mCreateImageBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderResult})
+var sCreateImageBuilderResult_ImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilder", ID: &iImageBuilder, Members: &mImageBuilder, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderResult_ImageBuilder})
+var sCreateImageBuilderStreamingURLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImageBuilderStreamingURLRequest, Members: &mCreateImageBuilderStreamingURLRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderStreamingURLRequest})
+var sCreateImageBuilderStreamingURLRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderStreamingURLRequest_Name})
+var sCreateImageBuilderStreamingURLRequest_Validity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validity", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateImageBuilderStreamingURLRequest_Validity})
+var sCreateImageBuilderStreamingURLResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImageBuilderStreamingURLResult, Members: &mCreateImageBuilderStreamingURLResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateImageBuilderStreamingURLResult})
+var sCreateImageBuilderStreamingURLResult_StreamingURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateImageBuilderStreamingURLResult_StreamingURL})
+var sCreateImageBuilderStreamingURLResult_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateImageBuilderStreamingURLResult_Expires})
+var sCreateImportedImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImportedImageRequest, Members: &mCreateImportedImageRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateImportedImageRequest})
+var sCreateImportedImageRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateImportedImageRequest_Name})
+var sCreateImportedImageRequest_SourceAmiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAmiId", ID: &i_PhotonAmiId, Type: smithy.ShapeTypeString, Ext: &eCreateImportedImageRequest_SourceAmiId})
+var sCreateImportedImageRequest_WorkspaceImageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkspaceImageId", ID: &i_WorkspaceImageId, Type: smithy.ShapeTypeString, Ext: &eCreateImportedImageRequest_WorkspaceImageId})
+var sCreateImportedImageRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateImportedImageRequest_IamRoleArn})
+var sCreateImportedImageRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ImageImportDescription, Type: smithy.ShapeTypeString, Ext: &eCreateImportedImageRequest_Description})
+var sCreateImportedImageRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_ImageImportDisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateImportedImageRequest_DisplayName})
+var sCreateImportedImageRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateImportedImageRequest_Tags})
+var sCreateImportedImageRequest_RuntimeValidationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeValidationConfig", ID: &iRuntimeValidationConfig, Members: &mRuntimeValidationConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateImportedImageRequest_RuntimeValidationConfig})
+var sCreateImportedImageRequest_AgentSoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentSoftwareVersion", ID: &iAgentSoftwareVersion, Members: &mAgentSoftwareVersion, Type: smithy.ShapeTypeEnum, Ext: &eCreateImportedImageRequest_AgentSoftwareVersion})
+var sCreateImportedImageRequest_AppCatalogConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppCatalogConfig", ID: &i_AppCatalogConfig, Members: &m_AppCatalogConfig, Type: smithy.ShapeTypeList, Ext: &eCreateImportedImageRequest_AppCatalogConfig})
+var sCreateImportedImageRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateImportedImageRequest_DryRun})
+var sCreateImportedImageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImportedImageResult, Members: &mCreateImportedImageResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateImportedImageResult})
+var sCreateImportedImageResult_Image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Image", ID: &iImage, Members: &mImage, Type: smithy.ShapeTypeStructure, Ext: &eCreateImportedImageResult_Image})
+var sCreateStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStackRequest, Members: &mCreateStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateStackRequest})
+var sCreateStackRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateStackRequest_Name})
+var sCreateStackRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateStackRequest_Description})
+var sCreateStackRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateStackRequest_DisplayName})
+var sCreateStackRequest_StorageConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConnectors", ID: &i_StorageConnectorList, Members: &m_StorageConnectorList, Type: smithy.ShapeTypeList, Ext: &eCreateStackRequest_StorageConnectors})
+var sCreateStackRequest_RedirectURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectURL", ID: &i_RedirectURL, Type: smithy.ShapeTypeString, Ext: &eCreateStackRequest_RedirectURL})
+var sCreateStackRequest_FeedbackURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackURL", ID: &i_FeedbackURL, Type: smithy.ShapeTypeString, Ext: &eCreateStackRequest_FeedbackURL})
+var sCreateStackRequest_UserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSettings", ID: &i_UserSettingList, Members: &m_UserSettingList, Type: smithy.ShapeTypeList, Ext: &eCreateStackRequest_UserSettings})
+var sCreateStackRequest_ApplicationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSettings", ID: &iApplicationSettings, Members: &mApplicationSettings, Type: smithy.ShapeTypeStructure, Ext: &eCreateStackRequest_ApplicationSettings})
+var sCreateStackRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateStackRequest_Tags})
+var sCreateStackRequest_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eCreateStackRequest_AccessEndpoints})
+var sCreateStackRequest_EmbedHostDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmbedHostDomains", ID: &i_EmbedHostDomains, Members: &m_EmbedHostDomains, Type: smithy.ShapeTypeList, Ext: &eCreateStackRequest_EmbedHostDomains})
+var sCreateStackRequest_StreamingExperienceSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingExperienceSettings", ID: &iStreamingExperienceSettings, Members: &mStreamingExperienceSettings, Type: smithy.ShapeTypeStructure, Ext: &eCreateStackRequest_StreamingExperienceSettings})
+var sCreateStackRequest_ContentRedirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRedirection", ID: &iContentRedirection, Members: &mContentRedirection, Type: smithy.ShapeTypeStructure, Ext: &eCreateStackRequest_ContentRedirection})
+var sCreateStackRequest_AgentAccessConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentAccessConfig", ID: &iAgentAccessConfig, Members: &mAgentAccessConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateStackRequest_AgentAccessConfig})
+var sCreateStackRequest_StorageConnectorAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConnectorAuthentication", ID: &iStorageConnectorAuthentication, Members: &mStorageConnectorAuthentication, Type: smithy.ShapeTypeEnum, Ext: &eCreateStackRequest_StorageConnectorAuthentication})
+var sCreateStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStackResult, Members: &mCreateStackResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateStackResult})
+var sCreateStackResult_Stack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stack", ID: &iStack, Members: &mStack, Type: smithy.ShapeTypeStructure, Ext: &eCreateStackResult_Stack})
+var sCreateStreamingURLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamingURLRequest, Members: &mCreateStreamingURLRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamingURLRequest})
+var sCreateStreamingURLRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateStreamingURLRequest_StackName})
+var sCreateStreamingURLRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateStreamingURLRequest_FleetName})
+var sCreateStreamingURLRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_StreamingUrlUserId, Type: smithy.ShapeTypeString, Ext: &eCreateStreamingURLRequest_UserId})
+var sCreateStreamingURLRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateStreamingURLRequest_ApplicationId})
+var sCreateStreamingURLRequest_Validity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validity", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateStreamingURLRequest_Validity})
+var sCreateStreamingURLRequest_SessionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionContext", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateStreamingURLRequest_SessionContext})
+var sCreateStreamingURLResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamingURLResult, Members: &mCreateStreamingURLResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamingURLResult})
+var sCreateStreamingURLResult_StreamingURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateStreamingURLResult_StreamingURL})
+var sCreateStreamingURLResult_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateStreamingURLResult_Expires})
+var sCreateThemeForStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateThemeForStackRequest, Members: &mCreateThemeForStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeForStackRequest})
+var sCreateThemeForStackRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateThemeForStackRequest_StackName})
+var sCreateThemeForStackRequest_FooterLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FooterLinks", ID: &i_ThemeFooterLinks, Members: &m_ThemeFooterLinks, Type: smithy.ShapeTypeList, Ext: &eCreateThemeForStackRequest_FooterLinks})
+var sCreateThemeForStackRequest_TitleText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TitleText", ID: &i_ThemeTitleText, Type: smithy.ShapeTypeString, Ext: &eCreateThemeForStackRequest_TitleText})
+var sCreateThemeForStackRequest_ThemeStyling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThemeStyling", ID: &iThemeStyling, Members: &mThemeStyling, Type: smithy.ShapeTypeEnum, Ext: &eCreateThemeForStackRequest_ThemeStyling})
+var sCreateThemeForStackRequest_OrganizationLogoS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationLogoS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeForStackRequest_OrganizationLogoS3Location})
+var sCreateThemeForStackRequest_FaviconS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaviconS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeForStackRequest_FaviconS3Location})
+var sCreateThemeForStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateThemeForStackResult, Members: &mCreateThemeForStackResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeForStackResult})
+var sCreateThemeForStackResult_Theme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Theme", ID: &iTheme, Members: &mTheme, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeForStackResult_Theme})
+var sCreateUpdatedImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUpdatedImageRequest, Members: &mCreateUpdatedImageRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateUpdatedImageRequest})
+var sCreateUpdatedImageRequest_existingImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "existingImageName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateUpdatedImageRequest_existingImageName})
+var sCreateUpdatedImageRequest_newImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newImageName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateUpdatedImageRequest_newImageName})
+var sCreateUpdatedImageRequest_newImageDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newImageDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateUpdatedImageRequest_newImageDescription})
+var sCreateUpdatedImageRequest_newImageDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newImageDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateUpdatedImageRequest_newImageDisplayName})
+var sCreateUpdatedImageRequest_newImageTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newImageTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateUpdatedImageRequest_newImageTags})
+var sCreateUpdatedImageRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateUpdatedImageRequest_dryRun})
+var sCreateUpdatedImageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUpdatedImageResult, Members: &mCreateUpdatedImageResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateUpdatedImageResult})
+var sCreateUpdatedImageResult_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &iImage, Members: &mImage, Type: smithy.ShapeTypeStructure, Ext: &eCreateUpdatedImageResult_image})
+var sCreateUpdatedImageResult_canUpdateImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canUpdateImage", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateUpdatedImageResult_canUpdateImage})
+var sCreateUsageReportSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUsageReportSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateUsageReportSubscriptionRequest})
+var sCreateUsageReportSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUsageReportSubscriptionResult, Members: &mCreateUsageReportSubscriptionResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateUsageReportSubscriptionResult})
+var sCreateUsageReportSubscriptionResult_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateUsageReportSubscriptionResult_S3BucketName})
+var sCreateUsageReportSubscriptionResult_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iUsageReportSchedule, Members: &mUsageReportSchedule, Type: smithy.ShapeTypeEnum, Ext: &eCreateUsageReportSubscriptionResult_Schedule})
+var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserRequest})
+var sCreateUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_Username, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_UserName})
+var sCreateUserRequest_MessageAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAction", ID: &iMessageAction, Members: &mMessageAction, Type: smithy.ShapeTypeEnum, Ext: &eCreateUserRequest_MessageAction})
+var sCreateUserRequest_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_UserAttributeValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_FirstName})
+var sCreateUserRequest_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_UserAttributeValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_LastName})
+var sCreateUserRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateUserRequest_AuthenticationType})
+var sCreateUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserResult})
+var sDeleteAppBlockBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBlockBuilderRequest, Members: &mDeleteAppBlockBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppBlockBuilderRequest})
+var sDeleteAppBlockBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteAppBlockBuilderRequest_Name})
+var sDeleteAppBlockBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBlockBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppBlockBuilderResult})
+var sDeleteAppBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBlockRequest, Members: &mDeleteAppBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppBlockRequest})
+var sDeleteAppBlockRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteAppBlockRequest_Name})
+var sDeleteAppBlockResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBlockResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppBlockResult})
+var sDeleteApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationRequest, Members: &mDeleteApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationRequest})
+var sDeleteApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteApplicationRequest_Name})
+var sDeleteApplicationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationResult})
+var sDeleteDirectoryConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryConfigRequest, Members: &mDeleteDirectoryConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDirectoryConfigRequest})
+var sDeleteDirectoryConfigRequest_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eDeleteDirectoryConfigRequest_DirectoryName})
+var sDeleteDirectoryConfigResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryConfigResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDirectoryConfigResult})
+var sDeleteEntitlementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntitlementRequest, Members: &mDeleteEntitlementRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEntitlementRequest})
+var sDeleteEntitlementRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteEntitlementRequest_Name})
+var sDeleteEntitlementRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteEntitlementRequest_StackName})
+var sDeleteEntitlementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntitlementResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEntitlementResult})
+var sDeleteFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleetRequest, Members: &mDeleteFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFleetRequest})
+var sDeleteFleetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteFleetRequest_Name})
+var sDeleteFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFleetResult})
+var sDeleteImageBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageBuilderRequest, Members: &mDeleteImageBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageBuilderRequest})
+var sDeleteImageBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteImageBuilderRequest_Name})
+var sDeleteImageBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageBuilderResult, Members: &mDeleteImageBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageBuilderResult})
+var sDeleteImageBuilderResult_ImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilder", ID: &iImageBuilder, Members: &mImageBuilder, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageBuilderResult_ImageBuilder})
+var sDeleteImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageRequest, Members: &mDeleteImageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageRequest})
+var sDeleteImageRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteImageRequest_Name})
+var sDeleteImageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageResult, Members: &mDeleteImageResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageResult})
+var sDeleteImageResult_Image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Image", ID: &iImage, Members: &mImage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageResult_Image})
+var sDeleteImagePermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImagePermissionsRequest, Members: &mDeleteImagePermissionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImagePermissionsRequest})
+var sDeleteImagePermissionsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteImagePermissionsRequest_Name})
+var sDeleteImagePermissionsRequest_SharedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteImagePermissionsRequest_SharedAccountId})
+var sDeleteImagePermissionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImagePermissionsResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImagePermissionsResult})
+var sDeleteStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStackRequest, Members: &mDeleteStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteStackRequest})
+var sDeleteStackRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteStackRequest_Name})
+var sDeleteStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStackResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteStackResult})
+var sDeleteThemeForStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteThemeForStackRequest, Members: &mDeleteThemeForStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteThemeForStackRequest})
+var sDeleteThemeForStackRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteThemeForStackRequest_StackName})
+var sDeleteThemeForStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteThemeForStackResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteThemeForStackResult})
+var sDeleteUsageReportSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUsageReportSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUsageReportSubscriptionRequest})
+var sDeleteUsageReportSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUsageReportSubscriptionResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUsageReportSubscriptionResult})
+var sDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserRequest, Members: &mDeleteUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserRequest})
+var sDeleteUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_Username, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_UserName})
+var sDeleteUserRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDeleteUserRequest_AuthenticationType})
+var sDeleteUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserResult})
+var sDescribeAppBlockBuilderAppBlockAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlockBuilderAppBlockAssociationsRequest, Members: &mDescribeAppBlockBuilderAppBlockAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsRequest})
+var sDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn})
+var sDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName})
+var sDescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults})
+var sDescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken})
+var sDescribeAppBlockBuilderAppBlockAssociationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlockBuilderAppBlockAssociationsResult, Members: &mDescribeAppBlockBuilderAppBlockAssociationsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsResult})
+var sDescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderAppBlockAssociations", ID: &i_AppBlockBuilderAppBlockAssociationsList, Members: &m_AppBlockBuilderAppBlockAssociationsList, Type: smithy.ShapeTypeList, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations})
+var sDescribeAppBlockBuilderAppBlockAssociationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlockBuilderAppBlockAssociationsResult_NextToken})
+var sDescribeAppBlockBuildersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlockBuildersRequest, Members: &mDescribeAppBlockBuildersRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppBlockBuildersRequest})
+var sDescribeAppBlockBuildersRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDescribeAppBlockBuildersRequest_Names})
+var sDescribeAppBlockBuildersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlockBuildersRequest_NextToken})
+var sDescribeAppBlockBuildersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAppBlockBuildersRequest_MaxResults})
+var sDescribeAppBlockBuildersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlockBuildersResult, Members: &mDescribeAppBlockBuildersResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppBlockBuildersResult})
+var sDescribeAppBlockBuildersResult_AppBlockBuilders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilders", ID: &i_AppBlockBuilderList, Members: &m_AppBlockBuilderList, Type: smithy.ShapeTypeList, Ext: &eDescribeAppBlockBuildersResult_AppBlockBuilders})
+var sDescribeAppBlockBuildersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlockBuildersResult_NextToken})
+var sDescribeAppBlocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlocksRequest, Members: &mDescribeAppBlocksRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppBlocksRequest})
+var sDescribeAppBlocksRequest_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeAppBlocksRequest_Arns})
+var sDescribeAppBlocksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlocksRequest_NextToken})
+var sDescribeAppBlocksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAppBlocksRequest_MaxResults})
+var sDescribeAppBlocksResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppBlocksResult, Members: &mDescribeAppBlocksResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppBlocksResult})
+var sDescribeAppBlocksResult_AppBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlocks", ID: &i_AppBlocks, Members: &m_AppBlocks, Type: smithy.ShapeTypeList, Ext: &eDescribeAppBlocksResult_AppBlocks})
+var sDescribeAppBlocksResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppBlocksResult_NextToken})
+var sDescribeApplicationFleetAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationFleetAssociationsRequest, Members: &mDescribeApplicationFleetAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationFleetAssociationsRequest})
+var sDescribeApplicationFleetAssociationsRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationFleetAssociationsRequest_FleetName})
+var sDescribeApplicationFleetAssociationsRequest_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationFleetAssociationsRequest_ApplicationArn})
+var sDescribeApplicationFleetAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeApplicationFleetAssociationsRequest_MaxResults})
+var sDescribeApplicationFleetAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationFleetAssociationsRequest_NextToken})
+var sDescribeApplicationFleetAssociationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationFleetAssociationsResult, Members: &mDescribeApplicationFleetAssociationsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationFleetAssociationsResult})
+var sDescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationFleetAssociations", ID: &i_ApplicationFleetAssociationList, Members: &m_ApplicationFleetAssociationList, Type: smithy.ShapeTypeList, Ext: &eDescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations})
+var sDescribeApplicationFleetAssociationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationFleetAssociationsResult_NextToken})
+var sDescribeApplicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationsRequest, Members: &mDescribeApplicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationsRequest})
+var sDescribeApplicationsRequest_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeApplicationsRequest_Arns})
+var sDescribeApplicationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationsRequest_NextToken})
+var sDescribeApplicationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeApplicationsRequest_MaxResults})
+var sDescribeApplicationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationsResult, Members: &mDescribeApplicationsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationsResult})
+var sDescribeApplicationsResult_Applications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Applications", ID: &i_Applications, Members: &m_Applications, Type: smithy.ShapeTypeList, Ext: &eDescribeApplicationsResult_Applications})
+var sDescribeApplicationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationsResult_NextToken})
+var sDescribeAppLicenseUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppLicenseUsageRequest, Members: &mDescribeAppLicenseUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppLicenseUsageRequest})
+var sDescribeAppLicenseUsageRequest_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppLicenseUsageRequest_BillingPeriod})
+var sDescribeAppLicenseUsageRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAppLicenseUsageRequest_MaxResults})
+var sDescribeAppLicenseUsageRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppLicenseUsageRequest_NextToken})
+var sDescribeAppLicenseUsageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAppLicenseUsageResult, Members: &mDescribeAppLicenseUsageResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAppLicenseUsageResult})
+var sDescribeAppLicenseUsageResult_AppLicenseUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppLicenseUsages", ID: &i_AdminAppLicenseUsageList, Members: &m_AdminAppLicenseUsageList, Type: smithy.ShapeTypeList, Ext: &eDescribeAppLicenseUsageResult_AppLicenseUsages})
+var sDescribeAppLicenseUsageResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAppLicenseUsageResult_NextToken})
+var sDescribeDirectoryConfigsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoryConfigsRequest, Members: &mDescribeDirectoryConfigsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDirectoryConfigsRequest})
+var sDescribeDirectoryConfigsRequest_DirectoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryNames", ID: &i_DirectoryNameList, Members: &m_DirectoryNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeDirectoryConfigsRequest_DirectoryNames})
+var sDescribeDirectoryConfigsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDirectoryConfigsRequest_MaxResults})
+var sDescribeDirectoryConfigsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDirectoryConfigsRequest_NextToken})
+var sDescribeDirectoryConfigsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoryConfigsResult, Members: &mDescribeDirectoryConfigsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDirectoryConfigsResult})
+var sDescribeDirectoryConfigsResult_DirectoryConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryConfigs", ID: &i_DirectoryConfigList, Members: &m_DirectoryConfigList, Type: smithy.ShapeTypeList, Ext: &eDescribeDirectoryConfigsResult_DirectoryConfigs})
+var sDescribeDirectoryConfigsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDirectoryConfigsResult_NextToken})
+var sDescribeEntitlementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntitlementsRequest, Members: &mDescribeEntitlementsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEntitlementsRequest})
+var sDescribeEntitlementsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeEntitlementsRequest_Name})
+var sDescribeEntitlementsRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeEntitlementsRequest_StackName})
+var sDescribeEntitlementsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEntitlementsRequest_NextToken})
+var sDescribeEntitlementsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEntitlementsRequest_MaxResults})
+var sDescribeEntitlementsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntitlementsResult, Members: &mDescribeEntitlementsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEntitlementsResult})
+var sDescribeEntitlementsResult_Entitlements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entitlements", ID: &i_EntitlementList, Members: &m_EntitlementList, Type: smithy.ShapeTypeList, Ext: &eDescribeEntitlementsResult_Entitlements})
+var sDescribeEntitlementsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEntitlementsResult_NextToken})
+var sDescribeFleetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFleetsRequest, Members: &mDescribeFleetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFleetsRequest})
+var sDescribeFleetsRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDescribeFleetsRequest_Names})
+var sDescribeFleetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeFleetsRequest_NextToken})
+var sDescribeFleetsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFleetsResult, Members: &mDescribeFleetsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFleetsResult})
+var sDescribeFleetsResult_Fleets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fleets", ID: &i_FleetList, Members: &m_FleetList, Type: smithy.ShapeTypeList, Ext: &eDescribeFleetsResult_Fleets})
+var sDescribeFleetsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeFleetsResult_NextToken})
+var sDescribeImageBuildersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImageBuildersRequest, Members: &mDescribeImageBuildersRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeImageBuildersRequest})
+var sDescribeImageBuildersRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDescribeImageBuildersRequest_Names})
+var sDescribeImageBuildersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeImageBuildersRequest_MaxResults})
+var sDescribeImageBuildersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeImageBuildersRequest_NextToken})
+var sDescribeImageBuildersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImageBuildersResult, Members: &mDescribeImageBuildersResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeImageBuildersResult})
+var sDescribeImageBuildersResult_ImageBuilders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilders", ID: &i_ImageBuilderList, Members: &m_ImageBuilderList, Type: smithy.ShapeTypeList, Ext: &eDescribeImageBuildersResult_ImageBuilders})
+var sDescribeImageBuildersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeImageBuildersResult_NextToken})
+var sDescribeImagePermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImagePermissionsRequest, Members: &mDescribeImagePermissionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeImagePermissionsRequest})
+var sDescribeImagePermissionsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeImagePermissionsRequest_Name})
+var sDescribeImagePermissionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeImagePermissionsRequest_MaxResults})
+var sDescribeImagePermissionsRequest_SharedAwsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedAwsAccountIds", ID: &i_AwsAccountIdList, Members: &m_AwsAccountIdList, Type: smithy.ShapeTypeList, Ext: &eDescribeImagePermissionsRequest_SharedAwsAccountIds})
+var sDescribeImagePermissionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeImagePermissionsRequest_NextToken})
+var sDescribeImagePermissionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImagePermissionsResult, Members: &mDescribeImagePermissionsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeImagePermissionsResult})
+var sDescribeImagePermissionsResult_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeImagePermissionsResult_Name})
+var sDescribeImagePermissionsResult_SharedImagePermissionsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedImagePermissionsList", ID: &i_SharedImagePermissionsList, Members: &m_SharedImagePermissionsList, Type: smithy.ShapeTypeList, Ext: &eDescribeImagePermissionsResult_SharedImagePermissionsList})
+var sDescribeImagePermissionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeImagePermissionsResult_NextToken})
+var sDescribeImagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImagesRequest, Members: &mDescribeImagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeImagesRequest})
+var sDescribeImagesRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDescribeImagesRequest_Names})
+var sDescribeImagesRequest_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeImagesRequest_Arns})
+var sDescribeImagesRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iVisibilityType, Members: &mVisibilityType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeImagesRequest_Type})
+var sDescribeImagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeImagesRequest_NextToken})
+var sDescribeImagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_DescribeImagesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeImagesRequest_MaxResults})
+var sDescribeImagesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImagesResult, Members: &mDescribeImagesResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeImagesResult})
+var sDescribeImagesResult_Images = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Images", ID: &i_ImageList, Members: &m_ImageList, Type: smithy.ShapeTypeList, Ext: &eDescribeImagesResult_Images})
+var sDescribeImagesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeImagesResult_NextToken})
+var sDescribeSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSessionsRequest, Members: &mDescribeSessionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSessionsRequest})
+var sDescribeSessionsRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeSessionsRequest_StackName})
+var sDescribeSessionsRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeSessionsRequest_FleetName})
+var sDescribeSessionsRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eDescribeSessionsRequest_UserId})
+var sDescribeSessionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeSessionsRequest_NextToken})
+var sDescribeSessionsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeSessionsRequest_Limit})
+var sDescribeSessionsRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeSessionsRequest_AuthenticationType})
+var sDescribeSessionsRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeSessionsRequest_InstanceId})
+var sDescribeSessionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSessionsResult, Members: &mDescribeSessionsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSessionsResult})
+var sDescribeSessionsResult_Sessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sessions", ID: &i_SessionList, Members: &m_SessionList, Type: smithy.ShapeTypeList, Ext: &eDescribeSessionsResult_Sessions})
+var sDescribeSessionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeSessionsResult_NextToken})
+var sDescribeSoftwareAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSoftwareAssociationsRequest, Members: &mDescribeSoftwareAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSoftwareAssociationsRequest})
+var sDescribeSoftwareAssociationsRequest_AssociatedResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResource", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeSoftwareAssociationsRequest_AssociatedResource})
+var sDescribeSoftwareAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeSoftwareAssociationsRequest_MaxResults})
+var sDescribeSoftwareAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeSoftwareAssociationsRequest_NextToken})
+var sDescribeSoftwareAssociationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSoftwareAssociationsResult, Members: &mDescribeSoftwareAssociationsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSoftwareAssociationsResult})
+var sDescribeSoftwareAssociationsResult_AssociatedResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResource", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeSoftwareAssociationsResult_AssociatedResource})
+var sDescribeSoftwareAssociationsResult_SoftwareAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareAssociations", ID: &i_SoftwareAssociationsList, Members: &m_SoftwareAssociationsList, Type: smithy.ShapeTypeList, Ext: &eDescribeSoftwareAssociationsResult_SoftwareAssociations})
+var sDescribeSoftwareAssociationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeSoftwareAssociationsResult_NextToken})
+var sDescribeStacksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStacksRequest, Members: &mDescribeStacksRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeStacksRequest})
+var sDescribeStacksRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDescribeStacksRequest_Names})
+var sDescribeStacksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeStacksRequest_NextToken})
+var sDescribeStacksResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStacksResult, Members: &mDescribeStacksResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeStacksResult})
+var sDescribeStacksResult_Stacks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stacks", ID: &i_StackList, Members: &m_StackList, Type: smithy.ShapeTypeList, Ext: &eDescribeStacksResult_Stacks})
+var sDescribeStacksResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeStacksResult_NextToken})
+var sDescribeThemeForStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeThemeForStackRequest, Members: &mDescribeThemeForStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeThemeForStackRequest})
+var sDescribeThemeForStackRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeThemeForStackRequest_StackName})
+var sDescribeThemeForStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeThemeForStackResult, Members: &mDescribeThemeForStackResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeThemeForStackResult})
+var sDescribeThemeForStackResult_Theme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Theme", ID: &iTheme, Members: &mTheme, Type: smithy.ShapeTypeStructure, Ext: &eDescribeThemeForStackResult_Theme})
+var sDescribeUsageReportSubscriptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUsageReportSubscriptionsRequest, Members: &mDescribeUsageReportSubscriptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUsageReportSubscriptionsRequest})
+var sDescribeUsageReportSubscriptionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeUsageReportSubscriptionsRequest_MaxResults})
+var sDescribeUsageReportSubscriptionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeUsageReportSubscriptionsRequest_NextToken})
+var sDescribeUsageReportSubscriptionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUsageReportSubscriptionsResult, Members: &mDescribeUsageReportSubscriptionsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUsageReportSubscriptionsResult})
+var sDescribeUsageReportSubscriptionsResult_UsageReportSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageReportSubscriptions", ID: &i_UsageReportSubscriptionList, Members: &m_UsageReportSubscriptionList, Type: smithy.ShapeTypeList, Ext: &eDescribeUsageReportSubscriptionsResult_UsageReportSubscriptions})
+var sDescribeUsageReportSubscriptionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeUsageReportSubscriptionsResult_NextToken})
+var sDescribeUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUsersRequest, Members: &mDescribeUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUsersRequest})
+var sDescribeUsersRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeUsersRequest_AuthenticationType})
+var sDescribeUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeUsersRequest_MaxResults})
+var sDescribeUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeUsersRequest_NextToken})
+var sDescribeUsersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUsersResult, Members: &mDescribeUsersResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUsersResult})
+var sDescribeUsersResult_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &eDescribeUsersResult_Users})
+var sDescribeUsersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeUsersResult_NextToken})
+var sDescribeUserStackAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserStackAssociationsRequest, Members: &mDescribeUserStackAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserStackAssociationsRequest})
+var sDescribeUserStackAssociationsRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeUserStackAssociationsRequest_StackName})
+var sDescribeUserStackAssociationsRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_Username, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserStackAssociationsRequest_UserName})
+var sDescribeUserStackAssociationsRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeUserStackAssociationsRequest_AuthenticationType})
+var sDescribeUserStackAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeUserStackAssociationsRequest_MaxResults})
+var sDescribeUserStackAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeUserStackAssociationsRequest_NextToken})
+var sDescribeUserStackAssociationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserStackAssociationsResult, Members: &mDescribeUserStackAssociationsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserStackAssociationsResult})
+var sDescribeUserStackAssociationsResult_UserStackAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserStackAssociations", ID: &i_UserStackAssociationList, Members: &m_UserStackAssociationList, Type: smithy.ShapeTypeList, Ext: &eDescribeUserStackAssociationsResult_UserStackAssociations})
+var sDescribeUserStackAssociationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeUserStackAssociationsResult_NextToken})
+var sDisableUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUserRequest, Members: &mDisableUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableUserRequest})
+var sDisableUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_Username, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDisableUserRequest_UserName})
+var sDisableUserRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDisableUserRequest_AuthenticationType})
+var sDisableUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUserResult, Type: smithy.ShapeTypeStructure, Ext: &eDisableUserResult})
+var sDisassociateAppBlockBuilderAppBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAppBlockBuilderAppBlockRequest, Members: &mDisassociateAppBlockBuilderAppBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAppBlockBuilderAppBlockRequest})
+var sDisassociateAppBlockBuilderAppBlockRequest_AppBlockArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDisassociateAppBlockBuilderAppBlockRequest_AppBlockArn})
+var sDisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName})
+var sDisassociateAppBlockBuilderAppBlockResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAppBlockBuilderAppBlockResult, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAppBlockBuilderAppBlockResult})
+var sDisassociateApplicationFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationFleetRequest, Members: &mDisassociateApplicationFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApplicationFleetRequest})
+var sDisassociateApplicationFleetRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDisassociateApplicationFleetRequest_FleetName})
+var sDisassociateApplicationFleetRequest_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDisassociateApplicationFleetRequest_ApplicationArn})
+var sDisassociateApplicationFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApplicationFleetResult})
+var sDisassociateApplicationFromEntitlementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationFromEntitlementRequest, Members: &mDisassociateApplicationFromEntitlementRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApplicationFromEntitlementRequest})
+var sDisassociateApplicationFromEntitlementRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDisassociateApplicationFromEntitlementRequest_StackName})
+var sDisassociateApplicationFromEntitlementRequest_EntitlementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntitlementName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDisassociateApplicationFromEntitlementRequest_EntitlementName})
+var sDisassociateApplicationFromEntitlementRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateApplicationFromEntitlementRequest_ApplicationIdentifier})
+var sDisassociateApplicationFromEntitlementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationFromEntitlementResult, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApplicationFromEntitlementResult})
+var sDisassociateFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFleetRequest, Members: &mDisassociateFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateFleetRequest})
+var sDisassociateFleetRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateFleetRequest_FleetName})
+var sDisassociateFleetRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateFleetRequest_StackName})
+var sDisassociateFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateFleetResult})
+var sDisassociateSoftwareFromImageBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSoftwareFromImageBuilderRequest, Members: &mDisassociateSoftwareFromImageBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateSoftwareFromImageBuilderRequest})
+var sDisassociateSoftwareFromImageBuilderRequest_ImageBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDisassociateSoftwareFromImageBuilderRequest_ImageBuilderName})
+var sDisassociateSoftwareFromImageBuilderRequest_SoftwareNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareNames", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDisassociateSoftwareFromImageBuilderRequest_SoftwareNames})
+var sDisassociateSoftwareFromImageBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSoftwareFromImageBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateSoftwareFromImageBuilderResult})
+var sDrainSessionInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDrainSessionInstanceRequest, Members: &mDrainSessionInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDrainSessionInstanceRequest})
+var sDrainSessionInstanceRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDrainSessionInstanceRequest_SessionId})
+var sDrainSessionInstanceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDrainSessionInstanceResult, Type: smithy.ShapeTypeStructure, Ext: &eDrainSessionInstanceResult})
+var sEnableUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableUserRequest, Members: &mEnableUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableUserRequest})
+var sEnableUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_Username, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eEnableUserRequest_UserName})
+var sEnableUserRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eEnableUserRequest_AuthenticationType})
+var sEnableUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableUserResult, Type: smithy.ShapeTypeStructure, Ext: &eEnableUserResult})
+var sExpireSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpireSessionRequest, Members: &mExpireSessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eExpireSessionRequest})
+var sExpireSessionRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eExpireSessionRequest_SessionId})
+var sExpireSessionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpireSessionResult, Type: smithy.ShapeTypeStructure, Ext: &eExpireSessionResult})
+var sGetExportImageTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExportImageTaskRequest, Members: &mGetExportImageTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExportImageTaskRequest})
+var sGetExportImageTaskRequest_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eGetExportImageTaskRequest_TaskId})
+var sGetExportImageTaskResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExportImageTaskResult, Members: &mGetExportImageTaskResult, Type: smithy.ShapeTypeStructure, Ext: &eGetExportImageTaskResult})
+var sGetExportImageTaskResult_ExportImageTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportImageTask", ID: &iExportImageTask, Members: &mExportImageTask, Type: smithy.ShapeTypeStructure, Ext: &eGetExportImageTaskResult_ExportImageTask})
+var sListAssociatedFleetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedFleetsRequest, Members: &mListAssociatedFleetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedFleetsRequest})
+var sListAssociatedFleetsRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListAssociatedFleetsRequest_StackName})
+var sListAssociatedFleetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListAssociatedFleetsRequest_NextToken})
+var sListAssociatedFleetsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedFleetsResult, Members: &mListAssociatedFleetsResult, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedFleetsResult})
+var sListAssociatedFleetsResult_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eListAssociatedFleetsResult_Names})
+var sListAssociatedFleetsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListAssociatedFleetsResult_NextToken})
+var sListAssociatedStacksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedStacksRequest, Members: &mListAssociatedStacksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedStacksRequest})
+var sListAssociatedStacksRequest_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FleetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListAssociatedStacksRequest_FleetName})
+var sListAssociatedStacksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListAssociatedStacksRequest_NextToken})
+var sListAssociatedStacksResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedStacksResult, Members: &mListAssociatedStacksResult, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedStacksResult})
+var sListAssociatedStacksResult_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eListAssociatedStacksResult_Names})
+var sListAssociatedStacksResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListAssociatedStacksResult_NextToken})
+var sListEntitledApplicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitledApplicationsRequest, Members: &mListEntitledApplicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEntitledApplicationsRequest})
+var sListEntitledApplicationsRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eListEntitledApplicationsRequest_StackName})
+var sListEntitledApplicationsRequest_EntitlementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntitlementName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eListEntitledApplicationsRequest_EntitlementName})
+var sListEntitledApplicationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListEntitledApplicationsRequest_NextToken})
+var sListEntitledApplicationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListEntitledApplicationsRequest_MaxResults})
+var sListEntitledApplicationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitledApplicationsResult, Members: &mListEntitledApplicationsResult, Type: smithy.ShapeTypeStructure, Ext: &eListEntitledApplicationsResult})
+var sListEntitledApplicationsResult_EntitledApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntitledApplications", ID: &i_EntitledApplicationList, Members: &m_EntitledApplicationList, Type: smithy.ShapeTypeList, Ext: &eListEntitledApplicationsResult_EntitledApplications})
+var sListEntitledApplicationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListEntitledApplicationsResult_NextToken})
+var sListExportImageTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExportImageTasksRequest, Members: &mListExportImageTasksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExportImageTasksRequest})
+var sListExportImageTasksRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListExportImageTasksRequest_Filters})
+var sListExportImageTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListExportImageTasksRequest_MaxResults})
+var sListExportImageTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListExportImageTasksRequest_NextToken})
+var sListExportImageTasksResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExportImageTasksResult, Members: &mListExportImageTasksResult, Type: smithy.ShapeTypeStructure, Ext: &eListExportImageTasksResult})
+var sListExportImageTasksResult_ExportImageTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportImageTasks", ID: &i_ExportImageTasks, Members: &m_ExportImageTasks, Type: smithy.ShapeTypeList, Ext: &eListExportImageTasksResult_ExportImageTasks})
+var sListExportImageTasksResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListExportImageTasksResult_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sStartAppBlockBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAppBlockBuilderRequest, Members: &mStartAppBlockBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartAppBlockBuilderRequest})
+var sStartAppBlockBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eStartAppBlockBuilderRequest_Name})
+var sStartAppBlockBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAppBlockBuilderResult, Members: &mStartAppBlockBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eStartAppBlockBuilderResult})
+var sStartAppBlockBuilderResult_AppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilder", ID: &iAppBlockBuilder, Members: &mAppBlockBuilder, Type: smithy.ShapeTypeStructure, Ext: &eStartAppBlockBuilderResult_AppBlockBuilder})
+var sStartFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFleetRequest, Members: &mStartFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartFleetRequest})
+var sStartFleetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartFleetRequest_Name})
+var sStartFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eStartFleetResult})
+var sStartImageBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImageBuilderRequest, Members: &mStartImageBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartImageBuilderRequest})
+var sStartImageBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartImageBuilderRequest_Name})
+var sStartImageBuilderRequest_AppstreamAgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppstreamAgentVersion", ID: &i_AppstreamAgentVersion, Type: smithy.ShapeTypeString, Ext: &eStartImageBuilderRequest_AppstreamAgentVersion})
+var sStartImageBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImageBuilderResult, Members: &mStartImageBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eStartImageBuilderResult})
+var sStartImageBuilderResult_ImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilder", ID: &iImageBuilder, Members: &mImageBuilder, Type: smithy.ShapeTypeStructure, Ext: &eStartImageBuilderResult_ImageBuilder})
+var sStartSoftwareDeploymentToImageBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSoftwareDeploymentToImageBuilderRequest, Members: &mStartSoftwareDeploymentToImageBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSoftwareDeploymentToImageBuilderRequest})
+var sStartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilderName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eStartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName})
+var sStartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryFailedDeployments", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments})
+var sStartSoftwareDeploymentToImageBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSoftwareDeploymentToImageBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eStartSoftwareDeploymentToImageBuilderResult})
+var sStopAppBlockBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAppBlockBuilderRequest, Members: &mStopAppBlockBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopAppBlockBuilderRequest})
+var sStopAppBlockBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eStopAppBlockBuilderRequest_Name})
+var sStopAppBlockBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAppBlockBuilderResult, Members: &mStopAppBlockBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eStopAppBlockBuilderResult})
+var sStopAppBlockBuilderResult_AppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilder", ID: &iAppBlockBuilder, Members: &mAppBlockBuilder, Type: smithy.ShapeTypeStructure, Ext: &eStopAppBlockBuilderResult_AppBlockBuilder})
+var sStopFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFleetRequest, Members: &mStopFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopFleetRequest})
+var sStopFleetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStopFleetRequest_Name})
+var sStopFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eStopFleetResult})
+var sStopImageBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopImageBuilderRequest, Members: &mStopImageBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopImageBuilderRequest})
+var sStopImageBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStopImageBuilderRequest_Name})
+var sStopImageBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopImageBuilderResult, Members: &mStopImageBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eStopImageBuilderResult})
+var sStopImageBuilderResult_ImageBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuilder", ID: &iImageBuilder, Members: &mImageBuilder, Type: smithy.ShapeTypeStructure, Ext: &eStopImageBuilderResult_ImageBuilder})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAppBlockBuilderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppBlockBuilderRequest, Members: &mUpdateAppBlockBuilderRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppBlockBuilderRequest})
+var sUpdateAppBlockBuilderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateAppBlockBuilderRequest_Name})
+var sUpdateAppBlockBuilderRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateAppBlockBuilderRequest_Description})
+var sUpdateAppBlockBuilderRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateAppBlockBuilderRequest_DisplayName})
+var sUpdateAppBlockBuilderRequest_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAppBlockBuilderRequest_Platform})
+var sUpdateAppBlockBuilderRequest_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateAppBlockBuilderRequest_InstanceType})
+var sUpdateAppBlockBuilderRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppBlockBuilderRequest_VpcConfig})
+var sUpdateAppBlockBuilderRequest_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateAppBlockBuilderRequest_EnableDefaultInternetAccess})
+var sUpdateAppBlockBuilderRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateAppBlockBuilderRequest_IamRoleArn})
+var sUpdateAppBlockBuilderRequest_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eUpdateAppBlockBuilderRequest_AccessEndpoints})
+var sUpdateAppBlockBuilderRequest_AttributesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributesToDelete", ID: &i_AppBlockBuilderAttributes, Members: &m_AppBlockBuilderAttributes, Type: smithy.ShapeTypeList, Ext: &eUpdateAppBlockBuilderRequest_AttributesToDelete})
+var sUpdateAppBlockBuilderRequest_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateAppBlockBuilderRequest_DisableIMDSV1})
+var sUpdateAppBlockBuilderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppBlockBuilderResult, Members: &mUpdateAppBlockBuilderResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppBlockBuilderResult})
+var sUpdateAppBlockBuilderResult_AppBlockBuilder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockBuilder", ID: &iAppBlockBuilder, Members: &mAppBlockBuilder, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppBlockBuilderResult_AppBlockBuilder})
+var sUpdateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationRequest, Members: &mUpdateApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationRequest})
+var sUpdateApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_Name})
+var sUpdateApplicationRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_DisplayName})
+var sUpdateApplicationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_Description})
+var sUpdateApplicationRequest_IconS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IconS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationRequest_IconS3Location})
+var sUpdateApplicationRequest_LaunchPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchPath", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_LaunchPath})
+var sUpdateApplicationRequest_WorkingDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingDirectory", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_WorkingDirectory})
+var sUpdateApplicationRequest_LaunchParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchParameters", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_LaunchParameters})
+var sUpdateApplicationRequest_AppBlockArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppBlockArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_AppBlockArn})
+var sUpdateApplicationRequest_AttributesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributesToDelete", ID: &i_ApplicationAttributes, Members: &m_ApplicationAttributes, Type: smithy.ShapeTypeList, Ext: &eUpdateApplicationRequest_AttributesToDelete})
+var sUpdateApplicationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationResult, Members: &mUpdateApplicationResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationResult})
+var sUpdateApplicationResult_Application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Application", ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationResult_Application})
+var sUpdateDirectoryConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectoryConfigRequest, Members: &mUpdateDirectoryConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDirectoryConfigRequest})
+var sUpdateDirectoryConfigRequest_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eUpdateDirectoryConfigRequest_DirectoryName})
+var sUpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedNames", ID: &i_OrganizationalUnitDistinguishedNamesList, Members: &m_OrganizationalUnitDistinguishedNamesList, Type: smithy.ShapeTypeList, Ext: &eUpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames})
+var sUpdateDirectoryConfigRequest_ServiceAccountCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceAccountCredentials", ID: &iServiceAccountCredentials, Members: &mServiceAccountCredentials, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDirectoryConfigRequest_ServiceAccountCredentials})
+var sUpdateDirectoryConfigRequest_CertificateBasedAuthProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateBasedAuthProperties", ID: &iCertificateBasedAuthProperties, Members: &mCertificateBasedAuthProperties, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDirectoryConfigRequest_CertificateBasedAuthProperties})
+var sUpdateDirectoryConfigResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectoryConfigResult, Members: &mUpdateDirectoryConfigResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDirectoryConfigResult})
+var sUpdateDirectoryConfigResult_DirectoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryConfig", ID: &iDirectoryConfig, Members: &mDirectoryConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDirectoryConfigResult_DirectoryConfig})
+var sUpdateEntitlementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEntitlementRequest, Members: &mUpdateEntitlementRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEntitlementRequest})
+var sUpdateEntitlementRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateEntitlementRequest_Name})
+var sUpdateEntitlementRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateEntitlementRequest_StackName})
+var sUpdateEntitlementRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateEntitlementRequest_Description})
+var sUpdateEntitlementRequest_AppVisibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppVisibility", ID: &iAppVisibility, Members: &mAppVisibility, Type: smithy.ShapeTypeEnum, Ext: &eUpdateEntitlementRequest_AppVisibility})
+var sUpdateEntitlementRequest_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_EntitlementAttributeList, Members: &m_EntitlementAttributeList, Type: smithy.ShapeTypeList, Ext: &eUpdateEntitlementRequest_Attributes})
+var sUpdateEntitlementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEntitlementResult, Members: &mUpdateEntitlementResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEntitlementResult})
+var sUpdateEntitlementResult_Entitlement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entitlement", ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEntitlementResult_Entitlement})
+var sUpdateFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleetRequest, Members: &mUpdateFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetRequest})
+var sUpdateFleetRequest_ImageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_ImageName})
+var sUpdateFleetRequest_ImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_ImageArn})
+var sUpdateFleetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_Name})
+var sUpdateFleetRequest_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_InstanceType})
+var sUpdateFleetRequest_ComputeCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeCapacity", ID: &iComputeCapacity, Members: &mComputeCapacity, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetRequest_ComputeCapacity})
+var sUpdateFleetRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetRequest_VpcConfig})
+var sUpdateFleetRequest_MaxUserDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUserDurationInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFleetRequest_MaxUserDurationInSeconds})
+var sUpdateFleetRequest_DisconnectTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisconnectTimeoutInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFleetRequest_DisconnectTimeoutInSeconds})
+var sUpdateFleetRequest_DeleteVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteVpcConfig", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFleetRequest_DeleteVpcConfig})
+var sUpdateFleetRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_Description})
+var sUpdateFleetRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_DisplayName})
+var sUpdateFleetRequest_EnableDefaultInternetAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDefaultInternetAccess", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFleetRequest_EnableDefaultInternetAccess})
+var sUpdateFleetRequest_DomainJoinInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinInfo", ID: &iDomainJoinInfo, Members: &mDomainJoinInfo, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetRequest_DomainJoinInfo})
+var sUpdateFleetRequest_IdleDisconnectTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleDisconnectTimeoutInSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFleetRequest_IdleDisconnectTimeoutInSeconds})
+var sUpdateFleetRequest_AttributesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributesToDelete", ID: &i_FleetAttributes, Members: &m_FleetAttributes, Type: smithy.ShapeTypeList, Ext: &eUpdateFleetRequest_AttributesToDelete})
+var sUpdateFleetRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_IamRoleArn})
+var sUpdateFleetRequest_StreamView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamView", ID: &iStreamView, Members: &mStreamView, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFleetRequest_StreamView})
+var sUpdateFleetRequest_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFleetRequest_Platform})
+var sUpdateFleetRequest_MaxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrentSessions", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFleetRequest_MaxConcurrentSessions})
+var sUpdateFleetRequest_UsbDeviceFilterStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsbDeviceFilterStrings", ID: &i_UsbDeviceFilterStrings, Members: &m_UsbDeviceFilterStrings, Type: smithy.ShapeTypeList, Ext: &eUpdateFleetRequest_UsbDeviceFilterStrings})
+var sUpdateFleetRequest_SessionScriptS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionScriptS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetRequest_SessionScriptS3Location})
+var sUpdateFleetRequest_MaxSessionsPerInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSessionsPerInstance", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFleetRequest_MaxSessionsPerInstance})
+var sUpdateFleetRequest_RootVolumeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeConfig", ID: &iVolumeConfig, Members: &mVolumeConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetRequest_RootVolumeConfig})
+var sUpdateFleetRequest_DisableIMDSV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableIMDSV1", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFleetRequest_DisableIMDSV1})
+var sUpdateFleetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleetResult, Members: &mUpdateFleetResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetResult})
+var sUpdateFleetResult_Fleet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fleet", ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetResult_Fleet})
+var sUpdateImagePermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImagePermissionsRequest, Members: &mUpdateImagePermissionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateImagePermissionsRequest})
+var sUpdateImagePermissionsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateImagePermissionsRequest_Name})
+var sUpdateImagePermissionsRequest_SharedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateImagePermissionsRequest_SharedAccountId})
+var sUpdateImagePermissionsRequest_ImagePermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImagePermissions", ID: &iImagePermissions, Members: &mImagePermissions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateImagePermissionsRequest_ImagePermissions})
+var sUpdateImagePermissionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImagePermissionsResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateImagePermissionsResult})
+var sUpdateStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStackRequest, Members: &mUpdateStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStackRequest})
+var sUpdateStackRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateStackRequest_DisplayName})
+var sUpdateStackRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateStackRequest_Description})
+var sUpdateStackRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateStackRequest_Name})
+var sUpdateStackRequest_StorageConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConnectors", ID: &i_StorageConnectorList, Members: &m_StorageConnectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateStackRequest_StorageConnectors})
+var sUpdateStackRequest_DeleteStorageConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteStorageConnectors", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateStackRequest_DeleteStorageConnectors})
+var sUpdateStackRequest_RedirectURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectURL", ID: &i_RedirectURL, Type: smithy.ShapeTypeString, Ext: &eUpdateStackRequest_RedirectURL})
+var sUpdateStackRequest_FeedbackURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackURL", ID: &i_FeedbackURL, Type: smithy.ShapeTypeString, Ext: &eUpdateStackRequest_FeedbackURL})
+var sUpdateStackRequest_AttributesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributesToDelete", ID: &i_StackAttributes, Members: &m_StackAttributes, Type: smithy.ShapeTypeList, Ext: &eUpdateStackRequest_AttributesToDelete})
+var sUpdateStackRequest_UserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSettings", ID: &i_UserSettingList, Members: &m_UserSettingList, Type: smithy.ShapeTypeList, Ext: &eUpdateStackRequest_UserSettings})
+var sUpdateStackRequest_ApplicationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSettings", ID: &iApplicationSettings, Members: &mApplicationSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStackRequest_ApplicationSettings})
+var sUpdateStackRequest_AccessEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoints", ID: &i_AccessEndpointList, Members: &m_AccessEndpointList, Type: smithy.ShapeTypeList, Ext: &eUpdateStackRequest_AccessEndpoints})
+var sUpdateStackRequest_EmbedHostDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmbedHostDomains", ID: &i_EmbedHostDomains, Members: &m_EmbedHostDomains, Type: smithy.ShapeTypeList, Ext: &eUpdateStackRequest_EmbedHostDomains})
+var sUpdateStackRequest_StreamingExperienceSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingExperienceSettings", ID: &iStreamingExperienceSettings, Members: &mStreamingExperienceSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStackRequest_StreamingExperienceSettings})
+var sUpdateStackRequest_ContentRedirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRedirection", ID: &iContentRedirection, Members: &mContentRedirection, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStackRequest_ContentRedirection})
+var sUpdateStackRequest_AgentAccessConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentAccessConfig", ID: &iAgentAccessConfigForUpdate, Members: &mAgentAccessConfigForUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStackRequest_AgentAccessConfig})
+var sUpdateStackRequest_StorageConnectorAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConnectorAuthentication", ID: &iStorageConnectorAuthentication, Members: &mStorageConnectorAuthentication, Type: smithy.ShapeTypeEnum, Ext: &eUpdateStackRequest_StorageConnectorAuthentication})
+var sUpdateStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStackResult, Members: &mUpdateStackResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStackResult})
+var sUpdateStackResult_Stack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stack", ID: &iStack, Members: &mStack, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStackResult_Stack})
+var sUpdateThemeForStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThemeForStackRequest, Members: &mUpdateThemeForStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeForStackRequest})
+var sUpdateThemeForStackRequest_StackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeForStackRequest_StackName})
+var sUpdateThemeForStackRequest_FooterLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FooterLinks", ID: &i_ThemeFooterLinks, Members: &m_ThemeFooterLinks, Type: smithy.ShapeTypeList, Ext: &eUpdateThemeForStackRequest_FooterLinks})
+var sUpdateThemeForStackRequest_TitleText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TitleText", ID: &i_ThemeTitleText, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeForStackRequest_TitleText})
+var sUpdateThemeForStackRequest_ThemeStyling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThemeStyling", ID: &iThemeStyling, Members: &mThemeStyling, Type: smithy.ShapeTypeEnum, Ext: &eUpdateThemeForStackRequest_ThemeStyling})
+var sUpdateThemeForStackRequest_OrganizationLogoS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationLogoS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeForStackRequest_OrganizationLogoS3Location})
+var sUpdateThemeForStackRequest_FaviconS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaviconS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeForStackRequest_FaviconS3Location})
+var sUpdateThemeForStackRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iThemeState, Members: &mThemeState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateThemeForStackRequest_State})
+var sUpdateThemeForStackRequest_AttributesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributesToDelete", ID: &i_ThemeAttributes, Members: &m_ThemeAttributes, Type: smithy.ShapeTypeList, Ext: &eUpdateThemeForStackRequest_AttributesToDelete})
+var sUpdateThemeForStackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThemeForStackResult, Members: &mUpdateThemeForStackResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeForStackResult})
+var sUpdateThemeForStackResult_Theme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Theme", ID: &iTheme, Members: &mTheme, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeForStackResult_Theme})
+
+var AssociateAppBlockBuilderAppBlock = &sAssociateAppBlockBuilderAppBlock
+
+var AssociateApplicationFleet = &sAssociateApplicationFleet
+
+var AssociateApplicationToEntitlement = &sAssociateApplicationToEntitlement
+
+var AssociateFleet = &sAssociateFleet
+
+var AssociateSoftwareToImageBuilder = &sAssociateSoftwareToImageBuilder
+
+var BatchAssociateUserStack = &sBatchAssociateUserStack
+
+var BatchDisassociateUserStack = &sBatchDisassociateUserStack
+
+var CopyImage = &sCopyImage
+
+var CreateAppBlock = &sCreateAppBlock
+
+var CreateAppBlockBuilder = &sCreateAppBlockBuilder
+
+var CreateAppBlockBuilderStreamingURL = &sCreateAppBlockBuilderStreamingURL
+
+var CreateApplication = &sCreateApplication
+
+var CreateDirectoryConfig = &sCreateDirectoryConfig
+
+var CreateEntitlement = &sCreateEntitlement
+
+var CreateExportImageTask = &sCreateExportImageTask
+
+var CreateFleet = &sCreateFleet
+
+var CreateImageBuilder = &sCreateImageBuilder
+
+var CreateImageBuilderStreamingURL = &sCreateImageBuilderStreamingURL
+
+var CreateImportedImage = &sCreateImportedImage
+
+var CreateStack = &sCreateStack
+
+var CreateStreamingURL = &sCreateStreamingURL
+
+var CreateThemeForStack = &sCreateThemeForStack
+
+var CreateUpdatedImage = &sCreateUpdatedImage
+
+var CreateUsageReportSubscription = &sCreateUsageReportSubscription
+
+var CreateUser = &sCreateUser
+
+var DeleteAppBlock = &sDeleteAppBlock
+
+var DeleteAppBlockBuilder = &sDeleteAppBlockBuilder
+
+var DeleteApplication = &sDeleteApplication
+
+var DeleteDirectoryConfig = &sDeleteDirectoryConfig
+
+var DeleteEntitlement = &sDeleteEntitlement
+
+var DeleteFleet = &sDeleteFleet
+
+var DeleteImage = &sDeleteImage
+
+var DeleteImageBuilder = &sDeleteImageBuilder
+
+var DeleteImagePermissions = &sDeleteImagePermissions
+
+var DeleteStack = &sDeleteStack
+
+var DeleteThemeForStack = &sDeleteThemeForStack
+
+var DeleteUsageReportSubscription = &sDeleteUsageReportSubscription
+
+var DeleteUser = &sDeleteUser
+
+var DescribeAppBlockBuilderAppBlockAssociations = &sDescribeAppBlockBuilderAppBlockAssociations
+
+var DescribeAppBlockBuilders = &sDescribeAppBlockBuilders
+
+var DescribeAppBlocks = &sDescribeAppBlocks
+
+var DescribeApplicationFleetAssociations = &sDescribeApplicationFleetAssociations
+
+var DescribeApplications = &sDescribeApplications
+
+var DescribeAppLicenseUsage = &sDescribeAppLicenseUsage
+
+var DescribeDirectoryConfigs = &sDescribeDirectoryConfigs
+
+var DescribeEntitlements = &sDescribeEntitlements
+
+var DescribeFleets = &sDescribeFleets
+
+var DescribeImageBuilders = &sDescribeImageBuilders
+
+var DescribeImagePermissions = &sDescribeImagePermissions
+
+var DescribeImages = &sDescribeImages
+
+var DescribeSessions = &sDescribeSessions
+
+var DescribeSoftwareAssociations = &sDescribeSoftwareAssociations
+
+var DescribeStacks = &sDescribeStacks
+
+var DescribeThemeForStack = &sDescribeThemeForStack
+
+var DescribeUsageReportSubscriptions = &sDescribeUsageReportSubscriptions
+
+var DescribeUsers = &sDescribeUsers
+
+var DescribeUserStackAssociations = &sDescribeUserStackAssociations
+
+var DisableUser = &sDisableUser
+
+var DisassociateAppBlockBuilderAppBlock = &sDisassociateAppBlockBuilderAppBlock
+
+var DisassociateApplicationFleet = &sDisassociateApplicationFleet
+
+var DisassociateApplicationFromEntitlement = &sDisassociateApplicationFromEntitlement
+
+var DisassociateFleet = &sDisassociateFleet
+
+var DisassociateSoftwareFromImageBuilder = &sDisassociateSoftwareFromImageBuilder
+
+var DrainSessionInstance = &sDrainSessionInstance
+
+var EnableUser = &sEnableUser
+
+var ExpireSession = &sExpireSession
+
+var GetExportImageTask = &sGetExportImageTask
+
+var ListAssociatedFleets = &sListAssociatedFleets
+
+var ListAssociatedStacks = &sListAssociatedStacks
+
+var ListEntitledApplications = &sListEntitledApplications
+
+var ListExportImageTasks = &sListExportImageTasks
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartAppBlockBuilder = &sStartAppBlockBuilder
+
+var StartFleet = &sStartFleet
+
+var StartImageBuilder = &sStartImageBuilder
+
+var StartSoftwareDeploymentToImageBuilder = &sStartSoftwareDeploymentToImageBuilder
+
+var StopAppBlockBuilder = &sStopAppBlockBuilder
+
+var StopFleet = &sStopFleet
+
+var StopImageBuilder = &sStopImageBuilder
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAppBlockBuilder = &sUpdateAppBlockBuilder
+
+var UpdateApplication = &sUpdateApplication
+
+var UpdateDirectoryConfig = &sUpdateDirectoryConfig
+
+var UpdateEntitlement = &sUpdateEntitlement
+
+var UpdateFleet = &sUpdateFleet
+
+var UpdateImagePermissions = &sUpdateImagePermissions
+
+var UpdateStack = &sUpdateStack
+
+var UpdateThemeForStack = &sUpdateThemeForStack
+
+var _PhotonAdminProxyService = &s_PhotonAdminProxyService
+
+var AccessEndpoint = &sAccessEndpoint
+var AccessEndpoint_EndpointType = &sAccessEndpoint_EndpointType
+var AccessEndpoint_VpceId = &sAccessEndpoint_VpceId
+
+var _AccessEndpointList = &s_AccessEndpointList
+var _AccessEndpointList_member = &s_AccessEndpointList_member
+
+var AccessEndpointType = &sAccessEndpointType
+var AccessEndpointType_STREAMING = &sAccessEndpointType_STREAMING
+
+var _AccountName = &s_AccountName
+
+var _AccountPassword = &s_AccountPassword
+
+var Action = &sAction
+var Action_CLIPBOARD_COPY_FROM_LOCAL_DEVICE = &sAction_CLIPBOARD_COPY_FROM_LOCAL_DEVICE
+var Action_CLIPBOARD_COPY_TO_LOCAL_DEVICE = &sAction_CLIPBOARD_COPY_TO_LOCAL_DEVICE
+var Action_FILE_UPLOAD = &sAction_FILE_UPLOAD
+var Action_FILE_DOWNLOAD = &sAction_FILE_DOWNLOAD
+var Action_PRINTING_TO_LOCAL_DEVICE = &sAction_PRINTING_TO_LOCAL_DEVICE
+var Action_DOMAIN_PASSWORD_SIGNIN = &sAction_DOMAIN_PASSWORD_SIGNIN
+var Action_DOMAIN_SMART_CARD_SIGNIN = &sAction_DOMAIN_SMART_CARD_SIGNIN
+var Action_AUTO_TIME_ZONE_REDIRECTION = &sAction_AUTO_TIME_ZONE_REDIRECTION
+
+var _AdminAppLicenseUsageList = &s_AdminAppLicenseUsageList
+var _AdminAppLicenseUsageList_member = &s_AdminAppLicenseUsageList_member
+
+var AdminAppLicenseUsageRecord = &sAdminAppLicenseUsageRecord
+var AdminAppLicenseUsageRecord_UserArn = &sAdminAppLicenseUsageRecord_UserArn
+var AdminAppLicenseUsageRecord_BillingPeriod = &sAdminAppLicenseUsageRecord_BillingPeriod
+var AdminAppLicenseUsageRecord_OwnerAWSAccountId = &sAdminAppLicenseUsageRecord_OwnerAWSAccountId
+var AdminAppLicenseUsageRecord_SubscriptionFirstUsedDate = &sAdminAppLicenseUsageRecord_SubscriptionFirstUsedDate
+var AdminAppLicenseUsageRecord_SubscriptionLastUsedDate = &sAdminAppLicenseUsageRecord_SubscriptionLastUsedDate
+var AdminAppLicenseUsageRecord_LicenseType = &sAdminAppLicenseUsageRecord_LicenseType
+var AdminAppLicenseUsageRecord_UserId = &sAdminAppLicenseUsageRecord_UserId
+
+var AgentAccessConfig = &sAgentAccessConfig
+var AgentAccessConfig_Settings = &sAgentAccessConfig_Settings
+var AgentAccessConfig_S3BucketArn = &sAgentAccessConfig_S3BucketArn
+var AgentAccessConfig_ScreenshotsUploadEnabled = &sAgentAccessConfig_ScreenshotsUploadEnabled
+var AgentAccessConfig_ScreenResolution = &sAgentAccessConfig_ScreenResolution
+var AgentAccessConfig_ScreenImageFormat = &sAgentAccessConfig_ScreenImageFormat
+var AgentAccessConfig_UserControlMode = &sAgentAccessConfig_UserControlMode
+
+var AgentAccessConfigForUpdate = &sAgentAccessConfigForUpdate
+var AgentAccessConfigForUpdate_Settings = &sAgentAccessConfigForUpdate_Settings
+var AgentAccessConfigForUpdate_S3BucketArn = &sAgentAccessConfigForUpdate_S3BucketArn
+var AgentAccessConfigForUpdate_ScreenshotsUploadEnabled = &sAgentAccessConfigForUpdate_ScreenshotsUploadEnabled
+var AgentAccessConfigForUpdate_ScreenResolution = &sAgentAccessConfigForUpdate_ScreenResolution
+var AgentAccessConfigForUpdate_ScreenImageFormat = &sAgentAccessConfigForUpdate_ScreenImageFormat
+var AgentAccessConfigForUpdate_UserControlMode = &sAgentAccessConfigForUpdate_UserControlMode
+
+var AgentAccessSetting = &sAgentAccessSetting
+var AgentAccessSetting_AgentAction = &sAgentAccessSetting_AgentAction
+var AgentAccessSetting_Permission = &sAgentAccessSetting_Permission
+
+var _AgentAccessSettingList = &s_AgentAccessSettingList
+var _AgentAccessSettingList_member = &s_AgentAccessSettingList_member
+
+var AgentAction = &sAgentAction
+var AgentAction_COMPUTER_VISION = &sAgentAction_COMPUTER_VISION
+var AgentAction_COMPUTER_INPUT = &sAgentAction_COMPUTER_INPUT
+var AgentAction_FORWARD_MCP_TOOLS = &sAgentAction_FORWARD_MCP_TOOLS
+
+var AgentSoftwareVersion = &sAgentSoftwareVersion
+var AgentSoftwareVersion_CURRENT_LATEST = &sAgentSoftwareVersion_CURRENT_LATEST
+var AgentSoftwareVersion_ALWAYS_LATEST = &sAgentSoftwareVersion_ALWAYS_LATEST
+
+var _AmiName = &s_AmiName
+
+var AppBlock = &sAppBlock
+var AppBlock_Name = &sAppBlock_Name
+var AppBlock_Arn = &sAppBlock_Arn
+var AppBlock_Description = &sAppBlock_Description
+var AppBlock_DisplayName = &sAppBlock_DisplayName
+var AppBlock_SourceS3Location = &sAppBlock_SourceS3Location
+var AppBlock_SetupScriptDetails = &sAppBlock_SetupScriptDetails
+var AppBlock_CreatedTime = &sAppBlock_CreatedTime
+var AppBlock_PostSetupScriptDetails = &sAppBlock_PostSetupScriptDetails
+var AppBlock_PackagingType = &sAppBlock_PackagingType
+var AppBlock_State = &sAppBlock_State
+var AppBlock_AppBlockErrors = &sAppBlock_AppBlockErrors
+
+var AppBlockBuilder = &sAppBlockBuilder
+var AppBlockBuilder_Arn = &sAppBlockBuilder_Arn
+var AppBlockBuilder_Name = &sAppBlockBuilder_Name
+var AppBlockBuilder_DisplayName = &sAppBlockBuilder_DisplayName
+var AppBlockBuilder_Description = &sAppBlockBuilder_Description
+var AppBlockBuilder_Platform = &sAppBlockBuilder_Platform
+var AppBlockBuilder_InstanceType = &sAppBlockBuilder_InstanceType
+var AppBlockBuilder_EnableDefaultInternetAccess = &sAppBlockBuilder_EnableDefaultInternetAccess
+var AppBlockBuilder_IamRoleArn = &sAppBlockBuilder_IamRoleArn
+var AppBlockBuilder_VpcConfig = &sAppBlockBuilder_VpcConfig
+var AppBlockBuilder_State = &sAppBlockBuilder_State
+var AppBlockBuilder_CreatedTime = &sAppBlockBuilder_CreatedTime
+var AppBlockBuilder_AppBlockBuilderErrors = &sAppBlockBuilder_AppBlockBuilderErrors
+var AppBlockBuilder_StateChangeReason = &sAppBlockBuilder_StateChangeReason
+var AppBlockBuilder_AccessEndpoints = &sAppBlockBuilder_AccessEndpoints
+var AppBlockBuilder_DisableIMDSV1 = &sAppBlockBuilder_DisableIMDSV1
+
+var AppBlockBuilderAppBlockAssociation = &sAppBlockBuilderAppBlockAssociation
+var AppBlockBuilderAppBlockAssociation_AppBlockArn = &sAppBlockBuilderAppBlockAssociation_AppBlockArn
+var AppBlockBuilderAppBlockAssociation_AppBlockBuilderName = &sAppBlockBuilderAppBlockAssociation_AppBlockBuilderName
+
+var _AppBlockBuilderAppBlockAssociationsList = &s_AppBlockBuilderAppBlockAssociationsList
+var _AppBlockBuilderAppBlockAssociationsList_member = &s_AppBlockBuilderAppBlockAssociationsList_member
+
+var AppBlockBuilderAttribute = &sAppBlockBuilderAttribute
+var AppBlockBuilderAttribute_IAM_ROLE_ARN = &sAppBlockBuilderAttribute_IAM_ROLE_ARN
+var AppBlockBuilderAttribute_ACCESS_ENDPOINTS = &sAppBlockBuilderAttribute_ACCESS_ENDPOINTS
+var AppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS = &sAppBlockBuilderAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS
+
+var _AppBlockBuilderAttributes = &s_AppBlockBuilderAttributes
+var _AppBlockBuilderAttributes_member = &s_AppBlockBuilderAttributes_member
+
+var _AppBlockBuilderList = &s_AppBlockBuilderList
+var _AppBlockBuilderList_member = &s_AppBlockBuilderList_member
+
+var AppBlockBuilderPlatformType = &sAppBlockBuilderPlatformType
+var AppBlockBuilderPlatformType_WINDOWS_SERVER_2019 = &sAppBlockBuilderPlatformType_WINDOWS_SERVER_2019
+
+var AppBlockBuilderState = &sAppBlockBuilderState
+var AppBlockBuilderState_STARTING = &sAppBlockBuilderState_STARTING
+var AppBlockBuilderState_RUNNING = &sAppBlockBuilderState_RUNNING
+var AppBlockBuilderState_STOPPING = &sAppBlockBuilderState_STOPPING
+var AppBlockBuilderState_STOPPED = &sAppBlockBuilderState_STOPPED
+
+var AppBlockBuilderStateChangeReason = &sAppBlockBuilderStateChangeReason
+var AppBlockBuilderStateChangeReason_Code = &sAppBlockBuilderStateChangeReason_Code
+var AppBlockBuilderStateChangeReason_Message = &sAppBlockBuilderStateChangeReason_Message
+
+var AppBlockBuilderStateChangeReasonCode = &sAppBlockBuilderStateChangeReasonCode
+var AppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR = &sAppBlockBuilderStateChangeReasonCode_INTERNAL_ERROR
+
+var _AppBlocks = &s_AppBlocks
+var _AppBlocks_member = &s_AppBlocks_member
+
+var AppBlockState = &sAppBlockState
+var AppBlockState_INACTIVE = &sAppBlockState_INACTIVE
+var AppBlockState_ACTIVE = &sAppBlockState_ACTIVE
+
+var _AppCatalogConfig = &s_AppCatalogConfig
+var _AppCatalogConfig_member = &s_AppCatalogConfig_member
+
+var _AppDisplayName = &s_AppDisplayName
+
+var Application = &sApplication
+var Application_Name = &sApplication_Name
+var Application_DisplayName = &sApplication_DisplayName
+var Application_IconURL = &sApplication_IconURL
+var Application_LaunchPath = &sApplication_LaunchPath
+var Application_LaunchParameters = &sApplication_LaunchParameters
+var Application_Enabled = &sApplication_Enabled
+var Application_Metadata = &sApplication_Metadata
+var Application_WorkingDirectory = &sApplication_WorkingDirectory
+var Application_Description = &sApplication_Description
+var Application_Arn = &sApplication_Arn
+var Application_AppBlockArn = &sApplication_AppBlockArn
+var Application_IconS3Location = &sApplication_IconS3Location
+var Application_Platforms = &sApplication_Platforms
+var Application_InstanceFamilies = &sApplication_InstanceFamilies
+var Application_CreatedTime = &sApplication_CreatedTime
+
+var ApplicationAttribute = &sApplicationAttribute
+var ApplicationAttribute_LAUNCH_PARAMETERS = &sApplicationAttribute_LAUNCH_PARAMETERS
+var ApplicationAttribute_WORKING_DIRECTORY = &sApplicationAttribute_WORKING_DIRECTORY
+
+var _ApplicationAttributes = &s_ApplicationAttributes
+var _ApplicationAttributes_member = &s_ApplicationAttributes_member
+
+var ApplicationConfig = &sApplicationConfig
+var ApplicationConfig_Name = &sApplicationConfig_Name
+var ApplicationConfig_DisplayName = &sApplicationConfig_DisplayName
+var ApplicationConfig_AbsoluteAppPath = &sApplicationConfig_AbsoluteAppPath
+var ApplicationConfig_AbsoluteIconPath = &sApplicationConfig_AbsoluteIconPath
+var ApplicationConfig_AbsoluteManifestPath = &sApplicationConfig_AbsoluteManifestPath
+var ApplicationConfig_WorkingDirectory = &sApplicationConfig_WorkingDirectory
+var ApplicationConfig_LaunchParameters = &sApplicationConfig_LaunchParameters
+
+var ApplicationFleetAssociation = &sApplicationFleetAssociation
+var ApplicationFleetAssociation_FleetName = &sApplicationFleetAssociation_FleetName
+var ApplicationFleetAssociation_ApplicationArn = &sApplicationFleetAssociation_ApplicationArn
+
+var _ApplicationFleetAssociationList = &s_ApplicationFleetAssociationList
+var _ApplicationFleetAssociationList_member = &s_ApplicationFleetAssociationList_member
+
+var _Applications = &s_Applications
+var _Applications_member = &s_Applications_member
+
+var ApplicationSettings = &sApplicationSettings
+var ApplicationSettings_Enabled = &sApplicationSettings_Enabled
+var ApplicationSettings_SettingsGroup = &sApplicationSettings_SettingsGroup
+
+var ApplicationSettingsResponse = &sApplicationSettingsResponse
+var ApplicationSettingsResponse_Enabled = &sApplicationSettingsResponse_Enabled
+var ApplicationSettingsResponse_SettingsGroup = &sApplicationSettingsResponse_SettingsGroup
+var ApplicationSettingsResponse_S3BucketName = &sApplicationSettingsResponse_S3BucketName
+
+var _AppName = &s_AppName
+
+var _AppstreamAgentVersion = &s_AppstreamAgentVersion
+
+var AppVisibility = &sAppVisibility
+var AppVisibility_ALL = &sAppVisibility_ALL
+var AppVisibility_ASSOCIATED = &sAppVisibility_ASSOCIATED
+
+var _Arn = &s_Arn
+
+var _ArnList = &s_ArnList
+var _ArnList_member = &s_ArnList_member
+
+var AuthenticationType = &sAuthenticationType
+var AuthenticationType_API = &sAuthenticationType_API
+var AuthenticationType_SAML = &sAuthenticationType_SAML
+var AuthenticationType_USERPOOL = &sAuthenticationType_USERPOOL
+var AuthenticationType_AWS_AD = &sAuthenticationType_AWS_AD
+
+var _AwsAccountId = &s_AwsAccountId
+
+var _AwsAccountIdList = &s_AwsAccountIdList
+var _AwsAccountIdList_member = &s_AwsAccountIdList_member
+
+var _Boolean = &s_Boolean
+
+var _BooleanObject = &s_BooleanObject
+
+var CertificateBasedAuthProperties = &sCertificateBasedAuthProperties
+var CertificateBasedAuthProperties_Status = &sCertificateBasedAuthProperties_Status
+var CertificateBasedAuthProperties_CertificateAuthorityArn = &sCertificateBasedAuthProperties_CertificateAuthorityArn
+
+var CertificateBasedAuthStatus = &sCertificateBasedAuthStatus
+var CertificateBasedAuthStatus_DISABLED = &sCertificateBasedAuthStatus_DISABLED
+var CertificateBasedAuthStatus_ENABLED = &sCertificateBasedAuthStatus_ENABLED
+var CertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK = &sCertificateBasedAuthStatus_ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
+
+var ComputeCapacity = &sComputeCapacity
+var ComputeCapacity_DesiredInstances = &sComputeCapacity_DesiredInstances
+var ComputeCapacity_DesiredSessions = &sComputeCapacity_DesiredSessions
+
+var ComputeCapacityStatus = &sComputeCapacityStatus
+var ComputeCapacityStatus_Desired = &sComputeCapacityStatus_Desired
+var ComputeCapacityStatus_Running = &sComputeCapacityStatus_Running
+var ComputeCapacityStatus_InUse = &sComputeCapacityStatus_InUse
+var ComputeCapacityStatus_Available = &sComputeCapacityStatus_Available
+var ComputeCapacityStatus_DesiredUserSessions = &sComputeCapacityStatus_DesiredUserSessions
+var ComputeCapacityStatus_AvailableUserSessions = &sComputeCapacityStatus_AvailableUserSessions
+var ComputeCapacityStatus_ActiveUserSessions = &sComputeCapacityStatus_ActiveUserSessions
+var ComputeCapacityStatus_ActualUserSessions = &sComputeCapacityStatus_ActualUserSessions
+var ComputeCapacityStatus_Draining = &sComputeCapacityStatus_Draining
+var ComputeCapacityStatus_DrainModeActiveUserSessions = &sComputeCapacityStatus_DrainModeActiveUserSessions
+var ComputeCapacityStatus_DrainModeUnusedUserSessions = &sComputeCapacityStatus_DrainModeUnusedUserSessions
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ContentRedirection = &sContentRedirection
+var ContentRedirection_HostToClient = &sContentRedirection_HostToClient
+
+var _DescribeImagesMaxResults = &s_DescribeImagesMaxResults
+
+var _Description = &s_Description
+
+var DirectoryConfig = &sDirectoryConfig
+var DirectoryConfig_DirectoryName = &sDirectoryConfig_DirectoryName
+var DirectoryConfig_OrganizationalUnitDistinguishedNames = &sDirectoryConfig_OrganizationalUnitDistinguishedNames
+var DirectoryConfig_ServiceAccountCredentials = &sDirectoryConfig_ServiceAccountCredentials
+var DirectoryConfig_CreatedTime = &sDirectoryConfig_CreatedTime
+var DirectoryConfig_CertificateBasedAuthProperties = &sDirectoryConfig_CertificateBasedAuthProperties
+
+var _DirectoryConfigList = &s_DirectoryConfigList
+var _DirectoryConfigList_member = &s_DirectoryConfigList_member
+
+var _DirectoryName = &s_DirectoryName
+
+var _DirectoryNameList = &s_DirectoryNameList
+var _DirectoryNameList_member = &s_DirectoryNameList_member
+
+var _DisplayName = &s_DisplayName
+
+var _Domain = &s_Domain
+
+var DomainJoinInfo = &sDomainJoinInfo
+var DomainJoinInfo_DirectoryName = &sDomainJoinInfo_DirectoryName
+var DomainJoinInfo_OrganizationalUnitDistinguishedName = &sDomainJoinInfo_OrganizationalUnitDistinguishedName
+
+var _DomainList = &s_DomainList
+var _DomainList_member = &s_DomainList_member
+
+var DryRunOperationException = &sDryRunOperationException
+var DryRunOperationException_Message = &sDryRunOperationException_Message
+
+var DynamicAppProvidersEnabled = &sDynamicAppProvidersEnabled
+var DynamicAppProvidersEnabled_ENABLED = &sDynamicAppProvidersEnabled_ENABLED
+var DynamicAppProvidersEnabled_DISABLED = &sDynamicAppProvidersEnabled_DISABLED
+
+var _EmbedHostDomain = &s_EmbedHostDomain
+
+var _EmbedHostDomains = &s_EmbedHostDomains
+var _EmbedHostDomains_member = &s_EmbedHostDomains_member
+
+var EntitledApplication = &sEntitledApplication
+var EntitledApplication_ApplicationIdentifier = &sEntitledApplication_ApplicationIdentifier
+
+var _EntitledApplicationList = &s_EntitledApplicationList
+var _EntitledApplicationList_member = &s_EntitledApplicationList_member
+
+var Entitlement = &sEntitlement
+var Entitlement_Name = &sEntitlement_Name
+var Entitlement_StackName = &sEntitlement_StackName
+var Entitlement_Description = &sEntitlement_Description
+var Entitlement_AppVisibility = &sEntitlement_AppVisibility
+var Entitlement_Attributes = &sEntitlement_Attributes
+var Entitlement_CreatedTime = &sEntitlement_CreatedTime
+var Entitlement_LastModifiedTime = &sEntitlement_LastModifiedTime
+
+var EntitlementAlreadyExistsException = &sEntitlementAlreadyExistsException
+var EntitlementAlreadyExistsException_Message = &sEntitlementAlreadyExistsException_Message
+
+var EntitlementAttribute = &sEntitlementAttribute
+var EntitlementAttribute_Name = &sEntitlementAttribute_Name
+var EntitlementAttribute_Value = &sEntitlementAttribute_Value
+
+var _EntitlementAttributeList = &s_EntitlementAttributeList
+var _EntitlementAttributeList_member = &s_EntitlementAttributeList_member
+
+var _EntitlementList = &s_EntitlementList
+var _EntitlementList_member = &s_EntitlementList_member
+
+var EntitlementNotFoundException = &sEntitlementNotFoundException
+var EntitlementNotFoundException_Message = &sEntitlementNotFoundException_Message
+
+var ErrorDetails = &sErrorDetails
+var ErrorDetails_ErrorCode = &sErrorDetails_ErrorCode
+var ErrorDetails_ErrorMessage = &sErrorDetails_ErrorMessage
+
+var _ErrorDetailsList = &s_ErrorDetailsList
+var _ErrorDetailsList_member = &s_ErrorDetailsList_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var ExportImageTask = &sExportImageTask
+var ExportImageTask_TaskId = &sExportImageTask_TaskId
+var ExportImageTask_ImageArn = &sExportImageTask_ImageArn
+var ExportImageTask_AmiName = &sExportImageTask_AmiName
+var ExportImageTask_CreatedDate = &sExportImageTask_CreatedDate
+var ExportImageTask_AmiDescription = &sExportImageTask_AmiDescription
+var ExportImageTask_State = &sExportImageTask_State
+var ExportImageTask_AmiId = &sExportImageTask_AmiId
+var ExportImageTask_TagSpecifications = &sExportImageTask_TagSpecifications
+var ExportImageTask_ErrorDetails = &sExportImageTask_ErrorDetails
+
+var _ExportImageTasks = &s_ExportImageTasks
+var _ExportImageTasks_member = &s_ExportImageTasks_member
+
+var ExportImageTaskState = &sExportImageTaskState
+var ExportImageTaskState_EXPORTING = &sExportImageTaskState_EXPORTING
+var ExportImageTaskState_COMPLETED = &sExportImageTaskState_COMPLETED
+var ExportImageTaskState_FAILED = &sExportImageTaskState_FAILED
+var ExportImageTaskState_TIMED_OUT = &sExportImageTaskState_TIMED_OUT
+
+var _FeedbackURL = &s_FeedbackURL
+
+var _FilePath = &s_FilePath
+
+var Filter = &sFilter
+var Filter_Name = &sFilter_Name
+var Filter_Values = &sFilter_Values
+
+var _FilterName = &s_FilterName
+
+var _Filters = &s_Filters
+var _Filters_member = &s_Filters_member
+
+var _FilterValue = &s_FilterValue
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var Fleet = &sFleet
+var Fleet_Arn = &sFleet_Arn
+var Fleet_Name = &sFleet_Name
+var Fleet_DisplayName = &sFleet_DisplayName
+var Fleet_Description = &sFleet_Description
+var Fleet_ImageName = &sFleet_ImageName
+var Fleet_ImageArn = &sFleet_ImageArn
+var Fleet_InstanceType = &sFleet_InstanceType
+var Fleet_FleetType = &sFleet_FleetType
+var Fleet_ComputeCapacityStatus = &sFleet_ComputeCapacityStatus
+var Fleet_MaxUserDurationInSeconds = &sFleet_MaxUserDurationInSeconds
+var Fleet_DisconnectTimeoutInSeconds = &sFleet_DisconnectTimeoutInSeconds
+var Fleet_State = &sFleet_State
+var Fleet_VpcConfig = &sFleet_VpcConfig
+var Fleet_CreatedTime = &sFleet_CreatedTime
+var Fleet_FleetErrors = &sFleet_FleetErrors
+var Fleet_EnableDefaultInternetAccess = &sFleet_EnableDefaultInternetAccess
+var Fleet_DomainJoinInfo = &sFleet_DomainJoinInfo
+var Fleet_IdleDisconnectTimeoutInSeconds = &sFleet_IdleDisconnectTimeoutInSeconds
+var Fleet_IamRoleArn = &sFleet_IamRoleArn
+var Fleet_StreamView = &sFleet_StreamView
+var Fleet_Platform = &sFleet_Platform
+var Fleet_MaxConcurrentSessions = &sFleet_MaxConcurrentSessions
+var Fleet_UsbDeviceFilterStrings = &sFleet_UsbDeviceFilterStrings
+var Fleet_SessionScriptS3Location = &sFleet_SessionScriptS3Location
+var Fleet_MaxSessionsPerInstance = &sFleet_MaxSessionsPerInstance
+var Fleet_RootVolumeConfig = &sFleet_RootVolumeConfig
+var Fleet_DisableIMDSV1 = &sFleet_DisableIMDSV1
+
+var FleetAttribute = &sFleetAttribute
+var FleetAttribute_VPC_CONFIGURATION = &sFleetAttribute_VPC_CONFIGURATION
+var FleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS = &sFleetAttribute_VPC_CONFIGURATION_SECURITY_GROUP_IDS
+var FleetAttribute_DOMAIN_JOIN_INFO = &sFleetAttribute_DOMAIN_JOIN_INFO
+var FleetAttribute_IAM_ROLE_ARN = &sFleetAttribute_IAM_ROLE_ARN
+var FleetAttribute_USB_DEVICE_FILTER_STRINGS = &sFleetAttribute_USB_DEVICE_FILTER_STRINGS
+var FleetAttribute_SESSION_SCRIPT_S3_LOCATION = &sFleetAttribute_SESSION_SCRIPT_S3_LOCATION
+var FleetAttribute_MAX_SESSIONS_PER_INSTANCE = &sFleetAttribute_MAX_SESSIONS_PER_INSTANCE
+var FleetAttribute_VOLUME_CONFIGURATION = &sFleetAttribute_VOLUME_CONFIGURATION
+
+var _FleetAttributes = &s_FleetAttributes
+var _FleetAttributes_member = &s_FleetAttributes_member
+
+var FleetError = &sFleetError
+var FleetError_ErrorCode = &sFleetError_ErrorCode
+var FleetError_ErrorMessage = &sFleetError_ErrorMessage
+
+var FleetErrorCode = &sFleetErrorCode
+var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION = &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION
+var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION = &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION
+var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION = &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION
+var FleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED = &sFleetErrorCode_NETWORK_INTERFACE_LIMIT_EXCEEDED
+var FleetErrorCode_INTERNAL_SERVICE_ERROR = &sFleetErrorCode_INTERNAL_SERVICE_ERROR
+var FleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING = &sFleetErrorCode_IAM_SERVICE_ROLE_IS_MISSING
+var FleetErrorCode_MACHINE_ROLE_IS_MISSING = &sFleetErrorCode_MACHINE_ROLE_IS_MISSING
+var FleetErrorCode_STS_DISABLED_IN_REGION = &sFleetErrorCode_STS_DISABLED_IN_REGION
+var FleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES = &sFleetErrorCode_SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES
+var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION = &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION
+var FleetErrorCode_SUBNET_NOT_FOUND = &sFleetErrorCode_SUBNET_NOT_FOUND
+var FleetErrorCode_IMAGE_NOT_FOUND = &sFleetErrorCode_IMAGE_NOT_FOUND
+var FleetErrorCode_INVALID_SUBNET_CONFIGURATION = &sFleetErrorCode_INVALID_SUBNET_CONFIGURATION
+var FleetErrorCode_SECURITY_GROUPS_NOT_FOUND = &sFleetErrorCode_SECURITY_GROUPS_NOT_FOUND
+var FleetErrorCode_IGW_NOT_ATTACHED = &sFleetErrorCode_IGW_NOT_ATTACHED
+var FleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION = &sFleetErrorCode_IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION
+var FleetErrorCode_FLEET_STOPPED = &sFleetErrorCode_FLEET_STOPPED
+var FleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE = &sFleetErrorCode_FLEET_INSTANCE_PROVISIONING_FAILURE
+var FleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND = &sFleetErrorCode_DOMAIN_JOIN_ERROR_FILE_NOT_FOUND
+var FleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED = &sFleetErrorCode_DOMAIN_JOIN_ERROR_ACCESS_DENIED
+var FleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE = &sFleetErrorCode_DOMAIN_JOIN_ERROR_LOGON_FAILURE
+var FleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER = &sFleetErrorCode_DOMAIN_JOIN_ERROR_INVALID_PARAMETER
+var FleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA = &sFleetErrorCode_DOMAIN_JOIN_ERROR_MORE_DATA
+var FleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN = &sFleetErrorCode_DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN
+var FleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED = &sFleetErrorCode_DOMAIN_JOIN_ERROR_NOT_SUPPORTED
+var FleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME = &sFleetErrorCode_DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME
+var FleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED = &sFleetErrorCode_DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED
+var FleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED = &sFleetErrorCode_DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED
+var FleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED = &sFleetErrorCode_DOMAIN_JOIN_NERR_PASSWORD_EXPIRED
+var FleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR = &sFleetErrorCode_DOMAIN_JOIN_INTERNAL_SERVICE_ERROR
+var FleetErrorCode_VALIDATION_ERROR = &sFleetErrorCode_VALIDATION_ERROR
+
+var _FleetErrors = &s_FleetErrors
+var _FleetErrors_member = &s_FleetErrors_member
+
+var _FleetList = &s_FleetList
+var _FleetList_member = &s_FleetList_member
+
+var FleetState = &sFleetState
+var FleetState_STARTING = &sFleetState_STARTING
+var FleetState_RUNNING = &sFleetState_RUNNING
+var FleetState_STOPPING = &sFleetState_STOPPING
+var FleetState_STOPPED = &sFleetState_STOPPED
+
+var FleetType = &sFleetType
+var FleetType_ALWAYS_ON = &sFleetType_ALWAYS_ON
+var FleetType_ON_DEMAND = &sFleetType_ON_DEMAND
+var FleetType_ELASTIC = &sFleetType_ELASTIC
+
+var Image = &sImage
+var Image_Name = &sImage_Name
+var Image_Arn = &sImage_Arn
+var Image_BaseImageArn = &sImage_BaseImageArn
+var Image_DisplayName = &sImage_DisplayName
+var Image_State = &sImage_State
+var Image_Visibility = &sImage_Visibility
+var Image_ImageBuilderSupported = &sImage_ImageBuilderSupported
+var Image_ImageBuilderName = &sImage_ImageBuilderName
+var Image_Platform = &sImage_Platform
+var Image_Description = &sImage_Description
+var Image_StateChangeReason = &sImage_StateChangeReason
+var Image_Applications = &sImage_Applications
+var Image_CreatedTime = &sImage_CreatedTime
+var Image_PublicBaseImageReleasedDate = &sImage_PublicBaseImageReleasedDate
+var Image_AppstreamAgentVersion = &sImage_AppstreamAgentVersion
+var Image_ImagePermissions = &sImage_ImagePermissions
+var Image_ImageErrors = &sImage_ImageErrors
+var Image_LatestAppstreamAgentVersion = &sImage_LatestAppstreamAgentVersion
+var Image_SupportedInstanceFamilies = &sImage_SupportedInstanceFamilies
+var Image_DynamicAppProvidersEnabled = &sImage_DynamicAppProvidersEnabled
+var Image_ImageSharedWithOthers = &sImage_ImageSharedWithOthers
+var Image_ManagedSoftwareIncluded = &sImage_ManagedSoftwareIncluded
+var Image_ImageType = &sImage_ImageType
+var Image_ImageSoftwareMetadata = &sImage_ImageSoftwareMetadata
+
+var ImageBuilder = &sImageBuilder
+var ImageBuilder_Name = &sImageBuilder_Name
+var ImageBuilder_Arn = &sImageBuilder_Arn
+var ImageBuilder_ImageArn = &sImageBuilder_ImageArn
+var ImageBuilder_Description = &sImageBuilder_Description
+var ImageBuilder_DisplayName = &sImageBuilder_DisplayName
+var ImageBuilder_VpcConfig = &sImageBuilder_VpcConfig
+var ImageBuilder_InstanceType = &sImageBuilder_InstanceType
+var ImageBuilder_Platform = &sImageBuilder_Platform
+var ImageBuilder_IamRoleArn = &sImageBuilder_IamRoleArn
+var ImageBuilder_State = &sImageBuilder_State
+var ImageBuilder_StateChangeReason = &sImageBuilder_StateChangeReason
+var ImageBuilder_CreatedTime = &sImageBuilder_CreatedTime
+var ImageBuilder_EnableDefaultInternetAccess = &sImageBuilder_EnableDefaultInternetAccess
+var ImageBuilder_DomainJoinInfo = &sImageBuilder_DomainJoinInfo
+var ImageBuilder_NetworkAccessConfiguration = &sImageBuilder_NetworkAccessConfiguration
+var ImageBuilder_ImageBuilderErrors = &sImageBuilder_ImageBuilderErrors
+var ImageBuilder_AppstreamAgentVersion = &sImageBuilder_AppstreamAgentVersion
+var ImageBuilder_AccessEndpoints = &sImageBuilder_AccessEndpoints
+var ImageBuilder_RootVolumeConfig = &sImageBuilder_RootVolumeConfig
+var ImageBuilder_LatestAppstreamAgentVersion = &sImageBuilder_LatestAppstreamAgentVersion
+var ImageBuilder_DisableIMDSV1 = &sImageBuilder_DisableIMDSV1
+
+var _ImageBuilderList = &s_ImageBuilderList
+var _ImageBuilderList_member = &s_ImageBuilderList_member
+
+var ImageBuilderState = &sImageBuilderState
+var ImageBuilderState_PENDING = &sImageBuilderState_PENDING
+var ImageBuilderState_UPDATING_AGENT = &sImageBuilderState_UPDATING_AGENT
+var ImageBuilderState_RUNNING = &sImageBuilderState_RUNNING
+var ImageBuilderState_STOPPING = &sImageBuilderState_STOPPING
+var ImageBuilderState_STOPPED = &sImageBuilderState_STOPPED
+var ImageBuilderState_REBOOTING = &sImageBuilderState_REBOOTING
+var ImageBuilderState_SNAPSHOTTING = &sImageBuilderState_SNAPSHOTTING
+var ImageBuilderState_DELETING = &sImageBuilderState_DELETING
+var ImageBuilderState_FAILED = &sImageBuilderState_FAILED
+var ImageBuilderState_UPDATING = &sImageBuilderState_UPDATING
+var ImageBuilderState_PENDING_QUALIFICATION = &sImageBuilderState_PENDING_QUALIFICATION
+var ImageBuilderState_PENDING_SYNCING_APPS = &sImageBuilderState_PENDING_SYNCING_APPS
+var ImageBuilderState_SYNCING_APPS = &sImageBuilderState_SYNCING_APPS
+var ImageBuilderState_PENDING_IMAGE_IMPORT = &sImageBuilderState_PENDING_IMAGE_IMPORT
+
+var ImageBuilderStateChangeReason = &sImageBuilderStateChangeReason
+var ImageBuilderStateChangeReason_Code = &sImageBuilderStateChangeReason_Code
+var ImageBuilderStateChangeReason_Message = &sImageBuilderStateChangeReason_Message
+
+var ImageBuilderStateChangeReasonCode = &sImageBuilderStateChangeReasonCode
+var ImageBuilderStateChangeReasonCode_INTERNAL_ERROR = &sImageBuilderStateChangeReasonCode_INTERNAL_ERROR
+var ImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE = &sImageBuilderStateChangeReasonCode_IMAGE_UNAVAILABLE
+
+var _ImageImportDescription = &s_ImageImportDescription
+
+var _ImageImportDisplayName = &s_ImageImportDisplayName
+
+var _ImageList = &s_ImageList
+var _ImageList_member = &s_ImageList_member
+
+var ImagePermissions = &sImagePermissions
+var ImagePermissions_allowFleet = &sImagePermissions_allowFleet
+var ImagePermissions_allowImageBuilder = &sImagePermissions_allowImageBuilder
+
+var ImageSharedWithOthers = &sImageSharedWithOthers
+var ImageSharedWithOthers_TRUE = &sImageSharedWithOthers_TRUE
+var ImageSharedWithOthers_FALSE = &sImageSharedWithOthers_FALSE
+
+var ImageSoftwareMetadata = &sImageSoftwareMetadata
+var ImageSoftwareMetadata_nvidiaGridDriverVersion = &sImageSoftwareMetadata_nvidiaGridDriverVersion
+
+var ImageState = &sImageState
+var ImageState_PENDING = &sImageState_PENDING
+var ImageState_AVAILABLE = &sImageState_AVAILABLE
+var ImageState_FAILED = &sImageState_FAILED
+var ImageState_COPYING = &sImageState_COPYING
+var ImageState_DELETING = &sImageState_DELETING
+var ImageState_CREATING = &sImageState_CREATING
+var ImageState_IMPORTING = &sImageState_IMPORTING
+var ImageState_VALIDATING = &sImageState_VALIDATING
+
+var ImageStateChangeReason = &sImageStateChangeReason
+var ImageStateChangeReason_Code = &sImageStateChangeReason_Code
+var ImageStateChangeReason_Message = &sImageStateChangeReason_Message
+
+var ImageStateChangeReasonCode = &sImageStateChangeReasonCode
+var ImageStateChangeReasonCode_INTERNAL_ERROR = &sImageStateChangeReasonCode_INTERNAL_ERROR
+var ImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE = &sImageStateChangeReasonCode_IMAGE_BUILDER_NOT_AVAILABLE
+var ImageStateChangeReasonCode_IMAGE_COPY_FAILURE = &sImageStateChangeReasonCode_IMAGE_COPY_FAILURE
+var ImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE = &sImageStateChangeReasonCode_IMAGE_UPDATE_FAILURE
+var ImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE = &sImageStateChangeReasonCode_IMAGE_IMPORT_FAILURE
+
+var ImageType = &sImageType
+var ImageType_CUSTOM = &sImageType_CUSTOM
+var ImageType_NATIVE = &sImageType_NATIVE
+var ImageType_BYOL = &sImageType_BYOL
+
+var IncompatibleImageException = &sIncompatibleImageException
+var IncompatibleImageException_Message = &sIncompatibleImageException_Message
+
+var InstanceDrainStatus = &sInstanceDrainStatus
+var InstanceDrainStatus_ACTIVE = &sInstanceDrainStatus_ACTIVE
+var InstanceDrainStatus_DRAINING = &sInstanceDrainStatus_DRAINING
+var InstanceDrainStatus_NOT_APPLICABLE = &sInstanceDrainStatus_NOT_APPLICABLE
+
+var _InstanceType = &s_InstanceType
+
+var _Integer = &s_Integer
+
+var InvalidAccountStatusException = &sInvalidAccountStatusException
+var InvalidAccountStatusException_Message = &sInvalidAccountStatusException_Message
+
+var InvalidParameterCombinationException = &sInvalidParameterCombinationException
+var InvalidParameterCombinationException_Message = &sInvalidParameterCombinationException_Message
+
+var InvalidRoleException = &sInvalidRoleException
+var InvalidRoleException_Message = &sInvalidRoleException_Message
+
+var LastReportGenerationExecutionError = &sLastReportGenerationExecutionError
+var LastReportGenerationExecutionError_ErrorCode = &sLastReportGenerationExecutionError_ErrorCode
+var LastReportGenerationExecutionError_ErrorMessage = &sLastReportGenerationExecutionError_ErrorMessage
+
+var _LastReportGenerationExecutionErrors = &s_LastReportGenerationExecutionErrors
+var _LastReportGenerationExecutionErrors_member = &s_LastReportGenerationExecutionErrors_member
+
+var LatestAppstreamAgentVersion = &sLatestAppstreamAgentVersion
+var LatestAppstreamAgentVersion_TRUE = &sLatestAppstreamAgentVersion_TRUE
+var LatestAppstreamAgentVersion_FALSE = &sLatestAppstreamAgentVersion_FALSE
+
+var _LaunchParameters = &s_LaunchParameters
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var _Long = &s_Long
+
+var _MaxResults = &s_MaxResults
+
+var MessageAction = &sMessageAction
+var MessageAction_SUPPRESS = &sMessageAction_SUPPRESS
+var MessageAction_RESEND = &sMessageAction_RESEND
+
+var _Metadata = &s_Metadata
+var _Metadata_key = &s_Metadata_key
+var _Metadata_value = &s_Metadata_value
+
+var _Name = &s_Name
+
+var NetworkAccessConfiguration = &sNetworkAccessConfiguration
+var NetworkAccessConfiguration_EniPrivateIpAddress = &sNetworkAccessConfiguration_EniPrivateIpAddress
+var NetworkAccessConfiguration_EniIpv6Addresses = &sNetworkAccessConfiguration_EniIpv6Addresses
+var NetworkAccessConfiguration_EniId = &sNetworkAccessConfiguration_EniId
+
+var _NvidiaGridDriverVersion = &s_NvidiaGridDriverVersion
+
+var OperationNotPermittedException = &sOperationNotPermittedException
+var OperationNotPermittedException_Message = &sOperationNotPermittedException_Message
+
+var _OrganizationalUnitDistinguishedName = &s_OrganizationalUnitDistinguishedName
+
+var _OrganizationalUnitDistinguishedNamesList = &s_OrganizationalUnitDistinguishedNamesList
+var _OrganizationalUnitDistinguishedNamesList_member = &s_OrganizationalUnitDistinguishedNamesList_member
+
+var PackagingType = &sPackagingType
+var PackagingType_CUSTOM = &sPackagingType_CUSTOM
+var PackagingType_APPSTREAM2 = &sPackagingType_APPSTREAM2
+
+var Permission = &sPermission
+var Permission_ENABLED = &sPermission_ENABLED
+var Permission_DISABLED = &sPermission_DISABLED
+
+var _PhotonAmiId = &s_PhotonAmiId
+
+var _Platforms = &s_Platforms
+var _Platforms_member = &s_Platforms_member
+
+var PlatformType = &sPlatformType
+var PlatformType_WINDOWS = &sPlatformType_WINDOWS
+var PlatformType_WINDOWS_SERVER_2016 = &sPlatformType_WINDOWS_SERVER_2016
+var PlatformType_WINDOWS_SERVER_2019 = &sPlatformType_WINDOWS_SERVER_2019
+var PlatformType_WINDOWS_SERVER_2022 = &sPlatformType_WINDOWS_SERVER_2022
+var PlatformType_WINDOWS_SERVER_2025 = &sPlatformType_WINDOWS_SERVER_2025
+var PlatformType_WINDOWS_11 = &sPlatformType_WINDOWS_11
+var PlatformType_AMAZON_LINUX2 = &sPlatformType_AMAZON_LINUX2
+var PlatformType_RHEL8 = &sPlatformType_RHEL8
+var PlatformType_ROCKY_LINUX8 = &sPlatformType_ROCKY_LINUX8
+var PlatformType_UBUNTU_PRO_2404 = &sPlatformType_UBUNTU_PRO_2404
+
+var PreferredProtocol = &sPreferredProtocol
+var PreferredProtocol_TCP = &sPreferredProtocol_TCP
+var PreferredProtocol_UDP = &sPreferredProtocol_UDP
+
+var _RedirectURL = &s_RedirectURL
+
+var _RegionName = &s_RegionName
+
+var RequestLimitExceededException = &sRequestLimitExceededException
+var RequestLimitExceededException_Message = &sRequestLimitExceededException_Message
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_Message = &sResourceAlreadyExistsException_Message
+
+var ResourceError = &sResourceError
+var ResourceError_ErrorCode = &sResourceError_ErrorCode
+var ResourceError_ErrorMessage = &sResourceError_ErrorMessage
+var ResourceError_ErrorTimestamp = &sResourceError_ErrorTimestamp
+
+var _ResourceErrors = &s_ResourceErrors
+var _ResourceErrors_member = &s_ResourceErrors_member
+
+var _ResourceIdentifier = &s_ResourceIdentifier
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_Message = &sResourceInUseException_Message
+
+var ResourceNotAvailableException = &sResourceNotAvailableException
+var ResourceNotAvailableException_Message = &sResourceNotAvailableException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var RuntimeValidationConfig = &sRuntimeValidationConfig
+var RuntimeValidationConfig_IntendedInstanceType = &sRuntimeValidationConfig_IntendedInstanceType
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3BucketArn = &s_S3BucketArn
+
+var _S3Key = &s_S3Key
+
+var S3Location = &sS3Location
+var S3Location_S3Bucket = &sS3Location_S3Bucket
+var S3Location_S3Key = &sS3Location_S3Key
+
+var ScreenImageFormat = &sScreenImageFormat
+var ScreenImageFormat_PNG = &sScreenImageFormat_PNG
+var ScreenImageFormat_JPEG = &sScreenImageFormat_JPEG
+
+var ScreenResolution = &sScreenResolution
+var ScreenResolution_W_1280xH_720 = &sScreenResolution_W_1280xH_720
+
+var ScriptDetails = &sScriptDetails
+var ScriptDetails_ScriptS3Location = &sScriptDetails_ScriptS3Location
+var ScriptDetails_ExecutablePath = &sScriptDetails_ExecutablePath
+var ScriptDetails_ExecutableParameters = &sScriptDetails_ExecutableParameters
+var ScriptDetails_TimeoutInSeconds = &sScriptDetails_TimeoutInSeconds
+
+var _SecurityGroupIdList = &s_SecurityGroupIdList
+var _SecurityGroupIdList_member = &s_SecurityGroupIdList_member
+
+var ServiceAccountCredentials = &sServiceAccountCredentials
+var ServiceAccountCredentials_AccountName = &sServiceAccountCredentials_AccountName
+var ServiceAccountCredentials_AccountPassword = &sServiceAccountCredentials_AccountPassword
+
+var Session = &sSession
+var Session_Id = &sSession_Id
+var Session_UserId = &sSession_UserId
+var Session_StackName = &sSession_StackName
+var Session_FleetName = &sSession_FleetName
+var Session_State = &sSession_State
+var Session_ConnectionState = &sSession_ConnectionState
+var Session_StartTime = &sSession_StartTime
+var Session_MaxExpirationTime = &sSession_MaxExpirationTime
+var Session_AuthenticationType = &sSession_AuthenticationType
+var Session_NetworkAccessConfiguration = &sSession_NetworkAccessConfiguration
+var Session_InstanceId = &sSession_InstanceId
+var Session_InstanceDrainStatus = &sSession_InstanceDrainStatus
+
+var SessionConnectionState = &sSessionConnectionState
+var SessionConnectionState_CONNECTED = &sSessionConnectionState_CONNECTED
+var SessionConnectionState_NOT_CONNECTED = &sSessionConnectionState_NOT_CONNECTED
+
+var _SessionList = &s_SessionList
+var _SessionList_member = &s_SessionList_member
+
+var SessionState = &sSessionState
+var SessionState_ACTIVE = &sSessionState_ACTIVE
+var SessionState_PENDING = &sSessionState_PENDING
+var SessionState_EXPIRED = &sSessionState_EXPIRED
+
+var _SettingsGroup = &s_SettingsGroup
+
+var SharedImagePermissions = &sSharedImagePermissions
+var SharedImagePermissions_sharedAccountId = &sSharedImagePermissions_sharedAccountId
+var SharedImagePermissions_imagePermissions = &sSharedImagePermissions_imagePermissions
+
+var _SharedImagePermissionsList = &s_SharedImagePermissionsList
+var _SharedImagePermissionsList_member = &s_SharedImagePermissionsList_member
+
+var SoftwareAssociations = &sSoftwareAssociations
+var SoftwareAssociations_SoftwareName = &sSoftwareAssociations_SoftwareName
+var SoftwareAssociations_Status = &sSoftwareAssociations_Status
+var SoftwareAssociations_DeploymentError = &sSoftwareAssociations_DeploymentError
+
+var _SoftwareAssociationsList = &s_SoftwareAssociationsList
+var _SoftwareAssociationsList_member = &s_SoftwareAssociationsList_member
+
+var SoftwareDeploymentStatus = &sSoftwareDeploymentStatus
+var SoftwareDeploymentStatus_STAGED_FOR_INSTALLATION = &sSoftwareDeploymentStatus_STAGED_FOR_INSTALLATION
+var SoftwareDeploymentStatus_PENDING_INSTALLATION = &sSoftwareDeploymentStatus_PENDING_INSTALLATION
+var SoftwareDeploymentStatus_INSTALLED = &sSoftwareDeploymentStatus_INSTALLED
+var SoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION = &sSoftwareDeploymentStatus_STAGED_FOR_UNINSTALLATION
+var SoftwareDeploymentStatus_PENDING_UNINSTALLATION = &sSoftwareDeploymentStatus_PENDING_UNINSTALLATION
+var SoftwareDeploymentStatus_FAILED_TO_INSTALL = &sSoftwareDeploymentStatus_FAILED_TO_INSTALL
+var SoftwareDeploymentStatus_FAILED_TO_UNINSTALL = &sSoftwareDeploymentStatus_FAILED_TO_UNINSTALL
+
+var Stack = &sStack
+var Stack_Arn = &sStack_Arn
+var Stack_Name = &sStack_Name
+var Stack_Description = &sStack_Description
+var Stack_DisplayName = &sStack_DisplayName
+var Stack_CreatedTime = &sStack_CreatedTime
+var Stack_StorageConnectors = &sStack_StorageConnectors
+var Stack_RedirectURL = &sStack_RedirectURL
+var Stack_FeedbackURL = &sStack_FeedbackURL
+var Stack_StackErrors = &sStack_StackErrors
+var Stack_UserSettings = &sStack_UserSettings
+var Stack_ApplicationSettings = &sStack_ApplicationSettings
+var Stack_AccessEndpoints = &sStack_AccessEndpoints
+var Stack_EmbedHostDomains = &sStack_EmbedHostDomains
+var Stack_StreamingExperienceSettings = &sStack_StreamingExperienceSettings
+var Stack_ContentRedirection = &sStack_ContentRedirection
+var Stack_AgentAccessConfig = &sStack_AgentAccessConfig
+var Stack_StorageConnectorAuthentication = &sStack_StorageConnectorAuthentication
+
+var StackAttribute = &sStackAttribute
+var StackAttribute_STORAGE_CONNECTORS = &sStackAttribute_STORAGE_CONNECTORS
+var StackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS = &sStackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS
+var StackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE = &sStackAttribute_STORAGE_CONNECTOR_GOOGLE_DRIVE
+var StackAttribute_STORAGE_CONNECTOR_ONE_DRIVE = &sStackAttribute_STORAGE_CONNECTOR_ONE_DRIVE
+var StackAttribute_REDIRECT_URL = &sStackAttribute_REDIRECT_URL
+var StackAttribute_FEEDBACK_URL = &sStackAttribute_FEEDBACK_URL
+var StackAttribute_THEME_NAME = &sStackAttribute_THEME_NAME
+var StackAttribute_USER_SETTINGS = &sStackAttribute_USER_SETTINGS
+var StackAttribute_EMBED_HOST_DOMAINS = &sStackAttribute_EMBED_HOST_DOMAINS
+var StackAttribute_IAM_ROLE_ARN = &sStackAttribute_IAM_ROLE_ARN
+var StackAttribute_ACCESS_ENDPOINTS = &sStackAttribute_ACCESS_ENDPOINTS
+var StackAttribute_STREAMING_EXPERIENCE_SETTINGS = &sStackAttribute_STREAMING_EXPERIENCE_SETTINGS
+var StackAttribute_CONTENT_REDIRECTION = &sStackAttribute_CONTENT_REDIRECTION
+var StackAttribute_AGENT_ACCESS_CONFIG = &sStackAttribute_AGENT_ACCESS_CONFIG
+var StackAttribute_STORAGE_CONNECTOR_AUTHENTICATION = &sStackAttribute_STORAGE_CONNECTOR_AUTHENTICATION
+
+var _StackAttributes = &s_StackAttributes
+var _StackAttributes_member = &s_StackAttributes_member
+
+var StackError = &sStackError
+var StackError_ErrorCode = &sStackError_ErrorCode
+var StackError_ErrorMessage = &sStackError_ErrorMessage
+
+var StackErrorCode = &sStackErrorCode
+var StackErrorCode_STORAGE_CONNECTOR_ERROR = &sStackErrorCode_STORAGE_CONNECTOR_ERROR
+var StackErrorCode_INTERNAL_SERVICE_ERROR = &sStackErrorCode_INTERNAL_SERVICE_ERROR
+
+var _StackErrors = &s_StackErrors
+var _StackErrors_member = &s_StackErrors_member
+
+var _StackList = &s_StackList
+var _StackList_member = &s_StackList_member
+
+var StorageConnector = &sStorageConnector
+var StorageConnector_ConnectorType = &sStorageConnector_ConnectorType
+var StorageConnector_ResourceIdentifier = &sStorageConnector_ResourceIdentifier
+var StorageConnector_Domains = &sStorageConnector_Domains
+var StorageConnector_DomainsRequireAdminConsent = &sStorageConnector_DomainsRequireAdminConsent
+
+var StorageConnectorAuthentication = &sStorageConnectorAuthentication
+var StorageConnectorAuthentication_FORCE_REAUTHENTICATION = &sStorageConnectorAuthentication_FORCE_REAUTHENTICATION
+var StorageConnectorAuthentication_REUSE_CREDENTIALS = &sStorageConnectorAuthentication_REUSE_CREDENTIALS
+
+var _StorageConnectorList = &s_StorageConnectorList
+var _StorageConnectorList_member = &s_StorageConnectorList_member
+
+var StorageConnectorType = &sStorageConnectorType
+var StorageConnectorType_HOMEFOLDERS = &sStorageConnectorType_HOMEFOLDERS
+var StorageConnectorType_GOOGLE_DRIVE = &sStorageConnectorType_GOOGLE_DRIVE
+var StorageConnectorType_ONE_DRIVE = &sStorageConnectorType_ONE_DRIVE
+
+var StreamingExperienceSettings = &sStreamingExperienceSettings
+var StreamingExperienceSettings_PreferredProtocol = &sStreamingExperienceSettings_PreferredProtocol
+
+var _StreamingUrlUserId = &s_StreamingUrlUserId
+
+var StreamView = &sStreamView
+var StreamView_APP = &sStreamView_APP
+var StreamView_DESKTOP = &sStreamView_DESKTOP
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _SubnetIdList = &s_SubnetIdList
+var _SubnetIdList_member = &s_SubnetIdList_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var Theme = &sTheme
+var Theme_StackName = &sTheme_StackName
+var Theme_State = &sTheme_State
+var Theme_ThemeTitleText = &sTheme_ThemeTitleText
+var Theme_ThemeStyling = &sTheme_ThemeStyling
+var Theme_ThemeFooterLinks = &sTheme_ThemeFooterLinks
+var Theme_ThemeOrganizationLogoURL = &sTheme_ThemeOrganizationLogoURL
+var Theme_ThemeFaviconURL = &sTheme_ThemeFaviconURL
+var Theme_CreatedTime = &sTheme_CreatedTime
+
+var ThemeAttribute = &sThemeAttribute
+var ThemeAttribute_FOOTER_LINKS = &sThemeAttribute_FOOTER_LINKS
+
+var _ThemeAttributes = &s_ThemeAttributes
+var _ThemeAttributes_member = &s_ThemeAttributes_member
+
+var ThemeFooterLink = &sThemeFooterLink
+var ThemeFooterLink_DisplayName = &sThemeFooterLink_DisplayName
+var ThemeFooterLink_FooterLinkURL = &sThemeFooterLink_FooterLinkURL
+
+var _ThemeFooterLinkDisplayName = &s_ThemeFooterLinkDisplayName
+
+var _ThemeFooterLinks = &s_ThemeFooterLinks
+var _ThemeFooterLinks_member = &s_ThemeFooterLinks_member
+
+var _ThemeFooterLinkURL = &s_ThemeFooterLinkURL
+
+var ThemeState = &sThemeState
+var ThemeState_ENABLED = &sThemeState_ENABLED
+var ThemeState_DISABLED = &sThemeState_DISABLED
+
+var ThemeStyling = &sThemeStyling
+var ThemeStyling_LIGHT_BLUE = &sThemeStyling_LIGHT_BLUE
+var ThemeStyling_BLUE = &sThemeStyling_BLUE
+var ThemeStyling_PINK = &sThemeStyling_PINK
+var ThemeStyling_RED = &sThemeStyling_RED
+
+var _ThemeTitleText = &s_ThemeTitleText
+
+var _Timestamp = &s_Timestamp
+
+var _UrlPattern = &s_UrlPattern
+
+var _UrlPatternList = &s_UrlPatternList
+var _UrlPatternList_member = &s_UrlPatternList_member
+
+var UrlRedirectionConfig = &sUrlRedirectionConfig
+var UrlRedirectionConfig_Enabled = &sUrlRedirectionConfig_Enabled
+var UrlRedirectionConfig_AllowedUrls = &sUrlRedirectionConfig_AllowedUrls
+var UrlRedirectionConfig_DeniedUrls = &sUrlRedirectionConfig_DeniedUrls
+
+var UsageReportExecutionErrorCode = &sUsageReportExecutionErrorCode
+var UsageReportExecutionErrorCode_RESOURCE_NOT_FOUND = &sUsageReportExecutionErrorCode_RESOURCE_NOT_FOUND
+var UsageReportExecutionErrorCode_ACCESS_DENIED = &sUsageReportExecutionErrorCode_ACCESS_DENIED
+var UsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR = &sUsageReportExecutionErrorCode_INTERNAL_SERVICE_ERROR
+
+var UsageReportSchedule = &sUsageReportSchedule
+var UsageReportSchedule_DAILY = &sUsageReportSchedule_DAILY
+
+var UsageReportSubscription = &sUsageReportSubscription
+var UsageReportSubscription_S3BucketName = &sUsageReportSubscription_S3BucketName
+var UsageReportSubscription_Schedule = &sUsageReportSubscription_Schedule
+var UsageReportSubscription_LastGeneratedReportDate = &sUsageReportSubscription_LastGeneratedReportDate
+var UsageReportSubscription_SubscriptionErrors = &sUsageReportSubscription_SubscriptionErrors
+
+var _UsageReportSubscriptionList = &s_UsageReportSubscriptionList
+var _UsageReportSubscriptionList_member = &s_UsageReportSubscriptionList_member
+
+var _UsbDeviceFilterString = &s_UsbDeviceFilterString
+
+var _UsbDeviceFilterStrings = &s_UsbDeviceFilterStrings
+var _UsbDeviceFilterStrings_member = &s_UsbDeviceFilterStrings_member
+
+var User = &sUser
+var User_Arn = &sUser_Arn
+var User_UserName = &sUser_UserName
+var User_Enabled = &sUser_Enabled
+var User_Status = &sUser_Status
+var User_FirstName = &sUser_FirstName
+var User_LastName = &sUser_LastName
+var User_CreatedTime = &sUser_CreatedTime
+var User_AuthenticationType = &sUser_AuthenticationType
+
+var _UserAttributeValue = &s_UserAttributeValue
+
+var UserControlMode = &sUserControlMode
+var UserControlMode_VIEW_ONLY = &sUserControlMode_VIEW_ONLY
+var UserControlMode_VIEW_STOP = &sUserControlMode_VIEW_STOP
+var UserControlMode_DISABLED = &sUserControlMode_DISABLED
+
+var _UserId = &s_UserId
+
+var _UserList = &s_UserList
+var _UserList_member = &s_UserList_member
+
+var _Username = &s_Username
+
+var UserSetting = &sUserSetting
+var UserSetting_Action = &sUserSetting_Action
+var UserSetting_Permission = &sUserSetting_Permission
+var UserSetting_MaximumLength = &sUserSetting_MaximumLength
+
+var _UserSettingList = &s_UserSettingList
+var _UserSettingList_member = &s_UserSettingList_member
+
+var UserStackAssociation = &sUserStackAssociation
+var UserStackAssociation_StackName = &sUserStackAssociation_StackName
+var UserStackAssociation_UserName = &sUserStackAssociation_UserName
+var UserStackAssociation_AuthenticationType = &sUserStackAssociation_AuthenticationType
+var UserStackAssociation_SendEmailNotification = &sUserStackAssociation_SendEmailNotification
+
+var UserStackAssociationError = &sUserStackAssociationError
+var UserStackAssociationError_UserStackAssociation = &sUserStackAssociationError_UserStackAssociation
+var UserStackAssociationError_ErrorCode = &sUserStackAssociationError_ErrorCode
+var UserStackAssociationError_ErrorMessage = &sUserStackAssociationError_ErrorMessage
+
+var UserStackAssociationErrorCode = &sUserStackAssociationErrorCode
+var UserStackAssociationErrorCode_STACK_NOT_FOUND = &sUserStackAssociationErrorCode_STACK_NOT_FOUND
+var UserStackAssociationErrorCode_USER_NAME_NOT_FOUND = &sUserStackAssociationErrorCode_USER_NAME_NOT_FOUND
+var UserStackAssociationErrorCode_DIRECTORY_NOT_FOUND = &sUserStackAssociationErrorCode_DIRECTORY_NOT_FOUND
+var UserStackAssociationErrorCode_INTERNAL_ERROR = &sUserStackAssociationErrorCode_INTERNAL_ERROR
+
+var _UserStackAssociationErrorList = &s_UserStackAssociationErrorList
+var _UserStackAssociationErrorList_member = &s_UserStackAssociationErrorList_member
+
+var _UserStackAssociationList = &s_UserStackAssociationList
+var _UserStackAssociationList_member = &s_UserStackAssociationList_member
+
+var _UUID = &s_UUID
+
+var VisibilityType = &sVisibilityType
+var VisibilityType_PUBLIC = &sVisibilityType_PUBLIC
+var VisibilityType_PRIVATE = &sVisibilityType_PRIVATE
+var VisibilityType_SHARED = &sVisibilityType_SHARED
+
+var VolumeConfig = &sVolumeConfig
+var VolumeConfig_VolumeSizeInGb = &sVolumeConfig_VolumeSizeInGb
+
+var VpcConfig = &sVpcConfig
+var VpcConfig_SubnetIds = &sVpcConfig_SubnetIds
+var VpcConfig_SecurityGroupIds = &sVpcConfig_SecurityGroupIds
+
+var _WorkspaceImageId = &s_WorkspaceImageId
+
+var AssociateAppBlockBuilderAppBlockRequest = &sAssociateAppBlockBuilderAppBlockRequest
+var AssociateAppBlockBuilderAppBlockRequest_AppBlockArn = &sAssociateAppBlockBuilderAppBlockRequest_AppBlockArn
+var AssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName = &sAssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName
+
+var AssociateAppBlockBuilderAppBlockResult = &sAssociateAppBlockBuilderAppBlockResult
+var AssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation = &sAssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation
+
+var AssociateApplicationFleetRequest = &sAssociateApplicationFleetRequest
+var AssociateApplicationFleetRequest_FleetName = &sAssociateApplicationFleetRequest_FleetName
+var AssociateApplicationFleetRequest_ApplicationArn = &sAssociateApplicationFleetRequest_ApplicationArn
+
+var AssociateApplicationFleetResult = &sAssociateApplicationFleetResult
+var AssociateApplicationFleetResult_ApplicationFleetAssociation = &sAssociateApplicationFleetResult_ApplicationFleetAssociation
+
+var AssociateApplicationToEntitlementRequest = &sAssociateApplicationToEntitlementRequest
+var AssociateApplicationToEntitlementRequest_StackName = &sAssociateApplicationToEntitlementRequest_StackName
+var AssociateApplicationToEntitlementRequest_EntitlementName = &sAssociateApplicationToEntitlementRequest_EntitlementName
+var AssociateApplicationToEntitlementRequest_ApplicationIdentifier = &sAssociateApplicationToEntitlementRequest_ApplicationIdentifier
+
+var AssociateApplicationToEntitlementResult = &sAssociateApplicationToEntitlementResult
+
+var AssociateFleetRequest = &sAssociateFleetRequest
+var AssociateFleetRequest_FleetName = &sAssociateFleetRequest_FleetName
+var AssociateFleetRequest_StackName = &sAssociateFleetRequest_StackName
+
+var AssociateFleetResult = &sAssociateFleetResult
+
+var AssociateSoftwareToImageBuilderRequest = &sAssociateSoftwareToImageBuilderRequest
+var AssociateSoftwareToImageBuilderRequest_ImageBuilderName = &sAssociateSoftwareToImageBuilderRequest_ImageBuilderName
+var AssociateSoftwareToImageBuilderRequest_SoftwareNames = &sAssociateSoftwareToImageBuilderRequest_SoftwareNames
+
+var AssociateSoftwareToImageBuilderResult = &sAssociateSoftwareToImageBuilderResult
+
+var BatchAssociateUserStackRequest = &sBatchAssociateUserStackRequest
+var BatchAssociateUserStackRequest_UserStackAssociations = &sBatchAssociateUserStackRequest_UserStackAssociations
+
+var BatchAssociateUserStackResult = &sBatchAssociateUserStackResult
+var BatchAssociateUserStackResult_errors = &sBatchAssociateUserStackResult_errors
+
+var BatchDisassociateUserStackRequest = &sBatchDisassociateUserStackRequest
+var BatchDisassociateUserStackRequest_UserStackAssociations = &sBatchDisassociateUserStackRequest_UserStackAssociations
+
+var BatchDisassociateUserStackResult = &sBatchDisassociateUserStackResult
+var BatchDisassociateUserStackResult_errors = &sBatchDisassociateUserStackResult_errors
+
+var CopyImageRequest = &sCopyImageRequest
+var CopyImageRequest_SourceImageName = &sCopyImageRequest_SourceImageName
+var CopyImageRequest_DestinationImageName = &sCopyImageRequest_DestinationImageName
+var CopyImageRequest_DestinationRegion = &sCopyImageRequest_DestinationRegion
+var CopyImageRequest_DestinationImageDescription = &sCopyImageRequest_DestinationImageDescription
+
+var CopyImageResponse = &sCopyImageResponse
+var CopyImageResponse_DestinationImageName = &sCopyImageResponse_DestinationImageName
+
+var CreateAppBlockBuilderRequest = &sCreateAppBlockBuilderRequest
+var CreateAppBlockBuilderRequest_Name = &sCreateAppBlockBuilderRequest_Name
+var CreateAppBlockBuilderRequest_Description = &sCreateAppBlockBuilderRequest_Description
+var CreateAppBlockBuilderRequest_DisplayName = &sCreateAppBlockBuilderRequest_DisplayName
+var CreateAppBlockBuilderRequest_Tags = &sCreateAppBlockBuilderRequest_Tags
+var CreateAppBlockBuilderRequest_Platform = &sCreateAppBlockBuilderRequest_Platform
+var CreateAppBlockBuilderRequest_InstanceType = &sCreateAppBlockBuilderRequest_InstanceType
+var CreateAppBlockBuilderRequest_VpcConfig = &sCreateAppBlockBuilderRequest_VpcConfig
+var CreateAppBlockBuilderRequest_EnableDefaultInternetAccess = &sCreateAppBlockBuilderRequest_EnableDefaultInternetAccess
+var CreateAppBlockBuilderRequest_IamRoleArn = &sCreateAppBlockBuilderRequest_IamRoleArn
+var CreateAppBlockBuilderRequest_AccessEndpoints = &sCreateAppBlockBuilderRequest_AccessEndpoints
+var CreateAppBlockBuilderRequest_DisableIMDSV1 = &sCreateAppBlockBuilderRequest_DisableIMDSV1
+
+var CreateAppBlockBuilderResult = &sCreateAppBlockBuilderResult
+var CreateAppBlockBuilderResult_AppBlockBuilder = &sCreateAppBlockBuilderResult_AppBlockBuilder
+
+var CreateAppBlockBuilderStreamingURLRequest = &sCreateAppBlockBuilderStreamingURLRequest
+var CreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName = &sCreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName
+var CreateAppBlockBuilderStreamingURLRequest_Validity = &sCreateAppBlockBuilderStreamingURLRequest_Validity
+
+var CreateAppBlockBuilderStreamingURLResult = &sCreateAppBlockBuilderStreamingURLResult
+var CreateAppBlockBuilderStreamingURLResult_StreamingURL = &sCreateAppBlockBuilderStreamingURLResult_StreamingURL
+var CreateAppBlockBuilderStreamingURLResult_Expires = &sCreateAppBlockBuilderStreamingURLResult_Expires
+
+var CreateAppBlockRequest = &sCreateAppBlockRequest
+var CreateAppBlockRequest_Name = &sCreateAppBlockRequest_Name
+var CreateAppBlockRequest_Description = &sCreateAppBlockRequest_Description
+var CreateAppBlockRequest_DisplayName = &sCreateAppBlockRequest_DisplayName
+var CreateAppBlockRequest_SourceS3Location = &sCreateAppBlockRequest_SourceS3Location
+var CreateAppBlockRequest_SetupScriptDetails = &sCreateAppBlockRequest_SetupScriptDetails
+var CreateAppBlockRequest_Tags = &sCreateAppBlockRequest_Tags
+var CreateAppBlockRequest_PostSetupScriptDetails = &sCreateAppBlockRequest_PostSetupScriptDetails
+var CreateAppBlockRequest_PackagingType = &sCreateAppBlockRequest_PackagingType
+
+var CreateAppBlockResult = &sCreateAppBlockResult
+var CreateAppBlockResult_AppBlock = &sCreateAppBlockResult_AppBlock
+
+var CreateApplicationRequest = &sCreateApplicationRequest
+var CreateApplicationRequest_Name = &sCreateApplicationRequest_Name
+var CreateApplicationRequest_DisplayName = &sCreateApplicationRequest_DisplayName
+var CreateApplicationRequest_Description = &sCreateApplicationRequest_Description
+var CreateApplicationRequest_IconS3Location = &sCreateApplicationRequest_IconS3Location
+var CreateApplicationRequest_LaunchPath = &sCreateApplicationRequest_LaunchPath
+var CreateApplicationRequest_WorkingDirectory = &sCreateApplicationRequest_WorkingDirectory
+var CreateApplicationRequest_LaunchParameters = &sCreateApplicationRequest_LaunchParameters
+var CreateApplicationRequest_Platforms = &sCreateApplicationRequest_Platforms
+var CreateApplicationRequest_InstanceFamilies = &sCreateApplicationRequest_InstanceFamilies
+var CreateApplicationRequest_AppBlockArn = &sCreateApplicationRequest_AppBlockArn
+var CreateApplicationRequest_Tags = &sCreateApplicationRequest_Tags
+
+var CreateApplicationResult = &sCreateApplicationResult
+var CreateApplicationResult_Application = &sCreateApplicationResult_Application
+
+var CreateDirectoryConfigRequest = &sCreateDirectoryConfigRequest
+var CreateDirectoryConfigRequest_DirectoryName = &sCreateDirectoryConfigRequest_DirectoryName
+var CreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames = &sCreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames
+var CreateDirectoryConfigRequest_ServiceAccountCredentials = &sCreateDirectoryConfigRequest_ServiceAccountCredentials
+var CreateDirectoryConfigRequest_CertificateBasedAuthProperties = &sCreateDirectoryConfigRequest_CertificateBasedAuthProperties
+
+var CreateDirectoryConfigResult = &sCreateDirectoryConfigResult
+var CreateDirectoryConfigResult_DirectoryConfig = &sCreateDirectoryConfigResult_DirectoryConfig
+
+var CreateEntitlementRequest = &sCreateEntitlementRequest
+var CreateEntitlementRequest_Name = &sCreateEntitlementRequest_Name
+var CreateEntitlementRequest_StackName = &sCreateEntitlementRequest_StackName
+var CreateEntitlementRequest_Description = &sCreateEntitlementRequest_Description
+var CreateEntitlementRequest_AppVisibility = &sCreateEntitlementRequest_AppVisibility
+var CreateEntitlementRequest_Attributes = &sCreateEntitlementRequest_Attributes
+
+var CreateEntitlementResult = &sCreateEntitlementResult
+var CreateEntitlementResult_Entitlement = &sCreateEntitlementResult_Entitlement
+
+var CreateExportImageTaskRequest = &sCreateExportImageTaskRequest
+var CreateExportImageTaskRequest_ImageName = &sCreateExportImageTaskRequest_ImageName
+var CreateExportImageTaskRequest_AmiName = &sCreateExportImageTaskRequest_AmiName
+var CreateExportImageTaskRequest_IamRoleArn = &sCreateExportImageTaskRequest_IamRoleArn
+var CreateExportImageTaskRequest_TagSpecifications = &sCreateExportImageTaskRequest_TagSpecifications
+var CreateExportImageTaskRequest_AmiDescription = &sCreateExportImageTaskRequest_AmiDescription
+
+var CreateExportImageTaskResult = &sCreateExportImageTaskResult
+var CreateExportImageTaskResult_ExportImageTask = &sCreateExportImageTaskResult_ExportImageTask
+
+var CreateFleetRequest = &sCreateFleetRequest
+var CreateFleetRequest_Name = &sCreateFleetRequest_Name
+var CreateFleetRequest_ImageName = &sCreateFleetRequest_ImageName
+var CreateFleetRequest_ImageArn = &sCreateFleetRequest_ImageArn
+var CreateFleetRequest_InstanceType = &sCreateFleetRequest_InstanceType
+var CreateFleetRequest_FleetType = &sCreateFleetRequest_FleetType
+var CreateFleetRequest_ComputeCapacity = &sCreateFleetRequest_ComputeCapacity
+var CreateFleetRequest_VpcConfig = &sCreateFleetRequest_VpcConfig
+var CreateFleetRequest_MaxUserDurationInSeconds = &sCreateFleetRequest_MaxUserDurationInSeconds
+var CreateFleetRequest_DisconnectTimeoutInSeconds = &sCreateFleetRequest_DisconnectTimeoutInSeconds
+var CreateFleetRequest_Description = &sCreateFleetRequest_Description
+var CreateFleetRequest_DisplayName = &sCreateFleetRequest_DisplayName
+var CreateFleetRequest_EnableDefaultInternetAccess = &sCreateFleetRequest_EnableDefaultInternetAccess
+var CreateFleetRequest_DomainJoinInfo = &sCreateFleetRequest_DomainJoinInfo
+var CreateFleetRequest_Tags = &sCreateFleetRequest_Tags
+var CreateFleetRequest_IdleDisconnectTimeoutInSeconds = &sCreateFleetRequest_IdleDisconnectTimeoutInSeconds
+var CreateFleetRequest_IamRoleArn = &sCreateFleetRequest_IamRoleArn
+var CreateFleetRequest_StreamView = &sCreateFleetRequest_StreamView
+var CreateFleetRequest_Platform = &sCreateFleetRequest_Platform
+var CreateFleetRequest_MaxConcurrentSessions = &sCreateFleetRequest_MaxConcurrentSessions
+var CreateFleetRequest_UsbDeviceFilterStrings = &sCreateFleetRequest_UsbDeviceFilterStrings
+var CreateFleetRequest_SessionScriptS3Location = &sCreateFleetRequest_SessionScriptS3Location
+var CreateFleetRequest_MaxSessionsPerInstance = &sCreateFleetRequest_MaxSessionsPerInstance
+var CreateFleetRequest_RootVolumeConfig = &sCreateFleetRequest_RootVolumeConfig
+var CreateFleetRequest_DisableIMDSV1 = &sCreateFleetRequest_DisableIMDSV1
+
+var CreateFleetResult = &sCreateFleetResult
+var CreateFleetResult_Fleet = &sCreateFleetResult_Fleet
+
+var CreateImageBuilderRequest = &sCreateImageBuilderRequest
+var CreateImageBuilderRequest_Name = &sCreateImageBuilderRequest_Name
+var CreateImageBuilderRequest_ImageName = &sCreateImageBuilderRequest_ImageName
+var CreateImageBuilderRequest_ImageArn = &sCreateImageBuilderRequest_ImageArn
+var CreateImageBuilderRequest_InstanceType = &sCreateImageBuilderRequest_InstanceType
+var CreateImageBuilderRequest_Description = &sCreateImageBuilderRequest_Description
+var CreateImageBuilderRequest_DisplayName = &sCreateImageBuilderRequest_DisplayName
+var CreateImageBuilderRequest_VpcConfig = &sCreateImageBuilderRequest_VpcConfig
+var CreateImageBuilderRequest_IamRoleArn = &sCreateImageBuilderRequest_IamRoleArn
+var CreateImageBuilderRequest_EnableDefaultInternetAccess = &sCreateImageBuilderRequest_EnableDefaultInternetAccess
+var CreateImageBuilderRequest_DomainJoinInfo = &sCreateImageBuilderRequest_DomainJoinInfo
+var CreateImageBuilderRequest_AppstreamAgentVersion = &sCreateImageBuilderRequest_AppstreamAgentVersion
+var CreateImageBuilderRequest_Tags = &sCreateImageBuilderRequest_Tags
+var CreateImageBuilderRequest_AccessEndpoints = &sCreateImageBuilderRequest_AccessEndpoints
+var CreateImageBuilderRequest_RootVolumeConfig = &sCreateImageBuilderRequest_RootVolumeConfig
+var CreateImageBuilderRequest_SoftwaresToInstall = &sCreateImageBuilderRequest_SoftwaresToInstall
+var CreateImageBuilderRequest_SoftwaresToUninstall = &sCreateImageBuilderRequest_SoftwaresToUninstall
+var CreateImageBuilderRequest_DisableIMDSV1 = &sCreateImageBuilderRequest_DisableIMDSV1
+
+var CreateImageBuilderResult = &sCreateImageBuilderResult
+var CreateImageBuilderResult_ImageBuilder = &sCreateImageBuilderResult_ImageBuilder
+
+var CreateImageBuilderStreamingURLRequest = &sCreateImageBuilderStreamingURLRequest
+var CreateImageBuilderStreamingURLRequest_Name = &sCreateImageBuilderStreamingURLRequest_Name
+var CreateImageBuilderStreamingURLRequest_Validity = &sCreateImageBuilderStreamingURLRequest_Validity
+
+var CreateImageBuilderStreamingURLResult = &sCreateImageBuilderStreamingURLResult
+var CreateImageBuilderStreamingURLResult_StreamingURL = &sCreateImageBuilderStreamingURLResult_StreamingURL
+var CreateImageBuilderStreamingURLResult_Expires = &sCreateImageBuilderStreamingURLResult_Expires
+
+var CreateImportedImageRequest = &sCreateImportedImageRequest
+var CreateImportedImageRequest_Name = &sCreateImportedImageRequest_Name
+var CreateImportedImageRequest_SourceAmiId = &sCreateImportedImageRequest_SourceAmiId
+var CreateImportedImageRequest_WorkspaceImageId = &sCreateImportedImageRequest_WorkspaceImageId
+var CreateImportedImageRequest_IamRoleArn = &sCreateImportedImageRequest_IamRoleArn
+var CreateImportedImageRequest_Description = &sCreateImportedImageRequest_Description
+var CreateImportedImageRequest_DisplayName = &sCreateImportedImageRequest_DisplayName
+var CreateImportedImageRequest_Tags = &sCreateImportedImageRequest_Tags
+var CreateImportedImageRequest_RuntimeValidationConfig = &sCreateImportedImageRequest_RuntimeValidationConfig
+var CreateImportedImageRequest_AgentSoftwareVersion = &sCreateImportedImageRequest_AgentSoftwareVersion
+var CreateImportedImageRequest_AppCatalogConfig = &sCreateImportedImageRequest_AppCatalogConfig
+var CreateImportedImageRequest_DryRun = &sCreateImportedImageRequest_DryRun
+
+var CreateImportedImageResult = &sCreateImportedImageResult
+var CreateImportedImageResult_Image = &sCreateImportedImageResult_Image
+
+var CreateStackRequest = &sCreateStackRequest
+var CreateStackRequest_Name = &sCreateStackRequest_Name
+var CreateStackRequest_Description = &sCreateStackRequest_Description
+var CreateStackRequest_DisplayName = &sCreateStackRequest_DisplayName
+var CreateStackRequest_StorageConnectors = &sCreateStackRequest_StorageConnectors
+var CreateStackRequest_RedirectURL = &sCreateStackRequest_RedirectURL
+var CreateStackRequest_FeedbackURL = &sCreateStackRequest_FeedbackURL
+var CreateStackRequest_UserSettings = &sCreateStackRequest_UserSettings
+var CreateStackRequest_ApplicationSettings = &sCreateStackRequest_ApplicationSettings
+var CreateStackRequest_Tags = &sCreateStackRequest_Tags
+var CreateStackRequest_AccessEndpoints = &sCreateStackRequest_AccessEndpoints
+var CreateStackRequest_EmbedHostDomains = &sCreateStackRequest_EmbedHostDomains
+var CreateStackRequest_StreamingExperienceSettings = &sCreateStackRequest_StreamingExperienceSettings
+var CreateStackRequest_ContentRedirection = &sCreateStackRequest_ContentRedirection
+var CreateStackRequest_AgentAccessConfig = &sCreateStackRequest_AgentAccessConfig
+var CreateStackRequest_StorageConnectorAuthentication = &sCreateStackRequest_StorageConnectorAuthentication
+
+var CreateStackResult = &sCreateStackResult
+var CreateStackResult_Stack = &sCreateStackResult_Stack
+
+var CreateStreamingURLRequest = &sCreateStreamingURLRequest
+var CreateStreamingURLRequest_StackName = &sCreateStreamingURLRequest_StackName
+var CreateStreamingURLRequest_FleetName = &sCreateStreamingURLRequest_FleetName
+var CreateStreamingURLRequest_UserId = &sCreateStreamingURLRequest_UserId
+var CreateStreamingURLRequest_ApplicationId = &sCreateStreamingURLRequest_ApplicationId
+var CreateStreamingURLRequest_Validity = &sCreateStreamingURLRequest_Validity
+var CreateStreamingURLRequest_SessionContext = &sCreateStreamingURLRequest_SessionContext
+
+var CreateStreamingURLResult = &sCreateStreamingURLResult
+var CreateStreamingURLResult_StreamingURL = &sCreateStreamingURLResult_StreamingURL
+var CreateStreamingURLResult_Expires = &sCreateStreamingURLResult_Expires
+
+var CreateThemeForStackRequest = &sCreateThemeForStackRequest
+var CreateThemeForStackRequest_StackName = &sCreateThemeForStackRequest_StackName
+var CreateThemeForStackRequest_FooterLinks = &sCreateThemeForStackRequest_FooterLinks
+var CreateThemeForStackRequest_TitleText = &sCreateThemeForStackRequest_TitleText
+var CreateThemeForStackRequest_ThemeStyling = &sCreateThemeForStackRequest_ThemeStyling
+var CreateThemeForStackRequest_OrganizationLogoS3Location = &sCreateThemeForStackRequest_OrganizationLogoS3Location
+var CreateThemeForStackRequest_FaviconS3Location = &sCreateThemeForStackRequest_FaviconS3Location
+
+var CreateThemeForStackResult = &sCreateThemeForStackResult
+var CreateThemeForStackResult_Theme = &sCreateThemeForStackResult_Theme
+
+var CreateUpdatedImageRequest = &sCreateUpdatedImageRequest
+var CreateUpdatedImageRequest_existingImageName = &sCreateUpdatedImageRequest_existingImageName
+var CreateUpdatedImageRequest_newImageName = &sCreateUpdatedImageRequest_newImageName
+var CreateUpdatedImageRequest_newImageDescription = &sCreateUpdatedImageRequest_newImageDescription
+var CreateUpdatedImageRequest_newImageDisplayName = &sCreateUpdatedImageRequest_newImageDisplayName
+var CreateUpdatedImageRequest_newImageTags = &sCreateUpdatedImageRequest_newImageTags
+var CreateUpdatedImageRequest_dryRun = &sCreateUpdatedImageRequest_dryRun
+
+var CreateUpdatedImageResult = &sCreateUpdatedImageResult
+var CreateUpdatedImageResult_image = &sCreateUpdatedImageResult_image
+var CreateUpdatedImageResult_canUpdateImage = &sCreateUpdatedImageResult_canUpdateImage
+
+var CreateUsageReportSubscriptionRequest = &sCreateUsageReportSubscriptionRequest
+
+var CreateUsageReportSubscriptionResult = &sCreateUsageReportSubscriptionResult
+var CreateUsageReportSubscriptionResult_S3BucketName = &sCreateUsageReportSubscriptionResult_S3BucketName
+var CreateUsageReportSubscriptionResult_Schedule = &sCreateUsageReportSubscriptionResult_Schedule
+
+var CreateUserRequest = &sCreateUserRequest
+var CreateUserRequest_UserName = &sCreateUserRequest_UserName
+var CreateUserRequest_MessageAction = &sCreateUserRequest_MessageAction
+var CreateUserRequest_FirstName = &sCreateUserRequest_FirstName
+var CreateUserRequest_LastName = &sCreateUserRequest_LastName
+var CreateUserRequest_AuthenticationType = &sCreateUserRequest_AuthenticationType
+
+var CreateUserResult = &sCreateUserResult
+
+var DeleteAppBlockBuilderRequest = &sDeleteAppBlockBuilderRequest
+var DeleteAppBlockBuilderRequest_Name = &sDeleteAppBlockBuilderRequest_Name
+
+var DeleteAppBlockBuilderResult = &sDeleteAppBlockBuilderResult
+
+var DeleteAppBlockRequest = &sDeleteAppBlockRequest
+var DeleteAppBlockRequest_Name = &sDeleteAppBlockRequest_Name
+
+var DeleteAppBlockResult = &sDeleteAppBlockResult
+
+var DeleteApplicationRequest = &sDeleteApplicationRequest
+var DeleteApplicationRequest_Name = &sDeleteApplicationRequest_Name
+
+var DeleteApplicationResult = &sDeleteApplicationResult
+
+var DeleteDirectoryConfigRequest = &sDeleteDirectoryConfigRequest
+var DeleteDirectoryConfigRequest_DirectoryName = &sDeleteDirectoryConfigRequest_DirectoryName
+
+var DeleteDirectoryConfigResult = &sDeleteDirectoryConfigResult
+
+var DeleteEntitlementRequest = &sDeleteEntitlementRequest
+var DeleteEntitlementRequest_Name = &sDeleteEntitlementRequest_Name
+var DeleteEntitlementRequest_StackName = &sDeleteEntitlementRequest_StackName
+
+var DeleteEntitlementResult = &sDeleteEntitlementResult
+
+var DeleteFleetRequest = &sDeleteFleetRequest
+var DeleteFleetRequest_Name = &sDeleteFleetRequest_Name
+
+var DeleteFleetResult = &sDeleteFleetResult
+
+var DeleteImageBuilderRequest = &sDeleteImageBuilderRequest
+var DeleteImageBuilderRequest_Name = &sDeleteImageBuilderRequest_Name
+
+var DeleteImageBuilderResult = &sDeleteImageBuilderResult
+var DeleteImageBuilderResult_ImageBuilder = &sDeleteImageBuilderResult_ImageBuilder
+
+var DeleteImageRequest = &sDeleteImageRequest
+var DeleteImageRequest_Name = &sDeleteImageRequest_Name
+
+var DeleteImageResult = &sDeleteImageResult
+var DeleteImageResult_Image = &sDeleteImageResult_Image
+
+var DeleteImagePermissionsRequest = &sDeleteImagePermissionsRequest
+var DeleteImagePermissionsRequest_Name = &sDeleteImagePermissionsRequest_Name
+var DeleteImagePermissionsRequest_SharedAccountId = &sDeleteImagePermissionsRequest_SharedAccountId
+
+var DeleteImagePermissionsResult = &sDeleteImagePermissionsResult
+
+var DeleteStackRequest = &sDeleteStackRequest
+var DeleteStackRequest_Name = &sDeleteStackRequest_Name
+
+var DeleteStackResult = &sDeleteStackResult
+
+var DeleteThemeForStackRequest = &sDeleteThemeForStackRequest
+var DeleteThemeForStackRequest_StackName = &sDeleteThemeForStackRequest_StackName
+
+var DeleteThemeForStackResult = &sDeleteThemeForStackResult
+
+var DeleteUsageReportSubscriptionRequest = &sDeleteUsageReportSubscriptionRequest
+
+var DeleteUsageReportSubscriptionResult = &sDeleteUsageReportSubscriptionResult
+
+var DeleteUserRequest = &sDeleteUserRequest
+var DeleteUserRequest_UserName = &sDeleteUserRequest_UserName
+var DeleteUserRequest_AuthenticationType = &sDeleteUserRequest_AuthenticationType
+
+var DeleteUserResult = &sDeleteUserResult
+
+var DescribeAppBlockBuilderAppBlockAssociationsRequest = &sDescribeAppBlockBuilderAppBlockAssociationsRequest
+var DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn = &sDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn
+var DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName = &sDescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName
+var DescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults = &sDescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults
+var DescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken = &sDescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken
+
+var DescribeAppBlockBuilderAppBlockAssociationsResult = &sDescribeAppBlockBuilderAppBlockAssociationsResult
+var DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations = &sDescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations
+var DescribeAppBlockBuilderAppBlockAssociationsResult_NextToken = &sDescribeAppBlockBuilderAppBlockAssociationsResult_NextToken
+
+var DescribeAppBlockBuildersRequest = &sDescribeAppBlockBuildersRequest
+var DescribeAppBlockBuildersRequest_Names = &sDescribeAppBlockBuildersRequest_Names
+var DescribeAppBlockBuildersRequest_NextToken = &sDescribeAppBlockBuildersRequest_NextToken
+var DescribeAppBlockBuildersRequest_MaxResults = &sDescribeAppBlockBuildersRequest_MaxResults
+
+var DescribeAppBlockBuildersResult = &sDescribeAppBlockBuildersResult
+var DescribeAppBlockBuildersResult_AppBlockBuilders = &sDescribeAppBlockBuildersResult_AppBlockBuilders
+var DescribeAppBlockBuildersResult_NextToken = &sDescribeAppBlockBuildersResult_NextToken
+
+var DescribeAppBlocksRequest = &sDescribeAppBlocksRequest
+var DescribeAppBlocksRequest_Arns = &sDescribeAppBlocksRequest_Arns
+var DescribeAppBlocksRequest_NextToken = &sDescribeAppBlocksRequest_NextToken
+var DescribeAppBlocksRequest_MaxResults = &sDescribeAppBlocksRequest_MaxResults
+
+var DescribeAppBlocksResult = &sDescribeAppBlocksResult
+var DescribeAppBlocksResult_AppBlocks = &sDescribeAppBlocksResult_AppBlocks
+var DescribeAppBlocksResult_NextToken = &sDescribeAppBlocksResult_NextToken
+
+var DescribeApplicationFleetAssociationsRequest = &sDescribeApplicationFleetAssociationsRequest
+var DescribeApplicationFleetAssociationsRequest_FleetName = &sDescribeApplicationFleetAssociationsRequest_FleetName
+var DescribeApplicationFleetAssociationsRequest_ApplicationArn = &sDescribeApplicationFleetAssociationsRequest_ApplicationArn
+var DescribeApplicationFleetAssociationsRequest_MaxResults = &sDescribeApplicationFleetAssociationsRequest_MaxResults
+var DescribeApplicationFleetAssociationsRequest_NextToken = &sDescribeApplicationFleetAssociationsRequest_NextToken
+
+var DescribeApplicationFleetAssociationsResult = &sDescribeApplicationFleetAssociationsResult
+var DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations = &sDescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations
+var DescribeApplicationFleetAssociationsResult_NextToken = &sDescribeApplicationFleetAssociationsResult_NextToken
+
+var DescribeApplicationsRequest = &sDescribeApplicationsRequest
+var DescribeApplicationsRequest_Arns = &sDescribeApplicationsRequest_Arns
+var DescribeApplicationsRequest_NextToken = &sDescribeApplicationsRequest_NextToken
+var DescribeApplicationsRequest_MaxResults = &sDescribeApplicationsRequest_MaxResults
+
+var DescribeApplicationsResult = &sDescribeApplicationsResult
+var DescribeApplicationsResult_Applications = &sDescribeApplicationsResult_Applications
+var DescribeApplicationsResult_NextToken = &sDescribeApplicationsResult_NextToken
+
+var DescribeAppLicenseUsageRequest = &sDescribeAppLicenseUsageRequest
+var DescribeAppLicenseUsageRequest_BillingPeriod = &sDescribeAppLicenseUsageRequest_BillingPeriod
+var DescribeAppLicenseUsageRequest_MaxResults = &sDescribeAppLicenseUsageRequest_MaxResults
+var DescribeAppLicenseUsageRequest_NextToken = &sDescribeAppLicenseUsageRequest_NextToken
+
+var DescribeAppLicenseUsageResult = &sDescribeAppLicenseUsageResult
+var DescribeAppLicenseUsageResult_AppLicenseUsages = &sDescribeAppLicenseUsageResult_AppLicenseUsages
+var DescribeAppLicenseUsageResult_NextToken = &sDescribeAppLicenseUsageResult_NextToken
+
+var DescribeDirectoryConfigsRequest = &sDescribeDirectoryConfigsRequest
+var DescribeDirectoryConfigsRequest_DirectoryNames = &sDescribeDirectoryConfigsRequest_DirectoryNames
+var DescribeDirectoryConfigsRequest_MaxResults = &sDescribeDirectoryConfigsRequest_MaxResults
+var DescribeDirectoryConfigsRequest_NextToken = &sDescribeDirectoryConfigsRequest_NextToken
+
+var DescribeDirectoryConfigsResult = &sDescribeDirectoryConfigsResult
+var DescribeDirectoryConfigsResult_DirectoryConfigs = &sDescribeDirectoryConfigsResult_DirectoryConfigs
+var DescribeDirectoryConfigsResult_NextToken = &sDescribeDirectoryConfigsResult_NextToken
+
+var DescribeEntitlementsRequest = &sDescribeEntitlementsRequest
+var DescribeEntitlementsRequest_Name = &sDescribeEntitlementsRequest_Name
+var DescribeEntitlementsRequest_StackName = &sDescribeEntitlementsRequest_StackName
+var DescribeEntitlementsRequest_NextToken = &sDescribeEntitlementsRequest_NextToken
+var DescribeEntitlementsRequest_MaxResults = &sDescribeEntitlementsRequest_MaxResults
+
+var DescribeEntitlementsResult = &sDescribeEntitlementsResult
+var DescribeEntitlementsResult_Entitlements = &sDescribeEntitlementsResult_Entitlements
+var DescribeEntitlementsResult_NextToken = &sDescribeEntitlementsResult_NextToken
+
+var DescribeFleetsRequest = &sDescribeFleetsRequest
+var DescribeFleetsRequest_Names = &sDescribeFleetsRequest_Names
+var DescribeFleetsRequest_NextToken = &sDescribeFleetsRequest_NextToken
+
+var DescribeFleetsResult = &sDescribeFleetsResult
+var DescribeFleetsResult_Fleets = &sDescribeFleetsResult_Fleets
+var DescribeFleetsResult_NextToken = &sDescribeFleetsResult_NextToken
+
+var DescribeImageBuildersRequest = &sDescribeImageBuildersRequest
+var DescribeImageBuildersRequest_Names = &sDescribeImageBuildersRequest_Names
+var DescribeImageBuildersRequest_MaxResults = &sDescribeImageBuildersRequest_MaxResults
+var DescribeImageBuildersRequest_NextToken = &sDescribeImageBuildersRequest_NextToken
+
+var DescribeImageBuildersResult = &sDescribeImageBuildersResult
+var DescribeImageBuildersResult_ImageBuilders = &sDescribeImageBuildersResult_ImageBuilders
+var DescribeImageBuildersResult_NextToken = &sDescribeImageBuildersResult_NextToken
+
+var DescribeImagePermissionsRequest = &sDescribeImagePermissionsRequest
+var DescribeImagePermissionsRequest_Name = &sDescribeImagePermissionsRequest_Name
+var DescribeImagePermissionsRequest_MaxResults = &sDescribeImagePermissionsRequest_MaxResults
+var DescribeImagePermissionsRequest_SharedAwsAccountIds = &sDescribeImagePermissionsRequest_SharedAwsAccountIds
+var DescribeImagePermissionsRequest_NextToken = &sDescribeImagePermissionsRequest_NextToken
+
+var DescribeImagePermissionsResult = &sDescribeImagePermissionsResult
+var DescribeImagePermissionsResult_Name = &sDescribeImagePermissionsResult_Name
+var DescribeImagePermissionsResult_SharedImagePermissionsList = &sDescribeImagePermissionsResult_SharedImagePermissionsList
+var DescribeImagePermissionsResult_NextToken = &sDescribeImagePermissionsResult_NextToken
+
+var DescribeImagesRequest = &sDescribeImagesRequest
+var DescribeImagesRequest_Names = &sDescribeImagesRequest_Names
+var DescribeImagesRequest_Arns = &sDescribeImagesRequest_Arns
+var DescribeImagesRequest_Type = &sDescribeImagesRequest_Type
+var DescribeImagesRequest_NextToken = &sDescribeImagesRequest_NextToken
+var DescribeImagesRequest_MaxResults = &sDescribeImagesRequest_MaxResults
+
+var DescribeImagesResult = &sDescribeImagesResult
+var DescribeImagesResult_Images = &sDescribeImagesResult_Images
+var DescribeImagesResult_NextToken = &sDescribeImagesResult_NextToken
+
+var DescribeSessionsRequest = &sDescribeSessionsRequest
+var DescribeSessionsRequest_StackName = &sDescribeSessionsRequest_StackName
+var DescribeSessionsRequest_FleetName = &sDescribeSessionsRequest_FleetName
+var DescribeSessionsRequest_UserId = &sDescribeSessionsRequest_UserId
+var DescribeSessionsRequest_NextToken = &sDescribeSessionsRequest_NextToken
+var DescribeSessionsRequest_Limit = &sDescribeSessionsRequest_Limit
+var DescribeSessionsRequest_AuthenticationType = &sDescribeSessionsRequest_AuthenticationType
+var DescribeSessionsRequest_InstanceId = &sDescribeSessionsRequest_InstanceId
+
+var DescribeSessionsResult = &sDescribeSessionsResult
+var DescribeSessionsResult_Sessions = &sDescribeSessionsResult_Sessions
+var DescribeSessionsResult_NextToken = &sDescribeSessionsResult_NextToken
+
+var DescribeSoftwareAssociationsRequest = &sDescribeSoftwareAssociationsRequest
+var DescribeSoftwareAssociationsRequest_AssociatedResource = &sDescribeSoftwareAssociationsRequest_AssociatedResource
+var DescribeSoftwareAssociationsRequest_MaxResults = &sDescribeSoftwareAssociationsRequest_MaxResults
+var DescribeSoftwareAssociationsRequest_NextToken = &sDescribeSoftwareAssociationsRequest_NextToken
+
+var DescribeSoftwareAssociationsResult = &sDescribeSoftwareAssociationsResult
+var DescribeSoftwareAssociationsResult_AssociatedResource = &sDescribeSoftwareAssociationsResult_AssociatedResource
+var DescribeSoftwareAssociationsResult_SoftwareAssociations = &sDescribeSoftwareAssociationsResult_SoftwareAssociations
+var DescribeSoftwareAssociationsResult_NextToken = &sDescribeSoftwareAssociationsResult_NextToken
+
+var DescribeStacksRequest = &sDescribeStacksRequest
+var DescribeStacksRequest_Names = &sDescribeStacksRequest_Names
+var DescribeStacksRequest_NextToken = &sDescribeStacksRequest_NextToken
+
+var DescribeStacksResult = &sDescribeStacksResult
+var DescribeStacksResult_Stacks = &sDescribeStacksResult_Stacks
+var DescribeStacksResult_NextToken = &sDescribeStacksResult_NextToken
+
+var DescribeThemeForStackRequest = &sDescribeThemeForStackRequest
+var DescribeThemeForStackRequest_StackName = &sDescribeThemeForStackRequest_StackName
+
+var DescribeThemeForStackResult = &sDescribeThemeForStackResult
+var DescribeThemeForStackResult_Theme = &sDescribeThemeForStackResult_Theme
+
+var DescribeUsageReportSubscriptionsRequest = &sDescribeUsageReportSubscriptionsRequest
+var DescribeUsageReportSubscriptionsRequest_MaxResults = &sDescribeUsageReportSubscriptionsRequest_MaxResults
+var DescribeUsageReportSubscriptionsRequest_NextToken = &sDescribeUsageReportSubscriptionsRequest_NextToken
+
+var DescribeUsageReportSubscriptionsResult = &sDescribeUsageReportSubscriptionsResult
+var DescribeUsageReportSubscriptionsResult_UsageReportSubscriptions = &sDescribeUsageReportSubscriptionsResult_UsageReportSubscriptions
+var DescribeUsageReportSubscriptionsResult_NextToken = &sDescribeUsageReportSubscriptionsResult_NextToken
+
+var DescribeUsersRequest = &sDescribeUsersRequest
+var DescribeUsersRequest_AuthenticationType = &sDescribeUsersRequest_AuthenticationType
+var DescribeUsersRequest_MaxResults = &sDescribeUsersRequest_MaxResults
+var DescribeUsersRequest_NextToken = &sDescribeUsersRequest_NextToken
+
+var DescribeUsersResult = &sDescribeUsersResult
+var DescribeUsersResult_Users = &sDescribeUsersResult_Users
+var DescribeUsersResult_NextToken = &sDescribeUsersResult_NextToken
+
+var DescribeUserStackAssociationsRequest = &sDescribeUserStackAssociationsRequest
+var DescribeUserStackAssociationsRequest_StackName = &sDescribeUserStackAssociationsRequest_StackName
+var DescribeUserStackAssociationsRequest_UserName = &sDescribeUserStackAssociationsRequest_UserName
+var DescribeUserStackAssociationsRequest_AuthenticationType = &sDescribeUserStackAssociationsRequest_AuthenticationType
+var DescribeUserStackAssociationsRequest_MaxResults = &sDescribeUserStackAssociationsRequest_MaxResults
+var DescribeUserStackAssociationsRequest_NextToken = &sDescribeUserStackAssociationsRequest_NextToken
+
+var DescribeUserStackAssociationsResult = &sDescribeUserStackAssociationsResult
+var DescribeUserStackAssociationsResult_UserStackAssociations = &sDescribeUserStackAssociationsResult_UserStackAssociations
+var DescribeUserStackAssociationsResult_NextToken = &sDescribeUserStackAssociationsResult_NextToken
+
+var DisableUserRequest = &sDisableUserRequest
+var DisableUserRequest_UserName = &sDisableUserRequest_UserName
+var DisableUserRequest_AuthenticationType = &sDisableUserRequest_AuthenticationType
+
+var DisableUserResult = &sDisableUserResult
+
+var DisassociateAppBlockBuilderAppBlockRequest = &sDisassociateAppBlockBuilderAppBlockRequest
+var DisassociateAppBlockBuilderAppBlockRequest_AppBlockArn = &sDisassociateAppBlockBuilderAppBlockRequest_AppBlockArn
+var DisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName = &sDisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName
+
+var DisassociateAppBlockBuilderAppBlockResult = &sDisassociateAppBlockBuilderAppBlockResult
+
+var DisassociateApplicationFleetRequest = &sDisassociateApplicationFleetRequest
+var DisassociateApplicationFleetRequest_FleetName = &sDisassociateApplicationFleetRequest_FleetName
+var DisassociateApplicationFleetRequest_ApplicationArn = &sDisassociateApplicationFleetRequest_ApplicationArn
+
+var DisassociateApplicationFleetResult = &sDisassociateApplicationFleetResult
+
+var DisassociateApplicationFromEntitlementRequest = &sDisassociateApplicationFromEntitlementRequest
+var DisassociateApplicationFromEntitlementRequest_StackName = &sDisassociateApplicationFromEntitlementRequest_StackName
+var DisassociateApplicationFromEntitlementRequest_EntitlementName = &sDisassociateApplicationFromEntitlementRequest_EntitlementName
+var DisassociateApplicationFromEntitlementRequest_ApplicationIdentifier = &sDisassociateApplicationFromEntitlementRequest_ApplicationIdentifier
+
+var DisassociateApplicationFromEntitlementResult = &sDisassociateApplicationFromEntitlementResult
+
+var DisassociateFleetRequest = &sDisassociateFleetRequest
+var DisassociateFleetRequest_FleetName = &sDisassociateFleetRequest_FleetName
+var DisassociateFleetRequest_StackName = &sDisassociateFleetRequest_StackName
+
+var DisassociateFleetResult = &sDisassociateFleetResult
+
+var DisassociateSoftwareFromImageBuilderRequest = &sDisassociateSoftwareFromImageBuilderRequest
+var DisassociateSoftwareFromImageBuilderRequest_ImageBuilderName = &sDisassociateSoftwareFromImageBuilderRequest_ImageBuilderName
+var DisassociateSoftwareFromImageBuilderRequest_SoftwareNames = &sDisassociateSoftwareFromImageBuilderRequest_SoftwareNames
+
+var DisassociateSoftwareFromImageBuilderResult = &sDisassociateSoftwareFromImageBuilderResult
+
+var DrainSessionInstanceRequest = &sDrainSessionInstanceRequest
+var DrainSessionInstanceRequest_SessionId = &sDrainSessionInstanceRequest_SessionId
+
+var DrainSessionInstanceResult = &sDrainSessionInstanceResult
+
+var EnableUserRequest = &sEnableUserRequest
+var EnableUserRequest_UserName = &sEnableUserRequest_UserName
+var EnableUserRequest_AuthenticationType = &sEnableUserRequest_AuthenticationType
+
+var EnableUserResult = &sEnableUserResult
+
+var ExpireSessionRequest = &sExpireSessionRequest
+var ExpireSessionRequest_SessionId = &sExpireSessionRequest_SessionId
+
+var ExpireSessionResult = &sExpireSessionResult
+
+var GetExportImageTaskRequest = &sGetExportImageTaskRequest
+var GetExportImageTaskRequest_TaskId = &sGetExportImageTaskRequest_TaskId
+
+var GetExportImageTaskResult = &sGetExportImageTaskResult
+var GetExportImageTaskResult_ExportImageTask = &sGetExportImageTaskResult_ExportImageTask
+
+var ListAssociatedFleetsRequest = &sListAssociatedFleetsRequest
+var ListAssociatedFleetsRequest_StackName = &sListAssociatedFleetsRequest_StackName
+var ListAssociatedFleetsRequest_NextToken = &sListAssociatedFleetsRequest_NextToken
+
+var ListAssociatedFleetsResult = &sListAssociatedFleetsResult
+var ListAssociatedFleetsResult_Names = &sListAssociatedFleetsResult_Names
+var ListAssociatedFleetsResult_NextToken = &sListAssociatedFleetsResult_NextToken
+
+var ListAssociatedStacksRequest = &sListAssociatedStacksRequest
+var ListAssociatedStacksRequest_FleetName = &sListAssociatedStacksRequest_FleetName
+var ListAssociatedStacksRequest_NextToken = &sListAssociatedStacksRequest_NextToken
+
+var ListAssociatedStacksResult = &sListAssociatedStacksResult
+var ListAssociatedStacksResult_Names = &sListAssociatedStacksResult_Names
+var ListAssociatedStacksResult_NextToken = &sListAssociatedStacksResult_NextToken
+
+var ListEntitledApplicationsRequest = &sListEntitledApplicationsRequest
+var ListEntitledApplicationsRequest_StackName = &sListEntitledApplicationsRequest_StackName
+var ListEntitledApplicationsRequest_EntitlementName = &sListEntitledApplicationsRequest_EntitlementName
+var ListEntitledApplicationsRequest_NextToken = &sListEntitledApplicationsRequest_NextToken
+var ListEntitledApplicationsRequest_MaxResults = &sListEntitledApplicationsRequest_MaxResults
+
+var ListEntitledApplicationsResult = &sListEntitledApplicationsResult
+var ListEntitledApplicationsResult_EntitledApplications = &sListEntitledApplicationsResult_EntitledApplications
+var ListEntitledApplicationsResult_NextToken = &sListEntitledApplicationsResult_NextToken
+
+var ListExportImageTasksRequest = &sListExportImageTasksRequest
+var ListExportImageTasksRequest_Filters = &sListExportImageTasksRequest_Filters
+var ListExportImageTasksRequest_MaxResults = &sListExportImageTasksRequest_MaxResults
+var ListExportImageTasksRequest_NextToken = &sListExportImageTasksRequest_NextToken
+
+var ListExportImageTasksResult = &sListExportImageTasksResult
+var ListExportImageTasksResult_ExportImageTasks = &sListExportImageTasksResult_ExportImageTasks
+var ListExportImageTasksResult_NextToken = &sListExportImageTasksResult_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var StartAppBlockBuilderRequest = &sStartAppBlockBuilderRequest
+var StartAppBlockBuilderRequest_Name = &sStartAppBlockBuilderRequest_Name
+
+var StartAppBlockBuilderResult = &sStartAppBlockBuilderResult
+var StartAppBlockBuilderResult_AppBlockBuilder = &sStartAppBlockBuilderResult_AppBlockBuilder
+
+var StartFleetRequest = &sStartFleetRequest
+var StartFleetRequest_Name = &sStartFleetRequest_Name
+
+var StartFleetResult = &sStartFleetResult
+
+var StartImageBuilderRequest = &sStartImageBuilderRequest
+var StartImageBuilderRequest_Name = &sStartImageBuilderRequest_Name
+var StartImageBuilderRequest_AppstreamAgentVersion = &sStartImageBuilderRequest_AppstreamAgentVersion
+
+var StartImageBuilderResult = &sStartImageBuilderResult
+var StartImageBuilderResult_ImageBuilder = &sStartImageBuilderResult_ImageBuilder
+
+var StartSoftwareDeploymentToImageBuilderRequest = &sStartSoftwareDeploymentToImageBuilderRequest
+var StartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName = &sStartSoftwareDeploymentToImageBuilderRequest_ImageBuilderName
+var StartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments = &sStartSoftwareDeploymentToImageBuilderRequest_RetryFailedDeployments
+
+var StartSoftwareDeploymentToImageBuilderResult = &sStartSoftwareDeploymentToImageBuilderResult
+
+var StopAppBlockBuilderRequest = &sStopAppBlockBuilderRequest
+var StopAppBlockBuilderRequest_Name = &sStopAppBlockBuilderRequest_Name
+
+var StopAppBlockBuilderResult = &sStopAppBlockBuilderResult
+var StopAppBlockBuilderResult_AppBlockBuilder = &sStopAppBlockBuilderResult_AppBlockBuilder
+
+var StopFleetRequest = &sStopFleetRequest
+var StopFleetRequest_Name = &sStopFleetRequest_Name
+
+var StopFleetResult = &sStopFleetResult
+
+var StopImageBuilderRequest = &sStopImageBuilderRequest
+var StopImageBuilderRequest_Name = &sStopImageBuilderRequest_Name
+
+var StopImageBuilderResult = &sStopImageBuilderResult
+var StopImageBuilderResult_ImageBuilder = &sStopImageBuilderResult_ImageBuilder
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAppBlockBuilderRequest = &sUpdateAppBlockBuilderRequest
+var UpdateAppBlockBuilderRequest_Name = &sUpdateAppBlockBuilderRequest_Name
+var UpdateAppBlockBuilderRequest_Description = &sUpdateAppBlockBuilderRequest_Description
+var UpdateAppBlockBuilderRequest_DisplayName = &sUpdateAppBlockBuilderRequest_DisplayName
+var UpdateAppBlockBuilderRequest_Platform = &sUpdateAppBlockBuilderRequest_Platform
+var UpdateAppBlockBuilderRequest_InstanceType = &sUpdateAppBlockBuilderRequest_InstanceType
+var UpdateAppBlockBuilderRequest_VpcConfig = &sUpdateAppBlockBuilderRequest_VpcConfig
+var UpdateAppBlockBuilderRequest_EnableDefaultInternetAccess = &sUpdateAppBlockBuilderRequest_EnableDefaultInternetAccess
+var UpdateAppBlockBuilderRequest_IamRoleArn = &sUpdateAppBlockBuilderRequest_IamRoleArn
+var UpdateAppBlockBuilderRequest_AccessEndpoints = &sUpdateAppBlockBuilderRequest_AccessEndpoints
+var UpdateAppBlockBuilderRequest_AttributesToDelete = &sUpdateAppBlockBuilderRequest_AttributesToDelete
+var UpdateAppBlockBuilderRequest_DisableIMDSV1 = &sUpdateAppBlockBuilderRequest_DisableIMDSV1
+
+var UpdateAppBlockBuilderResult = &sUpdateAppBlockBuilderResult
+var UpdateAppBlockBuilderResult_AppBlockBuilder = &sUpdateAppBlockBuilderResult_AppBlockBuilder
+
+var UpdateApplicationRequest = &sUpdateApplicationRequest
+var UpdateApplicationRequest_Name = &sUpdateApplicationRequest_Name
+var UpdateApplicationRequest_DisplayName = &sUpdateApplicationRequest_DisplayName
+var UpdateApplicationRequest_Description = &sUpdateApplicationRequest_Description
+var UpdateApplicationRequest_IconS3Location = &sUpdateApplicationRequest_IconS3Location
+var UpdateApplicationRequest_LaunchPath = &sUpdateApplicationRequest_LaunchPath
+var UpdateApplicationRequest_WorkingDirectory = &sUpdateApplicationRequest_WorkingDirectory
+var UpdateApplicationRequest_LaunchParameters = &sUpdateApplicationRequest_LaunchParameters
+var UpdateApplicationRequest_AppBlockArn = &sUpdateApplicationRequest_AppBlockArn
+var UpdateApplicationRequest_AttributesToDelete = &sUpdateApplicationRequest_AttributesToDelete
+
+var UpdateApplicationResult = &sUpdateApplicationResult
+var UpdateApplicationResult_Application = &sUpdateApplicationResult_Application
+
+var UpdateDirectoryConfigRequest = &sUpdateDirectoryConfigRequest
+var UpdateDirectoryConfigRequest_DirectoryName = &sUpdateDirectoryConfigRequest_DirectoryName
+var UpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames = &sUpdateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames
+var UpdateDirectoryConfigRequest_ServiceAccountCredentials = &sUpdateDirectoryConfigRequest_ServiceAccountCredentials
+var UpdateDirectoryConfigRequest_CertificateBasedAuthProperties = &sUpdateDirectoryConfigRequest_CertificateBasedAuthProperties
+
+var UpdateDirectoryConfigResult = &sUpdateDirectoryConfigResult
+var UpdateDirectoryConfigResult_DirectoryConfig = &sUpdateDirectoryConfigResult_DirectoryConfig
+
+var UpdateEntitlementRequest = &sUpdateEntitlementRequest
+var UpdateEntitlementRequest_Name = &sUpdateEntitlementRequest_Name
+var UpdateEntitlementRequest_StackName = &sUpdateEntitlementRequest_StackName
+var UpdateEntitlementRequest_Description = &sUpdateEntitlementRequest_Description
+var UpdateEntitlementRequest_AppVisibility = &sUpdateEntitlementRequest_AppVisibility
+var UpdateEntitlementRequest_Attributes = &sUpdateEntitlementRequest_Attributes
+
+var UpdateEntitlementResult = &sUpdateEntitlementResult
+var UpdateEntitlementResult_Entitlement = &sUpdateEntitlementResult_Entitlement
+
+var UpdateFleetRequest = &sUpdateFleetRequest
+var UpdateFleetRequest_ImageName = &sUpdateFleetRequest_ImageName
+var UpdateFleetRequest_ImageArn = &sUpdateFleetRequest_ImageArn
+var UpdateFleetRequest_Name = &sUpdateFleetRequest_Name
+var UpdateFleetRequest_InstanceType = &sUpdateFleetRequest_InstanceType
+var UpdateFleetRequest_ComputeCapacity = &sUpdateFleetRequest_ComputeCapacity
+var UpdateFleetRequest_VpcConfig = &sUpdateFleetRequest_VpcConfig
+var UpdateFleetRequest_MaxUserDurationInSeconds = &sUpdateFleetRequest_MaxUserDurationInSeconds
+var UpdateFleetRequest_DisconnectTimeoutInSeconds = &sUpdateFleetRequest_DisconnectTimeoutInSeconds
+var UpdateFleetRequest_DeleteVpcConfig = &sUpdateFleetRequest_DeleteVpcConfig
+var UpdateFleetRequest_Description = &sUpdateFleetRequest_Description
+var UpdateFleetRequest_DisplayName = &sUpdateFleetRequest_DisplayName
+var UpdateFleetRequest_EnableDefaultInternetAccess = &sUpdateFleetRequest_EnableDefaultInternetAccess
+var UpdateFleetRequest_DomainJoinInfo = &sUpdateFleetRequest_DomainJoinInfo
+var UpdateFleetRequest_IdleDisconnectTimeoutInSeconds = &sUpdateFleetRequest_IdleDisconnectTimeoutInSeconds
+var UpdateFleetRequest_AttributesToDelete = &sUpdateFleetRequest_AttributesToDelete
+var UpdateFleetRequest_IamRoleArn = &sUpdateFleetRequest_IamRoleArn
+var UpdateFleetRequest_StreamView = &sUpdateFleetRequest_StreamView
+var UpdateFleetRequest_Platform = &sUpdateFleetRequest_Platform
+var UpdateFleetRequest_MaxConcurrentSessions = &sUpdateFleetRequest_MaxConcurrentSessions
+var UpdateFleetRequest_UsbDeviceFilterStrings = &sUpdateFleetRequest_UsbDeviceFilterStrings
+var UpdateFleetRequest_SessionScriptS3Location = &sUpdateFleetRequest_SessionScriptS3Location
+var UpdateFleetRequest_MaxSessionsPerInstance = &sUpdateFleetRequest_MaxSessionsPerInstance
+var UpdateFleetRequest_RootVolumeConfig = &sUpdateFleetRequest_RootVolumeConfig
+var UpdateFleetRequest_DisableIMDSV1 = &sUpdateFleetRequest_DisableIMDSV1
+
+var UpdateFleetResult = &sUpdateFleetResult
+var UpdateFleetResult_Fleet = &sUpdateFleetResult_Fleet
+
+var UpdateImagePermissionsRequest = &sUpdateImagePermissionsRequest
+var UpdateImagePermissionsRequest_Name = &sUpdateImagePermissionsRequest_Name
+var UpdateImagePermissionsRequest_SharedAccountId = &sUpdateImagePermissionsRequest_SharedAccountId
+var UpdateImagePermissionsRequest_ImagePermissions = &sUpdateImagePermissionsRequest_ImagePermissions
+
+var UpdateImagePermissionsResult = &sUpdateImagePermissionsResult
+
+var UpdateStackRequest = &sUpdateStackRequest
+var UpdateStackRequest_DisplayName = &sUpdateStackRequest_DisplayName
+var UpdateStackRequest_Description = &sUpdateStackRequest_Description
+var UpdateStackRequest_Name = &sUpdateStackRequest_Name
+var UpdateStackRequest_StorageConnectors = &sUpdateStackRequest_StorageConnectors
+var UpdateStackRequest_DeleteStorageConnectors = &sUpdateStackRequest_DeleteStorageConnectors
+var UpdateStackRequest_RedirectURL = &sUpdateStackRequest_RedirectURL
+var UpdateStackRequest_FeedbackURL = &sUpdateStackRequest_FeedbackURL
+var UpdateStackRequest_AttributesToDelete = &sUpdateStackRequest_AttributesToDelete
+var UpdateStackRequest_UserSettings = &sUpdateStackRequest_UserSettings
+var UpdateStackRequest_ApplicationSettings = &sUpdateStackRequest_ApplicationSettings
+var UpdateStackRequest_AccessEndpoints = &sUpdateStackRequest_AccessEndpoints
+var UpdateStackRequest_EmbedHostDomains = &sUpdateStackRequest_EmbedHostDomains
+var UpdateStackRequest_StreamingExperienceSettings = &sUpdateStackRequest_StreamingExperienceSettings
+var UpdateStackRequest_ContentRedirection = &sUpdateStackRequest_ContentRedirection
+var UpdateStackRequest_AgentAccessConfig = &sUpdateStackRequest_AgentAccessConfig
+var UpdateStackRequest_StorageConnectorAuthentication = &sUpdateStackRequest_StorageConnectorAuthentication
+
+var UpdateStackResult = &sUpdateStackResult
+var UpdateStackResult_Stack = &sUpdateStackResult_Stack
+
+var UpdateThemeForStackRequest = &sUpdateThemeForStackRequest
+var UpdateThemeForStackRequest_StackName = &sUpdateThemeForStackRequest_StackName
+var UpdateThemeForStackRequest_FooterLinks = &sUpdateThemeForStackRequest_FooterLinks
+var UpdateThemeForStackRequest_TitleText = &sUpdateThemeForStackRequest_TitleText
+var UpdateThemeForStackRequest_ThemeStyling = &sUpdateThemeForStackRequest_ThemeStyling
+var UpdateThemeForStackRequest_OrganizationLogoS3Location = &sUpdateThemeForStackRequest_OrganizationLogoS3Location
+var UpdateThemeForStackRequest_FaviconS3Location = &sUpdateThemeForStackRequest_FaviconS3Location
+var UpdateThemeForStackRequest_State = &sUpdateThemeForStackRequest_State
+var UpdateThemeForStackRequest_AttributesToDelete = &sUpdateThemeForStackRequest_AttributesToDelete
+
+var UpdateThemeForStackResult = &sUpdateThemeForStackResult
+var UpdateThemeForStackResult_Theme = &sUpdateThemeForStackResult_Theme
+
+var PhotonAdminProxyService = &smithy.ServiceSchema{Schema: &s_PhotonAdminProxyService, Version: "2016-12-01"}

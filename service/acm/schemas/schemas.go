@@ -4,3655 +4,3529 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddTagsToCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AddTagsToCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAcmeDomainValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeDomainValidation",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAcmeEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAcmeExternalAccountBinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeExternalAccountBinding",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAcmeDomainValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteAcmeDomainValidation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAcmeEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteAcmeEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAcmeExternalAccountBinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteAcmeExternalAccountBinding",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAcmeAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeAccount",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAcmeDomainValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeDomainValidation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAcmeEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAcmeExternalAccountBinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeExternalAccountBinding",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExportCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccountConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetAccountConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAcmeExternalAccountBindingCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetAcmeExternalAccountBindingCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ImportCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAcmeAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeAccounts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAcmeDomainValidations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeDomainValidations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAcmeEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAcmeExternalAccountBindings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeExternalAccountBindings",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCertificateDomainValidations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListCertificateDomainValidations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListCertificates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListTagsForCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutAccountConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PutAccountConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTagsFromCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RemoveTagsFromCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var RenewCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RenewCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var RequestCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RequestCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResendValidationEmail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ResendValidationEmail",
-}, smithy.ShapeTypeOperation, 0)
-
-var RevokeAcmeAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevokeAcmeAccount",
-}, smithy.ShapeTypeOperation, 0)
-
-var RevokeAcmeExternalAccountBinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevokeAcmeExternalAccountBinding",
-}, smithy.ShapeTypeOperation, 0)
-
-var RevokeCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevokeCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var SearchCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SearchCertificates",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAcmeDomainValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateAcmeDomainValidation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAcmeEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateAcmeEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCertificateOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateCertificateOptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CertificateManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateManager",
-}, smithy.ShapeTypeService, 0)
-
-var CertificateManager = smithy.NewServiceSchema(_CertificateManager, "2015-12-08")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
-		StatusCode: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AcmCertificateMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmCertificateMetadata",
-}, smithy.ShapeTypeStructure, 16)
-var AcmCertificateMetadata_CreatedAt *smithy.Schema
-
-var AcmCertificateMetadata_Exported *smithy.Schema
-
-var AcmCertificateMetadata_ImportedAt *smithy.Schema
-
-var AcmCertificateMetadata_InUse *smithy.Schema
-
-var AcmCertificateMetadata_IssuedAt *smithy.Schema
-
-var AcmCertificateMetadata_RenewalEligibility *smithy.Schema
-
-var AcmCertificateMetadata_RevokedAt *smithy.Schema
-
-var AcmCertificateMetadata_Status *smithy.Schema
-
-var AcmCertificateMetadata_RenewalStatus *smithy.Schema
-
-var AcmCertificateMetadata_Type *smithy.Schema
-
-var AcmCertificateMetadata_ExportOption *smithy.Schema
-
-var AcmCertificateMetadata_ManagedBy *smithy.Schema
-
-var AcmCertificateMetadata_ValidationMethod *smithy.Schema
-
-var AcmCertificateMetadata_CertificateKeyPairOrigin *smithy.Schema
-
-var AcmCertificateMetadata_AcmeEndpointArn *smithy.Schema
-
-var AcmCertificateMetadata_AcmeAccountId *smithy.Schema
-
-var AcmCertificateMetadataFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmCertificateMetadataFilter",
-}, smithy.ShapeTypeUnion, 11)
-var AcmCertificateMetadataFilter_Status *smithy.Schema
-
-var AcmCertificateMetadataFilter_RenewalStatus *smithy.Schema
-
-var AcmCertificateMetadataFilter_Type *smithy.Schema
-
-var AcmCertificateMetadataFilter_InUse *smithy.Schema
-
-var AcmCertificateMetadataFilter_Exported *smithy.Schema
-
-var AcmCertificateMetadataFilter_ExportOption *smithy.Schema
-
-var AcmCertificateMetadataFilter_ManagedBy *smithy.Schema
-
-var AcmCertificateMetadataFilter_ValidationMethod *smithy.Schema
-
-var AcmCertificateMetadataFilter_CertificateKeyPairOrigin *smithy.Schema
-
-var AcmCertificateMetadataFilter_AcmeEndpointArn *smithy.Schema
-
-var AcmCertificateMetadataFilter_AcmeAccountId *smithy.Schema
-
-var AcmeAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeAccount",
-}, smithy.ShapeTypeStructure, 6)
-var AcmeAccount_AccountUrl *smithy.Schema
-
-var AcmeAccount_PublicKeyThumbprint *smithy.Schema
-
-var AcmeAccount_Status *smithy.Schema
-
-var AcmeAccount_CreatedAt *smithy.Schema
-
-var AcmeAccount_AcmeExternalAccountBindingArn *smithy.Schema
-
-var AcmeAccount_Contacts *smithy.Schema
-
-var _AcmeAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AcmeAccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeAccountList",
-}, smithy.ShapeTypeList, 1)
-var _AcmeAccountList_member *smithy.Schema
-
-var AcmeAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeAccountStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AcmeAccountStatus_VALID *smithy.Schema
-
-var AcmeAccountStatus_DEACTIVATED *smithy.Schema
-
-var AcmeAccountStatus_REVOKED *smithy.Schema
-
-var AcmeAccountSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeAccountSummary",
-}, smithy.ShapeTypeStructure, 6)
-var AcmeAccountSummary_AccountUrl *smithy.Schema
-
-var AcmeAccountSummary_PublicKeyThumbprint *smithy.Schema
-
-var AcmeAccountSummary_Status *smithy.Schema
-
-var AcmeAccountSummary_CreatedAt *smithy.Schema
-
-var AcmeAccountSummary_AcmeExternalAccountBindingArn *smithy.Schema
-
-var AcmeAccountSummary_Contacts *smithy.Schema
-
-var AcmeAuthorizationBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeAuthorizationBehavior",
-}, smithy.ShapeTypeEnum, 1)
-var AcmeAuthorizationBehavior_PRE_APPROVED *smithy.Schema
-
-var AcmeContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeContact",
-}, smithy.ShapeTypeEnum, 2)
-var AcmeContact_REQUIRED *smithy.Schema
-
-var AcmeContact_NOT_REQUIRED *smithy.Schema
-
-var AcmeDomainValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeDomainValidation",
-}, smithy.ShapeTypeStructure, 9)
-var AcmeDomainValidation_AcmeDomainValidationArn *smithy.Schema
-
-var AcmeDomainValidation_AcmeEndpointArn *smithy.Schema
-
-var AcmeDomainValidation_DomainName *smithy.Schema
-
-var AcmeDomainValidation_PrevalidationType *smithy.Schema
-
-var AcmeDomainValidation_PrevalidationDetails *smithy.Schema
-
-var AcmeDomainValidation_Status *smithy.Schema
-
-var AcmeDomainValidation_FailureDetails *smithy.Schema
-
-var AcmeDomainValidation_CreatedAt *smithy.Schema
-
-var AcmeDomainValidation_UpdatedAt *smithy.Schema
-
-var _AcmeDomainValidationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeDomainValidationArn",
-}, smithy.ShapeTypeString, 0)
-
-var AcmeDomainValidationFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeDomainValidationFailureReason",
-}, smithy.ShapeTypeEnum, 9)
-var AcmeDomainValidationFailureReason_ACCESS_DENIED *smithy.Schema
-
-var AcmeDomainValidationFailureReason_DOMAIN_MISMATCH *smithy.Schema
-
-var AcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED *smithy.Schema
-
-var AcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE *smithy.Schema
-
-var AcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND *smithy.Schema
-
-var AcmeDomainValidationFailureReason_INTERNAL_FAILURE *smithy.Schema
-
-var AcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH *smithy.Schema
-
-var AcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN *smithy.Schema
-
-var AcmeDomainValidationFailureReason_TIMED_OUT *smithy.Schema
-
-var _AcmeDomainValidationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeDomainValidationList",
-}, smithy.ShapeTypeList, 1)
-var _AcmeDomainValidationList_member *smithy.Schema
-
-var AcmeDomainValidationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeDomainValidationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var AcmeDomainValidationStatus_VALIDATING *smithy.Schema
-
-var AcmeDomainValidationStatus_VALID *smithy.Schema
-
-var AcmeDomainValidationStatus_INVALID *smithy.Schema
-
-var AcmeDomainValidationStatus_DELETING *smithy.Schema
-
-var AcmeDomainValidationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeDomainValidationSummary",
-}, smithy.ShapeTypeStructure, 9)
-var AcmeDomainValidationSummary_AcmeDomainValidationArn *smithy.Schema
-
-var AcmeDomainValidationSummary_AcmeEndpointArn *smithy.Schema
-
-var AcmeDomainValidationSummary_DomainName *smithy.Schema
-
-var AcmeDomainValidationSummary_PrevalidationType *smithy.Schema
-
-var AcmeDomainValidationSummary_PrevalidationDetails *smithy.Schema
-
-var AcmeDomainValidationSummary_Status *smithy.Schema
-
-var AcmeDomainValidationSummary_FailureDetails *smithy.Schema
-
-var AcmeDomainValidationSummary_CreatedAt *smithy.Schema
-
-var AcmeDomainValidationSummary_UpdatedAt *smithy.Schema
-
-var AcmeEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeEndpoint",
-}, smithy.ShapeTypeStructure, 10)
-var AcmeEndpoint_AcmeEndpointArn *smithy.Schema
-
-var AcmeEndpoint_EndpointUrl *smithy.Schema
-
-var AcmeEndpoint_Status *smithy.Schema
-
-var AcmeEndpoint_FailureReason *smithy.Schema
-
-var AcmeEndpoint_AuthorizationBehavior *smithy.Schema
-
-var AcmeEndpoint_Contact *smithy.Schema
-
-var AcmeEndpoint_CertificateAuthority *smithy.Schema
-
-var AcmeEndpoint_CertificateTags *smithy.Schema
-
-var AcmeEndpoint_CreatedAt *smithy.Schema
-
-var AcmeEndpoint_UpdatedAt *smithy.Schema
-
-var _AcmeEndpointArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeEndpointArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AcmeEndpointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeEndpointList",
-}, smithy.ShapeTypeList, 1)
-var _AcmeEndpointList_member *smithy.Schema
-
-var AcmeEndpointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeEndpointStatus",
-}, smithy.ShapeTypeEnum, 4)
-var AcmeEndpointStatus_CREATING *smithy.Schema
-
-var AcmeEndpointStatus_ACTIVE *smithy.Schema
-
-var AcmeEndpointStatus_DELETING *smithy.Schema
-
-var AcmeEndpointStatus_FAILED *smithy.Schema
-
-var AcmeEndpointSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeEndpointSummary",
-}, smithy.ShapeTypeStructure, 10)
-var AcmeEndpointSummary_AcmeEndpointArn *smithy.Schema
-
-var AcmeEndpointSummary_EndpointUrl *smithy.Schema
-
-var AcmeEndpointSummary_Status *smithy.Schema
-
-var AcmeEndpointSummary_FailureReason *smithy.Schema
-
-var AcmeEndpointSummary_AuthorizationBehavior *smithy.Schema
-
-var AcmeEndpointSummary_Contact *smithy.Schema
-
-var AcmeEndpointSummary_CertificateAuthority *smithy.Schema
-
-var AcmeEndpointSummary_CertificateTags *smithy.Schema
-
-var AcmeEndpointSummary_CreatedAt *smithy.Schema
-
-var AcmeEndpointSummary_UpdatedAt *smithy.Schema
-
-var AcmeExternalAccountBinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeExternalAccountBinding",
-}, smithy.ShapeTypeStructure, 8)
-var AcmeExternalAccountBinding_AcmeExternalAccountBindingArn *smithy.Schema
-
-var AcmeExternalAccountBinding_AcmeEndpointArn *smithy.Schema
-
-var AcmeExternalAccountBinding_RoleArn *smithy.Schema
-
-var AcmeExternalAccountBinding_ExpiresAt *smithy.Schema
-
-var AcmeExternalAccountBinding_RevokedAt *smithy.Schema
-
-var AcmeExternalAccountBinding_LastUsedAt *smithy.Schema
-
-var AcmeExternalAccountBinding_CreatedAt *smithy.Schema
-
-var AcmeExternalAccountBinding_UpdatedAt *smithy.Schema
-
-var _AcmeExternalAccountBindingArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeExternalAccountBindingArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AcmeExternalAccountBindingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeExternalAccountBindingList",
-}, smithy.ShapeTypeList, 1)
-var _AcmeExternalAccountBindingList_member *smithy.Schema
-
-var AcmeExternalAccountBindingSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AcmeExternalAccountBindingSummary",
-}, smithy.ShapeTypeStructure, 8)
-var AcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn *smithy.Schema
-
-var AcmeExternalAccountBindingSummary_AcmeEndpointArn *smithy.Schema
-
-var AcmeExternalAccountBindingSummary_RoleArn *smithy.Schema
-
-var AcmeExternalAccountBindingSummary_ExpiresAt *smithy.Schema
-
-var AcmeExternalAccountBindingSummary_RevokedAt *smithy.Schema
-
-var AcmeExternalAccountBindingSummary_LastUsedAt *smithy.Schema
-
-var AcmeExternalAccountBindingSummary_CreatedAt *smithy.Schema
-
-var AcmeExternalAccountBindingSummary_UpdatedAt *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AvailabilityErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AvailabilityErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateArn",
-}, smithy.ShapeTypeString, 0)
-
-var CertificateAuthority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateAuthority",
-}, smithy.ShapeTypeUnion, 1)
-var CertificateAuthority_PublicCertificateAuthority *smithy.Schema
-
-var _CertificateBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateBody",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateBodyBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateBodyBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _CertificateChain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateChain",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateChainBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateChainBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var CertificateDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateDetail",
-}, smithy.ShapeTypeStructure, 31)
-var CertificateDetail_CertificateArn *smithy.Schema
-
-var CertificateDetail_DomainName *smithy.Schema
-
-var CertificateDetail_SubjectAlternativeNames *smithy.Schema
-
-var CertificateDetail_ManagedBy *smithy.Schema
-
-var CertificateDetail_DomainValidationOptions *smithy.Schema
-
-var CertificateDetail_Serial *smithy.Schema
-
-var CertificateDetail_Subject *smithy.Schema
-
-var CertificateDetail_Issuer *smithy.Schema
-
-var CertificateDetail_CreatedAt *smithy.Schema
-
-var CertificateDetail_IssuedAt *smithy.Schema
-
-var CertificateDetail_ImportedAt *smithy.Schema
-
-var CertificateDetail_Status *smithy.Schema
-
-var CertificateDetail_RevokedAt *smithy.Schema
-
-var CertificateDetail_RevocationReason *smithy.Schema
-
-var CertificateDetail_NotBefore *smithy.Schema
-
-var CertificateDetail_NotAfter *smithy.Schema
-
-var CertificateDetail_KeyAlgorithm *smithy.Schema
-
-var CertificateDetail_SignatureAlgorithm *smithy.Schema
-
-var CertificateDetail_InUseBy *smithy.Schema
-
-var CertificateDetail_FailureReason *smithy.Schema
-
-var CertificateDetail_Type *smithy.Schema
-
-var CertificateDetail_RenewalSummary *smithy.Schema
-
-var CertificateDetail_KeyUsages *smithy.Schema
-
-var CertificateDetail_ExtendedKeyUsages *smithy.Schema
-
-var CertificateDetail_CertificateAuthorityArn *smithy.Schema
-
-var CertificateDetail_RenewalEligibility *smithy.Schema
-
-var CertificateDetail_Options *smithy.Schema
-
-var CertificateDetail_UpdateSummary *smithy.Schema
-
-var CertificateDetail_CertificateKeyPairOrigin *smithy.Schema
-
-var CertificateDetail_AcmeEndpointArn *smithy.Schema
-
-var CertificateDetail_AcmeAccountId *smithy.Schema
-
-var CertificateExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateExport",
-}, smithy.ShapeTypeEnum, 2)
-var CertificateExport_ENABLED *smithy.Schema
-
-var CertificateExport_DISABLED *smithy.Schema
-
-var CertificateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateFilter",
-}, smithy.ShapeTypeUnion, 3)
-var CertificateFilter_CertificateArn *smithy.Schema
-
-var CertificateFilter_X509AttributeFilter *smithy.Schema
-
-var CertificateFilter_AcmCertificateMetadataFilter *smithy.Schema
-
-var CertificateFilterStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateFilterStatement",
-}, smithy.ShapeTypeUnion, 4)
-var CertificateFilterStatement_And *smithy.Schema
-
-var CertificateFilterStatement_Or *smithy.Schema
-
-var CertificateFilterStatement_Not *smithy.Schema
-
-var CertificateFilterStatement_Filter *smithy.Schema
-
-var _CertificateFilterStatementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateFilterStatementList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateFilterStatementList_member *smithy.Schema
-
-var CertificateKeyPairOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateKeyPairOrigin",
-}, smithy.ShapeTypeEnum, 3)
-var CertificateKeyPairOrigin_AWS_MANAGED *smithy.Schema
-
-var CertificateKeyPairOrigin_ACME *smithy.Schema
-
-var CertificateKeyPairOrigin_CUSTOMER_PROVIDED *smithy.Schema
-
-var _CertificateKeyPairOrigins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateKeyPairOrigins",
-}, smithy.ShapeTypeList, 1)
-var _CertificateKeyPairOrigins_member *smithy.Schema
-
-var CertificateManagedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateManagedBy",
-}, smithy.ShapeTypeEnum, 1)
-var CertificateManagedBy_CLOUDFRONT *smithy.Schema
-
-var CertificateMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateMetadata",
-}, smithy.ShapeTypeUnion, 1)
-var CertificateMetadata_AcmCertificateMetadata *smithy.Schema
-
-var CertificateOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateOptions",
-}, smithy.ShapeTypeStructure, 3)
-var CertificateOptions_CertificateTransparencyLoggingPreference *smithy.Schema
-
-var CertificateOptions_Export *smithy.Schema
-
-var CertificateOptions_ValidationMethod *smithy.Schema
-
-var CertificateSearchResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateSearchResult",
-}, smithy.ShapeTypeStructure, 3)
-var CertificateSearchResult_CertificateArn *smithy.Schema
-
-var CertificateSearchResult_X509Attributes *smithy.Schema
-
-var CertificateSearchResult_CertificateMetadata *smithy.Schema
-
-var _CertificateSearchResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateSearchResultList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateSearchResultList_member *smithy.Schema
-
-var CertificateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateStatus",
-}, smithy.ShapeTypeEnum, 7)
-var CertificateStatus_PENDING_VALIDATION *smithy.Schema
-
-var CertificateStatus_ISSUED *smithy.Schema
-
-var CertificateStatus_INACTIVE *smithy.Schema
-
-var CertificateStatus_EXPIRED *smithy.Schema
-
-var CertificateStatus_VALIDATION_TIMED_OUT *smithy.Schema
-
-var CertificateStatus_REVOKED *smithy.Schema
-
-var CertificateStatus_FAILED *smithy.Schema
-
-var _CertificateStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateStatuses",
-}, smithy.ShapeTypeList, 1)
-var _CertificateStatuses_member *smithy.Schema
-
-var CertificateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateSummary",
-}, smithy.ShapeTypeStructure, 21)
-var CertificateSummary_CertificateArn *smithy.Schema
-
-var CertificateSummary_DomainName *smithy.Schema
-
-var CertificateSummary_SubjectAlternativeNameSummaries *smithy.Schema
-
-var CertificateSummary_HasAdditionalSubjectAlternativeNames *smithy.Schema
-
-var CertificateSummary_Status *smithy.Schema
-
-var CertificateSummary_Type *smithy.Schema
-
-var CertificateSummary_KeyAlgorithm *smithy.Schema
-
-var CertificateSummary_KeyUsages *smithy.Schema
-
-var CertificateSummary_ExtendedKeyUsages *smithy.Schema
-
-var CertificateSummary_ExportOption *smithy.Schema
-
-var CertificateSummary_InUse *smithy.Schema
-
-var CertificateSummary_Exported *smithy.Schema
-
-var CertificateSummary_RenewalEligibility *smithy.Schema
-
-var CertificateSummary_NotBefore *smithy.Schema
-
-var CertificateSummary_NotAfter *smithy.Schema
-
-var CertificateSummary_CreatedAt *smithy.Schema
-
-var CertificateSummary_IssuedAt *smithy.Schema
-
-var CertificateSummary_ImportedAt *smithy.Schema
-
-var CertificateSummary_RevokedAt *smithy.Schema
-
-var CertificateSummary_ManagedBy *smithy.Schema
-
-var CertificateSummary_CertificateKeyPairOrigin *smithy.Schema
-
-var _CertificateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateSummaryList_member *smithy.Schema
-
-var CertificateTransparencyLoggingPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateTransparencyLoggingPreference",
-}, smithy.ShapeTypeEnum, 2)
-var CertificateTransparencyLoggingPreference_ENABLED *smithy.Schema
-
-var CertificateTransparencyLoggingPreference_DISABLED *smithy.Schema
-
-var CertificateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CertificateType",
-}, smithy.ShapeTypeEnum, 3)
-var CertificateType_IMPORTED *smithy.Schema
-
-var CertificateType_AMAZON_ISSUED *smithy.Schema
-
-var CertificateType_PRIVATE *smithy.Schema
-
-var CommonNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CommonNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var CommonNameFilter_Value *smithy.Schema
-
-var CommonNameFilter_ComparisonOperator *smithy.Schema
-
-var ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeEnum, 2)
-var ComparisonOperator_CONTAINS *smithy.Schema
-
-var ComparisonOperator_EQUALS *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ConflictException_message *smithy.Schema
-
-var _ContactList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ContactList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _ContactList_member *smithy.Schema
-
-var _CoralAvailabilityThrottledResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CoralAvailabilityThrottledResource",
-}, smithy.ShapeTypeString, 0)
-
-var _CoralAvailabilityThrottlingReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CoralAvailabilityThrottlingReason",
-}, smithy.ShapeTypeString, 0)
-
-var CustomAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CustomAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var CustomAttribute_ObjectIdentifier *smithy.Schema
-
-var CustomAttribute_Value *smithy.Schema
-
-var _CustomAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CustomAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _CustomAttributeList_member *smithy.Schema
-
-var DistinguishedName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DistinguishedName",
-}, smithy.ShapeTypeStructure, 16)
-var DistinguishedName_CommonName *smithy.Schema
-
-var DistinguishedName_DomainComponents *smithy.Schema
-
-var DistinguishedName_Country *smithy.Schema
-
-var DistinguishedName_CustomAttributes *smithy.Schema
-
-var DistinguishedName_DistinguishedNameQualifier *smithy.Schema
-
-var DistinguishedName_GenerationQualifier *smithy.Schema
-
-var DistinguishedName_GivenName *smithy.Schema
-
-var DistinguishedName_Initials *smithy.Schema
-
-var DistinguishedName_Locality *smithy.Schema
-
-var DistinguishedName_Organization *smithy.Schema
-
-var DistinguishedName_OrganizationalUnit *smithy.Schema
-
-var DistinguishedName_Pseudonym *smithy.Schema
-
-var DistinguishedName_SerialNumber *smithy.Schema
-
-var DistinguishedName_State *smithy.Schema
-
-var DistinguishedName_Surname *smithy.Schema
-
-var DistinguishedName_Title *smithy.Schema
-
-var DnsNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DnsNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DnsNameFilter_Value *smithy.Schema
-
-var DnsNameFilter_ComparisonOperator *smithy.Schema
-
-var DnsPrevalidationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DnsPrevalidationDetails",
-}, smithy.ShapeTypeStructure, 3)
-var DnsPrevalidationDetails_DomainScope *smithy.Schema
-
-var DnsPrevalidationDetails_HostedZoneId *smithy.Schema
-
-var DnsPrevalidationDetails_ResourceRecord *smithy.Schema
-
-var DnsPrevalidationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DnsPrevalidationOptions",
-}, smithy.ShapeTypeStructure, 2)
-var DnsPrevalidationOptions_DomainScope *smithy.Schema
-
-var DnsPrevalidationOptions_HostedZoneId *smithy.Schema
-
-var DnsValidationChallenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DnsValidationChallenge",
-}, smithy.ShapeTypeStructure, 1)
-var DnsValidationChallenge_ResourceRecord *smithy.Schema
-
-var _DomainComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainComponentList",
-}, smithy.ShapeTypeList, 1)
-var _DomainComponentList_member *smithy.Schema
-
-var _DomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainList",
-}, smithy.ShapeTypeList, 1)
-var _DomainList_member *smithy.Schema
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainNameString",
-}, smithy.ShapeTypeString, 0)
-
-var DomainScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainScope",
-}, smithy.ShapeTypeStructure, 3)
-var DomainScope_ExactDomain *smithy.Schema
-
-var DomainScope_Subdomains *smithy.Schema
-
-var DomainScope_Wildcards *smithy.Schema
-
-var DomainScopeOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainScopeOption",
-}, smithy.ShapeTypeEnum, 2)
-var DomainScopeOption_ENABLED *smithy.Schema
-
-var DomainScopeOption_DISABLED *smithy.Schema
-
-var DomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DomainStatus_PENDING_VALIDATION *smithy.Schema
-
-var DomainStatus_SUCCESS *smithy.Schema
-
-var DomainStatus_FAILED *smithy.Schema
-
-var DomainValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainValidation",
-}, smithy.ShapeTypeStructure, 7)
-var DomainValidation_DomainName *smithy.Schema
-
-var DomainValidation_ValidationEmails *smithy.Schema
-
-var DomainValidation_ValidationDomain *smithy.Schema
-
-var DomainValidation_ValidationStatus *smithy.Schema
-
-var DomainValidation_ResourceRecord *smithy.Schema
-
-var DomainValidation_HttpRedirect *smithy.Schema
-
-var DomainValidation_ValidationMethod *smithy.Schema
-
-var _DomainValidationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainValidationList",
-}, smithy.ShapeTypeList, 1)
-var _DomainValidationList_member *smithy.Schema
-
-var DomainValidationMethodUpdateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainValidationMethodUpdateSummary",
-}, smithy.ShapeTypeStructure, 2)
-var DomainValidationMethodUpdateSummary_From *smithy.Schema
-
-var DomainValidationMethodUpdateSummary_To *smithy.Schema
-
-var DomainValidationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainValidationOption",
-}, smithy.ShapeTypeStructure, 2)
-var DomainValidationOption_DomainName *smithy.Schema
-
-var DomainValidationOption_ValidationDomain *smithy.Schema
-
-var _DomainValidationOptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainValidationOptionList",
-}, smithy.ShapeTypeList, 1)
-var _DomainValidationOptionList_member *smithy.Schema
-
-var DomainValidationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainValidationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var DomainValidationSummary_DomainName *smithy.Schema
-
-var DomainValidationSummary_ActiveValidationConfiguration *smithy.Schema
-
-var DomainValidationSummary_RequestedValidationConfiguration *smithy.Schema
-
-var _DomainValidationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DomainValidationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DomainValidationSummaryList_member *smithy.Schema
-
-var EmailValidationChallenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "EmailValidationChallenge",
-}, smithy.ShapeTypeStructure, 2)
-var EmailValidationChallenge_ValidationEmails *smithy.Schema
-
-var EmailValidationChallenge_ValidationDomain *smithy.Schema
-
-var Expiration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "Expiration",
-}, smithy.ShapeTypeStructure, 2)
-var Expiration_Value *smithy.Schema
-
-var Expiration_Type *smithy.Schema
-
-var ExpiryEventsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExpiryEventsConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ExpiryEventsConfiguration_DaysBeforeExpiry *smithy.Schema
-
-var ExtendedKeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExtendedKeyUsage",
-}, smithy.ShapeTypeStructure, 2)
-var ExtendedKeyUsage_Name *smithy.Schema
-
-var ExtendedKeyUsage_OID *smithy.Schema
-
-var _ExtendedKeyUsageFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExtendedKeyUsageFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ExtendedKeyUsageFilterList_member *smithy.Schema
-
-var _ExtendedKeyUsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExtendedKeyUsageList",
-}, smithy.ShapeTypeList, 1)
-var _ExtendedKeyUsageList_member *smithy.Schema
-
-var ExtendedKeyUsageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExtendedKeyUsageName",
-}, smithy.ShapeTypeEnum, 12)
-var ExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION *smithy.Schema
-
-var ExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION *smithy.Schema
-
-var ExtendedKeyUsageName_CODE_SIGNING *smithy.Schema
-
-var ExtendedKeyUsageName_EMAIL_PROTECTION *smithy.Schema
-
-var ExtendedKeyUsageName_TIME_STAMPING *smithy.Schema
-
-var ExtendedKeyUsageName_OCSP_SIGNING *smithy.Schema
-
-var ExtendedKeyUsageName_IPSEC_END_SYSTEM *smithy.Schema
-
-var ExtendedKeyUsageName_IPSEC_TUNNEL *smithy.Schema
-
-var ExtendedKeyUsageName_IPSEC_USER *smithy.Schema
-
-var ExtendedKeyUsageName_ANY *smithy.Schema
-
-var ExtendedKeyUsageName_NONE *smithy.Schema
-
-var ExtendedKeyUsageName_CUSTOM *smithy.Schema
-
-var _ExtendedKeyUsageNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExtendedKeyUsageNames",
-}, smithy.ShapeTypeList, 1)
-var _ExtendedKeyUsageNames_member *smithy.Schema
-
-var FailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "FailureDetails",
-}, smithy.ShapeTypeStructure, 2)
-var FailureDetails_Reason *smithy.Schema
-
-var FailureDetails_Message *smithy.Schema
-
-var FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeEnum, 17)
-var FailureReason_NO_AVAILABLE_CONTACTS *smithy.Schema
-
-var FailureReason_ADDITIONAL_VERIFICATION_REQUIRED *smithy.Schema
-
-var FailureReason_DOMAIN_NOT_ALLOWED *smithy.Schema
-
-var FailureReason_INVALID_PUBLIC_DOMAIN *smithy.Schema
-
-var FailureReason_DOMAIN_VALIDATION_DENIED *smithy.Schema
-
-var FailureReason_CAA_ERROR *smithy.Schema
-
-var FailureReason_PCA_LIMIT_EXCEEDED *smithy.Schema
-
-var FailureReason_PCA_INVALID_ARN *smithy.Schema
-
-var FailureReason_PCA_INVALID_STATE *smithy.Schema
-
-var FailureReason_PCA_REQUEST_FAILED *smithy.Schema
-
-var FailureReason_PCA_NAME_CONSTRAINTS_VALIDATION *smithy.Schema
-
-var FailureReason_PCA_RESOURCE_NOT_FOUND *smithy.Schema
-
-var FailureReason_PCA_INVALID_ARGS *smithy.Schema
-
-var FailureReason_PCA_INVALID_DURATION *smithy.Schema
-
-var FailureReason_PCA_ACCESS_DENIED *smithy.Schema
-
-var FailureReason_SLR_NOT_FOUND *smithy.Schema
-
-var FailureReason_OTHER *smithy.Schema
-
-var Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "Filters",
-}, smithy.ShapeTypeStructure, 5)
-var Filters_extendedKeyUsage *smithy.Schema
-
-var Filters_keyUsage *smithy.Schema
-
-var Filters_keyTypes *smithy.Schema
-
-var Filters_exportOption *smithy.Schema
-
-var Filters_managedBy *smithy.Schema
-
-var _FilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "FilterString",
-}, smithy.ShapeTypeString, 0)
-
-var GeneralName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GeneralName",
-}, smithy.ShapeTypeUnion, 7)
-var GeneralName_DirectoryName *smithy.Schema
-
-var GeneralName_DnsName *smithy.Schema
-
-var GeneralName_IpAddress *smithy.Schema
-
-var GeneralName_OtherName *smithy.Schema
-
-var GeneralName_RegisteredId *smithy.Schema
-
-var GeneralName_Rfc822Name *smithy.Schema
-
-var GeneralName_UniformResourceIdentifier *smithy.Schema
-
-var _GeneralNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GeneralNameList",
-}, smithy.ShapeTypeList, 1)
-var _GeneralNameList_member *smithy.Schema
-
-var _HostedZoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "HostedZoneId",
-}, smithy.ShapeTypeString, 0)
-
-var HttpRedirect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "HttpRedirect",
-}, smithy.ShapeTypeStructure, 2)
-var HttpRedirect_RedirectFrom *smithy.Schema
-
-var HttpRedirect_RedirectTo *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerException_message *smithy.Schema
-
-var _InUseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InUseList",
-}, smithy.ShapeTypeList, 1)
-var _InUseList_member *smithy.Schema
-
-var InvalidArgsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InvalidArgsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidArgsException_message *smithy.Schema
-
-var InvalidArnException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InvalidArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidArnException_message *smithy.Schema
-
-var InvalidDomainValidationOptionsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InvalidDomainValidationOptionsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidDomainValidationOptionsException_message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidParameterException_message *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidStateException_message *smithy.Schema
-
-var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidTagException_message *smithy.Schema
-
-var KeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "KeyAlgorithm",
-}, smithy.ShapeTypeEnum, 7)
-var KeyAlgorithm_RSA_1024 *smithy.Schema
-
-var KeyAlgorithm_RSA_2048 *smithy.Schema
-
-var KeyAlgorithm_RSA_3072 *smithy.Schema
-
-var KeyAlgorithm_RSA_4096 *smithy.Schema
-
-var KeyAlgorithm_EC_prime256v1 *smithy.Schema
-
-var KeyAlgorithm_EC_secp384r1 *smithy.Schema
-
-var KeyAlgorithm_EC_secp521r1 *smithy.Schema
-
-var _KeyAlgorithmList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "KeyAlgorithmList",
-}, smithy.ShapeTypeList, 1)
-var _KeyAlgorithmList_member *smithy.Schema
-
-var KeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "KeyUsage",
-}, smithy.ShapeTypeStructure, 1)
-var KeyUsage_Name *smithy.Schema
-
-var _KeyUsageFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "KeyUsageFilterList",
-}, smithy.ShapeTypeList, 1)
-var _KeyUsageFilterList_member *smithy.Schema
-
-var _KeyUsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "KeyUsageList",
-}, smithy.ShapeTypeList, 1)
-var _KeyUsageList_member *smithy.Schema
-
-var KeyUsageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "KeyUsageName",
-}, smithy.ShapeTypeEnum, 11)
-var KeyUsageName_DIGITAL_SIGNATURE *smithy.Schema
-
-var KeyUsageName_NON_REPUDATION *smithy.Schema
-
-var KeyUsageName_KEY_ENCIPHERMENT *smithy.Schema
-
-var KeyUsageName_DATA_ENCIPHERMENT *smithy.Schema
-
-var KeyUsageName_KEY_AGREEMENT *smithy.Schema
-
-var KeyUsageName_CERTIFICATE_SIGNING *smithy.Schema
-
-var KeyUsageName_CRL_SIGNING *smithy.Schema
-
-var KeyUsageName_ENCHIPER_ONLY *smithy.Schema
-
-var KeyUsageName_DECIPHER_ONLY *smithy.Schema
-
-var KeyUsageName_ANY *smithy.Schema
-
-var KeyUsageName_CUSTOM *smithy.Schema
-
-var _KeyUsageNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "KeyUsageNames",
-}, smithy.ShapeTypeList, 1)
-var _KeyUsageNames_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var LimitExceededException_message *smithy.Schema
-
-var _MacKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "MacKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MaxItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "MaxItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "NullableBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var OtherName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "OtherName",
-}, smithy.ShapeTypeStructure, 2)
-var OtherName_ObjectIdentifier *smithy.Schema
-
-var OtherName_Value *smithy.Schema
-
-var _PassphraseBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PassphraseBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _PcaArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PcaArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PositiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PositiveInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var PrevalidationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PrevalidationDetails",
-}, smithy.ShapeTypeUnion, 1)
-var PrevalidationDetails_DnsPrevalidation *smithy.Schema
-
-var PrevalidationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PrevalidationOptions",
-}, smithy.ShapeTypeUnion, 1)
-var PrevalidationOptions_DnsPrevalidation *smithy.Schema
-
-var PrevalidationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PrevalidationType",
-}, smithy.ShapeTypeEnum, 1)
-var PrevalidationType_DNS_PREVALIDATION *smithy.Schema
-
-var _PrivateKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PrivateKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PrivateKeyBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PrivateKeyBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var PublicCertificateAuthority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PublicCertificateAuthority",
-}, smithy.ShapeTypeStructure, 1)
-var PublicCertificateAuthority_AllowedKeyAlgorithms *smithy.Schema
-
-var PublicKeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PublicKeyAlgorithm",
-}, smithy.ShapeTypeEnum, 3)
-var PublicKeyAlgorithm_RSA_2048 *smithy.Schema
-
-var PublicKeyAlgorithm_EC_PRIME256_V1 *smithy.Schema
-
-var PublicKeyAlgorithm_EC_SECP384_R1 *smithy.Schema
-
-var _PublicKeyAlgorithmList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PublicKeyAlgorithmList",
-}, smithy.ShapeTypeList, 1)
-var _PublicKeyAlgorithmList_member *smithy.Schema
-
-var RecordType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RecordType",
-}, smithy.ShapeTypeEnum, 1)
-var RecordType_CNAME *smithy.Schema
-
-var RenewalEligibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RenewalEligibility",
-}, smithy.ShapeTypeEnum, 2)
-var RenewalEligibility_ELIGIBLE *smithy.Schema
-
-var RenewalEligibility_INELIGIBLE *smithy.Schema
-
-var RenewalStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RenewalStatus",
-}, smithy.ShapeTypeEnum, 4)
-var RenewalStatus_PENDING_AUTO_RENEWAL *smithy.Schema
-
-var RenewalStatus_PENDING_VALIDATION *smithy.Schema
-
-var RenewalStatus_SUCCESS *smithy.Schema
-
-var RenewalStatus_FAILED *smithy.Schema
-
-var RenewalSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RenewalSummary",
-}, smithy.ShapeTypeStructure, 4)
-var RenewalSummary_RenewalStatus *smithy.Schema
-
-var RenewalSummary_DomainValidationOptions *smithy.Schema
-
-var RenewalSummary_RenewalStatusReason *smithy.Schema
-
-var RenewalSummary_UpdatedAt *smithy.Schema
-
-var RequestInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RequestInProgressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var RequestInProgressException_message *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceInUseException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ResourceRecord",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceRecord_Name *smithy.Schema
-
-var ResourceRecord_Type *smithy.Schema
-
-var ResourceRecord_Value *smithy.Schema
-
-var RevocationReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevocationReason",
-}, smithy.ShapeTypeEnum, 11)
-var RevocationReason_UNSPECIFIED *smithy.Schema
-
-var RevocationReason_KEY_COMPROMISE *smithy.Schema
-
-var RevocationReason_CA_COMPROMISE *smithy.Schema
-
-var RevocationReason_AFFILIATION_CHANGED *smithy.Schema
-
-var RevocationReason_SUPERCEDED *smithy.Schema
-
-var RevocationReason_SUPERSEDED *smithy.Schema
-
-var RevocationReason_CESSATION_OF_OPERATION *smithy.Schema
-
-var RevocationReason_CERTIFICATE_HOLD *smithy.Schema
-
-var RevocationReason_REMOVE_FROM_CRL *smithy.Schema
-
-var RevocationReason_PRIVILEGE_WITHDRAWN *smithy.Schema
-
-var RevocationReason_A_A_COMPROMISE *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var SearchCertificatesSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SearchCertificatesSortBy",
-}, smithy.ShapeTypeEnum, 21)
-var SearchCertificatesSortBy_CREATED_AT *smithy.Schema
-
-var SearchCertificatesSortBy_NOT_AFTER *smithy.Schema
-
-var SearchCertificatesSortBy_STATUS *smithy.Schema
-
-var SearchCertificatesSortBy_RENEWAL_STATUS *smithy.Schema
-
-var SearchCertificatesSortBy_EXPORTED *smithy.Schema
-
-var SearchCertificatesSortBy_IN_USE *smithy.Schema
-
-var SearchCertificatesSortBy_NOT_BEFORE *smithy.Schema
-
-var SearchCertificatesSortBy_KEY_ALGORITHM *smithy.Schema
-
-var SearchCertificatesSortBy_TYPE *smithy.Schema
-
-var SearchCertificatesSortBy_CERTIFICATE_ARN *smithy.Schema
-
-var SearchCertificatesSortBy_COMMON_NAME *smithy.Schema
-
-var SearchCertificatesSortBy_REVOKED_AT *smithy.Schema
-
-var SearchCertificatesSortBy_RENEWAL_ELIGIBILITY *smithy.Schema
-
-var SearchCertificatesSortBy_ISSUED_AT *smithy.Schema
-
-var SearchCertificatesSortBy_MANAGED_BY *smithy.Schema
-
-var SearchCertificatesSortBy_EXPORT_OPTION *smithy.Schema
-
-var SearchCertificatesSortBy_VALIDATION_METHOD *smithy.Schema
-
-var SearchCertificatesSortBy_IMPORTED_AT *smithy.Schema
-
-var SearchCertificatesSortBy_ACME_ENDPOINT_ARN *smithy.Schema
-
-var SearchCertificatesSortBy_ACME_ACCOUNT_ID *smithy.Schema
-
-var SearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN *smithy.Schema
-
-var SearchCertificatesSortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SearchCertificatesSortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SearchCertificatesSortOrder_ASCENDING *smithy.Schema
-
-var SearchCertificatesSortOrder_DESCENDING *smithy.Schema
-
-var _SearchMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SearchMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SerialNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SerialNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ServiceErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SortBy",
-}, smithy.ShapeTypeEnum, 1)
-var SortBy_CREATED_AT *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var SubjectAlternativeNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SubjectAlternativeNameFilter",
-}, smithy.ShapeTypeUnion, 1)
-var SubjectAlternativeNameFilter_DnsName *smithy.Schema
-
-var SubjectFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SubjectFilter",
-}, smithy.ShapeTypeUnion, 1)
-var SubjectFilter_CommonName *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TagPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TagPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TagPolicyException_message *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "Throttling",
-		StatusCode: 400})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_throttlingReasons *smithy.Schema
-
-var ThrottlingReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ThrottlingReason",
-}, smithy.ShapeTypeStructure, 2)
-var ThrottlingReason_reason *smithy.Schema
-
-var ThrottlingReason_resource *smithy.Schema
-
-var _ThrottlingReasonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ThrottlingReasonList",
-}, smithy.ShapeTypeList, 1)
-var _ThrottlingReasonList_member *smithy.Schema
-
-var TimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimestampRange_Start *smithy.Schema
-
-var TimestampRange_End *smithy.Schema
-
-var TimeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TimeType",
-}, smithy.ShapeTypeEnum, 3)
-var TimeType_MINUTES *smithy.Schema
-
-var TimeType_HOURS *smithy.Schema
-
-var TimeType_DAYS *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TooManyTagsException_message *smithy.Schema
-
-var _TStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateStatus",
-}, smithy.ShapeTypeEnum, 3)
-var UpdateStatus_PENDING_DOMAIN_VALIDATION *smithy.Schema
-
-var UpdateStatus_SUCCESS *smithy.Schema
-
-var UpdateStatus_FAILED *smithy.Schema
-
-var UpdateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateSummary",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSummary_Status *smithy.Schema
-
-var UpdateSummary_Type *smithy.Schema
-
-var UpdateSummary_DomainValidationMethodUpdateSummary *smithy.Schema
-
-var UpdateSummary_RequestedAt *smithy.Schema
-
-var UpdateSummary_UpdatedAt *smithy.Schema
-
-var UpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateType",
-}, smithy.ShapeTypeEnum, 1)
-var UpdateType_DOMAIN_VALIDATION_METHOD *smithy.Schema
-
-var ValidationChallenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ValidationChallenge",
-}, smithy.ShapeTypeUnion, 2)
-var ValidationChallenge_EmailValidationChallenge *smithy.Schema
-
-var ValidationChallenge_DnsValidationChallenge *smithy.Schema
-
-var ValidationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ValidationConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ValidationConfiguration_ValidationMethod *smithy.Schema
-
-var ValidationConfiguration_ValidationChallenge *smithy.Schema
-
-var ValidationConfiguration_ValidationStatus *smithy.Schema
-
-var _ValidationEmailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ValidationEmailList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationEmailList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationError",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var _ValidationExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ValidationExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ValidationMethod",
-}, smithy.ShapeTypeEnum, 3)
-var ValidationMethod_EMAIL *smithy.Schema
-
-var ValidationMethod_DNS *smithy.Schema
-
-var ValidationMethod_HTTP *smithy.Schema
-
-var X509AttributeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "X509AttributeFilter",
-}, smithy.ShapeTypeUnion, 8)
-var X509AttributeFilter_Subject *smithy.Schema
-
-var X509AttributeFilter_SubjectAlternativeName *smithy.Schema
-
-var X509AttributeFilter_ExtendedKeyUsage *smithy.Schema
-
-var X509AttributeFilter_KeyUsage *smithy.Schema
-
-var X509AttributeFilter_KeyAlgorithm *smithy.Schema
-
-var X509AttributeFilter_SerialNumber *smithy.Schema
-
-var X509AttributeFilter_NotAfter *smithy.Schema
-
-var X509AttributeFilter_NotBefore *smithy.Schema
-
-var X509Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "X509Attributes",
-}, smithy.ShapeTypeStructure, 9)
-var X509Attributes_Issuer *smithy.Schema
-
-var X509Attributes_Subject *smithy.Schema
-
-var X509Attributes_SubjectAlternativeNames *smithy.Schema
-
-var X509Attributes_ExtendedKeyUsages *smithy.Schema
-
-var X509Attributes_KeyAlgorithm *smithy.Schema
-
-var X509Attributes_KeyUsages *smithy.Schema
-
-var X509Attributes_SerialNumber *smithy.Schema
-
-var X509Attributes_NotAfter *smithy.Schema
-
-var X509Attributes_NotBefore *smithy.Schema
-
-var AddTagsToCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "AddTagsToCertificateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsToCertificateRequest_CertificateArn *smithy.Schema
-
-var AddTagsToCertificateRequest_Tags *smithy.Schema
-
-var CreateAcmeDomainValidationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeDomainValidationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAcmeDomainValidationRequest_IdempotencyToken *smithy.Schema
-
-var CreateAcmeDomainValidationRequest_AcmeEndpointArn *smithy.Schema
-
-var CreateAcmeDomainValidationRequest_DomainName *smithy.Schema
-
-var CreateAcmeDomainValidationRequest_PrevalidationOptions *smithy.Schema
-
-var CreateAcmeDomainValidationRequest_Tags *smithy.Schema
-
-var CreateAcmeDomainValidationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeDomainValidationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAcmeDomainValidationResponse_AcmeDomainValidationArn *smithy.Schema
-
-var CreateAcmeEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeEndpointRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateAcmeEndpointRequest_IdempotencyToken *smithy.Schema
-
-var CreateAcmeEndpointRequest_AuthorizationBehavior *smithy.Schema
-
-var CreateAcmeEndpointRequest_Contact *smithy.Schema
-
-var CreateAcmeEndpointRequest_CertificateAuthority *smithy.Schema
-
-var CreateAcmeEndpointRequest_Tags *smithy.Schema
-
-var CreateAcmeEndpointRequest_CertificateTags *smithy.Schema
-
-var CreateAcmeEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAcmeEndpointResponse_AcmeEndpointArn *smithy.Schema
-
-var CreateAcmeExternalAccountBindingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeExternalAccountBindingRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAcmeExternalAccountBindingRequest_IdempotencyToken *smithy.Schema
-
-var CreateAcmeExternalAccountBindingRequest_AcmeEndpointArn *smithy.Schema
-
-var CreateAcmeExternalAccountBindingRequest_RoleArn *smithy.Schema
-
-var CreateAcmeExternalAccountBindingRequest_Expiration *smithy.Schema
-
-var CreateAcmeExternalAccountBindingRequest_Tags *smithy.Schema
-
-var CreateAcmeExternalAccountBindingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "CreateAcmeExternalAccountBindingResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAcmeExternalAccountBindingResponse_ExternalAccountBinding *smithy.Schema
-
-var DeleteAcmeDomainValidationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteAcmeDomainValidationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAcmeDomainValidationRequest_AcmeDomainValidationArn *smithy.Schema
-
-var DeleteAcmeEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteAcmeEndpointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAcmeEndpointRequest_AcmeEndpointArn *smithy.Schema
-
-var DeleteAcmeExternalAccountBindingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteAcmeExternalAccountBindingRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn *smithy.Schema
-
-var DeleteCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DeleteCertificateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCertificateRequest_CertificateArn *smithy.Schema
-
-var DescribeAcmeAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAcmeAccountRequest_AcmeEndpointArn *smithy.Schema
-
-var DescribeAcmeAccountRequest_AccountUrl *smithy.Schema
-
-var DescribeAcmeAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcmeAccountResponse_AcmeAccount *smithy.Schema
-
-var DescribeAcmeDomainValidationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeDomainValidationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcmeDomainValidationRequest_AcmeDomainValidationArn *smithy.Schema
-
-var DescribeAcmeDomainValidationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeDomainValidationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcmeDomainValidationResponse_AcmeDomainValidation *smithy.Schema
-
-var DescribeAcmeEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeEndpointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcmeEndpointRequest_AcmeEndpointArn *smithy.Schema
-
-var DescribeAcmeEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcmeEndpointResponse_AcmeEndpoint *smithy.Schema
-
-var DescribeAcmeExternalAccountBindingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeExternalAccountBindingRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn *smithy.Schema
-
-var DescribeAcmeExternalAccountBindingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeAcmeExternalAccountBindingResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding *smithy.Schema
-
-var DescribeCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeCertificateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCertificateRequest_CertificateArn *smithy.Schema
-
-var DescribeCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "DescribeCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCertificateResponse_Certificate *smithy.Schema
-
-var ExportCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExportCertificateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ExportCertificateRequest_CertificateArn *smithy.Schema
-
-var ExportCertificateRequest_Passphrase *smithy.Schema
-
-var ExportCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ExportCertificateResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ExportCertificateResponse_Certificate *smithy.Schema
-
-var ExportCertificateResponse_CertificateChain *smithy.Schema
-
-var ExportCertificateResponse_PrivateKey *smithy.Schema
-
-var GetAccountConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetAccountConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountConfigurationResponse_ExpiryEvents *smithy.Schema
-
-var GetAcmeExternalAccountBindingCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetAcmeExternalAccountBindingCredentialsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn *smithy.Schema
-
-var GetAcmeExternalAccountBindingCredentialsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetAcmeExternalAccountBindingCredentialsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAcmeExternalAccountBindingCredentialsResponse_KeyId *smithy.Schema
-
-var GetAcmeExternalAccountBindingCredentialsResponse_MacKey *smithy.Schema
-
-var GetCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetCertificateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCertificateRequest_CertificateArn *smithy.Schema
-
-var GetCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "GetCertificateResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCertificateResponse_Certificate *smithy.Schema
-
-var GetCertificateResponse_CertificateChain *smithy.Schema
-
-var ImportCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ImportCertificateRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ImportCertificateRequest_CertificateArn *smithy.Schema
-
-var ImportCertificateRequest_Certificate *smithy.Schema
-
-var ImportCertificateRequest_PrivateKey *smithy.Schema
-
-var ImportCertificateRequest_CertificateChain *smithy.Schema
-
-var ImportCertificateRequest_Tags *smithy.Schema
-
-var ImportCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ImportCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ImportCertificateResponse_CertificateArn *smithy.Schema
-
-var ListAcmeAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeAccountsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAcmeAccountsRequest_NextToken *smithy.Schema
-
-var ListAcmeAccountsRequest_MaxResults *smithy.Schema
-
-var ListAcmeAccountsRequest_AcmeEndpointArn *smithy.Schema
-
-var ListAcmeAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAcmeAccountsResponse_AcmeAccounts *smithy.Schema
-
-var ListAcmeAccountsResponse_NextToken *smithy.Schema
-
-var ListAcmeDomainValidationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeDomainValidationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAcmeDomainValidationsRequest_NextToken *smithy.Schema
-
-var ListAcmeDomainValidationsRequest_MaxResults *smithy.Schema
-
-var ListAcmeDomainValidationsRequest_AcmeEndpointArn *smithy.Schema
-
-var ListAcmeDomainValidationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeDomainValidationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAcmeDomainValidationsResponse_AcmeDomainValidations *smithy.Schema
-
-var ListAcmeDomainValidationsResponse_NextToken *smithy.Schema
-
-var ListAcmeEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeEndpointsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAcmeEndpointsRequest_NextToken *smithy.Schema
-
-var ListAcmeEndpointsRequest_MaxResults *smithy.Schema
-
-var ListAcmeEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAcmeEndpointsResponse_AcmeEndpoints *smithy.Schema
-
-var ListAcmeEndpointsResponse_NextToken *smithy.Schema
-
-var ListAcmeExternalAccountBindingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeExternalAccountBindingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAcmeExternalAccountBindingsRequest_NextToken *smithy.Schema
-
-var ListAcmeExternalAccountBindingsRequest_MaxResults *smithy.Schema
-
-var ListAcmeExternalAccountBindingsRequest_AcmeEndpointArn *smithy.Schema
-
-var ListAcmeExternalAccountBindingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListAcmeExternalAccountBindingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings *smithy.Schema
-
-var ListAcmeExternalAccountBindingsResponse_NextToken *smithy.Schema
-
-var ListCertificateDomainValidationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListCertificateDomainValidationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCertificateDomainValidationsRequest_CertificateArn *smithy.Schema
-
-var ListCertificateDomainValidationsRequest_NextToken *smithy.Schema
-
-var ListCertificateDomainValidationsRequest_MaxItems *smithy.Schema
-
-var ListCertificateDomainValidationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListCertificateDomainValidationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCertificateDomainValidationsResponse_DomainValidationSummaryList *smithy.Schema
-
-var ListCertificateDomainValidationsResponse_NextToken *smithy.Schema
-
-var ListCertificatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListCertificatesRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListCertificatesRequest_CertificateStatuses *smithy.Schema
-
-var ListCertificatesRequest_CertificateKeyPairOrigins *smithy.Schema
-
-var ListCertificatesRequest_Includes *smithy.Schema
-
-var ListCertificatesRequest_NextToken *smithy.Schema
-
-var ListCertificatesRequest_MaxItems *smithy.Schema
-
-var ListCertificatesRequest_SortBy *smithy.Schema
-
-var ListCertificatesRequest_SortOrder *smithy.Schema
-
-var ListCertificatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListCertificatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCertificatesResponse_NextToken *smithy.Schema
-
-var ListCertificatesResponse_CertificateSummaryList *smithy.Schema
-
-var ListTagsForCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListTagsForCertificateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForCertificateRequest_CertificateArn *smithy.Schema
-
-var ListTagsForCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListTagsForCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForCertificateResponse_Tags *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutAccountConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "PutAccountConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutAccountConfigurationRequest_ExpiryEvents *smithy.Schema
-
-var PutAccountConfigurationRequest_IdempotencyToken *smithy.Schema
-
-var RemoveTagsFromCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RemoveTagsFromCertificateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsFromCertificateRequest_CertificateArn *smithy.Schema
-
-var RemoveTagsFromCertificateRequest_Tags *smithy.Schema
-
-var RenewCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RenewCertificateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RenewCertificateRequest_CertificateArn *smithy.Schema
-
-var RequestCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RequestCertificateRequest",
-}, smithy.ShapeTypeStructure, 10)
-var RequestCertificateRequest_DomainName *smithy.Schema
-
-var RequestCertificateRequest_ValidationMethod *smithy.Schema
-
-var RequestCertificateRequest_SubjectAlternativeNames *smithy.Schema
-
-var RequestCertificateRequest_IdempotencyToken *smithy.Schema
-
-var RequestCertificateRequest_DomainValidationOptions *smithy.Schema
-
-var RequestCertificateRequest_Options *smithy.Schema
-
-var RequestCertificateRequest_CertificateAuthorityArn *smithy.Schema
-
-var RequestCertificateRequest_Tags *smithy.Schema
-
-var RequestCertificateRequest_KeyAlgorithm *smithy.Schema
-
-var RequestCertificateRequest_ManagedBy *smithy.Schema
-
-var RequestCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RequestCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RequestCertificateResponse_CertificateArn *smithy.Schema
-
-var ResendValidationEmailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "ResendValidationEmailRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ResendValidationEmailRequest_CertificateArn *smithy.Schema
-
-var ResendValidationEmailRequest_Domain *smithy.Schema
-
-var ResendValidationEmailRequest_ValidationDomain *smithy.Schema
-
-var RevokeAcmeAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevokeAcmeAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RevokeAcmeAccountRequest_AcmeEndpointArn *smithy.Schema
-
-var RevokeAcmeAccountRequest_AccountUrl *smithy.Schema
-
-var RevokeAcmeExternalAccountBindingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevokeAcmeExternalAccountBindingRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn *smithy.Schema
-
-var RevokeCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevokeCertificateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RevokeCertificateRequest_CertificateArn *smithy.Schema
-
-var RevokeCertificateRequest_RevocationReason *smithy.Schema
-
-var RevokeCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "RevokeCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RevokeCertificateResponse_CertificateArn *smithy.Schema
-
-var SearchCertificatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SearchCertificatesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var SearchCertificatesRequest_FilterStatement *smithy.Schema
-
-var SearchCertificatesRequest_MaxResults *smithy.Schema
-
-var SearchCertificatesRequest_NextToken *smithy.Schema
-
-var SearchCertificatesRequest_SortBy *smithy.Schema
-
-var SearchCertificatesRequest_SortOrder *smithy.Schema
-
-var SearchCertificatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "SearchCertificatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchCertificatesResponse_Results *smithy.Schema
-
-var SearchCertificatesResponse_NextToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateAcmeDomainValidationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateAcmeDomainValidationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAcmeDomainValidationRequest_AcmeDomainValidationArn *smithy.Schema
-
-var UpdateAcmeDomainValidationRequest_PrevalidationOptions *smithy.Schema
-
-var UpdateAcmeEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateAcmeEndpointRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAcmeEndpointRequest_AcmeEndpointArn *smithy.Schema
-
-var UpdateAcmeEndpointRequest_AuthorizationBehavior *smithy.Schema
-
-var UpdateAcmeEndpointRequest_Contact *smithy.Schema
-
-var UpdateAcmeEndpointRequest_CertificateAuthority *smithy.Schema
-
-var UpdateCertificateOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.acm",
-	Name:      "UpdateCertificateOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCertificateOptionsRequest_CertificateArn *smithy.Schema
-
-var UpdateCertificateOptionsRequest_Options *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	eAddTagsToCertificate                                                          smithy.SchemaExtensions
+	eCreateAcmeDomainValidation                                                    smithy.SchemaExtensions
+	eCreateAcmeEndpoint                                                            smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBinding                                              smithy.SchemaExtensions
+	eDeleteAcmeDomainValidation                                                    smithy.SchemaExtensions
+	eDeleteAcmeEndpoint                                                            smithy.SchemaExtensions
+	eDeleteAcmeExternalAccountBinding                                              smithy.SchemaExtensions
+	eDeleteCertificate                                                             smithy.SchemaExtensions
+	eDescribeAcmeAccount                                                           smithy.SchemaExtensions
+	eDescribeAcmeDomainValidation                                                  smithy.SchemaExtensions
+	eDescribeAcmeEndpoint                                                          smithy.SchemaExtensions
+	eDescribeAcmeExternalAccountBinding                                            smithy.SchemaExtensions
+	eDescribeCertificate                                                           smithy.SchemaExtensions
+	eExportCertificate                                                             smithy.SchemaExtensions
+	eGetAccountConfiguration                                                       smithy.SchemaExtensions
+	eGetAcmeExternalAccountBindingCredentials                                      smithy.SchemaExtensions
+	eGetCertificate                                                                smithy.SchemaExtensions
+	eImportCertificate                                                             smithy.SchemaExtensions
+	eListAcmeAccounts                                                              smithy.SchemaExtensions
+	eListAcmeDomainValidations                                                     smithy.SchemaExtensions
+	eListAcmeEndpoints                                                             smithy.SchemaExtensions
+	eListAcmeExternalAccountBindings                                               smithy.SchemaExtensions
+	eListCertificateDomainValidations                                              smithy.SchemaExtensions
+	eListCertificates                                                              smithy.SchemaExtensions
+	eListTagsForCertificate                                                        smithy.SchemaExtensions
+	eListTagsForResource                                                           smithy.SchemaExtensions
+	ePutAccountConfiguration                                                       smithy.SchemaExtensions
+	eRemoveTagsFromCertificate                                                     smithy.SchemaExtensions
+	eRenewCertificate                                                              smithy.SchemaExtensions
+	eRequestCertificate                                                            smithy.SchemaExtensions
+	eResendValidationEmail                                                         smithy.SchemaExtensions
+	eRevokeAcmeAccount                                                             smithy.SchemaExtensions
+	eRevokeAcmeExternalAccountBinding                                              smithy.SchemaExtensions
+	eRevokeCertificate                                                             smithy.SchemaExtensions
+	eSearchCertificates                                                            smithy.SchemaExtensions
+	eTagResource                                                                   smithy.SchemaExtensions
+	eUntagResource                                                                 smithy.SchemaExtensions
+	eUpdateAcmeDomainValidation                                                    smithy.SchemaExtensions
+	eUpdateAcmeEndpoint                                                            smithy.SchemaExtensions
+	eUpdateCertificateOptions                                                      smithy.SchemaExtensions
+	e_CertificateManager                                                           smithy.SchemaExtensions
+	eAccessDeniedException                                                         smithy.SchemaExtensions
+	eAccessDeniedException_Message                                                 smithy.SchemaExtensions
+	eAcmCertificateMetadata                                                        smithy.SchemaExtensions
+	eAcmCertificateMetadata_CreatedAt                                              smithy.SchemaExtensions
+	eAcmCertificateMetadata_Exported                                               smithy.SchemaExtensions
+	eAcmCertificateMetadata_ImportedAt                                             smithy.SchemaExtensions
+	eAcmCertificateMetadata_InUse                                                  smithy.SchemaExtensions
+	eAcmCertificateMetadata_IssuedAt                                               smithy.SchemaExtensions
+	eAcmCertificateMetadata_RenewalEligibility                                     smithy.SchemaExtensions
+	eAcmCertificateMetadata_RevokedAt                                              smithy.SchemaExtensions
+	eAcmCertificateMetadata_Status                                                 smithy.SchemaExtensions
+	eAcmCertificateMetadata_RenewalStatus                                          smithy.SchemaExtensions
+	eAcmCertificateMetadata_Type                                                   smithy.SchemaExtensions
+	eAcmCertificateMetadata_ExportOption                                           smithy.SchemaExtensions
+	eAcmCertificateMetadata_ManagedBy                                              smithy.SchemaExtensions
+	eAcmCertificateMetadata_ValidationMethod                                       smithy.SchemaExtensions
+	eAcmCertificateMetadata_CertificateKeyPairOrigin                               smithy.SchemaExtensions
+	eAcmCertificateMetadata_AcmeEndpointArn                                        smithy.SchemaExtensions
+	eAcmCertificateMetadata_AcmeAccountId                                          smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter                                                  smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_Status                                           smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_RenewalStatus                                    smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_Type                                             smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_InUse                                            smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_Exported                                         smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_ExportOption                                     smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_ManagedBy                                        smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_ValidationMethod                                 smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_CertificateKeyPairOrigin                         smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_AcmeEndpointArn                                  smithy.SchemaExtensions
+	eAcmCertificateMetadataFilter_AcmeAccountId                                    smithy.SchemaExtensions
+	eAcmeAccount                                                                   smithy.SchemaExtensions
+	eAcmeAccount_AccountUrl                                                        smithy.SchemaExtensions
+	eAcmeAccount_PublicKeyThumbprint                                               smithy.SchemaExtensions
+	eAcmeAccount_Status                                                            smithy.SchemaExtensions
+	eAcmeAccount_CreatedAt                                                         smithy.SchemaExtensions
+	eAcmeAccount_AcmeExternalAccountBindingArn                                     smithy.SchemaExtensions
+	eAcmeAccount_Contacts                                                          smithy.SchemaExtensions
+	e_AcmeAccountId                                                                smithy.SchemaExtensions
+	e_AcmeAccountList                                                              smithy.SchemaExtensions
+	e_AcmeAccountList_member                                                       smithy.SchemaExtensions
+	eAcmeAccountStatus                                                             smithy.SchemaExtensions
+	eAcmeAccountStatus_VALID                                                       smithy.SchemaExtensions
+	eAcmeAccountStatus_DEACTIVATED                                                 smithy.SchemaExtensions
+	eAcmeAccountStatus_REVOKED                                                     smithy.SchemaExtensions
+	eAcmeAccountSummary                                                            smithy.SchemaExtensions
+	eAcmeAccountSummary_AccountUrl                                                 smithy.SchemaExtensions
+	eAcmeAccountSummary_PublicKeyThumbprint                                        smithy.SchemaExtensions
+	eAcmeAccountSummary_Status                                                     smithy.SchemaExtensions
+	eAcmeAccountSummary_CreatedAt                                                  smithy.SchemaExtensions
+	eAcmeAccountSummary_AcmeExternalAccountBindingArn                              smithy.SchemaExtensions
+	eAcmeAccountSummary_Contacts                                                   smithy.SchemaExtensions
+	eAcmeAuthorizationBehavior                                                     smithy.SchemaExtensions
+	eAcmeAuthorizationBehavior_PRE_APPROVED                                        smithy.SchemaExtensions
+	eAcmeContact                                                                   smithy.SchemaExtensions
+	eAcmeContact_REQUIRED                                                          smithy.SchemaExtensions
+	eAcmeContact_NOT_REQUIRED                                                      smithy.SchemaExtensions
+	eAcmeDomainValidation                                                          smithy.SchemaExtensions
+	eAcmeDomainValidation_AcmeDomainValidationArn                                  smithy.SchemaExtensions
+	eAcmeDomainValidation_AcmeEndpointArn                                          smithy.SchemaExtensions
+	eAcmeDomainValidation_DomainName                                               smithy.SchemaExtensions
+	eAcmeDomainValidation_PrevalidationType                                        smithy.SchemaExtensions
+	eAcmeDomainValidation_PrevalidationDetails                                     smithy.SchemaExtensions
+	eAcmeDomainValidation_Status                                                   smithy.SchemaExtensions
+	eAcmeDomainValidation_FailureDetails                                           smithy.SchemaExtensions
+	eAcmeDomainValidation_CreatedAt                                                smithy.SchemaExtensions
+	eAcmeDomainValidation_UpdatedAt                                                smithy.SchemaExtensions
+	e_AcmeDomainValidationArn                                                      smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason                                             smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_ACCESS_DENIED                               smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_DOMAIN_MISMATCH                             smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED                          smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE                         smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND                       smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_INTERNAL_FAILURE                            smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH                        smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN                       smithy.SchemaExtensions
+	eAcmeDomainValidationFailureReason_TIMED_OUT                                   smithy.SchemaExtensions
+	e_AcmeDomainValidationList                                                     smithy.SchemaExtensions
+	e_AcmeDomainValidationList_member                                              smithy.SchemaExtensions
+	eAcmeDomainValidationStatus                                                    smithy.SchemaExtensions
+	eAcmeDomainValidationStatus_VALIDATING                                         smithy.SchemaExtensions
+	eAcmeDomainValidationStatus_VALID                                              smithy.SchemaExtensions
+	eAcmeDomainValidationStatus_INVALID                                            smithy.SchemaExtensions
+	eAcmeDomainValidationStatus_DELETING                                           smithy.SchemaExtensions
+	eAcmeDomainValidationSummary                                                   smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_AcmeDomainValidationArn                           smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_AcmeEndpointArn                                   smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_DomainName                                        smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_PrevalidationType                                 smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_PrevalidationDetails                              smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_Status                                            smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_FailureDetails                                    smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_CreatedAt                                         smithy.SchemaExtensions
+	eAcmeDomainValidationSummary_UpdatedAt                                         smithy.SchemaExtensions
+	eAcmeEndpoint                                                                  smithy.SchemaExtensions
+	eAcmeEndpoint_AcmeEndpointArn                                                  smithy.SchemaExtensions
+	eAcmeEndpoint_EndpointUrl                                                      smithy.SchemaExtensions
+	eAcmeEndpoint_Status                                                           smithy.SchemaExtensions
+	eAcmeEndpoint_FailureReason                                                    smithy.SchemaExtensions
+	eAcmeEndpoint_AuthorizationBehavior                                            smithy.SchemaExtensions
+	eAcmeEndpoint_Contact                                                          smithy.SchemaExtensions
+	eAcmeEndpoint_CertificateAuthority                                             smithy.SchemaExtensions
+	eAcmeEndpoint_CertificateTags                                                  smithy.SchemaExtensions
+	eAcmeEndpoint_CreatedAt                                                        smithy.SchemaExtensions
+	eAcmeEndpoint_UpdatedAt                                                        smithy.SchemaExtensions
+	e_AcmeEndpointArn                                                              smithy.SchemaExtensions
+	e_AcmeEndpointList                                                             smithy.SchemaExtensions
+	e_AcmeEndpointList_member                                                      smithy.SchemaExtensions
+	eAcmeEndpointStatus                                                            smithy.SchemaExtensions
+	eAcmeEndpointStatus_CREATING                                                   smithy.SchemaExtensions
+	eAcmeEndpointStatus_ACTIVE                                                     smithy.SchemaExtensions
+	eAcmeEndpointStatus_DELETING                                                   smithy.SchemaExtensions
+	eAcmeEndpointStatus_FAILED                                                     smithy.SchemaExtensions
+	eAcmeEndpointSummary                                                           smithy.SchemaExtensions
+	eAcmeEndpointSummary_AcmeEndpointArn                                           smithy.SchemaExtensions
+	eAcmeEndpointSummary_EndpointUrl                                               smithy.SchemaExtensions
+	eAcmeEndpointSummary_Status                                                    smithy.SchemaExtensions
+	eAcmeEndpointSummary_FailureReason                                             smithy.SchemaExtensions
+	eAcmeEndpointSummary_AuthorizationBehavior                                     smithy.SchemaExtensions
+	eAcmeEndpointSummary_Contact                                                   smithy.SchemaExtensions
+	eAcmeEndpointSummary_CertificateAuthority                                      smithy.SchemaExtensions
+	eAcmeEndpointSummary_CertificateTags                                           smithy.SchemaExtensions
+	eAcmeEndpointSummary_CreatedAt                                                 smithy.SchemaExtensions
+	eAcmeEndpointSummary_UpdatedAt                                                 smithy.SchemaExtensions
+	eAcmeExternalAccountBinding                                                    smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_AcmeExternalAccountBindingArn                      smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_AcmeEndpointArn                                    smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_RoleArn                                            smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_ExpiresAt                                          smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_RevokedAt                                          smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_LastUsedAt                                         smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_CreatedAt                                          smithy.SchemaExtensions
+	eAcmeExternalAccountBinding_UpdatedAt                                          smithy.SchemaExtensions
+	e_AcmeExternalAccountBindingArn                                                smithy.SchemaExtensions
+	e_AcmeExternalAccountBindingList                                               smithy.SchemaExtensions
+	e_AcmeExternalAccountBindingList_member                                        smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary                                             smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn               smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_AcmeEndpointArn                             smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_RoleArn                                     smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_ExpiresAt                                   smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_RevokedAt                                   smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_LastUsedAt                                  smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_CreatedAt                                   smithy.SchemaExtensions
+	eAcmeExternalAccountBindingSummary_UpdatedAt                                   smithy.SchemaExtensions
+	e_Arn                                                                          smithy.SchemaExtensions
+	e_AvailabilityErrorMessage                                                     smithy.SchemaExtensions
+	e_CertificateArn                                                               smithy.SchemaExtensions
+	eCertificateAuthority                                                          smithy.SchemaExtensions
+	eCertificateAuthority_PublicCertificateAuthority                               smithy.SchemaExtensions
+	e_CertificateBody                                                              smithy.SchemaExtensions
+	e_CertificateBodyBlob                                                          smithy.SchemaExtensions
+	e_CertificateChain                                                             smithy.SchemaExtensions
+	e_CertificateChainBlob                                                         smithy.SchemaExtensions
+	eCertificateDetail                                                             smithy.SchemaExtensions
+	eCertificateDetail_CertificateArn                                              smithy.SchemaExtensions
+	eCertificateDetail_DomainName                                                  smithy.SchemaExtensions
+	eCertificateDetail_SubjectAlternativeNames                                     smithy.SchemaExtensions
+	eCertificateDetail_ManagedBy                                                   smithy.SchemaExtensions
+	eCertificateDetail_DomainValidationOptions                                     smithy.SchemaExtensions
+	eCertificateDetail_Serial                                                      smithy.SchemaExtensions
+	eCertificateDetail_Subject                                                     smithy.SchemaExtensions
+	eCertificateDetail_Issuer                                                      smithy.SchemaExtensions
+	eCertificateDetail_CreatedAt                                                   smithy.SchemaExtensions
+	eCertificateDetail_IssuedAt                                                    smithy.SchemaExtensions
+	eCertificateDetail_ImportedAt                                                  smithy.SchemaExtensions
+	eCertificateDetail_Status                                                      smithy.SchemaExtensions
+	eCertificateDetail_RevokedAt                                                   smithy.SchemaExtensions
+	eCertificateDetail_RevocationReason                                            smithy.SchemaExtensions
+	eCertificateDetail_NotBefore                                                   smithy.SchemaExtensions
+	eCertificateDetail_NotAfter                                                    smithy.SchemaExtensions
+	eCertificateDetail_KeyAlgorithm                                                smithy.SchemaExtensions
+	eCertificateDetail_SignatureAlgorithm                                          smithy.SchemaExtensions
+	eCertificateDetail_InUseBy                                                     smithy.SchemaExtensions
+	eCertificateDetail_FailureReason                                               smithy.SchemaExtensions
+	eCertificateDetail_Type                                                        smithy.SchemaExtensions
+	eCertificateDetail_RenewalSummary                                              smithy.SchemaExtensions
+	eCertificateDetail_KeyUsages                                                   smithy.SchemaExtensions
+	eCertificateDetail_ExtendedKeyUsages                                           smithy.SchemaExtensions
+	eCertificateDetail_CertificateAuthorityArn                                     smithy.SchemaExtensions
+	eCertificateDetail_RenewalEligibility                                          smithy.SchemaExtensions
+	eCertificateDetail_Options                                                     smithy.SchemaExtensions
+	eCertificateDetail_UpdateSummary                                               smithy.SchemaExtensions
+	eCertificateDetail_CertificateKeyPairOrigin                                    smithy.SchemaExtensions
+	eCertificateDetail_AcmeEndpointArn                                             smithy.SchemaExtensions
+	eCertificateDetail_AcmeAccountId                                               smithy.SchemaExtensions
+	eCertificateExport                                                             smithy.SchemaExtensions
+	eCertificateExport_ENABLED                                                     smithy.SchemaExtensions
+	eCertificateExport_DISABLED                                                    smithy.SchemaExtensions
+	eCertificateFilter                                                             smithy.SchemaExtensions
+	eCertificateFilter_CertificateArn                                              smithy.SchemaExtensions
+	eCertificateFilter_X509AttributeFilter                                         smithy.SchemaExtensions
+	eCertificateFilter_AcmCertificateMetadataFilter                                smithy.SchemaExtensions
+	eCertificateFilterStatement                                                    smithy.SchemaExtensions
+	eCertificateFilterStatement_And                                                smithy.SchemaExtensions
+	eCertificateFilterStatement_Or                                                 smithy.SchemaExtensions
+	eCertificateFilterStatement_Not                                                smithy.SchemaExtensions
+	eCertificateFilterStatement_Filter                                             smithy.SchemaExtensions
+	e_CertificateFilterStatementList                                               smithy.SchemaExtensions
+	e_CertificateFilterStatementList_member                                        smithy.SchemaExtensions
+	eCertificateKeyPairOrigin                                                      smithy.SchemaExtensions
+	eCertificateKeyPairOrigin_AWS_MANAGED                                          smithy.SchemaExtensions
+	eCertificateKeyPairOrigin_ACME                                                 smithy.SchemaExtensions
+	eCertificateKeyPairOrigin_CUSTOMER_PROVIDED                                    smithy.SchemaExtensions
+	e_CertificateKeyPairOrigins                                                    smithy.SchemaExtensions
+	e_CertificateKeyPairOrigins_member                                             smithy.SchemaExtensions
+	eCertificateManagedBy                                                          smithy.SchemaExtensions
+	eCertificateManagedBy_CLOUDFRONT                                               smithy.SchemaExtensions
+	eCertificateMetadata                                                           smithy.SchemaExtensions
+	eCertificateMetadata_AcmCertificateMetadata                                    smithy.SchemaExtensions
+	eCertificateOptions                                                            smithy.SchemaExtensions
+	eCertificateOptions_CertificateTransparencyLoggingPreference                   smithy.SchemaExtensions
+	eCertificateOptions_Export                                                     smithy.SchemaExtensions
+	eCertificateOptions_ValidationMethod                                           smithy.SchemaExtensions
+	eCertificateSearchResult                                                       smithy.SchemaExtensions
+	eCertificateSearchResult_CertificateArn                                        smithy.SchemaExtensions
+	eCertificateSearchResult_X509Attributes                                        smithy.SchemaExtensions
+	eCertificateSearchResult_CertificateMetadata                                   smithy.SchemaExtensions
+	e_CertificateSearchResultList                                                  smithy.SchemaExtensions
+	e_CertificateSearchResultList_member                                           smithy.SchemaExtensions
+	eCertificateStatus                                                             smithy.SchemaExtensions
+	eCertificateStatus_PENDING_VALIDATION                                          smithy.SchemaExtensions
+	eCertificateStatus_ISSUED                                                      smithy.SchemaExtensions
+	eCertificateStatus_INACTIVE                                                    smithy.SchemaExtensions
+	eCertificateStatus_EXPIRED                                                     smithy.SchemaExtensions
+	eCertificateStatus_VALIDATION_TIMED_OUT                                        smithy.SchemaExtensions
+	eCertificateStatus_REVOKED                                                     smithy.SchemaExtensions
+	eCertificateStatus_FAILED                                                      smithy.SchemaExtensions
+	e_CertificateStatuses                                                          smithy.SchemaExtensions
+	e_CertificateStatuses_member                                                   smithy.SchemaExtensions
+	eCertificateSummary                                                            smithy.SchemaExtensions
+	eCertificateSummary_CertificateArn                                             smithy.SchemaExtensions
+	eCertificateSummary_DomainName                                                 smithy.SchemaExtensions
+	eCertificateSummary_SubjectAlternativeNameSummaries                            smithy.SchemaExtensions
+	eCertificateSummary_HasAdditionalSubjectAlternativeNames                       smithy.SchemaExtensions
+	eCertificateSummary_Status                                                     smithy.SchemaExtensions
+	eCertificateSummary_Type                                                       smithy.SchemaExtensions
+	eCertificateSummary_KeyAlgorithm                                               smithy.SchemaExtensions
+	eCertificateSummary_KeyUsages                                                  smithy.SchemaExtensions
+	eCertificateSummary_ExtendedKeyUsages                                          smithy.SchemaExtensions
+	eCertificateSummary_ExportOption                                               smithy.SchemaExtensions
+	eCertificateSummary_InUse                                                      smithy.SchemaExtensions
+	eCertificateSummary_Exported                                                   smithy.SchemaExtensions
+	eCertificateSummary_RenewalEligibility                                         smithy.SchemaExtensions
+	eCertificateSummary_NotBefore                                                  smithy.SchemaExtensions
+	eCertificateSummary_NotAfter                                                   smithy.SchemaExtensions
+	eCertificateSummary_CreatedAt                                                  smithy.SchemaExtensions
+	eCertificateSummary_IssuedAt                                                   smithy.SchemaExtensions
+	eCertificateSummary_ImportedAt                                                 smithy.SchemaExtensions
+	eCertificateSummary_RevokedAt                                                  smithy.SchemaExtensions
+	eCertificateSummary_ManagedBy                                                  smithy.SchemaExtensions
+	eCertificateSummary_CertificateKeyPairOrigin                                   smithy.SchemaExtensions
+	e_CertificateSummaryList                                                       smithy.SchemaExtensions
+	e_CertificateSummaryList_member                                                smithy.SchemaExtensions
+	eCertificateTransparencyLoggingPreference                                      smithy.SchemaExtensions
+	eCertificateTransparencyLoggingPreference_ENABLED                              smithy.SchemaExtensions
+	eCertificateTransparencyLoggingPreference_DISABLED                             smithy.SchemaExtensions
+	eCertificateType                                                               smithy.SchemaExtensions
+	eCertificateType_IMPORTED                                                      smithy.SchemaExtensions
+	eCertificateType_AMAZON_ISSUED                                                 smithy.SchemaExtensions
+	eCertificateType_PRIVATE                                                       smithy.SchemaExtensions
+	eCommonNameFilter                                                              smithy.SchemaExtensions
+	eCommonNameFilter_Value                                                        smithy.SchemaExtensions
+	eCommonNameFilter_ComparisonOperator                                           smithy.SchemaExtensions
+	eComparisonOperator                                                            smithy.SchemaExtensions
+	eComparisonOperator_CONTAINS                                                   smithy.SchemaExtensions
+	eComparisonOperator_EQUALS                                                     smithy.SchemaExtensions
+	eConflictException                                                             smithy.SchemaExtensions
+	eConflictException_message                                                     smithy.SchemaExtensions
+	e_ContactList                                                                  smithy.SchemaExtensions
+	e_ContactList_member                                                           smithy.SchemaExtensions
+	e_CoralAvailabilityThrottledResource                                           smithy.SchemaExtensions
+	e_CoralAvailabilityThrottlingReason                                            smithy.SchemaExtensions
+	eCustomAttribute                                                               smithy.SchemaExtensions
+	eCustomAttribute_ObjectIdentifier                                              smithy.SchemaExtensions
+	eCustomAttribute_Value                                                         smithy.SchemaExtensions
+	e_CustomAttributeList                                                          smithy.SchemaExtensions
+	e_CustomAttributeList_member                                                   smithy.SchemaExtensions
+	eDistinguishedName                                                             smithy.SchemaExtensions
+	eDistinguishedName_CommonName                                                  smithy.SchemaExtensions
+	eDistinguishedName_DomainComponents                                            smithy.SchemaExtensions
+	eDistinguishedName_Country                                                     smithy.SchemaExtensions
+	eDistinguishedName_CustomAttributes                                            smithy.SchemaExtensions
+	eDistinguishedName_DistinguishedNameQualifier                                  smithy.SchemaExtensions
+	eDistinguishedName_GenerationQualifier                                         smithy.SchemaExtensions
+	eDistinguishedName_GivenName                                                   smithy.SchemaExtensions
+	eDistinguishedName_Initials                                                    smithy.SchemaExtensions
+	eDistinguishedName_Locality                                                    smithy.SchemaExtensions
+	eDistinguishedName_Organization                                                smithy.SchemaExtensions
+	eDistinguishedName_OrganizationalUnit                                          smithy.SchemaExtensions
+	eDistinguishedName_Pseudonym                                                   smithy.SchemaExtensions
+	eDistinguishedName_SerialNumber                                                smithy.SchemaExtensions
+	eDistinguishedName_State                                                       smithy.SchemaExtensions
+	eDistinguishedName_Surname                                                     smithy.SchemaExtensions
+	eDistinguishedName_Title                                                       smithy.SchemaExtensions
+	eDnsNameFilter                                                                 smithy.SchemaExtensions
+	eDnsNameFilter_Value                                                           smithy.SchemaExtensions
+	eDnsNameFilter_ComparisonOperator                                              smithy.SchemaExtensions
+	eDnsPrevalidationDetails                                                       smithy.SchemaExtensions
+	eDnsPrevalidationDetails_DomainScope                                           smithy.SchemaExtensions
+	eDnsPrevalidationDetails_HostedZoneId                                          smithy.SchemaExtensions
+	eDnsPrevalidationDetails_ResourceRecord                                        smithy.SchemaExtensions
+	eDnsPrevalidationOptions                                                       smithy.SchemaExtensions
+	eDnsPrevalidationOptions_DomainScope                                           smithy.SchemaExtensions
+	eDnsPrevalidationOptions_HostedZoneId                                          smithy.SchemaExtensions
+	eDnsValidationChallenge                                                        smithy.SchemaExtensions
+	eDnsValidationChallenge_ResourceRecord                                         smithy.SchemaExtensions
+	e_DomainComponentList                                                          smithy.SchemaExtensions
+	e_DomainComponentList_member                                                   smithy.SchemaExtensions
+	e_DomainList                                                                   smithy.SchemaExtensions
+	e_DomainList_member                                                            smithy.SchemaExtensions
+	e_DomainName                                                                   smithy.SchemaExtensions
+	e_DomainNameString                                                             smithy.SchemaExtensions
+	eDomainScope                                                                   smithy.SchemaExtensions
+	eDomainScope_ExactDomain                                                       smithy.SchemaExtensions
+	eDomainScope_Subdomains                                                        smithy.SchemaExtensions
+	eDomainScope_Wildcards                                                         smithy.SchemaExtensions
+	eDomainScopeOption                                                             smithy.SchemaExtensions
+	eDomainScopeOption_ENABLED                                                     smithy.SchemaExtensions
+	eDomainScopeOption_DISABLED                                                    smithy.SchemaExtensions
+	eDomainStatus                                                                  smithy.SchemaExtensions
+	eDomainStatus_PENDING_VALIDATION                                               smithy.SchemaExtensions
+	eDomainStatus_SUCCESS                                                          smithy.SchemaExtensions
+	eDomainStatus_FAILED                                                           smithy.SchemaExtensions
+	eDomainValidation                                                              smithy.SchemaExtensions
+	eDomainValidation_DomainName                                                   smithy.SchemaExtensions
+	eDomainValidation_ValidationEmails                                             smithy.SchemaExtensions
+	eDomainValidation_ValidationDomain                                             smithy.SchemaExtensions
+	eDomainValidation_ValidationStatus                                             smithy.SchemaExtensions
+	eDomainValidation_ResourceRecord                                               smithy.SchemaExtensions
+	eDomainValidation_HttpRedirect                                                 smithy.SchemaExtensions
+	eDomainValidation_ValidationMethod                                             smithy.SchemaExtensions
+	e_DomainValidationList                                                         smithy.SchemaExtensions
+	e_DomainValidationList_member                                                  smithy.SchemaExtensions
+	eDomainValidationMethodUpdateSummary                                           smithy.SchemaExtensions
+	eDomainValidationMethodUpdateSummary_From                                      smithy.SchemaExtensions
+	eDomainValidationMethodUpdateSummary_To                                        smithy.SchemaExtensions
+	eDomainValidationOption                                                        smithy.SchemaExtensions
+	eDomainValidationOption_DomainName                                             smithy.SchemaExtensions
+	eDomainValidationOption_ValidationDomain                                       smithy.SchemaExtensions
+	e_DomainValidationOptionList                                                   smithy.SchemaExtensions
+	e_DomainValidationOptionList_member                                            smithy.SchemaExtensions
+	eDomainValidationSummary                                                       smithy.SchemaExtensions
+	eDomainValidationSummary_DomainName                                            smithy.SchemaExtensions
+	eDomainValidationSummary_ActiveValidationConfiguration                         smithy.SchemaExtensions
+	eDomainValidationSummary_RequestedValidationConfiguration                      smithy.SchemaExtensions
+	e_DomainValidationSummaryList                                                  smithy.SchemaExtensions
+	e_DomainValidationSummaryList_member                                           smithy.SchemaExtensions
+	eEmailValidationChallenge                                                      smithy.SchemaExtensions
+	eEmailValidationChallenge_ValidationEmails                                     smithy.SchemaExtensions
+	eEmailValidationChallenge_ValidationDomain                                     smithy.SchemaExtensions
+	eExpiration                                                                    smithy.SchemaExtensions
+	eExpiration_Value                                                              smithy.SchemaExtensions
+	eExpiration_Type                                                               smithy.SchemaExtensions
+	eExpiryEventsConfiguration                                                     smithy.SchemaExtensions
+	eExpiryEventsConfiguration_DaysBeforeExpiry                                    smithy.SchemaExtensions
+	eExtendedKeyUsage                                                              smithy.SchemaExtensions
+	eExtendedKeyUsage_Name                                                         smithy.SchemaExtensions
+	eExtendedKeyUsage_OID                                                          smithy.SchemaExtensions
+	e_ExtendedKeyUsageFilterList                                                   smithy.SchemaExtensions
+	e_ExtendedKeyUsageFilterList_member                                            smithy.SchemaExtensions
+	e_ExtendedKeyUsageList                                                         smithy.SchemaExtensions
+	e_ExtendedKeyUsageList_member                                                  smithy.SchemaExtensions
+	eExtendedKeyUsageName                                                          smithy.SchemaExtensions
+	eExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION                            smithy.SchemaExtensions
+	eExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION                            smithy.SchemaExtensions
+	eExtendedKeyUsageName_CODE_SIGNING                                             smithy.SchemaExtensions
+	eExtendedKeyUsageName_EMAIL_PROTECTION                                         smithy.SchemaExtensions
+	eExtendedKeyUsageName_TIME_STAMPING                                            smithy.SchemaExtensions
+	eExtendedKeyUsageName_OCSP_SIGNING                                             smithy.SchemaExtensions
+	eExtendedKeyUsageName_IPSEC_END_SYSTEM                                         smithy.SchemaExtensions
+	eExtendedKeyUsageName_IPSEC_TUNNEL                                             smithy.SchemaExtensions
+	eExtendedKeyUsageName_IPSEC_USER                                               smithy.SchemaExtensions
+	eExtendedKeyUsageName_ANY                                                      smithy.SchemaExtensions
+	eExtendedKeyUsageName_NONE                                                     smithy.SchemaExtensions
+	eExtendedKeyUsageName_CUSTOM                                                   smithy.SchemaExtensions
+	e_ExtendedKeyUsageNames                                                        smithy.SchemaExtensions
+	e_ExtendedKeyUsageNames_member                                                 smithy.SchemaExtensions
+	eFailureDetails                                                                smithy.SchemaExtensions
+	eFailureDetails_Reason                                                         smithy.SchemaExtensions
+	eFailureDetails_Message                                                        smithy.SchemaExtensions
+	eFailureReason                                                                 smithy.SchemaExtensions
+	eFailureReason_NO_AVAILABLE_CONTACTS                                           smithy.SchemaExtensions
+	eFailureReason_ADDITIONAL_VERIFICATION_REQUIRED                                smithy.SchemaExtensions
+	eFailureReason_DOMAIN_NOT_ALLOWED                                              smithy.SchemaExtensions
+	eFailureReason_INVALID_PUBLIC_DOMAIN                                           smithy.SchemaExtensions
+	eFailureReason_DOMAIN_VALIDATION_DENIED                                        smithy.SchemaExtensions
+	eFailureReason_CAA_ERROR                                                       smithy.SchemaExtensions
+	eFailureReason_PCA_LIMIT_EXCEEDED                                              smithy.SchemaExtensions
+	eFailureReason_PCA_INVALID_ARN                                                 smithy.SchemaExtensions
+	eFailureReason_PCA_INVALID_STATE                                               smithy.SchemaExtensions
+	eFailureReason_PCA_REQUEST_FAILED                                              smithy.SchemaExtensions
+	eFailureReason_PCA_NAME_CONSTRAINTS_VALIDATION                                 smithy.SchemaExtensions
+	eFailureReason_PCA_RESOURCE_NOT_FOUND                                          smithy.SchemaExtensions
+	eFailureReason_PCA_INVALID_ARGS                                                smithy.SchemaExtensions
+	eFailureReason_PCA_INVALID_DURATION                                            smithy.SchemaExtensions
+	eFailureReason_PCA_ACCESS_DENIED                                               smithy.SchemaExtensions
+	eFailureReason_SLR_NOT_FOUND                                                   smithy.SchemaExtensions
+	eFailureReason_OTHER                                                           smithy.SchemaExtensions
+	eFilters                                                                       smithy.SchemaExtensions
+	eFilters_extendedKeyUsage                                                      smithy.SchemaExtensions
+	eFilters_keyUsage                                                              smithy.SchemaExtensions
+	eFilters_keyTypes                                                              smithy.SchemaExtensions
+	eFilters_exportOption                                                          smithy.SchemaExtensions
+	eFilters_managedBy                                                             smithy.SchemaExtensions
+	e_FilterString                                                                 smithy.SchemaExtensions
+	eGeneralName                                                                   smithy.SchemaExtensions
+	eGeneralName_DirectoryName                                                     smithy.SchemaExtensions
+	eGeneralName_DnsName                                                           smithy.SchemaExtensions
+	eGeneralName_IpAddress                                                         smithy.SchemaExtensions
+	eGeneralName_OtherName                                                         smithy.SchemaExtensions
+	eGeneralName_RegisteredId                                                      smithy.SchemaExtensions
+	eGeneralName_Rfc822Name                                                        smithy.SchemaExtensions
+	eGeneralName_UniformResourceIdentifier                                         smithy.SchemaExtensions
+	e_GeneralNameList                                                              smithy.SchemaExtensions
+	e_GeneralNameList_member                                                       smithy.SchemaExtensions
+	e_HostedZoneId                                                                 smithy.SchemaExtensions
+	eHttpRedirect                                                                  smithy.SchemaExtensions
+	eHttpRedirect_RedirectFrom                                                     smithy.SchemaExtensions
+	eHttpRedirect_RedirectTo                                                       smithy.SchemaExtensions
+	e_IdempotencyToken                                                             smithy.SchemaExtensions
+	eInternalServerException                                                       smithy.SchemaExtensions
+	eInternalServerException_message                                               smithy.SchemaExtensions
+	e_InUseList                                                                    smithy.SchemaExtensions
+	e_InUseList_member                                                             smithy.SchemaExtensions
+	eInvalidArgsException                                                          smithy.SchemaExtensions
+	eInvalidArgsException_message                                                  smithy.SchemaExtensions
+	eInvalidArnException                                                           smithy.SchemaExtensions
+	eInvalidArnException_message                                                   smithy.SchemaExtensions
+	eInvalidDomainValidationOptionsException                                       smithy.SchemaExtensions
+	eInvalidDomainValidationOptionsException_message                               smithy.SchemaExtensions
+	eInvalidParameterException                                                     smithy.SchemaExtensions
+	eInvalidParameterException_message                                             smithy.SchemaExtensions
+	eInvalidStateException                                                         smithy.SchemaExtensions
+	eInvalidStateException_message                                                 smithy.SchemaExtensions
+	eInvalidTagException                                                           smithy.SchemaExtensions
+	eInvalidTagException_message                                                   smithy.SchemaExtensions
+	eKeyAlgorithm                                                                  smithy.SchemaExtensions
+	eKeyAlgorithm_RSA_1024                                                         smithy.SchemaExtensions
+	eKeyAlgorithm_RSA_2048                                                         smithy.SchemaExtensions
+	eKeyAlgorithm_RSA_3072                                                         smithy.SchemaExtensions
+	eKeyAlgorithm_RSA_4096                                                         smithy.SchemaExtensions
+	eKeyAlgorithm_EC_prime256v1                                                    smithy.SchemaExtensions
+	eKeyAlgorithm_EC_secp384r1                                                     smithy.SchemaExtensions
+	eKeyAlgorithm_EC_secp521r1                                                     smithy.SchemaExtensions
+	e_KeyAlgorithmList                                                             smithy.SchemaExtensions
+	e_KeyAlgorithmList_member                                                      smithy.SchemaExtensions
+	eKeyUsage                                                                      smithy.SchemaExtensions
+	eKeyUsage_Name                                                                 smithy.SchemaExtensions
+	e_KeyUsageFilterList                                                           smithy.SchemaExtensions
+	e_KeyUsageFilterList_member                                                    smithy.SchemaExtensions
+	e_KeyUsageList                                                                 smithy.SchemaExtensions
+	e_KeyUsageList_member                                                          smithy.SchemaExtensions
+	eKeyUsageName                                                                  smithy.SchemaExtensions
+	eKeyUsageName_DIGITAL_SIGNATURE                                                smithy.SchemaExtensions
+	eKeyUsageName_NON_REPUDATION                                                   smithy.SchemaExtensions
+	eKeyUsageName_KEY_ENCIPHERMENT                                                 smithy.SchemaExtensions
+	eKeyUsageName_DATA_ENCIPHERMENT                                                smithy.SchemaExtensions
+	eKeyUsageName_KEY_AGREEMENT                                                    smithy.SchemaExtensions
+	eKeyUsageName_CERTIFICATE_SIGNING                                              smithy.SchemaExtensions
+	eKeyUsageName_CRL_SIGNING                                                      smithy.SchemaExtensions
+	eKeyUsageName_ENCHIPER_ONLY                                                    smithy.SchemaExtensions
+	eKeyUsageName_DECIPHER_ONLY                                                    smithy.SchemaExtensions
+	eKeyUsageName_ANY                                                              smithy.SchemaExtensions
+	eKeyUsageName_CUSTOM                                                           smithy.SchemaExtensions
+	e_KeyUsageNames                                                                smithy.SchemaExtensions
+	e_KeyUsageNames_member                                                         smithy.SchemaExtensions
+	eLimitExceededException                                                        smithy.SchemaExtensions
+	eLimitExceededException_message                                                smithy.SchemaExtensions
+	e_MacKey                                                                       smithy.SchemaExtensions
+	e_MaxItems                                                                     smithy.SchemaExtensions
+	e_NextToken                                                                    smithy.SchemaExtensions
+	e_NullableBoolean                                                              smithy.SchemaExtensions
+	eOtherName                                                                     smithy.SchemaExtensions
+	eOtherName_ObjectIdentifier                                                    smithy.SchemaExtensions
+	eOtherName_Value                                                               smithy.SchemaExtensions
+	e_PassphraseBlob                                                               smithy.SchemaExtensions
+	e_PcaArn                                                                       smithy.SchemaExtensions
+	e_PositiveInteger                                                              smithy.SchemaExtensions
+	ePrevalidationDetails                                                          smithy.SchemaExtensions
+	ePrevalidationDetails_DnsPrevalidation                                         smithy.SchemaExtensions
+	ePrevalidationOptions                                                          smithy.SchemaExtensions
+	ePrevalidationOptions_DnsPrevalidation                                         smithy.SchemaExtensions
+	ePrevalidationType                                                             smithy.SchemaExtensions
+	ePrevalidationType_DNS_PREVALIDATION                                           smithy.SchemaExtensions
+	e_PrivateKey                                                                   smithy.SchemaExtensions
+	e_PrivateKeyBlob                                                               smithy.SchemaExtensions
+	ePublicCertificateAuthority                                                    smithy.SchemaExtensions
+	ePublicCertificateAuthority_AllowedKeyAlgorithms                               smithy.SchemaExtensions
+	ePublicKeyAlgorithm                                                            smithy.SchemaExtensions
+	ePublicKeyAlgorithm_RSA_2048                                                   smithy.SchemaExtensions
+	ePublicKeyAlgorithm_EC_PRIME256_V1                                             smithy.SchemaExtensions
+	ePublicKeyAlgorithm_EC_SECP384_R1                                              smithy.SchemaExtensions
+	e_PublicKeyAlgorithmList                                                       smithy.SchemaExtensions
+	e_PublicKeyAlgorithmList_member                                                smithy.SchemaExtensions
+	eRecordType                                                                    smithy.SchemaExtensions
+	eRecordType_CNAME                                                              smithy.SchemaExtensions
+	eRenewalEligibility                                                            smithy.SchemaExtensions
+	eRenewalEligibility_ELIGIBLE                                                   smithy.SchemaExtensions
+	eRenewalEligibility_INELIGIBLE                                                 smithy.SchemaExtensions
+	eRenewalStatus                                                                 smithy.SchemaExtensions
+	eRenewalStatus_PENDING_AUTO_RENEWAL                                            smithy.SchemaExtensions
+	eRenewalStatus_PENDING_VALIDATION                                              smithy.SchemaExtensions
+	eRenewalStatus_SUCCESS                                                         smithy.SchemaExtensions
+	eRenewalStatus_FAILED                                                          smithy.SchemaExtensions
+	eRenewalSummary                                                                smithy.SchemaExtensions
+	eRenewalSummary_RenewalStatus                                                  smithy.SchemaExtensions
+	eRenewalSummary_DomainValidationOptions                                        smithy.SchemaExtensions
+	eRenewalSummary_RenewalStatusReason                                            smithy.SchemaExtensions
+	eRenewalSummary_UpdatedAt                                                      smithy.SchemaExtensions
+	eRequestInProgressException                                                    smithy.SchemaExtensions
+	eRequestInProgressException_message                                            smithy.SchemaExtensions
+	eResourceInUseException                                                        smithy.SchemaExtensions
+	eResourceInUseException_message                                                smithy.SchemaExtensions
+	eResourceNotFoundException                                                     smithy.SchemaExtensions
+	eResourceNotFoundException_message                                             smithy.SchemaExtensions
+	eResourceRecord                                                                smithy.SchemaExtensions
+	eResourceRecord_Name                                                           smithy.SchemaExtensions
+	eResourceRecord_Type                                                           smithy.SchemaExtensions
+	eResourceRecord_Value                                                          smithy.SchemaExtensions
+	eRevocationReason                                                              smithy.SchemaExtensions
+	eRevocationReason_UNSPECIFIED                                                  smithy.SchemaExtensions
+	eRevocationReason_KEY_COMPROMISE                                               smithy.SchemaExtensions
+	eRevocationReason_CA_COMPROMISE                                                smithy.SchemaExtensions
+	eRevocationReason_AFFILIATION_CHANGED                                          smithy.SchemaExtensions
+	eRevocationReason_SUPERCEDED                                                   smithy.SchemaExtensions
+	eRevocationReason_SUPERSEDED                                                   smithy.SchemaExtensions
+	eRevocationReason_CESSATION_OF_OPERATION                                       smithy.SchemaExtensions
+	eRevocationReason_CERTIFICATE_HOLD                                             smithy.SchemaExtensions
+	eRevocationReason_REMOVE_FROM_CRL                                              smithy.SchemaExtensions
+	eRevocationReason_PRIVILEGE_WITHDRAWN                                          smithy.SchemaExtensions
+	eRevocationReason_A_A_COMPROMISE                                               smithy.SchemaExtensions
+	e_RoleArn                                                                      smithy.SchemaExtensions
+	eSearchCertificatesSortBy                                                      smithy.SchemaExtensions
+	eSearchCertificatesSortBy_CREATED_AT                                           smithy.SchemaExtensions
+	eSearchCertificatesSortBy_NOT_AFTER                                            smithy.SchemaExtensions
+	eSearchCertificatesSortBy_STATUS                                               smithy.SchemaExtensions
+	eSearchCertificatesSortBy_RENEWAL_STATUS                                       smithy.SchemaExtensions
+	eSearchCertificatesSortBy_EXPORTED                                             smithy.SchemaExtensions
+	eSearchCertificatesSortBy_IN_USE                                               smithy.SchemaExtensions
+	eSearchCertificatesSortBy_NOT_BEFORE                                           smithy.SchemaExtensions
+	eSearchCertificatesSortBy_KEY_ALGORITHM                                        smithy.SchemaExtensions
+	eSearchCertificatesSortBy_TYPE                                                 smithy.SchemaExtensions
+	eSearchCertificatesSortBy_CERTIFICATE_ARN                                      smithy.SchemaExtensions
+	eSearchCertificatesSortBy_COMMON_NAME                                          smithy.SchemaExtensions
+	eSearchCertificatesSortBy_REVOKED_AT                                           smithy.SchemaExtensions
+	eSearchCertificatesSortBy_RENEWAL_ELIGIBILITY                                  smithy.SchemaExtensions
+	eSearchCertificatesSortBy_ISSUED_AT                                            smithy.SchemaExtensions
+	eSearchCertificatesSortBy_MANAGED_BY                                           smithy.SchemaExtensions
+	eSearchCertificatesSortBy_EXPORT_OPTION                                        smithy.SchemaExtensions
+	eSearchCertificatesSortBy_VALIDATION_METHOD                                    smithy.SchemaExtensions
+	eSearchCertificatesSortBy_IMPORTED_AT                                          smithy.SchemaExtensions
+	eSearchCertificatesSortBy_ACME_ENDPOINT_ARN                                    smithy.SchemaExtensions
+	eSearchCertificatesSortBy_ACME_ACCOUNT_ID                                      smithy.SchemaExtensions
+	eSearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN                          smithy.SchemaExtensions
+	eSearchCertificatesSortOrder                                                   smithy.SchemaExtensions
+	eSearchCertificatesSortOrder_ASCENDING                                         smithy.SchemaExtensions
+	eSearchCertificatesSortOrder_DESCENDING                                        smithy.SchemaExtensions
+	e_SearchMaxResults                                                             smithy.SchemaExtensions
+	e_SerialNumber                                                                 smithy.SchemaExtensions
+	e_ServiceErrorMessage                                                          smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                         smithy.SchemaExtensions
+	eSortBy                                                                        smithy.SchemaExtensions
+	eSortBy_CREATED_AT                                                             smithy.SchemaExtensions
+	eSortOrder                                                                     smithy.SchemaExtensions
+	eSortOrder_ASCENDING                                                           smithy.SchemaExtensions
+	eSortOrder_DESCENDING                                                          smithy.SchemaExtensions
+	e_String                                                                       smithy.SchemaExtensions
+	eSubjectAlternativeNameFilter                                                  smithy.SchemaExtensions
+	eSubjectAlternativeNameFilter_DnsName                                          smithy.SchemaExtensions
+	eSubjectFilter                                                                 smithy.SchemaExtensions
+	eSubjectFilter_CommonName                                                      smithy.SchemaExtensions
+	eTag                                                                           smithy.SchemaExtensions
+	eTag_Key                                                                       smithy.SchemaExtensions
+	eTag_Value                                                                     smithy.SchemaExtensions
+	e_TagKey                                                                       smithy.SchemaExtensions
+	e_TagKeyList                                                                   smithy.SchemaExtensions
+	e_TagKeyList_member                                                            smithy.SchemaExtensions
+	e_TagList                                                                      smithy.SchemaExtensions
+	e_TagList_member                                                               smithy.SchemaExtensions
+	eTagPolicyException                                                            smithy.SchemaExtensions
+	eTagPolicyException_message                                                    smithy.SchemaExtensions
+	e_TagValue                                                                     smithy.SchemaExtensions
+	eThrottlingException                                                           smithy.SchemaExtensions
+	eThrottlingException_message                                                   smithy.SchemaExtensions
+	eThrottlingException_throttlingReasons                                         smithy.SchemaExtensions
+	eThrottlingReason                                                              smithy.SchemaExtensions
+	eThrottlingReason_reason                                                       smithy.SchemaExtensions
+	eThrottlingReason_resource                                                     smithy.SchemaExtensions
+	e_ThrottlingReasonList                                                         smithy.SchemaExtensions
+	e_ThrottlingReasonList_member                                                  smithy.SchemaExtensions
+	eTimestampRange                                                                smithy.SchemaExtensions
+	eTimestampRange_Start                                                          smithy.SchemaExtensions
+	eTimestampRange_End                                                            smithy.SchemaExtensions
+	eTimeType                                                                      smithy.SchemaExtensions
+	eTimeType_MINUTES                                                              smithy.SchemaExtensions
+	eTimeType_HOURS                                                                smithy.SchemaExtensions
+	eTimeType_DAYS                                                                 smithy.SchemaExtensions
+	eTooManyTagsException                                                          smithy.SchemaExtensions
+	eTooManyTagsException_message                                                  smithy.SchemaExtensions
+	e_TStamp                                                                       smithy.SchemaExtensions
+	eUpdateStatus                                                                  smithy.SchemaExtensions
+	eUpdateStatus_PENDING_DOMAIN_VALIDATION                                        smithy.SchemaExtensions
+	eUpdateStatus_SUCCESS                                                          smithy.SchemaExtensions
+	eUpdateStatus_FAILED                                                           smithy.SchemaExtensions
+	eUpdateSummary                                                                 smithy.SchemaExtensions
+	eUpdateSummary_Status                                                          smithy.SchemaExtensions
+	eUpdateSummary_Type                                                            smithy.SchemaExtensions
+	eUpdateSummary_DomainValidationMethodUpdateSummary                             smithy.SchemaExtensions
+	eUpdateSummary_RequestedAt                                                     smithy.SchemaExtensions
+	eUpdateSummary_UpdatedAt                                                       smithy.SchemaExtensions
+	eUpdateType                                                                    smithy.SchemaExtensions
+	eUpdateType_DOMAIN_VALIDATION_METHOD                                           smithy.SchemaExtensions
+	eValidationChallenge                                                           smithy.SchemaExtensions
+	eValidationChallenge_EmailValidationChallenge                                  smithy.SchemaExtensions
+	eValidationChallenge_DnsValidationChallenge                                    smithy.SchemaExtensions
+	eValidationConfiguration                                                       smithy.SchemaExtensions
+	eValidationConfiguration_ValidationMethod                                      smithy.SchemaExtensions
+	eValidationConfiguration_ValidationChallenge                                   smithy.SchemaExtensions
+	eValidationConfiguration_ValidationStatus                                      smithy.SchemaExtensions
+	e_ValidationEmailList                                                          smithy.SchemaExtensions
+	e_ValidationEmailList_member                                                   smithy.SchemaExtensions
+	eValidationException                                                           smithy.SchemaExtensions
+	eValidationException_message                                                   smithy.SchemaExtensions
+	e_ValidationExceptionMessage                                                   smithy.SchemaExtensions
+	eValidationMethod                                                              smithy.SchemaExtensions
+	eValidationMethod_EMAIL                                                        smithy.SchemaExtensions
+	eValidationMethod_DNS                                                          smithy.SchemaExtensions
+	eValidationMethod_HTTP                                                         smithy.SchemaExtensions
+	eX509AttributeFilter                                                           smithy.SchemaExtensions
+	eX509AttributeFilter_Subject                                                   smithy.SchemaExtensions
+	eX509AttributeFilter_SubjectAlternativeName                                    smithy.SchemaExtensions
+	eX509AttributeFilter_ExtendedKeyUsage                                          smithy.SchemaExtensions
+	eX509AttributeFilter_KeyUsage                                                  smithy.SchemaExtensions
+	eX509AttributeFilter_KeyAlgorithm                                              smithy.SchemaExtensions
+	eX509AttributeFilter_SerialNumber                                              smithy.SchemaExtensions
+	eX509AttributeFilter_NotAfter                                                  smithy.SchemaExtensions
+	eX509AttributeFilter_NotBefore                                                 smithy.SchemaExtensions
+	eX509Attributes                                                                smithy.SchemaExtensions
+	eX509Attributes_Issuer                                                         smithy.SchemaExtensions
+	eX509Attributes_Subject                                                        smithy.SchemaExtensions
+	eX509Attributes_SubjectAlternativeNames                                        smithy.SchemaExtensions
+	eX509Attributes_ExtendedKeyUsages                                              smithy.SchemaExtensions
+	eX509Attributes_KeyAlgorithm                                                   smithy.SchemaExtensions
+	eX509Attributes_KeyUsages                                                      smithy.SchemaExtensions
+	eX509Attributes_SerialNumber                                                   smithy.SchemaExtensions
+	eX509Attributes_NotAfter                                                       smithy.SchemaExtensions
+	eX509Attributes_NotBefore                                                      smithy.SchemaExtensions
+	eAddTagsToCertificateRequest                                                   smithy.SchemaExtensions
+	eAddTagsToCertificateRequest_CertificateArn                                    smithy.SchemaExtensions
+	eAddTagsToCertificateRequest_Tags                                              smithy.SchemaExtensions
+	eCreateAcmeDomainValidationRequest                                             smithy.SchemaExtensions
+	eCreateAcmeDomainValidationRequest_IdempotencyToken                            smithy.SchemaExtensions
+	eCreateAcmeDomainValidationRequest_AcmeEndpointArn                             smithy.SchemaExtensions
+	eCreateAcmeDomainValidationRequest_DomainName                                  smithy.SchemaExtensions
+	eCreateAcmeDomainValidationRequest_PrevalidationOptions                        smithy.SchemaExtensions
+	eCreateAcmeDomainValidationRequest_Tags                                        smithy.SchemaExtensions
+	eCreateAcmeDomainValidationResponse                                            smithy.SchemaExtensions
+	eCreateAcmeDomainValidationResponse_AcmeDomainValidationArn                    smithy.SchemaExtensions
+	eCreateAcmeEndpointRequest                                                     smithy.SchemaExtensions
+	eCreateAcmeEndpointRequest_IdempotencyToken                                    smithy.SchemaExtensions
+	eCreateAcmeEndpointRequest_AuthorizationBehavior                               smithy.SchemaExtensions
+	eCreateAcmeEndpointRequest_Contact                                             smithy.SchemaExtensions
+	eCreateAcmeEndpointRequest_CertificateAuthority                                smithy.SchemaExtensions
+	eCreateAcmeEndpointRequest_Tags                                                smithy.SchemaExtensions
+	eCreateAcmeEndpointRequest_CertificateTags                                     smithy.SchemaExtensions
+	eCreateAcmeEndpointResponse                                                    smithy.SchemaExtensions
+	eCreateAcmeEndpointResponse_AcmeEndpointArn                                    smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingRequest                                       smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingRequest_IdempotencyToken                      smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingRequest_AcmeEndpointArn                       smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingRequest_RoleArn                               smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingRequest_Expiration                            smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingRequest_Tags                                  smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingResponse                                      smithy.SchemaExtensions
+	eCreateAcmeExternalAccountBindingResponse_ExternalAccountBinding               smithy.SchemaExtensions
+	eDeleteAcmeDomainValidationRequest                                             smithy.SchemaExtensions
+	eDeleteAcmeDomainValidationRequest_AcmeDomainValidationArn                     smithy.SchemaExtensions
+	eDeleteAcmeEndpointRequest                                                     smithy.SchemaExtensions
+	eDeleteAcmeEndpointRequest_AcmeEndpointArn                                     smithy.SchemaExtensions
+	eDeleteAcmeExternalAccountBindingRequest                                       smithy.SchemaExtensions
+	eDeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn         smithy.SchemaExtensions
+	eDeleteCertificateRequest                                                      smithy.SchemaExtensions
+	eDeleteCertificateRequest_CertificateArn                                       smithy.SchemaExtensions
+	eDescribeAcmeAccountRequest                                                    smithy.SchemaExtensions
+	eDescribeAcmeAccountRequest_AcmeEndpointArn                                    smithy.SchemaExtensions
+	eDescribeAcmeAccountRequest_AccountUrl                                         smithy.SchemaExtensions
+	eDescribeAcmeAccountResponse                                                   smithy.SchemaExtensions
+	eDescribeAcmeAccountResponse_AcmeAccount                                       smithy.SchemaExtensions
+	eDescribeAcmeDomainValidationRequest                                           smithy.SchemaExtensions
+	eDescribeAcmeDomainValidationRequest_AcmeDomainValidationArn                   smithy.SchemaExtensions
+	eDescribeAcmeDomainValidationResponse                                          smithy.SchemaExtensions
+	eDescribeAcmeDomainValidationResponse_AcmeDomainValidation                     smithy.SchemaExtensions
+	eDescribeAcmeEndpointRequest                                                   smithy.SchemaExtensions
+	eDescribeAcmeEndpointRequest_AcmeEndpointArn                                   smithy.SchemaExtensions
+	eDescribeAcmeEndpointResponse                                                  smithy.SchemaExtensions
+	eDescribeAcmeEndpointResponse_AcmeEndpoint                                     smithy.SchemaExtensions
+	eDescribeAcmeExternalAccountBindingRequest                                     smithy.SchemaExtensions
+	eDescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn       smithy.SchemaExtensions
+	eDescribeAcmeExternalAccountBindingResponse                                    smithy.SchemaExtensions
+	eDescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding             smithy.SchemaExtensions
+	eDescribeCertificateRequest                                                    smithy.SchemaExtensions
+	eDescribeCertificateRequest_CertificateArn                                     smithy.SchemaExtensions
+	eDescribeCertificateResponse                                                   smithy.SchemaExtensions
+	eDescribeCertificateResponse_Certificate                                       smithy.SchemaExtensions
+	eExportCertificateRequest                                                      smithy.SchemaExtensions
+	eExportCertificateRequest_CertificateArn                                       smithy.SchemaExtensions
+	eExportCertificateRequest_Passphrase                                           smithy.SchemaExtensions
+	eExportCertificateResponse                                                     smithy.SchemaExtensions
+	eExportCertificateResponse_Certificate                                         smithy.SchemaExtensions
+	eExportCertificateResponse_CertificateChain                                    smithy.SchemaExtensions
+	eExportCertificateResponse_PrivateKey                                          smithy.SchemaExtensions
+	eGetAccountConfigurationResponse                                               smithy.SchemaExtensions
+	eGetAccountConfigurationResponse_ExpiryEvents                                  smithy.SchemaExtensions
+	eGetAcmeExternalAccountBindingCredentialsRequest                               smithy.SchemaExtensions
+	eGetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn smithy.SchemaExtensions
+	eGetAcmeExternalAccountBindingCredentialsResponse                              smithy.SchemaExtensions
+	eGetAcmeExternalAccountBindingCredentialsResponse_KeyId                        smithy.SchemaExtensions
+	eGetAcmeExternalAccountBindingCredentialsResponse_MacKey                       smithy.SchemaExtensions
+	eGetCertificateRequest                                                         smithy.SchemaExtensions
+	eGetCertificateRequest_CertificateArn                                          smithy.SchemaExtensions
+	eGetCertificateResponse                                                        smithy.SchemaExtensions
+	eGetCertificateResponse_Certificate                                            smithy.SchemaExtensions
+	eGetCertificateResponse_CertificateChain                                       smithy.SchemaExtensions
+	eImportCertificateRequest                                                      smithy.SchemaExtensions
+	eImportCertificateRequest_CertificateArn                                       smithy.SchemaExtensions
+	eImportCertificateRequest_Certificate                                          smithy.SchemaExtensions
+	eImportCertificateRequest_PrivateKey                                           smithy.SchemaExtensions
+	eImportCertificateRequest_CertificateChain                                     smithy.SchemaExtensions
+	eImportCertificateRequest_Tags                                                 smithy.SchemaExtensions
+	eImportCertificateResponse                                                     smithy.SchemaExtensions
+	eImportCertificateResponse_CertificateArn                                      smithy.SchemaExtensions
+	eListAcmeAccountsRequest                                                       smithy.SchemaExtensions
+	eListAcmeAccountsRequest_NextToken                                             smithy.SchemaExtensions
+	eListAcmeAccountsRequest_MaxResults                                            smithy.SchemaExtensions
+	eListAcmeAccountsRequest_AcmeEndpointArn                                       smithy.SchemaExtensions
+	eListAcmeAccountsResponse                                                      smithy.SchemaExtensions
+	eListAcmeAccountsResponse_AcmeAccounts                                         smithy.SchemaExtensions
+	eListAcmeAccountsResponse_NextToken                                            smithy.SchemaExtensions
+	eListAcmeDomainValidationsRequest                                              smithy.SchemaExtensions
+	eListAcmeDomainValidationsRequest_NextToken                                    smithy.SchemaExtensions
+	eListAcmeDomainValidationsRequest_MaxResults                                   smithy.SchemaExtensions
+	eListAcmeDomainValidationsRequest_AcmeEndpointArn                              smithy.SchemaExtensions
+	eListAcmeDomainValidationsResponse                                             smithy.SchemaExtensions
+	eListAcmeDomainValidationsResponse_AcmeDomainValidations                       smithy.SchemaExtensions
+	eListAcmeDomainValidationsResponse_NextToken                                   smithy.SchemaExtensions
+	eListAcmeEndpointsRequest                                                      smithy.SchemaExtensions
+	eListAcmeEndpointsRequest_NextToken                                            smithy.SchemaExtensions
+	eListAcmeEndpointsRequest_MaxResults                                           smithy.SchemaExtensions
+	eListAcmeEndpointsResponse                                                     smithy.SchemaExtensions
+	eListAcmeEndpointsResponse_AcmeEndpoints                                       smithy.SchemaExtensions
+	eListAcmeEndpointsResponse_NextToken                                           smithy.SchemaExtensions
+	eListAcmeExternalAccountBindingsRequest                                        smithy.SchemaExtensions
+	eListAcmeExternalAccountBindingsRequest_NextToken                              smithy.SchemaExtensions
+	eListAcmeExternalAccountBindingsRequest_MaxResults                             smithy.SchemaExtensions
+	eListAcmeExternalAccountBindingsRequest_AcmeEndpointArn                        smithy.SchemaExtensions
+	eListAcmeExternalAccountBindingsResponse                                       smithy.SchemaExtensions
+	eListAcmeExternalAccountBindingsResponse_ExternalAccountBindings               smithy.SchemaExtensions
+	eListAcmeExternalAccountBindingsResponse_NextToken                             smithy.SchemaExtensions
+	eListCertificateDomainValidationsRequest                                       smithy.SchemaExtensions
+	eListCertificateDomainValidationsRequest_CertificateArn                        smithy.SchemaExtensions
+	eListCertificateDomainValidationsRequest_NextToken                             smithy.SchemaExtensions
+	eListCertificateDomainValidationsRequest_MaxItems                              smithy.SchemaExtensions
+	eListCertificateDomainValidationsResponse                                      smithy.SchemaExtensions
+	eListCertificateDomainValidationsResponse_DomainValidationSummaryList          smithy.SchemaExtensions
+	eListCertificateDomainValidationsResponse_NextToken                            smithy.SchemaExtensions
+	eListCertificatesRequest                                                       smithy.SchemaExtensions
+	eListCertificatesRequest_CertificateStatuses                                   smithy.SchemaExtensions
+	eListCertificatesRequest_CertificateKeyPairOrigins                             smithy.SchemaExtensions
+	eListCertificatesRequest_Includes                                              smithy.SchemaExtensions
+	eListCertificatesRequest_NextToken                                             smithy.SchemaExtensions
+	eListCertificatesRequest_MaxItems                                              smithy.SchemaExtensions
+	eListCertificatesRequest_SortBy                                                smithy.SchemaExtensions
+	eListCertificatesRequest_SortOrder                                             smithy.SchemaExtensions
+	eListCertificatesResponse                                                      smithy.SchemaExtensions
+	eListCertificatesResponse_NextToken                                            smithy.SchemaExtensions
+	eListCertificatesResponse_CertificateSummaryList                               smithy.SchemaExtensions
+	eListTagsForCertificateRequest                                                 smithy.SchemaExtensions
+	eListTagsForCertificateRequest_CertificateArn                                  smithy.SchemaExtensions
+	eListTagsForCertificateResponse                                                smithy.SchemaExtensions
+	eListTagsForCertificateResponse_Tags                                           smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                    smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                        smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                   smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                              smithy.SchemaExtensions
+	ePutAccountConfigurationRequest                                                smithy.SchemaExtensions
+	ePutAccountConfigurationRequest_ExpiryEvents                                   smithy.SchemaExtensions
+	ePutAccountConfigurationRequest_IdempotencyToken                               smithy.SchemaExtensions
+	eRemoveTagsFromCertificateRequest                                              smithy.SchemaExtensions
+	eRemoveTagsFromCertificateRequest_CertificateArn                               smithy.SchemaExtensions
+	eRemoveTagsFromCertificateRequest_Tags                                         smithy.SchemaExtensions
+	eRenewCertificateRequest                                                       smithy.SchemaExtensions
+	eRenewCertificateRequest_CertificateArn                                        smithy.SchemaExtensions
+	eRequestCertificateRequest                                                     smithy.SchemaExtensions
+	eRequestCertificateRequest_DomainName                                          smithy.SchemaExtensions
+	eRequestCertificateRequest_ValidationMethod                                    smithy.SchemaExtensions
+	eRequestCertificateRequest_SubjectAlternativeNames                             smithy.SchemaExtensions
+	eRequestCertificateRequest_IdempotencyToken                                    smithy.SchemaExtensions
+	eRequestCertificateRequest_DomainValidationOptions                             smithy.SchemaExtensions
+	eRequestCertificateRequest_Options                                             smithy.SchemaExtensions
+	eRequestCertificateRequest_CertificateAuthorityArn                             smithy.SchemaExtensions
+	eRequestCertificateRequest_Tags                                                smithy.SchemaExtensions
+	eRequestCertificateRequest_KeyAlgorithm                                        smithy.SchemaExtensions
+	eRequestCertificateRequest_ManagedBy                                           smithy.SchemaExtensions
+	eRequestCertificateResponse                                                    smithy.SchemaExtensions
+	eRequestCertificateResponse_CertificateArn                                     smithy.SchemaExtensions
+	eResendValidationEmailRequest                                                  smithy.SchemaExtensions
+	eResendValidationEmailRequest_CertificateArn                                   smithy.SchemaExtensions
+	eResendValidationEmailRequest_Domain                                           smithy.SchemaExtensions
+	eResendValidationEmailRequest_ValidationDomain                                 smithy.SchemaExtensions
+	eRevokeAcmeAccountRequest                                                      smithy.SchemaExtensions
+	eRevokeAcmeAccountRequest_AcmeEndpointArn                                      smithy.SchemaExtensions
+	eRevokeAcmeAccountRequest_AccountUrl                                           smithy.SchemaExtensions
+	eRevokeAcmeExternalAccountBindingRequest                                       smithy.SchemaExtensions
+	eRevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn         smithy.SchemaExtensions
+	eRevokeCertificateRequest                                                      smithy.SchemaExtensions
+	eRevokeCertificateRequest_CertificateArn                                       smithy.SchemaExtensions
+	eRevokeCertificateRequest_RevocationReason                                     smithy.SchemaExtensions
+	eRevokeCertificateResponse                                                     smithy.SchemaExtensions
+	eRevokeCertificateResponse_CertificateArn                                      smithy.SchemaExtensions
+	eSearchCertificatesRequest                                                     smithy.SchemaExtensions
+	eSearchCertificatesRequest_FilterStatement                                     smithy.SchemaExtensions
+	eSearchCertificatesRequest_MaxResults                                          smithy.SchemaExtensions
+	eSearchCertificatesRequest_NextToken                                           smithy.SchemaExtensions
+	eSearchCertificatesRequest_SortBy                                              smithy.SchemaExtensions
+	eSearchCertificatesRequest_SortOrder                                           smithy.SchemaExtensions
+	eSearchCertificatesResponse                                                    smithy.SchemaExtensions
+	eSearchCertificatesResponse_Results                                            smithy.SchemaExtensions
+	eSearchCertificatesResponse_NextToken                                          smithy.SchemaExtensions
+	eTagResourceRequest                                                            smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                                smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                       smithy.SchemaExtensions
+	eUntagResourceRequest                                                          smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                              smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                  smithy.SchemaExtensions
+	eUpdateAcmeDomainValidationRequest                                             smithy.SchemaExtensions
+	eUpdateAcmeDomainValidationRequest_AcmeDomainValidationArn                     smithy.SchemaExtensions
+	eUpdateAcmeDomainValidationRequest_PrevalidationOptions                        smithy.SchemaExtensions
+	eUpdateAcmeEndpointRequest                                                     smithy.SchemaExtensions
+	eUpdateAcmeEndpointRequest_AcmeEndpointArn                                     smithy.SchemaExtensions
+	eUpdateAcmeEndpointRequest_AuthorizationBehavior                               smithy.SchemaExtensions
+	eUpdateAcmeEndpointRequest_Contact                                             smithy.SchemaExtensions
+	eUpdateAcmeEndpointRequest_CertificateAuthority                                smithy.SchemaExtensions
+	eUpdateCertificateOptionsRequest                                               smithy.SchemaExtensions
+	eUpdateCertificateOptionsRequest_CertificateArn                                smithy.SchemaExtensions
+	eUpdateCertificateOptionsRequest_Options                                       smithy.SchemaExtensions
+)
+
+var (
+	iAddTagsToCertificate                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AddTagsToCertificate"}
+	iCreateAcmeDomainValidation                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeDomainValidation"}
+	iCreateAcmeEndpoint                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeEndpoint"}
+	iCreateAcmeExternalAccountBinding                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeExternalAccountBinding"}
+	iDeleteAcmeDomainValidation                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteAcmeDomainValidation"}
+	iDeleteAcmeEndpoint                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteAcmeEndpoint"}
+	iDeleteAcmeExternalAccountBinding                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteAcmeExternalAccountBinding"}
+	iDeleteCertificate                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteCertificate"}
+	iDescribeAcmeAccount                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeAccount"}
+	iDescribeAcmeDomainValidation                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeDomainValidation"}
+	iDescribeAcmeEndpoint                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeEndpoint"}
+	iDescribeAcmeExternalAccountBinding               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeExternalAccountBinding"}
+	iDescribeCertificate                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeCertificate"}
+	iExportCertificate                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExportCertificate"}
+	iGetAccountConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetAccountConfiguration"}
+	iGetAcmeExternalAccountBindingCredentials         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetAcmeExternalAccountBindingCredentials"}
+	iGetCertificate                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetCertificate"}
+	iImportCertificate                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ImportCertificate"}
+	iListAcmeAccounts                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeAccounts"}
+	iListAcmeDomainValidations                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeDomainValidations"}
+	iListAcmeEndpoints                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeEndpoints"}
+	iListAcmeExternalAccountBindings                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeExternalAccountBindings"}
+	iListCertificateDomainValidations                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListCertificateDomainValidations"}
+	iListCertificates                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListCertificates"}
+	iListTagsForCertificate                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListTagsForCertificate"}
+	iListTagsForResource                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListTagsForResource"}
+	iPutAccountConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PutAccountConfiguration"}
+	iRemoveTagsFromCertificate                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RemoveTagsFromCertificate"}
+	iRenewCertificate                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RenewCertificate"}
+	iRequestCertificate                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RequestCertificate"}
+	iResendValidationEmail                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ResendValidationEmail"}
+	iRevokeAcmeAccount                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevokeAcmeAccount"}
+	iRevokeAcmeExternalAccountBinding                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevokeAcmeExternalAccountBinding"}
+	iRevokeCertificate                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevokeCertificate"}
+	iSearchCertificates                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SearchCertificates"}
+	iTagResource                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TagResource"}
+	iUntagResource                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UntagResource"}
+	iUpdateAcmeDomainValidation                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateAcmeDomainValidation"}
+	iUpdateAcmeEndpoint                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateAcmeEndpoint"}
+	iUpdateCertificateOptions                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateCertificateOptions"}
+	i_CertificateManager                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateManager"}
+	iAccessDeniedException                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AccessDeniedException"}
+	iAcmCertificateMetadata                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmCertificateMetadata"}
+	iAcmCertificateMetadataFilter                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmCertificateMetadataFilter"}
+	iAcmeAccount                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeAccount"}
+	i_AcmeAccountId                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeAccountId"}
+	i_AcmeAccountList                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeAccountList"}
+	iAcmeAccountStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeAccountStatus"}
+	iAcmeAccountSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeAccountSummary"}
+	iAcmeAuthorizationBehavior                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeAuthorizationBehavior"}
+	iAcmeContact                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeContact"}
+	iAcmeDomainValidation                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeDomainValidation"}
+	i_AcmeDomainValidationArn                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeDomainValidationArn"}
+	iAcmeDomainValidationFailureReason                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeDomainValidationFailureReason"}
+	i_AcmeDomainValidationList                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeDomainValidationList"}
+	iAcmeDomainValidationStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeDomainValidationStatus"}
+	iAcmeDomainValidationSummary                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeDomainValidationSummary"}
+	iAcmeEndpoint                                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeEndpoint"}
+	i_AcmeEndpointArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeEndpointArn"}
+	i_AcmeEndpointList                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeEndpointList"}
+	iAcmeEndpointStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeEndpointStatus"}
+	iAcmeEndpointSummary                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeEndpointSummary"}
+	iAcmeExternalAccountBinding                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeExternalAccountBinding"}
+	i_AcmeExternalAccountBindingArn                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeExternalAccountBindingArn"}
+	i_AcmeExternalAccountBindingList                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeExternalAccountBindingList"}
+	iAcmeExternalAccountBindingSummary                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AcmeExternalAccountBindingSummary"}
+	i_Arn                                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "Arn"}
+	i_AvailabilityErrorMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AvailabilityErrorMessage"}
+	i_CertificateArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateArn"}
+	iCertificateAuthority                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateAuthority"}
+	i_CertificateBody                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateBody"}
+	i_CertificateBodyBlob                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateBodyBlob"}
+	i_CertificateChain                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateChain"}
+	i_CertificateChainBlob                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateChainBlob"}
+	iCertificateDetail                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateDetail"}
+	iCertificateExport                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateExport"}
+	iCertificateFilter                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateFilter"}
+	iCertificateFilterStatement                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateFilterStatement"}
+	i_CertificateFilterStatementList                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateFilterStatementList"}
+	iCertificateKeyPairOrigin                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateKeyPairOrigin"}
+	i_CertificateKeyPairOrigins                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateKeyPairOrigins"}
+	iCertificateManagedBy                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateManagedBy"}
+	iCertificateMetadata                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateMetadata"}
+	iCertificateOptions                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateOptions"}
+	iCertificateSearchResult                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateSearchResult"}
+	i_CertificateSearchResultList                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateSearchResultList"}
+	iCertificateStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateStatus"}
+	i_CertificateStatuses                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateStatuses"}
+	iCertificateSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateSummary"}
+	i_CertificateSummaryList                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateSummaryList"}
+	iCertificateTransparencyLoggingPreference         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateTransparencyLoggingPreference"}
+	iCertificateType                                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CertificateType"}
+	iCommonNameFilter                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CommonNameFilter"}
+	iComparisonOperator                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ComparisonOperator"}
+	iConflictException                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ConflictException"}
+	i_ContactList                                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ContactList"}
+	i_CoralAvailabilityThrottledResource              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CoralAvailabilityThrottledResource"}
+	i_CoralAvailabilityThrottlingReason               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CoralAvailabilityThrottlingReason"}
+	iCustomAttribute                                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CustomAttribute"}
+	i_CustomAttributeList                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CustomAttributeList"}
+	iDistinguishedName                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DistinguishedName"}
+	iDnsNameFilter                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DnsNameFilter"}
+	iDnsPrevalidationDetails                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DnsPrevalidationDetails"}
+	iDnsPrevalidationOptions                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DnsPrevalidationOptions"}
+	iDnsValidationChallenge                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DnsValidationChallenge"}
+	i_DomainComponentList                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainComponentList"}
+	i_DomainList                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainList"}
+	i_DomainName                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainName"}
+	i_DomainNameString                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainNameString"}
+	iDomainScope                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainScope"}
+	iDomainScopeOption                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainScopeOption"}
+	iDomainStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainStatus"}
+	iDomainValidation                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainValidation"}
+	i_DomainValidationList                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainValidationList"}
+	iDomainValidationMethodUpdateSummary              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainValidationMethodUpdateSummary"}
+	iDomainValidationOption                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainValidationOption"}
+	i_DomainValidationOptionList                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainValidationOptionList"}
+	iDomainValidationSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainValidationSummary"}
+	i_DomainValidationSummaryList                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DomainValidationSummaryList"}
+	iEmailValidationChallenge                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "EmailValidationChallenge"}
+	iExpiration                                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "Expiration"}
+	iExpiryEventsConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExpiryEventsConfiguration"}
+	iExtendedKeyUsage                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExtendedKeyUsage"}
+	i_ExtendedKeyUsageFilterList                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExtendedKeyUsageFilterList"}
+	i_ExtendedKeyUsageList                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExtendedKeyUsageList"}
+	iExtendedKeyUsageName                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExtendedKeyUsageName"}
+	i_ExtendedKeyUsageNames                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExtendedKeyUsageNames"}
+	iFailureDetails                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "FailureDetails"}
+	iFailureReason                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "FailureReason"}
+	iFilters                                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "Filters"}
+	i_FilterString                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "FilterString"}
+	iGeneralName                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GeneralName"}
+	i_GeneralNameList                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GeneralNameList"}
+	i_HostedZoneId                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "HostedZoneId"}
+	iHttpRedirect                                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "HttpRedirect"}
+	i_IdempotencyToken                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "IdempotencyToken"}
+	iInternalServerException                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InternalServerException"}
+	i_InUseList                                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InUseList"}
+	iInvalidArgsException                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InvalidArgsException"}
+	iInvalidArnException                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InvalidArnException"}
+	iInvalidDomainValidationOptionsException          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InvalidDomainValidationOptionsException"}
+	iInvalidParameterException                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InvalidParameterException"}
+	iInvalidStateException                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InvalidStateException"}
+	iInvalidTagException                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "InvalidTagException"}
+	iKeyAlgorithm                                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "KeyAlgorithm"}
+	i_KeyAlgorithmList                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "KeyAlgorithmList"}
+	iKeyUsage                                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "KeyUsage"}
+	i_KeyUsageFilterList                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "KeyUsageFilterList"}
+	i_KeyUsageList                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "KeyUsageList"}
+	iKeyUsageName                                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "KeyUsageName"}
+	i_KeyUsageNames                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "KeyUsageNames"}
+	iLimitExceededException                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "LimitExceededException"}
+	i_MacKey                                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "MacKey"}
+	i_MaxItems                                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "MaxItems"}
+	i_NextToken                                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "NextToken"}
+	i_NullableBoolean                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "NullableBoolean"}
+	iOtherName                                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "OtherName"}
+	i_PassphraseBlob                                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PassphraseBlob"}
+	i_PcaArn                                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PcaArn"}
+	i_PositiveInteger                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PositiveInteger"}
+	iPrevalidationDetails                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PrevalidationDetails"}
+	iPrevalidationOptions                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PrevalidationOptions"}
+	iPrevalidationType                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PrevalidationType"}
+	i_PrivateKey                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PrivateKey"}
+	i_PrivateKeyBlob                                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PrivateKeyBlob"}
+	iPublicCertificateAuthority                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PublicCertificateAuthority"}
+	iPublicKeyAlgorithm                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PublicKeyAlgorithm"}
+	i_PublicKeyAlgorithmList                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PublicKeyAlgorithmList"}
+	iRecordType                                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RecordType"}
+	iRenewalEligibility                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RenewalEligibility"}
+	iRenewalStatus                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RenewalStatus"}
+	iRenewalSummary                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RenewalSummary"}
+	iRequestInProgressException                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RequestInProgressException"}
+	iResourceInUseException                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ResourceInUseException"}
+	iResourceNotFoundException                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ResourceNotFoundException"}
+	iResourceRecord                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ResourceRecord"}
+	iRevocationReason                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevocationReason"}
+	i_RoleArn                                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RoleArn"}
+	iSearchCertificatesSortBy                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SearchCertificatesSortBy"}
+	iSearchCertificatesSortOrder                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SearchCertificatesSortOrder"}
+	i_SearchMaxResults                                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SearchMaxResults"}
+	i_SerialNumber                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SerialNumber"}
+	i_ServiceErrorMessage                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ServiceErrorMessage"}
+	iServiceQuotaExceededException                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ServiceQuotaExceededException"}
+	iSortBy                                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SortBy"}
+	iSortOrder                                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SortOrder"}
+	i_String                                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "String"}
+	iSubjectAlternativeNameFilter                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SubjectAlternativeNameFilter"}
+	iSubjectFilter                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SubjectFilter"}
+	iTag                                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "Tag"}
+	i_TagKey                                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TagKey"}
+	i_TagKeyList                                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TagKeyList"}
+	i_TagList                                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TagList"}
+	iTagPolicyException                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TagPolicyException"}
+	i_TagValue                                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TagValue"}
+	iThrottlingException                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ThrottlingException"}
+	iThrottlingReason                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ThrottlingReason"}
+	i_ThrottlingReasonList                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ThrottlingReasonList"}
+	iTimestampRange                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TimestampRange"}
+	iTimeType                                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TimeType"}
+	iTooManyTagsException                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TooManyTagsException"}
+	i_TStamp                                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TStamp"}
+	iUpdateStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateStatus"}
+	iUpdateSummary                                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateSummary"}
+	iUpdateType                                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateType"}
+	iValidationChallenge                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ValidationChallenge"}
+	iValidationConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ValidationConfiguration"}
+	i_ValidationEmailList                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ValidationEmailList"}
+	iValidationException                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ValidationException"}
+	i_ValidationExceptionMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ValidationExceptionMessage"}
+	iValidationMethod                                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ValidationMethod"}
+	iX509AttributeFilter                              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "X509AttributeFilter"}
+	iX509Attributes                                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "X509Attributes"}
+	iAddTagsToCertificateRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "AddTagsToCertificateRequest"}
+	iCreateAcmeDomainValidationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeDomainValidationRequest"}
+	iCreateAcmeDomainValidationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeDomainValidationResponse"}
+	iCreateAcmeEndpointRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeEndpointRequest"}
+	iCreateAcmeEndpointResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeEndpointResponse"}
+	iCreateAcmeExternalAccountBindingRequest          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeExternalAccountBindingRequest"}
+	iCreateAcmeExternalAccountBindingResponse         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "CreateAcmeExternalAccountBindingResponse"}
+	iDeleteAcmeDomainValidationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteAcmeDomainValidationRequest"}
+	iDeleteAcmeEndpointRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteAcmeEndpointRequest"}
+	iDeleteAcmeExternalAccountBindingRequest          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteAcmeExternalAccountBindingRequest"}
+	iDeleteCertificateRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DeleteCertificateRequest"}
+	iDescribeAcmeAccountRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeAccountRequest"}
+	iDescribeAcmeAccountResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeAccountResponse"}
+	iDescribeAcmeDomainValidationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeDomainValidationRequest"}
+	iDescribeAcmeDomainValidationResponse             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeDomainValidationResponse"}
+	iDescribeAcmeEndpointRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeEndpointRequest"}
+	iDescribeAcmeEndpointResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeEndpointResponse"}
+	iDescribeAcmeExternalAccountBindingRequest        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeExternalAccountBindingRequest"}
+	iDescribeAcmeExternalAccountBindingResponse       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeAcmeExternalAccountBindingResponse"}
+	iDescribeCertificateRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeCertificateRequest"}
+	iDescribeCertificateResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "DescribeCertificateResponse"}
+	iExportCertificateRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExportCertificateRequest"}
+	iExportCertificateResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ExportCertificateResponse"}
+	iGetAccountConfigurationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetAccountConfigurationResponse"}
+	iGetAcmeExternalAccountBindingCredentialsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetAcmeExternalAccountBindingCredentialsRequest"}
+	iGetAcmeExternalAccountBindingCredentialsResponse = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetAcmeExternalAccountBindingCredentialsResponse"}
+	iGetCertificateRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetCertificateRequest"}
+	iGetCertificateResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "GetCertificateResponse"}
+	iImportCertificateRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ImportCertificateRequest"}
+	iImportCertificateResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ImportCertificateResponse"}
+	iListAcmeAccountsRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeAccountsRequest"}
+	iListAcmeAccountsResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeAccountsResponse"}
+	iListAcmeDomainValidationsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeDomainValidationsRequest"}
+	iListAcmeDomainValidationsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeDomainValidationsResponse"}
+	iListAcmeEndpointsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeEndpointsRequest"}
+	iListAcmeEndpointsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeEndpointsResponse"}
+	iListAcmeExternalAccountBindingsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeExternalAccountBindingsRequest"}
+	iListAcmeExternalAccountBindingsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListAcmeExternalAccountBindingsResponse"}
+	iListCertificateDomainValidationsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListCertificateDomainValidationsRequest"}
+	iListCertificateDomainValidationsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListCertificateDomainValidationsResponse"}
+	iListCertificatesRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListCertificatesRequest"}
+	iListCertificatesResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListCertificatesResponse"}
+	iListTagsForCertificateRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListTagsForCertificateRequest"}
+	iListTagsForCertificateResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListTagsForCertificateResponse"}
+	iListTagsForResourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ListTagsForResourceResponse"}
+	iPutAccountConfigurationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "PutAccountConfigurationRequest"}
+	iRemoveTagsFromCertificateRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RemoveTagsFromCertificateRequest"}
+	iRenewCertificateRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RenewCertificateRequest"}
+	iRequestCertificateRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RequestCertificateRequest"}
+	iRequestCertificateResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RequestCertificateResponse"}
+	iResendValidationEmailRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "ResendValidationEmailRequest"}
+	iRevokeAcmeAccountRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevokeAcmeAccountRequest"}
+	iRevokeAcmeExternalAccountBindingRequest          = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevokeAcmeExternalAccountBindingRequest"}
+	iRevokeCertificateRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevokeCertificateRequest"}
+	iRevokeCertificateResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "RevokeCertificateResponse"}
+	iSearchCertificatesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SearchCertificatesRequest"}
+	iSearchCertificatesResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "SearchCertificatesResponse"}
+	iTagResourceRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "TagResourceRequest"}
+	iUntagResourceRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UntagResourceRequest"}
+	iUpdateAcmeDomainValidationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateAcmeDomainValidationRequest"}
+	iUpdateAcmeEndpointRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateAcmeEndpointRequest"}
+	iUpdateCertificateOptionsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.acm", Name: "UpdateCertificateOptionsRequest"}
+	pString                                           = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pUnit                                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pLong                                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pInteger                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t4 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Throttling",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationError",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAcmCertificateMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmCertificateMetadata_CreatedAt, &sAcmCertificateMetadata_Exported, &sAcmCertificateMetadata_ImportedAt, &sAcmCertificateMetadata_InUse, &sAcmCertificateMetadata_IssuedAt, &sAcmCertificateMetadata_RenewalEligibility, &sAcmCertificateMetadata_RevokedAt, &sAcmCertificateMetadata_Status, &sAcmCertificateMetadata_RenewalStatus, &sAcmCertificateMetadata_Type, &sAcmCertificateMetadata_ExportOption, &sAcmCertificateMetadata_ManagedBy, &sAcmCertificateMetadata_ValidationMethod, &sAcmCertificateMetadata_CertificateKeyPairOrigin, &sAcmCertificateMetadata_AcmeEndpointArn, &sAcmCertificateMetadata_AcmeAccountId}, Hash: &hAcmCertificateMetadata}
+var mAcmCertificateMetadataFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmCertificateMetadataFilter_Status, &sAcmCertificateMetadataFilter_RenewalStatus, &sAcmCertificateMetadataFilter_Type, &sAcmCertificateMetadataFilter_InUse, &sAcmCertificateMetadataFilter_Exported, &sAcmCertificateMetadataFilter_ExportOption, &sAcmCertificateMetadataFilter_ManagedBy, &sAcmCertificateMetadataFilter_ValidationMethod, &sAcmCertificateMetadataFilter_CertificateKeyPairOrigin, &sAcmCertificateMetadataFilter_AcmeEndpointArn, &sAcmCertificateMetadataFilter_AcmeAccountId}, Hash: &hAcmCertificateMetadataFilter}
+var mAcmeAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeAccount_AccountUrl, &sAcmeAccount_PublicKeyThumbprint, &sAcmeAccount_Status, &sAcmeAccount_CreatedAt, &sAcmeAccount_AcmeExternalAccountBindingArn, &sAcmeAccount_Contacts}}
+var m_AcmeAccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AcmeAccountList_member}}
+var mAcmeAccountStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeAccountStatus_VALID, &sAcmeAccountStatus_DEACTIVATED, &sAcmeAccountStatus_REVOKED}}
+var mAcmeAccountSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeAccountSummary_AccountUrl, &sAcmeAccountSummary_PublicKeyThumbprint, &sAcmeAccountSummary_Status, &sAcmeAccountSummary_CreatedAt, &sAcmeAccountSummary_AcmeExternalAccountBindingArn, &sAcmeAccountSummary_Contacts}}
+var mAcmeAuthorizationBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeAuthorizationBehavior_PRE_APPROVED}}
+var mAcmeContact = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeContact_REQUIRED, &sAcmeContact_NOT_REQUIRED}}
+var mAcmeDomainValidation = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeDomainValidation_AcmeDomainValidationArn, &sAcmeDomainValidation_AcmeEndpointArn, &sAcmeDomainValidation_DomainName, &sAcmeDomainValidation_PrevalidationType, &sAcmeDomainValidation_PrevalidationDetails, &sAcmeDomainValidation_Status, &sAcmeDomainValidation_FailureDetails, &sAcmeDomainValidation_CreatedAt, &sAcmeDomainValidation_UpdatedAt}, Hash: &hAcmeDomainValidation}
+var mAcmeDomainValidationFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeDomainValidationFailureReason_ACCESS_DENIED, &sAcmeDomainValidationFailureReason_DOMAIN_MISMATCH, &sAcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED, &sAcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE, &sAcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND, &sAcmeDomainValidationFailureReason_INTERNAL_FAILURE, &sAcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH, &sAcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN, &sAcmeDomainValidationFailureReason_TIMED_OUT}, Hash: &hAcmeDomainValidationFailureReason}
+var m_AcmeDomainValidationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AcmeDomainValidationList_member}}
+var mAcmeDomainValidationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeDomainValidationStatus_VALIDATING, &sAcmeDomainValidationStatus_VALID, &sAcmeDomainValidationStatus_INVALID, &sAcmeDomainValidationStatus_DELETING}}
+var mAcmeDomainValidationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeDomainValidationSummary_AcmeDomainValidationArn, &sAcmeDomainValidationSummary_AcmeEndpointArn, &sAcmeDomainValidationSummary_DomainName, &sAcmeDomainValidationSummary_PrevalidationType, &sAcmeDomainValidationSummary_PrevalidationDetails, &sAcmeDomainValidationSummary_Status, &sAcmeDomainValidationSummary_FailureDetails, &sAcmeDomainValidationSummary_CreatedAt, &sAcmeDomainValidationSummary_UpdatedAt}, Hash: &hAcmeDomainValidationSummary}
+var mAcmeEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeEndpoint_AcmeEndpointArn, &sAcmeEndpoint_EndpointUrl, &sAcmeEndpoint_Status, &sAcmeEndpoint_FailureReason, &sAcmeEndpoint_AuthorizationBehavior, &sAcmeEndpoint_Contact, &sAcmeEndpoint_CertificateAuthority, &sAcmeEndpoint_CertificateTags, &sAcmeEndpoint_CreatedAt, &sAcmeEndpoint_UpdatedAt}, Hash: &hAcmeEndpoint}
+var m_AcmeEndpointList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AcmeEndpointList_member}}
+var mAcmeEndpointStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeEndpointStatus_CREATING, &sAcmeEndpointStatus_ACTIVE, &sAcmeEndpointStatus_DELETING, &sAcmeEndpointStatus_FAILED}}
+var mAcmeEndpointSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeEndpointSummary_AcmeEndpointArn, &sAcmeEndpointSummary_EndpointUrl, &sAcmeEndpointSummary_Status, &sAcmeEndpointSummary_FailureReason, &sAcmeEndpointSummary_AuthorizationBehavior, &sAcmeEndpointSummary_Contact, &sAcmeEndpointSummary_CertificateAuthority, &sAcmeEndpointSummary_CertificateTags, &sAcmeEndpointSummary_CreatedAt, &sAcmeEndpointSummary_UpdatedAt}, Hash: &hAcmeEndpointSummary}
+var mAcmeExternalAccountBinding = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeExternalAccountBinding_AcmeExternalAccountBindingArn, &sAcmeExternalAccountBinding_AcmeEndpointArn, &sAcmeExternalAccountBinding_RoleArn, &sAcmeExternalAccountBinding_ExpiresAt, &sAcmeExternalAccountBinding_RevokedAt, &sAcmeExternalAccountBinding_LastUsedAt, &sAcmeExternalAccountBinding_CreatedAt, &sAcmeExternalAccountBinding_UpdatedAt}}
+var m_AcmeExternalAccountBindingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AcmeExternalAccountBindingList_member}}
+var mAcmeExternalAccountBindingSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn, &sAcmeExternalAccountBindingSummary_AcmeEndpointArn, &sAcmeExternalAccountBindingSummary_RoleArn, &sAcmeExternalAccountBindingSummary_ExpiresAt, &sAcmeExternalAccountBindingSummary_RevokedAt, &sAcmeExternalAccountBindingSummary_LastUsedAt, &sAcmeExternalAccountBindingSummary_CreatedAt, &sAcmeExternalAccountBindingSummary_UpdatedAt}}
+var mCertificateAuthority = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateAuthority_PublicCertificateAuthority}}
+var mCertificateDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateDetail_CertificateArn, &sCertificateDetail_DomainName, &sCertificateDetail_SubjectAlternativeNames, &sCertificateDetail_ManagedBy, &sCertificateDetail_DomainValidationOptions, &sCertificateDetail_Serial, &sCertificateDetail_Subject, &sCertificateDetail_Issuer, &sCertificateDetail_CreatedAt, &sCertificateDetail_IssuedAt, &sCertificateDetail_ImportedAt, &sCertificateDetail_Status, &sCertificateDetail_RevokedAt, &sCertificateDetail_RevocationReason, &sCertificateDetail_NotBefore, &sCertificateDetail_NotAfter, &sCertificateDetail_KeyAlgorithm, &sCertificateDetail_SignatureAlgorithm, &sCertificateDetail_InUseBy, &sCertificateDetail_FailureReason, &sCertificateDetail_Type, &sCertificateDetail_RenewalSummary, &sCertificateDetail_KeyUsages, &sCertificateDetail_ExtendedKeyUsages, &sCertificateDetail_CertificateAuthorityArn, &sCertificateDetail_RenewalEligibility, &sCertificateDetail_Options, &sCertificateDetail_UpdateSummary, &sCertificateDetail_CertificateKeyPairOrigin, &sCertificateDetail_AcmeEndpointArn, &sCertificateDetail_AcmeAccountId}, Hash: &hCertificateDetail}
+var mCertificateExport = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateExport_ENABLED, &sCertificateExport_DISABLED}}
+var mCertificateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateFilter_CertificateArn, &sCertificateFilter_X509AttributeFilter, &sCertificateFilter_AcmCertificateMetadataFilter}}
+var mCertificateFilterStatement = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateFilterStatement_And, &sCertificateFilterStatement_Or, &sCertificateFilterStatement_Not, &sCertificateFilterStatement_Filter}}
+var m_CertificateFilterStatementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateFilterStatementList_member}}
+var mCertificateKeyPairOrigin = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateKeyPairOrigin_AWS_MANAGED, &sCertificateKeyPairOrigin_ACME, &sCertificateKeyPairOrigin_CUSTOMER_PROVIDED}}
+var m_CertificateKeyPairOrigins = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateKeyPairOrigins_member}}
+var mCertificateManagedBy = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateManagedBy_CLOUDFRONT}}
+var mCertificateMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateMetadata_AcmCertificateMetadata}}
+var mCertificateOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateOptions_CertificateTransparencyLoggingPreference, &sCertificateOptions_Export, &sCertificateOptions_ValidationMethod}}
+var mCertificateSearchResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateSearchResult_CertificateArn, &sCertificateSearchResult_X509Attributes, &sCertificateSearchResult_CertificateMetadata}}
+var m_CertificateSearchResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateSearchResultList_member}}
+var mCertificateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateStatus_PENDING_VALIDATION, &sCertificateStatus_ISSUED, &sCertificateStatus_INACTIVE, &sCertificateStatus_EXPIRED, &sCertificateStatus_VALIDATION_TIMED_OUT, &sCertificateStatus_REVOKED, &sCertificateStatus_FAILED}}
+var m_CertificateStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateStatuses_member}}
+var mCertificateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateSummary_CertificateArn, &sCertificateSummary_DomainName, &sCertificateSummary_SubjectAlternativeNameSummaries, &sCertificateSummary_HasAdditionalSubjectAlternativeNames, &sCertificateSummary_Status, &sCertificateSummary_Type, &sCertificateSummary_KeyAlgorithm, &sCertificateSummary_KeyUsages, &sCertificateSummary_ExtendedKeyUsages, &sCertificateSummary_ExportOption, &sCertificateSummary_InUse, &sCertificateSummary_Exported, &sCertificateSummary_RenewalEligibility, &sCertificateSummary_NotBefore, &sCertificateSummary_NotAfter, &sCertificateSummary_CreatedAt, &sCertificateSummary_IssuedAt, &sCertificateSummary_ImportedAt, &sCertificateSummary_RevokedAt, &sCertificateSummary_ManagedBy, &sCertificateSummary_CertificateKeyPairOrigin}, Hash: &hCertificateSummary}
+var m_CertificateSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateSummaryList_member}}
+var mCertificateTransparencyLoggingPreference = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateTransparencyLoggingPreference_ENABLED, &sCertificateTransparencyLoggingPreference_DISABLED}}
+var mCertificateType = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateType_IMPORTED, &sCertificateType_AMAZON_ISSUED, &sCertificateType_PRIVATE}}
+var mCommonNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCommonNameFilter_Value, &sCommonNameFilter_ComparisonOperator}}
+var mComparisonOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sComparisonOperator_CONTAINS, &sComparisonOperator_EQUALS}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var m_ContactList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContactList_member}}
+var mCustomAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomAttribute_ObjectIdentifier, &sCustomAttribute_Value}}
+var m_CustomAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomAttributeList_member}}
+var mDistinguishedName = smithy.SchemaMembers{List: []*smithy.Schema{&sDistinguishedName_CommonName, &sDistinguishedName_DomainComponents, &sDistinguishedName_Country, &sDistinguishedName_CustomAttributes, &sDistinguishedName_DistinguishedNameQualifier, &sDistinguishedName_GenerationQualifier, &sDistinguishedName_GivenName, &sDistinguishedName_Initials, &sDistinguishedName_Locality, &sDistinguishedName_Organization, &sDistinguishedName_OrganizationalUnit, &sDistinguishedName_Pseudonym, &sDistinguishedName_SerialNumber, &sDistinguishedName_State, &sDistinguishedName_Surname, &sDistinguishedName_Title}, Hash: &hDistinguishedName}
+var mDnsNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsNameFilter_Value, &sDnsNameFilter_ComparisonOperator}}
+var mDnsPrevalidationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsPrevalidationDetails_DomainScope, &sDnsPrevalidationDetails_HostedZoneId, &sDnsPrevalidationDetails_ResourceRecord}}
+var mDnsPrevalidationOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsPrevalidationOptions_DomainScope, &sDnsPrevalidationOptions_HostedZoneId}}
+var mDnsValidationChallenge = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsValidationChallenge_ResourceRecord}}
+var m_DomainComponentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainComponentList_member}}
+var m_DomainList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainList_member}}
+var mDomainScope = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainScope_ExactDomain, &sDomainScope_Subdomains, &sDomainScope_Wildcards}}
+var mDomainScopeOption = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainScopeOption_ENABLED, &sDomainScopeOption_DISABLED}}
+var mDomainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainStatus_PENDING_VALIDATION, &sDomainStatus_SUCCESS, &sDomainStatus_FAILED}}
+var mDomainValidation = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainValidation_DomainName, &sDomainValidation_ValidationEmails, &sDomainValidation_ValidationDomain, &sDomainValidation_ValidationStatus, &sDomainValidation_ResourceRecord, &sDomainValidation_HttpRedirect, &sDomainValidation_ValidationMethod}}
+var m_DomainValidationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainValidationList_member}}
+var mDomainValidationMethodUpdateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainValidationMethodUpdateSummary_From, &sDomainValidationMethodUpdateSummary_To}}
+var mDomainValidationOption = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainValidationOption_DomainName, &sDomainValidationOption_ValidationDomain}}
+var m_DomainValidationOptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainValidationOptionList_member}}
+var mDomainValidationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainValidationSummary_DomainName, &sDomainValidationSummary_ActiveValidationConfiguration, &sDomainValidationSummary_RequestedValidationConfiguration}}
+var m_DomainValidationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainValidationSummaryList_member}}
+var mEmailValidationChallenge = smithy.SchemaMembers{List: []*smithy.Schema{&sEmailValidationChallenge_ValidationEmails, &sEmailValidationChallenge_ValidationDomain}}
+var mExpiration = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiration_Value, &sExpiration_Type}}
+var mExpiryEventsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiryEventsConfiguration_DaysBeforeExpiry}}
+var mExtendedKeyUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedKeyUsage_Name, &sExtendedKeyUsage_OID}}
+var m_ExtendedKeyUsageFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtendedKeyUsageFilterList_member}}
+var m_ExtendedKeyUsageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtendedKeyUsageList_member}}
+var mExtendedKeyUsageName = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION, &sExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION, &sExtendedKeyUsageName_CODE_SIGNING, &sExtendedKeyUsageName_EMAIL_PROTECTION, &sExtendedKeyUsageName_TIME_STAMPING, &sExtendedKeyUsageName_OCSP_SIGNING, &sExtendedKeyUsageName_IPSEC_END_SYSTEM, &sExtendedKeyUsageName_IPSEC_TUNNEL, &sExtendedKeyUsageName_IPSEC_USER, &sExtendedKeyUsageName_ANY, &sExtendedKeyUsageName_NONE, &sExtendedKeyUsageName_CUSTOM}, Hash: &hExtendedKeyUsageName}
+var m_ExtendedKeyUsageNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtendedKeyUsageNames_member}}
+var mFailureDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sFailureDetails_Reason, &sFailureDetails_Message}}
+var mFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sFailureReason_NO_AVAILABLE_CONTACTS, &sFailureReason_ADDITIONAL_VERIFICATION_REQUIRED, &sFailureReason_DOMAIN_NOT_ALLOWED, &sFailureReason_INVALID_PUBLIC_DOMAIN, &sFailureReason_DOMAIN_VALIDATION_DENIED, &sFailureReason_CAA_ERROR, &sFailureReason_PCA_LIMIT_EXCEEDED, &sFailureReason_PCA_INVALID_ARN, &sFailureReason_PCA_INVALID_STATE, &sFailureReason_PCA_REQUEST_FAILED, &sFailureReason_PCA_NAME_CONSTRAINTS_VALIDATION, &sFailureReason_PCA_RESOURCE_NOT_FOUND, &sFailureReason_PCA_INVALID_ARGS, &sFailureReason_PCA_INVALID_DURATION, &sFailureReason_PCA_ACCESS_DENIED, &sFailureReason_SLR_NOT_FOUND, &sFailureReason_OTHER}, Hash: &hFailureReason}
+var mFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sFilters_extendedKeyUsage, &sFilters_keyUsage, &sFilters_keyTypes, &sFilters_exportOption, &sFilters_managedBy}}
+var mGeneralName = smithy.SchemaMembers{List: []*smithy.Schema{&sGeneralName_DirectoryName, &sGeneralName_DnsName, &sGeneralName_IpAddress, &sGeneralName_OtherName, &sGeneralName_RegisteredId, &sGeneralName_Rfc822Name, &sGeneralName_UniformResourceIdentifier}}
+var m_GeneralNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GeneralNameList_member}}
+var mHttpRedirect = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRedirect_RedirectFrom, &sHttpRedirect_RedirectTo}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_InUseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InUseList_member}}
+var mInvalidArgsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArgsException_message}}
+var mInvalidArnException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArnException_message}}
+var mInvalidDomainValidationOptionsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDomainValidationOptionsException_message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_message}}
+var mInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateException_message}}
+var mInvalidTagException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTagException_message}}
+var mKeyAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyAlgorithm_RSA_1024, &sKeyAlgorithm_RSA_2048, &sKeyAlgorithm_RSA_3072, &sKeyAlgorithm_RSA_4096, &sKeyAlgorithm_EC_prime256v1, &sKeyAlgorithm_EC_secp384r1, &sKeyAlgorithm_EC_secp521r1}}
+var m_KeyAlgorithmList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyAlgorithmList_member}}
+var mKeyUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyUsage_Name}}
+var m_KeyUsageFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyUsageFilterList_member}}
+var m_KeyUsageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyUsageList_member}}
+var mKeyUsageName = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyUsageName_DIGITAL_SIGNATURE, &sKeyUsageName_NON_REPUDATION, &sKeyUsageName_KEY_ENCIPHERMENT, &sKeyUsageName_DATA_ENCIPHERMENT, &sKeyUsageName_KEY_AGREEMENT, &sKeyUsageName_CERTIFICATE_SIGNING, &sKeyUsageName_CRL_SIGNING, &sKeyUsageName_ENCHIPER_ONLY, &sKeyUsageName_DECIPHER_ONLY, &sKeyUsageName_ANY, &sKeyUsageName_CUSTOM}, Hash: &hKeyUsageName}
+var m_KeyUsageNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyUsageNames_member}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mOtherName = smithy.SchemaMembers{List: []*smithy.Schema{&sOtherName_ObjectIdentifier, &sOtherName_Value}}
+var mPrevalidationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sPrevalidationDetails_DnsPrevalidation}}
+var mPrevalidationOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sPrevalidationOptions_DnsPrevalidation}}
+var mPrevalidationType = smithy.SchemaMembers{List: []*smithy.Schema{&sPrevalidationType_DNS_PREVALIDATION}}
+var mPublicCertificateAuthority = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicCertificateAuthority_AllowedKeyAlgorithms}}
+var mPublicKeyAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicKeyAlgorithm_RSA_2048, &sPublicKeyAlgorithm_EC_PRIME256_V1, &sPublicKeyAlgorithm_EC_SECP384_R1}}
+var m_PublicKeyAlgorithmList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PublicKeyAlgorithmList_member}}
+var mRecordType = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordType_CNAME}}
+var mRenewalEligibility = smithy.SchemaMembers{List: []*smithy.Schema{&sRenewalEligibility_ELIGIBLE, &sRenewalEligibility_INELIGIBLE}}
+var mRenewalStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRenewalStatus_PENDING_AUTO_RENEWAL, &sRenewalStatus_PENDING_VALIDATION, &sRenewalStatus_SUCCESS, &sRenewalStatus_FAILED}}
+var mRenewalSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRenewalSummary_RenewalStatus, &sRenewalSummary_DomainValidationOptions, &sRenewalSummary_RenewalStatusReason, &sRenewalSummary_UpdatedAt}}
+var mRequestInProgressException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestInProgressException_message}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceRecord_Name, &sResourceRecord_Type, &sResourceRecord_Value}}
+var mRevocationReason = smithy.SchemaMembers{List: []*smithy.Schema{&sRevocationReason_UNSPECIFIED, &sRevocationReason_KEY_COMPROMISE, &sRevocationReason_CA_COMPROMISE, &sRevocationReason_AFFILIATION_CHANGED, &sRevocationReason_SUPERCEDED, &sRevocationReason_SUPERSEDED, &sRevocationReason_CESSATION_OF_OPERATION, &sRevocationReason_CERTIFICATE_HOLD, &sRevocationReason_REMOVE_FROM_CRL, &sRevocationReason_PRIVILEGE_WITHDRAWN, &sRevocationReason_A_A_COMPROMISE}, Hash: &hRevocationReason}
+var mSearchCertificatesSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCertificatesSortBy_CREATED_AT, &sSearchCertificatesSortBy_NOT_AFTER, &sSearchCertificatesSortBy_STATUS, &sSearchCertificatesSortBy_RENEWAL_STATUS, &sSearchCertificatesSortBy_EXPORTED, &sSearchCertificatesSortBy_IN_USE, &sSearchCertificatesSortBy_NOT_BEFORE, &sSearchCertificatesSortBy_KEY_ALGORITHM, &sSearchCertificatesSortBy_TYPE, &sSearchCertificatesSortBy_CERTIFICATE_ARN, &sSearchCertificatesSortBy_COMMON_NAME, &sSearchCertificatesSortBy_REVOKED_AT, &sSearchCertificatesSortBy_RENEWAL_ELIGIBILITY, &sSearchCertificatesSortBy_ISSUED_AT, &sSearchCertificatesSortBy_MANAGED_BY, &sSearchCertificatesSortBy_EXPORT_OPTION, &sSearchCertificatesSortBy_VALIDATION_METHOD, &sSearchCertificatesSortBy_IMPORTED_AT, &sSearchCertificatesSortBy_ACME_ENDPOINT_ARN, &sSearchCertificatesSortBy_ACME_ACCOUNT_ID, &sSearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN}, Hash: &hSearchCertificatesSortBy}
+var mSearchCertificatesSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCertificatesSortOrder_ASCENDING, &sSearchCertificatesSortOrder_DESCENDING}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSortBy_CREATED_AT}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASCENDING, &sSortOrder_DESCENDING}}
+var mSubjectAlternativeNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectAlternativeNameFilter_DnsName}}
+var mSubjectFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectFilter_CommonName}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTagPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagPolicyException_message}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_throttlingReasons}}
+var mThrottlingReason = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingReason_reason, &sThrottlingReason_resource}}
+var m_ThrottlingReasonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThrottlingReasonList_member}}
+var mTimestampRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestampRange_Start, &sTimestampRange_End}}
+var mTimeType = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeType_MINUTES, &sTimeType_HOURS, &sTimeType_DAYS}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mUpdateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStatus_PENDING_DOMAIN_VALIDATION, &sUpdateStatus_SUCCESS, &sUpdateStatus_FAILED}}
+var mUpdateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSummary_Status, &sUpdateSummary_Type, &sUpdateSummary_DomainValidationMethodUpdateSummary, &sUpdateSummary_RequestedAt, &sUpdateSummary_UpdatedAt}}
+var mUpdateType = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateType_DOMAIN_VALIDATION_METHOD}}
+var mValidationChallenge = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationChallenge_EmailValidationChallenge, &sValidationChallenge_DnsValidationChallenge}}
+var mValidationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationConfiguration_ValidationMethod, &sValidationConfiguration_ValidationChallenge, &sValidationConfiguration_ValidationStatus}}
+var m_ValidationEmailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationEmailList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mValidationMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationMethod_EMAIL, &sValidationMethod_DNS, &sValidationMethod_HTTP}}
+var mX509AttributeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sX509AttributeFilter_Subject, &sX509AttributeFilter_SubjectAlternativeName, &sX509AttributeFilter_ExtendedKeyUsage, &sX509AttributeFilter_KeyUsage, &sX509AttributeFilter_KeyAlgorithm, &sX509AttributeFilter_SerialNumber, &sX509AttributeFilter_NotAfter, &sX509AttributeFilter_NotBefore}}
+var mX509Attributes = smithy.SchemaMembers{List: []*smithy.Schema{&sX509Attributes_Issuer, &sX509Attributes_Subject, &sX509Attributes_SubjectAlternativeNames, &sX509Attributes_ExtendedKeyUsages, &sX509Attributes_KeyAlgorithm, &sX509Attributes_KeyUsages, &sX509Attributes_SerialNumber, &sX509Attributes_NotAfter, &sX509Attributes_NotBefore}, Hash: &hX509Attributes}
+var mAddTagsToCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToCertificateRequest_CertificateArn, &sAddTagsToCertificateRequest_Tags}}
+var mCreateAcmeDomainValidationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcmeDomainValidationRequest_IdempotencyToken, &sCreateAcmeDomainValidationRequest_AcmeEndpointArn, &sCreateAcmeDomainValidationRequest_DomainName, &sCreateAcmeDomainValidationRequest_PrevalidationOptions, &sCreateAcmeDomainValidationRequest_Tags}}
+var mCreateAcmeDomainValidationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcmeDomainValidationResponse_AcmeDomainValidationArn}}
+var mCreateAcmeEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcmeEndpointRequest_IdempotencyToken, &sCreateAcmeEndpointRequest_AuthorizationBehavior, &sCreateAcmeEndpointRequest_Contact, &sCreateAcmeEndpointRequest_CertificateAuthority, &sCreateAcmeEndpointRequest_Tags, &sCreateAcmeEndpointRequest_CertificateTags}}
+var mCreateAcmeEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcmeEndpointResponse_AcmeEndpointArn}}
+var mCreateAcmeExternalAccountBindingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcmeExternalAccountBindingRequest_IdempotencyToken, &sCreateAcmeExternalAccountBindingRequest_AcmeEndpointArn, &sCreateAcmeExternalAccountBindingRequest_RoleArn, &sCreateAcmeExternalAccountBindingRequest_Expiration, &sCreateAcmeExternalAccountBindingRequest_Tags}}
+var mCreateAcmeExternalAccountBindingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcmeExternalAccountBindingResponse_ExternalAccountBinding}}
+var mDeleteAcmeDomainValidationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAcmeDomainValidationRequest_AcmeDomainValidationArn}}
+var mDeleteAcmeEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAcmeEndpointRequest_AcmeEndpointArn}}
+var mDeleteAcmeExternalAccountBindingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn}}
+var mDeleteCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCertificateRequest_CertificateArn}}
+var mDescribeAcmeAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeAccountRequest_AcmeEndpointArn, &sDescribeAcmeAccountRequest_AccountUrl}}
+var mDescribeAcmeAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeAccountResponse_AcmeAccount}}
+var mDescribeAcmeDomainValidationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeDomainValidationRequest_AcmeDomainValidationArn}}
+var mDescribeAcmeDomainValidationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeDomainValidationResponse_AcmeDomainValidation}}
+var mDescribeAcmeEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeEndpointRequest_AcmeEndpointArn}}
+var mDescribeAcmeEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeEndpointResponse_AcmeEndpoint}}
+var mDescribeAcmeExternalAccountBindingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn}}
+var mDescribeAcmeExternalAccountBindingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding}}
+var mDescribeCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCertificateRequest_CertificateArn}}
+var mDescribeCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCertificateResponse_Certificate}}
+var mExportCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExportCertificateRequest_CertificateArn, &sExportCertificateRequest_Passphrase}}
+var mExportCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExportCertificateResponse_Certificate, &sExportCertificateResponse_CertificateChain, &sExportCertificateResponse_PrivateKey}}
+var mGetAccountConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountConfigurationResponse_ExpiryEvents}}
+var mGetAcmeExternalAccountBindingCredentialsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn}}
+var mGetAcmeExternalAccountBindingCredentialsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAcmeExternalAccountBindingCredentialsResponse_KeyId, &sGetAcmeExternalAccountBindingCredentialsResponse_MacKey}}
+var mGetCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCertificateRequest_CertificateArn}}
+var mGetCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCertificateResponse_Certificate, &sGetCertificateResponse_CertificateChain}}
+var mImportCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportCertificateRequest_CertificateArn, &sImportCertificateRequest_Certificate, &sImportCertificateRequest_PrivateKey, &sImportCertificateRequest_CertificateChain, &sImportCertificateRequest_Tags}}
+var mImportCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportCertificateResponse_CertificateArn}}
+var mListAcmeAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeAccountsRequest_NextToken, &sListAcmeAccountsRequest_MaxResults, &sListAcmeAccountsRequest_AcmeEndpointArn}}
+var mListAcmeAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeAccountsResponse_AcmeAccounts, &sListAcmeAccountsResponse_NextToken}}
+var mListAcmeDomainValidationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeDomainValidationsRequest_NextToken, &sListAcmeDomainValidationsRequest_MaxResults, &sListAcmeDomainValidationsRequest_AcmeEndpointArn}}
+var mListAcmeDomainValidationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeDomainValidationsResponse_AcmeDomainValidations, &sListAcmeDomainValidationsResponse_NextToken}}
+var mListAcmeEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeEndpointsRequest_NextToken, &sListAcmeEndpointsRequest_MaxResults}}
+var mListAcmeEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeEndpointsResponse_AcmeEndpoints, &sListAcmeEndpointsResponse_NextToken}}
+var mListAcmeExternalAccountBindingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeExternalAccountBindingsRequest_NextToken, &sListAcmeExternalAccountBindingsRequest_MaxResults, &sListAcmeExternalAccountBindingsRequest_AcmeEndpointArn}}
+var mListAcmeExternalAccountBindingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcmeExternalAccountBindingsResponse_ExternalAccountBindings, &sListAcmeExternalAccountBindingsResponse_NextToken}}
+var mListCertificateDomainValidationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificateDomainValidationsRequest_CertificateArn, &sListCertificateDomainValidationsRequest_NextToken, &sListCertificateDomainValidationsRequest_MaxItems}}
+var mListCertificateDomainValidationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificateDomainValidationsResponse_DomainValidationSummaryList, &sListCertificateDomainValidationsResponse_NextToken}}
+var mListCertificatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificatesRequest_CertificateStatuses, &sListCertificatesRequest_CertificateKeyPairOrigins, &sListCertificatesRequest_Includes, &sListCertificatesRequest_NextToken, &sListCertificatesRequest_MaxItems, &sListCertificatesRequest_SortBy, &sListCertificatesRequest_SortOrder}}
+var mListCertificatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificatesResponse_NextToken, &sListCertificatesResponse_CertificateSummaryList}}
+var mListTagsForCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForCertificateRequest_CertificateArn}}
+var mListTagsForCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForCertificateResponse_Tags}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutAccountConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAccountConfigurationRequest_ExpiryEvents, &sPutAccountConfigurationRequest_IdempotencyToken}}
+var mRemoveTagsFromCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromCertificateRequest_CertificateArn, &sRemoveTagsFromCertificateRequest_Tags}}
+var mRenewCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRenewCertificateRequest_CertificateArn}}
+var mRequestCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCertificateRequest_DomainName, &sRequestCertificateRequest_ValidationMethod, &sRequestCertificateRequest_SubjectAlternativeNames, &sRequestCertificateRequest_IdempotencyToken, &sRequestCertificateRequest_DomainValidationOptions, &sRequestCertificateRequest_Options, &sRequestCertificateRequest_CertificateAuthorityArn, &sRequestCertificateRequest_Tags, &sRequestCertificateRequest_KeyAlgorithm, &sRequestCertificateRequest_ManagedBy}, Hash: &hRequestCertificateRequest}
+var mRequestCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCertificateResponse_CertificateArn}}
+var mResendValidationEmailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResendValidationEmailRequest_CertificateArn, &sResendValidationEmailRequest_Domain, &sResendValidationEmailRequest_ValidationDomain}}
+var mRevokeAcmeAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeAcmeAccountRequest_AcmeEndpointArn, &sRevokeAcmeAccountRequest_AccountUrl}}
+var mRevokeAcmeExternalAccountBindingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn}}
+var mRevokeCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeCertificateRequest_CertificateArn, &sRevokeCertificateRequest_RevocationReason}}
+var mRevokeCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeCertificateResponse_CertificateArn}}
+var mSearchCertificatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCertificatesRequest_FilterStatement, &sSearchCertificatesRequest_MaxResults, &sSearchCertificatesRequest_NextToken, &sSearchCertificatesRequest_SortBy, &sSearchCertificatesRequest_SortOrder}}
+var mSearchCertificatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCertificatesResponse_Results, &sSearchCertificatesResponse_NextToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateAcmeDomainValidationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAcmeDomainValidationRequest_AcmeDomainValidationArn, &sUpdateAcmeDomainValidationRequest_PrevalidationOptions}}
+var mUpdateAcmeEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAcmeEndpointRequest_AcmeEndpointArn, &sUpdateAcmeEndpointRequest_AuthorizationBehavior, &sUpdateAcmeEndpointRequest_Contact, &sUpdateAcmeEndpointRequest_CertificateAuthority}}
+var mUpdateCertificateOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCertificateOptionsRequest_CertificateArn, &sUpdateCertificateOptionsRequest_Options}}
+
+var hAcmCertificateMetadata = smithy.MemberHash{Seed: 289, Slots: []uint16{
+	0, 0, 8, 13, 0, 0, 0, 0, 6, 16, 12, 10, 5, 11, 1, 0, 0, 0, 0, 3, 0, 15, 0, 2,
+	0, 4, 7, 0, 0, 9, 0, 14,
+}}
+var hAcmCertificateMetadataFilter = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 11, 8, 0, 0, 3, 9, 0, 10, 5, 0,
+	1, 0, 0, 4, 2, 0, 0, 0,
+}}
+var hAcmeDomainValidation = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 3, 0, 0, 0, 0, 2, 4, 0, 0, 0, 9, 8, 0,
+	6, 0, 0, 0, 5, 0, 0, 0,
+}}
+var hAcmeDomainValidationFailureReason = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	1, 0, 0, 0, 6, 0, 0, 0, 2, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 8, 5, 3,
+	0, 0, 0, 0, 0, 7, 0, 0,
+}}
+var hAcmeDomainValidationSummary = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 3, 0, 0, 0, 0, 2, 4, 0, 0, 0, 9, 8, 0,
+	6, 0, 0, 0, 5, 0, 0, 0,
+}}
+var hAcmeEndpoint = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	1, 0, 0, 0, 0, 4, 0, 0, 10, 6, 0, 7, 0, 0, 0, 0, 0, 9, 0, 0, 0, 3, 0, 0,
+	0, 0, 0, 8, 0, 0, 2, 5,
+}}
+var hAcmeEndpointSummary = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	1, 0, 0, 0, 0, 4, 0, 0, 10, 6, 0, 7, 0, 0, 0, 0, 0, 9, 0, 0, 0, 3, 0, 0,
+	0, 0, 0, 8, 0, 0, 2, 5,
+}}
+var hCertificateDetail = smithy.MemberHash{Seed: 9226, Slots: []uint16{
+	16, 0, 0, 31, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 17, 0, 12, 0, 1, 6, 0, 8, 0, 26,
+	0, 9, 0, 0, 0, 4, 10, 11, 0, 7, 0, 0, 0, 27, 0, 13, 30, 22, 18, 2, 5, 0, 0, 28,
+	0, 29, 19, 0, 24, 0, 0, 0, 15, 23, 25, 20, 21, 0, 3, 0,
+}}
+var hCertificateSummary = smithy.MemberHash{Seed: 44, Slots: []uint16{
+	0, 0, 0, 0, 14, 0, 0, 0, 0, 12, 0, 0, 0, 19, 0, 0, 0, 21, 8, 6, 3, 0, 0, 0,
+	0, 0, 0, 0, 15, 0, 0, 0, 0, 13, 20, 11, 2, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 4, 9, 0, 10, 5, 0, 1, 16, 18, 0, 0, 0, 7, 0,
+}}
+var hDistinguishedName = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 9, 5, 1, 6, 0, 15, 12, 0, 10, 4, 0, 7, 16, 0, 0, 14, 2, 11, 0, 0, 0,
+	0, 8, 3, 0, 0, 0, 13, 0,
+}}
+var hExtendedKeyUsageName = smithy.MemberHash{Seed: 12, Slots: []uint16{
+	0, 0, 0, 2, 1, 10, 0, 0, 6, 4, 0, 3, 0, 0, 0, 0, 12, 0, 8, 0, 9, 0, 5, 11,
+	0, 0, 0, 0, 7, 0, 0, 0,
+}}
+var hFailureReason = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 10, 0, 0, 13, 0, 0, 0, 0, 2,
+	0, 0, 14, 0, 0, 12, 0, 0, 0, 15, 0, 0, 6, 0, 4, 0, 0, 0, 0, 17, 3, 0, 11, 0,
+	1, 7, 0, 0, 0, 0, 9, 0, 0, 0, 8, 0, 5, 0, 0, 0,
+}}
+var hKeyUsageName = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 7, 0, 6, 8, 0, 0, 0, 0, 1, 3, 0, 5, 10, 11, 0, 4, 0, 0, 0, 0, 0, 0, 9,
+	2, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hRevocationReason = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 0, 4, 3, 0, 0, 0, 1, 0, 8, 11, 0, 7, 0, 0, 0, 0, 5, 6, 0, 0, 9, 0, 0,
+	0, 0, 0, 2, 0, 10, 0, 0,
+}}
+var hSearchCertificatesSortBy = smithy.MemberHash{Seed: 28, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 0, 18, 0, 16, 0, 0, 0, 0, 7, 11, 20, 0, 0, 0, 9, 0, 0,
+	0, 0, 0, 0, 21, 0, 0, 0, 14, 0, 0, 0, 0, 10, 6, 0, 0, 0, 13, 0, 19, 8, 0, 5,
+	17, 1, 0, 3, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 2, 12,
+}}
+var hX509Attributes = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 4, 9, 0, 2, 0, 6, 8, 0, 0, 0, 5, 0, 0, 7, 0, 0, 0, 3, 0, 0,
+	0, 0, 0, 0, 0, 1, 0, 0,
+}}
+var hRequestCertificateRequest = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 9, 0,
+	7, 0, 2, 10, 6, 0, 5, 8,
+}}
+
+var sAddTagsToCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToCertificate, Type: smithy.ShapeTypeOperation, Ext: &eAddTagsToCertificate})
+var sCreateAcmeDomainValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeDomainValidation, Type: smithy.ShapeTypeOperation, Ext: &eCreateAcmeDomainValidation})
+var sCreateAcmeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eCreateAcmeEndpoint})
+var sCreateAcmeExternalAccountBinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeExternalAccountBinding, Type: smithy.ShapeTypeOperation, Ext: &eCreateAcmeExternalAccountBinding})
+var sDeleteAcmeDomainValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAcmeDomainValidation, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAcmeDomainValidation})
+var sDeleteAcmeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAcmeEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAcmeEndpoint})
+var sDeleteAcmeExternalAccountBinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAcmeExternalAccountBinding, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAcmeExternalAccountBinding})
+var sDeleteCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCertificate, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCertificate})
+var sDescribeAcmeAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeAccount, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAcmeAccount})
+var sDescribeAcmeDomainValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeDomainValidation, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAcmeDomainValidation})
+var sDescribeAcmeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAcmeEndpoint})
+var sDescribeAcmeExternalAccountBinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeExternalAccountBinding, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAcmeExternalAccountBinding})
+var sDescribeCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificate, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCertificate})
+var sExportCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportCertificate, Type: smithy.ShapeTypeOperation, Ext: &eExportCertificate})
+var sGetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountConfiguration})
+var sGetAcmeExternalAccountBindingCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAcmeExternalAccountBindingCredentials, Type: smithy.ShapeTypeOperation, Ext: &eGetAcmeExternalAccountBindingCredentials})
+var sGetCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCertificate, Type: smithy.ShapeTypeOperation, Ext: &eGetCertificate})
+var sImportCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCertificate, Type: smithy.ShapeTypeOperation, Ext: &eImportCertificate})
+var sListAcmeAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeAccounts, Type: smithy.ShapeTypeOperation, Ext: &eListAcmeAccounts})
+var sListAcmeDomainValidations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeDomainValidations, Type: smithy.ShapeTypeOperation, Ext: &eListAcmeDomainValidations})
+var sListAcmeEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeEndpoints, Type: smithy.ShapeTypeOperation, Ext: &eListAcmeEndpoints})
+var sListAcmeExternalAccountBindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeExternalAccountBindings, Type: smithy.ShapeTypeOperation, Ext: &eListAcmeExternalAccountBindings})
+var sListCertificateDomainValidations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificateDomainValidations, Type: smithy.ShapeTypeOperation, Ext: &eListCertificateDomainValidations})
+var sListCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificates, Type: smithy.ShapeTypeOperation, Ext: &eListCertificates})
+var sListTagsForCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForCertificate, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForCertificate})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ePutAccountConfiguration})
+var sRemoveTagsFromCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromCertificate, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTagsFromCertificate})
+var sRenewCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewCertificate, Type: smithy.ShapeTypeOperation, Ext: &eRenewCertificate})
+var sRequestCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCertificate, Type: smithy.ShapeTypeOperation, Ext: &eRequestCertificate})
+var sResendValidationEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendValidationEmail, Type: smithy.ShapeTypeOperation, Ext: &eResendValidationEmail})
+var sRevokeAcmeAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeAcmeAccount, Type: smithy.ShapeTypeOperation, Ext: &eRevokeAcmeAccount})
+var sRevokeAcmeExternalAccountBinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeAcmeExternalAccountBinding, Type: smithy.ShapeTypeOperation, Ext: &eRevokeAcmeExternalAccountBinding})
+var sRevokeCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeCertificate, Type: smithy.ShapeTypeOperation, Ext: &eRevokeCertificate})
+var sSearchCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCertificates, Type: smithy.ShapeTypeOperation, Ext: &eSearchCertificates})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAcmeDomainValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcmeDomainValidation, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAcmeDomainValidation})
+var sUpdateAcmeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcmeEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAcmeEndpoint})
+var sUpdateCertificateOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCertificateOptions, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCertificateOptions})
+var s_CertificateManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateManager, Type: smithy.ShapeTypeService, Ext: &e_CertificateManager})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServiceErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAcmCertificateMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmCertificateMetadata, Members: &mAcmCertificateMetadata, Type: smithy.ShapeTypeStructure, Ext: &eAcmCertificateMetadata})
+var sAcmCertificateMetadata_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmCertificateMetadata_CreatedAt})
+var sAcmCertificateMetadata_Exported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exported", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAcmCertificateMetadata_Exported})
+var sAcmCertificateMetadata_ImportedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmCertificateMetadata_ImportedAt})
+var sAcmCertificateMetadata_InUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InUse", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAcmCertificateMetadata_InUse})
+var sAcmCertificateMetadata_IssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmCertificateMetadata_IssuedAt})
+var sAcmCertificateMetadata_RenewalEligibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalEligibility", ID: &iRenewalEligibility, Members: &mRenewalEligibility, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_RenewalEligibility})
+var sAcmCertificateMetadata_RevokedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevokedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmCertificateMetadata_RevokedAt})
+var sAcmCertificateMetadata_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateStatus, Members: &mCertificateStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_Status})
+var sAcmCertificateMetadata_RenewalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalStatus", ID: &iRenewalStatus, Members: &mRenewalStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_RenewalStatus})
+var sAcmCertificateMetadata_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_Type})
+var sAcmCertificateMetadata_ExportOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportOption", ID: &iCertificateExport, Members: &mCertificateExport, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_ExportOption})
+var sAcmCertificateMetadata_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedBy", ID: &iCertificateManagedBy, Members: &mCertificateManagedBy, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_ManagedBy})
+var sAcmCertificateMetadata_ValidationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationMethod", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_ValidationMethod})
+var sAcmCertificateMetadata_CertificateKeyPairOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateKeyPairOrigin", ID: &iCertificateKeyPairOrigin, Members: &mCertificateKeyPairOrigin, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadata_CertificateKeyPairOrigin})
+var sAcmCertificateMetadata_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAcmCertificateMetadata_AcmeEndpointArn})
+var sAcmCertificateMetadata_AcmeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeAccountId", ID: &i_AcmeAccountId, Type: smithy.ShapeTypeString, Ext: &eAcmCertificateMetadata_AcmeAccountId})
+var sAcmCertificateMetadataFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmCertificateMetadataFilter, Members: &mAcmCertificateMetadataFilter, Type: smithy.ShapeTypeUnion, Ext: &eAcmCertificateMetadataFilter})
+var sAcmCertificateMetadataFilter_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateStatus, Members: &mCertificateStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadataFilter_Status})
+var sAcmCertificateMetadataFilter_RenewalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalStatus", ID: &iRenewalStatus, Members: &mRenewalStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadataFilter_RenewalStatus})
+var sAcmCertificateMetadataFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadataFilter_Type})
+var sAcmCertificateMetadataFilter_InUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InUse", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAcmCertificateMetadataFilter_InUse})
+var sAcmCertificateMetadataFilter_Exported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exported", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAcmCertificateMetadataFilter_Exported})
+var sAcmCertificateMetadataFilter_ExportOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportOption", ID: &iCertificateExport, Members: &mCertificateExport, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadataFilter_ExportOption})
+var sAcmCertificateMetadataFilter_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedBy", ID: &iCertificateManagedBy, Members: &mCertificateManagedBy, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadataFilter_ManagedBy})
+var sAcmCertificateMetadataFilter_ValidationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationMethod", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadataFilter_ValidationMethod})
+var sAcmCertificateMetadataFilter_CertificateKeyPairOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateKeyPairOrigin", ID: &iCertificateKeyPairOrigin, Members: &mCertificateKeyPairOrigin, Type: smithy.ShapeTypeEnum, Ext: &eAcmCertificateMetadataFilter_CertificateKeyPairOrigin})
+var sAcmCertificateMetadataFilter_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAcmCertificateMetadataFilter_AcmeEndpointArn})
+var sAcmCertificateMetadataFilter_AcmeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeAccountId", ID: &i_AcmeAccountId, Type: smithy.ShapeTypeString, Ext: &eAcmCertificateMetadataFilter_AcmeAccountId})
+var sAcmeAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeAccount, Members: &mAcmeAccount, Type: smithy.ShapeTypeStructure, Ext: &eAcmeAccount})
+var sAcmeAccount_AccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeAccount_AccountUrl})
+var sAcmeAccount_PublicKeyThumbprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyThumbprint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeAccount_PublicKeyThumbprint})
+var sAcmeAccount_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAcmeAccountStatus, Members: &mAcmeAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeAccount_Status})
+var sAcmeAccount_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeAccount_CreatedAt})
+var sAcmeAccount_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eAcmeAccount_AcmeExternalAccountBindingArn})
+var sAcmeAccount_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_ContactList, Members: &m_ContactList, Traits: &t1, Type: smithy.ShapeTypeList, Ext: &eAcmeAccount_Contacts})
+var s_AcmeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeAccountId, Type: smithy.ShapeTypeString, Ext: &e_AcmeAccountId})
+var s_AcmeAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeAccountList, Members: &m_AcmeAccountList, Type: smithy.ShapeTypeList, Ext: &e_AcmeAccountList})
+var s_AcmeAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAcmeAccountSummary, Members: &mAcmeAccountSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AcmeAccountList_member})
+var sAcmeAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeAccountStatus, Members: &mAcmeAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeAccountStatus})
+var sAcmeAccountStatus_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeAccountStatus_VALID})
+var sAcmeAccountStatus_DEACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeAccountStatus_DEACTIVATED})
+var sAcmeAccountStatus_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeAccountStatus_REVOKED})
+var sAcmeAccountSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeAccountSummary, Members: &mAcmeAccountSummary, Type: smithy.ShapeTypeStructure, Ext: &eAcmeAccountSummary})
+var sAcmeAccountSummary_AccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeAccountSummary_AccountUrl})
+var sAcmeAccountSummary_PublicKeyThumbprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyThumbprint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeAccountSummary_PublicKeyThumbprint})
+var sAcmeAccountSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAcmeAccountStatus, Members: &mAcmeAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeAccountSummary_Status})
+var sAcmeAccountSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeAccountSummary_CreatedAt})
+var sAcmeAccountSummary_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eAcmeAccountSummary_AcmeExternalAccountBindingArn})
+var sAcmeAccountSummary_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_ContactList, Members: &m_ContactList, Traits: &t1, Type: smithy.ShapeTypeList, Ext: &eAcmeAccountSummary_Contacts})
+var sAcmeAuthorizationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeAuthorizationBehavior, Members: &mAcmeAuthorizationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eAcmeAuthorizationBehavior})
+var sAcmeAuthorizationBehavior_PRE_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeAuthorizationBehavior_PRE_APPROVED})
+var sAcmeContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeContact, Members: &mAcmeContact, Type: smithy.ShapeTypeEnum, Ext: &eAcmeContact})
+var sAcmeContact_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeContact_REQUIRED})
+var sAcmeContact_NOT_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeContact_NOT_REQUIRED})
+var sAcmeDomainValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeDomainValidation, Members: &mAcmeDomainValidation, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidation})
+var sAcmeDomainValidation_AcmeDomainValidationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidationArn", ID: &i_AcmeDomainValidationArn, Type: smithy.ShapeTypeString, Ext: &eAcmeDomainValidation_AcmeDomainValidationArn})
+var sAcmeDomainValidation_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eAcmeDomainValidation_AcmeEndpointArn})
+var sAcmeDomainValidation_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eAcmeDomainValidation_DomainName})
+var sAcmeDomainValidation_PrevalidationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrevalidationType", ID: &iPrevalidationType, Members: &mPrevalidationType, Type: smithy.ShapeTypeEnum, Ext: &eAcmeDomainValidation_PrevalidationType})
+var sAcmeDomainValidation_PrevalidationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrevalidationDetails", ID: &iPrevalidationDetails, Members: &mPrevalidationDetails, Type: smithy.ShapeTypeUnion, Ext: &eAcmeDomainValidation_PrevalidationDetails})
+var sAcmeDomainValidation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAcmeDomainValidationStatus, Members: &mAcmeDomainValidationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeDomainValidation_Status})
+var sAcmeDomainValidation_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidation_FailureDetails})
+var sAcmeDomainValidation_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeDomainValidation_CreatedAt})
+var sAcmeDomainValidation_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeDomainValidation_UpdatedAt})
+var s_AcmeDomainValidationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeDomainValidationArn, Type: smithy.ShapeTypeString, Ext: &e_AcmeDomainValidationArn})
+var sAcmeDomainValidationFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeDomainValidationFailureReason, Members: &mAcmeDomainValidationFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eAcmeDomainValidationFailureReason})
+var sAcmeDomainValidationFailureReason_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_ACCESS_DENIED})
+var sAcmeDomainValidationFailureReason_DOMAIN_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_DOMAIN_MISMATCH})
+var sAcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED})
+var sAcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDPOINT_NOT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE})
+var sAcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOSTED_ZONE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND})
+var sAcmeDomainValidationFailureReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_INTERNAL_FAILURE})
+var sAcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CHANGE_BATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH})
+var sAcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PUBLIC_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN})
+var sAcmeDomainValidationFailureReason_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationFailureReason_TIMED_OUT})
+var s_AcmeDomainValidationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeDomainValidationList, Members: &m_AcmeDomainValidationList, Type: smithy.ShapeTypeList, Ext: &e_AcmeDomainValidationList})
+var s_AcmeDomainValidationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAcmeDomainValidationSummary, Members: &mAcmeDomainValidationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AcmeDomainValidationList_member})
+var sAcmeDomainValidationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeDomainValidationStatus, Members: &mAcmeDomainValidationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeDomainValidationStatus})
+var sAcmeDomainValidationStatus_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationStatus_VALIDATING})
+var sAcmeDomainValidationStatus_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationStatus_VALID})
+var sAcmeDomainValidationStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationStatus_INVALID})
+var sAcmeDomainValidationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationStatus_DELETING})
+var sAcmeDomainValidationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeDomainValidationSummary, Members: &mAcmeDomainValidationSummary, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationSummary})
+var sAcmeDomainValidationSummary_AcmeDomainValidationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidationArn", ID: &i_AcmeDomainValidationArn, Type: smithy.ShapeTypeString, Ext: &eAcmeDomainValidationSummary_AcmeDomainValidationArn})
+var sAcmeDomainValidationSummary_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eAcmeDomainValidationSummary_AcmeEndpointArn})
+var sAcmeDomainValidationSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eAcmeDomainValidationSummary_DomainName})
+var sAcmeDomainValidationSummary_PrevalidationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrevalidationType", ID: &iPrevalidationType, Members: &mPrevalidationType, Type: smithy.ShapeTypeEnum, Ext: &eAcmeDomainValidationSummary_PrevalidationType})
+var sAcmeDomainValidationSummary_PrevalidationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrevalidationDetails", ID: &iPrevalidationDetails, Members: &mPrevalidationDetails, Type: smithy.ShapeTypeUnion, Ext: &eAcmeDomainValidationSummary_PrevalidationDetails})
+var sAcmeDomainValidationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAcmeDomainValidationStatus, Members: &mAcmeDomainValidationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeDomainValidationSummary_Status})
+var sAcmeDomainValidationSummary_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eAcmeDomainValidationSummary_FailureDetails})
+var sAcmeDomainValidationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeDomainValidationSummary_CreatedAt})
+var sAcmeDomainValidationSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeDomainValidationSummary_UpdatedAt})
+var sAcmeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeEndpoint, Members: &mAcmeEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eAcmeEndpoint})
+var sAcmeEndpoint_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eAcmeEndpoint_AcmeEndpointArn})
+var sAcmeEndpoint_EndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeEndpoint_EndpointUrl})
+var sAcmeEndpoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAcmeEndpointStatus, Members: &mAcmeEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeEndpoint_Status})
+var sAcmeEndpoint_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeEndpoint_FailureReason})
+var sAcmeEndpoint_AuthorizationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationBehavior", ID: &iAcmeAuthorizationBehavior, Members: &mAcmeAuthorizationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eAcmeEndpoint_AuthorizationBehavior})
+var sAcmeEndpoint_Contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contact", ID: &iAcmeContact, Members: &mAcmeContact, Type: smithy.ShapeTypeEnum, Ext: &eAcmeEndpoint_Contact})
+var sAcmeEndpoint_CertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthority", ID: &iCertificateAuthority, Members: &mCertificateAuthority, Type: smithy.ShapeTypeUnion, Ext: &eAcmeEndpoint_CertificateAuthority})
+var sAcmeEndpoint_CertificateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAcmeEndpoint_CertificateTags})
+var sAcmeEndpoint_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeEndpoint_CreatedAt})
+var sAcmeEndpoint_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeEndpoint_UpdatedAt})
+var s_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &e_AcmeEndpointArn})
+var s_AcmeEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeEndpointList, Members: &m_AcmeEndpointList, Type: smithy.ShapeTypeList, Ext: &e_AcmeEndpointList})
+var s_AcmeEndpointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAcmeEndpointSummary, Members: &mAcmeEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AcmeEndpointList_member})
+var sAcmeEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeEndpointStatus, Members: &mAcmeEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeEndpointStatus})
+var sAcmeEndpointStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeEndpointStatus_CREATING})
+var sAcmeEndpointStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeEndpointStatus_ACTIVE})
+var sAcmeEndpointStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeEndpointStatus_DELETING})
+var sAcmeEndpointStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcmeEndpointStatus_FAILED})
+var sAcmeEndpointSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeEndpointSummary, Members: &mAcmeEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &eAcmeEndpointSummary})
+var sAcmeEndpointSummary_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eAcmeEndpointSummary_AcmeEndpointArn})
+var sAcmeEndpointSummary_EndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeEndpointSummary_EndpointUrl})
+var sAcmeEndpointSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAcmeEndpointStatus, Members: &mAcmeEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcmeEndpointSummary_Status})
+var sAcmeEndpointSummary_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcmeEndpointSummary_FailureReason})
+var sAcmeEndpointSummary_AuthorizationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationBehavior", ID: &iAcmeAuthorizationBehavior, Members: &mAcmeAuthorizationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eAcmeEndpointSummary_AuthorizationBehavior})
+var sAcmeEndpointSummary_Contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contact", ID: &iAcmeContact, Members: &mAcmeContact, Type: smithy.ShapeTypeEnum, Ext: &eAcmeEndpointSummary_Contact})
+var sAcmeEndpointSummary_CertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthority", ID: &iCertificateAuthority, Members: &mCertificateAuthority, Type: smithy.ShapeTypeUnion, Ext: &eAcmeEndpointSummary_CertificateAuthority})
+var sAcmeEndpointSummary_CertificateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAcmeEndpointSummary_CertificateTags})
+var sAcmeEndpointSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeEndpointSummary_CreatedAt})
+var sAcmeEndpointSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeEndpointSummary_UpdatedAt})
+var sAcmeExternalAccountBinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeExternalAccountBinding, Members: &mAcmeExternalAccountBinding, Type: smithy.ShapeTypeStructure, Ext: &eAcmeExternalAccountBinding})
+var sAcmeExternalAccountBinding_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eAcmeExternalAccountBinding_AcmeExternalAccountBindingArn})
+var sAcmeExternalAccountBinding_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eAcmeExternalAccountBinding_AcmeEndpointArn})
+var sAcmeExternalAccountBinding_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eAcmeExternalAccountBinding_RoleArn})
+var sAcmeExternalAccountBinding_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBinding_ExpiresAt})
+var sAcmeExternalAccountBinding_RevokedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevokedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBinding_RevokedAt})
+var sAcmeExternalAccountBinding_LastUsedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUsedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBinding_LastUsedAt})
+var sAcmeExternalAccountBinding_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBinding_CreatedAt})
+var sAcmeExternalAccountBinding_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBinding_UpdatedAt})
+var s_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &e_AcmeExternalAccountBindingArn})
+var s_AcmeExternalAccountBindingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcmeExternalAccountBindingList, Members: &m_AcmeExternalAccountBindingList, Type: smithy.ShapeTypeList, Ext: &e_AcmeExternalAccountBindingList})
+var s_AcmeExternalAccountBindingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAcmeExternalAccountBindingSummary, Members: &mAcmeExternalAccountBindingSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AcmeExternalAccountBindingList_member})
+var sAcmeExternalAccountBindingSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcmeExternalAccountBindingSummary, Members: &mAcmeExternalAccountBindingSummary, Type: smithy.ShapeTypeStructure, Ext: &eAcmeExternalAccountBindingSummary})
+var sAcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eAcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn})
+var sAcmeExternalAccountBindingSummary_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eAcmeExternalAccountBindingSummary_AcmeEndpointArn})
+var sAcmeExternalAccountBindingSummary_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eAcmeExternalAccountBindingSummary_RoleArn})
+var sAcmeExternalAccountBindingSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBindingSummary_ExpiresAt})
+var sAcmeExternalAccountBindingSummary_RevokedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevokedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBindingSummary_RevokedAt})
+var sAcmeExternalAccountBindingSummary_LastUsedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUsedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBindingSummary_LastUsedAt})
+var sAcmeExternalAccountBindingSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBindingSummary_CreatedAt})
+var sAcmeExternalAccountBindingSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAcmeExternalAccountBindingSummary_UpdatedAt})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AvailabilityErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityErrorMessage})
+var s_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateArn, Type: smithy.ShapeTypeString, Ext: &e_CertificateArn})
+var sCertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateAuthority, Members: &mCertificateAuthority, Type: smithy.ShapeTypeUnion, Ext: &eCertificateAuthority})
+var sCertificateAuthority_PublicCertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicCertificateAuthority", ID: &iPublicCertificateAuthority, Members: &mPublicCertificateAuthority, Type: smithy.ShapeTypeStructure, Ext: &eCertificateAuthority_PublicCertificateAuthority})
+var s_CertificateBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateBody, Type: smithy.ShapeTypeString, Ext: &e_CertificateBody})
+var s_CertificateBodyBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateBodyBlob, Type: smithy.ShapeTypeBlob, Ext: &e_CertificateBodyBlob})
+var s_CertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateChain, Type: smithy.ShapeTypeString, Ext: &e_CertificateChain})
+var s_CertificateChainBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateChainBlob, Type: smithy.ShapeTypeBlob, Ext: &e_CertificateChainBlob})
+var sCertificateDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateDetail, Members: &mCertificateDetail, Type: smithy.ShapeTypeStructure, Ext: &eCertificateDetail})
+var sCertificateDetail_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_CertificateArn})
+var sCertificateDetail_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_DomainName})
+var sCertificateDetail_SubjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectAlternativeNames", ID: &i_DomainList, Members: &m_DomainList, Type: smithy.ShapeTypeList, Ext: &eCertificateDetail_SubjectAlternativeNames})
+var sCertificateDetail_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedBy", ID: &iCertificateManagedBy, Members: &mCertificateManagedBy, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_ManagedBy})
+var sCertificateDetail_DomainValidationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainValidationOptions", ID: &i_DomainValidationList, Members: &m_DomainValidationList, Type: smithy.ShapeTypeList, Ext: &eCertificateDetail_DomainValidationOptions})
+var sCertificateDetail_Serial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Serial", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_Serial})
+var sCertificateDetail_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_Subject})
+var sCertificateDetail_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_Issuer})
+var sCertificateDetail_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateDetail_CreatedAt})
+var sCertificateDetail_IssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateDetail_IssuedAt})
+var sCertificateDetail_ImportedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateDetail_ImportedAt})
+var sCertificateDetail_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateStatus, Members: &mCertificateStatus, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_Status})
+var sCertificateDetail_RevokedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevokedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateDetail_RevokedAt})
+var sCertificateDetail_RevocationReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationReason", ID: &iRevocationReason, Members: &mRevocationReason, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_RevocationReason})
+var sCertificateDetail_NotBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotBefore", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateDetail_NotBefore})
+var sCertificateDetail_NotAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotAfter", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateDetail_NotAfter})
+var sCertificateDetail_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAlgorithm", ID: &iKeyAlgorithm, Members: &mKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_KeyAlgorithm})
+var sCertificateDetail_SignatureAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignatureAlgorithm", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_SignatureAlgorithm})
+var sCertificateDetail_InUseBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InUseBy", ID: &i_InUseList, Members: &m_InUseList, Type: smithy.ShapeTypeList, Ext: &eCertificateDetail_InUseBy})
+var sCertificateDetail_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &iFailureReason, Members: &mFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_FailureReason})
+var sCertificateDetail_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_Type})
+var sCertificateDetail_RenewalSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalSummary", ID: &iRenewalSummary, Members: &mRenewalSummary, Type: smithy.ShapeTypeStructure, Ext: &eCertificateDetail_RenewalSummary})
+var sCertificateDetail_KeyUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsages", ID: &i_KeyUsageList, Members: &m_KeyUsageList, Type: smithy.ShapeTypeList, Ext: &eCertificateDetail_KeyUsages})
+var sCertificateDetail_ExtendedKeyUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedKeyUsages", ID: &i_ExtendedKeyUsageList, Members: &m_ExtendedKeyUsageList, Type: smithy.ShapeTypeList, Ext: &eCertificateDetail_ExtendedKeyUsages})
+var sCertificateDetail_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_CertificateAuthorityArn})
+var sCertificateDetail_RenewalEligibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalEligibility", ID: &iRenewalEligibility, Members: &mRenewalEligibility, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_RenewalEligibility})
+var sCertificateDetail_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iCertificateOptions, Members: &mCertificateOptions, Type: smithy.ShapeTypeStructure, Ext: &eCertificateDetail_Options})
+var sCertificateDetail_UpdateSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateSummary", ID: &iUpdateSummary, Members: &mUpdateSummary, Type: smithy.ShapeTypeStructure, Ext: &eCertificateDetail_UpdateSummary})
+var sCertificateDetail_CertificateKeyPairOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateKeyPairOrigin", ID: &iCertificateKeyPairOrigin, Members: &mCertificateKeyPairOrigin, Type: smithy.ShapeTypeEnum, Ext: &eCertificateDetail_CertificateKeyPairOrigin})
+var sCertificateDetail_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_AcmeEndpointArn})
+var sCertificateDetail_AcmeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeAccountId", ID: &i_AcmeAccountId, Type: smithy.ShapeTypeString, Ext: &eCertificateDetail_AcmeAccountId})
+var sCertificateExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateExport, Members: &mCertificateExport, Type: smithy.ShapeTypeEnum, Ext: &eCertificateExport})
+var sCertificateExport_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateExport_ENABLED})
+var sCertificateExport_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateExport_DISABLED})
+var sCertificateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateFilter, Members: &mCertificateFilter, Type: smithy.ShapeTypeUnion, Ext: &eCertificateFilter})
+var sCertificateFilter_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCertificateFilter_CertificateArn})
+var sCertificateFilter_X509AttributeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "X509AttributeFilter", ID: &iX509AttributeFilter, Members: &mX509AttributeFilter, Type: smithy.ShapeTypeUnion, Ext: &eCertificateFilter_X509AttributeFilter})
+var sCertificateFilter_AcmCertificateMetadataFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmCertificateMetadataFilter", ID: &iAcmCertificateMetadataFilter, Members: &mAcmCertificateMetadataFilter, Type: smithy.ShapeTypeUnion, Ext: &eCertificateFilter_AcmCertificateMetadataFilter})
+var sCertificateFilterStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateFilterStatement, Members: &mCertificateFilterStatement, Type: smithy.ShapeTypeUnion, Ext: &eCertificateFilterStatement})
+var sCertificateFilterStatement_And = smithy.NewStaticSchema(smithy.StaticSchema{Member: "And", ID: &i_CertificateFilterStatementList, Members: &m_CertificateFilterStatementList, Type: smithy.ShapeTypeList, Ext: &eCertificateFilterStatement_And})
+var sCertificateFilterStatement_Or = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Or", ID: &i_CertificateFilterStatementList, Members: &m_CertificateFilterStatementList, Type: smithy.ShapeTypeList, Ext: &eCertificateFilterStatement_Or})
+var sCertificateFilterStatement_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iCertificateFilterStatement, Type: smithy.ShapeTypeUnion, Ext: &eCertificateFilterStatement_Not})
+var sCertificateFilterStatement_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iCertificateFilter, Members: &mCertificateFilter, Type: smithy.ShapeTypeUnion, Ext: &eCertificateFilterStatement_Filter})
+var s_CertificateFilterStatementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateFilterStatementList, Members: &m_CertificateFilterStatementList, Type: smithy.ShapeTypeList, Ext: &e_CertificateFilterStatementList})
+var s_CertificateFilterStatementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateFilterStatement, Type: smithy.ShapeTypeUnion, Ext: &e_CertificateFilterStatementList_member})
+var sCertificateKeyPairOrigin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateKeyPairOrigin, Members: &mCertificateKeyPairOrigin, Type: smithy.ShapeTypeEnum, Ext: &eCertificateKeyPairOrigin})
+var sCertificateKeyPairOrigin_AWS_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateKeyPairOrigin_AWS_MANAGED})
+var sCertificateKeyPairOrigin_ACME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateKeyPairOrigin_ACME})
+var sCertificateKeyPairOrigin_CUSTOMER_PROVIDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_PROVIDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateKeyPairOrigin_CUSTOMER_PROVIDED})
+var s_CertificateKeyPairOrigins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateKeyPairOrigins, Members: &m_CertificateKeyPairOrigins, Type: smithy.ShapeTypeList, Ext: &e_CertificateKeyPairOrigins})
+var s_CertificateKeyPairOrigins_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateKeyPairOrigin, Members: &mCertificateKeyPairOrigin, Type: smithy.ShapeTypeEnum, Ext: &e_CertificateKeyPairOrigins_member})
+var sCertificateManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateManagedBy, Members: &mCertificateManagedBy, Type: smithy.ShapeTypeEnum, Ext: &eCertificateManagedBy})
+var sCertificateManagedBy_CLOUDFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateManagedBy_CLOUDFRONT})
+var sCertificateMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateMetadata, Members: &mCertificateMetadata, Type: smithy.ShapeTypeUnion, Ext: &eCertificateMetadata})
+var sCertificateMetadata_AcmCertificateMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmCertificateMetadata", ID: &iAcmCertificateMetadata, Members: &mAcmCertificateMetadata, Type: smithy.ShapeTypeStructure, Ext: &eCertificateMetadata_AcmCertificateMetadata})
+var sCertificateOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateOptions, Members: &mCertificateOptions, Type: smithy.ShapeTypeStructure, Ext: &eCertificateOptions})
+var sCertificateOptions_CertificateTransparencyLoggingPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateTransparencyLoggingPreference", ID: &iCertificateTransparencyLoggingPreference, Members: &mCertificateTransparencyLoggingPreference, Type: smithy.ShapeTypeEnum, Ext: &eCertificateOptions_CertificateTransparencyLoggingPreference})
+var sCertificateOptions_Export = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Export", ID: &iCertificateExport, Members: &mCertificateExport, Type: smithy.ShapeTypeEnum, Ext: &eCertificateOptions_Export})
+var sCertificateOptions_ValidationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationMethod", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eCertificateOptions_ValidationMethod})
+var sCertificateSearchResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateSearchResult, Members: &mCertificateSearchResult, Type: smithy.ShapeTypeStructure, Ext: &eCertificateSearchResult})
+var sCertificateSearchResult_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCertificateSearchResult_CertificateArn})
+var sCertificateSearchResult_X509Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "X509Attributes", ID: &iX509Attributes, Members: &mX509Attributes, Type: smithy.ShapeTypeStructure, Ext: &eCertificateSearchResult_X509Attributes})
+var sCertificateSearchResult_CertificateMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateMetadata", ID: &iCertificateMetadata, Members: &mCertificateMetadata, Type: smithy.ShapeTypeUnion, Ext: &eCertificateSearchResult_CertificateMetadata})
+var s_CertificateSearchResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateSearchResultList, Members: &m_CertificateSearchResultList, Type: smithy.ShapeTypeList, Ext: &e_CertificateSearchResultList})
+var s_CertificateSearchResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateSearchResult, Members: &mCertificateSearchResult, Type: smithy.ShapeTypeStructure, Ext: &e_CertificateSearchResultList_member})
+var sCertificateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateStatus, Members: &mCertificateStatus, Type: smithy.ShapeTypeEnum, Ext: &eCertificateStatus})
+var sCertificateStatus_PENDING_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateStatus_PENDING_VALIDATION})
+var sCertificateStatus_ISSUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateStatus_ISSUED})
+var sCertificateStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateStatus_INACTIVE})
+var sCertificateStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateStatus_EXPIRED})
+var sCertificateStatus_VALIDATION_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateStatus_VALIDATION_TIMED_OUT})
+var sCertificateStatus_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateStatus_REVOKED})
+var sCertificateStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateStatus_FAILED})
+var s_CertificateStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateStatuses, Members: &m_CertificateStatuses, Type: smithy.ShapeTypeList, Ext: &e_CertificateStatuses})
+var s_CertificateStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateStatus, Members: &mCertificateStatus, Type: smithy.ShapeTypeEnum, Ext: &e_CertificateStatuses_member})
+var sCertificateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateSummary, Members: &mCertificateSummary, Type: smithy.ShapeTypeStructure, Ext: &eCertificateSummary})
+var sCertificateSummary_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCertificateSummary_CertificateArn})
+var sCertificateSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eCertificateSummary_DomainName})
+var sCertificateSummary_SubjectAlternativeNameSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectAlternativeNameSummaries", ID: &i_DomainList, Members: &m_DomainList, Type: smithy.ShapeTypeList, Ext: &eCertificateSummary_SubjectAlternativeNameSummaries})
+var sCertificateSummary_HasAdditionalSubjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasAdditionalSubjectAlternativeNames", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCertificateSummary_HasAdditionalSubjectAlternativeNames})
+var sCertificateSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateStatus, Members: &mCertificateStatus, Type: smithy.ShapeTypeEnum, Ext: &eCertificateSummary_Status})
+var sCertificateSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum, Ext: &eCertificateSummary_Type})
+var sCertificateSummary_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAlgorithm", ID: &iKeyAlgorithm, Members: &mKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eCertificateSummary_KeyAlgorithm})
+var sCertificateSummary_KeyUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsages", ID: &i_KeyUsageNames, Members: &m_KeyUsageNames, Type: smithy.ShapeTypeList, Ext: &eCertificateSummary_KeyUsages})
+var sCertificateSummary_ExtendedKeyUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedKeyUsages", ID: &i_ExtendedKeyUsageNames, Members: &m_ExtendedKeyUsageNames, Type: smithy.ShapeTypeList, Ext: &eCertificateSummary_ExtendedKeyUsages})
+var sCertificateSummary_ExportOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportOption", ID: &iCertificateExport, Members: &mCertificateExport, Type: smithy.ShapeTypeEnum, Ext: &eCertificateSummary_ExportOption})
+var sCertificateSummary_InUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InUse", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCertificateSummary_InUse})
+var sCertificateSummary_Exported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exported", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCertificateSummary_Exported})
+var sCertificateSummary_RenewalEligibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalEligibility", ID: &iRenewalEligibility, Members: &mRenewalEligibility, Type: smithy.ShapeTypeEnum, Ext: &eCertificateSummary_RenewalEligibility})
+var sCertificateSummary_NotBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotBefore", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateSummary_NotBefore})
+var sCertificateSummary_NotAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotAfter", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateSummary_NotAfter})
+var sCertificateSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateSummary_CreatedAt})
+var sCertificateSummary_IssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateSummary_IssuedAt})
+var sCertificateSummary_ImportedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateSummary_ImportedAt})
+var sCertificateSummary_RevokedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevokedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCertificateSummary_RevokedAt})
+var sCertificateSummary_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedBy", ID: &iCertificateManagedBy, Members: &mCertificateManagedBy, Type: smithy.ShapeTypeEnum, Ext: &eCertificateSummary_ManagedBy})
+var sCertificateSummary_CertificateKeyPairOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateKeyPairOrigin", ID: &iCertificateKeyPairOrigin, Members: &mCertificateKeyPairOrigin, Type: smithy.ShapeTypeEnum, Ext: &eCertificateSummary_CertificateKeyPairOrigin})
+var s_CertificateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateSummaryList, Members: &m_CertificateSummaryList, Type: smithy.ShapeTypeList, Ext: &e_CertificateSummaryList})
+var s_CertificateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateSummary, Members: &mCertificateSummary, Type: smithy.ShapeTypeStructure, Ext: &e_CertificateSummaryList_member})
+var sCertificateTransparencyLoggingPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateTransparencyLoggingPreference, Members: &mCertificateTransparencyLoggingPreference, Type: smithy.ShapeTypeEnum, Ext: &eCertificateTransparencyLoggingPreference})
+var sCertificateTransparencyLoggingPreference_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateTransparencyLoggingPreference_ENABLED})
+var sCertificateTransparencyLoggingPreference_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateTransparencyLoggingPreference_DISABLED})
+var sCertificateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum, Ext: &eCertificateType})
+var sCertificateType_IMPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateType_IMPORTED})
+var sCertificateType_AMAZON_ISSUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_ISSUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateType_AMAZON_ISSUED})
+var sCertificateType_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCertificateType_PRIVATE})
+var sCommonNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommonNameFilter, Members: &mCommonNameFilter, Type: smithy.ShapeTypeStructure, Ext: &eCommonNameFilter})
+var sCommonNameFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_FilterString, Type: smithy.ShapeTypeString, Ext: &eCommonNameFilter_Value})
+var sCommonNameFilter_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eCommonNameFilter_ComparisonOperator})
+var sComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eComparisonOperator})
+var sComparisonOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_CONTAINS})
+var sComparisonOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_EQUALS})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_ContactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactList, Members: &m_ContactList, Traits: &t3, Type: smithy.ShapeTypeList, Ext: &e_ContactList})
+var s_ContactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ContactList_member})
+var s_CoralAvailabilityThrottledResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &e_CoralAvailabilityThrottledResource})
+var s_CoralAvailabilityThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &e_CoralAvailabilityThrottlingReason})
+var sCustomAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAttribute, Members: &mCustomAttribute, Type: smithy.ShapeTypeStructure, Ext: &eCustomAttribute})
+var sCustomAttribute_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCustomAttribute_ObjectIdentifier})
+var sCustomAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCustomAttribute_Value})
+var s_CustomAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomAttributeList, Members: &m_CustomAttributeList, Type: smithy.ShapeTypeList, Ext: &e_CustomAttributeList})
+var s_CustomAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomAttribute, Members: &mCustomAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_CustomAttributeList_member})
+var sDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDistinguishedName, Members: &mDistinguishedName, Type: smithy.ShapeTypeStructure, Ext: &eDistinguishedName})
+var sDistinguishedName_CommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommonName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_CommonName})
+var sDistinguishedName_DomainComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainComponents", ID: &i_DomainComponentList, Members: &m_DomainComponentList, Type: smithy.ShapeTypeList, Ext: &eDistinguishedName_DomainComponents})
+var sDistinguishedName_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_Country})
+var sDistinguishedName_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributeList, Members: &m_CustomAttributeList, Type: smithy.ShapeTypeList, Ext: &eDistinguishedName_CustomAttributes})
+var sDistinguishedName_DistinguishedNameQualifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedNameQualifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_DistinguishedNameQualifier})
+var sDistinguishedName_GenerationQualifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerationQualifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_GenerationQualifier})
+var sDistinguishedName_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_GivenName})
+var sDistinguishedName_Initials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Initials", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_Initials})
+var sDistinguishedName_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_Locality})
+var sDistinguishedName_Organization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Organization", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_Organization})
+var sDistinguishedName_OrganizationalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnit", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_OrganizationalUnit})
+var sDistinguishedName_Pseudonym = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pseudonym", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_Pseudonym})
+var sDistinguishedName_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_SerialNumber})
+var sDistinguishedName_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_State})
+var sDistinguishedName_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_Surname})
+var sDistinguishedName_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDistinguishedName_Title})
+var sDnsNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsNameFilter, Members: &mDnsNameFilter, Type: smithy.ShapeTypeStructure, Ext: &eDnsNameFilter})
+var sDnsNameFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_FilterString, Type: smithy.ShapeTypeString, Ext: &eDnsNameFilter_Value})
+var sDnsNameFilter_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eDnsNameFilter_ComparisonOperator})
+var sDnsPrevalidationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsPrevalidationDetails, Members: &mDnsPrevalidationDetails, Type: smithy.ShapeTypeStructure, Ext: &eDnsPrevalidationDetails})
+var sDnsPrevalidationDetails_DomainScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainScope", ID: &iDomainScope, Members: &mDomainScope, Type: smithy.ShapeTypeStructure, Ext: &eDnsPrevalidationDetails_DomainScope})
+var sDnsPrevalidationDetails_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &eDnsPrevalidationDetails_HostedZoneId})
+var sDnsPrevalidationDetails_ResourceRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRecord", ID: &iResourceRecord, Members: &mResourceRecord, Type: smithy.ShapeTypeStructure, Ext: &eDnsPrevalidationDetails_ResourceRecord})
+var sDnsPrevalidationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsPrevalidationOptions, Members: &mDnsPrevalidationOptions, Type: smithy.ShapeTypeStructure, Ext: &eDnsPrevalidationOptions})
+var sDnsPrevalidationOptions_DomainScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainScope", ID: &iDomainScope, Members: &mDomainScope, Type: smithy.ShapeTypeStructure, Ext: &eDnsPrevalidationOptions_DomainScope})
+var sDnsPrevalidationOptions_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &eDnsPrevalidationOptions_HostedZoneId})
+var sDnsValidationChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsValidationChallenge, Members: &mDnsValidationChallenge, Type: smithy.ShapeTypeStructure, Ext: &eDnsValidationChallenge})
+var sDnsValidationChallenge_ResourceRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRecord", ID: &iResourceRecord, Members: &mResourceRecord, Type: smithy.ShapeTypeStructure, Ext: &eDnsValidationChallenge_ResourceRecord})
+var s_DomainComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainComponentList, Members: &m_DomainComponentList, Type: smithy.ShapeTypeList, Ext: &e_DomainComponentList})
+var s_DomainComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_DomainComponentList_member})
+var s_DomainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainList, Members: &m_DomainList, Type: smithy.ShapeTypeList, Ext: &e_DomainList})
+var s_DomainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &e_DomainList_member})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var s_DomainNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &e_DomainNameString})
+var sDomainScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainScope, Members: &mDomainScope, Type: smithy.ShapeTypeStructure, Ext: &eDomainScope})
+var sDomainScope_ExactDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExactDomain", ID: &iDomainScopeOption, Members: &mDomainScopeOption, Type: smithy.ShapeTypeEnum, Ext: &eDomainScope_ExactDomain})
+var sDomainScope_Subdomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdomains", ID: &iDomainScopeOption, Members: &mDomainScopeOption, Type: smithy.ShapeTypeEnum, Ext: &eDomainScope_Subdomains})
+var sDomainScope_Wildcards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Wildcards", ID: &iDomainScopeOption, Members: &mDomainScopeOption, Type: smithy.ShapeTypeEnum, Ext: &eDomainScope_Wildcards})
+var sDomainScopeOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainScopeOption, Members: &mDomainScopeOption, Type: smithy.ShapeTypeEnum, Ext: &eDomainScopeOption})
+var sDomainScopeOption_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainScopeOption_ENABLED})
+var sDomainScopeOption_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainScopeOption_DISABLED})
+var sDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eDomainStatus})
+var sDomainStatus_PENDING_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_PENDING_VALIDATION})
+var sDomainStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_SUCCESS})
+var sDomainStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_FAILED})
+var sDomainValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainValidation, Members: &mDomainValidation, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidation})
+var sDomainValidation_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eDomainValidation_DomainName})
+var sDomainValidation_ValidationEmails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationEmails", ID: &i_ValidationEmailList, Members: &m_ValidationEmailList, Type: smithy.ShapeTypeList, Ext: &eDomainValidation_ValidationEmails})
+var sDomainValidation_ValidationDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationDomain", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eDomainValidation_ValidationDomain})
+var sDomainValidation_ValidationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationStatus", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eDomainValidation_ValidationStatus})
+var sDomainValidation_ResourceRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRecord", ID: &iResourceRecord, Members: &mResourceRecord, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidation_ResourceRecord})
+var sDomainValidation_HttpRedirect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpRedirect", ID: &iHttpRedirect, Members: &mHttpRedirect, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidation_HttpRedirect})
+var sDomainValidation_ValidationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationMethod", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eDomainValidation_ValidationMethod})
+var s_DomainValidationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainValidationList, Members: &m_DomainValidationList, Type: smithy.ShapeTypeList, Ext: &e_DomainValidationList})
+var s_DomainValidationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainValidation, Members: &mDomainValidation, Type: smithy.ShapeTypeStructure, Ext: &e_DomainValidationList_member})
+var sDomainValidationMethodUpdateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainValidationMethodUpdateSummary, Members: &mDomainValidationMethodUpdateSummary, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidationMethodUpdateSummary})
+var sDomainValidationMethodUpdateSummary_From = smithy.NewStaticSchema(smithy.StaticSchema{Member: "From", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eDomainValidationMethodUpdateSummary_From})
+var sDomainValidationMethodUpdateSummary_To = smithy.NewStaticSchema(smithy.StaticSchema{Member: "To", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eDomainValidationMethodUpdateSummary_To})
+var sDomainValidationOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainValidationOption, Members: &mDomainValidationOption, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidationOption})
+var sDomainValidationOption_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eDomainValidationOption_DomainName})
+var sDomainValidationOption_ValidationDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationDomain", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eDomainValidationOption_ValidationDomain})
+var s_DomainValidationOptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainValidationOptionList, Members: &m_DomainValidationOptionList, Type: smithy.ShapeTypeList, Ext: &e_DomainValidationOptionList})
+var s_DomainValidationOptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainValidationOption, Members: &mDomainValidationOption, Type: smithy.ShapeTypeStructure, Ext: &e_DomainValidationOptionList_member})
+var sDomainValidationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainValidationSummary, Members: &mDomainValidationSummary, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidationSummary})
+var sDomainValidationSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eDomainValidationSummary_DomainName})
+var sDomainValidationSummary_ActiveValidationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveValidationConfiguration", ID: &iValidationConfiguration, Members: &mValidationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidationSummary_ActiveValidationConfiguration})
+var sDomainValidationSummary_RequestedValidationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedValidationConfiguration", ID: &iValidationConfiguration, Members: &mValidationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDomainValidationSummary_RequestedValidationConfiguration})
+var s_DomainValidationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainValidationSummaryList, Members: &m_DomainValidationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DomainValidationSummaryList})
+var s_DomainValidationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainValidationSummary, Members: &mDomainValidationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DomainValidationSummaryList_member})
+var sEmailValidationChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailValidationChallenge, Members: &mEmailValidationChallenge, Type: smithy.ShapeTypeStructure, Ext: &eEmailValidationChallenge})
+var sEmailValidationChallenge_ValidationEmails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationEmails", ID: &i_ValidationEmailList, Members: &m_ValidationEmailList, Type: smithy.ShapeTypeList, Ext: &eEmailValidationChallenge_ValidationEmails})
+var sEmailValidationChallenge_ValidationDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationDomain", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eEmailValidationChallenge_ValidationDomain})
+var sExpiration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiration, Members: &mExpiration, Type: smithy.ShapeTypeStructure, Ext: &eExpiration})
+var sExpiration_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eExpiration_Value})
+var sExpiration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iTimeType, Members: &mTimeType, Type: smithy.ShapeTypeEnum, Ext: &eExpiration_Type})
+var sExpiryEventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiryEventsConfiguration, Members: &mExpiryEventsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExpiryEventsConfiguration})
+var sExpiryEventsConfiguration_DaysBeforeExpiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DaysBeforeExpiry", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eExpiryEventsConfiguration_DaysBeforeExpiry})
+var sExtendedKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedKeyUsage, Members: &mExtendedKeyUsage, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsage})
+var sExtendedKeyUsage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iExtendedKeyUsageName, Members: &mExtendedKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &eExtendedKeyUsage_Name})
+var sExtendedKeyUsage_OID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OID", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eExtendedKeyUsage_OID})
+var s_ExtendedKeyUsageFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendedKeyUsageFilterList, Members: &m_ExtendedKeyUsageFilterList, Type: smithy.ShapeTypeList, Ext: &e_ExtendedKeyUsageFilterList})
+var s_ExtendedKeyUsageFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtendedKeyUsageName, Members: &mExtendedKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &e_ExtendedKeyUsageFilterList_member})
+var s_ExtendedKeyUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendedKeyUsageList, Members: &m_ExtendedKeyUsageList, Type: smithy.ShapeTypeList, Ext: &e_ExtendedKeyUsageList})
+var s_ExtendedKeyUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtendedKeyUsage, Members: &mExtendedKeyUsage, Type: smithy.ShapeTypeStructure, Ext: &e_ExtendedKeyUsageList_member})
+var sExtendedKeyUsageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedKeyUsageName, Members: &mExtendedKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &eExtendedKeyUsageName})
+var sExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_WEB_SERVER_AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION})
+var sExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_WEB_CLIENT_AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION})
+var sExtendedKeyUsageName_CODE_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_CODE_SIGNING})
+var sExtendedKeyUsageName_EMAIL_PROTECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_PROTECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_EMAIL_PROTECTION})
+var sExtendedKeyUsageName_TIME_STAMPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_STAMPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_TIME_STAMPING})
+var sExtendedKeyUsageName_OCSP_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OCSP_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_OCSP_SIGNING})
+var sExtendedKeyUsageName_IPSEC_END_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSEC_END_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_IPSEC_END_SYSTEM})
+var sExtendedKeyUsageName_IPSEC_TUNNEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSEC_TUNNEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_IPSEC_TUNNEL})
+var sExtendedKeyUsageName_IPSEC_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSEC_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_IPSEC_USER})
+var sExtendedKeyUsageName_ANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_ANY})
+var sExtendedKeyUsageName_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_NONE})
+var sExtendedKeyUsageName_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtendedKeyUsageName_CUSTOM})
+var s_ExtendedKeyUsageNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendedKeyUsageNames, Members: &m_ExtendedKeyUsageNames, Type: smithy.ShapeTypeList, Ext: &e_ExtendedKeyUsageNames})
+var s_ExtendedKeyUsageNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtendedKeyUsageName, Members: &mExtendedKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &e_ExtendedKeyUsageNames_member})
+var sFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eFailureDetails})
+var sFailureDetails_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAcmeDomainValidationFailureReason, Members: &mAcmeDomainValidationFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eFailureDetails_Reason})
+var sFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFailureDetails_Message})
+var sFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureReason, Members: &mFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eFailureReason})
+var sFailureReason_NO_AVAILABLE_CONTACTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_AVAILABLE_CONTACTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_NO_AVAILABLE_CONTACTS})
+var sFailureReason_ADDITIONAL_VERIFICATION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITIONAL_VERIFICATION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_ADDITIONAL_VERIFICATION_REQUIRED})
+var sFailureReason_DOMAIN_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_DOMAIN_NOT_ALLOWED})
+var sFailureReason_INVALID_PUBLIC_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PUBLIC_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_INVALID_PUBLIC_DOMAIN})
+var sFailureReason_DOMAIN_VALIDATION_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_VALIDATION_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_DOMAIN_VALIDATION_DENIED})
+var sFailureReason_CAA_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAA_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_CAA_ERROR})
+var sFailureReason_PCA_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_LIMIT_EXCEEDED})
+var sFailureReason_PCA_INVALID_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_INVALID_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_INVALID_ARN})
+var sFailureReason_PCA_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_INVALID_STATE})
+var sFailureReason_PCA_REQUEST_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_REQUEST_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_REQUEST_FAILED})
+var sFailureReason_PCA_NAME_CONSTRAINTS_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_NAME_CONSTRAINTS_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_NAME_CONSTRAINTS_VALIDATION})
+var sFailureReason_PCA_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_RESOURCE_NOT_FOUND})
+var sFailureReason_PCA_INVALID_ARGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_INVALID_ARGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_INVALID_ARGS})
+var sFailureReason_PCA_INVALID_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_INVALID_DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_INVALID_DURATION})
+var sFailureReason_PCA_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCA_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_PCA_ACCESS_DENIED})
+var sFailureReason_SLR_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLR_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_SLR_NOT_FOUND})
+var sFailureReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureReason_OTHER})
+var sFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilters, Members: &mFilters, Type: smithy.ShapeTypeStructure, Ext: &eFilters})
+var sFilters_extendedKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extendedKeyUsage", ID: &i_ExtendedKeyUsageFilterList, Members: &m_ExtendedKeyUsageFilterList, Type: smithy.ShapeTypeList, Ext: &eFilters_extendedKeyUsage})
+var sFilters_keyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyUsage", ID: &i_KeyUsageFilterList, Members: &m_KeyUsageFilterList, Type: smithy.ShapeTypeList, Ext: &eFilters_keyUsage})
+var sFilters_keyTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyTypes", ID: &i_KeyAlgorithmList, Members: &m_KeyAlgorithmList, Type: smithy.ShapeTypeList, Ext: &eFilters_keyTypes})
+var sFilters_exportOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportOption", ID: &iCertificateExport, Members: &mCertificateExport, Type: smithy.ShapeTypeEnum, Ext: &eFilters_exportOption})
+var sFilters_managedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedBy", ID: &iCertificateManagedBy, Members: &mCertificateManagedBy, Type: smithy.ShapeTypeEnum, Ext: &eFilters_managedBy})
+var s_FilterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterString, Type: smithy.ShapeTypeString, Ext: &e_FilterString})
+var sGeneralName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneralName, Members: &mGeneralName, Type: smithy.ShapeTypeUnion, Ext: &eGeneralName})
+var sGeneralName_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryName", ID: &iDistinguishedName, Members: &mDistinguishedName, Type: smithy.ShapeTypeStructure, Ext: &eGeneralName_DirectoryName})
+var sGeneralName_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGeneralName_DnsName})
+var sGeneralName_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGeneralName_IpAddress})
+var sGeneralName_OtherName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherName", ID: &iOtherName, Members: &mOtherName, Type: smithy.ShapeTypeStructure, Ext: &eGeneralName_OtherName})
+var sGeneralName_RegisteredId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGeneralName_RegisteredId})
+var sGeneralName_Rfc822Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rfc822Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGeneralName_Rfc822Name})
+var sGeneralName_UniformResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniformResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGeneralName_UniformResourceIdentifier})
+var s_GeneralNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneralNameList, Members: &m_GeneralNameList, Type: smithy.ShapeTypeList, Ext: &e_GeneralNameList})
+var s_GeneralNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeneralName, Members: &mGeneralName, Type: smithy.ShapeTypeUnion, Ext: &e_GeneralNameList_member})
+var s_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &e_HostedZoneId})
+var sHttpRedirect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRedirect, Members: &mHttpRedirect, Type: smithy.ShapeTypeStructure, Ext: &eHttpRedirect})
+var sHttpRedirect_RedirectFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectFrom", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHttpRedirect_RedirectFrom})
+var sHttpRedirect_RedirectTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectTo", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHttpRedirect_RedirectTo})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_InUseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InUseList, Members: &m_InUseList, Type: smithy.ShapeTypeList, Ext: &e_InUseList})
+var s_InUseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_InUseList_member})
+var sInvalidArgsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgsException, Members: &mInvalidArgsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArgsException})
+var sInvalidArgsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidArgsException_message})
+var sInvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArnException, Members: &mInvalidArnException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArnException})
+var sInvalidArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidArnException_message})
+var sInvalidDomainValidationOptionsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDomainValidationOptionsException, Members: &mInvalidDomainValidationOptionsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDomainValidationOptionsException})
+var sInvalidDomainValidationOptionsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidDomainValidationOptionsException_message})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStateException})
+var sInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidStateException_message})
+var sInvalidTagException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagException, Members: &mInvalidTagException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTagException})
+var sInvalidTagException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidTagException_message})
+var sKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyAlgorithm, Members: &mKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eKeyAlgorithm})
+var sKeyAlgorithm_RSA_1024 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_1024", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAlgorithm_RSA_1024})
+var sKeyAlgorithm_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAlgorithm_RSA_2048})
+var sKeyAlgorithm_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAlgorithm_RSA_3072})
+var sKeyAlgorithm_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAlgorithm_RSA_4096})
+var sKeyAlgorithm_EC_prime256v1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC_prime256v1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAlgorithm_EC_prime256v1})
+var sKeyAlgorithm_EC_secp384r1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC_secp384r1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAlgorithm_EC_secp384r1})
+var sKeyAlgorithm_EC_secp521r1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC_secp521r1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAlgorithm_EC_secp521r1})
+var s_KeyAlgorithmList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAlgorithmList, Members: &m_KeyAlgorithmList, Type: smithy.ShapeTypeList, Ext: &e_KeyAlgorithmList})
+var s_KeyAlgorithmList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyAlgorithm, Members: &mKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &e_KeyAlgorithmList_member})
+var sKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsage, Members: &mKeyUsage, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsage})
+var sKeyUsage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iKeyUsageName, Members: &mKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &eKeyUsage_Name})
+var s_KeyUsageFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyUsageFilterList, Members: &m_KeyUsageFilterList, Type: smithy.ShapeTypeList, Ext: &e_KeyUsageFilterList})
+var s_KeyUsageFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyUsageName, Members: &mKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &e_KeyUsageFilterList_member})
+var s_KeyUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyUsageList, Members: &m_KeyUsageList, Type: smithy.ShapeTypeList, Ext: &e_KeyUsageList})
+var s_KeyUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyUsage, Members: &mKeyUsage, Type: smithy.ShapeTypeStructure, Ext: &e_KeyUsageList_member})
+var sKeyUsageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsageName, Members: &mKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &eKeyUsageName})
+var sKeyUsageName_DIGITAL_SIGNATURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIGITAL_SIGNATURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_DIGITAL_SIGNATURE})
+var sKeyUsageName_NON_REPUDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_REPUDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_NON_REPUDATION})
+var sKeyUsageName_KEY_ENCIPHERMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_ENCIPHERMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_KEY_ENCIPHERMENT})
+var sKeyUsageName_DATA_ENCIPHERMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_ENCIPHERMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_DATA_ENCIPHERMENT})
+var sKeyUsageName_KEY_AGREEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_AGREEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_KEY_AGREEMENT})
+var sKeyUsageName_CERTIFICATE_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_CERTIFICATE_SIGNING})
+var sKeyUsageName_CRL_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRL_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_CRL_SIGNING})
+var sKeyUsageName_ENCHIPER_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCHIPER_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_ENCHIPER_ONLY})
+var sKeyUsageName_DECIPHER_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECIPHER_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_DECIPHER_ONLY})
+var sKeyUsageName_ANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_ANY})
+var sKeyUsageName_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageName_CUSTOM})
+var s_KeyUsageNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyUsageNames, Members: &m_KeyUsageNames, Type: smithy.ShapeTypeList, Ext: &e_KeyUsageNames})
+var s_KeyUsageNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyUsageName, Members: &mKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &e_KeyUsageNames_member})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var s_MacKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MacKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_MacKey})
+var s_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxItems, Type: smithy.ShapeTypeInteger, Ext: &e_MaxItems})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_NullableBoolean})
+var sOtherName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOtherName, Members: &mOtherName, Type: smithy.ShapeTypeStructure, Ext: &eOtherName})
+var sOtherName_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOtherName_ObjectIdentifier})
+var sOtherName_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOtherName_Value})
+var s_PassphraseBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PassphraseBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_PassphraseBlob})
+var s_PcaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PcaArn, Type: smithy.ShapeTypeString, Ext: &e_PcaArn})
+var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &e_PositiveInteger})
+var sPrevalidationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrevalidationDetails, Members: &mPrevalidationDetails, Type: smithy.ShapeTypeUnion, Ext: &ePrevalidationDetails})
+var sPrevalidationDetails_DnsPrevalidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsPrevalidation", ID: &iDnsPrevalidationDetails, Members: &mDnsPrevalidationDetails, Type: smithy.ShapeTypeStructure, Ext: &ePrevalidationDetails_DnsPrevalidation})
+var sPrevalidationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrevalidationOptions, Members: &mPrevalidationOptions, Type: smithy.ShapeTypeUnion, Ext: &ePrevalidationOptions})
+var sPrevalidationOptions_DnsPrevalidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsPrevalidation", ID: &iDnsPrevalidationOptions, Members: &mDnsPrevalidationOptions, Type: smithy.ShapeTypeStructure, Ext: &ePrevalidationOptions_DnsPrevalidation})
+var sPrevalidationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrevalidationType, Members: &mPrevalidationType, Type: smithy.ShapeTypeEnum, Ext: &ePrevalidationType})
+var sPrevalidationType_DNS_PREVALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_PREVALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePrevalidationType_DNS_PREVALIDATION})
+var s_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_PrivateKey})
+var s_PrivateKeyBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateKeyBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_PrivateKeyBlob})
+var sPublicCertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicCertificateAuthority, Members: &mPublicCertificateAuthority, Type: smithy.ShapeTypeStructure, Ext: &ePublicCertificateAuthority})
+var sPublicCertificateAuthority_AllowedKeyAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedKeyAlgorithms", ID: &i_PublicKeyAlgorithmList, Members: &m_PublicKeyAlgorithmList, Type: smithy.ShapeTypeList, Ext: &ePublicCertificateAuthority_AllowedKeyAlgorithms})
+var sPublicKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicKeyAlgorithm, Members: &mPublicKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &ePublicKeyAlgorithm})
+var sPublicKeyAlgorithm_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePublicKeyAlgorithm_RSA_2048})
+var sPublicKeyAlgorithm_EC_PRIME256_V1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC_PRIME256_V1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePublicKeyAlgorithm_EC_PRIME256_V1})
+var sPublicKeyAlgorithm_EC_SECP384_R1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC_SECP384_R1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePublicKeyAlgorithm_EC_SECP384_R1})
+var s_PublicKeyAlgorithmList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublicKeyAlgorithmList, Members: &m_PublicKeyAlgorithmList, Type: smithy.ShapeTypeList, Ext: &e_PublicKeyAlgorithmList})
+var s_PublicKeyAlgorithmList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPublicKeyAlgorithm, Members: &mPublicKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &e_PublicKeyAlgorithmList_member})
+var sRecordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &eRecordType})
+var sRecordType_CNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_CNAME})
+var sRenewalEligibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewalEligibility, Members: &mRenewalEligibility, Type: smithy.ShapeTypeEnum, Ext: &eRenewalEligibility})
+var sRenewalEligibility_ELIGIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELIGIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenewalEligibility_ELIGIBLE})
+var sRenewalEligibility_INELIGIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INELIGIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenewalEligibility_INELIGIBLE})
+var sRenewalStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewalStatus, Members: &mRenewalStatus, Type: smithy.ShapeTypeEnum, Ext: &eRenewalStatus})
+var sRenewalStatus_PENDING_AUTO_RENEWAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_AUTO_RENEWAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenewalStatus_PENDING_AUTO_RENEWAL})
+var sRenewalStatus_PENDING_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenewalStatus_PENDING_VALIDATION})
+var sRenewalStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenewalStatus_SUCCESS})
+var sRenewalStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenewalStatus_FAILED})
+var sRenewalSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewalSummary, Members: &mRenewalSummary, Type: smithy.ShapeTypeStructure, Ext: &eRenewalSummary})
+var sRenewalSummary_RenewalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalStatus", ID: &iRenewalStatus, Members: &mRenewalStatus, Type: smithy.ShapeTypeEnum, Ext: &eRenewalSummary_RenewalStatus})
+var sRenewalSummary_DomainValidationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainValidationOptions", ID: &i_DomainValidationList, Members: &m_DomainValidationList, Type: smithy.ShapeTypeList, Ext: &eRenewalSummary_DomainValidationOptions})
+var sRenewalSummary_RenewalStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalStatusReason", ID: &iFailureReason, Members: &mFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eRenewalSummary_RenewalStatusReason})
+var sRenewalSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRenewalSummary_UpdatedAt})
+var sRequestInProgressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestInProgressException, Members: &mRequestInProgressException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eRequestInProgressException})
+var sRequestInProgressException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRequestInProgressException_message})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceRecord, Members: &mResourceRecord, Type: smithy.ShapeTypeStructure, Ext: &eResourceRecord})
+var sResourceRecord_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceRecord_Name})
+var sResourceRecord_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &eResourceRecord_Type})
+var sResourceRecord_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceRecord_Value})
+var sRevocationReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationReason, Members: &mRevocationReason, Type: smithy.ShapeTypeEnum, Ext: &eRevocationReason})
+var sRevocationReason_UNSPECIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSPECIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_UNSPECIFIED})
+var sRevocationReason_KEY_COMPROMISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_COMPROMISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_KEY_COMPROMISE})
+var sRevocationReason_CA_COMPROMISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_COMPROMISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_CA_COMPROMISE})
+var sRevocationReason_AFFILIATION_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFFILIATION_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_AFFILIATION_CHANGED})
+var sRevocationReason_SUPERCEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPERCEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_SUPERCEDED})
+var sRevocationReason_SUPERSEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPERSEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_SUPERSEDED})
+var sRevocationReason_CESSATION_OF_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CESSATION_OF_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_CESSATION_OF_OPERATION})
+var sRevocationReason_CERTIFICATE_HOLD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_HOLD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_CERTIFICATE_HOLD})
+var sRevocationReason_REMOVE_FROM_CRL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE_FROM_CRL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_REMOVE_FROM_CRL})
+var sRevocationReason_PRIVILEGE_WITHDRAWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVILEGE_WITHDRAWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_PRIVILEGE_WITHDRAWN})
+var sRevocationReason_A_A_COMPROMISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "A_A_COMPROMISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationReason_A_A_COMPROMISE})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sSearchCertificatesSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCertificatesSortBy, Members: &mSearchCertificatesSortBy, Type: smithy.ShapeTypeEnum, Ext: &eSearchCertificatesSortBy})
+var sSearchCertificatesSortBy_CREATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_CREATED_AT})
+var sSearchCertificatesSortBy_NOT_AFTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_AFTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_NOT_AFTER})
+var sSearchCertificatesSortBy_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_STATUS})
+var sSearchCertificatesSortBy_RENEWAL_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENEWAL_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_RENEWAL_STATUS})
+var sSearchCertificatesSortBy_EXPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_EXPORTED})
+var sSearchCertificatesSortBy_IN_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_IN_USE})
+var sSearchCertificatesSortBy_NOT_BEFORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_BEFORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_NOT_BEFORE})
+var sSearchCertificatesSortBy_KEY_ALGORITHM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_ALGORITHM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_KEY_ALGORITHM})
+var sSearchCertificatesSortBy_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_TYPE})
+var sSearchCertificatesSortBy_CERTIFICATE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_CERTIFICATE_ARN})
+var sSearchCertificatesSortBy_COMMON_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMON_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_COMMON_NAME})
+var sSearchCertificatesSortBy_REVOKED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_REVOKED_AT})
+var sSearchCertificatesSortBy_RENEWAL_ELIGIBILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENEWAL_ELIGIBILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_RENEWAL_ELIGIBILITY})
+var sSearchCertificatesSortBy_ISSUED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_ISSUED_AT})
+var sSearchCertificatesSortBy_MANAGED_BY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_BY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_MANAGED_BY})
+var sSearchCertificatesSortBy_EXPORT_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_EXPORT_OPTION})
+var sSearchCertificatesSortBy_VALIDATION_METHOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_METHOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_VALIDATION_METHOD})
+var sSearchCertificatesSortBy_IMPORTED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_IMPORTED_AT})
+var sSearchCertificatesSortBy_ACME_ENDPOINT_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACME_ENDPOINT_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_ACME_ENDPOINT_ARN})
+var sSearchCertificatesSortBy_ACME_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACME_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_ACME_ACCOUNT_ID})
+var sSearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_KEY_PAIR_ORIGIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN})
+var sSearchCertificatesSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCertificatesSortOrder, Members: &mSearchCertificatesSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSearchCertificatesSortOrder})
+var sSearchCertificatesSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortOrder_ASCENDING})
+var sSearchCertificatesSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesSortOrder_DESCENDING})
+var s_SearchMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_SearchMaxResults})
+var s_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SerialNumber, Type: smithy.ShapeTypeString, Ext: &e_SerialNumber})
+var s_ServiceErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ServiceErrorMessage})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortBy, Members: &mSortBy, Type: smithy.ShapeTypeEnum, Ext: &eSortBy})
+var sSortBy_CREATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortBy_CREATED_AT})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASCENDING})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESCENDING})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sSubjectAlternativeNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectAlternativeNameFilter, Members: &mSubjectAlternativeNameFilter, Type: smithy.ShapeTypeUnion, Ext: &eSubjectAlternativeNameFilter})
+var sSubjectAlternativeNameFilter_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &iDnsNameFilter, Members: &mDnsNameFilter, Type: smithy.ShapeTypeStructure, Ext: &eSubjectAlternativeNameFilter_DnsName})
+var sSubjectFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectFilter, Members: &mSubjectFilter, Type: smithy.ShapeTypeUnion, Ext: &eSubjectFilter})
+var sSubjectFilter_CommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommonName", ID: &iCommonNameFilter, Members: &mCommonNameFilter, Type: smithy.ShapeTypeStructure, Ext: &eSubjectFilter_CommonName})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTagPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPolicyException, Members: &mTagPolicyException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTagPolicyException})
+var sTagPolicyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTagPolicyException_message})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_throttlingReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttlingReasons", ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &eThrottlingException_throttlingReasons})
+var sThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingReason})
+var sThrottlingReason_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &eThrottlingReason_reason})
+var sThrottlingReason_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &eThrottlingReason_resource})
+var s_ThrottlingReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &e_ThrottlingReasonList})
+var s_ThrottlingReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &e_ThrottlingReasonList_member})
+var sTimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampRange, Members: &mTimestampRange, Type: smithy.ShapeTypeStructure, Ext: &eTimestampRange})
+var sTimestampRange_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampRange_Start})
+var sTimestampRange_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampRange_End})
+var sTimeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeType, Members: &mTimeType, Type: smithy.ShapeTypeEnum, Ext: &eTimeType})
+var sTimeType_MINUTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeType_MINUTES})
+var sTimeType_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeType_HOURS})
+var sTimeType_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeType_DAYS})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var s_TStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TStamp})
+var sUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStatus, Members: &mUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateStatus})
+var sUpdateStatus_PENDING_DOMAIN_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DOMAIN_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStatus_PENDING_DOMAIN_VALIDATION})
+var sUpdateStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStatus_SUCCESS})
+var sUpdateStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStatus_FAILED})
+var sUpdateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSummary, Members: &mUpdateSummary, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSummary})
+var sUpdateSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iUpdateStatus, Members: &mUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateSummary_Status})
+var sUpdateSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateSummary_Type})
+var sUpdateSummary_DomainValidationMethodUpdateSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainValidationMethodUpdateSummary", ID: &iDomainValidationMethodUpdateSummary, Members: &mDomainValidationMethodUpdateSummary, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSummary_DomainValidationMethodUpdateSummary})
+var sUpdateSummary_RequestedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateSummary_RequestedAt})
+var sUpdateSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateSummary_UpdatedAt})
+var sUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateType})
+var sUpdateType_DOMAIN_VALIDATION_METHOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_VALIDATION_METHOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateType_DOMAIN_VALIDATION_METHOD})
+var sValidationChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationChallenge, Members: &mValidationChallenge, Type: smithy.ShapeTypeUnion, Ext: &eValidationChallenge})
+var sValidationChallenge_EmailValidationChallenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailValidationChallenge", ID: &iEmailValidationChallenge, Members: &mEmailValidationChallenge, Type: smithy.ShapeTypeStructure, Ext: &eValidationChallenge_EmailValidationChallenge})
+var sValidationChallenge_DnsValidationChallenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsValidationChallenge", ID: &iDnsValidationChallenge, Members: &mDnsValidationChallenge, Type: smithy.ShapeTypeStructure, Ext: &eValidationChallenge_DnsValidationChallenge})
+var sValidationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationConfiguration, Members: &mValidationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eValidationConfiguration})
+var sValidationConfiguration_ValidationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationMethod", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eValidationConfiguration_ValidationMethod})
+var sValidationConfiguration_ValidationChallenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationChallenge", ID: &iValidationChallenge, Members: &mValidationChallenge, Type: smithy.ShapeTypeUnion, Ext: &eValidationConfiguration_ValidationChallenge})
+var sValidationConfiguration_ValidationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationStatus", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eValidationConfiguration_ValidationStatus})
+var s_ValidationEmailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationEmailList, Members: &m_ValidationEmailList, Type: smithy.ShapeTypeList, Ext: &e_ValidationEmailList})
+var s_ValidationEmailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ValidationEmailList_member})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ValidationExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_ValidationExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionMessage})
+var sValidationMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eValidationMethod})
+var sValidationMethod_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationMethod_EMAIL})
+var sValidationMethod_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationMethod_DNS})
+var sValidationMethod_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationMethod_HTTP})
+var sX509AttributeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iX509AttributeFilter, Members: &mX509AttributeFilter, Type: smithy.ShapeTypeUnion, Ext: &eX509AttributeFilter})
+var sX509AttributeFilter_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &iSubjectFilter, Members: &mSubjectFilter, Type: smithy.ShapeTypeUnion, Ext: &eX509AttributeFilter_Subject})
+var sX509AttributeFilter_SubjectAlternativeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectAlternativeName", ID: &iSubjectAlternativeNameFilter, Members: &mSubjectAlternativeNameFilter, Type: smithy.ShapeTypeUnion, Ext: &eX509AttributeFilter_SubjectAlternativeName})
+var sX509AttributeFilter_ExtendedKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedKeyUsage", ID: &iExtendedKeyUsageName, Members: &mExtendedKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &eX509AttributeFilter_ExtendedKeyUsage})
+var sX509AttributeFilter_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsageName, Members: &mKeyUsageName, Type: smithy.ShapeTypeEnum, Ext: &eX509AttributeFilter_KeyUsage})
+var sX509AttributeFilter_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAlgorithm", ID: &iKeyAlgorithm, Members: &mKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eX509AttributeFilter_KeyAlgorithm})
+var sX509AttributeFilter_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_SerialNumber, Type: smithy.ShapeTypeString, Ext: &eX509AttributeFilter_SerialNumber})
+var sX509AttributeFilter_NotAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotAfter", ID: &iTimestampRange, Members: &mTimestampRange, Type: smithy.ShapeTypeStructure, Ext: &eX509AttributeFilter_NotAfter})
+var sX509AttributeFilter_NotBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotBefore", ID: &iTimestampRange, Members: &mTimestampRange, Type: smithy.ShapeTypeStructure, Ext: &eX509AttributeFilter_NotBefore})
+var sX509Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iX509Attributes, Members: &mX509Attributes, Type: smithy.ShapeTypeStructure, Ext: &eX509Attributes})
+var sX509Attributes_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &iDistinguishedName, Members: &mDistinguishedName, Type: smithy.ShapeTypeStructure, Ext: &eX509Attributes_Issuer})
+var sX509Attributes_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &iDistinguishedName, Members: &mDistinguishedName, Type: smithy.ShapeTypeStructure, Ext: &eX509Attributes_Subject})
+var sX509Attributes_SubjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectAlternativeNames", ID: &i_GeneralNameList, Members: &m_GeneralNameList, Type: smithy.ShapeTypeList, Ext: &eX509Attributes_SubjectAlternativeNames})
+var sX509Attributes_ExtendedKeyUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedKeyUsages", ID: &i_ExtendedKeyUsageNames, Members: &m_ExtendedKeyUsageNames, Type: smithy.ShapeTypeList, Ext: &eX509Attributes_ExtendedKeyUsages})
+var sX509Attributes_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAlgorithm", ID: &iKeyAlgorithm, Members: &mKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eX509Attributes_KeyAlgorithm})
+var sX509Attributes_KeyUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsages", ID: &i_KeyUsageNames, Members: &m_KeyUsageNames, Type: smithy.ShapeTypeList, Ext: &eX509Attributes_KeyUsages})
+var sX509Attributes_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_SerialNumber, Type: smithy.ShapeTypeString, Ext: &eX509Attributes_SerialNumber})
+var sX509Attributes_NotAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotAfter", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eX509Attributes_NotAfter})
+var sX509Attributes_NotBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotBefore", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eX509Attributes_NotBefore})
+var sAddTagsToCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToCertificateRequest, Members: &mAddTagsToCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsToCertificateRequest})
+var sAddTagsToCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAddTagsToCertificateRequest_CertificateArn})
+var sAddTagsToCertificateRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAddTagsToCertificateRequest_Tags})
+var sCreateAcmeDomainValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeDomainValidationRequest, Members: &mCreateAcmeDomainValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeDomainValidationRequest})
+var sCreateAcmeDomainValidationRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeDomainValidationRequest_IdempotencyToken})
+var sCreateAcmeDomainValidationRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeDomainValidationRequest_AcmeEndpointArn})
+var sCreateAcmeDomainValidationRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeDomainValidationRequest_DomainName})
+var sCreateAcmeDomainValidationRequest_PrevalidationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrevalidationOptions", ID: &iPrevalidationOptions, Members: &mPrevalidationOptions, Type: smithy.ShapeTypeUnion, Ext: &eCreateAcmeDomainValidationRequest_PrevalidationOptions})
+var sCreateAcmeDomainValidationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAcmeDomainValidationRequest_Tags})
+var sCreateAcmeDomainValidationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeDomainValidationResponse, Members: &mCreateAcmeDomainValidationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeDomainValidationResponse})
+var sCreateAcmeDomainValidationResponse_AcmeDomainValidationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidationArn", ID: &i_AcmeDomainValidationArn, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeDomainValidationResponse_AcmeDomainValidationArn})
+var sCreateAcmeEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeEndpointRequest, Members: &mCreateAcmeEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeEndpointRequest})
+var sCreateAcmeEndpointRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeEndpointRequest_IdempotencyToken})
+var sCreateAcmeEndpointRequest_AuthorizationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationBehavior", ID: &iAcmeAuthorizationBehavior, Members: &mAcmeAuthorizationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eCreateAcmeEndpointRequest_AuthorizationBehavior})
+var sCreateAcmeEndpointRequest_Contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contact", ID: &iAcmeContact, Members: &mAcmeContact, Type: smithy.ShapeTypeEnum, Ext: &eCreateAcmeEndpointRequest_Contact})
+var sCreateAcmeEndpointRequest_CertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthority", ID: &iCertificateAuthority, Members: &mCertificateAuthority, Type: smithy.ShapeTypeUnion, Ext: &eCreateAcmeEndpointRequest_CertificateAuthority})
+var sCreateAcmeEndpointRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAcmeEndpointRequest_Tags})
+var sCreateAcmeEndpointRequest_CertificateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAcmeEndpointRequest_CertificateTags})
+var sCreateAcmeEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeEndpointResponse, Members: &mCreateAcmeEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeEndpointResponse})
+var sCreateAcmeEndpointResponse_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeEndpointResponse_AcmeEndpointArn})
+var sCreateAcmeExternalAccountBindingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeExternalAccountBindingRequest, Members: &mCreateAcmeExternalAccountBindingRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeExternalAccountBindingRequest})
+var sCreateAcmeExternalAccountBindingRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeExternalAccountBindingRequest_IdempotencyToken})
+var sCreateAcmeExternalAccountBindingRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeExternalAccountBindingRequest_AcmeEndpointArn})
+var sCreateAcmeExternalAccountBindingRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateAcmeExternalAccountBindingRequest_RoleArn})
+var sCreateAcmeExternalAccountBindingRequest_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &iExpiration, Members: &mExpiration, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeExternalAccountBindingRequest_Expiration})
+var sCreateAcmeExternalAccountBindingRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAcmeExternalAccountBindingRequest_Tags})
+var sCreateAcmeExternalAccountBindingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcmeExternalAccountBindingResponse, Members: &mCreateAcmeExternalAccountBindingResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeExternalAccountBindingResponse})
+var sCreateAcmeExternalAccountBindingResponse_ExternalAccountBinding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalAccountBinding", ID: &iAcmeExternalAccountBinding, Members: &mAcmeExternalAccountBinding, Type: smithy.ShapeTypeStructure, Ext: &eCreateAcmeExternalAccountBindingResponse_ExternalAccountBinding})
+var sDeleteAcmeDomainValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAcmeDomainValidationRequest, Members: &mDeleteAcmeDomainValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAcmeDomainValidationRequest})
+var sDeleteAcmeDomainValidationRequest_AcmeDomainValidationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidationArn", ID: &i_AcmeDomainValidationArn, Type: smithy.ShapeTypeString, Ext: &eDeleteAcmeDomainValidationRequest_AcmeDomainValidationArn})
+var sDeleteAcmeEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAcmeEndpointRequest, Members: &mDeleteAcmeEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAcmeEndpointRequest})
+var sDeleteAcmeEndpointRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eDeleteAcmeEndpointRequest_AcmeEndpointArn})
+var sDeleteAcmeExternalAccountBindingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAcmeExternalAccountBindingRequest, Members: &mDeleteAcmeExternalAccountBindingRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAcmeExternalAccountBindingRequest})
+var sDeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eDeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn})
+var sDeleteCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCertificateRequest, Members: &mDeleteCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCertificateRequest})
+var sDeleteCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteCertificateRequest_CertificateArn})
+var sDescribeAcmeAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeAccountRequest, Members: &mDescribeAcmeAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeAccountRequest})
+var sDescribeAcmeAccountRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eDescribeAcmeAccountRequest_AcmeEndpointArn})
+var sDescribeAcmeAccountRequest_AccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeAcmeAccountRequest_AccountUrl})
+var sDescribeAcmeAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeAccountResponse, Members: &mDescribeAcmeAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeAccountResponse})
+var sDescribeAcmeAccountResponse_AcmeAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeAccount", ID: &iAcmeAccount, Members: &mAcmeAccount, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeAccountResponse_AcmeAccount})
+var sDescribeAcmeDomainValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeDomainValidationRequest, Members: &mDescribeAcmeDomainValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeDomainValidationRequest})
+var sDescribeAcmeDomainValidationRequest_AcmeDomainValidationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidationArn", ID: &i_AcmeDomainValidationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeAcmeDomainValidationRequest_AcmeDomainValidationArn})
+var sDescribeAcmeDomainValidationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeDomainValidationResponse, Members: &mDescribeAcmeDomainValidationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeDomainValidationResponse})
+var sDescribeAcmeDomainValidationResponse_AcmeDomainValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidation", ID: &iAcmeDomainValidation, Members: &mAcmeDomainValidation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeDomainValidationResponse_AcmeDomainValidation})
+var sDescribeAcmeEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeEndpointRequest, Members: &mDescribeAcmeEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeEndpointRequest})
+var sDescribeAcmeEndpointRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eDescribeAcmeEndpointRequest_AcmeEndpointArn})
+var sDescribeAcmeEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeEndpointResponse, Members: &mDescribeAcmeEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeEndpointResponse})
+var sDescribeAcmeEndpointResponse_AcmeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpoint", ID: &iAcmeEndpoint, Members: &mAcmeEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeEndpointResponse_AcmeEndpoint})
+var sDescribeAcmeExternalAccountBindingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeExternalAccountBindingRequest, Members: &mDescribeAcmeExternalAccountBindingRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeExternalAccountBindingRequest})
+var sDescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eDescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn})
+var sDescribeAcmeExternalAccountBindingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcmeExternalAccountBindingResponse, Members: &mDescribeAcmeExternalAccountBindingResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeExternalAccountBindingResponse})
+var sDescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalAccountBinding", ID: &iAcmeExternalAccountBinding, Members: &mAcmeExternalAccountBinding, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding})
+var sDescribeCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificateRequest, Members: &mDescribeCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCertificateRequest})
+var sDescribeCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeCertificateRequest_CertificateArn})
+var sDescribeCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificateResponse, Members: &mDescribeCertificateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCertificateResponse})
+var sDescribeCertificateResponse_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &iCertificateDetail, Members: &mCertificateDetail, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCertificateResponse_Certificate})
+var sExportCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportCertificateRequest, Members: &mExportCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eExportCertificateRequest})
+var sExportCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExportCertificateRequest_CertificateArn})
+var sExportCertificateRequest_Passphrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Passphrase", ID: &i_PassphraseBlob, Traits: &t1, Type: smithy.ShapeTypeBlob, Ext: &eExportCertificateRequest_Passphrase})
+var sExportCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportCertificateResponse, Members: &mExportCertificateResponse, Type: smithy.ShapeTypeStructure, Ext: &eExportCertificateResponse})
+var sExportCertificateResponse_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_CertificateBody, Type: smithy.ShapeTypeString, Ext: &eExportCertificateResponse_Certificate})
+var sExportCertificateResponse_CertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateChain", ID: &i_CertificateChain, Type: smithy.ShapeTypeString, Ext: &eExportCertificateResponse_CertificateChain})
+var sExportCertificateResponse_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKey", ID: &i_PrivateKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eExportCertificateResponse_PrivateKey})
+var sGetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfigurationResponse, Members: &mGetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountConfigurationResponse})
+var sGetAccountConfigurationResponse_ExpiryEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryEvents", ID: &iExpiryEventsConfiguration, Members: &mExpiryEventsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountConfigurationResponse_ExpiryEvents})
+var sGetAcmeExternalAccountBindingCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAcmeExternalAccountBindingCredentialsRequest, Members: &mGetAcmeExternalAccountBindingCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAcmeExternalAccountBindingCredentialsRequest})
+var sGetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eGetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn})
+var sGetAcmeExternalAccountBindingCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAcmeExternalAccountBindingCredentialsResponse, Members: &mGetAcmeExternalAccountBindingCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAcmeExternalAccountBindingCredentialsResponse})
+var sGetAcmeExternalAccountBindingCredentialsResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetAcmeExternalAccountBindingCredentialsResponse_KeyId})
+var sGetAcmeExternalAccountBindingCredentialsResponse_MacKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacKey", ID: &i_MacKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eGetAcmeExternalAccountBindingCredentialsResponse_MacKey})
+var sGetCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCertificateRequest, Members: &mGetCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCertificateRequest})
+var sGetCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetCertificateRequest_CertificateArn})
+var sGetCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCertificateResponse, Members: &mGetCertificateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCertificateResponse})
+var sGetCertificateResponse_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_CertificateBody, Type: smithy.ShapeTypeString, Ext: &eGetCertificateResponse_Certificate})
+var sGetCertificateResponse_CertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateChain", ID: &i_CertificateChain, Type: smithy.ShapeTypeString, Ext: &eGetCertificateResponse_CertificateChain})
+var sImportCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCertificateRequest, Members: &mImportCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportCertificateRequest})
+var sImportCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eImportCertificateRequest_CertificateArn})
+var sImportCertificateRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_CertificateBodyBlob, Type: smithy.ShapeTypeBlob, Ext: &eImportCertificateRequest_Certificate})
+var sImportCertificateRequest_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKey", ID: &i_PrivateKeyBlob, Traits: &t1, Type: smithy.ShapeTypeBlob, Ext: &eImportCertificateRequest_PrivateKey})
+var sImportCertificateRequest_CertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateChain", ID: &i_CertificateChainBlob, Type: smithy.ShapeTypeBlob, Ext: &eImportCertificateRequest_CertificateChain})
+var sImportCertificateRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eImportCertificateRequest_Tags})
+var sImportCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCertificateResponse, Members: &mImportCertificateResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportCertificateResponse})
+var sImportCertificateResponse_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eImportCertificateResponse_CertificateArn})
+var sListAcmeAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeAccountsRequest, Members: &mListAcmeAccountsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeAccountsRequest})
+var sListAcmeAccountsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeAccountsRequest_NextToken})
+var sListAcmeAccountsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListAcmeAccountsRequest_MaxResults})
+var sListAcmeAccountsRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eListAcmeAccountsRequest_AcmeEndpointArn})
+var sListAcmeAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeAccountsResponse, Members: &mListAcmeAccountsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeAccountsResponse})
+var sListAcmeAccountsResponse_AcmeAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeAccounts", ID: &i_AcmeAccountList, Members: &m_AcmeAccountList, Type: smithy.ShapeTypeList, Ext: &eListAcmeAccountsResponse_AcmeAccounts})
+var sListAcmeAccountsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeAccountsResponse_NextToken})
+var sListAcmeDomainValidationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeDomainValidationsRequest, Members: &mListAcmeDomainValidationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeDomainValidationsRequest})
+var sListAcmeDomainValidationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeDomainValidationsRequest_NextToken})
+var sListAcmeDomainValidationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListAcmeDomainValidationsRequest_MaxResults})
+var sListAcmeDomainValidationsRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eListAcmeDomainValidationsRequest_AcmeEndpointArn})
+var sListAcmeDomainValidationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeDomainValidationsResponse, Members: &mListAcmeDomainValidationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeDomainValidationsResponse})
+var sListAcmeDomainValidationsResponse_AcmeDomainValidations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidations", ID: &i_AcmeDomainValidationList, Members: &m_AcmeDomainValidationList, Type: smithy.ShapeTypeList, Ext: &eListAcmeDomainValidationsResponse_AcmeDomainValidations})
+var sListAcmeDomainValidationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeDomainValidationsResponse_NextToken})
+var sListAcmeEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeEndpointsRequest, Members: &mListAcmeEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeEndpointsRequest})
+var sListAcmeEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeEndpointsRequest_NextToken})
+var sListAcmeEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListAcmeEndpointsRequest_MaxResults})
+var sListAcmeEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeEndpointsResponse, Members: &mListAcmeEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeEndpointsResponse})
+var sListAcmeEndpointsResponse_AcmeEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpoints", ID: &i_AcmeEndpointList, Members: &m_AcmeEndpointList, Type: smithy.ShapeTypeList, Ext: &eListAcmeEndpointsResponse_AcmeEndpoints})
+var sListAcmeEndpointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeEndpointsResponse_NextToken})
+var sListAcmeExternalAccountBindingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeExternalAccountBindingsRequest, Members: &mListAcmeExternalAccountBindingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeExternalAccountBindingsRequest})
+var sListAcmeExternalAccountBindingsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeExternalAccountBindingsRequest_NextToken})
+var sListAcmeExternalAccountBindingsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListAcmeExternalAccountBindingsRequest_MaxResults})
+var sListAcmeExternalAccountBindingsRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eListAcmeExternalAccountBindingsRequest_AcmeEndpointArn})
+var sListAcmeExternalAccountBindingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcmeExternalAccountBindingsResponse, Members: &mListAcmeExternalAccountBindingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAcmeExternalAccountBindingsResponse})
+var sListAcmeExternalAccountBindingsResponse_ExternalAccountBindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalAccountBindings", ID: &i_AcmeExternalAccountBindingList, Members: &m_AcmeExternalAccountBindingList, Type: smithy.ShapeTypeList, Ext: &eListAcmeExternalAccountBindingsResponse_ExternalAccountBindings})
+var sListAcmeExternalAccountBindingsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAcmeExternalAccountBindingsResponse_NextToken})
+var sListCertificateDomainValidationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificateDomainValidationsRequest, Members: &mListCertificateDomainValidationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCertificateDomainValidationsRequest})
+var sListCertificateDomainValidationsRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_CertificateArn, Type: smithy.ShapeTypeString, Ext: &eListCertificateDomainValidationsRequest_CertificateArn})
+var sListCertificateDomainValidationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListCertificateDomainValidationsRequest_NextToken})
+var sListCertificateDomainValidationsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_MaxItems, Type: smithy.ShapeTypeInteger, Ext: &eListCertificateDomainValidationsRequest_MaxItems})
+var sListCertificateDomainValidationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificateDomainValidationsResponse, Members: &mListCertificateDomainValidationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCertificateDomainValidationsResponse})
+var sListCertificateDomainValidationsResponse_DomainValidationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainValidationSummaryList", ID: &i_DomainValidationSummaryList, Members: &m_DomainValidationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListCertificateDomainValidationsResponse_DomainValidationSummaryList})
+var sListCertificateDomainValidationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListCertificateDomainValidationsResponse_NextToken})
+var sListCertificatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificatesRequest, Members: &mListCertificatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCertificatesRequest})
+var sListCertificatesRequest_CertificateStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateStatuses", ID: &i_CertificateStatuses, Members: &m_CertificateStatuses, Type: smithy.ShapeTypeList, Ext: &eListCertificatesRequest_CertificateStatuses})
+var sListCertificatesRequest_CertificateKeyPairOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateKeyPairOrigins", ID: &i_CertificateKeyPairOrigins, Members: &m_CertificateKeyPairOrigins, Type: smithy.ShapeTypeList, Ext: &eListCertificatesRequest_CertificateKeyPairOrigins})
+var sListCertificatesRequest_Includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Includes", ID: &iFilters, Members: &mFilters, Type: smithy.ShapeTypeStructure, Ext: &eListCertificatesRequest_Includes})
+var sListCertificatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListCertificatesRequest_NextToken})
+var sListCertificatesRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_MaxItems, Type: smithy.ShapeTypeInteger, Ext: &eListCertificatesRequest_MaxItems})
+var sListCertificatesRequest_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSortBy, Members: &mSortBy, Type: smithy.ShapeTypeEnum, Ext: &eListCertificatesRequest_SortBy})
+var sListCertificatesRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListCertificatesRequest_SortOrder})
+var sListCertificatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificatesResponse, Members: &mListCertificatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCertificatesResponse})
+var sListCertificatesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListCertificatesResponse_NextToken})
+var sListCertificatesResponse_CertificateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateSummaryList", ID: &i_CertificateSummaryList, Members: &m_CertificateSummaryList, Type: smithy.ShapeTypeList, Ext: &eListCertificatesResponse_CertificateSummaryList})
+var sListTagsForCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForCertificateRequest, Members: &mListTagsForCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForCertificateRequest})
+var sListTagsForCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTagsForCertificateRequest_CertificateArn})
+var sListTagsForCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForCertificateResponse, Members: &mListTagsForCertificateResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForCertificateResponse})
+var sListTagsForCertificateResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForCertificateResponse_Tags})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sPutAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountConfigurationRequest, Members: &mPutAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAccountConfigurationRequest})
+var sPutAccountConfigurationRequest_ExpiryEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryEvents", ID: &iExpiryEventsConfiguration, Members: &mExpiryEventsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutAccountConfigurationRequest_ExpiryEvents})
+var sPutAccountConfigurationRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ePutAccountConfigurationRequest_IdempotencyToken})
+var sRemoveTagsFromCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromCertificateRequest, Members: &mRemoveTagsFromCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsFromCertificateRequest})
+var sRemoveTagsFromCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRemoveTagsFromCertificateRequest_CertificateArn})
+var sRemoveTagsFromCertificateRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsFromCertificateRequest_Tags})
+var sRenewCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewCertificateRequest, Members: &mRenewCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eRenewCertificateRequest})
+var sRenewCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRenewCertificateRequest_CertificateArn})
+var sRequestCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCertificateRequest, Members: &mRequestCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eRequestCertificateRequest})
+var sRequestCertificateRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eRequestCertificateRequest_DomainName})
+var sRequestCertificateRequest_ValidationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationMethod", ID: &iValidationMethod, Members: &mValidationMethod, Type: smithy.ShapeTypeEnum, Ext: &eRequestCertificateRequest_ValidationMethod})
+var sRequestCertificateRequest_SubjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectAlternativeNames", ID: &i_DomainList, Members: &m_DomainList, Type: smithy.ShapeTypeList, Ext: &eRequestCertificateRequest_SubjectAlternativeNames})
+var sRequestCertificateRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eRequestCertificateRequest_IdempotencyToken})
+var sRequestCertificateRequest_DomainValidationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainValidationOptions", ID: &i_DomainValidationOptionList, Members: &m_DomainValidationOptionList, Type: smithy.ShapeTypeList, Ext: &eRequestCertificateRequest_DomainValidationOptions})
+var sRequestCertificateRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iCertificateOptions, Members: &mCertificateOptions, Type: smithy.ShapeTypeStructure, Ext: &eRequestCertificateRequest_Options})
+var sRequestCertificateRequest_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_PcaArn, Type: smithy.ShapeTypeString, Ext: &eRequestCertificateRequest_CertificateAuthorityArn})
+var sRequestCertificateRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eRequestCertificateRequest_Tags})
+var sRequestCertificateRequest_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAlgorithm", ID: &iKeyAlgorithm, Members: &mKeyAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eRequestCertificateRequest_KeyAlgorithm})
+var sRequestCertificateRequest_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedBy", ID: &iCertificateManagedBy, Members: &mCertificateManagedBy, Type: smithy.ShapeTypeEnum, Ext: &eRequestCertificateRequest_ManagedBy})
+var sRequestCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCertificateResponse, Members: &mRequestCertificateResponse, Type: smithy.ShapeTypeStructure, Ext: &eRequestCertificateResponse})
+var sRequestCertificateResponse_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRequestCertificateResponse_CertificateArn})
+var sResendValidationEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendValidationEmailRequest, Members: &mResendValidationEmailRequest, Type: smithy.ShapeTypeStructure, Ext: &eResendValidationEmailRequest})
+var sResendValidationEmailRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eResendValidationEmailRequest_CertificateArn})
+var sResendValidationEmailRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eResendValidationEmailRequest_Domain})
+var sResendValidationEmailRequest_ValidationDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationDomain", ID: &i_DomainNameString, Type: smithy.ShapeTypeString, Ext: &eResendValidationEmailRequest_ValidationDomain})
+var sRevokeAcmeAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeAcmeAccountRequest, Members: &mRevokeAcmeAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eRevokeAcmeAccountRequest})
+var sRevokeAcmeAccountRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eRevokeAcmeAccountRequest_AcmeEndpointArn})
+var sRevokeAcmeAccountRequest_AccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRevokeAcmeAccountRequest_AccountUrl})
+var sRevokeAcmeExternalAccountBindingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeAcmeExternalAccountBindingRequest, Members: &mRevokeAcmeExternalAccountBindingRequest, Type: smithy.ShapeTypeStructure, Ext: &eRevokeAcmeExternalAccountBindingRequest})
+var sRevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeExternalAccountBindingArn", ID: &i_AcmeExternalAccountBindingArn, Type: smithy.ShapeTypeString, Ext: &eRevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn})
+var sRevokeCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeCertificateRequest, Members: &mRevokeCertificateRequest, Type: smithy.ShapeTypeStructure, Ext: &eRevokeCertificateRequest})
+var sRevokeCertificateRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRevokeCertificateRequest_CertificateArn})
+var sRevokeCertificateRequest_RevocationReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationReason", ID: &iRevocationReason, Members: &mRevocationReason, Type: smithy.ShapeTypeEnum, Ext: &eRevokeCertificateRequest_RevocationReason})
+var sRevokeCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeCertificateResponse, Members: &mRevokeCertificateResponse, Type: smithy.ShapeTypeStructure, Ext: &eRevokeCertificateResponse})
+var sRevokeCertificateResponse_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRevokeCertificateResponse_CertificateArn})
+var sSearchCertificatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCertificatesRequest, Members: &mSearchCertificatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesRequest})
+var sSearchCertificatesRequest_FilterStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterStatement", ID: &iCertificateFilterStatement, Members: &mCertificateFilterStatement, Type: smithy.ShapeTypeUnion, Ext: &eSearchCertificatesRequest_FilterStatement})
+var sSearchCertificatesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_SearchMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eSearchCertificatesRequest_MaxResults})
+var sSearchCertificatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eSearchCertificatesRequest_NextToken})
+var sSearchCertificatesRequest_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSearchCertificatesSortBy, Members: &mSearchCertificatesSortBy, Type: smithy.ShapeTypeEnum, Ext: &eSearchCertificatesRequest_SortBy})
+var sSearchCertificatesRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSearchCertificatesSortOrder, Members: &mSearchCertificatesSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSearchCertificatesRequest_SortOrder})
+var sSearchCertificatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCertificatesResponse, Members: &mSearchCertificatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchCertificatesResponse})
+var sSearchCertificatesResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_CertificateSearchResultList, Members: &m_CertificateSearchResultList, Type: smithy.ShapeTypeList, Ext: &eSearchCertificatesResponse_Results})
+var sSearchCertificatesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eSearchCertificatesResponse_NextToken})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateAcmeDomainValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcmeDomainValidationRequest, Members: &mUpdateAcmeDomainValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAcmeDomainValidationRequest})
+var sUpdateAcmeDomainValidationRequest_AcmeDomainValidationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeDomainValidationArn", ID: &i_AcmeDomainValidationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateAcmeDomainValidationRequest_AcmeDomainValidationArn})
+var sUpdateAcmeDomainValidationRequest_PrevalidationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrevalidationOptions", ID: &iPrevalidationOptions, Members: &mPrevalidationOptions, Type: smithy.ShapeTypeUnion, Ext: &eUpdateAcmeDomainValidationRequest_PrevalidationOptions})
+var sUpdateAcmeEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcmeEndpointRequest, Members: &mUpdateAcmeEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAcmeEndpointRequest})
+var sUpdateAcmeEndpointRequest_AcmeEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmeEndpointArn", ID: &i_AcmeEndpointArn, Type: smithy.ShapeTypeString, Ext: &eUpdateAcmeEndpointRequest_AcmeEndpointArn})
+var sUpdateAcmeEndpointRequest_AuthorizationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationBehavior", ID: &iAcmeAuthorizationBehavior, Members: &mAcmeAuthorizationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAcmeEndpointRequest_AuthorizationBehavior})
+var sUpdateAcmeEndpointRequest_Contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contact", ID: &iAcmeContact, Members: &mAcmeContact, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAcmeEndpointRequest_Contact})
+var sUpdateAcmeEndpointRequest_CertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthority", ID: &iCertificateAuthority, Members: &mCertificateAuthority, Type: smithy.ShapeTypeUnion, Ext: &eUpdateAcmeEndpointRequest_CertificateAuthority})
+var sUpdateCertificateOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCertificateOptionsRequest, Members: &mUpdateCertificateOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCertificateOptionsRequest})
+var sUpdateCertificateOptionsRequest_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateCertificateOptionsRequest_CertificateArn})
+var sUpdateCertificateOptionsRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iCertificateOptions, Members: &mCertificateOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCertificateOptionsRequest_Options})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ServiceErrorMessage)
-
-	RenewalEligibility_ELIGIBLE = RenewalEligibility.AddMember("ELIGIBLE", smithyprelude.Unit)
-
-	RenewalEligibility_INELIGIBLE = RenewalEligibility.AddMember("INELIGIBLE", smithyprelude.Unit)
-
-	CertificateStatus_PENDING_VALIDATION = CertificateStatus.AddMember("PENDING_VALIDATION", smithyprelude.Unit)
-
-	CertificateStatus_ISSUED = CertificateStatus.AddMember("ISSUED", smithyprelude.Unit)
-
-	CertificateStatus_INACTIVE = CertificateStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	CertificateStatus_EXPIRED = CertificateStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	CertificateStatus_VALIDATION_TIMED_OUT = CertificateStatus.AddMember("VALIDATION_TIMED_OUT", smithyprelude.Unit)
-
-	CertificateStatus_REVOKED = CertificateStatus.AddMember("REVOKED", smithyprelude.Unit)
-
-	CertificateStatus_FAILED = CertificateStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	RenewalStatus_PENDING_AUTO_RENEWAL = RenewalStatus.AddMember("PENDING_AUTO_RENEWAL", smithyprelude.Unit)
-
-	RenewalStatus_PENDING_VALIDATION = RenewalStatus.AddMember("PENDING_VALIDATION", smithyprelude.Unit)
-
-	RenewalStatus_SUCCESS = RenewalStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	RenewalStatus_FAILED = RenewalStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CertificateType_IMPORTED = CertificateType.AddMember("IMPORTED", smithyprelude.Unit)
-
-	CertificateType_AMAZON_ISSUED = CertificateType.AddMember("AMAZON_ISSUED", smithyprelude.Unit)
-
-	CertificateType_PRIVATE = CertificateType.AddMember("PRIVATE", smithyprelude.Unit)
-
-	CertificateExport_ENABLED = CertificateExport.AddMember("ENABLED", smithyprelude.Unit)
-
-	CertificateExport_DISABLED = CertificateExport.AddMember("DISABLED", smithyprelude.Unit)
-
-	CertificateManagedBy_CLOUDFRONT = CertificateManagedBy.AddMember("CLOUDFRONT", smithyprelude.Unit)
-
-	ValidationMethod_EMAIL = ValidationMethod.AddMember("EMAIL", smithyprelude.Unit)
-
-	ValidationMethod_DNS = ValidationMethod.AddMember("DNS", smithyprelude.Unit)
-
-	ValidationMethod_HTTP = ValidationMethod.AddMember("HTTP", smithyprelude.Unit)
-
-	CertificateKeyPairOrigin_AWS_MANAGED = CertificateKeyPairOrigin.AddMember("AWS_MANAGED", smithyprelude.Unit)
-
-	CertificateKeyPairOrigin_ACME = CertificateKeyPairOrigin.AddMember("ACME", smithyprelude.Unit)
-
-	CertificateKeyPairOrigin_CUSTOMER_PROVIDED = CertificateKeyPairOrigin.AddMember("CUSTOMER_PROVIDED", smithyprelude.Unit)
-
-	AcmCertificateMetadata_CreatedAt = AcmCertificateMetadata.AddMember("CreatedAt", _TStamp)
-
-	AcmCertificateMetadata_Exported = AcmCertificateMetadata.AddMember("Exported", _NullableBoolean)
-
-	AcmCertificateMetadata_ImportedAt = AcmCertificateMetadata.AddMember("ImportedAt", _TStamp)
-
-	AcmCertificateMetadata_InUse = AcmCertificateMetadata.AddMember("InUse", _NullableBoolean)
-
-	AcmCertificateMetadata_IssuedAt = AcmCertificateMetadata.AddMember("IssuedAt", _TStamp)
-
-	AcmCertificateMetadata_RenewalEligibility = AcmCertificateMetadata.AddMember("RenewalEligibility", RenewalEligibility)
-
-	AcmCertificateMetadata_RevokedAt = AcmCertificateMetadata.AddMember("RevokedAt", _TStamp)
-
-	AcmCertificateMetadata_Status = AcmCertificateMetadata.AddMember("Status", CertificateStatus)
-
-	AcmCertificateMetadata_RenewalStatus = AcmCertificateMetadata.AddMember("RenewalStatus", RenewalStatus)
-
-	AcmCertificateMetadata_Type = AcmCertificateMetadata.AddMember("Type", CertificateType)
-
-	AcmCertificateMetadata_ExportOption = AcmCertificateMetadata.AddMember("ExportOption", CertificateExport)
-
-	AcmCertificateMetadata_ManagedBy = AcmCertificateMetadata.AddMember("ManagedBy", CertificateManagedBy)
-
-	AcmCertificateMetadata_ValidationMethod = AcmCertificateMetadata.AddMember("ValidationMethod", ValidationMethod)
-
-	AcmCertificateMetadata_CertificateKeyPairOrigin = AcmCertificateMetadata.AddMember("CertificateKeyPairOrigin", CertificateKeyPairOrigin)
-
-	AcmCertificateMetadata_AcmeEndpointArn = AcmCertificateMetadata.AddMember("AcmeEndpointArn", _Arn)
-
-	AcmCertificateMetadata_AcmeAccountId = AcmCertificateMetadata.AddMember("AcmeAccountId", _AcmeAccountId)
-
-	AcmCertificateMetadataFilter_Status = AcmCertificateMetadataFilter.AddMember("Status", CertificateStatus)
-
-	AcmCertificateMetadataFilter_RenewalStatus = AcmCertificateMetadataFilter.AddMember("RenewalStatus", RenewalStatus)
-
-	AcmCertificateMetadataFilter_Type = AcmCertificateMetadataFilter.AddMember("Type", CertificateType)
-
-	AcmCertificateMetadataFilter_InUse = AcmCertificateMetadataFilter.AddMember("InUse", _NullableBoolean)
-
-	AcmCertificateMetadataFilter_Exported = AcmCertificateMetadataFilter.AddMember("Exported", _NullableBoolean)
-
-	AcmCertificateMetadataFilter_ExportOption = AcmCertificateMetadataFilter.AddMember("ExportOption", CertificateExport)
-
-	AcmCertificateMetadataFilter_ManagedBy = AcmCertificateMetadataFilter.AddMember("ManagedBy", CertificateManagedBy)
-
-	AcmCertificateMetadataFilter_ValidationMethod = AcmCertificateMetadataFilter.AddMember("ValidationMethod", ValidationMethod)
-
-	AcmCertificateMetadataFilter_CertificateKeyPairOrigin = AcmCertificateMetadataFilter.AddMember("CertificateKeyPairOrigin", CertificateKeyPairOrigin)
-
-	AcmCertificateMetadataFilter_AcmeEndpointArn = AcmCertificateMetadataFilter.AddMember("AcmeEndpointArn", _Arn)
-
-	AcmCertificateMetadataFilter_AcmeAccountId = AcmCertificateMetadataFilter.AddMember("AcmeAccountId", _AcmeAccountId)
-
-	AcmeAccountStatus_VALID = AcmeAccountStatus.AddMember("VALID", smithyprelude.Unit)
-
-	AcmeAccountStatus_DEACTIVATED = AcmeAccountStatus.AddMember("DEACTIVATED", smithyprelude.Unit)
-
-	AcmeAccountStatus_REVOKED = AcmeAccountStatus.AddMember("REVOKED", smithyprelude.Unit)
-
-	_ContactList_member = _ContactList.AddMember("member", smithyprelude.String)
-
-	AcmeAccount_AccountUrl = AcmeAccount.AddMember("AccountUrl", smithyprelude.String)
-
-	AcmeAccount_PublicKeyThumbprint = AcmeAccount.AddMember("PublicKeyThumbprint", smithyprelude.String)
-
-	AcmeAccount_Status = AcmeAccount.AddMember("Status", AcmeAccountStatus)
-
-	AcmeAccount_CreatedAt = AcmeAccount.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeAccount_AcmeExternalAccountBindingArn = AcmeAccount.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	AcmeAccount_Contacts = AcmeAccount.AddMember("Contacts", _ContactList)
-
-	AcmeAccountSummary_AccountUrl = AcmeAccountSummary.AddMember("AccountUrl", smithyprelude.String)
-
-	AcmeAccountSummary_PublicKeyThumbprint = AcmeAccountSummary.AddMember("PublicKeyThumbprint", smithyprelude.String)
-
-	AcmeAccountSummary_Status = AcmeAccountSummary.AddMember("Status", AcmeAccountStatus)
-
-	AcmeAccountSummary_CreatedAt = AcmeAccountSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeAccountSummary_AcmeExternalAccountBindingArn = AcmeAccountSummary.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	AcmeAccountSummary_Contacts = AcmeAccountSummary.AddMember("Contacts", _ContactList)
-
-	_AcmeAccountList_member = _AcmeAccountList.AddMember("member", AcmeAccountSummary)
-
-	AcmeAuthorizationBehavior_PRE_APPROVED = AcmeAuthorizationBehavior.AddMember("PRE_APPROVED", smithyprelude.Unit)
-
-	AcmeContact_REQUIRED = AcmeContact.AddMember("REQUIRED", smithyprelude.Unit)
-
-	AcmeContact_NOT_REQUIRED = AcmeContact.AddMember("NOT_REQUIRED", smithyprelude.Unit)
-
-	PrevalidationType_DNS_PREVALIDATION = PrevalidationType.AddMember("DNS_PREVALIDATION", smithyprelude.Unit)
-
-	DomainScopeOption_ENABLED = DomainScopeOption.AddMember("ENABLED", smithyprelude.Unit)
-
-	DomainScopeOption_DISABLED = DomainScopeOption.AddMember("DISABLED", smithyprelude.Unit)
-
-	DomainScope_ExactDomain = DomainScope.AddMember("ExactDomain", DomainScopeOption)
-
-	DomainScope_Subdomains = DomainScope.AddMember("Subdomains", DomainScopeOption)
-
-	DomainScope_Wildcards = DomainScope.AddMember("Wildcards", DomainScopeOption)
-
-	RecordType_CNAME = RecordType.AddMember("CNAME", smithyprelude.Unit)
-
-	ResourceRecord_Name = ResourceRecord.AddMember("Name", _String)
-
-	ResourceRecord_Type = ResourceRecord.AddMember("Type", RecordType)
-
-	ResourceRecord_Value = ResourceRecord.AddMember("Value", _String)
-
-	DnsPrevalidationDetails_DomainScope = DnsPrevalidationDetails.AddMember("DomainScope", DomainScope)
-
-	DnsPrevalidationDetails_HostedZoneId = DnsPrevalidationDetails.AddMember("HostedZoneId", _HostedZoneId)
-
-	DnsPrevalidationDetails_ResourceRecord = DnsPrevalidationDetails.AddMember("ResourceRecord", ResourceRecord)
-
-	PrevalidationDetails_DnsPrevalidation = PrevalidationDetails.AddMember("DnsPrevalidation", DnsPrevalidationDetails)
-
-	AcmeDomainValidationStatus_VALIDATING = AcmeDomainValidationStatus.AddMember("VALIDATING", smithyprelude.Unit)
-
-	AcmeDomainValidationStatus_VALID = AcmeDomainValidationStatus.AddMember("VALID", smithyprelude.Unit)
-
-	AcmeDomainValidationStatus_INVALID = AcmeDomainValidationStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	AcmeDomainValidationStatus_DELETING = AcmeDomainValidationStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_ACCESS_DENIED = AcmeDomainValidationFailureReason.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_DOMAIN_MISMATCH = AcmeDomainValidationFailureReason.AddMember("DOMAIN_MISMATCH", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED = AcmeDomainValidationFailureReason.AddMember("DOMAIN_NOT_ALLOWED", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE = AcmeDomainValidationFailureReason.AddMember("ENDPOINT_NOT_ACTIVE", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND = AcmeDomainValidationFailureReason.AddMember("HOSTED_ZONE_NOT_FOUND", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_INTERNAL_FAILURE = AcmeDomainValidationFailureReason.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH = AcmeDomainValidationFailureReason.AddMember("INVALID_CHANGE_BATCH", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN = AcmeDomainValidationFailureReason.AddMember("INVALID_PUBLIC_DOMAIN", smithyprelude.Unit)
-
-	AcmeDomainValidationFailureReason_TIMED_OUT = AcmeDomainValidationFailureReason.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	FailureDetails_Reason = FailureDetails.AddMember("Reason", AcmeDomainValidationFailureReason)
-
-	FailureDetails_Message = FailureDetails.AddMember("Message", smithyprelude.String)
-
-	AcmeDomainValidation_AcmeDomainValidationArn = AcmeDomainValidation.AddMember("AcmeDomainValidationArn", _AcmeDomainValidationArn)
-
-	AcmeDomainValidation_AcmeEndpointArn = AcmeDomainValidation.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	AcmeDomainValidation_DomainName = AcmeDomainValidation.AddMember("DomainName", _DomainName)
-
-	AcmeDomainValidation_PrevalidationType = AcmeDomainValidation.AddMember("PrevalidationType", PrevalidationType)
-
-	AcmeDomainValidation_PrevalidationDetails = AcmeDomainValidation.AddMember("PrevalidationDetails", PrevalidationDetails)
-
-	AcmeDomainValidation_Status = AcmeDomainValidation.AddMember("Status", AcmeDomainValidationStatus)
-
-	AcmeDomainValidation_FailureDetails = AcmeDomainValidation.AddMember("FailureDetails", FailureDetails)
-
-	AcmeDomainValidation_CreatedAt = AcmeDomainValidation.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeDomainValidation_UpdatedAt = AcmeDomainValidation.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	AcmeDomainValidationSummary_AcmeDomainValidationArn = AcmeDomainValidationSummary.AddMember("AcmeDomainValidationArn", _AcmeDomainValidationArn)
-
-	AcmeDomainValidationSummary_AcmeEndpointArn = AcmeDomainValidationSummary.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	AcmeDomainValidationSummary_DomainName = AcmeDomainValidationSummary.AddMember("DomainName", _DomainName)
-
-	AcmeDomainValidationSummary_PrevalidationType = AcmeDomainValidationSummary.AddMember("PrevalidationType", PrevalidationType)
-
-	AcmeDomainValidationSummary_PrevalidationDetails = AcmeDomainValidationSummary.AddMember("PrevalidationDetails", PrevalidationDetails)
-
-	AcmeDomainValidationSummary_Status = AcmeDomainValidationSummary.AddMember("Status", AcmeDomainValidationStatus)
-
-	AcmeDomainValidationSummary_FailureDetails = AcmeDomainValidationSummary.AddMember("FailureDetails", FailureDetails)
-
-	AcmeDomainValidationSummary_CreatedAt = AcmeDomainValidationSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeDomainValidationSummary_UpdatedAt = AcmeDomainValidationSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_AcmeDomainValidationList_member = _AcmeDomainValidationList.AddMember("member", AcmeDomainValidationSummary)
-
-	AcmeEndpointStatus_CREATING = AcmeEndpointStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	AcmeEndpointStatus_ACTIVE = AcmeEndpointStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AcmeEndpointStatus_DELETING = AcmeEndpointStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	AcmeEndpointStatus_FAILED = AcmeEndpointStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	PublicKeyAlgorithm_RSA_2048 = PublicKeyAlgorithm.AddMember("RSA_2048", smithyprelude.Unit)
-
-	PublicKeyAlgorithm_EC_PRIME256_V1 = PublicKeyAlgorithm.AddMember("EC_PRIME256_V1", smithyprelude.Unit)
-
-	PublicKeyAlgorithm_EC_SECP384_R1 = PublicKeyAlgorithm.AddMember("EC_SECP384_R1", smithyprelude.Unit)
-
-	_PublicKeyAlgorithmList_member = _PublicKeyAlgorithmList.AddMember("member", PublicKeyAlgorithm)
-
-	PublicCertificateAuthority_AllowedKeyAlgorithms = PublicCertificateAuthority.AddMember("AllowedKeyAlgorithms", _PublicKeyAlgorithmList)
-
-	CertificateAuthority_PublicCertificateAuthority = CertificateAuthority.AddMember("PublicCertificateAuthority", PublicCertificateAuthority)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	AcmeEndpoint_AcmeEndpointArn = AcmeEndpoint.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	AcmeEndpoint_EndpointUrl = AcmeEndpoint.AddMember("EndpointUrl", smithyprelude.String)
-
-	AcmeEndpoint_Status = AcmeEndpoint.AddMember("Status", AcmeEndpointStatus)
-
-	AcmeEndpoint_FailureReason = AcmeEndpoint.AddMember("FailureReason", smithyprelude.String)
-
-	AcmeEndpoint_AuthorizationBehavior = AcmeEndpoint.AddMember("AuthorizationBehavior", AcmeAuthorizationBehavior)
-
-	AcmeEndpoint_Contact = AcmeEndpoint.AddMember("Contact", AcmeContact)
-
-	AcmeEndpoint_CertificateAuthority = AcmeEndpoint.AddMember("CertificateAuthority", CertificateAuthority)
-
-	AcmeEndpoint_CertificateTags = AcmeEndpoint.AddMember("CertificateTags", _TagList)
-
-	AcmeEndpoint_CreatedAt = AcmeEndpoint.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeEndpoint_UpdatedAt = AcmeEndpoint.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	AcmeEndpointSummary_AcmeEndpointArn = AcmeEndpointSummary.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	AcmeEndpointSummary_EndpointUrl = AcmeEndpointSummary.AddMember("EndpointUrl", smithyprelude.String)
-
-	AcmeEndpointSummary_Status = AcmeEndpointSummary.AddMember("Status", AcmeEndpointStatus)
-
-	AcmeEndpointSummary_FailureReason = AcmeEndpointSummary.AddMember("FailureReason", smithyprelude.String)
-
-	AcmeEndpointSummary_AuthorizationBehavior = AcmeEndpointSummary.AddMember("AuthorizationBehavior", AcmeAuthorizationBehavior)
-
-	AcmeEndpointSummary_Contact = AcmeEndpointSummary.AddMember("Contact", AcmeContact)
-
-	AcmeEndpointSummary_CertificateAuthority = AcmeEndpointSummary.AddMember("CertificateAuthority", CertificateAuthority)
-
-	AcmeEndpointSummary_CertificateTags = AcmeEndpointSummary.AddMember("CertificateTags", _TagList)
-
-	AcmeEndpointSummary_CreatedAt = AcmeEndpointSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeEndpointSummary_UpdatedAt = AcmeEndpointSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_AcmeEndpointList_member = _AcmeEndpointList.AddMember("member", AcmeEndpointSummary)
-
-	AcmeExternalAccountBinding_AcmeExternalAccountBindingArn = AcmeExternalAccountBinding.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	AcmeExternalAccountBinding_AcmeEndpointArn = AcmeExternalAccountBinding.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	AcmeExternalAccountBinding_RoleArn = AcmeExternalAccountBinding.AddMember("RoleArn", _RoleArn)
-
-	AcmeExternalAccountBinding_ExpiresAt = AcmeExternalAccountBinding.AddMember("ExpiresAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBinding_RevokedAt = AcmeExternalAccountBinding.AddMember("RevokedAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBinding_LastUsedAt = AcmeExternalAccountBinding.AddMember("LastUsedAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBinding_CreatedAt = AcmeExternalAccountBinding.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBinding_UpdatedAt = AcmeExternalAccountBinding.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn = AcmeExternalAccountBindingSummary.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	AcmeExternalAccountBindingSummary_AcmeEndpointArn = AcmeExternalAccountBindingSummary.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	AcmeExternalAccountBindingSummary_RoleArn = AcmeExternalAccountBindingSummary.AddMember("RoleArn", _RoleArn)
-
-	AcmeExternalAccountBindingSummary_ExpiresAt = AcmeExternalAccountBindingSummary.AddMember("ExpiresAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBindingSummary_RevokedAt = AcmeExternalAccountBindingSummary.AddMember("RevokedAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBindingSummary_LastUsedAt = AcmeExternalAccountBindingSummary.AddMember("LastUsedAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBindingSummary_CreatedAt = AcmeExternalAccountBindingSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AcmeExternalAccountBindingSummary_UpdatedAt = AcmeExternalAccountBindingSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_AcmeExternalAccountBindingList_member = _AcmeExternalAccountBindingList.AddMember("member", AcmeExternalAccountBindingSummary)
-
-	_DomainList_member = _DomainList.AddMember("member", _DomainNameString)
-
-	_ValidationEmailList_member = _ValidationEmailList.AddMember("member", _String)
-
-	DomainStatus_PENDING_VALIDATION = DomainStatus.AddMember("PENDING_VALIDATION", smithyprelude.Unit)
-
-	DomainStatus_SUCCESS = DomainStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	DomainStatus_FAILED = DomainStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	HttpRedirect_RedirectFrom = HttpRedirect.AddMember("RedirectFrom", _String)
-
-	HttpRedirect_RedirectTo = HttpRedirect.AddMember("RedirectTo", _String)
-
-	DomainValidation_DomainName = DomainValidation.AddMember("DomainName", _DomainNameString)
-
-	DomainValidation_ValidationEmails = DomainValidation.AddMember("ValidationEmails", _ValidationEmailList)
-
-	DomainValidation_ValidationDomain = DomainValidation.AddMember("ValidationDomain", _DomainNameString)
-
-	DomainValidation_ValidationStatus = DomainValidation.AddMember("ValidationStatus", DomainStatus)
-
-	DomainValidation_ResourceRecord = DomainValidation.AddMember("ResourceRecord", ResourceRecord)
-
-	DomainValidation_HttpRedirect = DomainValidation.AddMember("HttpRedirect", HttpRedirect)
-
-	DomainValidation_ValidationMethod = DomainValidation.AddMember("ValidationMethod", ValidationMethod)
-
-	_DomainValidationList_member = _DomainValidationList.AddMember("member", DomainValidation)
-
-	RevocationReason_UNSPECIFIED = RevocationReason.AddMember("UNSPECIFIED", smithyprelude.Unit)
-
-	RevocationReason_KEY_COMPROMISE = RevocationReason.AddMember("KEY_COMPROMISE", smithyprelude.Unit)
-
-	RevocationReason_CA_COMPROMISE = RevocationReason.AddMember("CA_COMPROMISE", smithyprelude.Unit)
-
-	RevocationReason_AFFILIATION_CHANGED = RevocationReason.AddMember("AFFILIATION_CHANGED", smithyprelude.Unit)
-
-	RevocationReason_SUPERCEDED = RevocationReason.AddMember("SUPERCEDED", smithyprelude.Unit)
-
-	RevocationReason_SUPERSEDED = RevocationReason.AddMember("SUPERSEDED", smithyprelude.Unit)
-
-	RevocationReason_CESSATION_OF_OPERATION = RevocationReason.AddMember("CESSATION_OF_OPERATION", smithyprelude.Unit)
-
-	RevocationReason_CERTIFICATE_HOLD = RevocationReason.AddMember("CERTIFICATE_HOLD", smithyprelude.Unit)
-
-	RevocationReason_REMOVE_FROM_CRL = RevocationReason.AddMember("REMOVE_FROM_CRL", smithyprelude.Unit)
-
-	RevocationReason_PRIVILEGE_WITHDRAWN = RevocationReason.AddMember("PRIVILEGE_WITHDRAWN", smithyprelude.Unit)
-
-	RevocationReason_A_A_COMPROMISE = RevocationReason.AddMember("A_A_COMPROMISE", smithyprelude.Unit)
-
-	KeyAlgorithm_RSA_1024 = KeyAlgorithm.AddMember("RSA_1024", smithyprelude.Unit)
-
-	KeyAlgorithm_RSA_2048 = KeyAlgorithm.AddMember("RSA_2048", smithyprelude.Unit)
-
-	KeyAlgorithm_RSA_3072 = KeyAlgorithm.AddMember("RSA_3072", smithyprelude.Unit)
-
-	KeyAlgorithm_RSA_4096 = KeyAlgorithm.AddMember("RSA_4096", smithyprelude.Unit)
-
-	KeyAlgorithm_EC_prime256v1 = KeyAlgorithm.AddMember("EC_prime256v1", smithyprelude.Unit)
-
-	KeyAlgorithm_EC_secp384r1 = KeyAlgorithm.AddMember("EC_secp384r1", smithyprelude.Unit)
-
-	KeyAlgorithm_EC_secp521r1 = KeyAlgorithm.AddMember("EC_secp521r1", smithyprelude.Unit)
-
-	_InUseList_member = _InUseList.AddMember("member", _String)
-
-	FailureReason_NO_AVAILABLE_CONTACTS = FailureReason.AddMember("NO_AVAILABLE_CONTACTS", smithyprelude.Unit)
-
-	FailureReason_ADDITIONAL_VERIFICATION_REQUIRED = FailureReason.AddMember("ADDITIONAL_VERIFICATION_REQUIRED", smithyprelude.Unit)
-
-	FailureReason_DOMAIN_NOT_ALLOWED = FailureReason.AddMember("DOMAIN_NOT_ALLOWED", smithyprelude.Unit)
-
-	FailureReason_INVALID_PUBLIC_DOMAIN = FailureReason.AddMember("INVALID_PUBLIC_DOMAIN", smithyprelude.Unit)
-
-	FailureReason_DOMAIN_VALIDATION_DENIED = FailureReason.AddMember("DOMAIN_VALIDATION_DENIED", smithyprelude.Unit)
-
-	FailureReason_CAA_ERROR = FailureReason.AddMember("CAA_ERROR", smithyprelude.Unit)
-
-	FailureReason_PCA_LIMIT_EXCEEDED = FailureReason.AddMember("PCA_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	FailureReason_PCA_INVALID_ARN = FailureReason.AddMember("PCA_INVALID_ARN", smithyprelude.Unit)
-
-	FailureReason_PCA_INVALID_STATE = FailureReason.AddMember("PCA_INVALID_STATE", smithyprelude.Unit)
-
-	FailureReason_PCA_REQUEST_FAILED = FailureReason.AddMember("PCA_REQUEST_FAILED", smithyprelude.Unit)
-
-	FailureReason_PCA_NAME_CONSTRAINTS_VALIDATION = FailureReason.AddMember("PCA_NAME_CONSTRAINTS_VALIDATION", smithyprelude.Unit)
-
-	FailureReason_PCA_RESOURCE_NOT_FOUND = FailureReason.AddMember("PCA_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	FailureReason_PCA_INVALID_ARGS = FailureReason.AddMember("PCA_INVALID_ARGS", smithyprelude.Unit)
-
-	FailureReason_PCA_INVALID_DURATION = FailureReason.AddMember("PCA_INVALID_DURATION", smithyprelude.Unit)
-
-	FailureReason_PCA_ACCESS_DENIED = FailureReason.AddMember("PCA_ACCESS_DENIED", smithyprelude.Unit)
-
-	FailureReason_SLR_NOT_FOUND = FailureReason.AddMember("SLR_NOT_FOUND", smithyprelude.Unit)
-
-	FailureReason_OTHER = FailureReason.AddMember("OTHER", smithyprelude.Unit)
-
-	RenewalSummary_RenewalStatus = RenewalSummary.AddMember("RenewalStatus", RenewalStatus)
-
-	RenewalSummary_DomainValidationOptions = RenewalSummary.AddMember("DomainValidationOptions", _DomainValidationList)
-
-	RenewalSummary_RenewalStatusReason = RenewalSummary.AddMember("RenewalStatusReason", FailureReason)
-
-	RenewalSummary_UpdatedAt = RenewalSummary.AddMember("UpdatedAt", _TStamp)
-
-	KeyUsageName_DIGITAL_SIGNATURE = KeyUsageName.AddMember("DIGITAL_SIGNATURE", smithyprelude.Unit)
-
-	KeyUsageName_NON_REPUDATION = KeyUsageName.AddMember("NON_REPUDATION", smithyprelude.Unit)
-
-	KeyUsageName_KEY_ENCIPHERMENT = KeyUsageName.AddMember("KEY_ENCIPHERMENT", smithyprelude.Unit)
-
-	KeyUsageName_DATA_ENCIPHERMENT = KeyUsageName.AddMember("DATA_ENCIPHERMENT", smithyprelude.Unit)
-
-	KeyUsageName_KEY_AGREEMENT = KeyUsageName.AddMember("KEY_AGREEMENT", smithyprelude.Unit)
-
-	KeyUsageName_CERTIFICATE_SIGNING = KeyUsageName.AddMember("CERTIFICATE_SIGNING", smithyprelude.Unit)
-
-	KeyUsageName_CRL_SIGNING = KeyUsageName.AddMember("CRL_SIGNING", smithyprelude.Unit)
-
-	KeyUsageName_ENCHIPER_ONLY = KeyUsageName.AddMember("ENCHIPER_ONLY", smithyprelude.Unit)
-
-	KeyUsageName_DECIPHER_ONLY = KeyUsageName.AddMember("DECIPHER_ONLY", smithyprelude.Unit)
-
-	KeyUsageName_ANY = KeyUsageName.AddMember("ANY", smithyprelude.Unit)
-
-	KeyUsageName_CUSTOM = KeyUsageName.AddMember("CUSTOM", smithyprelude.Unit)
-
-	KeyUsage_Name = KeyUsage.AddMember("Name", KeyUsageName)
-
-	_KeyUsageList_member = _KeyUsageList.AddMember("member", KeyUsage)
-
-	ExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION = ExtendedKeyUsageName.AddMember("TLS_WEB_SERVER_AUTHENTICATION", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION = ExtendedKeyUsageName.AddMember("TLS_WEB_CLIENT_AUTHENTICATION", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_CODE_SIGNING = ExtendedKeyUsageName.AddMember("CODE_SIGNING", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_EMAIL_PROTECTION = ExtendedKeyUsageName.AddMember("EMAIL_PROTECTION", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_TIME_STAMPING = ExtendedKeyUsageName.AddMember("TIME_STAMPING", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_OCSP_SIGNING = ExtendedKeyUsageName.AddMember("OCSP_SIGNING", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_IPSEC_END_SYSTEM = ExtendedKeyUsageName.AddMember("IPSEC_END_SYSTEM", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_IPSEC_TUNNEL = ExtendedKeyUsageName.AddMember("IPSEC_TUNNEL", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_IPSEC_USER = ExtendedKeyUsageName.AddMember("IPSEC_USER", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_ANY = ExtendedKeyUsageName.AddMember("ANY", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_NONE = ExtendedKeyUsageName.AddMember("NONE", smithyprelude.Unit)
-
-	ExtendedKeyUsageName_CUSTOM = ExtendedKeyUsageName.AddMember("CUSTOM", smithyprelude.Unit)
-
-	ExtendedKeyUsage_Name = ExtendedKeyUsage.AddMember("Name", ExtendedKeyUsageName)
-
-	ExtendedKeyUsage_OID = ExtendedKeyUsage.AddMember("OID", _String)
-
-	_ExtendedKeyUsageList_member = _ExtendedKeyUsageList.AddMember("member", ExtendedKeyUsage)
-
-	CertificateTransparencyLoggingPreference_ENABLED = CertificateTransparencyLoggingPreference.AddMember("ENABLED", smithyprelude.Unit)
-
-	CertificateTransparencyLoggingPreference_DISABLED = CertificateTransparencyLoggingPreference.AddMember("DISABLED", smithyprelude.Unit)
-
-	CertificateOptions_CertificateTransparencyLoggingPreference = CertificateOptions.AddMember("CertificateTransparencyLoggingPreference", CertificateTransparencyLoggingPreference)
-
-	CertificateOptions_Export = CertificateOptions.AddMember("Export", CertificateExport)
-
-	CertificateOptions_ValidationMethod = CertificateOptions.AddMember("ValidationMethod", ValidationMethod)
-
-	UpdateStatus_PENDING_DOMAIN_VALIDATION = UpdateStatus.AddMember("PENDING_DOMAIN_VALIDATION", smithyprelude.Unit)
-
-	UpdateStatus_SUCCESS = UpdateStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	UpdateStatus_FAILED = UpdateStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	UpdateType_DOMAIN_VALIDATION_METHOD = UpdateType.AddMember("DOMAIN_VALIDATION_METHOD", smithyprelude.Unit)
-
-	DomainValidationMethodUpdateSummary_From = DomainValidationMethodUpdateSummary.AddMember("From", ValidationMethod)
-
-	DomainValidationMethodUpdateSummary_To = DomainValidationMethodUpdateSummary.AddMember("To", ValidationMethod)
-
-	UpdateSummary_Status = UpdateSummary.AddMember("Status", UpdateStatus)
-
-	UpdateSummary_Type = UpdateSummary.AddMember("Type", UpdateType)
-
-	UpdateSummary_DomainValidationMethodUpdateSummary = UpdateSummary.AddMember("DomainValidationMethodUpdateSummary", DomainValidationMethodUpdateSummary)
-
-	UpdateSummary_RequestedAt = UpdateSummary.AddMember("RequestedAt", _TStamp)
-
-	UpdateSummary_UpdatedAt = UpdateSummary.AddMember("UpdatedAt", _TStamp)
-
-	CertificateDetail_CertificateArn = CertificateDetail.AddMember("CertificateArn", _Arn)
-
-	CertificateDetail_DomainName = CertificateDetail.AddMember("DomainName", _DomainNameString)
-
-	CertificateDetail_SubjectAlternativeNames = CertificateDetail.AddMember("SubjectAlternativeNames", _DomainList)
-
-	CertificateDetail_ManagedBy = CertificateDetail.AddMember("ManagedBy", CertificateManagedBy)
-
-	CertificateDetail_DomainValidationOptions = CertificateDetail.AddMember("DomainValidationOptions", _DomainValidationList)
-
-	CertificateDetail_Serial = CertificateDetail.AddMember("Serial", _String)
-
-	CertificateDetail_Subject = CertificateDetail.AddMember("Subject", _String)
-
-	CertificateDetail_Issuer = CertificateDetail.AddMember("Issuer", _String)
-
-	CertificateDetail_CreatedAt = CertificateDetail.AddMember("CreatedAt", _TStamp)
-
-	CertificateDetail_IssuedAt = CertificateDetail.AddMember("IssuedAt", _TStamp)
-
-	CertificateDetail_ImportedAt = CertificateDetail.AddMember("ImportedAt", _TStamp)
-
-	CertificateDetail_Status = CertificateDetail.AddMember("Status", CertificateStatus)
-
-	CertificateDetail_RevokedAt = CertificateDetail.AddMember("RevokedAt", _TStamp)
-
-	CertificateDetail_RevocationReason = CertificateDetail.AddMember("RevocationReason", RevocationReason)
-
-	CertificateDetail_NotBefore = CertificateDetail.AddMember("NotBefore", _TStamp)
-
-	CertificateDetail_NotAfter = CertificateDetail.AddMember("NotAfter", _TStamp)
-
-	CertificateDetail_KeyAlgorithm = CertificateDetail.AddMember("KeyAlgorithm", KeyAlgorithm)
-
-	CertificateDetail_SignatureAlgorithm = CertificateDetail.AddMember("SignatureAlgorithm", _String)
-
-	CertificateDetail_InUseBy = CertificateDetail.AddMember("InUseBy", _InUseList)
-
-	CertificateDetail_FailureReason = CertificateDetail.AddMember("FailureReason", FailureReason)
-
-	CertificateDetail_Type = CertificateDetail.AddMember("Type", CertificateType)
-
-	CertificateDetail_RenewalSummary = CertificateDetail.AddMember("RenewalSummary", RenewalSummary)
-
-	CertificateDetail_KeyUsages = CertificateDetail.AddMember("KeyUsages", _KeyUsageList)
-
-	CertificateDetail_ExtendedKeyUsages = CertificateDetail.AddMember("ExtendedKeyUsages", _ExtendedKeyUsageList)
-
-	CertificateDetail_CertificateAuthorityArn = CertificateDetail.AddMember("CertificateAuthorityArn", _Arn)
-
-	CertificateDetail_RenewalEligibility = CertificateDetail.AddMember("RenewalEligibility", RenewalEligibility)
-
-	CertificateDetail_Options = CertificateDetail.AddMember("Options", CertificateOptions)
-
-	CertificateDetail_UpdateSummary = CertificateDetail.AddMember("UpdateSummary", UpdateSummary)
-
-	CertificateDetail_CertificateKeyPairOrigin = CertificateDetail.AddMember("CertificateKeyPairOrigin", CertificateKeyPairOrigin)
-
-	CertificateDetail_AcmeEndpointArn = CertificateDetail.AddMember("AcmeEndpointArn", _Arn)
-
-	CertificateDetail_AcmeAccountId = CertificateDetail.AddMember("AcmeAccountId", _AcmeAccountId)
-
-	ComparisonOperator_CONTAINS = ComparisonOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	ComparisonOperator_EQUALS = ComparisonOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	CommonNameFilter_Value = CommonNameFilter.AddMember("Value", _FilterString)
-
-	CommonNameFilter_ComparisonOperator = CommonNameFilter.AddMember("ComparisonOperator", ComparisonOperator)
-
-	SubjectFilter_CommonName = SubjectFilter.AddMember("CommonName", CommonNameFilter)
-
-	DnsNameFilter_Value = DnsNameFilter.AddMember("Value", _FilterString)
-
-	DnsNameFilter_ComparisonOperator = DnsNameFilter.AddMember("ComparisonOperator", ComparisonOperator)
-
-	SubjectAlternativeNameFilter_DnsName = SubjectAlternativeNameFilter.AddMember("DnsName", DnsNameFilter)
-
-	TimestampRange_Start = TimestampRange.AddMember("Start", _TStamp)
-
-	TimestampRange_End = TimestampRange.AddMember("End", _TStamp)
-
-	X509AttributeFilter_Subject = X509AttributeFilter.AddMember("Subject", SubjectFilter)
-
-	X509AttributeFilter_SubjectAlternativeName = X509AttributeFilter.AddMember("SubjectAlternativeName", SubjectAlternativeNameFilter)
-
-	X509AttributeFilter_ExtendedKeyUsage = X509AttributeFilter.AddMember("ExtendedKeyUsage", ExtendedKeyUsageName)
-
-	X509AttributeFilter_KeyUsage = X509AttributeFilter.AddMember("KeyUsage", KeyUsageName)
-
-	X509AttributeFilter_KeyAlgorithm = X509AttributeFilter.AddMember("KeyAlgorithm", KeyAlgorithm)
-
-	X509AttributeFilter_SerialNumber = X509AttributeFilter.AddMember("SerialNumber", _SerialNumber)
-
-	X509AttributeFilter_NotAfter = X509AttributeFilter.AddMember("NotAfter", TimestampRange)
-
-	X509AttributeFilter_NotBefore = X509AttributeFilter.AddMember("NotBefore", TimestampRange)
-
-	CertificateFilter_CertificateArn = CertificateFilter.AddMember("CertificateArn", _Arn)
-
-	CertificateFilter_X509AttributeFilter = CertificateFilter.AddMember("X509AttributeFilter", X509AttributeFilter)
-
-	CertificateFilter_AcmCertificateMetadataFilter = CertificateFilter.AddMember("AcmCertificateMetadataFilter", AcmCertificateMetadataFilter)
-
-	_CertificateFilterStatementList_member = _CertificateFilterStatementList.AddMember("member", CertificateFilterStatement)
-
-	CertificateFilterStatement_And = CertificateFilterStatement.AddMember("And", _CertificateFilterStatementList)
-
-	CertificateFilterStatement_Or = CertificateFilterStatement.AddMember("Or", _CertificateFilterStatementList)
-
-	CertificateFilterStatement_Not = CertificateFilterStatement.AddMember("Not", CertificateFilterStatement)
-
-	CertificateFilterStatement_Filter = CertificateFilterStatement.AddMember("Filter", CertificateFilter)
-
-	_CertificateKeyPairOrigins_member = _CertificateKeyPairOrigins.AddMember("member", CertificateKeyPairOrigin)
-
-	CertificateMetadata_AcmCertificateMetadata = CertificateMetadata.AddMember("AcmCertificateMetadata", AcmCertificateMetadata)
-
-	_DomainComponentList_member = _DomainComponentList.AddMember("member", _String)
-
-	CustomAttribute_ObjectIdentifier = CustomAttribute.AddMember("ObjectIdentifier", _String)
-
-	CustomAttribute_Value = CustomAttribute.AddMember("Value", _String)
-
-	_CustomAttributeList_member = _CustomAttributeList.AddMember("member", CustomAttribute)
-
-	DistinguishedName_CommonName = DistinguishedName.AddMember("CommonName", _String)
-
-	DistinguishedName_DomainComponents = DistinguishedName.AddMember("DomainComponents", _DomainComponentList)
-
-	DistinguishedName_Country = DistinguishedName.AddMember("Country", _String)
-
-	DistinguishedName_CustomAttributes = DistinguishedName.AddMember("CustomAttributes", _CustomAttributeList)
-
-	DistinguishedName_DistinguishedNameQualifier = DistinguishedName.AddMember("DistinguishedNameQualifier", _String)
-
-	DistinguishedName_GenerationQualifier = DistinguishedName.AddMember("GenerationQualifier", _String)
-
-	DistinguishedName_GivenName = DistinguishedName.AddMember("GivenName", _String)
-
-	DistinguishedName_Initials = DistinguishedName.AddMember("Initials", _String)
-
-	DistinguishedName_Locality = DistinguishedName.AddMember("Locality", _String)
-
-	DistinguishedName_Organization = DistinguishedName.AddMember("Organization", _String)
-
-	DistinguishedName_OrganizationalUnit = DistinguishedName.AddMember("OrganizationalUnit", _String)
-
-	DistinguishedName_Pseudonym = DistinguishedName.AddMember("Pseudonym", _String)
-
-	DistinguishedName_SerialNumber = DistinguishedName.AddMember("SerialNumber", _String)
-
-	DistinguishedName_State = DistinguishedName.AddMember("State", _String)
-
-	DistinguishedName_Surname = DistinguishedName.AddMember("Surname", _String)
-
-	DistinguishedName_Title = DistinguishedName.AddMember("Title", _String)
-
-	OtherName_ObjectIdentifier = OtherName.AddMember("ObjectIdentifier", _String)
-
-	OtherName_Value = OtherName.AddMember("Value", _String)
-
-	GeneralName_DirectoryName = GeneralName.AddMember("DirectoryName", DistinguishedName)
-
-	GeneralName_DnsName = GeneralName.AddMember("DnsName", _String)
-
-	GeneralName_IpAddress = GeneralName.AddMember("IpAddress", _String)
-
-	GeneralName_OtherName = GeneralName.AddMember("OtherName", OtherName)
-
-	GeneralName_RegisteredId = GeneralName.AddMember("RegisteredId", _String)
-
-	GeneralName_Rfc822Name = GeneralName.AddMember("Rfc822Name", _String)
-
-	GeneralName_UniformResourceIdentifier = GeneralName.AddMember("UniformResourceIdentifier", _String)
-
-	_GeneralNameList_member = _GeneralNameList.AddMember("member", GeneralName)
-
-	_ExtendedKeyUsageNames_member = _ExtendedKeyUsageNames.AddMember("member", ExtendedKeyUsageName)
-
-	_KeyUsageNames_member = _KeyUsageNames.AddMember("member", KeyUsageName)
-
-	X509Attributes_Issuer = X509Attributes.AddMember("Issuer", DistinguishedName)
-
-	X509Attributes_Subject = X509Attributes.AddMember("Subject", DistinguishedName)
-
-	X509Attributes_SubjectAlternativeNames = X509Attributes.AddMember("SubjectAlternativeNames", _GeneralNameList)
-
-	X509Attributes_ExtendedKeyUsages = X509Attributes.AddMember("ExtendedKeyUsages", _ExtendedKeyUsageNames)
-
-	X509Attributes_KeyAlgorithm = X509Attributes.AddMember("KeyAlgorithm", KeyAlgorithm)
-
-	X509Attributes_KeyUsages = X509Attributes.AddMember("KeyUsages", _KeyUsageNames)
-
-	X509Attributes_SerialNumber = X509Attributes.AddMember("SerialNumber", _SerialNumber)
-
-	X509Attributes_NotAfter = X509Attributes.AddMember("NotAfter", _TStamp)
-
-	X509Attributes_NotBefore = X509Attributes.AddMember("NotBefore", _TStamp)
-
-	CertificateSearchResult_CertificateArn = CertificateSearchResult.AddMember("CertificateArn", _Arn)
-
-	CertificateSearchResult_X509Attributes = CertificateSearchResult.AddMember("X509Attributes", X509Attributes)
-
-	CertificateSearchResult_CertificateMetadata = CertificateSearchResult.AddMember("CertificateMetadata", CertificateMetadata)
-
-	_CertificateSearchResultList_member = _CertificateSearchResultList.AddMember("member", CertificateSearchResult)
-
-	_CertificateStatuses_member = _CertificateStatuses.AddMember("member", CertificateStatus)
-
-	CertificateSummary_CertificateArn = CertificateSummary.AddMember("CertificateArn", _Arn)
-
-	CertificateSummary_DomainName = CertificateSummary.AddMember("DomainName", _DomainNameString)
-
-	CertificateSummary_SubjectAlternativeNameSummaries = CertificateSummary.AddMember("SubjectAlternativeNameSummaries", _DomainList)
-
-	CertificateSummary_HasAdditionalSubjectAlternativeNames = CertificateSummary.AddMember("HasAdditionalSubjectAlternativeNames", _NullableBoolean)
-
-	CertificateSummary_Status = CertificateSummary.AddMember("Status", CertificateStatus)
-
-	CertificateSummary_Type = CertificateSummary.AddMember("Type", CertificateType)
-
-	CertificateSummary_KeyAlgorithm = CertificateSummary.AddMember("KeyAlgorithm", KeyAlgorithm)
-
-	CertificateSummary_KeyUsages = CertificateSummary.AddMember("KeyUsages", _KeyUsageNames)
-
-	CertificateSummary_ExtendedKeyUsages = CertificateSummary.AddMember("ExtendedKeyUsages", _ExtendedKeyUsageNames)
-
-	CertificateSummary_ExportOption = CertificateSummary.AddMember("ExportOption", CertificateExport)
-
-	CertificateSummary_InUse = CertificateSummary.AddMember("InUse", _NullableBoolean)
-
-	CertificateSummary_Exported = CertificateSummary.AddMember("Exported", _NullableBoolean)
-
-	CertificateSummary_RenewalEligibility = CertificateSummary.AddMember("RenewalEligibility", RenewalEligibility)
-
-	CertificateSummary_NotBefore = CertificateSummary.AddMember("NotBefore", _TStamp)
-
-	CertificateSummary_NotAfter = CertificateSummary.AddMember("NotAfter", _TStamp)
-
-	CertificateSummary_CreatedAt = CertificateSummary.AddMember("CreatedAt", _TStamp)
-
-	CertificateSummary_IssuedAt = CertificateSummary.AddMember("IssuedAt", _TStamp)
-
-	CertificateSummary_ImportedAt = CertificateSummary.AddMember("ImportedAt", _TStamp)
-
-	CertificateSummary_RevokedAt = CertificateSummary.AddMember("RevokedAt", _TStamp)
-
-	CertificateSummary_ManagedBy = CertificateSummary.AddMember("ManagedBy", CertificateManagedBy)
-
-	CertificateSummary_CertificateKeyPairOrigin = CertificateSummary.AddMember("CertificateKeyPairOrigin", CertificateKeyPairOrigin)
-
-	_CertificateSummaryList_member = _CertificateSummaryList.AddMember("member", CertificateSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	DnsPrevalidationOptions_DomainScope = DnsPrevalidationOptions.AddMember("DomainScope", DomainScope)
-
-	DnsPrevalidationOptions_HostedZoneId = DnsPrevalidationOptions.AddMember("HostedZoneId", _HostedZoneId)
-
-	DnsValidationChallenge_ResourceRecord = DnsValidationChallenge.AddMember("ResourceRecord", ResourceRecord)
-
-	DomainValidationOption_DomainName = DomainValidationOption.AddMember("DomainName", _DomainNameString)
-
-	DomainValidationOption_ValidationDomain = DomainValidationOption.AddMember("ValidationDomain", _DomainNameString)
-
-	_DomainValidationOptionList_member = _DomainValidationOptionList.AddMember("member", DomainValidationOption)
-
-	EmailValidationChallenge_ValidationEmails = EmailValidationChallenge.AddMember("ValidationEmails", _ValidationEmailList)
-
-	EmailValidationChallenge_ValidationDomain = EmailValidationChallenge.AddMember("ValidationDomain", _DomainNameString)
-
-	ValidationChallenge_EmailValidationChallenge = ValidationChallenge.AddMember("EmailValidationChallenge", EmailValidationChallenge)
-
-	ValidationChallenge_DnsValidationChallenge = ValidationChallenge.AddMember("DnsValidationChallenge", DnsValidationChallenge)
-
-	ValidationConfiguration_ValidationMethod = ValidationConfiguration.AddMember("ValidationMethod", ValidationMethod)
-
-	ValidationConfiguration_ValidationChallenge = ValidationConfiguration.AddMember("ValidationChallenge", ValidationChallenge)
-
-	ValidationConfiguration_ValidationStatus = ValidationConfiguration.AddMember("ValidationStatus", DomainStatus)
-
-	DomainValidationSummary_DomainName = DomainValidationSummary.AddMember("DomainName", _DomainNameString)
-
-	DomainValidationSummary_ActiveValidationConfiguration = DomainValidationSummary.AddMember("ActiveValidationConfiguration", ValidationConfiguration)
-
-	DomainValidationSummary_RequestedValidationConfiguration = DomainValidationSummary.AddMember("RequestedValidationConfiguration", ValidationConfiguration)
-
-	_DomainValidationSummaryList_member = _DomainValidationSummaryList.AddMember("member", DomainValidationSummary)
-
-	TimeType_MINUTES = TimeType.AddMember("MINUTES", smithyprelude.Unit)
-
-	TimeType_HOURS = TimeType.AddMember("HOURS", smithyprelude.Unit)
-
-	TimeType_DAYS = TimeType.AddMember("DAYS", smithyprelude.Unit)
-
-	Expiration_Value = Expiration.AddMember("Value", smithyprelude.Long)
-
-	Expiration_Type = Expiration.AddMember("Type", TimeType)
-
-	ExpiryEventsConfiguration_DaysBeforeExpiry = ExpiryEventsConfiguration.AddMember("DaysBeforeExpiry", _PositiveInteger)
-
-	_ExtendedKeyUsageFilterList_member = _ExtendedKeyUsageFilterList.AddMember("member", ExtendedKeyUsageName)
-
-	_KeyUsageFilterList_member = _KeyUsageFilterList.AddMember("member", KeyUsageName)
-
-	_KeyAlgorithmList_member = _KeyAlgorithmList.AddMember("member", KeyAlgorithm)
-
-	Filters_extendedKeyUsage = Filters.AddMember("extendedKeyUsage", _ExtendedKeyUsageFilterList)
-
-	Filters_keyUsage = Filters.AddMember("keyUsage", _KeyUsageFilterList)
-
-	Filters_keyTypes = Filters.AddMember("keyTypes", _KeyAlgorithmList)
-
-	Filters_exportOption = Filters.AddMember("exportOption", CertificateExport)
-
-	Filters_managedBy = Filters.AddMember("managedBy", CertificateManagedBy)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	InvalidArgsException_message = InvalidArgsException.AddMember("message", _String)
-
-	InvalidArnException_message = InvalidArnException.AddMember("message", _String)
-
-	InvalidDomainValidationOptionsException_message = InvalidDomainValidationOptionsException.AddMember("message", _String)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", _String)
-
-	InvalidStateException_message = InvalidStateException.AddMember("message", _String)
-
-	InvalidTagException_message = InvalidTagException.AddMember("message", _String)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _String)
-
-	PrevalidationOptions_DnsPrevalidation = PrevalidationOptions.AddMember("DnsPrevalidation", DnsPrevalidationOptions)
-
-	RequestInProgressException_message = RequestInProgressException.AddMember("message", _String)
-
-	ResourceInUseException_message = ResourceInUseException.AddMember("message", _String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	SearchCertificatesSortBy_CREATED_AT = SearchCertificatesSortBy.AddMember("CREATED_AT", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_NOT_AFTER = SearchCertificatesSortBy.AddMember("NOT_AFTER", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_STATUS = SearchCertificatesSortBy.AddMember("STATUS", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_RENEWAL_STATUS = SearchCertificatesSortBy.AddMember("RENEWAL_STATUS", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_EXPORTED = SearchCertificatesSortBy.AddMember("EXPORTED", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_IN_USE = SearchCertificatesSortBy.AddMember("IN_USE", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_NOT_BEFORE = SearchCertificatesSortBy.AddMember("NOT_BEFORE", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_KEY_ALGORITHM = SearchCertificatesSortBy.AddMember("KEY_ALGORITHM", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_TYPE = SearchCertificatesSortBy.AddMember("TYPE", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_CERTIFICATE_ARN = SearchCertificatesSortBy.AddMember("CERTIFICATE_ARN", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_COMMON_NAME = SearchCertificatesSortBy.AddMember("COMMON_NAME", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_REVOKED_AT = SearchCertificatesSortBy.AddMember("REVOKED_AT", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_RENEWAL_ELIGIBILITY = SearchCertificatesSortBy.AddMember("RENEWAL_ELIGIBILITY", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_ISSUED_AT = SearchCertificatesSortBy.AddMember("ISSUED_AT", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_MANAGED_BY = SearchCertificatesSortBy.AddMember("MANAGED_BY", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_EXPORT_OPTION = SearchCertificatesSortBy.AddMember("EXPORT_OPTION", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_VALIDATION_METHOD = SearchCertificatesSortBy.AddMember("VALIDATION_METHOD", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_IMPORTED_AT = SearchCertificatesSortBy.AddMember("IMPORTED_AT", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_ACME_ENDPOINT_ARN = SearchCertificatesSortBy.AddMember("ACME_ENDPOINT_ARN", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_ACME_ACCOUNT_ID = SearchCertificatesSortBy.AddMember("ACME_ACCOUNT_ID", smithyprelude.Unit)
-
-	SearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN = SearchCertificatesSortBy.AddMember("CERTIFICATE_KEY_PAIR_ORIGIN", smithyprelude.Unit)
-
-	SearchCertificatesSortOrder_ASCENDING = SearchCertificatesSortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SearchCertificatesSortOrder_DESCENDING = SearchCertificatesSortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	SortBy_CREATED_AT = SortBy.AddMember("CREATED_AT", smithyprelude.Unit)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TagPolicyException_message = TagPolicyException.AddMember("message", _String)
-
-	ThrottlingReason_reason = ThrottlingReason.AddMember("reason", _CoralAvailabilityThrottlingReason)
-
-	ThrottlingReason_resource = ThrottlingReason.AddMember("resource", _CoralAvailabilityThrottledResource)
-
-	_ThrottlingReasonList_member = _ThrottlingReasonList.AddMember("member", ThrottlingReason)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _AvailabilityErrorMessage)
-
-	ThrottlingException_throttlingReasons = ThrottlingException.AddMember("throttlingReasons", _ThrottlingReasonList)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _String)
-
-	ValidationException_message = ValidationException.AddMember("message", _ValidationExceptionMessage)
-
-	AddTagsToCertificateRequest_CertificateArn = AddTagsToCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	AddTagsToCertificateRequest_Tags = AddTagsToCertificateRequest.AddMember("Tags", _TagList)
-
-	CreateAcmeDomainValidationRequest_IdempotencyToken = CreateAcmeDomainValidationRequest.AddMember("IdempotencyToken", smithyprelude.String)
-
-	CreateAcmeDomainValidationRequest_AcmeEndpointArn = CreateAcmeDomainValidationRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	CreateAcmeDomainValidationRequest_DomainName = CreateAcmeDomainValidationRequest.AddMember("DomainName", _DomainName)
-
-	CreateAcmeDomainValidationRequest_PrevalidationOptions = CreateAcmeDomainValidationRequest.AddMember("PrevalidationOptions", PrevalidationOptions)
-
-	CreateAcmeDomainValidationRequest_Tags = CreateAcmeDomainValidationRequest.AddMember("Tags", _TagList)
-
-	CreateAcmeDomainValidationResponse_AcmeDomainValidationArn = CreateAcmeDomainValidationResponse.AddMember("AcmeDomainValidationArn", _AcmeDomainValidationArn)
-
-	CreateAcmeEndpointRequest_IdempotencyToken = CreateAcmeEndpointRequest.AddMember("IdempotencyToken", smithyprelude.String)
-
-	CreateAcmeEndpointRequest_AuthorizationBehavior = CreateAcmeEndpointRequest.AddMember("AuthorizationBehavior", AcmeAuthorizationBehavior)
-
-	CreateAcmeEndpointRequest_Contact = CreateAcmeEndpointRequest.AddMember("Contact", AcmeContact)
-
-	CreateAcmeEndpointRequest_CertificateAuthority = CreateAcmeEndpointRequest.AddMember("CertificateAuthority", CertificateAuthority)
-
-	CreateAcmeEndpointRequest_Tags = CreateAcmeEndpointRequest.AddMember("Tags", _TagList)
-
-	CreateAcmeEndpointRequest_CertificateTags = CreateAcmeEndpointRequest.AddMember("CertificateTags", _TagList)
-
-	CreateAcmeEndpointResponse_AcmeEndpointArn = CreateAcmeEndpointResponse.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	CreateAcmeExternalAccountBindingRequest_IdempotencyToken = CreateAcmeExternalAccountBindingRequest.AddMember("IdempotencyToken", smithyprelude.String)
-
-	CreateAcmeExternalAccountBindingRequest_AcmeEndpointArn = CreateAcmeExternalAccountBindingRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	CreateAcmeExternalAccountBindingRequest_RoleArn = CreateAcmeExternalAccountBindingRequest.AddMember("RoleArn", _RoleArn)
-
-	CreateAcmeExternalAccountBindingRequest_Expiration = CreateAcmeExternalAccountBindingRequest.AddMember("Expiration", Expiration)
-
-	CreateAcmeExternalAccountBindingRequest_Tags = CreateAcmeExternalAccountBindingRequest.AddMember("Tags", _TagList)
-
-	CreateAcmeExternalAccountBindingResponse_ExternalAccountBinding = CreateAcmeExternalAccountBindingResponse.AddMember("ExternalAccountBinding", AcmeExternalAccountBinding)
-
-	DeleteAcmeDomainValidationRequest_AcmeDomainValidationArn = DeleteAcmeDomainValidationRequest.AddMember("AcmeDomainValidationArn", _AcmeDomainValidationArn)
-
-	DeleteAcmeEndpointRequest_AcmeEndpointArn = DeleteAcmeEndpointRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	DeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = DeleteAcmeExternalAccountBindingRequest.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	DeleteCertificateRequest_CertificateArn = DeleteCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	DescribeAcmeAccountRequest_AcmeEndpointArn = DescribeAcmeAccountRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	DescribeAcmeAccountRequest_AccountUrl = DescribeAcmeAccountRequest.AddMember("AccountUrl", smithyprelude.String)
-
-	DescribeAcmeAccountResponse_AcmeAccount = DescribeAcmeAccountResponse.AddMember("AcmeAccount", AcmeAccount)
-
-	DescribeAcmeDomainValidationRequest_AcmeDomainValidationArn = DescribeAcmeDomainValidationRequest.AddMember("AcmeDomainValidationArn", _AcmeDomainValidationArn)
-
-	DescribeAcmeDomainValidationResponse_AcmeDomainValidation = DescribeAcmeDomainValidationResponse.AddMember("AcmeDomainValidation", AcmeDomainValidation)
-
-	DescribeAcmeEndpointRequest_AcmeEndpointArn = DescribeAcmeEndpointRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	DescribeAcmeEndpointResponse_AcmeEndpoint = DescribeAcmeEndpointResponse.AddMember("AcmeEndpoint", AcmeEndpoint)
-
-	DescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = DescribeAcmeExternalAccountBindingRequest.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	DescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding = DescribeAcmeExternalAccountBindingResponse.AddMember("ExternalAccountBinding", AcmeExternalAccountBinding)
-
-	DescribeCertificateRequest_CertificateArn = DescribeCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	DescribeCertificateResponse_Certificate = DescribeCertificateResponse.AddMember("Certificate", CertificateDetail)
-
-	ExportCertificateRequest_CertificateArn = ExportCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	ExportCertificateRequest_Passphrase = ExportCertificateRequest.AddMember("Passphrase", _PassphraseBlob)
-
-	ExportCertificateResponse_Certificate = ExportCertificateResponse.AddMember("Certificate", _CertificateBody)
-
-	ExportCertificateResponse_CertificateChain = ExportCertificateResponse.AddMember("CertificateChain", _CertificateChain)
-
-	ExportCertificateResponse_PrivateKey = ExportCertificateResponse.AddMember("PrivateKey", _PrivateKey)
-
-	GetAccountConfigurationResponse_ExpiryEvents = GetAccountConfigurationResponse.AddMember("ExpiryEvents", ExpiryEventsConfiguration)
-
-	GetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn = GetAcmeExternalAccountBindingCredentialsRequest.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	GetAcmeExternalAccountBindingCredentialsResponse_KeyId = GetAcmeExternalAccountBindingCredentialsResponse.AddMember("KeyId", smithyprelude.String)
-
-	GetAcmeExternalAccountBindingCredentialsResponse_MacKey = GetAcmeExternalAccountBindingCredentialsResponse.AddMember("MacKey", _MacKey)
-
-	GetCertificateRequest_CertificateArn = GetCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	GetCertificateResponse_Certificate = GetCertificateResponse.AddMember("Certificate", _CertificateBody)
-
-	GetCertificateResponse_CertificateChain = GetCertificateResponse.AddMember("CertificateChain", _CertificateChain)
-
-	ImportCertificateRequest_CertificateArn = ImportCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	ImportCertificateRequest_Certificate = ImportCertificateRequest.AddMember("Certificate", _CertificateBodyBlob)
-
-	ImportCertificateRequest_PrivateKey = ImportCertificateRequest.AddMember("PrivateKey", _PrivateKeyBlob)
-
-	ImportCertificateRequest_CertificateChain = ImportCertificateRequest.AddMember("CertificateChain", _CertificateChainBlob)
-
-	ImportCertificateRequest_Tags = ImportCertificateRequest.AddMember("Tags", _TagList)
-
-	ImportCertificateResponse_CertificateArn = ImportCertificateResponse.AddMember("CertificateArn", _Arn)
-
-	ListAcmeAccountsRequest_NextToken = ListAcmeAccountsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListAcmeAccountsRequest_MaxResults = ListAcmeAccountsRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListAcmeAccountsRequest_AcmeEndpointArn = ListAcmeAccountsRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	ListAcmeAccountsResponse_AcmeAccounts = ListAcmeAccountsResponse.AddMember("AcmeAccounts", _AcmeAccountList)
-
-	ListAcmeAccountsResponse_NextToken = ListAcmeAccountsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListAcmeDomainValidationsRequest_NextToken = ListAcmeDomainValidationsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListAcmeDomainValidationsRequest_MaxResults = ListAcmeDomainValidationsRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListAcmeDomainValidationsRequest_AcmeEndpointArn = ListAcmeDomainValidationsRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	ListAcmeDomainValidationsResponse_AcmeDomainValidations = ListAcmeDomainValidationsResponse.AddMember("AcmeDomainValidations", _AcmeDomainValidationList)
-
-	ListAcmeDomainValidationsResponse_NextToken = ListAcmeDomainValidationsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListAcmeEndpointsRequest_NextToken = ListAcmeEndpointsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListAcmeEndpointsRequest_MaxResults = ListAcmeEndpointsRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListAcmeEndpointsResponse_AcmeEndpoints = ListAcmeEndpointsResponse.AddMember("AcmeEndpoints", _AcmeEndpointList)
-
-	ListAcmeEndpointsResponse_NextToken = ListAcmeEndpointsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListAcmeExternalAccountBindingsRequest_NextToken = ListAcmeExternalAccountBindingsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListAcmeExternalAccountBindingsRequest_MaxResults = ListAcmeExternalAccountBindingsRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListAcmeExternalAccountBindingsRequest_AcmeEndpointArn = ListAcmeExternalAccountBindingsRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings = ListAcmeExternalAccountBindingsResponse.AddMember("ExternalAccountBindings", _AcmeExternalAccountBindingList)
-
-	ListAcmeExternalAccountBindingsResponse_NextToken = ListAcmeExternalAccountBindingsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListCertificateDomainValidationsRequest_CertificateArn = ListCertificateDomainValidationsRequest.AddMember("CertificateArn", _CertificateArn)
-
-	ListCertificateDomainValidationsRequest_NextToken = ListCertificateDomainValidationsRequest.AddMember("NextToken", _NextToken)
-
-	ListCertificateDomainValidationsRequest_MaxItems = ListCertificateDomainValidationsRequest.AddMember("MaxItems", _MaxItems)
-
-	ListCertificateDomainValidationsResponse_DomainValidationSummaryList = ListCertificateDomainValidationsResponse.AddMember("DomainValidationSummaryList", _DomainValidationSummaryList)
-
-	ListCertificateDomainValidationsResponse_NextToken = ListCertificateDomainValidationsResponse.AddMember("NextToken", _NextToken)
-
-	ListCertificatesRequest_CertificateStatuses = ListCertificatesRequest.AddMember("CertificateStatuses", _CertificateStatuses)
-
-	ListCertificatesRequest_CertificateKeyPairOrigins = ListCertificatesRequest.AddMember("CertificateKeyPairOrigins", _CertificateKeyPairOrigins)
-
-	ListCertificatesRequest_Includes = ListCertificatesRequest.AddMember("Includes", Filters)
-
-	ListCertificatesRequest_NextToken = ListCertificatesRequest.AddMember("NextToken", _NextToken)
-
-	ListCertificatesRequest_MaxItems = ListCertificatesRequest.AddMember("MaxItems", _MaxItems)
-
-	ListCertificatesRequest_SortBy = ListCertificatesRequest.AddMember("SortBy", SortBy)
-
-	ListCertificatesRequest_SortOrder = ListCertificatesRequest.AddMember("SortOrder", SortOrder)
-
-	ListCertificatesResponse_NextToken = ListCertificatesResponse.AddMember("NextToken", _NextToken)
-
-	ListCertificatesResponse_CertificateSummaryList = ListCertificatesResponse.AddMember("CertificateSummaryList", _CertificateSummaryList)
-
-	ListTagsForCertificateRequest_CertificateArn = ListTagsForCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	ListTagsForCertificateResponse_Tags = ListTagsForCertificateResponse.AddMember("Tags", _TagList)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutAccountConfigurationRequest_ExpiryEvents = PutAccountConfigurationRequest.AddMember("ExpiryEvents", ExpiryEventsConfiguration)
-
-	PutAccountConfigurationRequest_IdempotencyToken = PutAccountConfigurationRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	RemoveTagsFromCertificateRequest_CertificateArn = RemoveTagsFromCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	RemoveTagsFromCertificateRequest_Tags = RemoveTagsFromCertificateRequest.AddMember("Tags", _TagList)
-
-	RenewCertificateRequest_CertificateArn = RenewCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	RequestCertificateRequest_DomainName = RequestCertificateRequest.AddMember("DomainName", _DomainNameString)
-
-	RequestCertificateRequest_ValidationMethod = RequestCertificateRequest.AddMember("ValidationMethod", ValidationMethod)
-
-	RequestCertificateRequest_SubjectAlternativeNames = RequestCertificateRequest.AddMember("SubjectAlternativeNames", _DomainList)
-
-	RequestCertificateRequest_IdempotencyToken = RequestCertificateRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	RequestCertificateRequest_DomainValidationOptions = RequestCertificateRequest.AddMember("DomainValidationOptions", _DomainValidationOptionList)
-
-	RequestCertificateRequest_Options = RequestCertificateRequest.AddMember("Options", CertificateOptions)
-
-	RequestCertificateRequest_CertificateAuthorityArn = RequestCertificateRequest.AddMember("CertificateAuthorityArn", _PcaArn)
-
-	RequestCertificateRequest_Tags = RequestCertificateRequest.AddMember("Tags", _TagList)
-
-	RequestCertificateRequest_KeyAlgorithm = RequestCertificateRequest.AddMember("KeyAlgorithm", KeyAlgorithm)
-
-	RequestCertificateRequest_ManagedBy = RequestCertificateRequest.AddMember("ManagedBy", CertificateManagedBy)
-
-	RequestCertificateResponse_CertificateArn = RequestCertificateResponse.AddMember("CertificateArn", _Arn)
-
-	ResendValidationEmailRequest_CertificateArn = ResendValidationEmailRequest.AddMember("CertificateArn", _Arn)
-
-	ResendValidationEmailRequest_Domain = ResendValidationEmailRequest.AddMember("Domain", _DomainNameString)
-
-	ResendValidationEmailRequest_ValidationDomain = ResendValidationEmailRequest.AddMember("ValidationDomain", _DomainNameString)
-
-	RevokeAcmeAccountRequest_AcmeEndpointArn = RevokeAcmeAccountRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	RevokeAcmeAccountRequest_AccountUrl = RevokeAcmeAccountRequest.AddMember("AccountUrl", smithyprelude.String)
-
-	RevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = RevokeAcmeExternalAccountBindingRequest.AddMember("AcmeExternalAccountBindingArn", _AcmeExternalAccountBindingArn)
-
-	RevokeCertificateRequest_CertificateArn = RevokeCertificateRequest.AddMember("CertificateArn", _Arn)
-
-	RevokeCertificateRequest_RevocationReason = RevokeCertificateRequest.AddMember("RevocationReason", RevocationReason)
-
-	RevokeCertificateResponse_CertificateArn = RevokeCertificateResponse.AddMember("CertificateArn", _Arn)
-
-	SearchCertificatesRequest_FilterStatement = SearchCertificatesRequest.AddMember("FilterStatement", CertificateFilterStatement)
-
-	SearchCertificatesRequest_MaxResults = SearchCertificatesRequest.AddMember("MaxResults", _SearchMaxResults)
-
-	SearchCertificatesRequest_NextToken = SearchCertificatesRequest.AddMember("NextToken", _NextToken)
-
-	SearchCertificatesRequest_SortBy = SearchCertificatesRequest.AddMember("SortBy", SearchCertificatesSortBy)
-
-	SearchCertificatesRequest_SortOrder = SearchCertificatesRequest.AddMember("SortOrder", SearchCertificatesSortOrder)
-
-	SearchCertificatesResponse_Results = SearchCertificatesResponse.AddMember("Results", _CertificateSearchResultList)
-
-	SearchCertificatesResponse_NextToken = SearchCertificatesResponse.AddMember("NextToken", _NextToken)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateAcmeDomainValidationRequest_AcmeDomainValidationArn = UpdateAcmeDomainValidationRequest.AddMember("AcmeDomainValidationArn", _AcmeDomainValidationArn)
-
-	UpdateAcmeDomainValidationRequest_PrevalidationOptions = UpdateAcmeDomainValidationRequest.AddMember("PrevalidationOptions", PrevalidationOptions)
-
-	UpdateAcmeEndpointRequest_AcmeEndpointArn = UpdateAcmeEndpointRequest.AddMember("AcmeEndpointArn", _AcmeEndpointArn)
-
-	UpdateAcmeEndpointRequest_AuthorizationBehavior = UpdateAcmeEndpointRequest.AddMember("AuthorizationBehavior", AcmeAuthorizationBehavior)
-
-	UpdateAcmeEndpointRequest_Contact = UpdateAcmeEndpointRequest.AddMember("Contact", AcmeContact)
-
-	UpdateAcmeEndpointRequest_CertificateAuthority = UpdateAcmeEndpointRequest.AddMember("CertificateAuthority", CertificateAuthority)
-
-	UpdateCertificateOptionsRequest_CertificateArn = UpdateCertificateOptionsRequest.AddMember("CertificateArn", _Arn)
-
-	UpdateCertificateOptionsRequest_Options = UpdateCertificateOptionsRequest.AddMember("Options", CertificateOptions)
-
+	sCertificateFilterStatement_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iCertificateFilterStatement, Members: &mCertificateFilterStatement, Type: smithy.ShapeTypeUnion, Ext: &eCertificateFilterStatement_Not})
+	s_CertificateFilterStatementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateFilterStatement, Members: &mCertificateFilterStatement, Type: smithy.ShapeTypeUnion, Ext: &e_CertificateFilterStatementList_member})
 }
+
+var AddTagsToCertificate = &sAddTagsToCertificate
+
+var CreateAcmeDomainValidation = &sCreateAcmeDomainValidation
+
+var CreateAcmeEndpoint = &sCreateAcmeEndpoint
+
+var CreateAcmeExternalAccountBinding = &sCreateAcmeExternalAccountBinding
+
+var DeleteAcmeDomainValidation = &sDeleteAcmeDomainValidation
+
+var DeleteAcmeEndpoint = &sDeleteAcmeEndpoint
+
+var DeleteAcmeExternalAccountBinding = &sDeleteAcmeExternalAccountBinding
+
+var DeleteCertificate = &sDeleteCertificate
+
+var DescribeAcmeAccount = &sDescribeAcmeAccount
+
+var DescribeAcmeDomainValidation = &sDescribeAcmeDomainValidation
+
+var DescribeAcmeEndpoint = &sDescribeAcmeEndpoint
+
+var DescribeAcmeExternalAccountBinding = &sDescribeAcmeExternalAccountBinding
+
+var DescribeCertificate = &sDescribeCertificate
+
+var ExportCertificate = &sExportCertificate
+
+var GetAccountConfiguration = &sGetAccountConfiguration
+
+var GetAcmeExternalAccountBindingCredentials = &sGetAcmeExternalAccountBindingCredentials
+
+var GetCertificate = &sGetCertificate
+
+var ImportCertificate = &sImportCertificate
+
+var ListAcmeAccounts = &sListAcmeAccounts
+
+var ListAcmeDomainValidations = &sListAcmeDomainValidations
+
+var ListAcmeEndpoints = &sListAcmeEndpoints
+
+var ListAcmeExternalAccountBindings = &sListAcmeExternalAccountBindings
+
+var ListCertificateDomainValidations = &sListCertificateDomainValidations
+
+var ListCertificates = &sListCertificates
+
+var ListTagsForCertificate = &sListTagsForCertificate
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutAccountConfiguration = &sPutAccountConfiguration
+
+var RemoveTagsFromCertificate = &sRemoveTagsFromCertificate
+
+var RenewCertificate = &sRenewCertificate
+
+var RequestCertificate = &sRequestCertificate
+
+var ResendValidationEmail = &sResendValidationEmail
+
+var RevokeAcmeAccount = &sRevokeAcmeAccount
+
+var RevokeAcmeExternalAccountBinding = &sRevokeAcmeExternalAccountBinding
+
+var RevokeCertificate = &sRevokeCertificate
+
+var SearchCertificates = &sSearchCertificates
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAcmeDomainValidation = &sUpdateAcmeDomainValidation
+
+var UpdateAcmeEndpoint = &sUpdateAcmeEndpoint
+
+var UpdateCertificateOptions = &sUpdateCertificateOptions
+
+var _CertificateManager = &s_CertificateManager
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AcmCertificateMetadata = &sAcmCertificateMetadata
+var AcmCertificateMetadata_CreatedAt = &sAcmCertificateMetadata_CreatedAt
+var AcmCertificateMetadata_Exported = &sAcmCertificateMetadata_Exported
+var AcmCertificateMetadata_ImportedAt = &sAcmCertificateMetadata_ImportedAt
+var AcmCertificateMetadata_InUse = &sAcmCertificateMetadata_InUse
+var AcmCertificateMetadata_IssuedAt = &sAcmCertificateMetadata_IssuedAt
+var AcmCertificateMetadata_RenewalEligibility = &sAcmCertificateMetadata_RenewalEligibility
+var AcmCertificateMetadata_RevokedAt = &sAcmCertificateMetadata_RevokedAt
+var AcmCertificateMetadata_Status = &sAcmCertificateMetadata_Status
+var AcmCertificateMetadata_RenewalStatus = &sAcmCertificateMetadata_RenewalStatus
+var AcmCertificateMetadata_Type = &sAcmCertificateMetadata_Type
+var AcmCertificateMetadata_ExportOption = &sAcmCertificateMetadata_ExportOption
+var AcmCertificateMetadata_ManagedBy = &sAcmCertificateMetadata_ManagedBy
+var AcmCertificateMetadata_ValidationMethod = &sAcmCertificateMetadata_ValidationMethod
+var AcmCertificateMetadata_CertificateKeyPairOrigin = &sAcmCertificateMetadata_CertificateKeyPairOrigin
+var AcmCertificateMetadata_AcmeEndpointArn = &sAcmCertificateMetadata_AcmeEndpointArn
+var AcmCertificateMetadata_AcmeAccountId = &sAcmCertificateMetadata_AcmeAccountId
+
+var AcmCertificateMetadataFilter = &sAcmCertificateMetadataFilter
+var AcmCertificateMetadataFilter_Status = &sAcmCertificateMetadataFilter_Status
+var AcmCertificateMetadataFilter_RenewalStatus = &sAcmCertificateMetadataFilter_RenewalStatus
+var AcmCertificateMetadataFilter_Type = &sAcmCertificateMetadataFilter_Type
+var AcmCertificateMetadataFilter_InUse = &sAcmCertificateMetadataFilter_InUse
+var AcmCertificateMetadataFilter_Exported = &sAcmCertificateMetadataFilter_Exported
+var AcmCertificateMetadataFilter_ExportOption = &sAcmCertificateMetadataFilter_ExportOption
+var AcmCertificateMetadataFilter_ManagedBy = &sAcmCertificateMetadataFilter_ManagedBy
+var AcmCertificateMetadataFilter_ValidationMethod = &sAcmCertificateMetadataFilter_ValidationMethod
+var AcmCertificateMetadataFilter_CertificateKeyPairOrigin = &sAcmCertificateMetadataFilter_CertificateKeyPairOrigin
+var AcmCertificateMetadataFilter_AcmeEndpointArn = &sAcmCertificateMetadataFilter_AcmeEndpointArn
+var AcmCertificateMetadataFilter_AcmeAccountId = &sAcmCertificateMetadataFilter_AcmeAccountId
+
+var AcmeAccount = &sAcmeAccount
+var AcmeAccount_AccountUrl = &sAcmeAccount_AccountUrl
+var AcmeAccount_PublicKeyThumbprint = &sAcmeAccount_PublicKeyThumbprint
+var AcmeAccount_Status = &sAcmeAccount_Status
+var AcmeAccount_CreatedAt = &sAcmeAccount_CreatedAt
+var AcmeAccount_AcmeExternalAccountBindingArn = &sAcmeAccount_AcmeExternalAccountBindingArn
+var AcmeAccount_Contacts = &sAcmeAccount_Contacts
+
+var _AcmeAccountId = &s_AcmeAccountId
+
+var _AcmeAccountList = &s_AcmeAccountList
+var _AcmeAccountList_member = &s_AcmeAccountList_member
+
+var AcmeAccountStatus = &sAcmeAccountStatus
+var AcmeAccountStatus_VALID = &sAcmeAccountStatus_VALID
+var AcmeAccountStatus_DEACTIVATED = &sAcmeAccountStatus_DEACTIVATED
+var AcmeAccountStatus_REVOKED = &sAcmeAccountStatus_REVOKED
+
+var AcmeAccountSummary = &sAcmeAccountSummary
+var AcmeAccountSummary_AccountUrl = &sAcmeAccountSummary_AccountUrl
+var AcmeAccountSummary_PublicKeyThumbprint = &sAcmeAccountSummary_PublicKeyThumbprint
+var AcmeAccountSummary_Status = &sAcmeAccountSummary_Status
+var AcmeAccountSummary_CreatedAt = &sAcmeAccountSummary_CreatedAt
+var AcmeAccountSummary_AcmeExternalAccountBindingArn = &sAcmeAccountSummary_AcmeExternalAccountBindingArn
+var AcmeAccountSummary_Contacts = &sAcmeAccountSummary_Contacts
+
+var AcmeAuthorizationBehavior = &sAcmeAuthorizationBehavior
+var AcmeAuthorizationBehavior_PRE_APPROVED = &sAcmeAuthorizationBehavior_PRE_APPROVED
+
+var AcmeContact = &sAcmeContact
+var AcmeContact_REQUIRED = &sAcmeContact_REQUIRED
+var AcmeContact_NOT_REQUIRED = &sAcmeContact_NOT_REQUIRED
+
+var AcmeDomainValidation = &sAcmeDomainValidation
+var AcmeDomainValidation_AcmeDomainValidationArn = &sAcmeDomainValidation_AcmeDomainValidationArn
+var AcmeDomainValidation_AcmeEndpointArn = &sAcmeDomainValidation_AcmeEndpointArn
+var AcmeDomainValidation_DomainName = &sAcmeDomainValidation_DomainName
+var AcmeDomainValidation_PrevalidationType = &sAcmeDomainValidation_PrevalidationType
+var AcmeDomainValidation_PrevalidationDetails = &sAcmeDomainValidation_PrevalidationDetails
+var AcmeDomainValidation_Status = &sAcmeDomainValidation_Status
+var AcmeDomainValidation_FailureDetails = &sAcmeDomainValidation_FailureDetails
+var AcmeDomainValidation_CreatedAt = &sAcmeDomainValidation_CreatedAt
+var AcmeDomainValidation_UpdatedAt = &sAcmeDomainValidation_UpdatedAt
+
+var _AcmeDomainValidationArn = &s_AcmeDomainValidationArn
+
+var AcmeDomainValidationFailureReason = &sAcmeDomainValidationFailureReason
+var AcmeDomainValidationFailureReason_ACCESS_DENIED = &sAcmeDomainValidationFailureReason_ACCESS_DENIED
+var AcmeDomainValidationFailureReason_DOMAIN_MISMATCH = &sAcmeDomainValidationFailureReason_DOMAIN_MISMATCH
+var AcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED = &sAcmeDomainValidationFailureReason_DOMAIN_NOT_ALLOWED
+var AcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE = &sAcmeDomainValidationFailureReason_ENDPOINT_NOT_ACTIVE
+var AcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND = &sAcmeDomainValidationFailureReason_HOSTED_ZONE_NOT_FOUND
+var AcmeDomainValidationFailureReason_INTERNAL_FAILURE = &sAcmeDomainValidationFailureReason_INTERNAL_FAILURE
+var AcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH = &sAcmeDomainValidationFailureReason_INVALID_CHANGE_BATCH
+var AcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN = &sAcmeDomainValidationFailureReason_INVALID_PUBLIC_DOMAIN
+var AcmeDomainValidationFailureReason_TIMED_OUT = &sAcmeDomainValidationFailureReason_TIMED_OUT
+
+var _AcmeDomainValidationList = &s_AcmeDomainValidationList
+var _AcmeDomainValidationList_member = &s_AcmeDomainValidationList_member
+
+var AcmeDomainValidationStatus = &sAcmeDomainValidationStatus
+var AcmeDomainValidationStatus_VALIDATING = &sAcmeDomainValidationStatus_VALIDATING
+var AcmeDomainValidationStatus_VALID = &sAcmeDomainValidationStatus_VALID
+var AcmeDomainValidationStatus_INVALID = &sAcmeDomainValidationStatus_INVALID
+var AcmeDomainValidationStatus_DELETING = &sAcmeDomainValidationStatus_DELETING
+
+var AcmeDomainValidationSummary = &sAcmeDomainValidationSummary
+var AcmeDomainValidationSummary_AcmeDomainValidationArn = &sAcmeDomainValidationSummary_AcmeDomainValidationArn
+var AcmeDomainValidationSummary_AcmeEndpointArn = &sAcmeDomainValidationSummary_AcmeEndpointArn
+var AcmeDomainValidationSummary_DomainName = &sAcmeDomainValidationSummary_DomainName
+var AcmeDomainValidationSummary_PrevalidationType = &sAcmeDomainValidationSummary_PrevalidationType
+var AcmeDomainValidationSummary_PrevalidationDetails = &sAcmeDomainValidationSummary_PrevalidationDetails
+var AcmeDomainValidationSummary_Status = &sAcmeDomainValidationSummary_Status
+var AcmeDomainValidationSummary_FailureDetails = &sAcmeDomainValidationSummary_FailureDetails
+var AcmeDomainValidationSummary_CreatedAt = &sAcmeDomainValidationSummary_CreatedAt
+var AcmeDomainValidationSummary_UpdatedAt = &sAcmeDomainValidationSummary_UpdatedAt
+
+var AcmeEndpoint = &sAcmeEndpoint
+var AcmeEndpoint_AcmeEndpointArn = &sAcmeEndpoint_AcmeEndpointArn
+var AcmeEndpoint_EndpointUrl = &sAcmeEndpoint_EndpointUrl
+var AcmeEndpoint_Status = &sAcmeEndpoint_Status
+var AcmeEndpoint_FailureReason = &sAcmeEndpoint_FailureReason
+var AcmeEndpoint_AuthorizationBehavior = &sAcmeEndpoint_AuthorizationBehavior
+var AcmeEndpoint_Contact = &sAcmeEndpoint_Contact
+var AcmeEndpoint_CertificateAuthority = &sAcmeEndpoint_CertificateAuthority
+var AcmeEndpoint_CertificateTags = &sAcmeEndpoint_CertificateTags
+var AcmeEndpoint_CreatedAt = &sAcmeEndpoint_CreatedAt
+var AcmeEndpoint_UpdatedAt = &sAcmeEndpoint_UpdatedAt
+
+var _AcmeEndpointArn = &s_AcmeEndpointArn
+
+var _AcmeEndpointList = &s_AcmeEndpointList
+var _AcmeEndpointList_member = &s_AcmeEndpointList_member
+
+var AcmeEndpointStatus = &sAcmeEndpointStatus
+var AcmeEndpointStatus_CREATING = &sAcmeEndpointStatus_CREATING
+var AcmeEndpointStatus_ACTIVE = &sAcmeEndpointStatus_ACTIVE
+var AcmeEndpointStatus_DELETING = &sAcmeEndpointStatus_DELETING
+var AcmeEndpointStatus_FAILED = &sAcmeEndpointStatus_FAILED
+
+var AcmeEndpointSummary = &sAcmeEndpointSummary
+var AcmeEndpointSummary_AcmeEndpointArn = &sAcmeEndpointSummary_AcmeEndpointArn
+var AcmeEndpointSummary_EndpointUrl = &sAcmeEndpointSummary_EndpointUrl
+var AcmeEndpointSummary_Status = &sAcmeEndpointSummary_Status
+var AcmeEndpointSummary_FailureReason = &sAcmeEndpointSummary_FailureReason
+var AcmeEndpointSummary_AuthorizationBehavior = &sAcmeEndpointSummary_AuthorizationBehavior
+var AcmeEndpointSummary_Contact = &sAcmeEndpointSummary_Contact
+var AcmeEndpointSummary_CertificateAuthority = &sAcmeEndpointSummary_CertificateAuthority
+var AcmeEndpointSummary_CertificateTags = &sAcmeEndpointSummary_CertificateTags
+var AcmeEndpointSummary_CreatedAt = &sAcmeEndpointSummary_CreatedAt
+var AcmeEndpointSummary_UpdatedAt = &sAcmeEndpointSummary_UpdatedAt
+
+var AcmeExternalAccountBinding = &sAcmeExternalAccountBinding
+var AcmeExternalAccountBinding_AcmeExternalAccountBindingArn = &sAcmeExternalAccountBinding_AcmeExternalAccountBindingArn
+var AcmeExternalAccountBinding_AcmeEndpointArn = &sAcmeExternalAccountBinding_AcmeEndpointArn
+var AcmeExternalAccountBinding_RoleArn = &sAcmeExternalAccountBinding_RoleArn
+var AcmeExternalAccountBinding_ExpiresAt = &sAcmeExternalAccountBinding_ExpiresAt
+var AcmeExternalAccountBinding_RevokedAt = &sAcmeExternalAccountBinding_RevokedAt
+var AcmeExternalAccountBinding_LastUsedAt = &sAcmeExternalAccountBinding_LastUsedAt
+var AcmeExternalAccountBinding_CreatedAt = &sAcmeExternalAccountBinding_CreatedAt
+var AcmeExternalAccountBinding_UpdatedAt = &sAcmeExternalAccountBinding_UpdatedAt
+
+var _AcmeExternalAccountBindingArn = &s_AcmeExternalAccountBindingArn
+
+var _AcmeExternalAccountBindingList = &s_AcmeExternalAccountBindingList
+var _AcmeExternalAccountBindingList_member = &s_AcmeExternalAccountBindingList_member
+
+var AcmeExternalAccountBindingSummary = &sAcmeExternalAccountBindingSummary
+var AcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn = &sAcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn
+var AcmeExternalAccountBindingSummary_AcmeEndpointArn = &sAcmeExternalAccountBindingSummary_AcmeEndpointArn
+var AcmeExternalAccountBindingSummary_RoleArn = &sAcmeExternalAccountBindingSummary_RoleArn
+var AcmeExternalAccountBindingSummary_ExpiresAt = &sAcmeExternalAccountBindingSummary_ExpiresAt
+var AcmeExternalAccountBindingSummary_RevokedAt = &sAcmeExternalAccountBindingSummary_RevokedAt
+var AcmeExternalAccountBindingSummary_LastUsedAt = &sAcmeExternalAccountBindingSummary_LastUsedAt
+var AcmeExternalAccountBindingSummary_CreatedAt = &sAcmeExternalAccountBindingSummary_CreatedAt
+var AcmeExternalAccountBindingSummary_UpdatedAt = &sAcmeExternalAccountBindingSummary_UpdatedAt
+
+var _Arn = &s_Arn
+
+var _AvailabilityErrorMessage = &s_AvailabilityErrorMessage
+
+var _CertificateArn = &s_CertificateArn
+
+var CertificateAuthority = &sCertificateAuthority
+var CertificateAuthority_PublicCertificateAuthority = &sCertificateAuthority_PublicCertificateAuthority
+
+var _CertificateBody = &s_CertificateBody
+
+var _CertificateBodyBlob = &s_CertificateBodyBlob
+
+var _CertificateChain = &s_CertificateChain
+
+var _CertificateChainBlob = &s_CertificateChainBlob
+
+var CertificateDetail = &sCertificateDetail
+var CertificateDetail_CertificateArn = &sCertificateDetail_CertificateArn
+var CertificateDetail_DomainName = &sCertificateDetail_DomainName
+var CertificateDetail_SubjectAlternativeNames = &sCertificateDetail_SubjectAlternativeNames
+var CertificateDetail_ManagedBy = &sCertificateDetail_ManagedBy
+var CertificateDetail_DomainValidationOptions = &sCertificateDetail_DomainValidationOptions
+var CertificateDetail_Serial = &sCertificateDetail_Serial
+var CertificateDetail_Subject = &sCertificateDetail_Subject
+var CertificateDetail_Issuer = &sCertificateDetail_Issuer
+var CertificateDetail_CreatedAt = &sCertificateDetail_CreatedAt
+var CertificateDetail_IssuedAt = &sCertificateDetail_IssuedAt
+var CertificateDetail_ImportedAt = &sCertificateDetail_ImportedAt
+var CertificateDetail_Status = &sCertificateDetail_Status
+var CertificateDetail_RevokedAt = &sCertificateDetail_RevokedAt
+var CertificateDetail_RevocationReason = &sCertificateDetail_RevocationReason
+var CertificateDetail_NotBefore = &sCertificateDetail_NotBefore
+var CertificateDetail_NotAfter = &sCertificateDetail_NotAfter
+var CertificateDetail_KeyAlgorithm = &sCertificateDetail_KeyAlgorithm
+var CertificateDetail_SignatureAlgorithm = &sCertificateDetail_SignatureAlgorithm
+var CertificateDetail_InUseBy = &sCertificateDetail_InUseBy
+var CertificateDetail_FailureReason = &sCertificateDetail_FailureReason
+var CertificateDetail_Type = &sCertificateDetail_Type
+var CertificateDetail_RenewalSummary = &sCertificateDetail_RenewalSummary
+var CertificateDetail_KeyUsages = &sCertificateDetail_KeyUsages
+var CertificateDetail_ExtendedKeyUsages = &sCertificateDetail_ExtendedKeyUsages
+var CertificateDetail_CertificateAuthorityArn = &sCertificateDetail_CertificateAuthorityArn
+var CertificateDetail_RenewalEligibility = &sCertificateDetail_RenewalEligibility
+var CertificateDetail_Options = &sCertificateDetail_Options
+var CertificateDetail_UpdateSummary = &sCertificateDetail_UpdateSummary
+var CertificateDetail_CertificateKeyPairOrigin = &sCertificateDetail_CertificateKeyPairOrigin
+var CertificateDetail_AcmeEndpointArn = &sCertificateDetail_AcmeEndpointArn
+var CertificateDetail_AcmeAccountId = &sCertificateDetail_AcmeAccountId
+
+var CertificateExport = &sCertificateExport
+var CertificateExport_ENABLED = &sCertificateExport_ENABLED
+var CertificateExport_DISABLED = &sCertificateExport_DISABLED
+
+var CertificateFilter = &sCertificateFilter
+var CertificateFilter_CertificateArn = &sCertificateFilter_CertificateArn
+var CertificateFilter_X509AttributeFilter = &sCertificateFilter_X509AttributeFilter
+var CertificateFilter_AcmCertificateMetadataFilter = &sCertificateFilter_AcmCertificateMetadataFilter
+
+var CertificateFilterStatement = &sCertificateFilterStatement
+var CertificateFilterStatement_And = &sCertificateFilterStatement_And
+var CertificateFilterStatement_Or = &sCertificateFilterStatement_Or
+var CertificateFilterStatement_Not = &sCertificateFilterStatement_Not
+var CertificateFilterStatement_Filter = &sCertificateFilterStatement_Filter
+
+var _CertificateFilterStatementList = &s_CertificateFilterStatementList
+var _CertificateFilterStatementList_member = &s_CertificateFilterStatementList_member
+
+var CertificateKeyPairOrigin = &sCertificateKeyPairOrigin
+var CertificateKeyPairOrigin_AWS_MANAGED = &sCertificateKeyPairOrigin_AWS_MANAGED
+var CertificateKeyPairOrigin_ACME = &sCertificateKeyPairOrigin_ACME
+var CertificateKeyPairOrigin_CUSTOMER_PROVIDED = &sCertificateKeyPairOrigin_CUSTOMER_PROVIDED
+
+var _CertificateKeyPairOrigins = &s_CertificateKeyPairOrigins
+var _CertificateKeyPairOrigins_member = &s_CertificateKeyPairOrigins_member
+
+var CertificateManagedBy = &sCertificateManagedBy
+var CertificateManagedBy_CLOUDFRONT = &sCertificateManagedBy_CLOUDFRONT
+
+var CertificateMetadata = &sCertificateMetadata
+var CertificateMetadata_AcmCertificateMetadata = &sCertificateMetadata_AcmCertificateMetadata
+
+var CertificateOptions = &sCertificateOptions
+var CertificateOptions_CertificateTransparencyLoggingPreference = &sCertificateOptions_CertificateTransparencyLoggingPreference
+var CertificateOptions_Export = &sCertificateOptions_Export
+var CertificateOptions_ValidationMethod = &sCertificateOptions_ValidationMethod
+
+var CertificateSearchResult = &sCertificateSearchResult
+var CertificateSearchResult_CertificateArn = &sCertificateSearchResult_CertificateArn
+var CertificateSearchResult_X509Attributes = &sCertificateSearchResult_X509Attributes
+var CertificateSearchResult_CertificateMetadata = &sCertificateSearchResult_CertificateMetadata
+
+var _CertificateSearchResultList = &s_CertificateSearchResultList
+var _CertificateSearchResultList_member = &s_CertificateSearchResultList_member
+
+var CertificateStatus = &sCertificateStatus
+var CertificateStatus_PENDING_VALIDATION = &sCertificateStatus_PENDING_VALIDATION
+var CertificateStatus_ISSUED = &sCertificateStatus_ISSUED
+var CertificateStatus_INACTIVE = &sCertificateStatus_INACTIVE
+var CertificateStatus_EXPIRED = &sCertificateStatus_EXPIRED
+var CertificateStatus_VALIDATION_TIMED_OUT = &sCertificateStatus_VALIDATION_TIMED_OUT
+var CertificateStatus_REVOKED = &sCertificateStatus_REVOKED
+var CertificateStatus_FAILED = &sCertificateStatus_FAILED
+
+var _CertificateStatuses = &s_CertificateStatuses
+var _CertificateStatuses_member = &s_CertificateStatuses_member
+
+var CertificateSummary = &sCertificateSummary
+var CertificateSummary_CertificateArn = &sCertificateSummary_CertificateArn
+var CertificateSummary_DomainName = &sCertificateSummary_DomainName
+var CertificateSummary_SubjectAlternativeNameSummaries = &sCertificateSummary_SubjectAlternativeNameSummaries
+var CertificateSummary_HasAdditionalSubjectAlternativeNames = &sCertificateSummary_HasAdditionalSubjectAlternativeNames
+var CertificateSummary_Status = &sCertificateSummary_Status
+var CertificateSummary_Type = &sCertificateSummary_Type
+var CertificateSummary_KeyAlgorithm = &sCertificateSummary_KeyAlgorithm
+var CertificateSummary_KeyUsages = &sCertificateSummary_KeyUsages
+var CertificateSummary_ExtendedKeyUsages = &sCertificateSummary_ExtendedKeyUsages
+var CertificateSummary_ExportOption = &sCertificateSummary_ExportOption
+var CertificateSummary_InUse = &sCertificateSummary_InUse
+var CertificateSummary_Exported = &sCertificateSummary_Exported
+var CertificateSummary_RenewalEligibility = &sCertificateSummary_RenewalEligibility
+var CertificateSummary_NotBefore = &sCertificateSummary_NotBefore
+var CertificateSummary_NotAfter = &sCertificateSummary_NotAfter
+var CertificateSummary_CreatedAt = &sCertificateSummary_CreatedAt
+var CertificateSummary_IssuedAt = &sCertificateSummary_IssuedAt
+var CertificateSummary_ImportedAt = &sCertificateSummary_ImportedAt
+var CertificateSummary_RevokedAt = &sCertificateSummary_RevokedAt
+var CertificateSummary_ManagedBy = &sCertificateSummary_ManagedBy
+var CertificateSummary_CertificateKeyPairOrigin = &sCertificateSummary_CertificateKeyPairOrigin
+
+var _CertificateSummaryList = &s_CertificateSummaryList
+var _CertificateSummaryList_member = &s_CertificateSummaryList_member
+
+var CertificateTransparencyLoggingPreference = &sCertificateTransparencyLoggingPreference
+var CertificateTransparencyLoggingPreference_ENABLED = &sCertificateTransparencyLoggingPreference_ENABLED
+var CertificateTransparencyLoggingPreference_DISABLED = &sCertificateTransparencyLoggingPreference_DISABLED
+
+var CertificateType = &sCertificateType
+var CertificateType_IMPORTED = &sCertificateType_IMPORTED
+var CertificateType_AMAZON_ISSUED = &sCertificateType_AMAZON_ISSUED
+var CertificateType_PRIVATE = &sCertificateType_PRIVATE
+
+var CommonNameFilter = &sCommonNameFilter
+var CommonNameFilter_Value = &sCommonNameFilter_Value
+var CommonNameFilter_ComparisonOperator = &sCommonNameFilter_ComparisonOperator
+
+var ComparisonOperator = &sComparisonOperator
+var ComparisonOperator_CONTAINS = &sComparisonOperator_CONTAINS
+var ComparisonOperator_EQUALS = &sComparisonOperator_EQUALS
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _ContactList = &s_ContactList
+var _ContactList_member = &s_ContactList_member
+
+var _CoralAvailabilityThrottledResource = &s_CoralAvailabilityThrottledResource
+
+var _CoralAvailabilityThrottlingReason = &s_CoralAvailabilityThrottlingReason
+
+var CustomAttribute = &sCustomAttribute
+var CustomAttribute_ObjectIdentifier = &sCustomAttribute_ObjectIdentifier
+var CustomAttribute_Value = &sCustomAttribute_Value
+
+var _CustomAttributeList = &s_CustomAttributeList
+var _CustomAttributeList_member = &s_CustomAttributeList_member
+
+var DistinguishedName = &sDistinguishedName
+var DistinguishedName_CommonName = &sDistinguishedName_CommonName
+var DistinguishedName_DomainComponents = &sDistinguishedName_DomainComponents
+var DistinguishedName_Country = &sDistinguishedName_Country
+var DistinguishedName_CustomAttributes = &sDistinguishedName_CustomAttributes
+var DistinguishedName_DistinguishedNameQualifier = &sDistinguishedName_DistinguishedNameQualifier
+var DistinguishedName_GenerationQualifier = &sDistinguishedName_GenerationQualifier
+var DistinguishedName_GivenName = &sDistinguishedName_GivenName
+var DistinguishedName_Initials = &sDistinguishedName_Initials
+var DistinguishedName_Locality = &sDistinguishedName_Locality
+var DistinguishedName_Organization = &sDistinguishedName_Organization
+var DistinguishedName_OrganizationalUnit = &sDistinguishedName_OrganizationalUnit
+var DistinguishedName_Pseudonym = &sDistinguishedName_Pseudonym
+var DistinguishedName_SerialNumber = &sDistinguishedName_SerialNumber
+var DistinguishedName_State = &sDistinguishedName_State
+var DistinguishedName_Surname = &sDistinguishedName_Surname
+var DistinguishedName_Title = &sDistinguishedName_Title
+
+var DnsNameFilter = &sDnsNameFilter
+var DnsNameFilter_Value = &sDnsNameFilter_Value
+var DnsNameFilter_ComparisonOperator = &sDnsNameFilter_ComparisonOperator
+
+var DnsPrevalidationDetails = &sDnsPrevalidationDetails
+var DnsPrevalidationDetails_DomainScope = &sDnsPrevalidationDetails_DomainScope
+var DnsPrevalidationDetails_HostedZoneId = &sDnsPrevalidationDetails_HostedZoneId
+var DnsPrevalidationDetails_ResourceRecord = &sDnsPrevalidationDetails_ResourceRecord
+
+var DnsPrevalidationOptions = &sDnsPrevalidationOptions
+var DnsPrevalidationOptions_DomainScope = &sDnsPrevalidationOptions_DomainScope
+var DnsPrevalidationOptions_HostedZoneId = &sDnsPrevalidationOptions_HostedZoneId
+
+var DnsValidationChallenge = &sDnsValidationChallenge
+var DnsValidationChallenge_ResourceRecord = &sDnsValidationChallenge_ResourceRecord
+
+var _DomainComponentList = &s_DomainComponentList
+var _DomainComponentList_member = &s_DomainComponentList_member
+
+var _DomainList = &s_DomainList
+var _DomainList_member = &s_DomainList_member
+
+var _DomainName = &s_DomainName
+
+var _DomainNameString = &s_DomainNameString
+
+var DomainScope = &sDomainScope
+var DomainScope_ExactDomain = &sDomainScope_ExactDomain
+var DomainScope_Subdomains = &sDomainScope_Subdomains
+var DomainScope_Wildcards = &sDomainScope_Wildcards
+
+var DomainScopeOption = &sDomainScopeOption
+var DomainScopeOption_ENABLED = &sDomainScopeOption_ENABLED
+var DomainScopeOption_DISABLED = &sDomainScopeOption_DISABLED
+
+var DomainStatus = &sDomainStatus
+var DomainStatus_PENDING_VALIDATION = &sDomainStatus_PENDING_VALIDATION
+var DomainStatus_SUCCESS = &sDomainStatus_SUCCESS
+var DomainStatus_FAILED = &sDomainStatus_FAILED
+
+var DomainValidation = &sDomainValidation
+var DomainValidation_DomainName = &sDomainValidation_DomainName
+var DomainValidation_ValidationEmails = &sDomainValidation_ValidationEmails
+var DomainValidation_ValidationDomain = &sDomainValidation_ValidationDomain
+var DomainValidation_ValidationStatus = &sDomainValidation_ValidationStatus
+var DomainValidation_ResourceRecord = &sDomainValidation_ResourceRecord
+var DomainValidation_HttpRedirect = &sDomainValidation_HttpRedirect
+var DomainValidation_ValidationMethod = &sDomainValidation_ValidationMethod
+
+var _DomainValidationList = &s_DomainValidationList
+var _DomainValidationList_member = &s_DomainValidationList_member
+
+var DomainValidationMethodUpdateSummary = &sDomainValidationMethodUpdateSummary
+var DomainValidationMethodUpdateSummary_From = &sDomainValidationMethodUpdateSummary_From
+var DomainValidationMethodUpdateSummary_To = &sDomainValidationMethodUpdateSummary_To
+
+var DomainValidationOption = &sDomainValidationOption
+var DomainValidationOption_DomainName = &sDomainValidationOption_DomainName
+var DomainValidationOption_ValidationDomain = &sDomainValidationOption_ValidationDomain
+
+var _DomainValidationOptionList = &s_DomainValidationOptionList
+var _DomainValidationOptionList_member = &s_DomainValidationOptionList_member
+
+var DomainValidationSummary = &sDomainValidationSummary
+var DomainValidationSummary_DomainName = &sDomainValidationSummary_DomainName
+var DomainValidationSummary_ActiveValidationConfiguration = &sDomainValidationSummary_ActiveValidationConfiguration
+var DomainValidationSummary_RequestedValidationConfiguration = &sDomainValidationSummary_RequestedValidationConfiguration
+
+var _DomainValidationSummaryList = &s_DomainValidationSummaryList
+var _DomainValidationSummaryList_member = &s_DomainValidationSummaryList_member
+
+var EmailValidationChallenge = &sEmailValidationChallenge
+var EmailValidationChallenge_ValidationEmails = &sEmailValidationChallenge_ValidationEmails
+var EmailValidationChallenge_ValidationDomain = &sEmailValidationChallenge_ValidationDomain
+
+var Expiration = &sExpiration
+var Expiration_Value = &sExpiration_Value
+var Expiration_Type = &sExpiration_Type
+
+var ExpiryEventsConfiguration = &sExpiryEventsConfiguration
+var ExpiryEventsConfiguration_DaysBeforeExpiry = &sExpiryEventsConfiguration_DaysBeforeExpiry
+
+var ExtendedKeyUsage = &sExtendedKeyUsage
+var ExtendedKeyUsage_Name = &sExtendedKeyUsage_Name
+var ExtendedKeyUsage_OID = &sExtendedKeyUsage_OID
+
+var _ExtendedKeyUsageFilterList = &s_ExtendedKeyUsageFilterList
+var _ExtendedKeyUsageFilterList_member = &s_ExtendedKeyUsageFilterList_member
+
+var _ExtendedKeyUsageList = &s_ExtendedKeyUsageList
+var _ExtendedKeyUsageList_member = &s_ExtendedKeyUsageList_member
+
+var ExtendedKeyUsageName = &sExtendedKeyUsageName
+var ExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION = &sExtendedKeyUsageName_TLS_WEB_SERVER_AUTHENTICATION
+var ExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION = &sExtendedKeyUsageName_TLS_WEB_CLIENT_AUTHENTICATION
+var ExtendedKeyUsageName_CODE_SIGNING = &sExtendedKeyUsageName_CODE_SIGNING
+var ExtendedKeyUsageName_EMAIL_PROTECTION = &sExtendedKeyUsageName_EMAIL_PROTECTION
+var ExtendedKeyUsageName_TIME_STAMPING = &sExtendedKeyUsageName_TIME_STAMPING
+var ExtendedKeyUsageName_OCSP_SIGNING = &sExtendedKeyUsageName_OCSP_SIGNING
+var ExtendedKeyUsageName_IPSEC_END_SYSTEM = &sExtendedKeyUsageName_IPSEC_END_SYSTEM
+var ExtendedKeyUsageName_IPSEC_TUNNEL = &sExtendedKeyUsageName_IPSEC_TUNNEL
+var ExtendedKeyUsageName_IPSEC_USER = &sExtendedKeyUsageName_IPSEC_USER
+var ExtendedKeyUsageName_ANY = &sExtendedKeyUsageName_ANY
+var ExtendedKeyUsageName_NONE = &sExtendedKeyUsageName_NONE
+var ExtendedKeyUsageName_CUSTOM = &sExtendedKeyUsageName_CUSTOM
+
+var _ExtendedKeyUsageNames = &s_ExtendedKeyUsageNames
+var _ExtendedKeyUsageNames_member = &s_ExtendedKeyUsageNames_member
+
+var FailureDetails = &sFailureDetails
+var FailureDetails_Reason = &sFailureDetails_Reason
+var FailureDetails_Message = &sFailureDetails_Message
+
+var FailureReason = &sFailureReason
+var FailureReason_NO_AVAILABLE_CONTACTS = &sFailureReason_NO_AVAILABLE_CONTACTS
+var FailureReason_ADDITIONAL_VERIFICATION_REQUIRED = &sFailureReason_ADDITIONAL_VERIFICATION_REQUIRED
+var FailureReason_DOMAIN_NOT_ALLOWED = &sFailureReason_DOMAIN_NOT_ALLOWED
+var FailureReason_INVALID_PUBLIC_DOMAIN = &sFailureReason_INVALID_PUBLIC_DOMAIN
+var FailureReason_DOMAIN_VALIDATION_DENIED = &sFailureReason_DOMAIN_VALIDATION_DENIED
+var FailureReason_CAA_ERROR = &sFailureReason_CAA_ERROR
+var FailureReason_PCA_LIMIT_EXCEEDED = &sFailureReason_PCA_LIMIT_EXCEEDED
+var FailureReason_PCA_INVALID_ARN = &sFailureReason_PCA_INVALID_ARN
+var FailureReason_PCA_INVALID_STATE = &sFailureReason_PCA_INVALID_STATE
+var FailureReason_PCA_REQUEST_FAILED = &sFailureReason_PCA_REQUEST_FAILED
+var FailureReason_PCA_NAME_CONSTRAINTS_VALIDATION = &sFailureReason_PCA_NAME_CONSTRAINTS_VALIDATION
+var FailureReason_PCA_RESOURCE_NOT_FOUND = &sFailureReason_PCA_RESOURCE_NOT_FOUND
+var FailureReason_PCA_INVALID_ARGS = &sFailureReason_PCA_INVALID_ARGS
+var FailureReason_PCA_INVALID_DURATION = &sFailureReason_PCA_INVALID_DURATION
+var FailureReason_PCA_ACCESS_DENIED = &sFailureReason_PCA_ACCESS_DENIED
+var FailureReason_SLR_NOT_FOUND = &sFailureReason_SLR_NOT_FOUND
+var FailureReason_OTHER = &sFailureReason_OTHER
+
+var Filters = &sFilters
+var Filters_extendedKeyUsage = &sFilters_extendedKeyUsage
+var Filters_keyUsage = &sFilters_keyUsage
+var Filters_keyTypes = &sFilters_keyTypes
+var Filters_exportOption = &sFilters_exportOption
+var Filters_managedBy = &sFilters_managedBy
+
+var _FilterString = &s_FilterString
+
+var GeneralName = &sGeneralName
+var GeneralName_DirectoryName = &sGeneralName_DirectoryName
+var GeneralName_DnsName = &sGeneralName_DnsName
+var GeneralName_IpAddress = &sGeneralName_IpAddress
+var GeneralName_OtherName = &sGeneralName_OtherName
+var GeneralName_RegisteredId = &sGeneralName_RegisteredId
+var GeneralName_Rfc822Name = &sGeneralName_Rfc822Name
+var GeneralName_UniformResourceIdentifier = &sGeneralName_UniformResourceIdentifier
+
+var _GeneralNameList = &s_GeneralNameList
+var _GeneralNameList_member = &s_GeneralNameList_member
+
+var _HostedZoneId = &s_HostedZoneId
+
+var HttpRedirect = &sHttpRedirect
+var HttpRedirect_RedirectFrom = &sHttpRedirect_RedirectFrom
+var HttpRedirect_RedirectTo = &sHttpRedirect_RedirectTo
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _InUseList = &s_InUseList
+var _InUseList_member = &s_InUseList_member
+
+var InvalidArgsException = &sInvalidArgsException
+var InvalidArgsException_message = &sInvalidArgsException_message
+
+var InvalidArnException = &sInvalidArnException
+var InvalidArnException_message = &sInvalidArnException_message
+
+var InvalidDomainValidationOptionsException = &sInvalidDomainValidationOptionsException
+var InvalidDomainValidationOptionsException_message = &sInvalidDomainValidationOptionsException_message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_message = &sInvalidParameterException_message
+
+var InvalidStateException = &sInvalidStateException
+var InvalidStateException_message = &sInvalidStateException_message
+
+var InvalidTagException = &sInvalidTagException
+var InvalidTagException_message = &sInvalidTagException_message
+
+var KeyAlgorithm = &sKeyAlgorithm
+var KeyAlgorithm_RSA_1024 = &sKeyAlgorithm_RSA_1024
+var KeyAlgorithm_RSA_2048 = &sKeyAlgorithm_RSA_2048
+var KeyAlgorithm_RSA_3072 = &sKeyAlgorithm_RSA_3072
+var KeyAlgorithm_RSA_4096 = &sKeyAlgorithm_RSA_4096
+var KeyAlgorithm_EC_prime256v1 = &sKeyAlgorithm_EC_prime256v1
+var KeyAlgorithm_EC_secp384r1 = &sKeyAlgorithm_EC_secp384r1
+var KeyAlgorithm_EC_secp521r1 = &sKeyAlgorithm_EC_secp521r1
+
+var _KeyAlgorithmList = &s_KeyAlgorithmList
+var _KeyAlgorithmList_member = &s_KeyAlgorithmList_member
+
+var KeyUsage = &sKeyUsage
+var KeyUsage_Name = &sKeyUsage_Name
+
+var _KeyUsageFilterList = &s_KeyUsageFilterList
+var _KeyUsageFilterList_member = &s_KeyUsageFilterList_member
+
+var _KeyUsageList = &s_KeyUsageList
+var _KeyUsageList_member = &s_KeyUsageList_member
+
+var KeyUsageName = &sKeyUsageName
+var KeyUsageName_DIGITAL_SIGNATURE = &sKeyUsageName_DIGITAL_SIGNATURE
+var KeyUsageName_NON_REPUDATION = &sKeyUsageName_NON_REPUDATION
+var KeyUsageName_KEY_ENCIPHERMENT = &sKeyUsageName_KEY_ENCIPHERMENT
+var KeyUsageName_DATA_ENCIPHERMENT = &sKeyUsageName_DATA_ENCIPHERMENT
+var KeyUsageName_KEY_AGREEMENT = &sKeyUsageName_KEY_AGREEMENT
+var KeyUsageName_CERTIFICATE_SIGNING = &sKeyUsageName_CERTIFICATE_SIGNING
+var KeyUsageName_CRL_SIGNING = &sKeyUsageName_CRL_SIGNING
+var KeyUsageName_ENCHIPER_ONLY = &sKeyUsageName_ENCHIPER_ONLY
+var KeyUsageName_DECIPHER_ONLY = &sKeyUsageName_DECIPHER_ONLY
+var KeyUsageName_ANY = &sKeyUsageName_ANY
+var KeyUsageName_CUSTOM = &sKeyUsageName_CUSTOM
+
+var _KeyUsageNames = &s_KeyUsageNames
+var _KeyUsageNames_member = &s_KeyUsageNames_member
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _MacKey = &s_MacKey
+
+var _MaxItems = &s_MaxItems
+
+var _NextToken = &s_NextToken
+
+var _NullableBoolean = &s_NullableBoolean
+
+var OtherName = &sOtherName
+var OtherName_ObjectIdentifier = &sOtherName_ObjectIdentifier
+var OtherName_Value = &sOtherName_Value
+
+var _PassphraseBlob = &s_PassphraseBlob
+
+var _PcaArn = &s_PcaArn
+
+var _PositiveInteger = &s_PositiveInteger
+
+var PrevalidationDetails = &sPrevalidationDetails
+var PrevalidationDetails_DnsPrevalidation = &sPrevalidationDetails_DnsPrevalidation
+
+var PrevalidationOptions = &sPrevalidationOptions
+var PrevalidationOptions_DnsPrevalidation = &sPrevalidationOptions_DnsPrevalidation
+
+var PrevalidationType = &sPrevalidationType
+var PrevalidationType_DNS_PREVALIDATION = &sPrevalidationType_DNS_PREVALIDATION
+
+var _PrivateKey = &s_PrivateKey
+
+var _PrivateKeyBlob = &s_PrivateKeyBlob
+
+var PublicCertificateAuthority = &sPublicCertificateAuthority
+var PublicCertificateAuthority_AllowedKeyAlgorithms = &sPublicCertificateAuthority_AllowedKeyAlgorithms
+
+var PublicKeyAlgorithm = &sPublicKeyAlgorithm
+var PublicKeyAlgorithm_RSA_2048 = &sPublicKeyAlgorithm_RSA_2048
+var PublicKeyAlgorithm_EC_PRIME256_V1 = &sPublicKeyAlgorithm_EC_PRIME256_V1
+var PublicKeyAlgorithm_EC_SECP384_R1 = &sPublicKeyAlgorithm_EC_SECP384_R1
+
+var _PublicKeyAlgorithmList = &s_PublicKeyAlgorithmList
+var _PublicKeyAlgorithmList_member = &s_PublicKeyAlgorithmList_member
+
+var RecordType = &sRecordType
+var RecordType_CNAME = &sRecordType_CNAME
+
+var RenewalEligibility = &sRenewalEligibility
+var RenewalEligibility_ELIGIBLE = &sRenewalEligibility_ELIGIBLE
+var RenewalEligibility_INELIGIBLE = &sRenewalEligibility_INELIGIBLE
+
+var RenewalStatus = &sRenewalStatus
+var RenewalStatus_PENDING_AUTO_RENEWAL = &sRenewalStatus_PENDING_AUTO_RENEWAL
+var RenewalStatus_PENDING_VALIDATION = &sRenewalStatus_PENDING_VALIDATION
+var RenewalStatus_SUCCESS = &sRenewalStatus_SUCCESS
+var RenewalStatus_FAILED = &sRenewalStatus_FAILED
+
+var RenewalSummary = &sRenewalSummary
+var RenewalSummary_RenewalStatus = &sRenewalSummary_RenewalStatus
+var RenewalSummary_DomainValidationOptions = &sRenewalSummary_DomainValidationOptions
+var RenewalSummary_RenewalStatusReason = &sRenewalSummary_RenewalStatusReason
+var RenewalSummary_UpdatedAt = &sRenewalSummary_UpdatedAt
+
+var RequestInProgressException = &sRequestInProgressException
+var RequestInProgressException_message = &sRequestInProgressException_message
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_message = &sResourceInUseException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceRecord = &sResourceRecord
+var ResourceRecord_Name = &sResourceRecord_Name
+var ResourceRecord_Type = &sResourceRecord_Type
+var ResourceRecord_Value = &sResourceRecord_Value
+
+var RevocationReason = &sRevocationReason
+var RevocationReason_UNSPECIFIED = &sRevocationReason_UNSPECIFIED
+var RevocationReason_KEY_COMPROMISE = &sRevocationReason_KEY_COMPROMISE
+var RevocationReason_CA_COMPROMISE = &sRevocationReason_CA_COMPROMISE
+var RevocationReason_AFFILIATION_CHANGED = &sRevocationReason_AFFILIATION_CHANGED
+var RevocationReason_SUPERCEDED = &sRevocationReason_SUPERCEDED
+var RevocationReason_SUPERSEDED = &sRevocationReason_SUPERSEDED
+var RevocationReason_CESSATION_OF_OPERATION = &sRevocationReason_CESSATION_OF_OPERATION
+var RevocationReason_CERTIFICATE_HOLD = &sRevocationReason_CERTIFICATE_HOLD
+var RevocationReason_REMOVE_FROM_CRL = &sRevocationReason_REMOVE_FROM_CRL
+var RevocationReason_PRIVILEGE_WITHDRAWN = &sRevocationReason_PRIVILEGE_WITHDRAWN
+var RevocationReason_A_A_COMPROMISE = &sRevocationReason_A_A_COMPROMISE
+
+var _RoleArn = &s_RoleArn
+
+var SearchCertificatesSortBy = &sSearchCertificatesSortBy
+var SearchCertificatesSortBy_CREATED_AT = &sSearchCertificatesSortBy_CREATED_AT
+var SearchCertificatesSortBy_NOT_AFTER = &sSearchCertificatesSortBy_NOT_AFTER
+var SearchCertificatesSortBy_STATUS = &sSearchCertificatesSortBy_STATUS
+var SearchCertificatesSortBy_RENEWAL_STATUS = &sSearchCertificatesSortBy_RENEWAL_STATUS
+var SearchCertificatesSortBy_EXPORTED = &sSearchCertificatesSortBy_EXPORTED
+var SearchCertificatesSortBy_IN_USE = &sSearchCertificatesSortBy_IN_USE
+var SearchCertificatesSortBy_NOT_BEFORE = &sSearchCertificatesSortBy_NOT_BEFORE
+var SearchCertificatesSortBy_KEY_ALGORITHM = &sSearchCertificatesSortBy_KEY_ALGORITHM
+var SearchCertificatesSortBy_TYPE = &sSearchCertificatesSortBy_TYPE
+var SearchCertificatesSortBy_CERTIFICATE_ARN = &sSearchCertificatesSortBy_CERTIFICATE_ARN
+var SearchCertificatesSortBy_COMMON_NAME = &sSearchCertificatesSortBy_COMMON_NAME
+var SearchCertificatesSortBy_REVOKED_AT = &sSearchCertificatesSortBy_REVOKED_AT
+var SearchCertificatesSortBy_RENEWAL_ELIGIBILITY = &sSearchCertificatesSortBy_RENEWAL_ELIGIBILITY
+var SearchCertificatesSortBy_ISSUED_AT = &sSearchCertificatesSortBy_ISSUED_AT
+var SearchCertificatesSortBy_MANAGED_BY = &sSearchCertificatesSortBy_MANAGED_BY
+var SearchCertificatesSortBy_EXPORT_OPTION = &sSearchCertificatesSortBy_EXPORT_OPTION
+var SearchCertificatesSortBy_VALIDATION_METHOD = &sSearchCertificatesSortBy_VALIDATION_METHOD
+var SearchCertificatesSortBy_IMPORTED_AT = &sSearchCertificatesSortBy_IMPORTED_AT
+var SearchCertificatesSortBy_ACME_ENDPOINT_ARN = &sSearchCertificatesSortBy_ACME_ENDPOINT_ARN
+var SearchCertificatesSortBy_ACME_ACCOUNT_ID = &sSearchCertificatesSortBy_ACME_ACCOUNT_ID
+var SearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN = &sSearchCertificatesSortBy_CERTIFICATE_KEY_PAIR_ORIGIN
+
+var SearchCertificatesSortOrder = &sSearchCertificatesSortOrder
+var SearchCertificatesSortOrder_ASCENDING = &sSearchCertificatesSortOrder_ASCENDING
+var SearchCertificatesSortOrder_DESCENDING = &sSearchCertificatesSortOrder_DESCENDING
+
+var _SearchMaxResults = &s_SearchMaxResults
+
+var _SerialNumber = &s_SerialNumber
+
+var _ServiceErrorMessage = &s_ServiceErrorMessage
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var SortBy = &sSortBy
+var SortBy_CREATED_AT = &sSortBy_CREATED_AT
+
+var SortOrder = &sSortOrder
+var SortOrder_ASCENDING = &sSortOrder_ASCENDING
+var SortOrder_DESCENDING = &sSortOrder_DESCENDING
+
+var _String = &s_String
+
+var SubjectAlternativeNameFilter = &sSubjectAlternativeNameFilter
+var SubjectAlternativeNameFilter_DnsName = &sSubjectAlternativeNameFilter_DnsName
+
+var SubjectFilter = &sSubjectFilter
+var SubjectFilter_CommonName = &sSubjectFilter_CommonName
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TagPolicyException = &sTagPolicyException
+var TagPolicyException_message = &sTagPolicyException_message
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_throttlingReasons = &sThrottlingException_throttlingReasons
+
+var ThrottlingReason = &sThrottlingReason
+var ThrottlingReason_reason = &sThrottlingReason_reason
+var ThrottlingReason_resource = &sThrottlingReason_resource
+
+var _ThrottlingReasonList = &s_ThrottlingReasonList
+var _ThrottlingReasonList_member = &s_ThrottlingReasonList_member
+
+var TimestampRange = &sTimestampRange
+var TimestampRange_Start = &sTimestampRange_Start
+var TimestampRange_End = &sTimestampRange_End
+
+var TimeType = &sTimeType
+var TimeType_MINUTES = &sTimeType_MINUTES
+var TimeType_HOURS = &sTimeType_HOURS
+var TimeType_DAYS = &sTimeType_DAYS
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var _TStamp = &s_TStamp
+
+var UpdateStatus = &sUpdateStatus
+var UpdateStatus_PENDING_DOMAIN_VALIDATION = &sUpdateStatus_PENDING_DOMAIN_VALIDATION
+var UpdateStatus_SUCCESS = &sUpdateStatus_SUCCESS
+var UpdateStatus_FAILED = &sUpdateStatus_FAILED
+
+var UpdateSummary = &sUpdateSummary
+var UpdateSummary_Status = &sUpdateSummary_Status
+var UpdateSummary_Type = &sUpdateSummary_Type
+var UpdateSummary_DomainValidationMethodUpdateSummary = &sUpdateSummary_DomainValidationMethodUpdateSummary
+var UpdateSummary_RequestedAt = &sUpdateSummary_RequestedAt
+var UpdateSummary_UpdatedAt = &sUpdateSummary_UpdatedAt
+
+var UpdateType = &sUpdateType
+var UpdateType_DOMAIN_VALIDATION_METHOD = &sUpdateType_DOMAIN_VALIDATION_METHOD
+
+var ValidationChallenge = &sValidationChallenge
+var ValidationChallenge_EmailValidationChallenge = &sValidationChallenge_EmailValidationChallenge
+var ValidationChallenge_DnsValidationChallenge = &sValidationChallenge_DnsValidationChallenge
+
+var ValidationConfiguration = &sValidationConfiguration
+var ValidationConfiguration_ValidationMethod = &sValidationConfiguration_ValidationMethod
+var ValidationConfiguration_ValidationChallenge = &sValidationConfiguration_ValidationChallenge
+var ValidationConfiguration_ValidationStatus = &sValidationConfiguration_ValidationStatus
+
+var _ValidationEmailList = &s_ValidationEmailList
+var _ValidationEmailList_member = &s_ValidationEmailList_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _ValidationExceptionMessage = &s_ValidationExceptionMessage
+
+var ValidationMethod = &sValidationMethod
+var ValidationMethod_EMAIL = &sValidationMethod_EMAIL
+var ValidationMethod_DNS = &sValidationMethod_DNS
+var ValidationMethod_HTTP = &sValidationMethod_HTTP
+
+var X509AttributeFilter = &sX509AttributeFilter
+var X509AttributeFilter_Subject = &sX509AttributeFilter_Subject
+var X509AttributeFilter_SubjectAlternativeName = &sX509AttributeFilter_SubjectAlternativeName
+var X509AttributeFilter_ExtendedKeyUsage = &sX509AttributeFilter_ExtendedKeyUsage
+var X509AttributeFilter_KeyUsage = &sX509AttributeFilter_KeyUsage
+var X509AttributeFilter_KeyAlgorithm = &sX509AttributeFilter_KeyAlgorithm
+var X509AttributeFilter_SerialNumber = &sX509AttributeFilter_SerialNumber
+var X509AttributeFilter_NotAfter = &sX509AttributeFilter_NotAfter
+var X509AttributeFilter_NotBefore = &sX509AttributeFilter_NotBefore
+
+var X509Attributes = &sX509Attributes
+var X509Attributes_Issuer = &sX509Attributes_Issuer
+var X509Attributes_Subject = &sX509Attributes_Subject
+var X509Attributes_SubjectAlternativeNames = &sX509Attributes_SubjectAlternativeNames
+var X509Attributes_ExtendedKeyUsages = &sX509Attributes_ExtendedKeyUsages
+var X509Attributes_KeyAlgorithm = &sX509Attributes_KeyAlgorithm
+var X509Attributes_KeyUsages = &sX509Attributes_KeyUsages
+var X509Attributes_SerialNumber = &sX509Attributes_SerialNumber
+var X509Attributes_NotAfter = &sX509Attributes_NotAfter
+var X509Attributes_NotBefore = &sX509Attributes_NotBefore
+
+var AddTagsToCertificateRequest = &sAddTagsToCertificateRequest
+var AddTagsToCertificateRequest_CertificateArn = &sAddTagsToCertificateRequest_CertificateArn
+var AddTagsToCertificateRequest_Tags = &sAddTagsToCertificateRequest_Tags
+
+var CreateAcmeDomainValidationRequest = &sCreateAcmeDomainValidationRequest
+var CreateAcmeDomainValidationRequest_IdempotencyToken = &sCreateAcmeDomainValidationRequest_IdempotencyToken
+var CreateAcmeDomainValidationRequest_AcmeEndpointArn = &sCreateAcmeDomainValidationRequest_AcmeEndpointArn
+var CreateAcmeDomainValidationRequest_DomainName = &sCreateAcmeDomainValidationRequest_DomainName
+var CreateAcmeDomainValidationRequest_PrevalidationOptions = &sCreateAcmeDomainValidationRequest_PrevalidationOptions
+var CreateAcmeDomainValidationRequest_Tags = &sCreateAcmeDomainValidationRequest_Tags
+
+var CreateAcmeDomainValidationResponse = &sCreateAcmeDomainValidationResponse
+var CreateAcmeDomainValidationResponse_AcmeDomainValidationArn = &sCreateAcmeDomainValidationResponse_AcmeDomainValidationArn
+
+var CreateAcmeEndpointRequest = &sCreateAcmeEndpointRequest
+var CreateAcmeEndpointRequest_IdempotencyToken = &sCreateAcmeEndpointRequest_IdempotencyToken
+var CreateAcmeEndpointRequest_AuthorizationBehavior = &sCreateAcmeEndpointRequest_AuthorizationBehavior
+var CreateAcmeEndpointRequest_Contact = &sCreateAcmeEndpointRequest_Contact
+var CreateAcmeEndpointRequest_CertificateAuthority = &sCreateAcmeEndpointRequest_CertificateAuthority
+var CreateAcmeEndpointRequest_Tags = &sCreateAcmeEndpointRequest_Tags
+var CreateAcmeEndpointRequest_CertificateTags = &sCreateAcmeEndpointRequest_CertificateTags
+
+var CreateAcmeEndpointResponse = &sCreateAcmeEndpointResponse
+var CreateAcmeEndpointResponse_AcmeEndpointArn = &sCreateAcmeEndpointResponse_AcmeEndpointArn
+
+var CreateAcmeExternalAccountBindingRequest = &sCreateAcmeExternalAccountBindingRequest
+var CreateAcmeExternalAccountBindingRequest_IdempotencyToken = &sCreateAcmeExternalAccountBindingRequest_IdempotencyToken
+var CreateAcmeExternalAccountBindingRequest_AcmeEndpointArn = &sCreateAcmeExternalAccountBindingRequest_AcmeEndpointArn
+var CreateAcmeExternalAccountBindingRequest_RoleArn = &sCreateAcmeExternalAccountBindingRequest_RoleArn
+var CreateAcmeExternalAccountBindingRequest_Expiration = &sCreateAcmeExternalAccountBindingRequest_Expiration
+var CreateAcmeExternalAccountBindingRequest_Tags = &sCreateAcmeExternalAccountBindingRequest_Tags
+
+var CreateAcmeExternalAccountBindingResponse = &sCreateAcmeExternalAccountBindingResponse
+var CreateAcmeExternalAccountBindingResponse_ExternalAccountBinding = &sCreateAcmeExternalAccountBindingResponse_ExternalAccountBinding
+
+var DeleteAcmeDomainValidationRequest = &sDeleteAcmeDomainValidationRequest
+var DeleteAcmeDomainValidationRequest_AcmeDomainValidationArn = &sDeleteAcmeDomainValidationRequest_AcmeDomainValidationArn
+
+var DeleteAcmeEndpointRequest = &sDeleteAcmeEndpointRequest
+var DeleteAcmeEndpointRequest_AcmeEndpointArn = &sDeleteAcmeEndpointRequest_AcmeEndpointArn
+
+var DeleteAcmeExternalAccountBindingRequest = &sDeleteAcmeExternalAccountBindingRequest
+var DeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = &sDeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn
+
+var DeleteCertificateRequest = &sDeleteCertificateRequest
+var DeleteCertificateRequest_CertificateArn = &sDeleteCertificateRequest_CertificateArn
+
+var DescribeAcmeAccountRequest = &sDescribeAcmeAccountRequest
+var DescribeAcmeAccountRequest_AcmeEndpointArn = &sDescribeAcmeAccountRequest_AcmeEndpointArn
+var DescribeAcmeAccountRequest_AccountUrl = &sDescribeAcmeAccountRequest_AccountUrl
+
+var DescribeAcmeAccountResponse = &sDescribeAcmeAccountResponse
+var DescribeAcmeAccountResponse_AcmeAccount = &sDescribeAcmeAccountResponse_AcmeAccount
+
+var DescribeAcmeDomainValidationRequest = &sDescribeAcmeDomainValidationRequest
+var DescribeAcmeDomainValidationRequest_AcmeDomainValidationArn = &sDescribeAcmeDomainValidationRequest_AcmeDomainValidationArn
+
+var DescribeAcmeDomainValidationResponse = &sDescribeAcmeDomainValidationResponse
+var DescribeAcmeDomainValidationResponse_AcmeDomainValidation = &sDescribeAcmeDomainValidationResponse_AcmeDomainValidation
+
+var DescribeAcmeEndpointRequest = &sDescribeAcmeEndpointRequest
+var DescribeAcmeEndpointRequest_AcmeEndpointArn = &sDescribeAcmeEndpointRequest_AcmeEndpointArn
+
+var DescribeAcmeEndpointResponse = &sDescribeAcmeEndpointResponse
+var DescribeAcmeEndpointResponse_AcmeEndpoint = &sDescribeAcmeEndpointResponse_AcmeEndpoint
+
+var DescribeAcmeExternalAccountBindingRequest = &sDescribeAcmeExternalAccountBindingRequest
+var DescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = &sDescribeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn
+
+var DescribeAcmeExternalAccountBindingResponse = &sDescribeAcmeExternalAccountBindingResponse
+var DescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding = &sDescribeAcmeExternalAccountBindingResponse_ExternalAccountBinding
+
+var DescribeCertificateRequest = &sDescribeCertificateRequest
+var DescribeCertificateRequest_CertificateArn = &sDescribeCertificateRequest_CertificateArn
+
+var DescribeCertificateResponse = &sDescribeCertificateResponse
+var DescribeCertificateResponse_Certificate = &sDescribeCertificateResponse_Certificate
+
+var ExportCertificateRequest = &sExportCertificateRequest
+var ExportCertificateRequest_CertificateArn = &sExportCertificateRequest_CertificateArn
+var ExportCertificateRequest_Passphrase = &sExportCertificateRequest_Passphrase
+
+var ExportCertificateResponse = &sExportCertificateResponse
+var ExportCertificateResponse_Certificate = &sExportCertificateResponse_Certificate
+var ExportCertificateResponse_CertificateChain = &sExportCertificateResponse_CertificateChain
+var ExportCertificateResponse_PrivateKey = &sExportCertificateResponse_PrivateKey
+
+var GetAccountConfigurationResponse = &sGetAccountConfigurationResponse
+var GetAccountConfigurationResponse_ExpiryEvents = &sGetAccountConfigurationResponse_ExpiryEvents
+
+var GetAcmeExternalAccountBindingCredentialsRequest = &sGetAcmeExternalAccountBindingCredentialsRequest
+var GetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn = &sGetAcmeExternalAccountBindingCredentialsRequest_AcmeExternalAccountBindingArn
+
+var GetAcmeExternalAccountBindingCredentialsResponse = &sGetAcmeExternalAccountBindingCredentialsResponse
+var GetAcmeExternalAccountBindingCredentialsResponse_KeyId = &sGetAcmeExternalAccountBindingCredentialsResponse_KeyId
+var GetAcmeExternalAccountBindingCredentialsResponse_MacKey = &sGetAcmeExternalAccountBindingCredentialsResponse_MacKey
+
+var GetCertificateRequest = &sGetCertificateRequest
+var GetCertificateRequest_CertificateArn = &sGetCertificateRequest_CertificateArn
+
+var GetCertificateResponse = &sGetCertificateResponse
+var GetCertificateResponse_Certificate = &sGetCertificateResponse_Certificate
+var GetCertificateResponse_CertificateChain = &sGetCertificateResponse_CertificateChain
+
+var ImportCertificateRequest = &sImportCertificateRequest
+var ImportCertificateRequest_CertificateArn = &sImportCertificateRequest_CertificateArn
+var ImportCertificateRequest_Certificate = &sImportCertificateRequest_Certificate
+var ImportCertificateRequest_PrivateKey = &sImportCertificateRequest_PrivateKey
+var ImportCertificateRequest_CertificateChain = &sImportCertificateRequest_CertificateChain
+var ImportCertificateRequest_Tags = &sImportCertificateRequest_Tags
+
+var ImportCertificateResponse = &sImportCertificateResponse
+var ImportCertificateResponse_CertificateArn = &sImportCertificateResponse_CertificateArn
+
+var ListAcmeAccountsRequest = &sListAcmeAccountsRequest
+var ListAcmeAccountsRequest_NextToken = &sListAcmeAccountsRequest_NextToken
+var ListAcmeAccountsRequest_MaxResults = &sListAcmeAccountsRequest_MaxResults
+var ListAcmeAccountsRequest_AcmeEndpointArn = &sListAcmeAccountsRequest_AcmeEndpointArn
+
+var ListAcmeAccountsResponse = &sListAcmeAccountsResponse
+var ListAcmeAccountsResponse_AcmeAccounts = &sListAcmeAccountsResponse_AcmeAccounts
+var ListAcmeAccountsResponse_NextToken = &sListAcmeAccountsResponse_NextToken
+
+var ListAcmeDomainValidationsRequest = &sListAcmeDomainValidationsRequest
+var ListAcmeDomainValidationsRequest_NextToken = &sListAcmeDomainValidationsRequest_NextToken
+var ListAcmeDomainValidationsRequest_MaxResults = &sListAcmeDomainValidationsRequest_MaxResults
+var ListAcmeDomainValidationsRequest_AcmeEndpointArn = &sListAcmeDomainValidationsRequest_AcmeEndpointArn
+
+var ListAcmeDomainValidationsResponse = &sListAcmeDomainValidationsResponse
+var ListAcmeDomainValidationsResponse_AcmeDomainValidations = &sListAcmeDomainValidationsResponse_AcmeDomainValidations
+var ListAcmeDomainValidationsResponse_NextToken = &sListAcmeDomainValidationsResponse_NextToken
+
+var ListAcmeEndpointsRequest = &sListAcmeEndpointsRequest
+var ListAcmeEndpointsRequest_NextToken = &sListAcmeEndpointsRequest_NextToken
+var ListAcmeEndpointsRequest_MaxResults = &sListAcmeEndpointsRequest_MaxResults
+
+var ListAcmeEndpointsResponse = &sListAcmeEndpointsResponse
+var ListAcmeEndpointsResponse_AcmeEndpoints = &sListAcmeEndpointsResponse_AcmeEndpoints
+var ListAcmeEndpointsResponse_NextToken = &sListAcmeEndpointsResponse_NextToken
+
+var ListAcmeExternalAccountBindingsRequest = &sListAcmeExternalAccountBindingsRequest
+var ListAcmeExternalAccountBindingsRequest_NextToken = &sListAcmeExternalAccountBindingsRequest_NextToken
+var ListAcmeExternalAccountBindingsRequest_MaxResults = &sListAcmeExternalAccountBindingsRequest_MaxResults
+var ListAcmeExternalAccountBindingsRequest_AcmeEndpointArn = &sListAcmeExternalAccountBindingsRequest_AcmeEndpointArn
+
+var ListAcmeExternalAccountBindingsResponse = &sListAcmeExternalAccountBindingsResponse
+var ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings = &sListAcmeExternalAccountBindingsResponse_ExternalAccountBindings
+var ListAcmeExternalAccountBindingsResponse_NextToken = &sListAcmeExternalAccountBindingsResponse_NextToken
+
+var ListCertificateDomainValidationsRequest = &sListCertificateDomainValidationsRequest
+var ListCertificateDomainValidationsRequest_CertificateArn = &sListCertificateDomainValidationsRequest_CertificateArn
+var ListCertificateDomainValidationsRequest_NextToken = &sListCertificateDomainValidationsRequest_NextToken
+var ListCertificateDomainValidationsRequest_MaxItems = &sListCertificateDomainValidationsRequest_MaxItems
+
+var ListCertificateDomainValidationsResponse = &sListCertificateDomainValidationsResponse
+var ListCertificateDomainValidationsResponse_DomainValidationSummaryList = &sListCertificateDomainValidationsResponse_DomainValidationSummaryList
+var ListCertificateDomainValidationsResponse_NextToken = &sListCertificateDomainValidationsResponse_NextToken
+
+var ListCertificatesRequest = &sListCertificatesRequest
+var ListCertificatesRequest_CertificateStatuses = &sListCertificatesRequest_CertificateStatuses
+var ListCertificatesRequest_CertificateKeyPairOrigins = &sListCertificatesRequest_CertificateKeyPairOrigins
+var ListCertificatesRequest_Includes = &sListCertificatesRequest_Includes
+var ListCertificatesRequest_NextToken = &sListCertificatesRequest_NextToken
+var ListCertificatesRequest_MaxItems = &sListCertificatesRequest_MaxItems
+var ListCertificatesRequest_SortBy = &sListCertificatesRequest_SortBy
+var ListCertificatesRequest_SortOrder = &sListCertificatesRequest_SortOrder
+
+var ListCertificatesResponse = &sListCertificatesResponse
+var ListCertificatesResponse_NextToken = &sListCertificatesResponse_NextToken
+var ListCertificatesResponse_CertificateSummaryList = &sListCertificatesResponse_CertificateSummaryList
+
+var ListTagsForCertificateRequest = &sListTagsForCertificateRequest
+var ListTagsForCertificateRequest_CertificateArn = &sListTagsForCertificateRequest_CertificateArn
+
+var ListTagsForCertificateResponse = &sListTagsForCertificateResponse
+var ListTagsForCertificateResponse_Tags = &sListTagsForCertificateResponse_Tags
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutAccountConfigurationRequest = &sPutAccountConfigurationRequest
+var PutAccountConfigurationRequest_ExpiryEvents = &sPutAccountConfigurationRequest_ExpiryEvents
+var PutAccountConfigurationRequest_IdempotencyToken = &sPutAccountConfigurationRequest_IdempotencyToken
+
+var RemoveTagsFromCertificateRequest = &sRemoveTagsFromCertificateRequest
+var RemoveTagsFromCertificateRequest_CertificateArn = &sRemoveTagsFromCertificateRequest_CertificateArn
+var RemoveTagsFromCertificateRequest_Tags = &sRemoveTagsFromCertificateRequest_Tags
+
+var RenewCertificateRequest = &sRenewCertificateRequest
+var RenewCertificateRequest_CertificateArn = &sRenewCertificateRequest_CertificateArn
+
+var RequestCertificateRequest = &sRequestCertificateRequest
+var RequestCertificateRequest_DomainName = &sRequestCertificateRequest_DomainName
+var RequestCertificateRequest_ValidationMethod = &sRequestCertificateRequest_ValidationMethod
+var RequestCertificateRequest_SubjectAlternativeNames = &sRequestCertificateRequest_SubjectAlternativeNames
+var RequestCertificateRequest_IdempotencyToken = &sRequestCertificateRequest_IdempotencyToken
+var RequestCertificateRequest_DomainValidationOptions = &sRequestCertificateRequest_DomainValidationOptions
+var RequestCertificateRequest_Options = &sRequestCertificateRequest_Options
+var RequestCertificateRequest_CertificateAuthorityArn = &sRequestCertificateRequest_CertificateAuthorityArn
+var RequestCertificateRequest_Tags = &sRequestCertificateRequest_Tags
+var RequestCertificateRequest_KeyAlgorithm = &sRequestCertificateRequest_KeyAlgorithm
+var RequestCertificateRequest_ManagedBy = &sRequestCertificateRequest_ManagedBy
+
+var RequestCertificateResponse = &sRequestCertificateResponse
+var RequestCertificateResponse_CertificateArn = &sRequestCertificateResponse_CertificateArn
+
+var ResendValidationEmailRequest = &sResendValidationEmailRequest
+var ResendValidationEmailRequest_CertificateArn = &sResendValidationEmailRequest_CertificateArn
+var ResendValidationEmailRequest_Domain = &sResendValidationEmailRequest_Domain
+var ResendValidationEmailRequest_ValidationDomain = &sResendValidationEmailRequest_ValidationDomain
+
+var RevokeAcmeAccountRequest = &sRevokeAcmeAccountRequest
+var RevokeAcmeAccountRequest_AcmeEndpointArn = &sRevokeAcmeAccountRequest_AcmeEndpointArn
+var RevokeAcmeAccountRequest_AccountUrl = &sRevokeAcmeAccountRequest_AccountUrl
+
+var RevokeAcmeExternalAccountBindingRequest = &sRevokeAcmeExternalAccountBindingRequest
+var RevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn = &sRevokeAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn
+
+var RevokeCertificateRequest = &sRevokeCertificateRequest
+var RevokeCertificateRequest_CertificateArn = &sRevokeCertificateRequest_CertificateArn
+var RevokeCertificateRequest_RevocationReason = &sRevokeCertificateRequest_RevocationReason
+
+var RevokeCertificateResponse = &sRevokeCertificateResponse
+var RevokeCertificateResponse_CertificateArn = &sRevokeCertificateResponse_CertificateArn
+
+var SearchCertificatesRequest = &sSearchCertificatesRequest
+var SearchCertificatesRequest_FilterStatement = &sSearchCertificatesRequest_FilterStatement
+var SearchCertificatesRequest_MaxResults = &sSearchCertificatesRequest_MaxResults
+var SearchCertificatesRequest_NextToken = &sSearchCertificatesRequest_NextToken
+var SearchCertificatesRequest_SortBy = &sSearchCertificatesRequest_SortBy
+var SearchCertificatesRequest_SortOrder = &sSearchCertificatesRequest_SortOrder
+
+var SearchCertificatesResponse = &sSearchCertificatesResponse
+var SearchCertificatesResponse_Results = &sSearchCertificatesResponse_Results
+var SearchCertificatesResponse_NextToken = &sSearchCertificatesResponse_NextToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateAcmeDomainValidationRequest = &sUpdateAcmeDomainValidationRequest
+var UpdateAcmeDomainValidationRequest_AcmeDomainValidationArn = &sUpdateAcmeDomainValidationRequest_AcmeDomainValidationArn
+var UpdateAcmeDomainValidationRequest_PrevalidationOptions = &sUpdateAcmeDomainValidationRequest_PrevalidationOptions
+
+var UpdateAcmeEndpointRequest = &sUpdateAcmeEndpointRequest
+var UpdateAcmeEndpointRequest_AcmeEndpointArn = &sUpdateAcmeEndpointRequest_AcmeEndpointArn
+var UpdateAcmeEndpointRequest_AuthorizationBehavior = &sUpdateAcmeEndpointRequest_AuthorizationBehavior
+var UpdateAcmeEndpointRequest_Contact = &sUpdateAcmeEndpointRequest_Contact
+var UpdateAcmeEndpointRequest_CertificateAuthority = &sUpdateAcmeEndpointRequest_CertificateAuthority
+
+var UpdateCertificateOptionsRequest = &sUpdateCertificateOptionsRequest
+var UpdateCertificateOptionsRequest_CertificateArn = &sUpdateCertificateOptionsRequest_CertificateArn
+var UpdateCertificateOptionsRequest_Options = &sUpdateCertificateOptionsRequest_Options
+
+var CertificateManager = &smithy.ServiceSchema{Schema: &s_CertificateManager, Version: "2015-12-08"}

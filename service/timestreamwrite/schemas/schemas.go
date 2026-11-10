@@ -4,1601 +4,1570 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateBatchLoadTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateBatchLoadTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DeleteDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DeleteTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBatchLoadTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeBatchLoadTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListBatchLoadTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListBatchLoadTasks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDatabases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListDatabases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListTables",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResumeBatchLoadTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ResumeBatchLoadTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UpdateDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UpdateTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var WriteRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "WriteRecords",
-}, smithy.ShapeTypeOperation, 0)
-
-var _Timestream_20181101 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Timestream_20181101",
-}, smithy.ShapeTypeService, 0)
-
-var Timestream_20181101 = smithy.NewServiceSchema(_Timestream_20181101, "2018-11-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var BatchLoadDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "BatchLoadDataFormat",
-}, smithy.ShapeTypeEnum, 1)
-var BatchLoadDataFormat_CSV *smithy.Schema
-
-var BatchLoadProgressReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "BatchLoadProgressReport",
-}, smithy.ShapeTypeStructure, 6)
-var BatchLoadProgressReport_RecordsProcessed *smithy.Schema
-
-var BatchLoadProgressReport_RecordsIngested *smithy.Schema
-
-var BatchLoadProgressReport_ParseFailures *smithy.Schema
-
-var BatchLoadProgressReport_RecordIngestionFailures *smithy.Schema
-
-var BatchLoadProgressReport_FileFailures *smithy.Schema
-
-var BatchLoadProgressReport_BytesMetered *smithy.Schema
-
-var BatchLoadStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "BatchLoadStatus",
-}, smithy.ShapeTypeEnum, 6)
-var BatchLoadStatus_CREATED *smithy.Schema
-
-var BatchLoadStatus_IN_PROGRESS *smithy.Schema
-
-var BatchLoadStatus_FAILED *smithy.Schema
-
-var BatchLoadStatus_SUCCEEDED *smithy.Schema
-
-var BatchLoadStatus_PROGRESS_STOPPED *smithy.Schema
-
-var BatchLoadStatus_PENDING_RESUME *smithy.Schema
-
-var BatchLoadTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "BatchLoadTask",
-}, smithy.ShapeTypeStructure, 7)
-var BatchLoadTask_TaskId *smithy.Schema
-
-var BatchLoadTask_TaskStatus *smithy.Schema
-
-var BatchLoadTask_DatabaseName *smithy.Schema
-
-var BatchLoadTask_TableName *smithy.Schema
-
-var BatchLoadTask_CreationTime *smithy.Schema
-
-var BatchLoadTask_LastUpdatedTime *smithy.Schema
-
-var BatchLoadTask_ResumableUntil *smithy.Schema
-
-var BatchLoadTaskDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "BatchLoadTaskDescription",
-}, smithy.ShapeTypeStructure, 13)
-var BatchLoadTaskDescription_TaskId *smithy.Schema
-
-var BatchLoadTaskDescription_ErrorMessage *smithy.Schema
-
-var BatchLoadTaskDescription_DataSourceConfiguration *smithy.Schema
-
-var BatchLoadTaskDescription_ProgressReport *smithy.Schema
-
-var BatchLoadTaskDescription_ReportConfiguration *smithy.Schema
-
-var BatchLoadTaskDescription_DataModelConfiguration *smithy.Schema
-
-var BatchLoadTaskDescription_TargetDatabaseName *smithy.Schema
-
-var BatchLoadTaskDescription_TargetTableName *smithy.Schema
-
-var BatchLoadTaskDescription_TaskStatus *smithy.Schema
-
-var BatchLoadTaskDescription_RecordVersion *smithy.Schema
-
-var BatchLoadTaskDescription_CreationTime *smithy.Schema
-
-var BatchLoadTaskDescription_LastUpdatedTime *smithy.Schema
-
-var BatchLoadTaskDescription_ResumableUntil *smithy.Schema
-
-var _BatchLoadTaskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "BatchLoadTaskId",
-}, smithy.ShapeTypeString, 0)
-
-var _BatchLoadTaskList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "BatchLoadTaskList",
-}, smithy.ShapeTypeList, 1)
-var _BatchLoadTaskList_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var CsvConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CsvConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var CsvConfiguration_ColumnSeparator *smithy.Schema
-
-var CsvConfiguration_EscapeChar *smithy.Schema
-
-var CsvConfiguration_QuoteChar *smithy.Schema
-
-var CsvConfiguration_NullValue *smithy.Schema
-
-var CsvConfiguration_TrimWhiteSpace *smithy.Schema
-
-var Database = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Database",
-}, smithy.ShapeTypeStructure, 6)
-var Database_Arn *smithy.Schema
-
-var Database_DatabaseName *smithy.Schema
-
-var Database_TableCount *smithy.Schema
-
-var Database_KmsKeyId *smithy.Schema
-
-var Database_CreationTime *smithy.Schema
-
-var Database_LastUpdatedTime *smithy.Schema
-
-var _DatabaseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DatabaseList",
-}, smithy.ShapeTypeList, 1)
-var _DatabaseList_member *smithy.Schema
-
-var DataModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DataModel",
-}, smithy.ShapeTypeStructure, 6)
-var DataModel_TimeColumn *smithy.Schema
-
-var DataModel_TimeUnit *smithy.Schema
-
-var DataModel_DimensionMappings *smithy.Schema
-
-var DataModel_MultiMeasureMappings *smithy.Schema
-
-var DataModel_MixedMeasureMappings *smithy.Schema
-
-var DataModel_MeasureNameColumn *smithy.Schema
-
-var DataModelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DataModelConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DataModelConfiguration_DataModel *smithy.Schema
-
-var DataModelConfiguration_DataModelS3Configuration *smithy.Schema
-
-var DataModelS3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DataModelS3Configuration",
-}, smithy.ShapeTypeStructure, 2)
-var DataModelS3Configuration_BucketName *smithy.Schema
-
-var DataModelS3Configuration_ObjectKey *smithy.Schema
-
-var DataSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DataSourceConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var DataSourceConfiguration_DataSourceS3Configuration *smithy.Schema
-
-var DataSourceConfiguration_CsvConfiguration *smithy.Schema
-
-var DataSourceConfiguration_DataFormat *smithy.Schema
-
-var DataSourceS3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DataSourceS3Configuration",
-}, smithy.ShapeTypeStructure, 2)
-var DataSourceS3Configuration_BucketName *smithy.Schema
-
-var DataSourceS3Configuration_ObjectKeyPrefix *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Dimension",
-}, smithy.ShapeTypeStructure, 3)
-var Dimension_Name *smithy.Schema
-
-var Dimension_Value *smithy.Schema
-
-var Dimension_DimensionValueType *smithy.Schema
-
-var DimensionMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DimensionMapping",
-}, smithy.ShapeTypeStructure, 2)
-var DimensionMapping_SourceColumn *smithy.Schema
-
-var DimensionMapping_DestinationColumn *smithy.Schema
-
-var _DimensionMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DimensionMappings",
-}, smithy.ShapeTypeList, 1)
-var _DimensionMappings_member *smithy.Schema
-
-var _Dimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Dimensions",
-}, smithy.ShapeTypeList, 1)
-var _Dimensions_member *smithy.Schema
-
-var DimensionValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DimensionValueType",
-}, smithy.ShapeTypeEnum, 1)
-var DimensionValueType_VARCHAR *smithy.Schema
-
-var Endpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Endpoint",
-}, smithy.ShapeTypeStructure, 2)
-var Endpoint_Address *smithy.Schema
-
-var Endpoint_CachePeriodInMinutes *smithy.Schema
-
-var _Endpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Endpoints",
-}, smithy.ShapeTypeList, 1)
-var _Endpoints_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidEndpointException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "InvalidEndpointException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 421})
-var InvalidEndpointException_Message *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var MagneticStoreRejectedDataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MagneticStoreRejectedDataLocation",
-}, smithy.ShapeTypeStructure, 1)
-var MagneticStoreRejectedDataLocation_S3Configuration *smithy.Schema
-
-var _MagneticStoreRetentionPeriodInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MagneticStoreRetentionPeriodInDays",
-}, smithy.ShapeTypeLong, 0)
-
-var MagneticStoreWriteProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MagneticStoreWriteProperties",
-}, smithy.ShapeTypeStructure, 2)
-var MagneticStoreWriteProperties_EnableMagneticStoreWrites *smithy.Schema
-
-var MagneticStoreWriteProperties_MagneticStoreRejectedDataLocation *smithy.Schema
-
-var MeasureValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MeasureValue",
-}, smithy.ShapeTypeStructure, 3)
-var MeasureValue_Name *smithy.Schema
-
-var MeasureValue_Value *smithy.Schema
-
-var MeasureValue_Type *smithy.Schema
-
-var _MeasureValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MeasureValues",
-}, smithy.ShapeTypeList, 1)
-var _MeasureValues_member *smithy.Schema
-
-var MeasureValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MeasureValueType",
-}, smithy.ShapeTypeEnum, 6)
-var MeasureValueType_DOUBLE *smithy.Schema
-
-var MeasureValueType_BIGINT *smithy.Schema
-
-var MeasureValueType_VARCHAR *smithy.Schema
-
-var MeasureValueType_BOOLEAN *smithy.Schema
-
-var MeasureValueType_TIMESTAMP *smithy.Schema
-
-var MeasureValueType_MULTI *smithy.Schema
-
-var _MemoryStoreRetentionPeriodInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MemoryStoreRetentionPeriodInHours",
-}, smithy.ShapeTypeLong, 0)
-
-var MixedMeasureMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MixedMeasureMapping",
-}, smithy.ShapeTypeStructure, 5)
-var MixedMeasureMapping_MeasureName *smithy.Schema
-
-var MixedMeasureMapping_SourceColumn *smithy.Schema
-
-var MixedMeasureMapping_TargetMeasureName *smithy.Schema
-
-var MixedMeasureMapping_MeasureValueType *smithy.Schema
-
-var MixedMeasureMapping_MultiMeasureAttributeMappings *smithy.Schema
-
-var _MixedMeasureMappingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MixedMeasureMappingList",
-}, smithy.ShapeTypeList, 1)
-var _MixedMeasureMappingList_member *smithy.Schema
-
-var MultiMeasureAttributeMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MultiMeasureAttributeMapping",
-}, smithy.ShapeTypeStructure, 3)
-var MultiMeasureAttributeMapping_SourceColumn *smithy.Schema
-
-var MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName *smithy.Schema
-
-var MultiMeasureAttributeMapping_MeasureValueType *smithy.Schema
-
-var _MultiMeasureAttributeMappingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MultiMeasureAttributeMappingList",
-}, smithy.ShapeTypeList, 1)
-var _MultiMeasureAttributeMappingList_member *smithy.Schema
-
-var MultiMeasureMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "MultiMeasureMappings",
-}, smithy.ShapeTypeStructure, 2)
-var MultiMeasureMappings_TargetMultiMeasureName *smithy.Schema
-
-var MultiMeasureMappings_MultiMeasureAttributeMappings *smithy.Schema
-
-var _PageLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "PageLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PaginationLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "PaginationLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var PartitionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "PartitionKey",
-}, smithy.ShapeTypeStructure, 3)
-var PartitionKey_Type *smithy.Schema
-
-var PartitionKey_Name *smithy.Schema
-
-var PartitionKey_EnforcementInRecord *smithy.Schema
-
-var PartitionKeyEnforcementLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "PartitionKeyEnforcementLevel",
-}, smithy.ShapeTypeEnum, 2)
-var PartitionKeyEnforcementLevel_REQUIRED *smithy.Schema
-
-var PartitionKeyEnforcementLevel_OPTIONAL *smithy.Schema
-
-var _PartitionKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "PartitionKeyList",
-}, smithy.ShapeTypeList, 1)
-var _PartitionKeyList_member *smithy.Schema
-
-var PartitionKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "PartitionKeyType",
-}, smithy.ShapeTypeEnum, 2)
-var PartitionKeyType_DIMENSION *smithy.Schema
-
-var PartitionKeyType_MEASURE *smithy.Schema
-
-var Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Record",
-}, smithy.ShapeTypeStructure, 8)
-var Record_Dimensions *smithy.Schema
-
-var Record_MeasureName *smithy.Schema
-
-var Record_MeasureValue *smithy.Schema
-
-var Record_MeasureValueType *smithy.Schema
-
-var Record_Time *smithy.Schema
-
-var Record_TimeUnit *smithy.Schema
-
-var Record_Version *smithy.Schema
-
-var Record_MeasureValues *smithy.Schema
-
-var _RecordIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "RecordIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Records = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Records",
-}, smithy.ShapeTypeList, 1)
-var _Records_member *smithy.Schema
-
-var RecordsIngested = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "RecordsIngested",
-}, smithy.ShapeTypeStructure, 3)
-var RecordsIngested_Total *smithy.Schema
-
-var RecordsIngested_MemoryStore *smithy.Schema
-
-var RecordsIngested_MagneticStore *smithy.Schema
-
-var _RecordVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "RecordVersion",
-}, smithy.ShapeTypeLong, 0)
-
-var RejectedRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "RejectedRecord",
-}, smithy.ShapeTypeStructure, 3)
-var RejectedRecord_RecordIndex *smithy.Schema
-
-var RejectedRecord_Reason *smithy.Schema
-
-var RejectedRecord_ExistingVersion *smithy.Schema
-
-var _RejectedRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "RejectedRecords",
-}, smithy.ShapeTypeList, 1)
-var _RejectedRecords_member *smithy.Schema
-
-var RejectedRecordsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "RejectedRecordsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 419})
-var RejectedRecordsException_Message *smithy.Schema
-
-var RejectedRecordsException_RejectedRecords *smithy.Schema
-
-var ReportConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ReportConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ReportConfiguration_ReportS3Configuration *smithy.Schema
-
-var ReportS3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ReportS3Configuration",
-}, smithy.ShapeTypeStructure, 4)
-var ReportS3Configuration_BucketName *smithy.Schema
-
-var ReportS3Configuration_ObjectKeyPrefix *smithy.Schema
-
-var ReportS3Configuration_EncryptionOption *smithy.Schema
-
-var ReportS3Configuration_KmsKeyId *smithy.Schema
-
-var _ResourceCreateAPIName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ResourceCreateAPIName",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RetentionProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "RetentionProperties",
-}, smithy.ShapeTypeStructure, 2)
-var RetentionProperties_MemoryStoreRetentionPeriodInHours *smithy.Schema
-
-var RetentionProperties_MagneticStoreRetentionPeriodInDays *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var S3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "S3Configuration",
-}, smithy.ShapeTypeStructure, 4)
-var S3Configuration_BucketName *smithy.Schema
-
-var S3Configuration_ObjectKeyPrefix *smithy.Schema
-
-var S3Configuration_EncryptionOption *smithy.Schema
-
-var S3Configuration_KmsKeyId *smithy.Schema
-
-var S3EncryptionOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "S3EncryptionOption",
-}, smithy.ShapeTypeEnum, 2)
-var S3EncryptionOption_SSE_S3 *smithy.Schema
-
-var S3EncryptionOption_SSE_KMS *smithy.Schema
-
-var _S3ObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "S3ObjectKey",
-}, smithy.ShapeTypeString, 0)
-
-var _S3ObjectKeyPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "S3ObjectKeyPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var ScalarMeasureValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ScalarMeasureValueType",
-}, smithy.ShapeTypeEnum, 5)
-var ScalarMeasureValueType_DOUBLE *smithy.Schema
-
-var ScalarMeasureValueType_BIGINT *smithy.Schema
-
-var ScalarMeasureValueType_BOOLEAN *smithy.Schema
-
-var ScalarMeasureValueType_VARCHAR *smithy.Schema
-
-var ScalarMeasureValueType_TIMESTAMP *smithy.Schema
-
-var Schema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Schema",
-}, smithy.ShapeTypeStructure, 1)
-var Schema_CompositePartitionKey *smithy.Schema
-
-var _SchemaName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "SchemaName",
-}, smithy.ShapeTypeString, 0)
-
-var _SchemaValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "SchemaValue",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringValue1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "StringValue1",
-}, smithy.ShapeTypeString, 0)
-
-var _StringValue2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "StringValue2048",
-}, smithy.ShapeTypeString, 0)
-
-var _StringValue256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "StringValue256",
-}, smithy.ShapeTypeString, 0)
-
-var Table = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Table",
-}, smithy.ShapeTypeStructure, 9)
-var Table_Arn *smithy.Schema
-
-var Table_TableName *smithy.Schema
-
-var Table_DatabaseName *smithy.Schema
-
-var Table_TableStatus *smithy.Schema
-
-var Table_RetentionProperties *smithy.Schema
-
-var Table_CreationTime *smithy.Schema
-
-var Table_LastUpdatedTime *smithy.Schema
-
-var Table_MagneticStoreWriteProperties *smithy.Schema
-
-var Table_Schema *smithy.Schema
-
-var _TableList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TableList",
-}, smithy.ShapeTypeList, 1)
-var _TableList_member *smithy.Schema
-
-var TableStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TableStatus",
-}, smithy.ShapeTypeEnum, 3)
-var TableStatus_ACTIVE *smithy.Schema
-
-var TableStatus_DELETING *smithy.Schema
-
-var TableStatus_RESTORING *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var TimeUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TimeUnit",
-}, smithy.ShapeTypeEnum, 4)
-var TimeUnit_MILLISECONDS *smithy.Schema
-
-var TimeUnit_SECONDS *smithy.Schema
-
-var TimeUnit_MICROSECONDS *smithy.Schema
-
-var TimeUnit_NANOSECONDS *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateBatchLoadTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateBatchLoadTaskRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateBatchLoadTaskRequest_ClientToken *smithy.Schema
-
-var CreateBatchLoadTaskRequest_DataModelConfiguration *smithy.Schema
-
-var CreateBatchLoadTaskRequest_DataSourceConfiguration *smithy.Schema
-
-var CreateBatchLoadTaskRequest_ReportConfiguration *smithy.Schema
-
-var CreateBatchLoadTaskRequest_TargetDatabaseName *smithy.Schema
-
-var CreateBatchLoadTaskRequest_TargetTableName *smithy.Schema
-
-var CreateBatchLoadTaskRequest_RecordVersion *smithy.Schema
-
-var CreateBatchLoadTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateBatchLoadTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBatchLoadTaskResponse_TaskId *smithy.Schema
-
-var CreateDatabaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateDatabaseRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDatabaseRequest_DatabaseName *smithy.Schema
-
-var CreateDatabaseRequest_KmsKeyId *smithy.Schema
-
-var CreateDatabaseRequest_Tags *smithy.Schema
-
-var CreateDatabaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateDatabaseResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDatabaseResponse_Database *smithy.Schema
-
-var CreateTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateTableRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateTableRequest_DatabaseName *smithy.Schema
-
-var CreateTableRequest_TableName *smithy.Schema
-
-var CreateTableRequest_RetentionProperties *smithy.Schema
-
-var CreateTableRequest_Tags *smithy.Schema
-
-var CreateTableRequest_MagneticStoreWriteProperties *smithy.Schema
-
-var CreateTableRequest_Schema *smithy.Schema
-
-var CreateTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "CreateTableResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTableResponse_Table *smithy.Schema
-
-var DeleteDatabaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DeleteDatabaseRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatabaseRequest_DatabaseName *smithy.Schema
-
-var DeleteTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DeleteTableRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTableRequest_DatabaseName *smithy.Schema
-
-var DeleteTableRequest_TableName *smithy.Schema
-
-var DescribeBatchLoadTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeBatchLoadTaskRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeBatchLoadTaskRequest_TaskId *smithy.Schema
-
-var DescribeBatchLoadTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeBatchLoadTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeBatchLoadTaskResponse_BatchLoadTaskDescription *smithy.Schema
-
-var DescribeDatabaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeDatabaseRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatabaseRequest_DatabaseName *smithy.Schema
-
-var DescribeDatabaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeDatabaseResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatabaseResponse_Database *smithy.Schema
-
-var DescribeEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeEndpointsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeEndpointsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEndpointsResponse_Endpoints *smithy.Schema
-
-var DescribeTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeTableRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTableRequest_DatabaseName *smithy.Schema
-
-var DescribeTableRequest_TableName *smithy.Schema
-
-var DescribeTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "DescribeTableResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTableResponse_Table *smithy.Schema
-
-var ListBatchLoadTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListBatchLoadTasksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListBatchLoadTasksRequest_NextToken *smithy.Schema
-
-var ListBatchLoadTasksRequest_MaxResults *smithy.Schema
-
-var ListBatchLoadTasksRequest_TaskStatus *smithy.Schema
-
-var ListBatchLoadTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListBatchLoadTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListBatchLoadTasksResponse_NextToken *smithy.Schema
-
-var ListBatchLoadTasksResponse_BatchLoadTasks *smithy.Schema
-
-var ListDatabasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListDatabasesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatabasesRequest_NextToken *smithy.Schema
-
-var ListDatabasesRequest_MaxResults *smithy.Schema
-
-var ListDatabasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListDatabasesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatabasesResponse_Databases *smithy.Schema
-
-var ListDatabasesResponse_NextToken *smithy.Schema
-
-var ListTablesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListTablesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTablesRequest_DatabaseName *smithy.Schema
-
-var ListTablesRequest_NextToken *smithy.Schema
-
-var ListTablesRequest_MaxResults *smithy.Schema
-
-var ListTablesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListTablesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTablesResponse_Tables *smithy.Schema
-
-var ListTablesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ResumeBatchLoadTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ResumeBatchLoadTaskRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResumeBatchLoadTaskRequest_TaskId *smithy.Schema
-
-var ResumeBatchLoadTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "ResumeBatchLoadTaskResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDatabaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UpdateDatabaseRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDatabaseRequest_DatabaseName *smithy.Schema
-
-var UpdateDatabaseRequest_KmsKeyId *smithy.Schema
-
-var UpdateDatabaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UpdateDatabaseResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDatabaseResponse_Database *smithy.Schema
-
-var UpdateTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UpdateTableRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateTableRequest_DatabaseName *smithy.Schema
-
-var UpdateTableRequest_TableName *smithy.Schema
-
-var UpdateTableRequest_RetentionProperties *smithy.Schema
-
-var UpdateTableRequest_MagneticStoreWriteProperties *smithy.Schema
-
-var UpdateTableRequest_Schema *smithy.Schema
-
-var UpdateTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "UpdateTableResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTableResponse_Table *smithy.Schema
-
-var WriteRecordsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "WriteRecordsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var WriteRecordsRequest_DatabaseName *smithy.Schema
-
-var WriteRecordsRequest_TableName *smithy.Schema
-
-var WriteRecordsRequest_CommonAttributes *smithy.Schema
-
-var WriteRecordsRequest_Records *smithy.Schema
-
-var WriteRecordsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.timestreamwrite",
-	Name:      "WriteRecordsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var WriteRecordsResponse_RecordsIngested *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	BatchLoadDataFormat_CSV = BatchLoadDataFormat.AddMember("CSV", smithyprelude.Unit)
-
-	BatchLoadProgressReport_RecordsProcessed = BatchLoadProgressReport.AddMember("RecordsProcessed", _Long)
-
-	BatchLoadProgressReport_RecordsIngested = BatchLoadProgressReport.AddMember("RecordsIngested", _Long)
-
-	BatchLoadProgressReport_ParseFailures = BatchLoadProgressReport.AddMember("ParseFailures", _Long)
-
-	BatchLoadProgressReport_RecordIngestionFailures = BatchLoadProgressReport.AddMember("RecordIngestionFailures", _Long)
-
-	BatchLoadProgressReport_FileFailures = BatchLoadProgressReport.AddMember("FileFailures", _Long)
-
-	BatchLoadProgressReport_BytesMetered = BatchLoadProgressReport.AddMember("BytesMetered", _Long)
-
-	BatchLoadStatus_CREATED = BatchLoadStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	BatchLoadStatus_IN_PROGRESS = BatchLoadStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	BatchLoadStatus_FAILED = BatchLoadStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	BatchLoadStatus_SUCCEEDED = BatchLoadStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	BatchLoadStatus_PROGRESS_STOPPED = BatchLoadStatus.AddMember("PROGRESS_STOPPED", smithyprelude.Unit)
-
-	BatchLoadStatus_PENDING_RESUME = BatchLoadStatus.AddMember("PENDING_RESUME", smithyprelude.Unit)
-
-	BatchLoadTask_TaskId = BatchLoadTask.AddMember("TaskId", _BatchLoadTaskId)
-
-	BatchLoadTask_TaskStatus = BatchLoadTask.AddMember("TaskStatus", BatchLoadStatus)
-
-	BatchLoadTask_DatabaseName = BatchLoadTask.AddMember("DatabaseName", _ResourceName)
-
-	BatchLoadTask_TableName = BatchLoadTask.AddMember("TableName", _ResourceName)
-
-	BatchLoadTask_CreationTime = BatchLoadTask.AddMember("CreationTime", _Date)
-
-	BatchLoadTask_LastUpdatedTime = BatchLoadTask.AddMember("LastUpdatedTime", _Date)
-
-	BatchLoadTask_ResumableUntil = BatchLoadTask.AddMember("ResumableUntil", _Date)
-
-	DataSourceS3Configuration_BucketName = DataSourceS3Configuration.AddMember("BucketName", _S3BucketName)
-
-	DataSourceS3Configuration_ObjectKeyPrefix = DataSourceS3Configuration.AddMember("ObjectKeyPrefix", _S3ObjectKey)
-
-	CsvConfiguration_ColumnSeparator = CsvConfiguration.AddMember("ColumnSeparator", _StringValue1)
-
-	CsvConfiguration_EscapeChar = CsvConfiguration.AddMember("EscapeChar", _StringValue1)
-
-	CsvConfiguration_QuoteChar = CsvConfiguration.AddMember("QuoteChar", _StringValue1)
-
-	CsvConfiguration_NullValue = CsvConfiguration.AddMember("NullValue", _StringValue256)
-
-	CsvConfiguration_TrimWhiteSpace = CsvConfiguration.AddMember("TrimWhiteSpace", _Boolean)
-
-	DataSourceConfiguration_DataSourceS3Configuration = DataSourceConfiguration.AddMember("DataSourceS3Configuration", DataSourceS3Configuration)
-
-	DataSourceConfiguration_CsvConfiguration = DataSourceConfiguration.AddMember("CsvConfiguration", CsvConfiguration)
-
-	DataSourceConfiguration_DataFormat = DataSourceConfiguration.AddMember("DataFormat", BatchLoadDataFormat)
-
-	S3EncryptionOption_SSE_S3 = S3EncryptionOption.AddMember("SSE_S3", smithyprelude.Unit)
-
-	S3EncryptionOption_SSE_KMS = S3EncryptionOption.AddMember("SSE_KMS", smithyprelude.Unit)
-
-	ReportS3Configuration_BucketName = ReportS3Configuration.AddMember("BucketName", _S3BucketName)
-
-	ReportS3Configuration_ObjectKeyPrefix = ReportS3Configuration.AddMember("ObjectKeyPrefix", _S3ObjectKeyPrefix)
-
-	ReportS3Configuration_EncryptionOption = ReportS3Configuration.AddMember("EncryptionOption", S3EncryptionOption)
-
-	ReportS3Configuration_KmsKeyId = ReportS3Configuration.AddMember("KmsKeyId", _StringValue2048)
-
-	ReportConfiguration_ReportS3Configuration = ReportConfiguration.AddMember("ReportS3Configuration", ReportS3Configuration)
-
-	TimeUnit_MILLISECONDS = TimeUnit.AddMember("MILLISECONDS", smithyprelude.Unit)
-
-	TimeUnit_SECONDS = TimeUnit.AddMember("SECONDS", smithyprelude.Unit)
-
-	TimeUnit_MICROSECONDS = TimeUnit.AddMember("MICROSECONDS", smithyprelude.Unit)
-
-	TimeUnit_NANOSECONDS = TimeUnit.AddMember("NANOSECONDS", smithyprelude.Unit)
-
-	DimensionMapping_SourceColumn = DimensionMapping.AddMember("SourceColumn", _SchemaName)
-
-	DimensionMapping_DestinationColumn = DimensionMapping.AddMember("DestinationColumn", _SchemaName)
-
-	_DimensionMappings_member = _DimensionMappings.AddMember("member", DimensionMapping)
-
-	ScalarMeasureValueType_DOUBLE = ScalarMeasureValueType.AddMember("DOUBLE", smithyprelude.Unit)
-
-	ScalarMeasureValueType_BIGINT = ScalarMeasureValueType.AddMember("BIGINT", smithyprelude.Unit)
-
-	ScalarMeasureValueType_BOOLEAN = ScalarMeasureValueType.AddMember("BOOLEAN", smithyprelude.Unit)
-
-	ScalarMeasureValueType_VARCHAR = ScalarMeasureValueType.AddMember("VARCHAR", smithyprelude.Unit)
-
-	ScalarMeasureValueType_TIMESTAMP = ScalarMeasureValueType.AddMember("TIMESTAMP", smithyprelude.Unit)
-
-	MultiMeasureAttributeMapping_SourceColumn = MultiMeasureAttributeMapping.AddMember("SourceColumn", _SchemaName)
-
-	MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName = MultiMeasureAttributeMapping.AddMember("TargetMultiMeasureAttributeName", _SchemaName)
-
-	MultiMeasureAttributeMapping_MeasureValueType = MultiMeasureAttributeMapping.AddMember("MeasureValueType", ScalarMeasureValueType)
-
-	_MultiMeasureAttributeMappingList_member = _MultiMeasureAttributeMappingList.AddMember("member", MultiMeasureAttributeMapping)
-
-	MultiMeasureMappings_TargetMultiMeasureName = MultiMeasureMappings.AddMember("TargetMultiMeasureName", _SchemaName)
-
-	MultiMeasureMappings_MultiMeasureAttributeMappings = MultiMeasureMappings.AddMember("MultiMeasureAttributeMappings", _MultiMeasureAttributeMappingList)
-
-	MeasureValueType_DOUBLE = MeasureValueType.AddMember("DOUBLE", smithyprelude.Unit)
-
-	MeasureValueType_BIGINT = MeasureValueType.AddMember("BIGINT", smithyprelude.Unit)
-
-	MeasureValueType_VARCHAR = MeasureValueType.AddMember("VARCHAR", smithyprelude.Unit)
-
-	MeasureValueType_BOOLEAN = MeasureValueType.AddMember("BOOLEAN", smithyprelude.Unit)
-
-	MeasureValueType_TIMESTAMP = MeasureValueType.AddMember("TIMESTAMP", smithyprelude.Unit)
-
-	MeasureValueType_MULTI = MeasureValueType.AddMember("MULTI", smithyprelude.Unit)
-
-	MixedMeasureMapping_MeasureName = MixedMeasureMapping.AddMember("MeasureName", _SchemaName)
-
-	MixedMeasureMapping_SourceColumn = MixedMeasureMapping.AddMember("SourceColumn", _SchemaName)
-
-	MixedMeasureMapping_TargetMeasureName = MixedMeasureMapping.AddMember("TargetMeasureName", _SchemaName)
-
-	MixedMeasureMapping_MeasureValueType = MixedMeasureMapping.AddMember("MeasureValueType", MeasureValueType)
-
-	MixedMeasureMapping_MultiMeasureAttributeMappings = MixedMeasureMapping.AddMember("MultiMeasureAttributeMappings", _MultiMeasureAttributeMappingList)
-
-	_MixedMeasureMappingList_member = _MixedMeasureMappingList.AddMember("member", MixedMeasureMapping)
-
-	DataModel_TimeColumn = DataModel.AddMember("TimeColumn", _StringValue256)
-
-	DataModel_TimeUnit = DataModel.AddMember("TimeUnit", TimeUnit)
-
-	DataModel_DimensionMappings = DataModel.AddMember("DimensionMappings", _DimensionMappings)
-
-	DataModel_MultiMeasureMappings = DataModel.AddMember("MultiMeasureMappings", MultiMeasureMappings)
-
-	DataModel_MixedMeasureMappings = DataModel.AddMember("MixedMeasureMappings", _MixedMeasureMappingList)
-
-	DataModel_MeasureNameColumn = DataModel.AddMember("MeasureNameColumn", _StringValue256)
-
-	DataModelS3Configuration_BucketName = DataModelS3Configuration.AddMember("BucketName", _S3BucketName)
-
-	DataModelS3Configuration_ObjectKey = DataModelS3Configuration.AddMember("ObjectKey", _S3ObjectKey)
-
-	DataModelConfiguration_DataModel = DataModelConfiguration.AddMember("DataModel", DataModel)
-
-	DataModelConfiguration_DataModelS3Configuration = DataModelConfiguration.AddMember("DataModelS3Configuration", DataModelS3Configuration)
-
-	BatchLoadTaskDescription_TaskId = BatchLoadTaskDescription.AddMember("TaskId", _BatchLoadTaskId)
-
-	BatchLoadTaskDescription_ErrorMessage = BatchLoadTaskDescription.AddMember("ErrorMessage", _StringValue2048)
-
-	BatchLoadTaskDescription_DataSourceConfiguration = BatchLoadTaskDescription.AddMember("DataSourceConfiguration", DataSourceConfiguration)
-
-	BatchLoadTaskDescription_ProgressReport = BatchLoadTaskDescription.AddMember("ProgressReport", BatchLoadProgressReport)
-
-	BatchLoadTaskDescription_ReportConfiguration = BatchLoadTaskDescription.AddMember("ReportConfiguration", ReportConfiguration)
-
-	BatchLoadTaskDescription_DataModelConfiguration = BatchLoadTaskDescription.AddMember("DataModelConfiguration", DataModelConfiguration)
-
-	BatchLoadTaskDescription_TargetDatabaseName = BatchLoadTaskDescription.AddMember("TargetDatabaseName", _ResourceName)
-
-	BatchLoadTaskDescription_TargetTableName = BatchLoadTaskDescription.AddMember("TargetTableName", _ResourceName)
-
-	BatchLoadTaskDescription_TaskStatus = BatchLoadTaskDescription.AddMember("TaskStatus", BatchLoadStatus)
-
-	BatchLoadTaskDescription_RecordVersion = BatchLoadTaskDescription.AddMember("RecordVersion", _RecordVersion)
-
-	BatchLoadTaskDescription_CreationTime = BatchLoadTaskDescription.AddMember("CreationTime", _Date)
-
-	BatchLoadTaskDescription_LastUpdatedTime = BatchLoadTaskDescription.AddMember("LastUpdatedTime", _Date)
-
-	BatchLoadTaskDescription_ResumableUntil = BatchLoadTaskDescription.AddMember("ResumableUntil", _Date)
-
-	_BatchLoadTaskList_member = _BatchLoadTaskList.AddMember("member", BatchLoadTask)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	Database_Arn = Database.AddMember("Arn", _String)
-
-	Database_DatabaseName = Database.AddMember("DatabaseName", _ResourceName)
-
-	Database_TableCount = Database.AddMember("TableCount", _Long)
-
-	Database_KmsKeyId = Database.AddMember("KmsKeyId", _StringValue2048)
-
-	Database_CreationTime = Database.AddMember("CreationTime", _Date)
-
-	Database_LastUpdatedTime = Database.AddMember("LastUpdatedTime", _Date)
-
-	_DatabaseList_member = _DatabaseList.AddMember("member", Database)
-
-	DimensionValueType_VARCHAR = DimensionValueType.AddMember("VARCHAR", smithyprelude.Unit)
-
-	Dimension_Name = Dimension.AddMember("Name", _SchemaName)
-
-	Dimension_Value = Dimension.AddMember("Value", _SchemaValue)
-
-	Dimension_DimensionValueType = Dimension.AddMember("DimensionValueType", DimensionValueType)
-
-	_Dimensions_member = _Dimensions.AddMember("member", Dimension)
-
-	Endpoint_Address = Endpoint.AddMember("Address", _String)
-
-	Endpoint_CachePeriodInMinutes = Endpoint.AddMember("CachePeriodInMinutes", _Long)
-
-	_Endpoints_member = _Endpoints.AddMember("member", Endpoint)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	InvalidEndpointException_Message = InvalidEndpointException.AddMember("Message", _ErrorMessage)
-
-	S3Configuration_BucketName = S3Configuration.AddMember("BucketName", _S3BucketName)
-
-	S3Configuration_ObjectKeyPrefix = S3Configuration.AddMember("ObjectKeyPrefix", _S3ObjectKeyPrefix)
-
-	S3Configuration_EncryptionOption = S3Configuration.AddMember("EncryptionOption", S3EncryptionOption)
-
-	S3Configuration_KmsKeyId = S3Configuration.AddMember("KmsKeyId", _StringValue2048)
-
-	MagneticStoreRejectedDataLocation_S3Configuration = MagneticStoreRejectedDataLocation.AddMember("S3Configuration", S3Configuration)
-
-	MagneticStoreWriteProperties_EnableMagneticStoreWrites = MagneticStoreWriteProperties.AddMember("EnableMagneticStoreWrites", _Boolean)
-
-	MagneticStoreWriteProperties_MagneticStoreRejectedDataLocation = MagneticStoreWriteProperties.AddMember("MagneticStoreRejectedDataLocation", MagneticStoreRejectedDataLocation)
-
-	MeasureValue_Name = MeasureValue.AddMember("Name", _SchemaName)
-
-	MeasureValue_Value = MeasureValue.AddMember("Value", _StringValue2048)
-
-	MeasureValue_Type = MeasureValue.AddMember("Type", MeasureValueType)
-
-	_MeasureValues_member = _MeasureValues.AddMember("member", MeasureValue)
-
-	PartitionKeyType_DIMENSION = PartitionKeyType.AddMember("DIMENSION", smithyprelude.Unit)
-
-	PartitionKeyType_MEASURE = PartitionKeyType.AddMember("MEASURE", smithyprelude.Unit)
-
-	PartitionKeyEnforcementLevel_REQUIRED = PartitionKeyEnforcementLevel.AddMember("REQUIRED", smithyprelude.Unit)
-
-	PartitionKeyEnforcementLevel_OPTIONAL = PartitionKeyEnforcementLevel.AddMember("OPTIONAL", smithyprelude.Unit)
-
-	PartitionKey_Type = PartitionKey.AddMember("Type", PartitionKeyType)
-
-	PartitionKey_Name = PartitionKey.AddMember("Name", _SchemaName)
-
-	PartitionKey_EnforcementInRecord = PartitionKey.AddMember("EnforcementInRecord", PartitionKeyEnforcementLevel)
-
-	_PartitionKeyList_member = _PartitionKeyList.AddMember("member", PartitionKey)
-
-	Record_Dimensions = Record.AddMember("Dimensions", _Dimensions)
-
-	Record_MeasureName = Record.AddMember("MeasureName", _SchemaName)
-
-	Record_MeasureValue = Record.AddMember("MeasureValue", _StringValue2048)
-
-	Record_MeasureValueType = Record.AddMember("MeasureValueType", MeasureValueType)
-
-	Record_Time = Record.AddMember("Time", _StringValue256)
-
-	Record_TimeUnit = Record.AddMember("TimeUnit", TimeUnit)
-
-	Record_Version = Record.AddMember("Version", _RecordVersion)
-
-	Record_MeasureValues = Record.AddMember("MeasureValues", _MeasureValues)
-
-	_Records_member = _Records.AddMember("member", Record)
-
-	RecordsIngested_Total = RecordsIngested.AddMember("Total", _Integer)
-
-	RecordsIngested_MemoryStore = RecordsIngested.AddMember("MemoryStore", _Integer)
-
-	RecordsIngested_MagneticStore = RecordsIngested.AddMember("MagneticStore", _Integer)
-
-	RejectedRecord_RecordIndex = RejectedRecord.AddMember("RecordIndex", _RecordIndex)
-
-	RejectedRecord_Reason = RejectedRecord.AddMember("Reason", _ErrorMessage)
-
-	RejectedRecord_ExistingVersion = RejectedRecord.AddMember("ExistingVersion", _RecordVersion)
-
-	_RejectedRecords_member = _RejectedRecords.AddMember("member", RejectedRecord)
-
-	RejectedRecordsException_Message = RejectedRecordsException.AddMember("Message", _ErrorMessage)
-
-	RejectedRecordsException_RejectedRecords = RejectedRecordsException.AddMember("RejectedRecords", _RejectedRecords)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	RetentionProperties_MemoryStoreRetentionPeriodInHours = RetentionProperties.AddMember("MemoryStoreRetentionPeriodInHours", _MemoryStoreRetentionPeriodInHours)
-
-	RetentionProperties_MagneticStoreRetentionPeriodInDays = RetentionProperties.AddMember("MagneticStoreRetentionPeriodInDays", _MagneticStoreRetentionPeriodInDays)
-
-	Schema_CompositePartitionKey = Schema.AddMember("CompositePartitionKey", _PartitionKeyList)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	TableStatus_ACTIVE = TableStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TableStatus_DELETING = TableStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	TableStatus_RESTORING = TableStatus.AddMember("RESTORING", smithyprelude.Unit)
-
-	Table_Arn = Table.AddMember("Arn", _String)
-
-	Table_TableName = Table.AddMember("TableName", _ResourceName)
-
-	Table_DatabaseName = Table.AddMember("DatabaseName", _ResourceName)
-
-	Table_TableStatus = Table.AddMember("TableStatus", TableStatus)
-
-	Table_RetentionProperties = Table.AddMember("RetentionProperties", RetentionProperties)
-
-	Table_CreationTime = Table.AddMember("CreationTime", _Date)
-
-	Table_LastUpdatedTime = Table.AddMember("LastUpdatedTime", _Date)
-
-	Table_MagneticStoreWriteProperties = Table.AddMember("MagneticStoreWriteProperties", MagneticStoreWriteProperties)
-
-	Table_Schema = Table.AddMember("Schema", Schema)
-
-	_TableList_member = _TableList.AddMember("member", Table)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	CreateBatchLoadTaskRequest_ClientToken = CreateBatchLoadTaskRequest.AddMember("ClientToken", _ClientRequestToken)
-
-	CreateBatchLoadTaskRequest_DataModelConfiguration = CreateBatchLoadTaskRequest.AddMember("DataModelConfiguration", DataModelConfiguration)
-
-	CreateBatchLoadTaskRequest_DataSourceConfiguration = CreateBatchLoadTaskRequest.AddMember("DataSourceConfiguration", DataSourceConfiguration)
-
-	CreateBatchLoadTaskRequest_ReportConfiguration = CreateBatchLoadTaskRequest.AddMember("ReportConfiguration", ReportConfiguration)
-
-	CreateBatchLoadTaskRequest_TargetDatabaseName = CreateBatchLoadTaskRequest.AddMember("TargetDatabaseName", _ResourceCreateAPIName)
-
-	CreateBatchLoadTaskRequest_TargetTableName = CreateBatchLoadTaskRequest.AddMember("TargetTableName", _ResourceCreateAPIName)
-
-	CreateBatchLoadTaskRequest_RecordVersion = CreateBatchLoadTaskRequest.AddMember("RecordVersion", _RecordVersion)
-
-	CreateBatchLoadTaskResponse_TaskId = CreateBatchLoadTaskResponse.AddMember("TaskId", _BatchLoadTaskId)
-
-	CreateDatabaseRequest_DatabaseName = CreateDatabaseRequest.AddMember("DatabaseName", _ResourceCreateAPIName)
-
-	CreateDatabaseRequest_KmsKeyId = CreateDatabaseRequest.AddMember("KmsKeyId", _StringValue2048)
-
-	CreateDatabaseRequest_Tags = CreateDatabaseRequest.AddMember("Tags", _TagList)
-
-	CreateDatabaseResponse_Database = CreateDatabaseResponse.AddMember("Database", Database)
-
-	CreateTableRequest_DatabaseName = CreateTableRequest.AddMember("DatabaseName", _ResourceCreateAPIName)
-
-	CreateTableRequest_TableName = CreateTableRequest.AddMember("TableName", _ResourceCreateAPIName)
-
-	CreateTableRequest_RetentionProperties = CreateTableRequest.AddMember("RetentionProperties", RetentionProperties)
-
-	CreateTableRequest_Tags = CreateTableRequest.AddMember("Tags", _TagList)
-
-	CreateTableRequest_MagneticStoreWriteProperties = CreateTableRequest.AddMember("MagneticStoreWriteProperties", MagneticStoreWriteProperties)
-
-	CreateTableRequest_Schema = CreateTableRequest.AddMember("Schema", Schema)
-
-	CreateTableResponse_Table = CreateTableResponse.AddMember("Table", Table)
-
-	DeleteDatabaseRequest_DatabaseName = DeleteDatabaseRequest.AddMember("DatabaseName", _ResourceName)
-
-	DeleteTableRequest_DatabaseName = DeleteTableRequest.AddMember("DatabaseName", _ResourceName)
-
-	DeleteTableRequest_TableName = DeleteTableRequest.AddMember("TableName", _ResourceName)
-
-	DescribeBatchLoadTaskRequest_TaskId = DescribeBatchLoadTaskRequest.AddMember("TaskId", _BatchLoadTaskId)
-
-	DescribeBatchLoadTaskResponse_BatchLoadTaskDescription = DescribeBatchLoadTaskResponse.AddMember("BatchLoadTaskDescription", BatchLoadTaskDescription)
-
-	DescribeDatabaseRequest_DatabaseName = DescribeDatabaseRequest.AddMember("DatabaseName", _ResourceName)
-
-	DescribeDatabaseResponse_Database = DescribeDatabaseResponse.AddMember("Database", Database)
-
-	DescribeEndpointsResponse_Endpoints = DescribeEndpointsResponse.AddMember("Endpoints", _Endpoints)
-
-	DescribeTableRequest_DatabaseName = DescribeTableRequest.AddMember("DatabaseName", _ResourceName)
-
-	DescribeTableRequest_TableName = DescribeTableRequest.AddMember("TableName", _ResourceName)
-
-	DescribeTableResponse_Table = DescribeTableResponse.AddMember("Table", Table)
-
-	ListBatchLoadTasksRequest_NextToken = ListBatchLoadTasksRequest.AddMember("NextToken", _String)
-
-	ListBatchLoadTasksRequest_MaxResults = ListBatchLoadTasksRequest.AddMember("MaxResults", _PageLimit)
-
-	ListBatchLoadTasksRequest_TaskStatus = ListBatchLoadTasksRequest.AddMember("TaskStatus", BatchLoadStatus)
-
-	ListBatchLoadTasksResponse_NextToken = ListBatchLoadTasksResponse.AddMember("NextToken", _String)
-
-	ListBatchLoadTasksResponse_BatchLoadTasks = ListBatchLoadTasksResponse.AddMember("BatchLoadTasks", _BatchLoadTaskList)
-
-	ListDatabasesRequest_NextToken = ListDatabasesRequest.AddMember("NextToken", _String)
-
-	ListDatabasesRequest_MaxResults = ListDatabasesRequest.AddMember("MaxResults", _PaginationLimit)
-
-	ListDatabasesResponse_Databases = ListDatabasesResponse.AddMember("Databases", _DatabaseList)
-
-	ListDatabasesResponse_NextToken = ListDatabasesResponse.AddMember("NextToken", _String)
-
-	ListTablesRequest_DatabaseName = ListTablesRequest.AddMember("DatabaseName", _ResourceName)
-
-	ListTablesRequest_NextToken = ListTablesRequest.AddMember("NextToken", _String)
-
-	ListTablesRequest_MaxResults = ListTablesRequest.AddMember("MaxResults", _PaginationLimit)
-
-	ListTablesResponse_Tables = ListTablesResponse.AddMember("Tables", _TableList)
-
-	ListTablesResponse_NextToken = ListTablesResponse.AddMember("NextToken", _String)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ResumeBatchLoadTaskRequest_TaskId = ResumeBatchLoadTaskRequest.AddMember("TaskId", _BatchLoadTaskId)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateDatabaseRequest_DatabaseName = UpdateDatabaseRequest.AddMember("DatabaseName", _ResourceName)
-
-	UpdateDatabaseRequest_KmsKeyId = UpdateDatabaseRequest.AddMember("KmsKeyId", _StringValue2048)
-
-	UpdateDatabaseResponse_Database = UpdateDatabaseResponse.AddMember("Database", Database)
-
-	UpdateTableRequest_DatabaseName = UpdateTableRequest.AddMember("DatabaseName", _ResourceName)
-
-	UpdateTableRequest_TableName = UpdateTableRequest.AddMember("TableName", _ResourceName)
-
-	UpdateTableRequest_RetentionProperties = UpdateTableRequest.AddMember("RetentionProperties", RetentionProperties)
-
-	UpdateTableRequest_MagneticStoreWriteProperties = UpdateTableRequest.AddMember("MagneticStoreWriteProperties", MagneticStoreWriteProperties)
-
-	UpdateTableRequest_Schema = UpdateTableRequest.AddMember("Schema", Schema)
-
-	UpdateTableResponse_Table = UpdateTableResponse.AddMember("Table", Table)
-
-	WriteRecordsRequest_DatabaseName = WriteRecordsRequest.AddMember("DatabaseName", _ResourceName)
-
-	WriteRecordsRequest_TableName = WriteRecordsRequest.AddMember("TableName", _ResourceName)
-
-	WriteRecordsRequest_CommonAttributes = WriteRecordsRequest.AddMember("CommonAttributes", Record)
-
-	WriteRecordsRequest_Records = WriteRecordsRequest.AddMember("Records", _Records)
-
-	WriteRecordsResponse_RecordsIngested = WriteRecordsResponse.AddMember("RecordsIngested", RecordsIngested)
-
-}
+var (
+	eCreateBatchLoadTask                                            smithy.SchemaExtensions
+	eCreateDatabase                                                 smithy.SchemaExtensions
+	eCreateTable                                                    smithy.SchemaExtensions
+	eDeleteDatabase                                                 smithy.SchemaExtensions
+	eDeleteTable                                                    smithy.SchemaExtensions
+	eDescribeBatchLoadTask                                          smithy.SchemaExtensions
+	eDescribeDatabase                                               smithy.SchemaExtensions
+	eDescribeEndpoints                                              smithy.SchemaExtensions
+	eDescribeTable                                                  smithy.SchemaExtensions
+	eListBatchLoadTasks                                             smithy.SchemaExtensions
+	eListDatabases                                                  smithy.SchemaExtensions
+	eListTables                                                     smithy.SchemaExtensions
+	eListTagsForResource                                            smithy.SchemaExtensions
+	eResumeBatchLoadTask                                            smithy.SchemaExtensions
+	eTagResource                                                    smithy.SchemaExtensions
+	eUntagResource                                                  smithy.SchemaExtensions
+	eUpdateDatabase                                                 smithy.SchemaExtensions
+	eUpdateTable                                                    smithy.SchemaExtensions
+	eWriteRecords                                                   smithy.SchemaExtensions
+	e_Timestream_20181101                                           smithy.SchemaExtensions
+	eAccessDeniedException                                          smithy.SchemaExtensions
+	eAccessDeniedException_Message                                  smithy.SchemaExtensions
+	e_AmazonResourceName                                            smithy.SchemaExtensions
+	eBatchLoadDataFormat                                            smithy.SchemaExtensions
+	eBatchLoadDataFormat_CSV                                        smithy.SchemaExtensions
+	eBatchLoadProgressReport                                        smithy.SchemaExtensions
+	eBatchLoadProgressReport_RecordsProcessed                       smithy.SchemaExtensions
+	eBatchLoadProgressReport_RecordsIngested                        smithy.SchemaExtensions
+	eBatchLoadProgressReport_ParseFailures                          smithy.SchemaExtensions
+	eBatchLoadProgressReport_RecordIngestionFailures                smithy.SchemaExtensions
+	eBatchLoadProgressReport_FileFailures                           smithy.SchemaExtensions
+	eBatchLoadProgressReport_BytesMetered                           smithy.SchemaExtensions
+	eBatchLoadStatus                                                smithy.SchemaExtensions
+	eBatchLoadStatus_CREATED                                        smithy.SchemaExtensions
+	eBatchLoadStatus_IN_PROGRESS                                    smithy.SchemaExtensions
+	eBatchLoadStatus_FAILED                                         smithy.SchemaExtensions
+	eBatchLoadStatus_SUCCEEDED                                      smithy.SchemaExtensions
+	eBatchLoadStatus_PROGRESS_STOPPED                               smithy.SchemaExtensions
+	eBatchLoadStatus_PENDING_RESUME                                 smithy.SchemaExtensions
+	eBatchLoadTask                                                  smithy.SchemaExtensions
+	eBatchLoadTask_TaskId                                           smithy.SchemaExtensions
+	eBatchLoadTask_TaskStatus                                       smithy.SchemaExtensions
+	eBatchLoadTask_DatabaseName                                     smithy.SchemaExtensions
+	eBatchLoadTask_TableName                                        smithy.SchemaExtensions
+	eBatchLoadTask_CreationTime                                     smithy.SchemaExtensions
+	eBatchLoadTask_LastUpdatedTime                                  smithy.SchemaExtensions
+	eBatchLoadTask_ResumableUntil                                   smithy.SchemaExtensions
+	eBatchLoadTaskDescription                                       smithy.SchemaExtensions
+	eBatchLoadTaskDescription_TaskId                                smithy.SchemaExtensions
+	eBatchLoadTaskDescription_ErrorMessage                          smithy.SchemaExtensions
+	eBatchLoadTaskDescription_DataSourceConfiguration               smithy.SchemaExtensions
+	eBatchLoadTaskDescription_ProgressReport                        smithy.SchemaExtensions
+	eBatchLoadTaskDescription_ReportConfiguration                   smithy.SchemaExtensions
+	eBatchLoadTaskDescription_DataModelConfiguration                smithy.SchemaExtensions
+	eBatchLoadTaskDescription_TargetDatabaseName                    smithy.SchemaExtensions
+	eBatchLoadTaskDescription_TargetTableName                       smithy.SchemaExtensions
+	eBatchLoadTaskDescription_TaskStatus                            smithy.SchemaExtensions
+	eBatchLoadTaskDescription_RecordVersion                         smithy.SchemaExtensions
+	eBatchLoadTaskDescription_CreationTime                          smithy.SchemaExtensions
+	eBatchLoadTaskDescription_LastUpdatedTime                       smithy.SchemaExtensions
+	eBatchLoadTaskDescription_ResumableUntil                        smithy.SchemaExtensions
+	e_BatchLoadTaskId                                               smithy.SchemaExtensions
+	e_BatchLoadTaskList                                             smithy.SchemaExtensions
+	e_BatchLoadTaskList_member                                      smithy.SchemaExtensions
+	e_Boolean                                                       smithy.SchemaExtensions
+	e_ClientRequestToken                                            smithy.SchemaExtensions
+	eConflictException                                              smithy.SchemaExtensions
+	eConflictException_Message                                      smithy.SchemaExtensions
+	eCsvConfiguration                                               smithy.SchemaExtensions
+	eCsvConfiguration_ColumnSeparator                               smithy.SchemaExtensions
+	eCsvConfiguration_EscapeChar                                    smithy.SchemaExtensions
+	eCsvConfiguration_QuoteChar                                     smithy.SchemaExtensions
+	eCsvConfiguration_NullValue                                     smithy.SchemaExtensions
+	eCsvConfiguration_TrimWhiteSpace                                smithy.SchemaExtensions
+	eDatabase                                                       smithy.SchemaExtensions
+	eDatabase_Arn                                                   smithy.SchemaExtensions
+	eDatabase_DatabaseName                                          smithy.SchemaExtensions
+	eDatabase_TableCount                                            smithy.SchemaExtensions
+	eDatabase_KmsKeyId                                              smithy.SchemaExtensions
+	eDatabase_CreationTime                                          smithy.SchemaExtensions
+	eDatabase_LastUpdatedTime                                       smithy.SchemaExtensions
+	e_DatabaseList                                                  smithy.SchemaExtensions
+	e_DatabaseList_member                                           smithy.SchemaExtensions
+	eDataModel                                                      smithy.SchemaExtensions
+	eDataModel_TimeColumn                                           smithy.SchemaExtensions
+	eDataModel_TimeUnit                                             smithy.SchemaExtensions
+	eDataModel_DimensionMappings                                    smithy.SchemaExtensions
+	eDataModel_MultiMeasureMappings                                 smithy.SchemaExtensions
+	eDataModel_MixedMeasureMappings                                 smithy.SchemaExtensions
+	eDataModel_MeasureNameColumn                                    smithy.SchemaExtensions
+	eDataModelConfiguration                                         smithy.SchemaExtensions
+	eDataModelConfiguration_DataModel                               smithy.SchemaExtensions
+	eDataModelConfiguration_DataModelS3Configuration                smithy.SchemaExtensions
+	eDataModelS3Configuration                                       smithy.SchemaExtensions
+	eDataModelS3Configuration_BucketName                            smithy.SchemaExtensions
+	eDataModelS3Configuration_ObjectKey                             smithy.SchemaExtensions
+	eDataSourceConfiguration                                        smithy.SchemaExtensions
+	eDataSourceConfiguration_DataSourceS3Configuration              smithy.SchemaExtensions
+	eDataSourceConfiguration_CsvConfiguration                       smithy.SchemaExtensions
+	eDataSourceConfiguration_DataFormat                             smithy.SchemaExtensions
+	eDataSourceS3Configuration                                      smithy.SchemaExtensions
+	eDataSourceS3Configuration_BucketName                           smithy.SchemaExtensions
+	eDataSourceS3Configuration_ObjectKeyPrefix                      smithy.SchemaExtensions
+	e_Date                                                          smithy.SchemaExtensions
+	eDimension                                                      smithy.SchemaExtensions
+	eDimension_Name                                                 smithy.SchemaExtensions
+	eDimension_Value                                                smithy.SchemaExtensions
+	eDimension_DimensionValueType                                   smithy.SchemaExtensions
+	eDimensionMapping                                               smithy.SchemaExtensions
+	eDimensionMapping_SourceColumn                                  smithy.SchemaExtensions
+	eDimensionMapping_DestinationColumn                             smithy.SchemaExtensions
+	e_DimensionMappings                                             smithy.SchemaExtensions
+	e_DimensionMappings_member                                      smithy.SchemaExtensions
+	e_Dimensions                                                    smithy.SchemaExtensions
+	e_Dimensions_member                                             smithy.SchemaExtensions
+	eDimensionValueType                                             smithy.SchemaExtensions
+	eDimensionValueType_VARCHAR                                     smithy.SchemaExtensions
+	eEndpoint                                                       smithy.SchemaExtensions
+	eEndpoint_Address                                               smithy.SchemaExtensions
+	eEndpoint_CachePeriodInMinutes                                  smithy.SchemaExtensions
+	e_Endpoints                                                     smithy.SchemaExtensions
+	e_Endpoints_member                                              smithy.SchemaExtensions
+	e_ErrorMessage                                                  smithy.SchemaExtensions
+	e_Integer                                                       smithy.SchemaExtensions
+	eInternalServerException                                        smithy.SchemaExtensions
+	eInternalServerException_Message                                smithy.SchemaExtensions
+	eInvalidEndpointException                                       smithy.SchemaExtensions
+	eInvalidEndpointException_Message                               smithy.SchemaExtensions
+	e_Long                                                          smithy.SchemaExtensions
+	eMagneticStoreRejectedDataLocation                              smithy.SchemaExtensions
+	eMagneticStoreRejectedDataLocation_S3Configuration              smithy.SchemaExtensions
+	e_MagneticStoreRetentionPeriodInDays                            smithy.SchemaExtensions
+	eMagneticStoreWriteProperties                                   smithy.SchemaExtensions
+	eMagneticStoreWriteProperties_EnableMagneticStoreWrites         smithy.SchemaExtensions
+	eMagneticStoreWriteProperties_MagneticStoreRejectedDataLocation smithy.SchemaExtensions
+	eMeasureValue                                                   smithy.SchemaExtensions
+	eMeasureValue_Name                                              smithy.SchemaExtensions
+	eMeasureValue_Value                                             smithy.SchemaExtensions
+	eMeasureValue_Type                                              smithy.SchemaExtensions
+	e_MeasureValues                                                 smithy.SchemaExtensions
+	e_MeasureValues_member                                          smithy.SchemaExtensions
+	eMeasureValueType                                               smithy.SchemaExtensions
+	eMeasureValueType_DOUBLE                                        smithy.SchemaExtensions
+	eMeasureValueType_BIGINT                                        smithy.SchemaExtensions
+	eMeasureValueType_VARCHAR                                       smithy.SchemaExtensions
+	eMeasureValueType_BOOLEAN                                       smithy.SchemaExtensions
+	eMeasureValueType_TIMESTAMP                                     smithy.SchemaExtensions
+	eMeasureValueType_MULTI                                         smithy.SchemaExtensions
+	e_MemoryStoreRetentionPeriodInHours                             smithy.SchemaExtensions
+	eMixedMeasureMapping                                            smithy.SchemaExtensions
+	eMixedMeasureMapping_MeasureName                                smithy.SchemaExtensions
+	eMixedMeasureMapping_SourceColumn                               smithy.SchemaExtensions
+	eMixedMeasureMapping_TargetMeasureName                          smithy.SchemaExtensions
+	eMixedMeasureMapping_MeasureValueType                           smithy.SchemaExtensions
+	eMixedMeasureMapping_MultiMeasureAttributeMappings              smithy.SchemaExtensions
+	e_MixedMeasureMappingList                                       smithy.SchemaExtensions
+	e_MixedMeasureMappingList_member                                smithy.SchemaExtensions
+	eMultiMeasureAttributeMapping                                   smithy.SchemaExtensions
+	eMultiMeasureAttributeMapping_SourceColumn                      smithy.SchemaExtensions
+	eMultiMeasureAttributeMapping_TargetMultiMeasureAttributeName   smithy.SchemaExtensions
+	eMultiMeasureAttributeMapping_MeasureValueType                  smithy.SchemaExtensions
+	e_MultiMeasureAttributeMappingList                              smithy.SchemaExtensions
+	e_MultiMeasureAttributeMappingList_member                       smithy.SchemaExtensions
+	eMultiMeasureMappings                                           smithy.SchemaExtensions
+	eMultiMeasureMappings_TargetMultiMeasureName                    smithy.SchemaExtensions
+	eMultiMeasureMappings_MultiMeasureAttributeMappings             smithy.SchemaExtensions
+	e_PageLimit                                                     smithy.SchemaExtensions
+	e_PaginationLimit                                               smithy.SchemaExtensions
+	ePartitionKey                                                   smithy.SchemaExtensions
+	ePartitionKey_Type                                              smithy.SchemaExtensions
+	ePartitionKey_Name                                              smithy.SchemaExtensions
+	ePartitionKey_EnforcementInRecord                               smithy.SchemaExtensions
+	ePartitionKeyEnforcementLevel                                   smithy.SchemaExtensions
+	ePartitionKeyEnforcementLevel_REQUIRED                          smithy.SchemaExtensions
+	ePartitionKeyEnforcementLevel_OPTIONAL                          smithy.SchemaExtensions
+	e_PartitionKeyList                                              smithy.SchemaExtensions
+	e_PartitionKeyList_member                                       smithy.SchemaExtensions
+	ePartitionKeyType                                               smithy.SchemaExtensions
+	ePartitionKeyType_DIMENSION                                     smithy.SchemaExtensions
+	ePartitionKeyType_MEASURE                                       smithy.SchemaExtensions
+	eRecord                                                         smithy.SchemaExtensions
+	eRecord_Dimensions                                              smithy.SchemaExtensions
+	eRecord_MeasureName                                             smithy.SchemaExtensions
+	eRecord_MeasureValue                                            smithy.SchemaExtensions
+	eRecord_MeasureValueType                                        smithy.SchemaExtensions
+	eRecord_Time                                                    smithy.SchemaExtensions
+	eRecord_TimeUnit                                                smithy.SchemaExtensions
+	eRecord_Version                                                 smithy.SchemaExtensions
+	eRecord_MeasureValues                                           smithy.SchemaExtensions
+	e_RecordIndex                                                   smithy.SchemaExtensions
+	e_Records                                                       smithy.SchemaExtensions
+	e_Records_member                                                smithy.SchemaExtensions
+	eRecordsIngested                                                smithy.SchemaExtensions
+	eRecordsIngested_Total                                          smithy.SchemaExtensions
+	eRecordsIngested_MemoryStore                                    smithy.SchemaExtensions
+	eRecordsIngested_MagneticStore                                  smithy.SchemaExtensions
+	e_RecordVersion                                                 smithy.SchemaExtensions
+	eRejectedRecord                                                 smithy.SchemaExtensions
+	eRejectedRecord_RecordIndex                                     smithy.SchemaExtensions
+	eRejectedRecord_Reason                                          smithy.SchemaExtensions
+	eRejectedRecord_ExistingVersion                                 smithy.SchemaExtensions
+	e_RejectedRecords                                               smithy.SchemaExtensions
+	e_RejectedRecords_member                                        smithy.SchemaExtensions
+	eRejectedRecordsException                                       smithy.SchemaExtensions
+	eRejectedRecordsException_Message                               smithy.SchemaExtensions
+	eRejectedRecordsException_RejectedRecords                       smithy.SchemaExtensions
+	eReportConfiguration                                            smithy.SchemaExtensions
+	eReportConfiguration_ReportS3Configuration                      smithy.SchemaExtensions
+	eReportS3Configuration                                          smithy.SchemaExtensions
+	eReportS3Configuration_BucketName                               smithy.SchemaExtensions
+	eReportS3Configuration_ObjectKeyPrefix                          smithy.SchemaExtensions
+	eReportS3Configuration_EncryptionOption                         smithy.SchemaExtensions
+	eReportS3Configuration_KmsKeyId                                 smithy.SchemaExtensions
+	e_ResourceCreateAPIName                                         smithy.SchemaExtensions
+	e_ResourceName                                                  smithy.SchemaExtensions
+	eResourceNotFoundException                                      smithy.SchemaExtensions
+	eResourceNotFoundException_Message                              smithy.SchemaExtensions
+	eRetentionProperties                                            smithy.SchemaExtensions
+	eRetentionProperties_MemoryStoreRetentionPeriodInHours          smithy.SchemaExtensions
+	eRetentionProperties_MagneticStoreRetentionPeriodInDays         smithy.SchemaExtensions
+	e_S3BucketName                                                  smithy.SchemaExtensions
+	eS3Configuration                                                smithy.SchemaExtensions
+	eS3Configuration_BucketName                                     smithy.SchemaExtensions
+	eS3Configuration_ObjectKeyPrefix                                smithy.SchemaExtensions
+	eS3Configuration_EncryptionOption                               smithy.SchemaExtensions
+	eS3Configuration_KmsKeyId                                       smithy.SchemaExtensions
+	eS3EncryptionOption                                             smithy.SchemaExtensions
+	eS3EncryptionOption_SSE_S3                                      smithy.SchemaExtensions
+	eS3EncryptionOption_SSE_KMS                                     smithy.SchemaExtensions
+	e_S3ObjectKey                                                   smithy.SchemaExtensions
+	e_S3ObjectKeyPrefix                                             smithy.SchemaExtensions
+	eScalarMeasureValueType                                         smithy.SchemaExtensions
+	eScalarMeasureValueType_DOUBLE                                  smithy.SchemaExtensions
+	eScalarMeasureValueType_BIGINT                                  smithy.SchemaExtensions
+	eScalarMeasureValueType_BOOLEAN                                 smithy.SchemaExtensions
+	eScalarMeasureValueType_VARCHAR                                 smithy.SchemaExtensions
+	eScalarMeasureValueType_TIMESTAMP                               smithy.SchemaExtensions
+	eSchema                                                         smithy.SchemaExtensions
+	eSchema_CompositePartitionKey                                   smithy.SchemaExtensions
+	e_SchemaName                                                    smithy.SchemaExtensions
+	e_SchemaValue                                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException                                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                          smithy.SchemaExtensions
+	e_String                                                        smithy.SchemaExtensions
+	e_StringValue1                                                  smithy.SchemaExtensions
+	e_StringValue2048                                               smithy.SchemaExtensions
+	e_StringValue256                                                smithy.SchemaExtensions
+	eTable                                                          smithy.SchemaExtensions
+	eTable_Arn                                                      smithy.SchemaExtensions
+	eTable_TableName                                                smithy.SchemaExtensions
+	eTable_DatabaseName                                             smithy.SchemaExtensions
+	eTable_TableStatus                                              smithy.SchemaExtensions
+	eTable_RetentionProperties                                      smithy.SchemaExtensions
+	eTable_CreationTime                                             smithy.SchemaExtensions
+	eTable_LastUpdatedTime                                          smithy.SchemaExtensions
+	eTable_MagneticStoreWriteProperties                             smithy.SchemaExtensions
+	eTable_Schema                                                   smithy.SchemaExtensions
+	e_TableList                                                     smithy.SchemaExtensions
+	e_TableList_member                                              smithy.SchemaExtensions
+	eTableStatus                                                    smithy.SchemaExtensions
+	eTableStatus_ACTIVE                                             smithy.SchemaExtensions
+	eTableStatus_DELETING                                           smithy.SchemaExtensions
+	eTableStatus_RESTORING                                          smithy.SchemaExtensions
+	eTag                                                            smithy.SchemaExtensions
+	eTag_Key                                                        smithy.SchemaExtensions
+	eTag_Value                                                      smithy.SchemaExtensions
+	e_TagKey                                                        smithy.SchemaExtensions
+	e_TagKeyList                                                    smithy.SchemaExtensions
+	e_TagKeyList_member                                             smithy.SchemaExtensions
+	e_TagList                                                       smithy.SchemaExtensions
+	e_TagList_member                                                smithy.SchemaExtensions
+	e_TagValue                                                      smithy.SchemaExtensions
+	eThrottlingException                                            smithy.SchemaExtensions
+	eThrottlingException_Message                                    smithy.SchemaExtensions
+	eTimeUnit                                                       smithy.SchemaExtensions
+	eTimeUnit_MILLISECONDS                                          smithy.SchemaExtensions
+	eTimeUnit_SECONDS                                               smithy.SchemaExtensions
+	eTimeUnit_MICROSECONDS                                          smithy.SchemaExtensions
+	eTimeUnit_NANOSECONDS                                           smithy.SchemaExtensions
+	eValidationException                                            smithy.SchemaExtensions
+	eValidationException_Message                                    smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest                                     smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest_ClientToken                         smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest_DataModelConfiguration              smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest_DataSourceConfiguration             smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest_ReportConfiguration                 smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest_TargetDatabaseName                  smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest_TargetTableName                     smithy.SchemaExtensions
+	eCreateBatchLoadTaskRequest_RecordVersion                       smithy.SchemaExtensions
+	eCreateBatchLoadTaskResponse                                    smithy.SchemaExtensions
+	eCreateBatchLoadTaskResponse_TaskId                             smithy.SchemaExtensions
+	eCreateDatabaseRequest                                          smithy.SchemaExtensions
+	eCreateDatabaseRequest_DatabaseName                             smithy.SchemaExtensions
+	eCreateDatabaseRequest_KmsKeyId                                 smithy.SchemaExtensions
+	eCreateDatabaseRequest_Tags                                     smithy.SchemaExtensions
+	eCreateDatabaseResponse                                         smithy.SchemaExtensions
+	eCreateDatabaseResponse_Database                                smithy.SchemaExtensions
+	eCreateTableRequest                                             smithy.SchemaExtensions
+	eCreateTableRequest_DatabaseName                                smithy.SchemaExtensions
+	eCreateTableRequest_TableName                                   smithy.SchemaExtensions
+	eCreateTableRequest_RetentionProperties                         smithy.SchemaExtensions
+	eCreateTableRequest_Tags                                        smithy.SchemaExtensions
+	eCreateTableRequest_MagneticStoreWriteProperties                smithy.SchemaExtensions
+	eCreateTableRequest_Schema                                      smithy.SchemaExtensions
+	eCreateTableResponse                                            smithy.SchemaExtensions
+	eCreateTableResponse_Table                                      smithy.SchemaExtensions
+	eDeleteDatabaseRequest                                          smithy.SchemaExtensions
+	eDeleteDatabaseRequest_DatabaseName                             smithy.SchemaExtensions
+	eDeleteTableRequest                                             smithy.SchemaExtensions
+	eDeleteTableRequest_DatabaseName                                smithy.SchemaExtensions
+	eDeleteTableRequest_TableName                                   smithy.SchemaExtensions
+	eDescribeBatchLoadTaskRequest                                   smithy.SchemaExtensions
+	eDescribeBatchLoadTaskRequest_TaskId                            smithy.SchemaExtensions
+	eDescribeBatchLoadTaskResponse                                  smithy.SchemaExtensions
+	eDescribeBatchLoadTaskResponse_BatchLoadTaskDescription         smithy.SchemaExtensions
+	eDescribeDatabaseRequest                                        smithy.SchemaExtensions
+	eDescribeDatabaseRequest_DatabaseName                           smithy.SchemaExtensions
+	eDescribeDatabaseResponse                                       smithy.SchemaExtensions
+	eDescribeDatabaseResponse_Database                              smithy.SchemaExtensions
+	eDescribeEndpointsRequest                                       smithy.SchemaExtensions
+	eDescribeEndpointsResponse                                      smithy.SchemaExtensions
+	eDescribeEndpointsResponse_Endpoints                            smithy.SchemaExtensions
+	eDescribeTableRequest                                           smithy.SchemaExtensions
+	eDescribeTableRequest_DatabaseName                              smithy.SchemaExtensions
+	eDescribeTableRequest_TableName                                 smithy.SchemaExtensions
+	eDescribeTableResponse                                          smithy.SchemaExtensions
+	eDescribeTableResponse_Table                                    smithy.SchemaExtensions
+	eListBatchLoadTasksRequest                                      smithy.SchemaExtensions
+	eListBatchLoadTasksRequest_NextToken                            smithy.SchemaExtensions
+	eListBatchLoadTasksRequest_MaxResults                           smithy.SchemaExtensions
+	eListBatchLoadTasksRequest_TaskStatus                           smithy.SchemaExtensions
+	eListBatchLoadTasksResponse                                     smithy.SchemaExtensions
+	eListBatchLoadTasksResponse_NextToken                           smithy.SchemaExtensions
+	eListBatchLoadTasksResponse_BatchLoadTasks                      smithy.SchemaExtensions
+	eListDatabasesRequest                                           smithy.SchemaExtensions
+	eListDatabasesRequest_NextToken                                 smithy.SchemaExtensions
+	eListDatabasesRequest_MaxResults                                smithy.SchemaExtensions
+	eListDatabasesResponse                                          smithy.SchemaExtensions
+	eListDatabasesResponse_Databases                                smithy.SchemaExtensions
+	eListDatabasesResponse_NextToken                                smithy.SchemaExtensions
+	eListTablesRequest                                              smithy.SchemaExtensions
+	eListTablesRequest_DatabaseName                                 smithy.SchemaExtensions
+	eListTablesRequest_NextToken                                    smithy.SchemaExtensions
+	eListTablesRequest_MaxResults                                   smithy.SchemaExtensions
+	eListTablesResponse                                             smithy.SchemaExtensions
+	eListTablesResponse_Tables                                      smithy.SchemaExtensions
+	eListTablesResponse_NextToken                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                     smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                         smithy.SchemaExtensions
+	eListTagsForResourceResponse                                    smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                               smithy.SchemaExtensions
+	eResumeBatchLoadTaskRequest                                     smithy.SchemaExtensions
+	eResumeBatchLoadTaskRequest_TaskId                              smithy.SchemaExtensions
+	eResumeBatchLoadTaskResponse                                    smithy.SchemaExtensions
+	eTagResourceRequest                                             smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                                 smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                        smithy.SchemaExtensions
+	eTagResourceResponse                                            smithy.SchemaExtensions
+	eUntagResourceRequest                                           smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                               smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                   smithy.SchemaExtensions
+	eUntagResourceResponse                                          smithy.SchemaExtensions
+	eUpdateDatabaseRequest                                          smithy.SchemaExtensions
+	eUpdateDatabaseRequest_DatabaseName                             smithy.SchemaExtensions
+	eUpdateDatabaseRequest_KmsKeyId                                 smithy.SchemaExtensions
+	eUpdateDatabaseResponse                                         smithy.SchemaExtensions
+	eUpdateDatabaseResponse_Database                                smithy.SchemaExtensions
+	eUpdateTableRequest                                             smithy.SchemaExtensions
+	eUpdateTableRequest_DatabaseName                                smithy.SchemaExtensions
+	eUpdateTableRequest_TableName                                   smithy.SchemaExtensions
+	eUpdateTableRequest_RetentionProperties                         smithy.SchemaExtensions
+	eUpdateTableRequest_MagneticStoreWriteProperties                smithy.SchemaExtensions
+	eUpdateTableRequest_Schema                                      smithy.SchemaExtensions
+	eUpdateTableResponse                                            smithy.SchemaExtensions
+	eUpdateTableResponse_Table                                      smithy.SchemaExtensions
+	eWriteRecordsRequest                                            smithy.SchemaExtensions
+	eWriteRecordsRequest_DatabaseName                               smithy.SchemaExtensions
+	eWriteRecordsRequest_TableName                                  smithy.SchemaExtensions
+	eWriteRecordsRequest_CommonAttributes                           smithy.SchemaExtensions
+	eWriteRecordsRequest_Records                                    smithy.SchemaExtensions
+	eWriteRecordsResponse                                           smithy.SchemaExtensions
+	eWriteRecordsResponse_RecordsIngested                           smithy.SchemaExtensions
+)
+
+var (
+	iCreateBatchLoadTask                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateBatchLoadTask"}
+	iCreateDatabase                      = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateDatabase"}
+	iCreateTable                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateTable"}
+	iDeleteDatabase                      = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DeleteDatabase"}
+	iDeleteTable                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DeleteTable"}
+	iDescribeBatchLoadTask               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeBatchLoadTask"}
+	iDescribeDatabase                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeDatabase"}
+	iDescribeEndpoints                   = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeEndpoints"}
+	iDescribeTable                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeTable"}
+	iListBatchLoadTasks                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListBatchLoadTasks"}
+	iListDatabases                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListDatabases"}
+	iListTables                          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListTables"}
+	iListTagsForResource                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListTagsForResource"}
+	iResumeBatchLoadTask                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ResumeBatchLoadTask"}
+	iTagResource                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TagResource"}
+	iUntagResource                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UntagResource"}
+	iUpdateDatabase                      = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UpdateDatabase"}
+	iUpdateTable                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UpdateTable"}
+	iWriteRecords                        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "WriteRecords"}
+	i_Timestream_20181101                = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Timestream_20181101"}
+	iAccessDeniedException               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "AccessDeniedException"}
+	i_AmazonResourceName                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "AmazonResourceName"}
+	iBatchLoadDataFormat                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "BatchLoadDataFormat"}
+	iBatchLoadProgressReport             = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "BatchLoadProgressReport"}
+	iBatchLoadStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "BatchLoadStatus"}
+	iBatchLoadTask                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "BatchLoadTask"}
+	iBatchLoadTaskDescription            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "BatchLoadTaskDescription"}
+	i_BatchLoadTaskId                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "BatchLoadTaskId"}
+	i_BatchLoadTaskList                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "BatchLoadTaskList"}
+	i_Boolean                            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Boolean"}
+	i_ClientRequestToken                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ClientRequestToken"}
+	iConflictException                   = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ConflictException"}
+	iCsvConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CsvConfiguration"}
+	iDatabase                            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Database"}
+	i_DatabaseList                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DatabaseList"}
+	iDataModel                           = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DataModel"}
+	iDataModelConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DataModelConfiguration"}
+	iDataModelS3Configuration            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DataModelS3Configuration"}
+	iDataSourceConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DataSourceConfiguration"}
+	iDataSourceS3Configuration           = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DataSourceS3Configuration"}
+	i_Date                               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Date"}
+	iDimension                           = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Dimension"}
+	iDimensionMapping                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DimensionMapping"}
+	i_DimensionMappings                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DimensionMappings"}
+	i_Dimensions                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Dimensions"}
+	iDimensionValueType                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DimensionValueType"}
+	iEndpoint                            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Endpoint"}
+	i_Endpoints                          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Endpoints"}
+	i_ErrorMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ErrorMessage"}
+	i_Integer                            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Integer"}
+	iInternalServerException             = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "InternalServerException"}
+	iInvalidEndpointException            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "InvalidEndpointException"}
+	i_Long                               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Long"}
+	iMagneticStoreRejectedDataLocation   = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MagneticStoreRejectedDataLocation"}
+	i_MagneticStoreRetentionPeriodInDays = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MagneticStoreRetentionPeriodInDays"}
+	iMagneticStoreWriteProperties        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MagneticStoreWriteProperties"}
+	iMeasureValue                        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MeasureValue"}
+	i_MeasureValues                      = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MeasureValues"}
+	iMeasureValueType                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MeasureValueType"}
+	i_MemoryStoreRetentionPeriodInHours  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MemoryStoreRetentionPeriodInHours"}
+	iMixedMeasureMapping                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MixedMeasureMapping"}
+	i_MixedMeasureMappingList            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MixedMeasureMappingList"}
+	iMultiMeasureAttributeMapping        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MultiMeasureAttributeMapping"}
+	i_MultiMeasureAttributeMappingList   = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MultiMeasureAttributeMappingList"}
+	iMultiMeasureMappings                = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "MultiMeasureMappings"}
+	i_PageLimit                          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "PageLimit"}
+	i_PaginationLimit                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "PaginationLimit"}
+	iPartitionKey                        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "PartitionKey"}
+	iPartitionKeyEnforcementLevel        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "PartitionKeyEnforcementLevel"}
+	i_PartitionKeyList                   = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "PartitionKeyList"}
+	iPartitionKeyType                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "PartitionKeyType"}
+	iRecord                              = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Record"}
+	i_RecordIndex                        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "RecordIndex"}
+	i_Records                            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Records"}
+	iRecordsIngested                     = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "RecordsIngested"}
+	i_RecordVersion                      = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "RecordVersion"}
+	iRejectedRecord                      = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "RejectedRecord"}
+	i_RejectedRecords                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "RejectedRecords"}
+	iRejectedRecordsException            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "RejectedRecordsException"}
+	iReportConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ReportConfiguration"}
+	iReportS3Configuration               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ReportS3Configuration"}
+	i_ResourceCreateAPIName              = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ResourceCreateAPIName"}
+	i_ResourceName                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ResourceName"}
+	iResourceNotFoundException           = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ResourceNotFoundException"}
+	iRetentionProperties                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "RetentionProperties"}
+	i_S3BucketName                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "S3BucketName"}
+	iS3Configuration                     = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "S3Configuration"}
+	iS3EncryptionOption                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "S3EncryptionOption"}
+	i_S3ObjectKey                        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "S3ObjectKey"}
+	i_S3ObjectKeyPrefix                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "S3ObjectKeyPrefix"}
+	iScalarMeasureValueType              = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ScalarMeasureValueType"}
+	iSchema                              = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Schema"}
+	i_SchemaName                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "SchemaName"}
+	i_SchemaValue                        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "SchemaValue"}
+	iServiceQuotaExceededException       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ServiceQuotaExceededException"}
+	i_String                             = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "String"}
+	i_StringValue1                       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "StringValue1"}
+	i_StringValue2048                    = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "StringValue2048"}
+	i_StringValue256                     = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "StringValue256"}
+	iTable                               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Table"}
+	i_TableList                          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TableList"}
+	iTableStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TableStatus"}
+	iTag                                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "Tag"}
+	i_TagKey                             = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TagKey"}
+	i_TagKeyList                         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TagKeyList"}
+	i_TagList                            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TagList"}
+	i_TagValue                           = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TagValue"}
+	iThrottlingException                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ThrottlingException"}
+	iTimeUnit                            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TimeUnit"}
+	iValidationException                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ValidationException"}
+	iCreateBatchLoadTaskRequest          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateBatchLoadTaskRequest"}
+	iCreateBatchLoadTaskResponse         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateBatchLoadTaskResponse"}
+	iCreateDatabaseRequest               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateDatabaseRequest"}
+	iCreateDatabaseResponse              = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateDatabaseResponse"}
+	iCreateTableRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateTableRequest"}
+	iCreateTableResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "CreateTableResponse"}
+	iDeleteDatabaseRequest               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DeleteDatabaseRequest"}
+	iDeleteTableRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DeleteTableRequest"}
+	iDescribeBatchLoadTaskRequest        = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeBatchLoadTaskRequest"}
+	iDescribeBatchLoadTaskResponse       = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeBatchLoadTaskResponse"}
+	iDescribeDatabaseRequest             = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeDatabaseRequest"}
+	iDescribeDatabaseResponse            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeDatabaseResponse"}
+	iDescribeEndpointsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeEndpointsRequest"}
+	iDescribeEndpointsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeEndpointsResponse"}
+	iDescribeTableRequest                = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeTableRequest"}
+	iDescribeTableResponse               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "DescribeTableResponse"}
+	iListBatchLoadTasksRequest           = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListBatchLoadTasksRequest"}
+	iListBatchLoadTasksResponse          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListBatchLoadTasksResponse"}
+	iListDatabasesRequest                = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListDatabasesRequest"}
+	iListDatabasesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListDatabasesResponse"}
+	iListTablesRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListTablesRequest"}
+	iListTablesResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListTablesResponse"}
+	iListTagsForResourceRequest          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ListTagsForResourceResponse"}
+	iResumeBatchLoadTaskRequest          = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ResumeBatchLoadTaskRequest"}
+	iResumeBatchLoadTaskResponse         = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "ResumeBatchLoadTaskResponse"}
+	iTagResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TagResourceRequest"}
+	iTagResourceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "TagResourceResponse"}
+	iUntagResourceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UntagResourceRequest"}
+	iUntagResourceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UntagResourceResponse"}
+	iUpdateDatabaseRequest               = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UpdateDatabaseRequest"}
+	iUpdateDatabaseResponse              = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UpdateDatabaseResponse"}
+	iUpdateTableRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UpdateTableRequest"}
+	iUpdateTableResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "UpdateTableResponse"}
+	iWriteRecordsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "WriteRecordsRequest"}
+	iWriteRecordsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.timestreamwrite", Name: "WriteRecordsResponse"}
+	pUnit                                = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 421}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 419}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mBatchLoadDataFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLoadDataFormat_CSV}}
+var mBatchLoadProgressReport = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLoadProgressReport_RecordsProcessed, &sBatchLoadProgressReport_RecordsIngested, &sBatchLoadProgressReport_ParseFailures, &sBatchLoadProgressReport_RecordIngestionFailures, &sBatchLoadProgressReport_FileFailures, &sBatchLoadProgressReport_BytesMetered}}
+var mBatchLoadStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLoadStatus_CREATED, &sBatchLoadStatus_IN_PROGRESS, &sBatchLoadStatus_FAILED, &sBatchLoadStatus_SUCCEEDED, &sBatchLoadStatus_PROGRESS_STOPPED, &sBatchLoadStatus_PENDING_RESUME}}
+var mBatchLoadTask = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLoadTask_TaskId, &sBatchLoadTask_TaskStatus, &sBatchLoadTask_DatabaseName, &sBatchLoadTask_TableName, &sBatchLoadTask_CreationTime, &sBatchLoadTask_LastUpdatedTime, &sBatchLoadTask_ResumableUntil}}
+var mBatchLoadTaskDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLoadTaskDescription_TaskId, &sBatchLoadTaskDescription_ErrorMessage, &sBatchLoadTaskDescription_DataSourceConfiguration, &sBatchLoadTaskDescription_ProgressReport, &sBatchLoadTaskDescription_ReportConfiguration, &sBatchLoadTaskDescription_DataModelConfiguration, &sBatchLoadTaskDescription_TargetDatabaseName, &sBatchLoadTaskDescription_TargetTableName, &sBatchLoadTaskDescription_TaskStatus, &sBatchLoadTaskDescription_RecordVersion, &sBatchLoadTaskDescription_CreationTime, &sBatchLoadTaskDescription_LastUpdatedTime, &sBatchLoadTaskDescription_ResumableUntil}, Hash: &hBatchLoadTaskDescription}
+var m_BatchLoadTaskList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchLoadTaskList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mCsvConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCsvConfiguration_ColumnSeparator, &sCsvConfiguration_EscapeChar, &sCsvConfiguration_QuoteChar, &sCsvConfiguration_NullValue, &sCsvConfiguration_TrimWhiteSpace}}
+var mDatabase = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabase_Arn, &sDatabase_DatabaseName, &sDatabase_TableCount, &sDatabase_KmsKeyId, &sDatabase_CreationTime, &sDatabase_LastUpdatedTime}}
+var m_DatabaseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatabaseList_member}}
+var mDataModel = smithy.SchemaMembers{List: []*smithy.Schema{&sDataModel_TimeColumn, &sDataModel_TimeUnit, &sDataModel_DimensionMappings, &sDataModel_MultiMeasureMappings, &sDataModel_MixedMeasureMappings, &sDataModel_MeasureNameColumn}}
+var mDataModelConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataModelConfiguration_DataModel, &sDataModelConfiguration_DataModelS3Configuration}}
+var mDataModelS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataModelS3Configuration_BucketName, &sDataModelS3Configuration_ObjectKey}}
+var mDataSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceConfiguration_DataSourceS3Configuration, &sDataSourceConfiguration_CsvConfiguration, &sDataSourceConfiguration_DataFormat}}
+var mDataSourceS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceS3Configuration_BucketName, &sDataSourceS3Configuration_ObjectKeyPrefix}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_Name, &sDimension_Value, &sDimension_DimensionValueType}}
+var mDimensionMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionMapping_SourceColumn, &sDimensionMapping_DestinationColumn}}
+var m_DimensionMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_DimensionMappings_member}}
+var m_Dimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dimensions_member}}
+var mDimensionValueType = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionValueType_VARCHAR}}
+var mEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpoint_Address, &sEndpoint_CachePeriodInMinutes}}
+var m_Endpoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_Endpoints_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidEndpointException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEndpointException_Message}}
+var mMagneticStoreRejectedDataLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sMagneticStoreRejectedDataLocation_S3Configuration}}
+var mMagneticStoreWriteProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sMagneticStoreWriteProperties_EnableMagneticStoreWrites, &sMagneticStoreWriteProperties_MagneticStoreRejectedDataLocation}}
+var mMeasureValue = smithy.SchemaMembers{List: []*smithy.Schema{&sMeasureValue_Name, &sMeasureValue_Value, &sMeasureValue_Type}}
+var m_MeasureValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_MeasureValues_member}}
+var mMeasureValueType = smithy.SchemaMembers{List: []*smithy.Schema{&sMeasureValueType_DOUBLE, &sMeasureValueType_BIGINT, &sMeasureValueType_VARCHAR, &sMeasureValueType_BOOLEAN, &sMeasureValueType_TIMESTAMP, &sMeasureValueType_MULTI}}
+var mMixedMeasureMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sMixedMeasureMapping_MeasureName, &sMixedMeasureMapping_SourceColumn, &sMixedMeasureMapping_TargetMeasureName, &sMixedMeasureMapping_MeasureValueType, &sMixedMeasureMapping_MultiMeasureAttributeMappings}}
+var m_MixedMeasureMappingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MixedMeasureMappingList_member}}
+var mMultiMeasureAttributeMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiMeasureAttributeMapping_SourceColumn, &sMultiMeasureAttributeMapping_TargetMultiMeasureAttributeName, &sMultiMeasureAttributeMapping_MeasureValueType}}
+var m_MultiMeasureAttributeMappingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MultiMeasureAttributeMappingList_member}}
+var mMultiMeasureMappings = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiMeasureMappings_TargetMultiMeasureName, &sMultiMeasureMappings_MultiMeasureAttributeMappings}}
+var mPartitionKey = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionKey_Type, &sPartitionKey_Name, &sPartitionKey_EnforcementInRecord}}
+var mPartitionKeyEnforcementLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionKeyEnforcementLevel_REQUIRED, &sPartitionKeyEnforcementLevel_OPTIONAL}}
+var m_PartitionKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartitionKeyList_member}}
+var mPartitionKeyType = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionKeyType_DIMENSION, &sPartitionKeyType_MEASURE}}
+var mRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRecord_Dimensions, &sRecord_MeasureName, &sRecord_MeasureValue, &sRecord_MeasureValueType, &sRecord_Time, &sRecord_TimeUnit, &sRecord_Version, &sRecord_MeasureValues}}
+var m_Records = smithy.SchemaMembers{List: []*smithy.Schema{&s_Records_member}}
+var mRecordsIngested = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordsIngested_Total, &sRecordsIngested_MemoryStore, &sRecordsIngested_MagneticStore}}
+var mRejectedRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectedRecord_RecordIndex, &sRejectedRecord_Reason, &sRejectedRecord_ExistingVersion}}
+var m_RejectedRecords = smithy.SchemaMembers{List: []*smithy.Schema{&s_RejectedRecords_member}}
+var mRejectedRecordsException = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectedRecordsException_Message, &sRejectedRecordsException_RejectedRecords}}
+var mReportConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sReportConfiguration_ReportS3Configuration}}
+var mReportS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sReportS3Configuration_BucketName, &sReportS3Configuration_ObjectKeyPrefix, &sReportS3Configuration_EncryptionOption, &sReportS3Configuration_KmsKeyId}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRetentionProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionProperties_MemoryStoreRetentionPeriodInHours, &sRetentionProperties_MagneticStoreRetentionPeriodInDays}}
+var mS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Configuration_BucketName, &sS3Configuration_ObjectKeyPrefix, &sS3Configuration_EncryptionOption, &sS3Configuration_KmsKeyId}}
+var mS3EncryptionOption = smithy.SchemaMembers{List: []*smithy.Schema{&sS3EncryptionOption_SSE_S3, &sS3EncryptionOption_SSE_KMS}}
+var mScalarMeasureValueType = smithy.SchemaMembers{List: []*smithy.Schema{&sScalarMeasureValueType_DOUBLE, &sScalarMeasureValueType_BIGINT, &sScalarMeasureValueType_BOOLEAN, &sScalarMeasureValueType_VARCHAR, &sScalarMeasureValueType_TIMESTAMP}}
+var mSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sSchema_CompositePartitionKey}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mTable = smithy.SchemaMembers{List: []*smithy.Schema{&sTable_Arn, &sTable_TableName, &sTable_DatabaseName, &sTable_TableStatus, &sTable_RetentionProperties, &sTable_CreationTime, &sTable_LastUpdatedTime, &sTable_MagneticStoreWriteProperties, &sTable_Schema}, Hash: &hTable}
+var m_TableList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableList_member}}
+var mTableStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTableStatus_ACTIVE, &sTableStatus_DELETING, &sTableStatus_RESTORING}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTimeUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeUnit_MILLISECONDS, &sTimeUnit_SECONDS, &sTimeUnit_MICROSECONDS, &sTimeUnit_NANOSECONDS}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateBatchLoadTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBatchLoadTaskRequest_ClientToken, &sCreateBatchLoadTaskRequest_DataModelConfiguration, &sCreateBatchLoadTaskRequest_DataSourceConfiguration, &sCreateBatchLoadTaskRequest_ReportConfiguration, &sCreateBatchLoadTaskRequest_TargetDatabaseName, &sCreateBatchLoadTaskRequest_TargetTableName, &sCreateBatchLoadTaskRequest_RecordVersion}}
+var mCreateBatchLoadTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBatchLoadTaskResponse_TaskId}}
+var mCreateDatabaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatabaseRequest_DatabaseName, &sCreateDatabaseRequest_KmsKeyId, &sCreateDatabaseRequest_Tags}}
+var mCreateDatabaseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatabaseResponse_Database}}
+var mCreateTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableRequest_DatabaseName, &sCreateTableRequest_TableName, &sCreateTableRequest_RetentionProperties, &sCreateTableRequest_Tags, &sCreateTableRequest_MagneticStoreWriteProperties, &sCreateTableRequest_Schema}}
+var mCreateTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableResponse_Table}}
+var mDeleteDatabaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatabaseRequest_DatabaseName}}
+var mDeleteTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableRequest_DatabaseName, &sDeleteTableRequest_TableName}}
+var mDescribeBatchLoadTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBatchLoadTaskRequest_TaskId}}
+var mDescribeBatchLoadTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBatchLoadTaskResponse_BatchLoadTaskDescription}}
+var mDescribeDatabaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatabaseRequest_DatabaseName}}
+var mDescribeDatabaseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatabaseResponse_Database}}
+var mDescribeEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEndpointsResponse_Endpoints}}
+var mDescribeTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTableRequest_DatabaseName, &sDescribeTableRequest_TableName}}
+var mDescribeTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTableResponse_Table}}
+var mListBatchLoadTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListBatchLoadTasksRequest_NextToken, &sListBatchLoadTasksRequest_MaxResults, &sListBatchLoadTasksRequest_TaskStatus}}
+var mListBatchLoadTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListBatchLoadTasksResponse_NextToken, &sListBatchLoadTasksResponse_BatchLoadTasks}}
+var mListDatabasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatabasesRequest_NextToken, &sListDatabasesRequest_MaxResults}}
+var mListDatabasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatabasesResponse_Databases, &sListDatabasesResponse_NextToken}}
+var mListTablesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesRequest_DatabaseName, &sListTablesRequest_NextToken, &sListTablesRequest_MaxResults}}
+var mListTablesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesResponse_Tables, &sListTablesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mResumeBatchLoadTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResumeBatchLoadTaskRequest_TaskId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateDatabaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatabaseRequest_DatabaseName, &sUpdateDatabaseRequest_KmsKeyId}}
+var mUpdateDatabaseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatabaseResponse_Database}}
+var mUpdateTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableRequest_DatabaseName, &sUpdateTableRequest_TableName, &sUpdateTableRequest_RetentionProperties, &sUpdateTableRequest_MagneticStoreWriteProperties, &sUpdateTableRequest_Schema}}
+var mUpdateTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableResponse_Table}}
+var mWriteRecordsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sWriteRecordsRequest_DatabaseName, &sWriteRecordsRequest_TableName, &sWriteRecordsRequest_CommonAttributes, &sWriteRecordsRequest_Records}}
+var mWriteRecordsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sWriteRecordsResponse_RecordsIngested}}
+
+var hBatchLoadTaskDescription = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	13, 6, 7, 1, 0, 0, 0, 10, 0, 0, 0, 0, 9, 0, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0,
+	3, 0, 4, 11, 0, 0, 12, 8,
+}}
+var hTable = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 2, 0, 0,
+	0, 4, 6, 9, 0, 0, 0, 8,
+}}
+
+var sCreateBatchLoadTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchLoadTask, Type: smithy.ShapeTypeOperation, Ext: &eCreateBatchLoadTask})
+var sCreateDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatabase, Type: smithy.ShapeTypeOperation, Ext: &eCreateDatabase})
+var sCreateTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTable, Type: smithy.ShapeTypeOperation, Ext: &eCreateTable})
+var sDeleteDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatabase, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDatabase})
+var sDeleteTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTable, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTable})
+var sDescribeBatchLoadTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBatchLoadTask, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBatchLoadTask})
+var sDescribeDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatabase, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDatabase})
+var sDescribeEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndpoints, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEndpoints})
+var sDescribeTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTable, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTable})
+var sListBatchLoadTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBatchLoadTasks, Type: smithy.ShapeTypeOperation, Ext: &eListBatchLoadTasks})
+var sListDatabases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatabases, Type: smithy.ShapeTypeOperation, Ext: &eListDatabases})
+var sListTables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTables, Type: smithy.ShapeTypeOperation, Ext: &eListTables})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sResumeBatchLoadTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeBatchLoadTask, Type: smithy.ShapeTypeOperation, Ext: &eResumeBatchLoadTask})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatabase, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDatabase})
+var sUpdateTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTable, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTable})
+var sWriteRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWriteRecords, Type: smithy.ShapeTypeOperation, Ext: &eWriteRecords})
+var s_Timestream_20181101 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestream_20181101, Type: smithy.ShapeTypeService, Ext: &e_Timestream_20181101})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sBatchLoadDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLoadDataFormat, Members: &mBatchLoadDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eBatchLoadDataFormat})
+var sBatchLoadDataFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadDataFormat_CSV})
+var sBatchLoadProgressReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLoadProgressReport, Members: &mBatchLoadProgressReport, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadProgressReport})
+var sBatchLoadProgressReport_RecordsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordsProcessed", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eBatchLoadProgressReport_RecordsProcessed})
+var sBatchLoadProgressReport_RecordsIngested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordsIngested", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eBatchLoadProgressReport_RecordsIngested})
+var sBatchLoadProgressReport_ParseFailures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParseFailures", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eBatchLoadProgressReport_ParseFailures})
+var sBatchLoadProgressReport_RecordIngestionFailures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIngestionFailures", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eBatchLoadProgressReport_RecordIngestionFailures})
+var sBatchLoadProgressReport_FileFailures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileFailures", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eBatchLoadProgressReport_FileFailures})
+var sBatchLoadProgressReport_BytesMetered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesMetered", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eBatchLoadProgressReport_BytesMetered})
+var sBatchLoadStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLoadStatus, Members: &mBatchLoadStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchLoadStatus})
+var sBatchLoadStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadStatus_CREATED})
+var sBatchLoadStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadStatus_IN_PROGRESS})
+var sBatchLoadStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadStatus_FAILED})
+var sBatchLoadStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadStatus_SUCCEEDED})
+var sBatchLoadStatus_PROGRESS_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROGRESS_STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadStatus_PROGRESS_STOPPED})
+var sBatchLoadStatus_PENDING_RESUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_RESUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadStatus_PENDING_RESUME})
+var sBatchLoadTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLoadTask, Members: &mBatchLoadTask, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadTask})
+var sBatchLoadTask_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_BatchLoadTaskId, Type: smithy.ShapeTypeString, Ext: &eBatchLoadTask_TaskId})
+var sBatchLoadTask_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iBatchLoadStatus, Members: &mBatchLoadStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchLoadTask_TaskStatus})
+var sBatchLoadTask_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eBatchLoadTask_DatabaseName})
+var sBatchLoadTask_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eBatchLoadTask_TableName})
+var sBatchLoadTask_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchLoadTask_CreationTime})
+var sBatchLoadTask_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchLoadTask_LastUpdatedTime})
+var sBatchLoadTask_ResumableUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResumableUntil", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchLoadTask_ResumableUntil})
+var sBatchLoadTaskDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLoadTaskDescription, Members: &mBatchLoadTaskDescription, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadTaskDescription})
+var sBatchLoadTaskDescription_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_BatchLoadTaskId, Type: smithy.ShapeTypeString, Ext: &eBatchLoadTaskDescription_TaskId})
+var sBatchLoadTaskDescription_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eBatchLoadTaskDescription_ErrorMessage})
+var sBatchLoadTaskDescription_DataSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceConfiguration", ID: &iDataSourceConfiguration, Members: &mDataSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadTaskDescription_DataSourceConfiguration})
+var sBatchLoadTaskDescription_ProgressReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressReport", ID: &iBatchLoadProgressReport, Members: &mBatchLoadProgressReport, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadTaskDescription_ProgressReport})
+var sBatchLoadTaskDescription_ReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportConfiguration", ID: &iReportConfiguration, Members: &mReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadTaskDescription_ReportConfiguration})
+var sBatchLoadTaskDescription_DataModelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataModelConfiguration", ID: &iDataModelConfiguration, Members: &mDataModelConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eBatchLoadTaskDescription_DataModelConfiguration})
+var sBatchLoadTaskDescription_TargetDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eBatchLoadTaskDescription_TargetDatabaseName})
+var sBatchLoadTaskDescription_TargetTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTableName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eBatchLoadTaskDescription_TargetTableName})
+var sBatchLoadTaskDescription_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iBatchLoadStatus, Members: &mBatchLoadStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchLoadTaskDescription_TaskStatus})
+var sBatchLoadTaskDescription_RecordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordVersion", ID: &i_RecordVersion, Type: smithy.ShapeTypeLong, Ext: &eBatchLoadTaskDescription_RecordVersion})
+var sBatchLoadTaskDescription_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchLoadTaskDescription_CreationTime})
+var sBatchLoadTaskDescription_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchLoadTaskDescription_LastUpdatedTime})
+var sBatchLoadTaskDescription_ResumableUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResumableUntil", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchLoadTaskDescription_ResumableUntil})
+var s_BatchLoadTaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchLoadTaskId, Type: smithy.ShapeTypeString, Ext: &e_BatchLoadTaskId})
+var s_BatchLoadTaskList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchLoadTaskList, Members: &m_BatchLoadTaskList, Type: smithy.ShapeTypeList, Ext: &e_BatchLoadTaskList})
+var s_BatchLoadTaskList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchLoadTask, Members: &mBatchLoadTask, Type: smithy.ShapeTypeStructure, Ext: &e_BatchLoadTaskList_member})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sCsvConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCsvConfiguration, Members: &mCsvConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCsvConfiguration})
+var sCsvConfiguration_ColumnSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnSeparator", ID: &i_StringValue1, Type: smithy.ShapeTypeString, Ext: &eCsvConfiguration_ColumnSeparator})
+var sCsvConfiguration_EscapeChar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EscapeChar", ID: &i_StringValue1, Type: smithy.ShapeTypeString, Ext: &eCsvConfiguration_EscapeChar})
+var sCsvConfiguration_QuoteChar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuoteChar", ID: &i_StringValue1, Type: smithy.ShapeTypeString, Ext: &eCsvConfiguration_QuoteChar})
+var sCsvConfiguration_NullValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NullValue", ID: &i_StringValue256, Type: smithy.ShapeTypeString, Ext: &eCsvConfiguration_NullValue})
+var sCsvConfiguration_TrimWhiteSpace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrimWhiteSpace", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCsvConfiguration_TrimWhiteSpace})
+var sDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure, Ext: &eDatabase})
+var sDatabase_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDatabase_Arn})
+var sDatabase_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDatabase_DatabaseName})
+var sDatabase_TableCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDatabase_TableCount})
+var sDatabase_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eDatabase_KmsKeyId})
+var sDatabase_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDatabase_CreationTime})
+var sDatabase_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDatabase_LastUpdatedTime})
+var s_DatabaseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseList, Members: &m_DatabaseList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseList})
+var s_DatabaseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure, Ext: &e_DatabaseList_member})
+var sDataModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataModel, Members: &mDataModel, Type: smithy.ShapeTypeStructure, Ext: &eDataModel})
+var sDataModel_TimeColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeColumn", ID: &i_StringValue256, Type: smithy.ShapeTypeString, Ext: &eDataModel_TimeColumn})
+var sDataModel_TimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeUnit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eDataModel_TimeUnit})
+var sDataModel_DimensionMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionMappings", ID: &i_DimensionMappings, Members: &m_DimensionMappings, Type: smithy.ShapeTypeList, Ext: &eDataModel_DimensionMappings})
+var sDataModel_MultiMeasureMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiMeasureMappings", ID: &iMultiMeasureMappings, Members: &mMultiMeasureMappings, Type: smithy.ShapeTypeStructure, Ext: &eDataModel_MultiMeasureMappings})
+var sDataModel_MixedMeasureMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MixedMeasureMappings", ID: &i_MixedMeasureMappingList, Members: &m_MixedMeasureMappingList, Type: smithy.ShapeTypeList, Ext: &eDataModel_MixedMeasureMappings})
+var sDataModel_MeasureNameColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureNameColumn", ID: &i_StringValue256, Type: smithy.ShapeTypeString, Ext: &eDataModel_MeasureNameColumn})
+var sDataModelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataModelConfiguration, Members: &mDataModelConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataModelConfiguration})
+var sDataModelConfiguration_DataModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataModel", ID: &iDataModel, Members: &mDataModel, Type: smithy.ShapeTypeStructure, Ext: &eDataModelConfiguration_DataModel})
+var sDataModelConfiguration_DataModelS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataModelS3Configuration", ID: &iDataModelS3Configuration, Members: &mDataModelS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eDataModelConfiguration_DataModelS3Configuration})
+var sDataModelS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataModelS3Configuration, Members: &mDataModelS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eDataModelS3Configuration})
+var sDataModelS3Configuration_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eDataModelS3Configuration_BucketName})
+var sDataModelS3Configuration_ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectKey", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &eDataModelS3Configuration_ObjectKey})
+var sDataSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceConfiguration, Members: &mDataSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceConfiguration})
+var sDataSourceConfiguration_DataSourceS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceS3Configuration", ID: &iDataSourceS3Configuration, Members: &mDataSourceS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceConfiguration_DataSourceS3Configuration})
+var sDataSourceConfiguration_CsvConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CsvConfiguration", ID: &iCsvConfiguration, Members: &mCsvConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceConfiguration_CsvConfiguration})
+var sDataSourceConfiguration_DataFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFormat", ID: &iBatchLoadDataFormat, Members: &mBatchLoadDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eDataSourceConfiguration_DataFormat})
+var sDataSourceS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceS3Configuration, Members: &mDataSourceS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceS3Configuration})
+var sDataSourceS3Configuration_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eDataSourceS3Configuration_BucketName})
+var sDataSourceS3Configuration_ObjectKeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectKeyPrefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &eDataSourceS3Configuration_ObjectKeyPrefix})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &eDimension})
+var sDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eDimension_Name})
+var sDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SchemaValue, Type: smithy.ShapeTypeString, Ext: &eDimension_Value})
+var sDimension_DimensionValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionValueType", ID: &iDimensionValueType, Members: &mDimensionValueType, Type: smithy.ShapeTypeEnum, Ext: &eDimension_DimensionValueType})
+var sDimensionMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionMapping, Members: &mDimensionMapping, Type: smithy.ShapeTypeStructure, Ext: &eDimensionMapping})
+var sDimensionMapping_SourceColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceColumn", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eDimensionMapping_SourceColumn})
+var sDimensionMapping_DestinationColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationColumn", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eDimensionMapping_DestinationColumn})
+var s_DimensionMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionMappings, Members: &m_DimensionMappings, Type: smithy.ShapeTypeList, Ext: &e_DimensionMappings})
+var s_DimensionMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimensionMapping, Members: &mDimensionMapping, Type: smithy.ShapeTypeStructure, Ext: &e_DimensionMappings_member})
+var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &e_Dimensions})
+var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &e_Dimensions_member})
+var sDimensionValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionValueType, Members: &mDimensionValueType, Type: smithy.ShapeTypeEnum, Ext: &eDimensionValueType})
+var sDimensionValueType_VARCHAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VARCHAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimensionValueType_VARCHAR})
+var sEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eEndpoint})
+var sEndpoint_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEndpoint_Address})
+var sEndpoint_CachePeriodInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CachePeriodInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eEndpoint_CachePeriodInMinutes})
+var s_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &e_Endpoints})
+var s_Endpoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_Endpoints_member})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInvalidEndpointException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEndpointException, Members: &mInvalidEndpointException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidEndpointException})
+var sInvalidEndpointException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidEndpointException_Message})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var sMagneticStoreRejectedDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMagneticStoreRejectedDataLocation, Members: &mMagneticStoreRejectedDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eMagneticStoreRejectedDataLocation})
+var sMagneticStoreRejectedDataLocation_S3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Configuration", ID: &iS3Configuration, Members: &mS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eMagneticStoreRejectedDataLocation_S3Configuration})
+var s_MagneticStoreRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MagneticStoreRetentionPeriodInDays, Type: smithy.ShapeTypeLong, Ext: &e_MagneticStoreRetentionPeriodInDays})
+var sMagneticStoreWriteProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMagneticStoreWriteProperties, Members: &mMagneticStoreWriteProperties, Type: smithy.ShapeTypeStructure, Ext: &eMagneticStoreWriteProperties})
+var sMagneticStoreWriteProperties_EnableMagneticStoreWrites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMagneticStoreWrites", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eMagneticStoreWriteProperties_EnableMagneticStoreWrites})
+var sMagneticStoreWriteProperties_MagneticStoreRejectedDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MagneticStoreRejectedDataLocation", ID: &iMagneticStoreRejectedDataLocation, Members: &mMagneticStoreRejectedDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eMagneticStoreWriteProperties_MagneticStoreRejectedDataLocation})
+var sMeasureValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeasureValue, Members: &mMeasureValue, Type: smithy.ShapeTypeStructure, Ext: &eMeasureValue})
+var sMeasureValue_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eMeasureValue_Name})
+var sMeasureValue_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eMeasureValue_Value})
+var sMeasureValue_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMeasureValueType, Members: &mMeasureValueType, Type: smithy.ShapeTypeEnum, Ext: &eMeasureValue_Type})
+var s_MeasureValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MeasureValues, Members: &m_MeasureValues, Type: smithy.ShapeTypeList, Ext: &e_MeasureValues})
+var s_MeasureValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMeasureValue, Members: &mMeasureValue, Type: smithy.ShapeTypeStructure, Ext: &e_MeasureValues_member})
+var sMeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeasureValueType, Members: &mMeasureValueType, Type: smithy.ShapeTypeEnum, Ext: &eMeasureValueType})
+var sMeasureValueType_DOUBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOUBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMeasureValueType_DOUBLE})
+var sMeasureValueType_BIGINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIGINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMeasureValueType_BIGINT})
+var sMeasureValueType_VARCHAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VARCHAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMeasureValueType_VARCHAR})
+var sMeasureValueType_BOOLEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOLEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMeasureValueType_BOOLEAN})
+var sMeasureValueType_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMeasureValueType_TIMESTAMP})
+var sMeasureValueType_MULTI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMeasureValueType_MULTI})
+var s_MemoryStoreRetentionPeriodInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemoryStoreRetentionPeriodInHours, Type: smithy.ShapeTypeLong, Ext: &e_MemoryStoreRetentionPeriodInHours})
+var sMixedMeasureMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMixedMeasureMapping, Members: &mMixedMeasureMapping, Type: smithy.ShapeTypeStructure, Ext: &eMixedMeasureMapping})
+var sMixedMeasureMapping_MeasureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureName", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eMixedMeasureMapping_MeasureName})
+var sMixedMeasureMapping_SourceColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceColumn", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eMixedMeasureMapping_SourceColumn})
+var sMixedMeasureMapping_TargetMeasureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetMeasureName", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eMixedMeasureMapping_TargetMeasureName})
+var sMixedMeasureMapping_MeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValueType", ID: &iMeasureValueType, Members: &mMeasureValueType, Type: smithy.ShapeTypeEnum, Ext: &eMixedMeasureMapping_MeasureValueType})
+var sMixedMeasureMapping_MultiMeasureAttributeMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiMeasureAttributeMappings", ID: &i_MultiMeasureAttributeMappingList, Members: &m_MultiMeasureAttributeMappingList, Type: smithy.ShapeTypeList, Ext: &eMixedMeasureMapping_MultiMeasureAttributeMappings})
+var s_MixedMeasureMappingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MixedMeasureMappingList, Members: &m_MixedMeasureMappingList, Type: smithy.ShapeTypeList, Ext: &e_MixedMeasureMappingList})
+var s_MixedMeasureMappingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMixedMeasureMapping, Members: &mMixedMeasureMapping, Type: smithy.ShapeTypeStructure, Ext: &e_MixedMeasureMappingList_member})
+var sMultiMeasureAttributeMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiMeasureAttributeMapping, Members: &mMultiMeasureAttributeMapping, Type: smithy.ShapeTypeStructure, Ext: &eMultiMeasureAttributeMapping})
+var sMultiMeasureAttributeMapping_SourceColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceColumn", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eMultiMeasureAttributeMapping_SourceColumn})
+var sMultiMeasureAttributeMapping_TargetMultiMeasureAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetMultiMeasureAttributeName", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eMultiMeasureAttributeMapping_TargetMultiMeasureAttributeName})
+var sMultiMeasureAttributeMapping_MeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValueType", ID: &iScalarMeasureValueType, Members: &mScalarMeasureValueType, Type: smithy.ShapeTypeEnum, Ext: &eMultiMeasureAttributeMapping_MeasureValueType})
+var s_MultiMeasureAttributeMappingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiMeasureAttributeMappingList, Members: &m_MultiMeasureAttributeMappingList, Type: smithy.ShapeTypeList, Ext: &e_MultiMeasureAttributeMappingList})
+var s_MultiMeasureAttributeMappingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMultiMeasureAttributeMapping, Members: &mMultiMeasureAttributeMapping, Type: smithy.ShapeTypeStructure, Ext: &e_MultiMeasureAttributeMappingList_member})
+var sMultiMeasureMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiMeasureMappings, Members: &mMultiMeasureMappings, Type: smithy.ShapeTypeStructure, Ext: &eMultiMeasureMappings})
+var sMultiMeasureMappings_TargetMultiMeasureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetMultiMeasureName", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eMultiMeasureMappings_TargetMultiMeasureName})
+var sMultiMeasureMappings_MultiMeasureAttributeMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiMeasureAttributeMappings", ID: &i_MultiMeasureAttributeMappingList, Members: &m_MultiMeasureAttributeMappingList, Type: smithy.ShapeTypeList, Ext: &eMultiMeasureMappings_MultiMeasureAttributeMappings})
+var s_PageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageLimit, Type: smithy.ShapeTypeInteger, Ext: &e_PageLimit})
+var s_PaginationLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &e_PaginationLimit})
+var sPartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionKey, Members: &mPartitionKey, Type: smithy.ShapeTypeStructure, Ext: &ePartitionKey})
+var sPartitionKey_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPartitionKeyType, Members: &mPartitionKeyType, Type: smithy.ShapeTypeEnum, Ext: &ePartitionKey_Type})
+var sPartitionKey_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &ePartitionKey_Name})
+var sPartitionKey_EnforcementInRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforcementInRecord", ID: &iPartitionKeyEnforcementLevel, Members: &mPartitionKeyEnforcementLevel, Type: smithy.ShapeTypeEnum, Ext: &ePartitionKey_EnforcementInRecord})
+var sPartitionKeyEnforcementLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionKeyEnforcementLevel, Members: &mPartitionKeyEnforcementLevel, Type: smithy.ShapeTypeEnum, Ext: &ePartitionKeyEnforcementLevel})
+var sPartitionKeyEnforcementLevel_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionKeyEnforcementLevel_REQUIRED})
+var sPartitionKeyEnforcementLevel_OPTIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionKeyEnforcementLevel_OPTIONAL})
+var s_PartitionKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionKeyList, Members: &m_PartitionKeyList, Type: smithy.ShapeTypeList, Ext: &e_PartitionKeyList})
+var s_PartitionKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartitionKey, Members: &mPartitionKey, Type: smithy.ShapeTypeStructure, Ext: &e_PartitionKeyList_member})
+var sPartitionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionKeyType, Members: &mPartitionKeyType, Type: smithy.ShapeTypeEnum, Ext: &ePartitionKeyType})
+var sPartitionKeyType_DIMENSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIMENSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionKeyType_DIMENSION})
+var sPartitionKeyType_MEASURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEASURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionKeyType_MEASURE})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &eRecord})
+var sRecord_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eRecord_Dimensions})
+var sRecord_MeasureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureName", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eRecord_MeasureName})
+var sRecord_MeasureValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValue", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eRecord_MeasureValue})
+var sRecord_MeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValueType", ID: &iMeasureValueType, Members: &mMeasureValueType, Type: smithy.ShapeTypeEnum, Ext: &eRecord_MeasureValueType})
+var sRecord_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_StringValue256, Type: smithy.ShapeTypeString, Ext: &eRecord_Time})
+var sRecord_TimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeUnit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eRecord_TimeUnit})
+var sRecord_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_RecordVersion, Type: smithy.ShapeTypeLong, Ext: &eRecord_Version})
+var sRecord_MeasureValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValues", ID: &i_MeasureValues, Members: &m_MeasureValues, Type: smithy.ShapeTypeList, Ext: &eRecord_MeasureValues})
+var s_RecordIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIndex, Type: smithy.ShapeTypeInteger, Ext: &e_RecordIndex})
+var s_Records = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Records, Members: &m_Records, Type: smithy.ShapeTypeList, Ext: &e_Records})
+var s_Records_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &e_Records_member})
+var sRecordsIngested = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordsIngested, Members: &mRecordsIngested, Type: smithy.ShapeTypeStructure, Ext: &eRecordsIngested})
+var sRecordsIngested_Total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Total", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eRecordsIngested_Total})
+var sRecordsIngested_MemoryStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemoryStore", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eRecordsIngested_MemoryStore})
+var sRecordsIngested_MagneticStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MagneticStore", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eRecordsIngested_MagneticStore})
+var s_RecordVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordVersion, Type: smithy.ShapeTypeLong, Ext: &e_RecordVersion})
+var sRejectedRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectedRecord, Members: &mRejectedRecord, Type: smithy.ShapeTypeStructure, Ext: &eRejectedRecord})
+var sRejectedRecord_RecordIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIndex", ID: &i_RecordIndex, Type: smithy.ShapeTypeInteger, Ext: &eRejectedRecord_RecordIndex})
+var sRejectedRecord_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRejectedRecord_Reason})
+var sRejectedRecord_ExistingVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExistingVersion", ID: &i_RecordVersion, Type: smithy.ShapeTypeLong, Ext: &eRejectedRecord_ExistingVersion})
+var s_RejectedRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RejectedRecords, Members: &m_RejectedRecords, Type: smithy.ShapeTypeList, Ext: &e_RejectedRecords})
+var s_RejectedRecords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRejectedRecord, Members: &mRejectedRecord, Type: smithy.ShapeTypeStructure, Ext: &e_RejectedRecords_member})
+var sRejectedRecordsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectedRecordsException, Members: &mRejectedRecordsException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eRejectedRecordsException})
+var sRejectedRecordsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRejectedRecordsException_Message})
+var sRejectedRecordsException_RejectedRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RejectedRecords", ID: &i_RejectedRecords, Members: &m_RejectedRecords, Type: smithy.ShapeTypeList, Ext: &eRejectedRecordsException_RejectedRecords})
+var sReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportConfiguration, Members: &mReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eReportConfiguration})
+var sReportConfiguration_ReportS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportS3Configuration", ID: &iReportS3Configuration, Members: &mReportS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eReportConfiguration_ReportS3Configuration})
+var sReportS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportS3Configuration, Members: &mReportS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eReportS3Configuration})
+var sReportS3Configuration_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eReportS3Configuration_BucketName})
+var sReportS3Configuration_ObjectKeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectKeyPrefix", ID: &i_S3ObjectKeyPrefix, Type: smithy.ShapeTypeString, Ext: &eReportS3Configuration_ObjectKeyPrefix})
+var sReportS3Configuration_EncryptionOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionOption", ID: &iS3EncryptionOption, Members: &mS3EncryptionOption, Type: smithy.ShapeTypeEnum, Ext: &eReportS3Configuration_EncryptionOption})
+var sReportS3Configuration_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eReportS3Configuration_KmsKeyId})
+var s_ResourceCreateAPIName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceCreateAPIName, Type: smithy.ShapeTypeString, Ext: &e_ResourceCreateAPIName})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sRetentionProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionProperties, Members: &mRetentionProperties, Type: smithy.ShapeTypeStructure, Ext: &eRetentionProperties})
+var sRetentionProperties_MemoryStoreRetentionPeriodInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemoryStoreRetentionPeriodInHours", ID: &i_MemoryStoreRetentionPeriodInHours, Type: smithy.ShapeTypeLong, Ext: &eRetentionProperties_MemoryStoreRetentionPeriodInHours})
+var sRetentionProperties_MagneticStoreRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MagneticStoreRetentionPeriodInDays", ID: &i_MagneticStoreRetentionPeriodInDays, Type: smithy.ShapeTypeLong, Ext: &eRetentionProperties_MagneticStoreRetentionPeriodInDays})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var sS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Configuration, Members: &mS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eS3Configuration})
+var sS3Configuration_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eS3Configuration_BucketName})
+var sS3Configuration_ObjectKeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectKeyPrefix", ID: &i_S3ObjectKeyPrefix, Type: smithy.ShapeTypeString, Ext: &eS3Configuration_ObjectKeyPrefix})
+var sS3Configuration_EncryptionOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionOption", ID: &iS3EncryptionOption, Members: &mS3EncryptionOption, Type: smithy.ShapeTypeEnum, Ext: &eS3Configuration_EncryptionOption})
+var sS3Configuration_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eS3Configuration_KmsKeyId})
+var sS3EncryptionOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3EncryptionOption, Members: &mS3EncryptionOption, Type: smithy.ShapeTypeEnum, Ext: &eS3EncryptionOption})
+var sS3EncryptionOption_SSE_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3EncryptionOption_SSE_S3})
+var sS3EncryptionOption_SSE_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3EncryptionOption_SSE_KMS})
+var s_S3ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectKey})
+var s_S3ObjectKeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKeyPrefix, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectKeyPrefix})
+var sScalarMeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalarMeasureValueType, Members: &mScalarMeasureValueType, Type: smithy.ShapeTypeEnum, Ext: &eScalarMeasureValueType})
+var sScalarMeasureValueType_DOUBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOUBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalarMeasureValueType_DOUBLE})
+var sScalarMeasureValueType_BIGINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIGINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalarMeasureValueType_BIGINT})
+var sScalarMeasureValueType_BOOLEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOLEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalarMeasureValueType_BOOLEAN})
+var sScalarMeasureValueType_VARCHAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VARCHAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalarMeasureValueType_VARCHAR})
+var sScalarMeasureValueType_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalarMeasureValueType_TIMESTAMP})
+var sSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eSchema})
+var sSchema_CompositePartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositePartitionKey", ID: &i_PartitionKeyList, Members: &m_PartitionKeyList, Type: smithy.ShapeTypeList, Ext: &eSchema_CompositePartitionKey})
+var s_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &e_SchemaName})
+var s_SchemaValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaValue, Type: smithy.ShapeTypeString, Ext: &e_SchemaValue})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringValue1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValue1, Type: smithy.ShapeTypeString, Ext: &e_StringValue1})
+var s_StringValue2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &e_StringValue2048})
+var s_StringValue256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValue256, Type: smithy.ShapeTypeString, Ext: &e_StringValue256})
+var sTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTable, Members: &mTable, Type: smithy.ShapeTypeStructure, Ext: &eTable})
+var sTable_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTable_Arn})
+var sTable_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eTable_TableName})
+var sTable_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eTable_DatabaseName})
+var sTable_TableStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableStatus", ID: &iTableStatus, Members: &mTableStatus, Type: smithy.ShapeTypeEnum, Ext: &eTable_TableStatus})
+var sTable_RetentionProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionProperties", ID: &iRetentionProperties, Members: &mRetentionProperties, Type: smithy.ShapeTypeStructure, Ext: &eTable_RetentionProperties})
+var sTable_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eTable_CreationTime})
+var sTable_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eTable_LastUpdatedTime})
+var sTable_MagneticStoreWriteProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MagneticStoreWriteProperties", ID: &iMagneticStoreWriteProperties, Members: &mMagneticStoreWriteProperties, Type: smithy.ShapeTypeStructure, Ext: &eTable_MagneticStoreWriteProperties})
+var sTable_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eTable_Schema})
+var s_TableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableList, Members: &m_TableList, Type: smithy.ShapeTypeList, Ext: &e_TableList})
+var s_TableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTable, Members: &mTable, Type: smithy.ShapeTypeStructure, Ext: &e_TableList_member})
+var sTableStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableStatus, Members: &mTableStatus, Type: smithy.ShapeTypeEnum, Ext: &eTableStatus})
+var sTableStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableStatus_ACTIVE})
+var sTableStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableStatus_DELETING})
+var sTableStatus_RESTORING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTORING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableStatus_RESTORING})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eTimeUnit})
+var sTimeUnit_MILLISECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_MILLISECONDS})
+var sTimeUnit_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_SECONDS})
+var sTimeUnit_MICROSECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_MICROSECONDS})
+var sTimeUnit_NANOSECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NANOSECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_NANOSECONDS})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sCreateBatchLoadTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchLoadTaskRequest, Members: &mCreateBatchLoadTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchLoadTaskRequest})
+var sCreateBatchLoadTaskRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientRequestToken, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eCreateBatchLoadTaskRequest_ClientToken})
+var sCreateBatchLoadTaskRequest_DataModelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataModelConfiguration", ID: &iDataModelConfiguration, Members: &mDataModelConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchLoadTaskRequest_DataModelConfiguration})
+var sCreateBatchLoadTaskRequest_DataSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceConfiguration", ID: &iDataSourceConfiguration, Members: &mDataSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchLoadTaskRequest_DataSourceConfiguration})
+var sCreateBatchLoadTaskRequest_ReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportConfiguration", ID: &iReportConfiguration, Members: &mReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchLoadTaskRequest_ReportConfiguration})
+var sCreateBatchLoadTaskRequest_TargetDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDatabaseName", ID: &i_ResourceCreateAPIName, Type: smithy.ShapeTypeString, Ext: &eCreateBatchLoadTaskRequest_TargetDatabaseName})
+var sCreateBatchLoadTaskRequest_TargetTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTableName", ID: &i_ResourceCreateAPIName, Type: smithy.ShapeTypeString, Ext: &eCreateBatchLoadTaskRequest_TargetTableName})
+var sCreateBatchLoadTaskRequest_RecordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordVersion", ID: &i_RecordVersion, Type: smithy.ShapeTypeLong, Ext: &eCreateBatchLoadTaskRequest_RecordVersion})
+var sCreateBatchLoadTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchLoadTaskResponse, Members: &mCreateBatchLoadTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchLoadTaskResponse})
+var sCreateBatchLoadTaskResponse_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_BatchLoadTaskId, Type: smithy.ShapeTypeString, Ext: &eCreateBatchLoadTaskResponse_TaskId})
+var sCreateDatabaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatabaseRequest, Members: &mCreateDatabaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatabaseRequest})
+var sCreateDatabaseRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceCreateAPIName, Type: smithy.ShapeTypeString, Ext: &eCreateDatabaseRequest_DatabaseName})
+var sCreateDatabaseRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eCreateDatabaseRequest_KmsKeyId})
+var sCreateDatabaseRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDatabaseRequest_Tags})
+var sCreateDatabaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatabaseResponse, Members: &mCreateDatabaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatabaseResponse})
+var sCreateDatabaseResponse_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatabaseResponse_Database})
+var sCreateTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableRequest, Members: &mCreateTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableRequest})
+var sCreateTableRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceCreateAPIName, Type: smithy.ShapeTypeString, Ext: &eCreateTableRequest_DatabaseName})
+var sCreateTableRequest_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_ResourceCreateAPIName, Type: smithy.ShapeTypeString, Ext: &eCreateTableRequest_TableName})
+var sCreateTableRequest_RetentionProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionProperties", ID: &iRetentionProperties, Members: &mRetentionProperties, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableRequest_RetentionProperties})
+var sCreateTableRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateTableRequest_Tags})
+var sCreateTableRequest_MagneticStoreWriteProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MagneticStoreWriteProperties", ID: &iMagneticStoreWriteProperties, Members: &mMagneticStoreWriteProperties, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableRequest_MagneticStoreWriteProperties})
+var sCreateTableRequest_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableRequest_Schema})
+var sCreateTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableResponse, Members: &mCreateTableResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableResponse})
+var sCreateTableResponse_Table = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Table", ID: &iTable, Members: &mTable, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableResponse_Table})
+var sDeleteDatabaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatabaseRequest, Members: &mDeleteDatabaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatabaseRequest})
+var sDeleteDatabaseRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteDatabaseRequest_DatabaseName})
+var sDeleteTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableRequest, Members: &mDeleteTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableRequest})
+var sDeleteTableRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteTableRequest_DatabaseName})
+var sDeleteTableRequest_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteTableRequest_TableName})
+var sDescribeBatchLoadTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBatchLoadTaskRequest, Members: &mDescribeBatchLoadTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBatchLoadTaskRequest})
+var sDescribeBatchLoadTaskRequest_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_BatchLoadTaskId, Type: smithy.ShapeTypeString, Ext: &eDescribeBatchLoadTaskRequest_TaskId})
+var sDescribeBatchLoadTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBatchLoadTaskResponse, Members: &mDescribeBatchLoadTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBatchLoadTaskResponse})
+var sDescribeBatchLoadTaskResponse_BatchLoadTaskDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchLoadTaskDescription", ID: &iBatchLoadTaskDescription, Members: &mBatchLoadTaskDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBatchLoadTaskResponse_BatchLoadTaskDescription})
+var sDescribeDatabaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatabaseRequest, Members: &mDescribeDatabaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatabaseRequest})
+var sDescribeDatabaseRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeDatabaseRequest_DatabaseName})
+var sDescribeDatabaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatabaseResponse, Members: &mDescribeDatabaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatabaseResponse})
+var sDescribeDatabaseResponse_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatabaseResponse_Database})
+var sDescribeEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEndpointsRequest})
+var sDescribeEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndpointsResponse, Members: &mDescribeEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEndpointsResponse})
+var sDescribeEndpointsResponse_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &eDescribeEndpointsResponse_Endpoints})
+var sDescribeTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTableRequest, Members: &mDescribeTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTableRequest})
+var sDescribeTableRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeTableRequest_DatabaseName})
+var sDescribeTableRequest_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeTableRequest_TableName})
+var sDescribeTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTableResponse, Members: &mDescribeTableResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTableResponse})
+var sDescribeTableResponse_Table = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Table", ID: &iTable, Members: &mTable, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTableResponse_Table})
+var sListBatchLoadTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBatchLoadTasksRequest, Members: &mListBatchLoadTasksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListBatchLoadTasksRequest})
+var sListBatchLoadTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBatchLoadTasksRequest_NextToken})
+var sListBatchLoadTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger, Ext: &eListBatchLoadTasksRequest_MaxResults})
+var sListBatchLoadTasksRequest_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iBatchLoadStatus, Members: &mBatchLoadStatus, Type: smithy.ShapeTypeEnum, Ext: &eListBatchLoadTasksRequest_TaskStatus})
+var sListBatchLoadTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBatchLoadTasksResponse, Members: &mListBatchLoadTasksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListBatchLoadTasksResponse})
+var sListBatchLoadTasksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBatchLoadTasksResponse_NextToken})
+var sListBatchLoadTasksResponse_BatchLoadTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchLoadTasks", ID: &i_BatchLoadTaskList, Members: &m_BatchLoadTaskList, Type: smithy.ShapeTypeList, Ext: &eListBatchLoadTasksResponse_BatchLoadTasks})
+var sListDatabasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatabasesRequest, Members: &mListDatabasesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDatabasesRequest})
+var sListDatabasesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListDatabasesRequest_NextToken})
+var sListDatabasesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListDatabasesRequest_MaxResults})
+var sListDatabasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatabasesResponse, Members: &mListDatabasesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDatabasesResponse})
+var sListDatabasesResponse_Databases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Databases", ID: &i_DatabaseList, Members: &m_DatabaseList, Type: smithy.ShapeTypeList, Ext: &eListDatabasesResponse_Databases})
+var sListDatabasesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListDatabasesResponse_NextToken})
+var sListTablesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesRequest, Members: &mListTablesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTablesRequest})
+var sListTablesRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eListTablesRequest_DatabaseName})
+var sListTablesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListTablesRequest_NextToken})
+var sListTablesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListTablesRequest_MaxResults})
+var sListTablesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesResponse, Members: &mListTablesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTablesResponse})
+var sListTablesResponse_Tables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tables", ID: &i_TableList, Members: &m_TableList, Type: smithy.ShapeTypeList, Ext: &eListTablesResponse_Tables})
+var sListTablesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListTablesResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sResumeBatchLoadTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeBatchLoadTaskRequest, Members: &mResumeBatchLoadTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eResumeBatchLoadTaskRequest})
+var sResumeBatchLoadTaskRequest_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_BatchLoadTaskId, Type: smithy.ShapeTypeString, Ext: &eResumeBatchLoadTaskRequest_TaskId})
+var sResumeBatchLoadTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeBatchLoadTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eResumeBatchLoadTaskResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateDatabaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatabaseRequest, Members: &mUpdateDatabaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDatabaseRequest})
+var sUpdateDatabaseRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateDatabaseRequest_DatabaseName})
+var sUpdateDatabaseRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_StringValue2048, Type: smithy.ShapeTypeString, Ext: &eUpdateDatabaseRequest_KmsKeyId})
+var sUpdateDatabaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatabaseResponse, Members: &mUpdateDatabaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDatabaseResponse})
+var sUpdateDatabaseResponse_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDatabaseResponse_Database})
+var sUpdateTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableRequest, Members: &mUpdateTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableRequest})
+var sUpdateTableRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateTableRequest_DatabaseName})
+var sUpdateTableRequest_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateTableRequest_TableName})
+var sUpdateTableRequest_RetentionProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionProperties", ID: &iRetentionProperties, Members: &mRetentionProperties, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableRequest_RetentionProperties})
+var sUpdateTableRequest_MagneticStoreWriteProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MagneticStoreWriteProperties", ID: &iMagneticStoreWriteProperties, Members: &mMagneticStoreWriteProperties, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableRequest_MagneticStoreWriteProperties})
+var sUpdateTableRequest_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableRequest_Schema})
+var sUpdateTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableResponse, Members: &mUpdateTableResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableResponse})
+var sUpdateTableResponse_Table = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Table", ID: &iTable, Members: &mTable, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableResponse_Table})
+var sWriteRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWriteRecordsRequest, Members: &mWriteRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &eWriteRecordsRequest})
+var sWriteRecordsRequest_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eWriteRecordsRequest_DatabaseName})
+var sWriteRecordsRequest_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eWriteRecordsRequest_TableName})
+var sWriteRecordsRequest_CommonAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommonAttributes", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &eWriteRecordsRequest_CommonAttributes})
+var sWriteRecordsRequest_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_Records, Members: &m_Records, Type: smithy.ShapeTypeList, Ext: &eWriteRecordsRequest_Records})
+var sWriteRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWriteRecordsResponse, Members: &mWriteRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &eWriteRecordsResponse})
+var sWriteRecordsResponse_RecordsIngested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordsIngested", ID: &iRecordsIngested, Members: &mRecordsIngested, Type: smithy.ShapeTypeStructure, Ext: &eWriteRecordsResponse_RecordsIngested})
+
+var CreateBatchLoadTask = &sCreateBatchLoadTask
+
+var CreateDatabase = &sCreateDatabase
+
+var CreateTable = &sCreateTable
+
+var DeleteDatabase = &sDeleteDatabase
+
+var DeleteTable = &sDeleteTable
+
+var DescribeBatchLoadTask = &sDescribeBatchLoadTask
+
+var DescribeDatabase = &sDescribeDatabase
+
+var DescribeEndpoints = &sDescribeEndpoints
+
+var DescribeTable = &sDescribeTable
+
+var ListBatchLoadTasks = &sListBatchLoadTasks
+
+var ListDatabases = &sListDatabases
+
+var ListTables = &sListTables
+
+var ListTagsForResource = &sListTagsForResource
+
+var ResumeBatchLoadTask = &sResumeBatchLoadTask
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDatabase = &sUpdateDatabase
+
+var UpdateTable = &sUpdateTable
+
+var WriteRecords = &sWriteRecords
+
+var _Timestream_20181101 = &s_Timestream_20181101
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var BatchLoadDataFormat = &sBatchLoadDataFormat
+var BatchLoadDataFormat_CSV = &sBatchLoadDataFormat_CSV
+
+var BatchLoadProgressReport = &sBatchLoadProgressReport
+var BatchLoadProgressReport_RecordsProcessed = &sBatchLoadProgressReport_RecordsProcessed
+var BatchLoadProgressReport_RecordsIngested = &sBatchLoadProgressReport_RecordsIngested
+var BatchLoadProgressReport_ParseFailures = &sBatchLoadProgressReport_ParseFailures
+var BatchLoadProgressReport_RecordIngestionFailures = &sBatchLoadProgressReport_RecordIngestionFailures
+var BatchLoadProgressReport_FileFailures = &sBatchLoadProgressReport_FileFailures
+var BatchLoadProgressReport_BytesMetered = &sBatchLoadProgressReport_BytesMetered
+
+var BatchLoadStatus = &sBatchLoadStatus
+var BatchLoadStatus_CREATED = &sBatchLoadStatus_CREATED
+var BatchLoadStatus_IN_PROGRESS = &sBatchLoadStatus_IN_PROGRESS
+var BatchLoadStatus_FAILED = &sBatchLoadStatus_FAILED
+var BatchLoadStatus_SUCCEEDED = &sBatchLoadStatus_SUCCEEDED
+var BatchLoadStatus_PROGRESS_STOPPED = &sBatchLoadStatus_PROGRESS_STOPPED
+var BatchLoadStatus_PENDING_RESUME = &sBatchLoadStatus_PENDING_RESUME
+
+var BatchLoadTask = &sBatchLoadTask
+var BatchLoadTask_TaskId = &sBatchLoadTask_TaskId
+var BatchLoadTask_TaskStatus = &sBatchLoadTask_TaskStatus
+var BatchLoadTask_DatabaseName = &sBatchLoadTask_DatabaseName
+var BatchLoadTask_TableName = &sBatchLoadTask_TableName
+var BatchLoadTask_CreationTime = &sBatchLoadTask_CreationTime
+var BatchLoadTask_LastUpdatedTime = &sBatchLoadTask_LastUpdatedTime
+var BatchLoadTask_ResumableUntil = &sBatchLoadTask_ResumableUntil
+
+var BatchLoadTaskDescription = &sBatchLoadTaskDescription
+var BatchLoadTaskDescription_TaskId = &sBatchLoadTaskDescription_TaskId
+var BatchLoadTaskDescription_ErrorMessage = &sBatchLoadTaskDescription_ErrorMessage
+var BatchLoadTaskDescription_DataSourceConfiguration = &sBatchLoadTaskDescription_DataSourceConfiguration
+var BatchLoadTaskDescription_ProgressReport = &sBatchLoadTaskDescription_ProgressReport
+var BatchLoadTaskDescription_ReportConfiguration = &sBatchLoadTaskDescription_ReportConfiguration
+var BatchLoadTaskDescription_DataModelConfiguration = &sBatchLoadTaskDescription_DataModelConfiguration
+var BatchLoadTaskDescription_TargetDatabaseName = &sBatchLoadTaskDescription_TargetDatabaseName
+var BatchLoadTaskDescription_TargetTableName = &sBatchLoadTaskDescription_TargetTableName
+var BatchLoadTaskDescription_TaskStatus = &sBatchLoadTaskDescription_TaskStatus
+var BatchLoadTaskDescription_RecordVersion = &sBatchLoadTaskDescription_RecordVersion
+var BatchLoadTaskDescription_CreationTime = &sBatchLoadTaskDescription_CreationTime
+var BatchLoadTaskDescription_LastUpdatedTime = &sBatchLoadTaskDescription_LastUpdatedTime
+var BatchLoadTaskDescription_ResumableUntil = &sBatchLoadTaskDescription_ResumableUntil
+
+var _BatchLoadTaskId = &s_BatchLoadTaskId
+
+var _BatchLoadTaskList = &s_BatchLoadTaskList
+var _BatchLoadTaskList_member = &s_BatchLoadTaskList_member
+
+var _Boolean = &s_Boolean
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var CsvConfiguration = &sCsvConfiguration
+var CsvConfiguration_ColumnSeparator = &sCsvConfiguration_ColumnSeparator
+var CsvConfiguration_EscapeChar = &sCsvConfiguration_EscapeChar
+var CsvConfiguration_QuoteChar = &sCsvConfiguration_QuoteChar
+var CsvConfiguration_NullValue = &sCsvConfiguration_NullValue
+var CsvConfiguration_TrimWhiteSpace = &sCsvConfiguration_TrimWhiteSpace
+
+var Database = &sDatabase
+var Database_Arn = &sDatabase_Arn
+var Database_DatabaseName = &sDatabase_DatabaseName
+var Database_TableCount = &sDatabase_TableCount
+var Database_KmsKeyId = &sDatabase_KmsKeyId
+var Database_CreationTime = &sDatabase_CreationTime
+var Database_LastUpdatedTime = &sDatabase_LastUpdatedTime
+
+var _DatabaseList = &s_DatabaseList
+var _DatabaseList_member = &s_DatabaseList_member
+
+var DataModel = &sDataModel
+var DataModel_TimeColumn = &sDataModel_TimeColumn
+var DataModel_TimeUnit = &sDataModel_TimeUnit
+var DataModel_DimensionMappings = &sDataModel_DimensionMappings
+var DataModel_MultiMeasureMappings = &sDataModel_MultiMeasureMappings
+var DataModel_MixedMeasureMappings = &sDataModel_MixedMeasureMappings
+var DataModel_MeasureNameColumn = &sDataModel_MeasureNameColumn
+
+var DataModelConfiguration = &sDataModelConfiguration
+var DataModelConfiguration_DataModel = &sDataModelConfiguration_DataModel
+var DataModelConfiguration_DataModelS3Configuration = &sDataModelConfiguration_DataModelS3Configuration
+
+var DataModelS3Configuration = &sDataModelS3Configuration
+var DataModelS3Configuration_BucketName = &sDataModelS3Configuration_BucketName
+var DataModelS3Configuration_ObjectKey = &sDataModelS3Configuration_ObjectKey
+
+var DataSourceConfiguration = &sDataSourceConfiguration
+var DataSourceConfiguration_DataSourceS3Configuration = &sDataSourceConfiguration_DataSourceS3Configuration
+var DataSourceConfiguration_CsvConfiguration = &sDataSourceConfiguration_CsvConfiguration
+var DataSourceConfiguration_DataFormat = &sDataSourceConfiguration_DataFormat
+
+var DataSourceS3Configuration = &sDataSourceS3Configuration
+var DataSourceS3Configuration_BucketName = &sDataSourceS3Configuration_BucketName
+var DataSourceS3Configuration_ObjectKeyPrefix = &sDataSourceS3Configuration_ObjectKeyPrefix
+
+var _Date = &s_Date
+
+var Dimension = &sDimension
+var Dimension_Name = &sDimension_Name
+var Dimension_Value = &sDimension_Value
+var Dimension_DimensionValueType = &sDimension_DimensionValueType
+
+var DimensionMapping = &sDimensionMapping
+var DimensionMapping_SourceColumn = &sDimensionMapping_SourceColumn
+var DimensionMapping_DestinationColumn = &sDimensionMapping_DestinationColumn
+
+var _DimensionMappings = &s_DimensionMappings
+var _DimensionMappings_member = &s_DimensionMappings_member
+
+var _Dimensions = &s_Dimensions
+var _Dimensions_member = &s_Dimensions_member
+
+var DimensionValueType = &sDimensionValueType
+var DimensionValueType_VARCHAR = &sDimensionValueType_VARCHAR
+
+var Endpoint = &sEndpoint
+var Endpoint_Address = &sEndpoint_Address
+var Endpoint_CachePeriodInMinutes = &sEndpoint_CachePeriodInMinutes
+
+var _Endpoints = &s_Endpoints
+var _Endpoints_member = &s_Endpoints_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidEndpointException = &sInvalidEndpointException
+var InvalidEndpointException_Message = &sInvalidEndpointException_Message
+
+var _Long = &s_Long
+
+var MagneticStoreRejectedDataLocation = &sMagneticStoreRejectedDataLocation
+var MagneticStoreRejectedDataLocation_S3Configuration = &sMagneticStoreRejectedDataLocation_S3Configuration
+
+var _MagneticStoreRetentionPeriodInDays = &s_MagneticStoreRetentionPeriodInDays
+
+var MagneticStoreWriteProperties = &sMagneticStoreWriteProperties
+var MagneticStoreWriteProperties_EnableMagneticStoreWrites = &sMagneticStoreWriteProperties_EnableMagneticStoreWrites
+var MagneticStoreWriteProperties_MagneticStoreRejectedDataLocation = &sMagneticStoreWriteProperties_MagneticStoreRejectedDataLocation
+
+var MeasureValue = &sMeasureValue
+var MeasureValue_Name = &sMeasureValue_Name
+var MeasureValue_Value = &sMeasureValue_Value
+var MeasureValue_Type = &sMeasureValue_Type
+
+var _MeasureValues = &s_MeasureValues
+var _MeasureValues_member = &s_MeasureValues_member
+
+var MeasureValueType = &sMeasureValueType
+var MeasureValueType_DOUBLE = &sMeasureValueType_DOUBLE
+var MeasureValueType_BIGINT = &sMeasureValueType_BIGINT
+var MeasureValueType_VARCHAR = &sMeasureValueType_VARCHAR
+var MeasureValueType_BOOLEAN = &sMeasureValueType_BOOLEAN
+var MeasureValueType_TIMESTAMP = &sMeasureValueType_TIMESTAMP
+var MeasureValueType_MULTI = &sMeasureValueType_MULTI
+
+var _MemoryStoreRetentionPeriodInHours = &s_MemoryStoreRetentionPeriodInHours
+
+var MixedMeasureMapping = &sMixedMeasureMapping
+var MixedMeasureMapping_MeasureName = &sMixedMeasureMapping_MeasureName
+var MixedMeasureMapping_SourceColumn = &sMixedMeasureMapping_SourceColumn
+var MixedMeasureMapping_TargetMeasureName = &sMixedMeasureMapping_TargetMeasureName
+var MixedMeasureMapping_MeasureValueType = &sMixedMeasureMapping_MeasureValueType
+var MixedMeasureMapping_MultiMeasureAttributeMappings = &sMixedMeasureMapping_MultiMeasureAttributeMappings
+
+var _MixedMeasureMappingList = &s_MixedMeasureMappingList
+var _MixedMeasureMappingList_member = &s_MixedMeasureMappingList_member
+
+var MultiMeasureAttributeMapping = &sMultiMeasureAttributeMapping
+var MultiMeasureAttributeMapping_SourceColumn = &sMultiMeasureAttributeMapping_SourceColumn
+var MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName = &sMultiMeasureAttributeMapping_TargetMultiMeasureAttributeName
+var MultiMeasureAttributeMapping_MeasureValueType = &sMultiMeasureAttributeMapping_MeasureValueType
+
+var _MultiMeasureAttributeMappingList = &s_MultiMeasureAttributeMappingList
+var _MultiMeasureAttributeMappingList_member = &s_MultiMeasureAttributeMappingList_member
+
+var MultiMeasureMappings = &sMultiMeasureMappings
+var MultiMeasureMappings_TargetMultiMeasureName = &sMultiMeasureMappings_TargetMultiMeasureName
+var MultiMeasureMappings_MultiMeasureAttributeMappings = &sMultiMeasureMappings_MultiMeasureAttributeMappings
+
+var _PageLimit = &s_PageLimit
+
+var _PaginationLimit = &s_PaginationLimit
+
+var PartitionKey = &sPartitionKey
+var PartitionKey_Type = &sPartitionKey_Type
+var PartitionKey_Name = &sPartitionKey_Name
+var PartitionKey_EnforcementInRecord = &sPartitionKey_EnforcementInRecord
+
+var PartitionKeyEnforcementLevel = &sPartitionKeyEnforcementLevel
+var PartitionKeyEnforcementLevel_REQUIRED = &sPartitionKeyEnforcementLevel_REQUIRED
+var PartitionKeyEnforcementLevel_OPTIONAL = &sPartitionKeyEnforcementLevel_OPTIONAL
+
+var _PartitionKeyList = &s_PartitionKeyList
+var _PartitionKeyList_member = &s_PartitionKeyList_member
+
+var PartitionKeyType = &sPartitionKeyType
+var PartitionKeyType_DIMENSION = &sPartitionKeyType_DIMENSION
+var PartitionKeyType_MEASURE = &sPartitionKeyType_MEASURE
+
+var Record = &sRecord
+var Record_Dimensions = &sRecord_Dimensions
+var Record_MeasureName = &sRecord_MeasureName
+var Record_MeasureValue = &sRecord_MeasureValue
+var Record_MeasureValueType = &sRecord_MeasureValueType
+var Record_Time = &sRecord_Time
+var Record_TimeUnit = &sRecord_TimeUnit
+var Record_Version = &sRecord_Version
+var Record_MeasureValues = &sRecord_MeasureValues
+
+var _RecordIndex = &s_RecordIndex
+
+var _Records = &s_Records
+var _Records_member = &s_Records_member
+
+var RecordsIngested = &sRecordsIngested
+var RecordsIngested_Total = &sRecordsIngested_Total
+var RecordsIngested_MemoryStore = &sRecordsIngested_MemoryStore
+var RecordsIngested_MagneticStore = &sRecordsIngested_MagneticStore
+
+var _RecordVersion = &s_RecordVersion
+
+var RejectedRecord = &sRejectedRecord
+var RejectedRecord_RecordIndex = &sRejectedRecord_RecordIndex
+var RejectedRecord_Reason = &sRejectedRecord_Reason
+var RejectedRecord_ExistingVersion = &sRejectedRecord_ExistingVersion
+
+var _RejectedRecords = &s_RejectedRecords
+var _RejectedRecords_member = &s_RejectedRecords_member
+
+var RejectedRecordsException = &sRejectedRecordsException
+var RejectedRecordsException_Message = &sRejectedRecordsException_Message
+var RejectedRecordsException_RejectedRecords = &sRejectedRecordsException_RejectedRecords
+
+var ReportConfiguration = &sReportConfiguration
+var ReportConfiguration_ReportS3Configuration = &sReportConfiguration_ReportS3Configuration
+
+var ReportS3Configuration = &sReportS3Configuration
+var ReportS3Configuration_BucketName = &sReportS3Configuration_BucketName
+var ReportS3Configuration_ObjectKeyPrefix = &sReportS3Configuration_ObjectKeyPrefix
+var ReportS3Configuration_EncryptionOption = &sReportS3Configuration_EncryptionOption
+var ReportS3Configuration_KmsKeyId = &sReportS3Configuration_KmsKeyId
+
+var _ResourceCreateAPIName = &s_ResourceCreateAPIName
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var RetentionProperties = &sRetentionProperties
+var RetentionProperties_MemoryStoreRetentionPeriodInHours = &sRetentionProperties_MemoryStoreRetentionPeriodInHours
+var RetentionProperties_MagneticStoreRetentionPeriodInDays = &sRetentionProperties_MagneticStoreRetentionPeriodInDays
+
+var _S3BucketName = &s_S3BucketName
+
+var S3Configuration = &sS3Configuration
+var S3Configuration_BucketName = &sS3Configuration_BucketName
+var S3Configuration_ObjectKeyPrefix = &sS3Configuration_ObjectKeyPrefix
+var S3Configuration_EncryptionOption = &sS3Configuration_EncryptionOption
+var S3Configuration_KmsKeyId = &sS3Configuration_KmsKeyId
+
+var S3EncryptionOption = &sS3EncryptionOption
+var S3EncryptionOption_SSE_S3 = &sS3EncryptionOption_SSE_S3
+var S3EncryptionOption_SSE_KMS = &sS3EncryptionOption_SSE_KMS
+
+var _S3ObjectKey = &s_S3ObjectKey
+
+var _S3ObjectKeyPrefix = &s_S3ObjectKeyPrefix
+
+var ScalarMeasureValueType = &sScalarMeasureValueType
+var ScalarMeasureValueType_DOUBLE = &sScalarMeasureValueType_DOUBLE
+var ScalarMeasureValueType_BIGINT = &sScalarMeasureValueType_BIGINT
+var ScalarMeasureValueType_BOOLEAN = &sScalarMeasureValueType_BOOLEAN
+var ScalarMeasureValueType_VARCHAR = &sScalarMeasureValueType_VARCHAR
+var ScalarMeasureValueType_TIMESTAMP = &sScalarMeasureValueType_TIMESTAMP
+
+var Schema = &sSchema
+var Schema_CompositePartitionKey = &sSchema_CompositePartitionKey
+
+var _SchemaName = &s_SchemaName
+
+var _SchemaValue = &s_SchemaValue
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var _String = &s_String
+
+var _StringValue1 = &s_StringValue1
+
+var _StringValue2048 = &s_StringValue2048
+
+var _StringValue256 = &s_StringValue256
+
+var Table = &sTable
+var Table_Arn = &sTable_Arn
+var Table_TableName = &sTable_TableName
+var Table_DatabaseName = &sTable_DatabaseName
+var Table_TableStatus = &sTable_TableStatus
+var Table_RetentionProperties = &sTable_RetentionProperties
+var Table_CreationTime = &sTable_CreationTime
+var Table_LastUpdatedTime = &sTable_LastUpdatedTime
+var Table_MagneticStoreWriteProperties = &sTable_MagneticStoreWriteProperties
+var Table_Schema = &sTable_Schema
+
+var _TableList = &s_TableList
+var _TableList_member = &s_TableList_member
+
+var TableStatus = &sTableStatus
+var TableStatus_ACTIVE = &sTableStatus_ACTIVE
+var TableStatus_DELETING = &sTableStatus_DELETING
+var TableStatus_RESTORING = &sTableStatus_RESTORING
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var TimeUnit = &sTimeUnit
+var TimeUnit_MILLISECONDS = &sTimeUnit_MILLISECONDS
+var TimeUnit_SECONDS = &sTimeUnit_SECONDS
+var TimeUnit_MICROSECONDS = &sTimeUnit_MICROSECONDS
+var TimeUnit_NANOSECONDS = &sTimeUnit_NANOSECONDS
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateBatchLoadTaskRequest = &sCreateBatchLoadTaskRequest
+var CreateBatchLoadTaskRequest_ClientToken = &sCreateBatchLoadTaskRequest_ClientToken
+var CreateBatchLoadTaskRequest_DataModelConfiguration = &sCreateBatchLoadTaskRequest_DataModelConfiguration
+var CreateBatchLoadTaskRequest_DataSourceConfiguration = &sCreateBatchLoadTaskRequest_DataSourceConfiguration
+var CreateBatchLoadTaskRequest_ReportConfiguration = &sCreateBatchLoadTaskRequest_ReportConfiguration
+var CreateBatchLoadTaskRequest_TargetDatabaseName = &sCreateBatchLoadTaskRequest_TargetDatabaseName
+var CreateBatchLoadTaskRequest_TargetTableName = &sCreateBatchLoadTaskRequest_TargetTableName
+var CreateBatchLoadTaskRequest_RecordVersion = &sCreateBatchLoadTaskRequest_RecordVersion
+
+var CreateBatchLoadTaskResponse = &sCreateBatchLoadTaskResponse
+var CreateBatchLoadTaskResponse_TaskId = &sCreateBatchLoadTaskResponse_TaskId
+
+var CreateDatabaseRequest = &sCreateDatabaseRequest
+var CreateDatabaseRequest_DatabaseName = &sCreateDatabaseRequest_DatabaseName
+var CreateDatabaseRequest_KmsKeyId = &sCreateDatabaseRequest_KmsKeyId
+var CreateDatabaseRequest_Tags = &sCreateDatabaseRequest_Tags
+
+var CreateDatabaseResponse = &sCreateDatabaseResponse
+var CreateDatabaseResponse_Database = &sCreateDatabaseResponse_Database
+
+var CreateTableRequest = &sCreateTableRequest
+var CreateTableRequest_DatabaseName = &sCreateTableRequest_DatabaseName
+var CreateTableRequest_TableName = &sCreateTableRequest_TableName
+var CreateTableRequest_RetentionProperties = &sCreateTableRequest_RetentionProperties
+var CreateTableRequest_Tags = &sCreateTableRequest_Tags
+var CreateTableRequest_MagneticStoreWriteProperties = &sCreateTableRequest_MagneticStoreWriteProperties
+var CreateTableRequest_Schema = &sCreateTableRequest_Schema
+
+var CreateTableResponse = &sCreateTableResponse
+var CreateTableResponse_Table = &sCreateTableResponse_Table
+
+var DeleteDatabaseRequest = &sDeleteDatabaseRequest
+var DeleteDatabaseRequest_DatabaseName = &sDeleteDatabaseRequest_DatabaseName
+
+var DeleteTableRequest = &sDeleteTableRequest
+var DeleteTableRequest_DatabaseName = &sDeleteTableRequest_DatabaseName
+var DeleteTableRequest_TableName = &sDeleteTableRequest_TableName
+
+var DescribeBatchLoadTaskRequest = &sDescribeBatchLoadTaskRequest
+var DescribeBatchLoadTaskRequest_TaskId = &sDescribeBatchLoadTaskRequest_TaskId
+
+var DescribeBatchLoadTaskResponse = &sDescribeBatchLoadTaskResponse
+var DescribeBatchLoadTaskResponse_BatchLoadTaskDescription = &sDescribeBatchLoadTaskResponse_BatchLoadTaskDescription
+
+var DescribeDatabaseRequest = &sDescribeDatabaseRequest
+var DescribeDatabaseRequest_DatabaseName = &sDescribeDatabaseRequest_DatabaseName
+
+var DescribeDatabaseResponse = &sDescribeDatabaseResponse
+var DescribeDatabaseResponse_Database = &sDescribeDatabaseResponse_Database
+
+var DescribeEndpointsRequest = &sDescribeEndpointsRequest
+
+var DescribeEndpointsResponse = &sDescribeEndpointsResponse
+var DescribeEndpointsResponse_Endpoints = &sDescribeEndpointsResponse_Endpoints
+
+var DescribeTableRequest = &sDescribeTableRequest
+var DescribeTableRequest_DatabaseName = &sDescribeTableRequest_DatabaseName
+var DescribeTableRequest_TableName = &sDescribeTableRequest_TableName
+
+var DescribeTableResponse = &sDescribeTableResponse
+var DescribeTableResponse_Table = &sDescribeTableResponse_Table
+
+var ListBatchLoadTasksRequest = &sListBatchLoadTasksRequest
+var ListBatchLoadTasksRequest_NextToken = &sListBatchLoadTasksRequest_NextToken
+var ListBatchLoadTasksRequest_MaxResults = &sListBatchLoadTasksRequest_MaxResults
+var ListBatchLoadTasksRequest_TaskStatus = &sListBatchLoadTasksRequest_TaskStatus
+
+var ListBatchLoadTasksResponse = &sListBatchLoadTasksResponse
+var ListBatchLoadTasksResponse_NextToken = &sListBatchLoadTasksResponse_NextToken
+var ListBatchLoadTasksResponse_BatchLoadTasks = &sListBatchLoadTasksResponse_BatchLoadTasks
+
+var ListDatabasesRequest = &sListDatabasesRequest
+var ListDatabasesRequest_NextToken = &sListDatabasesRequest_NextToken
+var ListDatabasesRequest_MaxResults = &sListDatabasesRequest_MaxResults
+
+var ListDatabasesResponse = &sListDatabasesResponse
+var ListDatabasesResponse_Databases = &sListDatabasesResponse_Databases
+var ListDatabasesResponse_NextToken = &sListDatabasesResponse_NextToken
+
+var ListTablesRequest = &sListTablesRequest
+var ListTablesRequest_DatabaseName = &sListTablesRequest_DatabaseName
+var ListTablesRequest_NextToken = &sListTablesRequest_NextToken
+var ListTablesRequest_MaxResults = &sListTablesRequest_MaxResults
+
+var ListTablesResponse = &sListTablesResponse
+var ListTablesResponse_Tables = &sListTablesResponse_Tables
+var ListTablesResponse_NextToken = &sListTablesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ResumeBatchLoadTaskRequest = &sResumeBatchLoadTaskRequest
+var ResumeBatchLoadTaskRequest_TaskId = &sResumeBatchLoadTaskRequest_TaskId
+
+var ResumeBatchLoadTaskResponse = &sResumeBatchLoadTaskResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDatabaseRequest = &sUpdateDatabaseRequest
+var UpdateDatabaseRequest_DatabaseName = &sUpdateDatabaseRequest_DatabaseName
+var UpdateDatabaseRequest_KmsKeyId = &sUpdateDatabaseRequest_KmsKeyId
+
+var UpdateDatabaseResponse = &sUpdateDatabaseResponse
+var UpdateDatabaseResponse_Database = &sUpdateDatabaseResponse_Database
+
+var UpdateTableRequest = &sUpdateTableRequest
+var UpdateTableRequest_DatabaseName = &sUpdateTableRequest_DatabaseName
+var UpdateTableRequest_TableName = &sUpdateTableRequest_TableName
+var UpdateTableRequest_RetentionProperties = &sUpdateTableRequest_RetentionProperties
+var UpdateTableRequest_MagneticStoreWriteProperties = &sUpdateTableRequest_MagneticStoreWriteProperties
+var UpdateTableRequest_Schema = &sUpdateTableRequest_Schema
+
+var UpdateTableResponse = &sUpdateTableResponse
+var UpdateTableResponse_Table = &sUpdateTableResponse_Table
+
+var WriteRecordsRequest = &sWriteRecordsRequest
+var WriteRecordsRequest_DatabaseName = &sWriteRecordsRequest_DatabaseName
+var WriteRecordsRequest_TableName = &sWriteRecordsRequest_TableName
+var WriteRecordsRequest_CommonAttributes = &sWriteRecordsRequest_CommonAttributes
+var WriteRecordsRequest_Records = &sWriteRecordsRequest_Records
+
+var WriteRecordsResponse = &sWriteRecordsResponse
+var WriteRecordsResponse_RecordsIngested = &sWriteRecordsResponse_RecordsIngested
+
+var Timestream_20181101 = &smithy.ServiceSchema{Schema: &s_Timestream_20181101, Version: "2018-11-01"}

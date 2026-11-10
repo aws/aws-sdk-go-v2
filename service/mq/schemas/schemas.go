@@ -4,2257 +4,2265 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateBroker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateBroker",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateBroker                                                smithy.SchemaExtensions
+	eCreateConfiguration                                         smithy.SchemaExtensions
+	eCreateTags                                                  smithy.SchemaExtensions
+	eCreateUser                                                  smithy.SchemaExtensions
+	eDeleteBroker                                                smithy.SchemaExtensions
+	eDeleteConfiguration                                         smithy.SchemaExtensions
+	eDeleteTags                                                  smithy.SchemaExtensions
+	eDeleteUser                                                  smithy.SchemaExtensions
+	eDescribeBroker                                              smithy.SchemaExtensions
+	eDescribeBrokerEngineTypes                                   smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptions                               smithy.SchemaExtensions
+	eDescribeConfiguration                                       smithy.SchemaExtensions
+	eDescribeConfigurationRevision                               smithy.SchemaExtensions
+	eDescribeSharedResources                                     smithy.SchemaExtensions
+	eDescribeUser                                                smithy.SchemaExtensions
+	eListBrokers                                                 smithy.SchemaExtensions
+	eListConfigurationRevisions                                  smithy.SchemaExtensions
+	eListConfigurations                                          smithy.SchemaExtensions
+	eListTags                                                    smithy.SchemaExtensions
+	eListUsers                                                   smithy.SchemaExtensions
+	ePromote                                                     smithy.SchemaExtensions
+	eRebootBroker                                                smithy.SchemaExtensions
+	eUpdateBroker                                                smithy.SchemaExtensions
+	eUpdateConfiguration                                         smithy.SchemaExtensions
+	eUpdateUser                                                  smithy.SchemaExtensions
+	e_mq                                                         smithy.SchemaExtensions
+	e___boolean                                                  smithy.SchemaExtensions
+	e___integer                                                  smithy.SchemaExtensions
+	e___integerMin5Max100                                        smithy.SchemaExtensions
+	e___listOf__string                                           smithy.SchemaExtensions
+	e___listOf__string_member                                    smithy.SchemaExtensions
+	e___listOfActionRequired                                     smithy.SchemaExtensions
+	e___listOfActionRequired_member                              smithy.SchemaExtensions
+	e___listOfAvailabilityZone                                   smithy.SchemaExtensions
+	e___listOfAvailabilityZone_member                            smithy.SchemaExtensions
+	e___listOfBrokerEngineType                                   smithy.SchemaExtensions
+	e___listOfBrokerEngineType_member                            smithy.SchemaExtensions
+	e___listOfBrokerInstance                                     smithy.SchemaExtensions
+	e___listOfBrokerInstance_member                              smithy.SchemaExtensions
+	e___listOfBrokerInstanceOption                               smithy.SchemaExtensions
+	e___listOfBrokerInstanceOption_member                        smithy.SchemaExtensions
+	e___listOfBrokerSummary                                      smithy.SchemaExtensions
+	e___listOfBrokerSummary_member                               smithy.SchemaExtensions
+	e___listOfConfiguration                                      smithy.SchemaExtensions
+	e___listOfConfiguration_member                               smithy.SchemaExtensions
+	e___listOfConfigurationId                                    smithy.SchemaExtensions
+	e___listOfConfigurationId_member                             smithy.SchemaExtensions
+	e___listOfConfigurationRevision                              smithy.SchemaExtensions
+	e___listOfConfigurationRevision_member                       smithy.SchemaExtensions
+	e___listOfDeploymentMode                                     smithy.SchemaExtensions
+	e___listOfDeploymentMode_member                              smithy.SchemaExtensions
+	e___listOfEngineVersion                                      smithy.SchemaExtensions
+	e___listOfEngineVersion_member                               smithy.SchemaExtensions
+	e___listOfResourceShareError                                 smithy.SchemaExtensions
+	e___listOfResourceShareError_member                          smithy.SchemaExtensions
+	e___listOfSanitizationWarning                                smithy.SchemaExtensions
+	e___listOfSanitizationWarning_member                         smithy.SchemaExtensions
+	e___listOfSharedResource                                     smithy.SchemaExtensions
+	e___listOfSharedResource_member                              smithy.SchemaExtensions
+	e___listOfUser                                               smithy.SchemaExtensions
+	e___listOfUser_member                                        smithy.SchemaExtensions
+	e___listOfUserSummary                                        smithy.SchemaExtensions
+	e___listOfUserSummary_member                                 smithy.SchemaExtensions
+	e___mapOf__string                                            smithy.SchemaExtensions
+	e___mapOf__string_key                                        smithy.SchemaExtensions
+	e___mapOf__string_value                                      smithy.SchemaExtensions
+	e___string                                                   smithy.SchemaExtensions
+	e___timestampIso8601                                         smithy.SchemaExtensions
+	eActionRequired                                              smithy.SchemaExtensions
+	eActionRequired_ActionRequiredCode                           smithy.SchemaExtensions
+	eActionRequired_ActionRequiredInfo                           smithy.SchemaExtensions
+	eAuthenticationStrategy                                      smithy.SchemaExtensions
+	eAuthenticationStrategy_SIMPLE                               smithy.SchemaExtensions
+	eAuthenticationStrategy_LDAP                                 smithy.SchemaExtensions
+	eAuthenticationStrategy_CONFIG_MANAGED                       smithy.SchemaExtensions
+	eAvailabilityZone                                            smithy.SchemaExtensions
+	eAvailabilityZone_Name                                       smithy.SchemaExtensions
+	eBadRequestException                                         smithy.SchemaExtensions
+	eBadRequestException_ErrorAttribute                          smithy.SchemaExtensions
+	eBadRequestException_Message                                 smithy.SchemaExtensions
+	eBadRequestException_ResourceShareErrors                     smithy.SchemaExtensions
+	eBrokerEngineType                                            smithy.SchemaExtensions
+	eBrokerEngineType_EngineType                                 smithy.SchemaExtensions
+	eBrokerEngineType_EngineVersions                             smithy.SchemaExtensions
+	eBrokerInstance                                              smithy.SchemaExtensions
+	eBrokerInstance_ConsoleURL                                   smithy.SchemaExtensions
+	eBrokerInstance_Endpoints                                    smithy.SchemaExtensions
+	eBrokerInstance_IpAddress                                    smithy.SchemaExtensions
+	eBrokerInstanceOption                                        smithy.SchemaExtensions
+	eBrokerInstanceOption_AvailabilityZones                      smithy.SchemaExtensions
+	eBrokerInstanceOption_EngineType                             smithy.SchemaExtensions
+	eBrokerInstanceOption_HostInstanceType                       smithy.SchemaExtensions
+	eBrokerInstanceOption_StorageType                            smithy.SchemaExtensions
+	eBrokerInstanceOption_SupportedDeploymentModes               smithy.SchemaExtensions
+	eBrokerInstanceOption_SupportedEngineVersions                smithy.SchemaExtensions
+	eBrokerState                                                 smithy.SchemaExtensions
+	eBrokerState_CREATION_IN_PROGRESS                            smithy.SchemaExtensions
+	eBrokerState_CREATION_FAILED                                 smithy.SchemaExtensions
+	eBrokerState_DELETION_IN_PROGRESS                            smithy.SchemaExtensions
+	eBrokerState_RUNNING                                         smithy.SchemaExtensions
+	eBrokerState_REBOOT_IN_PROGRESS                              smithy.SchemaExtensions
+	eBrokerState_CRITICAL_ACTION_REQUIRED                        smithy.SchemaExtensions
+	eBrokerState_REPLICA                                         smithy.SchemaExtensions
+	eBrokerStorageType                                           smithy.SchemaExtensions
+	eBrokerStorageType_EBS                                       smithy.SchemaExtensions
+	eBrokerStorageType_EFS                                       smithy.SchemaExtensions
+	eBrokerSummary                                               smithy.SchemaExtensions
+	eBrokerSummary_BrokerArn                                     smithy.SchemaExtensions
+	eBrokerSummary_BrokerId                                      smithy.SchemaExtensions
+	eBrokerSummary_BrokerName                                    smithy.SchemaExtensions
+	eBrokerSummary_BrokerState                                   smithy.SchemaExtensions
+	eBrokerSummary_Created                                       smithy.SchemaExtensions
+	eBrokerSummary_DeploymentMode                                smithy.SchemaExtensions
+	eBrokerSummary_EngineType                                    smithy.SchemaExtensions
+	eBrokerSummary_HostInstanceType                              smithy.SchemaExtensions
+	eChangeType                                                  smithy.SchemaExtensions
+	eChangeType_CREATE                                           smithy.SchemaExtensions
+	eChangeType_UPDATE                                           smithy.SchemaExtensions
+	eChangeType_DELETE                                           smithy.SchemaExtensions
+	eConfiguration                                               smithy.SchemaExtensions
+	eConfiguration_Arn                                           smithy.SchemaExtensions
+	eConfiguration_AuthenticationStrategy                        smithy.SchemaExtensions
+	eConfiguration_Created                                       smithy.SchemaExtensions
+	eConfiguration_Description                                   smithy.SchemaExtensions
+	eConfiguration_EngineType                                    smithy.SchemaExtensions
+	eConfiguration_EngineVersion                                 smithy.SchemaExtensions
+	eConfiguration_Id                                            smithy.SchemaExtensions
+	eConfiguration_LatestRevision                                smithy.SchemaExtensions
+	eConfiguration_Name                                          smithy.SchemaExtensions
+	eConfiguration_Tags                                          smithy.SchemaExtensions
+	eConfigurationId                                             smithy.SchemaExtensions
+	eConfigurationId_Id                                          smithy.SchemaExtensions
+	eConfigurationId_Revision                                    smithy.SchemaExtensions
+	eConfigurationRevision                                       smithy.SchemaExtensions
+	eConfigurationRevision_Created                               smithy.SchemaExtensions
+	eConfigurationRevision_Description                           smithy.SchemaExtensions
+	eConfigurationRevision_Revision                              smithy.SchemaExtensions
+	eConfigurations                                              smithy.SchemaExtensions
+	eConfigurations_Current                                      smithy.SchemaExtensions
+	eConfigurations_History                                      smithy.SchemaExtensions
+	eConfigurations_Pending                                      smithy.SchemaExtensions
+	eConflictException                                           smithy.SchemaExtensions
+	eConflictException_ErrorAttribute                            smithy.SchemaExtensions
+	eConflictException_Message                                   smithy.SchemaExtensions
+	eConflictException_ResourceShareErrors                       smithy.SchemaExtensions
+	eDataReplicationCounterpart                                  smithy.SchemaExtensions
+	eDataReplicationCounterpart_BrokerId                         smithy.SchemaExtensions
+	eDataReplicationCounterpart_Region                           smithy.SchemaExtensions
+	eDataReplicationMetadataOutput                               smithy.SchemaExtensions
+	eDataReplicationMetadataOutput_DataReplicationCounterpart    smithy.SchemaExtensions
+	eDataReplicationMetadataOutput_DataReplicationRole           smithy.SchemaExtensions
+	eDataReplicationMode                                         smithy.SchemaExtensions
+	eDataReplicationMode_NONE                                    smithy.SchemaExtensions
+	eDataReplicationMode_CRDR                                    smithy.SchemaExtensions
+	eDayOfWeek                                                   smithy.SchemaExtensions
+	eDayOfWeek_MONDAY                                            smithy.SchemaExtensions
+	eDayOfWeek_TUESDAY                                           smithy.SchemaExtensions
+	eDayOfWeek_WEDNESDAY                                         smithy.SchemaExtensions
+	eDayOfWeek_THURSDAY                                          smithy.SchemaExtensions
+	eDayOfWeek_FRIDAY                                            smithy.SchemaExtensions
+	eDayOfWeek_SATURDAY                                          smithy.SchemaExtensions
+	eDayOfWeek_SUNDAY                                            smithy.SchemaExtensions
+	eDeploymentMode                                              smithy.SchemaExtensions
+	eDeploymentMode_SINGLE_INSTANCE                              smithy.SchemaExtensions
+	eDeploymentMode_ACTIVE_STANDBY_MULTI_AZ                      smithy.SchemaExtensions
+	eDeploymentMode_CLUSTER_MULTI_AZ                             smithy.SchemaExtensions
+	eEncryptionOptions                                           smithy.SchemaExtensions
+	eEncryptionOptions_KmsKeyId                                  smithy.SchemaExtensions
+	eEncryptionOptions_UseAwsOwnedKey                            smithy.SchemaExtensions
+	eEngineType                                                  smithy.SchemaExtensions
+	eEngineType_ACTIVEMQ                                         smithy.SchemaExtensions
+	eEngineType_RABBITMQ                                         smithy.SchemaExtensions
+	eEngineVersion                                               smithy.SchemaExtensions
+	eEngineVersion_Name                                          smithy.SchemaExtensions
+	eForbiddenException                                          smithy.SchemaExtensions
+	eForbiddenException_ErrorAttribute                           smithy.SchemaExtensions
+	eForbiddenException_Message                                  smithy.SchemaExtensions
+	eForbiddenException_ResourceShareErrors                      smithy.SchemaExtensions
+	eInternalServerErrorException                                smithy.SchemaExtensions
+	eInternalServerErrorException_ErrorAttribute                 smithy.SchemaExtensions
+	eInternalServerErrorException_Message                        smithy.SchemaExtensions
+	eInternalServerErrorException_ResourceShareErrors            smithy.SchemaExtensions
+	eLdapServerMetadataInput                                     smithy.SchemaExtensions
+	eLdapServerMetadataInput_Hosts                               smithy.SchemaExtensions
+	eLdapServerMetadataInput_RoleBase                            smithy.SchemaExtensions
+	eLdapServerMetadataInput_RoleName                            smithy.SchemaExtensions
+	eLdapServerMetadataInput_RoleSearchMatching                  smithy.SchemaExtensions
+	eLdapServerMetadataInput_RoleSearchSubtree                   smithy.SchemaExtensions
+	eLdapServerMetadataInput_ServiceAccountPassword              smithy.SchemaExtensions
+	eLdapServerMetadataInput_ServiceAccountUsername              smithy.SchemaExtensions
+	eLdapServerMetadataInput_UserBase                            smithy.SchemaExtensions
+	eLdapServerMetadataInput_UserRoleName                        smithy.SchemaExtensions
+	eLdapServerMetadataInput_UserSearchMatching                  smithy.SchemaExtensions
+	eLdapServerMetadataInput_UserSearchSubtree                   smithy.SchemaExtensions
+	eLdapServerMetadataOutput                                    smithy.SchemaExtensions
+	eLdapServerMetadataOutput_Hosts                              smithy.SchemaExtensions
+	eLdapServerMetadataOutput_RoleBase                           smithy.SchemaExtensions
+	eLdapServerMetadataOutput_RoleName                           smithy.SchemaExtensions
+	eLdapServerMetadataOutput_RoleSearchMatching                 smithy.SchemaExtensions
+	eLdapServerMetadataOutput_RoleSearchSubtree                  smithy.SchemaExtensions
+	eLdapServerMetadataOutput_ServiceAccountUsername             smithy.SchemaExtensions
+	eLdapServerMetadataOutput_UserBase                           smithy.SchemaExtensions
+	eLdapServerMetadataOutput_UserRoleName                       smithy.SchemaExtensions
+	eLdapServerMetadataOutput_UserSearchMatching                 smithy.SchemaExtensions
+	eLdapServerMetadataOutput_UserSearchSubtree                  smithy.SchemaExtensions
+	eLogs                                                        smithy.SchemaExtensions
+	eLogs_Audit                                                  smithy.SchemaExtensions
+	eLogs_General                                                smithy.SchemaExtensions
+	eLogsSummary                                                 smithy.SchemaExtensions
+	eLogsSummary_Audit                                           smithy.SchemaExtensions
+	eLogsSummary_AuditLogGroup                                   smithy.SchemaExtensions
+	eLogsSummary_General                                         smithy.SchemaExtensions
+	eLogsSummary_GeneralLogGroup                                 smithy.SchemaExtensions
+	eLogsSummary_Pending                                         smithy.SchemaExtensions
+	e_MaxResults                                                 smithy.SchemaExtensions
+	eNotFoundException                                           smithy.SchemaExtensions
+	eNotFoundException_ErrorAttribute                            smithy.SchemaExtensions
+	eNotFoundException_Message                                   smithy.SchemaExtensions
+	eNotFoundException_ResourceShareErrors                       smithy.SchemaExtensions
+	ePendingLogs                                                 smithy.SchemaExtensions
+	ePendingLogs_Audit                                           smithy.SchemaExtensions
+	ePendingLogs_General                                         smithy.SchemaExtensions
+	ePromoteMode                                                 smithy.SchemaExtensions
+	ePromoteMode_SWITCHOVER                                      smithy.SchemaExtensions
+	ePromoteMode_FAILOVER                                        smithy.SchemaExtensions
+	eResourceShareError                                          smithy.SchemaExtensions
+	eResourceShareError_ErrorCode                                smithy.SchemaExtensions
+	eResourceShareError_ResourceShareArn                         smithy.SchemaExtensions
+	eResourceShareError_Status                                   smithy.SchemaExtensions
+	eSanitizationWarning                                         smithy.SchemaExtensions
+	eSanitizationWarning_AttributeName                           smithy.SchemaExtensions
+	eSanitizationWarning_ElementName                             smithy.SchemaExtensions
+	eSanitizationWarning_Reason                                  smithy.SchemaExtensions
+	eSanitizationWarningReason                                   smithy.SchemaExtensions
+	eSanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED        smithy.SchemaExtensions
+	eSanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED      smithy.SchemaExtensions
+	eSanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED   smithy.SchemaExtensions
+	eSharedResource                                              smithy.SchemaExtensions
+	eSharedResource_DnsNames                                     smithy.SchemaExtensions
+	eSharedResource_Error                                        smithy.SchemaExtensions
+	eSharedResource_ResourceArn                                  smithy.SchemaExtensions
+	eSharedResource_ResourceShareArns                            smithy.SchemaExtensions
+	eSharedResource_Status                                       smithy.SchemaExtensions
+	eSharedResource_Type                                         smithy.SchemaExtensions
+	eSharedResourceError                                         smithy.SchemaExtensions
+	eSharedResourceError_Code                                    smithy.SchemaExtensions
+	eSharedResourceError_Message                                 smithy.SchemaExtensions
+	eSharedResourceErrorCode                                     smithy.SchemaExtensions
+	eSharedResourceErrorCode_QUOTA_EXCEEDED                      smithy.SchemaExtensions
+	eSharedResourceErrorCode_SHARE_NOT_FOUND                     smithy.SchemaExtensions
+	eSharedResourceErrorCode_INVITE_FAILED                       smithy.SchemaExtensions
+	eSharedResourceErrorCode_SETUP_INCOMPLETE                    smithy.SchemaExtensions
+	eSharedResourceErrorCode_INTERNAL_ERROR                      smithy.SchemaExtensions
+	eSharedResourceErrorCode_AZ_MISMATCH                         smithy.SchemaExtensions
+	eSharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND    smithy.SchemaExtensions
+	eSharedResourceStatus                                        smithy.SchemaExtensions
+	eSharedResourceStatus_AVAILABLE                              smithy.SchemaExtensions
+	eSharedResourceStatus_SETUP_IN_PROGRESS                      smithy.SchemaExtensions
+	eSharedResourceStatus_DELETION_IN_PROGRESS                   smithy.SchemaExtensions
+	eSharedResourceStatus_PENDING_CREATE                         smithy.SchemaExtensions
+	eSharedResourceStatus_PENDING_DELETE                         smithy.SchemaExtensions
+	eSharedResourceStatus_ERROR                                  smithy.SchemaExtensions
+	eSharedResourceType                                          smithy.SchemaExtensions
+	eSharedResourceType_RESOURCE_SHARE                           smithy.SchemaExtensions
+	eSharedResourceType_RESOURCE                                 smithy.SchemaExtensions
+	eUnauthorizedException                                       smithy.SchemaExtensions
+	eUnauthorizedException_ErrorAttribute                        smithy.SchemaExtensions
+	eUnauthorizedException_Message                               smithy.SchemaExtensions
+	eUnauthorizedException_ResourceShareErrors                   smithy.SchemaExtensions
+	eUser                                                        smithy.SchemaExtensions
+	eUser_ConsoleAccess                                          smithy.SchemaExtensions
+	eUser_Groups                                                 smithy.SchemaExtensions
+	eUser_Password                                               smithy.SchemaExtensions
+	eUser_Username                                               smithy.SchemaExtensions
+	eUser_ReplicationUser                                        smithy.SchemaExtensions
+	eUserPendingChanges                                          smithy.SchemaExtensions
+	eUserPendingChanges_ConsoleAccess                            smithy.SchemaExtensions
+	eUserPendingChanges_Groups                                   smithy.SchemaExtensions
+	eUserPendingChanges_PendingChange                            smithy.SchemaExtensions
+	eUserSummary                                                 smithy.SchemaExtensions
+	eUserSummary_PendingChange                                   smithy.SchemaExtensions
+	eUserSummary_Username                                        smithy.SchemaExtensions
+	eWeeklyStartTime                                             smithy.SchemaExtensions
+	eWeeklyStartTime_DayOfWeek                                   smithy.SchemaExtensions
+	eWeeklyStartTime_TimeOfDay                                   smithy.SchemaExtensions
+	eWeeklyStartTime_TimeZone                                    smithy.SchemaExtensions
+	eCreateBrokerRequest                                         smithy.SchemaExtensions
+	eCreateBrokerRequest_AuthenticationStrategy                  smithy.SchemaExtensions
+	eCreateBrokerRequest_AutoMinorVersionUpgrade                 smithy.SchemaExtensions
+	eCreateBrokerRequest_BrokerName                              smithy.SchemaExtensions
+	eCreateBrokerRequest_Configuration                           smithy.SchemaExtensions
+	eCreateBrokerRequest_CreatorRequestId                        smithy.SchemaExtensions
+	eCreateBrokerRequest_DeploymentMode                          smithy.SchemaExtensions
+	eCreateBrokerRequest_EncryptionOptions                       smithy.SchemaExtensions
+	eCreateBrokerRequest_EngineType                              smithy.SchemaExtensions
+	eCreateBrokerRequest_EngineVersion                           smithy.SchemaExtensions
+	eCreateBrokerRequest_HostInstanceType                        smithy.SchemaExtensions
+	eCreateBrokerRequest_LdapServerMetadata                      smithy.SchemaExtensions
+	eCreateBrokerRequest_Logs                                    smithy.SchemaExtensions
+	eCreateBrokerRequest_MaintenanceWindowStartTime              smithy.SchemaExtensions
+	eCreateBrokerRequest_PubliclyAccessible                      smithy.SchemaExtensions
+	eCreateBrokerRequest_SecurityGroups                          smithy.SchemaExtensions
+	eCreateBrokerRequest_StorageSize                             smithy.SchemaExtensions
+	eCreateBrokerRequest_StorageType                             smithy.SchemaExtensions
+	eCreateBrokerRequest_SubnetIds                               smithy.SchemaExtensions
+	eCreateBrokerRequest_Tags                                    smithy.SchemaExtensions
+	eCreateBrokerRequest_Users                                   smithy.SchemaExtensions
+	eCreateBrokerRequest_DataReplicationMode                     smithy.SchemaExtensions
+	eCreateBrokerRequest_DataReplicationPrimaryBrokerArn         smithy.SchemaExtensions
+	eCreateBrokerResponse                                        smithy.SchemaExtensions
+	eCreateBrokerResponse_BrokerArn                              smithy.SchemaExtensions
+	eCreateBrokerResponse_BrokerId                               smithy.SchemaExtensions
+	eCreateConfigurationRequest                                  smithy.SchemaExtensions
+	eCreateConfigurationRequest_AuthenticationStrategy           smithy.SchemaExtensions
+	eCreateConfigurationRequest_EngineType                       smithy.SchemaExtensions
+	eCreateConfigurationRequest_EngineVersion                    smithy.SchemaExtensions
+	eCreateConfigurationRequest_Name                             smithy.SchemaExtensions
+	eCreateConfigurationRequest_Tags                             smithy.SchemaExtensions
+	eCreateConfigurationResponse                                 smithy.SchemaExtensions
+	eCreateConfigurationResponse_Arn                             smithy.SchemaExtensions
+	eCreateConfigurationResponse_AuthenticationStrategy          smithy.SchemaExtensions
+	eCreateConfigurationResponse_Created                         smithy.SchemaExtensions
+	eCreateConfigurationResponse_Id                              smithy.SchemaExtensions
+	eCreateConfigurationResponse_LatestRevision                  smithy.SchemaExtensions
+	eCreateConfigurationResponse_Name                            smithy.SchemaExtensions
+	eCreateTagsRequest                                           smithy.SchemaExtensions
+	eCreateTagsRequest_ResourceArn                               smithy.SchemaExtensions
+	eCreateTagsRequest_Tags                                      smithy.SchemaExtensions
+	eCreateUserRequest                                           smithy.SchemaExtensions
+	eCreateUserRequest_BrokerId                                  smithy.SchemaExtensions
+	eCreateUserRequest_ConsoleAccess                             smithy.SchemaExtensions
+	eCreateUserRequest_Groups                                    smithy.SchemaExtensions
+	eCreateUserRequest_Password                                  smithy.SchemaExtensions
+	eCreateUserRequest_Username                                  smithy.SchemaExtensions
+	eCreateUserRequest_ReplicationUser                           smithy.SchemaExtensions
+	eCreateUserResponse                                          smithy.SchemaExtensions
+	eDeleteBrokerRequest                                         smithy.SchemaExtensions
+	eDeleteBrokerRequest_BrokerId                                smithy.SchemaExtensions
+	eDeleteBrokerResponse                                        smithy.SchemaExtensions
+	eDeleteBrokerResponse_BrokerId                               smithy.SchemaExtensions
+	eDeleteConfigurationRequest                                  smithy.SchemaExtensions
+	eDeleteConfigurationRequest_ConfigurationId                  smithy.SchemaExtensions
+	eDeleteConfigurationResponse                                 smithy.SchemaExtensions
+	eDeleteConfigurationResponse_ConfigurationId                 smithy.SchemaExtensions
+	eDeleteTagsRequest                                           smithy.SchemaExtensions
+	eDeleteTagsRequest_ResourceArn                               smithy.SchemaExtensions
+	eDeleteTagsRequest_TagKeys                                   smithy.SchemaExtensions
+	eDeleteUserRequest                                           smithy.SchemaExtensions
+	eDeleteUserRequest_BrokerId                                  smithy.SchemaExtensions
+	eDeleteUserRequest_Username                                  smithy.SchemaExtensions
+	eDeleteUserResponse                                          smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesRequest                            smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesRequest_EngineType                 smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesRequest_MaxResults                 smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesRequest_NextToken                  smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesResponse                           smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesResponse_BrokerEngineTypes         smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesResponse_MaxResults                smithy.SchemaExtensions
+	eDescribeBrokerEngineTypesResponse_NextToken                 smithy.SchemaExtensions
+	eDescribeBrokerRequest                                       smithy.SchemaExtensions
+	eDescribeBrokerRequest_BrokerId                              smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsRequest                        smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsRequest_EngineType             smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsRequest_HostInstanceType       smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsRequest_MaxResults             smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsRequest_NextToken              smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsRequest_StorageType            smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsResponse                       smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsResponse_MaxResults            smithy.SchemaExtensions
+	eDescribeBrokerInstanceOptionsResponse_NextToken             smithy.SchemaExtensions
+	eDescribeBrokerResponse                                      smithy.SchemaExtensions
+	eDescribeBrokerResponse_ActionsRequired                      smithy.SchemaExtensions
+	eDescribeBrokerResponse_AuthenticationStrategy               smithy.SchemaExtensions
+	eDescribeBrokerResponse_AutoMinorVersionUpgrade              smithy.SchemaExtensions
+	eDescribeBrokerResponse_BrokerArn                            smithy.SchemaExtensions
+	eDescribeBrokerResponse_BrokerId                             smithy.SchemaExtensions
+	eDescribeBrokerResponse_BrokerInstances                      smithy.SchemaExtensions
+	eDescribeBrokerResponse_BrokerName                           smithy.SchemaExtensions
+	eDescribeBrokerResponse_BrokerState                          smithy.SchemaExtensions
+	eDescribeBrokerResponse_Configurations                       smithy.SchemaExtensions
+	eDescribeBrokerResponse_Created                              smithy.SchemaExtensions
+	eDescribeBrokerResponse_DeploymentMode                       smithy.SchemaExtensions
+	eDescribeBrokerResponse_EncryptionOptions                    smithy.SchemaExtensions
+	eDescribeBrokerResponse_EngineType                           smithy.SchemaExtensions
+	eDescribeBrokerResponse_EngineVersion                        smithy.SchemaExtensions
+	eDescribeBrokerResponse_HostInstanceType                     smithy.SchemaExtensions
+	eDescribeBrokerResponse_LdapServerMetadata                   smithy.SchemaExtensions
+	eDescribeBrokerResponse_Logs                                 smithy.SchemaExtensions
+	eDescribeBrokerResponse_MaintenanceWindowStartTime           smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingAuthenticationStrategy        smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingEngineVersion                 smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingHostInstanceType              smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingLdapServerMetadata            smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingSecurityGroups                smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingStorageSize                   smithy.SchemaExtensions
+	eDescribeBrokerResponse_PubliclyAccessible                   smithy.SchemaExtensions
+	eDescribeBrokerResponse_SecurityGroups                       smithy.SchemaExtensions
+	eDescribeBrokerResponse_StorageSize                          smithy.SchemaExtensions
+	eDescribeBrokerResponse_StorageType                          smithy.SchemaExtensions
+	eDescribeBrokerResponse_SubnetIds                            smithy.SchemaExtensions
+	eDescribeBrokerResponse_Tags                                 smithy.SchemaExtensions
+	eDescribeBrokerResponse_Users                                smithy.SchemaExtensions
+	eDescribeBrokerResponse_DataReplicationMetadata              smithy.SchemaExtensions
+	eDescribeBrokerResponse_DataReplicationMode                  smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingDataReplicationMetadata       smithy.SchemaExtensions
+	eDescribeBrokerResponse_PendingDataReplicationMode           smithy.SchemaExtensions
+	eDescribeConfigurationRequest                                smithy.SchemaExtensions
+	eDescribeConfigurationRequest_ConfigurationId                smithy.SchemaExtensions
+	eDescribeConfigurationResponse                               smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Arn                           smithy.SchemaExtensions
+	eDescribeConfigurationResponse_AuthenticationStrategy        smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Created                       smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Description                   smithy.SchemaExtensions
+	eDescribeConfigurationResponse_EngineType                    smithy.SchemaExtensions
+	eDescribeConfigurationResponse_EngineVersion                 smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Id                            smithy.SchemaExtensions
+	eDescribeConfigurationResponse_LatestRevision                smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Name                          smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Tags                          smithy.SchemaExtensions
+	eDescribeConfigurationRevisionRequest                        smithy.SchemaExtensions
+	eDescribeConfigurationRevisionRequest_ConfigurationId        smithy.SchemaExtensions
+	eDescribeConfigurationRevisionRequest_ConfigurationRevision  smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse                       smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_ConfigurationId       smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_Created               smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_Data                  smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_Description           smithy.SchemaExtensions
+	eDescribeSharedResourcesRequest                              smithy.SchemaExtensions
+	eDescribeSharedResourcesRequest_BrokerId                     smithy.SchemaExtensions
+	eDescribeSharedResourcesRequest_MaxResults                   smithy.SchemaExtensions
+	eDescribeSharedResourcesRequest_NextToken                    smithy.SchemaExtensions
+	eDescribeSharedResourcesResponse                             smithy.SchemaExtensions
+	eDescribeSharedResourcesResponse_NextToken                   smithy.SchemaExtensions
+	eDescribeSharedResourcesResponse_SharedResources             smithy.SchemaExtensions
+	eDescribeUserRequest                                         smithy.SchemaExtensions
+	eDescribeUserRequest_BrokerId                                smithy.SchemaExtensions
+	eDescribeUserRequest_Username                                smithy.SchemaExtensions
+	eDescribeUserResponse                                        smithy.SchemaExtensions
+	eDescribeUserResponse_BrokerId                               smithy.SchemaExtensions
+	eDescribeUserResponse_ConsoleAccess                          smithy.SchemaExtensions
+	eDescribeUserResponse_Groups                                 smithy.SchemaExtensions
+	eDescribeUserResponse_Pending                                smithy.SchemaExtensions
+	eDescribeUserResponse_Username                               smithy.SchemaExtensions
+	eDescribeUserResponse_ReplicationUser                        smithy.SchemaExtensions
+	eListBrokersRequest                                          smithy.SchemaExtensions
+	eListBrokersRequest_MaxResults                               smithy.SchemaExtensions
+	eListBrokersRequest_NextToken                                smithy.SchemaExtensions
+	eListBrokersResponse                                         smithy.SchemaExtensions
+	eListBrokersResponse_BrokerSummaries                         smithy.SchemaExtensions
+	eListBrokersResponse_NextToken                               smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest                           smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest_ConfigurationId           smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest_MaxResults                smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest_NextToken                 smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse                          smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse_ConfigurationId          smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse_MaxResults               smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse_NextToken                smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse_Revisions                smithy.SchemaExtensions
+	eListConfigurationsRequest                                   smithy.SchemaExtensions
+	eListConfigurationsRequest_MaxResults                        smithy.SchemaExtensions
+	eListConfigurationsRequest_NextToken                         smithy.SchemaExtensions
+	eListConfigurationsResponse                                  smithy.SchemaExtensions
+	eListConfigurationsResponse_Configurations                   smithy.SchemaExtensions
+	eListConfigurationsResponse_MaxResults                       smithy.SchemaExtensions
+	eListConfigurationsResponse_NextToken                        smithy.SchemaExtensions
+	eListTagsRequest                                             smithy.SchemaExtensions
+	eListTagsRequest_ResourceArn                                 smithy.SchemaExtensions
+	eListTagsResponse                                            smithy.SchemaExtensions
+	eListTagsResponse_Tags                                       smithy.SchemaExtensions
+	eListUsersRequest                                            smithy.SchemaExtensions
+	eListUsersRequest_BrokerId                                   smithy.SchemaExtensions
+	eListUsersRequest_MaxResults                                 smithy.SchemaExtensions
+	eListUsersRequest_NextToken                                  smithy.SchemaExtensions
+	eListUsersResponse                                           smithy.SchemaExtensions
+	eListUsersResponse_BrokerId                                  smithy.SchemaExtensions
+	eListUsersResponse_MaxResults                                smithy.SchemaExtensions
+	eListUsersResponse_NextToken                                 smithy.SchemaExtensions
+	eListUsersResponse_Users                                     smithy.SchemaExtensions
+	ePromoteRequest                                              smithy.SchemaExtensions
+	ePromoteRequest_BrokerId                                     smithy.SchemaExtensions
+	ePromoteRequest_Mode                                         smithy.SchemaExtensions
+	ePromoteResponse                                             smithy.SchemaExtensions
+	ePromoteResponse_BrokerId                                    smithy.SchemaExtensions
+	eRebootBrokerRequest                                         smithy.SchemaExtensions
+	eRebootBrokerRequest_BrokerId                                smithy.SchemaExtensions
+	eRebootBrokerResponse                                        smithy.SchemaExtensions
+	eUpdateBrokerRequest                                         smithy.SchemaExtensions
+	eUpdateBrokerRequest_AuthenticationStrategy                  smithy.SchemaExtensions
+	eUpdateBrokerRequest_AutoMinorVersionUpgrade                 smithy.SchemaExtensions
+	eUpdateBrokerRequest_BrokerId                                smithy.SchemaExtensions
+	eUpdateBrokerRequest_Configuration                           smithy.SchemaExtensions
+	eUpdateBrokerRequest_EngineVersion                           smithy.SchemaExtensions
+	eUpdateBrokerRequest_HostInstanceType                        smithy.SchemaExtensions
+	eUpdateBrokerRequest_LdapServerMetadata                      smithy.SchemaExtensions
+	eUpdateBrokerRequest_Logs                                    smithy.SchemaExtensions
+	eUpdateBrokerRequest_MaintenanceWindowStartTime              smithy.SchemaExtensions
+	eUpdateBrokerRequest_ResourceShareArns                       smithy.SchemaExtensions
+	eUpdateBrokerRequest_SecurityGroups                          smithy.SchemaExtensions
+	eUpdateBrokerRequest_StorageSize                             smithy.SchemaExtensions
+	eUpdateBrokerRequest_DataReplicationMode                     smithy.SchemaExtensions
+	eUpdateBrokerResponse                                        smithy.SchemaExtensions
+	eUpdateBrokerResponse_AuthenticationStrategy                 smithy.SchemaExtensions
+	eUpdateBrokerResponse_AutoMinorVersionUpgrade                smithy.SchemaExtensions
+	eUpdateBrokerResponse_BrokerId                               smithy.SchemaExtensions
+	eUpdateBrokerResponse_Configuration                          smithy.SchemaExtensions
+	eUpdateBrokerResponse_EngineVersion                          smithy.SchemaExtensions
+	eUpdateBrokerResponse_HostInstanceType                       smithy.SchemaExtensions
+	eUpdateBrokerResponse_LdapServerMetadata                     smithy.SchemaExtensions
+	eUpdateBrokerResponse_Logs                                   smithy.SchemaExtensions
+	eUpdateBrokerResponse_MaintenanceWindowStartTime             smithy.SchemaExtensions
+	eUpdateBrokerResponse_ResourceShareArns                      smithy.SchemaExtensions
+	eUpdateBrokerResponse_SecurityGroups                         smithy.SchemaExtensions
+	eUpdateBrokerResponse_DataReplicationMetadata                smithy.SchemaExtensions
+	eUpdateBrokerResponse_DataReplicationMode                    smithy.SchemaExtensions
+	eUpdateBrokerResponse_PendingDataReplicationMetadata         smithy.SchemaExtensions
+	eUpdateBrokerResponse_PendingDataReplicationMode             smithy.SchemaExtensions
+	eUpdateBrokerResponse_StorageSize                            smithy.SchemaExtensions
+	eUpdateConfigurationRequest                                  smithy.SchemaExtensions
+	eUpdateConfigurationRequest_ConfigurationId                  smithy.SchemaExtensions
+	eUpdateConfigurationRequest_Data                             smithy.SchemaExtensions
+	eUpdateConfigurationRequest_Description                      smithy.SchemaExtensions
+	eUpdateConfigurationResponse                                 smithy.SchemaExtensions
+	eUpdateConfigurationResponse_Arn                             smithy.SchemaExtensions
+	eUpdateConfigurationResponse_Created                         smithy.SchemaExtensions
+	eUpdateConfigurationResponse_Id                              smithy.SchemaExtensions
+	eUpdateConfigurationResponse_LatestRevision                  smithy.SchemaExtensions
+	eUpdateConfigurationResponse_Name                            smithy.SchemaExtensions
+	eUpdateConfigurationResponse_Warnings                        smithy.SchemaExtensions
+	eUpdateUserRequest                                           smithy.SchemaExtensions
+	eUpdateUserRequest_BrokerId                                  smithy.SchemaExtensions
+	eUpdateUserRequest_ConsoleAccess                             smithy.SchemaExtensions
+	eUpdateUserRequest_Groups                                    smithy.SchemaExtensions
+	eUpdateUserRequest_Password                                  smithy.SchemaExtensions
+	eUpdateUserRequest_Username                                  smithy.SchemaExtensions
+	eUpdateUserRequest_ReplicationUser                           smithy.SchemaExtensions
+	eUpdateUserResponse                                          smithy.SchemaExtensions
+)
+
+var (
+	iCreateBroker                          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateBroker"}
+	iCreateConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateConfiguration"}
+	iCreateTags                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateTags"}
+	iCreateUser                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateUser"}
+	iDeleteBroker                          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteBroker"}
+	iDeleteConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteConfiguration"}
+	iDeleteTags                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteTags"}
+	iDeleteUser                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteUser"}
+	iDescribeBroker                        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBroker"}
+	iDescribeBrokerEngineTypes             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerEngineTypes"}
+	iDescribeBrokerInstanceOptions         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerInstanceOptions"}
+	iDescribeConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeConfiguration"}
+	iDescribeConfigurationRevision         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeConfigurationRevision"}
+	iDescribeSharedResources               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeSharedResources"}
+	iDescribeUser                          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeUser"}
+	iListBrokers                           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListBrokers"}
+	iListConfigurationRevisions            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListConfigurationRevisions"}
+	iListConfigurations                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListConfigurations"}
+	iListTags                              = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListTags"}
+	iListUsers                             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListUsers"}
+	iPromote                               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "Promote"}
+	iRebootBroker                          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "RebootBroker"}
+	iUpdateBroker                          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateBroker"}
+	iUpdateConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateConfiguration"}
+	iUpdateUser                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateUser"}
+	i_mq                                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "mq"}
+	i___boolean                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__boolean"}
+	i___integer                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__integer"}
+	i___integerMin5Max100                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__integerMin5Max100"}
+	i___listOf__string                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOf__string"}
+	i___listOfActionRequired               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfActionRequired"}
+	i___listOfAvailabilityZone             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfAvailabilityZone"}
+	i___listOfBrokerEngineType             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfBrokerEngineType"}
+	i___listOfBrokerInstance               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfBrokerInstance"}
+	i___listOfBrokerInstanceOption         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfBrokerInstanceOption"}
+	i___listOfBrokerSummary                = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfBrokerSummary"}
+	i___listOfConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfConfiguration"}
+	i___listOfConfigurationId              = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfConfigurationId"}
+	i___listOfConfigurationRevision        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfConfigurationRevision"}
+	i___listOfDeploymentMode               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfDeploymentMode"}
+	i___listOfEngineVersion                = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfEngineVersion"}
+	i___listOfResourceShareError           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfResourceShareError"}
+	i___listOfSanitizationWarning          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfSanitizationWarning"}
+	i___listOfSharedResource               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfSharedResource"}
+	i___listOfUser                         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfUser"}
+	i___listOfUserSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__listOfUserSummary"}
+	i___mapOf__string                      = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__mapOf__string"}
+	i___string                             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__string"}
+	i___timestampIso8601                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "__timestampIso8601"}
+	iActionRequired                        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ActionRequired"}
+	iAuthenticationStrategy                = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "AuthenticationStrategy"}
+	iAvailabilityZone                      = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "AvailabilityZone"}
+	iBadRequestException                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "BadRequestException"}
+	iBrokerEngineType                      = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "BrokerEngineType"}
+	iBrokerInstance                        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "BrokerInstance"}
+	iBrokerInstanceOption                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "BrokerInstanceOption"}
+	iBrokerState                           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "BrokerState"}
+	iBrokerStorageType                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "BrokerStorageType"}
+	iBrokerSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "BrokerSummary"}
+	iChangeType                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ChangeType"}
+	iConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "Configuration"}
+	iConfigurationId                       = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ConfigurationId"}
+	iConfigurationRevision                 = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ConfigurationRevision"}
+	iConfigurations                        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "Configurations"}
+	iConflictException                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ConflictException"}
+	iDataReplicationCounterpart            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DataReplicationCounterpart"}
+	iDataReplicationMetadataOutput         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DataReplicationMetadataOutput"}
+	iDataReplicationMode                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DataReplicationMode"}
+	iDayOfWeek                             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DayOfWeek"}
+	iDeploymentMode                        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeploymentMode"}
+	iEncryptionOptions                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "EncryptionOptions"}
+	iEngineType                            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "EngineType"}
+	iEngineVersion                         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "EngineVersion"}
+	iForbiddenException                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ForbiddenException"}
+	iInternalServerErrorException          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "InternalServerErrorException"}
+	iLdapServerMetadataInput               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "LdapServerMetadataInput"}
+	iLdapServerMetadataOutput              = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "LdapServerMetadataOutput"}
+	iLogs                                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "Logs"}
+	iLogsSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "LogsSummary"}
+	i_MaxResults                           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "MaxResults"}
+	iNotFoundException                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "NotFoundException"}
+	iPendingLogs                           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "PendingLogs"}
+	iPromoteMode                           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "PromoteMode"}
+	iResourceShareError                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ResourceShareError"}
+	iSanitizationWarning                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "SanitizationWarning"}
+	iSanitizationWarningReason             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "SanitizationWarningReason"}
+	iSharedResource                        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "SharedResource"}
+	iSharedResourceError                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "SharedResourceError"}
+	iSharedResourceErrorCode               = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "SharedResourceErrorCode"}
+	iSharedResourceStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "SharedResourceStatus"}
+	iSharedResourceType                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "SharedResourceType"}
+	iUnauthorizedException                 = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UnauthorizedException"}
+	iUser                                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "User"}
+	iUserPendingChanges                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UserPendingChanges"}
+	iUserSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UserSummary"}
+	iWeeklyStartTime                       = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "WeeklyStartTime"}
+	iCreateBrokerRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateBrokerRequest"}
+	iCreateBrokerResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateBrokerResponse"}
+	iCreateConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateConfigurationRequest"}
+	iCreateConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateConfigurationResponse"}
+	iCreateTagsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateTagsRequest"}
+	iCreateUserRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateUserRequest"}
+	iCreateUserResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "CreateUserResponse"}
+	iDeleteBrokerRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteBrokerRequest"}
+	iDeleteBrokerResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteBrokerResponse"}
+	iDeleteConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteConfigurationRequest"}
+	iDeleteConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteConfigurationResponse"}
+	iDeleteTagsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteTagsRequest"}
+	iDeleteUserRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteUserRequest"}
+	iDeleteUserResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DeleteUserResponse"}
+	iDescribeBrokerEngineTypesRequest      = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerEngineTypesRequest"}
+	iDescribeBrokerEngineTypesResponse     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerEngineTypesResponse"}
+	iDescribeBrokerRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerRequest"}
+	iDescribeBrokerInstanceOptionsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerInstanceOptionsRequest"}
+	iDescribeBrokerInstanceOptionsResponse = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerInstanceOptionsResponse"}
+	iDescribeBrokerResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeBrokerResponse"}
+	iDescribeConfigurationRequest          = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeConfigurationRequest"}
+	iDescribeConfigurationResponse         = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeConfigurationResponse"}
+	iDescribeConfigurationRevisionRequest  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeConfigurationRevisionRequest"}
+	iDescribeConfigurationRevisionResponse = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeConfigurationRevisionResponse"}
+	iDescribeSharedResourcesRequest        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeSharedResourcesRequest"}
+	iDescribeSharedResourcesResponse       = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeSharedResourcesResponse"}
+	iDescribeUserRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeUserRequest"}
+	iDescribeUserResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "DescribeUserResponse"}
+	iListBrokersRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListBrokersRequest"}
+	iListBrokersResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListBrokersResponse"}
+	iListConfigurationRevisionsRequest     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListConfigurationRevisionsRequest"}
+	iListConfigurationRevisionsResponse    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListConfigurationRevisionsResponse"}
+	iListConfigurationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListConfigurationsRequest"}
+	iListConfigurationsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListConfigurationsResponse"}
+	iListTagsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListTagsRequest"}
+	iListTagsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListTagsResponse"}
+	iListUsersRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListUsersRequest"}
+	iListUsersResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "ListUsersResponse"}
+	iPromoteRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "PromoteRequest"}
+	iPromoteResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "PromoteResponse"}
+	iRebootBrokerRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "RebootBrokerRequest"}
+	iRebootBrokerResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "RebootBrokerResponse"}
+	iUpdateBrokerRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateBrokerRequest"}
+	iUpdateBrokerResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateBrokerResponse"}
+	iUpdateConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateConfigurationRequest"}
+	iUpdateConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateConfigurationResponse"}
+	iUpdateUserRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateUserRequest"}
+	iUpdateUserResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mq", Name: "UpdateUserResponse"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brokers",
-	Code: 200})
-
-var CreateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/configurations",
-	Code: 200})
-
-var CreateTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/{ResourceArn}",
-	Code: 204})
-
-var CreateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brokers/{BrokerId}/users/{Username}",
-	Code: 200})
-
-var DeleteBroker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteBroker",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/brokers/{BrokerId}",
-	Code: 200})
-
-var DeleteConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/configurations/{ConfigurationId}",
-	Code: 200})
-
-var DeleteTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/tags/{ResourceArn}",
-	Code: 204})
-
-var DeleteUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/brokers/{BrokerId}/users/{Username}",
-	Code: 200})
-
-var DescribeBroker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBroker",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brokers/{BrokerId}",
-	Code: 200})
-
-var DescribeBrokerEngineTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerEngineTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/broker-engine-types",
-	Code: 200})
-
-var DescribeBrokerInstanceOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerInstanceOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/broker-instance-options",
-	Code: 200})
-
-var DescribeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations/{ConfigurationId}",
-	Code: 200})
-
-var DescribeConfigurationRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeConfigurationRevision",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations/{ConfigurationId}/revisions/{ConfigurationRevision}",
-	Code: 200})
-
-var DescribeSharedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeSharedResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brokers/{BrokerId}/shared-resources",
-	Code: 200})
-
-var DescribeUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brokers/{BrokerId}/users/{Username}",
-	Code: 200})
-
-var ListBrokers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListBrokers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brokers",
-	Code: 200})
-
-var ListConfigurationRevisions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListConfigurationRevisions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations/{ConfigurationId}/revisions",
-	Code: 200})
-
-var ListConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations",
-	Code: 200})
-
-var ListTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/{ResourceArn}",
-	Code: 200})
-
-var ListUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brokers/{BrokerId}/users",
-	Code: 200})
-
-var Promote = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "Promote",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brokers/{BrokerId}/promote",
-	Code: 200})
-
-var RebootBroker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "RebootBroker",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brokers/{BrokerId}/reboot",
-	Code: 200})
-
-var UpdateBroker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateBroker",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/brokers/{BrokerId}",
-	Code: 200})
-
-var UpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/configurations/{ConfigurationId}",
-	Code: 200})
-
-var UpdateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/brokers/{BrokerId}/users/{Username}",
-	Code: 200})
-
-var _mq = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "mq",
-}, smithy.ShapeTypeService, 0)
-
-var Mq = smithy.NewServiceSchema(_mq, "2017-11-27")
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin5Max100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__integerMin5Max100",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOfActionRequired = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfActionRequired",
-}, smithy.ShapeTypeList, 1)
-var ___listOfActionRequired_member *smithy.Schema
-
-var ___listOfAvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfAvailabilityZone",
-}, smithy.ShapeTypeList, 1)
-var ___listOfAvailabilityZone_member *smithy.Schema
-
-var ___listOfBrokerEngineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfBrokerEngineType",
-}, smithy.ShapeTypeList, 1)
-var ___listOfBrokerEngineType_member *smithy.Schema
-
-var ___listOfBrokerInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfBrokerInstance",
-}, smithy.ShapeTypeList, 1)
-var ___listOfBrokerInstance_member *smithy.Schema
-
-var ___listOfBrokerInstanceOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfBrokerInstanceOption",
-}, smithy.ShapeTypeList, 1)
-var ___listOfBrokerInstanceOption_member *smithy.Schema
-
-var ___listOfBrokerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfBrokerSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfBrokerSummary_member *smithy.Schema
-
-var ___listOfConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfConfiguration",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConfiguration_member *smithy.Schema
-
-var ___listOfConfigurationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfConfigurationId",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConfigurationId_member *smithy.Schema
-
-var ___listOfConfigurationRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfConfigurationRevision",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConfigurationRevision_member *smithy.Schema
-
-var ___listOfDeploymentMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfDeploymentMode",
-}, smithy.ShapeTypeList, 1)
-var ___listOfDeploymentMode_member *smithy.Schema
-
-var ___listOfEngineVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfEngineVersion",
-}, smithy.ShapeTypeList, 1)
-var ___listOfEngineVersion_member *smithy.Schema
-
-var ___listOfResourceShareError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfResourceShareError",
-}, smithy.ShapeTypeList, 1)
-var ___listOfResourceShareError_member *smithy.Schema
-
-var ___listOfSanitizationWarning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfSanitizationWarning",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSanitizationWarning_member *smithy.Schema
-
-var ___listOfSharedResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfSharedResource",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSharedResource_member *smithy.Schema
-
-var ___listOfUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfUser",
-}, smithy.ShapeTypeList, 1)
-var ___listOfUser_member *smithy.Schema
-
-var ___listOfUserSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__listOfUserSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfUserSummary_member *smithy.Schema
-
-var ___mapOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__mapOf__string",
-}, smithy.ShapeTypeMap, 2)
-var ___mapOf__string_key *smithy.Schema
-
-var ___mapOf__string_value *smithy.Schema
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "__timestampIso8601",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ActionRequired = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ActionRequired",
-}, smithy.ShapeTypeStructure, 2)
-var ActionRequired_ActionRequiredCode *smithy.Schema
-
-var ActionRequired_ActionRequiredInfo *smithy.Schema
-
-var AuthenticationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "AuthenticationStrategy",
-}, smithy.ShapeTypeEnum, 3)
-var AuthenticationStrategy_SIMPLE *smithy.Schema
-
-var AuthenticationStrategy_LDAP *smithy.Schema
-
-var AuthenticationStrategy_CONFIG_MANAGED *smithy.Schema
-
-var AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "AvailabilityZone",
-}, smithy.ShapeTypeStructure, 1)
-var AvailabilityZone_Name *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_ErrorAttribute *smithy.Schema
-
-var BadRequestException_Message *smithy.Schema
-
-var BadRequestException_ResourceShareErrors *smithy.Schema
-
-var BrokerEngineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "BrokerEngineType",
-}, smithy.ShapeTypeStructure, 2)
-var BrokerEngineType_EngineType *smithy.Schema
-
-var BrokerEngineType_EngineVersions *smithy.Schema
-
-var BrokerInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "BrokerInstance",
-}, smithy.ShapeTypeStructure, 3)
-var BrokerInstance_ConsoleURL *smithy.Schema
-
-var BrokerInstance_Endpoints *smithy.Schema
-
-var BrokerInstance_IpAddress *smithy.Schema
-
-var BrokerInstanceOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "BrokerInstanceOption",
-}, smithy.ShapeTypeStructure, 6)
-var BrokerInstanceOption_AvailabilityZones *smithy.Schema
-
-var BrokerInstanceOption_EngineType *smithy.Schema
-
-var BrokerInstanceOption_HostInstanceType *smithy.Schema
-
-var BrokerInstanceOption_StorageType *smithy.Schema
-
-var BrokerInstanceOption_SupportedDeploymentModes *smithy.Schema
-
-var BrokerInstanceOption_SupportedEngineVersions *smithy.Schema
-
-var BrokerState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "BrokerState",
-}, smithy.ShapeTypeEnum, 7)
-var BrokerState_CREATION_IN_PROGRESS *smithy.Schema
-
-var BrokerState_CREATION_FAILED *smithy.Schema
-
-var BrokerState_DELETION_IN_PROGRESS *smithy.Schema
-
-var BrokerState_RUNNING *smithy.Schema
-
-var BrokerState_REBOOT_IN_PROGRESS *smithy.Schema
-
-var BrokerState_CRITICAL_ACTION_REQUIRED *smithy.Schema
-
-var BrokerState_REPLICA *smithy.Schema
-
-var BrokerStorageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "BrokerStorageType",
-}, smithy.ShapeTypeEnum, 2)
-var BrokerStorageType_EBS *smithy.Schema
-
-var BrokerStorageType_EFS *smithy.Schema
-
-var BrokerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "BrokerSummary",
-}, smithy.ShapeTypeStructure, 8)
-var BrokerSummary_BrokerArn *smithy.Schema
-
-var BrokerSummary_BrokerId *smithy.Schema
-
-var BrokerSummary_BrokerName *smithy.Schema
-
-var BrokerSummary_BrokerState *smithy.Schema
-
-var BrokerSummary_Created *smithy.Schema
-
-var BrokerSummary_DeploymentMode *smithy.Schema
-
-var BrokerSummary_EngineType *smithy.Schema
-
-var BrokerSummary_HostInstanceType *smithy.Schema
-
-var ChangeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ChangeType",
-}, smithy.ShapeTypeEnum, 3)
-var ChangeType_CREATE *smithy.Schema
-
-var ChangeType_UPDATE *smithy.Schema
-
-var ChangeType_DELETE *smithy.Schema
-
-var Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "Configuration",
-}, smithy.ShapeTypeStructure, 10)
-var Configuration_Arn *smithy.Schema
-
-var Configuration_AuthenticationStrategy *smithy.Schema
-
-var Configuration_Created *smithy.Schema
-
-var Configuration_Description *smithy.Schema
-
-var Configuration_EngineType *smithy.Schema
-
-var Configuration_EngineVersion *smithy.Schema
-
-var Configuration_Id *smithy.Schema
-
-var Configuration_LatestRevision *smithy.Schema
-
-var Configuration_Name *smithy.Schema
-
-var Configuration_Tags *smithy.Schema
-
-var ConfigurationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ConfigurationId",
-}, smithy.ShapeTypeStructure, 2)
-var ConfigurationId_Id *smithy.Schema
-
-var ConfigurationId_Revision *smithy.Schema
-
-var ConfigurationRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ConfigurationRevision",
-}, smithy.ShapeTypeStructure, 3)
-var ConfigurationRevision_Created *smithy.Schema
-
-var ConfigurationRevision_Description *smithy.Schema
-
-var ConfigurationRevision_Revision *smithy.Schema
-
-var Configurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "Configurations",
-}, smithy.ShapeTypeStructure, 3)
-var Configurations_Current *smithy.Schema
-
-var Configurations_History *smithy.Schema
-
-var Configurations_Pending *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_ErrorAttribute *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ResourceShareErrors *smithy.Schema
-
-var DataReplicationCounterpart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DataReplicationCounterpart",
-}, smithy.ShapeTypeStructure, 2)
-var DataReplicationCounterpart_BrokerId *smithy.Schema
-
-var DataReplicationCounterpart_Region *smithy.Schema
-
-var DataReplicationMetadataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DataReplicationMetadataOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DataReplicationMetadataOutput_DataReplicationCounterpart *smithy.Schema
-
-var DataReplicationMetadataOutput_DataReplicationRole *smithy.Schema
-
-var DataReplicationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DataReplicationMode",
-}, smithy.ShapeTypeEnum, 2)
-var DataReplicationMode_NONE *smithy.Schema
-
-var DataReplicationMode_CRDR *smithy.Schema
-
-var DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeEnum, 7)
-var DayOfWeek_MONDAY *smithy.Schema
-
-var DayOfWeek_TUESDAY *smithy.Schema
-
-var DayOfWeek_WEDNESDAY *smithy.Schema
-
-var DayOfWeek_THURSDAY *smithy.Schema
-
-var DayOfWeek_FRIDAY *smithy.Schema
-
-var DayOfWeek_SATURDAY *smithy.Schema
-
-var DayOfWeek_SUNDAY *smithy.Schema
-
-var DeploymentMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeploymentMode",
-}, smithy.ShapeTypeEnum, 3)
-var DeploymentMode_SINGLE_INSTANCE *smithy.Schema
-
-var DeploymentMode_ACTIVE_STANDBY_MULTI_AZ *smithy.Schema
-
-var DeploymentMode_CLUSTER_MULTI_AZ *smithy.Schema
-
-var EncryptionOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "EncryptionOptions",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionOptions_KmsKeyId *smithy.Schema
-
-var EncryptionOptions_UseAwsOwnedKey *smithy.Schema
-
-var EngineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "EngineType",
-}, smithy.ShapeTypeEnum, 2)
-var EngineType_ACTIVEMQ *smithy.Schema
-
-var EngineType_RABBITMQ *smithy.Schema
-
-var EngineVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "EngineVersion",
-}, smithy.ShapeTypeStructure, 1)
-var EngineVersion_Name *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_ErrorAttribute *smithy.Schema
-
-var ForbiddenException_Message *smithy.Schema
-
-var ForbiddenException_ResourceShareErrors *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_ErrorAttribute *smithy.Schema
-
-var InternalServerErrorException_Message *smithy.Schema
-
-var InternalServerErrorException_ResourceShareErrors *smithy.Schema
-
-var LdapServerMetadataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "LdapServerMetadataInput",
-}, smithy.ShapeTypeStructure, 11)
-var LdapServerMetadataInput_Hosts *smithy.Schema
-
-var LdapServerMetadataInput_RoleBase *smithy.Schema
-
-var LdapServerMetadataInput_RoleName *smithy.Schema
-
-var LdapServerMetadataInput_RoleSearchMatching *smithy.Schema
-
-var LdapServerMetadataInput_RoleSearchSubtree *smithy.Schema
-
-var LdapServerMetadataInput_ServiceAccountPassword *smithy.Schema
-
-var LdapServerMetadataInput_ServiceAccountUsername *smithy.Schema
-
-var LdapServerMetadataInput_UserBase *smithy.Schema
-
-var LdapServerMetadataInput_UserRoleName *smithy.Schema
-
-var LdapServerMetadataInput_UserSearchMatching *smithy.Schema
-
-var LdapServerMetadataInput_UserSearchSubtree *smithy.Schema
-
-var LdapServerMetadataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "LdapServerMetadataOutput",
-}, smithy.ShapeTypeStructure, 10)
-var LdapServerMetadataOutput_Hosts *smithy.Schema
-
-var LdapServerMetadataOutput_RoleBase *smithy.Schema
-
-var LdapServerMetadataOutput_RoleName *smithy.Schema
-
-var LdapServerMetadataOutput_RoleSearchMatching *smithy.Schema
-
-var LdapServerMetadataOutput_RoleSearchSubtree *smithy.Schema
-
-var LdapServerMetadataOutput_ServiceAccountUsername *smithy.Schema
-
-var LdapServerMetadataOutput_UserBase *smithy.Schema
-
-var LdapServerMetadataOutput_UserRoleName *smithy.Schema
-
-var LdapServerMetadataOutput_UserSearchMatching *smithy.Schema
-
-var LdapServerMetadataOutput_UserSearchSubtree *smithy.Schema
-
-var Logs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "Logs",
-}, smithy.ShapeTypeStructure, 2)
-var Logs_Audit *smithy.Schema
-
-var Logs_General *smithy.Schema
-
-var LogsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "LogsSummary",
-}, smithy.ShapeTypeStructure, 5)
-var LogsSummary_Audit *smithy.Schema
-
-var LogsSummary_AuditLogGroup *smithy.Schema
-
-var LogsSummary_General *smithy.Schema
-
-var LogsSummary_GeneralLogGroup *smithy.Schema
-
-var LogsSummary_Pending *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_ErrorAttribute *smithy.Schema
-
-var NotFoundException_Message *smithy.Schema
-
-var NotFoundException_ResourceShareErrors *smithy.Schema
-
-var PendingLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "PendingLogs",
-}, smithy.ShapeTypeStructure, 2)
-var PendingLogs_Audit *smithy.Schema
-
-var PendingLogs_General *smithy.Schema
-
-var PromoteMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "PromoteMode",
-}, smithy.ShapeTypeEnum, 2)
-var PromoteMode_SWITCHOVER *smithy.Schema
-
-var PromoteMode_FAILOVER *smithy.Schema
-
-var ResourceShareError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ResourceShareError",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceShareError_ErrorCode *smithy.Schema
-
-var ResourceShareError_ResourceShareArn *smithy.Schema
-
-var ResourceShareError_Status *smithy.Schema
-
-var SanitizationWarning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "SanitizationWarning",
-}, smithy.ShapeTypeStructure, 3)
-var SanitizationWarning_AttributeName *smithy.Schema
-
-var SanitizationWarning_ElementName *smithy.Schema
-
-var SanitizationWarning_Reason *smithy.Schema
-
-var SanitizationWarningReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "SanitizationWarningReason",
-}, smithy.ShapeTypeEnum, 3)
-var SanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED *smithy.Schema
-
-var SanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED *smithy.Schema
-
-var SanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED *smithy.Schema
-
-var SharedResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "SharedResource",
-}, smithy.ShapeTypeStructure, 6)
-var SharedResource_DnsNames *smithy.Schema
-
-var SharedResource_Error *smithy.Schema
-
-var SharedResource_ResourceArn *smithy.Schema
-
-var SharedResource_ResourceShareArns *smithy.Schema
-
-var SharedResource_Status *smithy.Schema
-
-var SharedResource_Type *smithy.Schema
-
-var SharedResourceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "SharedResourceError",
-}, smithy.ShapeTypeStructure, 2)
-var SharedResourceError_Code *smithy.Schema
-
-var SharedResourceError_Message *smithy.Schema
-
-var SharedResourceErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "SharedResourceErrorCode",
-}, smithy.ShapeTypeEnum, 7)
-var SharedResourceErrorCode_QUOTA_EXCEEDED *smithy.Schema
-
-var SharedResourceErrorCode_SHARE_NOT_FOUND *smithy.Schema
-
-var SharedResourceErrorCode_INVITE_FAILED *smithy.Schema
-
-var SharedResourceErrorCode_SETUP_INCOMPLETE *smithy.Schema
-
-var SharedResourceErrorCode_INTERNAL_ERROR *smithy.Schema
-
-var SharedResourceErrorCode_AZ_MISMATCH *smithy.Schema
-
-var SharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND *smithy.Schema
-
-var SharedResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "SharedResourceStatus",
-}, smithy.ShapeTypeEnum, 6)
-var SharedResourceStatus_AVAILABLE *smithy.Schema
-
-var SharedResourceStatus_SETUP_IN_PROGRESS *smithy.Schema
-
-var SharedResourceStatus_DELETION_IN_PROGRESS *smithy.Schema
-
-var SharedResourceStatus_PENDING_CREATE *smithy.Schema
-
-var SharedResourceStatus_PENDING_DELETE *smithy.Schema
-
-var SharedResourceStatus_ERROR *smithy.Schema
-
-var SharedResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "SharedResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var SharedResourceType_RESOURCE_SHARE *smithy.Schema
-
-var SharedResourceType_RESOURCE *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_ErrorAttribute *smithy.Schema
-
-var UnauthorizedException_Message *smithy.Schema
-
-var UnauthorizedException_ResourceShareErrors *smithy.Schema
-
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 5)
-var User_ConsoleAccess *smithy.Schema
-
-var User_Groups *smithy.Schema
-
-var User_Password *smithy.Schema
-
-var User_Username *smithy.Schema
-
-var User_ReplicationUser *smithy.Schema
-
-var UserPendingChanges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UserPendingChanges",
-}, smithy.ShapeTypeStructure, 3)
-var UserPendingChanges_ConsoleAccess *smithy.Schema
-
-var UserPendingChanges_Groups *smithy.Schema
-
-var UserPendingChanges_PendingChange *smithy.Schema
-
-var UserSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UserSummary",
-}, smithy.ShapeTypeStructure, 2)
-var UserSummary_PendingChange *smithy.Schema
-
-var UserSummary_Username *smithy.Schema
-
-var WeeklyStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "WeeklyStartTime",
-}, smithy.ShapeTypeStructure, 3)
-var WeeklyStartTime_DayOfWeek *smithy.Schema
-
-var WeeklyStartTime_TimeOfDay *smithy.Schema
-
-var WeeklyStartTime_TimeZone *smithy.Schema
-
-var CreateBrokerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateBrokerRequest",
-}, smithy.ShapeTypeStructure, 22)
-var CreateBrokerRequest_AuthenticationStrategy *smithy.Schema
-
-var CreateBrokerRequest_AutoMinorVersionUpgrade *smithy.Schema
-
-var CreateBrokerRequest_BrokerName *smithy.Schema
-
-var CreateBrokerRequest_Configuration *smithy.Schema
-
-var CreateBrokerRequest_CreatorRequestId *smithy.Schema
-
-var CreateBrokerRequest_DeploymentMode *smithy.Schema
-
-var CreateBrokerRequest_EncryptionOptions *smithy.Schema
-
-var CreateBrokerRequest_EngineType *smithy.Schema
-
-var CreateBrokerRequest_EngineVersion *smithy.Schema
-
-var CreateBrokerRequest_HostInstanceType *smithy.Schema
-
-var CreateBrokerRequest_LdapServerMetadata *smithy.Schema
-
-var CreateBrokerRequest_Logs *smithy.Schema
-
-var CreateBrokerRequest_MaintenanceWindowStartTime *smithy.Schema
-
-var CreateBrokerRequest_PubliclyAccessible *smithy.Schema
-
-var CreateBrokerRequest_SecurityGroups *smithy.Schema
-
-var CreateBrokerRequest_StorageSize *smithy.Schema
-
-var CreateBrokerRequest_StorageType *smithy.Schema
-
-var CreateBrokerRequest_SubnetIds *smithy.Schema
-
-var CreateBrokerRequest_Tags *smithy.Schema
-
-var CreateBrokerRequest_Users *smithy.Schema
-
-var CreateBrokerRequest_DataReplicationMode *smithy.Schema
-
-var CreateBrokerRequest_DataReplicationPrimaryBrokerArn *smithy.Schema
-
-var CreateBrokerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateBrokerResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBrokerResponse_BrokerArn *smithy.Schema
-
-var CreateBrokerResponse_BrokerId *smithy.Schema
-
-var CreateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateConfigurationRequest_AuthenticationStrategy *smithy.Schema
-
-var CreateConfigurationRequest_EngineType *smithy.Schema
-
-var CreateConfigurationRequest_EngineVersion *smithy.Schema
-
-var CreateConfigurationRequest_Name *smithy.Schema
-
-var CreateConfigurationRequest_Tags *smithy.Schema
-
-var CreateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateConfigurationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateConfigurationResponse_Arn *smithy.Schema
-
-var CreateConfigurationResponse_AuthenticationStrategy *smithy.Schema
-
-var CreateConfigurationResponse_Created *smithy.Schema
-
-var CreateConfigurationResponse_Id *smithy.Schema
-
-var CreateConfigurationResponse_LatestRevision *smithy.Schema
-
-var CreateConfigurationResponse_Name *smithy.Schema
-
-var CreateTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateTagsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTagsRequest_ResourceArn *smithy.Schema
-
-var CreateTagsRequest_Tags *smithy.Schema
-
-var CreateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateUserRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateUserRequest_BrokerId *smithy.Schema
-
-var CreateUserRequest_ConsoleAccess *smithy.Schema
-
-var CreateUserRequest_Groups *smithy.Schema
-
-var CreateUserRequest_Password *smithy.Schema
-
-var CreateUserRequest_Username *smithy.Schema
-
-var CreateUserRequest_ReplicationUser *smithy.Schema
-
-var CreateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "CreateUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteBrokerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteBrokerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBrokerRequest_BrokerId *smithy.Schema
-
-var DeleteBrokerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteBrokerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBrokerResponse_BrokerId *smithy.Schema
-
-var DeleteConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfigurationRequest_ConfigurationId *smithy.Schema
-
-var DeleteConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfigurationResponse_ConfigurationId *smithy.Schema
-
-var DeleteTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteTagsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTagsRequest_ResourceArn *smithy.Schema
-
-var DeleteTagsRequest_TagKeys *smithy.Schema
-
-var DeleteUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteUserRequest_BrokerId *smithy.Schema
-
-var DeleteUserRequest_Username *smithy.Schema
-
-var DeleteUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DeleteUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeBrokerEngineTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerEngineTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeBrokerEngineTypesRequest_EngineType *smithy.Schema
-
-var DescribeBrokerEngineTypesRequest_MaxResults *smithy.Schema
-
-var DescribeBrokerEngineTypesRequest_NextToken *smithy.Schema
-
-var DescribeBrokerEngineTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerEngineTypesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeBrokerEngineTypesResponse_BrokerEngineTypes *smithy.Schema
-
-var DescribeBrokerEngineTypesResponse_MaxResults *smithy.Schema
-
-var DescribeBrokerEngineTypesResponse_NextToken *smithy.Schema
-
-var DescribeBrokerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeBrokerRequest_BrokerId *smithy.Schema
-
-var DescribeBrokerInstanceOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerInstanceOptionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeBrokerInstanceOptionsRequest_EngineType *smithy.Schema
-
-var DescribeBrokerInstanceOptionsRequest_HostInstanceType *smithy.Schema
-
-var DescribeBrokerInstanceOptionsRequest_MaxResults *smithy.Schema
-
-var DescribeBrokerInstanceOptionsRequest_NextToken *smithy.Schema
-
-var DescribeBrokerInstanceOptionsRequest_StorageType *smithy.Schema
-
-var DescribeBrokerInstanceOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerInstanceOptionsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions *smithy.Schema
-
-var DescribeBrokerInstanceOptionsResponse_MaxResults *smithy.Schema
-
-var DescribeBrokerInstanceOptionsResponse_NextToken *smithy.Schema
-
-var DescribeBrokerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeBrokerResponse",
-}, smithy.ShapeTypeStructure, 35)
-var DescribeBrokerResponse_ActionsRequired *smithy.Schema
-
-var DescribeBrokerResponse_AuthenticationStrategy *smithy.Schema
-
-var DescribeBrokerResponse_AutoMinorVersionUpgrade *smithy.Schema
-
-var DescribeBrokerResponse_BrokerArn *smithy.Schema
-
-var DescribeBrokerResponse_BrokerId *smithy.Schema
-
-var DescribeBrokerResponse_BrokerInstances *smithy.Schema
-
-var DescribeBrokerResponse_BrokerName *smithy.Schema
-
-var DescribeBrokerResponse_BrokerState *smithy.Schema
-
-var DescribeBrokerResponse_Configurations *smithy.Schema
-
-var DescribeBrokerResponse_Created *smithy.Schema
-
-var DescribeBrokerResponse_DeploymentMode *smithy.Schema
-
-var DescribeBrokerResponse_EncryptionOptions *smithy.Schema
-
-var DescribeBrokerResponse_EngineType *smithy.Schema
-
-var DescribeBrokerResponse_EngineVersion *smithy.Schema
-
-var DescribeBrokerResponse_HostInstanceType *smithy.Schema
-
-var DescribeBrokerResponse_LdapServerMetadata *smithy.Schema
-
-var DescribeBrokerResponse_Logs *smithy.Schema
-
-var DescribeBrokerResponse_MaintenanceWindowStartTime *smithy.Schema
-
-var DescribeBrokerResponse_PendingAuthenticationStrategy *smithy.Schema
-
-var DescribeBrokerResponse_PendingEngineVersion *smithy.Schema
-
-var DescribeBrokerResponse_PendingHostInstanceType *smithy.Schema
-
-var DescribeBrokerResponse_PendingLdapServerMetadata *smithy.Schema
-
-var DescribeBrokerResponse_PendingSecurityGroups *smithy.Schema
-
-var DescribeBrokerResponse_PendingStorageSize *smithy.Schema
-
-var DescribeBrokerResponse_PubliclyAccessible *smithy.Schema
-
-var DescribeBrokerResponse_SecurityGroups *smithy.Schema
-
-var DescribeBrokerResponse_StorageSize *smithy.Schema
-
-var DescribeBrokerResponse_StorageType *smithy.Schema
-
-var DescribeBrokerResponse_SubnetIds *smithy.Schema
-
-var DescribeBrokerResponse_Tags *smithy.Schema
-
-var DescribeBrokerResponse_Users *smithy.Schema
-
-var DescribeBrokerResponse_DataReplicationMetadata *smithy.Schema
-
-var DescribeBrokerResponse_DataReplicationMode *smithy.Schema
-
-var DescribeBrokerResponse_PendingDataReplicationMetadata *smithy.Schema
-
-var DescribeBrokerResponse_PendingDataReplicationMode *smithy.Schema
-
-var DescribeConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConfigurationRequest_ConfigurationId *smithy.Schema
-
-var DescribeConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeConfigurationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeConfigurationResponse_Arn *smithy.Schema
-
-var DescribeConfigurationResponse_AuthenticationStrategy *smithy.Schema
-
-var DescribeConfigurationResponse_Created *smithy.Schema
-
-var DescribeConfigurationResponse_Description *smithy.Schema
-
-var DescribeConfigurationResponse_EngineType *smithy.Schema
-
-var DescribeConfigurationResponse_EngineVersion *smithy.Schema
-
-var DescribeConfigurationResponse_Id *smithy.Schema
-
-var DescribeConfigurationResponse_LatestRevision *smithy.Schema
-
-var DescribeConfigurationResponse_Name *smithy.Schema
-
-var DescribeConfigurationResponse_Tags *smithy.Schema
-
-var DescribeConfigurationRevisionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeConfigurationRevisionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeConfigurationRevisionRequest_ConfigurationId *smithy.Schema
-
-var DescribeConfigurationRevisionRequest_ConfigurationRevision *smithy.Schema
-
-var DescribeConfigurationRevisionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeConfigurationRevisionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeConfigurationRevisionResponse_ConfigurationId *smithy.Schema
-
-var DescribeConfigurationRevisionResponse_Created *smithy.Schema
-
-var DescribeConfigurationRevisionResponse_Data *smithy.Schema
-
-var DescribeConfigurationRevisionResponse_Description *smithy.Schema
-
-var DescribeSharedResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeSharedResourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSharedResourcesRequest_BrokerId *smithy.Schema
-
-var DescribeSharedResourcesRequest_MaxResults *smithy.Schema
-
-var DescribeSharedResourcesRequest_NextToken *smithy.Schema
-
-var DescribeSharedResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeSharedResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSharedResourcesResponse_NextToken *smithy.Schema
-
-var DescribeSharedResourcesResponse_SharedResources *smithy.Schema
-
-var DescribeUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUserRequest_BrokerId *smithy.Schema
-
-var DescribeUserRequest_Username *smithy.Schema
-
-var DescribeUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "DescribeUserResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeUserResponse_BrokerId *smithy.Schema
-
-var DescribeUserResponse_ConsoleAccess *smithy.Schema
-
-var DescribeUserResponse_Groups *smithy.Schema
-
-var DescribeUserResponse_Pending *smithy.Schema
-
-var DescribeUserResponse_Username *smithy.Schema
-
-var DescribeUserResponse_ReplicationUser *smithy.Schema
-
-var ListBrokersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListBrokersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListBrokersRequest_MaxResults *smithy.Schema
-
-var ListBrokersRequest_NextToken *smithy.Schema
-
-var ListBrokersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListBrokersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListBrokersResponse_BrokerSummaries *smithy.Schema
-
-var ListBrokersResponse_NextToken *smithy.Schema
-
-var ListConfigurationRevisionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListConfigurationRevisionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConfigurationRevisionsRequest_ConfigurationId *smithy.Schema
-
-var ListConfigurationRevisionsRequest_MaxResults *smithy.Schema
-
-var ListConfigurationRevisionsRequest_NextToken *smithy.Schema
-
-var ListConfigurationRevisionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListConfigurationRevisionsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListConfigurationRevisionsResponse_ConfigurationId *smithy.Schema
-
-var ListConfigurationRevisionsResponse_MaxResults *smithy.Schema
-
-var ListConfigurationRevisionsResponse_NextToken *smithy.Schema
-
-var ListConfigurationRevisionsResponse_Revisions *smithy.Schema
-
-var ListConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListConfigurationsRequest_NextToken *smithy.Schema
-
-var ListConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListConfigurationsResponse_Configurations *smithy.Schema
-
-var ListConfigurationsResponse_MaxResults *smithy.Schema
-
-var ListConfigurationsResponse_NextToken *smithy.Schema
-
-var ListTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListTagsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsRequest_ResourceArn *smithy.Schema
-
-var ListTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListTagsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsResponse_Tags *smithy.Schema
-
-var ListUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListUsersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListUsersRequest_BrokerId *smithy.Schema
-
-var ListUsersRequest_MaxResults *smithy.Schema
-
-var ListUsersRequest_NextToken *smithy.Schema
-
-var ListUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "ListUsersResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListUsersResponse_BrokerId *smithy.Schema
-
-var ListUsersResponse_MaxResults *smithy.Schema
-
-var ListUsersResponse_NextToken *smithy.Schema
-
-var ListUsersResponse_Users *smithy.Schema
-
-var PromoteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "PromoteRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PromoteRequest_BrokerId *smithy.Schema
-
-var PromoteRequest_Mode *smithy.Schema
-
-var PromoteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "PromoteResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PromoteResponse_BrokerId *smithy.Schema
-
-var RebootBrokerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "RebootBrokerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RebootBrokerRequest_BrokerId *smithy.Schema
-
-var RebootBrokerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "RebootBrokerResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateBrokerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateBrokerRequest",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateBrokerRequest_AuthenticationStrategy *smithy.Schema
-
-var UpdateBrokerRequest_AutoMinorVersionUpgrade *smithy.Schema
-
-var UpdateBrokerRequest_BrokerId *smithy.Schema
-
-var UpdateBrokerRequest_Configuration *smithy.Schema
-
-var UpdateBrokerRequest_EngineVersion *smithy.Schema
-
-var UpdateBrokerRequest_HostInstanceType *smithy.Schema
-
-var UpdateBrokerRequest_LdapServerMetadata *smithy.Schema
-
-var UpdateBrokerRequest_Logs *smithy.Schema
-
-var UpdateBrokerRequest_MaintenanceWindowStartTime *smithy.Schema
-
-var UpdateBrokerRequest_ResourceShareArns *smithy.Schema
-
-var UpdateBrokerRequest_SecurityGroups *smithy.Schema
-
-var UpdateBrokerRequest_StorageSize *smithy.Schema
-
-var UpdateBrokerRequest_DataReplicationMode *smithy.Schema
-
-var UpdateBrokerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateBrokerResponse",
-}, smithy.ShapeTypeStructure, 16)
-var UpdateBrokerResponse_AuthenticationStrategy *smithy.Schema
-
-var UpdateBrokerResponse_AutoMinorVersionUpgrade *smithy.Schema
-
-var UpdateBrokerResponse_BrokerId *smithy.Schema
-
-var UpdateBrokerResponse_Configuration *smithy.Schema
-
-var UpdateBrokerResponse_EngineVersion *smithy.Schema
-
-var UpdateBrokerResponse_HostInstanceType *smithy.Schema
-
-var UpdateBrokerResponse_LdapServerMetadata *smithy.Schema
-
-var UpdateBrokerResponse_Logs *smithy.Schema
-
-var UpdateBrokerResponse_MaintenanceWindowStartTime *smithy.Schema
-
-var UpdateBrokerResponse_ResourceShareArns *smithy.Schema
-
-var UpdateBrokerResponse_SecurityGroups *smithy.Schema
-
-var UpdateBrokerResponse_DataReplicationMetadata *smithy.Schema
-
-var UpdateBrokerResponse_DataReplicationMode *smithy.Schema
-
-var UpdateBrokerResponse_PendingDataReplicationMetadata *smithy.Schema
-
-var UpdateBrokerResponse_PendingDataReplicationMode *smithy.Schema
-
-var UpdateBrokerResponse_StorageSize *smithy.Schema
-
-var UpdateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConfigurationRequest_ConfigurationId *smithy.Schema
-
-var UpdateConfigurationRequest_Data *smithy.Schema
-
-var UpdateConfigurationRequest_Description *smithy.Schema
-
-var UpdateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateConfigurationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateConfigurationResponse_Arn *smithy.Schema
-
-var UpdateConfigurationResponse_Created *smithy.Schema
-
-var UpdateConfigurationResponse_Id *smithy.Schema
-
-var UpdateConfigurationResponse_LatestRevision *smithy.Schema
-
-var UpdateConfigurationResponse_Name *smithy.Schema
-
-var UpdateConfigurationResponse_Warnings *smithy.Schema
-
-var UpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateUserRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateUserRequest_BrokerId *smithy.Schema
-
-var UpdateUserRequest_ConsoleAccess *smithy.Schema
-
-var UpdateUserRequest_Groups *smithy.Schema
-
-var UpdateUserRequest_Password *smithy.Schema
-
-var UpdateUserRequest_Username *smithy.Schema
-
-var UpdateUserRequest_ReplicationUser *smithy.Schema
-
-var UpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mq",
-	Name:      "UpdateUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	ActionRequired_ActionRequiredCode = ActionRequired.AddMember("ActionRequiredCode", ___string, &smithytraits.JSONName{Name: "actionRequiredCode"})
-
-	ActionRequired_ActionRequiredInfo = ActionRequired.AddMember("ActionRequiredInfo", ___string, &smithytraits.JSONName{Name: "actionRequiredInfo"})
-
-	___listOfActionRequired_member = ___listOfActionRequired.AddMember("member", ActionRequired)
-
-	AvailabilityZone_Name = AvailabilityZone.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	___listOfAvailabilityZone_member = ___listOfAvailabilityZone.AddMember("member", AvailabilityZone)
-
-	EngineType_ACTIVEMQ = EngineType.AddMember("ACTIVEMQ", smithyprelude.Unit)
-
-	EngineType_RABBITMQ = EngineType.AddMember("RABBITMQ", smithyprelude.Unit)
-
-	EngineVersion_Name = EngineVersion.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	___listOfEngineVersion_member = ___listOfEngineVersion.AddMember("member", EngineVersion)
-
-	BrokerEngineType_EngineType = BrokerEngineType.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	BrokerEngineType_EngineVersions = BrokerEngineType.AddMember("EngineVersions", ___listOfEngineVersion, &smithytraits.JSONName{Name: "engineVersions"})
-
-	___listOfBrokerEngineType_member = ___listOfBrokerEngineType.AddMember("member", BrokerEngineType)
-
-	BrokerInstance_ConsoleURL = BrokerInstance.AddMember("ConsoleURL", ___string, &smithytraits.JSONName{Name: "consoleURL"})
-
-	BrokerInstance_Endpoints = BrokerInstance.AddMember("Endpoints", ___listOf__string, &smithytraits.JSONName{Name: "endpoints"})
-
-	BrokerInstance_IpAddress = BrokerInstance.AddMember("IpAddress", ___string, &smithytraits.JSONName{Name: "ipAddress"})
-
-	___listOfBrokerInstance_member = ___listOfBrokerInstance.AddMember("member", BrokerInstance)
-
-	BrokerStorageType_EBS = BrokerStorageType.AddMember("EBS", smithyprelude.Unit)
-
-	BrokerStorageType_EFS = BrokerStorageType.AddMember("EFS", smithyprelude.Unit)
-
-	DeploymentMode_SINGLE_INSTANCE = DeploymentMode.AddMember("SINGLE_INSTANCE", smithyprelude.Unit)
-
-	DeploymentMode_ACTIVE_STANDBY_MULTI_AZ = DeploymentMode.AddMember("ACTIVE_STANDBY_MULTI_AZ", smithyprelude.Unit)
-
-	DeploymentMode_CLUSTER_MULTI_AZ = DeploymentMode.AddMember("CLUSTER_MULTI_AZ", smithyprelude.Unit)
-
-	___listOfDeploymentMode_member = ___listOfDeploymentMode.AddMember("member", DeploymentMode)
-
-	BrokerInstanceOption_AvailabilityZones = BrokerInstanceOption.AddMember("AvailabilityZones", ___listOfAvailabilityZone, &smithytraits.JSONName{Name: "availabilityZones"})
-
-	BrokerInstanceOption_EngineType = BrokerInstanceOption.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	BrokerInstanceOption_HostInstanceType = BrokerInstanceOption.AddMember("HostInstanceType", ___string, &smithytraits.JSONName{Name: "hostInstanceType"})
-
-	BrokerInstanceOption_StorageType = BrokerInstanceOption.AddMember("StorageType", BrokerStorageType, &smithytraits.JSONName{Name: "storageType"})
-
-	BrokerInstanceOption_SupportedDeploymentModes = BrokerInstanceOption.AddMember("SupportedDeploymentModes", ___listOfDeploymentMode, &smithytraits.JSONName{Name: "supportedDeploymentModes"})
-
-	BrokerInstanceOption_SupportedEngineVersions = BrokerInstanceOption.AddMember("SupportedEngineVersions", ___listOf__string, &smithytraits.JSONName{Name: "supportedEngineVersions"})
-
-	___listOfBrokerInstanceOption_member = ___listOfBrokerInstanceOption.AddMember("member", BrokerInstanceOption)
-
-	BrokerState_CREATION_IN_PROGRESS = BrokerState.AddMember("CREATION_IN_PROGRESS", smithyprelude.Unit)
-
-	BrokerState_CREATION_FAILED = BrokerState.AddMember("CREATION_FAILED", smithyprelude.Unit)
-
-	BrokerState_DELETION_IN_PROGRESS = BrokerState.AddMember("DELETION_IN_PROGRESS", smithyprelude.Unit)
-
-	BrokerState_RUNNING = BrokerState.AddMember("RUNNING", smithyprelude.Unit)
-
-	BrokerState_REBOOT_IN_PROGRESS = BrokerState.AddMember("REBOOT_IN_PROGRESS", smithyprelude.Unit)
-
-	BrokerState_CRITICAL_ACTION_REQUIRED = BrokerState.AddMember("CRITICAL_ACTION_REQUIRED", smithyprelude.Unit)
-
-	BrokerState_REPLICA = BrokerState.AddMember("REPLICA", smithyprelude.Unit)
-
-	BrokerSummary_BrokerArn = BrokerSummary.AddMember("BrokerArn", ___string, &smithytraits.JSONName{Name: "brokerArn"})
-
-	BrokerSummary_BrokerId = BrokerSummary.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	BrokerSummary_BrokerName = BrokerSummary.AddMember("BrokerName", ___string, &smithytraits.JSONName{Name: "brokerName"})
-
-	BrokerSummary_BrokerState = BrokerSummary.AddMember("BrokerState", BrokerState, &smithytraits.JSONName{Name: "brokerState"})
-
-	BrokerSummary_Created = BrokerSummary.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	BrokerSummary_DeploymentMode = BrokerSummary.AddMember("DeploymentMode", DeploymentMode, &smithytraits.JSONName{Name: "deploymentMode"})
-
-	BrokerSummary_EngineType = BrokerSummary.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	BrokerSummary_HostInstanceType = BrokerSummary.AddMember("HostInstanceType", ___string, &smithytraits.JSONName{Name: "hostInstanceType"})
-
-	___listOfBrokerSummary_member = ___listOfBrokerSummary.AddMember("member", BrokerSummary)
-
-	AuthenticationStrategy_SIMPLE = AuthenticationStrategy.AddMember("SIMPLE", smithyprelude.Unit)
-
-	AuthenticationStrategy_LDAP = AuthenticationStrategy.AddMember("LDAP", smithyprelude.Unit)
-
-	AuthenticationStrategy_CONFIG_MANAGED = AuthenticationStrategy.AddMember("CONFIG_MANAGED", smithyprelude.Unit)
-
-	ConfigurationRevision_Created = ConfigurationRevision.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	ConfigurationRevision_Description = ConfigurationRevision.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	ConfigurationRevision_Revision = ConfigurationRevision.AddMember("Revision", ___integer, &smithytraits.JSONName{Name: "revision"})
-
-	___mapOf__string_key = ___mapOf__string.AddMember("key", ___string)
-
-	___mapOf__string_value = ___mapOf__string.AddMember("value", ___string)
-
-	Configuration_Arn = Configuration.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	Configuration_AuthenticationStrategy = Configuration.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	Configuration_Created = Configuration.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	Configuration_Description = Configuration.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	Configuration_EngineType = Configuration.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	Configuration_EngineVersion = Configuration.AddMember("EngineVersion", ___string, &smithytraits.JSONName{Name: "engineVersion"})
-
-	Configuration_Id = Configuration.AddMember("Id", ___string, &smithytraits.JSONName{Name: "id"})
-
-	Configuration_LatestRevision = Configuration.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	Configuration_Name = Configuration.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	Configuration_Tags = Configuration.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfConfiguration_member = ___listOfConfiguration.AddMember("member", Configuration)
-
-	ConfigurationId_Id = ConfigurationId.AddMember("Id", ___string, &smithytraits.JSONName{Name: "id"})
-
-	ConfigurationId_Revision = ConfigurationId.AddMember("Revision", ___integer, &smithytraits.JSONName{Name: "revision"})
-
-	___listOfConfigurationId_member = ___listOfConfigurationId.AddMember("member", ConfigurationId)
-
-	___listOfConfigurationRevision_member = ___listOfConfigurationRevision.AddMember("member", ConfigurationRevision)
-
-	ResourceShareError_ErrorCode = ResourceShareError.AddMember("ErrorCode", ___string, &smithytraits.JSONName{Name: "errorCode"})
-
-	ResourceShareError_ResourceShareArn = ResourceShareError.AddMember("ResourceShareArn", ___string, &smithytraits.JSONName{Name: "resourceShareArn"})
-
-	ResourceShareError_Status = ResourceShareError.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	___listOfResourceShareError_member = ___listOfResourceShareError.AddMember("member", ResourceShareError)
-
-	SanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED = SanitizationWarningReason.AddMember("DISALLOWED_ELEMENT_REMOVED", smithyprelude.Unit)
-
-	SanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED = SanitizationWarningReason.AddMember("DISALLOWED_ATTRIBUTE_REMOVED", smithyprelude.Unit)
-
-	SanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED = SanitizationWarningReason.AddMember("INVALID_ATTRIBUTE_VALUE_REMOVED", smithyprelude.Unit)
-
-	SanitizationWarning_AttributeName = SanitizationWarning.AddMember("AttributeName", ___string, &smithytraits.JSONName{Name: "attributeName"})
-
-	SanitizationWarning_ElementName = SanitizationWarning.AddMember("ElementName", ___string, &smithytraits.JSONName{Name: "elementName"})
-
-	SanitizationWarning_Reason = SanitizationWarning.AddMember("Reason", SanitizationWarningReason, &smithytraits.JSONName{Name: "reason"})
-
-	___listOfSanitizationWarning_member = ___listOfSanitizationWarning.AddMember("member", SanitizationWarning)
-
-	SharedResourceErrorCode_QUOTA_EXCEEDED = SharedResourceErrorCode.AddMember("QUOTA_EXCEEDED", smithyprelude.Unit)
-
-	SharedResourceErrorCode_SHARE_NOT_FOUND = SharedResourceErrorCode.AddMember("SHARE_NOT_FOUND", smithyprelude.Unit)
-
-	SharedResourceErrorCode_INVITE_FAILED = SharedResourceErrorCode.AddMember("INVITE_FAILED", smithyprelude.Unit)
-
-	SharedResourceErrorCode_SETUP_INCOMPLETE = SharedResourceErrorCode.AddMember("SETUP_INCOMPLETE", smithyprelude.Unit)
-
-	SharedResourceErrorCode_INTERNAL_ERROR = SharedResourceErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	SharedResourceErrorCode_AZ_MISMATCH = SharedResourceErrorCode.AddMember("AZ_MISMATCH", smithyprelude.Unit)
-
-	SharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND = SharedResourceErrorCode.AddMember("RESOURCE_CONFIGURATION_NOT_FOUND", smithyprelude.Unit)
-
-	SharedResourceError_Code = SharedResourceError.AddMember("Code", SharedResourceErrorCode, &smithytraits.JSONName{Name: "code"})
-
-	SharedResourceError_Message = SharedResourceError.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	SharedResourceStatus_AVAILABLE = SharedResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	SharedResourceStatus_SETUP_IN_PROGRESS = SharedResourceStatus.AddMember("SETUP_IN_PROGRESS", smithyprelude.Unit)
-
-	SharedResourceStatus_DELETION_IN_PROGRESS = SharedResourceStatus.AddMember("DELETION_IN_PROGRESS", smithyprelude.Unit)
-
-	SharedResourceStatus_PENDING_CREATE = SharedResourceStatus.AddMember("PENDING_CREATE", smithyprelude.Unit)
-
-	SharedResourceStatus_PENDING_DELETE = SharedResourceStatus.AddMember("PENDING_DELETE", smithyprelude.Unit)
-
-	SharedResourceStatus_ERROR = SharedResourceStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	SharedResourceType_RESOURCE_SHARE = SharedResourceType.AddMember("RESOURCE_SHARE", smithyprelude.Unit)
-
-	SharedResourceType_RESOURCE = SharedResourceType.AddMember("RESOURCE", smithyprelude.Unit)
-
-	SharedResource_DnsNames = SharedResource.AddMember("DnsNames", ___listOf__string, &smithytraits.JSONName{Name: "dnsNames"})
-
-	SharedResource_Error = SharedResource.AddMember("Error", SharedResourceError, &smithytraits.JSONName{Name: "error"})
-
-	SharedResource_ResourceArn = SharedResource.AddMember("ResourceArn", ___string, &smithytraits.JSONName{Name: "resourceArn"})
-
-	SharedResource_ResourceShareArns = SharedResource.AddMember("ResourceShareArns", ___listOf__string, &smithytraits.JSONName{Name: "resourceShareArns"})
-
-	SharedResource_Status = SharedResource.AddMember("Status", SharedResourceStatus, &smithytraits.JSONName{Name: "status"})
-
-	SharedResource_Type = SharedResource.AddMember("Type", SharedResourceType, &smithytraits.JSONName{Name: "type"})
-
-	___listOfSharedResource_member = ___listOfSharedResource.AddMember("member", SharedResource)
-
-	User_ConsoleAccess = User.AddMember("ConsoleAccess", ___boolean, &smithytraits.JSONName{Name: "consoleAccess"})
-
-	User_Groups = User.AddMember("Groups", ___listOf__string, &smithytraits.JSONName{Name: "groups"})
-
-	User_Password = User.AddMember("Password", ___string, &smithytraits.JSONName{Name: "password"})
-
-	User_Username = User.AddMember("Username", ___string, &smithytraits.JSONName{Name: "username"})
-
-	User_ReplicationUser = User.AddMember("ReplicationUser", ___boolean, &smithytraits.JSONName{Name: "replicationUser"})
-
-	___listOfUser_member = ___listOfUser.AddMember("member", User)
-
-	ChangeType_CREATE = ChangeType.AddMember("CREATE", smithyprelude.Unit)
-
-	ChangeType_UPDATE = ChangeType.AddMember("UPDATE", smithyprelude.Unit)
-
-	ChangeType_DELETE = ChangeType.AddMember("DELETE", smithyprelude.Unit)
-
-	UserSummary_PendingChange = UserSummary.AddMember("PendingChange", ChangeType, &smithytraits.JSONName{Name: "pendingChange"})
-
-	UserSummary_Username = UserSummary.AddMember("Username", ___string, &smithytraits.JSONName{Name: "username"})
-
-	___listOfUserSummary_member = ___listOfUserSummary.AddMember("member", UserSummary)
-
-	BadRequestException_ErrorAttribute = BadRequestException.AddMember("ErrorAttribute", ___string, &smithytraits.JSONName{Name: "errorAttribute"})
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	BadRequestException_ResourceShareErrors = BadRequestException.AddMember("ResourceShareErrors", ___listOfResourceShareError, &smithytraits.JSONName{Name: "resourceShareErrors"})
-
-	Configurations_Current = Configurations.AddMember("Current", ConfigurationId, &smithytraits.JSONName{Name: "current"})
-
-	Configurations_History = Configurations.AddMember("History", ___listOfConfigurationId, &smithytraits.JSONName{Name: "history"})
-
-	Configurations_Pending = Configurations.AddMember("Pending", ConfigurationId, &smithytraits.JSONName{Name: "pending"})
-
-	ConflictException_ErrorAttribute = ConflictException.AddMember("ErrorAttribute", ___string, &smithytraits.JSONName{Name: "errorAttribute"})
-
-	ConflictException_Message = ConflictException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ConflictException_ResourceShareErrors = ConflictException.AddMember("ResourceShareErrors", ___listOfResourceShareError, &smithytraits.JSONName{Name: "resourceShareErrors"})
-
-	DataReplicationCounterpart_BrokerId = DataReplicationCounterpart.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	DataReplicationCounterpart_Region = DataReplicationCounterpart.AddMember("Region", ___string, &smithytraits.JSONName{Name: "region"})
-
-	DataReplicationMetadataOutput_DataReplicationCounterpart = DataReplicationMetadataOutput.AddMember("DataReplicationCounterpart", DataReplicationCounterpart, &smithytraits.JSONName{Name: "dataReplicationCounterpart"})
-
-	DataReplicationMetadataOutput_DataReplicationRole = DataReplicationMetadataOutput.AddMember("DataReplicationRole", ___string, &smithytraits.JSONName{Name: "dataReplicationRole"})
-
-	DataReplicationMode_NONE = DataReplicationMode.AddMember("NONE", smithyprelude.Unit)
-
-	DataReplicationMode_CRDR = DataReplicationMode.AddMember("CRDR", smithyprelude.Unit)
-
-	DayOfWeek_MONDAY = DayOfWeek.AddMember("MONDAY", smithyprelude.Unit)
-
-	DayOfWeek_TUESDAY = DayOfWeek.AddMember("TUESDAY", smithyprelude.Unit)
-
-	DayOfWeek_WEDNESDAY = DayOfWeek.AddMember("WEDNESDAY", smithyprelude.Unit)
-
-	DayOfWeek_THURSDAY = DayOfWeek.AddMember("THURSDAY", smithyprelude.Unit)
-
-	DayOfWeek_FRIDAY = DayOfWeek.AddMember("FRIDAY", smithyprelude.Unit)
-
-	DayOfWeek_SATURDAY = DayOfWeek.AddMember("SATURDAY", smithyprelude.Unit)
-
-	DayOfWeek_SUNDAY = DayOfWeek.AddMember("SUNDAY", smithyprelude.Unit)
-
-	EncryptionOptions_KmsKeyId = EncryptionOptions.AddMember("KmsKeyId", ___string, &smithytraits.JSONName{Name: "kmsKeyId"})
-
-	EncryptionOptions_UseAwsOwnedKey = EncryptionOptions.AddMember("UseAwsOwnedKey", ___boolean, &smithytraits.JSONName{Name: "useAwsOwnedKey"})
-
-	ForbiddenException_ErrorAttribute = ForbiddenException.AddMember("ErrorAttribute", ___string, &smithytraits.JSONName{Name: "errorAttribute"})
-
-	ForbiddenException_Message = ForbiddenException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ForbiddenException_ResourceShareErrors = ForbiddenException.AddMember("ResourceShareErrors", ___listOfResourceShareError, &smithytraits.JSONName{Name: "resourceShareErrors"})
-
-	InternalServerErrorException_ErrorAttribute = InternalServerErrorException.AddMember("ErrorAttribute", ___string, &smithytraits.JSONName{Name: "errorAttribute"})
-
-	InternalServerErrorException_Message = InternalServerErrorException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	InternalServerErrorException_ResourceShareErrors = InternalServerErrorException.AddMember("ResourceShareErrors", ___listOfResourceShareError, &smithytraits.JSONName{Name: "resourceShareErrors"})
-
-	LdapServerMetadataInput_Hosts = LdapServerMetadataInput.AddMember("Hosts", ___listOf__string, &smithytraits.JSONName{Name: "hosts"})
-
-	LdapServerMetadataInput_RoleBase = LdapServerMetadataInput.AddMember("RoleBase", ___string, &smithytraits.JSONName{Name: "roleBase"})
-
-	LdapServerMetadataInput_RoleName = LdapServerMetadataInput.AddMember("RoleName", ___string, &smithytraits.JSONName{Name: "roleName"})
-
-	LdapServerMetadataInput_RoleSearchMatching = LdapServerMetadataInput.AddMember("RoleSearchMatching", ___string, &smithytraits.JSONName{Name: "roleSearchMatching"})
-
-	LdapServerMetadataInput_RoleSearchSubtree = LdapServerMetadataInput.AddMember("RoleSearchSubtree", ___boolean, &smithytraits.JSONName{Name: "roleSearchSubtree"})
-
-	LdapServerMetadataInput_ServiceAccountPassword = LdapServerMetadataInput.AddMember("ServiceAccountPassword", ___string, &smithytraits.JSONName{Name: "serviceAccountPassword"})
-
-	LdapServerMetadataInput_ServiceAccountUsername = LdapServerMetadataInput.AddMember("ServiceAccountUsername", ___string, &smithytraits.JSONName{Name: "serviceAccountUsername"})
-
-	LdapServerMetadataInput_UserBase = LdapServerMetadataInput.AddMember("UserBase", ___string, &smithytraits.JSONName{Name: "userBase"})
-
-	LdapServerMetadataInput_UserRoleName = LdapServerMetadataInput.AddMember("UserRoleName", ___string, &smithytraits.JSONName{Name: "userRoleName"})
-
-	LdapServerMetadataInput_UserSearchMatching = LdapServerMetadataInput.AddMember("UserSearchMatching", ___string, &smithytraits.JSONName{Name: "userSearchMatching"})
-
-	LdapServerMetadataInput_UserSearchSubtree = LdapServerMetadataInput.AddMember("UserSearchSubtree", ___boolean, &smithytraits.JSONName{Name: "userSearchSubtree"})
-
-	LdapServerMetadataOutput_Hosts = LdapServerMetadataOutput.AddMember("Hosts", ___listOf__string, &smithytraits.JSONName{Name: "hosts"})
-
-	LdapServerMetadataOutput_RoleBase = LdapServerMetadataOutput.AddMember("RoleBase", ___string, &smithytraits.JSONName{Name: "roleBase"})
-
-	LdapServerMetadataOutput_RoleName = LdapServerMetadataOutput.AddMember("RoleName", ___string, &smithytraits.JSONName{Name: "roleName"})
-
-	LdapServerMetadataOutput_RoleSearchMatching = LdapServerMetadataOutput.AddMember("RoleSearchMatching", ___string, &smithytraits.JSONName{Name: "roleSearchMatching"})
-
-	LdapServerMetadataOutput_RoleSearchSubtree = LdapServerMetadataOutput.AddMember("RoleSearchSubtree", ___boolean, &smithytraits.JSONName{Name: "roleSearchSubtree"})
-
-	LdapServerMetadataOutput_ServiceAccountUsername = LdapServerMetadataOutput.AddMember("ServiceAccountUsername", ___string, &smithytraits.JSONName{Name: "serviceAccountUsername"})
-
-	LdapServerMetadataOutput_UserBase = LdapServerMetadataOutput.AddMember("UserBase", ___string, &smithytraits.JSONName{Name: "userBase"})
-
-	LdapServerMetadataOutput_UserRoleName = LdapServerMetadataOutput.AddMember("UserRoleName", ___string, &smithytraits.JSONName{Name: "userRoleName"})
-
-	LdapServerMetadataOutput_UserSearchMatching = LdapServerMetadataOutput.AddMember("UserSearchMatching", ___string, &smithytraits.JSONName{Name: "userSearchMatching"})
-
-	LdapServerMetadataOutput_UserSearchSubtree = LdapServerMetadataOutput.AddMember("UserSearchSubtree", ___boolean, &smithytraits.JSONName{Name: "userSearchSubtree"})
-
-	Logs_Audit = Logs.AddMember("Audit", ___boolean, &smithytraits.JSONName{Name: "audit"})
-
-	Logs_General = Logs.AddMember("General", ___boolean, &smithytraits.JSONName{Name: "general"})
-
-	PendingLogs_Audit = PendingLogs.AddMember("Audit", ___boolean, &smithytraits.JSONName{Name: "audit"})
-
-	PendingLogs_General = PendingLogs.AddMember("General", ___boolean, &smithytraits.JSONName{Name: "general"})
-
-	LogsSummary_Audit = LogsSummary.AddMember("Audit", ___boolean, &smithytraits.JSONName{Name: "audit"})
-
-	LogsSummary_AuditLogGroup = LogsSummary.AddMember("AuditLogGroup", ___string, &smithytraits.JSONName{Name: "auditLogGroup"})
-
-	LogsSummary_General = LogsSummary.AddMember("General", ___boolean, &smithytraits.JSONName{Name: "general"})
-
-	LogsSummary_GeneralLogGroup = LogsSummary.AddMember("GeneralLogGroup", ___string, &smithytraits.JSONName{Name: "generalLogGroup"})
-
-	LogsSummary_Pending = LogsSummary.AddMember("Pending", PendingLogs, &smithytraits.JSONName{Name: "pending"})
-
-	NotFoundException_ErrorAttribute = NotFoundException.AddMember("ErrorAttribute", ___string, &smithytraits.JSONName{Name: "errorAttribute"})
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	NotFoundException_ResourceShareErrors = NotFoundException.AddMember("ResourceShareErrors", ___listOfResourceShareError, &smithytraits.JSONName{Name: "resourceShareErrors"})
-
-	PromoteMode_SWITCHOVER = PromoteMode.AddMember("SWITCHOVER", smithyprelude.Unit)
-
-	PromoteMode_FAILOVER = PromoteMode.AddMember("FAILOVER", smithyprelude.Unit)
-
-	UnauthorizedException_ErrorAttribute = UnauthorizedException.AddMember("ErrorAttribute", ___string, &smithytraits.JSONName{Name: "errorAttribute"})
-
-	UnauthorizedException_Message = UnauthorizedException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	UnauthorizedException_ResourceShareErrors = UnauthorizedException.AddMember("ResourceShareErrors", ___listOfResourceShareError, &smithytraits.JSONName{Name: "resourceShareErrors"})
-
-	UserPendingChanges_ConsoleAccess = UserPendingChanges.AddMember("ConsoleAccess", ___boolean, &smithytraits.JSONName{Name: "consoleAccess"})
-
-	UserPendingChanges_Groups = UserPendingChanges.AddMember("Groups", ___listOf__string, &smithytraits.JSONName{Name: "groups"})
-
-	UserPendingChanges_PendingChange = UserPendingChanges.AddMember("PendingChange", ChangeType, &smithytraits.JSONName{Name: "pendingChange"})
-
-	WeeklyStartTime_DayOfWeek = WeeklyStartTime.AddMember("DayOfWeek", DayOfWeek, &smithytraits.JSONName{Name: "dayOfWeek"})
-
-	WeeklyStartTime_TimeOfDay = WeeklyStartTime.AddMember("TimeOfDay", ___string, &smithytraits.JSONName{Name: "timeOfDay"})
-
-	WeeklyStartTime_TimeZone = WeeklyStartTime.AddMember("TimeZone", ___string, &smithytraits.JSONName{Name: "timeZone"})
-
-	CreateBrokerRequest_AuthenticationStrategy = CreateBrokerRequest.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	CreateBrokerRequest_AutoMinorVersionUpgrade = CreateBrokerRequest.AddMember("AutoMinorVersionUpgrade", ___boolean, &smithytraits.JSONName{Name: "autoMinorVersionUpgrade"})
-
-	CreateBrokerRequest_BrokerName = CreateBrokerRequest.AddMember("BrokerName", ___string, &smithytraits.JSONName{Name: "brokerName"})
-
-	CreateBrokerRequest_Configuration = CreateBrokerRequest.AddMember("Configuration", ConfigurationId, &smithytraits.JSONName{Name: "configuration"})
-
-	CreateBrokerRequest_CreatorRequestId = CreateBrokerRequest.AddMember("CreatorRequestId", ___string, &smithytraits.JSONName{Name: "creatorRequestId"})
-
-	CreateBrokerRequest_DeploymentMode = CreateBrokerRequest.AddMember("DeploymentMode", DeploymentMode, &smithytraits.JSONName{Name: "deploymentMode"})
-
-	CreateBrokerRequest_EncryptionOptions = CreateBrokerRequest.AddMember("EncryptionOptions", EncryptionOptions, &smithytraits.JSONName{Name: "encryptionOptions"})
-
-	CreateBrokerRequest_EngineType = CreateBrokerRequest.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	CreateBrokerRequest_EngineVersion = CreateBrokerRequest.AddMember("EngineVersion", ___string, &smithytraits.JSONName{Name: "engineVersion"})
-
-	CreateBrokerRequest_HostInstanceType = CreateBrokerRequest.AddMember("HostInstanceType", ___string, &smithytraits.JSONName{Name: "hostInstanceType"})
-
-	CreateBrokerRequest_LdapServerMetadata = CreateBrokerRequest.AddMember("LdapServerMetadata", LdapServerMetadataInput, &smithytraits.JSONName{Name: "ldapServerMetadata"})
-
-	CreateBrokerRequest_Logs = CreateBrokerRequest.AddMember("Logs", Logs, &smithytraits.JSONName{Name: "logs"})
-
-	CreateBrokerRequest_MaintenanceWindowStartTime = CreateBrokerRequest.AddMember("MaintenanceWindowStartTime", WeeklyStartTime, &smithytraits.JSONName{Name: "maintenanceWindowStartTime"})
-
-	CreateBrokerRequest_PubliclyAccessible = CreateBrokerRequest.AddMember("PubliclyAccessible", ___boolean, &smithytraits.JSONName{Name: "publiclyAccessible"})
-
-	CreateBrokerRequest_SecurityGroups = CreateBrokerRequest.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	CreateBrokerRequest_StorageSize = CreateBrokerRequest.AddMember("StorageSize", ___integer, &smithytraits.JSONName{Name: "storageSize"})
-
-	CreateBrokerRequest_StorageType = CreateBrokerRequest.AddMember("StorageType", BrokerStorageType, &smithytraits.JSONName{Name: "storageType"})
-
-	CreateBrokerRequest_SubnetIds = CreateBrokerRequest.AddMember("SubnetIds", ___listOf__string, &smithytraits.JSONName{Name: "subnetIds"})
-
-	CreateBrokerRequest_Tags = CreateBrokerRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateBrokerRequest_Users = CreateBrokerRequest.AddMember("Users", ___listOfUser, &smithytraits.JSONName{Name: "users"})
-
-	CreateBrokerRequest_DataReplicationMode = CreateBrokerRequest.AddMember("DataReplicationMode", DataReplicationMode, &smithytraits.JSONName{Name: "dataReplicationMode"})
-
-	CreateBrokerRequest_DataReplicationPrimaryBrokerArn = CreateBrokerRequest.AddMember("DataReplicationPrimaryBrokerArn", ___string, &smithytraits.JSONName{Name: "dataReplicationPrimaryBrokerArn"})
-
-	CreateBrokerResponse_BrokerArn = CreateBrokerResponse.AddMember("BrokerArn", ___string, &smithytraits.JSONName{Name: "brokerArn"})
-
-	CreateBrokerResponse_BrokerId = CreateBrokerResponse.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	CreateConfigurationRequest_AuthenticationStrategy = CreateConfigurationRequest.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	CreateConfigurationRequest_EngineType = CreateConfigurationRequest.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	CreateConfigurationRequest_EngineVersion = CreateConfigurationRequest.AddMember("EngineVersion", ___string, &smithytraits.JSONName{Name: "engineVersion"})
-
-	CreateConfigurationRequest_Name = CreateConfigurationRequest.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	CreateConfigurationRequest_Tags = CreateConfigurationRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateConfigurationResponse_Arn = CreateConfigurationResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	CreateConfigurationResponse_AuthenticationStrategy = CreateConfigurationResponse.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	CreateConfigurationResponse_Created = CreateConfigurationResponse.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	CreateConfigurationResponse_Id = CreateConfigurationResponse.AddMember("Id", ___string, &smithytraits.JSONName{Name: "id"})
-
-	CreateConfigurationResponse_LatestRevision = CreateConfigurationResponse.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	CreateConfigurationResponse_Name = CreateConfigurationResponse.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	CreateTagsRequest_ResourceArn = CreateTagsRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	CreateTagsRequest_Tags = CreateTagsRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateUserRequest_BrokerId = CreateUserRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateUserRequest_ConsoleAccess = CreateUserRequest.AddMember("ConsoleAccess", ___boolean, &smithytraits.JSONName{Name: "consoleAccess"})
-
-	CreateUserRequest_Groups = CreateUserRequest.AddMember("Groups", ___listOf__string, &smithytraits.JSONName{Name: "groups"})
-
-	CreateUserRequest_Password = CreateUserRequest.AddMember("Password", ___string, &smithytraits.JSONName{Name: "password"})
-
-	CreateUserRequest_Username = CreateUserRequest.AddMember("Username", ___string, &smithytraits.HTTPLabel{})
-
-	CreateUserRequest_ReplicationUser = CreateUserRequest.AddMember("ReplicationUser", ___boolean, &smithytraits.JSONName{Name: "replicationUser"})
-
-	DeleteBrokerRequest_BrokerId = DeleteBrokerRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBrokerResponse_BrokerId = DeleteBrokerResponse.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	DeleteConfigurationRequest_ConfigurationId = DeleteConfigurationRequest.AddMember("ConfigurationId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationResponse_ConfigurationId = DeleteConfigurationResponse.AddMember("ConfigurationId", ___string, &smithytraits.JSONName{Name: "configurationId"})
-
-	DeleteTagsRequest_ResourceArn = DeleteTagsRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteTagsRequest_TagKeys = DeleteTagsRequest.AddMember("TagKeys", ___listOf__string, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	DeleteUserRequest_BrokerId = DeleteUserRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteUserRequest_Username = DeleteUserRequest.AddMember("Username", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeBrokerEngineTypesRequest_EngineType = DescribeBrokerEngineTypesRequest.AddMember("EngineType", ___string, &smithytraits.HTTPQuery{Name: "engineType"})
-
-	DescribeBrokerEngineTypesRequest_MaxResults = DescribeBrokerEngineTypesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeBrokerEngineTypesRequest_NextToken = DescribeBrokerEngineTypesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeBrokerEngineTypesResponse_BrokerEngineTypes = DescribeBrokerEngineTypesResponse.AddMember("BrokerEngineTypes", ___listOfBrokerEngineType, &smithytraits.JSONName{Name: "brokerEngineTypes"})
-
-	DescribeBrokerEngineTypesResponse_MaxResults = DescribeBrokerEngineTypesResponse.AddMember("MaxResults", ___integerMin5Max100, &smithytraits.JSONName{Name: "maxResults"})
-
-	DescribeBrokerEngineTypesResponse_NextToken = DescribeBrokerEngineTypesResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	DescribeBrokerRequest_BrokerId = DescribeBrokerRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeBrokerInstanceOptionsRequest_EngineType = DescribeBrokerInstanceOptionsRequest.AddMember("EngineType", ___string, &smithytraits.HTTPQuery{Name: "engineType"})
-
-	DescribeBrokerInstanceOptionsRequest_HostInstanceType = DescribeBrokerInstanceOptionsRequest.AddMember("HostInstanceType", ___string, &smithytraits.HTTPQuery{Name: "hostInstanceType"})
-
-	DescribeBrokerInstanceOptionsRequest_MaxResults = DescribeBrokerInstanceOptionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeBrokerInstanceOptionsRequest_NextToken = DescribeBrokerInstanceOptionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeBrokerInstanceOptionsRequest_StorageType = DescribeBrokerInstanceOptionsRequest.AddMember("StorageType", ___string, &smithytraits.HTTPQuery{Name: "storageType"})
-
-	DescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions = DescribeBrokerInstanceOptionsResponse.AddMember("BrokerInstanceOptions", ___listOfBrokerInstanceOption, &smithytraits.JSONName{Name: "brokerInstanceOptions"})
-
-	DescribeBrokerInstanceOptionsResponse_MaxResults = DescribeBrokerInstanceOptionsResponse.AddMember("MaxResults", ___integerMin5Max100, &smithytraits.JSONName{Name: "maxResults"})
-
-	DescribeBrokerInstanceOptionsResponse_NextToken = DescribeBrokerInstanceOptionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	DescribeBrokerResponse_ActionsRequired = DescribeBrokerResponse.AddMember("ActionsRequired", ___listOfActionRequired, &smithytraits.JSONName{Name: "actionsRequired"})
-
-	DescribeBrokerResponse_AuthenticationStrategy = DescribeBrokerResponse.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	DescribeBrokerResponse_AutoMinorVersionUpgrade = DescribeBrokerResponse.AddMember("AutoMinorVersionUpgrade", ___boolean, &smithytraits.JSONName{Name: "autoMinorVersionUpgrade"})
-
-	DescribeBrokerResponse_BrokerArn = DescribeBrokerResponse.AddMember("BrokerArn", ___string, &smithytraits.JSONName{Name: "brokerArn"})
-
-	DescribeBrokerResponse_BrokerId = DescribeBrokerResponse.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	DescribeBrokerResponse_BrokerInstances = DescribeBrokerResponse.AddMember("BrokerInstances", ___listOfBrokerInstance, &smithytraits.JSONName{Name: "brokerInstances"})
-
-	DescribeBrokerResponse_BrokerName = DescribeBrokerResponse.AddMember("BrokerName", ___string, &smithytraits.JSONName{Name: "brokerName"})
-
-	DescribeBrokerResponse_BrokerState = DescribeBrokerResponse.AddMember("BrokerState", BrokerState, &smithytraits.JSONName{Name: "brokerState"})
-
-	DescribeBrokerResponse_Configurations = DescribeBrokerResponse.AddMember("Configurations", Configurations, &smithytraits.JSONName{Name: "configurations"})
-
-	DescribeBrokerResponse_Created = DescribeBrokerResponse.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	DescribeBrokerResponse_DeploymentMode = DescribeBrokerResponse.AddMember("DeploymentMode", DeploymentMode, &smithytraits.JSONName{Name: "deploymentMode"})
-
-	DescribeBrokerResponse_EncryptionOptions = DescribeBrokerResponse.AddMember("EncryptionOptions", EncryptionOptions, &smithytraits.JSONName{Name: "encryptionOptions"})
-
-	DescribeBrokerResponse_EngineType = DescribeBrokerResponse.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	DescribeBrokerResponse_EngineVersion = DescribeBrokerResponse.AddMember("EngineVersion", ___string, &smithytraits.JSONName{Name: "engineVersion"})
-
-	DescribeBrokerResponse_HostInstanceType = DescribeBrokerResponse.AddMember("HostInstanceType", ___string, &smithytraits.JSONName{Name: "hostInstanceType"})
-
-	DescribeBrokerResponse_LdapServerMetadata = DescribeBrokerResponse.AddMember("LdapServerMetadata", LdapServerMetadataOutput, &smithytraits.JSONName{Name: "ldapServerMetadata"})
-
-	DescribeBrokerResponse_Logs = DescribeBrokerResponse.AddMember("Logs", LogsSummary, &smithytraits.JSONName{Name: "logs"})
-
-	DescribeBrokerResponse_MaintenanceWindowStartTime = DescribeBrokerResponse.AddMember("MaintenanceWindowStartTime", WeeklyStartTime, &smithytraits.JSONName{Name: "maintenanceWindowStartTime"})
-
-	DescribeBrokerResponse_PendingAuthenticationStrategy = DescribeBrokerResponse.AddMember("PendingAuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "pendingAuthenticationStrategy"})
-
-	DescribeBrokerResponse_PendingEngineVersion = DescribeBrokerResponse.AddMember("PendingEngineVersion", ___string, &smithytraits.JSONName{Name: "pendingEngineVersion"})
-
-	DescribeBrokerResponse_PendingHostInstanceType = DescribeBrokerResponse.AddMember("PendingHostInstanceType", ___string, &smithytraits.JSONName{Name: "pendingHostInstanceType"})
-
-	DescribeBrokerResponse_PendingLdapServerMetadata = DescribeBrokerResponse.AddMember("PendingLdapServerMetadata", LdapServerMetadataOutput, &smithytraits.JSONName{Name: "pendingLdapServerMetadata"})
-
-	DescribeBrokerResponse_PendingSecurityGroups = DescribeBrokerResponse.AddMember("PendingSecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "pendingSecurityGroups"})
-
-	DescribeBrokerResponse_PendingStorageSize = DescribeBrokerResponse.AddMember("PendingStorageSize", ___integer, &smithytraits.JSONName{Name: "pendingStorageSize"})
-
-	DescribeBrokerResponse_PubliclyAccessible = DescribeBrokerResponse.AddMember("PubliclyAccessible", ___boolean, &smithytraits.JSONName{Name: "publiclyAccessible"})
-
-	DescribeBrokerResponse_SecurityGroups = DescribeBrokerResponse.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	DescribeBrokerResponse_StorageSize = DescribeBrokerResponse.AddMember("StorageSize", ___integer, &smithytraits.JSONName{Name: "storageSize"})
-
-	DescribeBrokerResponse_StorageType = DescribeBrokerResponse.AddMember("StorageType", BrokerStorageType, &smithytraits.JSONName{Name: "storageType"})
-
-	DescribeBrokerResponse_SubnetIds = DescribeBrokerResponse.AddMember("SubnetIds", ___listOf__string, &smithytraits.JSONName{Name: "subnetIds"})
-
-	DescribeBrokerResponse_Tags = DescribeBrokerResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeBrokerResponse_Users = DescribeBrokerResponse.AddMember("Users", ___listOfUserSummary, &smithytraits.JSONName{Name: "users"})
-
-	DescribeBrokerResponse_DataReplicationMetadata = DescribeBrokerResponse.AddMember("DataReplicationMetadata", DataReplicationMetadataOutput, &smithytraits.JSONName{Name: "dataReplicationMetadata"})
-
-	DescribeBrokerResponse_DataReplicationMode = DescribeBrokerResponse.AddMember("DataReplicationMode", DataReplicationMode, &smithytraits.JSONName{Name: "dataReplicationMode"})
-
-	DescribeBrokerResponse_PendingDataReplicationMetadata = DescribeBrokerResponse.AddMember("PendingDataReplicationMetadata", DataReplicationMetadataOutput, &smithytraits.JSONName{Name: "pendingDataReplicationMetadata"})
-
-	DescribeBrokerResponse_PendingDataReplicationMode = DescribeBrokerResponse.AddMember("PendingDataReplicationMode", DataReplicationMode, &smithytraits.JSONName{Name: "pendingDataReplicationMode"})
-
-	DescribeConfigurationRequest_ConfigurationId = DescribeConfigurationRequest.AddMember("ConfigurationId", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConfigurationResponse_Arn = DescribeConfigurationResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	DescribeConfigurationResponse_AuthenticationStrategy = DescribeConfigurationResponse.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	DescribeConfigurationResponse_Created = DescribeConfigurationResponse.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	DescribeConfigurationResponse_Description = DescribeConfigurationResponse.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	DescribeConfigurationResponse_EngineType = DescribeConfigurationResponse.AddMember("EngineType", EngineType, &smithytraits.JSONName{Name: "engineType"})
-
-	DescribeConfigurationResponse_EngineVersion = DescribeConfigurationResponse.AddMember("EngineVersion", ___string, &smithytraits.JSONName{Name: "engineVersion"})
-
-	DescribeConfigurationResponse_Id = DescribeConfigurationResponse.AddMember("Id", ___string, &smithytraits.JSONName{Name: "id"})
-
-	DescribeConfigurationResponse_LatestRevision = DescribeConfigurationResponse.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	DescribeConfigurationResponse_Name = DescribeConfigurationResponse.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	DescribeConfigurationResponse_Tags = DescribeConfigurationResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeConfigurationRevisionRequest_ConfigurationId = DescribeConfigurationRevisionRequest.AddMember("ConfigurationId", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConfigurationRevisionRequest_ConfigurationRevision = DescribeConfigurationRevisionRequest.AddMember("ConfigurationRevision", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConfigurationRevisionResponse_ConfigurationId = DescribeConfigurationRevisionResponse.AddMember("ConfigurationId", ___string, &smithytraits.JSONName{Name: "configurationId"})
-
-	DescribeConfigurationRevisionResponse_Created = DescribeConfigurationRevisionResponse.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	DescribeConfigurationRevisionResponse_Data = DescribeConfigurationRevisionResponse.AddMember("Data", ___string, &smithytraits.JSONName{Name: "data"})
-
-	DescribeConfigurationRevisionResponse_Description = DescribeConfigurationRevisionResponse.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	DescribeSharedResourcesRequest_BrokerId = DescribeSharedResourcesRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeSharedResourcesRequest_MaxResults = DescribeSharedResourcesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeSharedResourcesRequest_NextToken = DescribeSharedResourcesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeSharedResourcesResponse_NextToken = DescribeSharedResourcesResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	DescribeSharedResourcesResponse_SharedResources = DescribeSharedResourcesResponse.AddMember("SharedResources", ___listOfSharedResource, &smithytraits.JSONName{Name: "sharedResources"})
-
-	DescribeUserRequest_BrokerId = DescribeUserRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeUserRequest_Username = DescribeUserRequest.AddMember("Username", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeUserResponse_BrokerId = DescribeUserResponse.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	DescribeUserResponse_ConsoleAccess = DescribeUserResponse.AddMember("ConsoleAccess", ___boolean, &smithytraits.JSONName{Name: "consoleAccess"})
-
-	DescribeUserResponse_Groups = DescribeUserResponse.AddMember("Groups", ___listOf__string, &smithytraits.JSONName{Name: "groups"})
-
-	DescribeUserResponse_Pending = DescribeUserResponse.AddMember("Pending", UserPendingChanges, &smithytraits.JSONName{Name: "pending"})
-
-	DescribeUserResponse_Username = DescribeUserResponse.AddMember("Username", ___string, &smithytraits.JSONName{Name: "username"})
-
-	DescribeUserResponse_ReplicationUser = DescribeUserResponse.AddMember("ReplicationUser", ___boolean, &smithytraits.JSONName{Name: "replicationUser"})
-
-	ListBrokersRequest_MaxResults = ListBrokersRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListBrokersRequest_NextToken = ListBrokersRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListBrokersResponse_BrokerSummaries = ListBrokersResponse.AddMember("BrokerSummaries", ___listOfBrokerSummary, &smithytraits.JSONName{Name: "brokerSummaries"})
-
-	ListBrokersResponse_NextToken = ListBrokersResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListConfigurationRevisionsRequest_ConfigurationId = ListConfigurationRevisionsRequest.AddMember("ConfigurationId", ___string, &smithytraits.HTTPLabel{})
-
-	ListConfigurationRevisionsRequest_MaxResults = ListConfigurationRevisionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfigurationRevisionsRequest_NextToken = ListConfigurationRevisionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfigurationRevisionsResponse_ConfigurationId = ListConfigurationRevisionsResponse.AddMember("ConfigurationId", ___string, &smithytraits.JSONName{Name: "configurationId"})
-
-	ListConfigurationRevisionsResponse_MaxResults = ListConfigurationRevisionsResponse.AddMember("MaxResults", ___integer, &smithytraits.JSONName{Name: "maxResults"})
-
-	ListConfigurationRevisionsResponse_NextToken = ListConfigurationRevisionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListConfigurationRevisionsResponse_Revisions = ListConfigurationRevisionsResponse.AddMember("Revisions", ___listOfConfigurationRevision, &smithytraits.JSONName{Name: "revisions"})
-
-	ListConfigurationsRequest_MaxResults = ListConfigurationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfigurationsRequest_NextToken = ListConfigurationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfigurationsResponse_Configurations = ListConfigurationsResponse.AddMember("Configurations", ___listOfConfiguration, &smithytraits.JSONName{Name: "configurations"})
-
-	ListConfigurationsResponse_MaxResults = ListConfigurationsResponse.AddMember("MaxResults", ___integer, &smithytraits.JSONName{Name: "maxResults"})
-
-	ListConfigurationsResponse_NextToken = ListConfigurationsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListTagsRequest_ResourceArn = ListTagsRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTagsResponse_Tags = ListTagsResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	ListUsersRequest_BrokerId = ListUsersRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	ListUsersRequest_MaxResults = ListUsersRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListUsersRequest_NextToken = ListUsersRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListUsersResponse_BrokerId = ListUsersResponse.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	ListUsersResponse_MaxResults = ListUsersResponse.AddMember("MaxResults", ___integerMin5Max100, &smithytraits.JSONName{Name: "maxResults"})
-
-	ListUsersResponse_NextToken = ListUsersResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListUsersResponse_Users = ListUsersResponse.AddMember("Users", ___listOfUserSummary, &smithytraits.JSONName{Name: "users"})
-
-	PromoteRequest_BrokerId = PromoteRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	PromoteRequest_Mode = PromoteRequest.AddMember("Mode", PromoteMode, &smithytraits.JSONName{Name: "mode"})
-
-	PromoteResponse_BrokerId = PromoteResponse.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	RebootBrokerRequest_BrokerId = RebootBrokerRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBrokerRequest_AuthenticationStrategy = UpdateBrokerRequest.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	UpdateBrokerRequest_AutoMinorVersionUpgrade = UpdateBrokerRequest.AddMember("AutoMinorVersionUpgrade", ___boolean, &smithytraits.JSONName{Name: "autoMinorVersionUpgrade"})
-
-	UpdateBrokerRequest_BrokerId = UpdateBrokerRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBrokerRequest_Configuration = UpdateBrokerRequest.AddMember("Configuration", ConfigurationId, &smithytraits.JSONName{Name: "configuration"})
-
-	UpdateBrokerRequest_EngineVersion = UpdateBrokerRequest.AddMember("EngineVersion", ___string, &smithytraits.JSONName{Name: "engineVersion"})
-
-	UpdateBrokerRequest_HostInstanceType = UpdateBrokerRequest.AddMember("HostInstanceType", ___string, &smithytraits.JSONName{Name: "hostInstanceType"})
-
-	UpdateBrokerRequest_LdapServerMetadata = UpdateBrokerRequest.AddMember("LdapServerMetadata", LdapServerMetadataInput, &smithytraits.JSONName{Name: "ldapServerMetadata"})
-
-	UpdateBrokerRequest_Logs = UpdateBrokerRequest.AddMember("Logs", Logs, &smithytraits.JSONName{Name: "logs"})
-
-	UpdateBrokerRequest_MaintenanceWindowStartTime = UpdateBrokerRequest.AddMember("MaintenanceWindowStartTime", WeeklyStartTime, &smithytraits.JSONName{Name: "maintenanceWindowStartTime"})
-
-	UpdateBrokerRequest_ResourceShareArns = UpdateBrokerRequest.AddMember("ResourceShareArns", ___listOf__string, &smithytraits.JSONName{Name: "resourceShareArns"})
-
-	UpdateBrokerRequest_SecurityGroups = UpdateBrokerRequest.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	UpdateBrokerRequest_StorageSize = UpdateBrokerRequest.AddMember("StorageSize", ___integer, &smithytraits.JSONName{Name: "storageSize"})
-
-	UpdateBrokerRequest_DataReplicationMode = UpdateBrokerRequest.AddMember("DataReplicationMode", DataReplicationMode, &smithytraits.JSONName{Name: "dataReplicationMode"})
-
-	UpdateBrokerResponse_AuthenticationStrategy = UpdateBrokerResponse.AddMember("AuthenticationStrategy", AuthenticationStrategy, &smithytraits.JSONName{Name: "authenticationStrategy"})
-
-	UpdateBrokerResponse_AutoMinorVersionUpgrade = UpdateBrokerResponse.AddMember("AutoMinorVersionUpgrade", ___boolean, &smithytraits.JSONName{Name: "autoMinorVersionUpgrade"})
-
-	UpdateBrokerResponse_BrokerId = UpdateBrokerResponse.AddMember("BrokerId", ___string, &smithytraits.JSONName{Name: "brokerId"})
-
-	UpdateBrokerResponse_Configuration = UpdateBrokerResponse.AddMember("Configuration", ConfigurationId, &smithytraits.JSONName{Name: "configuration"})
-
-	UpdateBrokerResponse_EngineVersion = UpdateBrokerResponse.AddMember("EngineVersion", ___string, &smithytraits.JSONName{Name: "engineVersion"})
-
-	UpdateBrokerResponse_HostInstanceType = UpdateBrokerResponse.AddMember("HostInstanceType", ___string, &smithytraits.JSONName{Name: "hostInstanceType"})
-
-	UpdateBrokerResponse_LdapServerMetadata = UpdateBrokerResponse.AddMember("LdapServerMetadata", LdapServerMetadataOutput, &smithytraits.JSONName{Name: "ldapServerMetadata"})
-
-	UpdateBrokerResponse_Logs = UpdateBrokerResponse.AddMember("Logs", Logs, &smithytraits.JSONName{Name: "logs"})
-
-	UpdateBrokerResponse_MaintenanceWindowStartTime = UpdateBrokerResponse.AddMember("MaintenanceWindowStartTime", WeeklyStartTime, &smithytraits.JSONName{Name: "maintenanceWindowStartTime"})
-
-	UpdateBrokerResponse_ResourceShareArns = UpdateBrokerResponse.AddMember("ResourceShareArns", ___listOf__string, &smithytraits.JSONName{Name: "resourceShareArns"})
-
-	UpdateBrokerResponse_SecurityGroups = UpdateBrokerResponse.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	UpdateBrokerResponse_DataReplicationMetadata = UpdateBrokerResponse.AddMember("DataReplicationMetadata", DataReplicationMetadataOutput, &smithytraits.JSONName{Name: "dataReplicationMetadata"})
-
-	UpdateBrokerResponse_DataReplicationMode = UpdateBrokerResponse.AddMember("DataReplicationMode", DataReplicationMode, &smithytraits.JSONName{Name: "dataReplicationMode"})
-
-	UpdateBrokerResponse_PendingDataReplicationMetadata = UpdateBrokerResponse.AddMember("PendingDataReplicationMetadata", DataReplicationMetadataOutput, &smithytraits.JSONName{Name: "pendingDataReplicationMetadata"})
-
-	UpdateBrokerResponse_PendingDataReplicationMode = UpdateBrokerResponse.AddMember("PendingDataReplicationMode", DataReplicationMode, &smithytraits.JSONName{Name: "pendingDataReplicationMode"})
-
-	UpdateBrokerResponse_StorageSize = UpdateBrokerResponse.AddMember("StorageSize", ___integer, &smithytraits.JSONName{Name: "storageSize"})
-
-	UpdateConfigurationRequest_ConfigurationId = UpdateConfigurationRequest.AddMember("ConfigurationId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationRequest_Data = UpdateConfigurationRequest.AddMember("Data", ___string, &smithytraits.JSONName{Name: "data"})
-
-	UpdateConfigurationRequest_Description = UpdateConfigurationRequest.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	UpdateConfigurationResponse_Arn = UpdateConfigurationResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	UpdateConfigurationResponse_Created = UpdateConfigurationResponse.AddMember("Created", ___timestampIso8601, &smithytraits.JSONName{Name: "created"})
-
-	UpdateConfigurationResponse_Id = UpdateConfigurationResponse.AddMember("Id", ___string, &smithytraits.JSONName{Name: "id"})
-
-	UpdateConfigurationResponse_LatestRevision = UpdateConfigurationResponse.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	UpdateConfigurationResponse_Name = UpdateConfigurationResponse.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	UpdateConfigurationResponse_Warnings = UpdateConfigurationResponse.AddMember("Warnings", ___listOfSanitizationWarning, &smithytraits.JSONName{Name: "warnings"})
-
-	UpdateUserRequest_BrokerId = UpdateUserRequest.AddMember("BrokerId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateUserRequest_ConsoleAccess = UpdateUserRequest.AddMember("ConsoleAccess", ___boolean, &smithytraits.JSONName{Name: "consoleAccess"})
-
-	UpdateUserRequest_Groups = UpdateUserRequest.AddMember("Groups", ___listOf__string, &smithytraits.JSONName{Name: "groups"})
-
-	UpdateUserRequest_Password = UpdateUserRequest.AddMember("Password", ___string, &smithytraits.JSONName{Name: "password"})
-
-	UpdateUserRequest_Username = UpdateUserRequest.AddMember("Username", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateUserRequest_ReplicationUser = UpdateUserRequest.AddMember("ReplicationUser", ___boolean, &smithytraits.JSONName{Name: "replicationUser"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "actionRequiredCode"}}, DirectMask: 0x1}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "actionRequiredInfo"}}, DirectMask: 0x1}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "name"}}, DirectMask: 0x1}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorAttribute"}}, DirectMask: 0x1}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceShareErrors"}}, DirectMask: 0x1}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "engineType"}}, DirectMask: 0x1}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "engineVersions"}}, DirectMask: 0x1}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "consoleURL"}}, DirectMask: 0x1}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "endpoints"}}, DirectMask: 0x1}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ipAddress"}}, DirectMask: 0x1}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "availabilityZones"}}, DirectMask: 0x1}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "hostInstanceType"}}, DirectMask: 0x1}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "storageType"}}, DirectMask: 0x1}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "supportedDeploymentModes"}}, DirectMask: 0x1}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "supportedEngineVersions"}}, DirectMask: 0x1}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerArn"}}, DirectMask: 0x1}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerId"}}, DirectMask: 0x1}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerName"}}, DirectMask: 0x1}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerState"}}, DirectMask: 0x1}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "created"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deploymentMode"}}, DirectMask: 0x1}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "arn"}}, DirectMask: 0x1}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authenticationStrategy"}}, DirectMask: 0x1}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "description"}}, DirectMask: 0x1}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "engineVersion"}}, DirectMask: 0x1}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "id"}}, DirectMask: 0x1}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "latestRevision"}}, DirectMask: 0x1}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tags"}}, DirectMask: 0x1}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "revision"}}, DirectMask: 0x1}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "current"}}, DirectMask: 0x1}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "history"}}, DirectMask: 0x1}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pending"}}, DirectMask: 0x1}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "region"}}, DirectMask: 0x1}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataReplicationCounterpart"}}, DirectMask: 0x1}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataReplicationRole"}}, DirectMask: 0x1}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kmsKeyId"}}, DirectMask: 0x1}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "useAwsOwnedKey"}}, DirectMask: 0x1}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "hosts"}}, DirectMask: 0x1}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "roleBase"}}, DirectMask: 0x1}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "roleName"}}, DirectMask: 0x1}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "roleSearchMatching"}}, DirectMask: 0x1}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "roleSearchSubtree"}}, DirectMask: 0x1}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "serviceAccountPassword"}}, DirectMask: 0x1}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "serviceAccountUsername"}}, DirectMask: 0x1}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userBase"}}, DirectMask: 0x1}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userRoleName"}}, DirectMask: 0x1}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userSearchMatching"}}, DirectMask: 0x1}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userSearchSubtree"}}, DirectMask: 0x1}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "audit"}}, DirectMask: 0x1}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "general"}}, DirectMask: 0x1}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "auditLogGroup"}}, DirectMask: 0x1}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "generalLogGroup"}}, DirectMask: 0x1}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorCode"}}, DirectMask: 0x1}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceShareArn"}}, DirectMask: 0x1}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "status"}}, DirectMask: 0x1}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "attributeName"}}, DirectMask: 0x1}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "elementName"}}, DirectMask: 0x1}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "reason"}}, DirectMask: 0x1}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dnsNames"}}, DirectMask: 0x1}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "error"}}, DirectMask: 0x1}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceArn"}}, DirectMask: 0x1}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceShareArns"}}, DirectMask: 0x1}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "type"}}, DirectMask: 0x1}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "code"}}, DirectMask: 0x1}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "consoleAccess"}}, DirectMask: 0x1}
+var t98 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "groups"}}, DirectMask: 0x1}
+var t99 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "password"}}, DirectMask: 0x1}
+var t100 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "username"}}, DirectMask: 0x1}
+var t101 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicationUser"}}, DirectMask: 0x1}
+var t102 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingChange"}}, DirectMask: 0x1}
+var t103 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dayOfWeek"}}, DirectMask: 0x1}
+var t104 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "timeOfDay"}}, DirectMask: 0x1}
+var t105 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "timeZone"}}, DirectMask: 0x1}
+var t106 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "autoMinorVersionUpgrade"}}, DirectMask: 0x1}
+var t107 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configuration"}}, DirectMask: 0x1}
+var t108 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "creatorRequestId"}}, DirectMask: 0x1}
+var t109 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "encryptionOptions"}}, DirectMask: 0x1}
+var t110 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ldapServerMetadata"}}, DirectMask: 0x1}
+var t111 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "logs"}}, DirectMask: 0x1}
+var t112 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "maintenanceWindowStartTime"}}, DirectMask: 0x1}
+var t113 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "publiclyAccessible"}}, DirectMask: 0x1}
+var t114 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "securityGroups"}}, DirectMask: 0x1}
+var t115 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "storageSize"}}, DirectMask: 0x1}
+var t116 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "subnetIds"}}, DirectMask: 0x1}
+var t117 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "users"}}, DirectMask: 0x1}
+var t118 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataReplicationMode"}}, DirectMask: 0x1}
+var t119 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataReplicationPrimaryBrokerArn"}}, DirectMask: 0x1}
+var t120 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t121 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configurationId"}}, DirectMask: 0x1}
+var t122 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+var t123 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "engineType"}}, DirectMask: 0x10}
+var t124 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t125 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t126 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerEngineTypes"}}, DirectMask: 0x1}
+var t127 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "maxResults"}}, DirectMask: 0x1}
+var t128 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nextToken"}}, DirectMask: 0x1}
+var t129 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "hostInstanceType"}}, DirectMask: 0x10}
+var t130 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "storageType"}}, DirectMask: 0x10}
+var t131 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerInstanceOptions"}}, DirectMask: 0x1}
+var t132 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "actionsRequired"}}, DirectMask: 0x1}
+var t133 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerInstances"}}, DirectMask: 0x1}
+var t134 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configurations"}}, DirectMask: 0x1}
+var t135 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingAuthenticationStrategy"}}, DirectMask: 0x1}
+var t136 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingEngineVersion"}}, DirectMask: 0x1}
+var t137 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingHostInstanceType"}}, DirectMask: 0x1}
+var t138 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingLdapServerMetadata"}}, DirectMask: 0x1}
+var t139 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingSecurityGroups"}}, DirectMask: 0x1}
+var t140 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingStorageSize"}}, DirectMask: 0x1}
+var t141 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataReplicationMetadata"}}, DirectMask: 0x1}
+var t142 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingDataReplicationMetadata"}}, DirectMask: 0x1}
+var t143 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pendingDataReplicationMode"}}, DirectMask: 0x1}
+var t144 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "data"}}, DirectMask: 0x1}
+var t145 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sharedResources"}}, DirectMask: 0x1}
+var t146 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerSummaries"}}, DirectMask: 0x1}
+var t147 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "revisions"}}, DirectMask: 0x1}
+var t148 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mode"}}, DirectMask: 0x1}
+var t149 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "warnings"}}, DirectMask: 0x1}
+
+var m___listOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__string_member}}
+var m___listOfActionRequired = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfActionRequired_member}}
+var m___listOfAvailabilityZone = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfAvailabilityZone_member}}
+var m___listOfBrokerEngineType = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfBrokerEngineType_member}}
+var m___listOfBrokerInstance = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfBrokerInstance_member}}
+var m___listOfBrokerInstanceOption = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfBrokerInstanceOption_member}}
+var m___listOfBrokerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfBrokerSummary_member}}
+var m___listOfConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConfiguration_member}}
+var m___listOfConfigurationId = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConfigurationId_member}}
+var m___listOfConfigurationRevision = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConfigurationRevision_member}}
+var m___listOfDeploymentMode = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfDeploymentMode_member}}
+var m___listOfEngineVersion = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfEngineVersion_member}}
+var m___listOfResourceShareError = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfResourceShareError_member}}
+var m___listOfSanitizationWarning = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSanitizationWarning_member}}
+var m___listOfSharedResource = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSharedResource_member}}
+var m___listOfUser = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfUser_member}}
+var m___listOfUserSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfUserSummary_member}}
+var m___mapOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___mapOf__string_key, &s___mapOf__string_value}}
+var mActionRequired = smithy.SchemaMembers{List: []*smithy.Schema{&sActionRequired_ActionRequiredCode, &sActionRequired_ActionRequiredInfo}}
+var mAuthenticationStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationStrategy_SIMPLE, &sAuthenticationStrategy_LDAP, &sAuthenticationStrategy_CONFIG_MANAGED}}
+var mAvailabilityZone = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityZone_Name}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_ErrorAttribute, &sBadRequestException_Message, &sBadRequestException_ResourceShareErrors}}
+var mBrokerEngineType = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerEngineType_EngineType, &sBrokerEngineType_EngineVersions}}
+var mBrokerInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerInstance_ConsoleURL, &sBrokerInstance_Endpoints, &sBrokerInstance_IpAddress}}
+var mBrokerInstanceOption = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerInstanceOption_AvailabilityZones, &sBrokerInstanceOption_EngineType, &sBrokerInstanceOption_HostInstanceType, &sBrokerInstanceOption_StorageType, &sBrokerInstanceOption_SupportedDeploymentModes, &sBrokerInstanceOption_SupportedEngineVersions}}
+var mBrokerState = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerState_CREATION_IN_PROGRESS, &sBrokerState_CREATION_FAILED, &sBrokerState_DELETION_IN_PROGRESS, &sBrokerState_RUNNING, &sBrokerState_REBOOT_IN_PROGRESS, &sBrokerState_CRITICAL_ACTION_REQUIRED, &sBrokerState_REPLICA}}
+var mBrokerStorageType = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerStorageType_EBS, &sBrokerStorageType_EFS}}
+var mBrokerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerSummary_BrokerArn, &sBrokerSummary_BrokerId, &sBrokerSummary_BrokerName, &sBrokerSummary_BrokerState, &sBrokerSummary_Created, &sBrokerSummary_DeploymentMode, &sBrokerSummary_EngineType, &sBrokerSummary_HostInstanceType}}
+var mChangeType = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeType_CREATE, &sChangeType_UPDATE, &sChangeType_DELETE}}
+var mConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguration_Arn, &sConfiguration_AuthenticationStrategy, &sConfiguration_Created, &sConfiguration_Description, &sConfiguration_EngineType, &sConfiguration_EngineVersion, &sConfiguration_Id, &sConfiguration_LatestRevision, &sConfiguration_Name, &sConfiguration_Tags}, Hash: &hConfiguration}
+var mConfigurationId = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationId_Id, &sConfigurationId_Revision}}
+var mConfigurationRevision = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationRevision_Created, &sConfigurationRevision_Description, &sConfigurationRevision_Revision}}
+var mConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurations_Current, &sConfigurations_History, &sConfigurations_Pending}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_ErrorAttribute, &sConflictException_Message, &sConflictException_ResourceShareErrors}}
+var mDataReplicationCounterpart = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationCounterpart_BrokerId, &sDataReplicationCounterpart_Region}}
+var mDataReplicationMetadataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationMetadataOutput_DataReplicationCounterpart, &sDataReplicationMetadataOutput_DataReplicationRole}}
+var mDataReplicationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationMode_NONE, &sDataReplicationMode_CRDR}}
+var mDayOfWeek = smithy.SchemaMembers{List: []*smithy.Schema{&sDayOfWeek_MONDAY, &sDayOfWeek_TUESDAY, &sDayOfWeek_WEDNESDAY, &sDayOfWeek_THURSDAY, &sDayOfWeek_FRIDAY, &sDayOfWeek_SATURDAY, &sDayOfWeek_SUNDAY}}
+var mDeploymentMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentMode_SINGLE_INSTANCE, &sDeploymentMode_ACTIVE_STANDBY_MULTI_AZ, &sDeploymentMode_CLUSTER_MULTI_AZ}}
+var mEncryptionOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionOptions_KmsKeyId, &sEncryptionOptions_UseAwsOwnedKey}}
+var mEngineType = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineType_ACTIVEMQ, &sEngineType_RABBITMQ}}
+var mEngineVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineVersion_Name}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_ErrorAttribute, &sForbiddenException_Message, &sForbiddenException_ResourceShareErrors}}
+var mInternalServerErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerErrorException_ErrorAttribute, &sInternalServerErrorException_Message, &sInternalServerErrorException_ResourceShareErrors}}
+var mLdapServerMetadataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sLdapServerMetadataInput_Hosts, &sLdapServerMetadataInput_RoleBase, &sLdapServerMetadataInput_RoleName, &sLdapServerMetadataInput_RoleSearchMatching, &sLdapServerMetadataInput_RoleSearchSubtree, &sLdapServerMetadataInput_ServiceAccountPassword, &sLdapServerMetadataInput_ServiceAccountUsername, &sLdapServerMetadataInput_UserBase, &sLdapServerMetadataInput_UserRoleName, &sLdapServerMetadataInput_UserSearchMatching, &sLdapServerMetadataInput_UserSearchSubtree}, Hash: &hLdapServerMetadataInput}
+var mLdapServerMetadataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sLdapServerMetadataOutput_Hosts, &sLdapServerMetadataOutput_RoleBase, &sLdapServerMetadataOutput_RoleName, &sLdapServerMetadataOutput_RoleSearchMatching, &sLdapServerMetadataOutput_RoleSearchSubtree, &sLdapServerMetadataOutput_ServiceAccountUsername, &sLdapServerMetadataOutput_UserBase, &sLdapServerMetadataOutput_UserRoleName, &sLdapServerMetadataOutput_UserSearchMatching, &sLdapServerMetadataOutput_UserSearchSubtree}, Hash: &hLdapServerMetadataOutput}
+var mLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sLogs_Audit, &sLogs_General}}
+var mLogsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsSummary_Audit, &sLogsSummary_AuditLogGroup, &sLogsSummary_General, &sLogsSummary_GeneralLogGroup, &sLogsSummary_Pending}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_ErrorAttribute, &sNotFoundException_Message, &sNotFoundException_ResourceShareErrors}}
+var mPendingLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingLogs_Audit, &sPendingLogs_General}}
+var mPromoteMode = smithy.SchemaMembers{List: []*smithy.Schema{&sPromoteMode_SWITCHOVER, &sPromoteMode_FAILOVER}}
+var mResourceShareError = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceShareError_ErrorCode, &sResourceShareError_ResourceShareArn, &sResourceShareError_Status}}
+var mSanitizationWarning = smithy.SchemaMembers{List: []*smithy.Schema{&sSanitizationWarning_AttributeName, &sSanitizationWarning_ElementName, &sSanitizationWarning_Reason}}
+var mSanitizationWarningReason = smithy.SchemaMembers{List: []*smithy.Schema{&sSanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED, &sSanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED, &sSanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED}}
+var mSharedResource = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedResource_DnsNames, &sSharedResource_Error, &sSharedResource_ResourceArn, &sSharedResource_ResourceShareArns, &sSharedResource_Status, &sSharedResource_Type}}
+var mSharedResourceError = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedResourceError_Code, &sSharedResourceError_Message}}
+var mSharedResourceErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedResourceErrorCode_QUOTA_EXCEEDED, &sSharedResourceErrorCode_SHARE_NOT_FOUND, &sSharedResourceErrorCode_INVITE_FAILED, &sSharedResourceErrorCode_SETUP_INCOMPLETE, &sSharedResourceErrorCode_INTERNAL_ERROR, &sSharedResourceErrorCode_AZ_MISMATCH, &sSharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND}}
+var mSharedResourceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedResourceStatus_AVAILABLE, &sSharedResourceStatus_SETUP_IN_PROGRESS, &sSharedResourceStatus_DELETION_IN_PROGRESS, &sSharedResourceStatus_PENDING_CREATE, &sSharedResourceStatus_PENDING_DELETE, &sSharedResourceStatus_ERROR}}
+var mSharedResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedResourceType_RESOURCE_SHARE, &sSharedResourceType_RESOURCE}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_ErrorAttribute, &sUnauthorizedException_Message, &sUnauthorizedException_ResourceShareErrors}}
+var mUser = smithy.SchemaMembers{List: []*smithy.Schema{&sUser_ConsoleAccess, &sUser_Groups, &sUser_Password, &sUser_Username, &sUser_ReplicationUser}}
+var mUserPendingChanges = smithy.SchemaMembers{List: []*smithy.Schema{&sUserPendingChanges_ConsoleAccess, &sUserPendingChanges_Groups, &sUserPendingChanges_PendingChange}}
+var mUserSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sUserSummary_PendingChange, &sUserSummary_Username}}
+var mWeeklyStartTime = smithy.SchemaMembers{List: []*smithy.Schema{&sWeeklyStartTime_DayOfWeek, &sWeeklyStartTime_TimeOfDay, &sWeeklyStartTime_TimeZone}}
+var mCreateBrokerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrokerRequest_AuthenticationStrategy, &sCreateBrokerRequest_AutoMinorVersionUpgrade, &sCreateBrokerRequest_BrokerName, &sCreateBrokerRequest_Configuration, &sCreateBrokerRequest_CreatorRequestId, &sCreateBrokerRequest_DeploymentMode, &sCreateBrokerRequest_EncryptionOptions, &sCreateBrokerRequest_EngineType, &sCreateBrokerRequest_EngineVersion, &sCreateBrokerRequest_HostInstanceType, &sCreateBrokerRequest_LdapServerMetadata, &sCreateBrokerRequest_Logs, &sCreateBrokerRequest_MaintenanceWindowStartTime, &sCreateBrokerRequest_PubliclyAccessible, &sCreateBrokerRequest_SecurityGroups, &sCreateBrokerRequest_StorageSize, &sCreateBrokerRequest_StorageType, &sCreateBrokerRequest_SubnetIds, &sCreateBrokerRequest_Tags, &sCreateBrokerRequest_Users, &sCreateBrokerRequest_DataReplicationMode, &sCreateBrokerRequest_DataReplicationPrimaryBrokerArn}, Hash: &hCreateBrokerRequest}
+var mCreateBrokerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrokerResponse_BrokerArn, &sCreateBrokerResponse_BrokerId}}
+var mCreateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationRequest_AuthenticationStrategy, &sCreateConfigurationRequest_EngineType, &sCreateConfigurationRequest_EngineVersion, &sCreateConfigurationRequest_Name, &sCreateConfigurationRequest_Tags}}
+var mCreateConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationResponse_Arn, &sCreateConfigurationResponse_AuthenticationStrategy, &sCreateConfigurationResponse_Created, &sCreateConfigurationResponse_Id, &sCreateConfigurationResponse_LatestRevision, &sCreateConfigurationResponse_Name}}
+var mCreateTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTagsRequest_ResourceArn, &sCreateTagsRequest_Tags}}
+var mCreateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserRequest_BrokerId, &sCreateUserRequest_ConsoleAccess, &sCreateUserRequest_Groups, &sCreateUserRequest_Password, &sCreateUserRequest_Username, &sCreateUserRequest_ReplicationUser}}
+var mDeleteBrokerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBrokerRequest_BrokerId}}
+var mDeleteBrokerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBrokerResponse_BrokerId}}
+var mDeleteConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationRequest_ConfigurationId}}
+var mDeleteConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationResponse_ConfigurationId}}
+var mDeleteTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTagsRequest_ResourceArn, &sDeleteTagsRequest_TagKeys}}
+var mDeleteUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUserRequest_BrokerId, &sDeleteUserRequest_Username}}
+var mDescribeBrokerEngineTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBrokerEngineTypesRequest_EngineType, &sDescribeBrokerEngineTypesRequest_MaxResults, &sDescribeBrokerEngineTypesRequest_NextToken}}
+var mDescribeBrokerEngineTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBrokerEngineTypesResponse_BrokerEngineTypes, &sDescribeBrokerEngineTypesResponse_MaxResults, &sDescribeBrokerEngineTypesResponse_NextToken}}
+var mDescribeBrokerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBrokerRequest_BrokerId}}
+var mDescribeBrokerInstanceOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBrokerInstanceOptionsRequest_EngineType, &sDescribeBrokerInstanceOptionsRequest_HostInstanceType, &sDescribeBrokerInstanceOptionsRequest_MaxResults, &sDescribeBrokerInstanceOptionsRequest_NextToken, &sDescribeBrokerInstanceOptionsRequest_StorageType}}
+var mDescribeBrokerInstanceOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions, &sDescribeBrokerInstanceOptionsResponse_MaxResults, &sDescribeBrokerInstanceOptionsResponse_NextToken}}
+var mDescribeBrokerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBrokerResponse_ActionsRequired, &sDescribeBrokerResponse_AuthenticationStrategy, &sDescribeBrokerResponse_AutoMinorVersionUpgrade, &sDescribeBrokerResponse_BrokerArn, &sDescribeBrokerResponse_BrokerId, &sDescribeBrokerResponse_BrokerInstances, &sDescribeBrokerResponse_BrokerName, &sDescribeBrokerResponse_BrokerState, &sDescribeBrokerResponse_Configurations, &sDescribeBrokerResponse_Created, &sDescribeBrokerResponse_DeploymentMode, &sDescribeBrokerResponse_EncryptionOptions, &sDescribeBrokerResponse_EngineType, &sDescribeBrokerResponse_EngineVersion, &sDescribeBrokerResponse_HostInstanceType, &sDescribeBrokerResponse_LdapServerMetadata, &sDescribeBrokerResponse_Logs, &sDescribeBrokerResponse_MaintenanceWindowStartTime, &sDescribeBrokerResponse_PendingAuthenticationStrategy, &sDescribeBrokerResponse_PendingEngineVersion, &sDescribeBrokerResponse_PendingHostInstanceType, &sDescribeBrokerResponse_PendingLdapServerMetadata, &sDescribeBrokerResponse_PendingSecurityGroups, &sDescribeBrokerResponse_PendingStorageSize, &sDescribeBrokerResponse_PubliclyAccessible, &sDescribeBrokerResponse_SecurityGroups, &sDescribeBrokerResponse_StorageSize, &sDescribeBrokerResponse_StorageType, &sDescribeBrokerResponse_SubnetIds, &sDescribeBrokerResponse_Tags, &sDescribeBrokerResponse_Users, &sDescribeBrokerResponse_DataReplicationMetadata, &sDescribeBrokerResponse_DataReplicationMode, &sDescribeBrokerResponse_PendingDataReplicationMetadata, &sDescribeBrokerResponse_PendingDataReplicationMode}, Hash: &hDescribeBrokerResponse}
+var mDescribeConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationRequest_ConfigurationId}}
+var mDescribeConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationResponse_Arn, &sDescribeConfigurationResponse_AuthenticationStrategy, &sDescribeConfigurationResponse_Created, &sDescribeConfigurationResponse_Description, &sDescribeConfigurationResponse_EngineType, &sDescribeConfigurationResponse_EngineVersion, &sDescribeConfigurationResponse_Id, &sDescribeConfigurationResponse_LatestRevision, &sDescribeConfigurationResponse_Name, &sDescribeConfigurationResponse_Tags}, Hash: &hDescribeConfigurationResponse}
+var mDescribeConfigurationRevisionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationRevisionRequest_ConfigurationId, &sDescribeConfigurationRevisionRequest_ConfigurationRevision}}
+var mDescribeConfigurationRevisionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationRevisionResponse_ConfigurationId, &sDescribeConfigurationRevisionResponse_Created, &sDescribeConfigurationRevisionResponse_Data, &sDescribeConfigurationRevisionResponse_Description}}
+var mDescribeSharedResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSharedResourcesRequest_BrokerId, &sDescribeSharedResourcesRequest_MaxResults, &sDescribeSharedResourcesRequest_NextToken}}
+var mDescribeSharedResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSharedResourcesResponse_NextToken, &sDescribeSharedResourcesResponse_SharedResources}}
+var mDescribeUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserRequest_BrokerId, &sDescribeUserRequest_Username}}
+var mDescribeUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserResponse_BrokerId, &sDescribeUserResponse_ConsoleAccess, &sDescribeUserResponse_Groups, &sDescribeUserResponse_Pending, &sDescribeUserResponse_Username, &sDescribeUserResponse_ReplicationUser}}
+var mListBrokersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrokersRequest_MaxResults, &sListBrokersRequest_NextToken}}
+var mListBrokersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrokersResponse_BrokerSummaries, &sListBrokersResponse_NextToken}}
+var mListConfigurationRevisionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationRevisionsRequest_ConfigurationId, &sListConfigurationRevisionsRequest_MaxResults, &sListConfigurationRevisionsRequest_NextToken}}
+var mListConfigurationRevisionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationRevisionsResponse_ConfigurationId, &sListConfigurationRevisionsResponse_MaxResults, &sListConfigurationRevisionsResponse_NextToken, &sListConfigurationRevisionsResponse_Revisions}}
+var mListConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationsRequest_MaxResults, &sListConfigurationsRequest_NextToken}}
+var mListConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationsResponse_Configurations, &sListConfigurationsResponse_MaxResults, &sListConfigurationsResponse_NextToken}}
+var mListTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsRequest_ResourceArn}}
+var mListTagsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsResponse_Tags}}
+var mListUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersRequest_BrokerId, &sListUsersRequest_MaxResults, &sListUsersRequest_NextToken}}
+var mListUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersResponse_BrokerId, &sListUsersResponse_MaxResults, &sListUsersResponse_NextToken, &sListUsersResponse_Users}}
+var mPromoteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPromoteRequest_BrokerId, &sPromoteRequest_Mode}}
+var mPromoteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPromoteResponse_BrokerId}}
+var mRebootBrokerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRebootBrokerRequest_BrokerId}}
+var mUpdateBrokerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerRequest_AuthenticationStrategy, &sUpdateBrokerRequest_AutoMinorVersionUpgrade, &sUpdateBrokerRequest_BrokerId, &sUpdateBrokerRequest_Configuration, &sUpdateBrokerRequest_EngineVersion, &sUpdateBrokerRequest_HostInstanceType, &sUpdateBrokerRequest_LdapServerMetadata, &sUpdateBrokerRequest_Logs, &sUpdateBrokerRequest_MaintenanceWindowStartTime, &sUpdateBrokerRequest_ResourceShareArns, &sUpdateBrokerRequest_SecurityGroups, &sUpdateBrokerRequest_StorageSize, &sUpdateBrokerRequest_DataReplicationMode}, Hash: &hUpdateBrokerRequest}
+var mUpdateBrokerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerResponse_AuthenticationStrategy, &sUpdateBrokerResponse_AutoMinorVersionUpgrade, &sUpdateBrokerResponse_BrokerId, &sUpdateBrokerResponse_Configuration, &sUpdateBrokerResponse_EngineVersion, &sUpdateBrokerResponse_HostInstanceType, &sUpdateBrokerResponse_LdapServerMetadata, &sUpdateBrokerResponse_Logs, &sUpdateBrokerResponse_MaintenanceWindowStartTime, &sUpdateBrokerResponse_ResourceShareArns, &sUpdateBrokerResponse_SecurityGroups, &sUpdateBrokerResponse_DataReplicationMetadata, &sUpdateBrokerResponse_DataReplicationMode, &sUpdateBrokerResponse_PendingDataReplicationMetadata, &sUpdateBrokerResponse_PendingDataReplicationMode, &sUpdateBrokerResponse_StorageSize}, Hash: &hUpdateBrokerResponse}
+var mUpdateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationRequest_ConfigurationId, &sUpdateConfigurationRequest_Data, &sUpdateConfigurationRequest_Description}}
+var mUpdateConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationResponse_Arn, &sUpdateConfigurationResponse_Created, &sUpdateConfigurationResponse_Id, &sUpdateConfigurationResponse_LatestRevision, &sUpdateConfigurationResponse_Name, &sUpdateConfigurationResponse_Warnings}}
+var mUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequest_BrokerId, &sUpdateUserRequest_ConsoleAccess, &sUpdateUserRequest_Groups, &sUpdateUserRequest_Password, &sUpdateUserRequest_Username, &sUpdateUserRequest_ReplicationUser}}
+
+var hConfiguration = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 10, 0, 9, 0, 2, 6, 8, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 4, 1, 0, 0,
+	0, 0, 0, 0, 3, 0, 0, 5,
+}}
+var hLdapServerMetadataInput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 0, 2, 0, 10, 0, 0, 9, 0, 0, 7, 0, 11, 8, 0, 0, 0, 6, 0,
+	1, 0, 0, 0, 0, 0, 4, 5,
+}}
+var hLdapServerMetadataOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 0, 2, 0, 9, 0, 0, 8, 0, 0, 6, 0, 10, 7, 0, 0, 0, 0, 0,
+	1, 0, 0, 0, 0, 0, 4, 5,
+}}
+var hCreateBrokerRequest = smithy.MemberHash{Seed: 90, Slots: []uint16{
+	0, 21, 7, 0, 0, 16, 0, 0, 0, 0, 0, 2, 0, 18, 0, 6, 0, 0, 9, 20, 0, 12, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 10, 0, 14, 17, 0, 0, 0, 11, 19, 0, 0, 0,
+	0, 0, 0, 0, 0, 4, 0, 22, 5, 1, 0, 0, 0, 3, 15, 8,
+}}
+var hDescribeBrokerResponse = smithy.MemberHash{Seed: 729, Slots: []uint16{
+	6, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 19, 9, 0, 0, 0, 23, 0, 0, 22, 0, 7, 0, 0,
+	0, 0, 0, 0, 0, 0, 28, 8, 30, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 16,
+	0, 0, 0, 0, 13, 0, 29, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 17, 0, 5, 0, 0, 0, 11,
+	0, 0, 4, 0, 1, 12, 0, 0, 0, 0, 2, 0, 0, 0, 0, 14, 10, 0, 0, 0, 35, 0, 0, 0,
+	0, 0, 32, 0, 0, 0, 24, 0, 0, 0, 33, 26, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 18, 0,
+	3, 0, 0, 27, 0, 20, 0, 0,
+}}
+var hDescribeConfigurationResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 10, 0, 9, 0, 2, 6, 8, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 4, 1, 0, 0,
+	0, 0, 0, 0, 3, 0, 0, 5,
+}}
+var hUpdateBrokerRequest = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 12, 0, 0, 3, 0, 8, 0, 0, 2, 9, 1, 0, 0, 0, 10, 11, 13, 0, 0, 0, 0, 0, 6,
+	0, 5, 7, 0, 0, 4, 0, 0,
+}}
+var hUpdateBrokerResponse = smithy.MemberHash{Seed: 55, Slots: []uint16{
+	0, 11, 2, 0, 0, 8, 3, 0, 0, 0, 7, 10, 15, 12, 0, 16, 5, 0, 1, 0, 0, 14, 0, 13,
+	0, 0, 4, 0, 6, 0, 9, 0,
+}}
+
+var sCreateBroker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBroker, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateBroker})
+var sCreateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguration, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateConfiguration})
+var sCreateTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTags, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateTags})
+var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateUser})
+var sDeleteBroker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBroker, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBroker})
+var sDeleteConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConfiguration})
+var sDeleteTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTags, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTags})
+var sDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUser, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteUser})
+var sDescribeBroker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBroker, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBroker})
+var sDescribeBrokerEngineTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerEngineTypes, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBrokerEngineTypes})
+var sDescribeBrokerInstanceOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerInstanceOptions, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBrokerInstanceOptions})
+var sDescribeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfiguration, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConfiguration})
+var sDescribeConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRevision, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConfigurationRevision})
+var sDescribeSharedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedResources, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSharedResources})
+var sDescribeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUser, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDescribeUser})
+var sListBrokers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrokers, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListBrokers})
+var sListConfigurationRevisions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationRevisions, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListConfigurationRevisions})
+var sListConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurations, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListConfigurations})
+var sListTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTags, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListTags})
+var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListUsers})
+var sPromote = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromote, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ePromote})
+var sRebootBroker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootBroker, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eRebootBroker})
+var sUpdateBroker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBroker, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBroker})
+var sUpdateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfiguration, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConfiguration})
+var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUpdateUser})
+var s_mq = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_mq, Type: smithy.ShapeTypeService, Ext: &e_mq})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &e___boolean})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &e___integer})
+var s___integerMin5Max100 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin5Max100, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin5Max100})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &e___listOf__string})
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___listOf__string_member})
+var s___listOfActionRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfActionRequired, Members: &m___listOfActionRequired, Type: smithy.ShapeTypeList, Ext: &e___listOfActionRequired})
+var s___listOfActionRequired_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionRequired, Members: &mActionRequired, Type: smithy.ShapeTypeStructure, Ext: &e___listOfActionRequired_member})
+var s___listOfAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfAvailabilityZone, Members: &m___listOfAvailabilityZone, Type: smithy.ShapeTypeList, Ext: &e___listOfAvailabilityZone})
+var s___listOfAvailabilityZone_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailabilityZone, Members: &mAvailabilityZone, Type: smithy.ShapeTypeStructure, Ext: &e___listOfAvailabilityZone_member})
+var s___listOfBrokerEngineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfBrokerEngineType, Members: &m___listOfBrokerEngineType, Type: smithy.ShapeTypeList, Ext: &e___listOfBrokerEngineType})
+var s___listOfBrokerEngineType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrokerEngineType, Members: &mBrokerEngineType, Type: smithy.ShapeTypeStructure, Ext: &e___listOfBrokerEngineType_member})
+var s___listOfBrokerInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfBrokerInstance, Members: &m___listOfBrokerInstance, Type: smithy.ShapeTypeList, Ext: &e___listOfBrokerInstance})
+var s___listOfBrokerInstance_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrokerInstance, Members: &mBrokerInstance, Type: smithy.ShapeTypeStructure, Ext: &e___listOfBrokerInstance_member})
+var s___listOfBrokerInstanceOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfBrokerInstanceOption, Members: &m___listOfBrokerInstanceOption, Type: smithy.ShapeTypeList, Ext: &e___listOfBrokerInstanceOption})
+var s___listOfBrokerInstanceOption_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrokerInstanceOption, Members: &mBrokerInstanceOption, Type: smithy.ShapeTypeStructure, Ext: &e___listOfBrokerInstanceOption_member})
+var s___listOfBrokerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfBrokerSummary, Members: &m___listOfBrokerSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfBrokerSummary})
+var s___listOfBrokerSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrokerSummary, Members: &mBrokerSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfBrokerSummary_member})
+var s___listOfConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConfiguration, Members: &m___listOfConfiguration, Type: smithy.ShapeTypeList, Ext: &e___listOfConfiguration})
+var s___listOfConfiguration_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfiguration, Members: &mConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConfiguration_member})
+var s___listOfConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConfigurationId, Members: &m___listOfConfigurationId, Type: smithy.ShapeTypeList, Ext: &e___listOfConfigurationId})
+var s___listOfConfigurationId_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationId, Members: &mConfigurationId, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConfigurationId_member})
+var s___listOfConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConfigurationRevision, Members: &m___listOfConfigurationRevision, Type: smithy.ShapeTypeList, Ext: &e___listOfConfigurationRevision})
+var s___listOfConfigurationRevision_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConfigurationRevision_member})
+var s___listOfDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfDeploymentMode, Members: &m___listOfDeploymentMode, Type: smithy.ShapeTypeList, Ext: &e___listOfDeploymentMode})
+var s___listOfDeploymentMode_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentMode, Members: &mDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &e___listOfDeploymentMode_member})
+var s___listOfEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfEngineVersion, Members: &m___listOfEngineVersion, Type: smithy.ShapeTypeList, Ext: &e___listOfEngineVersion})
+var s___listOfEngineVersion_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure, Ext: &e___listOfEngineVersion_member})
+var s___listOfResourceShareError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfResourceShareError, Members: &m___listOfResourceShareError, Type: smithy.ShapeTypeList, Ext: &e___listOfResourceShareError})
+var s___listOfResourceShareError_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceShareError, Members: &mResourceShareError, Type: smithy.ShapeTypeStructure, Ext: &e___listOfResourceShareError_member})
+var s___listOfSanitizationWarning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSanitizationWarning, Members: &m___listOfSanitizationWarning, Type: smithy.ShapeTypeList, Ext: &e___listOfSanitizationWarning})
+var s___listOfSanitizationWarning_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSanitizationWarning, Members: &mSanitizationWarning, Type: smithy.ShapeTypeStructure, Ext: &e___listOfSanitizationWarning_member})
+var s___listOfSharedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSharedResource, Members: &m___listOfSharedResource, Type: smithy.ShapeTypeList, Ext: &e___listOfSharedResource})
+var s___listOfSharedResource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSharedResource, Members: &mSharedResource, Type: smithy.ShapeTypeStructure, Ext: &e___listOfSharedResource_member})
+var s___listOfUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfUser, Members: &m___listOfUser, Type: smithy.ShapeTypeList, Ext: &e___listOfUser})
+var s___listOfUser_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &e___listOfUser_member})
+var s___listOfUserSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfUserSummary, Members: &m___listOfUserSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfUserSummary})
+var s___listOfUserSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserSummary, Members: &mUserSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfUserSummary_member})
+var s___mapOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &e___mapOf__string})
+var s___mapOf__string_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_key})
+var s___mapOf__string_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_value})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var s___timestampIso8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &e___timestampIso8601})
+var sActionRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionRequired, Members: &mActionRequired, Type: smithy.ShapeTypeStructure, Ext: &eActionRequired})
+var sActionRequired_ActionRequiredCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionRequiredCode", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eActionRequired_ActionRequiredCode})
+var sActionRequired_ActionRequiredInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionRequiredInfo", ID: &i___string, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eActionRequired_ActionRequiredInfo})
+var sAuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticationStrategy})
+var sAuthenticationStrategy_SIMPLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMPLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationStrategy_SIMPLE})
+var sAuthenticationStrategy_LDAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationStrategy_LDAP})
+var sAuthenticationStrategy_CONFIG_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIG_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationStrategy_CONFIG_MANAGED})
+var sAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZone, Members: &mAvailabilityZone, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityZone})
+var sAvailabilityZone_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eAvailabilityZone_Name})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_ErrorAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorAttribute", ID: &i___string, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_ErrorAttribute})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sBadRequestException_ResourceShareErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareErrors", ID: &i___listOfResourceShareError, Members: &m___listOfResourceShareError, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eBadRequestException_ResourceShareErrors})
+var sBrokerEngineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerEngineType, Members: &mBrokerEngineType, Type: smithy.ShapeTypeStructure, Ext: &eBrokerEngineType})
+var sBrokerEngineType_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eBrokerEngineType_EngineType})
+var sBrokerEngineType_EngineVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersions", ID: &i___listOfEngineVersion, Members: &m___listOfEngineVersion, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &eBrokerEngineType_EngineVersions})
+var sBrokerInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerInstance, Members: &mBrokerInstance, Type: smithy.ShapeTypeStructure, Ext: &eBrokerInstance})
+var sBrokerInstance_ConsoleURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsoleURL", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eBrokerInstance_ConsoleURL})
+var sBrokerInstance_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eBrokerInstance_Endpoints})
+var sBrokerInstance_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i___string, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eBrokerInstance_IpAddress})
+var sBrokerInstanceOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerInstanceOption, Members: &mBrokerInstanceOption, Type: smithy.ShapeTypeStructure, Ext: &eBrokerInstanceOption})
+var sBrokerInstanceOption_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i___listOfAvailabilityZone, Members: &m___listOfAvailabilityZone, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &eBrokerInstanceOption_AvailabilityZones})
+var sBrokerInstanceOption_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eBrokerInstanceOption_EngineType})
+var sBrokerInstanceOption_HostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostInstanceType", ID: &i___string, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eBrokerInstanceOption_HostInstanceType})
+var sBrokerInstanceOption_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iBrokerStorageType, Members: &mBrokerStorageType, Traits: &t40, Type: smithy.ShapeTypeEnum, Ext: &eBrokerInstanceOption_StorageType})
+var sBrokerInstanceOption_SupportedDeploymentModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedDeploymentModes", ID: &i___listOfDeploymentMode, Members: &m___listOfDeploymentMode, Traits: &t41, Type: smithy.ShapeTypeList, Ext: &eBrokerInstanceOption_SupportedDeploymentModes})
+var sBrokerInstanceOption_SupportedEngineVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedEngineVersions", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t42, Type: smithy.ShapeTypeList, Ext: &eBrokerInstanceOption_SupportedEngineVersions})
+var sBrokerState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerState, Members: &mBrokerState, Type: smithy.ShapeTypeEnum, Ext: &eBrokerState})
+var sBrokerState_CREATION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerState_CREATION_IN_PROGRESS})
+var sBrokerState_CREATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerState_CREATION_FAILED})
+var sBrokerState_DELETION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerState_DELETION_IN_PROGRESS})
+var sBrokerState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerState_RUNNING})
+var sBrokerState_REBOOT_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REBOOT_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerState_REBOOT_IN_PROGRESS})
+var sBrokerState_CRITICAL_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL_ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerState_CRITICAL_ACTION_REQUIRED})
+var sBrokerState_REPLICA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerState_REPLICA})
+var sBrokerStorageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerStorageType, Members: &mBrokerStorageType, Type: smithy.ShapeTypeEnum, Ext: &eBrokerStorageType})
+var sBrokerStorageType_EBS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerStorageType_EBS})
+var sBrokerStorageType_EFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EFS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerStorageType_EFS})
+var sBrokerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerSummary, Members: &mBrokerSummary, Type: smithy.ShapeTypeStructure, Ext: &eBrokerSummary})
+var sBrokerSummary_BrokerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerArn", ID: &i___string, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eBrokerSummary_BrokerArn})
+var sBrokerSummary_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eBrokerSummary_BrokerId})
+var sBrokerSummary_BrokerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eBrokerSummary_BrokerName})
+var sBrokerSummary_BrokerState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerState", ID: &iBrokerState, Members: &mBrokerState, Traits: &t46, Type: smithy.ShapeTypeEnum, Ext: &eBrokerSummary_BrokerState})
+var sBrokerSummary_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eBrokerSummary_Created})
+var sBrokerSummary_DeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentMode", ID: &iDeploymentMode, Members: &mDeploymentMode, Traits: &t48, Type: smithy.ShapeTypeEnum, Ext: &eBrokerSummary_DeploymentMode})
+var sBrokerSummary_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eBrokerSummary_EngineType})
+var sBrokerSummary_HostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostInstanceType", ID: &i___string, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eBrokerSummary_HostInstanceType})
+var sChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeType, Members: &mChangeType, Type: smithy.ShapeTypeEnum, Ext: &eChangeType})
+var sChangeType_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeType_CREATE})
+var sChangeType_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeType_UPDATE})
+var sChangeType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeType_DELETE})
+var sConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguration, Members: &mConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConfiguration})
+var sConfiguration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eConfiguration_Arn})
+var sConfiguration_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eConfiguration_AuthenticationStrategy})
+var sConfiguration_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eConfiguration_Created})
+var sConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eConfiguration_Description})
+var sConfiguration_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eConfiguration_EngineType})
+var sConfiguration_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eConfiguration_EngineVersion})
+var sConfiguration_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eConfiguration_Id})
+var sConfiguration_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eConfiguration_LatestRevision})
+var sConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eConfiguration_Name})
+var sConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t55, Type: smithy.ShapeTypeMap, Ext: &eConfiguration_Tags})
+var sConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationId, Members: &mConfigurationId, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationId})
+var sConfigurationId_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eConfigurationId_Id})
+var sConfigurationId_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i___integer, Traits: &t56, Type: smithy.ShapeTypeInteger, Ext: &eConfigurationId_Revision})
+var sConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationRevision, Members: &mConfigurationRevision, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationRevision})
+var sConfigurationRevision_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eConfigurationRevision_Created})
+var sConfigurationRevision_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eConfigurationRevision_Description})
+var sConfigurationRevision_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i___integer, Traits: &t56, Type: smithy.ShapeTypeInteger, Ext: &eConfigurationRevision_Revision})
+var sConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurations, Members: &mConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eConfigurations})
+var sConfigurations_Current = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Current", ID: &iConfigurationId, Members: &mConfigurationId, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eConfigurations_Current})
+var sConfigurations_History = smithy.NewStaticSchema(smithy.StaticSchema{Member: "History", ID: &i___listOfConfigurationId, Members: &m___listOfConfigurationId, Traits: &t58, Type: smithy.ShapeTypeList, Ext: &eConfigurations_History})
+var sConfigurations_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &iConfigurationId, Members: &mConfigurationId, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eConfigurations_Pending})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t60, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_ErrorAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorAttribute", ID: &i___string, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eConflictException_ErrorAttribute})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_ResourceShareErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareErrors", ID: &i___listOfResourceShareError, Members: &m___listOfResourceShareError, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eConflictException_ResourceShareErrors})
+var sDataReplicationCounterpart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationCounterpart, Members: &mDataReplicationCounterpart, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationCounterpart})
+var sDataReplicationCounterpart_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eDataReplicationCounterpart_BrokerId})
+var sDataReplicationCounterpart_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i___string, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDataReplicationCounterpart_Region})
+var sDataReplicationMetadataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationMetadataOutput, Members: &mDataReplicationMetadataOutput, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationMetadataOutput})
+var sDataReplicationMetadataOutput_DataReplicationCounterpart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationCounterpart", ID: &iDataReplicationCounterpart, Members: &mDataReplicationCounterpart, Traits: &t62, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationMetadataOutput_DataReplicationCounterpart})
+var sDataReplicationMetadataOutput_DataReplicationRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationRole", ID: &i___string, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eDataReplicationMetadataOutput_DataReplicationRole})
+var sDataReplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationMode, Members: &mDataReplicationMode, Type: smithy.ShapeTypeEnum, Ext: &eDataReplicationMode})
+var sDataReplicationMode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationMode_NONE})
+var sDataReplicationMode_CRDR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRDR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationMode_CRDR})
+var sDayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDayOfWeek, Members: &mDayOfWeek, Type: smithy.ShapeTypeEnum, Ext: &eDayOfWeek})
+var sDayOfWeek_MONDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_MONDAY})
+var sDayOfWeek_TUESDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TUESDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_TUESDAY})
+var sDayOfWeek_WEDNESDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEDNESDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_WEDNESDAY})
+var sDayOfWeek_THURSDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THURSDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_THURSDAY})
+var sDayOfWeek_FRIDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRIDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_FRIDAY})
+var sDayOfWeek_SATURDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SATURDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_SATURDAY})
+var sDayOfWeek_SUNDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUNDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_SUNDAY})
+var sDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentMode, Members: &mDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentMode})
+var sDeploymentMode_SINGLE_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentMode_SINGLE_INSTANCE})
+var sDeploymentMode_ACTIVE_STANDBY_MULTI_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE_STANDBY_MULTI_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentMode_ACTIVE_STANDBY_MULTI_AZ})
+var sDeploymentMode_CLUSTER_MULTI_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLUSTER_MULTI_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentMode_CLUSTER_MULTI_AZ})
+var sEncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionOptions, Members: &mEncryptionOptions, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionOptions})
+var sEncryptionOptions_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i___string, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eEncryptionOptions_KmsKeyId})
+var sEncryptionOptions_UseAwsOwnedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseAwsOwnedKey", ID: &i___boolean, Traits: &t65, Type: smithy.ShapeTypeBoolean, Ext: &eEncryptionOptions_UseAwsOwnedKey})
+var sEngineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineType, Members: &mEngineType, Type: smithy.ShapeTypeEnum, Ext: &eEngineType})
+var sEngineType_ACTIVEMQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVEMQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngineType_ACTIVEMQ})
+var sEngineType_RABBITMQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RABBITMQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngineType_RABBITMQ})
+var sEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure, Ext: &eEngineVersion})
+var sEngineVersion_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eEngineVersion_Name})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t66, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_ErrorAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorAttribute", ID: &i___string, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_ErrorAttribute})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_Message})
+var sForbiddenException_ResourceShareErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareErrors", ID: &i___listOfResourceShareError, Members: &m___listOfResourceShareError, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eForbiddenException_ResourceShareErrors})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sInternalServerErrorException_ErrorAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorAttribute", ID: &i___string, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_ErrorAttribute})
+var sInternalServerErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_Message})
+var sInternalServerErrorException_ResourceShareErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareErrors", ID: &i___listOfResourceShareError, Members: &m___listOfResourceShareError, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eInternalServerErrorException_ResourceShareErrors})
+var sLdapServerMetadataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLdapServerMetadataInput, Members: &mLdapServerMetadataInput, Type: smithy.ShapeTypeStructure, Ext: &eLdapServerMetadataInput})
+var sLdapServerMetadataInput_Hosts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hosts", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eLdapServerMetadataInput_Hosts})
+var sLdapServerMetadataInput_RoleBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleBase", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_RoleBase})
+var sLdapServerMetadataInput_RoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleName", ID: &i___string, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_RoleName})
+var sLdapServerMetadataInput_RoleSearchMatching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleSearchMatching", ID: &i___string, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_RoleSearchMatching})
+var sLdapServerMetadataInput_RoleSearchSubtree = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleSearchSubtree", ID: &i___boolean, Traits: &t72, Type: smithy.ShapeTypeBoolean, Ext: &eLdapServerMetadataInput_RoleSearchSubtree})
+var sLdapServerMetadataInput_ServiceAccountPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceAccountPassword", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_ServiceAccountPassword})
+var sLdapServerMetadataInput_ServiceAccountUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceAccountUsername", ID: &i___string, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_ServiceAccountUsername})
+var sLdapServerMetadataInput_UserBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserBase", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_UserBase})
+var sLdapServerMetadataInput_UserRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserRoleName", ID: &i___string, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_UserRoleName})
+var sLdapServerMetadataInput_UserSearchMatching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSearchMatching", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataInput_UserSearchMatching})
+var sLdapServerMetadataInput_UserSearchSubtree = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSearchSubtree", ID: &i___boolean, Traits: &t78, Type: smithy.ShapeTypeBoolean, Ext: &eLdapServerMetadataInput_UserSearchSubtree})
+var sLdapServerMetadataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLdapServerMetadataOutput, Members: &mLdapServerMetadataOutput, Type: smithy.ShapeTypeStructure, Ext: &eLdapServerMetadataOutput})
+var sLdapServerMetadataOutput_Hosts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hosts", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eLdapServerMetadataOutput_Hosts})
+var sLdapServerMetadataOutput_RoleBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleBase", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataOutput_RoleBase})
+var sLdapServerMetadataOutput_RoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleName", ID: &i___string, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataOutput_RoleName})
+var sLdapServerMetadataOutput_RoleSearchMatching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleSearchMatching", ID: &i___string, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataOutput_RoleSearchMatching})
+var sLdapServerMetadataOutput_RoleSearchSubtree = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleSearchSubtree", ID: &i___boolean, Traits: &t72, Type: smithy.ShapeTypeBoolean, Ext: &eLdapServerMetadataOutput_RoleSearchSubtree})
+var sLdapServerMetadataOutput_ServiceAccountUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceAccountUsername", ID: &i___string, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataOutput_ServiceAccountUsername})
+var sLdapServerMetadataOutput_UserBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserBase", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataOutput_UserBase})
+var sLdapServerMetadataOutput_UserRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserRoleName", ID: &i___string, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataOutput_UserRoleName})
+var sLdapServerMetadataOutput_UserSearchMatching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSearchMatching", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eLdapServerMetadataOutput_UserSearchMatching})
+var sLdapServerMetadataOutput_UserSearchSubtree = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSearchSubtree", ID: &i___boolean, Traits: &t78, Type: smithy.ShapeTypeBoolean, Ext: &eLdapServerMetadataOutput_UserSearchSubtree})
+var sLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogs, Members: &mLogs, Type: smithy.ShapeTypeStructure, Ext: &eLogs})
+var sLogs_Audit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audit", ID: &i___boolean, Traits: &t79, Type: smithy.ShapeTypeBoolean, Ext: &eLogs_Audit})
+var sLogs_General = smithy.NewStaticSchema(smithy.StaticSchema{Member: "General", ID: &i___boolean, Traits: &t80, Type: smithy.ShapeTypeBoolean, Ext: &eLogs_General})
+var sLogsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsSummary, Members: &mLogsSummary, Type: smithy.ShapeTypeStructure, Ext: &eLogsSummary})
+var sLogsSummary_Audit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audit", ID: &i___boolean, Traits: &t79, Type: smithy.ShapeTypeBoolean, Ext: &eLogsSummary_Audit})
+var sLogsSummary_AuditLogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogGroup", ID: &i___string, Traits: &t81, Type: smithy.ShapeTypeString, Ext: &eLogsSummary_AuditLogGroup})
+var sLogsSummary_General = smithy.NewStaticSchema(smithy.StaticSchema{Member: "General", ID: &i___boolean, Traits: &t80, Type: smithy.ShapeTypeBoolean, Ext: &eLogsSummary_General})
+var sLogsSummary_GeneralLogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneralLogGroup", ID: &i___string, Traits: &t82, Type: smithy.ShapeTypeString, Ext: &eLogsSummary_GeneralLogGroup})
+var sLogsSummary_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &iPendingLogs, Members: &mPendingLogs, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eLogsSummary_Pending})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t83, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_ErrorAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorAttribute", ID: &i___string, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_ErrorAttribute})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var sNotFoundException_ResourceShareErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareErrors", ID: &i___listOfResourceShareError, Members: &m___listOfResourceShareError, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eNotFoundException_ResourceShareErrors})
+var sPendingLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingLogs, Members: &mPendingLogs, Type: smithy.ShapeTypeStructure, Ext: &ePendingLogs})
+var sPendingLogs_Audit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audit", ID: &i___boolean, Traits: &t79, Type: smithy.ShapeTypeBoolean, Ext: &ePendingLogs_Audit})
+var sPendingLogs_General = smithy.NewStaticSchema(smithy.StaticSchema{Member: "General", ID: &i___boolean, Traits: &t80, Type: smithy.ShapeTypeBoolean, Ext: &ePendingLogs_General})
+var sPromoteMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteMode, Members: &mPromoteMode, Type: smithy.ShapeTypeEnum, Ext: &ePromoteMode})
+var sPromoteMode_SWITCHOVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SWITCHOVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePromoteMode_SWITCHOVER})
+var sPromoteMode_FAILOVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILOVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePromoteMode_FAILOVER})
+var sResourceShareError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceShareError, Members: &mResourceShareError, Type: smithy.ShapeTypeStructure, Ext: &eResourceShareError})
+var sResourceShareError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i___string, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eResourceShareError_ErrorCode})
+var sResourceShareError_ResourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareArn", ID: &i___string, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eResourceShareError_ResourceShareArn})
+var sResourceShareError_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &eResourceShareError_Status})
+var sSanitizationWarning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSanitizationWarning, Members: &mSanitizationWarning, Type: smithy.ShapeTypeStructure, Ext: &eSanitizationWarning})
+var sSanitizationWarning_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i___string, Traits: &t87, Type: smithy.ShapeTypeString, Ext: &eSanitizationWarning_AttributeName})
+var sSanitizationWarning_ElementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElementName", ID: &i___string, Traits: &t88, Type: smithy.ShapeTypeString, Ext: &eSanitizationWarning_ElementName})
+var sSanitizationWarning_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iSanitizationWarningReason, Members: &mSanitizationWarningReason, Traits: &t89, Type: smithy.ShapeTypeEnum, Ext: &eSanitizationWarning_Reason})
+var sSanitizationWarningReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSanitizationWarningReason, Members: &mSanitizationWarningReason, Type: smithy.ShapeTypeEnum, Ext: &eSanitizationWarningReason})
+var sSanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISALLOWED_ELEMENT_REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED})
+var sSanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISALLOWED_ATTRIBUTE_REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED})
+var sSanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_VALUE_REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED})
+var sSharedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedResource, Members: &mSharedResource, Type: smithy.ShapeTypeStructure, Ext: &eSharedResource})
+var sSharedResource_DnsNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsNames", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t90, Type: smithy.ShapeTypeList, Ext: &eSharedResource_DnsNames})
+var sSharedResource_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iSharedResourceError, Members: &mSharedResourceError, Traits: &t91, Type: smithy.ShapeTypeStructure, Ext: &eSharedResource_Error})
+var sSharedResource_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t92, Type: smithy.ShapeTypeString, Ext: &eSharedResource_ResourceArn})
+var sSharedResource_ResourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareArns", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t93, Type: smithy.ShapeTypeList, Ext: &eSharedResource_ResourceShareArns})
+var sSharedResource_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSharedResourceStatus, Members: &mSharedResourceStatus, Traits: &t86, Type: smithy.ShapeTypeEnum, Ext: &eSharedResource_Status})
+var sSharedResource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSharedResourceType, Members: &mSharedResourceType, Traits: &t94, Type: smithy.ShapeTypeEnum, Ext: &eSharedResource_Type})
+var sSharedResourceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedResourceError, Members: &mSharedResourceError, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceError})
+var sSharedResourceError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iSharedResourceErrorCode, Members: &mSharedResourceErrorCode, Traits: &t95, Type: smithy.ShapeTypeEnum, Ext: &eSharedResourceError_Code})
+var sSharedResourceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eSharedResourceError_Message})
+var sSharedResourceErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedResourceErrorCode, Members: &mSharedResourceErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eSharedResourceErrorCode})
+var sSharedResourceErrorCode_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceErrorCode_QUOTA_EXCEEDED})
+var sSharedResourceErrorCode_SHARE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceErrorCode_SHARE_NOT_FOUND})
+var sSharedResourceErrorCode_INVITE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVITE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceErrorCode_INVITE_FAILED})
+var sSharedResourceErrorCode_SETUP_INCOMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SETUP_INCOMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceErrorCode_SETUP_INCOMPLETE})
+var sSharedResourceErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceErrorCode_INTERNAL_ERROR})
+var sSharedResourceErrorCode_AZ_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceErrorCode_AZ_MISMATCH})
+var sSharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_CONFIGURATION_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND})
+var sSharedResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedResourceStatus, Members: &mSharedResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eSharedResourceStatus})
+var sSharedResourceStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceStatus_AVAILABLE})
+var sSharedResourceStatus_SETUP_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SETUP_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceStatus_SETUP_IN_PROGRESS})
+var sSharedResourceStatus_DELETION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceStatus_DELETION_IN_PROGRESS})
+var sSharedResourceStatus_PENDING_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceStatus_PENDING_CREATE})
+var sSharedResourceStatus_PENDING_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceStatus_PENDING_DELETE})
+var sSharedResourceStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceStatus_ERROR})
+var sSharedResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedResourceType, Members: &mSharedResourceType, Type: smithy.ShapeTypeEnum, Ext: &eSharedResourceType})
+var sSharedResourceType_RESOURCE_SHARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_SHARE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceType_RESOURCE_SHARE})
+var sSharedResourceType_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceType_RESOURCE})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t96, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sUnauthorizedException_ErrorAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorAttribute", ID: &i___string, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_ErrorAttribute})
+var sUnauthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_Message})
+var sUnauthorizedException_ResourceShareErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareErrors", ID: &i___listOfResourceShareError, Members: &m___listOfResourceShareError, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eUnauthorizedException_ResourceShareErrors})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &eUser})
+var sUser_ConsoleAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsoleAccess", ID: &i___boolean, Traits: &t97, Type: smithy.ShapeTypeBoolean, Ext: &eUser_ConsoleAccess})
+var sUser_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t98, Type: smithy.ShapeTypeList, Ext: &eUser_Groups})
+var sUser_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eUser_Password})
+var sUser_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i___string, Traits: &t100, Type: smithy.ShapeTypeString, Ext: &eUser_Username})
+var sUser_ReplicationUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationUser", ID: &i___boolean, Traits: &t101, Type: smithy.ShapeTypeBoolean, Ext: &eUser_ReplicationUser})
+var sUserPendingChanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserPendingChanges, Members: &mUserPendingChanges, Type: smithy.ShapeTypeStructure, Ext: &eUserPendingChanges})
+var sUserPendingChanges_ConsoleAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsoleAccess", ID: &i___boolean, Traits: &t97, Type: smithy.ShapeTypeBoolean, Ext: &eUserPendingChanges_ConsoleAccess})
+var sUserPendingChanges_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t98, Type: smithy.ShapeTypeList, Ext: &eUserPendingChanges_Groups})
+var sUserPendingChanges_PendingChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingChange", ID: &iChangeType, Members: &mChangeType, Traits: &t102, Type: smithy.ShapeTypeEnum, Ext: &eUserPendingChanges_PendingChange})
+var sUserSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserSummary, Members: &mUserSummary, Type: smithy.ShapeTypeStructure, Ext: &eUserSummary})
+var sUserSummary_PendingChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingChange", ID: &iChangeType, Members: &mChangeType, Traits: &t102, Type: smithy.ShapeTypeEnum, Ext: &eUserSummary_PendingChange})
+var sUserSummary_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i___string, Traits: &t100, Type: smithy.ShapeTypeString, Ext: &eUserSummary_Username})
+var sWeeklyStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWeeklyStartTime, Members: &mWeeklyStartTime, Type: smithy.ShapeTypeStructure, Ext: &eWeeklyStartTime})
+var sWeeklyStartTime_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfWeek", ID: &iDayOfWeek, Members: &mDayOfWeek, Traits: &t103, Type: smithy.ShapeTypeEnum, Ext: &eWeeklyStartTime_DayOfWeek})
+var sWeeklyStartTime_TimeOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeOfDay", ID: &i___string, Traits: &t104, Type: smithy.ShapeTypeString, Ext: &eWeeklyStartTime_TimeOfDay})
+var sWeeklyStartTime_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString, Ext: &eWeeklyStartTime_TimeZone})
+var sCreateBrokerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrokerRequest, Members: &mCreateBrokerRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrokerRequest})
+var sCreateBrokerRequest_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eCreateBrokerRequest_AuthenticationStrategy})
+var sCreateBrokerRequest_AutoMinorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMinorVersionUpgrade", ID: &i___boolean, Traits: &t106, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBrokerRequest_AutoMinorVersionUpgrade})
+var sCreateBrokerRequest_BrokerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateBrokerRequest_BrokerName})
+var sCreateBrokerRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iConfigurationId, Members: &mConfigurationId, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrokerRequest_Configuration})
+var sCreateBrokerRequest_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i___string, Traits: &t108, Type: smithy.ShapeTypeString, Ext: &eCreateBrokerRequest_CreatorRequestId})
+var sCreateBrokerRequest_DeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentMode", ID: &iDeploymentMode, Members: &mDeploymentMode, Traits: &t48, Type: smithy.ShapeTypeEnum, Ext: &eCreateBrokerRequest_DeploymentMode})
+var sCreateBrokerRequest_EncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionOptions", ID: &iEncryptionOptions, Members: &mEncryptionOptions, Traits: &t109, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrokerRequest_EncryptionOptions})
+var sCreateBrokerRequest_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eCreateBrokerRequest_EngineType})
+var sCreateBrokerRequest_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateBrokerRequest_EngineVersion})
+var sCreateBrokerRequest_HostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostInstanceType", ID: &i___string, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateBrokerRequest_HostInstanceType})
+var sCreateBrokerRequest_LdapServerMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LdapServerMetadata", ID: &iLdapServerMetadataInput, Members: &mLdapServerMetadataInput, Traits: &t110, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrokerRequest_LdapServerMetadata})
+var sCreateBrokerRequest_Logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Logs", ID: &iLogs, Members: &mLogs, Traits: &t111, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrokerRequest_Logs})
+var sCreateBrokerRequest_MaintenanceWindowStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceWindowStartTime", ID: &iWeeklyStartTime, Members: &mWeeklyStartTime, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrokerRequest_MaintenanceWindowStartTime})
+var sCreateBrokerRequest_PubliclyAccessible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PubliclyAccessible", ID: &i___boolean, Traits: &t113, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBrokerRequest_PubliclyAccessible})
+var sCreateBrokerRequest_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t114, Type: smithy.ShapeTypeList, Ext: &eCreateBrokerRequest_SecurityGroups})
+var sCreateBrokerRequest_StorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageSize", ID: &i___integer, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eCreateBrokerRequest_StorageSize})
+var sCreateBrokerRequest_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iBrokerStorageType, Members: &mBrokerStorageType, Traits: &t40, Type: smithy.ShapeTypeEnum, Ext: &eCreateBrokerRequest_StorageType})
+var sCreateBrokerRequest_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t116, Type: smithy.ShapeTypeList, Ext: &eCreateBrokerRequest_SubnetIds})
+var sCreateBrokerRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t55, Type: smithy.ShapeTypeMap, Ext: &eCreateBrokerRequest_Tags})
+var sCreateBrokerRequest_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i___listOfUser, Members: &m___listOfUser, Traits: &t117, Type: smithy.ShapeTypeList, Ext: &eCreateBrokerRequest_Users})
+var sCreateBrokerRequest_DataReplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationMode", ID: &iDataReplicationMode, Members: &mDataReplicationMode, Traits: &t118, Type: smithy.ShapeTypeEnum, Ext: &eCreateBrokerRequest_DataReplicationMode})
+var sCreateBrokerRequest_DataReplicationPrimaryBrokerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationPrimaryBrokerArn", ID: &i___string, Traits: &t119, Type: smithy.ShapeTypeString, Ext: &eCreateBrokerRequest_DataReplicationPrimaryBrokerArn})
+var sCreateBrokerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrokerResponse, Members: &mCreateBrokerResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrokerResponse})
+var sCreateBrokerResponse_BrokerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerArn", ID: &i___string, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eCreateBrokerResponse_BrokerArn})
+var sCreateBrokerResponse_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eCreateBrokerResponse_BrokerId})
+var sCreateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationRequest, Members: &mCreateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationRequest})
+var sCreateConfigurationRequest_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eCreateConfigurationRequest_AuthenticationStrategy})
+var sCreateConfigurationRequest_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eCreateConfigurationRequest_EngineType})
+var sCreateConfigurationRequest_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationRequest_EngineVersion})
+var sCreateConfigurationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationRequest_Name})
+var sCreateConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t55, Type: smithy.ShapeTypeMap, Ext: &eCreateConfigurationRequest_Tags})
+var sCreateConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationResponse, Members: &mCreateConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationResponse})
+var sCreateConfigurationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationResponse_Arn})
+var sCreateConfigurationResponse_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eCreateConfigurationResponse_AuthenticationStrategy})
+var sCreateConfigurationResponse_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateConfigurationResponse_Created})
+var sCreateConfigurationResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationResponse_Id})
+var sCreateConfigurationResponse_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationResponse_LatestRevision})
+var sCreateConfigurationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationResponse_Name})
+var sCreateTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTagsRequest, Members: &mCreateTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTagsRequest})
+var sCreateTagsRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eCreateTagsRequest_ResourceArn})
+var sCreateTagsRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t55, Type: smithy.ShapeTypeMap, Ext: &eCreateTagsRequest_Tags})
+var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserRequest})
+var sCreateUserRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_BrokerId})
+var sCreateUserRequest_ConsoleAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsoleAccess", ID: &i___boolean, Traits: &t97, Type: smithy.ShapeTypeBoolean, Ext: &eCreateUserRequest_ConsoleAccess})
+var sCreateUserRequest_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t98, Type: smithy.ShapeTypeList, Ext: &eCreateUserRequest_Groups})
+var sCreateUserRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Password})
+var sCreateUserRequest_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Username})
+var sCreateUserRequest_ReplicationUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationUser", ID: &i___boolean, Traits: &t101, Type: smithy.ShapeTypeBoolean, Ext: &eCreateUserRequest_ReplicationUser})
+var sCreateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserResponse})
+var sDeleteBrokerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrokerRequest, Members: &mDeleteBrokerRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBrokerRequest})
+var sDeleteBrokerRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDeleteBrokerRequest_BrokerId})
+var sDeleteBrokerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrokerResponse, Members: &mDeleteBrokerResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBrokerResponse})
+var sDeleteBrokerResponse_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eDeleteBrokerResponse_BrokerId})
+var sDeleteConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationRequest, Members: &mDeleteConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationRequest})
+var sDeleteConfigurationRequest_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationRequest_ConfigurationId})
+var sDeleteConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationResponse, Members: &mDeleteConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationResponse})
+var sDeleteConfigurationResponse_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t121, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationResponse_ConfigurationId})
+var sDeleteTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsRequest, Members: &mDeleteTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTagsRequest})
+var sDeleteTagsRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDeleteTagsRequest_ResourceArn})
+var sDeleteTagsRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t122, Type: smithy.ShapeTypeList, Ext: &eDeleteTagsRequest_TagKeys})
+var sDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserRequest, Members: &mDeleteUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserRequest})
+var sDeleteUserRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_BrokerId})
+var sDeleteUserRequest_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_Username})
+var sDeleteUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserResponse})
+var sDescribeBrokerEngineTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerEngineTypesRequest, Members: &mDescribeBrokerEngineTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerEngineTypesRequest})
+var sDescribeBrokerEngineTypesRequest_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &i___string, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerEngineTypesRequest_EngineType})
+var sDescribeBrokerEngineTypesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t124, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBrokerEngineTypesRequest_MaxResults})
+var sDescribeBrokerEngineTypesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerEngineTypesRequest_NextToken})
+var sDescribeBrokerEngineTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerEngineTypesResponse, Members: &mDescribeBrokerEngineTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerEngineTypesResponse})
+var sDescribeBrokerEngineTypesResponse_BrokerEngineTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerEngineTypes", ID: &i___listOfBrokerEngineType, Members: &m___listOfBrokerEngineType, Traits: &t126, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerEngineTypesResponse_BrokerEngineTypes})
+var sDescribeBrokerEngineTypesResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___integerMin5Max100, Traits: &t127, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBrokerEngineTypesResponse_MaxResults})
+var sDescribeBrokerEngineTypesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerEngineTypesResponse_NextToken})
+var sDescribeBrokerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerRequest, Members: &mDescribeBrokerRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerRequest})
+var sDescribeBrokerRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerRequest_BrokerId})
+var sDescribeBrokerInstanceOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerInstanceOptionsRequest, Members: &mDescribeBrokerInstanceOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerInstanceOptionsRequest})
+var sDescribeBrokerInstanceOptionsRequest_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &i___string, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerInstanceOptionsRequest_EngineType})
+var sDescribeBrokerInstanceOptionsRequest_HostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostInstanceType", ID: &i___string, Traits: &t129, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerInstanceOptionsRequest_HostInstanceType})
+var sDescribeBrokerInstanceOptionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t124, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBrokerInstanceOptionsRequest_MaxResults})
+var sDescribeBrokerInstanceOptionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerInstanceOptionsRequest_NextToken})
+var sDescribeBrokerInstanceOptionsRequest_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i___string, Traits: &t130, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerInstanceOptionsRequest_StorageType})
+var sDescribeBrokerInstanceOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerInstanceOptionsResponse, Members: &mDescribeBrokerInstanceOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerInstanceOptionsResponse})
+var sDescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerInstanceOptions", ID: &i___listOfBrokerInstanceOption, Members: &m___listOfBrokerInstanceOption, Traits: &t131, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions})
+var sDescribeBrokerInstanceOptionsResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___integerMin5Max100, Traits: &t127, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBrokerInstanceOptionsResponse_MaxResults})
+var sDescribeBrokerInstanceOptionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerInstanceOptionsResponse_NextToken})
+var sDescribeBrokerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBrokerResponse, Members: &mDescribeBrokerResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse})
+var sDescribeBrokerResponse_ActionsRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsRequired", ID: &i___listOfActionRequired, Members: &m___listOfActionRequired, Traits: &t132, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerResponse_ActionsRequired})
+var sDescribeBrokerResponse_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_AuthenticationStrategy})
+var sDescribeBrokerResponse_AutoMinorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMinorVersionUpgrade", ID: &i___boolean, Traits: &t106, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeBrokerResponse_AutoMinorVersionUpgrade})
+var sDescribeBrokerResponse_BrokerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerArn", ID: &i___string, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerResponse_BrokerArn})
+var sDescribeBrokerResponse_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerResponse_BrokerId})
+var sDescribeBrokerResponse_BrokerInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerInstances", ID: &i___listOfBrokerInstance, Members: &m___listOfBrokerInstance, Traits: &t133, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerResponse_BrokerInstances})
+var sDescribeBrokerResponse_BrokerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerResponse_BrokerName})
+var sDescribeBrokerResponse_BrokerState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerState", ID: &iBrokerState, Members: &mBrokerState, Traits: &t46, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_BrokerState})
+var sDescribeBrokerResponse_Configurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configurations", ID: &iConfigurations, Members: &mConfigurations, Traits: &t134, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_Configurations})
+var sDescribeBrokerResponse_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeBrokerResponse_Created})
+var sDescribeBrokerResponse_DeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentMode", ID: &iDeploymentMode, Members: &mDeploymentMode, Traits: &t48, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_DeploymentMode})
+var sDescribeBrokerResponse_EncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionOptions", ID: &iEncryptionOptions, Members: &mEncryptionOptions, Traits: &t109, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_EncryptionOptions})
+var sDescribeBrokerResponse_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_EngineType})
+var sDescribeBrokerResponse_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerResponse_EngineVersion})
+var sDescribeBrokerResponse_HostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostInstanceType", ID: &i___string, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerResponse_HostInstanceType})
+var sDescribeBrokerResponse_LdapServerMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LdapServerMetadata", ID: &iLdapServerMetadataOutput, Members: &mLdapServerMetadataOutput, Traits: &t110, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_LdapServerMetadata})
+var sDescribeBrokerResponse_Logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Logs", ID: &iLogsSummary, Members: &mLogsSummary, Traits: &t111, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_Logs})
+var sDescribeBrokerResponse_MaintenanceWindowStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceWindowStartTime", ID: &iWeeklyStartTime, Members: &mWeeklyStartTime, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_MaintenanceWindowStartTime})
+var sDescribeBrokerResponse_PendingAuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingAuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t135, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_PendingAuthenticationStrategy})
+var sDescribeBrokerResponse_PendingEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingEngineVersion", ID: &i___string, Traits: &t136, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerResponse_PendingEngineVersion})
+var sDescribeBrokerResponse_PendingHostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingHostInstanceType", ID: &i___string, Traits: &t137, Type: smithy.ShapeTypeString, Ext: &eDescribeBrokerResponse_PendingHostInstanceType})
+var sDescribeBrokerResponse_PendingLdapServerMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingLdapServerMetadata", ID: &iLdapServerMetadataOutput, Members: &mLdapServerMetadataOutput, Traits: &t138, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_PendingLdapServerMetadata})
+var sDescribeBrokerResponse_PendingSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingSecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t139, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerResponse_PendingSecurityGroups})
+var sDescribeBrokerResponse_PendingStorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingStorageSize", ID: &i___integer, Traits: &t140, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBrokerResponse_PendingStorageSize})
+var sDescribeBrokerResponse_PubliclyAccessible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PubliclyAccessible", ID: &i___boolean, Traits: &t113, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeBrokerResponse_PubliclyAccessible})
+var sDescribeBrokerResponse_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t114, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerResponse_SecurityGroups})
+var sDescribeBrokerResponse_StorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageSize", ID: &i___integer, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBrokerResponse_StorageSize})
+var sDescribeBrokerResponse_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iBrokerStorageType, Members: &mBrokerStorageType, Traits: &t40, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_StorageType})
+var sDescribeBrokerResponse_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t116, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerResponse_SubnetIds})
+var sDescribeBrokerResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t55, Type: smithy.ShapeTypeMap, Ext: &eDescribeBrokerResponse_Tags})
+var sDescribeBrokerResponse_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i___listOfUserSummary, Members: &m___listOfUserSummary, Traits: &t117, Type: smithy.ShapeTypeList, Ext: &eDescribeBrokerResponse_Users})
+var sDescribeBrokerResponse_DataReplicationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationMetadata", ID: &iDataReplicationMetadataOutput, Members: &mDataReplicationMetadataOutput, Traits: &t141, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_DataReplicationMetadata})
+var sDescribeBrokerResponse_DataReplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationMode", ID: &iDataReplicationMode, Members: &mDataReplicationMode, Traits: &t118, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_DataReplicationMode})
+var sDescribeBrokerResponse_PendingDataReplicationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDataReplicationMetadata", ID: &iDataReplicationMetadataOutput, Members: &mDataReplicationMetadataOutput, Traits: &t142, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBrokerResponse_PendingDataReplicationMetadata})
+var sDescribeBrokerResponse_PendingDataReplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDataReplicationMode", ID: &iDataReplicationMode, Members: &mDataReplicationMode, Traits: &t143, Type: smithy.ShapeTypeEnum, Ext: &eDescribeBrokerResponse_PendingDataReplicationMode})
+var sDescribeConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRequest, Members: &mDescribeConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationRequest})
+var sDescribeConfigurationRequest_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRequest_ConfigurationId})
+var sDescribeConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationResponse, Members: &mDescribeConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationResponse})
+var sDescribeConfigurationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_Arn})
+var sDescribeConfigurationResponse_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eDescribeConfigurationResponse_AuthenticationStrategy})
+var sDescribeConfigurationResponse_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeConfigurationResponse_Created})
+var sDescribeConfigurationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_Description})
+var sDescribeConfigurationResponse_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eDescribeConfigurationResponse_EngineType})
+var sDescribeConfigurationResponse_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_EngineVersion})
+var sDescribeConfigurationResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_Id})
+var sDescribeConfigurationResponse_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationResponse_LatestRevision})
+var sDescribeConfigurationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_Name})
+var sDescribeConfigurationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t55, Type: smithy.ShapeTypeMap, Ext: &eDescribeConfigurationResponse_Tags})
+var sDescribeConfigurationRevisionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRevisionRequest, Members: &mDescribeConfigurationRevisionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationRevisionRequest})
+var sDescribeConfigurationRevisionRequest_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionRequest_ConfigurationId})
+var sDescribeConfigurationRevisionRequest_ConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationRevision", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionRequest_ConfigurationRevision})
+var sDescribeConfigurationRevisionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRevisionResponse, Members: &mDescribeConfigurationRevisionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationRevisionResponse})
+var sDescribeConfigurationRevisionResponse_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t121, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionResponse_ConfigurationId})
+var sDescribeConfigurationRevisionResponse_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeConfigurationRevisionResponse_Created})
+var sDescribeConfigurationRevisionResponse_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i___string, Traits: &t144, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionResponse_Data})
+var sDescribeConfigurationRevisionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionResponse_Description})
+var sDescribeSharedResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedResourcesRequest, Members: &mDescribeSharedResourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSharedResourcesRequest})
+var sDescribeSharedResourcesRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDescribeSharedResourcesRequest_BrokerId})
+var sDescribeSharedResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t124, Type: smithy.ShapeTypeInteger, Ext: &eDescribeSharedResourcesRequest_MaxResults})
+var sDescribeSharedResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eDescribeSharedResourcesRequest_NextToken})
+var sDescribeSharedResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedResourcesResponse, Members: &mDescribeSharedResourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSharedResourcesResponse})
+var sDescribeSharedResourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eDescribeSharedResourcesResponse_NextToken})
+var sDescribeSharedResourcesResponse_SharedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedResources", ID: &i___listOfSharedResource, Members: &m___listOfSharedResource, Traits: &t145, Type: smithy.ShapeTypeList, Ext: &eDescribeSharedResourcesResponse_SharedResources})
+var sDescribeUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserRequest, Members: &mDescribeUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserRequest})
+var sDescribeUserRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDescribeUserRequest_BrokerId})
+var sDescribeUserRequest_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eDescribeUserRequest_Username})
+var sDescribeUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserResponse, Members: &mDescribeUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserResponse})
+var sDescribeUserResponse_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_BrokerId})
+var sDescribeUserResponse_ConsoleAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsoleAccess", ID: &i___boolean, Traits: &t97, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeUserResponse_ConsoleAccess})
+var sDescribeUserResponse_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t98, Type: smithy.ShapeTypeList, Ext: &eDescribeUserResponse_Groups})
+var sDescribeUserResponse_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &iUserPendingChanges, Members: &mUserPendingChanges, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserResponse_Pending})
+var sDescribeUserResponse_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i___string, Traits: &t100, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_Username})
+var sDescribeUserResponse_ReplicationUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationUser", ID: &i___boolean, Traits: &t101, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeUserResponse_ReplicationUser})
+var sListBrokersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrokersRequest, Members: &mListBrokersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListBrokersRequest})
+var sListBrokersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t124, Type: smithy.ShapeTypeInteger, Ext: &eListBrokersRequest_MaxResults})
+var sListBrokersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eListBrokersRequest_NextToken})
+var sListBrokersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrokersResponse, Members: &mListBrokersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListBrokersResponse})
+var sListBrokersResponse_BrokerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerSummaries", ID: &i___listOfBrokerSummary, Members: &m___listOfBrokerSummary, Traits: &t146, Type: smithy.ShapeTypeList, Ext: &eListBrokersResponse_BrokerSummaries})
+var sListBrokersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eListBrokersResponse_NextToken})
+var sListConfigurationRevisionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationRevisionsRequest, Members: &mListConfigurationRevisionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationRevisionsRequest})
+var sListConfigurationRevisionsRequest_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eListConfigurationRevisionsRequest_ConfigurationId})
+var sListConfigurationRevisionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t124, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationRevisionsRequest_MaxResults})
+var sListConfigurationRevisionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eListConfigurationRevisionsRequest_NextToken})
+var sListConfigurationRevisionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationRevisionsResponse, Members: &mListConfigurationRevisionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationRevisionsResponse})
+var sListConfigurationRevisionsResponse_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t121, Type: smithy.ShapeTypeString, Ext: &eListConfigurationRevisionsResponse_ConfigurationId})
+var sListConfigurationRevisionsResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___integer, Traits: &t127, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationRevisionsResponse_MaxResults})
+var sListConfigurationRevisionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eListConfigurationRevisionsResponse_NextToken})
+var sListConfigurationRevisionsResponse_Revisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revisions", ID: &i___listOfConfigurationRevision, Members: &m___listOfConfigurationRevision, Traits: &t147, Type: smithy.ShapeTypeList, Ext: &eListConfigurationRevisionsResponse_Revisions})
+var sListConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationsRequest, Members: &mListConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationsRequest})
+var sListConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t124, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationsRequest_MaxResults})
+var sListConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eListConfigurationsRequest_NextToken})
+var sListConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationsResponse, Members: &mListConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationsResponse})
+var sListConfigurationsResponse_Configurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configurations", ID: &i___listOfConfiguration, Members: &m___listOfConfiguration, Traits: &t134, Type: smithy.ShapeTypeList, Ext: &eListConfigurationsResponse_Configurations})
+var sListConfigurationsResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___integer, Traits: &t127, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationsResponse_MaxResults})
+var sListConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eListConfigurationsResponse_NextToken})
+var sListTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsRequest, Members: &mListTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsRequest})
+var sListTagsRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eListTagsRequest_ResourceArn})
+var sListTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsResponse, Members: &mListTagsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsResponse})
+var sListTagsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t55, Type: smithy.ShapeTypeMap, Ext: &eListTagsResponse_Tags})
+var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListUsersRequest})
+var sListUsersRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eListUsersRequest_BrokerId})
+var sListUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t124, Type: smithy.ShapeTypeInteger, Ext: &eListUsersRequest_MaxResults})
+var sListUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eListUsersRequest_NextToken})
+var sListUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResponse, Members: &mListUsersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListUsersResponse})
+var sListUsersResponse_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListUsersResponse_BrokerId})
+var sListUsersResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___integerMin5Max100, Traits: &t127, Type: smithy.ShapeTypeInteger, Ext: &eListUsersResponse_MaxResults})
+var sListUsersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eListUsersResponse_NextToken})
+var sListUsersResponse_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i___listOfUserSummary, Members: &m___listOfUserSummary, Traits: &t117, Type: smithy.ShapeTypeList, Ext: &eListUsersResponse_Users})
+var sPromoteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteRequest, Members: &mPromoteRequest, Type: smithy.ShapeTypeStructure, Ext: &ePromoteRequest})
+var sPromoteRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &ePromoteRequest_BrokerId})
+var sPromoteRequest_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iPromoteMode, Members: &mPromoteMode, Traits: &t148, Type: smithy.ShapeTypeEnum, Ext: &ePromoteRequest_Mode})
+var sPromoteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteResponse, Members: &mPromoteResponse, Type: smithy.ShapeTypeStructure, Ext: &ePromoteResponse})
+var sPromoteResponse_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ePromoteResponse_BrokerId})
+var sRebootBrokerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootBrokerRequest, Members: &mRebootBrokerRequest, Type: smithy.ShapeTypeStructure, Ext: &eRebootBrokerRequest})
+var sRebootBrokerRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eRebootBrokerRequest_BrokerId})
+var sRebootBrokerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootBrokerResponse, Type: smithy.ShapeTypeStructure, Ext: &eRebootBrokerResponse})
+var sUpdateBrokerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerRequest, Members: &mUpdateBrokerRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerRequest})
+var sUpdateBrokerRequest_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrokerRequest_AuthenticationStrategy})
+var sUpdateBrokerRequest_AutoMinorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMinorVersionUpgrade", ID: &i___boolean, Traits: &t106, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateBrokerRequest_AutoMinorVersionUpgrade})
+var sUpdateBrokerRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerRequest_BrokerId})
+var sUpdateBrokerRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iConfigurationId, Members: &mConfigurationId, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerRequest_Configuration})
+var sUpdateBrokerRequest_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerRequest_EngineVersion})
+var sUpdateBrokerRequest_HostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostInstanceType", ID: &i___string, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerRequest_HostInstanceType})
+var sUpdateBrokerRequest_LdapServerMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LdapServerMetadata", ID: &iLdapServerMetadataInput, Members: &mLdapServerMetadataInput, Traits: &t110, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerRequest_LdapServerMetadata})
+var sUpdateBrokerRequest_Logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Logs", ID: &iLogs, Members: &mLogs, Traits: &t111, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerRequest_Logs})
+var sUpdateBrokerRequest_MaintenanceWindowStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceWindowStartTime", ID: &iWeeklyStartTime, Members: &mWeeklyStartTime, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerRequest_MaintenanceWindowStartTime})
+var sUpdateBrokerRequest_ResourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareArns", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t93, Type: smithy.ShapeTypeList, Ext: &eUpdateBrokerRequest_ResourceShareArns})
+var sUpdateBrokerRequest_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t114, Type: smithy.ShapeTypeList, Ext: &eUpdateBrokerRequest_SecurityGroups})
+var sUpdateBrokerRequest_StorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageSize", ID: &i___integer, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eUpdateBrokerRequest_StorageSize})
+var sUpdateBrokerRequest_DataReplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationMode", ID: &iDataReplicationMode, Members: &mDataReplicationMode, Traits: &t118, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrokerRequest_DataReplicationMode})
+var sUpdateBrokerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerResponse, Members: &mUpdateBrokerResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerResponse})
+var sUpdateBrokerResponse_AuthenticationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationStrategy", ID: &iAuthenticationStrategy, Members: &mAuthenticationStrategy, Traits: &t50, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrokerResponse_AuthenticationStrategy})
+var sUpdateBrokerResponse_AutoMinorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMinorVersionUpgrade", ID: &i___boolean, Traits: &t106, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateBrokerResponse_AutoMinorVersionUpgrade})
+var sUpdateBrokerResponse_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerResponse_BrokerId})
+var sUpdateBrokerResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iConfigurationId, Members: &mConfigurationId, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerResponse_Configuration})
+var sUpdateBrokerResponse_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerResponse_EngineVersion})
+var sUpdateBrokerResponse_HostInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostInstanceType", ID: &i___string, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerResponse_HostInstanceType})
+var sUpdateBrokerResponse_LdapServerMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LdapServerMetadata", ID: &iLdapServerMetadataOutput, Members: &mLdapServerMetadataOutput, Traits: &t110, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerResponse_LdapServerMetadata})
+var sUpdateBrokerResponse_Logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Logs", ID: &iLogs, Members: &mLogs, Traits: &t111, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerResponse_Logs})
+var sUpdateBrokerResponse_MaintenanceWindowStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceWindowStartTime", ID: &iWeeklyStartTime, Members: &mWeeklyStartTime, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerResponse_MaintenanceWindowStartTime})
+var sUpdateBrokerResponse_ResourceShareArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceShareArns", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t93, Type: smithy.ShapeTypeList, Ext: &eUpdateBrokerResponse_ResourceShareArns})
+var sUpdateBrokerResponse_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t114, Type: smithy.ShapeTypeList, Ext: &eUpdateBrokerResponse_SecurityGroups})
+var sUpdateBrokerResponse_DataReplicationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationMetadata", ID: &iDataReplicationMetadataOutput, Members: &mDataReplicationMetadataOutput, Traits: &t141, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerResponse_DataReplicationMetadata})
+var sUpdateBrokerResponse_DataReplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReplicationMode", ID: &iDataReplicationMode, Members: &mDataReplicationMode, Traits: &t118, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrokerResponse_DataReplicationMode})
+var sUpdateBrokerResponse_PendingDataReplicationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDataReplicationMetadata", ID: &iDataReplicationMetadataOutput, Members: &mDataReplicationMetadataOutput, Traits: &t142, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerResponse_PendingDataReplicationMetadata})
+var sUpdateBrokerResponse_PendingDataReplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDataReplicationMode", ID: &iDataReplicationMode, Members: &mDataReplicationMode, Traits: &t143, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrokerResponse_PendingDataReplicationMode})
+var sUpdateBrokerResponse_StorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageSize", ID: &i___integer, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eUpdateBrokerResponse_StorageSize})
+var sUpdateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationRequest, Members: &mUpdateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationRequest})
+var sUpdateConfigurationRequest_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationRequest_ConfigurationId})
+var sUpdateConfigurationRequest_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i___string, Traits: &t144, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationRequest_Data})
+var sUpdateConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationRequest_Description})
+var sUpdateConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationResponse, Members: &mUpdateConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationResponse})
+var sUpdateConfigurationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationResponse_Arn})
+var sUpdateConfigurationResponse_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i___timestampIso8601, Traits: &t47, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateConfigurationResponse_Created})
+var sUpdateConfigurationResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationResponse_Id})
+var sUpdateConfigurationResponse_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationResponse_LatestRevision})
+var sUpdateConfigurationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationResponse_Name})
+var sUpdateConfigurationResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i___listOfSanitizationWarning, Members: &m___listOfSanitizationWarning, Traits: &t149, Type: smithy.ShapeTypeList, Ext: &eUpdateConfigurationResponse_Warnings})
+var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateUserRequest})
+var sUpdateUserRequest_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_BrokerId})
+var sUpdateUserRequest_ConsoleAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsoleAccess", ID: &i___boolean, Traits: &t97, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateUserRequest_ConsoleAccess})
+var sUpdateUserRequest_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t98, Type: smithy.ShapeTypeList, Ext: &eUpdateUserRequest_Groups})
+var sUpdateUserRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_Password})
+var sUpdateUserRequest_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_Username})
+var sUpdateUserRequest_ReplicationUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationUser", ID: &i___boolean, Traits: &t101, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateUserRequest_ReplicationUser})
+var sUpdateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateUserResponse})
+
+var CreateBroker = &sCreateBroker
+
+var CreateConfiguration = &sCreateConfiguration
+
+var CreateTags = &sCreateTags
+
+var CreateUser = &sCreateUser
+
+var DeleteBroker = &sDeleteBroker
+
+var DeleteConfiguration = &sDeleteConfiguration
+
+var DeleteTags = &sDeleteTags
+
+var DeleteUser = &sDeleteUser
+
+var DescribeBroker = &sDescribeBroker
+
+var DescribeBrokerEngineTypes = &sDescribeBrokerEngineTypes
+
+var DescribeBrokerInstanceOptions = &sDescribeBrokerInstanceOptions
+
+var DescribeConfiguration = &sDescribeConfiguration
+
+var DescribeConfigurationRevision = &sDescribeConfigurationRevision
+
+var DescribeSharedResources = &sDescribeSharedResources
+
+var DescribeUser = &sDescribeUser
+
+var ListBrokers = &sListBrokers
+
+var ListConfigurationRevisions = &sListConfigurationRevisions
+
+var ListConfigurations = &sListConfigurations
+
+var ListTags = &sListTags
+
+var ListUsers = &sListUsers
+
+var Promote = &sPromote
+
+var RebootBroker = &sRebootBroker
+
+var UpdateBroker = &sUpdateBroker
+
+var UpdateConfiguration = &sUpdateConfiguration
+
+var UpdateUser = &sUpdateUser
+
+var _mq = &s_mq
+
+var ___boolean = &s___boolean
+
+var ___integer = &s___integer
+
+var ___integerMin5Max100 = &s___integerMin5Max100
+
+var ___listOf__string = &s___listOf__string
+var ___listOf__string_member = &s___listOf__string_member
+
+var ___listOfActionRequired = &s___listOfActionRequired
+var ___listOfActionRequired_member = &s___listOfActionRequired_member
+
+var ___listOfAvailabilityZone = &s___listOfAvailabilityZone
+var ___listOfAvailabilityZone_member = &s___listOfAvailabilityZone_member
+
+var ___listOfBrokerEngineType = &s___listOfBrokerEngineType
+var ___listOfBrokerEngineType_member = &s___listOfBrokerEngineType_member
+
+var ___listOfBrokerInstance = &s___listOfBrokerInstance
+var ___listOfBrokerInstance_member = &s___listOfBrokerInstance_member
+
+var ___listOfBrokerInstanceOption = &s___listOfBrokerInstanceOption
+var ___listOfBrokerInstanceOption_member = &s___listOfBrokerInstanceOption_member
+
+var ___listOfBrokerSummary = &s___listOfBrokerSummary
+var ___listOfBrokerSummary_member = &s___listOfBrokerSummary_member
+
+var ___listOfConfiguration = &s___listOfConfiguration
+var ___listOfConfiguration_member = &s___listOfConfiguration_member
+
+var ___listOfConfigurationId = &s___listOfConfigurationId
+var ___listOfConfigurationId_member = &s___listOfConfigurationId_member
+
+var ___listOfConfigurationRevision = &s___listOfConfigurationRevision
+var ___listOfConfigurationRevision_member = &s___listOfConfigurationRevision_member
+
+var ___listOfDeploymentMode = &s___listOfDeploymentMode
+var ___listOfDeploymentMode_member = &s___listOfDeploymentMode_member
+
+var ___listOfEngineVersion = &s___listOfEngineVersion
+var ___listOfEngineVersion_member = &s___listOfEngineVersion_member
+
+var ___listOfResourceShareError = &s___listOfResourceShareError
+var ___listOfResourceShareError_member = &s___listOfResourceShareError_member
+
+var ___listOfSanitizationWarning = &s___listOfSanitizationWarning
+var ___listOfSanitizationWarning_member = &s___listOfSanitizationWarning_member
+
+var ___listOfSharedResource = &s___listOfSharedResource
+var ___listOfSharedResource_member = &s___listOfSharedResource_member
+
+var ___listOfUser = &s___listOfUser
+var ___listOfUser_member = &s___listOfUser_member
+
+var ___listOfUserSummary = &s___listOfUserSummary
+var ___listOfUserSummary_member = &s___listOfUserSummary_member
+
+var ___mapOf__string = &s___mapOf__string
+var ___mapOf__string_key = &s___mapOf__string_key
+var ___mapOf__string_value = &s___mapOf__string_value
+
+var ___string = &s___string
+
+var ___timestampIso8601 = &s___timestampIso8601
+
+var ActionRequired = &sActionRequired
+var ActionRequired_ActionRequiredCode = &sActionRequired_ActionRequiredCode
+var ActionRequired_ActionRequiredInfo = &sActionRequired_ActionRequiredInfo
+
+var AuthenticationStrategy = &sAuthenticationStrategy
+var AuthenticationStrategy_SIMPLE = &sAuthenticationStrategy_SIMPLE
+var AuthenticationStrategy_LDAP = &sAuthenticationStrategy_LDAP
+var AuthenticationStrategy_CONFIG_MANAGED = &sAuthenticationStrategy_CONFIG_MANAGED
+
+var AvailabilityZone = &sAvailabilityZone
+var AvailabilityZone_Name = &sAvailabilityZone_Name
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_ErrorAttribute = &sBadRequestException_ErrorAttribute
+var BadRequestException_Message = &sBadRequestException_Message
+var BadRequestException_ResourceShareErrors = &sBadRequestException_ResourceShareErrors
+
+var BrokerEngineType = &sBrokerEngineType
+var BrokerEngineType_EngineType = &sBrokerEngineType_EngineType
+var BrokerEngineType_EngineVersions = &sBrokerEngineType_EngineVersions
+
+var BrokerInstance = &sBrokerInstance
+var BrokerInstance_ConsoleURL = &sBrokerInstance_ConsoleURL
+var BrokerInstance_Endpoints = &sBrokerInstance_Endpoints
+var BrokerInstance_IpAddress = &sBrokerInstance_IpAddress
+
+var BrokerInstanceOption = &sBrokerInstanceOption
+var BrokerInstanceOption_AvailabilityZones = &sBrokerInstanceOption_AvailabilityZones
+var BrokerInstanceOption_EngineType = &sBrokerInstanceOption_EngineType
+var BrokerInstanceOption_HostInstanceType = &sBrokerInstanceOption_HostInstanceType
+var BrokerInstanceOption_StorageType = &sBrokerInstanceOption_StorageType
+var BrokerInstanceOption_SupportedDeploymentModes = &sBrokerInstanceOption_SupportedDeploymentModes
+var BrokerInstanceOption_SupportedEngineVersions = &sBrokerInstanceOption_SupportedEngineVersions
+
+var BrokerState = &sBrokerState
+var BrokerState_CREATION_IN_PROGRESS = &sBrokerState_CREATION_IN_PROGRESS
+var BrokerState_CREATION_FAILED = &sBrokerState_CREATION_FAILED
+var BrokerState_DELETION_IN_PROGRESS = &sBrokerState_DELETION_IN_PROGRESS
+var BrokerState_RUNNING = &sBrokerState_RUNNING
+var BrokerState_REBOOT_IN_PROGRESS = &sBrokerState_REBOOT_IN_PROGRESS
+var BrokerState_CRITICAL_ACTION_REQUIRED = &sBrokerState_CRITICAL_ACTION_REQUIRED
+var BrokerState_REPLICA = &sBrokerState_REPLICA
+
+var BrokerStorageType = &sBrokerStorageType
+var BrokerStorageType_EBS = &sBrokerStorageType_EBS
+var BrokerStorageType_EFS = &sBrokerStorageType_EFS
+
+var BrokerSummary = &sBrokerSummary
+var BrokerSummary_BrokerArn = &sBrokerSummary_BrokerArn
+var BrokerSummary_BrokerId = &sBrokerSummary_BrokerId
+var BrokerSummary_BrokerName = &sBrokerSummary_BrokerName
+var BrokerSummary_BrokerState = &sBrokerSummary_BrokerState
+var BrokerSummary_Created = &sBrokerSummary_Created
+var BrokerSummary_DeploymentMode = &sBrokerSummary_DeploymentMode
+var BrokerSummary_EngineType = &sBrokerSummary_EngineType
+var BrokerSummary_HostInstanceType = &sBrokerSummary_HostInstanceType
+
+var ChangeType = &sChangeType
+var ChangeType_CREATE = &sChangeType_CREATE
+var ChangeType_UPDATE = &sChangeType_UPDATE
+var ChangeType_DELETE = &sChangeType_DELETE
+
+var Configuration = &sConfiguration
+var Configuration_Arn = &sConfiguration_Arn
+var Configuration_AuthenticationStrategy = &sConfiguration_AuthenticationStrategy
+var Configuration_Created = &sConfiguration_Created
+var Configuration_Description = &sConfiguration_Description
+var Configuration_EngineType = &sConfiguration_EngineType
+var Configuration_EngineVersion = &sConfiguration_EngineVersion
+var Configuration_Id = &sConfiguration_Id
+var Configuration_LatestRevision = &sConfiguration_LatestRevision
+var Configuration_Name = &sConfiguration_Name
+var Configuration_Tags = &sConfiguration_Tags
+
+var ConfigurationId = &sConfigurationId
+var ConfigurationId_Id = &sConfigurationId_Id
+var ConfigurationId_Revision = &sConfigurationId_Revision
+
+var ConfigurationRevision = &sConfigurationRevision
+var ConfigurationRevision_Created = &sConfigurationRevision_Created
+var ConfigurationRevision_Description = &sConfigurationRevision_Description
+var ConfigurationRevision_Revision = &sConfigurationRevision_Revision
+
+var Configurations = &sConfigurations
+var Configurations_Current = &sConfigurations_Current
+var Configurations_History = &sConfigurations_History
+var Configurations_Pending = &sConfigurations_Pending
+
+var ConflictException = &sConflictException
+var ConflictException_ErrorAttribute = &sConflictException_ErrorAttribute
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_ResourceShareErrors = &sConflictException_ResourceShareErrors
+
+var DataReplicationCounterpart = &sDataReplicationCounterpart
+var DataReplicationCounterpart_BrokerId = &sDataReplicationCounterpart_BrokerId
+var DataReplicationCounterpart_Region = &sDataReplicationCounterpart_Region
+
+var DataReplicationMetadataOutput = &sDataReplicationMetadataOutput
+var DataReplicationMetadataOutput_DataReplicationCounterpart = &sDataReplicationMetadataOutput_DataReplicationCounterpart
+var DataReplicationMetadataOutput_DataReplicationRole = &sDataReplicationMetadataOutput_DataReplicationRole
+
+var DataReplicationMode = &sDataReplicationMode
+var DataReplicationMode_NONE = &sDataReplicationMode_NONE
+var DataReplicationMode_CRDR = &sDataReplicationMode_CRDR
+
+var DayOfWeek = &sDayOfWeek
+var DayOfWeek_MONDAY = &sDayOfWeek_MONDAY
+var DayOfWeek_TUESDAY = &sDayOfWeek_TUESDAY
+var DayOfWeek_WEDNESDAY = &sDayOfWeek_WEDNESDAY
+var DayOfWeek_THURSDAY = &sDayOfWeek_THURSDAY
+var DayOfWeek_FRIDAY = &sDayOfWeek_FRIDAY
+var DayOfWeek_SATURDAY = &sDayOfWeek_SATURDAY
+var DayOfWeek_SUNDAY = &sDayOfWeek_SUNDAY
+
+var DeploymentMode = &sDeploymentMode
+var DeploymentMode_SINGLE_INSTANCE = &sDeploymentMode_SINGLE_INSTANCE
+var DeploymentMode_ACTIVE_STANDBY_MULTI_AZ = &sDeploymentMode_ACTIVE_STANDBY_MULTI_AZ
+var DeploymentMode_CLUSTER_MULTI_AZ = &sDeploymentMode_CLUSTER_MULTI_AZ
+
+var EncryptionOptions = &sEncryptionOptions
+var EncryptionOptions_KmsKeyId = &sEncryptionOptions_KmsKeyId
+var EncryptionOptions_UseAwsOwnedKey = &sEncryptionOptions_UseAwsOwnedKey
+
+var EngineType = &sEngineType
+var EngineType_ACTIVEMQ = &sEngineType_ACTIVEMQ
+var EngineType_RABBITMQ = &sEngineType_RABBITMQ
+
+var EngineVersion = &sEngineVersion
+var EngineVersion_Name = &sEngineVersion_Name
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_ErrorAttribute = &sForbiddenException_ErrorAttribute
+var ForbiddenException_Message = &sForbiddenException_Message
+var ForbiddenException_ResourceShareErrors = &sForbiddenException_ResourceShareErrors
+
+var InternalServerErrorException = &sInternalServerErrorException
+var InternalServerErrorException_ErrorAttribute = &sInternalServerErrorException_ErrorAttribute
+var InternalServerErrorException_Message = &sInternalServerErrorException_Message
+var InternalServerErrorException_ResourceShareErrors = &sInternalServerErrorException_ResourceShareErrors
+
+var LdapServerMetadataInput = &sLdapServerMetadataInput
+var LdapServerMetadataInput_Hosts = &sLdapServerMetadataInput_Hosts
+var LdapServerMetadataInput_RoleBase = &sLdapServerMetadataInput_RoleBase
+var LdapServerMetadataInput_RoleName = &sLdapServerMetadataInput_RoleName
+var LdapServerMetadataInput_RoleSearchMatching = &sLdapServerMetadataInput_RoleSearchMatching
+var LdapServerMetadataInput_RoleSearchSubtree = &sLdapServerMetadataInput_RoleSearchSubtree
+var LdapServerMetadataInput_ServiceAccountPassword = &sLdapServerMetadataInput_ServiceAccountPassword
+var LdapServerMetadataInput_ServiceAccountUsername = &sLdapServerMetadataInput_ServiceAccountUsername
+var LdapServerMetadataInput_UserBase = &sLdapServerMetadataInput_UserBase
+var LdapServerMetadataInput_UserRoleName = &sLdapServerMetadataInput_UserRoleName
+var LdapServerMetadataInput_UserSearchMatching = &sLdapServerMetadataInput_UserSearchMatching
+var LdapServerMetadataInput_UserSearchSubtree = &sLdapServerMetadataInput_UserSearchSubtree
+
+var LdapServerMetadataOutput = &sLdapServerMetadataOutput
+var LdapServerMetadataOutput_Hosts = &sLdapServerMetadataOutput_Hosts
+var LdapServerMetadataOutput_RoleBase = &sLdapServerMetadataOutput_RoleBase
+var LdapServerMetadataOutput_RoleName = &sLdapServerMetadataOutput_RoleName
+var LdapServerMetadataOutput_RoleSearchMatching = &sLdapServerMetadataOutput_RoleSearchMatching
+var LdapServerMetadataOutput_RoleSearchSubtree = &sLdapServerMetadataOutput_RoleSearchSubtree
+var LdapServerMetadataOutput_ServiceAccountUsername = &sLdapServerMetadataOutput_ServiceAccountUsername
+var LdapServerMetadataOutput_UserBase = &sLdapServerMetadataOutput_UserBase
+var LdapServerMetadataOutput_UserRoleName = &sLdapServerMetadataOutput_UserRoleName
+var LdapServerMetadataOutput_UserSearchMatching = &sLdapServerMetadataOutput_UserSearchMatching
+var LdapServerMetadataOutput_UserSearchSubtree = &sLdapServerMetadataOutput_UserSearchSubtree
+
+var Logs = &sLogs
+var Logs_Audit = &sLogs_Audit
+var Logs_General = &sLogs_General
+
+var LogsSummary = &sLogsSummary
+var LogsSummary_Audit = &sLogsSummary_Audit
+var LogsSummary_AuditLogGroup = &sLogsSummary_AuditLogGroup
+var LogsSummary_General = &sLogsSummary_General
+var LogsSummary_GeneralLogGroup = &sLogsSummary_GeneralLogGroup
+var LogsSummary_Pending = &sLogsSummary_Pending
+
+var _MaxResults = &s_MaxResults
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_ErrorAttribute = &sNotFoundException_ErrorAttribute
+var NotFoundException_Message = &sNotFoundException_Message
+var NotFoundException_ResourceShareErrors = &sNotFoundException_ResourceShareErrors
+
+var PendingLogs = &sPendingLogs
+var PendingLogs_Audit = &sPendingLogs_Audit
+var PendingLogs_General = &sPendingLogs_General
+
+var PromoteMode = &sPromoteMode
+var PromoteMode_SWITCHOVER = &sPromoteMode_SWITCHOVER
+var PromoteMode_FAILOVER = &sPromoteMode_FAILOVER
+
+var ResourceShareError = &sResourceShareError
+var ResourceShareError_ErrorCode = &sResourceShareError_ErrorCode
+var ResourceShareError_ResourceShareArn = &sResourceShareError_ResourceShareArn
+var ResourceShareError_Status = &sResourceShareError_Status
+
+var SanitizationWarning = &sSanitizationWarning
+var SanitizationWarning_AttributeName = &sSanitizationWarning_AttributeName
+var SanitizationWarning_ElementName = &sSanitizationWarning_ElementName
+var SanitizationWarning_Reason = &sSanitizationWarning_Reason
+
+var SanitizationWarningReason = &sSanitizationWarningReason
+var SanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED = &sSanitizationWarningReason_DISALLOWED_ELEMENT_REMOVED
+var SanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED = &sSanitizationWarningReason_DISALLOWED_ATTRIBUTE_REMOVED
+var SanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED = &sSanitizationWarningReason_INVALID_ATTRIBUTE_VALUE_REMOVED
+
+var SharedResource = &sSharedResource
+var SharedResource_DnsNames = &sSharedResource_DnsNames
+var SharedResource_Error = &sSharedResource_Error
+var SharedResource_ResourceArn = &sSharedResource_ResourceArn
+var SharedResource_ResourceShareArns = &sSharedResource_ResourceShareArns
+var SharedResource_Status = &sSharedResource_Status
+var SharedResource_Type = &sSharedResource_Type
+
+var SharedResourceError = &sSharedResourceError
+var SharedResourceError_Code = &sSharedResourceError_Code
+var SharedResourceError_Message = &sSharedResourceError_Message
+
+var SharedResourceErrorCode = &sSharedResourceErrorCode
+var SharedResourceErrorCode_QUOTA_EXCEEDED = &sSharedResourceErrorCode_QUOTA_EXCEEDED
+var SharedResourceErrorCode_SHARE_NOT_FOUND = &sSharedResourceErrorCode_SHARE_NOT_FOUND
+var SharedResourceErrorCode_INVITE_FAILED = &sSharedResourceErrorCode_INVITE_FAILED
+var SharedResourceErrorCode_SETUP_INCOMPLETE = &sSharedResourceErrorCode_SETUP_INCOMPLETE
+var SharedResourceErrorCode_INTERNAL_ERROR = &sSharedResourceErrorCode_INTERNAL_ERROR
+var SharedResourceErrorCode_AZ_MISMATCH = &sSharedResourceErrorCode_AZ_MISMATCH
+var SharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND = &sSharedResourceErrorCode_RESOURCE_CONFIGURATION_NOT_FOUND
+
+var SharedResourceStatus = &sSharedResourceStatus
+var SharedResourceStatus_AVAILABLE = &sSharedResourceStatus_AVAILABLE
+var SharedResourceStatus_SETUP_IN_PROGRESS = &sSharedResourceStatus_SETUP_IN_PROGRESS
+var SharedResourceStatus_DELETION_IN_PROGRESS = &sSharedResourceStatus_DELETION_IN_PROGRESS
+var SharedResourceStatus_PENDING_CREATE = &sSharedResourceStatus_PENDING_CREATE
+var SharedResourceStatus_PENDING_DELETE = &sSharedResourceStatus_PENDING_DELETE
+var SharedResourceStatus_ERROR = &sSharedResourceStatus_ERROR
+
+var SharedResourceType = &sSharedResourceType
+var SharedResourceType_RESOURCE_SHARE = &sSharedResourceType_RESOURCE_SHARE
+var SharedResourceType_RESOURCE = &sSharedResourceType_RESOURCE
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_ErrorAttribute = &sUnauthorizedException_ErrorAttribute
+var UnauthorizedException_Message = &sUnauthorizedException_Message
+var UnauthorizedException_ResourceShareErrors = &sUnauthorizedException_ResourceShareErrors
+
+var User = &sUser
+var User_ConsoleAccess = &sUser_ConsoleAccess
+var User_Groups = &sUser_Groups
+var User_Password = &sUser_Password
+var User_Username = &sUser_Username
+var User_ReplicationUser = &sUser_ReplicationUser
+
+var UserPendingChanges = &sUserPendingChanges
+var UserPendingChanges_ConsoleAccess = &sUserPendingChanges_ConsoleAccess
+var UserPendingChanges_Groups = &sUserPendingChanges_Groups
+var UserPendingChanges_PendingChange = &sUserPendingChanges_PendingChange
+
+var UserSummary = &sUserSummary
+var UserSummary_PendingChange = &sUserSummary_PendingChange
+var UserSummary_Username = &sUserSummary_Username
+
+var WeeklyStartTime = &sWeeklyStartTime
+var WeeklyStartTime_DayOfWeek = &sWeeklyStartTime_DayOfWeek
+var WeeklyStartTime_TimeOfDay = &sWeeklyStartTime_TimeOfDay
+var WeeklyStartTime_TimeZone = &sWeeklyStartTime_TimeZone
+
+var CreateBrokerRequest = &sCreateBrokerRequest
+var CreateBrokerRequest_AuthenticationStrategy = &sCreateBrokerRequest_AuthenticationStrategy
+var CreateBrokerRequest_AutoMinorVersionUpgrade = &sCreateBrokerRequest_AutoMinorVersionUpgrade
+var CreateBrokerRequest_BrokerName = &sCreateBrokerRequest_BrokerName
+var CreateBrokerRequest_Configuration = &sCreateBrokerRequest_Configuration
+var CreateBrokerRequest_CreatorRequestId = &sCreateBrokerRequest_CreatorRequestId
+var CreateBrokerRequest_DeploymentMode = &sCreateBrokerRequest_DeploymentMode
+var CreateBrokerRequest_EncryptionOptions = &sCreateBrokerRequest_EncryptionOptions
+var CreateBrokerRequest_EngineType = &sCreateBrokerRequest_EngineType
+var CreateBrokerRequest_EngineVersion = &sCreateBrokerRequest_EngineVersion
+var CreateBrokerRequest_HostInstanceType = &sCreateBrokerRequest_HostInstanceType
+var CreateBrokerRequest_LdapServerMetadata = &sCreateBrokerRequest_LdapServerMetadata
+var CreateBrokerRequest_Logs = &sCreateBrokerRequest_Logs
+var CreateBrokerRequest_MaintenanceWindowStartTime = &sCreateBrokerRequest_MaintenanceWindowStartTime
+var CreateBrokerRequest_PubliclyAccessible = &sCreateBrokerRequest_PubliclyAccessible
+var CreateBrokerRequest_SecurityGroups = &sCreateBrokerRequest_SecurityGroups
+var CreateBrokerRequest_StorageSize = &sCreateBrokerRequest_StorageSize
+var CreateBrokerRequest_StorageType = &sCreateBrokerRequest_StorageType
+var CreateBrokerRequest_SubnetIds = &sCreateBrokerRequest_SubnetIds
+var CreateBrokerRequest_Tags = &sCreateBrokerRequest_Tags
+var CreateBrokerRequest_Users = &sCreateBrokerRequest_Users
+var CreateBrokerRequest_DataReplicationMode = &sCreateBrokerRequest_DataReplicationMode
+var CreateBrokerRequest_DataReplicationPrimaryBrokerArn = &sCreateBrokerRequest_DataReplicationPrimaryBrokerArn
+
+var CreateBrokerResponse = &sCreateBrokerResponse
+var CreateBrokerResponse_BrokerArn = &sCreateBrokerResponse_BrokerArn
+var CreateBrokerResponse_BrokerId = &sCreateBrokerResponse_BrokerId
+
+var CreateConfigurationRequest = &sCreateConfigurationRequest
+var CreateConfigurationRequest_AuthenticationStrategy = &sCreateConfigurationRequest_AuthenticationStrategy
+var CreateConfigurationRequest_EngineType = &sCreateConfigurationRequest_EngineType
+var CreateConfigurationRequest_EngineVersion = &sCreateConfigurationRequest_EngineVersion
+var CreateConfigurationRequest_Name = &sCreateConfigurationRequest_Name
+var CreateConfigurationRequest_Tags = &sCreateConfigurationRequest_Tags
+
+var CreateConfigurationResponse = &sCreateConfigurationResponse
+var CreateConfigurationResponse_Arn = &sCreateConfigurationResponse_Arn
+var CreateConfigurationResponse_AuthenticationStrategy = &sCreateConfigurationResponse_AuthenticationStrategy
+var CreateConfigurationResponse_Created = &sCreateConfigurationResponse_Created
+var CreateConfigurationResponse_Id = &sCreateConfigurationResponse_Id
+var CreateConfigurationResponse_LatestRevision = &sCreateConfigurationResponse_LatestRevision
+var CreateConfigurationResponse_Name = &sCreateConfigurationResponse_Name
+
+var CreateTagsRequest = &sCreateTagsRequest
+var CreateTagsRequest_ResourceArn = &sCreateTagsRequest_ResourceArn
+var CreateTagsRequest_Tags = &sCreateTagsRequest_Tags
+
+var CreateUserRequest = &sCreateUserRequest
+var CreateUserRequest_BrokerId = &sCreateUserRequest_BrokerId
+var CreateUserRequest_ConsoleAccess = &sCreateUserRequest_ConsoleAccess
+var CreateUserRequest_Groups = &sCreateUserRequest_Groups
+var CreateUserRequest_Password = &sCreateUserRequest_Password
+var CreateUserRequest_Username = &sCreateUserRequest_Username
+var CreateUserRequest_ReplicationUser = &sCreateUserRequest_ReplicationUser
+
+var CreateUserResponse = &sCreateUserResponse
+
+var DeleteBrokerRequest = &sDeleteBrokerRequest
+var DeleteBrokerRequest_BrokerId = &sDeleteBrokerRequest_BrokerId
+
+var DeleteBrokerResponse = &sDeleteBrokerResponse
+var DeleteBrokerResponse_BrokerId = &sDeleteBrokerResponse_BrokerId
+
+var DeleteConfigurationRequest = &sDeleteConfigurationRequest
+var DeleteConfigurationRequest_ConfigurationId = &sDeleteConfigurationRequest_ConfigurationId
+
+var DeleteConfigurationResponse = &sDeleteConfigurationResponse
+var DeleteConfigurationResponse_ConfigurationId = &sDeleteConfigurationResponse_ConfigurationId
+
+var DeleteTagsRequest = &sDeleteTagsRequest
+var DeleteTagsRequest_ResourceArn = &sDeleteTagsRequest_ResourceArn
+var DeleteTagsRequest_TagKeys = &sDeleteTagsRequest_TagKeys
+
+var DeleteUserRequest = &sDeleteUserRequest
+var DeleteUserRequest_BrokerId = &sDeleteUserRequest_BrokerId
+var DeleteUserRequest_Username = &sDeleteUserRequest_Username
+
+var DeleteUserResponse = &sDeleteUserResponse
+
+var DescribeBrokerEngineTypesRequest = &sDescribeBrokerEngineTypesRequest
+var DescribeBrokerEngineTypesRequest_EngineType = &sDescribeBrokerEngineTypesRequest_EngineType
+var DescribeBrokerEngineTypesRequest_MaxResults = &sDescribeBrokerEngineTypesRequest_MaxResults
+var DescribeBrokerEngineTypesRequest_NextToken = &sDescribeBrokerEngineTypesRequest_NextToken
+
+var DescribeBrokerEngineTypesResponse = &sDescribeBrokerEngineTypesResponse
+var DescribeBrokerEngineTypesResponse_BrokerEngineTypes = &sDescribeBrokerEngineTypesResponse_BrokerEngineTypes
+var DescribeBrokerEngineTypesResponse_MaxResults = &sDescribeBrokerEngineTypesResponse_MaxResults
+var DescribeBrokerEngineTypesResponse_NextToken = &sDescribeBrokerEngineTypesResponse_NextToken
+
+var DescribeBrokerRequest = &sDescribeBrokerRequest
+var DescribeBrokerRequest_BrokerId = &sDescribeBrokerRequest_BrokerId
+
+var DescribeBrokerInstanceOptionsRequest = &sDescribeBrokerInstanceOptionsRequest
+var DescribeBrokerInstanceOptionsRequest_EngineType = &sDescribeBrokerInstanceOptionsRequest_EngineType
+var DescribeBrokerInstanceOptionsRequest_HostInstanceType = &sDescribeBrokerInstanceOptionsRequest_HostInstanceType
+var DescribeBrokerInstanceOptionsRequest_MaxResults = &sDescribeBrokerInstanceOptionsRequest_MaxResults
+var DescribeBrokerInstanceOptionsRequest_NextToken = &sDescribeBrokerInstanceOptionsRequest_NextToken
+var DescribeBrokerInstanceOptionsRequest_StorageType = &sDescribeBrokerInstanceOptionsRequest_StorageType
+
+var DescribeBrokerInstanceOptionsResponse = &sDescribeBrokerInstanceOptionsResponse
+var DescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions = &sDescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions
+var DescribeBrokerInstanceOptionsResponse_MaxResults = &sDescribeBrokerInstanceOptionsResponse_MaxResults
+var DescribeBrokerInstanceOptionsResponse_NextToken = &sDescribeBrokerInstanceOptionsResponse_NextToken
+
+var DescribeBrokerResponse = &sDescribeBrokerResponse
+var DescribeBrokerResponse_ActionsRequired = &sDescribeBrokerResponse_ActionsRequired
+var DescribeBrokerResponse_AuthenticationStrategy = &sDescribeBrokerResponse_AuthenticationStrategy
+var DescribeBrokerResponse_AutoMinorVersionUpgrade = &sDescribeBrokerResponse_AutoMinorVersionUpgrade
+var DescribeBrokerResponse_BrokerArn = &sDescribeBrokerResponse_BrokerArn
+var DescribeBrokerResponse_BrokerId = &sDescribeBrokerResponse_BrokerId
+var DescribeBrokerResponse_BrokerInstances = &sDescribeBrokerResponse_BrokerInstances
+var DescribeBrokerResponse_BrokerName = &sDescribeBrokerResponse_BrokerName
+var DescribeBrokerResponse_BrokerState = &sDescribeBrokerResponse_BrokerState
+var DescribeBrokerResponse_Configurations = &sDescribeBrokerResponse_Configurations
+var DescribeBrokerResponse_Created = &sDescribeBrokerResponse_Created
+var DescribeBrokerResponse_DeploymentMode = &sDescribeBrokerResponse_DeploymentMode
+var DescribeBrokerResponse_EncryptionOptions = &sDescribeBrokerResponse_EncryptionOptions
+var DescribeBrokerResponse_EngineType = &sDescribeBrokerResponse_EngineType
+var DescribeBrokerResponse_EngineVersion = &sDescribeBrokerResponse_EngineVersion
+var DescribeBrokerResponse_HostInstanceType = &sDescribeBrokerResponse_HostInstanceType
+var DescribeBrokerResponse_LdapServerMetadata = &sDescribeBrokerResponse_LdapServerMetadata
+var DescribeBrokerResponse_Logs = &sDescribeBrokerResponse_Logs
+var DescribeBrokerResponse_MaintenanceWindowStartTime = &sDescribeBrokerResponse_MaintenanceWindowStartTime
+var DescribeBrokerResponse_PendingAuthenticationStrategy = &sDescribeBrokerResponse_PendingAuthenticationStrategy
+var DescribeBrokerResponse_PendingEngineVersion = &sDescribeBrokerResponse_PendingEngineVersion
+var DescribeBrokerResponse_PendingHostInstanceType = &sDescribeBrokerResponse_PendingHostInstanceType
+var DescribeBrokerResponse_PendingLdapServerMetadata = &sDescribeBrokerResponse_PendingLdapServerMetadata
+var DescribeBrokerResponse_PendingSecurityGroups = &sDescribeBrokerResponse_PendingSecurityGroups
+var DescribeBrokerResponse_PendingStorageSize = &sDescribeBrokerResponse_PendingStorageSize
+var DescribeBrokerResponse_PubliclyAccessible = &sDescribeBrokerResponse_PubliclyAccessible
+var DescribeBrokerResponse_SecurityGroups = &sDescribeBrokerResponse_SecurityGroups
+var DescribeBrokerResponse_StorageSize = &sDescribeBrokerResponse_StorageSize
+var DescribeBrokerResponse_StorageType = &sDescribeBrokerResponse_StorageType
+var DescribeBrokerResponse_SubnetIds = &sDescribeBrokerResponse_SubnetIds
+var DescribeBrokerResponse_Tags = &sDescribeBrokerResponse_Tags
+var DescribeBrokerResponse_Users = &sDescribeBrokerResponse_Users
+var DescribeBrokerResponse_DataReplicationMetadata = &sDescribeBrokerResponse_DataReplicationMetadata
+var DescribeBrokerResponse_DataReplicationMode = &sDescribeBrokerResponse_DataReplicationMode
+var DescribeBrokerResponse_PendingDataReplicationMetadata = &sDescribeBrokerResponse_PendingDataReplicationMetadata
+var DescribeBrokerResponse_PendingDataReplicationMode = &sDescribeBrokerResponse_PendingDataReplicationMode
+
+var DescribeConfigurationRequest = &sDescribeConfigurationRequest
+var DescribeConfigurationRequest_ConfigurationId = &sDescribeConfigurationRequest_ConfigurationId
+
+var DescribeConfigurationResponse = &sDescribeConfigurationResponse
+var DescribeConfigurationResponse_Arn = &sDescribeConfigurationResponse_Arn
+var DescribeConfigurationResponse_AuthenticationStrategy = &sDescribeConfigurationResponse_AuthenticationStrategy
+var DescribeConfigurationResponse_Created = &sDescribeConfigurationResponse_Created
+var DescribeConfigurationResponse_Description = &sDescribeConfigurationResponse_Description
+var DescribeConfigurationResponse_EngineType = &sDescribeConfigurationResponse_EngineType
+var DescribeConfigurationResponse_EngineVersion = &sDescribeConfigurationResponse_EngineVersion
+var DescribeConfigurationResponse_Id = &sDescribeConfigurationResponse_Id
+var DescribeConfigurationResponse_LatestRevision = &sDescribeConfigurationResponse_LatestRevision
+var DescribeConfigurationResponse_Name = &sDescribeConfigurationResponse_Name
+var DescribeConfigurationResponse_Tags = &sDescribeConfigurationResponse_Tags
+
+var DescribeConfigurationRevisionRequest = &sDescribeConfigurationRevisionRequest
+var DescribeConfigurationRevisionRequest_ConfigurationId = &sDescribeConfigurationRevisionRequest_ConfigurationId
+var DescribeConfigurationRevisionRequest_ConfigurationRevision = &sDescribeConfigurationRevisionRequest_ConfigurationRevision
+
+var DescribeConfigurationRevisionResponse = &sDescribeConfigurationRevisionResponse
+var DescribeConfigurationRevisionResponse_ConfigurationId = &sDescribeConfigurationRevisionResponse_ConfigurationId
+var DescribeConfigurationRevisionResponse_Created = &sDescribeConfigurationRevisionResponse_Created
+var DescribeConfigurationRevisionResponse_Data = &sDescribeConfigurationRevisionResponse_Data
+var DescribeConfigurationRevisionResponse_Description = &sDescribeConfigurationRevisionResponse_Description
+
+var DescribeSharedResourcesRequest = &sDescribeSharedResourcesRequest
+var DescribeSharedResourcesRequest_BrokerId = &sDescribeSharedResourcesRequest_BrokerId
+var DescribeSharedResourcesRequest_MaxResults = &sDescribeSharedResourcesRequest_MaxResults
+var DescribeSharedResourcesRequest_NextToken = &sDescribeSharedResourcesRequest_NextToken
+
+var DescribeSharedResourcesResponse = &sDescribeSharedResourcesResponse
+var DescribeSharedResourcesResponse_NextToken = &sDescribeSharedResourcesResponse_NextToken
+var DescribeSharedResourcesResponse_SharedResources = &sDescribeSharedResourcesResponse_SharedResources
+
+var DescribeUserRequest = &sDescribeUserRequest
+var DescribeUserRequest_BrokerId = &sDescribeUserRequest_BrokerId
+var DescribeUserRequest_Username = &sDescribeUserRequest_Username
+
+var DescribeUserResponse = &sDescribeUserResponse
+var DescribeUserResponse_BrokerId = &sDescribeUserResponse_BrokerId
+var DescribeUserResponse_ConsoleAccess = &sDescribeUserResponse_ConsoleAccess
+var DescribeUserResponse_Groups = &sDescribeUserResponse_Groups
+var DescribeUserResponse_Pending = &sDescribeUserResponse_Pending
+var DescribeUserResponse_Username = &sDescribeUserResponse_Username
+var DescribeUserResponse_ReplicationUser = &sDescribeUserResponse_ReplicationUser
+
+var ListBrokersRequest = &sListBrokersRequest
+var ListBrokersRequest_MaxResults = &sListBrokersRequest_MaxResults
+var ListBrokersRequest_NextToken = &sListBrokersRequest_NextToken
+
+var ListBrokersResponse = &sListBrokersResponse
+var ListBrokersResponse_BrokerSummaries = &sListBrokersResponse_BrokerSummaries
+var ListBrokersResponse_NextToken = &sListBrokersResponse_NextToken
+
+var ListConfigurationRevisionsRequest = &sListConfigurationRevisionsRequest
+var ListConfigurationRevisionsRequest_ConfigurationId = &sListConfigurationRevisionsRequest_ConfigurationId
+var ListConfigurationRevisionsRequest_MaxResults = &sListConfigurationRevisionsRequest_MaxResults
+var ListConfigurationRevisionsRequest_NextToken = &sListConfigurationRevisionsRequest_NextToken
+
+var ListConfigurationRevisionsResponse = &sListConfigurationRevisionsResponse
+var ListConfigurationRevisionsResponse_ConfigurationId = &sListConfigurationRevisionsResponse_ConfigurationId
+var ListConfigurationRevisionsResponse_MaxResults = &sListConfigurationRevisionsResponse_MaxResults
+var ListConfigurationRevisionsResponse_NextToken = &sListConfigurationRevisionsResponse_NextToken
+var ListConfigurationRevisionsResponse_Revisions = &sListConfigurationRevisionsResponse_Revisions
+
+var ListConfigurationsRequest = &sListConfigurationsRequest
+var ListConfigurationsRequest_MaxResults = &sListConfigurationsRequest_MaxResults
+var ListConfigurationsRequest_NextToken = &sListConfigurationsRequest_NextToken
+
+var ListConfigurationsResponse = &sListConfigurationsResponse
+var ListConfigurationsResponse_Configurations = &sListConfigurationsResponse_Configurations
+var ListConfigurationsResponse_MaxResults = &sListConfigurationsResponse_MaxResults
+var ListConfigurationsResponse_NextToken = &sListConfigurationsResponse_NextToken
+
+var ListTagsRequest = &sListTagsRequest
+var ListTagsRequest_ResourceArn = &sListTagsRequest_ResourceArn
+
+var ListTagsResponse = &sListTagsResponse
+var ListTagsResponse_Tags = &sListTagsResponse_Tags
+
+var ListUsersRequest = &sListUsersRequest
+var ListUsersRequest_BrokerId = &sListUsersRequest_BrokerId
+var ListUsersRequest_MaxResults = &sListUsersRequest_MaxResults
+var ListUsersRequest_NextToken = &sListUsersRequest_NextToken
+
+var ListUsersResponse = &sListUsersResponse
+var ListUsersResponse_BrokerId = &sListUsersResponse_BrokerId
+var ListUsersResponse_MaxResults = &sListUsersResponse_MaxResults
+var ListUsersResponse_NextToken = &sListUsersResponse_NextToken
+var ListUsersResponse_Users = &sListUsersResponse_Users
+
+var PromoteRequest = &sPromoteRequest
+var PromoteRequest_BrokerId = &sPromoteRequest_BrokerId
+var PromoteRequest_Mode = &sPromoteRequest_Mode
+
+var PromoteResponse = &sPromoteResponse
+var PromoteResponse_BrokerId = &sPromoteResponse_BrokerId
+
+var RebootBrokerRequest = &sRebootBrokerRequest
+var RebootBrokerRequest_BrokerId = &sRebootBrokerRequest_BrokerId
+
+var RebootBrokerResponse = &sRebootBrokerResponse
+
+var UpdateBrokerRequest = &sUpdateBrokerRequest
+var UpdateBrokerRequest_AuthenticationStrategy = &sUpdateBrokerRequest_AuthenticationStrategy
+var UpdateBrokerRequest_AutoMinorVersionUpgrade = &sUpdateBrokerRequest_AutoMinorVersionUpgrade
+var UpdateBrokerRequest_BrokerId = &sUpdateBrokerRequest_BrokerId
+var UpdateBrokerRequest_Configuration = &sUpdateBrokerRequest_Configuration
+var UpdateBrokerRequest_EngineVersion = &sUpdateBrokerRequest_EngineVersion
+var UpdateBrokerRequest_HostInstanceType = &sUpdateBrokerRequest_HostInstanceType
+var UpdateBrokerRequest_LdapServerMetadata = &sUpdateBrokerRequest_LdapServerMetadata
+var UpdateBrokerRequest_Logs = &sUpdateBrokerRequest_Logs
+var UpdateBrokerRequest_MaintenanceWindowStartTime = &sUpdateBrokerRequest_MaintenanceWindowStartTime
+var UpdateBrokerRequest_ResourceShareArns = &sUpdateBrokerRequest_ResourceShareArns
+var UpdateBrokerRequest_SecurityGroups = &sUpdateBrokerRequest_SecurityGroups
+var UpdateBrokerRequest_StorageSize = &sUpdateBrokerRequest_StorageSize
+var UpdateBrokerRequest_DataReplicationMode = &sUpdateBrokerRequest_DataReplicationMode
+
+var UpdateBrokerResponse = &sUpdateBrokerResponse
+var UpdateBrokerResponse_AuthenticationStrategy = &sUpdateBrokerResponse_AuthenticationStrategy
+var UpdateBrokerResponse_AutoMinorVersionUpgrade = &sUpdateBrokerResponse_AutoMinorVersionUpgrade
+var UpdateBrokerResponse_BrokerId = &sUpdateBrokerResponse_BrokerId
+var UpdateBrokerResponse_Configuration = &sUpdateBrokerResponse_Configuration
+var UpdateBrokerResponse_EngineVersion = &sUpdateBrokerResponse_EngineVersion
+var UpdateBrokerResponse_HostInstanceType = &sUpdateBrokerResponse_HostInstanceType
+var UpdateBrokerResponse_LdapServerMetadata = &sUpdateBrokerResponse_LdapServerMetadata
+var UpdateBrokerResponse_Logs = &sUpdateBrokerResponse_Logs
+var UpdateBrokerResponse_MaintenanceWindowStartTime = &sUpdateBrokerResponse_MaintenanceWindowStartTime
+var UpdateBrokerResponse_ResourceShareArns = &sUpdateBrokerResponse_ResourceShareArns
+var UpdateBrokerResponse_SecurityGroups = &sUpdateBrokerResponse_SecurityGroups
+var UpdateBrokerResponse_DataReplicationMetadata = &sUpdateBrokerResponse_DataReplicationMetadata
+var UpdateBrokerResponse_DataReplicationMode = &sUpdateBrokerResponse_DataReplicationMode
+var UpdateBrokerResponse_PendingDataReplicationMetadata = &sUpdateBrokerResponse_PendingDataReplicationMetadata
+var UpdateBrokerResponse_PendingDataReplicationMode = &sUpdateBrokerResponse_PendingDataReplicationMode
+var UpdateBrokerResponse_StorageSize = &sUpdateBrokerResponse_StorageSize
+
+var UpdateConfigurationRequest = &sUpdateConfigurationRequest
+var UpdateConfigurationRequest_ConfigurationId = &sUpdateConfigurationRequest_ConfigurationId
+var UpdateConfigurationRequest_Data = &sUpdateConfigurationRequest_Data
+var UpdateConfigurationRequest_Description = &sUpdateConfigurationRequest_Description
+
+var UpdateConfigurationResponse = &sUpdateConfigurationResponse
+var UpdateConfigurationResponse_Arn = &sUpdateConfigurationResponse_Arn
+var UpdateConfigurationResponse_Created = &sUpdateConfigurationResponse_Created
+var UpdateConfigurationResponse_Id = &sUpdateConfigurationResponse_Id
+var UpdateConfigurationResponse_LatestRevision = &sUpdateConfigurationResponse_LatestRevision
+var UpdateConfigurationResponse_Name = &sUpdateConfigurationResponse_Name
+var UpdateConfigurationResponse_Warnings = &sUpdateConfigurationResponse_Warnings
+
+var UpdateUserRequest = &sUpdateUserRequest
+var UpdateUserRequest_BrokerId = &sUpdateUserRequest_BrokerId
+var UpdateUserRequest_ConsoleAccess = &sUpdateUserRequest_ConsoleAccess
+var UpdateUserRequest_Groups = &sUpdateUserRequest_Groups
+var UpdateUserRequest_Password = &sUpdateUserRequest_Password
+var UpdateUserRequest_Username = &sUpdateUserRequest_Username
+var UpdateUserRequest_ReplicationUser = &sUpdateUserRequest_ReplicationUser
+
+var UpdateUserResponse = &sUpdateUserResponse
+
+var Mq = &smithy.ServiceSchema{Schema: &s_mq, Version: "2017-11-27"}

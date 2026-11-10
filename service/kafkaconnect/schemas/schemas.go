@@ -7,2040 +7,2021 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateConnector                                                 smithy.SchemaExtensions
+	eCreateCustomPlugin                                              smithy.SchemaExtensions
+	eCreateWorkerConfiguration                                       smithy.SchemaExtensions
+	eDeleteConnector                                                 smithy.SchemaExtensions
+	eDeleteCustomPlugin                                              smithy.SchemaExtensions
+	eDeleteWorkerConfiguration                                       smithy.SchemaExtensions
+	eDescribeConnector                                               smithy.SchemaExtensions
+	eDescribeConnectorOperation                                      smithy.SchemaExtensions
+	eDescribeCustomPlugin                                            smithy.SchemaExtensions
+	eDescribeWorkerConfiguration                                     smithy.SchemaExtensions
+	eListConnectorOperations                                         smithy.SchemaExtensions
+	eListConnectors                                                  smithy.SchemaExtensions
+	eListCustomPlugins                                               smithy.SchemaExtensions
+	eListTagsForResource                                             smithy.SchemaExtensions
+	eListWorkerConfigurations                                        smithy.SchemaExtensions
+	ePauseConnector                                                  smithy.SchemaExtensions
+	eRestartConnector                                                smithy.SchemaExtensions
+	eResumeConnector                                                 smithy.SchemaExtensions
+	eTagResource                                                     smithy.SchemaExtensions
+	eUntagResource                                                   smithy.SchemaExtensions
+	eUpdateConnector                                                 smithy.SchemaExtensions
+	e_KafkaConnect                                                   smithy.SchemaExtensions
+	e___boolean                                                      smithy.SchemaExtensions
+	e___integer                                                      smithy.SchemaExtensions
+	e___integerMin1Max100                                            smithy.SchemaExtensions
+	e___integerMin1Max8                                              smithy.SchemaExtensions
+	e___listOf__string                                               smithy.SchemaExtensions
+	e___listOf__string_member                                        smithy.SchemaExtensions
+	e___listOfConnectorOperationStep                                 smithy.SchemaExtensions
+	e___listOfConnectorOperationStep_member                          smithy.SchemaExtensions
+	e___listOfConnectorOperationSummary                              smithy.SchemaExtensions
+	e___listOfConnectorOperationSummary_member                       smithy.SchemaExtensions
+	e___listOfConnectorSummary                                       smithy.SchemaExtensions
+	e___listOfConnectorSummary_member                                smithy.SchemaExtensions
+	e___listOfCustomPluginSummary                                    smithy.SchemaExtensions
+	e___listOfCustomPluginSummary_member                             smithy.SchemaExtensions
+	e___listOfPlugin                                                 smithy.SchemaExtensions
+	e___listOfPlugin_member                                          smithy.SchemaExtensions
+	e___listOfPluginDescription                                      smithy.SchemaExtensions
+	e___listOfPluginDescription_member                               smithy.SchemaExtensions
+	e___listOfPluginUpdate                                           smithy.SchemaExtensions
+	e___listOfPluginUpdate_member                                    smithy.SchemaExtensions
+	e___listOfWorkerConfigurationSummary                             smithy.SchemaExtensions
+	e___listOfWorkerConfigurationSummary_member                      smithy.SchemaExtensions
+	e___long                                                         smithy.SchemaExtensions
+	e___longMin1                                                     smithy.SchemaExtensions
+	e___sensitiveString                                              smithy.SchemaExtensions
+	e___string                                                       smithy.SchemaExtensions
+	e___stringMax1024                                                smithy.SchemaExtensions
+	e___stringMin1Max128                                             smithy.SchemaExtensions
+	e___timestampIso8601                                             smithy.SchemaExtensions
+	eApacheKafkaCluster                                              smithy.SchemaExtensions
+	eApacheKafkaCluster_bootstrapServers                             smithy.SchemaExtensions
+	eApacheKafkaCluster_vpc                                          smithy.SchemaExtensions
+	eApacheKafkaClusterDescription                                   smithy.SchemaExtensions
+	eApacheKafkaClusterDescription_bootstrapServers                  smithy.SchemaExtensions
+	eApacheKafkaClusterDescription_vpc                               smithy.SchemaExtensions
+	eAutoScaling                                                     smithy.SchemaExtensions
+	eAutoScaling_maxWorkerCount                                      smithy.SchemaExtensions
+	eAutoScaling_mcuCount                                            smithy.SchemaExtensions
+	eAutoScaling_minWorkerCount                                      smithy.SchemaExtensions
+	eAutoScaling_scaleInPolicy                                       smithy.SchemaExtensions
+	eAutoScaling_scaleOutPolicy                                      smithy.SchemaExtensions
+	eAutoScaling_maxAutoscalingTaskCount                             smithy.SchemaExtensions
+	eAutoScalingDescription                                          smithy.SchemaExtensions
+	eAutoScalingDescription_maxWorkerCount                           smithy.SchemaExtensions
+	eAutoScalingDescription_mcuCount                                 smithy.SchemaExtensions
+	eAutoScalingDescription_minWorkerCount                           smithy.SchemaExtensions
+	eAutoScalingDescription_scaleInPolicy                            smithy.SchemaExtensions
+	eAutoScalingDescription_scaleOutPolicy                           smithy.SchemaExtensions
+	eAutoScalingDescription_maxAutoscalingTaskCount                  smithy.SchemaExtensions
+	eAutoScalingUpdate                                               smithy.SchemaExtensions
+	eAutoScalingUpdate_maxWorkerCount                                smithy.SchemaExtensions
+	eAutoScalingUpdate_mcuCount                                      smithy.SchemaExtensions
+	eAutoScalingUpdate_minWorkerCount                                smithy.SchemaExtensions
+	eAutoScalingUpdate_scaleInPolicy                                 smithy.SchemaExtensions
+	eAutoScalingUpdate_scaleOutPolicy                                smithy.SchemaExtensions
+	eAutoScalingUpdate_maxAutoscalingTaskCount                       smithy.SchemaExtensions
+	eBadRequestException                                             smithy.SchemaExtensions
+	eBadRequestException_message                                     smithy.SchemaExtensions
+	eCapacity                                                        smithy.SchemaExtensions
+	eCapacity_autoScaling                                            smithy.SchemaExtensions
+	eCapacity_provisionedCapacity                                    smithy.SchemaExtensions
+	eCapacityDescription                                             smithy.SchemaExtensions
+	eCapacityDescription_autoScaling                                 smithy.SchemaExtensions
+	eCapacityDescription_provisionedCapacity                         smithy.SchemaExtensions
+	eCapacityUpdate                                                  smithy.SchemaExtensions
+	eCapacityUpdate_autoScaling                                      smithy.SchemaExtensions
+	eCapacityUpdate_provisionedCapacity                              smithy.SchemaExtensions
+	eCloudWatchLogsLogDelivery                                       smithy.SchemaExtensions
+	eCloudWatchLogsLogDelivery_enabled                               smithy.SchemaExtensions
+	eCloudWatchLogsLogDelivery_logGroup                              smithy.SchemaExtensions
+	eCloudWatchLogsLogDeliveryDescription                            smithy.SchemaExtensions
+	eCloudWatchLogsLogDeliveryDescription_enabled                    smithy.SchemaExtensions
+	eCloudWatchLogsLogDeliveryDescription_logGroup                   smithy.SchemaExtensions
+	eConflictException                                               smithy.SchemaExtensions
+	eConflictException_message                                       smithy.SchemaExtensions
+	e_ConnectorConfiguration                                         smithy.SchemaExtensions
+	e_ConnectorConfiguration_key                                     smithy.SchemaExtensions
+	e_ConnectorConfiguration_value                                   smithy.SchemaExtensions
+	e_ConnectorConfigurationUpdate                                   smithy.SchemaExtensions
+	e_ConnectorConfigurationUpdate_key                               smithy.SchemaExtensions
+	e_ConnectorConfigurationUpdate_value                             smithy.SchemaExtensions
+	e_ConnectorOperationState                                        smithy.SchemaExtensions
+	eConnectorOperationStep                                          smithy.SchemaExtensions
+	eConnectorOperationStep_stepType                                 smithy.SchemaExtensions
+	eConnectorOperationStep_stepState                                smithy.SchemaExtensions
+	e_ConnectorOperationStepState                                    smithy.SchemaExtensions
+	e_ConnectorOperationStepType                                     smithy.SchemaExtensions
+	eConnectorOperationSummary                                       smithy.SchemaExtensions
+	eConnectorOperationSummary_connectorOperationArn                 smithy.SchemaExtensions
+	eConnectorOperationSummary_connectorOperationType                smithy.SchemaExtensions
+	eConnectorOperationSummary_connectorOperationState               smithy.SchemaExtensions
+	eConnectorOperationSummary_creationTime                          smithy.SchemaExtensions
+	eConnectorOperationSummary_endTime                               smithy.SchemaExtensions
+	e_ConnectorOperationType                                         smithy.SchemaExtensions
+	e_ConnectorState                                                 smithy.SchemaExtensions
+	eConnectorSummary                                                smithy.SchemaExtensions
+	eConnectorSummary_capacity                                       smithy.SchemaExtensions
+	eConnectorSummary_connectorArn                                   smithy.SchemaExtensions
+	eConnectorSummary_connectorDescription                           smithy.SchemaExtensions
+	eConnectorSummary_connectorName                                  smithy.SchemaExtensions
+	eConnectorSummary_connectorState                                 smithy.SchemaExtensions
+	eConnectorSummary_creationTime                                   smithy.SchemaExtensions
+	eConnectorSummary_currentVersion                                 smithy.SchemaExtensions
+	eConnectorSummary_kafkaCluster                                   smithy.SchemaExtensions
+	eConnectorSummary_kafkaClusterClientAuthentication               smithy.SchemaExtensions
+	eConnectorSummary_kafkaClusterEncryptionInTransit                smithy.SchemaExtensions
+	eConnectorSummary_kafkaConnectVersion                            smithy.SchemaExtensions
+	eConnectorSummary_logDelivery                                    smithy.SchemaExtensions
+	eConnectorSummary_networkType                                    smithy.SchemaExtensions
+	eConnectorSummary_plugins                                        smithy.SchemaExtensions
+	eConnectorSummary_serviceExecutionRoleArn                        smithy.SchemaExtensions
+	eConnectorSummary_workerConfiguration                            smithy.SchemaExtensions
+	eCustomPlugin                                                    smithy.SchemaExtensions
+	eCustomPlugin_customPluginArn                                    smithy.SchemaExtensions
+	eCustomPlugin_revision                                           smithy.SchemaExtensions
+	e_CustomPluginContentType                                        smithy.SchemaExtensions
+	eCustomPluginDescription                                         smithy.SchemaExtensions
+	eCustomPluginDescription_customPluginArn                         smithy.SchemaExtensions
+	eCustomPluginDescription_revision                                smithy.SchemaExtensions
+	eCustomPluginFileDescription                                     smithy.SchemaExtensions
+	eCustomPluginFileDescription_fileMd5                             smithy.SchemaExtensions
+	eCustomPluginFileDescription_fileSize                            smithy.SchemaExtensions
+	eCustomPluginLocation                                            smithy.SchemaExtensions
+	eCustomPluginLocation_s3Location                                 smithy.SchemaExtensions
+	eCustomPluginLocationDescription                                 smithy.SchemaExtensions
+	eCustomPluginLocationDescription_s3Location                      smithy.SchemaExtensions
+	eCustomPluginRevisionSummary                                     smithy.SchemaExtensions
+	eCustomPluginRevisionSummary_contentType                         smithy.SchemaExtensions
+	eCustomPluginRevisionSummary_creationTime                        smithy.SchemaExtensions
+	eCustomPluginRevisionSummary_description                         smithy.SchemaExtensions
+	eCustomPluginRevisionSummary_fileDescription                     smithy.SchemaExtensions
+	eCustomPluginRevisionSummary_location                            smithy.SchemaExtensions
+	eCustomPluginRevisionSummary_revision                            smithy.SchemaExtensions
+	e_CustomPluginState                                              smithy.SchemaExtensions
+	eCustomPluginSummary                                             smithy.SchemaExtensions
+	eCustomPluginSummary_creationTime                                smithy.SchemaExtensions
+	eCustomPluginSummary_customPluginArn                             smithy.SchemaExtensions
+	eCustomPluginSummary_customPluginState                           smithy.SchemaExtensions
+	eCustomPluginSummary_description                                 smithy.SchemaExtensions
+	eCustomPluginSummary_latestRevision                              smithy.SchemaExtensions
+	eCustomPluginSummary_name                                        smithy.SchemaExtensions
+	eCustomPluginUpdate                                              smithy.SchemaExtensions
+	eCustomPluginUpdate_customPluginArn                              smithy.SchemaExtensions
+	eCustomPluginUpdate_revision                                     smithy.SchemaExtensions
+	eFirehoseLogDelivery                                             smithy.SchemaExtensions
+	eFirehoseLogDelivery_deliveryStream                              smithy.SchemaExtensions
+	eFirehoseLogDelivery_enabled                                     smithy.SchemaExtensions
+	eFirehoseLogDeliveryDescription                                  smithy.SchemaExtensions
+	eFirehoseLogDeliveryDescription_deliveryStream                   smithy.SchemaExtensions
+	eFirehoseLogDeliveryDescription_enabled                          smithy.SchemaExtensions
+	eForbiddenException                                              smithy.SchemaExtensions
+	eForbiddenException_message                                      smithy.SchemaExtensions
+	eInternalServerErrorException                                    smithy.SchemaExtensions
+	eInternalServerErrorException_message                            smithy.SchemaExtensions
+	eKafkaCluster                                                    smithy.SchemaExtensions
+	eKafkaCluster_apacheKafkaCluster                                 smithy.SchemaExtensions
+	eKafkaClusterClientAuthentication                                smithy.SchemaExtensions
+	eKafkaClusterClientAuthentication_authenticationType             smithy.SchemaExtensions
+	eKafkaClusterClientAuthenticationDescription                     smithy.SchemaExtensions
+	eKafkaClusterClientAuthenticationDescription_authenticationType  smithy.SchemaExtensions
+	e_KafkaClusterClientAuthenticationType                           smithy.SchemaExtensions
+	eKafkaClusterDescription                                         smithy.SchemaExtensions
+	eKafkaClusterDescription_apacheKafkaCluster                      smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransit                                 smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransit_encryptionType                  smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransitDescription                      smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransitDescription_encryptionType       smithy.SchemaExtensions
+	e_KafkaClusterEncryptionInTransitType                            smithy.SchemaExtensions
+	eLogDelivery                                                     smithy.SchemaExtensions
+	eLogDelivery_workerLogDelivery                                   smithy.SchemaExtensions
+	eLogDeliveryDescription                                          smithy.SchemaExtensions
+	eLogDeliveryDescription_workerLogDelivery                        smithy.SchemaExtensions
+	e_MaxResults                                                     smithy.SchemaExtensions
+	e_NetworkType                                                    smithy.SchemaExtensions
+	eNotFoundException                                               smithy.SchemaExtensions
+	eNotFoundException_message                                       smithy.SchemaExtensions
+	ePlugin                                                          smithy.SchemaExtensions
+	ePlugin_customPlugin                                             smithy.SchemaExtensions
+	ePluginDescription                                               smithy.SchemaExtensions
+	ePluginDescription_customPlugin                                  smithy.SchemaExtensions
+	ePluginUpdate                                                    smithy.SchemaExtensions
+	ePluginUpdate_customPlugin                                       smithy.SchemaExtensions
+	eProvisionedCapacity                                             smithy.SchemaExtensions
+	eProvisionedCapacity_mcuCount                                    smithy.SchemaExtensions
+	eProvisionedCapacity_workerCount                                 smithy.SchemaExtensions
+	eProvisionedCapacityDescription                                  smithy.SchemaExtensions
+	eProvisionedCapacityDescription_mcuCount                         smithy.SchemaExtensions
+	eProvisionedCapacityDescription_workerCount                      smithy.SchemaExtensions
+	eProvisionedCapacityUpdate                                       smithy.SchemaExtensions
+	eProvisionedCapacityUpdate_mcuCount                              smithy.SchemaExtensions
+	eProvisionedCapacityUpdate_workerCount                           smithy.SchemaExtensions
+	eS3Location                                                      smithy.SchemaExtensions
+	eS3Location_bucketArn                                            smithy.SchemaExtensions
+	eS3Location_fileKey                                              smithy.SchemaExtensions
+	eS3Location_objectVersion                                        smithy.SchemaExtensions
+	eS3LocationDescription                                           smithy.SchemaExtensions
+	eS3LocationDescription_bucketArn                                 smithy.SchemaExtensions
+	eS3LocationDescription_fileKey                                   smithy.SchemaExtensions
+	eS3LocationDescription_objectVersion                             smithy.SchemaExtensions
+	eS3LogDelivery                                                   smithy.SchemaExtensions
+	eS3LogDelivery_bucket                                            smithy.SchemaExtensions
+	eS3LogDelivery_enabled                                           smithy.SchemaExtensions
+	eS3LogDelivery_prefix                                            smithy.SchemaExtensions
+	eS3LogDeliveryDescription                                        smithy.SchemaExtensions
+	eS3LogDeliveryDescription_bucket                                 smithy.SchemaExtensions
+	eS3LogDeliveryDescription_enabled                                smithy.SchemaExtensions
+	eS3LogDeliveryDescription_prefix                                 smithy.SchemaExtensions
+	eScaleInPolicy                                                   smithy.SchemaExtensions
+	eScaleInPolicy_cpuUtilizationPercentage                          smithy.SchemaExtensions
+	eScaleInPolicyDescription                                        smithy.SchemaExtensions
+	eScaleInPolicyDescription_cpuUtilizationPercentage               smithy.SchemaExtensions
+	eScaleInPolicyUpdate                                             smithy.SchemaExtensions
+	eScaleInPolicyUpdate_cpuUtilizationPercentage                    smithy.SchemaExtensions
+	eScaleOutPolicy                                                  smithy.SchemaExtensions
+	eScaleOutPolicy_cpuUtilizationPercentage                         smithy.SchemaExtensions
+	eScaleOutPolicyDescription                                       smithy.SchemaExtensions
+	eScaleOutPolicyDescription_cpuUtilizationPercentage              smithy.SchemaExtensions
+	eScaleOutPolicyUpdate                                            smithy.SchemaExtensions
+	eScaleOutPolicyUpdate_cpuUtilizationPercentage                   smithy.SchemaExtensions
+	eServiceUnavailableException                                     smithy.SchemaExtensions
+	eServiceUnavailableException_message                             smithy.SchemaExtensions
+	eStateDescription                                                smithy.SchemaExtensions
+	eStateDescription_code                                           smithy.SchemaExtensions
+	eStateDescription_message                                        smithy.SchemaExtensions
+	e_TagKey                                                         smithy.SchemaExtensions
+	e_TagKeyList                                                     smithy.SchemaExtensions
+	e_TagKeyList_member                                              smithy.SchemaExtensions
+	e_Tags                                                           smithy.SchemaExtensions
+	e_Tags_key                                                       smithy.SchemaExtensions
+	e_Tags_value                                                     smithy.SchemaExtensions
+	e_TagValue                                                       smithy.SchemaExtensions
+	eTooManyRequestsException                                        smithy.SchemaExtensions
+	eTooManyRequestsException_message                                smithy.SchemaExtensions
+	eUnauthorizedException                                           smithy.SchemaExtensions
+	eUnauthorizedException_message                                   smithy.SchemaExtensions
+	eVpc                                                             smithy.SchemaExtensions
+	eVpc_securityGroups                                              smithy.SchemaExtensions
+	eVpc_subnets                                                     smithy.SchemaExtensions
+	eVpcDescription                                                  smithy.SchemaExtensions
+	eVpcDescription_securityGroups                                   smithy.SchemaExtensions
+	eVpcDescription_subnets                                          smithy.SchemaExtensions
+	eWorkerConfiguration                                             smithy.SchemaExtensions
+	eWorkerConfiguration_revision                                    smithy.SchemaExtensions
+	eWorkerConfiguration_workerConfigurationArn                      smithy.SchemaExtensions
+	eWorkerConfigurationDescription                                  smithy.SchemaExtensions
+	eWorkerConfigurationDescription_revision                         smithy.SchemaExtensions
+	eWorkerConfigurationDescription_workerConfigurationArn           smithy.SchemaExtensions
+	eWorkerConfigurationRevisionDescription                          smithy.SchemaExtensions
+	eWorkerConfigurationRevisionDescription_creationTime             smithy.SchemaExtensions
+	eWorkerConfigurationRevisionDescription_description              smithy.SchemaExtensions
+	eWorkerConfigurationRevisionDescription_propertiesFileContent    smithy.SchemaExtensions
+	eWorkerConfigurationRevisionDescription_revision                 smithy.SchemaExtensions
+	eWorkerConfigurationRevisionSummary                              smithy.SchemaExtensions
+	eWorkerConfigurationRevisionSummary_creationTime                 smithy.SchemaExtensions
+	eWorkerConfigurationRevisionSummary_description                  smithy.SchemaExtensions
+	eWorkerConfigurationRevisionSummary_revision                     smithy.SchemaExtensions
+	e_WorkerConfigurationState                                       smithy.SchemaExtensions
+	eWorkerConfigurationSummary                                      smithy.SchemaExtensions
+	eWorkerConfigurationSummary_creationTime                         smithy.SchemaExtensions
+	eWorkerConfigurationSummary_description                          smithy.SchemaExtensions
+	eWorkerConfigurationSummary_latestRevision                       smithy.SchemaExtensions
+	eWorkerConfigurationSummary_name                                 smithy.SchemaExtensions
+	eWorkerConfigurationSummary_workerConfigurationArn               smithy.SchemaExtensions
+	eWorkerConfigurationSummary_workerConfigurationState             smithy.SchemaExtensions
+	eWorkerConfigurationUpdate                                       smithy.SchemaExtensions
+	eWorkerConfigurationUpdate_revision                              smithy.SchemaExtensions
+	eWorkerConfigurationUpdate_workerConfigurationArn                smithy.SchemaExtensions
+	eWorkerLogDelivery                                               smithy.SchemaExtensions
+	eWorkerLogDelivery_cloudWatchLogs                                smithy.SchemaExtensions
+	eWorkerLogDelivery_firehose                                      smithy.SchemaExtensions
+	eWorkerLogDelivery_s3                                            smithy.SchemaExtensions
+	eWorkerLogDeliveryDescription                                    smithy.SchemaExtensions
+	eWorkerLogDeliveryDescription_cloudWatchLogs                     smithy.SchemaExtensions
+	eWorkerLogDeliveryDescription_firehose                           smithy.SchemaExtensions
+	eWorkerLogDeliveryDescription_s3                                 smithy.SchemaExtensions
+	eWorkerSetting                                                   smithy.SchemaExtensions
+	eWorkerSetting_capacity                                          smithy.SchemaExtensions
+	eWorkerSetting_plugins                                           smithy.SchemaExtensions
+	eWorkerSetting_workerConfiguration                               smithy.SchemaExtensions
+	eWorkerSetting_useDefaultWorkerConfiguration                     smithy.SchemaExtensions
+	eCreateConnectorRequest                                          smithy.SchemaExtensions
+	eCreateConnectorRequest_capacity                                 smithy.SchemaExtensions
+	eCreateConnectorRequest_connectorConfiguration                   smithy.SchemaExtensions
+	eCreateConnectorRequest_connectorDescription                     smithy.SchemaExtensions
+	eCreateConnectorRequest_connectorName                            smithy.SchemaExtensions
+	eCreateConnectorRequest_kafkaCluster                             smithy.SchemaExtensions
+	eCreateConnectorRequest_kafkaClusterClientAuthentication         smithy.SchemaExtensions
+	eCreateConnectorRequest_kafkaClusterEncryptionInTransit          smithy.SchemaExtensions
+	eCreateConnectorRequest_kafkaConnectVersion                      smithy.SchemaExtensions
+	eCreateConnectorRequest_logDelivery                              smithy.SchemaExtensions
+	eCreateConnectorRequest_networkType                              smithy.SchemaExtensions
+	eCreateConnectorRequest_plugins                                  smithy.SchemaExtensions
+	eCreateConnectorRequest_serviceExecutionRoleArn                  smithy.SchemaExtensions
+	eCreateConnectorRequest_workerConfiguration                      smithy.SchemaExtensions
+	eCreateConnectorRequest_tags                                     smithy.SchemaExtensions
+	eCreateConnectorResponse                                         smithy.SchemaExtensions
+	eCreateConnectorResponse_connectorArn                            smithy.SchemaExtensions
+	eCreateConnectorResponse_connectorName                           smithy.SchemaExtensions
+	eCreateConnectorResponse_connectorState                          smithy.SchemaExtensions
+	eCreateCustomPluginRequest                                       smithy.SchemaExtensions
+	eCreateCustomPluginRequest_contentType                           smithy.SchemaExtensions
+	eCreateCustomPluginRequest_description                           smithy.SchemaExtensions
+	eCreateCustomPluginRequest_location                              smithy.SchemaExtensions
+	eCreateCustomPluginRequest_name                                  smithy.SchemaExtensions
+	eCreateCustomPluginRequest_tags                                  smithy.SchemaExtensions
+	eCreateCustomPluginResponse                                      smithy.SchemaExtensions
+	eCreateCustomPluginResponse_customPluginArn                      smithy.SchemaExtensions
+	eCreateCustomPluginResponse_customPluginState                    smithy.SchemaExtensions
+	eCreateCustomPluginResponse_name                                 smithy.SchemaExtensions
+	eCreateCustomPluginResponse_revision                             smithy.SchemaExtensions
+	eCreateWorkerConfigurationRequest                                smithy.SchemaExtensions
+	eCreateWorkerConfigurationRequest_description                    smithy.SchemaExtensions
+	eCreateWorkerConfigurationRequest_name                           smithy.SchemaExtensions
+	eCreateWorkerConfigurationRequest_propertiesFileContent          smithy.SchemaExtensions
+	eCreateWorkerConfigurationRequest_tags                           smithy.SchemaExtensions
+	eCreateWorkerConfigurationResponse                               smithy.SchemaExtensions
+	eCreateWorkerConfigurationResponse_creationTime                  smithy.SchemaExtensions
+	eCreateWorkerConfigurationResponse_latestRevision                smithy.SchemaExtensions
+	eCreateWorkerConfigurationResponse_name                          smithy.SchemaExtensions
+	eCreateWorkerConfigurationResponse_workerConfigurationArn        smithy.SchemaExtensions
+	eCreateWorkerConfigurationResponse_workerConfigurationState      smithy.SchemaExtensions
+	eDeleteConnectorRequest                                          smithy.SchemaExtensions
+	eDeleteConnectorRequest_connectorArn                             smithy.SchemaExtensions
+	eDeleteConnectorRequest_currentVersion                           smithy.SchemaExtensions
+	eDeleteConnectorResponse                                         smithy.SchemaExtensions
+	eDeleteConnectorResponse_connectorArn                            smithy.SchemaExtensions
+	eDeleteConnectorResponse_connectorState                          smithy.SchemaExtensions
+	eDeleteCustomPluginRequest                                       smithy.SchemaExtensions
+	eDeleteCustomPluginRequest_customPluginArn                       smithy.SchemaExtensions
+	eDeleteCustomPluginResponse                                      smithy.SchemaExtensions
+	eDeleteCustomPluginResponse_customPluginArn                      smithy.SchemaExtensions
+	eDeleteCustomPluginResponse_customPluginState                    smithy.SchemaExtensions
+	eDeleteWorkerConfigurationRequest                                smithy.SchemaExtensions
+	eDeleteWorkerConfigurationRequest_workerConfigurationArn         smithy.SchemaExtensions
+	eDeleteWorkerConfigurationResponse                               smithy.SchemaExtensions
+	eDeleteWorkerConfigurationResponse_workerConfigurationArn        smithy.SchemaExtensions
+	eDeleteWorkerConfigurationResponse_workerConfigurationState      smithy.SchemaExtensions
+	eDescribeConnectorRequest                                        smithy.SchemaExtensions
+	eDescribeConnectorRequest_connectorArn                           smithy.SchemaExtensions
+	eDescribeConnectorOperationRequest                               smithy.SchemaExtensions
+	eDescribeConnectorOperationRequest_connectorOperationArn         smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse                              smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_connectorArn                 smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_connectorOperationArn        smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_connectorOperationState      smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_connectorOperationType       smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_operationSteps               smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_originWorkerSetting          smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_originConnectorConfiguration smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_targetWorkerSetting          smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_targetConnectorConfiguration smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_errorInfo                    smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_creationTime                 smithy.SchemaExtensions
+	eDescribeConnectorOperationResponse_endTime                      smithy.SchemaExtensions
+	eDescribeConnectorResponse                                       smithy.SchemaExtensions
+	eDescribeConnectorResponse_capacity                              smithy.SchemaExtensions
+	eDescribeConnectorResponse_connectorArn                          smithy.SchemaExtensions
+	eDescribeConnectorResponse_connectorConfiguration                smithy.SchemaExtensions
+	eDescribeConnectorResponse_connectorDescription                  smithy.SchemaExtensions
+	eDescribeConnectorResponse_connectorName                         smithy.SchemaExtensions
+	eDescribeConnectorResponse_connectorState                        smithy.SchemaExtensions
+	eDescribeConnectorResponse_creationTime                          smithy.SchemaExtensions
+	eDescribeConnectorResponse_currentVersion                        smithy.SchemaExtensions
+	eDescribeConnectorResponse_kafkaCluster                          smithy.SchemaExtensions
+	eDescribeConnectorResponse_kafkaClusterClientAuthentication      smithy.SchemaExtensions
+	eDescribeConnectorResponse_kafkaClusterEncryptionInTransit       smithy.SchemaExtensions
+	eDescribeConnectorResponse_kafkaConnectVersion                   smithy.SchemaExtensions
+	eDescribeConnectorResponse_logDelivery                           smithy.SchemaExtensions
+	eDescribeConnectorResponse_networkType                           smithy.SchemaExtensions
+	eDescribeConnectorResponse_plugins                               smithy.SchemaExtensions
+	eDescribeConnectorResponse_serviceExecutionRoleArn               smithy.SchemaExtensions
+	eDescribeConnectorResponse_workerConfiguration                   smithy.SchemaExtensions
+	eDescribeConnectorResponse_stateDescription                      smithy.SchemaExtensions
+	eDescribeCustomPluginRequest                                     smithy.SchemaExtensions
+	eDescribeCustomPluginRequest_customPluginArn                     smithy.SchemaExtensions
+	eDescribeCustomPluginResponse                                    smithy.SchemaExtensions
+	eDescribeCustomPluginResponse_creationTime                       smithy.SchemaExtensions
+	eDescribeCustomPluginResponse_customPluginArn                    smithy.SchemaExtensions
+	eDescribeCustomPluginResponse_customPluginState                  smithy.SchemaExtensions
+	eDescribeCustomPluginResponse_description                        smithy.SchemaExtensions
+	eDescribeCustomPluginResponse_latestRevision                     smithy.SchemaExtensions
+	eDescribeCustomPluginResponse_name                               smithy.SchemaExtensions
+	eDescribeCustomPluginResponse_stateDescription                   smithy.SchemaExtensions
+	eDescribeWorkerConfigurationRequest                              smithy.SchemaExtensions
+	eDescribeWorkerConfigurationRequest_workerConfigurationArn       smithy.SchemaExtensions
+	eDescribeWorkerConfigurationResponse                             smithy.SchemaExtensions
+	eDescribeWorkerConfigurationResponse_creationTime                smithy.SchemaExtensions
+	eDescribeWorkerConfigurationResponse_description                 smithy.SchemaExtensions
+	eDescribeWorkerConfigurationResponse_latestRevision              smithy.SchemaExtensions
+	eDescribeWorkerConfigurationResponse_name                        smithy.SchemaExtensions
+	eDescribeWorkerConfigurationResponse_workerConfigurationArn      smithy.SchemaExtensions
+	eDescribeWorkerConfigurationResponse_workerConfigurationState    smithy.SchemaExtensions
+	eListConnectorOperationsRequest                                  smithy.SchemaExtensions
+	eListConnectorOperationsRequest_connectorArn                     smithy.SchemaExtensions
+	eListConnectorOperationsRequest_maxResults                       smithy.SchemaExtensions
+	eListConnectorOperationsRequest_nextToken                        smithy.SchemaExtensions
+	eListConnectorOperationsResponse                                 smithy.SchemaExtensions
+	eListConnectorOperationsResponse_connectorOperations             smithy.SchemaExtensions
+	eListConnectorOperationsResponse_nextToken                       smithy.SchemaExtensions
+	eListConnectorsRequest                                           smithy.SchemaExtensions
+	eListConnectorsRequest_connectorNamePrefix                       smithy.SchemaExtensions
+	eListConnectorsRequest_maxResults                                smithy.SchemaExtensions
+	eListConnectorsRequest_nextToken                                 smithy.SchemaExtensions
+	eListConnectorsResponse                                          smithy.SchemaExtensions
+	eListConnectorsResponse_connectors                               smithy.SchemaExtensions
+	eListConnectorsResponse_nextToken                                smithy.SchemaExtensions
+	eListCustomPluginsRequest                                        smithy.SchemaExtensions
+	eListCustomPluginsRequest_maxResults                             smithy.SchemaExtensions
+	eListCustomPluginsRequest_nextToken                              smithy.SchemaExtensions
+	eListCustomPluginsRequest_namePrefix                             smithy.SchemaExtensions
+	eListCustomPluginsResponse                                       smithy.SchemaExtensions
+	eListCustomPluginsResponse_customPlugins                         smithy.SchemaExtensions
+	eListCustomPluginsResponse_nextToken                             smithy.SchemaExtensions
+	eListTagsForResourceRequest                                      smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                          smithy.SchemaExtensions
+	eListTagsForResourceResponse                                     smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                smithy.SchemaExtensions
+	eListWorkerConfigurationsRequest                                 smithy.SchemaExtensions
+	eListWorkerConfigurationsRequest_maxResults                      smithy.SchemaExtensions
+	eListWorkerConfigurationsRequest_nextToken                       smithy.SchemaExtensions
+	eListWorkerConfigurationsRequest_namePrefix                      smithy.SchemaExtensions
+	eListWorkerConfigurationsResponse                                smithy.SchemaExtensions
+	eListWorkerConfigurationsResponse_nextToken                      smithy.SchemaExtensions
+	eListWorkerConfigurationsResponse_workerConfigurations           smithy.SchemaExtensions
+	ePauseConnectorRequest                                           smithy.SchemaExtensions
+	ePauseConnectorRequest_connectorArn                              smithy.SchemaExtensions
+	ePauseConnectorResponse                                          smithy.SchemaExtensions
+	ePauseConnectorResponse_connectorArn                             smithy.SchemaExtensions
+	ePauseConnectorResponse_connectorOperationArn                    smithy.SchemaExtensions
+	eRestartConnectorRequest                                         smithy.SchemaExtensions
+	eRestartConnectorRequest_connectorArn                            smithy.SchemaExtensions
+	eRestartConnectorRequest_onlyFailedTasks                         smithy.SchemaExtensions
+	eRestartConnectorResponse                                        smithy.SchemaExtensions
+	eRestartConnectorResponse_connectorArn                           smithy.SchemaExtensions
+	eRestartConnectorResponse_connectorOperationArn                  smithy.SchemaExtensions
+	eResumeConnectorRequest                                          smithy.SchemaExtensions
+	eResumeConnectorRequest_connectorArn                             smithy.SchemaExtensions
+	eResumeConnectorResponse                                         smithy.SchemaExtensions
+	eResumeConnectorResponse_connectorArn                            smithy.SchemaExtensions
+	eResumeConnectorResponse_connectorOperationArn                   smithy.SchemaExtensions
+	eTagResourceRequest                                              smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                  smithy.SchemaExtensions
+	eTagResourceRequest_tags                                         smithy.SchemaExtensions
+	eTagResourceResponse                                             smithy.SchemaExtensions
+	eUntagResourceRequest                                            smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                    smithy.SchemaExtensions
+	eUntagResourceResponse                                           smithy.SchemaExtensions
+	eUpdateConnectorRequest                                          smithy.SchemaExtensions
+	eUpdateConnectorRequest_capacity                                 smithy.SchemaExtensions
+	eUpdateConnectorRequest_connectorConfiguration                   smithy.SchemaExtensions
+	eUpdateConnectorRequest_skipHealthValidation                     smithy.SchemaExtensions
+	eUpdateConnectorRequest_connectorArn                             smithy.SchemaExtensions
+	eUpdateConnectorRequest_currentVersion                           smithy.SchemaExtensions
+	eUpdateConnectorRequest_plugins                                  smithy.SchemaExtensions
+	eUpdateConnectorRequest_workerConfiguration                      smithy.SchemaExtensions
+	eUpdateConnectorRequest_useDefaultWorkerConfiguration            smithy.SchemaExtensions
+	eUpdateConnectorResponse                                         smithy.SchemaExtensions
+	eUpdateConnectorResponse_connectorArn                            smithy.SchemaExtensions
+	eUpdateConnectorResponse_connectorState                          smithy.SchemaExtensions
+	eUpdateConnectorResponse_connectorOperationArn                   smithy.SchemaExtensions
+)
+
+var (
+	iCreateConnector                             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateConnector"}
+	iCreateCustomPlugin                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateCustomPlugin"}
+	iCreateWorkerConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateWorkerConfiguration"}
+	iDeleteConnector                             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteConnector"}
+	iDeleteCustomPlugin                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteCustomPlugin"}
+	iDeleteWorkerConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteWorkerConfiguration"}
+	iDescribeConnector                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeConnector"}
+	iDescribeConnectorOperation                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeConnectorOperation"}
+	iDescribeCustomPlugin                        = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeCustomPlugin"}
+	iDescribeWorkerConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeWorkerConfiguration"}
+	iListConnectorOperations                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListConnectorOperations"}
+	iListConnectors                              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListConnectors"}
+	iListCustomPlugins                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListCustomPlugins"}
+	iListTagsForResource                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListTagsForResource"}
+	iListWorkerConfigurations                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListWorkerConfigurations"}
+	iPauseConnector                              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "PauseConnector"}
+	iRestartConnector                            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "RestartConnector"}
+	iResumeConnector                             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ResumeConnector"}
+	iTagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "TagResource"}
+	iUntagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "UntagResource"}
+	iUpdateConnector                             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "UpdateConnector"}
+	i_KafkaConnect                               = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaConnect"}
+	i___boolean                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__boolean"}
+	i___integer                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__integer"}
+	i___integerMin1Max100                        = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__integerMin1Max100"}
+	i___integerMin1Max8                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__integerMin1Max8"}
+	i___listOf__string                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOf__string"}
+	i___listOfConnectorOperationStep             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfConnectorOperationStep"}
+	i___listOfConnectorOperationSummary          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfConnectorOperationSummary"}
+	i___listOfConnectorSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfConnectorSummary"}
+	i___listOfCustomPluginSummary                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfCustomPluginSummary"}
+	i___listOfPlugin                             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfPlugin"}
+	i___listOfPluginDescription                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfPluginDescription"}
+	i___listOfPluginUpdate                       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfPluginUpdate"}
+	i___listOfWorkerConfigurationSummary         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__listOfWorkerConfigurationSummary"}
+	i___long                                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__long"}
+	i___longMin1                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__longMin1"}
+	i___sensitiveString                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__sensitiveString"}
+	i___string                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__string"}
+	i___stringMax1024                            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__stringMax1024"}
+	i___stringMin1Max128                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__stringMin1Max128"}
+	i___timestampIso8601                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "__timestampIso8601"}
+	iApacheKafkaCluster                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ApacheKafkaCluster"}
+	iApacheKafkaClusterDescription               = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ApacheKafkaClusterDescription"}
+	iAutoScaling                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "AutoScaling"}
+	iAutoScalingDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "AutoScalingDescription"}
+	iAutoScalingUpdate                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "AutoScalingUpdate"}
+	iBadRequestException                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "BadRequestException"}
+	iCapacity                                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "Capacity"}
+	iCapacityDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CapacityDescription"}
+	iCapacityUpdate                              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CapacityUpdate"}
+	iCloudWatchLogsLogDelivery                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CloudWatchLogsLogDelivery"}
+	iCloudWatchLogsLogDeliveryDescription        = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CloudWatchLogsLogDeliveryDescription"}
+	iConflictException                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConflictException"}
+	i_ConnectorConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorConfiguration"}
+	i_ConnectorConfigurationUpdate               = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorConfigurationUpdate"}
+	i_ConnectorOperationState                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorOperationState"}
+	iConnectorOperationStep                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorOperationStep"}
+	i_ConnectorOperationStepState                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorOperationStepState"}
+	i_ConnectorOperationStepType                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorOperationStepType"}
+	iConnectorOperationSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorOperationSummary"}
+	i_ConnectorOperationType                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorOperationType"}
+	i_ConnectorState                             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorState"}
+	iConnectorSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ConnectorSummary"}
+	iCustomPlugin                                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPlugin"}
+	i_CustomPluginContentType                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginContentType"}
+	iCustomPluginDescription                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginDescription"}
+	iCustomPluginFileDescription                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginFileDescription"}
+	iCustomPluginLocation                        = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginLocation"}
+	iCustomPluginLocationDescription             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginLocationDescription"}
+	iCustomPluginRevisionSummary                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginRevisionSummary"}
+	i_CustomPluginState                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginState"}
+	iCustomPluginSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginSummary"}
+	iCustomPluginUpdate                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CustomPluginUpdate"}
+	iFirehoseLogDelivery                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "FirehoseLogDelivery"}
+	iFirehoseLogDeliveryDescription              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "FirehoseLogDeliveryDescription"}
+	iForbiddenException                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ForbiddenException"}
+	iInternalServerErrorException                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "InternalServerErrorException"}
+	iKafkaCluster                                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaCluster"}
+	iKafkaClusterClientAuthentication            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaClusterClientAuthentication"}
+	iKafkaClusterClientAuthenticationDescription = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaClusterClientAuthenticationDescription"}
+	i_KafkaClusterClientAuthenticationType       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaClusterClientAuthenticationType"}
+	iKafkaClusterDescription                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaClusterDescription"}
+	iKafkaClusterEncryptionInTransit             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaClusterEncryptionInTransit"}
+	iKafkaClusterEncryptionInTransitDescription  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaClusterEncryptionInTransitDescription"}
+	i_KafkaClusterEncryptionInTransitType        = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "KafkaClusterEncryptionInTransitType"}
+	iLogDelivery                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "LogDelivery"}
+	iLogDeliveryDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "LogDeliveryDescription"}
+	i_MaxResults                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "MaxResults"}
+	i_NetworkType                                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "NetworkType"}
+	iNotFoundException                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "NotFoundException"}
+	iPlugin                                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "Plugin"}
+	iPluginDescription                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "PluginDescription"}
+	iPluginUpdate                                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "PluginUpdate"}
+	iProvisionedCapacity                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ProvisionedCapacity"}
+	iProvisionedCapacityDescription              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ProvisionedCapacityDescription"}
+	iProvisionedCapacityUpdate                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ProvisionedCapacityUpdate"}
+	iS3Location                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "S3Location"}
+	iS3LocationDescription                       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "S3LocationDescription"}
+	iS3LogDelivery                               = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "S3LogDelivery"}
+	iS3LogDeliveryDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "S3LogDeliveryDescription"}
+	iScaleInPolicy                               = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ScaleInPolicy"}
+	iScaleInPolicyDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ScaleInPolicyDescription"}
+	iScaleInPolicyUpdate                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ScaleInPolicyUpdate"}
+	iScaleOutPolicy                              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ScaleOutPolicy"}
+	iScaleOutPolicyDescription                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ScaleOutPolicyDescription"}
+	iScaleOutPolicyUpdate                        = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ScaleOutPolicyUpdate"}
+	iServiceUnavailableException                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ServiceUnavailableException"}
+	iStateDescription                            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "StateDescription"}
+	i_TagKey                                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "TagKey"}
+	i_TagKeyList                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "TagKeyList"}
+	i_Tags                                       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "Tags"}
+	i_TagValue                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "TagValue"}
+	iTooManyRequestsException                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "TooManyRequestsException"}
+	iUnauthorizedException                       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "UnauthorizedException"}
+	iVpc                                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "Vpc"}
+	iVpcDescription                              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "VpcDescription"}
+	iWorkerConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerConfiguration"}
+	iWorkerConfigurationDescription              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerConfigurationDescription"}
+	iWorkerConfigurationRevisionDescription      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerConfigurationRevisionDescription"}
+	iWorkerConfigurationRevisionSummary          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerConfigurationRevisionSummary"}
+	i_WorkerConfigurationState                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerConfigurationState"}
+	iWorkerConfigurationSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerConfigurationSummary"}
+	iWorkerConfigurationUpdate                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerConfigurationUpdate"}
+	iWorkerLogDelivery                           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerLogDelivery"}
+	iWorkerLogDeliveryDescription                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerLogDeliveryDescription"}
+	iWorkerSetting                               = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "WorkerSetting"}
+	iCreateConnectorRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateConnectorRequest"}
+	iCreateConnectorResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateConnectorResponse"}
+	iCreateCustomPluginRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateCustomPluginRequest"}
+	iCreateCustomPluginResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateCustomPluginResponse"}
+	iCreateWorkerConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateWorkerConfigurationRequest"}
+	iCreateWorkerConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "CreateWorkerConfigurationResponse"}
+	iDeleteConnectorRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteConnectorRequest"}
+	iDeleteConnectorResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteConnectorResponse"}
+	iDeleteCustomPluginRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteCustomPluginRequest"}
+	iDeleteCustomPluginResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteCustomPluginResponse"}
+	iDeleteWorkerConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteWorkerConfigurationRequest"}
+	iDeleteWorkerConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DeleteWorkerConfigurationResponse"}
+	iDescribeConnectorRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeConnectorRequest"}
+	iDescribeConnectorOperationRequest           = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeConnectorOperationRequest"}
+	iDescribeConnectorOperationResponse          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeConnectorOperationResponse"}
+	iDescribeConnectorResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeConnectorResponse"}
+	iDescribeCustomPluginRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeCustomPluginRequest"}
+	iDescribeCustomPluginResponse                = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeCustomPluginResponse"}
+	iDescribeWorkerConfigurationRequest          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeWorkerConfigurationRequest"}
+	iDescribeWorkerConfigurationResponse         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "DescribeWorkerConfigurationResponse"}
+	iListConnectorOperationsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListConnectorOperationsRequest"}
+	iListConnectorOperationsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListConnectorOperationsResponse"}
+	iListConnectorsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListConnectorsRequest"}
+	iListConnectorsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListConnectorsResponse"}
+	iListCustomPluginsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListCustomPluginsRequest"}
+	iListCustomPluginsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListCustomPluginsResponse"}
+	iListTagsForResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListTagsForResourceResponse"}
+	iListWorkerConfigurationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListWorkerConfigurationsRequest"}
+	iListWorkerConfigurationsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ListWorkerConfigurationsResponse"}
+	iPauseConnectorRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "PauseConnectorRequest"}
+	iPauseConnectorResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "PauseConnectorResponse"}
+	iRestartConnectorRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "RestartConnectorRequest"}
+	iRestartConnectorResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "RestartConnectorResponse"}
+	iResumeConnectorRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ResumeConnectorRequest"}
+	iResumeConnectorResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "ResumeConnectorResponse"}
+	iTagResourceRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "TagResourceRequest"}
+	iTagResourceResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "TagResourceResponse"}
+	iUntagResourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "UntagResourceResponse"}
+	iUpdateConnectorRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "UpdateConnectorRequest"}
+	iUpdateConnectorResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.kafkaconnect", Name: "UpdateConnectorResponse"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/connectors",
-	Code: 200})
-
-var CreateCustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateCustomPlugin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/custom-plugins",
-	Code: 200})
-
-var CreateWorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateWorkerConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/worker-configurations",
-	Code: 200})
-
-var DeleteConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/connectors/{connectorArn}",
-	Code: 200})
-
-var DeleteCustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteCustomPlugin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/custom-plugins/{customPluginArn}",
-	Code: 200})
-
-var DeleteWorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteWorkerConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/worker-configurations/{workerConfigurationArn}",
-	Code: 200})
-
-var DescribeConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/connectors/{connectorArn}",
-	Code: 200})
-
-var DescribeConnectorOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorOperation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/connectorOperations/{connectorOperationArn}",
-	Code: 200})
-
-var DescribeCustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeCustomPlugin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/custom-plugins/{customPluginArn}",
-	Code: 200})
-
-var DescribeWorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeWorkerConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/worker-configurations/{workerConfigurationArn}",
-	Code: 200})
-
-var ListConnectorOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorOperations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/connectors/{connectorArn}/operations",
-	Code: 200})
-
-var ListConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/connectors",
-	Code: 200})
-
-var ListCustomPlugins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListCustomPlugins",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/custom-plugins",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var ListWorkerConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListWorkerConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/worker-configurations",
-	Code: 200})
-
-var PauseConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PauseConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/connectors/{connectorArn}/pause",
-	Code: 200})
-
-var RestartConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "RestartConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/connectors/{connectorArn}/restart",
-	Code: 200})
-
-var ResumeConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ResumeConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/connectors/{connectorArn}/resume",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UpdateConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/connectors/{connectorArn}",
-	Code: 200})
-
-var _KafkaConnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaConnect",
-}, smithy.ShapeTypeService, 0)
-
-var KafkaConnect = smithy.NewServiceSchema(_KafkaConnect, "2021-09-14")
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1Max100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__integerMin1Max100",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1Max8 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__integerMin1Max8",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOfConnectorOperationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfConnectorOperationStep",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConnectorOperationStep_member *smithy.Schema
-
-var ___listOfConnectorOperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfConnectorOperationSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConnectorOperationSummary_member *smithy.Schema
-
-var ___listOfConnectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfConnectorSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConnectorSummary_member *smithy.Schema
-
-var ___listOfCustomPluginSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfCustomPluginSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfCustomPluginSummary_member *smithy.Schema
-
-var ___listOfPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfPlugin",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPlugin_member *smithy.Schema
-
-var ___listOfPluginDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfPluginDescription",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPluginDescription_member *smithy.Schema
-
-var ___listOfPluginUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfPluginUpdate",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPluginUpdate_member *smithy.Schema
-
-var ___listOfWorkerConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfWorkerConfigurationSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfWorkerConfigurationSummary_member *smithy.Schema
-
-var ___long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__long",
-}, smithy.ShapeTypeLong, 0)
-
-var ___longMin1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__longMin1",
-}, smithy.ShapeTypeLong, 0)
-
-var ___sensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__sensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__stringMax1024",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__stringMin1Max128",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__timestampIso8601",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ApacheKafkaCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ApacheKafkaCluster",
-}, smithy.ShapeTypeStructure, 2)
-var ApacheKafkaCluster_bootstrapServers *smithy.Schema
-
-var ApacheKafkaCluster_vpc *smithy.Schema
-
-var ApacheKafkaClusterDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ApacheKafkaClusterDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ApacheKafkaClusterDescription_bootstrapServers *smithy.Schema
-
-var ApacheKafkaClusterDescription_vpc *smithy.Schema
-
-var AutoScaling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "AutoScaling",
-}, smithy.ShapeTypeStructure, 6)
-var AutoScaling_maxWorkerCount *smithy.Schema
-
-var AutoScaling_mcuCount *smithy.Schema
-
-var AutoScaling_minWorkerCount *smithy.Schema
-
-var AutoScaling_scaleInPolicy *smithy.Schema
-
-var AutoScaling_scaleOutPolicy *smithy.Schema
-
-var AutoScaling_maxAutoscalingTaskCount *smithy.Schema
-
-var AutoScalingDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "AutoScalingDescription",
-}, smithy.ShapeTypeStructure, 6)
-var AutoScalingDescription_maxWorkerCount *smithy.Schema
-
-var AutoScalingDescription_mcuCount *smithy.Schema
-
-var AutoScalingDescription_minWorkerCount *smithy.Schema
-
-var AutoScalingDescription_scaleInPolicy *smithy.Schema
-
-var AutoScalingDescription_scaleOutPolicy *smithy.Schema
-
-var AutoScalingDescription_maxAutoscalingTaskCount *smithy.Schema
-
-var AutoScalingUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "AutoScalingUpdate",
-}, smithy.ShapeTypeStructure, 6)
-var AutoScalingUpdate_maxWorkerCount *smithy.Schema
-
-var AutoScalingUpdate_mcuCount *smithy.Schema
-
-var AutoScalingUpdate_minWorkerCount *smithy.Schema
-
-var AutoScalingUpdate_scaleInPolicy *smithy.Schema
-
-var AutoScalingUpdate_scaleOutPolicy *smithy.Schema
-
-var AutoScalingUpdate_maxAutoscalingTaskCount *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var Capacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Capacity",
-}, smithy.ShapeTypeStructure, 2)
-var Capacity_autoScaling *smithy.Schema
-
-var Capacity_provisionedCapacity *smithy.Schema
-
-var CapacityDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CapacityDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityDescription_autoScaling *smithy.Schema
-
-var CapacityDescription_provisionedCapacity *smithy.Schema
-
-var CapacityUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CapacityUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityUpdate_autoScaling *smithy.Schema
-
-var CapacityUpdate_provisionedCapacity *smithy.Schema
-
-var CloudWatchLogsLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CloudWatchLogsLogDelivery",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogsLogDelivery_enabled *smithy.Schema
-
-var CloudWatchLogsLogDelivery_logGroup *smithy.Schema
-
-var CloudWatchLogsLogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CloudWatchLogsLogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogsLogDeliveryDescription_enabled *smithy.Schema
-
-var CloudWatchLogsLogDeliveryDescription_logGroup *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _ConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorConfiguration",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ConnectorConfiguration_key *smithy.Schema
-
-var _ConnectorConfiguration_value *smithy.Schema
-
-var _ConnectorConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorConfigurationUpdate",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ConnectorConfigurationUpdate_key *smithy.Schema
-
-var _ConnectorConfigurationUpdate_value *smithy.Schema
-
-var _ConnectorOperationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationState",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorOperationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationStep",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectorOperationStep_stepType *smithy.Schema
-
-var ConnectorOperationStep_stepState *smithy.Schema
-
-var _ConnectorOperationStepState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationStepState",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorOperationStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationStepType",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorOperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConnectorOperationSummary_connectorOperationArn *smithy.Schema
-
-var ConnectorOperationSummary_connectorOperationType *smithy.Schema
-
-var ConnectorOperationSummary_connectorOperationState *smithy.Schema
-
-var ConnectorOperationSummary_creationTime *smithy.Schema
-
-var ConnectorOperationSummary_endTime *smithy.Schema
-
-var _ConnectorOperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationType",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorState",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorSummary",
-}, smithy.ShapeTypeStructure, 16)
-var ConnectorSummary_capacity *smithy.Schema
-
-var ConnectorSummary_connectorArn *smithy.Schema
-
-var ConnectorSummary_connectorDescription *smithy.Schema
-
-var ConnectorSummary_connectorName *smithy.Schema
-
-var ConnectorSummary_connectorState *smithy.Schema
-
-var ConnectorSummary_creationTime *smithy.Schema
-
-var ConnectorSummary_currentVersion *smithy.Schema
-
-var ConnectorSummary_kafkaCluster *smithy.Schema
-
-var ConnectorSummary_kafkaClusterClientAuthentication *smithy.Schema
-
-var ConnectorSummary_kafkaClusterEncryptionInTransit *smithy.Schema
-
-var ConnectorSummary_kafkaConnectVersion *smithy.Schema
-
-var ConnectorSummary_logDelivery *smithy.Schema
-
-var ConnectorSummary_networkType *smithy.Schema
-
-var ConnectorSummary_plugins *smithy.Schema
-
-var ConnectorSummary_serviceExecutionRoleArn *smithy.Schema
-
-var ConnectorSummary_workerConfiguration *smithy.Schema
-
-var CustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPlugin",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPlugin_customPluginArn *smithy.Schema
-
-var CustomPlugin_revision *smithy.Schema
-
-var _CustomPluginContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginContentType",
-}, smithy.ShapeTypeString, 0)
-
-var CustomPluginDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPluginDescription_customPluginArn *smithy.Schema
-
-var CustomPluginDescription_revision *smithy.Schema
-
-var CustomPluginFileDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginFileDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPluginFileDescription_fileMd5 *smithy.Schema
-
-var CustomPluginFileDescription_fileSize *smithy.Schema
-
-var CustomPluginLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginLocation",
-}, smithy.ShapeTypeStructure, 1)
-var CustomPluginLocation_s3Location *smithy.Schema
-
-var CustomPluginLocationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginLocationDescription",
-}, smithy.ShapeTypeStructure, 1)
-var CustomPluginLocationDescription_s3Location *smithy.Schema
-
-var CustomPluginRevisionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginRevisionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var CustomPluginRevisionSummary_contentType *smithy.Schema
-
-var CustomPluginRevisionSummary_creationTime *smithy.Schema
-
-var CustomPluginRevisionSummary_description *smithy.Schema
-
-var CustomPluginRevisionSummary_fileDescription *smithy.Schema
-
-var CustomPluginRevisionSummary_location *smithy.Schema
-
-var CustomPluginRevisionSummary_revision *smithy.Schema
-
-var _CustomPluginState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginState",
-}, smithy.ShapeTypeString, 0)
-
-var CustomPluginSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginSummary",
-}, smithy.ShapeTypeStructure, 6)
-var CustomPluginSummary_creationTime *smithy.Schema
-
-var CustomPluginSummary_customPluginArn *smithy.Schema
-
-var CustomPluginSummary_customPluginState *smithy.Schema
-
-var CustomPluginSummary_description *smithy.Schema
-
-var CustomPluginSummary_latestRevision *smithy.Schema
-
-var CustomPluginSummary_name *smithy.Schema
-
-var CustomPluginUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPluginUpdate_customPluginArn *smithy.Schema
-
-var CustomPluginUpdate_revision *smithy.Schema
-
-var FirehoseLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "FirehoseLogDelivery",
-}, smithy.ShapeTypeStructure, 2)
-var FirehoseLogDelivery_deliveryStream *smithy.Schema
-
-var FirehoseLogDelivery_enabled *smithy.Schema
-
-var FirehoseLogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "FirehoseLogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 2)
-var FirehoseLogDeliveryDescription_deliveryStream *smithy.Schema
-
-var FirehoseLogDeliveryDescription_enabled *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_message *smithy.Schema
-
-var KafkaCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaCluster",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaCluster_apacheKafkaCluster *smithy.Schema
-
-var KafkaClusterClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterClientAuthentication",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterClientAuthentication_authenticationType *smithy.Schema
-
-var KafkaClusterClientAuthenticationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterClientAuthenticationDescription",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterClientAuthenticationDescription_authenticationType *smithy.Schema
-
-var _KafkaClusterClientAuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterClientAuthenticationType",
-}, smithy.ShapeTypeString, 0)
-
-var KafkaClusterDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterDescription",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterDescription_apacheKafkaCluster *smithy.Schema
-
-var KafkaClusterEncryptionInTransit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterEncryptionInTransit",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterEncryptionInTransit_encryptionType *smithy.Schema
-
-var KafkaClusterEncryptionInTransitDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterEncryptionInTransitDescription",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterEncryptionInTransitDescription_encryptionType *smithy.Schema
-
-var _KafkaClusterEncryptionInTransitType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterEncryptionInTransitType",
-}, smithy.ShapeTypeString, 0)
-
-var LogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "LogDelivery",
-}, smithy.ShapeTypeStructure, 1)
-var LogDelivery_workerLogDelivery *smithy.Schema
-
-var LogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "LogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 1)
-var LogDeliveryDescription_workerLogDelivery *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var Plugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Plugin",
-}, smithy.ShapeTypeStructure, 1)
-var Plugin_customPlugin *smithy.Schema
-
-var PluginDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PluginDescription",
-}, smithy.ShapeTypeStructure, 1)
-var PluginDescription_customPlugin *smithy.Schema
-
-var PluginUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PluginUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var PluginUpdate_customPlugin *smithy.Schema
-
-var ProvisionedCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ProvisionedCapacity",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionedCapacity_mcuCount *smithy.Schema
-
-var ProvisionedCapacity_workerCount *smithy.Schema
-
-var ProvisionedCapacityDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ProvisionedCapacityDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionedCapacityDescription_mcuCount *smithy.Schema
-
-var ProvisionedCapacityDescription_workerCount *smithy.Schema
-
-var ProvisionedCapacityUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ProvisionedCapacityUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionedCapacityUpdate_mcuCount *smithy.Schema
-
-var ProvisionedCapacityUpdate_workerCount *smithy.Schema
-
-var S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3Location",
-}, smithy.ShapeTypeStructure, 3)
-var S3Location_bucketArn *smithy.Schema
-
-var S3Location_fileKey *smithy.Schema
-
-var S3Location_objectVersion *smithy.Schema
-
-var S3LocationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3LocationDescription",
-}, smithy.ShapeTypeStructure, 3)
-var S3LocationDescription_bucketArn *smithy.Schema
-
-var S3LocationDescription_fileKey *smithy.Schema
-
-var S3LocationDescription_objectVersion *smithy.Schema
-
-var S3LogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3LogDelivery",
-}, smithy.ShapeTypeStructure, 3)
-var S3LogDelivery_bucket *smithy.Schema
-
-var S3LogDelivery_enabled *smithy.Schema
-
-var S3LogDelivery_prefix *smithy.Schema
-
-var S3LogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3LogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 3)
-var S3LogDeliveryDescription_bucket *smithy.Schema
-
-var S3LogDeliveryDescription_enabled *smithy.Schema
-
-var S3LogDeliveryDescription_prefix *smithy.Schema
-
-var ScaleInPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleInPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleInPolicy_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleInPolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleInPolicyDescription",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleInPolicyDescription_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleInPolicyUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleInPolicyUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleInPolicyUpdate_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleOutPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleOutPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleOutPolicy_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleOutPolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleOutPolicyDescription",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleOutPolicyDescription_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleOutPolicyUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleOutPolicyUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleOutPolicyUpdate_cpuUtilizationPercentage *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var StateDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "StateDescription",
-}, smithy.ShapeTypeStructure, 2)
-var StateDescription_code *smithy.Schema
-
-var StateDescription_message *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var Vpc = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Vpc",
-}, smithy.ShapeTypeStructure, 2)
-var Vpc_securityGroups *smithy.Schema
-
-var Vpc_subnets *smithy.Schema
-
-var VpcDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "VpcDescription",
-}, smithy.ShapeTypeStructure, 2)
-var VpcDescription_securityGroups *smithy.Schema
-
-var VpcDescription_subnets *smithy.Schema
-
-var WorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var WorkerConfiguration_revision *smithy.Schema
-
-var WorkerConfiguration_workerConfigurationArn *smithy.Schema
-
-var WorkerConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationDescription",
-}, smithy.ShapeTypeStructure, 2)
-var WorkerConfigurationDescription_revision *smithy.Schema
-
-var WorkerConfigurationDescription_workerConfigurationArn *smithy.Schema
-
-var WorkerConfigurationRevisionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationRevisionDescription",
-}, smithy.ShapeTypeStructure, 4)
-var WorkerConfigurationRevisionDescription_creationTime *smithy.Schema
-
-var WorkerConfigurationRevisionDescription_description *smithy.Schema
-
-var WorkerConfigurationRevisionDescription_propertiesFileContent *smithy.Schema
-
-var WorkerConfigurationRevisionDescription_revision *smithy.Schema
-
-var WorkerConfigurationRevisionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationRevisionSummary",
-}, smithy.ShapeTypeStructure, 3)
-var WorkerConfigurationRevisionSummary_creationTime *smithy.Schema
-
-var WorkerConfigurationRevisionSummary_description *smithy.Schema
-
-var WorkerConfigurationRevisionSummary_revision *smithy.Schema
-
-var _WorkerConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationState",
-}, smithy.ShapeTypeString, 0)
-
-var WorkerConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var WorkerConfigurationSummary_creationTime *smithy.Schema
-
-var WorkerConfigurationSummary_description *smithy.Schema
-
-var WorkerConfigurationSummary_latestRevision *smithy.Schema
-
-var WorkerConfigurationSummary_name *smithy.Schema
-
-var WorkerConfigurationSummary_workerConfigurationArn *smithy.Schema
-
-var WorkerConfigurationSummary_workerConfigurationState *smithy.Schema
-
-var WorkerConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var WorkerConfigurationUpdate_revision *smithy.Schema
-
-var WorkerConfigurationUpdate_workerConfigurationArn *smithy.Schema
-
-var WorkerLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerLogDelivery",
-}, smithy.ShapeTypeStructure, 3)
-var WorkerLogDelivery_cloudWatchLogs *smithy.Schema
-
-var WorkerLogDelivery_firehose *smithy.Schema
-
-var WorkerLogDelivery_s3 *smithy.Schema
-
-var WorkerLogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerLogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 3)
-var WorkerLogDeliveryDescription_cloudWatchLogs *smithy.Schema
-
-var WorkerLogDeliveryDescription_firehose *smithy.Schema
-
-var WorkerLogDeliveryDescription_s3 *smithy.Schema
-
-var WorkerSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerSetting",
-}, smithy.ShapeTypeStructure, 4)
-var WorkerSetting_capacity *smithy.Schema
-
-var WorkerSetting_plugins *smithy.Schema
-
-var WorkerSetting_workerConfiguration *smithy.Schema
-
-var WorkerSetting_useDefaultWorkerConfiguration *smithy.Schema
-
-var CreateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateConnectorRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateConnectorRequest_capacity *smithy.Schema
-
-var CreateConnectorRequest_connectorConfiguration *smithy.Schema
-
-var CreateConnectorRequest_connectorDescription *smithy.Schema
-
-var CreateConnectorRequest_connectorName *smithy.Schema
-
-var CreateConnectorRequest_kafkaCluster *smithy.Schema
-
-var CreateConnectorRequest_kafkaClusterClientAuthentication *smithy.Schema
-
-var CreateConnectorRequest_kafkaClusterEncryptionInTransit *smithy.Schema
-
-var CreateConnectorRequest_kafkaConnectVersion *smithy.Schema
-
-var CreateConnectorRequest_logDelivery *smithy.Schema
-
-var CreateConnectorRequest_networkType *smithy.Schema
-
-var CreateConnectorRequest_plugins *smithy.Schema
-
-var CreateConnectorRequest_serviceExecutionRoleArn *smithy.Schema
-
-var CreateConnectorRequest_workerConfiguration *smithy.Schema
-
-var CreateConnectorRequest_tags *smithy.Schema
-
-var CreateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateConnectorResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateConnectorResponse_connectorArn *smithy.Schema
-
-var CreateConnectorResponse_connectorName *smithy.Schema
-
-var CreateConnectorResponse_connectorState *smithy.Schema
-
-var CreateCustomPluginRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateCustomPluginRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCustomPluginRequest_contentType *smithy.Schema
-
-var CreateCustomPluginRequest_description *smithy.Schema
-
-var CreateCustomPluginRequest_location *smithy.Schema
-
-var CreateCustomPluginRequest_name *smithy.Schema
-
-var CreateCustomPluginRequest_tags *smithy.Schema
-
-var CreateCustomPluginResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateCustomPluginResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCustomPluginResponse_customPluginArn *smithy.Schema
-
-var CreateCustomPluginResponse_customPluginState *smithy.Schema
-
-var CreateCustomPluginResponse_name *smithy.Schema
-
-var CreateCustomPluginResponse_revision *smithy.Schema
-
-var CreateWorkerConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateWorkerConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWorkerConfigurationRequest_description *smithy.Schema
-
-var CreateWorkerConfigurationRequest_name *smithy.Schema
-
-var CreateWorkerConfigurationRequest_propertiesFileContent *smithy.Schema
-
-var CreateWorkerConfigurationRequest_tags *smithy.Schema
-
-var CreateWorkerConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateWorkerConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWorkerConfigurationResponse_creationTime *smithy.Schema
-
-var CreateWorkerConfigurationResponse_latestRevision *smithy.Schema
-
-var CreateWorkerConfigurationResponse_name *smithy.Schema
-
-var CreateWorkerConfigurationResponse_workerConfigurationArn *smithy.Schema
-
-var CreateWorkerConfigurationResponse_workerConfigurationState *smithy.Schema
-
-var DeleteConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteConnectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConnectorRequest_connectorArn *smithy.Schema
-
-var DeleteConnectorRequest_currentVersion *smithy.Schema
-
-var DeleteConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConnectorResponse_connectorArn *smithy.Schema
-
-var DeleteConnectorResponse_connectorState *smithy.Schema
-
-var DeleteCustomPluginRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteCustomPluginRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCustomPluginRequest_customPluginArn *smithy.Schema
-
-var DeleteCustomPluginResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteCustomPluginResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCustomPluginResponse_customPluginArn *smithy.Schema
-
-var DeleteCustomPluginResponse_customPluginState *smithy.Schema
-
-var DeleteWorkerConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteWorkerConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkerConfigurationRequest_workerConfigurationArn *smithy.Schema
-
-var DeleteWorkerConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteWorkerConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWorkerConfigurationResponse_workerConfigurationArn *smithy.Schema
-
-var DeleteWorkerConfigurationResponse_workerConfigurationState *smithy.Schema
-
-var DescribeConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorRequest_connectorArn *smithy.Schema
-
-var DescribeConnectorOperationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorOperationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorOperationRequest_connectorOperationArn *smithy.Schema
-
-var DescribeConnectorOperationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorOperationResponse",
-}, smithy.ShapeTypeStructure, 12)
-var DescribeConnectorOperationResponse_connectorArn *smithy.Schema
-
-var DescribeConnectorOperationResponse_connectorOperationArn *smithy.Schema
-
-var DescribeConnectorOperationResponse_connectorOperationState *smithy.Schema
-
-var DescribeConnectorOperationResponse_connectorOperationType *smithy.Schema
-
-var DescribeConnectorOperationResponse_operationSteps *smithy.Schema
-
-var DescribeConnectorOperationResponse_originWorkerSetting *smithy.Schema
-
-var DescribeConnectorOperationResponse_originConnectorConfiguration *smithy.Schema
-
-var DescribeConnectorOperationResponse_targetWorkerSetting *smithy.Schema
-
-var DescribeConnectorOperationResponse_targetConnectorConfiguration *smithy.Schema
-
-var DescribeConnectorOperationResponse_errorInfo *smithy.Schema
-
-var DescribeConnectorOperationResponse_creationTime *smithy.Schema
-
-var DescribeConnectorOperationResponse_endTime *smithy.Schema
-
-var DescribeConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorResponse",
-}, smithy.ShapeTypeStructure, 18)
-var DescribeConnectorResponse_capacity *smithy.Schema
-
-var DescribeConnectorResponse_connectorArn *smithy.Schema
-
-var DescribeConnectorResponse_connectorConfiguration *smithy.Schema
-
-var DescribeConnectorResponse_connectorDescription *smithy.Schema
-
-var DescribeConnectorResponse_connectorName *smithy.Schema
-
-var DescribeConnectorResponse_connectorState *smithy.Schema
-
-var DescribeConnectorResponse_creationTime *smithy.Schema
-
-var DescribeConnectorResponse_currentVersion *smithy.Schema
-
-var DescribeConnectorResponse_kafkaCluster *smithy.Schema
-
-var DescribeConnectorResponse_kafkaClusterClientAuthentication *smithy.Schema
-
-var DescribeConnectorResponse_kafkaClusterEncryptionInTransit *smithy.Schema
-
-var DescribeConnectorResponse_kafkaConnectVersion *smithy.Schema
-
-var DescribeConnectorResponse_logDelivery *smithy.Schema
-
-var DescribeConnectorResponse_networkType *smithy.Schema
-
-var DescribeConnectorResponse_plugins *smithy.Schema
-
-var DescribeConnectorResponse_serviceExecutionRoleArn *smithy.Schema
-
-var DescribeConnectorResponse_workerConfiguration *smithy.Schema
-
-var DescribeConnectorResponse_stateDescription *smithy.Schema
-
-var DescribeCustomPluginRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeCustomPluginRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomPluginRequest_customPluginArn *smithy.Schema
-
-var DescribeCustomPluginResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeCustomPluginResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeCustomPluginResponse_creationTime *smithy.Schema
-
-var DescribeCustomPluginResponse_customPluginArn *smithy.Schema
-
-var DescribeCustomPluginResponse_customPluginState *smithy.Schema
-
-var DescribeCustomPluginResponse_description *smithy.Schema
-
-var DescribeCustomPluginResponse_latestRevision *smithy.Schema
-
-var DescribeCustomPluginResponse_name *smithy.Schema
-
-var DescribeCustomPluginResponse_stateDescription *smithy.Schema
-
-var DescribeWorkerConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeWorkerConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkerConfigurationRequest_workerConfigurationArn *smithy.Schema
-
-var DescribeWorkerConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeWorkerConfigurationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeWorkerConfigurationResponse_creationTime *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_description *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_latestRevision *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_name *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_workerConfigurationArn *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_workerConfigurationState *smithy.Schema
-
-var ListConnectorOperationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorOperationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConnectorOperationsRequest_connectorArn *smithy.Schema
-
-var ListConnectorOperationsRequest_maxResults *smithy.Schema
-
-var ListConnectorOperationsRequest_nextToken *smithy.Schema
-
-var ListConnectorOperationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorOperationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorOperationsResponse_connectorOperations *smithy.Schema
-
-var ListConnectorOperationsResponse_nextToken *smithy.Schema
-
-var ListConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConnectorsRequest_connectorNamePrefix *smithy.Schema
-
-var ListConnectorsRequest_maxResults *smithy.Schema
-
-var ListConnectorsRequest_nextToken *smithy.Schema
-
-var ListConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsResponse_connectors *smithy.Schema
-
-var ListConnectorsResponse_nextToken *smithy.Schema
-
-var ListCustomPluginsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListCustomPluginsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCustomPluginsRequest_maxResults *smithy.Schema
-
-var ListCustomPluginsRequest_nextToken *smithy.Schema
-
-var ListCustomPluginsRequest_namePrefix *smithy.Schema
-
-var ListCustomPluginsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListCustomPluginsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomPluginsResponse_customPlugins *smithy.Schema
-
-var ListCustomPluginsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListWorkerConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListWorkerConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWorkerConfigurationsRequest_maxResults *smithy.Schema
-
-var ListWorkerConfigurationsRequest_nextToken *smithy.Schema
-
-var ListWorkerConfigurationsRequest_namePrefix *smithy.Schema
-
-var ListWorkerConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListWorkerConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkerConfigurationsResponse_nextToken *smithy.Schema
-
-var ListWorkerConfigurationsResponse_workerConfigurations *smithy.Schema
-
-var PauseConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PauseConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PauseConnectorRequest_connectorArn *smithy.Schema
-
-var PauseConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PauseConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PauseConnectorResponse_connectorArn *smithy.Schema
-
-var PauseConnectorResponse_connectorOperationArn *smithy.Schema
-
-var RestartConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "RestartConnectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RestartConnectorRequest_connectorArn *smithy.Schema
-
-var RestartConnectorRequest_onlyFailedTasks *smithy.Schema
-
-var RestartConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "RestartConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RestartConnectorResponse_connectorArn *smithy.Schema
-
-var RestartConnectorResponse_connectorOperationArn *smithy.Schema
-
-var ResumeConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ResumeConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResumeConnectorRequest_connectorArn *smithy.Schema
-
-var ResumeConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ResumeConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ResumeConnectorResponse_connectorArn *smithy.Schema
-
-var ResumeConnectorResponse_connectorOperationArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UpdateConnectorRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateConnectorRequest_capacity *smithy.Schema
-
-var UpdateConnectorRequest_connectorConfiguration *smithy.Schema
-
-var UpdateConnectorRequest_skipHealthValidation *smithy.Schema
-
-var UpdateConnectorRequest_connectorArn *smithy.Schema
-
-var UpdateConnectorRequest_currentVersion *smithy.Schema
-
-var UpdateConnectorRequest_plugins *smithy.Schema
-
-var UpdateConnectorRequest_workerConfiguration *smithy.Schema
-
-var UpdateConnectorRequest_useDefaultWorkerConfiguration *smithy.Schema
-
-var UpdateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UpdateConnectorResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConnectorResponse_connectorArn *smithy.Schema
-
-var UpdateConnectorResponse_connectorState *smithy.Schema
-
-var UpdateConnectorResponse_connectorOperationArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	ConnectorOperationStep_stepType = ConnectorOperationStep.AddMember("stepType", _ConnectorOperationStepType)
-
-	ConnectorOperationStep_stepState = ConnectorOperationStep.AddMember("stepState", _ConnectorOperationStepState)
-
-	___listOfConnectorOperationStep_member = ___listOfConnectorOperationStep.AddMember("member", ConnectorOperationStep)
-
-	ConnectorOperationSummary_connectorOperationArn = ConnectorOperationSummary.AddMember("connectorOperationArn", ___string)
-
-	ConnectorOperationSummary_connectorOperationType = ConnectorOperationSummary.AddMember("connectorOperationType", _ConnectorOperationType)
-
-	ConnectorOperationSummary_connectorOperationState = ConnectorOperationSummary.AddMember("connectorOperationState", _ConnectorOperationState)
-
-	ConnectorOperationSummary_creationTime = ConnectorOperationSummary.AddMember("creationTime", ___timestampIso8601)
-
-	ConnectorOperationSummary_endTime = ConnectorOperationSummary.AddMember("endTime", ___timestampIso8601)
-
-	___listOfConnectorOperationSummary_member = ___listOfConnectorOperationSummary.AddMember("member", ConnectorOperationSummary)
-
-	ScaleInPolicyDescription_cpuUtilizationPercentage = ScaleInPolicyDescription.AddMember("cpuUtilizationPercentage", ___integer)
-
-	ScaleOutPolicyDescription_cpuUtilizationPercentage = ScaleOutPolicyDescription.AddMember("cpuUtilizationPercentage", ___integer)
-
-	AutoScalingDescription_maxWorkerCount = AutoScalingDescription.AddMember("maxWorkerCount", ___integer)
-
-	AutoScalingDescription_mcuCount = AutoScalingDescription.AddMember("mcuCount", ___integer)
-
-	AutoScalingDescription_minWorkerCount = AutoScalingDescription.AddMember("minWorkerCount", ___integer)
-
-	AutoScalingDescription_scaleInPolicy = AutoScalingDescription.AddMember("scaleInPolicy", ScaleInPolicyDescription)
-
-	AutoScalingDescription_scaleOutPolicy = AutoScalingDescription.AddMember("scaleOutPolicy", ScaleOutPolicyDescription)
-
-	AutoScalingDescription_maxAutoscalingTaskCount = AutoScalingDescription.AddMember("maxAutoscalingTaskCount", ___integer)
-
-	ProvisionedCapacityDescription_mcuCount = ProvisionedCapacityDescription.AddMember("mcuCount", ___integer)
-
-	ProvisionedCapacityDescription_workerCount = ProvisionedCapacityDescription.AddMember("workerCount", ___integer)
-
-	CapacityDescription_autoScaling = CapacityDescription.AddMember("autoScaling", AutoScalingDescription)
-
-	CapacityDescription_provisionedCapacity = CapacityDescription.AddMember("provisionedCapacity", ProvisionedCapacityDescription)
-
-	VpcDescription_securityGroups = VpcDescription.AddMember("securityGroups", ___listOf__string)
-
-	VpcDescription_subnets = VpcDescription.AddMember("subnets", ___listOf__string)
-
-	ApacheKafkaClusterDescription_bootstrapServers = ApacheKafkaClusterDescription.AddMember("bootstrapServers", ___string)
-
-	ApacheKafkaClusterDescription_vpc = ApacheKafkaClusterDescription.AddMember("vpc", VpcDescription)
-
-	KafkaClusterDescription_apacheKafkaCluster = KafkaClusterDescription.AddMember("apacheKafkaCluster", ApacheKafkaClusterDescription)
-
-	KafkaClusterClientAuthenticationDescription_authenticationType = KafkaClusterClientAuthenticationDescription.AddMember("authenticationType", _KafkaClusterClientAuthenticationType)
-
-	KafkaClusterEncryptionInTransitDescription_encryptionType = KafkaClusterEncryptionInTransitDescription.AddMember("encryptionType", _KafkaClusterEncryptionInTransitType)
-
-	CloudWatchLogsLogDeliveryDescription_enabled = CloudWatchLogsLogDeliveryDescription.AddMember("enabled", ___boolean)
-
-	CloudWatchLogsLogDeliveryDescription_logGroup = CloudWatchLogsLogDeliveryDescription.AddMember("logGroup", ___string)
-
-	FirehoseLogDeliveryDescription_deliveryStream = FirehoseLogDeliveryDescription.AddMember("deliveryStream", ___string)
-
-	FirehoseLogDeliveryDescription_enabled = FirehoseLogDeliveryDescription.AddMember("enabled", ___boolean)
-
-	S3LogDeliveryDescription_bucket = S3LogDeliveryDescription.AddMember("bucket", ___string)
-
-	S3LogDeliveryDescription_enabled = S3LogDeliveryDescription.AddMember("enabled", ___boolean)
-
-	S3LogDeliveryDescription_prefix = S3LogDeliveryDescription.AddMember("prefix", ___string)
-
-	WorkerLogDeliveryDescription_cloudWatchLogs = WorkerLogDeliveryDescription.AddMember("cloudWatchLogs", CloudWatchLogsLogDeliveryDescription)
-
-	WorkerLogDeliveryDescription_firehose = WorkerLogDeliveryDescription.AddMember("firehose", FirehoseLogDeliveryDescription)
-
-	WorkerLogDeliveryDescription_s3 = WorkerLogDeliveryDescription.AddMember("s3", S3LogDeliveryDescription)
-
-	LogDeliveryDescription_workerLogDelivery = LogDeliveryDescription.AddMember("workerLogDelivery", WorkerLogDeliveryDescription)
-
-	CustomPluginDescription_customPluginArn = CustomPluginDescription.AddMember("customPluginArn", ___string)
-
-	CustomPluginDescription_revision = CustomPluginDescription.AddMember("revision", ___long)
-
-	PluginDescription_customPlugin = PluginDescription.AddMember("customPlugin", CustomPluginDescription)
-
-	___listOfPluginDescription_member = ___listOfPluginDescription.AddMember("member", PluginDescription)
-
-	WorkerConfigurationDescription_revision = WorkerConfigurationDescription.AddMember("revision", ___long)
-
-	WorkerConfigurationDescription_workerConfigurationArn = WorkerConfigurationDescription.AddMember("workerConfigurationArn", ___string)
-
-	ConnectorSummary_capacity = ConnectorSummary.AddMember("capacity", CapacityDescription)
-
-	ConnectorSummary_connectorArn = ConnectorSummary.AddMember("connectorArn", ___string)
-
-	ConnectorSummary_connectorDescription = ConnectorSummary.AddMember("connectorDescription", ___string)
-
-	ConnectorSummary_connectorName = ConnectorSummary.AddMember("connectorName", ___string)
-
-	ConnectorSummary_connectorState = ConnectorSummary.AddMember("connectorState", _ConnectorState)
-
-	ConnectorSummary_creationTime = ConnectorSummary.AddMember("creationTime", ___timestampIso8601)
-
-	ConnectorSummary_currentVersion = ConnectorSummary.AddMember("currentVersion", ___string)
-
-	ConnectorSummary_kafkaCluster = ConnectorSummary.AddMember("kafkaCluster", KafkaClusterDescription)
-
-	ConnectorSummary_kafkaClusterClientAuthentication = ConnectorSummary.AddMember("kafkaClusterClientAuthentication", KafkaClusterClientAuthenticationDescription)
-
-	ConnectorSummary_kafkaClusterEncryptionInTransit = ConnectorSummary.AddMember("kafkaClusterEncryptionInTransit", KafkaClusterEncryptionInTransitDescription)
-
-	ConnectorSummary_kafkaConnectVersion = ConnectorSummary.AddMember("kafkaConnectVersion", ___string)
-
-	ConnectorSummary_logDelivery = ConnectorSummary.AddMember("logDelivery", LogDeliveryDescription)
-
-	ConnectorSummary_networkType = ConnectorSummary.AddMember("networkType", _NetworkType)
-
-	ConnectorSummary_plugins = ConnectorSummary.AddMember("plugins", ___listOfPluginDescription)
-
-	ConnectorSummary_serviceExecutionRoleArn = ConnectorSummary.AddMember("serviceExecutionRoleArn", ___string)
-
-	ConnectorSummary_workerConfiguration = ConnectorSummary.AddMember("workerConfiguration", WorkerConfigurationDescription)
-
-	___listOfConnectorSummary_member = ___listOfConnectorSummary.AddMember("member", ConnectorSummary)
-
-	CustomPluginFileDescription_fileMd5 = CustomPluginFileDescription.AddMember("fileMd5", ___string)
-
-	CustomPluginFileDescription_fileSize = CustomPluginFileDescription.AddMember("fileSize", ___long)
-
-	S3LocationDescription_bucketArn = S3LocationDescription.AddMember("bucketArn", ___string)
-
-	S3LocationDescription_fileKey = S3LocationDescription.AddMember("fileKey", ___string)
-
-	S3LocationDescription_objectVersion = S3LocationDescription.AddMember("objectVersion", ___string)
-
-	CustomPluginLocationDescription_s3Location = CustomPluginLocationDescription.AddMember("s3Location", S3LocationDescription)
-
-	CustomPluginRevisionSummary_contentType = CustomPluginRevisionSummary.AddMember("contentType", _CustomPluginContentType)
-
-	CustomPluginRevisionSummary_creationTime = CustomPluginRevisionSummary.AddMember("creationTime", ___timestampIso8601)
-
-	CustomPluginRevisionSummary_description = CustomPluginRevisionSummary.AddMember("description", ___string)
-
-	CustomPluginRevisionSummary_fileDescription = CustomPluginRevisionSummary.AddMember("fileDescription", CustomPluginFileDescription)
-
-	CustomPluginRevisionSummary_location = CustomPluginRevisionSummary.AddMember("location", CustomPluginLocationDescription)
-
-	CustomPluginRevisionSummary_revision = CustomPluginRevisionSummary.AddMember("revision", ___long)
-
-	CustomPluginSummary_creationTime = CustomPluginSummary.AddMember("creationTime", ___timestampIso8601)
-
-	CustomPluginSummary_customPluginArn = CustomPluginSummary.AddMember("customPluginArn", ___string)
-
-	CustomPluginSummary_customPluginState = CustomPluginSummary.AddMember("customPluginState", _CustomPluginState)
-
-	CustomPluginSummary_description = CustomPluginSummary.AddMember("description", ___string)
-
-	CustomPluginSummary_latestRevision = CustomPluginSummary.AddMember("latestRevision", CustomPluginRevisionSummary)
-
-	CustomPluginSummary_name = CustomPluginSummary.AddMember("name", ___string)
-
-	___listOfCustomPluginSummary_member = ___listOfCustomPluginSummary.AddMember("member", CustomPluginSummary)
-
-	CustomPlugin_customPluginArn = CustomPlugin.AddMember("customPluginArn", ___string)
-
-	CustomPlugin_revision = CustomPlugin.AddMember("revision", ___longMin1)
-
-	Plugin_customPlugin = Plugin.AddMember("customPlugin", CustomPlugin)
-
-	___listOfPlugin_member = ___listOfPlugin.AddMember("member", Plugin)
-
-	CustomPluginUpdate_customPluginArn = CustomPluginUpdate.AddMember("customPluginArn", ___string)
-
-	CustomPluginUpdate_revision = CustomPluginUpdate.AddMember("revision", ___longMin1)
-
-	PluginUpdate_customPlugin = PluginUpdate.AddMember("customPlugin", CustomPluginUpdate)
-
-	___listOfPluginUpdate_member = ___listOfPluginUpdate.AddMember("member", PluginUpdate)
-
-	WorkerConfigurationRevisionSummary_creationTime = WorkerConfigurationRevisionSummary.AddMember("creationTime", ___timestampIso8601)
-
-	WorkerConfigurationRevisionSummary_description = WorkerConfigurationRevisionSummary.AddMember("description", ___string)
-
-	WorkerConfigurationRevisionSummary_revision = WorkerConfigurationRevisionSummary.AddMember("revision", ___long)
-
-	WorkerConfigurationSummary_creationTime = WorkerConfigurationSummary.AddMember("creationTime", ___timestampIso8601)
-
-	WorkerConfigurationSummary_description = WorkerConfigurationSummary.AddMember("description", ___string)
-
-	WorkerConfigurationSummary_latestRevision = WorkerConfigurationSummary.AddMember("latestRevision", WorkerConfigurationRevisionSummary)
-
-	WorkerConfigurationSummary_name = WorkerConfigurationSummary.AddMember("name", ___string)
-
-	WorkerConfigurationSummary_workerConfigurationArn = WorkerConfigurationSummary.AddMember("workerConfigurationArn", ___string)
-
-	WorkerConfigurationSummary_workerConfigurationState = WorkerConfigurationSummary.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	___listOfWorkerConfigurationSummary_member = ___listOfWorkerConfigurationSummary.AddMember("member", WorkerConfigurationSummary)
-
-	Vpc_securityGroups = Vpc.AddMember("securityGroups", ___listOf__string)
-
-	Vpc_subnets = Vpc.AddMember("subnets", ___listOf__string)
-
-	ApacheKafkaCluster_bootstrapServers = ApacheKafkaCluster.AddMember("bootstrapServers", ___string)
-
-	ApacheKafkaCluster_vpc = ApacheKafkaCluster.AddMember("vpc", Vpc)
-
-	ScaleInPolicy_cpuUtilizationPercentage = ScaleInPolicy.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	ScaleOutPolicy_cpuUtilizationPercentage = ScaleOutPolicy.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	AutoScaling_maxWorkerCount = AutoScaling.AddMember("maxWorkerCount", ___integer)
-
-	AutoScaling_mcuCount = AutoScaling.AddMember("mcuCount", ___integerMin1Max8)
-
-	AutoScaling_minWorkerCount = AutoScaling.AddMember("minWorkerCount", ___integer)
-
-	AutoScaling_scaleInPolicy = AutoScaling.AddMember("scaleInPolicy", ScaleInPolicy)
-
-	AutoScaling_scaleOutPolicy = AutoScaling.AddMember("scaleOutPolicy", ScaleOutPolicy)
-
-	AutoScaling_maxAutoscalingTaskCount = AutoScaling.AddMember("maxAutoscalingTaskCount", ___integer)
-
-	ScaleInPolicyUpdate_cpuUtilizationPercentage = ScaleInPolicyUpdate.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	ScaleOutPolicyUpdate_cpuUtilizationPercentage = ScaleOutPolicyUpdate.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	AutoScalingUpdate_maxWorkerCount = AutoScalingUpdate.AddMember("maxWorkerCount", ___integer)
-
-	AutoScalingUpdate_mcuCount = AutoScalingUpdate.AddMember("mcuCount", ___integerMin1Max8)
-
-	AutoScalingUpdate_minWorkerCount = AutoScalingUpdate.AddMember("minWorkerCount", ___integer)
-
-	AutoScalingUpdate_scaleInPolicy = AutoScalingUpdate.AddMember("scaleInPolicy", ScaleInPolicyUpdate)
-
-	AutoScalingUpdate_scaleOutPolicy = AutoScalingUpdate.AddMember("scaleOutPolicy", ScaleOutPolicyUpdate)
-
-	AutoScalingUpdate_maxAutoscalingTaskCount = AutoScalingUpdate.AddMember("maxAutoscalingTaskCount", ___integer)
-
-	BadRequestException_message = BadRequestException.AddMember("message", ___string)
-
-	ProvisionedCapacity_mcuCount = ProvisionedCapacity.AddMember("mcuCount", ___integerMin1Max8)
-
-	ProvisionedCapacity_workerCount = ProvisionedCapacity.AddMember("workerCount", ___integer)
-
-	Capacity_autoScaling = Capacity.AddMember("autoScaling", AutoScaling)
-
-	Capacity_provisionedCapacity = Capacity.AddMember("provisionedCapacity", ProvisionedCapacity)
-
-	ProvisionedCapacityUpdate_mcuCount = ProvisionedCapacityUpdate.AddMember("mcuCount", ___integerMin1Max8)
-
-	ProvisionedCapacityUpdate_workerCount = ProvisionedCapacityUpdate.AddMember("workerCount", ___integer)
-
-	CapacityUpdate_autoScaling = CapacityUpdate.AddMember("autoScaling", AutoScalingUpdate)
-
-	CapacityUpdate_provisionedCapacity = CapacityUpdate.AddMember("provisionedCapacity", ProvisionedCapacityUpdate)
-
-	CloudWatchLogsLogDelivery_enabled = CloudWatchLogsLogDelivery.AddMember("enabled", ___boolean)
-
-	CloudWatchLogsLogDelivery_logGroup = CloudWatchLogsLogDelivery.AddMember("logGroup", ___string)
-
-	ConflictException_message = ConflictException.AddMember("message", ___string)
-
-	_ConnectorConfiguration_key = _ConnectorConfiguration.AddMember("key", ___string)
-
-	_ConnectorConfiguration_value = _ConnectorConfiguration.AddMember("value", ___string)
-
-	_ConnectorConfigurationUpdate_key = _ConnectorConfigurationUpdate.AddMember("key", ___string)
-
-	_ConnectorConfigurationUpdate_value = _ConnectorConfigurationUpdate.AddMember("value", ___string)
-
-	S3Location_bucketArn = S3Location.AddMember("bucketArn", ___string)
-
-	S3Location_fileKey = S3Location.AddMember("fileKey", ___string)
-
-	S3Location_objectVersion = S3Location.AddMember("objectVersion", ___string)
-
-	CustomPluginLocation_s3Location = CustomPluginLocation.AddMember("s3Location", S3Location)
-
-	FirehoseLogDelivery_deliveryStream = FirehoseLogDelivery.AddMember("deliveryStream", ___string)
-
-	FirehoseLogDelivery_enabled = FirehoseLogDelivery.AddMember("enabled", ___boolean)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", ___string)
-
-	InternalServerErrorException_message = InternalServerErrorException.AddMember("message", ___string)
-
-	KafkaCluster_apacheKafkaCluster = KafkaCluster.AddMember("apacheKafkaCluster", ApacheKafkaCluster)
-
-	KafkaClusterClientAuthentication_authenticationType = KafkaClusterClientAuthentication.AddMember("authenticationType", _KafkaClusterClientAuthenticationType)
-
-	KafkaClusterEncryptionInTransit_encryptionType = KafkaClusterEncryptionInTransit.AddMember("encryptionType", _KafkaClusterEncryptionInTransitType)
-
-	S3LogDelivery_bucket = S3LogDelivery.AddMember("bucket", ___string)
-
-	S3LogDelivery_enabled = S3LogDelivery.AddMember("enabled", ___boolean)
-
-	S3LogDelivery_prefix = S3LogDelivery.AddMember("prefix", ___string)
-
-	WorkerLogDelivery_cloudWatchLogs = WorkerLogDelivery.AddMember("cloudWatchLogs", CloudWatchLogsLogDelivery)
-
-	WorkerLogDelivery_firehose = WorkerLogDelivery.AddMember("firehose", FirehoseLogDelivery)
-
-	WorkerLogDelivery_s3 = WorkerLogDelivery.AddMember("s3", S3LogDelivery)
-
-	LogDelivery_workerLogDelivery = LogDelivery.AddMember("workerLogDelivery", WorkerLogDelivery)
-
-	NotFoundException_message = NotFoundException.AddMember("message", ___string)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", ___string)
-
-	StateDescription_code = StateDescription.AddMember("code", ___string)
-
-	StateDescription_message = StateDescription.AddMember("message", ___string)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", ___string)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", ___string)
-
-	WorkerConfiguration_revision = WorkerConfiguration.AddMember("revision", ___longMin1)
-
-	WorkerConfiguration_workerConfigurationArn = WorkerConfiguration.AddMember("workerConfigurationArn", ___string)
-
-	WorkerConfigurationRevisionDescription_creationTime = WorkerConfigurationRevisionDescription.AddMember("creationTime", ___timestampIso8601)
-
-	WorkerConfigurationRevisionDescription_description = WorkerConfigurationRevisionDescription.AddMember("description", ___string)
-
-	WorkerConfigurationRevisionDescription_propertiesFileContent = WorkerConfigurationRevisionDescription.AddMember("propertiesFileContent", ___sensitiveString)
-
-	WorkerConfigurationRevisionDescription_revision = WorkerConfigurationRevisionDescription.AddMember("revision", ___long)
-
-	WorkerConfigurationUpdate_revision = WorkerConfigurationUpdate.AddMember("revision", ___longMin1)
-
-	WorkerConfigurationUpdate_workerConfigurationArn = WorkerConfigurationUpdate.AddMember("workerConfigurationArn", ___string)
-
-	WorkerSetting_capacity = WorkerSetting.AddMember("capacity", CapacityDescription)
-
-	WorkerSetting_plugins = WorkerSetting.AddMember("plugins", ___listOfPluginDescription)
-
-	WorkerSetting_workerConfiguration = WorkerSetting.AddMember("workerConfiguration", WorkerConfigurationDescription)
-
-	WorkerSetting_useDefaultWorkerConfiguration = WorkerSetting.AddMember("useDefaultWorkerConfiguration", ___boolean)
-
-	CreateConnectorRequest_capacity = CreateConnectorRequest.AddMember("capacity", Capacity)
-
-	CreateConnectorRequest_connectorConfiguration = CreateConnectorRequest.AddMember("connectorConfiguration", _ConnectorConfiguration)
-
-	CreateConnectorRequest_connectorDescription = CreateConnectorRequest.AddMember("connectorDescription", ___stringMax1024)
-
-	CreateConnectorRequest_connectorName = CreateConnectorRequest.AddMember("connectorName", ___stringMin1Max128)
-
-	CreateConnectorRequest_kafkaCluster = CreateConnectorRequest.AddMember("kafkaCluster", KafkaCluster)
-
-	CreateConnectorRequest_kafkaClusterClientAuthentication = CreateConnectorRequest.AddMember("kafkaClusterClientAuthentication", KafkaClusterClientAuthentication)
-
-	CreateConnectorRequest_kafkaClusterEncryptionInTransit = CreateConnectorRequest.AddMember("kafkaClusterEncryptionInTransit", KafkaClusterEncryptionInTransit)
-
-	CreateConnectorRequest_kafkaConnectVersion = CreateConnectorRequest.AddMember("kafkaConnectVersion", ___string)
-
-	CreateConnectorRequest_logDelivery = CreateConnectorRequest.AddMember("logDelivery", LogDelivery)
-
-	CreateConnectorRequest_networkType = CreateConnectorRequest.AddMember("networkType", _NetworkType)
-
-	CreateConnectorRequest_plugins = CreateConnectorRequest.AddMember("plugins", ___listOfPlugin)
-
-	CreateConnectorRequest_serviceExecutionRoleArn = CreateConnectorRequest.AddMember("serviceExecutionRoleArn", ___string)
-
-	CreateConnectorRequest_workerConfiguration = CreateConnectorRequest.AddMember("workerConfiguration", WorkerConfiguration)
-
-	CreateConnectorRequest_tags = CreateConnectorRequest.AddMember("tags", _Tags)
-
-	CreateConnectorResponse_connectorArn = CreateConnectorResponse.AddMember("connectorArn", ___string)
-
-	CreateConnectorResponse_connectorName = CreateConnectorResponse.AddMember("connectorName", ___string)
-
-	CreateConnectorResponse_connectorState = CreateConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	CreateCustomPluginRequest_contentType = CreateCustomPluginRequest.AddMember("contentType", _CustomPluginContentType)
-
-	CreateCustomPluginRequest_description = CreateCustomPluginRequest.AddMember("description", ___stringMax1024)
-
-	CreateCustomPluginRequest_location = CreateCustomPluginRequest.AddMember("location", CustomPluginLocation)
-
-	CreateCustomPluginRequest_name = CreateCustomPluginRequest.AddMember("name", ___stringMin1Max128)
-
-	CreateCustomPluginRequest_tags = CreateCustomPluginRequest.AddMember("tags", _Tags)
-
-	CreateCustomPluginResponse_customPluginArn = CreateCustomPluginResponse.AddMember("customPluginArn", ___string)
-
-	CreateCustomPluginResponse_customPluginState = CreateCustomPluginResponse.AddMember("customPluginState", _CustomPluginState)
-
-	CreateCustomPluginResponse_name = CreateCustomPluginResponse.AddMember("name", ___string)
-
-	CreateCustomPluginResponse_revision = CreateCustomPluginResponse.AddMember("revision", ___long)
-
-	CreateWorkerConfigurationRequest_description = CreateWorkerConfigurationRequest.AddMember("description", ___stringMax1024)
-
-	CreateWorkerConfigurationRequest_name = CreateWorkerConfigurationRequest.AddMember("name", ___stringMin1Max128)
-
-	CreateWorkerConfigurationRequest_propertiesFileContent = CreateWorkerConfigurationRequest.AddMember("propertiesFileContent", ___sensitiveString)
-
-	CreateWorkerConfigurationRequest_tags = CreateWorkerConfigurationRequest.AddMember("tags", _Tags)
-
-	CreateWorkerConfigurationResponse_creationTime = CreateWorkerConfigurationResponse.AddMember("creationTime", ___timestampIso8601)
-
-	CreateWorkerConfigurationResponse_latestRevision = CreateWorkerConfigurationResponse.AddMember("latestRevision", WorkerConfigurationRevisionSummary)
-
-	CreateWorkerConfigurationResponse_name = CreateWorkerConfigurationResponse.AddMember("name", ___string)
-
-	CreateWorkerConfigurationResponse_workerConfigurationArn = CreateWorkerConfigurationResponse.AddMember("workerConfigurationArn", ___string)
-
-	CreateWorkerConfigurationResponse_workerConfigurationState = CreateWorkerConfigurationResponse.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	DeleteConnectorRequest_connectorArn = DeleteConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteConnectorRequest_currentVersion = DeleteConnectorRequest.AddMember("currentVersion", ___string, &smithytraits.HTTPQuery{Name: "currentVersion"})
-
-	DeleteConnectorResponse_connectorArn = DeleteConnectorResponse.AddMember("connectorArn", ___string)
-
-	DeleteConnectorResponse_connectorState = DeleteConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	DeleteCustomPluginRequest_customPluginArn = DeleteCustomPluginRequest.AddMember("customPluginArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteCustomPluginResponse_customPluginArn = DeleteCustomPluginResponse.AddMember("customPluginArn", ___string)
-
-	DeleteCustomPluginResponse_customPluginState = DeleteCustomPluginResponse.AddMember("customPluginState", _CustomPluginState)
-
-	DeleteWorkerConfigurationRequest_workerConfigurationArn = DeleteWorkerConfigurationRequest.AddMember("workerConfigurationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteWorkerConfigurationResponse_workerConfigurationArn = DeleteWorkerConfigurationResponse.AddMember("workerConfigurationArn", ___string)
-
-	DeleteWorkerConfigurationResponse_workerConfigurationState = DeleteWorkerConfigurationResponse.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	DescribeConnectorRequest_connectorArn = DescribeConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConnectorOperationRequest_connectorOperationArn = DescribeConnectorOperationRequest.AddMember("connectorOperationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConnectorOperationResponse_connectorArn = DescribeConnectorOperationResponse.AddMember("connectorArn", ___string)
-
-	DescribeConnectorOperationResponse_connectorOperationArn = DescribeConnectorOperationResponse.AddMember("connectorOperationArn", ___string)
-
-	DescribeConnectorOperationResponse_connectorOperationState = DescribeConnectorOperationResponse.AddMember("connectorOperationState", _ConnectorOperationState)
-
-	DescribeConnectorOperationResponse_connectorOperationType = DescribeConnectorOperationResponse.AddMember("connectorOperationType", _ConnectorOperationType)
-
-	DescribeConnectorOperationResponse_operationSteps = DescribeConnectorOperationResponse.AddMember("operationSteps", ___listOfConnectorOperationStep)
-
-	DescribeConnectorOperationResponse_originWorkerSetting = DescribeConnectorOperationResponse.AddMember("originWorkerSetting", WorkerSetting)
-
-	DescribeConnectorOperationResponse_originConnectorConfiguration = DescribeConnectorOperationResponse.AddMember("originConnectorConfiguration", _ConnectorConfiguration)
-
-	DescribeConnectorOperationResponse_targetWorkerSetting = DescribeConnectorOperationResponse.AddMember("targetWorkerSetting", WorkerSetting)
-
-	DescribeConnectorOperationResponse_targetConnectorConfiguration = DescribeConnectorOperationResponse.AddMember("targetConnectorConfiguration", _ConnectorConfiguration)
-
-	DescribeConnectorOperationResponse_errorInfo = DescribeConnectorOperationResponse.AddMember("errorInfo", StateDescription)
-
-	DescribeConnectorOperationResponse_creationTime = DescribeConnectorOperationResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeConnectorOperationResponse_endTime = DescribeConnectorOperationResponse.AddMember("endTime", ___timestampIso8601)
-
-	DescribeConnectorResponse_capacity = DescribeConnectorResponse.AddMember("capacity", CapacityDescription)
-
-	DescribeConnectorResponse_connectorArn = DescribeConnectorResponse.AddMember("connectorArn", ___string)
-
-	DescribeConnectorResponse_connectorConfiguration = DescribeConnectorResponse.AddMember("connectorConfiguration", _ConnectorConfiguration)
-
-	DescribeConnectorResponse_connectorDescription = DescribeConnectorResponse.AddMember("connectorDescription", ___string)
-
-	DescribeConnectorResponse_connectorName = DescribeConnectorResponse.AddMember("connectorName", ___string)
-
-	DescribeConnectorResponse_connectorState = DescribeConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	DescribeConnectorResponse_creationTime = DescribeConnectorResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeConnectorResponse_currentVersion = DescribeConnectorResponse.AddMember("currentVersion", ___string)
-
-	DescribeConnectorResponse_kafkaCluster = DescribeConnectorResponse.AddMember("kafkaCluster", KafkaClusterDescription)
-
-	DescribeConnectorResponse_kafkaClusterClientAuthentication = DescribeConnectorResponse.AddMember("kafkaClusterClientAuthentication", KafkaClusterClientAuthenticationDescription)
-
-	DescribeConnectorResponse_kafkaClusterEncryptionInTransit = DescribeConnectorResponse.AddMember("kafkaClusterEncryptionInTransit", KafkaClusterEncryptionInTransitDescription)
-
-	DescribeConnectorResponse_kafkaConnectVersion = DescribeConnectorResponse.AddMember("kafkaConnectVersion", ___string)
-
-	DescribeConnectorResponse_logDelivery = DescribeConnectorResponse.AddMember("logDelivery", LogDeliveryDescription)
-
-	DescribeConnectorResponse_networkType = DescribeConnectorResponse.AddMember("networkType", _NetworkType)
-
-	DescribeConnectorResponse_plugins = DescribeConnectorResponse.AddMember("plugins", ___listOfPluginDescription)
-
-	DescribeConnectorResponse_serviceExecutionRoleArn = DescribeConnectorResponse.AddMember("serviceExecutionRoleArn", ___string)
-
-	DescribeConnectorResponse_workerConfiguration = DescribeConnectorResponse.AddMember("workerConfiguration", WorkerConfigurationDescription)
-
-	DescribeConnectorResponse_stateDescription = DescribeConnectorResponse.AddMember("stateDescription", StateDescription)
-
-	DescribeCustomPluginRequest_customPluginArn = DescribeCustomPluginRequest.AddMember("customPluginArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeCustomPluginResponse_creationTime = DescribeCustomPluginResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeCustomPluginResponse_customPluginArn = DescribeCustomPluginResponse.AddMember("customPluginArn", ___string)
-
-	DescribeCustomPluginResponse_customPluginState = DescribeCustomPluginResponse.AddMember("customPluginState", _CustomPluginState)
-
-	DescribeCustomPluginResponse_description = DescribeCustomPluginResponse.AddMember("description", ___string)
-
-	DescribeCustomPluginResponse_latestRevision = DescribeCustomPluginResponse.AddMember("latestRevision", CustomPluginRevisionSummary)
-
-	DescribeCustomPluginResponse_name = DescribeCustomPluginResponse.AddMember("name", ___string)
-
-	DescribeCustomPluginResponse_stateDescription = DescribeCustomPluginResponse.AddMember("stateDescription", StateDescription)
-
-	DescribeWorkerConfigurationRequest_workerConfigurationArn = DescribeWorkerConfigurationRequest.AddMember("workerConfigurationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeWorkerConfigurationResponse_creationTime = DescribeWorkerConfigurationResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeWorkerConfigurationResponse_description = DescribeWorkerConfigurationResponse.AddMember("description", ___string)
-
-	DescribeWorkerConfigurationResponse_latestRevision = DescribeWorkerConfigurationResponse.AddMember("latestRevision", WorkerConfigurationRevisionDescription)
-
-	DescribeWorkerConfigurationResponse_name = DescribeWorkerConfigurationResponse.AddMember("name", ___string)
-
-	DescribeWorkerConfigurationResponse_workerConfigurationArn = DescribeWorkerConfigurationResponse.AddMember("workerConfigurationArn", ___string)
-
-	DescribeWorkerConfigurationResponse_workerConfigurationState = DescribeWorkerConfigurationResponse.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	ListConnectorOperationsRequest_connectorArn = ListConnectorOperationsRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListConnectorOperationsRequest_maxResults = ListConnectorOperationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConnectorOperationsRequest_nextToken = ListConnectorOperationsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConnectorOperationsResponse_connectorOperations = ListConnectorOperationsResponse.AddMember("connectorOperations", ___listOfConnectorOperationSummary)
-
-	ListConnectorOperationsResponse_nextToken = ListConnectorOperationsResponse.AddMember("nextToken", ___string)
-
-	ListConnectorsRequest_connectorNamePrefix = ListConnectorsRequest.AddMember("connectorNamePrefix", ___string, &smithytraits.HTTPQuery{Name: "connectorNamePrefix"})
-
-	ListConnectorsRequest_maxResults = ListConnectorsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConnectorsRequest_nextToken = ListConnectorsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConnectorsResponse_connectors = ListConnectorsResponse.AddMember("connectors", ___listOfConnectorSummary)
-
-	ListConnectorsResponse_nextToken = ListConnectorsResponse.AddMember("nextToken", ___string)
-
-	ListCustomPluginsRequest_maxResults = ListCustomPluginsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCustomPluginsRequest_nextToken = ListCustomPluginsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCustomPluginsRequest_namePrefix = ListCustomPluginsRequest.AddMember("namePrefix", ___string, &smithytraits.HTTPQuery{Name: "namePrefix"})
-
-	ListCustomPluginsResponse_customPlugins = ListCustomPluginsResponse.AddMember("customPlugins", ___listOfCustomPluginSummary)
-
-	ListCustomPluginsResponse_nextToken = ListCustomPluginsResponse.AddMember("nextToken", ___string)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	ListWorkerConfigurationsRequest_maxResults = ListWorkerConfigurationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkerConfigurationsRequest_nextToken = ListWorkerConfigurationsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkerConfigurationsRequest_namePrefix = ListWorkerConfigurationsRequest.AddMember("namePrefix", ___string, &smithytraits.HTTPQuery{Name: "namePrefix"})
-
-	ListWorkerConfigurationsResponse_nextToken = ListWorkerConfigurationsResponse.AddMember("nextToken", ___string)
-
-	ListWorkerConfigurationsResponse_workerConfigurations = ListWorkerConfigurationsResponse.AddMember("workerConfigurations", ___listOfWorkerConfigurationSummary)
-
-	PauseConnectorRequest_connectorArn = PauseConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	PauseConnectorResponse_connectorArn = PauseConnectorResponse.AddMember("connectorArn", ___string)
-
-	PauseConnectorResponse_connectorOperationArn = PauseConnectorResponse.AddMember("connectorOperationArn", ___string)
-
-	RestartConnectorRequest_connectorArn = RestartConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	RestartConnectorRequest_onlyFailedTasks = RestartConnectorRequest.AddMember("onlyFailedTasks", ___boolean, &smithytraits.HTTPQuery{Name: "onlyFailedTasks"})
-
-	RestartConnectorResponse_connectorArn = RestartConnectorResponse.AddMember("connectorArn", ___string)
-
-	RestartConnectorResponse_connectorOperationArn = RestartConnectorResponse.AddMember("connectorOperationArn", ___string)
-
-	ResumeConnectorRequest_connectorArn = ResumeConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	ResumeConnectorResponse_connectorArn = ResumeConnectorResponse.AddMember("connectorArn", ___string)
-
-	ResumeConnectorResponse_connectorOperationArn = ResumeConnectorResponse.AddMember("connectorOperationArn", ___string)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateConnectorRequest_capacity = UpdateConnectorRequest.AddMember("capacity", CapacityUpdate)
-
-	UpdateConnectorRequest_connectorConfiguration = UpdateConnectorRequest.AddMember("connectorConfiguration", _ConnectorConfigurationUpdate)
-
-	UpdateConnectorRequest_skipHealthValidation = UpdateConnectorRequest.AddMember("skipHealthValidation", ___boolean)
-
-	UpdateConnectorRequest_connectorArn = UpdateConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateConnectorRequest_currentVersion = UpdateConnectorRequest.AddMember("currentVersion", ___string, &smithytraits.HTTPQuery{Name: "currentVersion"})
-
-	UpdateConnectorRequest_plugins = UpdateConnectorRequest.AddMember("plugins", ___listOfPluginUpdate)
-
-	UpdateConnectorRequest_workerConfiguration = UpdateConnectorRequest.AddMember("workerConfiguration", WorkerConfigurationUpdate)
-
-	UpdateConnectorRequest_useDefaultWorkerConfiguration = UpdateConnectorRequest.AddMember("useDefaultWorkerConfiguration", ___boolean)
-
-	UpdateConnectorResponse_connectorArn = UpdateConnectorResponse.AddMember("connectorArn", ___string)
-
-	UpdateConnectorResponse_connectorState = UpdateConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	UpdateConnectorResponse_connectorOperationArn = UpdateConnectorResponse.AddMember("connectorOperationArn", ___string)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "currentVersion"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "connectorNamePrefix"}}, DirectMask: 0x10}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "namePrefix"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "onlyFailedTasks"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var m___listOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__string_member}}
+var m___listOfConnectorOperationStep = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConnectorOperationStep_member}}
+var m___listOfConnectorOperationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConnectorOperationSummary_member}}
+var m___listOfConnectorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConnectorSummary_member}}
+var m___listOfCustomPluginSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfCustomPluginSummary_member}}
+var m___listOfPlugin = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPlugin_member}}
+var m___listOfPluginDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPluginDescription_member}}
+var m___listOfPluginUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPluginUpdate_member}}
+var m___listOfWorkerConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfWorkerConfigurationSummary_member}}
+var mApacheKafkaCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sApacheKafkaCluster_bootstrapServers, &sApacheKafkaCluster_vpc}}
+var mApacheKafkaClusterDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sApacheKafkaClusterDescription_bootstrapServers, &sApacheKafkaClusterDescription_vpc}}
+var mAutoScaling = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScaling_maxWorkerCount, &sAutoScaling_mcuCount, &sAutoScaling_minWorkerCount, &sAutoScaling_scaleInPolicy, &sAutoScaling_scaleOutPolicy, &sAutoScaling_maxAutoscalingTaskCount}}
+var mAutoScalingDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingDescription_maxWorkerCount, &sAutoScalingDescription_mcuCount, &sAutoScalingDescription_minWorkerCount, &sAutoScalingDescription_scaleInPolicy, &sAutoScalingDescription_scaleOutPolicy, &sAutoScalingDescription_maxAutoscalingTaskCount}}
+var mAutoScalingUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingUpdate_maxWorkerCount, &sAutoScalingUpdate_mcuCount, &sAutoScalingUpdate_minWorkerCount, &sAutoScalingUpdate_scaleInPolicy, &sAutoScalingUpdate_scaleOutPolicy, &sAutoScalingUpdate_maxAutoscalingTaskCount}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacity_autoScaling, &sCapacity_provisionedCapacity}}
+var mCapacityDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityDescription_autoScaling, &sCapacityDescription_provisionedCapacity}}
+var mCapacityUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityUpdate_autoScaling, &sCapacityUpdate_provisionedCapacity}}
+var mCloudWatchLogsLogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogsLogDelivery_enabled, &sCloudWatchLogsLogDelivery_logGroup}}
+var mCloudWatchLogsLogDeliveryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogsLogDeliveryDescription_enabled, &sCloudWatchLogsLogDeliveryDescription_logGroup}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var m_ConnectorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorConfiguration_key, &s_ConnectorConfiguration_value}}
+var m_ConnectorConfigurationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorConfigurationUpdate_key, &s_ConnectorConfigurationUpdate_value}}
+var mConnectorOperationStep = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorOperationStep_stepType, &sConnectorOperationStep_stepState}}
+var mConnectorOperationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorOperationSummary_connectorOperationArn, &sConnectorOperationSummary_connectorOperationType, &sConnectorOperationSummary_connectorOperationState, &sConnectorOperationSummary_creationTime, &sConnectorOperationSummary_endTime}}
+var mConnectorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorSummary_capacity, &sConnectorSummary_connectorArn, &sConnectorSummary_connectorDescription, &sConnectorSummary_connectorName, &sConnectorSummary_connectorState, &sConnectorSummary_creationTime, &sConnectorSummary_currentVersion, &sConnectorSummary_kafkaCluster, &sConnectorSummary_kafkaClusterClientAuthentication, &sConnectorSummary_kafkaClusterEncryptionInTransit, &sConnectorSummary_kafkaConnectVersion, &sConnectorSummary_logDelivery, &sConnectorSummary_networkType, &sConnectorSummary_plugins, &sConnectorSummary_serviceExecutionRoleArn, &sConnectorSummary_workerConfiguration}, Hash: &hConnectorSummary}
+var mCustomPlugin = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPlugin_customPluginArn, &sCustomPlugin_revision}}
+var mCustomPluginDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPluginDescription_customPluginArn, &sCustomPluginDescription_revision}}
+var mCustomPluginFileDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPluginFileDescription_fileMd5, &sCustomPluginFileDescription_fileSize}}
+var mCustomPluginLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPluginLocation_s3Location}}
+var mCustomPluginLocationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPluginLocationDescription_s3Location}}
+var mCustomPluginRevisionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPluginRevisionSummary_contentType, &sCustomPluginRevisionSummary_creationTime, &sCustomPluginRevisionSummary_description, &sCustomPluginRevisionSummary_fileDescription, &sCustomPluginRevisionSummary_location, &sCustomPluginRevisionSummary_revision}}
+var mCustomPluginSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPluginSummary_creationTime, &sCustomPluginSummary_customPluginArn, &sCustomPluginSummary_customPluginState, &sCustomPluginSummary_description, &sCustomPluginSummary_latestRevision, &sCustomPluginSummary_name}}
+var mCustomPluginUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPluginUpdate_customPluginArn, &sCustomPluginUpdate_revision}}
+var mFirehoseLogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sFirehoseLogDelivery_deliveryStream, &sFirehoseLogDelivery_enabled}}
+var mFirehoseLogDeliveryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sFirehoseLogDeliveryDescription_deliveryStream, &sFirehoseLogDeliveryDescription_enabled}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_message}}
+var mInternalServerErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerErrorException_message}}
+var mKafkaCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaCluster_apacheKafkaCluster}}
+var mKafkaClusterClientAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterClientAuthentication_authenticationType}}
+var mKafkaClusterClientAuthenticationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterClientAuthenticationDescription_authenticationType}}
+var mKafkaClusterDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterDescription_apacheKafkaCluster}}
+var mKafkaClusterEncryptionInTransit = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterEncryptionInTransit_encryptionType}}
+var mKafkaClusterEncryptionInTransitDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterEncryptionInTransitDescription_encryptionType}}
+var mLogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sLogDelivery_workerLogDelivery}}
+var mLogDeliveryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sLogDeliveryDescription_workerLogDelivery}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mPlugin = smithy.SchemaMembers{List: []*smithy.Schema{&sPlugin_customPlugin}}
+var mPluginDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPluginDescription_customPlugin}}
+var mPluginUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sPluginUpdate_customPlugin}}
+var mProvisionedCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedCapacity_mcuCount, &sProvisionedCapacity_workerCount}}
+var mProvisionedCapacityDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedCapacityDescription_mcuCount, &sProvisionedCapacityDescription_workerCount}}
+var mProvisionedCapacityUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedCapacityUpdate_mcuCount, &sProvisionedCapacityUpdate_workerCount}}
+var mS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Location_bucketArn, &sS3Location_fileKey, &sS3Location_objectVersion}}
+var mS3LocationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LocationDescription_bucketArn, &sS3LocationDescription_fileKey, &sS3LocationDescription_objectVersion}}
+var mS3LogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LogDelivery_bucket, &sS3LogDelivery_enabled, &sS3LogDelivery_prefix}}
+var mS3LogDeliveryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LogDeliveryDescription_bucket, &sS3LogDeliveryDescription_enabled, &sS3LogDeliveryDescription_prefix}}
+var mScaleInPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sScaleInPolicy_cpuUtilizationPercentage}}
+var mScaleInPolicyDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sScaleInPolicyDescription_cpuUtilizationPercentage}}
+var mScaleInPolicyUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sScaleInPolicyUpdate_cpuUtilizationPercentage}}
+var mScaleOutPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sScaleOutPolicy_cpuUtilizationPercentage}}
+var mScaleOutPolicyDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sScaleOutPolicyDescription_cpuUtilizationPercentage}}
+var mScaleOutPolicyUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sScaleOutPolicyUpdate_cpuUtilizationPercentage}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var mStateDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sStateDescription_code, &sStateDescription_message}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mVpc = smithy.SchemaMembers{List: []*smithy.Schema{&sVpc_securityGroups, &sVpc_subnets}}
+var mVpcDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcDescription_securityGroups, &sVpcDescription_subnets}}
+var mWorkerConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerConfiguration_revision, &sWorkerConfiguration_workerConfigurationArn}}
+var mWorkerConfigurationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerConfigurationDescription_revision, &sWorkerConfigurationDescription_workerConfigurationArn}}
+var mWorkerConfigurationRevisionDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerConfigurationRevisionDescription_creationTime, &sWorkerConfigurationRevisionDescription_description, &sWorkerConfigurationRevisionDescription_propertiesFileContent, &sWorkerConfigurationRevisionDescription_revision}}
+var mWorkerConfigurationRevisionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerConfigurationRevisionSummary_creationTime, &sWorkerConfigurationRevisionSummary_description, &sWorkerConfigurationRevisionSummary_revision}}
+var mWorkerConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerConfigurationSummary_creationTime, &sWorkerConfigurationSummary_description, &sWorkerConfigurationSummary_latestRevision, &sWorkerConfigurationSummary_name, &sWorkerConfigurationSummary_workerConfigurationArn, &sWorkerConfigurationSummary_workerConfigurationState}}
+var mWorkerConfigurationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerConfigurationUpdate_revision, &sWorkerConfigurationUpdate_workerConfigurationArn}}
+var mWorkerLogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerLogDelivery_cloudWatchLogs, &sWorkerLogDelivery_firehose, &sWorkerLogDelivery_s3}}
+var mWorkerLogDeliveryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerLogDeliveryDescription_cloudWatchLogs, &sWorkerLogDeliveryDescription_firehose, &sWorkerLogDeliveryDescription_s3}}
+var mWorkerSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerSetting_capacity, &sWorkerSetting_plugins, &sWorkerSetting_workerConfiguration, &sWorkerSetting_useDefaultWorkerConfiguration}}
+var mCreateConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorRequest_capacity, &sCreateConnectorRequest_connectorConfiguration, &sCreateConnectorRequest_connectorDescription, &sCreateConnectorRequest_connectorName, &sCreateConnectorRequest_kafkaCluster, &sCreateConnectorRequest_kafkaClusterClientAuthentication, &sCreateConnectorRequest_kafkaClusterEncryptionInTransit, &sCreateConnectorRequest_kafkaConnectVersion, &sCreateConnectorRequest_logDelivery, &sCreateConnectorRequest_networkType, &sCreateConnectorRequest_plugins, &sCreateConnectorRequest_serviceExecutionRoleArn, &sCreateConnectorRequest_workerConfiguration, &sCreateConnectorRequest_tags}, Hash: &hCreateConnectorRequest}
+var mCreateConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorResponse_connectorArn, &sCreateConnectorResponse_connectorName, &sCreateConnectorResponse_connectorState}}
+var mCreateCustomPluginRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomPluginRequest_contentType, &sCreateCustomPluginRequest_description, &sCreateCustomPluginRequest_location, &sCreateCustomPluginRequest_name, &sCreateCustomPluginRequest_tags}}
+var mCreateCustomPluginResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomPluginResponse_customPluginArn, &sCreateCustomPluginResponse_customPluginState, &sCreateCustomPluginResponse_name, &sCreateCustomPluginResponse_revision}}
+var mCreateWorkerConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkerConfigurationRequest_description, &sCreateWorkerConfigurationRequest_name, &sCreateWorkerConfigurationRequest_propertiesFileContent, &sCreateWorkerConfigurationRequest_tags}}
+var mCreateWorkerConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkerConfigurationResponse_creationTime, &sCreateWorkerConfigurationResponse_latestRevision, &sCreateWorkerConfigurationResponse_name, &sCreateWorkerConfigurationResponse_workerConfigurationArn, &sCreateWorkerConfigurationResponse_workerConfigurationState}}
+var mDeleteConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectorRequest_connectorArn, &sDeleteConnectorRequest_currentVersion}}
+var mDeleteConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectorResponse_connectorArn, &sDeleteConnectorResponse_connectorState}}
+var mDeleteCustomPluginRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCustomPluginRequest_customPluginArn}}
+var mDeleteCustomPluginResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCustomPluginResponse_customPluginArn, &sDeleteCustomPluginResponse_customPluginState}}
+var mDeleteWorkerConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkerConfigurationRequest_workerConfigurationArn}}
+var mDeleteWorkerConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkerConfigurationResponse_workerConfigurationArn, &sDeleteWorkerConfigurationResponse_workerConfigurationState}}
+var mDescribeConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorRequest_connectorArn}}
+var mDescribeConnectorOperationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorOperationRequest_connectorOperationArn}}
+var mDescribeConnectorOperationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorOperationResponse_connectorArn, &sDescribeConnectorOperationResponse_connectorOperationArn, &sDescribeConnectorOperationResponse_connectorOperationState, &sDescribeConnectorOperationResponse_connectorOperationType, &sDescribeConnectorOperationResponse_operationSteps, &sDescribeConnectorOperationResponse_originWorkerSetting, &sDescribeConnectorOperationResponse_originConnectorConfiguration, &sDescribeConnectorOperationResponse_targetWorkerSetting, &sDescribeConnectorOperationResponse_targetConnectorConfiguration, &sDescribeConnectorOperationResponse_errorInfo, &sDescribeConnectorOperationResponse_creationTime, &sDescribeConnectorOperationResponse_endTime}, Hash: &hDescribeConnectorOperationResponse}
+var mDescribeConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorResponse_capacity, &sDescribeConnectorResponse_connectorArn, &sDescribeConnectorResponse_connectorConfiguration, &sDescribeConnectorResponse_connectorDescription, &sDescribeConnectorResponse_connectorName, &sDescribeConnectorResponse_connectorState, &sDescribeConnectorResponse_creationTime, &sDescribeConnectorResponse_currentVersion, &sDescribeConnectorResponse_kafkaCluster, &sDescribeConnectorResponse_kafkaClusterClientAuthentication, &sDescribeConnectorResponse_kafkaClusterEncryptionInTransit, &sDescribeConnectorResponse_kafkaConnectVersion, &sDescribeConnectorResponse_logDelivery, &sDescribeConnectorResponse_networkType, &sDescribeConnectorResponse_plugins, &sDescribeConnectorResponse_serviceExecutionRoleArn, &sDescribeConnectorResponse_workerConfiguration, &sDescribeConnectorResponse_stateDescription}, Hash: &hDescribeConnectorResponse}
+var mDescribeCustomPluginRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomPluginRequest_customPluginArn}}
+var mDescribeCustomPluginResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomPluginResponse_creationTime, &sDescribeCustomPluginResponse_customPluginArn, &sDescribeCustomPluginResponse_customPluginState, &sDescribeCustomPluginResponse_description, &sDescribeCustomPluginResponse_latestRevision, &sDescribeCustomPluginResponse_name, &sDescribeCustomPluginResponse_stateDescription}}
+var mDescribeWorkerConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkerConfigurationRequest_workerConfigurationArn}}
+var mDescribeWorkerConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkerConfigurationResponse_creationTime, &sDescribeWorkerConfigurationResponse_description, &sDescribeWorkerConfigurationResponse_latestRevision, &sDescribeWorkerConfigurationResponse_name, &sDescribeWorkerConfigurationResponse_workerConfigurationArn, &sDescribeWorkerConfigurationResponse_workerConfigurationState}}
+var mListConnectorOperationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorOperationsRequest_connectorArn, &sListConnectorOperationsRequest_maxResults, &sListConnectorOperationsRequest_nextToken}}
+var mListConnectorOperationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorOperationsResponse_connectorOperations, &sListConnectorOperationsResponse_nextToken}}
+var mListConnectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsRequest_connectorNamePrefix, &sListConnectorsRequest_maxResults, &sListConnectorsRequest_nextToken}}
+var mListConnectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsResponse_connectors, &sListConnectorsResponse_nextToken}}
+var mListCustomPluginsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomPluginsRequest_maxResults, &sListCustomPluginsRequest_nextToken, &sListCustomPluginsRequest_namePrefix}}
+var mListCustomPluginsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomPluginsResponse_customPlugins, &sListCustomPluginsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListWorkerConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkerConfigurationsRequest_maxResults, &sListWorkerConfigurationsRequest_nextToken, &sListWorkerConfigurationsRequest_namePrefix}}
+var mListWorkerConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkerConfigurationsResponse_nextToken, &sListWorkerConfigurationsResponse_workerConfigurations}}
+var mPauseConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPauseConnectorRequest_connectorArn}}
+var mPauseConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPauseConnectorResponse_connectorArn, &sPauseConnectorResponse_connectorOperationArn}}
+var mRestartConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRestartConnectorRequest_connectorArn, &sRestartConnectorRequest_onlyFailedTasks}}
+var mRestartConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRestartConnectorResponse_connectorArn, &sRestartConnectorResponse_connectorOperationArn}}
+var mResumeConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResumeConnectorRequest_connectorArn}}
+var mResumeConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResumeConnectorResponse_connectorArn, &sResumeConnectorResponse_connectorOperationArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorRequest_capacity, &sUpdateConnectorRequest_connectorConfiguration, &sUpdateConnectorRequest_skipHealthValidation, &sUpdateConnectorRequest_connectorArn, &sUpdateConnectorRequest_currentVersion, &sUpdateConnectorRequest_plugins, &sUpdateConnectorRequest_workerConfiguration, &sUpdateConnectorRequest_useDefaultWorkerConfiguration}}
+var mUpdateConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorResponse_connectorArn, &sUpdateConnectorResponse_connectorState, &sUpdateConnectorResponse_connectorOperationArn}}
+
+var hConnectorSummary = smithy.MemberHash{Seed: 69, Slots: []uint16{
+	0, 0, 0, 7, 16, 8, 0, 0, 0, 0, 9, 6, 11, 0, 0, 4, 3, 0, 0, 0, 5, 0, 12, 14,
+	1, 10, 15, 0, 2, 0, 13, 0,
+}}
+var hCreateConnectorRequest = smithy.MemberHash{Seed: 143, Slots: []uint16{
+	0, 1, 10, 0, 0, 0, 12, 4, 5, 0, 0, 0, 9, 14, 0, 0, 0, 2, 11, 0, 0, 0, 7, 0,
+	6, 0, 0, 8, 0, 0, 13, 3,
+}}
+var hDescribeConnectorOperationResponse = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	10, 0, 0, 0, 12, 0, 4, 2, 1, 0, 8, 0, 0, 0, 3, 0, 7, 0, 0, 0, 0, 0, 0, 0,
+	11, 9, 0, 0, 0, 5, 6, 0,
+}}
+var hDescribeConnectorResponse = smithy.MemberHash{Seed: 12, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 12, 0, 14, 0, 0, 4, 7, 15, 0, 2, 3, 6, 0, 8, 0, 0, 0, 0,
+	0, 16, 0, 13, 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 11, 0, 9, 0,
+	0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5, 10, 0, 0,
+}}
+
+var sCreateConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnector, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateConnector})
+var sCreateCustomPlugin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomPlugin, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateCustomPlugin})
+var sCreateWorkerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerConfiguration, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateWorkerConfiguration})
+var sDeleteConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnector, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConnector})
+var sDeleteCustomPlugin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomPlugin, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCustomPlugin})
+var sDeleteWorkerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWorkerConfiguration})
+var sDescribeConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnector, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConnector})
+var sDescribeConnectorOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorOperation, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConnectorOperation})
+var sDescribeCustomPlugin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomPlugin, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCustomPlugin})
+var sDescribeWorkerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkerConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWorkerConfiguration})
+var sListConnectorOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorOperations, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListConnectorOperations})
+var sListConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectors, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListConnectors})
+var sListCustomPlugins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomPlugins, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListCustomPlugins})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWorkerConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerConfigurations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListWorkerConfigurations})
+var sPauseConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseConnector, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ePauseConnector})
+var sRestartConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestartConnector, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eRestartConnector})
+var sResumeConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeConnector, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eResumeConnector})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnector, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConnector})
+var s_KafkaConnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KafkaConnect, Type: smithy.ShapeTypeService, Ext: &e_KafkaConnect})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &e___boolean})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &e___integer})
+var s___integerMin1Max100 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1Max100, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1Max100})
+var s___integerMin1Max8 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1Max8, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1Max8})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &e___listOf__string})
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___listOf__string_member})
+var s___listOfConnectorOperationStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConnectorOperationStep, Members: &m___listOfConnectorOperationStep, Type: smithy.ShapeTypeList, Ext: &e___listOfConnectorOperationStep})
+var s___listOfConnectorOperationStep_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorOperationStep, Members: &mConnectorOperationStep, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConnectorOperationStep_member})
+var s___listOfConnectorOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConnectorOperationSummary, Members: &m___listOfConnectorOperationSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfConnectorOperationSummary})
+var s___listOfConnectorOperationSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorOperationSummary, Members: &mConnectorOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConnectorOperationSummary_member})
+var s___listOfConnectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConnectorSummary, Members: &m___listOfConnectorSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfConnectorSummary})
+var s___listOfConnectorSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConnectorSummary_member})
+var s___listOfCustomPluginSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfCustomPluginSummary, Members: &m___listOfCustomPluginSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfCustomPluginSummary})
+var s___listOfCustomPluginSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomPluginSummary, Members: &mCustomPluginSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfCustomPluginSummary_member})
+var s___listOfPlugin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPlugin, Members: &m___listOfPlugin, Type: smithy.ShapeTypeList, Ext: &e___listOfPlugin})
+var s___listOfPlugin_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlugin, Members: &mPlugin, Type: smithy.ShapeTypeStructure, Ext: &e___listOfPlugin_member})
+var s___listOfPluginDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPluginDescription, Members: &m___listOfPluginDescription, Type: smithy.ShapeTypeList, Ext: &e___listOfPluginDescription})
+var s___listOfPluginDescription_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPluginDescription, Members: &mPluginDescription, Type: smithy.ShapeTypeStructure, Ext: &e___listOfPluginDescription_member})
+var s___listOfPluginUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPluginUpdate, Members: &m___listOfPluginUpdate, Type: smithy.ShapeTypeList, Ext: &e___listOfPluginUpdate})
+var s___listOfPluginUpdate_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPluginUpdate, Members: &mPluginUpdate, Type: smithy.ShapeTypeStructure, Ext: &e___listOfPluginUpdate_member})
+var s___listOfWorkerConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfWorkerConfigurationSummary, Members: &m___listOfWorkerConfigurationSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfWorkerConfigurationSummary})
+var s___listOfWorkerConfigurationSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkerConfigurationSummary, Members: &mWorkerConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfWorkerConfigurationSummary_member})
+var s___long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &e___long})
+var s___longMin1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___longMin1, Type: smithy.ShapeTypeLong, Ext: &e___longMin1})
+var s___sensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___sensitiveString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e___sensitiveString})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var s___stringMax1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax1024, Type: smithy.ShapeTypeString, Ext: &e___stringMax1024})
+var s___stringMin1Max128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max128, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max128})
+var s___timestampIso8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampIso8601, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &e___timestampIso8601})
+var sApacheKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApacheKafkaCluster, Members: &mApacheKafkaCluster, Type: smithy.ShapeTypeStructure, Ext: &eApacheKafkaCluster})
+var sApacheKafkaCluster_bootstrapServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bootstrapServers", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eApacheKafkaCluster_bootstrapServers})
+var sApacheKafkaCluster_vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpc", ID: &iVpc, Members: &mVpc, Type: smithy.ShapeTypeStructure, Ext: &eApacheKafkaCluster_vpc})
+var sApacheKafkaClusterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApacheKafkaClusterDescription, Members: &mApacheKafkaClusterDescription, Type: smithy.ShapeTypeStructure, Ext: &eApacheKafkaClusterDescription})
+var sApacheKafkaClusterDescription_bootstrapServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bootstrapServers", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eApacheKafkaClusterDescription_bootstrapServers})
+var sApacheKafkaClusterDescription_vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpc", ID: &iVpcDescription, Members: &mVpcDescription, Type: smithy.ShapeTypeStructure, Ext: &eApacheKafkaClusterDescription_vpc})
+var sAutoScaling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScaling, Members: &mAutoScaling, Type: smithy.ShapeTypeStructure, Ext: &eAutoScaling})
+var sAutoScaling_maxWorkerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxWorkerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScaling_maxWorkerCount})
+var sAutoScaling_mcuCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcuCount", ID: &i___integerMin1Max8, Type: smithy.ShapeTypeInteger, Ext: &eAutoScaling_mcuCount})
+var sAutoScaling_minWorkerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minWorkerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScaling_minWorkerCount})
+var sAutoScaling_scaleInPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleInPolicy", ID: &iScaleInPolicy, Members: &mScaleInPolicy, Type: smithy.ShapeTypeStructure, Ext: &eAutoScaling_scaleInPolicy})
+var sAutoScaling_scaleOutPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleOutPolicy", ID: &iScaleOutPolicy, Members: &mScaleOutPolicy, Type: smithy.ShapeTypeStructure, Ext: &eAutoScaling_scaleOutPolicy})
+var sAutoScaling_maxAutoscalingTaskCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAutoscalingTaskCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScaling_maxAutoscalingTaskCount})
+var sAutoScalingDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingDescription, Members: &mAutoScalingDescription, Type: smithy.ShapeTypeStructure, Ext: &eAutoScalingDescription})
+var sAutoScalingDescription_maxWorkerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxWorkerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingDescription_maxWorkerCount})
+var sAutoScalingDescription_mcuCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcuCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingDescription_mcuCount})
+var sAutoScalingDescription_minWorkerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minWorkerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingDescription_minWorkerCount})
+var sAutoScalingDescription_scaleInPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleInPolicy", ID: &iScaleInPolicyDescription, Members: &mScaleInPolicyDescription, Type: smithy.ShapeTypeStructure, Ext: &eAutoScalingDescription_scaleInPolicy})
+var sAutoScalingDescription_scaleOutPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleOutPolicy", ID: &iScaleOutPolicyDescription, Members: &mScaleOutPolicyDescription, Type: smithy.ShapeTypeStructure, Ext: &eAutoScalingDescription_scaleOutPolicy})
+var sAutoScalingDescription_maxAutoscalingTaskCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAutoscalingTaskCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingDescription_maxAutoscalingTaskCount})
+var sAutoScalingUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingUpdate, Members: &mAutoScalingUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAutoScalingUpdate})
+var sAutoScalingUpdate_maxWorkerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxWorkerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingUpdate_maxWorkerCount})
+var sAutoScalingUpdate_mcuCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcuCount", ID: &i___integerMin1Max8, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingUpdate_mcuCount})
+var sAutoScalingUpdate_minWorkerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minWorkerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingUpdate_minWorkerCount})
+var sAutoScalingUpdate_scaleInPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleInPolicy", ID: &iScaleInPolicyUpdate, Members: &mScaleInPolicyUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAutoScalingUpdate_scaleInPolicy})
+var sAutoScalingUpdate_scaleOutPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleOutPolicy", ID: &iScaleOutPolicyUpdate, Members: &mScaleOutPolicyUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAutoScalingUpdate_scaleOutPolicy})
+var sAutoScalingUpdate_maxAutoscalingTaskCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAutoscalingTaskCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAutoScalingUpdate_maxAutoscalingTaskCount})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var sCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacity, Members: &mCapacity, Type: smithy.ShapeTypeStructure, Ext: &eCapacity})
+var sCapacity_autoScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScaling", ID: &iAutoScaling, Members: &mAutoScaling, Type: smithy.ShapeTypeStructure, Ext: &eCapacity_autoScaling})
+var sCapacity_provisionedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisionedCapacity", ID: &iProvisionedCapacity, Members: &mProvisionedCapacity, Type: smithy.ShapeTypeStructure, Ext: &eCapacity_provisionedCapacity})
+var sCapacityDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityDescription, Members: &mCapacityDescription, Type: smithy.ShapeTypeStructure, Ext: &eCapacityDescription})
+var sCapacityDescription_autoScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScaling", ID: &iAutoScalingDescription, Members: &mAutoScalingDescription, Type: smithy.ShapeTypeStructure, Ext: &eCapacityDescription_autoScaling})
+var sCapacityDescription_provisionedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisionedCapacity", ID: &iProvisionedCapacityDescription, Members: &mProvisionedCapacityDescription, Type: smithy.ShapeTypeStructure, Ext: &eCapacityDescription_provisionedCapacity})
+var sCapacityUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityUpdate, Members: &mCapacityUpdate, Type: smithy.ShapeTypeStructure, Ext: &eCapacityUpdate})
+var sCapacityUpdate_autoScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScaling", ID: &iAutoScalingUpdate, Members: &mAutoScalingUpdate, Type: smithy.ShapeTypeStructure, Ext: &eCapacityUpdate_autoScaling})
+var sCapacityUpdate_provisionedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisionedCapacity", ID: &iProvisionedCapacityUpdate, Members: &mProvisionedCapacityUpdate, Type: smithy.ShapeTypeStructure, Ext: &eCapacityUpdate_provisionedCapacity})
+var sCloudWatchLogsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogsLogDelivery, Members: &mCloudWatchLogsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogsLogDelivery})
+var sCloudWatchLogsLogDelivery_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCloudWatchLogsLogDelivery_enabled})
+var sCloudWatchLogsLogDelivery_logGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroup", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogsLogDelivery_logGroup})
+var sCloudWatchLogsLogDeliveryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogsLogDeliveryDescription, Members: &mCloudWatchLogsLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogsLogDeliveryDescription})
+var sCloudWatchLogsLogDeliveryDescription_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCloudWatchLogsLogDeliveryDescription_enabled})
+var sCloudWatchLogsLogDeliveryDescription_logGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroup", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogsLogDeliveryDescription_logGroup})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_ConnectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorConfiguration, Members: &m_ConnectorConfiguration, Traits: &t21, Type: smithy.ShapeTypeMap, Ext: &e_ConnectorConfiguration})
+var s_ConnectorConfiguration_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_ConnectorConfiguration_key})
+var s_ConnectorConfiguration_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_ConnectorConfiguration_value})
+var s_ConnectorConfigurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorConfigurationUpdate, Members: &m_ConnectorConfigurationUpdate, Traits: &t21, Type: smithy.ShapeTypeMap, Ext: &e_ConnectorConfigurationUpdate})
+var s_ConnectorConfigurationUpdate_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_ConnectorConfigurationUpdate_key})
+var s_ConnectorConfigurationUpdate_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_ConnectorConfigurationUpdate_value})
+var s_ConnectorOperationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorOperationState, Type: smithy.ShapeTypeString, Ext: &e_ConnectorOperationState})
+var sConnectorOperationStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorOperationStep, Members: &mConnectorOperationStep, Type: smithy.ShapeTypeStructure, Ext: &eConnectorOperationStep})
+var sConnectorOperationStep_stepType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepType", ID: &i_ConnectorOperationStepType, Type: smithy.ShapeTypeString, Ext: &eConnectorOperationStep_stepType})
+var sConnectorOperationStep_stepState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepState", ID: &i_ConnectorOperationStepState, Type: smithy.ShapeTypeString, Ext: &eConnectorOperationStep_stepState})
+var s_ConnectorOperationStepState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorOperationStepState, Type: smithy.ShapeTypeString, Ext: &e_ConnectorOperationStepState})
+var s_ConnectorOperationStepType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorOperationStepType, Type: smithy.ShapeTypeString, Ext: &e_ConnectorOperationStepType})
+var sConnectorOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorOperationSummary, Members: &mConnectorOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &eConnectorOperationSummary})
+var sConnectorOperationSummary_connectorOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConnectorOperationSummary_connectorOperationArn})
+var sConnectorOperationSummary_connectorOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationType", ID: &i_ConnectorOperationType, Type: smithy.ShapeTypeString, Ext: &eConnectorOperationSummary_connectorOperationType})
+var sConnectorOperationSummary_connectorOperationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationState", ID: &i_ConnectorOperationState, Type: smithy.ShapeTypeString, Ext: &eConnectorOperationSummary_connectorOperationState})
+var sConnectorOperationSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eConnectorOperationSummary_creationTime})
+var sConnectorOperationSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eConnectorOperationSummary_endTime})
+var s_ConnectorOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorOperationType, Type: smithy.ShapeTypeString, Ext: &e_ConnectorOperationType})
+var s_ConnectorState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorState, Type: smithy.ShapeTypeString, Ext: &e_ConnectorState})
+var sConnectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary})
+var sConnectorSummary_capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacity", ID: &iCapacityDescription, Members: &mCapacityDescription, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary_capacity})
+var sConnectorSummary_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_connectorArn})
+var sConnectorSummary_connectorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorDescription", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_connectorDescription})
+var sConnectorSummary_connectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_connectorName})
+var sConnectorSummary_connectorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorState", ID: &i_ConnectorState, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_connectorState})
+var sConnectorSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eConnectorSummary_creationTime})
+var sConnectorSummary_currentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentVersion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_currentVersion})
+var sConnectorSummary_kafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaCluster", ID: &iKafkaClusterDescription, Members: &mKafkaClusterDescription, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary_kafkaCluster})
+var sConnectorSummary_kafkaClusterClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaClusterClientAuthentication", ID: &iKafkaClusterClientAuthenticationDescription, Members: &mKafkaClusterClientAuthenticationDescription, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary_kafkaClusterClientAuthentication})
+var sConnectorSummary_kafkaClusterEncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaClusterEncryptionInTransit", ID: &iKafkaClusterEncryptionInTransitDescription, Members: &mKafkaClusterEncryptionInTransitDescription, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary_kafkaClusterEncryptionInTransit})
+var sConnectorSummary_kafkaConnectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaConnectVersion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_kafkaConnectVersion})
+var sConnectorSummary_logDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logDelivery", ID: &iLogDeliveryDescription, Members: &mLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary_logDelivery})
+var sConnectorSummary_networkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkType", ID: &i_NetworkType, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_networkType})
+var sConnectorSummary_plugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "plugins", ID: &i___listOfPluginDescription, Members: &m___listOfPluginDescription, Type: smithy.ShapeTypeList, Ext: &eConnectorSummary_plugins})
+var sConnectorSummary_serviceExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceExecutionRoleArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_serviceExecutionRoleArn})
+var sConnectorSummary_workerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfiguration", ID: &iWorkerConfigurationDescription, Members: &mWorkerConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary_workerConfiguration})
+var sCustomPlugin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPlugin, Members: &mCustomPlugin, Type: smithy.ShapeTypeStructure, Ext: &eCustomPlugin})
+var sCustomPlugin_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPlugin_customPluginArn})
+var sCustomPlugin_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___longMin1, Type: smithy.ShapeTypeLong, Ext: &eCustomPlugin_revision})
+var s_CustomPluginContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomPluginContentType, Type: smithy.ShapeTypeString, Ext: &e_CustomPluginContentType})
+var sCustomPluginDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPluginDescription, Members: &mCustomPluginDescription, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginDescription})
+var sCustomPluginDescription_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPluginDescription_customPluginArn})
+var sCustomPluginDescription_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eCustomPluginDescription_revision})
+var sCustomPluginFileDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPluginFileDescription, Members: &mCustomPluginFileDescription, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginFileDescription})
+var sCustomPluginFileDescription_fileMd5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMd5", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPluginFileDescription_fileMd5})
+var sCustomPluginFileDescription_fileSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSize", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eCustomPluginFileDescription_fileSize})
+var sCustomPluginLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPluginLocation, Members: &mCustomPluginLocation, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginLocation})
+var sCustomPluginLocation_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginLocation_s3Location})
+var sCustomPluginLocationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPluginLocationDescription, Members: &mCustomPluginLocationDescription, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginLocationDescription})
+var sCustomPluginLocationDescription_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3LocationDescription, Members: &mS3LocationDescription, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginLocationDescription_s3Location})
+var sCustomPluginRevisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPluginRevisionSummary, Members: &mCustomPluginRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginRevisionSummary})
+var sCustomPluginRevisionSummary_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_CustomPluginContentType, Type: smithy.ShapeTypeString, Ext: &eCustomPluginRevisionSummary_contentType})
+var sCustomPluginRevisionSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eCustomPluginRevisionSummary_creationTime})
+var sCustomPluginRevisionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPluginRevisionSummary_description})
+var sCustomPluginRevisionSummary_fileDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileDescription", ID: &iCustomPluginFileDescription, Members: &mCustomPluginFileDescription, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginRevisionSummary_fileDescription})
+var sCustomPluginRevisionSummary_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iCustomPluginLocationDescription, Members: &mCustomPluginLocationDescription, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginRevisionSummary_location})
+var sCustomPluginRevisionSummary_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eCustomPluginRevisionSummary_revision})
+var s_CustomPluginState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomPluginState, Type: smithy.ShapeTypeString, Ext: &e_CustomPluginState})
+var sCustomPluginSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPluginSummary, Members: &mCustomPluginSummary, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginSummary})
+var sCustomPluginSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eCustomPluginSummary_creationTime})
+var sCustomPluginSummary_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPluginSummary_customPluginArn})
+var sCustomPluginSummary_customPluginState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginState", ID: &i_CustomPluginState, Type: smithy.ShapeTypeString, Ext: &eCustomPluginSummary_customPluginState})
+var sCustomPluginSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPluginSummary_description})
+var sCustomPluginSummary_latestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestRevision", ID: &iCustomPluginRevisionSummary, Members: &mCustomPluginRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginSummary_latestRevision})
+var sCustomPluginSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPluginSummary_name})
+var sCustomPluginUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPluginUpdate, Members: &mCustomPluginUpdate, Type: smithy.ShapeTypeStructure, Ext: &eCustomPluginUpdate})
+var sCustomPluginUpdate_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCustomPluginUpdate_customPluginArn})
+var sCustomPluginUpdate_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___longMin1, Type: smithy.ShapeTypeLong, Ext: &eCustomPluginUpdate_revision})
+var sFirehoseLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehoseLogDelivery, Members: &mFirehoseLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eFirehoseLogDelivery})
+var sFirehoseLogDelivery_deliveryStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deliveryStream", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFirehoseLogDelivery_deliveryStream})
+var sFirehoseLogDelivery_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFirehoseLogDelivery_enabled})
+var sFirehoseLogDeliveryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehoseLogDeliveryDescription, Members: &mFirehoseLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eFirehoseLogDeliveryDescription})
+var sFirehoseLogDeliveryDescription_deliveryStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deliveryStream", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFirehoseLogDeliveryDescription_deliveryStream})
+var sFirehoseLogDeliveryDescription_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFirehoseLogDeliveryDescription_enabled})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_message})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sInternalServerErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_message})
+var sKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaCluster, Members: &mKafkaCluster, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster})
+var sKafkaCluster_apacheKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apacheKafkaCluster", ID: &iApacheKafkaCluster, Members: &mApacheKafkaCluster, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster_apacheKafkaCluster})
+var sKafkaClusterClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterClientAuthentication, Members: &mKafkaClusterClientAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterClientAuthentication})
+var sKafkaClusterClientAuthentication_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &i_KafkaClusterClientAuthenticationType, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterClientAuthentication_authenticationType})
+var sKafkaClusterClientAuthenticationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterClientAuthenticationDescription, Members: &mKafkaClusterClientAuthenticationDescription, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterClientAuthenticationDescription})
+var sKafkaClusterClientAuthenticationDescription_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &i_KafkaClusterClientAuthenticationType, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterClientAuthenticationDescription_authenticationType})
+var s_KafkaClusterClientAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KafkaClusterClientAuthenticationType, Type: smithy.ShapeTypeString, Ext: &e_KafkaClusterClientAuthenticationType})
+var sKafkaClusterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterDescription, Members: &mKafkaClusterDescription, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription})
+var sKafkaClusterDescription_apacheKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apacheKafkaCluster", ID: &iApacheKafkaClusterDescription, Members: &mApacheKafkaClusterDescription, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription_apacheKafkaCluster})
+var sKafkaClusterEncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterEncryptionInTransit, Members: &mKafkaClusterEncryptionInTransit, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterEncryptionInTransit})
+var sKafkaClusterEncryptionInTransit_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &i_KafkaClusterEncryptionInTransitType, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterEncryptionInTransit_encryptionType})
+var sKafkaClusterEncryptionInTransitDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterEncryptionInTransitDescription, Members: &mKafkaClusterEncryptionInTransitDescription, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterEncryptionInTransitDescription})
+var sKafkaClusterEncryptionInTransitDescription_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &i_KafkaClusterEncryptionInTransitType, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterEncryptionInTransitDescription_encryptionType})
+var s_KafkaClusterEncryptionInTransitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KafkaClusterEncryptionInTransitType, Type: smithy.ShapeTypeString, Ext: &e_KafkaClusterEncryptionInTransitType})
+var sLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDelivery, Members: &mLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eLogDelivery})
+var sLogDelivery_workerLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerLogDelivery", ID: &iWorkerLogDelivery, Members: &mWorkerLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eLogDelivery_workerLogDelivery})
+var sLogDeliveryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDeliveryDescription, Members: &mLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eLogDeliveryDescription})
+var sLogDeliveryDescription_workerLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerLogDelivery", ID: &iWorkerLogDeliveryDescription, Members: &mWorkerLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eLogDeliveryDescription_workerLogDelivery})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkType, Type: smithy.ShapeTypeString, Ext: &e_NetworkType})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sPlugin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlugin, Members: &mPlugin, Type: smithy.ShapeTypeStructure, Ext: &ePlugin})
+var sPlugin_customPlugin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPlugin", ID: &iCustomPlugin, Members: &mCustomPlugin, Type: smithy.ShapeTypeStructure, Ext: &ePlugin_customPlugin})
+var sPluginDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPluginDescription, Members: &mPluginDescription, Type: smithy.ShapeTypeStructure, Ext: &ePluginDescription})
+var sPluginDescription_customPlugin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPlugin", ID: &iCustomPluginDescription, Members: &mCustomPluginDescription, Type: smithy.ShapeTypeStructure, Ext: &ePluginDescription_customPlugin})
+var sPluginUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPluginUpdate, Members: &mPluginUpdate, Type: smithy.ShapeTypeStructure, Ext: &ePluginUpdate})
+var sPluginUpdate_customPlugin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPlugin", ID: &iCustomPluginUpdate, Members: &mCustomPluginUpdate, Type: smithy.ShapeTypeStructure, Ext: &ePluginUpdate_customPlugin})
+var sProvisionedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedCapacity, Members: &mProvisionedCapacity, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedCapacity})
+var sProvisionedCapacity_mcuCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcuCount", ID: &i___integerMin1Max8, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedCapacity_mcuCount})
+var sProvisionedCapacity_workerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedCapacity_workerCount})
+var sProvisionedCapacityDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedCapacityDescription, Members: &mProvisionedCapacityDescription, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedCapacityDescription})
+var sProvisionedCapacityDescription_mcuCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcuCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedCapacityDescription_mcuCount})
+var sProvisionedCapacityDescription_workerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedCapacityDescription_workerCount})
+var sProvisionedCapacityUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedCapacityUpdate, Members: &mProvisionedCapacityUpdate, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedCapacityUpdate})
+var sProvisionedCapacityUpdate_mcuCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcuCount", ID: &i___integerMin1Max8, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedCapacityUpdate_mcuCount})
+var sProvisionedCapacityUpdate_workerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedCapacityUpdate_workerCount})
+var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eS3Location})
+var sS3Location_bucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3Location_bucketArn})
+var sS3Location_fileKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileKey", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3Location_fileKey})
+var sS3Location_objectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectVersion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3Location_objectVersion})
+var sS3LocationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LocationDescription, Members: &mS3LocationDescription, Type: smithy.ShapeTypeStructure, Ext: &eS3LocationDescription})
+var sS3LocationDescription_bucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3LocationDescription_bucketArn})
+var sS3LocationDescription_fileKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileKey", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3LocationDescription_fileKey})
+var sS3LocationDescription_objectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectVersion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3LocationDescription_objectVersion})
+var sS3LogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LogDelivery, Members: &mS3LogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eS3LogDelivery})
+var sS3LogDelivery_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3LogDelivery_bucket})
+var sS3LogDelivery_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eS3LogDelivery_enabled})
+var sS3LogDelivery_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3LogDelivery_prefix})
+var sS3LogDeliveryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LogDeliveryDescription, Members: &mS3LogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eS3LogDeliveryDescription})
+var sS3LogDeliveryDescription_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3LogDeliveryDescription_bucket})
+var sS3LogDeliveryDescription_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eS3LogDeliveryDescription_enabled})
+var sS3LogDeliveryDescription_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eS3LogDeliveryDescription_prefix})
+var sScaleInPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScaleInPolicy, Members: &mScaleInPolicy, Type: smithy.ShapeTypeStructure, Ext: &eScaleInPolicy})
+var sScaleInPolicy_cpuUtilizationPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuUtilizationPercentage", ID: &i___integerMin1Max100, Type: smithy.ShapeTypeInteger, Ext: &eScaleInPolicy_cpuUtilizationPercentage})
+var sScaleInPolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScaleInPolicyDescription, Members: &mScaleInPolicyDescription, Type: smithy.ShapeTypeStructure, Ext: &eScaleInPolicyDescription})
+var sScaleInPolicyDescription_cpuUtilizationPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuUtilizationPercentage", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eScaleInPolicyDescription_cpuUtilizationPercentage})
+var sScaleInPolicyUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScaleInPolicyUpdate, Members: &mScaleInPolicyUpdate, Type: smithy.ShapeTypeStructure, Ext: &eScaleInPolicyUpdate})
+var sScaleInPolicyUpdate_cpuUtilizationPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuUtilizationPercentage", ID: &i___integerMin1Max100, Type: smithy.ShapeTypeInteger, Ext: &eScaleInPolicyUpdate_cpuUtilizationPercentage})
+var sScaleOutPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScaleOutPolicy, Members: &mScaleOutPolicy, Type: smithy.ShapeTypeStructure, Ext: &eScaleOutPolicy})
+var sScaleOutPolicy_cpuUtilizationPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuUtilizationPercentage", ID: &i___integerMin1Max100, Type: smithy.ShapeTypeInteger, Ext: &eScaleOutPolicy_cpuUtilizationPercentage})
+var sScaleOutPolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScaleOutPolicyDescription, Members: &mScaleOutPolicyDescription, Type: smithy.ShapeTypeStructure, Ext: &eScaleOutPolicyDescription})
+var sScaleOutPolicyDescription_cpuUtilizationPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuUtilizationPercentage", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eScaleOutPolicyDescription_cpuUtilizationPercentage})
+var sScaleOutPolicyUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScaleOutPolicyUpdate, Members: &mScaleOutPolicyUpdate, Type: smithy.ShapeTypeStructure, Ext: &eScaleOutPolicyUpdate})
+var sScaleOutPolicyUpdate_cpuUtilizationPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuUtilizationPercentage", ID: &i___integerMin1Max100, Type: smithy.ShapeTypeInteger, Ext: &eScaleOutPolicyUpdate_cpuUtilizationPercentage})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var sStateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStateDescription, Members: &mStateDescription, Type: smithy.ShapeTypeStructure, Ext: &eStateDescription})
+var sStateDescription_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eStateDescription_code})
+var sStateDescription_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eStateDescription_message})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sVpc = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpc, Members: &mVpc, Type: smithy.ShapeTypeStructure, Ext: &eVpc})
+var sVpc_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &eVpc_securityGroups})
+var sVpc_subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnets", ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &eVpc_subnets})
+var sVpcDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcDescription, Members: &mVpcDescription, Type: smithy.ShapeTypeStructure, Ext: &eVpcDescription})
+var sVpcDescription_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &eVpcDescription_securityGroups})
+var sVpcDescription_subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnets", ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &eVpcDescription_subnets})
+var sWorkerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerConfiguration, Members: &mWorkerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWorkerConfiguration})
+var sWorkerConfiguration_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___longMin1, Type: smithy.ShapeTypeLong, Ext: &eWorkerConfiguration_revision})
+var sWorkerConfiguration_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfiguration_workerConfigurationArn})
+var sWorkerConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerConfigurationDescription, Members: &mWorkerConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerConfigurationDescription})
+var sWorkerConfigurationDescription_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eWorkerConfigurationDescription_revision})
+var sWorkerConfigurationDescription_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationDescription_workerConfigurationArn})
+var sWorkerConfigurationRevisionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerConfigurationRevisionDescription, Members: &mWorkerConfigurationRevisionDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerConfigurationRevisionDescription})
+var sWorkerConfigurationRevisionDescription_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkerConfigurationRevisionDescription_creationTime})
+var sWorkerConfigurationRevisionDescription_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationRevisionDescription_description})
+var sWorkerConfigurationRevisionDescription_propertiesFileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertiesFileContent", ID: &i___sensitiveString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationRevisionDescription_propertiesFileContent})
+var sWorkerConfigurationRevisionDescription_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eWorkerConfigurationRevisionDescription_revision})
+var sWorkerConfigurationRevisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerConfigurationRevisionSummary, Members: &mWorkerConfigurationRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkerConfigurationRevisionSummary})
+var sWorkerConfigurationRevisionSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkerConfigurationRevisionSummary_creationTime})
+var sWorkerConfigurationRevisionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationRevisionSummary_description})
+var sWorkerConfigurationRevisionSummary_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eWorkerConfigurationRevisionSummary_revision})
+var s_WorkerConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkerConfigurationState, Type: smithy.ShapeTypeString, Ext: &e_WorkerConfigurationState})
+var sWorkerConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerConfigurationSummary, Members: &mWorkerConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkerConfigurationSummary})
+var sWorkerConfigurationSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkerConfigurationSummary_creationTime})
+var sWorkerConfigurationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationSummary_description})
+var sWorkerConfigurationSummary_latestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestRevision", ID: &iWorkerConfigurationRevisionSummary, Members: &mWorkerConfigurationRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkerConfigurationSummary_latestRevision})
+var sWorkerConfigurationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationSummary_name})
+var sWorkerConfigurationSummary_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationSummary_workerConfigurationArn})
+var sWorkerConfigurationSummary_workerConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationState", ID: &i_WorkerConfigurationState, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationSummary_workerConfigurationState})
+var sWorkerConfigurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerConfigurationUpdate, Members: &mWorkerConfigurationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eWorkerConfigurationUpdate})
+var sWorkerConfigurationUpdate_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___longMin1, Type: smithy.ShapeTypeLong, Ext: &eWorkerConfigurationUpdate_revision})
+var sWorkerConfigurationUpdate_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eWorkerConfigurationUpdate_workerConfigurationArn})
+var sWorkerLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerLogDelivery, Members: &mWorkerLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDelivery})
+var sWorkerLogDelivery_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogsLogDelivery, Members: &mCloudWatchLogsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDelivery_cloudWatchLogs})
+var sWorkerLogDelivery_firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firehose", ID: &iFirehoseLogDelivery, Members: &mFirehoseLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDelivery_firehose})
+var sWorkerLogDelivery_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3LogDelivery, Members: &mS3LogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDelivery_s3})
+var sWorkerLogDeliveryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerLogDeliveryDescription, Members: &mWorkerLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDeliveryDescription})
+var sWorkerLogDeliveryDescription_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogsLogDeliveryDescription, Members: &mCloudWatchLogsLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDeliveryDescription_cloudWatchLogs})
+var sWorkerLogDeliveryDescription_firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firehose", ID: &iFirehoseLogDeliveryDescription, Members: &mFirehoseLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDeliveryDescription_firehose})
+var sWorkerLogDeliveryDescription_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3LogDeliveryDescription, Members: &mS3LogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerLogDeliveryDescription_s3})
+var sWorkerSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerSetting, Members: &mWorkerSetting, Type: smithy.ShapeTypeStructure, Ext: &eWorkerSetting})
+var sWorkerSetting_capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacity", ID: &iCapacityDescription, Members: &mCapacityDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerSetting_capacity})
+var sWorkerSetting_plugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "plugins", ID: &i___listOfPluginDescription, Members: &m___listOfPluginDescription, Type: smithy.ShapeTypeList, Ext: &eWorkerSetting_plugins})
+var sWorkerSetting_workerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfiguration", ID: &iWorkerConfigurationDescription, Members: &mWorkerConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkerSetting_workerConfiguration})
+var sWorkerSetting_useDefaultWorkerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useDefaultWorkerConfiguration", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eWorkerSetting_useDefaultWorkerConfiguration})
+var sCreateConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorRequest, Members: &mCreateConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest})
+var sCreateConnectorRequest_capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacity", ID: &iCapacity, Members: &mCapacity, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest_capacity})
+var sCreateConnectorRequest_connectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorConfiguration", ID: &i_ConnectorConfiguration, Members: &m_ConnectorConfiguration, Traits: &t32, Type: smithy.ShapeTypeMap, Ext: &eCreateConnectorRequest_connectorConfiguration})
+var sCreateConnectorRequest_connectorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorDescription", ID: &i___stringMax1024, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_connectorDescription})
+var sCreateConnectorRequest_connectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorName", ID: &i___stringMin1Max128, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_connectorName})
+var sCreateConnectorRequest_kafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaCluster", ID: &iKafkaCluster, Members: &mKafkaCluster, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest_kafkaCluster})
+var sCreateConnectorRequest_kafkaClusterClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaClusterClientAuthentication", ID: &iKafkaClusterClientAuthentication, Members: &mKafkaClusterClientAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest_kafkaClusterClientAuthentication})
+var sCreateConnectorRequest_kafkaClusterEncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaClusterEncryptionInTransit", ID: &iKafkaClusterEncryptionInTransit, Members: &mKafkaClusterEncryptionInTransit, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest_kafkaClusterEncryptionInTransit})
+var sCreateConnectorRequest_kafkaConnectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaConnectVersion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_kafkaConnectVersion})
+var sCreateConnectorRequest_logDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logDelivery", ID: &iLogDelivery, Members: &mLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest_logDelivery})
+var sCreateConnectorRequest_networkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkType", ID: &i_NetworkType, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_networkType})
+var sCreateConnectorRequest_plugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "plugins", ID: &i___listOfPlugin, Members: &m___listOfPlugin, Type: smithy.ShapeTypeList, Ext: &eCreateConnectorRequest_plugins})
+var sCreateConnectorRequest_serviceExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceExecutionRoleArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_serviceExecutionRoleArn})
+var sCreateConnectorRequest_workerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfiguration", ID: &iWorkerConfiguration, Members: &mWorkerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest_workerConfiguration})
+var sCreateConnectorRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateConnectorRequest_tags})
+var sCreateConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorResponse, Members: &mCreateConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorResponse})
+var sCreateConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorResponse_connectorArn})
+var sCreateConnectorResponse_connectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorResponse_connectorName})
+var sCreateConnectorResponse_connectorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorState", ID: &i_ConnectorState, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorResponse_connectorState})
+var sCreateCustomPluginRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomPluginRequest, Members: &mCreateCustomPluginRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomPluginRequest})
+var sCreateCustomPluginRequest_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_CustomPluginContentType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomPluginRequest_contentType})
+var sCreateCustomPluginRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___stringMax1024, Type: smithy.ShapeTypeString, Ext: &eCreateCustomPluginRequest_description})
+var sCreateCustomPluginRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iCustomPluginLocation, Members: &mCustomPluginLocation, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomPluginRequest_location})
+var sCreateCustomPluginRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___stringMin1Max128, Type: smithy.ShapeTypeString, Ext: &eCreateCustomPluginRequest_name})
+var sCreateCustomPluginRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateCustomPluginRequest_tags})
+var sCreateCustomPluginResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomPluginResponse, Members: &mCreateCustomPluginResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomPluginResponse})
+var sCreateCustomPluginResponse_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateCustomPluginResponse_customPluginArn})
+var sCreateCustomPluginResponse_customPluginState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginState", ID: &i_CustomPluginState, Type: smithy.ShapeTypeString, Ext: &eCreateCustomPluginResponse_customPluginState})
+var sCreateCustomPluginResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateCustomPluginResponse_name})
+var sCreateCustomPluginResponse_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eCreateCustomPluginResponse_revision})
+var sCreateWorkerConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerConfigurationRequest, Members: &mCreateWorkerConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkerConfigurationRequest})
+var sCreateWorkerConfigurationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___stringMax1024, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerConfigurationRequest_description})
+var sCreateWorkerConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___stringMin1Max128, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerConfigurationRequest_name})
+var sCreateWorkerConfigurationRequest_propertiesFileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertiesFileContent", ID: &i___sensitiveString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerConfigurationRequest_propertiesFileContent})
+var sCreateWorkerConfigurationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateWorkerConfigurationRequest_tags})
+var sCreateWorkerConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerConfigurationResponse, Members: &mCreateWorkerConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkerConfigurationResponse})
+var sCreateWorkerConfigurationResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateWorkerConfigurationResponse_creationTime})
+var sCreateWorkerConfigurationResponse_latestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestRevision", ID: &iWorkerConfigurationRevisionSummary, Members: &mWorkerConfigurationRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkerConfigurationResponse_latestRevision})
+var sCreateWorkerConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerConfigurationResponse_name})
+var sCreateWorkerConfigurationResponse_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerConfigurationResponse_workerConfigurationArn})
+var sCreateWorkerConfigurationResponse_workerConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationState", ID: &i_WorkerConfigurationState, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerConfigurationResponse_workerConfigurationState})
+var sDeleteConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorRequest, Members: &mDeleteConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectorRequest})
+var sDeleteConnectorRequest_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectorRequest_connectorArn})
+var sDeleteConnectorRequest_currentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentVersion", ID: &i___string, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectorRequest_currentVersion})
+var sDeleteConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorResponse, Members: &mDeleteConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectorResponse})
+var sDeleteConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectorResponse_connectorArn})
+var sDeleteConnectorResponse_connectorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorState", ID: &i_ConnectorState, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectorResponse_connectorState})
+var sDeleteCustomPluginRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomPluginRequest, Members: &mDeleteCustomPluginRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomPluginRequest})
+var sDeleteCustomPluginRequest_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomPluginRequest_customPluginArn})
+var sDeleteCustomPluginResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomPluginResponse, Members: &mDeleteCustomPluginResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomPluginResponse})
+var sDeleteCustomPluginResponse_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomPluginResponse_customPluginArn})
+var sDeleteCustomPluginResponse_customPluginState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginState", ID: &i_CustomPluginState, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomPluginResponse_customPluginState})
+var sDeleteWorkerConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerConfigurationRequest, Members: &mDeleteWorkerConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkerConfigurationRequest})
+var sDeleteWorkerConfigurationRequest_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkerConfigurationRequest_workerConfigurationArn})
+var sDeleteWorkerConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerConfigurationResponse, Members: &mDeleteWorkerConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkerConfigurationResponse})
+var sDeleteWorkerConfigurationResponse_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkerConfigurationResponse_workerConfigurationArn})
+var sDeleteWorkerConfigurationResponse_workerConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationState", ID: &i_WorkerConfigurationState, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkerConfigurationResponse_workerConfigurationState})
+var sDescribeConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorRequest, Members: &mDescribeConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorRequest})
+var sDescribeConnectorRequest_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorRequest_connectorArn})
+var sDescribeConnectorOperationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorOperationRequest, Members: &mDescribeConnectorOperationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorOperationRequest})
+var sDescribeConnectorOperationRequest_connectorOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorOperationRequest_connectorOperationArn})
+var sDescribeConnectorOperationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorOperationResponse, Members: &mDescribeConnectorOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorOperationResponse})
+var sDescribeConnectorOperationResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorOperationResponse_connectorArn})
+var sDescribeConnectorOperationResponse_connectorOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorOperationResponse_connectorOperationArn})
+var sDescribeConnectorOperationResponse_connectorOperationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationState", ID: &i_ConnectorOperationState, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorOperationResponse_connectorOperationState})
+var sDescribeConnectorOperationResponse_connectorOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationType", ID: &i_ConnectorOperationType, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorOperationResponse_connectorOperationType})
+var sDescribeConnectorOperationResponse_operationSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationSteps", ID: &i___listOfConnectorOperationStep, Members: &m___listOfConnectorOperationStep, Type: smithy.ShapeTypeList, Ext: &eDescribeConnectorOperationResponse_operationSteps})
+var sDescribeConnectorOperationResponse_originWorkerSetting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originWorkerSetting", ID: &iWorkerSetting, Members: &mWorkerSetting, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorOperationResponse_originWorkerSetting})
+var sDescribeConnectorOperationResponse_originConnectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originConnectorConfiguration", ID: &i_ConnectorConfiguration, Members: &m_ConnectorConfiguration, Traits: &t32, Type: smithy.ShapeTypeMap, Ext: &eDescribeConnectorOperationResponse_originConnectorConfiguration})
+var sDescribeConnectorOperationResponse_targetWorkerSetting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetWorkerSetting", ID: &iWorkerSetting, Members: &mWorkerSetting, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorOperationResponse_targetWorkerSetting})
+var sDescribeConnectorOperationResponse_targetConnectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetConnectorConfiguration", ID: &i_ConnectorConfiguration, Members: &m_ConnectorConfiguration, Traits: &t32, Type: smithy.ShapeTypeMap, Ext: &eDescribeConnectorOperationResponse_targetConnectorConfiguration})
+var sDescribeConnectorOperationResponse_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &iStateDescription, Members: &mStateDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorOperationResponse_errorInfo})
+var sDescribeConnectorOperationResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeConnectorOperationResponse_creationTime})
+var sDescribeConnectorOperationResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeConnectorOperationResponse_endTime})
+var sDescribeConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorResponse, Members: &mDescribeConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse})
+var sDescribeConnectorResponse_capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacity", ID: &iCapacityDescription, Members: &mCapacityDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse_capacity})
+var sDescribeConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_connectorArn})
+var sDescribeConnectorResponse_connectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorConfiguration", ID: &i_ConnectorConfiguration, Members: &m_ConnectorConfiguration, Traits: &t32, Type: smithy.ShapeTypeMap, Ext: &eDescribeConnectorResponse_connectorConfiguration})
+var sDescribeConnectorResponse_connectorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorDescription", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_connectorDescription})
+var sDescribeConnectorResponse_connectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_connectorName})
+var sDescribeConnectorResponse_connectorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorState", ID: &i_ConnectorState, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_connectorState})
+var sDescribeConnectorResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeConnectorResponse_creationTime})
+var sDescribeConnectorResponse_currentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentVersion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_currentVersion})
+var sDescribeConnectorResponse_kafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaCluster", ID: &iKafkaClusterDescription, Members: &mKafkaClusterDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse_kafkaCluster})
+var sDescribeConnectorResponse_kafkaClusterClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaClusterClientAuthentication", ID: &iKafkaClusterClientAuthenticationDescription, Members: &mKafkaClusterClientAuthenticationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse_kafkaClusterClientAuthentication})
+var sDescribeConnectorResponse_kafkaClusterEncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaClusterEncryptionInTransit", ID: &iKafkaClusterEncryptionInTransitDescription, Members: &mKafkaClusterEncryptionInTransitDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse_kafkaClusterEncryptionInTransit})
+var sDescribeConnectorResponse_kafkaConnectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaConnectVersion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_kafkaConnectVersion})
+var sDescribeConnectorResponse_logDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logDelivery", ID: &iLogDeliveryDescription, Members: &mLogDeliveryDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse_logDelivery})
+var sDescribeConnectorResponse_networkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkType", ID: &i_NetworkType, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_networkType})
+var sDescribeConnectorResponse_plugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "plugins", ID: &i___listOfPluginDescription, Members: &m___listOfPluginDescription, Type: smithy.ShapeTypeList, Ext: &eDescribeConnectorResponse_plugins})
+var sDescribeConnectorResponse_serviceExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceExecutionRoleArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectorResponse_serviceExecutionRoleArn})
+var sDescribeConnectorResponse_workerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfiguration", ID: &iWorkerConfigurationDescription, Members: &mWorkerConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse_workerConfiguration})
+var sDescribeConnectorResponse_stateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateDescription", ID: &iStateDescription, Members: &mStateDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectorResponse_stateDescription})
+var sDescribeCustomPluginRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomPluginRequest, Members: &mDescribeCustomPluginRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCustomPluginRequest})
+var sDescribeCustomPluginRequest_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomPluginRequest_customPluginArn})
+var sDescribeCustomPluginResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomPluginResponse, Members: &mDescribeCustomPluginResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCustomPluginResponse})
+var sDescribeCustomPluginResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeCustomPluginResponse_creationTime})
+var sDescribeCustomPluginResponse_customPluginArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomPluginResponse_customPluginArn})
+var sDescribeCustomPluginResponse_customPluginState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPluginState", ID: &i_CustomPluginState, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomPluginResponse_customPluginState})
+var sDescribeCustomPluginResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomPluginResponse_description})
+var sDescribeCustomPluginResponse_latestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestRevision", ID: &iCustomPluginRevisionSummary, Members: &mCustomPluginRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCustomPluginResponse_latestRevision})
+var sDescribeCustomPluginResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomPluginResponse_name})
+var sDescribeCustomPluginResponse_stateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateDescription", ID: &iStateDescription, Members: &mStateDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCustomPluginResponse_stateDescription})
+var sDescribeWorkerConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkerConfigurationRequest, Members: &mDescribeWorkerConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkerConfigurationRequest})
+var sDescribeWorkerConfigurationRequest_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkerConfigurationRequest_workerConfigurationArn})
+var sDescribeWorkerConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkerConfigurationResponse, Members: &mDescribeWorkerConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkerConfigurationResponse})
+var sDescribeWorkerConfigurationResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i___timestampIso8601, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeWorkerConfigurationResponse_creationTime})
+var sDescribeWorkerConfigurationResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkerConfigurationResponse_description})
+var sDescribeWorkerConfigurationResponse_latestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestRevision", ID: &iWorkerConfigurationRevisionDescription, Members: &mWorkerConfigurationRevisionDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkerConfigurationResponse_latestRevision})
+var sDescribeWorkerConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkerConfigurationResponse_name})
+var sDescribeWorkerConfigurationResponse_workerConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkerConfigurationResponse_workerConfigurationArn})
+var sDescribeWorkerConfigurationResponse_workerConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurationState", ID: &i_WorkerConfigurationState, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkerConfigurationResponse_workerConfigurationState})
+var sListConnectorOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorOperationsRequest, Members: &mListConnectorOperationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConnectorOperationsRequest})
+var sListConnectorOperationsRequest_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListConnectorOperationsRequest_connectorArn})
+var sListConnectorOperationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eListConnectorOperationsRequest_maxResults})
+var sListConnectorOperationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListConnectorOperationsRequest_nextToken})
+var sListConnectorOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorOperationsResponse, Members: &mListConnectorOperationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConnectorOperationsResponse})
+var sListConnectorOperationsResponse_connectorOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperations", ID: &i___listOfConnectorOperationSummary, Members: &m___listOfConnectorOperationSummary, Type: smithy.ShapeTypeList, Ext: &eListConnectorOperationsResponse_connectorOperations})
+var sListConnectorOperationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListConnectorOperationsResponse_nextToken})
+var sListConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsRequest, Members: &mListConnectorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConnectorsRequest})
+var sListConnectorsRequest_connectorNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorNamePrefix", ID: &i___string, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListConnectorsRequest_connectorNamePrefix})
+var sListConnectorsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eListConnectorsRequest_maxResults})
+var sListConnectorsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListConnectorsRequest_nextToken})
+var sListConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsResponse, Members: &mListConnectorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConnectorsResponse})
+var sListConnectorsResponse_connectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectors", ID: &i___listOfConnectorSummary, Members: &m___listOfConnectorSummary, Type: smithy.ShapeTypeList, Ext: &eListConnectorsResponse_connectors})
+var sListConnectorsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListConnectorsResponse_nextToken})
+var sListCustomPluginsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomPluginsRequest, Members: &mListCustomPluginsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCustomPluginsRequest})
+var sListCustomPluginsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eListCustomPluginsRequest_maxResults})
+var sListCustomPluginsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListCustomPluginsRequest_nextToken})
+var sListCustomPluginsRequest_namePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namePrefix", ID: &i___string, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListCustomPluginsRequest_namePrefix})
+var sListCustomPluginsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomPluginsResponse, Members: &mListCustomPluginsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCustomPluginsResponse})
+var sListCustomPluginsResponse_customPlugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPlugins", ID: &i___listOfCustomPluginSummary, Members: &m___listOfCustomPluginSummary, Type: smithy.ShapeTypeList, Ext: &eListCustomPluginsResponse_customPlugins})
+var sListCustomPluginsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListCustomPluginsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sListWorkerConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerConfigurationsRequest, Members: &mListWorkerConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkerConfigurationsRequest})
+var sListWorkerConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eListWorkerConfigurationsRequest_maxResults})
+var sListWorkerConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListWorkerConfigurationsRequest_nextToken})
+var sListWorkerConfigurationsRequest_namePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namePrefix", ID: &i___string, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListWorkerConfigurationsRequest_namePrefix})
+var sListWorkerConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerConfigurationsResponse, Members: &mListWorkerConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkerConfigurationsResponse})
+var sListWorkerConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListWorkerConfigurationsResponse_nextToken})
+var sListWorkerConfigurationsResponse_workerConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfigurations", ID: &i___listOfWorkerConfigurationSummary, Members: &m___listOfWorkerConfigurationSummary, Type: smithy.ShapeTypeList, Ext: &eListWorkerConfigurationsResponse_workerConfigurations})
+var sPauseConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseConnectorRequest, Members: &mPauseConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ePauseConnectorRequest})
+var sPauseConnectorRequest_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ePauseConnectorRequest_connectorArn})
+var sPauseConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseConnectorResponse, Members: &mPauseConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ePauseConnectorResponse})
+var sPauseConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePauseConnectorResponse_connectorArn})
+var sPauseConnectorResponse_connectorOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePauseConnectorResponse_connectorOperationArn})
+var sRestartConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestartConnectorRequest, Members: &mRestartConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eRestartConnectorRequest})
+var sRestartConnectorRequest_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eRestartConnectorRequest_connectorArn})
+var sRestartConnectorRequest_onlyFailedTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onlyFailedTasks", ID: &i___boolean, Traits: &t39, Type: smithy.ShapeTypeBoolean, Ext: &eRestartConnectorRequest_onlyFailedTasks})
+var sRestartConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestartConnectorResponse, Members: &mRestartConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eRestartConnectorResponse})
+var sRestartConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eRestartConnectorResponse_connectorArn})
+var sRestartConnectorResponse_connectorOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eRestartConnectorResponse_connectorOperationArn})
+var sResumeConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeConnectorRequest, Members: &mResumeConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eResumeConnectorRequest})
+var sResumeConnectorRequest_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eResumeConnectorRequest_connectorArn})
+var sResumeConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeConnectorResponse, Members: &mResumeConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eResumeConnectorResponse})
+var sResumeConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eResumeConnectorResponse_connectorArn})
+var sResumeConnectorResponse_connectorOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eResumeConnectorResponse_connectorOperationArn})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t40, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorRequest, Members: &mUpdateConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectorRequest})
+var sUpdateConnectorRequest_capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacity", ID: &iCapacityUpdate, Members: &mCapacityUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectorRequest_capacity})
+var sUpdateConnectorRequest_connectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorConfiguration", ID: &i_ConnectorConfigurationUpdate, Members: &m_ConnectorConfigurationUpdate, Traits: &t32, Type: smithy.ShapeTypeMap, Ext: &eUpdateConnectorRequest_connectorConfiguration})
+var sUpdateConnectorRequest_skipHealthValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skipHealthValidation", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateConnectorRequest_skipHealthValidation})
+var sUpdateConnectorRequest_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectorRequest_connectorArn})
+var sUpdateConnectorRequest_currentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentVersion", ID: &i___string, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectorRequest_currentVersion})
+var sUpdateConnectorRequest_plugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "plugins", ID: &i___listOfPluginUpdate, Members: &m___listOfPluginUpdate, Type: smithy.ShapeTypeList, Ext: &eUpdateConnectorRequest_plugins})
+var sUpdateConnectorRequest_workerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerConfiguration", ID: &iWorkerConfigurationUpdate, Members: &mWorkerConfigurationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectorRequest_workerConfiguration})
+var sUpdateConnectorRequest_useDefaultWorkerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useDefaultWorkerConfiguration", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateConnectorRequest_useDefaultWorkerConfiguration})
+var sUpdateConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorResponse, Members: &mUpdateConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectorResponse})
+var sUpdateConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectorResponse_connectorArn})
+var sUpdateConnectorResponse_connectorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorState", ID: &i_ConnectorState, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectorResponse_connectorState})
+var sUpdateConnectorResponse_connectorOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectorResponse_connectorOperationArn})
+
+var CreateConnector = &sCreateConnector
+
+var CreateCustomPlugin = &sCreateCustomPlugin
+
+var CreateWorkerConfiguration = &sCreateWorkerConfiguration
+
+var DeleteConnector = &sDeleteConnector
+
+var DeleteCustomPlugin = &sDeleteCustomPlugin
+
+var DeleteWorkerConfiguration = &sDeleteWorkerConfiguration
+
+var DescribeConnector = &sDescribeConnector
+
+var DescribeConnectorOperation = &sDescribeConnectorOperation
+
+var DescribeCustomPlugin = &sDescribeCustomPlugin
+
+var DescribeWorkerConfiguration = &sDescribeWorkerConfiguration
+
+var ListConnectorOperations = &sListConnectorOperations
+
+var ListConnectors = &sListConnectors
+
+var ListCustomPlugins = &sListCustomPlugins
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWorkerConfigurations = &sListWorkerConfigurations
+
+var PauseConnector = &sPauseConnector
+
+var RestartConnector = &sRestartConnector
+
+var ResumeConnector = &sResumeConnector
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateConnector = &sUpdateConnector
+
+var _KafkaConnect = &s_KafkaConnect
+
+var ___boolean = &s___boolean
+
+var ___integer = &s___integer
+
+var ___integerMin1Max100 = &s___integerMin1Max100
+
+var ___integerMin1Max8 = &s___integerMin1Max8
+
+var ___listOf__string = &s___listOf__string
+var ___listOf__string_member = &s___listOf__string_member
+
+var ___listOfConnectorOperationStep = &s___listOfConnectorOperationStep
+var ___listOfConnectorOperationStep_member = &s___listOfConnectorOperationStep_member
+
+var ___listOfConnectorOperationSummary = &s___listOfConnectorOperationSummary
+var ___listOfConnectorOperationSummary_member = &s___listOfConnectorOperationSummary_member
+
+var ___listOfConnectorSummary = &s___listOfConnectorSummary
+var ___listOfConnectorSummary_member = &s___listOfConnectorSummary_member
+
+var ___listOfCustomPluginSummary = &s___listOfCustomPluginSummary
+var ___listOfCustomPluginSummary_member = &s___listOfCustomPluginSummary_member
+
+var ___listOfPlugin = &s___listOfPlugin
+var ___listOfPlugin_member = &s___listOfPlugin_member
+
+var ___listOfPluginDescription = &s___listOfPluginDescription
+var ___listOfPluginDescription_member = &s___listOfPluginDescription_member
+
+var ___listOfPluginUpdate = &s___listOfPluginUpdate
+var ___listOfPluginUpdate_member = &s___listOfPluginUpdate_member
+
+var ___listOfWorkerConfigurationSummary = &s___listOfWorkerConfigurationSummary
+var ___listOfWorkerConfigurationSummary_member = &s___listOfWorkerConfigurationSummary_member
+
+var ___long = &s___long
+
+var ___longMin1 = &s___longMin1
+
+var ___sensitiveString = &s___sensitiveString
+
+var ___string = &s___string
+
+var ___stringMax1024 = &s___stringMax1024
+
+var ___stringMin1Max128 = &s___stringMin1Max128
+
+var ___timestampIso8601 = &s___timestampIso8601
+
+var ApacheKafkaCluster = &sApacheKafkaCluster
+var ApacheKafkaCluster_bootstrapServers = &sApacheKafkaCluster_bootstrapServers
+var ApacheKafkaCluster_vpc = &sApacheKafkaCluster_vpc
+
+var ApacheKafkaClusterDescription = &sApacheKafkaClusterDescription
+var ApacheKafkaClusterDescription_bootstrapServers = &sApacheKafkaClusterDescription_bootstrapServers
+var ApacheKafkaClusterDescription_vpc = &sApacheKafkaClusterDescription_vpc
+
+var AutoScaling = &sAutoScaling
+var AutoScaling_maxWorkerCount = &sAutoScaling_maxWorkerCount
+var AutoScaling_mcuCount = &sAutoScaling_mcuCount
+var AutoScaling_minWorkerCount = &sAutoScaling_minWorkerCount
+var AutoScaling_scaleInPolicy = &sAutoScaling_scaleInPolicy
+var AutoScaling_scaleOutPolicy = &sAutoScaling_scaleOutPolicy
+var AutoScaling_maxAutoscalingTaskCount = &sAutoScaling_maxAutoscalingTaskCount
+
+var AutoScalingDescription = &sAutoScalingDescription
+var AutoScalingDescription_maxWorkerCount = &sAutoScalingDescription_maxWorkerCount
+var AutoScalingDescription_mcuCount = &sAutoScalingDescription_mcuCount
+var AutoScalingDescription_minWorkerCount = &sAutoScalingDescription_minWorkerCount
+var AutoScalingDescription_scaleInPolicy = &sAutoScalingDescription_scaleInPolicy
+var AutoScalingDescription_scaleOutPolicy = &sAutoScalingDescription_scaleOutPolicy
+var AutoScalingDescription_maxAutoscalingTaskCount = &sAutoScalingDescription_maxAutoscalingTaskCount
+
+var AutoScalingUpdate = &sAutoScalingUpdate
+var AutoScalingUpdate_maxWorkerCount = &sAutoScalingUpdate_maxWorkerCount
+var AutoScalingUpdate_mcuCount = &sAutoScalingUpdate_mcuCount
+var AutoScalingUpdate_minWorkerCount = &sAutoScalingUpdate_minWorkerCount
+var AutoScalingUpdate_scaleInPolicy = &sAutoScalingUpdate_scaleInPolicy
+var AutoScalingUpdate_scaleOutPolicy = &sAutoScalingUpdate_scaleOutPolicy
+var AutoScalingUpdate_maxAutoscalingTaskCount = &sAutoScalingUpdate_maxAutoscalingTaskCount
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var Capacity = &sCapacity
+var Capacity_autoScaling = &sCapacity_autoScaling
+var Capacity_provisionedCapacity = &sCapacity_provisionedCapacity
+
+var CapacityDescription = &sCapacityDescription
+var CapacityDescription_autoScaling = &sCapacityDescription_autoScaling
+var CapacityDescription_provisionedCapacity = &sCapacityDescription_provisionedCapacity
+
+var CapacityUpdate = &sCapacityUpdate
+var CapacityUpdate_autoScaling = &sCapacityUpdate_autoScaling
+var CapacityUpdate_provisionedCapacity = &sCapacityUpdate_provisionedCapacity
+
+var CloudWatchLogsLogDelivery = &sCloudWatchLogsLogDelivery
+var CloudWatchLogsLogDelivery_enabled = &sCloudWatchLogsLogDelivery_enabled
+var CloudWatchLogsLogDelivery_logGroup = &sCloudWatchLogsLogDelivery_logGroup
+
+var CloudWatchLogsLogDeliveryDescription = &sCloudWatchLogsLogDeliveryDescription
+var CloudWatchLogsLogDeliveryDescription_enabled = &sCloudWatchLogsLogDeliveryDescription_enabled
+var CloudWatchLogsLogDeliveryDescription_logGroup = &sCloudWatchLogsLogDeliveryDescription_logGroup
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _ConnectorConfiguration = &s_ConnectorConfiguration
+var _ConnectorConfiguration_key = &s_ConnectorConfiguration_key
+var _ConnectorConfiguration_value = &s_ConnectorConfiguration_value
+
+var _ConnectorConfigurationUpdate = &s_ConnectorConfigurationUpdate
+var _ConnectorConfigurationUpdate_key = &s_ConnectorConfigurationUpdate_key
+var _ConnectorConfigurationUpdate_value = &s_ConnectorConfigurationUpdate_value
+
+var _ConnectorOperationState = &s_ConnectorOperationState
+
+var ConnectorOperationStep = &sConnectorOperationStep
+var ConnectorOperationStep_stepType = &sConnectorOperationStep_stepType
+var ConnectorOperationStep_stepState = &sConnectorOperationStep_stepState
+
+var _ConnectorOperationStepState = &s_ConnectorOperationStepState
+
+var _ConnectorOperationStepType = &s_ConnectorOperationStepType
+
+var ConnectorOperationSummary = &sConnectorOperationSummary
+var ConnectorOperationSummary_connectorOperationArn = &sConnectorOperationSummary_connectorOperationArn
+var ConnectorOperationSummary_connectorOperationType = &sConnectorOperationSummary_connectorOperationType
+var ConnectorOperationSummary_connectorOperationState = &sConnectorOperationSummary_connectorOperationState
+var ConnectorOperationSummary_creationTime = &sConnectorOperationSummary_creationTime
+var ConnectorOperationSummary_endTime = &sConnectorOperationSummary_endTime
+
+var _ConnectorOperationType = &s_ConnectorOperationType
+
+var _ConnectorState = &s_ConnectorState
+
+var ConnectorSummary = &sConnectorSummary
+var ConnectorSummary_capacity = &sConnectorSummary_capacity
+var ConnectorSummary_connectorArn = &sConnectorSummary_connectorArn
+var ConnectorSummary_connectorDescription = &sConnectorSummary_connectorDescription
+var ConnectorSummary_connectorName = &sConnectorSummary_connectorName
+var ConnectorSummary_connectorState = &sConnectorSummary_connectorState
+var ConnectorSummary_creationTime = &sConnectorSummary_creationTime
+var ConnectorSummary_currentVersion = &sConnectorSummary_currentVersion
+var ConnectorSummary_kafkaCluster = &sConnectorSummary_kafkaCluster
+var ConnectorSummary_kafkaClusterClientAuthentication = &sConnectorSummary_kafkaClusterClientAuthentication
+var ConnectorSummary_kafkaClusterEncryptionInTransit = &sConnectorSummary_kafkaClusterEncryptionInTransit
+var ConnectorSummary_kafkaConnectVersion = &sConnectorSummary_kafkaConnectVersion
+var ConnectorSummary_logDelivery = &sConnectorSummary_logDelivery
+var ConnectorSummary_networkType = &sConnectorSummary_networkType
+var ConnectorSummary_plugins = &sConnectorSummary_plugins
+var ConnectorSummary_serviceExecutionRoleArn = &sConnectorSummary_serviceExecutionRoleArn
+var ConnectorSummary_workerConfiguration = &sConnectorSummary_workerConfiguration
+
+var CustomPlugin = &sCustomPlugin
+var CustomPlugin_customPluginArn = &sCustomPlugin_customPluginArn
+var CustomPlugin_revision = &sCustomPlugin_revision
+
+var _CustomPluginContentType = &s_CustomPluginContentType
+
+var CustomPluginDescription = &sCustomPluginDescription
+var CustomPluginDescription_customPluginArn = &sCustomPluginDescription_customPluginArn
+var CustomPluginDescription_revision = &sCustomPluginDescription_revision
+
+var CustomPluginFileDescription = &sCustomPluginFileDescription
+var CustomPluginFileDescription_fileMd5 = &sCustomPluginFileDescription_fileMd5
+var CustomPluginFileDescription_fileSize = &sCustomPluginFileDescription_fileSize
+
+var CustomPluginLocation = &sCustomPluginLocation
+var CustomPluginLocation_s3Location = &sCustomPluginLocation_s3Location
+
+var CustomPluginLocationDescription = &sCustomPluginLocationDescription
+var CustomPluginLocationDescription_s3Location = &sCustomPluginLocationDescription_s3Location
+
+var CustomPluginRevisionSummary = &sCustomPluginRevisionSummary
+var CustomPluginRevisionSummary_contentType = &sCustomPluginRevisionSummary_contentType
+var CustomPluginRevisionSummary_creationTime = &sCustomPluginRevisionSummary_creationTime
+var CustomPluginRevisionSummary_description = &sCustomPluginRevisionSummary_description
+var CustomPluginRevisionSummary_fileDescription = &sCustomPluginRevisionSummary_fileDescription
+var CustomPluginRevisionSummary_location = &sCustomPluginRevisionSummary_location
+var CustomPluginRevisionSummary_revision = &sCustomPluginRevisionSummary_revision
+
+var _CustomPluginState = &s_CustomPluginState
+
+var CustomPluginSummary = &sCustomPluginSummary
+var CustomPluginSummary_creationTime = &sCustomPluginSummary_creationTime
+var CustomPluginSummary_customPluginArn = &sCustomPluginSummary_customPluginArn
+var CustomPluginSummary_customPluginState = &sCustomPluginSummary_customPluginState
+var CustomPluginSummary_description = &sCustomPluginSummary_description
+var CustomPluginSummary_latestRevision = &sCustomPluginSummary_latestRevision
+var CustomPluginSummary_name = &sCustomPluginSummary_name
+
+var CustomPluginUpdate = &sCustomPluginUpdate
+var CustomPluginUpdate_customPluginArn = &sCustomPluginUpdate_customPluginArn
+var CustomPluginUpdate_revision = &sCustomPluginUpdate_revision
+
+var FirehoseLogDelivery = &sFirehoseLogDelivery
+var FirehoseLogDelivery_deliveryStream = &sFirehoseLogDelivery_deliveryStream
+var FirehoseLogDelivery_enabled = &sFirehoseLogDelivery_enabled
+
+var FirehoseLogDeliveryDescription = &sFirehoseLogDeliveryDescription
+var FirehoseLogDeliveryDescription_deliveryStream = &sFirehoseLogDeliveryDescription_deliveryStream
+var FirehoseLogDeliveryDescription_enabled = &sFirehoseLogDeliveryDescription_enabled
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_message = &sForbiddenException_message
+
+var InternalServerErrorException = &sInternalServerErrorException
+var InternalServerErrorException_message = &sInternalServerErrorException_message
+
+var KafkaCluster = &sKafkaCluster
+var KafkaCluster_apacheKafkaCluster = &sKafkaCluster_apacheKafkaCluster
+
+var KafkaClusterClientAuthentication = &sKafkaClusterClientAuthentication
+var KafkaClusterClientAuthentication_authenticationType = &sKafkaClusterClientAuthentication_authenticationType
+
+var KafkaClusterClientAuthenticationDescription = &sKafkaClusterClientAuthenticationDescription
+var KafkaClusterClientAuthenticationDescription_authenticationType = &sKafkaClusterClientAuthenticationDescription_authenticationType
+
+var _KafkaClusterClientAuthenticationType = &s_KafkaClusterClientAuthenticationType
+
+var KafkaClusterDescription = &sKafkaClusterDescription
+var KafkaClusterDescription_apacheKafkaCluster = &sKafkaClusterDescription_apacheKafkaCluster
+
+var KafkaClusterEncryptionInTransit = &sKafkaClusterEncryptionInTransit
+var KafkaClusterEncryptionInTransit_encryptionType = &sKafkaClusterEncryptionInTransit_encryptionType
+
+var KafkaClusterEncryptionInTransitDescription = &sKafkaClusterEncryptionInTransitDescription
+var KafkaClusterEncryptionInTransitDescription_encryptionType = &sKafkaClusterEncryptionInTransitDescription_encryptionType
+
+var _KafkaClusterEncryptionInTransitType = &s_KafkaClusterEncryptionInTransitType
+
+var LogDelivery = &sLogDelivery
+var LogDelivery_workerLogDelivery = &sLogDelivery_workerLogDelivery
+
+var LogDeliveryDescription = &sLogDeliveryDescription
+var LogDeliveryDescription_workerLogDelivery = &sLogDeliveryDescription_workerLogDelivery
+
+var _MaxResults = &s_MaxResults
+
+var _NetworkType = &s_NetworkType
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var Plugin = &sPlugin
+var Plugin_customPlugin = &sPlugin_customPlugin
+
+var PluginDescription = &sPluginDescription
+var PluginDescription_customPlugin = &sPluginDescription_customPlugin
+
+var PluginUpdate = &sPluginUpdate
+var PluginUpdate_customPlugin = &sPluginUpdate_customPlugin
+
+var ProvisionedCapacity = &sProvisionedCapacity
+var ProvisionedCapacity_mcuCount = &sProvisionedCapacity_mcuCount
+var ProvisionedCapacity_workerCount = &sProvisionedCapacity_workerCount
+
+var ProvisionedCapacityDescription = &sProvisionedCapacityDescription
+var ProvisionedCapacityDescription_mcuCount = &sProvisionedCapacityDescription_mcuCount
+var ProvisionedCapacityDescription_workerCount = &sProvisionedCapacityDescription_workerCount
+
+var ProvisionedCapacityUpdate = &sProvisionedCapacityUpdate
+var ProvisionedCapacityUpdate_mcuCount = &sProvisionedCapacityUpdate_mcuCount
+var ProvisionedCapacityUpdate_workerCount = &sProvisionedCapacityUpdate_workerCount
+
+var S3Location = &sS3Location
+var S3Location_bucketArn = &sS3Location_bucketArn
+var S3Location_fileKey = &sS3Location_fileKey
+var S3Location_objectVersion = &sS3Location_objectVersion
+
+var S3LocationDescription = &sS3LocationDescription
+var S3LocationDescription_bucketArn = &sS3LocationDescription_bucketArn
+var S3LocationDescription_fileKey = &sS3LocationDescription_fileKey
+var S3LocationDescription_objectVersion = &sS3LocationDescription_objectVersion
+
+var S3LogDelivery = &sS3LogDelivery
+var S3LogDelivery_bucket = &sS3LogDelivery_bucket
+var S3LogDelivery_enabled = &sS3LogDelivery_enabled
+var S3LogDelivery_prefix = &sS3LogDelivery_prefix
+
+var S3LogDeliveryDescription = &sS3LogDeliveryDescription
+var S3LogDeliveryDescription_bucket = &sS3LogDeliveryDescription_bucket
+var S3LogDeliveryDescription_enabled = &sS3LogDeliveryDescription_enabled
+var S3LogDeliveryDescription_prefix = &sS3LogDeliveryDescription_prefix
+
+var ScaleInPolicy = &sScaleInPolicy
+var ScaleInPolicy_cpuUtilizationPercentage = &sScaleInPolicy_cpuUtilizationPercentage
+
+var ScaleInPolicyDescription = &sScaleInPolicyDescription
+var ScaleInPolicyDescription_cpuUtilizationPercentage = &sScaleInPolicyDescription_cpuUtilizationPercentage
+
+var ScaleInPolicyUpdate = &sScaleInPolicyUpdate
+var ScaleInPolicyUpdate_cpuUtilizationPercentage = &sScaleInPolicyUpdate_cpuUtilizationPercentage
+
+var ScaleOutPolicy = &sScaleOutPolicy
+var ScaleOutPolicy_cpuUtilizationPercentage = &sScaleOutPolicy_cpuUtilizationPercentage
+
+var ScaleOutPolicyDescription = &sScaleOutPolicyDescription
+var ScaleOutPolicyDescription_cpuUtilizationPercentage = &sScaleOutPolicyDescription_cpuUtilizationPercentage
+
+var ScaleOutPolicyUpdate = &sScaleOutPolicyUpdate
+var ScaleOutPolicyUpdate_cpuUtilizationPercentage = &sScaleOutPolicyUpdate_cpuUtilizationPercentage
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var StateDescription = &sStateDescription
+var StateDescription_code = &sStateDescription_code
+var StateDescription_message = &sStateDescription_message
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_message = &sTooManyRequestsException_message
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
+
+var Vpc = &sVpc
+var Vpc_securityGroups = &sVpc_securityGroups
+var Vpc_subnets = &sVpc_subnets
+
+var VpcDescription = &sVpcDescription
+var VpcDescription_securityGroups = &sVpcDescription_securityGroups
+var VpcDescription_subnets = &sVpcDescription_subnets
+
+var WorkerConfiguration = &sWorkerConfiguration
+var WorkerConfiguration_revision = &sWorkerConfiguration_revision
+var WorkerConfiguration_workerConfigurationArn = &sWorkerConfiguration_workerConfigurationArn
+
+var WorkerConfigurationDescription = &sWorkerConfigurationDescription
+var WorkerConfigurationDescription_revision = &sWorkerConfigurationDescription_revision
+var WorkerConfigurationDescription_workerConfigurationArn = &sWorkerConfigurationDescription_workerConfigurationArn
+
+var WorkerConfigurationRevisionDescription = &sWorkerConfigurationRevisionDescription
+var WorkerConfigurationRevisionDescription_creationTime = &sWorkerConfigurationRevisionDescription_creationTime
+var WorkerConfigurationRevisionDescription_description = &sWorkerConfigurationRevisionDescription_description
+var WorkerConfigurationRevisionDescription_propertiesFileContent = &sWorkerConfigurationRevisionDescription_propertiesFileContent
+var WorkerConfigurationRevisionDescription_revision = &sWorkerConfigurationRevisionDescription_revision
+
+var WorkerConfigurationRevisionSummary = &sWorkerConfigurationRevisionSummary
+var WorkerConfigurationRevisionSummary_creationTime = &sWorkerConfigurationRevisionSummary_creationTime
+var WorkerConfigurationRevisionSummary_description = &sWorkerConfigurationRevisionSummary_description
+var WorkerConfigurationRevisionSummary_revision = &sWorkerConfigurationRevisionSummary_revision
+
+var _WorkerConfigurationState = &s_WorkerConfigurationState
+
+var WorkerConfigurationSummary = &sWorkerConfigurationSummary
+var WorkerConfigurationSummary_creationTime = &sWorkerConfigurationSummary_creationTime
+var WorkerConfigurationSummary_description = &sWorkerConfigurationSummary_description
+var WorkerConfigurationSummary_latestRevision = &sWorkerConfigurationSummary_latestRevision
+var WorkerConfigurationSummary_name = &sWorkerConfigurationSummary_name
+var WorkerConfigurationSummary_workerConfigurationArn = &sWorkerConfigurationSummary_workerConfigurationArn
+var WorkerConfigurationSummary_workerConfigurationState = &sWorkerConfigurationSummary_workerConfigurationState
+
+var WorkerConfigurationUpdate = &sWorkerConfigurationUpdate
+var WorkerConfigurationUpdate_revision = &sWorkerConfigurationUpdate_revision
+var WorkerConfigurationUpdate_workerConfigurationArn = &sWorkerConfigurationUpdate_workerConfigurationArn
+
+var WorkerLogDelivery = &sWorkerLogDelivery
+var WorkerLogDelivery_cloudWatchLogs = &sWorkerLogDelivery_cloudWatchLogs
+var WorkerLogDelivery_firehose = &sWorkerLogDelivery_firehose
+var WorkerLogDelivery_s3 = &sWorkerLogDelivery_s3
+
+var WorkerLogDeliveryDescription = &sWorkerLogDeliveryDescription
+var WorkerLogDeliveryDescription_cloudWatchLogs = &sWorkerLogDeliveryDescription_cloudWatchLogs
+var WorkerLogDeliveryDescription_firehose = &sWorkerLogDeliveryDescription_firehose
+var WorkerLogDeliveryDescription_s3 = &sWorkerLogDeliveryDescription_s3
+
+var WorkerSetting = &sWorkerSetting
+var WorkerSetting_capacity = &sWorkerSetting_capacity
+var WorkerSetting_plugins = &sWorkerSetting_plugins
+var WorkerSetting_workerConfiguration = &sWorkerSetting_workerConfiguration
+var WorkerSetting_useDefaultWorkerConfiguration = &sWorkerSetting_useDefaultWorkerConfiguration
+
+var CreateConnectorRequest = &sCreateConnectorRequest
+var CreateConnectorRequest_capacity = &sCreateConnectorRequest_capacity
+var CreateConnectorRequest_connectorConfiguration = &sCreateConnectorRequest_connectorConfiguration
+var CreateConnectorRequest_connectorDescription = &sCreateConnectorRequest_connectorDescription
+var CreateConnectorRequest_connectorName = &sCreateConnectorRequest_connectorName
+var CreateConnectorRequest_kafkaCluster = &sCreateConnectorRequest_kafkaCluster
+var CreateConnectorRequest_kafkaClusterClientAuthentication = &sCreateConnectorRequest_kafkaClusterClientAuthentication
+var CreateConnectorRequest_kafkaClusterEncryptionInTransit = &sCreateConnectorRequest_kafkaClusterEncryptionInTransit
+var CreateConnectorRequest_kafkaConnectVersion = &sCreateConnectorRequest_kafkaConnectVersion
+var CreateConnectorRequest_logDelivery = &sCreateConnectorRequest_logDelivery
+var CreateConnectorRequest_networkType = &sCreateConnectorRequest_networkType
+var CreateConnectorRequest_plugins = &sCreateConnectorRequest_plugins
+var CreateConnectorRequest_serviceExecutionRoleArn = &sCreateConnectorRequest_serviceExecutionRoleArn
+var CreateConnectorRequest_workerConfiguration = &sCreateConnectorRequest_workerConfiguration
+var CreateConnectorRequest_tags = &sCreateConnectorRequest_tags
+
+var CreateConnectorResponse = &sCreateConnectorResponse
+var CreateConnectorResponse_connectorArn = &sCreateConnectorResponse_connectorArn
+var CreateConnectorResponse_connectorName = &sCreateConnectorResponse_connectorName
+var CreateConnectorResponse_connectorState = &sCreateConnectorResponse_connectorState
+
+var CreateCustomPluginRequest = &sCreateCustomPluginRequest
+var CreateCustomPluginRequest_contentType = &sCreateCustomPluginRequest_contentType
+var CreateCustomPluginRequest_description = &sCreateCustomPluginRequest_description
+var CreateCustomPluginRequest_location = &sCreateCustomPluginRequest_location
+var CreateCustomPluginRequest_name = &sCreateCustomPluginRequest_name
+var CreateCustomPluginRequest_tags = &sCreateCustomPluginRequest_tags
+
+var CreateCustomPluginResponse = &sCreateCustomPluginResponse
+var CreateCustomPluginResponse_customPluginArn = &sCreateCustomPluginResponse_customPluginArn
+var CreateCustomPluginResponse_customPluginState = &sCreateCustomPluginResponse_customPluginState
+var CreateCustomPluginResponse_name = &sCreateCustomPluginResponse_name
+var CreateCustomPluginResponse_revision = &sCreateCustomPluginResponse_revision
+
+var CreateWorkerConfigurationRequest = &sCreateWorkerConfigurationRequest
+var CreateWorkerConfigurationRequest_description = &sCreateWorkerConfigurationRequest_description
+var CreateWorkerConfigurationRequest_name = &sCreateWorkerConfigurationRequest_name
+var CreateWorkerConfigurationRequest_propertiesFileContent = &sCreateWorkerConfigurationRequest_propertiesFileContent
+var CreateWorkerConfigurationRequest_tags = &sCreateWorkerConfigurationRequest_tags
+
+var CreateWorkerConfigurationResponse = &sCreateWorkerConfigurationResponse
+var CreateWorkerConfigurationResponse_creationTime = &sCreateWorkerConfigurationResponse_creationTime
+var CreateWorkerConfigurationResponse_latestRevision = &sCreateWorkerConfigurationResponse_latestRevision
+var CreateWorkerConfigurationResponse_name = &sCreateWorkerConfigurationResponse_name
+var CreateWorkerConfigurationResponse_workerConfigurationArn = &sCreateWorkerConfigurationResponse_workerConfigurationArn
+var CreateWorkerConfigurationResponse_workerConfigurationState = &sCreateWorkerConfigurationResponse_workerConfigurationState
+
+var DeleteConnectorRequest = &sDeleteConnectorRequest
+var DeleteConnectorRequest_connectorArn = &sDeleteConnectorRequest_connectorArn
+var DeleteConnectorRequest_currentVersion = &sDeleteConnectorRequest_currentVersion
+
+var DeleteConnectorResponse = &sDeleteConnectorResponse
+var DeleteConnectorResponse_connectorArn = &sDeleteConnectorResponse_connectorArn
+var DeleteConnectorResponse_connectorState = &sDeleteConnectorResponse_connectorState
+
+var DeleteCustomPluginRequest = &sDeleteCustomPluginRequest
+var DeleteCustomPluginRequest_customPluginArn = &sDeleteCustomPluginRequest_customPluginArn
+
+var DeleteCustomPluginResponse = &sDeleteCustomPluginResponse
+var DeleteCustomPluginResponse_customPluginArn = &sDeleteCustomPluginResponse_customPluginArn
+var DeleteCustomPluginResponse_customPluginState = &sDeleteCustomPluginResponse_customPluginState
+
+var DeleteWorkerConfigurationRequest = &sDeleteWorkerConfigurationRequest
+var DeleteWorkerConfigurationRequest_workerConfigurationArn = &sDeleteWorkerConfigurationRequest_workerConfigurationArn
+
+var DeleteWorkerConfigurationResponse = &sDeleteWorkerConfigurationResponse
+var DeleteWorkerConfigurationResponse_workerConfigurationArn = &sDeleteWorkerConfigurationResponse_workerConfigurationArn
+var DeleteWorkerConfigurationResponse_workerConfigurationState = &sDeleteWorkerConfigurationResponse_workerConfigurationState
+
+var DescribeConnectorRequest = &sDescribeConnectorRequest
+var DescribeConnectorRequest_connectorArn = &sDescribeConnectorRequest_connectorArn
+
+var DescribeConnectorOperationRequest = &sDescribeConnectorOperationRequest
+var DescribeConnectorOperationRequest_connectorOperationArn = &sDescribeConnectorOperationRequest_connectorOperationArn
+
+var DescribeConnectorOperationResponse = &sDescribeConnectorOperationResponse
+var DescribeConnectorOperationResponse_connectorArn = &sDescribeConnectorOperationResponse_connectorArn
+var DescribeConnectorOperationResponse_connectorOperationArn = &sDescribeConnectorOperationResponse_connectorOperationArn
+var DescribeConnectorOperationResponse_connectorOperationState = &sDescribeConnectorOperationResponse_connectorOperationState
+var DescribeConnectorOperationResponse_connectorOperationType = &sDescribeConnectorOperationResponse_connectorOperationType
+var DescribeConnectorOperationResponse_operationSteps = &sDescribeConnectorOperationResponse_operationSteps
+var DescribeConnectorOperationResponse_originWorkerSetting = &sDescribeConnectorOperationResponse_originWorkerSetting
+var DescribeConnectorOperationResponse_originConnectorConfiguration = &sDescribeConnectorOperationResponse_originConnectorConfiguration
+var DescribeConnectorOperationResponse_targetWorkerSetting = &sDescribeConnectorOperationResponse_targetWorkerSetting
+var DescribeConnectorOperationResponse_targetConnectorConfiguration = &sDescribeConnectorOperationResponse_targetConnectorConfiguration
+var DescribeConnectorOperationResponse_errorInfo = &sDescribeConnectorOperationResponse_errorInfo
+var DescribeConnectorOperationResponse_creationTime = &sDescribeConnectorOperationResponse_creationTime
+var DescribeConnectorOperationResponse_endTime = &sDescribeConnectorOperationResponse_endTime
+
+var DescribeConnectorResponse = &sDescribeConnectorResponse
+var DescribeConnectorResponse_capacity = &sDescribeConnectorResponse_capacity
+var DescribeConnectorResponse_connectorArn = &sDescribeConnectorResponse_connectorArn
+var DescribeConnectorResponse_connectorConfiguration = &sDescribeConnectorResponse_connectorConfiguration
+var DescribeConnectorResponse_connectorDescription = &sDescribeConnectorResponse_connectorDescription
+var DescribeConnectorResponse_connectorName = &sDescribeConnectorResponse_connectorName
+var DescribeConnectorResponse_connectorState = &sDescribeConnectorResponse_connectorState
+var DescribeConnectorResponse_creationTime = &sDescribeConnectorResponse_creationTime
+var DescribeConnectorResponse_currentVersion = &sDescribeConnectorResponse_currentVersion
+var DescribeConnectorResponse_kafkaCluster = &sDescribeConnectorResponse_kafkaCluster
+var DescribeConnectorResponse_kafkaClusterClientAuthentication = &sDescribeConnectorResponse_kafkaClusterClientAuthentication
+var DescribeConnectorResponse_kafkaClusterEncryptionInTransit = &sDescribeConnectorResponse_kafkaClusterEncryptionInTransit
+var DescribeConnectorResponse_kafkaConnectVersion = &sDescribeConnectorResponse_kafkaConnectVersion
+var DescribeConnectorResponse_logDelivery = &sDescribeConnectorResponse_logDelivery
+var DescribeConnectorResponse_networkType = &sDescribeConnectorResponse_networkType
+var DescribeConnectorResponse_plugins = &sDescribeConnectorResponse_plugins
+var DescribeConnectorResponse_serviceExecutionRoleArn = &sDescribeConnectorResponse_serviceExecutionRoleArn
+var DescribeConnectorResponse_workerConfiguration = &sDescribeConnectorResponse_workerConfiguration
+var DescribeConnectorResponse_stateDescription = &sDescribeConnectorResponse_stateDescription
+
+var DescribeCustomPluginRequest = &sDescribeCustomPluginRequest
+var DescribeCustomPluginRequest_customPluginArn = &sDescribeCustomPluginRequest_customPluginArn
+
+var DescribeCustomPluginResponse = &sDescribeCustomPluginResponse
+var DescribeCustomPluginResponse_creationTime = &sDescribeCustomPluginResponse_creationTime
+var DescribeCustomPluginResponse_customPluginArn = &sDescribeCustomPluginResponse_customPluginArn
+var DescribeCustomPluginResponse_customPluginState = &sDescribeCustomPluginResponse_customPluginState
+var DescribeCustomPluginResponse_description = &sDescribeCustomPluginResponse_description
+var DescribeCustomPluginResponse_latestRevision = &sDescribeCustomPluginResponse_latestRevision
+var DescribeCustomPluginResponse_name = &sDescribeCustomPluginResponse_name
+var DescribeCustomPluginResponse_stateDescription = &sDescribeCustomPluginResponse_stateDescription
+
+var DescribeWorkerConfigurationRequest = &sDescribeWorkerConfigurationRequest
+var DescribeWorkerConfigurationRequest_workerConfigurationArn = &sDescribeWorkerConfigurationRequest_workerConfigurationArn
+
+var DescribeWorkerConfigurationResponse = &sDescribeWorkerConfigurationResponse
+var DescribeWorkerConfigurationResponse_creationTime = &sDescribeWorkerConfigurationResponse_creationTime
+var DescribeWorkerConfigurationResponse_description = &sDescribeWorkerConfigurationResponse_description
+var DescribeWorkerConfigurationResponse_latestRevision = &sDescribeWorkerConfigurationResponse_latestRevision
+var DescribeWorkerConfigurationResponse_name = &sDescribeWorkerConfigurationResponse_name
+var DescribeWorkerConfigurationResponse_workerConfigurationArn = &sDescribeWorkerConfigurationResponse_workerConfigurationArn
+var DescribeWorkerConfigurationResponse_workerConfigurationState = &sDescribeWorkerConfigurationResponse_workerConfigurationState
+
+var ListConnectorOperationsRequest = &sListConnectorOperationsRequest
+var ListConnectorOperationsRequest_connectorArn = &sListConnectorOperationsRequest_connectorArn
+var ListConnectorOperationsRequest_maxResults = &sListConnectorOperationsRequest_maxResults
+var ListConnectorOperationsRequest_nextToken = &sListConnectorOperationsRequest_nextToken
+
+var ListConnectorOperationsResponse = &sListConnectorOperationsResponse
+var ListConnectorOperationsResponse_connectorOperations = &sListConnectorOperationsResponse_connectorOperations
+var ListConnectorOperationsResponse_nextToken = &sListConnectorOperationsResponse_nextToken
+
+var ListConnectorsRequest = &sListConnectorsRequest
+var ListConnectorsRequest_connectorNamePrefix = &sListConnectorsRequest_connectorNamePrefix
+var ListConnectorsRequest_maxResults = &sListConnectorsRequest_maxResults
+var ListConnectorsRequest_nextToken = &sListConnectorsRequest_nextToken
+
+var ListConnectorsResponse = &sListConnectorsResponse
+var ListConnectorsResponse_connectors = &sListConnectorsResponse_connectors
+var ListConnectorsResponse_nextToken = &sListConnectorsResponse_nextToken
+
+var ListCustomPluginsRequest = &sListCustomPluginsRequest
+var ListCustomPluginsRequest_maxResults = &sListCustomPluginsRequest_maxResults
+var ListCustomPluginsRequest_nextToken = &sListCustomPluginsRequest_nextToken
+var ListCustomPluginsRequest_namePrefix = &sListCustomPluginsRequest_namePrefix
+
+var ListCustomPluginsResponse = &sListCustomPluginsResponse
+var ListCustomPluginsResponse_customPlugins = &sListCustomPluginsResponse_customPlugins
+var ListCustomPluginsResponse_nextToken = &sListCustomPluginsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListWorkerConfigurationsRequest = &sListWorkerConfigurationsRequest
+var ListWorkerConfigurationsRequest_maxResults = &sListWorkerConfigurationsRequest_maxResults
+var ListWorkerConfigurationsRequest_nextToken = &sListWorkerConfigurationsRequest_nextToken
+var ListWorkerConfigurationsRequest_namePrefix = &sListWorkerConfigurationsRequest_namePrefix
+
+var ListWorkerConfigurationsResponse = &sListWorkerConfigurationsResponse
+var ListWorkerConfigurationsResponse_nextToken = &sListWorkerConfigurationsResponse_nextToken
+var ListWorkerConfigurationsResponse_workerConfigurations = &sListWorkerConfigurationsResponse_workerConfigurations
+
+var PauseConnectorRequest = &sPauseConnectorRequest
+var PauseConnectorRequest_connectorArn = &sPauseConnectorRequest_connectorArn
+
+var PauseConnectorResponse = &sPauseConnectorResponse
+var PauseConnectorResponse_connectorArn = &sPauseConnectorResponse_connectorArn
+var PauseConnectorResponse_connectorOperationArn = &sPauseConnectorResponse_connectorOperationArn
+
+var RestartConnectorRequest = &sRestartConnectorRequest
+var RestartConnectorRequest_connectorArn = &sRestartConnectorRequest_connectorArn
+var RestartConnectorRequest_onlyFailedTasks = &sRestartConnectorRequest_onlyFailedTasks
+
+var RestartConnectorResponse = &sRestartConnectorResponse
+var RestartConnectorResponse_connectorArn = &sRestartConnectorResponse_connectorArn
+var RestartConnectorResponse_connectorOperationArn = &sRestartConnectorResponse_connectorOperationArn
+
+var ResumeConnectorRequest = &sResumeConnectorRequest
+var ResumeConnectorRequest_connectorArn = &sResumeConnectorRequest_connectorArn
+
+var ResumeConnectorResponse = &sResumeConnectorResponse
+var ResumeConnectorResponse_connectorArn = &sResumeConnectorResponse_connectorArn
+var ResumeConnectorResponse_connectorOperationArn = &sResumeConnectorResponse_connectorOperationArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateConnectorRequest = &sUpdateConnectorRequest
+var UpdateConnectorRequest_capacity = &sUpdateConnectorRequest_capacity
+var UpdateConnectorRequest_connectorConfiguration = &sUpdateConnectorRequest_connectorConfiguration
+var UpdateConnectorRequest_skipHealthValidation = &sUpdateConnectorRequest_skipHealthValidation
+var UpdateConnectorRequest_connectorArn = &sUpdateConnectorRequest_connectorArn
+var UpdateConnectorRequest_currentVersion = &sUpdateConnectorRequest_currentVersion
+var UpdateConnectorRequest_plugins = &sUpdateConnectorRequest_plugins
+var UpdateConnectorRequest_workerConfiguration = &sUpdateConnectorRequest_workerConfiguration
+var UpdateConnectorRequest_useDefaultWorkerConfiguration = &sUpdateConnectorRequest_useDefaultWorkerConfiguration
+
+var UpdateConnectorResponse = &sUpdateConnectorResponse
+var UpdateConnectorResponse_connectorArn = &sUpdateConnectorResponse_connectorArn
+var UpdateConnectorResponse_connectorState = &sUpdateConnectorResponse_connectorState
+var UpdateConnectorResponse_connectorOperationArn = &sUpdateConnectorResponse_connectorOperationArn
+
+var KafkaConnect = &smithy.ServiceSchema{Schema: &s_KafkaConnect, Version: "2021-09-14"}

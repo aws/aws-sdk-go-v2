@@ -7,1276 +7,1272 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateGatewayToServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AssociateGatewayToServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "CreateGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteHypervisor",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateGatewayFromServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DisassociateGatewayFromServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetHypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisor",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetHypervisorPropertyMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorPropertyMappings",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetVirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetVirtualMachine",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportHypervisorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ImportHypervisorConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListGateways",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListHypervisors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListHypervisors",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVirtualMachines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListVirtualMachines",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutHypervisorPropertyMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutHypervisorPropertyMappings",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutMaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutMaintenanceStartTime",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartVirtualMachinesMetadataSync = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "StartVirtualMachinesMetadataSync",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TestHypervisorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TestHypervisorConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewayInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewayInformation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewaySoftwareNow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewaySoftwareNow",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateHypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateHypervisor",
-}, smithy.ShapeTypeOperation, 0)
-
-var _BackupOnPremises_v20210101 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "BackupOnPremises_v20210101",
-}, smithy.ShapeTypeService, 0)
-
-var BackupOnPremises_v20210101 = smithy.NewServiceSchema(_BackupOnPremises_v20210101, "2021-01-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_ErrorCode *smithy.Schema
-
-var AccessDeniedException_Message *smithy.Schema
-
-var _ActivationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ActivationKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AverageUploadRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AverageUploadRateLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var BandwidthRateLimitInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "BandwidthRateLimitInterval",
-}, smithy.ShapeTypeStructure, 6)
-var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var BandwidthRateLimitInterval_StartHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_EndHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_StartMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_EndMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_DaysOfWeek *smithy.Schema
-
-var _BandwidthRateLimitIntervals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "BandwidthRateLimitIntervals",
-}, smithy.ShapeTypeList, 1)
-var _BandwidthRateLimitIntervals_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_ErrorCode *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var _DayOfMonth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DayOfMonth",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DaysOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DaysOfWeek",
-}, smithy.ShapeTypeList, 1)
-var _DaysOfWeek_member *smithy.Schema
-
-var Gateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Gateway",
-}, smithy.ShapeTypeStructure, 5)
-var Gateway_GatewayArn *smithy.Schema
-
-var Gateway_GatewayDisplayName *smithy.Schema
-
-var Gateway_GatewayType *smithy.Schema
-
-var Gateway_HypervisorId *smithy.Schema
-
-var Gateway_LastSeenTime *smithy.Schema
-
-var _GatewayArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GatewayArn",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GatewayDetails",
-}, smithy.ShapeTypeStructure, 10)
-var GatewayDetails_GatewayArn *smithy.Schema
-
-var GatewayDetails_GatewayDisplayName *smithy.Schema
-
-var GatewayDetails_GatewayType *smithy.Schema
-
-var GatewayDetails_HypervisorId *smithy.Schema
-
-var GatewayDetails_LastSeenTime *smithy.Schema
-
-var GatewayDetails_MaintenanceStartTime *smithy.Schema
-
-var GatewayDetails_NextUpdateAvailabilityTime *smithy.Schema
-
-var GatewayDetails_VpcEndpoint *smithy.Schema
-
-var GatewayDetails_DeprecationDate *smithy.Schema
-
-var GatewayDetails_SoftwareVersion *smithy.Schema
-
-var _Gateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Gateways",
-}, smithy.ShapeTypeList, 1)
-var _Gateways_member *smithy.Schema
-
-var _GatewayType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GatewayType",
-}, smithy.ShapeTypeString, 0)
-
-var _Host = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Host",
-}, smithy.ShapeTypeString, 0)
-
-var _HourOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HourOfDay",
-}, smithy.ShapeTypeInteger, 0)
-
-var Hypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Hypervisor",
-}, smithy.ShapeTypeStructure, 5)
-var Hypervisor_Host *smithy.Schema
-
-var Hypervisor_HypervisorArn *smithy.Schema
-
-var Hypervisor_KmsKeyArn *smithy.Schema
-
-var Hypervisor_Name *smithy.Schema
-
-var Hypervisor_State *smithy.Schema
-
-var HypervisorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HypervisorDetails",
-}, smithy.ShapeTypeStructure, 9)
-var HypervisorDetails_Host *smithy.Schema
-
-var HypervisorDetails_HypervisorArn *smithy.Schema
-
-var HypervisorDetails_KmsKeyArn *smithy.Schema
-
-var HypervisorDetails_Name *smithy.Schema
-
-var HypervisorDetails_LogGroupArn *smithy.Schema
-
-var HypervisorDetails_State *smithy.Schema
-
-var HypervisorDetails_LastSuccessfulMetadataSyncTime *smithy.Schema
-
-var HypervisorDetails_LatestMetadataSyncStatusMessage *smithy.Schema
-
-var HypervisorDetails_LatestMetadataSyncStatus *smithy.Schema
-
-var _HypervisorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HypervisorId",
-}, smithy.ShapeTypeString, 0)
-
-var _Hypervisors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Hypervisors",
-}, smithy.ShapeTypeList, 1)
-var _Hypervisors_member *smithy.Schema
-
-var _HypervisorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HypervisorState",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_ErrorCode *smithy.Schema
-
-var InternalServerException_Message *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "LogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var MaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "MaintenanceStartTime",
-}, smithy.ShapeTypeStructure, 4)
-var MaintenanceStartTime_DayOfMonth *smithy.Schema
-
-var MaintenanceStartTime_DayOfWeek *smithy.Schema
-
-var MaintenanceStartTime_HourOfDay *smithy.Schema
-
-var MaintenanceStartTime_MinuteOfHour *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MinuteOfHour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "MinuteOfHour",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Path",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_ErrorCode *smithy.Schema
-
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ServerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ServerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var _SyncMetadataStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "SyncMetadataStatus",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_ErrorCode *smithy.Schema
-
-var ThrottlingException_Message *smithy.Schema
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Time",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_ErrorCode *smithy.Schema
-
-var ValidationException_Message *smithy.Schema
-
-var VirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VirtualMachine",
-}, smithy.ShapeTypeStructure, 6)
-var VirtualMachine_HostName *smithy.Schema
-
-var VirtualMachine_HypervisorId *smithy.Schema
-
-var VirtualMachine_Name *smithy.Schema
-
-var VirtualMachine_Path *smithy.Schema
-
-var VirtualMachine_ResourceArn *smithy.Schema
-
-var VirtualMachine_LastBackupDate *smithy.Schema
-
-var VirtualMachineDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VirtualMachineDetails",
-}, smithy.ShapeTypeStructure, 7)
-var VirtualMachineDetails_HostName *smithy.Schema
-
-var VirtualMachineDetails_HypervisorId *smithy.Schema
-
-var VirtualMachineDetails_Name *smithy.Schema
-
-var VirtualMachineDetails_Path *smithy.Schema
-
-var VirtualMachineDetails_ResourceArn *smithy.Schema
-
-var VirtualMachineDetails_LastBackupDate *smithy.Schema
-
-var VirtualMachineDetails_VmwareTags *smithy.Schema
-
-var _VirtualMachines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VirtualMachines",
-}, smithy.ShapeTypeList, 1)
-var _VirtualMachines_member *smithy.Schema
-
-var _VmwareCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareCategory",
-}, smithy.ShapeTypeString, 0)
-
-var VmwareTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareTag",
-}, smithy.ShapeTypeStructure, 3)
-var VmwareTag_VmwareCategory *smithy.Schema
-
-var VmwareTag_VmwareTagName *smithy.Schema
-
-var VmwareTag_VmwareTagDescription *smithy.Schema
-
-var _VmwareTagName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareTagName",
-}, smithy.ShapeTypeString, 0)
-
-var _VmwareTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareTags",
-}, smithy.ShapeTypeList, 1)
-var _VmwareTags_member *smithy.Schema
-
-var VmwareToAwsTagMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareToAwsTagMapping",
-}, smithy.ShapeTypeStructure, 4)
-var VmwareToAwsTagMapping_VmwareCategory *smithy.Schema
-
-var VmwareToAwsTagMapping_VmwareTagName *smithy.Schema
-
-var VmwareToAwsTagMapping_AwsTagKey *smithy.Schema
-
-var VmwareToAwsTagMapping_AwsTagValue *smithy.Schema
-
-var _VmwareToAwsTagMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareToAwsTagMappings",
-}, smithy.ShapeTypeList, 1)
-var _VmwareToAwsTagMappings_member *smithy.Schema
-
-var _VpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VpcEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateGatewayToServerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AssociateGatewayToServerInput",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateGatewayToServerInput_GatewayArn *smithy.Schema
-
-var AssociateGatewayToServerInput_ServerArn *smithy.Schema
-
-var AssociateGatewayToServerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AssociateGatewayToServerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateGatewayToServerOutput_GatewayArn *smithy.Schema
-
-var CreateGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "CreateGatewayInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateGatewayInput_ActivationKey *smithy.Schema
-
-var CreateGatewayInput_GatewayDisplayName *smithy.Schema
-
-var CreateGatewayInput_GatewayType *smithy.Schema
-
-var CreateGatewayInput_Tags *smithy.Schema
-
-var CreateGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "CreateGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGatewayOutput_GatewayArn *smithy.Schema
-
-var DeleteGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayInput_GatewayArn *smithy.Schema
-
-var DeleteGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayOutput_GatewayArn *smithy.Schema
-
-var DeleteHypervisorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteHypervisorInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHypervisorInput_HypervisorArn *smithy.Schema
-
-var DeleteHypervisorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteHypervisorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHypervisorOutput_HypervisorArn *smithy.Schema
-
-var DisassociateGatewayFromServerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DisassociateGatewayFromServerInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateGatewayFromServerInput_GatewayArn *smithy.Schema
-
-var DisassociateGatewayFromServerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DisassociateGatewayFromServerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateGatewayFromServerOutput_GatewayArn *smithy.Schema
-
-var GetBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetBandwidthRateLimitScheduleInput_GatewayArn *smithy.Schema
-
-var GetBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetBandwidthRateLimitScheduleOutput_GatewayArn *smithy.Schema
-
-var GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals *smithy.Schema
-
-var GetGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetGatewayInput_GatewayArn *smithy.Schema
-
-var GetGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetGatewayOutput_Gateway *smithy.Schema
-
-var GetHypervisorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHypervisorInput_HypervisorArn *smithy.Schema
-
-var GetHypervisorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHypervisorOutput_Hypervisor *smithy.Schema
-
-var GetHypervisorPropertyMappingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorPropertyMappingsInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHypervisorPropertyMappingsInput_HypervisorArn *smithy.Schema
-
-var GetHypervisorPropertyMappingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorPropertyMappingsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetHypervisorPropertyMappingsOutput_HypervisorArn *smithy.Schema
-
-var GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings *smithy.Schema
-
-var GetHypervisorPropertyMappingsOutput_IamRoleArn *smithy.Schema
-
-var GetVirtualMachineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetVirtualMachineInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetVirtualMachineInput_ResourceArn *smithy.Schema
-
-var GetVirtualMachineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetVirtualMachineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetVirtualMachineOutput_VirtualMachine *smithy.Schema
-
-var ImportHypervisorConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ImportHypervisorConfigurationInput",
-}, smithy.ShapeTypeStructure, 6)
-var ImportHypervisorConfigurationInput_Name *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Host *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Username *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Password *smithy.Schema
-
-var ImportHypervisorConfigurationInput_KmsKeyArn *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Tags *smithy.Schema
-
-var ImportHypervisorConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ImportHypervisorConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ImportHypervisorConfigurationOutput_HypervisorArn *smithy.Schema
-
-var ListGatewaysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListGatewaysInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysInput_MaxResults *smithy.Schema
-
-var ListGatewaysInput_NextToken *smithy.Schema
-
-var ListGatewaysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListGatewaysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysOutput_Gateways *smithy.Schema
-
-var ListGatewaysOutput_NextToken *smithy.Schema
-
-var ListHypervisorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListHypervisorsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHypervisorsInput_MaxResults *smithy.Schema
-
-var ListHypervisorsInput_NextToken *smithy.Schema
-
-var ListHypervisorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListHypervisorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHypervisorsOutput_Hypervisors *smithy.Schema
-
-var ListHypervisorsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListVirtualMachinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListVirtualMachinesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListVirtualMachinesInput_HypervisorArn *smithy.Schema
-
-var ListVirtualMachinesInput_MaxResults *smithy.Schema
-
-var ListVirtualMachinesInput_NextToken *smithy.Schema
-
-var ListVirtualMachinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListVirtualMachinesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVirtualMachinesOutput_VirtualMachines *smithy.Schema
-
-var ListVirtualMachinesOutput_NextToken *smithy.Schema
-
-var PutBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutBandwidthRateLimitScheduleInput_GatewayArn *smithy.Schema
-
-var PutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals *smithy.Schema
-
-var PutBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutBandwidthRateLimitScheduleOutput_GatewayArn *smithy.Schema
-
-var PutHypervisorPropertyMappingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutHypervisorPropertyMappingsInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutHypervisorPropertyMappingsInput_HypervisorArn *smithy.Schema
-
-var PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings *smithy.Schema
-
-var PutHypervisorPropertyMappingsInput_IamRoleArn *smithy.Schema
-
-var PutHypervisorPropertyMappingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutHypervisorPropertyMappingsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutHypervisorPropertyMappingsOutput_HypervisorArn *smithy.Schema
-
-var PutMaintenanceStartTimeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutMaintenanceStartTimeInput",
-}, smithy.ShapeTypeStructure, 5)
-var PutMaintenanceStartTimeInput_GatewayArn *smithy.Schema
-
-var PutMaintenanceStartTimeInput_HourOfDay *smithy.Schema
-
-var PutMaintenanceStartTimeInput_MinuteOfHour *smithy.Schema
-
-var PutMaintenanceStartTimeInput_DayOfWeek *smithy.Schema
-
-var PutMaintenanceStartTimeInput_DayOfMonth *smithy.Schema
-
-var PutMaintenanceStartTimeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutMaintenanceStartTimeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutMaintenanceStartTimeOutput_GatewayArn *smithy.Schema
-
-var StartVirtualMachinesMetadataSyncInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "StartVirtualMachinesMetadataSyncInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartVirtualMachinesMetadataSyncInput_HypervisorArn *smithy.Schema
-
-var StartVirtualMachinesMetadataSyncOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "StartVirtualMachinesMetadataSyncOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartVirtualMachinesMetadataSyncOutput_HypervisorArn *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceARN *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var TagResourceOutput_ResourceARN *smithy.Schema
-
-var TestHypervisorConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TestHypervisorConfigurationInput",
-}, smithy.ShapeTypeStructure, 4)
-var TestHypervisorConfigurationInput_GatewayArn *smithy.Schema
-
-var TestHypervisorConfigurationInput_Host *smithy.Schema
-
-var TestHypervisorConfigurationInput_Username *smithy.Schema
-
-var TestHypervisorConfigurationInput_Password *smithy.Schema
-
-var TestHypervisorConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TestHypervisorConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceARN *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UntagResourceOutput_ResourceARN *smithy.Schema
-
-var UpdateGatewayInformationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewayInformationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateGatewayInformationInput_GatewayArn *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayDisplayName *smithy.Schema
-
-var UpdateGatewayInformationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewayInformationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewayInformationOutput_GatewayArn *smithy.Schema
-
-var UpdateGatewaySoftwareNowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewaySoftwareNowInput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowInput_GatewayArn *smithy.Schema
-
-var UpdateGatewaySoftwareNowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewaySoftwareNowOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowOutput_GatewayArn *smithy.Schema
-
-var UpdateHypervisorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateHypervisorInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateHypervisorInput_HypervisorArn *smithy.Schema
-
-var UpdateHypervisorInput_Host *smithy.Schema
-
-var UpdateHypervisorInput_Username *smithy.Schema
-
-var UpdateHypervisorInput_Password *smithy.Schema
-
-var UpdateHypervisorInput_Name *smithy.Schema
-
-var UpdateHypervisorInput_LogGroupArn *smithy.Schema
-
-var UpdateHypervisorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateHypervisorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateHypervisorOutput_HypervisorArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_ErrorCode = AccessDeniedException.AddMember("ErrorCode", _string)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _string)
-
-	_DaysOfWeek_member = _DaysOfWeek.AddMember("member", _DayOfWeek)
-
-	BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = BandwidthRateLimitInterval.AddMember("AverageUploadRateLimitInBitsPerSec", _AverageUploadRateLimit)
-
-	BandwidthRateLimitInterval_StartHourOfDay = BandwidthRateLimitInterval.AddMember("StartHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_EndHourOfDay = BandwidthRateLimitInterval.AddMember("EndHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_StartMinuteOfHour = BandwidthRateLimitInterval.AddMember("StartMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_EndMinuteOfHour = BandwidthRateLimitInterval.AddMember("EndMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_DaysOfWeek = BandwidthRateLimitInterval.AddMember("DaysOfWeek", _DaysOfWeek)
-
-	_BandwidthRateLimitIntervals_member = _BandwidthRateLimitIntervals.AddMember("member", BandwidthRateLimitInterval)
-
-	ConflictException_ErrorCode = ConflictException.AddMember("ErrorCode", _string)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _string)
-
-	Gateway_GatewayArn = Gateway.AddMember("GatewayArn", _GatewayArn)
-
-	Gateway_GatewayDisplayName = Gateway.AddMember("GatewayDisplayName", _Name)
-
-	Gateway_GatewayType = Gateway.AddMember("GatewayType", _GatewayType)
-
-	Gateway_HypervisorId = Gateway.AddMember("HypervisorId", _HypervisorId)
-
-	Gateway_LastSeenTime = Gateway.AddMember("LastSeenTime", _Time)
-
-	MaintenanceStartTime_DayOfMonth = MaintenanceStartTime.AddMember("DayOfMonth", _DayOfMonth)
-
-	MaintenanceStartTime_DayOfWeek = MaintenanceStartTime.AddMember("DayOfWeek", _DayOfWeek)
-
-	MaintenanceStartTime_HourOfDay = MaintenanceStartTime.AddMember("HourOfDay", _HourOfDay)
-
-	MaintenanceStartTime_MinuteOfHour = MaintenanceStartTime.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	GatewayDetails_GatewayArn = GatewayDetails.AddMember("GatewayArn", _GatewayArn)
-
-	GatewayDetails_GatewayDisplayName = GatewayDetails.AddMember("GatewayDisplayName", _Name)
-
-	GatewayDetails_GatewayType = GatewayDetails.AddMember("GatewayType", _GatewayType)
-
-	GatewayDetails_HypervisorId = GatewayDetails.AddMember("HypervisorId", _HypervisorId)
-
-	GatewayDetails_LastSeenTime = GatewayDetails.AddMember("LastSeenTime", _Time)
-
-	GatewayDetails_MaintenanceStartTime = GatewayDetails.AddMember("MaintenanceStartTime", MaintenanceStartTime)
-
-	GatewayDetails_NextUpdateAvailabilityTime = GatewayDetails.AddMember("NextUpdateAvailabilityTime", _Time)
-
-	GatewayDetails_VpcEndpoint = GatewayDetails.AddMember("VpcEndpoint", _VpcEndpoint)
-
-	GatewayDetails_DeprecationDate = GatewayDetails.AddMember("DeprecationDate", _Time)
-
-	GatewayDetails_SoftwareVersion = GatewayDetails.AddMember("SoftwareVersion", _Name)
-
-	_Gateways_member = _Gateways.AddMember("member", Gateway)
-
-	Hypervisor_Host = Hypervisor.AddMember("Host", _Host)
-
-	Hypervisor_HypervisorArn = Hypervisor.AddMember("HypervisorArn", _ServerArn)
-
-	Hypervisor_KmsKeyArn = Hypervisor.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	Hypervisor_Name = Hypervisor.AddMember("Name", _Name)
-
-	Hypervisor_State = Hypervisor.AddMember("State", _HypervisorState)
-
-	HypervisorDetails_Host = HypervisorDetails.AddMember("Host", _Host)
-
-	HypervisorDetails_HypervisorArn = HypervisorDetails.AddMember("HypervisorArn", _ServerArn)
-
-	HypervisorDetails_KmsKeyArn = HypervisorDetails.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	HypervisorDetails_Name = HypervisorDetails.AddMember("Name", _Name)
-
-	HypervisorDetails_LogGroupArn = HypervisorDetails.AddMember("LogGroupArn", _LogGroupArn)
-
-	HypervisorDetails_State = HypervisorDetails.AddMember("State", _HypervisorState)
-
-	HypervisorDetails_LastSuccessfulMetadataSyncTime = HypervisorDetails.AddMember("LastSuccessfulMetadataSyncTime", _Time)
-
-	HypervisorDetails_LatestMetadataSyncStatusMessage = HypervisorDetails.AddMember("LatestMetadataSyncStatusMessage", _string)
-
-	HypervisorDetails_LatestMetadataSyncStatus = HypervisorDetails.AddMember("LatestMetadataSyncStatus", _SyncMetadataStatus)
-
-	_Hypervisors_member = _Hypervisors.AddMember("member", Hypervisor)
-
-	InternalServerException_ErrorCode = InternalServerException.AddMember("ErrorCode", _string)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _string)
-
-	ResourceNotFoundException_ErrorCode = ResourceNotFoundException.AddMember("ErrorCode", _string)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _string)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	ThrottlingException_ErrorCode = ThrottlingException.AddMember("ErrorCode", _string)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _string)
-
-	ValidationException_ErrorCode = ValidationException.AddMember("ErrorCode", _string)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _string)
-
-	VirtualMachine_HostName = VirtualMachine.AddMember("HostName", _Name)
-
-	VirtualMachine_HypervisorId = VirtualMachine.AddMember("HypervisorId", _string)
-
-	VirtualMachine_Name = VirtualMachine.AddMember("Name", _Name)
-
-	VirtualMachine_Path = VirtualMachine.AddMember("Path", _Path)
-
-	VirtualMachine_ResourceArn = VirtualMachine.AddMember("ResourceArn", _ResourceArn)
-
-	VirtualMachine_LastBackupDate = VirtualMachine.AddMember("LastBackupDate", _Time)
-
-	VmwareTag_VmwareCategory = VmwareTag.AddMember("VmwareCategory", _VmwareCategory)
-
-	VmwareTag_VmwareTagName = VmwareTag.AddMember("VmwareTagName", _VmwareTagName)
-
-	VmwareTag_VmwareTagDescription = VmwareTag.AddMember("VmwareTagDescription", _string)
-
-	_VmwareTags_member = _VmwareTags.AddMember("member", VmwareTag)
-
-	VirtualMachineDetails_HostName = VirtualMachineDetails.AddMember("HostName", _Name)
-
-	VirtualMachineDetails_HypervisorId = VirtualMachineDetails.AddMember("HypervisorId", _string)
-
-	VirtualMachineDetails_Name = VirtualMachineDetails.AddMember("Name", _Name)
-
-	VirtualMachineDetails_Path = VirtualMachineDetails.AddMember("Path", _Path)
-
-	VirtualMachineDetails_ResourceArn = VirtualMachineDetails.AddMember("ResourceArn", _ResourceArn)
-
-	VirtualMachineDetails_LastBackupDate = VirtualMachineDetails.AddMember("LastBackupDate", _Time)
-
-	VirtualMachineDetails_VmwareTags = VirtualMachineDetails.AddMember("VmwareTags", _VmwareTags)
-
-	_VirtualMachines_member = _VirtualMachines.AddMember("member", VirtualMachine)
-
-	VmwareToAwsTagMapping_VmwareCategory = VmwareToAwsTagMapping.AddMember("VmwareCategory", _VmwareCategory)
-
-	VmwareToAwsTagMapping_VmwareTagName = VmwareToAwsTagMapping.AddMember("VmwareTagName", _VmwareTagName)
-
-	VmwareToAwsTagMapping_AwsTagKey = VmwareToAwsTagMapping.AddMember("AwsTagKey", _TagKey)
-
-	VmwareToAwsTagMapping_AwsTagValue = VmwareToAwsTagMapping.AddMember("AwsTagValue", _TagValue)
-
-	_VmwareToAwsTagMappings_member = _VmwareToAwsTagMappings.AddMember("member", VmwareToAwsTagMapping)
-
-	AssociateGatewayToServerInput_GatewayArn = AssociateGatewayToServerInput.AddMember("GatewayArn", _GatewayArn)
-
-	AssociateGatewayToServerInput_ServerArn = AssociateGatewayToServerInput.AddMember("ServerArn", _ServerArn)
-
-	AssociateGatewayToServerOutput_GatewayArn = AssociateGatewayToServerOutput.AddMember("GatewayArn", _GatewayArn)
-
-	CreateGatewayInput_ActivationKey = CreateGatewayInput.AddMember("ActivationKey", _ActivationKey)
-
-	CreateGatewayInput_GatewayDisplayName = CreateGatewayInput.AddMember("GatewayDisplayName", _Name)
-
-	CreateGatewayInput_GatewayType = CreateGatewayInput.AddMember("GatewayType", _GatewayType)
-
-	CreateGatewayInput_Tags = CreateGatewayInput.AddMember("Tags", _Tags)
-
-	CreateGatewayOutput_GatewayArn = CreateGatewayOutput.AddMember("GatewayArn", _GatewayArn)
-
-	DeleteGatewayInput_GatewayArn = DeleteGatewayInput.AddMember("GatewayArn", _GatewayArn)
-
-	DeleteGatewayOutput_GatewayArn = DeleteGatewayOutput.AddMember("GatewayArn", _GatewayArn)
-
-	DeleteHypervisorInput_HypervisorArn = DeleteHypervisorInput.AddMember("HypervisorArn", _ServerArn)
-
-	DeleteHypervisorOutput_HypervisorArn = DeleteHypervisorOutput.AddMember("HypervisorArn", _ServerArn)
-
-	DisassociateGatewayFromServerInput_GatewayArn = DisassociateGatewayFromServerInput.AddMember("GatewayArn", _GatewayArn)
-
-	DisassociateGatewayFromServerOutput_GatewayArn = DisassociateGatewayFromServerOutput.AddMember("GatewayArn", _GatewayArn)
-
-	GetBandwidthRateLimitScheduleInput_GatewayArn = GetBandwidthRateLimitScheduleInput.AddMember("GatewayArn", _GatewayArn)
-
-	GetBandwidthRateLimitScheduleOutput_GatewayArn = GetBandwidthRateLimitScheduleOutput.AddMember("GatewayArn", _GatewayArn)
-
-	GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = GetBandwidthRateLimitScheduleOutput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	GetGatewayInput_GatewayArn = GetGatewayInput.AddMember("GatewayArn", _GatewayArn)
-
-	GetGatewayOutput_Gateway = GetGatewayOutput.AddMember("Gateway", GatewayDetails)
-
-	GetHypervisorInput_HypervisorArn = GetHypervisorInput.AddMember("HypervisorArn", _ServerArn)
-
-	GetHypervisorOutput_Hypervisor = GetHypervisorOutput.AddMember("Hypervisor", HypervisorDetails)
-
-	GetHypervisorPropertyMappingsInput_HypervisorArn = GetHypervisorPropertyMappingsInput.AddMember("HypervisorArn", _ServerArn)
-
-	GetHypervisorPropertyMappingsOutput_HypervisorArn = GetHypervisorPropertyMappingsOutput.AddMember("HypervisorArn", _ServerArn)
-
-	GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings = GetHypervisorPropertyMappingsOutput.AddMember("VmwareToAwsTagMappings", _VmwareToAwsTagMappings)
-
-	GetHypervisorPropertyMappingsOutput_IamRoleArn = GetHypervisorPropertyMappingsOutput.AddMember("IamRoleArn", _IamRoleArn)
-
-	GetVirtualMachineInput_ResourceArn = GetVirtualMachineInput.AddMember("ResourceArn", _ResourceArn)
-
-	GetVirtualMachineOutput_VirtualMachine = GetVirtualMachineOutput.AddMember("VirtualMachine", VirtualMachineDetails)
-
-	ImportHypervisorConfigurationInput_Name = ImportHypervisorConfigurationInput.AddMember("Name", _Name)
-
-	ImportHypervisorConfigurationInput_Host = ImportHypervisorConfigurationInput.AddMember("Host", _Host)
-
-	ImportHypervisorConfigurationInput_Username = ImportHypervisorConfigurationInput.AddMember("Username", _Username)
-
-	ImportHypervisorConfigurationInput_Password = ImportHypervisorConfigurationInput.AddMember("Password", _Password)
-
-	ImportHypervisorConfigurationInput_KmsKeyArn = ImportHypervisorConfigurationInput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	ImportHypervisorConfigurationInput_Tags = ImportHypervisorConfigurationInput.AddMember("Tags", _Tags)
-
-	ImportHypervisorConfigurationOutput_HypervisorArn = ImportHypervisorConfigurationOutput.AddMember("HypervisorArn", _ServerArn)
-
-	ListGatewaysInput_MaxResults = ListGatewaysInput.AddMember("MaxResults", _MaxResults)
-
-	ListGatewaysInput_NextToken = ListGatewaysInput.AddMember("NextToken", _NextToken)
-
-	ListGatewaysOutput_Gateways = ListGatewaysOutput.AddMember("Gateways", _Gateways)
-
-	ListGatewaysOutput_NextToken = ListGatewaysOutput.AddMember("NextToken", _NextToken)
-
-	ListHypervisorsInput_MaxResults = ListHypervisorsInput.AddMember("MaxResults", _MaxResults)
-
-	ListHypervisorsInput_NextToken = ListHypervisorsInput.AddMember("NextToken", _NextToken)
-
-	ListHypervisorsOutput_Hypervisors = ListHypervisorsOutput.AddMember("Hypervisors", _Hypervisors)
-
-	ListHypervisorsOutput_NextToken = ListHypervisorsOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceOutput_ResourceArn = ListTagsForResourceOutput.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _Tags)
-
-	ListVirtualMachinesInput_HypervisorArn = ListVirtualMachinesInput.AddMember("HypervisorArn", _ServerArn)
-
-	ListVirtualMachinesInput_MaxResults = ListVirtualMachinesInput.AddMember("MaxResults", _MaxResults)
-
-	ListVirtualMachinesInput_NextToken = ListVirtualMachinesInput.AddMember("NextToken", _NextToken)
-
-	ListVirtualMachinesOutput_VirtualMachines = ListVirtualMachinesOutput.AddMember("VirtualMachines", _VirtualMachines)
-
-	ListVirtualMachinesOutput_NextToken = ListVirtualMachinesOutput.AddMember("NextToken", _NextToken)
-
-	PutBandwidthRateLimitScheduleInput_GatewayArn = PutBandwidthRateLimitScheduleInput.AddMember("GatewayArn", _GatewayArn)
-
-	PutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = PutBandwidthRateLimitScheduleInput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	PutBandwidthRateLimitScheduleOutput_GatewayArn = PutBandwidthRateLimitScheduleOutput.AddMember("GatewayArn", _GatewayArn)
-
-	PutHypervisorPropertyMappingsInput_HypervisorArn = PutHypervisorPropertyMappingsInput.AddMember("HypervisorArn", _ServerArn)
-
-	PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings = PutHypervisorPropertyMappingsInput.AddMember("VmwareToAwsTagMappings", _VmwareToAwsTagMappings)
-
-	PutHypervisorPropertyMappingsInput_IamRoleArn = PutHypervisorPropertyMappingsInput.AddMember("IamRoleArn", _IamRoleArn)
-
-	PutHypervisorPropertyMappingsOutput_HypervisorArn = PutHypervisorPropertyMappingsOutput.AddMember("HypervisorArn", _ServerArn)
-
-	PutMaintenanceStartTimeInput_GatewayArn = PutMaintenanceStartTimeInput.AddMember("GatewayArn", _GatewayArn)
-
-	PutMaintenanceStartTimeInput_HourOfDay = PutMaintenanceStartTimeInput.AddMember("HourOfDay", _HourOfDay)
-
-	PutMaintenanceStartTimeInput_MinuteOfHour = PutMaintenanceStartTimeInput.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	PutMaintenanceStartTimeInput_DayOfWeek = PutMaintenanceStartTimeInput.AddMember("DayOfWeek", _DayOfWeek)
-
-	PutMaintenanceStartTimeInput_DayOfMonth = PutMaintenanceStartTimeInput.AddMember("DayOfMonth", _DayOfMonth)
-
-	PutMaintenanceStartTimeOutput_GatewayArn = PutMaintenanceStartTimeOutput.AddMember("GatewayArn", _GatewayArn)
-
-	StartVirtualMachinesMetadataSyncInput_HypervisorArn = StartVirtualMachinesMetadataSyncInput.AddMember("HypervisorArn", _ServerArn)
-
-	StartVirtualMachinesMetadataSyncOutput_HypervisorArn = StartVirtualMachinesMetadataSyncOutput.AddMember("HypervisorArn", _ServerArn)
-
-	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _ResourceArn)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _Tags)
-
-	TagResourceOutput_ResourceARN = TagResourceOutput.AddMember("ResourceARN", _ResourceArn)
-
-	TestHypervisorConfigurationInput_GatewayArn = TestHypervisorConfigurationInput.AddMember("GatewayArn", _GatewayArn)
-
-	TestHypervisorConfigurationInput_Host = TestHypervisorConfigurationInput.AddMember("Host", _Host)
-
-	TestHypervisorConfigurationInput_Username = TestHypervisorConfigurationInput.AddMember("Username", _Username)
-
-	TestHypervisorConfigurationInput_Password = TestHypervisorConfigurationInput.AddMember("Password", _Password)
-
-	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _ResourceArn)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeys)
-
-	UntagResourceOutput_ResourceARN = UntagResourceOutput.AddMember("ResourceARN", _ResourceArn)
-
-	UpdateGatewayInformationInput_GatewayArn = UpdateGatewayInformationInput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateGatewayInformationInput_GatewayDisplayName = UpdateGatewayInformationInput.AddMember("GatewayDisplayName", _Name)
-
-	UpdateGatewayInformationOutput_GatewayArn = UpdateGatewayInformationOutput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateGatewaySoftwareNowInput_GatewayArn = UpdateGatewaySoftwareNowInput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateGatewaySoftwareNowOutput_GatewayArn = UpdateGatewaySoftwareNowOutput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateHypervisorInput_HypervisorArn = UpdateHypervisorInput.AddMember("HypervisorArn", _ServerArn)
-
-	UpdateHypervisorInput_Host = UpdateHypervisorInput.AddMember("Host", _Host)
-
-	UpdateHypervisorInput_Username = UpdateHypervisorInput.AddMember("Username", _Username)
-
-	UpdateHypervisorInput_Password = UpdateHypervisorInput.AddMember("Password", _Password)
-
-	UpdateHypervisorInput_Name = UpdateHypervisorInput.AddMember("Name", _Name)
-
-	UpdateHypervisorInput_LogGroupArn = UpdateHypervisorInput.AddMember("LogGroupArn", _LogGroupArn)
-
-	UpdateHypervisorOutput_HypervisorArn = UpdateHypervisorOutput.AddMember("HypervisorArn", _ServerArn)
-
-}
+var (
+	eAssociateGatewayToServer                                        smithy.SchemaExtensions
+	eCreateGateway                                                   smithy.SchemaExtensions
+	eDeleteGateway                                                   smithy.SchemaExtensions
+	eDeleteHypervisor                                                smithy.SchemaExtensions
+	eDisassociateGatewayFromServer                                   smithy.SchemaExtensions
+	eGetBandwidthRateLimitSchedule                                   smithy.SchemaExtensions
+	eGetGateway                                                      smithy.SchemaExtensions
+	eGetHypervisor                                                   smithy.SchemaExtensions
+	eGetHypervisorPropertyMappings                                   smithy.SchemaExtensions
+	eGetVirtualMachine                                               smithy.SchemaExtensions
+	eImportHypervisorConfiguration                                   smithy.SchemaExtensions
+	eListGateways                                                    smithy.SchemaExtensions
+	eListHypervisors                                                 smithy.SchemaExtensions
+	eListTagsForResource                                             smithy.SchemaExtensions
+	eListVirtualMachines                                             smithy.SchemaExtensions
+	ePutBandwidthRateLimitSchedule                                   smithy.SchemaExtensions
+	ePutHypervisorPropertyMappings                                   smithy.SchemaExtensions
+	ePutMaintenanceStartTime                                         smithy.SchemaExtensions
+	eStartVirtualMachinesMetadataSync                                smithy.SchemaExtensions
+	eTagResource                                                     smithy.SchemaExtensions
+	eTestHypervisorConfiguration                                     smithy.SchemaExtensions
+	eUntagResource                                                   smithy.SchemaExtensions
+	eUpdateGatewayInformation                                        smithy.SchemaExtensions
+	eUpdateGatewaySoftwareNow                                        smithy.SchemaExtensions
+	eUpdateHypervisor                                                smithy.SchemaExtensions
+	e_BackupOnPremises_v20210101                                     smithy.SchemaExtensions
+	eAccessDeniedException                                           smithy.SchemaExtensions
+	eAccessDeniedException_ErrorCode                                 smithy.SchemaExtensions
+	eAccessDeniedException_Message                                   smithy.SchemaExtensions
+	e_ActivationKey                                                  smithy.SchemaExtensions
+	e_AverageUploadRateLimit                                         smithy.SchemaExtensions
+	eBandwidthRateLimitInterval                                      smithy.SchemaExtensions
+	eBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec   smithy.SchemaExtensions
+	eBandwidthRateLimitInterval_StartHourOfDay                       smithy.SchemaExtensions
+	eBandwidthRateLimitInterval_EndHourOfDay                         smithy.SchemaExtensions
+	eBandwidthRateLimitInterval_StartMinuteOfHour                    smithy.SchemaExtensions
+	eBandwidthRateLimitInterval_EndMinuteOfHour                      smithy.SchemaExtensions
+	eBandwidthRateLimitInterval_DaysOfWeek                           smithy.SchemaExtensions
+	e_BandwidthRateLimitIntervals                                    smithy.SchemaExtensions
+	e_BandwidthRateLimitIntervals_member                             smithy.SchemaExtensions
+	eConflictException                                               smithy.SchemaExtensions
+	eConflictException_ErrorCode                                     smithy.SchemaExtensions
+	eConflictException_Message                                       smithy.SchemaExtensions
+	e_DayOfMonth                                                     smithy.SchemaExtensions
+	e_DayOfWeek                                                      smithy.SchemaExtensions
+	e_DaysOfWeek                                                     smithy.SchemaExtensions
+	e_DaysOfWeek_member                                              smithy.SchemaExtensions
+	eGateway                                                         smithy.SchemaExtensions
+	eGateway_GatewayArn                                              smithy.SchemaExtensions
+	eGateway_GatewayDisplayName                                      smithy.SchemaExtensions
+	eGateway_GatewayType                                             smithy.SchemaExtensions
+	eGateway_HypervisorId                                            smithy.SchemaExtensions
+	eGateway_LastSeenTime                                            smithy.SchemaExtensions
+	e_GatewayArn                                                     smithy.SchemaExtensions
+	eGatewayDetails                                                  smithy.SchemaExtensions
+	eGatewayDetails_GatewayArn                                       smithy.SchemaExtensions
+	eGatewayDetails_GatewayDisplayName                               smithy.SchemaExtensions
+	eGatewayDetails_GatewayType                                      smithy.SchemaExtensions
+	eGatewayDetails_HypervisorId                                     smithy.SchemaExtensions
+	eGatewayDetails_LastSeenTime                                     smithy.SchemaExtensions
+	eGatewayDetails_MaintenanceStartTime                             smithy.SchemaExtensions
+	eGatewayDetails_NextUpdateAvailabilityTime                       smithy.SchemaExtensions
+	eGatewayDetails_VpcEndpoint                                      smithy.SchemaExtensions
+	eGatewayDetails_DeprecationDate                                  smithy.SchemaExtensions
+	eGatewayDetails_SoftwareVersion                                  smithy.SchemaExtensions
+	e_Gateways                                                       smithy.SchemaExtensions
+	e_Gateways_member                                                smithy.SchemaExtensions
+	e_GatewayType                                                    smithy.SchemaExtensions
+	e_Host                                                           smithy.SchemaExtensions
+	e_HourOfDay                                                      smithy.SchemaExtensions
+	eHypervisor                                                      smithy.SchemaExtensions
+	eHypervisor_Host                                                 smithy.SchemaExtensions
+	eHypervisor_HypervisorArn                                        smithy.SchemaExtensions
+	eHypervisor_KmsKeyArn                                            smithy.SchemaExtensions
+	eHypervisor_Name                                                 smithy.SchemaExtensions
+	eHypervisor_State                                                smithy.SchemaExtensions
+	eHypervisorDetails                                               smithy.SchemaExtensions
+	eHypervisorDetails_Host                                          smithy.SchemaExtensions
+	eHypervisorDetails_HypervisorArn                                 smithy.SchemaExtensions
+	eHypervisorDetails_KmsKeyArn                                     smithy.SchemaExtensions
+	eHypervisorDetails_Name                                          smithy.SchemaExtensions
+	eHypervisorDetails_LogGroupArn                                   smithy.SchemaExtensions
+	eHypervisorDetails_State                                         smithy.SchemaExtensions
+	eHypervisorDetails_LastSuccessfulMetadataSyncTime                smithy.SchemaExtensions
+	eHypervisorDetails_LatestMetadataSyncStatusMessage               smithy.SchemaExtensions
+	eHypervisorDetails_LatestMetadataSyncStatus                      smithy.SchemaExtensions
+	e_HypervisorId                                                   smithy.SchemaExtensions
+	e_Hypervisors                                                    smithy.SchemaExtensions
+	e_Hypervisors_member                                             smithy.SchemaExtensions
+	e_HypervisorState                                                smithy.SchemaExtensions
+	e_IamRoleArn                                                     smithy.SchemaExtensions
+	eInternalServerException                                         smithy.SchemaExtensions
+	eInternalServerException_ErrorCode                               smithy.SchemaExtensions
+	eInternalServerException_Message                                 smithy.SchemaExtensions
+	e_KmsKeyArn                                                      smithy.SchemaExtensions
+	e_LogGroupArn                                                    smithy.SchemaExtensions
+	eMaintenanceStartTime                                            smithy.SchemaExtensions
+	eMaintenanceStartTime_DayOfMonth                                 smithy.SchemaExtensions
+	eMaintenanceStartTime_DayOfWeek                                  smithy.SchemaExtensions
+	eMaintenanceStartTime_HourOfDay                                  smithy.SchemaExtensions
+	eMaintenanceStartTime_MinuteOfHour                               smithy.SchemaExtensions
+	e_MaxResults                                                     smithy.SchemaExtensions
+	e_MinuteOfHour                                                   smithy.SchemaExtensions
+	e_Name                                                           smithy.SchemaExtensions
+	e_NextToken                                                      smithy.SchemaExtensions
+	e_Password                                                       smithy.SchemaExtensions
+	e_Path                                                           smithy.SchemaExtensions
+	e_ResourceArn                                                    smithy.SchemaExtensions
+	eResourceNotFoundException                                       smithy.SchemaExtensions
+	eResourceNotFoundException_ErrorCode                             smithy.SchemaExtensions
+	eResourceNotFoundException_Message                               smithy.SchemaExtensions
+	e_ServerArn                                                      smithy.SchemaExtensions
+	e_string                                                         smithy.SchemaExtensions
+	e_SyncMetadataStatus                                             smithy.SchemaExtensions
+	eTag                                                             smithy.SchemaExtensions
+	eTag_Key                                                         smithy.SchemaExtensions
+	eTag_Value                                                       smithy.SchemaExtensions
+	e_TagKey                                                         smithy.SchemaExtensions
+	e_TagKeys                                                        smithy.SchemaExtensions
+	e_TagKeys_member                                                 smithy.SchemaExtensions
+	e_Tags                                                           smithy.SchemaExtensions
+	e_Tags_member                                                    smithy.SchemaExtensions
+	e_TagValue                                                       smithy.SchemaExtensions
+	eThrottlingException                                             smithy.SchemaExtensions
+	eThrottlingException_ErrorCode                                   smithy.SchemaExtensions
+	eThrottlingException_Message                                     smithy.SchemaExtensions
+	e_Time                                                           smithy.SchemaExtensions
+	e_Username                                                       smithy.SchemaExtensions
+	eValidationException                                             smithy.SchemaExtensions
+	eValidationException_ErrorCode                                   smithy.SchemaExtensions
+	eValidationException_Message                                     smithy.SchemaExtensions
+	eVirtualMachine                                                  smithy.SchemaExtensions
+	eVirtualMachine_HostName                                         smithy.SchemaExtensions
+	eVirtualMachine_HypervisorId                                     smithy.SchemaExtensions
+	eVirtualMachine_Name                                             smithy.SchemaExtensions
+	eVirtualMachine_Path                                             smithy.SchemaExtensions
+	eVirtualMachine_ResourceArn                                      smithy.SchemaExtensions
+	eVirtualMachine_LastBackupDate                                   smithy.SchemaExtensions
+	eVirtualMachineDetails                                           smithy.SchemaExtensions
+	eVirtualMachineDetails_HostName                                  smithy.SchemaExtensions
+	eVirtualMachineDetails_HypervisorId                              smithy.SchemaExtensions
+	eVirtualMachineDetails_Name                                      smithy.SchemaExtensions
+	eVirtualMachineDetails_Path                                      smithy.SchemaExtensions
+	eVirtualMachineDetails_ResourceArn                               smithy.SchemaExtensions
+	eVirtualMachineDetails_LastBackupDate                            smithy.SchemaExtensions
+	eVirtualMachineDetails_VmwareTags                                smithy.SchemaExtensions
+	e_VirtualMachines                                                smithy.SchemaExtensions
+	e_VirtualMachines_member                                         smithy.SchemaExtensions
+	e_VmwareCategory                                                 smithy.SchemaExtensions
+	eVmwareTag                                                       smithy.SchemaExtensions
+	eVmwareTag_VmwareCategory                                        smithy.SchemaExtensions
+	eVmwareTag_VmwareTagName                                         smithy.SchemaExtensions
+	eVmwareTag_VmwareTagDescription                                  smithy.SchemaExtensions
+	e_VmwareTagName                                                  smithy.SchemaExtensions
+	e_VmwareTags                                                     smithy.SchemaExtensions
+	e_VmwareTags_member                                              smithy.SchemaExtensions
+	eVmwareToAwsTagMapping                                           smithy.SchemaExtensions
+	eVmwareToAwsTagMapping_VmwareCategory                            smithy.SchemaExtensions
+	eVmwareToAwsTagMapping_VmwareTagName                             smithy.SchemaExtensions
+	eVmwareToAwsTagMapping_AwsTagKey                                 smithy.SchemaExtensions
+	eVmwareToAwsTagMapping_AwsTagValue                               smithy.SchemaExtensions
+	e_VmwareToAwsTagMappings                                         smithy.SchemaExtensions
+	e_VmwareToAwsTagMappings_member                                  smithy.SchemaExtensions
+	e_VpcEndpoint                                                    smithy.SchemaExtensions
+	eAssociateGatewayToServerInput                                   smithy.SchemaExtensions
+	eAssociateGatewayToServerInput_GatewayArn                        smithy.SchemaExtensions
+	eAssociateGatewayToServerInput_ServerArn                         smithy.SchemaExtensions
+	eAssociateGatewayToServerOutput                                  smithy.SchemaExtensions
+	eAssociateGatewayToServerOutput_GatewayArn                       smithy.SchemaExtensions
+	eCreateGatewayInput                                              smithy.SchemaExtensions
+	eCreateGatewayInput_ActivationKey                                smithy.SchemaExtensions
+	eCreateGatewayInput_GatewayDisplayName                           smithy.SchemaExtensions
+	eCreateGatewayInput_GatewayType                                  smithy.SchemaExtensions
+	eCreateGatewayInput_Tags                                         smithy.SchemaExtensions
+	eCreateGatewayOutput                                             smithy.SchemaExtensions
+	eCreateGatewayOutput_GatewayArn                                  smithy.SchemaExtensions
+	eDeleteGatewayInput                                              smithy.SchemaExtensions
+	eDeleteGatewayInput_GatewayArn                                   smithy.SchemaExtensions
+	eDeleteGatewayOutput                                             smithy.SchemaExtensions
+	eDeleteGatewayOutput_GatewayArn                                  smithy.SchemaExtensions
+	eDeleteHypervisorInput                                           smithy.SchemaExtensions
+	eDeleteHypervisorInput_HypervisorArn                             smithy.SchemaExtensions
+	eDeleteHypervisorOutput                                          smithy.SchemaExtensions
+	eDeleteHypervisorOutput_HypervisorArn                            smithy.SchemaExtensions
+	eDisassociateGatewayFromServerInput                              smithy.SchemaExtensions
+	eDisassociateGatewayFromServerInput_GatewayArn                   smithy.SchemaExtensions
+	eDisassociateGatewayFromServerOutput                             smithy.SchemaExtensions
+	eDisassociateGatewayFromServerOutput_GatewayArn                  smithy.SchemaExtensions
+	eGetBandwidthRateLimitScheduleInput                              smithy.SchemaExtensions
+	eGetBandwidthRateLimitScheduleInput_GatewayArn                   smithy.SchemaExtensions
+	eGetBandwidthRateLimitScheduleOutput                             smithy.SchemaExtensions
+	eGetBandwidthRateLimitScheduleOutput_GatewayArn                  smithy.SchemaExtensions
+	eGetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals smithy.SchemaExtensions
+	eGetGatewayInput                                                 smithy.SchemaExtensions
+	eGetGatewayInput_GatewayArn                                      smithy.SchemaExtensions
+	eGetGatewayOutput                                                smithy.SchemaExtensions
+	eGetGatewayOutput_Gateway                                        smithy.SchemaExtensions
+	eGetHypervisorInput                                              smithy.SchemaExtensions
+	eGetHypervisorInput_HypervisorArn                                smithy.SchemaExtensions
+	eGetHypervisorOutput                                             smithy.SchemaExtensions
+	eGetHypervisorOutput_Hypervisor                                  smithy.SchemaExtensions
+	eGetHypervisorPropertyMappingsInput                              smithy.SchemaExtensions
+	eGetHypervisorPropertyMappingsInput_HypervisorArn                smithy.SchemaExtensions
+	eGetHypervisorPropertyMappingsOutput                             smithy.SchemaExtensions
+	eGetHypervisorPropertyMappingsOutput_HypervisorArn               smithy.SchemaExtensions
+	eGetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings      smithy.SchemaExtensions
+	eGetHypervisorPropertyMappingsOutput_IamRoleArn                  smithy.SchemaExtensions
+	eGetVirtualMachineInput                                          smithy.SchemaExtensions
+	eGetVirtualMachineInput_ResourceArn                              smithy.SchemaExtensions
+	eGetVirtualMachineOutput                                         smithy.SchemaExtensions
+	eGetVirtualMachineOutput_VirtualMachine                          smithy.SchemaExtensions
+	eImportHypervisorConfigurationInput                              smithy.SchemaExtensions
+	eImportHypervisorConfigurationInput_Name                         smithy.SchemaExtensions
+	eImportHypervisorConfigurationInput_Host                         smithy.SchemaExtensions
+	eImportHypervisorConfigurationInput_Username                     smithy.SchemaExtensions
+	eImportHypervisorConfigurationInput_Password                     smithy.SchemaExtensions
+	eImportHypervisorConfigurationInput_KmsKeyArn                    smithy.SchemaExtensions
+	eImportHypervisorConfigurationInput_Tags                         smithy.SchemaExtensions
+	eImportHypervisorConfigurationOutput                             smithy.SchemaExtensions
+	eImportHypervisorConfigurationOutput_HypervisorArn               smithy.SchemaExtensions
+	eListGatewaysInput                                               smithy.SchemaExtensions
+	eListGatewaysInput_MaxResults                                    smithy.SchemaExtensions
+	eListGatewaysInput_NextToken                                     smithy.SchemaExtensions
+	eListGatewaysOutput                                              smithy.SchemaExtensions
+	eListGatewaysOutput_Gateways                                     smithy.SchemaExtensions
+	eListGatewaysOutput_NextToken                                    smithy.SchemaExtensions
+	eListHypervisorsInput                                            smithy.SchemaExtensions
+	eListHypervisorsInput_MaxResults                                 smithy.SchemaExtensions
+	eListHypervisorsInput_NextToken                                  smithy.SchemaExtensions
+	eListHypervisorsOutput                                           smithy.SchemaExtensions
+	eListHypervisorsOutput_Hypervisors                               smithy.SchemaExtensions
+	eListHypervisorsOutput_NextToken                                 smithy.SchemaExtensions
+	eListTagsForResourceInput                                        smithy.SchemaExtensions
+	eListTagsForResourceInput_ResourceArn                            smithy.SchemaExtensions
+	eListTagsForResourceOutput                                       smithy.SchemaExtensions
+	eListTagsForResourceOutput_ResourceArn                           smithy.SchemaExtensions
+	eListTagsForResourceOutput_Tags                                  smithy.SchemaExtensions
+	eListVirtualMachinesInput                                        smithy.SchemaExtensions
+	eListVirtualMachinesInput_HypervisorArn                          smithy.SchemaExtensions
+	eListVirtualMachinesInput_MaxResults                             smithy.SchemaExtensions
+	eListVirtualMachinesInput_NextToken                              smithy.SchemaExtensions
+	eListVirtualMachinesOutput                                       smithy.SchemaExtensions
+	eListVirtualMachinesOutput_VirtualMachines                       smithy.SchemaExtensions
+	eListVirtualMachinesOutput_NextToken                             smithy.SchemaExtensions
+	ePutBandwidthRateLimitScheduleInput                              smithy.SchemaExtensions
+	ePutBandwidthRateLimitScheduleInput_GatewayArn                   smithy.SchemaExtensions
+	ePutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals  smithy.SchemaExtensions
+	ePutBandwidthRateLimitScheduleOutput                             smithy.SchemaExtensions
+	ePutBandwidthRateLimitScheduleOutput_GatewayArn                  smithy.SchemaExtensions
+	ePutHypervisorPropertyMappingsInput                              smithy.SchemaExtensions
+	ePutHypervisorPropertyMappingsInput_HypervisorArn                smithy.SchemaExtensions
+	ePutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings       smithy.SchemaExtensions
+	ePutHypervisorPropertyMappingsInput_IamRoleArn                   smithy.SchemaExtensions
+	ePutHypervisorPropertyMappingsOutput                             smithy.SchemaExtensions
+	ePutHypervisorPropertyMappingsOutput_HypervisorArn               smithy.SchemaExtensions
+	ePutMaintenanceStartTimeInput                                    smithy.SchemaExtensions
+	ePutMaintenanceStartTimeInput_GatewayArn                         smithy.SchemaExtensions
+	ePutMaintenanceStartTimeInput_HourOfDay                          smithy.SchemaExtensions
+	ePutMaintenanceStartTimeInput_MinuteOfHour                       smithy.SchemaExtensions
+	ePutMaintenanceStartTimeInput_DayOfWeek                          smithy.SchemaExtensions
+	ePutMaintenanceStartTimeInput_DayOfMonth                         smithy.SchemaExtensions
+	ePutMaintenanceStartTimeOutput                                   smithy.SchemaExtensions
+	ePutMaintenanceStartTimeOutput_GatewayArn                        smithy.SchemaExtensions
+	eStartVirtualMachinesMetadataSyncInput                           smithy.SchemaExtensions
+	eStartVirtualMachinesMetadataSyncInput_HypervisorArn             smithy.SchemaExtensions
+	eStartVirtualMachinesMetadataSyncOutput                          smithy.SchemaExtensions
+	eStartVirtualMachinesMetadataSyncOutput_HypervisorArn            smithy.SchemaExtensions
+	eTagResourceInput                                                smithy.SchemaExtensions
+	eTagResourceInput_ResourceARN                                    smithy.SchemaExtensions
+	eTagResourceInput_Tags                                           smithy.SchemaExtensions
+	eTagResourceOutput                                               smithy.SchemaExtensions
+	eTagResourceOutput_ResourceARN                                   smithy.SchemaExtensions
+	eTestHypervisorConfigurationInput                                smithy.SchemaExtensions
+	eTestHypervisorConfigurationInput_GatewayArn                     smithy.SchemaExtensions
+	eTestHypervisorConfigurationInput_Host                           smithy.SchemaExtensions
+	eTestHypervisorConfigurationInput_Username                       smithy.SchemaExtensions
+	eTestHypervisorConfigurationInput_Password                       smithy.SchemaExtensions
+	eTestHypervisorConfigurationOutput                               smithy.SchemaExtensions
+	eUntagResourceInput                                              smithy.SchemaExtensions
+	eUntagResourceInput_ResourceARN                                  smithy.SchemaExtensions
+	eUntagResourceInput_TagKeys                                      smithy.SchemaExtensions
+	eUntagResourceOutput                                             smithy.SchemaExtensions
+	eUntagResourceOutput_ResourceARN                                 smithy.SchemaExtensions
+	eUpdateGatewayInformationInput                                   smithy.SchemaExtensions
+	eUpdateGatewayInformationInput_GatewayArn                        smithy.SchemaExtensions
+	eUpdateGatewayInformationInput_GatewayDisplayName                smithy.SchemaExtensions
+	eUpdateGatewayInformationOutput                                  smithy.SchemaExtensions
+	eUpdateGatewayInformationOutput_GatewayArn                       smithy.SchemaExtensions
+	eUpdateGatewaySoftwareNowInput                                   smithy.SchemaExtensions
+	eUpdateGatewaySoftwareNowInput_GatewayArn                        smithy.SchemaExtensions
+	eUpdateGatewaySoftwareNowOutput                                  smithy.SchemaExtensions
+	eUpdateGatewaySoftwareNowOutput_GatewayArn                       smithy.SchemaExtensions
+	eUpdateHypervisorInput                                           smithy.SchemaExtensions
+	eUpdateHypervisorInput_HypervisorArn                             smithy.SchemaExtensions
+	eUpdateHypervisorInput_Host                                      smithy.SchemaExtensions
+	eUpdateHypervisorInput_Username                                  smithy.SchemaExtensions
+	eUpdateHypervisorInput_Password                                  smithy.SchemaExtensions
+	eUpdateHypervisorInput_Name                                      smithy.SchemaExtensions
+	eUpdateHypervisorInput_LogGroupArn                               smithy.SchemaExtensions
+	eUpdateHypervisorOutput                                          smithy.SchemaExtensions
+	eUpdateHypervisorOutput_HypervisorArn                            smithy.SchemaExtensions
+)
+
+var (
+	iAssociateGatewayToServer               = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "AssociateGatewayToServer"}
+	iCreateGateway                          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "CreateGateway"}
+	iDeleteGateway                          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DeleteGateway"}
+	iDeleteHypervisor                       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DeleteHypervisor"}
+	iDisassociateGatewayFromServer          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DisassociateGatewayFromServer"}
+	iGetBandwidthRateLimitSchedule          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetBandwidthRateLimitSchedule"}
+	iGetGateway                             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetGateway"}
+	iGetHypervisor                          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetHypervisor"}
+	iGetHypervisorPropertyMappings          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetHypervisorPropertyMappings"}
+	iGetVirtualMachine                      = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetVirtualMachine"}
+	iImportHypervisorConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ImportHypervisorConfiguration"}
+	iListGateways                           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListGateways"}
+	iListHypervisors                        = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListHypervisors"}
+	iListTagsForResource                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListTagsForResource"}
+	iListVirtualMachines                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListVirtualMachines"}
+	iPutBandwidthRateLimitSchedule          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutBandwidthRateLimitSchedule"}
+	iPutHypervisorPropertyMappings          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutHypervisorPropertyMappings"}
+	iPutMaintenanceStartTime                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutMaintenanceStartTime"}
+	iStartVirtualMachinesMetadataSync       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "StartVirtualMachinesMetadataSync"}
+	iTagResource                            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TagResource"}
+	iTestHypervisorConfiguration            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TestHypervisorConfiguration"}
+	iUntagResource                          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UntagResource"}
+	iUpdateGatewayInformation               = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateGatewayInformation"}
+	iUpdateGatewaySoftwareNow               = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateGatewaySoftwareNow"}
+	iUpdateHypervisor                       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateHypervisor"}
+	i_BackupOnPremises_v20210101            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "BackupOnPremises_v20210101"}
+	iAccessDeniedException                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "AccessDeniedException"}
+	i_ActivationKey                         = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ActivationKey"}
+	i_AverageUploadRateLimit                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "AverageUploadRateLimit"}
+	iBandwidthRateLimitInterval             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "BandwidthRateLimitInterval"}
+	i_BandwidthRateLimitIntervals           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "BandwidthRateLimitIntervals"}
+	iConflictException                      = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ConflictException"}
+	i_DayOfMonth                            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DayOfMonth"}
+	i_DayOfWeek                             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DayOfWeek"}
+	i_DaysOfWeek                            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DaysOfWeek"}
+	iGateway                                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Gateway"}
+	i_GatewayArn                            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GatewayArn"}
+	iGatewayDetails                         = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GatewayDetails"}
+	i_Gateways                              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Gateways"}
+	i_GatewayType                           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GatewayType"}
+	i_Host                                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Host"}
+	i_HourOfDay                             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "HourOfDay"}
+	iHypervisor                             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Hypervisor"}
+	iHypervisorDetails                      = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "HypervisorDetails"}
+	i_HypervisorId                          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "HypervisorId"}
+	i_Hypervisors                           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Hypervisors"}
+	i_HypervisorState                       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "HypervisorState"}
+	i_IamRoleArn                            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "IamRoleArn"}
+	iInternalServerException                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "InternalServerException"}
+	i_KmsKeyArn                             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "KmsKeyArn"}
+	i_LogGroupArn                           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "LogGroupArn"}
+	iMaintenanceStartTime                   = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "MaintenanceStartTime"}
+	i_MaxResults                            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "MaxResults"}
+	i_MinuteOfHour                          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "MinuteOfHour"}
+	i_Name                                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Name"}
+	i_NextToken                             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "NextToken"}
+	i_Password                              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Password"}
+	i_Path                                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Path"}
+	i_ResourceArn                           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ResourceArn"}
+	iResourceNotFoundException              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ResourceNotFoundException"}
+	i_ServerArn                             = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ServerArn"}
+	i_string                                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "string"}
+	i_SyncMetadataStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "SyncMetadataStatus"}
+	iTag                                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Tag"}
+	i_TagKey                                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TagKey"}
+	i_TagKeys                               = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TagKeys"}
+	i_Tags                                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Tags"}
+	i_TagValue                              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TagValue"}
+	iThrottlingException                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ThrottlingException"}
+	i_Time                                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Time"}
+	i_Username                              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "Username"}
+	iValidationException                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ValidationException"}
+	iVirtualMachine                         = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VirtualMachine"}
+	iVirtualMachineDetails                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VirtualMachineDetails"}
+	i_VirtualMachines                       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VirtualMachines"}
+	i_VmwareCategory                        = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VmwareCategory"}
+	iVmwareTag                              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VmwareTag"}
+	i_VmwareTagName                         = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VmwareTagName"}
+	i_VmwareTags                            = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VmwareTags"}
+	iVmwareToAwsTagMapping                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VmwareToAwsTagMapping"}
+	i_VmwareToAwsTagMappings                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VmwareToAwsTagMappings"}
+	i_VpcEndpoint                           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "VpcEndpoint"}
+	iAssociateGatewayToServerInput          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "AssociateGatewayToServerInput"}
+	iAssociateGatewayToServerOutput         = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "AssociateGatewayToServerOutput"}
+	iCreateGatewayInput                     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "CreateGatewayInput"}
+	iCreateGatewayOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "CreateGatewayOutput"}
+	iDeleteGatewayInput                     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DeleteGatewayInput"}
+	iDeleteGatewayOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DeleteGatewayOutput"}
+	iDeleteHypervisorInput                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DeleteHypervisorInput"}
+	iDeleteHypervisorOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DeleteHypervisorOutput"}
+	iDisassociateGatewayFromServerInput     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DisassociateGatewayFromServerInput"}
+	iDisassociateGatewayFromServerOutput    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "DisassociateGatewayFromServerOutput"}
+	iGetBandwidthRateLimitScheduleInput     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetBandwidthRateLimitScheduleInput"}
+	iGetBandwidthRateLimitScheduleOutput    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetBandwidthRateLimitScheduleOutput"}
+	iGetGatewayInput                        = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetGatewayInput"}
+	iGetGatewayOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetGatewayOutput"}
+	iGetHypervisorInput                     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetHypervisorInput"}
+	iGetHypervisorOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetHypervisorOutput"}
+	iGetHypervisorPropertyMappingsInput     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetHypervisorPropertyMappingsInput"}
+	iGetHypervisorPropertyMappingsOutput    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetHypervisorPropertyMappingsOutput"}
+	iGetVirtualMachineInput                 = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetVirtualMachineInput"}
+	iGetVirtualMachineOutput                = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "GetVirtualMachineOutput"}
+	iImportHypervisorConfigurationInput     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ImportHypervisorConfigurationInput"}
+	iImportHypervisorConfigurationOutput    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ImportHypervisorConfigurationOutput"}
+	iListGatewaysInput                      = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListGatewaysInput"}
+	iListGatewaysOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListGatewaysOutput"}
+	iListHypervisorsInput                   = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListHypervisorsInput"}
+	iListHypervisorsOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListHypervisorsOutput"}
+	iListTagsForResourceInput               = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListTagsForResourceOutput"}
+	iListVirtualMachinesInput               = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListVirtualMachinesInput"}
+	iListVirtualMachinesOutput              = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "ListVirtualMachinesOutput"}
+	iPutBandwidthRateLimitScheduleInput     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutBandwidthRateLimitScheduleInput"}
+	iPutBandwidthRateLimitScheduleOutput    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutBandwidthRateLimitScheduleOutput"}
+	iPutHypervisorPropertyMappingsInput     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutHypervisorPropertyMappingsInput"}
+	iPutHypervisorPropertyMappingsOutput    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutHypervisorPropertyMappingsOutput"}
+	iPutMaintenanceStartTimeInput           = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutMaintenanceStartTimeInput"}
+	iPutMaintenanceStartTimeOutput          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "PutMaintenanceStartTimeOutput"}
+	iStartVirtualMachinesMetadataSyncInput  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "StartVirtualMachinesMetadataSyncInput"}
+	iStartVirtualMachinesMetadataSyncOutput = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "StartVirtualMachinesMetadataSyncOutput"}
+	iTagResourceInput                       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TagResourceInput"}
+	iTagResourceOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TagResourceOutput"}
+	iTestHypervisorConfigurationInput       = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TestHypervisorConfigurationInput"}
+	iTestHypervisorConfigurationOutput      = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "TestHypervisorConfigurationOutput"}
+	iUntagResourceInput                     = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UntagResourceInput"}
+	iUntagResourceOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UntagResourceOutput"}
+	iUpdateGatewayInformationInput          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateGatewayInformationInput"}
+	iUpdateGatewayInformationOutput         = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateGatewayInformationOutput"}
+	iUpdateGatewaySoftwareNowInput          = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateGatewaySoftwareNowInput"}
+	iUpdateGatewaySoftwareNowOutput         = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateGatewaySoftwareNowOutput"}
+	iUpdateHypervisorInput                  = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateHypervisorInput"}
+	iUpdateHypervisorOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.backupgateway", Name: "UpdateHypervisorOutput"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_ErrorCode, &sAccessDeniedException_Message}}
+var mBandwidthRateLimitInterval = smithy.SchemaMembers{List: []*smithy.Schema{&sBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, &sBandwidthRateLimitInterval_StartHourOfDay, &sBandwidthRateLimitInterval_EndHourOfDay, &sBandwidthRateLimitInterval_StartMinuteOfHour, &sBandwidthRateLimitInterval_EndMinuteOfHour, &sBandwidthRateLimitInterval_DaysOfWeek}}
+var m_BandwidthRateLimitIntervals = smithy.SchemaMembers{List: []*smithy.Schema{&s_BandwidthRateLimitIntervals_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_ErrorCode, &sConflictException_Message}}
+var m_DaysOfWeek = smithy.SchemaMembers{List: []*smithy.Schema{&s_DaysOfWeek_member}}
+var mGateway = smithy.SchemaMembers{List: []*smithy.Schema{&sGateway_GatewayArn, &sGateway_GatewayDisplayName, &sGateway_GatewayType, &sGateway_HypervisorId, &sGateway_LastSeenTime}}
+var mGatewayDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayDetails_GatewayArn, &sGatewayDetails_GatewayDisplayName, &sGatewayDetails_GatewayType, &sGatewayDetails_HypervisorId, &sGatewayDetails_LastSeenTime, &sGatewayDetails_MaintenanceStartTime, &sGatewayDetails_NextUpdateAvailabilityTime, &sGatewayDetails_VpcEndpoint, &sGatewayDetails_DeprecationDate, &sGatewayDetails_SoftwareVersion}, Hash: &hGatewayDetails}
+var m_Gateways = smithy.SchemaMembers{List: []*smithy.Schema{&s_Gateways_member}}
+var mHypervisor = smithy.SchemaMembers{List: []*smithy.Schema{&sHypervisor_Host, &sHypervisor_HypervisorArn, &sHypervisor_KmsKeyArn, &sHypervisor_Name, &sHypervisor_State}}
+var mHypervisorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sHypervisorDetails_Host, &sHypervisorDetails_HypervisorArn, &sHypervisorDetails_KmsKeyArn, &sHypervisorDetails_Name, &sHypervisorDetails_LogGroupArn, &sHypervisorDetails_State, &sHypervisorDetails_LastSuccessfulMetadataSyncTime, &sHypervisorDetails_LatestMetadataSyncStatusMessage, &sHypervisorDetails_LatestMetadataSyncStatus}, Hash: &hHypervisorDetails}
+var m_Hypervisors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Hypervisors_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_ErrorCode, &sInternalServerException_Message}}
+var mMaintenanceStartTime = smithy.SchemaMembers{List: []*smithy.Schema{&sMaintenanceStartTime_DayOfMonth, &sMaintenanceStartTime_DayOfWeek, &sMaintenanceStartTime_HourOfDay, &sMaintenanceStartTime_MinuteOfHour}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_ErrorCode, &sResourceNotFoundException_Message}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_ErrorCode, &sThrottlingException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_ErrorCode, &sValidationException_Message}}
+var mVirtualMachine = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualMachine_HostName, &sVirtualMachine_HypervisorId, &sVirtualMachine_Name, &sVirtualMachine_Path, &sVirtualMachine_ResourceArn, &sVirtualMachine_LastBackupDate}}
+var mVirtualMachineDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualMachineDetails_HostName, &sVirtualMachineDetails_HypervisorId, &sVirtualMachineDetails_Name, &sVirtualMachineDetails_Path, &sVirtualMachineDetails_ResourceArn, &sVirtualMachineDetails_LastBackupDate, &sVirtualMachineDetails_VmwareTags}}
+var m_VirtualMachines = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualMachines_member}}
+var mVmwareTag = smithy.SchemaMembers{List: []*smithy.Schema{&sVmwareTag_VmwareCategory, &sVmwareTag_VmwareTagName, &sVmwareTag_VmwareTagDescription}}
+var m_VmwareTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_VmwareTags_member}}
+var mVmwareToAwsTagMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sVmwareToAwsTagMapping_VmwareCategory, &sVmwareToAwsTagMapping_VmwareTagName, &sVmwareToAwsTagMapping_AwsTagKey, &sVmwareToAwsTagMapping_AwsTagValue}}
+var m_VmwareToAwsTagMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_VmwareToAwsTagMappings_member}}
+var mAssociateGatewayToServerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateGatewayToServerInput_GatewayArn, &sAssociateGatewayToServerInput_ServerArn}}
+var mAssociateGatewayToServerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateGatewayToServerOutput_GatewayArn}}
+var mCreateGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGatewayInput_ActivationKey, &sCreateGatewayInput_GatewayDisplayName, &sCreateGatewayInput_GatewayType, &sCreateGatewayInput_Tags}}
+var mCreateGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGatewayOutput_GatewayArn}}
+var mDeleteGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGatewayInput_GatewayArn}}
+var mDeleteGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGatewayOutput_GatewayArn}}
+var mDeleteHypervisorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHypervisorInput_HypervisorArn}}
+var mDeleteHypervisorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHypervisorOutput_HypervisorArn}}
+var mDisassociateGatewayFromServerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateGatewayFromServerInput_GatewayArn}}
+var mDisassociateGatewayFromServerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateGatewayFromServerOutput_GatewayArn}}
+var mGetBandwidthRateLimitScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBandwidthRateLimitScheduleInput_GatewayArn}}
+var mGetBandwidthRateLimitScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBandwidthRateLimitScheduleOutput_GatewayArn, &sGetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals}}
+var mGetGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGatewayInput_GatewayArn}}
+var mGetGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGatewayOutput_Gateway}}
+var mGetHypervisorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHypervisorInput_HypervisorArn}}
+var mGetHypervisorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHypervisorOutput_Hypervisor}}
+var mGetHypervisorPropertyMappingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHypervisorPropertyMappingsInput_HypervisorArn}}
+var mGetHypervisorPropertyMappingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHypervisorPropertyMappingsOutput_HypervisorArn, &sGetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings, &sGetHypervisorPropertyMappingsOutput_IamRoleArn}}
+var mGetVirtualMachineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVirtualMachineInput_ResourceArn}}
+var mGetVirtualMachineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVirtualMachineOutput_VirtualMachine}}
+var mImportHypervisorConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportHypervisorConfigurationInput_Name, &sImportHypervisorConfigurationInput_Host, &sImportHypervisorConfigurationInput_Username, &sImportHypervisorConfigurationInput_Password, &sImportHypervisorConfigurationInput_KmsKeyArn, &sImportHypervisorConfigurationInput_Tags}}
+var mImportHypervisorConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportHypervisorConfigurationOutput_HypervisorArn}}
+var mListGatewaysInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGatewaysInput_MaxResults, &sListGatewaysInput_NextToken}}
+var mListGatewaysOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGatewaysOutput_Gateways, &sListGatewaysOutput_NextToken}}
+var mListHypervisorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListHypervisorsInput_MaxResults, &sListHypervisorsInput_NextToken}}
+var mListHypervisorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListHypervisorsOutput_Hypervisors, &sListHypervisorsOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_ResourceArn, &sListTagsForResourceOutput_Tags}}
+var mListVirtualMachinesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualMachinesInput_HypervisorArn, &sListVirtualMachinesInput_MaxResults, &sListVirtualMachinesInput_NextToken}}
+var mListVirtualMachinesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualMachinesOutput_VirtualMachines, &sListVirtualMachinesOutput_NextToken}}
+var mPutBandwidthRateLimitScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutBandwidthRateLimitScheduleInput_GatewayArn, &sPutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals}}
+var mPutBandwidthRateLimitScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutBandwidthRateLimitScheduleOutput_GatewayArn}}
+var mPutHypervisorPropertyMappingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutHypervisorPropertyMappingsInput_HypervisorArn, &sPutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings, &sPutHypervisorPropertyMappingsInput_IamRoleArn}}
+var mPutHypervisorPropertyMappingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutHypervisorPropertyMappingsOutput_HypervisorArn}}
+var mPutMaintenanceStartTimeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMaintenanceStartTimeInput_GatewayArn, &sPutMaintenanceStartTimeInput_HourOfDay, &sPutMaintenanceStartTimeInput_MinuteOfHour, &sPutMaintenanceStartTimeInput_DayOfWeek, &sPutMaintenanceStartTimeInput_DayOfMonth}}
+var mPutMaintenanceStartTimeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMaintenanceStartTimeOutput_GatewayArn}}
+var mStartVirtualMachinesMetadataSyncInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartVirtualMachinesMetadataSyncInput_HypervisorArn}}
+var mStartVirtualMachinesMetadataSyncOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartVirtualMachinesMetadataSyncOutput_HypervisorArn}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceARN, &sTagResourceInput_Tags}}
+var mTagResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceOutput_ResourceARN}}
+var mTestHypervisorConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTestHypervisorConfigurationInput_GatewayArn, &sTestHypervisorConfigurationInput_Host, &sTestHypervisorConfigurationInput_Username, &sTestHypervisorConfigurationInput_Password}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceARN, &sUntagResourceInput_TagKeys}}
+var mUntagResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceOutput_ResourceARN}}
+var mUpdateGatewayInformationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewayInformationInput_GatewayArn, &sUpdateGatewayInformationInput_GatewayDisplayName}}
+var mUpdateGatewayInformationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewayInformationOutput_GatewayArn}}
+var mUpdateGatewaySoftwareNowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewaySoftwareNowInput_GatewayArn}}
+var mUpdateGatewaySoftwareNowOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewaySoftwareNowOutput_GatewayArn}}
+var mUpdateHypervisorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHypervisorInput_HypervisorArn, &sUpdateHypervisorInput_Host, &sUpdateHypervisorInput_Username, &sUpdateHypervisorInput_Password, &sUpdateHypervisorInput_Name, &sUpdateHypervisorInput_LogGroupArn}}
+var mUpdateHypervisorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHypervisorOutput_HypervisorArn}}
+
+var hGatewayDetails = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 3, 5, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 2, 0, 9, 4,
+	10, 0, 0, 0, 0, 8, 0, 0,
+}}
+var hHypervisorDetails = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 5, 2, 0, 4, 1, 0, 8, 0, 9, 0, 0, 0, 0,
+	0, 0, 7, 0, 0, 0, 6, 0,
+}}
+
+var sAssociateGatewayToServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateGatewayToServer, Type: smithy.ShapeTypeOperation, Ext: &eAssociateGatewayToServer})
+var sCreateGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGateway, Type: smithy.ShapeTypeOperation, Ext: &eCreateGateway})
+var sDeleteGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGateway, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGateway})
+var sDeleteHypervisor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHypervisor, Type: smithy.ShapeTypeOperation, Ext: &eDeleteHypervisor})
+var sDisassociateGatewayFromServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateGatewayFromServer, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateGatewayFromServer})
+var sGetBandwidthRateLimitSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBandwidthRateLimitSchedule, Type: smithy.ShapeTypeOperation, Ext: &eGetBandwidthRateLimitSchedule})
+var sGetGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGateway, Type: smithy.ShapeTypeOperation, Ext: &eGetGateway})
+var sGetHypervisor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHypervisor, Type: smithy.ShapeTypeOperation, Ext: &eGetHypervisor})
+var sGetHypervisorPropertyMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHypervisorPropertyMappings, Type: smithy.ShapeTypeOperation, Ext: &eGetHypervisorPropertyMappings})
+var sGetVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVirtualMachine, Type: smithy.ShapeTypeOperation, Ext: &eGetVirtualMachine})
+var sImportHypervisorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportHypervisorConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eImportHypervisorConfiguration})
+var sListGateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGateways, Type: smithy.ShapeTypeOperation, Ext: &eListGateways})
+var sListHypervisors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHypervisors, Type: smithy.ShapeTypeOperation, Ext: &eListHypervisors})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListVirtualMachines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualMachines, Type: smithy.ShapeTypeOperation, Ext: &eListVirtualMachines})
+var sPutBandwidthRateLimitSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBandwidthRateLimitSchedule, Type: smithy.ShapeTypeOperation, Ext: &ePutBandwidthRateLimitSchedule})
+var sPutHypervisorPropertyMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutHypervisorPropertyMappings, Type: smithy.ShapeTypeOperation, Ext: &ePutHypervisorPropertyMappings})
+var sPutMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMaintenanceStartTime, Type: smithy.ShapeTypeOperation, Ext: &ePutMaintenanceStartTime})
+var sStartVirtualMachinesMetadataSync = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVirtualMachinesMetadataSync, Type: smithy.ShapeTypeOperation, Ext: &eStartVirtualMachinesMetadataSync})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sTestHypervisorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestHypervisorConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eTestHypervisorConfiguration})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateGatewayInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayInformation, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGatewayInformation})
+var sUpdateGatewaySoftwareNow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewaySoftwareNow, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGatewaySoftwareNow})
+var sUpdateHypervisor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHypervisor, Type: smithy.ShapeTypeOperation, Ext: &eUpdateHypervisor})
+var s_BackupOnPremises_v20210101 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackupOnPremises_v20210101, Type: smithy.ShapeTypeService, Ext: &e_BackupOnPremises_v20210101})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_ErrorCode})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivationKey, Type: smithy.ShapeTypeString, Ext: &e_ActivationKey})
+var s_AverageUploadRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AverageUploadRateLimit, Type: smithy.ShapeTypeLong, Ext: &e_AverageUploadRateLimit})
+var sBandwidthRateLimitInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandwidthRateLimitInterval, Members: &mBandwidthRateLimitInterval, Type: smithy.ShapeTypeStructure, Ext: &eBandwidthRateLimitInterval})
+var sBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageUploadRateLimitInBitsPerSec", ID: &i_AverageUploadRateLimit, Type: smithy.ShapeTypeLong, Ext: &eBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec})
+var sBandwidthRateLimitInterval_StartHourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartHourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger, Ext: &eBandwidthRateLimitInterval_StartHourOfDay})
+var sBandwidthRateLimitInterval_EndHourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndHourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger, Ext: &eBandwidthRateLimitInterval_EndHourOfDay})
+var sBandwidthRateLimitInterval_StartMinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartMinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger, Ext: &eBandwidthRateLimitInterval_StartMinuteOfHour})
+var sBandwidthRateLimitInterval_EndMinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndMinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger, Ext: &eBandwidthRateLimitInterval_EndMinuteOfHour})
+var sBandwidthRateLimitInterval_DaysOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DaysOfWeek", ID: &i_DaysOfWeek, Members: &m_DaysOfWeek, Type: smithy.ShapeTypeList, Ext: &eBandwidthRateLimitInterval_DaysOfWeek})
+var s_BandwidthRateLimitIntervals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthRateLimitIntervals, Members: &m_BandwidthRateLimitIntervals, Type: smithy.ShapeTypeList, Ext: &e_BandwidthRateLimitIntervals})
+var s_BandwidthRateLimitIntervals_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBandwidthRateLimitInterval, Members: &mBandwidthRateLimitInterval, Type: smithy.ShapeTypeStructure, Ext: &e_BandwidthRateLimitIntervals_member})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eConflictException_ErrorCode})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger, Ext: &e_DayOfMonth})
+var s_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger, Ext: &e_DayOfWeek})
+var s_DaysOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DaysOfWeek, Members: &m_DaysOfWeek, Type: smithy.ShapeTypeList, Ext: &e_DaysOfWeek})
+var s_DaysOfWeek_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger, Ext: &e_DaysOfWeek_member})
+var sGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGateway, Members: &mGateway, Type: smithy.ShapeTypeStructure, Ext: &eGateway})
+var sGateway_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eGateway_GatewayArn})
+var sGateway_GatewayDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayDisplayName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGateway_GatewayDisplayName})
+var sGateway_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayType", ID: &i_GatewayType, Type: smithy.ShapeTypeString, Ext: &eGateway_GatewayType})
+var sGateway_HypervisorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorId", ID: &i_HypervisorId, Type: smithy.ShapeTypeString, Ext: &eGateway_HypervisorId})
+var sGateway_LastSeenTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSeenTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eGateway_LastSeenTime})
+var s_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &e_GatewayArn})
+var sGatewayDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayDetails, Members: &mGatewayDetails, Type: smithy.ShapeTypeStructure, Ext: &eGatewayDetails})
+var sGatewayDetails_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eGatewayDetails_GatewayArn})
+var sGatewayDetails_GatewayDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayDisplayName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGatewayDetails_GatewayDisplayName})
+var sGatewayDetails_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayType", ID: &i_GatewayType, Type: smithy.ShapeTypeString, Ext: &eGatewayDetails_GatewayType})
+var sGatewayDetails_HypervisorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorId", ID: &i_HypervisorId, Type: smithy.ShapeTypeString, Ext: &eGatewayDetails_HypervisorId})
+var sGatewayDetails_LastSeenTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSeenTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eGatewayDetails_LastSeenTime})
+var sGatewayDetails_MaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceStartTime", ID: &iMaintenanceStartTime, Members: &mMaintenanceStartTime, Type: smithy.ShapeTypeStructure, Ext: &eGatewayDetails_MaintenanceStartTime})
+var sGatewayDetails_NextUpdateAvailabilityTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextUpdateAvailabilityTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eGatewayDetails_NextUpdateAvailabilityTime})
+var sGatewayDetails_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoint", ID: &i_VpcEndpoint, Type: smithy.ShapeTypeString, Ext: &eGatewayDetails_VpcEndpoint})
+var sGatewayDetails_DeprecationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecationDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eGatewayDetails_DeprecationDate})
+var sGatewayDetails_SoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareVersion", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGatewayDetails_SoftwareVersion})
+var s_Gateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Gateways, Members: &m_Gateways, Type: smithy.ShapeTypeList, Ext: &e_Gateways})
+var s_Gateways_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGateway, Members: &mGateway, Type: smithy.ShapeTypeStructure, Ext: &e_Gateways_member})
+var s_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayType, Type: smithy.ShapeTypeString, Ext: &e_GatewayType})
+var s_Host = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Host, Type: smithy.ShapeTypeString, Ext: &e_Host})
+var s_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger, Ext: &e_HourOfDay})
+var sHypervisor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHypervisor, Members: &mHypervisor, Type: smithy.ShapeTypeStructure, Ext: &eHypervisor})
+var sHypervisor_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_Host, Type: smithy.ShapeTypeString, Ext: &eHypervisor_Host})
+var sHypervisor_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eHypervisor_HypervisorArn})
+var sHypervisor_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eHypervisor_KmsKeyArn})
+var sHypervisor_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eHypervisor_Name})
+var sHypervisor_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_HypervisorState, Type: smithy.ShapeTypeString, Ext: &eHypervisor_State})
+var sHypervisorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHypervisorDetails, Members: &mHypervisorDetails, Type: smithy.ShapeTypeStructure, Ext: &eHypervisorDetails})
+var sHypervisorDetails_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_Host, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_Host})
+var sHypervisorDetails_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_HypervisorArn})
+var sHypervisorDetails_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_KmsKeyArn})
+var sHypervisorDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_Name})
+var sHypervisorDetails_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_LogGroupArn})
+var sHypervisorDetails_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_HypervisorState, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_State})
+var sHypervisorDetails_LastSuccessfulMetadataSyncTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSuccessfulMetadataSyncTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eHypervisorDetails_LastSuccessfulMetadataSyncTime})
+var sHypervisorDetails_LatestMetadataSyncStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMetadataSyncStatusMessage", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_LatestMetadataSyncStatusMessage})
+var sHypervisorDetails_LatestMetadataSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMetadataSyncStatus", ID: &i_SyncMetadataStatus, Type: smithy.ShapeTypeString, Ext: &eHypervisorDetails_LatestMetadataSyncStatus})
+var s_HypervisorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HypervisorId, Type: smithy.ShapeTypeString, Ext: &e_HypervisorId})
+var s_Hypervisors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Hypervisors, Members: &m_Hypervisors, Type: smithy.ShapeTypeList, Ext: &e_Hypervisors})
+var s_Hypervisors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHypervisor, Members: &mHypervisor, Type: smithy.ShapeTypeStructure, Ext: &e_Hypervisors_member})
+var s_HypervisorState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HypervisorState, Type: smithy.ShapeTypeString, Ext: &e_HypervisorState})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_ErrorCode})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &e_LogGroupArn})
+var sMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaintenanceStartTime, Members: &mMaintenanceStartTime, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceStartTime})
+var sMaintenanceStartTime_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfMonth", ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger, Ext: &eMaintenanceStartTime_DayOfMonth})
+var sMaintenanceStartTime_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfWeek", ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger, Ext: &eMaintenanceStartTime_DayOfWeek})
+var sMaintenanceStartTime_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger, Ext: &eMaintenanceStartTime_HourOfDay})
+var sMaintenanceStartTime_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger, Ext: &eMaintenanceStartTime_MinuteOfHour})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger, Ext: &e_MinuteOfHour})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_Password})
+var s_Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &e_Path})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ErrorCode})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_ServerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &e_ServerArn})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_string})
+var s_SyncMetadataStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncMetadataStatus, Type: smithy.ShapeTypeString, Ext: &e_SyncMetadataStatus})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &e_Tags})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_Tags_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_ErrorCode})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &e_Time})
+var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_Username})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eValidationException_ErrorCode})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualMachine, Members: &mVirtualMachine, Type: smithy.ShapeTypeStructure, Ext: &eVirtualMachine})
+var sVirtualMachine_HostName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eVirtualMachine_HostName})
+var sVirtualMachine_HypervisorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVirtualMachine_HypervisorId})
+var sVirtualMachine_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eVirtualMachine_Name})
+var sVirtualMachine_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eVirtualMachine_Path})
+var sVirtualMachine_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eVirtualMachine_ResourceArn})
+var sVirtualMachine_LastBackupDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastBackupDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualMachine_LastBackupDate})
+var sVirtualMachineDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualMachineDetails, Members: &mVirtualMachineDetails, Type: smithy.ShapeTypeStructure, Ext: &eVirtualMachineDetails})
+var sVirtualMachineDetails_HostName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eVirtualMachineDetails_HostName})
+var sVirtualMachineDetails_HypervisorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVirtualMachineDetails_HypervisorId})
+var sVirtualMachineDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eVirtualMachineDetails_Name})
+var sVirtualMachineDetails_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eVirtualMachineDetails_Path})
+var sVirtualMachineDetails_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eVirtualMachineDetails_ResourceArn})
+var sVirtualMachineDetails_LastBackupDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastBackupDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualMachineDetails_LastBackupDate})
+var sVirtualMachineDetails_VmwareTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareTags", ID: &i_VmwareTags, Members: &m_VmwareTags, Type: smithy.ShapeTypeList, Ext: &eVirtualMachineDetails_VmwareTags})
+var s_VirtualMachines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualMachines, Members: &m_VirtualMachines, Type: smithy.ShapeTypeList, Ext: &e_VirtualMachines})
+var s_VirtualMachines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualMachine, Members: &mVirtualMachine, Type: smithy.ShapeTypeStructure, Ext: &e_VirtualMachines_member})
+var s_VmwareCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VmwareCategory, Type: smithy.ShapeTypeString, Ext: &e_VmwareCategory})
+var sVmwareTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVmwareTag, Members: &mVmwareTag, Type: smithy.ShapeTypeStructure, Ext: &eVmwareTag})
+var sVmwareTag_VmwareCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareCategory", ID: &i_VmwareCategory, Type: smithy.ShapeTypeString, Ext: &eVmwareTag_VmwareCategory})
+var sVmwareTag_VmwareTagName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareTagName", ID: &i_VmwareTagName, Type: smithy.ShapeTypeString, Ext: &eVmwareTag_VmwareTagName})
+var sVmwareTag_VmwareTagDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareTagDescription", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVmwareTag_VmwareTagDescription})
+var s_VmwareTagName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VmwareTagName, Type: smithy.ShapeTypeString, Ext: &e_VmwareTagName})
+var s_VmwareTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VmwareTags, Members: &m_VmwareTags, Type: smithy.ShapeTypeList, Ext: &e_VmwareTags})
+var s_VmwareTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVmwareTag, Members: &mVmwareTag, Type: smithy.ShapeTypeStructure, Ext: &e_VmwareTags_member})
+var sVmwareToAwsTagMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVmwareToAwsTagMapping, Members: &mVmwareToAwsTagMapping, Type: smithy.ShapeTypeStructure, Ext: &eVmwareToAwsTagMapping})
+var sVmwareToAwsTagMapping_VmwareCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareCategory", ID: &i_VmwareCategory, Type: smithy.ShapeTypeString, Ext: &eVmwareToAwsTagMapping_VmwareCategory})
+var sVmwareToAwsTagMapping_VmwareTagName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareTagName", ID: &i_VmwareTagName, Type: smithy.ShapeTypeString, Ext: &eVmwareToAwsTagMapping_VmwareTagName})
+var sVmwareToAwsTagMapping_AwsTagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsTagKey", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eVmwareToAwsTagMapping_AwsTagKey})
+var sVmwareToAwsTagMapping_AwsTagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsTagValue", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eVmwareToAwsTagMapping_AwsTagValue})
+var s_VmwareToAwsTagMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VmwareToAwsTagMappings, Members: &m_VmwareToAwsTagMappings, Type: smithy.ShapeTypeList, Ext: &e_VmwareToAwsTagMappings})
+var s_VmwareToAwsTagMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVmwareToAwsTagMapping, Members: &mVmwareToAwsTagMapping, Type: smithy.ShapeTypeStructure, Ext: &e_VmwareToAwsTagMappings_member})
+var s_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpoint, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpoint})
+var sAssociateGatewayToServerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateGatewayToServerInput, Members: &mAssociateGatewayToServerInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateGatewayToServerInput})
+var sAssociateGatewayToServerInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eAssociateGatewayToServerInput_GatewayArn})
+var sAssociateGatewayToServerInput_ServerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eAssociateGatewayToServerInput_ServerArn})
+var sAssociateGatewayToServerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateGatewayToServerOutput, Members: &mAssociateGatewayToServerOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateGatewayToServerOutput})
+var sAssociateGatewayToServerOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eAssociateGatewayToServerOutput_GatewayArn})
+var sCreateGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGatewayInput, Members: &mCreateGatewayInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGatewayInput})
+var sCreateGatewayInput_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationKey", ID: &i_ActivationKey, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayInput_ActivationKey})
+var sCreateGatewayInput_GatewayDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayDisplayName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayInput_GatewayDisplayName})
+var sCreateGatewayInput_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayType", ID: &i_GatewayType, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayInput_GatewayType})
+var sCreateGatewayInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateGatewayInput_Tags})
+var sCreateGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGatewayOutput, Members: &mCreateGatewayOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGatewayOutput})
+var sCreateGatewayOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayOutput_GatewayArn})
+var sDeleteGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGatewayInput, Members: &mDeleteGatewayInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGatewayInput})
+var sDeleteGatewayInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eDeleteGatewayInput_GatewayArn})
+var sDeleteGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGatewayOutput, Members: &mDeleteGatewayOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGatewayOutput})
+var sDeleteGatewayOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eDeleteGatewayOutput_GatewayArn})
+var sDeleteHypervisorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHypervisorInput, Members: &mDeleteHypervisorInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHypervisorInput})
+var sDeleteHypervisorInput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eDeleteHypervisorInput_HypervisorArn})
+var sDeleteHypervisorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHypervisorOutput, Members: &mDeleteHypervisorOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHypervisorOutput})
+var sDeleteHypervisorOutput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eDeleteHypervisorOutput_HypervisorArn})
+var sDisassociateGatewayFromServerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateGatewayFromServerInput, Members: &mDisassociateGatewayFromServerInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateGatewayFromServerInput})
+var sDisassociateGatewayFromServerInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateGatewayFromServerInput_GatewayArn})
+var sDisassociateGatewayFromServerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateGatewayFromServerOutput, Members: &mDisassociateGatewayFromServerOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateGatewayFromServerOutput})
+var sDisassociateGatewayFromServerOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateGatewayFromServerOutput_GatewayArn})
+var sGetBandwidthRateLimitScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBandwidthRateLimitScheduleInput, Members: &mGetBandwidthRateLimitScheduleInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBandwidthRateLimitScheduleInput})
+var sGetBandwidthRateLimitScheduleInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eGetBandwidthRateLimitScheduleInput_GatewayArn})
+var sGetBandwidthRateLimitScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBandwidthRateLimitScheduleOutput, Members: &mGetBandwidthRateLimitScheduleOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBandwidthRateLimitScheduleOutput})
+var sGetBandwidthRateLimitScheduleOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eGetBandwidthRateLimitScheduleOutput_GatewayArn})
+var sGetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandwidthRateLimitIntervals", ID: &i_BandwidthRateLimitIntervals, Members: &m_BandwidthRateLimitIntervals, Type: smithy.ShapeTypeList, Ext: &eGetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals})
+var sGetGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGatewayInput, Members: &mGetGatewayInput, Type: smithy.ShapeTypeStructure, Ext: &eGetGatewayInput})
+var sGetGatewayInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eGetGatewayInput_GatewayArn})
+var sGetGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGatewayOutput, Members: &mGetGatewayOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetGatewayOutput})
+var sGetGatewayOutput_Gateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gateway", ID: &iGatewayDetails, Members: &mGatewayDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetGatewayOutput_Gateway})
+var sGetHypervisorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHypervisorInput, Members: &mGetHypervisorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetHypervisorInput})
+var sGetHypervisorInput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eGetHypervisorInput_HypervisorArn})
+var sGetHypervisorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHypervisorOutput, Members: &mGetHypervisorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetHypervisorOutput})
+var sGetHypervisorOutput_Hypervisor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hypervisor", ID: &iHypervisorDetails, Members: &mHypervisorDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetHypervisorOutput_Hypervisor})
+var sGetHypervisorPropertyMappingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHypervisorPropertyMappingsInput, Members: &mGetHypervisorPropertyMappingsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetHypervisorPropertyMappingsInput})
+var sGetHypervisorPropertyMappingsInput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eGetHypervisorPropertyMappingsInput_HypervisorArn})
+var sGetHypervisorPropertyMappingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHypervisorPropertyMappingsOutput, Members: &mGetHypervisorPropertyMappingsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetHypervisorPropertyMappingsOutput})
+var sGetHypervisorPropertyMappingsOutput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eGetHypervisorPropertyMappingsOutput_HypervisorArn})
+var sGetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareToAwsTagMappings", ID: &i_VmwareToAwsTagMappings, Members: &m_VmwareToAwsTagMappings, Type: smithy.ShapeTypeList, Ext: &eGetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings})
+var sGetHypervisorPropertyMappingsOutput_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eGetHypervisorPropertyMappingsOutput_IamRoleArn})
+var sGetVirtualMachineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVirtualMachineInput, Members: &mGetVirtualMachineInput, Type: smithy.ShapeTypeStructure, Ext: &eGetVirtualMachineInput})
+var sGetVirtualMachineInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetVirtualMachineInput_ResourceArn})
+var sGetVirtualMachineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVirtualMachineOutput, Members: &mGetVirtualMachineOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetVirtualMachineOutput})
+var sGetVirtualMachineOutput_VirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VirtualMachine", ID: &iVirtualMachineDetails, Members: &mVirtualMachineDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetVirtualMachineOutput_VirtualMachine})
+var sImportHypervisorConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportHypervisorConfigurationInput, Members: &mImportHypervisorConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eImportHypervisorConfigurationInput})
+var sImportHypervisorConfigurationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eImportHypervisorConfigurationInput_Name})
+var sImportHypervisorConfigurationInput_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_Host, Type: smithy.ShapeTypeString, Ext: &eImportHypervisorConfigurationInput_Host})
+var sImportHypervisorConfigurationInput_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_Username, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eImportHypervisorConfigurationInput_Username})
+var sImportHypervisorConfigurationInput_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eImportHypervisorConfigurationInput_Password})
+var sImportHypervisorConfigurationInput_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eImportHypervisorConfigurationInput_KmsKeyArn})
+var sImportHypervisorConfigurationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eImportHypervisorConfigurationInput_Tags})
+var sImportHypervisorConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportHypervisorConfigurationOutput, Members: &mImportHypervisorConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eImportHypervisorConfigurationOutput})
+var sImportHypervisorConfigurationOutput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eImportHypervisorConfigurationOutput_HypervisorArn})
+var sListGatewaysInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGatewaysInput, Members: &mListGatewaysInput, Type: smithy.ShapeTypeStructure, Ext: &eListGatewaysInput})
+var sListGatewaysInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListGatewaysInput_MaxResults})
+var sListGatewaysInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGatewaysInput_NextToken})
+var sListGatewaysOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGatewaysOutput, Members: &mListGatewaysOutput, Type: smithy.ShapeTypeStructure, Ext: &eListGatewaysOutput})
+var sListGatewaysOutput_Gateways = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gateways", ID: &i_Gateways, Members: &m_Gateways, Type: smithy.ShapeTypeList, Ext: &eListGatewaysOutput_Gateways})
+var sListGatewaysOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGatewaysOutput_NextToken})
+var sListHypervisorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHypervisorsInput, Members: &mListHypervisorsInput, Type: smithy.ShapeTypeStructure, Ext: &eListHypervisorsInput})
+var sListHypervisorsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListHypervisorsInput_MaxResults})
+var sListHypervisorsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListHypervisorsInput_NextToken})
+var sListHypervisorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHypervisorsOutput, Members: &mListHypervisorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListHypervisorsOutput})
+var sListHypervisorsOutput_Hypervisors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hypervisors", ID: &i_Hypervisors, Members: &m_Hypervisors, Type: smithy.ShapeTypeList, Ext: &eListHypervisorsOutput_Hypervisors})
+var sListHypervisorsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListHypervisorsOutput_NextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_ResourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceOutput_ResourceArn})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceOutput_Tags})
+var sListVirtualMachinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualMachinesInput, Members: &mListVirtualMachinesInput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualMachinesInput})
+var sListVirtualMachinesInput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eListVirtualMachinesInput_HypervisorArn})
+var sListVirtualMachinesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListVirtualMachinesInput_MaxResults})
+var sListVirtualMachinesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListVirtualMachinesInput_NextToken})
+var sListVirtualMachinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualMachinesOutput, Members: &mListVirtualMachinesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualMachinesOutput})
+var sListVirtualMachinesOutput_VirtualMachines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VirtualMachines", ID: &i_VirtualMachines, Members: &m_VirtualMachines, Type: smithy.ShapeTypeList, Ext: &eListVirtualMachinesOutput_VirtualMachines})
+var sListVirtualMachinesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListVirtualMachinesOutput_NextToken})
+var sPutBandwidthRateLimitScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBandwidthRateLimitScheduleInput, Members: &mPutBandwidthRateLimitScheduleInput, Type: smithy.ShapeTypeStructure, Ext: &ePutBandwidthRateLimitScheduleInput})
+var sPutBandwidthRateLimitScheduleInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &ePutBandwidthRateLimitScheduleInput_GatewayArn})
+var sPutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandwidthRateLimitIntervals", ID: &i_BandwidthRateLimitIntervals, Members: &m_BandwidthRateLimitIntervals, Type: smithy.ShapeTypeList, Ext: &ePutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals})
+var sPutBandwidthRateLimitScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBandwidthRateLimitScheduleOutput, Members: &mPutBandwidthRateLimitScheduleOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutBandwidthRateLimitScheduleOutput})
+var sPutBandwidthRateLimitScheduleOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &ePutBandwidthRateLimitScheduleOutput_GatewayArn})
+var sPutHypervisorPropertyMappingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutHypervisorPropertyMappingsInput, Members: &mPutHypervisorPropertyMappingsInput, Type: smithy.ShapeTypeStructure, Ext: &ePutHypervisorPropertyMappingsInput})
+var sPutHypervisorPropertyMappingsInput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &ePutHypervisorPropertyMappingsInput_HypervisorArn})
+var sPutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VmwareToAwsTagMappings", ID: &i_VmwareToAwsTagMappings, Members: &m_VmwareToAwsTagMappings, Type: smithy.ShapeTypeList, Ext: &ePutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings})
+var sPutHypervisorPropertyMappingsInput_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ePutHypervisorPropertyMappingsInput_IamRoleArn})
+var sPutHypervisorPropertyMappingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutHypervisorPropertyMappingsOutput, Members: &mPutHypervisorPropertyMappingsOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutHypervisorPropertyMappingsOutput})
+var sPutHypervisorPropertyMappingsOutput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &ePutHypervisorPropertyMappingsOutput_HypervisorArn})
+var sPutMaintenanceStartTimeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMaintenanceStartTimeInput, Members: &mPutMaintenanceStartTimeInput, Type: smithy.ShapeTypeStructure, Ext: &ePutMaintenanceStartTimeInput})
+var sPutMaintenanceStartTimeInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &ePutMaintenanceStartTimeInput_GatewayArn})
+var sPutMaintenanceStartTimeInput_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger, Ext: &ePutMaintenanceStartTimeInput_HourOfDay})
+var sPutMaintenanceStartTimeInput_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger, Ext: &ePutMaintenanceStartTimeInput_MinuteOfHour})
+var sPutMaintenanceStartTimeInput_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfWeek", ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger, Ext: &ePutMaintenanceStartTimeInput_DayOfWeek})
+var sPutMaintenanceStartTimeInput_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfMonth", ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger, Ext: &ePutMaintenanceStartTimeInput_DayOfMonth})
+var sPutMaintenanceStartTimeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMaintenanceStartTimeOutput, Members: &mPutMaintenanceStartTimeOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutMaintenanceStartTimeOutput})
+var sPutMaintenanceStartTimeOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &ePutMaintenanceStartTimeOutput_GatewayArn})
+var sStartVirtualMachinesMetadataSyncInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVirtualMachinesMetadataSyncInput, Members: &mStartVirtualMachinesMetadataSyncInput, Type: smithy.ShapeTypeStructure, Ext: &eStartVirtualMachinesMetadataSyncInput})
+var sStartVirtualMachinesMetadataSyncInput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eStartVirtualMachinesMetadataSyncInput_HypervisorArn})
+var sStartVirtualMachinesMetadataSyncOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVirtualMachinesMetadataSyncOutput, Members: &mStartVirtualMachinesMetadataSyncOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartVirtualMachinesMetadataSyncOutput})
+var sStartVirtualMachinesMetadataSyncOutput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eStartVirtualMachinesMetadataSyncOutput_HypervisorArn})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_ResourceARN})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eTagResourceInput_Tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Members: &mTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sTagResourceOutput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceOutput_ResourceARN})
+var sTestHypervisorConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestHypervisorConfigurationInput, Members: &mTestHypervisorConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eTestHypervisorConfigurationInput})
+var sTestHypervisorConfigurationInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eTestHypervisorConfigurationInput_GatewayArn})
+var sTestHypervisorConfigurationInput_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_Host, Type: smithy.ShapeTypeString, Ext: &eTestHypervisorConfigurationInput_Host})
+var sTestHypervisorConfigurationInput_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_Username, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eTestHypervisorConfigurationInput_Username})
+var sTestHypervisorConfigurationInput_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eTestHypervisorConfigurationInput_Password})
+var sTestHypervisorConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestHypervisorConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eTestHypervisorConfigurationOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_ResourceARN})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_TagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Members: &mUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUntagResourceOutput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceOutput_ResourceARN})
+var sUpdateGatewayInformationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayInformationInput, Members: &mUpdateGatewayInformationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewayInformationInput})
+var sUpdateGatewayInformationInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayInformationInput_GatewayArn})
+var sUpdateGatewayInformationInput_GatewayDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayDisplayName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayInformationInput_GatewayDisplayName})
+var sUpdateGatewayInformationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayInformationOutput, Members: &mUpdateGatewayInformationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewayInformationOutput})
+var sUpdateGatewayInformationOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayInformationOutput_GatewayArn})
+var sUpdateGatewaySoftwareNowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewaySoftwareNowInput, Members: &mUpdateGatewaySoftwareNowInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewaySoftwareNowInput})
+var sUpdateGatewaySoftwareNowInput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewaySoftwareNowInput_GatewayArn})
+var sUpdateGatewaySoftwareNowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewaySoftwareNowOutput, Members: &mUpdateGatewaySoftwareNowOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewaySoftwareNowOutput})
+var sUpdateGatewaySoftwareNowOutput_GatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayArn", ID: &i_GatewayArn, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewaySoftwareNowOutput_GatewayArn})
+var sUpdateHypervisorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHypervisorInput, Members: &mUpdateHypervisorInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHypervisorInput})
+var sUpdateHypervisorInput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eUpdateHypervisorInput_HypervisorArn})
+var sUpdateHypervisorInput_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_Host, Type: smithy.ShapeTypeString, Ext: &eUpdateHypervisorInput_Host})
+var sUpdateHypervisorInput_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_Username, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eUpdateHypervisorInput_Username})
+var sUpdateHypervisorInput_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eUpdateHypervisorInput_Password})
+var sUpdateHypervisorInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateHypervisorInput_Name})
+var sUpdateHypervisorInput_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eUpdateHypervisorInput_LogGroupArn})
+var sUpdateHypervisorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHypervisorOutput, Members: &mUpdateHypervisorOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHypervisorOutput})
+var sUpdateHypervisorOutput_HypervisorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HypervisorArn", ID: &i_ServerArn, Type: smithy.ShapeTypeString, Ext: &eUpdateHypervisorOutput_HypervisorArn})
+
+var AssociateGatewayToServer = &sAssociateGatewayToServer
+
+var CreateGateway = &sCreateGateway
+
+var DeleteGateway = &sDeleteGateway
+
+var DeleteHypervisor = &sDeleteHypervisor
+
+var DisassociateGatewayFromServer = &sDisassociateGatewayFromServer
+
+var GetBandwidthRateLimitSchedule = &sGetBandwidthRateLimitSchedule
+
+var GetGateway = &sGetGateway
+
+var GetHypervisor = &sGetHypervisor
+
+var GetHypervisorPropertyMappings = &sGetHypervisorPropertyMappings
+
+var GetVirtualMachine = &sGetVirtualMachine
+
+var ImportHypervisorConfiguration = &sImportHypervisorConfiguration
+
+var ListGateways = &sListGateways
+
+var ListHypervisors = &sListHypervisors
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListVirtualMachines = &sListVirtualMachines
+
+var PutBandwidthRateLimitSchedule = &sPutBandwidthRateLimitSchedule
+
+var PutHypervisorPropertyMappings = &sPutHypervisorPropertyMappings
+
+var PutMaintenanceStartTime = &sPutMaintenanceStartTime
+
+var StartVirtualMachinesMetadataSync = &sStartVirtualMachinesMetadataSync
+
+var TagResource = &sTagResource
+
+var TestHypervisorConfiguration = &sTestHypervisorConfiguration
+
+var UntagResource = &sUntagResource
+
+var UpdateGatewayInformation = &sUpdateGatewayInformation
+
+var UpdateGatewaySoftwareNow = &sUpdateGatewaySoftwareNow
+
+var UpdateHypervisor = &sUpdateHypervisor
+
+var _BackupOnPremises_v20210101 = &s_BackupOnPremises_v20210101
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_ErrorCode = &sAccessDeniedException_ErrorCode
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _ActivationKey = &s_ActivationKey
+
+var _AverageUploadRateLimit = &s_AverageUploadRateLimit
+
+var BandwidthRateLimitInterval = &sBandwidthRateLimitInterval
+var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = &sBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec
+var BandwidthRateLimitInterval_StartHourOfDay = &sBandwidthRateLimitInterval_StartHourOfDay
+var BandwidthRateLimitInterval_EndHourOfDay = &sBandwidthRateLimitInterval_EndHourOfDay
+var BandwidthRateLimitInterval_StartMinuteOfHour = &sBandwidthRateLimitInterval_StartMinuteOfHour
+var BandwidthRateLimitInterval_EndMinuteOfHour = &sBandwidthRateLimitInterval_EndMinuteOfHour
+var BandwidthRateLimitInterval_DaysOfWeek = &sBandwidthRateLimitInterval_DaysOfWeek
+
+var _BandwidthRateLimitIntervals = &s_BandwidthRateLimitIntervals
+var _BandwidthRateLimitIntervals_member = &s_BandwidthRateLimitIntervals_member
+
+var ConflictException = &sConflictException
+var ConflictException_ErrorCode = &sConflictException_ErrorCode
+var ConflictException_Message = &sConflictException_Message
+
+var _DayOfMonth = &s_DayOfMonth
+
+var _DayOfWeek = &s_DayOfWeek
+
+var _DaysOfWeek = &s_DaysOfWeek
+var _DaysOfWeek_member = &s_DaysOfWeek_member
+
+var Gateway = &sGateway
+var Gateway_GatewayArn = &sGateway_GatewayArn
+var Gateway_GatewayDisplayName = &sGateway_GatewayDisplayName
+var Gateway_GatewayType = &sGateway_GatewayType
+var Gateway_HypervisorId = &sGateway_HypervisorId
+var Gateway_LastSeenTime = &sGateway_LastSeenTime
+
+var _GatewayArn = &s_GatewayArn
+
+var GatewayDetails = &sGatewayDetails
+var GatewayDetails_GatewayArn = &sGatewayDetails_GatewayArn
+var GatewayDetails_GatewayDisplayName = &sGatewayDetails_GatewayDisplayName
+var GatewayDetails_GatewayType = &sGatewayDetails_GatewayType
+var GatewayDetails_HypervisorId = &sGatewayDetails_HypervisorId
+var GatewayDetails_LastSeenTime = &sGatewayDetails_LastSeenTime
+var GatewayDetails_MaintenanceStartTime = &sGatewayDetails_MaintenanceStartTime
+var GatewayDetails_NextUpdateAvailabilityTime = &sGatewayDetails_NextUpdateAvailabilityTime
+var GatewayDetails_VpcEndpoint = &sGatewayDetails_VpcEndpoint
+var GatewayDetails_DeprecationDate = &sGatewayDetails_DeprecationDate
+var GatewayDetails_SoftwareVersion = &sGatewayDetails_SoftwareVersion
+
+var _Gateways = &s_Gateways
+var _Gateways_member = &s_Gateways_member
+
+var _GatewayType = &s_GatewayType
+
+var _Host = &s_Host
+
+var _HourOfDay = &s_HourOfDay
+
+var Hypervisor = &sHypervisor
+var Hypervisor_Host = &sHypervisor_Host
+var Hypervisor_HypervisorArn = &sHypervisor_HypervisorArn
+var Hypervisor_KmsKeyArn = &sHypervisor_KmsKeyArn
+var Hypervisor_Name = &sHypervisor_Name
+var Hypervisor_State = &sHypervisor_State
+
+var HypervisorDetails = &sHypervisorDetails
+var HypervisorDetails_Host = &sHypervisorDetails_Host
+var HypervisorDetails_HypervisorArn = &sHypervisorDetails_HypervisorArn
+var HypervisorDetails_KmsKeyArn = &sHypervisorDetails_KmsKeyArn
+var HypervisorDetails_Name = &sHypervisorDetails_Name
+var HypervisorDetails_LogGroupArn = &sHypervisorDetails_LogGroupArn
+var HypervisorDetails_State = &sHypervisorDetails_State
+var HypervisorDetails_LastSuccessfulMetadataSyncTime = &sHypervisorDetails_LastSuccessfulMetadataSyncTime
+var HypervisorDetails_LatestMetadataSyncStatusMessage = &sHypervisorDetails_LatestMetadataSyncStatusMessage
+var HypervisorDetails_LatestMetadataSyncStatus = &sHypervisorDetails_LatestMetadataSyncStatus
+
+var _HypervisorId = &s_HypervisorId
+
+var _Hypervisors = &s_Hypervisors
+var _Hypervisors_member = &s_Hypervisors_member
+
+var _HypervisorState = &s_HypervisorState
+
+var _IamRoleArn = &s_IamRoleArn
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_ErrorCode = &sInternalServerException_ErrorCode
+var InternalServerException_Message = &sInternalServerException_Message
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LogGroupArn = &s_LogGroupArn
+
+var MaintenanceStartTime = &sMaintenanceStartTime
+var MaintenanceStartTime_DayOfMonth = &sMaintenanceStartTime_DayOfMonth
+var MaintenanceStartTime_DayOfWeek = &sMaintenanceStartTime_DayOfWeek
+var MaintenanceStartTime_HourOfDay = &sMaintenanceStartTime_HourOfDay
+var MaintenanceStartTime_MinuteOfHour = &sMaintenanceStartTime_MinuteOfHour
+
+var _MaxResults = &s_MaxResults
+
+var _MinuteOfHour = &s_MinuteOfHour
+
+var _Name = &s_Name
+
+var _NextToken = &s_NextToken
+
+var _Password = &s_Password
+
+var _Path = &s_Path
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_ErrorCode = &sResourceNotFoundException_ErrorCode
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ServerArn = &s_ServerArn
+
+var _string = &s_string
+
+var _SyncMetadataStatus = &s_SyncMetadataStatus
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_ErrorCode = &sThrottlingException_ErrorCode
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Time = &s_Time
+
+var _Username = &s_Username
+
+var ValidationException = &sValidationException
+var ValidationException_ErrorCode = &sValidationException_ErrorCode
+var ValidationException_Message = &sValidationException_Message
+
+var VirtualMachine = &sVirtualMachine
+var VirtualMachine_HostName = &sVirtualMachine_HostName
+var VirtualMachine_HypervisorId = &sVirtualMachine_HypervisorId
+var VirtualMachine_Name = &sVirtualMachine_Name
+var VirtualMachine_Path = &sVirtualMachine_Path
+var VirtualMachine_ResourceArn = &sVirtualMachine_ResourceArn
+var VirtualMachine_LastBackupDate = &sVirtualMachine_LastBackupDate
+
+var VirtualMachineDetails = &sVirtualMachineDetails
+var VirtualMachineDetails_HostName = &sVirtualMachineDetails_HostName
+var VirtualMachineDetails_HypervisorId = &sVirtualMachineDetails_HypervisorId
+var VirtualMachineDetails_Name = &sVirtualMachineDetails_Name
+var VirtualMachineDetails_Path = &sVirtualMachineDetails_Path
+var VirtualMachineDetails_ResourceArn = &sVirtualMachineDetails_ResourceArn
+var VirtualMachineDetails_LastBackupDate = &sVirtualMachineDetails_LastBackupDate
+var VirtualMachineDetails_VmwareTags = &sVirtualMachineDetails_VmwareTags
+
+var _VirtualMachines = &s_VirtualMachines
+var _VirtualMachines_member = &s_VirtualMachines_member
+
+var _VmwareCategory = &s_VmwareCategory
+
+var VmwareTag = &sVmwareTag
+var VmwareTag_VmwareCategory = &sVmwareTag_VmwareCategory
+var VmwareTag_VmwareTagName = &sVmwareTag_VmwareTagName
+var VmwareTag_VmwareTagDescription = &sVmwareTag_VmwareTagDescription
+
+var _VmwareTagName = &s_VmwareTagName
+
+var _VmwareTags = &s_VmwareTags
+var _VmwareTags_member = &s_VmwareTags_member
+
+var VmwareToAwsTagMapping = &sVmwareToAwsTagMapping
+var VmwareToAwsTagMapping_VmwareCategory = &sVmwareToAwsTagMapping_VmwareCategory
+var VmwareToAwsTagMapping_VmwareTagName = &sVmwareToAwsTagMapping_VmwareTagName
+var VmwareToAwsTagMapping_AwsTagKey = &sVmwareToAwsTagMapping_AwsTagKey
+var VmwareToAwsTagMapping_AwsTagValue = &sVmwareToAwsTagMapping_AwsTagValue
+
+var _VmwareToAwsTagMappings = &s_VmwareToAwsTagMappings
+var _VmwareToAwsTagMappings_member = &s_VmwareToAwsTagMappings_member
+
+var _VpcEndpoint = &s_VpcEndpoint
+
+var AssociateGatewayToServerInput = &sAssociateGatewayToServerInput
+var AssociateGatewayToServerInput_GatewayArn = &sAssociateGatewayToServerInput_GatewayArn
+var AssociateGatewayToServerInput_ServerArn = &sAssociateGatewayToServerInput_ServerArn
+
+var AssociateGatewayToServerOutput = &sAssociateGatewayToServerOutput
+var AssociateGatewayToServerOutput_GatewayArn = &sAssociateGatewayToServerOutput_GatewayArn
+
+var CreateGatewayInput = &sCreateGatewayInput
+var CreateGatewayInput_ActivationKey = &sCreateGatewayInput_ActivationKey
+var CreateGatewayInput_GatewayDisplayName = &sCreateGatewayInput_GatewayDisplayName
+var CreateGatewayInput_GatewayType = &sCreateGatewayInput_GatewayType
+var CreateGatewayInput_Tags = &sCreateGatewayInput_Tags
+
+var CreateGatewayOutput = &sCreateGatewayOutput
+var CreateGatewayOutput_GatewayArn = &sCreateGatewayOutput_GatewayArn
+
+var DeleteGatewayInput = &sDeleteGatewayInput
+var DeleteGatewayInput_GatewayArn = &sDeleteGatewayInput_GatewayArn
+
+var DeleteGatewayOutput = &sDeleteGatewayOutput
+var DeleteGatewayOutput_GatewayArn = &sDeleteGatewayOutput_GatewayArn
+
+var DeleteHypervisorInput = &sDeleteHypervisorInput
+var DeleteHypervisorInput_HypervisorArn = &sDeleteHypervisorInput_HypervisorArn
+
+var DeleteHypervisorOutput = &sDeleteHypervisorOutput
+var DeleteHypervisorOutput_HypervisorArn = &sDeleteHypervisorOutput_HypervisorArn
+
+var DisassociateGatewayFromServerInput = &sDisassociateGatewayFromServerInput
+var DisassociateGatewayFromServerInput_GatewayArn = &sDisassociateGatewayFromServerInput_GatewayArn
+
+var DisassociateGatewayFromServerOutput = &sDisassociateGatewayFromServerOutput
+var DisassociateGatewayFromServerOutput_GatewayArn = &sDisassociateGatewayFromServerOutput_GatewayArn
+
+var GetBandwidthRateLimitScheduleInput = &sGetBandwidthRateLimitScheduleInput
+var GetBandwidthRateLimitScheduleInput_GatewayArn = &sGetBandwidthRateLimitScheduleInput_GatewayArn
+
+var GetBandwidthRateLimitScheduleOutput = &sGetBandwidthRateLimitScheduleOutput
+var GetBandwidthRateLimitScheduleOutput_GatewayArn = &sGetBandwidthRateLimitScheduleOutput_GatewayArn
+var GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = &sGetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals
+
+var GetGatewayInput = &sGetGatewayInput
+var GetGatewayInput_GatewayArn = &sGetGatewayInput_GatewayArn
+
+var GetGatewayOutput = &sGetGatewayOutput
+var GetGatewayOutput_Gateway = &sGetGatewayOutput_Gateway
+
+var GetHypervisorInput = &sGetHypervisorInput
+var GetHypervisorInput_HypervisorArn = &sGetHypervisorInput_HypervisorArn
+
+var GetHypervisorOutput = &sGetHypervisorOutput
+var GetHypervisorOutput_Hypervisor = &sGetHypervisorOutput_Hypervisor
+
+var GetHypervisorPropertyMappingsInput = &sGetHypervisorPropertyMappingsInput
+var GetHypervisorPropertyMappingsInput_HypervisorArn = &sGetHypervisorPropertyMappingsInput_HypervisorArn
+
+var GetHypervisorPropertyMappingsOutput = &sGetHypervisorPropertyMappingsOutput
+var GetHypervisorPropertyMappingsOutput_HypervisorArn = &sGetHypervisorPropertyMappingsOutput_HypervisorArn
+var GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings = &sGetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings
+var GetHypervisorPropertyMappingsOutput_IamRoleArn = &sGetHypervisorPropertyMappingsOutput_IamRoleArn
+
+var GetVirtualMachineInput = &sGetVirtualMachineInput
+var GetVirtualMachineInput_ResourceArn = &sGetVirtualMachineInput_ResourceArn
+
+var GetVirtualMachineOutput = &sGetVirtualMachineOutput
+var GetVirtualMachineOutput_VirtualMachine = &sGetVirtualMachineOutput_VirtualMachine
+
+var ImportHypervisorConfigurationInput = &sImportHypervisorConfigurationInput
+var ImportHypervisorConfigurationInput_Name = &sImportHypervisorConfigurationInput_Name
+var ImportHypervisorConfigurationInput_Host = &sImportHypervisorConfigurationInput_Host
+var ImportHypervisorConfigurationInput_Username = &sImportHypervisorConfigurationInput_Username
+var ImportHypervisorConfigurationInput_Password = &sImportHypervisorConfigurationInput_Password
+var ImportHypervisorConfigurationInput_KmsKeyArn = &sImportHypervisorConfigurationInput_KmsKeyArn
+var ImportHypervisorConfigurationInput_Tags = &sImportHypervisorConfigurationInput_Tags
+
+var ImportHypervisorConfigurationOutput = &sImportHypervisorConfigurationOutput
+var ImportHypervisorConfigurationOutput_HypervisorArn = &sImportHypervisorConfigurationOutput_HypervisorArn
+
+var ListGatewaysInput = &sListGatewaysInput
+var ListGatewaysInput_MaxResults = &sListGatewaysInput_MaxResults
+var ListGatewaysInput_NextToken = &sListGatewaysInput_NextToken
+
+var ListGatewaysOutput = &sListGatewaysOutput
+var ListGatewaysOutput_Gateways = &sListGatewaysOutput_Gateways
+var ListGatewaysOutput_NextToken = &sListGatewaysOutput_NextToken
+
+var ListHypervisorsInput = &sListHypervisorsInput
+var ListHypervisorsInput_MaxResults = &sListHypervisorsInput_MaxResults
+var ListHypervisorsInput_NextToken = &sListHypervisorsInput_NextToken
+
+var ListHypervisorsOutput = &sListHypervisorsOutput
+var ListHypervisorsOutput_Hypervisors = &sListHypervisorsOutput_Hypervisors
+var ListHypervisorsOutput_NextToken = &sListHypervisorsOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_ResourceArn = &sListTagsForResourceOutput_ResourceArn
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var ListVirtualMachinesInput = &sListVirtualMachinesInput
+var ListVirtualMachinesInput_HypervisorArn = &sListVirtualMachinesInput_HypervisorArn
+var ListVirtualMachinesInput_MaxResults = &sListVirtualMachinesInput_MaxResults
+var ListVirtualMachinesInput_NextToken = &sListVirtualMachinesInput_NextToken
+
+var ListVirtualMachinesOutput = &sListVirtualMachinesOutput
+var ListVirtualMachinesOutput_VirtualMachines = &sListVirtualMachinesOutput_VirtualMachines
+var ListVirtualMachinesOutput_NextToken = &sListVirtualMachinesOutput_NextToken
+
+var PutBandwidthRateLimitScheduleInput = &sPutBandwidthRateLimitScheduleInput
+var PutBandwidthRateLimitScheduleInput_GatewayArn = &sPutBandwidthRateLimitScheduleInput_GatewayArn
+var PutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = &sPutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals
+
+var PutBandwidthRateLimitScheduleOutput = &sPutBandwidthRateLimitScheduleOutput
+var PutBandwidthRateLimitScheduleOutput_GatewayArn = &sPutBandwidthRateLimitScheduleOutput_GatewayArn
+
+var PutHypervisorPropertyMappingsInput = &sPutHypervisorPropertyMappingsInput
+var PutHypervisorPropertyMappingsInput_HypervisorArn = &sPutHypervisorPropertyMappingsInput_HypervisorArn
+var PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings = &sPutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings
+var PutHypervisorPropertyMappingsInput_IamRoleArn = &sPutHypervisorPropertyMappingsInput_IamRoleArn
+
+var PutHypervisorPropertyMappingsOutput = &sPutHypervisorPropertyMappingsOutput
+var PutHypervisorPropertyMappingsOutput_HypervisorArn = &sPutHypervisorPropertyMappingsOutput_HypervisorArn
+
+var PutMaintenanceStartTimeInput = &sPutMaintenanceStartTimeInput
+var PutMaintenanceStartTimeInput_GatewayArn = &sPutMaintenanceStartTimeInput_GatewayArn
+var PutMaintenanceStartTimeInput_HourOfDay = &sPutMaintenanceStartTimeInput_HourOfDay
+var PutMaintenanceStartTimeInput_MinuteOfHour = &sPutMaintenanceStartTimeInput_MinuteOfHour
+var PutMaintenanceStartTimeInput_DayOfWeek = &sPutMaintenanceStartTimeInput_DayOfWeek
+var PutMaintenanceStartTimeInput_DayOfMonth = &sPutMaintenanceStartTimeInput_DayOfMonth
+
+var PutMaintenanceStartTimeOutput = &sPutMaintenanceStartTimeOutput
+var PutMaintenanceStartTimeOutput_GatewayArn = &sPutMaintenanceStartTimeOutput_GatewayArn
+
+var StartVirtualMachinesMetadataSyncInput = &sStartVirtualMachinesMetadataSyncInput
+var StartVirtualMachinesMetadataSyncInput_HypervisorArn = &sStartVirtualMachinesMetadataSyncInput_HypervisorArn
+
+var StartVirtualMachinesMetadataSyncOutput = &sStartVirtualMachinesMetadataSyncOutput
+var StartVirtualMachinesMetadataSyncOutput_HypervisorArn = &sStartVirtualMachinesMetadataSyncOutput_HypervisorArn
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceARN = &sTagResourceInput_ResourceARN
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+var TagResourceOutput_ResourceARN = &sTagResourceOutput_ResourceARN
+
+var TestHypervisorConfigurationInput = &sTestHypervisorConfigurationInput
+var TestHypervisorConfigurationInput_GatewayArn = &sTestHypervisorConfigurationInput_GatewayArn
+var TestHypervisorConfigurationInput_Host = &sTestHypervisorConfigurationInput_Host
+var TestHypervisorConfigurationInput_Username = &sTestHypervisorConfigurationInput_Username
+var TestHypervisorConfigurationInput_Password = &sTestHypervisorConfigurationInput_Password
+
+var TestHypervisorConfigurationOutput = &sTestHypervisorConfigurationOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceARN = &sUntagResourceInput_ResourceARN
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+var UntagResourceOutput_ResourceARN = &sUntagResourceOutput_ResourceARN
+
+var UpdateGatewayInformationInput = &sUpdateGatewayInformationInput
+var UpdateGatewayInformationInput_GatewayArn = &sUpdateGatewayInformationInput_GatewayArn
+var UpdateGatewayInformationInput_GatewayDisplayName = &sUpdateGatewayInformationInput_GatewayDisplayName
+
+var UpdateGatewayInformationOutput = &sUpdateGatewayInformationOutput
+var UpdateGatewayInformationOutput_GatewayArn = &sUpdateGatewayInformationOutput_GatewayArn
+
+var UpdateGatewaySoftwareNowInput = &sUpdateGatewaySoftwareNowInput
+var UpdateGatewaySoftwareNowInput_GatewayArn = &sUpdateGatewaySoftwareNowInput_GatewayArn
+
+var UpdateGatewaySoftwareNowOutput = &sUpdateGatewaySoftwareNowOutput
+var UpdateGatewaySoftwareNowOutput_GatewayArn = &sUpdateGatewaySoftwareNowOutput_GatewayArn
+
+var UpdateHypervisorInput = &sUpdateHypervisorInput
+var UpdateHypervisorInput_HypervisorArn = &sUpdateHypervisorInput_HypervisorArn
+var UpdateHypervisorInput_Host = &sUpdateHypervisorInput_Host
+var UpdateHypervisorInput_Username = &sUpdateHypervisorInput_Username
+var UpdateHypervisorInput_Password = &sUpdateHypervisorInput_Password
+var UpdateHypervisorInput_Name = &sUpdateHypervisorInput_Name
+var UpdateHypervisorInput_LogGroupArn = &sUpdateHypervisorInput_LogGroupArn
+
+var UpdateHypervisorOutput = &sUpdateHypervisorOutput
+var UpdateHypervisorOutput_HypervisorArn = &sUpdateHypervisorOutput_HypervisorArn
+
+var BackupOnPremises_v20210101 = &smithy.ServiceSchema{Schema: &s_BackupOnPremises_v20210101, Version: "2021-01-01"}

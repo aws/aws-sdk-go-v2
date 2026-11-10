@@ -7,1074 +7,1043 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssumeRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssumeRoleWithSAML = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleWithSAML",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssumeRoleWithWebIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleWithWebIdentity",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssumeRoot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoot",
-}, smithy.ShapeTypeOperation, 0)
-
-var DecodeAuthorizationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "DecodeAuthorizationMessage",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccessKeyInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetAccessKeyInfo",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCallerIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetCallerIdentity",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDelegatedAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetDelegatedAccessToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetFederationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetFederationToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSessionToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetSessionToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetWebIdentityToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetWebIdentityToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSSecurityTokenServiceV20110615 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AWSSecurityTokenServiceV20110615",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "https://sts.amazonaws.com/doc/2011-06-15/"})
-
-var AWSSecurityTokenServiceV20110615 = smithy.NewServiceSchema(_AWSSecurityTokenServiceV20110615, "2011-06-15")
-
-var _accessKeyIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "accessKeyIdType",
-}, smithy.ShapeTypeString, 0)
-
-var _accessKeySecretType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "accessKeySecretType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _accountType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "accountType",
-}, smithy.ShapeTypeString, 0)
-
-var _arnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "arnType",
-}, smithy.ShapeTypeString, 0)
-
-var _assumedRoleIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "assumedRoleIdType",
-}, smithy.ShapeTypeString, 0)
-
-var AssumedRoleUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumedRoleUser",
-}, smithy.ShapeTypeStructure, 2)
-var AssumedRoleUser_AssumedRoleId *smithy.Schema
-
-var AssumedRoleUser_Arn *smithy.Schema
-
-var _Audience = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "Audience",
-}, smithy.ShapeTypeString, 0)
-
-var _clientTokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "clientTokenType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _contextAssertionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "contextAssertionType",
-}, smithy.ShapeTypeString, 0)
-
-var Credentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "Credentials",
-}, smithy.ShapeTypeStructure, 4)
-var Credentials_AccessKeyId *smithy.Schema
-
-var Credentials_SecretAccessKey *smithy.Schema
-
-var Credentials_SessionToken *smithy.Schema
-
-var Credentials_Expiration *smithy.Schema
-
-var _dateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "dateType",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _decodedMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "decodedMessageType",
-}, smithy.ShapeTypeString, 0)
-
-var _durationSecondsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "durationSecondsType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _encodedMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "encodedMessageType",
-}, smithy.ShapeTypeString, 0)
-
-var _expiredIdentityTokenMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "expiredIdentityTokenMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExpiredTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "ExpiredTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ExpiredTokenException",
-		StatusCode: 400})
-var ExpiredTokenException_message *smithy.Schema
-
-var ExpiredTradeInTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "ExpiredTradeInTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ExpiredTradeInTokenException",
-		StatusCode: 400})
-var ExpiredTradeInTokenException_message *smithy.Schema
-
-var _expiredTradeInTokenExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "expiredTradeInTokenExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _externalIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "externalIdType",
-}, smithy.ShapeTypeString, 0)
-
-var _federatedIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "federatedIdType",
-}, smithy.ShapeTypeString, 0)
-
-var FederatedUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "FederatedUser",
-}, smithy.ShapeTypeStructure, 2)
-var FederatedUser_FederatedUserId *smithy.Schema
-
-var FederatedUser_Arn *smithy.Schema
-
-var IDPCommunicationErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "IDPCommunicationErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "IDPCommunicationError",
-		StatusCode: 400})
-var IDPCommunicationErrorException_message *smithy.Schema
-
-var _idpCommunicationErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "idpCommunicationErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var IDPRejectedClaimException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "IDPRejectedClaimException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "IDPRejectedClaim",
-		StatusCode: 403})
-var IDPRejectedClaimException_message *smithy.Schema
-
-var _idpRejectedClaimMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "idpRejectedClaimMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _invalidAuthorizationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "invalidAuthorizationMessage",
-}, smithy.ShapeTypeString, 0)
-
-var InvalidAuthorizationMessageException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "InvalidAuthorizationMessageException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidAuthorizationMessageException",
-		StatusCode: 400})
-var InvalidAuthorizationMessageException_message *smithy.Schema
-
-var InvalidIdentityTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "InvalidIdentityTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidIdentityToken",
-		StatusCode: 400})
-var InvalidIdentityTokenException_message *smithy.Schema
-
-var _invalidIdentityTokenMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "invalidIdentityTokenMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Issuer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "Issuer",
-}, smithy.ShapeTypeString, 0)
-
-var _jwtAlgorithmType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "jwtAlgorithmType",
-}, smithy.ShapeTypeString, 0)
-
-var JWTPayloadSizeExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "JWTPayloadSizeExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "JWTPayloadSizeExceededException",
-		StatusCode: 400})
-var JWTPayloadSizeExceededException_message *smithy.Schema
-
-var _JWTPayloadSizeExceededException2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "JWTPayloadSizeExceededException2",
-}, smithy.ShapeTypeString, 0)
-
-var MalformedPolicyDocumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "MalformedPolicyDocumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "MalformedPolicyDocument",
-		StatusCode: 400})
-var MalformedPolicyDocumentException_message *smithy.Schema
-
-var _malformedPolicyDocumentMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "malformedPolicyDocumentMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _minimumSessionTokenSizeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "minimumSessionTokenSizeType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NameQualifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "NameQualifier",
-}, smithy.ShapeTypeString, 0)
-
-var _nonNegativeIntegerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "nonNegativeIntegerType",
-}, smithy.ShapeTypeInteger, 0)
-
-var OutboundWebIdentityFederationDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "OutboundWebIdentityFederationDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "OutboundWebIdentityFederationDisabledException",
-		StatusCode: 403})
-var OutboundWebIdentityFederationDisabledException_message *smithy.Schema
-
-var _OutboundWebIdentityFederationDisabledException2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "OutboundWebIdentityFederationDisabledException2",
-}, smithy.ShapeTypeString, 0)
-
-var PackedPolicyTooLargeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "PackedPolicyTooLargeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PackedPolicyTooLarge",
-		StatusCode: 400})
-var PackedPolicyTooLargeException_message *smithy.Schema
-
-var _packedPolicyTooLargeMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "packedPolicyTooLargeMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _policyDescriptorListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "policyDescriptorListType",
-}, smithy.ShapeTypeList, 1)
-var _policyDescriptorListType_member *smithy.Schema
-
-var PolicyDescriptorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "PolicyDescriptorType",
-}, smithy.ShapeTypeStructure, 1)
-var PolicyDescriptorType_arn *smithy.Schema
-
-var ProvidedContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "ProvidedContext",
-}, smithy.ShapeTypeStructure, 2)
-var ProvidedContext_ProviderArn *smithy.Schema
-
-var ProvidedContext_ContextAssertion *smithy.Schema
-
-var _ProvidedContextsListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "ProvidedContextsListType",
-}, smithy.ShapeTypeList, 1)
-var _ProvidedContextsListType_member *smithy.Schema
-
-var RegionDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "RegionDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "RegionDisabledException",
-		StatusCode: 403})
-var RegionDisabledException_message *smithy.Schema
-
-var _regionDisabledMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "regionDisabledMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _roleDurationSecondsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "roleDurationSecondsType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _roleSessionNameType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "roleSessionNameType",
-}, smithy.ShapeTypeString, 0)
-
-var _RootDurationSecondsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "RootDurationSecondsType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SAMLAssertionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "SAMLAssertionType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _serialNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "serialNumberType",
-}, smithy.ShapeTypeString, 0)
-
-var SessionDurationEscalationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "SessionDurationEscalationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "SessionDurationEscalationException",
-		StatusCode: 403})
-var SessionDurationEscalationException_message *smithy.Schema
-
-var _SessionDurationEscalationException2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "SessionDurationEscalationException2",
-}, smithy.ShapeTypeString, 0)
-
-var _sessionPolicyDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "sessionPolicyDocumentType",
-}, smithy.ShapeTypeString, 0)
-
-var _sessionTokenSizeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "sessionTokenSizeType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _sessionTokenUtilizationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "sessionTokenUtilizationType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _sourceIdentityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "sourceIdentityType",
-}, smithy.ShapeTypeString, 0)
-
-var _Subject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "Subject",
-}, smithy.ShapeTypeString, 0)
-
-var _SubjectType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "SubjectType",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _tagKeyListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "tagKeyListType",
-}, smithy.ShapeTypeList, 1)
-var _tagKeyListType_member *smithy.Schema
-
-var _tagKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "tagKeyType",
-}, smithy.ShapeTypeString, 0)
-
-var _tagListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "tagListType",
-}, smithy.ShapeTypeList, 1)
-var _tagListType_member *smithy.Schema
-
-var _tagValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "tagValueType",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetPrincipalType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "TargetPrincipalType",
-}, smithy.ShapeTypeString, 0)
-
-var _tokenCodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "tokenCodeType",
-}, smithy.ShapeTypeString, 0)
-
-var _tokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "tokenType",
-}, smithy.ShapeTypeString, 0)
-
-var _tradeInTokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "tradeInTokenType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _unrestrictedSessionPolicyDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "unrestrictedSessionPolicyDocumentType",
-}, smithy.ShapeTypeString, 0)
-
-var _urlType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "urlType",
-}, smithy.ShapeTypeString, 0)
-
-var _userIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "userIdType",
-}, smithy.ShapeTypeString, 0)
-
-var _userNameType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "userNameType",
-}, smithy.ShapeTypeString, 0)
-
-var _webIdentitySubjectType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "webIdentitySubjectType",
-}, smithy.ShapeTypeString, 0)
-
-var _webIdentityTokenAudienceListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "webIdentityTokenAudienceListType",
-}, smithy.ShapeTypeList, 1)
-var _webIdentityTokenAudienceListType_member *smithy.Schema
-
-var _webIdentityTokenAudienceStringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "webIdentityTokenAudienceStringType",
-}, smithy.ShapeTypeString, 0)
-
-var _webIdentityTokenDurationSecondsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "webIdentityTokenDurationSecondsType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _webIdentityTokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "webIdentityTokenType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AssumeRoleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleRequest",
-}, smithy.ShapeTypeStructure, 13)
-var AssumeRoleRequest_RoleArn *smithy.Schema
-
-var AssumeRoleRequest_RoleSessionName *smithy.Schema
-
-var AssumeRoleRequest_PolicyArns *smithy.Schema
-
-var AssumeRoleRequest_Policy *smithy.Schema
-
-var AssumeRoleRequest_DurationSeconds *smithy.Schema
-
-var AssumeRoleRequest_Tags *smithy.Schema
-
-var AssumeRoleRequest_TransitiveTagKeys *smithy.Schema
-
-var AssumeRoleRequest_ExternalId *smithy.Schema
-
-var AssumeRoleRequest_SerialNumber *smithy.Schema
-
-var AssumeRoleRequest_TokenCode *smithy.Schema
-
-var AssumeRoleRequest_SourceIdentity *smithy.Schema
-
-var AssumeRoleRequest_ProvidedContexts *smithy.Schema
-
-var AssumeRoleRequest_MinimumSessionTokenSize *smithy.Schema
-
-var AssumeRoleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleResponse",
-}, smithy.ShapeTypeStructure, 6)
-var AssumeRoleResponse_Credentials *smithy.Schema
-
-var AssumeRoleResponse_AssumedRoleUser *smithy.Schema
-
-var AssumeRoleResponse_PackedPolicySize *smithy.Schema
-
-var AssumeRoleResponse_SourceIdentity *smithy.Schema
-
-var AssumeRoleResponse_SessionTokenUtilization *smithy.Schema
-
-var AssumeRoleResponse_SessionTokenSize *smithy.Schema
-
-var AssumeRoleWithSAMLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleWithSAMLRequest",
-}, smithy.ShapeTypeStructure, 7)
-var AssumeRoleWithSAMLRequest_RoleArn *smithy.Schema
-
-var AssumeRoleWithSAMLRequest_PrincipalArn *smithy.Schema
-
-var AssumeRoleWithSAMLRequest_SAMLAssertion *smithy.Schema
-
-var AssumeRoleWithSAMLRequest_PolicyArns *smithy.Schema
-
-var AssumeRoleWithSAMLRequest_Policy *smithy.Schema
-
-var AssumeRoleWithSAMLRequest_DurationSeconds *smithy.Schema
-
-var AssumeRoleWithSAMLRequest_MinimumSessionTokenSize *smithy.Schema
-
-var AssumeRoleWithSAMLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleWithSAMLResponse",
-}, smithy.ShapeTypeStructure, 11)
-var AssumeRoleWithSAMLResponse_Credentials *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_AssumedRoleUser *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_PackedPolicySize *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_Subject *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_SubjectType *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_Issuer *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_Audience *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_NameQualifier *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_SourceIdentity *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_SessionTokenUtilization *smithy.Schema
-
-var AssumeRoleWithSAMLResponse_SessionTokenSize *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleWithWebIdentityRequest",
-}, smithy.ShapeTypeStructure, 8)
-var AssumeRoleWithWebIdentityRequest_RoleArn *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest_RoleSessionName *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest_WebIdentityToken *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest_ProviderId *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest_PolicyArns *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest_Policy *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest_DurationSeconds *smithy.Schema
-
-var AssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRoleWithWebIdentityResponse",
-}, smithy.ShapeTypeStructure, 9)
-var AssumeRoleWithWebIdentityResponse_Credentials *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_AssumedRoleUser *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_PackedPolicySize *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_Provider *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_Audience *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_SourceIdentity *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_SessionTokenUtilization *smithy.Schema
-
-var AssumeRoleWithWebIdentityResponse_SessionTokenSize *smithy.Schema
-
-var AssumeRootRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRootRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssumeRootRequest_TargetPrincipal *smithy.Schema
-
-var AssumeRootRequest_TaskPolicyArn *smithy.Schema
-
-var AssumeRootRequest_DurationSeconds *smithy.Schema
-
-var AssumeRootRequest_MinimumSessionTokenSize *smithy.Schema
-
-var AssumeRootResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "AssumeRootResponse",
-}, smithy.ShapeTypeStructure, 4)
-var AssumeRootResponse_Credentials *smithy.Schema
-
-var AssumeRootResponse_SourceIdentity *smithy.Schema
-
-var AssumeRootResponse_SessionTokenUtilization *smithy.Schema
-
-var AssumeRootResponse_SessionTokenSize *smithy.Schema
-
-var DecodeAuthorizationMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "DecodeAuthorizationMessageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DecodeAuthorizationMessageRequest_EncodedMessage *smithy.Schema
-
-var DecodeAuthorizationMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "DecodeAuthorizationMessageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DecodeAuthorizationMessageResponse_DecodedMessage *smithy.Schema
-
-var GetAccessKeyInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetAccessKeyInfoRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessKeyInfoRequest_AccessKeyId *smithy.Schema
-
-var GetAccessKeyInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetAccessKeyInfoResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessKeyInfoResponse_Account *smithy.Schema
-
-var GetCallerIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetCallerIdentityRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetCallerIdentityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetCallerIdentityResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetCallerIdentityResponse_UserId *smithy.Schema
-
-var GetCallerIdentityResponse_Account *smithy.Schema
-
-var GetCallerIdentityResponse_Arn *smithy.Schema
-
-var GetDelegatedAccessTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetDelegatedAccessTokenRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDelegatedAccessTokenRequest_TradeInToken *smithy.Schema
-
-var GetDelegatedAccessTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetDelegatedAccessTokenResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetDelegatedAccessTokenResponse_Credentials *smithy.Schema
-
-var GetDelegatedAccessTokenResponse_PackedPolicySize *smithy.Schema
-
-var GetDelegatedAccessTokenResponse_AssumedPrincipal *smithy.Schema
-
-var GetFederationTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetFederationTokenRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetFederationTokenRequest_Name *smithy.Schema
-
-var GetFederationTokenRequest_Policy *smithy.Schema
-
-var GetFederationTokenRequest_PolicyArns *smithy.Schema
-
-var GetFederationTokenRequest_DurationSeconds *smithy.Schema
-
-var GetFederationTokenRequest_Tags *smithy.Schema
-
-var GetFederationTokenRequest_MinimumSessionTokenSize *smithy.Schema
-
-var GetFederationTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetFederationTokenResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetFederationTokenResponse_Credentials *smithy.Schema
-
-var GetFederationTokenResponse_FederatedUser *smithy.Schema
-
-var GetFederationTokenResponse_PackedPolicySize *smithy.Schema
-
-var GetFederationTokenResponse_SessionTokenUtilization *smithy.Schema
-
-var GetFederationTokenResponse_SessionTokenSize *smithy.Schema
-
-var GetSessionTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetSessionTokenRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetSessionTokenRequest_DurationSeconds *smithy.Schema
-
-var GetSessionTokenRequest_SerialNumber *smithy.Schema
-
-var GetSessionTokenRequest_TokenCode *smithy.Schema
-
-var GetSessionTokenRequest_MinimumSessionTokenSize *smithy.Schema
-
-var GetSessionTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetSessionTokenResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetSessionTokenResponse_Credentials *smithy.Schema
-
-var GetSessionTokenResponse_SessionTokenUtilization *smithy.Schema
-
-var GetSessionTokenResponse_SessionTokenSize *smithy.Schema
-
-var GetWebIdentityTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetWebIdentityTokenRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetWebIdentityTokenRequest_Audience *smithy.Schema
-
-var GetWebIdentityTokenRequest_DurationSeconds *smithy.Schema
-
-var GetWebIdentityTokenRequest_SigningAlgorithm *smithy.Schema
-
-var GetWebIdentityTokenRequest_Tags *smithy.Schema
-
-var GetWebIdentityTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sts",
-	Name:      "GetWebIdentityTokenResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetWebIdentityTokenResponse_WebIdentityToken *smithy.Schema
-
-var GetWebIdentityTokenResponse_Expiration *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AssumedRoleUser_AssumedRoleId = AssumedRoleUser.AddMember("AssumedRoleId", _assumedRoleIdType)
-
-	AssumedRoleUser_Arn = AssumedRoleUser.AddMember("Arn", _arnType)
-
-	Credentials_AccessKeyId = Credentials.AddMember("AccessKeyId", _accessKeyIdType)
-
-	Credentials_SecretAccessKey = Credentials.AddMember("SecretAccessKey", _accessKeySecretType)
-
-	Credentials_SessionToken = Credentials.AddMember("SessionToken", _tokenType)
-
-	Credentials_Expiration = Credentials.AddMember("Expiration", _dateType)
-
-	ExpiredTokenException_message = ExpiredTokenException.AddMember("message", _expiredIdentityTokenMessage)
-
-	ExpiredTradeInTokenException_message = ExpiredTradeInTokenException.AddMember("message", _expiredTradeInTokenExceptionMessage)
-
-	FederatedUser_FederatedUserId = FederatedUser.AddMember("FederatedUserId", _federatedIdType)
-
-	FederatedUser_Arn = FederatedUser.AddMember("Arn", _arnType)
-
-	IDPCommunicationErrorException_message = IDPCommunicationErrorException.AddMember("message", _idpCommunicationErrorMessage)
-
-	IDPRejectedClaimException_message = IDPRejectedClaimException.AddMember("message", _idpRejectedClaimMessage)
-
-	InvalidAuthorizationMessageException_message = InvalidAuthorizationMessageException.AddMember("message", _invalidAuthorizationMessage)
-
-	InvalidIdentityTokenException_message = InvalidIdentityTokenException.AddMember("message", _invalidIdentityTokenMessage)
-
-	JWTPayloadSizeExceededException_message = JWTPayloadSizeExceededException.AddMember("message", _JWTPayloadSizeExceededException2)
-
-	MalformedPolicyDocumentException_message = MalformedPolicyDocumentException.AddMember("message", _malformedPolicyDocumentMessage)
-
-	OutboundWebIdentityFederationDisabledException_message = OutboundWebIdentityFederationDisabledException.AddMember("message", _OutboundWebIdentityFederationDisabledException2)
-
-	PackedPolicyTooLargeException_message = PackedPolicyTooLargeException.AddMember("message", _packedPolicyTooLargeMessage)
-
-	PolicyDescriptorType_arn = PolicyDescriptorType.AddMember("arn", _arnType)
-
-	_policyDescriptorListType_member = _policyDescriptorListType.AddMember("member", PolicyDescriptorType)
-
-	ProvidedContext_ProviderArn = ProvidedContext.AddMember("ProviderArn", _arnType)
-
-	ProvidedContext_ContextAssertion = ProvidedContext.AddMember("ContextAssertion", _contextAssertionType)
-
-	_ProvidedContextsListType_member = _ProvidedContextsListType.AddMember("member", ProvidedContext)
-
-	RegionDisabledException_message = RegionDisabledException.AddMember("message", _regionDisabledMessage)
-
-	SessionDurationEscalationException_message = SessionDurationEscalationException.AddMember("message", _SessionDurationEscalationException2)
-
-	Tag_Key = Tag.AddMember("Key", _tagKeyType)
-
-	Tag_Value = Tag.AddMember("Value", _tagValueType)
-
-	_tagKeyListType_member = _tagKeyListType.AddMember("member", _tagKeyType)
-
-	_tagListType_member = _tagListType.AddMember("member", Tag)
-
-	_webIdentityTokenAudienceListType_member = _webIdentityTokenAudienceListType.AddMember("member", _webIdentityTokenAudienceStringType)
-
-	AssumeRoleRequest_RoleArn = AssumeRoleRequest.AddMember("RoleArn", _arnType)
-
-	AssumeRoleRequest_RoleSessionName = AssumeRoleRequest.AddMember("RoleSessionName", _roleSessionNameType)
-
-	AssumeRoleRequest_PolicyArns = AssumeRoleRequest.AddMember("PolicyArns", _policyDescriptorListType)
-
-	AssumeRoleRequest_Policy = AssumeRoleRequest.AddMember("Policy", _unrestrictedSessionPolicyDocumentType)
-
-	AssumeRoleRequest_DurationSeconds = AssumeRoleRequest.AddMember("DurationSeconds", _roleDurationSecondsType)
-
-	AssumeRoleRequest_Tags = AssumeRoleRequest.AddMember("Tags", _tagListType)
-
-	AssumeRoleRequest_TransitiveTagKeys = AssumeRoleRequest.AddMember("TransitiveTagKeys", _tagKeyListType)
-
-	AssumeRoleRequest_ExternalId = AssumeRoleRequest.AddMember("ExternalId", _externalIdType)
-
-	AssumeRoleRequest_SerialNumber = AssumeRoleRequest.AddMember("SerialNumber", _serialNumberType)
-
-	AssumeRoleRequest_TokenCode = AssumeRoleRequest.AddMember("TokenCode", _tokenCodeType)
-
-	AssumeRoleRequest_SourceIdentity = AssumeRoleRequest.AddMember("SourceIdentity", _sourceIdentityType)
-
-	AssumeRoleRequest_ProvidedContexts = AssumeRoleRequest.AddMember("ProvidedContexts", _ProvidedContextsListType)
-
-	AssumeRoleRequest_MinimumSessionTokenSize = AssumeRoleRequest.AddMember("MinimumSessionTokenSize", _minimumSessionTokenSizeType)
-
-	AssumeRoleResponse_Credentials = AssumeRoleResponse.AddMember("Credentials", Credentials)
-
-	AssumeRoleResponse_AssumedRoleUser = AssumeRoleResponse.AddMember("AssumedRoleUser", AssumedRoleUser)
-
-	AssumeRoleResponse_PackedPolicySize = AssumeRoleResponse.AddMember("PackedPolicySize", _nonNegativeIntegerType)
-
-	AssumeRoleResponse_SourceIdentity = AssumeRoleResponse.AddMember("SourceIdentity", _sourceIdentityType)
-
-	AssumeRoleResponse_SessionTokenUtilization = AssumeRoleResponse.AddMember("SessionTokenUtilization", _sessionTokenUtilizationType)
-
-	AssumeRoleResponse_SessionTokenSize = AssumeRoleResponse.AddMember("SessionTokenSize", _sessionTokenSizeType)
-
-	AssumeRoleWithSAMLRequest_RoleArn = AssumeRoleWithSAMLRequest.AddMember("RoleArn", _arnType)
-
-	AssumeRoleWithSAMLRequest_PrincipalArn = AssumeRoleWithSAMLRequest.AddMember("PrincipalArn", _arnType)
-
-	AssumeRoleWithSAMLRequest_SAMLAssertion = AssumeRoleWithSAMLRequest.AddMember("SAMLAssertion", _SAMLAssertionType)
-
-	AssumeRoleWithSAMLRequest_PolicyArns = AssumeRoleWithSAMLRequest.AddMember("PolicyArns", _policyDescriptorListType)
-
-	AssumeRoleWithSAMLRequest_Policy = AssumeRoleWithSAMLRequest.AddMember("Policy", _sessionPolicyDocumentType)
-
-	AssumeRoleWithSAMLRequest_DurationSeconds = AssumeRoleWithSAMLRequest.AddMember("DurationSeconds", _roleDurationSecondsType)
-
-	AssumeRoleWithSAMLRequest_MinimumSessionTokenSize = AssumeRoleWithSAMLRequest.AddMember("MinimumSessionTokenSize", _minimumSessionTokenSizeType)
-
-	AssumeRoleWithSAMLResponse_Credentials = AssumeRoleWithSAMLResponse.AddMember("Credentials", Credentials)
-
-	AssumeRoleWithSAMLResponse_AssumedRoleUser = AssumeRoleWithSAMLResponse.AddMember("AssumedRoleUser", AssumedRoleUser)
-
-	AssumeRoleWithSAMLResponse_PackedPolicySize = AssumeRoleWithSAMLResponse.AddMember("PackedPolicySize", _nonNegativeIntegerType)
-
-	AssumeRoleWithSAMLResponse_Subject = AssumeRoleWithSAMLResponse.AddMember("Subject", _Subject)
-
-	AssumeRoleWithSAMLResponse_SubjectType = AssumeRoleWithSAMLResponse.AddMember("SubjectType", _SubjectType)
-
-	AssumeRoleWithSAMLResponse_Issuer = AssumeRoleWithSAMLResponse.AddMember("Issuer", _Issuer)
-
-	AssumeRoleWithSAMLResponse_Audience = AssumeRoleWithSAMLResponse.AddMember("Audience", _Audience)
-
-	AssumeRoleWithSAMLResponse_NameQualifier = AssumeRoleWithSAMLResponse.AddMember("NameQualifier", _NameQualifier)
-
-	AssumeRoleWithSAMLResponse_SourceIdentity = AssumeRoleWithSAMLResponse.AddMember("SourceIdentity", _sourceIdentityType)
-
-	AssumeRoleWithSAMLResponse_SessionTokenUtilization = AssumeRoleWithSAMLResponse.AddMember("SessionTokenUtilization", _sessionTokenUtilizationType)
-
-	AssumeRoleWithSAMLResponse_SessionTokenSize = AssumeRoleWithSAMLResponse.AddMember("SessionTokenSize", _sessionTokenSizeType)
-
-	AssumeRoleWithWebIdentityRequest_RoleArn = AssumeRoleWithWebIdentityRequest.AddMember("RoleArn", _arnType)
-
-	AssumeRoleWithWebIdentityRequest_RoleSessionName = AssumeRoleWithWebIdentityRequest.AddMember("RoleSessionName", _roleSessionNameType)
-
-	AssumeRoleWithWebIdentityRequest_WebIdentityToken = AssumeRoleWithWebIdentityRequest.AddMember("WebIdentityToken", _clientTokenType)
-
-	AssumeRoleWithWebIdentityRequest_ProviderId = AssumeRoleWithWebIdentityRequest.AddMember("ProviderId", _urlType)
-
-	AssumeRoleWithWebIdentityRequest_PolicyArns = AssumeRoleWithWebIdentityRequest.AddMember("PolicyArns", _policyDescriptorListType)
-
-	AssumeRoleWithWebIdentityRequest_Policy = AssumeRoleWithWebIdentityRequest.AddMember("Policy", _sessionPolicyDocumentType)
-
-	AssumeRoleWithWebIdentityRequest_DurationSeconds = AssumeRoleWithWebIdentityRequest.AddMember("DurationSeconds", _roleDurationSecondsType)
-
-	AssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize = AssumeRoleWithWebIdentityRequest.AddMember("MinimumSessionTokenSize", _minimumSessionTokenSizeType)
-
-	AssumeRoleWithWebIdentityResponse_Credentials = AssumeRoleWithWebIdentityResponse.AddMember("Credentials", Credentials)
-
-	AssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken = AssumeRoleWithWebIdentityResponse.AddMember("SubjectFromWebIdentityToken", _webIdentitySubjectType)
-
-	AssumeRoleWithWebIdentityResponse_AssumedRoleUser = AssumeRoleWithWebIdentityResponse.AddMember("AssumedRoleUser", AssumedRoleUser)
-
-	AssumeRoleWithWebIdentityResponse_PackedPolicySize = AssumeRoleWithWebIdentityResponse.AddMember("PackedPolicySize", _nonNegativeIntegerType)
-
-	AssumeRoleWithWebIdentityResponse_Provider = AssumeRoleWithWebIdentityResponse.AddMember("Provider", _Issuer)
-
-	AssumeRoleWithWebIdentityResponse_Audience = AssumeRoleWithWebIdentityResponse.AddMember("Audience", _Audience)
-
-	AssumeRoleWithWebIdentityResponse_SourceIdentity = AssumeRoleWithWebIdentityResponse.AddMember("SourceIdentity", _sourceIdentityType)
-
-	AssumeRoleWithWebIdentityResponse_SessionTokenUtilization = AssumeRoleWithWebIdentityResponse.AddMember("SessionTokenUtilization", _sessionTokenUtilizationType)
-
-	AssumeRoleWithWebIdentityResponse_SessionTokenSize = AssumeRoleWithWebIdentityResponse.AddMember("SessionTokenSize", _sessionTokenSizeType)
-
-	AssumeRootRequest_TargetPrincipal = AssumeRootRequest.AddMember("TargetPrincipal", _TargetPrincipalType)
-
-	AssumeRootRequest_TaskPolicyArn = AssumeRootRequest.AddMember("TaskPolicyArn", PolicyDescriptorType)
-
-	AssumeRootRequest_DurationSeconds = AssumeRootRequest.AddMember("DurationSeconds", _RootDurationSecondsType)
-
-	AssumeRootRequest_MinimumSessionTokenSize = AssumeRootRequest.AddMember("MinimumSessionTokenSize", _minimumSessionTokenSizeType)
-
-	AssumeRootResponse_Credentials = AssumeRootResponse.AddMember("Credentials", Credentials)
-
-	AssumeRootResponse_SourceIdentity = AssumeRootResponse.AddMember("SourceIdentity", _sourceIdentityType)
-
-	AssumeRootResponse_SessionTokenUtilization = AssumeRootResponse.AddMember("SessionTokenUtilization", _sessionTokenUtilizationType)
-
-	AssumeRootResponse_SessionTokenSize = AssumeRootResponse.AddMember("SessionTokenSize", _sessionTokenSizeType)
-
-	DecodeAuthorizationMessageRequest_EncodedMessage = DecodeAuthorizationMessageRequest.AddMember("EncodedMessage", _encodedMessageType)
-
-	DecodeAuthorizationMessageResponse_DecodedMessage = DecodeAuthorizationMessageResponse.AddMember("DecodedMessage", _decodedMessageType)
-
-	GetAccessKeyInfoRequest_AccessKeyId = GetAccessKeyInfoRequest.AddMember("AccessKeyId", _accessKeyIdType)
-
-	GetAccessKeyInfoResponse_Account = GetAccessKeyInfoResponse.AddMember("Account", _accountType)
-
-	GetCallerIdentityResponse_UserId = GetCallerIdentityResponse.AddMember("UserId", _userIdType)
-
-	GetCallerIdentityResponse_Account = GetCallerIdentityResponse.AddMember("Account", _accountType)
-
-	GetCallerIdentityResponse_Arn = GetCallerIdentityResponse.AddMember("Arn", _arnType)
-
-	GetDelegatedAccessTokenRequest_TradeInToken = GetDelegatedAccessTokenRequest.AddMember("TradeInToken", _tradeInTokenType)
-
-	GetDelegatedAccessTokenResponse_Credentials = GetDelegatedAccessTokenResponse.AddMember("Credentials", Credentials)
-
-	GetDelegatedAccessTokenResponse_PackedPolicySize = GetDelegatedAccessTokenResponse.AddMember("PackedPolicySize", _nonNegativeIntegerType)
-
-	GetDelegatedAccessTokenResponse_AssumedPrincipal = GetDelegatedAccessTokenResponse.AddMember("AssumedPrincipal", _arnType)
-
-	GetFederationTokenRequest_Name = GetFederationTokenRequest.AddMember("Name", _userNameType)
-
-	GetFederationTokenRequest_Policy = GetFederationTokenRequest.AddMember("Policy", _sessionPolicyDocumentType)
-
-	GetFederationTokenRequest_PolicyArns = GetFederationTokenRequest.AddMember("PolicyArns", _policyDescriptorListType)
-
-	GetFederationTokenRequest_DurationSeconds = GetFederationTokenRequest.AddMember("DurationSeconds", _durationSecondsType)
-
-	GetFederationTokenRequest_Tags = GetFederationTokenRequest.AddMember("Tags", _tagListType)
-
-	GetFederationTokenRequest_MinimumSessionTokenSize = GetFederationTokenRequest.AddMember("MinimumSessionTokenSize", _minimumSessionTokenSizeType)
-
-	GetFederationTokenResponse_Credentials = GetFederationTokenResponse.AddMember("Credentials", Credentials)
-
-	GetFederationTokenResponse_FederatedUser = GetFederationTokenResponse.AddMember("FederatedUser", FederatedUser)
-
-	GetFederationTokenResponse_PackedPolicySize = GetFederationTokenResponse.AddMember("PackedPolicySize", _nonNegativeIntegerType)
-
-	GetFederationTokenResponse_SessionTokenUtilization = GetFederationTokenResponse.AddMember("SessionTokenUtilization", _sessionTokenUtilizationType)
-
-	GetFederationTokenResponse_SessionTokenSize = GetFederationTokenResponse.AddMember("SessionTokenSize", _sessionTokenSizeType)
-
-	GetSessionTokenRequest_DurationSeconds = GetSessionTokenRequest.AddMember("DurationSeconds", _durationSecondsType)
-
-	GetSessionTokenRequest_SerialNumber = GetSessionTokenRequest.AddMember("SerialNumber", _serialNumberType)
-
-	GetSessionTokenRequest_TokenCode = GetSessionTokenRequest.AddMember("TokenCode", _tokenCodeType)
-
-	GetSessionTokenRequest_MinimumSessionTokenSize = GetSessionTokenRequest.AddMember("MinimumSessionTokenSize", _minimumSessionTokenSizeType)
-
-	GetSessionTokenResponse_Credentials = GetSessionTokenResponse.AddMember("Credentials", Credentials)
-
-	GetSessionTokenResponse_SessionTokenUtilization = GetSessionTokenResponse.AddMember("SessionTokenUtilization", _sessionTokenUtilizationType)
-
-	GetSessionTokenResponse_SessionTokenSize = GetSessionTokenResponse.AddMember("SessionTokenSize", _sessionTokenSizeType)
-
-	GetWebIdentityTokenRequest_Audience = GetWebIdentityTokenRequest.AddMember("Audience", _webIdentityTokenAudienceListType)
-
-	GetWebIdentityTokenRequest_DurationSeconds = GetWebIdentityTokenRequest.AddMember("DurationSeconds", _webIdentityTokenDurationSecondsType)
-
-	GetWebIdentityTokenRequest_SigningAlgorithm = GetWebIdentityTokenRequest.AddMember("SigningAlgorithm", _jwtAlgorithmType)
-
-	GetWebIdentityTokenRequest_Tags = GetWebIdentityTokenRequest.AddMember("Tags", _tagListType)
-
-	GetWebIdentityTokenResponse_WebIdentityToken = GetWebIdentityTokenResponse.AddMember("WebIdentityToken", _webIdentityTokenType)
-
-	GetWebIdentityTokenResponse_Expiration = GetWebIdentityTokenResponse.AddMember("Expiration", _dateType)
-
-}
+var (
+	eAssumeRole                                                    smithy.SchemaExtensions
+	eAssumeRoleWithSAML                                            smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentity                                     smithy.SchemaExtensions
+	eAssumeRoot                                                    smithy.SchemaExtensions
+	eDecodeAuthorizationMessage                                    smithy.SchemaExtensions
+	eGetAccessKeyInfo                                              smithy.SchemaExtensions
+	eGetCallerIdentity                                             smithy.SchemaExtensions
+	eGetDelegatedAccessToken                                       smithy.SchemaExtensions
+	eGetFederationToken                                            smithy.SchemaExtensions
+	eGetSessionToken                                               smithy.SchemaExtensions
+	eGetWebIdentityToken                                           smithy.SchemaExtensions
+	e_AWSSecurityTokenServiceV20110615                             smithy.SchemaExtensions
+	e_accessKeyIdType                                              smithy.SchemaExtensions
+	e_accessKeySecretType                                          smithy.SchemaExtensions
+	e_accountType                                                  smithy.SchemaExtensions
+	e_arnType                                                      smithy.SchemaExtensions
+	e_assumedRoleIdType                                            smithy.SchemaExtensions
+	eAssumedRoleUser                                               smithy.SchemaExtensions
+	eAssumedRoleUser_AssumedRoleId                                 smithy.SchemaExtensions
+	eAssumedRoleUser_Arn                                           smithy.SchemaExtensions
+	e_Audience                                                     smithy.SchemaExtensions
+	e_clientTokenType                                              smithy.SchemaExtensions
+	e_contextAssertionType                                         smithy.SchemaExtensions
+	eCredentials                                                   smithy.SchemaExtensions
+	eCredentials_AccessKeyId                                       smithy.SchemaExtensions
+	eCredentials_SecretAccessKey                                   smithy.SchemaExtensions
+	eCredentials_SessionToken                                      smithy.SchemaExtensions
+	eCredentials_Expiration                                        smithy.SchemaExtensions
+	e_dateType                                                     smithy.SchemaExtensions
+	e_decodedMessageType                                           smithy.SchemaExtensions
+	e_durationSecondsType                                          smithy.SchemaExtensions
+	e_encodedMessageType                                           smithy.SchemaExtensions
+	e_expiredIdentityTokenMessage                                  smithy.SchemaExtensions
+	eExpiredTokenException                                         smithy.SchemaExtensions
+	eExpiredTokenException_message                                 smithy.SchemaExtensions
+	eExpiredTradeInTokenException                                  smithy.SchemaExtensions
+	eExpiredTradeInTokenException_message                          smithy.SchemaExtensions
+	e_expiredTradeInTokenExceptionMessage                          smithy.SchemaExtensions
+	e_externalIdType                                               smithy.SchemaExtensions
+	e_federatedIdType                                              smithy.SchemaExtensions
+	eFederatedUser                                                 smithy.SchemaExtensions
+	eFederatedUser_FederatedUserId                                 smithy.SchemaExtensions
+	eFederatedUser_Arn                                             smithy.SchemaExtensions
+	eIDPCommunicationErrorException                                smithy.SchemaExtensions
+	eIDPCommunicationErrorException_message                        smithy.SchemaExtensions
+	e_idpCommunicationErrorMessage                                 smithy.SchemaExtensions
+	eIDPRejectedClaimException                                     smithy.SchemaExtensions
+	eIDPRejectedClaimException_message                             smithy.SchemaExtensions
+	e_idpRejectedClaimMessage                                      smithy.SchemaExtensions
+	e_invalidAuthorizationMessage                                  smithy.SchemaExtensions
+	eInvalidAuthorizationMessageException                          smithy.SchemaExtensions
+	eInvalidAuthorizationMessageException_message                  smithy.SchemaExtensions
+	eInvalidIdentityTokenException                                 smithy.SchemaExtensions
+	eInvalidIdentityTokenException_message                         smithy.SchemaExtensions
+	e_invalidIdentityTokenMessage                                  smithy.SchemaExtensions
+	e_Issuer                                                       smithy.SchemaExtensions
+	e_jwtAlgorithmType                                             smithy.SchemaExtensions
+	eJWTPayloadSizeExceededException                               smithy.SchemaExtensions
+	eJWTPayloadSizeExceededException_message                       smithy.SchemaExtensions
+	e_JWTPayloadSizeExceededException2                             smithy.SchemaExtensions
+	eMalformedPolicyDocumentException                              smithy.SchemaExtensions
+	eMalformedPolicyDocumentException_message                      smithy.SchemaExtensions
+	e_malformedPolicyDocumentMessage                               smithy.SchemaExtensions
+	e_minimumSessionTokenSizeType                                  smithy.SchemaExtensions
+	e_NameQualifier                                                smithy.SchemaExtensions
+	e_nonNegativeIntegerType                                       smithy.SchemaExtensions
+	eOutboundWebIdentityFederationDisabledException                smithy.SchemaExtensions
+	eOutboundWebIdentityFederationDisabledException_message        smithy.SchemaExtensions
+	e_OutboundWebIdentityFederationDisabledException2              smithy.SchemaExtensions
+	ePackedPolicyTooLargeException                                 smithy.SchemaExtensions
+	ePackedPolicyTooLargeException_message                         smithy.SchemaExtensions
+	e_packedPolicyTooLargeMessage                                  smithy.SchemaExtensions
+	e_policyDescriptorListType                                     smithy.SchemaExtensions
+	e_policyDescriptorListType_member                              smithy.SchemaExtensions
+	ePolicyDescriptorType                                          smithy.SchemaExtensions
+	ePolicyDescriptorType_arn                                      smithy.SchemaExtensions
+	eProvidedContext                                               smithy.SchemaExtensions
+	eProvidedContext_ProviderArn                                   smithy.SchemaExtensions
+	eProvidedContext_ContextAssertion                              smithy.SchemaExtensions
+	e_ProvidedContextsListType                                     smithy.SchemaExtensions
+	e_ProvidedContextsListType_member                              smithy.SchemaExtensions
+	eRegionDisabledException                                       smithy.SchemaExtensions
+	eRegionDisabledException_message                               smithy.SchemaExtensions
+	e_regionDisabledMessage                                        smithy.SchemaExtensions
+	e_roleDurationSecondsType                                      smithy.SchemaExtensions
+	e_roleSessionNameType                                          smithy.SchemaExtensions
+	e_RootDurationSecondsType                                      smithy.SchemaExtensions
+	e_SAMLAssertionType                                            smithy.SchemaExtensions
+	e_serialNumberType                                             smithy.SchemaExtensions
+	eSessionDurationEscalationException                            smithy.SchemaExtensions
+	eSessionDurationEscalationException_message                    smithy.SchemaExtensions
+	e_SessionDurationEscalationException2                          smithy.SchemaExtensions
+	e_sessionPolicyDocumentType                                    smithy.SchemaExtensions
+	e_sessionTokenSizeType                                         smithy.SchemaExtensions
+	e_sessionTokenUtilizationType                                  smithy.SchemaExtensions
+	e_sourceIdentityType                                           smithy.SchemaExtensions
+	e_Subject                                                      smithy.SchemaExtensions
+	e_SubjectType                                                  smithy.SchemaExtensions
+	eTag                                                           smithy.SchemaExtensions
+	eTag_Key                                                       smithy.SchemaExtensions
+	eTag_Value                                                     smithy.SchemaExtensions
+	e_tagKeyListType                                               smithy.SchemaExtensions
+	e_tagKeyListType_member                                        smithy.SchemaExtensions
+	e_tagKeyType                                                   smithy.SchemaExtensions
+	e_tagListType                                                  smithy.SchemaExtensions
+	e_tagListType_member                                           smithy.SchemaExtensions
+	e_tagValueType                                                 smithy.SchemaExtensions
+	e_TargetPrincipalType                                          smithy.SchemaExtensions
+	e_tokenCodeType                                                smithy.SchemaExtensions
+	e_tokenType                                                    smithy.SchemaExtensions
+	e_tradeInTokenType                                             smithy.SchemaExtensions
+	e_unrestrictedSessionPolicyDocumentType                        smithy.SchemaExtensions
+	e_urlType                                                      smithy.SchemaExtensions
+	e_userIdType                                                   smithy.SchemaExtensions
+	e_userNameType                                                 smithy.SchemaExtensions
+	e_webIdentitySubjectType                                       smithy.SchemaExtensions
+	e_webIdentityTokenAudienceListType                             smithy.SchemaExtensions
+	e_webIdentityTokenAudienceListType_member                      smithy.SchemaExtensions
+	e_webIdentityTokenAudienceStringType                           smithy.SchemaExtensions
+	e_webIdentityTokenDurationSecondsType                          smithy.SchemaExtensions
+	e_webIdentityTokenType                                         smithy.SchemaExtensions
+	eAssumeRoleRequest                                             smithy.SchemaExtensions
+	eAssumeRoleRequest_RoleArn                                     smithy.SchemaExtensions
+	eAssumeRoleRequest_RoleSessionName                             smithy.SchemaExtensions
+	eAssumeRoleRequest_PolicyArns                                  smithy.SchemaExtensions
+	eAssumeRoleRequest_Policy                                      smithy.SchemaExtensions
+	eAssumeRoleRequest_DurationSeconds                             smithy.SchemaExtensions
+	eAssumeRoleRequest_Tags                                        smithy.SchemaExtensions
+	eAssumeRoleRequest_TransitiveTagKeys                           smithy.SchemaExtensions
+	eAssumeRoleRequest_ExternalId                                  smithy.SchemaExtensions
+	eAssumeRoleRequest_SerialNumber                                smithy.SchemaExtensions
+	eAssumeRoleRequest_TokenCode                                   smithy.SchemaExtensions
+	eAssumeRoleRequest_SourceIdentity                              smithy.SchemaExtensions
+	eAssumeRoleRequest_ProvidedContexts                            smithy.SchemaExtensions
+	eAssumeRoleRequest_MinimumSessionTokenSize                     smithy.SchemaExtensions
+	eAssumeRoleResponse                                            smithy.SchemaExtensions
+	eAssumeRoleResponse_Credentials                                smithy.SchemaExtensions
+	eAssumeRoleResponse_AssumedRoleUser                            smithy.SchemaExtensions
+	eAssumeRoleResponse_PackedPolicySize                           smithy.SchemaExtensions
+	eAssumeRoleResponse_SourceIdentity                             smithy.SchemaExtensions
+	eAssumeRoleResponse_SessionTokenUtilization                    smithy.SchemaExtensions
+	eAssumeRoleResponse_SessionTokenSize                           smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest                                     smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest_RoleArn                             smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest_PrincipalArn                        smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest_SAMLAssertion                       smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest_PolicyArns                          smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest_Policy                              smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest_DurationSeconds                     smithy.SchemaExtensions
+	eAssumeRoleWithSAMLRequest_MinimumSessionTokenSize             smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse                                    smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_Credentials                        smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_AssumedRoleUser                    smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_PackedPolicySize                   smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_Subject                            smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_SubjectType                        smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_Issuer                             smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_Audience                           smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_NameQualifier                      smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_SourceIdentity                     smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_SessionTokenUtilization            smithy.SchemaExtensions
+	eAssumeRoleWithSAMLResponse_SessionTokenSize                   smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest                              smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_RoleArn                      smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_RoleSessionName              smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_WebIdentityToken             smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_ProviderId                   smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_PolicyArns                   smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_Policy                       smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_DurationSeconds              smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize      smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse                             smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_Credentials                 smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_AssumedRoleUser             smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_PackedPolicySize            smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_Provider                    smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_Audience                    smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_SourceIdentity              smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_SessionTokenUtilization     smithy.SchemaExtensions
+	eAssumeRoleWithWebIdentityResponse_SessionTokenSize            smithy.SchemaExtensions
+	eAssumeRootRequest                                             smithy.SchemaExtensions
+	eAssumeRootRequest_TargetPrincipal                             smithy.SchemaExtensions
+	eAssumeRootRequest_TaskPolicyArn                               smithy.SchemaExtensions
+	eAssumeRootRequest_DurationSeconds                             smithy.SchemaExtensions
+	eAssumeRootRequest_MinimumSessionTokenSize                     smithy.SchemaExtensions
+	eAssumeRootResponse                                            smithy.SchemaExtensions
+	eAssumeRootResponse_Credentials                                smithy.SchemaExtensions
+	eAssumeRootResponse_SourceIdentity                             smithy.SchemaExtensions
+	eAssumeRootResponse_SessionTokenUtilization                    smithy.SchemaExtensions
+	eAssumeRootResponse_SessionTokenSize                           smithy.SchemaExtensions
+	eDecodeAuthorizationMessageRequest                             smithy.SchemaExtensions
+	eDecodeAuthorizationMessageRequest_EncodedMessage              smithy.SchemaExtensions
+	eDecodeAuthorizationMessageResponse                            smithy.SchemaExtensions
+	eDecodeAuthorizationMessageResponse_DecodedMessage             smithy.SchemaExtensions
+	eGetAccessKeyInfoRequest                                       smithy.SchemaExtensions
+	eGetAccessKeyInfoRequest_AccessKeyId                           smithy.SchemaExtensions
+	eGetAccessKeyInfoResponse                                      smithy.SchemaExtensions
+	eGetAccessKeyInfoResponse_Account                              smithy.SchemaExtensions
+	eGetCallerIdentityRequest                                      smithy.SchemaExtensions
+	eGetCallerIdentityResponse                                     smithy.SchemaExtensions
+	eGetCallerIdentityResponse_UserId                              smithy.SchemaExtensions
+	eGetCallerIdentityResponse_Account                             smithy.SchemaExtensions
+	eGetCallerIdentityResponse_Arn                                 smithy.SchemaExtensions
+	eGetDelegatedAccessTokenRequest                                smithy.SchemaExtensions
+	eGetDelegatedAccessTokenRequest_TradeInToken                   smithy.SchemaExtensions
+	eGetDelegatedAccessTokenResponse                               smithy.SchemaExtensions
+	eGetDelegatedAccessTokenResponse_Credentials                   smithy.SchemaExtensions
+	eGetDelegatedAccessTokenResponse_PackedPolicySize              smithy.SchemaExtensions
+	eGetDelegatedAccessTokenResponse_AssumedPrincipal              smithy.SchemaExtensions
+	eGetFederationTokenRequest                                     smithy.SchemaExtensions
+	eGetFederationTokenRequest_Name                                smithy.SchemaExtensions
+	eGetFederationTokenRequest_Policy                              smithy.SchemaExtensions
+	eGetFederationTokenRequest_PolicyArns                          smithy.SchemaExtensions
+	eGetFederationTokenRequest_DurationSeconds                     smithy.SchemaExtensions
+	eGetFederationTokenRequest_Tags                                smithy.SchemaExtensions
+	eGetFederationTokenRequest_MinimumSessionTokenSize             smithy.SchemaExtensions
+	eGetFederationTokenResponse                                    smithy.SchemaExtensions
+	eGetFederationTokenResponse_Credentials                        smithy.SchemaExtensions
+	eGetFederationTokenResponse_FederatedUser                      smithy.SchemaExtensions
+	eGetFederationTokenResponse_PackedPolicySize                   smithy.SchemaExtensions
+	eGetFederationTokenResponse_SessionTokenUtilization            smithy.SchemaExtensions
+	eGetFederationTokenResponse_SessionTokenSize                   smithy.SchemaExtensions
+	eGetSessionTokenRequest                                        smithy.SchemaExtensions
+	eGetSessionTokenRequest_DurationSeconds                        smithy.SchemaExtensions
+	eGetSessionTokenRequest_SerialNumber                           smithy.SchemaExtensions
+	eGetSessionTokenRequest_TokenCode                              smithy.SchemaExtensions
+	eGetSessionTokenRequest_MinimumSessionTokenSize                smithy.SchemaExtensions
+	eGetSessionTokenResponse                                       smithy.SchemaExtensions
+	eGetSessionTokenResponse_Credentials                           smithy.SchemaExtensions
+	eGetSessionTokenResponse_SessionTokenUtilization               smithy.SchemaExtensions
+	eGetSessionTokenResponse_SessionTokenSize                      smithy.SchemaExtensions
+	eGetWebIdentityTokenRequest                                    smithy.SchemaExtensions
+	eGetWebIdentityTokenRequest_Audience                           smithy.SchemaExtensions
+	eGetWebIdentityTokenRequest_DurationSeconds                    smithy.SchemaExtensions
+	eGetWebIdentityTokenRequest_SigningAlgorithm                   smithy.SchemaExtensions
+	eGetWebIdentityTokenRequest_Tags                               smithy.SchemaExtensions
+	eGetWebIdentityTokenResponse                                   smithy.SchemaExtensions
+	eGetWebIdentityTokenResponse_WebIdentityToken                  smithy.SchemaExtensions
+	eGetWebIdentityTokenResponse_Expiration                        smithy.SchemaExtensions
+)
+
+var (
+	iAssumeRole                                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRole"}
+	iAssumeRoleWithSAML                               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleWithSAML"}
+	iAssumeRoleWithWebIdentity                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleWithWebIdentity"}
+	iAssumeRoot                                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoot"}
+	iDecodeAuthorizationMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "DecodeAuthorizationMessage"}
+	iGetAccessKeyInfo                                 = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetAccessKeyInfo"}
+	iGetCallerIdentity                                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetCallerIdentity"}
+	iGetDelegatedAccessToken                          = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetDelegatedAccessToken"}
+	iGetFederationToken                               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetFederationToken"}
+	iGetSessionToken                                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetSessionToken"}
+	iGetWebIdentityToken                              = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetWebIdentityToken"}
+	i_AWSSecurityTokenServiceV20110615                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AWSSecurityTokenServiceV20110615"}
+	i_accessKeyIdType                                 = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "accessKeyIdType"}
+	i_accessKeySecretType                             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "accessKeySecretType"}
+	i_accountType                                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "accountType"}
+	i_arnType                                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "arnType"}
+	i_assumedRoleIdType                               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "assumedRoleIdType"}
+	iAssumedRoleUser                                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumedRoleUser"}
+	i_Audience                                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "Audience"}
+	i_clientTokenType                                 = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "clientTokenType"}
+	i_contextAssertionType                            = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "contextAssertionType"}
+	iCredentials                                      = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "Credentials"}
+	i_dateType                                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "dateType"}
+	i_decodedMessageType                              = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "decodedMessageType"}
+	i_durationSecondsType                             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "durationSecondsType"}
+	i_encodedMessageType                              = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "encodedMessageType"}
+	i_expiredIdentityTokenMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "expiredIdentityTokenMessage"}
+	iExpiredTokenException                            = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "ExpiredTokenException"}
+	iExpiredTradeInTokenException                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "ExpiredTradeInTokenException"}
+	i_expiredTradeInTokenExceptionMessage             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "expiredTradeInTokenExceptionMessage"}
+	i_externalIdType                                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "externalIdType"}
+	i_federatedIdType                                 = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "federatedIdType"}
+	iFederatedUser                                    = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "FederatedUser"}
+	iIDPCommunicationErrorException                   = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "IDPCommunicationErrorException"}
+	i_idpCommunicationErrorMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "idpCommunicationErrorMessage"}
+	iIDPRejectedClaimException                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "IDPRejectedClaimException"}
+	i_idpRejectedClaimMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "idpRejectedClaimMessage"}
+	i_invalidAuthorizationMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "invalidAuthorizationMessage"}
+	iInvalidAuthorizationMessageException             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "InvalidAuthorizationMessageException"}
+	iInvalidIdentityTokenException                    = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "InvalidIdentityTokenException"}
+	i_invalidIdentityTokenMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "invalidIdentityTokenMessage"}
+	i_Issuer                                          = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "Issuer"}
+	i_jwtAlgorithmType                                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "jwtAlgorithmType"}
+	iJWTPayloadSizeExceededException                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "JWTPayloadSizeExceededException"}
+	i_JWTPayloadSizeExceededException2                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "JWTPayloadSizeExceededException2"}
+	iMalformedPolicyDocumentException                 = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "MalformedPolicyDocumentException"}
+	i_malformedPolicyDocumentMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "malformedPolicyDocumentMessage"}
+	i_minimumSessionTokenSizeType                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "minimumSessionTokenSizeType"}
+	i_NameQualifier                                   = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "NameQualifier"}
+	i_nonNegativeIntegerType                          = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "nonNegativeIntegerType"}
+	iOutboundWebIdentityFederationDisabledException   = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "OutboundWebIdentityFederationDisabledException"}
+	i_OutboundWebIdentityFederationDisabledException2 = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "OutboundWebIdentityFederationDisabledException2"}
+	iPackedPolicyTooLargeException                    = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "PackedPolicyTooLargeException"}
+	i_packedPolicyTooLargeMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "packedPolicyTooLargeMessage"}
+	i_policyDescriptorListType                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "policyDescriptorListType"}
+	iPolicyDescriptorType                             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "PolicyDescriptorType"}
+	iProvidedContext                                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "ProvidedContext"}
+	i_ProvidedContextsListType                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "ProvidedContextsListType"}
+	iRegionDisabledException                          = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "RegionDisabledException"}
+	i_regionDisabledMessage                           = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "regionDisabledMessage"}
+	i_roleDurationSecondsType                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "roleDurationSecondsType"}
+	i_roleSessionNameType                             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "roleSessionNameType"}
+	i_RootDurationSecondsType                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "RootDurationSecondsType"}
+	i_SAMLAssertionType                               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "SAMLAssertionType"}
+	i_serialNumberType                                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "serialNumberType"}
+	iSessionDurationEscalationException               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "SessionDurationEscalationException"}
+	i_SessionDurationEscalationException2             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "SessionDurationEscalationException2"}
+	i_sessionPolicyDocumentType                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "sessionPolicyDocumentType"}
+	i_sessionTokenSizeType                            = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "sessionTokenSizeType"}
+	i_sessionTokenUtilizationType                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "sessionTokenUtilizationType"}
+	i_sourceIdentityType                              = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "sourceIdentityType"}
+	i_Subject                                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "Subject"}
+	i_SubjectType                                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "SubjectType"}
+	iTag                                              = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "Tag"}
+	i_tagKeyListType                                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "tagKeyListType"}
+	i_tagKeyType                                      = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "tagKeyType"}
+	i_tagListType                                     = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "tagListType"}
+	i_tagValueType                                    = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "tagValueType"}
+	i_TargetPrincipalType                             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "TargetPrincipalType"}
+	i_tokenCodeType                                   = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "tokenCodeType"}
+	i_tokenType                                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "tokenType"}
+	i_tradeInTokenType                                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "tradeInTokenType"}
+	i_unrestrictedSessionPolicyDocumentType           = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "unrestrictedSessionPolicyDocumentType"}
+	i_urlType                                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "urlType"}
+	i_userIdType                                      = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "userIdType"}
+	i_userNameType                                    = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "userNameType"}
+	i_webIdentitySubjectType                          = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "webIdentitySubjectType"}
+	i_webIdentityTokenAudienceListType                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "webIdentityTokenAudienceListType"}
+	i_webIdentityTokenAudienceStringType              = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "webIdentityTokenAudienceStringType"}
+	i_webIdentityTokenDurationSecondsType             = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "webIdentityTokenDurationSecondsType"}
+	i_webIdentityTokenType                            = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "webIdentityTokenType"}
+	iAssumeRoleRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleRequest"}
+	iAssumeRoleResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleResponse"}
+	iAssumeRoleWithSAMLRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleWithSAMLRequest"}
+	iAssumeRoleWithSAMLResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleWithSAMLResponse"}
+	iAssumeRoleWithWebIdentityRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleWithWebIdentityRequest"}
+	iAssumeRoleWithWebIdentityResponse                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRoleWithWebIdentityResponse"}
+	iAssumeRootRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRootRequest"}
+	iAssumeRootResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "AssumeRootResponse"}
+	iDecodeAuthorizationMessageRequest                = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "DecodeAuthorizationMessageRequest"}
+	iDecodeAuthorizationMessageResponse               = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "DecodeAuthorizationMessageResponse"}
+	iGetAccessKeyInfoRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetAccessKeyInfoRequest"}
+	iGetAccessKeyInfoResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetAccessKeyInfoResponse"}
+	iGetCallerIdentityRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetCallerIdentityRequest"}
+	iGetCallerIdentityResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetCallerIdentityResponse"}
+	iGetDelegatedAccessTokenRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetDelegatedAccessTokenRequest"}
+	iGetDelegatedAccessTokenResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetDelegatedAccessTokenResponse"}
+	iGetFederationTokenRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetFederationTokenRequest"}
+	iGetFederationTokenResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetFederationTokenResponse"}
+	iGetSessionTokenRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetSessionTokenRequest"}
+	iGetSessionTokenResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetSessionTokenResponse"}
+	iGetWebIdentityTokenRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetWebIdentityTokenRequest"}
+	iGetWebIdentityTokenResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.sts", Name: "GetWebIdentityTokenResponse"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://sts.amazonaws.com/doc/2011-06-15/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ExpiredTokenException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ExpiredTradeInTokenException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "IDPCommunicationError",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "IDPRejectedClaim",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidAuthorizationMessageException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidIdentityToken",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "JWTPayloadSizeExceededException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "MalformedPolicyDocument",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OutboundWebIdentityFederationDisabledException",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PackedPolicyTooLarge",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "RegionDisabledException",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SessionDurationEscalationException",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAssumedRoleUser = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumedRoleUser_AssumedRoleId, &sAssumedRoleUser_Arn}}
+var mCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sCredentials_AccessKeyId, &sCredentials_SecretAccessKey, &sCredentials_SessionToken, &sCredentials_Expiration}}
+var mExpiredTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiredTokenException_message}}
+var mExpiredTradeInTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiredTradeInTokenException_message}}
+var mFederatedUser = smithy.SchemaMembers{List: []*smithy.Schema{&sFederatedUser_FederatedUserId, &sFederatedUser_Arn}}
+var mIDPCommunicationErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sIDPCommunicationErrorException_message}}
+var mIDPRejectedClaimException = smithy.SchemaMembers{List: []*smithy.Schema{&sIDPRejectedClaimException_message}}
+var mInvalidAuthorizationMessageException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidAuthorizationMessageException_message}}
+var mInvalidIdentityTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidIdentityTokenException_message}}
+var mJWTPayloadSizeExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sJWTPayloadSizeExceededException_message}}
+var mMalformedPolicyDocumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sMalformedPolicyDocumentException_message}}
+var mOutboundWebIdentityFederationDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sOutboundWebIdentityFederationDisabledException_message}}
+var mPackedPolicyTooLargeException = smithy.SchemaMembers{List: []*smithy.Schema{&sPackedPolicyTooLargeException_message}}
+var m_policyDescriptorListType = smithy.SchemaMembers{List: []*smithy.Schema{&s_policyDescriptorListType_member}}
+var mPolicyDescriptorType = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyDescriptorType_arn}}
+var mProvidedContext = smithy.SchemaMembers{List: []*smithy.Schema{&sProvidedContext_ProviderArn, &sProvidedContext_ContextAssertion}}
+var m_ProvidedContextsListType = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProvidedContextsListType_member}}
+var mRegionDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionDisabledException_message}}
+var mSessionDurationEscalationException = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionDurationEscalationException_message}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_tagKeyListType = smithy.SchemaMembers{List: []*smithy.Schema{&s_tagKeyListType_member}}
+var m_tagListType = smithy.SchemaMembers{List: []*smithy.Schema{&s_tagListType_member}}
+var m_webIdentityTokenAudienceListType = smithy.SchemaMembers{List: []*smithy.Schema{&s_webIdentityTokenAudienceListType_member}}
+var mAssumeRoleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleRequest_RoleArn, &sAssumeRoleRequest_RoleSessionName, &sAssumeRoleRequest_PolicyArns, &sAssumeRoleRequest_Policy, &sAssumeRoleRequest_DurationSeconds, &sAssumeRoleRequest_Tags, &sAssumeRoleRequest_TransitiveTagKeys, &sAssumeRoleRequest_ExternalId, &sAssumeRoleRequest_SerialNumber, &sAssumeRoleRequest_TokenCode, &sAssumeRoleRequest_SourceIdentity, &sAssumeRoleRequest_ProvidedContexts, &sAssumeRoleRequest_MinimumSessionTokenSize}, Hash: &hAssumeRoleRequest}
+var mAssumeRoleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleResponse_Credentials, &sAssumeRoleResponse_AssumedRoleUser, &sAssumeRoleResponse_PackedPolicySize, &sAssumeRoleResponse_SourceIdentity, &sAssumeRoleResponse_SessionTokenUtilization, &sAssumeRoleResponse_SessionTokenSize}}
+var mAssumeRoleWithSAMLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleWithSAMLRequest_RoleArn, &sAssumeRoleWithSAMLRequest_PrincipalArn, &sAssumeRoleWithSAMLRequest_SAMLAssertion, &sAssumeRoleWithSAMLRequest_PolicyArns, &sAssumeRoleWithSAMLRequest_Policy, &sAssumeRoleWithSAMLRequest_DurationSeconds, &sAssumeRoleWithSAMLRequest_MinimumSessionTokenSize}}
+var mAssumeRoleWithSAMLResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleWithSAMLResponse_Credentials, &sAssumeRoleWithSAMLResponse_AssumedRoleUser, &sAssumeRoleWithSAMLResponse_PackedPolicySize, &sAssumeRoleWithSAMLResponse_Subject, &sAssumeRoleWithSAMLResponse_SubjectType, &sAssumeRoleWithSAMLResponse_Issuer, &sAssumeRoleWithSAMLResponse_Audience, &sAssumeRoleWithSAMLResponse_NameQualifier, &sAssumeRoleWithSAMLResponse_SourceIdentity, &sAssumeRoleWithSAMLResponse_SessionTokenUtilization, &sAssumeRoleWithSAMLResponse_SessionTokenSize}, Hash: &hAssumeRoleWithSAMLResponse}
+var mAssumeRoleWithWebIdentityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleWithWebIdentityRequest_RoleArn, &sAssumeRoleWithWebIdentityRequest_RoleSessionName, &sAssumeRoleWithWebIdentityRequest_WebIdentityToken, &sAssumeRoleWithWebIdentityRequest_ProviderId, &sAssumeRoleWithWebIdentityRequest_PolicyArns, &sAssumeRoleWithWebIdentityRequest_Policy, &sAssumeRoleWithWebIdentityRequest_DurationSeconds, &sAssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize}}
+var mAssumeRoleWithWebIdentityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleWithWebIdentityResponse_Credentials, &sAssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken, &sAssumeRoleWithWebIdentityResponse_AssumedRoleUser, &sAssumeRoleWithWebIdentityResponse_PackedPolicySize, &sAssumeRoleWithWebIdentityResponse_Provider, &sAssumeRoleWithWebIdentityResponse_Audience, &sAssumeRoleWithWebIdentityResponse_SourceIdentity, &sAssumeRoleWithWebIdentityResponse_SessionTokenUtilization, &sAssumeRoleWithWebIdentityResponse_SessionTokenSize}, Hash: &hAssumeRoleWithWebIdentityResponse}
+var mAssumeRootRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRootRequest_TargetPrincipal, &sAssumeRootRequest_TaskPolicyArn, &sAssumeRootRequest_DurationSeconds, &sAssumeRootRequest_MinimumSessionTokenSize}}
+var mAssumeRootResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRootResponse_Credentials, &sAssumeRootResponse_SourceIdentity, &sAssumeRootResponse_SessionTokenUtilization, &sAssumeRootResponse_SessionTokenSize}}
+var mDecodeAuthorizationMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDecodeAuthorizationMessageRequest_EncodedMessage}}
+var mDecodeAuthorizationMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDecodeAuthorizationMessageResponse_DecodedMessage}}
+var mGetAccessKeyInfoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessKeyInfoRequest_AccessKeyId}}
+var mGetAccessKeyInfoResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessKeyInfoResponse_Account}}
+var mGetCallerIdentityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCallerIdentityResponse_UserId, &sGetCallerIdentityResponse_Account, &sGetCallerIdentityResponse_Arn}}
+var mGetDelegatedAccessTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDelegatedAccessTokenRequest_TradeInToken}}
+var mGetDelegatedAccessTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDelegatedAccessTokenResponse_Credentials, &sGetDelegatedAccessTokenResponse_PackedPolicySize, &sGetDelegatedAccessTokenResponse_AssumedPrincipal}}
+var mGetFederationTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFederationTokenRequest_Name, &sGetFederationTokenRequest_Policy, &sGetFederationTokenRequest_PolicyArns, &sGetFederationTokenRequest_DurationSeconds, &sGetFederationTokenRequest_Tags, &sGetFederationTokenRequest_MinimumSessionTokenSize}}
+var mGetFederationTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFederationTokenResponse_Credentials, &sGetFederationTokenResponse_FederatedUser, &sGetFederationTokenResponse_PackedPolicySize, &sGetFederationTokenResponse_SessionTokenUtilization, &sGetFederationTokenResponse_SessionTokenSize}}
+var mGetSessionTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionTokenRequest_DurationSeconds, &sGetSessionTokenRequest_SerialNumber, &sGetSessionTokenRequest_TokenCode, &sGetSessionTokenRequest_MinimumSessionTokenSize}}
+var mGetSessionTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionTokenResponse_Credentials, &sGetSessionTokenResponse_SessionTokenUtilization, &sGetSessionTokenResponse_SessionTokenSize}}
+var mGetWebIdentityTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebIdentityTokenRequest_Audience, &sGetWebIdentityTokenRequest_DurationSeconds, &sGetWebIdentityTokenRequest_SigningAlgorithm, &sGetWebIdentityTokenRequest_Tags}}
+var mGetWebIdentityTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebIdentityTokenResponse_WebIdentityToken, &sGetWebIdentityTokenResponse_Expiration}}
+
+var hAssumeRoleRequest = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	2, 0, 0, 8, 0, 12, 0, 7, 0, 11, 0, 9, 6, 0, 10, 0, 0, 0, 0, 1, 0, 0, 0, 4,
+	0, 0, 5, 13, 0, 3, 0, 0,
+}}
+var hAssumeRoleWithSAMLResponse = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 9, 0, 0, 5, 2, 0, 0, 0, 0, 6, 0, 0, 0, 0, 10, 11, 0, 7,
+	1, 0, 0, 3, 0, 0, 8, 4,
+}}
+var hAssumeRoleWithWebIdentityResponse = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 8, 0, 0, 0, 7, 4, 2, 0, 0, 0, 5, 0, 0,
+	0, 3, 1, 0, 0, 0, 9, 0,
+}}
+
+var sAssumeRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRole, Type: smithy.ShapeTypeOperation, Ext: &eAssumeRole})
+var sAssumeRoleWithSAML = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleWithSAML, Type: smithy.ShapeTypeOperation, Ext: &eAssumeRoleWithSAML})
+var sAssumeRoleWithWebIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleWithWebIdentity, Type: smithy.ShapeTypeOperation, Ext: &eAssumeRoleWithWebIdentity})
+var sAssumeRoot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoot, Type: smithy.ShapeTypeOperation, Ext: &eAssumeRoot})
+var sDecodeAuthorizationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecodeAuthorizationMessage, Type: smithy.ShapeTypeOperation, Ext: &eDecodeAuthorizationMessage})
+var sGetAccessKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessKeyInfo, Type: smithy.ShapeTypeOperation, Ext: &eGetAccessKeyInfo})
+var sGetCallerIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCallerIdentity, Type: smithy.ShapeTypeOperation, Ext: &eGetCallerIdentity})
+var sGetDelegatedAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDelegatedAccessToken, Type: smithy.ShapeTypeOperation, Ext: &eGetDelegatedAccessToken})
+var sGetFederationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFederationToken, Type: smithy.ShapeTypeOperation, Ext: &eGetFederationToken})
+var sGetSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionToken, Type: smithy.ShapeTypeOperation, Ext: &eGetSessionToken})
+var sGetWebIdentityToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebIdentityToken, Type: smithy.ShapeTypeOperation, Ext: &eGetWebIdentityToken})
+var s_AWSSecurityTokenServiceV20110615 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSSecurityTokenServiceV20110615, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_AWSSecurityTokenServiceV20110615})
+var s_accessKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_accessKeyIdType, Type: smithy.ShapeTypeString, Ext: &e_accessKeyIdType})
+var s_accessKeySecretType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_accessKeySecretType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_accessKeySecretType})
+var s_accountType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_accountType, Type: smithy.ShapeTypeString, Ext: &e_accountType})
+var s_arnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &e_arnType})
+var s_assumedRoleIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_assumedRoleIdType, Type: smithy.ShapeTypeString, Ext: &e_assumedRoleIdType})
+var sAssumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &eAssumedRoleUser})
+var sAssumedRoleUser_AssumedRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssumedRoleId", ID: &i_assumedRoleIdType, Type: smithy.ShapeTypeString, Ext: &eAssumedRoleUser_AssumedRoleId})
+var sAssumedRoleUser_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eAssumedRoleUser_Arn})
+var s_Audience = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Audience, Type: smithy.ShapeTypeString, Ext: &e_Audience})
+var s_clientTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_clientTokenType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_clientTokenType})
+var s_contextAssertionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_contextAssertionType, Type: smithy.ShapeTypeString, Ext: &e_contextAssertionType})
+var sCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eCredentials})
+var sCredentials_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKeyId", ID: &i_accessKeyIdType, Type: smithy.ShapeTypeString, Ext: &eCredentials_AccessKeyId})
+var sCredentials_SecretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretAccessKey", ID: &i_accessKeySecretType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCredentials_SecretAccessKey})
+var sCredentials_SessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionToken", ID: &i_tokenType, Type: smithy.ShapeTypeString, Ext: &eCredentials_SessionToken})
+var sCredentials_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &i_dateType, Type: smithy.ShapeTypeTimestamp, Ext: &eCredentials_Expiration})
+var s_dateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_dateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_dateType})
+var s_decodedMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_decodedMessageType, Type: smithy.ShapeTypeString, Ext: &e_decodedMessageType})
+var s_durationSecondsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_durationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &e_durationSecondsType})
+var s_encodedMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_encodedMessageType, Type: smithy.ShapeTypeString, Ext: &e_encodedMessageType})
+var s_expiredIdentityTokenMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_expiredIdentityTokenMessage, Type: smithy.ShapeTypeString, Ext: &e_expiredIdentityTokenMessage})
+var sExpiredTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredTokenException, Members: &mExpiredTokenException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eExpiredTokenException})
+var sExpiredTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_expiredIdentityTokenMessage, Type: smithy.ShapeTypeString, Ext: &eExpiredTokenException_message})
+var sExpiredTradeInTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredTradeInTokenException, Members: &mExpiredTradeInTokenException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eExpiredTradeInTokenException})
+var sExpiredTradeInTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_expiredTradeInTokenExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eExpiredTradeInTokenException_message})
+var s_expiredTradeInTokenExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_expiredTradeInTokenExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_expiredTradeInTokenExceptionMessage})
+var s_externalIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_externalIdType, Type: smithy.ShapeTypeString, Ext: &e_externalIdType})
+var s_federatedIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_federatedIdType, Type: smithy.ShapeTypeString, Ext: &e_federatedIdType})
+var sFederatedUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFederatedUser, Members: &mFederatedUser, Type: smithy.ShapeTypeStructure, Ext: &eFederatedUser})
+var sFederatedUser_FederatedUserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedUserId", ID: &i_federatedIdType, Type: smithy.ShapeTypeString, Ext: &eFederatedUser_FederatedUserId})
+var sFederatedUser_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eFederatedUser_Arn})
+var sIDPCommunicationErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIDPCommunicationErrorException, Members: &mIDPCommunicationErrorException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eIDPCommunicationErrorException})
+var sIDPCommunicationErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_idpCommunicationErrorMessage, Type: smithy.ShapeTypeString, Ext: &eIDPCommunicationErrorException_message})
+var s_idpCommunicationErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_idpCommunicationErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_idpCommunicationErrorMessage})
+var sIDPRejectedClaimException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIDPRejectedClaimException, Members: &mIDPRejectedClaimException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eIDPRejectedClaimException})
+var sIDPRejectedClaimException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_idpRejectedClaimMessage, Type: smithy.ShapeTypeString, Ext: &eIDPRejectedClaimException_message})
+var s_idpRejectedClaimMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_idpRejectedClaimMessage, Type: smithy.ShapeTypeString, Ext: &e_idpRejectedClaimMessage})
+var s_invalidAuthorizationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_invalidAuthorizationMessage, Type: smithy.ShapeTypeString, Ext: &e_invalidAuthorizationMessage})
+var sInvalidAuthorizationMessageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAuthorizationMessageException, Members: &mInvalidAuthorizationMessageException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInvalidAuthorizationMessageException})
+var sInvalidAuthorizationMessageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_invalidAuthorizationMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidAuthorizationMessageException_message})
+var sInvalidIdentityTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidIdentityTokenException, Members: &mInvalidIdentityTokenException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInvalidIdentityTokenException})
+var sInvalidIdentityTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_invalidIdentityTokenMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidIdentityTokenException_message})
+var s_invalidIdentityTokenMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_invalidIdentityTokenMessage, Type: smithy.ShapeTypeString, Ext: &e_invalidIdentityTokenMessage})
+var s_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &e_Issuer})
+var s_jwtAlgorithmType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_jwtAlgorithmType, Type: smithy.ShapeTypeString, Ext: &e_jwtAlgorithmType})
+var sJWTPayloadSizeExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJWTPayloadSizeExceededException, Members: &mJWTPayloadSizeExceededException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eJWTPayloadSizeExceededException})
+var sJWTPayloadSizeExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_JWTPayloadSizeExceededException2, Type: smithy.ShapeTypeString, Ext: &eJWTPayloadSizeExceededException_message})
+var s_JWTPayloadSizeExceededException2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JWTPayloadSizeExceededException2, Type: smithy.ShapeTypeString, Ext: &e_JWTPayloadSizeExceededException2})
+var sMalformedPolicyDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedPolicyDocumentException, Members: &mMalformedPolicyDocumentException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eMalformedPolicyDocumentException})
+var sMalformedPolicyDocumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_malformedPolicyDocumentMessage, Type: smithy.ShapeTypeString, Ext: &eMalformedPolicyDocumentException_message})
+var s_malformedPolicyDocumentMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_malformedPolicyDocumentMessage, Type: smithy.ShapeTypeString, Ext: &e_malformedPolicyDocumentMessage})
+var s_minimumSessionTokenSizeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_minimumSessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &e_minimumSessionTokenSizeType})
+var s_NameQualifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameQualifier, Type: smithy.ShapeTypeString, Ext: &e_NameQualifier})
+var s_nonNegativeIntegerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nonNegativeIntegerType, Type: smithy.ShapeTypeInteger, Ext: &e_nonNegativeIntegerType})
+var sOutboundWebIdentityFederationDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutboundWebIdentityFederationDisabledException, Members: &mOutboundWebIdentityFederationDisabledException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eOutboundWebIdentityFederationDisabledException})
+var sOutboundWebIdentityFederationDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_OutboundWebIdentityFederationDisabledException2, Type: smithy.ShapeTypeString, Ext: &eOutboundWebIdentityFederationDisabledException_message})
+var s_OutboundWebIdentityFederationDisabledException2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutboundWebIdentityFederationDisabledException2, Type: smithy.ShapeTypeString, Ext: &e_OutboundWebIdentityFederationDisabledException2})
+var sPackedPolicyTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackedPolicyTooLargeException, Members: &mPackedPolicyTooLargeException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ePackedPolicyTooLargeException})
+var sPackedPolicyTooLargeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_packedPolicyTooLargeMessage, Type: smithy.ShapeTypeString, Ext: &ePackedPolicyTooLargeException_message})
+var s_packedPolicyTooLargeMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_packedPolicyTooLargeMessage, Type: smithy.ShapeTypeString, Ext: &e_packedPolicyTooLargeMessage})
+var s_policyDescriptorListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_policyDescriptorListType, Members: &m_policyDescriptorListType, Type: smithy.ShapeTypeList, Ext: &e_policyDescriptorListType})
+var s_policyDescriptorListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyDescriptorType, Members: &mPolicyDescriptorType, Type: smithy.ShapeTypeStructure, Ext: &e_policyDescriptorListType_member})
+var sPolicyDescriptorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyDescriptorType, Members: &mPolicyDescriptorType, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDescriptorType})
+var sPolicyDescriptorType_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &ePolicyDescriptorType_arn})
+var sProvidedContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvidedContext, Members: &mProvidedContext, Type: smithy.ShapeTypeStructure, Ext: &eProvidedContext})
+var sProvidedContext_ProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderArn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eProvidedContext_ProviderArn})
+var sProvidedContext_ContextAssertion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextAssertion", ID: &i_contextAssertionType, Type: smithy.ShapeTypeString, Ext: &eProvidedContext_ContextAssertion})
+var s_ProvidedContextsListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProvidedContextsListType, Members: &m_ProvidedContextsListType, Type: smithy.ShapeTypeList, Ext: &e_ProvidedContextsListType})
+var s_ProvidedContextsListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProvidedContext, Members: &mProvidedContext, Type: smithy.ShapeTypeStructure, Ext: &e_ProvidedContextsListType_member})
+var sRegionDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionDisabledException, Members: &mRegionDisabledException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eRegionDisabledException})
+var sRegionDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_regionDisabledMessage, Type: smithy.ShapeTypeString, Ext: &eRegionDisabledException_message})
+var s_regionDisabledMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_regionDisabledMessage, Type: smithy.ShapeTypeString, Ext: &e_regionDisabledMessage})
+var s_roleDurationSecondsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_roleDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &e_roleDurationSecondsType})
+var s_roleSessionNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_roleSessionNameType, Type: smithy.ShapeTypeString, Ext: &e_roleSessionNameType})
+var s_RootDurationSecondsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RootDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &e_RootDurationSecondsType})
+var s_SAMLAssertionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SAMLAssertionType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_SAMLAssertionType})
+var s_serialNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_serialNumberType, Type: smithy.ShapeTypeString, Ext: &e_serialNumberType})
+var sSessionDurationEscalationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionDurationEscalationException, Members: &mSessionDurationEscalationException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eSessionDurationEscalationException})
+var sSessionDurationEscalationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_SessionDurationEscalationException2, Type: smithy.ShapeTypeString, Ext: &eSessionDurationEscalationException_message})
+var s_SessionDurationEscalationException2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionDurationEscalationException2, Type: smithy.ShapeTypeString, Ext: &e_SessionDurationEscalationException2})
+var s_sessionPolicyDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_sessionPolicyDocumentType, Type: smithy.ShapeTypeString, Ext: &e_sessionPolicyDocumentType})
+var s_sessionTokenSizeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_sessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &e_sessionTokenSizeType})
+var s_sessionTokenUtilizationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_sessionTokenUtilizationType, Type: smithy.ShapeTypeInteger, Ext: &e_sessionTokenUtilizationType})
+var s_sourceIdentityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_sourceIdentityType, Type: smithy.ShapeTypeString, Ext: &e_sourceIdentityType})
+var s_Subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &e_Subject})
+var s_SubjectType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectType, Type: smithy.ShapeTypeString, Ext: &e_SubjectType})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_tagKeyType, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_tagValueType, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_tagKeyListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKeyListType, Members: &m_tagKeyListType, Type: smithy.ShapeTypeList, Ext: &e_tagKeyListType})
+var s_tagKeyListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_tagKeyType, Type: smithy.ShapeTypeString, Ext: &e_tagKeyListType_member})
+var s_tagKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKeyType, Type: smithy.ShapeTypeString, Ext: &e_tagKeyType})
+var s_tagListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagListType, Members: &m_tagListType, Type: smithy.ShapeTypeList, Ext: &e_tagListType})
+var s_tagListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_tagListType_member})
+var s_tagValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagValueType, Type: smithy.ShapeTypeString, Ext: &e_tagValueType})
+var s_TargetPrincipalType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetPrincipalType, Type: smithy.ShapeTypeString, Ext: &e_TargetPrincipalType})
+var s_tokenCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tokenCodeType, Type: smithy.ShapeTypeString, Ext: &e_tokenCodeType})
+var s_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tokenType, Type: smithy.ShapeTypeString, Ext: &e_tokenType})
+var s_tradeInTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tradeInTokenType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_tradeInTokenType})
+var s_unrestrictedSessionPolicyDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_unrestrictedSessionPolicyDocumentType, Type: smithy.ShapeTypeString, Ext: &e_unrestrictedSessionPolicyDocumentType})
+var s_urlType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_urlType, Type: smithy.ShapeTypeString, Ext: &e_urlType})
+var s_userIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_userIdType, Type: smithy.ShapeTypeString, Ext: &e_userIdType})
+var s_userNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_userNameType, Type: smithy.ShapeTypeString, Ext: &e_userNameType})
+var s_webIdentitySubjectType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_webIdentitySubjectType, Type: smithy.ShapeTypeString, Ext: &e_webIdentitySubjectType})
+var s_webIdentityTokenAudienceListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_webIdentityTokenAudienceListType, Members: &m_webIdentityTokenAudienceListType, Type: smithy.ShapeTypeList, Ext: &e_webIdentityTokenAudienceListType})
+var s_webIdentityTokenAudienceListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_webIdentityTokenAudienceStringType, Type: smithy.ShapeTypeString, Ext: &e_webIdentityTokenAudienceListType_member})
+var s_webIdentityTokenAudienceStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_webIdentityTokenAudienceStringType, Type: smithy.ShapeTypeString, Ext: &e_webIdentityTokenAudienceStringType})
+var s_webIdentityTokenDurationSecondsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_webIdentityTokenDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &e_webIdentityTokenDurationSecondsType})
+var s_webIdentityTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_webIdentityTokenType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_webIdentityTokenType})
+var sAssumeRoleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleRequest, Members: &mAssumeRoleRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleRequest})
+var sAssumeRoleRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleRequest_RoleArn})
+var sAssumeRoleRequest_RoleSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleSessionName", ID: &i_roleSessionNameType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleRequest_RoleSessionName})
+var sAssumeRoleRequest_PolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArns", ID: &i_policyDescriptorListType, Members: &m_policyDescriptorListType, Type: smithy.ShapeTypeList, Ext: &eAssumeRoleRequest_PolicyArns})
+var sAssumeRoleRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_unrestrictedSessionPolicyDocumentType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleRequest_Policy})
+var sAssumeRoleRequest_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_roleDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleRequest_DurationSeconds})
+var sAssumeRoleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_tagListType, Members: &m_tagListType, Type: smithy.ShapeTypeList, Ext: &eAssumeRoleRequest_Tags})
+var sAssumeRoleRequest_TransitiveTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitiveTagKeys", ID: &i_tagKeyListType, Members: &m_tagKeyListType, Type: smithy.ShapeTypeList, Ext: &eAssumeRoleRequest_TransitiveTagKeys})
+var sAssumeRoleRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_externalIdType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleRequest_ExternalId})
+var sAssumeRoleRequest_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_serialNumberType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleRequest_SerialNumber})
+var sAssumeRoleRequest_TokenCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenCode", ID: &i_tokenCodeType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleRequest_TokenCode})
+var sAssumeRoleRequest_SourceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentity", ID: &i_sourceIdentityType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleRequest_SourceIdentity})
+var sAssumeRoleRequest_ProvidedContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvidedContexts", ID: &i_ProvidedContextsListType, Members: &m_ProvidedContextsListType, Type: smithy.ShapeTypeList, Ext: &eAssumeRoleRequest_ProvidedContexts})
+var sAssumeRoleRequest_MinimumSessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumSessionTokenSize", ID: &i_minimumSessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleRequest_MinimumSessionTokenSize})
+var sAssumeRoleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleResponse, Members: &mAssumeRoleResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleResponse})
+var sAssumeRoleResponse_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleResponse_Credentials})
+var sAssumeRoleResponse_AssumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssumedRoleUser", ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleResponse_AssumedRoleUser})
+var sAssumeRoleResponse_PackedPolicySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackedPolicySize", ID: &i_nonNegativeIntegerType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleResponse_PackedPolicySize})
+var sAssumeRoleResponse_SourceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentity", ID: &i_sourceIdentityType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleResponse_SourceIdentity})
+var sAssumeRoleResponse_SessionTokenUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenUtilization", ID: &i_sessionTokenUtilizationType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleResponse_SessionTokenUtilization})
+var sAssumeRoleResponse_SessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenSize", ID: &i_sessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleResponse_SessionTokenSize})
+var sAssumeRoleWithSAMLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleWithSAMLRequest, Members: &mAssumeRoleWithSAMLRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithSAMLRequest})
+var sAssumeRoleWithSAMLRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLRequest_RoleArn})
+var sAssumeRoleWithSAMLRequest_PrincipalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrincipalArn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLRequest_PrincipalArn})
+var sAssumeRoleWithSAMLRequest_SAMLAssertion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMLAssertion", ID: &i_SAMLAssertionType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLRequest_SAMLAssertion})
+var sAssumeRoleWithSAMLRequest_PolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArns", ID: &i_policyDescriptorListType, Members: &m_policyDescriptorListType, Type: smithy.ShapeTypeList, Ext: &eAssumeRoleWithSAMLRequest_PolicyArns})
+var sAssumeRoleWithSAMLRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_sessionPolicyDocumentType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLRequest_Policy})
+var sAssumeRoleWithSAMLRequest_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_roleDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithSAMLRequest_DurationSeconds})
+var sAssumeRoleWithSAMLRequest_MinimumSessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumSessionTokenSize", ID: &i_minimumSessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithSAMLRequest_MinimumSessionTokenSize})
+var sAssumeRoleWithSAMLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleWithSAMLResponse, Members: &mAssumeRoleWithSAMLResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithSAMLResponse})
+var sAssumeRoleWithSAMLResponse_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithSAMLResponse_Credentials})
+var sAssumeRoleWithSAMLResponse_AssumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssumedRoleUser", ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithSAMLResponse_AssumedRoleUser})
+var sAssumeRoleWithSAMLResponse_PackedPolicySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackedPolicySize", ID: &i_nonNegativeIntegerType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithSAMLResponse_PackedPolicySize})
+var sAssumeRoleWithSAMLResponse_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLResponse_Subject})
+var sAssumeRoleWithSAMLResponse_SubjectType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectType", ID: &i_SubjectType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLResponse_SubjectType})
+var sAssumeRoleWithSAMLResponse_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLResponse_Issuer})
+var sAssumeRoleWithSAMLResponse_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i_Audience, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLResponse_Audience})
+var sAssumeRoleWithSAMLResponse_NameQualifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NameQualifier", ID: &i_NameQualifier, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLResponse_NameQualifier})
+var sAssumeRoleWithSAMLResponse_SourceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentity", ID: &i_sourceIdentityType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithSAMLResponse_SourceIdentity})
+var sAssumeRoleWithSAMLResponse_SessionTokenUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenUtilization", ID: &i_sessionTokenUtilizationType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithSAMLResponse_SessionTokenUtilization})
+var sAssumeRoleWithSAMLResponse_SessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenSize", ID: &i_sessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithSAMLResponse_SessionTokenSize})
+var sAssumeRoleWithWebIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleWithWebIdentityRequest, Members: &mAssumeRoleWithWebIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithWebIdentityRequest})
+var sAssumeRoleWithWebIdentityRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityRequest_RoleArn})
+var sAssumeRoleWithWebIdentityRequest_RoleSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleSessionName", ID: &i_roleSessionNameType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityRequest_RoleSessionName})
+var sAssumeRoleWithWebIdentityRequest_WebIdentityToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebIdentityToken", ID: &i_clientTokenType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityRequest_WebIdentityToken})
+var sAssumeRoleWithWebIdentityRequest_ProviderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderId", ID: &i_urlType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityRequest_ProviderId})
+var sAssumeRoleWithWebIdentityRequest_PolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArns", ID: &i_policyDescriptorListType, Members: &m_policyDescriptorListType, Type: smithy.ShapeTypeList, Ext: &eAssumeRoleWithWebIdentityRequest_PolicyArns})
+var sAssumeRoleWithWebIdentityRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_sessionPolicyDocumentType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityRequest_Policy})
+var sAssumeRoleWithWebIdentityRequest_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_roleDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithWebIdentityRequest_DurationSeconds})
+var sAssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumSessionTokenSize", ID: &i_minimumSessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize})
+var sAssumeRoleWithWebIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleWithWebIdentityResponse, Members: &mAssumeRoleWithWebIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithWebIdentityResponse})
+var sAssumeRoleWithWebIdentityResponse_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithWebIdentityResponse_Credentials})
+var sAssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectFromWebIdentityToken", ID: &i_webIdentitySubjectType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken})
+var sAssumeRoleWithWebIdentityResponse_AssumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssumedRoleUser", ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleWithWebIdentityResponse_AssumedRoleUser})
+var sAssumeRoleWithWebIdentityResponse_PackedPolicySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackedPolicySize", ID: &i_nonNegativeIntegerType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithWebIdentityResponse_PackedPolicySize})
+var sAssumeRoleWithWebIdentityResponse_Provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provider", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityResponse_Provider})
+var sAssumeRoleWithWebIdentityResponse_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i_Audience, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityResponse_Audience})
+var sAssumeRoleWithWebIdentityResponse_SourceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentity", ID: &i_sourceIdentityType, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleWithWebIdentityResponse_SourceIdentity})
+var sAssumeRoleWithWebIdentityResponse_SessionTokenUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenUtilization", ID: &i_sessionTokenUtilizationType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithWebIdentityResponse_SessionTokenUtilization})
+var sAssumeRoleWithWebIdentityResponse_SessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenSize", ID: &i_sessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRoleWithWebIdentityResponse_SessionTokenSize})
+var sAssumeRootRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRootRequest, Members: &mAssumeRootRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRootRequest})
+var sAssumeRootRequest_TargetPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetPrincipal", ID: &i_TargetPrincipalType, Type: smithy.ShapeTypeString, Ext: &eAssumeRootRequest_TargetPrincipal})
+var sAssumeRootRequest_TaskPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskPolicyArn", ID: &iPolicyDescriptorType, Members: &mPolicyDescriptorType, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRootRequest_TaskPolicyArn})
+var sAssumeRootRequest_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_RootDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRootRequest_DurationSeconds})
+var sAssumeRootRequest_MinimumSessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumSessionTokenSize", ID: &i_minimumSessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRootRequest_MinimumSessionTokenSize})
+var sAssumeRootResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRootResponse, Members: &mAssumeRootResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRootResponse})
+var sAssumeRootResponse_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRootResponse_Credentials})
+var sAssumeRootResponse_SourceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentity", ID: &i_sourceIdentityType, Type: smithy.ShapeTypeString, Ext: &eAssumeRootResponse_SourceIdentity})
+var sAssumeRootResponse_SessionTokenUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenUtilization", ID: &i_sessionTokenUtilizationType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRootResponse_SessionTokenUtilization})
+var sAssumeRootResponse_SessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenSize", ID: &i_sessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eAssumeRootResponse_SessionTokenSize})
+var sDecodeAuthorizationMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecodeAuthorizationMessageRequest, Members: &mDecodeAuthorizationMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDecodeAuthorizationMessageRequest})
+var sDecodeAuthorizationMessageRequest_EncodedMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncodedMessage", ID: &i_encodedMessageType, Type: smithy.ShapeTypeString, Ext: &eDecodeAuthorizationMessageRequest_EncodedMessage})
+var sDecodeAuthorizationMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecodeAuthorizationMessageResponse, Members: &mDecodeAuthorizationMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDecodeAuthorizationMessageResponse})
+var sDecodeAuthorizationMessageResponse_DecodedMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecodedMessage", ID: &i_decodedMessageType, Type: smithy.ShapeTypeString, Ext: &eDecodeAuthorizationMessageResponse_DecodedMessage})
+var sGetAccessKeyInfoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessKeyInfoRequest, Members: &mGetAccessKeyInfoRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessKeyInfoRequest})
+var sGetAccessKeyInfoRequest_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKeyId", ID: &i_accessKeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetAccessKeyInfoRequest_AccessKeyId})
+var sGetAccessKeyInfoResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessKeyInfoResponse, Members: &mGetAccessKeyInfoResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessKeyInfoResponse})
+var sGetAccessKeyInfoResponse_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_accountType, Type: smithy.ShapeTypeString, Ext: &eGetAccessKeyInfoResponse_Account})
+var sGetCallerIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCallerIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCallerIdentityRequest})
+var sGetCallerIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCallerIdentityResponse, Members: &mGetCallerIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCallerIdentityResponse})
+var sGetCallerIdentityResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_userIdType, Type: smithy.ShapeTypeString, Ext: &eGetCallerIdentityResponse_UserId})
+var sGetCallerIdentityResponse_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_accountType, Type: smithy.ShapeTypeString, Ext: &eGetCallerIdentityResponse_Account})
+var sGetCallerIdentityResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eGetCallerIdentityResponse_Arn})
+var sGetDelegatedAccessTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDelegatedAccessTokenRequest, Members: &mGetDelegatedAccessTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDelegatedAccessTokenRequest})
+var sGetDelegatedAccessTokenRequest_TradeInToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TradeInToken", ID: &i_tradeInTokenType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetDelegatedAccessTokenRequest_TradeInToken})
+var sGetDelegatedAccessTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDelegatedAccessTokenResponse, Members: &mGetDelegatedAccessTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDelegatedAccessTokenResponse})
+var sGetDelegatedAccessTokenResponse_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eGetDelegatedAccessTokenResponse_Credentials})
+var sGetDelegatedAccessTokenResponse_PackedPolicySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackedPolicySize", ID: &i_nonNegativeIntegerType, Type: smithy.ShapeTypeInteger, Ext: &eGetDelegatedAccessTokenResponse_PackedPolicySize})
+var sGetDelegatedAccessTokenResponse_AssumedPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssumedPrincipal", ID: &i_arnType, Type: smithy.ShapeTypeString, Ext: &eGetDelegatedAccessTokenResponse_AssumedPrincipal})
+var sGetFederationTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFederationTokenRequest, Members: &mGetFederationTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFederationTokenRequest})
+var sGetFederationTokenRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_userNameType, Type: smithy.ShapeTypeString, Ext: &eGetFederationTokenRequest_Name})
+var sGetFederationTokenRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_sessionPolicyDocumentType, Type: smithy.ShapeTypeString, Ext: &eGetFederationTokenRequest_Policy})
+var sGetFederationTokenRequest_PolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArns", ID: &i_policyDescriptorListType, Members: &m_policyDescriptorListType, Type: smithy.ShapeTypeList, Ext: &eGetFederationTokenRequest_PolicyArns})
+var sGetFederationTokenRequest_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_durationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &eGetFederationTokenRequest_DurationSeconds})
+var sGetFederationTokenRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_tagListType, Members: &m_tagListType, Type: smithy.ShapeTypeList, Ext: &eGetFederationTokenRequest_Tags})
+var sGetFederationTokenRequest_MinimumSessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumSessionTokenSize", ID: &i_minimumSessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eGetFederationTokenRequest_MinimumSessionTokenSize})
+var sGetFederationTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFederationTokenResponse, Members: &mGetFederationTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFederationTokenResponse})
+var sGetFederationTokenResponse_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eGetFederationTokenResponse_Credentials})
+var sGetFederationTokenResponse_FederatedUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedUser", ID: &iFederatedUser, Members: &mFederatedUser, Type: smithy.ShapeTypeStructure, Ext: &eGetFederationTokenResponse_FederatedUser})
+var sGetFederationTokenResponse_PackedPolicySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackedPolicySize", ID: &i_nonNegativeIntegerType, Type: smithy.ShapeTypeInteger, Ext: &eGetFederationTokenResponse_PackedPolicySize})
+var sGetFederationTokenResponse_SessionTokenUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenUtilization", ID: &i_sessionTokenUtilizationType, Type: smithy.ShapeTypeInteger, Ext: &eGetFederationTokenResponse_SessionTokenUtilization})
+var sGetFederationTokenResponse_SessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenSize", ID: &i_sessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eGetFederationTokenResponse_SessionTokenSize})
+var sGetSessionTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionTokenRequest, Members: &mGetSessionTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSessionTokenRequest})
+var sGetSessionTokenRequest_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_durationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &eGetSessionTokenRequest_DurationSeconds})
+var sGetSessionTokenRequest_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_serialNumberType, Type: smithy.ShapeTypeString, Ext: &eGetSessionTokenRequest_SerialNumber})
+var sGetSessionTokenRequest_TokenCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenCode", ID: &i_tokenCodeType, Type: smithy.ShapeTypeString, Ext: &eGetSessionTokenRequest_TokenCode})
+var sGetSessionTokenRequest_MinimumSessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumSessionTokenSize", ID: &i_minimumSessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eGetSessionTokenRequest_MinimumSessionTokenSize})
+var sGetSessionTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionTokenResponse, Members: &mGetSessionTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSessionTokenResponse})
+var sGetSessionTokenResponse_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iCredentials, Members: &mCredentials, Type: smithy.ShapeTypeStructure, Ext: &eGetSessionTokenResponse_Credentials})
+var sGetSessionTokenResponse_SessionTokenUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenUtilization", ID: &i_sessionTokenUtilizationType, Type: smithy.ShapeTypeInteger, Ext: &eGetSessionTokenResponse_SessionTokenUtilization})
+var sGetSessionTokenResponse_SessionTokenSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTokenSize", ID: &i_sessionTokenSizeType, Type: smithy.ShapeTypeInteger, Ext: &eGetSessionTokenResponse_SessionTokenSize})
+var sGetWebIdentityTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebIdentityTokenRequest, Members: &mGetWebIdentityTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWebIdentityTokenRequest})
+var sGetWebIdentityTokenRequest_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i_webIdentityTokenAudienceListType, Members: &m_webIdentityTokenAudienceListType, Type: smithy.ShapeTypeList, Ext: &eGetWebIdentityTokenRequest_Audience})
+var sGetWebIdentityTokenRequest_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_webIdentityTokenDurationSecondsType, Type: smithy.ShapeTypeInteger, Ext: &eGetWebIdentityTokenRequest_DurationSeconds})
+var sGetWebIdentityTokenRequest_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &i_jwtAlgorithmType, Type: smithy.ShapeTypeString, Ext: &eGetWebIdentityTokenRequest_SigningAlgorithm})
+var sGetWebIdentityTokenRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_tagListType, Members: &m_tagListType, Type: smithy.ShapeTypeList, Ext: &eGetWebIdentityTokenRequest_Tags})
+var sGetWebIdentityTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebIdentityTokenResponse, Members: &mGetWebIdentityTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWebIdentityTokenResponse})
+var sGetWebIdentityTokenResponse_WebIdentityToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebIdentityToken", ID: &i_webIdentityTokenType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetWebIdentityTokenResponse_WebIdentityToken})
+var sGetWebIdentityTokenResponse_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &i_dateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWebIdentityTokenResponse_Expiration})
+
+var AssumeRole = &sAssumeRole
+
+var AssumeRoleWithSAML = &sAssumeRoleWithSAML
+
+var AssumeRoleWithWebIdentity = &sAssumeRoleWithWebIdentity
+
+var AssumeRoot = &sAssumeRoot
+
+var DecodeAuthorizationMessage = &sDecodeAuthorizationMessage
+
+var GetAccessKeyInfo = &sGetAccessKeyInfo
+
+var GetCallerIdentity = &sGetCallerIdentity
+
+var GetDelegatedAccessToken = &sGetDelegatedAccessToken
+
+var GetFederationToken = &sGetFederationToken
+
+var GetSessionToken = &sGetSessionToken
+
+var GetWebIdentityToken = &sGetWebIdentityToken
+
+var _AWSSecurityTokenServiceV20110615 = &s_AWSSecurityTokenServiceV20110615
+
+var _accessKeyIdType = &s_accessKeyIdType
+
+var _accessKeySecretType = &s_accessKeySecretType
+
+var _accountType = &s_accountType
+
+var _arnType = &s_arnType
+
+var _assumedRoleIdType = &s_assumedRoleIdType
+
+var AssumedRoleUser = &sAssumedRoleUser
+var AssumedRoleUser_AssumedRoleId = &sAssumedRoleUser_AssumedRoleId
+var AssumedRoleUser_Arn = &sAssumedRoleUser_Arn
+
+var _Audience = &s_Audience
+
+var _clientTokenType = &s_clientTokenType
+
+var _contextAssertionType = &s_contextAssertionType
+
+var Credentials = &sCredentials
+var Credentials_AccessKeyId = &sCredentials_AccessKeyId
+var Credentials_SecretAccessKey = &sCredentials_SecretAccessKey
+var Credentials_SessionToken = &sCredentials_SessionToken
+var Credentials_Expiration = &sCredentials_Expiration
+
+var _dateType = &s_dateType
+
+var _decodedMessageType = &s_decodedMessageType
+
+var _durationSecondsType = &s_durationSecondsType
+
+var _encodedMessageType = &s_encodedMessageType
+
+var _expiredIdentityTokenMessage = &s_expiredIdentityTokenMessage
+
+var ExpiredTokenException = &sExpiredTokenException
+var ExpiredTokenException_message = &sExpiredTokenException_message
+
+var ExpiredTradeInTokenException = &sExpiredTradeInTokenException
+var ExpiredTradeInTokenException_message = &sExpiredTradeInTokenException_message
+
+var _expiredTradeInTokenExceptionMessage = &s_expiredTradeInTokenExceptionMessage
+
+var _externalIdType = &s_externalIdType
+
+var _federatedIdType = &s_federatedIdType
+
+var FederatedUser = &sFederatedUser
+var FederatedUser_FederatedUserId = &sFederatedUser_FederatedUserId
+var FederatedUser_Arn = &sFederatedUser_Arn
+
+var IDPCommunicationErrorException = &sIDPCommunicationErrorException
+var IDPCommunicationErrorException_message = &sIDPCommunicationErrorException_message
+
+var _idpCommunicationErrorMessage = &s_idpCommunicationErrorMessage
+
+var IDPRejectedClaimException = &sIDPRejectedClaimException
+var IDPRejectedClaimException_message = &sIDPRejectedClaimException_message
+
+var _idpRejectedClaimMessage = &s_idpRejectedClaimMessage
+
+var _invalidAuthorizationMessage = &s_invalidAuthorizationMessage
+
+var InvalidAuthorizationMessageException = &sInvalidAuthorizationMessageException
+var InvalidAuthorizationMessageException_message = &sInvalidAuthorizationMessageException_message
+
+var InvalidIdentityTokenException = &sInvalidIdentityTokenException
+var InvalidIdentityTokenException_message = &sInvalidIdentityTokenException_message
+
+var _invalidIdentityTokenMessage = &s_invalidIdentityTokenMessage
+
+var _Issuer = &s_Issuer
+
+var _jwtAlgorithmType = &s_jwtAlgorithmType
+
+var JWTPayloadSizeExceededException = &sJWTPayloadSizeExceededException
+var JWTPayloadSizeExceededException_message = &sJWTPayloadSizeExceededException_message
+
+var _JWTPayloadSizeExceededException2 = &s_JWTPayloadSizeExceededException2
+
+var MalformedPolicyDocumentException = &sMalformedPolicyDocumentException
+var MalformedPolicyDocumentException_message = &sMalformedPolicyDocumentException_message
+
+var _malformedPolicyDocumentMessage = &s_malformedPolicyDocumentMessage
+
+var _minimumSessionTokenSizeType = &s_minimumSessionTokenSizeType
+
+var _NameQualifier = &s_NameQualifier
+
+var _nonNegativeIntegerType = &s_nonNegativeIntegerType
+
+var OutboundWebIdentityFederationDisabledException = &sOutboundWebIdentityFederationDisabledException
+var OutboundWebIdentityFederationDisabledException_message = &sOutboundWebIdentityFederationDisabledException_message
+
+var _OutboundWebIdentityFederationDisabledException2 = &s_OutboundWebIdentityFederationDisabledException2
+
+var PackedPolicyTooLargeException = &sPackedPolicyTooLargeException
+var PackedPolicyTooLargeException_message = &sPackedPolicyTooLargeException_message
+
+var _packedPolicyTooLargeMessage = &s_packedPolicyTooLargeMessage
+
+var _policyDescriptorListType = &s_policyDescriptorListType
+var _policyDescriptorListType_member = &s_policyDescriptorListType_member
+
+var PolicyDescriptorType = &sPolicyDescriptorType
+var PolicyDescriptorType_arn = &sPolicyDescriptorType_arn
+
+var ProvidedContext = &sProvidedContext
+var ProvidedContext_ProviderArn = &sProvidedContext_ProviderArn
+var ProvidedContext_ContextAssertion = &sProvidedContext_ContextAssertion
+
+var _ProvidedContextsListType = &s_ProvidedContextsListType
+var _ProvidedContextsListType_member = &s_ProvidedContextsListType_member
+
+var RegionDisabledException = &sRegionDisabledException
+var RegionDisabledException_message = &sRegionDisabledException_message
+
+var _regionDisabledMessage = &s_regionDisabledMessage
+
+var _roleDurationSecondsType = &s_roleDurationSecondsType
+
+var _roleSessionNameType = &s_roleSessionNameType
+
+var _RootDurationSecondsType = &s_RootDurationSecondsType
+
+var _SAMLAssertionType = &s_SAMLAssertionType
+
+var _serialNumberType = &s_serialNumberType
+
+var SessionDurationEscalationException = &sSessionDurationEscalationException
+var SessionDurationEscalationException_message = &sSessionDurationEscalationException_message
+
+var _SessionDurationEscalationException2 = &s_SessionDurationEscalationException2
+
+var _sessionPolicyDocumentType = &s_sessionPolicyDocumentType
+
+var _sessionTokenSizeType = &s_sessionTokenSizeType
+
+var _sessionTokenUtilizationType = &s_sessionTokenUtilizationType
+
+var _sourceIdentityType = &s_sourceIdentityType
+
+var _Subject = &s_Subject
+
+var _SubjectType = &s_SubjectType
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _tagKeyListType = &s_tagKeyListType
+var _tagKeyListType_member = &s_tagKeyListType_member
+
+var _tagKeyType = &s_tagKeyType
+
+var _tagListType = &s_tagListType
+var _tagListType_member = &s_tagListType_member
+
+var _tagValueType = &s_tagValueType
+
+var _TargetPrincipalType = &s_TargetPrincipalType
+
+var _tokenCodeType = &s_tokenCodeType
+
+var _tokenType = &s_tokenType
+
+var _tradeInTokenType = &s_tradeInTokenType
+
+var _unrestrictedSessionPolicyDocumentType = &s_unrestrictedSessionPolicyDocumentType
+
+var _urlType = &s_urlType
+
+var _userIdType = &s_userIdType
+
+var _userNameType = &s_userNameType
+
+var _webIdentitySubjectType = &s_webIdentitySubjectType
+
+var _webIdentityTokenAudienceListType = &s_webIdentityTokenAudienceListType
+var _webIdentityTokenAudienceListType_member = &s_webIdentityTokenAudienceListType_member
+
+var _webIdentityTokenAudienceStringType = &s_webIdentityTokenAudienceStringType
+
+var _webIdentityTokenDurationSecondsType = &s_webIdentityTokenDurationSecondsType
+
+var _webIdentityTokenType = &s_webIdentityTokenType
+
+var AssumeRoleRequest = &sAssumeRoleRequest
+var AssumeRoleRequest_RoleArn = &sAssumeRoleRequest_RoleArn
+var AssumeRoleRequest_RoleSessionName = &sAssumeRoleRequest_RoleSessionName
+var AssumeRoleRequest_PolicyArns = &sAssumeRoleRequest_PolicyArns
+var AssumeRoleRequest_Policy = &sAssumeRoleRequest_Policy
+var AssumeRoleRequest_DurationSeconds = &sAssumeRoleRequest_DurationSeconds
+var AssumeRoleRequest_Tags = &sAssumeRoleRequest_Tags
+var AssumeRoleRequest_TransitiveTagKeys = &sAssumeRoleRequest_TransitiveTagKeys
+var AssumeRoleRequest_ExternalId = &sAssumeRoleRequest_ExternalId
+var AssumeRoleRequest_SerialNumber = &sAssumeRoleRequest_SerialNumber
+var AssumeRoleRequest_TokenCode = &sAssumeRoleRequest_TokenCode
+var AssumeRoleRequest_SourceIdentity = &sAssumeRoleRequest_SourceIdentity
+var AssumeRoleRequest_ProvidedContexts = &sAssumeRoleRequest_ProvidedContexts
+var AssumeRoleRequest_MinimumSessionTokenSize = &sAssumeRoleRequest_MinimumSessionTokenSize
+
+var AssumeRoleResponse = &sAssumeRoleResponse
+var AssumeRoleResponse_Credentials = &sAssumeRoleResponse_Credentials
+var AssumeRoleResponse_AssumedRoleUser = &sAssumeRoleResponse_AssumedRoleUser
+var AssumeRoleResponse_PackedPolicySize = &sAssumeRoleResponse_PackedPolicySize
+var AssumeRoleResponse_SourceIdentity = &sAssumeRoleResponse_SourceIdentity
+var AssumeRoleResponse_SessionTokenUtilization = &sAssumeRoleResponse_SessionTokenUtilization
+var AssumeRoleResponse_SessionTokenSize = &sAssumeRoleResponse_SessionTokenSize
+
+var AssumeRoleWithSAMLRequest = &sAssumeRoleWithSAMLRequest
+var AssumeRoleWithSAMLRequest_RoleArn = &sAssumeRoleWithSAMLRequest_RoleArn
+var AssumeRoleWithSAMLRequest_PrincipalArn = &sAssumeRoleWithSAMLRequest_PrincipalArn
+var AssumeRoleWithSAMLRequest_SAMLAssertion = &sAssumeRoleWithSAMLRequest_SAMLAssertion
+var AssumeRoleWithSAMLRequest_PolicyArns = &sAssumeRoleWithSAMLRequest_PolicyArns
+var AssumeRoleWithSAMLRequest_Policy = &sAssumeRoleWithSAMLRequest_Policy
+var AssumeRoleWithSAMLRequest_DurationSeconds = &sAssumeRoleWithSAMLRequest_DurationSeconds
+var AssumeRoleWithSAMLRequest_MinimumSessionTokenSize = &sAssumeRoleWithSAMLRequest_MinimumSessionTokenSize
+
+var AssumeRoleWithSAMLResponse = &sAssumeRoleWithSAMLResponse
+var AssumeRoleWithSAMLResponse_Credentials = &sAssumeRoleWithSAMLResponse_Credentials
+var AssumeRoleWithSAMLResponse_AssumedRoleUser = &sAssumeRoleWithSAMLResponse_AssumedRoleUser
+var AssumeRoleWithSAMLResponse_PackedPolicySize = &sAssumeRoleWithSAMLResponse_PackedPolicySize
+var AssumeRoleWithSAMLResponse_Subject = &sAssumeRoleWithSAMLResponse_Subject
+var AssumeRoleWithSAMLResponse_SubjectType = &sAssumeRoleWithSAMLResponse_SubjectType
+var AssumeRoleWithSAMLResponse_Issuer = &sAssumeRoleWithSAMLResponse_Issuer
+var AssumeRoleWithSAMLResponse_Audience = &sAssumeRoleWithSAMLResponse_Audience
+var AssumeRoleWithSAMLResponse_NameQualifier = &sAssumeRoleWithSAMLResponse_NameQualifier
+var AssumeRoleWithSAMLResponse_SourceIdentity = &sAssumeRoleWithSAMLResponse_SourceIdentity
+var AssumeRoleWithSAMLResponse_SessionTokenUtilization = &sAssumeRoleWithSAMLResponse_SessionTokenUtilization
+var AssumeRoleWithSAMLResponse_SessionTokenSize = &sAssumeRoleWithSAMLResponse_SessionTokenSize
+
+var AssumeRoleWithWebIdentityRequest = &sAssumeRoleWithWebIdentityRequest
+var AssumeRoleWithWebIdentityRequest_RoleArn = &sAssumeRoleWithWebIdentityRequest_RoleArn
+var AssumeRoleWithWebIdentityRequest_RoleSessionName = &sAssumeRoleWithWebIdentityRequest_RoleSessionName
+var AssumeRoleWithWebIdentityRequest_WebIdentityToken = &sAssumeRoleWithWebIdentityRequest_WebIdentityToken
+var AssumeRoleWithWebIdentityRequest_ProviderId = &sAssumeRoleWithWebIdentityRequest_ProviderId
+var AssumeRoleWithWebIdentityRequest_PolicyArns = &sAssumeRoleWithWebIdentityRequest_PolicyArns
+var AssumeRoleWithWebIdentityRequest_Policy = &sAssumeRoleWithWebIdentityRequest_Policy
+var AssumeRoleWithWebIdentityRequest_DurationSeconds = &sAssumeRoleWithWebIdentityRequest_DurationSeconds
+var AssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize = &sAssumeRoleWithWebIdentityRequest_MinimumSessionTokenSize
+
+var AssumeRoleWithWebIdentityResponse = &sAssumeRoleWithWebIdentityResponse
+var AssumeRoleWithWebIdentityResponse_Credentials = &sAssumeRoleWithWebIdentityResponse_Credentials
+var AssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken = &sAssumeRoleWithWebIdentityResponse_SubjectFromWebIdentityToken
+var AssumeRoleWithWebIdentityResponse_AssumedRoleUser = &sAssumeRoleWithWebIdentityResponse_AssumedRoleUser
+var AssumeRoleWithWebIdentityResponse_PackedPolicySize = &sAssumeRoleWithWebIdentityResponse_PackedPolicySize
+var AssumeRoleWithWebIdentityResponse_Provider = &sAssumeRoleWithWebIdentityResponse_Provider
+var AssumeRoleWithWebIdentityResponse_Audience = &sAssumeRoleWithWebIdentityResponse_Audience
+var AssumeRoleWithWebIdentityResponse_SourceIdentity = &sAssumeRoleWithWebIdentityResponse_SourceIdentity
+var AssumeRoleWithWebIdentityResponse_SessionTokenUtilization = &sAssumeRoleWithWebIdentityResponse_SessionTokenUtilization
+var AssumeRoleWithWebIdentityResponse_SessionTokenSize = &sAssumeRoleWithWebIdentityResponse_SessionTokenSize
+
+var AssumeRootRequest = &sAssumeRootRequest
+var AssumeRootRequest_TargetPrincipal = &sAssumeRootRequest_TargetPrincipal
+var AssumeRootRequest_TaskPolicyArn = &sAssumeRootRequest_TaskPolicyArn
+var AssumeRootRequest_DurationSeconds = &sAssumeRootRequest_DurationSeconds
+var AssumeRootRequest_MinimumSessionTokenSize = &sAssumeRootRequest_MinimumSessionTokenSize
+
+var AssumeRootResponse = &sAssumeRootResponse
+var AssumeRootResponse_Credentials = &sAssumeRootResponse_Credentials
+var AssumeRootResponse_SourceIdentity = &sAssumeRootResponse_SourceIdentity
+var AssumeRootResponse_SessionTokenUtilization = &sAssumeRootResponse_SessionTokenUtilization
+var AssumeRootResponse_SessionTokenSize = &sAssumeRootResponse_SessionTokenSize
+
+var DecodeAuthorizationMessageRequest = &sDecodeAuthorizationMessageRequest
+var DecodeAuthorizationMessageRequest_EncodedMessage = &sDecodeAuthorizationMessageRequest_EncodedMessage
+
+var DecodeAuthorizationMessageResponse = &sDecodeAuthorizationMessageResponse
+var DecodeAuthorizationMessageResponse_DecodedMessage = &sDecodeAuthorizationMessageResponse_DecodedMessage
+
+var GetAccessKeyInfoRequest = &sGetAccessKeyInfoRequest
+var GetAccessKeyInfoRequest_AccessKeyId = &sGetAccessKeyInfoRequest_AccessKeyId
+
+var GetAccessKeyInfoResponse = &sGetAccessKeyInfoResponse
+var GetAccessKeyInfoResponse_Account = &sGetAccessKeyInfoResponse_Account
+
+var GetCallerIdentityRequest = &sGetCallerIdentityRequest
+
+var GetCallerIdentityResponse = &sGetCallerIdentityResponse
+var GetCallerIdentityResponse_UserId = &sGetCallerIdentityResponse_UserId
+var GetCallerIdentityResponse_Account = &sGetCallerIdentityResponse_Account
+var GetCallerIdentityResponse_Arn = &sGetCallerIdentityResponse_Arn
+
+var GetDelegatedAccessTokenRequest = &sGetDelegatedAccessTokenRequest
+var GetDelegatedAccessTokenRequest_TradeInToken = &sGetDelegatedAccessTokenRequest_TradeInToken
+
+var GetDelegatedAccessTokenResponse = &sGetDelegatedAccessTokenResponse
+var GetDelegatedAccessTokenResponse_Credentials = &sGetDelegatedAccessTokenResponse_Credentials
+var GetDelegatedAccessTokenResponse_PackedPolicySize = &sGetDelegatedAccessTokenResponse_PackedPolicySize
+var GetDelegatedAccessTokenResponse_AssumedPrincipal = &sGetDelegatedAccessTokenResponse_AssumedPrincipal
+
+var GetFederationTokenRequest = &sGetFederationTokenRequest
+var GetFederationTokenRequest_Name = &sGetFederationTokenRequest_Name
+var GetFederationTokenRequest_Policy = &sGetFederationTokenRequest_Policy
+var GetFederationTokenRequest_PolicyArns = &sGetFederationTokenRequest_PolicyArns
+var GetFederationTokenRequest_DurationSeconds = &sGetFederationTokenRequest_DurationSeconds
+var GetFederationTokenRequest_Tags = &sGetFederationTokenRequest_Tags
+var GetFederationTokenRequest_MinimumSessionTokenSize = &sGetFederationTokenRequest_MinimumSessionTokenSize
+
+var GetFederationTokenResponse = &sGetFederationTokenResponse
+var GetFederationTokenResponse_Credentials = &sGetFederationTokenResponse_Credentials
+var GetFederationTokenResponse_FederatedUser = &sGetFederationTokenResponse_FederatedUser
+var GetFederationTokenResponse_PackedPolicySize = &sGetFederationTokenResponse_PackedPolicySize
+var GetFederationTokenResponse_SessionTokenUtilization = &sGetFederationTokenResponse_SessionTokenUtilization
+var GetFederationTokenResponse_SessionTokenSize = &sGetFederationTokenResponse_SessionTokenSize
+
+var GetSessionTokenRequest = &sGetSessionTokenRequest
+var GetSessionTokenRequest_DurationSeconds = &sGetSessionTokenRequest_DurationSeconds
+var GetSessionTokenRequest_SerialNumber = &sGetSessionTokenRequest_SerialNumber
+var GetSessionTokenRequest_TokenCode = &sGetSessionTokenRequest_TokenCode
+var GetSessionTokenRequest_MinimumSessionTokenSize = &sGetSessionTokenRequest_MinimumSessionTokenSize
+
+var GetSessionTokenResponse = &sGetSessionTokenResponse
+var GetSessionTokenResponse_Credentials = &sGetSessionTokenResponse_Credentials
+var GetSessionTokenResponse_SessionTokenUtilization = &sGetSessionTokenResponse_SessionTokenUtilization
+var GetSessionTokenResponse_SessionTokenSize = &sGetSessionTokenResponse_SessionTokenSize
+
+var GetWebIdentityTokenRequest = &sGetWebIdentityTokenRequest
+var GetWebIdentityTokenRequest_Audience = &sGetWebIdentityTokenRequest_Audience
+var GetWebIdentityTokenRequest_DurationSeconds = &sGetWebIdentityTokenRequest_DurationSeconds
+var GetWebIdentityTokenRequest_SigningAlgorithm = &sGetWebIdentityTokenRequest_SigningAlgorithm
+var GetWebIdentityTokenRequest_Tags = &sGetWebIdentityTokenRequest_Tags
+
+var GetWebIdentityTokenResponse = &sGetWebIdentityTokenResponse
+var GetWebIdentityTokenResponse_WebIdentityToken = &sGetWebIdentityTokenResponse_WebIdentityToken
+var GetWebIdentityTokenResponse_Expiration = &sGetWebIdentityTokenResponse_Expiration
+
+var AWSSecurityTokenServiceV20110615 = &smithy.ServiceSchema{Schema: &s_AWSSecurityTokenServiceV20110615, Version: "2011-06-15"}

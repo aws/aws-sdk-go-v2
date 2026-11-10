@@ -4,178 +4,183 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ScanSbom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ScanSbom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eScanSbom                                              smithy.SchemaExtensions
+	e_InspectorScan                                        smithy.SchemaExtensions
+	eAccessDeniedException                                 smithy.SchemaExtensions
+	eAccessDeniedException_message                         smithy.SchemaExtensions
+	eInternalServerException                               smithy.SchemaExtensions
+	eInternalServerException_message                       smithy.SchemaExtensions
+	eInternalServerException_reason                        smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds             smithy.SchemaExtensions
+	eInternalServerExceptionReason                         smithy.SchemaExtensions
+	eInternalServerExceptionReason_FAILED_TO_GENERATE_SBOM smithy.SchemaExtensions
+	eInternalServerExceptionReason_OTHER                   smithy.SchemaExtensions
+	eOutputFormat                                          smithy.SchemaExtensions
+	eOutputFormat_CYCLONE_DX_1_5                           smithy.SchemaExtensions
+	eOutputFormat_INSPECTOR                                smithy.SchemaExtensions
+	eOutputFormat_INSPECTOR_ALT                            smithy.SchemaExtensions
+	e_Sbom                                                 smithy.SchemaExtensions
+	eThrottlingException                                   smithy.SchemaExtensions
+	eThrottlingException_message                           smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                 smithy.SchemaExtensions
+	eValidationException                                   smithy.SchemaExtensions
+	eValidationException_message                           smithy.SchemaExtensions
+	eValidationException_reason                            smithy.SchemaExtensions
+	eValidationException_fields                            smithy.SchemaExtensions
+	eValidationExceptionField                              smithy.SchemaExtensions
+	eValidationExceptionField_name                         smithy.SchemaExtensions
+	eValidationExceptionField_message                      smithy.SchemaExtensions
+	e_ValidationExceptionFields                            smithy.SchemaExtensions
+	e_ValidationExceptionFields_member                     smithy.SchemaExtensions
+	eValidationExceptionReason                             smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION           smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED     smithy.SchemaExtensions
+	eValidationExceptionReason_UNSUPPORTED_SBOM_TYPE       smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                       smithy.SchemaExtensions
+	eScanSbomRequest                                       smithy.SchemaExtensions
+	eScanSbomRequest_sbom                                  smithy.SchemaExtensions
+	eScanSbomRequest_outputFormat                          smithy.SchemaExtensions
+	eScanSbomResponse                                      smithy.SchemaExtensions
+	eScanSbomResponse_sbom                                 smithy.SchemaExtensions
+)
+
+var (
+	iScanSbom                      = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ScanSbom"}
+	i_InspectorScan                = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "InspectorScan"}
+	iAccessDeniedException         = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "AccessDeniedException"}
+	iInternalServerException       = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "InternalServerException"}
+	iInternalServerExceptionReason = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "InternalServerExceptionReason"}
+	iOutputFormat                  = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "OutputFormat"}
+	i_Sbom                         = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "Sbom"}
+	iThrottlingException           = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ThrottlingException"}
+	iValidationException           = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ValidationException"}
+	iValidationExceptionField      = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFields    = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ValidationExceptionFields"}
+	iValidationExceptionReason     = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ValidationExceptionReason"}
+	iScanSbomRequest               = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ScanSbomRequest"}
+	iScanSbomResponse              = smithy.ShapeName{Namespace: "com.amazonaws.inspectorscan", Name: "ScanSbomResponse"}
+	pString                        = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pInteger                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pUnit                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/scan/sbom",
-	Code: 200})
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
 
-var _InspectorScan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "InspectorScan",
-}, smithy.ShapeTypeService, 0)
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_reason, &sInternalServerException_retryAfterSeconds}}
+var mInternalServerExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerExceptionReason_FAILED_TO_GENERATE_SBOM, &sInternalServerExceptionReason_OTHER}}
+var mOutputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormat_CYCLONE_DX_1_5, &sOutputFormat_INSPECTOR, &sOutputFormat_INSPECTOR_ALT}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_retryAfterSeconds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fields}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFields_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_UNSUPPORTED_SBOM_TYPE, &sValidationExceptionReason_OTHER}}
+var mScanSbomRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sScanSbomRequest_sbom, &sScanSbomRequest_outputFormat}}
+var mScanSbomResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sScanSbomResponse_sbom}}
 
-var InspectorScan = smithy.NewServiceSchema(_InspectorScan, "2023-08-08")
+var sScanSbom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanSbom, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eScanSbom})
+var s_InspectorScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InspectorScan, Type: smithy.ShapeTypeService, Ext: &e_InspectorScan})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iInternalServerExceptionReason, Members: &mInternalServerExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eInternalServerException_reason})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t3, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sInternalServerExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerExceptionReason, Members: &mInternalServerExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eInternalServerExceptionReason})
+var sInternalServerExceptionReason_FAILED_TO_GENERATE_SBOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_TO_GENERATE_SBOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerExceptionReason_FAILED_TO_GENERATE_SBOM})
+var sInternalServerExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerExceptionReason_OTHER})
+var sOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eOutputFormat})
+var sOutputFormat_CYCLONE_DX_1_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CYCLONE_DX_1_5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_CYCLONE_DX_1_5})
+var sOutputFormat_INSPECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSPECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_INSPECTOR})
+var sOutputFormat_INSPECTOR_ALT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSPECTOR_ALT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_INSPECTOR_ALT})
+var s_Sbom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sbom, Type: smithy.ShapeTypeDocument, Ext: &e_Sbom})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t3, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_ValidationExceptionFields, Members: &m_ValidationExceptionFields, Type: smithy.ShapeTypeList, Ext: &eValidationException_fields})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFields, Members: &m_ValidationExceptionFields, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFields})
+var s_ValidationExceptionFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFields_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_UNSUPPORTED_SBOM_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_SBOM_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNSUPPORTED_SBOM_TYPE})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sScanSbomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanSbomRequest, Members: &mScanSbomRequest, Type: smithy.ShapeTypeStructure, Ext: &eScanSbomRequest})
+var sScanSbomRequest_sbom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sbom", ID: &i_Sbom, Type: smithy.ShapeTypeDocument, Ext: &eScanSbomRequest_sbom})
+var sScanSbomRequest_outputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputFormat", ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eScanSbomRequest_outputFormat})
+var sScanSbomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanSbomResponse, Members: &mScanSbomResponse, Type: smithy.ShapeTypeStructure, Ext: &eScanSbomResponse})
+var sScanSbomResponse_sbom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sbom", ID: &i_Sbom, Type: smithy.ShapeTypeDocument, Ext: &eScanSbomResponse_sbom})
 
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
+var ScanSbom = &sScanSbom
 
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
+var _InspectorScan = &s_InspectorScan
 
-var InternalServerException_reason *smithy.Schema
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
 
-var InternalServerException_retryAfterSeconds *smithy.Schema
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_reason = &sInternalServerException_reason
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
 
-var InternalServerExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "InternalServerExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var InternalServerExceptionReason_FAILED_TO_GENERATE_SBOM *smithy.Schema
+var InternalServerExceptionReason = &sInternalServerExceptionReason
+var InternalServerExceptionReason_FAILED_TO_GENERATE_SBOM = &sInternalServerExceptionReason_FAILED_TO_GENERATE_SBOM
+var InternalServerExceptionReason_OTHER = &sInternalServerExceptionReason_OTHER
 
-var InternalServerExceptionReason_OTHER *smithy.Schema
+var OutputFormat = &sOutputFormat
+var OutputFormat_CYCLONE_DX_1_5 = &sOutputFormat_CYCLONE_DX_1_5
+var OutputFormat_INSPECTOR = &sOutputFormat_INSPECTOR
+var OutputFormat_INSPECTOR_ALT = &sOutputFormat_INSPECTOR_ALT
 
-var OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "OutputFormat",
-}, smithy.ShapeTypeEnum, 3)
-var OutputFormat_CYCLONE_DX_1_5 *smithy.Schema
+var _Sbom = &s_Sbom
 
-var OutputFormat_INSPECTOR *smithy.Schema
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
 
-var OutputFormat_INSPECTOR_ALT *smithy.Schema
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fields = &sValidationException_fields
 
-var _Sbom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "Sbom",
-}, smithy.ShapeTypeDocument, 0)
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
 
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
+var _ValidationExceptionFields = &s_ValidationExceptionFields
+var _ValidationExceptionFields_member = &s_ValidationExceptionFields_member
 
-var ThrottlingException_retryAfterSeconds *smithy.Schema
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_UNSUPPORTED_SBOM_TYPE = &sValidationExceptionReason_UNSUPPORTED_SBOM_TYPE
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
 
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
+var ScanSbomRequest = &sScanSbomRequest
+var ScanSbomRequest_sbom = &sScanSbomRequest_sbom
+var ScanSbomRequest_outputFormat = &sScanSbomRequest_outputFormat
 
-var ValidationException_reason *smithy.Schema
+var ScanSbomResponse = &sScanSbomResponse
+var ScanSbomResponse_sbom = &sScanSbomResponse_sbom
 
-var ValidationException_fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ValidationExceptionFields",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFields_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 5)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_UNSUPPORTED_SBOM_TYPE *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ScanSbomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ScanSbomRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ScanSbomRequest_sbom *smithy.Schema
-
-var ScanSbomRequest_outputFormat *smithy.Schema
-
-var ScanSbomResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.inspectorscan",
-	Name:      "ScanSbomResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ScanSbomResponse_sbom *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	InternalServerExceptionReason_FAILED_TO_GENERATE_SBOM = InternalServerExceptionReason.AddMember("FAILED_TO_GENERATE_SBOM", smithyprelude.Unit)
-
-	InternalServerExceptionReason_OTHER = InternalServerExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_reason = InternalServerException.AddMember("reason", InternalServerExceptionReason)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	OutputFormat_CYCLONE_DX_1_5 = OutputFormat.AddMember("CYCLONE_DX_1_5", smithyprelude.Unit)
-
-	OutputFormat_INSPECTOR = OutputFormat.AddMember("INSPECTOR", smithyprelude.Unit)
-
-	OutputFormat_INSPECTOR_ALT = OutputFormat.AddMember("INSPECTOR_ALT", smithyprelude.Unit)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNSUPPORTED_SBOM_TYPE = ValidationExceptionReason.AddMember("UNSUPPORTED_SBOM_TYPE", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFields_member = _ValidationExceptionFields.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionFields)
-
-	ScanSbomRequest_sbom = ScanSbomRequest.AddMember("sbom", _Sbom)
-
-	ScanSbomRequest_outputFormat = ScanSbomRequest.AddMember("outputFormat", OutputFormat)
-
-	ScanSbomResponse_sbom = ScanSbomResponse.AddMember("sbom", _Sbom)
-
-}
+var InspectorScan = &smithy.ServiceSchema{Schema: &s_InspectorScan, Version: "2023-08-08"}

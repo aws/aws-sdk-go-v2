@@ -4,5288 +4,5103 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateVehicleFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "AssociateVehicleFleet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eAssociateVehicleFleet                                                                   smithy.SchemaExtensions
+	eBatchCreateVehicle                                                                      smithy.SchemaExtensions
+	eBatchUpdateVehicle                                                                      smithy.SchemaExtensions
+	eCreateCampaign                                                                          smithy.SchemaExtensions
+	eCreateDecoderManifest                                                                   smithy.SchemaExtensions
+	eCreateFleet                                                                             smithy.SchemaExtensions
+	eCreateModelManifest                                                                     smithy.SchemaExtensions
+	eCreateSignalCatalog                                                                     smithy.SchemaExtensions
+	eCreateStateTemplate                                                                     smithy.SchemaExtensions
+	eCreateVehicle                                                                           smithy.SchemaExtensions
+	eDeleteCampaign                                                                          smithy.SchemaExtensions
+	eDeleteDecoderManifest                                                                   smithy.SchemaExtensions
+	eDeleteFleet                                                                             smithy.SchemaExtensions
+	eDeleteModelManifest                                                                     smithy.SchemaExtensions
+	eDeleteSignalCatalog                                                                     smithy.SchemaExtensions
+	eDeleteStateTemplate                                                                     smithy.SchemaExtensions
+	eDeleteVehicle                                                                           smithy.SchemaExtensions
+	eDisassociateVehicleFleet                                                                smithy.SchemaExtensions
+	eGetCampaign                                                                             smithy.SchemaExtensions
+	eGetDecoderManifest                                                                      smithy.SchemaExtensions
+	eGetEncryptionConfiguration                                                              smithy.SchemaExtensions
+	eGetFleet                                                                                smithy.SchemaExtensions
+	eGetLoggingOptions                                                                       smithy.SchemaExtensions
+	eGetModelManifest                                                                        smithy.SchemaExtensions
+	eGetRegisterAccountStatus                                                                smithy.SchemaExtensions
+	eGetSignalCatalog                                                                        smithy.SchemaExtensions
+	eGetStateTemplate                                                                        smithy.SchemaExtensions
+	eGetVehicle                                                                              smithy.SchemaExtensions
+	eGetVehicleStatus                                                                        smithy.SchemaExtensions
+	eImportDecoderManifest                                                                   smithy.SchemaExtensions
+	eImportSignalCatalog                                                                     smithy.SchemaExtensions
+	eListCampaigns                                                                           smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfaces                                                    smithy.SchemaExtensions
+	eListDecoderManifests                                                                    smithy.SchemaExtensions
+	eListDecoderManifestSignals                                                              smithy.SchemaExtensions
+	eListFleets                                                                              smithy.SchemaExtensions
+	eListFleetsForVehicle                                                                    smithy.SchemaExtensions
+	eListModelManifestNodes                                                                  smithy.SchemaExtensions
+	eListModelManifests                                                                      smithy.SchemaExtensions
+	eListSignalCatalogNodes                                                                  smithy.SchemaExtensions
+	eListSignalCatalogs                                                                      smithy.SchemaExtensions
+	eListStateTemplates                                                                      smithy.SchemaExtensions
+	eListTagsForResource                                                                     smithy.SchemaExtensions
+	eListVehicles                                                                            smithy.SchemaExtensions
+	eListVehiclesInFleet                                                                     smithy.SchemaExtensions
+	ePutEncryptionConfiguration                                                              smithy.SchemaExtensions
+	ePutLoggingOptions                                                                       smithy.SchemaExtensions
+	eRegisterAccount                                                                         smithy.SchemaExtensions
+	eTagResource                                                                             smithy.SchemaExtensions
+	eUntagResource                                                                           smithy.SchemaExtensions
+	eUpdateCampaign                                                                          smithy.SchemaExtensions
+	eUpdateDecoderManifest                                                                   smithy.SchemaExtensions
+	eUpdateFleet                                                                             smithy.SchemaExtensions
+	eUpdateModelManifest                                                                     smithy.SchemaExtensions
+	eUpdateSignalCatalog                                                                     smithy.SchemaExtensions
+	eUpdateStateTemplate                                                                     smithy.SchemaExtensions
+	eUpdateVehicle                                                                           smithy.SchemaExtensions
+	e_IoTAutobahnControlPlane                                                                smithy.SchemaExtensions
+	eAccessDeniedException                                                                   smithy.SchemaExtensions
+	eAccessDeniedException_message                                                           smithy.SchemaExtensions
+	e_actionEventExpression                                                                  smithy.SchemaExtensions
+	eActuator                                                                                smithy.SchemaExtensions
+	eActuator_fullyQualifiedName                                                             smithy.SchemaExtensions
+	eActuator_dataType                                                                       smithy.SchemaExtensions
+	eActuator_description                                                                    smithy.SchemaExtensions
+	eActuator_unit                                                                           smithy.SchemaExtensions
+	eActuator_allowedValues                                                                  smithy.SchemaExtensions
+	eActuator_min                                                                            smithy.SchemaExtensions
+	eActuator_max                                                                            smithy.SchemaExtensions
+	eActuator_assignedValue                                                                  smithy.SchemaExtensions
+	eActuator_deprecationMessage                                                             smithy.SchemaExtensions
+	eActuator_comment                                                                        smithy.SchemaExtensions
+	eActuator_structFullyQualifiedName                                                       smithy.SchemaExtensions
+	e_AmazonResourceName                                                                     smithy.SchemaExtensions
+	e_arn                                                                                    smithy.SchemaExtensions
+	eAttribute                                                                               smithy.SchemaExtensions
+	eAttribute_fullyQualifiedName                                                            smithy.SchemaExtensions
+	eAttribute_dataType                                                                      smithy.SchemaExtensions
+	eAttribute_description                                                                   smithy.SchemaExtensions
+	eAttribute_unit                                                                          smithy.SchemaExtensions
+	eAttribute_allowedValues                                                                 smithy.SchemaExtensions
+	eAttribute_min                                                                           smithy.SchemaExtensions
+	eAttribute_max                                                                           smithy.SchemaExtensions
+	eAttribute_assignedValue                                                                 smithy.SchemaExtensions
+	eAttribute_defaultValue                                                                  smithy.SchemaExtensions
+	eAttribute_deprecationMessage                                                            smithy.SchemaExtensions
+	eAttribute_comment                                                                       smithy.SchemaExtensions
+	e_attributeName                                                                          smithy.SchemaExtensions
+	e_attributeNamesList                                                                     smithy.SchemaExtensions
+	e_attributeNamesList_member                                                              smithy.SchemaExtensions
+	e_attributesMap                                                                          smithy.SchemaExtensions
+	e_attributesMap_key                                                                      smithy.SchemaExtensions
+	e_attributesMap_value                                                                    smithy.SchemaExtensions
+	e_attributeValue                                                                         smithy.SchemaExtensions
+	e_attributeValuesList                                                                    smithy.SchemaExtensions
+	e_attributeValuesList_member                                                             smithy.SchemaExtensions
+	eBranch                                                                                  smithy.SchemaExtensions
+	eBranch_fullyQualifiedName                                                               smithy.SchemaExtensions
+	eBranch_description                                                                      smithy.SchemaExtensions
+	eBranch_deprecationMessage                                                               smithy.SchemaExtensions
+	eBranch_comment                                                                          smithy.SchemaExtensions
+	e_campaignArn                                                                            smithy.SchemaExtensions
+	e_campaignName                                                                           smithy.SchemaExtensions
+	eCampaignStatus                                                                          smithy.SchemaExtensions
+	eCampaignStatus_CREATING                                                                 smithy.SchemaExtensions
+	eCampaignStatus_WAITING_FOR_APPROVAL                                                     smithy.SchemaExtensions
+	eCampaignStatus_RUNNING                                                                  smithy.SchemaExtensions
+	eCampaignStatus_SUSPENDED                                                                smithy.SchemaExtensions
+	e_campaignSummaries                                                                      smithy.SchemaExtensions
+	e_campaignSummaries_member                                                               smithy.SchemaExtensions
+	eCampaignSummary                                                                         smithy.SchemaExtensions
+	eCampaignSummary_arn                                                                     smithy.SchemaExtensions
+	eCampaignSummary_name                                                                    smithy.SchemaExtensions
+	eCampaignSummary_description                                                             smithy.SchemaExtensions
+	eCampaignSummary_signalCatalogArn                                                        smithy.SchemaExtensions
+	eCampaignSummary_targetArn                                                               smithy.SchemaExtensions
+	eCampaignSummary_status                                                                  smithy.SchemaExtensions
+	eCampaignSummary_creationTime                                                            smithy.SchemaExtensions
+	eCampaignSummary_lastModificationTime                                                    smithy.SchemaExtensions
+	eCanDbcDefinition                                                                        smithy.SchemaExtensions
+	eCanDbcDefinition_networkInterface                                                       smithy.SchemaExtensions
+	eCanDbcDefinition_canDbcFiles                                                            smithy.SchemaExtensions
+	eCanDbcDefinition_signalsMap                                                             smithy.SchemaExtensions
+	eCanInterface                                                                            smithy.SchemaExtensions
+	eCanInterface_name                                                                       smithy.SchemaExtensions
+	eCanInterface_protocolName                                                               smithy.SchemaExtensions
+	eCanInterface_protocolVersion                                                            smithy.SchemaExtensions
+	e_CanInterfaceName                                                                       smithy.SchemaExtensions
+	eCanSignal                                                                               smithy.SchemaExtensions
+	eCanSignal_messageId                                                                     smithy.SchemaExtensions
+	eCanSignal_isBigEndian                                                                   smithy.SchemaExtensions
+	eCanSignal_isSigned                                                                      smithy.SchemaExtensions
+	eCanSignal_startBit                                                                      smithy.SchemaExtensions
+	eCanSignal_offset                                                                        smithy.SchemaExtensions
+	eCanSignal_factor                                                                        smithy.SchemaExtensions
+	eCanSignal_length                                                                        smithy.SchemaExtensions
+	eCanSignal_name                                                                          smithy.SchemaExtensions
+	eCanSignal_signalValueType                                                               smithy.SchemaExtensions
+	e_CanSignalName                                                                          smithy.SchemaExtensions
+	eCloudWatchLogDeliveryOptions                                                            smithy.SchemaExtensions
+	eCloudWatchLogDeliveryOptions_logType                                                    smithy.SchemaExtensions
+	eCloudWatchLogDeliveryOptions_logGroupName                                               smithy.SchemaExtensions
+	e_CloudWatchLogGroupName                                                                 smithy.SchemaExtensions
+	e_collectionPeriodMs                                                                     smithy.SchemaExtensions
+	eCollectionScheme                                                                        smithy.SchemaExtensions
+	eCollectionScheme_timeBasedCollectionScheme                                              smithy.SchemaExtensions
+	eCollectionScheme_conditionBasedCollectionScheme                                         smithy.SchemaExtensions
+	eCompression                                                                             smithy.SchemaExtensions
+	eCompression_OFF                                                                         smithy.SchemaExtensions
+	eCompression_SNAPPY                                                                      smithy.SchemaExtensions
+	eConditionBasedCollectionScheme                                                          smithy.SchemaExtensions
+	eConditionBasedCollectionScheme_expression                                               smithy.SchemaExtensions
+	eConditionBasedCollectionScheme_minimumTriggerIntervalMs                                 smithy.SchemaExtensions
+	eConditionBasedCollectionScheme_triggerMode                                              smithy.SchemaExtensions
+	eConditionBasedCollectionScheme_conditionLanguageVersion                                 smithy.SchemaExtensions
+	eConditionBasedSignalFetchConfig                                                         smithy.SchemaExtensions
+	eConditionBasedSignalFetchConfig_conditionExpression                                     smithy.SchemaExtensions
+	eConditionBasedSignalFetchConfig_triggerMode                                             smithy.SchemaExtensions
+	eConflictException                                                                       smithy.SchemaExtensions
+	eConflictException_message                                                               smithy.SchemaExtensions
+	eConflictException_resource                                                              smithy.SchemaExtensions
+	eConflictException_resourceType                                                          smithy.SchemaExtensions
+	eCreateVehicleError                                                                      smithy.SchemaExtensions
+	eCreateVehicleError_vehicleName                                                          smithy.SchemaExtensions
+	eCreateVehicleError_code                                                                 smithy.SchemaExtensions
+	eCreateVehicleError_message                                                              smithy.SchemaExtensions
+	e_createVehicleErrors                                                                    smithy.SchemaExtensions
+	e_createVehicleErrors_member                                                             smithy.SchemaExtensions
+	eCreateVehicleRequestItem                                                                smithy.SchemaExtensions
+	eCreateVehicleRequestItem_vehicleName                                                    smithy.SchemaExtensions
+	eCreateVehicleRequestItem_modelManifestArn                                               smithy.SchemaExtensions
+	eCreateVehicleRequestItem_decoderManifestArn                                             smithy.SchemaExtensions
+	eCreateVehicleRequestItem_attributes                                                     smithy.SchemaExtensions
+	eCreateVehicleRequestItem_associationBehavior                                            smithy.SchemaExtensions
+	eCreateVehicleRequestItem_tags                                                           smithy.SchemaExtensions
+	eCreateVehicleRequestItem_stateTemplates                                                 smithy.SchemaExtensions
+	e_createVehicleRequestItems                                                              smithy.SchemaExtensions
+	e_createVehicleRequestItems_member                                                       smithy.SchemaExtensions
+	eCreateVehicleResponseItem                                                               smithy.SchemaExtensions
+	eCreateVehicleResponseItem_vehicleName                                                   smithy.SchemaExtensions
+	eCreateVehicleResponseItem_arn                                                           smithy.SchemaExtensions
+	eCreateVehicleResponseItem_thingArn                                                      smithy.SchemaExtensions
+	e_createVehicleResponses                                                                 smithy.SchemaExtensions
+	e_createVehicleResponses_member                                                          smithy.SchemaExtensions
+	e_CustomDecodingId                                                                       smithy.SchemaExtensions
+	eCustomDecodingInterface                                                                 smithy.SchemaExtensions
+	eCustomDecodingInterface_name                                                            smithy.SchemaExtensions
+	eCustomDecodingSignal                                                                    smithy.SchemaExtensions
+	eCustomDecodingSignal_id                                                                 smithy.SchemaExtensions
+	e_CustomDecodingSignalInterfaceName                                                      smithy.SchemaExtensions
+	e_customerAccountId                                                                      smithy.SchemaExtensions
+	eCustomProperty                                                                          smithy.SchemaExtensions
+	eCustomProperty_fullyQualifiedName                                                       smithy.SchemaExtensions
+	eCustomProperty_dataType                                                                 smithy.SchemaExtensions
+	eCustomProperty_dataEncoding                                                             smithy.SchemaExtensions
+	eCustomProperty_description                                                              smithy.SchemaExtensions
+	eCustomProperty_deprecationMessage                                                       smithy.SchemaExtensions
+	eCustomProperty_comment                                                                  smithy.SchemaExtensions
+	eCustomProperty_structFullyQualifiedName                                                 smithy.SchemaExtensions
+	eCustomStruct                                                                            smithy.SchemaExtensions
+	eCustomStruct_fullyQualifiedName                                                         smithy.SchemaExtensions
+	eCustomStruct_description                                                                smithy.SchemaExtensions
+	eCustomStruct_deprecationMessage                                                         smithy.SchemaExtensions
+	eCustomStruct_comment                                                                    smithy.SchemaExtensions
+	eDataDestinationConfig                                                                   smithy.SchemaExtensions
+	eDataDestinationConfig_s3Config                                                          smithy.SchemaExtensions
+	eDataDestinationConfig_timestreamConfig                                                  smithy.SchemaExtensions
+	eDataDestinationConfig_mqttTopicConfig                                                   smithy.SchemaExtensions
+	e_DataDestinationConfigs                                                                 smithy.SchemaExtensions
+	e_DataDestinationConfigs_member                                                          smithy.SchemaExtensions
+	e_DataExtraDimensionNodePathList                                                         smithy.SchemaExtensions
+	e_DataExtraDimensionNodePathList_member                                                  smithy.SchemaExtensions
+	eDataFormat                                                                              smithy.SchemaExtensions
+	eDataFormat_JSON                                                                         smithy.SchemaExtensions
+	eDataFormat_PARQUET                                                                      smithy.SchemaExtensions
+	eDataPartition                                                                           smithy.SchemaExtensions
+	eDataPartition_id                                                                        smithy.SchemaExtensions
+	eDataPartition_storageOptions                                                            smithy.SchemaExtensions
+	eDataPartition_uploadOptions                                                             smithy.SchemaExtensions
+	e_DataPartitionId                                                                        smithy.SchemaExtensions
+	e_DataPartitions                                                                         smithy.SchemaExtensions
+	e_DataPartitions_member                                                                  smithy.SchemaExtensions
+	eDataPartitionStorageOptions                                                             smithy.SchemaExtensions
+	eDataPartitionStorageOptions_maximumSize                                                 smithy.SchemaExtensions
+	eDataPartitionStorageOptions_storageLocation                                             smithy.SchemaExtensions
+	eDataPartitionStorageOptions_minimumTimeToLive                                           smithy.SchemaExtensions
+	eDataPartitionUploadOptions                                                              smithy.SchemaExtensions
+	eDataPartitionUploadOptions_expression                                                   smithy.SchemaExtensions
+	eDataPartitionUploadOptions_conditionLanguageVersion                                     smithy.SchemaExtensions
+	e_decoderManifestSummaries                                                               smithy.SchemaExtensions
+	e_decoderManifestSummaries_member                                                        smithy.SchemaExtensions
+	eDecoderManifestSummary                                                                  smithy.SchemaExtensions
+	eDecoderManifestSummary_name                                                             smithy.SchemaExtensions
+	eDecoderManifestSummary_arn                                                              smithy.SchemaExtensions
+	eDecoderManifestSummary_modelManifestArn                                                 smithy.SchemaExtensions
+	eDecoderManifestSummary_description                                                      smithy.SchemaExtensions
+	eDecoderManifestSummary_status                                                           smithy.SchemaExtensions
+	eDecoderManifestSummary_creationTime                                                     smithy.SchemaExtensions
+	eDecoderManifestSummary_lastModificationTime                                             smithy.SchemaExtensions
+	eDecoderManifestSummary_message                                                          smithy.SchemaExtensions
+	eDecoderManifestValidationException                                                      smithy.SchemaExtensions
+	eDecoderManifestValidationException_invalidSignals                                       smithy.SchemaExtensions
+	eDecoderManifestValidationException_invalidNetworkInterfaces                             smithy.SchemaExtensions
+	eDecoderManifestValidationException_message                                              smithy.SchemaExtensions
+	eDefaultForUnmappedSignalsType                                                           smithy.SchemaExtensions
+	eDefaultForUnmappedSignalsType_CUSTOM_DECODING                                           smithy.SchemaExtensions
+	e_description                                                                            smithy.SchemaExtensions
+	eDiagnosticsMode                                                                         smithy.SchemaExtensions
+	eDiagnosticsMode_OFF                                                                     smithy.SchemaExtensions
+	eDiagnosticsMode_SEND_ACTIVE_DTCS                                                        smithy.SchemaExtensions
+	e_double                                                                                 smithy.SchemaExtensions
+	eEncryptionStatus                                                                        smithy.SchemaExtensions
+	eEncryptionStatus_PENDING                                                                smithy.SchemaExtensions
+	eEncryptionStatus_SUCCESS                                                                smithy.SchemaExtensions
+	eEncryptionStatus_FAILURE                                                                smithy.SchemaExtensions
+	eEncryptionType                                                                          smithy.SchemaExtensions
+	eEncryptionType_KMS_BASED_ENCRYPTION                                                     smithy.SchemaExtensions
+	eEncryptionType_FLEETWISE_DEFAULT_ENCRYPTION                                             smithy.SchemaExtensions
+	e_errorMessage                                                                           smithy.SchemaExtensions
+	e_eventExpression                                                                        smithy.SchemaExtensions
+	e_EventExpressionList                                                                    smithy.SchemaExtensions
+	e_EventExpressionList_member                                                             smithy.SchemaExtensions
+	e_fetchConfigEventExpression                                                             smithy.SchemaExtensions
+	e_fleetId                                                                                smithy.SchemaExtensions
+	e_fleets                                                                                 smithy.SchemaExtensions
+	e_fleets_member                                                                          smithy.SchemaExtensions
+	e_fleetSummaries                                                                         smithy.SchemaExtensions
+	e_fleetSummaries_member                                                                  smithy.SchemaExtensions
+	eFleetSummary                                                                            smithy.SchemaExtensions
+	eFleetSummary_id                                                                         smithy.SchemaExtensions
+	eFleetSummary_arn                                                                        smithy.SchemaExtensions
+	eFleetSummary_description                                                                smithy.SchemaExtensions
+	eFleetSummary_signalCatalogArn                                                           smithy.SchemaExtensions
+	eFleetSummary_creationTime                                                               smithy.SchemaExtensions
+	eFleetSummary_lastModificationTime                                                       smithy.SchemaExtensions
+	eFormattedVss                                                                            smithy.SchemaExtensions
+	eFormattedVss_vssJson                                                                    smithy.SchemaExtensions
+	e_Fqns                                                                                   smithy.SchemaExtensions
+	e_Fqns_member                                                                            smithy.SchemaExtensions
+	e_FullyQualifiedName                                                                     smithy.SchemaExtensions
+	eIamRegistrationResponse                                                                 smithy.SchemaExtensions
+	eIamRegistrationResponse_roleArn                                                         smithy.SchemaExtensions
+	eIamRegistrationResponse_registrationStatus                                              smithy.SchemaExtensions
+	eIamRegistrationResponse_errorMessage                                                    smithy.SchemaExtensions
+	eIamResources                                                                            smithy.SchemaExtensions
+	eIamResources_roleArn                                                                    smithy.SchemaExtensions
+	e_IAMRoleArn                                                                             smithy.SchemaExtensions
+	e_InterfaceId                                                                            smithy.SchemaExtensions
+	e_InterfaceIds                                                                           smithy.SchemaExtensions
+	e_InterfaceIds_member                                                                    smithy.SchemaExtensions
+	eInternalServerException                                                                 smithy.SchemaExtensions
+	eInternalServerException_message                                                         smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                                               smithy.SchemaExtensions
+	eInvalidNetworkInterface                                                                 smithy.SchemaExtensions
+	eInvalidNetworkInterface_interfaceId                                                     smithy.SchemaExtensions
+	eInvalidNetworkInterface_reason                                                          smithy.SchemaExtensions
+	e_InvalidNetworkInterfaces                                                               smithy.SchemaExtensions
+	e_InvalidNetworkInterfaces_member                                                        smithy.SchemaExtensions
+	eInvalidNodeException                                                                    smithy.SchemaExtensions
+	eInvalidNodeException_invalidNodes                                                       smithy.SchemaExtensions
+	eInvalidNodeException_reason                                                             smithy.SchemaExtensions
+	eInvalidNodeException_message                                                            smithy.SchemaExtensions
+	eInvalidSignal                                                                           smithy.SchemaExtensions
+	eInvalidSignal_name                                                                      smithy.SchemaExtensions
+	eInvalidSignal_reason                                                                    smithy.SchemaExtensions
+	eInvalidSignalDecoder                                                                    smithy.SchemaExtensions
+	eInvalidSignalDecoder_name                                                               smithy.SchemaExtensions
+	eInvalidSignalDecoder_reason                                                             smithy.SchemaExtensions
+	eInvalidSignalDecoder_hint                                                               smithy.SchemaExtensions
+	e_InvalidSignalDecoders                                                                  smithy.SchemaExtensions
+	e_InvalidSignalDecoders_member                                                           smithy.SchemaExtensions
+	e_InvalidSignals                                                                         smithy.SchemaExtensions
+	e_InvalidSignals_member                                                                  smithy.SchemaExtensions
+	eInvalidSignalsException                                                                 smithy.SchemaExtensions
+	eInvalidSignalsException_message                                                         smithy.SchemaExtensions
+	eInvalidSignalsException_invalidSignals                                                  smithy.SchemaExtensions
+	e_languageVersion                                                                        smithy.SchemaExtensions
+	eLimitExceededException                                                                  smithy.SchemaExtensions
+	eLimitExceededException_message                                                          smithy.SchemaExtensions
+	eLimitExceededException_resourceId                                                       smithy.SchemaExtensions
+	eLimitExceededException_resourceType                                                     smithy.SchemaExtensions
+	e_listOfStrings                                                                          smithy.SchemaExtensions
+	e_listOfStrings_member                                                                   smithy.SchemaExtensions
+	eListResponseScope                                                                       smithy.SchemaExtensions
+	eListResponseScope_METADATA_ONLY                                                         smithy.SchemaExtensions
+	e_listVehiclesMaxResults                                                                 smithy.SchemaExtensions
+	eLogType                                                                                 smithy.SchemaExtensions
+	eLogType_OFF                                                                             smithy.SchemaExtensions
+	eLogType_ERROR                                                                           smithy.SchemaExtensions
+	eManifestStatus                                                                          smithy.SchemaExtensions
+	eManifestStatus_ACTIVE                                                                   smithy.SchemaExtensions
+	eManifestStatus_DRAFT                                                                    smithy.SchemaExtensions
+	eManifestStatus_INVALID                                                                  smithy.SchemaExtensions
+	eManifestStatus_VALIDATING                                                               smithy.SchemaExtensions
+	e_maxResults                                                                             smithy.SchemaExtensions
+	e_maxSampleCount                                                                         smithy.SchemaExtensions
+	e_maxStringSize                                                                          smithy.SchemaExtensions
+	e_message                                                                                smithy.SchemaExtensions
+	eMessageSignal                                                                           smithy.SchemaExtensions
+	eMessageSignal_topicName                                                                 smithy.SchemaExtensions
+	eMessageSignal_structuredMessage                                                         smithy.SchemaExtensions
+	e_modelManifestSummaries                                                                 smithy.SchemaExtensions
+	e_modelManifestSummaries_member                                                          smithy.SchemaExtensions
+	eModelManifestSummary                                                                    smithy.SchemaExtensions
+	eModelManifestSummary_name                                                               smithy.SchemaExtensions
+	eModelManifestSummary_arn                                                                smithy.SchemaExtensions
+	eModelManifestSummary_signalCatalogArn                                                   smithy.SchemaExtensions
+	eModelManifestSummary_description                                                        smithy.SchemaExtensions
+	eModelManifestSummary_status                                                             smithy.SchemaExtensions
+	eModelManifestSummary_creationTime                                                       smithy.SchemaExtensions
+	eModelManifestSummary_lastModificationTime                                               smithy.SchemaExtensions
+	e_ModelSignalsMap                                                                        smithy.SchemaExtensions
+	e_ModelSignalsMap_key                                                                    smithy.SchemaExtensions
+	e_ModelSignalsMap_value                                                                  smithy.SchemaExtensions
+	e_MqttTopicArn                                                                           smithy.SchemaExtensions
+	eMqttTopicConfig                                                                         smithy.SchemaExtensions
+	eMqttTopicConfig_mqttTopicArn                                                            smithy.SchemaExtensions
+	eMqttTopicConfig_executionRoleArn                                                        smithy.SchemaExtensions
+	e_NetworkFileBlob                                                                        smithy.SchemaExtensions
+	eNetworkFileDefinition                                                                   smithy.SchemaExtensions
+	eNetworkFileDefinition_canDbc                                                            smithy.SchemaExtensions
+	e_NetworkFileDefinitions                                                                 smithy.SchemaExtensions
+	e_NetworkFileDefinitions_member                                                          smithy.SchemaExtensions
+	e_NetworkFilesList                                                                       smithy.SchemaExtensions
+	e_NetworkFilesList_member                                                                smithy.SchemaExtensions
+	eNetworkInterface                                                                        smithy.SchemaExtensions
+	eNetworkInterface_interfaceId                                                            smithy.SchemaExtensions
+	eNetworkInterface_type                                                                   smithy.SchemaExtensions
+	eNetworkInterface_canInterface                                                           smithy.SchemaExtensions
+	eNetworkInterface_obdInterface                                                           smithy.SchemaExtensions
+	eNetworkInterface_vehicleMiddleware                                                      smithy.SchemaExtensions
+	eNetworkInterface_customDecodingInterface                                                smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason                                                           smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_DUPLICATE_INTERFACE                                       smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE                             smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS                   smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL                        smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL                        smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS       smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL         smithy.SchemaExtensions
+	eNetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL     smithy.SchemaExtensions
+	e_NetworkInterfaces                                                                      smithy.SchemaExtensions
+	e_NetworkInterfaces_member                                                               smithy.SchemaExtensions
+	eNetworkInterfaceType                                                                    smithy.SchemaExtensions
+	eNetworkInterfaceType_CAN_INTERFACE                                                      smithy.SchemaExtensions
+	eNetworkInterfaceType_OBD_INTERFACE                                                      smithy.SchemaExtensions
+	eNetworkInterfaceType_VEHICLE_MIDDLEWARE                                                 smithy.SchemaExtensions
+	eNetworkInterfaceType_CUSTOM_DECODING_INTERFACE                                          smithy.SchemaExtensions
+	e_nextToken                                                                              smithy.SchemaExtensions
+	eNode                                                                                    smithy.SchemaExtensions
+	eNode_branch                                                                             smithy.SchemaExtensions
+	eNode_sensor                                                                             smithy.SchemaExtensions
+	eNode_actuator                                                                           smithy.SchemaExtensions
+	eNode_attribute                                                                          smithy.SchemaExtensions
+	eNode_struct                                                                             smithy.SchemaExtensions
+	eNode_property                                                                           smithy.SchemaExtensions
+	eNodeCounts                                                                              smithy.SchemaExtensions
+	eNodeCounts_totalNodes                                                                   smithy.SchemaExtensions
+	eNodeCounts_totalBranches                                                                smithy.SchemaExtensions
+	eNodeCounts_totalSensors                                                                 smithy.SchemaExtensions
+	eNodeCounts_totalAttributes                                                              smithy.SchemaExtensions
+	eNodeCounts_totalActuators                                                               smithy.SchemaExtensions
+	eNodeCounts_totalStructs                                                                 smithy.SchemaExtensions
+	eNodeCounts_totalProperties                                                              smithy.SchemaExtensions
+	eNodeDataEncoding                                                                        smithy.SchemaExtensions
+	eNodeDataEncoding_BINARY                                                                 smithy.SchemaExtensions
+	eNodeDataEncoding_TYPED                                                                  smithy.SchemaExtensions
+	eNodeDataType                                                                            smithy.SchemaExtensions
+	eNodeDataType_INT8                                                                       smithy.SchemaExtensions
+	eNodeDataType_UINT8                                                                      smithy.SchemaExtensions
+	eNodeDataType_INT16                                                                      smithy.SchemaExtensions
+	eNodeDataType_UINT16                                                                     smithy.SchemaExtensions
+	eNodeDataType_INT32                                                                      smithy.SchemaExtensions
+	eNodeDataType_UINT32                                                                     smithy.SchemaExtensions
+	eNodeDataType_INT64                                                                      smithy.SchemaExtensions
+	eNodeDataType_UINT64                                                                     smithy.SchemaExtensions
+	eNodeDataType_BOOLEAN                                                                    smithy.SchemaExtensions
+	eNodeDataType_FLOAT                                                                      smithy.SchemaExtensions
+	eNodeDataType_DOUBLE                                                                     smithy.SchemaExtensions
+	eNodeDataType_STRING                                                                     smithy.SchemaExtensions
+	eNodeDataType_UNIX_TIMESTAMP                                                             smithy.SchemaExtensions
+	eNodeDataType_INT8_ARRAY                                                                 smithy.SchemaExtensions
+	eNodeDataType_UINT8_ARRAY                                                                smithy.SchemaExtensions
+	eNodeDataType_INT16_ARRAY                                                                smithy.SchemaExtensions
+	eNodeDataType_UINT16_ARRAY                                                               smithy.SchemaExtensions
+	eNodeDataType_INT32_ARRAY                                                                smithy.SchemaExtensions
+	eNodeDataType_UINT32_ARRAY                                                               smithy.SchemaExtensions
+	eNodeDataType_INT64_ARRAY                                                                smithy.SchemaExtensions
+	eNodeDataType_UINT64_ARRAY                                                               smithy.SchemaExtensions
+	eNodeDataType_BOOLEAN_ARRAY                                                              smithy.SchemaExtensions
+	eNodeDataType_FLOAT_ARRAY                                                                smithy.SchemaExtensions
+	eNodeDataType_DOUBLE_ARRAY                                                               smithy.SchemaExtensions
+	eNodeDataType_STRING_ARRAY                                                               smithy.SchemaExtensions
+	eNodeDataType_UNIX_TIMESTAMP_ARRAY                                                       smithy.SchemaExtensions
+	eNodeDataType_UNKNOWN                                                                    smithy.SchemaExtensions
+	eNodeDataType_STRUCT                                                                     smithy.SchemaExtensions
+	eNodeDataType_STRUCT_ARRAY                                                               smithy.SchemaExtensions
+	e_NodePath                                                                               smithy.SchemaExtensions
+	e_NodePaths                                                                              smithy.SchemaExtensions
+	e_NodePaths_member                                                                       smithy.SchemaExtensions
+	e_Nodes                                                                                  smithy.SchemaExtensions
+	e_Nodes_member                                                                           smithy.SchemaExtensions
+	e_nonNegativeInteger                                                                     smithy.SchemaExtensions
+	e_number                                                                                 smithy.SchemaExtensions
+	e_ObdBitmaskLength                                                                       smithy.SchemaExtensions
+	e_ObdByteLength                                                                          smithy.SchemaExtensions
+	eObdInterface                                                                            smithy.SchemaExtensions
+	eObdInterface_name                                                                       smithy.SchemaExtensions
+	eObdInterface_requestMessageId                                                           smithy.SchemaExtensions
+	eObdInterface_obdStandard                                                                smithy.SchemaExtensions
+	eObdInterface_pidRequestIntervalSeconds                                                  smithy.SchemaExtensions
+	eObdInterface_dtcRequestIntervalSeconds                                                  smithy.SchemaExtensions
+	eObdInterface_useExtendedIds                                                             smithy.SchemaExtensions
+	eObdInterface_hasTransmissionEcu                                                         smithy.SchemaExtensions
+	e_ObdInterfaceName                                                                       smithy.SchemaExtensions
+	eObdSignal                                                                               smithy.SchemaExtensions
+	eObdSignal_pidResponseLength                                                             smithy.SchemaExtensions
+	eObdSignal_serviceMode                                                                   smithy.SchemaExtensions
+	eObdSignal_pid                                                                           smithy.SchemaExtensions
+	eObdSignal_scaling                                                                       smithy.SchemaExtensions
+	eObdSignal_offset                                                                        smithy.SchemaExtensions
+	eObdSignal_startByte                                                                     smithy.SchemaExtensions
+	eObdSignal_byteLength                                                                    smithy.SchemaExtensions
+	eObdSignal_bitRightShift                                                                 smithy.SchemaExtensions
+	eObdSignal_bitMaskLength                                                                 smithy.SchemaExtensions
+	eObdSignal_isSigned                                                                      smithy.SchemaExtensions
+	eObdSignal_signalValueType                                                               smithy.SchemaExtensions
+	e_ObdStandard                                                                            smithy.SchemaExtensions
+	eOnChangeStateTemplateUpdateStrategy                                                     smithy.SchemaExtensions
+	ePeriodicStateTemplateUpdateStrategy                                                     smithy.SchemaExtensions
+	ePeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate                             smithy.SchemaExtensions
+	e_positiveInteger                                                                        smithy.SchemaExtensions
+	e_positiveLong                                                                           smithy.SchemaExtensions
+	e_Prefix                                                                                 smithy.SchemaExtensions
+	ePrimitiveMessageDefinition                                                              smithy.SchemaExtensions
+	ePrimitiveMessageDefinition_ros2PrimitiveMessageDefinition                               smithy.SchemaExtensions
+	e_priority                                                                               smithy.SchemaExtensions
+	e_ProtocolName                                                                           smithy.SchemaExtensions
+	e_ProtocolVersion                                                                        smithy.SchemaExtensions
+	eRegistrationStatus                                                                      smithy.SchemaExtensions
+	eRegistrationStatus_REGISTRATION_PENDING                                                 smithy.SchemaExtensions
+	eRegistrationStatus_REGISTRATION_SUCCESS                                                 smithy.SchemaExtensions
+	eRegistrationStatus_REGISTRATION_FAILURE                                                 smithy.SchemaExtensions
+	e_ResourceIdentifier                                                                     smithy.SchemaExtensions
+	e_resourceName                                                                           smithy.SchemaExtensions
+	eResourceNotFoundException                                                               smithy.SchemaExtensions
+	eResourceNotFoundException_message                                                       smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                                    smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                                                  smithy.SchemaExtensions
+	e_ResourceUniqueId                                                                       smithy.SchemaExtensions
+	e_RetryAfterSeconds                                                                      smithy.SchemaExtensions
+	eROS2PrimitiveMessageDefinition                                                          smithy.SchemaExtensions
+	eROS2PrimitiveMessageDefinition_primitiveType                                            smithy.SchemaExtensions
+	eROS2PrimitiveMessageDefinition_offset                                                   smithy.SchemaExtensions
+	eROS2PrimitiveMessageDefinition_scaling                                                  smithy.SchemaExtensions
+	eROS2PrimitiveMessageDefinition_upperBound                                               smithy.SchemaExtensions
+	eROS2PrimitiveType                                                                       smithy.SchemaExtensions
+	eROS2PrimitiveType_BOOL                                                                  smithy.SchemaExtensions
+	eROS2PrimitiveType_BYTE                                                                  smithy.SchemaExtensions
+	eROS2PrimitiveType_CHAR                                                                  smithy.SchemaExtensions
+	eROS2PrimitiveType_FLOAT32                                                               smithy.SchemaExtensions
+	eROS2PrimitiveType_FLOAT64                                                               smithy.SchemaExtensions
+	eROS2PrimitiveType_INT8                                                                  smithy.SchemaExtensions
+	eROS2PrimitiveType_UINT8                                                                 smithy.SchemaExtensions
+	eROS2PrimitiveType_INT16                                                                 smithy.SchemaExtensions
+	eROS2PrimitiveType_UINT16                                                                smithy.SchemaExtensions
+	eROS2PrimitiveType_INT32                                                                 smithy.SchemaExtensions
+	eROS2PrimitiveType_UINT32                                                                smithy.SchemaExtensions
+	eROS2PrimitiveType_INT64                                                                 smithy.SchemaExtensions
+	eROS2PrimitiveType_UINT64                                                                smithy.SchemaExtensions
+	eROS2PrimitiveType_STRING                                                                smithy.SchemaExtensions
+	eROS2PrimitiveType_WSTRING                                                               smithy.SchemaExtensions
+	e_S3BucketArn                                                                            smithy.SchemaExtensions
+	eS3Config                                                                                smithy.SchemaExtensions
+	eS3Config_bucketArn                                                                      smithy.SchemaExtensions
+	eS3Config_dataFormat                                                                     smithy.SchemaExtensions
+	eS3Config_storageCompressionFormat                                                       smithy.SchemaExtensions
+	eS3Config_prefix                                                                         smithy.SchemaExtensions
+	eSensor                                                                                  smithy.SchemaExtensions
+	eSensor_fullyQualifiedName                                                               smithy.SchemaExtensions
+	eSensor_dataType                                                                         smithy.SchemaExtensions
+	eSensor_description                                                                      smithy.SchemaExtensions
+	eSensor_unit                                                                             smithy.SchemaExtensions
+	eSensor_allowedValues                                                                    smithy.SchemaExtensions
+	eSensor_min                                                                              smithy.SchemaExtensions
+	eSensor_max                                                                              smithy.SchemaExtensions
+	eSensor_deprecationMessage                                                               smithy.SchemaExtensions
+	eSensor_comment                                                                          smithy.SchemaExtensions
+	eSensor_structFullyQualifiedName                                                         smithy.SchemaExtensions
+	e_signalCatalogSummaries                                                                 smithy.SchemaExtensions
+	e_signalCatalogSummaries_member                                                          smithy.SchemaExtensions
+	eSignalCatalogSummary                                                                    smithy.SchemaExtensions
+	eSignalCatalogSummary_name                                                               smithy.SchemaExtensions
+	eSignalCatalogSummary_arn                                                                smithy.SchemaExtensions
+	eSignalCatalogSummary_creationTime                                                       smithy.SchemaExtensions
+	eSignalCatalogSummary_lastModificationTime                                               smithy.SchemaExtensions
+	eSignalDecoder                                                                           smithy.SchemaExtensions
+	eSignalDecoder_fullyQualifiedName                                                        smithy.SchemaExtensions
+	eSignalDecoder_type                                                                      smithy.SchemaExtensions
+	eSignalDecoder_interfaceId                                                               smithy.SchemaExtensions
+	eSignalDecoder_canSignal                                                                 smithy.SchemaExtensions
+	eSignalDecoder_obdSignal                                                                 smithy.SchemaExtensions
+	eSignalDecoder_messageSignal                                                             smithy.SchemaExtensions
+	eSignalDecoder_customDecodingSignal                                                      smithy.SchemaExtensions
+	eSignalDecoderFailureReason                                                              smithy.SchemaExtensions
+	eSignalDecoderFailureReason_DUPLICATE_SIGNAL                                             smithy.SchemaExtensions
+	eSignalDecoderFailureReason_CONFLICTING_SIGNAL                                           smithy.SchemaExtensions
+	eSignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS                                 smithy.SchemaExtensions
+	eSignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE                 smithy.SchemaExtensions
+	eSignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE smithy.SchemaExtensions
+	eSignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL                                          smithy.SchemaExtensions
+	eSignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL                                      smithy.SchemaExtensions
+	eSignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL                                      smithy.SchemaExtensions
+	eSignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL                          smithy.SchemaExtensions
+	eSignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL                                  smithy.SchemaExtensions
+	eSignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE    smithy.SchemaExtensions
+	eSignalDecoderFailureReason_STRUCT_SIZE_MISMATCH                                         smithy.SchemaExtensions
+	eSignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL                      smithy.SchemaExtensions
+	eSignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG              smithy.SchemaExtensions
+	eSignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL                                         smithy.SchemaExtensions
+	eSignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL                          smithy.SchemaExtensions
+	e_SignalDecoders                                                                         smithy.SchemaExtensions
+	e_SignalDecoders_member                                                                  smithy.SchemaExtensions
+	eSignalDecoderType                                                                       smithy.SchemaExtensions
+	eSignalDecoderType_CAN_SIGNAL                                                            smithy.SchemaExtensions
+	eSignalDecoderType_OBD_SIGNAL                                                            smithy.SchemaExtensions
+	eSignalDecoderType_MESSAGE_SIGNAL                                                        smithy.SchemaExtensions
+	eSignalDecoderType_CUSTOM_DECODING_SIGNAL                                                smithy.SchemaExtensions
+	eSignalFetchConfig                                                                       smithy.SchemaExtensions
+	eSignalFetchConfig_timeBased                                                             smithy.SchemaExtensions
+	eSignalFetchConfig_conditionBased                                                        smithy.SchemaExtensions
+	eSignalFetchInformation                                                                  smithy.SchemaExtensions
+	eSignalFetchInformation_fullyQualifiedName                                               smithy.SchemaExtensions
+	eSignalFetchInformation_signalFetchConfig                                                smithy.SchemaExtensions
+	eSignalFetchInformation_conditionLanguageVersion                                         smithy.SchemaExtensions
+	eSignalFetchInformation_actions                                                          smithy.SchemaExtensions
+	e_SignalFetchInformationList                                                             smithy.SchemaExtensions
+	e_SignalFetchInformationList_member                                                      smithy.SchemaExtensions
+	eSignalInformation                                                                       smithy.SchemaExtensions
+	eSignalInformation_name                                                                  smithy.SchemaExtensions
+	eSignalInformation_maxSampleCount                                                        smithy.SchemaExtensions
+	eSignalInformation_minimumSamplingIntervalMs                                             smithy.SchemaExtensions
+	eSignalInformation_dataPartitionId                                                       smithy.SchemaExtensions
+	e_SignalInformationList                                                                  smithy.SchemaExtensions
+	e_SignalInformationList_member                                                           smithy.SchemaExtensions
+	eSignalNodeType                                                                          smithy.SchemaExtensions
+	eSignalNodeType_SENSOR                                                                   smithy.SchemaExtensions
+	eSignalNodeType_ACTUATOR                                                                 smithy.SchemaExtensions
+	eSignalNodeType_ATTRIBUTE                                                                smithy.SchemaExtensions
+	eSignalNodeType_BRANCH                                                                   smithy.SchemaExtensions
+	eSignalNodeType_CUSTOM_STRUCT                                                            smithy.SchemaExtensions
+	eSignalNodeType_CUSTOM_PROPERTY                                                          smithy.SchemaExtensions
+	eSignalValueType                                                                         smithy.SchemaExtensions
+	eSignalValueType_INTEGER                                                                 smithy.SchemaExtensions
+	eSignalValueType_FLOATING_POINT                                                          smithy.SchemaExtensions
+	eSpoolingMode                                                                            smithy.SchemaExtensions
+	eSpoolingMode_OFF                                                                        smithy.SchemaExtensions
+	eSpoolingMode_TO_DISK                                                                    smithy.SchemaExtensions
+	eStateTemplateAssociation                                                                smithy.SchemaExtensions
+	eStateTemplateAssociation_identifier                                                     smithy.SchemaExtensions
+	eStateTemplateAssociation_stateTemplateUpdateStrategy                                    smithy.SchemaExtensions
+	e_StateTemplateAssociationIdentifiers                                                    smithy.SchemaExtensions
+	e_StateTemplateAssociationIdentifiers_member                                             smithy.SchemaExtensions
+	e_StateTemplateAssociations                                                              smithy.SchemaExtensions
+	e_StateTemplateAssociations_member                                                       smithy.SchemaExtensions
+	e_StateTemplateDataExtraDimensionNodePathList                                            smithy.SchemaExtensions
+	e_StateTemplateDataExtraDimensionNodePathList_member                                     smithy.SchemaExtensions
+	e_StateTemplateMetadataExtraDimensionNodePathList                                        smithy.SchemaExtensions
+	e_StateTemplateMetadataExtraDimensionNodePathList_member                                 smithy.SchemaExtensions
+	e_StateTemplateProperties                                                                smithy.SchemaExtensions
+	e_StateTemplateProperties_member                                                         smithy.SchemaExtensions
+	e_StateTemplateSummaries                                                                 smithy.SchemaExtensions
+	e_StateTemplateSummaries_member                                                          smithy.SchemaExtensions
+	eStateTemplateSummary                                                                    smithy.SchemaExtensions
+	eStateTemplateSummary_name                                                               smithy.SchemaExtensions
+	eStateTemplateSummary_arn                                                                smithy.SchemaExtensions
+	eStateTemplateSummary_signalCatalogArn                                                   smithy.SchemaExtensions
+	eStateTemplateSummary_description                                                        smithy.SchemaExtensions
+	eStateTemplateSummary_creationTime                                                       smithy.SchemaExtensions
+	eStateTemplateSummary_lastModificationTime                                               smithy.SchemaExtensions
+	eStateTemplateSummary_id                                                                 smithy.SchemaExtensions
+	eStateTemplateUpdateStrategy                                                             smithy.SchemaExtensions
+	eStateTemplateUpdateStrategy_periodic                                                    smithy.SchemaExtensions
+	eStateTemplateUpdateStrategy_onChange                                                    smithy.SchemaExtensions
+	e_statusStr                                                                              smithy.SchemaExtensions
+	eStorageCompressionFormat                                                                smithy.SchemaExtensions
+	eStorageCompressionFormat_NONE                                                           smithy.SchemaExtensions
+	eStorageCompressionFormat_GZIP                                                           smithy.SchemaExtensions
+	e_StorageLocation                                                                        smithy.SchemaExtensions
+	eStorageMaximumSize                                                                      smithy.SchemaExtensions
+	eStorageMaximumSize_unit                                                                 smithy.SchemaExtensions
+	eStorageMaximumSize_value                                                                smithy.SchemaExtensions
+	eStorageMaximumSizeUnit                                                                  smithy.SchemaExtensions
+	eStorageMaximumSizeUnit_MB                                                               smithy.SchemaExtensions
+	eStorageMaximumSizeUnit_GB                                                               smithy.SchemaExtensions
+	eStorageMaximumSizeUnit_TB                                                               smithy.SchemaExtensions
+	e_StorageMaximumSizeValue                                                                smithy.SchemaExtensions
+	eStorageMinimumTimeToLive                                                                smithy.SchemaExtensions
+	eStorageMinimumTimeToLive_unit                                                           smithy.SchemaExtensions
+	eStorageMinimumTimeToLive_value                                                          smithy.SchemaExtensions
+	eStorageMinimumTimeToLiveUnit                                                            smithy.SchemaExtensions
+	eStorageMinimumTimeToLiveUnit_HOURS                                                      smithy.SchemaExtensions
+	eStorageMinimumTimeToLiveUnit_DAYS                                                       smithy.SchemaExtensions
+	eStorageMinimumTimeToLiveUnit_WEEKS                                                      smithy.SchemaExtensions
+	e_StorageMinimumTimeToLiveValue                                                          smithy.SchemaExtensions
+	e_string                                                                                 smithy.SchemaExtensions
+	eStructuredMessage                                                                       smithy.SchemaExtensions
+	eStructuredMessage_primitiveMessageDefinition                                            smithy.SchemaExtensions
+	eStructuredMessage_structuredMessageListDefinition                                       smithy.SchemaExtensions
+	eStructuredMessage_structuredMessageDefinition                                           smithy.SchemaExtensions
+	e_StructuredMessageDefinition                                                            smithy.SchemaExtensions
+	e_StructuredMessageDefinition_member                                                     smithy.SchemaExtensions
+	eStructuredMessageFieldNameAndDataTypePair                                               smithy.SchemaExtensions
+	eStructuredMessageFieldNameAndDataTypePair_fieldName                                     smithy.SchemaExtensions
+	eStructuredMessageFieldNameAndDataTypePair_dataType                                      smithy.SchemaExtensions
+	eStructuredMessageListDefinition                                                         smithy.SchemaExtensions
+	eStructuredMessageListDefinition_name                                                    smithy.SchemaExtensions
+	eStructuredMessageListDefinition_memberType                                              smithy.SchemaExtensions
+	eStructuredMessageListDefinition_listType                                                smithy.SchemaExtensions
+	eStructuredMessageListDefinition_capacity                                                smithy.SchemaExtensions
+	eStructuredMessageListType                                                               smithy.SchemaExtensions
+	eStructuredMessageListType_FIXED_CAPACITY                                                smithy.SchemaExtensions
+	eStructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY                                    smithy.SchemaExtensions
+	eStructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY                                      smithy.SchemaExtensions
+	e_StructureMessageName                                                                   smithy.SchemaExtensions
+	eTag                                                                                     smithy.SchemaExtensions
+	eTag_Key                                                                                 smithy.SchemaExtensions
+	eTag_Value                                                                               smithy.SchemaExtensions
+	e_TagKey                                                                                 smithy.SchemaExtensions
+	e_TagKeyList                                                                             smithy.SchemaExtensions
+	e_TagKeyList_member                                                                      smithy.SchemaExtensions
+	e_TagList                                                                                smithy.SchemaExtensions
+	e_TagList_member                                                                         smithy.SchemaExtensions
+	e_TagValue                                                                               smithy.SchemaExtensions
+	eThrottlingException                                                                     smithy.SchemaExtensions
+	eThrottlingException_message                                                             smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                                           smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                                         smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                                                   smithy.SchemaExtensions
+	eTimeBasedCollectionScheme                                                               smithy.SchemaExtensions
+	eTimeBasedCollectionScheme_periodMs                                                      smithy.SchemaExtensions
+	eTimeBasedSignalFetchConfig                                                              smithy.SchemaExtensions
+	eTimeBasedSignalFetchConfig_executionFrequencyMs                                         smithy.SchemaExtensions
+	eTimePeriod                                                                              smithy.SchemaExtensions
+	eTimePeriod_unit                                                                         smithy.SchemaExtensions
+	eTimePeriod_value                                                                        smithy.SchemaExtensions
+	e_timestamp                                                                              smithy.SchemaExtensions
+	eTimestreamConfig                                                                        smithy.SchemaExtensions
+	eTimestreamConfig_timestreamTableArn                                                     smithy.SchemaExtensions
+	eTimestreamConfig_executionRoleArn                                                       smithy.SchemaExtensions
+	e_TimestreamDatabaseName                                                                 smithy.SchemaExtensions
+	eTimestreamRegistrationResponse                                                          smithy.SchemaExtensions
+	eTimestreamRegistrationResponse_timestreamDatabaseName                                   smithy.SchemaExtensions
+	eTimestreamRegistrationResponse_timestreamTableName                                      smithy.SchemaExtensions
+	eTimestreamRegistrationResponse_timestreamDatabaseArn                                    smithy.SchemaExtensions
+	eTimestreamRegistrationResponse_timestreamTableArn                                       smithy.SchemaExtensions
+	eTimestreamRegistrationResponse_registrationStatus                                       smithy.SchemaExtensions
+	eTimestreamRegistrationResponse_errorMessage                                             smithy.SchemaExtensions
+	eTimestreamResources                                                                     smithy.SchemaExtensions
+	eTimestreamResources_timestreamDatabaseName                                              smithy.SchemaExtensions
+	eTimestreamResources_timestreamTableName                                                 smithy.SchemaExtensions
+	e_TimestreamTableArn                                                                     smithy.SchemaExtensions
+	e_TimestreamTableName                                                                    smithy.SchemaExtensions
+	eTimeUnit                                                                                smithy.SchemaExtensions
+	eTimeUnit_MILLISECOND                                                                    smithy.SchemaExtensions
+	eTimeUnit_SECOND                                                                         smithy.SchemaExtensions
+	eTimeUnit_MINUTE                                                                         smithy.SchemaExtensions
+	eTimeUnit_HOUR                                                                           smithy.SchemaExtensions
+	e_TopicName                                                                              smithy.SchemaExtensions
+	eTriggerMode                                                                             smithy.SchemaExtensions
+	eTriggerMode_ALWAYS                                                                      smithy.SchemaExtensions
+	eTriggerMode_RISING_EDGE                                                                 smithy.SchemaExtensions
+	e_uint32                                                                                 smithy.SchemaExtensions
+	eUpdateCampaignAction                                                                    smithy.SchemaExtensions
+	eUpdateCampaignAction_APPROVE                                                            smithy.SchemaExtensions
+	eUpdateCampaignAction_SUSPEND                                                            smithy.SchemaExtensions
+	eUpdateCampaignAction_RESUME                                                             smithy.SchemaExtensions
+	eUpdateCampaignAction_UPDATE                                                             smithy.SchemaExtensions
+	eUpdateMode                                                                              smithy.SchemaExtensions
+	eUpdateMode_OVERWRITE                                                                    smithy.SchemaExtensions
+	eUpdateMode_MERGE                                                                        smithy.SchemaExtensions
+	eUpdateVehicleError                                                                      smithy.SchemaExtensions
+	eUpdateVehicleError_vehicleName                                                          smithy.SchemaExtensions
+	eUpdateVehicleError_code                                                                 smithy.SchemaExtensions
+	eUpdateVehicleError_message                                                              smithy.SchemaExtensions
+	e_updateVehicleErrors                                                                    smithy.SchemaExtensions
+	e_updateVehicleErrors_member                                                             smithy.SchemaExtensions
+	eUpdateVehicleRequestItem                                                                smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_vehicleName                                                    smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_modelManifestArn                                               smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_decoderManifestArn                                             smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_attributes                                                     smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_attributeUpdateMode                                            smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_stateTemplatesToAdd                                            smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_stateTemplatesToRemove                                         smithy.SchemaExtensions
+	eUpdateVehicleRequestItem_stateTemplatesToUpdate                                         smithy.SchemaExtensions
+	e_updateVehicleRequestItems                                                              smithy.SchemaExtensions
+	e_updateVehicleRequestItems_member                                                       smithy.SchemaExtensions
+	eUpdateVehicleResponseItem                                                               smithy.SchemaExtensions
+	eUpdateVehicleResponseItem_vehicleName                                                   smithy.SchemaExtensions
+	eUpdateVehicleResponseItem_arn                                                           smithy.SchemaExtensions
+	e_updateVehicleResponseItems                                                             smithy.SchemaExtensions
+	e_updateVehicleResponseItems_member                                                      smithy.SchemaExtensions
+	eValidationException                                                                     smithy.SchemaExtensions
+	eValidationException_message                                                             smithy.SchemaExtensions
+	eValidationException_reason                                                              smithy.SchemaExtensions
+	eValidationException_fieldList                                                           smithy.SchemaExtensions
+	eValidationExceptionField                                                                smithy.SchemaExtensions
+	eValidationExceptionField_name                                                           smithy.SchemaExtensions
+	eValidationExceptionField_message                                                        smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                                           smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                                    smithy.SchemaExtensions
+	eValidationExceptionReason                                                               smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                                             smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                                                  smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                                       smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                                         smithy.SchemaExtensions
+	eVehicleAssociationBehavior                                                              smithy.SchemaExtensions
+	eVehicleAssociationBehavior_CREATE_IOT_THING                                             smithy.SchemaExtensions
+	eVehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS                                    smithy.SchemaExtensions
+	eVehicleMiddleware                                                                       smithy.SchemaExtensions
+	eVehicleMiddleware_name                                                                  smithy.SchemaExtensions
+	eVehicleMiddleware_protocolName                                                          smithy.SchemaExtensions
+	e_VehicleMiddlewareName                                                                  smithy.SchemaExtensions
+	eVehicleMiddlewareProtocol                                                               smithy.SchemaExtensions
+	eVehicleMiddlewareProtocol_ROS_2                                                         smithy.SchemaExtensions
+	e_vehicleName                                                                            smithy.SchemaExtensions
+	e_vehicles                                                                               smithy.SchemaExtensions
+	e_vehicles_member                                                                        smithy.SchemaExtensions
+	eVehicleState                                                                            smithy.SchemaExtensions
+	eVehicleState_CREATED                                                                    smithy.SchemaExtensions
+	eVehicleState_READY                                                                      smithy.SchemaExtensions
+	eVehicleState_HEALTHY                                                                    smithy.SchemaExtensions
+	eVehicleState_SUSPENDED                                                                  smithy.SchemaExtensions
+	eVehicleState_DELETING                                                                   smithy.SchemaExtensions
+	eVehicleState_READY_FOR_CHECKIN                                                          smithy.SchemaExtensions
+	eVehicleStatus                                                                           smithy.SchemaExtensions
+	eVehicleStatus_campaignName                                                              smithy.SchemaExtensions
+	eVehicleStatus_vehicleName                                                               smithy.SchemaExtensions
+	eVehicleStatus_status                                                                    smithy.SchemaExtensions
+	e_VehicleStatusList                                                                      smithy.SchemaExtensions
+	e_VehicleStatusList_member                                                               smithy.SchemaExtensions
+	e_vehicleSummaries                                                                       smithy.SchemaExtensions
+	e_vehicleSummaries_member                                                                smithy.SchemaExtensions
+	eVehicleSummary                                                                          smithy.SchemaExtensions
+	eVehicleSummary_vehicleName                                                              smithy.SchemaExtensions
+	eVehicleSummary_arn                                                                      smithy.SchemaExtensions
+	eVehicleSummary_modelManifestArn                                                         smithy.SchemaExtensions
+	eVehicleSummary_decoderManifestArn                                                       smithy.SchemaExtensions
+	eVehicleSummary_creationTime                                                             smithy.SchemaExtensions
+	eVehicleSummary_lastModificationTime                                                     smithy.SchemaExtensions
+	eVehicleSummary_attributes                                                               smithy.SchemaExtensions
+	e_wildcardSignalName                                                                     smithy.SchemaExtensions
+	eAssociateVehicleFleetRequest                                                            smithy.SchemaExtensions
+	eAssociateVehicleFleetRequest_vehicleName                                                smithy.SchemaExtensions
+	eAssociateVehicleFleetRequest_fleetId                                                    smithy.SchemaExtensions
+	eAssociateVehicleFleetResponse                                                           smithy.SchemaExtensions
+	eBatchCreateVehicleRequest                                                               smithy.SchemaExtensions
+	eBatchCreateVehicleRequest_vehicles                                                      smithy.SchemaExtensions
+	eBatchCreateVehicleResponse                                                              smithy.SchemaExtensions
+	eBatchCreateVehicleResponse_vehicles                                                     smithy.SchemaExtensions
+	eBatchCreateVehicleResponse_errors                                                       smithy.SchemaExtensions
+	eBatchUpdateVehicleRequest                                                               smithy.SchemaExtensions
+	eBatchUpdateVehicleRequest_vehicles                                                      smithy.SchemaExtensions
+	eBatchUpdateVehicleResponse                                                              smithy.SchemaExtensions
+	eBatchUpdateVehicleResponse_vehicles                                                     smithy.SchemaExtensions
+	eBatchUpdateVehicleResponse_errors                                                       smithy.SchemaExtensions
+	eCreateCampaignRequest                                                                   smithy.SchemaExtensions
+	eCreateCampaignRequest_name                                                              smithy.SchemaExtensions
+	eCreateCampaignRequest_description                                                       smithy.SchemaExtensions
+	eCreateCampaignRequest_signalCatalogArn                                                  smithy.SchemaExtensions
+	eCreateCampaignRequest_targetArn                                                         smithy.SchemaExtensions
+	eCreateCampaignRequest_startTime                                                         smithy.SchemaExtensions
+	eCreateCampaignRequest_expiryTime                                                        smithy.SchemaExtensions
+	eCreateCampaignRequest_postTriggerCollectionDuration                                     smithy.SchemaExtensions
+	eCreateCampaignRequest_diagnosticsMode                                                   smithy.SchemaExtensions
+	eCreateCampaignRequest_spoolingMode                                                      smithy.SchemaExtensions
+	eCreateCampaignRequest_compression                                                       smithy.SchemaExtensions
+	eCreateCampaignRequest_priority                                                          smithy.SchemaExtensions
+	eCreateCampaignRequest_signalsToCollect                                                  smithy.SchemaExtensions
+	eCreateCampaignRequest_collectionScheme                                                  smithy.SchemaExtensions
+	eCreateCampaignRequest_dataExtraDimensions                                               smithy.SchemaExtensions
+	eCreateCampaignRequest_tags                                                              smithy.SchemaExtensions
+	eCreateCampaignRequest_dataDestinationConfigs                                            smithy.SchemaExtensions
+	eCreateCampaignRequest_dataPartitions                                                    smithy.SchemaExtensions
+	eCreateCampaignRequest_signalsToFetch                                                    smithy.SchemaExtensions
+	eCreateCampaignResponse                                                                  smithy.SchemaExtensions
+	eCreateCampaignResponse_name                                                             smithy.SchemaExtensions
+	eCreateCampaignResponse_arn                                                              smithy.SchemaExtensions
+	eCreateDecoderManifestRequest                                                            smithy.SchemaExtensions
+	eCreateDecoderManifestRequest_name                                                       smithy.SchemaExtensions
+	eCreateDecoderManifestRequest_description                                                smithy.SchemaExtensions
+	eCreateDecoderManifestRequest_modelManifestArn                                           smithy.SchemaExtensions
+	eCreateDecoderManifestRequest_signalDecoders                                             smithy.SchemaExtensions
+	eCreateDecoderManifestRequest_networkInterfaces                                          smithy.SchemaExtensions
+	eCreateDecoderManifestRequest_defaultForUnmappedSignals                                  smithy.SchemaExtensions
+	eCreateDecoderManifestRequest_tags                                                       smithy.SchemaExtensions
+	eCreateDecoderManifestResponse                                                           smithy.SchemaExtensions
+	eCreateDecoderManifestResponse_name                                                      smithy.SchemaExtensions
+	eCreateDecoderManifestResponse_arn                                                       smithy.SchemaExtensions
+	eCreateFleetRequest                                                                      smithy.SchemaExtensions
+	eCreateFleetRequest_fleetId                                                              smithy.SchemaExtensions
+	eCreateFleetRequest_description                                                          smithy.SchemaExtensions
+	eCreateFleetRequest_signalCatalogArn                                                     smithy.SchemaExtensions
+	eCreateFleetRequest_tags                                                                 smithy.SchemaExtensions
+	eCreateFleetResponse                                                                     smithy.SchemaExtensions
+	eCreateFleetResponse_id                                                                  smithy.SchemaExtensions
+	eCreateFleetResponse_arn                                                                 smithy.SchemaExtensions
+	eCreateModelManifestRequest                                                              smithy.SchemaExtensions
+	eCreateModelManifestRequest_name                                                         smithy.SchemaExtensions
+	eCreateModelManifestRequest_description                                                  smithy.SchemaExtensions
+	eCreateModelManifestRequest_nodes                                                        smithy.SchemaExtensions
+	eCreateModelManifestRequest_signalCatalogArn                                             smithy.SchemaExtensions
+	eCreateModelManifestRequest_tags                                                         smithy.SchemaExtensions
+	eCreateModelManifestResponse                                                             smithy.SchemaExtensions
+	eCreateModelManifestResponse_name                                                        smithy.SchemaExtensions
+	eCreateModelManifestResponse_arn                                                         smithy.SchemaExtensions
+	eCreateSignalCatalogRequest                                                              smithy.SchemaExtensions
+	eCreateSignalCatalogRequest_name                                                         smithy.SchemaExtensions
+	eCreateSignalCatalogRequest_description                                                  smithy.SchemaExtensions
+	eCreateSignalCatalogRequest_nodes                                                        smithy.SchemaExtensions
+	eCreateSignalCatalogRequest_tags                                                         smithy.SchemaExtensions
+	eCreateSignalCatalogResponse                                                             smithy.SchemaExtensions
+	eCreateSignalCatalogResponse_name                                                        smithy.SchemaExtensions
+	eCreateSignalCatalogResponse_arn                                                         smithy.SchemaExtensions
+	eCreateStateTemplateRequest                                                              smithy.SchemaExtensions
+	eCreateStateTemplateRequest_name                                                         smithy.SchemaExtensions
+	eCreateStateTemplateRequest_description                                                  smithy.SchemaExtensions
+	eCreateStateTemplateRequest_signalCatalogArn                                             smithy.SchemaExtensions
+	eCreateStateTemplateRequest_stateTemplateProperties                                      smithy.SchemaExtensions
+	eCreateStateTemplateRequest_dataExtraDimensions                                          smithy.SchemaExtensions
+	eCreateStateTemplateRequest_metadataExtraDimensions                                      smithy.SchemaExtensions
+	eCreateStateTemplateRequest_tags                                                         smithy.SchemaExtensions
+	eCreateStateTemplateResponse                                                             smithy.SchemaExtensions
+	eCreateStateTemplateResponse_name                                                        smithy.SchemaExtensions
+	eCreateStateTemplateResponse_arn                                                         smithy.SchemaExtensions
+	eCreateStateTemplateResponse_id                                                          smithy.SchemaExtensions
+	eCreateVehicleRequest                                                                    smithy.SchemaExtensions
+	eCreateVehicleRequest_vehicleName                                                        smithy.SchemaExtensions
+	eCreateVehicleRequest_modelManifestArn                                                   smithy.SchemaExtensions
+	eCreateVehicleRequest_decoderManifestArn                                                 smithy.SchemaExtensions
+	eCreateVehicleRequest_attributes                                                         smithy.SchemaExtensions
+	eCreateVehicleRequest_associationBehavior                                                smithy.SchemaExtensions
+	eCreateVehicleRequest_tags                                                               smithy.SchemaExtensions
+	eCreateVehicleRequest_stateTemplates                                                     smithy.SchemaExtensions
+	eCreateVehicleResponse                                                                   smithy.SchemaExtensions
+	eCreateVehicleResponse_vehicleName                                                       smithy.SchemaExtensions
+	eCreateVehicleResponse_arn                                                               smithy.SchemaExtensions
+	eCreateVehicleResponse_thingArn                                                          smithy.SchemaExtensions
+	eDeleteCampaignRequest                                                                   smithy.SchemaExtensions
+	eDeleteCampaignRequest_name                                                              smithy.SchemaExtensions
+	eDeleteCampaignResponse                                                                  smithy.SchemaExtensions
+	eDeleteCampaignResponse_name                                                             smithy.SchemaExtensions
+	eDeleteCampaignResponse_arn                                                              smithy.SchemaExtensions
+	eDeleteDecoderManifestRequest                                                            smithy.SchemaExtensions
+	eDeleteDecoderManifestRequest_name                                                       smithy.SchemaExtensions
+	eDeleteDecoderManifestResponse                                                           smithy.SchemaExtensions
+	eDeleteDecoderManifestResponse_name                                                      smithy.SchemaExtensions
+	eDeleteDecoderManifestResponse_arn                                                       smithy.SchemaExtensions
+	eDeleteFleetRequest                                                                      smithy.SchemaExtensions
+	eDeleteFleetRequest_fleetId                                                              smithy.SchemaExtensions
+	eDeleteFleetResponse                                                                     smithy.SchemaExtensions
+	eDeleteFleetResponse_id                                                                  smithy.SchemaExtensions
+	eDeleteFleetResponse_arn                                                                 smithy.SchemaExtensions
+	eDeleteModelManifestRequest                                                              smithy.SchemaExtensions
+	eDeleteModelManifestRequest_name                                                         smithy.SchemaExtensions
+	eDeleteModelManifestResponse                                                             smithy.SchemaExtensions
+	eDeleteModelManifestResponse_name                                                        smithy.SchemaExtensions
+	eDeleteModelManifestResponse_arn                                                         smithy.SchemaExtensions
+	eDeleteSignalCatalogRequest                                                              smithy.SchemaExtensions
+	eDeleteSignalCatalogRequest_name                                                         smithy.SchemaExtensions
+	eDeleteSignalCatalogResponse                                                             smithy.SchemaExtensions
+	eDeleteSignalCatalogResponse_name                                                        smithy.SchemaExtensions
+	eDeleteSignalCatalogResponse_arn                                                         smithy.SchemaExtensions
+	eDeleteStateTemplateRequest                                                              smithy.SchemaExtensions
+	eDeleteStateTemplateRequest_identifier                                                   smithy.SchemaExtensions
+	eDeleteStateTemplateResponse                                                             smithy.SchemaExtensions
+	eDeleteStateTemplateResponse_name                                                        smithy.SchemaExtensions
+	eDeleteStateTemplateResponse_arn                                                         smithy.SchemaExtensions
+	eDeleteStateTemplateResponse_id                                                          smithy.SchemaExtensions
+	eDeleteVehicleRequest                                                                    smithy.SchemaExtensions
+	eDeleteVehicleRequest_vehicleName                                                        smithy.SchemaExtensions
+	eDeleteVehicleResponse                                                                   smithy.SchemaExtensions
+	eDeleteVehicleResponse_vehicleName                                                       smithy.SchemaExtensions
+	eDeleteVehicleResponse_arn                                                               smithy.SchemaExtensions
+	eDisassociateVehicleFleetRequest                                                         smithy.SchemaExtensions
+	eDisassociateVehicleFleetRequest_vehicleName                                             smithy.SchemaExtensions
+	eDisassociateVehicleFleetRequest_fleetId                                                 smithy.SchemaExtensions
+	eDisassociateVehicleFleetResponse                                                        smithy.SchemaExtensions
+	eGetCampaignRequest                                                                      smithy.SchemaExtensions
+	eGetCampaignRequest_name                                                                 smithy.SchemaExtensions
+	eGetCampaignResponse                                                                     smithy.SchemaExtensions
+	eGetCampaignResponse_name                                                                smithy.SchemaExtensions
+	eGetCampaignResponse_arn                                                                 smithy.SchemaExtensions
+	eGetCampaignResponse_description                                                         smithy.SchemaExtensions
+	eGetCampaignResponse_signalCatalogArn                                                    smithy.SchemaExtensions
+	eGetCampaignResponse_targetArn                                                           smithy.SchemaExtensions
+	eGetCampaignResponse_status                                                              smithy.SchemaExtensions
+	eGetCampaignResponse_startTime                                                           smithy.SchemaExtensions
+	eGetCampaignResponse_expiryTime                                                          smithy.SchemaExtensions
+	eGetCampaignResponse_postTriggerCollectionDuration                                       smithy.SchemaExtensions
+	eGetCampaignResponse_diagnosticsMode                                                     smithy.SchemaExtensions
+	eGetCampaignResponse_spoolingMode                                                        smithy.SchemaExtensions
+	eGetCampaignResponse_compression                                                         smithy.SchemaExtensions
+	eGetCampaignResponse_priority                                                            smithy.SchemaExtensions
+	eGetCampaignResponse_signalsToCollect                                                    smithy.SchemaExtensions
+	eGetCampaignResponse_collectionScheme                                                    smithy.SchemaExtensions
+	eGetCampaignResponse_dataExtraDimensions                                                 smithy.SchemaExtensions
+	eGetCampaignResponse_creationTime                                                        smithy.SchemaExtensions
+	eGetCampaignResponse_lastModificationTime                                                smithy.SchemaExtensions
+	eGetCampaignResponse_dataDestinationConfigs                                              smithy.SchemaExtensions
+	eGetCampaignResponse_dataPartitions                                                      smithy.SchemaExtensions
+	eGetCampaignResponse_signalsToFetch                                                      smithy.SchemaExtensions
+	eGetDecoderManifestRequest                                                               smithy.SchemaExtensions
+	eGetDecoderManifestRequest_name                                                          smithy.SchemaExtensions
+	eGetDecoderManifestResponse                                                              smithy.SchemaExtensions
+	eGetDecoderManifestResponse_name                                                         smithy.SchemaExtensions
+	eGetDecoderManifestResponse_arn                                                          smithy.SchemaExtensions
+	eGetDecoderManifestResponse_description                                                  smithy.SchemaExtensions
+	eGetDecoderManifestResponse_modelManifestArn                                             smithy.SchemaExtensions
+	eGetDecoderManifestResponse_status                                                       smithy.SchemaExtensions
+	eGetDecoderManifestResponse_creationTime                                                 smithy.SchemaExtensions
+	eGetDecoderManifestResponse_lastModificationTime                                         smithy.SchemaExtensions
+	eGetDecoderManifestResponse_message                                                      smithy.SchemaExtensions
+	eGetEncryptionConfigurationRequest                                                       smithy.SchemaExtensions
+	eGetEncryptionConfigurationResponse                                                      smithy.SchemaExtensions
+	eGetEncryptionConfigurationResponse_kmsKeyId                                             smithy.SchemaExtensions
+	eGetEncryptionConfigurationResponse_encryptionStatus                                     smithy.SchemaExtensions
+	eGetEncryptionConfigurationResponse_encryptionType                                       smithy.SchemaExtensions
+	eGetEncryptionConfigurationResponse_errorMessage                                         smithy.SchemaExtensions
+	eGetEncryptionConfigurationResponse_creationTime                                         smithy.SchemaExtensions
+	eGetEncryptionConfigurationResponse_lastModificationTime                                 smithy.SchemaExtensions
+	eGetFleetRequest                                                                         smithy.SchemaExtensions
+	eGetFleetRequest_fleetId                                                                 smithy.SchemaExtensions
+	eGetFleetResponse                                                                        smithy.SchemaExtensions
+	eGetFleetResponse_id                                                                     smithy.SchemaExtensions
+	eGetFleetResponse_arn                                                                    smithy.SchemaExtensions
+	eGetFleetResponse_description                                                            smithy.SchemaExtensions
+	eGetFleetResponse_signalCatalogArn                                                       smithy.SchemaExtensions
+	eGetFleetResponse_creationTime                                                           smithy.SchemaExtensions
+	eGetFleetResponse_lastModificationTime                                                   smithy.SchemaExtensions
+	eGetLoggingOptionsRequest                                                                smithy.SchemaExtensions
+	eGetLoggingOptionsResponse                                                               smithy.SchemaExtensions
+	eGetLoggingOptionsResponse_cloudWatchLogDelivery                                         smithy.SchemaExtensions
+	eGetModelManifestRequest                                                                 smithy.SchemaExtensions
+	eGetModelManifestRequest_name                                                            smithy.SchemaExtensions
+	eGetModelManifestResponse                                                                smithy.SchemaExtensions
+	eGetModelManifestResponse_name                                                           smithy.SchemaExtensions
+	eGetModelManifestResponse_arn                                                            smithy.SchemaExtensions
+	eGetModelManifestResponse_description                                                    smithy.SchemaExtensions
+	eGetModelManifestResponse_signalCatalogArn                                               smithy.SchemaExtensions
+	eGetModelManifestResponse_status                                                         smithy.SchemaExtensions
+	eGetModelManifestResponse_creationTime                                                   smithy.SchemaExtensions
+	eGetModelManifestResponse_lastModificationTime                                           smithy.SchemaExtensions
+	eGetRegisterAccountStatusRequest                                                         smithy.SchemaExtensions
+	eGetRegisterAccountStatusResponse                                                        smithy.SchemaExtensions
+	eGetRegisterAccountStatusResponse_customerAccountId                                      smithy.SchemaExtensions
+	eGetRegisterAccountStatusResponse_accountStatus                                          smithy.SchemaExtensions
+	eGetRegisterAccountStatusResponse_timestreamRegistrationResponse                         smithy.SchemaExtensions
+	eGetRegisterAccountStatusResponse_iamRegistrationResponse                                smithy.SchemaExtensions
+	eGetRegisterAccountStatusResponse_creationTime                                           smithy.SchemaExtensions
+	eGetRegisterAccountStatusResponse_lastModificationTime                                   smithy.SchemaExtensions
+	eGetSignalCatalogRequest                                                                 smithy.SchemaExtensions
+	eGetSignalCatalogRequest_name                                                            smithy.SchemaExtensions
+	eGetSignalCatalogResponse                                                                smithy.SchemaExtensions
+	eGetSignalCatalogResponse_name                                                           smithy.SchemaExtensions
+	eGetSignalCatalogResponse_arn                                                            smithy.SchemaExtensions
+	eGetSignalCatalogResponse_description                                                    smithy.SchemaExtensions
+	eGetSignalCatalogResponse_nodeCounts                                                     smithy.SchemaExtensions
+	eGetSignalCatalogResponse_creationTime                                                   smithy.SchemaExtensions
+	eGetSignalCatalogResponse_lastModificationTime                                           smithy.SchemaExtensions
+	eGetStateTemplateRequest                                                                 smithy.SchemaExtensions
+	eGetStateTemplateRequest_identifier                                                      smithy.SchemaExtensions
+	eGetStateTemplateResponse                                                                smithy.SchemaExtensions
+	eGetStateTemplateResponse_name                                                           smithy.SchemaExtensions
+	eGetStateTemplateResponse_arn                                                            smithy.SchemaExtensions
+	eGetStateTemplateResponse_description                                                    smithy.SchemaExtensions
+	eGetStateTemplateResponse_signalCatalogArn                                               smithy.SchemaExtensions
+	eGetStateTemplateResponse_stateTemplateProperties                                        smithy.SchemaExtensions
+	eGetStateTemplateResponse_dataExtraDimensions                                            smithy.SchemaExtensions
+	eGetStateTemplateResponse_metadataExtraDimensions                                        smithy.SchemaExtensions
+	eGetStateTemplateResponse_creationTime                                                   smithy.SchemaExtensions
+	eGetStateTemplateResponse_lastModificationTime                                           smithy.SchemaExtensions
+	eGetStateTemplateResponse_id                                                             smithy.SchemaExtensions
+	eGetVehicleRequest                                                                       smithy.SchemaExtensions
+	eGetVehicleRequest_vehicleName                                                           smithy.SchemaExtensions
+	eGetVehicleResponse                                                                      smithy.SchemaExtensions
+	eGetVehicleResponse_vehicleName                                                          smithy.SchemaExtensions
+	eGetVehicleResponse_arn                                                                  smithy.SchemaExtensions
+	eGetVehicleResponse_modelManifestArn                                                     smithy.SchemaExtensions
+	eGetVehicleResponse_decoderManifestArn                                                   smithy.SchemaExtensions
+	eGetVehicleResponse_attributes                                                           smithy.SchemaExtensions
+	eGetVehicleResponse_stateTemplates                                                       smithy.SchemaExtensions
+	eGetVehicleResponse_creationTime                                                         smithy.SchemaExtensions
+	eGetVehicleResponse_lastModificationTime                                                 smithy.SchemaExtensions
+	eGetVehicleStatusRequest                                                                 smithy.SchemaExtensions
+	eGetVehicleStatusRequest_nextToken                                                       smithy.SchemaExtensions
+	eGetVehicleStatusRequest_maxResults                                                      smithy.SchemaExtensions
+	eGetVehicleStatusRequest_vehicleName                                                     smithy.SchemaExtensions
+	eGetVehicleStatusResponse                                                                smithy.SchemaExtensions
+	eGetVehicleStatusResponse_campaigns                                                      smithy.SchemaExtensions
+	eGetVehicleStatusResponse_nextToken                                                      smithy.SchemaExtensions
+	eImportDecoderManifestRequest                                                            smithy.SchemaExtensions
+	eImportDecoderManifestRequest_name                                                       smithy.SchemaExtensions
+	eImportDecoderManifestRequest_networkFileDefinitions                                     smithy.SchemaExtensions
+	eImportDecoderManifestResponse                                                           smithy.SchemaExtensions
+	eImportDecoderManifestResponse_name                                                      smithy.SchemaExtensions
+	eImportDecoderManifestResponse_arn                                                       smithy.SchemaExtensions
+	eImportSignalCatalogRequest                                                              smithy.SchemaExtensions
+	eImportSignalCatalogRequest_name                                                         smithy.SchemaExtensions
+	eImportSignalCatalogRequest_description                                                  smithy.SchemaExtensions
+	eImportSignalCatalogRequest_vss                                                          smithy.SchemaExtensions
+	eImportSignalCatalogRequest_tags                                                         smithy.SchemaExtensions
+	eImportSignalCatalogResponse                                                             smithy.SchemaExtensions
+	eImportSignalCatalogResponse_name                                                        smithy.SchemaExtensions
+	eImportSignalCatalogResponse_arn                                                         smithy.SchemaExtensions
+	eListCampaignsRequest                                                                    smithy.SchemaExtensions
+	eListCampaignsRequest_nextToken                                                          smithy.SchemaExtensions
+	eListCampaignsRequest_maxResults                                                         smithy.SchemaExtensions
+	eListCampaignsRequest_status                                                             smithy.SchemaExtensions
+	eListCampaignsRequest_listResponseScope                                                  smithy.SchemaExtensions
+	eListCampaignsResponse                                                                   smithy.SchemaExtensions
+	eListCampaignsResponse_campaignSummaries                                                 smithy.SchemaExtensions
+	eListCampaignsResponse_nextToken                                                         smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfacesRequest                                             smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfacesRequest_name                                        smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfacesRequest_nextToken                                   smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfacesRequest_maxResults                                  smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfacesResponse                                            smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfacesResponse_networkInterfaces                          smithy.SchemaExtensions
+	eListDecoderManifestNetworkInterfacesResponse_nextToken                                  smithy.SchemaExtensions
+	eListDecoderManifestSignalsRequest                                                       smithy.SchemaExtensions
+	eListDecoderManifestSignalsRequest_name                                                  smithy.SchemaExtensions
+	eListDecoderManifestSignalsRequest_nextToken                                             smithy.SchemaExtensions
+	eListDecoderManifestSignalsRequest_maxResults                                            smithy.SchemaExtensions
+	eListDecoderManifestSignalsResponse                                                      smithy.SchemaExtensions
+	eListDecoderManifestSignalsResponse_signalDecoders                                       smithy.SchemaExtensions
+	eListDecoderManifestSignalsResponse_nextToken                                            smithy.SchemaExtensions
+	eListDecoderManifestsRequest                                                             smithy.SchemaExtensions
+	eListDecoderManifestsRequest_modelManifestArn                                            smithy.SchemaExtensions
+	eListDecoderManifestsRequest_nextToken                                                   smithy.SchemaExtensions
+	eListDecoderManifestsRequest_maxResults                                                  smithy.SchemaExtensions
+	eListDecoderManifestsRequest_listResponseScope                                           smithy.SchemaExtensions
+	eListDecoderManifestsResponse                                                            smithy.SchemaExtensions
+	eListDecoderManifestsResponse_summaries                                                  smithy.SchemaExtensions
+	eListDecoderManifestsResponse_nextToken                                                  smithy.SchemaExtensions
+	eListFleetsForVehicleRequest                                                             smithy.SchemaExtensions
+	eListFleetsForVehicleRequest_vehicleName                                                 smithy.SchemaExtensions
+	eListFleetsForVehicleRequest_nextToken                                                   smithy.SchemaExtensions
+	eListFleetsForVehicleRequest_maxResults                                                  smithy.SchemaExtensions
+	eListFleetsForVehicleResponse                                                            smithy.SchemaExtensions
+	eListFleetsForVehicleResponse_fleets                                                     smithy.SchemaExtensions
+	eListFleetsForVehicleResponse_nextToken                                                  smithy.SchemaExtensions
+	eListFleetsRequest                                                                       smithy.SchemaExtensions
+	eListFleetsRequest_nextToken                                                             smithy.SchemaExtensions
+	eListFleetsRequest_maxResults                                                            smithy.SchemaExtensions
+	eListFleetsRequest_listResponseScope                                                     smithy.SchemaExtensions
+	eListFleetsResponse                                                                      smithy.SchemaExtensions
+	eListFleetsResponse_fleetSummaries                                                       smithy.SchemaExtensions
+	eListFleetsResponse_nextToken                                                            smithy.SchemaExtensions
+	eListModelManifestNodesRequest                                                           smithy.SchemaExtensions
+	eListModelManifestNodesRequest_name                                                      smithy.SchemaExtensions
+	eListModelManifestNodesRequest_nextToken                                                 smithy.SchemaExtensions
+	eListModelManifestNodesRequest_maxResults                                                smithy.SchemaExtensions
+	eListModelManifestNodesResponse                                                          smithy.SchemaExtensions
+	eListModelManifestNodesResponse_nodes                                                    smithy.SchemaExtensions
+	eListModelManifestNodesResponse_nextToken                                                smithy.SchemaExtensions
+	eListModelManifestsRequest                                                               smithy.SchemaExtensions
+	eListModelManifestsRequest_signalCatalogArn                                              smithy.SchemaExtensions
+	eListModelManifestsRequest_nextToken                                                     smithy.SchemaExtensions
+	eListModelManifestsRequest_maxResults                                                    smithy.SchemaExtensions
+	eListModelManifestsRequest_listResponseScope                                             smithy.SchemaExtensions
+	eListModelManifestsResponse                                                              smithy.SchemaExtensions
+	eListModelManifestsResponse_summaries                                                    smithy.SchemaExtensions
+	eListModelManifestsResponse_nextToken                                                    smithy.SchemaExtensions
+	eListSignalCatalogNodesRequest                                                           smithy.SchemaExtensions
+	eListSignalCatalogNodesRequest_name                                                      smithy.SchemaExtensions
+	eListSignalCatalogNodesRequest_nextToken                                                 smithy.SchemaExtensions
+	eListSignalCatalogNodesRequest_maxResults                                                smithy.SchemaExtensions
+	eListSignalCatalogNodesRequest_signalNodeType                                            smithy.SchemaExtensions
+	eListSignalCatalogNodesResponse                                                          smithy.SchemaExtensions
+	eListSignalCatalogNodesResponse_nodes                                                    smithy.SchemaExtensions
+	eListSignalCatalogNodesResponse_nextToken                                                smithy.SchemaExtensions
+	eListSignalCatalogsRequest                                                               smithy.SchemaExtensions
+	eListSignalCatalogsRequest_nextToken                                                     smithy.SchemaExtensions
+	eListSignalCatalogsRequest_maxResults                                                    smithy.SchemaExtensions
+	eListSignalCatalogsResponse                                                              smithy.SchemaExtensions
+	eListSignalCatalogsResponse_summaries                                                    smithy.SchemaExtensions
+	eListSignalCatalogsResponse_nextToken                                                    smithy.SchemaExtensions
+	eListStateTemplatesRequest                                                               smithy.SchemaExtensions
+	eListStateTemplatesRequest_nextToken                                                     smithy.SchemaExtensions
+	eListStateTemplatesRequest_maxResults                                                    smithy.SchemaExtensions
+	eListStateTemplatesRequest_listResponseScope                                             smithy.SchemaExtensions
+	eListStateTemplatesResponse                                                              smithy.SchemaExtensions
+	eListStateTemplatesResponse_summaries                                                    smithy.SchemaExtensions
+	eListStateTemplatesResponse_nextToken                                                    smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                              smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                                                  smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                             smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                                        smithy.SchemaExtensions
+	eListVehiclesInFleetRequest                                                              smithy.SchemaExtensions
+	eListVehiclesInFleetRequest_fleetId                                                      smithy.SchemaExtensions
+	eListVehiclesInFleetRequest_nextToken                                                    smithy.SchemaExtensions
+	eListVehiclesInFleetRequest_maxResults                                                   smithy.SchemaExtensions
+	eListVehiclesInFleetResponse                                                             smithy.SchemaExtensions
+	eListVehiclesInFleetResponse_vehicles                                                    smithy.SchemaExtensions
+	eListVehiclesInFleetResponse_nextToken                                                   smithy.SchemaExtensions
+	eListVehiclesRequest                                                                     smithy.SchemaExtensions
+	eListVehiclesRequest_modelManifestArn                                                    smithy.SchemaExtensions
+	eListVehiclesRequest_attributeNames                                                      smithy.SchemaExtensions
+	eListVehiclesRequest_attributeValues                                                     smithy.SchemaExtensions
+	eListVehiclesRequest_nextToken                                                           smithy.SchemaExtensions
+	eListVehiclesRequest_maxResults                                                          smithy.SchemaExtensions
+	eListVehiclesRequest_listResponseScope                                                   smithy.SchemaExtensions
+	eListVehiclesResponse                                                                    smithy.SchemaExtensions
+	eListVehiclesResponse_vehicleSummaries                                                   smithy.SchemaExtensions
+	eListVehiclesResponse_nextToken                                                          smithy.SchemaExtensions
+	ePutEncryptionConfigurationRequest                                                       smithy.SchemaExtensions
+	ePutEncryptionConfigurationRequest_kmsKeyId                                              smithy.SchemaExtensions
+	ePutEncryptionConfigurationRequest_encryptionType                                        smithy.SchemaExtensions
+	ePutEncryptionConfigurationResponse                                                      smithy.SchemaExtensions
+	ePutEncryptionConfigurationResponse_kmsKeyId                                             smithy.SchemaExtensions
+	ePutEncryptionConfigurationResponse_encryptionStatus                                     smithy.SchemaExtensions
+	ePutEncryptionConfigurationResponse_encryptionType                                       smithy.SchemaExtensions
+	ePutLoggingOptionsRequest                                                                smithy.SchemaExtensions
+	ePutLoggingOptionsRequest_cloudWatchLogDelivery                                          smithy.SchemaExtensions
+	ePutLoggingOptionsResponse                                                               smithy.SchemaExtensions
+	eRegisterAccountRequest                                                                  smithy.SchemaExtensions
+	eRegisterAccountRequest_timestreamResources                                              smithy.SchemaExtensions
+	eRegisterAccountRequest_iamResources                                                     smithy.SchemaExtensions
+	eRegisterAccountResponse                                                                 smithy.SchemaExtensions
+	eRegisterAccountResponse_registerAccountStatus                                           smithy.SchemaExtensions
+	eRegisterAccountResponse_timestreamResources                                             smithy.SchemaExtensions
+	eRegisterAccountResponse_iamResources                                                    smithy.SchemaExtensions
+	eRegisterAccountResponse_creationTime                                                    smithy.SchemaExtensions
+	eRegisterAccountResponse_lastModificationTime                                            smithy.SchemaExtensions
+	eTagResourceRequest                                                                      smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                                                          smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                                 smithy.SchemaExtensions
+	eTagResourceResponse                                                                     smithy.SchemaExtensions
+	eUntagResourceRequest                                                                    smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                                                        smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                            smithy.SchemaExtensions
+	eUntagResourceResponse                                                                   smithy.SchemaExtensions
+	eUpdateCampaignRequest                                                                   smithy.SchemaExtensions
+	eUpdateCampaignRequest_name                                                              smithy.SchemaExtensions
+	eUpdateCampaignRequest_description                                                       smithy.SchemaExtensions
+	eUpdateCampaignRequest_dataExtraDimensions                                               smithy.SchemaExtensions
+	eUpdateCampaignRequest_action                                                            smithy.SchemaExtensions
+	eUpdateCampaignResponse                                                                  smithy.SchemaExtensions
+	eUpdateCampaignResponse_arn                                                              smithy.SchemaExtensions
+	eUpdateCampaignResponse_name                                                             smithy.SchemaExtensions
+	eUpdateCampaignResponse_status                                                           smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest                                                            smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_name                                                       smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_description                                                smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_signalDecodersToAdd                                        smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_signalDecodersToUpdate                                     smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_signalDecodersToRemove                                     smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_networkInterfacesToAdd                                     smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_networkInterfacesToUpdate                                  smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_networkInterfacesToRemove                                  smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_status                                                     smithy.SchemaExtensions
+	eUpdateDecoderManifestRequest_defaultForUnmappedSignals                                  smithy.SchemaExtensions
+	eUpdateDecoderManifestResponse                                                           smithy.SchemaExtensions
+	eUpdateDecoderManifestResponse_name                                                      smithy.SchemaExtensions
+	eUpdateDecoderManifestResponse_arn                                                       smithy.SchemaExtensions
+	eUpdateFleetRequest                                                                      smithy.SchemaExtensions
+	eUpdateFleetRequest_fleetId                                                              smithy.SchemaExtensions
+	eUpdateFleetRequest_description                                                          smithy.SchemaExtensions
+	eUpdateFleetResponse                                                                     smithy.SchemaExtensions
+	eUpdateFleetResponse_id                                                                  smithy.SchemaExtensions
+	eUpdateFleetResponse_arn                                                                 smithy.SchemaExtensions
+	eUpdateModelManifestRequest                                                              smithy.SchemaExtensions
+	eUpdateModelManifestRequest_name                                                         smithy.SchemaExtensions
+	eUpdateModelManifestRequest_description                                                  smithy.SchemaExtensions
+	eUpdateModelManifestRequest_nodesToAdd                                                   smithy.SchemaExtensions
+	eUpdateModelManifestRequest_nodesToRemove                                                smithy.SchemaExtensions
+	eUpdateModelManifestRequest_status                                                       smithy.SchemaExtensions
+	eUpdateModelManifestResponse                                                             smithy.SchemaExtensions
+	eUpdateModelManifestResponse_name                                                        smithy.SchemaExtensions
+	eUpdateModelManifestResponse_arn                                                         smithy.SchemaExtensions
+	eUpdateSignalCatalogRequest                                                              smithy.SchemaExtensions
+	eUpdateSignalCatalogRequest_name                                                         smithy.SchemaExtensions
+	eUpdateSignalCatalogRequest_description                                                  smithy.SchemaExtensions
+	eUpdateSignalCatalogRequest_nodesToAdd                                                   smithy.SchemaExtensions
+	eUpdateSignalCatalogRequest_nodesToUpdate                                                smithy.SchemaExtensions
+	eUpdateSignalCatalogRequest_nodesToRemove                                                smithy.SchemaExtensions
+	eUpdateSignalCatalogResponse                                                             smithy.SchemaExtensions
+	eUpdateSignalCatalogResponse_name                                                        smithy.SchemaExtensions
+	eUpdateSignalCatalogResponse_arn                                                         smithy.SchemaExtensions
+	eUpdateStateTemplateRequest                                                              smithy.SchemaExtensions
+	eUpdateStateTemplateRequest_identifier                                                   smithy.SchemaExtensions
+	eUpdateStateTemplateRequest_description                                                  smithy.SchemaExtensions
+	eUpdateStateTemplateRequest_stateTemplatePropertiesToAdd                                 smithy.SchemaExtensions
+	eUpdateStateTemplateRequest_stateTemplatePropertiesToRemove                              smithy.SchemaExtensions
+	eUpdateStateTemplateRequest_dataExtraDimensions                                          smithy.SchemaExtensions
+	eUpdateStateTemplateRequest_metadataExtraDimensions                                      smithy.SchemaExtensions
+	eUpdateStateTemplateResponse                                                             smithy.SchemaExtensions
+	eUpdateStateTemplateResponse_name                                                        smithy.SchemaExtensions
+	eUpdateStateTemplateResponse_arn                                                         smithy.SchemaExtensions
+	eUpdateStateTemplateResponse_id                                                          smithy.SchemaExtensions
+	eUpdateVehicleRequest                                                                    smithy.SchemaExtensions
+	eUpdateVehicleRequest_vehicleName                                                        smithy.SchemaExtensions
+	eUpdateVehicleRequest_modelManifestArn                                                   smithy.SchemaExtensions
+	eUpdateVehicleRequest_decoderManifestArn                                                 smithy.SchemaExtensions
+	eUpdateVehicleRequest_attributes                                                         smithy.SchemaExtensions
+	eUpdateVehicleRequest_attributeUpdateMode                                                smithy.SchemaExtensions
+	eUpdateVehicleRequest_stateTemplatesToAdd                                                smithy.SchemaExtensions
+	eUpdateVehicleRequest_stateTemplatesToRemove                                             smithy.SchemaExtensions
+	eUpdateVehicleRequest_stateTemplatesToUpdate                                             smithy.SchemaExtensions
+	eUpdateVehicleResponse                                                                   smithy.SchemaExtensions
+	eUpdateVehicleResponse_vehicleName                                                       smithy.SchemaExtensions
+	eUpdateVehicleResponse_arn                                                               smithy.SchemaExtensions
+)
+
+var (
+	iAssociateVehicleFleet                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "AssociateVehicleFleet"}
+	iBatchCreateVehicle                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "BatchCreateVehicle"}
+	iBatchUpdateVehicle                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "BatchUpdateVehicle"}
+	iCreateCampaign                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateCampaign"}
+	iCreateDecoderManifest                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateDecoderManifest"}
+	iCreateFleet                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateFleet"}
+	iCreateModelManifest                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateModelManifest"}
+	iCreateSignalCatalog                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateSignalCatalog"}
+	iCreateStateTemplate                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateStateTemplate"}
+	iCreateVehicle                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateVehicle"}
+	iDeleteCampaign                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteCampaign"}
+	iDeleteDecoderManifest                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteDecoderManifest"}
+	iDeleteFleet                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteFleet"}
+	iDeleteModelManifest                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteModelManifest"}
+	iDeleteSignalCatalog                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteSignalCatalog"}
+	iDeleteStateTemplate                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteStateTemplate"}
+	iDeleteVehicle                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteVehicle"}
+	iDisassociateVehicleFleet                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DisassociateVehicleFleet"}
+	iGetCampaign                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetCampaign"}
+	iGetDecoderManifest                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetDecoderManifest"}
+	iGetEncryptionConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetEncryptionConfiguration"}
+	iGetFleet                                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetFleet"}
+	iGetLoggingOptions                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetLoggingOptions"}
+	iGetModelManifest                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetModelManifest"}
+	iGetRegisterAccountStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetRegisterAccountStatus"}
+	iGetSignalCatalog                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetSignalCatalog"}
+	iGetStateTemplate                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetStateTemplate"}
+	iGetVehicle                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetVehicle"}
+	iGetVehicleStatus                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetVehicleStatus"}
+	iImportDecoderManifest                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ImportDecoderManifest"}
+	iImportSignalCatalog                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ImportSignalCatalog"}
+	iListCampaigns                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListCampaigns"}
+	iListDecoderManifestNetworkInterfaces             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestNetworkInterfaces"}
+	iListDecoderManifests                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifests"}
+	iListDecoderManifestSignals                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestSignals"}
+	iListFleets                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListFleets"}
+	iListFleetsForVehicle                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListFleetsForVehicle"}
+	iListModelManifestNodes                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListModelManifestNodes"}
+	iListModelManifests                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListModelManifests"}
+	iListSignalCatalogNodes                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListSignalCatalogNodes"}
+	iListSignalCatalogs                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListSignalCatalogs"}
+	iListStateTemplates                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListStateTemplates"}
+	iListTagsForResource                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListTagsForResource"}
+	iListVehicles                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListVehicles"}
+	iListVehiclesInFleet                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListVehiclesInFleet"}
+	iPutEncryptionConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PutEncryptionConfiguration"}
+	iPutLoggingOptions                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PutLoggingOptions"}
+	iRegisterAccount                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "RegisterAccount"}
+	iTagResource                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TagResource"}
+	iUntagResource                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UntagResource"}
+	iUpdateCampaign                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateCampaign"}
+	iUpdateDecoderManifest                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateDecoderManifest"}
+	iUpdateFleet                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateFleet"}
+	iUpdateModelManifest                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateModelManifest"}
+	iUpdateSignalCatalog                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateSignalCatalog"}
+	iUpdateStateTemplate                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateStateTemplate"}
+	iUpdateVehicle                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateVehicle"}
+	i_IoTAutobahnControlPlane                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "IoTAutobahnControlPlane"}
+	iAccessDeniedException                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "AccessDeniedException"}
+	i_actionEventExpression                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "actionEventExpression"}
+	iActuator                                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Actuator"}
+	i_AmazonResourceName                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "AmazonResourceName"}
+	i_arn                                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "arn"}
+	iAttribute                                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Attribute"}
+	i_attributeName                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "attributeName"}
+	i_attributeNamesList                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "attributeNamesList"}
+	i_attributesMap                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "attributesMap"}
+	i_attributeValue                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "attributeValue"}
+	i_attributeValuesList                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "attributeValuesList"}
+	iBranch                                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Branch"}
+	i_campaignArn                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "campaignArn"}
+	i_campaignName                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "campaignName"}
+	iCampaignStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CampaignStatus"}
+	i_campaignSummaries                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "campaignSummaries"}
+	iCampaignSummary                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CampaignSummary"}
+	iCanDbcDefinition                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CanDbcDefinition"}
+	iCanInterface                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CanInterface"}
+	i_CanInterfaceName                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CanInterfaceName"}
+	iCanSignal                                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CanSignal"}
+	i_CanSignalName                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CanSignalName"}
+	iCloudWatchLogDeliveryOptions                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CloudWatchLogDeliveryOptions"}
+	i_CloudWatchLogGroupName                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CloudWatchLogGroupName"}
+	i_collectionPeriodMs                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "collectionPeriodMs"}
+	iCollectionScheme                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CollectionScheme"}
+	iCompression                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Compression"}
+	iConditionBasedCollectionScheme                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ConditionBasedCollectionScheme"}
+	iConditionBasedSignalFetchConfig                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ConditionBasedSignalFetchConfig"}
+	iConflictException                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ConflictException"}
+	iCreateVehicleError                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateVehicleError"}
+	i_createVehicleErrors                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "createVehicleErrors"}
+	iCreateVehicleRequestItem                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateVehicleRequestItem"}
+	i_createVehicleRequestItems                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "createVehicleRequestItems"}
+	iCreateVehicleResponseItem                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateVehicleResponseItem"}
+	i_createVehicleResponses                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "createVehicleResponses"}
+	i_CustomDecodingId                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CustomDecodingId"}
+	iCustomDecodingInterface                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CustomDecodingInterface"}
+	iCustomDecodingSignal                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CustomDecodingSignal"}
+	i_CustomDecodingSignalInterfaceName               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CustomDecodingSignalInterfaceName"}
+	i_customerAccountId                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "customerAccountId"}
+	iCustomProperty                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CustomProperty"}
+	iCustomStruct                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CustomStruct"}
+	iDataDestinationConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataDestinationConfig"}
+	i_DataDestinationConfigs                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataDestinationConfigs"}
+	i_DataExtraDimensionNodePathList                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataExtraDimensionNodePathList"}
+	iDataFormat                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataFormat"}
+	iDataPartition                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataPartition"}
+	i_DataPartitionId                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataPartitionId"}
+	i_DataPartitions                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataPartitions"}
+	iDataPartitionStorageOptions                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataPartitionStorageOptions"}
+	iDataPartitionUploadOptions                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DataPartitionUploadOptions"}
+	i_decoderManifestSummaries                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "decoderManifestSummaries"}
+	iDecoderManifestSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DecoderManifestSummary"}
+	iDecoderManifestValidationException               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DecoderManifestValidationException"}
+	iDefaultForUnmappedSignalsType                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DefaultForUnmappedSignalsType"}
+	i_description                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "description"}
+	iDiagnosticsMode                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DiagnosticsMode"}
+	i_double                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "double"}
+	iEncryptionStatus                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "EncryptionStatus"}
+	iEncryptionType                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "EncryptionType"}
+	i_errorMessage                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "errorMessage"}
+	i_eventExpression                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "eventExpression"}
+	i_EventExpressionList                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "EventExpressionList"}
+	i_fetchConfigEventExpression                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "fetchConfigEventExpression"}
+	i_fleetId                                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "fleetId"}
+	i_fleets                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "fleets"}
+	i_fleetSummaries                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "fleetSummaries"}
+	iFleetSummary                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "FleetSummary"}
+	iFormattedVss                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "FormattedVss"}
+	i_Fqns                                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Fqns"}
+	i_FullyQualifiedName                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "FullyQualifiedName"}
+	iIamRegistrationResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "IamRegistrationResponse"}
+	iIamResources                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "IamResources"}
+	i_IAMRoleArn                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "IAMRoleArn"}
+	i_InterfaceId                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InterfaceId"}
+	i_InterfaceIds                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InterfaceIds"}
+	iInternalServerException                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InternalServerException"}
+	iInvalidNetworkInterface                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidNetworkInterface"}
+	i_InvalidNetworkInterfaces                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidNetworkInterfaces"}
+	iInvalidNodeException                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidNodeException"}
+	iInvalidSignal                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidSignal"}
+	iInvalidSignalDecoder                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidSignalDecoder"}
+	i_InvalidSignalDecoders                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidSignalDecoders"}
+	i_InvalidSignals                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidSignals"}
+	iInvalidSignalsException                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "InvalidSignalsException"}
+	i_languageVersion                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "languageVersion"}
+	iLimitExceededException                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "LimitExceededException"}
+	i_listOfStrings                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "listOfStrings"}
+	iListResponseScope                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListResponseScope"}
+	i_listVehiclesMaxResults                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "listVehiclesMaxResults"}
+	iLogType                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "LogType"}
+	iManifestStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ManifestStatus"}
+	i_maxResults                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "maxResults"}
+	i_maxSampleCount                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "maxSampleCount"}
+	i_maxStringSize                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "maxStringSize"}
+	i_message                                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "message"}
+	iMessageSignal                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "MessageSignal"}
+	i_modelManifestSummaries                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "modelManifestSummaries"}
+	iModelManifestSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ModelManifestSummary"}
+	i_ModelSignalsMap                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ModelSignalsMap"}
+	i_MqttTopicArn                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "MqttTopicArn"}
+	iMqttTopicConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "MqttTopicConfig"}
+	i_NetworkFileBlob                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkFileBlob"}
+	iNetworkFileDefinition                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkFileDefinition"}
+	i_NetworkFileDefinitions                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkFileDefinitions"}
+	i_NetworkFilesList                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkFilesList"}
+	iNetworkInterface                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkInterface"}
+	iNetworkInterfaceFailureReason                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkInterfaceFailureReason"}
+	i_NetworkInterfaces                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkInterfaces"}
+	iNetworkInterfaceType                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NetworkInterfaceType"}
+	i_nextToken                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "nextToken"}
+	iNode                                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Node"}
+	iNodeCounts                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NodeCounts"}
+	iNodeDataEncoding                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NodeDataEncoding"}
+	iNodeDataType                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NodeDataType"}
+	i_NodePath                                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NodePath"}
+	i_NodePaths                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "NodePaths"}
+	i_Nodes                                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Nodes"}
+	i_nonNegativeInteger                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "nonNegativeInteger"}
+	i_number                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "number"}
+	i_ObdBitmaskLength                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ObdBitmaskLength"}
+	i_ObdByteLength                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ObdByteLength"}
+	iObdInterface                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ObdInterface"}
+	i_ObdInterfaceName                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ObdInterfaceName"}
+	iObdSignal                                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ObdSignal"}
+	i_ObdStandard                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ObdStandard"}
+	iOnChangeStateTemplateUpdateStrategy              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "OnChangeStateTemplateUpdateStrategy"}
+	iPeriodicStateTemplateUpdateStrategy              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PeriodicStateTemplateUpdateStrategy"}
+	i_positiveInteger                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "positiveInteger"}
+	i_positiveLong                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "positiveLong"}
+	i_Prefix                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Prefix"}
+	iPrimitiveMessageDefinition                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PrimitiveMessageDefinition"}
+	i_priority                                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "priority"}
+	i_ProtocolName                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ProtocolName"}
+	i_ProtocolVersion                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ProtocolVersion"}
+	iRegistrationStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "RegistrationStatus"}
+	i_ResourceIdentifier                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ResourceIdentifier"}
+	i_resourceName                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "resourceName"}
+	iResourceNotFoundException                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ResourceNotFoundException"}
+	i_ResourceUniqueId                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ResourceUniqueId"}
+	i_RetryAfterSeconds                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "RetryAfterSeconds"}
+	iROS2PrimitiveMessageDefinition                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ROS2PrimitiveMessageDefinition"}
+	iROS2PrimitiveType                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ROS2PrimitiveType"}
+	i_S3BucketArn                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "S3BucketArn"}
+	iS3Config                                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "S3Config"}
+	iSensor                                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Sensor"}
+	i_signalCatalogSummaries                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "signalCatalogSummaries"}
+	iSignalCatalogSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalCatalogSummary"}
+	iSignalDecoder                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalDecoder"}
+	iSignalDecoderFailureReason                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalDecoderFailureReason"}
+	i_SignalDecoders                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalDecoders"}
+	iSignalDecoderType                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalDecoderType"}
+	iSignalFetchConfig                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalFetchConfig"}
+	iSignalFetchInformation                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalFetchInformation"}
+	i_SignalFetchInformationList                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalFetchInformationList"}
+	iSignalInformation                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalInformation"}
+	i_SignalInformationList                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalInformationList"}
+	iSignalNodeType                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalNodeType"}
+	iSignalValueType                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SignalValueType"}
+	iSpoolingMode                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "SpoolingMode"}
+	iStateTemplateAssociation                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateAssociation"}
+	i_StateTemplateAssociationIdentifiers             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateAssociationIdentifiers"}
+	i_StateTemplateAssociations                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateAssociations"}
+	i_StateTemplateDataExtraDimensionNodePathList     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateDataExtraDimensionNodePathList"}
+	i_StateTemplateMetadataExtraDimensionNodePathList = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateMetadataExtraDimensionNodePathList"}
+	i_StateTemplateProperties                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateProperties"}
+	i_StateTemplateSummaries                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateSummaries"}
+	iStateTemplateSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateSummary"}
+	iStateTemplateUpdateStrategy                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StateTemplateUpdateStrategy"}
+	i_statusStr                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "statusStr"}
+	iStorageCompressionFormat                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageCompressionFormat"}
+	i_StorageLocation                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageLocation"}
+	iStorageMaximumSize                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageMaximumSize"}
+	iStorageMaximumSizeUnit                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageMaximumSizeUnit"}
+	i_StorageMaximumSizeValue                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageMaximumSizeValue"}
+	iStorageMinimumTimeToLive                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageMinimumTimeToLive"}
+	iStorageMinimumTimeToLiveUnit                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageMinimumTimeToLiveUnit"}
+	i_StorageMinimumTimeToLiveValue                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StorageMinimumTimeToLiveValue"}
+	i_string                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "string"}
+	iStructuredMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StructuredMessage"}
+	i_StructuredMessageDefinition                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StructuredMessageDefinition"}
+	iStructuredMessageFieldNameAndDataTypePair        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StructuredMessageFieldNameAndDataTypePair"}
+	iStructuredMessageListDefinition                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StructuredMessageListDefinition"}
+	iStructuredMessageListType                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StructuredMessageListType"}
+	i_StructureMessageName                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "StructureMessageName"}
+	iTag                                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "Tag"}
+	i_TagKey                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TagKey"}
+	i_TagKeyList                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TagKeyList"}
+	i_TagList                                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TagList"}
+	i_TagValue                                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TagValue"}
+	iThrottlingException                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ThrottlingException"}
+	iTimeBasedCollectionScheme                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimeBasedCollectionScheme"}
+	iTimeBasedSignalFetchConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimeBasedSignalFetchConfig"}
+	iTimePeriod                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimePeriod"}
+	i_timestamp                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "timestamp"}
+	iTimestreamConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimestreamConfig"}
+	i_TimestreamDatabaseName                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimestreamDatabaseName"}
+	iTimestreamRegistrationResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimestreamRegistrationResponse"}
+	iTimestreamResources                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimestreamResources"}
+	i_TimestreamTableArn                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimestreamTableArn"}
+	i_TimestreamTableName                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimestreamTableName"}
+	iTimeUnit                                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TimeUnit"}
+	i_TopicName                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TopicName"}
+	iTriggerMode                                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TriggerMode"}
+	i_uint32                                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "uint32"}
+	iUpdateCampaignAction                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateCampaignAction"}
+	iUpdateMode                                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateMode"}
+	iUpdateVehicleError                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateVehicleError"}
+	i_updateVehicleErrors                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "updateVehicleErrors"}
+	iUpdateVehicleRequestItem                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateVehicleRequestItem"}
+	i_updateVehicleRequestItems                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "updateVehicleRequestItems"}
+	iUpdateVehicleResponseItem                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateVehicleResponseItem"}
+	i_updateVehicleResponseItems                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "updateVehicleResponseItems"}
+	iValidationException                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ValidationException"}
+	iValidationExceptionField                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ValidationExceptionReason"}
+	iVehicleAssociationBehavior                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleAssociationBehavior"}
+	iVehicleMiddleware                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleMiddleware"}
+	i_VehicleMiddlewareName                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleMiddlewareName"}
+	iVehicleMiddlewareProtocol                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleMiddlewareProtocol"}
+	i_vehicleName                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "vehicleName"}
+	i_vehicles                                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "vehicles"}
+	iVehicleState                                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleState"}
+	iVehicleStatus                                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleStatus"}
+	i_VehicleStatusList                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleStatusList"}
+	i_vehicleSummaries                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "vehicleSummaries"}
+	iVehicleSummary                                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "VehicleSummary"}
+	i_wildcardSignalName                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "wildcardSignalName"}
+	iAssociateVehicleFleetRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "AssociateVehicleFleetRequest"}
+	iAssociateVehicleFleetResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "AssociateVehicleFleetResponse"}
+	iBatchCreateVehicleRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "BatchCreateVehicleRequest"}
+	iBatchCreateVehicleResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "BatchCreateVehicleResponse"}
+	iBatchUpdateVehicleRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "BatchUpdateVehicleRequest"}
+	iBatchUpdateVehicleResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "BatchUpdateVehicleResponse"}
+	iCreateCampaignRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateCampaignRequest"}
+	iCreateCampaignResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateCampaignResponse"}
+	iCreateDecoderManifestRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateDecoderManifestRequest"}
+	iCreateDecoderManifestResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateDecoderManifestResponse"}
+	iCreateFleetRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateFleetRequest"}
+	iCreateFleetResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateFleetResponse"}
+	iCreateModelManifestRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateModelManifestRequest"}
+	iCreateModelManifestResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateModelManifestResponse"}
+	iCreateSignalCatalogRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateSignalCatalogRequest"}
+	iCreateSignalCatalogResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateSignalCatalogResponse"}
+	iCreateStateTemplateRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateStateTemplateRequest"}
+	iCreateStateTemplateResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateStateTemplateResponse"}
+	iCreateVehicleRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateVehicleRequest"}
+	iCreateVehicleResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "CreateVehicleResponse"}
+	iDeleteCampaignRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteCampaignRequest"}
+	iDeleteCampaignResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteCampaignResponse"}
+	iDeleteDecoderManifestRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteDecoderManifestRequest"}
+	iDeleteDecoderManifestResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteDecoderManifestResponse"}
+	iDeleteFleetRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteFleetRequest"}
+	iDeleteFleetResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteFleetResponse"}
+	iDeleteModelManifestRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteModelManifestRequest"}
+	iDeleteModelManifestResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteModelManifestResponse"}
+	iDeleteSignalCatalogRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteSignalCatalogRequest"}
+	iDeleteSignalCatalogResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteSignalCatalogResponse"}
+	iDeleteStateTemplateRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteStateTemplateRequest"}
+	iDeleteStateTemplateResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteStateTemplateResponse"}
+	iDeleteVehicleRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteVehicleRequest"}
+	iDeleteVehicleResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DeleteVehicleResponse"}
+	iDisassociateVehicleFleetRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DisassociateVehicleFleetRequest"}
+	iDisassociateVehicleFleetResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "DisassociateVehicleFleetResponse"}
+	iGetCampaignRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetCampaignRequest"}
+	iGetCampaignResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetCampaignResponse"}
+	iGetDecoderManifestRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetDecoderManifestRequest"}
+	iGetDecoderManifestResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetDecoderManifestResponse"}
+	iGetEncryptionConfigurationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetEncryptionConfigurationRequest"}
+	iGetEncryptionConfigurationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetEncryptionConfigurationResponse"}
+	iGetFleetRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetFleetRequest"}
+	iGetFleetResponse                                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetFleetResponse"}
+	iGetLoggingOptionsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetLoggingOptionsRequest"}
+	iGetLoggingOptionsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetLoggingOptionsResponse"}
+	iGetModelManifestRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetModelManifestRequest"}
+	iGetModelManifestResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetModelManifestResponse"}
+	iGetRegisterAccountStatusRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetRegisterAccountStatusRequest"}
+	iGetRegisterAccountStatusResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetRegisterAccountStatusResponse"}
+	iGetSignalCatalogRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetSignalCatalogRequest"}
+	iGetSignalCatalogResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetSignalCatalogResponse"}
+	iGetStateTemplateRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetStateTemplateRequest"}
+	iGetStateTemplateResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetStateTemplateResponse"}
+	iGetVehicleRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetVehicleRequest"}
+	iGetVehicleResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetVehicleResponse"}
+	iGetVehicleStatusRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetVehicleStatusRequest"}
+	iGetVehicleStatusResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "GetVehicleStatusResponse"}
+	iImportDecoderManifestRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ImportDecoderManifestRequest"}
+	iImportDecoderManifestResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ImportDecoderManifestResponse"}
+	iImportSignalCatalogRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ImportSignalCatalogRequest"}
+	iImportSignalCatalogResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ImportSignalCatalogResponse"}
+	iListCampaignsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListCampaignsRequest"}
+	iListCampaignsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListCampaignsResponse"}
+	iListDecoderManifestNetworkInterfacesRequest      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestNetworkInterfacesRequest"}
+	iListDecoderManifestNetworkInterfacesResponse     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestNetworkInterfacesResponse"}
+	iListDecoderManifestSignalsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestSignalsRequest"}
+	iListDecoderManifestSignalsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestSignalsResponse"}
+	iListDecoderManifestsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestsRequest"}
+	iListDecoderManifestsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListDecoderManifestsResponse"}
+	iListFleetsForVehicleRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListFleetsForVehicleRequest"}
+	iListFleetsForVehicleResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListFleetsForVehicleResponse"}
+	iListFleetsRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListFleetsRequest"}
+	iListFleetsResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListFleetsResponse"}
+	iListModelManifestNodesRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListModelManifestNodesRequest"}
+	iListModelManifestNodesResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListModelManifestNodesResponse"}
+	iListModelManifestsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListModelManifestsRequest"}
+	iListModelManifestsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListModelManifestsResponse"}
+	iListSignalCatalogNodesRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListSignalCatalogNodesRequest"}
+	iListSignalCatalogNodesResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListSignalCatalogNodesResponse"}
+	iListSignalCatalogsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListSignalCatalogsRequest"}
+	iListSignalCatalogsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListSignalCatalogsResponse"}
+	iListStateTemplatesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListStateTemplatesRequest"}
+	iListStateTemplatesResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListStateTemplatesResponse"}
+	iListTagsForResourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListTagsForResourceResponse"}
+	iListVehiclesInFleetRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListVehiclesInFleetRequest"}
+	iListVehiclesInFleetResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListVehiclesInFleetResponse"}
+	iListVehiclesRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListVehiclesRequest"}
+	iListVehiclesResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "ListVehiclesResponse"}
+	iPutEncryptionConfigurationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PutEncryptionConfigurationRequest"}
+	iPutEncryptionConfigurationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PutEncryptionConfigurationResponse"}
+	iPutLoggingOptionsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PutLoggingOptionsRequest"}
+	iPutLoggingOptionsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "PutLoggingOptionsResponse"}
+	iRegisterAccountRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "RegisterAccountRequest"}
+	iRegisterAccountResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "RegisterAccountResponse"}
+	iTagResourceRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TagResourceRequest"}
+	iTagResourceResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "TagResourceResponse"}
+	iUntagResourceRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UntagResourceResponse"}
+	iUpdateCampaignRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateCampaignRequest"}
+	iUpdateCampaignResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateCampaignResponse"}
+	iUpdateDecoderManifestRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateDecoderManifestRequest"}
+	iUpdateDecoderManifestResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateDecoderManifestResponse"}
+	iUpdateFleetRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateFleetRequest"}
+	iUpdateFleetResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateFleetResponse"}
+	iUpdateModelManifestRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateModelManifestRequest"}
+	iUpdateModelManifestResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateModelManifestResponse"}
+	iUpdateSignalCatalogRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateSignalCatalogRequest"}
+	iUpdateSignalCatalogResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateSignalCatalogResponse"}
+	iUpdateStateTemplateRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateStateTemplateRequest"}
+	iUpdateStateTemplateResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateStateTemplateResponse"}
+	iUpdateVehicleRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateVehicleRequest"}
+	iUpdateVehicleResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.iotfleetwise", Name: "UpdateVehicleResponse"}
+	pUnit                                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pPrimitiveBoolean                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "PrimitiveBoolean"}
+	pString                                           = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/vehicles/{vehicleName}/associate",
-	Code: 204})
-
-var BatchCreateVehicle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "BatchCreateVehicle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/vehicles",
-	Code: 200})
-
-var BatchUpdateVehicle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "BatchUpdateVehicle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/vehicles",
-	Code: 200})
-
-var CreateCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/campaigns/{name}",
-	Code: 200})
-
-var CreateDecoderManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateDecoderManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/decoder-manifests/{name}",
-	Code: 200})
-
-var CreateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateFleet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/fleets/{fleetId}",
-	Code: 201})
-
-var CreateModelManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateModelManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/model-manifests/{name}",
-	Code: 200})
-
-var CreateSignalCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateSignalCatalog",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/signal-catalogs/{name}",
-	Code: 200})
-
-var CreateStateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateStateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/state-templates/{name}",
-	Code: 200})
-
-var CreateVehicle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateVehicle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/vehicles/{vehicleName}",
-	Code: 201})
-
-var DeleteCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/campaigns/{name}",
-	Code: 204})
-
-var DeleteDecoderManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteDecoderManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/decoder-manifests/{name}",
-	Code: 200})
-
-var DeleteFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteFleet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/fleets/{fleetId}",
-	Code: 200})
-
-var DeleteModelManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteModelManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/model-manifests/{name}",
-	Code: 200})
-
-var DeleteSignalCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteSignalCatalog",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/signal-catalogs/{name}",
-	Code: 200})
-
-var DeleteStateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteStateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/state-templates/{identifier}",
-	Code: 200})
-
-var DeleteVehicle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteVehicle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/vehicles/{vehicleName}",
-	Code: 204})
-
-var DisassociateVehicleFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DisassociateVehicleFleet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/vehicles/{vehicleName}/disassociate",
-	Code: 204})
-
-var GetCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/campaigns/{name}",
-	Code: 200})
-
-var GetDecoderManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetDecoderManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/decoder-manifests/{name}",
-	Code: 200})
-
-var GetEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetEncryptionConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/encryptionConfiguration",
-	Code: 200})
-
-var GetFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetFleet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/fleets/{fleetId}",
-	Code: 200})
-
-var GetLoggingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetLoggingOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/loggingOptions",
-	Code: 200})
-
-var GetModelManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetModelManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/model-manifests/{name}",
-	Code: 200})
-
-var GetRegisterAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetRegisterAccountStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/account/registration_status",
-	Code: 200})
-
-var GetSignalCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetSignalCatalog",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signal-catalogs/{name}",
-	Code: 200})
-
-var GetStateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetStateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/state-templates/{identifier}",
-	Code: 200})
-
-var GetVehicle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetVehicle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/vehicles/{vehicleName}",
-	Code: 200})
-
-var GetVehicleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetVehicleStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/vehicles/{vehicleName}/status",
-	Code: 200})
-
-var ImportDecoderManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ImportDecoderManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/decoder-manifests/{name}",
-	Code: 200})
-
-var ImportSignalCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ImportSignalCatalog",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/signal-catalogs/{name}/nodes",
-	Code: 200})
-
-var ListCampaigns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListCampaigns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/campaigns",
-	Code: 200})
-
-var ListDecoderManifestNetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestNetworkInterfaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/decoder-manifests/{name}/network-interfaces",
-	Code: 200})
-
-var ListDecoderManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifests",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/decoder-manifests",
-	Code: 200})
-
-var ListDecoderManifestSignals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestSignals",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/decoder-manifests/{name}/signals",
-	Code: 200})
-
-var ListFleets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListFleets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/fleets",
-	Code: 200})
-
-var ListFleetsForVehicle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListFleetsForVehicle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/vehicles/{vehicleName}/fleets",
-	Code: 200})
-
-var ListModelManifestNodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListModelManifestNodes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/model-manifests/{name}/nodes",
-	Code: 200})
-
-var ListModelManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListModelManifests",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/model-manifests",
-	Code: 200})
-
-var ListSignalCatalogNodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListSignalCatalogNodes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signal-catalogs/{name}/nodes",
-	Code: 200})
-
-var ListSignalCatalogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListSignalCatalogs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signal-catalogs",
-	Code: 200})
-
-var ListStateTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListStateTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/state-templates",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags",
-	Code: 200})
-
-var ListVehicles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListVehicles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/vehicles",
-	Code: 200})
-
-var ListVehiclesInFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListVehiclesInFleet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/fleets/{fleetId}/vehicles",
-	Code: 200})
-
-var PutEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PutEncryptionConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/encryptionConfiguration",
-	Code: 200})
-
-var PutLoggingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PutLoggingOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/loggingOptions",
-	Code: 204})
-
-var RegisterAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "RegisterAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/account/registration",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags",
-	Code: 204})
-
-var UpdateCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/campaigns/{name}",
-	Code: 200})
-
-var UpdateDecoderManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateDecoderManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/decoder-manifests/{name}",
-	Code: 200})
-
-var UpdateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateFleet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/fleets/{fleetId}",
-	Code: 204})
-
-var UpdateModelManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateModelManifest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/model-manifests/{name}",
-	Code: 200})
-
-var UpdateSignalCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateSignalCatalog",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/signal-catalogs/{name}",
-	Code: 200})
-
-var UpdateStateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateStateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/state-templates/{identifier}",
-	Code: 200})
-
-var UpdateVehicle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateVehicle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/vehicles/{vehicleName}",
-	Code: 204})
-
-var _IoTAutobahnControlPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "IoTAutobahnControlPlane",
-}, smithy.ShapeTypeService, 0)
-
-var IoTAutobahnControlPlane = smithy.NewServiceSchema(_IoTAutobahnControlPlane, "2021-06-17")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _actionEventExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "actionEventExpression",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Actuator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Actuator",
-}, smithy.ShapeTypeStructure, 11)
-var Actuator_fullyQualifiedName *smithy.Schema
-
-var Actuator_dataType *smithy.Schema
-
-var Actuator_description *smithy.Schema
-
-var Actuator_unit *smithy.Schema
-
-var Actuator_allowedValues *smithy.Schema
-
-var Actuator_min *smithy.Schema
-
-var Actuator_max *smithy.Schema
-
-var Actuator_assignedValue *smithy.Schema
-
-var Actuator_deprecationMessage *smithy.Schema
-
-var Actuator_comment *smithy.Schema
-
-var Actuator_structFullyQualifiedName *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "arn",
-}, smithy.ShapeTypeString, 0)
-
-var Attribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Attribute",
-}, smithy.ShapeTypeStructure, 11)
-var Attribute_fullyQualifiedName *smithy.Schema
-
-var Attribute_dataType *smithy.Schema
-
-var Attribute_description *smithy.Schema
-
-var Attribute_unit *smithy.Schema
-
-var Attribute_allowedValues *smithy.Schema
-
-var Attribute_min *smithy.Schema
-
-var Attribute_max *smithy.Schema
-
-var Attribute_assignedValue *smithy.Schema
-
-var Attribute_defaultValue *smithy.Schema
-
-var Attribute_deprecationMessage *smithy.Schema
-
-var Attribute_comment *smithy.Schema
-
-var _attributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "attributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _attributeNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "attributeNamesList",
-}, smithy.ShapeTypeList, 1)
-var _attributeNamesList_member *smithy.Schema
-
-var _attributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "attributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _attributesMap_key *smithy.Schema
-
-var _attributesMap_value *smithy.Schema
-
-var _attributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "attributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _attributeValuesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "attributeValuesList",
-}, smithy.ShapeTypeList, 1)
-var _attributeValuesList_member *smithy.Schema
-
-var Branch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Branch",
-}, smithy.ShapeTypeStructure, 4)
-var Branch_fullyQualifiedName *smithy.Schema
-
-var Branch_description *smithy.Schema
-
-var Branch_deprecationMessage *smithy.Schema
-
-var Branch_comment *smithy.Schema
-
-var _campaignArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "campaignArn",
-}, smithy.ShapeTypeString, 0)
-
-var _campaignName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "campaignName",
-}, smithy.ShapeTypeString, 0)
-
-var CampaignStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CampaignStatus",
-}, smithy.ShapeTypeEnum, 4)
-var CampaignStatus_CREATING *smithy.Schema
-
-var CampaignStatus_WAITING_FOR_APPROVAL *smithy.Schema
-
-var CampaignStatus_RUNNING *smithy.Schema
-
-var CampaignStatus_SUSPENDED *smithy.Schema
-
-var _campaignSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "campaignSummaries",
-}, smithy.ShapeTypeList, 1)
-var _campaignSummaries_member *smithy.Schema
-
-var CampaignSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CampaignSummary",
-}, smithy.ShapeTypeStructure, 8)
-var CampaignSummary_arn *smithy.Schema
-
-var CampaignSummary_name *smithy.Schema
-
-var CampaignSummary_description *smithy.Schema
-
-var CampaignSummary_signalCatalogArn *smithy.Schema
-
-var CampaignSummary_targetArn *smithy.Schema
-
-var CampaignSummary_status *smithy.Schema
-
-var CampaignSummary_creationTime *smithy.Schema
-
-var CampaignSummary_lastModificationTime *smithy.Schema
-
-var CanDbcDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CanDbcDefinition",
-}, smithy.ShapeTypeStructure, 3)
-var CanDbcDefinition_networkInterface *smithy.Schema
-
-var CanDbcDefinition_canDbcFiles *smithy.Schema
-
-var CanDbcDefinition_signalsMap *smithy.Schema
-
-var CanInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CanInterface",
-}, smithy.ShapeTypeStructure, 3)
-var CanInterface_name *smithy.Schema
-
-var CanInterface_protocolName *smithy.Schema
-
-var CanInterface_protocolVersion *smithy.Schema
-
-var _CanInterfaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CanInterfaceName",
-}, smithy.ShapeTypeString, 0)
-
-var CanSignal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CanSignal",
-}, smithy.ShapeTypeStructure, 9)
-var CanSignal_messageId *smithy.Schema
-
-var CanSignal_isBigEndian *smithy.Schema
-
-var CanSignal_isSigned *smithy.Schema
-
-var CanSignal_startBit *smithy.Schema
-
-var CanSignal_offset *smithy.Schema
-
-var CanSignal_factor *smithy.Schema
-
-var CanSignal_length *smithy.Schema
-
-var CanSignal_name *smithy.Schema
-
-var CanSignal_signalValueType *smithy.Schema
-
-var _CanSignalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CanSignalName",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchLogDeliveryOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CloudWatchLogDeliveryOptions",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogDeliveryOptions_logType *smithy.Schema
-
-var CloudWatchLogDeliveryOptions_logGroupName *smithy.Schema
-
-var _CloudWatchLogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CloudWatchLogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _collectionPeriodMs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "collectionPeriodMs",
-}, smithy.ShapeTypeLong, 0)
-
-var CollectionScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CollectionScheme",
-}, smithy.ShapeTypeUnion, 2)
-var CollectionScheme_timeBasedCollectionScheme *smithy.Schema
-
-var CollectionScheme_conditionBasedCollectionScheme *smithy.Schema
-
-var Compression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Compression",
-}, smithy.ShapeTypeEnum, 2)
-var Compression_OFF *smithy.Schema
-
-var Compression_SNAPPY *smithy.Schema
-
-var ConditionBasedCollectionScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ConditionBasedCollectionScheme",
-}, smithy.ShapeTypeStructure, 4)
-var ConditionBasedCollectionScheme_expression *smithy.Schema
-
-var ConditionBasedCollectionScheme_minimumTriggerIntervalMs *smithy.Schema
-
-var ConditionBasedCollectionScheme_triggerMode *smithy.Schema
-
-var ConditionBasedCollectionScheme_conditionLanguageVersion *smithy.Schema
-
-var ConditionBasedSignalFetchConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ConditionBasedSignalFetchConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ConditionBasedSignalFetchConfig_conditionExpression *smithy.Schema
-
-var ConditionBasedSignalFetchConfig_triggerMode *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resource *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CreateVehicleError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateVehicleError",
-}, smithy.ShapeTypeStructure, 3)
-var CreateVehicleError_vehicleName *smithy.Schema
-
-var CreateVehicleError_code *smithy.Schema
-
-var CreateVehicleError_message *smithy.Schema
-
-var _createVehicleErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "createVehicleErrors",
-}, smithy.ShapeTypeList, 1)
-var _createVehicleErrors_member *smithy.Schema
-
-var CreateVehicleRequestItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateVehicleRequestItem",
-}, smithy.ShapeTypeStructure, 7)
-var CreateVehicleRequestItem_vehicleName *smithy.Schema
-
-var CreateVehicleRequestItem_modelManifestArn *smithy.Schema
-
-var CreateVehicleRequestItem_decoderManifestArn *smithy.Schema
-
-var CreateVehicleRequestItem_attributes *smithy.Schema
-
-var CreateVehicleRequestItem_associationBehavior *smithy.Schema
-
-var CreateVehicleRequestItem_tags *smithy.Schema
-
-var CreateVehicleRequestItem_stateTemplates *smithy.Schema
-
-var _createVehicleRequestItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "createVehicleRequestItems",
-}, smithy.ShapeTypeList, 1)
-var _createVehicleRequestItems_member *smithy.Schema
-
-var CreateVehicleResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateVehicleResponseItem",
-}, smithy.ShapeTypeStructure, 3)
-var CreateVehicleResponseItem_vehicleName *smithy.Schema
-
-var CreateVehicleResponseItem_arn *smithy.Schema
-
-var CreateVehicleResponseItem_thingArn *smithy.Schema
-
-var _createVehicleResponses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "createVehicleResponses",
-}, smithy.ShapeTypeList, 1)
-var _createVehicleResponses_member *smithy.Schema
-
-var _CustomDecodingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CustomDecodingId",
-}, smithy.ShapeTypeString, 0)
-
-var CustomDecodingInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CustomDecodingInterface",
-}, smithy.ShapeTypeStructure, 1)
-var CustomDecodingInterface_name *smithy.Schema
-
-var CustomDecodingSignal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CustomDecodingSignal",
-}, smithy.ShapeTypeStructure, 1)
-var CustomDecodingSignal_id *smithy.Schema
-
-var _CustomDecodingSignalInterfaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CustomDecodingSignalInterfaceName",
-}, smithy.ShapeTypeString, 0)
-
-var _customerAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "customerAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var CustomProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CustomProperty",
-}, smithy.ShapeTypeStructure, 7)
-var CustomProperty_fullyQualifiedName *smithy.Schema
-
-var CustomProperty_dataType *smithy.Schema
-
-var CustomProperty_dataEncoding *smithy.Schema
-
-var CustomProperty_description *smithy.Schema
-
-var CustomProperty_deprecationMessage *smithy.Schema
-
-var CustomProperty_comment *smithy.Schema
-
-var CustomProperty_structFullyQualifiedName *smithy.Schema
-
-var CustomStruct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CustomStruct",
-}, smithy.ShapeTypeStructure, 4)
-var CustomStruct_fullyQualifiedName *smithy.Schema
-
-var CustomStruct_description *smithy.Schema
-
-var CustomStruct_deprecationMessage *smithy.Schema
-
-var CustomStruct_comment *smithy.Schema
-
-var DataDestinationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataDestinationConfig",
-}, smithy.ShapeTypeUnion, 3)
-var DataDestinationConfig_s3Config *smithy.Schema
-
-var DataDestinationConfig_timestreamConfig *smithy.Schema
-
-var DataDestinationConfig_mqttTopicConfig *smithy.Schema
-
-var _DataDestinationConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataDestinationConfigs",
-}, smithy.ShapeTypeList, 1)
-var _DataDestinationConfigs_member *smithy.Schema
-
-var _DataExtraDimensionNodePathList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataExtraDimensionNodePathList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _DataExtraDimensionNodePathList_member *smithy.Schema
-
-var DataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataFormat",
-}, smithy.ShapeTypeEnum, 2)
-var DataFormat_JSON *smithy.Schema
-
-var DataFormat_PARQUET *smithy.Schema
-
-var DataPartition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataPartition",
-}, smithy.ShapeTypeStructure, 3)
-var DataPartition_id *smithy.Schema
-
-var DataPartition_storageOptions *smithy.Schema
-
-var DataPartition_uploadOptions *smithy.Schema
-
-var _DataPartitionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataPartitionId",
-}, smithy.ShapeTypeString, 0)
-
-var _DataPartitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataPartitions",
-}, smithy.ShapeTypeList, 1)
-var _DataPartitions_member *smithy.Schema
-
-var DataPartitionStorageOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataPartitionStorageOptions",
-}, smithy.ShapeTypeStructure, 3)
-var DataPartitionStorageOptions_maximumSize *smithy.Schema
-
-var DataPartitionStorageOptions_storageLocation *smithy.Schema
-
-var DataPartitionStorageOptions_minimumTimeToLive *smithy.Schema
-
-var DataPartitionUploadOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DataPartitionUploadOptions",
-}, smithy.ShapeTypeStructure, 2)
-var DataPartitionUploadOptions_expression *smithy.Schema
-
-var DataPartitionUploadOptions_conditionLanguageVersion *smithy.Schema
-
-var _decoderManifestSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "decoderManifestSummaries",
-}, smithy.ShapeTypeList, 1)
-var _decoderManifestSummaries_member *smithy.Schema
-
-var DecoderManifestSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DecoderManifestSummary",
-}, smithy.ShapeTypeStructure, 8)
-var DecoderManifestSummary_name *smithy.Schema
-
-var DecoderManifestSummary_arn *smithy.Schema
-
-var DecoderManifestSummary_modelManifestArn *smithy.Schema
-
-var DecoderManifestSummary_description *smithy.Schema
-
-var DecoderManifestSummary_status *smithy.Schema
-
-var DecoderManifestSummary_creationTime *smithy.Schema
-
-var DecoderManifestSummary_lastModificationTime *smithy.Schema
-
-var DecoderManifestSummary_message *smithy.Schema
-
-var DecoderManifestValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DecoderManifestValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DecoderManifestValidationException_invalidSignals *smithy.Schema
-
-var DecoderManifestValidationException_invalidNetworkInterfaces *smithy.Schema
-
-var DecoderManifestValidationException_message *smithy.Schema
-
-var DefaultForUnmappedSignalsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DefaultForUnmappedSignalsType",
-}, smithy.ShapeTypeEnum, 1)
-var DefaultForUnmappedSignalsType_CUSTOM_DECODING *smithy.Schema
-
-var _description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "description",
-}, smithy.ShapeTypeString, 0)
-
-var DiagnosticsMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DiagnosticsMode",
-}, smithy.ShapeTypeEnum, 2)
-var DiagnosticsMode_OFF *smithy.Schema
-
-var DiagnosticsMode_SEND_ACTIVE_DTCS *smithy.Schema
-
-var _double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "double",
-}, smithy.ShapeTypeDouble, 0)
-
-var EncryptionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "EncryptionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var EncryptionStatus_PENDING *smithy.Schema
-
-var EncryptionStatus_SUCCESS *smithy.Schema
-
-var EncryptionStatus_FAILURE *smithy.Schema
-
-var EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionType_KMS_BASED_ENCRYPTION *smithy.Schema
-
-var EncryptionType_FLEETWISE_DEFAULT_ENCRYPTION *smithy.Schema
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _eventExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "eventExpression",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EventExpressionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "EventExpressionList",
-}, smithy.ShapeTypeList, 1)
-var _EventExpressionList_member *smithy.Schema
-
-var _fetchConfigEventExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "fetchConfigEventExpression",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _fleetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "fleetId",
-}, smithy.ShapeTypeString, 0)
-
-var _fleets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "fleets",
-}, smithy.ShapeTypeList, 1)
-var _fleets_member *smithy.Schema
-
-var _fleetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "fleetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _fleetSummaries_member *smithy.Schema
-
-var FleetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "FleetSummary",
-}, smithy.ShapeTypeStructure, 6)
-var FleetSummary_id *smithy.Schema
-
-var FleetSummary_arn *smithy.Schema
-
-var FleetSummary_description *smithy.Schema
-
-var FleetSummary_signalCatalogArn *smithy.Schema
-
-var FleetSummary_creationTime *smithy.Schema
-
-var FleetSummary_lastModificationTime *smithy.Schema
-
-var FormattedVss = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "FormattedVss",
-}, smithy.ShapeTypeUnion, 1)
-var FormattedVss_vssJson *smithy.Schema
-
-var _Fqns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Fqns",
-}, smithy.ShapeTypeList, 1)
-var _Fqns_member *smithy.Schema
-
-var _FullyQualifiedName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "FullyQualifiedName",
-}, smithy.ShapeTypeString, 0)
-
-var IamRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "IamRegistrationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var IamRegistrationResponse_roleArn *smithy.Schema
-
-var IamRegistrationResponse_registrationStatus *smithy.Schema
-
-var IamRegistrationResponse_errorMessage *smithy.Schema
-
-var IamResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "IamResources",
-}, smithy.ShapeTypeStructure, 1)
-var IamResources_roleArn *smithy.Schema
-
-var _IAMRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "IAMRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _InterfaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InterfaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _InterfaceIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InterfaceIds",
-}, smithy.ShapeTypeList, 1)
-var _InterfaceIds_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var InvalidNetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidNetworkInterface",
-}, smithy.ShapeTypeStructure, 2)
-var InvalidNetworkInterface_interfaceId *smithy.Schema
-
-var InvalidNetworkInterface_reason *smithy.Schema
-
-var _InvalidNetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidNetworkInterfaces",
-}, smithy.ShapeTypeList, 1)
-var _InvalidNetworkInterfaces_member *smithy.Schema
-
-var InvalidNodeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidNodeException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNodeException_invalidNodes *smithy.Schema
-
-var InvalidNodeException_reason *smithy.Schema
-
-var InvalidNodeException_message *smithy.Schema
-
-var InvalidSignal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidSignal",
-}, smithy.ShapeTypeStructure, 2)
-var InvalidSignal_name *smithy.Schema
-
-var InvalidSignal_reason *smithy.Schema
-
-var InvalidSignalDecoder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidSignalDecoder",
-}, smithy.ShapeTypeStructure, 3)
-var InvalidSignalDecoder_name *smithy.Schema
-
-var InvalidSignalDecoder_reason *smithy.Schema
-
-var InvalidSignalDecoder_hint *smithy.Schema
-
-var _InvalidSignalDecoders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidSignalDecoders",
-}, smithy.ShapeTypeList, 1)
-var _InvalidSignalDecoders_member *smithy.Schema
-
-var _InvalidSignals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidSignals",
-}, smithy.ShapeTypeList, 1)
-var _InvalidSignals_member *smithy.Schema
-
-var InvalidSignalsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "InvalidSignalsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidSignalsException_message *smithy.Schema
-
-var InvalidSignalsException_invalidSignals *smithy.Schema
-
-var _languageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "languageVersion",
-}, smithy.ShapeTypeInteger, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_message *smithy.Schema
-
-var LimitExceededException_resourceId *smithy.Schema
-
-var LimitExceededException_resourceType *smithy.Schema
-
-var _listOfStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "listOfStrings",
-}, smithy.ShapeTypeList, 1)
-var _listOfStrings_member *smithy.Schema
-
-var ListResponseScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListResponseScope",
-}, smithy.ShapeTypeEnum, 1)
-var ListResponseScope_METADATA_ONLY *smithy.Schema
-
-var _listVehiclesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "listVehiclesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var LogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 2)
-var LogType_OFF *smithy.Schema
-
-var LogType_ERROR *smithy.Schema
-
-var ManifestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ManifestStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ManifestStatus_ACTIVE *smithy.Schema
-
-var ManifestStatus_DRAFT *smithy.Schema
-
-var ManifestStatus_INVALID *smithy.Schema
-
-var ManifestStatus_VALIDATING *smithy.Schema
-
-var _maxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "maxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _maxSampleCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "maxSampleCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _maxStringSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "maxStringSize",
-}, smithy.ShapeTypeLong, 0)
-
-var _message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "message",
-}, smithy.ShapeTypeString, 0)
-
-var MessageSignal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "MessageSignal",
-}, smithy.ShapeTypeStructure, 2)
-var MessageSignal_topicName *smithy.Schema
-
-var MessageSignal_structuredMessage *smithy.Schema
-
-var _modelManifestSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "modelManifestSummaries",
-}, smithy.ShapeTypeList, 1)
-var _modelManifestSummaries_member *smithy.Schema
-
-var ModelManifestSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ModelManifestSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ModelManifestSummary_name *smithy.Schema
-
-var ModelManifestSummary_arn *smithy.Schema
-
-var ModelManifestSummary_signalCatalogArn *smithy.Schema
-
-var ModelManifestSummary_description *smithy.Schema
-
-var ModelManifestSummary_status *smithy.Schema
-
-var ModelManifestSummary_creationTime *smithy.Schema
-
-var ModelManifestSummary_lastModificationTime *smithy.Schema
-
-var _ModelSignalsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ModelSignalsMap",
-}, smithy.ShapeTypeMap, 2)
-var _ModelSignalsMap_key *smithy.Schema
-
-var _ModelSignalsMap_value *smithy.Schema
-
-var _MqttTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "MqttTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var MqttTopicConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "MqttTopicConfig",
-}, smithy.ShapeTypeStructure, 2)
-var MqttTopicConfig_mqttTopicArn *smithy.Schema
-
-var MqttTopicConfig_executionRoleArn *smithy.Schema
-
-var _NetworkFileBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkFileBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var NetworkFileDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkFileDefinition",
-}, smithy.ShapeTypeUnion, 1)
-var NetworkFileDefinition_canDbc *smithy.Schema
-
-var _NetworkFileDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkFileDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _NetworkFileDefinitions_member *smithy.Schema
-
-var _NetworkFilesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkFilesList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkFilesList_member *smithy.Schema
-
-var NetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkInterface",
-}, smithy.ShapeTypeStructure, 6)
-var NetworkInterface_interfaceId *smithy.Schema
-
-var NetworkInterface_type *smithy.Schema
-
-var NetworkInterface_canInterface *smithy.Schema
-
-var NetworkInterface_obdInterface *smithy.Schema
-
-var NetworkInterface_vehicleMiddleware *smithy.Schema
-
-var NetworkInterface_customDecodingInterface *smithy.Schema
-
-var NetworkInterfaceFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkInterfaceFailureReason",
-}, smithy.ShapeTypeEnum, 8)
-var NetworkInterfaceFailureReason_DUPLICATE_INTERFACE *smithy.Schema
-
-var NetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE *smithy.Schema
-
-var NetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS *smithy.Schema
-
-var NetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL *smithy.Schema
-
-var NetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL *smithy.Schema
-
-var NetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS *smithy.Schema
-
-var NetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL *smithy.Schema
-
-var NetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL *smithy.Schema
-
-var _NetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkInterfaces",
-}, smithy.ShapeTypeList, 1)
-var _NetworkInterfaces_member *smithy.Schema
-
-var NetworkInterfaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NetworkInterfaceType",
-}, smithy.ShapeTypeEnum, 4)
-var NetworkInterfaceType_CAN_INTERFACE *smithy.Schema
-
-var NetworkInterfaceType_OBD_INTERFACE *smithy.Schema
-
-var NetworkInterfaceType_VEHICLE_MIDDLEWARE *smithy.Schema
-
-var NetworkInterfaceType_CUSTOM_DECODING_INTERFACE *smithy.Schema
-
-var _nextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "nextToken",
-}, smithy.ShapeTypeString, 0)
-
-var Node = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Node",
-}, smithy.ShapeTypeUnion, 6)
-var Node_branch *smithy.Schema
-
-var Node_sensor *smithy.Schema
-
-var Node_actuator *smithy.Schema
-
-var Node_attribute *smithy.Schema
-
-var Node_struct *smithy.Schema
-
-var Node_property *smithy.Schema
-
-var NodeCounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NodeCounts",
-}, smithy.ShapeTypeStructure, 7)
-var NodeCounts_totalNodes *smithy.Schema
-
-var NodeCounts_totalBranches *smithy.Schema
-
-var NodeCounts_totalSensors *smithy.Schema
-
-var NodeCounts_totalAttributes *smithy.Schema
-
-var NodeCounts_totalActuators *smithy.Schema
-
-var NodeCounts_totalStructs *smithy.Schema
-
-var NodeCounts_totalProperties *smithy.Schema
-
-var NodeDataEncoding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NodeDataEncoding",
-}, smithy.ShapeTypeEnum, 2)
-var NodeDataEncoding_BINARY *smithy.Schema
-
-var NodeDataEncoding_TYPED *smithy.Schema
-
-var NodeDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NodeDataType",
-}, smithy.ShapeTypeEnum, 29)
-var NodeDataType_INT8 *smithy.Schema
-
-var NodeDataType_UINT8 *smithy.Schema
-
-var NodeDataType_INT16 *smithy.Schema
-
-var NodeDataType_UINT16 *smithy.Schema
-
-var NodeDataType_INT32 *smithy.Schema
-
-var NodeDataType_UINT32 *smithy.Schema
-
-var NodeDataType_INT64 *smithy.Schema
-
-var NodeDataType_UINT64 *smithy.Schema
-
-var NodeDataType_BOOLEAN *smithy.Schema
-
-var NodeDataType_FLOAT *smithy.Schema
-
-var NodeDataType_DOUBLE *smithy.Schema
-
-var NodeDataType_STRING *smithy.Schema
-
-var NodeDataType_UNIX_TIMESTAMP *smithy.Schema
-
-var NodeDataType_INT8_ARRAY *smithy.Schema
-
-var NodeDataType_UINT8_ARRAY *smithy.Schema
-
-var NodeDataType_INT16_ARRAY *smithy.Schema
-
-var NodeDataType_UINT16_ARRAY *smithy.Schema
-
-var NodeDataType_INT32_ARRAY *smithy.Schema
-
-var NodeDataType_UINT32_ARRAY *smithy.Schema
-
-var NodeDataType_INT64_ARRAY *smithy.Schema
-
-var NodeDataType_UINT64_ARRAY *smithy.Schema
-
-var NodeDataType_BOOLEAN_ARRAY *smithy.Schema
-
-var NodeDataType_FLOAT_ARRAY *smithy.Schema
-
-var NodeDataType_DOUBLE_ARRAY *smithy.Schema
-
-var NodeDataType_STRING_ARRAY *smithy.Schema
-
-var NodeDataType_UNIX_TIMESTAMP_ARRAY *smithy.Schema
-
-var NodeDataType_UNKNOWN *smithy.Schema
-
-var NodeDataType_STRUCT *smithy.Schema
-
-var NodeDataType_STRUCT_ARRAY *smithy.Schema
-
-var _NodePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NodePath",
-}, smithy.ShapeTypeString, 0)
-
-var _NodePaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "NodePaths",
-}, smithy.ShapeTypeList, 1)
-var _NodePaths_member *smithy.Schema
-
-var _Nodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Nodes",
-}, smithy.ShapeTypeList, 1)
-var _Nodes_member *smithy.Schema
-
-var _nonNegativeInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "nonNegativeInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _number = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "number",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ObdBitmaskLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ObdBitmaskLength",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ObdByteLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ObdByteLength",
-}, smithy.ShapeTypeInteger, 0)
-
-var ObdInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ObdInterface",
-}, smithy.ShapeTypeStructure, 7)
-var ObdInterface_name *smithy.Schema
-
-var ObdInterface_requestMessageId *smithy.Schema
-
-var ObdInterface_obdStandard *smithy.Schema
-
-var ObdInterface_pidRequestIntervalSeconds *smithy.Schema
-
-var ObdInterface_dtcRequestIntervalSeconds *smithy.Schema
-
-var ObdInterface_useExtendedIds *smithy.Schema
-
-var ObdInterface_hasTransmissionEcu *smithy.Schema
-
-var _ObdInterfaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ObdInterfaceName",
-}, smithy.ShapeTypeString, 0)
-
-var ObdSignal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ObdSignal",
-}, smithy.ShapeTypeStructure, 11)
-var ObdSignal_pidResponseLength *smithy.Schema
-
-var ObdSignal_serviceMode *smithy.Schema
-
-var ObdSignal_pid *smithy.Schema
-
-var ObdSignal_scaling *smithy.Schema
-
-var ObdSignal_offset *smithy.Schema
-
-var ObdSignal_startByte *smithy.Schema
-
-var ObdSignal_byteLength *smithy.Schema
-
-var ObdSignal_bitRightShift *smithy.Schema
-
-var ObdSignal_bitMaskLength *smithy.Schema
-
-var ObdSignal_isSigned *smithy.Schema
-
-var ObdSignal_signalValueType *smithy.Schema
-
-var _ObdStandard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ObdStandard",
-}, smithy.ShapeTypeString, 0)
-
-var OnChangeStateTemplateUpdateStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "OnChangeStateTemplateUpdateStrategy",
-}, smithy.ShapeTypeStructure, 0)
-
-var PeriodicStateTemplateUpdateStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PeriodicStateTemplateUpdateStrategy",
-}, smithy.ShapeTypeStructure, 1)
-var PeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate *smithy.Schema
-
-var _positiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "positiveInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _positiveLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "positiveLong",
-}, smithy.ShapeTypeLong, 0)
-
-var _Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var PrimitiveMessageDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PrimitiveMessageDefinition",
-}, smithy.ShapeTypeUnion, 1)
-var PrimitiveMessageDefinition_ros2PrimitiveMessageDefinition *smithy.Schema
-
-var _priority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "priority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProtocolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ProtocolName",
-}, smithy.ShapeTypeString, 0)
-
-var _ProtocolVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ProtocolVersion",
-}, smithy.ShapeTypeString, 0)
-
-var RegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "RegistrationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var RegistrationStatus_REGISTRATION_PENDING *smithy.Schema
-
-var RegistrationStatus_REGISTRATION_SUCCESS *smithy.Schema
-
-var RegistrationStatus_REGISTRATION_FAILURE *smithy.Schema
-
-var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _resourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "resourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourceUniqueId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ResourceUniqueId",
-}, smithy.ShapeTypeString, 0)
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var ROS2PrimitiveMessageDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ROS2PrimitiveMessageDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var ROS2PrimitiveMessageDefinition_primitiveType *smithy.Schema
-
-var ROS2PrimitiveMessageDefinition_offset *smithy.Schema
-
-var ROS2PrimitiveMessageDefinition_scaling *smithy.Schema
-
-var ROS2PrimitiveMessageDefinition_upperBound *smithy.Schema
-
-var ROS2PrimitiveType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ROS2PrimitiveType",
-}, smithy.ShapeTypeEnum, 15)
-var ROS2PrimitiveType_BOOL *smithy.Schema
-
-var ROS2PrimitiveType_BYTE *smithy.Schema
-
-var ROS2PrimitiveType_CHAR *smithy.Schema
-
-var ROS2PrimitiveType_FLOAT32 *smithy.Schema
-
-var ROS2PrimitiveType_FLOAT64 *smithy.Schema
-
-var ROS2PrimitiveType_INT8 *smithy.Schema
-
-var ROS2PrimitiveType_UINT8 *smithy.Schema
-
-var ROS2PrimitiveType_INT16 *smithy.Schema
-
-var ROS2PrimitiveType_UINT16 *smithy.Schema
-
-var ROS2PrimitiveType_INT32 *smithy.Schema
-
-var ROS2PrimitiveType_UINT32 *smithy.Schema
-
-var ROS2PrimitiveType_INT64 *smithy.Schema
-
-var ROS2PrimitiveType_UINT64 *smithy.Schema
-
-var ROS2PrimitiveType_STRING *smithy.Schema
-
-var ROS2PrimitiveType_WSTRING *smithy.Schema
-
-var _S3BucketArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "S3BucketArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3Config = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "S3Config",
-}, smithy.ShapeTypeStructure, 4)
-var S3Config_bucketArn *smithy.Schema
-
-var S3Config_dataFormat *smithy.Schema
-
-var S3Config_storageCompressionFormat *smithy.Schema
-
-var S3Config_prefix *smithy.Schema
-
-var Sensor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Sensor",
-}, smithy.ShapeTypeStructure, 10)
-var Sensor_fullyQualifiedName *smithy.Schema
-
-var Sensor_dataType *smithy.Schema
-
-var Sensor_description *smithy.Schema
-
-var Sensor_unit *smithy.Schema
-
-var Sensor_allowedValues *smithy.Schema
-
-var Sensor_min *smithy.Schema
-
-var Sensor_max *smithy.Schema
-
-var Sensor_deprecationMessage *smithy.Schema
-
-var Sensor_comment *smithy.Schema
-
-var Sensor_structFullyQualifiedName *smithy.Schema
-
-var _signalCatalogSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "signalCatalogSummaries",
-}, smithy.ShapeTypeList, 1)
-var _signalCatalogSummaries_member *smithy.Schema
-
-var SignalCatalogSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalCatalogSummary",
-}, smithy.ShapeTypeStructure, 4)
-var SignalCatalogSummary_name *smithy.Schema
-
-var SignalCatalogSummary_arn *smithy.Schema
-
-var SignalCatalogSummary_creationTime *smithy.Schema
-
-var SignalCatalogSummary_lastModificationTime *smithy.Schema
-
-var SignalDecoder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalDecoder",
-}, smithy.ShapeTypeStructure, 7)
-var SignalDecoder_fullyQualifiedName *smithy.Schema
-
-var SignalDecoder_type *smithy.Schema
-
-var SignalDecoder_interfaceId *smithy.Schema
-
-var SignalDecoder_canSignal *smithy.Schema
-
-var SignalDecoder_obdSignal *smithy.Schema
-
-var SignalDecoder_messageSignal *smithy.Schema
-
-var SignalDecoder_customDecodingSignal *smithy.Schema
-
-var SignalDecoderFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalDecoderFailureReason",
-}, smithy.ShapeTypeEnum, 16)
-var SignalDecoderFailureReason_DUPLICATE_SIGNAL *smithy.Schema
-
-var SignalDecoderFailureReason_CONFLICTING_SIGNAL *smithy.Schema
-
-var SignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS *smithy.Schema
-
-var SignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE *smithy.Schema
-
-var SignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE *smithy.Schema
-
-var SignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL *smithy.Schema
-
-var SignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL *smithy.Schema
-
-var SignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL *smithy.Schema
-
-var SignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL *smithy.Schema
-
-var SignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL *smithy.Schema
-
-var SignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE *smithy.Schema
-
-var SignalDecoderFailureReason_STRUCT_SIZE_MISMATCH *smithy.Schema
-
-var SignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL *smithy.Schema
-
-var SignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG *smithy.Schema
-
-var SignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL *smithy.Schema
-
-var SignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL *smithy.Schema
-
-var _SignalDecoders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalDecoders",
-}, smithy.ShapeTypeList, 1)
-var _SignalDecoders_member *smithy.Schema
-
-var SignalDecoderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalDecoderType",
-}, smithy.ShapeTypeEnum, 4)
-var SignalDecoderType_CAN_SIGNAL *smithy.Schema
-
-var SignalDecoderType_OBD_SIGNAL *smithy.Schema
-
-var SignalDecoderType_MESSAGE_SIGNAL *smithy.Schema
-
-var SignalDecoderType_CUSTOM_DECODING_SIGNAL *smithy.Schema
-
-var SignalFetchConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalFetchConfig",
-}, smithy.ShapeTypeUnion, 2)
-var SignalFetchConfig_timeBased *smithy.Schema
-
-var SignalFetchConfig_conditionBased *smithy.Schema
-
-var SignalFetchInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalFetchInformation",
-}, smithy.ShapeTypeStructure, 4)
-var SignalFetchInformation_fullyQualifiedName *smithy.Schema
-
-var SignalFetchInformation_signalFetchConfig *smithy.Schema
-
-var SignalFetchInformation_conditionLanguageVersion *smithy.Schema
-
-var SignalFetchInformation_actions *smithy.Schema
-
-var _SignalFetchInformationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalFetchInformationList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _SignalFetchInformationList_member *smithy.Schema
-
-var SignalInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalInformation",
-}, smithy.ShapeTypeStructure, 4)
-var SignalInformation_name *smithy.Schema
-
-var SignalInformation_maxSampleCount *smithy.Schema
-
-var SignalInformation_minimumSamplingIntervalMs *smithy.Schema
-
-var SignalInformation_dataPartitionId *smithy.Schema
-
-var _SignalInformationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalInformationList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _SignalInformationList_member *smithy.Schema
-
-var SignalNodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalNodeType",
-}, smithy.ShapeTypeEnum, 6)
-var SignalNodeType_SENSOR *smithy.Schema
-
-var SignalNodeType_ACTUATOR *smithy.Schema
-
-var SignalNodeType_ATTRIBUTE *smithy.Schema
-
-var SignalNodeType_BRANCH *smithy.Schema
-
-var SignalNodeType_CUSTOM_STRUCT *smithy.Schema
-
-var SignalNodeType_CUSTOM_PROPERTY *smithy.Schema
-
-var SignalValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SignalValueType",
-}, smithy.ShapeTypeEnum, 2)
-var SignalValueType_INTEGER *smithy.Schema
-
-var SignalValueType_FLOATING_POINT *smithy.Schema
-
-var SpoolingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "SpoolingMode",
-}, smithy.ShapeTypeEnum, 2)
-var SpoolingMode_OFF *smithy.Schema
-
-var SpoolingMode_TO_DISK *smithy.Schema
-
-var StateTemplateAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateAssociation",
-}, smithy.ShapeTypeStructure, 2)
-var StateTemplateAssociation_identifier *smithy.Schema
-
-var StateTemplateAssociation_stateTemplateUpdateStrategy *smithy.Schema
-
-var _StateTemplateAssociationIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateAssociationIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _StateTemplateAssociationIdentifiers_member *smithy.Schema
-
-var _StateTemplateAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateAssociations",
-}, smithy.ShapeTypeList, 1)
-var _StateTemplateAssociations_member *smithy.Schema
-
-var _StateTemplateDataExtraDimensionNodePathList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateDataExtraDimensionNodePathList",
-}, smithy.ShapeTypeList, 1)
-var _StateTemplateDataExtraDimensionNodePathList_member *smithy.Schema
-
-var _StateTemplateMetadataExtraDimensionNodePathList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateMetadataExtraDimensionNodePathList",
-}, smithy.ShapeTypeList, 1)
-var _StateTemplateMetadataExtraDimensionNodePathList_member *smithy.Schema
-
-var _StateTemplateProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateProperties",
-}, smithy.ShapeTypeList, 1)
-var _StateTemplateProperties_member *smithy.Schema
-
-var _StateTemplateSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateSummaries",
-}, smithy.ShapeTypeList, 1)
-var _StateTemplateSummaries_member *smithy.Schema
-
-var StateTemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateSummary",
-}, smithy.ShapeTypeStructure, 7)
-var StateTemplateSummary_name *smithy.Schema
-
-var StateTemplateSummary_arn *smithy.Schema
-
-var StateTemplateSummary_signalCatalogArn *smithy.Schema
-
-var StateTemplateSummary_description *smithy.Schema
-
-var StateTemplateSummary_creationTime *smithy.Schema
-
-var StateTemplateSummary_lastModificationTime *smithy.Schema
-
-var StateTemplateSummary_id *smithy.Schema
-
-var StateTemplateUpdateStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StateTemplateUpdateStrategy",
-}, smithy.ShapeTypeUnion, 2)
-var StateTemplateUpdateStrategy_periodic *smithy.Schema
-
-var StateTemplateUpdateStrategy_onChange *smithy.Schema
-
-var _statusStr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "statusStr",
-}, smithy.ShapeTypeString, 0)
-
-var StorageCompressionFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageCompressionFormat",
-}, smithy.ShapeTypeEnum, 2)
-var StorageCompressionFormat_NONE *smithy.Schema
-
-var StorageCompressionFormat_GZIP *smithy.Schema
-
-var _StorageLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageLocation",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var StorageMaximumSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageMaximumSize",
-}, smithy.ShapeTypeStructure, 2)
-var StorageMaximumSize_unit *smithy.Schema
-
-var StorageMaximumSize_value *smithy.Schema
-
-var StorageMaximumSizeUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageMaximumSizeUnit",
-}, smithy.ShapeTypeEnum, 3)
-var StorageMaximumSizeUnit_MB *smithy.Schema
-
-var StorageMaximumSizeUnit_GB *smithy.Schema
-
-var StorageMaximumSizeUnit_TB *smithy.Schema
-
-var _StorageMaximumSizeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageMaximumSizeValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var StorageMinimumTimeToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageMinimumTimeToLive",
-}, smithy.ShapeTypeStructure, 2)
-var StorageMinimumTimeToLive_unit *smithy.Schema
-
-var StorageMinimumTimeToLive_value *smithy.Schema
-
-var StorageMinimumTimeToLiveUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageMinimumTimeToLiveUnit",
-}, smithy.ShapeTypeEnum, 3)
-var StorageMinimumTimeToLiveUnit_HOURS *smithy.Schema
-
-var StorageMinimumTimeToLiveUnit_DAYS *smithy.Schema
-
-var StorageMinimumTimeToLiveUnit_WEEKS *smithy.Schema
-
-var _StorageMinimumTimeToLiveValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StorageMinimumTimeToLiveValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var StructuredMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StructuredMessage",
-}, smithy.ShapeTypeUnion, 3)
-var StructuredMessage_primitiveMessageDefinition *smithy.Schema
-
-var StructuredMessage_structuredMessageListDefinition *smithy.Schema
-
-var StructuredMessage_structuredMessageDefinition *smithy.Schema
-
-var _StructuredMessageDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StructuredMessageDefinition",
-}, smithy.ShapeTypeList, 1)
-var _StructuredMessageDefinition_member *smithy.Schema
-
-var StructuredMessageFieldNameAndDataTypePair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StructuredMessageFieldNameAndDataTypePair",
-}, smithy.ShapeTypeStructure, 2)
-var StructuredMessageFieldNameAndDataTypePair_fieldName *smithy.Schema
-
-var StructuredMessageFieldNameAndDataTypePair_dataType *smithy.Schema
-
-var StructuredMessageListDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StructuredMessageListDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var StructuredMessageListDefinition_name *smithy.Schema
-
-var StructuredMessageListDefinition_memberType *smithy.Schema
-
-var StructuredMessageListDefinition_listType *smithy.Schema
-
-var StructuredMessageListDefinition_capacity *smithy.Schema
-
-var StructuredMessageListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StructuredMessageListType",
-}, smithy.ShapeTypeEnum, 3)
-var StructuredMessageListType_FIXED_CAPACITY *smithy.Schema
-
-var StructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY *smithy.Schema
-
-var StructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY *smithy.Schema
-
-var _StructureMessageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "StructureMessageName",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TimeBasedCollectionScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimeBasedCollectionScheme",
-}, smithy.ShapeTypeStructure, 1)
-var TimeBasedCollectionScheme_periodMs *smithy.Schema
-
-var TimeBasedSignalFetchConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimeBasedSignalFetchConfig",
-}, smithy.ShapeTypeStructure, 1)
-var TimeBasedSignalFetchConfig_executionFrequencyMs *smithy.Schema
-
-var TimePeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimePeriod",
-}, smithy.ShapeTypeStructure, 2)
-var TimePeriod_unit *smithy.Schema
-
-var TimePeriod_value *smithy.Schema
-
-var _timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimestreamConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimestreamConfig",
-}, smithy.ShapeTypeStructure, 2)
-var TimestreamConfig_timestreamTableArn *smithy.Schema
-
-var TimestreamConfig_executionRoleArn *smithy.Schema
-
-var _TimestreamDatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimestreamDatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var TimestreamRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimestreamRegistrationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var TimestreamRegistrationResponse_timestreamDatabaseName *smithy.Schema
-
-var TimestreamRegistrationResponse_timestreamTableName *smithy.Schema
-
-var TimestreamRegistrationResponse_timestreamDatabaseArn *smithy.Schema
-
-var TimestreamRegistrationResponse_timestreamTableArn *smithy.Schema
-
-var TimestreamRegistrationResponse_registrationStatus *smithy.Schema
-
-var TimestreamRegistrationResponse_errorMessage *smithy.Schema
-
-var TimestreamResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimestreamResources",
-}, smithy.ShapeTypeStructure, 2)
-var TimestreamResources_timestreamDatabaseName *smithy.Schema
-
-var TimestreamResources_timestreamTableName *smithy.Schema
-
-var _TimestreamTableArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimestreamTableArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TimestreamTableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimestreamTableName",
-}, smithy.ShapeTypeString, 0)
-
-var TimeUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TimeUnit",
-}, smithy.ShapeTypeEnum, 4)
-var TimeUnit_MILLISECOND *smithy.Schema
-
-var TimeUnit_SECOND *smithy.Schema
-
-var TimeUnit_MINUTE *smithy.Schema
-
-var TimeUnit_HOUR *smithy.Schema
-
-var _TopicName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TopicName",
-}, smithy.ShapeTypeString, 0)
-
-var TriggerMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TriggerMode",
-}, smithy.ShapeTypeEnum, 2)
-var TriggerMode_ALWAYS *smithy.Schema
-
-var TriggerMode_RISING_EDGE *smithy.Schema
-
-var _uint32 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "uint32",
-}, smithy.ShapeTypeLong, 0)
-
-var UpdateCampaignAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateCampaignAction",
-}, smithy.ShapeTypeEnum, 4)
-var UpdateCampaignAction_APPROVE *smithy.Schema
-
-var UpdateCampaignAction_SUSPEND *smithy.Schema
-
-var UpdateCampaignAction_RESUME *smithy.Schema
-
-var UpdateCampaignAction_UPDATE *smithy.Schema
-
-var UpdateMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateMode",
-}, smithy.ShapeTypeEnum, 2)
-var UpdateMode_OVERWRITE *smithy.Schema
-
-var UpdateMode_MERGE *smithy.Schema
-
-var UpdateVehicleError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateVehicleError",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateVehicleError_vehicleName *smithy.Schema
-
-var UpdateVehicleError_code *smithy.Schema
-
-var UpdateVehicleError_message *smithy.Schema
-
-var _updateVehicleErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "updateVehicleErrors",
-}, smithy.ShapeTypeList, 1)
-var _updateVehicleErrors_member *smithy.Schema
-
-var UpdateVehicleRequestItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateVehicleRequestItem",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateVehicleRequestItem_vehicleName *smithy.Schema
-
-var UpdateVehicleRequestItem_modelManifestArn *smithy.Schema
-
-var UpdateVehicleRequestItem_decoderManifestArn *smithy.Schema
-
-var UpdateVehicleRequestItem_attributes *smithy.Schema
-
-var UpdateVehicleRequestItem_attributeUpdateMode *smithy.Schema
-
-var UpdateVehicleRequestItem_stateTemplatesToAdd *smithy.Schema
-
-var UpdateVehicleRequestItem_stateTemplatesToRemove *smithy.Schema
-
-var UpdateVehicleRequestItem_stateTemplatesToUpdate *smithy.Schema
-
-var _updateVehicleRequestItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "updateVehicleRequestItems",
-}, smithy.ShapeTypeList, 1)
-var _updateVehicleRequestItems_member *smithy.Schema
-
-var UpdateVehicleResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateVehicleResponseItem",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVehicleResponseItem_vehicleName *smithy.Schema
-
-var UpdateVehicleResponseItem_arn *smithy.Schema
-
-var _updateVehicleResponseItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "updateVehicleResponseItems",
-}, smithy.ShapeTypeList, 1)
-var _updateVehicleResponseItems_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var VehicleAssociationBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleAssociationBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var VehicleAssociationBehavior_CREATE_IOT_THING *smithy.Schema
-
-var VehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS *smithy.Schema
-
-var VehicleMiddleware = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleMiddleware",
-}, smithy.ShapeTypeStructure, 2)
-var VehicleMiddleware_name *smithy.Schema
-
-var VehicleMiddleware_protocolName *smithy.Schema
-
-var _VehicleMiddlewareName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleMiddlewareName",
-}, smithy.ShapeTypeString, 0)
-
-var VehicleMiddlewareProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleMiddlewareProtocol",
-}, smithy.ShapeTypeEnum, 1)
-var VehicleMiddlewareProtocol_ROS_2 *smithy.Schema
-
-var _vehicleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "vehicleName",
-}, smithy.ShapeTypeString, 0)
-
-var _vehicles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "vehicles",
-}, smithy.ShapeTypeList, 1)
-var _vehicles_member *smithy.Schema
-
-var VehicleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleState",
-}, smithy.ShapeTypeEnum, 6)
-var VehicleState_CREATED *smithy.Schema
-
-var VehicleState_READY *smithy.Schema
-
-var VehicleState_HEALTHY *smithy.Schema
-
-var VehicleState_SUSPENDED *smithy.Schema
-
-var VehicleState_DELETING *smithy.Schema
-
-var VehicleState_READY_FOR_CHECKIN *smithy.Schema
-
-var VehicleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleStatus",
-}, smithy.ShapeTypeStructure, 3)
-var VehicleStatus_campaignName *smithy.Schema
-
-var VehicleStatus_vehicleName *smithy.Schema
-
-var VehicleStatus_status *smithy.Schema
-
-var _VehicleStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleStatusList",
-}, smithy.ShapeTypeList, 1)
-var _VehicleStatusList_member *smithy.Schema
-
-var _vehicleSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "vehicleSummaries",
-}, smithy.ShapeTypeList, 1)
-var _vehicleSummaries_member *smithy.Schema
-
-var VehicleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "VehicleSummary",
-}, smithy.ShapeTypeStructure, 7)
-var VehicleSummary_vehicleName *smithy.Schema
-
-var VehicleSummary_arn *smithy.Schema
-
-var VehicleSummary_modelManifestArn *smithy.Schema
-
-var VehicleSummary_decoderManifestArn *smithy.Schema
-
-var VehicleSummary_creationTime *smithy.Schema
-
-var VehicleSummary_lastModificationTime *smithy.Schema
-
-var VehicleSummary_attributes *smithy.Schema
-
-var _wildcardSignalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "wildcardSignalName",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateVehicleFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "AssociateVehicleFleetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateVehicleFleetRequest_vehicleName *smithy.Schema
-
-var AssociateVehicleFleetRequest_fleetId *smithy.Schema
-
-var AssociateVehicleFleetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "AssociateVehicleFleetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchCreateVehicleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "BatchCreateVehicleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchCreateVehicleRequest_vehicles *smithy.Schema
-
-var BatchCreateVehicleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "BatchCreateVehicleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateVehicleResponse_vehicles *smithy.Schema
-
-var BatchCreateVehicleResponse_errors *smithy.Schema
-
-var BatchUpdateVehicleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "BatchUpdateVehicleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdateVehicleRequest_vehicles *smithy.Schema
-
-var BatchUpdateVehicleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "BatchUpdateVehicleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUpdateVehicleResponse_vehicles *smithy.Schema
-
-var BatchUpdateVehicleResponse_errors *smithy.Schema
-
-var CreateCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateCampaignRequest",
-}, smithy.ShapeTypeStructure, 18)
-var CreateCampaignRequest_name *smithy.Schema
-
-var CreateCampaignRequest_description *smithy.Schema
-
-var CreateCampaignRequest_signalCatalogArn *smithy.Schema
-
-var CreateCampaignRequest_targetArn *smithy.Schema
-
-var CreateCampaignRequest_startTime *smithy.Schema
-
-var CreateCampaignRequest_expiryTime *smithy.Schema
-
-var CreateCampaignRequest_postTriggerCollectionDuration *smithy.Schema
-
-var CreateCampaignRequest_diagnosticsMode *smithy.Schema
-
-var CreateCampaignRequest_spoolingMode *smithy.Schema
-
-var CreateCampaignRequest_compression *smithy.Schema
-
-var CreateCampaignRequest_priority *smithy.Schema
-
-var CreateCampaignRequest_signalsToCollect *smithy.Schema
-
-var CreateCampaignRequest_collectionScheme *smithy.Schema
-
-var CreateCampaignRequest_dataExtraDimensions *smithy.Schema
-
-var CreateCampaignRequest_tags *smithy.Schema
-
-var CreateCampaignRequest_dataDestinationConfigs *smithy.Schema
-
-var CreateCampaignRequest_dataPartitions *smithy.Schema
-
-var CreateCampaignRequest_signalsToFetch *smithy.Schema
-
-var CreateCampaignResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateCampaignResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCampaignResponse_name *smithy.Schema
-
-var CreateCampaignResponse_arn *smithy.Schema
-
-var CreateDecoderManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateDecoderManifestRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDecoderManifestRequest_name *smithy.Schema
-
-var CreateDecoderManifestRequest_description *smithy.Schema
-
-var CreateDecoderManifestRequest_modelManifestArn *smithy.Schema
-
-var CreateDecoderManifestRequest_signalDecoders *smithy.Schema
-
-var CreateDecoderManifestRequest_networkInterfaces *smithy.Schema
-
-var CreateDecoderManifestRequest_defaultForUnmappedSignals *smithy.Schema
-
-var CreateDecoderManifestRequest_tags *smithy.Schema
-
-var CreateDecoderManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateDecoderManifestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateDecoderManifestResponse_name *smithy.Schema
-
-var CreateDecoderManifestResponse_arn *smithy.Schema
-
-var CreateFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateFleetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateFleetRequest_fleetId *smithy.Schema
-
-var CreateFleetRequest_description *smithy.Schema
-
-var CreateFleetRequest_signalCatalogArn *smithy.Schema
-
-var CreateFleetRequest_tags *smithy.Schema
-
-var CreateFleetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateFleetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateFleetResponse_id *smithy.Schema
-
-var CreateFleetResponse_arn *smithy.Schema
-
-var CreateModelManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateModelManifestRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateModelManifestRequest_name *smithy.Schema
-
-var CreateModelManifestRequest_description *smithy.Schema
-
-var CreateModelManifestRequest_nodes *smithy.Schema
-
-var CreateModelManifestRequest_signalCatalogArn *smithy.Schema
-
-var CreateModelManifestRequest_tags *smithy.Schema
-
-var CreateModelManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateModelManifestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateModelManifestResponse_name *smithy.Schema
-
-var CreateModelManifestResponse_arn *smithy.Schema
-
-var CreateSignalCatalogRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateSignalCatalogRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSignalCatalogRequest_name *smithy.Schema
-
-var CreateSignalCatalogRequest_description *smithy.Schema
-
-var CreateSignalCatalogRequest_nodes *smithy.Schema
-
-var CreateSignalCatalogRequest_tags *smithy.Schema
-
-var CreateSignalCatalogResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateSignalCatalogResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSignalCatalogResponse_name *smithy.Schema
-
-var CreateSignalCatalogResponse_arn *smithy.Schema
-
-var CreateStateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateStateTemplateRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateStateTemplateRequest_name *smithy.Schema
-
-var CreateStateTemplateRequest_description *smithy.Schema
-
-var CreateStateTemplateRequest_signalCatalogArn *smithy.Schema
-
-var CreateStateTemplateRequest_stateTemplateProperties *smithy.Schema
-
-var CreateStateTemplateRequest_dataExtraDimensions *smithy.Schema
-
-var CreateStateTemplateRequest_metadataExtraDimensions *smithy.Schema
-
-var CreateStateTemplateRequest_tags *smithy.Schema
-
-var CreateStateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateStateTemplateResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateStateTemplateResponse_name *smithy.Schema
-
-var CreateStateTemplateResponse_arn *smithy.Schema
-
-var CreateStateTemplateResponse_id *smithy.Schema
-
-var CreateVehicleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateVehicleRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateVehicleRequest_vehicleName *smithy.Schema
-
-var CreateVehicleRequest_modelManifestArn *smithy.Schema
-
-var CreateVehicleRequest_decoderManifestArn *smithy.Schema
-
-var CreateVehicleRequest_attributes *smithy.Schema
-
-var CreateVehicleRequest_associationBehavior *smithy.Schema
-
-var CreateVehicleRequest_tags *smithy.Schema
-
-var CreateVehicleRequest_stateTemplates *smithy.Schema
-
-var CreateVehicleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "CreateVehicleResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateVehicleResponse_vehicleName *smithy.Schema
-
-var CreateVehicleResponse_arn *smithy.Schema
-
-var CreateVehicleResponse_thingArn *smithy.Schema
-
-var DeleteCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCampaignRequest_name *smithy.Schema
-
-var DeleteCampaignResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteCampaignResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCampaignResponse_name *smithy.Schema
-
-var DeleteCampaignResponse_arn *smithy.Schema
-
-var DeleteDecoderManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteDecoderManifestRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDecoderManifestRequest_name *smithy.Schema
-
-var DeleteDecoderManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteDecoderManifestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDecoderManifestResponse_name *smithy.Schema
-
-var DeleteDecoderManifestResponse_arn *smithy.Schema
-
-var DeleteFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteFleetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFleetRequest_fleetId *smithy.Schema
-
-var DeleteFleetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteFleetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFleetResponse_id *smithy.Schema
-
-var DeleteFleetResponse_arn *smithy.Schema
-
-var DeleteModelManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteModelManifestRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteModelManifestRequest_name *smithy.Schema
-
-var DeleteModelManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteModelManifestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteModelManifestResponse_name *smithy.Schema
-
-var DeleteModelManifestResponse_arn *smithy.Schema
-
-var DeleteSignalCatalogRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteSignalCatalogRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSignalCatalogRequest_name *smithy.Schema
-
-var DeleteSignalCatalogResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteSignalCatalogResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSignalCatalogResponse_name *smithy.Schema
-
-var DeleteSignalCatalogResponse_arn *smithy.Schema
-
-var DeleteStateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteStateTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteStateTemplateRequest_identifier *smithy.Schema
-
-var DeleteStateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteStateTemplateResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteStateTemplateResponse_name *smithy.Schema
-
-var DeleteStateTemplateResponse_arn *smithy.Schema
-
-var DeleteStateTemplateResponse_id *smithy.Schema
-
-var DeleteVehicleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteVehicleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVehicleRequest_vehicleName *smithy.Schema
-
-var DeleteVehicleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DeleteVehicleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteVehicleResponse_vehicleName *smithy.Schema
-
-var DeleteVehicleResponse_arn *smithy.Schema
-
-var DisassociateVehicleFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DisassociateVehicleFleetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateVehicleFleetRequest_vehicleName *smithy.Schema
-
-var DisassociateVehicleFleetRequest_fleetId *smithy.Schema
-
-var DisassociateVehicleFleetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "DisassociateVehicleFleetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCampaignRequest_name *smithy.Schema
-
-var GetCampaignResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetCampaignResponse",
-}, smithy.ShapeTypeStructure, 21)
-var GetCampaignResponse_name *smithy.Schema
-
-var GetCampaignResponse_arn *smithy.Schema
-
-var GetCampaignResponse_description *smithy.Schema
-
-var GetCampaignResponse_signalCatalogArn *smithy.Schema
-
-var GetCampaignResponse_targetArn *smithy.Schema
-
-var GetCampaignResponse_status *smithy.Schema
-
-var GetCampaignResponse_startTime *smithy.Schema
-
-var GetCampaignResponse_expiryTime *smithy.Schema
-
-var GetCampaignResponse_postTriggerCollectionDuration *smithy.Schema
-
-var GetCampaignResponse_diagnosticsMode *smithy.Schema
-
-var GetCampaignResponse_spoolingMode *smithy.Schema
-
-var GetCampaignResponse_compression *smithy.Schema
-
-var GetCampaignResponse_priority *smithy.Schema
-
-var GetCampaignResponse_signalsToCollect *smithy.Schema
-
-var GetCampaignResponse_collectionScheme *smithy.Schema
-
-var GetCampaignResponse_dataExtraDimensions *smithy.Schema
-
-var GetCampaignResponse_creationTime *smithy.Schema
-
-var GetCampaignResponse_lastModificationTime *smithy.Schema
-
-var GetCampaignResponse_dataDestinationConfigs *smithy.Schema
-
-var GetCampaignResponse_dataPartitions *smithy.Schema
-
-var GetCampaignResponse_signalsToFetch *smithy.Schema
-
-var GetDecoderManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetDecoderManifestRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDecoderManifestRequest_name *smithy.Schema
-
-var GetDecoderManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetDecoderManifestResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetDecoderManifestResponse_name *smithy.Schema
-
-var GetDecoderManifestResponse_arn *smithy.Schema
-
-var GetDecoderManifestResponse_description *smithy.Schema
-
-var GetDecoderManifestResponse_modelManifestArn *smithy.Schema
-
-var GetDecoderManifestResponse_status *smithy.Schema
-
-var GetDecoderManifestResponse_creationTime *smithy.Schema
-
-var GetDecoderManifestResponse_lastModificationTime *smithy.Schema
-
-var GetDecoderManifestResponse_message *smithy.Schema
-
-var GetEncryptionConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetEncryptionConfigurationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetEncryptionConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetEncryptionConfigurationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetEncryptionConfigurationResponse_kmsKeyId *smithy.Schema
-
-var GetEncryptionConfigurationResponse_encryptionStatus *smithy.Schema
-
-var GetEncryptionConfigurationResponse_encryptionType *smithy.Schema
-
-var GetEncryptionConfigurationResponse_errorMessage *smithy.Schema
-
-var GetEncryptionConfigurationResponse_creationTime *smithy.Schema
-
-var GetEncryptionConfigurationResponse_lastModificationTime *smithy.Schema
-
-var GetFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetFleetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetFleetRequest_fleetId *smithy.Schema
-
-var GetFleetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetFleetResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetFleetResponse_id *smithy.Schema
-
-var GetFleetResponse_arn *smithy.Schema
-
-var GetFleetResponse_description *smithy.Schema
-
-var GetFleetResponse_signalCatalogArn *smithy.Schema
-
-var GetFleetResponse_creationTime *smithy.Schema
-
-var GetFleetResponse_lastModificationTime *smithy.Schema
-
-var GetLoggingOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetLoggingOptionsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetLoggingOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetLoggingOptionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetLoggingOptionsResponse_cloudWatchLogDelivery *smithy.Schema
-
-var GetModelManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetModelManifestRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetModelManifestRequest_name *smithy.Schema
-
-var GetModelManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetModelManifestResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetModelManifestResponse_name *smithy.Schema
-
-var GetModelManifestResponse_arn *smithy.Schema
-
-var GetModelManifestResponse_description *smithy.Schema
-
-var GetModelManifestResponse_signalCatalogArn *smithy.Schema
-
-var GetModelManifestResponse_status *smithy.Schema
-
-var GetModelManifestResponse_creationTime *smithy.Schema
-
-var GetModelManifestResponse_lastModificationTime *smithy.Schema
-
-var GetRegisterAccountStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetRegisterAccountStatusRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetRegisterAccountStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetRegisterAccountStatusResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetRegisterAccountStatusResponse_customerAccountId *smithy.Schema
-
-var GetRegisterAccountStatusResponse_accountStatus *smithy.Schema
-
-var GetRegisterAccountStatusResponse_timestreamRegistrationResponse *smithy.Schema
-
-var GetRegisterAccountStatusResponse_iamRegistrationResponse *smithy.Schema
-
-var GetRegisterAccountStatusResponse_creationTime *smithy.Schema
-
-var GetRegisterAccountStatusResponse_lastModificationTime *smithy.Schema
-
-var GetSignalCatalogRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetSignalCatalogRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSignalCatalogRequest_name *smithy.Schema
-
-var GetSignalCatalogResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetSignalCatalogResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetSignalCatalogResponse_name *smithy.Schema
-
-var GetSignalCatalogResponse_arn *smithy.Schema
-
-var GetSignalCatalogResponse_description *smithy.Schema
-
-var GetSignalCatalogResponse_nodeCounts *smithy.Schema
-
-var GetSignalCatalogResponse_creationTime *smithy.Schema
-
-var GetSignalCatalogResponse_lastModificationTime *smithy.Schema
-
-var GetStateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetStateTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetStateTemplateRequest_identifier *smithy.Schema
-
-var GetStateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetStateTemplateResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetStateTemplateResponse_name *smithy.Schema
-
-var GetStateTemplateResponse_arn *smithy.Schema
-
-var GetStateTemplateResponse_description *smithy.Schema
-
-var GetStateTemplateResponse_signalCatalogArn *smithy.Schema
-
-var GetStateTemplateResponse_stateTemplateProperties *smithy.Schema
-
-var GetStateTemplateResponse_dataExtraDimensions *smithy.Schema
-
-var GetStateTemplateResponse_metadataExtraDimensions *smithy.Schema
-
-var GetStateTemplateResponse_creationTime *smithy.Schema
-
-var GetStateTemplateResponse_lastModificationTime *smithy.Schema
-
-var GetStateTemplateResponse_id *smithy.Schema
-
-var GetVehicleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetVehicleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVehicleRequest_vehicleName *smithy.Schema
-
-var GetVehicleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetVehicleResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetVehicleResponse_vehicleName *smithy.Schema
-
-var GetVehicleResponse_arn *smithy.Schema
-
-var GetVehicleResponse_modelManifestArn *smithy.Schema
-
-var GetVehicleResponse_decoderManifestArn *smithy.Schema
-
-var GetVehicleResponse_attributes *smithy.Schema
-
-var GetVehicleResponse_stateTemplates *smithy.Schema
-
-var GetVehicleResponse_creationTime *smithy.Schema
-
-var GetVehicleResponse_lastModificationTime *smithy.Schema
-
-var GetVehicleStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetVehicleStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetVehicleStatusRequest_nextToken *smithy.Schema
-
-var GetVehicleStatusRequest_maxResults *smithy.Schema
-
-var GetVehicleStatusRequest_vehicleName *smithy.Schema
-
-var GetVehicleStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "GetVehicleStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetVehicleStatusResponse_campaigns *smithy.Schema
-
-var GetVehicleStatusResponse_nextToken *smithy.Schema
-
-var ImportDecoderManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ImportDecoderManifestRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ImportDecoderManifestRequest_name *smithy.Schema
-
-var ImportDecoderManifestRequest_networkFileDefinitions *smithy.Schema
-
-var ImportDecoderManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ImportDecoderManifestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ImportDecoderManifestResponse_name *smithy.Schema
-
-var ImportDecoderManifestResponse_arn *smithy.Schema
-
-var ImportSignalCatalogRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ImportSignalCatalogRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ImportSignalCatalogRequest_name *smithy.Schema
-
-var ImportSignalCatalogRequest_description *smithy.Schema
-
-var ImportSignalCatalogRequest_vss *smithy.Schema
-
-var ImportSignalCatalogRequest_tags *smithy.Schema
-
-var ImportSignalCatalogResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ImportSignalCatalogResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ImportSignalCatalogResponse_name *smithy.Schema
-
-var ImportSignalCatalogResponse_arn *smithy.Schema
-
-var ListCampaignsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListCampaignsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCampaignsRequest_nextToken *smithy.Schema
-
-var ListCampaignsRequest_maxResults *smithy.Schema
-
-var ListCampaignsRequest_status *smithy.Schema
-
-var ListCampaignsRequest_listResponseScope *smithy.Schema
-
-var ListCampaignsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListCampaignsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCampaignsResponse_campaignSummaries *smithy.Schema
-
-var ListCampaignsResponse_nextToken *smithy.Schema
-
-var ListDecoderManifestNetworkInterfacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestNetworkInterfacesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDecoderManifestNetworkInterfacesRequest_name *smithy.Schema
-
-var ListDecoderManifestNetworkInterfacesRequest_nextToken *smithy.Schema
-
-var ListDecoderManifestNetworkInterfacesRequest_maxResults *smithy.Schema
-
-var ListDecoderManifestNetworkInterfacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestNetworkInterfacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDecoderManifestNetworkInterfacesResponse_networkInterfaces *smithy.Schema
-
-var ListDecoderManifestNetworkInterfacesResponse_nextToken *smithy.Schema
-
-var ListDecoderManifestSignalsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestSignalsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDecoderManifestSignalsRequest_name *smithy.Schema
-
-var ListDecoderManifestSignalsRequest_nextToken *smithy.Schema
-
-var ListDecoderManifestSignalsRequest_maxResults *smithy.Schema
-
-var ListDecoderManifestSignalsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestSignalsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDecoderManifestSignalsResponse_signalDecoders *smithy.Schema
-
-var ListDecoderManifestSignalsResponse_nextToken *smithy.Schema
-
-var ListDecoderManifestsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDecoderManifestsRequest_modelManifestArn *smithy.Schema
-
-var ListDecoderManifestsRequest_nextToken *smithy.Schema
-
-var ListDecoderManifestsRequest_maxResults *smithy.Schema
-
-var ListDecoderManifestsRequest_listResponseScope *smithy.Schema
-
-var ListDecoderManifestsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListDecoderManifestsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDecoderManifestsResponse_summaries *smithy.Schema
-
-var ListDecoderManifestsResponse_nextToken *smithy.Schema
-
-var ListFleetsForVehicleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListFleetsForVehicleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListFleetsForVehicleRequest_vehicleName *smithy.Schema
-
-var ListFleetsForVehicleRequest_nextToken *smithy.Schema
-
-var ListFleetsForVehicleRequest_maxResults *smithy.Schema
-
-var ListFleetsForVehicleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListFleetsForVehicleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFleetsForVehicleResponse_fleets *smithy.Schema
-
-var ListFleetsForVehicleResponse_nextToken *smithy.Schema
-
-var ListFleetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListFleetsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListFleetsRequest_nextToken *smithy.Schema
-
-var ListFleetsRequest_maxResults *smithy.Schema
-
-var ListFleetsRequest_listResponseScope *smithy.Schema
-
-var ListFleetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListFleetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFleetsResponse_fleetSummaries *smithy.Schema
-
-var ListFleetsResponse_nextToken *smithy.Schema
-
-var ListModelManifestNodesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListModelManifestNodesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListModelManifestNodesRequest_name *smithy.Schema
-
-var ListModelManifestNodesRequest_nextToken *smithy.Schema
-
-var ListModelManifestNodesRequest_maxResults *smithy.Schema
-
-var ListModelManifestNodesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListModelManifestNodesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListModelManifestNodesResponse_nodes *smithy.Schema
-
-var ListModelManifestNodesResponse_nextToken *smithy.Schema
-
-var ListModelManifestsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListModelManifestsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListModelManifestsRequest_signalCatalogArn *smithy.Schema
-
-var ListModelManifestsRequest_nextToken *smithy.Schema
-
-var ListModelManifestsRequest_maxResults *smithy.Schema
-
-var ListModelManifestsRequest_listResponseScope *smithy.Schema
-
-var ListModelManifestsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListModelManifestsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListModelManifestsResponse_summaries *smithy.Schema
-
-var ListModelManifestsResponse_nextToken *smithy.Schema
-
-var ListSignalCatalogNodesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListSignalCatalogNodesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSignalCatalogNodesRequest_name *smithy.Schema
-
-var ListSignalCatalogNodesRequest_nextToken *smithy.Schema
-
-var ListSignalCatalogNodesRequest_maxResults *smithy.Schema
-
-var ListSignalCatalogNodesRequest_signalNodeType *smithy.Schema
-
-var ListSignalCatalogNodesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListSignalCatalogNodesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSignalCatalogNodesResponse_nodes *smithy.Schema
-
-var ListSignalCatalogNodesResponse_nextToken *smithy.Schema
-
-var ListSignalCatalogsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListSignalCatalogsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSignalCatalogsRequest_nextToken *smithy.Schema
-
-var ListSignalCatalogsRequest_maxResults *smithy.Schema
-
-var ListSignalCatalogsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListSignalCatalogsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSignalCatalogsResponse_summaries *smithy.Schema
-
-var ListSignalCatalogsResponse_nextToken *smithy.Schema
-
-var ListStateTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListStateTemplatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListStateTemplatesRequest_nextToken *smithy.Schema
-
-var ListStateTemplatesRequest_maxResults *smithy.Schema
-
-var ListStateTemplatesRequest_listResponseScope *smithy.Schema
-
-var ListStateTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListStateTemplatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListStateTemplatesResponse_summaries *smithy.Schema
-
-var ListStateTemplatesResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListVehiclesInFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListVehiclesInFleetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListVehiclesInFleetRequest_fleetId *smithy.Schema
-
-var ListVehiclesInFleetRequest_nextToken *smithy.Schema
-
-var ListVehiclesInFleetRequest_maxResults *smithy.Schema
-
-var ListVehiclesInFleetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListVehiclesInFleetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVehiclesInFleetResponse_vehicles *smithy.Schema
-
-var ListVehiclesInFleetResponse_nextToken *smithy.Schema
-
-var ListVehiclesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListVehiclesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListVehiclesRequest_modelManifestArn *smithy.Schema
-
-var ListVehiclesRequest_attributeNames *smithy.Schema
-
-var ListVehiclesRequest_attributeValues *smithy.Schema
-
-var ListVehiclesRequest_nextToken *smithy.Schema
-
-var ListVehiclesRequest_maxResults *smithy.Schema
-
-var ListVehiclesRequest_listResponseScope *smithy.Schema
-
-var ListVehiclesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "ListVehiclesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVehiclesResponse_vehicleSummaries *smithy.Schema
-
-var ListVehiclesResponse_nextToken *smithy.Schema
-
-var PutEncryptionConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PutEncryptionConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutEncryptionConfigurationRequest_kmsKeyId *smithy.Schema
-
-var PutEncryptionConfigurationRequest_encryptionType *smithy.Schema
-
-var PutEncryptionConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PutEncryptionConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutEncryptionConfigurationResponse_kmsKeyId *smithy.Schema
-
-var PutEncryptionConfigurationResponse_encryptionStatus *smithy.Schema
-
-var PutEncryptionConfigurationResponse_encryptionType *smithy.Schema
-
-var PutLoggingOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PutLoggingOptionsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutLoggingOptionsRequest_cloudWatchLogDelivery *smithy.Schema
-
-var PutLoggingOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "PutLoggingOptionsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RegisterAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "RegisterAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterAccountRequest_timestreamResources *smithy.Schema
-
-var RegisterAccountRequest_iamResources *smithy.Schema
-
-var RegisterAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "RegisterAccountResponse",
-}, smithy.ShapeTypeStructure, 5)
-var RegisterAccountResponse_registerAccountStatus *smithy.Schema
-
-var RegisterAccountResponse_timestreamResources *smithy.Schema
-
-var RegisterAccountResponse_iamResources *smithy.Schema
-
-var RegisterAccountResponse_creationTime *smithy.Schema
-
-var RegisterAccountResponse_lastModificationTime *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateCampaignRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCampaignRequest_name *smithy.Schema
-
-var UpdateCampaignRequest_description *smithy.Schema
-
-var UpdateCampaignRequest_dataExtraDimensions *smithy.Schema
-
-var UpdateCampaignRequest_action *smithy.Schema
-
-var UpdateCampaignResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateCampaignResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateCampaignResponse_arn *smithy.Schema
-
-var UpdateCampaignResponse_name *smithy.Schema
-
-var UpdateCampaignResponse_status *smithy.Schema
-
-var UpdateDecoderManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateDecoderManifestRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateDecoderManifestRequest_name *smithy.Schema
-
-var UpdateDecoderManifestRequest_description *smithy.Schema
-
-var UpdateDecoderManifestRequest_signalDecodersToAdd *smithy.Schema
-
-var UpdateDecoderManifestRequest_signalDecodersToUpdate *smithy.Schema
-
-var UpdateDecoderManifestRequest_signalDecodersToRemove *smithy.Schema
-
-var UpdateDecoderManifestRequest_networkInterfacesToAdd *smithy.Schema
-
-var UpdateDecoderManifestRequest_networkInterfacesToUpdate *smithy.Schema
-
-var UpdateDecoderManifestRequest_networkInterfacesToRemove *smithy.Schema
-
-var UpdateDecoderManifestRequest_status *smithy.Schema
-
-var UpdateDecoderManifestRequest_defaultForUnmappedSignals *smithy.Schema
-
-var UpdateDecoderManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateDecoderManifestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDecoderManifestResponse_name *smithy.Schema
-
-var UpdateDecoderManifestResponse_arn *smithy.Schema
-
-var UpdateFleetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateFleetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateFleetRequest_fleetId *smithy.Schema
-
-var UpdateFleetRequest_description *smithy.Schema
-
-var UpdateFleetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateFleetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateFleetResponse_id *smithy.Schema
-
-var UpdateFleetResponse_arn *smithy.Schema
-
-var UpdateModelManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateModelManifestRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateModelManifestRequest_name *smithy.Schema
-
-var UpdateModelManifestRequest_description *smithy.Schema
-
-var UpdateModelManifestRequest_nodesToAdd *smithy.Schema
-
-var UpdateModelManifestRequest_nodesToRemove *smithy.Schema
-
-var UpdateModelManifestRequest_status *smithy.Schema
-
-var UpdateModelManifestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateModelManifestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateModelManifestResponse_name *smithy.Schema
-
-var UpdateModelManifestResponse_arn *smithy.Schema
-
-var UpdateSignalCatalogRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateSignalCatalogRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSignalCatalogRequest_name *smithy.Schema
-
-var UpdateSignalCatalogRequest_description *smithy.Schema
-
-var UpdateSignalCatalogRequest_nodesToAdd *smithy.Schema
-
-var UpdateSignalCatalogRequest_nodesToUpdate *smithy.Schema
-
-var UpdateSignalCatalogRequest_nodesToRemove *smithy.Schema
-
-var UpdateSignalCatalogResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateSignalCatalogResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSignalCatalogResponse_name *smithy.Schema
-
-var UpdateSignalCatalogResponse_arn *smithy.Schema
-
-var UpdateStateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateStateTemplateRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateStateTemplateRequest_identifier *smithy.Schema
-
-var UpdateStateTemplateRequest_description *smithy.Schema
-
-var UpdateStateTemplateRequest_stateTemplatePropertiesToAdd *smithy.Schema
-
-var UpdateStateTemplateRequest_stateTemplatePropertiesToRemove *smithy.Schema
-
-var UpdateStateTemplateRequest_dataExtraDimensions *smithy.Schema
-
-var UpdateStateTemplateRequest_metadataExtraDimensions *smithy.Schema
-
-var UpdateStateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateStateTemplateResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateStateTemplateResponse_name *smithy.Schema
-
-var UpdateStateTemplateResponse_arn *smithy.Schema
-
-var UpdateStateTemplateResponse_id *smithy.Schema
-
-var UpdateVehicleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateVehicleRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateVehicleRequest_vehicleName *smithy.Schema
-
-var UpdateVehicleRequest_modelManifestArn *smithy.Schema
-
-var UpdateVehicleRequest_decoderManifestArn *smithy.Schema
-
-var UpdateVehicleRequest_attributes *smithy.Schema
-
-var UpdateVehicleRequest_attributeUpdateMode *smithy.Schema
-
-var UpdateVehicleRequest_stateTemplatesToAdd *smithy.Schema
-
-var UpdateVehicleRequest_stateTemplatesToRemove *smithy.Schema
-
-var UpdateVehicleRequest_stateTemplatesToUpdate *smithy.Schema
-
-var UpdateVehicleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotfleetwise",
-	Name:      "UpdateVehicleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVehicleResponse_vehicleName *smithy.Schema
-
-var UpdateVehicleResponse_arn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+	Code: 204}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "listResponseScope"}}, DirectMask: 0x10}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "modelManifestArn"}}, DirectMask: 0x10}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signalCatalogArn"}}, DirectMask: 0x10}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signalNodeType"}}, DirectMask: 0x10}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "attributeNames"}}, DirectMask: 0x10}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "attributeValues"}}, DirectMask: 0x10}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mActuator = smithy.SchemaMembers{List: []*smithy.Schema{&sActuator_fullyQualifiedName, &sActuator_dataType, &sActuator_description, &sActuator_unit, &sActuator_allowedValues, &sActuator_min, &sActuator_max, &sActuator_assignedValue, &sActuator_deprecationMessage, &sActuator_comment, &sActuator_structFullyQualifiedName}, Hash: &hActuator}
+var mAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sAttribute_fullyQualifiedName, &sAttribute_dataType, &sAttribute_description, &sAttribute_unit, &sAttribute_allowedValues, &sAttribute_min, &sAttribute_max, &sAttribute_assignedValue, &sAttribute_defaultValue, &sAttribute_deprecationMessage, &sAttribute_comment}, Hash: &hAttribute}
+var m_attributeNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_attributeNamesList_member}}
+var m_attributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_attributesMap_key, &s_attributesMap_value}}
+var m_attributeValuesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_attributeValuesList_member}}
+var mBranch = smithy.SchemaMembers{List: []*smithy.Schema{&sBranch_fullyQualifiedName, &sBranch_description, &sBranch_deprecationMessage, &sBranch_comment}}
+var mCampaignStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCampaignStatus_CREATING, &sCampaignStatus_WAITING_FOR_APPROVAL, &sCampaignStatus_RUNNING, &sCampaignStatus_SUSPENDED}}
+var m_campaignSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_campaignSummaries_member}}
+var mCampaignSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCampaignSummary_arn, &sCampaignSummary_name, &sCampaignSummary_description, &sCampaignSummary_signalCatalogArn, &sCampaignSummary_targetArn, &sCampaignSummary_status, &sCampaignSummary_creationTime, &sCampaignSummary_lastModificationTime}}
+var mCanDbcDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sCanDbcDefinition_networkInterface, &sCanDbcDefinition_canDbcFiles, &sCanDbcDefinition_signalsMap}}
+var mCanInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sCanInterface_name, &sCanInterface_protocolName, &sCanInterface_protocolVersion}}
+var mCanSignal = smithy.SchemaMembers{List: []*smithy.Schema{&sCanSignal_messageId, &sCanSignal_isBigEndian, &sCanSignal_isSigned, &sCanSignal_startBit, &sCanSignal_offset, &sCanSignal_factor, &sCanSignal_length, &sCanSignal_name, &sCanSignal_signalValueType}, Hash: &hCanSignal}
+var mCloudWatchLogDeliveryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogDeliveryOptions_logType, &sCloudWatchLogDeliveryOptions_logGroupName}}
+var mCollectionScheme = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionScheme_timeBasedCollectionScheme, &sCollectionScheme_conditionBasedCollectionScheme}}
+var mCompression = smithy.SchemaMembers{List: []*smithy.Schema{&sCompression_OFF, &sCompression_SNAPPY}}
+var mConditionBasedCollectionScheme = smithy.SchemaMembers{List: []*smithy.Schema{&sConditionBasedCollectionScheme_expression, &sConditionBasedCollectionScheme_minimumTriggerIntervalMs, &sConditionBasedCollectionScheme_triggerMode, &sConditionBasedCollectionScheme_conditionLanguageVersion}}
+var mConditionBasedSignalFetchConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sConditionBasedSignalFetchConfig_conditionExpression, &sConditionBasedSignalFetchConfig_triggerMode}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resource, &sConflictException_resourceType}}
+var mCreateVehicleError = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVehicleError_vehicleName, &sCreateVehicleError_code, &sCreateVehicleError_message}}
+var m_createVehicleErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_createVehicleErrors_member}}
+var mCreateVehicleRequestItem = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVehicleRequestItem_vehicleName, &sCreateVehicleRequestItem_modelManifestArn, &sCreateVehicleRequestItem_decoderManifestArn, &sCreateVehicleRequestItem_attributes, &sCreateVehicleRequestItem_associationBehavior, &sCreateVehicleRequestItem_tags, &sCreateVehicleRequestItem_stateTemplates}}
+var m_createVehicleRequestItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_createVehicleRequestItems_member}}
+var mCreateVehicleResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVehicleResponseItem_vehicleName, &sCreateVehicleResponseItem_arn, &sCreateVehicleResponseItem_thingArn}}
+var m_createVehicleResponses = smithy.SchemaMembers{List: []*smithy.Schema{&s_createVehicleResponses_member}}
+var mCustomDecodingInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomDecodingInterface_name}}
+var mCustomDecodingSignal = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomDecodingSignal_id}}
+var mCustomProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomProperty_fullyQualifiedName, &sCustomProperty_dataType, &sCustomProperty_dataEncoding, &sCustomProperty_description, &sCustomProperty_deprecationMessage, &sCustomProperty_comment, &sCustomProperty_structFullyQualifiedName}}
+var mCustomStruct = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomStruct_fullyQualifiedName, &sCustomStruct_description, &sCustomStruct_deprecationMessage, &sCustomStruct_comment}}
+var mDataDestinationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDataDestinationConfig_s3Config, &sDataDestinationConfig_timestreamConfig, &sDataDestinationConfig_mqttTopicConfig}}
+var m_DataDestinationConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataDestinationConfigs_member}}
+var m_DataExtraDimensionNodePathList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataExtraDimensionNodePathList_member}}
+var mDataFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sDataFormat_JSON, &sDataFormat_PARQUET}}
+var mDataPartition = smithy.SchemaMembers{List: []*smithy.Schema{&sDataPartition_id, &sDataPartition_storageOptions, &sDataPartition_uploadOptions}}
+var m_DataPartitions = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataPartitions_member}}
+var mDataPartitionStorageOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDataPartitionStorageOptions_maximumSize, &sDataPartitionStorageOptions_storageLocation, &sDataPartitionStorageOptions_minimumTimeToLive}}
+var mDataPartitionUploadOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDataPartitionUploadOptions_expression, &sDataPartitionUploadOptions_conditionLanguageVersion}}
+var m_decoderManifestSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_decoderManifestSummaries_member}}
+var mDecoderManifestSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDecoderManifestSummary_name, &sDecoderManifestSummary_arn, &sDecoderManifestSummary_modelManifestArn, &sDecoderManifestSummary_description, &sDecoderManifestSummary_status, &sDecoderManifestSummary_creationTime, &sDecoderManifestSummary_lastModificationTime, &sDecoderManifestSummary_message}}
+var mDecoderManifestValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDecoderManifestValidationException_invalidSignals, &sDecoderManifestValidationException_invalidNetworkInterfaces, &sDecoderManifestValidationException_message}}
+var mDefaultForUnmappedSignalsType = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultForUnmappedSignalsType_CUSTOM_DECODING}}
+var mDiagnosticsMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDiagnosticsMode_OFF, &sDiagnosticsMode_SEND_ACTIVE_DTCS}}
+var mEncryptionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionStatus_PENDING, &sEncryptionStatus_SUCCESS, &sEncryptionStatus_FAILURE}}
+var mEncryptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionType_KMS_BASED_ENCRYPTION, &sEncryptionType_FLEETWISE_DEFAULT_ENCRYPTION}}
+var m_EventExpressionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventExpressionList_member}}
+var m_fleets = smithy.SchemaMembers{List: []*smithy.Schema{&s_fleets_member}}
+var m_fleetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_fleetSummaries_member}}
+var mFleetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetSummary_id, &sFleetSummary_arn, &sFleetSummary_description, &sFleetSummary_signalCatalogArn, &sFleetSummary_creationTime, &sFleetSummary_lastModificationTime}}
+var mFormattedVss = smithy.SchemaMembers{List: []*smithy.Schema{&sFormattedVss_vssJson}}
+var m_Fqns = smithy.SchemaMembers{List: []*smithy.Schema{&s_Fqns_member}}
+var mIamRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sIamRegistrationResponse_roleArn, &sIamRegistrationResponse_registrationStatus, &sIamRegistrationResponse_errorMessage}}
+var mIamResources = smithy.SchemaMembers{List: []*smithy.Schema{&sIamResources_roleArn}}
+var m_InterfaceIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_InterfaceIds_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mInvalidNetworkInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNetworkInterface_interfaceId, &sInvalidNetworkInterface_reason}}
+var m_InvalidNetworkInterfaces = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvalidNetworkInterfaces_member}}
+var mInvalidNodeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNodeException_invalidNodes, &sInvalidNodeException_reason, &sInvalidNodeException_message}}
+var mInvalidSignal = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSignal_name, &sInvalidSignal_reason}}
+var mInvalidSignalDecoder = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSignalDecoder_name, &sInvalidSignalDecoder_reason, &sInvalidSignalDecoder_hint}}
+var m_InvalidSignalDecoders = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvalidSignalDecoders_member}}
+var m_InvalidSignals = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvalidSignals_member}}
+var mInvalidSignalsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSignalsException_message, &sInvalidSignalsException_invalidSignals}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message, &sLimitExceededException_resourceId, &sLimitExceededException_resourceType}}
+var m_listOfStrings = smithy.SchemaMembers{List: []*smithy.Schema{&s_listOfStrings_member}}
+var mListResponseScope = smithy.SchemaMembers{List: []*smithy.Schema{&sListResponseScope_METADATA_ONLY}}
+var mLogType = smithy.SchemaMembers{List: []*smithy.Schema{&sLogType_OFF, &sLogType_ERROR}}
+var mManifestStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestStatus_ACTIVE, &sManifestStatus_DRAFT, &sManifestStatus_INVALID, &sManifestStatus_VALIDATING}}
+var mMessageSignal = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageSignal_topicName, &sMessageSignal_structuredMessage}}
+var m_modelManifestSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_modelManifestSummaries_member}}
+var mModelManifestSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sModelManifestSummary_name, &sModelManifestSummary_arn, &sModelManifestSummary_signalCatalogArn, &sModelManifestSummary_description, &sModelManifestSummary_status, &sModelManifestSummary_creationTime, &sModelManifestSummary_lastModificationTime}}
+var m_ModelSignalsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelSignalsMap_key, &s_ModelSignalsMap_value}}
+var mMqttTopicConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sMqttTopicConfig_mqttTopicArn, &sMqttTopicConfig_executionRoleArn}}
+var mNetworkFileDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFileDefinition_canDbc}}
+var m_NetworkFileDefinitions = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkFileDefinitions_member}}
+var m_NetworkFilesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkFilesList_member}}
+var mNetworkInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInterface_interfaceId, &sNetworkInterface_type, &sNetworkInterface_canInterface, &sNetworkInterface_obdInterface, &sNetworkInterface_vehicleMiddleware, &sNetworkInterface_customDecodingInterface}}
+var mNetworkInterfaceFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInterfaceFailureReason_DUPLICATE_INTERFACE, &sNetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE, &sNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS, &sNetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL, &sNetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL, &sNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS, &sNetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL, &sNetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL}}
+var m_NetworkInterfaces = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkInterfaces_member}}
+var mNetworkInterfaceType = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInterfaceType_CAN_INTERFACE, &sNetworkInterfaceType_OBD_INTERFACE, &sNetworkInterfaceType_VEHICLE_MIDDLEWARE, &sNetworkInterfaceType_CUSTOM_DECODING_INTERFACE}}
+var mNode = smithy.SchemaMembers{List: []*smithy.Schema{&sNode_branch, &sNode_sensor, &sNode_actuator, &sNode_attribute, &sNode_struct, &sNode_property}}
+var mNodeCounts = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeCounts_totalNodes, &sNodeCounts_totalBranches, &sNodeCounts_totalSensors, &sNodeCounts_totalAttributes, &sNodeCounts_totalActuators, &sNodeCounts_totalStructs, &sNodeCounts_totalProperties}}
+var mNodeDataEncoding = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeDataEncoding_BINARY, &sNodeDataEncoding_TYPED}}
+var mNodeDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeDataType_INT8, &sNodeDataType_UINT8, &sNodeDataType_INT16, &sNodeDataType_UINT16, &sNodeDataType_INT32, &sNodeDataType_UINT32, &sNodeDataType_INT64, &sNodeDataType_UINT64, &sNodeDataType_BOOLEAN, &sNodeDataType_FLOAT, &sNodeDataType_DOUBLE, &sNodeDataType_STRING, &sNodeDataType_UNIX_TIMESTAMP, &sNodeDataType_INT8_ARRAY, &sNodeDataType_UINT8_ARRAY, &sNodeDataType_INT16_ARRAY, &sNodeDataType_UINT16_ARRAY, &sNodeDataType_INT32_ARRAY, &sNodeDataType_UINT32_ARRAY, &sNodeDataType_INT64_ARRAY, &sNodeDataType_UINT64_ARRAY, &sNodeDataType_BOOLEAN_ARRAY, &sNodeDataType_FLOAT_ARRAY, &sNodeDataType_DOUBLE_ARRAY, &sNodeDataType_STRING_ARRAY, &sNodeDataType_UNIX_TIMESTAMP_ARRAY, &sNodeDataType_UNKNOWN, &sNodeDataType_STRUCT, &sNodeDataType_STRUCT_ARRAY}, Hash: &hNodeDataType}
+var m_NodePaths = smithy.SchemaMembers{List: []*smithy.Schema{&s_NodePaths_member}}
+var m_Nodes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Nodes_member}}
+var mObdInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sObdInterface_name, &sObdInterface_requestMessageId, &sObdInterface_obdStandard, &sObdInterface_pidRequestIntervalSeconds, &sObdInterface_dtcRequestIntervalSeconds, &sObdInterface_useExtendedIds, &sObdInterface_hasTransmissionEcu}}
+var mObdSignal = smithy.SchemaMembers{List: []*smithy.Schema{&sObdSignal_pidResponseLength, &sObdSignal_serviceMode, &sObdSignal_pid, &sObdSignal_scaling, &sObdSignal_offset, &sObdSignal_startByte, &sObdSignal_byteLength, &sObdSignal_bitRightShift, &sObdSignal_bitMaskLength, &sObdSignal_isSigned, &sObdSignal_signalValueType}, Hash: &hObdSignal}
+var mPeriodicStateTemplateUpdateStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sPeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate}}
+var mPrimitiveMessageDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sPrimitiveMessageDefinition_ros2PrimitiveMessageDefinition}}
+var mRegistrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrationStatus_REGISTRATION_PENDING, &sRegistrationStatus_REGISTRATION_SUCCESS, &sRegistrationStatus_REGISTRATION_FAILURE}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mROS2PrimitiveMessageDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sROS2PrimitiveMessageDefinition_primitiveType, &sROS2PrimitiveMessageDefinition_offset, &sROS2PrimitiveMessageDefinition_scaling, &sROS2PrimitiveMessageDefinition_upperBound}}
+var mROS2PrimitiveType = smithy.SchemaMembers{List: []*smithy.Schema{&sROS2PrimitiveType_BOOL, &sROS2PrimitiveType_BYTE, &sROS2PrimitiveType_CHAR, &sROS2PrimitiveType_FLOAT32, &sROS2PrimitiveType_FLOAT64, &sROS2PrimitiveType_INT8, &sROS2PrimitiveType_UINT8, &sROS2PrimitiveType_INT16, &sROS2PrimitiveType_UINT16, &sROS2PrimitiveType_INT32, &sROS2PrimitiveType_UINT32, &sROS2PrimitiveType_INT64, &sROS2PrimitiveType_UINT64, &sROS2PrimitiveType_STRING, &sROS2PrimitiveType_WSTRING}, Hash: &hROS2PrimitiveType}
+var mS3Config = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Config_bucketArn, &sS3Config_dataFormat, &sS3Config_storageCompressionFormat, &sS3Config_prefix}}
+var mSensor = smithy.SchemaMembers{List: []*smithy.Schema{&sSensor_fullyQualifiedName, &sSensor_dataType, &sSensor_description, &sSensor_unit, &sSensor_allowedValues, &sSensor_min, &sSensor_max, &sSensor_deprecationMessage, &sSensor_comment, &sSensor_structFullyQualifiedName}, Hash: &hSensor}
+var m_signalCatalogSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_signalCatalogSummaries_member}}
+var mSignalCatalogSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalCatalogSummary_name, &sSignalCatalogSummary_arn, &sSignalCatalogSummary_creationTime, &sSignalCatalogSummary_lastModificationTime}}
+var mSignalDecoder = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalDecoder_fullyQualifiedName, &sSignalDecoder_type, &sSignalDecoder_interfaceId, &sSignalDecoder_canSignal, &sSignalDecoder_obdSignal, &sSignalDecoder_messageSignal, &sSignalDecoder_customDecodingSignal}}
+var mSignalDecoderFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalDecoderFailureReason_DUPLICATE_SIGNAL, &sSignalDecoderFailureReason_CONFLICTING_SIGNAL, &sSignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS, &sSignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE, &sSignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE, &sSignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL, &sSignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL, &sSignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL, &sSignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL, &sSignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL, &sSignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE, &sSignalDecoderFailureReason_STRUCT_SIZE_MISMATCH, &sSignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL, &sSignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG, &sSignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL, &sSignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL}, Hash: &hSignalDecoderFailureReason}
+var m_SignalDecoders = smithy.SchemaMembers{List: []*smithy.Schema{&s_SignalDecoders_member}}
+var mSignalDecoderType = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalDecoderType_CAN_SIGNAL, &sSignalDecoderType_OBD_SIGNAL, &sSignalDecoderType_MESSAGE_SIGNAL, &sSignalDecoderType_CUSTOM_DECODING_SIGNAL}}
+var mSignalFetchConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalFetchConfig_timeBased, &sSignalFetchConfig_conditionBased}}
+var mSignalFetchInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalFetchInformation_fullyQualifiedName, &sSignalFetchInformation_signalFetchConfig, &sSignalFetchInformation_conditionLanguageVersion, &sSignalFetchInformation_actions}}
+var m_SignalFetchInformationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SignalFetchInformationList_member}}
+var mSignalInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalInformation_name, &sSignalInformation_maxSampleCount, &sSignalInformation_minimumSamplingIntervalMs, &sSignalInformation_dataPartitionId}}
+var m_SignalInformationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SignalInformationList_member}}
+var mSignalNodeType = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalNodeType_SENSOR, &sSignalNodeType_ACTUATOR, &sSignalNodeType_ATTRIBUTE, &sSignalNodeType_BRANCH, &sSignalNodeType_CUSTOM_STRUCT, &sSignalNodeType_CUSTOM_PROPERTY}}
+var mSignalValueType = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalValueType_INTEGER, &sSignalValueType_FLOATING_POINT}}
+var mSpoolingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sSpoolingMode_OFF, &sSpoolingMode_TO_DISK}}
+var mStateTemplateAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sStateTemplateAssociation_identifier, &sStateTemplateAssociation_stateTemplateUpdateStrategy}}
+var m_StateTemplateAssociationIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_StateTemplateAssociationIdentifiers_member}}
+var m_StateTemplateAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&s_StateTemplateAssociations_member}}
+var m_StateTemplateDataExtraDimensionNodePathList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StateTemplateDataExtraDimensionNodePathList_member}}
+var m_StateTemplateMetadataExtraDimensionNodePathList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StateTemplateMetadataExtraDimensionNodePathList_member}}
+var m_StateTemplateProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_StateTemplateProperties_member}}
+var m_StateTemplateSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_StateTemplateSummaries_member}}
+var mStateTemplateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStateTemplateSummary_name, &sStateTemplateSummary_arn, &sStateTemplateSummary_signalCatalogArn, &sStateTemplateSummary_description, &sStateTemplateSummary_creationTime, &sStateTemplateSummary_lastModificationTime, &sStateTemplateSummary_id}}
+var mStateTemplateUpdateStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sStateTemplateUpdateStrategy_periodic, &sStateTemplateUpdateStrategy_onChange}}
+var mStorageCompressionFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageCompressionFormat_NONE, &sStorageCompressionFormat_GZIP}}
+var mStorageMaximumSize = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageMaximumSize_unit, &sStorageMaximumSize_value}}
+var mStorageMaximumSizeUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageMaximumSizeUnit_MB, &sStorageMaximumSizeUnit_GB, &sStorageMaximumSizeUnit_TB}}
+var mStorageMinimumTimeToLive = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageMinimumTimeToLive_unit, &sStorageMinimumTimeToLive_value}}
+var mStorageMinimumTimeToLiveUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageMinimumTimeToLiveUnit_HOURS, &sStorageMinimumTimeToLiveUnit_DAYS, &sStorageMinimumTimeToLiveUnit_WEEKS}}
+var mStructuredMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sStructuredMessage_primitiveMessageDefinition, &sStructuredMessage_structuredMessageListDefinition, &sStructuredMessage_structuredMessageDefinition}}
+var m_StructuredMessageDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&s_StructuredMessageDefinition_member}}
+var mStructuredMessageFieldNameAndDataTypePair = smithy.SchemaMembers{List: []*smithy.Schema{&sStructuredMessageFieldNameAndDataTypePair_fieldName, &sStructuredMessageFieldNameAndDataTypePair_dataType}}
+var mStructuredMessageListDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sStructuredMessageListDefinition_name, &sStructuredMessageListDefinition_memberType, &sStructuredMessageListDefinition_listType, &sStructuredMessageListDefinition_capacity}}
+var mStructuredMessageListType = smithy.SchemaMembers{List: []*smithy.Schema{&sStructuredMessageListType_FIXED_CAPACITY, &sStructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY, &sStructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_quotaCode, &sThrottlingException_serviceCode, &sThrottlingException_retryAfterSeconds}}
+var mTimeBasedCollectionScheme = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeBasedCollectionScheme_periodMs}}
+var mTimeBasedSignalFetchConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeBasedSignalFetchConfig_executionFrequencyMs}}
+var mTimePeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sTimePeriod_unit, &sTimePeriod_value}}
+var mTimestreamConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestreamConfig_timestreamTableArn, &sTimestreamConfig_executionRoleArn}}
+var mTimestreamRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestreamRegistrationResponse_timestreamDatabaseName, &sTimestreamRegistrationResponse_timestreamTableName, &sTimestreamRegistrationResponse_timestreamDatabaseArn, &sTimestreamRegistrationResponse_timestreamTableArn, &sTimestreamRegistrationResponse_registrationStatus, &sTimestreamRegistrationResponse_errorMessage}}
+var mTimestreamResources = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestreamResources_timestreamDatabaseName, &sTimestreamResources_timestreamTableName}}
+var mTimeUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeUnit_MILLISECOND, &sTimeUnit_SECOND, &sTimeUnit_MINUTE, &sTimeUnit_HOUR}}
+var mTriggerMode = smithy.SchemaMembers{List: []*smithy.Schema{&sTriggerMode_ALWAYS, &sTriggerMode_RISING_EDGE}}
+var mUpdateCampaignAction = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCampaignAction_APPROVE, &sUpdateCampaignAction_SUSPEND, &sUpdateCampaignAction_RESUME, &sUpdateCampaignAction_UPDATE}}
+var mUpdateMode = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMode_OVERWRITE, &sUpdateMode_MERGE}}
+var mUpdateVehicleError = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVehicleError_vehicleName, &sUpdateVehicleError_code, &sUpdateVehicleError_message}}
+var m_updateVehicleErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_updateVehicleErrors_member}}
+var mUpdateVehicleRequestItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVehicleRequestItem_vehicleName, &sUpdateVehicleRequestItem_modelManifestArn, &sUpdateVehicleRequestItem_decoderManifestArn, &sUpdateVehicleRequestItem_attributes, &sUpdateVehicleRequestItem_attributeUpdateMode, &sUpdateVehicleRequestItem_stateTemplatesToAdd, &sUpdateVehicleRequestItem_stateTemplatesToRemove, &sUpdateVehicleRequestItem_stateTemplatesToUpdate}}
+var m_updateVehicleRequestItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_updateVehicleRequestItems_member}}
+var mUpdateVehicleResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVehicleResponseItem_vehicleName, &sUpdateVehicleResponseItem_arn}}
+var m_updateVehicleResponseItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_updateVehicleResponseItems_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mVehicleAssociationBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sVehicleAssociationBehavior_CREATE_IOT_THING, &sVehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS}}
+var mVehicleMiddleware = smithy.SchemaMembers{List: []*smithy.Schema{&sVehicleMiddleware_name, &sVehicleMiddleware_protocolName}}
+var mVehicleMiddlewareProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sVehicleMiddlewareProtocol_ROS_2}}
+var m_vehicles = smithy.SchemaMembers{List: []*smithy.Schema{&s_vehicles_member}}
+var mVehicleState = smithy.SchemaMembers{List: []*smithy.Schema{&sVehicleState_CREATED, &sVehicleState_READY, &sVehicleState_HEALTHY, &sVehicleState_SUSPENDED, &sVehicleState_DELETING, &sVehicleState_READY_FOR_CHECKIN}}
+var mVehicleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVehicleStatus_campaignName, &sVehicleStatus_vehicleName, &sVehicleStatus_status}}
+var m_VehicleStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VehicleStatusList_member}}
+var m_vehicleSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_vehicleSummaries_member}}
+var mVehicleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sVehicleSummary_vehicleName, &sVehicleSummary_arn, &sVehicleSummary_modelManifestArn, &sVehicleSummary_decoderManifestArn, &sVehicleSummary_creationTime, &sVehicleSummary_lastModificationTime, &sVehicleSummary_attributes}}
+var mAssociateVehicleFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateVehicleFleetRequest_vehicleName, &sAssociateVehicleFleetRequest_fleetId}}
+var mBatchCreateVehicleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateVehicleRequest_vehicles}}
+var mBatchCreateVehicleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateVehicleResponse_vehicles, &sBatchCreateVehicleResponse_errors}}
+var mBatchUpdateVehicleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateVehicleRequest_vehicles}}
+var mBatchUpdateVehicleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateVehicleResponse_vehicles, &sBatchUpdateVehicleResponse_errors}}
+var mCreateCampaignRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCampaignRequest_name, &sCreateCampaignRequest_description, &sCreateCampaignRequest_signalCatalogArn, &sCreateCampaignRequest_targetArn, &sCreateCampaignRequest_startTime, &sCreateCampaignRequest_expiryTime, &sCreateCampaignRequest_postTriggerCollectionDuration, &sCreateCampaignRequest_diagnosticsMode, &sCreateCampaignRequest_spoolingMode, &sCreateCampaignRequest_compression, &sCreateCampaignRequest_priority, &sCreateCampaignRequest_signalsToCollect, &sCreateCampaignRequest_collectionScheme, &sCreateCampaignRequest_dataExtraDimensions, &sCreateCampaignRequest_tags, &sCreateCampaignRequest_dataDestinationConfigs, &sCreateCampaignRequest_dataPartitions, &sCreateCampaignRequest_signalsToFetch}, Hash: &hCreateCampaignRequest}
+var mCreateCampaignResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCampaignResponse_name, &sCreateCampaignResponse_arn}}
+var mCreateDecoderManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDecoderManifestRequest_name, &sCreateDecoderManifestRequest_description, &sCreateDecoderManifestRequest_modelManifestArn, &sCreateDecoderManifestRequest_signalDecoders, &sCreateDecoderManifestRequest_networkInterfaces, &sCreateDecoderManifestRequest_defaultForUnmappedSignals, &sCreateDecoderManifestRequest_tags}}
+var mCreateDecoderManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDecoderManifestResponse_name, &sCreateDecoderManifestResponse_arn}}
+var mCreateFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFleetRequest_fleetId, &sCreateFleetRequest_description, &sCreateFleetRequest_signalCatalogArn, &sCreateFleetRequest_tags}}
+var mCreateFleetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFleetResponse_id, &sCreateFleetResponse_arn}}
+var mCreateModelManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelManifestRequest_name, &sCreateModelManifestRequest_description, &sCreateModelManifestRequest_nodes, &sCreateModelManifestRequest_signalCatalogArn, &sCreateModelManifestRequest_tags}}
+var mCreateModelManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelManifestResponse_name, &sCreateModelManifestResponse_arn}}
+var mCreateSignalCatalogRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSignalCatalogRequest_name, &sCreateSignalCatalogRequest_description, &sCreateSignalCatalogRequest_nodes, &sCreateSignalCatalogRequest_tags}}
+var mCreateSignalCatalogResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSignalCatalogResponse_name, &sCreateSignalCatalogResponse_arn}}
+var mCreateStateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStateTemplateRequest_name, &sCreateStateTemplateRequest_description, &sCreateStateTemplateRequest_signalCatalogArn, &sCreateStateTemplateRequest_stateTemplateProperties, &sCreateStateTemplateRequest_dataExtraDimensions, &sCreateStateTemplateRequest_metadataExtraDimensions, &sCreateStateTemplateRequest_tags}}
+var mCreateStateTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStateTemplateResponse_name, &sCreateStateTemplateResponse_arn, &sCreateStateTemplateResponse_id}}
+var mCreateVehicleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVehicleRequest_vehicleName, &sCreateVehicleRequest_modelManifestArn, &sCreateVehicleRequest_decoderManifestArn, &sCreateVehicleRequest_attributes, &sCreateVehicleRequest_associationBehavior, &sCreateVehicleRequest_tags, &sCreateVehicleRequest_stateTemplates}}
+var mCreateVehicleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVehicleResponse_vehicleName, &sCreateVehicleResponse_arn, &sCreateVehicleResponse_thingArn}}
+var mDeleteCampaignRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCampaignRequest_name}}
+var mDeleteCampaignResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCampaignResponse_name, &sDeleteCampaignResponse_arn}}
+var mDeleteDecoderManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDecoderManifestRequest_name}}
+var mDeleteDecoderManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDecoderManifestResponse_name, &sDeleteDecoderManifestResponse_arn}}
+var mDeleteFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFleetRequest_fleetId}}
+var mDeleteFleetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFleetResponse_id, &sDeleteFleetResponse_arn}}
+var mDeleteModelManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteModelManifestRequest_name}}
+var mDeleteModelManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteModelManifestResponse_name, &sDeleteModelManifestResponse_arn}}
+var mDeleteSignalCatalogRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSignalCatalogRequest_name}}
+var mDeleteSignalCatalogResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSignalCatalogResponse_name, &sDeleteSignalCatalogResponse_arn}}
+var mDeleteStateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStateTemplateRequest_identifier}}
+var mDeleteStateTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStateTemplateResponse_name, &sDeleteStateTemplateResponse_arn, &sDeleteStateTemplateResponse_id}}
+var mDeleteVehicleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVehicleRequest_vehicleName}}
+var mDeleteVehicleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVehicleResponse_vehicleName, &sDeleteVehicleResponse_arn}}
+var mDisassociateVehicleFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateVehicleFleetRequest_vehicleName, &sDisassociateVehicleFleetRequest_fleetId}}
+var mGetCampaignRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCampaignRequest_name}}
+var mGetCampaignResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCampaignResponse_name, &sGetCampaignResponse_arn, &sGetCampaignResponse_description, &sGetCampaignResponse_signalCatalogArn, &sGetCampaignResponse_targetArn, &sGetCampaignResponse_status, &sGetCampaignResponse_startTime, &sGetCampaignResponse_expiryTime, &sGetCampaignResponse_postTriggerCollectionDuration, &sGetCampaignResponse_diagnosticsMode, &sGetCampaignResponse_spoolingMode, &sGetCampaignResponse_compression, &sGetCampaignResponse_priority, &sGetCampaignResponse_signalsToCollect, &sGetCampaignResponse_collectionScheme, &sGetCampaignResponse_dataExtraDimensions, &sGetCampaignResponse_creationTime, &sGetCampaignResponse_lastModificationTime, &sGetCampaignResponse_dataDestinationConfigs, &sGetCampaignResponse_dataPartitions, &sGetCampaignResponse_signalsToFetch}, Hash: &hGetCampaignResponse}
+var mGetDecoderManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDecoderManifestRequest_name}}
+var mGetDecoderManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDecoderManifestResponse_name, &sGetDecoderManifestResponse_arn, &sGetDecoderManifestResponse_description, &sGetDecoderManifestResponse_modelManifestArn, &sGetDecoderManifestResponse_status, &sGetDecoderManifestResponse_creationTime, &sGetDecoderManifestResponse_lastModificationTime, &sGetDecoderManifestResponse_message}}
+var mGetEncryptionConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEncryptionConfigurationResponse_kmsKeyId, &sGetEncryptionConfigurationResponse_encryptionStatus, &sGetEncryptionConfigurationResponse_encryptionType, &sGetEncryptionConfigurationResponse_errorMessage, &sGetEncryptionConfigurationResponse_creationTime, &sGetEncryptionConfigurationResponse_lastModificationTime}}
+var mGetFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFleetRequest_fleetId}}
+var mGetFleetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFleetResponse_id, &sGetFleetResponse_arn, &sGetFleetResponse_description, &sGetFleetResponse_signalCatalogArn, &sGetFleetResponse_creationTime, &sGetFleetResponse_lastModificationTime}}
+var mGetLoggingOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLoggingOptionsResponse_cloudWatchLogDelivery}}
+var mGetModelManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelManifestRequest_name}}
+var mGetModelManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelManifestResponse_name, &sGetModelManifestResponse_arn, &sGetModelManifestResponse_description, &sGetModelManifestResponse_signalCatalogArn, &sGetModelManifestResponse_status, &sGetModelManifestResponse_creationTime, &sGetModelManifestResponse_lastModificationTime}}
+var mGetRegisterAccountStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRegisterAccountStatusResponse_customerAccountId, &sGetRegisterAccountStatusResponse_accountStatus, &sGetRegisterAccountStatusResponse_timestreamRegistrationResponse, &sGetRegisterAccountStatusResponse_iamRegistrationResponse, &sGetRegisterAccountStatusResponse_creationTime, &sGetRegisterAccountStatusResponse_lastModificationTime}}
+var mGetSignalCatalogRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSignalCatalogRequest_name}}
+var mGetSignalCatalogResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSignalCatalogResponse_name, &sGetSignalCatalogResponse_arn, &sGetSignalCatalogResponse_description, &sGetSignalCatalogResponse_nodeCounts, &sGetSignalCatalogResponse_creationTime, &sGetSignalCatalogResponse_lastModificationTime}}
+var mGetStateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStateTemplateRequest_identifier}}
+var mGetStateTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStateTemplateResponse_name, &sGetStateTemplateResponse_arn, &sGetStateTemplateResponse_description, &sGetStateTemplateResponse_signalCatalogArn, &sGetStateTemplateResponse_stateTemplateProperties, &sGetStateTemplateResponse_dataExtraDimensions, &sGetStateTemplateResponse_metadataExtraDimensions, &sGetStateTemplateResponse_creationTime, &sGetStateTemplateResponse_lastModificationTime, &sGetStateTemplateResponse_id}, Hash: &hGetStateTemplateResponse}
+var mGetVehicleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVehicleRequest_vehicleName}}
+var mGetVehicleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVehicleResponse_vehicleName, &sGetVehicleResponse_arn, &sGetVehicleResponse_modelManifestArn, &sGetVehicleResponse_decoderManifestArn, &sGetVehicleResponse_attributes, &sGetVehicleResponse_stateTemplates, &sGetVehicleResponse_creationTime, &sGetVehicleResponse_lastModificationTime}}
+var mGetVehicleStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVehicleStatusRequest_nextToken, &sGetVehicleStatusRequest_maxResults, &sGetVehicleStatusRequest_vehicleName}}
+var mGetVehicleStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVehicleStatusResponse_campaigns, &sGetVehicleStatusResponse_nextToken}}
+var mImportDecoderManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDecoderManifestRequest_name, &sImportDecoderManifestRequest_networkFileDefinitions}}
+var mImportDecoderManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDecoderManifestResponse_name, &sImportDecoderManifestResponse_arn}}
+var mImportSignalCatalogRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportSignalCatalogRequest_name, &sImportSignalCatalogRequest_description, &sImportSignalCatalogRequest_vss, &sImportSignalCatalogRequest_tags}}
+var mImportSignalCatalogResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportSignalCatalogResponse_name, &sImportSignalCatalogResponse_arn}}
+var mListCampaignsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCampaignsRequest_nextToken, &sListCampaignsRequest_maxResults, &sListCampaignsRequest_status, &sListCampaignsRequest_listResponseScope}}
+var mListCampaignsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCampaignsResponse_campaignSummaries, &sListCampaignsResponse_nextToken}}
+var mListDecoderManifestNetworkInterfacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDecoderManifestNetworkInterfacesRequest_name, &sListDecoderManifestNetworkInterfacesRequest_nextToken, &sListDecoderManifestNetworkInterfacesRequest_maxResults}}
+var mListDecoderManifestNetworkInterfacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDecoderManifestNetworkInterfacesResponse_networkInterfaces, &sListDecoderManifestNetworkInterfacesResponse_nextToken}}
+var mListDecoderManifestSignalsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDecoderManifestSignalsRequest_name, &sListDecoderManifestSignalsRequest_nextToken, &sListDecoderManifestSignalsRequest_maxResults}}
+var mListDecoderManifestSignalsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDecoderManifestSignalsResponse_signalDecoders, &sListDecoderManifestSignalsResponse_nextToken}}
+var mListDecoderManifestsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDecoderManifestsRequest_modelManifestArn, &sListDecoderManifestsRequest_nextToken, &sListDecoderManifestsRequest_maxResults, &sListDecoderManifestsRequest_listResponseScope}}
+var mListDecoderManifestsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDecoderManifestsResponse_summaries, &sListDecoderManifestsResponse_nextToken}}
+var mListFleetsForVehicleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFleetsForVehicleRequest_vehicleName, &sListFleetsForVehicleRequest_nextToken, &sListFleetsForVehicleRequest_maxResults}}
+var mListFleetsForVehicleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFleetsForVehicleResponse_fleets, &sListFleetsForVehicleResponse_nextToken}}
+var mListFleetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFleetsRequest_nextToken, &sListFleetsRequest_maxResults, &sListFleetsRequest_listResponseScope}}
+var mListFleetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFleetsResponse_fleetSummaries, &sListFleetsResponse_nextToken}}
+var mListModelManifestNodesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelManifestNodesRequest_name, &sListModelManifestNodesRequest_nextToken, &sListModelManifestNodesRequest_maxResults}}
+var mListModelManifestNodesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelManifestNodesResponse_nodes, &sListModelManifestNodesResponse_nextToken}}
+var mListModelManifestsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelManifestsRequest_signalCatalogArn, &sListModelManifestsRequest_nextToken, &sListModelManifestsRequest_maxResults, &sListModelManifestsRequest_listResponseScope}}
+var mListModelManifestsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelManifestsResponse_summaries, &sListModelManifestsResponse_nextToken}}
+var mListSignalCatalogNodesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSignalCatalogNodesRequest_name, &sListSignalCatalogNodesRequest_nextToken, &sListSignalCatalogNodesRequest_maxResults, &sListSignalCatalogNodesRequest_signalNodeType}}
+var mListSignalCatalogNodesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSignalCatalogNodesResponse_nodes, &sListSignalCatalogNodesResponse_nextToken}}
+var mListSignalCatalogsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSignalCatalogsRequest_nextToken, &sListSignalCatalogsRequest_maxResults}}
+var mListSignalCatalogsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSignalCatalogsResponse_summaries, &sListSignalCatalogsResponse_nextToken}}
+var mListStateTemplatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListStateTemplatesRequest_nextToken, &sListStateTemplatesRequest_maxResults, &sListStateTemplatesRequest_listResponseScope}}
+var mListStateTemplatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListStateTemplatesResponse_summaries, &sListStateTemplatesResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListVehiclesInFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVehiclesInFleetRequest_fleetId, &sListVehiclesInFleetRequest_nextToken, &sListVehiclesInFleetRequest_maxResults}}
+var mListVehiclesInFleetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVehiclesInFleetResponse_vehicles, &sListVehiclesInFleetResponse_nextToken}}
+var mListVehiclesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVehiclesRequest_modelManifestArn, &sListVehiclesRequest_attributeNames, &sListVehiclesRequest_attributeValues, &sListVehiclesRequest_nextToken, &sListVehiclesRequest_maxResults, &sListVehiclesRequest_listResponseScope}}
+var mListVehiclesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVehiclesResponse_vehicleSummaries, &sListVehiclesResponse_nextToken}}
+var mPutEncryptionConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEncryptionConfigurationRequest_kmsKeyId, &sPutEncryptionConfigurationRequest_encryptionType}}
+var mPutEncryptionConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEncryptionConfigurationResponse_kmsKeyId, &sPutEncryptionConfigurationResponse_encryptionStatus, &sPutEncryptionConfigurationResponse_encryptionType}}
+var mPutLoggingOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLoggingOptionsRequest_cloudWatchLogDelivery}}
+var mRegisterAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterAccountRequest_timestreamResources, &sRegisterAccountRequest_iamResources}}
+var mRegisterAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterAccountResponse_registerAccountStatus, &sRegisterAccountResponse_timestreamResources, &sRegisterAccountResponse_iamResources, &sRegisterAccountResponse_creationTime, &sRegisterAccountResponse_lastModificationTime}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateCampaignRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCampaignRequest_name, &sUpdateCampaignRequest_description, &sUpdateCampaignRequest_dataExtraDimensions, &sUpdateCampaignRequest_action}}
+var mUpdateCampaignResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCampaignResponse_arn, &sUpdateCampaignResponse_name, &sUpdateCampaignResponse_status}}
+var mUpdateDecoderManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDecoderManifestRequest_name, &sUpdateDecoderManifestRequest_description, &sUpdateDecoderManifestRequest_signalDecodersToAdd, &sUpdateDecoderManifestRequest_signalDecodersToUpdate, &sUpdateDecoderManifestRequest_signalDecodersToRemove, &sUpdateDecoderManifestRequest_networkInterfacesToAdd, &sUpdateDecoderManifestRequest_networkInterfacesToUpdate, &sUpdateDecoderManifestRequest_networkInterfacesToRemove, &sUpdateDecoderManifestRequest_status, &sUpdateDecoderManifestRequest_defaultForUnmappedSignals}, Hash: &hUpdateDecoderManifestRequest}
+var mUpdateDecoderManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDecoderManifestResponse_name, &sUpdateDecoderManifestResponse_arn}}
+var mUpdateFleetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFleetRequest_fleetId, &sUpdateFleetRequest_description}}
+var mUpdateFleetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFleetResponse_id, &sUpdateFleetResponse_arn}}
+var mUpdateModelManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelManifestRequest_name, &sUpdateModelManifestRequest_description, &sUpdateModelManifestRequest_nodesToAdd, &sUpdateModelManifestRequest_nodesToRemove, &sUpdateModelManifestRequest_status}}
+var mUpdateModelManifestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelManifestResponse_name, &sUpdateModelManifestResponse_arn}}
+var mUpdateSignalCatalogRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSignalCatalogRequest_name, &sUpdateSignalCatalogRequest_description, &sUpdateSignalCatalogRequest_nodesToAdd, &sUpdateSignalCatalogRequest_nodesToUpdate, &sUpdateSignalCatalogRequest_nodesToRemove}}
+var mUpdateSignalCatalogResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSignalCatalogResponse_name, &sUpdateSignalCatalogResponse_arn}}
+var mUpdateStateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStateTemplateRequest_identifier, &sUpdateStateTemplateRequest_description, &sUpdateStateTemplateRequest_stateTemplatePropertiesToAdd, &sUpdateStateTemplateRequest_stateTemplatePropertiesToRemove, &sUpdateStateTemplateRequest_dataExtraDimensions, &sUpdateStateTemplateRequest_metadataExtraDimensions}}
+var mUpdateStateTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStateTemplateResponse_name, &sUpdateStateTemplateResponse_arn, &sUpdateStateTemplateResponse_id}}
+var mUpdateVehicleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVehicleRequest_vehicleName, &sUpdateVehicleRequest_modelManifestArn, &sUpdateVehicleRequest_decoderManifestArn, &sUpdateVehicleRequest_attributes, &sUpdateVehicleRequest_attributeUpdateMode, &sUpdateVehicleRequest_stateTemplatesToAdd, &sUpdateVehicleRequest_stateTemplatesToRemove, &sUpdateVehicleRequest_stateTemplatesToUpdate}}
+var mUpdateVehicleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVehicleResponse_vehicleName, &sUpdateVehicleResponse_arn}}
+
+var hActuator = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 4, 0, 7, 0, 0, 0, 0, 5, 8, 9, 3, 10, 1, 0, 0, 0, 0, 0, 0, 11, 0,
+	0, 0, 0, 2, 0, 6, 0, 0,
+}}
+var hAttribute = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 4, 0, 7, 0, 0, 0, 0, 5, 8, 10, 3, 11, 1, 0, 0, 0, 0, 0, 0, 9, 0,
+	0, 0, 0, 2, 0, 6, 0, 0,
+}}
+var hCanSignal = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 4, 0, 0, 0, 0, 0, 6, 5, 0, 0, 0, 0, 0, 3, 7, 0, 0, 2, 0, 0, 0, 0, 0,
+	0, 0, 0, 9, 1, 0, 0, 8,
+}}
+var hNodeDataType = smithy.MemberHash{Seed: 10321, Slots: []uint16{
+	11, 0, 0, 0, 24, 22, 15, 0, 6, 0, 0, 0, 0, 27, 19, 23, 0, 28, 0, 3, 0, 21, 0, 0,
+	0, 7, 29, 16, 0, 20, 0, 9, 1, 14, 0, 2, 0, 0, 0, 10, 0, 8, 25, 0, 0, 18, 4, 0,
+	13, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 5, 26,
+}}
+var hObdSignal = smithy.MemberHash{Seed: 17, Slots: []uint16{
+	0, 0, 0, 0, 11, 0, 0, 9, 0, 8, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 6, 7, 3, 0,
+	4, 2, 0, 5, 0, 0, 0, 10,
+}}
+var hROS2PrimitiveType = smithy.MemberHash{Seed: 1356, Slots: []uint16{
+	0, 0, 0, 0, 0, 3, 0, 8, 4, 12, 10, 5, 11, 13, 9, 0, 0, 0, 0, 0, 15, 0, 2, 0,
+	0, 14, 6, 7, 0, 1, 0, 0,
+}}
+var hSensor = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 4, 0, 7, 0, 0, 0, 0, 5, 0, 8, 3, 9, 1, 0, 0, 0, 0, 0, 0, 10, 0,
+	0, 0, 0, 2, 0, 6, 0, 0,
+}}
+var hSignalDecoderFailureReason = smithy.MemberHash{Seed: 141, Slots: []uint16{
+	6, 11, 13, 15, 0, 1, 7, 0, 0, 9, 0, 0, 0, 12, 5, 0, 0, 0, 0, 2, 0, 0, 8, 3,
+	4, 16, 10, 0, 14, 0, 0, 0,
+}}
+var hCreateCampaignRequest = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	0, 0, 0, 7, 0, 0, 0, 4, 2, 0, 0, 0, 16, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
+	0, 13, 0, 1, 0, 5, 0, 11, 0, 6, 10, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 14, 0, 8, 9, 0, 0, 12, 0, 0, 0, 0, 18, 0, 0, 0,
+}}
+var hGetCampaignResponse = smithy.MemberHash{Seed: 35, Slots: []uint16{
+	0, 15, 0, 0, 0, 0, 18, 0, 20, 0, 0, 0, 10, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	17, 8, 0, 0, 0, 0, 0, 12, 0, 6, 0, 7, 14, 0, 3, 0, 5, 0, 4, 16, 0, 0, 0, 0,
+	0, 1, 0, 0, 2, 0, 0, 13, 0, 0, 21, 0, 11, 0, 9, 0,
+}}
+var hGetStateTemplateResponse = smithy.MemberHash{Seed: 15, Slots: []uint16{
+	0, 0, 10, 0, 0, 2, 7, 0, 6, 5, 0, 8, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 9, 0, 0, 4, 0, 0,
+}}
+var hUpdateDecoderManifestRequest = smithy.MemberHash{Seed: 25, Slots: []uint16{
+	0, 0, 0, 4, 0, 0, 0, 9, 6, 3, 0, 0, 0, 1, 0, 0, 8, 0, 0, 0, 0, 0, 10, 5,
+	0, 7, 0, 0, 2, 0, 0, 0,
+}}
+
+var sAssociateVehicleFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateVehicleFleet, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateVehicleFleet})
+var sBatchCreateVehicle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateVehicle, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchCreateVehicle})
+var sBatchUpdateVehicle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateVehicle, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eBatchUpdateVehicle})
+var sCreateCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaign, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateCampaign})
+var sCreateDecoderManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDecoderManifest, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateDecoderManifest})
+var sCreateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleet, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateFleet})
+var sCreateModelManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelManifest, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateModelManifest})
+var sCreateSignalCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSignalCatalog, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateSignalCatalog})
+var sCreateStateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStateTemplate, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreateStateTemplate})
+var sCreateVehicle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVehicle, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eCreateVehicle})
+var sDeleteCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCampaign, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCampaign})
+var sDeleteDecoderManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDecoderManifest, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDecoderManifest})
+var sDeleteFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleet, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFleet})
+var sDeleteModelManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelManifest, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteModelManifest})
+var sDeleteSignalCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSignalCatalog, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSignalCatalog})
+var sDeleteStateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStateTemplate, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteStateTemplate})
+var sDeleteVehicle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVehicle, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVehicle})
+var sDisassociateVehicleFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateVehicleFleet, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateVehicleFleet})
+var sGetCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaign, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetCampaign})
+var sGetDecoderManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDecoderManifest, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetDecoderManifest})
+var sGetEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEncryptionConfiguration, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eGetEncryptionConfiguration})
+var sGetFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFleet, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eGetFleet})
+var sGetLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingOptions, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eGetLoggingOptions})
+var sGetModelManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelManifest, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetModelManifest})
+var sGetRegisterAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegisterAccountStatus, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetRegisterAccountStatus})
+var sGetSignalCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSignalCatalog, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetSignalCatalog})
+var sGetStateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStateTemplate, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetStateTemplate})
+var sGetVehicle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVehicle, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetVehicle})
+var sGetVehicleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVehicleStatus, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eGetVehicleStatus})
+var sImportDecoderManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDecoderManifest, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eImportDecoderManifest})
+var sImportSignalCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSignalCatalog, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eImportSignalCatalog})
+var sListCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaigns, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListCampaigns})
+var sListDecoderManifestNetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestNetworkInterfaces, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eListDecoderManifestNetworkInterfaces})
+var sListDecoderManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifests, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListDecoderManifests})
+var sListDecoderManifestSignals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestSignals, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListDecoderManifestSignals})
+var sListFleets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleets, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListFleets})
+var sListFleetsForVehicle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleetsForVehicle, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListFleetsForVehicle})
+var sListModelManifestNodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelManifestNodes, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListModelManifestNodes})
+var sListModelManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelManifests, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListModelManifests})
+var sListSignalCatalogNodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalCatalogNodes, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eListSignalCatalogNodes})
+var sListSignalCatalogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalCatalogs, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eListSignalCatalogs})
+var sListStateTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStateTemplates, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eListStateTemplates})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListVehicles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVehicles, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eListVehicles})
+var sListVehiclesInFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVehiclesInFleet, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eListVehiclesInFleet})
+var sPutEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEncryptionConfiguration, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &ePutEncryptionConfiguration})
+var sPutLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLoggingOptions, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &ePutLoggingOptions})
+var sRegisterAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAccount, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eRegisterAccount})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaign, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCampaign})
+var sUpdateDecoderManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDecoderManifest, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDecoderManifest})
+var sUpdateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleet, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFleet})
+var sUpdateModelManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelManifest, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eUpdateModelManifest})
+var sUpdateSignalCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSignalCatalog, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSignalCatalog})
+var sUpdateStateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStateTemplate, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eUpdateStateTemplate})
+var sUpdateVehicle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVehicle, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVehicle})
+var s_IoTAutobahnControlPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTAutobahnControlPlane, Type: smithy.ShapeTypeService, Ext: &e_IoTAutobahnControlPlane})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_actionEventExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_actionEventExpression, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &e_actionEventExpression})
+var sActuator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActuator, Members: &mActuator, Type: smithy.ShapeTypeStructure, Ext: &eActuator})
+var sActuator_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eActuator_fullyQualifiedName})
+var sActuator_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iNodeDataType, Members: &mNodeDataType, Type: smithy.ShapeTypeEnum, Ext: &eActuator_dataType})
+var sActuator_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eActuator_description})
+var sActuator_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eActuator_unit})
+var sActuator_allowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedValues", ID: &i_listOfStrings, Members: &m_listOfStrings, Type: smithy.ShapeTypeList, Ext: &eActuator_allowedValues})
+var sActuator_min = smithy.NewStaticSchema(smithy.StaticSchema{Member: "min", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eActuator_min})
+var sActuator_max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "max", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eActuator_max})
+var sActuator_assignedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assignedValue", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eActuator_assignedValue})
+var sActuator_deprecationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationMessage", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eActuator_deprecationMessage})
+var sActuator_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eActuator_comment})
+var sActuator_structFullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structFullyQualifiedName", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &eActuator_structFullyQualifiedName})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &e_arn})
+var sAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure, Ext: &eAttribute})
+var sAttribute_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAttribute_fullyQualifiedName})
+var sAttribute_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iNodeDataType, Members: &mNodeDataType, Type: smithy.ShapeTypeEnum, Ext: &eAttribute_dataType})
+var sAttribute_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eAttribute_description})
+var sAttribute_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAttribute_unit})
+var sAttribute_allowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedValues", ID: &i_listOfStrings, Members: &m_listOfStrings, Type: smithy.ShapeTypeList, Ext: &eAttribute_allowedValues})
+var sAttribute_min = smithy.NewStaticSchema(smithy.StaticSchema{Member: "min", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eAttribute_min})
+var sAttribute_max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "max", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eAttribute_max})
+var sAttribute_assignedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assignedValue", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAttribute_assignedValue})
+var sAttribute_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAttribute_defaultValue})
+var sAttribute_deprecationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationMessage", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eAttribute_deprecationMessage})
+var sAttribute_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eAttribute_comment})
+var s_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &e_attributeName})
+var s_attributeNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeNamesList, Members: &m_attributeNamesList, Type: smithy.ShapeTypeList, Ext: &e_attributeNamesList})
+var s_attributeNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &e_attributeNamesList_member})
+var s_attributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributesMap, Members: &m_attributesMap, Type: smithy.ShapeTypeMap, Ext: &e_attributesMap})
+var s_attributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &e_attributesMap_key})
+var s_attributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &e_attributesMap_value})
+var s_attributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &e_attributeValue})
+var s_attributeValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeValuesList, Members: &m_attributeValuesList, Type: smithy.ShapeTypeList, Ext: &e_attributeValuesList})
+var s_attributeValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &e_attributeValuesList_member})
+var sBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranch, Members: &mBranch, Type: smithy.ShapeTypeStructure, Ext: &eBranch})
+var sBranch_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eBranch_fullyQualifiedName})
+var sBranch_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eBranch_description})
+var sBranch_deprecationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationMessage", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eBranch_deprecationMessage})
+var sBranch_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eBranch_comment})
+var s_campaignArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_campaignArn, Type: smithy.ShapeTypeString, Ext: &e_campaignArn})
+var s_campaignName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_campaignName, Type: smithy.ShapeTypeString, Ext: &e_campaignName})
+var sCampaignStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaignStatus, Members: &mCampaignStatus, Type: smithy.ShapeTypeEnum, Ext: &eCampaignStatus})
+var sCampaignStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCampaignStatus_CREATING})
+var sCampaignStatus_WAITING_FOR_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAITING_FOR_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCampaignStatus_WAITING_FOR_APPROVAL})
+var sCampaignStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCampaignStatus_RUNNING})
+var sCampaignStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCampaignStatus_SUSPENDED})
+var s_campaignSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_campaignSummaries, Members: &m_campaignSummaries, Type: smithy.ShapeTypeList, Ext: &e_campaignSummaries})
+var s_campaignSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCampaignSummary, Members: &mCampaignSummary, Type: smithy.ShapeTypeStructure, Ext: &e_campaignSummaries_member})
+var sCampaignSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaignSummary, Members: &mCampaignSummary, Type: smithy.ShapeTypeStructure, Ext: &eCampaignSummary})
+var sCampaignSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_campaignArn, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_arn})
+var sCampaignSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_name})
+var sCampaignSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_description})
+var sCampaignSummary_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_signalCatalogArn})
+var sCampaignSummary_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_targetArn})
+var sCampaignSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCampaignStatus, Members: &mCampaignStatus, Type: smithy.ShapeTypeEnum, Ext: &eCampaignSummary_status})
+var sCampaignSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCampaignSummary_creationTime})
+var sCampaignSummary_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCampaignSummary_lastModificationTime})
+var sCanDbcDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanDbcDefinition, Members: &mCanDbcDefinition, Type: smithy.ShapeTypeStructure, Ext: &eCanDbcDefinition})
+var sCanDbcDefinition_networkInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterface", ID: &i_InterfaceId, Type: smithy.ShapeTypeString, Ext: &eCanDbcDefinition_networkInterface})
+var sCanDbcDefinition_canDbcFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canDbcFiles", ID: &i_NetworkFilesList, Members: &m_NetworkFilesList, Type: smithy.ShapeTypeList, Ext: &eCanDbcDefinition_canDbcFiles})
+var sCanDbcDefinition_signalsMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalsMap", ID: &i_ModelSignalsMap, Members: &m_ModelSignalsMap, Type: smithy.ShapeTypeMap, Ext: &eCanDbcDefinition_signalsMap})
+var sCanInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanInterface, Members: &mCanInterface, Type: smithy.ShapeTypeStructure, Ext: &eCanInterface})
+var sCanInterface_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CanInterfaceName, Type: smithy.ShapeTypeString, Ext: &eCanInterface_name})
+var sCanInterface_protocolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocolName", ID: &i_ProtocolName, Type: smithy.ShapeTypeString, Ext: &eCanInterface_protocolName})
+var sCanInterface_protocolVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocolVersion", ID: &i_ProtocolVersion, Type: smithy.ShapeTypeString, Ext: &eCanInterface_protocolVersion})
+var s_CanInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanInterfaceName, Type: smithy.ShapeTypeString, Ext: &e_CanInterfaceName})
+var sCanSignal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanSignal, Members: &mCanSignal, Type: smithy.ShapeTypeStructure, Ext: &eCanSignal})
+var sCanSignal_messageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageId", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eCanSignal_messageId})
+var sCanSignal_isBigEndian = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBigEndian", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCanSignal_isBigEndian})
+var sCanSignal_isSigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSigned", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCanSignal_isSigned})
+var sCanSignal_startBit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startBit", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eCanSignal_startBit})
+var sCanSignal_offset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offset", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eCanSignal_offset})
+var sCanSignal_factor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "factor", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eCanSignal_factor})
+var sCanSignal_length = smithy.NewStaticSchema(smithy.StaticSchema{Member: "length", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eCanSignal_length})
+var sCanSignal_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CanSignalName, Type: smithy.ShapeTypeString, Ext: &eCanSignal_name})
+var sCanSignal_signalValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalValueType", ID: &iSignalValueType, Members: &mSignalValueType, Type: smithy.ShapeTypeEnum, Ext: &eCanSignal_signalValueType})
+var s_CanSignalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanSignalName, Type: smithy.ShapeTypeString, Ext: &e_CanSignalName})
+var sCloudWatchLogDeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogDeliveryOptions, Members: &mCloudWatchLogDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogDeliveryOptions})
+var sCloudWatchLogDeliveryOptions_logType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logType", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eCloudWatchLogDeliveryOptions_logType})
+var sCloudWatchLogDeliveryOptions_logGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupName", ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogDeliveryOptions_logGroupName})
+var s_CloudWatchLogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString, Ext: &e_CloudWatchLogGroupName})
+var s_collectionPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_collectionPeriodMs, Type: smithy.ShapeTypeLong, Ext: &e_collectionPeriodMs})
+var sCollectionScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionScheme, Members: &mCollectionScheme, Type: smithy.ShapeTypeUnion, Ext: &eCollectionScheme})
+var sCollectionScheme_timeBasedCollectionScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeBasedCollectionScheme", ID: &iTimeBasedCollectionScheme, Members: &mTimeBasedCollectionScheme, Type: smithy.ShapeTypeStructure, Ext: &eCollectionScheme_timeBasedCollectionScheme})
+var sCollectionScheme_conditionBasedCollectionScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionBasedCollectionScheme", ID: &iConditionBasedCollectionScheme, Members: &mConditionBasedCollectionScheme, Type: smithy.ShapeTypeStructure, Ext: &eCollectionScheme_conditionBasedCollectionScheme})
+var sCompression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompression, Members: &mCompression, Type: smithy.ShapeTypeEnum, Ext: &eCompression})
+var sCompression_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompression_OFF})
+var sCompression_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompression_SNAPPY})
+var sConditionBasedCollectionScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionBasedCollectionScheme, Members: &mConditionBasedCollectionScheme, Type: smithy.ShapeTypeStructure, Ext: &eConditionBasedCollectionScheme})
+var sConditionBasedCollectionScheme_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_eventExpression, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eConditionBasedCollectionScheme_expression})
+var sConditionBasedCollectionScheme_minimumTriggerIntervalMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumTriggerIntervalMs", ID: &i_uint32, Type: smithy.ShapeTypeLong, Ext: &eConditionBasedCollectionScheme_minimumTriggerIntervalMs})
+var sConditionBasedCollectionScheme_triggerMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerMode", ID: &iTriggerMode, Members: &mTriggerMode, Type: smithy.ShapeTypeEnum, Ext: &eConditionBasedCollectionScheme_triggerMode})
+var sConditionBasedCollectionScheme_conditionLanguageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionLanguageVersion", ID: &i_languageVersion, Type: smithy.ShapeTypeInteger, Ext: &eConditionBasedCollectionScheme_conditionLanguageVersion})
+var sConditionBasedSignalFetchConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionBasedSignalFetchConfig, Members: &mConditionBasedSignalFetchConfig, Type: smithy.ShapeTypeStructure, Ext: &eConditionBasedSignalFetchConfig})
+var sConditionBasedSignalFetchConfig_conditionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionExpression", ID: &i_fetchConfigEventExpression, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eConditionBasedSignalFetchConfig_conditionExpression})
+var sConditionBasedSignalFetchConfig_triggerMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerMode", ID: &iTriggerMode, Members: &mTriggerMode, Type: smithy.ShapeTypeEnum, Ext: &eConditionBasedSignalFetchConfig_triggerMode})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t60, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eConflictException_resource})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCreateVehicleError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVehicleError, Members: &mCreateVehicleError, Type: smithy.ShapeTypeStructure, Ext: &eCreateVehicleError})
+var sCreateVehicleError_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleError_vehicleName})
+var sCreateVehicleError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleError_code})
+var sCreateVehicleError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleError_message})
+var s_createVehicleErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_createVehicleErrors, Members: &m_createVehicleErrors, Type: smithy.ShapeTypeList, Ext: &e_createVehicleErrors})
+var s_createVehicleErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateVehicleError, Members: &mCreateVehicleError, Type: smithy.ShapeTypeStructure, Ext: &e_createVehicleErrors_member})
+var sCreateVehicleRequestItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVehicleRequestItem, Members: &mCreateVehicleRequestItem, Type: smithy.ShapeTypeStructure, Ext: &eCreateVehicleRequestItem})
+var sCreateVehicleRequestItem_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleRequestItem_vehicleName})
+var sCreateVehicleRequestItem_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleRequestItem_modelManifestArn})
+var sCreateVehicleRequestItem_decoderManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decoderManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleRequestItem_decoderManifestArn})
+var sCreateVehicleRequestItem_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_attributesMap, Members: &m_attributesMap, Type: smithy.ShapeTypeMap, Ext: &eCreateVehicleRequestItem_attributes})
+var sCreateVehicleRequestItem_associationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationBehavior", ID: &iVehicleAssociationBehavior, Members: &mVehicleAssociationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eCreateVehicleRequestItem_associationBehavior})
+var sCreateVehicleRequestItem_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVehicleRequestItem_tags})
+var sCreateVehicleRequestItem_stateTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplates", ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &eCreateVehicleRequestItem_stateTemplates})
+var s_createVehicleRequestItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_createVehicleRequestItems, Members: &m_createVehicleRequestItems, Type: smithy.ShapeTypeList, Ext: &e_createVehicleRequestItems})
+var s_createVehicleRequestItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateVehicleRequestItem, Members: &mCreateVehicleRequestItem, Type: smithy.ShapeTypeStructure, Ext: &e_createVehicleRequestItems_member})
+var sCreateVehicleResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVehicleResponseItem, Members: &mCreateVehicleResponseItem, Type: smithy.ShapeTypeStructure, Ext: &eCreateVehicleResponseItem})
+var sCreateVehicleResponseItem_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleResponseItem_vehicleName})
+var sCreateVehicleResponseItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleResponseItem_arn})
+var sCreateVehicleResponseItem_thingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleResponseItem_thingArn})
+var s_createVehicleResponses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_createVehicleResponses, Members: &m_createVehicleResponses, Type: smithy.ShapeTypeList, Ext: &e_createVehicleResponses})
+var s_createVehicleResponses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateVehicleResponseItem, Members: &mCreateVehicleResponseItem, Type: smithy.ShapeTypeStructure, Ext: &e_createVehicleResponses_member})
+var s_CustomDecodingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomDecodingId, Type: smithy.ShapeTypeString, Ext: &e_CustomDecodingId})
+var sCustomDecodingInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDecodingInterface, Members: &mCustomDecodingInterface, Type: smithy.ShapeTypeStructure, Ext: &eCustomDecodingInterface})
+var sCustomDecodingInterface_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CustomDecodingSignalInterfaceName, Type: smithy.ShapeTypeString, Ext: &eCustomDecodingInterface_name})
+var sCustomDecodingSignal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDecodingSignal, Members: &mCustomDecodingSignal, Type: smithy.ShapeTypeStructure, Ext: &eCustomDecodingSignal})
+var sCustomDecodingSignal_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CustomDecodingId, Type: smithy.ShapeTypeString, Ext: &eCustomDecodingSignal_id})
+var s_CustomDecodingSignalInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomDecodingSignalInterfaceName, Type: smithy.ShapeTypeString, Ext: &e_CustomDecodingSignalInterfaceName})
+var s_customerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_customerAccountId, Type: smithy.ShapeTypeString, Ext: &e_customerAccountId})
+var sCustomProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomProperty, Members: &mCustomProperty, Type: smithy.ShapeTypeStructure, Ext: &eCustomProperty})
+var sCustomProperty_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCustomProperty_fullyQualifiedName})
+var sCustomProperty_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iNodeDataType, Members: &mNodeDataType, Type: smithy.ShapeTypeEnum, Ext: &eCustomProperty_dataType})
+var sCustomProperty_dataEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataEncoding", ID: &iNodeDataEncoding, Members: &mNodeDataEncoding, Type: smithy.ShapeTypeEnum, Ext: &eCustomProperty_dataEncoding})
+var sCustomProperty_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCustomProperty_description})
+var sCustomProperty_deprecationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationMessage", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eCustomProperty_deprecationMessage})
+var sCustomProperty_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eCustomProperty_comment})
+var sCustomProperty_structFullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structFullyQualifiedName", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &eCustomProperty_structFullyQualifiedName})
+var sCustomStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomStruct, Members: &mCustomStruct, Type: smithy.ShapeTypeStructure, Ext: &eCustomStruct})
+var sCustomStruct_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCustomStruct_fullyQualifiedName})
+var sCustomStruct_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCustomStruct_description})
+var sCustomStruct_deprecationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationMessage", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eCustomStruct_deprecationMessage})
+var sCustomStruct_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eCustomStruct_comment})
+var sDataDestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataDestinationConfig, Members: &mDataDestinationConfig, Type: smithy.ShapeTypeUnion, Ext: &eDataDestinationConfig})
+var sDataDestinationConfig_s3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eDataDestinationConfig_s3Config})
+var sDataDestinationConfig_timestreamConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamConfig", ID: &iTimestreamConfig, Members: &mTimestreamConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataDestinationConfig_timestreamConfig})
+var sDataDestinationConfig_mqttTopicConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mqttTopicConfig", ID: &iMqttTopicConfig, Members: &mMqttTopicConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataDestinationConfig_mqttTopicConfig})
+var s_DataDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataDestinationConfigs, Members: &m_DataDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &e_DataDestinationConfigs})
+var s_DataDestinationConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataDestinationConfig, Members: &mDataDestinationConfig, Type: smithy.ShapeTypeUnion, Ext: &e_DataDestinationConfigs_member})
+var s_DataExtraDimensionNodePathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataExtraDimensionNodePathList, Members: &m_DataExtraDimensionNodePathList, Traits: &t58, Type: smithy.ShapeTypeList, Ext: &e_DataExtraDimensionNodePathList})
+var s_DataExtraDimensionNodePathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &e_DataExtraDimensionNodePathList_member})
+var sDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataFormat, Members: &mDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eDataFormat})
+var sDataFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataFormat_JSON})
+var sDataFormat_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataFormat_PARQUET})
+var sDataPartition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPartition, Members: &mDataPartition, Type: smithy.ShapeTypeStructure, Ext: &eDataPartition})
+var sDataPartition_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DataPartitionId, Type: smithy.ShapeTypeString, Ext: &eDataPartition_id})
+var sDataPartition_storageOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageOptions", ID: &iDataPartitionStorageOptions, Members: &mDataPartitionStorageOptions, Type: smithy.ShapeTypeStructure, Ext: &eDataPartition_storageOptions})
+var sDataPartition_uploadOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadOptions", ID: &iDataPartitionUploadOptions, Members: &mDataPartitionUploadOptions, Type: smithy.ShapeTypeStructure, Ext: &eDataPartition_uploadOptions})
+var s_DataPartitionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataPartitionId, Type: smithy.ShapeTypeString, Ext: &e_DataPartitionId})
+var s_DataPartitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataPartitions, Members: &m_DataPartitions, Type: smithy.ShapeTypeList, Ext: &e_DataPartitions})
+var s_DataPartitions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataPartition, Members: &mDataPartition, Type: smithy.ShapeTypeStructure, Ext: &e_DataPartitions_member})
+var sDataPartitionStorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPartitionStorageOptions, Members: &mDataPartitionStorageOptions, Type: smithy.ShapeTypeStructure, Ext: &eDataPartitionStorageOptions})
+var sDataPartitionStorageOptions_maximumSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumSize", ID: &iStorageMaximumSize, Members: &mStorageMaximumSize, Type: smithy.ShapeTypeStructure, Ext: &eDataPartitionStorageOptions_maximumSize})
+var sDataPartitionStorageOptions_storageLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageLocation", ID: &i_StorageLocation, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDataPartitionStorageOptions_storageLocation})
+var sDataPartitionStorageOptions_minimumTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumTimeToLive", ID: &iStorageMinimumTimeToLive, Members: &mStorageMinimumTimeToLive, Type: smithy.ShapeTypeStructure, Ext: &eDataPartitionStorageOptions_minimumTimeToLive})
+var sDataPartitionUploadOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPartitionUploadOptions, Members: &mDataPartitionUploadOptions, Type: smithy.ShapeTypeStructure, Ext: &eDataPartitionUploadOptions})
+var sDataPartitionUploadOptions_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_eventExpression, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDataPartitionUploadOptions_expression})
+var sDataPartitionUploadOptions_conditionLanguageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionLanguageVersion", ID: &i_languageVersion, Type: smithy.ShapeTypeInteger, Ext: &eDataPartitionUploadOptions_conditionLanguageVersion})
+var s_decoderManifestSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_decoderManifestSummaries, Members: &m_decoderManifestSummaries, Type: smithy.ShapeTypeList, Ext: &e_decoderManifestSummaries})
+var s_decoderManifestSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDecoderManifestSummary, Members: &mDecoderManifestSummary, Type: smithy.ShapeTypeStructure, Ext: &e_decoderManifestSummaries_member})
+var sDecoderManifestSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecoderManifestSummary, Members: &mDecoderManifestSummary, Type: smithy.ShapeTypeStructure, Ext: &eDecoderManifestSummary})
+var sDecoderManifestSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDecoderManifestSummary_name})
+var sDecoderManifestSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDecoderManifestSummary_arn})
+var sDecoderManifestSummary_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDecoderManifestSummary_modelManifestArn})
+var sDecoderManifestSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eDecoderManifestSummary_description})
+var sDecoderManifestSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManifestStatus, Members: &mManifestStatus, Type: smithy.ShapeTypeEnum, Ext: &eDecoderManifestSummary_status})
+var sDecoderManifestSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDecoderManifestSummary_creationTime})
+var sDecoderManifestSummary_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDecoderManifestSummary_lastModificationTime})
+var sDecoderManifestSummary_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eDecoderManifestSummary_message})
+var sDecoderManifestValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecoderManifestValidationException, Members: &mDecoderManifestValidationException, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eDecoderManifestValidationException})
+var sDecoderManifestValidationException_invalidSignals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidSignals", ID: &i_InvalidSignalDecoders, Members: &m_InvalidSignalDecoders, Type: smithy.ShapeTypeList, Ext: &eDecoderManifestValidationException_invalidSignals})
+var sDecoderManifestValidationException_invalidNetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidNetworkInterfaces", ID: &i_InvalidNetworkInterfaces, Members: &m_InvalidNetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eDecoderManifestValidationException_invalidNetworkInterfaces})
+var sDecoderManifestValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDecoderManifestValidationException_message})
+var sDefaultForUnmappedSignalsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultForUnmappedSignalsType, Members: &mDefaultForUnmappedSignalsType, Type: smithy.ShapeTypeEnum, Ext: &eDefaultForUnmappedSignalsType})
+var sDefaultForUnmappedSignalsType_CUSTOM_DECODING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_DECODING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultForUnmappedSignalsType_CUSTOM_DECODING})
+var s_description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_description, Type: smithy.ShapeTypeString, Ext: &e_description})
+var sDiagnosticsMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiagnosticsMode, Members: &mDiagnosticsMode, Type: smithy.ShapeTypeEnum, Ext: &eDiagnosticsMode})
+var sDiagnosticsMode_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDiagnosticsMode_OFF})
+var sDiagnosticsMode_SEND_ACTIVE_DTCS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND_ACTIVE_DTCS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDiagnosticsMode_SEND_ACTIVE_DTCS})
+var s_double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &e_double})
+var sEncryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionStatus, Members: &mEncryptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionStatus})
+var sEncryptionStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionStatus_PENDING})
+var sEncryptionStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionStatus_SUCCESS})
+var sEncryptionStatus_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionStatus_FAILURE})
+var sEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionType})
+var sEncryptionType_KMS_BASED_ENCRYPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_BASED_ENCRYPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionType_KMS_BASED_ENCRYPTION})
+var sEncryptionType_FLEETWISE_DEFAULT_ENCRYPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLEETWISE_DEFAULT_ENCRYPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionType_FLEETWISE_DEFAULT_ENCRYPTION})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var s_eventExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventExpression, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &e_eventExpression})
+var s_EventExpressionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventExpressionList, Members: &m_EventExpressionList, Type: smithy.ShapeTypeList, Ext: &e_EventExpressionList})
+var s_EventExpressionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_actionEventExpression, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &e_EventExpressionList_member})
+var s_fetchConfigEventExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fetchConfigEventExpression, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &e_fetchConfigEventExpression})
+var s_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &e_fleetId})
+var s_fleets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fleets, Members: &m_fleets, Type: smithy.ShapeTypeList, Ext: &e_fleets})
+var s_fleets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &e_fleets_member})
+var s_fleetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fleetSummaries, Members: &m_fleetSummaries, Type: smithy.ShapeTypeList, Ext: &e_fleetSummaries})
+var s_fleetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFleetSummary, Members: &mFleetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_fleetSummaries_member})
+var sFleetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetSummary, Members: &mFleetSummary, Type: smithy.ShapeTypeStructure, Ext: &eFleetSummary})
+var sFleetSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &eFleetSummary_id})
+var sFleetSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eFleetSummary_arn})
+var sFleetSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eFleetSummary_description})
+var sFleetSummary_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eFleetSummary_signalCatalogArn})
+var sFleetSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFleetSummary_creationTime})
+var sFleetSummary_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFleetSummary_lastModificationTime})
+var sFormattedVss = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormattedVss, Members: &mFormattedVss, Type: smithy.ShapeTypeUnion, Ext: &eFormattedVss})
+var sFormattedVss_vssJson = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vssJson", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormattedVss_vssJson})
+var s_Fqns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Fqns, Members: &m_Fqns, Type: smithy.ShapeTypeList, Ext: &e_Fqns})
+var s_Fqns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FullyQualifiedName, Type: smithy.ShapeTypeString, Ext: &e_Fqns_member})
+var s_FullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FullyQualifiedName, Type: smithy.ShapeTypeString, Ext: &e_FullyQualifiedName})
+var sIamRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamRegistrationResponse, Members: &mIamRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eIamRegistrationResponse})
+var sIamRegistrationResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eIamRegistrationResponse_roleArn})
+var sIamRegistrationResponse_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eIamRegistrationResponse_registrationStatus})
+var sIamRegistrationResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eIamRegistrationResponse_errorMessage})
+var sIamResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamResources, Members: &mIamResources, Type: smithy.ShapeTypeStructure, Ext: &eIamResources})
+var sIamResources_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString, Ext: &eIamResources_roleArn})
+var s_IAMRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IAMRoleArn})
+var s_InterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InterfaceId, Type: smithy.ShapeTypeString, Ext: &e_InterfaceId})
+var s_InterfaceIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InterfaceIds, Members: &m_InterfaceIds, Type: smithy.ShapeTypeList, Ext: &e_InterfaceIds})
+var s_InterfaceIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InterfaceId, Type: smithy.ShapeTypeString, Ext: &e_InterfaceIds_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t62, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sInvalidNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNetworkInterface, Members: &mInvalidNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNetworkInterface})
+var sInvalidNetworkInterface_interfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interfaceId", ID: &i_InterfaceId, Type: smithy.ShapeTypeString, Ext: &eInvalidNetworkInterface_interfaceId})
+var sInvalidNetworkInterface_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iNetworkInterfaceFailureReason, Members: &mNetworkInterfaceFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eInvalidNetworkInterface_reason})
+var s_InvalidNetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvalidNetworkInterfaces, Members: &m_InvalidNetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &e_InvalidNetworkInterfaces})
+var s_InvalidNetworkInterfaces_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvalidNetworkInterface, Members: &mInvalidNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &e_InvalidNetworkInterfaces_member})
+var sInvalidNodeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNodeException, Members: &mInvalidNodeException, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNodeException})
+var sInvalidNodeException_invalidNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidNodes", ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &eInvalidNodeException_invalidNodes})
+var sInvalidNodeException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidNodeException_reason})
+var sInvalidNodeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidNodeException_message})
+var sInvalidSignal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSignal, Members: &mInvalidSignal, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSignal})
+var sInvalidSignal_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FullyQualifiedName, Type: smithy.ShapeTypeString, Ext: &eInvalidSignal_name})
+var sInvalidSignal_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidSignal_reason})
+var sInvalidSignalDecoder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSignalDecoder, Members: &mInvalidSignalDecoder, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSignalDecoder})
+var sInvalidSignalDecoder_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FullyQualifiedName, Type: smithy.ShapeTypeString, Ext: &eInvalidSignalDecoder_name})
+var sInvalidSignalDecoder_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iSignalDecoderFailureReason, Members: &mSignalDecoderFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eInvalidSignalDecoder_reason})
+var sInvalidSignalDecoder_hint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hint", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eInvalidSignalDecoder_hint})
+var s_InvalidSignalDecoders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvalidSignalDecoders, Members: &m_InvalidSignalDecoders, Type: smithy.ShapeTypeList, Ext: &e_InvalidSignalDecoders})
+var s_InvalidSignalDecoders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvalidSignalDecoder, Members: &mInvalidSignalDecoder, Type: smithy.ShapeTypeStructure, Ext: &e_InvalidSignalDecoders_member})
+var s_InvalidSignals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvalidSignals, Members: &m_InvalidSignals, Type: smithy.ShapeTypeList, Ext: &e_InvalidSignals})
+var s_InvalidSignals_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvalidSignal, Members: &mInvalidSignal, Type: smithy.ShapeTypeStructure, Ext: &e_InvalidSignals_member})
+var sInvalidSignalsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSignalsException, Members: &mInvalidSignalsException, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSignalsException})
+var sInvalidSignalsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidSignalsException_message})
+var sInvalidSignalsException_invalidSignals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidSignals", ID: &i_InvalidSignals, Members: &m_InvalidSignals, Type: smithy.ShapeTypeList, Ext: &eInvalidSignalsException_invalidSignals})
+var s_languageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_languageVersion, Type: smithy.ShapeTypeInteger, Ext: &e_languageVersion})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sLimitExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_resourceId})
+var sLimitExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_resourceType})
+var s_listOfStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_listOfStrings, Members: &m_listOfStrings, Type: smithy.ShapeTypeList, Ext: &e_listOfStrings})
+var s_listOfStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_listOfStrings_member})
+var sListResponseScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResponseScope, Members: &mListResponseScope, Type: smithy.ShapeTypeEnum, Ext: &eListResponseScope})
+var sListResponseScope_METADATA_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METADATA_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListResponseScope_METADATA_ONLY})
+var s_listVehiclesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_listVehiclesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_listVehiclesMaxResults})
+var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogType})
+var sLogType_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_OFF})
+var sLogType_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_ERROR})
+var sManifestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestStatus, Members: &mManifestStatus, Type: smithy.ShapeTypeEnum, Ext: &eManifestStatus})
+var sManifestStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestStatus_ACTIVE})
+var sManifestStatus_DRAFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestStatus_DRAFT})
+var sManifestStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestStatus_INVALID})
+var sManifestStatus_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestStatus_VALIDATING})
+var s_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &e_maxResults})
+var s_maxSampleCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxSampleCount, Type: smithy.ShapeTypeLong, Ext: &e_maxSampleCount})
+var s_maxStringSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxStringSize, Type: smithy.ShapeTypeLong, Ext: &e_maxStringSize})
+var s_message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_message, Type: smithy.ShapeTypeString, Ext: &e_message})
+var sMessageSignal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageSignal, Members: &mMessageSignal, Type: smithy.ShapeTypeStructure, Ext: &eMessageSignal})
+var sMessageSignal_topicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topicName", ID: &i_TopicName, Type: smithy.ShapeTypeString, Ext: &eMessageSignal_topicName})
+var sMessageSignal_structuredMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structuredMessage", ID: &iStructuredMessage, Members: &mStructuredMessage, Type: smithy.ShapeTypeUnion, Ext: &eMessageSignal_structuredMessage})
+var s_modelManifestSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_modelManifestSummaries, Members: &m_modelManifestSummaries, Type: smithy.ShapeTypeList, Ext: &e_modelManifestSummaries})
+var s_modelManifestSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelManifestSummary, Members: &mModelManifestSummary, Type: smithy.ShapeTypeStructure, Ext: &e_modelManifestSummaries_member})
+var sModelManifestSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelManifestSummary, Members: &mModelManifestSummary, Type: smithy.ShapeTypeStructure, Ext: &eModelManifestSummary})
+var sModelManifestSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eModelManifestSummary_name})
+var sModelManifestSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eModelManifestSummary_arn})
+var sModelManifestSummary_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eModelManifestSummary_signalCatalogArn})
+var sModelManifestSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eModelManifestSummary_description})
+var sModelManifestSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManifestStatus, Members: &mManifestStatus, Type: smithy.ShapeTypeEnum, Ext: &eModelManifestSummary_status})
+var sModelManifestSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eModelManifestSummary_creationTime})
+var sModelManifestSummary_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eModelManifestSummary_lastModificationTime})
+var s_ModelSignalsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelSignalsMap, Members: &m_ModelSignalsMap, Type: smithy.ShapeTypeMap, Ext: &e_ModelSignalsMap})
+var s_ModelSignalsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_ModelSignalsMap_key})
+var s_ModelSignalsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_ModelSignalsMap_value})
+var s_MqttTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MqttTopicArn, Type: smithy.ShapeTypeString, Ext: &e_MqttTopicArn})
+var sMqttTopicConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMqttTopicConfig, Members: &mMqttTopicConfig, Type: smithy.ShapeTypeStructure, Ext: &eMqttTopicConfig})
+var sMqttTopicConfig_mqttTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mqttTopicArn", ID: &i_MqttTopicArn, Type: smithy.ShapeTypeString, Ext: &eMqttTopicConfig_mqttTopicArn})
+var sMqttTopicConfig_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString, Ext: &eMqttTopicConfig_executionRoleArn})
+var s_NetworkFileBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFileBlob, Type: smithy.ShapeTypeBlob, Ext: &e_NetworkFileBlob})
+var sNetworkFileDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFileDefinition, Members: &mNetworkFileDefinition, Type: smithy.ShapeTypeUnion, Ext: &eNetworkFileDefinition})
+var sNetworkFileDefinition_canDbc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canDbc", ID: &iCanDbcDefinition, Members: &mCanDbcDefinition, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFileDefinition_canDbc})
+var s_NetworkFileDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFileDefinitions, Members: &m_NetworkFileDefinitions, Type: smithy.ShapeTypeList, Ext: &e_NetworkFileDefinitions})
+var s_NetworkFileDefinitions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkFileDefinition, Members: &mNetworkFileDefinition, Type: smithy.ShapeTypeUnion, Ext: &e_NetworkFileDefinitions_member})
+var s_NetworkFilesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFilesList, Members: &m_NetworkFilesList, Type: smithy.ShapeTypeList, Ext: &e_NetworkFilesList})
+var s_NetworkFilesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkFileBlob, Type: smithy.ShapeTypeBlob, Ext: &e_NetworkFilesList_member})
+var sNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface})
+var sNetworkInterface_interfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interfaceId", ID: &i_InterfaceId, Type: smithy.ShapeTypeString, Ext: &eNetworkInterface_interfaceId})
+var sNetworkInterface_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iNetworkInterfaceType, Members: &mNetworkInterfaceType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkInterface_type})
+var sNetworkInterface_canInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canInterface", ID: &iCanInterface, Members: &mCanInterface, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface_canInterface})
+var sNetworkInterface_obdInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "obdInterface", ID: &iObdInterface, Members: &mObdInterface, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface_obdInterface})
+var sNetworkInterface_vehicleMiddleware = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleMiddleware", ID: &iVehicleMiddleware, Members: &mVehicleMiddleware, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface_vehicleMiddleware})
+var sNetworkInterface_customDecodingInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customDecodingInterface", ID: &iCustomDecodingInterface, Members: &mCustomDecodingInterface, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface_customDecodingInterface})
+var sNetworkInterfaceFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterfaceFailureReason, Members: &mNetworkInterfaceFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eNetworkInterfaceFailureReason})
+var sNetworkInterfaceFailureReason_DUPLICATE_INTERFACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_INTERFACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_DUPLICATE_INTERFACE})
+var sNetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICTING_NETWORK_INTERFACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE})
+var sNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS})
+var sNetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAN_NETWORK_INTERFACE_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL})
+var sNetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBD_NETWORK_INTERFACE_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL})
+var sNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS})
+var sNetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL})
+var sNetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL})
+var s_NetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &e_NetworkInterfaces})
+var s_NetworkInterfaces_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &e_NetworkInterfaces_member})
+var sNetworkInterfaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterfaceType, Members: &mNetworkInterfaceType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkInterfaceType})
+var sNetworkInterfaceType_CAN_INTERFACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAN_INTERFACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceType_CAN_INTERFACE})
+var sNetworkInterfaceType_OBD_INTERFACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBD_INTERFACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceType_OBD_INTERFACE})
+var sNetworkInterfaceType_VEHICLE_MIDDLEWARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VEHICLE_MIDDLEWARE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceType_VEHICLE_MIDDLEWARE})
+var sNetworkInterfaceType_CUSTOM_DECODING_INTERFACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_DECODING_INTERFACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterfaceType_CUSTOM_DECODING_INTERFACE})
+var s_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &e_nextToken})
+var sNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNode, Members: &mNode, Type: smithy.ShapeTypeUnion, Ext: &eNode})
+var sNode_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &iBranch, Members: &mBranch, Type: smithy.ShapeTypeStructure, Ext: &eNode_branch})
+var sNode_sensor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sensor", ID: &iSensor, Members: &mSensor, Type: smithy.ShapeTypeStructure, Ext: &eNode_sensor})
+var sNode_actuator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actuator", ID: &iActuator, Members: &mActuator, Type: smithy.ShapeTypeStructure, Ext: &eNode_actuator})
+var sNode_attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attribute", ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure, Ext: &eNode_attribute})
+var sNode_struct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "struct", ID: &iCustomStruct, Members: &mCustomStruct, Type: smithy.ShapeTypeStructure, Ext: &eNode_struct})
+var sNode_property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "property", ID: &iCustomProperty, Members: &mCustomProperty, Type: smithy.ShapeTypeStructure, Ext: &eNode_property})
+var sNodeCounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeCounts, Members: &mNodeCounts, Type: smithy.ShapeTypeStructure, Ext: &eNodeCounts})
+var sNodeCounts_totalNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalNodes", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eNodeCounts_totalNodes})
+var sNodeCounts_totalBranches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalBranches", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eNodeCounts_totalBranches})
+var sNodeCounts_totalSensors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalSensors", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eNodeCounts_totalSensors})
+var sNodeCounts_totalAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalAttributes", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eNodeCounts_totalAttributes})
+var sNodeCounts_totalActuators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalActuators", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eNodeCounts_totalActuators})
+var sNodeCounts_totalStructs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalStructs", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eNodeCounts_totalStructs})
+var sNodeCounts_totalProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalProperties", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eNodeCounts_totalProperties})
+var sNodeDataEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeDataEncoding, Members: &mNodeDataEncoding, Type: smithy.ShapeTypeEnum, Ext: &eNodeDataEncoding})
+var sNodeDataEncoding_BINARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataEncoding_BINARY})
+var sNodeDataEncoding_TYPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TYPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataEncoding_TYPED})
+var sNodeDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeDataType, Members: &mNodeDataType, Type: smithy.ShapeTypeEnum, Ext: &eNodeDataType})
+var sNodeDataType_INT8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT8})
+var sNodeDataType_UINT8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT8})
+var sNodeDataType_INT16 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT16", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT16})
+var sNodeDataType_UINT16 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT16", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT16})
+var sNodeDataType_INT32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT32})
+var sNodeDataType_UINT32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT32})
+var sNodeDataType_INT64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT64})
+var sNodeDataType_UINT64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT64})
+var sNodeDataType_BOOLEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOLEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_BOOLEAN})
+var sNodeDataType_FLOAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_FLOAT})
+var sNodeDataType_DOUBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOUBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_DOUBLE})
+var sNodeDataType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_STRING})
+var sNodeDataType_UNIX_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIX_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UNIX_TIMESTAMP})
+var sNodeDataType_INT8_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT8_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT8_ARRAY})
+var sNodeDataType_UINT8_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT8_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT8_ARRAY})
+var sNodeDataType_INT16_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT16_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT16_ARRAY})
+var sNodeDataType_UINT16_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT16_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT16_ARRAY})
+var sNodeDataType_INT32_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT32_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT32_ARRAY})
+var sNodeDataType_UINT32_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT32_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT32_ARRAY})
+var sNodeDataType_INT64_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT64_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_INT64_ARRAY})
+var sNodeDataType_UINT64_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT64_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UINT64_ARRAY})
+var sNodeDataType_BOOLEAN_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOLEAN_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_BOOLEAN_ARRAY})
+var sNodeDataType_FLOAT_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_FLOAT_ARRAY})
+var sNodeDataType_DOUBLE_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOUBLE_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_DOUBLE_ARRAY})
+var sNodeDataType_STRING_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_STRING_ARRAY})
+var sNodeDataType_UNIX_TIMESTAMP_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIX_TIMESTAMP_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UNIX_TIMESTAMP_ARRAY})
+var sNodeDataType_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_UNKNOWN})
+var sNodeDataType_STRUCT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRUCT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_STRUCT})
+var sNodeDataType_STRUCT_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRUCT_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeDataType_STRUCT_ARRAY})
+var s_NodePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &e_NodePath})
+var s_NodePaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodePaths, Members: &m_NodePaths, Type: smithy.ShapeTypeList, Ext: &e_NodePaths})
+var s_NodePaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &e_NodePaths_member})
+var s_Nodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &e_Nodes})
+var s_Nodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNode, Members: &mNode, Type: smithy.ShapeTypeUnion, Ext: &e_Nodes_member})
+var s_nonNegativeInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &e_nonNegativeInteger})
+var s_number = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &e_number})
+var s_ObdBitmaskLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObdBitmaskLength, Type: smithy.ShapeTypeInteger, Ext: &e_ObdBitmaskLength})
+var s_ObdByteLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObdByteLength, Type: smithy.ShapeTypeInteger, Ext: &e_ObdByteLength})
+var sObdInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObdInterface, Members: &mObdInterface, Type: smithy.ShapeTypeStructure, Ext: &eObdInterface})
+var sObdInterface_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ObdInterfaceName, Type: smithy.ShapeTypeString, Ext: &eObdInterface_name})
+var sObdInterface_requestMessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMessageId", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdInterface_requestMessageId})
+var sObdInterface_obdStandard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "obdStandard", ID: &i_ObdStandard, Type: smithy.ShapeTypeString, Ext: &eObdInterface_obdStandard})
+var sObdInterface_pidRequestIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pidRequestIntervalSeconds", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdInterface_pidRequestIntervalSeconds})
+var sObdInterface_dtcRequestIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dtcRequestIntervalSeconds", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdInterface_dtcRequestIntervalSeconds})
+var sObdInterface_useExtendedIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useExtendedIds", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eObdInterface_useExtendedIds})
+var sObdInterface_hasTransmissionEcu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasTransmissionEcu", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eObdInterface_hasTransmissionEcu})
+var s_ObdInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObdInterfaceName, Type: smithy.ShapeTypeString, Ext: &e_ObdInterfaceName})
+var sObdSignal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObdSignal, Members: &mObdSignal, Type: smithy.ShapeTypeStructure, Ext: &eObdSignal})
+var sObdSignal_pidResponseLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pidResponseLength", ID: &i_positiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdSignal_pidResponseLength})
+var sObdSignal_serviceMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceMode", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdSignal_serviceMode})
+var sObdSignal_pid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pid", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdSignal_pid})
+var sObdSignal_scaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaling", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eObdSignal_scaling})
+var sObdSignal_offset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offset", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eObdSignal_offset})
+var sObdSignal_startByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startByte", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdSignal_startByte})
+var sObdSignal_byteLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteLength", ID: &i_ObdByteLength, Type: smithy.ShapeTypeInteger, Ext: &eObdSignal_byteLength})
+var sObdSignal_bitRightShift = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bitRightShift", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eObdSignal_bitRightShift})
+var sObdSignal_bitMaskLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bitMaskLength", ID: &i_ObdBitmaskLength, Type: smithy.ShapeTypeInteger, Ext: &eObdSignal_bitMaskLength})
+var sObdSignal_isSigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSigned", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eObdSignal_isSigned})
+var sObdSignal_signalValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalValueType", ID: &iSignalValueType, Members: &mSignalValueType, Type: smithy.ShapeTypeEnum, Ext: &eObdSignal_signalValueType})
+var s_ObdStandard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObdStandard, Type: smithy.ShapeTypeString, Ext: &e_ObdStandard})
+var sOnChangeStateTemplateUpdateStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOnChangeStateTemplateUpdateStrategy, Type: smithy.ShapeTypeStructure, Ext: &eOnChangeStateTemplateUpdateStrategy})
+var sPeriodicStateTemplateUpdateStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeriodicStateTemplateUpdateStrategy, Members: &mPeriodicStateTemplateUpdateStrategy, Type: smithy.ShapeTypeStructure, Ext: &ePeriodicStateTemplateUpdateStrategy})
+var sPeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplateUpdateRate", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ePeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate})
+var s_positiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_positiveInteger, Type: smithy.ShapeTypeInteger, Ext: &e_positiveInteger})
+var s_positiveLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_positiveLong, Type: smithy.ShapeTypeLong, Ext: &e_positiveLong})
+var s_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &e_Prefix})
+var sPrimitiveMessageDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrimitiveMessageDefinition, Members: &mPrimitiveMessageDefinition, Type: smithy.ShapeTypeUnion, Ext: &ePrimitiveMessageDefinition})
+var sPrimitiveMessageDefinition_ros2PrimitiveMessageDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ros2PrimitiveMessageDefinition", ID: &iROS2PrimitiveMessageDefinition, Members: &mROS2PrimitiveMessageDefinition, Type: smithy.ShapeTypeStructure, Ext: &ePrimitiveMessageDefinition_ros2PrimitiveMessageDefinition})
+var s_priority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_priority, Type: smithy.ShapeTypeInteger, Ext: &e_priority})
+var s_ProtocolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolName, Type: smithy.ShapeTypeString, Ext: &e_ProtocolName})
+var s_ProtocolVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolVersion, Type: smithy.ShapeTypeString, Ext: &e_ProtocolVersion})
+var sRegistrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eRegistrationStatus})
+var sRegistrationStatus_REGISTRATION_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTRATION_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistrationStatus_REGISTRATION_PENDING})
+var sRegistrationStatus_REGISTRATION_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTRATION_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistrationStatus_REGISTRATION_SUCCESS})
+var sRegistrationStatus_REGISTRATION_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTRATION_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistrationStatus_REGISTRATION_FAILURE})
+var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ResourceIdentifier})
+var s_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &e_resourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_ResourceUniqueId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceUniqueId, Type: smithy.ShapeTypeString, Ext: &e_ResourceUniqueId})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RetryAfterSeconds})
+var sROS2PrimitiveMessageDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iROS2PrimitiveMessageDefinition, Members: &mROS2PrimitiveMessageDefinition, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveMessageDefinition})
+var sROS2PrimitiveMessageDefinition_primitiveType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primitiveType", ID: &iROS2PrimitiveType, Members: &mROS2PrimitiveType, Type: smithy.ShapeTypeEnum, Ext: &eROS2PrimitiveMessageDefinition_primitiveType})
+var sROS2PrimitiveMessageDefinition_offset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offset", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eROS2PrimitiveMessageDefinition_offset})
+var sROS2PrimitiveMessageDefinition_scaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaling", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eROS2PrimitiveMessageDefinition_scaling})
+var sROS2PrimitiveMessageDefinition_upperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upperBound", ID: &i_maxStringSize, Type: smithy.ShapeTypeLong, Ext: &eROS2PrimitiveMessageDefinition_upperBound})
+var sROS2PrimitiveType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iROS2PrimitiveType, Members: &mROS2PrimitiveType, Type: smithy.ShapeTypeEnum, Ext: &eROS2PrimitiveType})
+var sROS2PrimitiveType_BOOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_BOOL})
+var sROS2PrimitiveType_BYTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_BYTE})
+var sROS2PrimitiveType_CHAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_CHAR})
+var sROS2PrimitiveType_FLOAT32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_FLOAT32})
+var sROS2PrimitiveType_FLOAT64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_FLOAT64})
+var sROS2PrimitiveType_INT8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_INT8})
+var sROS2PrimitiveType_UINT8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_UINT8})
+var sROS2PrimitiveType_INT16 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT16", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_INT16})
+var sROS2PrimitiveType_UINT16 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT16", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_UINT16})
+var sROS2PrimitiveType_INT32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_INT32})
+var sROS2PrimitiveType_UINT32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_UINT32})
+var sROS2PrimitiveType_INT64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_INT64})
+var sROS2PrimitiveType_UINT64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UINT64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_UINT64})
+var sROS2PrimitiveType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_STRING})
+var sROS2PrimitiveType_WSTRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WSTRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eROS2PrimitiveType_WSTRING})
+var s_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &e_S3BucketArn})
+var sS3Config = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eS3Config})
+var sS3Config_bucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eS3Config_bucketArn})
+var sS3Config_dataFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataFormat", ID: &iDataFormat, Members: &mDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eS3Config_dataFormat})
+var sS3Config_storageCompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageCompressionFormat", ID: &iStorageCompressionFormat, Members: &mStorageCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eS3Config_storageCompressionFormat})
+var sS3Config_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &eS3Config_prefix})
+var sSensor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSensor, Members: &mSensor, Type: smithy.ShapeTypeStructure, Ext: &eSensor})
+var sSensor_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eSensor_fullyQualifiedName})
+var sSensor_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iNodeDataType, Members: &mNodeDataType, Type: smithy.ShapeTypeEnum, Ext: &eSensor_dataType})
+var sSensor_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eSensor_description})
+var sSensor_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eSensor_unit})
+var sSensor_allowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedValues", ID: &i_listOfStrings, Members: &m_listOfStrings, Type: smithy.ShapeTypeList, Ext: &eSensor_allowedValues})
+var sSensor_min = smithy.NewStaticSchema(smithy.StaticSchema{Member: "min", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eSensor_min})
+var sSensor_max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "max", ID: &i_double, Type: smithy.ShapeTypeDouble, Ext: &eSensor_max})
+var sSensor_deprecationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationMessage", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eSensor_deprecationMessage})
+var sSensor_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eSensor_comment})
+var sSensor_structFullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structFullyQualifiedName", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &eSensor_structFullyQualifiedName})
+var s_signalCatalogSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_signalCatalogSummaries, Members: &m_signalCatalogSummaries, Type: smithy.ShapeTypeList, Ext: &e_signalCatalogSummaries})
+var s_signalCatalogSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSignalCatalogSummary, Members: &mSignalCatalogSummary, Type: smithy.ShapeTypeStructure, Ext: &e_signalCatalogSummaries_member})
+var sSignalCatalogSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalCatalogSummary, Members: &mSignalCatalogSummary, Type: smithy.ShapeTypeStructure, Ext: &eSignalCatalogSummary})
+var sSignalCatalogSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eSignalCatalogSummary_name})
+var sSignalCatalogSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eSignalCatalogSummary_arn})
+var sSignalCatalogSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSignalCatalogSummary_creationTime})
+var sSignalCatalogSummary_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSignalCatalogSummary_lastModificationTime})
+var sSignalDecoder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalDecoder, Members: &mSignalDecoder, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoder})
+var sSignalDecoder_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_FullyQualifiedName, Type: smithy.ShapeTypeString, Ext: &eSignalDecoder_fullyQualifiedName})
+var sSignalDecoder_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSignalDecoderType, Members: &mSignalDecoderType, Type: smithy.ShapeTypeEnum, Ext: &eSignalDecoder_type})
+var sSignalDecoder_interfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interfaceId", ID: &i_InterfaceId, Type: smithy.ShapeTypeString, Ext: &eSignalDecoder_interfaceId})
+var sSignalDecoder_canSignal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canSignal", ID: &iCanSignal, Members: &mCanSignal, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoder_canSignal})
+var sSignalDecoder_obdSignal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "obdSignal", ID: &iObdSignal, Members: &mObdSignal, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoder_obdSignal})
+var sSignalDecoder_messageSignal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageSignal", ID: &iMessageSignal, Members: &mMessageSignal, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoder_messageSignal})
+var sSignalDecoder_customDecodingSignal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customDecodingSignal", ID: &iCustomDecodingSignal, Members: &mCustomDecodingSignal, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoder_customDecodingSignal})
+var sSignalDecoderFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalDecoderFailureReason, Members: &mSignalDecoderFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eSignalDecoderFailureReason})
+var sSignalDecoderFailureReason_DUPLICATE_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_DUPLICATE_SIGNAL})
+var sSignalDecoderFailureReason_CONFLICTING_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICTING_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_CONFLICTING_SIGNAL})
+var sSignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNAL_TO_ADD_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS})
+var sSignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE})
+var sSignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE})
+var sSignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNAL_NOT_IN_MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL})
+var sSignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAN_SIGNAL_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL})
+var sSignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBD_SIGNAL_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL})
+var sSignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL})
+var sSignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MESSAGE_SIGNAL_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL})
+var sSignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE})
+var sSignalDecoderFailureReason_STRUCT_SIZE_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRUCT_SIZE_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_STRUCT_SIZE_MISMATCH})
+var sSignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL})
+var sSignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG})
+var sSignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMPTY_MESSAGE_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL})
+var sSignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_DECODING_SIGNAL_INFO_IS_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL})
+var s_SignalDecoders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalDecoders, Members: &m_SignalDecoders, Type: smithy.ShapeTypeList, Ext: &e_SignalDecoders})
+var s_SignalDecoders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSignalDecoder, Members: &mSignalDecoder, Type: smithy.ShapeTypeStructure, Ext: &e_SignalDecoders_member})
+var sSignalDecoderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalDecoderType, Members: &mSignalDecoderType, Type: smithy.ShapeTypeEnum, Ext: &eSignalDecoderType})
+var sSignalDecoderType_CAN_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAN_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderType_CAN_SIGNAL})
+var sSignalDecoderType_OBD_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBD_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderType_OBD_SIGNAL})
+var sSignalDecoderType_MESSAGE_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MESSAGE_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderType_MESSAGE_SIGNAL})
+var sSignalDecoderType_CUSTOM_DECODING_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_DECODING_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalDecoderType_CUSTOM_DECODING_SIGNAL})
+var sSignalFetchConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalFetchConfig, Members: &mSignalFetchConfig, Type: smithy.ShapeTypeUnion, Ext: &eSignalFetchConfig})
+var sSignalFetchConfig_timeBased = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeBased", ID: &iTimeBasedSignalFetchConfig, Members: &mTimeBasedSignalFetchConfig, Type: smithy.ShapeTypeStructure, Ext: &eSignalFetchConfig_timeBased})
+var sSignalFetchConfig_conditionBased = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionBased", ID: &iConditionBasedSignalFetchConfig, Members: &mConditionBasedSignalFetchConfig, Type: smithy.ShapeTypeStructure, Ext: &eSignalFetchConfig_conditionBased})
+var sSignalFetchInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalFetchInformation, Members: &mSignalFetchInformation, Type: smithy.ShapeTypeStructure, Ext: &eSignalFetchInformation})
+var sSignalFetchInformation_fullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullyQualifiedName", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &eSignalFetchInformation_fullyQualifiedName})
+var sSignalFetchInformation_signalFetchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalFetchConfig", ID: &iSignalFetchConfig, Members: &mSignalFetchConfig, Type: smithy.ShapeTypeUnion, Ext: &eSignalFetchInformation_signalFetchConfig})
+var sSignalFetchInformation_conditionLanguageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionLanguageVersion", ID: &i_languageVersion, Type: smithy.ShapeTypeInteger, Ext: &eSignalFetchInformation_conditionLanguageVersion})
+var sSignalFetchInformation_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_EventExpressionList, Members: &m_EventExpressionList, Type: smithy.ShapeTypeList, Ext: &eSignalFetchInformation_actions})
+var s_SignalFetchInformationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalFetchInformationList, Members: &m_SignalFetchInformationList, Traits: &t58, Type: smithy.ShapeTypeList, Ext: &e_SignalFetchInformationList})
+var s_SignalFetchInformationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSignalFetchInformation, Members: &mSignalFetchInformation, Type: smithy.ShapeTypeStructure, Ext: &e_SignalFetchInformationList_member})
+var sSignalInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalInformation, Members: &mSignalInformation, Type: smithy.ShapeTypeStructure, Ext: &eSignalInformation})
+var sSignalInformation_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_wildcardSignalName, Type: smithy.ShapeTypeString, Ext: &eSignalInformation_name})
+var sSignalInformation_maxSampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSampleCount", ID: &i_maxSampleCount, Type: smithy.ShapeTypeLong, Ext: &eSignalInformation_maxSampleCount})
+var sSignalInformation_minimumSamplingIntervalMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumSamplingIntervalMs", ID: &i_uint32, Type: smithy.ShapeTypeLong, Ext: &eSignalInformation_minimumSamplingIntervalMs})
+var sSignalInformation_dataPartitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPartitionId", ID: &i_DataPartitionId, Type: smithy.ShapeTypeString, Ext: &eSignalInformation_dataPartitionId})
+var s_SignalInformationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalInformationList, Members: &m_SignalInformationList, Traits: &t58, Type: smithy.ShapeTypeList, Ext: &e_SignalInformationList})
+var s_SignalInformationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSignalInformation, Members: &mSignalInformation, Type: smithy.ShapeTypeStructure, Ext: &e_SignalInformationList_member})
+var sSignalNodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalNodeType, Members: &mSignalNodeType, Type: smithy.ShapeTypeEnum, Ext: &eSignalNodeType})
+var sSignalNodeType_SENSOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENSOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalNodeType_SENSOR})
+var sSignalNodeType_ACTUATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTUATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalNodeType_ACTUATOR})
+var sSignalNodeType_ATTRIBUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTRIBUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalNodeType_ATTRIBUTE})
+var sSignalNodeType_BRANCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRANCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalNodeType_BRANCH})
+var sSignalNodeType_CUSTOM_STRUCT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_STRUCT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalNodeType_CUSTOM_STRUCT})
+var sSignalNodeType_CUSTOM_PROPERTY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_PROPERTY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalNodeType_CUSTOM_PROPERTY})
+var sSignalValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalValueType, Members: &mSignalValueType, Type: smithy.ShapeTypeEnum, Ext: &eSignalValueType})
+var sSignalValueType_INTEGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTEGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalValueType_INTEGER})
+var sSignalValueType_FLOATING_POINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOATING_POINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignalValueType_FLOATING_POINT})
+var sSpoolingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpoolingMode, Members: &mSpoolingMode, Type: smithy.ShapeTypeEnum, Ext: &eSpoolingMode})
+var sSpoolingMode_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpoolingMode_OFF})
+var sSpoolingMode_TO_DISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO_DISK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpoolingMode_TO_DISK})
+var sStateTemplateAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStateTemplateAssociation, Members: &mStateTemplateAssociation, Type: smithy.ShapeTypeStructure, Ext: &eStateTemplateAssociation})
+var sStateTemplateAssociation_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eStateTemplateAssociation_identifier})
+var sStateTemplateAssociation_stateTemplateUpdateStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplateUpdateStrategy", ID: &iStateTemplateUpdateStrategy, Members: &mStateTemplateUpdateStrategy, Type: smithy.ShapeTypeUnion, Ext: &eStateTemplateAssociation_stateTemplateUpdateStrategy})
+var s_StateTemplateAssociationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateTemplateAssociationIdentifiers, Members: &m_StateTemplateAssociationIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_StateTemplateAssociationIdentifiers})
+var s_StateTemplateAssociationIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &e_StateTemplateAssociationIdentifiers_member})
+var s_StateTemplateAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &e_StateTemplateAssociations})
+var s_StateTemplateAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStateTemplateAssociation, Members: &mStateTemplateAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_StateTemplateAssociations_member})
+var s_StateTemplateDataExtraDimensionNodePathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateTemplateDataExtraDimensionNodePathList, Members: &m_StateTemplateDataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &e_StateTemplateDataExtraDimensionNodePathList})
+var s_StateTemplateDataExtraDimensionNodePathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &e_StateTemplateDataExtraDimensionNodePathList_member})
+var s_StateTemplateMetadataExtraDimensionNodePathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateTemplateMetadataExtraDimensionNodePathList, Members: &m_StateTemplateMetadataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &e_StateTemplateMetadataExtraDimensionNodePathList})
+var s_StateTemplateMetadataExtraDimensionNodePathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &e_StateTemplateMetadataExtraDimensionNodePathList_member})
+var s_StateTemplateProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateTemplateProperties, Members: &m_StateTemplateProperties, Type: smithy.ShapeTypeList, Ext: &e_StateTemplateProperties})
+var s_StateTemplateProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NodePath, Type: smithy.ShapeTypeString, Ext: &e_StateTemplateProperties_member})
+var s_StateTemplateSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateTemplateSummaries, Members: &m_StateTemplateSummaries, Type: smithy.ShapeTypeList, Ext: &e_StateTemplateSummaries})
+var s_StateTemplateSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStateTemplateSummary, Members: &mStateTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &e_StateTemplateSummaries_member})
+var sStateTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStateTemplateSummary, Members: &mStateTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &eStateTemplateSummary})
+var sStateTemplateSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eStateTemplateSummary_name})
+var sStateTemplateSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eStateTemplateSummary_arn})
+var sStateTemplateSummary_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eStateTemplateSummary_signalCatalogArn})
+var sStateTemplateSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eStateTemplateSummary_description})
+var sStateTemplateSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStateTemplateSummary_creationTime})
+var sStateTemplateSummary_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStateTemplateSummary_lastModificationTime})
+var sStateTemplateSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceUniqueId, Type: smithy.ShapeTypeString, Ext: &eStateTemplateSummary_id})
+var sStateTemplateUpdateStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStateTemplateUpdateStrategy, Members: &mStateTemplateUpdateStrategy, Type: smithy.ShapeTypeUnion, Ext: &eStateTemplateUpdateStrategy})
+var sStateTemplateUpdateStrategy_periodic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "periodic", ID: &iPeriodicStateTemplateUpdateStrategy, Members: &mPeriodicStateTemplateUpdateStrategy, Type: smithy.ShapeTypeStructure, Ext: &eStateTemplateUpdateStrategy_periodic})
+var sStateTemplateUpdateStrategy_onChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onChange", ID: &iOnChangeStateTemplateUpdateStrategy, Type: smithy.ShapeTypeStructure, Ext: &eStateTemplateUpdateStrategy_onChange})
+var s_statusStr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_statusStr, Type: smithy.ShapeTypeString, Ext: &e_statusStr})
+var sStorageCompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageCompressionFormat, Members: &mStorageCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eStorageCompressionFormat})
+var sStorageCompressionFormat_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageCompressionFormat_NONE})
+var sStorageCompressionFormat_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageCompressionFormat_GZIP})
+var s_StorageLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageLocation, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &e_StorageLocation})
+var sStorageMaximumSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageMaximumSize, Members: &mStorageMaximumSize, Type: smithy.ShapeTypeStructure, Ext: &eStorageMaximumSize})
+var sStorageMaximumSize_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iStorageMaximumSizeUnit, Members: &mStorageMaximumSizeUnit, Type: smithy.ShapeTypeEnum, Ext: &eStorageMaximumSize_unit})
+var sStorageMaximumSize_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StorageMaximumSizeValue, Type: smithy.ShapeTypeInteger, Ext: &eStorageMaximumSize_value})
+var sStorageMaximumSizeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageMaximumSizeUnit, Members: &mStorageMaximumSizeUnit, Type: smithy.ShapeTypeEnum, Ext: &eStorageMaximumSizeUnit})
+var sStorageMaximumSizeUnit_MB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMaximumSizeUnit_MB})
+var sStorageMaximumSizeUnit_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMaximumSizeUnit_GB})
+var sStorageMaximumSizeUnit_TB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMaximumSizeUnit_TB})
+var s_StorageMaximumSizeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageMaximumSizeValue, Type: smithy.ShapeTypeInteger, Ext: &e_StorageMaximumSizeValue})
+var sStorageMinimumTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageMinimumTimeToLive, Members: &mStorageMinimumTimeToLive, Type: smithy.ShapeTypeStructure, Ext: &eStorageMinimumTimeToLive})
+var sStorageMinimumTimeToLive_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iStorageMinimumTimeToLiveUnit, Members: &mStorageMinimumTimeToLiveUnit, Type: smithy.ShapeTypeEnum, Ext: &eStorageMinimumTimeToLive_unit})
+var sStorageMinimumTimeToLive_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StorageMinimumTimeToLiveValue, Type: smithy.ShapeTypeInteger, Ext: &eStorageMinimumTimeToLive_value})
+var sStorageMinimumTimeToLiveUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageMinimumTimeToLiveUnit, Members: &mStorageMinimumTimeToLiveUnit, Type: smithy.ShapeTypeEnum, Ext: &eStorageMinimumTimeToLiveUnit})
+var sStorageMinimumTimeToLiveUnit_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMinimumTimeToLiveUnit_HOURS})
+var sStorageMinimumTimeToLiveUnit_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMinimumTimeToLiveUnit_DAYS})
+var sStorageMinimumTimeToLiveUnit_WEEKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMinimumTimeToLiveUnit_WEEKS})
+var s_StorageMinimumTimeToLiveValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageMinimumTimeToLiveValue, Type: smithy.ShapeTypeInteger, Ext: &e_StorageMinimumTimeToLiveValue})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_string})
+var sStructuredMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructuredMessage, Members: &mStructuredMessage, Type: smithy.ShapeTypeUnion, Ext: &eStructuredMessage})
+var sStructuredMessage_primitiveMessageDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primitiveMessageDefinition", ID: &iPrimitiveMessageDefinition, Members: &mPrimitiveMessageDefinition, Type: smithy.ShapeTypeUnion, Ext: &eStructuredMessage_primitiveMessageDefinition})
+var sStructuredMessage_structuredMessageListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structuredMessageListDefinition", ID: &iStructuredMessageListDefinition, Members: &mStructuredMessageListDefinition, Type: smithy.ShapeTypeStructure, Ext: &eStructuredMessage_structuredMessageListDefinition})
+var sStructuredMessage_structuredMessageDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structuredMessageDefinition", ID: &i_StructuredMessageDefinition, Members: &m_StructuredMessageDefinition, Type: smithy.ShapeTypeList, Ext: &eStructuredMessage_structuredMessageDefinition})
+var s_StructuredMessageDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StructuredMessageDefinition, Members: &m_StructuredMessageDefinition, Type: smithy.ShapeTypeList, Ext: &e_StructuredMessageDefinition})
+var s_StructuredMessageDefinition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStructuredMessageFieldNameAndDataTypePair, Members: &mStructuredMessageFieldNameAndDataTypePair, Type: smithy.ShapeTypeStructure, Ext: &e_StructuredMessageDefinition_member})
+var sStructuredMessageFieldNameAndDataTypePair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructuredMessageFieldNameAndDataTypePair, Members: &mStructuredMessageFieldNameAndDataTypePair, Type: smithy.ShapeTypeStructure, Ext: &eStructuredMessageFieldNameAndDataTypePair})
+var sStructuredMessageFieldNameAndDataTypePair_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_StructureMessageName, Type: smithy.ShapeTypeString, Ext: &eStructuredMessageFieldNameAndDataTypePair_fieldName})
+var sStructuredMessageFieldNameAndDataTypePair_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iStructuredMessage, Type: smithy.ShapeTypeUnion, Ext: &eStructuredMessageFieldNameAndDataTypePair_dataType})
+var sStructuredMessageListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructuredMessageListDefinition, Members: &mStructuredMessageListDefinition, Type: smithy.ShapeTypeStructure, Ext: &eStructuredMessageListDefinition})
+var sStructuredMessageListDefinition_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StructureMessageName, Type: smithy.ShapeTypeString, Ext: &eStructuredMessageListDefinition_name})
+var sStructuredMessageListDefinition_memberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberType", ID: &iStructuredMessage, Type: smithy.ShapeTypeUnion, Ext: &eStructuredMessageListDefinition_memberType})
+var sStructuredMessageListDefinition_listType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listType", ID: &iStructuredMessageListType, Members: &mStructuredMessageListType, Type: smithy.ShapeTypeEnum, Ext: &eStructuredMessageListDefinition_listType})
+var sStructuredMessageListDefinition_capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacity", ID: &i_nonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eStructuredMessageListDefinition_capacity})
+var sStructuredMessageListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructuredMessageListType, Members: &mStructuredMessageListType, Type: smithy.ShapeTypeEnum, Ext: &eStructuredMessageListType})
+var sStructuredMessageListType_FIXED_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIXED_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStructuredMessageListType_FIXED_CAPACITY})
+var sStructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMIC_UNBOUNDED_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY})
+var sStructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMIC_BOUNDED_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY})
+var s_StructureMessageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StructureMessageName, Type: smithy.ShapeTypeString, Ext: &e_StructureMessageName})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t65, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sTimeBasedCollectionScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeBasedCollectionScheme, Members: &mTimeBasedCollectionScheme, Type: smithy.ShapeTypeStructure, Ext: &eTimeBasedCollectionScheme})
+var sTimeBasedCollectionScheme_periodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "periodMs", ID: &i_collectionPeriodMs, Type: smithy.ShapeTypeLong, Ext: &eTimeBasedCollectionScheme_periodMs})
+var sTimeBasedSignalFetchConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeBasedSignalFetchConfig, Members: &mTimeBasedSignalFetchConfig, Type: smithy.ShapeTypeStructure, Ext: &eTimeBasedSignalFetchConfig})
+var sTimeBasedSignalFetchConfig_executionFrequencyMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionFrequencyMs", ID: &i_positiveLong, Type: smithy.ShapeTypeLong, Ext: &eTimeBasedSignalFetchConfig_executionFrequencyMs})
+var sTimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eTimePeriod})
+var sTimePeriod_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eTimePeriod_unit})
+var sTimePeriod_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_positiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eTimePeriod_value})
+var s_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_timestamp})
+var sTimestreamConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestreamConfig, Members: &mTimestreamConfig, Type: smithy.ShapeTypeStructure, Ext: &eTimestreamConfig})
+var sTimestreamConfig_timestreamTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamTableArn", ID: &i_TimestreamTableArn, Type: smithy.ShapeTypeString, Ext: &eTimestreamConfig_timestreamTableArn})
+var sTimestreamConfig_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString, Ext: &eTimestreamConfig_executionRoleArn})
+var s_TimestreamDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestreamDatabaseName, Type: smithy.ShapeTypeString, Ext: &e_TimestreamDatabaseName})
+var sTimestreamRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestreamRegistrationResponse, Members: &mTimestreamRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eTimestreamRegistrationResponse})
+var sTimestreamRegistrationResponse_timestreamDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamDatabaseName", ID: &i_TimestreamDatabaseName, Type: smithy.ShapeTypeString, Ext: &eTimestreamRegistrationResponse_timestreamDatabaseName})
+var sTimestreamRegistrationResponse_timestreamTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamTableName", ID: &i_TimestreamTableName, Type: smithy.ShapeTypeString, Ext: &eTimestreamRegistrationResponse_timestreamTableName})
+var sTimestreamRegistrationResponse_timestreamDatabaseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamDatabaseArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eTimestreamRegistrationResponse_timestreamDatabaseArn})
+var sTimestreamRegistrationResponse_timestreamTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamTableArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eTimestreamRegistrationResponse_timestreamTableArn})
+var sTimestreamRegistrationResponse_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eTimestreamRegistrationResponse_registrationStatus})
+var sTimestreamRegistrationResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eTimestreamRegistrationResponse_errorMessage})
+var sTimestreamResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestreamResources, Members: &mTimestreamResources, Type: smithy.ShapeTypeStructure, Ext: &eTimestreamResources})
+var sTimestreamResources_timestreamDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamDatabaseName", ID: &i_TimestreamDatabaseName, Type: smithy.ShapeTypeString, Ext: &eTimestreamResources_timestreamDatabaseName})
+var sTimestreamResources_timestreamTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamTableName", ID: &i_TimestreamTableName, Type: smithy.ShapeTypeString, Ext: &eTimestreamResources_timestreamTableName})
+var s_TimestreamTableArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestreamTableArn, Type: smithy.ShapeTypeString, Ext: &e_TimestreamTableArn})
+var s_TimestreamTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestreamTableName, Type: smithy.ShapeTypeString, Ext: &e_TimestreamTableName})
+var sTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eTimeUnit})
+var sTimeUnit_MILLISECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_MILLISECOND})
+var sTimeUnit_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_SECOND})
+var sTimeUnit_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_MINUTE})
+var sTimeUnit_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_HOUR})
+var s_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicName, Type: smithy.ShapeTypeString, Ext: &e_TopicName})
+var sTriggerMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerMode, Members: &mTriggerMode, Type: smithy.ShapeTypeEnum, Ext: &eTriggerMode})
+var sTriggerMode_ALWAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerMode_ALWAYS})
+var sTriggerMode_RISING_EDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RISING_EDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerMode_RISING_EDGE})
+var s_uint32 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_uint32, Type: smithy.ShapeTypeLong, Ext: &e_uint32})
+var sUpdateCampaignAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignAction, Members: &mUpdateCampaignAction, Type: smithy.ShapeTypeEnum, Ext: &eUpdateCampaignAction})
+var sUpdateCampaignAction_APPROVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignAction_APPROVE})
+var sUpdateCampaignAction_SUSPEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPEND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignAction_SUSPEND})
+var sUpdateCampaignAction_RESUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignAction_RESUME})
+var sUpdateCampaignAction_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignAction_UPDATE})
+var sUpdateMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMode, Members: &mUpdateMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMode})
+var sUpdateMode_OVERWRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERWRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMode_OVERWRITE})
+var sUpdateMode_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMode_MERGE})
+var sUpdateVehicleError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVehicleError, Members: &mUpdateVehicleError, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVehicleError})
+var sUpdateVehicleError_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleError_vehicleName})
+var sUpdateVehicleError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_number, Type: smithy.ShapeTypeInteger, Ext: &eUpdateVehicleError_code})
+var sUpdateVehicleError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleError_message})
+var s_updateVehicleErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_updateVehicleErrors, Members: &m_updateVehicleErrors, Type: smithy.ShapeTypeList, Ext: &e_updateVehicleErrors})
+var s_updateVehicleErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateVehicleError, Members: &mUpdateVehicleError, Type: smithy.ShapeTypeStructure, Ext: &e_updateVehicleErrors_member})
+var sUpdateVehicleRequestItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVehicleRequestItem, Members: &mUpdateVehicleRequestItem, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVehicleRequestItem})
+var sUpdateVehicleRequestItem_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleRequestItem_vehicleName})
+var sUpdateVehicleRequestItem_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleRequestItem_modelManifestArn})
+var sUpdateVehicleRequestItem_decoderManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decoderManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleRequestItem_decoderManifestArn})
+var sUpdateVehicleRequestItem_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_attributesMap, Members: &m_attributesMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateVehicleRequestItem_attributes})
+var sUpdateVehicleRequestItem_attributeUpdateMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeUpdateMode", ID: &iUpdateMode, Members: &mUpdateMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateVehicleRequestItem_attributeUpdateMode})
+var sUpdateVehicleRequestItem_stateTemplatesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatesToAdd", ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &eUpdateVehicleRequestItem_stateTemplatesToAdd})
+var sUpdateVehicleRequestItem_stateTemplatesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatesToRemove", ID: &i_StateTemplateAssociationIdentifiers, Members: &m_StateTemplateAssociationIdentifiers, Type: smithy.ShapeTypeList, Ext: &eUpdateVehicleRequestItem_stateTemplatesToRemove})
+var sUpdateVehicleRequestItem_stateTemplatesToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatesToUpdate", ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &eUpdateVehicleRequestItem_stateTemplatesToUpdate})
+var s_updateVehicleRequestItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_updateVehicleRequestItems, Members: &m_updateVehicleRequestItems, Type: smithy.ShapeTypeList, Ext: &e_updateVehicleRequestItems})
+var s_updateVehicleRequestItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateVehicleRequestItem, Members: &mUpdateVehicleRequestItem, Type: smithy.ShapeTypeStructure, Ext: &e_updateVehicleRequestItems_member})
+var sUpdateVehicleResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVehicleResponseItem, Members: &mUpdateVehicleResponseItem, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVehicleResponseItem})
+var sUpdateVehicleResponseItem_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleResponseItem_vehicleName})
+var sUpdateVehicleResponseItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleResponseItem_arn})
+var s_updateVehicleResponseItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_updateVehicleResponseItems, Members: &m_updateVehicleResponseItems, Type: smithy.ShapeTypeList, Ext: &e_updateVehicleResponseItems})
+var s_updateVehicleResponseItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateVehicleResponseItem, Members: &mUpdateVehicleResponseItem, Type: smithy.ShapeTypeStructure, Ext: &e_updateVehicleResponseItems_member})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sVehicleAssociationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVehicleAssociationBehavior, Members: &mVehicleAssociationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eVehicleAssociationBehavior})
+var sVehicleAssociationBehavior_CREATE_IOT_THING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IOT_THING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleAssociationBehavior_CREATE_IOT_THING})
+var sVehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_IOT_THING_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS})
+var sVehicleMiddleware = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVehicleMiddleware, Members: &mVehicleMiddleware, Type: smithy.ShapeTypeStructure, Ext: &eVehicleMiddleware})
+var sVehicleMiddleware_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_VehicleMiddlewareName, Type: smithy.ShapeTypeString, Ext: &eVehicleMiddleware_name})
+var sVehicleMiddleware_protocolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocolName", ID: &iVehicleMiddlewareProtocol, Members: &mVehicleMiddlewareProtocol, Type: smithy.ShapeTypeEnum, Ext: &eVehicleMiddleware_protocolName})
+var s_VehicleMiddlewareName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VehicleMiddlewareName, Type: smithy.ShapeTypeString, Ext: &e_VehicleMiddlewareName})
+var sVehicleMiddlewareProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVehicleMiddlewareProtocol, Members: &mVehicleMiddlewareProtocol, Type: smithy.ShapeTypeEnum, Ext: &eVehicleMiddlewareProtocol})
+var sVehicleMiddlewareProtocol_ROS_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROS_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleMiddlewareProtocol_ROS_2})
+var s_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &e_vehicleName})
+var s_vehicles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_vehicles, Members: &m_vehicles, Type: smithy.ShapeTypeList, Ext: &e_vehicles})
+var s_vehicles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &e_vehicles_member})
+var sVehicleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVehicleState, Members: &mVehicleState, Type: smithy.ShapeTypeEnum, Ext: &eVehicleState})
+var sVehicleState_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleState_CREATED})
+var sVehicleState_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleState_READY})
+var sVehicleState_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleState_HEALTHY})
+var sVehicleState_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleState_SUSPENDED})
+var sVehicleState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleState_DELETING})
+var sVehicleState_READY_FOR_CHECKIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY_FOR_CHECKIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVehicleState_READY_FOR_CHECKIN})
+var sVehicleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVehicleStatus, Members: &mVehicleStatus, Type: smithy.ShapeTypeStructure, Ext: &eVehicleStatus})
+var sVehicleStatus_campaignName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignName", ID: &i_campaignName, Type: smithy.ShapeTypeString, Ext: &eVehicleStatus_campaignName})
+var sVehicleStatus_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eVehicleStatus_vehicleName})
+var sVehicleStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iVehicleState, Members: &mVehicleState, Type: smithy.ShapeTypeEnum, Ext: &eVehicleStatus_status})
+var s_VehicleStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VehicleStatusList, Members: &m_VehicleStatusList, Type: smithy.ShapeTypeList, Ext: &e_VehicleStatusList})
+var s_VehicleStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVehicleStatus, Members: &mVehicleStatus, Type: smithy.ShapeTypeStructure, Ext: &e_VehicleStatusList_member})
+var s_vehicleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_vehicleSummaries, Members: &m_vehicleSummaries, Type: smithy.ShapeTypeList, Ext: &e_vehicleSummaries})
+var s_vehicleSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVehicleSummary, Members: &mVehicleSummary, Type: smithy.ShapeTypeStructure, Ext: &e_vehicleSummaries_member})
+var sVehicleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVehicleSummary, Members: &mVehicleSummary, Type: smithy.ShapeTypeStructure, Ext: &eVehicleSummary})
+var sVehicleSummary_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eVehicleSummary_vehicleName})
+var sVehicleSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eVehicleSummary_arn})
+var sVehicleSummary_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eVehicleSummary_modelManifestArn})
+var sVehicleSummary_decoderManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decoderManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eVehicleSummary_decoderManifestArn})
+var sVehicleSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVehicleSummary_creationTime})
+var sVehicleSummary_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVehicleSummary_lastModificationTime})
+var sVehicleSummary_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_attributesMap, Members: &m_attributesMap, Type: smithy.ShapeTypeMap, Ext: &eVehicleSummary_attributes})
+var s_wildcardSignalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_wildcardSignalName, Type: smithy.ShapeTypeString, Ext: &e_wildcardSignalName})
+var sAssociateVehicleFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateVehicleFleetRequest, Members: &mAssociateVehicleFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateVehicleFleetRequest})
+var sAssociateVehicleFleetRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eAssociateVehicleFleetRequest_vehicleName})
+var sAssociateVehicleFleetRequest_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetId", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &eAssociateVehicleFleetRequest_fleetId})
+var sAssociateVehicleFleetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateVehicleFleetResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateVehicleFleetResponse})
+var sBatchCreateVehicleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateVehicleRequest, Members: &mBatchCreateVehicleRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateVehicleRequest})
+var sBatchCreateVehicleRequest_vehicles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicles", ID: &i_createVehicleRequestItems, Members: &m_createVehicleRequestItems, Type: smithy.ShapeTypeList, Ext: &eBatchCreateVehicleRequest_vehicles})
+var sBatchCreateVehicleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateVehicleResponse, Members: &mBatchCreateVehicleResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateVehicleResponse})
+var sBatchCreateVehicleResponse_vehicles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicles", ID: &i_createVehicleResponses, Members: &m_createVehicleResponses, Type: smithy.ShapeTypeList, Ext: &eBatchCreateVehicleResponse_vehicles})
+var sBatchCreateVehicleResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_createVehicleErrors, Members: &m_createVehicleErrors, Type: smithy.ShapeTypeList, Ext: &eBatchCreateVehicleResponse_errors})
+var sBatchUpdateVehicleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateVehicleRequest, Members: &mBatchUpdateVehicleRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateVehicleRequest})
+var sBatchUpdateVehicleRequest_vehicles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicles", ID: &i_updateVehicleRequestItems, Members: &m_updateVehicleRequestItems, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateVehicleRequest_vehicles})
+var sBatchUpdateVehicleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateVehicleResponse, Members: &mBatchUpdateVehicleResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateVehicleResponse})
+var sBatchUpdateVehicleResponse_vehicles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicles", ID: &i_updateVehicleResponseItems, Members: &m_updateVehicleResponseItems, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateVehicleResponse_vehicles})
+var sBatchUpdateVehicleResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_updateVehicleErrors, Members: &m_updateVehicleErrors, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateVehicleResponse_errors})
+var sCreateCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaignRequest, Members: &mCreateCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCampaignRequest})
+var sCreateCampaignRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignRequest_name})
+var sCreateCampaignRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignRequest_description})
+var sCreateCampaignRequest_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignRequest_signalCatalogArn})
+var sCreateCampaignRequest_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignRequest_targetArn})
+var sCreateCampaignRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateCampaignRequest_startTime})
+var sCreateCampaignRequest_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateCampaignRequest_expiryTime})
+var sCreateCampaignRequest_postTriggerCollectionDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postTriggerCollectionDuration", ID: &i_uint32, Type: smithy.ShapeTypeLong, Ext: &eCreateCampaignRequest_postTriggerCollectionDuration})
+var sCreateCampaignRequest_diagnosticsMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "diagnosticsMode", ID: &iDiagnosticsMode, Members: &mDiagnosticsMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateCampaignRequest_diagnosticsMode})
+var sCreateCampaignRequest_spoolingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spoolingMode", ID: &iSpoolingMode, Members: &mSpoolingMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateCampaignRequest_spoolingMode})
+var sCreateCampaignRequest_compression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compression", ID: &iCompression, Members: &mCompression, Type: smithy.ShapeTypeEnum, Ext: &eCreateCampaignRequest_compression})
+var sCreateCampaignRequest_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_priority, Type: smithy.ShapeTypeInteger, Ext: &eCreateCampaignRequest_priority})
+var sCreateCampaignRequest_signalsToCollect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalsToCollect", ID: &i_SignalInformationList, Members: &m_SignalInformationList, Traits: &t59, Type: smithy.ShapeTypeList, Ext: &eCreateCampaignRequest_signalsToCollect})
+var sCreateCampaignRequest_collectionScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionScheme", ID: &iCollectionScheme, Members: &mCollectionScheme, Type: smithy.ShapeTypeUnion, Ext: &eCreateCampaignRequest_collectionScheme})
+var sCreateCampaignRequest_dataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataExtraDimensions", ID: &i_DataExtraDimensionNodePathList, Members: &m_DataExtraDimensionNodePathList, Traits: &t59, Type: smithy.ShapeTypeList, Ext: &eCreateCampaignRequest_dataExtraDimensions})
+var sCreateCampaignRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateCampaignRequest_tags})
+var sCreateCampaignRequest_dataDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataDestinationConfigs", ID: &i_DataDestinationConfigs, Members: &m_DataDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &eCreateCampaignRequest_dataDestinationConfigs})
+var sCreateCampaignRequest_dataPartitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPartitions", ID: &i_DataPartitions, Members: &m_DataPartitions, Type: smithy.ShapeTypeList, Ext: &eCreateCampaignRequest_dataPartitions})
+var sCreateCampaignRequest_signalsToFetch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalsToFetch", ID: &i_SignalFetchInformationList, Members: &m_SignalFetchInformationList, Traits: &t59, Type: smithy.ShapeTypeList, Ext: &eCreateCampaignRequest_signalsToFetch})
+var sCreateCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaignResponse, Members: &mCreateCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCampaignResponse})
+var sCreateCampaignResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignResponse_name})
+var sCreateCampaignResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_campaignArn, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignResponse_arn})
+var sCreateDecoderManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDecoderManifestRequest, Members: &mCreateDecoderManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDecoderManifestRequest})
+var sCreateDecoderManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateDecoderManifestRequest_name})
+var sCreateDecoderManifestRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateDecoderManifestRequest_description})
+var sCreateDecoderManifestRequest_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateDecoderManifestRequest_modelManifestArn})
+var sCreateDecoderManifestRequest_signalDecoders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalDecoders", ID: &i_SignalDecoders, Members: &m_SignalDecoders, Type: smithy.ShapeTypeList, Ext: &eCreateDecoderManifestRequest_signalDecoders})
+var sCreateDecoderManifestRequest_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eCreateDecoderManifestRequest_networkInterfaces})
+var sCreateDecoderManifestRequest_defaultForUnmappedSignals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultForUnmappedSignals", ID: &iDefaultForUnmappedSignalsType, Members: &mDefaultForUnmappedSignalsType, Type: smithy.ShapeTypeEnum, Ext: &eCreateDecoderManifestRequest_defaultForUnmappedSignals})
+var sCreateDecoderManifestRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDecoderManifestRequest_tags})
+var sCreateDecoderManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDecoderManifestResponse, Members: &mCreateDecoderManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDecoderManifestResponse})
+var sCreateDecoderManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eCreateDecoderManifestResponse_name})
+var sCreateDecoderManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateDecoderManifestResponse_arn})
+var sCreateFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleetRequest, Members: &mCreateFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetRequest})
+var sCreateFleetRequest_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetId", ID: &i_fleetId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_fleetId})
+var sCreateFleetRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_description})
+var sCreateFleetRequest_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateFleetRequest_signalCatalogArn})
+var sCreateFleetRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateFleetRequest_tags})
+var sCreateFleetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleetResponse, Members: &mCreateFleetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetResponse})
+var sCreateFleetResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &eCreateFleetResponse_id})
+var sCreateFleetResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateFleetResponse_arn})
+var sCreateModelManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelManifestRequest, Members: &mCreateModelManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelManifestRequest})
+var sCreateModelManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateModelManifestRequest_name})
+var sCreateModelManifestRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateModelManifestRequest_description})
+var sCreateModelManifestRequest_nodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodes", ID: &i_listOfStrings, Members: &m_listOfStrings, Type: smithy.ShapeTypeList, Ext: &eCreateModelManifestRequest_nodes})
+var sCreateModelManifestRequest_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateModelManifestRequest_signalCatalogArn})
+var sCreateModelManifestRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateModelManifestRequest_tags})
+var sCreateModelManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelManifestResponse, Members: &mCreateModelManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelManifestResponse})
+var sCreateModelManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eCreateModelManifestResponse_name})
+var sCreateModelManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateModelManifestResponse_arn})
+var sCreateSignalCatalogRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSignalCatalogRequest, Members: &mCreateSignalCatalogRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSignalCatalogRequest})
+var sCreateSignalCatalogRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateSignalCatalogRequest_name})
+var sCreateSignalCatalogRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateSignalCatalogRequest_description})
+var sCreateSignalCatalogRequest_nodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodes", ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &eCreateSignalCatalogRequest_nodes})
+var sCreateSignalCatalogRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateSignalCatalogRequest_tags})
+var sCreateSignalCatalogResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSignalCatalogResponse, Members: &mCreateSignalCatalogResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSignalCatalogResponse})
+var sCreateSignalCatalogResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eCreateSignalCatalogResponse_name})
+var sCreateSignalCatalogResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateSignalCatalogResponse_arn})
+var sCreateStateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStateTemplateRequest, Members: &mCreateStateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateStateTemplateRequest})
+var sCreateStateTemplateRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateStateTemplateRequest_name})
+var sCreateStateTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateStateTemplateRequest_description})
+var sCreateStateTemplateRequest_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateStateTemplateRequest_signalCatalogArn})
+var sCreateStateTemplateRequest_stateTemplateProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplateProperties", ID: &i_StateTemplateProperties, Members: &m_StateTemplateProperties, Type: smithy.ShapeTypeList, Ext: &eCreateStateTemplateRequest_stateTemplateProperties})
+var sCreateStateTemplateRequest_dataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataExtraDimensions", ID: &i_StateTemplateDataExtraDimensionNodePathList, Members: &m_StateTemplateDataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &eCreateStateTemplateRequest_dataExtraDimensions})
+var sCreateStateTemplateRequest_metadataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataExtraDimensions", ID: &i_StateTemplateMetadataExtraDimensionNodePathList, Members: &m_StateTemplateMetadataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &eCreateStateTemplateRequest_metadataExtraDimensions})
+var sCreateStateTemplateRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateStateTemplateRequest_tags})
+var sCreateStateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStateTemplateResponse, Members: &mCreateStateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateStateTemplateResponse})
+var sCreateStateTemplateResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eCreateStateTemplateResponse_name})
+var sCreateStateTemplateResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateStateTemplateResponse_arn})
+var sCreateStateTemplateResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceUniqueId, Type: smithy.ShapeTypeString, Ext: &eCreateStateTemplateResponse_id})
+var sCreateVehicleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVehicleRequest, Members: &mCreateVehicleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVehicleRequest})
+var sCreateVehicleRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleRequest_vehicleName})
+var sCreateVehicleRequest_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleRequest_modelManifestArn})
+var sCreateVehicleRequest_decoderManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decoderManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleRequest_decoderManifestArn})
+var sCreateVehicleRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_attributesMap, Members: &m_attributesMap, Type: smithy.ShapeTypeMap, Ext: &eCreateVehicleRequest_attributes})
+var sCreateVehicleRequest_associationBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationBehavior", ID: &iVehicleAssociationBehavior, Members: &mVehicleAssociationBehavior, Type: smithy.ShapeTypeEnum, Ext: &eCreateVehicleRequest_associationBehavior})
+var sCreateVehicleRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVehicleRequest_tags})
+var sCreateVehicleRequest_stateTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplates", ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &eCreateVehicleRequest_stateTemplates})
+var sCreateVehicleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVehicleResponse, Members: &mCreateVehicleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVehicleResponse})
+var sCreateVehicleResponse_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleResponse_vehicleName})
+var sCreateVehicleResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleResponse_arn})
+var sCreateVehicleResponse_thingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eCreateVehicleResponse_thingArn})
+var sDeleteCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCampaignRequest, Members: &mDeleteCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCampaignRequest})
+var sDeleteCampaignRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteCampaignRequest_name})
+var sDeleteCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCampaignResponse, Members: &mDeleteCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCampaignResponse})
+var sDeleteCampaignResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Type: smithy.ShapeTypeString, Ext: &eDeleteCampaignResponse_name})
+var sDeleteCampaignResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_campaignArn, Type: smithy.ShapeTypeString, Ext: &eDeleteCampaignResponse_arn})
+var sDeleteDecoderManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDecoderManifestRequest, Members: &mDeleteDecoderManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDecoderManifestRequest})
+var sDeleteDecoderManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteDecoderManifestRequest_name})
+var sDeleteDecoderManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDecoderManifestResponse, Members: &mDeleteDecoderManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDecoderManifestResponse})
+var sDeleteDecoderManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteDecoderManifestResponse_name})
+var sDeleteDecoderManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDeleteDecoderManifestResponse_arn})
+var sDeleteFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleetRequest, Members: &mDeleteFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFleetRequest})
+var sDeleteFleetRequest_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetId", ID: &i_fleetId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteFleetRequest_fleetId})
+var sDeleteFleetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleetResponse, Members: &mDeleteFleetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFleetResponse})
+var sDeleteFleetResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &eDeleteFleetResponse_id})
+var sDeleteFleetResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDeleteFleetResponse_arn})
+var sDeleteModelManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelManifestRequest, Members: &mDeleteModelManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteModelManifestRequest})
+var sDeleteModelManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteModelManifestRequest_name})
+var sDeleteModelManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelManifestResponse, Members: &mDeleteModelManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteModelManifestResponse})
+var sDeleteModelManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteModelManifestResponse_name})
+var sDeleteModelManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDeleteModelManifestResponse_arn})
+var sDeleteSignalCatalogRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSignalCatalogRequest, Members: &mDeleteSignalCatalogRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSignalCatalogRequest})
+var sDeleteSignalCatalogRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteSignalCatalogRequest_name})
+var sDeleteSignalCatalogResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSignalCatalogResponse, Members: &mDeleteSignalCatalogResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSignalCatalogResponse})
+var sDeleteSignalCatalogResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteSignalCatalogResponse_name})
+var sDeleteSignalCatalogResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDeleteSignalCatalogResponse_arn})
+var sDeleteStateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStateTemplateRequest, Members: &mDeleteStateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteStateTemplateRequest})
+var sDeleteStateTemplateRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ResourceIdentifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteStateTemplateRequest_identifier})
+var sDeleteStateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStateTemplateResponse, Members: &mDeleteStateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteStateTemplateResponse})
+var sDeleteStateTemplateResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteStateTemplateResponse_name})
+var sDeleteStateTemplateResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDeleteStateTemplateResponse_arn})
+var sDeleteStateTemplateResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceUniqueId, Type: smithy.ShapeTypeString, Ext: &eDeleteStateTemplateResponse_id})
+var sDeleteVehicleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVehicleRequest, Members: &mDeleteVehicleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVehicleRequest})
+var sDeleteVehicleRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteVehicleRequest_vehicleName})
+var sDeleteVehicleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVehicleResponse, Members: &mDeleteVehicleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVehicleResponse})
+var sDeleteVehicleResponse_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eDeleteVehicleResponse_vehicleName})
+var sDeleteVehicleResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eDeleteVehicleResponse_arn})
+var sDisassociateVehicleFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateVehicleFleetRequest, Members: &mDisassociateVehicleFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateVehicleFleetRequest})
+var sDisassociateVehicleFleetRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDisassociateVehicleFleetRequest_vehicleName})
+var sDisassociateVehicleFleetRequest_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetId", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &eDisassociateVehicleFleetRequest_fleetId})
+var sDisassociateVehicleFleetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateVehicleFleetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateVehicleFleetResponse})
+var sGetCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignRequest, Members: &mGetCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCampaignRequest})
+var sGetCampaignRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetCampaignRequest_name})
+var sGetCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignResponse, Members: &mGetCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCampaignResponse})
+var sGetCampaignResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Type: smithy.ShapeTypeString, Ext: &eGetCampaignResponse_name})
+var sGetCampaignResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_campaignArn, Type: smithy.ShapeTypeString, Ext: &eGetCampaignResponse_arn})
+var sGetCampaignResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eGetCampaignResponse_description})
+var sGetCampaignResponse_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetCampaignResponse_signalCatalogArn})
+var sGetCampaignResponse_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetCampaignResponse_targetArn})
+var sGetCampaignResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCampaignStatus, Members: &mCampaignStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetCampaignResponse_status})
+var sGetCampaignResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetCampaignResponse_startTime})
+var sGetCampaignResponse_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetCampaignResponse_expiryTime})
+var sGetCampaignResponse_postTriggerCollectionDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postTriggerCollectionDuration", ID: &i_uint32, Type: smithy.ShapeTypeLong, Ext: &eGetCampaignResponse_postTriggerCollectionDuration})
+var sGetCampaignResponse_diagnosticsMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "diagnosticsMode", ID: &iDiagnosticsMode, Members: &mDiagnosticsMode, Type: smithy.ShapeTypeEnum, Ext: &eGetCampaignResponse_diagnosticsMode})
+var sGetCampaignResponse_spoolingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spoolingMode", ID: &iSpoolingMode, Members: &mSpoolingMode, Type: smithy.ShapeTypeEnum, Ext: &eGetCampaignResponse_spoolingMode})
+var sGetCampaignResponse_compression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compression", ID: &iCompression, Members: &mCompression, Type: smithy.ShapeTypeEnum, Ext: &eGetCampaignResponse_compression})
+var sGetCampaignResponse_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_priority, Type: smithy.ShapeTypeInteger, Ext: &eGetCampaignResponse_priority})
+var sGetCampaignResponse_signalsToCollect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalsToCollect", ID: &i_SignalInformationList, Members: &m_SignalInformationList, Traits: &t59, Type: smithy.ShapeTypeList, Ext: &eGetCampaignResponse_signalsToCollect})
+var sGetCampaignResponse_collectionScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionScheme", ID: &iCollectionScheme, Members: &mCollectionScheme, Type: smithy.ShapeTypeUnion, Ext: &eGetCampaignResponse_collectionScheme})
+var sGetCampaignResponse_dataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataExtraDimensions", ID: &i_DataExtraDimensionNodePathList, Members: &m_DataExtraDimensionNodePathList, Traits: &t59, Type: smithy.ShapeTypeList, Ext: &eGetCampaignResponse_dataExtraDimensions})
+var sGetCampaignResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetCampaignResponse_creationTime})
+var sGetCampaignResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetCampaignResponse_lastModificationTime})
+var sGetCampaignResponse_dataDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataDestinationConfigs", ID: &i_DataDestinationConfigs, Members: &m_DataDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &eGetCampaignResponse_dataDestinationConfigs})
+var sGetCampaignResponse_dataPartitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPartitions", ID: &i_DataPartitions, Members: &m_DataPartitions, Type: smithy.ShapeTypeList, Ext: &eGetCampaignResponse_dataPartitions})
+var sGetCampaignResponse_signalsToFetch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalsToFetch", ID: &i_SignalFetchInformationList, Members: &m_SignalFetchInformationList, Traits: &t59, Type: smithy.ShapeTypeList, Ext: &eGetCampaignResponse_signalsToFetch})
+var sGetDecoderManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDecoderManifestRequest, Members: &mGetDecoderManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDecoderManifestRequest})
+var sGetDecoderManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetDecoderManifestRequest_name})
+var sGetDecoderManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDecoderManifestResponse, Members: &mGetDecoderManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDecoderManifestResponse})
+var sGetDecoderManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetDecoderManifestResponse_name})
+var sGetDecoderManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetDecoderManifestResponse_arn})
+var sGetDecoderManifestResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eGetDecoderManifestResponse_description})
+var sGetDecoderManifestResponse_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetDecoderManifestResponse_modelManifestArn})
+var sGetDecoderManifestResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManifestStatus, Members: &mManifestStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDecoderManifestResponse_status})
+var sGetDecoderManifestResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDecoderManifestResponse_creationTime})
+var sGetDecoderManifestResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDecoderManifestResponse_lastModificationTime})
+var sGetDecoderManifestResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &eGetDecoderManifestResponse_message})
+var sGetEncryptionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEncryptionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEncryptionConfigurationRequest})
+var sGetEncryptionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEncryptionConfigurationResponse, Members: &mGetEncryptionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEncryptionConfigurationResponse})
+var sGetEncryptionConfigurationResponse_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetEncryptionConfigurationResponse_kmsKeyId})
+var sGetEncryptionConfigurationResponse_encryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionStatus", ID: &iEncryptionStatus, Members: &mEncryptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetEncryptionConfigurationResponse_encryptionStatus})
+var sGetEncryptionConfigurationResponse_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &eGetEncryptionConfigurationResponse_encryptionType})
+var sGetEncryptionConfigurationResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eGetEncryptionConfigurationResponse_errorMessage})
+var sGetEncryptionConfigurationResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetEncryptionConfigurationResponse_creationTime})
+var sGetEncryptionConfigurationResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetEncryptionConfigurationResponse_lastModificationTime})
+var sGetFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFleetRequest, Members: &mGetFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFleetRequest})
+var sGetFleetRequest_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetId", ID: &i_fleetId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetFleetRequest_fleetId})
+var sGetFleetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFleetResponse, Members: &mGetFleetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFleetResponse})
+var sGetFleetResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &eGetFleetResponse_id})
+var sGetFleetResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetFleetResponse_arn})
+var sGetFleetResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eGetFleetResponse_description})
+var sGetFleetResponse_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetFleetResponse_signalCatalogArn})
+var sGetFleetResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetFleetResponse_creationTime})
+var sGetFleetResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetFleetResponse_lastModificationTime})
+var sGetLoggingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingOptionsRequest})
+var sGetLoggingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingOptionsResponse, Members: &mGetLoggingOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingOptionsResponse})
+var sGetLoggingOptionsResponse_cloudWatchLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogDelivery", ID: &iCloudWatchLogDeliveryOptions, Members: &mCloudWatchLogDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingOptionsResponse_cloudWatchLogDelivery})
+var sGetModelManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelManifestRequest, Members: &mGetModelManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetModelManifestRequest})
+var sGetModelManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetModelManifestRequest_name})
+var sGetModelManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelManifestResponse, Members: &mGetModelManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetModelManifestResponse})
+var sGetModelManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eGetModelManifestResponse_name})
+var sGetModelManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetModelManifestResponse_arn})
+var sGetModelManifestResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eGetModelManifestResponse_description})
+var sGetModelManifestResponse_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetModelManifestResponse_signalCatalogArn})
+var sGetModelManifestResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManifestStatus, Members: &mManifestStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetModelManifestResponse_status})
+var sGetModelManifestResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetModelManifestResponse_creationTime})
+var sGetModelManifestResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetModelManifestResponse_lastModificationTime})
+var sGetRegisterAccountStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegisterAccountStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRegisterAccountStatusRequest})
+var sGetRegisterAccountStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegisterAccountStatusResponse, Members: &mGetRegisterAccountStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRegisterAccountStatusResponse})
+var sGetRegisterAccountStatusResponse_customerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAccountId", ID: &i_customerAccountId, Type: smithy.ShapeTypeString, Ext: &eGetRegisterAccountStatusResponse_customerAccountId})
+var sGetRegisterAccountStatusResponse_accountStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetRegisterAccountStatusResponse_accountStatus})
+var sGetRegisterAccountStatusResponse_timestreamRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamRegistrationResponse", ID: &iTimestreamRegistrationResponse, Members: &mTimestreamRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRegisterAccountStatusResponse_timestreamRegistrationResponse})
+var sGetRegisterAccountStatusResponse_iamRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamRegistrationResponse", ID: &iIamRegistrationResponse, Members: &mIamRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRegisterAccountStatusResponse_iamRegistrationResponse})
+var sGetRegisterAccountStatusResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRegisterAccountStatusResponse_creationTime})
+var sGetRegisterAccountStatusResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRegisterAccountStatusResponse_lastModificationTime})
+var sGetSignalCatalogRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSignalCatalogRequest, Members: &mGetSignalCatalogRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSignalCatalogRequest})
+var sGetSignalCatalogRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetSignalCatalogRequest_name})
+var sGetSignalCatalogResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSignalCatalogResponse, Members: &mGetSignalCatalogResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSignalCatalogResponse})
+var sGetSignalCatalogResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eGetSignalCatalogResponse_name})
+var sGetSignalCatalogResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetSignalCatalogResponse_arn})
+var sGetSignalCatalogResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eGetSignalCatalogResponse_description})
+var sGetSignalCatalogResponse_nodeCounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeCounts", ID: &iNodeCounts, Members: &mNodeCounts, Type: smithy.ShapeTypeStructure, Ext: &eGetSignalCatalogResponse_nodeCounts})
+var sGetSignalCatalogResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSignalCatalogResponse_creationTime})
+var sGetSignalCatalogResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSignalCatalogResponse_lastModificationTime})
+var sGetStateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStateTemplateRequest, Members: &mGetStateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetStateTemplateRequest})
+var sGetStateTemplateRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ResourceIdentifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetStateTemplateRequest_identifier})
+var sGetStateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStateTemplateResponse, Members: &mGetStateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetStateTemplateResponse})
+var sGetStateTemplateResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eGetStateTemplateResponse_name})
+var sGetStateTemplateResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetStateTemplateResponse_arn})
+var sGetStateTemplateResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eGetStateTemplateResponse_description})
+var sGetStateTemplateResponse_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetStateTemplateResponse_signalCatalogArn})
+var sGetStateTemplateResponse_stateTemplateProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplateProperties", ID: &i_StateTemplateProperties, Members: &m_StateTemplateProperties, Type: smithy.ShapeTypeList, Ext: &eGetStateTemplateResponse_stateTemplateProperties})
+var sGetStateTemplateResponse_dataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataExtraDimensions", ID: &i_StateTemplateDataExtraDimensionNodePathList, Members: &m_StateTemplateDataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &eGetStateTemplateResponse_dataExtraDimensions})
+var sGetStateTemplateResponse_metadataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataExtraDimensions", ID: &i_StateTemplateMetadataExtraDimensionNodePathList, Members: &m_StateTemplateMetadataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &eGetStateTemplateResponse_metadataExtraDimensions})
+var sGetStateTemplateResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStateTemplateResponse_creationTime})
+var sGetStateTemplateResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStateTemplateResponse_lastModificationTime})
+var sGetStateTemplateResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceUniqueId, Type: smithy.ShapeTypeString, Ext: &eGetStateTemplateResponse_id})
+var sGetVehicleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVehicleRequest, Members: &mGetVehicleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVehicleRequest})
+var sGetVehicleRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetVehicleRequest_vehicleName})
+var sGetVehicleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVehicleResponse, Members: &mGetVehicleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVehicleResponse})
+var sGetVehicleResponse_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eGetVehicleResponse_vehicleName})
+var sGetVehicleResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetVehicleResponse_arn})
+var sGetVehicleResponse_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetVehicleResponse_modelManifestArn})
+var sGetVehicleResponse_decoderManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decoderManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eGetVehicleResponse_decoderManifestArn})
+var sGetVehicleResponse_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_attributesMap, Members: &m_attributesMap, Type: smithy.ShapeTypeMap, Ext: &eGetVehicleResponse_attributes})
+var sGetVehicleResponse_stateTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplates", ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &eGetVehicleResponse_stateTemplates})
+var sGetVehicleResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetVehicleResponse_creationTime})
+var sGetVehicleResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetVehicleResponse_lastModificationTime})
+var sGetVehicleStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVehicleStatusRequest, Members: &mGetVehicleStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVehicleStatusRequest})
+var sGetVehicleStatusRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eGetVehicleStatusRequest_nextToken})
+var sGetVehicleStatusRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eGetVehicleStatusRequest_maxResults})
+var sGetVehicleStatusRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetVehicleStatusRequest_vehicleName})
+var sGetVehicleStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVehicleStatusResponse, Members: &mGetVehicleStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVehicleStatusResponse})
+var sGetVehicleStatusResponse_campaigns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaigns", ID: &i_VehicleStatusList, Members: &m_VehicleStatusList, Type: smithy.ShapeTypeList, Ext: &eGetVehicleStatusResponse_campaigns})
+var sGetVehicleStatusResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eGetVehicleStatusResponse_nextToken})
+var sImportDecoderManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDecoderManifestRequest, Members: &mImportDecoderManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportDecoderManifestRequest})
+var sImportDecoderManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eImportDecoderManifestRequest_name})
+var sImportDecoderManifestRequest_networkFileDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkFileDefinitions", ID: &i_NetworkFileDefinitions, Members: &m_NetworkFileDefinitions, Type: smithy.ShapeTypeList, Ext: &eImportDecoderManifestRequest_networkFileDefinitions})
+var sImportDecoderManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDecoderManifestResponse, Members: &mImportDecoderManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportDecoderManifestResponse})
+var sImportDecoderManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eImportDecoderManifestResponse_name})
+var sImportDecoderManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eImportDecoderManifestResponse_arn})
+var sImportSignalCatalogRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSignalCatalogRequest, Members: &mImportSignalCatalogRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportSignalCatalogRequest})
+var sImportSignalCatalogRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eImportSignalCatalogRequest_name})
+var sImportSignalCatalogRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eImportSignalCatalogRequest_description})
+var sImportSignalCatalogRequest_vss = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vss", ID: &iFormattedVss, Members: &mFormattedVss, Type: smithy.ShapeTypeUnion, Ext: &eImportSignalCatalogRequest_vss})
+var sImportSignalCatalogRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eImportSignalCatalogRequest_tags})
+var sImportSignalCatalogResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSignalCatalogResponse, Members: &mImportSignalCatalogResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportSignalCatalogResponse})
+var sImportSignalCatalogResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eImportSignalCatalogResponse_name})
+var sImportSignalCatalogResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eImportSignalCatalogResponse_arn})
+var sListCampaignsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaignsRequest, Members: &mListCampaignsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCampaignsRequest})
+var sListCampaignsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListCampaignsRequest_nextToken})
+var sListCampaignsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListCampaignsRequest_maxResults})
+var sListCampaignsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_statusStr, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eListCampaignsRequest_status})
+var sListCampaignsRequest_listResponseScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listResponseScope", ID: &iListResponseScope, Members: &mListResponseScope, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eListCampaignsRequest_listResponseScope})
+var sListCampaignsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaignsResponse, Members: &mListCampaignsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCampaignsResponse})
+var sListCampaignsResponse_campaignSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignSummaries", ID: &i_campaignSummaries, Members: &m_campaignSummaries, Type: smithy.ShapeTypeList, Ext: &eListCampaignsResponse_campaignSummaries})
+var sListCampaignsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListCampaignsResponse_nextToken})
+var sListDecoderManifestNetworkInterfacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestNetworkInterfacesRequest, Members: &mListDecoderManifestNetworkInterfacesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDecoderManifestNetworkInterfacesRequest})
+var sListDecoderManifestNetworkInterfacesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestNetworkInterfacesRequest_name})
+var sListDecoderManifestNetworkInterfacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestNetworkInterfacesRequest_nextToken})
+var sListDecoderManifestNetworkInterfacesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListDecoderManifestNetworkInterfacesRequest_maxResults})
+var sListDecoderManifestNetworkInterfacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestNetworkInterfacesResponse, Members: &mListDecoderManifestNetworkInterfacesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDecoderManifestNetworkInterfacesResponse})
+var sListDecoderManifestNetworkInterfacesResponse_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eListDecoderManifestNetworkInterfacesResponse_networkInterfaces})
+var sListDecoderManifestNetworkInterfacesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestNetworkInterfacesResponse_nextToken})
+var sListDecoderManifestSignalsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestSignalsRequest, Members: &mListDecoderManifestSignalsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDecoderManifestSignalsRequest})
+var sListDecoderManifestSignalsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestSignalsRequest_name})
+var sListDecoderManifestSignalsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestSignalsRequest_nextToken})
+var sListDecoderManifestSignalsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListDecoderManifestSignalsRequest_maxResults})
+var sListDecoderManifestSignalsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestSignalsResponse, Members: &mListDecoderManifestSignalsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDecoderManifestSignalsResponse})
+var sListDecoderManifestSignalsResponse_signalDecoders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalDecoders", ID: &i_SignalDecoders, Members: &m_SignalDecoders, Type: smithy.ShapeTypeList, Ext: &eListDecoderManifestSignalsResponse_signalDecoders})
+var sListDecoderManifestSignalsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestSignalsResponse_nextToken})
+var sListDecoderManifestsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestsRequest, Members: &mListDecoderManifestsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDecoderManifestsRequest})
+var sListDecoderManifestsRequest_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestsRequest_modelManifestArn})
+var sListDecoderManifestsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestsRequest_nextToken})
+var sListDecoderManifestsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListDecoderManifestsRequest_maxResults})
+var sListDecoderManifestsRequest_listResponseScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listResponseScope", ID: &iListResponseScope, Members: &mListResponseScope, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eListDecoderManifestsRequest_listResponseScope})
+var sListDecoderManifestsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDecoderManifestsResponse, Members: &mListDecoderManifestsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDecoderManifestsResponse})
+var sListDecoderManifestsResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_decoderManifestSummaries, Members: &m_decoderManifestSummaries, Type: smithy.ShapeTypeList, Ext: &eListDecoderManifestsResponse_summaries})
+var sListDecoderManifestsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListDecoderManifestsResponse_nextToken})
+var sListFleetsForVehicleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleetsForVehicleRequest, Members: &mListFleetsForVehicleRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFleetsForVehicleRequest})
+var sListFleetsForVehicleRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListFleetsForVehicleRequest_vehicleName})
+var sListFleetsForVehicleRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListFleetsForVehicleRequest_nextToken})
+var sListFleetsForVehicleRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListFleetsForVehicleRequest_maxResults})
+var sListFleetsForVehicleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleetsForVehicleResponse, Members: &mListFleetsForVehicleResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFleetsForVehicleResponse})
+var sListFleetsForVehicleResponse_fleets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleets", ID: &i_fleets, Members: &m_fleets, Type: smithy.ShapeTypeList, Ext: &eListFleetsForVehicleResponse_fleets})
+var sListFleetsForVehicleResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListFleetsForVehicleResponse_nextToken})
+var sListFleetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleetsRequest, Members: &mListFleetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFleetsRequest})
+var sListFleetsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListFleetsRequest_nextToken})
+var sListFleetsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListFleetsRequest_maxResults})
+var sListFleetsRequest_listResponseScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listResponseScope", ID: &iListResponseScope, Members: &mListResponseScope, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eListFleetsRequest_listResponseScope})
+var sListFleetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleetsResponse, Members: &mListFleetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFleetsResponse})
+var sListFleetsResponse_fleetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetSummaries", ID: &i_fleetSummaries, Members: &m_fleetSummaries, Type: smithy.ShapeTypeList, Ext: &eListFleetsResponse_fleetSummaries})
+var sListFleetsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListFleetsResponse_nextToken})
+var sListModelManifestNodesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelManifestNodesRequest, Members: &mListModelManifestNodesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListModelManifestNodesRequest})
+var sListModelManifestNodesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListModelManifestNodesRequest_name})
+var sListModelManifestNodesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListModelManifestNodesRequest_nextToken})
+var sListModelManifestNodesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListModelManifestNodesRequest_maxResults})
+var sListModelManifestNodesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelManifestNodesResponse, Members: &mListModelManifestNodesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListModelManifestNodesResponse})
+var sListModelManifestNodesResponse_nodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodes", ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &eListModelManifestNodesResponse_nodes})
+var sListModelManifestNodesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListModelManifestNodesResponse_nextToken})
+var sListModelManifestsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelManifestsRequest, Members: &mListModelManifestsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListModelManifestsRequest})
+var sListModelManifestsRequest_signalCatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalCatalogArn", ID: &i_arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListModelManifestsRequest_signalCatalogArn})
+var sListModelManifestsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListModelManifestsRequest_nextToken})
+var sListModelManifestsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListModelManifestsRequest_maxResults})
+var sListModelManifestsRequest_listResponseScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listResponseScope", ID: &iListResponseScope, Members: &mListResponseScope, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eListModelManifestsRequest_listResponseScope})
+var sListModelManifestsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelManifestsResponse, Members: &mListModelManifestsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListModelManifestsResponse})
+var sListModelManifestsResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_modelManifestSummaries, Members: &m_modelManifestSummaries, Type: smithy.ShapeTypeList, Ext: &eListModelManifestsResponse_summaries})
+var sListModelManifestsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListModelManifestsResponse_nextToken})
+var sListSignalCatalogNodesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalCatalogNodesRequest, Members: &mListSignalCatalogNodesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSignalCatalogNodesRequest})
+var sListSignalCatalogNodesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListSignalCatalogNodesRequest_name})
+var sListSignalCatalogNodesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListSignalCatalogNodesRequest_nextToken})
+var sListSignalCatalogNodesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListSignalCatalogNodesRequest_maxResults})
+var sListSignalCatalogNodesRequest_signalNodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalNodeType", ID: &iSignalNodeType, Members: &mSignalNodeType, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListSignalCatalogNodesRequest_signalNodeType})
+var sListSignalCatalogNodesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalCatalogNodesResponse, Members: &mListSignalCatalogNodesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSignalCatalogNodesResponse})
+var sListSignalCatalogNodesResponse_nodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodes", ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &eListSignalCatalogNodesResponse_nodes})
+var sListSignalCatalogNodesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListSignalCatalogNodesResponse_nextToken})
+var sListSignalCatalogsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalCatalogsRequest, Members: &mListSignalCatalogsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSignalCatalogsRequest})
+var sListSignalCatalogsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListSignalCatalogsRequest_nextToken})
+var sListSignalCatalogsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListSignalCatalogsRequest_maxResults})
+var sListSignalCatalogsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalCatalogsResponse, Members: &mListSignalCatalogsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSignalCatalogsResponse})
+var sListSignalCatalogsResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_signalCatalogSummaries, Members: &m_signalCatalogSummaries, Type: smithy.ShapeTypeList, Ext: &eListSignalCatalogsResponse_summaries})
+var sListSignalCatalogsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListSignalCatalogsResponse_nextToken})
+var sListStateTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStateTemplatesRequest, Members: &mListStateTemplatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListStateTemplatesRequest})
+var sListStateTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListStateTemplatesRequest_nextToken})
+var sListStateTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListStateTemplatesRequest_maxResults})
+var sListStateTemplatesRequest_listResponseScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listResponseScope", ID: &iListResponseScope, Members: &mListResponseScope, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eListStateTemplatesRequest_listResponseScope})
+var sListStateTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStateTemplatesResponse, Members: &mListStateTemplatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListStateTemplatesResponse})
+var sListStateTemplatesResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_StateTemplateSummaries, Members: &m_StateTemplateSummaries, Type: smithy.ShapeTypeList, Ext: &eListStateTemplatesResponse_summaries})
+var sListStateTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListStateTemplatesResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListVehiclesInFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVehiclesInFleetRequest, Members: &mListVehiclesInFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVehiclesInFleetRequest})
+var sListVehiclesInFleetRequest_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetId", ID: &i_fleetId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListVehiclesInFleetRequest_fleetId})
+var sListVehiclesInFleetRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListVehiclesInFleetRequest_nextToken})
+var sListVehiclesInFleetRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListVehiclesInFleetRequest_maxResults})
+var sListVehiclesInFleetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVehiclesInFleetResponse, Members: &mListVehiclesInFleetResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVehiclesInFleetResponse})
+var sListVehiclesInFleetResponse_vehicles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicles", ID: &i_vehicles, Members: &m_vehicles, Type: smithy.ShapeTypeList, Ext: &eListVehiclesInFleetResponse_vehicles})
+var sListVehiclesInFleetResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListVehiclesInFleetResponse_nextToken})
+var sListVehiclesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVehiclesRequest, Members: &mListVehiclesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVehiclesRequest})
+var sListVehiclesRequest_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eListVehiclesRequest_modelManifestArn})
+var sListVehiclesRequest_attributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeNames", ID: &i_attributeNamesList, Members: &m_attributeNamesList, Traits: &t75, Type: smithy.ShapeTypeList, Ext: &eListVehiclesRequest_attributeNames})
+var sListVehiclesRequest_attributeValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeValues", ID: &i_attributeValuesList, Members: &m_attributeValuesList, Traits: &t76, Type: smithy.ShapeTypeList, Ext: &eListVehiclesRequest_attributeValues})
+var sListVehiclesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListVehiclesRequest_nextToken})
+var sListVehiclesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_listVehiclesMaxResults, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eListVehiclesRequest_maxResults})
+var sListVehiclesRequest_listResponseScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listResponseScope", ID: &iListResponseScope, Members: &mListResponseScope, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eListVehiclesRequest_listResponseScope})
+var sListVehiclesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVehiclesResponse, Members: &mListVehiclesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVehiclesResponse})
+var sListVehiclesResponse_vehicleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleSummaries", ID: &i_vehicleSummaries, Members: &m_vehicleSummaries, Type: smithy.ShapeTypeList, Ext: &eListVehiclesResponse_vehicleSummaries})
+var sListVehiclesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListVehiclesResponse_nextToken})
+var sPutEncryptionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEncryptionConfigurationRequest, Members: &mPutEncryptionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutEncryptionConfigurationRequest})
+var sPutEncryptionConfigurationRequest_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutEncryptionConfigurationRequest_kmsKeyId})
+var sPutEncryptionConfigurationRequest_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &ePutEncryptionConfigurationRequest_encryptionType})
+var sPutEncryptionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEncryptionConfigurationResponse, Members: &mPutEncryptionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutEncryptionConfigurationResponse})
+var sPutEncryptionConfigurationResponse_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutEncryptionConfigurationResponse_kmsKeyId})
+var sPutEncryptionConfigurationResponse_encryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionStatus", ID: &iEncryptionStatus, Members: &mEncryptionStatus, Type: smithy.ShapeTypeEnum, Ext: &ePutEncryptionConfigurationResponse_encryptionStatus})
+var sPutEncryptionConfigurationResponse_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &ePutEncryptionConfigurationResponse_encryptionType})
+var sPutLoggingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLoggingOptionsRequest, Members: &mPutLoggingOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutLoggingOptionsRequest})
+var sPutLoggingOptionsRequest_cloudWatchLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogDelivery", ID: &iCloudWatchLogDeliveryOptions, Members: &mCloudWatchLogDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &ePutLoggingOptionsRequest_cloudWatchLogDelivery})
+var sPutLoggingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLoggingOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutLoggingOptionsResponse})
+var sRegisterAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAccountRequest, Members: &mRegisterAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountRequest})
+var sRegisterAccountRequest_timestreamResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamResources", ID: &iTimestreamResources, Members: &mTimestreamResources, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountRequest_timestreamResources})
+var sRegisterAccountRequest_iamResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamResources", ID: &iIamResources, Members: &mIamResources, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountRequest_iamResources})
+var sRegisterAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAccountResponse, Members: &mRegisterAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountResponse})
+var sRegisterAccountResponse_registerAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registerAccountStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eRegisterAccountResponse_registerAccountStatus})
+var sRegisterAccountResponse_timestreamResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestreamResources", ID: &iTimestreamResources, Members: &mTimestreamResources, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountResponse_timestreamResources})
+var sRegisterAccountResponse_iamResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamResources", ID: &iIamResources, Members: &mIamResources, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountResponse_iamResources})
+var sRegisterAccountResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRegisterAccountResponse_creationTime})
+var sRegisterAccountResponse_lastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModificationTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRegisterAccountResponse_lastModificationTime})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t77, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignRequest, Members: &mUpdateCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignRequest})
+var sUpdateCampaignRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignRequest_name})
+var sUpdateCampaignRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignRequest_description})
+var sUpdateCampaignRequest_dataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataExtraDimensions", ID: &i_DataExtraDimensionNodePathList, Members: &m_DataExtraDimensionNodePathList, Traits: &t59, Type: smithy.ShapeTypeList, Ext: &eUpdateCampaignRequest_dataExtraDimensions})
+var sUpdateCampaignRequest_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iUpdateCampaignAction, Members: &mUpdateCampaignAction, Type: smithy.ShapeTypeEnum, Ext: &eUpdateCampaignRequest_action})
+var sUpdateCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignResponse, Members: &mUpdateCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignResponse})
+var sUpdateCampaignResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_campaignArn, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignResponse_arn})
+var sUpdateCampaignResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_campaignName, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignResponse_name})
+var sUpdateCampaignResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCampaignStatus, Members: &mCampaignStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateCampaignResponse_status})
+var sUpdateDecoderManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDecoderManifestRequest, Members: &mUpdateDecoderManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDecoderManifestRequest})
+var sUpdateDecoderManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateDecoderManifestRequest_name})
+var sUpdateDecoderManifestRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateDecoderManifestRequest_description})
+var sUpdateDecoderManifestRequest_signalDecodersToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalDecodersToAdd", ID: &i_SignalDecoders, Members: &m_SignalDecoders, Type: smithy.ShapeTypeList, Ext: &eUpdateDecoderManifestRequest_signalDecodersToAdd})
+var sUpdateDecoderManifestRequest_signalDecodersToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalDecodersToUpdate", ID: &i_SignalDecoders, Members: &m_SignalDecoders, Type: smithy.ShapeTypeList, Ext: &eUpdateDecoderManifestRequest_signalDecodersToUpdate})
+var sUpdateDecoderManifestRequest_signalDecodersToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalDecodersToRemove", ID: &i_Fqns, Members: &m_Fqns, Type: smithy.ShapeTypeList, Ext: &eUpdateDecoderManifestRequest_signalDecodersToRemove})
+var sUpdateDecoderManifestRequest_networkInterfacesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfacesToAdd", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eUpdateDecoderManifestRequest_networkInterfacesToAdd})
+var sUpdateDecoderManifestRequest_networkInterfacesToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfacesToUpdate", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eUpdateDecoderManifestRequest_networkInterfacesToUpdate})
+var sUpdateDecoderManifestRequest_networkInterfacesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfacesToRemove", ID: &i_InterfaceIds, Members: &m_InterfaceIds, Type: smithy.ShapeTypeList, Ext: &eUpdateDecoderManifestRequest_networkInterfacesToRemove})
+var sUpdateDecoderManifestRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManifestStatus, Members: &mManifestStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDecoderManifestRequest_status})
+var sUpdateDecoderManifestRequest_defaultForUnmappedSignals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultForUnmappedSignals", ID: &iDefaultForUnmappedSignalsType, Members: &mDefaultForUnmappedSignalsType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDecoderManifestRequest_defaultForUnmappedSignals})
+var sUpdateDecoderManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDecoderManifestResponse, Members: &mUpdateDecoderManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDecoderManifestResponse})
+var sUpdateDecoderManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateDecoderManifestResponse_name})
+var sUpdateDecoderManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateDecoderManifestResponse_arn})
+var sUpdateFleetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleetRequest, Members: &mUpdateFleetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetRequest})
+var sUpdateFleetRequest_fleetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetId", ID: &i_fleetId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_fleetId})
+var sUpdateFleetRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetRequest_description})
+var sUpdateFleetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleetResponse, Members: &mUpdateFleetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetResponse})
+var sUpdateFleetResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_fleetId, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetResponse_id})
+var sUpdateFleetResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetResponse_arn})
+var sUpdateModelManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelManifestRequest, Members: &mUpdateModelManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelManifestRequest})
+var sUpdateModelManifestRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateModelManifestRequest_name})
+var sUpdateModelManifestRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateModelManifestRequest_description})
+var sUpdateModelManifestRequest_nodesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodesToAdd", ID: &i_NodePaths, Members: &m_NodePaths, Type: smithy.ShapeTypeList, Ext: &eUpdateModelManifestRequest_nodesToAdd})
+var sUpdateModelManifestRequest_nodesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodesToRemove", ID: &i_NodePaths, Members: &m_NodePaths, Type: smithy.ShapeTypeList, Ext: &eUpdateModelManifestRequest_nodesToRemove})
+var sUpdateModelManifestRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManifestStatus, Members: &mManifestStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateModelManifestRequest_status})
+var sUpdateModelManifestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelManifestResponse, Members: &mUpdateModelManifestResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelManifestResponse})
+var sUpdateModelManifestResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateModelManifestResponse_name})
+var sUpdateModelManifestResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateModelManifestResponse_arn})
+var sUpdateSignalCatalogRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSignalCatalogRequest, Members: &mUpdateSignalCatalogRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSignalCatalogRequest})
+var sUpdateSignalCatalogRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateSignalCatalogRequest_name})
+var sUpdateSignalCatalogRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateSignalCatalogRequest_description})
+var sUpdateSignalCatalogRequest_nodesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodesToAdd", ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &eUpdateSignalCatalogRequest_nodesToAdd})
+var sUpdateSignalCatalogRequest_nodesToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodesToUpdate", ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &eUpdateSignalCatalogRequest_nodesToUpdate})
+var sUpdateSignalCatalogRequest_nodesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodesToRemove", ID: &i_NodePaths, Members: &m_NodePaths, Type: smithy.ShapeTypeList, Ext: &eUpdateSignalCatalogRequest_nodesToRemove})
+var sUpdateSignalCatalogResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSignalCatalogResponse, Members: &mUpdateSignalCatalogResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSignalCatalogResponse})
+var sUpdateSignalCatalogResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateSignalCatalogResponse_name})
+var sUpdateSignalCatalogResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateSignalCatalogResponse_arn})
+var sUpdateStateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStateTemplateRequest, Members: &mUpdateStateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStateTemplateRequest})
+var sUpdateStateTemplateRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ResourceIdentifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateStateTemplateRequest_identifier})
+var sUpdateStateTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateStateTemplateRequest_description})
+var sUpdateStateTemplateRequest_stateTemplatePropertiesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatePropertiesToAdd", ID: &i_StateTemplateProperties, Members: &m_StateTemplateProperties, Type: smithy.ShapeTypeList, Ext: &eUpdateStateTemplateRequest_stateTemplatePropertiesToAdd})
+var sUpdateStateTemplateRequest_stateTemplatePropertiesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatePropertiesToRemove", ID: &i_StateTemplateProperties, Members: &m_StateTemplateProperties, Type: smithy.ShapeTypeList, Ext: &eUpdateStateTemplateRequest_stateTemplatePropertiesToRemove})
+var sUpdateStateTemplateRequest_dataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataExtraDimensions", ID: &i_StateTemplateDataExtraDimensionNodePathList, Members: &m_StateTemplateDataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &eUpdateStateTemplateRequest_dataExtraDimensions})
+var sUpdateStateTemplateRequest_metadataExtraDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataExtraDimensions", ID: &i_StateTemplateMetadataExtraDimensionNodePathList, Members: &m_StateTemplateMetadataExtraDimensionNodePathList, Type: smithy.ShapeTypeList, Ext: &eUpdateStateTemplateRequest_metadataExtraDimensions})
+var sUpdateStateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStateTemplateResponse, Members: &mUpdateStateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStateTemplateResponse})
+var sUpdateStateTemplateResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_resourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateStateTemplateResponse_name})
+var sUpdateStateTemplateResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateStateTemplateResponse_arn})
+var sUpdateStateTemplateResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceUniqueId, Type: smithy.ShapeTypeString, Ext: &eUpdateStateTemplateResponse_id})
+var sUpdateVehicleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVehicleRequest, Members: &mUpdateVehicleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVehicleRequest})
+var sUpdateVehicleRequest_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleRequest_vehicleName})
+var sUpdateVehicleRequest_modelManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleRequest_modelManifestArn})
+var sUpdateVehicleRequest_decoderManifestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decoderManifestArn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleRequest_decoderManifestArn})
+var sUpdateVehicleRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_attributesMap, Members: &m_attributesMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateVehicleRequest_attributes})
+var sUpdateVehicleRequest_attributeUpdateMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeUpdateMode", ID: &iUpdateMode, Members: &mUpdateMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateVehicleRequest_attributeUpdateMode})
+var sUpdateVehicleRequest_stateTemplatesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatesToAdd", ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &eUpdateVehicleRequest_stateTemplatesToAdd})
+var sUpdateVehicleRequest_stateTemplatesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatesToRemove", ID: &i_StateTemplateAssociationIdentifiers, Members: &m_StateTemplateAssociationIdentifiers, Type: smithy.ShapeTypeList, Ext: &eUpdateVehicleRequest_stateTemplatesToRemove})
+var sUpdateVehicleRequest_stateTemplatesToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateTemplatesToUpdate", ID: &i_StateTemplateAssociations, Members: &m_StateTemplateAssociations, Type: smithy.ShapeTypeList, Ext: &eUpdateVehicleRequest_stateTemplatesToUpdate})
+var sUpdateVehicleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVehicleResponse, Members: &mUpdateVehicleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVehicleResponse})
+var sUpdateVehicleResponse_vehicleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vehicleName", ID: &i_vehicleName, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleResponse_vehicleName})
+var sUpdateVehicleResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_arn, Type: smithy.ShapeTypeString, Ext: &eUpdateVehicleResponse_arn})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _string)
-
-	NodeDataType_INT8 = NodeDataType.AddMember("INT8", smithyprelude.Unit)
-
-	NodeDataType_UINT8 = NodeDataType.AddMember("UINT8", smithyprelude.Unit)
-
-	NodeDataType_INT16 = NodeDataType.AddMember("INT16", smithyprelude.Unit)
-
-	NodeDataType_UINT16 = NodeDataType.AddMember("UINT16", smithyprelude.Unit)
-
-	NodeDataType_INT32 = NodeDataType.AddMember("INT32", smithyprelude.Unit)
-
-	NodeDataType_UINT32 = NodeDataType.AddMember("UINT32", smithyprelude.Unit)
-
-	NodeDataType_INT64 = NodeDataType.AddMember("INT64", smithyprelude.Unit)
-
-	NodeDataType_UINT64 = NodeDataType.AddMember("UINT64", smithyprelude.Unit)
-
-	NodeDataType_BOOLEAN = NodeDataType.AddMember("BOOLEAN", smithyprelude.Unit)
-
-	NodeDataType_FLOAT = NodeDataType.AddMember("FLOAT", smithyprelude.Unit)
-
-	NodeDataType_DOUBLE = NodeDataType.AddMember("DOUBLE", smithyprelude.Unit)
-
-	NodeDataType_STRING = NodeDataType.AddMember("STRING", smithyprelude.Unit)
-
-	NodeDataType_UNIX_TIMESTAMP = NodeDataType.AddMember("UNIX_TIMESTAMP", smithyprelude.Unit)
-
-	NodeDataType_INT8_ARRAY = NodeDataType.AddMember("INT8_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_UINT8_ARRAY = NodeDataType.AddMember("UINT8_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_INT16_ARRAY = NodeDataType.AddMember("INT16_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_UINT16_ARRAY = NodeDataType.AddMember("UINT16_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_INT32_ARRAY = NodeDataType.AddMember("INT32_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_UINT32_ARRAY = NodeDataType.AddMember("UINT32_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_INT64_ARRAY = NodeDataType.AddMember("INT64_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_UINT64_ARRAY = NodeDataType.AddMember("UINT64_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_BOOLEAN_ARRAY = NodeDataType.AddMember("BOOLEAN_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_FLOAT_ARRAY = NodeDataType.AddMember("FLOAT_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_DOUBLE_ARRAY = NodeDataType.AddMember("DOUBLE_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_STRING_ARRAY = NodeDataType.AddMember("STRING_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_UNIX_TIMESTAMP_ARRAY = NodeDataType.AddMember("UNIX_TIMESTAMP_ARRAY", smithyprelude.Unit)
-
-	NodeDataType_UNKNOWN = NodeDataType.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	NodeDataType_STRUCT = NodeDataType.AddMember("STRUCT", smithyprelude.Unit)
-
-	NodeDataType_STRUCT_ARRAY = NodeDataType.AddMember("STRUCT_ARRAY", smithyprelude.Unit)
-
-	_listOfStrings_member = _listOfStrings.AddMember("member", _string)
-
-	Actuator_fullyQualifiedName = Actuator.AddMember("fullyQualifiedName", _string)
-
-	Actuator_dataType = Actuator.AddMember("dataType", NodeDataType)
-
-	Actuator_description = Actuator.AddMember("description", _description)
-
-	Actuator_unit = Actuator.AddMember("unit", _string)
-
-	Actuator_allowedValues = Actuator.AddMember("allowedValues", _listOfStrings)
-
-	Actuator_min = Actuator.AddMember("min", _double)
-
-	Actuator_max = Actuator.AddMember("max", _double)
-
-	Actuator_assignedValue = Actuator.AddMember("assignedValue", _string)
-
-	Actuator_deprecationMessage = Actuator.AddMember("deprecationMessage", _message)
-
-	Actuator_comment = Actuator.AddMember("comment", _message)
-
-	Actuator_structFullyQualifiedName = Actuator.AddMember("structFullyQualifiedName", _NodePath)
-
-	Attribute_fullyQualifiedName = Attribute.AddMember("fullyQualifiedName", _string)
-
-	Attribute_dataType = Attribute.AddMember("dataType", NodeDataType)
-
-	Attribute_description = Attribute.AddMember("description", _description)
-
-	Attribute_unit = Attribute.AddMember("unit", _string)
-
-	Attribute_allowedValues = Attribute.AddMember("allowedValues", _listOfStrings)
-
-	Attribute_min = Attribute.AddMember("min", _double)
-
-	Attribute_max = Attribute.AddMember("max", _double)
-
-	Attribute_assignedValue = Attribute.AddMember("assignedValue", _string)
-
-	Attribute_defaultValue = Attribute.AddMember("defaultValue", _string)
-
-	Attribute_deprecationMessage = Attribute.AddMember("deprecationMessage", _message)
-
-	Attribute_comment = Attribute.AddMember("comment", _message)
-
-	_attributeNamesList_member = _attributeNamesList.AddMember("member", _attributeName)
-
-	_attributesMap_key = _attributesMap.AddMember("key", _attributeName)
-
-	_attributesMap_value = _attributesMap.AddMember("value", _attributeValue)
-
-	_attributeValuesList_member = _attributeValuesList.AddMember("member", _attributeValue)
-
-	Branch_fullyQualifiedName = Branch.AddMember("fullyQualifiedName", _string)
-
-	Branch_description = Branch.AddMember("description", _description)
-
-	Branch_deprecationMessage = Branch.AddMember("deprecationMessage", _message)
-
-	Branch_comment = Branch.AddMember("comment", _message)
-
-	CampaignStatus_CREATING = CampaignStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	CampaignStatus_WAITING_FOR_APPROVAL = CampaignStatus.AddMember("WAITING_FOR_APPROVAL", smithyprelude.Unit)
-
-	CampaignStatus_RUNNING = CampaignStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	CampaignStatus_SUSPENDED = CampaignStatus.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	CampaignSummary_arn = CampaignSummary.AddMember("arn", _campaignArn)
-
-	CampaignSummary_name = CampaignSummary.AddMember("name", _campaignName)
-
-	CampaignSummary_description = CampaignSummary.AddMember("description", _description)
-
-	CampaignSummary_signalCatalogArn = CampaignSummary.AddMember("signalCatalogArn", _arn)
-
-	CampaignSummary_targetArn = CampaignSummary.AddMember("targetArn", _arn)
-
-	CampaignSummary_status = CampaignSummary.AddMember("status", CampaignStatus)
-
-	CampaignSummary_creationTime = CampaignSummary.AddMember("creationTime", _timestamp)
-
-	CampaignSummary_lastModificationTime = CampaignSummary.AddMember("lastModificationTime", _timestamp)
-
-	_campaignSummaries_member = _campaignSummaries.AddMember("member", CampaignSummary)
-
-	_NetworkFilesList_member = _NetworkFilesList.AddMember("member", _NetworkFileBlob)
-
-	_ModelSignalsMap_key = _ModelSignalsMap.AddMember("key", _string)
-
-	_ModelSignalsMap_value = _ModelSignalsMap.AddMember("value", _string)
-
-	CanDbcDefinition_networkInterface = CanDbcDefinition.AddMember("networkInterface", _InterfaceId)
-
-	CanDbcDefinition_canDbcFiles = CanDbcDefinition.AddMember("canDbcFiles", _NetworkFilesList)
-
-	CanDbcDefinition_signalsMap = CanDbcDefinition.AddMember("signalsMap", _ModelSignalsMap)
-
-	CanInterface_name = CanInterface.AddMember("name", _CanInterfaceName)
-
-	CanInterface_protocolName = CanInterface.AddMember("protocolName", _ProtocolName)
-
-	CanInterface_protocolVersion = CanInterface.AddMember("protocolVersion", _ProtocolVersion)
-
-	SignalValueType_INTEGER = SignalValueType.AddMember("INTEGER", smithyprelude.Unit)
-
-	SignalValueType_FLOATING_POINT = SignalValueType.AddMember("FLOATING_POINT", smithyprelude.Unit)
-
-	CanSignal_messageId = CanSignal.AddMember("messageId", _nonNegativeInteger)
-
-	CanSignal_isBigEndian = CanSignal.AddMember("isBigEndian", smithyprelude.PrimitiveBoolean)
-
-	CanSignal_isSigned = CanSignal.AddMember("isSigned", smithyprelude.PrimitiveBoolean)
-
-	CanSignal_startBit = CanSignal.AddMember("startBit", _nonNegativeInteger)
-
-	CanSignal_offset = CanSignal.AddMember("offset", _double)
-
-	CanSignal_factor = CanSignal.AddMember("factor", _double)
-
-	CanSignal_length = CanSignal.AddMember("length", _nonNegativeInteger)
-
-	CanSignal_name = CanSignal.AddMember("name", _CanSignalName)
-
-	CanSignal_signalValueType = CanSignal.AddMember("signalValueType", SignalValueType)
-
-	LogType_OFF = LogType.AddMember("OFF", smithyprelude.Unit)
-
-	LogType_ERROR = LogType.AddMember("ERROR", smithyprelude.Unit)
-
-	CloudWatchLogDeliveryOptions_logType = CloudWatchLogDeliveryOptions.AddMember("logType", LogType)
-
-	CloudWatchLogDeliveryOptions_logGroupName = CloudWatchLogDeliveryOptions.AddMember("logGroupName", _CloudWatchLogGroupName)
-
-	TimeBasedCollectionScheme_periodMs = TimeBasedCollectionScheme.AddMember("periodMs", _collectionPeriodMs)
-
-	TriggerMode_ALWAYS = TriggerMode.AddMember("ALWAYS", smithyprelude.Unit)
-
-	TriggerMode_RISING_EDGE = TriggerMode.AddMember("RISING_EDGE", smithyprelude.Unit)
-
-	ConditionBasedCollectionScheme_expression = ConditionBasedCollectionScheme.AddMember("expression", _eventExpression)
-
-	ConditionBasedCollectionScheme_minimumTriggerIntervalMs = ConditionBasedCollectionScheme.AddMember("minimumTriggerIntervalMs", _uint32)
-
-	ConditionBasedCollectionScheme_triggerMode = ConditionBasedCollectionScheme.AddMember("triggerMode", TriggerMode)
-
-	ConditionBasedCollectionScheme_conditionLanguageVersion = ConditionBasedCollectionScheme.AddMember("conditionLanguageVersion", _languageVersion)
-
-	CollectionScheme_timeBasedCollectionScheme = CollectionScheme.AddMember("timeBasedCollectionScheme", TimeBasedCollectionScheme)
-
-	CollectionScheme_conditionBasedCollectionScheme = CollectionScheme.AddMember("conditionBasedCollectionScheme", ConditionBasedCollectionScheme)
-
-	Compression_OFF = Compression.AddMember("OFF", smithyprelude.Unit)
-
-	Compression_SNAPPY = Compression.AddMember("SNAPPY", smithyprelude.Unit)
-
-	ConditionBasedSignalFetchConfig_conditionExpression = ConditionBasedSignalFetchConfig.AddMember("conditionExpression", _fetchConfigEventExpression)
-
-	ConditionBasedSignalFetchConfig_triggerMode = ConditionBasedSignalFetchConfig.AddMember("triggerMode", TriggerMode)
-
-	ConflictException_message = ConflictException.AddMember("message", _string)
-
-	ConflictException_resource = ConflictException.AddMember("resource", _string)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _string)
-
-	CreateVehicleError_vehicleName = CreateVehicleError.AddMember("vehicleName", _vehicleName)
-
-	CreateVehicleError_code = CreateVehicleError.AddMember("code", _string)
-
-	CreateVehicleError_message = CreateVehicleError.AddMember("message", _string)
-
-	_createVehicleErrors_member = _createVehicleErrors.AddMember("member", CreateVehicleError)
-
-	VehicleAssociationBehavior_CREATE_IOT_THING = VehicleAssociationBehavior.AddMember("CREATE_IOT_THING", smithyprelude.Unit)
-
-	VehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS = VehicleAssociationBehavior.AddMember("VALIDATE_IOT_THING_EXISTS", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TimeUnit_MILLISECOND = TimeUnit.AddMember("MILLISECOND", smithyprelude.Unit)
-
-	TimeUnit_SECOND = TimeUnit.AddMember("SECOND", smithyprelude.Unit)
-
-	TimeUnit_MINUTE = TimeUnit.AddMember("MINUTE", smithyprelude.Unit)
-
-	TimeUnit_HOUR = TimeUnit.AddMember("HOUR", smithyprelude.Unit)
-
-	TimePeriod_unit = TimePeriod.AddMember("unit", TimeUnit)
-
-	TimePeriod_value = TimePeriod.AddMember("value", _positiveInteger)
-
-	PeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate = PeriodicStateTemplateUpdateStrategy.AddMember("stateTemplateUpdateRate", TimePeriod)
-
-	StateTemplateUpdateStrategy_periodic = StateTemplateUpdateStrategy.AddMember("periodic", PeriodicStateTemplateUpdateStrategy)
-
-	StateTemplateUpdateStrategy_onChange = StateTemplateUpdateStrategy.AddMember("onChange", OnChangeStateTemplateUpdateStrategy)
-
-	StateTemplateAssociation_identifier = StateTemplateAssociation.AddMember("identifier", _ResourceIdentifier)
-
-	StateTemplateAssociation_stateTemplateUpdateStrategy = StateTemplateAssociation.AddMember("stateTemplateUpdateStrategy", StateTemplateUpdateStrategy)
-
-	_StateTemplateAssociations_member = _StateTemplateAssociations.AddMember("member", StateTemplateAssociation)
-
-	CreateVehicleRequestItem_vehicleName = CreateVehicleRequestItem.AddMember("vehicleName", _vehicleName)
-
-	CreateVehicleRequestItem_modelManifestArn = CreateVehicleRequestItem.AddMember("modelManifestArn", _arn)
-
-	CreateVehicleRequestItem_decoderManifestArn = CreateVehicleRequestItem.AddMember("decoderManifestArn", _arn)
-
-	CreateVehicleRequestItem_attributes = CreateVehicleRequestItem.AddMember("attributes", _attributesMap)
-
-	CreateVehicleRequestItem_associationBehavior = CreateVehicleRequestItem.AddMember("associationBehavior", VehicleAssociationBehavior)
-
-	CreateVehicleRequestItem_tags = CreateVehicleRequestItem.AddMember("tags", _TagList)
-
-	CreateVehicleRequestItem_stateTemplates = CreateVehicleRequestItem.AddMember("stateTemplates", _StateTemplateAssociations)
-
-	_createVehicleRequestItems_member = _createVehicleRequestItems.AddMember("member", CreateVehicleRequestItem)
-
-	CreateVehicleResponseItem_vehicleName = CreateVehicleResponseItem.AddMember("vehicleName", _vehicleName)
-
-	CreateVehicleResponseItem_arn = CreateVehicleResponseItem.AddMember("arn", _arn)
-
-	CreateVehicleResponseItem_thingArn = CreateVehicleResponseItem.AddMember("thingArn", _arn)
-
-	_createVehicleResponses_member = _createVehicleResponses.AddMember("member", CreateVehicleResponseItem)
-
-	CustomDecodingInterface_name = CustomDecodingInterface.AddMember("name", _CustomDecodingSignalInterfaceName)
-
-	CustomDecodingSignal_id = CustomDecodingSignal.AddMember("id", _CustomDecodingId)
-
-	NodeDataEncoding_BINARY = NodeDataEncoding.AddMember("BINARY", smithyprelude.Unit)
-
-	NodeDataEncoding_TYPED = NodeDataEncoding.AddMember("TYPED", smithyprelude.Unit)
-
-	CustomProperty_fullyQualifiedName = CustomProperty.AddMember("fullyQualifiedName", _string)
-
-	CustomProperty_dataType = CustomProperty.AddMember("dataType", NodeDataType)
-
-	CustomProperty_dataEncoding = CustomProperty.AddMember("dataEncoding", NodeDataEncoding)
-
-	CustomProperty_description = CustomProperty.AddMember("description", _description)
-
-	CustomProperty_deprecationMessage = CustomProperty.AddMember("deprecationMessage", _message)
-
-	CustomProperty_comment = CustomProperty.AddMember("comment", _message)
-
-	CustomProperty_structFullyQualifiedName = CustomProperty.AddMember("structFullyQualifiedName", _NodePath)
-
-	CustomStruct_fullyQualifiedName = CustomStruct.AddMember("fullyQualifiedName", _string)
-
-	CustomStruct_description = CustomStruct.AddMember("description", _description)
-
-	CustomStruct_deprecationMessage = CustomStruct.AddMember("deprecationMessage", _message)
-
-	CustomStruct_comment = CustomStruct.AddMember("comment", _message)
-
-	DataFormat_JSON = DataFormat.AddMember("JSON", smithyprelude.Unit)
-
-	DataFormat_PARQUET = DataFormat.AddMember("PARQUET", smithyprelude.Unit)
-
-	StorageCompressionFormat_NONE = StorageCompressionFormat.AddMember("NONE", smithyprelude.Unit)
-
-	StorageCompressionFormat_GZIP = StorageCompressionFormat.AddMember("GZIP", smithyprelude.Unit)
-
-	S3Config_bucketArn = S3Config.AddMember("bucketArn", _S3BucketArn)
-
-	S3Config_dataFormat = S3Config.AddMember("dataFormat", DataFormat)
-
-	S3Config_storageCompressionFormat = S3Config.AddMember("storageCompressionFormat", StorageCompressionFormat)
-
-	S3Config_prefix = S3Config.AddMember("prefix", _Prefix)
-
-	TimestreamConfig_timestreamTableArn = TimestreamConfig.AddMember("timestreamTableArn", _TimestreamTableArn)
-
-	TimestreamConfig_executionRoleArn = TimestreamConfig.AddMember("executionRoleArn", _IAMRoleArn)
-
-	MqttTopicConfig_mqttTopicArn = MqttTopicConfig.AddMember("mqttTopicArn", _MqttTopicArn)
-
-	MqttTopicConfig_executionRoleArn = MqttTopicConfig.AddMember("executionRoleArn", _IAMRoleArn)
-
-	DataDestinationConfig_s3Config = DataDestinationConfig.AddMember("s3Config", S3Config)
-
-	DataDestinationConfig_timestreamConfig = DataDestinationConfig.AddMember("timestreamConfig", TimestreamConfig)
-
-	DataDestinationConfig_mqttTopicConfig = DataDestinationConfig.AddMember("mqttTopicConfig", MqttTopicConfig)
-
-	_DataDestinationConfigs_member = _DataDestinationConfigs.AddMember("member", DataDestinationConfig)
-
-	_DataExtraDimensionNodePathList_member = _DataExtraDimensionNodePathList.AddMember("member", _NodePath)
-
-	StorageMaximumSizeUnit_MB = StorageMaximumSizeUnit.AddMember("MB", smithyprelude.Unit)
-
-	StorageMaximumSizeUnit_GB = StorageMaximumSizeUnit.AddMember("GB", smithyprelude.Unit)
-
-	StorageMaximumSizeUnit_TB = StorageMaximumSizeUnit.AddMember("TB", smithyprelude.Unit)
-
-	StorageMaximumSize_unit = StorageMaximumSize.AddMember("unit", StorageMaximumSizeUnit)
-
-	StorageMaximumSize_value = StorageMaximumSize.AddMember("value", _StorageMaximumSizeValue)
-
-	StorageMinimumTimeToLiveUnit_HOURS = StorageMinimumTimeToLiveUnit.AddMember("HOURS", smithyprelude.Unit)
-
-	StorageMinimumTimeToLiveUnit_DAYS = StorageMinimumTimeToLiveUnit.AddMember("DAYS", smithyprelude.Unit)
-
-	StorageMinimumTimeToLiveUnit_WEEKS = StorageMinimumTimeToLiveUnit.AddMember("WEEKS", smithyprelude.Unit)
-
-	StorageMinimumTimeToLive_unit = StorageMinimumTimeToLive.AddMember("unit", StorageMinimumTimeToLiveUnit)
-
-	StorageMinimumTimeToLive_value = StorageMinimumTimeToLive.AddMember("value", _StorageMinimumTimeToLiveValue)
-
-	DataPartitionStorageOptions_maximumSize = DataPartitionStorageOptions.AddMember("maximumSize", StorageMaximumSize)
-
-	DataPartitionStorageOptions_storageLocation = DataPartitionStorageOptions.AddMember("storageLocation", _StorageLocation)
-
-	DataPartitionStorageOptions_minimumTimeToLive = DataPartitionStorageOptions.AddMember("minimumTimeToLive", StorageMinimumTimeToLive)
-
-	DataPartitionUploadOptions_expression = DataPartitionUploadOptions.AddMember("expression", _eventExpression)
-
-	DataPartitionUploadOptions_conditionLanguageVersion = DataPartitionUploadOptions.AddMember("conditionLanguageVersion", _languageVersion)
-
-	DataPartition_id = DataPartition.AddMember("id", _DataPartitionId)
-
-	DataPartition_storageOptions = DataPartition.AddMember("storageOptions", DataPartitionStorageOptions)
-
-	DataPartition_uploadOptions = DataPartition.AddMember("uploadOptions", DataPartitionUploadOptions)
-
-	_DataPartitions_member = _DataPartitions.AddMember("member", DataPartition)
-
-	ManifestStatus_ACTIVE = ManifestStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ManifestStatus_DRAFT = ManifestStatus.AddMember("DRAFT", smithyprelude.Unit)
-
-	ManifestStatus_INVALID = ManifestStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	ManifestStatus_VALIDATING = ManifestStatus.AddMember("VALIDATING", smithyprelude.Unit)
-
-	DecoderManifestSummary_name = DecoderManifestSummary.AddMember("name", _string)
-
-	DecoderManifestSummary_arn = DecoderManifestSummary.AddMember("arn", _arn)
-
-	DecoderManifestSummary_modelManifestArn = DecoderManifestSummary.AddMember("modelManifestArn", _arn)
-
-	DecoderManifestSummary_description = DecoderManifestSummary.AddMember("description", _description)
-
-	DecoderManifestSummary_status = DecoderManifestSummary.AddMember("status", ManifestStatus)
-
-	DecoderManifestSummary_creationTime = DecoderManifestSummary.AddMember("creationTime", _timestamp)
-
-	DecoderManifestSummary_lastModificationTime = DecoderManifestSummary.AddMember("lastModificationTime", _timestamp)
-
-	DecoderManifestSummary_message = DecoderManifestSummary.AddMember("message", _message)
-
-	_decoderManifestSummaries_member = _decoderManifestSummaries.AddMember("member", DecoderManifestSummary)
-
-	SignalDecoderFailureReason_DUPLICATE_SIGNAL = SignalDecoderFailureReason.AddMember("DUPLICATE_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_CONFLICTING_SIGNAL = SignalDecoderFailureReason.AddMember("CONFLICTING_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS = SignalDecoderFailureReason.AddMember("SIGNAL_TO_ADD_ALREADY_EXISTS", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE = SignalDecoderFailureReason.AddMember("SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE = SignalDecoderFailureReason.AddMember("NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL = SignalDecoderFailureReason.AddMember("SIGNAL_NOT_IN_MODEL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL = SignalDecoderFailureReason.AddMember("CAN_SIGNAL_INFO_IS_NULL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL = SignalDecoderFailureReason.AddMember("OBD_SIGNAL_INFO_IS_NULL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL = SignalDecoderFailureReason.AddMember("NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL = SignalDecoderFailureReason.AddMember("MESSAGE_SIGNAL_INFO_IS_NULL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE = SignalDecoderFailureReason.AddMember("SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_STRUCT_SIZE_MISMATCH = SignalDecoderFailureReason.AddMember("STRUCT_SIZE_MISMATCH", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL = SignalDecoderFailureReason.AddMember("NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG = SignalDecoderFailureReason.AddMember("SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL = SignalDecoderFailureReason.AddMember("EMPTY_MESSAGE_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL = SignalDecoderFailureReason.AddMember("CUSTOM_DECODING_SIGNAL_INFO_IS_NULL", smithyprelude.Unit)
-
-	InvalidSignalDecoder_name = InvalidSignalDecoder.AddMember("name", _FullyQualifiedName)
-
-	InvalidSignalDecoder_reason = InvalidSignalDecoder.AddMember("reason", SignalDecoderFailureReason)
-
-	InvalidSignalDecoder_hint = InvalidSignalDecoder.AddMember("hint", _message)
-
-	_InvalidSignalDecoders_member = _InvalidSignalDecoders.AddMember("member", InvalidSignalDecoder)
-
-	NetworkInterfaceFailureReason_DUPLICATE_INTERFACE = NetworkInterfaceFailureReason.AddMember("DUPLICATE_INTERFACE", smithyprelude.Unit)
-
-	NetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE = NetworkInterfaceFailureReason.AddMember("CONFLICTING_NETWORK_INTERFACE", smithyprelude.Unit)
-
-	NetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS = NetworkInterfaceFailureReason.AddMember("NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS", smithyprelude.Unit)
-
-	NetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL = NetworkInterfaceFailureReason.AddMember("CAN_NETWORK_INTERFACE_INFO_IS_NULL", smithyprelude.Unit)
-
-	NetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL = NetworkInterfaceFailureReason.AddMember("OBD_NETWORK_INTERFACE_INFO_IS_NULL", smithyprelude.Unit)
-
-	NetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS = NetworkInterfaceFailureReason.AddMember("NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS", smithyprelude.Unit)
-
-	NetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL = NetworkInterfaceFailureReason.AddMember("VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL", smithyprelude.Unit)
-
-	NetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL = NetworkInterfaceFailureReason.AddMember("CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL", smithyprelude.Unit)
-
-	InvalidNetworkInterface_interfaceId = InvalidNetworkInterface.AddMember("interfaceId", _InterfaceId)
-
-	InvalidNetworkInterface_reason = InvalidNetworkInterface.AddMember("reason", NetworkInterfaceFailureReason)
-
-	_InvalidNetworkInterfaces_member = _InvalidNetworkInterfaces.AddMember("member", InvalidNetworkInterface)
-
-	DecoderManifestValidationException_invalidSignals = DecoderManifestValidationException.AddMember("invalidSignals", _InvalidSignalDecoders)
-
-	DecoderManifestValidationException_invalidNetworkInterfaces = DecoderManifestValidationException.AddMember("invalidNetworkInterfaces", _InvalidNetworkInterfaces)
-
-	DecoderManifestValidationException_message = DecoderManifestValidationException.AddMember("message", _string)
-
-	DefaultForUnmappedSignalsType_CUSTOM_DECODING = DefaultForUnmappedSignalsType.AddMember("CUSTOM_DECODING", smithyprelude.Unit)
-
-	DiagnosticsMode_OFF = DiagnosticsMode.AddMember("OFF", smithyprelude.Unit)
-
-	DiagnosticsMode_SEND_ACTIVE_DTCS = DiagnosticsMode.AddMember("SEND_ACTIVE_DTCS", smithyprelude.Unit)
-
-	EncryptionStatus_PENDING = EncryptionStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	EncryptionStatus_SUCCESS = EncryptionStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	EncryptionStatus_FAILURE = EncryptionStatus.AddMember("FAILURE", smithyprelude.Unit)
-
-	EncryptionType_KMS_BASED_ENCRYPTION = EncryptionType.AddMember("KMS_BASED_ENCRYPTION", smithyprelude.Unit)
-
-	EncryptionType_FLEETWISE_DEFAULT_ENCRYPTION = EncryptionType.AddMember("FLEETWISE_DEFAULT_ENCRYPTION", smithyprelude.Unit)
-
-	_EventExpressionList_member = _EventExpressionList.AddMember("member", _actionEventExpression)
-
-	_fleets_member = _fleets.AddMember("member", _fleetId)
-
-	FleetSummary_id = FleetSummary.AddMember("id", _fleetId)
-
-	FleetSummary_arn = FleetSummary.AddMember("arn", _arn)
-
-	FleetSummary_description = FleetSummary.AddMember("description", _description)
-
-	FleetSummary_signalCatalogArn = FleetSummary.AddMember("signalCatalogArn", _arn)
-
-	FleetSummary_creationTime = FleetSummary.AddMember("creationTime", _timestamp)
-
-	FleetSummary_lastModificationTime = FleetSummary.AddMember("lastModificationTime", _timestamp)
-
-	_fleetSummaries_member = _fleetSummaries.AddMember("member", FleetSummary)
-
-	FormattedVss_vssJson = FormattedVss.AddMember("vssJson", smithyprelude.String)
-
-	_Fqns_member = _Fqns.AddMember("member", _FullyQualifiedName)
-
-	RegistrationStatus_REGISTRATION_PENDING = RegistrationStatus.AddMember("REGISTRATION_PENDING", smithyprelude.Unit)
-
-	RegistrationStatus_REGISTRATION_SUCCESS = RegistrationStatus.AddMember("REGISTRATION_SUCCESS", smithyprelude.Unit)
-
-	RegistrationStatus_REGISTRATION_FAILURE = RegistrationStatus.AddMember("REGISTRATION_FAILURE", smithyprelude.Unit)
-
-	IamRegistrationResponse_roleArn = IamRegistrationResponse.AddMember("roleArn", _arn)
-
-	IamRegistrationResponse_registrationStatus = IamRegistrationResponse.AddMember("registrationStatus", RegistrationStatus)
-
-	IamRegistrationResponse_errorMessage = IamRegistrationResponse.AddMember("errorMessage", _errorMessage)
-
-	IamResources_roleArn = IamResources.AddMember("roleArn", _IAMRoleArn)
-
-	_InterfaceIds_member = _InterfaceIds.AddMember("member", _InterfaceId)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _string)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	Sensor_fullyQualifiedName = Sensor.AddMember("fullyQualifiedName", _string)
-
-	Sensor_dataType = Sensor.AddMember("dataType", NodeDataType)
-
-	Sensor_description = Sensor.AddMember("description", _description)
-
-	Sensor_unit = Sensor.AddMember("unit", _string)
-
-	Sensor_allowedValues = Sensor.AddMember("allowedValues", _listOfStrings)
-
-	Sensor_min = Sensor.AddMember("min", _double)
-
-	Sensor_max = Sensor.AddMember("max", _double)
-
-	Sensor_deprecationMessage = Sensor.AddMember("deprecationMessage", _message)
-
-	Sensor_comment = Sensor.AddMember("comment", _message)
-
-	Sensor_structFullyQualifiedName = Sensor.AddMember("structFullyQualifiedName", _NodePath)
-
-	Node_branch = Node.AddMember("branch", Branch)
-
-	Node_sensor = Node.AddMember("sensor", Sensor)
-
-	Node_actuator = Node.AddMember("actuator", Actuator)
-
-	Node_attribute = Node.AddMember("attribute", Attribute)
-
-	Node_struct = Node.AddMember("struct", CustomStruct)
-
-	Node_property = Node.AddMember("property", CustomProperty)
-
-	_Nodes_member = _Nodes.AddMember("member", Node)
-
-	InvalidNodeException_invalidNodes = InvalidNodeException.AddMember("invalidNodes", _Nodes)
-
-	InvalidNodeException_reason = InvalidNodeException.AddMember("reason", _string)
-
-	InvalidNodeException_message = InvalidNodeException.AddMember("message", _string)
-
-	InvalidSignal_name = InvalidSignal.AddMember("name", _FullyQualifiedName)
-
-	InvalidSignal_reason = InvalidSignal.AddMember("reason", _string)
-
-	_InvalidSignals_member = _InvalidSignals.AddMember("member", InvalidSignal)
-
-	InvalidSignalsException_message = InvalidSignalsException.AddMember("message", _string)
-
-	InvalidSignalsException_invalidSignals = InvalidSignalsException.AddMember("invalidSignals", _InvalidSignals)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _string)
-
-	LimitExceededException_resourceId = LimitExceededException.AddMember("resourceId", _string)
-
-	LimitExceededException_resourceType = LimitExceededException.AddMember("resourceType", _string)
-
-	ListResponseScope_METADATA_ONLY = ListResponseScope.AddMember("METADATA_ONLY", smithyprelude.Unit)
-
-	ROS2PrimitiveType_BOOL = ROS2PrimitiveType.AddMember("BOOL", smithyprelude.Unit)
-
-	ROS2PrimitiveType_BYTE = ROS2PrimitiveType.AddMember("BYTE", smithyprelude.Unit)
-
-	ROS2PrimitiveType_CHAR = ROS2PrimitiveType.AddMember("CHAR", smithyprelude.Unit)
-
-	ROS2PrimitiveType_FLOAT32 = ROS2PrimitiveType.AddMember("FLOAT32", smithyprelude.Unit)
-
-	ROS2PrimitiveType_FLOAT64 = ROS2PrimitiveType.AddMember("FLOAT64", smithyprelude.Unit)
-
-	ROS2PrimitiveType_INT8 = ROS2PrimitiveType.AddMember("INT8", smithyprelude.Unit)
-
-	ROS2PrimitiveType_UINT8 = ROS2PrimitiveType.AddMember("UINT8", smithyprelude.Unit)
-
-	ROS2PrimitiveType_INT16 = ROS2PrimitiveType.AddMember("INT16", smithyprelude.Unit)
-
-	ROS2PrimitiveType_UINT16 = ROS2PrimitiveType.AddMember("UINT16", smithyprelude.Unit)
-
-	ROS2PrimitiveType_INT32 = ROS2PrimitiveType.AddMember("INT32", smithyprelude.Unit)
-
-	ROS2PrimitiveType_UINT32 = ROS2PrimitiveType.AddMember("UINT32", smithyprelude.Unit)
-
-	ROS2PrimitiveType_INT64 = ROS2PrimitiveType.AddMember("INT64", smithyprelude.Unit)
-
-	ROS2PrimitiveType_UINT64 = ROS2PrimitiveType.AddMember("UINT64", smithyprelude.Unit)
-
-	ROS2PrimitiveType_STRING = ROS2PrimitiveType.AddMember("STRING", smithyprelude.Unit)
-
-	ROS2PrimitiveType_WSTRING = ROS2PrimitiveType.AddMember("WSTRING", smithyprelude.Unit)
-
-	ROS2PrimitiveMessageDefinition_primitiveType = ROS2PrimitiveMessageDefinition.AddMember("primitiveType", ROS2PrimitiveType)
-
-	ROS2PrimitiveMessageDefinition_offset = ROS2PrimitiveMessageDefinition.AddMember("offset", _double)
-
-	ROS2PrimitiveMessageDefinition_scaling = ROS2PrimitiveMessageDefinition.AddMember("scaling", _double)
-
-	ROS2PrimitiveMessageDefinition_upperBound = ROS2PrimitiveMessageDefinition.AddMember("upperBound", _maxStringSize)
-
-	PrimitiveMessageDefinition_ros2PrimitiveMessageDefinition = PrimitiveMessageDefinition.AddMember("ros2PrimitiveMessageDefinition", ROS2PrimitiveMessageDefinition)
-
-	StructuredMessageListType_FIXED_CAPACITY = StructuredMessageListType.AddMember("FIXED_CAPACITY", smithyprelude.Unit)
-
-	StructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY = StructuredMessageListType.AddMember("DYNAMIC_UNBOUNDED_CAPACITY", smithyprelude.Unit)
-
-	StructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY = StructuredMessageListType.AddMember("DYNAMIC_BOUNDED_CAPACITY", smithyprelude.Unit)
-
-	StructuredMessageListDefinition_name = StructuredMessageListDefinition.AddMember("name", _StructureMessageName)
-
-	StructuredMessageListDefinition_memberType = StructuredMessageListDefinition.AddMember("memberType", StructuredMessage)
-
-	StructuredMessageListDefinition_listType = StructuredMessageListDefinition.AddMember("listType", StructuredMessageListType)
-
-	StructuredMessageListDefinition_capacity = StructuredMessageListDefinition.AddMember("capacity", _nonNegativeInteger)
-
-	StructuredMessageFieldNameAndDataTypePair_fieldName = StructuredMessageFieldNameAndDataTypePair.AddMember("fieldName", _StructureMessageName)
-
-	StructuredMessageFieldNameAndDataTypePair_dataType = StructuredMessageFieldNameAndDataTypePair.AddMember("dataType", StructuredMessage)
-
-	_StructuredMessageDefinition_member = _StructuredMessageDefinition.AddMember("member", StructuredMessageFieldNameAndDataTypePair)
-
-	StructuredMessage_primitiveMessageDefinition = StructuredMessage.AddMember("primitiveMessageDefinition", PrimitiveMessageDefinition)
-
-	StructuredMessage_structuredMessageListDefinition = StructuredMessage.AddMember("structuredMessageListDefinition", StructuredMessageListDefinition)
-
-	StructuredMessage_structuredMessageDefinition = StructuredMessage.AddMember("structuredMessageDefinition", _StructuredMessageDefinition)
-
-	MessageSignal_topicName = MessageSignal.AddMember("topicName", _TopicName)
-
-	MessageSignal_structuredMessage = MessageSignal.AddMember("structuredMessage", StructuredMessage)
-
-	ModelManifestSummary_name = ModelManifestSummary.AddMember("name", _string)
-
-	ModelManifestSummary_arn = ModelManifestSummary.AddMember("arn", _arn)
-
-	ModelManifestSummary_signalCatalogArn = ModelManifestSummary.AddMember("signalCatalogArn", _arn)
-
-	ModelManifestSummary_description = ModelManifestSummary.AddMember("description", _description)
-
-	ModelManifestSummary_status = ModelManifestSummary.AddMember("status", ManifestStatus)
-
-	ModelManifestSummary_creationTime = ModelManifestSummary.AddMember("creationTime", _timestamp)
-
-	ModelManifestSummary_lastModificationTime = ModelManifestSummary.AddMember("lastModificationTime", _timestamp)
-
-	_modelManifestSummaries_member = _modelManifestSummaries.AddMember("member", ModelManifestSummary)
-
-	NetworkFileDefinition_canDbc = NetworkFileDefinition.AddMember("canDbc", CanDbcDefinition)
-
-	_NetworkFileDefinitions_member = _NetworkFileDefinitions.AddMember("member", NetworkFileDefinition)
-
-	NetworkInterfaceType_CAN_INTERFACE = NetworkInterfaceType.AddMember("CAN_INTERFACE", smithyprelude.Unit)
-
-	NetworkInterfaceType_OBD_INTERFACE = NetworkInterfaceType.AddMember("OBD_INTERFACE", smithyprelude.Unit)
-
-	NetworkInterfaceType_VEHICLE_MIDDLEWARE = NetworkInterfaceType.AddMember("VEHICLE_MIDDLEWARE", smithyprelude.Unit)
-
-	NetworkInterfaceType_CUSTOM_DECODING_INTERFACE = NetworkInterfaceType.AddMember("CUSTOM_DECODING_INTERFACE", smithyprelude.Unit)
-
-	ObdInterface_name = ObdInterface.AddMember("name", _ObdInterfaceName)
-
-	ObdInterface_requestMessageId = ObdInterface.AddMember("requestMessageId", _nonNegativeInteger)
-
-	ObdInterface_obdStandard = ObdInterface.AddMember("obdStandard", _ObdStandard)
-
-	ObdInterface_pidRequestIntervalSeconds = ObdInterface.AddMember("pidRequestIntervalSeconds", _nonNegativeInteger)
-
-	ObdInterface_dtcRequestIntervalSeconds = ObdInterface.AddMember("dtcRequestIntervalSeconds", _nonNegativeInteger)
-
-	ObdInterface_useExtendedIds = ObdInterface.AddMember("useExtendedIds", smithyprelude.PrimitiveBoolean)
-
-	ObdInterface_hasTransmissionEcu = ObdInterface.AddMember("hasTransmissionEcu", smithyprelude.PrimitiveBoolean)
-
-	VehicleMiddlewareProtocol_ROS_2 = VehicleMiddlewareProtocol.AddMember("ROS_2", smithyprelude.Unit)
-
-	VehicleMiddleware_name = VehicleMiddleware.AddMember("name", _VehicleMiddlewareName)
-
-	VehicleMiddleware_protocolName = VehicleMiddleware.AddMember("protocolName", VehicleMiddlewareProtocol)
-
-	NetworkInterface_interfaceId = NetworkInterface.AddMember("interfaceId", _InterfaceId)
-
-	NetworkInterface_type = NetworkInterface.AddMember("type", NetworkInterfaceType)
-
-	NetworkInterface_canInterface = NetworkInterface.AddMember("canInterface", CanInterface)
-
-	NetworkInterface_obdInterface = NetworkInterface.AddMember("obdInterface", ObdInterface)
-
-	NetworkInterface_vehicleMiddleware = NetworkInterface.AddMember("vehicleMiddleware", VehicleMiddleware)
-
-	NetworkInterface_customDecodingInterface = NetworkInterface.AddMember("customDecodingInterface", CustomDecodingInterface)
-
-	_NetworkInterfaces_member = _NetworkInterfaces.AddMember("member", NetworkInterface)
-
-	NodeCounts_totalNodes = NodeCounts.AddMember("totalNodes", _number)
-
-	NodeCounts_totalBranches = NodeCounts.AddMember("totalBranches", _number)
-
-	NodeCounts_totalSensors = NodeCounts.AddMember("totalSensors", _number)
-
-	NodeCounts_totalAttributes = NodeCounts.AddMember("totalAttributes", _number)
-
-	NodeCounts_totalActuators = NodeCounts.AddMember("totalActuators", _number)
-
-	NodeCounts_totalStructs = NodeCounts.AddMember("totalStructs", _number)
-
-	NodeCounts_totalProperties = NodeCounts.AddMember("totalProperties", _number)
-
-	_NodePaths_member = _NodePaths.AddMember("member", _NodePath)
-
-	ObdSignal_pidResponseLength = ObdSignal.AddMember("pidResponseLength", _positiveInteger)
-
-	ObdSignal_serviceMode = ObdSignal.AddMember("serviceMode", _nonNegativeInteger)
-
-	ObdSignal_pid = ObdSignal.AddMember("pid", _nonNegativeInteger)
-
-	ObdSignal_scaling = ObdSignal.AddMember("scaling", _double)
-
-	ObdSignal_offset = ObdSignal.AddMember("offset", _double)
-
-	ObdSignal_startByte = ObdSignal.AddMember("startByte", _nonNegativeInteger)
-
-	ObdSignal_byteLength = ObdSignal.AddMember("byteLength", _ObdByteLength)
-
-	ObdSignal_bitRightShift = ObdSignal.AddMember("bitRightShift", _nonNegativeInteger)
-
-	ObdSignal_bitMaskLength = ObdSignal.AddMember("bitMaskLength", _ObdBitmaskLength)
-
-	ObdSignal_isSigned = ObdSignal.AddMember("isSigned", smithyprelude.PrimitiveBoolean)
-
-	ObdSignal_signalValueType = ObdSignal.AddMember("signalValueType", SignalValueType)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _string)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _string)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _string)
-
-	SignalCatalogSummary_name = SignalCatalogSummary.AddMember("name", _string)
-
-	SignalCatalogSummary_arn = SignalCatalogSummary.AddMember("arn", _arn)
-
-	SignalCatalogSummary_creationTime = SignalCatalogSummary.AddMember("creationTime", _timestamp)
-
-	SignalCatalogSummary_lastModificationTime = SignalCatalogSummary.AddMember("lastModificationTime", _timestamp)
-
-	_signalCatalogSummaries_member = _signalCatalogSummaries.AddMember("member", SignalCatalogSummary)
-
-	SignalDecoderType_CAN_SIGNAL = SignalDecoderType.AddMember("CAN_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoderType_OBD_SIGNAL = SignalDecoderType.AddMember("OBD_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoderType_MESSAGE_SIGNAL = SignalDecoderType.AddMember("MESSAGE_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoderType_CUSTOM_DECODING_SIGNAL = SignalDecoderType.AddMember("CUSTOM_DECODING_SIGNAL", smithyprelude.Unit)
-
-	SignalDecoder_fullyQualifiedName = SignalDecoder.AddMember("fullyQualifiedName", _FullyQualifiedName)
-
-	SignalDecoder_type = SignalDecoder.AddMember("type", SignalDecoderType)
-
-	SignalDecoder_interfaceId = SignalDecoder.AddMember("interfaceId", _InterfaceId)
-
-	SignalDecoder_canSignal = SignalDecoder.AddMember("canSignal", CanSignal)
-
-	SignalDecoder_obdSignal = SignalDecoder.AddMember("obdSignal", ObdSignal)
-
-	SignalDecoder_messageSignal = SignalDecoder.AddMember("messageSignal", MessageSignal)
-
-	SignalDecoder_customDecodingSignal = SignalDecoder.AddMember("customDecodingSignal", CustomDecodingSignal)
-
-	_SignalDecoders_member = _SignalDecoders.AddMember("member", SignalDecoder)
-
-	TimeBasedSignalFetchConfig_executionFrequencyMs = TimeBasedSignalFetchConfig.AddMember("executionFrequencyMs", _positiveLong)
-
-	SignalFetchConfig_timeBased = SignalFetchConfig.AddMember("timeBased", TimeBasedSignalFetchConfig)
-
-	SignalFetchConfig_conditionBased = SignalFetchConfig.AddMember("conditionBased", ConditionBasedSignalFetchConfig)
-
-	SignalFetchInformation_fullyQualifiedName = SignalFetchInformation.AddMember("fullyQualifiedName", _NodePath)
-
-	SignalFetchInformation_signalFetchConfig = SignalFetchInformation.AddMember("signalFetchConfig", SignalFetchConfig)
-
-	SignalFetchInformation_conditionLanguageVersion = SignalFetchInformation.AddMember("conditionLanguageVersion", _languageVersion)
-
-	SignalFetchInformation_actions = SignalFetchInformation.AddMember("actions", _EventExpressionList)
-
-	_SignalFetchInformationList_member = _SignalFetchInformationList.AddMember("member", SignalFetchInformation)
-
-	SignalInformation_name = SignalInformation.AddMember("name", _wildcardSignalName)
-
-	SignalInformation_maxSampleCount = SignalInformation.AddMember("maxSampleCount", _maxSampleCount)
-
-	SignalInformation_minimumSamplingIntervalMs = SignalInformation.AddMember("minimumSamplingIntervalMs", _uint32)
-
-	SignalInformation_dataPartitionId = SignalInformation.AddMember("dataPartitionId", _DataPartitionId)
-
-	_SignalInformationList_member = _SignalInformationList.AddMember("member", SignalInformation)
-
-	SignalNodeType_SENSOR = SignalNodeType.AddMember("SENSOR", smithyprelude.Unit)
-
-	SignalNodeType_ACTUATOR = SignalNodeType.AddMember("ACTUATOR", smithyprelude.Unit)
-
-	SignalNodeType_ATTRIBUTE = SignalNodeType.AddMember("ATTRIBUTE", smithyprelude.Unit)
-
-	SignalNodeType_BRANCH = SignalNodeType.AddMember("BRANCH", smithyprelude.Unit)
-
-	SignalNodeType_CUSTOM_STRUCT = SignalNodeType.AddMember("CUSTOM_STRUCT", smithyprelude.Unit)
-
-	SignalNodeType_CUSTOM_PROPERTY = SignalNodeType.AddMember("CUSTOM_PROPERTY", smithyprelude.Unit)
-
-	SpoolingMode_OFF = SpoolingMode.AddMember("OFF", smithyprelude.Unit)
-
-	SpoolingMode_TO_DISK = SpoolingMode.AddMember("TO_DISK", smithyprelude.Unit)
-
-	_StateTemplateAssociationIdentifiers_member = _StateTemplateAssociationIdentifiers.AddMember("member", _ResourceIdentifier)
-
-	_StateTemplateDataExtraDimensionNodePathList_member = _StateTemplateDataExtraDimensionNodePathList.AddMember("member", _NodePath)
-
-	_StateTemplateMetadataExtraDimensionNodePathList_member = _StateTemplateMetadataExtraDimensionNodePathList.AddMember("member", _NodePath)
-
-	_StateTemplateProperties_member = _StateTemplateProperties.AddMember("member", _NodePath)
-
-	StateTemplateSummary_name = StateTemplateSummary.AddMember("name", _resourceName)
-
-	StateTemplateSummary_arn = StateTemplateSummary.AddMember("arn", _arn)
-
-	StateTemplateSummary_signalCatalogArn = StateTemplateSummary.AddMember("signalCatalogArn", _arn)
-
-	StateTemplateSummary_description = StateTemplateSummary.AddMember("description", _description)
-
-	StateTemplateSummary_creationTime = StateTemplateSummary.AddMember("creationTime", _timestamp)
-
-	StateTemplateSummary_lastModificationTime = StateTemplateSummary.AddMember("lastModificationTime", _timestamp)
-
-	StateTemplateSummary_id = StateTemplateSummary.AddMember("id", _ResourceUniqueId)
-
-	_StateTemplateSummaries_member = _StateTemplateSummaries.AddMember("member", StateTemplateSummary)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _string)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _string)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _string)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TimestreamRegistrationResponse_timestreamDatabaseName = TimestreamRegistrationResponse.AddMember("timestreamDatabaseName", _TimestreamDatabaseName)
-
-	TimestreamRegistrationResponse_timestreamTableName = TimestreamRegistrationResponse.AddMember("timestreamTableName", _TimestreamTableName)
-
-	TimestreamRegistrationResponse_timestreamDatabaseArn = TimestreamRegistrationResponse.AddMember("timestreamDatabaseArn", _arn)
-
-	TimestreamRegistrationResponse_timestreamTableArn = TimestreamRegistrationResponse.AddMember("timestreamTableArn", _arn)
-
-	TimestreamRegistrationResponse_registrationStatus = TimestreamRegistrationResponse.AddMember("registrationStatus", RegistrationStatus)
-
-	TimestreamRegistrationResponse_errorMessage = TimestreamRegistrationResponse.AddMember("errorMessage", _errorMessage)
-
-	TimestreamResources_timestreamDatabaseName = TimestreamResources.AddMember("timestreamDatabaseName", _TimestreamDatabaseName)
-
-	TimestreamResources_timestreamTableName = TimestreamResources.AddMember("timestreamTableName", _TimestreamTableName)
-
-	UpdateCampaignAction_APPROVE = UpdateCampaignAction.AddMember("APPROVE", smithyprelude.Unit)
-
-	UpdateCampaignAction_SUSPEND = UpdateCampaignAction.AddMember("SUSPEND", smithyprelude.Unit)
-
-	UpdateCampaignAction_RESUME = UpdateCampaignAction.AddMember("RESUME", smithyprelude.Unit)
-
-	UpdateCampaignAction_UPDATE = UpdateCampaignAction.AddMember("UPDATE", smithyprelude.Unit)
-
-	UpdateMode_OVERWRITE = UpdateMode.AddMember("OVERWRITE", smithyprelude.Unit)
-
-	UpdateMode_MERGE = UpdateMode.AddMember("MERGE", smithyprelude.Unit)
-
-	UpdateVehicleError_vehicleName = UpdateVehicleError.AddMember("vehicleName", _vehicleName)
-
-	UpdateVehicleError_code = UpdateVehicleError.AddMember("code", _number)
-
-	UpdateVehicleError_message = UpdateVehicleError.AddMember("message", _string)
-
-	_updateVehicleErrors_member = _updateVehicleErrors.AddMember("member", UpdateVehicleError)
-
-	UpdateVehicleRequestItem_vehicleName = UpdateVehicleRequestItem.AddMember("vehicleName", _vehicleName)
-
-	UpdateVehicleRequestItem_modelManifestArn = UpdateVehicleRequestItem.AddMember("modelManifestArn", _arn)
-
-	UpdateVehicleRequestItem_decoderManifestArn = UpdateVehicleRequestItem.AddMember("decoderManifestArn", _arn)
-
-	UpdateVehicleRequestItem_attributes = UpdateVehicleRequestItem.AddMember("attributes", _attributesMap)
-
-	UpdateVehicleRequestItem_attributeUpdateMode = UpdateVehicleRequestItem.AddMember("attributeUpdateMode", UpdateMode)
-
-	UpdateVehicleRequestItem_stateTemplatesToAdd = UpdateVehicleRequestItem.AddMember("stateTemplatesToAdd", _StateTemplateAssociations)
-
-	UpdateVehicleRequestItem_stateTemplatesToRemove = UpdateVehicleRequestItem.AddMember("stateTemplatesToRemove", _StateTemplateAssociationIdentifiers)
-
-	UpdateVehicleRequestItem_stateTemplatesToUpdate = UpdateVehicleRequestItem.AddMember("stateTemplatesToUpdate", _StateTemplateAssociations)
-
-	_updateVehicleRequestItems_member = _updateVehicleRequestItems.AddMember("member", UpdateVehicleRequestItem)
-
-	UpdateVehicleResponseItem_vehicleName = UpdateVehicleResponseItem.AddMember("vehicleName", _vehicleName)
-
-	UpdateVehicleResponseItem_arn = UpdateVehicleResponseItem.AddMember("arn", _arn)
-
-	_updateVehicleResponseItems_member = _updateVehicleResponseItems.AddMember("member", UpdateVehicleResponseItem)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _string)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	_vehicles_member = _vehicles.AddMember("member", _vehicleName)
-
-	VehicleState_CREATED = VehicleState.AddMember("CREATED", smithyprelude.Unit)
-
-	VehicleState_READY = VehicleState.AddMember("READY", smithyprelude.Unit)
-
-	VehicleState_HEALTHY = VehicleState.AddMember("HEALTHY", smithyprelude.Unit)
-
-	VehicleState_SUSPENDED = VehicleState.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	VehicleState_DELETING = VehicleState.AddMember("DELETING", smithyprelude.Unit)
-
-	VehicleState_READY_FOR_CHECKIN = VehicleState.AddMember("READY_FOR_CHECKIN", smithyprelude.Unit)
-
-	VehicleStatus_campaignName = VehicleStatus.AddMember("campaignName", _campaignName)
-
-	VehicleStatus_vehicleName = VehicleStatus.AddMember("vehicleName", _vehicleName)
-
-	VehicleStatus_status = VehicleStatus.AddMember("status", VehicleState)
-
-	_VehicleStatusList_member = _VehicleStatusList.AddMember("member", VehicleStatus)
-
-	VehicleSummary_vehicleName = VehicleSummary.AddMember("vehicleName", _vehicleName)
-
-	VehicleSummary_arn = VehicleSummary.AddMember("arn", _arn)
-
-	VehicleSummary_modelManifestArn = VehicleSummary.AddMember("modelManifestArn", _arn)
-
-	VehicleSummary_decoderManifestArn = VehicleSummary.AddMember("decoderManifestArn", _arn)
-
-	VehicleSummary_creationTime = VehicleSummary.AddMember("creationTime", _timestamp)
-
-	VehicleSummary_lastModificationTime = VehicleSummary.AddMember("lastModificationTime", _timestamp)
-
-	VehicleSummary_attributes = VehicleSummary.AddMember("attributes", _attributesMap)
-
-	_vehicleSummaries_member = _vehicleSummaries.AddMember("member", VehicleSummary)
-
-	AssociateVehicleFleetRequest_vehicleName = AssociateVehicleFleetRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	AssociateVehicleFleetRequest_fleetId = AssociateVehicleFleetRequest.AddMember("fleetId", _fleetId)
-
-	BatchCreateVehicleRequest_vehicles = BatchCreateVehicleRequest.AddMember("vehicles", _createVehicleRequestItems)
-
-	BatchCreateVehicleResponse_vehicles = BatchCreateVehicleResponse.AddMember("vehicles", _createVehicleResponses)
-
-	BatchCreateVehicleResponse_errors = BatchCreateVehicleResponse.AddMember("errors", _createVehicleErrors)
-
-	BatchUpdateVehicleRequest_vehicles = BatchUpdateVehicleRequest.AddMember("vehicles", _updateVehicleRequestItems)
-
-	BatchUpdateVehicleResponse_vehicles = BatchUpdateVehicleResponse.AddMember("vehicles", _updateVehicleResponseItems)
-
-	BatchUpdateVehicleResponse_errors = BatchUpdateVehicleResponse.AddMember("errors", _updateVehicleErrors)
-
-	CreateCampaignRequest_name = CreateCampaignRequest.AddMember("name", _campaignName, &smithytraits.HTTPLabel{})
-
-	CreateCampaignRequest_description = CreateCampaignRequest.AddMember("description", _description)
-
-	CreateCampaignRequest_signalCatalogArn = CreateCampaignRequest.AddMember("signalCatalogArn", _arn)
-
-	CreateCampaignRequest_targetArn = CreateCampaignRequest.AddMember("targetArn", _arn)
-
-	CreateCampaignRequest_startTime = CreateCampaignRequest.AddMember("startTime", _timestamp)
-
-	CreateCampaignRequest_expiryTime = CreateCampaignRequest.AddMember("expiryTime", _timestamp)
-
-	CreateCampaignRequest_postTriggerCollectionDuration = CreateCampaignRequest.AddMember("postTriggerCollectionDuration", _uint32)
-
-	CreateCampaignRequest_diagnosticsMode = CreateCampaignRequest.AddMember("diagnosticsMode", DiagnosticsMode)
-
-	CreateCampaignRequest_spoolingMode = CreateCampaignRequest.AddMember("spoolingMode", SpoolingMode)
-
-	CreateCampaignRequest_compression = CreateCampaignRequest.AddMember("compression", Compression)
-
-	CreateCampaignRequest_priority = CreateCampaignRequest.AddMember("priority", _priority)
-
-	CreateCampaignRequest_signalsToCollect = CreateCampaignRequest.AddMember("signalsToCollect", _SignalInformationList)
-
-	CreateCampaignRequest_collectionScheme = CreateCampaignRequest.AddMember("collectionScheme", CollectionScheme)
-
-	CreateCampaignRequest_dataExtraDimensions = CreateCampaignRequest.AddMember("dataExtraDimensions", _DataExtraDimensionNodePathList)
-
-	CreateCampaignRequest_tags = CreateCampaignRequest.AddMember("tags", _TagList)
-
-	CreateCampaignRequest_dataDestinationConfigs = CreateCampaignRequest.AddMember("dataDestinationConfigs", _DataDestinationConfigs)
-
-	CreateCampaignRequest_dataPartitions = CreateCampaignRequest.AddMember("dataPartitions", _DataPartitions)
-
-	CreateCampaignRequest_signalsToFetch = CreateCampaignRequest.AddMember("signalsToFetch", _SignalFetchInformationList)
-
-	CreateCampaignResponse_name = CreateCampaignResponse.AddMember("name", _campaignName)
-
-	CreateCampaignResponse_arn = CreateCampaignResponse.AddMember("arn", _campaignArn)
-
-	CreateDecoderManifestRequest_name = CreateDecoderManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	CreateDecoderManifestRequest_description = CreateDecoderManifestRequest.AddMember("description", _description)
-
-	CreateDecoderManifestRequest_modelManifestArn = CreateDecoderManifestRequest.AddMember("modelManifestArn", _arn)
-
-	CreateDecoderManifestRequest_signalDecoders = CreateDecoderManifestRequest.AddMember("signalDecoders", _SignalDecoders)
-
-	CreateDecoderManifestRequest_networkInterfaces = CreateDecoderManifestRequest.AddMember("networkInterfaces", _NetworkInterfaces)
-
-	CreateDecoderManifestRequest_defaultForUnmappedSignals = CreateDecoderManifestRequest.AddMember("defaultForUnmappedSignals", DefaultForUnmappedSignalsType)
-
-	CreateDecoderManifestRequest_tags = CreateDecoderManifestRequest.AddMember("tags", _TagList)
-
-	CreateDecoderManifestResponse_name = CreateDecoderManifestResponse.AddMember("name", _resourceName)
-
-	CreateDecoderManifestResponse_arn = CreateDecoderManifestResponse.AddMember("arn", _arn)
-
-	CreateFleetRequest_fleetId = CreateFleetRequest.AddMember("fleetId", _fleetId, &smithytraits.HTTPLabel{})
-
-	CreateFleetRequest_description = CreateFleetRequest.AddMember("description", _description)
-
-	CreateFleetRequest_signalCatalogArn = CreateFleetRequest.AddMember("signalCatalogArn", _arn)
-
-	CreateFleetRequest_tags = CreateFleetRequest.AddMember("tags", _TagList)
-
-	CreateFleetResponse_id = CreateFleetResponse.AddMember("id", _fleetId)
-
-	CreateFleetResponse_arn = CreateFleetResponse.AddMember("arn", _arn)
-
-	CreateModelManifestRequest_name = CreateModelManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	CreateModelManifestRequest_description = CreateModelManifestRequest.AddMember("description", _description)
-
-	CreateModelManifestRequest_nodes = CreateModelManifestRequest.AddMember("nodes", _listOfStrings)
-
-	CreateModelManifestRequest_signalCatalogArn = CreateModelManifestRequest.AddMember("signalCatalogArn", _arn)
-
-	CreateModelManifestRequest_tags = CreateModelManifestRequest.AddMember("tags", _TagList)
-
-	CreateModelManifestResponse_name = CreateModelManifestResponse.AddMember("name", _resourceName)
-
-	CreateModelManifestResponse_arn = CreateModelManifestResponse.AddMember("arn", _arn)
-
-	CreateSignalCatalogRequest_name = CreateSignalCatalogRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	CreateSignalCatalogRequest_description = CreateSignalCatalogRequest.AddMember("description", _description)
-
-	CreateSignalCatalogRequest_nodes = CreateSignalCatalogRequest.AddMember("nodes", _Nodes)
-
-	CreateSignalCatalogRequest_tags = CreateSignalCatalogRequest.AddMember("tags", _TagList)
-
-	CreateSignalCatalogResponse_name = CreateSignalCatalogResponse.AddMember("name", _resourceName)
-
-	CreateSignalCatalogResponse_arn = CreateSignalCatalogResponse.AddMember("arn", _arn)
-
-	CreateStateTemplateRequest_name = CreateStateTemplateRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	CreateStateTemplateRequest_description = CreateStateTemplateRequest.AddMember("description", _description)
-
-	CreateStateTemplateRequest_signalCatalogArn = CreateStateTemplateRequest.AddMember("signalCatalogArn", _arn)
-
-	CreateStateTemplateRequest_stateTemplateProperties = CreateStateTemplateRequest.AddMember("stateTemplateProperties", _StateTemplateProperties)
-
-	CreateStateTemplateRequest_dataExtraDimensions = CreateStateTemplateRequest.AddMember("dataExtraDimensions", _StateTemplateDataExtraDimensionNodePathList)
-
-	CreateStateTemplateRequest_metadataExtraDimensions = CreateStateTemplateRequest.AddMember("metadataExtraDimensions", _StateTemplateMetadataExtraDimensionNodePathList)
-
-	CreateStateTemplateRequest_tags = CreateStateTemplateRequest.AddMember("tags", _TagList)
-
-	CreateStateTemplateResponse_name = CreateStateTemplateResponse.AddMember("name", _resourceName)
-
-	CreateStateTemplateResponse_arn = CreateStateTemplateResponse.AddMember("arn", _arn)
-
-	CreateStateTemplateResponse_id = CreateStateTemplateResponse.AddMember("id", _ResourceUniqueId)
-
-	CreateVehicleRequest_vehicleName = CreateVehicleRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	CreateVehicleRequest_modelManifestArn = CreateVehicleRequest.AddMember("modelManifestArn", _arn)
-
-	CreateVehicleRequest_decoderManifestArn = CreateVehicleRequest.AddMember("decoderManifestArn", _arn)
-
-	CreateVehicleRequest_attributes = CreateVehicleRequest.AddMember("attributes", _attributesMap)
-
-	CreateVehicleRequest_associationBehavior = CreateVehicleRequest.AddMember("associationBehavior", VehicleAssociationBehavior)
-
-	CreateVehicleRequest_tags = CreateVehicleRequest.AddMember("tags", _TagList)
-
-	CreateVehicleRequest_stateTemplates = CreateVehicleRequest.AddMember("stateTemplates", _StateTemplateAssociations)
-
-	CreateVehicleResponse_vehicleName = CreateVehicleResponse.AddMember("vehicleName", _vehicleName)
-
-	CreateVehicleResponse_arn = CreateVehicleResponse.AddMember("arn", _arn)
-
-	CreateVehicleResponse_thingArn = CreateVehicleResponse.AddMember("thingArn", _arn)
-
-	DeleteCampaignRequest_name = DeleteCampaignRequest.AddMember("name", _campaignName, &smithytraits.HTTPLabel{})
-
-	DeleteCampaignResponse_name = DeleteCampaignResponse.AddMember("name", _campaignName)
-
-	DeleteCampaignResponse_arn = DeleteCampaignResponse.AddMember("arn", _campaignArn)
-
-	DeleteDecoderManifestRequest_name = DeleteDecoderManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	DeleteDecoderManifestResponse_name = DeleteDecoderManifestResponse.AddMember("name", _resourceName)
-
-	DeleteDecoderManifestResponse_arn = DeleteDecoderManifestResponse.AddMember("arn", _arn)
-
-	DeleteFleetRequest_fleetId = DeleteFleetRequest.AddMember("fleetId", _fleetId, &smithytraits.HTTPLabel{})
-
-	DeleteFleetResponse_id = DeleteFleetResponse.AddMember("id", _fleetId)
-
-	DeleteFleetResponse_arn = DeleteFleetResponse.AddMember("arn", _arn)
-
-	DeleteModelManifestRequest_name = DeleteModelManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	DeleteModelManifestResponse_name = DeleteModelManifestResponse.AddMember("name", _resourceName)
-
-	DeleteModelManifestResponse_arn = DeleteModelManifestResponse.AddMember("arn", _arn)
-
-	DeleteSignalCatalogRequest_name = DeleteSignalCatalogRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	DeleteSignalCatalogResponse_name = DeleteSignalCatalogResponse.AddMember("name", _resourceName)
-
-	DeleteSignalCatalogResponse_arn = DeleteSignalCatalogResponse.AddMember("arn", _arn)
-
-	DeleteStateTemplateRequest_identifier = DeleteStateTemplateRequest.AddMember("identifier", _ResourceIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteStateTemplateResponse_name = DeleteStateTemplateResponse.AddMember("name", _resourceName)
-
-	DeleteStateTemplateResponse_arn = DeleteStateTemplateResponse.AddMember("arn", _arn)
-
-	DeleteStateTemplateResponse_id = DeleteStateTemplateResponse.AddMember("id", _ResourceUniqueId)
-
-	DeleteVehicleRequest_vehicleName = DeleteVehicleRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	DeleteVehicleResponse_vehicleName = DeleteVehicleResponse.AddMember("vehicleName", _vehicleName)
-
-	DeleteVehicleResponse_arn = DeleteVehicleResponse.AddMember("arn", _arn)
-
-	DisassociateVehicleFleetRequest_vehicleName = DisassociateVehicleFleetRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	DisassociateVehicleFleetRequest_fleetId = DisassociateVehicleFleetRequest.AddMember("fleetId", _fleetId)
-
-	GetCampaignRequest_name = GetCampaignRequest.AddMember("name", _campaignName, &smithytraits.HTTPLabel{})
-
-	GetCampaignResponse_name = GetCampaignResponse.AddMember("name", _campaignName)
-
-	GetCampaignResponse_arn = GetCampaignResponse.AddMember("arn", _campaignArn)
-
-	GetCampaignResponse_description = GetCampaignResponse.AddMember("description", _description)
-
-	GetCampaignResponse_signalCatalogArn = GetCampaignResponse.AddMember("signalCatalogArn", _arn)
-
-	GetCampaignResponse_targetArn = GetCampaignResponse.AddMember("targetArn", _arn)
-
-	GetCampaignResponse_status = GetCampaignResponse.AddMember("status", CampaignStatus)
-
-	GetCampaignResponse_startTime = GetCampaignResponse.AddMember("startTime", _timestamp)
-
-	GetCampaignResponse_expiryTime = GetCampaignResponse.AddMember("expiryTime", _timestamp)
-
-	GetCampaignResponse_postTriggerCollectionDuration = GetCampaignResponse.AddMember("postTriggerCollectionDuration", _uint32)
-
-	GetCampaignResponse_diagnosticsMode = GetCampaignResponse.AddMember("diagnosticsMode", DiagnosticsMode)
-
-	GetCampaignResponse_spoolingMode = GetCampaignResponse.AddMember("spoolingMode", SpoolingMode)
-
-	GetCampaignResponse_compression = GetCampaignResponse.AddMember("compression", Compression)
-
-	GetCampaignResponse_priority = GetCampaignResponse.AddMember("priority", _priority)
-
-	GetCampaignResponse_signalsToCollect = GetCampaignResponse.AddMember("signalsToCollect", _SignalInformationList)
-
-	GetCampaignResponse_collectionScheme = GetCampaignResponse.AddMember("collectionScheme", CollectionScheme)
-
-	GetCampaignResponse_dataExtraDimensions = GetCampaignResponse.AddMember("dataExtraDimensions", _DataExtraDimensionNodePathList)
-
-	GetCampaignResponse_creationTime = GetCampaignResponse.AddMember("creationTime", _timestamp)
-
-	GetCampaignResponse_lastModificationTime = GetCampaignResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetCampaignResponse_dataDestinationConfigs = GetCampaignResponse.AddMember("dataDestinationConfigs", _DataDestinationConfigs)
-
-	GetCampaignResponse_dataPartitions = GetCampaignResponse.AddMember("dataPartitions", _DataPartitions)
-
-	GetCampaignResponse_signalsToFetch = GetCampaignResponse.AddMember("signalsToFetch", _SignalFetchInformationList)
-
-	GetDecoderManifestRequest_name = GetDecoderManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	GetDecoderManifestResponse_name = GetDecoderManifestResponse.AddMember("name", _string)
-
-	GetDecoderManifestResponse_arn = GetDecoderManifestResponse.AddMember("arn", _arn)
-
-	GetDecoderManifestResponse_description = GetDecoderManifestResponse.AddMember("description", _description)
-
-	GetDecoderManifestResponse_modelManifestArn = GetDecoderManifestResponse.AddMember("modelManifestArn", _arn)
-
-	GetDecoderManifestResponse_status = GetDecoderManifestResponse.AddMember("status", ManifestStatus)
-
-	GetDecoderManifestResponse_creationTime = GetDecoderManifestResponse.AddMember("creationTime", _timestamp)
-
-	GetDecoderManifestResponse_lastModificationTime = GetDecoderManifestResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetDecoderManifestResponse_message = GetDecoderManifestResponse.AddMember("message", _message)
-
-	GetEncryptionConfigurationResponse_kmsKeyId = GetEncryptionConfigurationResponse.AddMember("kmsKeyId", smithyprelude.String)
-
-	GetEncryptionConfigurationResponse_encryptionStatus = GetEncryptionConfigurationResponse.AddMember("encryptionStatus", EncryptionStatus)
-
-	GetEncryptionConfigurationResponse_encryptionType = GetEncryptionConfigurationResponse.AddMember("encryptionType", EncryptionType)
-
-	GetEncryptionConfigurationResponse_errorMessage = GetEncryptionConfigurationResponse.AddMember("errorMessage", _errorMessage)
-
-	GetEncryptionConfigurationResponse_creationTime = GetEncryptionConfigurationResponse.AddMember("creationTime", _timestamp)
-
-	GetEncryptionConfigurationResponse_lastModificationTime = GetEncryptionConfigurationResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetFleetRequest_fleetId = GetFleetRequest.AddMember("fleetId", _fleetId, &smithytraits.HTTPLabel{})
-
-	GetFleetResponse_id = GetFleetResponse.AddMember("id", _fleetId)
-
-	GetFleetResponse_arn = GetFleetResponse.AddMember("arn", _arn)
-
-	GetFleetResponse_description = GetFleetResponse.AddMember("description", _description)
-
-	GetFleetResponse_signalCatalogArn = GetFleetResponse.AddMember("signalCatalogArn", _arn)
-
-	GetFleetResponse_creationTime = GetFleetResponse.AddMember("creationTime", _timestamp)
-
-	GetFleetResponse_lastModificationTime = GetFleetResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetLoggingOptionsResponse_cloudWatchLogDelivery = GetLoggingOptionsResponse.AddMember("cloudWatchLogDelivery", CloudWatchLogDeliveryOptions)
-
-	GetModelManifestRequest_name = GetModelManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	GetModelManifestResponse_name = GetModelManifestResponse.AddMember("name", _resourceName)
-
-	GetModelManifestResponse_arn = GetModelManifestResponse.AddMember("arn", _arn)
-
-	GetModelManifestResponse_description = GetModelManifestResponse.AddMember("description", _description)
-
-	GetModelManifestResponse_signalCatalogArn = GetModelManifestResponse.AddMember("signalCatalogArn", _arn)
-
-	GetModelManifestResponse_status = GetModelManifestResponse.AddMember("status", ManifestStatus)
-
-	GetModelManifestResponse_creationTime = GetModelManifestResponse.AddMember("creationTime", _timestamp)
-
-	GetModelManifestResponse_lastModificationTime = GetModelManifestResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetRegisterAccountStatusResponse_customerAccountId = GetRegisterAccountStatusResponse.AddMember("customerAccountId", _customerAccountId)
-
-	GetRegisterAccountStatusResponse_accountStatus = GetRegisterAccountStatusResponse.AddMember("accountStatus", RegistrationStatus)
-
-	GetRegisterAccountStatusResponse_timestreamRegistrationResponse = GetRegisterAccountStatusResponse.AddMember("timestreamRegistrationResponse", TimestreamRegistrationResponse)
-
-	GetRegisterAccountStatusResponse_iamRegistrationResponse = GetRegisterAccountStatusResponse.AddMember("iamRegistrationResponse", IamRegistrationResponse)
-
-	GetRegisterAccountStatusResponse_creationTime = GetRegisterAccountStatusResponse.AddMember("creationTime", _timestamp)
-
-	GetRegisterAccountStatusResponse_lastModificationTime = GetRegisterAccountStatusResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetSignalCatalogRequest_name = GetSignalCatalogRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	GetSignalCatalogResponse_name = GetSignalCatalogResponse.AddMember("name", _resourceName)
-
-	GetSignalCatalogResponse_arn = GetSignalCatalogResponse.AddMember("arn", _arn)
-
-	GetSignalCatalogResponse_description = GetSignalCatalogResponse.AddMember("description", _description)
-
-	GetSignalCatalogResponse_nodeCounts = GetSignalCatalogResponse.AddMember("nodeCounts", NodeCounts)
-
-	GetSignalCatalogResponse_creationTime = GetSignalCatalogResponse.AddMember("creationTime", _timestamp)
-
-	GetSignalCatalogResponse_lastModificationTime = GetSignalCatalogResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetStateTemplateRequest_identifier = GetStateTemplateRequest.AddMember("identifier", _ResourceIdentifier, &smithytraits.HTTPLabel{})
-
-	GetStateTemplateResponse_name = GetStateTemplateResponse.AddMember("name", _resourceName)
-
-	GetStateTemplateResponse_arn = GetStateTemplateResponse.AddMember("arn", _arn)
-
-	GetStateTemplateResponse_description = GetStateTemplateResponse.AddMember("description", _description)
-
-	GetStateTemplateResponse_signalCatalogArn = GetStateTemplateResponse.AddMember("signalCatalogArn", _arn)
-
-	GetStateTemplateResponse_stateTemplateProperties = GetStateTemplateResponse.AddMember("stateTemplateProperties", _StateTemplateProperties)
-
-	GetStateTemplateResponse_dataExtraDimensions = GetStateTemplateResponse.AddMember("dataExtraDimensions", _StateTemplateDataExtraDimensionNodePathList)
-
-	GetStateTemplateResponse_metadataExtraDimensions = GetStateTemplateResponse.AddMember("metadataExtraDimensions", _StateTemplateMetadataExtraDimensionNodePathList)
-
-	GetStateTemplateResponse_creationTime = GetStateTemplateResponse.AddMember("creationTime", _timestamp)
-
-	GetStateTemplateResponse_lastModificationTime = GetStateTemplateResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetStateTemplateResponse_id = GetStateTemplateResponse.AddMember("id", _ResourceUniqueId)
-
-	GetVehicleRequest_vehicleName = GetVehicleRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	GetVehicleResponse_vehicleName = GetVehicleResponse.AddMember("vehicleName", _vehicleName)
-
-	GetVehicleResponse_arn = GetVehicleResponse.AddMember("arn", _arn)
-
-	GetVehicleResponse_modelManifestArn = GetVehicleResponse.AddMember("modelManifestArn", _arn)
-
-	GetVehicleResponse_decoderManifestArn = GetVehicleResponse.AddMember("decoderManifestArn", _arn)
-
-	GetVehicleResponse_attributes = GetVehicleResponse.AddMember("attributes", _attributesMap)
-
-	GetVehicleResponse_stateTemplates = GetVehicleResponse.AddMember("stateTemplates", _StateTemplateAssociations)
-
-	GetVehicleResponse_creationTime = GetVehicleResponse.AddMember("creationTime", _timestamp)
-
-	GetVehicleResponse_lastModificationTime = GetVehicleResponse.AddMember("lastModificationTime", _timestamp)
-
-	GetVehicleStatusRequest_nextToken = GetVehicleStatusRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetVehicleStatusRequest_maxResults = GetVehicleStatusRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetVehicleStatusRequest_vehicleName = GetVehicleStatusRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	GetVehicleStatusResponse_campaigns = GetVehicleStatusResponse.AddMember("campaigns", _VehicleStatusList)
-
-	GetVehicleStatusResponse_nextToken = GetVehicleStatusResponse.AddMember("nextToken", _nextToken)
-
-	ImportDecoderManifestRequest_name = ImportDecoderManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	ImportDecoderManifestRequest_networkFileDefinitions = ImportDecoderManifestRequest.AddMember("networkFileDefinitions", _NetworkFileDefinitions)
-
-	ImportDecoderManifestResponse_name = ImportDecoderManifestResponse.AddMember("name", _resourceName)
-
-	ImportDecoderManifestResponse_arn = ImportDecoderManifestResponse.AddMember("arn", _arn)
-
-	ImportSignalCatalogRequest_name = ImportSignalCatalogRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	ImportSignalCatalogRequest_description = ImportSignalCatalogRequest.AddMember("description", _description)
-
-	ImportSignalCatalogRequest_vss = ImportSignalCatalogRequest.AddMember("vss", FormattedVss)
-
-	ImportSignalCatalogRequest_tags = ImportSignalCatalogRequest.AddMember("tags", _TagList)
-
-	ImportSignalCatalogResponse_name = ImportSignalCatalogResponse.AddMember("name", _resourceName)
-
-	ImportSignalCatalogResponse_arn = ImportSignalCatalogResponse.AddMember("arn", _arn)
-
-	ListCampaignsRequest_nextToken = ListCampaignsRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCampaignsRequest_maxResults = ListCampaignsRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCampaignsRequest_status = ListCampaignsRequest.AddMember("status", _statusStr, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListCampaignsRequest_listResponseScope = ListCampaignsRequest.AddMember("listResponseScope", ListResponseScope, &smithytraits.HTTPQuery{Name: "listResponseScope"})
-
-	ListCampaignsResponse_campaignSummaries = ListCampaignsResponse.AddMember("campaignSummaries", _campaignSummaries)
-
-	ListCampaignsResponse_nextToken = ListCampaignsResponse.AddMember("nextToken", _nextToken)
-
-	ListDecoderManifestNetworkInterfacesRequest_name = ListDecoderManifestNetworkInterfacesRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	ListDecoderManifestNetworkInterfacesRequest_nextToken = ListDecoderManifestNetworkInterfacesRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDecoderManifestNetworkInterfacesRequest_maxResults = ListDecoderManifestNetworkInterfacesRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDecoderManifestNetworkInterfacesResponse_networkInterfaces = ListDecoderManifestNetworkInterfacesResponse.AddMember("networkInterfaces", _NetworkInterfaces)
-
-	ListDecoderManifestNetworkInterfacesResponse_nextToken = ListDecoderManifestNetworkInterfacesResponse.AddMember("nextToken", _nextToken)
-
-	ListDecoderManifestSignalsRequest_name = ListDecoderManifestSignalsRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	ListDecoderManifestSignalsRequest_nextToken = ListDecoderManifestSignalsRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDecoderManifestSignalsRequest_maxResults = ListDecoderManifestSignalsRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDecoderManifestSignalsResponse_signalDecoders = ListDecoderManifestSignalsResponse.AddMember("signalDecoders", _SignalDecoders)
-
-	ListDecoderManifestSignalsResponse_nextToken = ListDecoderManifestSignalsResponse.AddMember("nextToken", _nextToken)
-
-	ListDecoderManifestsRequest_modelManifestArn = ListDecoderManifestsRequest.AddMember("modelManifestArn", _arn, &smithytraits.HTTPQuery{Name: "modelManifestArn"})
-
-	ListDecoderManifestsRequest_nextToken = ListDecoderManifestsRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDecoderManifestsRequest_maxResults = ListDecoderManifestsRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDecoderManifestsRequest_listResponseScope = ListDecoderManifestsRequest.AddMember("listResponseScope", ListResponseScope, &smithytraits.HTTPQuery{Name: "listResponseScope"})
-
-	ListDecoderManifestsResponse_summaries = ListDecoderManifestsResponse.AddMember("summaries", _decoderManifestSummaries)
-
-	ListDecoderManifestsResponse_nextToken = ListDecoderManifestsResponse.AddMember("nextToken", _nextToken)
-
-	ListFleetsForVehicleRequest_vehicleName = ListFleetsForVehicleRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	ListFleetsForVehicleRequest_nextToken = ListFleetsForVehicleRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFleetsForVehicleRequest_maxResults = ListFleetsForVehicleRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFleetsForVehicleResponse_fleets = ListFleetsForVehicleResponse.AddMember("fleets", _fleets)
-
-	ListFleetsForVehicleResponse_nextToken = ListFleetsForVehicleResponse.AddMember("nextToken", _nextToken)
-
-	ListFleetsRequest_nextToken = ListFleetsRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFleetsRequest_maxResults = ListFleetsRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFleetsRequest_listResponseScope = ListFleetsRequest.AddMember("listResponseScope", ListResponseScope, &smithytraits.HTTPQuery{Name: "listResponseScope"})
-
-	ListFleetsResponse_fleetSummaries = ListFleetsResponse.AddMember("fleetSummaries", _fleetSummaries)
-
-	ListFleetsResponse_nextToken = ListFleetsResponse.AddMember("nextToken", _nextToken)
-
-	ListModelManifestNodesRequest_name = ListModelManifestNodesRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	ListModelManifestNodesRequest_nextToken = ListModelManifestNodesRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListModelManifestNodesRequest_maxResults = ListModelManifestNodesRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListModelManifestNodesResponse_nodes = ListModelManifestNodesResponse.AddMember("nodes", _Nodes)
-
-	ListModelManifestNodesResponse_nextToken = ListModelManifestNodesResponse.AddMember("nextToken", _nextToken)
-
-	ListModelManifestsRequest_signalCatalogArn = ListModelManifestsRequest.AddMember("signalCatalogArn", _arn, &smithytraits.HTTPQuery{Name: "signalCatalogArn"})
-
-	ListModelManifestsRequest_nextToken = ListModelManifestsRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListModelManifestsRequest_maxResults = ListModelManifestsRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListModelManifestsRequest_listResponseScope = ListModelManifestsRequest.AddMember("listResponseScope", ListResponseScope, &smithytraits.HTTPQuery{Name: "listResponseScope"})
-
-	ListModelManifestsResponse_summaries = ListModelManifestsResponse.AddMember("summaries", _modelManifestSummaries)
-
-	ListModelManifestsResponse_nextToken = ListModelManifestsResponse.AddMember("nextToken", _nextToken)
-
-	ListSignalCatalogNodesRequest_name = ListSignalCatalogNodesRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	ListSignalCatalogNodesRequest_nextToken = ListSignalCatalogNodesRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSignalCatalogNodesRequest_maxResults = ListSignalCatalogNodesRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSignalCatalogNodesRequest_signalNodeType = ListSignalCatalogNodesRequest.AddMember("signalNodeType", SignalNodeType, &smithytraits.HTTPQuery{Name: "signalNodeType"})
-
-	ListSignalCatalogNodesResponse_nodes = ListSignalCatalogNodesResponse.AddMember("nodes", _Nodes)
-
-	ListSignalCatalogNodesResponse_nextToken = ListSignalCatalogNodesResponse.AddMember("nextToken", _nextToken)
-
-	ListSignalCatalogsRequest_nextToken = ListSignalCatalogsRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSignalCatalogsRequest_maxResults = ListSignalCatalogsRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSignalCatalogsResponse_summaries = ListSignalCatalogsResponse.AddMember("summaries", _signalCatalogSummaries)
-
-	ListSignalCatalogsResponse_nextToken = ListSignalCatalogsResponse.AddMember("nextToken", _nextToken)
-
-	ListStateTemplatesRequest_nextToken = ListStateTemplatesRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListStateTemplatesRequest_maxResults = ListStateTemplatesRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListStateTemplatesRequest_listResponseScope = ListStateTemplatesRequest.AddMember("listResponseScope", ListResponseScope, &smithytraits.HTTPQuery{Name: "listResponseScope"})
-
-	ListStateTemplatesResponse_summaries = ListStateTemplatesResponse.AddMember("summaries", _StateTemplateSummaries)
-
-	ListStateTemplatesResponse_nextToken = ListStateTemplatesResponse.AddMember("nextToken", _nextToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListVehiclesInFleetRequest_fleetId = ListVehiclesInFleetRequest.AddMember("fleetId", _fleetId, &smithytraits.HTTPLabel{})
-
-	ListVehiclesInFleetRequest_nextToken = ListVehiclesInFleetRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVehiclesInFleetRequest_maxResults = ListVehiclesInFleetRequest.AddMember("maxResults", _maxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListVehiclesInFleetResponse_vehicles = ListVehiclesInFleetResponse.AddMember("vehicles", _vehicles)
-
-	ListVehiclesInFleetResponse_nextToken = ListVehiclesInFleetResponse.AddMember("nextToken", _nextToken)
-
-	ListVehiclesRequest_modelManifestArn = ListVehiclesRequest.AddMember("modelManifestArn", _arn, &smithytraits.HTTPQuery{Name: "modelManifestArn"})
-
-	ListVehiclesRequest_attributeNames = ListVehiclesRequest.AddMember("attributeNames", _attributeNamesList, &smithytraits.HTTPQuery{Name: "attributeNames"})
-
-	ListVehiclesRequest_attributeValues = ListVehiclesRequest.AddMember("attributeValues", _attributeValuesList, &smithytraits.HTTPQuery{Name: "attributeValues"})
-
-	ListVehiclesRequest_nextToken = ListVehiclesRequest.AddMember("nextToken", _nextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVehiclesRequest_maxResults = ListVehiclesRequest.AddMember("maxResults", _listVehiclesMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListVehiclesRequest_listResponseScope = ListVehiclesRequest.AddMember("listResponseScope", ListResponseScope, &smithytraits.HTTPQuery{Name: "listResponseScope"})
-
-	ListVehiclesResponse_vehicleSummaries = ListVehiclesResponse.AddMember("vehicleSummaries", _vehicleSummaries)
-
-	ListVehiclesResponse_nextToken = ListVehiclesResponse.AddMember("nextToken", _nextToken)
-
-	PutEncryptionConfigurationRequest_kmsKeyId = PutEncryptionConfigurationRequest.AddMember("kmsKeyId", smithyprelude.String)
-
-	PutEncryptionConfigurationRequest_encryptionType = PutEncryptionConfigurationRequest.AddMember("encryptionType", EncryptionType)
-
-	PutEncryptionConfigurationResponse_kmsKeyId = PutEncryptionConfigurationResponse.AddMember("kmsKeyId", smithyprelude.String)
-
-	PutEncryptionConfigurationResponse_encryptionStatus = PutEncryptionConfigurationResponse.AddMember("encryptionStatus", EncryptionStatus)
-
-	PutEncryptionConfigurationResponse_encryptionType = PutEncryptionConfigurationResponse.AddMember("encryptionType", EncryptionType)
-
-	PutLoggingOptionsRequest_cloudWatchLogDelivery = PutLoggingOptionsRequest.AddMember("cloudWatchLogDelivery", CloudWatchLogDeliveryOptions)
-
-	RegisterAccountRequest_timestreamResources = RegisterAccountRequest.AddMember("timestreamResources", TimestreamResources)
-
-	RegisterAccountRequest_iamResources = RegisterAccountRequest.AddMember("iamResources", IamResources)
-
-	RegisterAccountResponse_registerAccountStatus = RegisterAccountResponse.AddMember("registerAccountStatus", RegistrationStatus)
-
-	RegisterAccountResponse_timestreamResources = RegisterAccountResponse.AddMember("timestreamResources", TimestreamResources)
-
-	RegisterAccountResponse_iamResources = RegisterAccountResponse.AddMember("iamResources", IamResources)
-
-	RegisterAccountResponse_creationTime = RegisterAccountResponse.AddMember("creationTime", _timestamp)
-
-	RegisterAccountResponse_lastModificationTime = RegisterAccountResponse.AddMember("lastModificationTime", _timestamp)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateCampaignRequest_name = UpdateCampaignRequest.AddMember("name", _campaignName, &smithytraits.HTTPLabel{})
-
-	UpdateCampaignRequest_description = UpdateCampaignRequest.AddMember("description", _description)
-
-	UpdateCampaignRequest_dataExtraDimensions = UpdateCampaignRequest.AddMember("dataExtraDimensions", _DataExtraDimensionNodePathList)
-
-	UpdateCampaignRequest_action = UpdateCampaignRequest.AddMember("action", UpdateCampaignAction)
-
-	UpdateCampaignResponse_arn = UpdateCampaignResponse.AddMember("arn", _campaignArn)
-
-	UpdateCampaignResponse_name = UpdateCampaignResponse.AddMember("name", _campaignName)
-
-	UpdateCampaignResponse_status = UpdateCampaignResponse.AddMember("status", CampaignStatus)
-
-	UpdateDecoderManifestRequest_name = UpdateDecoderManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	UpdateDecoderManifestRequest_description = UpdateDecoderManifestRequest.AddMember("description", _description)
-
-	UpdateDecoderManifestRequest_signalDecodersToAdd = UpdateDecoderManifestRequest.AddMember("signalDecodersToAdd", _SignalDecoders)
-
-	UpdateDecoderManifestRequest_signalDecodersToUpdate = UpdateDecoderManifestRequest.AddMember("signalDecodersToUpdate", _SignalDecoders)
-
-	UpdateDecoderManifestRequest_signalDecodersToRemove = UpdateDecoderManifestRequest.AddMember("signalDecodersToRemove", _Fqns)
-
-	UpdateDecoderManifestRequest_networkInterfacesToAdd = UpdateDecoderManifestRequest.AddMember("networkInterfacesToAdd", _NetworkInterfaces)
-
-	UpdateDecoderManifestRequest_networkInterfacesToUpdate = UpdateDecoderManifestRequest.AddMember("networkInterfacesToUpdate", _NetworkInterfaces)
-
-	UpdateDecoderManifestRequest_networkInterfacesToRemove = UpdateDecoderManifestRequest.AddMember("networkInterfacesToRemove", _InterfaceIds)
-
-	UpdateDecoderManifestRequest_status = UpdateDecoderManifestRequest.AddMember("status", ManifestStatus)
-
-	UpdateDecoderManifestRequest_defaultForUnmappedSignals = UpdateDecoderManifestRequest.AddMember("defaultForUnmappedSignals", DefaultForUnmappedSignalsType)
-
-	UpdateDecoderManifestResponse_name = UpdateDecoderManifestResponse.AddMember("name", _resourceName)
-
-	UpdateDecoderManifestResponse_arn = UpdateDecoderManifestResponse.AddMember("arn", _arn)
-
-	UpdateFleetRequest_fleetId = UpdateFleetRequest.AddMember("fleetId", _fleetId, &smithytraits.HTTPLabel{})
-
-	UpdateFleetRequest_description = UpdateFleetRequest.AddMember("description", _description)
-
-	UpdateFleetResponse_id = UpdateFleetResponse.AddMember("id", _fleetId)
-
-	UpdateFleetResponse_arn = UpdateFleetResponse.AddMember("arn", _arn)
-
-	UpdateModelManifestRequest_name = UpdateModelManifestRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	UpdateModelManifestRequest_description = UpdateModelManifestRequest.AddMember("description", _description)
-
-	UpdateModelManifestRequest_nodesToAdd = UpdateModelManifestRequest.AddMember("nodesToAdd", _NodePaths)
-
-	UpdateModelManifestRequest_nodesToRemove = UpdateModelManifestRequest.AddMember("nodesToRemove", _NodePaths)
-
-	UpdateModelManifestRequest_status = UpdateModelManifestRequest.AddMember("status", ManifestStatus)
-
-	UpdateModelManifestResponse_name = UpdateModelManifestResponse.AddMember("name", _resourceName)
-
-	UpdateModelManifestResponse_arn = UpdateModelManifestResponse.AddMember("arn", _arn)
-
-	UpdateSignalCatalogRequest_name = UpdateSignalCatalogRequest.AddMember("name", _resourceName, &smithytraits.HTTPLabel{})
-
-	UpdateSignalCatalogRequest_description = UpdateSignalCatalogRequest.AddMember("description", _description)
-
-	UpdateSignalCatalogRequest_nodesToAdd = UpdateSignalCatalogRequest.AddMember("nodesToAdd", _Nodes)
-
-	UpdateSignalCatalogRequest_nodesToUpdate = UpdateSignalCatalogRequest.AddMember("nodesToUpdate", _Nodes)
-
-	UpdateSignalCatalogRequest_nodesToRemove = UpdateSignalCatalogRequest.AddMember("nodesToRemove", _NodePaths)
-
-	UpdateSignalCatalogResponse_name = UpdateSignalCatalogResponse.AddMember("name", _resourceName)
-
-	UpdateSignalCatalogResponse_arn = UpdateSignalCatalogResponse.AddMember("arn", _arn)
-
-	UpdateStateTemplateRequest_identifier = UpdateStateTemplateRequest.AddMember("identifier", _ResourceIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateStateTemplateRequest_description = UpdateStateTemplateRequest.AddMember("description", _description)
-
-	UpdateStateTemplateRequest_stateTemplatePropertiesToAdd = UpdateStateTemplateRequest.AddMember("stateTemplatePropertiesToAdd", _StateTemplateProperties)
-
-	UpdateStateTemplateRequest_stateTemplatePropertiesToRemove = UpdateStateTemplateRequest.AddMember("stateTemplatePropertiesToRemove", _StateTemplateProperties)
-
-	UpdateStateTemplateRequest_dataExtraDimensions = UpdateStateTemplateRequest.AddMember("dataExtraDimensions", _StateTemplateDataExtraDimensionNodePathList)
-
-	UpdateStateTemplateRequest_metadataExtraDimensions = UpdateStateTemplateRequest.AddMember("metadataExtraDimensions", _StateTemplateMetadataExtraDimensionNodePathList)
-
-	UpdateStateTemplateResponse_name = UpdateStateTemplateResponse.AddMember("name", _resourceName)
-
-	UpdateStateTemplateResponse_arn = UpdateStateTemplateResponse.AddMember("arn", _arn)
-
-	UpdateStateTemplateResponse_id = UpdateStateTemplateResponse.AddMember("id", _ResourceUniqueId)
-
-	UpdateVehicleRequest_vehicleName = UpdateVehicleRequest.AddMember("vehicleName", _vehicleName, &smithytraits.HTTPLabel{})
-
-	UpdateVehicleRequest_modelManifestArn = UpdateVehicleRequest.AddMember("modelManifestArn", _arn)
-
-	UpdateVehicleRequest_decoderManifestArn = UpdateVehicleRequest.AddMember("decoderManifestArn", _arn)
-
-	UpdateVehicleRequest_attributes = UpdateVehicleRequest.AddMember("attributes", _attributesMap)
-
-	UpdateVehicleRequest_attributeUpdateMode = UpdateVehicleRequest.AddMember("attributeUpdateMode", UpdateMode)
-
-	UpdateVehicleRequest_stateTemplatesToAdd = UpdateVehicleRequest.AddMember("stateTemplatesToAdd", _StateTemplateAssociations)
-
-	UpdateVehicleRequest_stateTemplatesToRemove = UpdateVehicleRequest.AddMember("stateTemplatesToRemove", _StateTemplateAssociationIdentifiers)
-
-	UpdateVehicleRequest_stateTemplatesToUpdate = UpdateVehicleRequest.AddMember("stateTemplatesToUpdate", _StateTemplateAssociations)
-
-	UpdateVehicleResponse_vehicleName = UpdateVehicleResponse.AddMember("vehicleName", _vehicleName)
-
-	UpdateVehicleResponse_arn = UpdateVehicleResponse.AddMember("arn", _arn)
-
+	sStructuredMessageFieldNameAndDataTypePair_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iStructuredMessage, Members: &mStructuredMessage, Type: smithy.ShapeTypeUnion, Ext: &eStructuredMessageFieldNameAndDataTypePair_dataType})
+	sStructuredMessageListDefinition_memberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberType", ID: &iStructuredMessage, Members: &mStructuredMessage, Type: smithy.ShapeTypeUnion, Ext: &eStructuredMessageListDefinition_memberType})
 }
+
+var AssociateVehicleFleet = &sAssociateVehicleFleet
+
+var BatchCreateVehicle = &sBatchCreateVehicle
+
+var BatchUpdateVehicle = &sBatchUpdateVehicle
+
+var CreateCampaign = &sCreateCampaign
+
+var CreateDecoderManifest = &sCreateDecoderManifest
+
+var CreateFleet = &sCreateFleet
+
+var CreateModelManifest = &sCreateModelManifest
+
+var CreateSignalCatalog = &sCreateSignalCatalog
+
+var CreateStateTemplate = &sCreateStateTemplate
+
+var CreateVehicle = &sCreateVehicle
+
+var DeleteCampaign = &sDeleteCampaign
+
+var DeleteDecoderManifest = &sDeleteDecoderManifest
+
+var DeleteFleet = &sDeleteFleet
+
+var DeleteModelManifest = &sDeleteModelManifest
+
+var DeleteSignalCatalog = &sDeleteSignalCatalog
+
+var DeleteStateTemplate = &sDeleteStateTemplate
+
+var DeleteVehicle = &sDeleteVehicle
+
+var DisassociateVehicleFleet = &sDisassociateVehicleFleet
+
+var GetCampaign = &sGetCampaign
+
+var GetDecoderManifest = &sGetDecoderManifest
+
+var GetEncryptionConfiguration = &sGetEncryptionConfiguration
+
+var GetFleet = &sGetFleet
+
+var GetLoggingOptions = &sGetLoggingOptions
+
+var GetModelManifest = &sGetModelManifest
+
+var GetRegisterAccountStatus = &sGetRegisterAccountStatus
+
+var GetSignalCatalog = &sGetSignalCatalog
+
+var GetStateTemplate = &sGetStateTemplate
+
+var GetVehicle = &sGetVehicle
+
+var GetVehicleStatus = &sGetVehicleStatus
+
+var ImportDecoderManifest = &sImportDecoderManifest
+
+var ImportSignalCatalog = &sImportSignalCatalog
+
+var ListCampaigns = &sListCampaigns
+
+var ListDecoderManifestNetworkInterfaces = &sListDecoderManifestNetworkInterfaces
+
+var ListDecoderManifests = &sListDecoderManifests
+
+var ListDecoderManifestSignals = &sListDecoderManifestSignals
+
+var ListFleets = &sListFleets
+
+var ListFleetsForVehicle = &sListFleetsForVehicle
+
+var ListModelManifestNodes = &sListModelManifestNodes
+
+var ListModelManifests = &sListModelManifests
+
+var ListSignalCatalogNodes = &sListSignalCatalogNodes
+
+var ListSignalCatalogs = &sListSignalCatalogs
+
+var ListStateTemplates = &sListStateTemplates
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListVehicles = &sListVehicles
+
+var ListVehiclesInFleet = &sListVehiclesInFleet
+
+var PutEncryptionConfiguration = &sPutEncryptionConfiguration
+
+var PutLoggingOptions = &sPutLoggingOptions
+
+var RegisterAccount = &sRegisterAccount
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateCampaign = &sUpdateCampaign
+
+var UpdateDecoderManifest = &sUpdateDecoderManifest
+
+var UpdateFleet = &sUpdateFleet
+
+var UpdateModelManifest = &sUpdateModelManifest
+
+var UpdateSignalCatalog = &sUpdateSignalCatalog
+
+var UpdateStateTemplate = &sUpdateStateTemplate
+
+var UpdateVehicle = &sUpdateVehicle
+
+var _IoTAutobahnControlPlane = &s_IoTAutobahnControlPlane
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _actionEventExpression = &s_actionEventExpression
+
+var Actuator = &sActuator
+var Actuator_fullyQualifiedName = &sActuator_fullyQualifiedName
+var Actuator_dataType = &sActuator_dataType
+var Actuator_description = &sActuator_description
+var Actuator_unit = &sActuator_unit
+var Actuator_allowedValues = &sActuator_allowedValues
+var Actuator_min = &sActuator_min
+var Actuator_max = &sActuator_max
+var Actuator_assignedValue = &sActuator_assignedValue
+var Actuator_deprecationMessage = &sActuator_deprecationMessage
+var Actuator_comment = &sActuator_comment
+var Actuator_structFullyQualifiedName = &sActuator_structFullyQualifiedName
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _arn = &s_arn
+
+var Attribute = &sAttribute
+var Attribute_fullyQualifiedName = &sAttribute_fullyQualifiedName
+var Attribute_dataType = &sAttribute_dataType
+var Attribute_description = &sAttribute_description
+var Attribute_unit = &sAttribute_unit
+var Attribute_allowedValues = &sAttribute_allowedValues
+var Attribute_min = &sAttribute_min
+var Attribute_max = &sAttribute_max
+var Attribute_assignedValue = &sAttribute_assignedValue
+var Attribute_defaultValue = &sAttribute_defaultValue
+var Attribute_deprecationMessage = &sAttribute_deprecationMessage
+var Attribute_comment = &sAttribute_comment
+
+var _attributeName = &s_attributeName
+
+var _attributeNamesList = &s_attributeNamesList
+var _attributeNamesList_member = &s_attributeNamesList_member
+
+var _attributesMap = &s_attributesMap
+var _attributesMap_key = &s_attributesMap_key
+var _attributesMap_value = &s_attributesMap_value
+
+var _attributeValue = &s_attributeValue
+
+var _attributeValuesList = &s_attributeValuesList
+var _attributeValuesList_member = &s_attributeValuesList_member
+
+var Branch = &sBranch
+var Branch_fullyQualifiedName = &sBranch_fullyQualifiedName
+var Branch_description = &sBranch_description
+var Branch_deprecationMessage = &sBranch_deprecationMessage
+var Branch_comment = &sBranch_comment
+
+var _campaignArn = &s_campaignArn
+
+var _campaignName = &s_campaignName
+
+var CampaignStatus = &sCampaignStatus
+var CampaignStatus_CREATING = &sCampaignStatus_CREATING
+var CampaignStatus_WAITING_FOR_APPROVAL = &sCampaignStatus_WAITING_FOR_APPROVAL
+var CampaignStatus_RUNNING = &sCampaignStatus_RUNNING
+var CampaignStatus_SUSPENDED = &sCampaignStatus_SUSPENDED
+
+var _campaignSummaries = &s_campaignSummaries
+var _campaignSummaries_member = &s_campaignSummaries_member
+
+var CampaignSummary = &sCampaignSummary
+var CampaignSummary_arn = &sCampaignSummary_arn
+var CampaignSummary_name = &sCampaignSummary_name
+var CampaignSummary_description = &sCampaignSummary_description
+var CampaignSummary_signalCatalogArn = &sCampaignSummary_signalCatalogArn
+var CampaignSummary_targetArn = &sCampaignSummary_targetArn
+var CampaignSummary_status = &sCampaignSummary_status
+var CampaignSummary_creationTime = &sCampaignSummary_creationTime
+var CampaignSummary_lastModificationTime = &sCampaignSummary_lastModificationTime
+
+var CanDbcDefinition = &sCanDbcDefinition
+var CanDbcDefinition_networkInterface = &sCanDbcDefinition_networkInterface
+var CanDbcDefinition_canDbcFiles = &sCanDbcDefinition_canDbcFiles
+var CanDbcDefinition_signalsMap = &sCanDbcDefinition_signalsMap
+
+var CanInterface = &sCanInterface
+var CanInterface_name = &sCanInterface_name
+var CanInterface_protocolName = &sCanInterface_protocolName
+var CanInterface_protocolVersion = &sCanInterface_protocolVersion
+
+var _CanInterfaceName = &s_CanInterfaceName
+
+var CanSignal = &sCanSignal
+var CanSignal_messageId = &sCanSignal_messageId
+var CanSignal_isBigEndian = &sCanSignal_isBigEndian
+var CanSignal_isSigned = &sCanSignal_isSigned
+var CanSignal_startBit = &sCanSignal_startBit
+var CanSignal_offset = &sCanSignal_offset
+var CanSignal_factor = &sCanSignal_factor
+var CanSignal_length = &sCanSignal_length
+var CanSignal_name = &sCanSignal_name
+var CanSignal_signalValueType = &sCanSignal_signalValueType
+
+var _CanSignalName = &s_CanSignalName
+
+var CloudWatchLogDeliveryOptions = &sCloudWatchLogDeliveryOptions
+var CloudWatchLogDeliveryOptions_logType = &sCloudWatchLogDeliveryOptions_logType
+var CloudWatchLogDeliveryOptions_logGroupName = &sCloudWatchLogDeliveryOptions_logGroupName
+
+var _CloudWatchLogGroupName = &s_CloudWatchLogGroupName
+
+var _collectionPeriodMs = &s_collectionPeriodMs
+
+var CollectionScheme = &sCollectionScheme
+var CollectionScheme_timeBasedCollectionScheme = &sCollectionScheme_timeBasedCollectionScheme
+var CollectionScheme_conditionBasedCollectionScheme = &sCollectionScheme_conditionBasedCollectionScheme
+
+var Compression = &sCompression
+var Compression_OFF = &sCompression_OFF
+var Compression_SNAPPY = &sCompression_SNAPPY
+
+var ConditionBasedCollectionScheme = &sConditionBasedCollectionScheme
+var ConditionBasedCollectionScheme_expression = &sConditionBasedCollectionScheme_expression
+var ConditionBasedCollectionScheme_minimumTriggerIntervalMs = &sConditionBasedCollectionScheme_minimumTriggerIntervalMs
+var ConditionBasedCollectionScheme_triggerMode = &sConditionBasedCollectionScheme_triggerMode
+var ConditionBasedCollectionScheme_conditionLanguageVersion = &sConditionBasedCollectionScheme_conditionLanguageVersion
+
+var ConditionBasedSignalFetchConfig = &sConditionBasedSignalFetchConfig
+var ConditionBasedSignalFetchConfig_conditionExpression = &sConditionBasedSignalFetchConfig_conditionExpression
+var ConditionBasedSignalFetchConfig_triggerMode = &sConditionBasedSignalFetchConfig_triggerMode
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resource = &sConflictException_resource
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var CreateVehicleError = &sCreateVehicleError
+var CreateVehicleError_vehicleName = &sCreateVehicleError_vehicleName
+var CreateVehicleError_code = &sCreateVehicleError_code
+var CreateVehicleError_message = &sCreateVehicleError_message
+
+var _createVehicleErrors = &s_createVehicleErrors
+var _createVehicleErrors_member = &s_createVehicleErrors_member
+
+var CreateVehicleRequestItem = &sCreateVehicleRequestItem
+var CreateVehicleRequestItem_vehicleName = &sCreateVehicleRequestItem_vehicleName
+var CreateVehicleRequestItem_modelManifestArn = &sCreateVehicleRequestItem_modelManifestArn
+var CreateVehicleRequestItem_decoderManifestArn = &sCreateVehicleRequestItem_decoderManifestArn
+var CreateVehicleRequestItem_attributes = &sCreateVehicleRequestItem_attributes
+var CreateVehicleRequestItem_associationBehavior = &sCreateVehicleRequestItem_associationBehavior
+var CreateVehicleRequestItem_tags = &sCreateVehicleRequestItem_tags
+var CreateVehicleRequestItem_stateTemplates = &sCreateVehicleRequestItem_stateTemplates
+
+var _createVehicleRequestItems = &s_createVehicleRequestItems
+var _createVehicleRequestItems_member = &s_createVehicleRequestItems_member
+
+var CreateVehicleResponseItem = &sCreateVehicleResponseItem
+var CreateVehicleResponseItem_vehicleName = &sCreateVehicleResponseItem_vehicleName
+var CreateVehicleResponseItem_arn = &sCreateVehicleResponseItem_arn
+var CreateVehicleResponseItem_thingArn = &sCreateVehicleResponseItem_thingArn
+
+var _createVehicleResponses = &s_createVehicleResponses
+var _createVehicleResponses_member = &s_createVehicleResponses_member
+
+var _CustomDecodingId = &s_CustomDecodingId
+
+var CustomDecodingInterface = &sCustomDecodingInterface
+var CustomDecodingInterface_name = &sCustomDecodingInterface_name
+
+var CustomDecodingSignal = &sCustomDecodingSignal
+var CustomDecodingSignal_id = &sCustomDecodingSignal_id
+
+var _CustomDecodingSignalInterfaceName = &s_CustomDecodingSignalInterfaceName
+
+var _customerAccountId = &s_customerAccountId
+
+var CustomProperty = &sCustomProperty
+var CustomProperty_fullyQualifiedName = &sCustomProperty_fullyQualifiedName
+var CustomProperty_dataType = &sCustomProperty_dataType
+var CustomProperty_dataEncoding = &sCustomProperty_dataEncoding
+var CustomProperty_description = &sCustomProperty_description
+var CustomProperty_deprecationMessage = &sCustomProperty_deprecationMessage
+var CustomProperty_comment = &sCustomProperty_comment
+var CustomProperty_structFullyQualifiedName = &sCustomProperty_structFullyQualifiedName
+
+var CustomStruct = &sCustomStruct
+var CustomStruct_fullyQualifiedName = &sCustomStruct_fullyQualifiedName
+var CustomStruct_description = &sCustomStruct_description
+var CustomStruct_deprecationMessage = &sCustomStruct_deprecationMessage
+var CustomStruct_comment = &sCustomStruct_comment
+
+var DataDestinationConfig = &sDataDestinationConfig
+var DataDestinationConfig_s3Config = &sDataDestinationConfig_s3Config
+var DataDestinationConfig_timestreamConfig = &sDataDestinationConfig_timestreamConfig
+var DataDestinationConfig_mqttTopicConfig = &sDataDestinationConfig_mqttTopicConfig
+
+var _DataDestinationConfigs = &s_DataDestinationConfigs
+var _DataDestinationConfigs_member = &s_DataDestinationConfigs_member
+
+var _DataExtraDimensionNodePathList = &s_DataExtraDimensionNodePathList
+var _DataExtraDimensionNodePathList_member = &s_DataExtraDimensionNodePathList_member
+
+var DataFormat = &sDataFormat
+var DataFormat_JSON = &sDataFormat_JSON
+var DataFormat_PARQUET = &sDataFormat_PARQUET
+
+var DataPartition = &sDataPartition
+var DataPartition_id = &sDataPartition_id
+var DataPartition_storageOptions = &sDataPartition_storageOptions
+var DataPartition_uploadOptions = &sDataPartition_uploadOptions
+
+var _DataPartitionId = &s_DataPartitionId
+
+var _DataPartitions = &s_DataPartitions
+var _DataPartitions_member = &s_DataPartitions_member
+
+var DataPartitionStorageOptions = &sDataPartitionStorageOptions
+var DataPartitionStorageOptions_maximumSize = &sDataPartitionStorageOptions_maximumSize
+var DataPartitionStorageOptions_storageLocation = &sDataPartitionStorageOptions_storageLocation
+var DataPartitionStorageOptions_minimumTimeToLive = &sDataPartitionStorageOptions_minimumTimeToLive
+
+var DataPartitionUploadOptions = &sDataPartitionUploadOptions
+var DataPartitionUploadOptions_expression = &sDataPartitionUploadOptions_expression
+var DataPartitionUploadOptions_conditionLanguageVersion = &sDataPartitionUploadOptions_conditionLanguageVersion
+
+var _decoderManifestSummaries = &s_decoderManifestSummaries
+var _decoderManifestSummaries_member = &s_decoderManifestSummaries_member
+
+var DecoderManifestSummary = &sDecoderManifestSummary
+var DecoderManifestSummary_name = &sDecoderManifestSummary_name
+var DecoderManifestSummary_arn = &sDecoderManifestSummary_arn
+var DecoderManifestSummary_modelManifestArn = &sDecoderManifestSummary_modelManifestArn
+var DecoderManifestSummary_description = &sDecoderManifestSummary_description
+var DecoderManifestSummary_status = &sDecoderManifestSummary_status
+var DecoderManifestSummary_creationTime = &sDecoderManifestSummary_creationTime
+var DecoderManifestSummary_lastModificationTime = &sDecoderManifestSummary_lastModificationTime
+var DecoderManifestSummary_message = &sDecoderManifestSummary_message
+
+var DecoderManifestValidationException = &sDecoderManifestValidationException
+var DecoderManifestValidationException_invalidSignals = &sDecoderManifestValidationException_invalidSignals
+var DecoderManifestValidationException_invalidNetworkInterfaces = &sDecoderManifestValidationException_invalidNetworkInterfaces
+var DecoderManifestValidationException_message = &sDecoderManifestValidationException_message
+
+var DefaultForUnmappedSignalsType = &sDefaultForUnmappedSignalsType
+var DefaultForUnmappedSignalsType_CUSTOM_DECODING = &sDefaultForUnmappedSignalsType_CUSTOM_DECODING
+
+var _description = &s_description
+
+var DiagnosticsMode = &sDiagnosticsMode
+var DiagnosticsMode_OFF = &sDiagnosticsMode_OFF
+var DiagnosticsMode_SEND_ACTIVE_DTCS = &sDiagnosticsMode_SEND_ACTIVE_DTCS
+
+var _double = &s_double
+
+var EncryptionStatus = &sEncryptionStatus
+var EncryptionStatus_PENDING = &sEncryptionStatus_PENDING
+var EncryptionStatus_SUCCESS = &sEncryptionStatus_SUCCESS
+var EncryptionStatus_FAILURE = &sEncryptionStatus_FAILURE
+
+var EncryptionType = &sEncryptionType
+var EncryptionType_KMS_BASED_ENCRYPTION = &sEncryptionType_KMS_BASED_ENCRYPTION
+var EncryptionType_FLEETWISE_DEFAULT_ENCRYPTION = &sEncryptionType_FLEETWISE_DEFAULT_ENCRYPTION
+
+var _errorMessage = &s_errorMessage
+
+var _eventExpression = &s_eventExpression
+
+var _EventExpressionList = &s_EventExpressionList
+var _EventExpressionList_member = &s_EventExpressionList_member
+
+var _fetchConfigEventExpression = &s_fetchConfigEventExpression
+
+var _fleetId = &s_fleetId
+
+var _fleets = &s_fleets
+var _fleets_member = &s_fleets_member
+
+var _fleetSummaries = &s_fleetSummaries
+var _fleetSummaries_member = &s_fleetSummaries_member
+
+var FleetSummary = &sFleetSummary
+var FleetSummary_id = &sFleetSummary_id
+var FleetSummary_arn = &sFleetSummary_arn
+var FleetSummary_description = &sFleetSummary_description
+var FleetSummary_signalCatalogArn = &sFleetSummary_signalCatalogArn
+var FleetSummary_creationTime = &sFleetSummary_creationTime
+var FleetSummary_lastModificationTime = &sFleetSummary_lastModificationTime
+
+var FormattedVss = &sFormattedVss
+var FormattedVss_vssJson = &sFormattedVss_vssJson
+
+var _Fqns = &s_Fqns
+var _Fqns_member = &s_Fqns_member
+
+var _FullyQualifiedName = &s_FullyQualifiedName
+
+var IamRegistrationResponse = &sIamRegistrationResponse
+var IamRegistrationResponse_roleArn = &sIamRegistrationResponse_roleArn
+var IamRegistrationResponse_registrationStatus = &sIamRegistrationResponse_registrationStatus
+var IamRegistrationResponse_errorMessage = &sIamRegistrationResponse_errorMessage
+
+var IamResources = &sIamResources
+var IamResources_roleArn = &sIamResources_roleArn
+
+var _IAMRoleArn = &s_IAMRoleArn
+
+var _InterfaceId = &s_InterfaceId
+
+var _InterfaceIds = &s_InterfaceIds
+var _InterfaceIds_member = &s_InterfaceIds_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var InvalidNetworkInterface = &sInvalidNetworkInterface
+var InvalidNetworkInterface_interfaceId = &sInvalidNetworkInterface_interfaceId
+var InvalidNetworkInterface_reason = &sInvalidNetworkInterface_reason
+
+var _InvalidNetworkInterfaces = &s_InvalidNetworkInterfaces
+var _InvalidNetworkInterfaces_member = &s_InvalidNetworkInterfaces_member
+
+var InvalidNodeException = &sInvalidNodeException
+var InvalidNodeException_invalidNodes = &sInvalidNodeException_invalidNodes
+var InvalidNodeException_reason = &sInvalidNodeException_reason
+var InvalidNodeException_message = &sInvalidNodeException_message
+
+var InvalidSignal = &sInvalidSignal
+var InvalidSignal_name = &sInvalidSignal_name
+var InvalidSignal_reason = &sInvalidSignal_reason
+
+var InvalidSignalDecoder = &sInvalidSignalDecoder
+var InvalidSignalDecoder_name = &sInvalidSignalDecoder_name
+var InvalidSignalDecoder_reason = &sInvalidSignalDecoder_reason
+var InvalidSignalDecoder_hint = &sInvalidSignalDecoder_hint
+
+var _InvalidSignalDecoders = &s_InvalidSignalDecoders
+var _InvalidSignalDecoders_member = &s_InvalidSignalDecoders_member
+
+var _InvalidSignals = &s_InvalidSignals
+var _InvalidSignals_member = &s_InvalidSignals_member
+
+var InvalidSignalsException = &sInvalidSignalsException
+var InvalidSignalsException_message = &sInvalidSignalsException_message
+var InvalidSignalsException_invalidSignals = &sInvalidSignalsException_invalidSignals
+
+var _languageVersion = &s_languageVersion
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+var LimitExceededException_resourceId = &sLimitExceededException_resourceId
+var LimitExceededException_resourceType = &sLimitExceededException_resourceType
+
+var _listOfStrings = &s_listOfStrings
+var _listOfStrings_member = &s_listOfStrings_member
+
+var ListResponseScope = &sListResponseScope
+var ListResponseScope_METADATA_ONLY = &sListResponseScope_METADATA_ONLY
+
+var _listVehiclesMaxResults = &s_listVehiclesMaxResults
+
+var LogType = &sLogType
+var LogType_OFF = &sLogType_OFF
+var LogType_ERROR = &sLogType_ERROR
+
+var ManifestStatus = &sManifestStatus
+var ManifestStatus_ACTIVE = &sManifestStatus_ACTIVE
+var ManifestStatus_DRAFT = &sManifestStatus_DRAFT
+var ManifestStatus_INVALID = &sManifestStatus_INVALID
+var ManifestStatus_VALIDATING = &sManifestStatus_VALIDATING
+
+var _maxResults = &s_maxResults
+
+var _maxSampleCount = &s_maxSampleCount
+
+var _maxStringSize = &s_maxStringSize
+
+var _message = &s_message
+
+var MessageSignal = &sMessageSignal
+var MessageSignal_topicName = &sMessageSignal_topicName
+var MessageSignal_structuredMessage = &sMessageSignal_structuredMessage
+
+var _modelManifestSummaries = &s_modelManifestSummaries
+var _modelManifestSummaries_member = &s_modelManifestSummaries_member
+
+var ModelManifestSummary = &sModelManifestSummary
+var ModelManifestSummary_name = &sModelManifestSummary_name
+var ModelManifestSummary_arn = &sModelManifestSummary_arn
+var ModelManifestSummary_signalCatalogArn = &sModelManifestSummary_signalCatalogArn
+var ModelManifestSummary_description = &sModelManifestSummary_description
+var ModelManifestSummary_status = &sModelManifestSummary_status
+var ModelManifestSummary_creationTime = &sModelManifestSummary_creationTime
+var ModelManifestSummary_lastModificationTime = &sModelManifestSummary_lastModificationTime
+
+var _ModelSignalsMap = &s_ModelSignalsMap
+var _ModelSignalsMap_key = &s_ModelSignalsMap_key
+var _ModelSignalsMap_value = &s_ModelSignalsMap_value
+
+var _MqttTopicArn = &s_MqttTopicArn
+
+var MqttTopicConfig = &sMqttTopicConfig
+var MqttTopicConfig_mqttTopicArn = &sMqttTopicConfig_mqttTopicArn
+var MqttTopicConfig_executionRoleArn = &sMqttTopicConfig_executionRoleArn
+
+var _NetworkFileBlob = &s_NetworkFileBlob
+
+var NetworkFileDefinition = &sNetworkFileDefinition
+var NetworkFileDefinition_canDbc = &sNetworkFileDefinition_canDbc
+
+var _NetworkFileDefinitions = &s_NetworkFileDefinitions
+var _NetworkFileDefinitions_member = &s_NetworkFileDefinitions_member
+
+var _NetworkFilesList = &s_NetworkFilesList
+var _NetworkFilesList_member = &s_NetworkFilesList_member
+
+var NetworkInterface = &sNetworkInterface
+var NetworkInterface_interfaceId = &sNetworkInterface_interfaceId
+var NetworkInterface_type = &sNetworkInterface_type
+var NetworkInterface_canInterface = &sNetworkInterface_canInterface
+var NetworkInterface_obdInterface = &sNetworkInterface_obdInterface
+var NetworkInterface_vehicleMiddleware = &sNetworkInterface_vehicleMiddleware
+var NetworkInterface_customDecodingInterface = &sNetworkInterface_customDecodingInterface
+
+var NetworkInterfaceFailureReason = &sNetworkInterfaceFailureReason
+var NetworkInterfaceFailureReason_DUPLICATE_INTERFACE = &sNetworkInterfaceFailureReason_DUPLICATE_INTERFACE
+var NetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE = &sNetworkInterfaceFailureReason_CONFLICTING_NETWORK_INTERFACE
+var NetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS = &sNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS
+var NetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL = &sNetworkInterfaceFailureReason_CAN_NETWORK_INTERFACE_INFO_IS_NULL
+var NetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL = &sNetworkInterfaceFailureReason_OBD_NETWORK_INTERFACE_INFO_IS_NULL
+var NetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS = &sNetworkInterfaceFailureReason_NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS
+var NetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL = &sNetworkInterfaceFailureReason_VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL
+var NetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL = &sNetworkInterfaceFailureReason_CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL
+
+var _NetworkInterfaces = &s_NetworkInterfaces
+var _NetworkInterfaces_member = &s_NetworkInterfaces_member
+
+var NetworkInterfaceType = &sNetworkInterfaceType
+var NetworkInterfaceType_CAN_INTERFACE = &sNetworkInterfaceType_CAN_INTERFACE
+var NetworkInterfaceType_OBD_INTERFACE = &sNetworkInterfaceType_OBD_INTERFACE
+var NetworkInterfaceType_VEHICLE_MIDDLEWARE = &sNetworkInterfaceType_VEHICLE_MIDDLEWARE
+var NetworkInterfaceType_CUSTOM_DECODING_INTERFACE = &sNetworkInterfaceType_CUSTOM_DECODING_INTERFACE
+
+var _nextToken = &s_nextToken
+
+var Node = &sNode
+var Node_branch = &sNode_branch
+var Node_sensor = &sNode_sensor
+var Node_actuator = &sNode_actuator
+var Node_attribute = &sNode_attribute
+var Node_struct = &sNode_struct
+var Node_property = &sNode_property
+
+var NodeCounts = &sNodeCounts
+var NodeCounts_totalNodes = &sNodeCounts_totalNodes
+var NodeCounts_totalBranches = &sNodeCounts_totalBranches
+var NodeCounts_totalSensors = &sNodeCounts_totalSensors
+var NodeCounts_totalAttributes = &sNodeCounts_totalAttributes
+var NodeCounts_totalActuators = &sNodeCounts_totalActuators
+var NodeCounts_totalStructs = &sNodeCounts_totalStructs
+var NodeCounts_totalProperties = &sNodeCounts_totalProperties
+
+var NodeDataEncoding = &sNodeDataEncoding
+var NodeDataEncoding_BINARY = &sNodeDataEncoding_BINARY
+var NodeDataEncoding_TYPED = &sNodeDataEncoding_TYPED
+
+var NodeDataType = &sNodeDataType
+var NodeDataType_INT8 = &sNodeDataType_INT8
+var NodeDataType_UINT8 = &sNodeDataType_UINT8
+var NodeDataType_INT16 = &sNodeDataType_INT16
+var NodeDataType_UINT16 = &sNodeDataType_UINT16
+var NodeDataType_INT32 = &sNodeDataType_INT32
+var NodeDataType_UINT32 = &sNodeDataType_UINT32
+var NodeDataType_INT64 = &sNodeDataType_INT64
+var NodeDataType_UINT64 = &sNodeDataType_UINT64
+var NodeDataType_BOOLEAN = &sNodeDataType_BOOLEAN
+var NodeDataType_FLOAT = &sNodeDataType_FLOAT
+var NodeDataType_DOUBLE = &sNodeDataType_DOUBLE
+var NodeDataType_STRING = &sNodeDataType_STRING
+var NodeDataType_UNIX_TIMESTAMP = &sNodeDataType_UNIX_TIMESTAMP
+var NodeDataType_INT8_ARRAY = &sNodeDataType_INT8_ARRAY
+var NodeDataType_UINT8_ARRAY = &sNodeDataType_UINT8_ARRAY
+var NodeDataType_INT16_ARRAY = &sNodeDataType_INT16_ARRAY
+var NodeDataType_UINT16_ARRAY = &sNodeDataType_UINT16_ARRAY
+var NodeDataType_INT32_ARRAY = &sNodeDataType_INT32_ARRAY
+var NodeDataType_UINT32_ARRAY = &sNodeDataType_UINT32_ARRAY
+var NodeDataType_INT64_ARRAY = &sNodeDataType_INT64_ARRAY
+var NodeDataType_UINT64_ARRAY = &sNodeDataType_UINT64_ARRAY
+var NodeDataType_BOOLEAN_ARRAY = &sNodeDataType_BOOLEAN_ARRAY
+var NodeDataType_FLOAT_ARRAY = &sNodeDataType_FLOAT_ARRAY
+var NodeDataType_DOUBLE_ARRAY = &sNodeDataType_DOUBLE_ARRAY
+var NodeDataType_STRING_ARRAY = &sNodeDataType_STRING_ARRAY
+var NodeDataType_UNIX_TIMESTAMP_ARRAY = &sNodeDataType_UNIX_TIMESTAMP_ARRAY
+var NodeDataType_UNKNOWN = &sNodeDataType_UNKNOWN
+var NodeDataType_STRUCT = &sNodeDataType_STRUCT
+var NodeDataType_STRUCT_ARRAY = &sNodeDataType_STRUCT_ARRAY
+
+var _NodePath = &s_NodePath
+
+var _NodePaths = &s_NodePaths
+var _NodePaths_member = &s_NodePaths_member
+
+var _Nodes = &s_Nodes
+var _Nodes_member = &s_Nodes_member
+
+var _nonNegativeInteger = &s_nonNegativeInteger
+
+var _number = &s_number
+
+var _ObdBitmaskLength = &s_ObdBitmaskLength
+
+var _ObdByteLength = &s_ObdByteLength
+
+var ObdInterface = &sObdInterface
+var ObdInterface_name = &sObdInterface_name
+var ObdInterface_requestMessageId = &sObdInterface_requestMessageId
+var ObdInterface_obdStandard = &sObdInterface_obdStandard
+var ObdInterface_pidRequestIntervalSeconds = &sObdInterface_pidRequestIntervalSeconds
+var ObdInterface_dtcRequestIntervalSeconds = &sObdInterface_dtcRequestIntervalSeconds
+var ObdInterface_useExtendedIds = &sObdInterface_useExtendedIds
+var ObdInterface_hasTransmissionEcu = &sObdInterface_hasTransmissionEcu
+
+var _ObdInterfaceName = &s_ObdInterfaceName
+
+var ObdSignal = &sObdSignal
+var ObdSignal_pidResponseLength = &sObdSignal_pidResponseLength
+var ObdSignal_serviceMode = &sObdSignal_serviceMode
+var ObdSignal_pid = &sObdSignal_pid
+var ObdSignal_scaling = &sObdSignal_scaling
+var ObdSignal_offset = &sObdSignal_offset
+var ObdSignal_startByte = &sObdSignal_startByte
+var ObdSignal_byteLength = &sObdSignal_byteLength
+var ObdSignal_bitRightShift = &sObdSignal_bitRightShift
+var ObdSignal_bitMaskLength = &sObdSignal_bitMaskLength
+var ObdSignal_isSigned = &sObdSignal_isSigned
+var ObdSignal_signalValueType = &sObdSignal_signalValueType
+
+var _ObdStandard = &s_ObdStandard
+
+var OnChangeStateTemplateUpdateStrategy = &sOnChangeStateTemplateUpdateStrategy
+
+var PeriodicStateTemplateUpdateStrategy = &sPeriodicStateTemplateUpdateStrategy
+var PeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate = &sPeriodicStateTemplateUpdateStrategy_stateTemplateUpdateRate
+
+var _positiveInteger = &s_positiveInteger
+
+var _positiveLong = &s_positiveLong
+
+var _Prefix = &s_Prefix
+
+var PrimitiveMessageDefinition = &sPrimitiveMessageDefinition
+var PrimitiveMessageDefinition_ros2PrimitiveMessageDefinition = &sPrimitiveMessageDefinition_ros2PrimitiveMessageDefinition
+
+var _priority = &s_priority
+
+var _ProtocolName = &s_ProtocolName
+
+var _ProtocolVersion = &s_ProtocolVersion
+
+var RegistrationStatus = &sRegistrationStatus
+var RegistrationStatus_REGISTRATION_PENDING = &sRegistrationStatus_REGISTRATION_PENDING
+var RegistrationStatus_REGISTRATION_SUCCESS = &sRegistrationStatus_REGISTRATION_SUCCESS
+var RegistrationStatus_REGISTRATION_FAILURE = &sRegistrationStatus_REGISTRATION_FAILURE
+
+var _ResourceIdentifier = &s_ResourceIdentifier
+
+var _resourceName = &s_resourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _ResourceUniqueId = &s_ResourceUniqueId
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var ROS2PrimitiveMessageDefinition = &sROS2PrimitiveMessageDefinition
+var ROS2PrimitiveMessageDefinition_primitiveType = &sROS2PrimitiveMessageDefinition_primitiveType
+var ROS2PrimitiveMessageDefinition_offset = &sROS2PrimitiveMessageDefinition_offset
+var ROS2PrimitiveMessageDefinition_scaling = &sROS2PrimitiveMessageDefinition_scaling
+var ROS2PrimitiveMessageDefinition_upperBound = &sROS2PrimitiveMessageDefinition_upperBound
+
+var ROS2PrimitiveType = &sROS2PrimitiveType
+var ROS2PrimitiveType_BOOL = &sROS2PrimitiveType_BOOL
+var ROS2PrimitiveType_BYTE = &sROS2PrimitiveType_BYTE
+var ROS2PrimitiveType_CHAR = &sROS2PrimitiveType_CHAR
+var ROS2PrimitiveType_FLOAT32 = &sROS2PrimitiveType_FLOAT32
+var ROS2PrimitiveType_FLOAT64 = &sROS2PrimitiveType_FLOAT64
+var ROS2PrimitiveType_INT8 = &sROS2PrimitiveType_INT8
+var ROS2PrimitiveType_UINT8 = &sROS2PrimitiveType_UINT8
+var ROS2PrimitiveType_INT16 = &sROS2PrimitiveType_INT16
+var ROS2PrimitiveType_UINT16 = &sROS2PrimitiveType_UINT16
+var ROS2PrimitiveType_INT32 = &sROS2PrimitiveType_INT32
+var ROS2PrimitiveType_UINT32 = &sROS2PrimitiveType_UINT32
+var ROS2PrimitiveType_INT64 = &sROS2PrimitiveType_INT64
+var ROS2PrimitiveType_UINT64 = &sROS2PrimitiveType_UINT64
+var ROS2PrimitiveType_STRING = &sROS2PrimitiveType_STRING
+var ROS2PrimitiveType_WSTRING = &sROS2PrimitiveType_WSTRING
+
+var _S3BucketArn = &s_S3BucketArn
+
+var S3Config = &sS3Config
+var S3Config_bucketArn = &sS3Config_bucketArn
+var S3Config_dataFormat = &sS3Config_dataFormat
+var S3Config_storageCompressionFormat = &sS3Config_storageCompressionFormat
+var S3Config_prefix = &sS3Config_prefix
+
+var Sensor = &sSensor
+var Sensor_fullyQualifiedName = &sSensor_fullyQualifiedName
+var Sensor_dataType = &sSensor_dataType
+var Sensor_description = &sSensor_description
+var Sensor_unit = &sSensor_unit
+var Sensor_allowedValues = &sSensor_allowedValues
+var Sensor_min = &sSensor_min
+var Sensor_max = &sSensor_max
+var Sensor_deprecationMessage = &sSensor_deprecationMessage
+var Sensor_comment = &sSensor_comment
+var Sensor_structFullyQualifiedName = &sSensor_structFullyQualifiedName
+
+var _signalCatalogSummaries = &s_signalCatalogSummaries
+var _signalCatalogSummaries_member = &s_signalCatalogSummaries_member
+
+var SignalCatalogSummary = &sSignalCatalogSummary
+var SignalCatalogSummary_name = &sSignalCatalogSummary_name
+var SignalCatalogSummary_arn = &sSignalCatalogSummary_arn
+var SignalCatalogSummary_creationTime = &sSignalCatalogSummary_creationTime
+var SignalCatalogSummary_lastModificationTime = &sSignalCatalogSummary_lastModificationTime
+
+var SignalDecoder = &sSignalDecoder
+var SignalDecoder_fullyQualifiedName = &sSignalDecoder_fullyQualifiedName
+var SignalDecoder_type = &sSignalDecoder_type
+var SignalDecoder_interfaceId = &sSignalDecoder_interfaceId
+var SignalDecoder_canSignal = &sSignalDecoder_canSignal
+var SignalDecoder_obdSignal = &sSignalDecoder_obdSignal
+var SignalDecoder_messageSignal = &sSignalDecoder_messageSignal
+var SignalDecoder_customDecodingSignal = &sSignalDecoder_customDecodingSignal
+
+var SignalDecoderFailureReason = &sSignalDecoderFailureReason
+var SignalDecoderFailureReason_DUPLICATE_SIGNAL = &sSignalDecoderFailureReason_DUPLICATE_SIGNAL
+var SignalDecoderFailureReason_CONFLICTING_SIGNAL = &sSignalDecoderFailureReason_CONFLICTING_SIGNAL
+var SignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS = &sSignalDecoderFailureReason_SIGNAL_TO_ADD_ALREADY_EXISTS
+var SignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE = &sSignalDecoderFailureReason_SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE
+var SignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE = &sSignalDecoderFailureReason_NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE
+var SignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL = &sSignalDecoderFailureReason_SIGNAL_NOT_IN_MODEL
+var SignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL = &sSignalDecoderFailureReason_CAN_SIGNAL_INFO_IS_NULL
+var SignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL = &sSignalDecoderFailureReason_OBD_SIGNAL_INFO_IS_NULL
+var SignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL = &sSignalDecoderFailureReason_NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL
+var SignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL = &sSignalDecoderFailureReason_MESSAGE_SIGNAL_INFO_IS_NULL
+var SignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE = &sSignalDecoderFailureReason_SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE
+var SignalDecoderFailureReason_STRUCT_SIZE_MISMATCH = &sSignalDecoderFailureReason_STRUCT_SIZE_MISMATCH
+var SignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL = &sSignalDecoderFailureReason_NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL
+var SignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG = &sSignalDecoderFailureReason_SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG
+var SignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL = &sSignalDecoderFailureReason_EMPTY_MESSAGE_SIGNAL
+var SignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL = &sSignalDecoderFailureReason_CUSTOM_DECODING_SIGNAL_INFO_IS_NULL
+
+var _SignalDecoders = &s_SignalDecoders
+var _SignalDecoders_member = &s_SignalDecoders_member
+
+var SignalDecoderType = &sSignalDecoderType
+var SignalDecoderType_CAN_SIGNAL = &sSignalDecoderType_CAN_SIGNAL
+var SignalDecoderType_OBD_SIGNAL = &sSignalDecoderType_OBD_SIGNAL
+var SignalDecoderType_MESSAGE_SIGNAL = &sSignalDecoderType_MESSAGE_SIGNAL
+var SignalDecoderType_CUSTOM_DECODING_SIGNAL = &sSignalDecoderType_CUSTOM_DECODING_SIGNAL
+
+var SignalFetchConfig = &sSignalFetchConfig
+var SignalFetchConfig_timeBased = &sSignalFetchConfig_timeBased
+var SignalFetchConfig_conditionBased = &sSignalFetchConfig_conditionBased
+
+var SignalFetchInformation = &sSignalFetchInformation
+var SignalFetchInformation_fullyQualifiedName = &sSignalFetchInformation_fullyQualifiedName
+var SignalFetchInformation_signalFetchConfig = &sSignalFetchInformation_signalFetchConfig
+var SignalFetchInformation_conditionLanguageVersion = &sSignalFetchInformation_conditionLanguageVersion
+var SignalFetchInformation_actions = &sSignalFetchInformation_actions
+
+var _SignalFetchInformationList = &s_SignalFetchInformationList
+var _SignalFetchInformationList_member = &s_SignalFetchInformationList_member
+
+var SignalInformation = &sSignalInformation
+var SignalInformation_name = &sSignalInformation_name
+var SignalInformation_maxSampleCount = &sSignalInformation_maxSampleCount
+var SignalInformation_minimumSamplingIntervalMs = &sSignalInformation_minimumSamplingIntervalMs
+var SignalInformation_dataPartitionId = &sSignalInformation_dataPartitionId
+
+var _SignalInformationList = &s_SignalInformationList
+var _SignalInformationList_member = &s_SignalInformationList_member
+
+var SignalNodeType = &sSignalNodeType
+var SignalNodeType_SENSOR = &sSignalNodeType_SENSOR
+var SignalNodeType_ACTUATOR = &sSignalNodeType_ACTUATOR
+var SignalNodeType_ATTRIBUTE = &sSignalNodeType_ATTRIBUTE
+var SignalNodeType_BRANCH = &sSignalNodeType_BRANCH
+var SignalNodeType_CUSTOM_STRUCT = &sSignalNodeType_CUSTOM_STRUCT
+var SignalNodeType_CUSTOM_PROPERTY = &sSignalNodeType_CUSTOM_PROPERTY
+
+var SignalValueType = &sSignalValueType
+var SignalValueType_INTEGER = &sSignalValueType_INTEGER
+var SignalValueType_FLOATING_POINT = &sSignalValueType_FLOATING_POINT
+
+var SpoolingMode = &sSpoolingMode
+var SpoolingMode_OFF = &sSpoolingMode_OFF
+var SpoolingMode_TO_DISK = &sSpoolingMode_TO_DISK
+
+var StateTemplateAssociation = &sStateTemplateAssociation
+var StateTemplateAssociation_identifier = &sStateTemplateAssociation_identifier
+var StateTemplateAssociation_stateTemplateUpdateStrategy = &sStateTemplateAssociation_stateTemplateUpdateStrategy
+
+var _StateTemplateAssociationIdentifiers = &s_StateTemplateAssociationIdentifiers
+var _StateTemplateAssociationIdentifiers_member = &s_StateTemplateAssociationIdentifiers_member
+
+var _StateTemplateAssociations = &s_StateTemplateAssociations
+var _StateTemplateAssociations_member = &s_StateTemplateAssociations_member
+
+var _StateTemplateDataExtraDimensionNodePathList = &s_StateTemplateDataExtraDimensionNodePathList
+var _StateTemplateDataExtraDimensionNodePathList_member = &s_StateTemplateDataExtraDimensionNodePathList_member
+
+var _StateTemplateMetadataExtraDimensionNodePathList = &s_StateTemplateMetadataExtraDimensionNodePathList
+var _StateTemplateMetadataExtraDimensionNodePathList_member = &s_StateTemplateMetadataExtraDimensionNodePathList_member
+
+var _StateTemplateProperties = &s_StateTemplateProperties
+var _StateTemplateProperties_member = &s_StateTemplateProperties_member
+
+var _StateTemplateSummaries = &s_StateTemplateSummaries
+var _StateTemplateSummaries_member = &s_StateTemplateSummaries_member
+
+var StateTemplateSummary = &sStateTemplateSummary
+var StateTemplateSummary_name = &sStateTemplateSummary_name
+var StateTemplateSummary_arn = &sStateTemplateSummary_arn
+var StateTemplateSummary_signalCatalogArn = &sStateTemplateSummary_signalCatalogArn
+var StateTemplateSummary_description = &sStateTemplateSummary_description
+var StateTemplateSummary_creationTime = &sStateTemplateSummary_creationTime
+var StateTemplateSummary_lastModificationTime = &sStateTemplateSummary_lastModificationTime
+var StateTemplateSummary_id = &sStateTemplateSummary_id
+
+var StateTemplateUpdateStrategy = &sStateTemplateUpdateStrategy
+var StateTemplateUpdateStrategy_periodic = &sStateTemplateUpdateStrategy_periodic
+var StateTemplateUpdateStrategy_onChange = &sStateTemplateUpdateStrategy_onChange
+
+var _statusStr = &s_statusStr
+
+var StorageCompressionFormat = &sStorageCompressionFormat
+var StorageCompressionFormat_NONE = &sStorageCompressionFormat_NONE
+var StorageCompressionFormat_GZIP = &sStorageCompressionFormat_GZIP
+
+var _StorageLocation = &s_StorageLocation
+
+var StorageMaximumSize = &sStorageMaximumSize
+var StorageMaximumSize_unit = &sStorageMaximumSize_unit
+var StorageMaximumSize_value = &sStorageMaximumSize_value
+
+var StorageMaximumSizeUnit = &sStorageMaximumSizeUnit
+var StorageMaximumSizeUnit_MB = &sStorageMaximumSizeUnit_MB
+var StorageMaximumSizeUnit_GB = &sStorageMaximumSizeUnit_GB
+var StorageMaximumSizeUnit_TB = &sStorageMaximumSizeUnit_TB
+
+var _StorageMaximumSizeValue = &s_StorageMaximumSizeValue
+
+var StorageMinimumTimeToLive = &sStorageMinimumTimeToLive
+var StorageMinimumTimeToLive_unit = &sStorageMinimumTimeToLive_unit
+var StorageMinimumTimeToLive_value = &sStorageMinimumTimeToLive_value
+
+var StorageMinimumTimeToLiveUnit = &sStorageMinimumTimeToLiveUnit
+var StorageMinimumTimeToLiveUnit_HOURS = &sStorageMinimumTimeToLiveUnit_HOURS
+var StorageMinimumTimeToLiveUnit_DAYS = &sStorageMinimumTimeToLiveUnit_DAYS
+var StorageMinimumTimeToLiveUnit_WEEKS = &sStorageMinimumTimeToLiveUnit_WEEKS
+
+var _StorageMinimumTimeToLiveValue = &s_StorageMinimumTimeToLiveValue
+
+var _string = &s_string
+
+var StructuredMessage = &sStructuredMessage
+var StructuredMessage_primitiveMessageDefinition = &sStructuredMessage_primitiveMessageDefinition
+var StructuredMessage_structuredMessageListDefinition = &sStructuredMessage_structuredMessageListDefinition
+var StructuredMessage_structuredMessageDefinition = &sStructuredMessage_structuredMessageDefinition
+
+var _StructuredMessageDefinition = &s_StructuredMessageDefinition
+var _StructuredMessageDefinition_member = &s_StructuredMessageDefinition_member
+
+var StructuredMessageFieldNameAndDataTypePair = &sStructuredMessageFieldNameAndDataTypePair
+var StructuredMessageFieldNameAndDataTypePair_fieldName = &sStructuredMessageFieldNameAndDataTypePair_fieldName
+var StructuredMessageFieldNameAndDataTypePair_dataType = &sStructuredMessageFieldNameAndDataTypePair_dataType
+
+var StructuredMessageListDefinition = &sStructuredMessageListDefinition
+var StructuredMessageListDefinition_name = &sStructuredMessageListDefinition_name
+var StructuredMessageListDefinition_memberType = &sStructuredMessageListDefinition_memberType
+var StructuredMessageListDefinition_listType = &sStructuredMessageListDefinition_listType
+var StructuredMessageListDefinition_capacity = &sStructuredMessageListDefinition_capacity
+
+var StructuredMessageListType = &sStructuredMessageListType
+var StructuredMessageListType_FIXED_CAPACITY = &sStructuredMessageListType_FIXED_CAPACITY
+var StructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY = &sStructuredMessageListType_DYNAMIC_UNBOUNDED_CAPACITY
+var StructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY = &sStructuredMessageListType_DYNAMIC_BOUNDED_CAPACITY
+
+var _StructureMessageName = &s_StructureMessageName
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var TimeBasedCollectionScheme = &sTimeBasedCollectionScheme
+var TimeBasedCollectionScheme_periodMs = &sTimeBasedCollectionScheme_periodMs
+
+var TimeBasedSignalFetchConfig = &sTimeBasedSignalFetchConfig
+var TimeBasedSignalFetchConfig_executionFrequencyMs = &sTimeBasedSignalFetchConfig_executionFrequencyMs
+
+var TimePeriod = &sTimePeriod
+var TimePeriod_unit = &sTimePeriod_unit
+var TimePeriod_value = &sTimePeriod_value
+
+var _timestamp = &s_timestamp
+
+var TimestreamConfig = &sTimestreamConfig
+var TimestreamConfig_timestreamTableArn = &sTimestreamConfig_timestreamTableArn
+var TimestreamConfig_executionRoleArn = &sTimestreamConfig_executionRoleArn
+
+var _TimestreamDatabaseName = &s_TimestreamDatabaseName
+
+var TimestreamRegistrationResponse = &sTimestreamRegistrationResponse
+var TimestreamRegistrationResponse_timestreamDatabaseName = &sTimestreamRegistrationResponse_timestreamDatabaseName
+var TimestreamRegistrationResponse_timestreamTableName = &sTimestreamRegistrationResponse_timestreamTableName
+var TimestreamRegistrationResponse_timestreamDatabaseArn = &sTimestreamRegistrationResponse_timestreamDatabaseArn
+var TimestreamRegistrationResponse_timestreamTableArn = &sTimestreamRegistrationResponse_timestreamTableArn
+var TimestreamRegistrationResponse_registrationStatus = &sTimestreamRegistrationResponse_registrationStatus
+var TimestreamRegistrationResponse_errorMessage = &sTimestreamRegistrationResponse_errorMessage
+
+var TimestreamResources = &sTimestreamResources
+var TimestreamResources_timestreamDatabaseName = &sTimestreamResources_timestreamDatabaseName
+var TimestreamResources_timestreamTableName = &sTimestreamResources_timestreamTableName
+
+var _TimestreamTableArn = &s_TimestreamTableArn
+
+var _TimestreamTableName = &s_TimestreamTableName
+
+var TimeUnit = &sTimeUnit
+var TimeUnit_MILLISECOND = &sTimeUnit_MILLISECOND
+var TimeUnit_SECOND = &sTimeUnit_SECOND
+var TimeUnit_MINUTE = &sTimeUnit_MINUTE
+var TimeUnit_HOUR = &sTimeUnit_HOUR
+
+var _TopicName = &s_TopicName
+
+var TriggerMode = &sTriggerMode
+var TriggerMode_ALWAYS = &sTriggerMode_ALWAYS
+var TriggerMode_RISING_EDGE = &sTriggerMode_RISING_EDGE
+
+var _uint32 = &s_uint32
+
+var UpdateCampaignAction = &sUpdateCampaignAction
+var UpdateCampaignAction_APPROVE = &sUpdateCampaignAction_APPROVE
+var UpdateCampaignAction_SUSPEND = &sUpdateCampaignAction_SUSPEND
+var UpdateCampaignAction_RESUME = &sUpdateCampaignAction_RESUME
+var UpdateCampaignAction_UPDATE = &sUpdateCampaignAction_UPDATE
+
+var UpdateMode = &sUpdateMode
+var UpdateMode_OVERWRITE = &sUpdateMode_OVERWRITE
+var UpdateMode_MERGE = &sUpdateMode_MERGE
+
+var UpdateVehicleError = &sUpdateVehicleError
+var UpdateVehicleError_vehicleName = &sUpdateVehicleError_vehicleName
+var UpdateVehicleError_code = &sUpdateVehicleError_code
+var UpdateVehicleError_message = &sUpdateVehicleError_message
+
+var _updateVehicleErrors = &s_updateVehicleErrors
+var _updateVehicleErrors_member = &s_updateVehicleErrors_member
+
+var UpdateVehicleRequestItem = &sUpdateVehicleRequestItem
+var UpdateVehicleRequestItem_vehicleName = &sUpdateVehicleRequestItem_vehicleName
+var UpdateVehicleRequestItem_modelManifestArn = &sUpdateVehicleRequestItem_modelManifestArn
+var UpdateVehicleRequestItem_decoderManifestArn = &sUpdateVehicleRequestItem_decoderManifestArn
+var UpdateVehicleRequestItem_attributes = &sUpdateVehicleRequestItem_attributes
+var UpdateVehicleRequestItem_attributeUpdateMode = &sUpdateVehicleRequestItem_attributeUpdateMode
+var UpdateVehicleRequestItem_stateTemplatesToAdd = &sUpdateVehicleRequestItem_stateTemplatesToAdd
+var UpdateVehicleRequestItem_stateTemplatesToRemove = &sUpdateVehicleRequestItem_stateTemplatesToRemove
+var UpdateVehicleRequestItem_stateTemplatesToUpdate = &sUpdateVehicleRequestItem_stateTemplatesToUpdate
+
+var _updateVehicleRequestItems = &s_updateVehicleRequestItems
+var _updateVehicleRequestItems_member = &s_updateVehicleRequestItems_member
+
+var UpdateVehicleResponseItem = &sUpdateVehicleResponseItem
+var UpdateVehicleResponseItem_vehicleName = &sUpdateVehicleResponseItem_vehicleName
+var UpdateVehicleResponseItem_arn = &sUpdateVehicleResponseItem_arn
+
+var _updateVehicleResponseItems = &s_updateVehicleResponseItems
+var _updateVehicleResponseItems_member = &s_updateVehicleResponseItems_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var VehicleAssociationBehavior = &sVehicleAssociationBehavior
+var VehicleAssociationBehavior_CREATE_IOT_THING = &sVehicleAssociationBehavior_CREATE_IOT_THING
+var VehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS = &sVehicleAssociationBehavior_VALIDATE_IOT_THING_EXISTS
+
+var VehicleMiddleware = &sVehicleMiddleware
+var VehicleMiddleware_name = &sVehicleMiddleware_name
+var VehicleMiddleware_protocolName = &sVehicleMiddleware_protocolName
+
+var _VehicleMiddlewareName = &s_VehicleMiddlewareName
+
+var VehicleMiddlewareProtocol = &sVehicleMiddlewareProtocol
+var VehicleMiddlewareProtocol_ROS_2 = &sVehicleMiddlewareProtocol_ROS_2
+
+var _vehicleName = &s_vehicleName
+
+var _vehicles = &s_vehicles
+var _vehicles_member = &s_vehicles_member
+
+var VehicleState = &sVehicleState
+var VehicleState_CREATED = &sVehicleState_CREATED
+var VehicleState_READY = &sVehicleState_READY
+var VehicleState_HEALTHY = &sVehicleState_HEALTHY
+var VehicleState_SUSPENDED = &sVehicleState_SUSPENDED
+var VehicleState_DELETING = &sVehicleState_DELETING
+var VehicleState_READY_FOR_CHECKIN = &sVehicleState_READY_FOR_CHECKIN
+
+var VehicleStatus = &sVehicleStatus
+var VehicleStatus_campaignName = &sVehicleStatus_campaignName
+var VehicleStatus_vehicleName = &sVehicleStatus_vehicleName
+var VehicleStatus_status = &sVehicleStatus_status
+
+var _VehicleStatusList = &s_VehicleStatusList
+var _VehicleStatusList_member = &s_VehicleStatusList_member
+
+var _vehicleSummaries = &s_vehicleSummaries
+var _vehicleSummaries_member = &s_vehicleSummaries_member
+
+var VehicleSummary = &sVehicleSummary
+var VehicleSummary_vehicleName = &sVehicleSummary_vehicleName
+var VehicleSummary_arn = &sVehicleSummary_arn
+var VehicleSummary_modelManifestArn = &sVehicleSummary_modelManifestArn
+var VehicleSummary_decoderManifestArn = &sVehicleSummary_decoderManifestArn
+var VehicleSummary_creationTime = &sVehicleSummary_creationTime
+var VehicleSummary_lastModificationTime = &sVehicleSummary_lastModificationTime
+var VehicleSummary_attributes = &sVehicleSummary_attributes
+
+var _wildcardSignalName = &s_wildcardSignalName
+
+var AssociateVehicleFleetRequest = &sAssociateVehicleFleetRequest
+var AssociateVehicleFleetRequest_vehicleName = &sAssociateVehicleFleetRequest_vehicleName
+var AssociateVehicleFleetRequest_fleetId = &sAssociateVehicleFleetRequest_fleetId
+
+var AssociateVehicleFleetResponse = &sAssociateVehicleFleetResponse
+
+var BatchCreateVehicleRequest = &sBatchCreateVehicleRequest
+var BatchCreateVehicleRequest_vehicles = &sBatchCreateVehicleRequest_vehicles
+
+var BatchCreateVehicleResponse = &sBatchCreateVehicleResponse
+var BatchCreateVehicleResponse_vehicles = &sBatchCreateVehicleResponse_vehicles
+var BatchCreateVehicleResponse_errors = &sBatchCreateVehicleResponse_errors
+
+var BatchUpdateVehicleRequest = &sBatchUpdateVehicleRequest
+var BatchUpdateVehicleRequest_vehicles = &sBatchUpdateVehicleRequest_vehicles
+
+var BatchUpdateVehicleResponse = &sBatchUpdateVehicleResponse
+var BatchUpdateVehicleResponse_vehicles = &sBatchUpdateVehicleResponse_vehicles
+var BatchUpdateVehicleResponse_errors = &sBatchUpdateVehicleResponse_errors
+
+var CreateCampaignRequest = &sCreateCampaignRequest
+var CreateCampaignRequest_name = &sCreateCampaignRequest_name
+var CreateCampaignRequest_description = &sCreateCampaignRequest_description
+var CreateCampaignRequest_signalCatalogArn = &sCreateCampaignRequest_signalCatalogArn
+var CreateCampaignRequest_targetArn = &sCreateCampaignRequest_targetArn
+var CreateCampaignRequest_startTime = &sCreateCampaignRequest_startTime
+var CreateCampaignRequest_expiryTime = &sCreateCampaignRequest_expiryTime
+var CreateCampaignRequest_postTriggerCollectionDuration = &sCreateCampaignRequest_postTriggerCollectionDuration
+var CreateCampaignRequest_diagnosticsMode = &sCreateCampaignRequest_diagnosticsMode
+var CreateCampaignRequest_spoolingMode = &sCreateCampaignRequest_spoolingMode
+var CreateCampaignRequest_compression = &sCreateCampaignRequest_compression
+var CreateCampaignRequest_priority = &sCreateCampaignRequest_priority
+var CreateCampaignRequest_signalsToCollect = &sCreateCampaignRequest_signalsToCollect
+var CreateCampaignRequest_collectionScheme = &sCreateCampaignRequest_collectionScheme
+var CreateCampaignRequest_dataExtraDimensions = &sCreateCampaignRequest_dataExtraDimensions
+var CreateCampaignRequest_tags = &sCreateCampaignRequest_tags
+var CreateCampaignRequest_dataDestinationConfigs = &sCreateCampaignRequest_dataDestinationConfigs
+var CreateCampaignRequest_dataPartitions = &sCreateCampaignRequest_dataPartitions
+var CreateCampaignRequest_signalsToFetch = &sCreateCampaignRequest_signalsToFetch
+
+var CreateCampaignResponse = &sCreateCampaignResponse
+var CreateCampaignResponse_name = &sCreateCampaignResponse_name
+var CreateCampaignResponse_arn = &sCreateCampaignResponse_arn
+
+var CreateDecoderManifestRequest = &sCreateDecoderManifestRequest
+var CreateDecoderManifestRequest_name = &sCreateDecoderManifestRequest_name
+var CreateDecoderManifestRequest_description = &sCreateDecoderManifestRequest_description
+var CreateDecoderManifestRequest_modelManifestArn = &sCreateDecoderManifestRequest_modelManifestArn
+var CreateDecoderManifestRequest_signalDecoders = &sCreateDecoderManifestRequest_signalDecoders
+var CreateDecoderManifestRequest_networkInterfaces = &sCreateDecoderManifestRequest_networkInterfaces
+var CreateDecoderManifestRequest_defaultForUnmappedSignals = &sCreateDecoderManifestRequest_defaultForUnmappedSignals
+var CreateDecoderManifestRequest_tags = &sCreateDecoderManifestRequest_tags
+
+var CreateDecoderManifestResponse = &sCreateDecoderManifestResponse
+var CreateDecoderManifestResponse_name = &sCreateDecoderManifestResponse_name
+var CreateDecoderManifestResponse_arn = &sCreateDecoderManifestResponse_arn
+
+var CreateFleetRequest = &sCreateFleetRequest
+var CreateFleetRequest_fleetId = &sCreateFleetRequest_fleetId
+var CreateFleetRequest_description = &sCreateFleetRequest_description
+var CreateFleetRequest_signalCatalogArn = &sCreateFleetRequest_signalCatalogArn
+var CreateFleetRequest_tags = &sCreateFleetRequest_tags
+
+var CreateFleetResponse = &sCreateFleetResponse
+var CreateFleetResponse_id = &sCreateFleetResponse_id
+var CreateFleetResponse_arn = &sCreateFleetResponse_arn
+
+var CreateModelManifestRequest = &sCreateModelManifestRequest
+var CreateModelManifestRequest_name = &sCreateModelManifestRequest_name
+var CreateModelManifestRequest_description = &sCreateModelManifestRequest_description
+var CreateModelManifestRequest_nodes = &sCreateModelManifestRequest_nodes
+var CreateModelManifestRequest_signalCatalogArn = &sCreateModelManifestRequest_signalCatalogArn
+var CreateModelManifestRequest_tags = &sCreateModelManifestRequest_tags
+
+var CreateModelManifestResponse = &sCreateModelManifestResponse
+var CreateModelManifestResponse_name = &sCreateModelManifestResponse_name
+var CreateModelManifestResponse_arn = &sCreateModelManifestResponse_arn
+
+var CreateSignalCatalogRequest = &sCreateSignalCatalogRequest
+var CreateSignalCatalogRequest_name = &sCreateSignalCatalogRequest_name
+var CreateSignalCatalogRequest_description = &sCreateSignalCatalogRequest_description
+var CreateSignalCatalogRequest_nodes = &sCreateSignalCatalogRequest_nodes
+var CreateSignalCatalogRequest_tags = &sCreateSignalCatalogRequest_tags
+
+var CreateSignalCatalogResponse = &sCreateSignalCatalogResponse
+var CreateSignalCatalogResponse_name = &sCreateSignalCatalogResponse_name
+var CreateSignalCatalogResponse_arn = &sCreateSignalCatalogResponse_arn
+
+var CreateStateTemplateRequest = &sCreateStateTemplateRequest
+var CreateStateTemplateRequest_name = &sCreateStateTemplateRequest_name
+var CreateStateTemplateRequest_description = &sCreateStateTemplateRequest_description
+var CreateStateTemplateRequest_signalCatalogArn = &sCreateStateTemplateRequest_signalCatalogArn
+var CreateStateTemplateRequest_stateTemplateProperties = &sCreateStateTemplateRequest_stateTemplateProperties
+var CreateStateTemplateRequest_dataExtraDimensions = &sCreateStateTemplateRequest_dataExtraDimensions
+var CreateStateTemplateRequest_metadataExtraDimensions = &sCreateStateTemplateRequest_metadataExtraDimensions
+var CreateStateTemplateRequest_tags = &sCreateStateTemplateRequest_tags
+
+var CreateStateTemplateResponse = &sCreateStateTemplateResponse
+var CreateStateTemplateResponse_name = &sCreateStateTemplateResponse_name
+var CreateStateTemplateResponse_arn = &sCreateStateTemplateResponse_arn
+var CreateStateTemplateResponse_id = &sCreateStateTemplateResponse_id
+
+var CreateVehicleRequest = &sCreateVehicleRequest
+var CreateVehicleRequest_vehicleName = &sCreateVehicleRequest_vehicleName
+var CreateVehicleRequest_modelManifestArn = &sCreateVehicleRequest_modelManifestArn
+var CreateVehicleRequest_decoderManifestArn = &sCreateVehicleRequest_decoderManifestArn
+var CreateVehicleRequest_attributes = &sCreateVehicleRequest_attributes
+var CreateVehicleRequest_associationBehavior = &sCreateVehicleRequest_associationBehavior
+var CreateVehicleRequest_tags = &sCreateVehicleRequest_tags
+var CreateVehicleRequest_stateTemplates = &sCreateVehicleRequest_stateTemplates
+
+var CreateVehicleResponse = &sCreateVehicleResponse
+var CreateVehicleResponse_vehicleName = &sCreateVehicleResponse_vehicleName
+var CreateVehicleResponse_arn = &sCreateVehicleResponse_arn
+var CreateVehicleResponse_thingArn = &sCreateVehicleResponse_thingArn
+
+var DeleteCampaignRequest = &sDeleteCampaignRequest
+var DeleteCampaignRequest_name = &sDeleteCampaignRequest_name
+
+var DeleteCampaignResponse = &sDeleteCampaignResponse
+var DeleteCampaignResponse_name = &sDeleteCampaignResponse_name
+var DeleteCampaignResponse_arn = &sDeleteCampaignResponse_arn
+
+var DeleteDecoderManifestRequest = &sDeleteDecoderManifestRequest
+var DeleteDecoderManifestRequest_name = &sDeleteDecoderManifestRequest_name
+
+var DeleteDecoderManifestResponse = &sDeleteDecoderManifestResponse
+var DeleteDecoderManifestResponse_name = &sDeleteDecoderManifestResponse_name
+var DeleteDecoderManifestResponse_arn = &sDeleteDecoderManifestResponse_arn
+
+var DeleteFleetRequest = &sDeleteFleetRequest
+var DeleteFleetRequest_fleetId = &sDeleteFleetRequest_fleetId
+
+var DeleteFleetResponse = &sDeleteFleetResponse
+var DeleteFleetResponse_id = &sDeleteFleetResponse_id
+var DeleteFleetResponse_arn = &sDeleteFleetResponse_arn
+
+var DeleteModelManifestRequest = &sDeleteModelManifestRequest
+var DeleteModelManifestRequest_name = &sDeleteModelManifestRequest_name
+
+var DeleteModelManifestResponse = &sDeleteModelManifestResponse
+var DeleteModelManifestResponse_name = &sDeleteModelManifestResponse_name
+var DeleteModelManifestResponse_arn = &sDeleteModelManifestResponse_arn
+
+var DeleteSignalCatalogRequest = &sDeleteSignalCatalogRequest
+var DeleteSignalCatalogRequest_name = &sDeleteSignalCatalogRequest_name
+
+var DeleteSignalCatalogResponse = &sDeleteSignalCatalogResponse
+var DeleteSignalCatalogResponse_name = &sDeleteSignalCatalogResponse_name
+var DeleteSignalCatalogResponse_arn = &sDeleteSignalCatalogResponse_arn
+
+var DeleteStateTemplateRequest = &sDeleteStateTemplateRequest
+var DeleteStateTemplateRequest_identifier = &sDeleteStateTemplateRequest_identifier
+
+var DeleteStateTemplateResponse = &sDeleteStateTemplateResponse
+var DeleteStateTemplateResponse_name = &sDeleteStateTemplateResponse_name
+var DeleteStateTemplateResponse_arn = &sDeleteStateTemplateResponse_arn
+var DeleteStateTemplateResponse_id = &sDeleteStateTemplateResponse_id
+
+var DeleteVehicleRequest = &sDeleteVehicleRequest
+var DeleteVehicleRequest_vehicleName = &sDeleteVehicleRequest_vehicleName
+
+var DeleteVehicleResponse = &sDeleteVehicleResponse
+var DeleteVehicleResponse_vehicleName = &sDeleteVehicleResponse_vehicleName
+var DeleteVehicleResponse_arn = &sDeleteVehicleResponse_arn
+
+var DisassociateVehicleFleetRequest = &sDisassociateVehicleFleetRequest
+var DisassociateVehicleFleetRequest_vehicleName = &sDisassociateVehicleFleetRequest_vehicleName
+var DisassociateVehicleFleetRequest_fleetId = &sDisassociateVehicleFleetRequest_fleetId
+
+var DisassociateVehicleFleetResponse = &sDisassociateVehicleFleetResponse
+
+var GetCampaignRequest = &sGetCampaignRequest
+var GetCampaignRequest_name = &sGetCampaignRequest_name
+
+var GetCampaignResponse = &sGetCampaignResponse
+var GetCampaignResponse_name = &sGetCampaignResponse_name
+var GetCampaignResponse_arn = &sGetCampaignResponse_arn
+var GetCampaignResponse_description = &sGetCampaignResponse_description
+var GetCampaignResponse_signalCatalogArn = &sGetCampaignResponse_signalCatalogArn
+var GetCampaignResponse_targetArn = &sGetCampaignResponse_targetArn
+var GetCampaignResponse_status = &sGetCampaignResponse_status
+var GetCampaignResponse_startTime = &sGetCampaignResponse_startTime
+var GetCampaignResponse_expiryTime = &sGetCampaignResponse_expiryTime
+var GetCampaignResponse_postTriggerCollectionDuration = &sGetCampaignResponse_postTriggerCollectionDuration
+var GetCampaignResponse_diagnosticsMode = &sGetCampaignResponse_diagnosticsMode
+var GetCampaignResponse_spoolingMode = &sGetCampaignResponse_spoolingMode
+var GetCampaignResponse_compression = &sGetCampaignResponse_compression
+var GetCampaignResponse_priority = &sGetCampaignResponse_priority
+var GetCampaignResponse_signalsToCollect = &sGetCampaignResponse_signalsToCollect
+var GetCampaignResponse_collectionScheme = &sGetCampaignResponse_collectionScheme
+var GetCampaignResponse_dataExtraDimensions = &sGetCampaignResponse_dataExtraDimensions
+var GetCampaignResponse_creationTime = &sGetCampaignResponse_creationTime
+var GetCampaignResponse_lastModificationTime = &sGetCampaignResponse_lastModificationTime
+var GetCampaignResponse_dataDestinationConfigs = &sGetCampaignResponse_dataDestinationConfigs
+var GetCampaignResponse_dataPartitions = &sGetCampaignResponse_dataPartitions
+var GetCampaignResponse_signalsToFetch = &sGetCampaignResponse_signalsToFetch
+
+var GetDecoderManifestRequest = &sGetDecoderManifestRequest
+var GetDecoderManifestRequest_name = &sGetDecoderManifestRequest_name
+
+var GetDecoderManifestResponse = &sGetDecoderManifestResponse
+var GetDecoderManifestResponse_name = &sGetDecoderManifestResponse_name
+var GetDecoderManifestResponse_arn = &sGetDecoderManifestResponse_arn
+var GetDecoderManifestResponse_description = &sGetDecoderManifestResponse_description
+var GetDecoderManifestResponse_modelManifestArn = &sGetDecoderManifestResponse_modelManifestArn
+var GetDecoderManifestResponse_status = &sGetDecoderManifestResponse_status
+var GetDecoderManifestResponse_creationTime = &sGetDecoderManifestResponse_creationTime
+var GetDecoderManifestResponse_lastModificationTime = &sGetDecoderManifestResponse_lastModificationTime
+var GetDecoderManifestResponse_message = &sGetDecoderManifestResponse_message
+
+var GetEncryptionConfigurationRequest = &sGetEncryptionConfigurationRequest
+
+var GetEncryptionConfigurationResponse = &sGetEncryptionConfigurationResponse
+var GetEncryptionConfigurationResponse_kmsKeyId = &sGetEncryptionConfigurationResponse_kmsKeyId
+var GetEncryptionConfigurationResponse_encryptionStatus = &sGetEncryptionConfigurationResponse_encryptionStatus
+var GetEncryptionConfigurationResponse_encryptionType = &sGetEncryptionConfigurationResponse_encryptionType
+var GetEncryptionConfigurationResponse_errorMessage = &sGetEncryptionConfigurationResponse_errorMessage
+var GetEncryptionConfigurationResponse_creationTime = &sGetEncryptionConfigurationResponse_creationTime
+var GetEncryptionConfigurationResponse_lastModificationTime = &sGetEncryptionConfigurationResponse_lastModificationTime
+
+var GetFleetRequest = &sGetFleetRequest
+var GetFleetRequest_fleetId = &sGetFleetRequest_fleetId
+
+var GetFleetResponse = &sGetFleetResponse
+var GetFleetResponse_id = &sGetFleetResponse_id
+var GetFleetResponse_arn = &sGetFleetResponse_arn
+var GetFleetResponse_description = &sGetFleetResponse_description
+var GetFleetResponse_signalCatalogArn = &sGetFleetResponse_signalCatalogArn
+var GetFleetResponse_creationTime = &sGetFleetResponse_creationTime
+var GetFleetResponse_lastModificationTime = &sGetFleetResponse_lastModificationTime
+
+var GetLoggingOptionsRequest = &sGetLoggingOptionsRequest
+
+var GetLoggingOptionsResponse = &sGetLoggingOptionsResponse
+var GetLoggingOptionsResponse_cloudWatchLogDelivery = &sGetLoggingOptionsResponse_cloudWatchLogDelivery
+
+var GetModelManifestRequest = &sGetModelManifestRequest
+var GetModelManifestRequest_name = &sGetModelManifestRequest_name
+
+var GetModelManifestResponse = &sGetModelManifestResponse
+var GetModelManifestResponse_name = &sGetModelManifestResponse_name
+var GetModelManifestResponse_arn = &sGetModelManifestResponse_arn
+var GetModelManifestResponse_description = &sGetModelManifestResponse_description
+var GetModelManifestResponse_signalCatalogArn = &sGetModelManifestResponse_signalCatalogArn
+var GetModelManifestResponse_status = &sGetModelManifestResponse_status
+var GetModelManifestResponse_creationTime = &sGetModelManifestResponse_creationTime
+var GetModelManifestResponse_lastModificationTime = &sGetModelManifestResponse_lastModificationTime
+
+var GetRegisterAccountStatusRequest = &sGetRegisterAccountStatusRequest
+
+var GetRegisterAccountStatusResponse = &sGetRegisterAccountStatusResponse
+var GetRegisterAccountStatusResponse_customerAccountId = &sGetRegisterAccountStatusResponse_customerAccountId
+var GetRegisterAccountStatusResponse_accountStatus = &sGetRegisterAccountStatusResponse_accountStatus
+var GetRegisterAccountStatusResponse_timestreamRegistrationResponse = &sGetRegisterAccountStatusResponse_timestreamRegistrationResponse
+var GetRegisterAccountStatusResponse_iamRegistrationResponse = &sGetRegisterAccountStatusResponse_iamRegistrationResponse
+var GetRegisterAccountStatusResponse_creationTime = &sGetRegisterAccountStatusResponse_creationTime
+var GetRegisterAccountStatusResponse_lastModificationTime = &sGetRegisterAccountStatusResponse_lastModificationTime
+
+var GetSignalCatalogRequest = &sGetSignalCatalogRequest
+var GetSignalCatalogRequest_name = &sGetSignalCatalogRequest_name
+
+var GetSignalCatalogResponse = &sGetSignalCatalogResponse
+var GetSignalCatalogResponse_name = &sGetSignalCatalogResponse_name
+var GetSignalCatalogResponse_arn = &sGetSignalCatalogResponse_arn
+var GetSignalCatalogResponse_description = &sGetSignalCatalogResponse_description
+var GetSignalCatalogResponse_nodeCounts = &sGetSignalCatalogResponse_nodeCounts
+var GetSignalCatalogResponse_creationTime = &sGetSignalCatalogResponse_creationTime
+var GetSignalCatalogResponse_lastModificationTime = &sGetSignalCatalogResponse_lastModificationTime
+
+var GetStateTemplateRequest = &sGetStateTemplateRequest
+var GetStateTemplateRequest_identifier = &sGetStateTemplateRequest_identifier
+
+var GetStateTemplateResponse = &sGetStateTemplateResponse
+var GetStateTemplateResponse_name = &sGetStateTemplateResponse_name
+var GetStateTemplateResponse_arn = &sGetStateTemplateResponse_arn
+var GetStateTemplateResponse_description = &sGetStateTemplateResponse_description
+var GetStateTemplateResponse_signalCatalogArn = &sGetStateTemplateResponse_signalCatalogArn
+var GetStateTemplateResponse_stateTemplateProperties = &sGetStateTemplateResponse_stateTemplateProperties
+var GetStateTemplateResponse_dataExtraDimensions = &sGetStateTemplateResponse_dataExtraDimensions
+var GetStateTemplateResponse_metadataExtraDimensions = &sGetStateTemplateResponse_metadataExtraDimensions
+var GetStateTemplateResponse_creationTime = &sGetStateTemplateResponse_creationTime
+var GetStateTemplateResponse_lastModificationTime = &sGetStateTemplateResponse_lastModificationTime
+var GetStateTemplateResponse_id = &sGetStateTemplateResponse_id
+
+var GetVehicleRequest = &sGetVehicleRequest
+var GetVehicleRequest_vehicleName = &sGetVehicleRequest_vehicleName
+
+var GetVehicleResponse = &sGetVehicleResponse
+var GetVehicleResponse_vehicleName = &sGetVehicleResponse_vehicleName
+var GetVehicleResponse_arn = &sGetVehicleResponse_arn
+var GetVehicleResponse_modelManifestArn = &sGetVehicleResponse_modelManifestArn
+var GetVehicleResponse_decoderManifestArn = &sGetVehicleResponse_decoderManifestArn
+var GetVehicleResponse_attributes = &sGetVehicleResponse_attributes
+var GetVehicleResponse_stateTemplates = &sGetVehicleResponse_stateTemplates
+var GetVehicleResponse_creationTime = &sGetVehicleResponse_creationTime
+var GetVehicleResponse_lastModificationTime = &sGetVehicleResponse_lastModificationTime
+
+var GetVehicleStatusRequest = &sGetVehicleStatusRequest
+var GetVehicleStatusRequest_nextToken = &sGetVehicleStatusRequest_nextToken
+var GetVehicleStatusRequest_maxResults = &sGetVehicleStatusRequest_maxResults
+var GetVehicleStatusRequest_vehicleName = &sGetVehicleStatusRequest_vehicleName
+
+var GetVehicleStatusResponse = &sGetVehicleStatusResponse
+var GetVehicleStatusResponse_campaigns = &sGetVehicleStatusResponse_campaigns
+var GetVehicleStatusResponse_nextToken = &sGetVehicleStatusResponse_nextToken
+
+var ImportDecoderManifestRequest = &sImportDecoderManifestRequest
+var ImportDecoderManifestRequest_name = &sImportDecoderManifestRequest_name
+var ImportDecoderManifestRequest_networkFileDefinitions = &sImportDecoderManifestRequest_networkFileDefinitions
+
+var ImportDecoderManifestResponse = &sImportDecoderManifestResponse
+var ImportDecoderManifestResponse_name = &sImportDecoderManifestResponse_name
+var ImportDecoderManifestResponse_arn = &sImportDecoderManifestResponse_arn
+
+var ImportSignalCatalogRequest = &sImportSignalCatalogRequest
+var ImportSignalCatalogRequest_name = &sImportSignalCatalogRequest_name
+var ImportSignalCatalogRequest_description = &sImportSignalCatalogRequest_description
+var ImportSignalCatalogRequest_vss = &sImportSignalCatalogRequest_vss
+var ImportSignalCatalogRequest_tags = &sImportSignalCatalogRequest_tags
+
+var ImportSignalCatalogResponse = &sImportSignalCatalogResponse
+var ImportSignalCatalogResponse_name = &sImportSignalCatalogResponse_name
+var ImportSignalCatalogResponse_arn = &sImportSignalCatalogResponse_arn
+
+var ListCampaignsRequest = &sListCampaignsRequest
+var ListCampaignsRequest_nextToken = &sListCampaignsRequest_nextToken
+var ListCampaignsRequest_maxResults = &sListCampaignsRequest_maxResults
+var ListCampaignsRequest_status = &sListCampaignsRequest_status
+var ListCampaignsRequest_listResponseScope = &sListCampaignsRequest_listResponseScope
+
+var ListCampaignsResponse = &sListCampaignsResponse
+var ListCampaignsResponse_campaignSummaries = &sListCampaignsResponse_campaignSummaries
+var ListCampaignsResponse_nextToken = &sListCampaignsResponse_nextToken
+
+var ListDecoderManifestNetworkInterfacesRequest = &sListDecoderManifestNetworkInterfacesRequest
+var ListDecoderManifestNetworkInterfacesRequest_name = &sListDecoderManifestNetworkInterfacesRequest_name
+var ListDecoderManifestNetworkInterfacesRequest_nextToken = &sListDecoderManifestNetworkInterfacesRequest_nextToken
+var ListDecoderManifestNetworkInterfacesRequest_maxResults = &sListDecoderManifestNetworkInterfacesRequest_maxResults
+
+var ListDecoderManifestNetworkInterfacesResponse = &sListDecoderManifestNetworkInterfacesResponse
+var ListDecoderManifestNetworkInterfacesResponse_networkInterfaces = &sListDecoderManifestNetworkInterfacesResponse_networkInterfaces
+var ListDecoderManifestNetworkInterfacesResponse_nextToken = &sListDecoderManifestNetworkInterfacesResponse_nextToken
+
+var ListDecoderManifestSignalsRequest = &sListDecoderManifestSignalsRequest
+var ListDecoderManifestSignalsRequest_name = &sListDecoderManifestSignalsRequest_name
+var ListDecoderManifestSignalsRequest_nextToken = &sListDecoderManifestSignalsRequest_nextToken
+var ListDecoderManifestSignalsRequest_maxResults = &sListDecoderManifestSignalsRequest_maxResults
+
+var ListDecoderManifestSignalsResponse = &sListDecoderManifestSignalsResponse
+var ListDecoderManifestSignalsResponse_signalDecoders = &sListDecoderManifestSignalsResponse_signalDecoders
+var ListDecoderManifestSignalsResponse_nextToken = &sListDecoderManifestSignalsResponse_nextToken
+
+var ListDecoderManifestsRequest = &sListDecoderManifestsRequest
+var ListDecoderManifestsRequest_modelManifestArn = &sListDecoderManifestsRequest_modelManifestArn
+var ListDecoderManifestsRequest_nextToken = &sListDecoderManifestsRequest_nextToken
+var ListDecoderManifestsRequest_maxResults = &sListDecoderManifestsRequest_maxResults
+var ListDecoderManifestsRequest_listResponseScope = &sListDecoderManifestsRequest_listResponseScope
+
+var ListDecoderManifestsResponse = &sListDecoderManifestsResponse
+var ListDecoderManifestsResponse_summaries = &sListDecoderManifestsResponse_summaries
+var ListDecoderManifestsResponse_nextToken = &sListDecoderManifestsResponse_nextToken
+
+var ListFleetsForVehicleRequest = &sListFleetsForVehicleRequest
+var ListFleetsForVehicleRequest_vehicleName = &sListFleetsForVehicleRequest_vehicleName
+var ListFleetsForVehicleRequest_nextToken = &sListFleetsForVehicleRequest_nextToken
+var ListFleetsForVehicleRequest_maxResults = &sListFleetsForVehicleRequest_maxResults
+
+var ListFleetsForVehicleResponse = &sListFleetsForVehicleResponse
+var ListFleetsForVehicleResponse_fleets = &sListFleetsForVehicleResponse_fleets
+var ListFleetsForVehicleResponse_nextToken = &sListFleetsForVehicleResponse_nextToken
+
+var ListFleetsRequest = &sListFleetsRequest
+var ListFleetsRequest_nextToken = &sListFleetsRequest_nextToken
+var ListFleetsRequest_maxResults = &sListFleetsRequest_maxResults
+var ListFleetsRequest_listResponseScope = &sListFleetsRequest_listResponseScope
+
+var ListFleetsResponse = &sListFleetsResponse
+var ListFleetsResponse_fleetSummaries = &sListFleetsResponse_fleetSummaries
+var ListFleetsResponse_nextToken = &sListFleetsResponse_nextToken
+
+var ListModelManifestNodesRequest = &sListModelManifestNodesRequest
+var ListModelManifestNodesRequest_name = &sListModelManifestNodesRequest_name
+var ListModelManifestNodesRequest_nextToken = &sListModelManifestNodesRequest_nextToken
+var ListModelManifestNodesRequest_maxResults = &sListModelManifestNodesRequest_maxResults
+
+var ListModelManifestNodesResponse = &sListModelManifestNodesResponse
+var ListModelManifestNodesResponse_nodes = &sListModelManifestNodesResponse_nodes
+var ListModelManifestNodesResponse_nextToken = &sListModelManifestNodesResponse_nextToken
+
+var ListModelManifestsRequest = &sListModelManifestsRequest
+var ListModelManifestsRequest_signalCatalogArn = &sListModelManifestsRequest_signalCatalogArn
+var ListModelManifestsRequest_nextToken = &sListModelManifestsRequest_nextToken
+var ListModelManifestsRequest_maxResults = &sListModelManifestsRequest_maxResults
+var ListModelManifestsRequest_listResponseScope = &sListModelManifestsRequest_listResponseScope
+
+var ListModelManifestsResponse = &sListModelManifestsResponse
+var ListModelManifestsResponse_summaries = &sListModelManifestsResponse_summaries
+var ListModelManifestsResponse_nextToken = &sListModelManifestsResponse_nextToken
+
+var ListSignalCatalogNodesRequest = &sListSignalCatalogNodesRequest
+var ListSignalCatalogNodesRequest_name = &sListSignalCatalogNodesRequest_name
+var ListSignalCatalogNodesRequest_nextToken = &sListSignalCatalogNodesRequest_nextToken
+var ListSignalCatalogNodesRequest_maxResults = &sListSignalCatalogNodesRequest_maxResults
+var ListSignalCatalogNodesRequest_signalNodeType = &sListSignalCatalogNodesRequest_signalNodeType
+
+var ListSignalCatalogNodesResponse = &sListSignalCatalogNodesResponse
+var ListSignalCatalogNodesResponse_nodes = &sListSignalCatalogNodesResponse_nodes
+var ListSignalCatalogNodesResponse_nextToken = &sListSignalCatalogNodesResponse_nextToken
+
+var ListSignalCatalogsRequest = &sListSignalCatalogsRequest
+var ListSignalCatalogsRequest_nextToken = &sListSignalCatalogsRequest_nextToken
+var ListSignalCatalogsRequest_maxResults = &sListSignalCatalogsRequest_maxResults
+
+var ListSignalCatalogsResponse = &sListSignalCatalogsResponse
+var ListSignalCatalogsResponse_summaries = &sListSignalCatalogsResponse_summaries
+var ListSignalCatalogsResponse_nextToken = &sListSignalCatalogsResponse_nextToken
+
+var ListStateTemplatesRequest = &sListStateTemplatesRequest
+var ListStateTemplatesRequest_nextToken = &sListStateTemplatesRequest_nextToken
+var ListStateTemplatesRequest_maxResults = &sListStateTemplatesRequest_maxResults
+var ListStateTemplatesRequest_listResponseScope = &sListStateTemplatesRequest_listResponseScope
+
+var ListStateTemplatesResponse = &sListStateTemplatesResponse
+var ListStateTemplatesResponse_summaries = &sListStateTemplatesResponse_summaries
+var ListStateTemplatesResponse_nextToken = &sListStateTemplatesResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListVehiclesInFleetRequest = &sListVehiclesInFleetRequest
+var ListVehiclesInFleetRequest_fleetId = &sListVehiclesInFleetRequest_fleetId
+var ListVehiclesInFleetRequest_nextToken = &sListVehiclesInFleetRequest_nextToken
+var ListVehiclesInFleetRequest_maxResults = &sListVehiclesInFleetRequest_maxResults
+
+var ListVehiclesInFleetResponse = &sListVehiclesInFleetResponse
+var ListVehiclesInFleetResponse_vehicles = &sListVehiclesInFleetResponse_vehicles
+var ListVehiclesInFleetResponse_nextToken = &sListVehiclesInFleetResponse_nextToken
+
+var ListVehiclesRequest = &sListVehiclesRequest
+var ListVehiclesRequest_modelManifestArn = &sListVehiclesRequest_modelManifestArn
+var ListVehiclesRequest_attributeNames = &sListVehiclesRequest_attributeNames
+var ListVehiclesRequest_attributeValues = &sListVehiclesRequest_attributeValues
+var ListVehiclesRequest_nextToken = &sListVehiclesRequest_nextToken
+var ListVehiclesRequest_maxResults = &sListVehiclesRequest_maxResults
+var ListVehiclesRequest_listResponseScope = &sListVehiclesRequest_listResponseScope
+
+var ListVehiclesResponse = &sListVehiclesResponse
+var ListVehiclesResponse_vehicleSummaries = &sListVehiclesResponse_vehicleSummaries
+var ListVehiclesResponse_nextToken = &sListVehiclesResponse_nextToken
+
+var PutEncryptionConfigurationRequest = &sPutEncryptionConfigurationRequest
+var PutEncryptionConfigurationRequest_kmsKeyId = &sPutEncryptionConfigurationRequest_kmsKeyId
+var PutEncryptionConfigurationRequest_encryptionType = &sPutEncryptionConfigurationRequest_encryptionType
+
+var PutEncryptionConfigurationResponse = &sPutEncryptionConfigurationResponse
+var PutEncryptionConfigurationResponse_kmsKeyId = &sPutEncryptionConfigurationResponse_kmsKeyId
+var PutEncryptionConfigurationResponse_encryptionStatus = &sPutEncryptionConfigurationResponse_encryptionStatus
+var PutEncryptionConfigurationResponse_encryptionType = &sPutEncryptionConfigurationResponse_encryptionType
+
+var PutLoggingOptionsRequest = &sPutLoggingOptionsRequest
+var PutLoggingOptionsRequest_cloudWatchLogDelivery = &sPutLoggingOptionsRequest_cloudWatchLogDelivery
+
+var PutLoggingOptionsResponse = &sPutLoggingOptionsResponse
+
+var RegisterAccountRequest = &sRegisterAccountRequest
+var RegisterAccountRequest_timestreamResources = &sRegisterAccountRequest_timestreamResources
+var RegisterAccountRequest_iamResources = &sRegisterAccountRequest_iamResources
+
+var RegisterAccountResponse = &sRegisterAccountResponse
+var RegisterAccountResponse_registerAccountStatus = &sRegisterAccountResponse_registerAccountStatus
+var RegisterAccountResponse_timestreamResources = &sRegisterAccountResponse_timestreamResources
+var RegisterAccountResponse_iamResources = &sRegisterAccountResponse_iamResources
+var RegisterAccountResponse_creationTime = &sRegisterAccountResponse_creationTime
+var RegisterAccountResponse_lastModificationTime = &sRegisterAccountResponse_lastModificationTime
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateCampaignRequest = &sUpdateCampaignRequest
+var UpdateCampaignRequest_name = &sUpdateCampaignRequest_name
+var UpdateCampaignRequest_description = &sUpdateCampaignRequest_description
+var UpdateCampaignRequest_dataExtraDimensions = &sUpdateCampaignRequest_dataExtraDimensions
+var UpdateCampaignRequest_action = &sUpdateCampaignRequest_action
+
+var UpdateCampaignResponse = &sUpdateCampaignResponse
+var UpdateCampaignResponse_arn = &sUpdateCampaignResponse_arn
+var UpdateCampaignResponse_name = &sUpdateCampaignResponse_name
+var UpdateCampaignResponse_status = &sUpdateCampaignResponse_status
+
+var UpdateDecoderManifestRequest = &sUpdateDecoderManifestRequest
+var UpdateDecoderManifestRequest_name = &sUpdateDecoderManifestRequest_name
+var UpdateDecoderManifestRequest_description = &sUpdateDecoderManifestRequest_description
+var UpdateDecoderManifestRequest_signalDecodersToAdd = &sUpdateDecoderManifestRequest_signalDecodersToAdd
+var UpdateDecoderManifestRequest_signalDecodersToUpdate = &sUpdateDecoderManifestRequest_signalDecodersToUpdate
+var UpdateDecoderManifestRequest_signalDecodersToRemove = &sUpdateDecoderManifestRequest_signalDecodersToRemove
+var UpdateDecoderManifestRequest_networkInterfacesToAdd = &sUpdateDecoderManifestRequest_networkInterfacesToAdd
+var UpdateDecoderManifestRequest_networkInterfacesToUpdate = &sUpdateDecoderManifestRequest_networkInterfacesToUpdate
+var UpdateDecoderManifestRequest_networkInterfacesToRemove = &sUpdateDecoderManifestRequest_networkInterfacesToRemove
+var UpdateDecoderManifestRequest_status = &sUpdateDecoderManifestRequest_status
+var UpdateDecoderManifestRequest_defaultForUnmappedSignals = &sUpdateDecoderManifestRequest_defaultForUnmappedSignals
+
+var UpdateDecoderManifestResponse = &sUpdateDecoderManifestResponse
+var UpdateDecoderManifestResponse_name = &sUpdateDecoderManifestResponse_name
+var UpdateDecoderManifestResponse_arn = &sUpdateDecoderManifestResponse_arn
+
+var UpdateFleetRequest = &sUpdateFleetRequest
+var UpdateFleetRequest_fleetId = &sUpdateFleetRequest_fleetId
+var UpdateFleetRequest_description = &sUpdateFleetRequest_description
+
+var UpdateFleetResponse = &sUpdateFleetResponse
+var UpdateFleetResponse_id = &sUpdateFleetResponse_id
+var UpdateFleetResponse_arn = &sUpdateFleetResponse_arn
+
+var UpdateModelManifestRequest = &sUpdateModelManifestRequest
+var UpdateModelManifestRequest_name = &sUpdateModelManifestRequest_name
+var UpdateModelManifestRequest_description = &sUpdateModelManifestRequest_description
+var UpdateModelManifestRequest_nodesToAdd = &sUpdateModelManifestRequest_nodesToAdd
+var UpdateModelManifestRequest_nodesToRemove = &sUpdateModelManifestRequest_nodesToRemove
+var UpdateModelManifestRequest_status = &sUpdateModelManifestRequest_status
+
+var UpdateModelManifestResponse = &sUpdateModelManifestResponse
+var UpdateModelManifestResponse_name = &sUpdateModelManifestResponse_name
+var UpdateModelManifestResponse_arn = &sUpdateModelManifestResponse_arn
+
+var UpdateSignalCatalogRequest = &sUpdateSignalCatalogRequest
+var UpdateSignalCatalogRequest_name = &sUpdateSignalCatalogRequest_name
+var UpdateSignalCatalogRequest_description = &sUpdateSignalCatalogRequest_description
+var UpdateSignalCatalogRequest_nodesToAdd = &sUpdateSignalCatalogRequest_nodesToAdd
+var UpdateSignalCatalogRequest_nodesToUpdate = &sUpdateSignalCatalogRequest_nodesToUpdate
+var UpdateSignalCatalogRequest_nodesToRemove = &sUpdateSignalCatalogRequest_nodesToRemove
+
+var UpdateSignalCatalogResponse = &sUpdateSignalCatalogResponse
+var UpdateSignalCatalogResponse_name = &sUpdateSignalCatalogResponse_name
+var UpdateSignalCatalogResponse_arn = &sUpdateSignalCatalogResponse_arn
+
+var UpdateStateTemplateRequest = &sUpdateStateTemplateRequest
+var UpdateStateTemplateRequest_identifier = &sUpdateStateTemplateRequest_identifier
+var UpdateStateTemplateRequest_description = &sUpdateStateTemplateRequest_description
+var UpdateStateTemplateRequest_stateTemplatePropertiesToAdd = &sUpdateStateTemplateRequest_stateTemplatePropertiesToAdd
+var UpdateStateTemplateRequest_stateTemplatePropertiesToRemove = &sUpdateStateTemplateRequest_stateTemplatePropertiesToRemove
+var UpdateStateTemplateRequest_dataExtraDimensions = &sUpdateStateTemplateRequest_dataExtraDimensions
+var UpdateStateTemplateRequest_metadataExtraDimensions = &sUpdateStateTemplateRequest_metadataExtraDimensions
+
+var UpdateStateTemplateResponse = &sUpdateStateTemplateResponse
+var UpdateStateTemplateResponse_name = &sUpdateStateTemplateResponse_name
+var UpdateStateTemplateResponse_arn = &sUpdateStateTemplateResponse_arn
+var UpdateStateTemplateResponse_id = &sUpdateStateTemplateResponse_id
+
+var UpdateVehicleRequest = &sUpdateVehicleRequest
+var UpdateVehicleRequest_vehicleName = &sUpdateVehicleRequest_vehicleName
+var UpdateVehicleRequest_modelManifestArn = &sUpdateVehicleRequest_modelManifestArn
+var UpdateVehicleRequest_decoderManifestArn = &sUpdateVehicleRequest_decoderManifestArn
+var UpdateVehicleRequest_attributes = &sUpdateVehicleRequest_attributes
+var UpdateVehicleRequest_attributeUpdateMode = &sUpdateVehicleRequest_attributeUpdateMode
+var UpdateVehicleRequest_stateTemplatesToAdd = &sUpdateVehicleRequest_stateTemplatesToAdd
+var UpdateVehicleRequest_stateTemplatesToRemove = &sUpdateVehicleRequest_stateTemplatesToRemove
+var UpdateVehicleRequest_stateTemplatesToUpdate = &sUpdateVehicleRequest_stateTemplatesToUpdate
+
+var UpdateVehicleResponse = &sUpdateVehicleResponse
+var UpdateVehicleResponse_vehicleName = &sUpdateVehicleResponse_vehicleName
+var UpdateVehicleResponse_arn = &sUpdateVehicleResponse_arn
+
+var IoTAutobahnControlPlane = &smithy.ServiceSchema{Schema: &s_IoTAutobahnControlPlane, Version: "2021-06-17"}

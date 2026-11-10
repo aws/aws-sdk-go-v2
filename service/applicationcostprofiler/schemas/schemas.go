@@ -4,431 +4,437 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "DeleteReportDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/reportDefinition/{reportId}",
-	Code: 200})
+var (
+	eDeleteReportDefinition                              smithy.SchemaExtensions
+	eGetReportDefinition                                 smithy.SchemaExtensions
+	eImportApplicationUsage                              smithy.SchemaExtensions
+	eListReportDefinitions                               smithy.SchemaExtensions
+	ePutReportDefinition                                 smithy.SchemaExtensions
+	eUpdateReportDefinition                              smithy.SchemaExtensions
+	e_AWSApplicationCostProfiler                         smithy.SchemaExtensions
+	eAccessDeniedException                               smithy.SchemaExtensions
+	eAccessDeniedException_message                       smithy.SchemaExtensions
+	e_ErrorMessage                                       smithy.SchemaExtensions
+	eFormat                                              smithy.SchemaExtensions
+	eFormat_CSV                                          smithy.SchemaExtensions
+	eFormat_PARQUET                                      smithy.SchemaExtensions
+	e_ImportId                                           smithy.SchemaExtensions
+	e_Integer                                            smithy.SchemaExtensions
+	eInternalServerException                             smithy.SchemaExtensions
+	eInternalServerException_message                     smithy.SchemaExtensions
+	eReportDefinition                                    smithy.SchemaExtensions
+	eReportDefinition_reportId                           smithy.SchemaExtensions
+	eReportDefinition_reportDescription                  smithy.SchemaExtensions
+	eReportDefinition_reportFrequency                    smithy.SchemaExtensions
+	eReportDefinition_format                             smithy.SchemaExtensions
+	eReportDefinition_destinationS3Location              smithy.SchemaExtensions
+	eReportDefinition_createdAt                          smithy.SchemaExtensions
+	eReportDefinition_lastUpdatedAt                      smithy.SchemaExtensions
+	e_ReportDefinitionList                               smithy.SchemaExtensions
+	e_ReportDefinitionList_member                        smithy.SchemaExtensions
+	e_ReportDescription                                  smithy.SchemaExtensions
+	eReportFrequency                                     smithy.SchemaExtensions
+	eReportFrequency_MONTHLY                             smithy.SchemaExtensions
+	eReportFrequency_DAILY                               smithy.SchemaExtensions
+	eReportFrequency_ALL                                 smithy.SchemaExtensions
+	e_ReportId                                           smithy.SchemaExtensions
+	e_S3Bucket                                           smithy.SchemaExtensions
+	eS3BucketRegion                                      smithy.SchemaExtensions
+	eS3BucketRegion_AP_EAST_1                            smithy.SchemaExtensions
+	eS3BucketRegion_ME_SOUTH_1                           smithy.SchemaExtensions
+	eS3BucketRegion_EU_SOUTH_1                           smithy.SchemaExtensions
+	eS3BucketRegion_AF_SOUTH_1                           smithy.SchemaExtensions
+	e_S3Key                                              smithy.SchemaExtensions
+	eS3Location                                          smithy.SchemaExtensions
+	eS3Location_bucket                                   smithy.SchemaExtensions
+	eS3Location_prefix                                   smithy.SchemaExtensions
+	e_S3Prefix                                           smithy.SchemaExtensions
+	eServiceQuotaExceededException                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_message               smithy.SchemaExtensions
+	eSourceS3Location                                    smithy.SchemaExtensions
+	eSourceS3Location_bucket                             smithy.SchemaExtensions
+	eSourceS3Location_key                                smithy.SchemaExtensions
+	eSourceS3Location_region                             smithy.SchemaExtensions
+	eThrottlingException                                 smithy.SchemaExtensions
+	eThrottlingException_message                         smithy.SchemaExtensions
+	e_Timestamp                                          smithy.SchemaExtensions
+	e_Token                                              smithy.SchemaExtensions
+	eValidationException                                 smithy.SchemaExtensions
+	eValidationException_message                         smithy.SchemaExtensions
+	eDeleteReportDefinitionRequest                       smithy.SchemaExtensions
+	eDeleteReportDefinitionRequest_reportId              smithy.SchemaExtensions
+	eDeleteReportDefinitionResult                        smithy.SchemaExtensions
+	eDeleteReportDefinitionResult_reportId               smithy.SchemaExtensions
+	eGetReportDefinitionRequest                          smithy.SchemaExtensions
+	eGetReportDefinitionRequest_reportId                 smithy.SchemaExtensions
+	eGetReportDefinitionResult                           smithy.SchemaExtensions
+	eGetReportDefinitionResult_reportId                  smithy.SchemaExtensions
+	eGetReportDefinitionResult_reportDescription         smithy.SchemaExtensions
+	eGetReportDefinitionResult_reportFrequency           smithy.SchemaExtensions
+	eGetReportDefinitionResult_format                    smithy.SchemaExtensions
+	eGetReportDefinitionResult_destinationS3Location     smithy.SchemaExtensions
+	eGetReportDefinitionResult_createdAt                 smithy.SchemaExtensions
+	eGetReportDefinitionResult_lastUpdated               smithy.SchemaExtensions
+	eImportApplicationUsageRequest                       smithy.SchemaExtensions
+	eImportApplicationUsageRequest_sourceS3Location      smithy.SchemaExtensions
+	eImportApplicationUsageResult                        smithy.SchemaExtensions
+	eImportApplicationUsageResult_importId               smithy.SchemaExtensions
+	eListReportDefinitionsRequest                        smithy.SchemaExtensions
+	eListReportDefinitionsRequest_nextToken              smithy.SchemaExtensions
+	eListReportDefinitionsRequest_maxResults             smithy.SchemaExtensions
+	eListReportDefinitionsResult                         smithy.SchemaExtensions
+	eListReportDefinitionsResult_reportDefinitions       smithy.SchemaExtensions
+	eListReportDefinitionsResult_nextToken               smithy.SchemaExtensions
+	ePutReportDefinitionRequest                          smithy.SchemaExtensions
+	ePutReportDefinitionRequest_reportId                 smithy.SchemaExtensions
+	ePutReportDefinitionRequest_reportDescription        smithy.SchemaExtensions
+	ePutReportDefinitionRequest_reportFrequency          smithy.SchemaExtensions
+	ePutReportDefinitionRequest_format                   smithy.SchemaExtensions
+	ePutReportDefinitionRequest_destinationS3Location    smithy.SchemaExtensions
+	ePutReportDefinitionResult                           smithy.SchemaExtensions
+	ePutReportDefinitionResult_reportId                  smithy.SchemaExtensions
+	eUpdateReportDefinitionRequest                       smithy.SchemaExtensions
+	eUpdateReportDefinitionRequest_reportId              smithy.SchemaExtensions
+	eUpdateReportDefinitionRequest_reportDescription     smithy.SchemaExtensions
+	eUpdateReportDefinitionRequest_reportFrequency       smithy.SchemaExtensions
+	eUpdateReportDefinitionRequest_format                smithy.SchemaExtensions
+	eUpdateReportDefinitionRequest_destinationS3Location smithy.SchemaExtensions
+	eUpdateReportDefinitionResult                        smithy.SchemaExtensions
+	eUpdateReportDefinitionResult_reportId               smithy.SchemaExtensions
+)
 
-var GetReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "GetReportDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/reportDefinition/{reportId}",
-	Code: 200})
+var (
+	iDeleteReportDefinition        = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "DeleteReportDefinition"}
+	iGetReportDefinition           = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "GetReportDefinition"}
+	iImportApplicationUsage        = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ImportApplicationUsage"}
+	iListReportDefinitions         = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ListReportDefinitions"}
+	iPutReportDefinition           = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "PutReportDefinition"}
+	iUpdateReportDefinition        = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "UpdateReportDefinition"}
+	i_AWSApplicationCostProfiler   = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "AWSApplicationCostProfiler"}
+	iAccessDeniedException         = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "AccessDeniedException"}
+	i_ErrorMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ErrorMessage"}
+	iFormat                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "Format"}
+	i_ImportId                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ImportId"}
+	i_Integer                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "Integer"}
+	iInternalServerException       = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "InternalServerException"}
+	iReportDefinition              = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ReportDefinition"}
+	i_ReportDefinitionList         = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ReportDefinitionList"}
+	i_ReportDescription            = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ReportDescription"}
+	iReportFrequency               = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ReportFrequency"}
+	i_ReportId                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ReportId"}
+	i_S3Bucket                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "S3Bucket"}
+	iS3BucketRegion                = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "S3BucketRegion"}
+	i_S3Key                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "S3Key"}
+	iS3Location                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "S3Location"}
+	i_S3Prefix                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "S3Prefix"}
+	iServiceQuotaExceededException = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ServiceQuotaExceededException"}
+	iSourceS3Location              = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "SourceS3Location"}
+	iThrottlingException           = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ThrottlingException"}
+	i_Timestamp                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "Timestamp"}
+	i_Token                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "Token"}
+	iValidationException           = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ValidationException"}
+	iDeleteReportDefinitionRequest = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "DeleteReportDefinitionRequest"}
+	iDeleteReportDefinitionResult  = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "DeleteReportDefinitionResult"}
+	iGetReportDefinitionRequest    = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "GetReportDefinitionRequest"}
+	iGetReportDefinitionResult     = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "GetReportDefinitionResult"}
+	iImportApplicationUsageRequest = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ImportApplicationUsageRequest"}
+	iImportApplicationUsageResult  = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ImportApplicationUsageResult"}
+	iListReportDefinitionsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ListReportDefinitionsRequest"}
+	iListReportDefinitionsResult   = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "ListReportDefinitionsResult"}
+	iPutReportDefinitionRequest    = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "PutReportDefinitionRequest"}
+	iPutReportDefinitionResult     = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "PutReportDefinitionResult"}
+	iUpdateReportDefinitionRequest = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "UpdateReportDefinitionRequest"}
+	iUpdateReportDefinitionResult  = smithy.ShapeName{Namespace: "com.amazonaws.applicationcostprofiler", Name: "UpdateReportDefinitionResult"}
+	pUnit                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var ImportApplicationUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ImportApplicationUsage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/reportDefinition/{reportId}",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+	URI:  "/reportDefinition/{reportId}",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/importApplicationUsage",
-	Code: 200})
-
-var ListReportDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ListReportDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/reportDefinition",
-	Code: 200})
-
-var PutReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "PutReportDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/reportDefinition",
-	Code: 200})
-
-var UpdateReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "UpdateReportDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/reportDefinition/{reportId}",
-	Code: 200})
-
-var _AWSApplicationCostProfiler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "AWSApplicationCostProfiler",
-}, smithy.ShapeTypeService, 0)
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sFormat_CSV, &sFormat_PARQUET}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mReportDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sReportDefinition_reportId, &sReportDefinition_reportDescription, &sReportDefinition_reportFrequency, &sReportDefinition_format, &sReportDefinition_destinationS3Location, &sReportDefinition_createdAt, &sReportDefinition_lastUpdatedAt}}
+var m_ReportDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportDefinitionList_member}}
+var mReportFrequency = smithy.SchemaMembers{List: []*smithy.Schema{&sReportFrequency_MONTHLY, &sReportFrequency_DAILY, &sReportFrequency_ALL}}
+var mS3BucketRegion = smithy.SchemaMembers{List: []*smithy.Schema{&sS3BucketRegion_AP_EAST_1, &sS3BucketRegion_ME_SOUTH_1, &sS3BucketRegion_EU_SOUTH_1, &sS3BucketRegion_AF_SOUTH_1}}
+var mS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Location_bucket, &sS3Location_prefix}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSourceS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceS3Location_bucket, &sSourceS3Location_key, &sSourceS3Location_region}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mDeleteReportDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReportDefinitionRequest_reportId}}
+var mDeleteReportDefinitionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReportDefinitionResult_reportId}}
+var mGetReportDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReportDefinitionRequest_reportId}}
+var mGetReportDefinitionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReportDefinitionResult_reportId, &sGetReportDefinitionResult_reportDescription, &sGetReportDefinitionResult_reportFrequency, &sGetReportDefinitionResult_format, &sGetReportDefinitionResult_destinationS3Location, &sGetReportDefinitionResult_createdAt, &sGetReportDefinitionResult_lastUpdated}}
+var mImportApplicationUsageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportApplicationUsageRequest_sourceS3Location}}
+var mImportApplicationUsageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sImportApplicationUsageResult_importId}}
+var mListReportDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportDefinitionsRequest_nextToken, &sListReportDefinitionsRequest_maxResults}}
+var mListReportDefinitionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportDefinitionsResult_reportDefinitions, &sListReportDefinitionsResult_nextToken}}
+var mPutReportDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutReportDefinitionRequest_reportId, &sPutReportDefinitionRequest_reportDescription, &sPutReportDefinitionRequest_reportFrequency, &sPutReportDefinitionRequest_format, &sPutReportDefinitionRequest_destinationS3Location}}
+var mPutReportDefinitionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPutReportDefinitionResult_reportId}}
+var mUpdateReportDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReportDefinitionRequest_reportId, &sUpdateReportDefinitionRequest_reportDescription, &sUpdateReportDefinitionRequest_reportFrequency, &sUpdateReportDefinitionRequest_format, &sUpdateReportDefinitionRequest_destinationS3Location}}
+var mUpdateReportDefinitionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReportDefinitionResult_reportId}}
+
+var sDeleteReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportDefinition, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReportDefinition})
+var sGetReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReportDefinition, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetReportDefinition})
+var sImportApplicationUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportApplicationUsage, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eImportApplicationUsage})
+var sListReportDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportDefinitions, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListReportDefinitions})
+var sPutReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutReportDefinition, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ePutReportDefinition})
+var sUpdateReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReportDefinition, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eUpdateReportDefinition})
+var s_AWSApplicationCostProfiler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSApplicationCostProfiler, Type: smithy.ShapeTypeService, Ext: &e_AWSApplicationCostProfiler})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum, Ext: &eFormat})
+var sFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormat_CSV})
+var sFormat_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormat_PARQUET})
+var s_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportId, Type: smithy.ShapeTypeString, Ext: &e_ImportId})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportDefinition, Members: &mReportDefinition, Type: smithy.ShapeTypeStructure, Ext: &eReportDefinition})
+var sReportDefinition_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eReportDefinition_reportId})
+var sReportDefinition_reportDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportDescription", ID: &i_ReportDescription, Type: smithy.ShapeTypeString, Ext: &eReportDefinition_reportDescription})
+var sReportDefinition_reportFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportFrequency", ID: &iReportFrequency, Members: &mReportFrequency, Type: smithy.ShapeTypeEnum, Ext: &eReportDefinition_reportFrequency})
+var sReportDefinition_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum, Ext: &eReportDefinition_format})
+var sReportDefinition_destinationS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eReportDefinition_destinationS3Location})
+var sReportDefinition_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReportDefinition_createdAt})
+var sReportDefinition_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReportDefinition_lastUpdatedAt})
+var s_ReportDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportDefinitionList, Members: &m_ReportDefinitionList, Type: smithy.ShapeTypeList, Ext: &e_ReportDefinitionList})
+var s_ReportDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReportDefinition, Members: &mReportDefinition, Type: smithy.ShapeTypeStructure, Ext: &e_ReportDefinitionList_member})
+var s_ReportDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportDescription, Type: smithy.ShapeTypeString, Ext: &e_ReportDescription})
+var sReportFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportFrequency, Members: &mReportFrequency, Type: smithy.ShapeTypeEnum, Ext: &eReportFrequency})
+var sReportFrequency_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportFrequency_MONTHLY})
+var sReportFrequency_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportFrequency_DAILY})
+var sReportFrequency_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportFrequency_ALL})
+var s_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &e_ReportId})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var sS3BucketRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3BucketRegion, Members: &mS3BucketRegion, Type: smithy.ShapeTypeEnum, Ext: &eS3BucketRegion})
+var sS3BucketRegion_AP_EAST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_EAST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3BucketRegion_AP_EAST_1})
+var sS3BucketRegion_ME_SOUTH_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ME_SOUTH_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3BucketRegion_ME_SOUTH_1})
+var sS3BucketRegion_EU_SOUTH_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_SOUTH_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3BucketRegion_EU_SOUTH_1})
+var sS3BucketRegion_AF_SOUTH_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AF_SOUTH_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3BucketRegion_AF_SOUTH_1})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eS3Location})
+var sS3Location_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eS3Location_bucket})
+var sS3Location_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &eS3Location_prefix})
+var s_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &e_S3Prefix})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSourceS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceS3Location, Members: &mSourceS3Location, Type: smithy.ShapeTypeStructure, Ext: &eSourceS3Location})
+var sSourceS3Location_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eSourceS3Location_bucket})
+var sSourceS3Location_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eSourceS3Location_key})
+var sSourceS3Location_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &iS3BucketRegion, Members: &mS3BucketRegion, Type: smithy.ShapeTypeEnum, Ext: &eSourceS3Location_region})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sDeleteReportDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportDefinitionRequest, Members: &mDeleteReportDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportDefinitionRequest})
+var sDeleteReportDefinitionRequest_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eDeleteReportDefinitionRequest_reportId})
+var sDeleteReportDefinitionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportDefinitionResult, Members: &mDeleteReportDefinitionResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportDefinitionResult})
+var sDeleteReportDefinitionResult_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eDeleteReportDefinitionResult_reportId})
+var sGetReportDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReportDefinitionRequest, Members: &mGetReportDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetReportDefinitionRequest})
+var sGetReportDefinitionRequest_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eGetReportDefinitionRequest_reportId})
+var sGetReportDefinitionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReportDefinitionResult, Members: &mGetReportDefinitionResult, Type: smithy.ShapeTypeStructure, Ext: &eGetReportDefinitionResult})
+var sGetReportDefinitionResult_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eGetReportDefinitionResult_reportId})
+var sGetReportDefinitionResult_reportDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportDescription", ID: &i_ReportDescription, Type: smithy.ShapeTypeString, Ext: &eGetReportDefinitionResult_reportDescription})
+var sGetReportDefinitionResult_reportFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportFrequency", ID: &iReportFrequency, Members: &mReportFrequency, Type: smithy.ShapeTypeEnum, Ext: &eGetReportDefinitionResult_reportFrequency})
+var sGetReportDefinitionResult_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum, Ext: &eGetReportDefinitionResult_format})
+var sGetReportDefinitionResult_destinationS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eGetReportDefinitionResult_destinationS3Location})
+var sGetReportDefinitionResult_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetReportDefinitionResult_createdAt})
+var sGetReportDefinitionResult_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetReportDefinitionResult_lastUpdated})
+var sImportApplicationUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportApplicationUsageRequest, Members: &mImportApplicationUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportApplicationUsageRequest})
+var sImportApplicationUsageRequest_sourceS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceS3Location", ID: &iSourceS3Location, Members: &mSourceS3Location, Type: smithy.ShapeTypeStructure, Ext: &eImportApplicationUsageRequest_sourceS3Location})
+var sImportApplicationUsageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportApplicationUsageResult, Members: &mImportApplicationUsageResult, Type: smithy.ShapeTypeStructure, Ext: &eImportApplicationUsageResult})
+var sImportApplicationUsageResult_importId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importId", ID: &i_ImportId, Type: smithy.ShapeTypeString, Ext: &eImportApplicationUsageResult_importId})
+var sListReportDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportDefinitionsRequest, Members: &mListReportDefinitionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListReportDefinitionsRequest})
+var sListReportDefinitionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eListReportDefinitionsRequest_nextToken})
+var sListReportDefinitionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Traits: &t13, Type: smithy.ShapeTypeInteger, Ext: &eListReportDefinitionsRequest_maxResults})
+var sListReportDefinitionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportDefinitionsResult, Members: &mListReportDefinitionsResult, Type: smithy.ShapeTypeStructure, Ext: &eListReportDefinitionsResult})
+var sListReportDefinitionsResult_reportDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportDefinitions", ID: &i_ReportDefinitionList, Members: &m_ReportDefinitionList, Type: smithy.ShapeTypeList, Ext: &eListReportDefinitionsResult_reportDefinitions})
+var sListReportDefinitionsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListReportDefinitionsResult_nextToken})
+var sPutReportDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutReportDefinitionRequest, Members: &mPutReportDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutReportDefinitionRequest})
+var sPutReportDefinitionRequest_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ePutReportDefinitionRequest_reportId})
+var sPutReportDefinitionRequest_reportDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportDescription", ID: &i_ReportDescription, Type: smithy.ShapeTypeString, Ext: &ePutReportDefinitionRequest_reportDescription})
+var sPutReportDefinitionRequest_reportFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportFrequency", ID: &iReportFrequency, Members: &mReportFrequency, Type: smithy.ShapeTypeEnum, Ext: &ePutReportDefinitionRequest_reportFrequency})
+var sPutReportDefinitionRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum, Ext: &ePutReportDefinitionRequest_format})
+var sPutReportDefinitionRequest_destinationS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &ePutReportDefinitionRequest_destinationS3Location})
+var sPutReportDefinitionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutReportDefinitionResult, Members: &mPutReportDefinitionResult, Type: smithy.ShapeTypeStructure, Ext: &ePutReportDefinitionResult})
+var sPutReportDefinitionResult_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ePutReportDefinitionResult_reportId})
+var sUpdateReportDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReportDefinitionRequest, Members: &mUpdateReportDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReportDefinitionRequest})
+var sUpdateReportDefinitionRequest_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eUpdateReportDefinitionRequest_reportId})
+var sUpdateReportDefinitionRequest_reportDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportDescription", ID: &i_ReportDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateReportDefinitionRequest_reportDescription})
+var sUpdateReportDefinitionRequest_reportFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportFrequency", ID: &iReportFrequency, Members: &mReportFrequency, Type: smithy.ShapeTypeEnum, Ext: &eUpdateReportDefinitionRequest_reportFrequency})
+var sUpdateReportDefinitionRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum, Ext: &eUpdateReportDefinitionRequest_format})
+var sUpdateReportDefinitionRequest_destinationS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReportDefinitionRequest_destinationS3Location})
+var sUpdateReportDefinitionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReportDefinitionResult, Members: &mUpdateReportDefinitionResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReportDefinitionResult})
+var sUpdateReportDefinitionResult_reportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eUpdateReportDefinitionResult_reportId})
 
-var AWSApplicationCostProfiler = smithy.NewServiceSchema(_AWSApplicationCostProfiler, "2020-09-10")
+var DeleteReportDefinition = &sDeleteReportDefinition
+
+var GetReportDefinition = &sGetReportDefinition
 
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
+var ImportApplicationUsage = &sImportApplicationUsage
+
+var ListReportDefinitions = &sListReportDefinitions
 
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
+var PutReportDefinition = &sPutReportDefinition
 
-var Format = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "Format",
-}, smithy.ShapeTypeEnum, 2)
-var Format_CSV *smithy.Schema
+var UpdateReportDefinition = &sUpdateReportDefinition
 
-var Format_PARQUET *smithy.Schema
+var _AWSApplicationCostProfiler = &s_AWSApplicationCostProfiler
 
-var _ImportId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ImportId",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var ReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ReportDefinition",
-}, smithy.ShapeTypeStructure, 7)
-var ReportDefinition_reportId *smithy.Schema
-
-var ReportDefinition_reportDescription *smithy.Schema
-
-var ReportDefinition_reportFrequency *smithy.Schema
-
-var ReportDefinition_format *smithy.Schema
-
-var ReportDefinition_destinationS3Location *smithy.Schema
-
-var ReportDefinition_createdAt *smithy.Schema
-
-var ReportDefinition_lastUpdatedAt *smithy.Schema
-
-var _ReportDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ReportDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _ReportDefinitionList_member *smithy.Schema
-
-var _ReportDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ReportDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ReportFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ReportFrequency",
-}, smithy.ShapeTypeEnum, 3)
-var ReportFrequency_MONTHLY *smithy.Schema
-
-var ReportFrequency_DAILY *smithy.Schema
-
-var ReportFrequency_ALL *smithy.Schema
-
-var _ReportId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ReportId",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var S3BucketRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "S3BucketRegion",
-}, smithy.ShapeTypeEnum, 4)
-var S3BucketRegion_AP_EAST_1 *smithy.Schema
-
-var S3BucketRegion_ME_SOUTH_1 *smithy.Schema
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
 
-var S3BucketRegion_EU_SOUTH_1 *smithy.Schema
+var _ErrorMessage = &s_ErrorMessage
 
-var S3BucketRegion_AF_SOUTH_1 *smithy.Schema
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "S3Location",
-}, smithy.ShapeTypeStructure, 2)
-var S3Location_bucket *smithy.Schema
-
-var S3Location_prefix *smithy.Schema
-
-var _S3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "S3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SourceS3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "SourceS3Location",
-}, smithy.ShapeTypeStructure, 3)
-var SourceS3Location_bucket *smithy.Schema
-
-var SourceS3Location_key *smithy.Schema
-
-var SourceS3Location_region *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
+var Format = &sFormat
+var Format_CSV = &sFormat_CSV
+var Format_PARQUET = &sFormat_PARQUET
+
+var _ImportId = &s_ImportId
 
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var DeleteReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "DeleteReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReportDefinitionRequest_reportId *smithy.Schema
-
-var DeleteReportDefinitionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "DeleteReportDefinitionResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReportDefinitionResult_reportId *smithy.Schema
-
-var GetReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "GetReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetReportDefinitionRequest_reportId *smithy.Schema
-
-var GetReportDefinitionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "GetReportDefinitionResult",
-}, smithy.ShapeTypeStructure, 7)
-var GetReportDefinitionResult_reportId *smithy.Schema
-
-var GetReportDefinitionResult_reportDescription *smithy.Schema
-
-var GetReportDefinitionResult_reportFrequency *smithy.Schema
-
-var GetReportDefinitionResult_format *smithy.Schema
-
-var GetReportDefinitionResult_destinationS3Location *smithy.Schema
-
-var GetReportDefinitionResult_createdAt *smithy.Schema
-
-var GetReportDefinitionResult_lastUpdated *smithy.Schema
-
-var ImportApplicationUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ImportApplicationUsageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ImportApplicationUsageRequest_sourceS3Location *smithy.Schema
-
-var ImportApplicationUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ImportApplicationUsageResult",
-}, smithy.ShapeTypeStructure, 1)
-var ImportApplicationUsageResult_importId *smithy.Schema
-
-var ListReportDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ListReportDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListReportDefinitionsRequest_nextToken *smithy.Schema
-
-var ListReportDefinitionsRequest_maxResults *smithy.Schema
-
-var ListReportDefinitionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "ListReportDefinitionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListReportDefinitionsResult_reportDefinitions *smithy.Schema
-
-var ListReportDefinitionsResult_nextToken *smithy.Schema
-
-var PutReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "PutReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutReportDefinitionRequest_reportId *smithy.Schema
-
-var PutReportDefinitionRequest_reportDescription *smithy.Schema
-
-var PutReportDefinitionRequest_reportFrequency *smithy.Schema
-
-var PutReportDefinitionRequest_format *smithy.Schema
-
-var PutReportDefinitionRequest_destinationS3Location *smithy.Schema
-
-var PutReportDefinitionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "PutReportDefinitionResult",
-}, smithy.ShapeTypeStructure, 1)
-var PutReportDefinitionResult_reportId *smithy.Schema
-
-var UpdateReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "UpdateReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateReportDefinitionRequest_reportId *smithy.Schema
-
-var UpdateReportDefinitionRequest_reportDescription *smithy.Schema
-
-var UpdateReportDefinitionRequest_reportFrequency *smithy.Schema
-
-var UpdateReportDefinitionRequest_format *smithy.Schema
-
-var UpdateReportDefinitionRequest_destinationS3Location *smithy.Schema
-
-var UpdateReportDefinitionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationcostprofiler",
-	Name:      "UpdateReportDefinitionResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateReportDefinitionResult_reportId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	Format_CSV = Format.AddMember("CSV", smithyprelude.Unit)
-
-	Format_PARQUET = Format.AddMember("PARQUET", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	ReportFrequency_MONTHLY = ReportFrequency.AddMember("MONTHLY", smithyprelude.Unit)
-
-	ReportFrequency_DAILY = ReportFrequency.AddMember("DAILY", smithyprelude.Unit)
-
-	ReportFrequency_ALL = ReportFrequency.AddMember("ALL", smithyprelude.Unit)
-
-	S3Location_bucket = S3Location.AddMember("bucket", _S3Bucket)
-
-	S3Location_prefix = S3Location.AddMember("prefix", _S3Prefix)
-
-	ReportDefinition_reportId = ReportDefinition.AddMember("reportId", _ReportId)
-
-	ReportDefinition_reportDescription = ReportDefinition.AddMember("reportDescription", _ReportDescription)
-
-	ReportDefinition_reportFrequency = ReportDefinition.AddMember("reportFrequency", ReportFrequency)
-
-	ReportDefinition_format = ReportDefinition.AddMember("format", Format)
-
-	ReportDefinition_destinationS3Location = ReportDefinition.AddMember("destinationS3Location", S3Location)
-
-	ReportDefinition_createdAt = ReportDefinition.AddMember("createdAt", _Timestamp)
-
-	ReportDefinition_lastUpdatedAt = ReportDefinition.AddMember("lastUpdatedAt", _Timestamp)
-
-	_ReportDefinitionList_member = _ReportDefinitionList.AddMember("member", ReportDefinition)
-
-	S3BucketRegion_AP_EAST_1 = S3BucketRegion.AddMember("AP_EAST_1", smithyprelude.Unit)
-
-	S3BucketRegion_ME_SOUTH_1 = S3BucketRegion.AddMember("ME_SOUTH_1", smithyprelude.Unit)
-
-	S3BucketRegion_EU_SOUTH_1 = S3BucketRegion.AddMember("EU_SOUTH_1", smithyprelude.Unit)
-
-	S3BucketRegion_AF_SOUTH_1 = S3BucketRegion.AddMember("AF_SOUTH_1", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	SourceS3Location_bucket = SourceS3Location.AddMember("bucket", _S3Bucket)
-
-	SourceS3Location_key = SourceS3Location.AddMember("key", _S3Key)
-
-	SourceS3Location_region = SourceS3Location.AddMember("region", S3BucketRegion)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	DeleteReportDefinitionRequest_reportId = DeleteReportDefinitionRequest.AddMember("reportId", _ReportId, &smithytraits.HTTPLabel{})
-
-	DeleteReportDefinitionResult_reportId = DeleteReportDefinitionResult.AddMember("reportId", _ReportId)
-
-	GetReportDefinitionRequest_reportId = GetReportDefinitionRequest.AddMember("reportId", _ReportId, &smithytraits.HTTPLabel{})
-
-	GetReportDefinitionResult_reportId = GetReportDefinitionResult.AddMember("reportId", _ReportId)
-
-	GetReportDefinitionResult_reportDescription = GetReportDefinitionResult.AddMember("reportDescription", _ReportDescription)
-
-	GetReportDefinitionResult_reportFrequency = GetReportDefinitionResult.AddMember("reportFrequency", ReportFrequency)
-
-	GetReportDefinitionResult_format = GetReportDefinitionResult.AddMember("format", Format)
-
-	GetReportDefinitionResult_destinationS3Location = GetReportDefinitionResult.AddMember("destinationS3Location", S3Location)
-
-	GetReportDefinitionResult_createdAt = GetReportDefinitionResult.AddMember("createdAt", _Timestamp)
-
-	GetReportDefinitionResult_lastUpdated = GetReportDefinitionResult.AddMember("lastUpdated", _Timestamp)
-
-	ImportApplicationUsageRequest_sourceS3Location = ImportApplicationUsageRequest.AddMember("sourceS3Location", SourceS3Location)
-
-	ImportApplicationUsageResult_importId = ImportApplicationUsageResult.AddMember("importId", _ImportId)
-
-	ListReportDefinitionsRequest_nextToken = ListReportDefinitionsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListReportDefinitionsRequest_maxResults = ListReportDefinitionsRequest.AddMember("maxResults", _Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListReportDefinitionsResult_reportDefinitions = ListReportDefinitionsResult.AddMember("reportDefinitions", _ReportDefinitionList)
-
-	ListReportDefinitionsResult_nextToken = ListReportDefinitionsResult.AddMember("nextToken", _Token)
-
-	PutReportDefinitionRequest_reportId = PutReportDefinitionRequest.AddMember("reportId", _ReportId)
-
-	PutReportDefinitionRequest_reportDescription = PutReportDefinitionRequest.AddMember("reportDescription", _ReportDescription)
-
-	PutReportDefinitionRequest_reportFrequency = PutReportDefinitionRequest.AddMember("reportFrequency", ReportFrequency)
-
-	PutReportDefinitionRequest_format = PutReportDefinitionRequest.AddMember("format", Format)
-
-	PutReportDefinitionRequest_destinationS3Location = PutReportDefinitionRequest.AddMember("destinationS3Location", S3Location)
-
-	PutReportDefinitionResult_reportId = PutReportDefinitionResult.AddMember("reportId", _ReportId)
-
-	UpdateReportDefinitionRequest_reportId = UpdateReportDefinitionRequest.AddMember("reportId", _ReportId, &smithytraits.HTTPLabel{})
-
-	UpdateReportDefinitionRequest_reportDescription = UpdateReportDefinitionRequest.AddMember("reportDescription", _ReportDescription)
-
-	UpdateReportDefinitionRequest_reportFrequency = UpdateReportDefinitionRequest.AddMember("reportFrequency", ReportFrequency)
-
-	UpdateReportDefinitionRequest_format = UpdateReportDefinitionRequest.AddMember("format", Format)
-
-	UpdateReportDefinitionRequest_destinationS3Location = UpdateReportDefinitionRequest.AddMember("destinationS3Location", S3Location)
-
-	UpdateReportDefinitionResult_reportId = UpdateReportDefinitionResult.AddMember("reportId", _ReportId)
-
-}
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var ReportDefinition = &sReportDefinition
+var ReportDefinition_reportId = &sReportDefinition_reportId
+var ReportDefinition_reportDescription = &sReportDefinition_reportDescription
+var ReportDefinition_reportFrequency = &sReportDefinition_reportFrequency
+var ReportDefinition_format = &sReportDefinition_format
+var ReportDefinition_destinationS3Location = &sReportDefinition_destinationS3Location
+var ReportDefinition_createdAt = &sReportDefinition_createdAt
+var ReportDefinition_lastUpdatedAt = &sReportDefinition_lastUpdatedAt
+
+var _ReportDefinitionList = &s_ReportDefinitionList
+var _ReportDefinitionList_member = &s_ReportDefinitionList_member
+
+var _ReportDescription = &s_ReportDescription
+
+var ReportFrequency = &sReportFrequency
+var ReportFrequency_MONTHLY = &sReportFrequency_MONTHLY
+var ReportFrequency_DAILY = &sReportFrequency_DAILY
+var ReportFrequency_ALL = &sReportFrequency_ALL
+
+var _ReportId = &s_ReportId
+
+var _S3Bucket = &s_S3Bucket
+
+var S3BucketRegion = &sS3BucketRegion
+var S3BucketRegion_AP_EAST_1 = &sS3BucketRegion_AP_EAST_1
+var S3BucketRegion_ME_SOUTH_1 = &sS3BucketRegion_ME_SOUTH_1
+var S3BucketRegion_EU_SOUTH_1 = &sS3BucketRegion_EU_SOUTH_1
+var S3BucketRegion_AF_SOUTH_1 = &sS3BucketRegion_AF_SOUTH_1
+
+var _S3Key = &s_S3Key
+
+var S3Location = &sS3Location
+var S3Location_bucket = &sS3Location_bucket
+var S3Location_prefix = &sS3Location_prefix
+
+var _S3Prefix = &s_S3Prefix
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var SourceS3Location = &sSourceS3Location
+var SourceS3Location_bucket = &sSourceS3Location_bucket
+var SourceS3Location_key = &sSourceS3Location_key
+var SourceS3Location_region = &sSourceS3Location_region
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Timestamp = &s_Timestamp
+
+var _Token = &s_Token
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var DeleteReportDefinitionRequest = &sDeleteReportDefinitionRequest
+var DeleteReportDefinitionRequest_reportId = &sDeleteReportDefinitionRequest_reportId
+
+var DeleteReportDefinitionResult = &sDeleteReportDefinitionResult
+var DeleteReportDefinitionResult_reportId = &sDeleteReportDefinitionResult_reportId
+
+var GetReportDefinitionRequest = &sGetReportDefinitionRequest
+var GetReportDefinitionRequest_reportId = &sGetReportDefinitionRequest_reportId
+
+var GetReportDefinitionResult = &sGetReportDefinitionResult
+var GetReportDefinitionResult_reportId = &sGetReportDefinitionResult_reportId
+var GetReportDefinitionResult_reportDescription = &sGetReportDefinitionResult_reportDescription
+var GetReportDefinitionResult_reportFrequency = &sGetReportDefinitionResult_reportFrequency
+var GetReportDefinitionResult_format = &sGetReportDefinitionResult_format
+var GetReportDefinitionResult_destinationS3Location = &sGetReportDefinitionResult_destinationS3Location
+var GetReportDefinitionResult_createdAt = &sGetReportDefinitionResult_createdAt
+var GetReportDefinitionResult_lastUpdated = &sGetReportDefinitionResult_lastUpdated
+
+var ImportApplicationUsageRequest = &sImportApplicationUsageRequest
+var ImportApplicationUsageRequest_sourceS3Location = &sImportApplicationUsageRequest_sourceS3Location
+
+var ImportApplicationUsageResult = &sImportApplicationUsageResult
+var ImportApplicationUsageResult_importId = &sImportApplicationUsageResult_importId
+
+var ListReportDefinitionsRequest = &sListReportDefinitionsRequest
+var ListReportDefinitionsRequest_nextToken = &sListReportDefinitionsRequest_nextToken
+var ListReportDefinitionsRequest_maxResults = &sListReportDefinitionsRequest_maxResults
+
+var ListReportDefinitionsResult = &sListReportDefinitionsResult
+var ListReportDefinitionsResult_reportDefinitions = &sListReportDefinitionsResult_reportDefinitions
+var ListReportDefinitionsResult_nextToken = &sListReportDefinitionsResult_nextToken
+
+var PutReportDefinitionRequest = &sPutReportDefinitionRequest
+var PutReportDefinitionRequest_reportId = &sPutReportDefinitionRequest_reportId
+var PutReportDefinitionRequest_reportDescription = &sPutReportDefinitionRequest_reportDescription
+var PutReportDefinitionRequest_reportFrequency = &sPutReportDefinitionRequest_reportFrequency
+var PutReportDefinitionRequest_format = &sPutReportDefinitionRequest_format
+var PutReportDefinitionRequest_destinationS3Location = &sPutReportDefinitionRequest_destinationS3Location
+
+var PutReportDefinitionResult = &sPutReportDefinitionResult
+var PutReportDefinitionResult_reportId = &sPutReportDefinitionResult_reportId
+
+var UpdateReportDefinitionRequest = &sUpdateReportDefinitionRequest
+var UpdateReportDefinitionRequest_reportId = &sUpdateReportDefinitionRequest_reportId
+var UpdateReportDefinitionRequest_reportDescription = &sUpdateReportDefinitionRequest_reportDescription
+var UpdateReportDefinitionRequest_reportFrequency = &sUpdateReportDefinitionRequest_reportFrequency
+var UpdateReportDefinitionRequest_format = &sUpdateReportDefinitionRequest_format
+var UpdateReportDefinitionRequest_destinationS3Location = &sUpdateReportDefinitionRequest_destinationS3Location
+
+var UpdateReportDefinitionResult = &sUpdateReportDefinitionResult
+var UpdateReportDefinitionResult_reportId = &sUpdateReportDefinitionResult_reportId
+
+var AWSApplicationCostProfiler = &smithy.ServiceSchema{Schema: &s_AWSApplicationCostProfiler, Version: "2020-09-10"}

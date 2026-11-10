@@ -4,281 +4,288 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetRequestAuthorizationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "GetRequestAuthorizationDetails",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	eGetRequestAuthorizationDetails                      smithy.SchemaExtensions
+	e_AuthRequestService                                 smithy.SchemaExtensions
+	eAccessDeniedException                               smithy.SchemaExtensions
+	eAccessDeniedException_message                       smithy.SchemaExtensions
+	eAttachedTo                                          smithy.SchemaExtensions
+	eAttachedTo_arn                                      smithy.SchemaExtensions
+	e_AttachedToList                                     smithy.SchemaExtensions
+	e_AttachedToList_member                              smithy.SchemaExtensions
+	e_AuthorizationContext                               smithy.SchemaExtensions
+	e_AuthorizationContext_key                           smithy.SchemaExtensions
+	e_AuthorizationContext_value                         smithy.SchemaExtensions
+	eEvaluatedEffect                                     smithy.SchemaExtensions
+	eEvaluatedEffect_ALLOW                               smithy.SchemaExtensions
+	eEvaluatedEffect_EXPLICIT_DENY                       smithy.SchemaExtensions
+	eEvaluatedEffect_IMPLICIT_DENY                       smithy.SchemaExtensions
+	eEvaluation                                          smithy.SchemaExtensions
+	eEvaluation_action                                   smithy.SchemaExtensions
+	eEvaluation_resource                                 smithy.SchemaExtensions
+	eEvaluation_context                                  smithy.SchemaExtensions
+	eEvaluation_evaluatedEffect                          smithy.SchemaExtensions
+	eEvaluation_matchedPolicies                          smithy.SchemaExtensions
+	e_Evaluations                                        smithy.SchemaExtensions
+	e_Evaluations_member                                 smithy.SchemaExtensions
+	eInternalServerException                             smithy.SchemaExtensions
+	eInternalServerException_message                     smithy.SchemaExtensions
+	eMatchedPolicy                                       smithy.SchemaExtensions
+	eMatchedPolicy_uri                                   smithy.SchemaExtensions
+	eMatchedPolicy_matchedStatements                     smithy.SchemaExtensions
+	e_MatchedPolicyList                                  smithy.SchemaExtensions
+	e_MatchedPolicyList_member                           smithy.SchemaExtensions
+	eMatchedStatement                                    smithy.SchemaExtensions
+	eMatchedStatement_sid                                smithy.SchemaExtensions
+	eMatchedStatement_evaluatedEffect                    smithy.SchemaExtensions
+	e_MatchedStatementList                               smithy.SchemaExtensions
+	e_MatchedStatementList_member                        smithy.SchemaExtensions
+	ePolicyInfo                                          smithy.SchemaExtensions
+	ePolicyInfo_type                                     smithy.SchemaExtensions
+	ePolicyInfo_inline                                   smithy.SchemaExtensions
+	ePolicyInfo_uri                                      smithy.SchemaExtensions
+	ePolicyInfo_attachedTo                               smithy.SchemaExtensions
+	e_PolicyInfoList                                     smithy.SchemaExtensions
+	e_PolicyInfoList_member                              smithy.SchemaExtensions
+	ePolicyType                                          smithy.SchemaExtensions
+	ePolicyType_IDENTITY_BASED_POLICY                    smithy.SchemaExtensions
+	ePolicyType_RESOURCE_BASED_POLICY                    smithy.SchemaExtensions
+	ePolicyType_PERMISSIONS_BOUNDARY                     smithy.SchemaExtensions
+	ePolicyType_SESSION_POLICY                           smithy.SchemaExtensions
+	ePolicyType_SERVICE_CONTROL_POLICY                   smithy.SchemaExtensions
+	ePolicyType_RESOURCE_CONTROL_POLICY                  smithy.SchemaExtensions
+	ePolicyType_VPC_ENDPOINT_POLICY                      smithy.SchemaExtensions
+	eResourceNotFoundException                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                   smithy.SchemaExtensions
+	eStatementEffect                                     smithy.SchemaExtensions
+	eStatementEffect_ALLOW                               smithy.SchemaExtensions
+	eStatementEffect_DENY                                smithy.SchemaExtensions
+	eValidationException                                 smithy.SchemaExtensions
+	eValidationException_message                         smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsInput                 smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsInput_authorizationId smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsInput_nextToken       smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsOutput                smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsOutput_requestContext smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsOutput_evaluations    smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsOutput_policies       smithy.SchemaExtensions
+	eGetRequestAuthorizationDetailsOutput_nextToken      smithy.SchemaExtensions
+)
+
+var (
+	iGetRequestAuthorizationDetails       = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "GetRequestAuthorizationDetails"}
+	i_AuthRequestService                  = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "AuthRequestService"}
+	iAccessDeniedException                = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "AccessDeniedException"}
+	iAttachedTo                           = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "AttachedTo"}
+	i_AttachedToList                      = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "AttachedToList"}
+	i_AuthorizationContext                = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "AuthorizationContext"}
+	iEvaluatedEffect                      = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "EvaluatedEffect"}
+	iEvaluation                           = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "Evaluation"}
+	i_Evaluations                         = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "Evaluations"}
+	iInternalServerException              = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "InternalServerException"}
+	iMatchedPolicy                        = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "MatchedPolicy"}
+	i_MatchedPolicyList                   = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "MatchedPolicyList"}
+	iMatchedStatement                     = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "MatchedStatement"}
+	i_MatchedStatementList                = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "MatchedStatementList"}
+	iPolicyInfo                           = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "PolicyInfo"}
+	i_PolicyInfoList                      = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "PolicyInfoList"}
+	iPolicyType                           = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "PolicyType"}
+	iResourceNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "ResourceNotFoundException"}
+	iStatementEffect                      = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "StatementEffect"}
+	iValidationException                  = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "ValidationException"}
+	iGetRequestAuthorizationDetailsInput  = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "GetRequestAuthorizationDetailsInput"}
+	iGetRequestAuthorizationDetailsOutput = smithy.ShapeName{Namespace: "com.amazonaws.iamtoolbox", Name: "GetRequestAuthorizationDetailsOutput"}
+	pString                               = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pDocument                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Document"}
+	pUnit                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/authorization-details/{authorizationId}",
-	Code: 200})
-
-var _AuthRequestService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AuthRequestService",
-}, smithy.ShapeTypeService, 0)
-
-var AuthRequestService = smithy.NewServiceSchema(_AuthRequestService, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AttachedTo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AttachedTo",
-}, smithy.ShapeTypeStructure, 1)
-var AttachedTo_arn *smithy.Schema
-
-var _AttachedToList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AttachedToList",
-}, smithy.ShapeTypeList, 1)
-var _AttachedToList_member *smithy.Schema
-
-var _AuthorizationContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AuthorizationContext",
-}, smithy.ShapeTypeMap, 2)
-var _AuthorizationContext_key *smithy.Schema
-
-var _AuthorizationContext_value *smithy.Schema
-
-var EvaluatedEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "EvaluatedEffect",
-}, smithy.ShapeTypeEnum, 3)
-var EvaluatedEffect_ALLOW *smithy.Schema
-
-var EvaluatedEffect_EXPLICIT_DENY *smithy.Schema
-
-var EvaluatedEffect_IMPLICIT_DENY *smithy.Schema
-
-var Evaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "Evaluation",
-}, smithy.ShapeTypeStructure, 5)
-var Evaluation_action *smithy.Schema
-
-var Evaluation_resource *smithy.Schema
-
-var Evaluation_context *smithy.Schema
-
-var Evaluation_evaluatedEffect *smithy.Schema
-
-var Evaluation_matchedPolicies *smithy.Schema
-
-var _Evaluations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "Evaluations",
-}, smithy.ShapeTypeList, 1)
-var _Evaluations_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var MatchedPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var MatchedPolicy_uri *smithy.Schema
-
-var MatchedPolicy_matchedStatements *smithy.Schema
-
-var _MatchedPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _MatchedPolicyList_member *smithy.Schema
-
-var MatchedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedStatement",
-}, smithy.ShapeTypeStructure, 2)
-var MatchedStatement_sid *smithy.Schema
-
-var MatchedStatement_evaluatedEffect *smithy.Schema
-
-var _MatchedStatementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedStatementList",
-}, smithy.ShapeTypeList, 1)
-var _MatchedStatementList_member *smithy.Schema
-
-var PolicyInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "PolicyInfo",
-}, smithy.ShapeTypeStructure, 4)
-var PolicyInfo_type *smithy.Schema
-
-var PolicyInfo_inline *smithy.Schema
-
-var PolicyInfo_uri *smithy.Schema
-
-var PolicyInfo_attachedTo *smithy.Schema
-
-var _PolicyInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "PolicyInfoList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyInfoList_member *smithy.Schema
-
-var PolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 7)
-var PolicyType_IDENTITY_BASED_POLICY *smithy.Schema
-
-var PolicyType_RESOURCE_BASED_POLICY *smithy.Schema
-
-var PolicyType_PERMISSIONS_BOUNDARY *smithy.Schema
-
-var PolicyType_SESSION_POLICY *smithy.Schema
-
-var PolicyType_SERVICE_CONTROL_POLICY *smithy.Schema
-
-var PolicyType_RESOURCE_CONTROL_POLICY *smithy.Schema
-
-var PolicyType_VPC_ENDPOINT_POLICY *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var StatementEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "StatementEffect",
-}, smithy.ShapeTypeEnum, 2)
-var StatementEffect_ALLOW *smithy.Schema
-
-var StatementEffect_DENY *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var GetRequestAuthorizationDetailsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "GetRequestAuthorizationDetailsInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetRequestAuthorizationDetailsInput_authorizationId *smithy.Schema
-
-var GetRequestAuthorizationDetailsInput_nextToken *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "GetRequestAuthorizationDetailsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetRequestAuthorizationDetailsOutput_requestContext *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput_evaluations *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput_policies *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AttachedTo_arn = AttachedTo.AddMember("arn", smithyprelude.String)
-
-	_AttachedToList_member = _AttachedToList.AddMember("member", AttachedTo)
-
-	_AuthorizationContext_key = _AuthorizationContext.AddMember("key", smithyprelude.String)
-
-	_AuthorizationContext_value = _AuthorizationContext.AddMember("value", smithyprelude.Document)
-
-	EvaluatedEffect_ALLOW = EvaluatedEffect.AddMember("ALLOW", smithyprelude.Unit)
-
-	EvaluatedEffect_EXPLICIT_DENY = EvaluatedEffect.AddMember("EXPLICIT_DENY", smithyprelude.Unit)
-
-	EvaluatedEffect_IMPLICIT_DENY = EvaluatedEffect.AddMember("IMPLICIT_DENY", smithyprelude.Unit)
-
-	StatementEffect_ALLOW = StatementEffect.AddMember("ALLOW", smithyprelude.Unit)
-
-	StatementEffect_DENY = StatementEffect.AddMember("DENY", smithyprelude.Unit)
-
-	MatchedStatement_sid = MatchedStatement.AddMember("sid", smithyprelude.String)
-
-	MatchedStatement_evaluatedEffect = MatchedStatement.AddMember("evaluatedEffect", StatementEffect)
-
-	_MatchedStatementList_member = _MatchedStatementList.AddMember("member", MatchedStatement)
-
-	MatchedPolicy_uri = MatchedPolicy.AddMember("uri", smithyprelude.String)
-
-	MatchedPolicy_matchedStatements = MatchedPolicy.AddMember("matchedStatements", _MatchedStatementList)
-
-	_MatchedPolicyList_member = _MatchedPolicyList.AddMember("member", MatchedPolicy)
-
-	Evaluation_action = Evaluation.AddMember("action", smithyprelude.String)
-
-	Evaluation_resource = Evaluation.AddMember("resource", smithyprelude.String)
-
-	Evaluation_context = Evaluation.AddMember("context", _AuthorizationContext)
-
-	Evaluation_evaluatedEffect = Evaluation.AddMember("evaluatedEffect", EvaluatedEffect)
-
-	Evaluation_matchedPolicies = Evaluation.AddMember("matchedPolicies", _MatchedPolicyList)
-
-	_Evaluations_member = _Evaluations.AddMember("member", Evaluation)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	PolicyType_IDENTITY_BASED_POLICY = PolicyType.AddMember("IDENTITY_BASED_POLICY", smithyprelude.Unit)
-
-	PolicyType_RESOURCE_BASED_POLICY = PolicyType.AddMember("RESOURCE_BASED_POLICY", smithyprelude.Unit)
-
-	PolicyType_PERMISSIONS_BOUNDARY = PolicyType.AddMember("PERMISSIONS_BOUNDARY", smithyprelude.Unit)
-
-	PolicyType_SESSION_POLICY = PolicyType.AddMember("SESSION_POLICY", smithyprelude.Unit)
-
-	PolicyType_SERVICE_CONTROL_POLICY = PolicyType.AddMember("SERVICE_CONTROL_POLICY", smithyprelude.Unit)
-
-	PolicyType_RESOURCE_CONTROL_POLICY = PolicyType.AddMember("RESOURCE_CONTROL_POLICY", smithyprelude.Unit)
-
-	PolicyType_VPC_ENDPOINT_POLICY = PolicyType.AddMember("VPC_ENDPOINT_POLICY", smithyprelude.Unit)
-
-	PolicyInfo_type = PolicyInfo.AddMember("type", PolicyType)
-
-	PolicyInfo_inline = PolicyInfo.AddMember("inline", smithyprelude.Boolean)
-
-	PolicyInfo_uri = PolicyInfo.AddMember("uri", smithyprelude.String)
-
-	PolicyInfo_attachedTo = PolicyInfo.AddMember("attachedTo", _AttachedToList)
-
-	_PolicyInfoList_member = _PolicyInfoList.AddMember("member", PolicyInfo)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	GetRequestAuthorizationDetailsInput_authorizationId = GetRequestAuthorizationDetailsInput.AddMember("authorizationId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetRequestAuthorizationDetailsInput_nextToken = GetRequestAuthorizationDetailsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetRequestAuthorizationDetailsOutput_requestContext = GetRequestAuthorizationDetailsOutput.AddMember("requestContext", _AuthorizationContext)
-
-	GetRequestAuthorizationDetailsOutput_evaluations = GetRequestAuthorizationDetailsOutput.AddMember("evaluations", _Evaluations)
-
-	GetRequestAuthorizationDetailsOutput_policies = GetRequestAuthorizationDetailsOutput.AddMember("policies", _PolicyInfoList)
-
-	GetRequestAuthorizationDetailsOutput_nextToken = GetRequestAuthorizationDetailsOutput.AddMember("nextToken", smithyprelude.String)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAttachedTo = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachedTo_arn}}
+var m_AttachedToList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttachedToList_member}}
+var m_AuthorizationContext = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthorizationContext_key, &s_AuthorizationContext_value}}
+var mEvaluatedEffect = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluatedEffect_ALLOW, &sEvaluatedEffect_EXPLICIT_DENY, &sEvaluatedEffect_IMPLICIT_DENY}}
+var mEvaluation = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluation_action, &sEvaluation_resource, &sEvaluation_context, &sEvaluation_evaluatedEffect, &sEvaluation_matchedPolicies}}
+var m_Evaluations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Evaluations_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mMatchedPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sMatchedPolicy_uri, &sMatchedPolicy_matchedStatements}}
+var m_MatchedPolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MatchedPolicyList_member}}
+var mMatchedStatement = smithy.SchemaMembers{List: []*smithy.Schema{&sMatchedStatement_sid, &sMatchedStatement_evaluatedEffect}}
+var m_MatchedStatementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MatchedStatementList_member}}
+var mPolicyInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyInfo_type, &sPolicyInfo_inline, &sPolicyInfo_uri, &sPolicyInfo_attachedTo}}
+var m_PolicyInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyInfoList_member}}
+var mPolicyType = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyType_IDENTITY_BASED_POLICY, &sPolicyType_RESOURCE_BASED_POLICY, &sPolicyType_PERMISSIONS_BOUNDARY, &sPolicyType_SESSION_POLICY, &sPolicyType_SERVICE_CONTROL_POLICY, &sPolicyType_RESOURCE_CONTROL_POLICY, &sPolicyType_VPC_ENDPOINT_POLICY}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mStatementEffect = smithy.SchemaMembers{List: []*smithy.Schema{&sStatementEffect_ALLOW, &sStatementEffect_DENY}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mGetRequestAuthorizationDetailsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRequestAuthorizationDetailsInput_authorizationId, &sGetRequestAuthorizationDetailsInput_nextToken}}
+var mGetRequestAuthorizationDetailsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRequestAuthorizationDetailsOutput_requestContext, &sGetRequestAuthorizationDetailsOutput_evaluations, &sGetRequestAuthorizationDetailsOutput_policies, &sGetRequestAuthorizationDetailsOutput_nextToken}}
+
+var sGetRequestAuthorizationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestAuthorizationDetails, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetRequestAuthorizationDetails})
+var s_AuthRequestService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthRequestService, Type: smithy.ShapeTypeService, Ext: &e_AuthRequestService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAttachedTo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachedTo, Members: &mAttachedTo, Type: smithy.ShapeTypeStructure, Ext: &eAttachedTo})
+var sAttachedTo_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAttachedTo_arn})
+var s_AttachedToList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachedToList, Members: &m_AttachedToList, Type: smithy.ShapeTypeList, Ext: &e_AttachedToList})
+var s_AttachedToList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachedTo, Members: &mAttachedTo, Type: smithy.ShapeTypeStructure, Ext: &e_AttachedToList_member})
+var s_AuthorizationContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthorizationContext, Members: &m_AuthorizationContext, Type: smithy.ShapeTypeMap, Ext: &e_AuthorizationContext})
+var s_AuthorizationContext_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AuthorizationContext_key})
+var s_AuthorizationContext_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &e_AuthorizationContext_value})
+var sEvaluatedEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatedEffect, Members: &mEvaluatedEffect, Type: smithy.ShapeTypeEnum, Ext: &eEvaluatedEffect})
+var sEvaluatedEffect_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatedEffect_ALLOW})
+var sEvaluatedEffect_EXPLICIT_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPLICIT_DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatedEffect_EXPLICIT_DENY})
+var sEvaluatedEffect_IMPLICIT_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPLICIT_DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatedEffect_IMPLICIT_DENY})
+var sEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure, Ext: &eEvaluation})
+var sEvaluation_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEvaluation_action})
+var sEvaluation_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEvaluation_resource})
+var sEvaluation_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_AuthorizationContext, Members: &m_AuthorizationContext, Type: smithy.ShapeTypeMap, Ext: &eEvaluation_context})
+var sEvaluation_evaluatedEffect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluatedEffect", ID: &iEvaluatedEffect, Members: &mEvaluatedEffect, Type: smithy.ShapeTypeEnum, Ext: &eEvaluation_evaluatedEffect})
+var sEvaluation_matchedPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchedPolicies", ID: &i_MatchedPolicyList, Members: &m_MatchedPolicyList, Type: smithy.ShapeTypeList, Ext: &eEvaluation_matchedPolicies})
+var s_Evaluations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Evaluations, Members: &m_Evaluations, Type: smithy.ShapeTypeList, Ext: &e_Evaluations})
+var s_Evaluations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure, Ext: &e_Evaluations_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sMatchedPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchedPolicy, Members: &mMatchedPolicy, Type: smithy.ShapeTypeStructure, Ext: &eMatchedPolicy})
+var sMatchedPolicy_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMatchedPolicy_uri})
+var sMatchedPolicy_matchedStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchedStatements", ID: &i_MatchedStatementList, Members: &m_MatchedStatementList, Type: smithy.ShapeTypeList, Ext: &eMatchedPolicy_matchedStatements})
+var s_MatchedPolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchedPolicyList, Members: &m_MatchedPolicyList, Type: smithy.ShapeTypeList, Ext: &e_MatchedPolicyList})
+var s_MatchedPolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMatchedPolicy, Members: &mMatchedPolicy, Type: smithy.ShapeTypeStructure, Ext: &e_MatchedPolicyList_member})
+var sMatchedStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchedStatement, Members: &mMatchedStatement, Type: smithy.ShapeTypeStructure, Ext: &eMatchedStatement})
+var sMatchedStatement_sid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sid", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMatchedStatement_sid})
+var sMatchedStatement_evaluatedEffect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluatedEffect", ID: &iStatementEffect, Members: &mStatementEffect, Type: smithy.ShapeTypeEnum, Ext: &eMatchedStatement_evaluatedEffect})
+var s_MatchedStatementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchedStatementList, Members: &m_MatchedStatementList, Type: smithy.ShapeTypeList, Ext: &e_MatchedStatementList})
+var s_MatchedStatementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMatchedStatement, Members: &mMatchedStatement, Type: smithy.ShapeTypeStructure, Ext: &e_MatchedStatementList_member})
+var sPolicyInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyInfo, Members: &mPolicyInfo, Type: smithy.ShapeTypeStructure, Ext: &ePolicyInfo})
+var sPolicyInfo_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &ePolicyInfo_type})
+var sPolicyInfo_inline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inline", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePolicyInfo_inline})
+var sPolicyInfo_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePolicyInfo_uri})
+var sPolicyInfo_attachedTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachedTo", ID: &i_AttachedToList, Members: &m_AttachedToList, Type: smithy.ShapeTypeList, Ext: &ePolicyInfo_attachedTo})
+var s_PolicyInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyInfoList, Members: &m_PolicyInfoList, Type: smithy.ShapeTypeList, Ext: &e_PolicyInfoList})
+var s_PolicyInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyInfo, Members: &mPolicyInfo, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyInfoList_member})
+var sPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &ePolicyType})
+var sPolicyType_IDENTITY_BASED_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTITY_BASED_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_IDENTITY_BASED_POLICY})
+var sPolicyType_RESOURCE_BASED_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_BASED_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_RESOURCE_BASED_POLICY})
+var sPolicyType_PERMISSIONS_BOUNDARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERMISSIONS_BOUNDARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_PERMISSIONS_BOUNDARY})
+var sPolicyType_SESSION_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_SESSION_POLICY})
+var sPolicyType_SERVICE_CONTROL_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_CONTROL_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_SERVICE_CONTROL_POLICY})
+var sPolicyType_RESOURCE_CONTROL_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_CONTROL_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_RESOURCE_CONTROL_POLICY})
+var sPolicyType_VPC_ENDPOINT_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_VPC_ENDPOINT_POLICY})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sStatementEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatementEffect, Members: &mStatementEffect, Type: smithy.ShapeTypeEnum, Ext: &eStatementEffect})
+var sStatementEffect_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatementEffect_ALLOW})
+var sStatementEffect_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatementEffect_DENY})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sGetRequestAuthorizationDetailsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestAuthorizationDetailsInput, Members: &mGetRequestAuthorizationDetailsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRequestAuthorizationDetailsInput})
+var sGetRequestAuthorizationDetailsInput_authorizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationId", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eGetRequestAuthorizationDetailsInput_authorizationId})
+var sGetRequestAuthorizationDetailsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &eGetRequestAuthorizationDetailsInput_nextToken})
+var sGetRequestAuthorizationDetailsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestAuthorizationDetailsOutput, Members: &mGetRequestAuthorizationDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRequestAuthorizationDetailsOutput})
+var sGetRequestAuthorizationDetailsOutput_requestContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestContext", ID: &i_AuthorizationContext, Members: &m_AuthorizationContext, Type: smithy.ShapeTypeMap, Ext: &eGetRequestAuthorizationDetailsOutput_requestContext})
+var sGetRequestAuthorizationDetailsOutput_evaluations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluations", ID: &i_Evaluations, Members: &m_Evaluations, Type: smithy.ShapeTypeList, Ext: &eGetRequestAuthorizationDetailsOutput_evaluations})
+var sGetRequestAuthorizationDetailsOutput_policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policies", ID: &i_PolicyInfoList, Members: &m_PolicyInfoList, Type: smithy.ShapeTypeList, Ext: &eGetRequestAuthorizationDetailsOutput_policies})
+var sGetRequestAuthorizationDetailsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRequestAuthorizationDetailsOutput_nextToken})
+
+var GetRequestAuthorizationDetails = &sGetRequestAuthorizationDetails
+
+var _AuthRequestService = &s_AuthRequestService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AttachedTo = &sAttachedTo
+var AttachedTo_arn = &sAttachedTo_arn
+
+var _AttachedToList = &s_AttachedToList
+var _AttachedToList_member = &s_AttachedToList_member
+
+var _AuthorizationContext = &s_AuthorizationContext
+var _AuthorizationContext_key = &s_AuthorizationContext_key
+var _AuthorizationContext_value = &s_AuthorizationContext_value
+
+var EvaluatedEffect = &sEvaluatedEffect
+var EvaluatedEffect_ALLOW = &sEvaluatedEffect_ALLOW
+var EvaluatedEffect_EXPLICIT_DENY = &sEvaluatedEffect_EXPLICIT_DENY
+var EvaluatedEffect_IMPLICIT_DENY = &sEvaluatedEffect_IMPLICIT_DENY
+
+var Evaluation = &sEvaluation
+var Evaluation_action = &sEvaluation_action
+var Evaluation_resource = &sEvaluation_resource
+var Evaluation_context = &sEvaluation_context
+var Evaluation_evaluatedEffect = &sEvaluation_evaluatedEffect
+var Evaluation_matchedPolicies = &sEvaluation_matchedPolicies
+
+var _Evaluations = &s_Evaluations
+var _Evaluations_member = &s_Evaluations_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var MatchedPolicy = &sMatchedPolicy
+var MatchedPolicy_uri = &sMatchedPolicy_uri
+var MatchedPolicy_matchedStatements = &sMatchedPolicy_matchedStatements
+
+var _MatchedPolicyList = &s_MatchedPolicyList
+var _MatchedPolicyList_member = &s_MatchedPolicyList_member
+
+var MatchedStatement = &sMatchedStatement
+var MatchedStatement_sid = &sMatchedStatement_sid
+var MatchedStatement_evaluatedEffect = &sMatchedStatement_evaluatedEffect
+
+var _MatchedStatementList = &s_MatchedStatementList
+var _MatchedStatementList_member = &s_MatchedStatementList_member
+
+var PolicyInfo = &sPolicyInfo
+var PolicyInfo_type = &sPolicyInfo_type
+var PolicyInfo_inline = &sPolicyInfo_inline
+var PolicyInfo_uri = &sPolicyInfo_uri
+var PolicyInfo_attachedTo = &sPolicyInfo_attachedTo
+
+var _PolicyInfoList = &s_PolicyInfoList
+var _PolicyInfoList_member = &s_PolicyInfoList_member
+
+var PolicyType = &sPolicyType
+var PolicyType_IDENTITY_BASED_POLICY = &sPolicyType_IDENTITY_BASED_POLICY
+var PolicyType_RESOURCE_BASED_POLICY = &sPolicyType_RESOURCE_BASED_POLICY
+var PolicyType_PERMISSIONS_BOUNDARY = &sPolicyType_PERMISSIONS_BOUNDARY
+var PolicyType_SESSION_POLICY = &sPolicyType_SESSION_POLICY
+var PolicyType_SERVICE_CONTROL_POLICY = &sPolicyType_SERVICE_CONTROL_POLICY
+var PolicyType_RESOURCE_CONTROL_POLICY = &sPolicyType_RESOURCE_CONTROL_POLICY
+var PolicyType_VPC_ENDPOINT_POLICY = &sPolicyType_VPC_ENDPOINT_POLICY
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var StatementEffect = &sStatementEffect
+var StatementEffect_ALLOW = &sStatementEffect_ALLOW
+var StatementEffect_DENY = &sStatementEffect_DENY
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var GetRequestAuthorizationDetailsInput = &sGetRequestAuthorizationDetailsInput
+var GetRequestAuthorizationDetailsInput_authorizationId = &sGetRequestAuthorizationDetailsInput_authorizationId
+var GetRequestAuthorizationDetailsInput_nextToken = &sGetRequestAuthorizationDetailsInput_nextToken
+
+var GetRequestAuthorizationDetailsOutput = &sGetRequestAuthorizationDetailsOutput
+var GetRequestAuthorizationDetailsOutput_requestContext = &sGetRequestAuthorizationDetailsOutput_requestContext
+var GetRequestAuthorizationDetailsOutput_evaluations = &sGetRequestAuthorizationDetailsOutput_evaluations
+var GetRequestAuthorizationDetailsOutput_policies = &sGetRequestAuthorizationDetailsOutput_policies
+var GetRequestAuthorizationDetailsOutput_nextToken = &sGetRequestAuthorizationDetailsOutput_nextToken
+
+var AuthRequestService = &smithy.ServiceSchema{Schema: &s_AuthRequestService, Version: "2018-05-10"}

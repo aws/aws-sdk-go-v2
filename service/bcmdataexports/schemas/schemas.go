@@ -4,1002 +4,985 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "CreateExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "DeleteExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListExports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListTables",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "UpdateExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSBillingAndCostManagementDataExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "AWSBillingAndCostManagementDataExports",
-}, smithy.ShapeTypeService, 0)
-
-var AWSBillingAndCostManagementDataExports = smithy.NewServiceSchema(_AWSBillingAndCostManagementDataExports, "2023-11-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var Column = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "Column",
-}, smithy.ShapeTypeStructure, 3)
-var Column_Name *smithy.Schema
-
-var Column_Type *smithy.Schema
-
-var Column_Description *smithy.Schema
-
-var _ColumnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ColumnList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnList_member *smithy.Schema
-
-var CompressionOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "CompressionOption",
-}, smithy.ShapeTypeEnum, 3)
-var CompressionOption_GZIP *smithy.Schema
-
-var CompressionOption_PARQUET *smithy.Schema
-
-var CompressionOption_ZIP *smithy.Schema
-
-var DataQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "DataQuery",
-}, smithy.ShapeTypeStructure, 2)
-var DataQuery_QueryStatement *smithy.Schema
-
-var DataQuery_TableConfigurations *smithy.Schema
-
-var DestinationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "DestinationConfigurations",
-}, smithy.ShapeTypeStructure, 1)
-var DestinationConfigurations_S3Destination *smithy.Schema
-
-var ExecutionReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExecutionReference",
-}, smithy.ShapeTypeStructure, 2)
-var ExecutionReference_ExecutionId *smithy.Schema
-
-var ExecutionReference_ExecutionStatus *smithy.Schema
-
-var _ExecutionReferenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExecutionReferenceList",
-}, smithy.ShapeTypeList, 1)
-var _ExecutionReferenceList_member *smithy.Schema
-
-var ExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExecutionStatus",
-}, smithy.ShapeTypeStructure, 5)
-var ExecutionStatus_StatusCode *smithy.Schema
-
-var ExecutionStatus_StatusReason *smithy.Schema
-
-var ExecutionStatus_CreatedAt *smithy.Schema
-
-var ExecutionStatus_CompletedAt *smithy.Schema
-
-var ExecutionStatus_LastUpdatedAt *smithy.Schema
-
-var ExecutionStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExecutionStatusCode",
-}, smithy.ShapeTypeEnum, 7)
-var ExecutionStatusCode_INITIATION_IN_PROCESS *smithy.Schema
-
-var ExecutionStatusCode_QUERY_QUEUED *smithy.Schema
-
-var ExecutionStatusCode_QUERY_IN_PROCESS *smithy.Schema
-
-var ExecutionStatusCode_QUERY_FAILURE *smithy.Schema
-
-var ExecutionStatusCode_DELIVERY_IN_PROCESS *smithy.Schema
-
-var ExecutionStatusCode_DELIVERY_SUCCESS *smithy.Schema
-
-var ExecutionStatusCode_DELIVERY_FAILURE *smithy.Schema
-
-var ExecutionStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExecutionStatusReason",
-}, smithy.ShapeTypeEnum, 4)
-var ExecutionStatusReason_INSUFFICIENT_PERMISSION *smithy.Schema
-
-var ExecutionStatusReason_BILL_OWNER_CHANGED *smithy.Schema
-
-var ExecutionStatusReason_INTERNAL_FAILURE *smithy.Schema
-
-var ExecutionStatusReason_DEPRECATED *smithy.Schema
-
-var Export = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "Export",
-}, smithy.ShapeTypeStructure, 6)
-var Export_ExportArn *smithy.Schema
-
-var Export_Name *smithy.Schema
-
-var Export_Description *smithy.Schema
-
-var Export_DataQuery *smithy.Schema
-
-var Export_DestinationConfigurations *smithy.Schema
-
-var Export_RefreshCadence *smithy.Schema
-
-var _ExportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExportName",
-}, smithy.ShapeTypeString, 0)
-
-var ExportReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExportReference",
-}, smithy.ShapeTypeStructure, 3)
-var ExportReference_ExportArn *smithy.Schema
-
-var ExportReference_ExportName *smithy.Schema
-
-var ExportReference_ExportStatus *smithy.Schema
-
-var _ExportReferenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExportReferenceList",
-}, smithy.ShapeTypeList, 1)
-var _ExportReferenceList_member *smithy.Schema
-
-var ExportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExportStatus",
-}, smithy.ShapeTypeStructure, 5)
-var ExportStatus_StatusCode *smithy.Schema
-
-var ExportStatus_StatusReason *smithy.Schema
-
-var ExportStatus_CreatedAt *smithy.Schema
-
-var ExportStatus_LastUpdatedAt *smithy.Schema
-
-var ExportStatus_LastRefreshedAt *smithy.Schema
-
-var ExportStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ExportStatusCode",
-}, smithy.ShapeTypeEnum, 2)
-var ExportStatusCode_HEALTHY *smithy.Schema
-
-var ExportStatusCode_UNHEALTHY *smithy.Schema
-
-var FormatOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "FormatOption",
-}, smithy.ShapeTypeEnum, 2)
-var FormatOption_TEXT_OR_CSV *smithy.Schema
-
-var FormatOption_PARQUET *smithy.Schema
-
-var FrequencyOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "FrequencyOption",
-}, smithy.ShapeTypeEnum, 1)
-var FrequencyOption_SYNCHRONOUS *smithy.Schema
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var _GenericStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GenericStringList",
-}, smithy.ShapeTypeList, 1)
-var _GenericStringList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextPageToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "NextPageToken",
-}, smithy.ShapeTypeString, 0)
-
-var OverwriteOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "OverwriteOption",
-}, smithy.ShapeTypeEnum, 2)
-var OverwriteOption_CREATE_NEW_REPORT *smithy.Schema
-
-var OverwriteOption_OVERWRITE_REPORT *smithy.Schema
-
-var _QueryStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "QueryStatement",
-}, smithy.ShapeTypeString, 0)
-
-var RefreshCadence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "RefreshCadence",
-}, smithy.ShapeTypeStructure, 1)
-var RefreshCadence_Frequency *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_Key *smithy.Schema
-
-var ResourceTag_Value *smithy.Schema
-
-var _ResourceTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ResourceTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceTagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ResourceTagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagKeyList_member *smithy.Schema
-
-var _ResourceTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ResourceTagList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagList_member *smithy.Schema
-
-var _ResourceTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ResourceTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var S3Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "S3Destination",
-}, smithy.ShapeTypeStructure, 5)
-var S3Destination_S3Bucket *smithy.Schema
-
-var S3Destination_S3BucketOwner *smithy.Schema
-
-var S3Destination_S3Prefix *smithy.Schema
-
-var S3Destination_S3Region *smithy.Schema
-
-var S3Destination_S3OutputConfigurations *smithy.Schema
-
-var S3OutputConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "S3OutputConfigurations",
-}, smithy.ShapeTypeStructure, 4)
-var S3OutputConfigurations_OutputType *smithy.Schema
-
-var S3OutputConfigurations_Format *smithy.Schema
-
-var S3OutputConfigurations_Compression *smithy.Schema
-
-var S3OutputConfigurations_Overwrite *smithy.Schema
-
-var S3OutputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "S3OutputType",
-}, smithy.ShapeTypeEnum, 3)
-var S3OutputType_CUSTOM *smithy.Schema
-
-var S3OutputType_ATHENA *smithy.Schema
-
-var S3OutputType_REDSHIFT *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceId *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceType *smithy.Schema
-
-var ServiceQuotaExceededException_QuotaCode *smithy.Schema
-
-var ServiceQuotaExceededException_ServiceCode *smithy.Schema
-
-var Table = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "Table",
-}, smithy.ShapeTypeStructure, 3)
-var Table_TableName *smithy.Schema
-
-var Table_Description *smithy.Schema
-
-var Table_TableProperties *smithy.Schema
-
-var _TableConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TableConfigurations",
-}, smithy.ShapeTypeMap, 2)
-var _TableConfigurations_key *smithy.Schema
-
-var _TableConfigurations_value *smithy.Schema
-
-var _TableList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TableList",
-}, smithy.ShapeTypeList, 1)
-var _TableList_member *smithy.Schema
-
-var _TableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TableName",
-}, smithy.ShapeTypeString, 0)
-
-var _TableProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TableProperties",
-}, smithy.ShapeTypeMap, 2)
-var _TableProperties_key *smithy.Schema
-
-var _TableProperties_value *smithy.Schema
-
-var _TableProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TableProperty",
-}, smithy.ShapeTypeString, 0)
-
-var TablePropertyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TablePropertyDescription",
-}, smithy.ShapeTypeStructure, 4)
-var TablePropertyDescription_Name *smithy.Schema
-
-var TablePropertyDescription_ValidValues *smithy.Schema
-
-var TablePropertyDescription_DefaultValue *smithy.Schema
-
-var TablePropertyDescription_Description *smithy.Schema
-
-var _TablePropertyDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TablePropertyDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _TablePropertyDescriptionList_member *smithy.Schema
-
-var _TablePropertyGenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TablePropertyGenericString",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_QuotaCode *smithy.Schema
-
-var ThrottlingException_ServiceCode *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_Fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var CreateExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "CreateExportRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateExportRequest_Export *smithy.Schema
-
-var CreateExportRequest_ResourceTags *smithy.Schema
-
-var CreateExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "CreateExportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateExportResponse_ExportArn *smithy.Schema
-
-var DeleteExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "DeleteExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExportRequest_ExportArn *smithy.Schema
-
-var DeleteExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "DeleteExportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExportResponse_ExportArn *smithy.Schema
-
-var GetExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetExecutionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetExecutionRequest_ExportArn *smithy.Schema
-
-var GetExecutionRequest_ExecutionId *smithy.Schema
-
-var GetExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetExecutionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetExecutionResponse_ExecutionId *smithy.Schema
-
-var GetExecutionResponse_Export *smithy.Schema
-
-var GetExecutionResponse_ExecutionStatus *smithy.Schema
-
-var GetExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetExportRequest_ExportArn *smithy.Schema
-
-var GetExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetExportResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetExportResponse_Export *smithy.Schema
-
-var GetExportResponse_ExportStatus *smithy.Schema
-
-var GetTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetTableRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableRequest_TableName *smithy.Schema
-
-var GetTableRequest_TableProperties *smithy.Schema
-
-var GetTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "GetTableResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetTableResponse_TableName *smithy.Schema
-
-var GetTableResponse_Description *smithy.Schema
-
-var GetTableResponse_TableProperties *smithy.Schema
-
-var GetTableResponse_Schema *smithy.Schema
-
-var ListExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListExecutionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExecutionsRequest_ExportArn *smithy.Schema
-
-var ListExecutionsRequest_MaxResults *smithy.Schema
-
-var ListExecutionsRequest_NextToken *smithy.Schema
-
-var ListExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListExecutionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListExecutionsResponse_Executions *smithy.Schema
-
-var ListExecutionsResponse_NextToken *smithy.Schema
-
-var ListExportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListExportsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListExportsRequest_MaxResults *smithy.Schema
-
-var ListExportsRequest_NextToken *smithy.Schema
-
-var ListExportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListExportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListExportsResponse_Exports *smithy.Schema
-
-var ListExportsResponse_NextToken *smithy.Schema
-
-var ListTablesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListTablesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTablesRequest_NextToken *smithy.Schema
-
-var ListTablesRequest_MaxResults *smithy.Schema
-
-var ListTablesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListTablesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTablesResponse_Tables *smithy.Schema
-
-var ListTablesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceRequest_MaxResults *smithy.Schema
-
-var ListTagsForResourceRequest_NextToken *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_ResourceTags *smithy.Schema
-
-var ListTagsForResourceResponse_NextToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_ResourceTags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_ResourceTagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "UpdateExportRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateExportRequest_ExportArn *smithy.Schema
-
-var UpdateExportRequest_Export *smithy.Schema
-
-var UpdateExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdataexports",
-	Name:      "UpdateExportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateExportResponse_ExportArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _GenericString)
-
-	Column_Name = Column.AddMember("Name", _GenericString)
-
-	Column_Type = Column.AddMember("Type", _GenericString)
-
-	Column_Description = Column.AddMember("Description", _GenericString)
-
-	_ColumnList_member = _ColumnList.AddMember("member", Column)
-
-	CompressionOption_GZIP = CompressionOption.AddMember("GZIP", smithyprelude.Unit)
-
-	CompressionOption_PARQUET = CompressionOption.AddMember("PARQUET", smithyprelude.Unit)
-
-	CompressionOption_ZIP = CompressionOption.AddMember("ZIP", smithyprelude.Unit)
-
-	_TableProperties_key = _TableProperties.AddMember("key", _TableProperty)
-
-	_TableProperties_value = _TableProperties.AddMember("value", _TablePropertyGenericString)
-
-	_TableConfigurations_key = _TableConfigurations.AddMember("key", _TableName)
-
-	_TableConfigurations_value = _TableConfigurations.AddMember("value", _TableProperties)
-
-	DataQuery_QueryStatement = DataQuery.AddMember("QueryStatement", _QueryStatement)
-
-	DataQuery_TableConfigurations = DataQuery.AddMember("TableConfigurations", _TableConfigurations)
-
-	S3OutputType_CUSTOM = S3OutputType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	S3OutputType_ATHENA = S3OutputType.AddMember("ATHENA", smithyprelude.Unit)
-
-	S3OutputType_REDSHIFT = S3OutputType.AddMember("REDSHIFT", smithyprelude.Unit)
-
-	FormatOption_TEXT_OR_CSV = FormatOption.AddMember("TEXT_OR_CSV", smithyprelude.Unit)
-
-	FormatOption_PARQUET = FormatOption.AddMember("PARQUET", smithyprelude.Unit)
-
-	OverwriteOption_CREATE_NEW_REPORT = OverwriteOption.AddMember("CREATE_NEW_REPORT", smithyprelude.Unit)
-
-	OverwriteOption_OVERWRITE_REPORT = OverwriteOption.AddMember("OVERWRITE_REPORT", smithyprelude.Unit)
-
-	S3OutputConfigurations_OutputType = S3OutputConfigurations.AddMember("OutputType", S3OutputType)
-
-	S3OutputConfigurations_Format = S3OutputConfigurations.AddMember("Format", FormatOption)
-
-	S3OutputConfigurations_Compression = S3OutputConfigurations.AddMember("Compression", CompressionOption)
-
-	S3OutputConfigurations_Overwrite = S3OutputConfigurations.AddMember("Overwrite", OverwriteOption)
-
-	S3Destination_S3Bucket = S3Destination.AddMember("S3Bucket", _GenericString)
-
-	S3Destination_S3BucketOwner = S3Destination.AddMember("S3BucketOwner", _AccountId)
-
-	S3Destination_S3Prefix = S3Destination.AddMember("S3Prefix", _GenericString)
-
-	S3Destination_S3Region = S3Destination.AddMember("S3Region", _GenericString)
-
-	S3Destination_S3OutputConfigurations = S3Destination.AddMember("S3OutputConfigurations", S3OutputConfigurations)
-
-	DestinationConfigurations_S3Destination = DestinationConfigurations.AddMember("S3Destination", S3Destination)
-
-	ExecutionStatusCode_INITIATION_IN_PROCESS = ExecutionStatusCode.AddMember("INITIATION_IN_PROCESS", smithyprelude.Unit)
-
-	ExecutionStatusCode_QUERY_QUEUED = ExecutionStatusCode.AddMember("QUERY_QUEUED", smithyprelude.Unit)
-
-	ExecutionStatusCode_QUERY_IN_PROCESS = ExecutionStatusCode.AddMember("QUERY_IN_PROCESS", smithyprelude.Unit)
-
-	ExecutionStatusCode_QUERY_FAILURE = ExecutionStatusCode.AddMember("QUERY_FAILURE", smithyprelude.Unit)
-
-	ExecutionStatusCode_DELIVERY_IN_PROCESS = ExecutionStatusCode.AddMember("DELIVERY_IN_PROCESS", smithyprelude.Unit)
-
-	ExecutionStatusCode_DELIVERY_SUCCESS = ExecutionStatusCode.AddMember("DELIVERY_SUCCESS", smithyprelude.Unit)
-
-	ExecutionStatusCode_DELIVERY_FAILURE = ExecutionStatusCode.AddMember("DELIVERY_FAILURE", smithyprelude.Unit)
-
-	ExecutionStatusReason_INSUFFICIENT_PERMISSION = ExecutionStatusReason.AddMember("INSUFFICIENT_PERMISSION", smithyprelude.Unit)
-
-	ExecutionStatusReason_BILL_OWNER_CHANGED = ExecutionStatusReason.AddMember("BILL_OWNER_CHANGED", smithyprelude.Unit)
-
-	ExecutionStatusReason_INTERNAL_FAILURE = ExecutionStatusReason.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
-
-	ExecutionStatusReason_DEPRECATED = ExecutionStatusReason.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	ExecutionStatus_StatusCode = ExecutionStatus.AddMember("StatusCode", ExecutionStatusCode)
-
-	ExecutionStatus_StatusReason = ExecutionStatus.AddMember("StatusReason", ExecutionStatusReason)
-
-	ExecutionStatus_CreatedAt = ExecutionStatus.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExecutionStatus_CompletedAt = ExecutionStatus.AddMember("CompletedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExecutionStatus_LastUpdatedAt = ExecutionStatus.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExecutionReference_ExecutionId = ExecutionReference.AddMember("ExecutionId", _GenericString)
-
-	ExecutionReference_ExecutionStatus = ExecutionReference.AddMember("ExecutionStatus", ExecutionStatus)
-
-	_ExecutionReferenceList_member = _ExecutionReferenceList.AddMember("member", ExecutionReference)
-
-	FrequencyOption_SYNCHRONOUS = FrequencyOption.AddMember("SYNCHRONOUS", smithyprelude.Unit)
-
-	RefreshCadence_Frequency = RefreshCadence.AddMember("Frequency", FrequencyOption)
-
-	Export_ExportArn = Export.AddMember("ExportArn", _Arn)
-
-	Export_Name = Export.AddMember("Name", _ExportName)
-
-	Export_Description = Export.AddMember("Description", _GenericString)
-
-	Export_DataQuery = Export.AddMember("DataQuery", DataQuery)
-
-	Export_DestinationConfigurations = Export.AddMember("DestinationConfigurations", DestinationConfigurations)
-
-	Export_RefreshCadence = Export.AddMember("RefreshCadence", RefreshCadence)
-
-	ExportStatusCode_HEALTHY = ExportStatusCode.AddMember("HEALTHY", smithyprelude.Unit)
-
-	ExportStatusCode_UNHEALTHY = ExportStatusCode.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	ExportStatus_StatusCode = ExportStatus.AddMember("StatusCode", ExportStatusCode)
-
-	ExportStatus_StatusReason = ExportStatus.AddMember("StatusReason", ExecutionStatusReason)
-
-	ExportStatus_CreatedAt = ExportStatus.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExportStatus_LastUpdatedAt = ExportStatus.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExportStatus_LastRefreshedAt = ExportStatus.AddMember("LastRefreshedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExportReference_ExportArn = ExportReference.AddMember("ExportArn", _Arn)
-
-	ExportReference_ExportName = ExportReference.AddMember("ExportName", _ExportName)
-
-	ExportReference_ExportStatus = ExportReference.AddMember("ExportStatus", ExportStatus)
-
-	_ExportReferenceList_member = _ExportReferenceList.AddMember("member", ExportReference)
-
-	_GenericStringList_member = _GenericStringList.AddMember("member", _GenericString)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _GenericString)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _GenericString)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", _GenericString)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _GenericString)
-
-	ResourceTag_Key = ResourceTag.AddMember("Key", _ResourceTagKey)
-
-	ResourceTag_Value = ResourceTag.AddMember("Value", _ResourceTagValue)
-
-	_ResourceTagKeyList_member = _ResourceTagKeyList.AddMember("member", _ResourceTagKey)
-
-	_ResourceTagList_member = _ResourceTagList.AddMember("member", ResourceTag)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _GenericString)
-
-	ServiceQuotaExceededException_ResourceId = ServiceQuotaExceededException.AddMember("ResourceId", _GenericString)
-
-	ServiceQuotaExceededException_ResourceType = ServiceQuotaExceededException.AddMember("ResourceType", _GenericString)
-
-	ServiceQuotaExceededException_QuotaCode = ServiceQuotaExceededException.AddMember("QuotaCode", _GenericString)
-
-	ServiceQuotaExceededException_ServiceCode = ServiceQuotaExceededException.AddMember("ServiceCode", _GenericString)
-
-	TablePropertyDescription_Name = TablePropertyDescription.AddMember("Name", _GenericString)
-
-	TablePropertyDescription_ValidValues = TablePropertyDescription.AddMember("ValidValues", _GenericStringList)
-
-	TablePropertyDescription_DefaultValue = TablePropertyDescription.AddMember("DefaultValue", _GenericString)
-
-	TablePropertyDescription_Description = TablePropertyDescription.AddMember("Description", _GenericString)
-
-	_TablePropertyDescriptionList_member = _TablePropertyDescriptionList.AddMember("member", TablePropertyDescription)
-
-	Table_TableName = Table.AddMember("TableName", _TableName)
-
-	Table_Description = Table.AddMember("Description", _GenericString)
-
-	Table_TableProperties = Table.AddMember("TableProperties", _TablePropertyDescriptionList)
-
-	_TableList_member = _TableList.AddMember("member", Table)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _GenericString)
-
-	ThrottlingException_QuotaCode = ThrottlingException.AddMember("QuotaCode", _GenericString)
-
-	ThrottlingException_ServiceCode = ThrottlingException.AddMember("ServiceCode", _GenericString)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", _GenericString)
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", _GenericString)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _GenericString)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationException_Fields = ValidationException.AddMember("Fields", _ValidationExceptionFieldList)
-
-	CreateExportRequest_Export = CreateExportRequest.AddMember("Export", Export)
-
-	CreateExportRequest_ResourceTags = CreateExportRequest.AddMember("ResourceTags", _ResourceTagList)
-
-	CreateExportResponse_ExportArn = CreateExportResponse.AddMember("ExportArn", _Arn)
-
-	DeleteExportRequest_ExportArn = DeleteExportRequest.AddMember("ExportArn", _Arn)
-
-	DeleteExportResponse_ExportArn = DeleteExportResponse.AddMember("ExportArn", _Arn)
-
-	GetExecutionRequest_ExportArn = GetExecutionRequest.AddMember("ExportArn", _Arn)
-
-	GetExecutionRequest_ExecutionId = GetExecutionRequest.AddMember("ExecutionId", _GenericString)
-
-	GetExecutionResponse_ExecutionId = GetExecutionResponse.AddMember("ExecutionId", _GenericString)
-
-	GetExecutionResponse_Export = GetExecutionResponse.AddMember("Export", Export)
-
-	GetExecutionResponse_ExecutionStatus = GetExecutionResponse.AddMember("ExecutionStatus", ExecutionStatus)
-
-	GetExportRequest_ExportArn = GetExportRequest.AddMember("ExportArn", _Arn)
-
-	GetExportResponse_Export = GetExportResponse.AddMember("Export", Export)
-
-	GetExportResponse_ExportStatus = GetExportResponse.AddMember("ExportStatus", ExportStatus)
-
-	GetTableRequest_TableName = GetTableRequest.AddMember("TableName", _TableName)
-
-	GetTableRequest_TableProperties = GetTableRequest.AddMember("TableProperties", _TableProperties)
-
-	GetTableResponse_TableName = GetTableResponse.AddMember("TableName", _TableName)
-
-	GetTableResponse_Description = GetTableResponse.AddMember("Description", _GenericString)
-
-	GetTableResponse_TableProperties = GetTableResponse.AddMember("TableProperties", _TableProperties)
-
-	GetTableResponse_Schema = GetTableResponse.AddMember("Schema", _ColumnList)
-
-	ListExecutionsRequest_ExportArn = ListExecutionsRequest.AddMember("ExportArn", _Arn)
-
-	ListExecutionsRequest_MaxResults = ListExecutionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListExecutionsRequest_NextToken = ListExecutionsRequest.AddMember("NextToken", _NextPageToken)
-
-	ListExecutionsResponse_Executions = ListExecutionsResponse.AddMember("Executions", _ExecutionReferenceList)
-
-	ListExecutionsResponse_NextToken = ListExecutionsResponse.AddMember("NextToken", _NextPageToken)
-
-	ListExportsRequest_MaxResults = ListExportsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListExportsRequest_NextToken = ListExportsRequest.AddMember("NextToken", _NextPageToken)
-
-	ListExportsResponse_Exports = ListExportsResponse.AddMember("Exports", _ExportReferenceList)
-
-	ListExportsResponse_NextToken = ListExportsResponse.AddMember("NextToken", _NextPageToken)
-
-	ListTablesRequest_NextToken = ListTablesRequest.AddMember("NextToken", _NextPageToken)
-
-	ListTablesRequest_MaxResults = ListTablesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTablesResponse_Tables = ListTablesResponse.AddMember("Tables", _TableList)
-
-	ListTablesResponse_NextToken = ListTablesResponse.AddMember("NextToken", _NextPageToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn)
-
-	ListTagsForResourceRequest_MaxResults = ListTagsForResourceRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTagsForResourceRequest_NextToken = ListTagsForResourceRequest.AddMember("NextToken", _NextPageToken)
-
-	ListTagsForResourceResponse_ResourceTags = ListTagsForResourceResponse.AddMember("ResourceTags", _ResourceTagList)
-
-	ListTagsForResourceResponse_NextToken = ListTagsForResourceResponse.AddMember("NextToken", _NextPageToken)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	TagResourceRequest_ResourceTags = TagResourceRequest.AddMember("ResourceTags", _ResourceTagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	UntagResourceRequest_ResourceTagKeys = UntagResourceRequest.AddMember("ResourceTagKeys", _ResourceTagKeyList)
-
-	UpdateExportRequest_ExportArn = UpdateExportRequest.AddMember("ExportArn", _Arn)
-
-	UpdateExportRequest_Export = UpdateExportRequest.AddMember("Export", Export)
-
-	UpdateExportResponse_ExportArn = UpdateExportResponse.AddMember("ExportArn", _Arn)
-
-}
+var (
+	eCreateExport                                      smithy.SchemaExtensions
+	eDeleteExport                                      smithy.SchemaExtensions
+	eGetExecution                                      smithy.SchemaExtensions
+	eGetExport                                         smithy.SchemaExtensions
+	eGetTable                                          smithy.SchemaExtensions
+	eListExecutions                                    smithy.SchemaExtensions
+	eListExports                                       smithy.SchemaExtensions
+	eListTables                                        smithy.SchemaExtensions
+	eListTagsForResource                               smithy.SchemaExtensions
+	eTagResource                                       smithy.SchemaExtensions
+	eUntagResource                                     smithy.SchemaExtensions
+	eUpdateExport                                      smithy.SchemaExtensions
+	e_AWSBillingAndCostManagementDataExports           smithy.SchemaExtensions
+	eAccessDeniedException                             smithy.SchemaExtensions
+	eAccessDeniedException_Message                     smithy.SchemaExtensions
+	e_AccountId                                        smithy.SchemaExtensions
+	e_Arn                                              smithy.SchemaExtensions
+	eColumn                                            smithy.SchemaExtensions
+	eColumn_Name                                       smithy.SchemaExtensions
+	eColumn_Type                                       smithy.SchemaExtensions
+	eColumn_Description                                smithy.SchemaExtensions
+	e_ColumnList                                       smithy.SchemaExtensions
+	e_ColumnList_member                                smithy.SchemaExtensions
+	eCompressionOption                                 smithy.SchemaExtensions
+	eCompressionOption_GZIP                            smithy.SchemaExtensions
+	eCompressionOption_PARQUET                         smithy.SchemaExtensions
+	eCompressionOption_ZIP                             smithy.SchemaExtensions
+	eDataQuery                                         smithy.SchemaExtensions
+	eDataQuery_QueryStatement                          smithy.SchemaExtensions
+	eDataQuery_TableConfigurations                     smithy.SchemaExtensions
+	eDestinationConfigurations                         smithy.SchemaExtensions
+	eDestinationConfigurations_S3Destination           smithy.SchemaExtensions
+	eExecutionReference                                smithy.SchemaExtensions
+	eExecutionReference_ExecutionId                    smithy.SchemaExtensions
+	eExecutionReference_ExecutionStatus                smithy.SchemaExtensions
+	e_ExecutionReferenceList                           smithy.SchemaExtensions
+	e_ExecutionReferenceList_member                    smithy.SchemaExtensions
+	eExecutionStatus                                   smithy.SchemaExtensions
+	eExecutionStatus_StatusCode                        smithy.SchemaExtensions
+	eExecutionStatus_StatusReason                      smithy.SchemaExtensions
+	eExecutionStatus_CreatedAt                         smithy.SchemaExtensions
+	eExecutionStatus_CompletedAt                       smithy.SchemaExtensions
+	eExecutionStatus_LastUpdatedAt                     smithy.SchemaExtensions
+	eExecutionStatusCode                               smithy.SchemaExtensions
+	eExecutionStatusCode_INITIATION_IN_PROCESS         smithy.SchemaExtensions
+	eExecutionStatusCode_QUERY_QUEUED                  smithy.SchemaExtensions
+	eExecutionStatusCode_QUERY_IN_PROCESS              smithy.SchemaExtensions
+	eExecutionStatusCode_QUERY_FAILURE                 smithy.SchemaExtensions
+	eExecutionStatusCode_DELIVERY_IN_PROCESS           smithy.SchemaExtensions
+	eExecutionStatusCode_DELIVERY_SUCCESS              smithy.SchemaExtensions
+	eExecutionStatusCode_DELIVERY_FAILURE              smithy.SchemaExtensions
+	eExecutionStatusReason                             smithy.SchemaExtensions
+	eExecutionStatusReason_INSUFFICIENT_PERMISSION     smithy.SchemaExtensions
+	eExecutionStatusReason_BILL_OWNER_CHANGED          smithy.SchemaExtensions
+	eExecutionStatusReason_INTERNAL_FAILURE            smithy.SchemaExtensions
+	eExecutionStatusReason_DEPRECATED                  smithy.SchemaExtensions
+	eExport                                            smithy.SchemaExtensions
+	eExport_ExportArn                                  smithy.SchemaExtensions
+	eExport_Name                                       smithy.SchemaExtensions
+	eExport_Description                                smithy.SchemaExtensions
+	eExport_DataQuery                                  smithy.SchemaExtensions
+	eExport_DestinationConfigurations                  smithy.SchemaExtensions
+	eExport_RefreshCadence                             smithy.SchemaExtensions
+	e_ExportName                                       smithy.SchemaExtensions
+	eExportReference                                   smithy.SchemaExtensions
+	eExportReference_ExportArn                         smithy.SchemaExtensions
+	eExportReference_ExportName                        smithy.SchemaExtensions
+	eExportReference_ExportStatus                      smithy.SchemaExtensions
+	e_ExportReferenceList                              smithy.SchemaExtensions
+	e_ExportReferenceList_member                       smithy.SchemaExtensions
+	eExportStatus                                      smithy.SchemaExtensions
+	eExportStatus_StatusCode                           smithy.SchemaExtensions
+	eExportStatus_StatusReason                         smithy.SchemaExtensions
+	eExportStatus_CreatedAt                            smithy.SchemaExtensions
+	eExportStatus_LastUpdatedAt                        smithy.SchemaExtensions
+	eExportStatus_LastRefreshedAt                      smithy.SchemaExtensions
+	eExportStatusCode                                  smithy.SchemaExtensions
+	eExportStatusCode_HEALTHY                          smithy.SchemaExtensions
+	eExportStatusCode_UNHEALTHY                        smithy.SchemaExtensions
+	eFormatOption                                      smithy.SchemaExtensions
+	eFormatOption_TEXT_OR_CSV                          smithy.SchemaExtensions
+	eFormatOption_PARQUET                              smithy.SchemaExtensions
+	eFrequencyOption                                   smithy.SchemaExtensions
+	eFrequencyOption_SYNCHRONOUS                       smithy.SchemaExtensions
+	e_GenericString                                    smithy.SchemaExtensions
+	e_GenericStringList                                smithy.SchemaExtensions
+	e_GenericStringList_member                         smithy.SchemaExtensions
+	eInternalServerException                           smithy.SchemaExtensions
+	eInternalServerException_Message                   smithy.SchemaExtensions
+	e_MaxResults                                       smithy.SchemaExtensions
+	e_NextPageToken                                    smithy.SchemaExtensions
+	eOverwriteOption                                   smithy.SchemaExtensions
+	eOverwriteOption_CREATE_NEW_REPORT                 smithy.SchemaExtensions
+	eOverwriteOption_OVERWRITE_REPORT                  smithy.SchemaExtensions
+	e_QueryStatement                                   smithy.SchemaExtensions
+	eRefreshCadence                                    smithy.SchemaExtensions
+	eRefreshCadence_Frequency                          smithy.SchemaExtensions
+	eResourceNotFoundException                         smithy.SchemaExtensions
+	eResourceNotFoundException_Message                 smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId              smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType            smithy.SchemaExtensions
+	eResourceTag                                       smithy.SchemaExtensions
+	eResourceTag_Key                                   smithy.SchemaExtensions
+	eResourceTag_Value                                 smithy.SchemaExtensions
+	e_ResourceTagKey                                   smithy.SchemaExtensions
+	e_ResourceTagKeyList                               smithy.SchemaExtensions
+	e_ResourceTagKeyList_member                        smithy.SchemaExtensions
+	e_ResourceTagList                                  smithy.SchemaExtensions
+	e_ResourceTagList_member                           smithy.SchemaExtensions
+	e_ResourceTagValue                                 smithy.SchemaExtensions
+	eS3Destination                                     smithy.SchemaExtensions
+	eS3Destination_S3Bucket                            smithy.SchemaExtensions
+	eS3Destination_S3BucketOwner                       smithy.SchemaExtensions
+	eS3Destination_S3Prefix                            smithy.SchemaExtensions
+	eS3Destination_S3Region                            smithy.SchemaExtensions
+	eS3Destination_S3OutputConfigurations              smithy.SchemaExtensions
+	eS3OutputConfigurations                            smithy.SchemaExtensions
+	eS3OutputConfigurations_OutputType                 smithy.SchemaExtensions
+	eS3OutputConfigurations_Format                     smithy.SchemaExtensions
+	eS3OutputConfigurations_Compression                smithy.SchemaExtensions
+	eS3OutputConfigurations_Overwrite                  smithy.SchemaExtensions
+	eS3OutputType                                      smithy.SchemaExtensions
+	eS3OutputType_CUSTOM                               smithy.SchemaExtensions
+	eS3OutputType_ATHENA                               smithy.SchemaExtensions
+	eS3OutputType_REDSHIFT                             smithy.SchemaExtensions
+	eServiceQuotaExceededException                     smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message             smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceId          smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceType        smithy.SchemaExtensions
+	eServiceQuotaExceededException_QuotaCode           smithy.SchemaExtensions
+	eServiceQuotaExceededException_ServiceCode         smithy.SchemaExtensions
+	eTable                                             smithy.SchemaExtensions
+	eTable_TableName                                   smithy.SchemaExtensions
+	eTable_Description                                 smithy.SchemaExtensions
+	eTable_TableProperties                             smithy.SchemaExtensions
+	e_TableConfigurations                              smithy.SchemaExtensions
+	e_TableConfigurations_key                          smithy.SchemaExtensions
+	e_TableConfigurations_value                        smithy.SchemaExtensions
+	e_TableList                                        smithy.SchemaExtensions
+	e_TableList_member                                 smithy.SchemaExtensions
+	e_TableName                                        smithy.SchemaExtensions
+	e_TableProperties                                  smithy.SchemaExtensions
+	e_TableProperties_key                              smithy.SchemaExtensions
+	e_TableProperties_value                            smithy.SchemaExtensions
+	e_TableProperty                                    smithy.SchemaExtensions
+	eTablePropertyDescription                          smithy.SchemaExtensions
+	eTablePropertyDescription_Name                     smithy.SchemaExtensions
+	eTablePropertyDescription_ValidValues              smithy.SchemaExtensions
+	eTablePropertyDescription_DefaultValue             smithy.SchemaExtensions
+	eTablePropertyDescription_Description              smithy.SchemaExtensions
+	e_TablePropertyDescriptionList                     smithy.SchemaExtensions
+	e_TablePropertyDescriptionList_member              smithy.SchemaExtensions
+	e_TablePropertyGenericString                       smithy.SchemaExtensions
+	eThrottlingException                               smithy.SchemaExtensions
+	eThrottlingException_Message                       smithy.SchemaExtensions
+	eThrottlingException_QuotaCode                     smithy.SchemaExtensions
+	eThrottlingException_ServiceCode                   smithy.SchemaExtensions
+	eValidationException                               smithy.SchemaExtensions
+	eValidationException_Message                       smithy.SchemaExtensions
+	eValidationException_Reason                        smithy.SchemaExtensions
+	eValidationException_Fields                        smithy.SchemaExtensions
+	eValidationExceptionField                          smithy.SchemaExtensions
+	eValidationExceptionField_Name                     smithy.SchemaExtensions
+	eValidationExceptionField_Message                  smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                     smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member              smithy.SchemaExtensions
+	eValidationExceptionReason                         smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION       smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE            smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                   smithy.SchemaExtensions
+	eCreateExportRequest                               smithy.SchemaExtensions
+	eCreateExportRequest_Export                        smithy.SchemaExtensions
+	eCreateExportRequest_ResourceTags                  smithy.SchemaExtensions
+	eCreateExportResponse                              smithy.SchemaExtensions
+	eCreateExportResponse_ExportArn                    smithy.SchemaExtensions
+	eDeleteExportRequest                               smithy.SchemaExtensions
+	eDeleteExportRequest_ExportArn                     smithy.SchemaExtensions
+	eDeleteExportResponse                              smithy.SchemaExtensions
+	eDeleteExportResponse_ExportArn                    smithy.SchemaExtensions
+	eGetExecutionRequest                               smithy.SchemaExtensions
+	eGetExecutionRequest_ExportArn                     smithy.SchemaExtensions
+	eGetExecutionRequest_ExecutionId                   smithy.SchemaExtensions
+	eGetExecutionResponse                              smithy.SchemaExtensions
+	eGetExecutionResponse_ExecutionId                  smithy.SchemaExtensions
+	eGetExecutionResponse_Export                       smithy.SchemaExtensions
+	eGetExecutionResponse_ExecutionStatus              smithy.SchemaExtensions
+	eGetExportRequest                                  smithy.SchemaExtensions
+	eGetExportRequest_ExportArn                        smithy.SchemaExtensions
+	eGetExportResponse                                 smithy.SchemaExtensions
+	eGetExportResponse_Export                          smithy.SchemaExtensions
+	eGetExportResponse_ExportStatus                    smithy.SchemaExtensions
+	eGetTableRequest                                   smithy.SchemaExtensions
+	eGetTableRequest_TableName                         smithy.SchemaExtensions
+	eGetTableRequest_TableProperties                   smithy.SchemaExtensions
+	eGetTableResponse                                  smithy.SchemaExtensions
+	eGetTableResponse_TableName                        smithy.SchemaExtensions
+	eGetTableResponse_Description                      smithy.SchemaExtensions
+	eGetTableResponse_TableProperties                  smithy.SchemaExtensions
+	eGetTableResponse_Schema                           smithy.SchemaExtensions
+	eListExecutionsRequest                             smithy.SchemaExtensions
+	eListExecutionsRequest_ExportArn                   smithy.SchemaExtensions
+	eListExecutionsRequest_MaxResults                  smithy.SchemaExtensions
+	eListExecutionsRequest_NextToken                   smithy.SchemaExtensions
+	eListExecutionsResponse                            smithy.SchemaExtensions
+	eListExecutionsResponse_Executions                 smithy.SchemaExtensions
+	eListExecutionsResponse_NextToken                  smithy.SchemaExtensions
+	eListExportsRequest                                smithy.SchemaExtensions
+	eListExportsRequest_MaxResults                     smithy.SchemaExtensions
+	eListExportsRequest_NextToken                      smithy.SchemaExtensions
+	eListExportsResponse                               smithy.SchemaExtensions
+	eListExportsResponse_Exports                       smithy.SchemaExtensions
+	eListExportsResponse_NextToken                     smithy.SchemaExtensions
+	eListTablesRequest                                 smithy.SchemaExtensions
+	eListTablesRequest_NextToken                       smithy.SchemaExtensions
+	eListTablesRequest_MaxResults                      smithy.SchemaExtensions
+	eListTablesResponse                                smithy.SchemaExtensions
+	eListTablesResponse_Tables                         smithy.SchemaExtensions
+	eListTablesResponse_NextToken                      smithy.SchemaExtensions
+	eListTagsForResourceRequest                        smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn            smithy.SchemaExtensions
+	eListTagsForResourceRequest_MaxResults             smithy.SchemaExtensions
+	eListTagsForResourceRequest_NextToken              smithy.SchemaExtensions
+	eListTagsForResourceResponse                       smithy.SchemaExtensions
+	eListTagsForResourceResponse_ResourceTags          smithy.SchemaExtensions
+	eListTagsForResourceResponse_NextToken             smithy.SchemaExtensions
+	eTagResourceRequest                                smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                    smithy.SchemaExtensions
+	eTagResourceRequest_ResourceTags                   smithy.SchemaExtensions
+	eTagResourceResponse                               smithy.SchemaExtensions
+	eUntagResourceRequest                              smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                  smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceTagKeys              smithy.SchemaExtensions
+	eUntagResourceResponse                             smithy.SchemaExtensions
+	eUpdateExportRequest                               smithy.SchemaExtensions
+	eUpdateExportRequest_ExportArn                     smithy.SchemaExtensions
+	eUpdateExportRequest_Export                        smithy.SchemaExtensions
+	eUpdateExportResponse                              smithy.SchemaExtensions
+	eUpdateExportResponse_ExportArn                    smithy.SchemaExtensions
+)
+
+var (
+	iCreateExport                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "CreateExport"}
+	iDeleteExport                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "DeleteExport"}
+	iGetExecution                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetExecution"}
+	iGetExport                               = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetExport"}
+	iGetTable                                = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetTable"}
+	iListExecutions                          = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListExecutions"}
+	iListExports                             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListExports"}
+	iListTables                              = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListTables"}
+	iListTagsForResource                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListTagsForResource"}
+	iTagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "UntagResource"}
+	iUpdateExport                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "UpdateExport"}
+	i_AWSBillingAndCostManagementDataExports = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "AWSBillingAndCostManagementDataExports"}
+	iAccessDeniedException                   = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "AccessDeniedException"}
+	i_AccountId                              = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "AccountId"}
+	i_Arn                                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "Arn"}
+	iColumn                                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "Column"}
+	i_ColumnList                             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ColumnList"}
+	iCompressionOption                       = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "CompressionOption"}
+	iDataQuery                               = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "DataQuery"}
+	iDestinationConfigurations               = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "DestinationConfigurations"}
+	iExecutionReference                      = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExecutionReference"}
+	i_ExecutionReferenceList                 = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExecutionReferenceList"}
+	iExecutionStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExecutionStatus"}
+	iExecutionStatusCode                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExecutionStatusCode"}
+	iExecutionStatusReason                   = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExecutionStatusReason"}
+	iExport                                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "Export"}
+	i_ExportName                             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExportName"}
+	iExportReference                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExportReference"}
+	i_ExportReferenceList                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExportReferenceList"}
+	iExportStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExportStatus"}
+	iExportStatusCode                        = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ExportStatusCode"}
+	iFormatOption                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "FormatOption"}
+	iFrequencyOption                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "FrequencyOption"}
+	i_GenericString                          = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GenericString"}
+	i_GenericStringList                      = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GenericStringList"}
+	iInternalServerException                 = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "InternalServerException"}
+	i_MaxResults                             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "MaxResults"}
+	i_NextPageToken                          = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "NextPageToken"}
+	iOverwriteOption                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "OverwriteOption"}
+	i_QueryStatement                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "QueryStatement"}
+	iRefreshCadence                          = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "RefreshCadence"}
+	iResourceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ResourceNotFoundException"}
+	iResourceTag                             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ResourceTag"}
+	i_ResourceTagKey                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ResourceTagKey"}
+	i_ResourceTagKeyList                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ResourceTagKeyList"}
+	i_ResourceTagList                        = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ResourceTagList"}
+	i_ResourceTagValue                       = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ResourceTagValue"}
+	iS3Destination                           = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "S3Destination"}
+	iS3OutputConfigurations                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "S3OutputConfigurations"}
+	iS3OutputType                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "S3OutputType"}
+	iServiceQuotaExceededException           = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ServiceQuotaExceededException"}
+	iTable                                   = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "Table"}
+	i_TableConfigurations                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TableConfigurations"}
+	i_TableList                              = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TableList"}
+	i_TableName                              = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TableName"}
+	i_TableProperties                        = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TableProperties"}
+	i_TableProperty                          = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TableProperty"}
+	iTablePropertyDescription                = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TablePropertyDescription"}
+	i_TablePropertyDescriptionList           = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TablePropertyDescriptionList"}
+	i_TablePropertyGenericString             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TablePropertyGenericString"}
+	iThrottlingException                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ThrottlingException"}
+	iValidationException                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ValidationException"}
+	iValidationExceptionField                = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList           = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason               = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ValidationExceptionReason"}
+	iCreateExportRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "CreateExportRequest"}
+	iCreateExportResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "CreateExportResponse"}
+	iDeleteExportRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "DeleteExportRequest"}
+	iDeleteExportResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "DeleteExportResponse"}
+	iGetExecutionRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetExecutionRequest"}
+	iGetExecutionResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetExecutionResponse"}
+	iGetExportRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetExportRequest"}
+	iGetExportResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetExportResponse"}
+	iGetTableRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetTableRequest"}
+	iGetTableResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "GetTableResponse"}
+	iListExecutionsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListExecutionsRequest"}
+	iListExecutionsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListExecutionsResponse"}
+	iListExportsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListExportsRequest"}
+	iListExportsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListExportsResponse"}
+	iListTablesRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListTablesRequest"}
+	iListTablesResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListTablesResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "ListTagsForResourceResponse"}
+	iTagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TagResourceRequest"}
+	iTagResourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "TagResourceResponse"}
+	iUntagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "UntagResourceResponse"}
+	iUpdateExportRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "UpdateExportRequest"}
+	iUpdateExportResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmdataexports", Name: "UpdateExportResponse"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mColumn = smithy.SchemaMembers{List: []*smithy.Schema{&sColumn_Name, &sColumn_Type, &sColumn_Description}}
+var m_ColumnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnList_member}}
+var mCompressionOption = smithy.SchemaMembers{List: []*smithy.Schema{&sCompressionOption_GZIP, &sCompressionOption_PARQUET, &sCompressionOption_ZIP}}
+var mDataQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sDataQuery_QueryStatement, &sDataQuery_TableConfigurations}}
+var mDestinationConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationConfigurations_S3Destination}}
+var mExecutionReference = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionReference_ExecutionId, &sExecutionReference_ExecutionStatus}}
+var m_ExecutionReferenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExecutionReferenceList_member}}
+var mExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionStatus_StatusCode, &sExecutionStatus_StatusReason, &sExecutionStatus_CreatedAt, &sExecutionStatus_CompletedAt, &sExecutionStatus_LastUpdatedAt}}
+var mExecutionStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionStatusCode_INITIATION_IN_PROCESS, &sExecutionStatusCode_QUERY_QUEUED, &sExecutionStatusCode_QUERY_IN_PROCESS, &sExecutionStatusCode_QUERY_FAILURE, &sExecutionStatusCode_DELIVERY_IN_PROCESS, &sExecutionStatusCode_DELIVERY_SUCCESS, &sExecutionStatusCode_DELIVERY_FAILURE}}
+var mExecutionStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionStatusReason_INSUFFICIENT_PERMISSION, &sExecutionStatusReason_BILL_OWNER_CHANGED, &sExecutionStatusReason_INTERNAL_FAILURE, &sExecutionStatusReason_DEPRECATED}}
+var mExport = smithy.SchemaMembers{List: []*smithy.Schema{&sExport_ExportArn, &sExport_Name, &sExport_Description, &sExport_DataQuery, &sExport_DestinationConfigurations, &sExport_RefreshCadence}}
+var mExportReference = smithy.SchemaMembers{List: []*smithy.Schema{&sExportReference_ExportArn, &sExportReference_ExportName, &sExportReference_ExportStatus}}
+var m_ExportReferenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExportReferenceList_member}}
+var mExportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExportStatus_StatusCode, &sExportStatus_StatusReason, &sExportStatus_CreatedAt, &sExportStatus_LastUpdatedAt, &sExportStatus_LastRefreshedAt}}
+var mExportStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sExportStatusCode_HEALTHY, &sExportStatusCode_UNHEALTHY}}
+var mFormatOption = smithy.SchemaMembers{List: []*smithy.Schema{&sFormatOption_TEXT_OR_CSV, &sFormatOption_PARQUET}}
+var mFrequencyOption = smithy.SchemaMembers{List: []*smithy.Schema{&sFrequencyOption_SYNCHRONOUS}}
+var m_GenericStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GenericStringList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mOverwriteOption = smithy.SchemaMembers{List: []*smithy.Schema{&sOverwriteOption_CREATE_NEW_REPORT, &sOverwriteOption_OVERWRITE_REPORT}}
+var mRefreshCadence = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshCadence_Frequency}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_ResourceType}}
+var mResourceTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTag_Key, &sResourceTag_Value}}
+var m_ResourceTagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagKeyList_member}}
+var m_ResourceTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagList_member}}
+var mS3Destination = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Destination_S3Bucket, &sS3Destination_S3BucketOwner, &sS3Destination_S3Prefix, &sS3Destination_S3Region, &sS3Destination_S3OutputConfigurations}}
+var mS3OutputConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&sS3OutputConfigurations_OutputType, &sS3OutputConfigurations_Format, &sS3OutputConfigurations_Compression, &sS3OutputConfigurations_Overwrite}}
+var mS3OutputType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3OutputType_CUSTOM, &sS3OutputType_ATHENA, &sS3OutputType_REDSHIFT}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_ResourceId, &sServiceQuotaExceededException_ResourceType, &sServiceQuotaExceededException_QuotaCode, &sServiceQuotaExceededException_ServiceCode}}
+var mTable = smithy.SchemaMembers{List: []*smithy.Schema{&sTable_TableName, &sTable_Description, &sTable_TableProperties}}
+var m_TableConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableConfigurations_key, &s_TableConfigurations_value}}
+var m_TableList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableList_member}}
+var m_TableProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableProperties_key, &s_TableProperties_value}}
+var mTablePropertyDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sTablePropertyDescription_Name, &sTablePropertyDescription_ValidValues, &sTablePropertyDescription_DefaultValue, &sTablePropertyDescription_Description}}
+var m_TablePropertyDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TablePropertyDescriptionList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message, &sThrottlingException_QuotaCode, &sThrottlingException_ServiceCode}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Reason, &sValidationException_Fields}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_Name, &sValidationExceptionField_Message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mCreateExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExportRequest_Export, &sCreateExportRequest_ResourceTags}}
+var mCreateExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExportResponse_ExportArn}}
+var mDeleteExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExportRequest_ExportArn}}
+var mDeleteExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExportResponse_ExportArn}}
+var mGetExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExecutionRequest_ExportArn, &sGetExecutionRequest_ExecutionId}}
+var mGetExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExecutionResponse_ExecutionId, &sGetExecutionResponse_Export, &sGetExecutionResponse_ExecutionStatus}}
+var mGetExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExportRequest_ExportArn}}
+var mGetExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExportResponse_Export, &sGetExportResponse_ExportStatus}}
+var mGetTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableRequest_TableName, &sGetTableRequest_TableProperties}}
+var mGetTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableResponse_TableName, &sGetTableResponse_Description, &sGetTableResponse_TableProperties, &sGetTableResponse_Schema}}
+var mListExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutionsRequest_ExportArn, &sListExecutionsRequest_MaxResults, &sListExecutionsRequest_NextToken}}
+var mListExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutionsResponse_Executions, &sListExecutionsResponse_NextToken}}
+var mListExportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExportsRequest_MaxResults, &sListExportsRequest_NextToken}}
+var mListExportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListExportsResponse_Exports, &sListExportsResponse_NextToken}}
+var mListTablesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesRequest_NextToken, &sListTablesRequest_MaxResults}}
+var mListTablesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesResponse_Tables, &sListTablesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn, &sListTagsForResourceRequest_MaxResults, &sListTagsForResourceRequest_NextToken}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_ResourceTags, &sListTagsForResourceResponse_NextToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_ResourceTags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_ResourceTagKeys}}
+var mUpdateExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateExportRequest_ExportArn, &sUpdateExportRequest_Export}}
+var mUpdateExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateExportResponse_ExportArn}}
+
+var sCreateExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExport, Type: smithy.ShapeTypeOperation, Ext: &eCreateExport})
+var sDeleteExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExport, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExport})
+var sGetExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExecution, Type: smithy.ShapeTypeOperation, Ext: &eGetExecution})
+var sGetExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExport, Type: smithy.ShapeTypeOperation, Ext: &eGetExport})
+var sGetTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTable, Type: smithy.ShapeTypeOperation, Ext: &eGetTable})
+var sListExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutions, Type: smithy.ShapeTypeOperation, Ext: &eListExecutions})
+var sListExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExports, Type: smithy.ShapeTypeOperation, Ext: &eListExports})
+var sListTables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTables, Type: smithy.ShapeTypeOperation, Ext: &eListTables})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExport, Type: smithy.ShapeTypeOperation, Ext: &eUpdateExport})
+var s_AWSBillingAndCostManagementDataExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBillingAndCostManagementDataExports, Type: smithy.ShapeTypeService, Ext: &e_AWSBillingAndCostManagementDataExports})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sColumn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumn, Members: &mColumn, Type: smithy.ShapeTypeStructure, Ext: &eColumn})
+var sColumn_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eColumn_Name})
+var sColumn_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eColumn_Type})
+var sColumn_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eColumn_Description})
+var s_ColumnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnList, Members: &m_ColumnList, Type: smithy.ShapeTypeList, Ext: &e_ColumnList})
+var s_ColumnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumn, Members: &mColumn, Type: smithy.ShapeTypeStructure, Ext: &e_ColumnList_member})
+var sCompressionOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionOption, Members: &mCompressionOption, Type: smithy.ShapeTypeEnum, Ext: &eCompressionOption})
+var sCompressionOption_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionOption_GZIP})
+var sCompressionOption_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionOption_PARQUET})
+var sCompressionOption_ZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionOption_ZIP})
+var sDataQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataQuery, Members: &mDataQuery, Type: smithy.ShapeTypeStructure, Ext: &eDataQuery})
+var sDataQuery_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryStatement, Type: smithy.ShapeTypeString, Ext: &eDataQuery_QueryStatement})
+var sDataQuery_TableConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableConfigurations", ID: &i_TableConfigurations, Members: &m_TableConfigurations, Type: smithy.ShapeTypeMap, Ext: &eDataQuery_TableConfigurations})
+var sDestinationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfigurations, Members: &mDestinationConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfigurations})
+var sDestinationConfigurations_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfigurations_S3Destination})
+var sExecutionReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionReference, Members: &mExecutionReference, Type: smithy.ShapeTypeStructure, Ext: &eExecutionReference})
+var sExecutionReference_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eExecutionReference_ExecutionId})
+var sExecutionReference_ExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionStatus", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeStructure, Ext: &eExecutionReference_ExecutionStatus})
+var s_ExecutionReferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionReferenceList, Members: &m_ExecutionReferenceList, Type: smithy.ShapeTypeList, Ext: &e_ExecutionReferenceList})
+var s_ExecutionReferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExecutionReference, Members: &mExecutionReference, Type: smithy.ShapeTypeStructure, Ext: &e_ExecutionReferenceList_member})
+var sExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatus})
+var sExecutionStatus_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iExecutionStatusCode, Members: &mExecutionStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eExecutionStatus_StatusCode})
+var sExecutionStatus_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iExecutionStatusReason, Members: &mExecutionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eExecutionStatus_StatusReason})
+var sExecutionStatus_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eExecutionStatus_CreatedAt})
+var sExecutionStatus_CompletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eExecutionStatus_CompletedAt})
+var sExecutionStatus_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eExecutionStatus_LastUpdatedAt})
+var sExecutionStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionStatusCode, Members: &mExecutionStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eExecutionStatusCode})
+var sExecutionStatusCode_INITIATION_IN_PROCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIATION_IN_PROCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusCode_INITIATION_IN_PROCESS})
+var sExecutionStatusCode_QUERY_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY_QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusCode_QUERY_QUEUED})
+var sExecutionStatusCode_QUERY_IN_PROCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY_IN_PROCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusCode_QUERY_IN_PROCESS})
+var sExecutionStatusCode_QUERY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusCode_QUERY_FAILURE})
+var sExecutionStatusCode_DELIVERY_IN_PROCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY_IN_PROCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusCode_DELIVERY_IN_PROCESS})
+var sExecutionStatusCode_DELIVERY_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusCode_DELIVERY_SUCCESS})
+var sExecutionStatusCode_DELIVERY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusCode_DELIVERY_FAILURE})
+var sExecutionStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionStatusReason, Members: &mExecutionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eExecutionStatusReason})
+var sExecutionStatusReason_INSUFFICIENT_PERMISSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_PERMISSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusReason_INSUFFICIENT_PERMISSION})
+var sExecutionStatusReason_BILL_OWNER_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILL_OWNER_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusReason_BILL_OWNER_CHANGED})
+var sExecutionStatusReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusReason_INTERNAL_FAILURE})
+var sExecutionStatusReason_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionStatusReason_DEPRECATED})
+var sExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExport, Members: &mExport, Type: smithy.ShapeTypeStructure, Ext: &eExport})
+var sExport_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExport_ExportArn})
+var sExport_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ExportName, Type: smithy.ShapeTypeString, Ext: &eExport_Name})
+var sExport_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eExport_Description})
+var sExport_DataQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataQuery", ID: &iDataQuery, Members: &mDataQuery, Type: smithy.ShapeTypeStructure, Ext: &eExport_DataQuery})
+var sExport_DestinationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationConfigurations", ID: &iDestinationConfigurations, Members: &mDestinationConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eExport_DestinationConfigurations})
+var sExport_RefreshCadence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshCadence", ID: &iRefreshCadence, Members: &mRefreshCadence, Type: smithy.ShapeTypeStructure, Ext: &eExport_RefreshCadence})
+var s_ExportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportName, Type: smithy.ShapeTypeString, Ext: &e_ExportName})
+var sExportReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportReference, Members: &mExportReference, Type: smithy.ShapeTypeStructure, Ext: &eExportReference})
+var sExportReference_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExportReference_ExportArn})
+var sExportReference_ExportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportName", ID: &i_ExportName, Type: smithy.ShapeTypeString, Ext: &eExportReference_ExportName})
+var sExportReference_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeStructure, Ext: &eExportReference_ExportStatus})
+var s_ExportReferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportReferenceList, Members: &m_ExportReferenceList, Type: smithy.ShapeTypeList, Ext: &e_ExportReferenceList})
+var s_ExportReferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExportReference, Members: &mExportReference, Type: smithy.ShapeTypeStructure, Ext: &e_ExportReferenceList_member})
+var sExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeStructure, Ext: &eExportStatus})
+var sExportStatus_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iExportStatusCode, Members: &mExportStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eExportStatus_StatusCode})
+var sExportStatus_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iExecutionStatusReason, Members: &mExecutionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eExportStatus_StatusReason})
+var sExportStatus_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eExportStatus_CreatedAt})
+var sExportStatus_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eExportStatus_LastUpdatedAt})
+var sExportStatus_LastRefreshedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRefreshedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eExportStatus_LastRefreshedAt})
+var sExportStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStatusCode, Members: &mExportStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eExportStatusCode})
+var sExportStatusCode_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportStatusCode_HEALTHY})
+var sExportStatusCode_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportStatusCode_UNHEALTHY})
+var sFormatOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormatOption, Members: &mFormatOption, Type: smithy.ShapeTypeEnum, Ext: &eFormatOption})
+var sFormatOption_TEXT_OR_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT_OR_CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormatOption_TEXT_OR_CSV})
+var sFormatOption_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormatOption_PARQUET})
+var sFrequencyOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrequencyOption, Members: &mFrequencyOption, Type: smithy.ShapeTypeEnum, Ext: &eFrequencyOption})
+var sFrequencyOption_SYNCHRONOUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNCHRONOUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFrequencyOption_SYNCHRONOUS})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_GenericString})
+var s_GenericStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericStringList, Members: &m_GenericStringList, Type: smithy.ShapeTypeList, Ext: &e_GenericStringList})
+var s_GenericStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_GenericStringList_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &e_NextPageToken})
+var sOverwriteOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverwriteOption, Members: &mOverwriteOption, Type: smithy.ShapeTypeEnum, Ext: &eOverwriteOption})
+var sOverwriteOption_CREATE_NEW_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_NEW_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverwriteOption_CREATE_NEW_REPORT})
+var sOverwriteOption_OVERWRITE_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERWRITE_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverwriteOption_OVERWRITE_REPORT})
+var s_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStatement, Type: smithy.ShapeTypeString, Ext: &e_QueryStatement})
+var sRefreshCadence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshCadence, Members: &mRefreshCadence, Type: smithy.ShapeTypeStructure, Ext: &eRefreshCadence})
+var sRefreshCadence_Frequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Frequency", ID: &iFrequencyOption, Members: &mFrequencyOption, Type: smithy.ShapeTypeEnum, Ext: &eRefreshCadence_Frequency})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &eResourceTag})
+var sResourceTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &eResourceTag_Key})
+var sResourceTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &eResourceTag_Value})
+var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagKey})
+var s_ResourceTagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTagKeyList})
+var s_ResourceTagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagKeyList_member})
+var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTagList})
+var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceTagList_member})
+var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagValue})
+var sS3Destination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Destination, Members: &mS3Destination, Type: smithy.ShapeTypeStructure, Ext: &eS3Destination})
+var sS3Destination_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eS3Destination_S3Bucket})
+var sS3Destination_S3BucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eS3Destination_S3BucketOwner})
+var sS3Destination_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Prefix", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eS3Destination_S3Prefix})
+var sS3Destination_S3Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Region", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eS3Destination_S3Region})
+var sS3Destination_S3OutputConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OutputConfigurations", ID: &iS3OutputConfigurations, Members: &mS3OutputConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eS3Destination_S3OutputConfigurations})
+var sS3OutputConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3OutputConfigurations, Members: &mS3OutputConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eS3OutputConfigurations})
+var sS3OutputConfigurations_OutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputType", ID: &iS3OutputType, Members: &mS3OutputType, Type: smithy.ShapeTypeEnum, Ext: &eS3OutputConfigurations_OutputType})
+var sS3OutputConfigurations_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iFormatOption, Members: &mFormatOption, Type: smithy.ShapeTypeEnum, Ext: &eS3OutputConfigurations_Format})
+var sS3OutputConfigurations_Compression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compression", ID: &iCompressionOption, Members: &mCompressionOption, Type: smithy.ShapeTypeEnum, Ext: &eS3OutputConfigurations_Compression})
+var sS3OutputConfigurations_Overwrite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overwrite", ID: &iOverwriteOption, Members: &mOverwriteOption, Type: smithy.ShapeTypeEnum, Ext: &eS3OutputConfigurations_Overwrite})
+var sS3OutputType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3OutputType, Members: &mS3OutputType, Type: smithy.ShapeTypeEnum, Ext: &eS3OutputType})
+var sS3OutputType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3OutputType_CUSTOM})
+var sS3OutputType_ATHENA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATHENA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3OutputType_ATHENA})
+var sS3OutputType_REDSHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDSHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3OutputType_REDSHIFT})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceId})
+var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceType})
+var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_QuotaCode})
+var sServiceQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ServiceCode})
+var sTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTable, Members: &mTable, Type: smithy.ShapeTypeStructure, Ext: &eTable})
+var sTable_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eTable_TableName})
+var sTable_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eTable_Description})
+var sTable_TableProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableProperties", ID: &i_TablePropertyDescriptionList, Members: &m_TablePropertyDescriptionList, Type: smithy.ShapeTypeList, Ext: &eTable_TableProperties})
+var s_TableConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableConfigurations, Members: &m_TableConfigurations, Type: smithy.ShapeTypeMap, Ext: &e_TableConfigurations})
+var s_TableConfigurations_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &e_TableConfigurations_key})
+var s_TableConfigurations_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TableProperties, Members: &m_TableProperties, Type: smithy.ShapeTypeMap, Ext: &e_TableConfigurations_value})
+var s_TableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableList, Members: &m_TableList, Type: smithy.ShapeTypeList, Ext: &e_TableList})
+var s_TableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTable, Members: &mTable, Type: smithy.ShapeTypeStructure, Ext: &e_TableList_member})
+var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &e_TableName})
+var s_TableProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableProperties, Members: &m_TableProperties, Type: smithy.ShapeTypeMap, Ext: &e_TableProperties})
+var s_TableProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TableProperty, Type: smithy.ShapeTypeString, Ext: &e_TableProperties_key})
+var s_TableProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TablePropertyGenericString, Type: smithy.ShapeTypeString, Ext: &e_TableProperties_value})
+var s_TableProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableProperty, Type: smithy.ShapeTypeString, Ext: &e_TableProperty})
+var sTablePropertyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTablePropertyDescription, Members: &mTablePropertyDescription, Type: smithy.ShapeTypeStructure, Ext: &eTablePropertyDescription})
+var sTablePropertyDescription_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eTablePropertyDescription_Name})
+var sTablePropertyDescription_ValidValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidValues", ID: &i_GenericStringList, Members: &m_GenericStringList, Type: smithy.ShapeTypeList, Ext: &eTablePropertyDescription_ValidValues})
+var sTablePropertyDescription_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eTablePropertyDescription_DefaultValue})
+var sTablePropertyDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eTablePropertyDescription_Description})
+var s_TablePropertyDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TablePropertyDescriptionList, Members: &m_TablePropertyDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_TablePropertyDescriptionList})
+var s_TablePropertyDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTablePropertyDescription, Members: &mTablePropertyDescription, Type: smithy.ShapeTypeStructure, Ext: &e_TablePropertyDescriptionList_member})
+var s_TablePropertyGenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TablePropertyGenericString, Type: smithy.ShapeTypeString, Ext: &e_TablePropertyGenericString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sThrottlingException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_QuotaCode})
+var sThrottlingException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_ServiceCode})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationException_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_Fields})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Name})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sCreateExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExportRequest, Members: &mCreateExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExportRequest})
+var sCreateExportRequest_Export = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Export", ID: &iExport, Members: &mExport, Type: smithy.ShapeTypeStructure, Ext: &eCreateExportRequest_Export})
+var sCreateExportRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eCreateExportRequest_ResourceTags})
+var sCreateExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExportResponse, Members: &mCreateExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateExportResponse})
+var sCreateExportResponse_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateExportResponse_ExportArn})
+var sDeleteExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExportRequest, Members: &mDeleteExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExportRequest})
+var sDeleteExportRequest_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteExportRequest_ExportArn})
+var sDeleteExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExportResponse, Members: &mDeleteExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExportResponse})
+var sDeleteExportResponse_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteExportResponse_ExportArn})
+var sGetExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExecutionRequest, Members: &mGetExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExecutionRequest})
+var sGetExecutionRequest_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetExecutionRequest_ExportArn})
+var sGetExecutionRequest_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eGetExecutionRequest_ExecutionId})
+var sGetExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExecutionResponse, Members: &mGetExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetExecutionResponse})
+var sGetExecutionResponse_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eGetExecutionResponse_ExecutionId})
+var sGetExecutionResponse_Export = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Export", ID: &iExport, Members: &mExport, Type: smithy.ShapeTypeStructure, Ext: &eGetExecutionResponse_Export})
+var sGetExecutionResponse_ExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionStatus", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeStructure, Ext: &eGetExecutionResponse_ExecutionStatus})
+var sGetExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExportRequest, Members: &mGetExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExportRequest})
+var sGetExportRequest_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetExportRequest_ExportArn})
+var sGetExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExportResponse, Members: &mGetExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetExportResponse})
+var sGetExportResponse_Export = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Export", ID: &iExport, Members: &mExport, Type: smithy.ShapeTypeStructure, Ext: &eGetExportResponse_Export})
+var sGetExportResponse_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeStructure, Ext: &eGetExportResponse_ExportStatus})
+var sGetTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRequest, Members: &mGetTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRequest})
+var sGetTableRequest_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eGetTableRequest_TableName})
+var sGetTableRequest_TableProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableProperties", ID: &i_TableProperties, Members: &m_TableProperties, Type: smithy.ShapeTypeMap, Ext: &eGetTableRequest_TableProperties})
+var sGetTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableResponse, Members: &mGetTableResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableResponse})
+var sGetTableResponse_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_TableName})
+var sGetTableResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_Description})
+var sGetTableResponse_TableProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableProperties", ID: &i_TableProperties, Members: &m_TableProperties, Type: smithy.ShapeTypeMap, Ext: &eGetTableResponse_TableProperties})
+var sGetTableResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_ColumnList, Members: &m_ColumnList, Type: smithy.ShapeTypeList, Ext: &eGetTableResponse_Schema})
+var sListExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutionsRequest, Members: &mListExecutionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExecutionsRequest})
+var sListExecutionsRequest_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListExecutionsRequest_ExportArn})
+var sListExecutionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListExecutionsRequest_MaxResults})
+var sListExecutionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListExecutionsRequest_NextToken})
+var sListExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutionsResponse, Members: &mListExecutionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExecutionsResponse})
+var sListExecutionsResponse_Executions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Executions", ID: &i_ExecutionReferenceList, Members: &m_ExecutionReferenceList, Type: smithy.ShapeTypeList, Ext: &eListExecutionsResponse_Executions})
+var sListExecutionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListExecutionsResponse_NextToken})
+var sListExportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExportsRequest, Members: &mListExportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExportsRequest})
+var sListExportsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListExportsRequest_MaxResults})
+var sListExportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListExportsRequest_NextToken})
+var sListExportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExportsResponse, Members: &mListExportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExportsResponse})
+var sListExportsResponse_Exports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exports", ID: &i_ExportReferenceList, Members: &m_ExportReferenceList, Type: smithy.ShapeTypeList, Ext: &eListExportsResponse_Exports})
+var sListExportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListExportsResponse_NextToken})
+var sListTablesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesRequest, Members: &mListTablesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTablesRequest})
+var sListTablesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListTablesRequest_NextToken})
+var sListTablesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTablesRequest_MaxResults})
+var sListTablesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesResponse, Members: &mListTablesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTablesResponse})
+var sListTablesResponse_Tables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tables", ID: &i_TableList, Members: &m_TableList, Type: smithy.ShapeTypeList, Ext: &eListTablesResponse_Tables})
+var sListTablesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListTablesResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceRequest_MaxResults})
+var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_NextToken})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_ResourceTags})
+var sListTagsForResourceResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceResponse_NextToken})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_ResourceTags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_ResourceTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagKeys", ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_ResourceTagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExportRequest, Members: &mUpdateExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExportRequest})
+var sUpdateExportRequest_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateExportRequest_ExportArn})
+var sUpdateExportRequest_Export = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Export", ID: &iExport, Members: &mExport, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExportRequest_Export})
+var sUpdateExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExportResponse, Members: &mUpdateExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExportResponse})
+var sUpdateExportResponse_ExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateExportResponse_ExportArn})
+
+var CreateExport = &sCreateExport
+
+var DeleteExport = &sDeleteExport
+
+var GetExecution = &sGetExecution
+
+var GetExport = &sGetExport
+
+var GetTable = &sGetTable
+
+var ListExecutions = &sListExecutions
+
+var ListExports = &sListExports
+
+var ListTables = &sListTables
+
+var ListTagsForResource = &sListTagsForResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateExport = &sUpdateExport
+
+var _AWSBillingAndCostManagementDataExports = &s_AWSBillingAndCostManagementDataExports
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var _Arn = &s_Arn
+
+var Column = &sColumn
+var Column_Name = &sColumn_Name
+var Column_Type = &sColumn_Type
+var Column_Description = &sColumn_Description
+
+var _ColumnList = &s_ColumnList
+var _ColumnList_member = &s_ColumnList_member
+
+var CompressionOption = &sCompressionOption
+var CompressionOption_GZIP = &sCompressionOption_GZIP
+var CompressionOption_PARQUET = &sCompressionOption_PARQUET
+var CompressionOption_ZIP = &sCompressionOption_ZIP
+
+var DataQuery = &sDataQuery
+var DataQuery_QueryStatement = &sDataQuery_QueryStatement
+var DataQuery_TableConfigurations = &sDataQuery_TableConfigurations
+
+var DestinationConfigurations = &sDestinationConfigurations
+var DestinationConfigurations_S3Destination = &sDestinationConfigurations_S3Destination
+
+var ExecutionReference = &sExecutionReference
+var ExecutionReference_ExecutionId = &sExecutionReference_ExecutionId
+var ExecutionReference_ExecutionStatus = &sExecutionReference_ExecutionStatus
+
+var _ExecutionReferenceList = &s_ExecutionReferenceList
+var _ExecutionReferenceList_member = &s_ExecutionReferenceList_member
+
+var ExecutionStatus = &sExecutionStatus
+var ExecutionStatus_StatusCode = &sExecutionStatus_StatusCode
+var ExecutionStatus_StatusReason = &sExecutionStatus_StatusReason
+var ExecutionStatus_CreatedAt = &sExecutionStatus_CreatedAt
+var ExecutionStatus_CompletedAt = &sExecutionStatus_CompletedAt
+var ExecutionStatus_LastUpdatedAt = &sExecutionStatus_LastUpdatedAt
+
+var ExecutionStatusCode = &sExecutionStatusCode
+var ExecutionStatusCode_INITIATION_IN_PROCESS = &sExecutionStatusCode_INITIATION_IN_PROCESS
+var ExecutionStatusCode_QUERY_QUEUED = &sExecutionStatusCode_QUERY_QUEUED
+var ExecutionStatusCode_QUERY_IN_PROCESS = &sExecutionStatusCode_QUERY_IN_PROCESS
+var ExecutionStatusCode_QUERY_FAILURE = &sExecutionStatusCode_QUERY_FAILURE
+var ExecutionStatusCode_DELIVERY_IN_PROCESS = &sExecutionStatusCode_DELIVERY_IN_PROCESS
+var ExecutionStatusCode_DELIVERY_SUCCESS = &sExecutionStatusCode_DELIVERY_SUCCESS
+var ExecutionStatusCode_DELIVERY_FAILURE = &sExecutionStatusCode_DELIVERY_FAILURE
+
+var ExecutionStatusReason = &sExecutionStatusReason
+var ExecutionStatusReason_INSUFFICIENT_PERMISSION = &sExecutionStatusReason_INSUFFICIENT_PERMISSION
+var ExecutionStatusReason_BILL_OWNER_CHANGED = &sExecutionStatusReason_BILL_OWNER_CHANGED
+var ExecutionStatusReason_INTERNAL_FAILURE = &sExecutionStatusReason_INTERNAL_FAILURE
+var ExecutionStatusReason_DEPRECATED = &sExecutionStatusReason_DEPRECATED
+
+var Export = &sExport
+var Export_ExportArn = &sExport_ExportArn
+var Export_Name = &sExport_Name
+var Export_Description = &sExport_Description
+var Export_DataQuery = &sExport_DataQuery
+var Export_DestinationConfigurations = &sExport_DestinationConfigurations
+var Export_RefreshCadence = &sExport_RefreshCadence
+
+var _ExportName = &s_ExportName
+
+var ExportReference = &sExportReference
+var ExportReference_ExportArn = &sExportReference_ExportArn
+var ExportReference_ExportName = &sExportReference_ExportName
+var ExportReference_ExportStatus = &sExportReference_ExportStatus
+
+var _ExportReferenceList = &s_ExportReferenceList
+var _ExportReferenceList_member = &s_ExportReferenceList_member
+
+var ExportStatus = &sExportStatus
+var ExportStatus_StatusCode = &sExportStatus_StatusCode
+var ExportStatus_StatusReason = &sExportStatus_StatusReason
+var ExportStatus_CreatedAt = &sExportStatus_CreatedAt
+var ExportStatus_LastUpdatedAt = &sExportStatus_LastUpdatedAt
+var ExportStatus_LastRefreshedAt = &sExportStatus_LastRefreshedAt
+
+var ExportStatusCode = &sExportStatusCode
+var ExportStatusCode_HEALTHY = &sExportStatusCode_HEALTHY
+var ExportStatusCode_UNHEALTHY = &sExportStatusCode_UNHEALTHY
+
+var FormatOption = &sFormatOption
+var FormatOption_TEXT_OR_CSV = &sFormatOption_TEXT_OR_CSV
+var FormatOption_PARQUET = &sFormatOption_PARQUET
+
+var FrequencyOption = &sFrequencyOption
+var FrequencyOption_SYNCHRONOUS = &sFrequencyOption_SYNCHRONOUS
+
+var _GenericString = &s_GenericString
+
+var _GenericStringList = &s_GenericStringList
+var _GenericStringList_member = &s_GenericStringList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var _MaxResults = &s_MaxResults
+
+var _NextPageToken = &s_NextPageToken
+
+var OverwriteOption = &sOverwriteOption
+var OverwriteOption_CREATE_NEW_REPORT = &sOverwriteOption_CREATE_NEW_REPORT
+var OverwriteOption_OVERWRITE_REPORT = &sOverwriteOption_OVERWRITE_REPORT
+
+var _QueryStatement = &s_QueryStatement
+
+var RefreshCadence = &sRefreshCadence
+var RefreshCadence_Frequency = &sRefreshCadence_Frequency
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+
+var ResourceTag = &sResourceTag
+var ResourceTag_Key = &sResourceTag_Key
+var ResourceTag_Value = &sResourceTag_Value
+
+var _ResourceTagKey = &s_ResourceTagKey
+
+var _ResourceTagKeyList = &s_ResourceTagKeyList
+var _ResourceTagKeyList_member = &s_ResourceTagKeyList_member
+
+var _ResourceTagList = &s_ResourceTagList
+var _ResourceTagList_member = &s_ResourceTagList_member
+
+var _ResourceTagValue = &s_ResourceTagValue
+
+var S3Destination = &sS3Destination
+var S3Destination_S3Bucket = &sS3Destination_S3Bucket
+var S3Destination_S3BucketOwner = &sS3Destination_S3BucketOwner
+var S3Destination_S3Prefix = &sS3Destination_S3Prefix
+var S3Destination_S3Region = &sS3Destination_S3Region
+var S3Destination_S3OutputConfigurations = &sS3Destination_S3OutputConfigurations
+
+var S3OutputConfigurations = &sS3OutputConfigurations
+var S3OutputConfigurations_OutputType = &sS3OutputConfigurations_OutputType
+var S3OutputConfigurations_Format = &sS3OutputConfigurations_Format
+var S3OutputConfigurations_Compression = &sS3OutputConfigurations_Compression
+var S3OutputConfigurations_Overwrite = &sS3OutputConfigurations_Overwrite
+
+var S3OutputType = &sS3OutputType
+var S3OutputType_CUSTOM = &sS3OutputType_CUSTOM
+var S3OutputType_ATHENA = &sS3OutputType_ATHENA
+var S3OutputType_REDSHIFT = &sS3OutputType_REDSHIFT
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_ResourceId = &sServiceQuotaExceededException_ResourceId
+var ServiceQuotaExceededException_ResourceType = &sServiceQuotaExceededException_ResourceType
+var ServiceQuotaExceededException_QuotaCode = &sServiceQuotaExceededException_QuotaCode
+var ServiceQuotaExceededException_ServiceCode = &sServiceQuotaExceededException_ServiceCode
+
+var Table = &sTable
+var Table_TableName = &sTable_TableName
+var Table_Description = &sTable_Description
+var Table_TableProperties = &sTable_TableProperties
+
+var _TableConfigurations = &s_TableConfigurations
+var _TableConfigurations_key = &s_TableConfigurations_key
+var _TableConfigurations_value = &s_TableConfigurations_value
+
+var _TableList = &s_TableList
+var _TableList_member = &s_TableList_member
+
+var _TableName = &s_TableName
+
+var _TableProperties = &s_TableProperties
+var _TableProperties_key = &s_TableProperties_key
+var _TableProperties_value = &s_TableProperties_value
+
+var _TableProperty = &s_TableProperty
+
+var TablePropertyDescription = &sTablePropertyDescription
+var TablePropertyDescription_Name = &sTablePropertyDescription_Name
+var TablePropertyDescription_ValidValues = &sTablePropertyDescription_ValidValues
+var TablePropertyDescription_DefaultValue = &sTablePropertyDescription_DefaultValue
+var TablePropertyDescription_Description = &sTablePropertyDescription_Description
+
+var _TablePropertyDescriptionList = &s_TablePropertyDescriptionList
+var _TablePropertyDescriptionList_member = &s_TablePropertyDescriptionList_member
+
+var _TablePropertyGenericString = &s_TablePropertyGenericString
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+var ThrottlingException_QuotaCode = &sThrottlingException_QuotaCode
+var ThrottlingException_ServiceCode = &sThrottlingException_ServiceCode
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Reason = &sValidationException_Reason
+var ValidationException_Fields = &sValidationException_Fields
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_Name = &sValidationExceptionField_Name
+var ValidationExceptionField_Message = &sValidationExceptionField_Message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var CreateExportRequest = &sCreateExportRequest
+var CreateExportRequest_Export = &sCreateExportRequest_Export
+var CreateExportRequest_ResourceTags = &sCreateExportRequest_ResourceTags
+
+var CreateExportResponse = &sCreateExportResponse
+var CreateExportResponse_ExportArn = &sCreateExportResponse_ExportArn
+
+var DeleteExportRequest = &sDeleteExportRequest
+var DeleteExportRequest_ExportArn = &sDeleteExportRequest_ExportArn
+
+var DeleteExportResponse = &sDeleteExportResponse
+var DeleteExportResponse_ExportArn = &sDeleteExportResponse_ExportArn
+
+var GetExecutionRequest = &sGetExecutionRequest
+var GetExecutionRequest_ExportArn = &sGetExecutionRequest_ExportArn
+var GetExecutionRequest_ExecutionId = &sGetExecutionRequest_ExecutionId
+
+var GetExecutionResponse = &sGetExecutionResponse
+var GetExecutionResponse_ExecutionId = &sGetExecutionResponse_ExecutionId
+var GetExecutionResponse_Export = &sGetExecutionResponse_Export
+var GetExecutionResponse_ExecutionStatus = &sGetExecutionResponse_ExecutionStatus
+
+var GetExportRequest = &sGetExportRequest
+var GetExportRequest_ExportArn = &sGetExportRequest_ExportArn
+
+var GetExportResponse = &sGetExportResponse
+var GetExportResponse_Export = &sGetExportResponse_Export
+var GetExportResponse_ExportStatus = &sGetExportResponse_ExportStatus
+
+var GetTableRequest = &sGetTableRequest
+var GetTableRequest_TableName = &sGetTableRequest_TableName
+var GetTableRequest_TableProperties = &sGetTableRequest_TableProperties
+
+var GetTableResponse = &sGetTableResponse
+var GetTableResponse_TableName = &sGetTableResponse_TableName
+var GetTableResponse_Description = &sGetTableResponse_Description
+var GetTableResponse_TableProperties = &sGetTableResponse_TableProperties
+var GetTableResponse_Schema = &sGetTableResponse_Schema
+
+var ListExecutionsRequest = &sListExecutionsRequest
+var ListExecutionsRequest_ExportArn = &sListExecutionsRequest_ExportArn
+var ListExecutionsRequest_MaxResults = &sListExecutionsRequest_MaxResults
+var ListExecutionsRequest_NextToken = &sListExecutionsRequest_NextToken
+
+var ListExecutionsResponse = &sListExecutionsResponse
+var ListExecutionsResponse_Executions = &sListExecutionsResponse_Executions
+var ListExecutionsResponse_NextToken = &sListExecutionsResponse_NextToken
+
+var ListExportsRequest = &sListExportsRequest
+var ListExportsRequest_MaxResults = &sListExportsRequest_MaxResults
+var ListExportsRequest_NextToken = &sListExportsRequest_NextToken
+
+var ListExportsResponse = &sListExportsResponse
+var ListExportsResponse_Exports = &sListExportsResponse_Exports
+var ListExportsResponse_NextToken = &sListExportsResponse_NextToken
+
+var ListTablesRequest = &sListTablesRequest
+var ListTablesRequest_NextToken = &sListTablesRequest_NextToken
+var ListTablesRequest_MaxResults = &sListTablesRequest_MaxResults
+
+var ListTablesResponse = &sListTablesResponse
+var ListTablesResponse_Tables = &sListTablesResponse_Tables
+var ListTablesResponse_NextToken = &sListTablesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+var ListTagsForResourceRequest_MaxResults = &sListTagsForResourceRequest_MaxResults
+var ListTagsForResourceRequest_NextToken = &sListTagsForResourceRequest_NextToken
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_ResourceTags = &sListTagsForResourceResponse_ResourceTags
+var ListTagsForResourceResponse_NextToken = &sListTagsForResourceResponse_NextToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_ResourceTags = &sTagResourceRequest_ResourceTags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_ResourceTagKeys = &sUntagResourceRequest_ResourceTagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateExportRequest = &sUpdateExportRequest
+var UpdateExportRequest_ExportArn = &sUpdateExportRequest_ExportArn
+var UpdateExportRequest_Export = &sUpdateExportRequest_Export
+
+var UpdateExportResponse = &sUpdateExportResponse
+var UpdateExportResponse_ExportArn = &sUpdateExportResponse_ExportArn
+
+var AWSBillingAndCostManagementDataExports = &smithy.ServiceSchema{Schema: &s_AWSBillingAndCostManagementDataExports, Version: "2023-11-26"}

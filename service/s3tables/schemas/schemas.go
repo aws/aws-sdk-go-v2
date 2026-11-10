@@ -4,3449 +4,3448 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CompleteTableMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CompleteTableMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCompleteTableMigration                                           smithy.SchemaExtensions
+	eCreateNamespace                                                  smithy.SchemaExtensions
+	eCreateTable                                                      smithy.SchemaExtensions
+	eCreateTableBucket                                                smithy.SchemaExtensions
+	eDeleteNamespace                                                  smithy.SchemaExtensions
+	eDeleteTable                                                      smithy.SchemaExtensions
+	eDeleteTableBucket                                                smithy.SchemaExtensions
+	eDeleteTableBucketEncryption                                      smithy.SchemaExtensions
+	eDeleteTableBucketMetricsConfiguration                            smithy.SchemaExtensions
+	eDeleteTableBucketPolicy                                          smithy.SchemaExtensions
+	eDeleteTableBucketReplication                                     smithy.SchemaExtensions
+	eDeleteTablePolicy                                                smithy.SchemaExtensions
+	eDeleteTableReplication                                           smithy.SchemaExtensions
+	eGetNamespace                                                     smithy.SchemaExtensions
+	eGetTable                                                         smithy.SchemaExtensions
+	eGetTableBucket                                                   smithy.SchemaExtensions
+	eGetTableBucketEncryption                                         smithy.SchemaExtensions
+	eGetTableBucketMaintenanceConfiguration                           smithy.SchemaExtensions
+	eGetTableBucketMetricsConfiguration                               smithy.SchemaExtensions
+	eGetTableBucketPolicy                                             smithy.SchemaExtensions
+	eGetTableBucketReplication                                        smithy.SchemaExtensions
+	eGetTableBucketStorageClass                                       smithy.SchemaExtensions
+	eGetTableEncryption                                               smithy.SchemaExtensions
+	eGetTableMaintenanceConfiguration                                 smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatus                                     smithy.SchemaExtensions
+	eGetTableMetadataLocation                                         smithy.SchemaExtensions
+	eGetTableMigration                                                smithy.SchemaExtensions
+	eGetTablePolicy                                                   smithy.SchemaExtensions
+	eGetTableRecordExpirationConfiguration                            smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatus                                smithy.SchemaExtensions
+	eGetTableReplication                                              smithy.SchemaExtensions
+	eGetTableReplicationStatus                                        smithy.SchemaExtensions
+	eGetTableStorageClass                                             smithy.SchemaExtensions
+	eListNamespaces                                                   smithy.SchemaExtensions
+	eListTableBuckets                                                 smithy.SchemaExtensions
+	eListTableMigrations                                              smithy.SchemaExtensions
+	eListTables                                                       smithy.SchemaExtensions
+	eListTagsForResource                                              smithy.SchemaExtensions
+	ePutTableBucketEncryption                                         smithy.SchemaExtensions
+	ePutTableBucketMaintenanceConfiguration                           smithy.SchemaExtensions
+	ePutTableBucketMetricsConfiguration                               smithy.SchemaExtensions
+	ePutTableBucketPolicy                                             smithy.SchemaExtensions
+	ePutTableBucketReplication                                        smithy.SchemaExtensions
+	ePutTableBucketStorageClass                                       smithy.SchemaExtensions
+	ePutTableMaintenanceConfiguration                                 smithy.SchemaExtensions
+	ePutTablePolicy                                                   smithy.SchemaExtensions
+	ePutTableRecordExpirationConfiguration                            smithy.SchemaExtensions
+	ePutTableReplication                                              smithy.SchemaExtensions
+	eRenameTable                                                      smithy.SchemaExtensions
+	eStartTableMigration                                              smithy.SchemaExtensions
+	eSyncTableMigration                                               smithy.SchemaExtensions
+	eTagResource                                                      smithy.SchemaExtensions
+	eUntagResource                                                    smithy.SchemaExtensions
+	eUpdateTableMetadataLocation                                      smithy.SchemaExtensions
+	eUpdateTableMigration                                             smithy.SchemaExtensions
+	e_S3TableBuckets                                                  smithy.SchemaExtensions
+	eAccessDeniedException                                            smithy.SchemaExtensions
+	eAccessDeniedException_message                                    smithy.SchemaExtensions
+	e_AccountId                                                       smithy.SchemaExtensions
+	eBadRequestException                                              smithy.SchemaExtensions
+	eBadRequestException_message                                      smithy.SchemaExtensions
+	e_ChecksumCRC64NVME                                               smithy.SchemaExtensions
+	eCompressionCodec                                                 smithy.SchemaExtensions
+	eCompressionCodec_ZSTD                                            smithy.SchemaExtensions
+	eCompressionCodec_SNAPPY                                          smithy.SchemaExtensions
+	eCompressionCodec_GZIP                                            smithy.SchemaExtensions
+	eCompressionCodec_UNCOMPRESSED                                    smithy.SchemaExtensions
+	eConflictException                                                smithy.SchemaExtensions
+	eConflictException_message                                        smithy.SchemaExtensions
+	eDataFileFormat                                                   smithy.SchemaExtensions
+	eDataFileFormat_PARQUET                                           smithy.SchemaExtensions
+	eDataMigrationOverview                                            smithy.SchemaExtensions
+	eDataMigrationOverview_maintenanceSettings                        smithy.SchemaExtensions
+	eDataMigrationOverview_migrationPolicies                          smithy.SchemaExtensions
+	eDataMigrationSettings                                            smithy.SchemaExtensions
+	eDataMigrationSettings_maintenanceSettings                        smithy.SchemaExtensions
+	eDataMigrationSettings_migrationPolicies                          smithy.SchemaExtensions
+	eDestinationTable                                                 smithy.SchemaExtensions
+	eDestinationTable_tableBucketARN                                  smithy.SchemaExtensions
+	eDestinationTable_namespace                                       smithy.SchemaExtensions
+	eDestinationTable_name                                            smithy.SchemaExtensions
+	eDestinationTable_encryptionConfiguration                         smithy.SchemaExtensions
+	eDestinationTable_storageClassConfiguration                       smithy.SchemaExtensions
+	eDestinationTable_tags                                            smithy.SchemaExtensions
+	eDestinationTable_properties                                      smithy.SchemaExtensions
+	eDestinationTable_schema                                          smithy.SchemaExtensions
+	eDestinationTable_icebergSortOrder                                smithy.SchemaExtensions
+	eEncryptionConfiguration                                          smithy.SchemaExtensions
+	eEncryptionConfiguration_sseAlgorithm                             smithy.SchemaExtensions
+	eEncryptionConfiguration_kmsKeyArn                                smithy.SchemaExtensions
+	e_ErrorMessage                                                    smithy.SchemaExtensions
+	eFindingCategory                                                  smithy.SchemaExtensions
+	eFindingCategory_ACCESS                                           smithy.SchemaExtensions
+	eFindingCategory_METADATA                                         smithy.SchemaExtensions
+	eFindingCategory_DATA                                             smithy.SchemaExtensions
+	eFindingCategory_INTERNAL                                         smithy.SchemaExtensions
+	e_FindingCategoryCounts                                           smithy.SchemaExtensions
+	e_FindingCategoryCounts_key                                       smithy.SchemaExtensions
+	e_FindingCategoryCounts_value                                     smithy.SchemaExtensions
+	eForbiddenException                                               smithy.SchemaExtensions
+	eForbiddenException_message                                       smithy.SchemaExtensions
+	eGlueTableSource                                                  smithy.SchemaExtensions
+	eGlueTableSource_catalogId                                        smithy.SchemaExtensions
+	eGlueTableSource_databaseName                                     smithy.SchemaExtensions
+	eGlueTableSource_tableName                                        smithy.SchemaExtensions
+	e_IAMRole                                                         smithy.SchemaExtensions
+	eIcebergCompactionSettings                                        smithy.SchemaExtensions
+	eIcebergCompactionSettings_targetFileSizeMB                       smithy.SchemaExtensions
+	eIcebergCompactionSettings_strategy                               smithy.SchemaExtensions
+	eIcebergCompactionStrategy                                        smithy.SchemaExtensions
+	eIcebergCompactionStrategy_AUTO                                   smithy.SchemaExtensions
+	eIcebergCompactionStrategy_BINPACK                                smithy.SchemaExtensions
+	eIcebergCompactionStrategy_SORT                                   smithy.SchemaExtensions
+	eIcebergCompactionStrategy_ZORDER                                 smithy.SchemaExtensions
+	eIcebergMetadata                                                  smithy.SchemaExtensions
+	eIcebergMetadata_schema                                           smithy.SchemaExtensions
+	eIcebergMetadata_schemaV2                                         smithy.SchemaExtensions
+	eIcebergMetadata_partitionSpec                                    smithy.SchemaExtensions
+	eIcebergMetadata_writeOrder                                       smithy.SchemaExtensions
+	eIcebergMetadata_properties                                       smithy.SchemaExtensions
+	eIcebergNullOrder                                                 smithy.SchemaExtensions
+	eIcebergNullOrder_NULLS_FIRST                                     smithy.SchemaExtensions
+	eIcebergNullOrder_NULLS_LAST                                      smithy.SchemaExtensions
+	eIcebergPartitionField                                            smithy.SchemaExtensions
+	eIcebergPartitionField_sourceId                                   smithy.SchemaExtensions
+	eIcebergPartitionField_transform                                  smithy.SchemaExtensions
+	eIcebergPartitionField_name                                       smithy.SchemaExtensions
+	eIcebergPartitionField_fieldId                                    smithy.SchemaExtensions
+	e_IcebergPartitionFieldList                                       smithy.SchemaExtensions
+	e_IcebergPartitionFieldList_member                                smithy.SchemaExtensions
+	eIcebergPartitionSpec                                             smithy.SchemaExtensions
+	eIcebergPartitionSpec_fields                                      smithy.SchemaExtensions
+	eIcebergPartitionSpec_specId                                      smithy.SchemaExtensions
+	eIcebergSchema                                                    smithy.SchemaExtensions
+	eIcebergSchema_fields                                             smithy.SchemaExtensions
+	eIcebergSchemaV2                                                  smithy.SchemaExtensions
+	eIcebergSchemaV2_type                                             smithy.SchemaExtensions
+	eIcebergSchemaV2_fields                                           smithy.SchemaExtensions
+	eIcebergSchemaV2_schemaId                                         smithy.SchemaExtensions
+	eIcebergSchemaV2_identifierFieldIds                               smithy.SchemaExtensions
+	eIcebergSnapshotManagementSettings                                smithy.SchemaExtensions
+	eIcebergSnapshotManagementSettings_minSnapshotsToKeep             smithy.SchemaExtensions
+	eIcebergSnapshotManagementSettings_maxSnapshotAgeHours            smithy.SchemaExtensions
+	eIcebergSortDirection                                             smithy.SchemaExtensions
+	eIcebergSortDirection_ASC                                         smithy.SchemaExtensions
+	eIcebergSortDirection_DESC                                        smithy.SchemaExtensions
+	eIcebergSortField                                                 smithy.SchemaExtensions
+	eIcebergSortField_sourceId                                        smithy.SchemaExtensions
+	eIcebergSortField_transform                                       smithy.SchemaExtensions
+	eIcebergSortField_direction                                       smithy.SchemaExtensions
+	eIcebergSortField_nullOrder                                       smithy.SchemaExtensions
+	e_IcebergSortFieldList                                            smithy.SchemaExtensions
+	e_IcebergSortFieldList_member                                     smithy.SchemaExtensions
+	eIcebergSortOrder                                                 smithy.SchemaExtensions
+	eIcebergSortOrder_orderId                                         smithy.SchemaExtensions
+	eIcebergSortOrder_fields                                          smithy.SchemaExtensions
+	eIcebergUnreferencedFileRemovalSettings                           smithy.SchemaExtensions
+	eIcebergUnreferencedFileRemovalSettings_unreferencedDays          smithy.SchemaExtensions
+	eIcebergUnreferencedFileRemovalSettings_nonCurrentDays            smithy.SchemaExtensions
+	eIncompatibleValuesPolicy                                         smithy.SchemaExtensions
+	eIncompatibleValuesPolicy_FAIL                                    smithy.SchemaExtensions
+	eIncompatibleValuesPolicy_SET_NULL                                smithy.SchemaExtensions
+	e_IntegerList                                                     smithy.SchemaExtensions
+	e_IntegerList_member                                              smithy.SchemaExtensions
+	eInternalServerErrorException                                     smithy.SchemaExtensions
+	eInternalServerErrorException_message                             smithy.SchemaExtensions
+	eJobStatus                                                        smithy.SchemaExtensions
+	eJobStatus_NOT_YET_RUN                                            smithy.SchemaExtensions
+	eJobStatus_SUCCESSFUL                                             smithy.SchemaExtensions
+	eJobStatus_FAILED                                                 smithy.SchemaExtensions
+	eJobStatus_DISABLED                                               smithy.SchemaExtensions
+	eLastSuccessfulReplicatedUpdate                                   smithy.SchemaExtensions
+	eLastSuccessfulReplicatedUpdate_metadataLocation                  smithy.SchemaExtensions
+	eLastSuccessfulReplicatedUpdate_timestamp                         smithy.SchemaExtensions
+	e_ListNamespacesLimit                                             smithy.SchemaExtensions
+	e_ListTableBucketsLimit                                           smithy.SchemaExtensions
+	e_ListTableMigrationsLimit                                        smithy.SchemaExtensions
+	e_ListTablesLimit                                                 smithy.SchemaExtensions
+	eMaintenanceSettings                                              smithy.SchemaExtensions
+	eMaintenanceSettings_icebergCompaction                            smithy.SchemaExtensions
+	eMaintenanceSettings_icebergSnapshotManagement                    smithy.SchemaExtensions
+	eMaintenanceStatus                                                smithy.SchemaExtensions
+	eMaintenanceStatus_ENABLED                                        smithy.SchemaExtensions
+	eMaintenanceStatus_DISABLED                                       smithy.SchemaExtensions
+	eManagedTableInformation                                          smithy.SchemaExtensions
+	eManagedTableInformation_replicationInformation                   smithy.SchemaExtensions
+	e_MetadataLocation                                                smithy.SchemaExtensions
+	eMethodNotAllowedException                                        smithy.SchemaExtensions
+	eMethodNotAllowedException_message                                smithy.SchemaExtensions
+	eMigrationCompactionSettings                                      smithy.SchemaExtensions
+	eMigrationCompactionSettings_targetFileSizeMB                     smithy.SchemaExtensions
+	eMigrationCompactionSettings_strategy                             smithy.SchemaExtensions
+	eMigrationFailureCode                                             smithy.SchemaExtensions
+	eMigrationFailureCode_ROLE_PERMISSIONS                            smithy.SchemaExtensions
+	eMigrationFailureCode_SOURCE_PERMISSIONS                          smithy.SchemaExtensions
+	eMigrationFailureCode_DESTINATION_PERMISSIONS                     smithy.SchemaExtensions
+	eMigrationFailureCode_RESOURCE_NOT_FOUND                          smithy.SchemaExtensions
+	eMigrationFailureCode_SOURCE_NOT_SUPPORTED                        smithy.SchemaExtensions
+	eMigrationFailureCode_OBJECT_MIGRATION_REPORT                     smithy.SchemaExtensions
+	eMigrationFailureCode_OBJECT_COMPATIBILITY_REPORT                 smithy.SchemaExtensions
+	eMigrationFailureCode_TABLE_COMPATIBILITY_REPORT                  smithy.SchemaExtensions
+	eMigrationFailureCode_INTERNAL_ERROR                              smithy.SchemaExtensions
+	eMigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED                 smithy.SchemaExtensions
+	e_MigrationFailureDetail                                          smithy.SchemaExtensions
+	eMigrationFailureReason                                           smithy.SchemaExtensions
+	eMigrationFailureReason_code                                      smithy.SchemaExtensions
+	eMigrationFailureReason_detail                                    smithy.SchemaExtensions
+	e_MigrationId                                                     smithy.SchemaExtensions
+	e_MigrationMinSnapshotsToKeep                                     smithy.SchemaExtensions
+	eMigrationOutputConfiguration                                     smithy.SchemaExtensions
+	eMigrationOutputConfiguration_bucket                              smithy.SchemaExtensions
+	eMigrationOutputConfiguration_prefixes                            smithy.SchemaExtensions
+	eMigrationOutputOverview                                          smithy.SchemaExtensions
+	eMigrationOutputOverview_bucket                                   smithy.SchemaExtensions
+	eMigrationOutputOverview_tableCompatibilityReport                 smithy.SchemaExtensions
+	eMigrationOutputOverview_objectCompatibilityReport                smithy.SchemaExtensions
+	eMigrationOutputOverview_objectMigrationReport                    smithy.SchemaExtensions
+	eMigrationPolicies                                                smithy.SchemaExtensions
+	eMigrationPolicies_unmatchedSourceFieldsPolicy                    smithy.SchemaExtensions
+	eMigrationPolicies_incompatibleValuesPolicy                       smithy.SchemaExtensions
+	e_MigrationReportPrefix                                           smithy.SchemaExtensions
+	eMigrationReportPrefixes                                          smithy.SchemaExtensions
+	eMigrationReportPrefixes_tableCompatibilityReport                 smithy.SchemaExtensions
+	eMigrationReportPrefixes_objectCompatibilityReport                smithy.SchemaExtensions
+	eMigrationReportPrefixes_objectMigrationReport                    smithy.SchemaExtensions
+	eMigrationRequestedState                                          smithy.SchemaExtensions
+	eMigrationRequestedState_QUEUED                                   smithy.SchemaExtensions
+	eMigrationRequestedState_CANCELLED                                smithy.SchemaExtensions
+	eMigrationSnapshotManagementSettings                              smithy.SchemaExtensions
+	eMigrationSnapshotManagementSettings_minSnapshotsToKeep           smithy.SchemaExtensions
+	eMigrationSnapshotManagementSettings_maxSnapshotAgeHours          smithy.SchemaExtensions
+	eMigrationSourceType                                              smithy.SchemaExtensions
+	eMigrationSourceType_GLUE_TABLE                                   smithy.SchemaExtensions
+	eMigrationState                                                   smithy.SchemaExtensions
+	eMigrationState_NEW                                               smithy.SchemaExtensions
+	eMigrationState_PLANNING                                          smithy.SchemaExtensions
+	eMigrationState_PENDING_REVIEW                                    smithy.SchemaExtensions
+	eMigrationState_QUEUED                                            smithy.SchemaExtensions
+	eMigrationState_MIGRATING                                         smithy.SchemaExtensions
+	eMigrationState_SUCCEEDED                                         smithy.SchemaExtensions
+	eMigrationState_FAILED                                            smithy.SchemaExtensions
+	eMigrationState_CANCELLING                                        smithy.SchemaExtensions
+	eMigrationState_CANCELLED                                         smithy.SchemaExtensions
+	eMigrationStats                                                   smithy.SchemaExtensions
+	eMigrationStats_objectsMigrated                                   smithy.SchemaExtensions
+	eMigrationStats_objectsFailedMigration                            smithy.SchemaExtensions
+	eMigrationStats_objectsPendingMigration                           smithy.SchemaExtensions
+	eMigrationSummary                                                 smithy.SchemaExtensions
+	eMigrationSummary_migrationId                                     smithy.SchemaExtensions
+	eMigrationSummary_tableBucketARN                                  smithy.SchemaExtensions
+	eMigrationSummary_namespace                                       smithy.SchemaExtensions
+	eMigrationSummary_tableARN                                        smithy.SchemaExtensions
+	eMigrationSummary_name                                            smithy.SchemaExtensions
+	eMigrationSummary_type                                            smithy.SchemaExtensions
+	eMigrationSummary_state                                           smithy.SchemaExtensions
+	eMigrationSummary_hasValidPlan                                    smithy.SchemaExtensions
+	eMigrationSummary_createdAt                                       smithy.SchemaExtensions
+	eMigrationSummary_stateUpdatedAt                                  smithy.SchemaExtensions
+	e_MigrationSummaryList                                            smithy.SchemaExtensions
+	e_MigrationSummaryList_member                                     smithy.SchemaExtensions
+	eMigrationTableProperties                                         smithy.SchemaExtensions
+	eMigrationTableProperties_writeFormat                             smithy.SchemaExtensions
+	eMigrationTableProperties_icebergFormatVersion                    smithy.SchemaExtensions
+	eMigrationTableProperties_compressionCodec                        smithy.SchemaExtensions
+	eMigrationTableProperties_dictionaryEncoding                      smithy.SchemaExtensions
+	e_MigrationTargetFileSizeMB                                       smithy.SchemaExtensions
+	eMigrationType                                                    smithy.SchemaExtensions
+	eMigrationType_START                                              smithy.SchemaExtensions
+	eMigrationType_SYNC                                               smithy.SchemaExtensions
+	e_NamespaceId                                                     smithy.SchemaExtensions
+	e_NamespaceList                                                   smithy.SchemaExtensions
+	e_NamespaceList_member                                            smithy.SchemaExtensions
+	e_NamespaceName                                                   smithy.SchemaExtensions
+	eNamespaceSummary                                                 smithy.SchemaExtensions
+	eNamespaceSummary_namespace                                       smithy.SchemaExtensions
+	eNamespaceSummary_createdAt                                       smithy.SchemaExtensions
+	eNamespaceSummary_createdBy                                       smithy.SchemaExtensions
+	eNamespaceSummary_ownerAccountId                                  smithy.SchemaExtensions
+	eNamespaceSummary_namespaceId                                     smithy.SchemaExtensions
+	eNamespaceSummary_tableBucketId                                   smithy.SchemaExtensions
+	e_NamespaceSummaryList                                            smithy.SchemaExtensions
+	e_NamespaceSummaryList_member                                     smithy.SchemaExtensions
+	e_NextToken                                                       smithy.SchemaExtensions
+	eNotFoundException                                                smithy.SchemaExtensions
+	eNotFoundException_message                                        smithy.SchemaExtensions
+	eOpenTableFormat                                                  smithy.SchemaExtensions
+	eOpenTableFormat_ICEBERG                                          smithy.SchemaExtensions
+	ePlanningStats                                                    smithy.SchemaExtensions
+	ePlanningStats_objectsScanned                                     smithy.SchemaExtensions
+	ePlanningStats_objectsPlanned                                     smithy.SchemaExtensions
+	ePlanningStats_partitionCount                                     smithy.SchemaExtensions
+	e_PositiveInteger                                                 smithy.SchemaExtensions
+	eReplicationDestination                                           smithy.SchemaExtensions
+	eReplicationDestination_destinationTableBucketARN                 smithy.SchemaExtensions
+	e_ReplicationDestinations                                         smithy.SchemaExtensions
+	e_ReplicationDestinations_member                                  smithy.SchemaExtensions
+	e_ReplicationDestinationStatuses                                  smithy.SchemaExtensions
+	e_ReplicationDestinationStatuses_member                           smithy.SchemaExtensions
+	eReplicationDestinationStatusModel                                smithy.SchemaExtensions
+	eReplicationDestinationStatusModel_replicationStatus              smithy.SchemaExtensions
+	eReplicationDestinationStatusModel_destinationTableBucketArn      smithy.SchemaExtensions
+	eReplicationDestinationStatusModel_destinationTableArn            smithy.SchemaExtensions
+	eReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate smithy.SchemaExtensions
+	eReplicationDestinationStatusModel_failureMessage                 smithy.SchemaExtensions
+	eReplicationInformation                                           smithy.SchemaExtensions
+	eReplicationInformation_sourceTableARN                            smithy.SchemaExtensions
+	eReplicationStatus                                                smithy.SchemaExtensions
+	eReplicationStatus_PENDING                                        smithy.SchemaExtensions
+	eReplicationStatus_COMPLETED                                      smithy.SchemaExtensions
+	eReplicationStatus_FAILED                                         smithy.SchemaExtensions
+	e_ReportObjectKey                                                 smithy.SchemaExtensions
+	eReportOverview                                                   smithy.SchemaExtensions
+	eReportOverview_prefix                                            smithy.SchemaExtensions
+	eReportOverview_key                                               smithy.SchemaExtensions
+	eReportOverview_checksumCRC64NVME                                 smithy.SchemaExtensions
+	eReportOverview_invalidFindings                                   smithy.SchemaExtensions
+	e_ResourceArn                                                     smithy.SchemaExtensions
+	e_ResourcePolicy                                                  smithy.SchemaExtensions
+	e_RoleArn                                                         smithy.SchemaExtensions
+	e_S3BucketARN                                                     smithy.SchemaExtensions
+	eSchemaField                                                      smithy.SchemaExtensions
+	eSchemaField_id                                                   smithy.SchemaExtensions
+	eSchemaField_name                                                 smithy.SchemaExtensions
+	eSchemaField_type                                                 smithy.SchemaExtensions
+	eSchemaField_required                                             smithy.SchemaExtensions
+	e_SchemaFieldList                                                 smithy.SchemaExtensions
+	e_SchemaFieldList_member                                          smithy.SchemaExtensions
+	eSchemaV2Field                                                    smithy.SchemaExtensions
+	eSchemaV2Field_id                                                 smithy.SchemaExtensions
+	eSchemaV2Field_name                                               smithy.SchemaExtensions
+	eSchemaV2Field_type                                               smithy.SchemaExtensions
+	eSchemaV2Field_required                                           smithy.SchemaExtensions
+	eSchemaV2Field_doc                                                smithy.SchemaExtensions
+	e_SchemaV2FieldList                                               smithy.SchemaExtensions
+	e_SchemaV2FieldList_member                                        smithy.SchemaExtensions
+	eSchemaV2FieldType                                                smithy.SchemaExtensions
+	eSchemaV2FieldType_STRUCT                                         smithy.SchemaExtensions
+	eSourceConfiguration                                              smithy.SchemaExtensions
+	eSourceConfiguration_glueTable                                    smithy.SchemaExtensions
+	eSSEAlgorithm                                                     smithy.SchemaExtensions
+	eSSEAlgorithm_AES256                                              smithy.SchemaExtensions
+	eSSEAlgorithm_AWS_KMS                                             smithy.SchemaExtensions
+	eStorageClass                                                     smithy.SchemaExtensions
+	eStorageClass_STANDARD                                            smithy.SchemaExtensions
+	eStorageClass_INTELLIGENT_TIERING                                 smithy.SchemaExtensions
+	eStorageClassConfiguration                                        smithy.SchemaExtensions
+	eStorageClassConfiguration_storageClass                           smithy.SchemaExtensions
+	e_TableARN                                                        smithy.SchemaExtensions
+	e_TableBucketARN                                                  smithy.SchemaExtensions
+	e_TableBucketId                                                   smithy.SchemaExtensions
+	e_TableBucketMaintenanceConfiguration                             smithy.SchemaExtensions
+	e_TableBucketMaintenanceConfiguration_key                         smithy.SchemaExtensions
+	e_TableBucketMaintenanceConfiguration_value                       smithy.SchemaExtensions
+	eTableBucketMaintenanceConfigurationValue                         smithy.SchemaExtensions
+	eTableBucketMaintenanceConfigurationValue_status                  smithy.SchemaExtensions
+	eTableBucketMaintenanceConfigurationValue_settings                smithy.SchemaExtensions
+	eTableBucketMaintenanceSettings                                   smithy.SchemaExtensions
+	eTableBucketMaintenanceSettings_icebergUnreferencedFileRemoval    smithy.SchemaExtensions
+	eTableBucketMaintenanceType                                       smithy.SchemaExtensions
+	eTableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL     smithy.SchemaExtensions
+	e_TableBucketName                                                 smithy.SchemaExtensions
+	eTableBucketReplicationConfiguration                              smithy.SchemaExtensions
+	eTableBucketReplicationConfiguration_role                         smithy.SchemaExtensions
+	eTableBucketReplicationConfiguration_rules                        smithy.SchemaExtensions
+	eTableBucketReplicationRule                                       smithy.SchemaExtensions
+	eTableBucketReplicationRule_destinations                          smithy.SchemaExtensions
+	e_TableBucketReplicationRules                                     smithy.SchemaExtensions
+	e_TableBucketReplicationRules_member                              smithy.SchemaExtensions
+	eTableBucketSummary                                               smithy.SchemaExtensions
+	eTableBucketSummary_arn                                           smithy.SchemaExtensions
+	eTableBucketSummary_name                                          smithy.SchemaExtensions
+	eTableBucketSummary_ownerAccountId                                smithy.SchemaExtensions
+	eTableBucketSummary_createdAt                                     smithy.SchemaExtensions
+	eTableBucketSummary_tableBucketId                                 smithy.SchemaExtensions
+	eTableBucketSummary_type                                          smithy.SchemaExtensions
+	e_TableBucketSummaryList                                          smithy.SchemaExtensions
+	e_TableBucketSummaryList_member                                   smithy.SchemaExtensions
+	eTableBucketType                                                  smithy.SchemaExtensions
+	eTableBucketType_CUSTOMER                                         smithy.SchemaExtensions
+	eTableBucketType_AWS                                              smithy.SchemaExtensions
+	e_TableMaintenanceConfiguration                                   smithy.SchemaExtensions
+	e_TableMaintenanceConfiguration_key                               smithy.SchemaExtensions
+	e_TableMaintenanceConfiguration_value                             smithy.SchemaExtensions
+	eTableMaintenanceConfigurationValue                               smithy.SchemaExtensions
+	eTableMaintenanceConfigurationValue_status                        smithy.SchemaExtensions
+	eTableMaintenanceConfigurationValue_settings                      smithy.SchemaExtensions
+	e_TableMaintenanceJobStatus                                       smithy.SchemaExtensions
+	e_TableMaintenanceJobStatus_key                                   smithy.SchemaExtensions
+	e_TableMaintenanceJobStatus_value                                 smithy.SchemaExtensions
+	eTableMaintenanceJobStatusValue                                   smithy.SchemaExtensions
+	eTableMaintenanceJobStatusValue_status                            smithy.SchemaExtensions
+	eTableMaintenanceJobStatusValue_lastRunTimestamp                  smithy.SchemaExtensions
+	eTableMaintenanceJobStatusValue_failureMessage                    smithy.SchemaExtensions
+	eTableMaintenanceJobType                                          smithy.SchemaExtensions
+	eTableMaintenanceJobType_ICEBERG_COMPACTION                       smithy.SchemaExtensions
+	eTableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT              smithy.SchemaExtensions
+	eTableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL        smithy.SchemaExtensions
+	eTableMaintenanceSettings                                         smithy.SchemaExtensions
+	eTableMaintenanceSettings_icebergCompaction                       smithy.SchemaExtensions
+	eTableMaintenanceSettings_icebergSnapshotManagement               smithy.SchemaExtensions
+	eTableMaintenanceType                                             smithy.SchemaExtensions
+	eTableMaintenanceType_ICEBERG_COMPACTION                          smithy.SchemaExtensions
+	eTableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT                 smithy.SchemaExtensions
+	eTableMetadata                                                    smithy.SchemaExtensions
+	eTableMetadata_iceberg                                            smithy.SchemaExtensions
+	e_TableName                                                       smithy.SchemaExtensions
+	e_TableProperties                                                 smithy.SchemaExtensions
+	e_TableProperties_key                                             smithy.SchemaExtensions
+	e_TableProperties_value                                           smithy.SchemaExtensions
+	eTableRecordExpirationConfigurationValue                          smithy.SchemaExtensions
+	eTableRecordExpirationConfigurationValue_status                   smithy.SchemaExtensions
+	eTableRecordExpirationConfigurationValue_settings                 smithy.SchemaExtensions
+	eTableRecordExpirationJobMetrics                                  smithy.SchemaExtensions
+	eTableRecordExpirationJobMetrics_deletedDataFiles                 smithy.SchemaExtensions
+	eTableRecordExpirationJobMetrics_deletedRecords                   smithy.SchemaExtensions
+	eTableRecordExpirationJobMetrics_removedFilesSize                 smithy.SchemaExtensions
+	eTableRecordExpirationJobStatus                                   smithy.SchemaExtensions
+	eTableRecordExpirationJobStatus_NOT_YET_RUN                       smithy.SchemaExtensions
+	eTableRecordExpirationJobStatus_SUCCESSFUL                        smithy.SchemaExtensions
+	eTableRecordExpirationJobStatus_FAILED                            smithy.SchemaExtensions
+	eTableRecordExpirationJobStatus_DISABLED                          smithy.SchemaExtensions
+	eTableRecordExpirationSettings                                    smithy.SchemaExtensions
+	eTableRecordExpirationSettings_days                               smithy.SchemaExtensions
+	eTableRecordExpirationStatus                                      smithy.SchemaExtensions
+	eTableRecordExpirationStatus_ENABLED                              smithy.SchemaExtensions
+	eTableRecordExpirationStatus_DISABLED                             smithy.SchemaExtensions
+	eTableReplicationConfiguration                                    smithy.SchemaExtensions
+	eTableReplicationConfiguration_role                               smithy.SchemaExtensions
+	eTableReplicationConfiguration_rules                              smithy.SchemaExtensions
+	eTableReplicationRule                                             smithy.SchemaExtensions
+	eTableReplicationRule_destinations                                smithy.SchemaExtensions
+	e_TableReplicationRules                                           smithy.SchemaExtensions
+	e_TableReplicationRules_member                                    smithy.SchemaExtensions
+	eTableSummary                                                     smithy.SchemaExtensions
+	eTableSummary_namespace                                           smithy.SchemaExtensions
+	eTableSummary_name                                                smithy.SchemaExtensions
+	eTableSummary_type                                                smithy.SchemaExtensions
+	eTableSummary_tableARN                                            smithy.SchemaExtensions
+	eTableSummary_createdAt                                           smithy.SchemaExtensions
+	eTableSummary_modifiedAt                                          smithy.SchemaExtensions
+	eTableSummary_managedByService                                    smithy.SchemaExtensions
+	eTableSummary_namespaceId                                         smithy.SchemaExtensions
+	eTableSummary_tableBucketId                                       smithy.SchemaExtensions
+	e_TableSummaryList                                                smithy.SchemaExtensions
+	e_TableSummaryList_member                                         smithy.SchemaExtensions
+	eTableType                                                        smithy.SchemaExtensions
+	eTableType_CUSTOMER                                               smithy.SchemaExtensions
+	eTableType_AWS                                                    smithy.SchemaExtensions
+	e_TagKey                                                          smithy.SchemaExtensions
+	e_TagKeyList                                                      smithy.SchemaExtensions
+	e_TagKeyList_member                                               smithy.SchemaExtensions
+	e_Tags                                                            smithy.SchemaExtensions
+	e_Tags_key                                                        smithy.SchemaExtensions
+	e_Tags_value                                                      smithy.SchemaExtensions
+	e_TagValue                                                        smithy.SchemaExtensions
+	eTooManyRequestsException                                         smithy.SchemaExtensions
+	eTooManyRequestsException_message                                 smithy.SchemaExtensions
+	eUnmatchedSourceFieldsPolicy                                      smithy.SchemaExtensions
+	eUnmatchedSourceFieldsPolicy_FAIL                                 smithy.SchemaExtensions
+	eUnmatchedSourceFieldsPolicy_DROP                                 smithy.SchemaExtensions
+	e_VersionToken                                                    smithy.SchemaExtensions
+	e_WarehouseLocation                                               smithy.SchemaExtensions
+	eCompleteTableMigrationRequest                                    smithy.SchemaExtensions
+	eCompleteTableMigrationRequest_tableARN                           smithy.SchemaExtensions
+	eCreateNamespaceRequest                                           smithy.SchemaExtensions
+	eCreateNamespaceRequest_tableBucketARN                            smithy.SchemaExtensions
+	eCreateNamespaceRequest_namespace                                 smithy.SchemaExtensions
+	eCreateNamespaceResponse                                          smithy.SchemaExtensions
+	eCreateNamespaceResponse_tableBucketARN                           smithy.SchemaExtensions
+	eCreateNamespaceResponse_namespace                                smithy.SchemaExtensions
+	eCreateTableBucketRequest                                         smithy.SchemaExtensions
+	eCreateTableBucketRequest_name                                    smithy.SchemaExtensions
+	eCreateTableBucketRequest_encryptionConfiguration                 smithy.SchemaExtensions
+	eCreateTableBucketRequest_storageClassConfiguration               smithy.SchemaExtensions
+	eCreateTableBucketRequest_tags                                    smithy.SchemaExtensions
+	eCreateTableBucketResponse                                        smithy.SchemaExtensions
+	eCreateTableBucketResponse_arn                                    smithy.SchemaExtensions
+	eCreateTableRequest                                               smithy.SchemaExtensions
+	eCreateTableRequest_tableBucketARN                                smithy.SchemaExtensions
+	eCreateTableRequest_namespace                                     smithy.SchemaExtensions
+	eCreateTableRequest_name                                          smithy.SchemaExtensions
+	eCreateTableRequest_format                                        smithy.SchemaExtensions
+	eCreateTableRequest_metadata                                      smithy.SchemaExtensions
+	eCreateTableRequest_encryptionConfiguration                       smithy.SchemaExtensions
+	eCreateTableRequest_storageClassConfiguration                     smithy.SchemaExtensions
+	eCreateTableRequest_tags                                          smithy.SchemaExtensions
+	eCreateTableResponse                                              smithy.SchemaExtensions
+	eCreateTableResponse_tableARN                                     smithy.SchemaExtensions
+	eCreateTableResponse_versionToken                                 smithy.SchemaExtensions
+	eDeleteNamespaceRequest                                           smithy.SchemaExtensions
+	eDeleteNamespaceRequest_tableBucketARN                            smithy.SchemaExtensions
+	eDeleteNamespaceRequest_namespace                                 smithy.SchemaExtensions
+	eDeleteTableBucketEncryptionRequest                               smithy.SchemaExtensions
+	eDeleteTableBucketEncryptionRequest_tableBucketARN                smithy.SchemaExtensions
+	eDeleteTableBucketRequest                                         smithy.SchemaExtensions
+	eDeleteTableBucketRequest_tableBucketARN                          smithy.SchemaExtensions
+	eDeleteTableBucketMetricsConfigurationRequest                     smithy.SchemaExtensions
+	eDeleteTableBucketMetricsConfigurationRequest_tableBucketARN      smithy.SchemaExtensions
+	eDeleteTableBucketPolicyRequest                                   smithy.SchemaExtensions
+	eDeleteTableBucketPolicyRequest_tableBucketARN                    smithy.SchemaExtensions
+	eDeleteTableBucketReplicationRequest                              smithy.SchemaExtensions
+	eDeleteTableBucketReplicationRequest_tableBucketARN               smithy.SchemaExtensions
+	eDeleteTableBucketReplicationRequest_versionToken                 smithy.SchemaExtensions
+	eDeleteTableRequest                                               smithy.SchemaExtensions
+	eDeleteTableRequest_tableBucketARN                                smithy.SchemaExtensions
+	eDeleteTableRequest_namespace                                     smithy.SchemaExtensions
+	eDeleteTableRequest_name                                          smithy.SchemaExtensions
+	eDeleteTableRequest_versionToken                                  smithy.SchemaExtensions
+	eDeleteTablePolicyRequest                                         smithy.SchemaExtensions
+	eDeleteTablePolicyRequest_tableBucketARN                          smithy.SchemaExtensions
+	eDeleteTablePolicyRequest_namespace                               smithy.SchemaExtensions
+	eDeleteTablePolicyRequest_name                                    smithy.SchemaExtensions
+	eDeleteTableReplicationRequest                                    smithy.SchemaExtensions
+	eDeleteTableReplicationRequest_tableArn                           smithy.SchemaExtensions
+	eDeleteTableReplicationRequest_versionToken                       smithy.SchemaExtensions
+	eGetNamespaceRequest                                              smithy.SchemaExtensions
+	eGetNamespaceRequest_tableBucketARN                               smithy.SchemaExtensions
+	eGetNamespaceRequest_namespace                                    smithy.SchemaExtensions
+	eGetNamespaceResponse                                             smithy.SchemaExtensions
+	eGetNamespaceResponse_namespace                                   smithy.SchemaExtensions
+	eGetNamespaceResponse_createdAt                                   smithy.SchemaExtensions
+	eGetNamespaceResponse_createdBy                                   smithy.SchemaExtensions
+	eGetNamespaceResponse_ownerAccountId                              smithy.SchemaExtensions
+	eGetNamespaceResponse_namespaceId                                 smithy.SchemaExtensions
+	eGetNamespaceResponse_tableBucketId                               smithy.SchemaExtensions
+	eGetTableBucketEncryptionRequest                                  smithy.SchemaExtensions
+	eGetTableBucketEncryptionRequest_tableBucketARN                   smithy.SchemaExtensions
+	eGetTableBucketEncryptionResponse                                 smithy.SchemaExtensions
+	eGetTableBucketEncryptionResponse_encryptionConfiguration         smithy.SchemaExtensions
+	eGetTableBucketRequest                                            smithy.SchemaExtensions
+	eGetTableBucketRequest_tableBucketARN                             smithy.SchemaExtensions
+	eGetTableBucketMaintenanceConfigurationRequest                    smithy.SchemaExtensions
+	eGetTableBucketMaintenanceConfigurationRequest_tableBucketARN     smithy.SchemaExtensions
+	eGetTableBucketMaintenanceConfigurationResponse                   smithy.SchemaExtensions
+	eGetTableBucketMaintenanceConfigurationResponse_tableBucketARN    smithy.SchemaExtensions
+	eGetTableBucketMaintenanceConfigurationResponse_configuration     smithy.SchemaExtensions
+	eGetTableBucketMetricsConfigurationRequest                        smithy.SchemaExtensions
+	eGetTableBucketMetricsConfigurationRequest_tableBucketARN         smithy.SchemaExtensions
+	eGetTableBucketMetricsConfigurationResponse                       smithy.SchemaExtensions
+	eGetTableBucketMetricsConfigurationResponse_tableBucketARN        smithy.SchemaExtensions
+	eGetTableBucketMetricsConfigurationResponse_id                    smithy.SchemaExtensions
+	eGetTableBucketResponse                                           smithy.SchemaExtensions
+	eGetTableBucketResponse_arn                                       smithy.SchemaExtensions
+	eGetTableBucketResponse_name                                      smithy.SchemaExtensions
+	eGetTableBucketResponse_ownerAccountId                            smithy.SchemaExtensions
+	eGetTableBucketResponse_createdAt                                 smithy.SchemaExtensions
+	eGetTableBucketResponse_tableBucketId                             smithy.SchemaExtensions
+	eGetTableBucketResponse_type                                      smithy.SchemaExtensions
+	eGetTableBucketPolicyRequest                                      smithy.SchemaExtensions
+	eGetTableBucketPolicyRequest_tableBucketARN                       smithy.SchemaExtensions
+	eGetTableBucketPolicyResponse                                     smithy.SchemaExtensions
+	eGetTableBucketPolicyResponse_resourcePolicy                      smithy.SchemaExtensions
+	eGetTableBucketReplicationRequest                                 smithy.SchemaExtensions
+	eGetTableBucketReplicationRequest_tableBucketARN                  smithy.SchemaExtensions
+	eGetTableBucketReplicationResponse                                smithy.SchemaExtensions
+	eGetTableBucketReplicationResponse_versionToken                   smithy.SchemaExtensions
+	eGetTableBucketReplicationResponse_configuration                  smithy.SchemaExtensions
+	eGetTableBucketStorageClassRequest                                smithy.SchemaExtensions
+	eGetTableBucketStorageClassRequest_tableBucketARN                 smithy.SchemaExtensions
+	eGetTableBucketStorageClassResponse                               smithy.SchemaExtensions
+	eGetTableBucketStorageClassResponse_storageClassConfiguration     smithy.SchemaExtensions
+	eGetTableEncryptionRequest                                        smithy.SchemaExtensions
+	eGetTableEncryptionRequest_tableBucketARN                         smithy.SchemaExtensions
+	eGetTableEncryptionRequest_namespace                              smithy.SchemaExtensions
+	eGetTableEncryptionRequest_name                                   smithy.SchemaExtensions
+	eGetTableEncryptionResponse                                       smithy.SchemaExtensions
+	eGetTableEncryptionResponse_encryptionConfiguration               smithy.SchemaExtensions
+	eGetTableRequest                                                  smithy.SchemaExtensions
+	eGetTableRequest_tableBucketARN                                   smithy.SchemaExtensions
+	eGetTableRequest_namespace                                        smithy.SchemaExtensions
+	eGetTableRequest_name                                             smithy.SchemaExtensions
+	eGetTableRequest_tableArn                                         smithy.SchemaExtensions
+	eGetTableMaintenanceConfigurationRequest                          smithy.SchemaExtensions
+	eGetTableMaintenanceConfigurationRequest_tableBucketARN           smithy.SchemaExtensions
+	eGetTableMaintenanceConfigurationRequest_namespace                smithy.SchemaExtensions
+	eGetTableMaintenanceConfigurationRequest_name                     smithy.SchemaExtensions
+	eGetTableMaintenanceConfigurationResponse                         smithy.SchemaExtensions
+	eGetTableMaintenanceConfigurationResponse_tableARN                smithy.SchemaExtensions
+	eGetTableMaintenanceConfigurationResponse_configuration           smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatusRequest                              smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatusRequest_tableBucketARN               smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatusRequest_namespace                    smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatusRequest_name                         smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatusResponse                             smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatusResponse_tableARN                    smithy.SchemaExtensions
+	eGetTableMaintenanceJobStatusResponse_status                      smithy.SchemaExtensions
+	eGetTableMetadataLocationRequest                                  smithy.SchemaExtensions
+	eGetTableMetadataLocationRequest_tableBucketARN                   smithy.SchemaExtensions
+	eGetTableMetadataLocationRequest_namespace                        smithy.SchemaExtensions
+	eGetTableMetadataLocationRequest_name                             smithy.SchemaExtensions
+	eGetTableMetadataLocationResponse                                 smithy.SchemaExtensions
+	eGetTableMetadataLocationResponse_versionToken                    smithy.SchemaExtensions
+	eGetTableMetadataLocationResponse_metadataLocation                smithy.SchemaExtensions
+	eGetTableMetadataLocationResponse_warehouseLocation               smithy.SchemaExtensions
+	eGetTableMigrationRequest                                         smithy.SchemaExtensions
+	eGetTableMigrationRequest_migrationId                             smithy.SchemaExtensions
+	eGetTableMigrationRequest_tableARN                                smithy.SchemaExtensions
+	eGetTableMigrationResponse                                        smithy.SchemaExtensions
+	eGetTableMigrationResponse_migrationId                            smithy.SchemaExtensions
+	eGetTableMigrationResponse_tableBucketARN                         smithy.SchemaExtensions
+	eGetTableMigrationResponse_namespace                              smithy.SchemaExtensions
+	eGetTableMigrationResponse_tableARN                               smithy.SchemaExtensions
+	eGetTableMigrationResponse_name                                   smithy.SchemaExtensions
+	eGetTableMigrationResponse_type                                   smithy.SchemaExtensions
+	eGetTableMigrationResponse_state                                  smithy.SchemaExtensions
+	eGetTableMigrationResponse_roleARN                                smithy.SchemaExtensions
+	eGetTableMigrationResponse_reviewMigrationPlan                    smithy.SchemaExtensions
+	eGetTableMigrationResponse_hasValidPlan                           smithy.SchemaExtensions
+	eGetTableMigrationResponse_createdAt                              smithy.SchemaExtensions
+	eGetTableMigrationResponse_stateUpdatedAt                         smithy.SchemaExtensions
+	eGetTableMigrationResponse_failureReason                          smithy.SchemaExtensions
+	eGetTableMigrationResponse_planningStats                          smithy.SchemaExtensions
+	eGetTableMigrationResponse_migrationStats                         smithy.SchemaExtensions
+	eGetTableMigrationResponse_sourceType                             smithy.SchemaExtensions
+	eGetTableMigrationResponse_source                                 smithy.SchemaExtensions
+	eGetTableMigrationResponse_dataMigration                          smithy.SchemaExtensions
+	eGetTableMigrationResponse_migrationOutput                        smithy.SchemaExtensions
+	eGetTableResponse                                                 smithy.SchemaExtensions
+	eGetTableResponse_name                                            smithy.SchemaExtensions
+	eGetTableResponse_type                                            smithy.SchemaExtensions
+	eGetTableResponse_tableARN                                        smithy.SchemaExtensions
+	eGetTableResponse_namespace                                       smithy.SchemaExtensions
+	eGetTableResponse_namespaceId                                     smithy.SchemaExtensions
+	eGetTableResponse_versionToken                                    smithy.SchemaExtensions
+	eGetTableResponse_metadataLocation                                smithy.SchemaExtensions
+	eGetTableResponse_warehouseLocation                               smithy.SchemaExtensions
+	eGetTableResponse_createdAt                                       smithy.SchemaExtensions
+	eGetTableResponse_createdBy                                       smithy.SchemaExtensions
+	eGetTableResponse_managedByService                                smithy.SchemaExtensions
+	eGetTableResponse_modifiedAt                                      smithy.SchemaExtensions
+	eGetTableResponse_modifiedBy                                      smithy.SchemaExtensions
+	eGetTableResponse_ownerAccountId                                  smithy.SchemaExtensions
+	eGetTableResponse_format                                          smithy.SchemaExtensions
+	eGetTableResponse_tableBucketId                                   smithy.SchemaExtensions
+	eGetTableResponse_managedTableInformation                         smithy.SchemaExtensions
+	eGetTablePolicyRequest                                            smithy.SchemaExtensions
+	eGetTablePolicyRequest_tableBucketARN                             smithy.SchemaExtensions
+	eGetTablePolicyRequest_namespace                                  smithy.SchemaExtensions
+	eGetTablePolicyRequest_name                                       smithy.SchemaExtensions
+	eGetTablePolicyResponse                                           smithy.SchemaExtensions
+	eGetTablePolicyResponse_resourcePolicy                            smithy.SchemaExtensions
+	eGetTableRecordExpirationConfigurationRequest                     smithy.SchemaExtensions
+	eGetTableRecordExpirationConfigurationRequest_tableArn            smithy.SchemaExtensions
+	eGetTableRecordExpirationConfigurationResponse                    smithy.SchemaExtensions
+	eGetTableRecordExpirationConfigurationResponse_configuration      smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatusRequest                         smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatusRequest_tableArn                smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatusResponse                        smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatusResponse_status                 smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatusResponse_lastRunTimestamp       smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatusResponse_failureMessage         smithy.SchemaExtensions
+	eGetTableRecordExpirationJobStatusResponse_metrics                smithy.SchemaExtensions
+	eGetTableReplicationRequest                                       smithy.SchemaExtensions
+	eGetTableReplicationRequest_tableArn                              smithy.SchemaExtensions
+	eGetTableReplicationResponse                                      smithy.SchemaExtensions
+	eGetTableReplicationResponse_versionToken                         smithy.SchemaExtensions
+	eGetTableReplicationResponse_configuration                        smithy.SchemaExtensions
+	eGetTableReplicationStatusRequest                                 smithy.SchemaExtensions
+	eGetTableReplicationStatusRequest_tableArn                        smithy.SchemaExtensions
+	eGetTableReplicationStatusResponse                                smithy.SchemaExtensions
+	eGetTableReplicationStatusResponse_sourceTableArn                 smithy.SchemaExtensions
+	eGetTableReplicationStatusResponse_destinations                   smithy.SchemaExtensions
+	eGetTableStorageClassRequest                                      smithy.SchemaExtensions
+	eGetTableStorageClassRequest_tableBucketARN                       smithy.SchemaExtensions
+	eGetTableStorageClassRequest_namespace                            smithy.SchemaExtensions
+	eGetTableStorageClassRequest_name                                 smithy.SchemaExtensions
+	eGetTableStorageClassResponse                                     smithy.SchemaExtensions
+	eGetTableStorageClassResponse_storageClassConfiguration           smithy.SchemaExtensions
+	eListNamespacesRequest                                            smithy.SchemaExtensions
+	eListNamespacesRequest_tableBucketARN                             smithy.SchemaExtensions
+	eListNamespacesRequest_prefix                                     smithy.SchemaExtensions
+	eListNamespacesRequest_continuationToken                          smithy.SchemaExtensions
+	eListNamespacesRequest_maxNamespaces                              smithy.SchemaExtensions
+	eListNamespacesResponse                                           smithy.SchemaExtensions
+	eListNamespacesResponse_namespaces                                smithy.SchemaExtensions
+	eListNamespacesResponse_continuationToken                         smithy.SchemaExtensions
+	eListTableBucketsRequest                                          smithy.SchemaExtensions
+	eListTableBucketsRequest_prefix                                   smithy.SchemaExtensions
+	eListTableBucketsRequest_continuationToken                        smithy.SchemaExtensions
+	eListTableBucketsRequest_maxBuckets                               smithy.SchemaExtensions
+	eListTableBucketsRequest_type                                     smithy.SchemaExtensions
+	eListTableBucketsResponse                                         smithy.SchemaExtensions
+	eListTableBucketsResponse_tableBuckets                            smithy.SchemaExtensions
+	eListTableBucketsResponse_continuationToken                       smithy.SchemaExtensions
+	eListTableMigrationsRequest                                       smithy.SchemaExtensions
+	eListTableMigrationsRequest_tableBucketARN                        smithy.SchemaExtensions
+	eListTableMigrationsRequest_namespace                             smithy.SchemaExtensions
+	eListTableMigrationsRequest_name                                  smithy.SchemaExtensions
+	eListTableMigrationsRequest_tableARN                              smithy.SchemaExtensions
+	eListTableMigrationsRequest_state                                 smithy.SchemaExtensions
+	eListTableMigrationsRequest_hasValidPlan                          smithy.SchemaExtensions
+	eListTableMigrationsRequest_maxResults                            smithy.SchemaExtensions
+	eListTableMigrationsRequest_nextToken                             smithy.SchemaExtensions
+	eListTableMigrationsResponse                                      smithy.SchemaExtensions
+	eListTableMigrationsResponse_migrations                           smithy.SchemaExtensions
+	eListTableMigrationsResponse_nextToken                            smithy.SchemaExtensions
+	eListTablesRequest                                                smithy.SchemaExtensions
+	eListTablesRequest_tableBucketARN                                 smithy.SchemaExtensions
+	eListTablesRequest_namespace                                      smithy.SchemaExtensions
+	eListTablesRequest_prefix                                         smithy.SchemaExtensions
+	eListTablesRequest_continuationToken                              smithy.SchemaExtensions
+	eListTablesRequest_maxTables                                      smithy.SchemaExtensions
+	eListTablesResponse                                               smithy.SchemaExtensions
+	eListTablesResponse_tables                                        smithy.SchemaExtensions
+	eListTablesResponse_continuationToken                             smithy.SchemaExtensions
+	eListTagsForResourceRequest                                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                           smithy.SchemaExtensions
+	eListTagsForResourceResponse                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                 smithy.SchemaExtensions
+	ePutTableBucketEncryptionRequest                                  smithy.SchemaExtensions
+	ePutTableBucketEncryptionRequest_tableBucketARN                   smithy.SchemaExtensions
+	ePutTableBucketEncryptionRequest_encryptionConfiguration          smithy.SchemaExtensions
+	ePutTableBucketMaintenanceConfigurationRequest                    smithy.SchemaExtensions
+	ePutTableBucketMaintenanceConfigurationRequest_tableBucketARN     smithy.SchemaExtensions
+	ePutTableBucketMaintenanceConfigurationRequest_type               smithy.SchemaExtensions
+	ePutTableBucketMaintenanceConfigurationRequest_value              smithy.SchemaExtensions
+	ePutTableBucketMetricsConfigurationRequest                        smithy.SchemaExtensions
+	ePutTableBucketMetricsConfigurationRequest_tableBucketARN         smithy.SchemaExtensions
+	ePutTableBucketPolicyRequest                                      smithy.SchemaExtensions
+	ePutTableBucketPolicyRequest_tableBucketARN                       smithy.SchemaExtensions
+	ePutTableBucketPolicyRequest_resourcePolicy                       smithy.SchemaExtensions
+	ePutTableBucketReplicationRequest                                 smithy.SchemaExtensions
+	ePutTableBucketReplicationRequest_tableBucketARN                  smithy.SchemaExtensions
+	ePutTableBucketReplicationRequest_versionToken                    smithy.SchemaExtensions
+	ePutTableBucketReplicationRequest_configuration                   smithy.SchemaExtensions
+	ePutTableBucketReplicationResponse                                smithy.SchemaExtensions
+	ePutTableBucketReplicationResponse_versionToken                   smithy.SchemaExtensions
+	ePutTableBucketReplicationResponse_status                         smithy.SchemaExtensions
+	ePutTableBucketStorageClassRequest                                smithy.SchemaExtensions
+	ePutTableBucketStorageClassRequest_tableBucketARN                 smithy.SchemaExtensions
+	ePutTableBucketStorageClassRequest_storageClassConfiguration      smithy.SchemaExtensions
+	ePutTableMaintenanceConfigurationRequest                          smithy.SchemaExtensions
+	ePutTableMaintenanceConfigurationRequest_tableBucketARN           smithy.SchemaExtensions
+	ePutTableMaintenanceConfigurationRequest_namespace                smithy.SchemaExtensions
+	ePutTableMaintenanceConfigurationRequest_name                     smithy.SchemaExtensions
+	ePutTableMaintenanceConfigurationRequest_type                     smithy.SchemaExtensions
+	ePutTableMaintenanceConfigurationRequest_value                    smithy.SchemaExtensions
+	ePutTablePolicyRequest                                            smithy.SchemaExtensions
+	ePutTablePolicyRequest_tableBucketARN                             smithy.SchemaExtensions
+	ePutTablePolicyRequest_namespace                                  smithy.SchemaExtensions
+	ePutTablePolicyRequest_name                                       smithy.SchemaExtensions
+	ePutTablePolicyRequest_resourcePolicy                             smithy.SchemaExtensions
+	ePutTableRecordExpirationConfigurationRequest                     smithy.SchemaExtensions
+	ePutTableRecordExpirationConfigurationRequest_tableArn            smithy.SchemaExtensions
+	ePutTableRecordExpirationConfigurationRequest_value               smithy.SchemaExtensions
+	ePutTableReplicationRequest                                       smithy.SchemaExtensions
+	ePutTableReplicationRequest_tableArn                              smithy.SchemaExtensions
+	ePutTableReplicationRequest_versionToken                          smithy.SchemaExtensions
+	ePutTableReplicationRequest_configuration                         smithy.SchemaExtensions
+	ePutTableReplicationResponse                                      smithy.SchemaExtensions
+	ePutTableReplicationResponse_versionToken                         smithy.SchemaExtensions
+	ePutTableReplicationResponse_status                               smithy.SchemaExtensions
+	eRenameTableRequest                                               smithy.SchemaExtensions
+	eRenameTableRequest_tableBucketARN                                smithy.SchemaExtensions
+	eRenameTableRequest_namespace                                     smithy.SchemaExtensions
+	eRenameTableRequest_name                                          smithy.SchemaExtensions
+	eRenameTableRequest_newNamespaceName                              smithy.SchemaExtensions
+	eRenameTableRequest_newName                                       smithy.SchemaExtensions
+	eRenameTableRequest_versionToken                                  smithy.SchemaExtensions
+	eStartTableMigrationRequest                                       smithy.SchemaExtensions
+	eStartTableMigrationRequest_roleARN                               smithy.SchemaExtensions
+	eStartTableMigrationRequest_destinationTable                      smithy.SchemaExtensions
+	eStartTableMigrationRequest_sourceType                            smithy.SchemaExtensions
+	eStartTableMigrationRequest_source                                smithy.SchemaExtensions
+	eStartTableMigrationRequest_dataMigration                         smithy.SchemaExtensions
+	eStartTableMigrationRequest_reviewMigrationPlan                   smithy.SchemaExtensions
+	eStartTableMigrationRequest_migrationOutput                       smithy.SchemaExtensions
+	eStartTableMigrationResponse                                      smithy.SchemaExtensions
+	eStartTableMigrationResponse_migrationId                          smithy.SchemaExtensions
+	eStartTableMigrationResponse_state                                smithy.SchemaExtensions
+	eSyncTableMigrationRequest                                        smithy.SchemaExtensions
+	eSyncTableMigrationRequest_roleARN                                smithy.SchemaExtensions
+	eSyncTableMigrationRequest_tableARN                               smithy.SchemaExtensions
+	eSyncTableMigrationRequest_reviewMigrationPlan                    smithy.SchemaExtensions
+	eSyncTableMigrationRequest_migrationOutput                        smithy.SchemaExtensions
+	eSyncTableMigrationResponse                                       smithy.SchemaExtensions
+	eSyncTableMigrationResponse_migrationId                           smithy.SchemaExtensions
+	eSyncTableMigrationResponse_state                                 smithy.SchemaExtensions
+	eTagResourceRequest                                               smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                   smithy.SchemaExtensions
+	eTagResourceRequest_tags                                          smithy.SchemaExtensions
+	eTagResourceResponse                                              smithy.SchemaExtensions
+	eUntagResourceRequest                                             smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                 smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                     smithy.SchemaExtensions
+	eUntagResourceResponse                                            smithy.SchemaExtensions
+	eUpdateTableMetadataLocationRequest                               smithy.SchemaExtensions
+	eUpdateTableMetadataLocationRequest_tableBucketARN                smithy.SchemaExtensions
+	eUpdateTableMetadataLocationRequest_namespace                     smithy.SchemaExtensions
+	eUpdateTableMetadataLocationRequest_name                          smithy.SchemaExtensions
+	eUpdateTableMetadataLocationRequest_versionToken                  smithy.SchemaExtensions
+	eUpdateTableMetadataLocationRequest_metadataLocation              smithy.SchemaExtensions
+	eUpdateTableMetadataLocationResponse                              smithy.SchemaExtensions
+	eUpdateTableMetadataLocationResponse_name                         smithy.SchemaExtensions
+	eUpdateTableMetadataLocationResponse_tableARN                     smithy.SchemaExtensions
+	eUpdateTableMetadataLocationResponse_namespace                    smithy.SchemaExtensions
+	eUpdateTableMetadataLocationResponse_versionToken                 smithy.SchemaExtensions
+	eUpdateTableMetadataLocationResponse_metadataLocation             smithy.SchemaExtensions
+	eUpdateTableMigrationRequest                                      smithy.SchemaExtensions
+	eUpdateTableMigrationRequest_tableARN                             smithy.SchemaExtensions
+	eUpdateTableMigrationRequest_migrationId                          smithy.SchemaExtensions
+	eUpdateTableMigrationRequest_requestedState                       smithy.SchemaExtensions
+	eUpdateTableMigrationRequest_updateDescription                    smithy.SchemaExtensions
+	eUpdateTableMigrationResponse                                     smithy.SchemaExtensions
+	eUpdateTableMigrationResponse_migrationId                         smithy.SchemaExtensions
+	eUpdateTableMigrationResponse_state                               smithy.SchemaExtensions
+	eUpdateTableMigrationResponse_tableARN                            smithy.SchemaExtensions
+)
+
+var (
+	iCompleteTableMigration                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CompleteTableMigration"}
+	iCreateNamespace                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateNamespace"}
+	iCreateTable                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateTable"}
+	iCreateTableBucket                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateTableBucket"}
+	iDeleteNamespace                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteNamespace"}
+	iDeleteTable                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTable"}
+	iDeleteTableBucket                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucket"}
+	iDeleteTableBucketEncryption                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketEncryption"}
+	iDeleteTableBucketMetricsConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketMetricsConfiguration"}
+	iDeleteTableBucketPolicy                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketPolicy"}
+	iDeleteTableBucketReplication                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketReplication"}
+	iDeleteTablePolicy                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTablePolicy"}
+	iDeleteTableReplication                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableReplication"}
+	iGetNamespace                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetNamespace"}
+	iGetTable                                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTable"}
+	iGetTableBucket                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucket"}
+	iGetTableBucketEncryption                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketEncryption"}
+	iGetTableBucketMaintenanceConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketMaintenanceConfiguration"}
+	iGetTableBucketMetricsConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketMetricsConfiguration"}
+	iGetTableBucketPolicy                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketPolicy"}
+	iGetTableBucketReplication                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketReplication"}
+	iGetTableBucketStorageClass                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketStorageClass"}
+	iGetTableEncryption                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableEncryption"}
+	iGetTableMaintenanceConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMaintenanceConfiguration"}
+	iGetTableMaintenanceJobStatus                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMaintenanceJobStatus"}
+	iGetTableMetadataLocation                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMetadataLocation"}
+	iGetTableMigration                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMigration"}
+	iGetTablePolicy                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTablePolicy"}
+	iGetTableRecordExpirationConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableRecordExpirationConfiguration"}
+	iGetTableRecordExpirationJobStatus              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableRecordExpirationJobStatus"}
+	iGetTableReplication                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableReplication"}
+	iGetTableReplicationStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableReplicationStatus"}
+	iGetTableStorageClass                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableStorageClass"}
+	iListNamespaces                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListNamespaces"}
+	iListTableBuckets                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableBuckets"}
+	iListTableMigrations                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableMigrations"}
+	iListTables                                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTables"}
+	iListTagsForResource                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTagsForResource"}
+	iPutTableBucketEncryption                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketEncryption"}
+	iPutTableBucketMaintenanceConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketMaintenanceConfiguration"}
+	iPutTableBucketMetricsConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketMetricsConfiguration"}
+	iPutTableBucketPolicy                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketPolicy"}
+	iPutTableBucketReplication                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketReplication"}
+	iPutTableBucketStorageClass                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketStorageClass"}
+	iPutTableMaintenanceConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableMaintenanceConfiguration"}
+	iPutTablePolicy                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTablePolicy"}
+	iPutTableRecordExpirationConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableRecordExpirationConfiguration"}
+	iPutTableReplication                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableReplication"}
+	iRenameTable                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "RenameTable"}
+	iStartTableMigration                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "StartTableMigration"}
+	iSyncTableMigration                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SyncTableMigration"}
+	iTagResource                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TagResource"}
+	iUntagResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UntagResource"}
+	iUpdateTableMetadataLocation                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UpdateTableMetadataLocation"}
+	iUpdateTableMigration                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UpdateTableMigration"}
+	i_S3TableBuckets                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "S3TableBuckets"}
+	iAccessDeniedException                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "AccessDeniedException"}
+	i_AccountId                                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "AccountId"}
+	iBadRequestException                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "BadRequestException"}
+	i_ChecksumCRC64NVME                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ChecksumCRC64NVME"}
+	iCompressionCodec                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CompressionCodec"}
+	iConflictException                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ConflictException"}
+	iDataFileFormat                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DataFileFormat"}
+	iDataMigrationOverview                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DataMigrationOverview"}
+	iDataMigrationSettings                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DataMigrationSettings"}
+	iDestinationTable                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DestinationTable"}
+	iEncryptionConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "EncryptionConfiguration"}
+	i_ErrorMessage                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ErrorMessage"}
+	iFindingCategory                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "FindingCategory"}
+	i_FindingCategoryCounts                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "FindingCategoryCounts"}
+	iForbiddenException                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ForbiddenException"}
+	iGlueTableSource                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GlueTableSource"}
+	i_IAMRole                                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IAMRole"}
+	iIcebergCompactionSettings                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergCompactionSettings"}
+	iIcebergCompactionStrategy                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergCompactionStrategy"}
+	iIcebergMetadata                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergMetadata"}
+	iIcebergNullOrder                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergNullOrder"}
+	iIcebergPartitionField                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergPartitionField"}
+	i_IcebergPartitionFieldList                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergPartitionFieldList"}
+	iIcebergPartitionSpec                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergPartitionSpec"}
+	iIcebergSchema                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergSchema"}
+	iIcebergSchemaV2                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergSchemaV2"}
+	iIcebergSnapshotManagementSettings              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergSnapshotManagementSettings"}
+	iIcebergSortDirection                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergSortDirection"}
+	iIcebergSortField                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergSortField"}
+	i_IcebergSortFieldList                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergSortFieldList"}
+	iIcebergSortOrder                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergSortOrder"}
+	iIcebergUnreferencedFileRemovalSettings         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IcebergUnreferencedFileRemovalSettings"}
+	iIncompatibleValuesPolicy                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IncompatibleValuesPolicy"}
+	i_IntegerList                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "IntegerList"}
+	iInternalServerErrorException                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "InternalServerErrorException"}
+	iJobStatus                                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "JobStatus"}
+	iLastSuccessfulReplicatedUpdate                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "LastSuccessfulReplicatedUpdate"}
+	i_ListNamespacesLimit                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListNamespacesLimit"}
+	i_ListTableBucketsLimit                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableBucketsLimit"}
+	i_ListTableMigrationsLimit                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableMigrationsLimit"}
+	i_ListTablesLimit                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTablesLimit"}
+	iMaintenanceSettings                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MaintenanceSettings"}
+	iMaintenanceStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MaintenanceStatus"}
+	iManagedTableInformation                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ManagedTableInformation"}
+	i_MetadataLocation                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MetadataLocation"}
+	iMethodNotAllowedException                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MethodNotAllowedException"}
+	iMigrationCompactionSettings                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationCompactionSettings"}
+	iMigrationFailureCode                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationFailureCode"}
+	i_MigrationFailureDetail                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationFailureDetail"}
+	iMigrationFailureReason                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationFailureReason"}
+	i_MigrationId                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationId"}
+	i_MigrationMinSnapshotsToKeep                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationMinSnapshotsToKeep"}
+	iMigrationOutputConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationOutputConfiguration"}
+	iMigrationOutputOverview                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationOutputOverview"}
+	iMigrationPolicies                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationPolicies"}
+	i_MigrationReportPrefix                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationReportPrefix"}
+	iMigrationReportPrefixes                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationReportPrefixes"}
+	iMigrationRequestedState                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationRequestedState"}
+	iMigrationSnapshotManagementSettings            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationSnapshotManagementSettings"}
+	iMigrationSourceType                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationSourceType"}
+	iMigrationState                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationState"}
+	iMigrationStats                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationStats"}
+	iMigrationSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationSummary"}
+	i_MigrationSummaryList                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationSummaryList"}
+	iMigrationTableProperties                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationTableProperties"}
+	i_MigrationTargetFileSizeMB                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationTargetFileSizeMB"}
+	iMigrationType                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "MigrationType"}
+	i_NamespaceId                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "NamespaceId"}
+	i_NamespaceList                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "NamespaceList"}
+	i_NamespaceName                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "NamespaceName"}
+	iNamespaceSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "NamespaceSummary"}
+	i_NamespaceSummaryList                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "NamespaceSummaryList"}
+	i_NextToken                                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "NextToken"}
+	iNotFoundException                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "NotFoundException"}
+	iOpenTableFormat                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "OpenTableFormat"}
+	iPlanningStats                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PlanningStats"}
+	i_PositiveInteger                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PositiveInteger"}
+	iReplicationDestination                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReplicationDestination"}
+	i_ReplicationDestinations                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReplicationDestinations"}
+	i_ReplicationDestinationStatuses                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReplicationDestinationStatuses"}
+	iReplicationDestinationStatusModel              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReplicationDestinationStatusModel"}
+	iReplicationInformation                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReplicationInformation"}
+	iReplicationStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReplicationStatus"}
+	i_ReportObjectKey                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReportObjectKey"}
+	iReportOverview                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ReportOverview"}
+	i_ResourceArn                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ResourceArn"}
+	i_ResourcePolicy                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ResourcePolicy"}
+	i_RoleArn                                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "RoleArn"}
+	i_S3BucketARN                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "S3BucketARN"}
+	iSchemaField                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SchemaField"}
+	i_SchemaFieldList                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SchemaFieldList"}
+	iSchemaV2Field                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SchemaV2Field"}
+	i_SchemaV2FieldList                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SchemaV2FieldList"}
+	iSchemaV2FieldType                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SchemaV2FieldType"}
+	iSourceConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SourceConfiguration"}
+	iSSEAlgorithm                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SSEAlgorithm"}
+	iStorageClass                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "StorageClass"}
+	iStorageClassConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "StorageClassConfiguration"}
+	i_TableARN                                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableARN"}
+	i_TableBucketARN                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketARN"}
+	i_TableBucketId                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketId"}
+	i_TableBucketMaintenanceConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketMaintenanceConfiguration"}
+	iTableBucketMaintenanceConfigurationValue       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketMaintenanceConfigurationValue"}
+	iTableBucketMaintenanceSettings                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketMaintenanceSettings"}
+	iTableBucketMaintenanceType                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketMaintenanceType"}
+	i_TableBucketName                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketName"}
+	iTableBucketReplicationConfiguration            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketReplicationConfiguration"}
+	iTableBucketReplicationRule                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketReplicationRule"}
+	i_TableBucketReplicationRules                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketReplicationRules"}
+	iTableBucketSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketSummary"}
+	i_TableBucketSummaryList                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketSummaryList"}
+	iTableBucketType                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableBucketType"}
+	i_TableMaintenanceConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMaintenanceConfiguration"}
+	iTableMaintenanceConfigurationValue             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMaintenanceConfigurationValue"}
+	i_TableMaintenanceJobStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMaintenanceJobStatus"}
+	iTableMaintenanceJobStatusValue                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMaintenanceJobStatusValue"}
+	iTableMaintenanceJobType                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMaintenanceJobType"}
+	iTableMaintenanceSettings                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMaintenanceSettings"}
+	iTableMaintenanceType                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMaintenanceType"}
+	iTableMetadata                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableMetadata"}
+	i_TableName                                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableName"}
+	i_TableProperties                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableProperties"}
+	iTableRecordExpirationConfigurationValue        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableRecordExpirationConfigurationValue"}
+	iTableRecordExpirationJobMetrics                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableRecordExpirationJobMetrics"}
+	iTableRecordExpirationJobStatus                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableRecordExpirationJobStatus"}
+	iTableRecordExpirationSettings                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableRecordExpirationSettings"}
+	iTableRecordExpirationStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableRecordExpirationStatus"}
+	iTableReplicationConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableReplicationConfiguration"}
+	iTableReplicationRule                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableReplicationRule"}
+	i_TableReplicationRules                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableReplicationRules"}
+	iTableSummary                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableSummary"}
+	i_TableSummaryList                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableSummaryList"}
+	iTableType                                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TableType"}
+	i_TagKey                                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TagKey"}
+	i_TagKeyList                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TagKeyList"}
+	i_Tags                                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "Tags"}
+	i_TagValue                                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TagValue"}
+	iTooManyRequestsException                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TooManyRequestsException"}
+	iUnmatchedSourceFieldsPolicy                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UnmatchedSourceFieldsPolicy"}
+	i_VersionToken                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "VersionToken"}
+	i_WarehouseLocation                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "WarehouseLocation"}
+	iCompleteTableMigrationRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CompleteTableMigrationRequest"}
+	iCreateNamespaceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateNamespaceRequest"}
+	iCreateNamespaceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateNamespaceResponse"}
+	iCreateTableBucketRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateTableBucketRequest"}
+	iCreateTableBucketResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateTableBucketResponse"}
+	iCreateTableRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateTableRequest"}
+	iCreateTableResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "CreateTableResponse"}
+	iDeleteNamespaceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteNamespaceRequest"}
+	iDeleteTableBucketEncryptionRequest             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketEncryptionRequest"}
+	iDeleteTableBucketRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketRequest"}
+	iDeleteTableBucketMetricsConfigurationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketMetricsConfigurationRequest"}
+	iDeleteTableBucketPolicyRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketPolicyRequest"}
+	iDeleteTableBucketReplicationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableBucketReplicationRequest"}
+	iDeleteTableRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableRequest"}
+	iDeleteTablePolicyRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTablePolicyRequest"}
+	iDeleteTableReplicationRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "DeleteTableReplicationRequest"}
+	iGetNamespaceRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetNamespaceRequest"}
+	iGetNamespaceResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetNamespaceResponse"}
+	iGetTableBucketEncryptionRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketEncryptionRequest"}
+	iGetTableBucketEncryptionResponse               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketEncryptionResponse"}
+	iGetTableBucketRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketRequest"}
+	iGetTableBucketMaintenanceConfigurationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketMaintenanceConfigurationRequest"}
+	iGetTableBucketMaintenanceConfigurationResponse = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketMaintenanceConfigurationResponse"}
+	iGetTableBucketMetricsConfigurationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketMetricsConfigurationRequest"}
+	iGetTableBucketMetricsConfigurationResponse     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketMetricsConfigurationResponse"}
+	iGetTableBucketResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketResponse"}
+	iGetTableBucketPolicyRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketPolicyRequest"}
+	iGetTableBucketPolicyResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketPolicyResponse"}
+	iGetTableBucketReplicationRequest               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketReplicationRequest"}
+	iGetTableBucketReplicationResponse              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketReplicationResponse"}
+	iGetTableBucketStorageClassRequest              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketStorageClassRequest"}
+	iGetTableBucketStorageClassResponse             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableBucketStorageClassResponse"}
+	iGetTableEncryptionRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableEncryptionRequest"}
+	iGetTableEncryptionResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableEncryptionResponse"}
+	iGetTableRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableRequest"}
+	iGetTableMaintenanceConfigurationRequest        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMaintenanceConfigurationRequest"}
+	iGetTableMaintenanceConfigurationResponse       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMaintenanceConfigurationResponse"}
+	iGetTableMaintenanceJobStatusRequest            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMaintenanceJobStatusRequest"}
+	iGetTableMaintenanceJobStatusResponse           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMaintenanceJobStatusResponse"}
+	iGetTableMetadataLocationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMetadataLocationRequest"}
+	iGetTableMetadataLocationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMetadataLocationResponse"}
+	iGetTableMigrationRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMigrationRequest"}
+	iGetTableMigrationResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableMigrationResponse"}
+	iGetTableResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableResponse"}
+	iGetTablePolicyRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTablePolicyRequest"}
+	iGetTablePolicyResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTablePolicyResponse"}
+	iGetTableRecordExpirationConfigurationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableRecordExpirationConfigurationRequest"}
+	iGetTableRecordExpirationConfigurationResponse  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableRecordExpirationConfigurationResponse"}
+	iGetTableRecordExpirationJobStatusRequest       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableRecordExpirationJobStatusRequest"}
+	iGetTableRecordExpirationJobStatusResponse      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableRecordExpirationJobStatusResponse"}
+	iGetTableReplicationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableReplicationRequest"}
+	iGetTableReplicationResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableReplicationResponse"}
+	iGetTableReplicationStatusRequest               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableReplicationStatusRequest"}
+	iGetTableReplicationStatusResponse              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableReplicationStatusResponse"}
+	iGetTableStorageClassRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableStorageClassRequest"}
+	iGetTableStorageClassResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "GetTableStorageClassResponse"}
+	iListNamespacesRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListNamespacesRequest"}
+	iListNamespacesResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListNamespacesResponse"}
+	iListTableBucketsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableBucketsRequest"}
+	iListTableBucketsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableBucketsResponse"}
+	iListTableMigrationsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableMigrationsRequest"}
+	iListTableMigrationsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTableMigrationsResponse"}
+	iListTablesRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTablesRequest"}
+	iListTablesResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTablesResponse"}
+	iListTagsForResourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "ListTagsForResourceResponse"}
+	iPutTableBucketEncryptionRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketEncryptionRequest"}
+	iPutTableBucketMaintenanceConfigurationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketMaintenanceConfigurationRequest"}
+	iPutTableBucketMetricsConfigurationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketMetricsConfigurationRequest"}
+	iPutTableBucketPolicyRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketPolicyRequest"}
+	iPutTableBucketReplicationRequest               = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketReplicationRequest"}
+	iPutTableBucketReplicationResponse              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketReplicationResponse"}
+	iPutTableBucketStorageClassRequest              = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableBucketStorageClassRequest"}
+	iPutTableMaintenanceConfigurationRequest        = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableMaintenanceConfigurationRequest"}
+	iPutTablePolicyRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTablePolicyRequest"}
+	iPutTableRecordExpirationConfigurationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableRecordExpirationConfigurationRequest"}
+	iPutTableReplicationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableReplicationRequest"}
+	iPutTableReplicationResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "PutTableReplicationResponse"}
+	iRenameTableRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "RenameTableRequest"}
+	iStartTableMigrationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "StartTableMigrationRequest"}
+	iStartTableMigrationResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "StartTableMigrationResponse"}
+	iSyncTableMigrationRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SyncTableMigrationRequest"}
+	iSyncTableMigrationResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "SyncTableMigrationResponse"}
+	iTagResourceRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TagResourceRequest"}
+	iTagResourceResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "TagResourceResponse"}
+	iUntagResourceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UntagResourceResponse"}
+	iUpdateTableMetadataLocationRequest             = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UpdateTableMetadataLocationRequest"}
+	iUpdateTableMetadataLocationResponse            = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UpdateTableMetadataLocationResponse"}
+	iUpdateTableMigrationRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UpdateTableMigrationRequest"}
+	iUpdateTableMigrationResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.s3tables", Name: "UpdateTableMigrationResponse"}
+	pUnit                                           = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pString                                         = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pLong                                           = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pInteger                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pBoolean                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pDocument                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Document"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/complete-table-migration",
-	Code: 204})
-
-var CreateNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/namespaces/{tableBucketARN}",
-	Code: 200})
-
-var CreateTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateTable",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tables/{tableBucketARN}/{namespace}",
-	Code: 200})
-
-var CreateTableBucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateTableBucket",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/buckets",
-	Code: 200})
-
-var DeleteNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/namespaces/{tableBucketARN}/{namespace}",
-	Code: 204})
-
-var DeleteTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTable",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}",
-	Code: 204})
-
-var DeleteTableBucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucket",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/buckets/{tableBucketARN}",
-	Code: 204})
-
-var DeleteTableBucketEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketEncryption",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/buckets/{tableBucketARN}/encryption",
-	Code: 204})
-
-var DeleteTableBucketMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketMetricsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/buckets/{tableBucketARN}/metrics",
-	Code: 204})
-
-var DeleteTableBucketPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/buckets/{tableBucketARN}/policy",
-	Code: 204})
-
-var DeleteTableBucketReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/table-bucket-replication",
-	Code: 204})
-
-var DeleteTablePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTablePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/policy",
-	Code: 204})
-
-var DeleteTableReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/table-replication",
-	Code: 204})
-
-var GetNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/namespaces/{tableBucketARN}/{namespace}",
-	Code: 200})
-
-var GetTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTable",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-table",
-	Code: 200})
-
-var GetTableBucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucket",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/buckets/{tableBucketARN}",
-	Code: 200})
-
-var GetTableBucketEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketEncryption",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/buckets/{tableBucketARN}/encryption",
-	Code: 200})
-
-var GetTableBucketMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketMaintenanceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/buckets/{tableBucketARN}/maintenance",
-	Code: 200})
-
-var GetTableBucketMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketMetricsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/buckets/{tableBucketARN}/metrics",
-	Code: 200})
-
-var GetTableBucketPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/buckets/{tableBucketARN}/policy",
-	Code: 200})
-
-var GetTableBucketReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/table-bucket-replication",
-	Code: 200})
-
-var GetTableBucketStorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketStorageClass",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/buckets/{tableBucketARN}/storage-class",
-	Code: 200})
-
-var GetTableEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableEncryption",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/encryption",
-	Code: 200})
-
-var GetTableMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMaintenanceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/maintenance",
-	Code: 200})
-
-var GetTableMaintenanceJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMaintenanceJobStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/maintenance-job-status",
-	Code: 200})
-
-var GetTableMetadataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMetadataLocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/metadata-location",
-	Code: 200})
-
-var GetTableMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-table-migration",
-	Code: 200})
-
-var GetTablePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTablePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/policy",
-	Code: 200})
-
-var GetTableRecordExpirationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableRecordExpirationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/table-record-expiration",
-	Code: 200})
-
-var GetTableRecordExpirationJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableRecordExpirationJobStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/table-record-expiration-job-status",
-	Code: 200})
-
-var GetTableReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/table-replication",
-	Code: 200})
-
-var GetTableReplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableReplicationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/replication-status",
-	Code: 200})
-
-var GetTableStorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableStorageClass",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/storage-class",
-	Code: 200})
-
-var ListNamespaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListNamespaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/namespaces/{tableBucketARN}",
-	Code: 200})
-
-var ListTableBuckets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableBuckets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/buckets",
-	Code: 200})
-
-var ListTableMigrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableMigrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/list-table-migrations",
-	Code: 200})
-
-var ListTables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTables",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tables/{tableBucketARN}",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tag/{resourceArn}",
-	Code: 200})
-
-var PutTableBucketEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketEncryption",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/buckets/{tableBucketARN}/encryption",
-	Code: 200})
-
-var PutTableBucketMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketMaintenanceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/buckets/{tableBucketARN}/maintenance/{type}",
-	Code: 204})
-
-var PutTableBucketMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketMetricsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/buckets/{tableBucketARN}/metrics",
-	Code: 204})
-
-var PutTableBucketPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/buckets/{tableBucketARN}/policy",
-	Code: 200})
-
-var PutTableBucketReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/table-bucket-replication",
-	Code: 200})
-
-var PutTableBucketStorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketStorageClass",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/buckets/{tableBucketARN}/storage-class",
-	Code: 200})
-
-var PutTableMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableMaintenanceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/maintenance/{type}",
-	Code: 204})
-
-var PutTablePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTablePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/policy",
-	Code: 200})
-
-var PutTableRecordExpirationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableRecordExpirationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/table-record-expiration",
-	Code: 204})
-
-var PutTableReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/table-replication",
-	Code: 200})
-
-var RenameTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "RenameTable",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/rename",
-	Code: 204})
-
-var StartTableMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "StartTableMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/start-table-migration",
-	Code: 202})
-
-var SyncTableMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SyncTableMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sync-table-migration",
-	Code: 202})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tag/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tag/{resourceArn}",
-	Code: 204})
-
-var UpdateTableMetadataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UpdateTableMetadataLocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tables/{tableBucketARN}/{namespace}/{name}/metadata-location",
-	Code: 200})
-
-var UpdateTableMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UpdateTableMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-table-migration",
-	Code: 200})
-
-var _S3TableBuckets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "S3TableBuckets",
-}, smithy.ShapeTypeService, 0)
-
-var S3TableBuckets = smithy.NewServiceSchema(_S3TableBuckets, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var _ChecksumCRC64NVME = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ChecksumCRC64NVME",
-}, smithy.ShapeTypeString, 0)
-
-var CompressionCodec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CompressionCodec",
-}, smithy.ShapeTypeEnum, 4)
-var CompressionCodec_ZSTD *smithy.Schema
-
-var CompressionCodec_SNAPPY *smithy.Schema
-
-var CompressionCodec_GZIP *smithy.Schema
-
-var CompressionCodec_UNCOMPRESSED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var DataFileFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DataFileFormat",
-}, smithy.ShapeTypeEnum, 1)
-var DataFileFormat_PARQUET *smithy.Schema
-
-var DataMigrationOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DataMigrationOverview",
-}, smithy.ShapeTypeStructure, 2)
-var DataMigrationOverview_maintenanceSettings *smithy.Schema
-
-var DataMigrationOverview_migrationPolicies *smithy.Schema
-
-var DataMigrationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DataMigrationSettings",
-}, smithy.ShapeTypeStructure, 2)
-var DataMigrationSettings_maintenanceSettings *smithy.Schema
-
-var DataMigrationSettings_migrationPolicies *smithy.Schema
-
-var DestinationTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DestinationTable",
-}, smithy.ShapeTypeStructure, 9)
-var DestinationTable_tableBucketARN *smithy.Schema
-
-var DestinationTable_namespace *smithy.Schema
-
-var DestinationTable_name *smithy.Schema
-
-var DestinationTable_encryptionConfiguration *smithy.Schema
-
-var DestinationTable_storageClassConfiguration *smithy.Schema
-
-var DestinationTable_tags *smithy.Schema
-
-var DestinationTable_properties *smithy.Schema
-
-var DestinationTable_schema *smithy.Schema
-
-var DestinationTable_icebergSortOrder *smithy.Schema
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfiguration_sseAlgorithm *smithy.Schema
-
-var EncryptionConfiguration_kmsKeyArn *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FindingCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "FindingCategory",
-}, smithy.ShapeTypeEnum, 4)
-var FindingCategory_ACCESS *smithy.Schema
-
-var FindingCategory_METADATA *smithy.Schema
-
-var FindingCategory_DATA *smithy.Schema
-
-var FindingCategory_INTERNAL *smithy.Schema
-
-var _FindingCategoryCounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "FindingCategoryCounts",
-}, smithy.ShapeTypeMap, 2)
-var _FindingCategoryCounts_key *smithy.Schema
-
-var _FindingCategoryCounts_value *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var GlueTableSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GlueTableSource",
-}, smithy.ShapeTypeStructure, 3)
-var GlueTableSource_catalogId *smithy.Schema
-
-var GlueTableSource_databaseName *smithy.Schema
-
-var GlueTableSource_tableName *smithy.Schema
-
-var _IAMRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IAMRole",
-}, smithy.ShapeTypeString, 0)
-
-var IcebergCompactionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergCompactionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var IcebergCompactionSettings_targetFileSizeMB *smithy.Schema
-
-var IcebergCompactionSettings_strategy *smithy.Schema
-
-var IcebergCompactionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergCompactionStrategy",
-}, smithy.ShapeTypeEnum, 4)
-var IcebergCompactionStrategy_AUTO *smithy.Schema
-
-var IcebergCompactionStrategy_BINPACK *smithy.Schema
-
-var IcebergCompactionStrategy_SORT *smithy.Schema
-
-var IcebergCompactionStrategy_ZORDER *smithy.Schema
-
-var IcebergMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var IcebergMetadata_schema *smithy.Schema
-
-var IcebergMetadata_schemaV2 *smithy.Schema
-
-var IcebergMetadata_partitionSpec *smithy.Schema
-
-var IcebergMetadata_writeOrder *smithy.Schema
-
-var IcebergMetadata_properties *smithy.Schema
-
-var IcebergNullOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergNullOrder",
-}, smithy.ShapeTypeEnum, 2)
-var IcebergNullOrder_NULLS_FIRST *smithy.Schema
-
-var IcebergNullOrder_NULLS_LAST *smithy.Schema
-
-var IcebergPartitionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergPartitionField",
-}, smithy.ShapeTypeStructure, 4)
-var IcebergPartitionField_sourceId *smithy.Schema
-
-var IcebergPartitionField_transform *smithy.Schema
-
-var IcebergPartitionField_name *smithy.Schema
-
-var IcebergPartitionField_fieldId *smithy.Schema
-
-var _IcebergPartitionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergPartitionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _IcebergPartitionFieldList_member *smithy.Schema
-
-var IcebergPartitionSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergPartitionSpec",
-}, smithy.ShapeTypeStructure, 2)
-var IcebergPartitionSpec_fields *smithy.Schema
-
-var IcebergPartitionSpec_specId *smithy.Schema
-
-var IcebergSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergSchema",
-}, smithy.ShapeTypeStructure, 1)
-var IcebergSchema_fields *smithy.Schema
-
-var IcebergSchemaV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergSchemaV2",
-}, smithy.ShapeTypeStructure, 4)
-var IcebergSchemaV2_type *smithy.Schema
-
-var IcebergSchemaV2_fields *smithy.Schema
-
-var IcebergSchemaV2_schemaId *smithy.Schema
-
-var IcebergSchemaV2_identifierFieldIds *smithy.Schema
-
-var IcebergSnapshotManagementSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergSnapshotManagementSettings",
-}, smithy.ShapeTypeStructure, 2)
-var IcebergSnapshotManagementSettings_minSnapshotsToKeep *smithy.Schema
-
-var IcebergSnapshotManagementSettings_maxSnapshotAgeHours *smithy.Schema
-
-var IcebergSortDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergSortDirection",
-}, smithy.ShapeTypeEnum, 2)
-var IcebergSortDirection_ASC *smithy.Schema
-
-var IcebergSortDirection_DESC *smithy.Schema
-
-var IcebergSortField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergSortField",
-}, smithy.ShapeTypeStructure, 4)
-var IcebergSortField_sourceId *smithy.Schema
-
-var IcebergSortField_transform *smithy.Schema
-
-var IcebergSortField_direction *smithy.Schema
-
-var IcebergSortField_nullOrder *smithy.Schema
-
-var _IcebergSortFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergSortFieldList",
-}, smithy.ShapeTypeList, 1)
-var _IcebergSortFieldList_member *smithy.Schema
-
-var IcebergSortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergSortOrder",
-}, smithy.ShapeTypeStructure, 2)
-var IcebergSortOrder_orderId *smithy.Schema
-
-var IcebergSortOrder_fields *smithy.Schema
-
-var IcebergUnreferencedFileRemovalSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IcebergUnreferencedFileRemovalSettings",
-}, smithy.ShapeTypeStructure, 2)
-var IcebergUnreferencedFileRemovalSettings_unreferencedDays *smithy.Schema
-
-var IcebergUnreferencedFileRemovalSettings_nonCurrentDays *smithy.Schema
-
-var IncompatibleValuesPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IncompatibleValuesPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var IncompatibleValuesPolicy_FAIL *smithy.Schema
-
-var IncompatibleValuesPolicy_SET_NULL *smithy.Schema
-
-var _IntegerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "IntegerList",
-}, smithy.ShapeTypeList, 1)
-var _IntegerList_member *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_message *smithy.Schema
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var JobStatus_NOT_YET_RUN *smithy.Schema
-
-var JobStatus_SUCCESSFUL *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_DISABLED *smithy.Schema
-
-var LastSuccessfulReplicatedUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "LastSuccessfulReplicatedUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var LastSuccessfulReplicatedUpdate_metadataLocation *smithy.Schema
-
-var LastSuccessfulReplicatedUpdate_timestamp *smithy.Schema
-
-var _ListNamespacesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListNamespacesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListTableBucketsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableBucketsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListTableMigrationsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableMigrationsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListTablesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTablesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var MaintenanceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MaintenanceSettings",
-}, smithy.ShapeTypeStructure, 2)
-var MaintenanceSettings_icebergCompaction *smithy.Schema
-
-var MaintenanceSettings_icebergSnapshotManagement *smithy.Schema
-
-var MaintenanceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MaintenanceStatus",
-}, smithy.ShapeTypeEnum, 2)
-var MaintenanceStatus_ENABLED *smithy.Schema
-
-var MaintenanceStatus_DISABLED *smithy.Schema
-
-var ManagedTableInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ManagedTableInformation",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedTableInformation_replicationInformation *smithy.Schema
-
-var _MetadataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MetadataLocation",
-}, smithy.ShapeTypeString, 0)
-
-var MethodNotAllowedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MethodNotAllowedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 405})
-var MethodNotAllowedException_message *smithy.Schema
-
-var MigrationCompactionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationCompactionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var MigrationCompactionSettings_targetFileSizeMB *smithy.Schema
-
-var MigrationCompactionSettings_strategy *smithy.Schema
-
-var MigrationFailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationFailureCode",
-}, smithy.ShapeTypeEnum, 10)
-var MigrationFailureCode_ROLE_PERMISSIONS *smithy.Schema
-
-var MigrationFailureCode_SOURCE_PERMISSIONS *smithy.Schema
-
-var MigrationFailureCode_DESTINATION_PERMISSIONS *smithy.Schema
-
-var MigrationFailureCode_RESOURCE_NOT_FOUND *smithy.Schema
-
-var MigrationFailureCode_SOURCE_NOT_SUPPORTED *smithy.Schema
-
-var MigrationFailureCode_OBJECT_MIGRATION_REPORT *smithy.Schema
-
-var MigrationFailureCode_OBJECT_COMPATIBILITY_REPORT *smithy.Schema
-
-var MigrationFailureCode_TABLE_COMPATIBILITY_REPORT *smithy.Schema
-
-var MigrationFailureCode_INTERNAL_ERROR *smithy.Schema
-
-var MigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED *smithy.Schema
-
-var _MigrationFailureDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationFailureDetail",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationFailureReason",
-}, smithy.ShapeTypeStructure, 2)
-var MigrationFailureReason_code *smithy.Schema
-
-var MigrationFailureReason_detail *smithy.Schema
-
-var _MigrationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationId",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationMinSnapshotsToKeep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationMinSnapshotsToKeep",
-}, smithy.ShapeTypeInteger, 0)
-
-var MigrationOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationOutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MigrationOutputConfiguration_bucket *smithy.Schema
-
-var MigrationOutputConfiguration_prefixes *smithy.Schema
-
-var MigrationOutputOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationOutputOverview",
-}, smithy.ShapeTypeStructure, 4)
-var MigrationOutputOverview_bucket *smithy.Schema
-
-var MigrationOutputOverview_tableCompatibilityReport *smithy.Schema
-
-var MigrationOutputOverview_objectCompatibilityReport *smithy.Schema
-
-var MigrationOutputOverview_objectMigrationReport *smithy.Schema
-
-var MigrationPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationPolicies",
-}, smithy.ShapeTypeStructure, 2)
-var MigrationPolicies_unmatchedSourceFieldsPolicy *smithy.Schema
-
-var MigrationPolicies_incompatibleValuesPolicy *smithy.Schema
-
-var _MigrationReportPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationReportPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationReportPrefixes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationReportPrefixes",
-}, smithy.ShapeTypeStructure, 3)
-var MigrationReportPrefixes_tableCompatibilityReport *smithy.Schema
-
-var MigrationReportPrefixes_objectCompatibilityReport *smithy.Schema
-
-var MigrationReportPrefixes_objectMigrationReport *smithy.Schema
-
-var MigrationRequestedState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationRequestedState",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationRequestedState_QUEUED *smithy.Schema
-
-var MigrationRequestedState_CANCELLED *smithy.Schema
-
-var MigrationSnapshotManagementSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationSnapshotManagementSettings",
-}, smithy.ShapeTypeStructure, 2)
-var MigrationSnapshotManagementSettings_minSnapshotsToKeep *smithy.Schema
-
-var MigrationSnapshotManagementSettings_maxSnapshotAgeHours *smithy.Schema
-
-var MigrationSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationSourceType",
-}, smithy.ShapeTypeEnum, 1)
-var MigrationSourceType_GLUE_TABLE *smithy.Schema
-
-var MigrationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationState",
-}, smithy.ShapeTypeEnum, 9)
-var MigrationState_NEW *smithy.Schema
-
-var MigrationState_PLANNING *smithy.Schema
-
-var MigrationState_PENDING_REVIEW *smithy.Schema
-
-var MigrationState_QUEUED *smithy.Schema
-
-var MigrationState_MIGRATING *smithy.Schema
-
-var MigrationState_SUCCEEDED *smithy.Schema
-
-var MigrationState_FAILED *smithy.Schema
-
-var MigrationState_CANCELLING *smithy.Schema
-
-var MigrationState_CANCELLED *smithy.Schema
-
-var MigrationStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationStats",
-}, smithy.ShapeTypeStructure, 3)
-var MigrationStats_objectsMigrated *smithy.Schema
-
-var MigrationStats_objectsFailedMigration *smithy.Schema
-
-var MigrationStats_objectsPendingMigration *smithy.Schema
-
-var MigrationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationSummary",
-}, smithy.ShapeTypeStructure, 10)
-var MigrationSummary_migrationId *smithy.Schema
-
-var MigrationSummary_tableBucketARN *smithy.Schema
-
-var MigrationSummary_namespace *smithy.Schema
-
-var MigrationSummary_tableARN *smithy.Schema
-
-var MigrationSummary_name *smithy.Schema
-
-var MigrationSummary_type *smithy.Schema
-
-var MigrationSummary_state *smithy.Schema
-
-var MigrationSummary_hasValidPlan *smithy.Schema
-
-var MigrationSummary_createdAt *smithy.Schema
-
-var MigrationSummary_stateUpdatedAt *smithy.Schema
-
-var _MigrationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MigrationSummaryList_member *smithy.Schema
-
-var MigrationTableProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationTableProperties",
-}, smithy.ShapeTypeStructure, 4)
-var MigrationTableProperties_writeFormat *smithy.Schema
-
-var MigrationTableProperties_icebergFormatVersion *smithy.Schema
-
-var MigrationTableProperties_compressionCodec *smithy.Schema
-
-var MigrationTableProperties_dictionaryEncoding *smithy.Schema
-
-var _MigrationTargetFileSizeMB = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationTargetFileSizeMB",
-}, smithy.ShapeTypeInteger, 0)
-
-var MigrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "MigrationType",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationType_START *smithy.Schema
-
-var MigrationType_SYNC *smithy.Schema
-
-var _NamespaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "NamespaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _NamespaceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "NamespaceList",
-}, smithy.ShapeTypeList, 1)
-var _NamespaceList_member *smithy.Schema
-
-var _NamespaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "NamespaceName",
-}, smithy.ShapeTypeString, 0)
-
-var NamespaceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "NamespaceSummary",
-}, smithy.ShapeTypeStructure, 6)
-var NamespaceSummary_namespace *smithy.Schema
-
-var NamespaceSummary_createdAt *smithy.Schema
-
-var NamespaceSummary_createdBy *smithy.Schema
-
-var NamespaceSummary_ownerAccountId *smithy.Schema
-
-var NamespaceSummary_namespaceId *smithy.Schema
-
-var NamespaceSummary_tableBucketId *smithy.Schema
-
-var _NamespaceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "NamespaceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _NamespaceSummaryList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var OpenTableFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "OpenTableFormat",
-}, smithy.ShapeTypeEnum, 1)
-var OpenTableFormat_ICEBERG *smithy.Schema
-
-var PlanningStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PlanningStats",
-}, smithy.ShapeTypeStructure, 3)
-var PlanningStats_objectsScanned *smithy.Schema
-
-var PlanningStats_objectsPlanned *smithy.Schema
-
-var PlanningStats_partitionCount *smithy.Schema
-
-var _PositiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PositiveInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var ReplicationDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReplicationDestination",
-}, smithy.ShapeTypeStructure, 1)
-var ReplicationDestination_destinationTableBucketARN *smithy.Schema
-
-var _ReplicationDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReplicationDestinations",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationDestinations_member *smithy.Schema
-
-var _ReplicationDestinationStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReplicationDestinationStatuses",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationDestinationStatuses_member *smithy.Schema
-
-var ReplicationDestinationStatusModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReplicationDestinationStatusModel",
-}, smithy.ShapeTypeStructure, 5)
-var ReplicationDestinationStatusModel_replicationStatus *smithy.Schema
-
-var ReplicationDestinationStatusModel_destinationTableBucketArn *smithy.Schema
-
-var ReplicationDestinationStatusModel_destinationTableArn *smithy.Schema
-
-var ReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate *smithy.Schema
-
-var ReplicationDestinationStatusModel_failureMessage *smithy.Schema
-
-var ReplicationInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReplicationInformation",
-}, smithy.ShapeTypeStructure, 1)
-var ReplicationInformation_sourceTableARN *smithy.Schema
-
-var ReplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReplicationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ReplicationStatus_PENDING *smithy.Schema
-
-var ReplicationStatus_COMPLETED *smithy.Schema
-
-var ReplicationStatus_FAILED *smithy.Schema
-
-var _ReportObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReportObjectKey",
-}, smithy.ShapeTypeString, 0)
-
-var ReportOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ReportOverview",
-}, smithy.ShapeTypeStructure, 4)
-var ReportOverview_prefix *smithy.Schema
-
-var ReportOverview_key *smithy.Schema
-
-var ReportOverview_checksumCRC64NVME *smithy.Schema
-
-var ReportOverview_invalidFindings *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3BucketARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "S3BucketARN",
-}, smithy.ShapeTypeString, 0)
-
-var SchemaField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SchemaField",
-}, smithy.ShapeTypeStructure, 4)
-var SchemaField_id *smithy.Schema
-
-var SchemaField_name *smithy.Schema
-
-var SchemaField_type *smithy.Schema
-
-var SchemaField_required *smithy.Schema
-
-var _SchemaFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SchemaFieldList",
-}, smithy.ShapeTypeList, 1)
-var _SchemaFieldList_member *smithy.Schema
-
-var SchemaV2Field = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SchemaV2Field",
-}, smithy.ShapeTypeStructure, 5)
-var SchemaV2Field_id *smithy.Schema
-
-var SchemaV2Field_name *smithy.Schema
-
-var SchemaV2Field_type *smithy.Schema
-
-var SchemaV2Field_required *smithy.Schema
-
-var SchemaV2Field_doc *smithy.Schema
-
-var _SchemaV2FieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SchemaV2FieldList",
-}, smithy.ShapeTypeList, 1)
-var _SchemaV2FieldList_member *smithy.Schema
-
-var SchemaV2FieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SchemaV2FieldType",
-}, smithy.ShapeTypeEnum, 1)
-var SchemaV2FieldType_STRUCT *smithy.Schema
-
-var SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SourceConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var SourceConfiguration_glueTable *smithy.Schema
-
-var SSEAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SSEAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var SSEAlgorithm_AES256 *smithy.Schema
-
-var SSEAlgorithm_AWS_KMS *smithy.Schema
-
-var StorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "StorageClass",
-}, smithy.ShapeTypeEnum, 2)
-var StorageClass_STANDARD *smithy.Schema
-
-var StorageClass_INTELLIGENT_TIERING *smithy.Schema
-
-var StorageClassConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "StorageClassConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var StorageClassConfiguration_storageClass *smithy.Schema
-
-var _TableARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableARN",
-}, smithy.ShapeTypeString, 0)
-
-var _TableBucketARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketARN",
-}, smithy.ShapeTypeString, 0)
-
-var _TableBucketId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketId",
-}, smithy.ShapeTypeString, 0)
-
-var _TableBucketMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketMaintenanceConfiguration",
-}, smithy.ShapeTypeMap, 2)
-var _TableBucketMaintenanceConfiguration_key *smithy.Schema
-
-var _TableBucketMaintenanceConfiguration_value *smithy.Schema
-
-var TableBucketMaintenanceConfigurationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketMaintenanceConfigurationValue",
-}, smithy.ShapeTypeStructure, 2)
-var TableBucketMaintenanceConfigurationValue_status *smithy.Schema
-
-var TableBucketMaintenanceConfigurationValue_settings *smithy.Schema
-
-var TableBucketMaintenanceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketMaintenanceSettings",
-}, smithy.ShapeTypeUnion, 1)
-var TableBucketMaintenanceSettings_icebergUnreferencedFileRemoval *smithy.Schema
-
-var TableBucketMaintenanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketMaintenanceType",
-}, smithy.ShapeTypeEnum, 1)
-var TableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL *smithy.Schema
-
-var _TableBucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketName",
-}, smithy.ShapeTypeString, 0)
-
-var TableBucketReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketReplicationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var TableBucketReplicationConfiguration_role *smithy.Schema
-
-var TableBucketReplicationConfiguration_rules *smithy.Schema
-
-var TableBucketReplicationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketReplicationRule",
-}, smithy.ShapeTypeStructure, 1)
-var TableBucketReplicationRule_destinations *smithy.Schema
-
-var _TableBucketReplicationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketReplicationRules",
-}, smithy.ShapeTypeList, 1)
-var _TableBucketReplicationRules_member *smithy.Schema
-
-var TableBucketSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketSummary",
-}, smithy.ShapeTypeStructure, 6)
-var TableBucketSummary_arn *smithy.Schema
-
-var TableBucketSummary_name *smithy.Schema
-
-var TableBucketSummary_ownerAccountId *smithy.Schema
-
-var TableBucketSummary_createdAt *smithy.Schema
-
-var TableBucketSummary_tableBucketId *smithy.Schema
-
-var TableBucketSummary_type *smithy.Schema
-
-var _TableBucketSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TableBucketSummaryList_member *smithy.Schema
-
-var TableBucketType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableBucketType",
-}, smithy.ShapeTypeEnum, 2)
-var TableBucketType_CUSTOMER *smithy.Schema
-
-var TableBucketType_AWS *smithy.Schema
-
-var _TableMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMaintenanceConfiguration",
-}, smithy.ShapeTypeMap, 2)
-var _TableMaintenanceConfiguration_key *smithy.Schema
-
-var _TableMaintenanceConfiguration_value *smithy.Schema
-
-var TableMaintenanceConfigurationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMaintenanceConfigurationValue",
-}, smithy.ShapeTypeStructure, 2)
-var TableMaintenanceConfigurationValue_status *smithy.Schema
-
-var TableMaintenanceConfigurationValue_settings *smithy.Schema
-
-var _TableMaintenanceJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMaintenanceJobStatus",
-}, smithy.ShapeTypeMap, 2)
-var _TableMaintenanceJobStatus_key *smithy.Schema
-
-var _TableMaintenanceJobStatus_value *smithy.Schema
-
-var TableMaintenanceJobStatusValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMaintenanceJobStatusValue",
-}, smithy.ShapeTypeStructure, 3)
-var TableMaintenanceJobStatusValue_status *smithy.Schema
-
-var TableMaintenanceJobStatusValue_lastRunTimestamp *smithy.Schema
-
-var TableMaintenanceJobStatusValue_failureMessage *smithy.Schema
-
-var TableMaintenanceJobType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMaintenanceJobType",
-}, smithy.ShapeTypeEnum, 3)
-var TableMaintenanceJobType_ICEBERG_COMPACTION *smithy.Schema
-
-var TableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT *smithy.Schema
-
-var TableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL *smithy.Schema
-
-var TableMaintenanceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMaintenanceSettings",
-}, smithy.ShapeTypeUnion, 2)
-var TableMaintenanceSettings_icebergCompaction *smithy.Schema
-
-var TableMaintenanceSettings_icebergSnapshotManagement *smithy.Schema
-
-var TableMaintenanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMaintenanceType",
-}, smithy.ShapeTypeEnum, 2)
-var TableMaintenanceType_ICEBERG_COMPACTION *smithy.Schema
-
-var TableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT *smithy.Schema
-
-var TableMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableMetadata",
-}, smithy.ShapeTypeUnion, 1)
-var TableMetadata_iceberg *smithy.Schema
-
-var _TableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableName",
-}, smithy.ShapeTypeString, 0)
-
-var _TableProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableProperties",
-}, smithy.ShapeTypeMap, 2)
-var _TableProperties_key *smithy.Schema
-
-var _TableProperties_value *smithy.Schema
-
-var TableRecordExpirationConfigurationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableRecordExpirationConfigurationValue",
-}, smithy.ShapeTypeStructure, 2)
-var TableRecordExpirationConfigurationValue_status *smithy.Schema
-
-var TableRecordExpirationConfigurationValue_settings *smithy.Schema
-
-var TableRecordExpirationJobMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableRecordExpirationJobMetrics",
-}, smithy.ShapeTypeStructure, 3)
-var TableRecordExpirationJobMetrics_deletedDataFiles *smithy.Schema
-
-var TableRecordExpirationJobMetrics_deletedRecords *smithy.Schema
-
-var TableRecordExpirationJobMetrics_removedFilesSize *smithy.Schema
-
-var TableRecordExpirationJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableRecordExpirationJobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TableRecordExpirationJobStatus_NOT_YET_RUN *smithy.Schema
-
-var TableRecordExpirationJobStatus_SUCCESSFUL *smithy.Schema
-
-var TableRecordExpirationJobStatus_FAILED *smithy.Schema
-
-var TableRecordExpirationJobStatus_DISABLED *smithy.Schema
-
-var TableRecordExpirationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableRecordExpirationSettings",
-}, smithy.ShapeTypeStructure, 1)
-var TableRecordExpirationSettings_days *smithy.Schema
-
-var TableRecordExpirationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableRecordExpirationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var TableRecordExpirationStatus_ENABLED *smithy.Schema
-
-var TableRecordExpirationStatus_DISABLED *smithy.Schema
-
-var TableReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableReplicationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var TableReplicationConfiguration_role *smithy.Schema
-
-var TableReplicationConfiguration_rules *smithy.Schema
-
-var TableReplicationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableReplicationRule",
-}, smithy.ShapeTypeStructure, 1)
-var TableReplicationRule_destinations *smithy.Schema
-
-var _TableReplicationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableReplicationRules",
-}, smithy.ShapeTypeList, 1)
-var _TableReplicationRules_member *smithy.Schema
-
-var TableSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableSummary",
-}, smithy.ShapeTypeStructure, 9)
-var TableSummary_namespace *smithy.Schema
-
-var TableSummary_name *smithy.Schema
-
-var TableSummary_type *smithy.Schema
-
-var TableSummary_tableARN *smithy.Schema
-
-var TableSummary_createdAt *smithy.Schema
-
-var TableSummary_modifiedAt *smithy.Schema
-
-var TableSummary_managedByService *smithy.Schema
-
-var TableSummary_namespaceId *smithy.Schema
-
-var TableSummary_tableBucketId *smithy.Schema
-
-var _TableSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TableSummaryList_member *smithy.Schema
-
-var TableType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TableType",
-}, smithy.ShapeTypeEnum, 2)
-var TableType_CUSTOMER *smithy.Schema
-
-var TableType_AWS *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var UnmatchedSourceFieldsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UnmatchedSourceFieldsPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var UnmatchedSourceFieldsPolicy_FAIL *smithy.Schema
-
-var UnmatchedSourceFieldsPolicy_DROP *smithy.Schema
-
-var _VersionToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "VersionToken",
-}, smithy.ShapeTypeString, 0)
-
-var _WarehouseLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "WarehouseLocation",
-}, smithy.ShapeTypeString, 0)
-
-var CompleteTableMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CompleteTableMigrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CompleteTableMigrationRequest_tableARN *smithy.Schema
-
-var CreateNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateNamespaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateNamespaceRequest_tableBucketARN *smithy.Schema
-
-var CreateNamespaceRequest_namespace *smithy.Schema
-
-var CreateNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateNamespaceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateNamespaceResponse_tableBucketARN *smithy.Schema
-
-var CreateNamespaceResponse_namespace *smithy.Schema
-
-var CreateTableBucketRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateTableBucketRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateTableBucketRequest_name *smithy.Schema
-
-var CreateTableBucketRequest_encryptionConfiguration *smithy.Schema
-
-var CreateTableBucketRequest_storageClassConfiguration *smithy.Schema
-
-var CreateTableBucketRequest_tags *smithy.Schema
-
-var CreateTableBucketResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateTableBucketResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTableBucketResponse_arn *smithy.Schema
-
-var CreateTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateTableRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateTableRequest_tableBucketARN *smithy.Schema
-
-var CreateTableRequest_namespace *smithy.Schema
-
-var CreateTableRequest_name *smithy.Schema
-
-var CreateTableRequest_format *smithy.Schema
-
-var CreateTableRequest_metadata *smithy.Schema
-
-var CreateTableRequest_encryptionConfiguration *smithy.Schema
-
-var CreateTableRequest_storageClassConfiguration *smithy.Schema
-
-var CreateTableRequest_tags *smithy.Schema
-
-var CreateTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "CreateTableResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTableResponse_tableARN *smithy.Schema
-
-var CreateTableResponse_versionToken *smithy.Schema
-
-var DeleteNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteNamespaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteNamespaceRequest_tableBucketARN *smithy.Schema
-
-var DeleteNamespaceRequest_namespace *smithy.Schema
-
-var DeleteTableBucketEncryptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketEncryptionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTableBucketEncryptionRequest_tableBucketARN *smithy.Schema
-
-var DeleteTableBucketRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTableBucketRequest_tableBucketARN *smithy.Schema
-
-var DeleteTableBucketMetricsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketMetricsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTableBucketMetricsConfigurationRequest_tableBucketARN *smithy.Schema
-
-var DeleteTableBucketPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTableBucketPolicyRequest_tableBucketARN *smithy.Schema
-
-var DeleteTableBucketReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableBucketReplicationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTableBucketReplicationRequest_tableBucketARN *smithy.Schema
-
-var DeleteTableBucketReplicationRequest_versionToken *smithy.Schema
-
-var DeleteTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteTableRequest_tableBucketARN *smithy.Schema
-
-var DeleteTableRequest_namespace *smithy.Schema
-
-var DeleteTableRequest_name *smithy.Schema
-
-var DeleteTableRequest_versionToken *smithy.Schema
-
-var DeleteTablePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTablePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteTablePolicyRequest_tableBucketARN *smithy.Schema
-
-var DeleteTablePolicyRequest_namespace *smithy.Schema
-
-var DeleteTablePolicyRequest_name *smithy.Schema
-
-var DeleteTableReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "DeleteTableReplicationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTableReplicationRequest_tableArn *smithy.Schema
-
-var DeleteTableReplicationRequest_versionToken *smithy.Schema
-
-var GetNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetNamespaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetNamespaceRequest_tableBucketARN *smithy.Schema
-
-var GetNamespaceRequest_namespace *smithy.Schema
-
-var GetNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetNamespaceResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetNamespaceResponse_namespace *smithy.Schema
-
-var GetNamespaceResponse_createdAt *smithy.Schema
-
-var GetNamespaceResponse_createdBy *smithy.Schema
-
-var GetNamespaceResponse_ownerAccountId *smithy.Schema
-
-var GetNamespaceResponse_namespaceId *smithy.Schema
-
-var GetNamespaceResponse_tableBucketId *smithy.Schema
-
-var GetTableBucketEncryptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketEncryptionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketEncryptionRequest_tableBucketARN *smithy.Schema
-
-var GetTableBucketEncryptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketEncryptionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketEncryptionResponse_encryptionConfiguration *smithy.Schema
-
-var GetTableBucketRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketRequest_tableBucketARN *smithy.Schema
-
-var GetTableBucketMaintenanceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketMaintenanceConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketMaintenanceConfigurationRequest_tableBucketARN *smithy.Schema
-
-var GetTableBucketMaintenanceConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketMaintenanceConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableBucketMaintenanceConfigurationResponse_tableBucketARN *smithy.Schema
-
-var GetTableBucketMaintenanceConfigurationResponse_configuration *smithy.Schema
-
-var GetTableBucketMetricsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketMetricsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketMetricsConfigurationRequest_tableBucketARN *smithy.Schema
-
-var GetTableBucketMetricsConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketMetricsConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableBucketMetricsConfigurationResponse_tableBucketARN *smithy.Schema
-
-var GetTableBucketMetricsConfigurationResponse_id *smithy.Schema
-
-var GetTableBucketResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetTableBucketResponse_arn *smithy.Schema
-
-var GetTableBucketResponse_name *smithy.Schema
-
-var GetTableBucketResponse_ownerAccountId *smithy.Schema
-
-var GetTableBucketResponse_createdAt *smithy.Schema
-
-var GetTableBucketResponse_tableBucketId *smithy.Schema
-
-var GetTableBucketResponse_type *smithy.Schema
-
-var GetTableBucketPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketPolicyRequest_tableBucketARN *smithy.Schema
-
-var GetTableBucketPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketPolicyResponse_resourcePolicy *smithy.Schema
-
-var GetTableBucketReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketReplicationRequest_tableBucketARN *smithy.Schema
-
-var GetTableBucketReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketReplicationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableBucketReplicationResponse_versionToken *smithy.Schema
-
-var GetTableBucketReplicationResponse_configuration *smithy.Schema
-
-var GetTableBucketStorageClassRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketStorageClassRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketStorageClassRequest_tableBucketARN *smithy.Schema
-
-var GetTableBucketStorageClassResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableBucketStorageClassResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableBucketStorageClassResponse_storageClassConfiguration *smithy.Schema
-
-var GetTableEncryptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableEncryptionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTableEncryptionRequest_tableBucketARN *smithy.Schema
-
-var GetTableEncryptionRequest_namespace *smithy.Schema
-
-var GetTableEncryptionRequest_name *smithy.Schema
-
-var GetTableEncryptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableEncryptionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableEncryptionResponse_encryptionConfiguration *smithy.Schema
-
-var GetTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetTableRequest_tableBucketARN *smithy.Schema
-
-var GetTableRequest_namespace *smithy.Schema
-
-var GetTableRequest_name *smithy.Schema
-
-var GetTableRequest_tableArn *smithy.Schema
-
-var GetTableMaintenanceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMaintenanceConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTableMaintenanceConfigurationRequest_tableBucketARN *smithy.Schema
-
-var GetTableMaintenanceConfigurationRequest_namespace *smithy.Schema
-
-var GetTableMaintenanceConfigurationRequest_name *smithy.Schema
-
-var GetTableMaintenanceConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMaintenanceConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableMaintenanceConfigurationResponse_tableARN *smithy.Schema
-
-var GetTableMaintenanceConfigurationResponse_configuration *smithy.Schema
-
-var GetTableMaintenanceJobStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMaintenanceJobStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTableMaintenanceJobStatusRequest_tableBucketARN *smithy.Schema
-
-var GetTableMaintenanceJobStatusRequest_namespace *smithy.Schema
-
-var GetTableMaintenanceJobStatusRequest_name *smithy.Schema
-
-var GetTableMaintenanceJobStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMaintenanceJobStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableMaintenanceJobStatusResponse_tableARN *smithy.Schema
-
-var GetTableMaintenanceJobStatusResponse_status *smithy.Schema
-
-var GetTableMetadataLocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMetadataLocationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTableMetadataLocationRequest_tableBucketARN *smithy.Schema
-
-var GetTableMetadataLocationRequest_namespace *smithy.Schema
-
-var GetTableMetadataLocationRequest_name *smithy.Schema
-
-var GetTableMetadataLocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMetadataLocationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetTableMetadataLocationResponse_versionToken *smithy.Schema
-
-var GetTableMetadataLocationResponse_metadataLocation *smithy.Schema
-
-var GetTableMetadataLocationResponse_warehouseLocation *smithy.Schema
-
-var GetTableMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMigrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableMigrationRequest_migrationId *smithy.Schema
-
-var GetTableMigrationRequest_tableARN *smithy.Schema
-
-var GetTableMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableMigrationResponse",
-}, smithy.ShapeTypeStructure, 19)
-var GetTableMigrationResponse_migrationId *smithy.Schema
-
-var GetTableMigrationResponse_tableBucketARN *smithy.Schema
-
-var GetTableMigrationResponse_namespace *smithy.Schema
-
-var GetTableMigrationResponse_tableARN *smithy.Schema
-
-var GetTableMigrationResponse_name *smithy.Schema
-
-var GetTableMigrationResponse_type *smithy.Schema
-
-var GetTableMigrationResponse_state *smithy.Schema
-
-var GetTableMigrationResponse_roleARN *smithy.Schema
-
-var GetTableMigrationResponse_reviewMigrationPlan *smithy.Schema
-
-var GetTableMigrationResponse_hasValidPlan *smithy.Schema
-
-var GetTableMigrationResponse_createdAt *smithy.Schema
-
-var GetTableMigrationResponse_stateUpdatedAt *smithy.Schema
-
-var GetTableMigrationResponse_failureReason *smithy.Schema
-
-var GetTableMigrationResponse_planningStats *smithy.Schema
-
-var GetTableMigrationResponse_migrationStats *smithy.Schema
-
-var GetTableMigrationResponse_sourceType *smithy.Schema
-
-var GetTableMigrationResponse_source *smithy.Schema
-
-var GetTableMigrationResponse_dataMigration *smithy.Schema
-
-var GetTableMigrationResponse_migrationOutput *smithy.Schema
-
-var GetTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableResponse",
-}, smithy.ShapeTypeStructure, 17)
-var GetTableResponse_name *smithy.Schema
-
-var GetTableResponse_type *smithy.Schema
-
-var GetTableResponse_tableARN *smithy.Schema
-
-var GetTableResponse_namespace *smithy.Schema
-
-var GetTableResponse_namespaceId *smithy.Schema
-
-var GetTableResponse_versionToken *smithy.Schema
-
-var GetTableResponse_metadataLocation *smithy.Schema
-
-var GetTableResponse_warehouseLocation *smithy.Schema
-
-var GetTableResponse_createdAt *smithy.Schema
-
-var GetTableResponse_createdBy *smithy.Schema
-
-var GetTableResponse_managedByService *smithy.Schema
-
-var GetTableResponse_modifiedAt *smithy.Schema
-
-var GetTableResponse_modifiedBy *smithy.Schema
-
-var GetTableResponse_ownerAccountId *smithy.Schema
-
-var GetTableResponse_format *smithy.Schema
-
-var GetTableResponse_tableBucketId *smithy.Schema
-
-var GetTableResponse_managedTableInformation *smithy.Schema
-
-var GetTablePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTablePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTablePolicyRequest_tableBucketARN *smithy.Schema
-
-var GetTablePolicyRequest_namespace *smithy.Schema
-
-var GetTablePolicyRequest_name *smithy.Schema
-
-var GetTablePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTablePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTablePolicyResponse_resourcePolicy *smithy.Schema
-
-var GetTableRecordExpirationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableRecordExpirationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableRecordExpirationConfigurationRequest_tableArn *smithy.Schema
-
-var GetTableRecordExpirationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableRecordExpirationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableRecordExpirationConfigurationResponse_configuration *smithy.Schema
-
-var GetTableRecordExpirationJobStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableRecordExpirationJobStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableRecordExpirationJobStatusRequest_tableArn *smithy.Schema
-
-var GetTableRecordExpirationJobStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableRecordExpirationJobStatusResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetTableRecordExpirationJobStatusResponse_status *smithy.Schema
-
-var GetTableRecordExpirationJobStatusResponse_lastRunTimestamp *smithy.Schema
-
-var GetTableRecordExpirationJobStatusResponse_failureMessage *smithy.Schema
-
-var GetTableRecordExpirationJobStatusResponse_metrics *smithy.Schema
-
-var GetTableReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableReplicationRequest_tableArn *smithy.Schema
-
-var GetTableReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableReplicationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableReplicationResponse_versionToken *smithy.Schema
-
-var GetTableReplicationResponse_configuration *smithy.Schema
-
-var GetTableReplicationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableReplicationStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableReplicationStatusRequest_tableArn *smithy.Schema
-
-var GetTableReplicationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableReplicationStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableReplicationStatusResponse_sourceTableArn *smithy.Schema
-
-var GetTableReplicationStatusResponse_destinations *smithy.Schema
-
-var GetTableStorageClassRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableStorageClassRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTableStorageClassRequest_tableBucketARN *smithy.Schema
-
-var GetTableStorageClassRequest_namespace *smithy.Schema
-
-var GetTableStorageClassRequest_name *smithy.Schema
-
-var GetTableStorageClassResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "GetTableStorageClassResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableStorageClassResponse_storageClassConfiguration *smithy.Schema
-
-var ListNamespacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListNamespacesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListNamespacesRequest_tableBucketARN *smithy.Schema
-
-var ListNamespacesRequest_prefix *smithy.Schema
-
-var ListNamespacesRequest_continuationToken *smithy.Schema
-
-var ListNamespacesRequest_maxNamespaces *smithy.Schema
-
-var ListNamespacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListNamespacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNamespacesResponse_namespaces *smithy.Schema
-
-var ListNamespacesResponse_continuationToken *smithy.Schema
-
-var ListTableBucketsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableBucketsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTableBucketsRequest_prefix *smithy.Schema
-
-var ListTableBucketsRequest_continuationToken *smithy.Schema
-
-var ListTableBucketsRequest_maxBuckets *smithy.Schema
-
-var ListTableBucketsRequest_type *smithy.Schema
-
-var ListTableBucketsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableBucketsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTableBucketsResponse_tableBuckets *smithy.Schema
-
-var ListTableBucketsResponse_continuationToken *smithy.Schema
-
-var ListTableMigrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableMigrationsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListTableMigrationsRequest_tableBucketARN *smithy.Schema
-
-var ListTableMigrationsRequest_namespace *smithy.Schema
-
-var ListTableMigrationsRequest_name *smithy.Schema
-
-var ListTableMigrationsRequest_tableARN *smithy.Schema
-
-var ListTableMigrationsRequest_state *smithy.Schema
-
-var ListTableMigrationsRequest_hasValidPlan *smithy.Schema
-
-var ListTableMigrationsRequest_maxResults *smithy.Schema
-
-var ListTableMigrationsRequest_nextToken *smithy.Schema
-
-var ListTableMigrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTableMigrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTableMigrationsResponse_migrations *smithy.Schema
-
-var ListTableMigrationsResponse_nextToken *smithy.Schema
-
-var ListTablesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTablesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListTablesRequest_tableBucketARN *smithy.Schema
-
-var ListTablesRequest_namespace *smithy.Schema
-
-var ListTablesRequest_prefix *smithy.Schema
-
-var ListTablesRequest_continuationToken *smithy.Schema
-
-var ListTablesRequest_maxTables *smithy.Schema
-
-var ListTablesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTablesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTablesResponse_tables *smithy.Schema
-
-var ListTablesResponse_continuationToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutTableBucketEncryptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketEncryptionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutTableBucketEncryptionRequest_tableBucketARN *smithy.Schema
-
-var PutTableBucketEncryptionRequest_encryptionConfiguration *smithy.Schema
-
-var PutTableBucketMaintenanceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketMaintenanceConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutTableBucketMaintenanceConfigurationRequest_tableBucketARN *smithy.Schema
-
-var PutTableBucketMaintenanceConfigurationRequest_type *smithy.Schema
-
-var PutTableBucketMaintenanceConfigurationRequest_value *smithy.Schema
-
-var PutTableBucketMetricsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketMetricsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutTableBucketMetricsConfigurationRequest_tableBucketARN *smithy.Schema
-
-var PutTableBucketPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutTableBucketPolicyRequest_tableBucketARN *smithy.Schema
-
-var PutTableBucketPolicyRequest_resourcePolicy *smithy.Schema
-
-var PutTableBucketReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketReplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutTableBucketReplicationRequest_tableBucketARN *smithy.Schema
-
-var PutTableBucketReplicationRequest_versionToken *smithy.Schema
-
-var PutTableBucketReplicationRequest_configuration *smithy.Schema
-
-var PutTableBucketReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketReplicationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutTableBucketReplicationResponse_versionToken *smithy.Schema
-
-var PutTableBucketReplicationResponse_status *smithy.Schema
-
-var PutTableBucketStorageClassRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableBucketStorageClassRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutTableBucketStorageClassRequest_tableBucketARN *smithy.Schema
-
-var PutTableBucketStorageClassRequest_storageClassConfiguration *smithy.Schema
-
-var PutTableMaintenanceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableMaintenanceConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutTableMaintenanceConfigurationRequest_tableBucketARN *smithy.Schema
-
-var PutTableMaintenanceConfigurationRequest_namespace *smithy.Schema
-
-var PutTableMaintenanceConfigurationRequest_name *smithy.Schema
-
-var PutTableMaintenanceConfigurationRequest_type *smithy.Schema
-
-var PutTableMaintenanceConfigurationRequest_value *smithy.Schema
-
-var PutTablePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTablePolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutTablePolicyRequest_tableBucketARN *smithy.Schema
-
-var PutTablePolicyRequest_namespace *smithy.Schema
-
-var PutTablePolicyRequest_name *smithy.Schema
-
-var PutTablePolicyRequest_resourcePolicy *smithy.Schema
-
-var PutTableRecordExpirationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableRecordExpirationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutTableRecordExpirationConfigurationRequest_tableArn *smithy.Schema
-
-var PutTableRecordExpirationConfigurationRequest_value *smithy.Schema
-
-var PutTableReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableReplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutTableReplicationRequest_tableArn *smithy.Schema
-
-var PutTableReplicationRequest_versionToken *smithy.Schema
-
-var PutTableReplicationRequest_configuration *smithy.Schema
-
-var PutTableReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "PutTableReplicationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutTableReplicationResponse_versionToken *smithy.Schema
-
-var PutTableReplicationResponse_status *smithy.Schema
-
-var RenameTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "RenameTableRequest",
-}, smithy.ShapeTypeStructure, 6)
-var RenameTableRequest_tableBucketARN *smithy.Schema
-
-var RenameTableRequest_namespace *smithy.Schema
-
-var RenameTableRequest_name *smithy.Schema
-
-var RenameTableRequest_newNamespaceName *smithy.Schema
-
-var RenameTableRequest_newName *smithy.Schema
-
-var RenameTableRequest_versionToken *smithy.Schema
-
-var StartTableMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "StartTableMigrationRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartTableMigrationRequest_roleARN *smithy.Schema
-
-var StartTableMigrationRequest_destinationTable *smithy.Schema
-
-var StartTableMigrationRequest_sourceType *smithy.Schema
-
-var StartTableMigrationRequest_source *smithy.Schema
-
-var StartTableMigrationRequest_dataMigration *smithy.Schema
-
-var StartTableMigrationRequest_reviewMigrationPlan *smithy.Schema
-
-var StartTableMigrationRequest_migrationOutput *smithy.Schema
-
-var StartTableMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "StartTableMigrationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartTableMigrationResponse_migrationId *smithy.Schema
-
-var StartTableMigrationResponse_state *smithy.Schema
-
-var SyncTableMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SyncTableMigrationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SyncTableMigrationRequest_roleARN *smithy.Schema
-
-var SyncTableMigrationRequest_tableARN *smithy.Schema
-
-var SyncTableMigrationRequest_reviewMigrationPlan *smithy.Schema
-
-var SyncTableMigrationRequest_migrationOutput *smithy.Schema
-
-var SyncTableMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "SyncTableMigrationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SyncTableMigrationResponse_migrationId *smithy.Schema
-
-var SyncTableMigrationResponse_state *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateTableMetadataLocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UpdateTableMetadataLocationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateTableMetadataLocationRequest_tableBucketARN *smithy.Schema
-
-var UpdateTableMetadataLocationRequest_namespace *smithy.Schema
-
-var UpdateTableMetadataLocationRequest_name *smithy.Schema
-
-var UpdateTableMetadataLocationRequest_versionToken *smithy.Schema
-
-var UpdateTableMetadataLocationRequest_metadataLocation *smithy.Schema
-
-var UpdateTableMetadataLocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UpdateTableMetadataLocationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateTableMetadataLocationResponse_name *smithy.Schema
-
-var UpdateTableMetadataLocationResponse_tableARN *smithy.Schema
-
-var UpdateTableMetadataLocationResponse_namespace *smithy.Schema
-
-var UpdateTableMetadataLocationResponse_versionToken *smithy.Schema
-
-var UpdateTableMetadataLocationResponse_metadataLocation *smithy.Schema
-
-var UpdateTableMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UpdateTableMigrationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTableMigrationRequest_tableARN *smithy.Schema
-
-var UpdateTableMigrationRequest_migrationId *smithy.Schema
-
-var UpdateTableMigrationRequest_requestedState *smithy.Schema
-
-var UpdateTableMigrationRequest_updateDescription *smithy.Schema
-
-var UpdateTableMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3tables",
-	Name:      "UpdateTableMigrationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateTableMigrationResponse_migrationId *smithy.Schema
-
-var UpdateTableMigrationResponse_state *smithy.Schema
-
-var UpdateTableMigrationResponse_tableARN *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _ErrorMessage)
-
-	CompressionCodec_ZSTD = CompressionCodec.AddMember("ZSTD", smithyprelude.Unit)
-
-	CompressionCodec_SNAPPY = CompressionCodec.AddMember("SNAPPY", smithyprelude.Unit)
-
-	CompressionCodec_GZIP = CompressionCodec.AddMember("GZIP", smithyprelude.Unit)
-
-	CompressionCodec_UNCOMPRESSED = CompressionCodec.AddMember("UNCOMPRESSED", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	DataFileFormat_PARQUET = DataFileFormat.AddMember("PARQUET", smithyprelude.Unit)
-
-	IcebergCompactionStrategy_AUTO = IcebergCompactionStrategy.AddMember("AUTO", smithyprelude.Unit)
-
-	IcebergCompactionStrategy_BINPACK = IcebergCompactionStrategy.AddMember("BINPACK", smithyprelude.Unit)
-
-	IcebergCompactionStrategy_SORT = IcebergCompactionStrategy.AddMember("SORT", smithyprelude.Unit)
-
-	IcebergCompactionStrategy_ZORDER = IcebergCompactionStrategy.AddMember("ZORDER", smithyprelude.Unit)
-
-	MigrationCompactionSettings_targetFileSizeMB = MigrationCompactionSettings.AddMember("targetFileSizeMB", _MigrationTargetFileSizeMB)
-
-	MigrationCompactionSettings_strategy = MigrationCompactionSettings.AddMember("strategy", IcebergCompactionStrategy)
-
-	MigrationSnapshotManagementSettings_minSnapshotsToKeep = MigrationSnapshotManagementSettings.AddMember("minSnapshotsToKeep", _MigrationMinSnapshotsToKeep)
-
-	MigrationSnapshotManagementSettings_maxSnapshotAgeHours = MigrationSnapshotManagementSettings.AddMember("maxSnapshotAgeHours", _PositiveInteger)
-
-	MaintenanceSettings_icebergCompaction = MaintenanceSettings.AddMember("icebergCompaction", MigrationCompactionSettings)
-
-	MaintenanceSettings_icebergSnapshotManagement = MaintenanceSettings.AddMember("icebergSnapshotManagement", MigrationSnapshotManagementSettings)
-
-	UnmatchedSourceFieldsPolicy_FAIL = UnmatchedSourceFieldsPolicy.AddMember("FAIL", smithyprelude.Unit)
-
-	UnmatchedSourceFieldsPolicy_DROP = UnmatchedSourceFieldsPolicy.AddMember("DROP", smithyprelude.Unit)
-
-	IncompatibleValuesPolicy_FAIL = IncompatibleValuesPolicy.AddMember("FAIL", smithyprelude.Unit)
-
-	IncompatibleValuesPolicy_SET_NULL = IncompatibleValuesPolicy.AddMember("SET_NULL", smithyprelude.Unit)
-
-	MigrationPolicies_unmatchedSourceFieldsPolicy = MigrationPolicies.AddMember("unmatchedSourceFieldsPolicy", UnmatchedSourceFieldsPolicy)
-
-	MigrationPolicies_incompatibleValuesPolicy = MigrationPolicies.AddMember("incompatibleValuesPolicy", IncompatibleValuesPolicy)
-
-	DataMigrationOverview_maintenanceSettings = DataMigrationOverview.AddMember("maintenanceSettings", MaintenanceSettings)
-
-	DataMigrationOverview_migrationPolicies = DataMigrationOverview.AddMember("migrationPolicies", MigrationPolicies)
-
-	DataMigrationSettings_maintenanceSettings = DataMigrationSettings.AddMember("maintenanceSettings", MaintenanceSettings)
-
-	DataMigrationSettings_migrationPolicies = DataMigrationSettings.AddMember("migrationPolicies", MigrationPolicies)
-
-	SSEAlgorithm_AES256 = SSEAlgorithm.AddMember("AES256", smithyprelude.Unit)
-
-	SSEAlgorithm_AWS_KMS = SSEAlgorithm.AddMember("AWS_KMS", smithyprelude.Unit)
-
-	EncryptionConfiguration_sseAlgorithm = EncryptionConfiguration.AddMember("sseAlgorithm", SSEAlgorithm)
-
-	EncryptionConfiguration_kmsKeyArn = EncryptionConfiguration.AddMember("kmsKeyArn", smithyprelude.String)
-
-	StorageClass_STANDARD = StorageClass.AddMember("STANDARD", smithyprelude.Unit)
-
-	StorageClass_INTELLIGENT_TIERING = StorageClass.AddMember("INTELLIGENT_TIERING", smithyprelude.Unit)
-
-	StorageClassConfiguration_storageClass = StorageClassConfiguration.AddMember("storageClass", StorageClass)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	MigrationTableProperties_writeFormat = MigrationTableProperties.AddMember("writeFormat", DataFileFormat)
-
-	MigrationTableProperties_icebergFormatVersion = MigrationTableProperties.AddMember("icebergFormatVersion", smithyprelude.Integer)
-
-	MigrationTableProperties_compressionCodec = MigrationTableProperties.AddMember("compressionCodec", CompressionCodec)
-
-	MigrationTableProperties_dictionaryEncoding = MigrationTableProperties.AddMember("dictionaryEncoding", smithyprelude.Boolean)
-
-	SchemaV2FieldType_STRUCT = SchemaV2FieldType.AddMember("STRUCT", smithyprelude.Unit)
-
-	SchemaV2Field_id = SchemaV2Field.AddMember("id", smithyprelude.Integer)
-
-	SchemaV2Field_name = SchemaV2Field.AddMember("name", smithyprelude.String)
-
-	SchemaV2Field_type = SchemaV2Field.AddMember("type", smithyprelude.Document)
-
-	SchemaV2Field_required = SchemaV2Field.AddMember("required", smithyprelude.Boolean)
-
-	SchemaV2Field_doc = SchemaV2Field.AddMember("doc", smithyprelude.String)
-
-	_SchemaV2FieldList_member = _SchemaV2FieldList.AddMember("member", SchemaV2Field)
-
-	_IntegerList_member = _IntegerList.AddMember("member", smithyprelude.Integer)
-
-	IcebergSchemaV2_type = IcebergSchemaV2.AddMember("type", SchemaV2FieldType)
-
-	IcebergSchemaV2_fields = IcebergSchemaV2.AddMember("fields", _SchemaV2FieldList)
-
-	IcebergSchemaV2_schemaId = IcebergSchemaV2.AddMember("schemaId", smithyprelude.Integer, &smithytraits.JSONName{Name: "schema-id"})
-
-	IcebergSchemaV2_identifierFieldIds = IcebergSchemaV2.AddMember("identifierFieldIds", _IntegerList, &smithytraits.JSONName{Name: "identifier-field-ids"})
-
-	IcebergSortDirection_ASC = IcebergSortDirection.AddMember("ASC", smithyprelude.Unit)
-
-	IcebergSortDirection_DESC = IcebergSortDirection.AddMember("DESC", smithyprelude.Unit)
-
-	IcebergNullOrder_NULLS_FIRST = IcebergNullOrder.AddMember("NULLS_FIRST", smithyprelude.Unit)
-
-	IcebergNullOrder_NULLS_LAST = IcebergNullOrder.AddMember("NULLS_LAST", smithyprelude.Unit)
-
-	IcebergSortField_sourceId = IcebergSortField.AddMember("sourceId", smithyprelude.Integer, &smithytraits.JSONName{Name: "source-id"})
-
-	IcebergSortField_transform = IcebergSortField.AddMember("transform", smithyprelude.String)
-
-	IcebergSortField_direction = IcebergSortField.AddMember("direction", IcebergSortDirection)
-
-	IcebergSortField_nullOrder = IcebergSortField.AddMember("nullOrder", IcebergNullOrder, &smithytraits.JSONName{Name: "null-order"})
-
-	_IcebergSortFieldList_member = _IcebergSortFieldList.AddMember("member", IcebergSortField)
-
-	IcebergSortOrder_orderId = IcebergSortOrder.AddMember("orderId", smithyprelude.Integer, &smithytraits.JSONName{Name: "order-id"})
-
-	IcebergSortOrder_fields = IcebergSortOrder.AddMember("fields", _IcebergSortFieldList)
-
-	DestinationTable_tableBucketARN = DestinationTable.AddMember("tableBucketARN", _TableBucketARN)
-
-	DestinationTable_namespace = DestinationTable.AddMember("namespace", _NamespaceName)
-
-	DestinationTable_name = DestinationTable.AddMember("name", _TableName)
-
-	DestinationTable_encryptionConfiguration = DestinationTable.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	DestinationTable_storageClassConfiguration = DestinationTable.AddMember("storageClassConfiguration", StorageClassConfiguration)
-
-	DestinationTable_tags = DestinationTable.AddMember("tags", _Tags)
-
-	DestinationTable_properties = DestinationTable.AddMember("properties", MigrationTableProperties)
-
-	DestinationTable_schema = DestinationTable.AddMember("schema", IcebergSchemaV2)
-
-	DestinationTable_icebergSortOrder = DestinationTable.AddMember("icebergSortOrder", IcebergSortOrder)
-
-	FindingCategory_ACCESS = FindingCategory.AddMember("ACCESS", smithyprelude.Unit)
-
-	FindingCategory_METADATA = FindingCategory.AddMember("METADATA", smithyprelude.Unit)
-
-	FindingCategory_DATA = FindingCategory.AddMember("DATA", smithyprelude.Unit)
-
-	FindingCategory_INTERNAL = FindingCategory.AddMember("INTERNAL", smithyprelude.Unit)
-
-	_FindingCategoryCounts_key = _FindingCategoryCounts.AddMember("key", FindingCategory)
-
-	_FindingCategoryCounts_value = _FindingCategoryCounts.AddMember("value", smithyprelude.Long)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", _ErrorMessage)
-
-	GlueTableSource_catalogId = GlueTableSource.AddMember("catalogId", smithyprelude.String)
-
-	GlueTableSource_databaseName = GlueTableSource.AddMember("databaseName", smithyprelude.String)
-
-	GlueTableSource_tableName = GlueTableSource.AddMember("tableName", smithyprelude.String)
-
-	IcebergCompactionSettings_targetFileSizeMB = IcebergCompactionSettings.AddMember("targetFileSizeMB", _PositiveInteger)
-
-	IcebergCompactionSettings_strategy = IcebergCompactionSettings.AddMember("strategy", IcebergCompactionStrategy)
-
-	SchemaField_id = SchemaField.AddMember("id", smithyprelude.Integer)
-
-	SchemaField_name = SchemaField.AddMember("name", smithyprelude.String)
-
-	SchemaField_type = SchemaField.AddMember("type", smithyprelude.String)
-
-	SchemaField_required = SchemaField.AddMember("required", smithyprelude.Boolean)
-
-	_SchemaFieldList_member = _SchemaFieldList.AddMember("member", SchemaField)
-
-	IcebergSchema_fields = IcebergSchema.AddMember("fields", _SchemaFieldList)
-
-	IcebergPartitionField_sourceId = IcebergPartitionField.AddMember("sourceId", smithyprelude.Integer, &smithytraits.JSONName{Name: "source-id"})
-
-	IcebergPartitionField_transform = IcebergPartitionField.AddMember("transform", smithyprelude.String)
-
-	IcebergPartitionField_name = IcebergPartitionField.AddMember("name", smithyprelude.String)
-
-	IcebergPartitionField_fieldId = IcebergPartitionField.AddMember("fieldId", smithyprelude.Integer, &smithytraits.JSONName{Name: "field-id"})
-
-	_IcebergPartitionFieldList_member = _IcebergPartitionFieldList.AddMember("member", IcebergPartitionField)
-
-	IcebergPartitionSpec_fields = IcebergPartitionSpec.AddMember("fields", _IcebergPartitionFieldList)
-
-	IcebergPartitionSpec_specId = IcebergPartitionSpec.AddMember("specId", smithyprelude.Integer, &smithytraits.JSONName{Name: "spec-id"})
-
-	_TableProperties_key = _TableProperties.AddMember("key", smithyprelude.String)
-
-	_TableProperties_value = _TableProperties.AddMember("value", smithyprelude.String)
-
-	IcebergMetadata_schema = IcebergMetadata.AddMember("schema", IcebergSchema)
-
-	IcebergMetadata_schemaV2 = IcebergMetadata.AddMember("schemaV2", IcebergSchemaV2)
-
-	IcebergMetadata_partitionSpec = IcebergMetadata.AddMember("partitionSpec", IcebergPartitionSpec)
-
-	IcebergMetadata_writeOrder = IcebergMetadata.AddMember("writeOrder", IcebergSortOrder)
-
-	IcebergMetadata_properties = IcebergMetadata.AddMember("properties", _TableProperties)
-
-	IcebergSnapshotManagementSettings_minSnapshotsToKeep = IcebergSnapshotManagementSettings.AddMember("minSnapshotsToKeep", _PositiveInteger)
-
-	IcebergSnapshotManagementSettings_maxSnapshotAgeHours = IcebergSnapshotManagementSettings.AddMember("maxSnapshotAgeHours", _PositiveInteger)
-
-	IcebergUnreferencedFileRemovalSettings_unreferencedDays = IcebergUnreferencedFileRemovalSettings.AddMember("unreferencedDays", _PositiveInteger)
-
-	IcebergUnreferencedFileRemovalSettings_nonCurrentDays = IcebergUnreferencedFileRemovalSettings.AddMember("nonCurrentDays", _PositiveInteger)
-
-	InternalServerErrorException_message = InternalServerErrorException.AddMember("message", _ErrorMessage)
-
-	JobStatus_NOT_YET_RUN = JobStatus.AddMember("NOT_YET_RUN", smithyprelude.Unit)
-
-	JobStatus_SUCCESSFUL = JobStatus.AddMember("SUCCESSFUL", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_DISABLED = JobStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	LastSuccessfulReplicatedUpdate_metadataLocation = LastSuccessfulReplicatedUpdate.AddMember("metadataLocation", _MetadataLocation)
-
-	LastSuccessfulReplicatedUpdate_timestamp = LastSuccessfulReplicatedUpdate.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	MaintenanceStatus_ENABLED = MaintenanceStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	MaintenanceStatus_DISABLED = MaintenanceStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ReplicationInformation_sourceTableARN = ReplicationInformation.AddMember("sourceTableARN", _TableARN)
-
-	ManagedTableInformation_replicationInformation = ManagedTableInformation.AddMember("replicationInformation", ReplicationInformation)
-
-	MethodNotAllowedException_message = MethodNotAllowedException.AddMember("message", _ErrorMessage)
-
-	MigrationFailureCode_ROLE_PERMISSIONS = MigrationFailureCode.AddMember("ROLE_PERMISSIONS", smithyprelude.Unit)
-
-	MigrationFailureCode_SOURCE_PERMISSIONS = MigrationFailureCode.AddMember("SOURCE_PERMISSIONS", smithyprelude.Unit)
-
-	MigrationFailureCode_DESTINATION_PERMISSIONS = MigrationFailureCode.AddMember("DESTINATION_PERMISSIONS", smithyprelude.Unit)
-
-	MigrationFailureCode_RESOURCE_NOT_FOUND = MigrationFailureCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	MigrationFailureCode_SOURCE_NOT_SUPPORTED = MigrationFailureCode.AddMember("SOURCE_NOT_SUPPORTED", smithyprelude.Unit)
-
-	MigrationFailureCode_OBJECT_MIGRATION_REPORT = MigrationFailureCode.AddMember("OBJECT_MIGRATION_REPORT", smithyprelude.Unit)
-
-	MigrationFailureCode_OBJECT_COMPATIBILITY_REPORT = MigrationFailureCode.AddMember("OBJECT_COMPATIBILITY_REPORT", smithyprelude.Unit)
-
-	MigrationFailureCode_TABLE_COMPATIBILITY_REPORT = MigrationFailureCode.AddMember("TABLE_COMPATIBILITY_REPORT", smithyprelude.Unit)
-
-	MigrationFailureCode_INTERNAL_ERROR = MigrationFailureCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	MigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED = MigrationFailureCode.AddMember("REPORT_BUCKET_NOT_SUPPORTED", smithyprelude.Unit)
-
-	MigrationFailureReason_code = MigrationFailureReason.AddMember("code", MigrationFailureCode)
-
-	MigrationFailureReason_detail = MigrationFailureReason.AddMember("detail", _MigrationFailureDetail)
-
-	MigrationReportPrefixes_tableCompatibilityReport = MigrationReportPrefixes.AddMember("tableCompatibilityReport", _MigrationReportPrefix)
-
-	MigrationReportPrefixes_objectCompatibilityReport = MigrationReportPrefixes.AddMember("objectCompatibilityReport", _MigrationReportPrefix)
-
-	MigrationReportPrefixes_objectMigrationReport = MigrationReportPrefixes.AddMember("objectMigrationReport", _MigrationReportPrefix)
-
-	MigrationOutputConfiguration_bucket = MigrationOutputConfiguration.AddMember("bucket", _S3BucketARN)
-
-	MigrationOutputConfiguration_prefixes = MigrationOutputConfiguration.AddMember("prefixes", MigrationReportPrefixes)
-
-	ReportOverview_prefix = ReportOverview.AddMember("prefix", _MigrationReportPrefix)
-
-	ReportOverview_key = ReportOverview.AddMember("key", _ReportObjectKey)
-
-	ReportOverview_checksumCRC64NVME = ReportOverview.AddMember("checksumCRC64NVME", _ChecksumCRC64NVME)
-
-	ReportOverview_invalidFindings = ReportOverview.AddMember("invalidFindings", _FindingCategoryCounts)
-
-	MigrationOutputOverview_bucket = MigrationOutputOverview.AddMember("bucket", _S3BucketARN)
-
-	MigrationOutputOverview_tableCompatibilityReport = MigrationOutputOverview.AddMember("tableCompatibilityReport", ReportOverview)
-
-	MigrationOutputOverview_objectCompatibilityReport = MigrationOutputOverview.AddMember("objectCompatibilityReport", ReportOverview)
-
-	MigrationOutputOverview_objectMigrationReport = MigrationOutputOverview.AddMember("objectMigrationReport", ReportOverview)
-
-	MigrationRequestedState_QUEUED = MigrationRequestedState.AddMember("QUEUED", smithyprelude.Unit)
-
-	MigrationRequestedState_CANCELLED = MigrationRequestedState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	MigrationSourceType_GLUE_TABLE = MigrationSourceType.AddMember("GLUE_TABLE", smithyprelude.Unit)
-
-	MigrationState_NEW = MigrationState.AddMember("NEW", smithyprelude.Unit)
-
-	MigrationState_PLANNING = MigrationState.AddMember("PLANNING", smithyprelude.Unit)
-
-	MigrationState_PENDING_REVIEW = MigrationState.AddMember("PENDING_REVIEW", smithyprelude.Unit)
-
-	MigrationState_QUEUED = MigrationState.AddMember("QUEUED", smithyprelude.Unit)
-
-	MigrationState_MIGRATING = MigrationState.AddMember("MIGRATING", smithyprelude.Unit)
-
-	MigrationState_SUCCEEDED = MigrationState.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	MigrationState_FAILED = MigrationState.AddMember("FAILED", smithyprelude.Unit)
-
-	MigrationState_CANCELLING = MigrationState.AddMember("CANCELLING", smithyprelude.Unit)
-
-	MigrationState_CANCELLED = MigrationState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	MigrationStats_objectsMigrated = MigrationStats.AddMember("objectsMigrated", smithyprelude.Long)
-
-	MigrationStats_objectsFailedMigration = MigrationStats.AddMember("objectsFailedMigration", smithyprelude.Long)
-
-	MigrationStats_objectsPendingMigration = MigrationStats.AddMember("objectsPendingMigration", smithyprelude.Long)
-
-	MigrationType_START = MigrationType.AddMember("START", smithyprelude.Unit)
-
-	MigrationType_SYNC = MigrationType.AddMember("SYNC", smithyprelude.Unit)
-
-	MigrationSummary_migrationId = MigrationSummary.AddMember("migrationId", _MigrationId)
-
-	MigrationSummary_tableBucketARN = MigrationSummary.AddMember("tableBucketARN", _TableBucketARN)
-
-	MigrationSummary_namespace = MigrationSummary.AddMember("namespace", _NamespaceName)
-
-	MigrationSummary_tableARN = MigrationSummary.AddMember("tableARN", _TableARN)
-
-	MigrationSummary_name = MigrationSummary.AddMember("name", _TableName)
-
-	MigrationSummary_type = MigrationSummary.AddMember("type", MigrationType)
-
-	MigrationSummary_state = MigrationSummary.AddMember("state", MigrationState)
-
-	MigrationSummary_hasValidPlan = MigrationSummary.AddMember("hasValidPlan", smithyprelude.Boolean)
-
-	MigrationSummary_createdAt = MigrationSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	MigrationSummary_stateUpdatedAt = MigrationSummary.AddMember("stateUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_MigrationSummaryList_member = _MigrationSummaryList.AddMember("member", MigrationSummary)
-
-	_NamespaceList_member = _NamespaceList.AddMember("member", _NamespaceName)
-
-	NamespaceSummary_namespace = NamespaceSummary.AddMember("namespace", _NamespaceList)
-
-	NamespaceSummary_createdAt = NamespaceSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	NamespaceSummary_createdBy = NamespaceSummary.AddMember("createdBy", _AccountId)
-
-	NamespaceSummary_ownerAccountId = NamespaceSummary.AddMember("ownerAccountId", _AccountId)
-
-	NamespaceSummary_namespaceId = NamespaceSummary.AddMember("namespaceId", _NamespaceId)
-
-	NamespaceSummary_tableBucketId = NamespaceSummary.AddMember("tableBucketId", _TableBucketId)
-
-	_NamespaceSummaryList_member = _NamespaceSummaryList.AddMember("member", NamespaceSummary)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _ErrorMessage)
-
-	OpenTableFormat_ICEBERG = OpenTableFormat.AddMember("ICEBERG", smithyprelude.Unit)
-
-	PlanningStats_objectsScanned = PlanningStats.AddMember("objectsScanned", smithyprelude.Long)
-
-	PlanningStats_objectsPlanned = PlanningStats.AddMember("objectsPlanned", smithyprelude.Long)
-
-	PlanningStats_partitionCount = PlanningStats.AddMember("partitionCount", smithyprelude.Long)
-
-	ReplicationDestination_destinationTableBucketARN = ReplicationDestination.AddMember("destinationTableBucketARN", _TableBucketARN)
-
-	_ReplicationDestinations_member = _ReplicationDestinations.AddMember("member", ReplicationDestination)
-
-	ReplicationStatus_PENDING = ReplicationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ReplicationStatus_COMPLETED = ReplicationStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ReplicationStatus_FAILED = ReplicationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ReplicationDestinationStatusModel_replicationStatus = ReplicationDestinationStatusModel.AddMember("replicationStatus", ReplicationStatus)
-
-	ReplicationDestinationStatusModel_destinationTableBucketArn = ReplicationDestinationStatusModel.AddMember("destinationTableBucketArn", _TableBucketARN)
-
-	ReplicationDestinationStatusModel_destinationTableArn = ReplicationDestinationStatusModel.AddMember("destinationTableArn", _TableARN)
-
-	ReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate = ReplicationDestinationStatusModel.AddMember("lastSuccessfulReplicatedUpdate", LastSuccessfulReplicatedUpdate)
-
-	ReplicationDestinationStatusModel_failureMessage = ReplicationDestinationStatusModel.AddMember("failureMessage", smithyprelude.String)
-
-	_ReplicationDestinationStatuses_member = _ReplicationDestinationStatuses.AddMember("member", ReplicationDestinationStatusModel)
-
-	SourceConfiguration_glueTable = SourceConfiguration.AddMember("glueTable", GlueTableSource)
-
-	TableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL = TableBucketMaintenanceType.AddMember("ICEBERG_UNREFERENCED_FILE_REMOVAL", smithyprelude.Unit)
-
-	TableBucketMaintenanceSettings_icebergUnreferencedFileRemoval = TableBucketMaintenanceSettings.AddMember("icebergUnreferencedFileRemoval", IcebergUnreferencedFileRemovalSettings)
-
-	TableBucketMaintenanceConfigurationValue_status = TableBucketMaintenanceConfigurationValue.AddMember("status", MaintenanceStatus)
-
-	TableBucketMaintenanceConfigurationValue_settings = TableBucketMaintenanceConfigurationValue.AddMember("settings", TableBucketMaintenanceSettings)
-
-	_TableBucketMaintenanceConfiguration_key = _TableBucketMaintenanceConfiguration.AddMember("key", TableBucketMaintenanceType)
-
-	_TableBucketMaintenanceConfiguration_value = _TableBucketMaintenanceConfiguration.AddMember("value", TableBucketMaintenanceConfigurationValue)
-
-	TableBucketReplicationRule_destinations = TableBucketReplicationRule.AddMember("destinations", _ReplicationDestinations)
-
-	_TableBucketReplicationRules_member = _TableBucketReplicationRules.AddMember("member", TableBucketReplicationRule)
-
-	TableBucketReplicationConfiguration_role = TableBucketReplicationConfiguration.AddMember("role", _IAMRole)
-
-	TableBucketReplicationConfiguration_rules = TableBucketReplicationConfiguration.AddMember("rules", _TableBucketReplicationRules)
-
-	TableBucketType_CUSTOMER = TableBucketType.AddMember("CUSTOMER", smithyprelude.Unit)
-
-	TableBucketType_AWS = TableBucketType.AddMember("AWS", smithyprelude.Unit)
-
-	TableBucketSummary_arn = TableBucketSummary.AddMember("arn", _TableBucketARN)
-
-	TableBucketSummary_name = TableBucketSummary.AddMember("name", _TableBucketName)
-
-	TableBucketSummary_ownerAccountId = TableBucketSummary.AddMember("ownerAccountId", _AccountId)
-
-	TableBucketSummary_createdAt = TableBucketSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TableBucketSummary_tableBucketId = TableBucketSummary.AddMember("tableBucketId", _TableBucketId)
-
-	TableBucketSummary_type = TableBucketSummary.AddMember("type", TableBucketType)
-
-	_TableBucketSummaryList_member = _TableBucketSummaryList.AddMember("member", TableBucketSummary)
-
-	TableMaintenanceType_ICEBERG_COMPACTION = TableMaintenanceType.AddMember("ICEBERG_COMPACTION", smithyprelude.Unit)
-
-	TableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT = TableMaintenanceType.AddMember("ICEBERG_SNAPSHOT_MANAGEMENT", smithyprelude.Unit)
-
-	TableMaintenanceSettings_icebergCompaction = TableMaintenanceSettings.AddMember("icebergCompaction", IcebergCompactionSettings)
-
-	TableMaintenanceSettings_icebergSnapshotManagement = TableMaintenanceSettings.AddMember("icebergSnapshotManagement", IcebergSnapshotManagementSettings)
-
-	TableMaintenanceConfigurationValue_status = TableMaintenanceConfigurationValue.AddMember("status", MaintenanceStatus)
-
-	TableMaintenanceConfigurationValue_settings = TableMaintenanceConfigurationValue.AddMember("settings", TableMaintenanceSettings)
-
-	_TableMaintenanceConfiguration_key = _TableMaintenanceConfiguration.AddMember("key", TableMaintenanceType)
-
-	_TableMaintenanceConfiguration_value = _TableMaintenanceConfiguration.AddMember("value", TableMaintenanceConfigurationValue)
-
-	TableMaintenanceJobType_ICEBERG_COMPACTION = TableMaintenanceJobType.AddMember("ICEBERG_COMPACTION", smithyprelude.Unit)
-
-	TableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT = TableMaintenanceJobType.AddMember("ICEBERG_SNAPSHOT_MANAGEMENT", smithyprelude.Unit)
-
-	TableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL = TableMaintenanceJobType.AddMember("ICEBERG_UNREFERENCED_FILE_REMOVAL", smithyprelude.Unit)
-
-	TableMaintenanceJobStatusValue_status = TableMaintenanceJobStatusValue.AddMember("status", JobStatus)
-
-	TableMaintenanceJobStatusValue_lastRunTimestamp = TableMaintenanceJobStatusValue.AddMember("lastRunTimestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TableMaintenanceJobStatusValue_failureMessage = TableMaintenanceJobStatusValue.AddMember("failureMessage", smithyprelude.String)
-
-	_TableMaintenanceJobStatus_key = _TableMaintenanceJobStatus.AddMember("key", TableMaintenanceJobType)
-
-	_TableMaintenanceJobStatus_value = _TableMaintenanceJobStatus.AddMember("value", TableMaintenanceJobStatusValue)
-
-	TableMetadata_iceberg = TableMetadata.AddMember("iceberg", IcebergMetadata)
-
-	TableRecordExpirationStatus_ENABLED = TableRecordExpirationStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	TableRecordExpirationStatus_DISABLED = TableRecordExpirationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	TableRecordExpirationSettings_days = TableRecordExpirationSettings.AddMember("days", _PositiveInteger)
-
-	TableRecordExpirationConfigurationValue_status = TableRecordExpirationConfigurationValue.AddMember("status", TableRecordExpirationStatus)
-
-	TableRecordExpirationConfigurationValue_settings = TableRecordExpirationConfigurationValue.AddMember("settings", TableRecordExpirationSettings)
-
-	TableRecordExpirationJobMetrics_deletedDataFiles = TableRecordExpirationJobMetrics.AddMember("deletedDataFiles", smithyprelude.Long)
-
-	TableRecordExpirationJobMetrics_deletedRecords = TableRecordExpirationJobMetrics.AddMember("deletedRecords", smithyprelude.Long)
-
-	TableRecordExpirationJobMetrics_removedFilesSize = TableRecordExpirationJobMetrics.AddMember("removedFilesSize", smithyprelude.Long)
-
-	TableRecordExpirationJobStatus_NOT_YET_RUN = TableRecordExpirationJobStatus.AddMember("NOT_YET_RUN", smithyprelude.Unit)
-
-	TableRecordExpirationJobStatus_SUCCESSFUL = TableRecordExpirationJobStatus.AddMember("SUCCESSFUL", smithyprelude.Unit)
-
-	TableRecordExpirationJobStatus_FAILED = TableRecordExpirationJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	TableRecordExpirationJobStatus_DISABLED = TableRecordExpirationJobStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	TableReplicationRule_destinations = TableReplicationRule.AddMember("destinations", _ReplicationDestinations)
-
-	_TableReplicationRules_member = _TableReplicationRules.AddMember("member", TableReplicationRule)
-
-	TableReplicationConfiguration_role = TableReplicationConfiguration.AddMember("role", _IAMRole)
-
-	TableReplicationConfiguration_rules = TableReplicationConfiguration.AddMember("rules", _TableReplicationRules)
-
-	TableType_CUSTOMER = TableType.AddMember("CUSTOMER", smithyprelude.Unit)
-
-	TableType_AWS = TableType.AddMember("AWS", smithyprelude.Unit)
-
-	TableSummary_namespace = TableSummary.AddMember("namespace", _NamespaceList)
-
-	TableSummary_name = TableSummary.AddMember("name", _TableName)
-
-	TableSummary_type = TableSummary.AddMember("type", TableType)
-
-	TableSummary_tableARN = TableSummary.AddMember("tableARN", _TableARN)
-
-	TableSummary_createdAt = TableSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TableSummary_modifiedAt = TableSummary.AddMember("modifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TableSummary_managedByService = TableSummary.AddMember("managedByService", smithyprelude.String)
-
-	TableSummary_namespaceId = TableSummary.AddMember("namespaceId", _NamespaceId)
-
-	TableSummary_tableBucketId = TableSummary.AddMember("tableBucketId", _TableBucketId)
-
-	_TableSummaryList_member = _TableSummaryList.AddMember("member", TableSummary)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _ErrorMessage)
-
-	CompleteTableMigrationRequest_tableARN = CompleteTableMigrationRequest.AddMember("tableARN", _TableARN, &smithytraits.HTTPQuery{Name: "tableARN"})
-
-	CreateNamespaceRequest_tableBucketARN = CreateNamespaceRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	CreateNamespaceRequest_namespace = CreateNamespaceRequest.AddMember("namespace", _NamespaceList)
-
-	CreateNamespaceResponse_tableBucketARN = CreateNamespaceResponse.AddMember("tableBucketARN", _TableBucketARN)
-
-	CreateNamespaceResponse_namespace = CreateNamespaceResponse.AddMember("namespace", _NamespaceList)
-
-	CreateTableBucketRequest_name = CreateTableBucketRequest.AddMember("name", _TableBucketName)
-
-	CreateTableBucketRequest_encryptionConfiguration = CreateTableBucketRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	CreateTableBucketRequest_storageClassConfiguration = CreateTableBucketRequest.AddMember("storageClassConfiguration", StorageClassConfiguration)
-
-	CreateTableBucketRequest_tags = CreateTableBucketRequest.AddMember("tags", _Tags)
-
-	CreateTableBucketResponse_arn = CreateTableBucketResponse.AddMember("arn", _TableBucketARN)
-
-	CreateTableRequest_tableBucketARN = CreateTableRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	CreateTableRequest_namespace = CreateTableRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	CreateTableRequest_name = CreateTableRequest.AddMember("name", _TableName)
-
-	CreateTableRequest_format = CreateTableRequest.AddMember("format", OpenTableFormat)
-
-	CreateTableRequest_metadata = CreateTableRequest.AddMember("metadata", TableMetadata)
-
-	CreateTableRequest_encryptionConfiguration = CreateTableRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	CreateTableRequest_storageClassConfiguration = CreateTableRequest.AddMember("storageClassConfiguration", StorageClassConfiguration)
-
-	CreateTableRequest_tags = CreateTableRequest.AddMember("tags", _Tags)
-
-	CreateTableResponse_tableARN = CreateTableResponse.AddMember("tableARN", _TableARN)
-
-	CreateTableResponse_versionToken = CreateTableResponse.AddMember("versionToken", _VersionToken)
-
-	DeleteNamespaceRequest_tableBucketARN = DeleteNamespaceRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	DeleteNamespaceRequest_namespace = DeleteNamespaceRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	DeleteTableBucketEncryptionRequest_tableBucketARN = DeleteTableBucketEncryptionRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	DeleteTableBucketRequest_tableBucketARN = DeleteTableBucketRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	DeleteTableBucketMetricsConfigurationRequest_tableBucketARN = DeleteTableBucketMetricsConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	DeleteTableBucketPolicyRequest_tableBucketARN = DeleteTableBucketPolicyRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	DeleteTableBucketReplicationRequest_tableBucketARN = DeleteTableBucketReplicationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPQuery{Name: "tableBucketARN"})
-
-	DeleteTableBucketReplicationRequest_versionToken = DeleteTableBucketReplicationRequest.AddMember("versionToken", _VersionToken, &smithytraits.HTTPQuery{Name: "versionToken"})
-
-	DeleteTableRequest_tableBucketARN = DeleteTableRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	DeleteTableRequest_namespace = DeleteTableRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	DeleteTableRequest_name = DeleteTableRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	DeleteTableRequest_versionToken = DeleteTableRequest.AddMember("versionToken", _VersionToken, &smithytraits.HTTPQuery{Name: "versionToken"})
-
-	DeleteTablePolicyRequest_tableBucketARN = DeleteTablePolicyRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	DeleteTablePolicyRequest_namespace = DeleteTablePolicyRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	DeleteTablePolicyRequest_name = DeleteTablePolicyRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	DeleteTableReplicationRequest_tableArn = DeleteTableReplicationRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	DeleteTableReplicationRequest_versionToken = DeleteTableReplicationRequest.AddMember("versionToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "versionToken"})
-
-	GetNamespaceRequest_tableBucketARN = GetNamespaceRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetNamespaceRequest_namespace = GetNamespaceRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	GetNamespaceResponse_namespace = GetNamespaceResponse.AddMember("namespace", _NamespaceList)
-
-	GetNamespaceResponse_createdAt = GetNamespaceResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetNamespaceResponse_createdBy = GetNamespaceResponse.AddMember("createdBy", _AccountId)
-
-	GetNamespaceResponse_ownerAccountId = GetNamespaceResponse.AddMember("ownerAccountId", _AccountId)
-
-	GetNamespaceResponse_namespaceId = GetNamespaceResponse.AddMember("namespaceId", _NamespaceId)
-
-	GetNamespaceResponse_tableBucketId = GetNamespaceResponse.AddMember("tableBucketId", _TableBucketId)
-
-	GetTableBucketEncryptionRequest_tableBucketARN = GetTableBucketEncryptionRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableBucketEncryptionResponse_encryptionConfiguration = GetTableBucketEncryptionResponse.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	GetTableBucketRequest_tableBucketARN = GetTableBucketRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableBucketMaintenanceConfigurationRequest_tableBucketARN = GetTableBucketMaintenanceConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableBucketMaintenanceConfigurationResponse_tableBucketARN = GetTableBucketMaintenanceConfigurationResponse.AddMember("tableBucketARN", _TableBucketARN)
-
-	GetTableBucketMaintenanceConfigurationResponse_configuration = GetTableBucketMaintenanceConfigurationResponse.AddMember("configuration", _TableBucketMaintenanceConfiguration)
-
-	GetTableBucketMetricsConfigurationRequest_tableBucketARN = GetTableBucketMetricsConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableBucketMetricsConfigurationResponse_tableBucketARN = GetTableBucketMetricsConfigurationResponse.AddMember("tableBucketARN", _TableBucketARN)
-
-	GetTableBucketMetricsConfigurationResponse_id = GetTableBucketMetricsConfigurationResponse.AddMember("id", smithyprelude.String)
-
-	GetTableBucketResponse_arn = GetTableBucketResponse.AddMember("arn", _TableBucketARN)
-
-	GetTableBucketResponse_name = GetTableBucketResponse.AddMember("name", _TableBucketName)
-
-	GetTableBucketResponse_ownerAccountId = GetTableBucketResponse.AddMember("ownerAccountId", _AccountId)
-
-	GetTableBucketResponse_createdAt = GetTableBucketResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTableBucketResponse_tableBucketId = GetTableBucketResponse.AddMember("tableBucketId", _TableBucketId)
-
-	GetTableBucketResponse_type = GetTableBucketResponse.AddMember("type", TableBucketType)
-
-	GetTableBucketPolicyRequest_tableBucketARN = GetTableBucketPolicyRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableBucketPolicyResponse_resourcePolicy = GetTableBucketPolicyResponse.AddMember("resourcePolicy", _ResourcePolicy)
-
-	GetTableBucketReplicationRequest_tableBucketARN = GetTableBucketReplicationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPQuery{Name: "tableBucketARN"})
-
-	GetTableBucketReplicationResponse_versionToken = GetTableBucketReplicationResponse.AddMember("versionToken", _VersionToken)
-
-	GetTableBucketReplicationResponse_configuration = GetTableBucketReplicationResponse.AddMember("configuration", TableBucketReplicationConfiguration)
-
-	GetTableBucketStorageClassRequest_tableBucketARN = GetTableBucketStorageClassRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableBucketStorageClassResponse_storageClassConfiguration = GetTableBucketStorageClassResponse.AddMember("storageClassConfiguration", StorageClassConfiguration)
-
-	GetTableEncryptionRequest_tableBucketARN = GetTableEncryptionRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableEncryptionRequest_namespace = GetTableEncryptionRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	GetTableEncryptionRequest_name = GetTableEncryptionRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	GetTableEncryptionResponse_encryptionConfiguration = GetTableEncryptionResponse.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	GetTableRequest_tableBucketARN = GetTableRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPQuery{Name: "tableBucketARN"})
-
-	GetTableRequest_namespace = GetTableRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	GetTableRequest_name = GetTableRequest.AddMember("name", _TableName, &smithytraits.HTTPQuery{Name: "name"})
-
-	GetTableRequest_tableArn = GetTableRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	GetTableMaintenanceConfigurationRequest_tableBucketARN = GetTableMaintenanceConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableMaintenanceConfigurationRequest_namespace = GetTableMaintenanceConfigurationRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	GetTableMaintenanceConfigurationRequest_name = GetTableMaintenanceConfigurationRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	GetTableMaintenanceConfigurationResponse_tableARN = GetTableMaintenanceConfigurationResponse.AddMember("tableARN", _TableARN)
-
-	GetTableMaintenanceConfigurationResponse_configuration = GetTableMaintenanceConfigurationResponse.AddMember("configuration", _TableMaintenanceConfiguration)
-
-	GetTableMaintenanceJobStatusRequest_tableBucketARN = GetTableMaintenanceJobStatusRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableMaintenanceJobStatusRequest_namespace = GetTableMaintenanceJobStatusRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	GetTableMaintenanceJobStatusRequest_name = GetTableMaintenanceJobStatusRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	GetTableMaintenanceJobStatusResponse_tableARN = GetTableMaintenanceJobStatusResponse.AddMember("tableARN", _TableARN)
-
-	GetTableMaintenanceJobStatusResponse_status = GetTableMaintenanceJobStatusResponse.AddMember("status", _TableMaintenanceJobStatus)
-
-	GetTableMetadataLocationRequest_tableBucketARN = GetTableMetadataLocationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableMetadataLocationRequest_namespace = GetTableMetadataLocationRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	GetTableMetadataLocationRequest_name = GetTableMetadataLocationRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	GetTableMetadataLocationResponse_versionToken = GetTableMetadataLocationResponse.AddMember("versionToken", _VersionToken)
-
-	GetTableMetadataLocationResponse_metadataLocation = GetTableMetadataLocationResponse.AddMember("metadataLocation", _MetadataLocation)
-
-	GetTableMetadataLocationResponse_warehouseLocation = GetTableMetadataLocationResponse.AddMember("warehouseLocation", _WarehouseLocation)
-
-	GetTableMigrationRequest_migrationId = GetTableMigrationRequest.AddMember("migrationId", _MigrationId, &smithytraits.HTTPQuery{Name: "migrationId"})
-
-	GetTableMigrationRequest_tableARN = GetTableMigrationRequest.AddMember("tableARN", _TableARN, &smithytraits.HTTPQuery{Name: "tableARN"})
-
-	GetTableMigrationResponse_migrationId = GetTableMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	GetTableMigrationResponse_tableBucketARN = GetTableMigrationResponse.AddMember("tableBucketARN", _TableBucketARN)
-
-	GetTableMigrationResponse_namespace = GetTableMigrationResponse.AddMember("namespace", _NamespaceName)
-
-	GetTableMigrationResponse_tableARN = GetTableMigrationResponse.AddMember("tableARN", _TableARN)
-
-	GetTableMigrationResponse_name = GetTableMigrationResponse.AddMember("name", _TableName)
-
-	GetTableMigrationResponse_type = GetTableMigrationResponse.AddMember("type", MigrationType)
-
-	GetTableMigrationResponse_state = GetTableMigrationResponse.AddMember("state", MigrationState)
-
-	GetTableMigrationResponse_roleARN = GetTableMigrationResponse.AddMember("roleARN", _RoleArn)
-
-	GetTableMigrationResponse_reviewMigrationPlan = GetTableMigrationResponse.AddMember("reviewMigrationPlan", smithyprelude.Boolean)
-
-	GetTableMigrationResponse_hasValidPlan = GetTableMigrationResponse.AddMember("hasValidPlan", smithyprelude.Boolean)
-
-	GetTableMigrationResponse_createdAt = GetTableMigrationResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTableMigrationResponse_stateUpdatedAt = GetTableMigrationResponse.AddMember("stateUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTableMigrationResponse_failureReason = GetTableMigrationResponse.AddMember("failureReason", MigrationFailureReason)
-
-	GetTableMigrationResponse_planningStats = GetTableMigrationResponse.AddMember("planningStats", PlanningStats)
-
-	GetTableMigrationResponse_migrationStats = GetTableMigrationResponse.AddMember("migrationStats", MigrationStats)
-
-	GetTableMigrationResponse_sourceType = GetTableMigrationResponse.AddMember("sourceType", MigrationSourceType)
-
-	GetTableMigrationResponse_source = GetTableMigrationResponse.AddMember("source", SourceConfiguration)
-
-	GetTableMigrationResponse_dataMigration = GetTableMigrationResponse.AddMember("dataMigration", DataMigrationOverview)
-
-	GetTableMigrationResponse_migrationOutput = GetTableMigrationResponse.AddMember("migrationOutput", MigrationOutputOverview)
-
-	GetTableResponse_name = GetTableResponse.AddMember("name", _TableName)
-
-	GetTableResponse_type = GetTableResponse.AddMember("type", TableType)
-
-	GetTableResponse_tableARN = GetTableResponse.AddMember("tableARN", _TableARN)
-
-	GetTableResponse_namespace = GetTableResponse.AddMember("namespace", _NamespaceList)
-
-	GetTableResponse_namespaceId = GetTableResponse.AddMember("namespaceId", _NamespaceId)
-
-	GetTableResponse_versionToken = GetTableResponse.AddMember("versionToken", _VersionToken)
-
-	GetTableResponse_metadataLocation = GetTableResponse.AddMember("metadataLocation", _MetadataLocation)
-
-	GetTableResponse_warehouseLocation = GetTableResponse.AddMember("warehouseLocation", _WarehouseLocation)
-
-	GetTableResponse_createdAt = GetTableResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTableResponse_createdBy = GetTableResponse.AddMember("createdBy", _AccountId)
-
-	GetTableResponse_managedByService = GetTableResponse.AddMember("managedByService", smithyprelude.String)
-
-	GetTableResponse_modifiedAt = GetTableResponse.AddMember("modifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTableResponse_modifiedBy = GetTableResponse.AddMember("modifiedBy", _AccountId)
-
-	GetTableResponse_ownerAccountId = GetTableResponse.AddMember("ownerAccountId", _AccountId)
-
-	GetTableResponse_format = GetTableResponse.AddMember("format", OpenTableFormat)
-
-	GetTableResponse_tableBucketId = GetTableResponse.AddMember("tableBucketId", _TableBucketId)
-
-	GetTableResponse_managedTableInformation = GetTableResponse.AddMember("managedTableInformation", ManagedTableInformation)
-
-	GetTablePolicyRequest_tableBucketARN = GetTablePolicyRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTablePolicyRequest_namespace = GetTablePolicyRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	GetTablePolicyRequest_name = GetTablePolicyRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	GetTablePolicyResponse_resourcePolicy = GetTablePolicyResponse.AddMember("resourcePolicy", _ResourcePolicy)
-
-	GetTableRecordExpirationConfigurationRequest_tableArn = GetTableRecordExpirationConfigurationRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	GetTableRecordExpirationConfigurationResponse_configuration = GetTableRecordExpirationConfigurationResponse.AddMember("configuration", TableRecordExpirationConfigurationValue)
-
-	GetTableRecordExpirationJobStatusRequest_tableArn = GetTableRecordExpirationJobStatusRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	GetTableRecordExpirationJobStatusResponse_status = GetTableRecordExpirationJobStatusResponse.AddMember("status", TableRecordExpirationJobStatus)
-
-	GetTableRecordExpirationJobStatusResponse_lastRunTimestamp = GetTableRecordExpirationJobStatusResponse.AddMember("lastRunTimestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTableRecordExpirationJobStatusResponse_failureMessage = GetTableRecordExpirationJobStatusResponse.AddMember("failureMessage", smithyprelude.String)
-
-	GetTableRecordExpirationJobStatusResponse_metrics = GetTableRecordExpirationJobStatusResponse.AddMember("metrics", TableRecordExpirationJobMetrics)
-
-	GetTableReplicationRequest_tableArn = GetTableReplicationRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	GetTableReplicationResponse_versionToken = GetTableReplicationResponse.AddMember("versionToken", smithyprelude.String)
-
-	GetTableReplicationResponse_configuration = GetTableReplicationResponse.AddMember("configuration", TableReplicationConfiguration)
-
-	GetTableReplicationStatusRequest_tableArn = GetTableReplicationStatusRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	GetTableReplicationStatusResponse_sourceTableArn = GetTableReplicationStatusResponse.AddMember("sourceTableArn", _TableARN)
-
-	GetTableReplicationStatusResponse_destinations = GetTableReplicationStatusResponse.AddMember("destinations", _ReplicationDestinationStatuses)
-
-	GetTableStorageClassRequest_tableBucketARN = GetTableStorageClassRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	GetTableStorageClassRequest_namespace = GetTableStorageClassRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	GetTableStorageClassRequest_name = GetTableStorageClassRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	GetTableStorageClassResponse_storageClassConfiguration = GetTableStorageClassResponse.AddMember("storageClassConfiguration", StorageClassConfiguration)
-
-	ListNamespacesRequest_tableBucketARN = ListNamespacesRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	ListNamespacesRequest_prefix = ListNamespacesRequest.AddMember("prefix", smithyprelude.String, &smithytraits.HTTPQuery{Name: "prefix"})
-
-	ListNamespacesRequest_continuationToken = ListNamespacesRequest.AddMember("continuationToken", _NextToken, &smithytraits.HTTPQuery{Name: "continuationToken"})
-
-	ListNamespacesRequest_maxNamespaces = ListNamespacesRequest.AddMember("maxNamespaces", _ListNamespacesLimit, &smithytraits.HTTPQuery{Name: "maxNamespaces"})
-
-	ListNamespacesResponse_namespaces = ListNamespacesResponse.AddMember("namespaces", _NamespaceSummaryList)
-
-	ListNamespacesResponse_continuationToken = ListNamespacesResponse.AddMember("continuationToken", _NextToken)
-
-	ListTableBucketsRequest_prefix = ListTableBucketsRequest.AddMember("prefix", smithyprelude.String, &smithytraits.HTTPQuery{Name: "prefix"})
-
-	ListTableBucketsRequest_continuationToken = ListTableBucketsRequest.AddMember("continuationToken", _NextToken, &smithytraits.HTTPQuery{Name: "continuationToken"})
-
-	ListTableBucketsRequest_maxBuckets = ListTableBucketsRequest.AddMember("maxBuckets", _ListTableBucketsLimit, &smithytraits.HTTPQuery{Name: "maxBuckets"})
-
-	ListTableBucketsRequest_type = ListTableBucketsRequest.AddMember("type", TableBucketType, &smithytraits.HTTPQuery{Name: "type"})
-
-	ListTableBucketsResponse_tableBuckets = ListTableBucketsResponse.AddMember("tableBuckets", _TableBucketSummaryList)
-
-	ListTableBucketsResponse_continuationToken = ListTableBucketsResponse.AddMember("continuationToken", _NextToken)
-
-	ListTableMigrationsRequest_tableBucketARN = ListTableMigrationsRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPQuery{Name: "tableBucketARN"})
-
-	ListTableMigrationsRequest_namespace = ListTableMigrationsRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	ListTableMigrationsRequest_name = ListTableMigrationsRequest.AddMember("name", _TableName, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListTableMigrationsRequest_tableARN = ListTableMigrationsRequest.AddMember("tableARN", _TableARN, &smithytraits.HTTPQuery{Name: "tableARN"})
-
-	ListTableMigrationsRequest_state = ListTableMigrationsRequest.AddMember("state", MigrationState, &smithytraits.HTTPQuery{Name: "state"})
-
-	ListTableMigrationsRequest_hasValidPlan = ListTableMigrationsRequest.AddMember("hasValidPlan", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "hasValidPlan"})
-
-	ListTableMigrationsRequest_maxResults = ListTableMigrationsRequest.AddMember("maxResults", _ListTableMigrationsLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTableMigrationsRequest_nextToken = ListTableMigrationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTableMigrationsResponse_migrations = ListTableMigrationsResponse.AddMember("migrations", _MigrationSummaryList)
-
-	ListTableMigrationsResponse_nextToken = ListTableMigrationsResponse.AddMember("nextToken", _NextToken)
-
-	ListTablesRequest_tableBucketARN = ListTablesRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	ListTablesRequest_namespace = ListTablesRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	ListTablesRequest_prefix = ListTablesRequest.AddMember("prefix", smithyprelude.String, &smithytraits.HTTPQuery{Name: "prefix"})
-
-	ListTablesRequest_continuationToken = ListTablesRequest.AddMember("continuationToken", _NextToken, &smithytraits.HTTPQuery{Name: "continuationToken"})
-
-	ListTablesRequest_maxTables = ListTablesRequest.AddMember("maxTables", _ListTablesLimit, &smithytraits.HTTPQuery{Name: "maxTables"})
-
-	ListTablesResponse_tables = ListTablesResponse.AddMember("tables", _TableSummaryList)
-
-	ListTablesResponse_continuationToken = ListTablesResponse.AddMember("continuationToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	PutTableBucketEncryptionRequest_tableBucketARN = PutTableBucketEncryptionRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	PutTableBucketEncryptionRequest_encryptionConfiguration = PutTableBucketEncryptionRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	PutTableBucketMaintenanceConfigurationRequest_tableBucketARN = PutTableBucketMaintenanceConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	PutTableBucketMaintenanceConfigurationRequest_type = PutTableBucketMaintenanceConfigurationRequest.AddMember("type", TableBucketMaintenanceType, &smithytraits.HTTPLabel{})
-
-	PutTableBucketMaintenanceConfigurationRequest_value = PutTableBucketMaintenanceConfigurationRequest.AddMember("value", TableBucketMaintenanceConfigurationValue)
-
-	PutTableBucketMetricsConfigurationRequest_tableBucketARN = PutTableBucketMetricsConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	PutTableBucketPolicyRequest_tableBucketARN = PutTableBucketPolicyRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	PutTableBucketPolicyRequest_resourcePolicy = PutTableBucketPolicyRequest.AddMember("resourcePolicy", _ResourcePolicy)
-
-	PutTableBucketReplicationRequest_tableBucketARN = PutTableBucketReplicationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPQuery{Name: "tableBucketARN"})
-
-	PutTableBucketReplicationRequest_versionToken = PutTableBucketReplicationRequest.AddMember("versionToken", _VersionToken, &smithytraits.HTTPQuery{Name: "versionToken"})
-
-	PutTableBucketReplicationRequest_configuration = PutTableBucketReplicationRequest.AddMember("configuration", TableBucketReplicationConfiguration)
-
-	PutTableBucketReplicationResponse_versionToken = PutTableBucketReplicationResponse.AddMember("versionToken", _VersionToken)
-
-	PutTableBucketReplicationResponse_status = PutTableBucketReplicationResponse.AddMember("status", smithyprelude.String)
-
-	PutTableBucketStorageClassRequest_tableBucketARN = PutTableBucketStorageClassRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	PutTableBucketStorageClassRequest_storageClassConfiguration = PutTableBucketStorageClassRequest.AddMember("storageClassConfiguration", StorageClassConfiguration)
-
-	PutTableMaintenanceConfigurationRequest_tableBucketARN = PutTableMaintenanceConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	PutTableMaintenanceConfigurationRequest_namespace = PutTableMaintenanceConfigurationRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	PutTableMaintenanceConfigurationRequest_name = PutTableMaintenanceConfigurationRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	PutTableMaintenanceConfigurationRequest_type = PutTableMaintenanceConfigurationRequest.AddMember("type", TableMaintenanceType, &smithytraits.HTTPLabel{})
-
-	PutTableMaintenanceConfigurationRequest_value = PutTableMaintenanceConfigurationRequest.AddMember("value", TableMaintenanceConfigurationValue)
-
-	PutTablePolicyRequest_tableBucketARN = PutTablePolicyRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	PutTablePolicyRequest_namespace = PutTablePolicyRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	PutTablePolicyRequest_name = PutTablePolicyRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	PutTablePolicyRequest_resourcePolicy = PutTablePolicyRequest.AddMember("resourcePolicy", _ResourcePolicy)
-
-	PutTableRecordExpirationConfigurationRequest_tableArn = PutTableRecordExpirationConfigurationRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	PutTableRecordExpirationConfigurationRequest_value = PutTableRecordExpirationConfigurationRequest.AddMember("value", TableRecordExpirationConfigurationValue)
-
-	PutTableReplicationRequest_tableArn = PutTableReplicationRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
-
-	PutTableReplicationRequest_versionToken = PutTableReplicationRequest.AddMember("versionToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "versionToken"})
-
-	PutTableReplicationRequest_configuration = PutTableReplicationRequest.AddMember("configuration", TableReplicationConfiguration)
-
-	PutTableReplicationResponse_versionToken = PutTableReplicationResponse.AddMember("versionToken", smithyprelude.String)
-
-	PutTableReplicationResponse_status = PutTableReplicationResponse.AddMember("status", smithyprelude.String)
-
-	RenameTableRequest_tableBucketARN = RenameTableRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	RenameTableRequest_namespace = RenameTableRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	RenameTableRequest_name = RenameTableRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	RenameTableRequest_newNamespaceName = RenameTableRequest.AddMember("newNamespaceName", _NamespaceName)
-
-	RenameTableRequest_newName = RenameTableRequest.AddMember("newName", _TableName)
-
-	RenameTableRequest_versionToken = RenameTableRequest.AddMember("versionToken", _VersionToken)
-
-	StartTableMigrationRequest_roleARN = StartTableMigrationRequest.AddMember("roleARN", _RoleArn)
-
-	StartTableMigrationRequest_destinationTable = StartTableMigrationRequest.AddMember("destinationTable", DestinationTable)
-
-	StartTableMigrationRequest_sourceType = StartTableMigrationRequest.AddMember("sourceType", MigrationSourceType)
-
-	StartTableMigrationRequest_source = StartTableMigrationRequest.AddMember("source", SourceConfiguration)
-
-	StartTableMigrationRequest_dataMigration = StartTableMigrationRequest.AddMember("dataMigration", DataMigrationSettings)
-
-	StartTableMigrationRequest_reviewMigrationPlan = StartTableMigrationRequest.AddMember("reviewMigrationPlan", smithyprelude.Boolean)
-
-	StartTableMigrationRequest_migrationOutput = StartTableMigrationRequest.AddMember("migrationOutput", MigrationOutputConfiguration)
-
-	StartTableMigrationResponse_migrationId = StartTableMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	StartTableMigrationResponse_state = StartTableMigrationResponse.AddMember("state", MigrationState)
-
-	SyncTableMigrationRequest_roleARN = SyncTableMigrationRequest.AddMember("roleARN", _RoleArn)
-
-	SyncTableMigrationRequest_tableARN = SyncTableMigrationRequest.AddMember("tableARN", _TableARN)
-
-	SyncTableMigrationRequest_reviewMigrationPlan = SyncTableMigrationRequest.AddMember("reviewMigrationPlan", smithyprelude.Boolean)
-
-	SyncTableMigrationRequest_migrationOutput = SyncTableMigrationRequest.AddMember("migrationOutput", MigrationOutputConfiguration)
-
-	SyncTableMigrationResponse_migrationId = SyncTableMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	SyncTableMigrationResponse_state = SyncTableMigrationResponse.AddMember("state", MigrationState)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateTableMetadataLocationRequest_tableBucketARN = UpdateTableMetadataLocationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
-
-	UpdateTableMetadataLocationRequest_namespace = UpdateTableMetadataLocationRequest.AddMember("namespace", _NamespaceName, &smithytraits.HTTPLabel{})
-
-	UpdateTableMetadataLocationRequest_name = UpdateTableMetadataLocationRequest.AddMember("name", _TableName, &smithytraits.HTTPLabel{})
-
-	UpdateTableMetadataLocationRequest_versionToken = UpdateTableMetadataLocationRequest.AddMember("versionToken", _VersionToken)
-
-	UpdateTableMetadataLocationRequest_metadataLocation = UpdateTableMetadataLocationRequest.AddMember("metadataLocation", _MetadataLocation)
-
-	UpdateTableMetadataLocationResponse_name = UpdateTableMetadataLocationResponse.AddMember("name", _TableName)
-
-	UpdateTableMetadataLocationResponse_tableARN = UpdateTableMetadataLocationResponse.AddMember("tableARN", _TableARN)
-
-	UpdateTableMetadataLocationResponse_namespace = UpdateTableMetadataLocationResponse.AddMember("namespace", _NamespaceList)
-
-	UpdateTableMetadataLocationResponse_versionToken = UpdateTableMetadataLocationResponse.AddMember("versionToken", _VersionToken)
-
-	UpdateTableMetadataLocationResponse_metadataLocation = UpdateTableMetadataLocationResponse.AddMember("metadataLocation", _MetadataLocation)
-
-	UpdateTableMigrationRequest_tableARN = UpdateTableMigrationRequest.AddMember("tableARN", _TableARN, &smithytraits.HTTPQuery{Name: "tableARN"})
-
-	UpdateTableMigrationRequest_migrationId = UpdateTableMigrationRequest.AddMember("migrationId", _MigrationId, &smithytraits.HTTPQuery{Name: "migrationId"})
-
-	UpdateTableMigrationRequest_requestedState = UpdateTableMigrationRequest.AddMember("requestedState", MigrationRequestedState)
-
-	UpdateTableMigrationRequest_updateDescription = UpdateTableMigrationRequest.AddMember("updateDescription", smithyprelude.String)
-
-	UpdateTableMigrationResponse_migrationId = UpdateTableMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	UpdateTableMigrationResponse_state = UpdateTableMigrationResponse.AddMember("state", MigrationState)
-
-	UpdateTableMigrationResponse_tableARN = UpdateTableMigrationResponse.AddMember("tableARN", _TableARN)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "source-id"}}, DirectMask: 0x1}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "field-id"}}, DirectMask: 0x1}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "spec-id"}}, DirectMask: 0x1}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "schema-id"}}, DirectMask: 0x1}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identifier-field-ids"}}, DirectMask: 0x1}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "null-order"}}, DirectMask: 0x1}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "order-id"}}, DirectMask: 0x1}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 405}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tableARN"}}, DirectMask: 0x10}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tableBucketARN"}}, DirectMask: 0x10}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "versionToken"}}, DirectMask: 0x10}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tableArn"}}, DirectMask: 0x10}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "namespace"}}, DirectMask: 0x10}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "migrationId"}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "prefix"}}, DirectMask: 0x10}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "continuationToken"}}, DirectMask: 0x10}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxNamespaces"}}, DirectMask: 0x10}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxBuckets"}}, DirectMask: 0x10}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "type"}}, DirectMask: 0x10}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "state"}}, DirectMask: 0x10}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "hasValidPlan"}}, DirectMask: 0x10}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxTables"}}, DirectMask: 0x10}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mCompressionCodec = smithy.SchemaMembers{List: []*smithy.Schema{&sCompressionCodec_ZSTD, &sCompressionCodec_SNAPPY, &sCompressionCodec_GZIP, &sCompressionCodec_UNCOMPRESSED}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mDataFileFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sDataFileFormat_PARQUET}}
+var mDataMigrationOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sDataMigrationOverview_maintenanceSettings, &sDataMigrationOverview_migrationPolicies}}
+var mDataMigrationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDataMigrationSettings_maintenanceSettings, &sDataMigrationSettings_migrationPolicies}}
+var mDestinationTable = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationTable_tableBucketARN, &sDestinationTable_namespace, &sDestinationTable_name, &sDestinationTable_encryptionConfiguration, &sDestinationTable_storageClassConfiguration, &sDestinationTable_tags, &sDestinationTable_properties, &sDestinationTable_schema, &sDestinationTable_icebergSortOrder}, Hash: &hDestinationTable}
+var mEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfiguration_sseAlgorithm, &sEncryptionConfiguration_kmsKeyArn}}
+var mFindingCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingCategory_ACCESS, &sFindingCategory_METADATA, &sFindingCategory_DATA, &sFindingCategory_INTERNAL}}
+var m_FindingCategoryCounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingCategoryCounts_key, &s_FindingCategoryCounts_value}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_message}}
+var mGlueTableSource = smithy.SchemaMembers{List: []*smithy.Schema{&sGlueTableSource_catalogId, &sGlueTableSource_databaseName, &sGlueTableSource_tableName}}
+var mIcebergCompactionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergCompactionSettings_targetFileSizeMB, &sIcebergCompactionSettings_strategy}}
+var mIcebergCompactionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergCompactionStrategy_AUTO, &sIcebergCompactionStrategy_BINPACK, &sIcebergCompactionStrategy_SORT, &sIcebergCompactionStrategy_ZORDER}}
+var mIcebergMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergMetadata_schema, &sIcebergMetadata_schemaV2, &sIcebergMetadata_partitionSpec, &sIcebergMetadata_writeOrder, &sIcebergMetadata_properties}}
+var mIcebergNullOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergNullOrder_NULLS_FIRST, &sIcebergNullOrder_NULLS_LAST}}
+var mIcebergPartitionField = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergPartitionField_sourceId, &sIcebergPartitionField_transform, &sIcebergPartitionField_name, &sIcebergPartitionField_fieldId}}
+var m_IcebergPartitionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IcebergPartitionFieldList_member}}
+var mIcebergPartitionSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergPartitionSpec_fields, &sIcebergPartitionSpec_specId}}
+var mIcebergSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergSchema_fields}}
+var mIcebergSchemaV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergSchemaV2_type, &sIcebergSchemaV2_fields, &sIcebergSchemaV2_schemaId, &sIcebergSchemaV2_identifierFieldIds}}
+var mIcebergSnapshotManagementSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergSnapshotManagementSettings_minSnapshotsToKeep, &sIcebergSnapshotManagementSettings_maxSnapshotAgeHours}}
+var mIcebergSortDirection = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergSortDirection_ASC, &sIcebergSortDirection_DESC}}
+var mIcebergSortField = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergSortField_sourceId, &sIcebergSortField_transform, &sIcebergSortField_direction, &sIcebergSortField_nullOrder}}
+var m_IcebergSortFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IcebergSortFieldList_member}}
+var mIcebergSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergSortOrder_orderId, &sIcebergSortOrder_fields}}
+var mIcebergUnreferencedFileRemovalSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergUnreferencedFileRemovalSettings_unreferencedDays, &sIcebergUnreferencedFileRemovalSettings_nonCurrentDays}}
+var mIncompatibleValuesPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sIncompatibleValuesPolicy_FAIL, &sIncompatibleValuesPolicy_SET_NULL}}
+var m_IntegerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegerList_member}}
+var mInternalServerErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerErrorException_message}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_NOT_YET_RUN, &sJobStatus_SUCCESSFUL, &sJobStatus_FAILED, &sJobStatus_DISABLED}}
+var mLastSuccessfulReplicatedUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sLastSuccessfulReplicatedUpdate_metadataLocation, &sLastSuccessfulReplicatedUpdate_timestamp}}
+var mMaintenanceSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sMaintenanceSettings_icebergCompaction, &sMaintenanceSettings_icebergSnapshotManagement}}
+var mMaintenanceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMaintenanceStatus_ENABLED, &sMaintenanceStatus_DISABLED}}
+var mManagedTableInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedTableInformation_replicationInformation}}
+var mMethodNotAllowedException = smithy.SchemaMembers{List: []*smithy.Schema{&sMethodNotAllowedException_message}}
+var mMigrationCompactionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationCompactionSettings_targetFileSizeMB, &sMigrationCompactionSettings_strategy}}
+var mMigrationFailureCode = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationFailureCode_ROLE_PERMISSIONS, &sMigrationFailureCode_SOURCE_PERMISSIONS, &sMigrationFailureCode_DESTINATION_PERMISSIONS, &sMigrationFailureCode_RESOURCE_NOT_FOUND, &sMigrationFailureCode_SOURCE_NOT_SUPPORTED, &sMigrationFailureCode_OBJECT_MIGRATION_REPORT, &sMigrationFailureCode_OBJECT_COMPATIBILITY_REPORT, &sMigrationFailureCode_TABLE_COMPATIBILITY_REPORT, &sMigrationFailureCode_INTERNAL_ERROR, &sMigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED}, Hash: &hMigrationFailureCode}
+var mMigrationFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationFailureReason_code, &sMigrationFailureReason_detail}}
+var mMigrationOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationOutputConfiguration_bucket, &sMigrationOutputConfiguration_prefixes}}
+var mMigrationOutputOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationOutputOverview_bucket, &sMigrationOutputOverview_tableCompatibilityReport, &sMigrationOutputOverview_objectCompatibilityReport, &sMigrationOutputOverview_objectMigrationReport}}
+var mMigrationPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationPolicies_unmatchedSourceFieldsPolicy, &sMigrationPolicies_incompatibleValuesPolicy}}
+var mMigrationReportPrefixes = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationReportPrefixes_tableCompatibilityReport, &sMigrationReportPrefixes_objectCompatibilityReport, &sMigrationReportPrefixes_objectMigrationReport}}
+var mMigrationRequestedState = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationRequestedState_QUEUED, &sMigrationRequestedState_CANCELLED}}
+var mMigrationSnapshotManagementSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationSnapshotManagementSettings_minSnapshotsToKeep, &sMigrationSnapshotManagementSettings_maxSnapshotAgeHours}}
+var mMigrationSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationSourceType_GLUE_TABLE}}
+var mMigrationState = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationState_NEW, &sMigrationState_PLANNING, &sMigrationState_PENDING_REVIEW, &sMigrationState_QUEUED, &sMigrationState_MIGRATING, &sMigrationState_SUCCEEDED, &sMigrationState_FAILED, &sMigrationState_CANCELLING, &sMigrationState_CANCELLED}, Hash: &hMigrationState}
+var mMigrationStats = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationStats_objectsMigrated, &sMigrationStats_objectsFailedMigration, &sMigrationStats_objectsPendingMigration}}
+var mMigrationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationSummary_migrationId, &sMigrationSummary_tableBucketARN, &sMigrationSummary_namespace, &sMigrationSummary_tableARN, &sMigrationSummary_name, &sMigrationSummary_type, &sMigrationSummary_state, &sMigrationSummary_hasValidPlan, &sMigrationSummary_createdAt, &sMigrationSummary_stateUpdatedAt}, Hash: &hMigrationSummary}
+var m_MigrationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MigrationSummaryList_member}}
+var mMigrationTableProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationTableProperties_writeFormat, &sMigrationTableProperties_icebergFormatVersion, &sMigrationTableProperties_compressionCodec, &sMigrationTableProperties_dictionaryEncoding}}
+var mMigrationType = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationType_START, &sMigrationType_SYNC}}
+var m_NamespaceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamespaceList_member}}
+var mNamespaceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceSummary_namespace, &sNamespaceSummary_createdAt, &sNamespaceSummary_createdBy, &sNamespaceSummary_ownerAccountId, &sNamespaceSummary_namespaceId, &sNamespaceSummary_tableBucketId}}
+var m_NamespaceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamespaceSummaryList_member}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mOpenTableFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenTableFormat_ICEBERG}}
+var mPlanningStats = smithy.SchemaMembers{List: []*smithy.Schema{&sPlanningStats_objectsScanned, &sPlanningStats_objectsPlanned, &sPlanningStats_partitionCount}}
+var mReplicationDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationDestination_destinationTableBucketARN}}
+var m_ReplicationDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationDestinations_member}}
+var m_ReplicationDestinationStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationDestinationStatuses_member}}
+var mReplicationDestinationStatusModel = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationDestinationStatusModel_replicationStatus, &sReplicationDestinationStatusModel_destinationTableBucketArn, &sReplicationDestinationStatusModel_destinationTableArn, &sReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate, &sReplicationDestinationStatusModel_failureMessage}}
+var mReplicationInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationInformation_sourceTableARN}}
+var mReplicationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationStatus_PENDING, &sReplicationStatus_COMPLETED, &sReplicationStatus_FAILED}}
+var mReportOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sReportOverview_prefix, &sReportOverview_key, &sReportOverview_checksumCRC64NVME, &sReportOverview_invalidFindings}}
+var mSchemaField = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaField_id, &sSchemaField_name, &sSchemaField_type, &sSchemaField_required}}
+var m_SchemaFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchemaFieldList_member}}
+var mSchemaV2Field = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaV2Field_id, &sSchemaV2Field_name, &sSchemaV2Field_type, &sSchemaV2Field_required, &sSchemaV2Field_doc}}
+var m_SchemaV2FieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchemaV2FieldList_member}}
+var mSchemaV2FieldType = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaV2FieldType_STRUCT}}
+var mSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceConfiguration_glueTable}}
+var mSSEAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sSSEAlgorithm_AES256, &sSSEAlgorithm_AWS_KMS}}
+var mStorageClass = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageClass_STANDARD, &sStorageClass_INTELLIGENT_TIERING}}
+var mStorageClassConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageClassConfiguration_storageClass}}
+var m_TableBucketMaintenanceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableBucketMaintenanceConfiguration_key, &s_TableBucketMaintenanceConfiguration_value}}
+var mTableBucketMaintenanceConfigurationValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTableBucketMaintenanceConfigurationValue_status, &sTableBucketMaintenanceConfigurationValue_settings}}
+var mTableBucketMaintenanceSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sTableBucketMaintenanceSettings_icebergUnreferencedFileRemoval}}
+var mTableBucketMaintenanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sTableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL}}
+var mTableBucketReplicationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTableBucketReplicationConfiguration_role, &sTableBucketReplicationConfiguration_rules}}
+var mTableBucketReplicationRule = smithy.SchemaMembers{List: []*smithy.Schema{&sTableBucketReplicationRule_destinations}}
+var m_TableBucketReplicationRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableBucketReplicationRules_member}}
+var mTableBucketSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTableBucketSummary_arn, &sTableBucketSummary_name, &sTableBucketSummary_ownerAccountId, &sTableBucketSummary_createdAt, &sTableBucketSummary_tableBucketId, &sTableBucketSummary_type}}
+var m_TableBucketSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableBucketSummaryList_member}}
+var mTableBucketType = smithy.SchemaMembers{List: []*smithy.Schema{&sTableBucketType_CUSTOMER, &sTableBucketType_AWS}}
+var m_TableMaintenanceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableMaintenanceConfiguration_key, &s_TableMaintenanceConfiguration_value}}
+var mTableMaintenanceConfigurationValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTableMaintenanceConfigurationValue_status, &sTableMaintenanceConfigurationValue_settings}}
+var m_TableMaintenanceJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableMaintenanceJobStatus_key, &s_TableMaintenanceJobStatus_value}}
+var mTableMaintenanceJobStatusValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTableMaintenanceJobStatusValue_status, &sTableMaintenanceJobStatusValue_lastRunTimestamp, &sTableMaintenanceJobStatusValue_failureMessage}}
+var mTableMaintenanceJobType = smithy.SchemaMembers{List: []*smithy.Schema{&sTableMaintenanceJobType_ICEBERG_COMPACTION, &sTableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT, &sTableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL}}
+var mTableMaintenanceSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sTableMaintenanceSettings_icebergCompaction, &sTableMaintenanceSettings_icebergSnapshotManagement}}
+var mTableMaintenanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sTableMaintenanceType_ICEBERG_COMPACTION, &sTableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT}}
+var mTableMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sTableMetadata_iceberg}}
+var m_TableProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableProperties_key, &s_TableProperties_value}}
+var mTableRecordExpirationConfigurationValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTableRecordExpirationConfigurationValue_status, &sTableRecordExpirationConfigurationValue_settings}}
+var mTableRecordExpirationJobMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sTableRecordExpirationJobMetrics_deletedDataFiles, &sTableRecordExpirationJobMetrics_deletedRecords, &sTableRecordExpirationJobMetrics_removedFilesSize}}
+var mTableRecordExpirationJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTableRecordExpirationJobStatus_NOT_YET_RUN, &sTableRecordExpirationJobStatus_SUCCESSFUL, &sTableRecordExpirationJobStatus_FAILED, &sTableRecordExpirationJobStatus_DISABLED}}
+var mTableRecordExpirationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sTableRecordExpirationSettings_days}}
+var mTableRecordExpirationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTableRecordExpirationStatus_ENABLED, &sTableRecordExpirationStatus_DISABLED}}
+var mTableReplicationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTableReplicationConfiguration_role, &sTableReplicationConfiguration_rules}}
+var mTableReplicationRule = smithy.SchemaMembers{List: []*smithy.Schema{&sTableReplicationRule_destinations}}
+var m_TableReplicationRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableReplicationRules_member}}
+var mTableSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTableSummary_namespace, &sTableSummary_name, &sTableSummary_type, &sTableSummary_tableARN, &sTableSummary_createdAt, &sTableSummary_modifiedAt, &sTableSummary_managedByService, &sTableSummary_namespaceId, &sTableSummary_tableBucketId}, Hash: &hTableSummary}
+var m_TableSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableSummaryList_member}}
+var mTableType = smithy.SchemaMembers{List: []*smithy.Schema{&sTableType_CUSTOMER, &sTableType_AWS}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_message}}
+var mUnmatchedSourceFieldsPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sUnmatchedSourceFieldsPolicy_FAIL, &sUnmatchedSourceFieldsPolicy_DROP}}
+var mCompleteTableMigrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCompleteTableMigrationRequest_tableARN}}
+var mCreateNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNamespaceRequest_tableBucketARN, &sCreateNamespaceRequest_namespace}}
+var mCreateNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNamespaceResponse_tableBucketARN, &sCreateNamespaceResponse_namespace}}
+var mCreateTableBucketRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableBucketRequest_name, &sCreateTableBucketRequest_encryptionConfiguration, &sCreateTableBucketRequest_storageClassConfiguration, &sCreateTableBucketRequest_tags}}
+var mCreateTableBucketResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableBucketResponse_arn}}
+var mCreateTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableRequest_tableBucketARN, &sCreateTableRequest_namespace, &sCreateTableRequest_name, &sCreateTableRequest_format, &sCreateTableRequest_metadata, &sCreateTableRequest_encryptionConfiguration, &sCreateTableRequest_storageClassConfiguration, &sCreateTableRequest_tags}}
+var mCreateTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableResponse_tableARN, &sCreateTableResponse_versionToken}}
+var mDeleteNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNamespaceRequest_tableBucketARN, &sDeleteNamespaceRequest_namespace}}
+var mDeleteTableBucketEncryptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableBucketEncryptionRequest_tableBucketARN}}
+var mDeleteTableBucketRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableBucketRequest_tableBucketARN}}
+var mDeleteTableBucketMetricsConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableBucketMetricsConfigurationRequest_tableBucketARN}}
+var mDeleteTableBucketPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableBucketPolicyRequest_tableBucketARN}}
+var mDeleteTableBucketReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableBucketReplicationRequest_tableBucketARN, &sDeleteTableBucketReplicationRequest_versionToken}}
+var mDeleteTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableRequest_tableBucketARN, &sDeleteTableRequest_namespace, &sDeleteTableRequest_name, &sDeleteTableRequest_versionToken}}
+var mDeleteTablePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTablePolicyRequest_tableBucketARN, &sDeleteTablePolicyRequest_namespace, &sDeleteTablePolicyRequest_name}}
+var mDeleteTableReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableReplicationRequest_tableArn, &sDeleteTableReplicationRequest_versionToken}}
+var mGetNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNamespaceRequest_tableBucketARN, &sGetNamespaceRequest_namespace}}
+var mGetNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNamespaceResponse_namespace, &sGetNamespaceResponse_createdAt, &sGetNamespaceResponse_createdBy, &sGetNamespaceResponse_ownerAccountId, &sGetNamespaceResponse_namespaceId, &sGetNamespaceResponse_tableBucketId}}
+var mGetTableBucketEncryptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketEncryptionRequest_tableBucketARN}}
+var mGetTableBucketEncryptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketEncryptionResponse_encryptionConfiguration}}
+var mGetTableBucketRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketRequest_tableBucketARN}}
+var mGetTableBucketMaintenanceConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketMaintenanceConfigurationRequest_tableBucketARN}}
+var mGetTableBucketMaintenanceConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketMaintenanceConfigurationResponse_tableBucketARN, &sGetTableBucketMaintenanceConfigurationResponse_configuration}}
+var mGetTableBucketMetricsConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketMetricsConfigurationRequest_tableBucketARN}}
+var mGetTableBucketMetricsConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketMetricsConfigurationResponse_tableBucketARN, &sGetTableBucketMetricsConfigurationResponse_id}}
+var mGetTableBucketResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketResponse_arn, &sGetTableBucketResponse_name, &sGetTableBucketResponse_ownerAccountId, &sGetTableBucketResponse_createdAt, &sGetTableBucketResponse_tableBucketId, &sGetTableBucketResponse_type}}
+var mGetTableBucketPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketPolicyRequest_tableBucketARN}}
+var mGetTableBucketPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketPolicyResponse_resourcePolicy}}
+var mGetTableBucketReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketReplicationRequest_tableBucketARN}}
+var mGetTableBucketReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketReplicationResponse_versionToken, &sGetTableBucketReplicationResponse_configuration}}
+var mGetTableBucketStorageClassRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketStorageClassRequest_tableBucketARN}}
+var mGetTableBucketStorageClassResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableBucketStorageClassResponse_storageClassConfiguration}}
+var mGetTableEncryptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableEncryptionRequest_tableBucketARN, &sGetTableEncryptionRequest_namespace, &sGetTableEncryptionRequest_name}}
+var mGetTableEncryptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableEncryptionResponse_encryptionConfiguration}}
+var mGetTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableRequest_tableBucketARN, &sGetTableRequest_namespace, &sGetTableRequest_name, &sGetTableRequest_tableArn}}
+var mGetTableMaintenanceConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMaintenanceConfigurationRequest_tableBucketARN, &sGetTableMaintenanceConfigurationRequest_namespace, &sGetTableMaintenanceConfigurationRequest_name}}
+var mGetTableMaintenanceConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMaintenanceConfigurationResponse_tableARN, &sGetTableMaintenanceConfigurationResponse_configuration}}
+var mGetTableMaintenanceJobStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMaintenanceJobStatusRequest_tableBucketARN, &sGetTableMaintenanceJobStatusRequest_namespace, &sGetTableMaintenanceJobStatusRequest_name}}
+var mGetTableMaintenanceJobStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMaintenanceJobStatusResponse_tableARN, &sGetTableMaintenanceJobStatusResponse_status}}
+var mGetTableMetadataLocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMetadataLocationRequest_tableBucketARN, &sGetTableMetadataLocationRequest_namespace, &sGetTableMetadataLocationRequest_name}}
+var mGetTableMetadataLocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMetadataLocationResponse_versionToken, &sGetTableMetadataLocationResponse_metadataLocation, &sGetTableMetadataLocationResponse_warehouseLocation}}
+var mGetTableMigrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMigrationRequest_migrationId, &sGetTableMigrationRequest_tableARN}}
+var mGetTableMigrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMigrationResponse_migrationId, &sGetTableMigrationResponse_tableBucketARN, &sGetTableMigrationResponse_namespace, &sGetTableMigrationResponse_tableARN, &sGetTableMigrationResponse_name, &sGetTableMigrationResponse_type, &sGetTableMigrationResponse_state, &sGetTableMigrationResponse_roleARN, &sGetTableMigrationResponse_reviewMigrationPlan, &sGetTableMigrationResponse_hasValidPlan, &sGetTableMigrationResponse_createdAt, &sGetTableMigrationResponse_stateUpdatedAt, &sGetTableMigrationResponse_failureReason, &sGetTableMigrationResponse_planningStats, &sGetTableMigrationResponse_migrationStats, &sGetTableMigrationResponse_sourceType, &sGetTableMigrationResponse_source, &sGetTableMigrationResponse_dataMigration, &sGetTableMigrationResponse_migrationOutput}, Hash: &hGetTableMigrationResponse}
+var mGetTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableResponse_name, &sGetTableResponse_type, &sGetTableResponse_tableARN, &sGetTableResponse_namespace, &sGetTableResponse_namespaceId, &sGetTableResponse_versionToken, &sGetTableResponse_metadataLocation, &sGetTableResponse_warehouseLocation, &sGetTableResponse_createdAt, &sGetTableResponse_createdBy, &sGetTableResponse_managedByService, &sGetTableResponse_modifiedAt, &sGetTableResponse_modifiedBy, &sGetTableResponse_ownerAccountId, &sGetTableResponse_format, &sGetTableResponse_tableBucketId, &sGetTableResponse_managedTableInformation}, Hash: &hGetTableResponse}
+var mGetTablePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTablePolicyRequest_tableBucketARN, &sGetTablePolicyRequest_namespace, &sGetTablePolicyRequest_name}}
+var mGetTablePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTablePolicyResponse_resourcePolicy}}
+var mGetTableRecordExpirationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableRecordExpirationConfigurationRequest_tableArn}}
+var mGetTableRecordExpirationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableRecordExpirationConfigurationResponse_configuration}}
+var mGetTableRecordExpirationJobStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableRecordExpirationJobStatusRequest_tableArn}}
+var mGetTableRecordExpirationJobStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableRecordExpirationJobStatusResponse_status, &sGetTableRecordExpirationJobStatusResponse_lastRunTimestamp, &sGetTableRecordExpirationJobStatusResponse_failureMessage, &sGetTableRecordExpirationJobStatusResponse_metrics}}
+var mGetTableReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableReplicationRequest_tableArn}}
+var mGetTableReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableReplicationResponse_versionToken, &sGetTableReplicationResponse_configuration}}
+var mGetTableReplicationStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableReplicationStatusRequest_tableArn}}
+var mGetTableReplicationStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableReplicationStatusResponse_sourceTableArn, &sGetTableReplicationStatusResponse_destinations}}
+var mGetTableStorageClassRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableStorageClassRequest_tableBucketARN, &sGetTableStorageClassRequest_namespace, &sGetTableStorageClassRequest_name}}
+var mGetTableStorageClassResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableStorageClassResponse_storageClassConfiguration}}
+var mListNamespacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamespacesRequest_tableBucketARN, &sListNamespacesRequest_prefix, &sListNamespacesRequest_continuationToken, &sListNamespacesRequest_maxNamespaces}}
+var mListNamespacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamespacesResponse_namespaces, &sListNamespacesResponse_continuationToken}}
+var mListTableBucketsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTableBucketsRequest_prefix, &sListTableBucketsRequest_continuationToken, &sListTableBucketsRequest_maxBuckets, &sListTableBucketsRequest_type}}
+var mListTableBucketsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTableBucketsResponse_tableBuckets, &sListTableBucketsResponse_continuationToken}}
+var mListTableMigrationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTableMigrationsRequest_tableBucketARN, &sListTableMigrationsRequest_namespace, &sListTableMigrationsRequest_name, &sListTableMigrationsRequest_tableARN, &sListTableMigrationsRequest_state, &sListTableMigrationsRequest_hasValidPlan, &sListTableMigrationsRequest_maxResults, &sListTableMigrationsRequest_nextToken}}
+var mListTableMigrationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTableMigrationsResponse_migrations, &sListTableMigrationsResponse_nextToken}}
+var mListTablesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesRequest_tableBucketARN, &sListTablesRequest_namespace, &sListTablesRequest_prefix, &sListTablesRequest_continuationToken, &sListTablesRequest_maxTables}}
+var mListTablesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesResponse_tables, &sListTablesResponse_continuationToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mPutTableBucketEncryptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableBucketEncryptionRequest_tableBucketARN, &sPutTableBucketEncryptionRequest_encryptionConfiguration}}
+var mPutTableBucketMaintenanceConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableBucketMaintenanceConfigurationRequest_tableBucketARN, &sPutTableBucketMaintenanceConfigurationRequest_type, &sPutTableBucketMaintenanceConfigurationRequest_value}}
+var mPutTableBucketMetricsConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableBucketMetricsConfigurationRequest_tableBucketARN}}
+var mPutTableBucketPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableBucketPolicyRequest_tableBucketARN, &sPutTableBucketPolicyRequest_resourcePolicy}}
+var mPutTableBucketReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableBucketReplicationRequest_tableBucketARN, &sPutTableBucketReplicationRequest_versionToken, &sPutTableBucketReplicationRequest_configuration}}
+var mPutTableBucketReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableBucketReplicationResponse_versionToken, &sPutTableBucketReplicationResponse_status}}
+var mPutTableBucketStorageClassRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableBucketStorageClassRequest_tableBucketARN, &sPutTableBucketStorageClassRequest_storageClassConfiguration}}
+var mPutTableMaintenanceConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableMaintenanceConfigurationRequest_tableBucketARN, &sPutTableMaintenanceConfigurationRequest_namespace, &sPutTableMaintenanceConfigurationRequest_name, &sPutTableMaintenanceConfigurationRequest_type, &sPutTableMaintenanceConfigurationRequest_value}}
+var mPutTablePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTablePolicyRequest_tableBucketARN, &sPutTablePolicyRequest_namespace, &sPutTablePolicyRequest_name, &sPutTablePolicyRequest_resourcePolicy}}
+var mPutTableRecordExpirationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableRecordExpirationConfigurationRequest_tableArn, &sPutTableRecordExpirationConfigurationRequest_value}}
+var mPutTableReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableReplicationRequest_tableArn, &sPutTableReplicationRequest_versionToken, &sPutTableReplicationRequest_configuration}}
+var mPutTableReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTableReplicationResponse_versionToken, &sPutTableReplicationResponse_status}}
+var mRenameTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRenameTableRequest_tableBucketARN, &sRenameTableRequest_namespace, &sRenameTableRequest_name, &sRenameTableRequest_newNamespaceName, &sRenameTableRequest_newName, &sRenameTableRequest_versionToken}}
+var mStartTableMigrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTableMigrationRequest_roleARN, &sStartTableMigrationRequest_destinationTable, &sStartTableMigrationRequest_sourceType, &sStartTableMigrationRequest_source, &sStartTableMigrationRequest_dataMigration, &sStartTableMigrationRequest_reviewMigrationPlan, &sStartTableMigrationRequest_migrationOutput}}
+var mStartTableMigrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTableMigrationResponse_migrationId, &sStartTableMigrationResponse_state}}
+var mSyncTableMigrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncTableMigrationRequest_roleARN, &sSyncTableMigrationRequest_tableARN, &sSyncTableMigrationRequest_reviewMigrationPlan, &sSyncTableMigrationRequest_migrationOutput}}
+var mSyncTableMigrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncTableMigrationResponse_migrationId, &sSyncTableMigrationResponse_state}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateTableMetadataLocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableMetadataLocationRequest_tableBucketARN, &sUpdateTableMetadataLocationRequest_namespace, &sUpdateTableMetadataLocationRequest_name, &sUpdateTableMetadataLocationRequest_versionToken, &sUpdateTableMetadataLocationRequest_metadataLocation}}
+var mUpdateTableMetadataLocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableMetadataLocationResponse_name, &sUpdateTableMetadataLocationResponse_tableARN, &sUpdateTableMetadataLocationResponse_namespace, &sUpdateTableMetadataLocationResponse_versionToken, &sUpdateTableMetadataLocationResponse_metadataLocation}}
+var mUpdateTableMigrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableMigrationRequest_tableARN, &sUpdateTableMigrationRequest_migrationId, &sUpdateTableMigrationRequest_requestedState, &sUpdateTableMigrationRequest_updateDescription}}
+var mUpdateTableMigrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableMigrationResponse_migrationId, &sUpdateTableMigrationResponse_state, &sUpdateTableMigrationResponse_tableARN}}
+
+var hDestinationTable = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 9, 3, 0, 0, 2, 0, 0, 8, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0,
+	7, 0, 0, 0, 0, 5, 4, 0,
+}}
+var hMigrationFailureCode = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 9, 0, 0, 5, 0, 6, 0, 10, 0, 0, 0, 8, 0, 1, 0, 0, 0, 0, 2, 0, 0,
+	0, 0, 0, 0, 0, 4, 7, 3,
+}}
+var hMigrationState = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 6, 0, 0, 0, 0, 7, 0, 8, 0, 2, 0, 0, 0, 5, 0, 3, 0, 0, 0, 0, 0, 9, 0,
+	0, 0, 0, 1, 0, 4, 0, 0,
+}}
+var hMigrationSummary = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 8, 0, 5, 3, 0, 0, 0, 1, 4, 0, 0, 0, 2, 10, 0, 0, 6, 0, 0, 0, 0,
+	0, 0, 9, 7, 0, 0, 0, 0,
+}}
+var hTableSummary = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 4, 5, 0, 0, 2, 0, 0, 6, 1, 0, 0, 0, 0, 0, 0, 0, 7, 0, 8, 0, 0, 0,
+	0, 0, 3, 9, 0, 0, 0, 0,
+}}
+var hGetTableMigrationResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 10, 17, 5, 3, 0, 0, 0, 1, 4, 0, 0, 0, 2, 12, 16, 19, 6, 0, 0, 9, 14,
+	0, 0, 11, 7, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 13,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0,
+}}
+var hGetTableResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 5, 9, 14,
+	0, 0, 0, 0, 0, 0, 15, 0, 8, 10, 0, 0, 0, 7, 0, 3, 0, 0, 0, 0, 12, 0, 0, 0,
+	13, 17, 0, 0, 2, 0, 16, 0, 0, 0, 0, 0, 0, 0, 6, 0,
+}}
+
+var sCompleteTableMigration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteTableMigration, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCompleteTableMigration})
+var sCreateNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNamespace, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateNamespace})
+var sCreateTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTable, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateTable})
+var sCreateTableBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableBucket, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateTableBucket})
+var sDeleteNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamespace, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNamespace})
+var sDeleteTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTable, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTable})
+var sDeleteTableBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucket, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTableBucket})
+var sDeleteTableBucketEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketEncryption, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTableBucketEncryption})
+var sDeleteTableBucketMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketMetricsConfiguration, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTableBucketMetricsConfiguration})
+var sDeleteTableBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketPolicy, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTableBucketPolicy})
+var sDeleteTableBucketReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketReplication, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTableBucketReplication})
+var sDeleteTablePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTablePolicy, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTablePolicy})
+var sDeleteTableReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableReplication, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTableReplication})
+var sGetNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamespace, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetNamespace})
+var sGetTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTable, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetTable})
+var sGetTableBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucket, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetTableBucket})
+var sGetTableBucketEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketEncryption, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetTableBucketEncryption})
+var sGetTableBucketMaintenanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketMaintenanceConfiguration, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetTableBucketMaintenanceConfiguration})
+var sGetTableBucketMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketMetricsConfiguration, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetTableBucketMetricsConfiguration})
+var sGetTableBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketPolicy, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetTableBucketPolicy})
+var sGetTableBucketReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketReplication, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eGetTableBucketReplication})
+var sGetTableBucketStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketStorageClass, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eGetTableBucketStorageClass})
+var sGetTableEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableEncryption, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eGetTableEncryption})
+var sGetTableMaintenanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMaintenanceConfiguration, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetTableMaintenanceConfiguration})
+var sGetTableMaintenanceJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMaintenanceJobStatus, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetTableMaintenanceJobStatus})
+var sGetTableMetadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMetadataLocation, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetTableMetadataLocation})
+var sGetTableMigration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMigration, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetTableMigration})
+var sGetTablePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTablePolicy, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetTablePolicy})
+var sGetTableRecordExpirationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRecordExpirationConfiguration, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eGetTableRecordExpirationConfiguration})
+var sGetTableRecordExpirationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRecordExpirationJobStatus, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetTableRecordExpirationJobStatus})
+var sGetTableReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableReplication, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetTableReplication})
+var sGetTableReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableReplicationStatus, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetTableReplicationStatus})
+var sGetTableStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableStorageClass, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetTableStorageClass})
+var sListNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamespaces, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListNamespaces})
+var sListTableBuckets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableBuckets, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListTableBuckets})
+var sListTableMigrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableMigrations, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListTableMigrations})
+var sListTables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTables, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListTables})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutTableBucketEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketEncryption, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &ePutTableBucketEncryption})
+var sPutTableBucketMaintenanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketMaintenanceConfiguration, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &ePutTableBucketMaintenanceConfiguration})
+var sPutTableBucketMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketMetricsConfiguration, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &ePutTableBucketMetricsConfiguration})
+var sPutTableBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketPolicy, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &ePutTableBucketPolicy})
+var sPutTableBucketReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketReplication, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &ePutTableBucketReplication})
+var sPutTableBucketStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketStorageClass, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &ePutTableBucketStorageClass})
+var sPutTableMaintenanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableMaintenanceConfiguration, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &ePutTableMaintenanceConfiguration})
+var sPutTablePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTablePolicy, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &ePutTablePolicy})
+var sPutTableRecordExpirationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableRecordExpirationConfiguration, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &ePutTableRecordExpirationConfiguration})
+var sPutTableReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableReplication, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &ePutTableReplication})
+var sRenameTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenameTable, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eRenameTable})
+var sStartTableMigration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTableMigration, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eStartTableMigration})
+var sSyncTableMigration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncTableMigration, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eSyncTableMigration})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateTableMetadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableMetadataLocation, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTableMetadataLocation})
+var sUpdateTableMigration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableMigration, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTableMigration})
+var s_S3TableBuckets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3TableBuckets, Type: smithy.ShapeTypeService, Ext: &e_S3TableBuckets})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var s_ChecksumCRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChecksumCRC64NVME, Type: smithy.ShapeTypeString, Ext: &e_ChecksumCRC64NVME})
+var sCompressionCodec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionCodec, Members: &mCompressionCodec, Type: smithy.ShapeTypeEnum, Ext: &eCompressionCodec})
+var sCompressionCodec_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionCodec_ZSTD})
+var sCompressionCodec_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionCodec_SNAPPY})
+var sCompressionCodec_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionCodec_GZIP})
+var sCompressionCodec_UNCOMPRESSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCOMPRESSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionCodec_UNCOMPRESSED})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sDataFileFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataFileFormat, Members: &mDataFileFormat, Type: smithy.ShapeTypeEnum, Ext: &eDataFileFormat})
+var sDataFileFormat_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataFileFormat_PARQUET})
+var sDataMigrationOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataMigrationOverview, Members: &mDataMigrationOverview, Type: smithy.ShapeTypeStructure, Ext: &eDataMigrationOverview})
+var sDataMigrationOverview_maintenanceSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maintenanceSettings", ID: &iMaintenanceSettings, Members: &mMaintenanceSettings, Type: smithy.ShapeTypeStructure, Ext: &eDataMigrationOverview_maintenanceSettings})
+var sDataMigrationOverview_migrationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationPolicies", ID: &iMigrationPolicies, Members: &mMigrationPolicies, Type: smithy.ShapeTypeStructure, Ext: &eDataMigrationOverview_migrationPolicies})
+var sDataMigrationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataMigrationSettings, Members: &mDataMigrationSettings, Type: smithy.ShapeTypeStructure, Ext: &eDataMigrationSettings})
+var sDataMigrationSettings_maintenanceSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maintenanceSettings", ID: &iMaintenanceSettings, Members: &mMaintenanceSettings, Type: smithy.ShapeTypeStructure, Ext: &eDataMigrationSettings_maintenanceSettings})
+var sDataMigrationSettings_migrationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationPolicies", ID: &iMigrationPolicies, Members: &mMigrationPolicies, Type: smithy.ShapeTypeStructure, Ext: &eDataMigrationSettings_migrationPolicies})
+var sDestinationTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationTable, Members: &mDestinationTable, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable})
+var sDestinationTable_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eDestinationTable_tableBucketARN})
+var sDestinationTable_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eDestinationTable_namespace})
+var sDestinationTable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eDestinationTable_name})
+var sDestinationTable_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable_encryptionConfiguration})
+var sDestinationTable_storageClassConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClassConfiguration", ID: &iStorageClassConfiguration, Members: &mStorageClassConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable_storageClassConfiguration})
+var sDestinationTable_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eDestinationTable_tags})
+var sDestinationTable_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &iMigrationTableProperties, Members: &mMigrationTableProperties, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable_properties})
+var sDestinationTable_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &iIcebergSchemaV2, Members: &mIcebergSchemaV2, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable_schema})
+var sDestinationTable_icebergSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "icebergSortOrder", ID: &iIcebergSortOrder, Members: &mIcebergSortOrder, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable_icebergSortOrder})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
+var sEncryptionConfiguration_sseAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sseAlgorithm", ID: &iSSEAlgorithm, Members: &mSSEAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionConfiguration_sseAlgorithm})
+var sEncryptionConfiguration_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfiguration_kmsKeyArn})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sFindingCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingCategory, Members: &mFindingCategory, Type: smithy.ShapeTypeEnum, Ext: &eFindingCategory})
+var sFindingCategory_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFindingCategory_ACCESS})
+var sFindingCategory_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFindingCategory_METADATA})
+var sFindingCategory_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFindingCategory_DATA})
+var sFindingCategory_INTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFindingCategory_INTERNAL})
+var s_FindingCategoryCounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingCategoryCounts, Members: &m_FindingCategoryCounts, Type: smithy.ShapeTypeMap, Ext: &e_FindingCategoryCounts})
+var s_FindingCategoryCounts_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iFindingCategory, Members: &mFindingCategory, Type: smithy.ShapeTypeEnum, Ext: &e_FindingCategoryCounts_key})
+var s_FindingCategoryCounts_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &e_FindingCategoryCounts_value})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_message})
+var sGlueTableSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlueTableSource, Members: &mGlueTableSource, Type: smithy.ShapeTypeStructure, Ext: &eGlueTableSource})
+var sGlueTableSource_catalogId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalogId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGlueTableSource_catalogId})
+var sGlueTableSource_databaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGlueTableSource_databaseName})
+var sGlueTableSource_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGlueTableSource_tableName})
+var s_IAMRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IAMRole, Type: smithy.ShapeTypeString, Ext: &e_IAMRole})
+var sIcebergCompactionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergCompactionSettings, Members: &mIcebergCompactionSettings, Type: smithy.ShapeTypeStructure, Ext: &eIcebergCompactionSettings})
+var sIcebergCompactionSettings_targetFileSizeMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetFileSizeMB", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eIcebergCompactionSettings_targetFileSizeMB})
+var sIcebergCompactionSettings_strategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategy", ID: &iIcebergCompactionStrategy, Members: &mIcebergCompactionStrategy, Type: smithy.ShapeTypeEnum, Ext: &eIcebergCompactionSettings_strategy})
+var sIcebergCompactionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergCompactionStrategy, Members: &mIcebergCompactionStrategy, Type: smithy.ShapeTypeEnum, Ext: &eIcebergCompactionStrategy})
+var sIcebergCompactionStrategy_AUTO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergCompactionStrategy_AUTO})
+var sIcebergCompactionStrategy_BINPACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINPACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergCompactionStrategy_BINPACK})
+var sIcebergCompactionStrategy_SORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergCompactionStrategy_SORT})
+var sIcebergCompactionStrategy_ZORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergCompactionStrategy_ZORDER})
+var sIcebergMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergMetadata, Members: &mIcebergMetadata, Type: smithy.ShapeTypeStructure, Ext: &eIcebergMetadata})
+var sIcebergMetadata_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &iIcebergSchema, Members: &mIcebergSchema, Type: smithy.ShapeTypeStructure, Ext: &eIcebergMetadata_schema})
+var sIcebergMetadata_schemaV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaV2", ID: &iIcebergSchemaV2, Members: &mIcebergSchemaV2, Type: smithy.ShapeTypeStructure, Ext: &eIcebergMetadata_schemaV2})
+var sIcebergMetadata_partitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partitionSpec", ID: &iIcebergPartitionSpec, Members: &mIcebergPartitionSpec, Type: smithy.ShapeTypeStructure, Ext: &eIcebergMetadata_partitionSpec})
+var sIcebergMetadata_writeOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeOrder", ID: &iIcebergSortOrder, Members: &mIcebergSortOrder, Type: smithy.ShapeTypeStructure, Ext: &eIcebergMetadata_writeOrder})
+var sIcebergMetadata_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_TableProperties, Members: &m_TableProperties, Type: smithy.ShapeTypeMap, Ext: &eIcebergMetadata_properties})
+var sIcebergNullOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergNullOrder, Members: &mIcebergNullOrder, Type: smithy.ShapeTypeEnum, Ext: &eIcebergNullOrder})
+var sIcebergNullOrder_NULLS_FIRST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NULLS_FIRST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergNullOrder_NULLS_FIRST})
+var sIcebergNullOrder_NULLS_LAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NULLS_LAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergNullOrder_NULLS_LAST})
+var sIcebergPartitionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergPartitionField, Members: &mIcebergPartitionField, Type: smithy.ShapeTypeStructure, Ext: &eIcebergPartitionField})
+var sIcebergPartitionField_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &pInteger, Traits: &t58, Type: smithy.ShapeTypeInteger, Ext: &eIcebergPartitionField_sourceId})
+var sIcebergPartitionField_transform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transform", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIcebergPartitionField_transform})
+var sIcebergPartitionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIcebergPartitionField_name})
+var sIcebergPartitionField_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &pInteger, Traits: &t59, Type: smithy.ShapeTypeInteger, Ext: &eIcebergPartitionField_fieldId})
+var s_IcebergPartitionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IcebergPartitionFieldList, Members: &m_IcebergPartitionFieldList, Type: smithy.ShapeTypeList, Ext: &e_IcebergPartitionFieldList})
+var s_IcebergPartitionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIcebergPartitionField, Members: &mIcebergPartitionField, Type: smithy.ShapeTypeStructure, Ext: &e_IcebergPartitionFieldList_member})
+var sIcebergPartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergPartitionSpec, Members: &mIcebergPartitionSpec, Type: smithy.ShapeTypeStructure, Ext: &eIcebergPartitionSpec})
+var sIcebergPartitionSpec_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_IcebergPartitionFieldList, Members: &m_IcebergPartitionFieldList, Type: smithy.ShapeTypeList, Ext: &eIcebergPartitionSpec_fields})
+var sIcebergPartitionSpec_specId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specId", ID: &pInteger, Traits: &t60, Type: smithy.ShapeTypeInteger, Ext: &eIcebergPartitionSpec_specId})
+var sIcebergSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergSchema, Members: &mIcebergSchema, Type: smithy.ShapeTypeStructure, Ext: &eIcebergSchema})
+var sIcebergSchema_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_SchemaFieldList, Members: &m_SchemaFieldList, Type: smithy.ShapeTypeList, Ext: &eIcebergSchema_fields})
+var sIcebergSchemaV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergSchemaV2, Members: &mIcebergSchemaV2, Type: smithy.ShapeTypeStructure, Ext: &eIcebergSchemaV2})
+var sIcebergSchemaV2_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSchemaV2FieldType, Members: &mSchemaV2FieldType, Type: smithy.ShapeTypeEnum, Ext: &eIcebergSchemaV2_type})
+var sIcebergSchemaV2_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_SchemaV2FieldList, Members: &m_SchemaV2FieldList, Type: smithy.ShapeTypeList, Ext: &eIcebergSchemaV2_fields})
+var sIcebergSchemaV2_schemaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaId", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eIcebergSchemaV2_schemaId})
+var sIcebergSchemaV2_identifierFieldIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifierFieldIds", ID: &i_IntegerList, Members: &m_IntegerList, Traits: &t62, Type: smithy.ShapeTypeList, Ext: &eIcebergSchemaV2_identifierFieldIds})
+var sIcebergSnapshotManagementSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergSnapshotManagementSettings, Members: &mIcebergSnapshotManagementSettings, Type: smithy.ShapeTypeStructure, Ext: &eIcebergSnapshotManagementSettings})
+var sIcebergSnapshotManagementSettings_minSnapshotsToKeep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minSnapshotsToKeep", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eIcebergSnapshotManagementSettings_minSnapshotsToKeep})
+var sIcebergSnapshotManagementSettings_maxSnapshotAgeHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSnapshotAgeHours", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eIcebergSnapshotManagementSettings_maxSnapshotAgeHours})
+var sIcebergSortDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergSortDirection, Members: &mIcebergSortDirection, Type: smithy.ShapeTypeEnum, Ext: &eIcebergSortDirection})
+var sIcebergSortDirection_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergSortDirection_ASC})
+var sIcebergSortDirection_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergSortDirection_DESC})
+var sIcebergSortField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergSortField, Members: &mIcebergSortField, Type: smithy.ShapeTypeStructure, Ext: &eIcebergSortField})
+var sIcebergSortField_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &pInteger, Traits: &t58, Type: smithy.ShapeTypeInteger, Ext: &eIcebergSortField_sourceId})
+var sIcebergSortField_transform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transform", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIcebergSortField_transform})
+var sIcebergSortField_direction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "direction", ID: &iIcebergSortDirection, Members: &mIcebergSortDirection, Type: smithy.ShapeTypeEnum, Ext: &eIcebergSortField_direction})
+var sIcebergSortField_nullOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nullOrder", ID: &iIcebergNullOrder, Members: &mIcebergNullOrder, Traits: &t63, Type: smithy.ShapeTypeEnum, Ext: &eIcebergSortField_nullOrder})
+var s_IcebergSortFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IcebergSortFieldList, Members: &m_IcebergSortFieldList, Type: smithy.ShapeTypeList, Ext: &e_IcebergSortFieldList})
+var s_IcebergSortFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIcebergSortField, Members: &mIcebergSortField, Type: smithy.ShapeTypeStructure, Ext: &e_IcebergSortFieldList_member})
+var sIcebergSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergSortOrder, Members: &mIcebergSortOrder, Type: smithy.ShapeTypeStructure, Ext: &eIcebergSortOrder})
+var sIcebergSortOrder_orderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orderId", ID: &pInteger, Traits: &t64, Type: smithy.ShapeTypeInteger, Ext: &eIcebergSortOrder_orderId})
+var sIcebergSortOrder_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_IcebergSortFieldList, Members: &m_IcebergSortFieldList, Type: smithy.ShapeTypeList, Ext: &eIcebergSortOrder_fields})
+var sIcebergUnreferencedFileRemovalSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergUnreferencedFileRemovalSettings, Members: &mIcebergUnreferencedFileRemovalSettings, Type: smithy.ShapeTypeStructure, Ext: &eIcebergUnreferencedFileRemovalSettings})
+var sIcebergUnreferencedFileRemovalSettings_unreferencedDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unreferencedDays", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eIcebergUnreferencedFileRemovalSettings_unreferencedDays})
+var sIcebergUnreferencedFileRemovalSettings_nonCurrentDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonCurrentDays", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eIcebergUnreferencedFileRemovalSettings_nonCurrentDays})
+var sIncompatibleValuesPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncompatibleValuesPolicy, Members: &mIncompatibleValuesPolicy, Type: smithy.ShapeTypeEnum, Ext: &eIncompatibleValuesPolicy})
+var sIncompatibleValuesPolicy_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIncompatibleValuesPolicy_FAIL})
+var sIncompatibleValuesPolicy_SET_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SET_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIncompatibleValuesPolicy_SET_NULL})
+var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &e_IntegerList})
+var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerList_member})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t65, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sInternalServerErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_message})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobStatus})
+var sJobStatus_NOT_YET_RUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_YET_RUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_NOT_YET_RUN})
+var sJobStatus_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_SUCCESSFUL})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_FAILED})
+var sJobStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_DISABLED})
+var sLastSuccessfulReplicatedUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLastSuccessfulReplicatedUpdate, Members: &mLastSuccessfulReplicatedUpdate, Type: smithy.ShapeTypeStructure, Ext: &eLastSuccessfulReplicatedUpdate})
+var sLastSuccessfulReplicatedUpdate_metadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataLocation", ID: &i_MetadataLocation, Type: smithy.ShapeTypeString, Ext: &eLastSuccessfulReplicatedUpdate_metadataLocation})
+var sLastSuccessfulReplicatedUpdate_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eLastSuccessfulReplicatedUpdate_timestamp})
+var s_ListNamespacesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListNamespacesLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListNamespacesLimit})
+var s_ListTableBucketsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTableBucketsLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListTableBucketsLimit})
+var s_ListTableMigrationsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTableMigrationsLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListTableMigrationsLimit})
+var s_ListTablesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTablesLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListTablesLimit})
+var sMaintenanceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaintenanceSettings, Members: &mMaintenanceSettings, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceSettings})
+var sMaintenanceSettings_icebergCompaction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "icebergCompaction", ID: &iMigrationCompactionSettings, Members: &mMigrationCompactionSettings, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceSettings_icebergCompaction})
+var sMaintenanceSettings_icebergSnapshotManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "icebergSnapshotManagement", ID: &iMigrationSnapshotManagementSettings, Members: &mMigrationSnapshotManagementSettings, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceSettings_icebergSnapshotManagement})
+var sMaintenanceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaintenanceStatus, Members: &mMaintenanceStatus, Type: smithy.ShapeTypeEnum, Ext: &eMaintenanceStatus})
+var sMaintenanceStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceStatus_ENABLED})
+var sMaintenanceStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceStatus_DISABLED})
+var sManagedTableInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedTableInformation, Members: &mManagedTableInformation, Type: smithy.ShapeTypeStructure, Ext: &eManagedTableInformation})
+var sManagedTableInformation_replicationInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationInformation", ID: &iReplicationInformation, Members: &mReplicationInformation, Type: smithy.ShapeTypeStructure, Ext: &eManagedTableInformation_replicationInformation})
+var s_MetadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataLocation, Type: smithy.ShapeTypeString, Ext: &e_MetadataLocation})
+var sMethodNotAllowedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMethodNotAllowedException, Members: &mMethodNotAllowedException, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eMethodNotAllowedException})
+var sMethodNotAllowedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMethodNotAllowedException_message})
+var sMigrationCompactionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationCompactionSettings, Members: &mMigrationCompactionSettings, Type: smithy.ShapeTypeStructure, Ext: &eMigrationCompactionSettings})
+var sMigrationCompactionSettings_targetFileSizeMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetFileSizeMB", ID: &i_MigrationTargetFileSizeMB, Type: smithy.ShapeTypeInteger, Ext: &eMigrationCompactionSettings_targetFileSizeMB})
+var sMigrationCompactionSettings_strategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategy", ID: &iIcebergCompactionStrategy, Members: &mIcebergCompactionStrategy, Type: smithy.ShapeTypeEnum, Ext: &eMigrationCompactionSettings_strategy})
+var sMigrationFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationFailureCode, Members: &mMigrationFailureCode, Type: smithy.ShapeTypeEnum, Ext: &eMigrationFailureCode})
+var sMigrationFailureCode_ROLE_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLE_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_ROLE_PERMISSIONS})
+var sMigrationFailureCode_SOURCE_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_SOURCE_PERMISSIONS})
+var sMigrationFailureCode_DESTINATION_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESTINATION_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_DESTINATION_PERMISSIONS})
+var sMigrationFailureCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_RESOURCE_NOT_FOUND})
+var sMigrationFailureCode_SOURCE_NOT_SUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_NOT_SUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_SOURCE_NOT_SUPPORTED})
+var sMigrationFailureCode_OBJECT_MIGRATION_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBJECT_MIGRATION_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_OBJECT_MIGRATION_REPORT})
+var sMigrationFailureCode_OBJECT_COMPATIBILITY_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBJECT_COMPATIBILITY_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_OBJECT_COMPATIBILITY_REPORT})
+var sMigrationFailureCode_TABLE_COMPATIBILITY_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_COMPATIBILITY_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_TABLE_COMPATIBILITY_REPORT})
+var sMigrationFailureCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_INTERNAL_ERROR})
+var sMigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPORT_BUCKET_NOT_SUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED})
+var s_MigrationFailureDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationFailureDetail, Type: smithy.ShapeTypeString, Ext: &e_MigrationFailureDetail})
+var sMigrationFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationFailureReason, Members: &mMigrationFailureReason, Type: smithy.ShapeTypeStructure, Ext: &eMigrationFailureReason})
+var sMigrationFailureReason_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &iMigrationFailureCode, Members: &mMigrationFailureCode, Type: smithy.ShapeTypeEnum, Ext: &eMigrationFailureReason_code})
+var sMigrationFailureReason_detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detail", ID: &i_MigrationFailureDetail, Type: smithy.ShapeTypeString, Ext: &eMigrationFailureReason_detail})
+var s_MigrationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &e_MigrationId})
+var s_MigrationMinSnapshotsToKeep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationMinSnapshotsToKeep, Type: smithy.ShapeTypeInteger, Ext: &e_MigrationMinSnapshotsToKeep})
+var sMigrationOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationOutputConfiguration, Members: &mMigrationOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMigrationOutputConfiguration})
+var sMigrationOutputConfiguration_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3BucketARN, Type: smithy.ShapeTypeString, Ext: &eMigrationOutputConfiguration_bucket})
+var sMigrationOutputConfiguration_prefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixes", ID: &iMigrationReportPrefixes, Members: &mMigrationReportPrefixes, Type: smithy.ShapeTypeStructure, Ext: &eMigrationOutputConfiguration_prefixes})
+var sMigrationOutputOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationOutputOverview, Members: &mMigrationOutputOverview, Type: smithy.ShapeTypeStructure, Ext: &eMigrationOutputOverview})
+var sMigrationOutputOverview_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3BucketARN, Type: smithy.ShapeTypeString, Ext: &eMigrationOutputOverview_bucket})
+var sMigrationOutputOverview_tableCompatibilityReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableCompatibilityReport", ID: &iReportOverview, Members: &mReportOverview, Type: smithy.ShapeTypeStructure, Ext: &eMigrationOutputOverview_tableCompatibilityReport})
+var sMigrationOutputOverview_objectCompatibilityReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectCompatibilityReport", ID: &iReportOverview, Members: &mReportOverview, Type: smithy.ShapeTypeStructure, Ext: &eMigrationOutputOverview_objectCompatibilityReport})
+var sMigrationOutputOverview_objectMigrationReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectMigrationReport", ID: &iReportOverview, Members: &mReportOverview, Type: smithy.ShapeTypeStructure, Ext: &eMigrationOutputOverview_objectMigrationReport})
+var sMigrationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationPolicies, Members: &mMigrationPolicies, Type: smithy.ShapeTypeStructure, Ext: &eMigrationPolicies})
+var sMigrationPolicies_unmatchedSourceFieldsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unmatchedSourceFieldsPolicy", ID: &iUnmatchedSourceFieldsPolicy, Members: &mUnmatchedSourceFieldsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eMigrationPolicies_unmatchedSourceFieldsPolicy})
+var sMigrationPolicies_incompatibleValuesPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incompatibleValuesPolicy", ID: &iIncompatibleValuesPolicy, Members: &mIncompatibleValuesPolicy, Type: smithy.ShapeTypeEnum, Ext: &eMigrationPolicies_incompatibleValuesPolicy})
+var s_MigrationReportPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationReportPrefix, Type: smithy.ShapeTypeString, Ext: &e_MigrationReportPrefix})
+var sMigrationReportPrefixes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationReportPrefixes, Members: &mMigrationReportPrefixes, Type: smithy.ShapeTypeStructure, Ext: &eMigrationReportPrefixes})
+var sMigrationReportPrefixes_tableCompatibilityReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableCompatibilityReport", ID: &i_MigrationReportPrefix, Type: smithy.ShapeTypeString, Ext: &eMigrationReportPrefixes_tableCompatibilityReport})
+var sMigrationReportPrefixes_objectCompatibilityReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectCompatibilityReport", ID: &i_MigrationReportPrefix, Type: smithy.ShapeTypeString, Ext: &eMigrationReportPrefixes_objectCompatibilityReport})
+var sMigrationReportPrefixes_objectMigrationReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectMigrationReport", ID: &i_MigrationReportPrefix, Type: smithy.ShapeTypeString, Ext: &eMigrationReportPrefixes_objectMigrationReport})
+var sMigrationRequestedState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationRequestedState, Members: &mMigrationRequestedState, Type: smithy.ShapeTypeEnum, Ext: &eMigrationRequestedState})
+var sMigrationRequestedState_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationRequestedState_QUEUED})
+var sMigrationRequestedState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationRequestedState_CANCELLED})
+var sMigrationSnapshotManagementSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationSnapshotManagementSettings, Members: &mMigrationSnapshotManagementSettings, Type: smithy.ShapeTypeStructure, Ext: &eMigrationSnapshotManagementSettings})
+var sMigrationSnapshotManagementSettings_minSnapshotsToKeep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minSnapshotsToKeep", ID: &i_MigrationMinSnapshotsToKeep, Type: smithy.ShapeTypeInteger, Ext: &eMigrationSnapshotManagementSettings_minSnapshotsToKeep})
+var sMigrationSnapshotManagementSettings_maxSnapshotAgeHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSnapshotAgeHours", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eMigrationSnapshotManagementSettings_maxSnapshotAgeHours})
+var sMigrationSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationSourceType, Members: &mMigrationSourceType, Type: smithy.ShapeTypeEnum, Ext: &eMigrationSourceType})
+var sMigrationSourceType_GLUE_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLUE_TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationSourceType_GLUE_TABLE})
+var sMigrationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationState, Members: &mMigrationState, Type: smithy.ShapeTypeEnum, Ext: &eMigrationState})
+var sMigrationState_NEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_NEW})
+var sMigrationState_PLANNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLANNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_PLANNING})
+var sMigrationState_PENDING_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_PENDING_REVIEW})
+var sMigrationState_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_QUEUED})
+var sMigrationState_MIGRATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIGRATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_MIGRATING})
+var sMigrationState_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_SUCCEEDED})
+var sMigrationState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_FAILED})
+var sMigrationState_CANCELLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_CANCELLING})
+var sMigrationState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationState_CANCELLED})
+var sMigrationStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationStats, Members: &mMigrationStats, Type: smithy.ShapeTypeStructure, Ext: &eMigrationStats})
+var sMigrationStats_objectsMigrated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsMigrated", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMigrationStats_objectsMigrated})
+var sMigrationStats_objectsFailedMigration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsFailedMigration", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMigrationStats_objectsFailedMigration})
+var sMigrationStats_objectsPendingMigration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsPendingMigration", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMigrationStats_objectsPendingMigration})
+var sMigrationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationSummary, Members: &mMigrationSummary, Type: smithy.ShapeTypeStructure, Ext: &eMigrationSummary})
+var sMigrationSummary_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_migrationId})
+var sMigrationSummary_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_tableBucketARN})
+var sMigrationSummary_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_namespace})
+var sMigrationSummary_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_tableARN})
+var sMigrationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_name})
+var sMigrationSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMigrationType, Members: &mMigrationType, Type: smithy.ShapeTypeEnum, Ext: &eMigrationSummary_type})
+var sMigrationSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMigrationState, Members: &mMigrationState, Type: smithy.ShapeTypeEnum, Ext: &eMigrationSummary_state})
+var sMigrationSummary_hasValidPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasValidPlan", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMigrationSummary_hasValidPlan})
+var sMigrationSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eMigrationSummary_createdAt})
+var sMigrationSummary_stateUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateUpdatedAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eMigrationSummary_stateUpdatedAt})
+var s_MigrationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationSummaryList, Members: &m_MigrationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_MigrationSummaryList})
+var s_MigrationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMigrationSummary, Members: &mMigrationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MigrationSummaryList_member})
+var sMigrationTableProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationTableProperties, Members: &mMigrationTableProperties, Type: smithy.ShapeTypeStructure, Ext: &eMigrationTableProperties})
+var sMigrationTableProperties_writeFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeFormat", ID: &iDataFileFormat, Members: &mDataFileFormat, Type: smithy.ShapeTypeEnum, Ext: &eMigrationTableProperties_writeFormat})
+var sMigrationTableProperties_icebergFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "icebergFormatVersion", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMigrationTableProperties_icebergFormatVersion})
+var sMigrationTableProperties_compressionCodec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compressionCodec", ID: &iCompressionCodec, Members: &mCompressionCodec, Type: smithy.ShapeTypeEnum, Ext: &eMigrationTableProperties_compressionCodec})
+var sMigrationTableProperties_dictionaryEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dictionaryEncoding", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMigrationTableProperties_dictionaryEncoding})
+var s_MigrationTargetFileSizeMB = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationTargetFileSizeMB, Type: smithy.ShapeTypeInteger, Ext: &e_MigrationTargetFileSizeMB})
+var sMigrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationType, Members: &mMigrationType, Type: smithy.ShapeTypeEnum, Ext: &eMigrationType})
+var sMigrationType_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationType_START})
+var sMigrationType_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationType_SYNC})
+var s_NamespaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceId, Type: smithy.ShapeTypeString, Ext: &e_NamespaceId})
+var s_NamespaceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &e_NamespaceList})
+var s_NamespaceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &e_NamespaceList_member})
+var s_NamespaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &e_NamespaceName})
+var sNamespaceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceSummary, Members: &mNamespaceSummary, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceSummary})
+var sNamespaceSummary_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eNamespaceSummary_namespace})
+var sNamespaceSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eNamespaceSummary_createdAt})
+var sNamespaceSummary_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_createdBy})
+var sNamespaceSummary_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_ownerAccountId})
+var sNamespaceSummary_namespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaceId", ID: &i_NamespaceId, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_namespaceId})
+var sNamespaceSummary_tableBucketId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketId", ID: &i_TableBucketId, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_tableBucketId})
+var s_NamespaceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceSummaryList, Members: &m_NamespaceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_NamespaceSummaryList})
+var s_NamespaceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNamespaceSummary, Members: &mNamespaceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_NamespaceSummaryList_member})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sOpenTableFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenTableFormat, Members: &mOpenTableFormat, Type: smithy.ShapeTypeEnum, Ext: &eOpenTableFormat})
+var sOpenTableFormat_ICEBERG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOpenTableFormat_ICEBERG})
+var sPlanningStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlanningStats, Members: &mPlanningStats, Type: smithy.ShapeTypeStructure, Ext: &ePlanningStats})
+var sPlanningStats_objectsScanned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsScanned", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ePlanningStats_objectsScanned})
+var sPlanningStats_objectsPlanned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsPlanned", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ePlanningStats_objectsPlanned})
+var sPlanningStats_partitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partitionCount", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ePlanningStats_partitionCount})
+var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &e_PositiveInteger})
+var sReplicationDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationDestination, Members: &mReplicationDestination, Type: smithy.ShapeTypeStructure, Ext: &eReplicationDestination})
+var sReplicationDestination_destinationTableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationTableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eReplicationDestination_destinationTableBucketARN})
+var s_ReplicationDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationDestinations, Members: &m_ReplicationDestinations, Type: smithy.ShapeTypeList, Ext: &e_ReplicationDestinations})
+var s_ReplicationDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationDestination, Members: &mReplicationDestination, Type: smithy.ShapeTypeStructure, Ext: &e_ReplicationDestinations_member})
+var s_ReplicationDestinationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationDestinationStatuses, Members: &m_ReplicationDestinationStatuses, Type: smithy.ShapeTypeList, Ext: &e_ReplicationDestinationStatuses})
+var s_ReplicationDestinationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationDestinationStatusModel, Members: &mReplicationDestinationStatusModel, Type: smithy.ShapeTypeStructure, Ext: &e_ReplicationDestinationStatuses_member})
+var sReplicationDestinationStatusModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationDestinationStatusModel, Members: &mReplicationDestinationStatusModel, Type: smithy.ShapeTypeStructure, Ext: &eReplicationDestinationStatusModel})
+var sReplicationDestinationStatusModel_replicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationStatus", ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eReplicationDestinationStatusModel_replicationStatus})
+var sReplicationDestinationStatusModel_destinationTableBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationTableBucketArn", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eReplicationDestinationStatusModel_destinationTableBucketArn})
+var sReplicationDestinationStatusModel_destinationTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationTableArn", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eReplicationDestinationStatusModel_destinationTableArn})
+var sReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSuccessfulReplicatedUpdate", ID: &iLastSuccessfulReplicatedUpdate, Members: &mLastSuccessfulReplicatedUpdate, Type: smithy.ShapeTypeStructure, Ext: &eReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate})
+var sReplicationDestinationStatusModel_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReplicationDestinationStatusModel_failureMessage})
+var sReplicationInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationInformation, Members: &mReplicationInformation, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInformation})
+var sReplicationInformation_sourceTableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceTableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eReplicationInformation_sourceTableARN})
+var sReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eReplicationStatus})
+var sReplicationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatus_PENDING})
+var sReplicationStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatus_COMPLETED})
+var sReplicationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatus_FAILED})
+var s_ReportObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportObjectKey, Type: smithy.ShapeTypeString, Ext: &e_ReportObjectKey})
+var sReportOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportOverview, Members: &mReportOverview, Type: smithy.ShapeTypeStructure, Ext: &eReportOverview})
+var sReportOverview_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_MigrationReportPrefix, Type: smithy.ShapeTypeString, Ext: &eReportOverview_prefix})
+var sReportOverview_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ReportObjectKey, Type: smithy.ShapeTypeString, Ext: &eReportOverview_key})
+var sReportOverview_checksumCRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksumCRC64NVME", ID: &i_ChecksumCRC64NVME, Type: smithy.ShapeTypeString, Ext: &eReportOverview_checksumCRC64NVME})
+var sReportOverview_invalidFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidFindings", ID: &i_FindingCategoryCounts, Members: &m_FindingCategoryCounts, Type: smithy.ShapeTypeMap, Ext: &eReportOverview_invalidFindings})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &e_ResourcePolicy})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_S3BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketARN, Type: smithy.ShapeTypeString, Ext: &e_S3BucketARN})
+var sSchemaField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaField, Members: &mSchemaField, Type: smithy.ShapeTypeStructure, Ext: &eSchemaField})
+var sSchemaField_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSchemaField_id})
+var sSchemaField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSchemaField_name})
+var sSchemaField_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSchemaField_type})
+var sSchemaField_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSchemaField_required})
+var s_SchemaFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaFieldList, Members: &m_SchemaFieldList, Type: smithy.ShapeTypeList, Ext: &e_SchemaFieldList})
+var s_SchemaFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaField, Members: &mSchemaField, Type: smithy.ShapeTypeStructure, Ext: &e_SchemaFieldList_member})
+var sSchemaV2Field = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaV2Field, Members: &mSchemaV2Field, Type: smithy.ShapeTypeStructure, Ext: &eSchemaV2Field})
+var sSchemaV2Field_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSchemaV2Field_id})
+var sSchemaV2Field_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSchemaV2Field_name})
+var sSchemaV2Field_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eSchemaV2Field_type})
+var sSchemaV2Field_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSchemaV2Field_required})
+var sSchemaV2Field_doc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doc", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSchemaV2Field_doc})
+var s_SchemaV2FieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaV2FieldList, Members: &m_SchemaV2FieldList, Type: smithy.ShapeTypeList, Ext: &e_SchemaV2FieldList})
+var s_SchemaV2FieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaV2Field, Members: &mSchemaV2Field, Type: smithy.ShapeTypeStructure, Ext: &e_SchemaV2FieldList_member})
+var sSchemaV2FieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaV2FieldType, Members: &mSchemaV2FieldType, Type: smithy.ShapeTypeEnum, Ext: &eSchemaV2FieldType})
+var sSchemaV2FieldType_STRUCT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRUCT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaV2FieldType_STRUCT})
+var sSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eSourceConfiguration})
+var sSourceConfiguration_glueTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "glueTable", ID: &iGlueTableSource, Members: &mGlueTableSource, Type: smithy.ShapeTypeStructure, Ext: &eSourceConfiguration_glueTable})
+var sSSEAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSEAlgorithm, Members: &mSSEAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eSSEAlgorithm})
+var sSSEAlgorithm_AES256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSSEAlgorithm_AES256})
+var sSSEAlgorithm_AWS_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSSEAlgorithm_AWS_KMS})
+var sStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageClass, Members: &mStorageClass, Type: smithy.ShapeTypeEnum, Ext: &eStorageClass})
+var sStorageClass_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageClass_STANDARD})
+var sStorageClass_INTELLIGENT_TIERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTELLIGENT_TIERING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageClass_INTELLIGENT_TIERING})
+var sStorageClassConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageClassConfiguration, Members: &mStorageClassConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStorageClassConfiguration})
+var sStorageClassConfiguration_storageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClass", ID: &iStorageClass, Members: &mStorageClass, Type: smithy.ShapeTypeEnum, Ext: &eStorageClassConfiguration_storageClass})
+var s_TableARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &e_TableARN})
+var s_TableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &e_TableBucketARN})
+var s_TableBucketId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableBucketId, Type: smithy.ShapeTypeString, Ext: &e_TableBucketId})
+var s_TableBucketMaintenanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableBucketMaintenanceConfiguration, Members: &m_TableBucketMaintenanceConfiguration, Type: smithy.ShapeTypeMap, Ext: &e_TableBucketMaintenanceConfiguration})
+var s_TableBucketMaintenanceConfiguration_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iTableBucketMaintenanceType, Members: &mTableBucketMaintenanceType, Type: smithy.ShapeTypeEnum, Ext: &e_TableBucketMaintenanceConfiguration_key})
+var s_TableBucketMaintenanceConfiguration_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTableBucketMaintenanceConfigurationValue, Members: &mTableBucketMaintenanceConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &e_TableBucketMaintenanceConfiguration_value})
+var sTableBucketMaintenanceConfigurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableBucketMaintenanceConfigurationValue, Members: &mTableBucketMaintenanceConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketMaintenanceConfigurationValue})
+var sTableBucketMaintenanceConfigurationValue_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMaintenanceStatus, Members: &mMaintenanceStatus, Type: smithy.ShapeTypeEnum, Ext: &eTableBucketMaintenanceConfigurationValue_status})
+var sTableBucketMaintenanceConfigurationValue_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iTableBucketMaintenanceSettings, Members: &mTableBucketMaintenanceSettings, Type: smithy.ShapeTypeUnion, Ext: &eTableBucketMaintenanceConfigurationValue_settings})
+var sTableBucketMaintenanceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableBucketMaintenanceSettings, Members: &mTableBucketMaintenanceSettings, Type: smithy.ShapeTypeUnion, Ext: &eTableBucketMaintenanceSettings})
+var sTableBucketMaintenanceSettings_icebergUnreferencedFileRemoval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "icebergUnreferencedFileRemoval", ID: &iIcebergUnreferencedFileRemovalSettings, Members: &mIcebergUnreferencedFileRemovalSettings, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketMaintenanceSettings_icebergUnreferencedFileRemoval})
+var sTableBucketMaintenanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableBucketMaintenanceType, Members: &mTableBucketMaintenanceType, Type: smithy.ShapeTypeEnum, Ext: &eTableBucketMaintenanceType})
+var sTableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG_UNREFERENCED_FILE_REMOVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL})
+var s_TableBucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableBucketName, Type: smithy.ShapeTypeString, Ext: &e_TableBucketName})
+var sTableBucketReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableBucketReplicationConfiguration, Members: &mTableBucketReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketReplicationConfiguration})
+var sTableBucketReplicationConfiguration_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &i_IAMRole, Type: smithy.ShapeTypeString, Ext: &eTableBucketReplicationConfiguration_role})
+var sTableBucketReplicationConfiguration_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_TableBucketReplicationRules, Members: &m_TableBucketReplicationRules, Type: smithy.ShapeTypeList, Ext: &eTableBucketReplicationConfiguration_rules})
+var sTableBucketReplicationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableBucketReplicationRule, Members: &mTableBucketReplicationRule, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketReplicationRule})
+var sTableBucketReplicationRule_destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinations", ID: &i_ReplicationDestinations, Members: &m_ReplicationDestinations, Type: smithy.ShapeTypeList, Ext: &eTableBucketReplicationRule_destinations})
+var s_TableBucketReplicationRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableBucketReplicationRules, Members: &m_TableBucketReplicationRules, Type: smithy.ShapeTypeList, Ext: &e_TableBucketReplicationRules})
+var s_TableBucketReplicationRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTableBucketReplicationRule, Members: &mTableBucketReplicationRule, Type: smithy.ShapeTypeStructure, Ext: &e_TableBucketReplicationRules_member})
+var sTableBucketSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableBucketSummary, Members: &mTableBucketSummary, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketSummary})
+var sTableBucketSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eTableBucketSummary_arn})
+var sTableBucketSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableBucketName, Type: smithy.ShapeTypeString, Ext: &eTableBucketSummary_name})
+var sTableBucketSummary_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eTableBucketSummary_ownerAccountId})
+var sTableBucketSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eTableBucketSummary_createdAt})
+var sTableBucketSummary_tableBucketId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketId", ID: &i_TableBucketId, Type: smithy.ShapeTypeString, Ext: &eTableBucketSummary_tableBucketId})
+var sTableBucketSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTableBucketType, Members: &mTableBucketType, Type: smithy.ShapeTypeEnum, Ext: &eTableBucketSummary_type})
+var s_TableBucketSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableBucketSummaryList, Members: &m_TableBucketSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TableBucketSummaryList})
+var s_TableBucketSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTableBucketSummary, Members: &mTableBucketSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TableBucketSummaryList_member})
+var sTableBucketType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableBucketType, Members: &mTableBucketType, Type: smithy.ShapeTypeEnum, Ext: &eTableBucketType})
+var sTableBucketType_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketType_CUSTOMER})
+var sTableBucketType_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableBucketType_AWS})
+var s_TableMaintenanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableMaintenanceConfiguration, Members: &m_TableMaintenanceConfiguration, Type: smithy.ShapeTypeMap, Ext: &e_TableMaintenanceConfiguration})
+var s_TableMaintenanceConfiguration_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iTableMaintenanceType, Members: &mTableMaintenanceType, Type: smithy.ShapeTypeEnum, Ext: &e_TableMaintenanceConfiguration_key})
+var s_TableMaintenanceConfiguration_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTableMaintenanceConfigurationValue, Members: &mTableMaintenanceConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &e_TableMaintenanceConfiguration_value})
+var sTableMaintenanceConfigurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableMaintenanceConfigurationValue, Members: &mTableMaintenanceConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceConfigurationValue})
+var sTableMaintenanceConfigurationValue_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMaintenanceStatus, Members: &mMaintenanceStatus, Type: smithy.ShapeTypeEnum, Ext: &eTableMaintenanceConfigurationValue_status})
+var sTableMaintenanceConfigurationValue_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iTableMaintenanceSettings, Members: &mTableMaintenanceSettings, Type: smithy.ShapeTypeUnion, Ext: &eTableMaintenanceConfigurationValue_settings})
+var s_TableMaintenanceJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableMaintenanceJobStatus, Members: &m_TableMaintenanceJobStatus, Type: smithy.ShapeTypeMap, Ext: &e_TableMaintenanceJobStatus})
+var s_TableMaintenanceJobStatus_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iTableMaintenanceJobType, Members: &mTableMaintenanceJobType, Type: smithy.ShapeTypeEnum, Ext: &e_TableMaintenanceJobStatus_key})
+var s_TableMaintenanceJobStatus_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTableMaintenanceJobStatusValue, Members: &mTableMaintenanceJobStatusValue, Type: smithy.ShapeTypeStructure, Ext: &e_TableMaintenanceJobStatus_value})
+var sTableMaintenanceJobStatusValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableMaintenanceJobStatusValue, Members: &mTableMaintenanceJobStatusValue, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceJobStatusValue})
+var sTableMaintenanceJobStatusValue_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eTableMaintenanceJobStatusValue_status})
+var sTableMaintenanceJobStatusValue_lastRunTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRunTimestamp", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eTableMaintenanceJobStatusValue_lastRunTimestamp})
+var sTableMaintenanceJobStatusValue_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTableMaintenanceJobStatusValue_failureMessage})
+var sTableMaintenanceJobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableMaintenanceJobType, Members: &mTableMaintenanceJobType, Type: smithy.ShapeTypeEnum, Ext: &eTableMaintenanceJobType})
+var sTableMaintenanceJobType_ICEBERG_COMPACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG_COMPACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceJobType_ICEBERG_COMPACTION})
+var sTableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG_SNAPSHOT_MANAGEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT})
+var sTableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG_UNREFERENCED_FILE_REMOVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL})
+var sTableMaintenanceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableMaintenanceSettings, Members: &mTableMaintenanceSettings, Type: smithy.ShapeTypeUnion, Ext: &eTableMaintenanceSettings})
+var sTableMaintenanceSettings_icebergCompaction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "icebergCompaction", ID: &iIcebergCompactionSettings, Members: &mIcebergCompactionSettings, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceSettings_icebergCompaction})
+var sTableMaintenanceSettings_icebergSnapshotManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "icebergSnapshotManagement", ID: &iIcebergSnapshotManagementSettings, Members: &mIcebergSnapshotManagementSettings, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceSettings_icebergSnapshotManagement})
+var sTableMaintenanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableMaintenanceType, Members: &mTableMaintenanceType, Type: smithy.ShapeTypeEnum, Ext: &eTableMaintenanceType})
+var sTableMaintenanceType_ICEBERG_COMPACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG_COMPACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceType_ICEBERG_COMPACTION})
+var sTableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG_SNAPSHOT_MANAGEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT})
+var sTableMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableMetadata, Members: &mTableMetadata, Type: smithy.ShapeTypeUnion, Ext: &eTableMetadata})
+var sTableMetadata_iceberg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iceberg", ID: &iIcebergMetadata, Members: &mIcebergMetadata, Type: smithy.ShapeTypeStructure, Ext: &eTableMetadata_iceberg})
+var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &e_TableName})
+var s_TableProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableProperties, Members: &m_TableProperties, Type: smithy.ShapeTypeMap, Ext: &e_TableProperties})
+var s_TableProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TableProperties_key})
+var s_TableProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TableProperties_value})
+var sTableRecordExpirationConfigurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableRecordExpirationConfigurationValue, Members: &mTableRecordExpirationConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationConfigurationValue})
+var sTableRecordExpirationConfigurationValue_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTableRecordExpirationStatus, Members: &mTableRecordExpirationStatus, Type: smithy.ShapeTypeEnum, Ext: &eTableRecordExpirationConfigurationValue_status})
+var sTableRecordExpirationConfigurationValue_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iTableRecordExpirationSettings, Members: &mTableRecordExpirationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationConfigurationValue_settings})
+var sTableRecordExpirationJobMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableRecordExpirationJobMetrics, Members: &mTableRecordExpirationJobMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationJobMetrics})
+var sTableRecordExpirationJobMetrics_deletedDataFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedDataFiles", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eTableRecordExpirationJobMetrics_deletedDataFiles})
+var sTableRecordExpirationJobMetrics_deletedRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedRecords", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eTableRecordExpirationJobMetrics_deletedRecords})
+var sTableRecordExpirationJobMetrics_removedFilesSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removedFilesSize", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eTableRecordExpirationJobMetrics_removedFilesSize})
+var sTableRecordExpirationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableRecordExpirationJobStatus, Members: &mTableRecordExpirationJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eTableRecordExpirationJobStatus})
+var sTableRecordExpirationJobStatus_NOT_YET_RUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_YET_RUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationJobStatus_NOT_YET_RUN})
+var sTableRecordExpirationJobStatus_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationJobStatus_SUCCESSFUL})
+var sTableRecordExpirationJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationJobStatus_FAILED})
+var sTableRecordExpirationJobStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationJobStatus_DISABLED})
+var sTableRecordExpirationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableRecordExpirationSettings, Members: &mTableRecordExpirationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationSettings})
+var sTableRecordExpirationSettings_days = smithy.NewStaticSchema(smithy.StaticSchema{Member: "days", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eTableRecordExpirationSettings_days})
+var sTableRecordExpirationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableRecordExpirationStatus, Members: &mTableRecordExpirationStatus, Type: smithy.ShapeTypeEnum, Ext: &eTableRecordExpirationStatus})
+var sTableRecordExpirationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationStatus_ENABLED})
+var sTableRecordExpirationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableRecordExpirationStatus_DISABLED})
+var sTableReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableReplicationConfiguration, Members: &mTableReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTableReplicationConfiguration})
+var sTableReplicationConfiguration_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &i_IAMRole, Type: smithy.ShapeTypeString, Ext: &eTableReplicationConfiguration_role})
+var sTableReplicationConfiguration_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_TableReplicationRules, Members: &m_TableReplicationRules, Type: smithy.ShapeTypeList, Ext: &eTableReplicationConfiguration_rules})
+var sTableReplicationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableReplicationRule, Members: &mTableReplicationRule, Type: smithy.ShapeTypeStructure, Ext: &eTableReplicationRule})
+var sTableReplicationRule_destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinations", ID: &i_ReplicationDestinations, Members: &m_ReplicationDestinations, Type: smithy.ShapeTypeList, Ext: &eTableReplicationRule_destinations})
+var s_TableReplicationRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableReplicationRules, Members: &m_TableReplicationRules, Type: smithy.ShapeTypeList, Ext: &e_TableReplicationRules})
+var s_TableReplicationRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTableReplicationRule, Members: &mTableReplicationRule, Type: smithy.ShapeTypeStructure, Ext: &e_TableReplicationRules_member})
+var sTableSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableSummary, Members: &mTableSummary, Type: smithy.ShapeTypeStructure, Ext: &eTableSummary})
+var sTableSummary_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eTableSummary_namespace})
+var sTableSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eTableSummary_name})
+var sTableSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTableType, Members: &mTableType, Type: smithy.ShapeTypeEnum, Ext: &eTableSummary_type})
+var sTableSummary_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eTableSummary_tableARN})
+var sTableSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eTableSummary_createdAt})
+var sTableSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eTableSummary_modifiedAt})
+var sTableSummary_managedByService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedByService", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTableSummary_managedByService})
+var sTableSummary_namespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaceId", ID: &i_NamespaceId, Type: smithy.ShapeTypeString, Ext: &eTableSummary_namespaceId})
+var sTableSummary_tableBucketId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketId", ID: &i_TableBucketId, Type: smithy.ShapeTypeString, Ext: &eTableSummary_tableBucketId})
+var s_TableSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableSummaryList, Members: &m_TableSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TableSummaryList})
+var s_TableSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTableSummary, Members: &mTableSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TableSummaryList_member})
+var sTableType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableType, Members: &mTableType, Type: smithy.ShapeTypeEnum, Ext: &eTableType})
+var sTableType_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableType_CUSTOMER})
+var sTableType_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTableType_AWS})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sUnmatchedSourceFieldsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnmatchedSourceFieldsPolicy, Members: &mUnmatchedSourceFieldsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eUnmatchedSourceFieldsPolicy})
+var sUnmatchedSourceFieldsPolicy_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnmatchedSourceFieldsPolicy_FAIL})
+var sUnmatchedSourceFieldsPolicy_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnmatchedSourceFieldsPolicy_DROP})
+var s_VersionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &e_VersionToken})
+var s_WarehouseLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WarehouseLocation, Type: smithy.ShapeTypeString, Ext: &e_WarehouseLocation})
+var sCompleteTableMigrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteTableMigrationRequest, Members: &mCompleteTableMigrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCompleteTableMigrationRequest})
+var sCompleteTableMigrationRequest_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eCompleteTableMigrationRequest_tableARN})
+var sCreateNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNamespaceRequest, Members: &mCreateNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateNamespaceRequest})
+var sCreateNamespaceRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eCreateNamespaceRequest_tableBucketARN})
+var sCreateNamespaceRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eCreateNamespaceRequest_namespace})
+var sCreateNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNamespaceResponse, Members: &mCreateNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateNamespaceResponse})
+var sCreateNamespaceResponse_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eCreateNamespaceResponse_tableBucketARN})
+var sCreateNamespaceResponse_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eCreateNamespaceResponse_namespace})
+var sCreateTableBucketRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableBucketRequest, Members: &mCreateTableBucketRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableBucketRequest})
+var sCreateTableBucketRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableBucketName, Type: smithy.ShapeTypeString, Ext: &eCreateTableBucketRequest_name})
+var sCreateTableBucketRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableBucketRequest_encryptionConfiguration})
+var sCreateTableBucketRequest_storageClassConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClassConfiguration", ID: &iStorageClassConfiguration, Members: &mStorageClassConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableBucketRequest_storageClassConfiguration})
+var sCreateTableBucketRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateTableBucketRequest_tags})
+var sCreateTableBucketResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableBucketResponse, Members: &mCreateTableBucketResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableBucketResponse})
+var sCreateTableBucketResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eCreateTableBucketResponse_arn})
+var sCreateTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableRequest, Members: &mCreateTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableRequest})
+var sCreateTableRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eCreateTableRequest_tableBucketARN})
+var sCreateTableRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eCreateTableRequest_namespace})
+var sCreateTableRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eCreateTableRequest_name})
+var sCreateTableRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iOpenTableFormat, Members: &mOpenTableFormat, Type: smithy.ShapeTypeEnum, Ext: &eCreateTableRequest_format})
+var sCreateTableRequest_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iTableMetadata, Members: &mTableMetadata, Type: smithy.ShapeTypeUnion, Ext: &eCreateTableRequest_metadata})
+var sCreateTableRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableRequest_encryptionConfiguration})
+var sCreateTableRequest_storageClassConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClassConfiguration", ID: &iStorageClassConfiguration, Members: &mStorageClassConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableRequest_storageClassConfiguration})
+var sCreateTableRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateTableRequest_tags})
+var sCreateTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableResponse, Members: &mCreateTableResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTableResponse})
+var sCreateTableResponse_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eCreateTableResponse_tableARN})
+var sCreateTableResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &eCreateTableResponse_versionToken})
+var sDeleteNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamespaceRequest, Members: &mDeleteNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNamespaceRequest})
+var sDeleteNamespaceRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteNamespaceRequest_tableBucketARN})
+var sDeleteNamespaceRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteNamespaceRequest_namespace})
+var sDeleteTableBucketEncryptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketEncryptionRequest, Members: &mDeleteTableBucketEncryptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableBucketEncryptionRequest})
+var sDeleteTableBucketEncryptionRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTableBucketEncryptionRequest_tableBucketARN})
+var sDeleteTableBucketRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketRequest, Members: &mDeleteTableBucketRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableBucketRequest})
+var sDeleteTableBucketRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTableBucketRequest_tableBucketARN})
+var sDeleteTableBucketMetricsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketMetricsConfigurationRequest, Members: &mDeleteTableBucketMetricsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableBucketMetricsConfigurationRequest})
+var sDeleteTableBucketMetricsConfigurationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTableBucketMetricsConfigurationRequest_tableBucketARN})
+var sDeleteTableBucketPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketPolicyRequest, Members: &mDeleteTableBucketPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableBucketPolicyRequest})
+var sDeleteTableBucketPolicyRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTableBucketPolicyRequest_tableBucketARN})
+var sDeleteTableBucketReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableBucketReplicationRequest, Members: &mDeleteTableBucketReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableBucketReplicationRequest})
+var sDeleteTableBucketReplicationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDeleteTableBucketReplicationRequest_tableBucketARN})
+var sDeleteTableBucketReplicationRequest_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eDeleteTableBucketReplicationRequest_versionToken})
+var sDeleteTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableRequest, Members: &mDeleteTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableRequest})
+var sDeleteTableRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTableRequest_tableBucketARN})
+var sDeleteTableRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTableRequest_namespace})
+var sDeleteTableRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTableRequest_name})
+var sDeleteTableRequest_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eDeleteTableRequest_versionToken})
+var sDeleteTablePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTablePolicyRequest, Members: &mDeleteTablePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTablePolicyRequest})
+var sDeleteTablePolicyRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTablePolicyRequest_tableBucketARN})
+var sDeleteTablePolicyRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTablePolicyRequest_namespace})
+var sDeleteTablePolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eDeleteTablePolicyRequest_name})
+var sDeleteTableReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableReplicationRequest, Members: &mDeleteTableReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTableReplicationRequest})
+var sDeleteTableReplicationRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eDeleteTableReplicationRequest_tableArn})
+var sDeleteTableReplicationRequest_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &pString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eDeleteTableReplicationRequest_versionToken})
+var sGetNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamespaceRequest, Members: &mGetNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetNamespaceRequest})
+var sGetNamespaceRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetNamespaceRequest_tableBucketARN})
+var sGetNamespaceRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetNamespaceRequest_namespace})
+var sGetNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamespaceResponse, Members: &mGetNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetNamespaceResponse})
+var sGetNamespaceResponse_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eGetNamespaceResponse_namespace})
+var sGetNamespaceResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eGetNamespaceResponse_createdAt})
+var sGetNamespaceResponse_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetNamespaceResponse_createdBy})
+var sGetNamespaceResponse_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetNamespaceResponse_ownerAccountId})
+var sGetNamespaceResponse_namespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaceId", ID: &i_NamespaceId, Type: smithy.ShapeTypeString, Ext: &eGetNamespaceResponse_namespaceId})
+var sGetNamespaceResponse_tableBucketId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketId", ID: &i_TableBucketId, Type: smithy.ShapeTypeString, Ext: &eGetNamespaceResponse_tableBucketId})
+var sGetTableBucketEncryptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketEncryptionRequest, Members: &mGetTableBucketEncryptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketEncryptionRequest})
+var sGetTableBucketEncryptionRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketEncryptionRequest_tableBucketARN})
+var sGetTableBucketEncryptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketEncryptionResponse, Members: &mGetTableBucketEncryptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketEncryptionResponse})
+var sGetTableBucketEncryptionResponse_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketEncryptionResponse_encryptionConfiguration})
+var sGetTableBucketRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketRequest, Members: &mGetTableBucketRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketRequest})
+var sGetTableBucketRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketRequest_tableBucketARN})
+var sGetTableBucketMaintenanceConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketMaintenanceConfigurationRequest, Members: &mGetTableBucketMaintenanceConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketMaintenanceConfigurationRequest})
+var sGetTableBucketMaintenanceConfigurationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketMaintenanceConfigurationRequest_tableBucketARN})
+var sGetTableBucketMaintenanceConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketMaintenanceConfigurationResponse, Members: &mGetTableBucketMaintenanceConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketMaintenanceConfigurationResponse})
+var sGetTableBucketMaintenanceConfigurationResponse_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketMaintenanceConfigurationResponse_tableBucketARN})
+var sGetTableBucketMaintenanceConfigurationResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_TableBucketMaintenanceConfiguration, Members: &m_TableBucketMaintenanceConfiguration, Type: smithy.ShapeTypeMap, Ext: &eGetTableBucketMaintenanceConfigurationResponse_configuration})
+var sGetTableBucketMetricsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketMetricsConfigurationRequest, Members: &mGetTableBucketMetricsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketMetricsConfigurationRequest})
+var sGetTableBucketMetricsConfigurationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketMetricsConfigurationRequest_tableBucketARN})
+var sGetTableBucketMetricsConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketMetricsConfigurationResponse, Members: &mGetTableBucketMetricsConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketMetricsConfigurationResponse})
+var sGetTableBucketMetricsConfigurationResponse_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketMetricsConfigurationResponse_tableBucketARN})
+var sGetTableBucketMetricsConfigurationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketMetricsConfigurationResponse_id})
+var sGetTableBucketResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketResponse, Members: &mGetTableBucketResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketResponse})
+var sGetTableBucketResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketResponse_arn})
+var sGetTableBucketResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableBucketName, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketResponse_name})
+var sGetTableBucketResponse_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketResponse_ownerAccountId})
+var sGetTableBucketResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTableBucketResponse_createdAt})
+var sGetTableBucketResponse_tableBucketId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketId", ID: &i_TableBucketId, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketResponse_tableBucketId})
+var sGetTableBucketResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTableBucketType, Members: &mTableBucketType, Type: smithy.ShapeTypeEnum, Ext: &eGetTableBucketResponse_type})
+var sGetTableBucketPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketPolicyRequest, Members: &mGetTableBucketPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketPolicyRequest})
+var sGetTableBucketPolicyRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketPolicyRequest_tableBucketARN})
+var sGetTableBucketPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketPolicyResponse, Members: &mGetTableBucketPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketPolicyResponse})
+var sGetTableBucketPolicyResponse_resourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketPolicyResponse_resourcePolicy})
+var sGetTableBucketReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketReplicationRequest, Members: &mGetTableBucketReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketReplicationRequest})
+var sGetTableBucketReplicationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketReplicationRequest_tableBucketARN})
+var sGetTableBucketReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketReplicationResponse, Members: &mGetTableBucketReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketReplicationResponse})
+var sGetTableBucketReplicationResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketReplicationResponse_versionToken})
+var sGetTableBucketReplicationResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iTableBucketReplicationConfiguration, Members: &mTableBucketReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketReplicationResponse_configuration})
+var sGetTableBucketStorageClassRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketStorageClassRequest, Members: &mGetTableBucketStorageClassRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketStorageClassRequest})
+var sGetTableBucketStorageClassRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableBucketStorageClassRequest_tableBucketARN})
+var sGetTableBucketStorageClassResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableBucketStorageClassResponse, Members: &mGetTableBucketStorageClassResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketStorageClassResponse})
+var sGetTableBucketStorageClassResponse_storageClassConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClassConfiguration", ID: &iStorageClassConfiguration, Members: &mStorageClassConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTableBucketStorageClassResponse_storageClassConfiguration})
+var sGetTableEncryptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableEncryptionRequest, Members: &mGetTableEncryptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableEncryptionRequest})
+var sGetTableEncryptionRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableEncryptionRequest_tableBucketARN})
+var sGetTableEncryptionRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableEncryptionRequest_namespace})
+var sGetTableEncryptionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableEncryptionRequest_name})
+var sGetTableEncryptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableEncryptionResponse, Members: &mGetTableEncryptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableEncryptionResponse})
+var sGetTableEncryptionResponse_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTableEncryptionResponse_encryptionConfiguration})
+var sGetTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRequest, Members: &mGetTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRequest})
+var sGetTableRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetTableRequest_tableBucketARN})
+var sGetTableRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetTableRequest_namespace})
+var sGetTableRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eGetTableRequest_name})
+var sGetTableRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetTableRequest_tableArn})
+var sGetTableMaintenanceConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMaintenanceConfigurationRequest, Members: &mGetTableMaintenanceConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMaintenanceConfigurationRequest})
+var sGetTableMaintenanceConfigurationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceConfigurationRequest_tableBucketARN})
+var sGetTableMaintenanceConfigurationRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceConfigurationRequest_namespace})
+var sGetTableMaintenanceConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceConfigurationRequest_name})
+var sGetTableMaintenanceConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMaintenanceConfigurationResponse, Members: &mGetTableMaintenanceConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMaintenanceConfigurationResponse})
+var sGetTableMaintenanceConfigurationResponse_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceConfigurationResponse_tableARN})
+var sGetTableMaintenanceConfigurationResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_TableMaintenanceConfiguration, Members: &m_TableMaintenanceConfiguration, Type: smithy.ShapeTypeMap, Ext: &eGetTableMaintenanceConfigurationResponse_configuration})
+var sGetTableMaintenanceJobStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMaintenanceJobStatusRequest, Members: &mGetTableMaintenanceJobStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMaintenanceJobStatusRequest})
+var sGetTableMaintenanceJobStatusRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceJobStatusRequest_tableBucketARN})
+var sGetTableMaintenanceJobStatusRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceJobStatusRequest_namespace})
+var sGetTableMaintenanceJobStatusRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceJobStatusRequest_name})
+var sGetTableMaintenanceJobStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMaintenanceJobStatusResponse, Members: &mGetTableMaintenanceJobStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMaintenanceJobStatusResponse})
+var sGetTableMaintenanceJobStatusResponse_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eGetTableMaintenanceJobStatusResponse_tableARN})
+var sGetTableMaintenanceJobStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TableMaintenanceJobStatus, Members: &m_TableMaintenanceJobStatus, Type: smithy.ShapeTypeMap, Ext: &eGetTableMaintenanceJobStatusResponse_status})
+var sGetTableMetadataLocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMetadataLocationRequest, Members: &mGetTableMetadataLocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMetadataLocationRequest})
+var sGetTableMetadataLocationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMetadataLocationRequest_tableBucketARN})
+var sGetTableMetadataLocationRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMetadataLocationRequest_namespace})
+var sGetTableMetadataLocationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableMetadataLocationRequest_name})
+var sGetTableMetadataLocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMetadataLocationResponse, Members: &mGetTableMetadataLocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMetadataLocationResponse})
+var sGetTableMetadataLocationResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &eGetTableMetadataLocationResponse_versionToken})
+var sGetTableMetadataLocationResponse_metadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataLocation", ID: &i_MetadataLocation, Type: smithy.ShapeTypeString, Ext: &eGetTableMetadataLocationResponse_metadataLocation})
+var sGetTableMetadataLocationResponse_warehouseLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warehouseLocation", ID: &i_WarehouseLocation, Type: smithy.ShapeTypeString, Ext: &eGetTableMetadataLocationResponse_warehouseLocation})
+var sGetTableMigrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMigrationRequest, Members: &mGetTableMigrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMigrationRequest})
+var sGetTableMigrationRequest_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationRequest_migrationId})
+var sGetTableMigrationRequest_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationRequest_tableARN})
+var sGetTableMigrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMigrationResponse, Members: &mGetTableMigrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMigrationResponse})
+var sGetTableMigrationResponse_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationResponse_migrationId})
+var sGetTableMigrationResponse_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationResponse_tableBucketARN})
+var sGetTableMigrationResponse_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationResponse_namespace})
+var sGetTableMigrationResponse_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationResponse_tableARN})
+var sGetTableMigrationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationResponse_name})
+var sGetTableMigrationResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMigrationType, Members: &mMigrationType, Type: smithy.ShapeTypeEnum, Ext: &eGetTableMigrationResponse_type})
+var sGetTableMigrationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMigrationState, Members: &mMigrationState, Type: smithy.ShapeTypeEnum, Ext: &eGetTableMigrationResponse_state})
+var sGetTableMigrationResponse_roleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleARN", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetTableMigrationResponse_roleARN})
+var sGetTableMigrationResponse_reviewMigrationPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reviewMigrationPlan", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetTableMigrationResponse_reviewMigrationPlan})
+var sGetTableMigrationResponse_hasValidPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasValidPlan", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetTableMigrationResponse_hasValidPlan})
+var sGetTableMigrationResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTableMigrationResponse_createdAt})
+var sGetTableMigrationResponse_stateUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateUpdatedAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTableMigrationResponse_stateUpdatedAt})
+var sGetTableMigrationResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &iMigrationFailureReason, Members: &mMigrationFailureReason, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMigrationResponse_failureReason})
+var sGetTableMigrationResponse_planningStats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planningStats", ID: &iPlanningStats, Members: &mPlanningStats, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMigrationResponse_planningStats})
+var sGetTableMigrationResponse_migrationStats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStats", ID: &iMigrationStats, Members: &mMigrationStats, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMigrationResponse_migrationStats})
+var sGetTableMigrationResponse_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &iMigrationSourceType, Members: &mMigrationSourceType, Type: smithy.ShapeTypeEnum, Ext: &eGetTableMigrationResponse_sourceType})
+var sGetTableMigrationResponse_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eGetTableMigrationResponse_source})
+var sGetTableMigrationResponse_dataMigration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataMigration", ID: &iDataMigrationOverview, Members: &mDataMigrationOverview, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMigrationResponse_dataMigration})
+var sGetTableMigrationResponse_migrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationOutput", ID: &iMigrationOutputOverview, Members: &mMigrationOutputOverview, Type: smithy.ShapeTypeStructure, Ext: &eGetTableMigrationResponse_migrationOutput})
+var sGetTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableResponse, Members: &mGetTableResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableResponse})
+var sGetTableResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_name})
+var sGetTableResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTableType, Members: &mTableType, Type: smithy.ShapeTypeEnum, Ext: &eGetTableResponse_type})
+var sGetTableResponse_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_tableARN})
+var sGetTableResponse_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eGetTableResponse_namespace})
+var sGetTableResponse_namespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaceId", ID: &i_NamespaceId, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_namespaceId})
+var sGetTableResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_versionToken})
+var sGetTableResponse_metadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataLocation", ID: &i_MetadataLocation, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_metadataLocation})
+var sGetTableResponse_warehouseLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warehouseLocation", ID: &i_WarehouseLocation, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_warehouseLocation})
+var sGetTableResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTableResponse_createdAt})
+var sGetTableResponse_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_createdBy})
+var sGetTableResponse_managedByService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedByService", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_managedByService})
+var sGetTableResponse_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTableResponse_modifiedAt})
+var sGetTableResponse_modifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedBy", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_modifiedBy})
+var sGetTableResponse_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_ownerAccountId})
+var sGetTableResponse_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iOpenTableFormat, Members: &mOpenTableFormat, Type: smithy.ShapeTypeEnum, Ext: &eGetTableResponse_format})
+var sGetTableResponse_tableBucketId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketId", ID: &i_TableBucketId, Type: smithy.ShapeTypeString, Ext: &eGetTableResponse_tableBucketId})
+var sGetTableResponse_managedTableInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedTableInformation", ID: &iManagedTableInformation, Members: &mManagedTableInformation, Type: smithy.ShapeTypeStructure, Ext: &eGetTableResponse_managedTableInformation})
+var sGetTablePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTablePolicyRequest, Members: &mGetTablePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTablePolicyRequest})
+var sGetTablePolicyRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTablePolicyRequest_tableBucketARN})
+var sGetTablePolicyRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTablePolicyRequest_namespace})
+var sGetTablePolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTablePolicyRequest_name})
+var sGetTablePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTablePolicyResponse, Members: &mGetTablePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTablePolicyResponse})
+var sGetTablePolicyResponse_resourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &eGetTablePolicyResponse_resourcePolicy})
+var sGetTableRecordExpirationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRecordExpirationConfigurationRequest, Members: &mGetTableRecordExpirationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRecordExpirationConfigurationRequest})
+var sGetTableRecordExpirationConfigurationRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetTableRecordExpirationConfigurationRequest_tableArn})
+var sGetTableRecordExpirationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRecordExpirationConfigurationResponse, Members: &mGetTableRecordExpirationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRecordExpirationConfigurationResponse})
+var sGetTableRecordExpirationConfigurationResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iTableRecordExpirationConfigurationValue, Members: &mTableRecordExpirationConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRecordExpirationConfigurationResponse_configuration})
+var sGetTableRecordExpirationJobStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRecordExpirationJobStatusRequest, Members: &mGetTableRecordExpirationJobStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRecordExpirationJobStatusRequest})
+var sGetTableRecordExpirationJobStatusRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetTableRecordExpirationJobStatusRequest_tableArn})
+var sGetTableRecordExpirationJobStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRecordExpirationJobStatusResponse, Members: &mGetTableRecordExpirationJobStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRecordExpirationJobStatusResponse})
+var sGetTableRecordExpirationJobStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTableRecordExpirationJobStatus, Members: &mTableRecordExpirationJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetTableRecordExpirationJobStatusResponse_status})
+var sGetTableRecordExpirationJobStatusResponse_lastRunTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRunTimestamp", ID: &pTimestamp, Traits: &t66, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTableRecordExpirationJobStatusResponse_lastRunTimestamp})
+var sGetTableRecordExpirationJobStatusResponse_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTableRecordExpirationJobStatusResponse_failureMessage})
+var sGetTableRecordExpirationJobStatusResponse_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &iTableRecordExpirationJobMetrics, Members: &mTableRecordExpirationJobMetrics, Type: smithy.ShapeTypeStructure, Ext: &eGetTableRecordExpirationJobStatusResponse_metrics})
+var sGetTableReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableReplicationRequest, Members: &mGetTableReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableReplicationRequest})
+var sGetTableReplicationRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetTableReplicationRequest_tableArn})
+var sGetTableReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableReplicationResponse, Members: &mGetTableReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableReplicationResponse})
+var sGetTableReplicationResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTableReplicationResponse_versionToken})
+var sGetTableReplicationResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iTableReplicationConfiguration, Members: &mTableReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTableReplicationResponse_configuration})
+var sGetTableReplicationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableReplicationStatusRequest, Members: &mGetTableReplicationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableReplicationStatusRequest})
+var sGetTableReplicationStatusRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetTableReplicationStatusRequest_tableArn})
+var sGetTableReplicationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableReplicationStatusResponse, Members: &mGetTableReplicationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableReplicationStatusResponse})
+var sGetTableReplicationStatusResponse_sourceTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceTableArn", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eGetTableReplicationStatusResponse_sourceTableArn})
+var sGetTableReplicationStatusResponse_destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinations", ID: &i_ReplicationDestinationStatuses, Members: &m_ReplicationDestinationStatuses, Type: smithy.ShapeTypeList, Ext: &eGetTableReplicationStatusResponse_destinations})
+var sGetTableStorageClassRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableStorageClassRequest, Members: &mGetTableStorageClassRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTableStorageClassRequest})
+var sGetTableStorageClassRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableStorageClassRequest_tableBucketARN})
+var sGetTableStorageClassRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableStorageClassRequest_namespace})
+var sGetTableStorageClassRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetTableStorageClassRequest_name})
+var sGetTableStorageClassResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableStorageClassResponse, Members: &mGetTableStorageClassResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTableStorageClassResponse})
+var sGetTableStorageClassResponse_storageClassConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClassConfiguration", ID: &iStorageClassConfiguration, Members: &mStorageClassConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTableStorageClassResponse_storageClassConfiguration})
+var sListNamespacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamespacesRequest, Members: &mListNamespacesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNamespacesRequest})
+var sListNamespacesRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eListNamespacesRequest_tableBucketARN})
+var sListNamespacesRequest_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Traits: &t78, Type: smithy.ShapeTypeString, Ext: &eListNamespacesRequest_prefix})
+var sListNamespacesRequest_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_NextToken, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListNamespacesRequest_continuationToken})
+var sListNamespacesRequest_maxNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxNamespaces", ID: &i_ListNamespacesLimit, Traits: &t80, Type: smithy.ShapeTypeInteger, Ext: &eListNamespacesRequest_maxNamespaces})
+var sListNamespacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamespacesResponse, Members: &mListNamespacesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNamespacesResponse})
+var sListNamespacesResponse_namespaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaces", ID: &i_NamespaceSummaryList, Members: &m_NamespaceSummaryList, Type: smithy.ShapeTypeList, Ext: &eListNamespacesResponse_namespaces})
+var sListNamespacesResponse_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNamespacesResponse_continuationToken})
+var sListTableBucketsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableBucketsRequest, Members: &mListTableBucketsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTableBucketsRequest})
+var sListTableBucketsRequest_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Traits: &t78, Type: smithy.ShapeTypeString, Ext: &eListTableBucketsRequest_prefix})
+var sListTableBucketsRequest_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_NextToken, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListTableBucketsRequest_continuationToken})
+var sListTableBucketsRequest_maxBuckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBuckets", ID: &i_ListTableBucketsLimit, Traits: &t81, Type: smithy.ShapeTypeInteger, Ext: &eListTableBucketsRequest_maxBuckets})
+var sListTableBucketsRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTableBucketType, Members: &mTableBucketType, Traits: &t82, Type: smithy.ShapeTypeEnum, Ext: &eListTableBucketsRequest_type})
+var sListTableBucketsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableBucketsResponse, Members: &mListTableBucketsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTableBucketsResponse})
+var sListTableBucketsResponse_tableBuckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBuckets", ID: &i_TableBucketSummaryList, Members: &m_TableBucketSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTableBucketsResponse_tableBuckets})
+var sListTableBucketsResponse_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTableBucketsResponse_continuationToken})
+var sListTableMigrationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableMigrationsRequest, Members: &mListTableMigrationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTableMigrationsRequest})
+var sListTableMigrationsRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListTableMigrationsRequest_tableBucketARN})
+var sListTableMigrationsRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eListTableMigrationsRequest_namespace})
+var sListTableMigrationsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eListTableMigrationsRequest_name})
+var sListTableMigrationsRequest_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eListTableMigrationsRequest_tableARN})
+var sListTableMigrationsRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMigrationState, Members: &mMigrationState, Traits: &t83, Type: smithy.ShapeTypeEnum, Ext: &eListTableMigrationsRequest_state})
+var sListTableMigrationsRequest_hasValidPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasValidPlan", ID: &pBoolean, Traits: &t84, Type: smithy.ShapeTypeBoolean, Ext: &eListTableMigrationsRequest_hasValidPlan})
+var sListTableMigrationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListTableMigrationsLimit, Traits: &t85, Type: smithy.ShapeTypeInteger, Ext: &eListTableMigrationsRequest_maxResults})
+var sListTableMigrationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &eListTableMigrationsRequest_nextToken})
+var sListTableMigrationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableMigrationsResponse, Members: &mListTableMigrationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTableMigrationsResponse})
+var sListTableMigrationsResponse_migrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrations", ID: &i_MigrationSummaryList, Members: &m_MigrationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTableMigrationsResponse_migrations})
+var sListTableMigrationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTableMigrationsResponse_nextToken})
+var sListTablesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesRequest, Members: &mListTablesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTablesRequest})
+var sListTablesRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eListTablesRequest_tableBucketARN})
+var sListTablesRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eListTablesRequest_namespace})
+var sListTablesRequest_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Traits: &t78, Type: smithy.ShapeTypeString, Ext: &eListTablesRequest_prefix})
+var sListTablesRequest_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_NextToken, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListTablesRequest_continuationToken})
+var sListTablesRequest_maxTables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTables", ID: &i_ListTablesLimit, Traits: &t87, Type: smithy.ShapeTypeInteger, Ext: &eListTablesRequest_maxTables})
+var sListTablesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesResponse, Members: &mListTablesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTablesResponse})
+var sListTablesResponse_tables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tables", ID: &i_TableSummaryList, Members: &m_TableSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTablesResponse_tables})
+var sListTablesResponse_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTablesResponse_continuationToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sPutTableBucketEncryptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketEncryptionRequest, Members: &mPutTableBucketEncryptionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketEncryptionRequest})
+var sPutTableBucketEncryptionRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketEncryptionRequest_tableBucketARN})
+var sPutTableBucketEncryptionRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketEncryptionRequest_encryptionConfiguration})
+var sPutTableBucketMaintenanceConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketMaintenanceConfigurationRequest, Members: &mPutTableBucketMaintenanceConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketMaintenanceConfigurationRequest})
+var sPutTableBucketMaintenanceConfigurationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketMaintenanceConfigurationRequest_tableBucketARN})
+var sPutTableBucketMaintenanceConfigurationRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTableBucketMaintenanceType, Members: &mTableBucketMaintenanceType, Traits: &t71, Type: smithy.ShapeTypeEnum, Ext: &ePutTableBucketMaintenanceConfigurationRequest_type})
+var sPutTableBucketMaintenanceConfigurationRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTableBucketMaintenanceConfigurationValue, Members: &mTableBucketMaintenanceConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketMaintenanceConfigurationRequest_value})
+var sPutTableBucketMetricsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketMetricsConfigurationRequest, Members: &mPutTableBucketMetricsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketMetricsConfigurationRequest})
+var sPutTableBucketMetricsConfigurationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketMetricsConfigurationRequest_tableBucketARN})
+var sPutTableBucketPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketPolicyRequest, Members: &mPutTableBucketPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketPolicyRequest})
+var sPutTableBucketPolicyRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketPolicyRequest_tableBucketARN})
+var sPutTableBucketPolicyRequest_resourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketPolicyRequest_resourcePolicy})
+var sPutTableBucketReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketReplicationRequest, Members: &mPutTableBucketReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketReplicationRequest})
+var sPutTableBucketReplicationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketReplicationRequest_tableBucketARN})
+var sPutTableBucketReplicationRequest_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketReplicationRequest_versionToken})
+var sPutTableBucketReplicationRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iTableBucketReplicationConfiguration, Members: &mTableBucketReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketReplicationRequest_configuration})
+var sPutTableBucketReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketReplicationResponse, Members: &mPutTableBucketReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketReplicationResponse})
+var sPutTableBucketReplicationResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketReplicationResponse_versionToken})
+var sPutTableBucketReplicationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketReplicationResponse_status})
+var sPutTableBucketStorageClassRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableBucketStorageClassRequest, Members: &mPutTableBucketStorageClassRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketStorageClassRequest})
+var sPutTableBucketStorageClassRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableBucketStorageClassRequest_tableBucketARN})
+var sPutTableBucketStorageClassRequest_storageClassConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClassConfiguration", ID: &iStorageClassConfiguration, Members: &mStorageClassConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutTableBucketStorageClassRequest_storageClassConfiguration})
+var sPutTableMaintenanceConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableMaintenanceConfigurationRequest, Members: &mPutTableMaintenanceConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableMaintenanceConfigurationRequest})
+var sPutTableMaintenanceConfigurationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableMaintenanceConfigurationRequest_tableBucketARN})
+var sPutTableMaintenanceConfigurationRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableMaintenanceConfigurationRequest_namespace})
+var sPutTableMaintenanceConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTableMaintenanceConfigurationRequest_name})
+var sPutTableMaintenanceConfigurationRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTableMaintenanceType, Members: &mTableMaintenanceType, Traits: &t71, Type: smithy.ShapeTypeEnum, Ext: &ePutTableMaintenanceConfigurationRequest_type})
+var sPutTableMaintenanceConfigurationRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTableMaintenanceConfigurationValue, Members: &mTableMaintenanceConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &ePutTableMaintenanceConfigurationRequest_value})
+var sPutTablePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTablePolicyRequest, Members: &mPutTablePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTablePolicyRequest})
+var sPutTablePolicyRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTablePolicyRequest_tableBucketARN})
+var sPutTablePolicyRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTablePolicyRequest_namespace})
+var sPutTablePolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutTablePolicyRequest_name})
+var sPutTablePolicyRequest_resourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ePutTablePolicyRequest_resourcePolicy})
+var sPutTableRecordExpirationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableRecordExpirationConfigurationRequest, Members: &mPutTableRecordExpirationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableRecordExpirationConfigurationRequest})
+var sPutTableRecordExpirationConfigurationRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &ePutTableRecordExpirationConfigurationRequest_tableArn})
+var sPutTableRecordExpirationConfigurationRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTableRecordExpirationConfigurationValue, Members: &mTableRecordExpirationConfigurationValue, Type: smithy.ShapeTypeStructure, Ext: &ePutTableRecordExpirationConfigurationRequest_value})
+var sPutTableReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableReplicationRequest, Members: &mPutTableReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTableReplicationRequest})
+var sPutTableReplicationRequest_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_TableARN, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &ePutTableReplicationRequest_tableArn})
+var sPutTableReplicationRequest_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &pString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &ePutTableReplicationRequest_versionToken})
+var sPutTableReplicationRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iTableReplicationConfiguration, Members: &mTableReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutTableReplicationRequest_configuration})
+var sPutTableReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTableReplicationResponse, Members: &mPutTableReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutTableReplicationResponse})
+var sPutTableReplicationResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutTableReplicationResponse_versionToken})
+var sPutTableReplicationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutTableReplicationResponse_status})
+var sRenameTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenameTableRequest, Members: &mRenameTableRequest, Type: smithy.ShapeTypeStructure, Ext: &eRenameTableRequest})
+var sRenameTableRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eRenameTableRequest_tableBucketARN})
+var sRenameTableRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eRenameTableRequest_namespace})
+var sRenameTableRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eRenameTableRequest_name})
+var sRenameTableRequest_newNamespaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newNamespaceName", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eRenameTableRequest_newNamespaceName})
+var sRenameTableRequest_newName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eRenameTableRequest_newName})
+var sRenameTableRequest_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &eRenameTableRequest_versionToken})
+var sStartTableMigrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTableMigrationRequest, Members: &mStartTableMigrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartTableMigrationRequest})
+var sStartTableMigrationRequest_roleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleARN", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eStartTableMigrationRequest_roleARN})
+var sStartTableMigrationRequest_destinationTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationTable", ID: &iDestinationTable, Members: &mDestinationTable, Type: smithy.ShapeTypeStructure, Ext: &eStartTableMigrationRequest_destinationTable})
+var sStartTableMigrationRequest_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &iMigrationSourceType, Members: &mMigrationSourceType, Type: smithy.ShapeTypeEnum, Ext: &eStartTableMigrationRequest_sourceType})
+var sStartTableMigrationRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eStartTableMigrationRequest_source})
+var sStartTableMigrationRequest_dataMigration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataMigration", ID: &iDataMigrationSettings, Members: &mDataMigrationSettings, Type: smithy.ShapeTypeStructure, Ext: &eStartTableMigrationRequest_dataMigration})
+var sStartTableMigrationRequest_reviewMigrationPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reviewMigrationPlan", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartTableMigrationRequest_reviewMigrationPlan})
+var sStartTableMigrationRequest_migrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationOutput", ID: &iMigrationOutputConfiguration, Members: &mMigrationOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStartTableMigrationRequest_migrationOutput})
+var sStartTableMigrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTableMigrationResponse, Members: &mStartTableMigrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartTableMigrationResponse})
+var sStartTableMigrationResponse_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eStartTableMigrationResponse_migrationId})
+var sStartTableMigrationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMigrationState, Members: &mMigrationState, Type: smithy.ShapeTypeEnum, Ext: &eStartTableMigrationResponse_state})
+var sSyncTableMigrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncTableMigrationRequest, Members: &mSyncTableMigrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eSyncTableMigrationRequest})
+var sSyncTableMigrationRequest_roleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleARN", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eSyncTableMigrationRequest_roleARN})
+var sSyncTableMigrationRequest_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eSyncTableMigrationRequest_tableARN})
+var sSyncTableMigrationRequest_reviewMigrationPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reviewMigrationPlan", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSyncTableMigrationRequest_reviewMigrationPlan})
+var sSyncTableMigrationRequest_migrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationOutput", ID: &iMigrationOutputConfiguration, Members: &mMigrationOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSyncTableMigrationRequest_migrationOutput})
+var sSyncTableMigrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncTableMigrationResponse, Members: &mSyncTableMigrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eSyncTableMigrationResponse})
+var sSyncTableMigrationResponse_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eSyncTableMigrationResponse_migrationId})
+var sSyncTableMigrationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMigrationState, Members: &mMigrationState, Type: smithy.ShapeTypeEnum, Ext: &eSyncTableMigrationResponse_state})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t88, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateTableMetadataLocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableMetadataLocationRequest, Members: &mUpdateTableMetadataLocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableMetadataLocationRequest})
+var sUpdateTableMetadataLocationRequest_tableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableBucketARN", ID: &i_TableBucketARN, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationRequest_tableBucketARN})
+var sUpdateTableMetadataLocationRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationRequest_namespace})
+var sUpdateTableMetadataLocationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationRequest_name})
+var sUpdateTableMetadataLocationRequest_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationRequest_versionToken})
+var sUpdateTableMetadataLocationRequest_metadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataLocation", ID: &i_MetadataLocation, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationRequest_metadataLocation})
+var sUpdateTableMetadataLocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableMetadataLocationResponse, Members: &mUpdateTableMetadataLocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableMetadataLocationResponse})
+var sUpdateTableMetadataLocationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationResponse_name})
+var sUpdateTableMetadataLocationResponse_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationResponse_tableARN})
+var sUpdateTableMetadataLocationResponse_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eUpdateTableMetadataLocationResponse_namespace})
+var sUpdateTableMetadataLocationResponse_versionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionToken", ID: &i_VersionToken, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationResponse_versionToken})
+var sUpdateTableMetadataLocationResponse_metadataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataLocation", ID: &i_MetadataLocation, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMetadataLocationResponse_metadataLocation})
+var sUpdateTableMigrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableMigrationRequest, Members: &mUpdateTableMigrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableMigrationRequest})
+var sUpdateTableMigrationRequest_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMigrationRequest_tableARN})
+var sUpdateTableMigrationRequest_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMigrationRequest_migrationId})
+var sUpdateTableMigrationRequest_requestedState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedState", ID: &iMigrationRequestedState, Members: &mMigrationRequestedState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateTableMigrationRequest_requestedState})
+var sUpdateTableMigrationRequest_updateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMigrationRequest_updateDescription})
+var sUpdateTableMigrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableMigrationResponse, Members: &mUpdateTableMigrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTableMigrationResponse})
+var sUpdateTableMigrationResponse_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMigrationResponse_migrationId})
+var sUpdateTableMigrationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMigrationState, Members: &mMigrationState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateTableMigrationResponse_state})
+var sUpdateTableMigrationResponse_tableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableARN", ID: &i_TableARN, Type: smithy.ShapeTypeString, Ext: &eUpdateTableMigrationResponse_tableARN})
+
+var CompleteTableMigration = &sCompleteTableMigration
+
+var CreateNamespace = &sCreateNamespace
+
+var CreateTable = &sCreateTable
+
+var CreateTableBucket = &sCreateTableBucket
+
+var DeleteNamespace = &sDeleteNamespace
+
+var DeleteTable = &sDeleteTable
+
+var DeleteTableBucket = &sDeleteTableBucket
+
+var DeleteTableBucketEncryption = &sDeleteTableBucketEncryption
+
+var DeleteTableBucketMetricsConfiguration = &sDeleteTableBucketMetricsConfiguration
+
+var DeleteTableBucketPolicy = &sDeleteTableBucketPolicy
+
+var DeleteTableBucketReplication = &sDeleteTableBucketReplication
+
+var DeleteTablePolicy = &sDeleteTablePolicy
+
+var DeleteTableReplication = &sDeleteTableReplication
+
+var GetNamespace = &sGetNamespace
+
+var GetTable = &sGetTable
+
+var GetTableBucket = &sGetTableBucket
+
+var GetTableBucketEncryption = &sGetTableBucketEncryption
+
+var GetTableBucketMaintenanceConfiguration = &sGetTableBucketMaintenanceConfiguration
+
+var GetTableBucketMetricsConfiguration = &sGetTableBucketMetricsConfiguration
+
+var GetTableBucketPolicy = &sGetTableBucketPolicy
+
+var GetTableBucketReplication = &sGetTableBucketReplication
+
+var GetTableBucketStorageClass = &sGetTableBucketStorageClass
+
+var GetTableEncryption = &sGetTableEncryption
+
+var GetTableMaintenanceConfiguration = &sGetTableMaintenanceConfiguration
+
+var GetTableMaintenanceJobStatus = &sGetTableMaintenanceJobStatus
+
+var GetTableMetadataLocation = &sGetTableMetadataLocation
+
+var GetTableMigration = &sGetTableMigration
+
+var GetTablePolicy = &sGetTablePolicy
+
+var GetTableRecordExpirationConfiguration = &sGetTableRecordExpirationConfiguration
+
+var GetTableRecordExpirationJobStatus = &sGetTableRecordExpirationJobStatus
+
+var GetTableReplication = &sGetTableReplication
+
+var GetTableReplicationStatus = &sGetTableReplicationStatus
+
+var GetTableStorageClass = &sGetTableStorageClass
+
+var ListNamespaces = &sListNamespaces
+
+var ListTableBuckets = &sListTableBuckets
+
+var ListTableMigrations = &sListTableMigrations
+
+var ListTables = &sListTables
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutTableBucketEncryption = &sPutTableBucketEncryption
+
+var PutTableBucketMaintenanceConfiguration = &sPutTableBucketMaintenanceConfiguration
+
+var PutTableBucketMetricsConfiguration = &sPutTableBucketMetricsConfiguration
+
+var PutTableBucketPolicy = &sPutTableBucketPolicy
+
+var PutTableBucketReplication = &sPutTableBucketReplication
+
+var PutTableBucketStorageClass = &sPutTableBucketStorageClass
+
+var PutTableMaintenanceConfiguration = &sPutTableMaintenanceConfiguration
+
+var PutTablePolicy = &sPutTablePolicy
+
+var PutTableRecordExpirationConfiguration = &sPutTableRecordExpirationConfiguration
+
+var PutTableReplication = &sPutTableReplication
+
+var RenameTable = &sRenameTable
+
+var StartTableMigration = &sStartTableMigration
+
+var SyncTableMigration = &sSyncTableMigration
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateTableMetadataLocation = &sUpdateTableMetadataLocation
+
+var UpdateTableMigration = &sUpdateTableMigration
+
+var _S3TableBuckets = &s_S3TableBuckets
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var _ChecksumCRC64NVME = &s_ChecksumCRC64NVME
+
+var CompressionCodec = &sCompressionCodec
+var CompressionCodec_ZSTD = &sCompressionCodec_ZSTD
+var CompressionCodec_SNAPPY = &sCompressionCodec_SNAPPY
+var CompressionCodec_GZIP = &sCompressionCodec_GZIP
+var CompressionCodec_UNCOMPRESSED = &sCompressionCodec_UNCOMPRESSED
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var DataFileFormat = &sDataFileFormat
+var DataFileFormat_PARQUET = &sDataFileFormat_PARQUET
+
+var DataMigrationOverview = &sDataMigrationOverview
+var DataMigrationOverview_maintenanceSettings = &sDataMigrationOverview_maintenanceSettings
+var DataMigrationOverview_migrationPolicies = &sDataMigrationOverview_migrationPolicies
+
+var DataMigrationSettings = &sDataMigrationSettings
+var DataMigrationSettings_maintenanceSettings = &sDataMigrationSettings_maintenanceSettings
+var DataMigrationSettings_migrationPolicies = &sDataMigrationSettings_migrationPolicies
+
+var DestinationTable = &sDestinationTable
+var DestinationTable_tableBucketARN = &sDestinationTable_tableBucketARN
+var DestinationTable_namespace = &sDestinationTable_namespace
+var DestinationTable_name = &sDestinationTable_name
+var DestinationTable_encryptionConfiguration = &sDestinationTable_encryptionConfiguration
+var DestinationTable_storageClassConfiguration = &sDestinationTable_storageClassConfiguration
+var DestinationTable_tags = &sDestinationTable_tags
+var DestinationTable_properties = &sDestinationTable_properties
+var DestinationTable_schema = &sDestinationTable_schema
+var DestinationTable_icebergSortOrder = &sDestinationTable_icebergSortOrder
+
+var EncryptionConfiguration = &sEncryptionConfiguration
+var EncryptionConfiguration_sseAlgorithm = &sEncryptionConfiguration_sseAlgorithm
+var EncryptionConfiguration_kmsKeyArn = &sEncryptionConfiguration_kmsKeyArn
+
+var _ErrorMessage = &s_ErrorMessage
+
+var FindingCategory = &sFindingCategory
+var FindingCategory_ACCESS = &sFindingCategory_ACCESS
+var FindingCategory_METADATA = &sFindingCategory_METADATA
+var FindingCategory_DATA = &sFindingCategory_DATA
+var FindingCategory_INTERNAL = &sFindingCategory_INTERNAL
+
+var _FindingCategoryCounts = &s_FindingCategoryCounts
+var _FindingCategoryCounts_key = &s_FindingCategoryCounts_key
+var _FindingCategoryCounts_value = &s_FindingCategoryCounts_value
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_message = &sForbiddenException_message
+
+var GlueTableSource = &sGlueTableSource
+var GlueTableSource_catalogId = &sGlueTableSource_catalogId
+var GlueTableSource_databaseName = &sGlueTableSource_databaseName
+var GlueTableSource_tableName = &sGlueTableSource_tableName
+
+var _IAMRole = &s_IAMRole
+
+var IcebergCompactionSettings = &sIcebergCompactionSettings
+var IcebergCompactionSettings_targetFileSizeMB = &sIcebergCompactionSettings_targetFileSizeMB
+var IcebergCompactionSettings_strategy = &sIcebergCompactionSettings_strategy
+
+var IcebergCompactionStrategy = &sIcebergCompactionStrategy
+var IcebergCompactionStrategy_AUTO = &sIcebergCompactionStrategy_AUTO
+var IcebergCompactionStrategy_BINPACK = &sIcebergCompactionStrategy_BINPACK
+var IcebergCompactionStrategy_SORT = &sIcebergCompactionStrategy_SORT
+var IcebergCompactionStrategy_ZORDER = &sIcebergCompactionStrategy_ZORDER
+
+var IcebergMetadata = &sIcebergMetadata
+var IcebergMetadata_schema = &sIcebergMetadata_schema
+var IcebergMetadata_schemaV2 = &sIcebergMetadata_schemaV2
+var IcebergMetadata_partitionSpec = &sIcebergMetadata_partitionSpec
+var IcebergMetadata_writeOrder = &sIcebergMetadata_writeOrder
+var IcebergMetadata_properties = &sIcebergMetadata_properties
+
+var IcebergNullOrder = &sIcebergNullOrder
+var IcebergNullOrder_NULLS_FIRST = &sIcebergNullOrder_NULLS_FIRST
+var IcebergNullOrder_NULLS_LAST = &sIcebergNullOrder_NULLS_LAST
+
+var IcebergPartitionField = &sIcebergPartitionField
+var IcebergPartitionField_sourceId = &sIcebergPartitionField_sourceId
+var IcebergPartitionField_transform = &sIcebergPartitionField_transform
+var IcebergPartitionField_name = &sIcebergPartitionField_name
+var IcebergPartitionField_fieldId = &sIcebergPartitionField_fieldId
+
+var _IcebergPartitionFieldList = &s_IcebergPartitionFieldList
+var _IcebergPartitionFieldList_member = &s_IcebergPartitionFieldList_member
+
+var IcebergPartitionSpec = &sIcebergPartitionSpec
+var IcebergPartitionSpec_fields = &sIcebergPartitionSpec_fields
+var IcebergPartitionSpec_specId = &sIcebergPartitionSpec_specId
+
+var IcebergSchema = &sIcebergSchema
+var IcebergSchema_fields = &sIcebergSchema_fields
+
+var IcebergSchemaV2 = &sIcebergSchemaV2
+var IcebergSchemaV2_type = &sIcebergSchemaV2_type
+var IcebergSchemaV2_fields = &sIcebergSchemaV2_fields
+var IcebergSchemaV2_schemaId = &sIcebergSchemaV2_schemaId
+var IcebergSchemaV2_identifierFieldIds = &sIcebergSchemaV2_identifierFieldIds
+
+var IcebergSnapshotManagementSettings = &sIcebergSnapshotManagementSettings
+var IcebergSnapshotManagementSettings_minSnapshotsToKeep = &sIcebergSnapshotManagementSettings_minSnapshotsToKeep
+var IcebergSnapshotManagementSettings_maxSnapshotAgeHours = &sIcebergSnapshotManagementSettings_maxSnapshotAgeHours
+
+var IcebergSortDirection = &sIcebergSortDirection
+var IcebergSortDirection_ASC = &sIcebergSortDirection_ASC
+var IcebergSortDirection_DESC = &sIcebergSortDirection_DESC
+
+var IcebergSortField = &sIcebergSortField
+var IcebergSortField_sourceId = &sIcebergSortField_sourceId
+var IcebergSortField_transform = &sIcebergSortField_transform
+var IcebergSortField_direction = &sIcebergSortField_direction
+var IcebergSortField_nullOrder = &sIcebergSortField_nullOrder
+
+var _IcebergSortFieldList = &s_IcebergSortFieldList
+var _IcebergSortFieldList_member = &s_IcebergSortFieldList_member
+
+var IcebergSortOrder = &sIcebergSortOrder
+var IcebergSortOrder_orderId = &sIcebergSortOrder_orderId
+var IcebergSortOrder_fields = &sIcebergSortOrder_fields
+
+var IcebergUnreferencedFileRemovalSettings = &sIcebergUnreferencedFileRemovalSettings
+var IcebergUnreferencedFileRemovalSettings_unreferencedDays = &sIcebergUnreferencedFileRemovalSettings_unreferencedDays
+var IcebergUnreferencedFileRemovalSettings_nonCurrentDays = &sIcebergUnreferencedFileRemovalSettings_nonCurrentDays
+
+var IncompatibleValuesPolicy = &sIncompatibleValuesPolicy
+var IncompatibleValuesPolicy_FAIL = &sIncompatibleValuesPolicy_FAIL
+var IncompatibleValuesPolicy_SET_NULL = &sIncompatibleValuesPolicy_SET_NULL
+
+var _IntegerList = &s_IntegerList
+var _IntegerList_member = &s_IntegerList_member
+
+var InternalServerErrorException = &sInternalServerErrorException
+var InternalServerErrorException_message = &sInternalServerErrorException_message
+
+var JobStatus = &sJobStatus
+var JobStatus_NOT_YET_RUN = &sJobStatus_NOT_YET_RUN
+var JobStatus_SUCCESSFUL = &sJobStatus_SUCCESSFUL
+var JobStatus_FAILED = &sJobStatus_FAILED
+var JobStatus_DISABLED = &sJobStatus_DISABLED
+
+var LastSuccessfulReplicatedUpdate = &sLastSuccessfulReplicatedUpdate
+var LastSuccessfulReplicatedUpdate_metadataLocation = &sLastSuccessfulReplicatedUpdate_metadataLocation
+var LastSuccessfulReplicatedUpdate_timestamp = &sLastSuccessfulReplicatedUpdate_timestamp
+
+var _ListNamespacesLimit = &s_ListNamespacesLimit
+
+var _ListTableBucketsLimit = &s_ListTableBucketsLimit
+
+var _ListTableMigrationsLimit = &s_ListTableMigrationsLimit
+
+var _ListTablesLimit = &s_ListTablesLimit
+
+var MaintenanceSettings = &sMaintenanceSettings
+var MaintenanceSettings_icebergCompaction = &sMaintenanceSettings_icebergCompaction
+var MaintenanceSettings_icebergSnapshotManagement = &sMaintenanceSettings_icebergSnapshotManagement
+
+var MaintenanceStatus = &sMaintenanceStatus
+var MaintenanceStatus_ENABLED = &sMaintenanceStatus_ENABLED
+var MaintenanceStatus_DISABLED = &sMaintenanceStatus_DISABLED
+
+var ManagedTableInformation = &sManagedTableInformation
+var ManagedTableInformation_replicationInformation = &sManagedTableInformation_replicationInformation
+
+var _MetadataLocation = &s_MetadataLocation
+
+var MethodNotAllowedException = &sMethodNotAllowedException
+var MethodNotAllowedException_message = &sMethodNotAllowedException_message
+
+var MigrationCompactionSettings = &sMigrationCompactionSettings
+var MigrationCompactionSettings_targetFileSizeMB = &sMigrationCompactionSettings_targetFileSizeMB
+var MigrationCompactionSettings_strategy = &sMigrationCompactionSettings_strategy
+
+var MigrationFailureCode = &sMigrationFailureCode
+var MigrationFailureCode_ROLE_PERMISSIONS = &sMigrationFailureCode_ROLE_PERMISSIONS
+var MigrationFailureCode_SOURCE_PERMISSIONS = &sMigrationFailureCode_SOURCE_PERMISSIONS
+var MigrationFailureCode_DESTINATION_PERMISSIONS = &sMigrationFailureCode_DESTINATION_PERMISSIONS
+var MigrationFailureCode_RESOURCE_NOT_FOUND = &sMigrationFailureCode_RESOURCE_NOT_FOUND
+var MigrationFailureCode_SOURCE_NOT_SUPPORTED = &sMigrationFailureCode_SOURCE_NOT_SUPPORTED
+var MigrationFailureCode_OBJECT_MIGRATION_REPORT = &sMigrationFailureCode_OBJECT_MIGRATION_REPORT
+var MigrationFailureCode_OBJECT_COMPATIBILITY_REPORT = &sMigrationFailureCode_OBJECT_COMPATIBILITY_REPORT
+var MigrationFailureCode_TABLE_COMPATIBILITY_REPORT = &sMigrationFailureCode_TABLE_COMPATIBILITY_REPORT
+var MigrationFailureCode_INTERNAL_ERROR = &sMigrationFailureCode_INTERNAL_ERROR
+var MigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED = &sMigrationFailureCode_REPORT_BUCKET_NOT_SUPPORTED
+
+var _MigrationFailureDetail = &s_MigrationFailureDetail
+
+var MigrationFailureReason = &sMigrationFailureReason
+var MigrationFailureReason_code = &sMigrationFailureReason_code
+var MigrationFailureReason_detail = &sMigrationFailureReason_detail
+
+var _MigrationId = &s_MigrationId
+
+var _MigrationMinSnapshotsToKeep = &s_MigrationMinSnapshotsToKeep
+
+var MigrationOutputConfiguration = &sMigrationOutputConfiguration
+var MigrationOutputConfiguration_bucket = &sMigrationOutputConfiguration_bucket
+var MigrationOutputConfiguration_prefixes = &sMigrationOutputConfiguration_prefixes
+
+var MigrationOutputOverview = &sMigrationOutputOverview
+var MigrationOutputOverview_bucket = &sMigrationOutputOverview_bucket
+var MigrationOutputOverview_tableCompatibilityReport = &sMigrationOutputOverview_tableCompatibilityReport
+var MigrationOutputOverview_objectCompatibilityReport = &sMigrationOutputOverview_objectCompatibilityReport
+var MigrationOutputOverview_objectMigrationReport = &sMigrationOutputOverview_objectMigrationReport
+
+var MigrationPolicies = &sMigrationPolicies
+var MigrationPolicies_unmatchedSourceFieldsPolicy = &sMigrationPolicies_unmatchedSourceFieldsPolicy
+var MigrationPolicies_incompatibleValuesPolicy = &sMigrationPolicies_incompatibleValuesPolicy
+
+var _MigrationReportPrefix = &s_MigrationReportPrefix
+
+var MigrationReportPrefixes = &sMigrationReportPrefixes
+var MigrationReportPrefixes_tableCompatibilityReport = &sMigrationReportPrefixes_tableCompatibilityReport
+var MigrationReportPrefixes_objectCompatibilityReport = &sMigrationReportPrefixes_objectCompatibilityReport
+var MigrationReportPrefixes_objectMigrationReport = &sMigrationReportPrefixes_objectMigrationReport
+
+var MigrationRequestedState = &sMigrationRequestedState
+var MigrationRequestedState_QUEUED = &sMigrationRequestedState_QUEUED
+var MigrationRequestedState_CANCELLED = &sMigrationRequestedState_CANCELLED
+
+var MigrationSnapshotManagementSettings = &sMigrationSnapshotManagementSettings
+var MigrationSnapshotManagementSettings_minSnapshotsToKeep = &sMigrationSnapshotManagementSettings_minSnapshotsToKeep
+var MigrationSnapshotManagementSettings_maxSnapshotAgeHours = &sMigrationSnapshotManagementSettings_maxSnapshotAgeHours
+
+var MigrationSourceType = &sMigrationSourceType
+var MigrationSourceType_GLUE_TABLE = &sMigrationSourceType_GLUE_TABLE
+
+var MigrationState = &sMigrationState
+var MigrationState_NEW = &sMigrationState_NEW
+var MigrationState_PLANNING = &sMigrationState_PLANNING
+var MigrationState_PENDING_REVIEW = &sMigrationState_PENDING_REVIEW
+var MigrationState_QUEUED = &sMigrationState_QUEUED
+var MigrationState_MIGRATING = &sMigrationState_MIGRATING
+var MigrationState_SUCCEEDED = &sMigrationState_SUCCEEDED
+var MigrationState_FAILED = &sMigrationState_FAILED
+var MigrationState_CANCELLING = &sMigrationState_CANCELLING
+var MigrationState_CANCELLED = &sMigrationState_CANCELLED
+
+var MigrationStats = &sMigrationStats
+var MigrationStats_objectsMigrated = &sMigrationStats_objectsMigrated
+var MigrationStats_objectsFailedMigration = &sMigrationStats_objectsFailedMigration
+var MigrationStats_objectsPendingMigration = &sMigrationStats_objectsPendingMigration
+
+var MigrationSummary = &sMigrationSummary
+var MigrationSummary_migrationId = &sMigrationSummary_migrationId
+var MigrationSummary_tableBucketARN = &sMigrationSummary_tableBucketARN
+var MigrationSummary_namespace = &sMigrationSummary_namespace
+var MigrationSummary_tableARN = &sMigrationSummary_tableARN
+var MigrationSummary_name = &sMigrationSummary_name
+var MigrationSummary_type = &sMigrationSummary_type
+var MigrationSummary_state = &sMigrationSummary_state
+var MigrationSummary_hasValidPlan = &sMigrationSummary_hasValidPlan
+var MigrationSummary_createdAt = &sMigrationSummary_createdAt
+var MigrationSummary_stateUpdatedAt = &sMigrationSummary_stateUpdatedAt
+
+var _MigrationSummaryList = &s_MigrationSummaryList
+var _MigrationSummaryList_member = &s_MigrationSummaryList_member
+
+var MigrationTableProperties = &sMigrationTableProperties
+var MigrationTableProperties_writeFormat = &sMigrationTableProperties_writeFormat
+var MigrationTableProperties_icebergFormatVersion = &sMigrationTableProperties_icebergFormatVersion
+var MigrationTableProperties_compressionCodec = &sMigrationTableProperties_compressionCodec
+var MigrationTableProperties_dictionaryEncoding = &sMigrationTableProperties_dictionaryEncoding
+
+var _MigrationTargetFileSizeMB = &s_MigrationTargetFileSizeMB
+
+var MigrationType = &sMigrationType
+var MigrationType_START = &sMigrationType_START
+var MigrationType_SYNC = &sMigrationType_SYNC
+
+var _NamespaceId = &s_NamespaceId
+
+var _NamespaceList = &s_NamespaceList
+var _NamespaceList_member = &s_NamespaceList_member
+
+var _NamespaceName = &s_NamespaceName
+
+var NamespaceSummary = &sNamespaceSummary
+var NamespaceSummary_namespace = &sNamespaceSummary_namespace
+var NamespaceSummary_createdAt = &sNamespaceSummary_createdAt
+var NamespaceSummary_createdBy = &sNamespaceSummary_createdBy
+var NamespaceSummary_ownerAccountId = &sNamespaceSummary_ownerAccountId
+var NamespaceSummary_namespaceId = &sNamespaceSummary_namespaceId
+var NamespaceSummary_tableBucketId = &sNamespaceSummary_tableBucketId
+
+var _NamespaceSummaryList = &s_NamespaceSummaryList
+var _NamespaceSummaryList_member = &s_NamespaceSummaryList_member
+
+var _NextToken = &s_NextToken
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var OpenTableFormat = &sOpenTableFormat
+var OpenTableFormat_ICEBERG = &sOpenTableFormat_ICEBERG
+
+var PlanningStats = &sPlanningStats
+var PlanningStats_objectsScanned = &sPlanningStats_objectsScanned
+var PlanningStats_objectsPlanned = &sPlanningStats_objectsPlanned
+var PlanningStats_partitionCount = &sPlanningStats_partitionCount
+
+var _PositiveInteger = &s_PositiveInteger
+
+var ReplicationDestination = &sReplicationDestination
+var ReplicationDestination_destinationTableBucketARN = &sReplicationDestination_destinationTableBucketARN
+
+var _ReplicationDestinations = &s_ReplicationDestinations
+var _ReplicationDestinations_member = &s_ReplicationDestinations_member
+
+var _ReplicationDestinationStatuses = &s_ReplicationDestinationStatuses
+var _ReplicationDestinationStatuses_member = &s_ReplicationDestinationStatuses_member
+
+var ReplicationDestinationStatusModel = &sReplicationDestinationStatusModel
+var ReplicationDestinationStatusModel_replicationStatus = &sReplicationDestinationStatusModel_replicationStatus
+var ReplicationDestinationStatusModel_destinationTableBucketArn = &sReplicationDestinationStatusModel_destinationTableBucketArn
+var ReplicationDestinationStatusModel_destinationTableArn = &sReplicationDestinationStatusModel_destinationTableArn
+var ReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate = &sReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate
+var ReplicationDestinationStatusModel_failureMessage = &sReplicationDestinationStatusModel_failureMessage
+
+var ReplicationInformation = &sReplicationInformation
+var ReplicationInformation_sourceTableARN = &sReplicationInformation_sourceTableARN
+
+var ReplicationStatus = &sReplicationStatus
+var ReplicationStatus_PENDING = &sReplicationStatus_PENDING
+var ReplicationStatus_COMPLETED = &sReplicationStatus_COMPLETED
+var ReplicationStatus_FAILED = &sReplicationStatus_FAILED
+
+var _ReportObjectKey = &s_ReportObjectKey
+
+var ReportOverview = &sReportOverview
+var ReportOverview_prefix = &sReportOverview_prefix
+var ReportOverview_key = &sReportOverview_key
+var ReportOverview_checksumCRC64NVME = &sReportOverview_checksumCRC64NVME
+var ReportOverview_invalidFindings = &sReportOverview_invalidFindings
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourcePolicy = &s_ResourcePolicy
+
+var _RoleArn = &s_RoleArn
+
+var _S3BucketARN = &s_S3BucketARN
+
+var SchemaField = &sSchemaField
+var SchemaField_id = &sSchemaField_id
+var SchemaField_name = &sSchemaField_name
+var SchemaField_type = &sSchemaField_type
+var SchemaField_required = &sSchemaField_required
+
+var _SchemaFieldList = &s_SchemaFieldList
+var _SchemaFieldList_member = &s_SchemaFieldList_member
+
+var SchemaV2Field = &sSchemaV2Field
+var SchemaV2Field_id = &sSchemaV2Field_id
+var SchemaV2Field_name = &sSchemaV2Field_name
+var SchemaV2Field_type = &sSchemaV2Field_type
+var SchemaV2Field_required = &sSchemaV2Field_required
+var SchemaV2Field_doc = &sSchemaV2Field_doc
+
+var _SchemaV2FieldList = &s_SchemaV2FieldList
+var _SchemaV2FieldList_member = &s_SchemaV2FieldList_member
+
+var SchemaV2FieldType = &sSchemaV2FieldType
+var SchemaV2FieldType_STRUCT = &sSchemaV2FieldType_STRUCT
+
+var SourceConfiguration = &sSourceConfiguration
+var SourceConfiguration_glueTable = &sSourceConfiguration_glueTable
+
+var SSEAlgorithm = &sSSEAlgorithm
+var SSEAlgorithm_AES256 = &sSSEAlgorithm_AES256
+var SSEAlgorithm_AWS_KMS = &sSSEAlgorithm_AWS_KMS
+
+var StorageClass = &sStorageClass
+var StorageClass_STANDARD = &sStorageClass_STANDARD
+var StorageClass_INTELLIGENT_TIERING = &sStorageClass_INTELLIGENT_TIERING
+
+var StorageClassConfiguration = &sStorageClassConfiguration
+var StorageClassConfiguration_storageClass = &sStorageClassConfiguration_storageClass
+
+var _TableARN = &s_TableARN
+
+var _TableBucketARN = &s_TableBucketARN
+
+var _TableBucketId = &s_TableBucketId
+
+var _TableBucketMaintenanceConfiguration = &s_TableBucketMaintenanceConfiguration
+var _TableBucketMaintenanceConfiguration_key = &s_TableBucketMaintenanceConfiguration_key
+var _TableBucketMaintenanceConfiguration_value = &s_TableBucketMaintenanceConfiguration_value
+
+var TableBucketMaintenanceConfigurationValue = &sTableBucketMaintenanceConfigurationValue
+var TableBucketMaintenanceConfigurationValue_status = &sTableBucketMaintenanceConfigurationValue_status
+var TableBucketMaintenanceConfigurationValue_settings = &sTableBucketMaintenanceConfigurationValue_settings
+
+var TableBucketMaintenanceSettings = &sTableBucketMaintenanceSettings
+var TableBucketMaintenanceSettings_icebergUnreferencedFileRemoval = &sTableBucketMaintenanceSettings_icebergUnreferencedFileRemoval
+
+var TableBucketMaintenanceType = &sTableBucketMaintenanceType
+var TableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL = &sTableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL
+
+var _TableBucketName = &s_TableBucketName
+
+var TableBucketReplicationConfiguration = &sTableBucketReplicationConfiguration
+var TableBucketReplicationConfiguration_role = &sTableBucketReplicationConfiguration_role
+var TableBucketReplicationConfiguration_rules = &sTableBucketReplicationConfiguration_rules
+
+var TableBucketReplicationRule = &sTableBucketReplicationRule
+var TableBucketReplicationRule_destinations = &sTableBucketReplicationRule_destinations
+
+var _TableBucketReplicationRules = &s_TableBucketReplicationRules
+var _TableBucketReplicationRules_member = &s_TableBucketReplicationRules_member
+
+var TableBucketSummary = &sTableBucketSummary
+var TableBucketSummary_arn = &sTableBucketSummary_arn
+var TableBucketSummary_name = &sTableBucketSummary_name
+var TableBucketSummary_ownerAccountId = &sTableBucketSummary_ownerAccountId
+var TableBucketSummary_createdAt = &sTableBucketSummary_createdAt
+var TableBucketSummary_tableBucketId = &sTableBucketSummary_tableBucketId
+var TableBucketSummary_type = &sTableBucketSummary_type
+
+var _TableBucketSummaryList = &s_TableBucketSummaryList
+var _TableBucketSummaryList_member = &s_TableBucketSummaryList_member
+
+var TableBucketType = &sTableBucketType
+var TableBucketType_CUSTOMER = &sTableBucketType_CUSTOMER
+var TableBucketType_AWS = &sTableBucketType_AWS
+
+var _TableMaintenanceConfiguration = &s_TableMaintenanceConfiguration
+var _TableMaintenanceConfiguration_key = &s_TableMaintenanceConfiguration_key
+var _TableMaintenanceConfiguration_value = &s_TableMaintenanceConfiguration_value
+
+var TableMaintenanceConfigurationValue = &sTableMaintenanceConfigurationValue
+var TableMaintenanceConfigurationValue_status = &sTableMaintenanceConfigurationValue_status
+var TableMaintenanceConfigurationValue_settings = &sTableMaintenanceConfigurationValue_settings
+
+var _TableMaintenanceJobStatus = &s_TableMaintenanceJobStatus
+var _TableMaintenanceJobStatus_key = &s_TableMaintenanceJobStatus_key
+var _TableMaintenanceJobStatus_value = &s_TableMaintenanceJobStatus_value
+
+var TableMaintenanceJobStatusValue = &sTableMaintenanceJobStatusValue
+var TableMaintenanceJobStatusValue_status = &sTableMaintenanceJobStatusValue_status
+var TableMaintenanceJobStatusValue_lastRunTimestamp = &sTableMaintenanceJobStatusValue_lastRunTimestamp
+var TableMaintenanceJobStatusValue_failureMessage = &sTableMaintenanceJobStatusValue_failureMessage
+
+var TableMaintenanceJobType = &sTableMaintenanceJobType
+var TableMaintenanceJobType_ICEBERG_COMPACTION = &sTableMaintenanceJobType_ICEBERG_COMPACTION
+var TableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT = &sTableMaintenanceJobType_ICEBERG_SNAPSHOT_MANAGEMENT
+var TableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL = &sTableMaintenanceJobType_ICEBERG_UNREFERENCED_FILE_REMOVAL
+
+var TableMaintenanceSettings = &sTableMaintenanceSettings
+var TableMaintenanceSettings_icebergCompaction = &sTableMaintenanceSettings_icebergCompaction
+var TableMaintenanceSettings_icebergSnapshotManagement = &sTableMaintenanceSettings_icebergSnapshotManagement
+
+var TableMaintenanceType = &sTableMaintenanceType
+var TableMaintenanceType_ICEBERG_COMPACTION = &sTableMaintenanceType_ICEBERG_COMPACTION
+var TableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT = &sTableMaintenanceType_ICEBERG_SNAPSHOT_MANAGEMENT
+
+var TableMetadata = &sTableMetadata
+var TableMetadata_iceberg = &sTableMetadata_iceberg
+
+var _TableName = &s_TableName
+
+var _TableProperties = &s_TableProperties
+var _TableProperties_key = &s_TableProperties_key
+var _TableProperties_value = &s_TableProperties_value
+
+var TableRecordExpirationConfigurationValue = &sTableRecordExpirationConfigurationValue
+var TableRecordExpirationConfigurationValue_status = &sTableRecordExpirationConfigurationValue_status
+var TableRecordExpirationConfigurationValue_settings = &sTableRecordExpirationConfigurationValue_settings
+
+var TableRecordExpirationJobMetrics = &sTableRecordExpirationJobMetrics
+var TableRecordExpirationJobMetrics_deletedDataFiles = &sTableRecordExpirationJobMetrics_deletedDataFiles
+var TableRecordExpirationJobMetrics_deletedRecords = &sTableRecordExpirationJobMetrics_deletedRecords
+var TableRecordExpirationJobMetrics_removedFilesSize = &sTableRecordExpirationJobMetrics_removedFilesSize
+
+var TableRecordExpirationJobStatus = &sTableRecordExpirationJobStatus
+var TableRecordExpirationJobStatus_NOT_YET_RUN = &sTableRecordExpirationJobStatus_NOT_YET_RUN
+var TableRecordExpirationJobStatus_SUCCESSFUL = &sTableRecordExpirationJobStatus_SUCCESSFUL
+var TableRecordExpirationJobStatus_FAILED = &sTableRecordExpirationJobStatus_FAILED
+var TableRecordExpirationJobStatus_DISABLED = &sTableRecordExpirationJobStatus_DISABLED
+
+var TableRecordExpirationSettings = &sTableRecordExpirationSettings
+var TableRecordExpirationSettings_days = &sTableRecordExpirationSettings_days
+
+var TableRecordExpirationStatus = &sTableRecordExpirationStatus
+var TableRecordExpirationStatus_ENABLED = &sTableRecordExpirationStatus_ENABLED
+var TableRecordExpirationStatus_DISABLED = &sTableRecordExpirationStatus_DISABLED
+
+var TableReplicationConfiguration = &sTableReplicationConfiguration
+var TableReplicationConfiguration_role = &sTableReplicationConfiguration_role
+var TableReplicationConfiguration_rules = &sTableReplicationConfiguration_rules
+
+var TableReplicationRule = &sTableReplicationRule
+var TableReplicationRule_destinations = &sTableReplicationRule_destinations
+
+var _TableReplicationRules = &s_TableReplicationRules
+var _TableReplicationRules_member = &s_TableReplicationRules_member
+
+var TableSummary = &sTableSummary
+var TableSummary_namespace = &sTableSummary_namespace
+var TableSummary_name = &sTableSummary_name
+var TableSummary_type = &sTableSummary_type
+var TableSummary_tableARN = &sTableSummary_tableARN
+var TableSummary_createdAt = &sTableSummary_createdAt
+var TableSummary_modifiedAt = &sTableSummary_modifiedAt
+var TableSummary_managedByService = &sTableSummary_managedByService
+var TableSummary_namespaceId = &sTableSummary_namespaceId
+var TableSummary_tableBucketId = &sTableSummary_tableBucketId
+
+var _TableSummaryList = &s_TableSummaryList
+var _TableSummaryList_member = &s_TableSummaryList_member
+
+var TableType = &sTableType
+var TableType_CUSTOMER = &sTableType_CUSTOMER
+var TableType_AWS = &sTableType_AWS
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_message = &sTooManyRequestsException_message
+
+var UnmatchedSourceFieldsPolicy = &sUnmatchedSourceFieldsPolicy
+var UnmatchedSourceFieldsPolicy_FAIL = &sUnmatchedSourceFieldsPolicy_FAIL
+var UnmatchedSourceFieldsPolicy_DROP = &sUnmatchedSourceFieldsPolicy_DROP
+
+var _VersionToken = &s_VersionToken
+
+var _WarehouseLocation = &s_WarehouseLocation
+
+var CompleteTableMigrationRequest = &sCompleteTableMigrationRequest
+var CompleteTableMigrationRequest_tableARN = &sCompleteTableMigrationRequest_tableARN
+
+var CreateNamespaceRequest = &sCreateNamespaceRequest
+var CreateNamespaceRequest_tableBucketARN = &sCreateNamespaceRequest_tableBucketARN
+var CreateNamespaceRequest_namespace = &sCreateNamespaceRequest_namespace
+
+var CreateNamespaceResponse = &sCreateNamespaceResponse
+var CreateNamespaceResponse_tableBucketARN = &sCreateNamespaceResponse_tableBucketARN
+var CreateNamespaceResponse_namespace = &sCreateNamespaceResponse_namespace
+
+var CreateTableBucketRequest = &sCreateTableBucketRequest
+var CreateTableBucketRequest_name = &sCreateTableBucketRequest_name
+var CreateTableBucketRequest_encryptionConfiguration = &sCreateTableBucketRequest_encryptionConfiguration
+var CreateTableBucketRequest_storageClassConfiguration = &sCreateTableBucketRequest_storageClassConfiguration
+var CreateTableBucketRequest_tags = &sCreateTableBucketRequest_tags
+
+var CreateTableBucketResponse = &sCreateTableBucketResponse
+var CreateTableBucketResponse_arn = &sCreateTableBucketResponse_arn
+
+var CreateTableRequest = &sCreateTableRequest
+var CreateTableRequest_tableBucketARN = &sCreateTableRequest_tableBucketARN
+var CreateTableRequest_namespace = &sCreateTableRequest_namespace
+var CreateTableRequest_name = &sCreateTableRequest_name
+var CreateTableRequest_format = &sCreateTableRequest_format
+var CreateTableRequest_metadata = &sCreateTableRequest_metadata
+var CreateTableRequest_encryptionConfiguration = &sCreateTableRequest_encryptionConfiguration
+var CreateTableRequest_storageClassConfiguration = &sCreateTableRequest_storageClassConfiguration
+var CreateTableRequest_tags = &sCreateTableRequest_tags
+
+var CreateTableResponse = &sCreateTableResponse
+var CreateTableResponse_tableARN = &sCreateTableResponse_tableARN
+var CreateTableResponse_versionToken = &sCreateTableResponse_versionToken
+
+var DeleteNamespaceRequest = &sDeleteNamespaceRequest
+var DeleteNamespaceRequest_tableBucketARN = &sDeleteNamespaceRequest_tableBucketARN
+var DeleteNamespaceRequest_namespace = &sDeleteNamespaceRequest_namespace
+
+var DeleteTableBucketEncryptionRequest = &sDeleteTableBucketEncryptionRequest
+var DeleteTableBucketEncryptionRequest_tableBucketARN = &sDeleteTableBucketEncryptionRequest_tableBucketARN
+
+var DeleteTableBucketRequest = &sDeleteTableBucketRequest
+var DeleteTableBucketRequest_tableBucketARN = &sDeleteTableBucketRequest_tableBucketARN
+
+var DeleteTableBucketMetricsConfigurationRequest = &sDeleteTableBucketMetricsConfigurationRequest
+var DeleteTableBucketMetricsConfigurationRequest_tableBucketARN = &sDeleteTableBucketMetricsConfigurationRequest_tableBucketARN
+
+var DeleteTableBucketPolicyRequest = &sDeleteTableBucketPolicyRequest
+var DeleteTableBucketPolicyRequest_tableBucketARN = &sDeleteTableBucketPolicyRequest_tableBucketARN
+
+var DeleteTableBucketReplicationRequest = &sDeleteTableBucketReplicationRequest
+var DeleteTableBucketReplicationRequest_tableBucketARN = &sDeleteTableBucketReplicationRequest_tableBucketARN
+var DeleteTableBucketReplicationRequest_versionToken = &sDeleteTableBucketReplicationRequest_versionToken
+
+var DeleteTableRequest = &sDeleteTableRequest
+var DeleteTableRequest_tableBucketARN = &sDeleteTableRequest_tableBucketARN
+var DeleteTableRequest_namespace = &sDeleteTableRequest_namespace
+var DeleteTableRequest_name = &sDeleteTableRequest_name
+var DeleteTableRequest_versionToken = &sDeleteTableRequest_versionToken
+
+var DeleteTablePolicyRequest = &sDeleteTablePolicyRequest
+var DeleteTablePolicyRequest_tableBucketARN = &sDeleteTablePolicyRequest_tableBucketARN
+var DeleteTablePolicyRequest_namespace = &sDeleteTablePolicyRequest_namespace
+var DeleteTablePolicyRequest_name = &sDeleteTablePolicyRequest_name
+
+var DeleteTableReplicationRequest = &sDeleteTableReplicationRequest
+var DeleteTableReplicationRequest_tableArn = &sDeleteTableReplicationRequest_tableArn
+var DeleteTableReplicationRequest_versionToken = &sDeleteTableReplicationRequest_versionToken
+
+var GetNamespaceRequest = &sGetNamespaceRequest
+var GetNamespaceRequest_tableBucketARN = &sGetNamespaceRequest_tableBucketARN
+var GetNamespaceRequest_namespace = &sGetNamespaceRequest_namespace
+
+var GetNamespaceResponse = &sGetNamespaceResponse
+var GetNamespaceResponse_namespace = &sGetNamespaceResponse_namespace
+var GetNamespaceResponse_createdAt = &sGetNamespaceResponse_createdAt
+var GetNamespaceResponse_createdBy = &sGetNamespaceResponse_createdBy
+var GetNamespaceResponse_ownerAccountId = &sGetNamespaceResponse_ownerAccountId
+var GetNamespaceResponse_namespaceId = &sGetNamespaceResponse_namespaceId
+var GetNamespaceResponse_tableBucketId = &sGetNamespaceResponse_tableBucketId
+
+var GetTableBucketEncryptionRequest = &sGetTableBucketEncryptionRequest
+var GetTableBucketEncryptionRequest_tableBucketARN = &sGetTableBucketEncryptionRequest_tableBucketARN
+
+var GetTableBucketEncryptionResponse = &sGetTableBucketEncryptionResponse
+var GetTableBucketEncryptionResponse_encryptionConfiguration = &sGetTableBucketEncryptionResponse_encryptionConfiguration
+
+var GetTableBucketRequest = &sGetTableBucketRequest
+var GetTableBucketRequest_tableBucketARN = &sGetTableBucketRequest_tableBucketARN
+
+var GetTableBucketMaintenanceConfigurationRequest = &sGetTableBucketMaintenanceConfigurationRequest
+var GetTableBucketMaintenanceConfigurationRequest_tableBucketARN = &sGetTableBucketMaintenanceConfigurationRequest_tableBucketARN
+
+var GetTableBucketMaintenanceConfigurationResponse = &sGetTableBucketMaintenanceConfigurationResponse
+var GetTableBucketMaintenanceConfigurationResponse_tableBucketARN = &sGetTableBucketMaintenanceConfigurationResponse_tableBucketARN
+var GetTableBucketMaintenanceConfigurationResponse_configuration = &sGetTableBucketMaintenanceConfigurationResponse_configuration
+
+var GetTableBucketMetricsConfigurationRequest = &sGetTableBucketMetricsConfigurationRequest
+var GetTableBucketMetricsConfigurationRequest_tableBucketARN = &sGetTableBucketMetricsConfigurationRequest_tableBucketARN
+
+var GetTableBucketMetricsConfigurationResponse = &sGetTableBucketMetricsConfigurationResponse
+var GetTableBucketMetricsConfigurationResponse_tableBucketARN = &sGetTableBucketMetricsConfigurationResponse_tableBucketARN
+var GetTableBucketMetricsConfigurationResponse_id = &sGetTableBucketMetricsConfigurationResponse_id
+
+var GetTableBucketResponse = &sGetTableBucketResponse
+var GetTableBucketResponse_arn = &sGetTableBucketResponse_arn
+var GetTableBucketResponse_name = &sGetTableBucketResponse_name
+var GetTableBucketResponse_ownerAccountId = &sGetTableBucketResponse_ownerAccountId
+var GetTableBucketResponse_createdAt = &sGetTableBucketResponse_createdAt
+var GetTableBucketResponse_tableBucketId = &sGetTableBucketResponse_tableBucketId
+var GetTableBucketResponse_type = &sGetTableBucketResponse_type
+
+var GetTableBucketPolicyRequest = &sGetTableBucketPolicyRequest
+var GetTableBucketPolicyRequest_tableBucketARN = &sGetTableBucketPolicyRequest_tableBucketARN
+
+var GetTableBucketPolicyResponse = &sGetTableBucketPolicyResponse
+var GetTableBucketPolicyResponse_resourcePolicy = &sGetTableBucketPolicyResponse_resourcePolicy
+
+var GetTableBucketReplicationRequest = &sGetTableBucketReplicationRequest
+var GetTableBucketReplicationRequest_tableBucketARN = &sGetTableBucketReplicationRequest_tableBucketARN
+
+var GetTableBucketReplicationResponse = &sGetTableBucketReplicationResponse
+var GetTableBucketReplicationResponse_versionToken = &sGetTableBucketReplicationResponse_versionToken
+var GetTableBucketReplicationResponse_configuration = &sGetTableBucketReplicationResponse_configuration
+
+var GetTableBucketStorageClassRequest = &sGetTableBucketStorageClassRequest
+var GetTableBucketStorageClassRequest_tableBucketARN = &sGetTableBucketStorageClassRequest_tableBucketARN
+
+var GetTableBucketStorageClassResponse = &sGetTableBucketStorageClassResponse
+var GetTableBucketStorageClassResponse_storageClassConfiguration = &sGetTableBucketStorageClassResponse_storageClassConfiguration
+
+var GetTableEncryptionRequest = &sGetTableEncryptionRequest
+var GetTableEncryptionRequest_tableBucketARN = &sGetTableEncryptionRequest_tableBucketARN
+var GetTableEncryptionRequest_namespace = &sGetTableEncryptionRequest_namespace
+var GetTableEncryptionRequest_name = &sGetTableEncryptionRequest_name
+
+var GetTableEncryptionResponse = &sGetTableEncryptionResponse
+var GetTableEncryptionResponse_encryptionConfiguration = &sGetTableEncryptionResponse_encryptionConfiguration
+
+var GetTableRequest = &sGetTableRequest
+var GetTableRequest_tableBucketARN = &sGetTableRequest_tableBucketARN
+var GetTableRequest_namespace = &sGetTableRequest_namespace
+var GetTableRequest_name = &sGetTableRequest_name
+var GetTableRequest_tableArn = &sGetTableRequest_tableArn
+
+var GetTableMaintenanceConfigurationRequest = &sGetTableMaintenanceConfigurationRequest
+var GetTableMaintenanceConfigurationRequest_tableBucketARN = &sGetTableMaintenanceConfigurationRequest_tableBucketARN
+var GetTableMaintenanceConfigurationRequest_namespace = &sGetTableMaintenanceConfigurationRequest_namespace
+var GetTableMaintenanceConfigurationRequest_name = &sGetTableMaintenanceConfigurationRequest_name
+
+var GetTableMaintenanceConfigurationResponse = &sGetTableMaintenanceConfigurationResponse
+var GetTableMaintenanceConfigurationResponse_tableARN = &sGetTableMaintenanceConfigurationResponse_tableARN
+var GetTableMaintenanceConfigurationResponse_configuration = &sGetTableMaintenanceConfigurationResponse_configuration
+
+var GetTableMaintenanceJobStatusRequest = &sGetTableMaintenanceJobStatusRequest
+var GetTableMaintenanceJobStatusRequest_tableBucketARN = &sGetTableMaintenanceJobStatusRequest_tableBucketARN
+var GetTableMaintenanceJobStatusRequest_namespace = &sGetTableMaintenanceJobStatusRequest_namespace
+var GetTableMaintenanceJobStatusRequest_name = &sGetTableMaintenanceJobStatusRequest_name
+
+var GetTableMaintenanceJobStatusResponse = &sGetTableMaintenanceJobStatusResponse
+var GetTableMaintenanceJobStatusResponse_tableARN = &sGetTableMaintenanceJobStatusResponse_tableARN
+var GetTableMaintenanceJobStatusResponse_status = &sGetTableMaintenanceJobStatusResponse_status
+
+var GetTableMetadataLocationRequest = &sGetTableMetadataLocationRequest
+var GetTableMetadataLocationRequest_tableBucketARN = &sGetTableMetadataLocationRequest_tableBucketARN
+var GetTableMetadataLocationRequest_namespace = &sGetTableMetadataLocationRequest_namespace
+var GetTableMetadataLocationRequest_name = &sGetTableMetadataLocationRequest_name
+
+var GetTableMetadataLocationResponse = &sGetTableMetadataLocationResponse
+var GetTableMetadataLocationResponse_versionToken = &sGetTableMetadataLocationResponse_versionToken
+var GetTableMetadataLocationResponse_metadataLocation = &sGetTableMetadataLocationResponse_metadataLocation
+var GetTableMetadataLocationResponse_warehouseLocation = &sGetTableMetadataLocationResponse_warehouseLocation
+
+var GetTableMigrationRequest = &sGetTableMigrationRequest
+var GetTableMigrationRequest_migrationId = &sGetTableMigrationRequest_migrationId
+var GetTableMigrationRequest_tableARN = &sGetTableMigrationRequest_tableARN
+
+var GetTableMigrationResponse = &sGetTableMigrationResponse
+var GetTableMigrationResponse_migrationId = &sGetTableMigrationResponse_migrationId
+var GetTableMigrationResponse_tableBucketARN = &sGetTableMigrationResponse_tableBucketARN
+var GetTableMigrationResponse_namespace = &sGetTableMigrationResponse_namespace
+var GetTableMigrationResponse_tableARN = &sGetTableMigrationResponse_tableARN
+var GetTableMigrationResponse_name = &sGetTableMigrationResponse_name
+var GetTableMigrationResponse_type = &sGetTableMigrationResponse_type
+var GetTableMigrationResponse_state = &sGetTableMigrationResponse_state
+var GetTableMigrationResponse_roleARN = &sGetTableMigrationResponse_roleARN
+var GetTableMigrationResponse_reviewMigrationPlan = &sGetTableMigrationResponse_reviewMigrationPlan
+var GetTableMigrationResponse_hasValidPlan = &sGetTableMigrationResponse_hasValidPlan
+var GetTableMigrationResponse_createdAt = &sGetTableMigrationResponse_createdAt
+var GetTableMigrationResponse_stateUpdatedAt = &sGetTableMigrationResponse_stateUpdatedAt
+var GetTableMigrationResponse_failureReason = &sGetTableMigrationResponse_failureReason
+var GetTableMigrationResponse_planningStats = &sGetTableMigrationResponse_planningStats
+var GetTableMigrationResponse_migrationStats = &sGetTableMigrationResponse_migrationStats
+var GetTableMigrationResponse_sourceType = &sGetTableMigrationResponse_sourceType
+var GetTableMigrationResponse_source = &sGetTableMigrationResponse_source
+var GetTableMigrationResponse_dataMigration = &sGetTableMigrationResponse_dataMigration
+var GetTableMigrationResponse_migrationOutput = &sGetTableMigrationResponse_migrationOutput
+
+var GetTableResponse = &sGetTableResponse
+var GetTableResponse_name = &sGetTableResponse_name
+var GetTableResponse_type = &sGetTableResponse_type
+var GetTableResponse_tableARN = &sGetTableResponse_tableARN
+var GetTableResponse_namespace = &sGetTableResponse_namespace
+var GetTableResponse_namespaceId = &sGetTableResponse_namespaceId
+var GetTableResponse_versionToken = &sGetTableResponse_versionToken
+var GetTableResponse_metadataLocation = &sGetTableResponse_metadataLocation
+var GetTableResponse_warehouseLocation = &sGetTableResponse_warehouseLocation
+var GetTableResponse_createdAt = &sGetTableResponse_createdAt
+var GetTableResponse_createdBy = &sGetTableResponse_createdBy
+var GetTableResponse_managedByService = &sGetTableResponse_managedByService
+var GetTableResponse_modifiedAt = &sGetTableResponse_modifiedAt
+var GetTableResponse_modifiedBy = &sGetTableResponse_modifiedBy
+var GetTableResponse_ownerAccountId = &sGetTableResponse_ownerAccountId
+var GetTableResponse_format = &sGetTableResponse_format
+var GetTableResponse_tableBucketId = &sGetTableResponse_tableBucketId
+var GetTableResponse_managedTableInformation = &sGetTableResponse_managedTableInformation
+
+var GetTablePolicyRequest = &sGetTablePolicyRequest
+var GetTablePolicyRequest_tableBucketARN = &sGetTablePolicyRequest_tableBucketARN
+var GetTablePolicyRequest_namespace = &sGetTablePolicyRequest_namespace
+var GetTablePolicyRequest_name = &sGetTablePolicyRequest_name
+
+var GetTablePolicyResponse = &sGetTablePolicyResponse
+var GetTablePolicyResponse_resourcePolicy = &sGetTablePolicyResponse_resourcePolicy
+
+var GetTableRecordExpirationConfigurationRequest = &sGetTableRecordExpirationConfigurationRequest
+var GetTableRecordExpirationConfigurationRequest_tableArn = &sGetTableRecordExpirationConfigurationRequest_tableArn
+
+var GetTableRecordExpirationConfigurationResponse = &sGetTableRecordExpirationConfigurationResponse
+var GetTableRecordExpirationConfigurationResponse_configuration = &sGetTableRecordExpirationConfigurationResponse_configuration
+
+var GetTableRecordExpirationJobStatusRequest = &sGetTableRecordExpirationJobStatusRequest
+var GetTableRecordExpirationJobStatusRequest_tableArn = &sGetTableRecordExpirationJobStatusRequest_tableArn
+
+var GetTableRecordExpirationJobStatusResponse = &sGetTableRecordExpirationJobStatusResponse
+var GetTableRecordExpirationJobStatusResponse_status = &sGetTableRecordExpirationJobStatusResponse_status
+var GetTableRecordExpirationJobStatusResponse_lastRunTimestamp = &sGetTableRecordExpirationJobStatusResponse_lastRunTimestamp
+var GetTableRecordExpirationJobStatusResponse_failureMessage = &sGetTableRecordExpirationJobStatusResponse_failureMessage
+var GetTableRecordExpirationJobStatusResponse_metrics = &sGetTableRecordExpirationJobStatusResponse_metrics
+
+var GetTableReplicationRequest = &sGetTableReplicationRequest
+var GetTableReplicationRequest_tableArn = &sGetTableReplicationRequest_tableArn
+
+var GetTableReplicationResponse = &sGetTableReplicationResponse
+var GetTableReplicationResponse_versionToken = &sGetTableReplicationResponse_versionToken
+var GetTableReplicationResponse_configuration = &sGetTableReplicationResponse_configuration
+
+var GetTableReplicationStatusRequest = &sGetTableReplicationStatusRequest
+var GetTableReplicationStatusRequest_tableArn = &sGetTableReplicationStatusRequest_tableArn
+
+var GetTableReplicationStatusResponse = &sGetTableReplicationStatusResponse
+var GetTableReplicationStatusResponse_sourceTableArn = &sGetTableReplicationStatusResponse_sourceTableArn
+var GetTableReplicationStatusResponse_destinations = &sGetTableReplicationStatusResponse_destinations
+
+var GetTableStorageClassRequest = &sGetTableStorageClassRequest
+var GetTableStorageClassRequest_tableBucketARN = &sGetTableStorageClassRequest_tableBucketARN
+var GetTableStorageClassRequest_namespace = &sGetTableStorageClassRequest_namespace
+var GetTableStorageClassRequest_name = &sGetTableStorageClassRequest_name
+
+var GetTableStorageClassResponse = &sGetTableStorageClassResponse
+var GetTableStorageClassResponse_storageClassConfiguration = &sGetTableStorageClassResponse_storageClassConfiguration
+
+var ListNamespacesRequest = &sListNamespacesRequest
+var ListNamespacesRequest_tableBucketARN = &sListNamespacesRequest_tableBucketARN
+var ListNamespacesRequest_prefix = &sListNamespacesRequest_prefix
+var ListNamespacesRequest_continuationToken = &sListNamespacesRequest_continuationToken
+var ListNamespacesRequest_maxNamespaces = &sListNamespacesRequest_maxNamespaces
+
+var ListNamespacesResponse = &sListNamespacesResponse
+var ListNamespacesResponse_namespaces = &sListNamespacesResponse_namespaces
+var ListNamespacesResponse_continuationToken = &sListNamespacesResponse_continuationToken
+
+var ListTableBucketsRequest = &sListTableBucketsRequest
+var ListTableBucketsRequest_prefix = &sListTableBucketsRequest_prefix
+var ListTableBucketsRequest_continuationToken = &sListTableBucketsRequest_continuationToken
+var ListTableBucketsRequest_maxBuckets = &sListTableBucketsRequest_maxBuckets
+var ListTableBucketsRequest_type = &sListTableBucketsRequest_type
+
+var ListTableBucketsResponse = &sListTableBucketsResponse
+var ListTableBucketsResponse_tableBuckets = &sListTableBucketsResponse_tableBuckets
+var ListTableBucketsResponse_continuationToken = &sListTableBucketsResponse_continuationToken
+
+var ListTableMigrationsRequest = &sListTableMigrationsRequest
+var ListTableMigrationsRequest_tableBucketARN = &sListTableMigrationsRequest_tableBucketARN
+var ListTableMigrationsRequest_namespace = &sListTableMigrationsRequest_namespace
+var ListTableMigrationsRequest_name = &sListTableMigrationsRequest_name
+var ListTableMigrationsRequest_tableARN = &sListTableMigrationsRequest_tableARN
+var ListTableMigrationsRequest_state = &sListTableMigrationsRequest_state
+var ListTableMigrationsRequest_hasValidPlan = &sListTableMigrationsRequest_hasValidPlan
+var ListTableMigrationsRequest_maxResults = &sListTableMigrationsRequest_maxResults
+var ListTableMigrationsRequest_nextToken = &sListTableMigrationsRequest_nextToken
+
+var ListTableMigrationsResponse = &sListTableMigrationsResponse
+var ListTableMigrationsResponse_migrations = &sListTableMigrationsResponse_migrations
+var ListTableMigrationsResponse_nextToken = &sListTableMigrationsResponse_nextToken
+
+var ListTablesRequest = &sListTablesRequest
+var ListTablesRequest_tableBucketARN = &sListTablesRequest_tableBucketARN
+var ListTablesRequest_namespace = &sListTablesRequest_namespace
+var ListTablesRequest_prefix = &sListTablesRequest_prefix
+var ListTablesRequest_continuationToken = &sListTablesRequest_continuationToken
+var ListTablesRequest_maxTables = &sListTablesRequest_maxTables
+
+var ListTablesResponse = &sListTablesResponse
+var ListTablesResponse_tables = &sListTablesResponse_tables
+var ListTablesResponse_continuationToken = &sListTablesResponse_continuationToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var PutTableBucketEncryptionRequest = &sPutTableBucketEncryptionRequest
+var PutTableBucketEncryptionRequest_tableBucketARN = &sPutTableBucketEncryptionRequest_tableBucketARN
+var PutTableBucketEncryptionRequest_encryptionConfiguration = &sPutTableBucketEncryptionRequest_encryptionConfiguration
+
+var PutTableBucketMaintenanceConfigurationRequest = &sPutTableBucketMaintenanceConfigurationRequest
+var PutTableBucketMaintenanceConfigurationRequest_tableBucketARN = &sPutTableBucketMaintenanceConfigurationRequest_tableBucketARN
+var PutTableBucketMaintenanceConfigurationRequest_type = &sPutTableBucketMaintenanceConfigurationRequest_type
+var PutTableBucketMaintenanceConfigurationRequest_value = &sPutTableBucketMaintenanceConfigurationRequest_value
+
+var PutTableBucketMetricsConfigurationRequest = &sPutTableBucketMetricsConfigurationRequest
+var PutTableBucketMetricsConfigurationRequest_tableBucketARN = &sPutTableBucketMetricsConfigurationRequest_tableBucketARN
+
+var PutTableBucketPolicyRequest = &sPutTableBucketPolicyRequest
+var PutTableBucketPolicyRequest_tableBucketARN = &sPutTableBucketPolicyRequest_tableBucketARN
+var PutTableBucketPolicyRequest_resourcePolicy = &sPutTableBucketPolicyRequest_resourcePolicy
+
+var PutTableBucketReplicationRequest = &sPutTableBucketReplicationRequest
+var PutTableBucketReplicationRequest_tableBucketARN = &sPutTableBucketReplicationRequest_tableBucketARN
+var PutTableBucketReplicationRequest_versionToken = &sPutTableBucketReplicationRequest_versionToken
+var PutTableBucketReplicationRequest_configuration = &sPutTableBucketReplicationRequest_configuration
+
+var PutTableBucketReplicationResponse = &sPutTableBucketReplicationResponse
+var PutTableBucketReplicationResponse_versionToken = &sPutTableBucketReplicationResponse_versionToken
+var PutTableBucketReplicationResponse_status = &sPutTableBucketReplicationResponse_status
+
+var PutTableBucketStorageClassRequest = &sPutTableBucketStorageClassRequest
+var PutTableBucketStorageClassRequest_tableBucketARN = &sPutTableBucketStorageClassRequest_tableBucketARN
+var PutTableBucketStorageClassRequest_storageClassConfiguration = &sPutTableBucketStorageClassRequest_storageClassConfiguration
+
+var PutTableMaintenanceConfigurationRequest = &sPutTableMaintenanceConfigurationRequest
+var PutTableMaintenanceConfigurationRequest_tableBucketARN = &sPutTableMaintenanceConfigurationRequest_tableBucketARN
+var PutTableMaintenanceConfigurationRequest_namespace = &sPutTableMaintenanceConfigurationRequest_namespace
+var PutTableMaintenanceConfigurationRequest_name = &sPutTableMaintenanceConfigurationRequest_name
+var PutTableMaintenanceConfigurationRequest_type = &sPutTableMaintenanceConfigurationRequest_type
+var PutTableMaintenanceConfigurationRequest_value = &sPutTableMaintenanceConfigurationRequest_value
+
+var PutTablePolicyRequest = &sPutTablePolicyRequest
+var PutTablePolicyRequest_tableBucketARN = &sPutTablePolicyRequest_tableBucketARN
+var PutTablePolicyRequest_namespace = &sPutTablePolicyRequest_namespace
+var PutTablePolicyRequest_name = &sPutTablePolicyRequest_name
+var PutTablePolicyRequest_resourcePolicy = &sPutTablePolicyRequest_resourcePolicy
+
+var PutTableRecordExpirationConfigurationRequest = &sPutTableRecordExpirationConfigurationRequest
+var PutTableRecordExpirationConfigurationRequest_tableArn = &sPutTableRecordExpirationConfigurationRequest_tableArn
+var PutTableRecordExpirationConfigurationRequest_value = &sPutTableRecordExpirationConfigurationRequest_value
+
+var PutTableReplicationRequest = &sPutTableReplicationRequest
+var PutTableReplicationRequest_tableArn = &sPutTableReplicationRequest_tableArn
+var PutTableReplicationRequest_versionToken = &sPutTableReplicationRequest_versionToken
+var PutTableReplicationRequest_configuration = &sPutTableReplicationRequest_configuration
+
+var PutTableReplicationResponse = &sPutTableReplicationResponse
+var PutTableReplicationResponse_versionToken = &sPutTableReplicationResponse_versionToken
+var PutTableReplicationResponse_status = &sPutTableReplicationResponse_status
+
+var RenameTableRequest = &sRenameTableRequest
+var RenameTableRequest_tableBucketARN = &sRenameTableRequest_tableBucketARN
+var RenameTableRequest_namespace = &sRenameTableRequest_namespace
+var RenameTableRequest_name = &sRenameTableRequest_name
+var RenameTableRequest_newNamespaceName = &sRenameTableRequest_newNamespaceName
+var RenameTableRequest_newName = &sRenameTableRequest_newName
+var RenameTableRequest_versionToken = &sRenameTableRequest_versionToken
+
+var StartTableMigrationRequest = &sStartTableMigrationRequest
+var StartTableMigrationRequest_roleARN = &sStartTableMigrationRequest_roleARN
+var StartTableMigrationRequest_destinationTable = &sStartTableMigrationRequest_destinationTable
+var StartTableMigrationRequest_sourceType = &sStartTableMigrationRequest_sourceType
+var StartTableMigrationRequest_source = &sStartTableMigrationRequest_source
+var StartTableMigrationRequest_dataMigration = &sStartTableMigrationRequest_dataMigration
+var StartTableMigrationRequest_reviewMigrationPlan = &sStartTableMigrationRequest_reviewMigrationPlan
+var StartTableMigrationRequest_migrationOutput = &sStartTableMigrationRequest_migrationOutput
+
+var StartTableMigrationResponse = &sStartTableMigrationResponse
+var StartTableMigrationResponse_migrationId = &sStartTableMigrationResponse_migrationId
+var StartTableMigrationResponse_state = &sStartTableMigrationResponse_state
+
+var SyncTableMigrationRequest = &sSyncTableMigrationRequest
+var SyncTableMigrationRequest_roleARN = &sSyncTableMigrationRequest_roleARN
+var SyncTableMigrationRequest_tableARN = &sSyncTableMigrationRequest_tableARN
+var SyncTableMigrationRequest_reviewMigrationPlan = &sSyncTableMigrationRequest_reviewMigrationPlan
+var SyncTableMigrationRequest_migrationOutput = &sSyncTableMigrationRequest_migrationOutput
+
+var SyncTableMigrationResponse = &sSyncTableMigrationResponse
+var SyncTableMigrationResponse_migrationId = &sSyncTableMigrationResponse_migrationId
+var SyncTableMigrationResponse_state = &sSyncTableMigrationResponse_state
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateTableMetadataLocationRequest = &sUpdateTableMetadataLocationRequest
+var UpdateTableMetadataLocationRequest_tableBucketARN = &sUpdateTableMetadataLocationRequest_tableBucketARN
+var UpdateTableMetadataLocationRequest_namespace = &sUpdateTableMetadataLocationRequest_namespace
+var UpdateTableMetadataLocationRequest_name = &sUpdateTableMetadataLocationRequest_name
+var UpdateTableMetadataLocationRequest_versionToken = &sUpdateTableMetadataLocationRequest_versionToken
+var UpdateTableMetadataLocationRequest_metadataLocation = &sUpdateTableMetadataLocationRequest_metadataLocation
+
+var UpdateTableMetadataLocationResponse = &sUpdateTableMetadataLocationResponse
+var UpdateTableMetadataLocationResponse_name = &sUpdateTableMetadataLocationResponse_name
+var UpdateTableMetadataLocationResponse_tableARN = &sUpdateTableMetadataLocationResponse_tableARN
+var UpdateTableMetadataLocationResponse_namespace = &sUpdateTableMetadataLocationResponse_namespace
+var UpdateTableMetadataLocationResponse_versionToken = &sUpdateTableMetadataLocationResponse_versionToken
+var UpdateTableMetadataLocationResponse_metadataLocation = &sUpdateTableMetadataLocationResponse_metadataLocation
+
+var UpdateTableMigrationRequest = &sUpdateTableMigrationRequest
+var UpdateTableMigrationRequest_tableARN = &sUpdateTableMigrationRequest_tableARN
+var UpdateTableMigrationRequest_migrationId = &sUpdateTableMigrationRequest_migrationId
+var UpdateTableMigrationRequest_requestedState = &sUpdateTableMigrationRequest_requestedState
+var UpdateTableMigrationRequest_updateDescription = &sUpdateTableMigrationRequest_updateDescription
+
+var UpdateTableMigrationResponse = &sUpdateTableMigrationResponse
+var UpdateTableMigrationResponse_migrationId = &sUpdateTableMigrationResponse_migrationId
+var UpdateTableMigrationResponse_state = &sUpdateTableMigrationResponse_state
+var UpdateTableMigrationResponse_tableARN = &sUpdateTableMigrationResponse_tableARN
+
+var S3TableBuckets = &smithy.ServiceSchema{Schema: &s_S3TableBuckets, Version: "2018-05-10"}

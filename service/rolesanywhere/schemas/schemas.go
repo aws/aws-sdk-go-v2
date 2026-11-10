@@ -4,1263 +4,1290 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CreateProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateProfile                                            smithy.SchemaExtensions
+	eCreateTrustAnchor                                        smithy.SchemaExtensions
+	eDeleteAttributeMapping                                   smithy.SchemaExtensions
+	eDeleteCrl                                                smithy.SchemaExtensions
+	eDeleteProfile                                            smithy.SchemaExtensions
+	eDeleteTrustAnchor                                        smithy.SchemaExtensions
+	eDisableCrl                                               smithy.SchemaExtensions
+	eDisableProfile                                           smithy.SchemaExtensions
+	eDisableTrustAnchor                                       smithy.SchemaExtensions
+	eEnableCrl                                                smithy.SchemaExtensions
+	eEnableProfile                                            smithy.SchemaExtensions
+	eEnableTrustAnchor                                        smithy.SchemaExtensions
+	eGetCrl                                                   smithy.SchemaExtensions
+	eGetProfile                                               smithy.SchemaExtensions
+	eGetSubject                                               smithy.SchemaExtensions
+	eGetTrustAnchor                                           smithy.SchemaExtensions
+	eImportCrl                                                smithy.SchemaExtensions
+	eListCrls                                                 smithy.SchemaExtensions
+	eListProfiles                                             smithy.SchemaExtensions
+	eListSubjects                                             smithy.SchemaExtensions
+	eListTagsForResource                                      smithy.SchemaExtensions
+	eListTrustAnchors                                         smithy.SchemaExtensions
+	ePutAttributeMapping                                      smithy.SchemaExtensions
+	ePutNotificationSettings                                  smithy.SchemaExtensions
+	eResetNotificationSettings                                smithy.SchemaExtensions
+	eTagResource                                              smithy.SchemaExtensions
+	eUntagResource                                            smithy.SchemaExtensions
+	eUpdateCrl                                                smithy.SchemaExtensions
+	eUpdateProfile                                            smithy.SchemaExtensions
+	eUpdateTrustAnchor                                        smithy.SchemaExtensions
+	e_RolesAnywhere                                           smithy.SchemaExtensions
+	eAccessDeniedException                                    smithy.SchemaExtensions
+	eAccessDeniedException_message                            smithy.SchemaExtensions
+	e_AmazonResourceName                                      smithy.SchemaExtensions
+	eAttributeMapping                                         smithy.SchemaExtensions
+	eAttributeMapping_certificateField                        smithy.SchemaExtensions
+	eAttributeMapping_mappingRules                            smithy.SchemaExtensions
+	e_AttributeMappings                                       smithy.SchemaExtensions
+	e_AttributeMappings_member                                smithy.SchemaExtensions
+	e_CertificateField                                        smithy.SchemaExtensions
+	e_CredentialSummaries                                     smithy.SchemaExtensions
+	e_CredentialSummaries_member                              smithy.SchemaExtensions
+	eCredentialSummary                                        smithy.SchemaExtensions
+	eCredentialSummary_seenAt                                 smithy.SchemaExtensions
+	eCredentialSummary_serialNumber                           smithy.SchemaExtensions
+	eCredentialSummary_issuer                                 smithy.SchemaExtensions
+	eCredentialSummary_enabled                                smithy.SchemaExtensions
+	eCredentialSummary_x509CertificateData                    smithy.SchemaExtensions
+	eCredentialSummary_failed                                 smithy.SchemaExtensions
+	eCrlDetail                                                smithy.SchemaExtensions
+	eCrlDetail_crlId                                          smithy.SchemaExtensions
+	eCrlDetail_crlArn                                         smithy.SchemaExtensions
+	eCrlDetail_name                                           smithy.SchemaExtensions
+	eCrlDetail_enabled                                        smithy.SchemaExtensions
+	eCrlDetail_crlData                                        smithy.SchemaExtensions
+	eCrlDetail_trustAnchorArn                                 smithy.SchemaExtensions
+	eCrlDetail_createdAt                                      smithy.SchemaExtensions
+	eCrlDetail_updatedAt                                      smithy.SchemaExtensions
+	e_CrlDetails                                              smithy.SchemaExtensions
+	e_CrlDetails_member                                       smithy.SchemaExtensions
+	e_InstanceProperties                                      smithy.SchemaExtensions
+	e_InstanceProperties_member                               smithy.SchemaExtensions
+	eInstanceProperty                                         smithy.SchemaExtensions
+	eInstanceProperty_seenAt                                  smithy.SchemaExtensions
+	eInstanceProperty_properties                              smithy.SchemaExtensions
+	eInstanceProperty_failed                                  smithy.SchemaExtensions
+	e_InstancePropertyMap                                     smithy.SchemaExtensions
+	e_InstancePropertyMap_key                                 smithy.SchemaExtensions
+	e_InstancePropertyMap_value                               smithy.SchemaExtensions
+	e_ManagedPolicyList                                       smithy.SchemaExtensions
+	e_ManagedPolicyList_member                                smithy.SchemaExtensions
+	eMappingRule                                              smithy.SchemaExtensions
+	eMappingRule_specifier                                    smithy.SchemaExtensions
+	e_MappingRules                                            smithy.SchemaExtensions
+	e_MappingRules_member                                     smithy.SchemaExtensions
+	e_NotificationChannel                                     smithy.SchemaExtensions
+	e_NotificationEvent                                       smithy.SchemaExtensions
+	eNotificationSetting                                      smithy.SchemaExtensions
+	eNotificationSetting_enabled                              smithy.SchemaExtensions
+	eNotificationSetting_event                                smithy.SchemaExtensions
+	eNotificationSetting_threshold                            smithy.SchemaExtensions
+	eNotificationSetting_channel                              smithy.SchemaExtensions
+	eNotificationSettingDetail                                smithy.SchemaExtensions
+	eNotificationSettingDetail_enabled                        smithy.SchemaExtensions
+	eNotificationSettingDetail_event                          smithy.SchemaExtensions
+	eNotificationSettingDetail_threshold                      smithy.SchemaExtensions
+	eNotificationSettingDetail_channel                        smithy.SchemaExtensions
+	eNotificationSettingDetail_configuredBy                   smithy.SchemaExtensions
+	e_NotificationSettingDetails                              smithy.SchemaExtensions
+	e_NotificationSettingDetails_member                       smithy.SchemaExtensions
+	eNotificationSettingKey                                   smithy.SchemaExtensions
+	eNotificationSettingKey_event                             smithy.SchemaExtensions
+	eNotificationSettingKey_channel                           smithy.SchemaExtensions
+	e_NotificationSettingKeys                                 smithy.SchemaExtensions
+	e_NotificationSettingKeys_member                          smithy.SchemaExtensions
+	e_NotificationSettings                                    smithy.SchemaExtensions
+	e_NotificationSettings_member                             smithy.SchemaExtensions
+	e_ProfileArn                                              smithy.SchemaExtensions
+	eProfileDetail                                            smithy.SchemaExtensions
+	eProfileDetail_profileId                                  smithy.SchemaExtensions
+	eProfileDetail_profileArn                                 smithy.SchemaExtensions
+	eProfileDetail_name                                       smithy.SchemaExtensions
+	eProfileDetail_requireInstanceProperties                  smithy.SchemaExtensions
+	eProfileDetail_enabled                                    smithy.SchemaExtensions
+	eProfileDetail_createdBy                                  smithy.SchemaExtensions
+	eProfileDetail_sessionPolicy                              smithy.SchemaExtensions
+	eProfileDetail_roleArns                                   smithy.SchemaExtensions
+	eProfileDetail_managedPolicyArns                          smithy.SchemaExtensions
+	eProfileDetail_createdAt                                  smithy.SchemaExtensions
+	eProfileDetail_updatedAt                                  smithy.SchemaExtensions
+	eProfileDetail_durationSeconds                            smithy.SchemaExtensions
+	eProfileDetail_acceptRoleSessionName                      smithy.SchemaExtensions
+	eProfileDetail_attributeMappings                          smithy.SchemaExtensions
+	e_ProfileDetails                                          smithy.SchemaExtensions
+	e_ProfileDetails_member                                   smithy.SchemaExtensions
+	e_ResourceName                                            smithy.SchemaExtensions
+	eResourceNotFoundException                                smithy.SchemaExtensions
+	eResourceNotFoundException_message                        smithy.SchemaExtensions
+	e_RoleArn                                                 smithy.SchemaExtensions
+	e_RoleArnList                                             smithy.SchemaExtensions
+	e_RoleArnList_member                                      smithy.SchemaExtensions
+	eServiceUnavailableException                              smithy.SchemaExtensions
+	eServiceUnavailableException_message                      smithy.SchemaExtensions
+	eServiceUnavailableException_retryAfterSeconds            smithy.SchemaExtensions
+	eSource                                                   smithy.SchemaExtensions
+	eSource_sourceType                                        smithy.SchemaExtensions
+	eSource_sourceData                                        smithy.SchemaExtensions
+	eSourceData                                               smithy.SchemaExtensions
+	eSourceData_x509CertificateData                           smithy.SchemaExtensions
+	eSourceData_acmPcaArn                                     smithy.SchemaExtensions
+	e_SpecifierList                                           smithy.SchemaExtensions
+	e_SpecifierList_member                                    smithy.SchemaExtensions
+	eSubjectDetail                                            smithy.SchemaExtensions
+	eSubjectDetail_subjectArn                                 smithy.SchemaExtensions
+	eSubjectDetail_subjectId                                  smithy.SchemaExtensions
+	eSubjectDetail_enabled                                    smithy.SchemaExtensions
+	eSubjectDetail_x509Subject                                smithy.SchemaExtensions
+	eSubjectDetail_lastSeenAt                                 smithy.SchemaExtensions
+	eSubjectDetail_createdAt                                  smithy.SchemaExtensions
+	eSubjectDetail_updatedAt                                  smithy.SchemaExtensions
+	eSubjectDetail_credentials                                smithy.SchemaExtensions
+	eSubjectDetail_instanceProperties                         smithy.SchemaExtensions
+	e_SubjectSummaries                                        smithy.SchemaExtensions
+	e_SubjectSummaries_member                                 smithy.SchemaExtensions
+	eSubjectSummary                                           smithy.SchemaExtensions
+	eSubjectSummary_subjectArn                                smithy.SchemaExtensions
+	eSubjectSummary_subjectId                                 smithy.SchemaExtensions
+	eSubjectSummary_enabled                                   smithy.SchemaExtensions
+	eSubjectSummary_x509Subject                               smithy.SchemaExtensions
+	eSubjectSummary_lastSeenAt                                smithy.SchemaExtensions
+	eSubjectSummary_createdAt                                 smithy.SchemaExtensions
+	eSubjectSummary_updatedAt                                 smithy.SchemaExtensions
+	eTag                                                      smithy.SchemaExtensions
+	eTag_key                                                  smithy.SchemaExtensions
+	eTag_value                                                smithy.SchemaExtensions
+	e_TagKey                                                  smithy.SchemaExtensions
+	e_TagKeyList                                              smithy.SchemaExtensions
+	e_TagKeyList_member                                       smithy.SchemaExtensions
+	e_TagList                                                 smithy.SchemaExtensions
+	e_TagList_member                                          smithy.SchemaExtensions
+	e_TagValue                                                smithy.SchemaExtensions
+	eTooManyTagsException                                     smithy.SchemaExtensions
+	eTooManyTagsException_message                             smithy.SchemaExtensions
+	e_TrustAnchorArn                                          smithy.SchemaExtensions
+	eTrustAnchorDetail                                        smithy.SchemaExtensions
+	eTrustAnchorDetail_trustAnchorId                          smithy.SchemaExtensions
+	eTrustAnchorDetail_trustAnchorArn                         smithy.SchemaExtensions
+	eTrustAnchorDetail_name                                   smithy.SchemaExtensions
+	eTrustAnchorDetail_source                                 smithy.SchemaExtensions
+	eTrustAnchorDetail_enabled                                smithy.SchemaExtensions
+	eTrustAnchorDetail_crlDpRevocationEnabled                 smithy.SchemaExtensions
+	eTrustAnchorDetail_createdAt                              smithy.SchemaExtensions
+	eTrustAnchorDetail_updatedAt                              smithy.SchemaExtensions
+	eTrustAnchorDetail_notificationSettings                   smithy.SchemaExtensions
+	e_TrustAnchorDetails                                      smithy.SchemaExtensions
+	e_TrustAnchorDetails_member                               smithy.SchemaExtensions
+	e_TrustAnchorType                                         smithy.SchemaExtensions
+	e_Uuid                                                    smithy.SchemaExtensions
+	eValidationException                                      smithy.SchemaExtensions
+	eValidationException_message                              smithy.SchemaExtensions
+	eCreateProfileRequest                                     smithy.SchemaExtensions
+	eCreateProfileRequest_name                                smithy.SchemaExtensions
+	eCreateProfileRequest_requireInstanceProperties           smithy.SchemaExtensions
+	eCreateProfileRequest_sessionPolicy                       smithy.SchemaExtensions
+	eCreateProfileRequest_roleArns                            smithy.SchemaExtensions
+	eCreateProfileRequest_managedPolicyArns                   smithy.SchemaExtensions
+	eCreateProfileRequest_durationSeconds                     smithy.SchemaExtensions
+	eCreateProfileRequest_enabled                             smithy.SchemaExtensions
+	eCreateProfileRequest_tags                                smithy.SchemaExtensions
+	eCreateProfileRequest_acceptRoleSessionName               smithy.SchemaExtensions
+	eProfileDetailResponse                                    smithy.SchemaExtensions
+	eProfileDetailResponse_profile                            smithy.SchemaExtensions
+	eCreateTrustAnchorRequest                                 smithy.SchemaExtensions
+	eCreateTrustAnchorRequest_name                            smithy.SchemaExtensions
+	eCreateTrustAnchorRequest_source                          smithy.SchemaExtensions
+	eCreateTrustAnchorRequest_enabled                         smithy.SchemaExtensions
+	eCreateTrustAnchorRequest_crlDpRevocationEnabled          smithy.SchemaExtensions
+	eCreateTrustAnchorRequest_tags                            smithy.SchemaExtensions
+	eCreateTrustAnchorRequest_notificationSettings            smithy.SchemaExtensions
+	eTrustAnchorDetailResponse                                smithy.SchemaExtensions
+	eTrustAnchorDetailResponse_trustAnchor                    smithy.SchemaExtensions
+	eDeleteAttributeMappingRequest                            smithy.SchemaExtensions
+	eDeleteAttributeMappingRequest_profileId                  smithy.SchemaExtensions
+	eDeleteAttributeMappingRequest_certificateField           smithy.SchemaExtensions
+	eDeleteAttributeMappingRequest_specifiers                 smithy.SchemaExtensions
+	eDeleteAttributeMappingResponse                           smithy.SchemaExtensions
+	eDeleteAttributeMappingResponse_profile                   smithy.SchemaExtensions
+	eScalarCrlRequest                                         smithy.SchemaExtensions
+	eScalarCrlRequest_crlId                                   smithy.SchemaExtensions
+	eCrlDetailResponse                                        smithy.SchemaExtensions
+	eCrlDetailResponse_crl                                    smithy.SchemaExtensions
+	eScalarProfileRequest                                     smithy.SchemaExtensions
+	eScalarProfileRequest_profileId                           smithy.SchemaExtensions
+	eScalarTrustAnchorRequest                                 smithy.SchemaExtensions
+	eScalarTrustAnchorRequest_trustAnchorId                   smithy.SchemaExtensions
+	eScalarSubjectRequest                                     smithy.SchemaExtensions
+	eScalarSubjectRequest_subjectId                           smithy.SchemaExtensions
+	eSubjectDetailResponse                                    smithy.SchemaExtensions
+	eSubjectDetailResponse_subject                            smithy.SchemaExtensions
+	eImportCrlRequest                                         smithy.SchemaExtensions
+	eImportCrlRequest_name                                    smithy.SchemaExtensions
+	eImportCrlRequest_crlData                                 smithy.SchemaExtensions
+	eImportCrlRequest_enabled                                 smithy.SchemaExtensions
+	eImportCrlRequest_tags                                    smithy.SchemaExtensions
+	eImportCrlRequest_trustAnchorArn                          smithy.SchemaExtensions
+	eListRequest                                              smithy.SchemaExtensions
+	eListRequest_nextToken                                    smithy.SchemaExtensions
+	eListRequest_pageSize                                     smithy.SchemaExtensions
+	eListCrlsResponse                                         smithy.SchemaExtensions
+	eListCrlsResponse_nextToken                               smithy.SchemaExtensions
+	eListCrlsResponse_crls                                    smithy.SchemaExtensions
+	eListProfilesResponse                                     smithy.SchemaExtensions
+	eListProfilesResponse_nextToken                           smithy.SchemaExtensions
+	eListProfilesResponse_profiles                            smithy.SchemaExtensions
+	eListSubjectsResponse                                     smithy.SchemaExtensions
+	eListSubjectsResponse_subjects                            smithy.SchemaExtensions
+	eListSubjectsResponse_nextToken                           smithy.SchemaExtensions
+	eListTagsForResourceRequest                               smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                   smithy.SchemaExtensions
+	eListTagsForResourceResponse                              smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                         smithy.SchemaExtensions
+	eListTrustAnchorsResponse                                 smithy.SchemaExtensions
+	eListTrustAnchorsResponse_nextToken                       smithy.SchemaExtensions
+	eListTrustAnchorsResponse_trustAnchors                    smithy.SchemaExtensions
+	ePutAttributeMappingRequest                               smithy.SchemaExtensions
+	ePutAttributeMappingRequest_profileId                     smithy.SchemaExtensions
+	ePutAttributeMappingRequest_certificateField              smithy.SchemaExtensions
+	ePutAttributeMappingRequest_mappingRules                  smithy.SchemaExtensions
+	ePutAttributeMappingResponse                              smithy.SchemaExtensions
+	ePutAttributeMappingResponse_profile                      smithy.SchemaExtensions
+	ePutNotificationSettingsRequest                           smithy.SchemaExtensions
+	ePutNotificationSettingsRequest_trustAnchorId             smithy.SchemaExtensions
+	ePutNotificationSettingsRequest_notificationSettings      smithy.SchemaExtensions
+	ePutNotificationSettingsResponse                          smithy.SchemaExtensions
+	ePutNotificationSettingsResponse_trustAnchor              smithy.SchemaExtensions
+	eResetNotificationSettingsRequest                         smithy.SchemaExtensions
+	eResetNotificationSettingsRequest_trustAnchorId           smithy.SchemaExtensions
+	eResetNotificationSettingsRequest_notificationSettingKeys smithy.SchemaExtensions
+	eResetNotificationSettingsResponse                        smithy.SchemaExtensions
+	eResetNotificationSettingsResponse_trustAnchor            smithy.SchemaExtensions
+	eTagResourceRequest                                       smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                           smithy.SchemaExtensions
+	eTagResourceRequest_tags                                  smithy.SchemaExtensions
+	eTagResourceResponse                                      smithy.SchemaExtensions
+	eUntagResourceRequest                                     smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                         smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                             smithy.SchemaExtensions
+	eUntagResourceResponse                                    smithy.SchemaExtensions
+	eUpdateCrlRequest                                         smithy.SchemaExtensions
+	eUpdateCrlRequest_crlId                                   smithy.SchemaExtensions
+	eUpdateCrlRequest_name                                    smithy.SchemaExtensions
+	eUpdateCrlRequest_crlData                                 smithy.SchemaExtensions
+	eUpdateProfileRequest                                     smithy.SchemaExtensions
+	eUpdateProfileRequest_profileId                           smithy.SchemaExtensions
+	eUpdateProfileRequest_name                                smithy.SchemaExtensions
+	eUpdateProfileRequest_sessionPolicy                       smithy.SchemaExtensions
+	eUpdateProfileRequest_roleArns                            smithy.SchemaExtensions
+	eUpdateProfileRequest_managedPolicyArns                   smithy.SchemaExtensions
+	eUpdateProfileRequest_durationSeconds                     smithy.SchemaExtensions
+	eUpdateProfileRequest_acceptRoleSessionName               smithy.SchemaExtensions
+	eUpdateTrustAnchorRequest                                 smithy.SchemaExtensions
+	eUpdateTrustAnchorRequest_trustAnchorId                   smithy.SchemaExtensions
+	eUpdateTrustAnchorRequest_name                            smithy.SchemaExtensions
+	eUpdateTrustAnchorRequest_source                          smithy.SchemaExtensions
+	eUpdateTrustAnchorRequest_crlDpRevocationEnabled          smithy.SchemaExtensions
+)
+
+var (
+	iCreateProfile                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CreateProfile"}
+	iCreateTrustAnchor                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CreateTrustAnchor"}
+	iDeleteAttributeMapping            = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DeleteAttributeMapping"}
+	iDeleteCrl                         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DeleteCrl"}
+	iDeleteProfile                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DeleteProfile"}
+	iDeleteTrustAnchor                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DeleteTrustAnchor"}
+	iDisableCrl                        = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DisableCrl"}
+	iDisableProfile                    = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DisableProfile"}
+	iDisableTrustAnchor                = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DisableTrustAnchor"}
+	iEnableCrl                         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "EnableCrl"}
+	iEnableProfile                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "EnableProfile"}
+	iEnableTrustAnchor                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "EnableTrustAnchor"}
+	iGetCrl                            = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "GetCrl"}
+	iGetProfile                        = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "GetProfile"}
+	iGetSubject                        = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "GetSubject"}
+	iGetTrustAnchor                    = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "GetTrustAnchor"}
+	iImportCrl                         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ImportCrl"}
+	iListCrls                          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListCrls"}
+	iListProfiles                      = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListProfiles"}
+	iListSubjects                      = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListSubjects"}
+	iListTagsForResource               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListTagsForResource"}
+	iListTrustAnchors                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListTrustAnchors"}
+	iPutAttributeMapping               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "PutAttributeMapping"}
+	iPutNotificationSettings           = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "PutNotificationSettings"}
+	iResetNotificationSettings         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ResetNotificationSettings"}
+	iTagResource                       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TagResource"}
+	iUntagResource                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UntagResource"}
+	iUpdateCrl                         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UpdateCrl"}
+	iUpdateProfile                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UpdateProfile"}
+	iUpdateTrustAnchor                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UpdateTrustAnchor"}
+	i_RolesAnywhere                    = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "RolesAnywhere"}
+	iAccessDeniedException             = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "AccessDeniedException"}
+	i_AmazonResourceName               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "AmazonResourceName"}
+	iAttributeMapping                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "AttributeMapping"}
+	i_AttributeMappings                = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "AttributeMappings"}
+	i_CertificateField                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CertificateField"}
+	i_CredentialSummaries              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CredentialSummaries"}
+	iCredentialSummary                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CredentialSummary"}
+	iCrlDetail                         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CrlDetail"}
+	i_CrlDetails                       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CrlDetails"}
+	i_InstanceProperties               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "InstanceProperties"}
+	iInstanceProperty                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "InstanceProperty"}
+	i_InstancePropertyMap              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "InstancePropertyMap"}
+	i_ManagedPolicyList                = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ManagedPolicyList"}
+	iMappingRule                       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "MappingRule"}
+	i_MappingRules                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "MappingRules"}
+	i_NotificationChannel              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationChannel"}
+	i_NotificationEvent                = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationEvent"}
+	iNotificationSetting               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationSetting"}
+	iNotificationSettingDetail         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationSettingDetail"}
+	i_NotificationSettingDetails       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationSettingDetails"}
+	iNotificationSettingKey            = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationSettingKey"}
+	i_NotificationSettingKeys          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationSettingKeys"}
+	i_NotificationSettings             = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "NotificationSettings"}
+	i_ProfileArn                       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ProfileArn"}
+	iProfileDetail                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ProfileDetail"}
+	i_ProfileDetails                   = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ProfileDetails"}
+	i_ResourceName                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ResourceName"}
+	iResourceNotFoundException         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ResourceNotFoundException"}
+	i_RoleArn                          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "RoleArn"}
+	i_RoleArnList                      = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "RoleArnList"}
+	iServiceUnavailableException       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ServiceUnavailableException"}
+	iSource                            = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "Source"}
+	iSourceData                        = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "SourceData"}
+	i_SpecifierList                    = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "SpecifierList"}
+	iSubjectDetail                     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "SubjectDetail"}
+	i_SubjectSummaries                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "SubjectSummaries"}
+	iSubjectSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "SubjectSummary"}
+	iTag                               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "Tag"}
+	i_TagKey                           = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TagKey"}
+	i_TagKeyList                       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TagKeyList"}
+	i_TagList                          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TagList"}
+	i_TagValue                         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TagValue"}
+	iTooManyTagsException              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TooManyTagsException"}
+	i_TrustAnchorArn                   = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TrustAnchorArn"}
+	iTrustAnchorDetail                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TrustAnchorDetail"}
+	i_TrustAnchorDetails               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TrustAnchorDetails"}
+	i_TrustAnchorType                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TrustAnchorType"}
+	i_Uuid                             = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "Uuid"}
+	iValidationException               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ValidationException"}
+	iCreateProfileRequest              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CreateProfileRequest"}
+	iProfileDetailResponse             = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ProfileDetailResponse"}
+	iCreateTrustAnchorRequest          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CreateTrustAnchorRequest"}
+	iTrustAnchorDetailResponse         = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TrustAnchorDetailResponse"}
+	iDeleteAttributeMappingRequest     = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DeleteAttributeMappingRequest"}
+	iDeleteAttributeMappingResponse    = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "DeleteAttributeMappingResponse"}
+	iScalarCrlRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ScalarCrlRequest"}
+	iCrlDetailResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "CrlDetailResponse"}
+	iScalarProfileRequest              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ScalarProfileRequest"}
+	iScalarTrustAnchorRequest          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ScalarTrustAnchorRequest"}
+	iScalarSubjectRequest              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ScalarSubjectRequest"}
+	iSubjectDetailResponse             = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "SubjectDetailResponse"}
+	iImportCrlRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ImportCrlRequest"}
+	iListRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListRequest"}
+	iListCrlsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListCrlsResponse"}
+	iListProfilesResponse              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListProfilesResponse"}
+	iListSubjectsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListSubjectsResponse"}
+	iListTagsForResourceRequest        = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListTagsForResourceResponse"}
+	iListTrustAnchorsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ListTrustAnchorsResponse"}
+	iPutAttributeMappingRequest        = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "PutAttributeMappingRequest"}
+	iPutAttributeMappingResponse       = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "PutAttributeMappingResponse"}
+	iPutNotificationSettingsRequest    = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "PutNotificationSettingsRequest"}
+	iPutNotificationSettingsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "PutNotificationSettingsResponse"}
+	iResetNotificationSettingsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ResetNotificationSettingsRequest"}
+	iResetNotificationSettingsResponse = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "ResetNotificationSettingsResponse"}
+	iTagResourceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TagResourceRequest"}
+	iTagResourceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "TagResourceResponse"}
+	iUntagResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UntagResourceRequest"}
+	iUntagResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UntagResourceResponse"}
+	iUpdateCrlRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UpdateCrlRequest"}
+	iUpdateProfileRequest              = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UpdateProfileRequest"}
+	iUpdateTrustAnchorRequest          = smithy.ShapeName{Namespace: "com.amazonaws.rolesanywhere", Name: "UpdateTrustAnchorRequest"}
+	pString                            = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pBoolean                           = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pBlob                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Blob"}
+	pInteger                           = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/profiles",
-	Code: 201})
-
-var CreateTrustAnchor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CreateTrustAnchor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/trustanchors",
-	Code: 201})
-
-var DeleteAttributeMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DeleteAttributeMapping",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/profiles/{profileId}/mappings",
-	Code: 200})
-
-var DeleteCrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DeleteCrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/crl/{crlId}",
-	Code: 200})
-
-var DeleteProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DeleteProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/profile/{profileId}",
-	Code: 200})
-
-var DeleteTrustAnchor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DeleteTrustAnchor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/trustanchor/{trustAnchorId}",
-	Code: 200})
-
-var DisableCrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DisableCrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/crl/{crlId}/disable",
-	Code: 200})
-
-var DisableProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DisableProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/profile/{profileId}/disable",
-	Code: 200})
-
-var DisableTrustAnchor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DisableTrustAnchor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/trustanchor/{trustAnchorId}/disable",
-	Code: 200})
-
-var EnableCrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "EnableCrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/crl/{crlId}/enable",
-	Code: 200})
-
-var EnableProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "EnableProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/profile/{profileId}/enable",
-	Code: 200})
-
-var EnableTrustAnchor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "EnableTrustAnchor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/trustanchor/{trustAnchorId}/enable",
-	Code: 200})
-
-var GetCrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "GetCrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/crl/{crlId}",
-	Code: 200})
-
-var GetProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "GetProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/profile/{profileId}",
-	Code: 200})
-
-var GetSubject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "GetSubject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/subject/{subjectId}",
-	Code: 200})
-
-var GetTrustAnchor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "GetTrustAnchor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/trustanchor/{trustAnchorId}",
-	Code: 200})
-
-var ImportCrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ImportCrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/crls",
-	Code: 201})
-
-var ListCrls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListCrls",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 201}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/crls",
-	Code: 200})
-
-var ListProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/profiles",
-	Code: 200})
-
-var ListSubjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListSubjects",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/subjects",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var ListTrustAnchors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListTrustAnchors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/trustanchors",
-	Code: 200})
-
-var PutAttributeMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "PutAttributeMapping",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/profiles/{profileId}/mappings",
-	Code: 200})
-
-var PutNotificationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "PutNotificationSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/put-notifications-settings",
-	Code: 200})
-
-var ResetNotificationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ResetNotificationSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/reset-notifications-settings",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TagResource",
-	Code: 201})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UntagResource",
-	Code: 200})
-
-var UpdateCrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UpdateCrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/crl/{crlId}",
-	Code: 200})
-
-var UpdateProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UpdateProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/profile/{profileId}",
-	Code: 200})
-
-var UpdateTrustAnchor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UpdateTrustAnchor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/trustanchor/{trustAnchorId}",
-	Code: 200})
-
-var _RolesAnywhere = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "RolesAnywhere",
-}, smithy.ShapeTypeService, 0)
-
-var RolesAnywhere = smithy.NewServiceSchema(_RolesAnywhere, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AttributeMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "AttributeMapping",
-}, smithy.ShapeTypeStructure, 2)
-var AttributeMapping_certificateField *smithy.Schema
-
-var AttributeMapping_mappingRules *smithy.Schema
-
-var _AttributeMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "AttributeMappings",
-}, smithy.ShapeTypeList, 1)
-var _AttributeMappings_member *smithy.Schema
-
-var _CertificateField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CertificateField",
-}, smithy.ShapeTypeString, 0)
-
-var _CredentialSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CredentialSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CredentialSummaries_member *smithy.Schema
-
-var CredentialSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CredentialSummary",
-}, smithy.ShapeTypeStructure, 6)
-var CredentialSummary_seenAt *smithy.Schema
-
-var CredentialSummary_serialNumber *smithy.Schema
-
-var CredentialSummary_issuer *smithy.Schema
-
-var CredentialSummary_enabled *smithy.Schema
-
-var CredentialSummary_x509CertificateData *smithy.Schema
-
-var CredentialSummary_failed *smithy.Schema
-
-var CrlDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CrlDetail",
-}, smithy.ShapeTypeStructure, 8)
-var CrlDetail_crlId *smithy.Schema
-
-var CrlDetail_crlArn *smithy.Schema
-
-var CrlDetail_name *smithy.Schema
-
-var CrlDetail_enabled *smithy.Schema
-
-var CrlDetail_crlData *smithy.Schema
-
-var CrlDetail_trustAnchorArn *smithy.Schema
-
-var CrlDetail_createdAt *smithy.Schema
-
-var CrlDetail_updatedAt *smithy.Schema
-
-var _CrlDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CrlDetails",
-}, smithy.ShapeTypeList, 1)
-var _CrlDetails_member *smithy.Schema
-
-var _InstanceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "InstanceProperties",
-}, smithy.ShapeTypeList, 1)
-var _InstanceProperties_member *smithy.Schema
-
-var InstanceProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "InstanceProperty",
-}, smithy.ShapeTypeStructure, 3)
-var InstanceProperty_seenAt *smithy.Schema
-
-var InstanceProperty_properties *smithy.Schema
-
-var InstanceProperty_failed *smithy.Schema
-
-var _InstancePropertyMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "InstancePropertyMap",
-}, smithy.ShapeTypeMap, 2)
-var _InstancePropertyMap_key *smithy.Schema
-
-var _InstancePropertyMap_value *smithy.Schema
-
-var _ManagedPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ManagedPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _ManagedPolicyList_member *smithy.Schema
-
-var MappingRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "MappingRule",
-}, smithy.ShapeTypeStructure, 1)
-var MappingRule_specifier *smithy.Schema
-
-var _MappingRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "MappingRules",
-}, smithy.ShapeTypeList, 1)
-var _MappingRules_member *smithy.Schema
-
-var _NotificationChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationChannel",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationEvent",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationSetting",
-}, smithy.ShapeTypeStructure, 4)
-var NotificationSetting_enabled *smithy.Schema
-
-var NotificationSetting_event *smithy.Schema
-
-var NotificationSetting_threshold *smithy.Schema
-
-var NotificationSetting_channel *smithy.Schema
-
-var NotificationSettingDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationSettingDetail",
-}, smithy.ShapeTypeStructure, 5)
-var NotificationSettingDetail_enabled *smithy.Schema
-
-var NotificationSettingDetail_event *smithy.Schema
-
-var NotificationSettingDetail_threshold *smithy.Schema
-
-var NotificationSettingDetail_channel *smithy.Schema
-
-var NotificationSettingDetail_configuredBy *smithy.Schema
-
-var _NotificationSettingDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationSettingDetails",
-}, smithy.ShapeTypeList, 1)
-var _NotificationSettingDetails_member *smithy.Schema
-
-var NotificationSettingKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationSettingKey",
-}, smithy.ShapeTypeStructure, 2)
-var NotificationSettingKey_event *smithy.Schema
-
-var NotificationSettingKey_channel *smithy.Schema
-
-var _NotificationSettingKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationSettingKeys",
-}, smithy.ShapeTypeList, 1)
-var _NotificationSettingKeys_member *smithy.Schema
-
-var _NotificationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "NotificationSettings",
-}, smithy.ShapeTypeList, 1)
-var _NotificationSettings_member *smithy.Schema
-
-var _ProfileArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ProfileArn",
-}, smithy.ShapeTypeString, 0)
-
-var ProfileDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ProfileDetail",
-}, smithy.ShapeTypeStructure, 14)
-var ProfileDetail_profileId *smithy.Schema
-
-var ProfileDetail_profileArn *smithy.Schema
-
-var ProfileDetail_name *smithy.Schema
-
-var ProfileDetail_requireInstanceProperties *smithy.Schema
-
-var ProfileDetail_enabled *smithy.Schema
-
-var ProfileDetail_createdBy *smithy.Schema
-
-var ProfileDetail_sessionPolicy *smithy.Schema
-
-var ProfileDetail_roleArns *smithy.Schema
-
-var ProfileDetail_managedPolicyArns *smithy.Schema
-
-var ProfileDetail_createdAt *smithy.Schema
-
-var ProfileDetail_updatedAt *smithy.Schema
-
-var ProfileDetail_durationSeconds *smithy.Schema
-
-var ProfileDetail_acceptRoleSessionName *smithy.Schema
-
-var ProfileDetail_attributeMappings *smithy.Schema
-
-var _ProfileDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ProfileDetails",
-}, smithy.ShapeTypeList, 1)
-var _ProfileDetails_member *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "RoleArnList",
-}, smithy.ShapeTypeList, 1)
-var _RoleArnList_member *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var ServiceUnavailableException_retryAfterSeconds *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "Source",
-}, smithy.ShapeTypeStructure, 2)
-var Source_sourceType *smithy.Schema
-
-var Source_sourceData *smithy.Schema
-
-var SourceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "SourceData",
-}, smithy.ShapeTypeUnion, 2)
-var SourceData_x509CertificateData *smithy.Schema
-
-var SourceData_acmPcaArn *smithy.Schema
-
-var _SpecifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "SpecifierList",
-}, smithy.ShapeTypeList, 1)
-var _SpecifierList_member *smithy.Schema
-
-var SubjectDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "SubjectDetail",
-}, smithy.ShapeTypeStructure, 9)
-var SubjectDetail_subjectArn *smithy.Schema
-
-var SubjectDetail_subjectId *smithy.Schema
-
-var SubjectDetail_enabled *smithy.Schema
-
-var SubjectDetail_x509Subject *smithy.Schema
-
-var SubjectDetail_lastSeenAt *smithy.Schema
-
-var SubjectDetail_createdAt *smithy.Schema
-
-var SubjectDetail_updatedAt *smithy.Schema
-
-var SubjectDetail_credentials *smithy.Schema
-
-var SubjectDetail_instanceProperties *smithy.Schema
-
-var _SubjectSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "SubjectSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SubjectSummaries_member *smithy.Schema
-
-var SubjectSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "SubjectSummary",
-}, smithy.ShapeTypeStructure, 7)
-var SubjectSummary_subjectArn *smithy.Schema
-
-var SubjectSummary_subjectId *smithy.Schema
-
-var SubjectSummary_enabled *smithy.Schema
-
-var SubjectSummary_x509Subject *smithy.Schema
-
-var SubjectSummary_lastSeenAt *smithy.Schema
-
-var SubjectSummary_createdAt *smithy.Schema
-
-var SubjectSummary_updatedAt *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var _TrustAnchorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TrustAnchorArn",
-}, smithy.ShapeTypeString, 0)
-
-var TrustAnchorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TrustAnchorDetail",
-}, smithy.ShapeTypeStructure, 9)
-var TrustAnchorDetail_trustAnchorId *smithy.Schema
-
-var TrustAnchorDetail_trustAnchorArn *smithy.Schema
-
-var TrustAnchorDetail_name *smithy.Schema
-
-var TrustAnchorDetail_source *smithy.Schema
-
-var TrustAnchorDetail_enabled *smithy.Schema
-
-var TrustAnchorDetail_crlDpRevocationEnabled *smithy.Schema
-
-var TrustAnchorDetail_createdAt *smithy.Schema
-
-var TrustAnchorDetail_updatedAt *smithy.Schema
-
-var TrustAnchorDetail_notificationSettings *smithy.Schema
-
-var _TrustAnchorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TrustAnchorDetails",
-}, smithy.ShapeTypeList, 1)
-var _TrustAnchorDetails_member *smithy.Schema
-
-var _TrustAnchorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TrustAnchorType",
-}, smithy.ShapeTypeString, 0)
-
-var _Uuid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "Uuid",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CreateProfileRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateProfileRequest_name *smithy.Schema
-
-var CreateProfileRequest_requireInstanceProperties *smithy.Schema
-
-var CreateProfileRequest_sessionPolicy *smithy.Schema
-
-var CreateProfileRequest_roleArns *smithy.Schema
-
-var CreateProfileRequest_managedPolicyArns *smithy.Schema
-
-var CreateProfileRequest_durationSeconds *smithy.Schema
-
-var CreateProfileRequest_enabled *smithy.Schema
-
-var CreateProfileRequest_tags *smithy.Schema
-
-var CreateProfileRequest_acceptRoleSessionName *smithy.Schema
-
-var ProfileDetailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ProfileDetailResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ProfileDetailResponse_profile *smithy.Schema
-
-var CreateTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CreateTrustAnchorRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateTrustAnchorRequest_name *smithy.Schema
-
-var CreateTrustAnchorRequest_source *smithy.Schema
-
-var CreateTrustAnchorRequest_enabled *smithy.Schema
-
-var CreateTrustAnchorRequest_crlDpRevocationEnabled *smithy.Schema
-
-var CreateTrustAnchorRequest_tags *smithy.Schema
-
-var CreateTrustAnchorRequest_notificationSettings *smithy.Schema
-
-var TrustAnchorDetailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TrustAnchorDetailResponse",
-}, smithy.ShapeTypeStructure, 1)
-var TrustAnchorDetailResponse_trustAnchor *smithy.Schema
-
-var DeleteAttributeMappingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DeleteAttributeMappingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteAttributeMappingRequest_profileId *smithy.Schema
-
-var DeleteAttributeMappingRequest_certificateField *smithy.Schema
-
-var DeleteAttributeMappingRequest_specifiers *smithy.Schema
-
-var DeleteAttributeMappingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "DeleteAttributeMappingResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAttributeMappingResponse_profile *smithy.Schema
-
-var ScalarCrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ScalarCrlRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ScalarCrlRequest_crlId *smithy.Schema
-
-var CrlDetailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "CrlDetailResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CrlDetailResponse_crl *smithy.Schema
-
-var ScalarProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ScalarProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ScalarProfileRequest_profileId *smithy.Schema
-
-var ScalarTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ScalarTrustAnchorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ScalarTrustAnchorRequest_trustAnchorId *smithy.Schema
-
-var ScalarSubjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ScalarSubjectRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ScalarSubjectRequest_subjectId *smithy.Schema
-
-var SubjectDetailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "SubjectDetailResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SubjectDetailResponse_subject *smithy.Schema
-
-var ImportCrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ImportCrlRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ImportCrlRequest_name *smithy.Schema
-
-var ImportCrlRequest_crlData *smithy.Schema
-
-var ImportCrlRequest_enabled *smithy.Schema
-
-var ImportCrlRequest_tags *smithy.Schema
-
-var ImportCrlRequest_trustAnchorArn *smithy.Schema
-
-var ListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRequest_nextToken *smithy.Schema
-
-var ListRequest_pageSize *smithy.Schema
-
-var ListCrlsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListCrlsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCrlsResponse_nextToken *smithy.Schema
-
-var ListCrlsResponse_crls *smithy.Schema
-
-var ListProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProfilesResponse_nextToken *smithy.Schema
-
-var ListProfilesResponse_profiles *smithy.Schema
-
-var ListSubjectsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListSubjectsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubjectsResponse_subjects *smithy.Schema
-
-var ListSubjectsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTrustAnchorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ListTrustAnchorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrustAnchorsResponse_nextToken *smithy.Schema
-
-var ListTrustAnchorsResponse_trustAnchors *smithy.Schema
-
-var PutAttributeMappingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "PutAttributeMappingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutAttributeMappingRequest_profileId *smithy.Schema
-
-var PutAttributeMappingRequest_certificateField *smithy.Schema
-
-var PutAttributeMappingRequest_mappingRules *smithy.Schema
-
-var PutAttributeMappingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "PutAttributeMappingResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutAttributeMappingResponse_profile *smithy.Schema
-
-var PutNotificationSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "PutNotificationSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutNotificationSettingsRequest_trustAnchorId *smithy.Schema
-
-var PutNotificationSettingsRequest_notificationSettings *smithy.Schema
-
-var PutNotificationSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "PutNotificationSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutNotificationSettingsResponse_trustAnchor *smithy.Schema
-
-var ResetNotificationSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ResetNotificationSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ResetNotificationSettingsRequest_trustAnchorId *smithy.Schema
-
-var ResetNotificationSettingsRequest_notificationSettingKeys *smithy.Schema
-
-var ResetNotificationSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ResetNotificationSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ResetNotificationSettingsResponse_trustAnchor *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateCrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UpdateCrlRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateCrlRequest_crlId *smithy.Schema
-
-var UpdateCrlRequest_name *smithy.Schema
-
-var UpdateCrlRequest_crlData *smithy.Schema
-
-var UpdateProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UpdateProfileRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateProfileRequest_profileId *smithy.Schema
-
-var UpdateProfileRequest_name *smithy.Schema
-
-var UpdateProfileRequest_sessionPolicy *smithy.Schema
-
-var UpdateProfileRequest_roleArns *smithy.Schema
-
-var UpdateProfileRequest_managedPolicyArns *smithy.Schema
-
-var UpdateProfileRequest_durationSeconds *smithy.Schema
-
-var UpdateProfileRequest_acceptRoleSessionName *smithy.Schema
-
-var UpdateTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "UpdateTrustAnchorRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTrustAnchorRequest_trustAnchorId *smithy.Schema
-
-var UpdateTrustAnchorRequest_name *smithy.Schema
-
-var UpdateTrustAnchorRequest_source *smithy.Schema
-
-var UpdateTrustAnchorRequest_crlDpRevocationEnabled *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	MappingRule_specifier = MappingRule.AddMember("specifier", smithyprelude.String)
-
-	_MappingRules_member = _MappingRules.AddMember("member", MappingRule)
-
-	AttributeMapping_certificateField = AttributeMapping.AddMember("certificateField", _CertificateField)
-
-	AttributeMapping_mappingRules = AttributeMapping.AddMember("mappingRules", _MappingRules)
-
-	_AttributeMappings_member = _AttributeMappings.AddMember("member", AttributeMapping)
-
-	CredentialSummary_seenAt = CredentialSummary.AddMember("seenAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CredentialSummary_serialNumber = CredentialSummary.AddMember("serialNumber", smithyprelude.String)
-
-	CredentialSummary_issuer = CredentialSummary.AddMember("issuer", smithyprelude.String)
-
-	CredentialSummary_enabled = CredentialSummary.AddMember("enabled", smithyprelude.Boolean)
-
-	CredentialSummary_x509CertificateData = CredentialSummary.AddMember("x509CertificateData", smithyprelude.String)
-
-	CredentialSummary_failed = CredentialSummary.AddMember("failed", smithyprelude.Boolean)
-
-	_CredentialSummaries_member = _CredentialSummaries.AddMember("member", CredentialSummary)
-
-	CrlDetail_crlId = CrlDetail.AddMember("crlId", _Uuid)
-
-	CrlDetail_crlArn = CrlDetail.AddMember("crlArn", smithyprelude.String)
-
-	CrlDetail_name = CrlDetail.AddMember("name", smithyprelude.String)
-
-	CrlDetail_enabled = CrlDetail.AddMember("enabled", smithyprelude.Boolean)
-
-	CrlDetail_crlData = CrlDetail.AddMember("crlData", smithyprelude.Blob)
-
-	CrlDetail_trustAnchorArn = CrlDetail.AddMember("trustAnchorArn", smithyprelude.String)
-
-	CrlDetail_createdAt = CrlDetail.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CrlDetail_updatedAt = CrlDetail.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_CrlDetails_member = _CrlDetails.AddMember("member", CrlDetail)
-
-	_InstancePropertyMap_key = _InstancePropertyMap.AddMember("key", smithyprelude.String)
-
-	_InstancePropertyMap_value = _InstancePropertyMap.AddMember("value", smithyprelude.String)
-
-	InstanceProperty_seenAt = InstanceProperty.AddMember("seenAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	InstanceProperty_properties = InstanceProperty.AddMember("properties", _InstancePropertyMap)
-
-	InstanceProperty_failed = InstanceProperty.AddMember("failed", smithyprelude.Boolean)
-
-	_InstanceProperties_member = _InstanceProperties.AddMember("member", InstanceProperty)
-
-	_ManagedPolicyList_member = _ManagedPolicyList.AddMember("member", smithyprelude.String)
-
-	NotificationSetting_enabled = NotificationSetting.AddMember("enabled", smithyprelude.Boolean)
-
-	NotificationSetting_event = NotificationSetting.AddMember("event", _NotificationEvent)
-
-	NotificationSetting_threshold = NotificationSetting.AddMember("threshold", smithyprelude.Integer)
-
-	NotificationSetting_channel = NotificationSetting.AddMember("channel", _NotificationChannel)
-
-	NotificationSettingDetail_enabled = NotificationSettingDetail.AddMember("enabled", smithyprelude.Boolean)
-
-	NotificationSettingDetail_event = NotificationSettingDetail.AddMember("event", _NotificationEvent)
-
-	NotificationSettingDetail_threshold = NotificationSettingDetail.AddMember("threshold", smithyprelude.Integer)
-
-	NotificationSettingDetail_channel = NotificationSettingDetail.AddMember("channel", _NotificationChannel)
-
-	NotificationSettingDetail_configuredBy = NotificationSettingDetail.AddMember("configuredBy", smithyprelude.String)
-
-	_NotificationSettingDetails_member = _NotificationSettingDetails.AddMember("member", NotificationSettingDetail)
-
-	NotificationSettingKey_event = NotificationSettingKey.AddMember("event", _NotificationEvent)
-
-	NotificationSettingKey_channel = NotificationSettingKey.AddMember("channel", _NotificationChannel)
-
-	_NotificationSettingKeys_member = _NotificationSettingKeys.AddMember("member", NotificationSettingKey)
-
-	_NotificationSettings_member = _NotificationSettings.AddMember("member", NotificationSetting)
-
-	_RoleArnList_member = _RoleArnList.AddMember("member", _RoleArn)
-
-	ProfileDetail_profileId = ProfileDetail.AddMember("profileId", _Uuid)
-
-	ProfileDetail_profileArn = ProfileDetail.AddMember("profileArn", _ProfileArn)
-
-	ProfileDetail_name = ProfileDetail.AddMember("name", _ResourceName)
-
-	ProfileDetail_requireInstanceProperties = ProfileDetail.AddMember("requireInstanceProperties", smithyprelude.Boolean)
-
-	ProfileDetail_enabled = ProfileDetail.AddMember("enabled", smithyprelude.Boolean)
-
-	ProfileDetail_createdBy = ProfileDetail.AddMember("createdBy", smithyprelude.String)
-
-	ProfileDetail_sessionPolicy = ProfileDetail.AddMember("sessionPolicy", smithyprelude.String)
-
-	ProfileDetail_roleArns = ProfileDetail.AddMember("roleArns", _RoleArnList)
-
-	ProfileDetail_managedPolicyArns = ProfileDetail.AddMember("managedPolicyArns", _ManagedPolicyList)
-
-	ProfileDetail_createdAt = ProfileDetail.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ProfileDetail_updatedAt = ProfileDetail.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ProfileDetail_durationSeconds = ProfileDetail.AddMember("durationSeconds", smithyprelude.Integer)
-
-	ProfileDetail_acceptRoleSessionName = ProfileDetail.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
-
-	ProfileDetail_attributeMappings = ProfileDetail.AddMember("attributeMappings", _AttributeMappings)
-
-	_ProfileDetails_member = _ProfileDetails.AddMember("member", ProfileDetail)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", smithyprelude.String)
-
-	ServiceUnavailableException_retryAfterSeconds = ServiceUnavailableException.AddMember("retryAfterSeconds", smithyprelude.Integer)
-
-	SourceData_x509CertificateData = SourceData.AddMember("x509CertificateData", smithyprelude.String)
-
-	SourceData_acmPcaArn = SourceData.AddMember("acmPcaArn", smithyprelude.String)
-
-	Source_sourceType = Source.AddMember("sourceType", _TrustAnchorType)
-
-	Source_sourceData = Source.AddMember("sourceData", SourceData)
-
-	_SpecifierList_member = _SpecifierList.AddMember("member", smithyprelude.String)
-
-	SubjectDetail_subjectArn = SubjectDetail.AddMember("subjectArn", smithyprelude.String)
-
-	SubjectDetail_subjectId = SubjectDetail.AddMember("subjectId", _Uuid)
-
-	SubjectDetail_enabled = SubjectDetail.AddMember("enabled", smithyprelude.Boolean)
-
-	SubjectDetail_x509Subject = SubjectDetail.AddMember("x509Subject", smithyprelude.String)
-
-	SubjectDetail_lastSeenAt = SubjectDetail.AddMember("lastSeenAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubjectDetail_createdAt = SubjectDetail.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubjectDetail_updatedAt = SubjectDetail.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubjectDetail_credentials = SubjectDetail.AddMember("credentials", _CredentialSummaries)
-
-	SubjectDetail_instanceProperties = SubjectDetail.AddMember("instanceProperties", _InstanceProperties)
-
-	SubjectSummary_subjectArn = SubjectSummary.AddMember("subjectArn", smithyprelude.String)
-
-	SubjectSummary_subjectId = SubjectSummary.AddMember("subjectId", _Uuid)
-
-	SubjectSummary_enabled = SubjectSummary.AddMember("enabled", smithyprelude.Boolean)
-
-	SubjectSummary_x509Subject = SubjectSummary.AddMember("x509Subject", smithyprelude.String)
-
-	SubjectSummary_lastSeenAt = SubjectSummary.AddMember("lastSeenAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubjectSummary_createdAt = SubjectSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubjectSummary_updatedAt = SubjectSummary.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_SubjectSummaries_member = _SubjectSummaries.AddMember("member", SubjectSummary)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", smithyprelude.String)
-
-	TrustAnchorDetail_trustAnchorId = TrustAnchorDetail.AddMember("trustAnchorId", _Uuid)
-
-	TrustAnchorDetail_trustAnchorArn = TrustAnchorDetail.AddMember("trustAnchorArn", smithyprelude.String)
-
-	TrustAnchorDetail_name = TrustAnchorDetail.AddMember("name", _ResourceName)
-
-	TrustAnchorDetail_source = TrustAnchorDetail.AddMember("source", Source)
-
-	TrustAnchorDetail_enabled = TrustAnchorDetail.AddMember("enabled", smithyprelude.Boolean)
-
-	TrustAnchorDetail_crlDpRevocationEnabled = TrustAnchorDetail.AddMember("crlDpRevocationEnabled", smithyprelude.Boolean)
-
-	TrustAnchorDetail_createdAt = TrustAnchorDetail.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TrustAnchorDetail_updatedAt = TrustAnchorDetail.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TrustAnchorDetail_notificationSettings = TrustAnchorDetail.AddMember("notificationSettings", _NotificationSettingDetails)
-
-	_TrustAnchorDetails_member = _TrustAnchorDetails.AddMember("member", TrustAnchorDetail)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateProfileRequest_name = CreateProfileRequest.AddMember("name", _ResourceName)
-
-	CreateProfileRequest_requireInstanceProperties = CreateProfileRequest.AddMember("requireInstanceProperties", smithyprelude.Boolean)
-
-	CreateProfileRequest_sessionPolicy = CreateProfileRequest.AddMember("sessionPolicy", smithyprelude.String)
-
-	CreateProfileRequest_roleArns = CreateProfileRequest.AddMember("roleArns", _RoleArnList)
-
-	CreateProfileRequest_managedPolicyArns = CreateProfileRequest.AddMember("managedPolicyArns", _ManagedPolicyList)
-
-	CreateProfileRequest_durationSeconds = CreateProfileRequest.AddMember("durationSeconds", smithyprelude.Integer)
-
-	CreateProfileRequest_enabled = CreateProfileRequest.AddMember("enabled", smithyprelude.Boolean)
-
-	CreateProfileRequest_tags = CreateProfileRequest.AddMember("tags", _TagList)
-
-	CreateProfileRequest_acceptRoleSessionName = CreateProfileRequest.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
-
-	ProfileDetailResponse_profile = ProfileDetailResponse.AddMember("profile", ProfileDetail)
-
-	CreateTrustAnchorRequest_name = CreateTrustAnchorRequest.AddMember("name", _ResourceName)
-
-	CreateTrustAnchorRequest_source = CreateTrustAnchorRequest.AddMember("source", Source)
-
-	CreateTrustAnchorRequest_enabled = CreateTrustAnchorRequest.AddMember("enabled", smithyprelude.Boolean)
-
-	CreateTrustAnchorRequest_crlDpRevocationEnabled = CreateTrustAnchorRequest.AddMember("crlDpRevocationEnabled", smithyprelude.Boolean)
-
-	CreateTrustAnchorRequest_tags = CreateTrustAnchorRequest.AddMember("tags", _TagList)
-
-	CreateTrustAnchorRequest_notificationSettings = CreateTrustAnchorRequest.AddMember("notificationSettings", _NotificationSettings)
-
-	TrustAnchorDetailResponse_trustAnchor = TrustAnchorDetailResponse.AddMember("trustAnchor", TrustAnchorDetail)
-
-	DeleteAttributeMappingRequest_profileId = DeleteAttributeMappingRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DeleteAttributeMappingRequest_certificateField = DeleteAttributeMappingRequest.AddMember("certificateField", _CertificateField, &smithytraits.HTTPQuery{Name: "certificateField"})
-
-	DeleteAttributeMappingRequest_specifiers = DeleteAttributeMappingRequest.AddMember("specifiers", _SpecifierList, &smithytraits.HTTPQuery{Name: "specifiers"})
-
-	DeleteAttributeMappingResponse_profile = DeleteAttributeMappingResponse.AddMember("profile", ProfileDetail)
-
-	ScalarCrlRequest_crlId = ScalarCrlRequest.AddMember("crlId", _Uuid, &smithytraits.HTTPLabel{})
-
-	CrlDetailResponse_crl = CrlDetailResponse.AddMember("crl", CrlDetail)
-
-	ScalarProfileRequest_profileId = ScalarProfileRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
-
-	ScalarTrustAnchorRequest_trustAnchorId = ScalarTrustAnchorRequest.AddMember("trustAnchorId", _Uuid, &smithytraits.HTTPLabel{})
-
-	ScalarSubjectRequest_subjectId = ScalarSubjectRequest.AddMember("subjectId", _Uuid, &smithytraits.HTTPLabel{})
-
-	SubjectDetailResponse_subject = SubjectDetailResponse.AddMember("subject", SubjectDetail)
-
-	ImportCrlRequest_name = ImportCrlRequest.AddMember("name", _ResourceName)
-
-	ImportCrlRequest_crlData = ImportCrlRequest.AddMember("crlData", smithyprelude.Blob)
-
-	ImportCrlRequest_enabled = ImportCrlRequest.AddMember("enabled", smithyprelude.Boolean)
-
-	ImportCrlRequest_tags = ImportCrlRequest.AddMember("tags", _TagList)
-
-	ImportCrlRequest_trustAnchorArn = ImportCrlRequest.AddMember("trustAnchorArn", _TrustAnchorArn)
-
-	ListRequest_nextToken = ListRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRequest_pageSize = ListRequest.AddMember("pageSize", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "pageSize"})
-
-	ListCrlsResponse_nextToken = ListCrlsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListCrlsResponse_crls = ListCrlsResponse.AddMember("crls", _CrlDetails)
-
-	ListProfilesResponse_nextToken = ListProfilesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListProfilesResponse_profiles = ListProfilesResponse.AddMember("profiles", _ProfileDetails)
-
-	ListSubjectsResponse_subjects = ListSubjectsResponse.AddMember("subjects", _SubjectSummaries)
-
-	ListSubjectsResponse_nextToken = ListSubjectsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	ListTrustAnchorsResponse_nextToken = ListTrustAnchorsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListTrustAnchorsResponse_trustAnchors = ListTrustAnchorsResponse.AddMember("trustAnchors", _TrustAnchorDetails)
-
-	PutAttributeMappingRequest_profileId = PutAttributeMappingRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
-
-	PutAttributeMappingRequest_certificateField = PutAttributeMappingRequest.AddMember("certificateField", _CertificateField)
-
-	PutAttributeMappingRequest_mappingRules = PutAttributeMappingRequest.AddMember("mappingRules", _MappingRules)
-
-	PutAttributeMappingResponse_profile = PutAttributeMappingResponse.AddMember("profile", ProfileDetail)
-
-	PutNotificationSettingsRequest_trustAnchorId = PutNotificationSettingsRequest.AddMember("trustAnchorId", _Uuid)
-
-	PutNotificationSettingsRequest_notificationSettings = PutNotificationSettingsRequest.AddMember("notificationSettings", _NotificationSettings)
-
-	PutNotificationSettingsResponse_trustAnchor = PutNotificationSettingsResponse.AddMember("trustAnchor", TrustAnchorDetail)
-
-	ResetNotificationSettingsRequest_trustAnchorId = ResetNotificationSettingsRequest.AddMember("trustAnchorId", _Uuid)
-
-	ResetNotificationSettingsRequest_notificationSettingKeys = ResetNotificationSettingsRequest.AddMember("notificationSettingKeys", _NotificationSettingKeys)
-
-	ResetNotificationSettingsResponse_trustAnchor = ResetNotificationSettingsResponse.AddMember("trustAnchor", TrustAnchorDetail)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AmazonResourceName)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AmazonResourceName)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UpdateCrlRequest_crlId = UpdateCrlRequest.AddMember("crlId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateCrlRequest_name = UpdateCrlRequest.AddMember("name", _ResourceName)
-
-	UpdateCrlRequest_crlData = UpdateCrlRequest.AddMember("crlData", smithyprelude.Blob)
-
-	UpdateProfileRequest_profileId = UpdateProfileRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateProfileRequest_name = UpdateProfileRequest.AddMember("name", _ResourceName)
-
-	UpdateProfileRequest_sessionPolicy = UpdateProfileRequest.AddMember("sessionPolicy", smithyprelude.String)
-
-	UpdateProfileRequest_roleArns = UpdateProfileRequest.AddMember("roleArns", _RoleArnList)
-
-	UpdateProfileRequest_managedPolicyArns = UpdateProfileRequest.AddMember("managedPolicyArns", _ManagedPolicyList)
-
-	UpdateProfileRequest_durationSeconds = UpdateProfileRequest.AddMember("durationSeconds", smithyprelude.Integer)
-
-	UpdateProfileRequest_acceptRoleSessionName = UpdateProfileRequest.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
-
-	UpdateTrustAnchorRequest_trustAnchorId = UpdateTrustAnchorRequest.AddMember("trustAnchorId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateTrustAnchorRequest_name = UpdateTrustAnchorRequest.AddMember("name", _ResourceName)
-
-	UpdateTrustAnchorRequest_source = UpdateTrustAnchorRequest.AddMember("source", Source)
-
-	UpdateTrustAnchorRequest_crlDpRevocationEnabled = UpdateTrustAnchorRequest.AddMember("crlDpRevocationEnabled", smithyprelude.Boolean)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "certificateField"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "specifiers"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "pageSize"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAttributeMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeMapping_certificateField, &sAttributeMapping_mappingRules}}
+var m_AttributeMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeMappings_member}}
+var m_CredentialSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CredentialSummaries_member}}
+var mCredentialSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCredentialSummary_seenAt, &sCredentialSummary_serialNumber, &sCredentialSummary_issuer, &sCredentialSummary_enabled, &sCredentialSummary_x509CertificateData, &sCredentialSummary_failed}}
+var mCrlDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCrlDetail_crlId, &sCrlDetail_crlArn, &sCrlDetail_name, &sCrlDetail_enabled, &sCrlDetail_crlData, &sCrlDetail_trustAnchorArn, &sCrlDetail_createdAt, &sCrlDetail_updatedAt}}
+var m_CrlDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_CrlDetails_member}}
+var m_InstanceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceProperties_member}}
+var mInstanceProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceProperty_seenAt, &sInstanceProperty_properties, &sInstanceProperty_failed}}
+var m_InstancePropertyMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstancePropertyMap_key, &s_InstancePropertyMap_value}}
+var m_ManagedPolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedPolicyList_member}}
+var mMappingRule = smithy.SchemaMembers{List: []*smithy.Schema{&sMappingRule_specifier}}
+var m_MappingRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_MappingRules_member}}
+var mNotificationSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationSetting_enabled, &sNotificationSetting_event, &sNotificationSetting_threshold, &sNotificationSetting_channel}}
+var mNotificationSettingDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationSettingDetail_enabled, &sNotificationSettingDetail_event, &sNotificationSettingDetail_threshold, &sNotificationSettingDetail_channel, &sNotificationSettingDetail_configuredBy}}
+var m_NotificationSettingDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationSettingDetails_member}}
+var mNotificationSettingKey = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationSettingKey_event, &sNotificationSettingKey_channel}}
+var m_NotificationSettingKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationSettingKeys_member}}
+var m_NotificationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationSettings_member}}
+var mProfileDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sProfileDetail_profileId, &sProfileDetail_profileArn, &sProfileDetail_name, &sProfileDetail_requireInstanceProperties, &sProfileDetail_enabled, &sProfileDetail_createdBy, &sProfileDetail_sessionPolicy, &sProfileDetail_roleArns, &sProfileDetail_managedPolicyArns, &sProfileDetail_createdAt, &sProfileDetail_updatedAt, &sProfileDetail_durationSeconds, &sProfileDetail_acceptRoleSessionName, &sProfileDetail_attributeMappings}, Hash: &hProfileDetail}
+var m_ProfileDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProfileDetails_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var m_RoleArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RoleArnList_member}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message, &sServiceUnavailableException_retryAfterSeconds}}
+var mSource = smithy.SchemaMembers{List: []*smithy.Schema{&sSource_sourceType, &sSource_sourceData}}
+var mSourceData = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceData_x509CertificateData, &sSourceData_acmPcaArn}}
+var m_SpecifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SpecifierList_member}}
+var mSubjectDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectDetail_subjectArn, &sSubjectDetail_subjectId, &sSubjectDetail_enabled, &sSubjectDetail_x509Subject, &sSubjectDetail_lastSeenAt, &sSubjectDetail_createdAt, &sSubjectDetail_updatedAt, &sSubjectDetail_credentials, &sSubjectDetail_instanceProperties}, Hash: &hSubjectDetail}
+var m_SubjectSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubjectSummaries_member}}
+var mSubjectSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectSummary_subjectArn, &sSubjectSummary_subjectId, &sSubjectSummary_enabled, &sSubjectSummary_x509Subject, &sSubjectSummary_lastSeenAt, &sSubjectSummary_createdAt, &sSubjectSummary_updatedAt}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mTrustAnchorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustAnchorDetail_trustAnchorId, &sTrustAnchorDetail_trustAnchorArn, &sTrustAnchorDetail_name, &sTrustAnchorDetail_source, &sTrustAnchorDetail_enabled, &sTrustAnchorDetail_crlDpRevocationEnabled, &sTrustAnchorDetail_createdAt, &sTrustAnchorDetail_updatedAt, &sTrustAnchorDetail_notificationSettings}, Hash: &hTrustAnchorDetail}
+var m_TrustAnchorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustAnchorDetails_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProfileRequest_name, &sCreateProfileRequest_requireInstanceProperties, &sCreateProfileRequest_sessionPolicy, &sCreateProfileRequest_roleArns, &sCreateProfileRequest_managedPolicyArns, &sCreateProfileRequest_durationSeconds, &sCreateProfileRequest_enabled, &sCreateProfileRequest_tags, &sCreateProfileRequest_acceptRoleSessionName}, Hash: &hCreateProfileRequest}
+var mProfileDetailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sProfileDetailResponse_profile}}
+var mCreateTrustAnchorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrustAnchorRequest_name, &sCreateTrustAnchorRequest_source, &sCreateTrustAnchorRequest_enabled, &sCreateTrustAnchorRequest_crlDpRevocationEnabled, &sCreateTrustAnchorRequest_tags, &sCreateTrustAnchorRequest_notificationSettings}}
+var mTrustAnchorDetailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustAnchorDetailResponse_trustAnchor}}
+var mDeleteAttributeMappingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAttributeMappingRequest_profileId, &sDeleteAttributeMappingRequest_certificateField, &sDeleteAttributeMappingRequest_specifiers}}
+var mDeleteAttributeMappingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAttributeMappingResponse_profile}}
+var mScalarCrlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sScalarCrlRequest_crlId}}
+var mCrlDetailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCrlDetailResponse_crl}}
+var mScalarProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sScalarProfileRequest_profileId}}
+var mScalarTrustAnchorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sScalarTrustAnchorRequest_trustAnchorId}}
+var mScalarSubjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sScalarSubjectRequest_subjectId}}
+var mSubjectDetailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectDetailResponse_subject}}
+var mImportCrlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportCrlRequest_name, &sImportCrlRequest_crlData, &sImportCrlRequest_enabled, &sImportCrlRequest_tags, &sImportCrlRequest_trustAnchorArn}}
+var mListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRequest_nextToken, &sListRequest_pageSize}}
+var mListCrlsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrlsResponse_nextToken, &sListCrlsResponse_crls}}
+var mListProfilesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProfilesResponse_nextToken, &sListProfilesResponse_profiles}}
+var mListSubjectsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubjectsResponse_subjects, &sListSubjectsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListTrustAnchorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrustAnchorsResponse_nextToken, &sListTrustAnchorsResponse_trustAnchors}}
+var mPutAttributeMappingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAttributeMappingRequest_profileId, &sPutAttributeMappingRequest_certificateField, &sPutAttributeMappingRequest_mappingRules}}
+var mPutAttributeMappingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAttributeMappingResponse_profile}}
+var mPutNotificationSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutNotificationSettingsRequest_trustAnchorId, &sPutNotificationSettingsRequest_notificationSettings}}
+var mPutNotificationSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutNotificationSettingsResponse_trustAnchor}}
+var mResetNotificationSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetNotificationSettingsRequest_trustAnchorId, &sResetNotificationSettingsRequest_notificationSettingKeys}}
+var mResetNotificationSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResetNotificationSettingsResponse_trustAnchor}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateCrlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCrlRequest_crlId, &sUpdateCrlRequest_name, &sUpdateCrlRequest_crlData}}
+var mUpdateProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProfileRequest_profileId, &sUpdateProfileRequest_name, &sUpdateProfileRequest_sessionPolicy, &sUpdateProfileRequest_roleArns, &sUpdateProfileRequest_managedPolicyArns, &sUpdateProfileRequest_durationSeconds, &sUpdateProfileRequest_acceptRoleSessionName}}
+var mUpdateTrustAnchorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrustAnchorRequest_trustAnchorId, &sUpdateTrustAnchorRequest_name, &sUpdateTrustAnchorRequest_source, &sUpdateTrustAnchorRequest_crlDpRevocationEnabled}}
+
+var hProfileDetail = smithy.MemberHash{Seed: 46, Slots: []uint16{
+	0, 0, 6, 0, 0, 0, 0, 1, 9, 12, 0, 11, 0, 0, 5, 0, 10, 3, 0, 0, 13, 0, 0, 8,
+	14, 0, 2, 0, 0, 7, 4, 0,
+}}
+var hSubjectDetail = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	2, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0, 1, 3, 0, 0, 6, 0, 0, 0, 0, 4, 0, 0,
+	0, 0, 0, 0, 0, 7, 0, 5,
+}}
+var hTrustAnchorDetail = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 9, 3, 2, 0, 7, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4,
+	1, 0, 5, 0, 0, 0, 0, 0,
+}}
+var hCreateProfileRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 7, 8, 0, 1, 0, 0, 0, 0, 0, 5, 3, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
+	0, 9, 2, 0, 0, 6, 0, 0,
+}}
+
+var sCreateProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfile, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateProfile})
+var sCreateTrustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustAnchor, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateTrustAnchor})
+var sDeleteAttributeMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttributeMapping, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAttributeMapping})
+var sDeleteCrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCrl, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCrl})
+var sDeleteProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProfile, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProfile})
+var sDeleteTrustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustAnchor, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTrustAnchor})
+var sDisableCrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableCrl, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDisableCrl})
+var sDisableProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableProfile, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDisableProfile})
+var sDisableTrustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableTrustAnchor, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDisableTrustAnchor})
+var sEnableCrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableCrl, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eEnableCrl})
+var sEnableProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableProfile, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eEnableProfile})
+var sEnableTrustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableTrustAnchor, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eEnableTrustAnchor})
+var sGetCrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCrl, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetCrl})
+var sGetProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProfile, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetProfile})
+var sGetSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubject, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetSubject})
+var sGetTrustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustAnchor, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetTrustAnchor})
+var sImportCrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCrl, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eImportCrl})
+var sListCrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrls, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListCrls})
+var sListProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfiles, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListProfiles})
+var sListSubjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubjects, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListSubjects})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTrustAnchors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustAnchors, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListTrustAnchors})
+var sPutAttributeMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAttributeMapping, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ePutAttributeMapping})
+var sPutNotificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutNotificationSettings, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ePutNotificationSettings})
+var sResetNotificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetNotificationSettings, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eResetNotificationSettings})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateCrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCrl, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCrl})
+var sUpdateProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfile, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProfile})
+var sUpdateTrustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrustAnchor, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTrustAnchor})
+var s_RolesAnywhere = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RolesAnywhere, Type: smithy.ShapeTypeService, Ext: &e_RolesAnywhere})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sAttributeMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeMapping, Members: &mAttributeMapping, Type: smithy.ShapeTypeStructure, Ext: &eAttributeMapping})
+var sAttributeMapping_certificateField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateField", ID: &i_CertificateField, Type: smithy.ShapeTypeString, Ext: &eAttributeMapping_certificateField})
+var sAttributeMapping_mappingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mappingRules", ID: &i_MappingRules, Members: &m_MappingRules, Type: smithy.ShapeTypeList, Ext: &eAttributeMapping_mappingRules})
+var s_AttributeMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeMappings, Members: &m_AttributeMappings, Type: smithy.ShapeTypeList, Ext: &e_AttributeMappings})
+var s_AttributeMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeMapping, Members: &mAttributeMapping, Type: smithy.ShapeTypeStructure, Ext: &e_AttributeMappings_member})
+var s_CertificateField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateField, Type: smithy.ShapeTypeString, Ext: &e_CertificateField})
+var s_CredentialSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CredentialSummaries, Members: &m_CredentialSummaries, Type: smithy.ShapeTypeList, Ext: &e_CredentialSummaries})
+var s_CredentialSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCredentialSummary, Members: &mCredentialSummary, Type: smithy.ShapeTypeStructure, Ext: &e_CredentialSummaries_member})
+var sCredentialSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredentialSummary, Members: &mCredentialSummary, Type: smithy.ShapeTypeStructure, Ext: &eCredentialSummary})
+var sCredentialSummary_seenAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seenAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eCredentialSummary_seenAt})
+var sCredentialSummary_serialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serialNumber", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCredentialSummary_serialNumber})
+var sCredentialSummary_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCredentialSummary_issuer})
+var sCredentialSummary_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCredentialSummary_enabled})
+var sCredentialSummary_x509CertificateData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "x509CertificateData", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCredentialSummary_x509CertificateData})
+var sCredentialSummary_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCredentialSummary_failed})
+var sCrlDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrlDetail, Members: &mCrlDetail, Type: smithy.ShapeTypeStructure, Ext: &eCrlDetail})
+var sCrlDetail_crlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCrlDetail_crlId})
+var sCrlDetail_crlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCrlDetail_crlArn})
+var sCrlDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCrlDetail_name})
+var sCrlDetail_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCrlDetail_enabled})
+var sCrlDetail_crlData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlData", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eCrlDetail_crlData})
+var sCrlDetail_trustAnchorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCrlDetail_trustAnchorArn})
+var sCrlDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eCrlDetail_createdAt})
+var sCrlDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eCrlDetail_updatedAt})
+var s_CrlDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrlDetails, Members: &m_CrlDetails, Type: smithy.ShapeTypeList, Ext: &e_CrlDetails})
+var s_CrlDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrlDetail, Members: &mCrlDetail, Type: smithy.ShapeTypeStructure, Ext: &e_CrlDetails_member})
+var s_InstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceProperties, Members: &m_InstanceProperties, Type: smithy.ShapeTypeList, Ext: &e_InstanceProperties})
+var s_InstanceProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstanceProperty, Members: &mInstanceProperty, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceProperties_member})
+var sInstanceProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceProperty, Members: &mInstanceProperty, Type: smithy.ShapeTypeStructure, Ext: &eInstanceProperty})
+var sInstanceProperty_seenAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seenAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eInstanceProperty_seenAt})
+var sInstanceProperty_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_InstancePropertyMap, Members: &m_InstancePropertyMap, Type: smithy.ShapeTypeMap, Ext: &eInstanceProperty_properties})
+var sInstanceProperty_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eInstanceProperty_failed})
+var s_InstancePropertyMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstancePropertyMap, Members: &m_InstancePropertyMap, Type: smithy.ShapeTypeMap, Ext: &e_InstancePropertyMap})
+var s_InstancePropertyMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_InstancePropertyMap_key})
+var s_InstancePropertyMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_InstancePropertyMap_value})
+var s_ManagedPolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedPolicyList, Members: &m_ManagedPolicyList, Type: smithy.ShapeTypeList, Ext: &e_ManagedPolicyList})
+var s_ManagedPolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ManagedPolicyList_member})
+var sMappingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMappingRule, Members: &mMappingRule, Type: smithy.ShapeTypeStructure, Ext: &eMappingRule})
+var sMappingRule_specifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMappingRule_specifier})
+var s_MappingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MappingRules, Members: &m_MappingRules, Type: smithy.ShapeTypeList, Ext: &e_MappingRules})
+var s_MappingRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMappingRule, Members: &mMappingRule, Type: smithy.ShapeTypeStructure, Ext: &e_MappingRules_member})
+var s_NotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationChannel, Type: smithy.ShapeTypeString, Ext: &e_NotificationChannel})
+var s_NotificationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationEvent, Type: smithy.ShapeTypeString, Ext: &e_NotificationEvent})
+var sNotificationSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationSetting, Members: &mNotificationSetting, Type: smithy.ShapeTypeStructure, Ext: &eNotificationSetting})
+var sNotificationSetting_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eNotificationSetting_enabled})
+var sNotificationSetting_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &i_NotificationEvent, Type: smithy.ShapeTypeString, Ext: &eNotificationSetting_event})
+var sNotificationSetting_threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threshold", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eNotificationSetting_threshold})
+var sNotificationSetting_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &i_NotificationChannel, Type: smithy.ShapeTypeString, Ext: &eNotificationSetting_channel})
+var sNotificationSettingDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationSettingDetail, Members: &mNotificationSettingDetail, Type: smithy.ShapeTypeStructure, Ext: &eNotificationSettingDetail})
+var sNotificationSettingDetail_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eNotificationSettingDetail_enabled})
+var sNotificationSettingDetail_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &i_NotificationEvent, Type: smithy.ShapeTypeString, Ext: &eNotificationSettingDetail_event})
+var sNotificationSettingDetail_threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threshold", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eNotificationSettingDetail_threshold})
+var sNotificationSettingDetail_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &i_NotificationChannel, Type: smithy.ShapeTypeString, Ext: &eNotificationSettingDetail_channel})
+var sNotificationSettingDetail_configuredBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNotificationSettingDetail_configuredBy})
+var s_NotificationSettingDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationSettingDetails, Members: &m_NotificationSettingDetails, Type: smithy.ShapeTypeList, Ext: &e_NotificationSettingDetails})
+var s_NotificationSettingDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationSettingDetail, Members: &mNotificationSettingDetail, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationSettingDetails_member})
+var sNotificationSettingKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationSettingKey, Members: &mNotificationSettingKey, Type: smithy.ShapeTypeStructure, Ext: &eNotificationSettingKey})
+var sNotificationSettingKey_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &i_NotificationEvent, Type: smithy.ShapeTypeString, Ext: &eNotificationSettingKey_event})
+var sNotificationSettingKey_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &i_NotificationChannel, Type: smithy.ShapeTypeString, Ext: &eNotificationSettingKey_channel})
+var s_NotificationSettingKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationSettingKeys, Members: &m_NotificationSettingKeys, Type: smithy.ShapeTypeList, Ext: &e_NotificationSettingKeys})
+var s_NotificationSettingKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationSettingKey, Members: &mNotificationSettingKey, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationSettingKeys_member})
+var s_NotificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationSettings, Members: &m_NotificationSettings, Type: smithy.ShapeTypeList, Ext: &e_NotificationSettings})
+var s_NotificationSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationSetting, Members: &mNotificationSetting, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationSettings_member})
+var s_ProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileArn, Type: smithy.ShapeTypeString, Ext: &e_ProfileArn})
+var sProfileDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfileDetail, Members: &mProfileDetail, Type: smithy.ShapeTypeStructure, Ext: &eProfileDetail})
+var sProfileDetail_profileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eProfileDetail_profileId})
+var sProfileDetail_profileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileArn", ID: &i_ProfileArn, Type: smithy.ShapeTypeString, Ext: &eProfileDetail_profileArn})
+var sProfileDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProfileDetail_name})
+var sProfileDetail_requireInstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requireInstanceProperties", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProfileDetail_requireInstanceProperties})
+var sProfileDetail_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProfileDetail_enabled})
+var sProfileDetail_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProfileDetail_createdBy})
+var sProfileDetail_sessionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionPolicy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProfileDetail_sessionPolicy})
+var sProfileDetail_roleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArns", ID: &i_RoleArnList, Members: &m_RoleArnList, Type: smithy.ShapeTypeList, Ext: &eProfileDetail_roleArns})
+var sProfileDetail_managedPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedPolicyArns", ID: &i_ManagedPolicyList, Members: &m_ManagedPolicyList, Type: smithy.ShapeTypeList, Ext: &eProfileDetail_managedPolicyArns})
+var sProfileDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eProfileDetail_createdAt})
+var sProfileDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eProfileDetail_updatedAt})
+var sProfileDetail_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eProfileDetail_durationSeconds})
+var sProfileDetail_acceptRoleSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acceptRoleSessionName", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProfileDetail_acceptRoleSessionName})
+var sProfileDetail_attributeMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeMappings", ID: &i_AttributeMappings, Members: &m_AttributeMappings, Type: smithy.ShapeTypeList, Ext: &eProfileDetail_attributeMappings})
+var s_ProfileDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileDetails, Members: &m_ProfileDetails, Type: smithy.ShapeTypeList, Ext: &e_ProfileDetails})
+var s_ProfileDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProfileDetail, Members: &mProfileDetail, Type: smithy.ShapeTypeStructure, Ext: &e_ProfileDetails_member})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_RoleArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArnList, Members: &m_RoleArnList, Type: smithy.ShapeTypeList, Ext: &e_RoleArnList})
+var s_RoleArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArnList_member})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var sServiceUnavailableException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eServiceUnavailableException_retryAfterSeconds})
+var sSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure, Ext: &eSource})
+var sSource_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &i_TrustAnchorType, Type: smithy.ShapeTypeString, Ext: &eSource_sourceType})
+var sSource_sourceData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceData", ID: &iSourceData, Members: &mSourceData, Type: smithy.ShapeTypeUnion, Ext: &eSource_sourceData})
+var sSourceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceData, Members: &mSourceData, Type: smithy.ShapeTypeUnion, Ext: &eSourceData})
+var sSourceData_x509CertificateData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "x509CertificateData", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceData_x509CertificateData})
+var sSourceData_acmPcaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acmPcaArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceData_acmPcaArn})
+var s_SpecifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpecifierList, Members: &m_SpecifierList, Type: smithy.ShapeTypeList, Ext: &e_SpecifierList})
+var s_SpecifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SpecifierList_member})
+var sSubjectDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectDetail, Members: &mSubjectDetail, Type: smithy.ShapeTypeStructure, Ext: &eSubjectDetail})
+var sSubjectDetail_subjectArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubjectDetail_subjectArn})
+var sSubjectDetail_subjectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eSubjectDetail_subjectId})
+var sSubjectDetail_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSubjectDetail_enabled})
+var sSubjectDetail_x509Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "x509Subject", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubjectDetail_x509Subject})
+var sSubjectDetail_lastSeenAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSeenAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eSubjectDetail_lastSeenAt})
+var sSubjectDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eSubjectDetail_createdAt})
+var sSubjectDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eSubjectDetail_updatedAt})
+var sSubjectDetail_credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentials", ID: &i_CredentialSummaries, Members: &m_CredentialSummaries, Type: smithy.ShapeTypeList, Ext: &eSubjectDetail_credentials})
+var sSubjectDetail_instanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceProperties", ID: &i_InstanceProperties, Members: &m_InstanceProperties, Type: smithy.ShapeTypeList, Ext: &eSubjectDetail_instanceProperties})
+var s_SubjectSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectSummaries, Members: &m_SubjectSummaries, Type: smithy.ShapeTypeList, Ext: &e_SubjectSummaries})
+var s_SubjectSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubjectSummary, Members: &mSubjectSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SubjectSummaries_member})
+var sSubjectSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectSummary, Members: &mSubjectSummary, Type: smithy.ShapeTypeStructure, Ext: &eSubjectSummary})
+var sSubjectSummary_subjectArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubjectSummary_subjectArn})
+var sSubjectSummary_subjectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eSubjectSummary_subjectId})
+var sSubjectSummary_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSubjectSummary_enabled})
+var sSubjectSummary_x509Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "x509Subject", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubjectSummary_x509Subject})
+var sSubjectSummary_lastSeenAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSeenAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eSubjectSummary_lastSeenAt})
+var sSubjectSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eSubjectSummary_createdAt})
+var sSubjectSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eSubjectSummary_updatedAt})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var s_TrustAnchorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustAnchorArn, Type: smithy.ShapeTypeString, Ext: &e_TrustAnchorArn})
+var sTrustAnchorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustAnchorDetail, Members: &mTrustAnchorDetail, Type: smithy.ShapeTypeStructure, Ext: &eTrustAnchorDetail})
+var sTrustAnchorDetail_trustAnchorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eTrustAnchorDetail_trustAnchorId})
+var sTrustAnchorDetail_trustAnchorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTrustAnchorDetail_trustAnchorArn})
+var sTrustAnchorDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eTrustAnchorDetail_name})
+var sTrustAnchorDetail_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure, Ext: &eTrustAnchorDetail_source})
+var sTrustAnchorDetail_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eTrustAnchorDetail_enabled})
+var sTrustAnchorDetail_crlDpRevocationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlDpRevocationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eTrustAnchorDetail_crlDpRevocationEnabled})
+var sTrustAnchorDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eTrustAnchorDetail_createdAt})
+var sTrustAnchorDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eTrustAnchorDetail_updatedAt})
+var sTrustAnchorDetail_notificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationSettings", ID: &i_NotificationSettingDetails, Members: &m_NotificationSettingDetails, Type: smithy.ShapeTypeList, Ext: &eTrustAnchorDetail_notificationSettings})
+var s_TrustAnchorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustAnchorDetails, Members: &m_TrustAnchorDetails, Type: smithy.ShapeTypeList, Ext: &e_TrustAnchorDetails})
+var s_TrustAnchorDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustAnchorDetail, Members: &mTrustAnchorDetail, Type: smithy.ShapeTypeStructure, Ext: &e_TrustAnchorDetails_member})
+var s_TrustAnchorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustAnchorType, Type: smithy.ShapeTypeString, Ext: &e_TrustAnchorType})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &e_Uuid})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfileRequest, Members: &mCreateProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProfileRequest})
+var sCreateProfileRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateProfileRequest_name})
+var sCreateProfileRequest_requireInstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requireInstanceProperties", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateProfileRequest_requireInstanceProperties})
+var sCreateProfileRequest_sessionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionPolicy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateProfileRequest_sessionPolicy})
+var sCreateProfileRequest_roleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArns", ID: &i_RoleArnList, Members: &m_RoleArnList, Type: smithy.ShapeTypeList, Ext: &eCreateProfileRequest_roleArns})
+var sCreateProfileRequest_managedPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedPolicyArns", ID: &i_ManagedPolicyList, Members: &m_ManagedPolicyList, Type: smithy.ShapeTypeList, Ext: &eCreateProfileRequest_managedPolicyArns})
+var sCreateProfileRequest_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCreateProfileRequest_durationSeconds})
+var sCreateProfileRequest_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateProfileRequest_enabled})
+var sCreateProfileRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateProfileRequest_tags})
+var sCreateProfileRequest_acceptRoleSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acceptRoleSessionName", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateProfileRequest_acceptRoleSessionName})
+var sProfileDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfileDetailResponse, Members: &mProfileDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &eProfileDetailResponse})
+var sProfileDetailResponse_profile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profile", ID: &iProfileDetail, Members: &mProfileDetail, Type: smithy.ShapeTypeStructure, Ext: &eProfileDetailResponse_profile})
+var sCreateTrustAnchorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustAnchorRequest, Members: &mCreateTrustAnchorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTrustAnchorRequest})
+var sCreateTrustAnchorRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateTrustAnchorRequest_name})
+var sCreateTrustAnchorRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateTrustAnchorRequest_source})
+var sCreateTrustAnchorRequest_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateTrustAnchorRequest_enabled})
+var sCreateTrustAnchorRequest_crlDpRevocationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlDpRevocationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateTrustAnchorRequest_crlDpRevocationEnabled})
+var sCreateTrustAnchorRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateTrustAnchorRequest_tags})
+var sCreateTrustAnchorRequest_notificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationSettings", ID: &i_NotificationSettings, Members: &m_NotificationSettings, Type: smithy.ShapeTypeList, Ext: &eCreateTrustAnchorRequest_notificationSettings})
+var sTrustAnchorDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustAnchorDetailResponse, Members: &mTrustAnchorDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &eTrustAnchorDetailResponse})
+var sTrustAnchorDetailResponse_trustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchor", ID: &iTrustAnchorDetail, Members: &mTrustAnchorDetail, Type: smithy.ShapeTypeStructure, Ext: &eTrustAnchorDetailResponse_trustAnchor})
+var sDeleteAttributeMappingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttributeMappingRequest, Members: &mDeleteAttributeMappingRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAttributeMappingRequest})
+var sDeleteAttributeMappingRequest_profileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eDeleteAttributeMappingRequest_profileId})
+var sDeleteAttributeMappingRequest_certificateField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateField", ID: &i_CertificateField, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteAttributeMappingRequest_certificateField})
+var sDeleteAttributeMappingRequest_specifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specifiers", ID: &i_SpecifierList, Members: &m_SpecifierList, Traits: &t39, Type: smithy.ShapeTypeList, Ext: &eDeleteAttributeMappingRequest_specifiers})
+var sDeleteAttributeMappingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttributeMappingResponse, Members: &mDeleteAttributeMappingResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAttributeMappingResponse})
+var sDeleteAttributeMappingResponse_profile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profile", ID: &iProfileDetail, Members: &mProfileDetail, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAttributeMappingResponse_profile})
+var sScalarCrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalarCrlRequest, Members: &mScalarCrlRequest, Type: smithy.ShapeTypeStructure, Ext: &eScalarCrlRequest})
+var sScalarCrlRequest_crlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eScalarCrlRequest_crlId})
+var sCrlDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrlDetailResponse, Members: &mCrlDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &eCrlDetailResponse})
+var sCrlDetailResponse_crl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crl", ID: &iCrlDetail, Members: &mCrlDetail, Type: smithy.ShapeTypeStructure, Ext: &eCrlDetailResponse_crl})
+var sScalarProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalarProfileRequest, Members: &mScalarProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eScalarProfileRequest})
+var sScalarProfileRequest_profileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eScalarProfileRequest_profileId})
+var sScalarTrustAnchorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalarTrustAnchorRequest, Members: &mScalarTrustAnchorRequest, Type: smithy.ShapeTypeStructure, Ext: &eScalarTrustAnchorRequest})
+var sScalarTrustAnchorRequest_trustAnchorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eScalarTrustAnchorRequest_trustAnchorId})
+var sScalarSubjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalarSubjectRequest, Members: &mScalarSubjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eScalarSubjectRequest})
+var sScalarSubjectRequest_subjectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eScalarSubjectRequest_subjectId})
+var sSubjectDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectDetailResponse, Members: &mSubjectDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &eSubjectDetailResponse})
+var sSubjectDetailResponse_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &iSubjectDetail, Members: &mSubjectDetail, Type: smithy.ShapeTypeStructure, Ext: &eSubjectDetailResponse_subject})
+var sImportCrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCrlRequest, Members: &mImportCrlRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportCrlRequest})
+var sImportCrlRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eImportCrlRequest_name})
+var sImportCrlRequest_crlData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlData", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eImportCrlRequest_crlData})
+var sImportCrlRequest_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eImportCrlRequest_enabled})
+var sImportCrlRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eImportCrlRequest_tags})
+var sImportCrlRequest_trustAnchorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorArn", ID: &i_TrustAnchorArn, Type: smithy.ShapeTypeString, Ext: &eImportCrlRequest_trustAnchorArn})
+var sListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequest, Members: &mListRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRequest})
+var sListRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListRequest_nextToken})
+var sListRequest_pageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pageSize", ID: &pInteger, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &eListRequest_pageSize})
+var sListCrlsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrlsResponse, Members: &mListCrlsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCrlsResponse})
+var sListCrlsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListCrlsResponse_nextToken})
+var sListCrlsResponse_crls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crls", ID: &i_CrlDetails, Members: &m_CrlDetails, Type: smithy.ShapeTypeList, Ext: &eListCrlsResponse_crls})
+var sListProfilesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfilesResponse, Members: &mListProfilesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProfilesResponse})
+var sListProfilesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListProfilesResponse_nextToken})
+var sListProfilesResponse_profiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profiles", ID: &i_ProfileDetails, Members: &m_ProfileDetails, Type: smithy.ShapeTypeList, Ext: &eListProfilesResponse_profiles})
+var sListSubjectsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubjectsResponse, Members: &mListSubjectsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSubjectsResponse})
+var sListSubjectsResponse_subjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjects", ID: &i_SubjectSummaries, Members: &m_SubjectSummaries, Type: smithy.ShapeTypeList, Ext: &eListSubjectsResponse_subjects})
+var sListSubjectsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSubjectsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sListTrustAnchorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustAnchorsResponse, Members: &mListTrustAnchorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTrustAnchorsResponse})
+var sListTrustAnchorsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListTrustAnchorsResponse_nextToken})
+var sListTrustAnchorsResponse_trustAnchors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchors", ID: &i_TrustAnchorDetails, Members: &m_TrustAnchorDetails, Type: smithy.ShapeTypeList, Ext: &eListTrustAnchorsResponse_trustAnchors})
+var sPutAttributeMappingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAttributeMappingRequest, Members: &mPutAttributeMappingRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAttributeMappingRequest})
+var sPutAttributeMappingRequest_profileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ePutAttributeMappingRequest_profileId})
+var sPutAttributeMappingRequest_certificateField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateField", ID: &i_CertificateField, Type: smithy.ShapeTypeString, Ext: &ePutAttributeMappingRequest_certificateField})
+var sPutAttributeMappingRequest_mappingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mappingRules", ID: &i_MappingRules, Members: &m_MappingRules, Type: smithy.ShapeTypeList, Ext: &ePutAttributeMappingRequest_mappingRules})
+var sPutAttributeMappingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAttributeMappingResponse, Members: &mPutAttributeMappingResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutAttributeMappingResponse})
+var sPutAttributeMappingResponse_profile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profile", ID: &iProfileDetail, Members: &mProfileDetail, Type: smithy.ShapeTypeStructure, Ext: &ePutAttributeMappingResponse_profile})
+var sPutNotificationSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutNotificationSettingsRequest, Members: &mPutNotificationSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutNotificationSettingsRequest})
+var sPutNotificationSettingsRequest_trustAnchorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &ePutNotificationSettingsRequest_trustAnchorId})
+var sPutNotificationSettingsRequest_notificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationSettings", ID: &i_NotificationSettings, Members: &m_NotificationSettings, Type: smithy.ShapeTypeList, Ext: &ePutNotificationSettingsRequest_notificationSettings})
+var sPutNotificationSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutNotificationSettingsResponse, Members: &mPutNotificationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutNotificationSettingsResponse})
+var sPutNotificationSettingsResponse_trustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchor", ID: &iTrustAnchorDetail, Members: &mTrustAnchorDetail, Type: smithy.ShapeTypeStructure, Ext: &ePutNotificationSettingsResponse_trustAnchor})
+var sResetNotificationSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetNotificationSettingsRequest, Members: &mResetNotificationSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eResetNotificationSettingsRequest})
+var sResetNotificationSettingsRequest_trustAnchorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eResetNotificationSettingsRequest_trustAnchorId})
+var sResetNotificationSettingsRequest_notificationSettingKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationSettingKeys", ID: &i_NotificationSettingKeys, Members: &m_NotificationSettingKeys, Type: smithy.ShapeTypeList, Ext: &eResetNotificationSettingsRequest_notificationSettingKeys})
+var sResetNotificationSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetNotificationSettingsResponse, Members: &mResetNotificationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eResetNotificationSettingsResponse})
+var sResetNotificationSettingsResponse_trustAnchor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchor", ID: &iTrustAnchorDetail, Members: &mTrustAnchorDetail, Type: smithy.ShapeTypeStructure, Ext: &eResetNotificationSettingsResponse_trustAnchor})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateCrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCrlRequest, Members: &mUpdateCrlRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCrlRequest})
+var sUpdateCrlRequest_crlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateCrlRequest_crlId})
+var sUpdateCrlRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateCrlRequest_name})
+var sUpdateCrlRequest_crlData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlData", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eUpdateCrlRequest_crlData})
+var sUpdateProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfileRequest, Members: &mUpdateProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProfileRequest})
+var sUpdateProfileRequest_profileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateProfileRequest_profileId})
+var sUpdateProfileRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProfileRequest_name})
+var sUpdateProfileRequest_sessionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionPolicy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateProfileRequest_sessionPolicy})
+var sUpdateProfileRequest_roleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArns", ID: &i_RoleArnList, Members: &m_RoleArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateProfileRequest_roleArns})
+var sUpdateProfileRequest_managedPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedPolicyArns", ID: &i_ManagedPolicyList, Members: &m_ManagedPolicyList, Type: smithy.ShapeTypeList, Ext: &eUpdateProfileRequest_managedPolicyArns})
+var sUpdateProfileRequest_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProfileRequest_durationSeconds})
+var sUpdateProfileRequest_acceptRoleSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acceptRoleSessionName", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateProfileRequest_acceptRoleSessionName})
+var sUpdateTrustAnchorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrustAnchorRequest, Members: &mUpdateTrustAnchorRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTrustAnchorRequest})
+var sUpdateTrustAnchorRequest_trustAnchorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustAnchorId", ID: &i_Uuid, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateTrustAnchorRequest_trustAnchorId})
+var sUpdateTrustAnchorRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateTrustAnchorRequest_name})
+var sUpdateTrustAnchorRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTrustAnchorRequest_source})
+var sUpdateTrustAnchorRequest_crlDpRevocationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crlDpRevocationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateTrustAnchorRequest_crlDpRevocationEnabled})
+
+var CreateProfile = &sCreateProfile
+
+var CreateTrustAnchor = &sCreateTrustAnchor
+
+var DeleteAttributeMapping = &sDeleteAttributeMapping
+
+var DeleteCrl = &sDeleteCrl
+
+var DeleteProfile = &sDeleteProfile
+
+var DeleteTrustAnchor = &sDeleteTrustAnchor
+
+var DisableCrl = &sDisableCrl
+
+var DisableProfile = &sDisableProfile
+
+var DisableTrustAnchor = &sDisableTrustAnchor
+
+var EnableCrl = &sEnableCrl
+
+var EnableProfile = &sEnableProfile
+
+var EnableTrustAnchor = &sEnableTrustAnchor
+
+var GetCrl = &sGetCrl
+
+var GetProfile = &sGetProfile
+
+var GetSubject = &sGetSubject
+
+var GetTrustAnchor = &sGetTrustAnchor
+
+var ImportCrl = &sImportCrl
+
+var ListCrls = &sListCrls
+
+var ListProfiles = &sListProfiles
+
+var ListSubjects = &sListSubjects
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTrustAnchors = &sListTrustAnchors
+
+var PutAttributeMapping = &sPutAttributeMapping
+
+var PutNotificationSettings = &sPutNotificationSettings
+
+var ResetNotificationSettings = &sResetNotificationSettings
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateCrl = &sUpdateCrl
+
+var UpdateProfile = &sUpdateProfile
+
+var UpdateTrustAnchor = &sUpdateTrustAnchor
+
+var _RolesAnywhere = &s_RolesAnywhere
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var AttributeMapping = &sAttributeMapping
+var AttributeMapping_certificateField = &sAttributeMapping_certificateField
+var AttributeMapping_mappingRules = &sAttributeMapping_mappingRules
+
+var _AttributeMappings = &s_AttributeMappings
+var _AttributeMappings_member = &s_AttributeMappings_member
+
+var _CertificateField = &s_CertificateField
+
+var _CredentialSummaries = &s_CredentialSummaries
+var _CredentialSummaries_member = &s_CredentialSummaries_member
+
+var CredentialSummary = &sCredentialSummary
+var CredentialSummary_seenAt = &sCredentialSummary_seenAt
+var CredentialSummary_serialNumber = &sCredentialSummary_serialNumber
+var CredentialSummary_issuer = &sCredentialSummary_issuer
+var CredentialSummary_enabled = &sCredentialSummary_enabled
+var CredentialSummary_x509CertificateData = &sCredentialSummary_x509CertificateData
+var CredentialSummary_failed = &sCredentialSummary_failed
+
+var CrlDetail = &sCrlDetail
+var CrlDetail_crlId = &sCrlDetail_crlId
+var CrlDetail_crlArn = &sCrlDetail_crlArn
+var CrlDetail_name = &sCrlDetail_name
+var CrlDetail_enabled = &sCrlDetail_enabled
+var CrlDetail_crlData = &sCrlDetail_crlData
+var CrlDetail_trustAnchorArn = &sCrlDetail_trustAnchorArn
+var CrlDetail_createdAt = &sCrlDetail_createdAt
+var CrlDetail_updatedAt = &sCrlDetail_updatedAt
+
+var _CrlDetails = &s_CrlDetails
+var _CrlDetails_member = &s_CrlDetails_member
+
+var _InstanceProperties = &s_InstanceProperties
+var _InstanceProperties_member = &s_InstanceProperties_member
+
+var InstanceProperty = &sInstanceProperty
+var InstanceProperty_seenAt = &sInstanceProperty_seenAt
+var InstanceProperty_properties = &sInstanceProperty_properties
+var InstanceProperty_failed = &sInstanceProperty_failed
+
+var _InstancePropertyMap = &s_InstancePropertyMap
+var _InstancePropertyMap_key = &s_InstancePropertyMap_key
+var _InstancePropertyMap_value = &s_InstancePropertyMap_value
+
+var _ManagedPolicyList = &s_ManagedPolicyList
+var _ManagedPolicyList_member = &s_ManagedPolicyList_member
+
+var MappingRule = &sMappingRule
+var MappingRule_specifier = &sMappingRule_specifier
+
+var _MappingRules = &s_MappingRules
+var _MappingRules_member = &s_MappingRules_member
+
+var _NotificationChannel = &s_NotificationChannel
+
+var _NotificationEvent = &s_NotificationEvent
+
+var NotificationSetting = &sNotificationSetting
+var NotificationSetting_enabled = &sNotificationSetting_enabled
+var NotificationSetting_event = &sNotificationSetting_event
+var NotificationSetting_threshold = &sNotificationSetting_threshold
+var NotificationSetting_channel = &sNotificationSetting_channel
+
+var NotificationSettingDetail = &sNotificationSettingDetail
+var NotificationSettingDetail_enabled = &sNotificationSettingDetail_enabled
+var NotificationSettingDetail_event = &sNotificationSettingDetail_event
+var NotificationSettingDetail_threshold = &sNotificationSettingDetail_threshold
+var NotificationSettingDetail_channel = &sNotificationSettingDetail_channel
+var NotificationSettingDetail_configuredBy = &sNotificationSettingDetail_configuredBy
+
+var _NotificationSettingDetails = &s_NotificationSettingDetails
+var _NotificationSettingDetails_member = &s_NotificationSettingDetails_member
+
+var NotificationSettingKey = &sNotificationSettingKey
+var NotificationSettingKey_event = &sNotificationSettingKey_event
+var NotificationSettingKey_channel = &sNotificationSettingKey_channel
+
+var _NotificationSettingKeys = &s_NotificationSettingKeys
+var _NotificationSettingKeys_member = &s_NotificationSettingKeys_member
+
+var _NotificationSettings = &s_NotificationSettings
+var _NotificationSettings_member = &s_NotificationSettings_member
+
+var _ProfileArn = &s_ProfileArn
+
+var ProfileDetail = &sProfileDetail
+var ProfileDetail_profileId = &sProfileDetail_profileId
+var ProfileDetail_profileArn = &sProfileDetail_profileArn
+var ProfileDetail_name = &sProfileDetail_name
+var ProfileDetail_requireInstanceProperties = &sProfileDetail_requireInstanceProperties
+var ProfileDetail_enabled = &sProfileDetail_enabled
+var ProfileDetail_createdBy = &sProfileDetail_createdBy
+var ProfileDetail_sessionPolicy = &sProfileDetail_sessionPolicy
+var ProfileDetail_roleArns = &sProfileDetail_roleArns
+var ProfileDetail_managedPolicyArns = &sProfileDetail_managedPolicyArns
+var ProfileDetail_createdAt = &sProfileDetail_createdAt
+var ProfileDetail_updatedAt = &sProfileDetail_updatedAt
+var ProfileDetail_durationSeconds = &sProfileDetail_durationSeconds
+var ProfileDetail_acceptRoleSessionName = &sProfileDetail_acceptRoleSessionName
+var ProfileDetail_attributeMappings = &sProfileDetail_attributeMappings
+
+var _ProfileDetails = &s_ProfileDetails
+var _ProfileDetails_member = &s_ProfileDetails_member
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var _RoleArnList = &s_RoleArnList
+var _RoleArnList_member = &s_RoleArnList_member
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+var ServiceUnavailableException_retryAfterSeconds = &sServiceUnavailableException_retryAfterSeconds
+
+var Source = &sSource
+var Source_sourceType = &sSource_sourceType
+var Source_sourceData = &sSource_sourceData
+
+var SourceData = &sSourceData
+var SourceData_x509CertificateData = &sSourceData_x509CertificateData
+var SourceData_acmPcaArn = &sSourceData_acmPcaArn
+
+var _SpecifierList = &s_SpecifierList
+var _SpecifierList_member = &s_SpecifierList_member
+
+var SubjectDetail = &sSubjectDetail
+var SubjectDetail_subjectArn = &sSubjectDetail_subjectArn
+var SubjectDetail_subjectId = &sSubjectDetail_subjectId
+var SubjectDetail_enabled = &sSubjectDetail_enabled
+var SubjectDetail_x509Subject = &sSubjectDetail_x509Subject
+var SubjectDetail_lastSeenAt = &sSubjectDetail_lastSeenAt
+var SubjectDetail_createdAt = &sSubjectDetail_createdAt
+var SubjectDetail_updatedAt = &sSubjectDetail_updatedAt
+var SubjectDetail_credentials = &sSubjectDetail_credentials
+var SubjectDetail_instanceProperties = &sSubjectDetail_instanceProperties
+
+var _SubjectSummaries = &s_SubjectSummaries
+var _SubjectSummaries_member = &s_SubjectSummaries_member
+
+var SubjectSummary = &sSubjectSummary
+var SubjectSummary_subjectArn = &sSubjectSummary_subjectArn
+var SubjectSummary_subjectId = &sSubjectSummary_subjectId
+var SubjectSummary_enabled = &sSubjectSummary_enabled
+var SubjectSummary_x509Subject = &sSubjectSummary_x509Subject
+var SubjectSummary_lastSeenAt = &sSubjectSummary_lastSeenAt
+var SubjectSummary_createdAt = &sSubjectSummary_createdAt
+var SubjectSummary_updatedAt = &sSubjectSummary_updatedAt
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var _TrustAnchorArn = &s_TrustAnchorArn
+
+var TrustAnchorDetail = &sTrustAnchorDetail
+var TrustAnchorDetail_trustAnchorId = &sTrustAnchorDetail_trustAnchorId
+var TrustAnchorDetail_trustAnchorArn = &sTrustAnchorDetail_trustAnchorArn
+var TrustAnchorDetail_name = &sTrustAnchorDetail_name
+var TrustAnchorDetail_source = &sTrustAnchorDetail_source
+var TrustAnchorDetail_enabled = &sTrustAnchorDetail_enabled
+var TrustAnchorDetail_crlDpRevocationEnabled = &sTrustAnchorDetail_crlDpRevocationEnabled
+var TrustAnchorDetail_createdAt = &sTrustAnchorDetail_createdAt
+var TrustAnchorDetail_updatedAt = &sTrustAnchorDetail_updatedAt
+var TrustAnchorDetail_notificationSettings = &sTrustAnchorDetail_notificationSettings
+
+var _TrustAnchorDetails = &s_TrustAnchorDetails
+var _TrustAnchorDetails_member = &s_TrustAnchorDetails_member
+
+var _TrustAnchorType = &s_TrustAnchorType
+
+var _Uuid = &s_Uuid
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CreateProfileRequest = &sCreateProfileRequest
+var CreateProfileRequest_name = &sCreateProfileRequest_name
+var CreateProfileRequest_requireInstanceProperties = &sCreateProfileRequest_requireInstanceProperties
+var CreateProfileRequest_sessionPolicy = &sCreateProfileRequest_sessionPolicy
+var CreateProfileRequest_roleArns = &sCreateProfileRequest_roleArns
+var CreateProfileRequest_managedPolicyArns = &sCreateProfileRequest_managedPolicyArns
+var CreateProfileRequest_durationSeconds = &sCreateProfileRequest_durationSeconds
+var CreateProfileRequest_enabled = &sCreateProfileRequest_enabled
+var CreateProfileRequest_tags = &sCreateProfileRequest_tags
+var CreateProfileRequest_acceptRoleSessionName = &sCreateProfileRequest_acceptRoleSessionName
+
+var ProfileDetailResponse = &sProfileDetailResponse
+var ProfileDetailResponse_profile = &sProfileDetailResponse_profile
+
+var CreateTrustAnchorRequest = &sCreateTrustAnchorRequest
+var CreateTrustAnchorRequest_name = &sCreateTrustAnchorRequest_name
+var CreateTrustAnchorRequest_source = &sCreateTrustAnchorRequest_source
+var CreateTrustAnchorRequest_enabled = &sCreateTrustAnchorRequest_enabled
+var CreateTrustAnchorRequest_crlDpRevocationEnabled = &sCreateTrustAnchorRequest_crlDpRevocationEnabled
+var CreateTrustAnchorRequest_tags = &sCreateTrustAnchorRequest_tags
+var CreateTrustAnchorRequest_notificationSettings = &sCreateTrustAnchorRequest_notificationSettings
+
+var TrustAnchorDetailResponse = &sTrustAnchorDetailResponse
+var TrustAnchorDetailResponse_trustAnchor = &sTrustAnchorDetailResponse_trustAnchor
+
+var DeleteAttributeMappingRequest = &sDeleteAttributeMappingRequest
+var DeleteAttributeMappingRequest_profileId = &sDeleteAttributeMappingRequest_profileId
+var DeleteAttributeMappingRequest_certificateField = &sDeleteAttributeMappingRequest_certificateField
+var DeleteAttributeMappingRequest_specifiers = &sDeleteAttributeMappingRequest_specifiers
+
+var DeleteAttributeMappingResponse = &sDeleteAttributeMappingResponse
+var DeleteAttributeMappingResponse_profile = &sDeleteAttributeMappingResponse_profile
+
+var ScalarCrlRequest = &sScalarCrlRequest
+var ScalarCrlRequest_crlId = &sScalarCrlRequest_crlId
+
+var CrlDetailResponse = &sCrlDetailResponse
+var CrlDetailResponse_crl = &sCrlDetailResponse_crl
+
+var ScalarProfileRequest = &sScalarProfileRequest
+var ScalarProfileRequest_profileId = &sScalarProfileRequest_profileId
+
+var ScalarTrustAnchorRequest = &sScalarTrustAnchorRequest
+var ScalarTrustAnchorRequest_trustAnchorId = &sScalarTrustAnchorRequest_trustAnchorId
+
+var ScalarSubjectRequest = &sScalarSubjectRequest
+var ScalarSubjectRequest_subjectId = &sScalarSubjectRequest_subjectId
+
+var SubjectDetailResponse = &sSubjectDetailResponse
+var SubjectDetailResponse_subject = &sSubjectDetailResponse_subject
+
+var ImportCrlRequest = &sImportCrlRequest
+var ImportCrlRequest_name = &sImportCrlRequest_name
+var ImportCrlRequest_crlData = &sImportCrlRequest_crlData
+var ImportCrlRequest_enabled = &sImportCrlRequest_enabled
+var ImportCrlRequest_tags = &sImportCrlRequest_tags
+var ImportCrlRequest_trustAnchorArn = &sImportCrlRequest_trustAnchorArn
+
+var ListRequest = &sListRequest
+var ListRequest_nextToken = &sListRequest_nextToken
+var ListRequest_pageSize = &sListRequest_pageSize
+
+var ListCrlsResponse = &sListCrlsResponse
+var ListCrlsResponse_nextToken = &sListCrlsResponse_nextToken
+var ListCrlsResponse_crls = &sListCrlsResponse_crls
+
+var ListProfilesResponse = &sListProfilesResponse
+var ListProfilesResponse_nextToken = &sListProfilesResponse_nextToken
+var ListProfilesResponse_profiles = &sListProfilesResponse_profiles
+
+var ListSubjectsResponse = &sListSubjectsResponse
+var ListSubjectsResponse_subjects = &sListSubjectsResponse_subjects
+var ListSubjectsResponse_nextToken = &sListSubjectsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListTrustAnchorsResponse = &sListTrustAnchorsResponse
+var ListTrustAnchorsResponse_nextToken = &sListTrustAnchorsResponse_nextToken
+var ListTrustAnchorsResponse_trustAnchors = &sListTrustAnchorsResponse_trustAnchors
+
+var PutAttributeMappingRequest = &sPutAttributeMappingRequest
+var PutAttributeMappingRequest_profileId = &sPutAttributeMappingRequest_profileId
+var PutAttributeMappingRequest_certificateField = &sPutAttributeMappingRequest_certificateField
+var PutAttributeMappingRequest_mappingRules = &sPutAttributeMappingRequest_mappingRules
+
+var PutAttributeMappingResponse = &sPutAttributeMappingResponse
+var PutAttributeMappingResponse_profile = &sPutAttributeMappingResponse_profile
+
+var PutNotificationSettingsRequest = &sPutNotificationSettingsRequest
+var PutNotificationSettingsRequest_trustAnchorId = &sPutNotificationSettingsRequest_trustAnchorId
+var PutNotificationSettingsRequest_notificationSettings = &sPutNotificationSettingsRequest_notificationSettings
+
+var PutNotificationSettingsResponse = &sPutNotificationSettingsResponse
+var PutNotificationSettingsResponse_trustAnchor = &sPutNotificationSettingsResponse_trustAnchor
+
+var ResetNotificationSettingsRequest = &sResetNotificationSettingsRequest
+var ResetNotificationSettingsRequest_trustAnchorId = &sResetNotificationSettingsRequest_trustAnchorId
+var ResetNotificationSettingsRequest_notificationSettingKeys = &sResetNotificationSettingsRequest_notificationSettingKeys
+
+var ResetNotificationSettingsResponse = &sResetNotificationSettingsResponse
+var ResetNotificationSettingsResponse_trustAnchor = &sResetNotificationSettingsResponse_trustAnchor
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateCrlRequest = &sUpdateCrlRequest
+var UpdateCrlRequest_crlId = &sUpdateCrlRequest_crlId
+var UpdateCrlRequest_name = &sUpdateCrlRequest_name
+var UpdateCrlRequest_crlData = &sUpdateCrlRequest_crlData
+
+var UpdateProfileRequest = &sUpdateProfileRequest
+var UpdateProfileRequest_profileId = &sUpdateProfileRequest_profileId
+var UpdateProfileRequest_name = &sUpdateProfileRequest_name
+var UpdateProfileRequest_sessionPolicy = &sUpdateProfileRequest_sessionPolicy
+var UpdateProfileRequest_roleArns = &sUpdateProfileRequest_roleArns
+var UpdateProfileRequest_managedPolicyArns = &sUpdateProfileRequest_managedPolicyArns
+var UpdateProfileRequest_durationSeconds = &sUpdateProfileRequest_durationSeconds
+var UpdateProfileRequest_acceptRoleSessionName = &sUpdateProfileRequest_acceptRoleSessionName
+
+var UpdateTrustAnchorRequest = &sUpdateTrustAnchorRequest
+var UpdateTrustAnchorRequest_trustAnchorId = &sUpdateTrustAnchorRequest_trustAnchorId
+var UpdateTrustAnchorRequest_name = &sUpdateTrustAnchorRequest_name
+var UpdateTrustAnchorRequest_source = &sUpdateTrustAnchorRequest_source
+var UpdateTrustAnchorRequest_crlDpRevocationEnabled = &sUpdateTrustAnchorRequest_crlDpRevocationEnabled
+
+var RolesAnywhere = &smithy.ServiceSchema{Schema: &s_RolesAnywhere, Version: "2018-05-10"}

@@ -4,5187 +4,4894 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ConfigureLogsForChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigureLogsForChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eConfigureLogsForChannel                                                            smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfiguration                                              smithy.SchemaExtensions
+	eCreateChannel                                                                      smithy.SchemaExtensions
+	eCreateLiveSource                                                                   smithy.SchemaExtensions
+	eCreatePrefetchSchedule                                                             smithy.SchemaExtensions
+	eCreateProgram                                                                      smithy.SchemaExtensions
+	eCreateSourceLocation                                                               smithy.SchemaExtensions
+	eCreateVodSource                                                                    smithy.SchemaExtensions
+	eDeleteChannel                                                                      smithy.SchemaExtensions
+	eDeleteChannelPolicy                                                                smithy.SchemaExtensions
+	eDeleteFunction                                                                     smithy.SchemaExtensions
+	eDeleteLiveSource                                                                   smithy.SchemaExtensions
+	eDeletePlaybackConfiguration                                                        smithy.SchemaExtensions
+	eDeletePrefetchSchedule                                                             smithy.SchemaExtensions
+	eDeleteProgram                                                                      smithy.SchemaExtensions
+	eDeleteSourceLocation                                                               smithy.SchemaExtensions
+	eDeleteVodSource                                                                    smithy.SchemaExtensions
+	eDescribeChannel                                                                    smithy.SchemaExtensions
+	eDescribeLiveSource                                                                 smithy.SchemaExtensions
+	eDescribeProgram                                                                    smithy.SchemaExtensions
+	eDescribeSourceLocation                                                             smithy.SchemaExtensions
+	eDescribeVodSource                                                                  smithy.SchemaExtensions
+	eGetChannelPolicy                                                                   smithy.SchemaExtensions
+	eGetChannelSchedule                                                                 smithy.SchemaExtensions
+	eGetFunction                                                                        smithy.SchemaExtensions
+	eGetPlaybackConfiguration                                                           smithy.SchemaExtensions
+	eGetPrefetchSchedule                                                                smithy.SchemaExtensions
+	eListAlerts                                                                         smithy.SchemaExtensions
+	eListChannels                                                                       smithy.SchemaExtensions
+	eListFunctions                                                                      smithy.SchemaExtensions
+	eListLiveSources                                                                    smithy.SchemaExtensions
+	eListPlaybackConfigurations                                                         smithy.SchemaExtensions
+	eListPrefetchSchedules                                                              smithy.SchemaExtensions
+	eListSourceLocations                                                                smithy.SchemaExtensions
+	eListTagsForResource                                                                smithy.SchemaExtensions
+	eListVodSources                                                                     smithy.SchemaExtensions
+	ePutChannelPolicy                                                                   smithy.SchemaExtensions
+	ePutFunction                                                                        smithy.SchemaExtensions
+	ePutPlaybackConfiguration                                                           smithy.SchemaExtensions
+	eStartChannel                                                                       smithy.SchemaExtensions
+	eStopChannel                                                                        smithy.SchemaExtensions
+	eTagResource                                                                        smithy.SchemaExtensions
+	eUntagResource                                                                      smithy.SchemaExtensions
+	eUpdateChannel                                                                      smithy.SchemaExtensions
+	eUpdateLiveSource                                                                   smithy.SchemaExtensions
+	eUpdateProgram                                                                      smithy.SchemaExtensions
+	eUpdateSourceLocation                                                               smithy.SchemaExtensions
+	eUpdateVodSource                                                                    smithy.SchemaExtensions
+	e_MediaTailor                                                                       smithy.SchemaExtensions
+	e___adsInteractionExcludeEventTypesList                                             smithy.SchemaExtensions
+	e___adsInteractionExcludeEventTypesList_member                                      smithy.SchemaExtensions
+	e___adsInteractionPublishOptInEventTypesList                                        smithy.SchemaExtensions
+	e___adsInteractionPublishOptInEventTypesList_member                                 smithy.SchemaExtensions
+	e___boolean                                                                         smithy.SchemaExtensions
+	e___integer                                                                         smithy.SchemaExtensions
+	e___integerMin1                                                                     smithy.SchemaExtensions
+	e___integerMin1Max100                                                               smithy.SchemaExtensions
+	e___listOf__string                                                                  smithy.SchemaExtensions
+	e___listOf__string_member                                                           smithy.SchemaExtensions
+	e___listOfAdBreak                                                                   smithy.SchemaExtensions
+	e___listOfAdBreak_member                                                            smithy.SchemaExtensions
+	e___listOfAlert                                                                     smithy.SchemaExtensions
+	e___listOfAlert_member                                                              smithy.SchemaExtensions
+	e___listOfAlternateMedia                                                            smithy.SchemaExtensions
+	e___listOfAlternateMedia_member                                                     smithy.SchemaExtensions
+	e___listOfAudienceMedia                                                             smithy.SchemaExtensions
+	e___listOfAudienceMedia_member                                                      smithy.SchemaExtensions
+	e___listOfAvailMatchingCriteria                                                     smithy.SchemaExtensions
+	e___listOfAvailMatchingCriteria_member                                              smithy.SchemaExtensions
+	e___listOfChannel                                                                   smithy.SchemaExtensions
+	e___listOfChannel_member                                                            smithy.SchemaExtensions
+	e___listOfFunctionsRef                                                              smithy.SchemaExtensions
+	e___listOfFunctionsRef_member                                                       smithy.SchemaExtensions
+	e___listOfFunctionsResponse                                                         smithy.SchemaExtensions
+	e___listOfFunctionsResponse_member                                                  smithy.SchemaExtensions
+	e___listOfLiveSource                                                                smithy.SchemaExtensions
+	e___listOfLiveSource_member                                                         smithy.SchemaExtensions
+	e___listOfLoggingStrategies                                                         smithy.SchemaExtensions
+	e___listOfLoggingStrategies_member                                                  smithy.SchemaExtensions
+	e___listOfPlaybackConfiguration                                                     smithy.SchemaExtensions
+	e___listOfPlaybackConfiguration_member                                              smithy.SchemaExtensions
+	e___listOfPrefetchSchedule                                                          smithy.SchemaExtensions
+	e___listOfPrefetchSchedule_member                                                   smithy.SchemaExtensions
+	e___listOfScheduleAdBreak                                                           smithy.SchemaExtensions
+	e___listOfScheduleAdBreak_member                                                    smithy.SchemaExtensions
+	e___listOfScheduleEntry                                                             smithy.SchemaExtensions
+	e___listOfScheduleEntry_member                                                      smithy.SchemaExtensions
+	e___listOfSegmentDeliveryConfiguration                                              smithy.SchemaExtensions
+	e___listOfSegmentDeliveryConfiguration_member                                       smithy.SchemaExtensions
+	e___listOfSourceLocation                                                            smithy.SchemaExtensions
+	e___listOfSourceLocation_member                                                     smithy.SchemaExtensions
+	e___listOfVodSource                                                                 smithy.SchemaExtensions
+	e___listOfVodSource_member                                                          smithy.SchemaExtensions
+	e___long                                                                            smithy.SchemaExtensions
+	e___manifestServiceExcludeEventTypesList                                            smithy.SchemaExtensions
+	e___manifestServiceExcludeEventTypesList_member                                     smithy.SchemaExtensions
+	e___manifestServicePublishOptInEventTypesList                                       smithy.SchemaExtensions
+	e___manifestServicePublishOptInEventTypesList_member                                smithy.SchemaExtensions
+	e___mapOf__string                                                                   smithy.SchemaExtensions
+	e___mapOf__string_key                                                               smithy.SchemaExtensions
+	e___mapOf__string_value                                                             smithy.SchemaExtensions
+	e___string                                                                          smithy.SchemaExtensions
+	e___timestampUnix                                                                   smithy.SchemaExtensions
+	eAccessConfiguration                                                                smithy.SchemaExtensions
+	eAccessConfiguration_AccessType                                                     smithy.SchemaExtensions
+	eAccessConfiguration_SecretsManagerAccessTokenConfiguration                         smithy.SchemaExtensions
+	eAccessType                                                                         smithy.SchemaExtensions
+	eAccessType_S3_SIGV4                                                                smithy.SchemaExtensions
+	eAccessType_SECRETS_MANAGER_ACCESS_TOKEN                                            smithy.SchemaExtensions
+	eAccessType_AUTODETECT_SIGV4                                                        smithy.SchemaExtensions
+	eAdBreak                                                                            smithy.SchemaExtensions
+	eAdBreak_MessageType                                                                smithy.SchemaExtensions
+	eAdBreak_OffsetMillis                                                               smithy.SchemaExtensions
+	eAdBreak_Slate                                                                      smithy.SchemaExtensions
+	eAdBreak_SpliceInsertMessage                                                        smithy.SchemaExtensions
+	eAdBreak_TimeSignalMessage                                                          smithy.SchemaExtensions
+	eAdBreak_AdBreakMetadata                                                            smithy.SchemaExtensions
+	e_AdBreakMetadataList                                                               smithy.SchemaExtensions
+	e_AdBreakMetadataList_member                                                        smithy.SchemaExtensions
+	e_AdBreakOpportunities                                                              smithy.SchemaExtensions
+	e_AdBreakOpportunities_member                                                       smithy.SchemaExtensions
+	eAdBreakOpportunity                                                                 smithy.SchemaExtensions
+	eAdBreakOpportunity_OffsetMillis                                                    smithy.SchemaExtensions
+	eAdConditioningConfiguration                                                        smithy.SchemaExtensions
+	eAdConditioningConfiguration_StreamingMediaFileConditioning                         smithy.SchemaExtensions
+	eAdDecisionServerConfiguration                                                      smithy.SchemaExtensions
+	eAdDecisionServerConfiguration_HttpRequest                                          smithy.SchemaExtensions
+	eAdDecisionServerConfiguration_VastResponse                                         smithy.SchemaExtensions
+	eAdMarkerPassthrough                                                                smithy.SchemaExtensions
+	eAdMarkerPassthrough_Enabled                                                        smithy.SchemaExtensions
+	eAdMarkupType                                                                       smithy.SchemaExtensions
+	eAdMarkupType_DATERANGE                                                             smithy.SchemaExtensions
+	eAdMarkupType_SCTE35_ENHANCED                                                       smithy.SchemaExtensions
+	e_adMarkupTypes                                                                     smithy.SchemaExtensions
+	e_adMarkupTypes_member                                                              smithy.SchemaExtensions
+	eAdSequencingMode                                                                   smithy.SchemaExtensions
+	eAdSequencingMode_FOLLOW_AD_SEQUENCE                                                smithy.SchemaExtensions
+	eAdSequencingMode_IGNORE_AD_SEQUENCE                                                smithy.SchemaExtensions
+	eAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE                                      smithy.SchemaExtensions
+	eAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD                                       smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType                                                     smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_AD_MARKER_FOUND                                     smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_NON_AD_MARKER_FOUND                                 smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_MAKING_ADS_REQUEST                                  smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_MODIFIED_TARGET_URL                                 smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_VAST_REDIRECT                                       smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE                                 smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE                                 smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_VAST_RESPONSE                                       smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE                            smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_FILLED_AVAIL                                        smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL                                smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_BEACON_FIRED                                        smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS                           smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED                            smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED            smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_UNKNOWN                                       smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST                                  smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST                               smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_ADS_IO                                        smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT                                   smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE                            smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT             smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE                          smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE                  smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST                   smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED                          smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES                       smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES                        smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS                         smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION                       smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI                  smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS                 smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR                          smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE                       smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED                          smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED                      smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET  smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS                   smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS                            smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE                            smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR                          smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR                      smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_BEACON_RECEIVED                                     smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR                        smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR                    smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR                   smithy.SchemaExtensions
+	eAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR               smithy.SchemaExtensions
+	eAdsInteractionLog                                                                  smithy.SchemaExtensions
+	eAdsInteractionLog_PublishOptInEventTypes                                           smithy.SchemaExtensions
+	eAdsInteractionLog_ExcludeEventTypes                                                smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType                                                smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE                               smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_RAW_ADS_REQUEST                                smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_RAW_BID_REQUEST                                smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_RAW_BID_RESPONSE                               smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY                   smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED             smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY                 smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED           smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY            smithy.SchemaExtensions
+	eAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED      smithy.SchemaExtensions
+	eAdsPersonalizationConcurrency                                                      smithy.SchemaExtensions
+	eAdsPersonalizationConcurrency_MaxConcurrentAdsRequests                             smithy.SchemaExtensions
+	eAdsPersonalizationConcurrency_EnableVodVastParallelization                         smithy.SchemaExtensions
+	eAdsPersonalizationTimeouts                                                         smithy.SchemaExtensions
+	eAdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds                           smithy.SchemaExtensions
+	eAdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds           smithy.SchemaExtensions
+	eAdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds            smithy.SchemaExtensions
+	eAdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds                   smithy.SchemaExtensions
+	eAdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds       smithy.SchemaExtensions
+	eAlert                                                                              smithy.SchemaExtensions
+	eAlert_AlertCode                                                                    smithy.SchemaExtensions
+	eAlert_AlertMessage                                                                 smithy.SchemaExtensions
+	eAlert_LastModifiedTime                                                             smithy.SchemaExtensions
+	eAlert_RelatedResourceArns                                                          smithy.SchemaExtensions
+	eAlert_ResourceArn                                                                  smithy.SchemaExtensions
+	eAlert_Category                                                                     smithy.SchemaExtensions
+	eAlertCategory                                                                      smithy.SchemaExtensions
+	eAlertCategory_SCHEDULING_ERROR                                                     smithy.SchemaExtensions
+	eAlertCategory_PLAYBACK_WARNING                                                     smithy.SchemaExtensions
+	eAlertCategory_INFO                                                                 smithy.SchemaExtensions
+	eAlternateMedia                                                                     smithy.SchemaExtensions
+	eAlternateMedia_SourceLocationName                                                  smithy.SchemaExtensions
+	eAlternateMedia_LiveSourceName                                                      smithy.SchemaExtensions
+	eAlternateMedia_VodSourceName                                                       smithy.SchemaExtensions
+	eAlternateMedia_ClipRange                                                           smithy.SchemaExtensions
+	eAlternateMedia_ScheduledStartTimeMillis                                            smithy.SchemaExtensions
+	eAlternateMedia_AdBreaks                                                            smithy.SchemaExtensions
+	eAlternateMedia_DurationMillis                                                      smithy.SchemaExtensions
+	e_ApsPublisherId                                                                    smithy.SchemaExtensions
+	eApsRegion                                                                          smithy.SchemaExtensions
+	eApsRegion_AMERICAS                                                                 smithy.SchemaExtensions
+	eApsRegion_EUROPE                                                                   smithy.SchemaExtensions
+	eApsRegion_ASIA_PACIFIC                                                             smithy.SchemaExtensions
+	eAudienceMedia                                                                      smithy.SchemaExtensions
+	eAudienceMedia_Audience                                                             smithy.SchemaExtensions
+	eAudienceMedia_AlternateMedia                                                       smithy.SchemaExtensions
+	e_Audiences                                                                         smithy.SchemaExtensions
+	e_Audiences_member                                                                  smithy.SchemaExtensions
+	eAvailMatchingCriteria                                                              smithy.SchemaExtensions
+	eAvailMatchingCriteria_DynamicVariable                                              smithy.SchemaExtensions
+	eAvailMatchingCriteria_Operator                                                     smithy.SchemaExtensions
+	eAvailSuppression                                                                   smithy.SchemaExtensions
+	eAvailSuppression_Mode                                                              smithy.SchemaExtensions
+	eAvailSuppression_Value                                                             smithy.SchemaExtensions
+	eAvailSuppression_FillPolicy                                                        smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration                                                     smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_Runtime                                             smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_Output                                              smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_MethodType                                          smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_RequestTimeoutMilliseconds                          smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_Url                                                 smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_Body                                                smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_Headers                                             smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_Cache                                               smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_TargetService                                       smithy.SchemaExtensions
+	eAwsServiceRequestConfiguration_TargetRegion                                        smithy.SchemaExtensions
+	e_AwsTargetService                                                                  smithy.SchemaExtensions
+	eBadRequestException                                                                smithy.SchemaExtensions
+	eBadRequestException_Message                                                        smithy.SchemaExtensions
+	eBeaconEventType                                                                    smithy.SchemaExtensions
+	eBeaconEventType_MUTE                                                               smithy.SchemaExtensions
+	eBeaconEventType_UNMUTE                                                             smithy.SchemaExtensions
+	eBeaconEventType_PAUSE                                                              smithy.SchemaExtensions
+	eBeaconEventType_SKIP                                                               smithy.SchemaExtensions
+	e_BeaconEventTypeList                                                               smithy.SchemaExtensions
+	e_BeaconEventTypeList_member                                                        smithy.SchemaExtensions
+	eBeaconingConfiguration                                                             smithy.SchemaExtensions
+	eBeaconingConfiguration_ClientSide                                                  smithy.SchemaExtensions
+	eBumper                                                                             smithy.SchemaExtensions
+	eBumper_EndUrl                                                                      smithy.SchemaExtensions
+	eBumper_StartUrl                                                                    smithy.SchemaExtensions
+	eCdnConfiguration                                                                   smithy.SchemaExtensions
+	eCdnConfiguration_AdSegmentUrlPrefix                                                smithy.SchemaExtensions
+	eCdnConfiguration_ContentSegmentUrlPrefix                                           smithy.SchemaExtensions
+	eChannel                                                                            smithy.SchemaExtensions
+	eChannel_Arn                                                                        smithy.SchemaExtensions
+	eChannel_ChannelName                                                                smithy.SchemaExtensions
+	eChannel_ChannelState                                                               smithy.SchemaExtensions
+	eChannel_CreationTime                                                               smithy.SchemaExtensions
+	eChannel_FillerSlate                                                                smithy.SchemaExtensions
+	eChannel_LastModifiedTime                                                           smithy.SchemaExtensions
+	eChannel_Outputs                                                                    smithy.SchemaExtensions
+	eChannel_PlaybackMode                                                               smithy.SchemaExtensions
+	eChannel_Tags                                                                       smithy.SchemaExtensions
+	eChannel_Tier                                                                       smithy.SchemaExtensions
+	eChannel_LogConfiguration                                                           smithy.SchemaExtensions
+	eChannel_Audiences                                                                  smithy.SchemaExtensions
+	eChannelState                                                                       smithy.SchemaExtensions
+	eChannelState_RUNNING                                                               smithy.SchemaExtensions
+	eChannelState_STOPPED                                                               smithy.SchemaExtensions
+	eClientSideBeaconingConfiguration                                                   smithy.SchemaExtensions
+	eClientSideBeaconingConfiguration_ReportingMode                                     smithy.SchemaExtensions
+	eClientSideBeaconingConfiguration_AdditionalEventTypes                              smithy.SchemaExtensions
+	eClientSideBeaconingMode                                                            smithy.SchemaExtensions
+	eClientSideBeaconingMode_DISABLED                                                   smithy.SchemaExtensions
+	eClientSideBeaconingMode_INSIGHTS                                                   smithy.SchemaExtensions
+	eClipRange                                                                          smithy.SchemaExtensions
+	eClipRange_EndOffsetMillis                                                          smithy.SchemaExtensions
+	eClipRange_StartOffsetMillis                                                        smithy.SchemaExtensions
+	eCompressionMethod                                                                  smithy.SchemaExtensions
+	eCompressionMethod_NONE                                                             smithy.SchemaExtensions
+	eCompressionMethod_GZIP                                                             smithy.SchemaExtensions
+	eConcurrentExecutorConfiguration                                                    smithy.SchemaExtensions
+	eConcurrentExecutorConfiguration_Runtime                                            smithy.SchemaExtensions
+	eConcurrentExecutorConfiguration_Output                                             smithy.SchemaExtensions
+	eConcurrentExecutorConfiguration_FunctionList                                       smithy.SchemaExtensions
+	eConcurrentExecutorConfiguration_TimeoutMilliseconds                                smithy.SchemaExtensions
+	eConcurrentExecutorConfiguration_MaxConcurrency                                     smithy.SchemaExtensions
+	e_ConfigurationAliasesRequest                                                       smithy.SchemaExtensions
+	e_ConfigurationAliasesRequest_key                                                   smithy.SchemaExtensions
+	e_ConfigurationAliasesRequest_value                                                 smithy.SchemaExtensions
+	e_ConfigurationAliasesResponse                                                      smithy.SchemaExtensions
+	e_ConfigurationAliasesResponse_key                                                  smithy.SchemaExtensions
+	e_ConfigurationAliasesResponse_value                                                smithy.SchemaExtensions
+	eCustomOutputConfiguration                                                          smithy.SchemaExtensions
+	eCustomOutputConfiguration_Runtime                                                  smithy.SchemaExtensions
+	eCustomOutputConfiguration_Output                                                   smithy.SchemaExtensions
+	eDashConfiguration                                                                  smithy.SchemaExtensions
+	eDashConfiguration_ManifestEndpointPrefix                                           smithy.SchemaExtensions
+	eDashConfiguration_DualStackManifestEndpointPrefix                                  smithy.SchemaExtensions
+	eDashConfiguration_MpdLocation                                                      smithy.SchemaExtensions
+	eDashConfiguration_OriginManifestType                                               smithy.SchemaExtensions
+	eDashConfigurationForPut                                                            smithy.SchemaExtensions
+	eDashConfigurationForPut_MpdLocation                                                smithy.SchemaExtensions
+	eDashConfigurationForPut_OriginManifestType                                         smithy.SchemaExtensions
+	eDashPlaylistSettings                                                               smithy.SchemaExtensions
+	eDashPlaylistSettings_ManifestWindowSeconds                                         smithy.SchemaExtensions
+	eDashPlaylistSettings_MinBufferTimeSeconds                                          smithy.SchemaExtensions
+	eDashPlaylistSettings_MinUpdatePeriodSeconds                                        smithy.SchemaExtensions
+	eDashPlaylistSettings_SuggestedPresentationDelaySeconds                             smithy.SchemaExtensions
+	eDefaultSegmentDeliveryConfiguration                                                smithy.SchemaExtensions
+	eDefaultSegmentDeliveryConfiguration_BaseUrl                                        smithy.SchemaExtensions
+	eEventName                                                                          smithy.SchemaExtensions
+	eEventName_PRE_SESSION_INITIALIZATION                                               smithy.SchemaExtensions
+	eEventName_PRE_ADS_REQUEST                                                          smithy.SchemaExtensions
+	eEventName_POST_ADS_RESPONSE                                                        smithy.SchemaExtensions
+	eEventName_PRE_MANIFEST_INSERTION                                                   smithy.SchemaExtensions
+	eFillPolicy                                                                         smithy.SchemaExtensions
+	eFillPolicy_FULL_AVAIL_ONLY                                                         smithy.SchemaExtensions
+	eFillPolicy_PARTIAL_AVAIL                                                           smithy.SchemaExtensions
+	eFunction                                                                           smithy.SchemaExtensions
+	eFunction_FunctionId                                                                smithy.SchemaExtensions
+	eFunction_FunctionType                                                              smithy.SchemaExtensions
+	eFunction_Description                                                               smithy.SchemaExtensions
+	eFunction_HttpRequestConfiguration                                                  smithy.SchemaExtensions
+	eFunction_AwsServiceRequestConfiguration                                            smithy.SchemaExtensions
+	eFunction_CustomOutputConfiguration                                                 smithy.SchemaExtensions
+	eFunction_ConcurrentExecutorConfiguration                                           smithy.SchemaExtensions
+	eFunction_SequentialExecutorConfiguration                                           smithy.SchemaExtensions
+	eFunction_VastRequestConfiguration                                                  smithy.SchemaExtensions
+	eFunction_Tags                                                                      smithy.SchemaExtensions
+	eFunction_Arn                                                                       smithy.SchemaExtensions
+	e_FunctionMapping                                                                   smithy.SchemaExtensions
+	e_FunctionMapping_key                                                               smithy.SchemaExtensions
+	e_FunctionMapping_value                                                             smithy.SchemaExtensions
+	eFunctionRef                                                                        smithy.SchemaExtensions
+	eFunctionRef_RunCondition                                                           smithy.SchemaExtensions
+	eFunctionRef_FunctionId                                                             smithy.SchemaExtensions
+	eFunctionRef_Alias                                                                  smithy.SchemaExtensions
+	eFunctionType                                                                       smithy.SchemaExtensions
+	eFunctionType_HTTP_REQUEST                                                          smithy.SchemaExtensions
+	eFunctionType_AWS_SERVICE_REQUEST                                                   smithy.SchemaExtensions
+	eFunctionType_CUSTOM_OUTPUT                                                         smithy.SchemaExtensions
+	eFunctionType_CONCURRENT_EXECUTOR                                                   smithy.SchemaExtensions
+	eFunctionType_SEQUENTIAL_EXECUTOR                                                   smithy.SchemaExtensions
+	eFunctionType_VAST_REQUEST                                                          smithy.SchemaExtensions
+	eHlsConfiguration                                                                   smithy.SchemaExtensions
+	eHlsConfiguration_ManifestEndpointPrefix                                            smithy.SchemaExtensions
+	eHlsConfiguration_DualStackManifestEndpointPrefix                                   smithy.SchemaExtensions
+	eHlsPlaylistSettings                                                                smithy.SchemaExtensions
+	eHlsPlaylistSettings_ManifestWindowSeconds                                          smithy.SchemaExtensions
+	eHlsPlaylistSettings_AdMarkupType                                                   smithy.SchemaExtensions
+	eHttpConfiguration                                                                  smithy.SchemaExtensions
+	eHttpConfiguration_BaseUrl                                                          smithy.SchemaExtensions
+	eHttpPackageConfiguration                                                           smithy.SchemaExtensions
+	eHttpPackageConfiguration_Path                                                      smithy.SchemaExtensions
+	eHttpPackageConfiguration_SourceGroup                                               smithy.SchemaExtensions
+	eHttpPackageConfiguration_Type                                                      smithy.SchemaExtensions
+	e_HttpPackageConfigurations                                                         smithy.SchemaExtensions
+	e_HttpPackageConfigurations_member                                                  smithy.SchemaExtensions
+	eHttpRequest                                                                        smithy.SchemaExtensions
+	eHttpRequest_Method                                                                 smithy.SchemaExtensions
+	eHttpRequest_Body                                                                   smithy.SchemaExtensions
+	eHttpRequest_Headers                                                                smithy.SchemaExtensions
+	eHttpRequest_CompressRequest                                                        smithy.SchemaExtensions
+	eHttpRequestCacheConfiguration                                                      smithy.SchemaExtensions
+	eHttpRequestCacheConfiguration_TtlMinimumSeconds                                    smithy.SchemaExtensions
+	eHttpRequestCacheConfiguration_TtlMaximumSeconds                                    smithy.SchemaExtensions
+	eHttpRequestCacheConfiguration_Key                                                  smithy.SchemaExtensions
+	eHttpRequestConfiguration                                                           smithy.SchemaExtensions
+	eHttpRequestConfiguration_Runtime                                                   smithy.SchemaExtensions
+	eHttpRequestConfiguration_Output                                                    smithy.SchemaExtensions
+	eHttpRequestConfiguration_MethodType                                                smithy.SchemaExtensions
+	eHttpRequestConfiguration_RequestTimeoutMilliseconds                                smithy.SchemaExtensions
+	eHttpRequestConfiguration_Url                                                       smithy.SchemaExtensions
+	eHttpRequestConfiguration_Body                                                      smithy.SchemaExtensions
+	eHttpRequestConfiguration_Headers                                                   smithy.SchemaExtensions
+	eHttpRequestConfiguration_Cache                                                     smithy.SchemaExtensions
+	eInsertionMode                                                                      smithy.SchemaExtensions
+	eInsertionMode_STITCHED_ONLY                                                        smithy.SchemaExtensions
+	eInsertionMode_PLAYER_SELECT                                                        smithy.SchemaExtensions
+	eKeyValuePair                                                                       smithy.SchemaExtensions
+	eKeyValuePair_Key                                                                   smithy.SchemaExtensions
+	eKeyValuePair_Value                                                                 smithy.SchemaExtensions
+	eListPrefetchScheduleType                                                           smithy.SchemaExtensions
+	eListPrefetchScheduleType_SINGLE                                                    smithy.SchemaExtensions
+	eListPrefetchScheduleType_RECURRING                                                 smithy.SchemaExtensions
+	eListPrefetchScheduleType_ALL                                                       smithy.SchemaExtensions
+	eLivePreRollConfiguration                                                           smithy.SchemaExtensions
+	eLivePreRollConfiguration_AdDecisionServerUrl                                       smithy.SchemaExtensions
+	eLivePreRollConfiguration_MaxDurationSeconds                                        smithy.SchemaExtensions
+	eLivePreRollConfiguration_AdDecisionServerConfiguration                             smithy.SchemaExtensions
+	eLiveSource                                                                         smithy.SchemaExtensions
+	eLiveSource_Arn                                                                     smithy.SchemaExtensions
+	eLiveSource_CreationTime                                                            smithy.SchemaExtensions
+	eLiveSource_HttpPackageConfigurations                                               smithy.SchemaExtensions
+	eLiveSource_LastModifiedTime                                                        smithy.SchemaExtensions
+	eLiveSource_LiveSourceName                                                          smithy.SchemaExtensions
+	eLiveSource_SourceLocationName                                                      smithy.SchemaExtensions
+	eLiveSource_Tags                                                                    smithy.SchemaExtensions
+	eLogConfiguration                                                                   smithy.SchemaExtensions
+	eLogConfiguration_PercentEnabled                                                    smithy.SchemaExtensions
+	eLogConfiguration_EnabledLoggingStrategies                                          smithy.SchemaExtensions
+	eLogConfiguration_AdsInteractionLog                                                 smithy.SchemaExtensions
+	eLogConfiguration_ManifestServiceInteractionLog                                     smithy.SchemaExtensions
+	eLogConfigurationForChannel                                                         smithy.SchemaExtensions
+	eLogConfigurationForChannel_LogTypes                                                smithy.SchemaExtensions
+	eLoggingStrategy                                                                    smithy.SchemaExtensions
+	eLoggingStrategy_VENDED_LOGS                                                        smithy.SchemaExtensions
+	eLoggingStrategy_LEGACY_CLOUDWATCH                                                  smithy.SchemaExtensions
+	eLogType                                                                            smithy.SchemaExtensions
+	eLogType_AS_RUN                                                                     smithy.SchemaExtensions
+	e_LogTypes                                                                          smithy.SchemaExtensions
+	e_LogTypes_member                                                                   smithy.SchemaExtensions
+	eManifestProcessingRules                                                            smithy.SchemaExtensions
+	eManifestProcessingRules_AdMarkerPassthrough                                        smithy.SchemaExtensions
+	eManifestServiceExcludeEventType                                                    smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_GENERATED_MANIFEST                                 smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ORIGIN_MANIFEST                                    smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_SESSION_INITIALIZED                                smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_TRACKING_RESPONSE                                  smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR                                smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR                              smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_UNKNOWN_HOST                                       smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_TIMEOUT_ERROR                                      smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_CONNECTION_ERROR                                   smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_IO_ERROR                                           smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_UNKNOWN_ERROR                                      smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_HOST_DISALLOWED                                    smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_PARSING_ERROR                                      smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_MANIFEST_ERROR                                     smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST                        smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_NO_MASTER_PLAYLIST                                 smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST                                  smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION                           smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_SCTE35_PARSING_ERROR                               smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST                smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST            smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO                          smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING                  smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION                  smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION                            smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION              smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION                 smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION            smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION                   smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION                   smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION                   smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION                     smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR                        smithy.SchemaExtensions
+	eManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR                    smithy.SchemaExtensions
+	eManifestServiceInteractionLog                                                      smithy.SchemaExtensions
+	eManifestServiceInteractionLog_PublishOptInEventTypes                               smithy.SchemaExtensions
+	eManifestServiceInteractionLog_ExcludeEventTypes                                    smithy.SchemaExtensions
+	eManifestServicePublishOptInEventType                                               smithy.SchemaExtensions
+	eManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY                 smithy.SchemaExtensions
+	eManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED           smithy.SchemaExtensions
+	e_MaxResults                                                                        smithy.SchemaExtensions
+	eMessageType                                                                        smithy.SchemaExtensions
+	eMessageType_SPLICE_INSERT                                                          smithy.SchemaExtensions
+	eMessageType_TIME_SIGNAL                                                            smithy.SchemaExtensions
+	eMethod                                                                             smithy.SchemaExtensions
+	eMethod_GET                                                                         smithy.SchemaExtensions
+	eMethod_POST                                                                        smithy.SchemaExtensions
+	eMethodType                                                                         smithy.SchemaExtensions
+	eMethodType_GET                                                                     smithy.SchemaExtensions
+	eMethodType_POST                                                                    smithy.SchemaExtensions
+	e_MinimumUnfilledDurationSeconds                                                    smithy.SchemaExtensions
+	eMode                                                                               smithy.SchemaExtensions
+	eMode_OFF                                                                           smithy.SchemaExtensions
+	eMode_BEHIND_LIVE_EDGE                                                              smithy.SchemaExtensions
+	eMode_AFTER_LIVE_EDGE                                                               smithy.SchemaExtensions
+	e_OpenRtbTemplateString                                                             smithy.SchemaExtensions
+	eOperator                                                                           smithy.SchemaExtensions
+	eOperator_EQUALS                                                                    smithy.SchemaExtensions
+	eOriginManifestType                                                                 smithy.SchemaExtensions
+	eOriginManifestType_SINGLE_PERIOD                                                   smithy.SchemaExtensions
+	eOriginManifestType_MULTI_PERIOD                                                    smithy.SchemaExtensions
+	ePlaybackConfiguration                                                              smithy.SchemaExtensions
+	ePlaybackConfiguration_AdDecisionServerUrl                                          smithy.SchemaExtensions
+	ePlaybackConfiguration_AvailSuppression                                             smithy.SchemaExtensions
+	ePlaybackConfiguration_Bumper                                                       smithy.SchemaExtensions
+	ePlaybackConfiguration_CdnConfiguration                                             smithy.SchemaExtensions
+	ePlaybackConfiguration_ConfigurationAliases                                         smithy.SchemaExtensions
+	ePlaybackConfiguration_DashConfiguration                                            smithy.SchemaExtensions
+	ePlaybackConfiguration_HlsConfiguration                                             smithy.SchemaExtensions
+	ePlaybackConfiguration_InsertionMode                                                smithy.SchemaExtensions
+	ePlaybackConfiguration_LivePreRollConfiguration                                     smithy.SchemaExtensions
+	ePlaybackConfiguration_LogConfiguration                                             smithy.SchemaExtensions
+	ePlaybackConfiguration_ManifestProcessingRules                                      smithy.SchemaExtensions
+	ePlaybackConfiguration_Name                                                         smithy.SchemaExtensions
+	ePlaybackConfiguration_PersonalizationThresholdSeconds                              smithy.SchemaExtensions
+	ePlaybackConfiguration_PlaybackConfigurationArn                                     smithy.SchemaExtensions
+	ePlaybackConfiguration_PlaybackEndpointPrefix                                       smithy.SchemaExtensions
+	ePlaybackConfiguration_DualStackPlaybackEndpointPrefix                              smithy.SchemaExtensions
+	ePlaybackConfiguration_SessionInitializationEndpointPrefix                          smithy.SchemaExtensions
+	ePlaybackConfiguration_DualStackSessionInitializationEndpointPrefix                 smithy.SchemaExtensions
+	ePlaybackConfiguration_SlateAdUrl                                                   smithy.SchemaExtensions
+	ePlaybackConfiguration_Tags                                                         smithy.SchemaExtensions
+	ePlaybackConfiguration_TranscodeProfileName                                         smithy.SchemaExtensions
+	ePlaybackConfiguration_VideoContentSourceUrl                                        smithy.SchemaExtensions
+	ePlaybackConfiguration_AdConditioningConfiguration                                  smithy.SchemaExtensions
+	ePlaybackConfiguration_AdDecisionServerConfiguration                                smithy.SchemaExtensions
+	ePlaybackConfiguration_YieldOptimizationConfiguration                               smithy.SchemaExtensions
+	ePlaybackConfiguration_FunctionMapping                                              smithy.SchemaExtensions
+	ePlaybackConfiguration_AdsPersonalizationTimeouts                                   smithy.SchemaExtensions
+	ePlaybackConfiguration_AdsPersonalizationConcurrency                                smithy.SchemaExtensions
+	ePlaybackConfiguration_BeaconingConfiguration                                       smithy.SchemaExtensions
+	ePlaybackMode                                                                       smithy.SchemaExtensions
+	ePlaybackMode_LOOP                                                                  smithy.SchemaExtensions
+	ePlaybackMode_LINEAR                                                                smithy.SchemaExtensions
+	ePrefetchConsumption                                                                smithy.SchemaExtensions
+	ePrefetchConsumption_AvailMatchingCriteria                                          smithy.SchemaExtensions
+	ePrefetchConsumption_EndTime                                                        smithy.SchemaExtensions
+	ePrefetchConsumption_StartTime                                                      smithy.SchemaExtensions
+	ePrefetchRetrieval                                                                  smithy.SchemaExtensions
+	ePrefetchRetrieval_DynamicVariables                                                 smithy.SchemaExtensions
+	ePrefetchRetrieval_EndTime                                                          smithy.SchemaExtensions
+	ePrefetchRetrieval_StartTime                                                        smithy.SchemaExtensions
+	ePrefetchRetrieval_TrafficShapingType                                               smithy.SchemaExtensions
+	ePrefetchRetrieval_TrafficShapingRetrievalWindow                                    smithy.SchemaExtensions
+	ePrefetchRetrieval_TrafficShapingTpsConfiguration                                   smithy.SchemaExtensions
+	ePrefetchSchedule                                                                   smithy.SchemaExtensions
+	ePrefetchSchedule_Arn                                                               smithy.SchemaExtensions
+	ePrefetchSchedule_Consumption                                                       smithy.SchemaExtensions
+	ePrefetchSchedule_Name                                                              smithy.SchemaExtensions
+	ePrefetchSchedule_PlaybackConfigurationName                                         smithy.SchemaExtensions
+	ePrefetchSchedule_Retrieval                                                         smithy.SchemaExtensions
+	ePrefetchSchedule_ScheduleType                                                      smithy.SchemaExtensions
+	ePrefetchSchedule_RecurringPrefetchConfiguration                                    smithy.SchemaExtensions
+	ePrefetchSchedule_StreamId                                                          smithy.SchemaExtensions
+	ePrefetchSchedule_Tags                                                              smithy.SchemaExtensions
+	ePrefetchScheduleType                                                               smithy.SchemaExtensions
+	ePrefetchScheduleType_SINGLE                                                        smithy.SchemaExtensions
+	ePrefetchScheduleType_RECURRING                                                     smithy.SchemaExtensions
+	ePreRollAdDecisionServerConfiguration                                               smithy.SchemaExtensions
+	ePreRollAdDecisionServerConfiguration_VastResponse                                  smithy.SchemaExtensions
+	ePreRollAdSequencingMode                                                            smithy.SchemaExtensions
+	ePreRollAdSequencingMode_FOLLOW_AD_SEQUENCE                                         smithy.SchemaExtensions
+	ePreRollAdSequencingMode_IGNORE_AD_SEQUENCE                                         smithy.SchemaExtensions
+	ePreRollVastResponse                                                                smithy.SchemaExtensions
+	ePreRollVastResponse_AdSequencingMode                                               smithy.SchemaExtensions
+	eRecurringConsumption                                                               smithy.SchemaExtensions
+	eRecurringConsumption_RetrievedAdExpirationSeconds                                  smithy.SchemaExtensions
+	eRecurringConsumption_AvailMatchingCriteria                                         smithy.SchemaExtensions
+	eRecurringPrefetchConfiguration                                                     smithy.SchemaExtensions
+	eRecurringPrefetchConfiguration_StartTime                                           smithy.SchemaExtensions
+	eRecurringPrefetchConfiguration_EndTime                                             smithy.SchemaExtensions
+	eRecurringPrefetchConfiguration_RecurringConsumption                                smithy.SchemaExtensions
+	eRecurringPrefetchConfiguration_RecurringRetrieval                                  smithy.SchemaExtensions
+	eRecurringRetrieval                                                                 smithy.SchemaExtensions
+	eRecurringRetrieval_DynamicVariables                                                smithy.SchemaExtensions
+	eRecurringRetrieval_DelayAfterAvailEndSeconds                                       smithy.SchemaExtensions
+	eRecurringRetrieval_TrafficShapingType                                              smithy.SchemaExtensions
+	eRecurringRetrieval_TrafficShapingRetrievalWindow                                   smithy.SchemaExtensions
+	eRecurringRetrieval_TrafficShapingTpsConfiguration                                  smithy.SchemaExtensions
+	eRelativePosition                                                                   smithy.SchemaExtensions
+	eRelativePosition_BEFORE_PROGRAM                                                    smithy.SchemaExtensions
+	eRelativePosition_AFTER_PROGRAM                                                     smithy.SchemaExtensions
+	eRequestOutputItem                                                                  smithy.SchemaExtensions
+	eRequestOutputItem_DashPlaylistSettings                                             smithy.SchemaExtensions
+	eRequestOutputItem_HlsPlaylistSettings                                              smithy.SchemaExtensions
+	eRequestOutputItem_ManifestName                                                     smithy.SchemaExtensions
+	eRequestOutputItem_SourceGroup                                                      smithy.SchemaExtensions
+	e_RequestOutputs                                                                    smithy.SchemaExtensions
+	e_RequestOutputs_member                                                             smithy.SchemaExtensions
+	eResponseOutputItem                                                                 smithy.SchemaExtensions
+	eResponseOutputItem_DashPlaylistSettings                                            smithy.SchemaExtensions
+	eResponseOutputItem_HlsPlaylistSettings                                             smithy.SchemaExtensions
+	eResponseOutputItem_ManifestName                                                    smithy.SchemaExtensions
+	eResponseOutputItem_PlaybackUrl                                                     smithy.SchemaExtensions
+	eResponseOutputItem_DualStackPlaybackUrl                                            smithy.SchemaExtensions
+	eResponseOutputItem_SourceGroup                                                     smithy.SchemaExtensions
+	e_ResponseOutputs                                                                   smithy.SchemaExtensions
+	e_ResponseOutputs_member                                                            smithy.SchemaExtensions
+	eRuntimeType                                                                        smithy.SchemaExtensions
+	eRuntimeType_JSONATA                                                                smithy.SchemaExtensions
+	eScheduleAdBreak                                                                    smithy.SchemaExtensions
+	eScheduleAdBreak_ApproximateDurationSeconds                                         smithy.SchemaExtensions
+	eScheduleAdBreak_ApproximateStartTime                                               smithy.SchemaExtensions
+	eScheduleAdBreak_SourceLocationName                                                 smithy.SchemaExtensions
+	eScheduleAdBreak_VodSourceName                                                      smithy.SchemaExtensions
+	eScheduleConfiguration                                                              smithy.SchemaExtensions
+	eScheduleConfiguration_Transition                                                   smithy.SchemaExtensions
+	eScheduleConfiguration_ClipRange                                                    smithy.SchemaExtensions
+	eScheduleEntry                                                                      smithy.SchemaExtensions
+	eScheduleEntry_ApproximateDurationSeconds                                           smithy.SchemaExtensions
+	eScheduleEntry_ApproximateStartTime                                                 smithy.SchemaExtensions
+	eScheduleEntry_Arn                                                                  smithy.SchemaExtensions
+	eScheduleEntry_ChannelName                                                          smithy.SchemaExtensions
+	eScheduleEntry_LiveSourceName                                                       smithy.SchemaExtensions
+	eScheduleEntry_ProgramName                                                          smithy.SchemaExtensions
+	eScheduleEntry_ScheduleAdBreaks                                                     smithy.SchemaExtensions
+	eScheduleEntry_ScheduleEntryType                                                    smithy.SchemaExtensions
+	eScheduleEntry_SourceLocationName                                                   smithy.SchemaExtensions
+	eScheduleEntry_VodSourceName                                                        smithy.SchemaExtensions
+	eScheduleEntry_Audiences                                                            smithy.SchemaExtensions
+	eScheduleEntryType                                                                  smithy.SchemaExtensions
+	eScheduleEntryType_PROGRAM                                                          smithy.SchemaExtensions
+	eScheduleEntryType_FILLER_SLATE                                                     smithy.SchemaExtensions
+	eScheduleEntryType_ALTERNATE_MEDIA                                                  smithy.SchemaExtensions
+	eSecretsManagerAccessTokenConfiguration                                             smithy.SchemaExtensions
+	eSecretsManagerAccessTokenConfiguration_HeaderName                                  smithy.SchemaExtensions
+	eSecretsManagerAccessTokenConfiguration_SecretArn                                   smithy.SchemaExtensions
+	eSecretsManagerAccessTokenConfiguration_SecretStringKey                             smithy.SchemaExtensions
+	eSegmentationDescriptor                                                             smithy.SchemaExtensions
+	eSegmentationDescriptor_SegmentationEventId                                         smithy.SchemaExtensions
+	eSegmentationDescriptor_SegmentationUpidType                                        smithy.SchemaExtensions
+	eSegmentationDescriptor_SegmentationUpid                                            smithy.SchemaExtensions
+	eSegmentationDescriptor_SegmentationTypeId                                          smithy.SchemaExtensions
+	eSegmentationDescriptor_SegmentNum                                                  smithy.SchemaExtensions
+	eSegmentationDescriptor_SegmentsExpected                                            smithy.SchemaExtensions
+	eSegmentationDescriptor_SubSegmentNum                                               smithy.SchemaExtensions
+	eSegmentationDescriptor_SubSegmentsExpected                                         smithy.SchemaExtensions
+	e_SegmentationDescriptorList                                                        smithy.SchemaExtensions
+	e_SegmentationDescriptorList_member                                                 smithy.SchemaExtensions
+	eSegmentDeliveryConfiguration                                                       smithy.SchemaExtensions
+	eSegmentDeliveryConfiguration_BaseUrl                                               smithy.SchemaExtensions
+	eSegmentDeliveryConfiguration_Name                                                  smithy.SchemaExtensions
+	eSequentialExecutorConfiguration                                                    smithy.SchemaExtensions
+	eSequentialExecutorConfiguration_Runtime                                            smithy.SchemaExtensions
+	eSequentialExecutorConfiguration_Output                                             smithy.SchemaExtensions
+	eSequentialExecutorConfiguration_FunctionList                                       smithy.SchemaExtensions
+	eSequentialExecutorConfiguration_TimeoutMilliseconds                                smithy.SchemaExtensions
+	eSlateSource                                                                        smithy.SchemaExtensions
+	eSlateSource_SourceLocationName                                                     smithy.SchemaExtensions
+	eSlateSource_VodSourceName                                                          smithy.SchemaExtensions
+	eSourceLocation                                                                     smithy.SchemaExtensions
+	eSourceLocation_AccessConfiguration                                                 smithy.SchemaExtensions
+	eSourceLocation_Arn                                                                 smithy.SchemaExtensions
+	eSourceLocation_CreationTime                                                        smithy.SchemaExtensions
+	eSourceLocation_DefaultSegmentDeliveryConfiguration                                 smithy.SchemaExtensions
+	eSourceLocation_HttpConfiguration                                                   smithy.SchemaExtensions
+	eSourceLocation_LastModifiedTime                                                    smithy.SchemaExtensions
+	eSourceLocation_SegmentDeliveryConfigurations                                       smithy.SchemaExtensions
+	eSourceLocation_SourceLocationName                                                  smithy.SchemaExtensions
+	eSourceLocation_Tags                                                                smithy.SchemaExtensions
+	eSpliceInsertMessage                                                                smithy.SchemaExtensions
+	eSpliceInsertMessage_AvailNum                                                       smithy.SchemaExtensions
+	eSpliceInsertMessage_AvailsExpected                                                 smithy.SchemaExtensions
+	eSpliceInsertMessage_SpliceEventId                                                  smithy.SchemaExtensions
+	eSpliceInsertMessage_UniqueProgramId                                                smithy.SchemaExtensions
+	eStreamingMediaFileConditioning                                                     smithy.SchemaExtensions
+	eStreamingMediaFileConditioning_TRANSCODE                                           smithy.SchemaExtensions
+	eStreamingMediaFileConditioning_NONE                                                smithy.SchemaExtensions
+	e_StringMap                                                                         smithy.SchemaExtensions
+	e_StringMap_key                                                                     smithy.SchemaExtensions
+	e_StringMap_value                                                                   smithy.SchemaExtensions
+	eTier                                                                               smithy.SchemaExtensions
+	eTier_BASIC                                                                         smithy.SchemaExtensions
+	eTier_STANDARD                                                                      smithy.SchemaExtensions
+	eTimeShiftConfiguration                                                             smithy.SchemaExtensions
+	eTimeShiftConfiguration_MaxTimeDelaySeconds                                         smithy.SchemaExtensions
+	eTimeSignalMessage                                                                  smithy.SchemaExtensions
+	eTimeSignalMessage_SegmentationDescriptors                                          smithy.SchemaExtensions
+	eTrafficShapingRetrievalWindow                                                      smithy.SchemaExtensions
+	eTrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds                       smithy.SchemaExtensions
+	eTrafficShapingTpsConfiguration                                                     smithy.SchemaExtensions
+	eTrafficShapingTpsConfiguration_PeakTps                                             smithy.SchemaExtensions
+	eTrafficShapingTpsConfiguration_PeakConcurrentUsers                                 smithy.SchemaExtensions
+	eTrafficShapingType                                                                 smithy.SchemaExtensions
+	eTrafficShapingType_RETRIEVAL_WINDOW                                                smithy.SchemaExtensions
+	eTrafficShapingType_TPS                                                             smithy.SchemaExtensions
+	eTransition                                                                         smithy.SchemaExtensions
+	eTransition_DurationMillis                                                          smithy.SchemaExtensions
+	eTransition_RelativePosition                                                        smithy.SchemaExtensions
+	eTransition_RelativeProgram                                                         smithy.SchemaExtensions
+	eTransition_ScheduledStartTimeMillis                                                smithy.SchemaExtensions
+	eTransition_Type                                                                    smithy.SchemaExtensions
+	eType                                                                               smithy.SchemaExtensions
+	eType_DASH                                                                          smithy.SchemaExtensions
+	eType_HLS                                                                           smithy.SchemaExtensions
+	eUpdateProgramScheduleConfiguration                                                 smithy.SchemaExtensions
+	eUpdateProgramScheduleConfiguration_Transition                                      smithy.SchemaExtensions
+	eUpdateProgramScheduleConfiguration_ClipRange                                       smithy.SchemaExtensions
+	eUpdateProgramTransition                                                            smithy.SchemaExtensions
+	eUpdateProgramTransition_ScheduledStartTimeMillis                                   smithy.SchemaExtensions
+	eUpdateProgramTransition_DurationMillis                                             smithy.SchemaExtensions
+	eVastRequestConfiguration                                                           smithy.SchemaExtensions
+	eVastRequestConfiguration_Runtime                                                   smithy.SchemaExtensions
+	eVastRequestConfiguration_Output                                                    smithy.SchemaExtensions
+	eVastRequestConfiguration_MethodType                                                smithy.SchemaExtensions
+	eVastRequestConfiguration_RequestTimeoutMilliseconds                                smithy.SchemaExtensions
+	eVastRequestConfiguration_Url                                                       smithy.SchemaExtensions
+	eVastRequestConfiguration_Body                                                      smithy.SchemaExtensions
+	eVastRequestConfiguration_Headers                                                   smithy.SchemaExtensions
+	eVastRequestConfiguration_Cache                                                     smithy.SchemaExtensions
+	eVastResponse                                                                       smithy.SchemaExtensions
+	eVastResponse_AdSequencingMode                                                      smithy.SchemaExtensions
+	eVodSource                                                                          smithy.SchemaExtensions
+	eVodSource_Arn                                                                      smithy.SchemaExtensions
+	eVodSource_CreationTime                                                             smithy.SchemaExtensions
+	eVodSource_HttpPackageConfigurations                                                smithy.SchemaExtensions
+	eVodSource_LastModifiedTime                                                         smithy.SchemaExtensions
+	eVodSource_SourceLocationName                                                       smithy.SchemaExtensions
+	eVodSource_Tags                                                                     smithy.SchemaExtensions
+	eVodSource_VodSourceName                                                            smithy.SchemaExtensions
+	eYieldOptimizationConfiguration                                                     smithy.SchemaExtensions
+	eYieldOptimizationConfiguration_MinimumUnfilledDuration                             smithy.SchemaExtensions
+	eYieldOptimizationConfiguration_PublisherId                                         smithy.SchemaExtensions
+	eYieldOptimizationConfiguration_Region                                              smithy.SchemaExtensions
+	eYieldOptimizationConfiguration_OpenRtbTemplate                                     smithy.SchemaExtensions
+	eConfigureLogsForChannelRequest                                                     smithy.SchemaExtensions
+	eConfigureLogsForChannelRequest_ChannelName                                         smithy.SchemaExtensions
+	eConfigureLogsForChannelRequest_LogTypes                                            smithy.SchemaExtensions
+	eConfigureLogsForChannelResponse                                                    smithy.SchemaExtensions
+	eConfigureLogsForChannelResponse_ChannelName                                        smithy.SchemaExtensions
+	eConfigureLogsForChannelResponse_LogTypes                                           smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationRequest                                       smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationRequest_PercentEnabled                        smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName             smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies              smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog                     smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog         smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationResponse                                      smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationResponse_PercentEnabled                       smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName            smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies             smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog                    smithy.SchemaExtensions
+	eConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog        smithy.SchemaExtensions
+	eCreateChannelRequest                                                               smithy.SchemaExtensions
+	eCreateChannelRequest_ChannelName                                                   smithy.SchemaExtensions
+	eCreateChannelRequest_FillerSlate                                                   smithy.SchemaExtensions
+	eCreateChannelRequest_Outputs                                                       smithy.SchemaExtensions
+	eCreateChannelRequest_PlaybackMode                                                  smithy.SchemaExtensions
+	eCreateChannelRequest_Tags                                                          smithy.SchemaExtensions
+	eCreateChannelRequest_Tier                                                          smithy.SchemaExtensions
+	eCreateChannelRequest_TimeShiftConfiguration                                        smithy.SchemaExtensions
+	eCreateChannelRequest_Audiences                                                     smithy.SchemaExtensions
+	eCreateChannelResponse                                                              smithy.SchemaExtensions
+	eCreateChannelResponse_Arn                                                          smithy.SchemaExtensions
+	eCreateChannelResponse_ChannelName                                                  smithy.SchemaExtensions
+	eCreateChannelResponse_ChannelState                                                 smithy.SchemaExtensions
+	eCreateChannelResponse_CreationTime                                                 smithy.SchemaExtensions
+	eCreateChannelResponse_FillerSlate                                                  smithy.SchemaExtensions
+	eCreateChannelResponse_LastModifiedTime                                             smithy.SchemaExtensions
+	eCreateChannelResponse_Outputs                                                      smithy.SchemaExtensions
+	eCreateChannelResponse_PlaybackMode                                                 smithy.SchemaExtensions
+	eCreateChannelResponse_Tags                                                         smithy.SchemaExtensions
+	eCreateChannelResponse_Tier                                                         smithy.SchemaExtensions
+	eCreateChannelResponse_TimeShiftConfiguration                                       smithy.SchemaExtensions
+	eCreateChannelResponse_Audiences                                                    smithy.SchemaExtensions
+	eCreateLiveSourceRequest                                                            smithy.SchemaExtensions
+	eCreateLiveSourceRequest_HttpPackageConfigurations                                  smithy.SchemaExtensions
+	eCreateLiveSourceRequest_LiveSourceName                                             smithy.SchemaExtensions
+	eCreateLiveSourceRequest_SourceLocationName                                         smithy.SchemaExtensions
+	eCreateLiveSourceRequest_Tags                                                       smithy.SchemaExtensions
+	eCreateLiveSourceResponse                                                           smithy.SchemaExtensions
+	eCreateLiveSourceResponse_Arn                                                       smithy.SchemaExtensions
+	eCreateLiveSourceResponse_CreationTime                                              smithy.SchemaExtensions
+	eCreateLiveSourceResponse_HttpPackageConfigurations                                 smithy.SchemaExtensions
+	eCreateLiveSourceResponse_LastModifiedTime                                          smithy.SchemaExtensions
+	eCreateLiveSourceResponse_LiveSourceName                                            smithy.SchemaExtensions
+	eCreateLiveSourceResponse_SourceLocationName                                        smithy.SchemaExtensions
+	eCreateLiveSourceResponse_Tags                                                      smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest                                                      smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_Consumption                                          smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_Name                                                 smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_PlaybackConfigurationName                            smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_Retrieval                                            smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_RecurringPrefetchConfiguration                       smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_ScheduleType                                         smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_StreamId                                             smithy.SchemaExtensions
+	eCreatePrefetchScheduleRequest_Tags                                                 smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse                                                     smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_Arn                                                 smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_Consumption                                         smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_Name                                                smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_PlaybackConfigurationName                           smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_Retrieval                                           smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_RecurringPrefetchConfiguration                      smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_ScheduleType                                        smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_StreamId                                            smithy.SchemaExtensions
+	eCreatePrefetchScheduleResponse_Tags                                                smithy.SchemaExtensions
+	eCreateProgramRequest                                                               smithy.SchemaExtensions
+	eCreateProgramRequest_AdBreaks                                                      smithy.SchemaExtensions
+	eCreateProgramRequest_ChannelName                                                   smithy.SchemaExtensions
+	eCreateProgramRequest_LiveSourceName                                                smithy.SchemaExtensions
+	eCreateProgramRequest_ProgramName                                                   smithy.SchemaExtensions
+	eCreateProgramRequest_ScheduleConfiguration                                         smithy.SchemaExtensions
+	eCreateProgramRequest_SourceLocationName                                            smithy.SchemaExtensions
+	eCreateProgramRequest_VodSourceName                                                 smithy.SchemaExtensions
+	eCreateProgramRequest_AudienceMedia                                                 smithy.SchemaExtensions
+	eCreateProgramRequest_Tags                                                          smithy.SchemaExtensions
+	eCreateProgramResponse                                                              smithy.SchemaExtensions
+	eCreateProgramResponse_AdBreaks                                                     smithy.SchemaExtensions
+	eCreateProgramResponse_Arn                                                          smithy.SchemaExtensions
+	eCreateProgramResponse_ChannelName                                                  smithy.SchemaExtensions
+	eCreateProgramResponse_CreationTime                                                 smithy.SchemaExtensions
+	eCreateProgramResponse_LiveSourceName                                               smithy.SchemaExtensions
+	eCreateProgramResponse_ProgramName                                                  smithy.SchemaExtensions
+	eCreateProgramResponse_ScheduledStartTime                                           smithy.SchemaExtensions
+	eCreateProgramResponse_SourceLocationName                                           smithy.SchemaExtensions
+	eCreateProgramResponse_VodSourceName                                                smithy.SchemaExtensions
+	eCreateProgramResponse_ClipRange                                                    smithy.SchemaExtensions
+	eCreateProgramResponse_DurationMillis                                               smithy.SchemaExtensions
+	eCreateProgramResponse_AudienceMedia                                                smithy.SchemaExtensions
+	eCreateProgramResponse_Tags                                                         smithy.SchemaExtensions
+	eCreateSourceLocationRequest                                                        smithy.SchemaExtensions
+	eCreateSourceLocationRequest_AccessConfiguration                                    smithy.SchemaExtensions
+	eCreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration                    smithy.SchemaExtensions
+	eCreateSourceLocationRequest_HttpConfiguration                                      smithy.SchemaExtensions
+	eCreateSourceLocationRequest_SegmentDeliveryConfigurations                          smithy.SchemaExtensions
+	eCreateSourceLocationRequest_SourceLocationName                                     smithy.SchemaExtensions
+	eCreateSourceLocationRequest_Tags                                                   smithy.SchemaExtensions
+	eCreateSourceLocationResponse                                                       smithy.SchemaExtensions
+	eCreateSourceLocationResponse_AccessConfiguration                                   smithy.SchemaExtensions
+	eCreateSourceLocationResponse_Arn                                                   smithy.SchemaExtensions
+	eCreateSourceLocationResponse_CreationTime                                          smithy.SchemaExtensions
+	eCreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration                   smithy.SchemaExtensions
+	eCreateSourceLocationResponse_HttpConfiguration                                     smithy.SchemaExtensions
+	eCreateSourceLocationResponse_LastModifiedTime                                      smithy.SchemaExtensions
+	eCreateSourceLocationResponse_SegmentDeliveryConfigurations                         smithy.SchemaExtensions
+	eCreateSourceLocationResponse_SourceLocationName                                    smithy.SchemaExtensions
+	eCreateSourceLocationResponse_Tags                                                  smithy.SchemaExtensions
+	eCreateVodSourceRequest                                                             smithy.SchemaExtensions
+	eCreateVodSourceRequest_HttpPackageConfigurations                                   smithy.SchemaExtensions
+	eCreateVodSourceRequest_SourceLocationName                                          smithy.SchemaExtensions
+	eCreateVodSourceRequest_Tags                                                        smithy.SchemaExtensions
+	eCreateVodSourceRequest_VodSourceName                                               smithy.SchemaExtensions
+	eCreateVodSourceResponse                                                            smithy.SchemaExtensions
+	eCreateVodSourceResponse_Arn                                                        smithy.SchemaExtensions
+	eCreateVodSourceResponse_CreationTime                                               smithy.SchemaExtensions
+	eCreateVodSourceResponse_HttpPackageConfigurations                                  smithy.SchemaExtensions
+	eCreateVodSourceResponse_LastModifiedTime                                           smithy.SchemaExtensions
+	eCreateVodSourceResponse_SourceLocationName                                         smithy.SchemaExtensions
+	eCreateVodSourceResponse_Tags                                                       smithy.SchemaExtensions
+	eCreateVodSourceResponse_VodSourceName                                              smithy.SchemaExtensions
+	eDeleteChannelRequest                                                               smithy.SchemaExtensions
+	eDeleteChannelRequest_ChannelName                                                   smithy.SchemaExtensions
+	eDeleteChannelResponse                                                              smithy.SchemaExtensions
+	eDeleteChannelPolicyRequest                                                         smithy.SchemaExtensions
+	eDeleteChannelPolicyRequest_ChannelName                                             smithy.SchemaExtensions
+	eDeleteChannelPolicyResponse                                                        smithy.SchemaExtensions
+	eDeleteFunctionRequest                                                              smithy.SchemaExtensions
+	eDeleteFunctionRequest_FunctionId                                                   smithy.SchemaExtensions
+	eDeleteFunctionResponse                                                             smithy.SchemaExtensions
+	eDeleteLiveSourceRequest                                                            smithy.SchemaExtensions
+	eDeleteLiveSourceRequest_LiveSourceName                                             smithy.SchemaExtensions
+	eDeleteLiveSourceRequest_SourceLocationName                                         smithy.SchemaExtensions
+	eDeleteLiveSourceResponse                                                           smithy.SchemaExtensions
+	eDeletePlaybackConfigurationRequest                                                 smithy.SchemaExtensions
+	eDeletePlaybackConfigurationRequest_Name                                            smithy.SchemaExtensions
+	eDeletePlaybackConfigurationResponse                                                smithy.SchemaExtensions
+	eDeletePrefetchScheduleRequest                                                      smithy.SchemaExtensions
+	eDeletePrefetchScheduleRequest_Name                                                 smithy.SchemaExtensions
+	eDeletePrefetchScheduleRequest_PlaybackConfigurationName                            smithy.SchemaExtensions
+	eDeletePrefetchScheduleResponse                                                     smithy.SchemaExtensions
+	eDeleteProgramRequest                                                               smithy.SchemaExtensions
+	eDeleteProgramRequest_ChannelName                                                   smithy.SchemaExtensions
+	eDeleteProgramRequest_ProgramName                                                   smithy.SchemaExtensions
+	eDeleteProgramResponse                                                              smithy.SchemaExtensions
+	eDeleteSourceLocationRequest                                                        smithy.SchemaExtensions
+	eDeleteSourceLocationRequest_SourceLocationName                                     smithy.SchemaExtensions
+	eDeleteSourceLocationResponse                                                       smithy.SchemaExtensions
+	eDeleteVodSourceRequest                                                             smithy.SchemaExtensions
+	eDeleteVodSourceRequest_SourceLocationName                                          smithy.SchemaExtensions
+	eDeleteVodSourceRequest_VodSourceName                                               smithy.SchemaExtensions
+	eDeleteVodSourceResponse                                                            smithy.SchemaExtensions
+	eDescribeChannelRequest                                                             smithy.SchemaExtensions
+	eDescribeChannelRequest_ChannelName                                                 smithy.SchemaExtensions
+	eDescribeChannelResponse                                                            smithy.SchemaExtensions
+	eDescribeChannelResponse_Arn                                                        smithy.SchemaExtensions
+	eDescribeChannelResponse_ChannelName                                                smithy.SchemaExtensions
+	eDescribeChannelResponse_ChannelState                                               smithy.SchemaExtensions
+	eDescribeChannelResponse_CreationTime                                               smithy.SchemaExtensions
+	eDescribeChannelResponse_FillerSlate                                                smithy.SchemaExtensions
+	eDescribeChannelResponse_LastModifiedTime                                           smithy.SchemaExtensions
+	eDescribeChannelResponse_Outputs                                                    smithy.SchemaExtensions
+	eDescribeChannelResponse_PlaybackMode                                               smithy.SchemaExtensions
+	eDescribeChannelResponse_Tags                                                       smithy.SchemaExtensions
+	eDescribeChannelResponse_Tier                                                       smithy.SchemaExtensions
+	eDescribeChannelResponse_LogConfiguration                                           smithy.SchemaExtensions
+	eDescribeChannelResponse_TimeShiftConfiguration                                     smithy.SchemaExtensions
+	eDescribeChannelResponse_Audiences                                                  smithy.SchemaExtensions
+	eDescribeLiveSourceRequest                                                          smithy.SchemaExtensions
+	eDescribeLiveSourceRequest_LiveSourceName                                           smithy.SchemaExtensions
+	eDescribeLiveSourceRequest_SourceLocationName                                       smithy.SchemaExtensions
+	eDescribeLiveSourceResponse                                                         smithy.SchemaExtensions
+	eDescribeLiveSourceResponse_Arn                                                     smithy.SchemaExtensions
+	eDescribeLiveSourceResponse_CreationTime                                            smithy.SchemaExtensions
+	eDescribeLiveSourceResponse_HttpPackageConfigurations                               smithy.SchemaExtensions
+	eDescribeLiveSourceResponse_LastModifiedTime                                        smithy.SchemaExtensions
+	eDescribeLiveSourceResponse_LiveSourceName                                          smithy.SchemaExtensions
+	eDescribeLiveSourceResponse_SourceLocationName                                      smithy.SchemaExtensions
+	eDescribeLiveSourceResponse_Tags                                                    smithy.SchemaExtensions
+	eDescribeProgramRequest                                                             smithy.SchemaExtensions
+	eDescribeProgramRequest_ChannelName                                                 smithy.SchemaExtensions
+	eDescribeProgramRequest_ProgramName                                                 smithy.SchemaExtensions
+	eDescribeProgramResponse                                                            smithy.SchemaExtensions
+	eDescribeProgramResponse_AdBreaks                                                   smithy.SchemaExtensions
+	eDescribeProgramResponse_Arn                                                        smithy.SchemaExtensions
+	eDescribeProgramResponse_ChannelName                                                smithy.SchemaExtensions
+	eDescribeProgramResponse_CreationTime                                               smithy.SchemaExtensions
+	eDescribeProgramResponse_LiveSourceName                                             smithy.SchemaExtensions
+	eDescribeProgramResponse_ProgramName                                                smithy.SchemaExtensions
+	eDescribeProgramResponse_ScheduledStartTime                                         smithy.SchemaExtensions
+	eDescribeProgramResponse_SourceLocationName                                         smithy.SchemaExtensions
+	eDescribeProgramResponse_VodSourceName                                              smithy.SchemaExtensions
+	eDescribeProgramResponse_ClipRange                                                  smithy.SchemaExtensions
+	eDescribeProgramResponse_DurationMillis                                             smithy.SchemaExtensions
+	eDescribeProgramResponse_AudienceMedia                                              smithy.SchemaExtensions
+	eDescribeProgramResponse_Tags                                                       smithy.SchemaExtensions
+	eDescribeSourceLocationRequest                                                      smithy.SchemaExtensions
+	eDescribeSourceLocationRequest_SourceLocationName                                   smithy.SchemaExtensions
+	eDescribeSourceLocationResponse                                                     smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_AccessConfiguration                                 smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_Arn                                                 smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_CreationTime                                        smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration                 smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_HttpConfiguration                                   smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_LastModifiedTime                                    smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_SegmentDeliveryConfigurations                       smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_SourceLocationName                                  smithy.SchemaExtensions
+	eDescribeSourceLocationResponse_Tags                                                smithy.SchemaExtensions
+	eDescribeVodSourceRequest                                                           smithy.SchemaExtensions
+	eDescribeVodSourceRequest_SourceLocationName                                        smithy.SchemaExtensions
+	eDescribeVodSourceRequest_VodSourceName                                             smithy.SchemaExtensions
+	eDescribeVodSourceResponse                                                          smithy.SchemaExtensions
+	eDescribeVodSourceResponse_AdBreakOpportunities                                     smithy.SchemaExtensions
+	eDescribeVodSourceResponse_Arn                                                      smithy.SchemaExtensions
+	eDescribeVodSourceResponse_CreationTime                                             smithy.SchemaExtensions
+	eDescribeVodSourceResponse_HttpPackageConfigurations                                smithy.SchemaExtensions
+	eDescribeVodSourceResponse_LastModifiedTime                                         smithy.SchemaExtensions
+	eDescribeVodSourceResponse_SourceLocationName                                       smithy.SchemaExtensions
+	eDescribeVodSourceResponse_Tags                                                     smithy.SchemaExtensions
+	eDescribeVodSourceResponse_VodSourceName                                            smithy.SchemaExtensions
+	eGetChannelPolicyRequest                                                            smithy.SchemaExtensions
+	eGetChannelPolicyRequest_ChannelName                                                smithy.SchemaExtensions
+	eGetChannelPolicyResponse                                                           smithy.SchemaExtensions
+	eGetChannelPolicyResponse_Policy                                                    smithy.SchemaExtensions
+	eGetChannelScheduleRequest                                                          smithy.SchemaExtensions
+	eGetChannelScheduleRequest_ChannelName                                              smithy.SchemaExtensions
+	eGetChannelScheduleRequest_DurationMinutes                                          smithy.SchemaExtensions
+	eGetChannelScheduleRequest_MaxResults                                               smithy.SchemaExtensions
+	eGetChannelScheduleRequest_NextToken                                                smithy.SchemaExtensions
+	eGetChannelScheduleRequest_Audience                                                 smithy.SchemaExtensions
+	eGetChannelScheduleResponse                                                         smithy.SchemaExtensions
+	eGetChannelScheduleResponse_Items                                                   smithy.SchemaExtensions
+	eGetChannelScheduleResponse_NextToken                                               smithy.SchemaExtensions
+	eGetFunctionRequest                                                                 smithy.SchemaExtensions
+	eGetFunctionRequest_FunctionId                                                      smithy.SchemaExtensions
+	eGetFunctionResponse                                                                smithy.SchemaExtensions
+	eGetFunctionResponse_FunctionId                                                     smithy.SchemaExtensions
+	eGetFunctionResponse_FunctionType                                                   smithy.SchemaExtensions
+	eGetFunctionResponse_Description                                                    smithy.SchemaExtensions
+	eGetFunctionResponse_HttpRequestConfiguration                                       smithy.SchemaExtensions
+	eGetFunctionResponse_AwsServiceRequestConfiguration                                 smithy.SchemaExtensions
+	eGetFunctionResponse_CustomOutputConfiguration                                      smithy.SchemaExtensions
+	eGetFunctionResponse_ConcurrentExecutorConfiguration                                smithy.SchemaExtensions
+	eGetFunctionResponse_SequentialExecutorConfiguration                                smithy.SchemaExtensions
+	eGetFunctionResponse_VastRequestConfiguration                                       smithy.SchemaExtensions
+	eGetFunctionResponse_Tags                                                           smithy.SchemaExtensions
+	eGetFunctionResponse_Arn                                                            smithy.SchemaExtensions
+	eGetPlaybackConfigurationRequest                                                    smithy.SchemaExtensions
+	eGetPlaybackConfigurationRequest_Name                                               smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse                                                   smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_AdDecisionServerUrl                               smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_AvailSuppression                                  smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_Bumper                                            smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_CdnConfiguration                                  smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_ConfigurationAliases                              smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_DashConfiguration                                 smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_HlsConfiguration                                  smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_InsertionMode                                     smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_LivePreRollConfiguration                          smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_LogConfiguration                                  smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_ManifestProcessingRules                           smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_Name                                              smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_PersonalizationThresholdSeconds                   smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_PlaybackConfigurationArn                          smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_PlaybackEndpointPrefix                            smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix                   smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix               smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix      smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_SlateAdUrl                                        smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_Tags                                              smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_TranscodeProfileName                              smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_VideoContentSourceUrl                             smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_AdConditioningConfiguration                       smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_AdDecisionServerConfiguration                     smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_YieldOptimizationConfiguration                    smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_FunctionMapping                                   smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_AdsPersonalizationTimeouts                        smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_AdsPersonalizationConcurrency                     smithy.SchemaExtensions
+	eGetPlaybackConfigurationResponse_BeaconingConfiguration                            smithy.SchemaExtensions
+	eGetPrefetchScheduleRequest                                                         smithy.SchemaExtensions
+	eGetPrefetchScheduleRequest_Name                                                    smithy.SchemaExtensions
+	eGetPrefetchScheduleRequest_PlaybackConfigurationName                               smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse                                                        smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_Arn                                                    smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_Consumption                                            smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_Name                                                   smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_PlaybackConfigurationName                              smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_Retrieval                                              smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_ScheduleType                                           smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_RecurringPrefetchConfiguration                         smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_StreamId                                               smithy.SchemaExtensions
+	eGetPrefetchScheduleResponse_Tags                                                   smithy.SchemaExtensions
+	eListAlertsRequest                                                                  smithy.SchemaExtensions
+	eListAlertsRequest_MaxResults                                                       smithy.SchemaExtensions
+	eListAlertsRequest_NextToken                                                        smithy.SchemaExtensions
+	eListAlertsRequest_ResourceArn                                                      smithy.SchemaExtensions
+	eListAlertsResponse                                                                 smithy.SchemaExtensions
+	eListAlertsResponse_Items                                                           smithy.SchemaExtensions
+	eListAlertsResponse_NextToken                                                       smithy.SchemaExtensions
+	eListChannelsRequest                                                                smithy.SchemaExtensions
+	eListChannelsRequest_MaxResults                                                     smithy.SchemaExtensions
+	eListChannelsRequest_NextToken                                                      smithy.SchemaExtensions
+	eListChannelsResponse                                                               smithy.SchemaExtensions
+	eListChannelsResponse_Items                                                         smithy.SchemaExtensions
+	eListChannelsResponse_NextToken                                                     smithy.SchemaExtensions
+	eListFunctionsRequest                                                               smithy.SchemaExtensions
+	eListFunctionsRequest_MaxResults                                                    smithy.SchemaExtensions
+	eListFunctionsRequest_NextToken                                                     smithy.SchemaExtensions
+	eListFunctionsResponse                                                              smithy.SchemaExtensions
+	eListFunctionsResponse_Items                                                        smithy.SchemaExtensions
+	eListFunctionsResponse_NextToken                                                    smithy.SchemaExtensions
+	eListLiveSourcesRequest                                                             smithy.SchemaExtensions
+	eListLiveSourcesRequest_MaxResults                                                  smithy.SchemaExtensions
+	eListLiveSourcesRequest_NextToken                                                   smithy.SchemaExtensions
+	eListLiveSourcesRequest_SourceLocationName                                          smithy.SchemaExtensions
+	eListLiveSourcesResponse                                                            smithy.SchemaExtensions
+	eListLiveSourcesResponse_Items                                                      smithy.SchemaExtensions
+	eListLiveSourcesResponse_NextToken                                                  smithy.SchemaExtensions
+	eListPlaybackConfigurationsRequest                                                  smithy.SchemaExtensions
+	eListPlaybackConfigurationsRequest_MaxResults                                       smithy.SchemaExtensions
+	eListPlaybackConfigurationsRequest_NextToken                                        smithy.SchemaExtensions
+	eListPlaybackConfigurationsResponse                                                 smithy.SchemaExtensions
+	eListPlaybackConfigurationsResponse_Items                                           smithy.SchemaExtensions
+	eListPlaybackConfigurationsResponse_NextToken                                       smithy.SchemaExtensions
+	eListPrefetchSchedulesRequest                                                       smithy.SchemaExtensions
+	eListPrefetchSchedulesRequest_MaxResults                                            smithy.SchemaExtensions
+	eListPrefetchSchedulesRequest_NextToken                                             smithy.SchemaExtensions
+	eListPrefetchSchedulesRequest_PlaybackConfigurationName                             smithy.SchemaExtensions
+	eListPrefetchSchedulesRequest_ScheduleType                                          smithy.SchemaExtensions
+	eListPrefetchSchedulesRequest_StreamId                                              smithy.SchemaExtensions
+	eListPrefetchSchedulesResponse                                                      smithy.SchemaExtensions
+	eListPrefetchSchedulesResponse_Items                                                smithy.SchemaExtensions
+	eListPrefetchSchedulesResponse_NextToken                                            smithy.SchemaExtensions
+	eListSourceLocationsRequest                                                         smithy.SchemaExtensions
+	eListSourceLocationsRequest_MaxResults                                              smithy.SchemaExtensions
+	eListSourceLocationsRequest_NextToken                                               smithy.SchemaExtensions
+	eListSourceLocationsResponse                                                        smithy.SchemaExtensions
+	eListSourceLocationsResponse_Items                                                  smithy.SchemaExtensions
+	eListSourceLocationsResponse_NextToken                                              smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                         smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                             smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                        smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                                   smithy.SchemaExtensions
+	eListVodSourcesRequest                                                              smithy.SchemaExtensions
+	eListVodSourcesRequest_MaxResults                                                   smithy.SchemaExtensions
+	eListVodSourcesRequest_NextToken                                                    smithy.SchemaExtensions
+	eListVodSourcesRequest_SourceLocationName                                           smithy.SchemaExtensions
+	eListVodSourcesResponse                                                             smithy.SchemaExtensions
+	eListVodSourcesResponse_Items                                                       smithy.SchemaExtensions
+	eListVodSourcesResponse_NextToken                                                   smithy.SchemaExtensions
+	ePutChannelPolicyRequest                                                            smithy.SchemaExtensions
+	ePutChannelPolicyRequest_ChannelName                                                smithy.SchemaExtensions
+	ePutChannelPolicyRequest_Policy                                                     smithy.SchemaExtensions
+	ePutChannelPolicyResponse                                                           smithy.SchemaExtensions
+	ePutFunctionRequest                                                                 smithy.SchemaExtensions
+	ePutFunctionRequest_FunctionId                                                      smithy.SchemaExtensions
+	ePutFunctionRequest_FunctionType                                                    smithy.SchemaExtensions
+	ePutFunctionRequest_Description                                                     smithy.SchemaExtensions
+	ePutFunctionRequest_HttpRequestConfiguration                                        smithy.SchemaExtensions
+	ePutFunctionRequest_AwsServiceRequestConfiguration                                  smithy.SchemaExtensions
+	ePutFunctionRequest_CustomOutputConfiguration                                       smithy.SchemaExtensions
+	ePutFunctionRequest_ConcurrentExecutorConfiguration                                 smithy.SchemaExtensions
+	ePutFunctionRequest_SequentialExecutorConfiguration                                 smithy.SchemaExtensions
+	ePutFunctionRequest_VastRequestConfiguration                                        smithy.SchemaExtensions
+	ePutFunctionRequest_Tags                                                            smithy.SchemaExtensions
+	ePutFunctionResponse                                                                smithy.SchemaExtensions
+	ePutFunctionResponse_FunctionId                                                     smithy.SchemaExtensions
+	ePutFunctionResponse_FunctionType                                                   smithy.SchemaExtensions
+	ePutFunctionResponse_Description                                                    smithy.SchemaExtensions
+	ePutFunctionResponse_HttpRequestConfiguration                                       smithy.SchemaExtensions
+	ePutFunctionResponse_AwsServiceRequestConfiguration                                 smithy.SchemaExtensions
+	ePutFunctionResponse_CustomOutputConfiguration                                      smithy.SchemaExtensions
+	ePutFunctionResponse_ConcurrentExecutorConfiguration                                smithy.SchemaExtensions
+	ePutFunctionResponse_SequentialExecutorConfiguration                                smithy.SchemaExtensions
+	ePutFunctionResponse_VastRequestConfiguration                                       smithy.SchemaExtensions
+	ePutFunctionResponse_Tags                                                           smithy.SchemaExtensions
+	ePutFunctionResponse_Arn                                                            smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest                                                    smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_AdDecisionServerUrl                                smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_AvailSuppression                                   smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_Bumper                                             smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_CdnConfiguration                                   smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_ConfigurationAliases                               smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_DashConfiguration                                  smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_InsertionMode                                      smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_LivePreRollConfiguration                           smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_ManifestProcessingRules                            smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_Name                                               smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_PersonalizationThresholdSeconds                    smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_SlateAdUrl                                         smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_Tags                                               smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_TranscodeProfileName                               smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_VideoContentSourceUrl                              smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_AdConditioningConfiguration                        smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_AdDecisionServerConfiguration                      smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_YieldOptimizationConfiguration                     smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_FunctionMapping                                    smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_AdsPersonalizationTimeouts                         smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_AdsPersonalizationConcurrency                      smithy.SchemaExtensions
+	ePutPlaybackConfigurationRequest_BeaconingConfiguration                             smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse                                                   smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_AdDecisionServerUrl                               smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_AvailSuppression                                  smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_Bumper                                            smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_CdnConfiguration                                  smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_ConfigurationAliases                              smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_DashConfiguration                                 smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_HlsConfiguration                                  smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_InsertionMode                                     smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_LivePreRollConfiguration                          smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_LogConfiguration                                  smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_ManifestProcessingRules                           smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_Name                                              smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_PersonalizationThresholdSeconds                   smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_PlaybackConfigurationArn                          smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_PlaybackEndpointPrefix                            smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix                   smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix               smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix      smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_SlateAdUrl                                        smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_Tags                                              smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_TranscodeProfileName                              smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_VideoContentSourceUrl                             smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_AdConditioningConfiguration                       smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_AdDecisionServerConfiguration                     smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_YieldOptimizationConfiguration                    smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_FunctionMapping                                   smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_AdsPersonalizationTimeouts                        smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_AdsPersonalizationConcurrency                     smithy.SchemaExtensions
+	ePutPlaybackConfigurationResponse_BeaconingConfiguration                            smithy.SchemaExtensions
+	eStartChannelRequest                                                                smithy.SchemaExtensions
+	eStartChannelRequest_ChannelName                                                    smithy.SchemaExtensions
+	eStartChannelResponse                                                               smithy.SchemaExtensions
+	eStopChannelRequest                                                                 smithy.SchemaExtensions
+	eStopChannelRequest_ChannelName                                                     smithy.SchemaExtensions
+	eStopChannelResponse                                                                smithy.SchemaExtensions
+	eTagResourceRequest                                                                 smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                                     smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                            smithy.SchemaExtensions
+	eUntagResourceRequest                                                               smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                                   smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                       smithy.SchemaExtensions
+	eUpdateChannelRequest                                                               smithy.SchemaExtensions
+	eUpdateChannelRequest_ChannelName                                                   smithy.SchemaExtensions
+	eUpdateChannelRequest_FillerSlate                                                   smithy.SchemaExtensions
+	eUpdateChannelRequest_Outputs                                                       smithy.SchemaExtensions
+	eUpdateChannelRequest_TimeShiftConfiguration                                        smithy.SchemaExtensions
+	eUpdateChannelRequest_Audiences                                                     smithy.SchemaExtensions
+	eUpdateChannelResponse                                                              smithy.SchemaExtensions
+	eUpdateChannelResponse_Arn                                                          smithy.SchemaExtensions
+	eUpdateChannelResponse_ChannelName                                                  smithy.SchemaExtensions
+	eUpdateChannelResponse_ChannelState                                                 smithy.SchemaExtensions
+	eUpdateChannelResponse_CreationTime                                                 smithy.SchemaExtensions
+	eUpdateChannelResponse_FillerSlate                                                  smithy.SchemaExtensions
+	eUpdateChannelResponse_LastModifiedTime                                             smithy.SchemaExtensions
+	eUpdateChannelResponse_Outputs                                                      smithy.SchemaExtensions
+	eUpdateChannelResponse_PlaybackMode                                                 smithy.SchemaExtensions
+	eUpdateChannelResponse_Tags                                                         smithy.SchemaExtensions
+	eUpdateChannelResponse_Tier                                                         smithy.SchemaExtensions
+	eUpdateChannelResponse_TimeShiftConfiguration                                       smithy.SchemaExtensions
+	eUpdateChannelResponse_Audiences                                                    smithy.SchemaExtensions
+	eUpdateLiveSourceRequest                                                            smithy.SchemaExtensions
+	eUpdateLiveSourceRequest_HttpPackageConfigurations                                  smithy.SchemaExtensions
+	eUpdateLiveSourceRequest_LiveSourceName                                             smithy.SchemaExtensions
+	eUpdateLiveSourceRequest_SourceLocationName                                         smithy.SchemaExtensions
+	eUpdateLiveSourceResponse                                                           smithy.SchemaExtensions
+	eUpdateLiveSourceResponse_Arn                                                       smithy.SchemaExtensions
+	eUpdateLiveSourceResponse_CreationTime                                              smithy.SchemaExtensions
+	eUpdateLiveSourceResponse_HttpPackageConfigurations                                 smithy.SchemaExtensions
+	eUpdateLiveSourceResponse_LastModifiedTime                                          smithy.SchemaExtensions
+	eUpdateLiveSourceResponse_LiveSourceName                                            smithy.SchemaExtensions
+	eUpdateLiveSourceResponse_SourceLocationName                                        smithy.SchemaExtensions
+	eUpdateLiveSourceResponse_Tags                                                      smithy.SchemaExtensions
+	eUpdateProgramRequest                                                               smithy.SchemaExtensions
+	eUpdateProgramRequest_AdBreaks                                                      smithy.SchemaExtensions
+	eUpdateProgramRequest_ChannelName                                                   smithy.SchemaExtensions
+	eUpdateProgramRequest_ProgramName                                                   smithy.SchemaExtensions
+	eUpdateProgramRequest_ScheduleConfiguration                                         smithy.SchemaExtensions
+	eUpdateProgramRequest_AudienceMedia                                                 smithy.SchemaExtensions
+	eUpdateProgramResponse                                                              smithy.SchemaExtensions
+	eUpdateProgramResponse_AdBreaks                                                     smithy.SchemaExtensions
+	eUpdateProgramResponse_Arn                                                          smithy.SchemaExtensions
+	eUpdateProgramResponse_ChannelName                                                  smithy.SchemaExtensions
+	eUpdateProgramResponse_CreationTime                                                 smithy.SchemaExtensions
+	eUpdateProgramResponse_ProgramName                                                  smithy.SchemaExtensions
+	eUpdateProgramResponse_SourceLocationName                                           smithy.SchemaExtensions
+	eUpdateProgramResponse_VodSourceName                                                smithy.SchemaExtensions
+	eUpdateProgramResponse_LiveSourceName                                               smithy.SchemaExtensions
+	eUpdateProgramResponse_ClipRange                                                    smithy.SchemaExtensions
+	eUpdateProgramResponse_DurationMillis                                               smithy.SchemaExtensions
+	eUpdateProgramResponse_ScheduledStartTime                                           smithy.SchemaExtensions
+	eUpdateProgramResponse_AudienceMedia                                                smithy.SchemaExtensions
+	eUpdateProgramResponse_Tags                                                         smithy.SchemaExtensions
+	eUpdateSourceLocationRequest                                                        smithy.SchemaExtensions
+	eUpdateSourceLocationRequest_AccessConfiguration                                    smithy.SchemaExtensions
+	eUpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration                    smithy.SchemaExtensions
+	eUpdateSourceLocationRequest_HttpConfiguration                                      smithy.SchemaExtensions
+	eUpdateSourceLocationRequest_SegmentDeliveryConfigurations                          smithy.SchemaExtensions
+	eUpdateSourceLocationRequest_SourceLocationName                                     smithy.SchemaExtensions
+	eUpdateSourceLocationResponse                                                       smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_AccessConfiguration                                   smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_Arn                                                   smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_CreationTime                                          smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration                   smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_HttpConfiguration                                     smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_LastModifiedTime                                      smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_SegmentDeliveryConfigurations                         smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_SourceLocationName                                    smithy.SchemaExtensions
+	eUpdateSourceLocationResponse_Tags                                                  smithy.SchemaExtensions
+	eUpdateVodSourceRequest                                                             smithy.SchemaExtensions
+	eUpdateVodSourceRequest_HttpPackageConfigurations                                   smithy.SchemaExtensions
+	eUpdateVodSourceRequest_SourceLocationName                                          smithy.SchemaExtensions
+	eUpdateVodSourceRequest_VodSourceName                                               smithy.SchemaExtensions
+	eUpdateVodSourceResponse                                                            smithy.SchemaExtensions
+	eUpdateVodSourceResponse_Arn                                                        smithy.SchemaExtensions
+	eUpdateVodSourceResponse_CreationTime                                               smithy.SchemaExtensions
+	eUpdateVodSourceResponse_HttpPackageConfigurations                                  smithy.SchemaExtensions
+	eUpdateVodSourceResponse_LastModifiedTime                                           smithy.SchemaExtensions
+	eUpdateVodSourceResponse_SourceLocationName                                         smithy.SchemaExtensions
+	eUpdateVodSourceResponse_Tags                                                       smithy.SchemaExtensions
+	eUpdateVodSourceResponse_VodSourceName                                              smithy.SchemaExtensions
+)
+
+var (
+	iConfigureLogsForChannel                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigureLogsForChannel"}
+	iConfigureLogsForPlaybackConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigureLogsForPlaybackConfiguration"}
+	iCreateChannel                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateChannel"}
+	iCreateLiveSource                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateLiveSource"}
+	iCreatePrefetchSchedule                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreatePrefetchSchedule"}
+	iCreateProgram                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateProgram"}
+	iCreateSourceLocation                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateSourceLocation"}
+	iCreateVodSource                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateVodSource"}
+	iDeleteChannel                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteChannel"}
+	iDeleteChannelPolicy                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteChannelPolicy"}
+	iDeleteFunction                                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteFunction"}
+	iDeleteLiveSource                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteLiveSource"}
+	iDeletePlaybackConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeletePlaybackConfiguration"}
+	iDeletePrefetchSchedule                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeletePrefetchSchedule"}
+	iDeleteProgram                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteProgram"}
+	iDeleteSourceLocation                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteSourceLocation"}
+	iDeleteVodSource                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteVodSource"}
+	iDescribeChannel                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeChannel"}
+	iDescribeLiveSource                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeLiveSource"}
+	iDescribeProgram                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeProgram"}
+	iDescribeSourceLocation                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeSourceLocation"}
+	iDescribeVodSource                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeVodSource"}
+	iGetChannelPolicy                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetChannelPolicy"}
+	iGetChannelSchedule                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetChannelSchedule"}
+	iGetFunction                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetFunction"}
+	iGetPlaybackConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetPlaybackConfiguration"}
+	iGetPrefetchSchedule                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetPrefetchSchedule"}
+	iListAlerts                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListAlerts"}
+	iListChannels                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListChannels"}
+	iListFunctions                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListFunctions"}
+	iListLiveSources                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListLiveSources"}
+	iListPlaybackConfigurations                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListPlaybackConfigurations"}
+	iListPrefetchSchedules                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListPrefetchSchedules"}
+	iListSourceLocations                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListSourceLocations"}
+	iListTagsForResource                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListTagsForResource"}
+	iListVodSources                                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListVodSources"}
+	iPutChannelPolicy                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutChannelPolicy"}
+	iPutFunction                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutFunction"}
+	iPutPlaybackConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutPlaybackConfiguration"}
+	iStartChannel                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StartChannel"}
+	iStopChannel                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StopChannel"}
+	iTagResource                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "TagResource"}
+	iUntagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UntagResource"}
+	iUpdateChannel                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateChannel"}
+	iUpdateLiveSource                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateLiveSource"}
+	iUpdateProgram                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateProgram"}
+	iUpdateSourceLocation                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateSourceLocation"}
+	iUpdateVodSource                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateVodSource"}
+	i_MediaTailor                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "MediaTailor"}
+	i___adsInteractionExcludeEventTypesList        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__adsInteractionExcludeEventTypesList"}
+	i___adsInteractionPublishOptInEventTypesList   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__adsInteractionPublishOptInEventTypesList"}
+	i___boolean                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__boolean"}
+	i___integer                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__integer"}
+	i___integerMin1                                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__integerMin1"}
+	i___integerMin1Max100                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__integerMin1Max100"}
+	i___listOf__string                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOf__string"}
+	i___listOfAdBreak                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfAdBreak"}
+	i___listOfAlert                                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfAlert"}
+	i___listOfAlternateMedia                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfAlternateMedia"}
+	i___listOfAudienceMedia                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfAudienceMedia"}
+	i___listOfAvailMatchingCriteria                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfAvailMatchingCriteria"}
+	i___listOfChannel                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfChannel"}
+	i___listOfFunctionsRef                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfFunctionsRef"}
+	i___listOfFunctionsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfFunctionsResponse"}
+	i___listOfLiveSource                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfLiveSource"}
+	i___listOfLoggingStrategies                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfLoggingStrategies"}
+	i___listOfPlaybackConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfPlaybackConfiguration"}
+	i___listOfPrefetchSchedule                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfPrefetchSchedule"}
+	i___listOfScheduleAdBreak                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfScheduleAdBreak"}
+	i___listOfScheduleEntry                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfScheduleEntry"}
+	i___listOfSegmentDeliveryConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfSegmentDeliveryConfiguration"}
+	i___listOfSourceLocation                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfSourceLocation"}
+	i___listOfVodSource                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__listOfVodSource"}
+	i___long                                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__long"}
+	i___manifestServiceExcludeEventTypesList       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__manifestServiceExcludeEventTypesList"}
+	i___manifestServicePublishOptInEventTypesList  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__manifestServicePublishOptInEventTypesList"}
+	i___mapOf__string                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__mapOf__string"}
+	i___string                                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__string"}
+	i___timestampUnix                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "__timestampUnix"}
+	iAccessConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AccessConfiguration"}
+	iAccessType                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AccessType"}
+	iAdBreak                                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdBreak"}
+	i_AdBreakMetadataList                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdBreakMetadataList"}
+	i_AdBreakOpportunities                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdBreakOpportunities"}
+	iAdBreakOpportunity                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdBreakOpportunity"}
+	iAdConditioningConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdConditioningConfiguration"}
+	iAdDecisionServerConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdDecisionServerConfiguration"}
+	iAdMarkerPassthrough                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdMarkerPassthrough"}
+	iAdMarkupType                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdMarkupType"}
+	i_adMarkupTypes                                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "adMarkupTypes"}
+	iAdSequencingMode                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdSequencingMode"}
+	iAdsInteractionExcludeEventType                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdsInteractionExcludeEventType"}
+	iAdsInteractionLog                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdsInteractionLog"}
+	iAdsInteractionPublishOptInEventType           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdsInteractionPublishOptInEventType"}
+	iAdsPersonalizationConcurrency                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdsPersonalizationConcurrency"}
+	iAdsPersonalizationTimeouts                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AdsPersonalizationTimeouts"}
+	iAlert                                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Alert"}
+	iAlertCategory                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AlertCategory"}
+	iAlternateMedia                                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AlternateMedia"}
+	i_ApsPublisherId                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ApsPublisherId"}
+	iApsRegion                                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ApsRegion"}
+	iAudienceMedia                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AudienceMedia"}
+	i_Audiences                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Audiences"}
+	iAvailMatchingCriteria                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AvailMatchingCriteria"}
+	iAvailSuppression                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AvailSuppression"}
+	iAwsServiceRequestConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AwsServiceRequestConfiguration"}
+	i_AwsTargetService                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "AwsTargetService"}
+	iBadRequestException                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "BadRequestException"}
+	iBeaconEventType                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "BeaconEventType"}
+	i_BeaconEventTypeList                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "BeaconEventTypeList"}
+	iBeaconingConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "BeaconingConfiguration"}
+	iBumper                                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Bumper"}
+	iCdnConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CdnConfiguration"}
+	iChannel                                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Channel"}
+	iChannelState                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ChannelState"}
+	iClientSideBeaconingConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ClientSideBeaconingConfiguration"}
+	iClientSideBeaconingMode                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ClientSideBeaconingMode"}
+	iClipRange                                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ClipRange"}
+	iCompressionMethod                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CompressionMethod"}
+	iConcurrentExecutorConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConcurrentExecutorConfiguration"}
+	i_ConfigurationAliasesRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigurationAliasesRequest"}
+	i_ConfigurationAliasesResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigurationAliasesResponse"}
+	iCustomOutputConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CustomOutputConfiguration"}
+	iDashConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DashConfiguration"}
+	iDashConfigurationForPut                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DashConfigurationForPut"}
+	iDashPlaylistSettings                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DashPlaylistSettings"}
+	iDefaultSegmentDeliveryConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DefaultSegmentDeliveryConfiguration"}
+	iEventName                                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "EventName"}
+	iFillPolicy                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "FillPolicy"}
+	iFunction                                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Function"}
+	i_FunctionMapping                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "FunctionMapping"}
+	iFunctionRef                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "FunctionRef"}
+	iFunctionType                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "FunctionType"}
+	iHlsConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HlsConfiguration"}
+	iHlsPlaylistSettings                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HlsPlaylistSettings"}
+	iHttpConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HttpConfiguration"}
+	iHttpPackageConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HttpPackageConfiguration"}
+	i_HttpPackageConfigurations                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HttpPackageConfigurations"}
+	iHttpRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HttpRequest"}
+	iHttpRequestCacheConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HttpRequestCacheConfiguration"}
+	iHttpRequestConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "HttpRequestConfiguration"}
+	iInsertionMode                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "InsertionMode"}
+	iKeyValuePair                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "KeyValuePair"}
+	iListPrefetchScheduleType                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListPrefetchScheduleType"}
+	iLivePreRollConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "LivePreRollConfiguration"}
+	iLiveSource                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "LiveSource"}
+	iLogConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "LogConfiguration"}
+	iLogConfigurationForChannel                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "LogConfigurationForChannel"}
+	iLoggingStrategy                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "LoggingStrategy"}
+	iLogType                                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "LogType"}
+	i_LogTypes                                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "LogTypes"}
+	iManifestProcessingRules                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ManifestProcessingRules"}
+	iManifestServiceExcludeEventType               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ManifestServiceExcludeEventType"}
+	iManifestServiceInteractionLog                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ManifestServiceInteractionLog"}
+	iManifestServicePublishOptInEventType          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ManifestServicePublishOptInEventType"}
+	i_MaxResults                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "MaxResults"}
+	iMessageType                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "MessageType"}
+	iMethod                                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Method"}
+	iMethodType                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "MethodType"}
+	i_MinimumUnfilledDurationSeconds               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "MinimumUnfilledDurationSeconds"}
+	iMode                                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Mode"}
+	i_OpenRtbTemplateString                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "OpenRtbTemplateString"}
+	iOperator                                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Operator"}
+	iOriginManifestType                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "OriginManifestType"}
+	iPlaybackConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PlaybackConfiguration"}
+	iPlaybackMode                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PlaybackMode"}
+	iPrefetchConsumption                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PrefetchConsumption"}
+	iPrefetchRetrieval                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PrefetchRetrieval"}
+	iPrefetchSchedule                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PrefetchSchedule"}
+	iPrefetchScheduleType                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PrefetchScheduleType"}
+	iPreRollAdDecisionServerConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PreRollAdDecisionServerConfiguration"}
+	iPreRollAdSequencingMode                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PreRollAdSequencingMode"}
+	iPreRollVastResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PreRollVastResponse"}
+	iRecurringConsumption                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "RecurringConsumption"}
+	iRecurringPrefetchConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "RecurringPrefetchConfiguration"}
+	iRecurringRetrieval                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "RecurringRetrieval"}
+	iRelativePosition                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "RelativePosition"}
+	iRequestOutputItem                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "RequestOutputItem"}
+	i_RequestOutputs                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "RequestOutputs"}
+	iResponseOutputItem                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ResponseOutputItem"}
+	i_ResponseOutputs                              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ResponseOutputs"}
+	iRuntimeType                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "RuntimeType"}
+	iScheduleAdBreak                               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ScheduleAdBreak"}
+	iScheduleConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ScheduleConfiguration"}
+	iScheduleEntry                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ScheduleEntry"}
+	iScheduleEntryType                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ScheduleEntryType"}
+	iSecretsManagerAccessTokenConfiguration        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SecretsManagerAccessTokenConfiguration"}
+	iSegmentationDescriptor                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SegmentationDescriptor"}
+	i_SegmentationDescriptorList                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SegmentationDescriptorList"}
+	iSegmentDeliveryConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SegmentDeliveryConfiguration"}
+	iSequentialExecutorConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SequentialExecutorConfiguration"}
+	iSlateSource                                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SlateSource"}
+	iSourceLocation                                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SourceLocation"}
+	iSpliceInsertMessage                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "SpliceInsertMessage"}
+	iStreamingMediaFileConditioning                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StreamingMediaFileConditioning"}
+	i_StringMap                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StringMap"}
+	iTier                                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Tier"}
+	iTimeShiftConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "TimeShiftConfiguration"}
+	iTimeSignalMessage                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "TimeSignalMessage"}
+	iTrafficShapingRetrievalWindow                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "TrafficShapingRetrievalWindow"}
+	iTrafficShapingTpsConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "TrafficShapingTpsConfiguration"}
+	iTrafficShapingType                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "TrafficShapingType"}
+	iTransition                                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Transition"}
+	iType                                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "Type"}
+	iUpdateProgramScheduleConfiguration            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateProgramScheduleConfiguration"}
+	iUpdateProgramTransition                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateProgramTransition"}
+	iVastRequestConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "VastRequestConfiguration"}
+	iVastResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "VastResponse"}
+	iVodSource                                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "VodSource"}
+	iYieldOptimizationConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "YieldOptimizationConfiguration"}
+	iConfigureLogsForChannelRequest                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigureLogsForChannelRequest"}
+	iConfigureLogsForChannelResponse               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigureLogsForChannelResponse"}
+	iConfigureLogsForPlaybackConfigurationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigureLogsForPlaybackConfigurationRequest"}
+	iConfigureLogsForPlaybackConfigurationResponse = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ConfigureLogsForPlaybackConfigurationResponse"}
+	iCreateChannelRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateChannelRequest"}
+	iCreateChannelResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateChannelResponse"}
+	iCreateLiveSourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateLiveSourceRequest"}
+	iCreateLiveSourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateLiveSourceResponse"}
+	iCreatePrefetchScheduleRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreatePrefetchScheduleRequest"}
+	iCreatePrefetchScheduleResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreatePrefetchScheduleResponse"}
+	iCreateProgramRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateProgramRequest"}
+	iCreateProgramResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateProgramResponse"}
+	iCreateSourceLocationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateSourceLocationRequest"}
+	iCreateSourceLocationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateSourceLocationResponse"}
+	iCreateVodSourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateVodSourceRequest"}
+	iCreateVodSourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "CreateVodSourceResponse"}
+	iDeleteChannelRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteChannelRequest"}
+	iDeleteChannelResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteChannelResponse"}
+	iDeleteChannelPolicyRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteChannelPolicyRequest"}
+	iDeleteChannelPolicyResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteChannelPolicyResponse"}
+	iDeleteFunctionRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteFunctionRequest"}
+	iDeleteFunctionResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteFunctionResponse"}
+	iDeleteLiveSourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteLiveSourceRequest"}
+	iDeleteLiveSourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteLiveSourceResponse"}
+	iDeletePlaybackConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeletePlaybackConfigurationRequest"}
+	iDeletePlaybackConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeletePlaybackConfigurationResponse"}
+	iDeletePrefetchScheduleRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeletePrefetchScheduleRequest"}
+	iDeletePrefetchScheduleResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeletePrefetchScheduleResponse"}
+	iDeleteProgramRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteProgramRequest"}
+	iDeleteProgramResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteProgramResponse"}
+	iDeleteSourceLocationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteSourceLocationRequest"}
+	iDeleteSourceLocationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteSourceLocationResponse"}
+	iDeleteVodSourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteVodSourceRequest"}
+	iDeleteVodSourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DeleteVodSourceResponse"}
+	iDescribeChannelRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeChannelRequest"}
+	iDescribeChannelResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeChannelResponse"}
+	iDescribeLiveSourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeLiveSourceRequest"}
+	iDescribeLiveSourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeLiveSourceResponse"}
+	iDescribeProgramRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeProgramRequest"}
+	iDescribeProgramResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeProgramResponse"}
+	iDescribeSourceLocationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeSourceLocationRequest"}
+	iDescribeSourceLocationResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeSourceLocationResponse"}
+	iDescribeVodSourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeVodSourceRequest"}
+	iDescribeVodSourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "DescribeVodSourceResponse"}
+	iGetChannelPolicyRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetChannelPolicyRequest"}
+	iGetChannelPolicyResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetChannelPolicyResponse"}
+	iGetChannelScheduleRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetChannelScheduleRequest"}
+	iGetChannelScheduleResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetChannelScheduleResponse"}
+	iGetFunctionRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetFunctionRequest"}
+	iGetFunctionResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetFunctionResponse"}
+	iGetPlaybackConfigurationRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetPlaybackConfigurationRequest"}
+	iGetPlaybackConfigurationResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetPlaybackConfigurationResponse"}
+	iGetPrefetchScheduleRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetPrefetchScheduleRequest"}
+	iGetPrefetchScheduleResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "GetPrefetchScheduleResponse"}
+	iListAlertsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListAlertsRequest"}
+	iListAlertsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListAlertsResponse"}
+	iListChannelsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListChannelsRequest"}
+	iListChannelsResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListChannelsResponse"}
+	iListFunctionsRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListFunctionsRequest"}
+	iListFunctionsResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListFunctionsResponse"}
+	iListLiveSourcesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListLiveSourcesRequest"}
+	iListLiveSourcesResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListLiveSourcesResponse"}
+	iListPlaybackConfigurationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListPlaybackConfigurationsRequest"}
+	iListPlaybackConfigurationsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListPlaybackConfigurationsResponse"}
+	iListPrefetchSchedulesRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListPrefetchSchedulesRequest"}
+	iListPrefetchSchedulesResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListPrefetchSchedulesResponse"}
+	iListSourceLocationsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListSourceLocationsRequest"}
+	iListSourceLocationsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListSourceLocationsResponse"}
+	iListTagsForResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListTagsForResourceResponse"}
+	iListVodSourcesRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListVodSourcesRequest"}
+	iListVodSourcesResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "ListVodSourcesResponse"}
+	iPutChannelPolicyRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutChannelPolicyRequest"}
+	iPutChannelPolicyResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutChannelPolicyResponse"}
+	iPutFunctionRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutFunctionRequest"}
+	iPutFunctionResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutFunctionResponse"}
+	iPutPlaybackConfigurationRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutPlaybackConfigurationRequest"}
+	iPutPlaybackConfigurationResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "PutPlaybackConfigurationResponse"}
+	iStartChannelRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StartChannelRequest"}
+	iStartChannelResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StartChannelResponse"}
+	iStopChannelRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StopChannelRequest"}
+	iStopChannelResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "StopChannelResponse"}
+	iTagResourceRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "TagResourceRequest"}
+	iUntagResourceRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UntagResourceRequest"}
+	iUpdateChannelRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateChannelRequest"}
+	iUpdateChannelResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateChannelResponse"}
+	iUpdateLiveSourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateLiveSourceRequest"}
+	iUpdateLiveSourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateLiveSourceResponse"}
+	iUpdateProgramRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateProgramRequest"}
+	iUpdateProgramResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateProgramResponse"}
+	iUpdateSourceLocationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateSourceLocationRequest"}
+	iUpdateSourceLocationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateSourceLocationResponse"}
+	iUpdateVodSourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateVodSourceRequest"}
+	iUpdateVodSourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.mediatailor", Name: "UpdateVodSourceResponse"}
+	pUnit                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pString                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pInteger                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/configureLogs/channel",
-	Code: 200})
-
-var ConfigureLogsForPlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigureLogsForPlaybackConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/configureLogs/playbackConfiguration",
-	Code: 200})
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channel/{ChannelName}",
-	Code: 200})
-
-var CreateLiveSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateLiveSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
-	Code: 200})
-
-var CreatePrefetchSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreatePrefetchSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/prefetchSchedule/{PlaybackConfigurationName}/{Name}",
-	Code: 200})
-
-var CreateProgram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateProgram",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channel/{ChannelName}/program/{ProgramName}",
-	Code: 200})
-
-var CreateSourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateSourceLocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sourceLocation/{SourceLocationName}",
-	Code: 200})
-
-var CreateVodSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateVodSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}",
-	Code: 200})
-
-var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channel/{ChannelName}",
-	Code: 200})
-
-var DeleteChannelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteChannelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channel/{ChannelName}/policy",
-	Code: 200})
-
-var DeleteFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/function/{FunctionId}",
-	Code: 204})
-
-var DeleteLiveSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteLiveSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
-	Code: 200})
-
-var DeletePlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeletePlaybackConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/playbackConfiguration/{Name}",
-	Code: 204})
-
-var DeletePrefetchSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeletePrefetchSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/prefetchSchedule/{PlaybackConfigurationName}/{Name}",
-	Code: 204})
-
-var DeleteProgram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteProgram",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channel/{ChannelName}/program/{ProgramName}",
-	Code: 200})
-
-var DeleteSourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteSourceLocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/sourceLocation/{SourceLocationName}",
-	Code: 200})
-
-var DeleteVodSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteVodSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}",
-	Code: 200})
-
-var DescribeChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channel/{ChannelName}",
-	Code: 200})
-
-var DescribeLiveSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeLiveSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
-	Code: 200})
-
-var DescribeProgram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeProgram",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channel/{ChannelName}/program/{ProgramName}",
-	Code: 200})
-
-var DescribeSourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeSourceLocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sourceLocation/{SourceLocationName}",
-	Code: 200})
-
-var DescribeVodSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeVodSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}",
-	Code: 200})
-
-var GetChannelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetChannelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channel/{ChannelName}/policy",
-	Code: 200})
-
-var GetChannelSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetChannelSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channel/{ChannelName}/schedule",
-	Code: 200})
-
-var GetFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/function/{FunctionId}",
-	Code: 200})
-
-var GetPlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetPlaybackConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/playbackConfiguration/{Name}",
-	Code: 200})
-
-var GetPrefetchSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetPrefetchSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/prefetchSchedule/{PlaybackConfigurationName}/{Name}",
-	Code: 200})
-
-var ListAlerts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListAlerts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/alerts",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels",
-	Code: 200})
-
-var ListFunctions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListFunctions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/functions",
-	Code: 200})
-
-var ListLiveSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListLiveSources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sourceLocation/{SourceLocationName}/liveSources",
-	Code: 200})
-
-var ListPlaybackConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListPlaybackConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/playbackConfigurations",
-	Code: 200})
-
-var ListPrefetchSchedules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListPrefetchSchedules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/prefetchSchedule/{PlaybackConfigurationName}",
-	Code: 200})
-
-var ListSourceLocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListSourceLocations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sourceLocations",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var ListVodSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListVodSources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sourceLocation/{SourceLocationName}/vodSources",
-	Code: 200})
-
-var PutChannelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutChannelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channel/{ChannelName}/policy",
-	Code: 200})
-
-var PutFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/function/{FunctionId}",
-	Code: 200})
-
-var PutPlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutPlaybackConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/playbackConfiguration",
-	Code: 200})
-
-var StartChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StartChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channel/{ChannelName}/start",
-	Code: 200})
-
-var StopChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StopChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channel/{ChannelName}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channel/{ChannelName}",
-	Code: 200})
-
-var UpdateLiveSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateLiveSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
-	Code: 200})
-
-var UpdateProgram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateProgram",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channel/{ChannelName}/program/{ProgramName}",
-	Code: 200})
-
-var UpdateSourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateSourceLocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/sourceLocation/{SourceLocationName}",
-	Code: 200})
-
-var UpdateVodSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateVodSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}",
-	Code: 200})
-
-var _MediaTailor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "MediaTailor",
-}, smithy.ShapeTypeService, 0)
-
-var MediaTailor = smithy.NewServiceSchema(_MediaTailor, "2018-04-23")
-
-var ___adsInteractionExcludeEventTypesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__adsInteractionExcludeEventTypesList",
-}, smithy.ShapeTypeList, 1)
-var ___adsInteractionExcludeEventTypesList_member *smithy.Schema
-
-var ___adsInteractionPublishOptInEventTypesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__adsInteractionPublishOptInEventTypesList",
-}, smithy.ShapeTypeList, 1)
-var ___adsInteractionPublishOptInEventTypesList_member *smithy.Schema
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__integerMin1",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1Max100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__integerMin1Max100",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOfAdBreak = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfAdBreak",
-}, smithy.ShapeTypeList, 1)
-var ___listOfAdBreak_member *smithy.Schema
-
-var ___listOfAlert = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfAlert",
-}, smithy.ShapeTypeList, 1)
-var ___listOfAlert_member *smithy.Schema
-
-var ___listOfAlternateMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfAlternateMedia",
-}, smithy.ShapeTypeList, 1)
-var ___listOfAlternateMedia_member *smithy.Schema
-
-var ___listOfAudienceMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfAudienceMedia",
-}, smithy.ShapeTypeList, 1)
-var ___listOfAudienceMedia_member *smithy.Schema
-
-var ___listOfAvailMatchingCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfAvailMatchingCriteria",
-}, smithy.ShapeTypeList, 1)
-var ___listOfAvailMatchingCriteria_member *smithy.Schema
-
-var ___listOfChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfChannel",
-}, smithy.ShapeTypeList, 1)
-var ___listOfChannel_member *smithy.Schema
-
-var ___listOfFunctionsRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfFunctionsRef",
-}, smithy.ShapeTypeList, 1)
-var ___listOfFunctionsRef_member *smithy.Schema
-
-var ___listOfFunctionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfFunctionsResponse",
-}, smithy.ShapeTypeList, 1)
-var ___listOfFunctionsResponse_member *smithy.Schema
-
-var ___listOfLiveSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfLiveSource",
-}, smithy.ShapeTypeList, 1)
-var ___listOfLiveSource_member *smithy.Schema
-
-var ___listOfLoggingStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfLoggingStrategies",
-}, smithy.ShapeTypeList, 1)
-var ___listOfLoggingStrategies_member *smithy.Schema
-
-var ___listOfPlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfPlaybackConfiguration",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPlaybackConfiguration_member *smithy.Schema
-
-var ___listOfPrefetchSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfPrefetchSchedule",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPrefetchSchedule_member *smithy.Schema
-
-var ___listOfScheduleAdBreak = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfScheduleAdBreak",
-}, smithy.ShapeTypeList, 1)
-var ___listOfScheduleAdBreak_member *smithy.Schema
-
-var ___listOfScheduleEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfScheduleEntry",
-}, smithy.ShapeTypeList, 1)
-var ___listOfScheduleEntry_member *smithy.Schema
-
-var ___listOfSegmentDeliveryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfSegmentDeliveryConfiguration",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSegmentDeliveryConfiguration_member *smithy.Schema
-
-var ___listOfSourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfSourceLocation",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSourceLocation_member *smithy.Schema
-
-var ___listOfVodSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__listOfVodSource",
-}, smithy.ShapeTypeList, 1)
-var ___listOfVodSource_member *smithy.Schema
-
-var ___long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__long",
-}, smithy.ShapeTypeLong, 0)
-
-var ___manifestServiceExcludeEventTypesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__manifestServiceExcludeEventTypesList",
-}, smithy.ShapeTypeList, 1)
-var ___manifestServiceExcludeEventTypesList_member *smithy.Schema
-
-var ___manifestServicePublishOptInEventTypesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__manifestServicePublishOptInEventTypesList",
-}, smithy.ShapeTypeList, 1)
-var ___manifestServicePublishOptInEventTypesList_member *smithy.Schema
-
-var ___mapOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__mapOf__string",
-}, smithy.ShapeTypeMap, 2)
-var ___mapOf__string_key *smithy.Schema
-
-var ___mapOf__string_value *smithy.Schema
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampUnix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "__timestampUnix",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
-
-var AccessConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AccessConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var AccessConfiguration_AccessType *smithy.Schema
-
-var AccessConfiguration_SecretsManagerAccessTokenConfiguration *smithy.Schema
-
-var AccessType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AccessType",
-}, smithy.ShapeTypeEnum, 3)
-var AccessType_S3_SIGV4 *smithy.Schema
-
-var AccessType_SECRETS_MANAGER_ACCESS_TOKEN *smithy.Schema
-
-var AccessType_AUTODETECT_SIGV4 *smithy.Schema
-
-var AdBreak = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdBreak",
-}, smithy.ShapeTypeStructure, 6)
-var AdBreak_MessageType *smithy.Schema
-
-var AdBreak_OffsetMillis *smithy.Schema
-
-var AdBreak_Slate *smithy.Schema
-
-var AdBreak_SpliceInsertMessage *smithy.Schema
-
-var AdBreak_TimeSignalMessage *smithy.Schema
-
-var AdBreak_AdBreakMetadata *smithy.Schema
-
-var _AdBreakMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdBreakMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _AdBreakMetadataList_member *smithy.Schema
-
-var _AdBreakOpportunities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdBreakOpportunities",
-}, smithy.ShapeTypeList, 1)
-var _AdBreakOpportunities_member *smithy.Schema
-
-var AdBreakOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdBreakOpportunity",
-}, smithy.ShapeTypeStructure, 1)
-var AdBreakOpportunity_OffsetMillis *smithy.Schema
-
-var AdConditioningConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdConditioningConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AdConditioningConfiguration_StreamingMediaFileConditioning *smithy.Schema
-
-var AdDecisionServerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdDecisionServerConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var AdDecisionServerConfiguration_HttpRequest *smithy.Schema
-
-var AdDecisionServerConfiguration_VastResponse *smithy.Schema
-
-var AdMarkerPassthrough = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdMarkerPassthrough",
-}, smithy.ShapeTypeStructure, 1)
-var AdMarkerPassthrough_Enabled *smithy.Schema
-
-var AdMarkupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdMarkupType",
-}, smithy.ShapeTypeEnum, 2)
-var AdMarkupType_DATERANGE *smithy.Schema
-
-var AdMarkupType_SCTE35_ENHANCED *smithy.Schema
-
-var _adMarkupTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "adMarkupTypes",
-}, smithy.ShapeTypeList, 1)
-var _adMarkupTypes_member *smithy.Schema
-
-var AdSequencingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdSequencingMode",
-}, smithy.ShapeTypeEnum, 4)
-var AdSequencingMode_FOLLOW_AD_SEQUENCE *smithy.Schema
-
-var AdSequencingMode_IGNORE_AD_SEQUENCE *smithy.Schema
-
-var AdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE *smithy.Schema
-
-var AdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD *smithy.Schema
-
-var AdsInteractionExcludeEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdsInteractionExcludeEventType",
-}, smithy.ShapeTypeEnum, 48)
-var AdsInteractionExcludeEventType_AD_MARKER_FOUND *smithy.Schema
-
-var AdsInteractionExcludeEventType_NON_AD_MARKER_FOUND *smithy.Schema
-
-var AdsInteractionExcludeEventType_MAKING_ADS_REQUEST *smithy.Schema
-
-var AdsInteractionExcludeEventType_MODIFIED_TARGET_URL *smithy.Schema
-
-var AdsInteractionExcludeEventType_VAST_REDIRECT *smithy.Schema
-
-var AdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE *smithy.Schema
-
-var AdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE *smithy.Schema
-
-var AdsInteractionExcludeEventType_VAST_RESPONSE *smithy.Schema
-
-var AdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE *smithy.Schema
-
-var AdsInteractionExcludeEventType_FILLED_AVAIL *smithy.Schema
-
-var AdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL *smithy.Schema
-
-var AdsInteractionExcludeEventType_BEACON_FIRED *smithy.Schema
-
-var AdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS *smithy.Schema
-
-var AdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED *smithy.Schema
-
-var AdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_UNKNOWN *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_ADS_IO *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED *smithy.Schema
-
-var AdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED *smithy.Schema
-
-var AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET *smithy.Schema
-
-var AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS *smithy.Schema
-
-var AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS *smithy.Schema
-
-var AdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS *smithy.Schema
-
-var AdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE *smithy.Schema
-
-var AdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR *smithy.Schema
-
-var AdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR *smithy.Schema
-
-var AdsInteractionExcludeEventType_BEACON_RECEIVED *smithy.Schema
-
-var AdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR *smithy.Schema
-
-var AdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR *smithy.Schema
-
-var AdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR *smithy.Schema
-
-var AdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR *smithy.Schema
-
-var AdsInteractionLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdsInteractionLog",
-}, smithy.ShapeTypeStructure, 2)
-var AdsInteractionLog_PublishOptInEventTypes *smithy.Schema
-
-var AdsInteractionLog_ExcludeEventTypes *smithy.Schema
-
-var AdsInteractionPublishOptInEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdsInteractionPublishOptInEventType",
-}, smithy.ShapeTypeEnum, 10)
-var AdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_RAW_ADS_REQUEST *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_RAW_BID_REQUEST *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_RAW_BID_RESPONSE *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY *smithy.Schema
-
-var AdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED *smithy.Schema
-
-var AdsPersonalizationConcurrency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdsPersonalizationConcurrency",
-}, smithy.ShapeTypeStructure, 2)
-var AdsPersonalizationConcurrency_MaxConcurrentAdsRequests *smithy.Schema
-
-var AdsPersonalizationConcurrency_EnableVodVastParallelization *smithy.Schema
-
-var AdsPersonalizationTimeouts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AdsPersonalizationTimeouts",
-}, smithy.ShapeTypeStructure, 5)
-var AdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds *smithy.Schema
-
-var AdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds *smithy.Schema
-
-var AdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds *smithy.Schema
-
-var AdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds *smithy.Schema
-
-var AdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds *smithy.Schema
-
-var Alert = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Alert",
-}, smithy.ShapeTypeStructure, 6)
-var Alert_AlertCode *smithy.Schema
-
-var Alert_AlertMessage *smithy.Schema
-
-var Alert_LastModifiedTime *smithy.Schema
-
-var Alert_RelatedResourceArns *smithy.Schema
-
-var Alert_ResourceArn *smithy.Schema
-
-var Alert_Category *smithy.Schema
-
-var AlertCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AlertCategory",
-}, smithy.ShapeTypeEnum, 3)
-var AlertCategory_SCHEDULING_ERROR *smithy.Schema
-
-var AlertCategory_PLAYBACK_WARNING *smithy.Schema
-
-var AlertCategory_INFO *smithy.Schema
-
-var AlternateMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AlternateMedia",
-}, smithy.ShapeTypeStructure, 7)
-var AlternateMedia_SourceLocationName *smithy.Schema
-
-var AlternateMedia_LiveSourceName *smithy.Schema
-
-var AlternateMedia_VodSourceName *smithy.Schema
-
-var AlternateMedia_ClipRange *smithy.Schema
-
-var AlternateMedia_ScheduledStartTimeMillis *smithy.Schema
-
-var AlternateMedia_AdBreaks *smithy.Schema
-
-var AlternateMedia_DurationMillis *smithy.Schema
-
-var _ApsPublisherId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ApsPublisherId",
-}, smithy.ShapeTypeString, 0)
-
-var ApsRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ApsRegion",
-}, smithy.ShapeTypeEnum, 3)
-var ApsRegion_AMERICAS *smithy.Schema
-
-var ApsRegion_EUROPE *smithy.Schema
-
-var ApsRegion_ASIA_PACIFIC *smithy.Schema
-
-var AudienceMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AudienceMedia",
-}, smithy.ShapeTypeStructure, 2)
-var AudienceMedia_Audience *smithy.Schema
-
-var AudienceMedia_AlternateMedia *smithy.Schema
-
-var _Audiences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Audiences",
-}, smithy.ShapeTypeList, 1)
-var _Audiences_member *smithy.Schema
-
-var AvailMatchingCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AvailMatchingCriteria",
-}, smithy.ShapeTypeStructure, 2)
-var AvailMatchingCriteria_DynamicVariable *smithy.Schema
-
-var AvailMatchingCriteria_Operator *smithy.Schema
-
-var AvailSuppression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AvailSuppression",
-}, smithy.ShapeTypeStructure, 3)
-var AvailSuppression_Mode *smithy.Schema
-
-var AvailSuppression_Value *smithy.Schema
-
-var AvailSuppression_FillPolicy *smithy.Schema
-
-var AwsServiceRequestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AwsServiceRequestConfiguration",
-}, smithy.ShapeTypeStructure, 10)
-var AwsServiceRequestConfiguration_Runtime *smithy.Schema
-
-var AwsServiceRequestConfiguration_Output *smithy.Schema
-
-var AwsServiceRequestConfiguration_MethodType *smithy.Schema
-
-var AwsServiceRequestConfiguration_RequestTimeoutMilliseconds *smithy.Schema
-
-var AwsServiceRequestConfiguration_Url *smithy.Schema
-
-var AwsServiceRequestConfiguration_Body *smithy.Schema
-
-var AwsServiceRequestConfiguration_Headers *smithy.Schema
-
-var AwsServiceRequestConfiguration_Cache *smithy.Schema
-
-var AwsServiceRequestConfiguration_TargetService *smithy.Schema
-
-var AwsServiceRequestConfiguration_TargetRegion *smithy.Schema
-
-var _AwsTargetService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "AwsTargetService",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var BeaconEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "BeaconEventType",
-}, smithy.ShapeTypeEnum, 4)
-var BeaconEventType_MUTE *smithy.Schema
-
-var BeaconEventType_UNMUTE *smithy.Schema
-
-var BeaconEventType_PAUSE *smithy.Schema
-
-var BeaconEventType_SKIP *smithy.Schema
-
-var _BeaconEventTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "BeaconEventTypeList",
-}, smithy.ShapeTypeList, 1)
-var _BeaconEventTypeList_member *smithy.Schema
-
-var BeaconingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "BeaconingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var BeaconingConfiguration_ClientSide *smithy.Schema
-
-var Bumper = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Bumper",
-}, smithy.ShapeTypeStructure, 2)
-var Bumper_EndUrl *smithy.Schema
-
-var Bumper_StartUrl *smithy.Schema
-
-var CdnConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CdnConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CdnConfiguration_AdSegmentUrlPrefix *smithy.Schema
-
-var CdnConfiguration_ContentSegmentUrlPrefix *smithy.Schema
-
-var Channel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Channel",
-}, smithy.ShapeTypeStructure, 12)
-var Channel_Arn *smithy.Schema
-
-var Channel_ChannelName *smithy.Schema
-
-var Channel_ChannelState *smithy.Schema
-
-var Channel_CreationTime *smithy.Schema
-
-var Channel_FillerSlate *smithy.Schema
-
-var Channel_LastModifiedTime *smithy.Schema
-
-var Channel_Outputs *smithy.Schema
-
-var Channel_PlaybackMode *smithy.Schema
-
-var Channel_Tags *smithy.Schema
-
-var Channel_Tier *smithy.Schema
-
-var Channel_LogConfiguration *smithy.Schema
-
-var Channel_Audiences *smithy.Schema
-
-var ChannelState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ChannelState",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelState_RUNNING *smithy.Schema
-
-var ChannelState_STOPPED *smithy.Schema
-
-var ClientSideBeaconingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ClientSideBeaconingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ClientSideBeaconingConfiguration_ReportingMode *smithy.Schema
-
-var ClientSideBeaconingConfiguration_AdditionalEventTypes *smithy.Schema
-
-var ClientSideBeaconingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ClientSideBeaconingMode",
-}, smithy.ShapeTypeEnum, 2)
-var ClientSideBeaconingMode_DISABLED *smithy.Schema
-
-var ClientSideBeaconingMode_INSIGHTS *smithy.Schema
-
-var ClipRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ClipRange",
-}, smithy.ShapeTypeStructure, 2)
-var ClipRange_EndOffsetMillis *smithy.Schema
-
-var ClipRange_StartOffsetMillis *smithy.Schema
-
-var CompressionMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CompressionMethod",
-}, smithy.ShapeTypeEnum, 2)
-var CompressionMethod_NONE *smithy.Schema
-
-var CompressionMethod_GZIP *smithy.Schema
-
-var ConcurrentExecutorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConcurrentExecutorConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var ConcurrentExecutorConfiguration_Runtime *smithy.Schema
-
-var ConcurrentExecutorConfiguration_Output *smithy.Schema
-
-var ConcurrentExecutorConfiguration_FunctionList *smithy.Schema
-
-var ConcurrentExecutorConfiguration_TimeoutMilliseconds *smithy.Schema
-
-var ConcurrentExecutorConfiguration_MaxConcurrency *smithy.Schema
-
-var _ConfigurationAliasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigurationAliasesRequest",
-}, smithy.ShapeTypeMap, 2)
-var _ConfigurationAliasesRequest_key *smithy.Schema
-
-var _ConfigurationAliasesRequest_value *smithy.Schema
-
-var _ConfigurationAliasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigurationAliasesResponse",
-}, smithy.ShapeTypeMap, 2)
-var _ConfigurationAliasesResponse_key *smithy.Schema
-
-var _ConfigurationAliasesResponse_value *smithy.Schema
-
-var CustomOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CustomOutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CustomOutputConfiguration_Runtime *smithy.Schema
-
-var CustomOutputConfiguration_Output *smithy.Schema
-
-var DashConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DashConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var DashConfiguration_ManifestEndpointPrefix *smithy.Schema
-
-var DashConfiguration_DualStackManifestEndpointPrefix *smithy.Schema
-
-var DashConfiguration_MpdLocation *smithy.Schema
-
-var DashConfiguration_OriginManifestType *smithy.Schema
-
-var DashConfigurationForPut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DashConfigurationForPut",
-}, smithy.ShapeTypeStructure, 2)
-var DashConfigurationForPut_MpdLocation *smithy.Schema
-
-var DashConfigurationForPut_OriginManifestType *smithy.Schema
-
-var DashPlaylistSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DashPlaylistSettings",
-}, smithy.ShapeTypeStructure, 4)
-var DashPlaylistSettings_ManifestWindowSeconds *smithy.Schema
-
-var DashPlaylistSettings_MinBufferTimeSeconds *smithy.Schema
-
-var DashPlaylistSettings_MinUpdatePeriodSeconds *smithy.Schema
-
-var DashPlaylistSettings_SuggestedPresentationDelaySeconds *smithy.Schema
-
-var DefaultSegmentDeliveryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DefaultSegmentDeliveryConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DefaultSegmentDeliveryConfiguration_BaseUrl *smithy.Schema
-
-var EventName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "EventName",
-}, smithy.ShapeTypeEnum, 4)
-var EventName_PRE_SESSION_INITIALIZATION *smithy.Schema
-
-var EventName_PRE_ADS_REQUEST *smithy.Schema
-
-var EventName_POST_ADS_RESPONSE *smithy.Schema
-
-var EventName_PRE_MANIFEST_INSERTION *smithy.Schema
-
-var FillPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "FillPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var FillPolicy_FULL_AVAIL_ONLY *smithy.Schema
-
-var FillPolicy_PARTIAL_AVAIL *smithy.Schema
-
-var Function = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Function",
-}, smithy.ShapeTypeStructure, 11)
-var Function_FunctionId *smithy.Schema
-
-var Function_FunctionType *smithy.Schema
-
-var Function_Description *smithy.Schema
-
-var Function_HttpRequestConfiguration *smithy.Schema
-
-var Function_AwsServiceRequestConfiguration *smithy.Schema
-
-var Function_CustomOutputConfiguration *smithy.Schema
-
-var Function_ConcurrentExecutorConfiguration *smithy.Schema
-
-var Function_SequentialExecutorConfiguration *smithy.Schema
-
-var Function_VastRequestConfiguration *smithy.Schema
-
-var Function_Tags *smithy.Schema
-
-var Function_Arn *smithy.Schema
-
-var _FunctionMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "FunctionMapping",
-}, smithy.ShapeTypeMap, 2)
-var _FunctionMapping_key *smithy.Schema
-
-var _FunctionMapping_value *smithy.Schema
-
-var FunctionRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "FunctionRef",
-}, smithy.ShapeTypeStructure, 3)
-var FunctionRef_RunCondition *smithy.Schema
-
-var FunctionRef_FunctionId *smithy.Schema
-
-var FunctionRef_Alias *smithy.Schema
-
-var FunctionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "FunctionType",
-}, smithy.ShapeTypeEnum, 6)
-var FunctionType_HTTP_REQUEST *smithy.Schema
-
-var FunctionType_AWS_SERVICE_REQUEST *smithy.Schema
-
-var FunctionType_CUSTOM_OUTPUT *smithy.Schema
-
-var FunctionType_CONCURRENT_EXECUTOR *smithy.Schema
-
-var FunctionType_SEQUENTIAL_EXECUTOR *smithy.Schema
-
-var FunctionType_VAST_REQUEST *smithy.Schema
-
-var HlsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HlsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var HlsConfiguration_ManifestEndpointPrefix *smithy.Schema
-
-var HlsConfiguration_DualStackManifestEndpointPrefix *smithy.Schema
-
-var HlsPlaylistSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HlsPlaylistSettings",
-}, smithy.ShapeTypeStructure, 2)
-var HlsPlaylistSettings_ManifestWindowSeconds *smithy.Schema
-
-var HlsPlaylistSettings_AdMarkupType *smithy.Schema
-
-var HttpConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HttpConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var HttpConfiguration_BaseUrl *smithy.Schema
-
-var HttpPackageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HttpPackageConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var HttpPackageConfiguration_Path *smithy.Schema
-
-var HttpPackageConfiguration_SourceGroup *smithy.Schema
-
-var HttpPackageConfiguration_Type *smithy.Schema
-
-var _HttpPackageConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HttpPackageConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _HttpPackageConfigurations_member *smithy.Schema
-
-var HttpRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HttpRequest",
-}, smithy.ShapeTypeStructure, 4)
-var HttpRequest_Method *smithy.Schema
-
-var HttpRequest_Body *smithy.Schema
-
-var HttpRequest_Headers *smithy.Schema
-
-var HttpRequest_CompressRequest *smithy.Schema
-
-var HttpRequestCacheConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HttpRequestCacheConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var HttpRequestCacheConfiguration_TtlMinimumSeconds *smithy.Schema
-
-var HttpRequestCacheConfiguration_TtlMaximumSeconds *smithy.Schema
-
-var HttpRequestCacheConfiguration_Key *smithy.Schema
-
-var HttpRequestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "HttpRequestConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var HttpRequestConfiguration_Runtime *smithy.Schema
-
-var HttpRequestConfiguration_Output *smithy.Schema
-
-var HttpRequestConfiguration_MethodType *smithy.Schema
-
-var HttpRequestConfiguration_RequestTimeoutMilliseconds *smithy.Schema
-
-var HttpRequestConfiguration_Url *smithy.Schema
-
-var HttpRequestConfiguration_Body *smithy.Schema
-
-var HttpRequestConfiguration_Headers *smithy.Schema
-
-var HttpRequestConfiguration_Cache *smithy.Schema
-
-var InsertionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "InsertionMode",
-}, smithy.ShapeTypeEnum, 2)
-var InsertionMode_STITCHED_ONLY *smithy.Schema
-
-var InsertionMode_PLAYER_SELECT *smithy.Schema
-
-var KeyValuePair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "KeyValuePair",
-}, smithy.ShapeTypeStructure, 2)
-var KeyValuePair_Key *smithy.Schema
-
-var KeyValuePair_Value *smithy.Schema
-
-var ListPrefetchScheduleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListPrefetchScheduleType",
-}, smithy.ShapeTypeEnum, 3)
-var ListPrefetchScheduleType_SINGLE *smithy.Schema
-
-var ListPrefetchScheduleType_RECURRING *smithy.Schema
-
-var ListPrefetchScheduleType_ALL *smithy.Schema
-
-var LivePreRollConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "LivePreRollConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var LivePreRollConfiguration_AdDecisionServerUrl *smithy.Schema
-
-var LivePreRollConfiguration_MaxDurationSeconds *smithy.Schema
-
-var LivePreRollConfiguration_AdDecisionServerConfiguration *smithy.Schema
-
-var LiveSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "LiveSource",
-}, smithy.ShapeTypeStructure, 7)
-var LiveSource_Arn *smithy.Schema
-
-var LiveSource_CreationTime *smithy.Schema
-
-var LiveSource_HttpPackageConfigurations *smithy.Schema
-
-var LiveSource_LastModifiedTime *smithy.Schema
-
-var LiveSource_LiveSourceName *smithy.Schema
-
-var LiveSource_SourceLocationName *smithy.Schema
-
-var LiveSource_Tags *smithy.Schema
-
-var LogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "LogConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var LogConfiguration_PercentEnabled *smithy.Schema
-
-var LogConfiguration_EnabledLoggingStrategies *smithy.Schema
-
-var LogConfiguration_AdsInteractionLog *smithy.Schema
-
-var LogConfiguration_ManifestServiceInteractionLog *smithy.Schema
-
-var LogConfigurationForChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "LogConfigurationForChannel",
-}, smithy.ShapeTypeStructure, 1)
-var LogConfigurationForChannel_LogTypes *smithy.Schema
-
-var LoggingStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "LoggingStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var LoggingStrategy_VENDED_LOGS *smithy.Schema
-
-var LoggingStrategy_LEGACY_CLOUDWATCH *smithy.Schema
-
-var LogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 1)
-var LogType_AS_RUN *smithy.Schema
-
-var _LogTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "LogTypes",
-}, smithy.ShapeTypeList, 1)
-var _LogTypes_member *smithy.Schema
-
-var ManifestProcessingRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ManifestProcessingRules",
-}, smithy.ShapeTypeStructure, 1)
-var ManifestProcessingRules_AdMarkerPassthrough *smithy.Schema
-
-var ManifestServiceExcludeEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ManifestServiceExcludeEventType",
-}, smithy.ShapeTypeEnum, 34)
-var ManifestServiceExcludeEventType_GENERATED_MANIFEST *smithy.Schema
-
-var ManifestServiceExcludeEventType_ORIGIN_MANIFEST *smithy.Schema
-
-var ManifestServiceExcludeEventType_SESSION_INITIALIZED *smithy.Schema
-
-var ManifestServiceExcludeEventType_TRACKING_RESPONSE *smithy.Schema
-
-var ManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_UNKNOWN_HOST *smithy.Schema
-
-var ManifestServiceExcludeEventType_TIMEOUT_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_CONNECTION_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_IO_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_UNKNOWN_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_HOST_DISALLOWED *smithy.Schema
-
-var ManifestServiceExcludeEventType_PARSING_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_MANIFEST_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST *smithy.Schema
-
-var ManifestServiceExcludeEventType_NO_MASTER_PLAYLIST *smithy.Schema
-
-var ManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST *smithy.Schema
-
-var ManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION *smithy.Schema
-
-var ManifestServiceExcludeEventType_SCTE35_PARSING_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST *smithy.Schema
-
-var ManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST *smithy.Schema
-
-var ManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO *smithy.Schema
-
-var ManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION *smithy.Schema
-
-var ManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR *smithy.Schema
-
-var ManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR *smithy.Schema
-
-var ManifestServiceInteractionLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ManifestServiceInteractionLog",
-}, smithy.ShapeTypeStructure, 2)
-var ManifestServiceInteractionLog_PublishOptInEventTypes *smithy.Schema
-
-var ManifestServiceInteractionLog_ExcludeEventTypes *smithy.Schema
-
-var ManifestServicePublishOptInEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ManifestServicePublishOptInEventType",
-}, smithy.ShapeTypeEnum, 2)
-var ManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY *smithy.Schema
-
-var ManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "MessageType",
-}, smithy.ShapeTypeEnum, 2)
-var MessageType_SPLICE_INSERT *smithy.Schema
-
-var MessageType_TIME_SIGNAL *smithy.Schema
-
-var Method = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Method",
-}, smithy.ShapeTypeEnum, 2)
-var Method_GET *smithy.Schema
-
-var Method_POST *smithy.Schema
-
-var MethodType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "MethodType",
-}, smithy.ShapeTypeEnum, 2)
-var MethodType_GET *smithy.Schema
-
-var MethodType_POST *smithy.Schema
-
-var _MinimumUnfilledDurationSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "MinimumUnfilledDurationSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var Mode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Mode",
-}, smithy.ShapeTypeEnum, 3)
-var Mode_OFF *smithy.Schema
-
-var Mode_BEHIND_LIVE_EDGE *smithy.Schema
-
-var Mode_AFTER_LIVE_EDGE *smithy.Schema
-
-var _OpenRtbTemplateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "OpenRtbTemplateString",
-}, smithy.ShapeTypeString, 0)
-
-var Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Operator",
-}, smithy.ShapeTypeEnum, 1)
-var Operator_EQUALS *smithy.Schema
-
-var OriginManifestType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "OriginManifestType",
-}, smithy.ShapeTypeEnum, 2)
-var OriginManifestType_SINGLE_PERIOD *smithy.Schema
-
-var OriginManifestType_MULTI_PERIOD *smithy.Schema
-
-var PlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PlaybackConfiguration",
-}, smithy.ShapeTypeStructure, 29)
-var PlaybackConfiguration_AdDecisionServerUrl *smithy.Schema
-
-var PlaybackConfiguration_AvailSuppression *smithy.Schema
-
-var PlaybackConfiguration_Bumper *smithy.Schema
-
-var PlaybackConfiguration_CdnConfiguration *smithy.Schema
-
-var PlaybackConfiguration_ConfigurationAliases *smithy.Schema
-
-var PlaybackConfiguration_DashConfiguration *smithy.Schema
-
-var PlaybackConfiguration_HlsConfiguration *smithy.Schema
-
-var PlaybackConfiguration_InsertionMode *smithy.Schema
-
-var PlaybackConfiguration_LivePreRollConfiguration *smithy.Schema
-
-var PlaybackConfiguration_LogConfiguration *smithy.Schema
-
-var PlaybackConfiguration_ManifestProcessingRules *smithy.Schema
-
-var PlaybackConfiguration_Name *smithy.Schema
-
-var PlaybackConfiguration_PersonalizationThresholdSeconds *smithy.Schema
-
-var PlaybackConfiguration_PlaybackConfigurationArn *smithy.Schema
-
-var PlaybackConfiguration_PlaybackEndpointPrefix *smithy.Schema
-
-var PlaybackConfiguration_DualStackPlaybackEndpointPrefix *smithy.Schema
-
-var PlaybackConfiguration_SessionInitializationEndpointPrefix *smithy.Schema
-
-var PlaybackConfiguration_DualStackSessionInitializationEndpointPrefix *smithy.Schema
-
-var PlaybackConfiguration_SlateAdUrl *smithy.Schema
-
-var PlaybackConfiguration_Tags *smithy.Schema
-
-var PlaybackConfiguration_TranscodeProfileName *smithy.Schema
-
-var PlaybackConfiguration_VideoContentSourceUrl *smithy.Schema
-
-var PlaybackConfiguration_AdConditioningConfiguration *smithy.Schema
-
-var PlaybackConfiguration_AdDecisionServerConfiguration *smithy.Schema
-
-var PlaybackConfiguration_YieldOptimizationConfiguration *smithy.Schema
-
-var PlaybackConfiguration_FunctionMapping *smithy.Schema
-
-var PlaybackConfiguration_AdsPersonalizationTimeouts *smithy.Schema
-
-var PlaybackConfiguration_AdsPersonalizationConcurrency *smithy.Schema
-
-var PlaybackConfiguration_BeaconingConfiguration *smithy.Schema
-
-var PlaybackMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PlaybackMode",
-}, smithy.ShapeTypeEnum, 2)
-var PlaybackMode_LOOP *smithy.Schema
-
-var PlaybackMode_LINEAR *smithy.Schema
-
-var PrefetchConsumption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PrefetchConsumption",
-}, smithy.ShapeTypeStructure, 3)
-var PrefetchConsumption_AvailMatchingCriteria *smithy.Schema
-
-var PrefetchConsumption_EndTime *smithy.Schema
-
-var PrefetchConsumption_StartTime *smithy.Schema
-
-var PrefetchRetrieval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PrefetchRetrieval",
-}, smithy.ShapeTypeStructure, 6)
-var PrefetchRetrieval_DynamicVariables *smithy.Schema
-
-var PrefetchRetrieval_EndTime *smithy.Schema
-
-var PrefetchRetrieval_StartTime *smithy.Schema
-
-var PrefetchRetrieval_TrafficShapingType *smithy.Schema
-
-var PrefetchRetrieval_TrafficShapingRetrievalWindow *smithy.Schema
-
-var PrefetchRetrieval_TrafficShapingTpsConfiguration *smithy.Schema
-
-var PrefetchSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PrefetchSchedule",
-}, smithy.ShapeTypeStructure, 9)
-var PrefetchSchedule_Arn *smithy.Schema
-
-var PrefetchSchedule_Consumption *smithy.Schema
-
-var PrefetchSchedule_Name *smithy.Schema
-
-var PrefetchSchedule_PlaybackConfigurationName *smithy.Schema
-
-var PrefetchSchedule_Retrieval *smithy.Schema
-
-var PrefetchSchedule_ScheduleType *smithy.Schema
-
-var PrefetchSchedule_RecurringPrefetchConfiguration *smithy.Schema
-
-var PrefetchSchedule_StreamId *smithy.Schema
-
-var PrefetchSchedule_Tags *smithy.Schema
-
-var PrefetchScheduleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PrefetchScheduleType",
-}, smithy.ShapeTypeEnum, 2)
-var PrefetchScheduleType_SINGLE *smithy.Schema
-
-var PrefetchScheduleType_RECURRING *smithy.Schema
-
-var PreRollAdDecisionServerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PreRollAdDecisionServerConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PreRollAdDecisionServerConfiguration_VastResponse *smithy.Schema
-
-var PreRollAdSequencingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PreRollAdSequencingMode",
-}, smithy.ShapeTypeEnum, 2)
-var PreRollAdSequencingMode_FOLLOW_AD_SEQUENCE *smithy.Schema
-
-var PreRollAdSequencingMode_IGNORE_AD_SEQUENCE *smithy.Schema
-
-var PreRollVastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PreRollVastResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PreRollVastResponse_AdSequencingMode *smithy.Schema
-
-var RecurringConsumption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "RecurringConsumption",
-}, smithy.ShapeTypeStructure, 2)
-var RecurringConsumption_RetrievedAdExpirationSeconds *smithy.Schema
-
-var RecurringConsumption_AvailMatchingCriteria *smithy.Schema
-
-var RecurringPrefetchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "RecurringPrefetchConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var RecurringPrefetchConfiguration_StartTime *smithy.Schema
-
-var RecurringPrefetchConfiguration_EndTime *smithy.Schema
-
-var RecurringPrefetchConfiguration_RecurringConsumption *smithy.Schema
-
-var RecurringPrefetchConfiguration_RecurringRetrieval *smithy.Schema
-
-var RecurringRetrieval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "RecurringRetrieval",
-}, smithy.ShapeTypeStructure, 5)
-var RecurringRetrieval_DynamicVariables *smithy.Schema
-
-var RecurringRetrieval_DelayAfterAvailEndSeconds *smithy.Schema
-
-var RecurringRetrieval_TrafficShapingType *smithy.Schema
-
-var RecurringRetrieval_TrafficShapingRetrievalWindow *smithy.Schema
-
-var RecurringRetrieval_TrafficShapingTpsConfiguration *smithy.Schema
-
-var RelativePosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "RelativePosition",
-}, smithy.ShapeTypeEnum, 2)
-var RelativePosition_BEFORE_PROGRAM *smithy.Schema
-
-var RelativePosition_AFTER_PROGRAM *smithy.Schema
-
-var RequestOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "RequestOutputItem",
-}, smithy.ShapeTypeStructure, 4)
-var RequestOutputItem_DashPlaylistSettings *smithy.Schema
-
-var RequestOutputItem_HlsPlaylistSettings *smithy.Schema
-
-var RequestOutputItem_ManifestName *smithy.Schema
-
-var RequestOutputItem_SourceGroup *smithy.Schema
-
-var _RequestOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "RequestOutputs",
-}, smithy.ShapeTypeList, 1)
-var _RequestOutputs_member *smithy.Schema
-
-var ResponseOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ResponseOutputItem",
-}, smithy.ShapeTypeStructure, 6)
-var ResponseOutputItem_DashPlaylistSettings *smithy.Schema
-
-var ResponseOutputItem_HlsPlaylistSettings *smithy.Schema
-
-var ResponseOutputItem_ManifestName *smithy.Schema
-
-var ResponseOutputItem_PlaybackUrl *smithy.Schema
-
-var ResponseOutputItem_DualStackPlaybackUrl *smithy.Schema
-
-var ResponseOutputItem_SourceGroup *smithy.Schema
-
-var _ResponseOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ResponseOutputs",
-}, smithy.ShapeTypeList, 1)
-var _ResponseOutputs_member *smithy.Schema
-
-var RuntimeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "RuntimeType",
-}, smithy.ShapeTypeEnum, 1)
-var RuntimeType_JSONATA *smithy.Schema
-
-var ScheduleAdBreak = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ScheduleAdBreak",
-}, smithy.ShapeTypeStructure, 4)
-var ScheduleAdBreak_ApproximateDurationSeconds *smithy.Schema
-
-var ScheduleAdBreak_ApproximateStartTime *smithy.Schema
-
-var ScheduleAdBreak_SourceLocationName *smithy.Schema
-
-var ScheduleAdBreak_VodSourceName *smithy.Schema
-
-var ScheduleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ScheduleConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ScheduleConfiguration_Transition *smithy.Schema
-
-var ScheduleConfiguration_ClipRange *smithy.Schema
-
-var ScheduleEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ScheduleEntry",
-}, smithy.ShapeTypeStructure, 11)
-var ScheduleEntry_ApproximateDurationSeconds *smithy.Schema
-
-var ScheduleEntry_ApproximateStartTime *smithy.Schema
-
-var ScheduleEntry_Arn *smithy.Schema
-
-var ScheduleEntry_ChannelName *smithy.Schema
-
-var ScheduleEntry_LiveSourceName *smithy.Schema
-
-var ScheduleEntry_ProgramName *smithy.Schema
-
-var ScheduleEntry_ScheduleAdBreaks *smithy.Schema
-
-var ScheduleEntry_ScheduleEntryType *smithy.Schema
-
-var ScheduleEntry_SourceLocationName *smithy.Schema
-
-var ScheduleEntry_VodSourceName *smithy.Schema
-
-var ScheduleEntry_Audiences *smithy.Schema
-
-var ScheduleEntryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ScheduleEntryType",
-}, smithy.ShapeTypeEnum, 3)
-var ScheduleEntryType_PROGRAM *smithy.Schema
-
-var ScheduleEntryType_FILLER_SLATE *smithy.Schema
-
-var ScheduleEntryType_ALTERNATE_MEDIA *smithy.Schema
-
-var SecretsManagerAccessTokenConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SecretsManagerAccessTokenConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var SecretsManagerAccessTokenConfiguration_HeaderName *smithy.Schema
-
-var SecretsManagerAccessTokenConfiguration_SecretArn *smithy.Schema
-
-var SecretsManagerAccessTokenConfiguration_SecretStringKey *smithy.Schema
-
-var SegmentationDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SegmentationDescriptor",
-}, smithy.ShapeTypeStructure, 8)
-var SegmentationDescriptor_SegmentationEventId *smithy.Schema
-
-var SegmentationDescriptor_SegmentationUpidType *smithy.Schema
-
-var SegmentationDescriptor_SegmentationUpid *smithy.Schema
-
-var SegmentationDescriptor_SegmentationTypeId *smithy.Schema
-
-var SegmentationDescriptor_SegmentNum *smithy.Schema
-
-var SegmentationDescriptor_SegmentsExpected *smithy.Schema
-
-var SegmentationDescriptor_SubSegmentNum *smithy.Schema
-
-var SegmentationDescriptor_SubSegmentsExpected *smithy.Schema
-
-var _SegmentationDescriptorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SegmentationDescriptorList",
-}, smithy.ShapeTypeList, 1)
-var _SegmentationDescriptorList_member *smithy.Schema
-
-var SegmentDeliveryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SegmentDeliveryConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SegmentDeliveryConfiguration_BaseUrl *smithy.Schema
-
-var SegmentDeliveryConfiguration_Name *smithy.Schema
-
-var SequentialExecutorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SequentialExecutorConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var SequentialExecutorConfiguration_Runtime *smithy.Schema
-
-var SequentialExecutorConfiguration_Output *smithy.Schema
-
-var SequentialExecutorConfiguration_FunctionList *smithy.Schema
-
-var SequentialExecutorConfiguration_TimeoutMilliseconds *smithy.Schema
-
-var SlateSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SlateSource",
-}, smithy.ShapeTypeStructure, 2)
-var SlateSource_SourceLocationName *smithy.Schema
-
-var SlateSource_VodSourceName *smithy.Schema
-
-var SourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SourceLocation",
-}, smithy.ShapeTypeStructure, 9)
-var SourceLocation_AccessConfiguration *smithy.Schema
-
-var SourceLocation_Arn *smithy.Schema
-
-var SourceLocation_CreationTime *smithy.Schema
-
-var SourceLocation_DefaultSegmentDeliveryConfiguration *smithy.Schema
-
-var SourceLocation_HttpConfiguration *smithy.Schema
-
-var SourceLocation_LastModifiedTime *smithy.Schema
-
-var SourceLocation_SegmentDeliveryConfigurations *smithy.Schema
-
-var SourceLocation_SourceLocationName *smithy.Schema
-
-var SourceLocation_Tags *smithy.Schema
-
-var SpliceInsertMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "SpliceInsertMessage",
-}, smithy.ShapeTypeStructure, 4)
-var SpliceInsertMessage_AvailNum *smithy.Schema
-
-var SpliceInsertMessage_AvailsExpected *smithy.Schema
-
-var SpliceInsertMessage_SpliceEventId *smithy.Schema
-
-var SpliceInsertMessage_UniqueProgramId *smithy.Schema
-
-var StreamingMediaFileConditioning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StreamingMediaFileConditioning",
-}, smithy.ShapeTypeEnum, 2)
-var StreamingMediaFileConditioning_TRANSCODE *smithy.Schema
-
-var StreamingMediaFileConditioning_NONE *smithy.Schema
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var Tier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Tier",
-}, smithy.ShapeTypeEnum, 2)
-var Tier_BASIC *smithy.Schema
-
-var Tier_STANDARD *smithy.Schema
-
-var TimeShiftConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "TimeShiftConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var TimeShiftConfiguration_MaxTimeDelaySeconds *smithy.Schema
-
-var TimeSignalMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "TimeSignalMessage",
-}, smithy.ShapeTypeStructure, 1)
-var TimeSignalMessage_SegmentationDescriptors *smithy.Schema
-
-var TrafficShapingRetrievalWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "TrafficShapingRetrievalWindow",
-}, smithy.ShapeTypeStructure, 1)
-var TrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds *smithy.Schema
-
-var TrafficShapingTpsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "TrafficShapingTpsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var TrafficShapingTpsConfiguration_PeakTps *smithy.Schema
-
-var TrafficShapingTpsConfiguration_PeakConcurrentUsers *smithy.Schema
-
-var TrafficShapingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "TrafficShapingType",
-}, smithy.ShapeTypeEnum, 2)
-var TrafficShapingType_RETRIEVAL_WINDOW *smithy.Schema
-
-var TrafficShapingType_TPS *smithy.Schema
-
-var Transition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Transition",
-}, smithy.ShapeTypeStructure, 5)
-var Transition_DurationMillis *smithy.Schema
-
-var Transition_RelativePosition *smithy.Schema
-
-var Transition_RelativeProgram *smithy.Schema
-
-var Transition_ScheduledStartTimeMillis *smithy.Schema
-
-var Transition_Type *smithy.Schema
-
-var Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "Type",
-}, smithy.ShapeTypeEnum, 2)
-var Type_DASH *smithy.Schema
-
-var Type_HLS *smithy.Schema
-
-var UpdateProgramScheduleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateProgramScheduleConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateProgramScheduleConfiguration_Transition *smithy.Schema
-
-var UpdateProgramScheduleConfiguration_ClipRange *smithy.Schema
-
-var UpdateProgramTransition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateProgramTransition",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateProgramTransition_ScheduledStartTimeMillis *smithy.Schema
-
-var UpdateProgramTransition_DurationMillis *smithy.Schema
-
-var VastRequestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "VastRequestConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var VastRequestConfiguration_Runtime *smithy.Schema
-
-var VastRequestConfiguration_Output *smithy.Schema
-
-var VastRequestConfiguration_MethodType *smithy.Schema
-
-var VastRequestConfiguration_RequestTimeoutMilliseconds *smithy.Schema
-
-var VastRequestConfiguration_Url *smithy.Schema
-
-var VastRequestConfiguration_Body *smithy.Schema
-
-var VastRequestConfiguration_Headers *smithy.Schema
-
-var VastRequestConfiguration_Cache *smithy.Schema
-
-var VastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "VastResponse",
-}, smithy.ShapeTypeStructure, 1)
-var VastResponse_AdSequencingMode *smithy.Schema
-
-var VodSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "VodSource",
-}, smithy.ShapeTypeStructure, 7)
-var VodSource_Arn *smithy.Schema
-
-var VodSource_CreationTime *smithy.Schema
-
-var VodSource_HttpPackageConfigurations *smithy.Schema
-
-var VodSource_LastModifiedTime *smithy.Schema
-
-var VodSource_SourceLocationName *smithy.Schema
-
-var VodSource_Tags *smithy.Schema
-
-var VodSource_VodSourceName *smithy.Schema
-
-var YieldOptimizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "YieldOptimizationConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var YieldOptimizationConfiguration_MinimumUnfilledDuration *smithy.Schema
-
-var YieldOptimizationConfiguration_PublisherId *smithy.Schema
-
-var YieldOptimizationConfiguration_Region *smithy.Schema
-
-var YieldOptimizationConfiguration_OpenRtbTemplate *smithy.Schema
-
-var ConfigureLogsForChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigureLogsForChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ConfigureLogsForChannelRequest_ChannelName *smithy.Schema
-
-var ConfigureLogsForChannelRequest_LogTypes *smithy.Schema
-
-var ConfigureLogsForChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigureLogsForChannelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ConfigureLogsForChannelResponse_ChannelName *smithy.Schema
-
-var ConfigureLogsForChannelResponse_LogTypes *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigureLogsForPlaybackConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ConfigureLogsForPlaybackConfigurationRequest_PercentEnabled *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ConfigureLogsForPlaybackConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var ConfigureLogsForPlaybackConfigurationResponse_PercentEnabled *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog *smithy.Schema
-
-var ConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog *smithy.Schema
-
-var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateChannelRequest_ChannelName *smithy.Schema
-
-var CreateChannelRequest_FillerSlate *smithy.Schema
-
-var CreateChannelRequest_Outputs *smithy.Schema
-
-var CreateChannelRequest_PlaybackMode *smithy.Schema
-
-var CreateChannelRequest_Tags *smithy.Schema
-
-var CreateChannelRequest_Tier *smithy.Schema
-
-var CreateChannelRequest_TimeShiftConfiguration *smithy.Schema
-
-var CreateChannelRequest_Audiences *smithy.Schema
-
-var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateChannelResponse",
-}, smithy.ShapeTypeStructure, 12)
-var CreateChannelResponse_Arn *smithy.Schema
-
-var CreateChannelResponse_ChannelName *smithy.Schema
-
-var CreateChannelResponse_ChannelState *smithy.Schema
-
-var CreateChannelResponse_CreationTime *smithy.Schema
-
-var CreateChannelResponse_FillerSlate *smithy.Schema
-
-var CreateChannelResponse_LastModifiedTime *smithy.Schema
-
-var CreateChannelResponse_Outputs *smithy.Schema
-
-var CreateChannelResponse_PlaybackMode *smithy.Schema
-
-var CreateChannelResponse_Tags *smithy.Schema
-
-var CreateChannelResponse_Tier *smithy.Schema
-
-var CreateChannelResponse_TimeShiftConfiguration *smithy.Schema
-
-var CreateChannelResponse_Audiences *smithy.Schema
-
-var CreateLiveSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateLiveSourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateLiveSourceRequest_HttpPackageConfigurations *smithy.Schema
-
-var CreateLiveSourceRequest_LiveSourceName *smithy.Schema
-
-var CreateLiveSourceRequest_SourceLocationName *smithy.Schema
-
-var CreateLiveSourceRequest_Tags *smithy.Schema
-
-var CreateLiveSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateLiveSourceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CreateLiveSourceResponse_Arn *smithy.Schema
-
-var CreateLiveSourceResponse_CreationTime *smithy.Schema
-
-var CreateLiveSourceResponse_HttpPackageConfigurations *smithy.Schema
-
-var CreateLiveSourceResponse_LastModifiedTime *smithy.Schema
-
-var CreateLiveSourceResponse_LiveSourceName *smithy.Schema
-
-var CreateLiveSourceResponse_SourceLocationName *smithy.Schema
-
-var CreateLiveSourceResponse_Tags *smithy.Schema
-
-var CreatePrefetchScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreatePrefetchScheduleRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreatePrefetchScheduleRequest_Consumption *smithy.Schema
-
-var CreatePrefetchScheduleRequest_Name *smithy.Schema
-
-var CreatePrefetchScheduleRequest_PlaybackConfigurationName *smithy.Schema
-
-var CreatePrefetchScheduleRequest_Retrieval *smithy.Schema
-
-var CreatePrefetchScheduleRequest_RecurringPrefetchConfiguration *smithy.Schema
-
-var CreatePrefetchScheduleRequest_ScheduleType *smithy.Schema
-
-var CreatePrefetchScheduleRequest_StreamId *smithy.Schema
-
-var CreatePrefetchScheduleRequest_Tags *smithy.Schema
-
-var CreatePrefetchScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreatePrefetchScheduleResponse",
-}, smithy.ShapeTypeStructure, 9)
-var CreatePrefetchScheduleResponse_Arn *smithy.Schema
-
-var CreatePrefetchScheduleResponse_Consumption *smithy.Schema
-
-var CreatePrefetchScheduleResponse_Name *smithy.Schema
-
-var CreatePrefetchScheduleResponse_PlaybackConfigurationName *smithy.Schema
-
-var CreatePrefetchScheduleResponse_Retrieval *smithy.Schema
-
-var CreatePrefetchScheduleResponse_RecurringPrefetchConfiguration *smithy.Schema
-
-var CreatePrefetchScheduleResponse_ScheduleType *smithy.Schema
-
-var CreatePrefetchScheduleResponse_StreamId *smithy.Schema
-
-var CreatePrefetchScheduleResponse_Tags *smithy.Schema
-
-var CreateProgramRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateProgramRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateProgramRequest_AdBreaks *smithy.Schema
-
-var CreateProgramRequest_ChannelName *smithy.Schema
-
-var CreateProgramRequest_LiveSourceName *smithy.Schema
-
-var CreateProgramRequest_ProgramName *smithy.Schema
-
-var CreateProgramRequest_ScheduleConfiguration *smithy.Schema
-
-var CreateProgramRequest_SourceLocationName *smithy.Schema
-
-var CreateProgramRequest_VodSourceName *smithy.Schema
-
-var CreateProgramRequest_AudienceMedia *smithy.Schema
-
-var CreateProgramRequest_Tags *smithy.Schema
-
-var CreateProgramResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateProgramResponse",
-}, smithy.ShapeTypeStructure, 13)
-var CreateProgramResponse_AdBreaks *smithy.Schema
-
-var CreateProgramResponse_Arn *smithy.Schema
-
-var CreateProgramResponse_ChannelName *smithy.Schema
-
-var CreateProgramResponse_CreationTime *smithy.Schema
-
-var CreateProgramResponse_LiveSourceName *smithy.Schema
-
-var CreateProgramResponse_ProgramName *smithy.Schema
-
-var CreateProgramResponse_ScheduledStartTime *smithy.Schema
-
-var CreateProgramResponse_SourceLocationName *smithy.Schema
-
-var CreateProgramResponse_VodSourceName *smithy.Schema
-
-var CreateProgramResponse_ClipRange *smithy.Schema
-
-var CreateProgramResponse_DurationMillis *smithy.Schema
-
-var CreateProgramResponse_AudienceMedia *smithy.Schema
-
-var CreateProgramResponse_Tags *smithy.Schema
-
-var CreateSourceLocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateSourceLocationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateSourceLocationRequest_AccessConfiguration *smithy.Schema
-
-var CreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration *smithy.Schema
-
-var CreateSourceLocationRequest_HttpConfiguration *smithy.Schema
-
-var CreateSourceLocationRequest_SegmentDeliveryConfigurations *smithy.Schema
-
-var CreateSourceLocationRequest_SourceLocationName *smithy.Schema
-
-var CreateSourceLocationRequest_Tags *smithy.Schema
-
-var CreateSourceLocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateSourceLocationResponse",
-}, smithy.ShapeTypeStructure, 9)
-var CreateSourceLocationResponse_AccessConfiguration *smithy.Schema
-
-var CreateSourceLocationResponse_Arn *smithy.Schema
-
-var CreateSourceLocationResponse_CreationTime *smithy.Schema
-
-var CreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration *smithy.Schema
-
-var CreateSourceLocationResponse_HttpConfiguration *smithy.Schema
-
-var CreateSourceLocationResponse_LastModifiedTime *smithy.Schema
-
-var CreateSourceLocationResponse_SegmentDeliveryConfigurations *smithy.Schema
-
-var CreateSourceLocationResponse_SourceLocationName *smithy.Schema
-
-var CreateSourceLocationResponse_Tags *smithy.Schema
-
-var CreateVodSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateVodSourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateVodSourceRequest_HttpPackageConfigurations *smithy.Schema
-
-var CreateVodSourceRequest_SourceLocationName *smithy.Schema
-
-var CreateVodSourceRequest_Tags *smithy.Schema
-
-var CreateVodSourceRequest_VodSourceName *smithy.Schema
-
-var CreateVodSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "CreateVodSourceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CreateVodSourceResponse_Arn *smithy.Schema
-
-var CreateVodSourceResponse_CreationTime *smithy.Schema
-
-var CreateVodSourceResponse_HttpPackageConfigurations *smithy.Schema
-
-var CreateVodSourceResponse_LastModifiedTime *smithy.Schema
-
-var CreateVodSourceResponse_SourceLocationName *smithy.Schema
-
-var CreateVodSourceResponse_Tags *smithy.Schema
-
-var CreateVodSourceResponse_VodSourceName *smithy.Schema
-
-var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChannelRequest_ChannelName *smithy.Schema
-
-var DeleteChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteChannelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteChannelPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChannelPolicyRequest_ChannelName *smithy.Schema
-
-var DeleteChannelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteChannelPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteFunctionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFunctionRequest_FunctionId *smithy.Schema
-
-var DeleteFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteFunctionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLiveSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteLiveSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLiveSourceRequest_LiveSourceName *smithy.Schema
-
-var DeleteLiveSourceRequest_SourceLocationName *smithy.Schema
-
-var DeleteLiveSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteLiveSourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePlaybackConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeletePlaybackConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePlaybackConfigurationRequest_Name *smithy.Schema
-
-var DeletePlaybackConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeletePlaybackConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePrefetchScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeletePrefetchScheduleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePrefetchScheduleRequest_Name *smithy.Schema
-
-var DeletePrefetchScheduleRequest_PlaybackConfigurationName *smithy.Schema
-
-var DeletePrefetchScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeletePrefetchScheduleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteProgramRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteProgramRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProgramRequest_ChannelName *smithy.Schema
-
-var DeleteProgramRequest_ProgramName *smithy.Schema
-
-var DeleteProgramResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteProgramResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSourceLocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteSourceLocationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSourceLocationRequest_SourceLocationName *smithy.Schema
-
-var DeleteSourceLocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteSourceLocationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteVodSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteVodSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteVodSourceRequest_SourceLocationName *smithy.Schema
-
-var DeleteVodSourceRequest_VodSourceName *smithy.Schema
-
-var DeleteVodSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DeleteVodSourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelRequest_ChannelName *smithy.Schema
-
-var DescribeChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeChannelResponse",
-}, smithy.ShapeTypeStructure, 13)
-var DescribeChannelResponse_Arn *smithy.Schema
-
-var DescribeChannelResponse_ChannelName *smithy.Schema
-
-var DescribeChannelResponse_ChannelState *smithy.Schema
-
-var DescribeChannelResponse_CreationTime *smithy.Schema
-
-var DescribeChannelResponse_FillerSlate *smithy.Schema
-
-var DescribeChannelResponse_LastModifiedTime *smithy.Schema
-
-var DescribeChannelResponse_Outputs *smithy.Schema
-
-var DescribeChannelResponse_PlaybackMode *smithy.Schema
-
-var DescribeChannelResponse_Tags *smithy.Schema
-
-var DescribeChannelResponse_Tier *smithy.Schema
-
-var DescribeChannelResponse_LogConfiguration *smithy.Schema
-
-var DescribeChannelResponse_TimeShiftConfiguration *smithy.Schema
-
-var DescribeChannelResponse_Audiences *smithy.Schema
-
-var DescribeLiveSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeLiveSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeLiveSourceRequest_LiveSourceName *smithy.Schema
-
-var DescribeLiveSourceRequest_SourceLocationName *smithy.Schema
-
-var DescribeLiveSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeLiveSourceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeLiveSourceResponse_Arn *smithy.Schema
-
-var DescribeLiveSourceResponse_CreationTime *smithy.Schema
-
-var DescribeLiveSourceResponse_HttpPackageConfigurations *smithy.Schema
-
-var DescribeLiveSourceResponse_LastModifiedTime *smithy.Schema
-
-var DescribeLiveSourceResponse_LiveSourceName *smithy.Schema
-
-var DescribeLiveSourceResponse_SourceLocationName *smithy.Schema
-
-var DescribeLiveSourceResponse_Tags *smithy.Schema
-
-var DescribeProgramRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeProgramRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProgramRequest_ChannelName *smithy.Schema
-
-var DescribeProgramRequest_ProgramName *smithy.Schema
-
-var DescribeProgramResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeProgramResponse",
-}, smithy.ShapeTypeStructure, 13)
-var DescribeProgramResponse_AdBreaks *smithy.Schema
-
-var DescribeProgramResponse_Arn *smithy.Schema
-
-var DescribeProgramResponse_ChannelName *smithy.Schema
-
-var DescribeProgramResponse_CreationTime *smithy.Schema
-
-var DescribeProgramResponse_LiveSourceName *smithy.Schema
-
-var DescribeProgramResponse_ProgramName *smithy.Schema
-
-var DescribeProgramResponse_ScheduledStartTime *smithy.Schema
-
-var DescribeProgramResponse_SourceLocationName *smithy.Schema
-
-var DescribeProgramResponse_VodSourceName *smithy.Schema
-
-var DescribeProgramResponse_ClipRange *smithy.Schema
-
-var DescribeProgramResponse_DurationMillis *smithy.Schema
-
-var DescribeProgramResponse_AudienceMedia *smithy.Schema
-
-var DescribeProgramResponse_Tags *smithy.Schema
-
-var DescribeSourceLocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeSourceLocationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSourceLocationRequest_SourceLocationName *smithy.Schema
-
-var DescribeSourceLocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeSourceLocationResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeSourceLocationResponse_AccessConfiguration *smithy.Schema
-
-var DescribeSourceLocationResponse_Arn *smithy.Schema
-
-var DescribeSourceLocationResponse_CreationTime *smithy.Schema
-
-var DescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration *smithy.Schema
-
-var DescribeSourceLocationResponse_HttpConfiguration *smithy.Schema
-
-var DescribeSourceLocationResponse_LastModifiedTime *smithy.Schema
-
-var DescribeSourceLocationResponse_SegmentDeliveryConfigurations *smithy.Schema
-
-var DescribeSourceLocationResponse_SourceLocationName *smithy.Schema
-
-var DescribeSourceLocationResponse_Tags *smithy.Schema
-
-var DescribeVodSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeVodSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeVodSourceRequest_SourceLocationName *smithy.Schema
-
-var DescribeVodSourceRequest_VodSourceName *smithy.Schema
-
-var DescribeVodSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "DescribeVodSourceResponse",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeVodSourceResponse_AdBreakOpportunities *smithy.Schema
-
-var DescribeVodSourceResponse_Arn *smithy.Schema
-
-var DescribeVodSourceResponse_CreationTime *smithy.Schema
-
-var DescribeVodSourceResponse_HttpPackageConfigurations *smithy.Schema
-
-var DescribeVodSourceResponse_LastModifiedTime *smithy.Schema
-
-var DescribeVodSourceResponse_SourceLocationName *smithy.Schema
-
-var DescribeVodSourceResponse_Tags *smithy.Schema
-
-var DescribeVodSourceResponse_VodSourceName *smithy.Schema
-
-var GetChannelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetChannelPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelPolicyRequest_ChannelName *smithy.Schema
-
-var GetChannelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetChannelPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelPolicyResponse_Policy *smithy.Schema
-
-var GetChannelScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetChannelScheduleRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetChannelScheduleRequest_ChannelName *smithy.Schema
-
-var GetChannelScheduleRequest_DurationMinutes *smithy.Schema
-
-var GetChannelScheduleRequest_MaxResults *smithy.Schema
-
-var GetChannelScheduleRequest_NextToken *smithy.Schema
-
-var GetChannelScheduleRequest_Audience *smithy.Schema
-
-var GetChannelScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetChannelScheduleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetChannelScheduleResponse_Items *smithy.Schema
-
-var GetChannelScheduleResponse_NextToken *smithy.Schema
-
-var GetFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetFunctionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetFunctionRequest_FunctionId *smithy.Schema
-
-var GetFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetFunctionResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetFunctionResponse_FunctionId *smithy.Schema
-
-var GetFunctionResponse_FunctionType *smithy.Schema
-
-var GetFunctionResponse_Description *smithy.Schema
-
-var GetFunctionResponse_HttpRequestConfiguration *smithy.Schema
-
-var GetFunctionResponse_AwsServiceRequestConfiguration *smithy.Schema
-
-var GetFunctionResponse_CustomOutputConfiguration *smithy.Schema
-
-var GetFunctionResponse_ConcurrentExecutorConfiguration *smithy.Schema
-
-var GetFunctionResponse_SequentialExecutorConfiguration *smithy.Schema
-
-var GetFunctionResponse_VastRequestConfiguration *smithy.Schema
-
-var GetFunctionResponse_Tags *smithy.Schema
-
-var GetFunctionResponse_Arn *smithy.Schema
-
-var GetPlaybackConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetPlaybackConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPlaybackConfigurationRequest_Name *smithy.Schema
-
-var GetPlaybackConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetPlaybackConfigurationResponse",
-}, smithy.ShapeTypeStructure, 29)
-var GetPlaybackConfigurationResponse_AdDecisionServerUrl *smithy.Schema
-
-var GetPlaybackConfigurationResponse_AvailSuppression *smithy.Schema
-
-var GetPlaybackConfigurationResponse_Bumper *smithy.Schema
-
-var GetPlaybackConfigurationResponse_CdnConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_ConfigurationAliases *smithy.Schema
-
-var GetPlaybackConfigurationResponse_DashConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_HlsConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_InsertionMode *smithy.Schema
-
-var GetPlaybackConfigurationResponse_LivePreRollConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_LogConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_ManifestProcessingRules *smithy.Schema
-
-var GetPlaybackConfigurationResponse_Name *smithy.Schema
-
-var GetPlaybackConfigurationResponse_PersonalizationThresholdSeconds *smithy.Schema
-
-var GetPlaybackConfigurationResponse_PlaybackConfigurationArn *smithy.Schema
-
-var GetPlaybackConfigurationResponse_PlaybackEndpointPrefix *smithy.Schema
-
-var GetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix *smithy.Schema
-
-var GetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix *smithy.Schema
-
-var GetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix *smithy.Schema
-
-var GetPlaybackConfigurationResponse_SlateAdUrl *smithy.Schema
-
-var GetPlaybackConfigurationResponse_Tags *smithy.Schema
-
-var GetPlaybackConfigurationResponse_TranscodeProfileName *smithy.Schema
-
-var GetPlaybackConfigurationResponse_VideoContentSourceUrl *smithy.Schema
-
-var GetPlaybackConfigurationResponse_AdConditioningConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_AdDecisionServerConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_YieldOptimizationConfiguration *smithy.Schema
-
-var GetPlaybackConfigurationResponse_FunctionMapping *smithy.Schema
-
-var GetPlaybackConfigurationResponse_AdsPersonalizationTimeouts *smithy.Schema
-
-var GetPlaybackConfigurationResponse_AdsPersonalizationConcurrency *smithy.Schema
-
-var GetPlaybackConfigurationResponse_BeaconingConfiguration *smithy.Schema
-
-var GetPrefetchScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetPrefetchScheduleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetPrefetchScheduleRequest_Name *smithy.Schema
-
-var GetPrefetchScheduleRequest_PlaybackConfigurationName *smithy.Schema
-
-var GetPrefetchScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "GetPrefetchScheduleResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetPrefetchScheduleResponse_Arn *smithy.Schema
-
-var GetPrefetchScheduleResponse_Consumption *smithy.Schema
-
-var GetPrefetchScheduleResponse_Name *smithy.Schema
-
-var GetPrefetchScheduleResponse_PlaybackConfigurationName *smithy.Schema
-
-var GetPrefetchScheduleResponse_Retrieval *smithy.Schema
-
-var GetPrefetchScheduleResponse_ScheduleType *smithy.Schema
-
-var GetPrefetchScheduleResponse_RecurringPrefetchConfiguration *smithy.Schema
-
-var GetPrefetchScheduleResponse_StreamId *smithy.Schema
-
-var GetPrefetchScheduleResponse_Tags *smithy.Schema
-
-var ListAlertsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListAlertsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAlertsRequest_MaxResults *smithy.Schema
-
-var ListAlertsRequest_NextToken *smithy.Schema
-
-var ListAlertsRequest_ResourceArn *smithy.Schema
-
-var ListAlertsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListAlertsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAlertsResponse_Items *smithy.Schema
-
-var ListAlertsResponse_NextToken *smithy.Schema
-
-var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsRequest_MaxResults *smithy.Schema
-
-var ListChannelsRequest_NextToken *smithy.Schema
-
-var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsResponse_Items *smithy.Schema
-
-var ListChannelsResponse_NextToken *smithy.Schema
-
-var ListFunctionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListFunctionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListFunctionsRequest_MaxResults *smithy.Schema
-
-var ListFunctionsRequest_NextToken *smithy.Schema
-
-var ListFunctionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListFunctionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFunctionsResponse_Items *smithy.Schema
-
-var ListFunctionsResponse_NextToken *smithy.Schema
-
-var ListLiveSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListLiveSourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLiveSourcesRequest_MaxResults *smithy.Schema
-
-var ListLiveSourcesRequest_NextToken *smithy.Schema
-
-var ListLiveSourcesRequest_SourceLocationName *smithy.Schema
-
-var ListLiveSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListLiveSourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLiveSourcesResponse_Items *smithy.Schema
-
-var ListLiveSourcesResponse_NextToken *smithy.Schema
-
-var ListPlaybackConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListPlaybackConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlaybackConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListPlaybackConfigurationsRequest_NextToken *smithy.Schema
-
-var ListPlaybackConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListPlaybackConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlaybackConfigurationsResponse_Items *smithy.Schema
-
-var ListPlaybackConfigurationsResponse_NextToken *smithy.Schema
-
-var ListPrefetchSchedulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListPrefetchSchedulesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListPrefetchSchedulesRequest_MaxResults *smithy.Schema
-
-var ListPrefetchSchedulesRequest_NextToken *smithy.Schema
-
-var ListPrefetchSchedulesRequest_PlaybackConfigurationName *smithy.Schema
-
-var ListPrefetchSchedulesRequest_ScheduleType *smithy.Schema
-
-var ListPrefetchSchedulesRequest_StreamId *smithy.Schema
-
-var ListPrefetchSchedulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListPrefetchSchedulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPrefetchSchedulesResponse_Items *smithy.Schema
-
-var ListPrefetchSchedulesResponse_NextToken *smithy.Schema
-
-var ListSourceLocationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListSourceLocationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSourceLocationsRequest_MaxResults *smithy.Schema
-
-var ListSourceLocationsRequest_NextToken *smithy.Schema
-
-var ListSourceLocationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListSourceLocationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSourceLocationsResponse_Items *smithy.Schema
-
-var ListSourceLocationsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListVodSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListVodSourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListVodSourcesRequest_MaxResults *smithy.Schema
-
-var ListVodSourcesRequest_NextToken *smithy.Schema
-
-var ListVodSourcesRequest_SourceLocationName *smithy.Schema
-
-var ListVodSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "ListVodSourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVodSourcesResponse_Items *smithy.Schema
-
-var ListVodSourcesResponse_NextToken *smithy.Schema
-
-var PutChannelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutChannelPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutChannelPolicyRequest_ChannelName *smithy.Schema
-
-var PutChannelPolicyRequest_Policy *smithy.Schema
-
-var PutChannelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutChannelPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutFunctionRequest",
-}, smithy.ShapeTypeStructure, 10)
-var PutFunctionRequest_FunctionId *smithy.Schema
-
-var PutFunctionRequest_FunctionType *smithy.Schema
-
-var PutFunctionRequest_Description *smithy.Schema
-
-var PutFunctionRequest_HttpRequestConfiguration *smithy.Schema
-
-var PutFunctionRequest_AwsServiceRequestConfiguration *smithy.Schema
-
-var PutFunctionRequest_CustomOutputConfiguration *smithy.Schema
-
-var PutFunctionRequest_ConcurrentExecutorConfiguration *smithy.Schema
-
-var PutFunctionRequest_SequentialExecutorConfiguration *smithy.Schema
-
-var PutFunctionRequest_VastRequestConfiguration *smithy.Schema
-
-var PutFunctionRequest_Tags *smithy.Schema
-
-var PutFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutFunctionResponse",
-}, smithy.ShapeTypeStructure, 11)
-var PutFunctionResponse_FunctionId *smithy.Schema
-
-var PutFunctionResponse_FunctionType *smithy.Schema
-
-var PutFunctionResponse_Description *smithy.Schema
-
-var PutFunctionResponse_HttpRequestConfiguration *smithy.Schema
-
-var PutFunctionResponse_AwsServiceRequestConfiguration *smithy.Schema
-
-var PutFunctionResponse_CustomOutputConfiguration *smithy.Schema
-
-var PutFunctionResponse_ConcurrentExecutorConfiguration *smithy.Schema
-
-var PutFunctionResponse_SequentialExecutorConfiguration *smithy.Schema
-
-var PutFunctionResponse_VastRequestConfiguration *smithy.Schema
-
-var PutFunctionResponse_Tags *smithy.Schema
-
-var PutFunctionResponse_Arn *smithy.Schema
-
-var PutPlaybackConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutPlaybackConfigurationRequest",
-}, smithy.ShapeTypeStructure, 22)
-var PutPlaybackConfigurationRequest_AdDecisionServerUrl *smithy.Schema
-
-var PutPlaybackConfigurationRequest_AvailSuppression *smithy.Schema
-
-var PutPlaybackConfigurationRequest_Bumper *smithy.Schema
-
-var PutPlaybackConfigurationRequest_CdnConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationRequest_ConfigurationAliases *smithy.Schema
-
-var PutPlaybackConfigurationRequest_DashConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationRequest_InsertionMode *smithy.Schema
-
-var PutPlaybackConfigurationRequest_LivePreRollConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationRequest_ManifestProcessingRules *smithy.Schema
-
-var PutPlaybackConfigurationRequest_Name *smithy.Schema
-
-var PutPlaybackConfigurationRequest_PersonalizationThresholdSeconds *smithy.Schema
-
-var PutPlaybackConfigurationRequest_SlateAdUrl *smithy.Schema
-
-var PutPlaybackConfigurationRequest_Tags *smithy.Schema
-
-var PutPlaybackConfigurationRequest_TranscodeProfileName *smithy.Schema
-
-var PutPlaybackConfigurationRequest_VideoContentSourceUrl *smithy.Schema
-
-var PutPlaybackConfigurationRequest_AdConditioningConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationRequest_AdDecisionServerConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationRequest_YieldOptimizationConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationRequest_FunctionMapping *smithy.Schema
-
-var PutPlaybackConfigurationRequest_AdsPersonalizationTimeouts *smithy.Schema
-
-var PutPlaybackConfigurationRequest_AdsPersonalizationConcurrency *smithy.Schema
-
-var PutPlaybackConfigurationRequest_BeaconingConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "PutPlaybackConfigurationResponse",
-}, smithy.ShapeTypeStructure, 29)
-var PutPlaybackConfigurationResponse_AdDecisionServerUrl *smithy.Schema
-
-var PutPlaybackConfigurationResponse_AvailSuppression *smithy.Schema
-
-var PutPlaybackConfigurationResponse_Bumper *smithy.Schema
-
-var PutPlaybackConfigurationResponse_CdnConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_ConfigurationAliases *smithy.Schema
-
-var PutPlaybackConfigurationResponse_DashConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_HlsConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_InsertionMode *smithy.Schema
-
-var PutPlaybackConfigurationResponse_LivePreRollConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_LogConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_ManifestProcessingRules *smithy.Schema
-
-var PutPlaybackConfigurationResponse_Name *smithy.Schema
-
-var PutPlaybackConfigurationResponse_PersonalizationThresholdSeconds *smithy.Schema
-
-var PutPlaybackConfigurationResponse_PlaybackConfigurationArn *smithy.Schema
-
-var PutPlaybackConfigurationResponse_PlaybackEndpointPrefix *smithy.Schema
-
-var PutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix *smithy.Schema
-
-var PutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix *smithy.Schema
-
-var PutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix *smithy.Schema
-
-var PutPlaybackConfigurationResponse_SlateAdUrl *smithy.Schema
-
-var PutPlaybackConfigurationResponse_Tags *smithy.Schema
-
-var PutPlaybackConfigurationResponse_TranscodeProfileName *smithy.Schema
-
-var PutPlaybackConfigurationResponse_VideoContentSourceUrl *smithy.Schema
-
-var PutPlaybackConfigurationResponse_AdConditioningConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_AdDecisionServerConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_YieldOptimizationConfiguration *smithy.Schema
-
-var PutPlaybackConfigurationResponse_FunctionMapping *smithy.Schema
-
-var PutPlaybackConfigurationResponse_AdsPersonalizationTimeouts *smithy.Schema
-
-var PutPlaybackConfigurationResponse_AdsPersonalizationConcurrency *smithy.Schema
-
-var PutPlaybackConfigurationResponse_BeaconingConfiguration *smithy.Schema
-
-var StartChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StartChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartChannelRequest_ChannelName *smithy.Schema
-
-var StartChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StartChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StopChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopChannelRequest_ChannelName *smithy.Schema
-
-var StopChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "StopChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateChannelRequest_ChannelName *smithy.Schema
-
-var UpdateChannelRequest_FillerSlate *smithy.Schema
-
-var UpdateChannelRequest_Outputs *smithy.Schema
-
-var UpdateChannelRequest_TimeShiftConfiguration *smithy.Schema
-
-var UpdateChannelRequest_Audiences *smithy.Schema
-
-var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateChannelResponse",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateChannelResponse_Arn *smithy.Schema
-
-var UpdateChannelResponse_ChannelName *smithy.Schema
-
-var UpdateChannelResponse_ChannelState *smithy.Schema
-
-var UpdateChannelResponse_CreationTime *smithy.Schema
-
-var UpdateChannelResponse_FillerSlate *smithy.Schema
-
-var UpdateChannelResponse_LastModifiedTime *smithy.Schema
-
-var UpdateChannelResponse_Outputs *smithy.Schema
-
-var UpdateChannelResponse_PlaybackMode *smithy.Schema
-
-var UpdateChannelResponse_Tags *smithy.Schema
-
-var UpdateChannelResponse_Tier *smithy.Schema
-
-var UpdateChannelResponse_TimeShiftConfiguration *smithy.Schema
-
-var UpdateChannelResponse_Audiences *smithy.Schema
-
-var UpdateLiveSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateLiveSourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLiveSourceRequest_HttpPackageConfigurations *smithy.Schema
-
-var UpdateLiveSourceRequest_LiveSourceName *smithy.Schema
-
-var UpdateLiveSourceRequest_SourceLocationName *smithy.Schema
-
-var UpdateLiveSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateLiveSourceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateLiveSourceResponse_Arn *smithy.Schema
-
-var UpdateLiveSourceResponse_CreationTime *smithy.Schema
-
-var UpdateLiveSourceResponse_HttpPackageConfigurations *smithy.Schema
-
-var UpdateLiveSourceResponse_LastModifiedTime *smithy.Schema
-
-var UpdateLiveSourceResponse_LiveSourceName *smithy.Schema
-
-var UpdateLiveSourceResponse_SourceLocationName *smithy.Schema
-
-var UpdateLiveSourceResponse_Tags *smithy.Schema
-
-var UpdateProgramRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateProgramRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateProgramRequest_AdBreaks *smithy.Schema
-
-var UpdateProgramRequest_ChannelName *smithy.Schema
-
-var UpdateProgramRequest_ProgramName *smithy.Schema
-
-var UpdateProgramRequest_ScheduleConfiguration *smithy.Schema
-
-var UpdateProgramRequest_AudienceMedia *smithy.Schema
-
-var UpdateProgramResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateProgramResponse",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateProgramResponse_AdBreaks *smithy.Schema
-
-var UpdateProgramResponse_Arn *smithy.Schema
-
-var UpdateProgramResponse_ChannelName *smithy.Schema
-
-var UpdateProgramResponse_CreationTime *smithy.Schema
-
-var UpdateProgramResponse_ProgramName *smithy.Schema
-
-var UpdateProgramResponse_SourceLocationName *smithy.Schema
-
-var UpdateProgramResponse_VodSourceName *smithy.Schema
-
-var UpdateProgramResponse_LiveSourceName *smithy.Schema
-
-var UpdateProgramResponse_ClipRange *smithy.Schema
-
-var UpdateProgramResponse_DurationMillis *smithy.Schema
-
-var UpdateProgramResponse_ScheduledStartTime *smithy.Schema
-
-var UpdateProgramResponse_AudienceMedia *smithy.Schema
-
-var UpdateProgramResponse_Tags *smithy.Schema
-
-var UpdateSourceLocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateSourceLocationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSourceLocationRequest_AccessConfiguration *smithy.Schema
-
-var UpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration *smithy.Schema
-
-var UpdateSourceLocationRequest_HttpConfiguration *smithy.Schema
-
-var UpdateSourceLocationRequest_SegmentDeliveryConfigurations *smithy.Schema
-
-var UpdateSourceLocationRequest_SourceLocationName *smithy.Schema
-
-var UpdateSourceLocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateSourceLocationResponse",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateSourceLocationResponse_AccessConfiguration *smithy.Schema
-
-var UpdateSourceLocationResponse_Arn *smithy.Schema
-
-var UpdateSourceLocationResponse_CreationTime *smithy.Schema
-
-var UpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration *smithy.Schema
-
-var UpdateSourceLocationResponse_HttpConfiguration *smithy.Schema
-
-var UpdateSourceLocationResponse_LastModifiedTime *smithy.Schema
-
-var UpdateSourceLocationResponse_SegmentDeliveryConfigurations *smithy.Schema
-
-var UpdateSourceLocationResponse_SourceLocationName *smithy.Schema
-
-var UpdateSourceLocationResponse_Tags *smithy.Schema
-
-var UpdateVodSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateVodSourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateVodSourceRequest_HttpPackageConfigurations *smithy.Schema
-
-var UpdateVodSourceRequest_SourceLocationName *smithy.Schema
-
-var UpdateVodSourceRequest_VodSourceName *smithy.Schema
-
-var UpdateVodSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediatailor",
-	Name:      "UpdateVodSourceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateVodSourceResponse_Arn *smithy.Schema
-
-var UpdateVodSourceResponse_CreationTime *smithy.Schema
-
-var UpdateVodSourceResponse_HttpPackageConfigurations *smithy.Schema
-
-var UpdateVodSourceResponse_LastModifiedTime *smithy.Schema
-
-var UpdateVodSourceResponse_SourceLocationName *smithy.Schema
-
-var UpdateVodSourceResponse_Tags *smithy.Schema
-
-var UpdateVodSourceResponse_VodSourceName *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AdsInteractionExcludeEventType_AD_MARKER_FOUND = AdsInteractionExcludeEventType.AddMember("AD_MARKER_FOUND", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_NON_AD_MARKER_FOUND = AdsInteractionExcludeEventType.AddMember("NON_AD_MARKER_FOUND", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_MAKING_ADS_REQUEST = AdsInteractionExcludeEventType.AddMember("MAKING_ADS_REQUEST", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_MODIFIED_TARGET_URL = AdsInteractionExcludeEventType.AddMember("MODIFIED_TARGET_URL", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_VAST_REDIRECT = AdsInteractionExcludeEventType.AddMember("VAST_REDIRECT", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE = AdsInteractionExcludeEventType.AddMember("EMPTY_VAST_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE = AdsInteractionExcludeEventType.AddMember("EMPTY_VMAP_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_VAST_RESPONSE = AdsInteractionExcludeEventType.AddMember("VAST_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE = AdsInteractionExcludeEventType.AddMember("REDIRECTED_VAST_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_FILLED_AVAIL = AdsInteractionExcludeEventType.AddMember("FILLED_AVAIL", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL = AdsInteractionExcludeEventType.AddMember("FILLED_OVERLAY_AVAIL", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_BEACON_FIRED = AdsInteractionExcludeEventType.AddMember("BEACON_FIRED", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS = AdsInteractionExcludeEventType.AddMember("WARNING_NO_ADVERTISEMENTS", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED = AdsInteractionExcludeEventType.AddMember("WARNING_VPAID_AD_DROPPED", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED = AdsInteractionExcludeEventType.AddMember("WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_UNKNOWN = AdsInteractionExcludeEventType.AddMember("ERROR_UNKNOWN", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST = AdsInteractionExcludeEventType.AddMember("ERROR_UNKNOWN_HOST", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST = AdsInteractionExcludeEventType.AddMember("ERROR_DISALLOWED_HOST", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_ADS_IO = AdsInteractionExcludeEventType.AddMember("ERROR_ADS_IO", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT = AdsInteractionExcludeEventType.AddMember("ERROR_ADS_TIMEOUT", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE = AdsInteractionExcludeEventType.AddMember("ERROR_ADS_RESPONSE_PARSE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT = AdsInteractionExcludeEventType.AddMember("ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE = AdsInteractionExcludeEventType.AddMember("ERROR_ADS_INVALID_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_REDIRECT_EMPTY_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_REDIRECT_MULTIPLE_VAST", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_REDIRECT_FAILED", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_MISSING_MEDIAFILES", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_MISSING_CREATIVES", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_MISSING_OVERLAYS", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_MISSING_IMPRESSION", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_INVALID_VAST_AD_TAG_URI", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_MULTIPLE_TRACKING_EVENTS", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_MULTIPLE_LINEAR", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE = AdsInteractionExcludeEventType.AddMember("ERROR_VAST_INVALID_MEDIA_FILE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED = AdsInteractionExcludeEventType.AddMember("ERROR_FIRING_BEACON_FAILED", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED = AdsInteractionExcludeEventType.AddMember("ERROR_PERSONALIZATION_DISABLED", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET = AdsInteractionExcludeEventType.AddMember("VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS = AdsInteractionExcludeEventType.AddMember("VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS = AdsInteractionExcludeEventType.AddMember("VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS = AdsInteractionExcludeEventType.AddMember("INTERSTITIAL_VOD_SUCCESS", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE = AdsInteractionExcludeEventType.AddMember("INTERSTITIAL_VOD_FAILURE", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR = AdsInteractionExcludeEventType.AddMember("PRE_ADS_REQUEST_HOOK_ERROR", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR = AdsInteractionExcludeEventType.AddMember("PRE_ADS_REQUEST_FUNCTION_ERROR", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_BEACON_RECEIVED = AdsInteractionExcludeEventType.AddMember("BEACON_RECEIVED", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR = AdsInteractionExcludeEventType.AddMember("POST_ADS_RESPONSE_HOOK_ERROR", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR = AdsInteractionExcludeEventType.AddMember("POST_ADS_RESPONSE_FUNCTION_ERROR", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR = AdsInteractionExcludeEventType.AddMember("PRE_MANIFEST_INSERTION_HOOK_ERROR", smithyprelude.Unit)
-
-	AdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR = AdsInteractionExcludeEventType.AddMember("PRE_MANIFEST_INSERTION_FUNCTION_ERROR", smithyprelude.Unit)
-
-	___adsInteractionExcludeEventTypesList_member = ___adsInteractionExcludeEventTypesList.AddMember("member", AdsInteractionExcludeEventType)
-
-	AdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE = AdsInteractionPublishOptInEventType.AddMember("RAW_ADS_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_RAW_ADS_REQUEST = AdsInteractionPublishOptInEventType.AddMember("RAW_ADS_REQUEST", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_RAW_BID_REQUEST = AdsInteractionPublishOptInEventType.AddMember("RAW_BID_REQUEST", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_RAW_BID_RESPONSE = AdsInteractionPublishOptInEventType.AddMember("RAW_BID_RESPONSE", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY = AdsInteractionPublishOptInEventType.AddMember("PRE_ADS_REQUEST_HOOK_SUMMARY", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED = AdsInteractionPublishOptInEventType.AddMember("PRE_ADS_REQUEST_FUNCTION_COMPLETED", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY = AdsInteractionPublishOptInEventType.AddMember("POST_ADS_RESPONSE_HOOK_SUMMARY", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED = AdsInteractionPublishOptInEventType.AddMember("POST_ADS_RESPONSE_FUNCTION_COMPLETED", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY = AdsInteractionPublishOptInEventType.AddMember("PRE_MANIFEST_INSERTION_HOOK_SUMMARY", smithyprelude.Unit)
-
-	AdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED = AdsInteractionPublishOptInEventType.AddMember("PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED", smithyprelude.Unit)
-
-	___adsInteractionPublishOptInEventTypesList_member = ___adsInteractionPublishOptInEventTypesList.AddMember("member", AdsInteractionPublishOptInEventType)
-
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	MessageType_SPLICE_INSERT = MessageType.AddMember("SPLICE_INSERT", smithyprelude.Unit)
-
-	MessageType_TIME_SIGNAL = MessageType.AddMember("TIME_SIGNAL", smithyprelude.Unit)
-
-	SlateSource_SourceLocationName = SlateSource.AddMember("SourceLocationName", ___string)
-
-	SlateSource_VodSourceName = SlateSource.AddMember("VodSourceName", ___string)
-
-	SpliceInsertMessage_AvailNum = SpliceInsertMessage.AddMember("AvailNum", ___integer)
-
-	SpliceInsertMessage_AvailsExpected = SpliceInsertMessage.AddMember("AvailsExpected", ___integer)
-
-	SpliceInsertMessage_SpliceEventId = SpliceInsertMessage.AddMember("SpliceEventId", ___integer)
-
-	SpliceInsertMessage_UniqueProgramId = SpliceInsertMessage.AddMember("UniqueProgramId", ___integer)
-
-	SegmentationDescriptor_SegmentationEventId = SegmentationDescriptor.AddMember("SegmentationEventId", smithyprelude.Integer)
-
-	SegmentationDescriptor_SegmentationUpidType = SegmentationDescriptor.AddMember("SegmentationUpidType", smithyprelude.Integer)
-
-	SegmentationDescriptor_SegmentationUpid = SegmentationDescriptor.AddMember("SegmentationUpid", smithyprelude.String)
-
-	SegmentationDescriptor_SegmentationTypeId = SegmentationDescriptor.AddMember("SegmentationTypeId", smithyprelude.Integer)
-
-	SegmentationDescriptor_SegmentNum = SegmentationDescriptor.AddMember("SegmentNum", smithyprelude.Integer)
-
-	SegmentationDescriptor_SegmentsExpected = SegmentationDescriptor.AddMember("SegmentsExpected", smithyprelude.Integer)
-
-	SegmentationDescriptor_SubSegmentNum = SegmentationDescriptor.AddMember("SubSegmentNum", smithyprelude.Integer)
-
-	SegmentationDescriptor_SubSegmentsExpected = SegmentationDescriptor.AddMember("SubSegmentsExpected", smithyprelude.Integer)
-
-	_SegmentationDescriptorList_member = _SegmentationDescriptorList.AddMember("member", SegmentationDescriptor)
-
-	TimeSignalMessage_SegmentationDescriptors = TimeSignalMessage.AddMember("SegmentationDescriptors", _SegmentationDescriptorList)
-
-	KeyValuePair_Key = KeyValuePair.AddMember("Key", smithyprelude.String)
-
-	KeyValuePair_Value = KeyValuePair.AddMember("Value", smithyprelude.String)
-
-	_AdBreakMetadataList_member = _AdBreakMetadataList.AddMember("member", KeyValuePair)
-
-	AdBreak_MessageType = AdBreak.AddMember("MessageType", MessageType)
-
-	AdBreak_OffsetMillis = AdBreak.AddMember("OffsetMillis", ___long)
-
-	AdBreak_Slate = AdBreak.AddMember("Slate", SlateSource)
-
-	AdBreak_SpliceInsertMessage = AdBreak.AddMember("SpliceInsertMessage", SpliceInsertMessage)
-
-	AdBreak_TimeSignalMessage = AdBreak.AddMember("TimeSignalMessage", TimeSignalMessage)
-
-	AdBreak_AdBreakMetadata = AdBreak.AddMember("AdBreakMetadata", _AdBreakMetadataList)
-
-	___listOfAdBreak_member = ___listOfAdBreak.AddMember("member", AdBreak)
-
-	AlertCategory_SCHEDULING_ERROR = AlertCategory.AddMember("SCHEDULING_ERROR", smithyprelude.Unit)
-
-	AlertCategory_PLAYBACK_WARNING = AlertCategory.AddMember("PLAYBACK_WARNING", smithyprelude.Unit)
-
-	AlertCategory_INFO = AlertCategory.AddMember("INFO", smithyprelude.Unit)
-
-	Alert_AlertCode = Alert.AddMember("AlertCode", ___string)
-
-	Alert_AlertMessage = Alert.AddMember("AlertMessage", ___string)
-
-	Alert_LastModifiedTime = Alert.AddMember("LastModifiedTime", ___timestampUnix)
-
-	Alert_RelatedResourceArns = Alert.AddMember("RelatedResourceArns", ___listOf__string)
-
-	Alert_ResourceArn = Alert.AddMember("ResourceArn", ___string)
-
-	Alert_Category = Alert.AddMember("Category", AlertCategory)
-
-	___listOfAlert_member = ___listOfAlert.AddMember("member", Alert)
-
-	ClipRange_EndOffsetMillis = ClipRange.AddMember("EndOffsetMillis", ___long)
-
-	ClipRange_StartOffsetMillis = ClipRange.AddMember("StartOffsetMillis", ___long)
-
-	AlternateMedia_SourceLocationName = AlternateMedia.AddMember("SourceLocationName", ___string)
-
-	AlternateMedia_LiveSourceName = AlternateMedia.AddMember("LiveSourceName", ___string)
-
-	AlternateMedia_VodSourceName = AlternateMedia.AddMember("VodSourceName", ___string)
-
-	AlternateMedia_ClipRange = AlternateMedia.AddMember("ClipRange", ClipRange)
-
-	AlternateMedia_ScheduledStartTimeMillis = AlternateMedia.AddMember("ScheduledStartTimeMillis", ___long)
-
-	AlternateMedia_AdBreaks = AlternateMedia.AddMember("AdBreaks", ___listOfAdBreak)
-
-	AlternateMedia_DurationMillis = AlternateMedia.AddMember("DurationMillis", ___long)
-
-	___listOfAlternateMedia_member = ___listOfAlternateMedia.AddMember("member", AlternateMedia)
-
-	AudienceMedia_Audience = AudienceMedia.AddMember("Audience", ___string)
-
-	AudienceMedia_AlternateMedia = AudienceMedia.AddMember("AlternateMedia", ___listOfAlternateMedia)
-
-	___listOfAudienceMedia_member = ___listOfAudienceMedia.AddMember("member", AudienceMedia)
-
-	Operator_EQUALS = Operator.AddMember("EQUALS", smithyprelude.Unit)
-
-	AvailMatchingCriteria_DynamicVariable = AvailMatchingCriteria.AddMember("DynamicVariable", ___string)
-
-	AvailMatchingCriteria_Operator = AvailMatchingCriteria.AddMember("Operator", Operator)
-
-	___listOfAvailMatchingCriteria_member = ___listOfAvailMatchingCriteria.AddMember("member", AvailMatchingCriteria)
-
-	DashPlaylistSettings_ManifestWindowSeconds = DashPlaylistSettings.AddMember("ManifestWindowSeconds", ___integer)
-
-	DashPlaylistSettings_MinBufferTimeSeconds = DashPlaylistSettings.AddMember("MinBufferTimeSeconds", ___integer)
-
-	DashPlaylistSettings_MinUpdatePeriodSeconds = DashPlaylistSettings.AddMember("MinUpdatePeriodSeconds", ___integer)
-
-	DashPlaylistSettings_SuggestedPresentationDelaySeconds = DashPlaylistSettings.AddMember("SuggestedPresentationDelaySeconds", ___integer)
-
-	AdMarkupType_DATERANGE = AdMarkupType.AddMember("DATERANGE", smithyprelude.Unit)
-
-	AdMarkupType_SCTE35_ENHANCED = AdMarkupType.AddMember("SCTE35_ENHANCED", smithyprelude.Unit)
-
-	_adMarkupTypes_member = _adMarkupTypes.AddMember("member", AdMarkupType)
-
-	HlsPlaylistSettings_ManifestWindowSeconds = HlsPlaylistSettings.AddMember("ManifestWindowSeconds", ___integer)
-
-	HlsPlaylistSettings_AdMarkupType = HlsPlaylistSettings.AddMember("AdMarkupType", _adMarkupTypes)
-
-	ResponseOutputItem_DashPlaylistSettings = ResponseOutputItem.AddMember("DashPlaylistSettings", DashPlaylistSettings)
-
-	ResponseOutputItem_HlsPlaylistSettings = ResponseOutputItem.AddMember("HlsPlaylistSettings", HlsPlaylistSettings)
-
-	ResponseOutputItem_ManifestName = ResponseOutputItem.AddMember("ManifestName", ___string)
-
-	ResponseOutputItem_PlaybackUrl = ResponseOutputItem.AddMember("PlaybackUrl", ___string)
-
-	ResponseOutputItem_DualStackPlaybackUrl = ResponseOutputItem.AddMember("DualStackPlaybackUrl", ___string)
-
-	ResponseOutputItem_SourceGroup = ResponseOutputItem.AddMember("SourceGroup", ___string)
-
-	_ResponseOutputs_member = _ResponseOutputs.AddMember("member", ResponseOutputItem)
-
-	___mapOf__string_key = ___mapOf__string.AddMember("key", ___string)
-
-	___mapOf__string_value = ___mapOf__string.AddMember("value", ___string)
-
-	LogType_AS_RUN = LogType.AddMember("AS_RUN", smithyprelude.Unit)
-
-	_LogTypes_member = _LogTypes.AddMember("member", LogType)
-
-	LogConfigurationForChannel_LogTypes = LogConfigurationForChannel.AddMember("LogTypes", _LogTypes)
-
-	_Audiences_member = _Audiences.AddMember("member", smithyprelude.String)
-
-	Channel_Arn = Channel.AddMember("Arn", ___string)
-
-	Channel_ChannelName = Channel.AddMember("ChannelName", ___string)
-
-	Channel_ChannelState = Channel.AddMember("ChannelState", ___string)
-
-	Channel_CreationTime = Channel.AddMember("CreationTime", ___timestampUnix)
-
-	Channel_FillerSlate = Channel.AddMember("FillerSlate", SlateSource)
-
-	Channel_LastModifiedTime = Channel.AddMember("LastModifiedTime", ___timestampUnix)
-
-	Channel_Outputs = Channel.AddMember("Outputs", _ResponseOutputs)
-
-	Channel_PlaybackMode = Channel.AddMember("PlaybackMode", ___string)
-
-	Channel_Tags = Channel.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	Channel_Tier = Channel.AddMember("Tier", ___string)
-
-	Channel_LogConfiguration = Channel.AddMember("LogConfiguration", LogConfigurationForChannel)
-
-	Channel_Audiences = Channel.AddMember("Audiences", _Audiences)
-
-	___listOfChannel_member = ___listOfChannel.AddMember("member", Channel)
-
-	FunctionRef_RunCondition = FunctionRef.AddMember("RunCondition", ___string)
-
-	FunctionRef_FunctionId = FunctionRef.AddMember("FunctionId", ___string)
-
-	FunctionRef_Alias = FunctionRef.AddMember("Alias", ___string)
-
-	___listOfFunctionsRef_member = ___listOfFunctionsRef.AddMember("member", FunctionRef)
-
-	FunctionType_HTTP_REQUEST = FunctionType.AddMember("HTTP_REQUEST", smithyprelude.Unit)
-
-	FunctionType_AWS_SERVICE_REQUEST = FunctionType.AddMember("AWS_SERVICE_REQUEST", smithyprelude.Unit)
-
-	FunctionType_CUSTOM_OUTPUT = FunctionType.AddMember("CUSTOM_OUTPUT", smithyprelude.Unit)
-
-	FunctionType_CONCURRENT_EXECUTOR = FunctionType.AddMember("CONCURRENT_EXECUTOR", smithyprelude.Unit)
-
-	FunctionType_SEQUENTIAL_EXECUTOR = FunctionType.AddMember("SEQUENTIAL_EXECUTOR", smithyprelude.Unit)
-
-	FunctionType_VAST_REQUEST = FunctionType.AddMember("VAST_REQUEST", smithyprelude.Unit)
-
-	RuntimeType_JSONATA = RuntimeType.AddMember("JSONATA", smithyprelude.Unit)
-
-	MethodType_GET = MethodType.AddMember("GET", smithyprelude.Unit)
-
-	MethodType_POST = MethodType.AddMember("POST", smithyprelude.Unit)
-
-	HttpRequestCacheConfiguration_TtlMinimumSeconds = HttpRequestCacheConfiguration.AddMember("TtlMinimumSeconds", ___integerMin1)
-
-	HttpRequestCacheConfiguration_TtlMaximumSeconds = HttpRequestCacheConfiguration.AddMember("TtlMaximumSeconds", ___integerMin1)
-
-	HttpRequestCacheConfiguration_Key = HttpRequestCacheConfiguration.AddMember("Key", ___string)
-
-	HttpRequestConfiguration_Runtime = HttpRequestConfiguration.AddMember("Runtime", RuntimeType)
-
-	HttpRequestConfiguration_Output = HttpRequestConfiguration.AddMember("Output", ___mapOf__string)
-
-	HttpRequestConfiguration_MethodType = HttpRequestConfiguration.AddMember("MethodType", MethodType)
-
-	HttpRequestConfiguration_RequestTimeoutMilliseconds = HttpRequestConfiguration.AddMember("RequestTimeoutMilliseconds", ___integer)
-
-	HttpRequestConfiguration_Url = HttpRequestConfiguration.AddMember("Url", ___string)
-
-	HttpRequestConfiguration_Body = HttpRequestConfiguration.AddMember("Body", ___string)
-
-	HttpRequestConfiguration_Headers = HttpRequestConfiguration.AddMember("Headers", ___mapOf__string)
-
-	HttpRequestConfiguration_Cache = HttpRequestConfiguration.AddMember("Cache", HttpRequestCacheConfiguration)
-
-	AwsServiceRequestConfiguration_Runtime = AwsServiceRequestConfiguration.AddMember("Runtime", RuntimeType)
-
-	AwsServiceRequestConfiguration_Output = AwsServiceRequestConfiguration.AddMember("Output", ___mapOf__string)
-
-	AwsServiceRequestConfiguration_MethodType = AwsServiceRequestConfiguration.AddMember("MethodType", MethodType)
-
-	AwsServiceRequestConfiguration_RequestTimeoutMilliseconds = AwsServiceRequestConfiguration.AddMember("RequestTimeoutMilliseconds", ___integer)
-
-	AwsServiceRequestConfiguration_Url = AwsServiceRequestConfiguration.AddMember("Url", ___string)
-
-	AwsServiceRequestConfiguration_Body = AwsServiceRequestConfiguration.AddMember("Body", ___string)
-
-	AwsServiceRequestConfiguration_Headers = AwsServiceRequestConfiguration.AddMember("Headers", ___mapOf__string)
-
-	AwsServiceRequestConfiguration_Cache = AwsServiceRequestConfiguration.AddMember("Cache", HttpRequestCacheConfiguration)
-
-	AwsServiceRequestConfiguration_TargetService = AwsServiceRequestConfiguration.AddMember("TargetService", _AwsTargetService)
-
-	AwsServiceRequestConfiguration_TargetRegion = AwsServiceRequestConfiguration.AddMember("TargetRegion", ___string)
-
-	CustomOutputConfiguration_Runtime = CustomOutputConfiguration.AddMember("Runtime", RuntimeType)
-
-	CustomOutputConfiguration_Output = CustomOutputConfiguration.AddMember("Output", ___mapOf__string)
-
-	ConcurrentExecutorConfiguration_Runtime = ConcurrentExecutorConfiguration.AddMember("Runtime", RuntimeType)
-
-	ConcurrentExecutorConfiguration_Output = ConcurrentExecutorConfiguration.AddMember("Output", ___mapOf__string)
-
-	ConcurrentExecutorConfiguration_FunctionList = ConcurrentExecutorConfiguration.AddMember("FunctionList", ___listOfFunctionsRef)
-
-	ConcurrentExecutorConfiguration_TimeoutMilliseconds = ConcurrentExecutorConfiguration.AddMember("TimeoutMilliseconds", ___integer)
-
-	ConcurrentExecutorConfiguration_MaxConcurrency = ConcurrentExecutorConfiguration.AddMember("MaxConcurrency", ___integer)
-
-	SequentialExecutorConfiguration_Runtime = SequentialExecutorConfiguration.AddMember("Runtime", RuntimeType)
-
-	SequentialExecutorConfiguration_Output = SequentialExecutorConfiguration.AddMember("Output", ___mapOf__string)
-
-	SequentialExecutorConfiguration_FunctionList = SequentialExecutorConfiguration.AddMember("FunctionList", ___listOfFunctionsRef)
-
-	SequentialExecutorConfiguration_TimeoutMilliseconds = SequentialExecutorConfiguration.AddMember("TimeoutMilliseconds", ___integer)
-
-	VastRequestConfiguration_Runtime = VastRequestConfiguration.AddMember("Runtime", RuntimeType)
-
-	VastRequestConfiguration_Output = VastRequestConfiguration.AddMember("Output", ___mapOf__string)
-
-	VastRequestConfiguration_MethodType = VastRequestConfiguration.AddMember("MethodType", MethodType)
-
-	VastRequestConfiguration_RequestTimeoutMilliseconds = VastRequestConfiguration.AddMember("RequestTimeoutMilliseconds", ___integer)
-
-	VastRequestConfiguration_Url = VastRequestConfiguration.AddMember("Url", ___string)
-
-	VastRequestConfiguration_Body = VastRequestConfiguration.AddMember("Body", ___string)
-
-	VastRequestConfiguration_Headers = VastRequestConfiguration.AddMember("Headers", ___mapOf__string)
-
-	VastRequestConfiguration_Cache = VastRequestConfiguration.AddMember("Cache", HttpRequestCacheConfiguration)
-
-	Function_FunctionId = Function.AddMember("FunctionId", ___string)
-
-	Function_FunctionType = Function.AddMember("FunctionType", FunctionType)
-
-	Function_Description = Function.AddMember("Description", ___string)
-
-	Function_HttpRequestConfiguration = Function.AddMember("HttpRequestConfiguration", HttpRequestConfiguration)
-
-	Function_AwsServiceRequestConfiguration = Function.AddMember("AwsServiceRequestConfiguration", AwsServiceRequestConfiguration)
-
-	Function_CustomOutputConfiguration = Function.AddMember("CustomOutputConfiguration", CustomOutputConfiguration)
-
-	Function_ConcurrentExecutorConfiguration = Function.AddMember("ConcurrentExecutorConfiguration", ConcurrentExecutorConfiguration)
-
-	Function_SequentialExecutorConfiguration = Function.AddMember("SequentialExecutorConfiguration", SequentialExecutorConfiguration)
-
-	Function_VastRequestConfiguration = Function.AddMember("VastRequestConfiguration", VastRequestConfiguration)
-
-	Function_Tags = Function.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	Function_Arn = Function.AddMember("Arn", ___string)
-
-	___listOfFunctionsResponse_member = ___listOfFunctionsResponse.AddMember("member", Function)
-
-	Type_DASH = Type.AddMember("DASH", smithyprelude.Unit)
-
-	Type_HLS = Type.AddMember("HLS", smithyprelude.Unit)
-
-	HttpPackageConfiguration_Path = HttpPackageConfiguration.AddMember("Path", ___string)
-
-	HttpPackageConfiguration_SourceGroup = HttpPackageConfiguration.AddMember("SourceGroup", ___string)
-
-	HttpPackageConfiguration_Type = HttpPackageConfiguration.AddMember("Type", Type)
-
-	_HttpPackageConfigurations_member = _HttpPackageConfigurations.AddMember("member", HttpPackageConfiguration)
-
-	LiveSource_Arn = LiveSource.AddMember("Arn", ___string)
-
-	LiveSource_CreationTime = LiveSource.AddMember("CreationTime", ___timestampUnix)
-
-	LiveSource_HttpPackageConfigurations = LiveSource.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	LiveSource_LastModifiedTime = LiveSource.AddMember("LastModifiedTime", ___timestampUnix)
-
-	LiveSource_LiveSourceName = LiveSource.AddMember("LiveSourceName", ___string)
-
-	LiveSource_SourceLocationName = LiveSource.AddMember("SourceLocationName", ___string)
-
-	LiveSource_Tags = LiveSource.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfLiveSource_member = ___listOfLiveSource.AddMember("member", LiveSource)
-
-	LoggingStrategy_VENDED_LOGS = LoggingStrategy.AddMember("VENDED_LOGS", smithyprelude.Unit)
-
-	LoggingStrategy_LEGACY_CLOUDWATCH = LoggingStrategy.AddMember("LEGACY_CLOUDWATCH", smithyprelude.Unit)
-
-	___listOfLoggingStrategies_member = ___listOfLoggingStrategies.AddMember("member", LoggingStrategy)
-
-	Mode_OFF = Mode.AddMember("OFF", smithyprelude.Unit)
-
-	Mode_BEHIND_LIVE_EDGE = Mode.AddMember("BEHIND_LIVE_EDGE", smithyprelude.Unit)
-
-	Mode_AFTER_LIVE_EDGE = Mode.AddMember("AFTER_LIVE_EDGE", smithyprelude.Unit)
-
-	FillPolicy_FULL_AVAIL_ONLY = FillPolicy.AddMember("FULL_AVAIL_ONLY", smithyprelude.Unit)
-
-	FillPolicy_PARTIAL_AVAIL = FillPolicy.AddMember("PARTIAL_AVAIL", smithyprelude.Unit)
-
-	AvailSuppression_Mode = AvailSuppression.AddMember("Mode", Mode)
-
-	AvailSuppression_Value = AvailSuppression.AddMember("Value", ___string)
-
-	AvailSuppression_FillPolicy = AvailSuppression.AddMember("FillPolicy", FillPolicy)
-
-	Bumper_EndUrl = Bumper.AddMember("EndUrl", ___string)
-
-	Bumper_StartUrl = Bumper.AddMember("StartUrl", ___string)
-
-	CdnConfiguration_AdSegmentUrlPrefix = CdnConfiguration.AddMember("AdSegmentUrlPrefix", ___string)
-
-	CdnConfiguration_ContentSegmentUrlPrefix = CdnConfiguration.AddMember("ContentSegmentUrlPrefix", ___string)
-
-	_ConfigurationAliasesResponse_key = _ConfigurationAliasesResponse.AddMember("key", ___string)
-
-	_ConfigurationAliasesResponse_value = _ConfigurationAliasesResponse.AddMember("value", ___mapOf__string)
-
-	OriginManifestType_SINGLE_PERIOD = OriginManifestType.AddMember("SINGLE_PERIOD", smithyprelude.Unit)
-
-	OriginManifestType_MULTI_PERIOD = OriginManifestType.AddMember("MULTI_PERIOD", smithyprelude.Unit)
-
-	DashConfiguration_ManifestEndpointPrefix = DashConfiguration.AddMember("ManifestEndpointPrefix", ___string)
-
-	DashConfiguration_DualStackManifestEndpointPrefix = DashConfiguration.AddMember("DualStackManifestEndpointPrefix", ___string)
-
-	DashConfiguration_MpdLocation = DashConfiguration.AddMember("MpdLocation", ___string)
-
-	DashConfiguration_OriginManifestType = DashConfiguration.AddMember("OriginManifestType", OriginManifestType)
-
-	HlsConfiguration_ManifestEndpointPrefix = HlsConfiguration.AddMember("ManifestEndpointPrefix", ___string)
-
-	HlsConfiguration_DualStackManifestEndpointPrefix = HlsConfiguration.AddMember("DualStackManifestEndpointPrefix", ___string)
-
-	InsertionMode_STITCHED_ONLY = InsertionMode.AddMember("STITCHED_ONLY", smithyprelude.Unit)
-
-	InsertionMode_PLAYER_SELECT = InsertionMode.AddMember("PLAYER_SELECT", smithyprelude.Unit)
-
-	PreRollAdSequencingMode_FOLLOW_AD_SEQUENCE = PreRollAdSequencingMode.AddMember("FOLLOW_AD_SEQUENCE", smithyprelude.Unit)
-
-	PreRollAdSequencingMode_IGNORE_AD_SEQUENCE = PreRollAdSequencingMode.AddMember("IGNORE_AD_SEQUENCE", smithyprelude.Unit)
-
-	PreRollVastResponse_AdSequencingMode = PreRollVastResponse.AddMember("AdSequencingMode", PreRollAdSequencingMode)
-
-	PreRollAdDecisionServerConfiguration_VastResponse = PreRollAdDecisionServerConfiguration.AddMember("VastResponse", PreRollVastResponse)
-
-	LivePreRollConfiguration_AdDecisionServerUrl = LivePreRollConfiguration.AddMember("AdDecisionServerUrl", ___string)
-
-	LivePreRollConfiguration_MaxDurationSeconds = LivePreRollConfiguration.AddMember("MaxDurationSeconds", ___integer)
-
-	LivePreRollConfiguration_AdDecisionServerConfiguration = LivePreRollConfiguration.AddMember("AdDecisionServerConfiguration", PreRollAdDecisionServerConfiguration)
-
-	AdsInteractionLog_PublishOptInEventTypes = AdsInteractionLog.AddMember("PublishOptInEventTypes", ___adsInteractionPublishOptInEventTypesList)
-
-	AdsInteractionLog_ExcludeEventTypes = AdsInteractionLog.AddMember("ExcludeEventTypes", ___adsInteractionExcludeEventTypesList)
-
-	ManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY = ManifestServicePublishOptInEventType.AddMember("PRE_SESSION_INIT_HOOK_SUMMARY", smithyprelude.Unit)
-
-	ManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED = ManifestServicePublishOptInEventType.AddMember("PRE_SESSION_INIT_FUNCTION_COMPLETED", smithyprelude.Unit)
-
-	___manifestServicePublishOptInEventTypesList_member = ___manifestServicePublishOptInEventTypesList.AddMember("member", ManifestServicePublishOptInEventType)
-
-	ManifestServiceExcludeEventType_GENERATED_MANIFEST = ManifestServiceExcludeEventType.AddMember("GENERATED_MANIFEST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ORIGIN_MANIFEST = ManifestServiceExcludeEventType.AddMember("ORIGIN_MANIFEST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_SESSION_INITIALIZED = ManifestServiceExcludeEventType.AddMember("SESSION_INITIALIZED", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_TRACKING_RESPONSE = ManifestServiceExcludeEventType.AddMember("TRACKING_RESPONSE", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR = ManifestServiceExcludeEventType.AddMember("CONFIG_SYNTAX_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR = ManifestServiceExcludeEventType.AddMember("CONFIG_SECURITY_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_UNKNOWN_HOST = ManifestServiceExcludeEventType.AddMember("UNKNOWN_HOST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_TIMEOUT_ERROR = ManifestServiceExcludeEventType.AddMember("TIMEOUT_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_CONNECTION_ERROR = ManifestServiceExcludeEventType.AddMember("CONNECTION_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_IO_ERROR = ManifestServiceExcludeEventType.AddMember("IO_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_UNKNOWN_ERROR = ManifestServiceExcludeEventType.AddMember("UNKNOWN_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_HOST_DISALLOWED = ManifestServiceExcludeEventType.AddMember("HOST_DISALLOWED", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_PARSING_ERROR = ManifestServiceExcludeEventType.AddMember("PARSING_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_MANIFEST_ERROR = ManifestServiceExcludeEventType.AddMember("MANIFEST_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST = ManifestServiceExcludeEventType.AddMember("NO_MASTER_OR_MEDIA_PLAYLIST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_NO_MASTER_PLAYLIST = ManifestServiceExcludeEventType.AddMember("NO_MASTER_PLAYLIST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST = ManifestServiceExcludeEventType.AddMember("NO_MEDIA_PLAYLIST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION = ManifestServiceExcludeEventType.AddMember("INCOMPATIBLE_HLS_VERSION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_SCTE35_PARSING_ERROR = ManifestServiceExcludeEventType.AddMember("SCTE35_PARSING_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST = ManifestServiceExcludeEventType.AddMember("INVALID_SINGLE_PERIOD_DASH_MANIFEST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST = ManifestServiceExcludeEventType.AddMember("UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO = ManifestServiceExcludeEventType.AddMember("LAST_PERIOD_MISSING_AUDIO", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING = ManifestServiceExcludeEventType.AddMember("LAST_PERIOD_MISSING_AUDIO_WARNING", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_ORIGIN_PREFIX_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_ADS_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_CDN_AD_SEGMENT_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_SLATE_AD_URL_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_PROFILE_NAME_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_BUMPER_START_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION = ManifestServiceExcludeEventType.AddMember("ERROR_BUMPER_END_INTERPOLATION", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR = ManifestServiceExcludeEventType.AddMember("PRE_SESSION_INIT_HOOK_ERROR", smithyprelude.Unit)
-
-	ManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR = ManifestServiceExcludeEventType.AddMember("PRE_SESSION_INIT_FUNCTION_ERROR", smithyprelude.Unit)
-
-	___manifestServiceExcludeEventTypesList_member = ___manifestServiceExcludeEventTypesList.AddMember("member", ManifestServiceExcludeEventType)
-
-	ManifestServiceInteractionLog_PublishOptInEventTypes = ManifestServiceInteractionLog.AddMember("PublishOptInEventTypes", ___manifestServicePublishOptInEventTypesList)
-
-	ManifestServiceInteractionLog_ExcludeEventTypes = ManifestServiceInteractionLog.AddMember("ExcludeEventTypes", ___manifestServiceExcludeEventTypesList)
-
-	LogConfiguration_PercentEnabled = LogConfiguration.AddMember("PercentEnabled", ___integer)
-
-	LogConfiguration_EnabledLoggingStrategies = LogConfiguration.AddMember("EnabledLoggingStrategies", ___listOfLoggingStrategies)
-
-	LogConfiguration_AdsInteractionLog = LogConfiguration.AddMember("AdsInteractionLog", AdsInteractionLog)
-
-	LogConfiguration_ManifestServiceInteractionLog = LogConfiguration.AddMember("ManifestServiceInteractionLog", ManifestServiceInteractionLog)
-
-	AdMarkerPassthrough_Enabled = AdMarkerPassthrough.AddMember("Enabled", ___boolean)
-
-	ManifestProcessingRules_AdMarkerPassthrough = ManifestProcessingRules.AddMember("AdMarkerPassthrough", AdMarkerPassthrough)
-
-	StreamingMediaFileConditioning_TRANSCODE = StreamingMediaFileConditioning.AddMember("TRANSCODE", smithyprelude.Unit)
-
-	StreamingMediaFileConditioning_NONE = StreamingMediaFileConditioning.AddMember("NONE", smithyprelude.Unit)
-
-	AdConditioningConfiguration_StreamingMediaFileConditioning = AdConditioningConfiguration.AddMember("StreamingMediaFileConditioning", StreamingMediaFileConditioning)
-
-	Method_GET = Method.AddMember("GET", smithyprelude.Unit)
-
-	Method_POST = Method.AddMember("POST", smithyprelude.Unit)
-
-	_StringMap_key = _StringMap.AddMember("key", ___string)
-
-	_StringMap_value = _StringMap.AddMember("value", ___string)
-
-	CompressionMethod_NONE = CompressionMethod.AddMember("NONE", smithyprelude.Unit)
-
-	CompressionMethod_GZIP = CompressionMethod.AddMember("GZIP", smithyprelude.Unit)
-
-	HttpRequest_Method = HttpRequest.AddMember("Method", Method)
-
-	HttpRequest_Body = HttpRequest.AddMember("Body", ___string)
-
-	HttpRequest_Headers = HttpRequest.AddMember("Headers", _StringMap)
-
-	HttpRequest_CompressRequest = HttpRequest.AddMember("CompressRequest", CompressionMethod)
-
-	AdSequencingMode_FOLLOW_AD_SEQUENCE = AdSequencingMode.AddMember("FOLLOW_AD_SEQUENCE", smithyprelude.Unit)
-
-	AdSequencingMode_IGNORE_AD_SEQUENCE = AdSequencingMode.AddMember("IGNORE_AD_SEQUENCE", smithyprelude.Unit)
-
-	AdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE = AdSequencingMode.AddMember("FOLLOW_AD_SEQUENCE_ONLY_LIVE", smithyprelude.Unit)
-
-	AdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD = AdSequencingMode.AddMember("FOLLOW_AD_SEQUENCE_ONLY_VOD", smithyprelude.Unit)
-
-	VastResponse_AdSequencingMode = VastResponse.AddMember("AdSequencingMode", AdSequencingMode)
-
-	AdDecisionServerConfiguration_HttpRequest = AdDecisionServerConfiguration.AddMember("HttpRequest", HttpRequest)
-
-	AdDecisionServerConfiguration_VastResponse = AdDecisionServerConfiguration.AddMember("VastResponse", VastResponse)
-
-	ApsRegion_AMERICAS = ApsRegion.AddMember("AMERICAS", smithyprelude.Unit)
-
-	ApsRegion_EUROPE = ApsRegion.AddMember("EUROPE", smithyprelude.Unit)
-
-	ApsRegion_ASIA_PACIFIC = ApsRegion.AddMember("ASIA_PACIFIC", smithyprelude.Unit)
-
-	YieldOptimizationConfiguration_MinimumUnfilledDuration = YieldOptimizationConfiguration.AddMember("MinimumUnfilledDuration", _MinimumUnfilledDurationSeconds)
-
-	YieldOptimizationConfiguration_PublisherId = YieldOptimizationConfiguration.AddMember("PublisherId", _ApsPublisherId)
-
-	YieldOptimizationConfiguration_Region = YieldOptimizationConfiguration.AddMember("Region", ApsRegion)
-
-	YieldOptimizationConfiguration_OpenRtbTemplate = YieldOptimizationConfiguration.AddMember("OpenRtbTemplate", _OpenRtbTemplateString)
-
-	EventName_PRE_SESSION_INITIALIZATION = EventName.AddMember("PRE_SESSION_INITIALIZATION", smithyprelude.Unit)
-
-	EventName_PRE_ADS_REQUEST = EventName.AddMember("PRE_ADS_REQUEST", smithyprelude.Unit)
-
-	EventName_POST_ADS_RESPONSE = EventName.AddMember("POST_ADS_RESPONSE", smithyprelude.Unit)
-
-	EventName_PRE_MANIFEST_INSERTION = EventName.AddMember("PRE_MANIFEST_INSERTION", smithyprelude.Unit)
-
-	_FunctionMapping_key = _FunctionMapping.AddMember("key", EventName)
-
-	_FunctionMapping_value = _FunctionMapping.AddMember("value", ___string)
-
-	AdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds = AdsPersonalizationTimeouts.AddMember("AdsRequestTimeoutMilliseconds", ___integer)
-
-	AdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds = AdsPersonalizationTimeouts.AddMember("LiveMaximumAdsPersonalizationTimeMilliseconds", ___integer)
-
-	AdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds = AdsPersonalizationTimeouts.AddMember("VodMaximumAdsPersonalizationTimeMilliseconds", ___integer)
-
-	AdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds = AdsPersonalizationTimeouts.AddMember("PrefetchAdsRequestTimeoutMilliseconds", ___integer)
-
-	AdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds = AdsPersonalizationTimeouts.AddMember("PrefetchMaximumAdsPersonalizationTimeMilliseconds", ___integer)
-
-	AdsPersonalizationConcurrency_MaxConcurrentAdsRequests = AdsPersonalizationConcurrency.AddMember("MaxConcurrentAdsRequests", ___integer)
-
-	AdsPersonalizationConcurrency_EnableVodVastParallelization = AdsPersonalizationConcurrency.AddMember("EnableVodVastParallelization", ___boolean)
-
-	ClientSideBeaconingMode_DISABLED = ClientSideBeaconingMode.AddMember("DISABLED", smithyprelude.Unit)
-
-	ClientSideBeaconingMode_INSIGHTS = ClientSideBeaconingMode.AddMember("INSIGHTS", smithyprelude.Unit)
-
-	BeaconEventType_MUTE = BeaconEventType.AddMember("MUTE", smithyprelude.Unit)
-
-	BeaconEventType_UNMUTE = BeaconEventType.AddMember("UNMUTE", smithyprelude.Unit)
-
-	BeaconEventType_PAUSE = BeaconEventType.AddMember("PAUSE", smithyprelude.Unit)
-
-	BeaconEventType_SKIP = BeaconEventType.AddMember("SKIP", smithyprelude.Unit)
-
-	_BeaconEventTypeList_member = _BeaconEventTypeList.AddMember("member", BeaconEventType)
-
-	ClientSideBeaconingConfiguration_ReportingMode = ClientSideBeaconingConfiguration.AddMember("ReportingMode", ClientSideBeaconingMode)
-
-	ClientSideBeaconingConfiguration_AdditionalEventTypes = ClientSideBeaconingConfiguration.AddMember("AdditionalEventTypes", _BeaconEventTypeList)
-
-	BeaconingConfiguration_ClientSide = BeaconingConfiguration.AddMember("ClientSide", ClientSideBeaconingConfiguration)
-
-	PlaybackConfiguration_AdDecisionServerUrl = PlaybackConfiguration.AddMember("AdDecisionServerUrl", ___string)
-
-	PlaybackConfiguration_AvailSuppression = PlaybackConfiguration.AddMember("AvailSuppression", AvailSuppression)
-
-	PlaybackConfiguration_Bumper = PlaybackConfiguration.AddMember("Bumper", Bumper)
-
-	PlaybackConfiguration_CdnConfiguration = PlaybackConfiguration.AddMember("CdnConfiguration", CdnConfiguration)
-
-	PlaybackConfiguration_ConfigurationAliases = PlaybackConfiguration.AddMember("ConfigurationAliases", _ConfigurationAliasesResponse)
-
-	PlaybackConfiguration_DashConfiguration = PlaybackConfiguration.AddMember("DashConfiguration", DashConfiguration)
-
-	PlaybackConfiguration_HlsConfiguration = PlaybackConfiguration.AddMember("HlsConfiguration", HlsConfiguration)
-
-	PlaybackConfiguration_InsertionMode = PlaybackConfiguration.AddMember("InsertionMode", InsertionMode)
-
-	PlaybackConfiguration_LivePreRollConfiguration = PlaybackConfiguration.AddMember("LivePreRollConfiguration", LivePreRollConfiguration)
-
-	PlaybackConfiguration_LogConfiguration = PlaybackConfiguration.AddMember("LogConfiguration", LogConfiguration)
-
-	PlaybackConfiguration_ManifestProcessingRules = PlaybackConfiguration.AddMember("ManifestProcessingRules", ManifestProcessingRules)
-
-	PlaybackConfiguration_Name = PlaybackConfiguration.AddMember("Name", ___string)
-
-	PlaybackConfiguration_PersonalizationThresholdSeconds = PlaybackConfiguration.AddMember("PersonalizationThresholdSeconds", ___integerMin1)
-
-	PlaybackConfiguration_PlaybackConfigurationArn = PlaybackConfiguration.AddMember("PlaybackConfigurationArn", ___string)
-
-	PlaybackConfiguration_PlaybackEndpointPrefix = PlaybackConfiguration.AddMember("PlaybackEndpointPrefix", ___string)
-
-	PlaybackConfiguration_DualStackPlaybackEndpointPrefix = PlaybackConfiguration.AddMember("DualStackPlaybackEndpointPrefix", ___string)
-
-	PlaybackConfiguration_SessionInitializationEndpointPrefix = PlaybackConfiguration.AddMember("SessionInitializationEndpointPrefix", ___string)
-
-	PlaybackConfiguration_DualStackSessionInitializationEndpointPrefix = PlaybackConfiguration.AddMember("DualStackSessionInitializationEndpointPrefix", ___string)
-
-	PlaybackConfiguration_SlateAdUrl = PlaybackConfiguration.AddMember("SlateAdUrl", ___string)
-
-	PlaybackConfiguration_Tags = PlaybackConfiguration.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	PlaybackConfiguration_TranscodeProfileName = PlaybackConfiguration.AddMember("TranscodeProfileName", ___string)
-
-	PlaybackConfiguration_VideoContentSourceUrl = PlaybackConfiguration.AddMember("VideoContentSourceUrl", ___string)
-
-	PlaybackConfiguration_AdConditioningConfiguration = PlaybackConfiguration.AddMember("AdConditioningConfiguration", AdConditioningConfiguration)
-
-	PlaybackConfiguration_AdDecisionServerConfiguration = PlaybackConfiguration.AddMember("AdDecisionServerConfiguration", AdDecisionServerConfiguration)
-
-	PlaybackConfiguration_YieldOptimizationConfiguration = PlaybackConfiguration.AddMember("YieldOptimizationConfiguration", YieldOptimizationConfiguration)
-
-	PlaybackConfiguration_FunctionMapping = PlaybackConfiguration.AddMember("FunctionMapping", _FunctionMapping)
-
-	PlaybackConfiguration_AdsPersonalizationTimeouts = PlaybackConfiguration.AddMember("AdsPersonalizationTimeouts", AdsPersonalizationTimeouts)
-
-	PlaybackConfiguration_AdsPersonalizationConcurrency = PlaybackConfiguration.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
-
-	PlaybackConfiguration_BeaconingConfiguration = PlaybackConfiguration.AddMember("BeaconingConfiguration", BeaconingConfiguration)
-
-	___listOfPlaybackConfiguration_member = ___listOfPlaybackConfiguration.AddMember("member", PlaybackConfiguration)
-
-	PrefetchConsumption_AvailMatchingCriteria = PrefetchConsumption.AddMember("AvailMatchingCriteria", ___listOfAvailMatchingCriteria)
-
-	PrefetchConsumption_EndTime = PrefetchConsumption.AddMember("EndTime", ___timestampUnix)
-
-	PrefetchConsumption_StartTime = PrefetchConsumption.AddMember("StartTime", ___timestampUnix)
-
-	TrafficShapingType_RETRIEVAL_WINDOW = TrafficShapingType.AddMember("RETRIEVAL_WINDOW", smithyprelude.Unit)
-
-	TrafficShapingType_TPS = TrafficShapingType.AddMember("TPS", smithyprelude.Unit)
-
-	TrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds = TrafficShapingRetrievalWindow.AddMember("RetrievalWindowDurationSeconds", ___integer)
-
-	TrafficShapingTpsConfiguration_PeakTps = TrafficShapingTpsConfiguration.AddMember("PeakTps", ___integer)
-
-	TrafficShapingTpsConfiguration_PeakConcurrentUsers = TrafficShapingTpsConfiguration.AddMember("PeakConcurrentUsers", ___integer)
-
-	PrefetchRetrieval_DynamicVariables = PrefetchRetrieval.AddMember("DynamicVariables", ___mapOf__string)
-
-	PrefetchRetrieval_EndTime = PrefetchRetrieval.AddMember("EndTime", ___timestampUnix)
-
-	PrefetchRetrieval_StartTime = PrefetchRetrieval.AddMember("StartTime", ___timestampUnix)
-
-	PrefetchRetrieval_TrafficShapingType = PrefetchRetrieval.AddMember("TrafficShapingType", TrafficShapingType)
-
-	PrefetchRetrieval_TrafficShapingRetrievalWindow = PrefetchRetrieval.AddMember("TrafficShapingRetrievalWindow", TrafficShapingRetrievalWindow)
-
-	PrefetchRetrieval_TrafficShapingTpsConfiguration = PrefetchRetrieval.AddMember("TrafficShapingTpsConfiguration", TrafficShapingTpsConfiguration)
-
-	PrefetchScheduleType_SINGLE = PrefetchScheduleType.AddMember("SINGLE", smithyprelude.Unit)
-
-	PrefetchScheduleType_RECURRING = PrefetchScheduleType.AddMember("RECURRING", smithyprelude.Unit)
-
-	RecurringConsumption_RetrievedAdExpirationSeconds = RecurringConsumption.AddMember("RetrievedAdExpirationSeconds", ___integer)
-
-	RecurringConsumption_AvailMatchingCriteria = RecurringConsumption.AddMember("AvailMatchingCriteria", ___listOfAvailMatchingCriteria)
-
-	RecurringRetrieval_DynamicVariables = RecurringRetrieval.AddMember("DynamicVariables", ___mapOf__string)
-
-	RecurringRetrieval_DelayAfterAvailEndSeconds = RecurringRetrieval.AddMember("DelayAfterAvailEndSeconds", ___integer)
-
-	RecurringRetrieval_TrafficShapingType = RecurringRetrieval.AddMember("TrafficShapingType", TrafficShapingType)
-
-	RecurringRetrieval_TrafficShapingRetrievalWindow = RecurringRetrieval.AddMember("TrafficShapingRetrievalWindow", TrafficShapingRetrievalWindow)
-
-	RecurringRetrieval_TrafficShapingTpsConfiguration = RecurringRetrieval.AddMember("TrafficShapingTpsConfiguration", TrafficShapingTpsConfiguration)
-
-	RecurringPrefetchConfiguration_StartTime = RecurringPrefetchConfiguration.AddMember("StartTime", ___timestampUnix)
-
-	RecurringPrefetchConfiguration_EndTime = RecurringPrefetchConfiguration.AddMember("EndTime", ___timestampUnix)
-
-	RecurringPrefetchConfiguration_RecurringConsumption = RecurringPrefetchConfiguration.AddMember("RecurringConsumption", RecurringConsumption)
-
-	RecurringPrefetchConfiguration_RecurringRetrieval = RecurringPrefetchConfiguration.AddMember("RecurringRetrieval", RecurringRetrieval)
-
-	PrefetchSchedule_Arn = PrefetchSchedule.AddMember("Arn", ___string)
-
-	PrefetchSchedule_Consumption = PrefetchSchedule.AddMember("Consumption", PrefetchConsumption)
-
-	PrefetchSchedule_Name = PrefetchSchedule.AddMember("Name", ___string)
-
-	PrefetchSchedule_PlaybackConfigurationName = PrefetchSchedule.AddMember("PlaybackConfigurationName", ___string)
-
-	PrefetchSchedule_Retrieval = PrefetchSchedule.AddMember("Retrieval", PrefetchRetrieval)
-
-	PrefetchSchedule_ScheduleType = PrefetchSchedule.AddMember("ScheduleType", PrefetchScheduleType)
-
-	PrefetchSchedule_RecurringPrefetchConfiguration = PrefetchSchedule.AddMember("RecurringPrefetchConfiguration", RecurringPrefetchConfiguration)
-
-	PrefetchSchedule_StreamId = PrefetchSchedule.AddMember("StreamId", ___string)
-
-	PrefetchSchedule_Tags = PrefetchSchedule.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfPrefetchSchedule_member = ___listOfPrefetchSchedule.AddMember("member", PrefetchSchedule)
-
-	ScheduleAdBreak_ApproximateDurationSeconds = ScheduleAdBreak.AddMember("ApproximateDurationSeconds", ___long)
-
-	ScheduleAdBreak_ApproximateStartTime = ScheduleAdBreak.AddMember("ApproximateStartTime", ___timestampUnix)
-
-	ScheduleAdBreak_SourceLocationName = ScheduleAdBreak.AddMember("SourceLocationName", ___string)
-
-	ScheduleAdBreak_VodSourceName = ScheduleAdBreak.AddMember("VodSourceName", ___string)
-
-	___listOfScheduleAdBreak_member = ___listOfScheduleAdBreak.AddMember("member", ScheduleAdBreak)
-
-	ScheduleEntryType_PROGRAM = ScheduleEntryType.AddMember("PROGRAM", smithyprelude.Unit)
-
-	ScheduleEntryType_FILLER_SLATE = ScheduleEntryType.AddMember("FILLER_SLATE", smithyprelude.Unit)
-
-	ScheduleEntryType_ALTERNATE_MEDIA = ScheduleEntryType.AddMember("ALTERNATE_MEDIA", smithyprelude.Unit)
-
-	ScheduleEntry_ApproximateDurationSeconds = ScheduleEntry.AddMember("ApproximateDurationSeconds", ___long)
-
-	ScheduleEntry_ApproximateStartTime = ScheduleEntry.AddMember("ApproximateStartTime", ___timestampUnix)
-
-	ScheduleEntry_Arn = ScheduleEntry.AddMember("Arn", ___string)
-
-	ScheduleEntry_ChannelName = ScheduleEntry.AddMember("ChannelName", ___string)
-
-	ScheduleEntry_LiveSourceName = ScheduleEntry.AddMember("LiveSourceName", ___string)
-
-	ScheduleEntry_ProgramName = ScheduleEntry.AddMember("ProgramName", ___string)
-
-	ScheduleEntry_ScheduleAdBreaks = ScheduleEntry.AddMember("ScheduleAdBreaks", ___listOfScheduleAdBreak)
-
-	ScheduleEntry_ScheduleEntryType = ScheduleEntry.AddMember("ScheduleEntryType", ScheduleEntryType)
-
-	ScheduleEntry_SourceLocationName = ScheduleEntry.AddMember("SourceLocationName", ___string)
-
-	ScheduleEntry_VodSourceName = ScheduleEntry.AddMember("VodSourceName", ___string)
-
-	ScheduleEntry_Audiences = ScheduleEntry.AddMember("Audiences", _Audiences)
-
-	___listOfScheduleEntry_member = ___listOfScheduleEntry.AddMember("member", ScheduleEntry)
-
-	SegmentDeliveryConfiguration_BaseUrl = SegmentDeliveryConfiguration.AddMember("BaseUrl", ___string)
-
-	SegmentDeliveryConfiguration_Name = SegmentDeliveryConfiguration.AddMember("Name", ___string)
-
-	___listOfSegmentDeliveryConfiguration_member = ___listOfSegmentDeliveryConfiguration.AddMember("member", SegmentDeliveryConfiguration)
-
-	AccessType_S3_SIGV4 = AccessType.AddMember("S3_SIGV4", smithyprelude.Unit)
-
-	AccessType_SECRETS_MANAGER_ACCESS_TOKEN = AccessType.AddMember("SECRETS_MANAGER_ACCESS_TOKEN", smithyprelude.Unit)
-
-	AccessType_AUTODETECT_SIGV4 = AccessType.AddMember("AUTODETECT_SIGV4", smithyprelude.Unit)
-
-	SecretsManagerAccessTokenConfiguration_HeaderName = SecretsManagerAccessTokenConfiguration.AddMember("HeaderName", ___string)
-
-	SecretsManagerAccessTokenConfiguration_SecretArn = SecretsManagerAccessTokenConfiguration.AddMember("SecretArn", ___string)
-
-	SecretsManagerAccessTokenConfiguration_SecretStringKey = SecretsManagerAccessTokenConfiguration.AddMember("SecretStringKey", ___string)
-
-	AccessConfiguration_AccessType = AccessConfiguration.AddMember("AccessType", AccessType)
-
-	AccessConfiguration_SecretsManagerAccessTokenConfiguration = AccessConfiguration.AddMember("SecretsManagerAccessTokenConfiguration", SecretsManagerAccessTokenConfiguration)
-
-	DefaultSegmentDeliveryConfiguration_BaseUrl = DefaultSegmentDeliveryConfiguration.AddMember("BaseUrl", ___string)
-
-	HttpConfiguration_BaseUrl = HttpConfiguration.AddMember("BaseUrl", ___string)
-
-	SourceLocation_AccessConfiguration = SourceLocation.AddMember("AccessConfiguration", AccessConfiguration)
-
-	SourceLocation_Arn = SourceLocation.AddMember("Arn", ___string)
-
-	SourceLocation_CreationTime = SourceLocation.AddMember("CreationTime", ___timestampUnix)
-
-	SourceLocation_DefaultSegmentDeliveryConfiguration = SourceLocation.AddMember("DefaultSegmentDeliveryConfiguration", DefaultSegmentDeliveryConfiguration)
-
-	SourceLocation_HttpConfiguration = SourceLocation.AddMember("HttpConfiguration", HttpConfiguration)
-
-	SourceLocation_LastModifiedTime = SourceLocation.AddMember("LastModifiedTime", ___timestampUnix)
-
-	SourceLocation_SegmentDeliveryConfigurations = SourceLocation.AddMember("SegmentDeliveryConfigurations", ___listOfSegmentDeliveryConfiguration)
-
-	SourceLocation_SourceLocationName = SourceLocation.AddMember("SourceLocationName", ___string)
-
-	SourceLocation_Tags = SourceLocation.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfSourceLocation_member = ___listOfSourceLocation.AddMember("member", SourceLocation)
-
-	VodSource_Arn = VodSource.AddMember("Arn", ___string)
-
-	VodSource_CreationTime = VodSource.AddMember("CreationTime", ___timestampUnix)
-
-	VodSource_HttpPackageConfigurations = VodSource.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	VodSource_LastModifiedTime = VodSource.AddMember("LastModifiedTime", ___timestampUnix)
-
-	VodSource_SourceLocationName = VodSource.AddMember("SourceLocationName", ___string)
-
-	VodSource_Tags = VodSource.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	VodSource_VodSourceName = VodSource.AddMember("VodSourceName", ___string)
-
-	___listOfVodSource_member = ___listOfVodSource.AddMember("member", VodSource)
-
-	AdBreakOpportunity_OffsetMillis = AdBreakOpportunity.AddMember("OffsetMillis", ___long)
-
-	_AdBreakOpportunities_member = _AdBreakOpportunities.AddMember("member", AdBreakOpportunity)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", ___string)
-
-	ChannelState_RUNNING = ChannelState.AddMember("RUNNING", smithyprelude.Unit)
-
-	ChannelState_STOPPED = ChannelState.AddMember("STOPPED", smithyprelude.Unit)
-
-	_ConfigurationAliasesRequest_key = _ConfigurationAliasesRequest.AddMember("key", ___string)
-
-	_ConfigurationAliasesRequest_value = _ConfigurationAliasesRequest.AddMember("value", ___mapOf__string)
-
-	DashConfigurationForPut_MpdLocation = DashConfigurationForPut.AddMember("MpdLocation", ___string)
-
-	DashConfigurationForPut_OriginManifestType = DashConfigurationForPut.AddMember("OriginManifestType", OriginManifestType)
-
-	ListPrefetchScheduleType_SINGLE = ListPrefetchScheduleType.AddMember("SINGLE", smithyprelude.Unit)
-
-	ListPrefetchScheduleType_RECURRING = ListPrefetchScheduleType.AddMember("RECURRING", smithyprelude.Unit)
-
-	ListPrefetchScheduleType_ALL = ListPrefetchScheduleType.AddMember("ALL", smithyprelude.Unit)
-
-	PlaybackMode_LOOP = PlaybackMode.AddMember("LOOP", smithyprelude.Unit)
-
-	PlaybackMode_LINEAR = PlaybackMode.AddMember("LINEAR", smithyprelude.Unit)
-
-	RelativePosition_BEFORE_PROGRAM = RelativePosition.AddMember("BEFORE_PROGRAM", smithyprelude.Unit)
-
-	RelativePosition_AFTER_PROGRAM = RelativePosition.AddMember("AFTER_PROGRAM", smithyprelude.Unit)
-
-	RequestOutputItem_DashPlaylistSettings = RequestOutputItem.AddMember("DashPlaylistSettings", DashPlaylistSettings)
-
-	RequestOutputItem_HlsPlaylistSettings = RequestOutputItem.AddMember("HlsPlaylistSettings", HlsPlaylistSettings)
-
-	RequestOutputItem_ManifestName = RequestOutputItem.AddMember("ManifestName", ___string)
-
-	RequestOutputItem_SourceGroup = RequestOutputItem.AddMember("SourceGroup", ___string)
-
-	_RequestOutputs_member = _RequestOutputs.AddMember("member", RequestOutputItem)
-
-	Transition_DurationMillis = Transition.AddMember("DurationMillis", ___long)
-
-	Transition_RelativePosition = Transition.AddMember("RelativePosition", RelativePosition)
-
-	Transition_RelativeProgram = Transition.AddMember("RelativeProgram", ___string)
-
-	Transition_ScheduledStartTimeMillis = Transition.AddMember("ScheduledStartTimeMillis", ___long)
-
-	Transition_Type = Transition.AddMember("Type", ___string)
-
-	ScheduleConfiguration_Transition = ScheduleConfiguration.AddMember("Transition", Transition)
-
-	ScheduleConfiguration_ClipRange = ScheduleConfiguration.AddMember("ClipRange", ClipRange)
-
-	Tier_BASIC = Tier.AddMember("BASIC", smithyprelude.Unit)
-
-	Tier_STANDARD = Tier.AddMember("STANDARD", smithyprelude.Unit)
-
-	TimeShiftConfiguration_MaxTimeDelaySeconds = TimeShiftConfiguration.AddMember("MaxTimeDelaySeconds", ___integer)
-
-	UpdateProgramTransition_ScheduledStartTimeMillis = UpdateProgramTransition.AddMember("ScheduledStartTimeMillis", ___long)
-
-	UpdateProgramTransition_DurationMillis = UpdateProgramTransition.AddMember("DurationMillis", ___long)
-
-	UpdateProgramScheduleConfiguration_Transition = UpdateProgramScheduleConfiguration.AddMember("Transition", UpdateProgramTransition)
-
-	UpdateProgramScheduleConfiguration_ClipRange = UpdateProgramScheduleConfiguration.AddMember("ClipRange", ClipRange)
-
-	ConfigureLogsForChannelRequest_ChannelName = ConfigureLogsForChannelRequest.AddMember("ChannelName", ___string)
-
-	ConfigureLogsForChannelRequest_LogTypes = ConfigureLogsForChannelRequest.AddMember("LogTypes", _LogTypes)
-
-	ConfigureLogsForChannelResponse_ChannelName = ConfigureLogsForChannelResponse.AddMember("ChannelName", ___string)
-
-	ConfigureLogsForChannelResponse_LogTypes = ConfigureLogsForChannelResponse.AddMember("LogTypes", _LogTypes)
-
-	ConfigureLogsForPlaybackConfigurationRequest_PercentEnabled = ConfigureLogsForPlaybackConfigurationRequest.AddMember("PercentEnabled", ___integer)
-
-	ConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName = ConfigureLogsForPlaybackConfigurationRequest.AddMember("PlaybackConfigurationName", ___string)
-
-	ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies = ConfigureLogsForPlaybackConfigurationRequest.AddMember("EnabledLoggingStrategies", ___listOfLoggingStrategies)
-
-	ConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog = ConfigureLogsForPlaybackConfigurationRequest.AddMember("AdsInteractionLog", AdsInteractionLog)
-
-	ConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog = ConfigureLogsForPlaybackConfigurationRequest.AddMember("ManifestServiceInteractionLog", ManifestServiceInteractionLog)
-
-	ConfigureLogsForPlaybackConfigurationResponse_PercentEnabled = ConfigureLogsForPlaybackConfigurationResponse.AddMember("PercentEnabled", ___integer)
-
-	ConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName = ConfigureLogsForPlaybackConfigurationResponse.AddMember("PlaybackConfigurationName", ___string)
-
-	ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies = ConfigureLogsForPlaybackConfigurationResponse.AddMember("EnabledLoggingStrategies", ___listOfLoggingStrategies)
-
-	ConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog = ConfigureLogsForPlaybackConfigurationResponse.AddMember("AdsInteractionLog", AdsInteractionLog)
-
-	ConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog = ConfigureLogsForPlaybackConfigurationResponse.AddMember("ManifestServiceInteractionLog", ManifestServiceInteractionLog)
-
-	CreateChannelRequest_ChannelName = CreateChannelRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateChannelRequest_FillerSlate = CreateChannelRequest.AddMember("FillerSlate", SlateSource)
-
-	CreateChannelRequest_Outputs = CreateChannelRequest.AddMember("Outputs", _RequestOutputs)
-
-	CreateChannelRequest_PlaybackMode = CreateChannelRequest.AddMember("PlaybackMode", PlaybackMode)
-
-	CreateChannelRequest_Tags = CreateChannelRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateChannelRequest_Tier = CreateChannelRequest.AddMember("Tier", Tier)
-
-	CreateChannelRequest_TimeShiftConfiguration = CreateChannelRequest.AddMember("TimeShiftConfiguration", TimeShiftConfiguration)
-
-	CreateChannelRequest_Audiences = CreateChannelRequest.AddMember("Audiences", _Audiences)
-
-	CreateChannelResponse_Arn = CreateChannelResponse.AddMember("Arn", ___string)
-
-	CreateChannelResponse_ChannelName = CreateChannelResponse.AddMember("ChannelName", ___string)
-
-	CreateChannelResponse_ChannelState = CreateChannelResponse.AddMember("ChannelState", ChannelState)
-
-	CreateChannelResponse_CreationTime = CreateChannelResponse.AddMember("CreationTime", ___timestampUnix)
-
-	CreateChannelResponse_FillerSlate = CreateChannelResponse.AddMember("FillerSlate", SlateSource)
-
-	CreateChannelResponse_LastModifiedTime = CreateChannelResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	CreateChannelResponse_Outputs = CreateChannelResponse.AddMember("Outputs", _ResponseOutputs)
-
-	CreateChannelResponse_PlaybackMode = CreateChannelResponse.AddMember("PlaybackMode", ___string)
-
-	CreateChannelResponse_Tags = CreateChannelResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateChannelResponse_Tier = CreateChannelResponse.AddMember("Tier", ___string)
-
-	CreateChannelResponse_TimeShiftConfiguration = CreateChannelResponse.AddMember("TimeShiftConfiguration", TimeShiftConfiguration)
-
-	CreateChannelResponse_Audiences = CreateChannelResponse.AddMember("Audiences", _Audiences)
-
-	CreateLiveSourceRequest_HttpPackageConfigurations = CreateLiveSourceRequest.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	CreateLiveSourceRequest_LiveSourceName = CreateLiveSourceRequest.AddMember("LiveSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateLiveSourceRequest_SourceLocationName = CreateLiveSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateLiveSourceRequest_Tags = CreateLiveSourceRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateLiveSourceResponse_Arn = CreateLiveSourceResponse.AddMember("Arn", ___string)
-
-	CreateLiveSourceResponse_CreationTime = CreateLiveSourceResponse.AddMember("CreationTime", ___timestampUnix)
-
-	CreateLiveSourceResponse_HttpPackageConfigurations = CreateLiveSourceResponse.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	CreateLiveSourceResponse_LastModifiedTime = CreateLiveSourceResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	CreateLiveSourceResponse_LiveSourceName = CreateLiveSourceResponse.AddMember("LiveSourceName", ___string)
-
-	CreateLiveSourceResponse_SourceLocationName = CreateLiveSourceResponse.AddMember("SourceLocationName", ___string)
-
-	CreateLiveSourceResponse_Tags = CreateLiveSourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreatePrefetchScheduleRequest_Consumption = CreatePrefetchScheduleRequest.AddMember("Consumption", PrefetchConsumption)
-
-	CreatePrefetchScheduleRequest_Name = CreatePrefetchScheduleRequest.AddMember("Name", ___string, &smithytraits.HTTPLabel{})
-
-	CreatePrefetchScheduleRequest_PlaybackConfigurationName = CreatePrefetchScheduleRequest.AddMember("PlaybackConfigurationName", ___string, &smithytraits.HTTPLabel{})
-
-	CreatePrefetchScheduleRequest_Retrieval = CreatePrefetchScheduleRequest.AddMember("Retrieval", PrefetchRetrieval)
-
-	CreatePrefetchScheduleRequest_RecurringPrefetchConfiguration = CreatePrefetchScheduleRequest.AddMember("RecurringPrefetchConfiguration", RecurringPrefetchConfiguration)
-
-	CreatePrefetchScheduleRequest_ScheduleType = CreatePrefetchScheduleRequest.AddMember("ScheduleType", PrefetchScheduleType)
-
-	CreatePrefetchScheduleRequest_StreamId = CreatePrefetchScheduleRequest.AddMember("StreamId", ___string)
-
-	CreatePrefetchScheduleRequest_Tags = CreatePrefetchScheduleRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreatePrefetchScheduleResponse_Arn = CreatePrefetchScheduleResponse.AddMember("Arn", ___string)
-
-	CreatePrefetchScheduleResponse_Consumption = CreatePrefetchScheduleResponse.AddMember("Consumption", PrefetchConsumption)
-
-	CreatePrefetchScheduleResponse_Name = CreatePrefetchScheduleResponse.AddMember("Name", ___string)
-
-	CreatePrefetchScheduleResponse_PlaybackConfigurationName = CreatePrefetchScheduleResponse.AddMember("PlaybackConfigurationName", ___string)
-
-	CreatePrefetchScheduleResponse_Retrieval = CreatePrefetchScheduleResponse.AddMember("Retrieval", PrefetchRetrieval)
-
-	CreatePrefetchScheduleResponse_RecurringPrefetchConfiguration = CreatePrefetchScheduleResponse.AddMember("RecurringPrefetchConfiguration", RecurringPrefetchConfiguration)
-
-	CreatePrefetchScheduleResponse_ScheduleType = CreatePrefetchScheduleResponse.AddMember("ScheduleType", PrefetchScheduleType)
-
-	CreatePrefetchScheduleResponse_StreamId = CreatePrefetchScheduleResponse.AddMember("StreamId", ___string)
-
-	CreatePrefetchScheduleResponse_Tags = CreatePrefetchScheduleResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateProgramRequest_AdBreaks = CreateProgramRequest.AddMember("AdBreaks", ___listOfAdBreak)
-
-	CreateProgramRequest_ChannelName = CreateProgramRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateProgramRequest_LiveSourceName = CreateProgramRequest.AddMember("LiveSourceName", ___string)
-
-	CreateProgramRequest_ProgramName = CreateProgramRequest.AddMember("ProgramName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateProgramRequest_ScheduleConfiguration = CreateProgramRequest.AddMember("ScheduleConfiguration", ScheduleConfiguration)
-
-	CreateProgramRequest_SourceLocationName = CreateProgramRequest.AddMember("SourceLocationName", ___string)
-
-	CreateProgramRequest_VodSourceName = CreateProgramRequest.AddMember("VodSourceName", ___string)
-
-	CreateProgramRequest_AudienceMedia = CreateProgramRequest.AddMember("AudienceMedia", ___listOfAudienceMedia)
-
-	CreateProgramRequest_Tags = CreateProgramRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateProgramResponse_AdBreaks = CreateProgramResponse.AddMember("AdBreaks", ___listOfAdBreak)
-
-	CreateProgramResponse_Arn = CreateProgramResponse.AddMember("Arn", ___string)
-
-	CreateProgramResponse_ChannelName = CreateProgramResponse.AddMember("ChannelName", ___string)
-
-	CreateProgramResponse_CreationTime = CreateProgramResponse.AddMember("CreationTime", ___timestampUnix)
-
-	CreateProgramResponse_LiveSourceName = CreateProgramResponse.AddMember("LiveSourceName", ___string)
-
-	CreateProgramResponse_ProgramName = CreateProgramResponse.AddMember("ProgramName", ___string)
-
-	CreateProgramResponse_ScheduledStartTime = CreateProgramResponse.AddMember("ScheduledStartTime", ___timestampUnix)
-
-	CreateProgramResponse_SourceLocationName = CreateProgramResponse.AddMember("SourceLocationName", ___string)
-
-	CreateProgramResponse_VodSourceName = CreateProgramResponse.AddMember("VodSourceName", ___string)
-
-	CreateProgramResponse_ClipRange = CreateProgramResponse.AddMember("ClipRange", ClipRange)
-
-	CreateProgramResponse_DurationMillis = CreateProgramResponse.AddMember("DurationMillis", ___long)
-
-	CreateProgramResponse_AudienceMedia = CreateProgramResponse.AddMember("AudienceMedia", ___listOfAudienceMedia)
-
-	CreateProgramResponse_Tags = CreateProgramResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateSourceLocationRequest_AccessConfiguration = CreateSourceLocationRequest.AddMember("AccessConfiguration", AccessConfiguration)
-
-	CreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration = CreateSourceLocationRequest.AddMember("DefaultSegmentDeliveryConfiguration", DefaultSegmentDeliveryConfiguration)
-
-	CreateSourceLocationRequest_HttpConfiguration = CreateSourceLocationRequest.AddMember("HttpConfiguration", HttpConfiguration)
-
-	CreateSourceLocationRequest_SegmentDeliveryConfigurations = CreateSourceLocationRequest.AddMember("SegmentDeliveryConfigurations", ___listOfSegmentDeliveryConfiguration)
-
-	CreateSourceLocationRequest_SourceLocationName = CreateSourceLocationRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateSourceLocationRequest_Tags = CreateSourceLocationRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateSourceLocationResponse_AccessConfiguration = CreateSourceLocationResponse.AddMember("AccessConfiguration", AccessConfiguration)
-
-	CreateSourceLocationResponse_Arn = CreateSourceLocationResponse.AddMember("Arn", ___string)
-
-	CreateSourceLocationResponse_CreationTime = CreateSourceLocationResponse.AddMember("CreationTime", ___timestampUnix)
-
-	CreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration = CreateSourceLocationResponse.AddMember("DefaultSegmentDeliveryConfiguration", DefaultSegmentDeliveryConfiguration)
-
-	CreateSourceLocationResponse_HttpConfiguration = CreateSourceLocationResponse.AddMember("HttpConfiguration", HttpConfiguration)
-
-	CreateSourceLocationResponse_LastModifiedTime = CreateSourceLocationResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	CreateSourceLocationResponse_SegmentDeliveryConfigurations = CreateSourceLocationResponse.AddMember("SegmentDeliveryConfigurations", ___listOfSegmentDeliveryConfiguration)
-
-	CreateSourceLocationResponse_SourceLocationName = CreateSourceLocationResponse.AddMember("SourceLocationName", ___string)
-
-	CreateSourceLocationResponse_Tags = CreateSourceLocationResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateVodSourceRequest_HttpPackageConfigurations = CreateVodSourceRequest.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	CreateVodSourceRequest_SourceLocationName = CreateVodSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateVodSourceRequest_Tags = CreateVodSourceRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateVodSourceRequest_VodSourceName = CreateVodSourceRequest.AddMember("VodSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateVodSourceResponse_Arn = CreateVodSourceResponse.AddMember("Arn", ___string)
-
-	CreateVodSourceResponse_CreationTime = CreateVodSourceResponse.AddMember("CreationTime", ___timestampUnix)
-
-	CreateVodSourceResponse_HttpPackageConfigurations = CreateVodSourceResponse.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	CreateVodSourceResponse_LastModifiedTime = CreateVodSourceResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	CreateVodSourceResponse_SourceLocationName = CreateVodSourceResponse.AddMember("SourceLocationName", ___string)
-
-	CreateVodSourceResponse_Tags = CreateVodSourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateVodSourceResponse_VodSourceName = CreateVodSourceResponse.AddMember("VodSourceName", ___string)
-
-	DeleteChannelRequest_ChannelName = DeleteChannelRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteChannelPolicyRequest_ChannelName = DeleteChannelPolicyRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteFunctionRequest_FunctionId = DeleteFunctionRequest.AddMember("FunctionId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteLiveSourceRequest_LiveSourceName = DeleteLiveSourceRequest.AddMember("LiveSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteLiveSourceRequest_SourceLocationName = DeleteLiveSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	DeletePlaybackConfigurationRequest_Name = DeletePlaybackConfigurationRequest.AddMember("Name", ___string, &smithytraits.HTTPLabel{})
-
-	DeletePrefetchScheduleRequest_Name = DeletePrefetchScheduleRequest.AddMember("Name", ___string, &smithytraits.HTTPLabel{})
-
-	DeletePrefetchScheduleRequest_PlaybackConfigurationName = DeletePrefetchScheduleRequest.AddMember("PlaybackConfigurationName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteProgramRequest_ChannelName = DeleteProgramRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteProgramRequest_ProgramName = DeleteProgramRequest.AddMember("ProgramName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteSourceLocationRequest_SourceLocationName = DeleteSourceLocationRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteVodSourceRequest_SourceLocationName = DeleteVodSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteVodSourceRequest_VodSourceName = DeleteVodSourceRequest.AddMember("VodSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeChannelRequest_ChannelName = DescribeChannelRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeChannelResponse_Arn = DescribeChannelResponse.AddMember("Arn", ___string)
-
-	DescribeChannelResponse_ChannelName = DescribeChannelResponse.AddMember("ChannelName", ___string)
-
-	DescribeChannelResponse_ChannelState = DescribeChannelResponse.AddMember("ChannelState", ChannelState)
-
-	DescribeChannelResponse_CreationTime = DescribeChannelResponse.AddMember("CreationTime", ___timestampUnix)
-
-	DescribeChannelResponse_FillerSlate = DescribeChannelResponse.AddMember("FillerSlate", SlateSource)
-
-	DescribeChannelResponse_LastModifiedTime = DescribeChannelResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	DescribeChannelResponse_Outputs = DescribeChannelResponse.AddMember("Outputs", _ResponseOutputs)
-
-	DescribeChannelResponse_PlaybackMode = DescribeChannelResponse.AddMember("PlaybackMode", ___string)
-
-	DescribeChannelResponse_Tags = DescribeChannelResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeChannelResponse_Tier = DescribeChannelResponse.AddMember("Tier", ___string)
-
-	DescribeChannelResponse_LogConfiguration = DescribeChannelResponse.AddMember("LogConfiguration", LogConfigurationForChannel)
-
-	DescribeChannelResponse_TimeShiftConfiguration = DescribeChannelResponse.AddMember("TimeShiftConfiguration", TimeShiftConfiguration)
-
-	DescribeChannelResponse_Audiences = DescribeChannelResponse.AddMember("Audiences", _Audiences)
-
-	DescribeLiveSourceRequest_LiveSourceName = DescribeLiveSourceRequest.AddMember("LiveSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeLiveSourceRequest_SourceLocationName = DescribeLiveSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeLiveSourceResponse_Arn = DescribeLiveSourceResponse.AddMember("Arn", ___string)
-
-	DescribeLiveSourceResponse_CreationTime = DescribeLiveSourceResponse.AddMember("CreationTime", ___timestampUnix)
-
-	DescribeLiveSourceResponse_HttpPackageConfigurations = DescribeLiveSourceResponse.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	DescribeLiveSourceResponse_LastModifiedTime = DescribeLiveSourceResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	DescribeLiveSourceResponse_LiveSourceName = DescribeLiveSourceResponse.AddMember("LiveSourceName", ___string)
-
-	DescribeLiveSourceResponse_SourceLocationName = DescribeLiveSourceResponse.AddMember("SourceLocationName", ___string)
-
-	DescribeLiveSourceResponse_Tags = DescribeLiveSourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeProgramRequest_ChannelName = DescribeProgramRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeProgramRequest_ProgramName = DescribeProgramRequest.AddMember("ProgramName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeProgramResponse_AdBreaks = DescribeProgramResponse.AddMember("AdBreaks", ___listOfAdBreak)
-
-	DescribeProgramResponse_Arn = DescribeProgramResponse.AddMember("Arn", ___string)
-
-	DescribeProgramResponse_ChannelName = DescribeProgramResponse.AddMember("ChannelName", ___string)
-
-	DescribeProgramResponse_CreationTime = DescribeProgramResponse.AddMember("CreationTime", ___timestampUnix)
-
-	DescribeProgramResponse_LiveSourceName = DescribeProgramResponse.AddMember("LiveSourceName", ___string)
-
-	DescribeProgramResponse_ProgramName = DescribeProgramResponse.AddMember("ProgramName", ___string)
-
-	DescribeProgramResponse_ScheduledStartTime = DescribeProgramResponse.AddMember("ScheduledStartTime", ___timestampUnix)
-
-	DescribeProgramResponse_SourceLocationName = DescribeProgramResponse.AddMember("SourceLocationName", ___string)
-
-	DescribeProgramResponse_VodSourceName = DescribeProgramResponse.AddMember("VodSourceName", ___string)
-
-	DescribeProgramResponse_ClipRange = DescribeProgramResponse.AddMember("ClipRange", ClipRange)
-
-	DescribeProgramResponse_DurationMillis = DescribeProgramResponse.AddMember("DurationMillis", smithyprelude.Long)
-
-	DescribeProgramResponse_AudienceMedia = DescribeProgramResponse.AddMember("AudienceMedia", ___listOfAudienceMedia)
-
-	DescribeProgramResponse_Tags = DescribeProgramResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeSourceLocationRequest_SourceLocationName = DescribeSourceLocationRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeSourceLocationResponse_AccessConfiguration = DescribeSourceLocationResponse.AddMember("AccessConfiguration", AccessConfiguration)
-
-	DescribeSourceLocationResponse_Arn = DescribeSourceLocationResponse.AddMember("Arn", ___string)
-
-	DescribeSourceLocationResponse_CreationTime = DescribeSourceLocationResponse.AddMember("CreationTime", ___timestampUnix)
-
-	DescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration = DescribeSourceLocationResponse.AddMember("DefaultSegmentDeliveryConfiguration", DefaultSegmentDeliveryConfiguration)
-
-	DescribeSourceLocationResponse_HttpConfiguration = DescribeSourceLocationResponse.AddMember("HttpConfiguration", HttpConfiguration)
-
-	DescribeSourceLocationResponse_LastModifiedTime = DescribeSourceLocationResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	DescribeSourceLocationResponse_SegmentDeliveryConfigurations = DescribeSourceLocationResponse.AddMember("SegmentDeliveryConfigurations", ___listOfSegmentDeliveryConfiguration)
-
-	DescribeSourceLocationResponse_SourceLocationName = DescribeSourceLocationResponse.AddMember("SourceLocationName", ___string)
-
-	DescribeSourceLocationResponse_Tags = DescribeSourceLocationResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeVodSourceRequest_SourceLocationName = DescribeVodSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeVodSourceRequest_VodSourceName = DescribeVodSourceRequest.AddMember("VodSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeVodSourceResponse_AdBreakOpportunities = DescribeVodSourceResponse.AddMember("AdBreakOpportunities", _AdBreakOpportunities)
-
-	DescribeVodSourceResponse_Arn = DescribeVodSourceResponse.AddMember("Arn", ___string)
-
-	DescribeVodSourceResponse_CreationTime = DescribeVodSourceResponse.AddMember("CreationTime", ___timestampUnix)
-
-	DescribeVodSourceResponse_HttpPackageConfigurations = DescribeVodSourceResponse.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	DescribeVodSourceResponse_LastModifiedTime = DescribeVodSourceResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	DescribeVodSourceResponse_SourceLocationName = DescribeVodSourceResponse.AddMember("SourceLocationName", ___string)
-
-	DescribeVodSourceResponse_Tags = DescribeVodSourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeVodSourceResponse_VodSourceName = DescribeVodSourceResponse.AddMember("VodSourceName", ___string)
-
-	GetChannelPolicyRequest_ChannelName = GetChannelPolicyRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	GetChannelPolicyResponse_Policy = GetChannelPolicyResponse.AddMember("Policy", ___string)
-
-	GetChannelScheduleRequest_ChannelName = GetChannelScheduleRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	GetChannelScheduleRequest_DurationMinutes = GetChannelScheduleRequest.AddMember("DurationMinutes", ___string, &smithytraits.HTTPQuery{Name: "durationMinutes"})
-
-	GetChannelScheduleRequest_MaxResults = GetChannelScheduleRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetChannelScheduleRequest_NextToken = GetChannelScheduleRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetChannelScheduleRequest_Audience = GetChannelScheduleRequest.AddMember("Audience", ___string, &smithytraits.HTTPQuery{Name: "audience"})
-
-	GetChannelScheduleResponse_Items = GetChannelScheduleResponse.AddMember("Items", ___listOfScheduleEntry)
-
-	GetChannelScheduleResponse_NextToken = GetChannelScheduleResponse.AddMember("NextToken", ___string)
-
-	GetFunctionRequest_FunctionId = GetFunctionRequest.AddMember("FunctionId", ___string, &smithytraits.HTTPLabel{})
-
-	GetFunctionResponse_FunctionId = GetFunctionResponse.AddMember("FunctionId", ___string)
-
-	GetFunctionResponse_FunctionType = GetFunctionResponse.AddMember("FunctionType", FunctionType)
-
-	GetFunctionResponse_Description = GetFunctionResponse.AddMember("Description", ___string)
-
-	GetFunctionResponse_HttpRequestConfiguration = GetFunctionResponse.AddMember("HttpRequestConfiguration", HttpRequestConfiguration)
-
-	GetFunctionResponse_AwsServiceRequestConfiguration = GetFunctionResponse.AddMember("AwsServiceRequestConfiguration", AwsServiceRequestConfiguration)
-
-	GetFunctionResponse_CustomOutputConfiguration = GetFunctionResponse.AddMember("CustomOutputConfiguration", CustomOutputConfiguration)
-
-	GetFunctionResponse_ConcurrentExecutorConfiguration = GetFunctionResponse.AddMember("ConcurrentExecutorConfiguration", ConcurrentExecutorConfiguration)
-
-	GetFunctionResponse_SequentialExecutorConfiguration = GetFunctionResponse.AddMember("SequentialExecutorConfiguration", SequentialExecutorConfiguration)
-
-	GetFunctionResponse_VastRequestConfiguration = GetFunctionResponse.AddMember("VastRequestConfiguration", VastRequestConfiguration)
-
-	GetFunctionResponse_Tags = GetFunctionResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	GetFunctionResponse_Arn = GetFunctionResponse.AddMember("Arn", ___string)
-
-	GetPlaybackConfigurationRequest_Name = GetPlaybackConfigurationRequest.AddMember("Name", ___string, &smithytraits.HTTPLabel{})
-
-	GetPlaybackConfigurationResponse_AdDecisionServerUrl = GetPlaybackConfigurationResponse.AddMember("AdDecisionServerUrl", ___string)
-
-	GetPlaybackConfigurationResponse_AvailSuppression = GetPlaybackConfigurationResponse.AddMember("AvailSuppression", AvailSuppression)
-
-	GetPlaybackConfigurationResponse_Bumper = GetPlaybackConfigurationResponse.AddMember("Bumper", Bumper)
-
-	GetPlaybackConfigurationResponse_CdnConfiguration = GetPlaybackConfigurationResponse.AddMember("CdnConfiguration", CdnConfiguration)
-
-	GetPlaybackConfigurationResponse_ConfigurationAliases = GetPlaybackConfigurationResponse.AddMember("ConfigurationAliases", _ConfigurationAliasesResponse)
-
-	GetPlaybackConfigurationResponse_DashConfiguration = GetPlaybackConfigurationResponse.AddMember("DashConfiguration", DashConfiguration)
-
-	GetPlaybackConfigurationResponse_HlsConfiguration = GetPlaybackConfigurationResponse.AddMember("HlsConfiguration", HlsConfiguration)
-
-	GetPlaybackConfigurationResponse_InsertionMode = GetPlaybackConfigurationResponse.AddMember("InsertionMode", InsertionMode)
-
-	GetPlaybackConfigurationResponse_LivePreRollConfiguration = GetPlaybackConfigurationResponse.AddMember("LivePreRollConfiguration", LivePreRollConfiguration)
-
-	GetPlaybackConfigurationResponse_LogConfiguration = GetPlaybackConfigurationResponse.AddMember("LogConfiguration", LogConfiguration)
-
-	GetPlaybackConfigurationResponse_ManifestProcessingRules = GetPlaybackConfigurationResponse.AddMember("ManifestProcessingRules", ManifestProcessingRules)
-
-	GetPlaybackConfigurationResponse_Name = GetPlaybackConfigurationResponse.AddMember("Name", ___string)
-
-	GetPlaybackConfigurationResponse_PersonalizationThresholdSeconds = GetPlaybackConfigurationResponse.AddMember("PersonalizationThresholdSeconds", ___integerMin1)
-
-	GetPlaybackConfigurationResponse_PlaybackConfigurationArn = GetPlaybackConfigurationResponse.AddMember("PlaybackConfigurationArn", ___string)
-
-	GetPlaybackConfigurationResponse_PlaybackEndpointPrefix = GetPlaybackConfigurationResponse.AddMember("PlaybackEndpointPrefix", ___string)
-
-	GetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix = GetPlaybackConfigurationResponse.AddMember("DualStackPlaybackEndpointPrefix", ___string)
-
-	GetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix = GetPlaybackConfigurationResponse.AddMember("SessionInitializationEndpointPrefix", ___string)
-
-	GetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix = GetPlaybackConfigurationResponse.AddMember("DualStackSessionInitializationEndpointPrefix", ___string)
-
-	GetPlaybackConfigurationResponse_SlateAdUrl = GetPlaybackConfigurationResponse.AddMember("SlateAdUrl", ___string)
-
-	GetPlaybackConfigurationResponse_Tags = GetPlaybackConfigurationResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	GetPlaybackConfigurationResponse_TranscodeProfileName = GetPlaybackConfigurationResponse.AddMember("TranscodeProfileName", ___string)
-
-	GetPlaybackConfigurationResponse_VideoContentSourceUrl = GetPlaybackConfigurationResponse.AddMember("VideoContentSourceUrl", ___string)
-
-	GetPlaybackConfigurationResponse_AdConditioningConfiguration = GetPlaybackConfigurationResponse.AddMember("AdConditioningConfiguration", AdConditioningConfiguration)
-
-	GetPlaybackConfigurationResponse_AdDecisionServerConfiguration = GetPlaybackConfigurationResponse.AddMember("AdDecisionServerConfiguration", AdDecisionServerConfiguration)
-
-	GetPlaybackConfigurationResponse_YieldOptimizationConfiguration = GetPlaybackConfigurationResponse.AddMember("YieldOptimizationConfiguration", YieldOptimizationConfiguration)
-
-	GetPlaybackConfigurationResponse_FunctionMapping = GetPlaybackConfigurationResponse.AddMember("FunctionMapping", _FunctionMapping)
-
-	GetPlaybackConfigurationResponse_AdsPersonalizationTimeouts = GetPlaybackConfigurationResponse.AddMember("AdsPersonalizationTimeouts", AdsPersonalizationTimeouts)
-
-	GetPlaybackConfigurationResponse_AdsPersonalizationConcurrency = GetPlaybackConfigurationResponse.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
-
-	GetPlaybackConfigurationResponse_BeaconingConfiguration = GetPlaybackConfigurationResponse.AddMember("BeaconingConfiguration", BeaconingConfiguration)
-
-	GetPrefetchScheduleRequest_Name = GetPrefetchScheduleRequest.AddMember("Name", ___string, &smithytraits.HTTPLabel{})
-
-	GetPrefetchScheduleRequest_PlaybackConfigurationName = GetPrefetchScheduleRequest.AddMember("PlaybackConfigurationName", ___string, &smithytraits.HTTPLabel{})
-
-	GetPrefetchScheduleResponse_Arn = GetPrefetchScheduleResponse.AddMember("Arn", ___string)
-
-	GetPrefetchScheduleResponse_Consumption = GetPrefetchScheduleResponse.AddMember("Consumption", PrefetchConsumption)
-
-	GetPrefetchScheduleResponse_Name = GetPrefetchScheduleResponse.AddMember("Name", ___string)
-
-	GetPrefetchScheduleResponse_PlaybackConfigurationName = GetPrefetchScheduleResponse.AddMember("PlaybackConfigurationName", ___string)
-
-	GetPrefetchScheduleResponse_Retrieval = GetPrefetchScheduleResponse.AddMember("Retrieval", PrefetchRetrieval)
-
-	GetPrefetchScheduleResponse_ScheduleType = GetPrefetchScheduleResponse.AddMember("ScheduleType", PrefetchScheduleType)
-
-	GetPrefetchScheduleResponse_RecurringPrefetchConfiguration = GetPrefetchScheduleResponse.AddMember("RecurringPrefetchConfiguration", RecurringPrefetchConfiguration)
-
-	GetPrefetchScheduleResponse_StreamId = GetPrefetchScheduleResponse.AddMember("StreamId", ___string)
-
-	GetPrefetchScheduleResponse_Tags = GetPrefetchScheduleResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	ListAlertsRequest_MaxResults = ListAlertsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAlertsRequest_NextToken = ListAlertsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAlertsRequest_ResourceArn = ListAlertsRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListAlertsResponse_Items = ListAlertsResponse.AddMember("Items", ___listOfAlert)
-
-	ListAlertsResponse_NextToken = ListAlertsResponse.AddMember("NextToken", ___string)
-
-	ListChannelsRequest_MaxResults = ListChannelsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelsRequest_NextToken = ListChannelsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelsResponse_Items = ListChannelsResponse.AddMember("Items", ___listOfChannel)
-
-	ListChannelsResponse_NextToken = ListChannelsResponse.AddMember("NextToken", ___string)
-
-	ListFunctionsRequest_MaxResults = ListFunctionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListFunctionsRequest_NextToken = ListFunctionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListFunctionsResponse_Items = ListFunctionsResponse.AddMember("Items", ___listOfFunctionsResponse)
-
-	ListFunctionsResponse_NextToken = ListFunctionsResponse.AddMember("NextToken", ___string)
-
-	ListLiveSourcesRequest_MaxResults = ListLiveSourcesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListLiveSourcesRequest_NextToken = ListLiveSourcesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListLiveSourcesRequest_SourceLocationName = ListLiveSourcesRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	ListLiveSourcesResponse_Items = ListLiveSourcesResponse.AddMember("Items", ___listOfLiveSource)
-
-	ListLiveSourcesResponse_NextToken = ListLiveSourcesResponse.AddMember("NextToken", ___string)
-
-	ListPlaybackConfigurationsRequest_MaxResults = ListPlaybackConfigurationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListPlaybackConfigurationsRequest_NextToken = ListPlaybackConfigurationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListPlaybackConfigurationsResponse_Items = ListPlaybackConfigurationsResponse.AddMember("Items", ___listOfPlaybackConfiguration)
-
-	ListPlaybackConfigurationsResponse_NextToken = ListPlaybackConfigurationsResponse.AddMember("NextToken", ___string)
-
-	ListPrefetchSchedulesRequest_MaxResults = ListPrefetchSchedulesRequest.AddMember("MaxResults", ___integerMin1Max100)
-
-	ListPrefetchSchedulesRequest_NextToken = ListPrefetchSchedulesRequest.AddMember("NextToken", ___string)
-
-	ListPrefetchSchedulesRequest_PlaybackConfigurationName = ListPrefetchSchedulesRequest.AddMember("PlaybackConfigurationName", ___string, &smithytraits.HTTPLabel{})
-
-	ListPrefetchSchedulesRequest_ScheduleType = ListPrefetchSchedulesRequest.AddMember("ScheduleType", ListPrefetchScheduleType)
-
-	ListPrefetchSchedulesRequest_StreamId = ListPrefetchSchedulesRequest.AddMember("StreamId", ___string)
-
-	ListPrefetchSchedulesResponse_Items = ListPrefetchSchedulesResponse.AddMember("Items", ___listOfPrefetchSchedule)
-
-	ListPrefetchSchedulesResponse_NextToken = ListPrefetchSchedulesResponse.AddMember("NextToken", ___string)
-
-	ListSourceLocationsRequest_MaxResults = ListSourceLocationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSourceLocationsRequest_NextToken = ListSourceLocationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSourceLocationsResponse_Items = ListSourceLocationsResponse.AddMember("Items", ___listOfSourceLocation)
-
-	ListSourceLocationsResponse_NextToken = ListSourceLocationsResponse.AddMember("NextToken", ___string)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	ListVodSourcesRequest_MaxResults = ListVodSourcesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListVodSourcesRequest_NextToken = ListVodSourcesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVodSourcesRequest_SourceLocationName = ListVodSourcesRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	ListVodSourcesResponse_Items = ListVodSourcesResponse.AddMember("Items", ___listOfVodSource)
-
-	ListVodSourcesResponse_NextToken = ListVodSourcesResponse.AddMember("NextToken", ___string)
-
-	PutChannelPolicyRequest_ChannelName = PutChannelPolicyRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	PutChannelPolicyRequest_Policy = PutChannelPolicyRequest.AddMember("Policy", ___string)
-
-	PutFunctionRequest_FunctionId = PutFunctionRequest.AddMember("FunctionId", ___string, &smithytraits.HTTPLabel{})
-
-	PutFunctionRequest_FunctionType = PutFunctionRequest.AddMember("FunctionType", FunctionType)
-
-	PutFunctionRequest_Description = PutFunctionRequest.AddMember("Description", ___string)
-
-	PutFunctionRequest_HttpRequestConfiguration = PutFunctionRequest.AddMember("HttpRequestConfiguration", HttpRequestConfiguration)
-
-	PutFunctionRequest_AwsServiceRequestConfiguration = PutFunctionRequest.AddMember("AwsServiceRequestConfiguration", AwsServiceRequestConfiguration)
-
-	PutFunctionRequest_CustomOutputConfiguration = PutFunctionRequest.AddMember("CustomOutputConfiguration", CustomOutputConfiguration)
-
-	PutFunctionRequest_ConcurrentExecutorConfiguration = PutFunctionRequest.AddMember("ConcurrentExecutorConfiguration", ConcurrentExecutorConfiguration)
-
-	PutFunctionRequest_SequentialExecutorConfiguration = PutFunctionRequest.AddMember("SequentialExecutorConfiguration", SequentialExecutorConfiguration)
-
-	PutFunctionRequest_VastRequestConfiguration = PutFunctionRequest.AddMember("VastRequestConfiguration", VastRequestConfiguration)
-
-	PutFunctionRequest_Tags = PutFunctionRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	PutFunctionResponse_FunctionId = PutFunctionResponse.AddMember("FunctionId", ___string)
-
-	PutFunctionResponse_FunctionType = PutFunctionResponse.AddMember("FunctionType", FunctionType)
-
-	PutFunctionResponse_Description = PutFunctionResponse.AddMember("Description", ___string)
-
-	PutFunctionResponse_HttpRequestConfiguration = PutFunctionResponse.AddMember("HttpRequestConfiguration", HttpRequestConfiguration)
-
-	PutFunctionResponse_AwsServiceRequestConfiguration = PutFunctionResponse.AddMember("AwsServiceRequestConfiguration", AwsServiceRequestConfiguration)
-
-	PutFunctionResponse_CustomOutputConfiguration = PutFunctionResponse.AddMember("CustomOutputConfiguration", CustomOutputConfiguration)
-
-	PutFunctionResponse_ConcurrentExecutorConfiguration = PutFunctionResponse.AddMember("ConcurrentExecutorConfiguration", ConcurrentExecutorConfiguration)
-
-	PutFunctionResponse_SequentialExecutorConfiguration = PutFunctionResponse.AddMember("SequentialExecutorConfiguration", SequentialExecutorConfiguration)
-
-	PutFunctionResponse_VastRequestConfiguration = PutFunctionResponse.AddMember("VastRequestConfiguration", VastRequestConfiguration)
-
-	PutFunctionResponse_Tags = PutFunctionResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	PutFunctionResponse_Arn = PutFunctionResponse.AddMember("Arn", ___string)
-
-	PutPlaybackConfigurationRequest_AdDecisionServerUrl = PutPlaybackConfigurationRequest.AddMember("AdDecisionServerUrl", ___string)
-
-	PutPlaybackConfigurationRequest_AvailSuppression = PutPlaybackConfigurationRequest.AddMember("AvailSuppression", AvailSuppression)
-
-	PutPlaybackConfigurationRequest_Bumper = PutPlaybackConfigurationRequest.AddMember("Bumper", Bumper)
-
-	PutPlaybackConfigurationRequest_CdnConfiguration = PutPlaybackConfigurationRequest.AddMember("CdnConfiguration", CdnConfiguration)
-
-	PutPlaybackConfigurationRequest_ConfigurationAliases = PutPlaybackConfigurationRequest.AddMember("ConfigurationAliases", _ConfigurationAliasesRequest)
-
-	PutPlaybackConfigurationRequest_DashConfiguration = PutPlaybackConfigurationRequest.AddMember("DashConfiguration", DashConfigurationForPut)
-
-	PutPlaybackConfigurationRequest_InsertionMode = PutPlaybackConfigurationRequest.AddMember("InsertionMode", InsertionMode)
-
-	PutPlaybackConfigurationRequest_LivePreRollConfiguration = PutPlaybackConfigurationRequest.AddMember("LivePreRollConfiguration", LivePreRollConfiguration)
-
-	PutPlaybackConfigurationRequest_ManifestProcessingRules = PutPlaybackConfigurationRequest.AddMember("ManifestProcessingRules", ManifestProcessingRules)
-
-	PutPlaybackConfigurationRequest_Name = PutPlaybackConfigurationRequest.AddMember("Name", ___string)
-
-	PutPlaybackConfigurationRequest_PersonalizationThresholdSeconds = PutPlaybackConfigurationRequest.AddMember("PersonalizationThresholdSeconds", ___integerMin1)
-
-	PutPlaybackConfigurationRequest_SlateAdUrl = PutPlaybackConfigurationRequest.AddMember("SlateAdUrl", ___string)
-
-	PutPlaybackConfigurationRequest_Tags = PutPlaybackConfigurationRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	PutPlaybackConfigurationRequest_TranscodeProfileName = PutPlaybackConfigurationRequest.AddMember("TranscodeProfileName", ___string)
-
-	PutPlaybackConfigurationRequest_VideoContentSourceUrl = PutPlaybackConfigurationRequest.AddMember("VideoContentSourceUrl", ___string)
-
-	PutPlaybackConfigurationRequest_AdConditioningConfiguration = PutPlaybackConfigurationRequest.AddMember("AdConditioningConfiguration", AdConditioningConfiguration)
-
-	PutPlaybackConfigurationRequest_AdDecisionServerConfiguration = PutPlaybackConfigurationRequest.AddMember("AdDecisionServerConfiguration", AdDecisionServerConfiguration)
-
-	PutPlaybackConfigurationRequest_YieldOptimizationConfiguration = PutPlaybackConfigurationRequest.AddMember("YieldOptimizationConfiguration", YieldOptimizationConfiguration)
-
-	PutPlaybackConfigurationRequest_FunctionMapping = PutPlaybackConfigurationRequest.AddMember("FunctionMapping", _FunctionMapping)
-
-	PutPlaybackConfigurationRequest_AdsPersonalizationTimeouts = PutPlaybackConfigurationRequest.AddMember("AdsPersonalizationTimeouts", AdsPersonalizationTimeouts)
-
-	PutPlaybackConfigurationRequest_AdsPersonalizationConcurrency = PutPlaybackConfigurationRequest.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
-
-	PutPlaybackConfigurationRequest_BeaconingConfiguration = PutPlaybackConfigurationRequest.AddMember("BeaconingConfiguration", BeaconingConfiguration)
-
-	PutPlaybackConfigurationResponse_AdDecisionServerUrl = PutPlaybackConfigurationResponse.AddMember("AdDecisionServerUrl", ___string)
-
-	PutPlaybackConfigurationResponse_AvailSuppression = PutPlaybackConfigurationResponse.AddMember("AvailSuppression", AvailSuppression)
-
-	PutPlaybackConfigurationResponse_Bumper = PutPlaybackConfigurationResponse.AddMember("Bumper", Bumper)
-
-	PutPlaybackConfigurationResponse_CdnConfiguration = PutPlaybackConfigurationResponse.AddMember("CdnConfiguration", CdnConfiguration)
-
-	PutPlaybackConfigurationResponse_ConfigurationAliases = PutPlaybackConfigurationResponse.AddMember("ConfigurationAliases", _ConfigurationAliasesResponse)
-
-	PutPlaybackConfigurationResponse_DashConfiguration = PutPlaybackConfigurationResponse.AddMember("DashConfiguration", DashConfiguration)
-
-	PutPlaybackConfigurationResponse_HlsConfiguration = PutPlaybackConfigurationResponse.AddMember("HlsConfiguration", HlsConfiguration)
-
-	PutPlaybackConfigurationResponse_InsertionMode = PutPlaybackConfigurationResponse.AddMember("InsertionMode", InsertionMode)
-
-	PutPlaybackConfigurationResponse_LivePreRollConfiguration = PutPlaybackConfigurationResponse.AddMember("LivePreRollConfiguration", LivePreRollConfiguration)
-
-	PutPlaybackConfigurationResponse_LogConfiguration = PutPlaybackConfigurationResponse.AddMember("LogConfiguration", LogConfiguration)
-
-	PutPlaybackConfigurationResponse_ManifestProcessingRules = PutPlaybackConfigurationResponse.AddMember("ManifestProcessingRules", ManifestProcessingRules)
-
-	PutPlaybackConfigurationResponse_Name = PutPlaybackConfigurationResponse.AddMember("Name", ___string)
-
-	PutPlaybackConfigurationResponse_PersonalizationThresholdSeconds = PutPlaybackConfigurationResponse.AddMember("PersonalizationThresholdSeconds", ___integerMin1)
-
-	PutPlaybackConfigurationResponse_PlaybackConfigurationArn = PutPlaybackConfigurationResponse.AddMember("PlaybackConfigurationArn", ___string)
-
-	PutPlaybackConfigurationResponse_PlaybackEndpointPrefix = PutPlaybackConfigurationResponse.AddMember("PlaybackEndpointPrefix", ___string)
-
-	PutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix = PutPlaybackConfigurationResponse.AddMember("DualStackPlaybackEndpointPrefix", ___string)
-
-	PutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix = PutPlaybackConfigurationResponse.AddMember("SessionInitializationEndpointPrefix", ___string)
-
-	PutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix = PutPlaybackConfigurationResponse.AddMember("DualStackSessionInitializationEndpointPrefix", ___string)
-
-	PutPlaybackConfigurationResponse_SlateAdUrl = PutPlaybackConfigurationResponse.AddMember("SlateAdUrl", ___string)
-
-	PutPlaybackConfigurationResponse_Tags = PutPlaybackConfigurationResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	PutPlaybackConfigurationResponse_TranscodeProfileName = PutPlaybackConfigurationResponse.AddMember("TranscodeProfileName", ___string)
-
-	PutPlaybackConfigurationResponse_VideoContentSourceUrl = PutPlaybackConfigurationResponse.AddMember("VideoContentSourceUrl", ___string)
-
-	PutPlaybackConfigurationResponse_AdConditioningConfiguration = PutPlaybackConfigurationResponse.AddMember("AdConditioningConfiguration", AdConditioningConfiguration)
-
-	PutPlaybackConfigurationResponse_AdDecisionServerConfiguration = PutPlaybackConfigurationResponse.AddMember("AdDecisionServerConfiguration", AdDecisionServerConfiguration)
-
-	PutPlaybackConfigurationResponse_YieldOptimizationConfiguration = PutPlaybackConfigurationResponse.AddMember("YieldOptimizationConfiguration", YieldOptimizationConfiguration)
-
-	PutPlaybackConfigurationResponse_FunctionMapping = PutPlaybackConfigurationResponse.AddMember("FunctionMapping", _FunctionMapping)
-
-	PutPlaybackConfigurationResponse_AdsPersonalizationTimeouts = PutPlaybackConfigurationResponse.AddMember("AdsPersonalizationTimeouts", AdsPersonalizationTimeouts)
-
-	PutPlaybackConfigurationResponse_AdsPersonalizationConcurrency = PutPlaybackConfigurationResponse.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
-
-	PutPlaybackConfigurationResponse_BeaconingConfiguration = PutPlaybackConfigurationResponse.AddMember("BeaconingConfiguration", BeaconingConfiguration)
-
-	StartChannelRequest_ChannelName = StartChannelRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	StopChannelRequest_ChannelName = StopChannelRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", ___listOf__string, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateChannelRequest_ChannelName = UpdateChannelRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateChannelRequest_FillerSlate = UpdateChannelRequest.AddMember("FillerSlate", SlateSource)
-
-	UpdateChannelRequest_Outputs = UpdateChannelRequest.AddMember("Outputs", _RequestOutputs)
-
-	UpdateChannelRequest_TimeShiftConfiguration = UpdateChannelRequest.AddMember("TimeShiftConfiguration", TimeShiftConfiguration)
-
-	UpdateChannelRequest_Audiences = UpdateChannelRequest.AddMember("Audiences", _Audiences)
-
-	UpdateChannelResponse_Arn = UpdateChannelResponse.AddMember("Arn", ___string)
-
-	UpdateChannelResponse_ChannelName = UpdateChannelResponse.AddMember("ChannelName", ___string)
-
-	UpdateChannelResponse_ChannelState = UpdateChannelResponse.AddMember("ChannelState", ChannelState)
-
-	UpdateChannelResponse_CreationTime = UpdateChannelResponse.AddMember("CreationTime", ___timestampUnix)
-
-	UpdateChannelResponse_FillerSlate = UpdateChannelResponse.AddMember("FillerSlate", SlateSource)
-
-	UpdateChannelResponse_LastModifiedTime = UpdateChannelResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	UpdateChannelResponse_Outputs = UpdateChannelResponse.AddMember("Outputs", _ResponseOutputs)
-
-	UpdateChannelResponse_PlaybackMode = UpdateChannelResponse.AddMember("PlaybackMode", ___string)
-
-	UpdateChannelResponse_Tags = UpdateChannelResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateChannelResponse_Tier = UpdateChannelResponse.AddMember("Tier", ___string)
-
-	UpdateChannelResponse_TimeShiftConfiguration = UpdateChannelResponse.AddMember("TimeShiftConfiguration", TimeShiftConfiguration)
-
-	UpdateChannelResponse_Audiences = UpdateChannelResponse.AddMember("Audiences", _Audiences)
-
-	UpdateLiveSourceRequest_HttpPackageConfigurations = UpdateLiveSourceRequest.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	UpdateLiveSourceRequest_LiveSourceName = UpdateLiveSourceRequest.AddMember("LiveSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateLiveSourceRequest_SourceLocationName = UpdateLiveSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateLiveSourceResponse_Arn = UpdateLiveSourceResponse.AddMember("Arn", ___string)
-
-	UpdateLiveSourceResponse_CreationTime = UpdateLiveSourceResponse.AddMember("CreationTime", ___timestampUnix)
-
-	UpdateLiveSourceResponse_HttpPackageConfigurations = UpdateLiveSourceResponse.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	UpdateLiveSourceResponse_LastModifiedTime = UpdateLiveSourceResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	UpdateLiveSourceResponse_LiveSourceName = UpdateLiveSourceResponse.AddMember("LiveSourceName", ___string)
-
-	UpdateLiveSourceResponse_SourceLocationName = UpdateLiveSourceResponse.AddMember("SourceLocationName", ___string)
-
-	UpdateLiveSourceResponse_Tags = UpdateLiveSourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateProgramRequest_AdBreaks = UpdateProgramRequest.AddMember("AdBreaks", ___listOfAdBreak)
-
-	UpdateProgramRequest_ChannelName = UpdateProgramRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateProgramRequest_ProgramName = UpdateProgramRequest.AddMember("ProgramName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateProgramRequest_ScheduleConfiguration = UpdateProgramRequest.AddMember("ScheduleConfiguration", UpdateProgramScheduleConfiguration)
-
-	UpdateProgramRequest_AudienceMedia = UpdateProgramRequest.AddMember("AudienceMedia", ___listOfAudienceMedia)
-
-	UpdateProgramResponse_AdBreaks = UpdateProgramResponse.AddMember("AdBreaks", ___listOfAdBreak)
-
-	UpdateProgramResponse_Arn = UpdateProgramResponse.AddMember("Arn", ___string)
-
-	UpdateProgramResponse_ChannelName = UpdateProgramResponse.AddMember("ChannelName", ___string)
-
-	UpdateProgramResponse_CreationTime = UpdateProgramResponse.AddMember("CreationTime", ___timestampUnix)
-
-	UpdateProgramResponse_ProgramName = UpdateProgramResponse.AddMember("ProgramName", ___string)
-
-	UpdateProgramResponse_SourceLocationName = UpdateProgramResponse.AddMember("SourceLocationName", ___string)
-
-	UpdateProgramResponse_VodSourceName = UpdateProgramResponse.AddMember("VodSourceName", ___string)
-
-	UpdateProgramResponse_LiveSourceName = UpdateProgramResponse.AddMember("LiveSourceName", ___string)
-
-	UpdateProgramResponse_ClipRange = UpdateProgramResponse.AddMember("ClipRange", ClipRange)
-
-	UpdateProgramResponse_DurationMillis = UpdateProgramResponse.AddMember("DurationMillis", ___long)
-
-	UpdateProgramResponse_ScheduledStartTime = UpdateProgramResponse.AddMember("ScheduledStartTime", ___timestampUnix)
-
-	UpdateProgramResponse_AudienceMedia = UpdateProgramResponse.AddMember("AudienceMedia", ___listOfAudienceMedia)
-
-	UpdateProgramResponse_Tags = UpdateProgramResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateSourceLocationRequest_AccessConfiguration = UpdateSourceLocationRequest.AddMember("AccessConfiguration", AccessConfiguration)
-
-	UpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration = UpdateSourceLocationRequest.AddMember("DefaultSegmentDeliveryConfiguration", DefaultSegmentDeliveryConfiguration)
-
-	UpdateSourceLocationRequest_HttpConfiguration = UpdateSourceLocationRequest.AddMember("HttpConfiguration", HttpConfiguration)
-
-	UpdateSourceLocationRequest_SegmentDeliveryConfigurations = UpdateSourceLocationRequest.AddMember("SegmentDeliveryConfigurations", ___listOfSegmentDeliveryConfiguration)
-
-	UpdateSourceLocationRequest_SourceLocationName = UpdateSourceLocationRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateSourceLocationResponse_AccessConfiguration = UpdateSourceLocationResponse.AddMember("AccessConfiguration", AccessConfiguration)
-
-	UpdateSourceLocationResponse_Arn = UpdateSourceLocationResponse.AddMember("Arn", ___string)
-
-	UpdateSourceLocationResponse_CreationTime = UpdateSourceLocationResponse.AddMember("CreationTime", ___timestampUnix)
-
-	UpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration = UpdateSourceLocationResponse.AddMember("DefaultSegmentDeliveryConfiguration", DefaultSegmentDeliveryConfiguration)
-
-	UpdateSourceLocationResponse_HttpConfiguration = UpdateSourceLocationResponse.AddMember("HttpConfiguration", HttpConfiguration)
-
-	UpdateSourceLocationResponse_LastModifiedTime = UpdateSourceLocationResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	UpdateSourceLocationResponse_SegmentDeliveryConfigurations = UpdateSourceLocationResponse.AddMember("SegmentDeliveryConfigurations", ___listOfSegmentDeliveryConfiguration)
-
-	UpdateSourceLocationResponse_SourceLocationName = UpdateSourceLocationResponse.AddMember("SourceLocationName", ___string)
-
-	UpdateSourceLocationResponse_Tags = UpdateSourceLocationResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateVodSourceRequest_HttpPackageConfigurations = UpdateVodSourceRequest.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	UpdateVodSourceRequest_SourceLocationName = UpdateVodSourceRequest.AddMember("SourceLocationName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateVodSourceRequest_VodSourceName = UpdateVodSourceRequest.AddMember("VodSourceName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateVodSourceResponse_Arn = UpdateVodSourceResponse.AddMember("Arn", ___string)
-
-	UpdateVodSourceResponse_CreationTime = UpdateVodSourceResponse.AddMember("CreationTime", ___timestampUnix)
-
-	UpdateVodSourceResponse_HttpPackageConfigurations = UpdateVodSourceResponse.AddMember("HttpPackageConfigurations", _HttpPackageConfigurations)
-
-	UpdateVodSourceResponse_LastModifiedTime = UpdateVodSourceResponse.AddMember("LastModifiedTime", ___timestampUnix)
-
-	UpdateVodSourceResponse_SourceLocationName = UpdateVodSourceResponse.AddMember("SourceLocationName", ___string)
-
-	UpdateVodSourceResponse_Tags = UpdateVodSourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateVodSourceResponse_VodSourceName = UpdateVodSourceResponse.AddMember("VodSourceName", ___string)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}, DirectMask: 0x400}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tags"}}, DirectMask: 0x1}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "durationMinutes"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "audience"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var m___adsInteractionExcludeEventTypesList = smithy.SchemaMembers{List: []*smithy.Schema{&s___adsInteractionExcludeEventTypesList_member}}
+var m___adsInteractionPublishOptInEventTypesList = smithy.SchemaMembers{List: []*smithy.Schema{&s___adsInteractionPublishOptInEventTypesList_member}}
+var m___listOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__string_member}}
+var m___listOfAdBreak = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfAdBreak_member}}
+var m___listOfAlert = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfAlert_member}}
+var m___listOfAlternateMedia = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfAlternateMedia_member}}
+var m___listOfAudienceMedia = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfAudienceMedia_member}}
+var m___listOfAvailMatchingCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfAvailMatchingCriteria_member}}
+var m___listOfChannel = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfChannel_member}}
+var m___listOfFunctionsRef = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfFunctionsRef_member}}
+var m___listOfFunctionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfFunctionsResponse_member}}
+var m___listOfLiveSource = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfLiveSource_member}}
+var m___listOfLoggingStrategies = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfLoggingStrategies_member}}
+var m___listOfPlaybackConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPlaybackConfiguration_member}}
+var m___listOfPrefetchSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPrefetchSchedule_member}}
+var m___listOfScheduleAdBreak = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfScheduleAdBreak_member}}
+var m___listOfScheduleEntry = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfScheduleEntry_member}}
+var m___listOfSegmentDeliveryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSegmentDeliveryConfiguration_member}}
+var m___listOfSourceLocation = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSourceLocation_member}}
+var m___listOfVodSource = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfVodSource_member}}
+var m___manifestServiceExcludeEventTypesList = smithy.SchemaMembers{List: []*smithy.Schema{&s___manifestServiceExcludeEventTypesList_member}}
+var m___manifestServicePublishOptInEventTypesList = smithy.SchemaMembers{List: []*smithy.Schema{&s___manifestServicePublishOptInEventTypesList_member}}
+var m___mapOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___mapOf__string_key, &s___mapOf__string_value}}
+var mAccessConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessConfiguration_AccessType, &sAccessConfiguration_SecretsManagerAccessTokenConfiguration}}
+var mAccessType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessType_S3_SIGV4, &sAccessType_SECRETS_MANAGER_ACCESS_TOKEN, &sAccessType_AUTODETECT_SIGV4}}
+var mAdBreak = smithy.SchemaMembers{List: []*smithy.Schema{&sAdBreak_MessageType, &sAdBreak_OffsetMillis, &sAdBreak_Slate, &sAdBreak_SpliceInsertMessage, &sAdBreak_TimeSignalMessage, &sAdBreak_AdBreakMetadata}}
+var m_AdBreakMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdBreakMetadataList_member}}
+var m_AdBreakOpportunities = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdBreakOpportunities_member}}
+var mAdBreakOpportunity = smithy.SchemaMembers{List: []*smithy.Schema{&sAdBreakOpportunity_OffsetMillis}}
+var mAdConditioningConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAdConditioningConfiguration_StreamingMediaFileConditioning}}
+var mAdDecisionServerConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAdDecisionServerConfiguration_HttpRequest, &sAdDecisionServerConfiguration_VastResponse}}
+var mAdMarkerPassthrough = smithy.SchemaMembers{List: []*smithy.Schema{&sAdMarkerPassthrough_Enabled}}
+var mAdMarkupType = smithy.SchemaMembers{List: []*smithy.Schema{&sAdMarkupType_DATERANGE, &sAdMarkupType_SCTE35_ENHANCED}}
+var m_adMarkupTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_adMarkupTypes_member}}
+var mAdSequencingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAdSequencingMode_FOLLOW_AD_SEQUENCE, &sAdSequencingMode_IGNORE_AD_SEQUENCE, &sAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE, &sAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD}}
+var mAdsInteractionExcludeEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sAdsInteractionExcludeEventType_AD_MARKER_FOUND, &sAdsInteractionExcludeEventType_NON_AD_MARKER_FOUND, &sAdsInteractionExcludeEventType_MAKING_ADS_REQUEST, &sAdsInteractionExcludeEventType_MODIFIED_TARGET_URL, &sAdsInteractionExcludeEventType_VAST_REDIRECT, &sAdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE, &sAdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE, &sAdsInteractionExcludeEventType_VAST_RESPONSE, &sAdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE, &sAdsInteractionExcludeEventType_FILLED_AVAIL, &sAdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL, &sAdsInteractionExcludeEventType_BEACON_FIRED, &sAdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS, &sAdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED, &sAdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED, &sAdsInteractionExcludeEventType_ERROR_UNKNOWN, &sAdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST, &sAdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST, &sAdsInteractionExcludeEventType_ERROR_ADS_IO, &sAdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT, &sAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE, &sAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT, &sAdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE, &sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE, &sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST, &sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED, &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES, &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES, &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS, &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION, &sAdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI, &sAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS, &sAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR, &sAdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE, &sAdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED, &sAdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED, &sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET, &sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS, &sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS, &sAdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS, &sAdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE, &sAdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR, &sAdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR, &sAdsInteractionExcludeEventType_BEACON_RECEIVED, &sAdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR, &sAdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR, &sAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR, &sAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR}, Hash: &hAdsInteractionExcludeEventType}
+var mAdsInteractionLog = smithy.SchemaMembers{List: []*smithy.Schema{&sAdsInteractionLog_PublishOptInEventTypes, &sAdsInteractionLog_ExcludeEventTypes}}
+var mAdsInteractionPublishOptInEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sAdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE, &sAdsInteractionPublishOptInEventType_RAW_ADS_REQUEST, &sAdsInteractionPublishOptInEventType_RAW_BID_REQUEST, &sAdsInteractionPublishOptInEventType_RAW_BID_RESPONSE, &sAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY, &sAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED, &sAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY, &sAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED, &sAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY, &sAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED}, Hash: &hAdsInteractionPublishOptInEventType}
+var mAdsPersonalizationConcurrency = smithy.SchemaMembers{List: []*smithy.Schema{&sAdsPersonalizationConcurrency_MaxConcurrentAdsRequests, &sAdsPersonalizationConcurrency_EnableVodVastParallelization}}
+var mAdsPersonalizationTimeouts = smithy.SchemaMembers{List: []*smithy.Schema{&sAdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds, &sAdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds, &sAdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds, &sAdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds, &sAdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds}}
+var mAlert = smithy.SchemaMembers{List: []*smithy.Schema{&sAlert_AlertCode, &sAlert_AlertMessage, &sAlert_LastModifiedTime, &sAlert_RelatedResourceArns, &sAlert_ResourceArn, &sAlert_Category}}
+var mAlertCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sAlertCategory_SCHEDULING_ERROR, &sAlertCategory_PLAYBACK_WARNING, &sAlertCategory_INFO}}
+var mAlternateMedia = smithy.SchemaMembers{List: []*smithy.Schema{&sAlternateMedia_SourceLocationName, &sAlternateMedia_LiveSourceName, &sAlternateMedia_VodSourceName, &sAlternateMedia_ClipRange, &sAlternateMedia_ScheduledStartTimeMillis, &sAlternateMedia_AdBreaks, &sAlternateMedia_DurationMillis}}
+var mApsRegion = smithy.SchemaMembers{List: []*smithy.Schema{&sApsRegion_AMERICAS, &sApsRegion_EUROPE, &sApsRegion_ASIA_PACIFIC}}
+var mAudienceMedia = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceMedia_Audience, &sAudienceMedia_AlternateMedia}}
+var m_Audiences = smithy.SchemaMembers{List: []*smithy.Schema{&s_Audiences_member}}
+var mAvailMatchingCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailMatchingCriteria_DynamicVariable, &sAvailMatchingCriteria_Operator}}
+var mAvailSuppression = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailSuppression_Mode, &sAvailSuppression_Value, &sAvailSuppression_FillPolicy}}
+var mAwsServiceRequestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsServiceRequestConfiguration_Runtime, &sAwsServiceRequestConfiguration_Output, &sAwsServiceRequestConfiguration_MethodType, &sAwsServiceRequestConfiguration_RequestTimeoutMilliseconds, &sAwsServiceRequestConfiguration_Url, &sAwsServiceRequestConfiguration_Body, &sAwsServiceRequestConfiguration_Headers, &sAwsServiceRequestConfiguration_Cache, &sAwsServiceRequestConfiguration_TargetService, &sAwsServiceRequestConfiguration_TargetRegion}, Hash: &hAwsServiceRequestConfiguration}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Message}}
+var mBeaconEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sBeaconEventType_MUTE, &sBeaconEventType_UNMUTE, &sBeaconEventType_PAUSE, &sBeaconEventType_SKIP}}
+var m_BeaconEventTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BeaconEventTypeList_member}}
+var mBeaconingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sBeaconingConfiguration_ClientSide}}
+var mBumper = smithy.SchemaMembers{List: []*smithy.Schema{&sBumper_EndUrl, &sBumper_StartUrl}}
+var mCdnConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCdnConfiguration_AdSegmentUrlPrefix, &sCdnConfiguration_ContentSegmentUrlPrefix}}
+var mChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sChannel_Arn, &sChannel_ChannelName, &sChannel_ChannelState, &sChannel_CreationTime, &sChannel_FillerSlate, &sChannel_LastModifiedTime, &sChannel_Outputs, &sChannel_PlaybackMode, &sChannel_Tags, &sChannel_Tier, &sChannel_LogConfiguration, &sChannel_Audiences}, Hash: &hChannel}
+var mChannelState = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelState_RUNNING, &sChannelState_STOPPED}}
+var mClientSideBeaconingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sClientSideBeaconingConfiguration_ReportingMode, &sClientSideBeaconingConfiguration_AdditionalEventTypes}}
+var mClientSideBeaconingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sClientSideBeaconingMode_DISABLED, &sClientSideBeaconingMode_INSIGHTS}}
+var mClipRange = smithy.SchemaMembers{List: []*smithy.Schema{&sClipRange_EndOffsetMillis, &sClipRange_StartOffsetMillis}}
+var mCompressionMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sCompressionMethod_NONE, &sCompressionMethod_GZIP}}
+var mConcurrentExecutorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentExecutorConfiguration_Runtime, &sConcurrentExecutorConfiguration_Output, &sConcurrentExecutorConfiguration_FunctionList, &sConcurrentExecutorConfiguration_TimeoutMilliseconds, &sConcurrentExecutorConfiguration_MaxConcurrency}}
+var m_ConfigurationAliasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationAliasesRequest_key, &s_ConfigurationAliasesRequest_value}}
+var m_ConfigurationAliasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationAliasesResponse_key, &s_ConfigurationAliasesResponse_value}}
+var mCustomOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomOutputConfiguration_Runtime, &sCustomOutputConfiguration_Output}}
+var mDashConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDashConfiguration_ManifestEndpointPrefix, &sDashConfiguration_DualStackManifestEndpointPrefix, &sDashConfiguration_MpdLocation, &sDashConfiguration_OriginManifestType}}
+var mDashConfigurationForPut = smithy.SchemaMembers{List: []*smithy.Schema{&sDashConfigurationForPut_MpdLocation, &sDashConfigurationForPut_OriginManifestType}}
+var mDashPlaylistSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDashPlaylistSettings_ManifestWindowSeconds, &sDashPlaylistSettings_MinBufferTimeSeconds, &sDashPlaylistSettings_MinUpdatePeriodSeconds, &sDashPlaylistSettings_SuggestedPresentationDelaySeconds}}
+var mDefaultSegmentDeliveryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultSegmentDeliveryConfiguration_BaseUrl}}
+var mEventName = smithy.SchemaMembers{List: []*smithy.Schema{&sEventName_PRE_SESSION_INITIALIZATION, &sEventName_PRE_ADS_REQUEST, &sEventName_POST_ADS_RESPONSE, &sEventName_PRE_MANIFEST_INSERTION}}
+var mFillPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sFillPolicy_FULL_AVAIL_ONLY, &sFillPolicy_PARTIAL_AVAIL}}
+var mFunction = smithy.SchemaMembers{List: []*smithy.Schema{&sFunction_FunctionId, &sFunction_FunctionType, &sFunction_Description, &sFunction_HttpRequestConfiguration, &sFunction_AwsServiceRequestConfiguration, &sFunction_CustomOutputConfiguration, &sFunction_ConcurrentExecutorConfiguration, &sFunction_SequentialExecutorConfiguration, &sFunction_VastRequestConfiguration, &sFunction_Tags, &sFunction_Arn}, Hash: &hFunction}
+var m_FunctionMapping = smithy.SchemaMembers{List: []*smithy.Schema{&s_FunctionMapping_key, &s_FunctionMapping_value}}
+var mFunctionRef = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionRef_RunCondition, &sFunctionRef_FunctionId, &sFunctionRef_Alias}}
+var mFunctionType = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionType_HTTP_REQUEST, &sFunctionType_AWS_SERVICE_REQUEST, &sFunctionType_CUSTOM_OUTPUT, &sFunctionType_CONCURRENT_EXECUTOR, &sFunctionType_SEQUENTIAL_EXECUTOR, &sFunctionType_VAST_REQUEST}}
+var mHlsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHlsConfiguration_ManifestEndpointPrefix, &sHlsConfiguration_DualStackManifestEndpointPrefix}}
+var mHlsPlaylistSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sHlsPlaylistSettings_ManifestWindowSeconds, &sHlsPlaylistSettings_AdMarkupType}}
+var mHttpConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpConfiguration_BaseUrl}}
+var mHttpPackageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpPackageConfiguration_Path, &sHttpPackageConfiguration_SourceGroup, &sHttpPackageConfiguration_Type}}
+var m_HttpPackageConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_HttpPackageConfigurations_member}}
+var mHttpRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRequest_Method, &sHttpRequest_Body, &sHttpRequest_Headers, &sHttpRequest_CompressRequest}}
+var mHttpRequestCacheConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRequestCacheConfiguration_TtlMinimumSeconds, &sHttpRequestCacheConfiguration_TtlMaximumSeconds, &sHttpRequestCacheConfiguration_Key}}
+var mHttpRequestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRequestConfiguration_Runtime, &sHttpRequestConfiguration_Output, &sHttpRequestConfiguration_MethodType, &sHttpRequestConfiguration_RequestTimeoutMilliseconds, &sHttpRequestConfiguration_Url, &sHttpRequestConfiguration_Body, &sHttpRequestConfiguration_Headers, &sHttpRequestConfiguration_Cache}}
+var mInsertionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sInsertionMode_STITCHED_ONLY, &sInsertionMode_PLAYER_SELECT}}
+var mKeyValuePair = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyValuePair_Key, &sKeyValuePair_Value}}
+var mListPrefetchScheduleType = smithy.SchemaMembers{List: []*smithy.Schema{&sListPrefetchScheduleType_SINGLE, &sListPrefetchScheduleType_RECURRING, &sListPrefetchScheduleType_ALL}}
+var mLivePreRollConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLivePreRollConfiguration_AdDecisionServerUrl, &sLivePreRollConfiguration_MaxDurationSeconds, &sLivePreRollConfiguration_AdDecisionServerConfiguration}}
+var mLiveSource = smithy.SchemaMembers{List: []*smithy.Schema{&sLiveSource_Arn, &sLiveSource_CreationTime, &sLiveSource_HttpPackageConfigurations, &sLiveSource_LastModifiedTime, &sLiveSource_LiveSourceName, &sLiveSource_SourceLocationName, &sLiveSource_Tags}}
+var mLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfiguration_PercentEnabled, &sLogConfiguration_EnabledLoggingStrategies, &sLogConfiguration_AdsInteractionLog, &sLogConfiguration_ManifestServiceInteractionLog}}
+var mLogConfigurationForChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfigurationForChannel_LogTypes}}
+var mLoggingStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingStrategy_VENDED_LOGS, &sLoggingStrategy_LEGACY_CLOUDWATCH}}
+var mLogType = smithy.SchemaMembers{List: []*smithy.Schema{&sLogType_AS_RUN}}
+var m_LogTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogTypes_member}}
+var mManifestProcessingRules = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestProcessingRules_AdMarkerPassthrough}}
+var mManifestServiceExcludeEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestServiceExcludeEventType_GENERATED_MANIFEST, &sManifestServiceExcludeEventType_ORIGIN_MANIFEST, &sManifestServiceExcludeEventType_SESSION_INITIALIZED, &sManifestServiceExcludeEventType_TRACKING_RESPONSE, &sManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR, &sManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR, &sManifestServiceExcludeEventType_UNKNOWN_HOST, &sManifestServiceExcludeEventType_TIMEOUT_ERROR, &sManifestServiceExcludeEventType_CONNECTION_ERROR, &sManifestServiceExcludeEventType_IO_ERROR, &sManifestServiceExcludeEventType_UNKNOWN_ERROR, &sManifestServiceExcludeEventType_HOST_DISALLOWED, &sManifestServiceExcludeEventType_PARSING_ERROR, &sManifestServiceExcludeEventType_MANIFEST_ERROR, &sManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST, &sManifestServiceExcludeEventType_NO_MASTER_PLAYLIST, &sManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST, &sManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION, &sManifestServiceExcludeEventType_SCTE35_PARSING_ERROR, &sManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST, &sManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST, &sManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO, &sManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING, &sManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION, &sManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION, &sManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR, &sManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR}, Hash: &hManifestServiceExcludeEventType}
+var mManifestServiceInteractionLog = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestServiceInteractionLog_PublishOptInEventTypes, &sManifestServiceInteractionLog_ExcludeEventTypes}}
+var mManifestServicePublishOptInEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY, &sManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED}}
+var mMessageType = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageType_SPLICE_INSERT, &sMessageType_TIME_SIGNAL}}
+var mMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sMethod_GET, &sMethod_POST}}
+var mMethodType = smithy.SchemaMembers{List: []*smithy.Schema{&sMethodType_GET, &sMethodType_POST}}
+var mMode = smithy.SchemaMembers{List: []*smithy.Schema{&sMode_OFF, &sMode_BEHIND_LIVE_EDGE, &sMode_AFTER_LIVE_EDGE}}
+var mOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sOperator_EQUALS}}
+var mOriginManifestType = smithy.SchemaMembers{List: []*smithy.Schema{&sOriginManifestType_SINGLE_PERIOD, &sOriginManifestType_MULTI_PERIOD}}
+var mPlaybackConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackConfiguration_AdDecisionServerUrl, &sPlaybackConfiguration_AvailSuppression, &sPlaybackConfiguration_Bumper, &sPlaybackConfiguration_CdnConfiguration, &sPlaybackConfiguration_ConfigurationAliases, &sPlaybackConfiguration_DashConfiguration, &sPlaybackConfiguration_HlsConfiguration, &sPlaybackConfiguration_InsertionMode, &sPlaybackConfiguration_LivePreRollConfiguration, &sPlaybackConfiguration_LogConfiguration, &sPlaybackConfiguration_ManifestProcessingRules, &sPlaybackConfiguration_Name, &sPlaybackConfiguration_PersonalizationThresholdSeconds, &sPlaybackConfiguration_PlaybackConfigurationArn, &sPlaybackConfiguration_PlaybackEndpointPrefix, &sPlaybackConfiguration_DualStackPlaybackEndpointPrefix, &sPlaybackConfiguration_SessionInitializationEndpointPrefix, &sPlaybackConfiguration_DualStackSessionInitializationEndpointPrefix, &sPlaybackConfiguration_SlateAdUrl, &sPlaybackConfiguration_Tags, &sPlaybackConfiguration_TranscodeProfileName, &sPlaybackConfiguration_VideoContentSourceUrl, &sPlaybackConfiguration_AdConditioningConfiguration, &sPlaybackConfiguration_AdDecisionServerConfiguration, &sPlaybackConfiguration_YieldOptimizationConfiguration, &sPlaybackConfiguration_FunctionMapping, &sPlaybackConfiguration_AdsPersonalizationTimeouts, &sPlaybackConfiguration_AdsPersonalizationConcurrency, &sPlaybackConfiguration_BeaconingConfiguration}, Hash: &hPlaybackConfiguration}
+var mPlaybackMode = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackMode_LOOP, &sPlaybackMode_LINEAR}}
+var mPrefetchConsumption = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefetchConsumption_AvailMatchingCriteria, &sPrefetchConsumption_EndTime, &sPrefetchConsumption_StartTime}}
+var mPrefetchRetrieval = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefetchRetrieval_DynamicVariables, &sPrefetchRetrieval_EndTime, &sPrefetchRetrieval_StartTime, &sPrefetchRetrieval_TrafficShapingType, &sPrefetchRetrieval_TrafficShapingRetrievalWindow, &sPrefetchRetrieval_TrafficShapingTpsConfiguration}}
+var mPrefetchSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefetchSchedule_Arn, &sPrefetchSchedule_Consumption, &sPrefetchSchedule_Name, &sPrefetchSchedule_PlaybackConfigurationName, &sPrefetchSchedule_Retrieval, &sPrefetchSchedule_ScheduleType, &sPrefetchSchedule_RecurringPrefetchConfiguration, &sPrefetchSchedule_StreamId, &sPrefetchSchedule_Tags}, Hash: &hPrefetchSchedule}
+var mPrefetchScheduleType = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefetchScheduleType_SINGLE, &sPrefetchScheduleType_RECURRING}}
+var mPreRollAdDecisionServerConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPreRollAdDecisionServerConfiguration_VastResponse}}
+var mPreRollAdSequencingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sPreRollAdSequencingMode_FOLLOW_AD_SEQUENCE, &sPreRollAdSequencingMode_IGNORE_AD_SEQUENCE}}
+var mPreRollVastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPreRollVastResponse_AdSequencingMode}}
+var mRecurringConsumption = smithy.SchemaMembers{List: []*smithy.Schema{&sRecurringConsumption_RetrievedAdExpirationSeconds, &sRecurringConsumption_AvailMatchingCriteria}}
+var mRecurringPrefetchConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRecurringPrefetchConfiguration_StartTime, &sRecurringPrefetchConfiguration_EndTime, &sRecurringPrefetchConfiguration_RecurringConsumption, &sRecurringPrefetchConfiguration_RecurringRetrieval}}
+var mRecurringRetrieval = smithy.SchemaMembers{List: []*smithy.Schema{&sRecurringRetrieval_DynamicVariables, &sRecurringRetrieval_DelayAfterAvailEndSeconds, &sRecurringRetrieval_TrafficShapingType, &sRecurringRetrieval_TrafficShapingRetrievalWindow, &sRecurringRetrieval_TrafficShapingTpsConfiguration}}
+var mRelativePosition = smithy.SchemaMembers{List: []*smithy.Schema{&sRelativePosition_BEFORE_PROGRAM, &sRelativePosition_AFTER_PROGRAM}}
+var mRequestOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestOutputItem_DashPlaylistSettings, &sRequestOutputItem_HlsPlaylistSettings, &sRequestOutputItem_ManifestName, &sRequestOutputItem_SourceGroup}}
+var m_RequestOutputs = smithy.SchemaMembers{List: []*smithy.Schema{&s_RequestOutputs_member}}
+var mResponseOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sResponseOutputItem_DashPlaylistSettings, &sResponseOutputItem_HlsPlaylistSettings, &sResponseOutputItem_ManifestName, &sResponseOutputItem_PlaybackUrl, &sResponseOutputItem_DualStackPlaybackUrl, &sResponseOutputItem_SourceGroup}}
+var m_ResponseOutputs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResponseOutputs_member}}
+var mRuntimeType = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeType_JSONATA}}
+var mScheduleAdBreak = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleAdBreak_ApproximateDurationSeconds, &sScheduleAdBreak_ApproximateStartTime, &sScheduleAdBreak_SourceLocationName, &sScheduleAdBreak_VodSourceName}}
+var mScheduleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleConfiguration_Transition, &sScheduleConfiguration_ClipRange}}
+var mScheduleEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleEntry_ApproximateDurationSeconds, &sScheduleEntry_ApproximateStartTime, &sScheduleEntry_Arn, &sScheduleEntry_ChannelName, &sScheduleEntry_LiveSourceName, &sScheduleEntry_ProgramName, &sScheduleEntry_ScheduleAdBreaks, &sScheduleEntry_ScheduleEntryType, &sScheduleEntry_SourceLocationName, &sScheduleEntry_VodSourceName, &sScheduleEntry_Audiences}, Hash: &hScheduleEntry}
+var mScheduleEntryType = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleEntryType_PROGRAM, &sScheduleEntryType_FILLER_SLATE, &sScheduleEntryType_ALTERNATE_MEDIA}}
+var mSecretsManagerAccessTokenConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSecretsManagerAccessTokenConfiguration_HeaderName, &sSecretsManagerAccessTokenConfiguration_SecretArn, &sSecretsManagerAccessTokenConfiguration_SecretStringKey}}
+var mSegmentationDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sSegmentationDescriptor_SegmentationEventId, &sSegmentationDescriptor_SegmentationUpidType, &sSegmentationDescriptor_SegmentationUpid, &sSegmentationDescriptor_SegmentationTypeId, &sSegmentationDescriptor_SegmentNum, &sSegmentationDescriptor_SegmentsExpected, &sSegmentationDescriptor_SubSegmentNum, &sSegmentationDescriptor_SubSegmentsExpected}}
+var m_SegmentationDescriptorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SegmentationDescriptorList_member}}
+var mSegmentDeliveryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSegmentDeliveryConfiguration_BaseUrl, &sSegmentDeliveryConfiguration_Name}}
+var mSequentialExecutorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSequentialExecutorConfiguration_Runtime, &sSequentialExecutorConfiguration_Output, &sSequentialExecutorConfiguration_FunctionList, &sSequentialExecutorConfiguration_TimeoutMilliseconds}}
+var mSlateSource = smithy.SchemaMembers{List: []*smithy.Schema{&sSlateSource_SourceLocationName, &sSlateSource_VodSourceName}}
+var mSourceLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceLocation_AccessConfiguration, &sSourceLocation_Arn, &sSourceLocation_CreationTime, &sSourceLocation_DefaultSegmentDeliveryConfiguration, &sSourceLocation_HttpConfiguration, &sSourceLocation_LastModifiedTime, &sSourceLocation_SegmentDeliveryConfigurations, &sSourceLocation_SourceLocationName, &sSourceLocation_Tags}, Hash: &hSourceLocation}
+var mSpliceInsertMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sSpliceInsertMessage_AvailNum, &sSpliceInsertMessage_AvailsExpected, &sSpliceInsertMessage_SpliceEventId, &sSpliceInsertMessage_UniqueProgramId}}
+var mStreamingMediaFileConditioning = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamingMediaFileConditioning_TRANSCODE, &sStreamingMediaFileConditioning_NONE}}
+var m_StringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringMap_key, &s_StringMap_value}}
+var mTier = smithy.SchemaMembers{List: []*smithy.Schema{&sTier_BASIC, &sTier_STANDARD}}
+var mTimeShiftConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeShiftConfiguration_MaxTimeDelaySeconds}}
+var mTimeSignalMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeSignalMessage_SegmentationDescriptors}}
+var mTrafficShapingRetrievalWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds}}
+var mTrafficShapingTpsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficShapingTpsConfiguration_PeakTps, &sTrafficShapingTpsConfiguration_PeakConcurrentUsers}}
+var mTrafficShapingType = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficShapingType_RETRIEVAL_WINDOW, &sTrafficShapingType_TPS}}
+var mTransition = smithy.SchemaMembers{List: []*smithy.Schema{&sTransition_DurationMillis, &sTransition_RelativePosition, &sTransition_RelativeProgram, &sTransition_ScheduledStartTimeMillis, &sTransition_Type}}
+var mType = smithy.SchemaMembers{List: []*smithy.Schema{&sType_DASH, &sType_HLS}}
+var mUpdateProgramScheduleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProgramScheduleConfiguration_Transition, &sUpdateProgramScheduleConfiguration_ClipRange}}
+var mUpdateProgramTransition = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProgramTransition_ScheduledStartTimeMillis, &sUpdateProgramTransition_DurationMillis}}
+var mVastRequestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVastRequestConfiguration_Runtime, &sVastRequestConfiguration_Output, &sVastRequestConfiguration_MethodType, &sVastRequestConfiguration_RequestTimeoutMilliseconds, &sVastRequestConfiguration_Url, &sVastRequestConfiguration_Body, &sVastRequestConfiguration_Headers, &sVastRequestConfiguration_Cache}}
+var mVastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sVastResponse_AdSequencingMode}}
+var mVodSource = smithy.SchemaMembers{List: []*smithy.Schema{&sVodSource_Arn, &sVodSource_CreationTime, &sVodSource_HttpPackageConfigurations, &sVodSource_LastModifiedTime, &sVodSource_SourceLocationName, &sVodSource_Tags, &sVodSource_VodSourceName}}
+var mYieldOptimizationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sYieldOptimizationConfiguration_MinimumUnfilledDuration, &sYieldOptimizationConfiguration_PublisherId, &sYieldOptimizationConfiguration_Region, &sYieldOptimizationConfiguration_OpenRtbTemplate}}
+var mConfigureLogsForChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigureLogsForChannelRequest_ChannelName, &sConfigureLogsForChannelRequest_LogTypes}}
+var mConfigureLogsForChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigureLogsForChannelResponse_ChannelName, &sConfigureLogsForChannelResponse_LogTypes}}
+var mConfigureLogsForPlaybackConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigureLogsForPlaybackConfigurationRequest_PercentEnabled, &sConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName, &sConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies, &sConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog, &sConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog}}
+var mConfigureLogsForPlaybackConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigureLogsForPlaybackConfigurationResponse_PercentEnabled, &sConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName, &sConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies, &sConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog, &sConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog}}
+var mCreateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelRequest_ChannelName, &sCreateChannelRequest_FillerSlate, &sCreateChannelRequest_Outputs, &sCreateChannelRequest_PlaybackMode, &sCreateChannelRequest_Tags, &sCreateChannelRequest_Tier, &sCreateChannelRequest_TimeShiftConfiguration, &sCreateChannelRequest_Audiences}}
+var mCreateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelResponse_Arn, &sCreateChannelResponse_ChannelName, &sCreateChannelResponse_ChannelState, &sCreateChannelResponse_CreationTime, &sCreateChannelResponse_FillerSlate, &sCreateChannelResponse_LastModifiedTime, &sCreateChannelResponse_Outputs, &sCreateChannelResponse_PlaybackMode, &sCreateChannelResponse_Tags, &sCreateChannelResponse_Tier, &sCreateChannelResponse_TimeShiftConfiguration, &sCreateChannelResponse_Audiences}, Hash: &hCreateChannelResponse}
+var mCreateLiveSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLiveSourceRequest_HttpPackageConfigurations, &sCreateLiveSourceRequest_LiveSourceName, &sCreateLiveSourceRequest_SourceLocationName, &sCreateLiveSourceRequest_Tags}}
+var mCreateLiveSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLiveSourceResponse_Arn, &sCreateLiveSourceResponse_CreationTime, &sCreateLiveSourceResponse_HttpPackageConfigurations, &sCreateLiveSourceResponse_LastModifiedTime, &sCreateLiveSourceResponse_LiveSourceName, &sCreateLiveSourceResponse_SourceLocationName, &sCreateLiveSourceResponse_Tags}}
+var mCreatePrefetchScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePrefetchScheduleRequest_Consumption, &sCreatePrefetchScheduleRequest_Name, &sCreatePrefetchScheduleRequest_PlaybackConfigurationName, &sCreatePrefetchScheduleRequest_Retrieval, &sCreatePrefetchScheduleRequest_RecurringPrefetchConfiguration, &sCreatePrefetchScheduleRequest_ScheduleType, &sCreatePrefetchScheduleRequest_StreamId, &sCreatePrefetchScheduleRequest_Tags}}
+var mCreatePrefetchScheduleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePrefetchScheduleResponse_Arn, &sCreatePrefetchScheduleResponse_Consumption, &sCreatePrefetchScheduleResponse_Name, &sCreatePrefetchScheduleResponse_PlaybackConfigurationName, &sCreatePrefetchScheduleResponse_Retrieval, &sCreatePrefetchScheduleResponse_RecurringPrefetchConfiguration, &sCreatePrefetchScheduleResponse_ScheduleType, &sCreatePrefetchScheduleResponse_StreamId, &sCreatePrefetchScheduleResponse_Tags}, Hash: &hCreatePrefetchScheduleResponse}
+var mCreateProgramRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProgramRequest_AdBreaks, &sCreateProgramRequest_ChannelName, &sCreateProgramRequest_LiveSourceName, &sCreateProgramRequest_ProgramName, &sCreateProgramRequest_ScheduleConfiguration, &sCreateProgramRequest_SourceLocationName, &sCreateProgramRequest_VodSourceName, &sCreateProgramRequest_AudienceMedia, &sCreateProgramRequest_Tags}, Hash: &hCreateProgramRequest}
+var mCreateProgramResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProgramResponse_AdBreaks, &sCreateProgramResponse_Arn, &sCreateProgramResponse_ChannelName, &sCreateProgramResponse_CreationTime, &sCreateProgramResponse_LiveSourceName, &sCreateProgramResponse_ProgramName, &sCreateProgramResponse_ScheduledStartTime, &sCreateProgramResponse_SourceLocationName, &sCreateProgramResponse_VodSourceName, &sCreateProgramResponse_ClipRange, &sCreateProgramResponse_DurationMillis, &sCreateProgramResponse_AudienceMedia, &sCreateProgramResponse_Tags}, Hash: &hCreateProgramResponse}
+var mCreateSourceLocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceLocationRequest_AccessConfiguration, &sCreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration, &sCreateSourceLocationRequest_HttpConfiguration, &sCreateSourceLocationRequest_SegmentDeliveryConfigurations, &sCreateSourceLocationRequest_SourceLocationName, &sCreateSourceLocationRequest_Tags}}
+var mCreateSourceLocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceLocationResponse_AccessConfiguration, &sCreateSourceLocationResponse_Arn, &sCreateSourceLocationResponse_CreationTime, &sCreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration, &sCreateSourceLocationResponse_HttpConfiguration, &sCreateSourceLocationResponse_LastModifiedTime, &sCreateSourceLocationResponse_SegmentDeliveryConfigurations, &sCreateSourceLocationResponse_SourceLocationName, &sCreateSourceLocationResponse_Tags}, Hash: &hCreateSourceLocationResponse}
+var mCreateVodSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVodSourceRequest_HttpPackageConfigurations, &sCreateVodSourceRequest_SourceLocationName, &sCreateVodSourceRequest_Tags, &sCreateVodSourceRequest_VodSourceName}}
+var mCreateVodSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVodSourceResponse_Arn, &sCreateVodSourceResponse_CreationTime, &sCreateVodSourceResponse_HttpPackageConfigurations, &sCreateVodSourceResponse_LastModifiedTime, &sCreateVodSourceResponse_SourceLocationName, &sCreateVodSourceResponse_Tags, &sCreateVodSourceResponse_VodSourceName}}
+var mDeleteChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelRequest_ChannelName}}
+var mDeleteChannelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelPolicyRequest_ChannelName}}
+var mDeleteFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFunctionRequest_FunctionId}}
+var mDeleteLiveSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLiveSourceRequest_LiveSourceName, &sDeleteLiveSourceRequest_SourceLocationName}}
+var mDeletePlaybackConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePlaybackConfigurationRequest_Name}}
+var mDeletePrefetchScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePrefetchScheduleRequest_Name, &sDeletePrefetchScheduleRequest_PlaybackConfigurationName}}
+var mDeleteProgramRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProgramRequest_ChannelName, &sDeleteProgramRequest_ProgramName}}
+var mDeleteSourceLocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSourceLocationRequest_SourceLocationName}}
+var mDeleteVodSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVodSourceRequest_SourceLocationName, &sDeleteVodSourceRequest_VodSourceName}}
+var mDescribeChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelRequest_ChannelName}}
+var mDescribeChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelResponse_Arn, &sDescribeChannelResponse_ChannelName, &sDescribeChannelResponse_ChannelState, &sDescribeChannelResponse_CreationTime, &sDescribeChannelResponse_FillerSlate, &sDescribeChannelResponse_LastModifiedTime, &sDescribeChannelResponse_Outputs, &sDescribeChannelResponse_PlaybackMode, &sDescribeChannelResponse_Tags, &sDescribeChannelResponse_Tier, &sDescribeChannelResponse_LogConfiguration, &sDescribeChannelResponse_TimeShiftConfiguration, &sDescribeChannelResponse_Audiences}, Hash: &hDescribeChannelResponse}
+var mDescribeLiveSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLiveSourceRequest_LiveSourceName, &sDescribeLiveSourceRequest_SourceLocationName}}
+var mDescribeLiveSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLiveSourceResponse_Arn, &sDescribeLiveSourceResponse_CreationTime, &sDescribeLiveSourceResponse_HttpPackageConfigurations, &sDescribeLiveSourceResponse_LastModifiedTime, &sDescribeLiveSourceResponse_LiveSourceName, &sDescribeLiveSourceResponse_SourceLocationName, &sDescribeLiveSourceResponse_Tags}}
+var mDescribeProgramRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProgramRequest_ChannelName, &sDescribeProgramRequest_ProgramName}}
+var mDescribeProgramResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProgramResponse_AdBreaks, &sDescribeProgramResponse_Arn, &sDescribeProgramResponse_ChannelName, &sDescribeProgramResponse_CreationTime, &sDescribeProgramResponse_LiveSourceName, &sDescribeProgramResponse_ProgramName, &sDescribeProgramResponse_ScheduledStartTime, &sDescribeProgramResponse_SourceLocationName, &sDescribeProgramResponse_VodSourceName, &sDescribeProgramResponse_ClipRange, &sDescribeProgramResponse_DurationMillis, &sDescribeProgramResponse_AudienceMedia, &sDescribeProgramResponse_Tags}, Hash: &hDescribeProgramResponse}
+var mDescribeSourceLocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceLocationRequest_SourceLocationName}}
+var mDescribeSourceLocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceLocationResponse_AccessConfiguration, &sDescribeSourceLocationResponse_Arn, &sDescribeSourceLocationResponse_CreationTime, &sDescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration, &sDescribeSourceLocationResponse_HttpConfiguration, &sDescribeSourceLocationResponse_LastModifiedTime, &sDescribeSourceLocationResponse_SegmentDeliveryConfigurations, &sDescribeSourceLocationResponse_SourceLocationName, &sDescribeSourceLocationResponse_Tags}, Hash: &hDescribeSourceLocationResponse}
+var mDescribeVodSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVodSourceRequest_SourceLocationName, &sDescribeVodSourceRequest_VodSourceName}}
+var mDescribeVodSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVodSourceResponse_AdBreakOpportunities, &sDescribeVodSourceResponse_Arn, &sDescribeVodSourceResponse_CreationTime, &sDescribeVodSourceResponse_HttpPackageConfigurations, &sDescribeVodSourceResponse_LastModifiedTime, &sDescribeVodSourceResponse_SourceLocationName, &sDescribeVodSourceResponse_Tags, &sDescribeVodSourceResponse_VodSourceName}}
+var mGetChannelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelPolicyRequest_ChannelName}}
+var mGetChannelPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelPolicyResponse_Policy}}
+var mGetChannelScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelScheduleRequest_ChannelName, &sGetChannelScheduleRequest_DurationMinutes, &sGetChannelScheduleRequest_MaxResults, &sGetChannelScheduleRequest_NextToken, &sGetChannelScheduleRequest_Audience}}
+var mGetChannelScheduleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelScheduleResponse_Items, &sGetChannelScheduleResponse_NextToken}}
+var mGetFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFunctionRequest_FunctionId}}
+var mGetFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFunctionResponse_FunctionId, &sGetFunctionResponse_FunctionType, &sGetFunctionResponse_Description, &sGetFunctionResponse_HttpRequestConfiguration, &sGetFunctionResponse_AwsServiceRequestConfiguration, &sGetFunctionResponse_CustomOutputConfiguration, &sGetFunctionResponse_ConcurrentExecutorConfiguration, &sGetFunctionResponse_SequentialExecutorConfiguration, &sGetFunctionResponse_VastRequestConfiguration, &sGetFunctionResponse_Tags, &sGetFunctionResponse_Arn}, Hash: &hGetFunctionResponse}
+var mGetPlaybackConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlaybackConfigurationRequest_Name}}
+var mGetPlaybackConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlaybackConfigurationResponse_AdDecisionServerUrl, &sGetPlaybackConfigurationResponse_AvailSuppression, &sGetPlaybackConfigurationResponse_Bumper, &sGetPlaybackConfigurationResponse_CdnConfiguration, &sGetPlaybackConfigurationResponse_ConfigurationAliases, &sGetPlaybackConfigurationResponse_DashConfiguration, &sGetPlaybackConfigurationResponse_HlsConfiguration, &sGetPlaybackConfigurationResponse_InsertionMode, &sGetPlaybackConfigurationResponse_LivePreRollConfiguration, &sGetPlaybackConfigurationResponse_LogConfiguration, &sGetPlaybackConfigurationResponse_ManifestProcessingRules, &sGetPlaybackConfigurationResponse_Name, &sGetPlaybackConfigurationResponse_PersonalizationThresholdSeconds, &sGetPlaybackConfigurationResponse_PlaybackConfigurationArn, &sGetPlaybackConfigurationResponse_PlaybackEndpointPrefix, &sGetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix, &sGetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix, &sGetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix, &sGetPlaybackConfigurationResponse_SlateAdUrl, &sGetPlaybackConfigurationResponse_Tags, &sGetPlaybackConfigurationResponse_TranscodeProfileName, &sGetPlaybackConfigurationResponse_VideoContentSourceUrl, &sGetPlaybackConfigurationResponse_AdConditioningConfiguration, &sGetPlaybackConfigurationResponse_AdDecisionServerConfiguration, &sGetPlaybackConfigurationResponse_YieldOptimizationConfiguration, &sGetPlaybackConfigurationResponse_FunctionMapping, &sGetPlaybackConfigurationResponse_AdsPersonalizationTimeouts, &sGetPlaybackConfigurationResponse_AdsPersonalizationConcurrency, &sGetPlaybackConfigurationResponse_BeaconingConfiguration}, Hash: &hGetPlaybackConfigurationResponse}
+var mGetPrefetchScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPrefetchScheduleRequest_Name, &sGetPrefetchScheduleRequest_PlaybackConfigurationName}}
+var mGetPrefetchScheduleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPrefetchScheduleResponse_Arn, &sGetPrefetchScheduleResponse_Consumption, &sGetPrefetchScheduleResponse_Name, &sGetPrefetchScheduleResponse_PlaybackConfigurationName, &sGetPrefetchScheduleResponse_Retrieval, &sGetPrefetchScheduleResponse_ScheduleType, &sGetPrefetchScheduleResponse_RecurringPrefetchConfiguration, &sGetPrefetchScheduleResponse_StreamId, &sGetPrefetchScheduleResponse_Tags}, Hash: &hGetPrefetchScheduleResponse}
+var mListAlertsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAlertsRequest_MaxResults, &sListAlertsRequest_NextToken, &sListAlertsRequest_ResourceArn}}
+var mListAlertsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAlertsResponse_Items, &sListAlertsResponse_NextToken}}
+var mListChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsRequest_MaxResults, &sListChannelsRequest_NextToken}}
+var mListChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsResponse_Items, &sListChannelsResponse_NextToken}}
+var mListFunctionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFunctionsRequest_MaxResults, &sListFunctionsRequest_NextToken}}
+var mListFunctionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFunctionsResponse_Items, &sListFunctionsResponse_NextToken}}
+var mListLiveSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLiveSourcesRequest_MaxResults, &sListLiveSourcesRequest_NextToken, &sListLiveSourcesRequest_SourceLocationName}}
+var mListLiveSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLiveSourcesResponse_Items, &sListLiveSourcesResponse_NextToken}}
+var mListPlaybackConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlaybackConfigurationsRequest_MaxResults, &sListPlaybackConfigurationsRequest_NextToken}}
+var mListPlaybackConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlaybackConfigurationsResponse_Items, &sListPlaybackConfigurationsResponse_NextToken}}
+var mListPrefetchSchedulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPrefetchSchedulesRequest_MaxResults, &sListPrefetchSchedulesRequest_NextToken, &sListPrefetchSchedulesRequest_PlaybackConfigurationName, &sListPrefetchSchedulesRequest_ScheduleType, &sListPrefetchSchedulesRequest_StreamId}}
+var mListPrefetchSchedulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPrefetchSchedulesResponse_Items, &sListPrefetchSchedulesResponse_NextToken}}
+var mListSourceLocationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceLocationsRequest_MaxResults, &sListSourceLocationsRequest_NextToken}}
+var mListSourceLocationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceLocationsResponse_Items, &sListSourceLocationsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListVodSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVodSourcesRequest_MaxResults, &sListVodSourcesRequest_NextToken, &sListVodSourcesRequest_SourceLocationName}}
+var mListVodSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVodSourcesResponse_Items, &sListVodSourcesResponse_NextToken}}
+var mPutChannelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutChannelPolicyRequest_ChannelName, &sPutChannelPolicyRequest_Policy}}
+var mPutFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutFunctionRequest_FunctionId, &sPutFunctionRequest_FunctionType, &sPutFunctionRequest_Description, &sPutFunctionRequest_HttpRequestConfiguration, &sPutFunctionRequest_AwsServiceRequestConfiguration, &sPutFunctionRequest_CustomOutputConfiguration, &sPutFunctionRequest_ConcurrentExecutorConfiguration, &sPutFunctionRequest_SequentialExecutorConfiguration, &sPutFunctionRequest_VastRequestConfiguration, &sPutFunctionRequest_Tags}, Hash: &hPutFunctionRequest}
+var mPutFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutFunctionResponse_FunctionId, &sPutFunctionResponse_FunctionType, &sPutFunctionResponse_Description, &sPutFunctionResponse_HttpRequestConfiguration, &sPutFunctionResponse_AwsServiceRequestConfiguration, &sPutFunctionResponse_CustomOutputConfiguration, &sPutFunctionResponse_ConcurrentExecutorConfiguration, &sPutFunctionResponse_SequentialExecutorConfiguration, &sPutFunctionResponse_VastRequestConfiguration, &sPutFunctionResponse_Tags, &sPutFunctionResponse_Arn}, Hash: &hPutFunctionResponse}
+var mPutPlaybackConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPlaybackConfigurationRequest_AdDecisionServerUrl, &sPutPlaybackConfigurationRequest_AvailSuppression, &sPutPlaybackConfigurationRequest_Bumper, &sPutPlaybackConfigurationRequest_CdnConfiguration, &sPutPlaybackConfigurationRequest_ConfigurationAliases, &sPutPlaybackConfigurationRequest_DashConfiguration, &sPutPlaybackConfigurationRequest_InsertionMode, &sPutPlaybackConfigurationRequest_LivePreRollConfiguration, &sPutPlaybackConfigurationRequest_ManifestProcessingRules, &sPutPlaybackConfigurationRequest_Name, &sPutPlaybackConfigurationRequest_PersonalizationThresholdSeconds, &sPutPlaybackConfigurationRequest_SlateAdUrl, &sPutPlaybackConfigurationRequest_Tags, &sPutPlaybackConfigurationRequest_TranscodeProfileName, &sPutPlaybackConfigurationRequest_VideoContentSourceUrl, &sPutPlaybackConfigurationRequest_AdConditioningConfiguration, &sPutPlaybackConfigurationRequest_AdDecisionServerConfiguration, &sPutPlaybackConfigurationRequest_YieldOptimizationConfiguration, &sPutPlaybackConfigurationRequest_FunctionMapping, &sPutPlaybackConfigurationRequest_AdsPersonalizationTimeouts, &sPutPlaybackConfigurationRequest_AdsPersonalizationConcurrency, &sPutPlaybackConfigurationRequest_BeaconingConfiguration}, Hash: &hPutPlaybackConfigurationRequest}
+var mPutPlaybackConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPlaybackConfigurationResponse_AdDecisionServerUrl, &sPutPlaybackConfigurationResponse_AvailSuppression, &sPutPlaybackConfigurationResponse_Bumper, &sPutPlaybackConfigurationResponse_CdnConfiguration, &sPutPlaybackConfigurationResponse_ConfigurationAliases, &sPutPlaybackConfigurationResponse_DashConfiguration, &sPutPlaybackConfigurationResponse_HlsConfiguration, &sPutPlaybackConfigurationResponse_InsertionMode, &sPutPlaybackConfigurationResponse_LivePreRollConfiguration, &sPutPlaybackConfigurationResponse_LogConfiguration, &sPutPlaybackConfigurationResponse_ManifestProcessingRules, &sPutPlaybackConfigurationResponse_Name, &sPutPlaybackConfigurationResponse_PersonalizationThresholdSeconds, &sPutPlaybackConfigurationResponse_PlaybackConfigurationArn, &sPutPlaybackConfigurationResponse_PlaybackEndpointPrefix, &sPutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix, &sPutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix, &sPutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix, &sPutPlaybackConfigurationResponse_SlateAdUrl, &sPutPlaybackConfigurationResponse_Tags, &sPutPlaybackConfigurationResponse_TranscodeProfileName, &sPutPlaybackConfigurationResponse_VideoContentSourceUrl, &sPutPlaybackConfigurationResponse_AdConditioningConfiguration, &sPutPlaybackConfigurationResponse_AdDecisionServerConfiguration, &sPutPlaybackConfigurationResponse_YieldOptimizationConfiguration, &sPutPlaybackConfigurationResponse_FunctionMapping, &sPutPlaybackConfigurationResponse_AdsPersonalizationTimeouts, &sPutPlaybackConfigurationResponse_AdsPersonalizationConcurrency, &sPutPlaybackConfigurationResponse_BeaconingConfiguration}, Hash: &hPutPlaybackConfigurationResponse}
+var mStartChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartChannelRequest_ChannelName}}
+var mStopChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopChannelRequest_ChannelName}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelRequest_ChannelName, &sUpdateChannelRequest_FillerSlate, &sUpdateChannelRequest_Outputs, &sUpdateChannelRequest_TimeShiftConfiguration, &sUpdateChannelRequest_Audiences}}
+var mUpdateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelResponse_Arn, &sUpdateChannelResponse_ChannelName, &sUpdateChannelResponse_ChannelState, &sUpdateChannelResponse_CreationTime, &sUpdateChannelResponse_FillerSlate, &sUpdateChannelResponse_LastModifiedTime, &sUpdateChannelResponse_Outputs, &sUpdateChannelResponse_PlaybackMode, &sUpdateChannelResponse_Tags, &sUpdateChannelResponse_Tier, &sUpdateChannelResponse_TimeShiftConfiguration, &sUpdateChannelResponse_Audiences}, Hash: &hUpdateChannelResponse}
+var mUpdateLiveSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLiveSourceRequest_HttpPackageConfigurations, &sUpdateLiveSourceRequest_LiveSourceName, &sUpdateLiveSourceRequest_SourceLocationName}}
+var mUpdateLiveSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLiveSourceResponse_Arn, &sUpdateLiveSourceResponse_CreationTime, &sUpdateLiveSourceResponse_HttpPackageConfigurations, &sUpdateLiveSourceResponse_LastModifiedTime, &sUpdateLiveSourceResponse_LiveSourceName, &sUpdateLiveSourceResponse_SourceLocationName, &sUpdateLiveSourceResponse_Tags}}
+var mUpdateProgramRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProgramRequest_AdBreaks, &sUpdateProgramRequest_ChannelName, &sUpdateProgramRequest_ProgramName, &sUpdateProgramRequest_ScheduleConfiguration, &sUpdateProgramRequest_AudienceMedia}}
+var mUpdateProgramResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProgramResponse_AdBreaks, &sUpdateProgramResponse_Arn, &sUpdateProgramResponse_ChannelName, &sUpdateProgramResponse_CreationTime, &sUpdateProgramResponse_ProgramName, &sUpdateProgramResponse_SourceLocationName, &sUpdateProgramResponse_VodSourceName, &sUpdateProgramResponse_LiveSourceName, &sUpdateProgramResponse_ClipRange, &sUpdateProgramResponse_DurationMillis, &sUpdateProgramResponse_ScheduledStartTime, &sUpdateProgramResponse_AudienceMedia, &sUpdateProgramResponse_Tags}, Hash: &hUpdateProgramResponse}
+var mUpdateSourceLocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSourceLocationRequest_AccessConfiguration, &sUpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration, &sUpdateSourceLocationRequest_HttpConfiguration, &sUpdateSourceLocationRequest_SegmentDeliveryConfigurations, &sUpdateSourceLocationRequest_SourceLocationName}}
+var mUpdateSourceLocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSourceLocationResponse_AccessConfiguration, &sUpdateSourceLocationResponse_Arn, &sUpdateSourceLocationResponse_CreationTime, &sUpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration, &sUpdateSourceLocationResponse_HttpConfiguration, &sUpdateSourceLocationResponse_LastModifiedTime, &sUpdateSourceLocationResponse_SegmentDeliveryConfigurations, &sUpdateSourceLocationResponse_SourceLocationName, &sUpdateSourceLocationResponse_Tags}, Hash: &hUpdateSourceLocationResponse}
+var mUpdateVodSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVodSourceRequest_HttpPackageConfigurations, &sUpdateVodSourceRequest_SourceLocationName, &sUpdateVodSourceRequest_VodSourceName}}
+var mUpdateVodSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVodSourceResponse_Arn, &sUpdateVodSourceResponse_CreationTime, &sUpdateVodSourceResponse_HttpPackageConfigurations, &sUpdateVodSourceResponse_LastModifiedTime, &sUpdateVodSourceResponse_SourceLocationName, &sUpdateVodSourceResponse_Tags, &sUpdateVodSourceResponse_VodSourceName}}
+
+var hAdsInteractionExcludeEventType = smithy.MemberHash{Seed: 18392, Slots: []uint16{
+	46, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 8, 25, 0, 0, 0, 0, 20, 48,
+	7, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 17, 24, 0, 13, 1, 0, 33, 41, 30, 0, 0, 0, 0,
+	0, 14, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 11, 22, 0, 19, 0, 2, 32, 0, 47, 34, 0, 0,
+	18, 0, 0, 0, 43, 0, 0, 0, 10, 0, 0, 0, 0, 9, 0, 0, 0, 16, 39, 0, 27, 23, 0, 26,
+	40, 0, 0, 12, 42, 28, 0, 0, 35, 0, 38, 0, 44, 45, 29, 0, 0, 31, 0, 0, 0, 0, 0, 0,
+	3, 0, 0, 21, 15, 0, 0, 37,
+}}
+var hAdsInteractionPublishOptInEventType = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 9, 0, 1, 0, 0, 0, 0, 4, 8, 0, 2, 0, 0, 0, 0, 7, 0, 0, 0, 10, 0,
+	0, 0, 0, 6, 0, 3, 0, 5,
+}}
+var hAwsServiceRequestConfiguration = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	8, 10, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 6, 9, 4, 0, 0, 3, 0, 0, 0, 0, 0, 0,
+	2, 0, 0, 0, 1, 0, 0, 5,
+}}
+var hChannel = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 2, 0, 5, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 9, 1, 0, 0, 11, 4, 0, 8,
+	0, 10, 0, 3, 6, 0, 12, 0,
+}}
+var hFunction = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	7, 0, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0, 9, 5, 0, 0, 0, 11, 4,
+	0, 0, 6, 0, 0, 0, 0, 0,
+}}
+var hManifestServiceExcludeEventType = smithy.MemberHash{Seed: 31, Slots: []uint16{
+	0, 8, 0, 0, 0, 9, 11, 0, 0, 16, 0, 0, 5, 0, 32, 28, 0, 0, 15, 0, 19, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 22, 0, 0, 0,
+	0, 4, 26, 0, 29, 0, 1, 0, 3, 0, 30, 0, 12, 0, 0, 23, 13, 0, 18, 0, 34, 17, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 2, 0, 0, 0, 0,
+	7, 0, 0, 6, 0, 0, 0, 0, 10, 0, 0, 0, 27, 0, 20, 0, 0, 0, 0, 24, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 31, 0,
+}}
+var hPlaybackConfiguration = smithy.MemberHash{Seed: 1662, Slots: []uint16{
+	0, 0, 0, 7, 2, 26, 0, 18, 28, 0, 0, 0, 0, 12, 13, 0, 0, 0, 0, 0, 0, 0, 0, 10,
+	16, 0, 0, 0, 27, 0, 11, 24, 22, 20, 0, 0, 0, 0, 8, 3, 17, 0, 0, 0, 5, 0, 0, 21,
+	19, 29, 0, 6, 15, 0, 1, 0, 9, 0, 14, 0, 0, 25, 23, 4,
+}}
+var hPrefetchSchedule = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 7, 3, 0, 0, 0, 0, 4, 5, 0, 0, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+	8, 0, 0, 0, 0, 2, 0, 9,
+}}
+var hScheduleEntry = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	9, 0, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 10, 5, 0, 11, 0, 0, 2, 0, 0, 0, 3, 0,
+	0, 0, 8, 0, 0, 6, 0, 7,
+}}
+var hSourceLocation = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 9, 0, 8, 6, 0, 0, 5, 0, 0, 2, 0,
+	0, 0, 0, 3, 0, 0, 0, 0,
+}}
+var hCreateChannelResponse = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 11, 0, 6, 12, 8, 0, 9, 0, 7, 0, 2, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0, 5,
+	0, 3, 4, 0, 0, 0, 0, 0,
+}}
+var hCreatePrefetchScheduleResponse = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 4, 5, 0, 0, 7, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+	8, 0, 0, 0, 0, 2, 0, 9,
+}}
+var hCreateProgramRequest = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 0, 0, 0, 7, 2, 0, 0, 6, 0, 0, 0, 0, 5, 0, 0, 0, 3, 0, 0, 0, 1, 0,
+	0, 4, 0, 0, 0, 9, 0, 8,
+}}
+var hCreateProgramResponse = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	5, 0, 4, 0, 12, 0, 0, 0, 0, 0, 0, 2, 0, 0, 11, 0, 0, 3, 0, 0, 1, 0, 0, 0,
+	8, 9, 13, 0, 6, 0, 7, 10,
+}}
+var hCreateSourceLocationResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 9, 0, 8, 6, 0, 0, 5, 0, 0, 2, 0,
+	0, 0, 0, 3, 0, 0, 0, 0,
+}}
+var hDescribeChannelResponse = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	11, 0, 12, 0, 6, 13, 8, 0, 9, 0, 7, 0, 2, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0, 5,
+	0, 3, 4, 0, 0, 0, 0, 0,
+}}
+var hDescribeProgramResponse = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	5, 0, 4, 0, 12, 0, 0, 0, 0, 0, 0, 2, 0, 0, 11, 0, 0, 3, 0, 0, 1, 0, 0, 0,
+	8, 9, 13, 0, 6, 0, 7, 10,
+}}
+var hDescribeSourceLocationResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 9, 0, 8, 6, 0, 0, 5, 0, 0, 2, 0,
+	0, 0, 0, 3, 0, 0, 0, 0,
+}}
+var hGetFunctionResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	7, 0, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0, 9, 5, 0, 0, 0, 11, 4,
+	0, 0, 6, 0, 0, 0, 0, 0,
+}}
+var hGetPlaybackConfigurationResponse = smithy.MemberHash{Seed: 1662, Slots: []uint16{
+	0, 0, 0, 7, 2, 26, 0, 18, 28, 0, 0, 0, 0, 12, 13, 0, 0, 0, 0, 0, 0, 0, 0, 10,
+	16, 0, 0, 0, 27, 0, 11, 24, 22, 20, 0, 0, 0, 0, 8, 3, 17, 0, 0, 0, 5, 0, 0, 21,
+	19, 29, 0, 6, 15, 0, 1, 0, 9, 0, 14, 0, 0, 25, 23, 4,
+}}
+var hGetPrefetchScheduleResponse = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 7, 3, 0, 0, 0, 0, 4, 5, 0, 0, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+	8, 0, 0, 0, 0, 2, 0, 9,
+}}
+var hPutFunctionRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	7, 0, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0, 9, 5, 0, 0, 0, 0, 4,
+	0, 0, 6, 0, 0, 0, 0, 0,
+}}
+var hPutFunctionResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	7, 0, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0, 9, 5, 0, 0, 0, 11, 4,
+	0, 0, 6, 0, 0, 0, 0, 0,
+}}
+var hPutPlaybackConfigurationRequest = smithy.MemberHash{Seed: 133, Slots: []uint16{
+	0, 0, 0, 21, 0, 1, 0, 19, 0, 0, 13, 9, 0, 0, 0, 4, 0, 6, 14, 0, 22, 0, 0, 0,
+	8, 0, 0, 0, 2, 0, 0, 0, 20, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 15, 0,
+	0, 5, 16, 18, 10, 17, 0, 0, 0, 0, 0, 3, 0, 0, 12, 0,
+}}
+var hPutPlaybackConfigurationResponse = smithy.MemberHash{Seed: 1662, Slots: []uint16{
+	0, 0, 0, 7, 2, 26, 0, 18, 28, 0, 0, 0, 0, 12, 13, 0, 0, 0, 0, 0, 0, 0, 0, 10,
+	16, 0, 0, 0, 27, 0, 11, 24, 22, 20, 0, 0, 0, 0, 8, 3, 17, 0, 0, 0, 5, 0, 0, 21,
+	19, 29, 0, 6, 15, 0, 1, 0, 9, 0, 14, 0, 0, 25, 23, 4,
+}}
+var hUpdateChannelResponse = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 11, 0, 6, 12, 8, 0, 9, 0, 7, 0, 2, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0, 5,
+	0, 3, 4, 0, 0, 0, 0, 0,
+}}
+var hUpdateProgramResponse = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	8, 0, 4, 0, 12, 0, 0, 0, 0, 0, 0, 2, 0, 0, 10, 0, 0, 3, 0, 0, 1, 0, 0, 0,
+	6, 7, 13, 0, 5, 0, 11, 9,
+}}
+var hUpdateSourceLocationResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 9, 0, 8, 6, 0, 0, 5, 0, 0, 2, 0,
+	0, 0, 0, 3, 0, 0, 0, 0,
+}}
+
+var sConfigureLogsForChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsForChannel, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eConfigureLogsForChannel})
+var sConfigureLogsForPlaybackConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsForPlaybackConfiguration, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eConfigureLogsForPlaybackConfiguration})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannel})
+var sCreateLiveSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLiveSource, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateLiveSource})
+var sCreatePrefetchSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrefetchSchedule, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreatePrefetchSchedule})
+var sCreateProgram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgram, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateProgram})
+var sCreateSourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceLocation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateSourceLocation})
+var sCreateVodSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVodSource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateVodSource})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannel})
+var sDeleteChannelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelPolicy, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannelPolicy})
+var sDeleteFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFunction, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFunction})
+var sDeleteLiveSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLiveSource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLiveSource})
+var sDeletePlaybackConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeletePlaybackConfiguration})
+var sDeletePrefetchSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePrefetchSchedule, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeletePrefetchSchedule})
+var sDeleteProgram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgram, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProgram})
+var sDeleteSourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceLocation, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSourceLocation})
+var sDeleteVodSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVodSource, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVodSource})
+var sDescribeChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannel, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannel})
+var sDescribeLiveSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLiveSource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLiveSource})
+var sDescribeProgram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProgram, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDescribeProgram})
+var sDescribeSourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceLocation, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSourceLocation})
+var sDescribeVodSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVodSource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVodSource})
+var sGetChannelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelPolicy, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eGetChannelPolicy})
+var sGetChannelSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelSchedule, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetChannelSchedule})
+var sGetFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFunction, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetFunction})
+var sGetPlaybackConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackConfiguration, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetPlaybackConfiguration})
+var sGetPrefetchSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrefetchSchedule, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetPrefetchSchedule})
+var sListAlerts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAlerts, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eListAlerts})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListChannels})
+var sListFunctions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFunctions, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eListFunctions})
+var sListLiveSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLiveSources, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListLiveSources})
+var sListPlaybackConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackConfigurations, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListPlaybackConfigurations})
+var sListPrefetchSchedules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrefetchSchedules, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eListPrefetchSchedules})
+var sListSourceLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceLocations, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListSourceLocations})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListVodSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVodSources, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListVodSources})
+var sPutChannelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelPolicy, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &ePutChannelPolicy})
+var sPutFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFunction, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &ePutFunction})
+var sPutPlaybackConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPlaybackConfiguration, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &ePutPlaybackConfiguration})
+var sStartChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChannel, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eStartChannel})
+var sStopChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopChannel, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eStopChannel})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannel})
+var sUpdateLiveSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLiveSource, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLiveSource})
+var sUpdateProgram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgram, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProgram})
+var sUpdateSourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSourceLocation, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSourceLocation})
+var sUpdateVodSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVodSource, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVodSource})
+var s_MediaTailor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaTailor, Type: smithy.ShapeTypeService, Ext: &e_MediaTailor})
+var s___adsInteractionExcludeEventTypesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___adsInteractionExcludeEventTypesList, Members: &m___adsInteractionExcludeEventTypesList, Type: smithy.ShapeTypeList, Ext: &e___adsInteractionExcludeEventTypesList})
+var s___adsInteractionExcludeEventTypesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdsInteractionExcludeEventType, Members: &mAdsInteractionExcludeEventType, Type: smithy.ShapeTypeEnum, Ext: &e___adsInteractionExcludeEventTypesList_member})
+var s___adsInteractionPublishOptInEventTypesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___adsInteractionPublishOptInEventTypesList, Members: &m___adsInteractionPublishOptInEventTypesList, Type: smithy.ShapeTypeList, Ext: &e___adsInteractionPublishOptInEventTypesList})
+var s___adsInteractionPublishOptInEventTypesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdsInteractionPublishOptInEventType, Members: &mAdsInteractionPublishOptInEventType, Type: smithy.ShapeTypeEnum, Ext: &e___adsInteractionPublishOptInEventTypesList_member})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &e___boolean})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &e___integer})
+var s___integerMin1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1})
+var s___integerMin1Max100 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1Max100, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1Max100})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &e___listOf__string})
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___listOf__string_member})
+var s___listOfAdBreak = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfAdBreak, Members: &m___listOfAdBreak, Type: smithy.ShapeTypeList, Ext: &e___listOfAdBreak})
+var s___listOfAdBreak_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdBreak, Members: &mAdBreak, Type: smithy.ShapeTypeStructure, Ext: &e___listOfAdBreak_member})
+var s___listOfAlert = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfAlert, Members: &m___listOfAlert, Type: smithy.ShapeTypeList, Ext: &e___listOfAlert})
+var s___listOfAlert_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlert, Members: &mAlert, Type: smithy.ShapeTypeStructure, Ext: &e___listOfAlert_member})
+var s___listOfAlternateMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfAlternateMedia, Members: &m___listOfAlternateMedia, Type: smithy.ShapeTypeList, Ext: &e___listOfAlternateMedia})
+var s___listOfAlternateMedia_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlternateMedia, Members: &mAlternateMedia, Type: smithy.ShapeTypeStructure, Ext: &e___listOfAlternateMedia_member})
+var s___listOfAudienceMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfAudienceMedia, Members: &m___listOfAudienceMedia, Type: smithy.ShapeTypeList, Ext: &e___listOfAudienceMedia})
+var s___listOfAudienceMedia_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAudienceMedia, Members: &mAudienceMedia, Type: smithy.ShapeTypeStructure, Ext: &e___listOfAudienceMedia_member})
+var s___listOfAvailMatchingCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfAvailMatchingCriteria, Members: &m___listOfAvailMatchingCriteria, Type: smithy.ShapeTypeList, Ext: &e___listOfAvailMatchingCriteria})
+var s___listOfAvailMatchingCriteria_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailMatchingCriteria, Members: &mAvailMatchingCriteria, Type: smithy.ShapeTypeStructure, Ext: &e___listOfAvailMatchingCriteria_member})
+var s___listOfChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfChannel, Members: &m___listOfChannel, Type: smithy.ShapeTypeList, Ext: &e___listOfChannel})
+var s___listOfChannel_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &e___listOfChannel_member})
+var s___listOfFunctionsRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfFunctionsRef, Members: &m___listOfFunctionsRef, Type: smithy.ShapeTypeList, Ext: &e___listOfFunctionsRef})
+var s___listOfFunctionsRef_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFunctionRef, Members: &mFunctionRef, Type: smithy.ShapeTypeStructure, Ext: &e___listOfFunctionsRef_member})
+var s___listOfFunctionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfFunctionsResponse, Members: &m___listOfFunctionsResponse, Type: smithy.ShapeTypeList, Ext: &e___listOfFunctionsResponse})
+var s___listOfFunctionsResponse_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFunction, Members: &mFunction, Type: smithy.ShapeTypeStructure, Ext: &e___listOfFunctionsResponse_member})
+var s___listOfLiveSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfLiveSource, Members: &m___listOfLiveSource, Type: smithy.ShapeTypeList, Ext: &e___listOfLiveSource})
+var s___listOfLiveSource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLiveSource, Members: &mLiveSource, Type: smithy.ShapeTypeStructure, Ext: &e___listOfLiveSource_member})
+var s___listOfLoggingStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfLoggingStrategies, Members: &m___listOfLoggingStrategies, Type: smithy.ShapeTypeList, Ext: &e___listOfLoggingStrategies})
+var s___listOfLoggingStrategies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoggingStrategy, Members: &mLoggingStrategy, Type: smithy.ShapeTypeEnum, Ext: &e___listOfLoggingStrategies_member})
+var s___listOfPlaybackConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPlaybackConfiguration, Members: &m___listOfPlaybackConfiguration, Type: smithy.ShapeTypeList, Ext: &e___listOfPlaybackConfiguration})
+var s___listOfPlaybackConfiguration_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlaybackConfiguration, Members: &mPlaybackConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e___listOfPlaybackConfiguration_member})
+var s___listOfPrefetchSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPrefetchSchedule, Members: &m___listOfPrefetchSchedule, Type: smithy.ShapeTypeList, Ext: &e___listOfPrefetchSchedule})
+var s___listOfPrefetchSchedule_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPrefetchSchedule, Members: &mPrefetchSchedule, Type: smithy.ShapeTypeStructure, Ext: &e___listOfPrefetchSchedule_member})
+var s___listOfScheduleAdBreak = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfScheduleAdBreak, Members: &m___listOfScheduleAdBreak, Type: smithy.ShapeTypeList, Ext: &e___listOfScheduleAdBreak})
+var s___listOfScheduleAdBreak_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduleAdBreak, Members: &mScheduleAdBreak, Type: smithy.ShapeTypeStructure, Ext: &e___listOfScheduleAdBreak_member})
+var s___listOfScheduleEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfScheduleEntry, Members: &m___listOfScheduleEntry, Type: smithy.ShapeTypeList, Ext: &e___listOfScheduleEntry})
+var s___listOfScheduleEntry_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduleEntry, Members: &mScheduleEntry, Type: smithy.ShapeTypeStructure, Ext: &e___listOfScheduleEntry_member})
+var s___listOfSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSegmentDeliveryConfiguration, Members: &m___listOfSegmentDeliveryConfiguration, Type: smithy.ShapeTypeList, Ext: &e___listOfSegmentDeliveryConfiguration})
+var s___listOfSegmentDeliveryConfiguration_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSegmentDeliveryConfiguration, Members: &mSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e___listOfSegmentDeliveryConfiguration_member})
+var s___listOfSourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSourceLocation, Members: &m___listOfSourceLocation, Type: smithy.ShapeTypeList, Ext: &e___listOfSourceLocation})
+var s___listOfSourceLocation_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceLocation, Members: &mSourceLocation, Type: smithy.ShapeTypeStructure, Ext: &e___listOfSourceLocation_member})
+var s___listOfVodSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfVodSource, Members: &m___listOfVodSource, Type: smithy.ShapeTypeList, Ext: &e___listOfVodSource})
+var s___listOfVodSource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVodSource, Members: &mVodSource, Type: smithy.ShapeTypeStructure, Ext: &e___listOfVodSource_member})
+var s___long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &e___long})
+var s___manifestServiceExcludeEventTypesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___manifestServiceExcludeEventTypesList, Members: &m___manifestServiceExcludeEventTypesList, Type: smithy.ShapeTypeList, Ext: &e___manifestServiceExcludeEventTypesList})
+var s___manifestServiceExcludeEventTypesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManifestServiceExcludeEventType, Members: &mManifestServiceExcludeEventType, Type: smithy.ShapeTypeEnum, Ext: &e___manifestServiceExcludeEventTypesList_member})
+var s___manifestServicePublishOptInEventTypesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___manifestServicePublishOptInEventTypesList, Members: &m___manifestServicePublishOptInEventTypesList, Type: smithy.ShapeTypeList, Ext: &e___manifestServicePublishOptInEventTypesList})
+var s___manifestServicePublishOptInEventTypesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManifestServicePublishOptInEventType, Members: &mManifestServicePublishOptInEventType, Type: smithy.ShapeTypeEnum, Ext: &e___manifestServicePublishOptInEventTypesList_member})
+var s___mapOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &e___mapOf__string})
+var s___mapOf__string_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_key})
+var s___mapOf__string_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_value})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var s___timestampUnix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampUnix, Traits: &t48, Type: smithy.ShapeTypeTimestamp, Ext: &e___timestampUnix})
+var sAccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessConfiguration, Members: &mAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAccessConfiguration})
+var sAccessConfiguration_AccessType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessType", ID: &iAccessType, Members: &mAccessType, Type: smithy.ShapeTypeEnum, Ext: &eAccessConfiguration_AccessType})
+var sAccessConfiguration_SecretsManagerAccessTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerAccessTokenConfiguration", ID: &iSecretsManagerAccessTokenConfiguration, Members: &mSecretsManagerAccessTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAccessConfiguration_SecretsManagerAccessTokenConfiguration})
+var sAccessType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessType, Members: &mAccessType, Type: smithy.ShapeTypeEnum, Ext: &eAccessType})
+var sAccessType_S3_SIGV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_SIGV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessType_S3_SIGV4})
+var sAccessType_SECRETS_MANAGER_ACCESS_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER_ACCESS_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessType_SECRETS_MANAGER_ACCESS_TOKEN})
+var sAccessType_AUTODETECT_SIGV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTODETECT_SIGV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessType_AUTODETECT_SIGV4})
+var sAdBreak = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdBreak, Members: &mAdBreak, Type: smithy.ShapeTypeStructure, Ext: &eAdBreak})
+var sAdBreak_MessageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageType", ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &eAdBreak_MessageType})
+var sAdBreak_OffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffsetMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eAdBreak_OffsetMillis})
+var sAdBreak_Slate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slate", ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eAdBreak_Slate})
+var sAdBreak_SpliceInsertMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpliceInsertMessage", ID: &iSpliceInsertMessage, Members: &mSpliceInsertMessage, Type: smithy.ShapeTypeStructure, Ext: &eAdBreak_SpliceInsertMessage})
+var sAdBreak_TimeSignalMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSignalMessage", ID: &iTimeSignalMessage, Members: &mTimeSignalMessage, Type: smithy.ShapeTypeStructure, Ext: &eAdBreak_TimeSignalMessage})
+var sAdBreak_AdBreakMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreakMetadata", ID: &i_AdBreakMetadataList, Members: &m_AdBreakMetadataList, Type: smithy.ShapeTypeList, Ext: &eAdBreak_AdBreakMetadata})
+var s_AdBreakMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdBreakMetadataList, Members: &m_AdBreakMetadataList, Type: smithy.ShapeTypeList, Ext: &e_AdBreakMetadataList})
+var s_AdBreakMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyValuePair, Members: &mKeyValuePair, Type: smithy.ShapeTypeStructure, Ext: &e_AdBreakMetadataList_member})
+var s_AdBreakOpportunities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdBreakOpportunities, Members: &m_AdBreakOpportunities, Type: smithy.ShapeTypeList, Ext: &e_AdBreakOpportunities})
+var s_AdBreakOpportunities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdBreakOpportunity, Members: &mAdBreakOpportunity, Type: smithy.ShapeTypeStructure, Ext: &e_AdBreakOpportunities_member})
+var sAdBreakOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdBreakOpportunity, Members: &mAdBreakOpportunity, Type: smithy.ShapeTypeStructure, Ext: &eAdBreakOpportunity})
+var sAdBreakOpportunity_OffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffsetMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eAdBreakOpportunity_OffsetMillis})
+var sAdConditioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdConditioningConfiguration, Members: &mAdConditioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAdConditioningConfiguration})
+var sAdConditioningConfiguration_StreamingMediaFileConditioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingMediaFileConditioning", ID: &iStreamingMediaFileConditioning, Members: &mStreamingMediaFileConditioning, Type: smithy.ShapeTypeEnum, Ext: &eAdConditioningConfiguration_StreamingMediaFileConditioning})
+var sAdDecisionServerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdDecisionServerConfiguration, Members: &mAdDecisionServerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAdDecisionServerConfiguration})
+var sAdDecisionServerConfiguration_HttpRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpRequest", ID: &iHttpRequest, Members: &mHttpRequest, Type: smithy.ShapeTypeStructure, Ext: &eAdDecisionServerConfiguration_HttpRequest})
+var sAdDecisionServerConfiguration_VastResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VastResponse", ID: &iVastResponse, Members: &mVastResponse, Type: smithy.ShapeTypeStructure, Ext: &eAdDecisionServerConfiguration_VastResponse})
+var sAdMarkerPassthrough = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdMarkerPassthrough, Members: &mAdMarkerPassthrough, Type: smithy.ShapeTypeStructure, Ext: &eAdMarkerPassthrough})
+var sAdMarkerPassthrough_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdMarkerPassthrough_Enabled})
+var sAdMarkupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdMarkupType, Members: &mAdMarkupType, Type: smithy.ShapeTypeEnum, Ext: &eAdMarkupType})
+var sAdMarkupType_DATERANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATERANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdMarkupType_DATERANGE})
+var sAdMarkupType_SCTE35_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCTE35_ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdMarkupType_SCTE35_ENHANCED})
+var s_adMarkupTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_adMarkupTypes, Members: &m_adMarkupTypes, Type: smithy.ShapeTypeList, Ext: &e_adMarkupTypes})
+var s_adMarkupTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdMarkupType, Members: &mAdMarkupType, Type: smithy.ShapeTypeEnum, Ext: &e_adMarkupTypes_member})
+var sAdSequencingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdSequencingMode, Members: &mAdSequencingMode, Type: smithy.ShapeTypeEnum, Ext: &eAdSequencingMode})
+var sAdSequencingMode_FOLLOW_AD_SEQUENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOLLOW_AD_SEQUENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdSequencingMode_FOLLOW_AD_SEQUENCE})
+var sAdSequencingMode_IGNORE_AD_SEQUENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE_AD_SEQUENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdSequencingMode_IGNORE_AD_SEQUENCE})
+var sAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOLLOW_AD_SEQUENCE_ONLY_LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE})
+var sAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOLLOW_AD_SEQUENCE_ONLY_VOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD})
+var sAdsInteractionExcludeEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdsInteractionExcludeEventType, Members: &mAdsInteractionExcludeEventType, Type: smithy.ShapeTypeEnum, Ext: &eAdsInteractionExcludeEventType})
+var sAdsInteractionExcludeEventType_AD_MARKER_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AD_MARKER_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_AD_MARKER_FOUND})
+var sAdsInteractionExcludeEventType_NON_AD_MARKER_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_AD_MARKER_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_NON_AD_MARKER_FOUND})
+var sAdsInteractionExcludeEventType_MAKING_ADS_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAKING_ADS_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_MAKING_ADS_REQUEST})
+var sAdsInteractionExcludeEventType_MODIFIED_TARGET_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFIED_TARGET_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_MODIFIED_TARGET_URL})
+var sAdsInteractionExcludeEventType_VAST_REDIRECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VAST_REDIRECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_VAST_REDIRECT})
+var sAdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMPTY_VAST_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE})
+var sAdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMPTY_VMAP_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE})
+var sAdsInteractionExcludeEventType_VAST_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VAST_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_VAST_RESPONSE})
+var sAdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDIRECTED_VAST_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE})
+var sAdsInteractionExcludeEventType_FILLED_AVAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILLED_AVAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_FILLED_AVAIL})
+var sAdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILLED_OVERLAY_AVAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL})
+var sAdsInteractionExcludeEventType_BEACON_FIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEACON_FIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_BEACON_FIRED})
+var sAdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARNING_NO_ADVERTISEMENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS})
+var sAdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARNING_VPAID_AD_DROPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED})
+var sAdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED})
+var sAdsInteractionExcludeEventType_ERROR_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_UNKNOWN})
+var sAdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_UNKNOWN_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST})
+var sAdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_DISALLOWED_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST})
+var sAdsInteractionExcludeEventType_ERROR_ADS_IO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ADS_IO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_ADS_IO})
+var sAdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ADS_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT})
+var sAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ADS_RESPONSE_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE})
+var sAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT})
+var sAdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ADS_INVALID_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE})
+var sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE})
+var sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_REDIRECT_MULTIPLE_VAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST})
+var sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_REDIRECT_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED})
+var sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_MISSING_MEDIAFILES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES})
+var sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_MISSING_CREATIVES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES})
+var sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_MISSING_OVERLAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS})
+var sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_MISSING_IMPRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION})
+var sAdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_INVALID_VAST_AD_TAG_URI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI})
+var sAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS})
+var sAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_MULTIPLE_LINEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR})
+var sAdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_VAST_INVALID_MEDIA_FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE})
+var sAdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_FIRING_BEACON_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED})
+var sAdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_PERSONALIZATION_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED})
+var sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET})
+var sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS})
+var sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS})
+var sAdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSTITIAL_VOD_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS})
+var sAdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSTITIAL_VOD_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE})
+var sAdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_ADS_REQUEST_HOOK_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR})
+var sAdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_ADS_REQUEST_FUNCTION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR})
+var sAdsInteractionExcludeEventType_BEACON_RECEIVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEACON_RECEIVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_BEACON_RECEIVED})
+var sAdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_ADS_RESPONSE_HOOK_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR})
+var sAdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_ADS_RESPONSE_FUNCTION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR})
+var sAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_MANIFEST_INSERTION_HOOK_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR})
+var sAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_MANIFEST_INSERTION_FUNCTION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR})
+var sAdsInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdsInteractionLog, Members: &mAdsInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionLog})
+var sAdsInteractionLog_PublishOptInEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishOptInEventTypes", ID: &i___adsInteractionPublishOptInEventTypesList, Members: &m___adsInteractionPublishOptInEventTypesList, Type: smithy.ShapeTypeList, Ext: &eAdsInteractionLog_PublishOptInEventTypes})
+var sAdsInteractionLog_ExcludeEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeEventTypes", ID: &i___adsInteractionExcludeEventTypesList, Members: &m___adsInteractionExcludeEventTypesList, Type: smithy.ShapeTypeList, Ext: &eAdsInteractionLog_ExcludeEventTypes})
+var sAdsInteractionPublishOptInEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdsInteractionPublishOptInEventType, Members: &mAdsInteractionPublishOptInEventType, Type: smithy.ShapeTypeEnum, Ext: &eAdsInteractionPublishOptInEventType})
+var sAdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW_ADS_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE})
+var sAdsInteractionPublishOptInEventType_RAW_ADS_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW_ADS_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_RAW_ADS_REQUEST})
+var sAdsInteractionPublishOptInEventType_RAW_BID_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW_BID_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_RAW_BID_REQUEST})
+var sAdsInteractionPublishOptInEventType_RAW_BID_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW_BID_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_RAW_BID_RESPONSE})
+var sAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_ADS_REQUEST_HOOK_SUMMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY})
+var sAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_ADS_REQUEST_FUNCTION_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED})
+var sAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_ADS_RESPONSE_HOOK_SUMMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY})
+var sAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_ADS_RESPONSE_FUNCTION_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED})
+var sAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_MANIFEST_INSERTION_HOOK_SUMMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY})
+var sAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED})
+var sAdsPersonalizationConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdsPersonalizationConcurrency, Members: &mAdsPersonalizationConcurrency, Type: smithy.ShapeTypeStructure, Ext: &eAdsPersonalizationConcurrency})
+var sAdsPersonalizationConcurrency_MaxConcurrentAdsRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrentAdsRequests", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAdsPersonalizationConcurrency_MaxConcurrentAdsRequests})
+var sAdsPersonalizationConcurrency_EnableVodVastParallelization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableVodVastParallelization", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdsPersonalizationConcurrency_EnableVodVastParallelization})
+var sAdsPersonalizationTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdsPersonalizationTimeouts, Members: &mAdsPersonalizationTimeouts, Type: smithy.ShapeTypeStructure, Ext: &eAdsPersonalizationTimeouts})
+var sAdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsRequestTimeoutMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds})
+var sAdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveMaximumAdsPersonalizationTimeMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds})
+var sAdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodMaximumAdsPersonalizationTimeMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds})
+var sAdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefetchAdsRequestTimeoutMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds})
+var sAdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefetchMaximumAdsPersonalizationTimeMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds})
+var sAlert = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlert, Members: &mAlert, Type: smithy.ShapeTypeStructure, Ext: &eAlert})
+var sAlert_AlertCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlertCode", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAlert_AlertCode})
+var sAlert_AlertMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlertMessage", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAlert_AlertMessage})
+var sAlert_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eAlert_LastModifiedTime})
+var sAlert_RelatedResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedResourceArns", ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &eAlert_RelatedResourceArns})
+var sAlert_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAlert_ResourceArn})
+var sAlert_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iAlertCategory, Members: &mAlertCategory, Type: smithy.ShapeTypeEnum, Ext: &eAlert_Category})
+var sAlertCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlertCategory, Members: &mAlertCategory, Type: smithy.ShapeTypeEnum, Ext: &eAlertCategory})
+var sAlertCategory_SCHEDULING_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULING_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlertCategory_SCHEDULING_ERROR})
+var sAlertCategory_PLAYBACK_WARNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAYBACK_WARNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlertCategory_PLAYBACK_WARNING})
+var sAlertCategory_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlertCategory_INFO})
+var sAlternateMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlternateMedia, Members: &mAlternateMedia, Type: smithy.ShapeTypeStructure, Ext: &eAlternateMedia})
+var sAlternateMedia_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAlternateMedia_SourceLocationName})
+var sAlternateMedia_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAlternateMedia_LiveSourceName})
+var sAlternateMedia_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAlternateMedia_VodSourceName})
+var sAlternateMedia_ClipRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipRange", ID: &iClipRange, Members: &mClipRange, Type: smithy.ShapeTypeStructure, Ext: &eAlternateMedia_ClipRange})
+var sAlternateMedia_ScheduledStartTimeMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledStartTimeMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eAlternateMedia_ScheduledStartTimeMillis})
+var sAlternateMedia_AdBreaks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreaks", ID: &i___listOfAdBreak, Members: &m___listOfAdBreak, Type: smithy.ShapeTypeList, Ext: &eAlternateMedia_AdBreaks})
+var sAlternateMedia_DurationMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eAlternateMedia_DurationMillis})
+var s_ApsPublisherId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApsPublisherId, Type: smithy.ShapeTypeString, Ext: &e_ApsPublisherId})
+var sApsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApsRegion, Members: &mApsRegion, Type: smithy.ShapeTypeEnum, Ext: &eApsRegion})
+var sApsRegion_AMERICAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMERICAS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApsRegion_AMERICAS})
+var sApsRegion_EUROPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EUROPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApsRegion_EUROPE})
+var sApsRegion_ASIA_PACIFIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASIA_PACIFIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApsRegion_ASIA_PACIFIC})
+var sAudienceMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceMedia, Members: &mAudienceMedia, Type: smithy.ShapeTypeStructure, Ext: &eAudienceMedia})
+var sAudienceMedia_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAudienceMedia_Audience})
+var sAudienceMedia_AlternateMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateMedia", ID: &i___listOfAlternateMedia, Members: &m___listOfAlternateMedia, Type: smithy.ShapeTypeList, Ext: &eAudienceMedia_AlternateMedia})
+var s_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &e_Audiences})
+var s_Audiences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Audiences_member})
+var sAvailMatchingCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailMatchingCriteria, Members: &mAvailMatchingCriteria, Type: smithy.ShapeTypeStructure, Ext: &eAvailMatchingCriteria})
+var sAvailMatchingCriteria_DynamicVariable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicVariable", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAvailMatchingCriteria_DynamicVariable})
+var sAvailMatchingCriteria_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eAvailMatchingCriteria_Operator})
+var sAvailSuppression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailSuppression, Members: &mAvailSuppression, Type: smithy.ShapeTypeStructure, Ext: &eAvailSuppression})
+var sAvailSuppression_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iMode, Members: &mMode, Type: smithy.ShapeTypeEnum, Ext: &eAvailSuppression_Mode})
+var sAvailSuppression_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAvailSuppression_Value})
+var sAvailSuppression_FillPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FillPolicy", ID: &iFillPolicy, Members: &mFillPolicy, Type: smithy.ShapeTypeEnum, Ext: &eAvailSuppression_FillPolicy})
+var sAwsServiceRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsServiceRequestConfiguration, Members: &mAwsServiceRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAwsServiceRequestConfiguration})
+var sAwsServiceRequestConfiguration_Runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Runtime", ID: &iRuntimeType, Members: &mRuntimeType, Type: smithy.ShapeTypeEnum, Ext: &eAwsServiceRequestConfiguration_Runtime})
+var sAwsServiceRequestConfiguration_Output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Output", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eAwsServiceRequestConfiguration_Output})
+var sAwsServiceRequestConfiguration_MethodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MethodType", ID: &iMethodType, Members: &mMethodType, Type: smithy.ShapeTypeEnum, Ext: &eAwsServiceRequestConfiguration_MethodType})
+var sAwsServiceRequestConfiguration_RequestTimeoutMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTimeoutMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAwsServiceRequestConfiguration_RequestTimeoutMilliseconds})
+var sAwsServiceRequestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAwsServiceRequestConfiguration_Url})
+var sAwsServiceRequestConfiguration_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAwsServiceRequestConfiguration_Body})
+var sAwsServiceRequestConfiguration_Headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Headers", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eAwsServiceRequestConfiguration_Headers})
+var sAwsServiceRequestConfiguration_Cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cache", ID: &iHttpRequestCacheConfiguration, Members: &mHttpRequestCacheConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAwsServiceRequestConfiguration_Cache})
+var sAwsServiceRequestConfiguration_TargetService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetService", ID: &i_AwsTargetService, Type: smithy.ShapeTypeString, Ext: &eAwsServiceRequestConfiguration_TargetService})
+var sAwsServiceRequestConfiguration_TargetRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetRegion", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eAwsServiceRequestConfiguration_TargetRegion})
+var s_AwsTargetService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsTargetService, Type: smithy.ShapeTypeString, Ext: &e_AwsTargetService})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sBeaconEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeaconEventType, Members: &mBeaconEventType, Type: smithy.ShapeTypeEnum, Ext: &eBeaconEventType})
+var sBeaconEventType_MUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBeaconEventType_MUTE})
+var sBeaconEventType_UNMUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNMUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBeaconEventType_UNMUTE})
+var sBeaconEventType_PAUSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAUSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBeaconEventType_PAUSE})
+var sBeaconEventType_SKIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBeaconEventType_SKIP})
+var s_BeaconEventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BeaconEventTypeList, Members: &m_BeaconEventTypeList, Type: smithy.ShapeTypeList, Ext: &e_BeaconEventTypeList})
+var s_BeaconEventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBeaconEventType, Members: &mBeaconEventType, Type: smithy.ShapeTypeEnum, Ext: &e_BeaconEventTypeList_member})
+var sBeaconingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeaconingConfiguration, Members: &mBeaconingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eBeaconingConfiguration})
+var sBeaconingConfiguration_ClientSide = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSide", ID: &iClientSideBeaconingConfiguration, Members: &mClientSideBeaconingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eBeaconingConfiguration_ClientSide})
+var sBumper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBumper, Members: &mBumper, Type: smithy.ShapeTypeStructure, Ext: &eBumper})
+var sBumper_EndUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eBumper_EndUrl})
+var sBumper_StartUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eBumper_StartUrl})
+var sCdnConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCdnConfiguration, Members: &mCdnConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCdnConfiguration})
+var sCdnConfiguration_AdSegmentUrlPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdSegmentUrlPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCdnConfiguration_AdSegmentUrlPrefix})
+var sCdnConfiguration_ContentSegmentUrlPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentSegmentUrlPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCdnConfiguration_ContentSegmentUrlPrefix})
+var sChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eChannel})
+var sChannel_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eChannel_Arn})
+var sChannel_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eChannel_ChannelName})
+var sChannel_ChannelState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelState", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eChannel_ChannelState})
+var sChannel_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eChannel_CreationTime})
+var sChannel_FillerSlate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FillerSlate", ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eChannel_FillerSlate})
+var sChannel_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eChannel_LastModifiedTime})
+var sChannel_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_ResponseOutputs, Members: &m_ResponseOutputs, Type: smithy.ShapeTypeList, Ext: &eChannel_Outputs})
+var sChannel_PlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackMode", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eChannel_PlaybackMode})
+var sChannel_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eChannel_Tags})
+var sChannel_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eChannel_Tier})
+var sChannel_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfigurationForChannel, Members: &mLogConfigurationForChannel, Type: smithy.ShapeTypeStructure, Ext: &eChannel_LogConfiguration})
+var sChannel_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eChannel_Audiences})
+var sChannelState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelState, Members: &mChannelState, Type: smithy.ShapeTypeEnum, Ext: &eChannelState})
+var sChannelState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelState_RUNNING})
+var sChannelState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelState_STOPPED})
+var sClientSideBeaconingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientSideBeaconingConfiguration, Members: &mClientSideBeaconingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eClientSideBeaconingConfiguration})
+var sClientSideBeaconingConfiguration_ReportingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportingMode", ID: &iClientSideBeaconingMode, Members: &mClientSideBeaconingMode, Type: smithy.ShapeTypeEnum, Ext: &eClientSideBeaconingConfiguration_ReportingMode})
+var sClientSideBeaconingConfiguration_AdditionalEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEventTypes", ID: &i_BeaconEventTypeList, Members: &m_BeaconEventTypeList, Type: smithy.ShapeTypeList, Ext: &eClientSideBeaconingConfiguration_AdditionalEventTypes})
+var sClientSideBeaconingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientSideBeaconingMode, Members: &mClientSideBeaconingMode, Type: smithy.ShapeTypeEnum, Ext: &eClientSideBeaconingMode})
+var sClientSideBeaconingMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientSideBeaconingMode_DISABLED})
+var sClientSideBeaconingMode_INSIGHTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSIGHTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientSideBeaconingMode_INSIGHTS})
+var sClipRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClipRange, Members: &mClipRange, Type: smithy.ShapeTypeStructure, Ext: &eClipRange})
+var sClipRange_EndOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffsetMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eClipRange_EndOffsetMillis})
+var sClipRange_StartOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartOffsetMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eClipRange_StartOffsetMillis})
+var sCompressionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionMethod, Members: &mCompressionMethod, Type: smithy.ShapeTypeEnum, Ext: &eCompressionMethod})
+var sCompressionMethod_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionMethod_NONE})
+var sCompressionMethod_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionMethod_GZIP})
+var sConcurrentExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentExecutorConfiguration, Members: &mConcurrentExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentExecutorConfiguration})
+var sConcurrentExecutorConfiguration_Runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Runtime", ID: &iRuntimeType, Members: &mRuntimeType, Type: smithy.ShapeTypeEnum, Ext: &eConcurrentExecutorConfiguration_Runtime})
+var sConcurrentExecutorConfiguration_Output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Output", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eConcurrentExecutorConfiguration_Output})
+var sConcurrentExecutorConfiguration_FunctionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionList", ID: &i___listOfFunctionsRef, Members: &m___listOfFunctionsRef, Type: smithy.ShapeTypeList, Ext: &eConcurrentExecutorConfiguration_FunctionList})
+var sConcurrentExecutorConfiguration_TimeoutMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eConcurrentExecutorConfiguration_TimeoutMilliseconds})
+var sConcurrentExecutorConfiguration_MaxConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrency", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eConcurrentExecutorConfiguration_MaxConcurrency})
+var s_ConfigurationAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationAliasesRequest, Members: &m_ConfigurationAliasesRequest, Type: smithy.ShapeTypeMap, Ext: &e_ConfigurationAliasesRequest})
+var s_ConfigurationAliasesRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationAliasesRequest_key})
+var s_ConfigurationAliasesRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &e_ConfigurationAliasesRequest_value})
+var s_ConfigurationAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationAliasesResponse, Members: &m_ConfigurationAliasesResponse, Type: smithy.ShapeTypeMap, Ext: &e_ConfigurationAliasesResponse})
+var s_ConfigurationAliasesResponse_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationAliasesResponse_key})
+var s_ConfigurationAliasesResponse_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &e_ConfigurationAliasesResponse_value})
+var sCustomOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomOutputConfiguration, Members: &mCustomOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCustomOutputConfiguration})
+var sCustomOutputConfiguration_Runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Runtime", ID: &iRuntimeType, Members: &mRuntimeType, Type: smithy.ShapeTypeEnum, Ext: &eCustomOutputConfiguration_Runtime})
+var sCustomOutputConfiguration_Output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Output", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eCustomOutputConfiguration_Output})
+var sDashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashConfiguration, Members: &mDashConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDashConfiguration})
+var sDashConfiguration_ManifestEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDashConfiguration_ManifestEndpointPrefix})
+var sDashConfiguration_DualStackManifestEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackManifestEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDashConfiguration_DualStackManifestEndpointPrefix})
+var sDashConfiguration_MpdLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpdLocation", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDashConfiguration_MpdLocation})
+var sDashConfiguration_OriginManifestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginManifestType", ID: &iOriginManifestType, Members: &mOriginManifestType, Type: smithy.ShapeTypeEnum, Ext: &eDashConfiguration_OriginManifestType})
+var sDashConfigurationForPut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashConfigurationForPut, Members: &mDashConfigurationForPut, Type: smithy.ShapeTypeStructure, Ext: &eDashConfigurationForPut})
+var sDashConfigurationForPut_MpdLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpdLocation", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDashConfigurationForPut_MpdLocation})
+var sDashConfigurationForPut_OriginManifestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginManifestType", ID: &iOriginManifestType, Members: &mOriginManifestType, Type: smithy.ShapeTypeEnum, Ext: &eDashConfigurationForPut_OriginManifestType})
+var sDashPlaylistSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashPlaylistSettings, Members: &mDashPlaylistSettings, Type: smithy.ShapeTypeStructure, Ext: &eDashPlaylistSettings})
+var sDashPlaylistSettings_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eDashPlaylistSettings_ManifestWindowSeconds})
+var sDashPlaylistSettings_MinBufferTimeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinBufferTimeSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eDashPlaylistSettings_MinBufferTimeSeconds})
+var sDashPlaylistSettings_MinUpdatePeriodSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUpdatePeriodSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eDashPlaylistSettings_MinUpdatePeriodSeconds})
+var sDashPlaylistSettings_SuggestedPresentationDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestedPresentationDelaySeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eDashPlaylistSettings_SuggestedPresentationDelaySeconds})
+var sDefaultSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultSegmentDeliveryConfiguration, Members: &mDefaultSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDefaultSegmentDeliveryConfiguration})
+var sDefaultSegmentDeliveryConfiguration_BaseUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDefaultSegmentDeliveryConfiguration_BaseUrl})
+var sEventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventName, Members: &mEventName, Type: smithy.ShapeTypeEnum, Ext: &eEventName})
+var sEventName_PRE_SESSION_INITIALIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_SESSION_INITIALIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventName_PRE_SESSION_INITIALIZATION})
+var sEventName_PRE_ADS_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_ADS_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventName_PRE_ADS_REQUEST})
+var sEventName_POST_ADS_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_ADS_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventName_POST_ADS_RESPONSE})
+var sEventName_PRE_MANIFEST_INSERTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_MANIFEST_INSERTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventName_PRE_MANIFEST_INSERTION})
+var sFillPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFillPolicy, Members: &mFillPolicy, Type: smithy.ShapeTypeEnum, Ext: &eFillPolicy})
+var sFillPolicy_FULL_AVAIL_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_AVAIL_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFillPolicy_FULL_AVAIL_ONLY})
+var sFillPolicy_PARTIAL_AVAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_AVAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFillPolicy_PARTIAL_AVAIL})
+var sFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunction, Members: &mFunction, Type: smithy.ShapeTypeStructure, Ext: &eFunction})
+var sFunction_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFunction_FunctionId})
+var sFunction_FunctionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionType", ID: &iFunctionType, Members: &mFunctionType, Type: smithy.ShapeTypeEnum, Ext: &eFunction_FunctionType})
+var sFunction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFunction_Description})
+var sFunction_HttpRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpRequestConfiguration", ID: &iHttpRequestConfiguration, Members: &mHttpRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFunction_HttpRequestConfiguration})
+var sFunction_AwsServiceRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsServiceRequestConfiguration", ID: &iAwsServiceRequestConfiguration, Members: &mAwsServiceRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFunction_AwsServiceRequestConfiguration})
+var sFunction_CustomOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomOutputConfiguration", ID: &iCustomOutputConfiguration, Members: &mCustomOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFunction_CustomOutputConfiguration})
+var sFunction_ConcurrentExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConcurrentExecutorConfiguration", ID: &iConcurrentExecutorConfiguration, Members: &mConcurrentExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFunction_ConcurrentExecutorConfiguration})
+var sFunction_SequentialExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequentialExecutorConfiguration", ID: &iSequentialExecutorConfiguration, Members: &mSequentialExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFunction_SequentialExecutorConfiguration})
+var sFunction_VastRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VastRequestConfiguration", ID: &iVastRequestConfiguration, Members: &mVastRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFunction_VastRequestConfiguration})
+var sFunction_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eFunction_Tags})
+var sFunction_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFunction_Arn})
+var s_FunctionMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionMapping, Members: &m_FunctionMapping, Type: smithy.ShapeTypeMap, Ext: &e_FunctionMapping})
+var s_FunctionMapping_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iEventName, Members: &mEventName, Type: smithy.ShapeTypeEnum, Ext: &e_FunctionMapping_key})
+var s_FunctionMapping_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_FunctionMapping_value})
+var sFunctionRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionRef, Members: &mFunctionRef, Type: smithy.ShapeTypeStructure, Ext: &eFunctionRef})
+var sFunctionRef_RunCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunCondition", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFunctionRef_RunCondition})
+var sFunctionRef_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFunctionRef_FunctionId})
+var sFunctionRef_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eFunctionRef_Alias})
+var sFunctionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionType, Members: &mFunctionType, Type: smithy.ShapeTypeEnum, Ext: &eFunctionType})
+var sFunctionType_HTTP_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionType_HTTP_REQUEST})
+var sFunctionType_AWS_SERVICE_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SERVICE_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionType_AWS_SERVICE_REQUEST})
+var sFunctionType_CUSTOM_OUTPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_OUTPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionType_CUSTOM_OUTPUT})
+var sFunctionType_CONCURRENT_EXECUTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENT_EXECUTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionType_CONCURRENT_EXECUTOR})
+var sFunctionType_SEQUENTIAL_EXECUTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEQUENTIAL_EXECUTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionType_SEQUENTIAL_EXECUTOR})
+var sFunctionType_VAST_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VAST_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionType_VAST_REQUEST})
+var sHlsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsConfiguration, Members: &mHlsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHlsConfiguration})
+var sHlsConfiguration_ManifestEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHlsConfiguration_ManifestEndpointPrefix})
+var sHlsConfiguration_DualStackManifestEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackManifestEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHlsConfiguration_DualStackManifestEndpointPrefix})
+var sHlsPlaylistSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsPlaylistSettings, Members: &mHlsPlaylistSettings, Type: smithy.ShapeTypeStructure, Ext: &eHlsPlaylistSettings})
+var sHlsPlaylistSettings_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eHlsPlaylistSettings_ManifestWindowSeconds})
+var sHlsPlaylistSettings_AdMarkupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkupType", ID: &i_adMarkupTypes, Members: &m_adMarkupTypes, Type: smithy.ShapeTypeList, Ext: &eHlsPlaylistSettings_AdMarkupType})
+var sHttpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpConfiguration, Members: &mHttpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpConfiguration})
+var sHttpConfiguration_BaseUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHttpConfiguration_BaseUrl})
+var sHttpPackageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPackageConfiguration, Members: &mHttpPackageConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpPackageConfiguration})
+var sHttpPackageConfiguration_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHttpPackageConfiguration_Path})
+var sHttpPackageConfiguration_SourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceGroup", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHttpPackageConfiguration_SourceGroup})
+var sHttpPackageConfiguration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum, Ext: &eHttpPackageConfiguration_Type})
+var s_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &e_HttpPackageConfigurations})
+var s_HttpPackageConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHttpPackageConfiguration, Members: &mHttpPackageConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_HttpPackageConfigurations_member})
+var sHttpRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequest, Members: &mHttpRequest, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequest})
+var sHttpRequest_Method = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Method", ID: &iMethod, Members: &mMethod, Type: smithy.ShapeTypeEnum, Ext: &eHttpRequest_Method})
+var sHttpRequest_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHttpRequest_Body})
+var sHttpRequest_Headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Headers", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eHttpRequest_Headers})
+var sHttpRequest_CompressRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressRequest", ID: &iCompressionMethod, Members: &mCompressionMethod, Type: smithy.ShapeTypeEnum, Ext: &eHttpRequest_CompressRequest})
+var sHttpRequestCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestCacheConfiguration, Members: &mHttpRequestCacheConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestCacheConfiguration})
+var sHttpRequestCacheConfiguration_TtlMinimumSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlMinimumSeconds", ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &eHttpRequestCacheConfiguration_TtlMinimumSeconds})
+var sHttpRequestCacheConfiguration_TtlMaximumSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlMaximumSeconds", ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &eHttpRequestCacheConfiguration_TtlMaximumSeconds})
+var sHttpRequestCacheConfiguration_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHttpRequestCacheConfiguration_Key})
+var sHttpRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestConfiguration, Members: &mHttpRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestConfiguration})
+var sHttpRequestConfiguration_Runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Runtime", ID: &iRuntimeType, Members: &mRuntimeType, Type: smithy.ShapeTypeEnum, Ext: &eHttpRequestConfiguration_Runtime})
+var sHttpRequestConfiguration_Output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Output", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eHttpRequestConfiguration_Output})
+var sHttpRequestConfiguration_MethodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MethodType", ID: &iMethodType, Members: &mMethodType, Type: smithy.ShapeTypeEnum, Ext: &eHttpRequestConfiguration_MethodType})
+var sHttpRequestConfiguration_RequestTimeoutMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTimeoutMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eHttpRequestConfiguration_RequestTimeoutMilliseconds})
+var sHttpRequestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHttpRequestConfiguration_Url})
+var sHttpRequestConfiguration_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eHttpRequestConfiguration_Body})
+var sHttpRequestConfiguration_Headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Headers", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eHttpRequestConfiguration_Headers})
+var sHttpRequestConfiguration_Cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cache", ID: &iHttpRequestCacheConfiguration, Members: &mHttpRequestCacheConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestConfiguration_Cache})
+var sInsertionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsertionMode, Members: &mInsertionMode, Type: smithy.ShapeTypeEnum, Ext: &eInsertionMode})
+var sInsertionMode_STITCHED_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STITCHED_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInsertionMode_STITCHED_ONLY})
+var sInsertionMode_PLAYER_SELECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAYER_SELECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInsertionMode_PLAYER_SELECT})
+var sKeyValuePair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyValuePair, Members: &mKeyValuePair, Type: smithy.ShapeTypeStructure, Ext: &eKeyValuePair})
+var sKeyValuePair_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyValuePair_Key})
+var sKeyValuePair_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyValuePair_Value})
+var sListPrefetchScheduleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrefetchScheduleType, Members: &mListPrefetchScheduleType, Type: smithy.ShapeTypeEnum, Ext: &eListPrefetchScheduleType})
+var sListPrefetchScheduleType_SINGLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListPrefetchScheduleType_SINGLE})
+var sListPrefetchScheduleType_RECURRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECURRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListPrefetchScheduleType_RECURRING})
+var sListPrefetchScheduleType_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListPrefetchScheduleType_ALL})
+var sLivePreRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLivePreRollConfiguration, Members: &mLivePreRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLivePreRollConfiguration})
+var sLivePreRollConfiguration_AdDecisionServerUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eLivePreRollConfiguration_AdDecisionServerUrl})
+var sLivePreRollConfiguration_MaxDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxDurationSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eLivePreRollConfiguration_MaxDurationSeconds})
+var sLivePreRollConfiguration_AdDecisionServerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerConfiguration", ID: &iPreRollAdDecisionServerConfiguration, Members: &mPreRollAdDecisionServerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLivePreRollConfiguration_AdDecisionServerConfiguration})
+var sLiveSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiveSource, Members: &mLiveSource, Type: smithy.ShapeTypeStructure, Ext: &eLiveSource})
+var sLiveSource_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eLiveSource_Arn})
+var sLiveSource_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eLiveSource_CreationTime})
+var sLiveSource_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eLiveSource_HttpPackageConfigurations})
+var sLiveSource_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eLiveSource_LastModifiedTime})
+var sLiveSource_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eLiveSource_LiveSourceName})
+var sLiveSource_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eLiveSource_SourceLocationName})
+var sLiveSource_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eLiveSource_Tags})
+var sLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLogConfiguration})
+var sLogConfiguration_PercentEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentEnabled", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eLogConfiguration_PercentEnabled})
+var sLogConfiguration_EnabledLoggingStrategies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledLoggingStrategies", ID: &i___listOfLoggingStrategies, Members: &m___listOfLoggingStrategies, Type: smithy.ShapeTypeList, Ext: &eLogConfiguration_EnabledLoggingStrategies})
+var sLogConfiguration_AdsInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsInteractionLog", ID: &iAdsInteractionLog, Members: &mAdsInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eLogConfiguration_AdsInteractionLog})
+var sLogConfiguration_ManifestServiceInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestServiceInteractionLog", ID: &iManifestServiceInteractionLog, Members: &mManifestServiceInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eLogConfiguration_ManifestServiceInteractionLog})
+var sLogConfigurationForChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfigurationForChannel, Members: &mLogConfigurationForChannel, Type: smithy.ShapeTypeStructure, Ext: &eLogConfigurationForChannel})
+var sLogConfigurationForChannel_LogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogTypes", ID: &i_LogTypes, Members: &m_LogTypes, Type: smithy.ShapeTypeList, Ext: &eLogConfigurationForChannel_LogTypes})
+var sLoggingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingStrategy, Members: &mLoggingStrategy, Type: smithy.ShapeTypeEnum, Ext: &eLoggingStrategy})
+var sLoggingStrategy_VENDED_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VENDED_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoggingStrategy_VENDED_LOGS})
+var sLoggingStrategy_LEGACY_CLOUDWATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGACY_CLOUDWATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoggingStrategy_LEGACY_CLOUDWATCH})
+var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogType})
+var sLogType_AS_RUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AS_RUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_AS_RUN})
+var s_LogTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogTypes, Members: &m_LogTypes, Type: smithy.ShapeTypeList, Ext: &e_LogTypes})
+var s_LogTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &e_LogTypes_member})
+var sManifestProcessingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestProcessingRules, Members: &mManifestProcessingRules, Type: smithy.ShapeTypeStructure, Ext: &eManifestProcessingRules})
+var sManifestProcessingRules_AdMarkerPassthrough = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkerPassthrough", ID: &iAdMarkerPassthrough, Members: &mAdMarkerPassthrough, Type: smithy.ShapeTypeStructure, Ext: &eManifestProcessingRules_AdMarkerPassthrough})
+var sManifestServiceExcludeEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestServiceExcludeEventType, Members: &mManifestServiceExcludeEventType, Type: smithy.ShapeTypeEnum, Ext: &eManifestServiceExcludeEventType})
+var sManifestServiceExcludeEventType_GENERATED_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERATED_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_GENERATED_MANIFEST})
+var sManifestServiceExcludeEventType_ORIGIN_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORIGIN_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ORIGIN_MANIFEST})
+var sManifestServiceExcludeEventType_SESSION_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_SESSION_INITIALIZED})
+var sManifestServiceExcludeEventType_TRACKING_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRACKING_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_TRACKING_RESPONSE})
+var sManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIG_SYNTAX_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR})
+var sManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIG_SECURITY_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR})
+var sManifestServiceExcludeEventType_UNKNOWN_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_UNKNOWN_HOST})
+var sManifestServiceExcludeEventType_TIMEOUT_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUT_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_TIMEOUT_ERROR})
+var sManifestServiceExcludeEventType_CONNECTION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_CONNECTION_ERROR})
+var sManifestServiceExcludeEventType_IO_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IO_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_IO_ERROR})
+var sManifestServiceExcludeEventType_UNKNOWN_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_UNKNOWN_ERROR})
+var sManifestServiceExcludeEventType_HOST_DISALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOST_DISALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_HOST_DISALLOWED})
+var sManifestServiceExcludeEventType_PARSING_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARSING_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_PARSING_ERROR})
+var sManifestServiceExcludeEventType_MANIFEST_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANIFEST_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_MANIFEST_ERROR})
+var sManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_MASTER_OR_MEDIA_PLAYLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST})
+var sManifestServiceExcludeEventType_NO_MASTER_PLAYLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_MASTER_PLAYLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_NO_MASTER_PLAYLIST})
+var sManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_MEDIA_PLAYLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST})
+var sManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPATIBLE_HLS_VERSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION})
+var sManifestServiceExcludeEventType_SCTE35_PARSING_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCTE35_PARSING_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_SCTE35_PARSING_ERROR})
+var sManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SINGLE_PERIOD_DASH_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST})
+var sManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST})
+var sManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_PERIOD_MISSING_AUDIO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO})
+var sManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_PERIOD_MISSING_AUDIO_WARNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING})
+var sManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ORIGIN_PREFIX_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ADS_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_CDN_AD_SEGMENT_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_SLATE_AD_URL_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_PROFILE_NAME_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_BUMPER_START_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION})
+var sManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_BUMPER_END_INTERPOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION})
+var sManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_SESSION_INIT_HOOK_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR})
+var sManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_SESSION_INIT_FUNCTION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR})
+var sManifestServiceInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestServiceInteractionLog, Members: &mManifestServiceInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eManifestServiceInteractionLog})
+var sManifestServiceInteractionLog_PublishOptInEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishOptInEventTypes", ID: &i___manifestServicePublishOptInEventTypesList, Members: &m___manifestServicePublishOptInEventTypesList, Type: smithy.ShapeTypeList, Ext: &eManifestServiceInteractionLog_PublishOptInEventTypes})
+var sManifestServiceInteractionLog_ExcludeEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeEventTypes", ID: &i___manifestServiceExcludeEventTypesList, Members: &m___manifestServiceExcludeEventTypesList, Type: smithy.ShapeTypeList, Ext: &eManifestServiceInteractionLog_ExcludeEventTypes})
+var sManifestServicePublishOptInEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestServicePublishOptInEventType, Members: &mManifestServicePublishOptInEventType, Type: smithy.ShapeTypeEnum, Ext: &eManifestServicePublishOptInEventType})
+var sManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_SESSION_INIT_HOOK_SUMMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY})
+var sManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_SESSION_INIT_FUNCTION_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &eMessageType})
+var sMessageType_SPLICE_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPLICE_INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessageType_SPLICE_INSERT})
+var sMessageType_TIME_SIGNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_SIGNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessageType_TIME_SIGNAL})
+var sMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMethod, Members: &mMethod, Type: smithy.ShapeTypeEnum, Ext: &eMethod})
+var sMethod_GET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethod_GET})
+var sMethod_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethod_POST})
+var sMethodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMethodType, Members: &mMethodType, Type: smithy.ShapeTypeEnum, Ext: &eMethodType})
+var sMethodType_GET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethodType_GET})
+var sMethodType_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethodType_POST})
+var s_MinimumUnfilledDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumUnfilledDurationSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_MinimumUnfilledDurationSeconds})
+var sMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMode, Members: &mMode, Type: smithy.ShapeTypeEnum, Ext: &eMode})
+var sMode_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMode_OFF})
+var sMode_BEHIND_LIVE_EDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEHIND_LIVE_EDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMode_BEHIND_LIVE_EDGE})
+var sMode_AFTER_LIVE_EDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_LIVE_EDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMode_AFTER_LIVE_EDGE})
+var s_OpenRtbTemplateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenRtbTemplateString, Type: smithy.ShapeTypeString, Ext: &e_OpenRtbTemplateString})
+var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eOperator})
+var sOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_EQUALS})
+var sOriginManifestType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginManifestType, Members: &mOriginManifestType, Type: smithy.ShapeTypeEnum, Ext: &eOriginManifestType})
+var sOriginManifestType_SINGLE_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginManifestType_SINGLE_PERIOD})
+var sOriginManifestType_MULTI_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginManifestType_MULTI_PERIOD})
+var sPlaybackConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackConfiguration, Members: &mPlaybackConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration})
+var sPlaybackConfiguration_AdDecisionServerUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_AdDecisionServerUrl})
+var sPlaybackConfiguration_AvailSuppression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailSuppression", ID: &iAvailSuppression, Members: &mAvailSuppression, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_AvailSuppression})
+var sPlaybackConfiguration_Bumper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bumper", ID: &iBumper, Members: &mBumper, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_Bumper})
+var sPlaybackConfiguration_CdnConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnConfiguration", ID: &iCdnConfiguration, Members: &mCdnConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_CdnConfiguration})
+var sPlaybackConfiguration_ConfigurationAliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationAliases", ID: &i_ConfigurationAliasesResponse, Members: &m_ConfigurationAliasesResponse, Type: smithy.ShapeTypeMap, Ext: &ePlaybackConfiguration_ConfigurationAliases})
+var sPlaybackConfiguration_DashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashConfiguration", ID: &iDashConfiguration, Members: &mDashConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_DashConfiguration})
+var sPlaybackConfiguration_HlsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsConfiguration", ID: &iHlsConfiguration, Members: &mHlsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_HlsConfiguration})
+var sPlaybackConfiguration_InsertionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertionMode", ID: &iInsertionMode, Members: &mInsertionMode, Type: smithy.ShapeTypeEnum, Ext: &ePlaybackConfiguration_InsertionMode})
+var sPlaybackConfiguration_LivePreRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LivePreRollConfiguration", ID: &iLivePreRollConfiguration, Members: &mLivePreRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_LivePreRollConfiguration})
+var sPlaybackConfiguration_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_LogConfiguration})
+var sPlaybackConfiguration_ManifestProcessingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestProcessingRules", ID: &iManifestProcessingRules, Members: &mManifestProcessingRules, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_ManifestProcessingRules})
+var sPlaybackConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_Name})
+var sPlaybackConfiguration_PersonalizationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalizationThresholdSeconds", ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &ePlaybackConfiguration_PersonalizationThresholdSeconds})
+var sPlaybackConfiguration_PlaybackConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_PlaybackConfigurationArn})
+var sPlaybackConfiguration_PlaybackEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_PlaybackEndpointPrefix})
+var sPlaybackConfiguration_DualStackPlaybackEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackPlaybackEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_DualStackPlaybackEndpointPrefix})
+var sPlaybackConfiguration_SessionInitializationEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionInitializationEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_SessionInitializationEndpointPrefix})
+var sPlaybackConfiguration_DualStackSessionInitializationEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackSessionInitializationEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_DualStackSessionInitializationEndpointPrefix})
+var sPlaybackConfiguration_SlateAdUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlateAdUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_SlateAdUrl})
+var sPlaybackConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &ePlaybackConfiguration_Tags})
+var sPlaybackConfiguration_TranscodeProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranscodeProfileName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_TranscodeProfileName})
+var sPlaybackConfiguration_VideoContentSourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VideoContentSourceUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePlaybackConfiguration_VideoContentSourceUrl})
+var sPlaybackConfiguration_AdConditioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdConditioningConfiguration", ID: &iAdConditioningConfiguration, Members: &mAdConditioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_AdConditioningConfiguration})
+var sPlaybackConfiguration_AdDecisionServerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerConfiguration", ID: &iAdDecisionServerConfiguration, Members: &mAdDecisionServerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_AdDecisionServerConfiguration})
+var sPlaybackConfiguration_YieldOptimizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YieldOptimizationConfiguration", ID: &iYieldOptimizationConfiguration, Members: &mYieldOptimizationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_YieldOptimizationConfiguration})
+var sPlaybackConfiguration_FunctionMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionMapping", ID: &i_FunctionMapping, Members: &m_FunctionMapping, Type: smithy.ShapeTypeMap, Ext: &ePlaybackConfiguration_FunctionMapping})
+var sPlaybackConfiguration_AdsPersonalizationTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationTimeouts", ID: &iAdsPersonalizationTimeouts, Members: &mAdsPersonalizationTimeouts, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_AdsPersonalizationTimeouts})
+var sPlaybackConfiguration_AdsPersonalizationConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationConcurrency", ID: &iAdsPersonalizationConcurrency, Members: &mAdsPersonalizationConcurrency, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_AdsPersonalizationConcurrency})
+var sPlaybackConfiguration_BeaconingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeaconingConfiguration", ID: &iBeaconingConfiguration, Members: &mBeaconingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackConfiguration_BeaconingConfiguration})
+var sPlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackMode, Members: &mPlaybackMode, Type: smithy.ShapeTypeEnum, Ext: &ePlaybackMode})
+var sPlaybackMode_LOOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackMode_LOOP})
+var sPlaybackMode_LINEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackMode_LINEAR})
+var sPrefetchConsumption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefetchConsumption, Members: &mPrefetchConsumption, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchConsumption})
+var sPrefetchConsumption_AvailMatchingCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailMatchingCriteria", ID: &i___listOfAvailMatchingCriteria, Members: &m___listOfAvailMatchingCriteria, Type: smithy.ShapeTypeList, Ext: &ePrefetchConsumption_AvailMatchingCriteria})
+var sPrefetchConsumption_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &ePrefetchConsumption_EndTime})
+var sPrefetchConsumption_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &ePrefetchConsumption_StartTime})
+var sPrefetchRetrieval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefetchRetrieval, Members: &mPrefetchRetrieval, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchRetrieval})
+var sPrefetchRetrieval_DynamicVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicVariables", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &ePrefetchRetrieval_DynamicVariables})
+var sPrefetchRetrieval_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &ePrefetchRetrieval_EndTime})
+var sPrefetchRetrieval_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &ePrefetchRetrieval_StartTime})
+var sPrefetchRetrieval_TrafficShapingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficShapingType", ID: &iTrafficShapingType, Members: &mTrafficShapingType, Type: smithy.ShapeTypeEnum, Ext: &ePrefetchRetrieval_TrafficShapingType})
+var sPrefetchRetrieval_TrafficShapingRetrievalWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficShapingRetrievalWindow", ID: &iTrafficShapingRetrievalWindow, Members: &mTrafficShapingRetrievalWindow, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchRetrieval_TrafficShapingRetrievalWindow})
+var sPrefetchRetrieval_TrafficShapingTpsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficShapingTpsConfiguration", ID: &iTrafficShapingTpsConfiguration, Members: &mTrafficShapingTpsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchRetrieval_TrafficShapingTpsConfiguration})
+var sPrefetchSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefetchSchedule, Members: &mPrefetchSchedule, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchSchedule})
+var sPrefetchSchedule_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePrefetchSchedule_Arn})
+var sPrefetchSchedule_Consumption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consumption", ID: &iPrefetchConsumption, Members: &mPrefetchConsumption, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchSchedule_Consumption})
+var sPrefetchSchedule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePrefetchSchedule_Name})
+var sPrefetchSchedule_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePrefetchSchedule_PlaybackConfigurationName})
+var sPrefetchSchedule_Retrieval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retrieval", ID: &iPrefetchRetrieval, Members: &mPrefetchRetrieval, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchSchedule_Retrieval})
+var sPrefetchSchedule_ScheduleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleType", ID: &iPrefetchScheduleType, Members: &mPrefetchScheduleType, Type: smithy.ShapeTypeEnum, Ext: &ePrefetchSchedule_ScheduleType})
+var sPrefetchSchedule_RecurringPrefetchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringPrefetchConfiguration", ID: &iRecurringPrefetchConfiguration, Members: &mRecurringPrefetchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchSchedule_RecurringPrefetchConfiguration})
+var sPrefetchSchedule_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePrefetchSchedule_StreamId})
+var sPrefetchSchedule_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &ePrefetchSchedule_Tags})
+var sPrefetchScheduleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefetchScheduleType, Members: &mPrefetchScheduleType, Type: smithy.ShapeTypeEnum, Ext: &ePrefetchScheduleType})
+var sPrefetchScheduleType_SINGLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchScheduleType_SINGLE})
+var sPrefetchScheduleType_RECURRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECURRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePrefetchScheduleType_RECURRING})
+var sPreRollAdDecisionServerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreRollAdDecisionServerConfiguration, Members: &mPreRollAdDecisionServerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePreRollAdDecisionServerConfiguration})
+var sPreRollAdDecisionServerConfiguration_VastResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VastResponse", ID: &iPreRollVastResponse, Members: &mPreRollVastResponse, Type: smithy.ShapeTypeStructure, Ext: &ePreRollAdDecisionServerConfiguration_VastResponse})
+var sPreRollAdSequencingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreRollAdSequencingMode, Members: &mPreRollAdSequencingMode, Type: smithy.ShapeTypeEnum, Ext: &ePreRollAdSequencingMode})
+var sPreRollAdSequencingMode_FOLLOW_AD_SEQUENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOLLOW_AD_SEQUENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreRollAdSequencingMode_FOLLOW_AD_SEQUENCE})
+var sPreRollAdSequencingMode_IGNORE_AD_SEQUENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE_AD_SEQUENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreRollAdSequencingMode_IGNORE_AD_SEQUENCE})
+var sPreRollVastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreRollVastResponse, Members: &mPreRollVastResponse, Type: smithy.ShapeTypeStructure, Ext: &ePreRollVastResponse})
+var sPreRollVastResponse_AdSequencingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdSequencingMode", ID: &iPreRollAdSequencingMode, Members: &mPreRollAdSequencingMode, Type: smithy.ShapeTypeEnum, Ext: &ePreRollVastResponse_AdSequencingMode})
+var sRecurringConsumption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecurringConsumption, Members: &mRecurringConsumption, Type: smithy.ShapeTypeStructure, Ext: &eRecurringConsumption})
+var sRecurringConsumption_RetrievedAdExpirationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrievedAdExpirationSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eRecurringConsumption_RetrievedAdExpirationSeconds})
+var sRecurringConsumption_AvailMatchingCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailMatchingCriteria", ID: &i___listOfAvailMatchingCriteria, Members: &m___listOfAvailMatchingCriteria, Type: smithy.ShapeTypeList, Ext: &eRecurringConsumption_AvailMatchingCriteria})
+var sRecurringPrefetchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecurringPrefetchConfiguration, Members: &mRecurringPrefetchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecurringPrefetchConfiguration})
+var sRecurringPrefetchConfiguration_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eRecurringPrefetchConfiguration_StartTime})
+var sRecurringPrefetchConfiguration_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eRecurringPrefetchConfiguration_EndTime})
+var sRecurringPrefetchConfiguration_RecurringConsumption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringConsumption", ID: &iRecurringConsumption, Members: &mRecurringConsumption, Type: smithy.ShapeTypeStructure, Ext: &eRecurringPrefetchConfiguration_RecurringConsumption})
+var sRecurringPrefetchConfiguration_RecurringRetrieval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringRetrieval", ID: &iRecurringRetrieval, Members: &mRecurringRetrieval, Type: smithy.ShapeTypeStructure, Ext: &eRecurringPrefetchConfiguration_RecurringRetrieval})
+var sRecurringRetrieval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecurringRetrieval, Members: &mRecurringRetrieval, Type: smithy.ShapeTypeStructure, Ext: &eRecurringRetrieval})
+var sRecurringRetrieval_DynamicVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicVariables", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eRecurringRetrieval_DynamicVariables})
+var sRecurringRetrieval_DelayAfterAvailEndSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DelayAfterAvailEndSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eRecurringRetrieval_DelayAfterAvailEndSeconds})
+var sRecurringRetrieval_TrafficShapingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficShapingType", ID: &iTrafficShapingType, Members: &mTrafficShapingType, Type: smithy.ShapeTypeEnum, Ext: &eRecurringRetrieval_TrafficShapingType})
+var sRecurringRetrieval_TrafficShapingRetrievalWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficShapingRetrievalWindow", ID: &iTrafficShapingRetrievalWindow, Members: &mTrafficShapingRetrievalWindow, Type: smithy.ShapeTypeStructure, Ext: &eRecurringRetrieval_TrafficShapingRetrievalWindow})
+var sRecurringRetrieval_TrafficShapingTpsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficShapingTpsConfiguration", ID: &iTrafficShapingTpsConfiguration, Members: &mTrafficShapingTpsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecurringRetrieval_TrafficShapingTpsConfiguration})
+var sRelativePosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelativePosition, Members: &mRelativePosition, Type: smithy.ShapeTypeEnum, Ext: &eRelativePosition})
+var sRelativePosition_BEFORE_PROGRAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE_PROGRAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRelativePosition_BEFORE_PROGRAM})
+var sRelativePosition_AFTER_PROGRAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_PROGRAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRelativePosition_AFTER_PROGRAM})
+var sRequestOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestOutputItem, Members: &mRequestOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eRequestOutputItem})
+var sRequestOutputItem_DashPlaylistSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPlaylistSettings", ID: &iDashPlaylistSettings, Members: &mDashPlaylistSettings, Type: smithy.ShapeTypeStructure, Ext: &eRequestOutputItem_DashPlaylistSettings})
+var sRequestOutputItem_HlsPlaylistSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPlaylistSettings", ID: &iHlsPlaylistSettings, Members: &mHlsPlaylistSettings, Type: smithy.ShapeTypeStructure, Ext: &eRequestOutputItem_HlsPlaylistSettings})
+var sRequestOutputItem_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eRequestOutputItem_ManifestName})
+var sRequestOutputItem_SourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceGroup", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eRequestOutputItem_SourceGroup})
+var s_RequestOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestOutputs, Members: &m_RequestOutputs, Type: smithy.ShapeTypeList, Ext: &e_RequestOutputs})
+var s_RequestOutputs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRequestOutputItem, Members: &mRequestOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_RequestOutputs_member})
+var sResponseOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseOutputItem, Members: &mResponseOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eResponseOutputItem})
+var sResponseOutputItem_DashPlaylistSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPlaylistSettings", ID: &iDashPlaylistSettings, Members: &mDashPlaylistSettings, Type: smithy.ShapeTypeStructure, Ext: &eResponseOutputItem_DashPlaylistSettings})
+var sResponseOutputItem_HlsPlaylistSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPlaylistSettings", ID: &iHlsPlaylistSettings, Members: &mHlsPlaylistSettings, Type: smithy.ShapeTypeStructure, Ext: &eResponseOutputItem_HlsPlaylistSettings})
+var sResponseOutputItem_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eResponseOutputItem_ManifestName})
+var sResponseOutputItem_PlaybackUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eResponseOutputItem_PlaybackUrl})
+var sResponseOutputItem_DualStackPlaybackUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackPlaybackUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eResponseOutputItem_DualStackPlaybackUrl})
+var sResponseOutputItem_SourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceGroup", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eResponseOutputItem_SourceGroup})
+var s_ResponseOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseOutputs, Members: &m_ResponseOutputs, Type: smithy.ShapeTypeList, Ext: &e_ResponseOutputs})
+var s_ResponseOutputs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResponseOutputItem, Members: &mResponseOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_ResponseOutputs_member})
+var sRuntimeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeType, Members: &mRuntimeType, Type: smithy.ShapeTypeEnum, Ext: &eRuntimeType})
+var sRuntimeType_JSONATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSONATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeType_JSONATA})
+var sScheduleAdBreak = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleAdBreak, Members: &mScheduleAdBreak, Type: smithy.ShapeTypeStructure, Ext: &eScheduleAdBreak})
+var sScheduleAdBreak_ApproximateDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateDurationSeconds", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eScheduleAdBreak_ApproximateDurationSeconds})
+var sScheduleAdBreak_ApproximateStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateStartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eScheduleAdBreak_ApproximateStartTime})
+var sScheduleAdBreak_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleAdBreak_SourceLocationName})
+var sScheduleAdBreak_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleAdBreak_VodSourceName})
+var sScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleConfiguration, Members: &mScheduleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScheduleConfiguration})
+var sScheduleConfiguration_Transition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transition", ID: &iTransition, Members: &mTransition, Type: smithy.ShapeTypeStructure, Ext: &eScheduleConfiguration_Transition})
+var sScheduleConfiguration_ClipRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipRange", ID: &iClipRange, Members: &mClipRange, Type: smithy.ShapeTypeStructure, Ext: &eScheduleConfiguration_ClipRange})
+var sScheduleEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleEntry, Members: &mScheduleEntry, Type: smithy.ShapeTypeStructure, Ext: &eScheduleEntry})
+var sScheduleEntry_ApproximateDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateDurationSeconds", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eScheduleEntry_ApproximateDurationSeconds})
+var sScheduleEntry_ApproximateStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateStartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eScheduleEntry_ApproximateStartTime})
+var sScheduleEntry_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleEntry_Arn})
+var sScheduleEntry_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleEntry_ChannelName})
+var sScheduleEntry_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleEntry_LiveSourceName})
+var sScheduleEntry_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleEntry_ProgramName})
+var sScheduleEntry_ScheduleAdBreaks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleAdBreaks", ID: &i___listOfScheduleAdBreak, Members: &m___listOfScheduleAdBreak, Type: smithy.ShapeTypeList, Ext: &eScheduleEntry_ScheduleAdBreaks})
+var sScheduleEntry_ScheduleEntryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleEntryType", ID: &iScheduleEntryType, Members: &mScheduleEntryType, Type: smithy.ShapeTypeEnum, Ext: &eScheduleEntry_ScheduleEntryType})
+var sScheduleEntry_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleEntry_SourceLocationName})
+var sScheduleEntry_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eScheduleEntry_VodSourceName})
+var sScheduleEntry_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eScheduleEntry_Audiences})
+var sScheduleEntryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleEntryType, Members: &mScheduleEntryType, Type: smithy.ShapeTypeEnum, Ext: &eScheduleEntryType})
+var sScheduleEntryType_PROGRAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROGRAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduleEntryType_PROGRAM})
+var sScheduleEntryType_FILLER_SLATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILLER_SLATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduleEntryType_FILLER_SLATE})
+var sScheduleEntryType_ALTERNATE_MEDIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALTERNATE_MEDIA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduleEntryType_ALTERNATE_MEDIA})
+var sSecretsManagerAccessTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretsManagerAccessTokenConfiguration, Members: &mSecretsManagerAccessTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSecretsManagerAccessTokenConfiguration})
+var sSecretsManagerAccessTokenConfiguration_HeaderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSecretsManagerAccessTokenConfiguration_HeaderName})
+var sSecretsManagerAccessTokenConfiguration_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSecretsManagerAccessTokenConfiguration_SecretArn})
+var sSecretsManagerAccessTokenConfiguration_SecretStringKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretStringKey", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSecretsManagerAccessTokenConfiguration_SecretStringKey})
+var sSegmentationDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSegmentationDescriptor, Members: &mSegmentationDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eSegmentationDescriptor})
+var sSegmentationDescriptor_SegmentationEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentationEventId", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSegmentationDescriptor_SegmentationEventId})
+var sSegmentationDescriptor_SegmentationUpidType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentationUpidType", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSegmentationDescriptor_SegmentationUpidType})
+var sSegmentationDescriptor_SegmentationUpid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentationUpid", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSegmentationDescriptor_SegmentationUpid})
+var sSegmentationDescriptor_SegmentationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentationTypeId", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSegmentationDescriptor_SegmentationTypeId})
+var sSegmentationDescriptor_SegmentNum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentNum", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSegmentationDescriptor_SegmentNum})
+var sSegmentationDescriptor_SegmentsExpected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentsExpected", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSegmentationDescriptor_SegmentsExpected})
+var sSegmentationDescriptor_SubSegmentNum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubSegmentNum", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSegmentationDescriptor_SubSegmentNum})
+var sSegmentationDescriptor_SubSegmentsExpected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubSegmentsExpected", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSegmentationDescriptor_SubSegmentsExpected})
+var s_SegmentationDescriptorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SegmentationDescriptorList, Members: &m_SegmentationDescriptorList, Type: smithy.ShapeTypeList, Ext: &e_SegmentationDescriptorList})
+var s_SegmentationDescriptorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSegmentationDescriptor, Members: &mSegmentationDescriptor, Type: smithy.ShapeTypeStructure, Ext: &e_SegmentationDescriptorList_member})
+var sSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSegmentDeliveryConfiguration, Members: &mSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSegmentDeliveryConfiguration})
+var sSegmentDeliveryConfiguration_BaseUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSegmentDeliveryConfiguration_BaseUrl})
+var sSegmentDeliveryConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSegmentDeliveryConfiguration_Name})
+var sSequentialExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSequentialExecutorConfiguration, Members: &mSequentialExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSequentialExecutorConfiguration})
+var sSequentialExecutorConfiguration_Runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Runtime", ID: &iRuntimeType, Members: &mRuntimeType, Type: smithy.ShapeTypeEnum, Ext: &eSequentialExecutorConfiguration_Runtime})
+var sSequentialExecutorConfiguration_Output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Output", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eSequentialExecutorConfiguration_Output})
+var sSequentialExecutorConfiguration_FunctionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionList", ID: &i___listOfFunctionsRef, Members: &m___listOfFunctionsRef, Type: smithy.ShapeTypeList, Ext: &eSequentialExecutorConfiguration_FunctionList})
+var sSequentialExecutorConfiguration_TimeoutMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eSequentialExecutorConfiguration_TimeoutMilliseconds})
+var sSlateSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eSlateSource})
+var sSlateSource_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSlateSource_SourceLocationName})
+var sSlateSource_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSlateSource_VodSourceName})
+var sSourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceLocation, Members: &mSourceLocation, Type: smithy.ShapeTypeStructure, Ext: &eSourceLocation})
+var sSourceLocation_AccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessConfiguration", ID: &iAccessConfiguration, Members: &mAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSourceLocation_AccessConfiguration})
+var sSourceLocation_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSourceLocation_Arn})
+var sSourceLocation_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eSourceLocation_CreationTime})
+var sSourceLocation_DefaultSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSegmentDeliveryConfiguration", ID: &iDefaultSegmentDeliveryConfiguration, Members: &mDefaultSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSourceLocation_DefaultSegmentDeliveryConfiguration})
+var sSourceLocation_HttpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpConfiguration", ID: &iHttpConfiguration, Members: &mHttpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSourceLocation_HttpConfiguration})
+var sSourceLocation_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eSourceLocation_LastModifiedTime})
+var sSourceLocation_SegmentDeliveryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDeliveryConfigurations", ID: &i___listOfSegmentDeliveryConfiguration, Members: &m___listOfSegmentDeliveryConfiguration, Type: smithy.ShapeTypeList, Ext: &eSourceLocation_SegmentDeliveryConfigurations})
+var sSourceLocation_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eSourceLocation_SourceLocationName})
+var sSourceLocation_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eSourceLocation_Tags})
+var sSpliceInsertMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpliceInsertMessage, Members: &mSpliceInsertMessage, Type: smithy.ShapeTypeStructure, Ext: &eSpliceInsertMessage})
+var sSpliceInsertMessage_AvailNum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailNum", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eSpliceInsertMessage_AvailNum})
+var sSpliceInsertMessage_AvailsExpected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailsExpected", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eSpliceInsertMessage_AvailsExpected})
+var sSpliceInsertMessage_SpliceEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpliceEventId", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eSpliceInsertMessage_SpliceEventId})
+var sSpliceInsertMessage_UniqueProgramId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueProgramId", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eSpliceInsertMessage_UniqueProgramId})
+var sStreamingMediaFileConditioning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingMediaFileConditioning, Members: &mStreamingMediaFileConditioning, Type: smithy.ShapeTypeEnum, Ext: &eStreamingMediaFileConditioning})
+var sStreamingMediaFileConditioning_TRANSCODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSCODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamingMediaFileConditioning_TRANSCODE})
+var sStreamingMediaFileConditioning_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamingMediaFileConditioning_NONE})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &e_StringMap})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_StringMap_key})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_StringMap_value})
+var sTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eTier})
+var sTier_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_BASIC})
+var sTier_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_STANDARD})
+var sTimeShiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeShiftConfiguration, Members: &mTimeShiftConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTimeShiftConfiguration})
+var sTimeShiftConfiguration_MaxTimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxTimeDelaySeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eTimeShiftConfiguration_MaxTimeDelaySeconds})
+var sTimeSignalMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeSignalMessage, Members: &mTimeSignalMessage, Type: smithy.ShapeTypeStructure, Ext: &eTimeSignalMessage})
+var sTimeSignalMessage_SegmentationDescriptors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentationDescriptors", ID: &i_SegmentationDescriptorList, Members: &m_SegmentationDescriptorList, Type: smithy.ShapeTypeList, Ext: &eTimeSignalMessage_SegmentationDescriptors})
+var sTrafficShapingRetrievalWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficShapingRetrievalWindow, Members: &mTrafficShapingRetrievalWindow, Type: smithy.ShapeTypeStructure, Ext: &eTrafficShapingRetrievalWindow})
+var sTrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrievalWindowDurationSeconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eTrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds})
+var sTrafficShapingTpsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficShapingTpsConfiguration, Members: &mTrafficShapingTpsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTrafficShapingTpsConfiguration})
+var sTrafficShapingTpsConfiguration_PeakTps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeakTps", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eTrafficShapingTpsConfiguration_PeakTps})
+var sTrafficShapingTpsConfiguration_PeakConcurrentUsers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeakConcurrentUsers", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eTrafficShapingTpsConfiguration_PeakConcurrentUsers})
+var sTrafficShapingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficShapingType, Members: &mTrafficShapingType, Type: smithy.ShapeTypeEnum, Ext: &eTrafficShapingType})
+var sTrafficShapingType_RETRIEVAL_WINDOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRIEVAL_WINDOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrafficShapingType_RETRIEVAL_WINDOW})
+var sTrafficShapingType_TPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrafficShapingType_TPS})
+var sTransition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransition, Members: &mTransition, Type: smithy.ShapeTypeStructure, Ext: &eTransition})
+var sTransition_DurationMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eTransition_DurationMillis})
+var sTransition_RelativePosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelativePosition", ID: &iRelativePosition, Members: &mRelativePosition, Type: smithy.ShapeTypeEnum, Ext: &eTransition_RelativePosition})
+var sTransition_RelativeProgram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelativeProgram", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eTransition_RelativeProgram})
+var sTransition_ScheduledStartTimeMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledStartTimeMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eTransition_ScheduledStartTimeMillis})
+var sTransition_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eTransition_Type})
+var sType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum, Ext: &eType})
+var sType_DASH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DASH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eType_DASH})
+var sType_HLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eType_HLS})
+var sUpdateProgramScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramScheduleConfiguration, Members: &mUpdateProgramScheduleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramScheduleConfiguration})
+var sUpdateProgramScheduleConfiguration_Transition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transition", ID: &iUpdateProgramTransition, Members: &mUpdateProgramTransition, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramScheduleConfiguration_Transition})
+var sUpdateProgramScheduleConfiguration_ClipRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipRange", ID: &iClipRange, Members: &mClipRange, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramScheduleConfiguration_ClipRange})
+var sUpdateProgramTransition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramTransition, Members: &mUpdateProgramTransition, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramTransition})
+var sUpdateProgramTransition_ScheduledStartTimeMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledStartTimeMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eUpdateProgramTransition_ScheduledStartTimeMillis})
+var sUpdateProgramTransition_DurationMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eUpdateProgramTransition_DurationMillis})
+var sVastRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVastRequestConfiguration, Members: &mVastRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVastRequestConfiguration})
+var sVastRequestConfiguration_Runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Runtime", ID: &iRuntimeType, Members: &mRuntimeType, Type: smithy.ShapeTypeEnum, Ext: &eVastRequestConfiguration_Runtime})
+var sVastRequestConfiguration_Output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Output", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eVastRequestConfiguration_Output})
+var sVastRequestConfiguration_MethodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MethodType", ID: &iMethodType, Members: &mMethodType, Type: smithy.ShapeTypeEnum, Ext: &eVastRequestConfiguration_MethodType})
+var sVastRequestConfiguration_RequestTimeoutMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTimeoutMilliseconds", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eVastRequestConfiguration_RequestTimeoutMilliseconds})
+var sVastRequestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eVastRequestConfiguration_Url})
+var sVastRequestConfiguration_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eVastRequestConfiguration_Body})
+var sVastRequestConfiguration_Headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Headers", ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &eVastRequestConfiguration_Headers})
+var sVastRequestConfiguration_Cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cache", ID: &iHttpRequestCacheConfiguration, Members: &mHttpRequestCacheConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVastRequestConfiguration_Cache})
+var sVastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVastResponse, Members: &mVastResponse, Type: smithy.ShapeTypeStructure, Ext: &eVastResponse})
+var sVastResponse_AdSequencingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdSequencingMode", ID: &iAdSequencingMode, Members: &mAdSequencingMode, Type: smithy.ShapeTypeEnum, Ext: &eVastResponse_AdSequencingMode})
+var sVodSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVodSource, Members: &mVodSource, Type: smithy.ShapeTypeStructure, Ext: &eVodSource})
+var sVodSource_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eVodSource_Arn})
+var sVodSource_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eVodSource_CreationTime})
+var sVodSource_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eVodSource_HttpPackageConfigurations})
+var sVodSource_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eVodSource_LastModifiedTime})
+var sVodSource_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eVodSource_SourceLocationName})
+var sVodSource_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eVodSource_Tags})
+var sVodSource_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eVodSource_VodSourceName})
+var sYieldOptimizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iYieldOptimizationConfiguration, Members: &mYieldOptimizationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eYieldOptimizationConfiguration})
+var sYieldOptimizationConfiguration_MinimumUnfilledDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumUnfilledDuration", ID: &i_MinimumUnfilledDurationSeconds, Type: smithy.ShapeTypeInteger, Ext: &eYieldOptimizationConfiguration_MinimumUnfilledDuration})
+var sYieldOptimizationConfiguration_PublisherId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublisherId", ID: &i_ApsPublisherId, Type: smithy.ShapeTypeString, Ext: &eYieldOptimizationConfiguration_PublisherId})
+var sYieldOptimizationConfiguration_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &iApsRegion, Members: &mApsRegion, Type: smithy.ShapeTypeEnum, Ext: &eYieldOptimizationConfiguration_Region})
+var sYieldOptimizationConfiguration_OpenRtbTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenRtbTemplate", ID: &i_OpenRtbTemplateString, Type: smithy.ShapeTypeString, Ext: &eYieldOptimizationConfiguration_OpenRtbTemplate})
+var sConfigureLogsForChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsForChannelRequest, Members: &mConfigureLogsForChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForChannelRequest})
+var sConfigureLogsForChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsForChannelRequest_ChannelName})
+var sConfigureLogsForChannelRequest_LogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogTypes", ID: &i_LogTypes, Members: &m_LogTypes, Type: smithy.ShapeTypeList, Ext: &eConfigureLogsForChannelRequest_LogTypes})
+var sConfigureLogsForChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsForChannelResponse, Members: &mConfigureLogsForChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForChannelResponse})
+var sConfigureLogsForChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsForChannelResponse_ChannelName})
+var sConfigureLogsForChannelResponse_LogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogTypes", ID: &i_LogTypes, Members: &m_LogTypes, Type: smithy.ShapeTypeList, Ext: &eConfigureLogsForChannelResponse_LogTypes})
+var sConfigureLogsForPlaybackConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsForPlaybackConfigurationRequest, Members: &mConfigureLogsForPlaybackConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForPlaybackConfigurationRequest})
+var sConfigureLogsForPlaybackConfigurationRequest_PercentEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentEnabled", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eConfigureLogsForPlaybackConfigurationRequest_PercentEnabled})
+var sConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName})
+var sConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledLoggingStrategies", ID: &i___listOfLoggingStrategies, Members: &m___listOfLoggingStrategies, Type: smithy.ShapeTypeList, Ext: &eConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies})
+var sConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsInteractionLog", ID: &iAdsInteractionLog, Members: &mAdsInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog})
+var sConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestServiceInteractionLog", ID: &iManifestServiceInteractionLog, Members: &mManifestServiceInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog})
+var sConfigureLogsForPlaybackConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsForPlaybackConfigurationResponse, Members: &mConfigureLogsForPlaybackConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForPlaybackConfigurationResponse})
+var sConfigureLogsForPlaybackConfigurationResponse_PercentEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentEnabled", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eConfigureLogsForPlaybackConfigurationResponse_PercentEnabled})
+var sConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName})
+var sConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledLoggingStrategies", ID: &i___listOfLoggingStrategies, Members: &m___listOfLoggingStrategies, Type: smithy.ShapeTypeList, Ext: &eConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies})
+var sConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsInteractionLog", ID: &iAdsInteractionLog, Members: &mAdsInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog})
+var sConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestServiceInteractionLog", ID: &iManifestServiceInteractionLog, Members: &mManifestServiceInteractionLog, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog})
+var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest})
+var sCreateChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_ChannelName})
+var sCreateChannelRequest_FillerSlate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FillerSlate", ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_FillerSlate})
+var sCreateChannelRequest_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_RequestOutputs, Members: &m_RequestOutputs, Type: smithy.ShapeTypeList, Ext: &eCreateChannelRequest_Outputs})
+var sCreateChannelRequest_PlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackMode", ID: &iPlaybackMode, Members: &mPlaybackMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelRequest_PlaybackMode})
+var sCreateChannelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateChannelRequest_Tags})
+var sCreateChannelRequest_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelRequest_Tier})
+var sCreateChannelRequest_TimeShiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeShiftConfiguration", ID: &iTimeShiftConfiguration, Members: &mTimeShiftConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_TimeShiftConfiguration})
+var sCreateChannelRequest_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eCreateChannelRequest_Audiences})
+var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse})
+var sCreateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_Arn})
+var sCreateChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_ChannelName})
+var sCreateChannelResponse_ChannelState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelState", ID: &iChannelState, Members: &mChannelState, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelResponse_ChannelState})
+var sCreateChannelResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateChannelResponse_CreationTime})
+var sCreateChannelResponse_FillerSlate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FillerSlate", ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse_FillerSlate})
+var sCreateChannelResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateChannelResponse_LastModifiedTime})
+var sCreateChannelResponse_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_ResponseOutputs, Members: &m_ResponseOutputs, Type: smithy.ShapeTypeList, Ext: &eCreateChannelResponse_Outputs})
+var sCreateChannelResponse_PlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackMode", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_PlaybackMode})
+var sCreateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateChannelResponse_Tags})
+var sCreateChannelResponse_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_Tier})
+var sCreateChannelResponse_TimeShiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeShiftConfiguration", ID: &iTimeShiftConfiguration, Members: &mTimeShiftConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse_TimeShiftConfiguration})
+var sCreateChannelResponse_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eCreateChannelResponse_Audiences})
+var sCreateLiveSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLiveSourceRequest, Members: &mCreateLiveSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLiveSourceRequest})
+var sCreateLiveSourceRequest_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateLiveSourceRequest_HttpPackageConfigurations})
+var sCreateLiveSourceRequest_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateLiveSourceRequest_LiveSourceName})
+var sCreateLiveSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateLiveSourceRequest_SourceLocationName})
+var sCreateLiveSourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateLiveSourceRequest_Tags})
+var sCreateLiveSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLiveSourceResponse, Members: &mCreateLiveSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLiveSourceResponse})
+var sCreateLiveSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateLiveSourceResponse_Arn})
+var sCreateLiveSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateLiveSourceResponse_CreationTime})
+var sCreateLiveSourceResponse_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateLiveSourceResponse_HttpPackageConfigurations})
+var sCreateLiveSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateLiveSourceResponse_LastModifiedTime})
+var sCreateLiveSourceResponse_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateLiveSourceResponse_LiveSourceName})
+var sCreateLiveSourceResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateLiveSourceResponse_SourceLocationName})
+var sCreateLiveSourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateLiveSourceResponse_Tags})
+var sCreatePrefetchScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrefetchScheduleRequest, Members: &mCreatePrefetchScheduleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleRequest})
+var sCreatePrefetchScheduleRequest_Consumption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consumption", ID: &iPrefetchConsumption, Members: &mPrefetchConsumption, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleRequest_Consumption})
+var sCreatePrefetchScheduleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreatePrefetchScheduleRequest_Name})
+var sCreatePrefetchScheduleRequest_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreatePrefetchScheduleRequest_PlaybackConfigurationName})
+var sCreatePrefetchScheduleRequest_Retrieval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retrieval", ID: &iPrefetchRetrieval, Members: &mPrefetchRetrieval, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleRequest_Retrieval})
+var sCreatePrefetchScheduleRequest_RecurringPrefetchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringPrefetchConfiguration", ID: &iRecurringPrefetchConfiguration, Members: &mRecurringPrefetchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleRequest_RecurringPrefetchConfiguration})
+var sCreatePrefetchScheduleRequest_ScheduleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleType", ID: &iPrefetchScheduleType, Members: &mPrefetchScheduleType, Type: smithy.ShapeTypeEnum, Ext: &eCreatePrefetchScheduleRequest_ScheduleType})
+var sCreatePrefetchScheduleRequest_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreatePrefetchScheduleRequest_StreamId})
+var sCreatePrefetchScheduleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreatePrefetchScheduleRequest_Tags})
+var sCreatePrefetchScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrefetchScheduleResponse, Members: &mCreatePrefetchScheduleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleResponse})
+var sCreatePrefetchScheduleResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreatePrefetchScheduleResponse_Arn})
+var sCreatePrefetchScheduleResponse_Consumption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consumption", ID: &iPrefetchConsumption, Members: &mPrefetchConsumption, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleResponse_Consumption})
+var sCreatePrefetchScheduleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreatePrefetchScheduleResponse_Name})
+var sCreatePrefetchScheduleResponse_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreatePrefetchScheduleResponse_PlaybackConfigurationName})
+var sCreatePrefetchScheduleResponse_Retrieval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retrieval", ID: &iPrefetchRetrieval, Members: &mPrefetchRetrieval, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleResponse_Retrieval})
+var sCreatePrefetchScheduleResponse_RecurringPrefetchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringPrefetchConfiguration", ID: &iRecurringPrefetchConfiguration, Members: &mRecurringPrefetchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrefetchScheduleResponse_RecurringPrefetchConfiguration})
+var sCreatePrefetchScheduleResponse_ScheduleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleType", ID: &iPrefetchScheduleType, Members: &mPrefetchScheduleType, Type: smithy.ShapeTypeEnum, Ext: &eCreatePrefetchScheduleResponse_ScheduleType})
+var sCreatePrefetchScheduleResponse_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreatePrefetchScheduleResponse_StreamId})
+var sCreatePrefetchScheduleResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreatePrefetchScheduleResponse_Tags})
+var sCreateProgramRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramRequest, Members: &mCreateProgramRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramRequest})
+var sCreateProgramRequest_AdBreaks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreaks", ID: &i___listOfAdBreak, Members: &m___listOfAdBreak, Type: smithy.ShapeTypeList, Ext: &eCreateProgramRequest_AdBreaks})
+var sCreateProgramRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateProgramRequest_ChannelName})
+var sCreateProgramRequest_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramRequest_LiveSourceName})
+var sCreateProgramRequest_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateProgramRequest_ProgramName})
+var sCreateProgramRequest_ScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfiguration", ID: &iScheduleConfiguration, Members: &mScheduleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramRequest_ScheduleConfiguration})
+var sCreateProgramRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramRequest_SourceLocationName})
+var sCreateProgramRequest_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramRequest_VodSourceName})
+var sCreateProgramRequest_AudienceMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceMedia", ID: &i___listOfAudienceMedia, Members: &m___listOfAudienceMedia, Type: smithy.ShapeTypeList, Ext: &eCreateProgramRequest_AudienceMedia})
+var sCreateProgramRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateProgramRequest_Tags})
+var sCreateProgramResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramResponse, Members: &mCreateProgramResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramResponse})
+var sCreateProgramResponse_AdBreaks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreaks", ID: &i___listOfAdBreak, Members: &m___listOfAdBreak, Type: smithy.ShapeTypeList, Ext: &eCreateProgramResponse_AdBreaks})
+var sCreateProgramResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramResponse_Arn})
+var sCreateProgramResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramResponse_ChannelName})
+var sCreateProgramResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateProgramResponse_CreationTime})
+var sCreateProgramResponse_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramResponse_LiveSourceName})
+var sCreateProgramResponse_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramResponse_ProgramName})
+var sCreateProgramResponse_ScheduledStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledStartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateProgramResponse_ScheduledStartTime})
+var sCreateProgramResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramResponse_SourceLocationName})
+var sCreateProgramResponse_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateProgramResponse_VodSourceName})
+var sCreateProgramResponse_ClipRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipRange", ID: &iClipRange, Members: &mClipRange, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramResponse_ClipRange})
+var sCreateProgramResponse_DurationMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eCreateProgramResponse_DurationMillis})
+var sCreateProgramResponse_AudienceMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceMedia", ID: &i___listOfAudienceMedia, Members: &m___listOfAudienceMedia, Type: smithy.ShapeTypeList, Ext: &eCreateProgramResponse_AudienceMedia})
+var sCreateProgramResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateProgramResponse_Tags})
+var sCreateSourceLocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceLocationRequest, Members: &mCreateSourceLocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationRequest})
+var sCreateSourceLocationRequest_AccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessConfiguration", ID: &iAccessConfiguration, Members: &mAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationRequest_AccessConfiguration})
+var sCreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSegmentDeliveryConfiguration", ID: &iDefaultSegmentDeliveryConfiguration, Members: &mDefaultSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration})
+var sCreateSourceLocationRequest_HttpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpConfiguration", ID: &iHttpConfiguration, Members: &mHttpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationRequest_HttpConfiguration})
+var sCreateSourceLocationRequest_SegmentDeliveryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDeliveryConfigurations", ID: &i___listOfSegmentDeliveryConfiguration, Members: &m___listOfSegmentDeliveryConfiguration, Type: smithy.ShapeTypeList, Ext: &eCreateSourceLocationRequest_SegmentDeliveryConfigurations})
+var sCreateSourceLocationRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateSourceLocationRequest_SourceLocationName})
+var sCreateSourceLocationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateSourceLocationRequest_Tags})
+var sCreateSourceLocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceLocationResponse, Members: &mCreateSourceLocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationResponse})
+var sCreateSourceLocationResponse_AccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessConfiguration", ID: &iAccessConfiguration, Members: &mAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationResponse_AccessConfiguration})
+var sCreateSourceLocationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateSourceLocationResponse_Arn})
+var sCreateSourceLocationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSourceLocationResponse_CreationTime})
+var sCreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSegmentDeliveryConfiguration", ID: &iDefaultSegmentDeliveryConfiguration, Members: &mDefaultSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration})
+var sCreateSourceLocationResponse_HttpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpConfiguration", ID: &iHttpConfiguration, Members: &mHttpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceLocationResponse_HttpConfiguration})
+var sCreateSourceLocationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSourceLocationResponse_LastModifiedTime})
+var sCreateSourceLocationResponse_SegmentDeliveryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDeliveryConfigurations", ID: &i___listOfSegmentDeliveryConfiguration, Members: &m___listOfSegmentDeliveryConfiguration, Type: smithy.ShapeTypeList, Ext: &eCreateSourceLocationResponse_SegmentDeliveryConfigurations})
+var sCreateSourceLocationResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateSourceLocationResponse_SourceLocationName})
+var sCreateSourceLocationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateSourceLocationResponse_Tags})
+var sCreateVodSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVodSourceRequest, Members: &mCreateVodSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVodSourceRequest})
+var sCreateVodSourceRequest_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateVodSourceRequest_HttpPackageConfigurations})
+var sCreateVodSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateVodSourceRequest_SourceLocationName})
+var sCreateVodSourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateVodSourceRequest_Tags})
+var sCreateVodSourceRequest_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateVodSourceRequest_VodSourceName})
+var sCreateVodSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVodSourceResponse, Members: &mCreateVodSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVodSourceResponse})
+var sCreateVodSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateVodSourceResponse_Arn})
+var sCreateVodSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateVodSourceResponse_CreationTime})
+var sCreateVodSourceResponse_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateVodSourceResponse_HttpPackageConfigurations})
+var sCreateVodSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateVodSourceResponse_LastModifiedTime})
+var sCreateVodSourceResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateVodSourceResponse_SourceLocationName})
+var sCreateVodSourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eCreateVodSourceResponse_Tags})
+var sCreateVodSourceResponse_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eCreateVodSourceResponse_VodSourceName})
+var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelRequest})
+var sDeleteChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelRequest_ChannelName})
+var sDeleteChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelResponse})
+var sDeleteChannelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelPolicyRequest, Members: &mDeleteChannelPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelPolicyRequest})
+var sDeleteChannelPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelPolicyRequest_ChannelName})
+var sDeleteChannelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelPolicyResponse})
+var sDeleteFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFunctionRequest, Members: &mDeleteFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFunctionRequest})
+var sDeleteFunctionRequest_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionId", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteFunctionRequest_FunctionId})
+var sDeleteFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFunctionResponse})
+var sDeleteLiveSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLiveSourceRequest, Members: &mDeleteLiveSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLiveSourceRequest})
+var sDeleteLiveSourceRequest_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteLiveSourceRequest_LiveSourceName})
+var sDeleteLiveSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteLiveSourceRequest_SourceLocationName})
+var sDeleteLiveSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLiveSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLiveSourceResponse})
+var sDeletePlaybackConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackConfigurationRequest, Members: &mDeletePlaybackConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlaybackConfigurationRequest})
+var sDeletePlaybackConfigurationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeletePlaybackConfigurationRequest_Name})
+var sDeletePlaybackConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlaybackConfigurationResponse})
+var sDeletePrefetchScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePrefetchScheduleRequest, Members: &mDeletePrefetchScheduleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePrefetchScheduleRequest})
+var sDeletePrefetchScheduleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeletePrefetchScheduleRequest_Name})
+var sDeletePrefetchScheduleRequest_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeletePrefetchScheduleRequest_PlaybackConfigurationName})
+var sDeletePrefetchScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePrefetchScheduleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePrefetchScheduleResponse})
+var sDeleteProgramRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramRequest, Members: &mDeleteProgramRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProgramRequest})
+var sDeleteProgramRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteProgramRequest_ChannelName})
+var sDeleteProgramRequest_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteProgramRequest_ProgramName})
+var sDeleteProgramResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProgramResponse})
+var sDeleteSourceLocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceLocationRequest, Members: &mDeleteSourceLocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceLocationRequest})
+var sDeleteSourceLocationRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceLocationRequest_SourceLocationName})
+var sDeleteSourceLocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceLocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceLocationResponse})
+var sDeleteVodSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVodSourceRequest, Members: &mDeleteVodSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVodSourceRequest})
+var sDeleteVodSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteVodSourceRequest_SourceLocationName})
+var sDeleteVodSourceRequest_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteVodSourceRequest_VodSourceName})
+var sDeleteVodSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVodSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVodSourceResponse})
+var sDescribeChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelRequest, Members: &mDescribeChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelRequest})
+var sDescribeChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelRequest_ChannelName})
+var sDescribeChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelResponse, Members: &mDescribeChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse})
+var sDescribeChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_Arn})
+var sDescribeChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_ChannelName})
+var sDescribeChannelResponse_ChannelState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelState", ID: &iChannelState, Members: &mChannelState, Type: smithy.ShapeTypeEnum, Ext: &eDescribeChannelResponse_ChannelState})
+var sDescribeChannelResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeChannelResponse_CreationTime})
+var sDescribeChannelResponse_FillerSlate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FillerSlate", ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_FillerSlate})
+var sDescribeChannelResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeChannelResponse_LastModifiedTime})
+var sDescribeChannelResponse_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_ResponseOutputs, Members: &m_ResponseOutputs, Type: smithy.ShapeTypeList, Ext: &eDescribeChannelResponse_Outputs})
+var sDescribeChannelResponse_PlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackMode", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_PlaybackMode})
+var sDescribeChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eDescribeChannelResponse_Tags})
+var sDescribeChannelResponse_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_Tier})
+var sDescribeChannelResponse_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfigurationForChannel, Members: &mLogConfigurationForChannel, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_LogConfiguration})
+var sDescribeChannelResponse_TimeShiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeShiftConfiguration", ID: &iTimeShiftConfiguration, Members: &mTimeShiftConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_TimeShiftConfiguration})
+var sDescribeChannelResponse_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eDescribeChannelResponse_Audiences})
+var sDescribeLiveSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLiveSourceRequest, Members: &mDescribeLiveSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLiveSourceRequest})
+var sDescribeLiveSourceRequest_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeLiveSourceRequest_LiveSourceName})
+var sDescribeLiveSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeLiveSourceRequest_SourceLocationName})
+var sDescribeLiveSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLiveSourceResponse, Members: &mDescribeLiveSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLiveSourceResponse})
+var sDescribeLiveSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeLiveSourceResponse_Arn})
+var sDescribeLiveSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLiveSourceResponse_CreationTime})
+var sDescribeLiveSourceResponse_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eDescribeLiveSourceResponse_HttpPackageConfigurations})
+var sDescribeLiveSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLiveSourceResponse_LastModifiedTime})
+var sDescribeLiveSourceResponse_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeLiveSourceResponse_LiveSourceName})
+var sDescribeLiveSourceResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeLiveSourceResponse_SourceLocationName})
+var sDescribeLiveSourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eDescribeLiveSourceResponse_Tags})
+var sDescribeProgramRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProgramRequest, Members: &mDescribeProgramRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProgramRequest})
+var sDescribeProgramRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramRequest_ChannelName})
+var sDescribeProgramRequest_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramRequest_ProgramName})
+var sDescribeProgramResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProgramResponse, Members: &mDescribeProgramResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProgramResponse})
+var sDescribeProgramResponse_AdBreaks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreaks", ID: &i___listOfAdBreak, Members: &m___listOfAdBreak, Type: smithy.ShapeTypeList, Ext: &eDescribeProgramResponse_AdBreaks})
+var sDescribeProgramResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramResponse_Arn})
+var sDescribeProgramResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramResponse_ChannelName})
+var sDescribeProgramResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeProgramResponse_CreationTime})
+var sDescribeProgramResponse_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramResponse_LiveSourceName})
+var sDescribeProgramResponse_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramResponse_ProgramName})
+var sDescribeProgramResponse_ScheduledStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledStartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeProgramResponse_ScheduledStartTime})
+var sDescribeProgramResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramResponse_SourceLocationName})
+var sDescribeProgramResponse_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeProgramResponse_VodSourceName})
+var sDescribeProgramResponse_ClipRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipRange", ID: &iClipRange, Members: &mClipRange, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProgramResponse_ClipRange})
+var sDescribeProgramResponse_DurationMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationMillis", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eDescribeProgramResponse_DurationMillis})
+var sDescribeProgramResponse_AudienceMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceMedia", ID: &i___listOfAudienceMedia, Members: &m___listOfAudienceMedia, Type: smithy.ShapeTypeList, Ext: &eDescribeProgramResponse_AudienceMedia})
+var sDescribeProgramResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eDescribeProgramResponse_Tags})
+var sDescribeSourceLocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceLocationRequest, Members: &mDescribeSourceLocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceLocationRequest})
+var sDescribeSourceLocationRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceLocationRequest_SourceLocationName})
+var sDescribeSourceLocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceLocationResponse, Members: &mDescribeSourceLocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceLocationResponse})
+var sDescribeSourceLocationResponse_AccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessConfiguration", ID: &iAccessConfiguration, Members: &mAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceLocationResponse_AccessConfiguration})
+var sDescribeSourceLocationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceLocationResponse_Arn})
+var sDescribeSourceLocationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSourceLocationResponse_CreationTime})
+var sDescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSegmentDeliveryConfiguration", ID: &iDefaultSegmentDeliveryConfiguration, Members: &mDefaultSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration})
+var sDescribeSourceLocationResponse_HttpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpConfiguration", ID: &iHttpConfiguration, Members: &mHttpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceLocationResponse_HttpConfiguration})
+var sDescribeSourceLocationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSourceLocationResponse_LastModifiedTime})
+var sDescribeSourceLocationResponse_SegmentDeliveryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDeliveryConfigurations", ID: &i___listOfSegmentDeliveryConfiguration, Members: &m___listOfSegmentDeliveryConfiguration, Type: smithy.ShapeTypeList, Ext: &eDescribeSourceLocationResponse_SegmentDeliveryConfigurations})
+var sDescribeSourceLocationResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceLocationResponse_SourceLocationName})
+var sDescribeSourceLocationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eDescribeSourceLocationResponse_Tags})
+var sDescribeVodSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVodSourceRequest, Members: &mDescribeVodSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVodSourceRequest})
+var sDescribeVodSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeVodSourceRequest_SourceLocationName})
+var sDescribeVodSourceRequest_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeVodSourceRequest_VodSourceName})
+var sDescribeVodSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVodSourceResponse, Members: &mDescribeVodSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVodSourceResponse})
+var sDescribeVodSourceResponse_AdBreakOpportunities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreakOpportunities", ID: &i_AdBreakOpportunities, Members: &m_AdBreakOpportunities, Type: smithy.ShapeTypeList, Ext: &eDescribeVodSourceResponse_AdBreakOpportunities})
+var sDescribeVodSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeVodSourceResponse_Arn})
+var sDescribeVodSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeVodSourceResponse_CreationTime})
+var sDescribeVodSourceResponse_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eDescribeVodSourceResponse_HttpPackageConfigurations})
+var sDescribeVodSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeVodSourceResponse_LastModifiedTime})
+var sDescribeVodSourceResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeVodSourceResponse_SourceLocationName})
+var sDescribeVodSourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eDescribeVodSourceResponse_Tags})
+var sDescribeVodSourceResponse_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eDescribeVodSourceResponse_VodSourceName})
+var sGetChannelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelPolicyRequest, Members: &mGetChannelPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelPolicyRequest})
+var sGetChannelPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetChannelPolicyRequest_ChannelName})
+var sGetChannelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelPolicyResponse, Members: &mGetChannelPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelPolicyResponse})
+var sGetChannelPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetChannelPolicyResponse_Policy})
+var sGetChannelScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelScheduleRequest, Members: &mGetChannelScheduleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelScheduleRequest})
+var sGetChannelScheduleRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetChannelScheduleRequest_ChannelName})
+var sGetChannelScheduleRequest_DurationMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationMinutes", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetChannelScheduleRequest_DurationMinutes})
+var sGetChannelScheduleRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetChannelScheduleRequest_MaxResults})
+var sGetChannelScheduleRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetChannelScheduleRequest_NextToken})
+var sGetChannelScheduleRequest_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eGetChannelScheduleRequest_Audience})
+var sGetChannelScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelScheduleResponse, Members: &mGetChannelScheduleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelScheduleResponse})
+var sGetChannelScheduleResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfScheduleEntry, Members: &m___listOfScheduleEntry, Type: smithy.ShapeTypeList, Ext: &eGetChannelScheduleResponse_Items})
+var sGetChannelScheduleResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetChannelScheduleResponse_NextToken})
+var sGetFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFunctionRequest, Members: &mGetFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionRequest})
+var sGetFunctionRequest_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionId", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetFunctionRequest_FunctionId})
+var sGetFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFunctionResponse, Members: &mGetFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse})
+var sGetFunctionResponse_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetFunctionResponse_FunctionId})
+var sGetFunctionResponse_FunctionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionType", ID: &iFunctionType, Members: &mFunctionType, Type: smithy.ShapeTypeEnum, Ext: &eGetFunctionResponse_FunctionType})
+var sGetFunctionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetFunctionResponse_Description})
+var sGetFunctionResponse_HttpRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpRequestConfiguration", ID: &iHttpRequestConfiguration, Members: &mHttpRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse_HttpRequestConfiguration})
+var sGetFunctionResponse_AwsServiceRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsServiceRequestConfiguration", ID: &iAwsServiceRequestConfiguration, Members: &mAwsServiceRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse_AwsServiceRequestConfiguration})
+var sGetFunctionResponse_CustomOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomOutputConfiguration", ID: &iCustomOutputConfiguration, Members: &mCustomOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse_CustomOutputConfiguration})
+var sGetFunctionResponse_ConcurrentExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConcurrentExecutorConfiguration", ID: &iConcurrentExecutorConfiguration, Members: &mConcurrentExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse_ConcurrentExecutorConfiguration})
+var sGetFunctionResponse_SequentialExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequentialExecutorConfiguration", ID: &iSequentialExecutorConfiguration, Members: &mSequentialExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse_SequentialExecutorConfiguration})
+var sGetFunctionResponse_VastRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VastRequestConfiguration", ID: &iVastRequestConfiguration, Members: &mVastRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse_VastRequestConfiguration})
+var sGetFunctionResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eGetFunctionResponse_Tags})
+var sGetFunctionResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetFunctionResponse_Arn})
+var sGetPlaybackConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackConfigurationRequest, Members: &mGetPlaybackConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationRequest})
+var sGetPlaybackConfigurationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationRequest_Name})
+var sGetPlaybackConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackConfigurationResponse, Members: &mGetPlaybackConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse})
+var sGetPlaybackConfigurationResponse_AdDecisionServerUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_AdDecisionServerUrl})
+var sGetPlaybackConfigurationResponse_AvailSuppression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailSuppression", ID: &iAvailSuppression, Members: &mAvailSuppression, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_AvailSuppression})
+var sGetPlaybackConfigurationResponse_Bumper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bumper", ID: &iBumper, Members: &mBumper, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_Bumper})
+var sGetPlaybackConfigurationResponse_CdnConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnConfiguration", ID: &iCdnConfiguration, Members: &mCdnConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_CdnConfiguration})
+var sGetPlaybackConfigurationResponse_ConfigurationAliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationAliases", ID: &i_ConfigurationAliasesResponse, Members: &m_ConfigurationAliasesResponse, Type: smithy.ShapeTypeMap, Ext: &eGetPlaybackConfigurationResponse_ConfigurationAliases})
+var sGetPlaybackConfigurationResponse_DashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashConfiguration", ID: &iDashConfiguration, Members: &mDashConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_DashConfiguration})
+var sGetPlaybackConfigurationResponse_HlsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsConfiguration", ID: &iHlsConfiguration, Members: &mHlsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_HlsConfiguration})
+var sGetPlaybackConfigurationResponse_InsertionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertionMode", ID: &iInsertionMode, Members: &mInsertionMode, Type: smithy.ShapeTypeEnum, Ext: &eGetPlaybackConfigurationResponse_InsertionMode})
+var sGetPlaybackConfigurationResponse_LivePreRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LivePreRollConfiguration", ID: &iLivePreRollConfiguration, Members: &mLivePreRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_LivePreRollConfiguration})
+var sGetPlaybackConfigurationResponse_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_LogConfiguration})
+var sGetPlaybackConfigurationResponse_ManifestProcessingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestProcessingRules", ID: &iManifestProcessingRules, Members: &mManifestProcessingRules, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_ManifestProcessingRules})
+var sGetPlaybackConfigurationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_Name})
+var sGetPlaybackConfigurationResponse_PersonalizationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalizationThresholdSeconds", ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &eGetPlaybackConfigurationResponse_PersonalizationThresholdSeconds})
+var sGetPlaybackConfigurationResponse_PlaybackConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_PlaybackConfigurationArn})
+var sGetPlaybackConfigurationResponse_PlaybackEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_PlaybackEndpointPrefix})
+var sGetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackPlaybackEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix})
+var sGetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionInitializationEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix})
+var sGetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackSessionInitializationEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix})
+var sGetPlaybackConfigurationResponse_SlateAdUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlateAdUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_SlateAdUrl})
+var sGetPlaybackConfigurationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eGetPlaybackConfigurationResponse_Tags})
+var sGetPlaybackConfigurationResponse_TranscodeProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranscodeProfileName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_TranscodeProfileName})
+var sGetPlaybackConfigurationResponse_VideoContentSourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VideoContentSourceUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackConfigurationResponse_VideoContentSourceUrl})
+var sGetPlaybackConfigurationResponse_AdConditioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdConditioningConfiguration", ID: &iAdConditioningConfiguration, Members: &mAdConditioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_AdConditioningConfiguration})
+var sGetPlaybackConfigurationResponse_AdDecisionServerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerConfiguration", ID: &iAdDecisionServerConfiguration, Members: &mAdDecisionServerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_AdDecisionServerConfiguration})
+var sGetPlaybackConfigurationResponse_YieldOptimizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YieldOptimizationConfiguration", ID: &iYieldOptimizationConfiguration, Members: &mYieldOptimizationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_YieldOptimizationConfiguration})
+var sGetPlaybackConfigurationResponse_FunctionMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionMapping", ID: &i_FunctionMapping, Members: &m_FunctionMapping, Type: smithy.ShapeTypeMap, Ext: &eGetPlaybackConfigurationResponse_FunctionMapping})
+var sGetPlaybackConfigurationResponse_AdsPersonalizationTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationTimeouts", ID: &iAdsPersonalizationTimeouts, Members: &mAdsPersonalizationTimeouts, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_AdsPersonalizationTimeouts})
+var sGetPlaybackConfigurationResponse_AdsPersonalizationConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationConcurrency", ID: &iAdsPersonalizationConcurrency, Members: &mAdsPersonalizationConcurrency, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_AdsPersonalizationConcurrency})
+var sGetPlaybackConfigurationResponse_BeaconingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeaconingConfiguration", ID: &iBeaconingConfiguration, Members: &mBeaconingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackConfigurationResponse_BeaconingConfiguration})
+var sGetPrefetchScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrefetchScheduleRequest, Members: &mGetPrefetchScheduleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPrefetchScheduleRequest})
+var sGetPrefetchScheduleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetPrefetchScheduleRequest_Name})
+var sGetPrefetchScheduleRequest_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetPrefetchScheduleRequest_PlaybackConfigurationName})
+var sGetPrefetchScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrefetchScheduleResponse, Members: &mGetPrefetchScheduleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPrefetchScheduleResponse})
+var sGetPrefetchScheduleResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPrefetchScheduleResponse_Arn})
+var sGetPrefetchScheduleResponse_Consumption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consumption", ID: &iPrefetchConsumption, Members: &mPrefetchConsumption, Type: smithy.ShapeTypeStructure, Ext: &eGetPrefetchScheduleResponse_Consumption})
+var sGetPrefetchScheduleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPrefetchScheduleResponse_Name})
+var sGetPrefetchScheduleResponse_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPrefetchScheduleResponse_PlaybackConfigurationName})
+var sGetPrefetchScheduleResponse_Retrieval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retrieval", ID: &iPrefetchRetrieval, Members: &mPrefetchRetrieval, Type: smithy.ShapeTypeStructure, Ext: &eGetPrefetchScheduleResponse_Retrieval})
+var sGetPrefetchScheduleResponse_ScheduleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleType", ID: &iPrefetchScheduleType, Members: &mPrefetchScheduleType, Type: smithy.ShapeTypeEnum, Ext: &eGetPrefetchScheduleResponse_ScheduleType})
+var sGetPrefetchScheduleResponse_RecurringPrefetchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringPrefetchConfiguration", ID: &iRecurringPrefetchConfiguration, Members: &mRecurringPrefetchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetPrefetchScheduleResponse_RecurringPrefetchConfiguration})
+var sGetPrefetchScheduleResponse_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eGetPrefetchScheduleResponse_StreamId})
+var sGetPrefetchScheduleResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eGetPrefetchScheduleResponse_Tags})
+var sListAlertsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAlertsRequest, Members: &mListAlertsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAlertsRequest})
+var sListAlertsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eListAlertsRequest_MaxResults})
+var sListAlertsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eListAlertsRequest_NextToken})
+var sListAlertsRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eListAlertsRequest_ResourceArn})
+var sListAlertsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAlertsResponse, Members: &mListAlertsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAlertsResponse})
+var sListAlertsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfAlert, Members: &m___listOfAlert, Type: smithy.ShapeTypeList, Ext: &eListAlertsResponse_Items})
+var sListAlertsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListAlertsResponse_NextToken})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsRequest})
+var sListChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsRequest_MaxResults})
+var sListChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_NextToken})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsResponse})
+var sListChannelsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfChannel, Members: &m___listOfChannel, Type: smithy.ShapeTypeList, Ext: &eListChannelsResponse_Items})
+var sListChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListChannelsResponse_NextToken})
+var sListFunctionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFunctionsRequest, Members: &mListFunctionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFunctionsRequest})
+var sListFunctionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t58, Type: smithy.ShapeTypeInteger, Ext: &eListFunctionsRequest_MaxResults})
+var sListFunctionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eListFunctionsRequest_NextToken})
+var sListFunctionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFunctionsResponse, Members: &mListFunctionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFunctionsResponse})
+var sListFunctionsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfFunctionsResponse, Members: &m___listOfFunctionsResponse, Type: smithy.ShapeTypeList, Ext: &eListFunctionsResponse_Items})
+var sListFunctionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListFunctionsResponse_NextToken})
+var sListLiveSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLiveSourcesRequest, Members: &mListLiveSourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLiveSourcesRequest})
+var sListLiveSourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eListLiveSourcesRequest_MaxResults})
+var sListLiveSourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eListLiveSourcesRequest_NextToken})
+var sListLiveSourcesRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListLiveSourcesRequest_SourceLocationName})
+var sListLiveSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLiveSourcesResponse, Members: &mListLiveSourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLiveSourcesResponse})
+var sListLiveSourcesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfLiveSource, Members: &m___listOfLiveSource, Type: smithy.ShapeTypeList, Ext: &eListLiveSourcesResponse_Items})
+var sListLiveSourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListLiveSourcesResponse_NextToken})
+var sListPlaybackConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackConfigurationsRequest, Members: &mListPlaybackConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPlaybackConfigurationsRequest})
+var sListPlaybackConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t58, Type: smithy.ShapeTypeInteger, Ext: &eListPlaybackConfigurationsRequest_MaxResults})
+var sListPlaybackConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eListPlaybackConfigurationsRequest_NextToken})
+var sListPlaybackConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackConfigurationsResponse, Members: &mListPlaybackConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPlaybackConfigurationsResponse})
+var sListPlaybackConfigurationsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfPlaybackConfiguration, Members: &m___listOfPlaybackConfiguration, Type: smithy.ShapeTypeList, Ext: &eListPlaybackConfigurationsResponse_Items})
+var sListPlaybackConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListPlaybackConfigurationsResponse_NextToken})
+var sListPrefetchSchedulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrefetchSchedulesRequest, Members: &mListPrefetchSchedulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPrefetchSchedulesRequest})
+var sListPrefetchSchedulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___integerMin1Max100, Type: smithy.ShapeTypeInteger, Ext: &eListPrefetchSchedulesRequest_MaxResults})
+var sListPrefetchSchedulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListPrefetchSchedulesRequest_NextToken})
+var sListPrefetchSchedulesRequest_PlaybackConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListPrefetchSchedulesRequest_PlaybackConfigurationName})
+var sListPrefetchSchedulesRequest_ScheduleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleType", ID: &iListPrefetchScheduleType, Members: &mListPrefetchScheduleType, Type: smithy.ShapeTypeEnum, Ext: &eListPrefetchSchedulesRequest_ScheduleType})
+var sListPrefetchSchedulesRequest_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListPrefetchSchedulesRequest_StreamId})
+var sListPrefetchSchedulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrefetchSchedulesResponse, Members: &mListPrefetchSchedulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPrefetchSchedulesResponse})
+var sListPrefetchSchedulesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfPrefetchSchedule, Members: &m___listOfPrefetchSchedule, Type: smithy.ShapeTypeList, Ext: &eListPrefetchSchedulesResponse_Items})
+var sListPrefetchSchedulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListPrefetchSchedulesResponse_NextToken})
+var sListSourceLocationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceLocationsRequest, Members: &mListSourceLocationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSourceLocationsRequest})
+var sListSourceLocationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eListSourceLocationsRequest_MaxResults})
+var sListSourceLocationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eListSourceLocationsRequest_NextToken})
+var sListSourceLocationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceLocationsResponse, Members: &mListSourceLocationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSourceLocationsResponse})
+var sListSourceLocationsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfSourceLocation, Members: &m___listOfSourceLocation, Type: smithy.ShapeTypeList, Ext: &eListSourceLocationsResponse_Items})
+var sListSourceLocationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListSourceLocationsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sListVodSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVodSourcesRequest, Members: &mListVodSourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVodSourcesRequest})
+var sListVodSourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eListVodSourcesRequest_MaxResults})
+var sListVodSourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eListVodSourcesRequest_NextToken})
+var sListVodSourcesRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListVodSourcesRequest_SourceLocationName})
+var sListVodSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVodSourcesResponse, Members: &mListVodSourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVodSourcesResponse})
+var sListVodSourcesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfVodSource, Members: &m___listOfVodSource, Type: smithy.ShapeTypeList, Ext: &eListVodSourcesResponse_Items})
+var sListVodSourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eListVodSourcesResponse_NextToken})
+var sPutChannelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelPolicyRequest, Members: &mPutChannelPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelPolicyRequest})
+var sPutChannelPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutChannelPolicyRequest_ChannelName})
+var sPutChannelPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutChannelPolicyRequest_Policy})
+var sPutChannelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelPolicyResponse})
+var sPutFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFunctionRequest, Members: &mPutFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionRequest})
+var sPutFunctionRequest_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionId", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutFunctionRequest_FunctionId})
+var sPutFunctionRequest_FunctionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionType", ID: &iFunctionType, Members: &mFunctionType, Type: smithy.ShapeTypeEnum, Ext: &ePutFunctionRequest_FunctionType})
+var sPutFunctionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutFunctionRequest_Description})
+var sPutFunctionRequest_HttpRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpRequestConfiguration", ID: &iHttpRequestConfiguration, Members: &mHttpRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionRequest_HttpRequestConfiguration})
+var sPutFunctionRequest_AwsServiceRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsServiceRequestConfiguration", ID: &iAwsServiceRequestConfiguration, Members: &mAwsServiceRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionRequest_AwsServiceRequestConfiguration})
+var sPutFunctionRequest_CustomOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomOutputConfiguration", ID: &iCustomOutputConfiguration, Members: &mCustomOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionRequest_CustomOutputConfiguration})
+var sPutFunctionRequest_ConcurrentExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConcurrentExecutorConfiguration", ID: &iConcurrentExecutorConfiguration, Members: &mConcurrentExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionRequest_ConcurrentExecutorConfiguration})
+var sPutFunctionRequest_SequentialExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequentialExecutorConfiguration", ID: &iSequentialExecutorConfiguration, Members: &mSequentialExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionRequest_SequentialExecutorConfiguration})
+var sPutFunctionRequest_VastRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VastRequestConfiguration", ID: &iVastRequestConfiguration, Members: &mVastRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionRequest_VastRequestConfiguration})
+var sPutFunctionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &ePutFunctionRequest_Tags})
+var sPutFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFunctionResponse, Members: &mPutFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionResponse})
+var sPutFunctionResponse_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionId", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutFunctionResponse_FunctionId})
+var sPutFunctionResponse_FunctionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionType", ID: &iFunctionType, Members: &mFunctionType, Type: smithy.ShapeTypeEnum, Ext: &ePutFunctionResponse_FunctionType})
+var sPutFunctionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutFunctionResponse_Description})
+var sPutFunctionResponse_HttpRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpRequestConfiguration", ID: &iHttpRequestConfiguration, Members: &mHttpRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionResponse_HttpRequestConfiguration})
+var sPutFunctionResponse_AwsServiceRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsServiceRequestConfiguration", ID: &iAwsServiceRequestConfiguration, Members: &mAwsServiceRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionResponse_AwsServiceRequestConfiguration})
+var sPutFunctionResponse_CustomOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomOutputConfiguration", ID: &iCustomOutputConfiguration, Members: &mCustomOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionResponse_CustomOutputConfiguration})
+var sPutFunctionResponse_ConcurrentExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConcurrentExecutorConfiguration", ID: &iConcurrentExecutorConfiguration, Members: &mConcurrentExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionResponse_ConcurrentExecutorConfiguration})
+var sPutFunctionResponse_SequentialExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequentialExecutorConfiguration", ID: &iSequentialExecutorConfiguration, Members: &mSequentialExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionResponse_SequentialExecutorConfiguration})
+var sPutFunctionResponse_VastRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VastRequestConfiguration", ID: &iVastRequestConfiguration, Members: &mVastRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutFunctionResponse_VastRequestConfiguration})
+var sPutFunctionResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &ePutFunctionResponse_Tags})
+var sPutFunctionResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutFunctionResponse_Arn})
+var sPutPlaybackConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPlaybackConfigurationRequest, Members: &mPutPlaybackConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest})
+var sPutPlaybackConfigurationRequest_AdDecisionServerUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationRequest_AdDecisionServerUrl})
+var sPutPlaybackConfigurationRequest_AvailSuppression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailSuppression", ID: &iAvailSuppression, Members: &mAvailSuppression, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_AvailSuppression})
+var sPutPlaybackConfigurationRequest_Bumper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bumper", ID: &iBumper, Members: &mBumper, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_Bumper})
+var sPutPlaybackConfigurationRequest_CdnConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnConfiguration", ID: &iCdnConfiguration, Members: &mCdnConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_CdnConfiguration})
+var sPutPlaybackConfigurationRequest_ConfigurationAliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationAliases", ID: &i_ConfigurationAliasesRequest, Members: &m_ConfigurationAliasesRequest, Type: smithy.ShapeTypeMap, Ext: &ePutPlaybackConfigurationRequest_ConfigurationAliases})
+var sPutPlaybackConfigurationRequest_DashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashConfiguration", ID: &iDashConfigurationForPut, Members: &mDashConfigurationForPut, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_DashConfiguration})
+var sPutPlaybackConfigurationRequest_InsertionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertionMode", ID: &iInsertionMode, Members: &mInsertionMode, Type: smithy.ShapeTypeEnum, Ext: &ePutPlaybackConfigurationRequest_InsertionMode})
+var sPutPlaybackConfigurationRequest_LivePreRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LivePreRollConfiguration", ID: &iLivePreRollConfiguration, Members: &mLivePreRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_LivePreRollConfiguration})
+var sPutPlaybackConfigurationRequest_ManifestProcessingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestProcessingRules", ID: &iManifestProcessingRules, Members: &mManifestProcessingRules, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_ManifestProcessingRules})
+var sPutPlaybackConfigurationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationRequest_Name})
+var sPutPlaybackConfigurationRequest_PersonalizationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalizationThresholdSeconds", ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &ePutPlaybackConfigurationRequest_PersonalizationThresholdSeconds})
+var sPutPlaybackConfigurationRequest_SlateAdUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlateAdUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationRequest_SlateAdUrl})
+var sPutPlaybackConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &ePutPlaybackConfigurationRequest_Tags})
+var sPutPlaybackConfigurationRequest_TranscodeProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranscodeProfileName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationRequest_TranscodeProfileName})
+var sPutPlaybackConfigurationRequest_VideoContentSourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VideoContentSourceUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationRequest_VideoContentSourceUrl})
+var sPutPlaybackConfigurationRequest_AdConditioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdConditioningConfiguration", ID: &iAdConditioningConfiguration, Members: &mAdConditioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_AdConditioningConfiguration})
+var sPutPlaybackConfigurationRequest_AdDecisionServerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerConfiguration", ID: &iAdDecisionServerConfiguration, Members: &mAdDecisionServerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_AdDecisionServerConfiguration})
+var sPutPlaybackConfigurationRequest_YieldOptimizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YieldOptimizationConfiguration", ID: &iYieldOptimizationConfiguration, Members: &mYieldOptimizationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_YieldOptimizationConfiguration})
+var sPutPlaybackConfigurationRequest_FunctionMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionMapping", ID: &i_FunctionMapping, Members: &m_FunctionMapping, Type: smithy.ShapeTypeMap, Ext: &ePutPlaybackConfigurationRequest_FunctionMapping})
+var sPutPlaybackConfigurationRequest_AdsPersonalizationTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationTimeouts", ID: &iAdsPersonalizationTimeouts, Members: &mAdsPersonalizationTimeouts, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_AdsPersonalizationTimeouts})
+var sPutPlaybackConfigurationRequest_AdsPersonalizationConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationConcurrency", ID: &iAdsPersonalizationConcurrency, Members: &mAdsPersonalizationConcurrency, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_AdsPersonalizationConcurrency})
+var sPutPlaybackConfigurationRequest_BeaconingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeaconingConfiguration", ID: &iBeaconingConfiguration, Members: &mBeaconingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationRequest_BeaconingConfiguration})
+var sPutPlaybackConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPlaybackConfigurationResponse, Members: &mPutPlaybackConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse})
+var sPutPlaybackConfigurationResponse_AdDecisionServerUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_AdDecisionServerUrl})
+var sPutPlaybackConfigurationResponse_AvailSuppression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailSuppression", ID: &iAvailSuppression, Members: &mAvailSuppression, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_AvailSuppression})
+var sPutPlaybackConfigurationResponse_Bumper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bumper", ID: &iBumper, Members: &mBumper, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_Bumper})
+var sPutPlaybackConfigurationResponse_CdnConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnConfiguration", ID: &iCdnConfiguration, Members: &mCdnConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_CdnConfiguration})
+var sPutPlaybackConfigurationResponse_ConfigurationAliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationAliases", ID: &i_ConfigurationAliasesResponse, Members: &m_ConfigurationAliasesResponse, Type: smithy.ShapeTypeMap, Ext: &ePutPlaybackConfigurationResponse_ConfigurationAliases})
+var sPutPlaybackConfigurationResponse_DashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashConfiguration", ID: &iDashConfiguration, Members: &mDashConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_DashConfiguration})
+var sPutPlaybackConfigurationResponse_HlsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsConfiguration", ID: &iHlsConfiguration, Members: &mHlsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_HlsConfiguration})
+var sPutPlaybackConfigurationResponse_InsertionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertionMode", ID: &iInsertionMode, Members: &mInsertionMode, Type: smithy.ShapeTypeEnum, Ext: &ePutPlaybackConfigurationResponse_InsertionMode})
+var sPutPlaybackConfigurationResponse_LivePreRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LivePreRollConfiguration", ID: &iLivePreRollConfiguration, Members: &mLivePreRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_LivePreRollConfiguration})
+var sPutPlaybackConfigurationResponse_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_LogConfiguration})
+var sPutPlaybackConfigurationResponse_ManifestProcessingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestProcessingRules", ID: &iManifestProcessingRules, Members: &mManifestProcessingRules, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_ManifestProcessingRules})
+var sPutPlaybackConfigurationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_Name})
+var sPutPlaybackConfigurationResponse_PersonalizationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalizationThresholdSeconds", ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &ePutPlaybackConfigurationResponse_PersonalizationThresholdSeconds})
+var sPutPlaybackConfigurationResponse_PlaybackConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackConfigurationArn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_PlaybackConfigurationArn})
+var sPutPlaybackConfigurationResponse_PlaybackEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_PlaybackEndpointPrefix})
+var sPutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackPlaybackEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix})
+var sPutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionInitializationEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix})
+var sPutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackSessionInitializationEndpointPrefix", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix})
+var sPutPlaybackConfigurationResponse_SlateAdUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlateAdUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_SlateAdUrl})
+var sPutPlaybackConfigurationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &ePutPlaybackConfigurationResponse_Tags})
+var sPutPlaybackConfigurationResponse_TranscodeProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranscodeProfileName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_TranscodeProfileName})
+var sPutPlaybackConfigurationResponse_VideoContentSourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VideoContentSourceUrl", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ePutPlaybackConfigurationResponse_VideoContentSourceUrl})
+var sPutPlaybackConfigurationResponse_AdConditioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdConditioningConfiguration", ID: &iAdConditioningConfiguration, Members: &mAdConditioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_AdConditioningConfiguration})
+var sPutPlaybackConfigurationResponse_AdDecisionServerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdDecisionServerConfiguration", ID: &iAdDecisionServerConfiguration, Members: &mAdDecisionServerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_AdDecisionServerConfiguration})
+var sPutPlaybackConfigurationResponse_YieldOptimizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YieldOptimizationConfiguration", ID: &iYieldOptimizationConfiguration, Members: &mYieldOptimizationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_YieldOptimizationConfiguration})
+var sPutPlaybackConfigurationResponse_FunctionMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionMapping", ID: &i_FunctionMapping, Members: &m_FunctionMapping, Type: smithy.ShapeTypeMap, Ext: &ePutPlaybackConfigurationResponse_FunctionMapping})
+var sPutPlaybackConfigurationResponse_AdsPersonalizationTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationTimeouts", ID: &iAdsPersonalizationTimeouts, Members: &mAdsPersonalizationTimeouts, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_AdsPersonalizationTimeouts})
+var sPutPlaybackConfigurationResponse_AdsPersonalizationConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsPersonalizationConcurrency", ID: &iAdsPersonalizationConcurrency, Members: &mAdsPersonalizationConcurrency, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_AdsPersonalizationConcurrency})
+var sPutPlaybackConfigurationResponse_BeaconingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeaconingConfiguration", ID: &iBeaconingConfiguration, Members: &mBeaconingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutPlaybackConfigurationResponse_BeaconingConfiguration})
+var sStartChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChannelRequest, Members: &mStartChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartChannelRequest})
+var sStartChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eStartChannelRequest_ChannelName})
+var sStartChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartChannelResponse})
+var sStopChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopChannelRequest, Members: &mStopChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopChannelRequest})
+var sStopChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eStopChannelRequest_ChannelName})
+var sStopChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopChannelResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t60, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest})
+var sUpdateChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_ChannelName})
+var sUpdateChannelRequest_FillerSlate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FillerSlate", ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest_FillerSlate})
+var sUpdateChannelRequest_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_RequestOutputs, Members: &m_RequestOutputs, Type: smithy.ShapeTypeList, Ext: &eUpdateChannelRequest_Outputs})
+var sUpdateChannelRequest_TimeShiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeShiftConfiguration", ID: &iTimeShiftConfiguration, Members: &mTimeShiftConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest_TimeShiftConfiguration})
+var sUpdateChannelRequest_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eUpdateChannelRequest_Audiences})
+var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse})
+var sUpdateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_Arn})
+var sUpdateChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_ChannelName})
+var sUpdateChannelResponse_ChannelState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelState", ID: &iChannelState, Members: &mChannelState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateChannelResponse_ChannelState})
+var sUpdateChannelResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateChannelResponse_CreationTime})
+var sUpdateChannelResponse_FillerSlate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FillerSlate", ID: &iSlateSource, Members: &mSlateSource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse_FillerSlate})
+var sUpdateChannelResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateChannelResponse_LastModifiedTime})
+var sUpdateChannelResponse_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_ResponseOutputs, Members: &m_ResponseOutputs, Type: smithy.ShapeTypeList, Ext: &eUpdateChannelResponse_Outputs})
+var sUpdateChannelResponse_PlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackMode", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_PlaybackMode})
+var sUpdateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eUpdateChannelResponse_Tags})
+var sUpdateChannelResponse_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_Tier})
+var sUpdateChannelResponse_TimeShiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeShiftConfiguration", ID: &iTimeShiftConfiguration, Members: &mTimeShiftConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse_TimeShiftConfiguration})
+var sUpdateChannelResponse_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eUpdateChannelResponse_Audiences})
+var sUpdateLiveSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLiveSourceRequest, Members: &mUpdateLiveSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLiveSourceRequest})
+var sUpdateLiveSourceRequest_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateLiveSourceRequest_HttpPackageConfigurations})
+var sUpdateLiveSourceRequest_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateLiveSourceRequest_LiveSourceName})
+var sUpdateLiveSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateLiveSourceRequest_SourceLocationName})
+var sUpdateLiveSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLiveSourceResponse, Members: &mUpdateLiveSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLiveSourceResponse})
+var sUpdateLiveSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateLiveSourceResponse_Arn})
+var sUpdateLiveSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateLiveSourceResponse_CreationTime})
+var sUpdateLiveSourceResponse_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateLiveSourceResponse_HttpPackageConfigurations})
+var sUpdateLiveSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateLiveSourceResponse_LastModifiedTime})
+var sUpdateLiveSourceResponse_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateLiveSourceResponse_LiveSourceName})
+var sUpdateLiveSourceResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateLiveSourceResponse_SourceLocationName})
+var sUpdateLiveSourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eUpdateLiveSourceResponse_Tags})
+var sUpdateProgramRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramRequest, Members: &mUpdateProgramRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramRequest})
+var sUpdateProgramRequest_AdBreaks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreaks", ID: &i___listOfAdBreak, Members: &m___listOfAdBreak, Type: smithy.ShapeTypeList, Ext: &eUpdateProgramRequest_AdBreaks})
+var sUpdateProgramRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramRequest_ChannelName})
+var sUpdateProgramRequest_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramRequest_ProgramName})
+var sUpdateProgramRequest_ScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfiguration", ID: &iUpdateProgramScheduleConfiguration, Members: &mUpdateProgramScheduleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramRequest_ScheduleConfiguration})
+var sUpdateProgramRequest_AudienceMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceMedia", ID: &i___listOfAudienceMedia, Members: &m___listOfAudienceMedia, Type: smithy.ShapeTypeList, Ext: &eUpdateProgramRequest_AudienceMedia})
+var sUpdateProgramResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramResponse, Members: &mUpdateProgramResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramResponse})
+var sUpdateProgramResponse_AdBreaks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdBreaks", ID: &i___listOfAdBreak, Members: &m___listOfAdBreak, Type: smithy.ShapeTypeList, Ext: &eUpdateProgramResponse_AdBreaks})
+var sUpdateProgramResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramResponse_Arn})
+var sUpdateProgramResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramResponse_ChannelName})
+var sUpdateProgramResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateProgramResponse_CreationTime})
+var sUpdateProgramResponse_ProgramName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramResponse_ProgramName})
+var sUpdateProgramResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramResponse_SourceLocationName})
+var sUpdateProgramResponse_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramResponse_VodSourceName})
+var sUpdateProgramResponse_LiveSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiveSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramResponse_LiveSourceName})
+var sUpdateProgramResponse_ClipRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipRange", ID: &iClipRange, Members: &mClipRange, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramResponse_ClipRange})
+var sUpdateProgramResponse_DurationMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationMillis", ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &eUpdateProgramResponse_DurationMillis})
+var sUpdateProgramResponse_ScheduledStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledStartTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateProgramResponse_ScheduledStartTime})
+var sUpdateProgramResponse_AudienceMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceMedia", ID: &i___listOfAudienceMedia, Members: &m___listOfAudienceMedia, Type: smithy.ShapeTypeList, Ext: &eUpdateProgramResponse_AudienceMedia})
+var sUpdateProgramResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eUpdateProgramResponse_Tags})
+var sUpdateSourceLocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSourceLocationRequest, Members: &mUpdateSourceLocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationRequest})
+var sUpdateSourceLocationRequest_AccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessConfiguration", ID: &iAccessConfiguration, Members: &mAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationRequest_AccessConfiguration})
+var sUpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSegmentDeliveryConfiguration", ID: &iDefaultSegmentDeliveryConfiguration, Members: &mDefaultSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration})
+var sUpdateSourceLocationRequest_HttpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpConfiguration", ID: &iHttpConfiguration, Members: &mHttpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationRequest_HttpConfiguration})
+var sUpdateSourceLocationRequest_SegmentDeliveryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDeliveryConfigurations", ID: &i___listOfSegmentDeliveryConfiguration, Members: &m___listOfSegmentDeliveryConfiguration, Type: smithy.ShapeTypeList, Ext: &eUpdateSourceLocationRequest_SegmentDeliveryConfigurations})
+var sUpdateSourceLocationRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateSourceLocationRequest_SourceLocationName})
+var sUpdateSourceLocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSourceLocationResponse, Members: &mUpdateSourceLocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationResponse})
+var sUpdateSourceLocationResponse_AccessConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessConfiguration", ID: &iAccessConfiguration, Members: &mAccessConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationResponse_AccessConfiguration})
+var sUpdateSourceLocationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateSourceLocationResponse_Arn})
+var sUpdateSourceLocationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateSourceLocationResponse_CreationTime})
+var sUpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSegmentDeliveryConfiguration", ID: &iDefaultSegmentDeliveryConfiguration, Members: &mDefaultSegmentDeliveryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration})
+var sUpdateSourceLocationResponse_HttpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpConfiguration", ID: &iHttpConfiguration, Members: &mHttpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceLocationResponse_HttpConfiguration})
+var sUpdateSourceLocationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateSourceLocationResponse_LastModifiedTime})
+var sUpdateSourceLocationResponse_SegmentDeliveryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDeliveryConfigurations", ID: &i___listOfSegmentDeliveryConfiguration, Members: &m___listOfSegmentDeliveryConfiguration, Type: smithy.ShapeTypeList, Ext: &eUpdateSourceLocationResponse_SegmentDeliveryConfigurations})
+var sUpdateSourceLocationResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateSourceLocationResponse_SourceLocationName})
+var sUpdateSourceLocationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eUpdateSourceLocationResponse_Tags})
+var sUpdateVodSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVodSourceRequest, Members: &mUpdateVodSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVodSourceRequest})
+var sUpdateVodSourceRequest_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateVodSourceRequest_HttpPackageConfigurations})
+var sUpdateVodSourceRequest_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateVodSourceRequest_SourceLocationName})
+var sUpdateVodSourceRequest_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateVodSourceRequest_VodSourceName})
+var sUpdateVodSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVodSourceResponse, Members: &mUpdateVodSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVodSourceResponse})
+var sUpdateVodSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateVodSourceResponse_Arn})
+var sUpdateVodSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateVodSourceResponse_CreationTime})
+var sUpdateVodSourceResponse_HttpPackageConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpPackageConfigurations", ID: &i_HttpPackageConfigurations, Members: &m_HttpPackageConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateVodSourceResponse_HttpPackageConfigurations})
+var sUpdateVodSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i___timestampUnix, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateVodSourceResponse_LastModifiedTime})
+var sUpdateVodSourceResponse_SourceLocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateVodSourceResponse_SourceLocationName})
+var sUpdateVodSourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t51, Type: smithy.ShapeTypeMap, Ext: &eUpdateVodSourceResponse_Tags})
+var sUpdateVodSourceResponse_VodSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VodSourceName", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &eUpdateVodSourceResponse_VodSourceName})
+
+var ConfigureLogsForChannel = &sConfigureLogsForChannel
+
+var ConfigureLogsForPlaybackConfiguration = &sConfigureLogsForPlaybackConfiguration
+
+var CreateChannel = &sCreateChannel
+
+var CreateLiveSource = &sCreateLiveSource
+
+var CreatePrefetchSchedule = &sCreatePrefetchSchedule
+
+var CreateProgram = &sCreateProgram
+
+var CreateSourceLocation = &sCreateSourceLocation
+
+var CreateVodSource = &sCreateVodSource
+
+var DeleteChannel = &sDeleteChannel
+
+var DeleteChannelPolicy = &sDeleteChannelPolicy
+
+var DeleteFunction = &sDeleteFunction
+
+var DeleteLiveSource = &sDeleteLiveSource
+
+var DeletePlaybackConfiguration = &sDeletePlaybackConfiguration
+
+var DeletePrefetchSchedule = &sDeletePrefetchSchedule
+
+var DeleteProgram = &sDeleteProgram
+
+var DeleteSourceLocation = &sDeleteSourceLocation
+
+var DeleteVodSource = &sDeleteVodSource
+
+var DescribeChannel = &sDescribeChannel
+
+var DescribeLiveSource = &sDescribeLiveSource
+
+var DescribeProgram = &sDescribeProgram
+
+var DescribeSourceLocation = &sDescribeSourceLocation
+
+var DescribeVodSource = &sDescribeVodSource
+
+var GetChannelPolicy = &sGetChannelPolicy
+
+var GetChannelSchedule = &sGetChannelSchedule
+
+var GetFunction = &sGetFunction
+
+var GetPlaybackConfiguration = &sGetPlaybackConfiguration
+
+var GetPrefetchSchedule = &sGetPrefetchSchedule
+
+var ListAlerts = &sListAlerts
+
+var ListChannels = &sListChannels
+
+var ListFunctions = &sListFunctions
+
+var ListLiveSources = &sListLiveSources
+
+var ListPlaybackConfigurations = &sListPlaybackConfigurations
+
+var ListPrefetchSchedules = &sListPrefetchSchedules
+
+var ListSourceLocations = &sListSourceLocations
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListVodSources = &sListVodSources
+
+var PutChannelPolicy = &sPutChannelPolicy
+
+var PutFunction = &sPutFunction
+
+var PutPlaybackConfiguration = &sPutPlaybackConfiguration
+
+var StartChannel = &sStartChannel
+
+var StopChannel = &sStopChannel
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateLiveSource = &sUpdateLiveSource
+
+var UpdateProgram = &sUpdateProgram
+
+var UpdateSourceLocation = &sUpdateSourceLocation
+
+var UpdateVodSource = &sUpdateVodSource
+
+var _MediaTailor = &s_MediaTailor
+
+var ___adsInteractionExcludeEventTypesList = &s___adsInteractionExcludeEventTypesList
+var ___adsInteractionExcludeEventTypesList_member = &s___adsInteractionExcludeEventTypesList_member
+
+var ___adsInteractionPublishOptInEventTypesList = &s___adsInteractionPublishOptInEventTypesList
+var ___adsInteractionPublishOptInEventTypesList_member = &s___adsInteractionPublishOptInEventTypesList_member
+
+var ___boolean = &s___boolean
+
+var ___integer = &s___integer
+
+var ___integerMin1 = &s___integerMin1
+
+var ___integerMin1Max100 = &s___integerMin1Max100
+
+var ___listOf__string = &s___listOf__string
+var ___listOf__string_member = &s___listOf__string_member
+
+var ___listOfAdBreak = &s___listOfAdBreak
+var ___listOfAdBreak_member = &s___listOfAdBreak_member
+
+var ___listOfAlert = &s___listOfAlert
+var ___listOfAlert_member = &s___listOfAlert_member
+
+var ___listOfAlternateMedia = &s___listOfAlternateMedia
+var ___listOfAlternateMedia_member = &s___listOfAlternateMedia_member
+
+var ___listOfAudienceMedia = &s___listOfAudienceMedia
+var ___listOfAudienceMedia_member = &s___listOfAudienceMedia_member
+
+var ___listOfAvailMatchingCriteria = &s___listOfAvailMatchingCriteria
+var ___listOfAvailMatchingCriteria_member = &s___listOfAvailMatchingCriteria_member
+
+var ___listOfChannel = &s___listOfChannel
+var ___listOfChannel_member = &s___listOfChannel_member
+
+var ___listOfFunctionsRef = &s___listOfFunctionsRef
+var ___listOfFunctionsRef_member = &s___listOfFunctionsRef_member
+
+var ___listOfFunctionsResponse = &s___listOfFunctionsResponse
+var ___listOfFunctionsResponse_member = &s___listOfFunctionsResponse_member
+
+var ___listOfLiveSource = &s___listOfLiveSource
+var ___listOfLiveSource_member = &s___listOfLiveSource_member
+
+var ___listOfLoggingStrategies = &s___listOfLoggingStrategies
+var ___listOfLoggingStrategies_member = &s___listOfLoggingStrategies_member
+
+var ___listOfPlaybackConfiguration = &s___listOfPlaybackConfiguration
+var ___listOfPlaybackConfiguration_member = &s___listOfPlaybackConfiguration_member
+
+var ___listOfPrefetchSchedule = &s___listOfPrefetchSchedule
+var ___listOfPrefetchSchedule_member = &s___listOfPrefetchSchedule_member
+
+var ___listOfScheduleAdBreak = &s___listOfScheduleAdBreak
+var ___listOfScheduleAdBreak_member = &s___listOfScheduleAdBreak_member
+
+var ___listOfScheduleEntry = &s___listOfScheduleEntry
+var ___listOfScheduleEntry_member = &s___listOfScheduleEntry_member
+
+var ___listOfSegmentDeliveryConfiguration = &s___listOfSegmentDeliveryConfiguration
+var ___listOfSegmentDeliveryConfiguration_member = &s___listOfSegmentDeliveryConfiguration_member
+
+var ___listOfSourceLocation = &s___listOfSourceLocation
+var ___listOfSourceLocation_member = &s___listOfSourceLocation_member
+
+var ___listOfVodSource = &s___listOfVodSource
+var ___listOfVodSource_member = &s___listOfVodSource_member
+
+var ___long = &s___long
+
+var ___manifestServiceExcludeEventTypesList = &s___manifestServiceExcludeEventTypesList
+var ___manifestServiceExcludeEventTypesList_member = &s___manifestServiceExcludeEventTypesList_member
+
+var ___manifestServicePublishOptInEventTypesList = &s___manifestServicePublishOptInEventTypesList
+var ___manifestServicePublishOptInEventTypesList_member = &s___manifestServicePublishOptInEventTypesList_member
+
+var ___mapOf__string = &s___mapOf__string
+var ___mapOf__string_key = &s___mapOf__string_key
+var ___mapOf__string_value = &s___mapOf__string_value
+
+var ___string = &s___string
+
+var ___timestampUnix = &s___timestampUnix
+
+var AccessConfiguration = &sAccessConfiguration
+var AccessConfiguration_AccessType = &sAccessConfiguration_AccessType
+var AccessConfiguration_SecretsManagerAccessTokenConfiguration = &sAccessConfiguration_SecretsManagerAccessTokenConfiguration
+
+var AccessType = &sAccessType
+var AccessType_S3_SIGV4 = &sAccessType_S3_SIGV4
+var AccessType_SECRETS_MANAGER_ACCESS_TOKEN = &sAccessType_SECRETS_MANAGER_ACCESS_TOKEN
+var AccessType_AUTODETECT_SIGV4 = &sAccessType_AUTODETECT_SIGV4
+
+var AdBreak = &sAdBreak
+var AdBreak_MessageType = &sAdBreak_MessageType
+var AdBreak_OffsetMillis = &sAdBreak_OffsetMillis
+var AdBreak_Slate = &sAdBreak_Slate
+var AdBreak_SpliceInsertMessage = &sAdBreak_SpliceInsertMessage
+var AdBreak_TimeSignalMessage = &sAdBreak_TimeSignalMessage
+var AdBreak_AdBreakMetadata = &sAdBreak_AdBreakMetadata
+
+var _AdBreakMetadataList = &s_AdBreakMetadataList
+var _AdBreakMetadataList_member = &s_AdBreakMetadataList_member
+
+var _AdBreakOpportunities = &s_AdBreakOpportunities
+var _AdBreakOpportunities_member = &s_AdBreakOpportunities_member
+
+var AdBreakOpportunity = &sAdBreakOpportunity
+var AdBreakOpportunity_OffsetMillis = &sAdBreakOpportunity_OffsetMillis
+
+var AdConditioningConfiguration = &sAdConditioningConfiguration
+var AdConditioningConfiguration_StreamingMediaFileConditioning = &sAdConditioningConfiguration_StreamingMediaFileConditioning
+
+var AdDecisionServerConfiguration = &sAdDecisionServerConfiguration
+var AdDecisionServerConfiguration_HttpRequest = &sAdDecisionServerConfiguration_HttpRequest
+var AdDecisionServerConfiguration_VastResponse = &sAdDecisionServerConfiguration_VastResponse
+
+var AdMarkerPassthrough = &sAdMarkerPassthrough
+var AdMarkerPassthrough_Enabled = &sAdMarkerPassthrough_Enabled
+
+var AdMarkupType = &sAdMarkupType
+var AdMarkupType_DATERANGE = &sAdMarkupType_DATERANGE
+var AdMarkupType_SCTE35_ENHANCED = &sAdMarkupType_SCTE35_ENHANCED
+
+var _adMarkupTypes = &s_adMarkupTypes
+var _adMarkupTypes_member = &s_adMarkupTypes_member
+
+var AdSequencingMode = &sAdSequencingMode
+var AdSequencingMode_FOLLOW_AD_SEQUENCE = &sAdSequencingMode_FOLLOW_AD_SEQUENCE
+var AdSequencingMode_IGNORE_AD_SEQUENCE = &sAdSequencingMode_IGNORE_AD_SEQUENCE
+var AdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE = &sAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_LIVE
+var AdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD = &sAdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD
+
+var AdsInteractionExcludeEventType = &sAdsInteractionExcludeEventType
+var AdsInteractionExcludeEventType_AD_MARKER_FOUND = &sAdsInteractionExcludeEventType_AD_MARKER_FOUND
+var AdsInteractionExcludeEventType_NON_AD_MARKER_FOUND = &sAdsInteractionExcludeEventType_NON_AD_MARKER_FOUND
+var AdsInteractionExcludeEventType_MAKING_ADS_REQUEST = &sAdsInteractionExcludeEventType_MAKING_ADS_REQUEST
+var AdsInteractionExcludeEventType_MODIFIED_TARGET_URL = &sAdsInteractionExcludeEventType_MODIFIED_TARGET_URL
+var AdsInteractionExcludeEventType_VAST_REDIRECT = &sAdsInteractionExcludeEventType_VAST_REDIRECT
+var AdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE = &sAdsInteractionExcludeEventType_EMPTY_VAST_RESPONSE
+var AdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE = &sAdsInteractionExcludeEventType_EMPTY_VMAP_RESPONSE
+var AdsInteractionExcludeEventType_VAST_RESPONSE = &sAdsInteractionExcludeEventType_VAST_RESPONSE
+var AdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE = &sAdsInteractionExcludeEventType_REDIRECTED_VAST_RESPONSE
+var AdsInteractionExcludeEventType_FILLED_AVAIL = &sAdsInteractionExcludeEventType_FILLED_AVAIL
+var AdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL = &sAdsInteractionExcludeEventType_FILLED_OVERLAY_AVAIL
+var AdsInteractionExcludeEventType_BEACON_FIRED = &sAdsInteractionExcludeEventType_BEACON_FIRED
+var AdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS = &sAdsInteractionExcludeEventType_WARNING_NO_ADVERTISEMENTS
+var AdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED = &sAdsInteractionExcludeEventType_WARNING_VPAID_AD_DROPPED
+var AdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED = &sAdsInteractionExcludeEventType_WARNING_URL_VARIABLE_SUBSTITUTION_FAILED
+var AdsInteractionExcludeEventType_ERROR_UNKNOWN = &sAdsInteractionExcludeEventType_ERROR_UNKNOWN
+var AdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST = &sAdsInteractionExcludeEventType_ERROR_UNKNOWN_HOST
+var AdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST = &sAdsInteractionExcludeEventType_ERROR_DISALLOWED_HOST
+var AdsInteractionExcludeEventType_ERROR_ADS_IO = &sAdsInteractionExcludeEventType_ERROR_ADS_IO
+var AdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT = &sAdsInteractionExcludeEventType_ERROR_ADS_TIMEOUT
+var AdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE = &sAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_PARSE
+var AdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT = &sAdsInteractionExcludeEventType_ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT
+var AdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE = &sAdsInteractionExcludeEventType_ERROR_ADS_INVALID_RESPONSE
+var AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE = &sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_EMPTY_RESPONSE
+var AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST = &sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_MULTIPLE_VAST
+var AdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED = &sAdsInteractionExcludeEventType_ERROR_VAST_REDIRECT_FAILED
+var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES = &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_MEDIAFILES
+var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES = &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_CREATIVES
+var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS = &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_OVERLAYS
+var AdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION = &sAdsInteractionExcludeEventType_ERROR_VAST_MISSING_IMPRESSION
+var AdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI = &sAdsInteractionExcludeEventType_ERROR_VAST_INVALID_VAST_AD_TAG_URI
+var AdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS = &sAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_TRACKING_EVENTS
+var AdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR = &sAdsInteractionExcludeEventType_ERROR_VAST_MULTIPLE_LINEAR
+var AdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE = &sAdsInteractionExcludeEventType_ERROR_VAST_INVALID_MEDIA_FILE
+var AdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED = &sAdsInteractionExcludeEventType_ERROR_FIRING_BEACON_FAILED
+var AdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED = &sAdsInteractionExcludeEventType_ERROR_PERSONALIZATION_DISABLED
+var AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET = &sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET
+var AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS = &sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_SUCCESS
+var AdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS = &sAdsInteractionExcludeEventType_VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS
+var AdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS = &sAdsInteractionExcludeEventType_INTERSTITIAL_VOD_SUCCESS
+var AdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE = &sAdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE
+var AdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR = &sAdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR
+var AdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR = &sAdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR
+var AdsInteractionExcludeEventType_BEACON_RECEIVED = &sAdsInteractionExcludeEventType_BEACON_RECEIVED
+var AdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR = &sAdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR
+var AdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR = &sAdsInteractionExcludeEventType_POST_ADS_RESPONSE_FUNCTION_ERROR
+var AdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR = &sAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_HOOK_ERROR
+var AdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR = &sAdsInteractionExcludeEventType_PRE_MANIFEST_INSERTION_FUNCTION_ERROR
+
+var AdsInteractionLog = &sAdsInteractionLog
+var AdsInteractionLog_PublishOptInEventTypes = &sAdsInteractionLog_PublishOptInEventTypes
+var AdsInteractionLog_ExcludeEventTypes = &sAdsInteractionLog_ExcludeEventTypes
+
+var AdsInteractionPublishOptInEventType = &sAdsInteractionPublishOptInEventType
+var AdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE = &sAdsInteractionPublishOptInEventType_RAW_ADS_RESPONSE
+var AdsInteractionPublishOptInEventType_RAW_ADS_REQUEST = &sAdsInteractionPublishOptInEventType_RAW_ADS_REQUEST
+var AdsInteractionPublishOptInEventType_RAW_BID_REQUEST = &sAdsInteractionPublishOptInEventType_RAW_BID_REQUEST
+var AdsInteractionPublishOptInEventType_RAW_BID_RESPONSE = &sAdsInteractionPublishOptInEventType_RAW_BID_RESPONSE
+var AdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY = &sAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_HOOK_SUMMARY
+var AdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED = &sAdsInteractionPublishOptInEventType_PRE_ADS_REQUEST_FUNCTION_COMPLETED
+var AdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY = &sAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_HOOK_SUMMARY
+var AdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED = &sAdsInteractionPublishOptInEventType_POST_ADS_RESPONSE_FUNCTION_COMPLETED
+var AdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY = &sAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_HOOK_SUMMARY
+var AdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED = &sAdsInteractionPublishOptInEventType_PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED
+
+var AdsPersonalizationConcurrency = &sAdsPersonalizationConcurrency
+var AdsPersonalizationConcurrency_MaxConcurrentAdsRequests = &sAdsPersonalizationConcurrency_MaxConcurrentAdsRequests
+var AdsPersonalizationConcurrency_EnableVodVastParallelization = &sAdsPersonalizationConcurrency_EnableVodVastParallelization
+
+var AdsPersonalizationTimeouts = &sAdsPersonalizationTimeouts
+var AdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds = &sAdsPersonalizationTimeouts_AdsRequestTimeoutMilliseconds
+var AdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds = &sAdsPersonalizationTimeouts_LiveMaximumAdsPersonalizationTimeMilliseconds
+var AdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds = &sAdsPersonalizationTimeouts_VodMaximumAdsPersonalizationTimeMilliseconds
+var AdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds = &sAdsPersonalizationTimeouts_PrefetchAdsRequestTimeoutMilliseconds
+var AdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds = &sAdsPersonalizationTimeouts_PrefetchMaximumAdsPersonalizationTimeMilliseconds
+
+var Alert = &sAlert
+var Alert_AlertCode = &sAlert_AlertCode
+var Alert_AlertMessage = &sAlert_AlertMessage
+var Alert_LastModifiedTime = &sAlert_LastModifiedTime
+var Alert_RelatedResourceArns = &sAlert_RelatedResourceArns
+var Alert_ResourceArn = &sAlert_ResourceArn
+var Alert_Category = &sAlert_Category
+
+var AlertCategory = &sAlertCategory
+var AlertCategory_SCHEDULING_ERROR = &sAlertCategory_SCHEDULING_ERROR
+var AlertCategory_PLAYBACK_WARNING = &sAlertCategory_PLAYBACK_WARNING
+var AlertCategory_INFO = &sAlertCategory_INFO
+
+var AlternateMedia = &sAlternateMedia
+var AlternateMedia_SourceLocationName = &sAlternateMedia_SourceLocationName
+var AlternateMedia_LiveSourceName = &sAlternateMedia_LiveSourceName
+var AlternateMedia_VodSourceName = &sAlternateMedia_VodSourceName
+var AlternateMedia_ClipRange = &sAlternateMedia_ClipRange
+var AlternateMedia_ScheduledStartTimeMillis = &sAlternateMedia_ScheduledStartTimeMillis
+var AlternateMedia_AdBreaks = &sAlternateMedia_AdBreaks
+var AlternateMedia_DurationMillis = &sAlternateMedia_DurationMillis
+
+var _ApsPublisherId = &s_ApsPublisherId
+
+var ApsRegion = &sApsRegion
+var ApsRegion_AMERICAS = &sApsRegion_AMERICAS
+var ApsRegion_EUROPE = &sApsRegion_EUROPE
+var ApsRegion_ASIA_PACIFIC = &sApsRegion_ASIA_PACIFIC
+
+var AudienceMedia = &sAudienceMedia
+var AudienceMedia_Audience = &sAudienceMedia_Audience
+var AudienceMedia_AlternateMedia = &sAudienceMedia_AlternateMedia
+
+var _Audiences = &s_Audiences
+var _Audiences_member = &s_Audiences_member
+
+var AvailMatchingCriteria = &sAvailMatchingCriteria
+var AvailMatchingCriteria_DynamicVariable = &sAvailMatchingCriteria_DynamicVariable
+var AvailMatchingCriteria_Operator = &sAvailMatchingCriteria_Operator
+
+var AvailSuppression = &sAvailSuppression
+var AvailSuppression_Mode = &sAvailSuppression_Mode
+var AvailSuppression_Value = &sAvailSuppression_Value
+var AvailSuppression_FillPolicy = &sAvailSuppression_FillPolicy
+
+var AwsServiceRequestConfiguration = &sAwsServiceRequestConfiguration
+var AwsServiceRequestConfiguration_Runtime = &sAwsServiceRequestConfiguration_Runtime
+var AwsServiceRequestConfiguration_Output = &sAwsServiceRequestConfiguration_Output
+var AwsServiceRequestConfiguration_MethodType = &sAwsServiceRequestConfiguration_MethodType
+var AwsServiceRequestConfiguration_RequestTimeoutMilliseconds = &sAwsServiceRequestConfiguration_RequestTimeoutMilliseconds
+var AwsServiceRequestConfiguration_Url = &sAwsServiceRequestConfiguration_Url
+var AwsServiceRequestConfiguration_Body = &sAwsServiceRequestConfiguration_Body
+var AwsServiceRequestConfiguration_Headers = &sAwsServiceRequestConfiguration_Headers
+var AwsServiceRequestConfiguration_Cache = &sAwsServiceRequestConfiguration_Cache
+var AwsServiceRequestConfiguration_TargetService = &sAwsServiceRequestConfiguration_TargetService
+var AwsServiceRequestConfiguration_TargetRegion = &sAwsServiceRequestConfiguration_TargetRegion
+
+var _AwsTargetService = &s_AwsTargetService
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Message = &sBadRequestException_Message
+
+var BeaconEventType = &sBeaconEventType
+var BeaconEventType_MUTE = &sBeaconEventType_MUTE
+var BeaconEventType_UNMUTE = &sBeaconEventType_UNMUTE
+var BeaconEventType_PAUSE = &sBeaconEventType_PAUSE
+var BeaconEventType_SKIP = &sBeaconEventType_SKIP
+
+var _BeaconEventTypeList = &s_BeaconEventTypeList
+var _BeaconEventTypeList_member = &s_BeaconEventTypeList_member
+
+var BeaconingConfiguration = &sBeaconingConfiguration
+var BeaconingConfiguration_ClientSide = &sBeaconingConfiguration_ClientSide
+
+var Bumper = &sBumper
+var Bumper_EndUrl = &sBumper_EndUrl
+var Bumper_StartUrl = &sBumper_StartUrl
+
+var CdnConfiguration = &sCdnConfiguration
+var CdnConfiguration_AdSegmentUrlPrefix = &sCdnConfiguration_AdSegmentUrlPrefix
+var CdnConfiguration_ContentSegmentUrlPrefix = &sCdnConfiguration_ContentSegmentUrlPrefix
+
+var Channel = &sChannel
+var Channel_Arn = &sChannel_Arn
+var Channel_ChannelName = &sChannel_ChannelName
+var Channel_ChannelState = &sChannel_ChannelState
+var Channel_CreationTime = &sChannel_CreationTime
+var Channel_FillerSlate = &sChannel_FillerSlate
+var Channel_LastModifiedTime = &sChannel_LastModifiedTime
+var Channel_Outputs = &sChannel_Outputs
+var Channel_PlaybackMode = &sChannel_PlaybackMode
+var Channel_Tags = &sChannel_Tags
+var Channel_Tier = &sChannel_Tier
+var Channel_LogConfiguration = &sChannel_LogConfiguration
+var Channel_Audiences = &sChannel_Audiences
+
+var ChannelState = &sChannelState
+var ChannelState_RUNNING = &sChannelState_RUNNING
+var ChannelState_STOPPED = &sChannelState_STOPPED
+
+var ClientSideBeaconingConfiguration = &sClientSideBeaconingConfiguration
+var ClientSideBeaconingConfiguration_ReportingMode = &sClientSideBeaconingConfiguration_ReportingMode
+var ClientSideBeaconingConfiguration_AdditionalEventTypes = &sClientSideBeaconingConfiguration_AdditionalEventTypes
+
+var ClientSideBeaconingMode = &sClientSideBeaconingMode
+var ClientSideBeaconingMode_DISABLED = &sClientSideBeaconingMode_DISABLED
+var ClientSideBeaconingMode_INSIGHTS = &sClientSideBeaconingMode_INSIGHTS
+
+var ClipRange = &sClipRange
+var ClipRange_EndOffsetMillis = &sClipRange_EndOffsetMillis
+var ClipRange_StartOffsetMillis = &sClipRange_StartOffsetMillis
+
+var CompressionMethod = &sCompressionMethod
+var CompressionMethod_NONE = &sCompressionMethod_NONE
+var CompressionMethod_GZIP = &sCompressionMethod_GZIP
+
+var ConcurrentExecutorConfiguration = &sConcurrentExecutorConfiguration
+var ConcurrentExecutorConfiguration_Runtime = &sConcurrentExecutorConfiguration_Runtime
+var ConcurrentExecutorConfiguration_Output = &sConcurrentExecutorConfiguration_Output
+var ConcurrentExecutorConfiguration_FunctionList = &sConcurrentExecutorConfiguration_FunctionList
+var ConcurrentExecutorConfiguration_TimeoutMilliseconds = &sConcurrentExecutorConfiguration_TimeoutMilliseconds
+var ConcurrentExecutorConfiguration_MaxConcurrency = &sConcurrentExecutorConfiguration_MaxConcurrency
+
+var _ConfigurationAliasesRequest = &s_ConfigurationAliasesRequest
+var _ConfigurationAliasesRequest_key = &s_ConfigurationAliasesRequest_key
+var _ConfigurationAliasesRequest_value = &s_ConfigurationAliasesRequest_value
+
+var _ConfigurationAliasesResponse = &s_ConfigurationAliasesResponse
+var _ConfigurationAliasesResponse_key = &s_ConfigurationAliasesResponse_key
+var _ConfigurationAliasesResponse_value = &s_ConfigurationAliasesResponse_value
+
+var CustomOutputConfiguration = &sCustomOutputConfiguration
+var CustomOutputConfiguration_Runtime = &sCustomOutputConfiguration_Runtime
+var CustomOutputConfiguration_Output = &sCustomOutputConfiguration_Output
+
+var DashConfiguration = &sDashConfiguration
+var DashConfiguration_ManifestEndpointPrefix = &sDashConfiguration_ManifestEndpointPrefix
+var DashConfiguration_DualStackManifestEndpointPrefix = &sDashConfiguration_DualStackManifestEndpointPrefix
+var DashConfiguration_MpdLocation = &sDashConfiguration_MpdLocation
+var DashConfiguration_OriginManifestType = &sDashConfiguration_OriginManifestType
+
+var DashConfigurationForPut = &sDashConfigurationForPut
+var DashConfigurationForPut_MpdLocation = &sDashConfigurationForPut_MpdLocation
+var DashConfigurationForPut_OriginManifestType = &sDashConfigurationForPut_OriginManifestType
+
+var DashPlaylistSettings = &sDashPlaylistSettings
+var DashPlaylistSettings_ManifestWindowSeconds = &sDashPlaylistSettings_ManifestWindowSeconds
+var DashPlaylistSettings_MinBufferTimeSeconds = &sDashPlaylistSettings_MinBufferTimeSeconds
+var DashPlaylistSettings_MinUpdatePeriodSeconds = &sDashPlaylistSettings_MinUpdatePeriodSeconds
+var DashPlaylistSettings_SuggestedPresentationDelaySeconds = &sDashPlaylistSettings_SuggestedPresentationDelaySeconds
+
+var DefaultSegmentDeliveryConfiguration = &sDefaultSegmentDeliveryConfiguration
+var DefaultSegmentDeliveryConfiguration_BaseUrl = &sDefaultSegmentDeliveryConfiguration_BaseUrl
+
+var EventName = &sEventName
+var EventName_PRE_SESSION_INITIALIZATION = &sEventName_PRE_SESSION_INITIALIZATION
+var EventName_PRE_ADS_REQUEST = &sEventName_PRE_ADS_REQUEST
+var EventName_POST_ADS_RESPONSE = &sEventName_POST_ADS_RESPONSE
+var EventName_PRE_MANIFEST_INSERTION = &sEventName_PRE_MANIFEST_INSERTION
+
+var FillPolicy = &sFillPolicy
+var FillPolicy_FULL_AVAIL_ONLY = &sFillPolicy_FULL_AVAIL_ONLY
+var FillPolicy_PARTIAL_AVAIL = &sFillPolicy_PARTIAL_AVAIL
+
+var Function = &sFunction
+var Function_FunctionId = &sFunction_FunctionId
+var Function_FunctionType = &sFunction_FunctionType
+var Function_Description = &sFunction_Description
+var Function_HttpRequestConfiguration = &sFunction_HttpRequestConfiguration
+var Function_AwsServiceRequestConfiguration = &sFunction_AwsServiceRequestConfiguration
+var Function_CustomOutputConfiguration = &sFunction_CustomOutputConfiguration
+var Function_ConcurrentExecutorConfiguration = &sFunction_ConcurrentExecutorConfiguration
+var Function_SequentialExecutorConfiguration = &sFunction_SequentialExecutorConfiguration
+var Function_VastRequestConfiguration = &sFunction_VastRequestConfiguration
+var Function_Tags = &sFunction_Tags
+var Function_Arn = &sFunction_Arn
+
+var _FunctionMapping = &s_FunctionMapping
+var _FunctionMapping_key = &s_FunctionMapping_key
+var _FunctionMapping_value = &s_FunctionMapping_value
+
+var FunctionRef = &sFunctionRef
+var FunctionRef_RunCondition = &sFunctionRef_RunCondition
+var FunctionRef_FunctionId = &sFunctionRef_FunctionId
+var FunctionRef_Alias = &sFunctionRef_Alias
+
+var FunctionType = &sFunctionType
+var FunctionType_HTTP_REQUEST = &sFunctionType_HTTP_REQUEST
+var FunctionType_AWS_SERVICE_REQUEST = &sFunctionType_AWS_SERVICE_REQUEST
+var FunctionType_CUSTOM_OUTPUT = &sFunctionType_CUSTOM_OUTPUT
+var FunctionType_CONCURRENT_EXECUTOR = &sFunctionType_CONCURRENT_EXECUTOR
+var FunctionType_SEQUENTIAL_EXECUTOR = &sFunctionType_SEQUENTIAL_EXECUTOR
+var FunctionType_VAST_REQUEST = &sFunctionType_VAST_REQUEST
+
+var HlsConfiguration = &sHlsConfiguration
+var HlsConfiguration_ManifestEndpointPrefix = &sHlsConfiguration_ManifestEndpointPrefix
+var HlsConfiguration_DualStackManifestEndpointPrefix = &sHlsConfiguration_DualStackManifestEndpointPrefix
+
+var HlsPlaylistSettings = &sHlsPlaylistSettings
+var HlsPlaylistSettings_ManifestWindowSeconds = &sHlsPlaylistSettings_ManifestWindowSeconds
+var HlsPlaylistSettings_AdMarkupType = &sHlsPlaylistSettings_AdMarkupType
+
+var HttpConfiguration = &sHttpConfiguration
+var HttpConfiguration_BaseUrl = &sHttpConfiguration_BaseUrl
+
+var HttpPackageConfiguration = &sHttpPackageConfiguration
+var HttpPackageConfiguration_Path = &sHttpPackageConfiguration_Path
+var HttpPackageConfiguration_SourceGroup = &sHttpPackageConfiguration_SourceGroup
+var HttpPackageConfiguration_Type = &sHttpPackageConfiguration_Type
+
+var _HttpPackageConfigurations = &s_HttpPackageConfigurations
+var _HttpPackageConfigurations_member = &s_HttpPackageConfigurations_member
+
+var HttpRequest = &sHttpRequest
+var HttpRequest_Method = &sHttpRequest_Method
+var HttpRequest_Body = &sHttpRequest_Body
+var HttpRequest_Headers = &sHttpRequest_Headers
+var HttpRequest_CompressRequest = &sHttpRequest_CompressRequest
+
+var HttpRequestCacheConfiguration = &sHttpRequestCacheConfiguration
+var HttpRequestCacheConfiguration_TtlMinimumSeconds = &sHttpRequestCacheConfiguration_TtlMinimumSeconds
+var HttpRequestCacheConfiguration_TtlMaximumSeconds = &sHttpRequestCacheConfiguration_TtlMaximumSeconds
+var HttpRequestCacheConfiguration_Key = &sHttpRequestCacheConfiguration_Key
+
+var HttpRequestConfiguration = &sHttpRequestConfiguration
+var HttpRequestConfiguration_Runtime = &sHttpRequestConfiguration_Runtime
+var HttpRequestConfiguration_Output = &sHttpRequestConfiguration_Output
+var HttpRequestConfiguration_MethodType = &sHttpRequestConfiguration_MethodType
+var HttpRequestConfiguration_RequestTimeoutMilliseconds = &sHttpRequestConfiguration_RequestTimeoutMilliseconds
+var HttpRequestConfiguration_Url = &sHttpRequestConfiguration_Url
+var HttpRequestConfiguration_Body = &sHttpRequestConfiguration_Body
+var HttpRequestConfiguration_Headers = &sHttpRequestConfiguration_Headers
+var HttpRequestConfiguration_Cache = &sHttpRequestConfiguration_Cache
+
+var InsertionMode = &sInsertionMode
+var InsertionMode_STITCHED_ONLY = &sInsertionMode_STITCHED_ONLY
+var InsertionMode_PLAYER_SELECT = &sInsertionMode_PLAYER_SELECT
+
+var KeyValuePair = &sKeyValuePair
+var KeyValuePair_Key = &sKeyValuePair_Key
+var KeyValuePair_Value = &sKeyValuePair_Value
+
+var ListPrefetchScheduleType = &sListPrefetchScheduleType
+var ListPrefetchScheduleType_SINGLE = &sListPrefetchScheduleType_SINGLE
+var ListPrefetchScheduleType_RECURRING = &sListPrefetchScheduleType_RECURRING
+var ListPrefetchScheduleType_ALL = &sListPrefetchScheduleType_ALL
+
+var LivePreRollConfiguration = &sLivePreRollConfiguration
+var LivePreRollConfiguration_AdDecisionServerUrl = &sLivePreRollConfiguration_AdDecisionServerUrl
+var LivePreRollConfiguration_MaxDurationSeconds = &sLivePreRollConfiguration_MaxDurationSeconds
+var LivePreRollConfiguration_AdDecisionServerConfiguration = &sLivePreRollConfiguration_AdDecisionServerConfiguration
+
+var LiveSource = &sLiveSource
+var LiveSource_Arn = &sLiveSource_Arn
+var LiveSource_CreationTime = &sLiveSource_CreationTime
+var LiveSource_HttpPackageConfigurations = &sLiveSource_HttpPackageConfigurations
+var LiveSource_LastModifiedTime = &sLiveSource_LastModifiedTime
+var LiveSource_LiveSourceName = &sLiveSource_LiveSourceName
+var LiveSource_SourceLocationName = &sLiveSource_SourceLocationName
+var LiveSource_Tags = &sLiveSource_Tags
+
+var LogConfiguration = &sLogConfiguration
+var LogConfiguration_PercentEnabled = &sLogConfiguration_PercentEnabled
+var LogConfiguration_EnabledLoggingStrategies = &sLogConfiguration_EnabledLoggingStrategies
+var LogConfiguration_AdsInteractionLog = &sLogConfiguration_AdsInteractionLog
+var LogConfiguration_ManifestServiceInteractionLog = &sLogConfiguration_ManifestServiceInteractionLog
+
+var LogConfigurationForChannel = &sLogConfigurationForChannel
+var LogConfigurationForChannel_LogTypes = &sLogConfigurationForChannel_LogTypes
+
+var LoggingStrategy = &sLoggingStrategy
+var LoggingStrategy_VENDED_LOGS = &sLoggingStrategy_VENDED_LOGS
+var LoggingStrategy_LEGACY_CLOUDWATCH = &sLoggingStrategy_LEGACY_CLOUDWATCH
+
+var LogType = &sLogType
+var LogType_AS_RUN = &sLogType_AS_RUN
+
+var _LogTypes = &s_LogTypes
+var _LogTypes_member = &s_LogTypes_member
+
+var ManifestProcessingRules = &sManifestProcessingRules
+var ManifestProcessingRules_AdMarkerPassthrough = &sManifestProcessingRules_AdMarkerPassthrough
+
+var ManifestServiceExcludeEventType = &sManifestServiceExcludeEventType
+var ManifestServiceExcludeEventType_GENERATED_MANIFEST = &sManifestServiceExcludeEventType_GENERATED_MANIFEST
+var ManifestServiceExcludeEventType_ORIGIN_MANIFEST = &sManifestServiceExcludeEventType_ORIGIN_MANIFEST
+var ManifestServiceExcludeEventType_SESSION_INITIALIZED = &sManifestServiceExcludeEventType_SESSION_INITIALIZED
+var ManifestServiceExcludeEventType_TRACKING_RESPONSE = &sManifestServiceExcludeEventType_TRACKING_RESPONSE
+var ManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR = &sManifestServiceExcludeEventType_CONFIG_SYNTAX_ERROR
+var ManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR = &sManifestServiceExcludeEventType_CONFIG_SECURITY_ERROR
+var ManifestServiceExcludeEventType_UNKNOWN_HOST = &sManifestServiceExcludeEventType_UNKNOWN_HOST
+var ManifestServiceExcludeEventType_TIMEOUT_ERROR = &sManifestServiceExcludeEventType_TIMEOUT_ERROR
+var ManifestServiceExcludeEventType_CONNECTION_ERROR = &sManifestServiceExcludeEventType_CONNECTION_ERROR
+var ManifestServiceExcludeEventType_IO_ERROR = &sManifestServiceExcludeEventType_IO_ERROR
+var ManifestServiceExcludeEventType_UNKNOWN_ERROR = &sManifestServiceExcludeEventType_UNKNOWN_ERROR
+var ManifestServiceExcludeEventType_HOST_DISALLOWED = &sManifestServiceExcludeEventType_HOST_DISALLOWED
+var ManifestServiceExcludeEventType_PARSING_ERROR = &sManifestServiceExcludeEventType_PARSING_ERROR
+var ManifestServiceExcludeEventType_MANIFEST_ERROR = &sManifestServiceExcludeEventType_MANIFEST_ERROR
+var ManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST = &sManifestServiceExcludeEventType_NO_MASTER_OR_MEDIA_PLAYLIST
+var ManifestServiceExcludeEventType_NO_MASTER_PLAYLIST = &sManifestServiceExcludeEventType_NO_MASTER_PLAYLIST
+var ManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST = &sManifestServiceExcludeEventType_NO_MEDIA_PLAYLIST
+var ManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION = &sManifestServiceExcludeEventType_INCOMPATIBLE_HLS_VERSION
+var ManifestServiceExcludeEventType_SCTE35_PARSING_ERROR = &sManifestServiceExcludeEventType_SCTE35_PARSING_ERROR
+var ManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST = &sManifestServiceExcludeEventType_INVALID_SINGLE_PERIOD_DASH_MANIFEST
+var ManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST = &sManifestServiceExcludeEventType_UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST
+var ManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO = &sManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO
+var ManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING = &sManifestServiceExcludeEventType_LAST_PERIOD_MISSING_AUDIO_WARNING
+var ManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_ORIGIN_PREFIX_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_ADS_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_CDN_AD_SEGMENT_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_SLATE_AD_URL_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_PROFILE_NAME_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_BUMPER_START_INTERPOLATION
+var ManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION = &sManifestServiceExcludeEventType_ERROR_BUMPER_END_INTERPOLATION
+var ManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR = &sManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR
+var ManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR = &sManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR
+
+var ManifestServiceInteractionLog = &sManifestServiceInteractionLog
+var ManifestServiceInteractionLog_PublishOptInEventTypes = &sManifestServiceInteractionLog_PublishOptInEventTypes
+var ManifestServiceInteractionLog_ExcludeEventTypes = &sManifestServiceInteractionLog_ExcludeEventTypes
+
+var ManifestServicePublishOptInEventType = &sManifestServicePublishOptInEventType
+var ManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY = &sManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY
+var ManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED = &sManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED
+
+var _MaxResults = &s_MaxResults
+
+var MessageType = &sMessageType
+var MessageType_SPLICE_INSERT = &sMessageType_SPLICE_INSERT
+var MessageType_TIME_SIGNAL = &sMessageType_TIME_SIGNAL
+
+var Method = &sMethod
+var Method_GET = &sMethod_GET
+var Method_POST = &sMethod_POST
+
+var MethodType = &sMethodType
+var MethodType_GET = &sMethodType_GET
+var MethodType_POST = &sMethodType_POST
+
+var _MinimumUnfilledDurationSeconds = &s_MinimumUnfilledDurationSeconds
+
+var Mode = &sMode
+var Mode_OFF = &sMode_OFF
+var Mode_BEHIND_LIVE_EDGE = &sMode_BEHIND_LIVE_EDGE
+var Mode_AFTER_LIVE_EDGE = &sMode_AFTER_LIVE_EDGE
+
+var _OpenRtbTemplateString = &s_OpenRtbTemplateString
+
+var Operator = &sOperator
+var Operator_EQUALS = &sOperator_EQUALS
+
+var OriginManifestType = &sOriginManifestType
+var OriginManifestType_SINGLE_PERIOD = &sOriginManifestType_SINGLE_PERIOD
+var OriginManifestType_MULTI_PERIOD = &sOriginManifestType_MULTI_PERIOD
+
+var PlaybackConfiguration = &sPlaybackConfiguration
+var PlaybackConfiguration_AdDecisionServerUrl = &sPlaybackConfiguration_AdDecisionServerUrl
+var PlaybackConfiguration_AvailSuppression = &sPlaybackConfiguration_AvailSuppression
+var PlaybackConfiguration_Bumper = &sPlaybackConfiguration_Bumper
+var PlaybackConfiguration_CdnConfiguration = &sPlaybackConfiguration_CdnConfiguration
+var PlaybackConfiguration_ConfigurationAliases = &sPlaybackConfiguration_ConfigurationAliases
+var PlaybackConfiguration_DashConfiguration = &sPlaybackConfiguration_DashConfiguration
+var PlaybackConfiguration_HlsConfiguration = &sPlaybackConfiguration_HlsConfiguration
+var PlaybackConfiguration_InsertionMode = &sPlaybackConfiguration_InsertionMode
+var PlaybackConfiguration_LivePreRollConfiguration = &sPlaybackConfiguration_LivePreRollConfiguration
+var PlaybackConfiguration_LogConfiguration = &sPlaybackConfiguration_LogConfiguration
+var PlaybackConfiguration_ManifestProcessingRules = &sPlaybackConfiguration_ManifestProcessingRules
+var PlaybackConfiguration_Name = &sPlaybackConfiguration_Name
+var PlaybackConfiguration_PersonalizationThresholdSeconds = &sPlaybackConfiguration_PersonalizationThresholdSeconds
+var PlaybackConfiguration_PlaybackConfigurationArn = &sPlaybackConfiguration_PlaybackConfigurationArn
+var PlaybackConfiguration_PlaybackEndpointPrefix = &sPlaybackConfiguration_PlaybackEndpointPrefix
+var PlaybackConfiguration_DualStackPlaybackEndpointPrefix = &sPlaybackConfiguration_DualStackPlaybackEndpointPrefix
+var PlaybackConfiguration_SessionInitializationEndpointPrefix = &sPlaybackConfiguration_SessionInitializationEndpointPrefix
+var PlaybackConfiguration_DualStackSessionInitializationEndpointPrefix = &sPlaybackConfiguration_DualStackSessionInitializationEndpointPrefix
+var PlaybackConfiguration_SlateAdUrl = &sPlaybackConfiguration_SlateAdUrl
+var PlaybackConfiguration_Tags = &sPlaybackConfiguration_Tags
+var PlaybackConfiguration_TranscodeProfileName = &sPlaybackConfiguration_TranscodeProfileName
+var PlaybackConfiguration_VideoContentSourceUrl = &sPlaybackConfiguration_VideoContentSourceUrl
+var PlaybackConfiguration_AdConditioningConfiguration = &sPlaybackConfiguration_AdConditioningConfiguration
+var PlaybackConfiguration_AdDecisionServerConfiguration = &sPlaybackConfiguration_AdDecisionServerConfiguration
+var PlaybackConfiguration_YieldOptimizationConfiguration = &sPlaybackConfiguration_YieldOptimizationConfiguration
+var PlaybackConfiguration_FunctionMapping = &sPlaybackConfiguration_FunctionMapping
+var PlaybackConfiguration_AdsPersonalizationTimeouts = &sPlaybackConfiguration_AdsPersonalizationTimeouts
+var PlaybackConfiguration_AdsPersonalizationConcurrency = &sPlaybackConfiguration_AdsPersonalizationConcurrency
+var PlaybackConfiguration_BeaconingConfiguration = &sPlaybackConfiguration_BeaconingConfiguration
+
+var PlaybackMode = &sPlaybackMode
+var PlaybackMode_LOOP = &sPlaybackMode_LOOP
+var PlaybackMode_LINEAR = &sPlaybackMode_LINEAR
+
+var PrefetchConsumption = &sPrefetchConsumption
+var PrefetchConsumption_AvailMatchingCriteria = &sPrefetchConsumption_AvailMatchingCriteria
+var PrefetchConsumption_EndTime = &sPrefetchConsumption_EndTime
+var PrefetchConsumption_StartTime = &sPrefetchConsumption_StartTime
+
+var PrefetchRetrieval = &sPrefetchRetrieval
+var PrefetchRetrieval_DynamicVariables = &sPrefetchRetrieval_DynamicVariables
+var PrefetchRetrieval_EndTime = &sPrefetchRetrieval_EndTime
+var PrefetchRetrieval_StartTime = &sPrefetchRetrieval_StartTime
+var PrefetchRetrieval_TrafficShapingType = &sPrefetchRetrieval_TrafficShapingType
+var PrefetchRetrieval_TrafficShapingRetrievalWindow = &sPrefetchRetrieval_TrafficShapingRetrievalWindow
+var PrefetchRetrieval_TrafficShapingTpsConfiguration = &sPrefetchRetrieval_TrafficShapingTpsConfiguration
+
+var PrefetchSchedule = &sPrefetchSchedule
+var PrefetchSchedule_Arn = &sPrefetchSchedule_Arn
+var PrefetchSchedule_Consumption = &sPrefetchSchedule_Consumption
+var PrefetchSchedule_Name = &sPrefetchSchedule_Name
+var PrefetchSchedule_PlaybackConfigurationName = &sPrefetchSchedule_PlaybackConfigurationName
+var PrefetchSchedule_Retrieval = &sPrefetchSchedule_Retrieval
+var PrefetchSchedule_ScheduleType = &sPrefetchSchedule_ScheduleType
+var PrefetchSchedule_RecurringPrefetchConfiguration = &sPrefetchSchedule_RecurringPrefetchConfiguration
+var PrefetchSchedule_StreamId = &sPrefetchSchedule_StreamId
+var PrefetchSchedule_Tags = &sPrefetchSchedule_Tags
+
+var PrefetchScheduleType = &sPrefetchScheduleType
+var PrefetchScheduleType_SINGLE = &sPrefetchScheduleType_SINGLE
+var PrefetchScheduleType_RECURRING = &sPrefetchScheduleType_RECURRING
+
+var PreRollAdDecisionServerConfiguration = &sPreRollAdDecisionServerConfiguration
+var PreRollAdDecisionServerConfiguration_VastResponse = &sPreRollAdDecisionServerConfiguration_VastResponse
+
+var PreRollAdSequencingMode = &sPreRollAdSequencingMode
+var PreRollAdSequencingMode_FOLLOW_AD_SEQUENCE = &sPreRollAdSequencingMode_FOLLOW_AD_SEQUENCE
+var PreRollAdSequencingMode_IGNORE_AD_SEQUENCE = &sPreRollAdSequencingMode_IGNORE_AD_SEQUENCE
+
+var PreRollVastResponse = &sPreRollVastResponse
+var PreRollVastResponse_AdSequencingMode = &sPreRollVastResponse_AdSequencingMode
+
+var RecurringConsumption = &sRecurringConsumption
+var RecurringConsumption_RetrievedAdExpirationSeconds = &sRecurringConsumption_RetrievedAdExpirationSeconds
+var RecurringConsumption_AvailMatchingCriteria = &sRecurringConsumption_AvailMatchingCriteria
+
+var RecurringPrefetchConfiguration = &sRecurringPrefetchConfiguration
+var RecurringPrefetchConfiguration_StartTime = &sRecurringPrefetchConfiguration_StartTime
+var RecurringPrefetchConfiguration_EndTime = &sRecurringPrefetchConfiguration_EndTime
+var RecurringPrefetchConfiguration_RecurringConsumption = &sRecurringPrefetchConfiguration_RecurringConsumption
+var RecurringPrefetchConfiguration_RecurringRetrieval = &sRecurringPrefetchConfiguration_RecurringRetrieval
+
+var RecurringRetrieval = &sRecurringRetrieval
+var RecurringRetrieval_DynamicVariables = &sRecurringRetrieval_DynamicVariables
+var RecurringRetrieval_DelayAfterAvailEndSeconds = &sRecurringRetrieval_DelayAfterAvailEndSeconds
+var RecurringRetrieval_TrafficShapingType = &sRecurringRetrieval_TrafficShapingType
+var RecurringRetrieval_TrafficShapingRetrievalWindow = &sRecurringRetrieval_TrafficShapingRetrievalWindow
+var RecurringRetrieval_TrafficShapingTpsConfiguration = &sRecurringRetrieval_TrafficShapingTpsConfiguration
+
+var RelativePosition = &sRelativePosition
+var RelativePosition_BEFORE_PROGRAM = &sRelativePosition_BEFORE_PROGRAM
+var RelativePosition_AFTER_PROGRAM = &sRelativePosition_AFTER_PROGRAM
+
+var RequestOutputItem = &sRequestOutputItem
+var RequestOutputItem_DashPlaylistSettings = &sRequestOutputItem_DashPlaylistSettings
+var RequestOutputItem_HlsPlaylistSettings = &sRequestOutputItem_HlsPlaylistSettings
+var RequestOutputItem_ManifestName = &sRequestOutputItem_ManifestName
+var RequestOutputItem_SourceGroup = &sRequestOutputItem_SourceGroup
+
+var _RequestOutputs = &s_RequestOutputs
+var _RequestOutputs_member = &s_RequestOutputs_member
+
+var ResponseOutputItem = &sResponseOutputItem
+var ResponseOutputItem_DashPlaylistSettings = &sResponseOutputItem_DashPlaylistSettings
+var ResponseOutputItem_HlsPlaylistSettings = &sResponseOutputItem_HlsPlaylistSettings
+var ResponseOutputItem_ManifestName = &sResponseOutputItem_ManifestName
+var ResponseOutputItem_PlaybackUrl = &sResponseOutputItem_PlaybackUrl
+var ResponseOutputItem_DualStackPlaybackUrl = &sResponseOutputItem_DualStackPlaybackUrl
+var ResponseOutputItem_SourceGroup = &sResponseOutputItem_SourceGroup
+
+var _ResponseOutputs = &s_ResponseOutputs
+var _ResponseOutputs_member = &s_ResponseOutputs_member
+
+var RuntimeType = &sRuntimeType
+var RuntimeType_JSONATA = &sRuntimeType_JSONATA
+
+var ScheduleAdBreak = &sScheduleAdBreak
+var ScheduleAdBreak_ApproximateDurationSeconds = &sScheduleAdBreak_ApproximateDurationSeconds
+var ScheduleAdBreak_ApproximateStartTime = &sScheduleAdBreak_ApproximateStartTime
+var ScheduleAdBreak_SourceLocationName = &sScheduleAdBreak_SourceLocationName
+var ScheduleAdBreak_VodSourceName = &sScheduleAdBreak_VodSourceName
+
+var ScheduleConfiguration = &sScheduleConfiguration
+var ScheduleConfiguration_Transition = &sScheduleConfiguration_Transition
+var ScheduleConfiguration_ClipRange = &sScheduleConfiguration_ClipRange
+
+var ScheduleEntry = &sScheduleEntry
+var ScheduleEntry_ApproximateDurationSeconds = &sScheduleEntry_ApproximateDurationSeconds
+var ScheduleEntry_ApproximateStartTime = &sScheduleEntry_ApproximateStartTime
+var ScheduleEntry_Arn = &sScheduleEntry_Arn
+var ScheduleEntry_ChannelName = &sScheduleEntry_ChannelName
+var ScheduleEntry_LiveSourceName = &sScheduleEntry_LiveSourceName
+var ScheduleEntry_ProgramName = &sScheduleEntry_ProgramName
+var ScheduleEntry_ScheduleAdBreaks = &sScheduleEntry_ScheduleAdBreaks
+var ScheduleEntry_ScheduleEntryType = &sScheduleEntry_ScheduleEntryType
+var ScheduleEntry_SourceLocationName = &sScheduleEntry_SourceLocationName
+var ScheduleEntry_VodSourceName = &sScheduleEntry_VodSourceName
+var ScheduleEntry_Audiences = &sScheduleEntry_Audiences
+
+var ScheduleEntryType = &sScheduleEntryType
+var ScheduleEntryType_PROGRAM = &sScheduleEntryType_PROGRAM
+var ScheduleEntryType_FILLER_SLATE = &sScheduleEntryType_FILLER_SLATE
+var ScheduleEntryType_ALTERNATE_MEDIA = &sScheduleEntryType_ALTERNATE_MEDIA
+
+var SecretsManagerAccessTokenConfiguration = &sSecretsManagerAccessTokenConfiguration
+var SecretsManagerAccessTokenConfiguration_HeaderName = &sSecretsManagerAccessTokenConfiguration_HeaderName
+var SecretsManagerAccessTokenConfiguration_SecretArn = &sSecretsManagerAccessTokenConfiguration_SecretArn
+var SecretsManagerAccessTokenConfiguration_SecretStringKey = &sSecretsManagerAccessTokenConfiguration_SecretStringKey
+
+var SegmentationDescriptor = &sSegmentationDescriptor
+var SegmentationDescriptor_SegmentationEventId = &sSegmentationDescriptor_SegmentationEventId
+var SegmentationDescriptor_SegmentationUpidType = &sSegmentationDescriptor_SegmentationUpidType
+var SegmentationDescriptor_SegmentationUpid = &sSegmentationDescriptor_SegmentationUpid
+var SegmentationDescriptor_SegmentationTypeId = &sSegmentationDescriptor_SegmentationTypeId
+var SegmentationDescriptor_SegmentNum = &sSegmentationDescriptor_SegmentNum
+var SegmentationDescriptor_SegmentsExpected = &sSegmentationDescriptor_SegmentsExpected
+var SegmentationDescriptor_SubSegmentNum = &sSegmentationDescriptor_SubSegmentNum
+var SegmentationDescriptor_SubSegmentsExpected = &sSegmentationDescriptor_SubSegmentsExpected
+
+var _SegmentationDescriptorList = &s_SegmentationDescriptorList
+var _SegmentationDescriptorList_member = &s_SegmentationDescriptorList_member
+
+var SegmentDeliveryConfiguration = &sSegmentDeliveryConfiguration
+var SegmentDeliveryConfiguration_BaseUrl = &sSegmentDeliveryConfiguration_BaseUrl
+var SegmentDeliveryConfiguration_Name = &sSegmentDeliveryConfiguration_Name
+
+var SequentialExecutorConfiguration = &sSequentialExecutorConfiguration
+var SequentialExecutorConfiguration_Runtime = &sSequentialExecutorConfiguration_Runtime
+var SequentialExecutorConfiguration_Output = &sSequentialExecutorConfiguration_Output
+var SequentialExecutorConfiguration_FunctionList = &sSequentialExecutorConfiguration_FunctionList
+var SequentialExecutorConfiguration_TimeoutMilliseconds = &sSequentialExecutorConfiguration_TimeoutMilliseconds
+
+var SlateSource = &sSlateSource
+var SlateSource_SourceLocationName = &sSlateSource_SourceLocationName
+var SlateSource_VodSourceName = &sSlateSource_VodSourceName
+
+var SourceLocation = &sSourceLocation
+var SourceLocation_AccessConfiguration = &sSourceLocation_AccessConfiguration
+var SourceLocation_Arn = &sSourceLocation_Arn
+var SourceLocation_CreationTime = &sSourceLocation_CreationTime
+var SourceLocation_DefaultSegmentDeliveryConfiguration = &sSourceLocation_DefaultSegmentDeliveryConfiguration
+var SourceLocation_HttpConfiguration = &sSourceLocation_HttpConfiguration
+var SourceLocation_LastModifiedTime = &sSourceLocation_LastModifiedTime
+var SourceLocation_SegmentDeliveryConfigurations = &sSourceLocation_SegmentDeliveryConfigurations
+var SourceLocation_SourceLocationName = &sSourceLocation_SourceLocationName
+var SourceLocation_Tags = &sSourceLocation_Tags
+
+var SpliceInsertMessage = &sSpliceInsertMessage
+var SpliceInsertMessage_AvailNum = &sSpliceInsertMessage_AvailNum
+var SpliceInsertMessage_AvailsExpected = &sSpliceInsertMessage_AvailsExpected
+var SpliceInsertMessage_SpliceEventId = &sSpliceInsertMessage_SpliceEventId
+var SpliceInsertMessage_UniqueProgramId = &sSpliceInsertMessage_UniqueProgramId
+
+var StreamingMediaFileConditioning = &sStreamingMediaFileConditioning
+var StreamingMediaFileConditioning_TRANSCODE = &sStreamingMediaFileConditioning_TRANSCODE
+var StreamingMediaFileConditioning_NONE = &sStreamingMediaFileConditioning_NONE
+
+var _StringMap = &s_StringMap
+var _StringMap_key = &s_StringMap_key
+var _StringMap_value = &s_StringMap_value
+
+var Tier = &sTier
+var Tier_BASIC = &sTier_BASIC
+var Tier_STANDARD = &sTier_STANDARD
+
+var TimeShiftConfiguration = &sTimeShiftConfiguration
+var TimeShiftConfiguration_MaxTimeDelaySeconds = &sTimeShiftConfiguration_MaxTimeDelaySeconds
+
+var TimeSignalMessage = &sTimeSignalMessage
+var TimeSignalMessage_SegmentationDescriptors = &sTimeSignalMessage_SegmentationDescriptors
+
+var TrafficShapingRetrievalWindow = &sTrafficShapingRetrievalWindow
+var TrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds = &sTrafficShapingRetrievalWindow_RetrievalWindowDurationSeconds
+
+var TrafficShapingTpsConfiguration = &sTrafficShapingTpsConfiguration
+var TrafficShapingTpsConfiguration_PeakTps = &sTrafficShapingTpsConfiguration_PeakTps
+var TrafficShapingTpsConfiguration_PeakConcurrentUsers = &sTrafficShapingTpsConfiguration_PeakConcurrentUsers
+
+var TrafficShapingType = &sTrafficShapingType
+var TrafficShapingType_RETRIEVAL_WINDOW = &sTrafficShapingType_RETRIEVAL_WINDOW
+var TrafficShapingType_TPS = &sTrafficShapingType_TPS
+
+var Transition = &sTransition
+var Transition_DurationMillis = &sTransition_DurationMillis
+var Transition_RelativePosition = &sTransition_RelativePosition
+var Transition_RelativeProgram = &sTransition_RelativeProgram
+var Transition_ScheduledStartTimeMillis = &sTransition_ScheduledStartTimeMillis
+var Transition_Type = &sTransition_Type
+
+var Type = &sType
+var Type_DASH = &sType_DASH
+var Type_HLS = &sType_HLS
+
+var UpdateProgramScheduleConfiguration = &sUpdateProgramScheduleConfiguration
+var UpdateProgramScheduleConfiguration_Transition = &sUpdateProgramScheduleConfiguration_Transition
+var UpdateProgramScheduleConfiguration_ClipRange = &sUpdateProgramScheduleConfiguration_ClipRange
+
+var UpdateProgramTransition = &sUpdateProgramTransition
+var UpdateProgramTransition_ScheduledStartTimeMillis = &sUpdateProgramTransition_ScheduledStartTimeMillis
+var UpdateProgramTransition_DurationMillis = &sUpdateProgramTransition_DurationMillis
+
+var VastRequestConfiguration = &sVastRequestConfiguration
+var VastRequestConfiguration_Runtime = &sVastRequestConfiguration_Runtime
+var VastRequestConfiguration_Output = &sVastRequestConfiguration_Output
+var VastRequestConfiguration_MethodType = &sVastRequestConfiguration_MethodType
+var VastRequestConfiguration_RequestTimeoutMilliseconds = &sVastRequestConfiguration_RequestTimeoutMilliseconds
+var VastRequestConfiguration_Url = &sVastRequestConfiguration_Url
+var VastRequestConfiguration_Body = &sVastRequestConfiguration_Body
+var VastRequestConfiguration_Headers = &sVastRequestConfiguration_Headers
+var VastRequestConfiguration_Cache = &sVastRequestConfiguration_Cache
+
+var VastResponse = &sVastResponse
+var VastResponse_AdSequencingMode = &sVastResponse_AdSequencingMode
+
+var VodSource = &sVodSource
+var VodSource_Arn = &sVodSource_Arn
+var VodSource_CreationTime = &sVodSource_CreationTime
+var VodSource_HttpPackageConfigurations = &sVodSource_HttpPackageConfigurations
+var VodSource_LastModifiedTime = &sVodSource_LastModifiedTime
+var VodSource_SourceLocationName = &sVodSource_SourceLocationName
+var VodSource_Tags = &sVodSource_Tags
+var VodSource_VodSourceName = &sVodSource_VodSourceName
+
+var YieldOptimizationConfiguration = &sYieldOptimizationConfiguration
+var YieldOptimizationConfiguration_MinimumUnfilledDuration = &sYieldOptimizationConfiguration_MinimumUnfilledDuration
+var YieldOptimizationConfiguration_PublisherId = &sYieldOptimizationConfiguration_PublisherId
+var YieldOptimizationConfiguration_Region = &sYieldOptimizationConfiguration_Region
+var YieldOptimizationConfiguration_OpenRtbTemplate = &sYieldOptimizationConfiguration_OpenRtbTemplate
+
+var ConfigureLogsForChannelRequest = &sConfigureLogsForChannelRequest
+var ConfigureLogsForChannelRequest_ChannelName = &sConfigureLogsForChannelRequest_ChannelName
+var ConfigureLogsForChannelRequest_LogTypes = &sConfigureLogsForChannelRequest_LogTypes
+
+var ConfigureLogsForChannelResponse = &sConfigureLogsForChannelResponse
+var ConfigureLogsForChannelResponse_ChannelName = &sConfigureLogsForChannelResponse_ChannelName
+var ConfigureLogsForChannelResponse_LogTypes = &sConfigureLogsForChannelResponse_LogTypes
+
+var ConfigureLogsForPlaybackConfigurationRequest = &sConfigureLogsForPlaybackConfigurationRequest
+var ConfigureLogsForPlaybackConfigurationRequest_PercentEnabled = &sConfigureLogsForPlaybackConfigurationRequest_PercentEnabled
+var ConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName = &sConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName
+var ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies = &sConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies
+var ConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog = &sConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog
+var ConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog = &sConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog
+
+var ConfigureLogsForPlaybackConfigurationResponse = &sConfigureLogsForPlaybackConfigurationResponse
+var ConfigureLogsForPlaybackConfigurationResponse_PercentEnabled = &sConfigureLogsForPlaybackConfigurationResponse_PercentEnabled
+var ConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName = &sConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName
+var ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies = &sConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies
+var ConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog = &sConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog
+var ConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog = &sConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog
+
+var CreateChannelRequest = &sCreateChannelRequest
+var CreateChannelRequest_ChannelName = &sCreateChannelRequest_ChannelName
+var CreateChannelRequest_FillerSlate = &sCreateChannelRequest_FillerSlate
+var CreateChannelRequest_Outputs = &sCreateChannelRequest_Outputs
+var CreateChannelRequest_PlaybackMode = &sCreateChannelRequest_PlaybackMode
+var CreateChannelRequest_Tags = &sCreateChannelRequest_Tags
+var CreateChannelRequest_Tier = &sCreateChannelRequest_Tier
+var CreateChannelRequest_TimeShiftConfiguration = &sCreateChannelRequest_TimeShiftConfiguration
+var CreateChannelRequest_Audiences = &sCreateChannelRequest_Audiences
+
+var CreateChannelResponse = &sCreateChannelResponse
+var CreateChannelResponse_Arn = &sCreateChannelResponse_Arn
+var CreateChannelResponse_ChannelName = &sCreateChannelResponse_ChannelName
+var CreateChannelResponse_ChannelState = &sCreateChannelResponse_ChannelState
+var CreateChannelResponse_CreationTime = &sCreateChannelResponse_CreationTime
+var CreateChannelResponse_FillerSlate = &sCreateChannelResponse_FillerSlate
+var CreateChannelResponse_LastModifiedTime = &sCreateChannelResponse_LastModifiedTime
+var CreateChannelResponse_Outputs = &sCreateChannelResponse_Outputs
+var CreateChannelResponse_PlaybackMode = &sCreateChannelResponse_PlaybackMode
+var CreateChannelResponse_Tags = &sCreateChannelResponse_Tags
+var CreateChannelResponse_Tier = &sCreateChannelResponse_Tier
+var CreateChannelResponse_TimeShiftConfiguration = &sCreateChannelResponse_TimeShiftConfiguration
+var CreateChannelResponse_Audiences = &sCreateChannelResponse_Audiences
+
+var CreateLiveSourceRequest = &sCreateLiveSourceRequest
+var CreateLiveSourceRequest_HttpPackageConfigurations = &sCreateLiveSourceRequest_HttpPackageConfigurations
+var CreateLiveSourceRequest_LiveSourceName = &sCreateLiveSourceRequest_LiveSourceName
+var CreateLiveSourceRequest_SourceLocationName = &sCreateLiveSourceRequest_SourceLocationName
+var CreateLiveSourceRequest_Tags = &sCreateLiveSourceRequest_Tags
+
+var CreateLiveSourceResponse = &sCreateLiveSourceResponse
+var CreateLiveSourceResponse_Arn = &sCreateLiveSourceResponse_Arn
+var CreateLiveSourceResponse_CreationTime = &sCreateLiveSourceResponse_CreationTime
+var CreateLiveSourceResponse_HttpPackageConfigurations = &sCreateLiveSourceResponse_HttpPackageConfigurations
+var CreateLiveSourceResponse_LastModifiedTime = &sCreateLiveSourceResponse_LastModifiedTime
+var CreateLiveSourceResponse_LiveSourceName = &sCreateLiveSourceResponse_LiveSourceName
+var CreateLiveSourceResponse_SourceLocationName = &sCreateLiveSourceResponse_SourceLocationName
+var CreateLiveSourceResponse_Tags = &sCreateLiveSourceResponse_Tags
+
+var CreatePrefetchScheduleRequest = &sCreatePrefetchScheduleRequest
+var CreatePrefetchScheduleRequest_Consumption = &sCreatePrefetchScheduleRequest_Consumption
+var CreatePrefetchScheduleRequest_Name = &sCreatePrefetchScheduleRequest_Name
+var CreatePrefetchScheduleRequest_PlaybackConfigurationName = &sCreatePrefetchScheduleRequest_PlaybackConfigurationName
+var CreatePrefetchScheduleRequest_Retrieval = &sCreatePrefetchScheduleRequest_Retrieval
+var CreatePrefetchScheduleRequest_RecurringPrefetchConfiguration = &sCreatePrefetchScheduleRequest_RecurringPrefetchConfiguration
+var CreatePrefetchScheduleRequest_ScheduleType = &sCreatePrefetchScheduleRequest_ScheduleType
+var CreatePrefetchScheduleRequest_StreamId = &sCreatePrefetchScheduleRequest_StreamId
+var CreatePrefetchScheduleRequest_Tags = &sCreatePrefetchScheduleRequest_Tags
+
+var CreatePrefetchScheduleResponse = &sCreatePrefetchScheduleResponse
+var CreatePrefetchScheduleResponse_Arn = &sCreatePrefetchScheduleResponse_Arn
+var CreatePrefetchScheduleResponse_Consumption = &sCreatePrefetchScheduleResponse_Consumption
+var CreatePrefetchScheduleResponse_Name = &sCreatePrefetchScheduleResponse_Name
+var CreatePrefetchScheduleResponse_PlaybackConfigurationName = &sCreatePrefetchScheduleResponse_PlaybackConfigurationName
+var CreatePrefetchScheduleResponse_Retrieval = &sCreatePrefetchScheduleResponse_Retrieval
+var CreatePrefetchScheduleResponse_RecurringPrefetchConfiguration = &sCreatePrefetchScheduleResponse_RecurringPrefetchConfiguration
+var CreatePrefetchScheduleResponse_ScheduleType = &sCreatePrefetchScheduleResponse_ScheduleType
+var CreatePrefetchScheduleResponse_StreamId = &sCreatePrefetchScheduleResponse_StreamId
+var CreatePrefetchScheduleResponse_Tags = &sCreatePrefetchScheduleResponse_Tags
+
+var CreateProgramRequest = &sCreateProgramRequest
+var CreateProgramRequest_AdBreaks = &sCreateProgramRequest_AdBreaks
+var CreateProgramRequest_ChannelName = &sCreateProgramRequest_ChannelName
+var CreateProgramRequest_LiveSourceName = &sCreateProgramRequest_LiveSourceName
+var CreateProgramRequest_ProgramName = &sCreateProgramRequest_ProgramName
+var CreateProgramRequest_ScheduleConfiguration = &sCreateProgramRequest_ScheduleConfiguration
+var CreateProgramRequest_SourceLocationName = &sCreateProgramRequest_SourceLocationName
+var CreateProgramRequest_VodSourceName = &sCreateProgramRequest_VodSourceName
+var CreateProgramRequest_AudienceMedia = &sCreateProgramRequest_AudienceMedia
+var CreateProgramRequest_Tags = &sCreateProgramRequest_Tags
+
+var CreateProgramResponse = &sCreateProgramResponse
+var CreateProgramResponse_AdBreaks = &sCreateProgramResponse_AdBreaks
+var CreateProgramResponse_Arn = &sCreateProgramResponse_Arn
+var CreateProgramResponse_ChannelName = &sCreateProgramResponse_ChannelName
+var CreateProgramResponse_CreationTime = &sCreateProgramResponse_CreationTime
+var CreateProgramResponse_LiveSourceName = &sCreateProgramResponse_LiveSourceName
+var CreateProgramResponse_ProgramName = &sCreateProgramResponse_ProgramName
+var CreateProgramResponse_ScheduledStartTime = &sCreateProgramResponse_ScheduledStartTime
+var CreateProgramResponse_SourceLocationName = &sCreateProgramResponse_SourceLocationName
+var CreateProgramResponse_VodSourceName = &sCreateProgramResponse_VodSourceName
+var CreateProgramResponse_ClipRange = &sCreateProgramResponse_ClipRange
+var CreateProgramResponse_DurationMillis = &sCreateProgramResponse_DurationMillis
+var CreateProgramResponse_AudienceMedia = &sCreateProgramResponse_AudienceMedia
+var CreateProgramResponse_Tags = &sCreateProgramResponse_Tags
+
+var CreateSourceLocationRequest = &sCreateSourceLocationRequest
+var CreateSourceLocationRequest_AccessConfiguration = &sCreateSourceLocationRequest_AccessConfiguration
+var CreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration = &sCreateSourceLocationRequest_DefaultSegmentDeliveryConfiguration
+var CreateSourceLocationRequest_HttpConfiguration = &sCreateSourceLocationRequest_HttpConfiguration
+var CreateSourceLocationRequest_SegmentDeliveryConfigurations = &sCreateSourceLocationRequest_SegmentDeliveryConfigurations
+var CreateSourceLocationRequest_SourceLocationName = &sCreateSourceLocationRequest_SourceLocationName
+var CreateSourceLocationRequest_Tags = &sCreateSourceLocationRequest_Tags
+
+var CreateSourceLocationResponse = &sCreateSourceLocationResponse
+var CreateSourceLocationResponse_AccessConfiguration = &sCreateSourceLocationResponse_AccessConfiguration
+var CreateSourceLocationResponse_Arn = &sCreateSourceLocationResponse_Arn
+var CreateSourceLocationResponse_CreationTime = &sCreateSourceLocationResponse_CreationTime
+var CreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration = &sCreateSourceLocationResponse_DefaultSegmentDeliveryConfiguration
+var CreateSourceLocationResponse_HttpConfiguration = &sCreateSourceLocationResponse_HttpConfiguration
+var CreateSourceLocationResponse_LastModifiedTime = &sCreateSourceLocationResponse_LastModifiedTime
+var CreateSourceLocationResponse_SegmentDeliveryConfigurations = &sCreateSourceLocationResponse_SegmentDeliveryConfigurations
+var CreateSourceLocationResponse_SourceLocationName = &sCreateSourceLocationResponse_SourceLocationName
+var CreateSourceLocationResponse_Tags = &sCreateSourceLocationResponse_Tags
+
+var CreateVodSourceRequest = &sCreateVodSourceRequest
+var CreateVodSourceRequest_HttpPackageConfigurations = &sCreateVodSourceRequest_HttpPackageConfigurations
+var CreateVodSourceRequest_SourceLocationName = &sCreateVodSourceRequest_SourceLocationName
+var CreateVodSourceRequest_Tags = &sCreateVodSourceRequest_Tags
+var CreateVodSourceRequest_VodSourceName = &sCreateVodSourceRequest_VodSourceName
+
+var CreateVodSourceResponse = &sCreateVodSourceResponse
+var CreateVodSourceResponse_Arn = &sCreateVodSourceResponse_Arn
+var CreateVodSourceResponse_CreationTime = &sCreateVodSourceResponse_CreationTime
+var CreateVodSourceResponse_HttpPackageConfigurations = &sCreateVodSourceResponse_HttpPackageConfigurations
+var CreateVodSourceResponse_LastModifiedTime = &sCreateVodSourceResponse_LastModifiedTime
+var CreateVodSourceResponse_SourceLocationName = &sCreateVodSourceResponse_SourceLocationName
+var CreateVodSourceResponse_Tags = &sCreateVodSourceResponse_Tags
+var CreateVodSourceResponse_VodSourceName = &sCreateVodSourceResponse_VodSourceName
+
+var DeleteChannelRequest = &sDeleteChannelRequest
+var DeleteChannelRequest_ChannelName = &sDeleteChannelRequest_ChannelName
+
+var DeleteChannelResponse = &sDeleteChannelResponse
+
+var DeleteChannelPolicyRequest = &sDeleteChannelPolicyRequest
+var DeleteChannelPolicyRequest_ChannelName = &sDeleteChannelPolicyRequest_ChannelName
+
+var DeleteChannelPolicyResponse = &sDeleteChannelPolicyResponse
+
+var DeleteFunctionRequest = &sDeleteFunctionRequest
+var DeleteFunctionRequest_FunctionId = &sDeleteFunctionRequest_FunctionId
+
+var DeleteFunctionResponse = &sDeleteFunctionResponse
+
+var DeleteLiveSourceRequest = &sDeleteLiveSourceRequest
+var DeleteLiveSourceRequest_LiveSourceName = &sDeleteLiveSourceRequest_LiveSourceName
+var DeleteLiveSourceRequest_SourceLocationName = &sDeleteLiveSourceRequest_SourceLocationName
+
+var DeleteLiveSourceResponse = &sDeleteLiveSourceResponse
+
+var DeletePlaybackConfigurationRequest = &sDeletePlaybackConfigurationRequest
+var DeletePlaybackConfigurationRequest_Name = &sDeletePlaybackConfigurationRequest_Name
+
+var DeletePlaybackConfigurationResponse = &sDeletePlaybackConfigurationResponse
+
+var DeletePrefetchScheduleRequest = &sDeletePrefetchScheduleRequest
+var DeletePrefetchScheduleRequest_Name = &sDeletePrefetchScheduleRequest_Name
+var DeletePrefetchScheduleRequest_PlaybackConfigurationName = &sDeletePrefetchScheduleRequest_PlaybackConfigurationName
+
+var DeletePrefetchScheduleResponse = &sDeletePrefetchScheduleResponse
+
+var DeleteProgramRequest = &sDeleteProgramRequest
+var DeleteProgramRequest_ChannelName = &sDeleteProgramRequest_ChannelName
+var DeleteProgramRequest_ProgramName = &sDeleteProgramRequest_ProgramName
+
+var DeleteProgramResponse = &sDeleteProgramResponse
+
+var DeleteSourceLocationRequest = &sDeleteSourceLocationRequest
+var DeleteSourceLocationRequest_SourceLocationName = &sDeleteSourceLocationRequest_SourceLocationName
+
+var DeleteSourceLocationResponse = &sDeleteSourceLocationResponse
+
+var DeleteVodSourceRequest = &sDeleteVodSourceRequest
+var DeleteVodSourceRequest_SourceLocationName = &sDeleteVodSourceRequest_SourceLocationName
+var DeleteVodSourceRequest_VodSourceName = &sDeleteVodSourceRequest_VodSourceName
+
+var DeleteVodSourceResponse = &sDeleteVodSourceResponse
+
+var DescribeChannelRequest = &sDescribeChannelRequest
+var DescribeChannelRequest_ChannelName = &sDescribeChannelRequest_ChannelName
+
+var DescribeChannelResponse = &sDescribeChannelResponse
+var DescribeChannelResponse_Arn = &sDescribeChannelResponse_Arn
+var DescribeChannelResponse_ChannelName = &sDescribeChannelResponse_ChannelName
+var DescribeChannelResponse_ChannelState = &sDescribeChannelResponse_ChannelState
+var DescribeChannelResponse_CreationTime = &sDescribeChannelResponse_CreationTime
+var DescribeChannelResponse_FillerSlate = &sDescribeChannelResponse_FillerSlate
+var DescribeChannelResponse_LastModifiedTime = &sDescribeChannelResponse_LastModifiedTime
+var DescribeChannelResponse_Outputs = &sDescribeChannelResponse_Outputs
+var DescribeChannelResponse_PlaybackMode = &sDescribeChannelResponse_PlaybackMode
+var DescribeChannelResponse_Tags = &sDescribeChannelResponse_Tags
+var DescribeChannelResponse_Tier = &sDescribeChannelResponse_Tier
+var DescribeChannelResponse_LogConfiguration = &sDescribeChannelResponse_LogConfiguration
+var DescribeChannelResponse_TimeShiftConfiguration = &sDescribeChannelResponse_TimeShiftConfiguration
+var DescribeChannelResponse_Audiences = &sDescribeChannelResponse_Audiences
+
+var DescribeLiveSourceRequest = &sDescribeLiveSourceRequest
+var DescribeLiveSourceRequest_LiveSourceName = &sDescribeLiveSourceRequest_LiveSourceName
+var DescribeLiveSourceRequest_SourceLocationName = &sDescribeLiveSourceRequest_SourceLocationName
+
+var DescribeLiveSourceResponse = &sDescribeLiveSourceResponse
+var DescribeLiveSourceResponse_Arn = &sDescribeLiveSourceResponse_Arn
+var DescribeLiveSourceResponse_CreationTime = &sDescribeLiveSourceResponse_CreationTime
+var DescribeLiveSourceResponse_HttpPackageConfigurations = &sDescribeLiveSourceResponse_HttpPackageConfigurations
+var DescribeLiveSourceResponse_LastModifiedTime = &sDescribeLiveSourceResponse_LastModifiedTime
+var DescribeLiveSourceResponse_LiveSourceName = &sDescribeLiveSourceResponse_LiveSourceName
+var DescribeLiveSourceResponse_SourceLocationName = &sDescribeLiveSourceResponse_SourceLocationName
+var DescribeLiveSourceResponse_Tags = &sDescribeLiveSourceResponse_Tags
+
+var DescribeProgramRequest = &sDescribeProgramRequest
+var DescribeProgramRequest_ChannelName = &sDescribeProgramRequest_ChannelName
+var DescribeProgramRequest_ProgramName = &sDescribeProgramRequest_ProgramName
+
+var DescribeProgramResponse = &sDescribeProgramResponse
+var DescribeProgramResponse_AdBreaks = &sDescribeProgramResponse_AdBreaks
+var DescribeProgramResponse_Arn = &sDescribeProgramResponse_Arn
+var DescribeProgramResponse_ChannelName = &sDescribeProgramResponse_ChannelName
+var DescribeProgramResponse_CreationTime = &sDescribeProgramResponse_CreationTime
+var DescribeProgramResponse_LiveSourceName = &sDescribeProgramResponse_LiveSourceName
+var DescribeProgramResponse_ProgramName = &sDescribeProgramResponse_ProgramName
+var DescribeProgramResponse_ScheduledStartTime = &sDescribeProgramResponse_ScheduledStartTime
+var DescribeProgramResponse_SourceLocationName = &sDescribeProgramResponse_SourceLocationName
+var DescribeProgramResponse_VodSourceName = &sDescribeProgramResponse_VodSourceName
+var DescribeProgramResponse_ClipRange = &sDescribeProgramResponse_ClipRange
+var DescribeProgramResponse_DurationMillis = &sDescribeProgramResponse_DurationMillis
+var DescribeProgramResponse_AudienceMedia = &sDescribeProgramResponse_AudienceMedia
+var DescribeProgramResponse_Tags = &sDescribeProgramResponse_Tags
+
+var DescribeSourceLocationRequest = &sDescribeSourceLocationRequest
+var DescribeSourceLocationRequest_SourceLocationName = &sDescribeSourceLocationRequest_SourceLocationName
+
+var DescribeSourceLocationResponse = &sDescribeSourceLocationResponse
+var DescribeSourceLocationResponse_AccessConfiguration = &sDescribeSourceLocationResponse_AccessConfiguration
+var DescribeSourceLocationResponse_Arn = &sDescribeSourceLocationResponse_Arn
+var DescribeSourceLocationResponse_CreationTime = &sDescribeSourceLocationResponse_CreationTime
+var DescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration = &sDescribeSourceLocationResponse_DefaultSegmentDeliveryConfiguration
+var DescribeSourceLocationResponse_HttpConfiguration = &sDescribeSourceLocationResponse_HttpConfiguration
+var DescribeSourceLocationResponse_LastModifiedTime = &sDescribeSourceLocationResponse_LastModifiedTime
+var DescribeSourceLocationResponse_SegmentDeliveryConfigurations = &sDescribeSourceLocationResponse_SegmentDeliveryConfigurations
+var DescribeSourceLocationResponse_SourceLocationName = &sDescribeSourceLocationResponse_SourceLocationName
+var DescribeSourceLocationResponse_Tags = &sDescribeSourceLocationResponse_Tags
+
+var DescribeVodSourceRequest = &sDescribeVodSourceRequest
+var DescribeVodSourceRequest_SourceLocationName = &sDescribeVodSourceRequest_SourceLocationName
+var DescribeVodSourceRequest_VodSourceName = &sDescribeVodSourceRequest_VodSourceName
+
+var DescribeVodSourceResponse = &sDescribeVodSourceResponse
+var DescribeVodSourceResponse_AdBreakOpportunities = &sDescribeVodSourceResponse_AdBreakOpportunities
+var DescribeVodSourceResponse_Arn = &sDescribeVodSourceResponse_Arn
+var DescribeVodSourceResponse_CreationTime = &sDescribeVodSourceResponse_CreationTime
+var DescribeVodSourceResponse_HttpPackageConfigurations = &sDescribeVodSourceResponse_HttpPackageConfigurations
+var DescribeVodSourceResponse_LastModifiedTime = &sDescribeVodSourceResponse_LastModifiedTime
+var DescribeVodSourceResponse_SourceLocationName = &sDescribeVodSourceResponse_SourceLocationName
+var DescribeVodSourceResponse_Tags = &sDescribeVodSourceResponse_Tags
+var DescribeVodSourceResponse_VodSourceName = &sDescribeVodSourceResponse_VodSourceName
+
+var GetChannelPolicyRequest = &sGetChannelPolicyRequest
+var GetChannelPolicyRequest_ChannelName = &sGetChannelPolicyRequest_ChannelName
+
+var GetChannelPolicyResponse = &sGetChannelPolicyResponse
+var GetChannelPolicyResponse_Policy = &sGetChannelPolicyResponse_Policy
+
+var GetChannelScheduleRequest = &sGetChannelScheduleRequest
+var GetChannelScheduleRequest_ChannelName = &sGetChannelScheduleRequest_ChannelName
+var GetChannelScheduleRequest_DurationMinutes = &sGetChannelScheduleRequest_DurationMinutes
+var GetChannelScheduleRequest_MaxResults = &sGetChannelScheduleRequest_MaxResults
+var GetChannelScheduleRequest_NextToken = &sGetChannelScheduleRequest_NextToken
+var GetChannelScheduleRequest_Audience = &sGetChannelScheduleRequest_Audience
+
+var GetChannelScheduleResponse = &sGetChannelScheduleResponse
+var GetChannelScheduleResponse_Items = &sGetChannelScheduleResponse_Items
+var GetChannelScheduleResponse_NextToken = &sGetChannelScheduleResponse_NextToken
+
+var GetFunctionRequest = &sGetFunctionRequest
+var GetFunctionRequest_FunctionId = &sGetFunctionRequest_FunctionId
+
+var GetFunctionResponse = &sGetFunctionResponse
+var GetFunctionResponse_FunctionId = &sGetFunctionResponse_FunctionId
+var GetFunctionResponse_FunctionType = &sGetFunctionResponse_FunctionType
+var GetFunctionResponse_Description = &sGetFunctionResponse_Description
+var GetFunctionResponse_HttpRequestConfiguration = &sGetFunctionResponse_HttpRequestConfiguration
+var GetFunctionResponse_AwsServiceRequestConfiguration = &sGetFunctionResponse_AwsServiceRequestConfiguration
+var GetFunctionResponse_CustomOutputConfiguration = &sGetFunctionResponse_CustomOutputConfiguration
+var GetFunctionResponse_ConcurrentExecutorConfiguration = &sGetFunctionResponse_ConcurrentExecutorConfiguration
+var GetFunctionResponse_SequentialExecutorConfiguration = &sGetFunctionResponse_SequentialExecutorConfiguration
+var GetFunctionResponse_VastRequestConfiguration = &sGetFunctionResponse_VastRequestConfiguration
+var GetFunctionResponse_Tags = &sGetFunctionResponse_Tags
+var GetFunctionResponse_Arn = &sGetFunctionResponse_Arn
+
+var GetPlaybackConfigurationRequest = &sGetPlaybackConfigurationRequest
+var GetPlaybackConfigurationRequest_Name = &sGetPlaybackConfigurationRequest_Name
+
+var GetPlaybackConfigurationResponse = &sGetPlaybackConfigurationResponse
+var GetPlaybackConfigurationResponse_AdDecisionServerUrl = &sGetPlaybackConfigurationResponse_AdDecisionServerUrl
+var GetPlaybackConfigurationResponse_AvailSuppression = &sGetPlaybackConfigurationResponse_AvailSuppression
+var GetPlaybackConfigurationResponse_Bumper = &sGetPlaybackConfigurationResponse_Bumper
+var GetPlaybackConfigurationResponse_CdnConfiguration = &sGetPlaybackConfigurationResponse_CdnConfiguration
+var GetPlaybackConfigurationResponse_ConfigurationAliases = &sGetPlaybackConfigurationResponse_ConfigurationAliases
+var GetPlaybackConfigurationResponse_DashConfiguration = &sGetPlaybackConfigurationResponse_DashConfiguration
+var GetPlaybackConfigurationResponse_HlsConfiguration = &sGetPlaybackConfigurationResponse_HlsConfiguration
+var GetPlaybackConfigurationResponse_InsertionMode = &sGetPlaybackConfigurationResponse_InsertionMode
+var GetPlaybackConfigurationResponse_LivePreRollConfiguration = &sGetPlaybackConfigurationResponse_LivePreRollConfiguration
+var GetPlaybackConfigurationResponse_LogConfiguration = &sGetPlaybackConfigurationResponse_LogConfiguration
+var GetPlaybackConfigurationResponse_ManifestProcessingRules = &sGetPlaybackConfigurationResponse_ManifestProcessingRules
+var GetPlaybackConfigurationResponse_Name = &sGetPlaybackConfigurationResponse_Name
+var GetPlaybackConfigurationResponse_PersonalizationThresholdSeconds = &sGetPlaybackConfigurationResponse_PersonalizationThresholdSeconds
+var GetPlaybackConfigurationResponse_PlaybackConfigurationArn = &sGetPlaybackConfigurationResponse_PlaybackConfigurationArn
+var GetPlaybackConfigurationResponse_PlaybackEndpointPrefix = &sGetPlaybackConfigurationResponse_PlaybackEndpointPrefix
+var GetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix = &sGetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix
+var GetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix = &sGetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix
+var GetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix = &sGetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix
+var GetPlaybackConfigurationResponse_SlateAdUrl = &sGetPlaybackConfigurationResponse_SlateAdUrl
+var GetPlaybackConfigurationResponse_Tags = &sGetPlaybackConfigurationResponse_Tags
+var GetPlaybackConfigurationResponse_TranscodeProfileName = &sGetPlaybackConfigurationResponse_TranscodeProfileName
+var GetPlaybackConfigurationResponse_VideoContentSourceUrl = &sGetPlaybackConfigurationResponse_VideoContentSourceUrl
+var GetPlaybackConfigurationResponse_AdConditioningConfiguration = &sGetPlaybackConfigurationResponse_AdConditioningConfiguration
+var GetPlaybackConfigurationResponse_AdDecisionServerConfiguration = &sGetPlaybackConfigurationResponse_AdDecisionServerConfiguration
+var GetPlaybackConfigurationResponse_YieldOptimizationConfiguration = &sGetPlaybackConfigurationResponse_YieldOptimizationConfiguration
+var GetPlaybackConfigurationResponse_FunctionMapping = &sGetPlaybackConfigurationResponse_FunctionMapping
+var GetPlaybackConfigurationResponse_AdsPersonalizationTimeouts = &sGetPlaybackConfigurationResponse_AdsPersonalizationTimeouts
+var GetPlaybackConfigurationResponse_AdsPersonalizationConcurrency = &sGetPlaybackConfigurationResponse_AdsPersonalizationConcurrency
+var GetPlaybackConfigurationResponse_BeaconingConfiguration = &sGetPlaybackConfigurationResponse_BeaconingConfiguration
+
+var GetPrefetchScheduleRequest = &sGetPrefetchScheduleRequest
+var GetPrefetchScheduleRequest_Name = &sGetPrefetchScheduleRequest_Name
+var GetPrefetchScheduleRequest_PlaybackConfigurationName = &sGetPrefetchScheduleRequest_PlaybackConfigurationName
+
+var GetPrefetchScheduleResponse = &sGetPrefetchScheduleResponse
+var GetPrefetchScheduleResponse_Arn = &sGetPrefetchScheduleResponse_Arn
+var GetPrefetchScheduleResponse_Consumption = &sGetPrefetchScheduleResponse_Consumption
+var GetPrefetchScheduleResponse_Name = &sGetPrefetchScheduleResponse_Name
+var GetPrefetchScheduleResponse_PlaybackConfigurationName = &sGetPrefetchScheduleResponse_PlaybackConfigurationName
+var GetPrefetchScheduleResponse_Retrieval = &sGetPrefetchScheduleResponse_Retrieval
+var GetPrefetchScheduleResponse_ScheduleType = &sGetPrefetchScheduleResponse_ScheduleType
+var GetPrefetchScheduleResponse_RecurringPrefetchConfiguration = &sGetPrefetchScheduleResponse_RecurringPrefetchConfiguration
+var GetPrefetchScheduleResponse_StreamId = &sGetPrefetchScheduleResponse_StreamId
+var GetPrefetchScheduleResponse_Tags = &sGetPrefetchScheduleResponse_Tags
+
+var ListAlertsRequest = &sListAlertsRequest
+var ListAlertsRequest_MaxResults = &sListAlertsRequest_MaxResults
+var ListAlertsRequest_NextToken = &sListAlertsRequest_NextToken
+var ListAlertsRequest_ResourceArn = &sListAlertsRequest_ResourceArn
+
+var ListAlertsResponse = &sListAlertsResponse
+var ListAlertsResponse_Items = &sListAlertsResponse_Items
+var ListAlertsResponse_NextToken = &sListAlertsResponse_NextToken
+
+var ListChannelsRequest = &sListChannelsRequest
+var ListChannelsRequest_MaxResults = &sListChannelsRequest_MaxResults
+var ListChannelsRequest_NextToken = &sListChannelsRequest_NextToken
+
+var ListChannelsResponse = &sListChannelsResponse
+var ListChannelsResponse_Items = &sListChannelsResponse_Items
+var ListChannelsResponse_NextToken = &sListChannelsResponse_NextToken
+
+var ListFunctionsRequest = &sListFunctionsRequest
+var ListFunctionsRequest_MaxResults = &sListFunctionsRequest_MaxResults
+var ListFunctionsRequest_NextToken = &sListFunctionsRequest_NextToken
+
+var ListFunctionsResponse = &sListFunctionsResponse
+var ListFunctionsResponse_Items = &sListFunctionsResponse_Items
+var ListFunctionsResponse_NextToken = &sListFunctionsResponse_NextToken
+
+var ListLiveSourcesRequest = &sListLiveSourcesRequest
+var ListLiveSourcesRequest_MaxResults = &sListLiveSourcesRequest_MaxResults
+var ListLiveSourcesRequest_NextToken = &sListLiveSourcesRequest_NextToken
+var ListLiveSourcesRequest_SourceLocationName = &sListLiveSourcesRequest_SourceLocationName
+
+var ListLiveSourcesResponse = &sListLiveSourcesResponse
+var ListLiveSourcesResponse_Items = &sListLiveSourcesResponse_Items
+var ListLiveSourcesResponse_NextToken = &sListLiveSourcesResponse_NextToken
+
+var ListPlaybackConfigurationsRequest = &sListPlaybackConfigurationsRequest
+var ListPlaybackConfigurationsRequest_MaxResults = &sListPlaybackConfigurationsRequest_MaxResults
+var ListPlaybackConfigurationsRequest_NextToken = &sListPlaybackConfigurationsRequest_NextToken
+
+var ListPlaybackConfigurationsResponse = &sListPlaybackConfigurationsResponse
+var ListPlaybackConfigurationsResponse_Items = &sListPlaybackConfigurationsResponse_Items
+var ListPlaybackConfigurationsResponse_NextToken = &sListPlaybackConfigurationsResponse_NextToken
+
+var ListPrefetchSchedulesRequest = &sListPrefetchSchedulesRequest
+var ListPrefetchSchedulesRequest_MaxResults = &sListPrefetchSchedulesRequest_MaxResults
+var ListPrefetchSchedulesRequest_NextToken = &sListPrefetchSchedulesRequest_NextToken
+var ListPrefetchSchedulesRequest_PlaybackConfigurationName = &sListPrefetchSchedulesRequest_PlaybackConfigurationName
+var ListPrefetchSchedulesRequest_ScheduleType = &sListPrefetchSchedulesRequest_ScheduleType
+var ListPrefetchSchedulesRequest_StreamId = &sListPrefetchSchedulesRequest_StreamId
+
+var ListPrefetchSchedulesResponse = &sListPrefetchSchedulesResponse
+var ListPrefetchSchedulesResponse_Items = &sListPrefetchSchedulesResponse_Items
+var ListPrefetchSchedulesResponse_NextToken = &sListPrefetchSchedulesResponse_NextToken
+
+var ListSourceLocationsRequest = &sListSourceLocationsRequest
+var ListSourceLocationsRequest_MaxResults = &sListSourceLocationsRequest_MaxResults
+var ListSourceLocationsRequest_NextToken = &sListSourceLocationsRequest_NextToken
+
+var ListSourceLocationsResponse = &sListSourceLocationsResponse
+var ListSourceLocationsResponse_Items = &sListSourceLocationsResponse_Items
+var ListSourceLocationsResponse_NextToken = &sListSourceLocationsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListVodSourcesRequest = &sListVodSourcesRequest
+var ListVodSourcesRequest_MaxResults = &sListVodSourcesRequest_MaxResults
+var ListVodSourcesRequest_NextToken = &sListVodSourcesRequest_NextToken
+var ListVodSourcesRequest_SourceLocationName = &sListVodSourcesRequest_SourceLocationName
+
+var ListVodSourcesResponse = &sListVodSourcesResponse
+var ListVodSourcesResponse_Items = &sListVodSourcesResponse_Items
+var ListVodSourcesResponse_NextToken = &sListVodSourcesResponse_NextToken
+
+var PutChannelPolicyRequest = &sPutChannelPolicyRequest
+var PutChannelPolicyRequest_ChannelName = &sPutChannelPolicyRequest_ChannelName
+var PutChannelPolicyRequest_Policy = &sPutChannelPolicyRequest_Policy
+
+var PutChannelPolicyResponse = &sPutChannelPolicyResponse
+
+var PutFunctionRequest = &sPutFunctionRequest
+var PutFunctionRequest_FunctionId = &sPutFunctionRequest_FunctionId
+var PutFunctionRequest_FunctionType = &sPutFunctionRequest_FunctionType
+var PutFunctionRequest_Description = &sPutFunctionRequest_Description
+var PutFunctionRequest_HttpRequestConfiguration = &sPutFunctionRequest_HttpRequestConfiguration
+var PutFunctionRequest_AwsServiceRequestConfiguration = &sPutFunctionRequest_AwsServiceRequestConfiguration
+var PutFunctionRequest_CustomOutputConfiguration = &sPutFunctionRequest_CustomOutputConfiguration
+var PutFunctionRequest_ConcurrentExecutorConfiguration = &sPutFunctionRequest_ConcurrentExecutorConfiguration
+var PutFunctionRequest_SequentialExecutorConfiguration = &sPutFunctionRequest_SequentialExecutorConfiguration
+var PutFunctionRequest_VastRequestConfiguration = &sPutFunctionRequest_VastRequestConfiguration
+var PutFunctionRequest_Tags = &sPutFunctionRequest_Tags
+
+var PutFunctionResponse = &sPutFunctionResponse
+var PutFunctionResponse_FunctionId = &sPutFunctionResponse_FunctionId
+var PutFunctionResponse_FunctionType = &sPutFunctionResponse_FunctionType
+var PutFunctionResponse_Description = &sPutFunctionResponse_Description
+var PutFunctionResponse_HttpRequestConfiguration = &sPutFunctionResponse_HttpRequestConfiguration
+var PutFunctionResponse_AwsServiceRequestConfiguration = &sPutFunctionResponse_AwsServiceRequestConfiguration
+var PutFunctionResponse_CustomOutputConfiguration = &sPutFunctionResponse_CustomOutputConfiguration
+var PutFunctionResponse_ConcurrentExecutorConfiguration = &sPutFunctionResponse_ConcurrentExecutorConfiguration
+var PutFunctionResponse_SequentialExecutorConfiguration = &sPutFunctionResponse_SequentialExecutorConfiguration
+var PutFunctionResponse_VastRequestConfiguration = &sPutFunctionResponse_VastRequestConfiguration
+var PutFunctionResponse_Tags = &sPutFunctionResponse_Tags
+var PutFunctionResponse_Arn = &sPutFunctionResponse_Arn
+
+var PutPlaybackConfigurationRequest = &sPutPlaybackConfigurationRequest
+var PutPlaybackConfigurationRequest_AdDecisionServerUrl = &sPutPlaybackConfigurationRequest_AdDecisionServerUrl
+var PutPlaybackConfigurationRequest_AvailSuppression = &sPutPlaybackConfigurationRequest_AvailSuppression
+var PutPlaybackConfigurationRequest_Bumper = &sPutPlaybackConfigurationRequest_Bumper
+var PutPlaybackConfigurationRequest_CdnConfiguration = &sPutPlaybackConfigurationRequest_CdnConfiguration
+var PutPlaybackConfigurationRequest_ConfigurationAliases = &sPutPlaybackConfigurationRequest_ConfigurationAliases
+var PutPlaybackConfigurationRequest_DashConfiguration = &sPutPlaybackConfigurationRequest_DashConfiguration
+var PutPlaybackConfigurationRequest_InsertionMode = &sPutPlaybackConfigurationRequest_InsertionMode
+var PutPlaybackConfigurationRequest_LivePreRollConfiguration = &sPutPlaybackConfigurationRequest_LivePreRollConfiguration
+var PutPlaybackConfigurationRequest_ManifestProcessingRules = &sPutPlaybackConfigurationRequest_ManifestProcessingRules
+var PutPlaybackConfigurationRequest_Name = &sPutPlaybackConfigurationRequest_Name
+var PutPlaybackConfigurationRequest_PersonalizationThresholdSeconds = &sPutPlaybackConfigurationRequest_PersonalizationThresholdSeconds
+var PutPlaybackConfigurationRequest_SlateAdUrl = &sPutPlaybackConfigurationRequest_SlateAdUrl
+var PutPlaybackConfigurationRequest_Tags = &sPutPlaybackConfigurationRequest_Tags
+var PutPlaybackConfigurationRequest_TranscodeProfileName = &sPutPlaybackConfigurationRequest_TranscodeProfileName
+var PutPlaybackConfigurationRequest_VideoContentSourceUrl = &sPutPlaybackConfigurationRequest_VideoContentSourceUrl
+var PutPlaybackConfigurationRequest_AdConditioningConfiguration = &sPutPlaybackConfigurationRequest_AdConditioningConfiguration
+var PutPlaybackConfigurationRequest_AdDecisionServerConfiguration = &sPutPlaybackConfigurationRequest_AdDecisionServerConfiguration
+var PutPlaybackConfigurationRequest_YieldOptimizationConfiguration = &sPutPlaybackConfigurationRequest_YieldOptimizationConfiguration
+var PutPlaybackConfigurationRequest_FunctionMapping = &sPutPlaybackConfigurationRequest_FunctionMapping
+var PutPlaybackConfigurationRequest_AdsPersonalizationTimeouts = &sPutPlaybackConfigurationRequest_AdsPersonalizationTimeouts
+var PutPlaybackConfigurationRequest_AdsPersonalizationConcurrency = &sPutPlaybackConfigurationRequest_AdsPersonalizationConcurrency
+var PutPlaybackConfigurationRequest_BeaconingConfiguration = &sPutPlaybackConfigurationRequest_BeaconingConfiguration
+
+var PutPlaybackConfigurationResponse = &sPutPlaybackConfigurationResponse
+var PutPlaybackConfigurationResponse_AdDecisionServerUrl = &sPutPlaybackConfigurationResponse_AdDecisionServerUrl
+var PutPlaybackConfigurationResponse_AvailSuppression = &sPutPlaybackConfigurationResponse_AvailSuppression
+var PutPlaybackConfigurationResponse_Bumper = &sPutPlaybackConfigurationResponse_Bumper
+var PutPlaybackConfigurationResponse_CdnConfiguration = &sPutPlaybackConfigurationResponse_CdnConfiguration
+var PutPlaybackConfigurationResponse_ConfigurationAliases = &sPutPlaybackConfigurationResponse_ConfigurationAliases
+var PutPlaybackConfigurationResponse_DashConfiguration = &sPutPlaybackConfigurationResponse_DashConfiguration
+var PutPlaybackConfigurationResponse_HlsConfiguration = &sPutPlaybackConfigurationResponse_HlsConfiguration
+var PutPlaybackConfigurationResponse_InsertionMode = &sPutPlaybackConfigurationResponse_InsertionMode
+var PutPlaybackConfigurationResponse_LivePreRollConfiguration = &sPutPlaybackConfigurationResponse_LivePreRollConfiguration
+var PutPlaybackConfigurationResponse_LogConfiguration = &sPutPlaybackConfigurationResponse_LogConfiguration
+var PutPlaybackConfigurationResponse_ManifestProcessingRules = &sPutPlaybackConfigurationResponse_ManifestProcessingRules
+var PutPlaybackConfigurationResponse_Name = &sPutPlaybackConfigurationResponse_Name
+var PutPlaybackConfigurationResponse_PersonalizationThresholdSeconds = &sPutPlaybackConfigurationResponse_PersonalizationThresholdSeconds
+var PutPlaybackConfigurationResponse_PlaybackConfigurationArn = &sPutPlaybackConfigurationResponse_PlaybackConfigurationArn
+var PutPlaybackConfigurationResponse_PlaybackEndpointPrefix = &sPutPlaybackConfigurationResponse_PlaybackEndpointPrefix
+var PutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix = &sPutPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix
+var PutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix = &sPutPlaybackConfigurationResponse_SessionInitializationEndpointPrefix
+var PutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix = &sPutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix
+var PutPlaybackConfigurationResponse_SlateAdUrl = &sPutPlaybackConfigurationResponse_SlateAdUrl
+var PutPlaybackConfigurationResponse_Tags = &sPutPlaybackConfigurationResponse_Tags
+var PutPlaybackConfigurationResponse_TranscodeProfileName = &sPutPlaybackConfigurationResponse_TranscodeProfileName
+var PutPlaybackConfigurationResponse_VideoContentSourceUrl = &sPutPlaybackConfigurationResponse_VideoContentSourceUrl
+var PutPlaybackConfigurationResponse_AdConditioningConfiguration = &sPutPlaybackConfigurationResponse_AdConditioningConfiguration
+var PutPlaybackConfigurationResponse_AdDecisionServerConfiguration = &sPutPlaybackConfigurationResponse_AdDecisionServerConfiguration
+var PutPlaybackConfigurationResponse_YieldOptimizationConfiguration = &sPutPlaybackConfigurationResponse_YieldOptimizationConfiguration
+var PutPlaybackConfigurationResponse_FunctionMapping = &sPutPlaybackConfigurationResponse_FunctionMapping
+var PutPlaybackConfigurationResponse_AdsPersonalizationTimeouts = &sPutPlaybackConfigurationResponse_AdsPersonalizationTimeouts
+var PutPlaybackConfigurationResponse_AdsPersonalizationConcurrency = &sPutPlaybackConfigurationResponse_AdsPersonalizationConcurrency
+var PutPlaybackConfigurationResponse_BeaconingConfiguration = &sPutPlaybackConfigurationResponse_BeaconingConfiguration
+
+var StartChannelRequest = &sStartChannelRequest
+var StartChannelRequest_ChannelName = &sStartChannelRequest_ChannelName
+
+var StartChannelResponse = &sStartChannelResponse
+
+var StopChannelRequest = &sStopChannelRequest
+var StopChannelRequest_ChannelName = &sStopChannelRequest_ChannelName
+
+var StopChannelResponse = &sStopChannelResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateChannelRequest = &sUpdateChannelRequest
+var UpdateChannelRequest_ChannelName = &sUpdateChannelRequest_ChannelName
+var UpdateChannelRequest_FillerSlate = &sUpdateChannelRequest_FillerSlate
+var UpdateChannelRequest_Outputs = &sUpdateChannelRequest_Outputs
+var UpdateChannelRequest_TimeShiftConfiguration = &sUpdateChannelRequest_TimeShiftConfiguration
+var UpdateChannelRequest_Audiences = &sUpdateChannelRequest_Audiences
+
+var UpdateChannelResponse = &sUpdateChannelResponse
+var UpdateChannelResponse_Arn = &sUpdateChannelResponse_Arn
+var UpdateChannelResponse_ChannelName = &sUpdateChannelResponse_ChannelName
+var UpdateChannelResponse_ChannelState = &sUpdateChannelResponse_ChannelState
+var UpdateChannelResponse_CreationTime = &sUpdateChannelResponse_CreationTime
+var UpdateChannelResponse_FillerSlate = &sUpdateChannelResponse_FillerSlate
+var UpdateChannelResponse_LastModifiedTime = &sUpdateChannelResponse_LastModifiedTime
+var UpdateChannelResponse_Outputs = &sUpdateChannelResponse_Outputs
+var UpdateChannelResponse_PlaybackMode = &sUpdateChannelResponse_PlaybackMode
+var UpdateChannelResponse_Tags = &sUpdateChannelResponse_Tags
+var UpdateChannelResponse_Tier = &sUpdateChannelResponse_Tier
+var UpdateChannelResponse_TimeShiftConfiguration = &sUpdateChannelResponse_TimeShiftConfiguration
+var UpdateChannelResponse_Audiences = &sUpdateChannelResponse_Audiences
+
+var UpdateLiveSourceRequest = &sUpdateLiveSourceRequest
+var UpdateLiveSourceRequest_HttpPackageConfigurations = &sUpdateLiveSourceRequest_HttpPackageConfigurations
+var UpdateLiveSourceRequest_LiveSourceName = &sUpdateLiveSourceRequest_LiveSourceName
+var UpdateLiveSourceRequest_SourceLocationName = &sUpdateLiveSourceRequest_SourceLocationName
+
+var UpdateLiveSourceResponse = &sUpdateLiveSourceResponse
+var UpdateLiveSourceResponse_Arn = &sUpdateLiveSourceResponse_Arn
+var UpdateLiveSourceResponse_CreationTime = &sUpdateLiveSourceResponse_CreationTime
+var UpdateLiveSourceResponse_HttpPackageConfigurations = &sUpdateLiveSourceResponse_HttpPackageConfigurations
+var UpdateLiveSourceResponse_LastModifiedTime = &sUpdateLiveSourceResponse_LastModifiedTime
+var UpdateLiveSourceResponse_LiveSourceName = &sUpdateLiveSourceResponse_LiveSourceName
+var UpdateLiveSourceResponse_SourceLocationName = &sUpdateLiveSourceResponse_SourceLocationName
+var UpdateLiveSourceResponse_Tags = &sUpdateLiveSourceResponse_Tags
+
+var UpdateProgramRequest = &sUpdateProgramRequest
+var UpdateProgramRequest_AdBreaks = &sUpdateProgramRequest_AdBreaks
+var UpdateProgramRequest_ChannelName = &sUpdateProgramRequest_ChannelName
+var UpdateProgramRequest_ProgramName = &sUpdateProgramRequest_ProgramName
+var UpdateProgramRequest_ScheduleConfiguration = &sUpdateProgramRequest_ScheduleConfiguration
+var UpdateProgramRequest_AudienceMedia = &sUpdateProgramRequest_AudienceMedia
+
+var UpdateProgramResponse = &sUpdateProgramResponse
+var UpdateProgramResponse_AdBreaks = &sUpdateProgramResponse_AdBreaks
+var UpdateProgramResponse_Arn = &sUpdateProgramResponse_Arn
+var UpdateProgramResponse_ChannelName = &sUpdateProgramResponse_ChannelName
+var UpdateProgramResponse_CreationTime = &sUpdateProgramResponse_CreationTime
+var UpdateProgramResponse_ProgramName = &sUpdateProgramResponse_ProgramName
+var UpdateProgramResponse_SourceLocationName = &sUpdateProgramResponse_SourceLocationName
+var UpdateProgramResponse_VodSourceName = &sUpdateProgramResponse_VodSourceName
+var UpdateProgramResponse_LiveSourceName = &sUpdateProgramResponse_LiveSourceName
+var UpdateProgramResponse_ClipRange = &sUpdateProgramResponse_ClipRange
+var UpdateProgramResponse_DurationMillis = &sUpdateProgramResponse_DurationMillis
+var UpdateProgramResponse_ScheduledStartTime = &sUpdateProgramResponse_ScheduledStartTime
+var UpdateProgramResponse_AudienceMedia = &sUpdateProgramResponse_AudienceMedia
+var UpdateProgramResponse_Tags = &sUpdateProgramResponse_Tags
+
+var UpdateSourceLocationRequest = &sUpdateSourceLocationRequest
+var UpdateSourceLocationRequest_AccessConfiguration = &sUpdateSourceLocationRequest_AccessConfiguration
+var UpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration = &sUpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration
+var UpdateSourceLocationRequest_HttpConfiguration = &sUpdateSourceLocationRequest_HttpConfiguration
+var UpdateSourceLocationRequest_SegmentDeliveryConfigurations = &sUpdateSourceLocationRequest_SegmentDeliveryConfigurations
+var UpdateSourceLocationRequest_SourceLocationName = &sUpdateSourceLocationRequest_SourceLocationName
+
+var UpdateSourceLocationResponse = &sUpdateSourceLocationResponse
+var UpdateSourceLocationResponse_AccessConfiguration = &sUpdateSourceLocationResponse_AccessConfiguration
+var UpdateSourceLocationResponse_Arn = &sUpdateSourceLocationResponse_Arn
+var UpdateSourceLocationResponse_CreationTime = &sUpdateSourceLocationResponse_CreationTime
+var UpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration = &sUpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration
+var UpdateSourceLocationResponse_HttpConfiguration = &sUpdateSourceLocationResponse_HttpConfiguration
+var UpdateSourceLocationResponse_LastModifiedTime = &sUpdateSourceLocationResponse_LastModifiedTime
+var UpdateSourceLocationResponse_SegmentDeliveryConfigurations = &sUpdateSourceLocationResponse_SegmentDeliveryConfigurations
+var UpdateSourceLocationResponse_SourceLocationName = &sUpdateSourceLocationResponse_SourceLocationName
+var UpdateSourceLocationResponse_Tags = &sUpdateSourceLocationResponse_Tags
+
+var UpdateVodSourceRequest = &sUpdateVodSourceRequest
+var UpdateVodSourceRequest_HttpPackageConfigurations = &sUpdateVodSourceRequest_HttpPackageConfigurations
+var UpdateVodSourceRequest_SourceLocationName = &sUpdateVodSourceRequest_SourceLocationName
+var UpdateVodSourceRequest_VodSourceName = &sUpdateVodSourceRequest_VodSourceName
+
+var UpdateVodSourceResponse = &sUpdateVodSourceResponse
+var UpdateVodSourceResponse_Arn = &sUpdateVodSourceResponse_Arn
+var UpdateVodSourceResponse_CreationTime = &sUpdateVodSourceResponse_CreationTime
+var UpdateVodSourceResponse_HttpPackageConfigurations = &sUpdateVodSourceResponse_HttpPackageConfigurations
+var UpdateVodSourceResponse_LastModifiedTime = &sUpdateVodSourceResponse_LastModifiedTime
+var UpdateVodSourceResponse_SourceLocationName = &sUpdateVodSourceResponse_SourceLocationName
+var UpdateVodSourceResponse_Tags = &sUpdateVodSourceResponse_Tags
+var UpdateVodSourceResponse_VodSourceName = &sUpdateVodSourceResponse_VodSourceName
+
+var MediaTailor = &smithy.ServiceSchema{Schema: &s_MediaTailor, Version: "2018-04-23"}

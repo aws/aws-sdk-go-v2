@@ -4,3594 +4,3472 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateApplication                                                smithy.SchemaExtensions
+	eCreateConfigurationProfile                                       smithy.SchemaExtensions
+	eCreateDeploymentStrategy                                         smithy.SchemaExtensions
+	eCreateEnvironment                                                smithy.SchemaExtensions
+	eCreateExperimentDefinition                                       smithy.SchemaExtensions
+	eCreateExtension                                                  smithy.SchemaExtensions
+	eCreateExtensionAssociation                                       smithy.SchemaExtensions
+	eCreateHostedConfigurationVersion                                 smithy.SchemaExtensions
+	eDeleteApplication                                                smithy.SchemaExtensions
+	eDeleteConfigurationProfile                                       smithy.SchemaExtensions
+	eDeleteDeploymentStrategy                                         smithy.SchemaExtensions
+	eDeleteEnvironment                                                smithy.SchemaExtensions
+	eDeleteExperimentDefinition                                       smithy.SchemaExtensions
+	eDeleteExtension                                                  smithy.SchemaExtensions
+	eDeleteExtensionAssociation                                       smithy.SchemaExtensions
+	eDeleteHostedConfigurationVersion                                 smithy.SchemaExtensions
+	eGetAccountSettings                                               smithy.SchemaExtensions
+	eGetApplication                                                   smithy.SchemaExtensions
+	eGetConfiguration                                                 smithy.SchemaExtensions
+	eGetConfigurationProfile                                          smithy.SchemaExtensions
+	eGetDeployment                                                    smithy.SchemaExtensions
+	eGetDeploymentStrategy                                            smithy.SchemaExtensions
+	eGetEnvironment                                                   smithy.SchemaExtensions
+	eGetExperimentDefinition                                          smithy.SchemaExtensions
+	eGetExperimentRun                                                 smithy.SchemaExtensions
+	eGetExtension                                                     smithy.SchemaExtensions
+	eGetExtensionAssociation                                          smithy.SchemaExtensions
+	eGetHostedConfigurationVersion                                    smithy.SchemaExtensions
+	eListApplications                                                 smithy.SchemaExtensions
+	eListConfigurationProfiles                                        smithy.SchemaExtensions
+	eListDeployments                                                  smithy.SchemaExtensions
+	eListDeploymentStrategies                                         smithy.SchemaExtensions
+	eListEnvironments                                                 smithy.SchemaExtensions
+	eListExperimentDefinitions                                        smithy.SchemaExtensions
+	eListExperimentRunEvents                                          smithy.SchemaExtensions
+	eListExperimentRuns                                               smithy.SchemaExtensions
+	eListExtensionAssociations                                        smithy.SchemaExtensions
+	eListExtensions                                                   smithy.SchemaExtensions
+	eListHostedConfigurationVersions                                  smithy.SchemaExtensions
+	eListTagsForResource                                              smithy.SchemaExtensions
+	eStartDeployment                                                  smithy.SchemaExtensions
+	eStartExperimentRun                                               smithy.SchemaExtensions
+	eStopDeployment                                                   smithy.SchemaExtensions
+	eStopExperimentRun                                                smithy.SchemaExtensions
+	eTagResource                                                      smithy.SchemaExtensions
+	eUntagResource                                                    smithy.SchemaExtensions
+	eUpdateAccountSettings                                            smithy.SchemaExtensions
+	eUpdateApplication                                                smithy.SchemaExtensions
+	eUpdateConfigurationProfile                                       smithy.SchemaExtensions
+	eUpdateDeploymentStrategy                                         smithy.SchemaExtensions
+	eUpdateEnvironment                                                smithy.SchemaExtensions
+	eUpdateExperimentDefinition                                       smithy.SchemaExtensions
+	eUpdateExperimentRun                                              smithy.SchemaExtensions
+	eUpdateExtension                                                  smithy.SchemaExtensions
+	eUpdateExtensionAssociation                                       smithy.SchemaExtensions
+	eValidateConfiguration                                            smithy.SchemaExtensions
+	e_AmazonAppConfig                                                 smithy.SchemaExtensions
+	eAction                                                           smithy.SchemaExtensions
+	eAction_Name                                                      smithy.SchemaExtensions
+	eAction_Description                                               smithy.SchemaExtensions
+	eAction_Uri                                                       smithy.SchemaExtensions
+	eAction_RoleArn                                                   smithy.SchemaExtensions
+	eActionInvocation                                                 smithy.SchemaExtensions
+	eActionInvocation_ExtensionIdentifier                             smithy.SchemaExtensions
+	eActionInvocation_ActionName                                      smithy.SchemaExtensions
+	eActionInvocation_Uri                                             smithy.SchemaExtensions
+	eActionInvocation_RoleArn                                         smithy.SchemaExtensions
+	eActionInvocation_ErrorMessage                                    smithy.SchemaExtensions
+	eActionInvocation_ErrorCode                                       smithy.SchemaExtensions
+	eActionInvocation_InvocationId                                    smithy.SchemaExtensions
+	e_ActionInvocations                                               smithy.SchemaExtensions
+	e_ActionInvocations_member                                        smithy.SchemaExtensions
+	e_ActionList                                                      smithy.SchemaExtensions
+	e_ActionList_member                                               smithy.SchemaExtensions
+	eActionPoint                                                      smithy.SchemaExtensions
+	eActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION              smithy.SchemaExtensions
+	eActionPoint_PRE_START_DEPLOYMENT                                 smithy.SchemaExtensions
+	eActionPoint_AT_DEPLOYMENT_TICK                                   smithy.SchemaExtensions
+	eActionPoint_ON_DEPLOYMENT_START                                  smithy.SchemaExtensions
+	eActionPoint_ON_DEPLOYMENT_STEP                                   smithy.SchemaExtensions
+	eActionPoint_ON_DEPLOYMENT_BAKING                                 smithy.SchemaExtensions
+	eActionPoint_ON_DEPLOYMENT_COMPLETE                               smithy.SchemaExtensions
+	eActionPoint_ON_DEPLOYMENT_ROLLED_BACK                            smithy.SchemaExtensions
+	e_ActionsMap                                                      smithy.SchemaExtensions
+	e_ActionsMap_key                                                  smithy.SchemaExtensions
+	e_ActionsMap_value                                                smithy.SchemaExtensions
+	eApplication                                                      smithy.SchemaExtensions
+	eApplication_Id                                                   smithy.SchemaExtensions
+	eApplication_Name                                                 smithy.SchemaExtensions
+	eApplication_Description                                          smithy.SchemaExtensions
+	e_ApplicationList                                                 smithy.SchemaExtensions
+	e_ApplicationList_member                                          smithy.SchemaExtensions
+	eAppliedExtension                                                 smithy.SchemaExtensions
+	eAppliedExtension_ExtensionId                                     smithy.SchemaExtensions
+	eAppliedExtension_ExtensionAssociationId                          smithy.SchemaExtensions
+	eAppliedExtension_VersionNumber                                   smithy.SchemaExtensions
+	eAppliedExtension_Parameters                                      smithy.SchemaExtensions
+	e_AppliedExtensions                                               smithy.SchemaExtensions
+	e_AppliedExtensions_member                                        smithy.SchemaExtensions
+	e_Arn                                                             smithy.SchemaExtensions
+	e_AttributeKey                                                    smithy.SchemaExtensions
+	e_AttributeString                                                 smithy.SchemaExtensions
+	eAttributeValue                                                   smithy.SchemaExtensions
+	eAttributeValue_StringValue                                       smithy.SchemaExtensions
+	eAttributeValue_NumberValue                                       smithy.SchemaExtensions
+	eAttributeValue_BooleanValue                                      smithy.SchemaExtensions
+	eAttributeValue_StringArray                                       smithy.SchemaExtensions
+	eAttributeValue_NumberArray                                       smithy.SchemaExtensions
+	e_AttributeValueMap                                               smithy.SchemaExtensions
+	e_AttributeValueMap_key                                           smithy.SchemaExtensions
+	e_AttributeValueMap_value                                         smithy.SchemaExtensions
+	eBadRequestDetails                                                smithy.SchemaExtensions
+	eBadRequestDetails_InvalidConfiguration                           smithy.SchemaExtensions
+	eBadRequestException                                              smithy.SchemaExtensions
+	eBadRequestException_Message                                      smithy.SchemaExtensions
+	eBadRequestException_Reason                                       smithy.SchemaExtensions
+	eBadRequestException_Details                                      smithy.SchemaExtensions
+	eBadRequestReason                                                 smithy.SchemaExtensions
+	eBadRequestReason_INVALID_CONFIGURATION                           smithy.SchemaExtensions
+	e_Blob                                                            smithy.SchemaExtensions
+	e_Boolean                                                         smithy.SchemaExtensions
+	eBytesMeasure                                                     smithy.SchemaExtensions
+	eBytesMeasure_KILOBYTES                                           smithy.SchemaExtensions
+	eConfigurationProfileSummary                                      smithy.SchemaExtensions
+	eConfigurationProfileSummary_ApplicationId                        smithy.SchemaExtensions
+	eConfigurationProfileSummary_Id                                   smithy.SchemaExtensions
+	eConfigurationProfileSummary_Name                                 smithy.SchemaExtensions
+	eConfigurationProfileSummary_LocationUri                          smithy.SchemaExtensions
+	eConfigurationProfileSummary_ValidatorTypes                       smithy.SchemaExtensions
+	eConfigurationProfileSummary_Type                                 smithy.SchemaExtensions
+	e_ConfigurationProfileSummaryList                                 smithy.SchemaExtensions
+	e_ConfigurationProfileSummaryList_member                          smithy.SchemaExtensions
+	e_ConfigurationProfileType                                        smithy.SchemaExtensions
+	eConflictException                                                smithy.SchemaExtensions
+	eConflictException_Message                                        smithy.SchemaExtensions
+	eDeleteType                                                       smithy.SchemaExtensions
+	eDeleteType_ARCHIVE                                               smithy.SchemaExtensions
+	eDeleteType_DESTROY                                               smithy.SchemaExtensions
+	eDeletionProtectionCheck                                          smithy.SchemaExtensions
+	eDeletionProtectionCheck_ACCOUNT_DEFAULT                          smithy.SchemaExtensions
+	eDeletionProtectionCheck_APPLY                                    smithy.SchemaExtensions
+	eDeletionProtectionCheck_BYPASS                                   smithy.SchemaExtensions
+	e_DeletionProtectionDuration                                      smithy.SchemaExtensions
+	eDeletionProtectionSettings                                       smithy.SchemaExtensions
+	eDeletionProtectionSettings_Enabled                               smithy.SchemaExtensions
+	eDeletionProtectionSettings_ProtectionPeriodInMinutes             smithy.SchemaExtensions
+	eDeploymentEvent                                                  smithy.SchemaExtensions
+	eDeploymentEvent_EventType                                        smithy.SchemaExtensions
+	eDeploymentEvent_TriggeredBy                                      smithy.SchemaExtensions
+	eDeploymentEvent_Description                                      smithy.SchemaExtensions
+	eDeploymentEvent_ActionInvocations                                smithy.SchemaExtensions
+	eDeploymentEvent_OccurredAt                                       smithy.SchemaExtensions
+	e_DeploymentEvents                                                smithy.SchemaExtensions
+	e_DeploymentEvents_member                                         smithy.SchemaExtensions
+	eDeploymentEventType                                              smithy.SchemaExtensions
+	eDeploymentEventType_PERCENTAGE_UPDATED                           smithy.SchemaExtensions
+	eDeploymentEventType_ROLLBACK_STARTED                             smithy.SchemaExtensions
+	eDeploymentEventType_ROLLBACK_COMPLETED                           smithy.SchemaExtensions
+	eDeploymentEventType_BAKE_TIME_STARTED                            smithy.SchemaExtensions
+	eDeploymentEventType_DEPLOYMENT_STARTED                           smithy.SchemaExtensions
+	eDeploymentEventType_DEPLOYMENT_COMPLETED                         smithy.SchemaExtensions
+	eDeploymentEventType_REVERT_COMPLETED                             smithy.SchemaExtensions
+	e_DeploymentList                                                  smithy.SchemaExtensions
+	e_DeploymentList_member                                           smithy.SchemaExtensions
+	eDeploymentParameters                                             smithy.SchemaExtensions
+	eDeploymentParameters_DynamicExtensionParameters                  smithy.SchemaExtensions
+	eDeploymentParameters_Tags                                        smithy.SchemaExtensions
+	eDeploymentState                                                  smithy.SchemaExtensions
+	eDeploymentState_BAKING                                           smithy.SchemaExtensions
+	eDeploymentState_VALIDATING                                       smithy.SchemaExtensions
+	eDeploymentState_DEPLOYING                                        smithy.SchemaExtensions
+	eDeploymentState_COMPLETE                                         smithy.SchemaExtensions
+	eDeploymentState_ROLLING_BACK                                     smithy.SchemaExtensions
+	eDeploymentState_ROLLED_BACK                                      smithy.SchemaExtensions
+	eDeploymentState_REVERTED                                         smithy.SchemaExtensions
+	eDeploymentStrategy                                               smithy.SchemaExtensions
+	eDeploymentStrategy_Id                                            smithy.SchemaExtensions
+	eDeploymentStrategy_Name                                          smithy.SchemaExtensions
+	eDeploymentStrategy_Description                                   smithy.SchemaExtensions
+	eDeploymentStrategy_DeploymentDurationInMinutes                   smithy.SchemaExtensions
+	eDeploymentStrategy_GrowthType                                    smithy.SchemaExtensions
+	eDeploymentStrategy_GrowthFactor                                  smithy.SchemaExtensions
+	eDeploymentStrategy_FinalBakeTimeInMinutes                        smithy.SchemaExtensions
+	eDeploymentStrategy_ReplicateTo                                   smithy.SchemaExtensions
+	e_DeploymentStrategyId                                            smithy.SchemaExtensions
+	e_DeploymentStrategyList                                          smithy.SchemaExtensions
+	e_DeploymentStrategyList_member                                   smithy.SchemaExtensions
+	eDeploymentSummary                                                smithy.SchemaExtensions
+	eDeploymentSummary_DeploymentNumber                               smithy.SchemaExtensions
+	eDeploymentSummary_ConfigurationProfileId                         smithy.SchemaExtensions
+	eDeploymentSummary_ConfigurationName                              smithy.SchemaExtensions
+	eDeploymentSummary_ConfigurationVersion                           smithy.SchemaExtensions
+	eDeploymentSummary_DeploymentDurationInMinutes                    smithy.SchemaExtensions
+	eDeploymentSummary_GrowthType                                     smithy.SchemaExtensions
+	eDeploymentSummary_GrowthFactor                                   smithy.SchemaExtensions
+	eDeploymentSummary_FinalBakeTimeInMinutes                         smithy.SchemaExtensions
+	eDeploymentSummary_State                                          smithy.SchemaExtensions
+	eDeploymentSummary_PercentageComplete                             smithy.SchemaExtensions
+	eDeploymentSummary_StartedAt                                      smithy.SchemaExtensions
+	eDeploymentSummary_CompletedAt                                    smithy.SchemaExtensions
+	eDeploymentSummary_VersionLabel                                   smithy.SchemaExtensions
+	eDeploymentSummary_Type                                           smithy.SchemaExtensions
+	eDeploymentType                                                   smithy.SchemaExtensions
+	eDeploymentType_USER                                              smithy.SchemaExtensions
+	eDeploymentType_MANAGED                                           smithy.SchemaExtensions
+	e_Description                                                     smithy.SchemaExtensions
+	e_Double                                                          smithy.SchemaExtensions
+	e_DynamicParameterKey                                             smithy.SchemaExtensions
+	e_DynamicParameterMap                                             smithy.SchemaExtensions
+	e_DynamicParameterMap_key                                         smithy.SchemaExtensions
+	e_DynamicParameterMap_value                                       smithy.SchemaExtensions
+	e_EntityId                                                        smithy.SchemaExtensions
+	eEnvironment                                                      smithy.SchemaExtensions
+	eEnvironment_ApplicationId                                        smithy.SchemaExtensions
+	eEnvironment_Id                                                   smithy.SchemaExtensions
+	eEnvironment_Name                                                 smithy.SchemaExtensions
+	eEnvironment_Description                                          smithy.SchemaExtensions
+	eEnvironment_State                                                smithy.SchemaExtensions
+	eEnvironment_Monitors                                             smithy.SchemaExtensions
+	e_EnvironmentList                                                 smithy.SchemaExtensions
+	e_EnvironmentList_member                                          smithy.SchemaExtensions
+	eEnvironmentState                                                 smithy.SchemaExtensions
+	eEnvironmentState_READY_FOR_DEPLOYMENT                            smithy.SchemaExtensions
+	eEnvironmentState_DEPLOYING                                       smithy.SchemaExtensions
+	eEnvironmentState_ROLLING_BACK                                    smithy.SchemaExtensions
+	eEnvironmentState_ROLLED_BACK                                     smithy.SchemaExtensions
+	eEnvironmentState_REVERTED                                        smithy.SchemaExtensions
+	e_ExperimentDefinitionList                                        smithy.SchemaExtensions
+	e_ExperimentDefinitionList_member                                 smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot                                     smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_ApplicationId                       smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_Id                                  smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_Name                                smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_Hypothesis                          smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_ConfigurationProfileId              smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_EnvironmentId                       smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_FlagKey                             smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_AudienceRule                        smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_AudienceDescription                 smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_LaunchCriteria                      smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_Treatments                          smithy.SchemaExtensions
+	eExperimentDefinitionSnapshot_Control                             smithy.SchemaExtensions
+	eExperimentDefinitionStatus                                       smithy.SchemaExtensions
+	eExperimentDefinitionStatus_ACTIVE                                smithy.SchemaExtensions
+	eExperimentDefinitionStatus_IDLE                                  smithy.SchemaExtensions
+	eExperimentDefinitionStatus_ARCHIVED                              smithy.SchemaExtensions
+	eExperimentDefinitionSummary                                      smithy.SchemaExtensions
+	eExperimentDefinitionSummary_ApplicationId                        smithy.SchemaExtensions
+	eExperimentDefinitionSummary_Id                                   smithy.SchemaExtensions
+	eExperimentDefinitionSummary_Name                                 smithy.SchemaExtensions
+	eExperimentDefinitionSummary_Hypothesis                           smithy.SchemaExtensions
+	eExperimentDefinitionSummary_Status                               smithy.SchemaExtensions
+	eExperimentDefinitionSummary_ConfigurationProfileId               smithy.SchemaExtensions
+	eExperimentDefinitionSummary_EnvironmentId                        smithy.SchemaExtensions
+	eExperimentDefinitionSummary_FlagKey                              smithy.SchemaExtensions
+	eExperimentDefinitionSummary_CreatedAt                            smithy.SchemaExtensions
+	eExperimentDefinitionSummary_UpdatedAt                            smithy.SchemaExtensions
+	eExperimentRunEvent                                               smithy.SchemaExtensions
+	eExperimentRunEvent_Description                                   smithy.SchemaExtensions
+	eExperimentRunEvent_AssociatedDeployment                          smithy.SchemaExtensions
+	eExperimentRunEvent_EventType                                     smithy.SchemaExtensions
+	eExperimentRunEvent_OccurredAt                                    smithy.SchemaExtensions
+	eExperimentRunEvent_TriggeredBy                                   smithy.SchemaExtensions
+	eExperimentRunEvent_ExposurePercentage                            smithy.SchemaExtensions
+	eExperimentRunEvent_TreatmentOverrides                            smithy.SchemaExtensions
+	e_ExperimentRunEventList                                          smithy.SchemaExtensions
+	e_ExperimentRunEventList_member                                   smithy.SchemaExtensions
+	eExperimentRunEventType                                           smithy.SchemaExtensions
+	eExperimentRunEventType_RUN_STARTED                               smithy.SchemaExtensions
+	eExperimentRunEventType_EXPOSURE_UPDATED                          smithy.SchemaExtensions
+	eExperimentRunEventType_OVERRIDES_UPDATED                         smithy.SchemaExtensions
+	eExperimentRunEventType_RUN_STOPPED                               smithy.SchemaExtensions
+	eExperimentRunResult                                              smithy.SchemaExtensions
+	eExperimentRunResult_ExecutiveSummary                             smithy.SchemaExtensions
+	eExperimentRunResult_ReasonsToLaunch                              smithy.SchemaExtensions
+	eExperimentRunResult_ReasonsNotToLaunch                           smithy.SchemaExtensions
+	eExperimentRunStatus                                              smithy.SchemaExtensions
+	eExperimentRunStatus_RUNNING                                      smithy.SchemaExtensions
+	eExperimentRunStatus_DONE                                         smithy.SchemaExtensions
+	eExperimentRunSummary                                             smithy.SchemaExtensions
+	eExperimentRunSummary_ExperimentDefinitionId                      smithy.SchemaExtensions
+	eExperimentRunSummary_Run                                         smithy.SchemaExtensions
+	eExperimentRunSummary_Description                                 smithy.SchemaExtensions
+	eExperimentRunSummary_Status                                      smithy.SchemaExtensions
+	eExperimentRunSummary_StartedAt                                   smithy.SchemaExtensions
+	eExperimentRunSummary_UpdatedAt                                   smithy.SchemaExtensions
+	eExperimentRunSummary_EndedAt                                     smithy.SchemaExtensions
+	e_ExperimentRunSummaryList                                        smithy.SchemaExtensions
+	e_ExperimentRunSummaryList_member                                 smithy.SchemaExtensions
+	e_ExtensionAssociationSummaries                                   smithy.SchemaExtensions
+	e_ExtensionAssociationSummaries_member                            smithy.SchemaExtensions
+	eExtensionAssociationSummary                                      smithy.SchemaExtensions
+	eExtensionAssociationSummary_Id                                   smithy.SchemaExtensions
+	eExtensionAssociationSummary_ExtensionArn                         smithy.SchemaExtensions
+	eExtensionAssociationSummary_ResourceArn                          smithy.SchemaExtensions
+	e_ExtensionOrParameterName                                        smithy.SchemaExtensions
+	e_ExtensionSummaries                                              smithy.SchemaExtensions
+	e_ExtensionSummaries_member                                       smithy.SchemaExtensions
+	eExtensionSummary                                                 smithy.SchemaExtensions
+	eExtensionSummary_Id                                              smithy.SchemaExtensions
+	eExtensionSummary_Name                                            smithy.SchemaExtensions
+	eExtensionSummary_VersionNumber                                   smithy.SchemaExtensions
+	eExtensionSummary_Arn                                             smithy.SchemaExtensions
+	eExtensionSummary_Description                                     smithy.SchemaExtensions
+	e_FlagKey                                                         smithy.SchemaExtensions
+	eFlagValue                                                        smithy.SchemaExtensions
+	eFlagValue_Enabled                                                smithy.SchemaExtensions
+	eFlagValue_AttributeValues                                        smithy.SchemaExtensions
+	e_Float                                                           smithy.SchemaExtensions
+	e_GrowthFactor                                                    smithy.SchemaExtensions
+	eGrowthType                                                       smithy.SchemaExtensions
+	eGrowthType_LINEAR                                                smithy.SchemaExtensions
+	eGrowthType_EXPONENTIAL                                           smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary                                smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary_ApplicationId                  smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary_ConfigurationProfileId         smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary_VersionNumber                  smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary_Description                    smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary_ContentType                    smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary_VersionLabel                   smithy.SchemaExtensions
+	eHostedConfigurationVersionSummary_KmsKeyArn                      smithy.SchemaExtensions
+	e_HostedConfigurationVersionSummaryList                           smithy.SchemaExtensions
+	e_HostedConfigurationVersionSummaryList_member                    smithy.SchemaExtensions
+	e_Id                                                              smithy.SchemaExtensions
+	e_Identifier                                                      smithy.SchemaExtensions
+	e_Integer                                                         smithy.SchemaExtensions
+	eInternalServerException                                          smithy.SchemaExtensions
+	eInternalServerException_Message                                  smithy.SchemaExtensions
+	eInvalidConfigurationDetail                                       smithy.SchemaExtensions
+	eInvalidConfigurationDetail_Constraint                            smithy.SchemaExtensions
+	eInvalidConfigurationDetail_Location                              smithy.SchemaExtensions
+	eInvalidConfigurationDetail_Reason                                smithy.SchemaExtensions
+	eInvalidConfigurationDetail_Type                                  smithy.SchemaExtensions
+	eInvalidConfigurationDetail_Value                                 smithy.SchemaExtensions
+	e_InvalidConfigurationDetailList                                  smithy.SchemaExtensions
+	e_InvalidConfigurationDetailList_member                           smithy.SchemaExtensions
+	e_Iso8601DateTime                                                 smithy.SchemaExtensions
+	e_KmsKeyIdentifier                                                smithy.SchemaExtensions
+	e_KmsKeyIdentifierOrEmpty                                         smithy.SchemaExtensions
+	e_LongName                                                        smithy.SchemaExtensions
+	e_MaxResults                                                      smithy.SchemaExtensions
+	e_MinutesBetween0And24Hours                                       smithy.SchemaExtensions
+	eMonitor                                                          smithy.SchemaExtensions
+	eMonitor_AlarmArn                                                 smithy.SchemaExtensions
+	eMonitor_AlarmRoleArn                                             smithy.SchemaExtensions
+	e_MonitorList                                                     smithy.SchemaExtensions
+	e_MonitorList_member                                              smithy.SchemaExtensions
+	e_Name                                                            smithy.SchemaExtensions
+	e_NameWithReservedAwsPrefix                                       smithy.SchemaExtensions
+	e_NextToken                                                       smithy.SchemaExtensions
+	e_NullablePercentage                                              smithy.SchemaExtensions
+	e_NumberList                                                      smithy.SchemaExtensions
+	e_NumberList_member                                               smithy.SchemaExtensions
+	eParameter                                                        smithy.SchemaExtensions
+	eParameter_Description                                            smithy.SchemaExtensions
+	eParameter_Required                                               smithy.SchemaExtensions
+	eParameter_Dynamic                                                smithy.SchemaExtensions
+	e_ParameterMap                                                    smithy.SchemaExtensions
+	e_ParameterMap_key                                                smithy.SchemaExtensions
+	e_ParameterMap_value                                              smithy.SchemaExtensions
+	e_ParameterValueMap                                               smithy.SchemaExtensions
+	e_ParameterValueMap_key                                           smithy.SchemaExtensions
+	e_ParameterValueMap_value                                         smithy.SchemaExtensions
+	ePayloadTooLargeException                                         smithy.SchemaExtensions
+	ePayloadTooLargeException_Message                                 smithy.SchemaExtensions
+	ePayloadTooLargeException_Measure                                 smithy.SchemaExtensions
+	ePayloadTooLargeException_Limit                                   smithy.SchemaExtensions
+	ePayloadTooLargeException_Size                                    smithy.SchemaExtensions
+	e_Percentage                                                      smithy.SchemaExtensions
+	e_PositiveInteger                                                 smithy.SchemaExtensions
+	e_QueryName                                                       smithy.SchemaExtensions
+	eReplicateTo                                                      smithy.SchemaExtensions
+	eReplicateTo_NONE                                                 smithy.SchemaExtensions
+	eReplicateTo_SSM_DOCUMENT                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                        smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceName                           smithy.SchemaExtensions
+	e_RoleArn                                                         smithy.SchemaExtensions
+	e_Rule                                                            smithy.SchemaExtensions
+	eServiceQuotaExceededException                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                            smithy.SchemaExtensions
+	e_String                                                          smithy.SchemaExtensions
+	e_StringList                                                      smithy.SchemaExtensions
+	e_StringList_member                                               smithy.SchemaExtensions
+	e_StringWithLengthBetween0And32768                                smithy.SchemaExtensions
+	e_StringWithLengthBetween1And2048                                 smithy.SchemaExtensions
+	e_StringWithLengthBetween1And255                                  smithy.SchemaExtensions
+	e_StringWithLengthBetween1And64                                   smithy.SchemaExtensions
+	e_TagKey                                                          smithy.SchemaExtensions
+	e_TagKeyList                                                      smithy.SchemaExtensions
+	e_TagKeyList_member                                               smithy.SchemaExtensions
+	e_TagMap                                                          smithy.SchemaExtensions
+	e_TagMap_key                                                      smithy.SchemaExtensions
+	e_TagMap_value                                                    smithy.SchemaExtensions
+	e_TagValue                                                        smithy.SchemaExtensions
+	eTreatment                                                        smithy.SchemaExtensions
+	eTreatment_Key                                                    smithy.SchemaExtensions
+	eTreatment_Weight                                                 smithy.SchemaExtensions
+	eTreatment_Description                                            smithy.SchemaExtensions
+	eTreatment_FlagValue                                              smithy.SchemaExtensions
+	eTreatmentInput                                                   smithy.SchemaExtensions
+	eTreatmentInput_Weight                                            smithy.SchemaExtensions
+	eTreatmentInput_Description                                       smithy.SchemaExtensions
+	eTreatmentInput_FlagValue                                         smithy.SchemaExtensions
+	e_TreatmentInputList                                              smithy.SchemaExtensions
+	e_TreatmentInputList_member                                       smithy.SchemaExtensions
+	e_TreatmentKey                                                    smithy.SchemaExtensions
+	e_TreatmentList                                                   smithy.SchemaExtensions
+	e_TreatmentList_member                                            smithy.SchemaExtensions
+	e_TreatmentOverrideMap                                            smithy.SchemaExtensions
+	e_TreatmentOverrideMap_key                                        smithy.SchemaExtensions
+	e_TreatmentOverrideMap_value                                      smithy.SchemaExtensions
+	eTreatmentOverrides                                               smithy.SchemaExtensions
+	eTreatmentOverrides_Inline                                        smithy.SchemaExtensions
+	eTriggeredBy                                                      smithy.SchemaExtensions
+	eTriggeredBy_USER                                                 smithy.SchemaExtensions
+	eTriggeredBy_APPCONFIG                                            smithy.SchemaExtensions
+	eTriggeredBy_CLOUDWATCH_ALARM                                     smithy.SchemaExtensions
+	eTriggeredBy_INTERNAL_ERROR                                       smithy.SchemaExtensions
+	e_Uri                                                             smithy.SchemaExtensions
+	eValidator                                                        smithy.SchemaExtensions
+	eValidator_Type                                                   smithy.SchemaExtensions
+	eValidator_Content                                                smithy.SchemaExtensions
+	e_ValidatorList                                                   smithy.SchemaExtensions
+	e_ValidatorList_member                                            smithy.SchemaExtensions
+	eValidatorType                                                    smithy.SchemaExtensions
+	eValidatorType_JSON_SCHEMA                                        smithy.SchemaExtensions
+	eValidatorType_LAMBDA                                             smithy.SchemaExtensions
+	e_ValidatorTypeList                                               smithy.SchemaExtensions
+	e_ValidatorTypeList_member                                        smithy.SchemaExtensions
+	eVendedMetricsSettings                                            smithy.SchemaExtensions
+	eVendedMetricsSettings_Enabled                                    smithy.SchemaExtensions
+	e_Version                                                         smithy.SchemaExtensions
+	e_VersionLabel                                                    smithy.SchemaExtensions
+	e_Weight                                                          smithy.SchemaExtensions
+	eCreateApplicationRequest                                         smithy.SchemaExtensions
+	eCreateApplicationRequest_Name                                    smithy.SchemaExtensions
+	eCreateApplicationRequest_Description                             smithy.SchemaExtensions
+	eCreateApplicationRequest_Tags                                    smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest                                smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_ApplicationId                  smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_Name                           smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_Description                    smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_LocationUri                    smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_RetrievalRoleArn               smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_Validators                     smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_Tags                           smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_Type                           smithy.SchemaExtensions
+	eCreateConfigurationProfileRequest_KmsKeyIdentifier               smithy.SchemaExtensions
+	eConfigurationProfile                                             smithy.SchemaExtensions
+	eConfigurationProfile_ApplicationId                               smithy.SchemaExtensions
+	eConfigurationProfile_Id                                          smithy.SchemaExtensions
+	eConfigurationProfile_Name                                        smithy.SchemaExtensions
+	eConfigurationProfile_Description                                 smithy.SchemaExtensions
+	eConfigurationProfile_LocationUri                                 smithy.SchemaExtensions
+	eConfigurationProfile_RetrievalRoleArn                            smithy.SchemaExtensions
+	eConfigurationProfile_Validators                                  smithy.SchemaExtensions
+	eConfigurationProfile_Type                                        smithy.SchemaExtensions
+	eConfigurationProfile_KmsKeyArn                                   smithy.SchemaExtensions
+	eConfigurationProfile_KmsKeyIdentifier                            smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest                                  smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_Name                             smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_Description                      smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_DeploymentDurationInMinutes      smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_FinalBakeTimeInMinutes           smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_GrowthFactor                     smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_GrowthType                       smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_ReplicateTo                      smithy.SchemaExtensions
+	eCreateDeploymentStrategyRequest_Tags                             smithy.SchemaExtensions
+	eCreateEnvironmentRequest                                         smithy.SchemaExtensions
+	eCreateEnvironmentRequest_ApplicationId                           smithy.SchemaExtensions
+	eCreateEnvironmentRequest_Name                                    smithy.SchemaExtensions
+	eCreateEnvironmentRequest_Description                             smithy.SchemaExtensions
+	eCreateEnvironmentRequest_Monitors                                smithy.SchemaExtensions
+	eCreateEnvironmentRequest_Tags                                    smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest                                smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_ApplicationIdentifier          smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_Name                           smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_ConfigurationProfileIdentifier smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_EnvironmentIdentifier          smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_FlagKey                        smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_Treatments                     smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_Control                        smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_AudienceRule                   smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_Hypothesis                     smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_AudienceDescription            smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_LaunchCriteria                 smithy.SchemaExtensions
+	eCreateExperimentDefinitionRequest_Tags                           smithy.SchemaExtensions
+	eExperimentDefinition                                             smithy.SchemaExtensions
+	eExperimentDefinition_ApplicationId                               smithy.SchemaExtensions
+	eExperimentDefinition_Id                                          smithy.SchemaExtensions
+	eExperimentDefinition_Name                                        smithy.SchemaExtensions
+	eExperimentDefinition_Hypothesis                                  smithy.SchemaExtensions
+	eExperimentDefinition_Status                                      smithy.SchemaExtensions
+	eExperimentDefinition_ConfigurationProfileId                      smithy.SchemaExtensions
+	eExperimentDefinition_EnvironmentId                               smithy.SchemaExtensions
+	eExperimentDefinition_FlagKey                                     smithy.SchemaExtensions
+	eExperimentDefinition_AudienceRule                                smithy.SchemaExtensions
+	eExperimentDefinition_AudienceDescription                         smithy.SchemaExtensions
+	eExperimentDefinition_LaunchCriteria                              smithy.SchemaExtensions
+	eExperimentDefinition_Treatments                                  smithy.SchemaExtensions
+	eExperimentDefinition_Control                                     smithy.SchemaExtensions
+	eExperimentDefinition_CreatedAt                                   smithy.SchemaExtensions
+	eExperimentDefinition_UpdatedAt                                   smithy.SchemaExtensions
+	eExperimentDefinition_KmsKeyIdentifier                            smithy.SchemaExtensions
+	eCreateExtensionAssociationRequest                                smithy.SchemaExtensions
+	eCreateExtensionAssociationRequest_ExtensionIdentifier            smithy.SchemaExtensions
+	eCreateExtensionAssociationRequest_ExtensionVersionNumber         smithy.SchemaExtensions
+	eCreateExtensionAssociationRequest_ResourceIdentifier             smithy.SchemaExtensions
+	eCreateExtensionAssociationRequest_Parameters                     smithy.SchemaExtensions
+	eCreateExtensionAssociationRequest_Tags                           smithy.SchemaExtensions
+	eExtensionAssociation                                             smithy.SchemaExtensions
+	eExtensionAssociation_Id                                          smithy.SchemaExtensions
+	eExtensionAssociation_ExtensionArn                                smithy.SchemaExtensions
+	eExtensionAssociation_ResourceArn                                 smithy.SchemaExtensions
+	eExtensionAssociation_Arn                                         smithy.SchemaExtensions
+	eExtensionAssociation_Parameters                                  smithy.SchemaExtensions
+	eExtensionAssociation_ExtensionVersionNumber                      smithy.SchemaExtensions
+	eCreateExtensionRequest                                           smithy.SchemaExtensions
+	eCreateExtensionRequest_Name                                      smithy.SchemaExtensions
+	eCreateExtensionRequest_Description                               smithy.SchemaExtensions
+	eCreateExtensionRequest_Actions                                   smithy.SchemaExtensions
+	eCreateExtensionRequest_Parameters                                smithy.SchemaExtensions
+	eCreateExtensionRequest_Tags                                      smithy.SchemaExtensions
+	eCreateExtensionRequest_LatestVersionNumber                       smithy.SchemaExtensions
+	eExtension                                                        smithy.SchemaExtensions
+	eExtension_Id                                                     smithy.SchemaExtensions
+	eExtension_Name                                                   smithy.SchemaExtensions
+	eExtension_VersionNumber                                          smithy.SchemaExtensions
+	eExtension_Arn                                                    smithy.SchemaExtensions
+	eExtension_Description                                            smithy.SchemaExtensions
+	eExtension_Actions                                                smithy.SchemaExtensions
+	eExtension_Parameters                                             smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest                          smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest_ApplicationId            smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest_ConfigurationProfileId   smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest_Description              smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest_Content                  smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest_ContentType              smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest_LatestVersionNumber      smithy.SchemaExtensions
+	eCreateHostedConfigurationVersionRequest_VersionLabel             smithy.SchemaExtensions
+	eHostedConfigurationVersion                                       smithy.SchemaExtensions
+	eHostedConfigurationVersion_ApplicationId                         smithy.SchemaExtensions
+	eHostedConfigurationVersion_ConfigurationProfileId                smithy.SchemaExtensions
+	eHostedConfigurationVersion_VersionNumber                         smithy.SchemaExtensions
+	eHostedConfigurationVersion_Description                           smithy.SchemaExtensions
+	eHostedConfigurationVersion_Content                               smithy.SchemaExtensions
+	eHostedConfigurationVersion_ContentType                           smithy.SchemaExtensions
+	eHostedConfigurationVersion_VersionLabel                          smithy.SchemaExtensions
+	eHostedConfigurationVersion_KmsKeyArn                             smithy.SchemaExtensions
+	eDeleteApplicationRequest                                         smithy.SchemaExtensions
+	eDeleteApplicationRequest_ApplicationId                           smithy.SchemaExtensions
+	eDeleteConfigurationProfileRequest                                smithy.SchemaExtensions
+	eDeleteConfigurationProfileRequest_ApplicationId                  smithy.SchemaExtensions
+	eDeleteConfigurationProfileRequest_ConfigurationProfileId         smithy.SchemaExtensions
+	eDeleteConfigurationProfileRequest_DeletionProtectionCheck        smithy.SchemaExtensions
+	eDeleteDeploymentStrategyRequest                                  smithy.SchemaExtensions
+	eDeleteDeploymentStrategyRequest_DeploymentStrategyId             smithy.SchemaExtensions
+	eDeleteEnvironmentRequest                                         smithy.SchemaExtensions
+	eDeleteEnvironmentRequest_EnvironmentId                           smithy.SchemaExtensions
+	eDeleteEnvironmentRequest_ApplicationId                           smithy.SchemaExtensions
+	eDeleteEnvironmentRequest_DeletionProtectionCheck                 smithy.SchemaExtensions
+	eDeleteExperimentDefinitionRequest                                smithy.SchemaExtensions
+	eDeleteExperimentDefinitionRequest_ApplicationIdentifier          smithy.SchemaExtensions
+	eDeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier smithy.SchemaExtensions
+	eDeleteExperimentDefinitionRequest_DeleteType                     smithy.SchemaExtensions
+	eDeleteExtensionAssociationRequest                                smithy.SchemaExtensions
+	eDeleteExtensionAssociationRequest_ExtensionAssociationId         smithy.SchemaExtensions
+	eDeleteExtensionRequest                                           smithy.SchemaExtensions
+	eDeleteExtensionRequest_ExtensionIdentifier                       smithy.SchemaExtensions
+	eDeleteExtensionRequest_VersionNumber                             smithy.SchemaExtensions
+	eDeleteHostedConfigurationVersionRequest                          smithy.SchemaExtensions
+	eDeleteHostedConfigurationVersionRequest_ApplicationId            smithy.SchemaExtensions
+	eDeleteHostedConfigurationVersionRequest_ConfigurationProfileId   smithy.SchemaExtensions
+	eDeleteHostedConfigurationVersionRequest_VersionNumber            smithy.SchemaExtensions
+	eAccountSettings                                                  smithy.SchemaExtensions
+	eAccountSettings_DeletionProtection                               smithy.SchemaExtensions
+	eAccountSettings_VendedMetrics                                    smithy.SchemaExtensions
+	eGetApplicationRequest                                            smithy.SchemaExtensions
+	eGetApplicationRequest_ApplicationId                              smithy.SchemaExtensions
+	eGetConfigurationRequest                                          smithy.SchemaExtensions
+	eGetConfigurationRequest_Application                              smithy.SchemaExtensions
+	eGetConfigurationRequest_Environment                              smithy.SchemaExtensions
+	eGetConfigurationRequest_Configuration                            smithy.SchemaExtensions
+	eGetConfigurationRequest_ClientId                                 smithy.SchemaExtensions
+	eGetConfigurationRequest_ClientConfigurationVersion               smithy.SchemaExtensions
+	eConfiguration                                                    smithy.SchemaExtensions
+	eConfiguration_Content                                            smithy.SchemaExtensions
+	eConfiguration_ConfigurationVersion                               smithy.SchemaExtensions
+	eConfiguration_ContentType                                        smithy.SchemaExtensions
+	eGetConfigurationProfileRequest                                   smithy.SchemaExtensions
+	eGetConfigurationProfileRequest_ApplicationId                     smithy.SchemaExtensions
+	eGetConfigurationProfileRequest_ConfigurationProfileId            smithy.SchemaExtensions
+	eGetDeploymentRequest                                             smithy.SchemaExtensions
+	eGetDeploymentRequest_ApplicationId                               smithy.SchemaExtensions
+	eGetDeploymentRequest_EnvironmentId                               smithy.SchemaExtensions
+	eGetDeploymentRequest_DeploymentNumber                            smithy.SchemaExtensions
+	eDeployment                                                       smithy.SchemaExtensions
+	eDeployment_ApplicationId                                         smithy.SchemaExtensions
+	eDeployment_EnvironmentId                                         smithy.SchemaExtensions
+	eDeployment_DeploymentStrategyId                                  smithy.SchemaExtensions
+	eDeployment_ConfigurationProfileId                                smithy.SchemaExtensions
+	eDeployment_DeploymentNumber                                      smithy.SchemaExtensions
+	eDeployment_ConfigurationName                                     smithy.SchemaExtensions
+	eDeployment_ConfigurationLocationUri                              smithy.SchemaExtensions
+	eDeployment_ConfigurationVersion                                  smithy.SchemaExtensions
+	eDeployment_Description                                           smithy.SchemaExtensions
+	eDeployment_DeploymentDurationInMinutes                           smithy.SchemaExtensions
+	eDeployment_GrowthType                                            smithy.SchemaExtensions
+	eDeployment_GrowthFactor                                          smithy.SchemaExtensions
+	eDeployment_FinalBakeTimeInMinutes                                smithy.SchemaExtensions
+	eDeployment_State                                                 smithy.SchemaExtensions
+	eDeployment_EventLog                                              smithy.SchemaExtensions
+	eDeployment_PercentageComplete                                    smithy.SchemaExtensions
+	eDeployment_StartedAt                                             smithy.SchemaExtensions
+	eDeployment_CompletedAt                                           smithy.SchemaExtensions
+	eDeployment_AppliedExtensions                                     smithy.SchemaExtensions
+	eDeployment_KmsKeyArn                                             smithy.SchemaExtensions
+	eDeployment_KmsKeyIdentifier                                      smithy.SchemaExtensions
+	eDeployment_VersionLabel                                          smithy.SchemaExtensions
+	eGetDeploymentStrategyRequest                                     smithy.SchemaExtensions
+	eGetDeploymentStrategyRequest_DeploymentStrategyId                smithy.SchemaExtensions
+	eGetEnvironmentRequest                                            smithy.SchemaExtensions
+	eGetEnvironmentRequest_ApplicationId                              smithy.SchemaExtensions
+	eGetEnvironmentRequest_EnvironmentId                              smithy.SchemaExtensions
+	eGetExperimentDefinitionRequest                                   smithy.SchemaExtensions
+	eGetExperimentDefinitionRequest_ApplicationIdentifier             smithy.SchemaExtensions
+	eGetExperimentDefinitionRequest_ExperimentDefinitionIdentifier    smithy.SchemaExtensions
+	eGetExperimentRunRequest                                          smithy.SchemaExtensions
+	eGetExperimentRunRequest_ApplicationIdentifier                    smithy.SchemaExtensions
+	eGetExperimentRunRequest_ExperimentDefinitionIdentifier           smithy.SchemaExtensions
+	eGetExperimentRunRequest_Run                                      smithy.SchemaExtensions
+	eExperimentRun                                                    smithy.SchemaExtensions
+	eExperimentRun_ApplicationId                                      smithy.SchemaExtensions
+	eExperimentRun_ExperimentDefinitionId                             smithy.SchemaExtensions
+	eExperimentRun_Run                                                smithy.SchemaExtensions
+	eExperimentRun_Description                                        smithy.SchemaExtensions
+	eExperimentRun_Status                                             smithy.SchemaExtensions
+	eExperimentRun_ExposurePercentage                                 smithy.SchemaExtensions
+	eExperimentRun_TreatmentOverrides                                 smithy.SchemaExtensions
+	eExperimentRun_Result                                             smithy.SchemaExtensions
+	eExperimentRun_StartedAt                                          smithy.SchemaExtensions
+	eExperimentRun_UpdatedAt                                          smithy.SchemaExtensions
+	eExperimentRun_EndedAt                                            smithy.SchemaExtensions
+	eExperimentRun_ExperimentDefinitionSnapshot                       smithy.SchemaExtensions
+	eGetExtensionAssociationRequest                                   smithy.SchemaExtensions
+	eGetExtensionAssociationRequest_ExtensionAssociationId            smithy.SchemaExtensions
+	eGetExtensionRequest                                              smithy.SchemaExtensions
+	eGetExtensionRequest_ExtensionIdentifier                          smithy.SchemaExtensions
+	eGetExtensionRequest_VersionNumber                                smithy.SchemaExtensions
+	eGetHostedConfigurationVersionRequest                             smithy.SchemaExtensions
+	eGetHostedConfigurationVersionRequest_ApplicationId               smithy.SchemaExtensions
+	eGetHostedConfigurationVersionRequest_ConfigurationProfileId      smithy.SchemaExtensions
+	eGetHostedConfigurationVersionRequest_VersionNumber               smithy.SchemaExtensions
+	eListApplicationsRequest                                          smithy.SchemaExtensions
+	eListApplicationsRequest_MaxResults                               smithy.SchemaExtensions
+	eListApplicationsRequest_NextToken                                smithy.SchemaExtensions
+	eApplications                                                     smithy.SchemaExtensions
+	eApplications_Items                                               smithy.SchemaExtensions
+	eApplications_NextToken                                           smithy.SchemaExtensions
+	eListConfigurationProfilesRequest                                 smithy.SchemaExtensions
+	eListConfigurationProfilesRequest_ApplicationId                   smithy.SchemaExtensions
+	eListConfigurationProfilesRequest_MaxResults                      smithy.SchemaExtensions
+	eListConfigurationProfilesRequest_NextToken                       smithy.SchemaExtensions
+	eListConfigurationProfilesRequest_Type                            smithy.SchemaExtensions
+	eConfigurationProfiles                                            smithy.SchemaExtensions
+	eConfigurationProfiles_Items                                      smithy.SchemaExtensions
+	eConfigurationProfiles_NextToken                                  smithy.SchemaExtensions
+	eListDeploymentsRequest                                           smithy.SchemaExtensions
+	eListDeploymentsRequest_ApplicationId                             smithy.SchemaExtensions
+	eListDeploymentsRequest_EnvironmentId                             smithy.SchemaExtensions
+	eListDeploymentsRequest_MaxResults                                smithy.SchemaExtensions
+	eListDeploymentsRequest_NextToken                                 smithy.SchemaExtensions
+	eDeployments                                                      smithy.SchemaExtensions
+	eDeployments_Items                                                smithy.SchemaExtensions
+	eDeployments_NextToken                                            smithy.SchemaExtensions
+	eListDeploymentStrategiesRequest                                  smithy.SchemaExtensions
+	eListDeploymentStrategiesRequest_MaxResults                       smithy.SchemaExtensions
+	eListDeploymentStrategiesRequest_NextToken                        smithy.SchemaExtensions
+	eDeploymentStrategies                                             smithy.SchemaExtensions
+	eDeploymentStrategies_Items                                       smithy.SchemaExtensions
+	eDeploymentStrategies_NextToken                                   smithy.SchemaExtensions
+	eListEnvironmentsRequest                                          smithy.SchemaExtensions
+	eListEnvironmentsRequest_ApplicationId                            smithy.SchemaExtensions
+	eListEnvironmentsRequest_MaxResults                               smithy.SchemaExtensions
+	eListEnvironmentsRequest_NextToken                                smithy.SchemaExtensions
+	eEnvironments                                                     smithy.SchemaExtensions
+	eEnvironments_Items                                               smithy.SchemaExtensions
+	eEnvironments_NextToken                                           smithy.SchemaExtensions
+	eListExperimentDefinitionsRequest                                 smithy.SchemaExtensions
+	eListExperimentDefinitionsRequest_ApplicationIdentifier           smithy.SchemaExtensions
+	eListExperimentDefinitionsRequest_ConfigurationProfileIdentifier  smithy.SchemaExtensions
+	eListExperimentDefinitionsRequest_EnvironmentIdentifier           smithy.SchemaExtensions
+	eListExperimentDefinitionsRequest_Status                          smithy.SchemaExtensions
+	eListExperimentDefinitionsRequest_MaxResults                      smithy.SchemaExtensions
+	eListExperimentDefinitionsRequest_NextToken                       smithy.SchemaExtensions
+	eExperimentDefinitions                                            smithy.SchemaExtensions
+	eExperimentDefinitions_Items                                      smithy.SchemaExtensions
+	eExperimentDefinitions_NextToken                                  smithy.SchemaExtensions
+	eListExperimentRunEventsRequest                                   smithy.SchemaExtensions
+	eListExperimentRunEventsRequest_ApplicationIdentifier             smithy.SchemaExtensions
+	eListExperimentRunEventsRequest_ExperimentDefinitionIdentifier    smithy.SchemaExtensions
+	eListExperimentRunEventsRequest_Run                               smithy.SchemaExtensions
+	eListExperimentRunEventsRequest_MaxResults                        smithy.SchemaExtensions
+	eListExperimentRunEventsRequest_NextToken                         smithy.SchemaExtensions
+	eExperimentRunEvents                                              smithy.SchemaExtensions
+	eExperimentRunEvents_Items                                        smithy.SchemaExtensions
+	eExperimentRunEvents_NextToken                                    smithy.SchemaExtensions
+	eListExperimentRunsRequest                                        smithy.SchemaExtensions
+	eListExperimentRunsRequest_ApplicationIdentifier                  smithy.SchemaExtensions
+	eListExperimentRunsRequest_ExperimentDefinitionIdentifier         smithy.SchemaExtensions
+	eListExperimentRunsRequest_MaxResults                             smithy.SchemaExtensions
+	eListExperimentRunsRequest_NextToken                              smithy.SchemaExtensions
+	eListExperimentRunsRequest_Status                                 smithy.SchemaExtensions
+	eExperimentRuns                                                   smithy.SchemaExtensions
+	eExperimentRuns_Items                                             smithy.SchemaExtensions
+	eExperimentRuns_NextToken                                         smithy.SchemaExtensions
+	eListExtensionAssociationsRequest                                 smithy.SchemaExtensions
+	eListExtensionAssociationsRequest_ResourceIdentifier              smithy.SchemaExtensions
+	eListExtensionAssociationsRequest_ExtensionIdentifier             smithy.SchemaExtensions
+	eListExtensionAssociationsRequest_ExtensionVersionNumber          smithy.SchemaExtensions
+	eListExtensionAssociationsRequest_MaxResults                      smithy.SchemaExtensions
+	eListExtensionAssociationsRequest_NextToken                       smithy.SchemaExtensions
+	eExtensionAssociations                                            smithy.SchemaExtensions
+	eExtensionAssociations_Items                                      smithy.SchemaExtensions
+	eExtensionAssociations_NextToken                                  smithy.SchemaExtensions
+	eListExtensionsRequest                                            smithy.SchemaExtensions
+	eListExtensionsRequest_MaxResults                                 smithy.SchemaExtensions
+	eListExtensionsRequest_NextToken                                  smithy.SchemaExtensions
+	eListExtensionsRequest_Name                                       smithy.SchemaExtensions
+	eExtensions                                                       smithy.SchemaExtensions
+	eExtensions_Items                                                 smithy.SchemaExtensions
+	eExtensions_NextToken                                             smithy.SchemaExtensions
+	eListHostedConfigurationVersionsRequest                           smithy.SchemaExtensions
+	eListHostedConfigurationVersionsRequest_ApplicationId             smithy.SchemaExtensions
+	eListHostedConfigurationVersionsRequest_ConfigurationProfileId    smithy.SchemaExtensions
+	eListHostedConfigurationVersionsRequest_MaxResults                smithy.SchemaExtensions
+	eListHostedConfigurationVersionsRequest_NextToken                 smithy.SchemaExtensions
+	eListHostedConfigurationVersionsRequest_VersionLabel              smithy.SchemaExtensions
+	eHostedConfigurationVersions                                      smithy.SchemaExtensions
+	eHostedConfigurationVersions_Items                                smithy.SchemaExtensions
+	eHostedConfigurationVersions_NextToken                            smithy.SchemaExtensions
+	eListTagsForResourceRequest                                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                           smithy.SchemaExtensions
+	eResourceTags                                                     smithy.SchemaExtensions
+	eResourceTags_Tags                                                smithy.SchemaExtensions
+	eStartDeploymentRequest                                           smithy.SchemaExtensions
+	eStartDeploymentRequest_ApplicationId                             smithy.SchemaExtensions
+	eStartDeploymentRequest_EnvironmentId                             smithy.SchemaExtensions
+	eStartDeploymentRequest_DeploymentStrategyId                      smithy.SchemaExtensions
+	eStartDeploymentRequest_ConfigurationProfileId                    smithy.SchemaExtensions
+	eStartDeploymentRequest_ConfigurationVersion                      smithy.SchemaExtensions
+	eStartDeploymentRequest_Description                               smithy.SchemaExtensions
+	eStartDeploymentRequest_Tags                                      smithy.SchemaExtensions
+	eStartDeploymentRequest_KmsKeyIdentifier                          smithy.SchemaExtensions
+	eStartDeploymentRequest_DynamicExtensionParameters                smithy.SchemaExtensions
+	eStartDeploymentRequest_LatestDeploymentNumber                    smithy.SchemaExtensions
+	eStartExperimentRunRequest                                        smithy.SchemaExtensions
+	eStartExperimentRunRequest_ApplicationIdentifier                  smithy.SchemaExtensions
+	eStartExperimentRunRequest_ExperimentDefinitionIdentifier         smithy.SchemaExtensions
+	eStartExperimentRunRequest_Description                            smithy.SchemaExtensions
+	eStartExperimentRunRequest_ExposurePercentage                     smithy.SchemaExtensions
+	eStartExperimentRunRequest_TreatmentOverrides                     smithy.SchemaExtensions
+	eStartExperimentRunRequest_Tags                                   smithy.SchemaExtensions
+	eStartExperimentRunRequest_DeploymentParameters                   smithy.SchemaExtensions
+	eStopDeploymentRequest                                            smithy.SchemaExtensions
+	eStopDeploymentRequest_ApplicationId                              smithy.SchemaExtensions
+	eStopDeploymentRequest_EnvironmentId                              smithy.SchemaExtensions
+	eStopDeploymentRequest_DeploymentNumber                           smithy.SchemaExtensions
+	eStopDeploymentRequest_AllowRevert                                smithy.SchemaExtensions
+	eStopExperimentRunRequest                                         smithy.SchemaExtensions
+	eStopExperimentRunRequest_ApplicationIdentifier                   smithy.SchemaExtensions
+	eStopExperimentRunRequest_ExperimentDefinitionIdentifier          smithy.SchemaExtensions
+	eStopExperimentRunRequest_Run                                     smithy.SchemaExtensions
+	eStopExperimentRunRequest_Result                                  smithy.SchemaExtensions
+	eStopExperimentRunRequest_DeploymentParameters                    smithy.SchemaExtensions
+	eTagResourceRequest                                               smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                   smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                          smithy.SchemaExtensions
+	eUntagResourceRequest                                             smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                 smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                     smithy.SchemaExtensions
+	eUpdateAccountSettingsRequest                                     smithy.SchemaExtensions
+	eUpdateAccountSettingsRequest_DeletionProtection                  smithy.SchemaExtensions
+	eUpdateAccountSettingsRequest_VendedMetrics                       smithy.SchemaExtensions
+	eUpdateApplicationRequest                                         smithy.SchemaExtensions
+	eUpdateApplicationRequest_ApplicationId                           smithy.SchemaExtensions
+	eUpdateApplicationRequest_Name                                    smithy.SchemaExtensions
+	eUpdateApplicationRequest_Description                             smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest                                smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest_ApplicationId                  smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest_ConfigurationProfileId         smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest_Name                           smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest_Description                    smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest_RetrievalRoleArn               smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest_Validators                     smithy.SchemaExtensions
+	eUpdateConfigurationProfileRequest_KmsKeyIdentifier               smithy.SchemaExtensions
+	eUpdateDeploymentStrategyRequest                                  smithy.SchemaExtensions
+	eUpdateDeploymentStrategyRequest_DeploymentStrategyId             smithy.SchemaExtensions
+	eUpdateDeploymentStrategyRequest_Description                      smithy.SchemaExtensions
+	eUpdateDeploymentStrategyRequest_DeploymentDurationInMinutes      smithy.SchemaExtensions
+	eUpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes           smithy.SchemaExtensions
+	eUpdateDeploymentStrategyRequest_GrowthFactor                     smithy.SchemaExtensions
+	eUpdateDeploymentStrategyRequest_GrowthType                       smithy.SchemaExtensions
+	eUpdateEnvironmentRequest                                         smithy.SchemaExtensions
+	eUpdateEnvironmentRequest_ApplicationId                           smithy.SchemaExtensions
+	eUpdateEnvironmentRequest_EnvironmentId                           smithy.SchemaExtensions
+	eUpdateEnvironmentRequest_Name                                    smithy.SchemaExtensions
+	eUpdateEnvironmentRequest_Description                             smithy.SchemaExtensions
+	eUpdateEnvironmentRequest_Monitors                                smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest                                smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_ApplicationIdentifier          smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_Treatments                     smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_Control                        smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_Hypothesis                     smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_AudienceRule                   smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_AudienceDescription            smithy.SchemaExtensions
+	eUpdateExperimentDefinitionRequest_LaunchCriteria                 smithy.SchemaExtensions
+	eUpdateExperimentRunRequest                                       smithy.SchemaExtensions
+	eUpdateExperimentRunRequest_ApplicationIdentifier                 smithy.SchemaExtensions
+	eUpdateExperimentRunRequest_ExperimentDefinitionIdentifier        smithy.SchemaExtensions
+	eUpdateExperimentRunRequest_Run                                   smithy.SchemaExtensions
+	eUpdateExperimentRunRequest_Description                           smithy.SchemaExtensions
+	eUpdateExperimentRunRequest_ExposurePercentage                    smithy.SchemaExtensions
+	eUpdateExperimentRunRequest_TreatmentOverrides                    smithy.SchemaExtensions
+	eUpdateExperimentRunRequest_DeploymentParameters                  smithy.SchemaExtensions
+	eUpdateExtensionAssociationRequest                                smithy.SchemaExtensions
+	eUpdateExtensionAssociationRequest_ExtensionAssociationId         smithy.SchemaExtensions
+	eUpdateExtensionAssociationRequest_Parameters                     smithy.SchemaExtensions
+	eUpdateExtensionRequest                                           smithy.SchemaExtensions
+	eUpdateExtensionRequest_ExtensionIdentifier                       smithy.SchemaExtensions
+	eUpdateExtensionRequest_Description                               smithy.SchemaExtensions
+	eUpdateExtensionRequest_Actions                                   smithy.SchemaExtensions
+	eUpdateExtensionRequest_Parameters                                smithy.SchemaExtensions
+	eUpdateExtensionRequest_VersionNumber                             smithy.SchemaExtensions
+	eValidateConfigurationRequest                                     smithy.SchemaExtensions
+	eValidateConfigurationRequest_ApplicationId                       smithy.SchemaExtensions
+	eValidateConfigurationRequest_ConfigurationProfileId              smithy.SchemaExtensions
+	eValidateConfigurationRequest_ConfigurationVersion                smithy.SchemaExtensions
+)
+
+var (
+	iCreateApplication                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateApplication"}
+	iCreateConfigurationProfile              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateConfigurationProfile"}
+	iCreateDeploymentStrategy                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateDeploymentStrategy"}
+	iCreateEnvironment                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateEnvironment"}
+	iCreateExperimentDefinition              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateExperimentDefinition"}
+	iCreateExtension                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateExtension"}
+	iCreateExtensionAssociation              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateExtensionAssociation"}
+	iCreateHostedConfigurationVersion        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateHostedConfigurationVersion"}
+	iDeleteApplication                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteApplication"}
+	iDeleteConfigurationProfile              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteConfigurationProfile"}
+	iDeleteDeploymentStrategy                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteDeploymentStrategy"}
+	iDeleteEnvironment                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteEnvironment"}
+	iDeleteExperimentDefinition              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteExperimentDefinition"}
+	iDeleteExtension                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteExtension"}
+	iDeleteExtensionAssociation              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteExtensionAssociation"}
+	iDeleteHostedConfigurationVersion        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteHostedConfigurationVersion"}
+	iGetAccountSettings                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetAccountSettings"}
+	iGetApplication                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetApplication"}
+	iGetConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetConfiguration"}
+	iGetConfigurationProfile                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetConfigurationProfile"}
+	iGetDeployment                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetDeployment"}
+	iGetDeploymentStrategy                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetDeploymentStrategy"}
+	iGetEnvironment                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetEnvironment"}
+	iGetExperimentDefinition                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExperimentDefinition"}
+	iGetExperimentRun                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExperimentRun"}
+	iGetExtension                            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExtension"}
+	iGetExtensionAssociation                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExtensionAssociation"}
+	iGetHostedConfigurationVersion           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetHostedConfigurationVersion"}
+	iListApplications                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListApplications"}
+	iListConfigurationProfiles               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListConfigurationProfiles"}
+	iListDeployments                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListDeployments"}
+	iListDeploymentStrategies                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListDeploymentStrategies"}
+	iListEnvironments                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListEnvironments"}
+	iListExperimentDefinitions               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExperimentDefinitions"}
+	iListExperimentRunEvents                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExperimentRunEvents"}
+	iListExperimentRuns                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExperimentRuns"}
+	iListExtensionAssociations               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExtensionAssociations"}
+	iListExtensions                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExtensions"}
+	iListHostedConfigurationVersions         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListHostedConfigurationVersions"}
+	iListTagsForResource                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListTagsForResource"}
+	iStartDeployment                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StartDeployment"}
+	iStartExperimentRun                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StartExperimentRun"}
+	iStopDeployment                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StopDeployment"}
+	iStopExperimentRun                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StopExperimentRun"}
+	iTagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UntagResource"}
+	iUpdateAccountSettings                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateAccountSettings"}
+	iUpdateApplication                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateApplication"}
+	iUpdateConfigurationProfile              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateConfigurationProfile"}
+	iUpdateDeploymentStrategy                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateDeploymentStrategy"}
+	iUpdateEnvironment                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateEnvironment"}
+	iUpdateExperimentDefinition              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExperimentDefinition"}
+	iUpdateExperimentRun                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExperimentRun"}
+	iUpdateExtension                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExtension"}
+	iUpdateExtensionAssociation              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExtensionAssociation"}
+	iValidateConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ValidateConfiguration"}
+	i_AmazonAppConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AmazonAppConfig"}
+	iAction                                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Action"}
+	iActionInvocation                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ActionInvocation"}
+	i_ActionInvocations                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ActionInvocations"}
+	i_ActionList                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ActionList"}
+	iActionPoint                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ActionPoint"}
+	i_ActionsMap                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ActionsMap"}
+	iApplication                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Application"}
+	i_ApplicationList                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ApplicationList"}
+	iAppliedExtension                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AppliedExtension"}
+	i_AppliedExtensions                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AppliedExtensions"}
+	i_Arn                                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Arn"}
+	i_AttributeKey                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AttributeKey"}
+	i_AttributeString                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AttributeString"}
+	iAttributeValue                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AttributeValue"}
+	i_AttributeValueMap                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AttributeValueMap"}
+	iBadRequestDetails                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "BadRequestDetails"}
+	iBadRequestException                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "BadRequestException"}
+	iBadRequestReason                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "BadRequestReason"}
+	i_Blob                                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Blob"}
+	i_Boolean                                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Boolean"}
+	iBytesMeasure                            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "BytesMeasure"}
+	iConfigurationProfileSummary             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ConfigurationProfileSummary"}
+	i_ConfigurationProfileSummaryList        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ConfigurationProfileSummaryList"}
+	i_ConfigurationProfileType               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ConfigurationProfileType"}
+	iConflictException                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ConflictException"}
+	iDeleteType                              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteType"}
+	iDeletionProtectionCheck                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeletionProtectionCheck"}
+	i_DeletionProtectionDuration             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeletionProtectionDuration"}
+	iDeletionProtectionSettings              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeletionProtectionSettings"}
+	iDeploymentEvent                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentEvent"}
+	i_DeploymentEvents                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentEvents"}
+	iDeploymentEventType                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentEventType"}
+	i_DeploymentList                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentList"}
+	iDeploymentParameters                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentParameters"}
+	iDeploymentState                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentState"}
+	iDeploymentStrategy                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentStrategy"}
+	i_DeploymentStrategyId                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentStrategyId"}
+	i_DeploymentStrategyList                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentStrategyList"}
+	iDeploymentSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentSummary"}
+	iDeploymentType                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentType"}
+	i_Description                            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Description"}
+	i_Double                                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Double"}
+	i_DynamicParameterKey                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DynamicParameterKey"}
+	i_DynamicParameterMap                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DynamicParameterMap"}
+	i_EntityId                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "EntityId"}
+	iEnvironment                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Environment"}
+	i_EnvironmentList                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "EnvironmentList"}
+	iEnvironmentState                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "EnvironmentState"}
+	i_ExperimentDefinitionList               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentDefinitionList"}
+	iExperimentDefinitionSnapshot            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentDefinitionSnapshot"}
+	iExperimentDefinitionStatus              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentDefinitionStatus"}
+	iExperimentDefinitionSummary             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentDefinitionSummary"}
+	iExperimentRunEvent                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunEvent"}
+	i_ExperimentRunEventList                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunEventList"}
+	iExperimentRunEventType                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunEventType"}
+	iExperimentRunResult                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunResult"}
+	iExperimentRunStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunStatus"}
+	iExperimentRunSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunSummary"}
+	i_ExperimentRunSummaryList               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunSummaryList"}
+	i_ExtensionAssociationSummaries          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExtensionAssociationSummaries"}
+	iExtensionAssociationSummary             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExtensionAssociationSummary"}
+	i_ExtensionOrParameterName               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExtensionOrParameterName"}
+	i_ExtensionSummaries                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExtensionSummaries"}
+	iExtensionSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExtensionSummary"}
+	i_FlagKey                                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "FlagKey"}
+	iFlagValue                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "FlagValue"}
+	i_Float                                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Float"}
+	i_GrowthFactor                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GrowthFactor"}
+	iGrowthType                              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GrowthType"}
+	iHostedConfigurationVersionSummary       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "HostedConfigurationVersionSummary"}
+	i_HostedConfigurationVersionSummaryList  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "HostedConfigurationVersionSummaryList"}
+	i_Id                                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Id"}
+	i_Identifier                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Identifier"}
+	i_Integer                                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Integer"}
+	iInternalServerException                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "InternalServerException"}
+	iInvalidConfigurationDetail              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "InvalidConfigurationDetail"}
+	i_InvalidConfigurationDetailList         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "InvalidConfigurationDetailList"}
+	i_Iso8601DateTime                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Iso8601DateTime"}
+	i_KmsKeyIdentifier                       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "KmsKeyIdentifier"}
+	i_KmsKeyIdentifierOrEmpty                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "KmsKeyIdentifierOrEmpty"}
+	i_LongName                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "LongName"}
+	i_MaxResults                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "MaxResults"}
+	i_MinutesBetween0And24Hours              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "MinutesBetween0And24Hours"}
+	iMonitor                                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Monitor"}
+	i_MonitorList                            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "MonitorList"}
+	i_Name                                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Name"}
+	i_NameWithReservedAwsPrefix              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "NameWithReservedAwsPrefix"}
+	i_NextToken                              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "NextToken"}
+	i_NullablePercentage                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "NullablePercentage"}
+	i_NumberList                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "NumberList"}
+	iParameter                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Parameter"}
+	i_ParameterMap                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ParameterMap"}
+	i_ParameterValueMap                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ParameterValueMap"}
+	iPayloadTooLargeException                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "PayloadTooLargeException"}
+	i_Percentage                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Percentage"}
+	i_PositiveInteger                        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "PositiveInteger"}
+	i_QueryName                              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "QueryName"}
+	iReplicateTo                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ReplicateTo"}
+	iResourceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ResourceNotFoundException"}
+	i_RoleArn                                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "RoleArn"}
+	i_Rule                                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Rule"}
+	iServiceQuotaExceededException           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ServiceQuotaExceededException"}
+	i_String                                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "String"}
+	i_StringList                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StringList"}
+	i_StringWithLengthBetween0And32768       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StringWithLengthBetween0And32768"}
+	i_StringWithLengthBetween1And2048        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StringWithLengthBetween1And2048"}
+	i_StringWithLengthBetween1And255         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StringWithLengthBetween1And255"}
+	i_StringWithLengthBetween1And64          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StringWithLengthBetween1And64"}
+	i_TagKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TagKey"}
+	i_TagKeyList                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TagKeyList"}
+	i_TagMap                                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TagMap"}
+	i_TagValue                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TagValue"}
+	iTreatment                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Treatment"}
+	iTreatmentInput                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TreatmentInput"}
+	i_TreatmentInputList                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TreatmentInputList"}
+	i_TreatmentKey                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TreatmentKey"}
+	i_TreatmentList                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TreatmentList"}
+	i_TreatmentOverrideMap                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TreatmentOverrideMap"}
+	iTreatmentOverrides                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TreatmentOverrides"}
+	iTriggeredBy                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TriggeredBy"}
+	i_Uri                                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Uri"}
+	iValidator                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Validator"}
+	i_ValidatorList                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ValidatorList"}
+	iValidatorType                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ValidatorType"}
+	i_ValidatorTypeList                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ValidatorTypeList"}
+	iVendedMetricsSettings                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "VendedMetricsSettings"}
+	i_Version                                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Version"}
+	i_VersionLabel                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "VersionLabel"}
+	i_Weight                                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Weight"}
+	iCreateApplicationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateApplicationRequest"}
+	iCreateConfigurationProfileRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateConfigurationProfileRequest"}
+	iConfigurationProfile                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ConfigurationProfile"}
+	iCreateDeploymentStrategyRequest         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateDeploymentStrategyRequest"}
+	iCreateEnvironmentRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateEnvironmentRequest"}
+	iCreateExperimentDefinitionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateExperimentDefinitionRequest"}
+	iExperimentDefinition                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentDefinition"}
+	iCreateExtensionAssociationRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateExtensionAssociationRequest"}
+	iExtensionAssociation                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExtensionAssociation"}
+	iCreateExtensionRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateExtensionRequest"}
+	iExtension                               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Extension"}
+	iCreateHostedConfigurationVersionRequest = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "CreateHostedConfigurationVersionRequest"}
+	iHostedConfigurationVersion              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "HostedConfigurationVersion"}
+	iDeleteApplicationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteApplicationRequest"}
+	iDeleteConfigurationProfileRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteConfigurationProfileRequest"}
+	iDeleteDeploymentStrategyRequest         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteDeploymentStrategyRequest"}
+	iDeleteEnvironmentRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteEnvironmentRequest"}
+	iDeleteExperimentDefinitionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteExperimentDefinitionRequest"}
+	iDeleteExtensionAssociationRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteExtensionAssociationRequest"}
+	iDeleteExtensionRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteExtensionRequest"}
+	iDeleteHostedConfigurationVersionRequest = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeleteHostedConfigurationVersionRequest"}
+	iAccountSettings                         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "AccountSettings"}
+	iGetApplicationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetApplicationRequest"}
+	iGetConfigurationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetConfigurationRequest"}
+	iConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Configuration"}
+	iGetConfigurationProfileRequest          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetConfigurationProfileRequest"}
+	iGetDeploymentRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetDeploymentRequest"}
+	iDeployment                              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Deployment"}
+	iGetDeploymentStrategyRequest            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetDeploymentStrategyRequest"}
+	iGetEnvironmentRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetEnvironmentRequest"}
+	iGetExperimentDefinitionRequest          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExperimentDefinitionRequest"}
+	iGetExperimentRunRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExperimentRunRequest"}
+	iExperimentRun                           = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRun"}
+	iGetExtensionAssociationRequest          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExtensionAssociationRequest"}
+	iGetExtensionRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetExtensionRequest"}
+	iGetHostedConfigurationVersionRequest    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "GetHostedConfigurationVersionRequest"}
+	iListApplicationsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListApplicationsRequest"}
+	iApplications                            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Applications"}
+	iListConfigurationProfilesRequest        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListConfigurationProfilesRequest"}
+	iConfigurationProfiles                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ConfigurationProfiles"}
+	iListDeploymentsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListDeploymentsRequest"}
+	iDeployments                             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Deployments"}
+	iListDeploymentStrategiesRequest         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListDeploymentStrategiesRequest"}
+	iDeploymentStrategies                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "DeploymentStrategies"}
+	iListEnvironmentsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListEnvironmentsRequest"}
+	iEnvironments                            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Environments"}
+	iListExperimentDefinitionsRequest        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExperimentDefinitionsRequest"}
+	iExperimentDefinitions                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentDefinitions"}
+	iListExperimentRunEventsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExperimentRunEventsRequest"}
+	iExperimentRunEvents                     = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRunEvents"}
+	iListExperimentRunsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExperimentRunsRequest"}
+	iExperimentRuns                          = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExperimentRuns"}
+	iListExtensionAssociationsRequest        = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExtensionAssociationsRequest"}
+	iExtensionAssociations                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ExtensionAssociations"}
+	iListExtensionsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListExtensionsRequest"}
+	iExtensions                              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "Extensions"}
+	iListHostedConfigurationVersionsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListHostedConfigurationVersionsRequest"}
+	iHostedConfigurationVersions             = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "HostedConfigurationVersions"}
+	iListTagsForResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ListTagsForResourceRequest"}
+	iResourceTags                            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ResourceTags"}
+	iStartDeploymentRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StartDeploymentRequest"}
+	iStartExperimentRunRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StartExperimentRunRequest"}
+	iStopDeploymentRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StopDeploymentRequest"}
+	iStopExperimentRunRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "StopExperimentRunRequest"}
+	iTagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "TagResourceRequest"}
+	iUntagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UntagResourceRequest"}
+	iUpdateAccountSettingsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateAccountSettingsRequest"}
+	iUpdateApplicationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateApplicationRequest"}
+	iUpdateConfigurationProfileRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateConfigurationProfileRequest"}
+	iUpdateDeploymentStrategyRequest         = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateDeploymentStrategyRequest"}
+	iUpdateEnvironmentRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateEnvironmentRequest"}
+	iUpdateExperimentDefinitionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExperimentDefinitionRequest"}
+	iUpdateExperimentRunRequest              = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExperimentRunRequest"}
+	iUpdateExtensionAssociationRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExtensionAssociationRequest"}
+	iUpdateExtensionRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "UpdateExtensionRequest"}
+	iValidateConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.appconfig", Name: "ValidateConfigurationRequest"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications",
-	Code: 201})
-
-var CreateConfigurationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateConfigurationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications/{ApplicationId}/configurationprofiles",
-	Code: 201})
-
-var CreateDeploymentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateDeploymentStrategy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deploymentstrategies",
-	Code: 201})
-
-var CreateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications/{ApplicationId}/environments",
-	Code: 201})
-
-var CreateExperimentDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateExperimentDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions",
-	Code: 201})
-
-var CreateExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateExtension",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/extensions",
-	Code: 201})
-
-var CreateExtensionAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateExtensionAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/extensionassociations",
-	Code: 201})
-
-var CreateHostedConfigurationVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateHostedConfigurationVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions",
-	Code: 201})
-
-var DeleteApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{ApplicationId}",
-	Code: 204})
-
-var DeleteConfigurationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteConfigurationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}",
-	Code: 204})
-
-var DeleteDeploymentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteDeploymentStrategy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/deployementstrategies/{DeploymentStrategyId}",
-	Code: 204})
-
-var DeleteEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{ApplicationId}/environments/{EnvironmentId}",
-	Code: 204})
-
-var DeleteExperimentDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteExperimentDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}",
-	Code: 204})
-
-var DeleteExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteExtension",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/extensions/{ExtensionIdentifier}",
-	Code: 204})
-
-var DeleteExtensionAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteExtensionAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/extensionassociations/{ExtensionAssociationId}",
-	Code: 204})
-
-var DeleteHostedConfigurationVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteHostedConfigurationVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions/{VersionNumber}",
-	Code: 204})
-
-var GetAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetAccountSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/settings",
-	Code: 200})
-
-var GetApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}",
-	Code: 200})
-
-var GetConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{Application}/environments/{Environment}/configurations/{Configuration}",
-	Code: 200})
-
-var GetConfigurationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetConfigurationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}",
-	Code: 200})
-
-var GetDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/environments/{EnvironmentId}/deployments/{DeploymentNumber}",
-	Code: 200})
-
-var GetDeploymentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetDeploymentStrategy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/deploymentstrategies/{DeploymentStrategyId}",
-	Code: 200})
-
-var GetEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/environments/{EnvironmentId}",
-	Code: 200})
-
-var GetExperimentDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExperimentDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}",
-	Code: 200})
-
-var GetExperimentRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExperimentRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}",
-	Code: 200})
-
-var GetExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExtension",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/extensions/{ExtensionIdentifier}",
-	Code: 200})
-
-var GetExtensionAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExtensionAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/extensionassociations/{ExtensionAssociationId}",
-	Code: 200})
-
-var GetHostedConfigurationVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetHostedConfigurationVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions/{VersionNumber}",
-	Code: 200})
-
-var ListApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListApplications",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications",
-	Code: 200})
-
-var ListConfigurationProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListConfigurationProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/configurationprofiles",
-	Code: 200})
-
-var ListDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/environments/{EnvironmentId}/deployments",
-	Code: 200})
-
-var ListDeploymentStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListDeploymentStrategies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/deploymentstrategies",
-	Code: 200})
-
-var ListEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListEnvironments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/environments",
-	Code: 200})
-
-var ListExperimentDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExperimentDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/experimentdefinitions",
-	Code: 200})
-
-var ListExperimentRunEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExperimentRunEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}/events",
-	Code: 200})
-
-var ListExperimentRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExperimentRuns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns",
-	Code: 200})
-
-var ListExtensionAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExtensionAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/extensionassociations",
-	Code: 200})
-
-var ListExtensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExtensions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/extensions",
-	Code: 200})
-
-var ListHostedConfigurationVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListHostedConfigurationVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var StartDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StartDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications/{ApplicationId}/environments/{EnvironmentId}/deployments",
-	Code: 201})
-
-var StartExperimentRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StartExperimentRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns",
-	Code: 201})
-
-var StopDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StopDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{ApplicationId}/environments/{EnvironmentId}/deployments/{DeploymentNumber}",
-	Code: 202})
-
-var StopExperimentRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StopExperimentRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 202}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateAccountSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/settings",
-	Code: 200})
-
-var UpdateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/applications/{ApplicationId}",
-	Code: 200})
-
-var UpdateConfigurationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateConfigurationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}",
-	Code: 200})
-
-var UpdateDeploymentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateDeploymentStrategy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/deploymentstrategies/{DeploymentStrategyId}",
-	Code: 200})
-
-var UpdateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/applications/{ApplicationId}/environments/{EnvironmentId}",
-	Code: 200})
-
-var UpdateExperimentDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExperimentDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}",
-	Code: 200})
-
-var UpdateExperimentRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExperimentRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}/update",
-	Code: 200})
-
-var UpdateExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExtension",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/extensions/{ExtensionIdentifier}",
-	Code: 200})
-
-var UpdateExtensionAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExtensionAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/extensionassociations/{ExtensionAssociationId}",
-	Code: 200})
-
-var ValidateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ValidateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/validators",
-	Code: 204})
-
-var _AmazonAppConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AmazonAppConfig",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonAppConfig = smithy.NewServiceSchema(_AmazonAppConfig, "2019-10-09")
-
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Action",
-}, smithy.ShapeTypeStructure, 4)
-var Action_Name *smithy.Schema
-
-var Action_Description *smithy.Schema
-
-var Action_Uri *smithy.Schema
-
-var Action_RoleArn *smithy.Schema
-
-var ActionInvocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ActionInvocation",
-}, smithy.ShapeTypeStructure, 7)
-var ActionInvocation_ExtensionIdentifier *smithy.Schema
-
-var ActionInvocation_ActionName *smithy.Schema
-
-var ActionInvocation_Uri *smithy.Schema
-
-var ActionInvocation_RoleArn *smithy.Schema
-
-var ActionInvocation_ErrorMessage *smithy.Schema
-
-var ActionInvocation_ErrorCode *smithy.Schema
-
-var ActionInvocation_InvocationId *smithy.Schema
-
-var _ActionInvocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ActionInvocations",
-}, smithy.ShapeTypeList, 1)
-var _ActionInvocations_member *smithy.Schema
-
-var _ActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ActionList",
-}, smithy.ShapeTypeList, 1)
-var _ActionList_member *smithy.Schema
-
-var ActionPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ActionPoint",
-}, smithy.ShapeTypeEnum, 8)
-var ActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION *smithy.Schema
-
-var ActionPoint_PRE_START_DEPLOYMENT *smithy.Schema
-
-var ActionPoint_AT_DEPLOYMENT_TICK *smithy.Schema
-
-var ActionPoint_ON_DEPLOYMENT_START *smithy.Schema
-
-var ActionPoint_ON_DEPLOYMENT_STEP *smithy.Schema
-
-var ActionPoint_ON_DEPLOYMENT_BAKING *smithy.Schema
-
-var ActionPoint_ON_DEPLOYMENT_COMPLETE *smithy.Schema
-
-var ActionPoint_ON_DEPLOYMENT_ROLLED_BACK *smithy.Schema
-
-var _ActionsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ActionsMap",
-}, smithy.ShapeTypeMap, 2)
-var _ActionsMap_key *smithy.Schema
-
-var _ActionsMap_value *smithy.Schema
-
-var Application = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Application",
-}, smithy.ShapeTypeStructure, 3)
-var Application_Id *smithy.Schema
-
-var Application_Name *smithy.Schema
-
-var Application_Description *smithy.Schema
-
-var _ApplicationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ApplicationList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationList_member *smithy.Schema
-
-var AppliedExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AppliedExtension",
-}, smithy.ShapeTypeStructure, 4)
-var AppliedExtension_ExtensionId *smithy.Schema
-
-var AppliedExtension_ExtensionAssociationId *smithy.Schema
-
-var AppliedExtension_VersionNumber *smithy.Schema
-
-var AppliedExtension_Parameters *smithy.Schema
-
-var _AppliedExtensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AppliedExtensions",
-}, smithy.ShapeTypeList, 1)
-var _AppliedExtensions_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AttributeString",
-}, smithy.ShapeTypeString, 0)
-
-var AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeUnion, 5)
-var AttributeValue_StringValue *smithy.Schema
-
-var AttributeValue_NumberValue *smithy.Schema
-
-var AttributeValue_BooleanValue *smithy.Schema
-
-var AttributeValue_StringArray *smithy.Schema
-
-var AttributeValue_NumberArray *smithy.Schema
-
-var _AttributeValueMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AttributeValueMap",
-}, smithy.ShapeTypeMap, 2)
-var _AttributeValueMap_key *smithy.Schema
-
-var _AttributeValueMap_value *smithy.Schema
-
-var BadRequestDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "BadRequestDetails",
-}, smithy.ShapeTypeUnion, 1)
-var BadRequestDetails_InvalidConfiguration *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var BadRequestException_Reason *smithy.Schema
-
-var BadRequestException_Details *smithy.Schema
-
-var BadRequestReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "BadRequestReason",
-}, smithy.ShapeTypeEnum, 1)
-var BadRequestReason_INVALID_CONFIGURATION *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BytesMeasure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "BytesMeasure",
-}, smithy.ShapeTypeEnum, 1)
-var BytesMeasure_KILOBYTES *smithy.Schema
-
-var ConfigurationProfileSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ConfigurationProfileSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ConfigurationProfileSummary_ApplicationId *smithy.Schema
-
-var ConfigurationProfileSummary_Id *smithy.Schema
-
-var ConfigurationProfileSummary_Name *smithy.Schema
-
-var ConfigurationProfileSummary_LocationUri *smithy.Schema
-
-var ConfigurationProfileSummary_ValidatorTypes *smithy.Schema
-
-var ConfigurationProfileSummary_Type *smithy.Schema
-
-var _ConfigurationProfileSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ConfigurationProfileSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationProfileSummaryList_member *smithy.Schema
-
-var _ConfigurationProfileType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ConfigurationProfileType",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var DeleteType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteType",
-}, smithy.ShapeTypeEnum, 2)
-var DeleteType_ARCHIVE *smithy.Schema
-
-var DeleteType_DESTROY *smithy.Schema
-
-var DeletionProtectionCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeletionProtectionCheck",
-}, smithy.ShapeTypeEnum, 3)
-var DeletionProtectionCheck_ACCOUNT_DEFAULT *smithy.Schema
-
-var DeletionProtectionCheck_APPLY *smithy.Schema
-
-var DeletionProtectionCheck_BYPASS *smithy.Schema
-
-var _DeletionProtectionDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeletionProtectionDuration",
-}, smithy.ShapeTypeInteger, 0)
-
-var DeletionProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeletionProtectionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var DeletionProtectionSettings_Enabled *smithy.Schema
-
-var DeletionProtectionSettings_ProtectionPeriodInMinutes *smithy.Schema
-
-var DeploymentEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentEvent",
-}, smithy.ShapeTypeStructure, 5)
-var DeploymentEvent_EventType *smithy.Schema
-
-var DeploymentEvent_TriggeredBy *smithy.Schema
-
-var DeploymentEvent_Description *smithy.Schema
-
-var DeploymentEvent_ActionInvocations *smithy.Schema
-
-var DeploymentEvent_OccurredAt *smithy.Schema
-
-var _DeploymentEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentEvents",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentEvents_member *smithy.Schema
-
-var DeploymentEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentEventType",
-}, smithy.ShapeTypeEnum, 7)
-var DeploymentEventType_PERCENTAGE_UPDATED *smithy.Schema
-
-var DeploymentEventType_ROLLBACK_STARTED *smithy.Schema
-
-var DeploymentEventType_ROLLBACK_COMPLETED *smithy.Schema
-
-var DeploymentEventType_BAKE_TIME_STARTED *smithy.Schema
-
-var DeploymentEventType_DEPLOYMENT_STARTED *smithy.Schema
-
-var DeploymentEventType_DEPLOYMENT_COMPLETED *smithy.Schema
-
-var DeploymentEventType_REVERT_COMPLETED *smithy.Schema
-
-var _DeploymentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentList_member *smithy.Schema
-
-var DeploymentParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentParameters",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentParameters_DynamicExtensionParameters *smithy.Schema
-
-var DeploymentParameters_Tags *smithy.Schema
-
-var DeploymentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentState",
-}, smithy.ShapeTypeEnum, 7)
-var DeploymentState_BAKING *smithy.Schema
-
-var DeploymentState_VALIDATING *smithy.Schema
-
-var DeploymentState_DEPLOYING *smithy.Schema
-
-var DeploymentState_COMPLETE *smithy.Schema
-
-var DeploymentState_ROLLING_BACK *smithy.Schema
-
-var DeploymentState_ROLLED_BACK *smithy.Schema
-
-var DeploymentState_REVERTED *smithy.Schema
-
-var DeploymentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentStrategy",
-}, smithy.ShapeTypeStructure, 8)
-var DeploymentStrategy_Id *smithy.Schema
-
-var DeploymentStrategy_Name *smithy.Schema
-
-var DeploymentStrategy_Description *smithy.Schema
-
-var DeploymentStrategy_DeploymentDurationInMinutes *smithy.Schema
-
-var DeploymentStrategy_GrowthType *smithy.Schema
-
-var DeploymentStrategy_GrowthFactor *smithy.Schema
-
-var DeploymentStrategy_FinalBakeTimeInMinutes *smithy.Schema
-
-var DeploymentStrategy_ReplicateTo *smithy.Schema
-
-var _DeploymentStrategyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentStrategyId",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentStrategyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentStrategyList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentStrategyList_member *smithy.Schema
-
-var DeploymentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentSummary",
-}, smithy.ShapeTypeStructure, 14)
-var DeploymentSummary_DeploymentNumber *smithy.Schema
-
-var DeploymentSummary_ConfigurationProfileId *smithy.Schema
-
-var DeploymentSummary_ConfigurationName *smithy.Schema
-
-var DeploymentSummary_ConfigurationVersion *smithy.Schema
-
-var DeploymentSummary_DeploymentDurationInMinutes *smithy.Schema
-
-var DeploymentSummary_GrowthType *smithy.Schema
-
-var DeploymentSummary_GrowthFactor *smithy.Schema
-
-var DeploymentSummary_FinalBakeTimeInMinutes *smithy.Schema
-
-var DeploymentSummary_State *smithy.Schema
-
-var DeploymentSummary_PercentageComplete *smithy.Schema
-
-var DeploymentSummary_StartedAt *smithy.Schema
-
-var DeploymentSummary_CompletedAt *smithy.Schema
-
-var DeploymentSummary_VersionLabel *smithy.Schema
-
-var DeploymentSummary_Type *smithy.Schema
-
-var DeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentType",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentType_USER *smithy.Schema
-
-var DeploymentType_MANAGED *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DynamicParameterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DynamicParameterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DynamicParameterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DynamicParameterMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _DynamicParameterMap_key *smithy.Schema
-
-var _DynamicParameterMap_value *smithy.Schema
-
-var _EntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "EntityId",
-}, smithy.ShapeTypeString, 0)
-
-var Environment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Environment",
-}, smithy.ShapeTypeStructure, 6)
-var Environment_ApplicationId *smithy.Schema
-
-var Environment_Id *smithy.Schema
-
-var Environment_Name *smithy.Schema
-
-var Environment_Description *smithy.Schema
-
-var Environment_State *smithy.Schema
-
-var Environment_Monitors *smithy.Schema
-
-var _EnvironmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "EnvironmentList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentList_member *smithy.Schema
-
-var EnvironmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "EnvironmentState",
-}, smithy.ShapeTypeEnum, 5)
-var EnvironmentState_READY_FOR_DEPLOYMENT *smithy.Schema
-
-var EnvironmentState_DEPLOYING *smithy.Schema
-
-var EnvironmentState_ROLLING_BACK *smithy.Schema
-
-var EnvironmentState_ROLLED_BACK *smithy.Schema
-
-var EnvironmentState_REVERTED *smithy.Schema
-
-var _ExperimentDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _ExperimentDefinitionList_member *smithy.Schema
-
-var ExperimentDefinitionSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentDefinitionSnapshot",
-}, smithy.ShapeTypeStructure, 12)
-var ExperimentDefinitionSnapshot_ApplicationId *smithy.Schema
-
-var ExperimentDefinitionSnapshot_Id *smithy.Schema
-
-var ExperimentDefinitionSnapshot_Name *smithy.Schema
-
-var ExperimentDefinitionSnapshot_Hypothesis *smithy.Schema
-
-var ExperimentDefinitionSnapshot_ConfigurationProfileId *smithy.Schema
-
-var ExperimentDefinitionSnapshot_EnvironmentId *smithy.Schema
-
-var ExperimentDefinitionSnapshot_FlagKey *smithy.Schema
-
-var ExperimentDefinitionSnapshot_AudienceRule *smithy.Schema
-
-var ExperimentDefinitionSnapshot_AudienceDescription *smithy.Schema
-
-var ExperimentDefinitionSnapshot_LaunchCriteria *smithy.Schema
-
-var ExperimentDefinitionSnapshot_Treatments *smithy.Schema
-
-var ExperimentDefinitionSnapshot_Control *smithy.Schema
-
-var ExperimentDefinitionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentDefinitionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ExperimentDefinitionStatus_ACTIVE *smithy.Schema
-
-var ExperimentDefinitionStatus_IDLE *smithy.Schema
-
-var ExperimentDefinitionStatus_ARCHIVED *smithy.Schema
-
-var ExperimentDefinitionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentDefinitionSummary",
-}, smithy.ShapeTypeStructure, 10)
-var ExperimentDefinitionSummary_ApplicationId *smithy.Schema
-
-var ExperimentDefinitionSummary_Id *smithy.Schema
-
-var ExperimentDefinitionSummary_Name *smithy.Schema
-
-var ExperimentDefinitionSummary_Hypothesis *smithy.Schema
-
-var ExperimentDefinitionSummary_Status *smithy.Schema
-
-var ExperimentDefinitionSummary_ConfigurationProfileId *smithy.Schema
-
-var ExperimentDefinitionSummary_EnvironmentId *smithy.Schema
-
-var ExperimentDefinitionSummary_FlagKey *smithy.Schema
-
-var ExperimentDefinitionSummary_CreatedAt *smithy.Schema
-
-var ExperimentDefinitionSummary_UpdatedAt *smithy.Schema
-
-var ExperimentRunEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunEvent",
-}, smithy.ShapeTypeStructure, 7)
-var ExperimentRunEvent_Description *smithy.Schema
-
-var ExperimentRunEvent_AssociatedDeployment *smithy.Schema
-
-var ExperimentRunEvent_EventType *smithy.Schema
-
-var ExperimentRunEvent_OccurredAt *smithy.Schema
-
-var ExperimentRunEvent_TriggeredBy *smithy.Schema
-
-var ExperimentRunEvent_ExposurePercentage *smithy.Schema
-
-var ExperimentRunEvent_TreatmentOverrides *smithy.Schema
-
-var _ExperimentRunEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunEventList",
-}, smithy.ShapeTypeList, 1)
-var _ExperimentRunEventList_member *smithy.Schema
-
-var ExperimentRunEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunEventType",
-}, smithy.ShapeTypeEnum, 4)
-var ExperimentRunEventType_RUN_STARTED *smithy.Schema
-
-var ExperimentRunEventType_EXPOSURE_UPDATED *smithy.Schema
-
-var ExperimentRunEventType_OVERRIDES_UPDATED *smithy.Schema
-
-var ExperimentRunEventType_RUN_STOPPED *smithy.Schema
-
-var ExperimentRunResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunResult",
-}, smithy.ShapeTypeStructure, 3)
-var ExperimentRunResult_ExecutiveSummary *smithy.Schema
-
-var ExperimentRunResult_ReasonsToLaunch *smithy.Schema
-
-var ExperimentRunResult_ReasonsNotToLaunch *smithy.Schema
-
-var ExperimentRunStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ExperimentRunStatus_RUNNING *smithy.Schema
-
-var ExperimentRunStatus_DONE *smithy.Schema
-
-var ExperimentRunSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ExperimentRunSummary_ExperimentDefinitionId *smithy.Schema
-
-var ExperimentRunSummary_Run *smithy.Schema
-
-var ExperimentRunSummary_Description *smithy.Schema
-
-var ExperimentRunSummary_Status *smithy.Schema
-
-var ExperimentRunSummary_StartedAt *smithy.Schema
-
-var ExperimentRunSummary_UpdatedAt *smithy.Schema
-
-var ExperimentRunSummary_EndedAt *smithy.Schema
-
-var _ExperimentRunSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ExperimentRunSummaryList_member *smithy.Schema
-
-var _ExtensionAssociationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExtensionAssociationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ExtensionAssociationSummaries_member *smithy.Schema
-
-var ExtensionAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExtensionAssociationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ExtensionAssociationSummary_Id *smithy.Schema
-
-var ExtensionAssociationSummary_ExtensionArn *smithy.Schema
-
-var ExtensionAssociationSummary_ResourceArn *smithy.Schema
-
-var _ExtensionOrParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExtensionOrParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtensionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExtensionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ExtensionSummaries_member *smithy.Schema
-
-var ExtensionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExtensionSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ExtensionSummary_Id *smithy.Schema
-
-var ExtensionSummary_Name *smithy.Schema
-
-var ExtensionSummary_VersionNumber *smithy.Schema
-
-var ExtensionSummary_Arn *smithy.Schema
-
-var ExtensionSummary_Description *smithy.Schema
-
-var _FlagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "FlagKey",
-}, smithy.ShapeTypeString, 0)
-
-var FlagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "FlagValue",
-}, smithy.ShapeTypeStructure, 2)
-var FlagValue_Enabled *smithy.Schema
-
-var FlagValue_AttributeValues *smithy.Schema
-
-var _Float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Float",
-}, smithy.ShapeTypeFloat, 0)
-
-var _GrowthFactor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GrowthFactor",
-}, smithy.ShapeTypeFloat, 0)
-
-var GrowthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GrowthType",
-}, smithy.ShapeTypeEnum, 2)
-var GrowthType_LINEAR *smithy.Schema
-
-var GrowthType_EXPONENTIAL *smithy.Schema
-
-var HostedConfigurationVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "HostedConfigurationVersionSummary",
-}, smithy.ShapeTypeStructure, 7)
-var HostedConfigurationVersionSummary_ApplicationId *smithy.Schema
-
-var HostedConfigurationVersionSummary_ConfigurationProfileId *smithy.Schema
-
-var HostedConfigurationVersionSummary_VersionNumber *smithy.Schema
-
-var HostedConfigurationVersionSummary_Description *smithy.Schema
-
-var HostedConfigurationVersionSummary_ContentType *smithy.Schema
-
-var HostedConfigurationVersionSummary_VersionLabel *smithy.Schema
-
-var HostedConfigurationVersionSummary_KmsKeyArn *smithy.Schema
-
-var _HostedConfigurationVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "HostedConfigurationVersionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _HostedConfigurationVersionSummaryList_member *smithy.Schema
-
-var _Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Id",
-}, smithy.ShapeTypeString, 0)
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "InvalidConfigurationDetail",
-}, smithy.ShapeTypeStructure, 5)
-var InvalidConfigurationDetail_Constraint *smithy.Schema
-
-var InvalidConfigurationDetail_Location *smithy.Schema
-
-var InvalidConfigurationDetail_Reason *smithy.Schema
-
-var InvalidConfigurationDetail_Type *smithy.Schema
-
-var InvalidConfigurationDetail_Value *smithy.Schema
-
-var _InvalidConfigurationDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "InvalidConfigurationDetailList",
-}, smithy.ShapeTypeList, 1)
-var _InvalidConfigurationDetailList_member *smithy.Schema
-
-var _Iso8601DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Iso8601DateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _KmsKeyIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "KmsKeyIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyIdentifierOrEmpty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "KmsKeyIdentifierOrEmpty",
-}, smithy.ShapeTypeString, 0)
-
-var _LongName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "LongName",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MinutesBetween0And24Hours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "MinutesBetween0And24Hours",
-}, smithy.ShapeTypeInteger, 0)
-
-var Monitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Monitor",
-}, smithy.ShapeTypeStructure, 2)
-var Monitor_AlarmArn *smithy.Schema
-
-var Monitor_AlarmRoleArn *smithy.Schema
-
-var _MonitorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "MonitorList",
-}, smithy.ShapeTypeList, 1)
-var _MonitorList_member *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NameWithReservedAwsPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "NameWithReservedAwsPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NullablePercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "NullablePercentage",
-}, smithy.ShapeTypeFloat, 0)
-
-var _NumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "NumberList",
-}, smithy.ShapeTypeList, 1)
-var _NumberList_member *smithy.Schema
-
-var Parameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Parameter",
-}, smithy.ShapeTypeStructure, 3)
-var Parameter_Description *smithy.Schema
-
-var Parameter_Required *smithy.Schema
-
-var Parameter_Dynamic *smithy.Schema
-
-var _ParameterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ParameterMap",
-}, smithy.ShapeTypeMap, 2)
-var _ParameterMap_key *smithy.Schema
-
-var _ParameterMap_value *smithy.Schema
-
-var _ParameterValueMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ParameterValueMap",
-}, smithy.ShapeTypeMap, 2)
-var _ParameterValueMap_key *smithy.Schema
-
-var _ParameterValueMap_value *smithy.Schema
-
-var PayloadTooLargeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "PayloadTooLargeException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 413})
-var PayloadTooLargeException_Message *smithy.Schema
-
-var PayloadTooLargeException_Measure *smithy.Schema
-
-var PayloadTooLargeException_Limit *smithy.Schema
-
-var PayloadTooLargeException_Size *smithy.Schema
-
-var _Percentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Percentage",
-}, smithy.ShapeTypeFloat, 0)
-
-var _PositiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "PositiveInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QueryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "QueryName",
-}, smithy.ShapeTypeString, 0)
-
-var ReplicateTo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ReplicateTo",
-}, smithy.ShapeTypeEnum, 2)
-var ReplicateTo_NONE *smithy.Schema
-
-var ReplicateTo_SSM_DOCUMENT *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceName *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Rule",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _StringWithLengthBetween0And32768 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StringWithLengthBetween0And32768",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _StringWithLengthBetween1And2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StringWithLengthBetween1And2048",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And255 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StringWithLengthBetween1And255",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And64 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StringWithLengthBetween1And64",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Treatment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Treatment",
-}, smithy.ShapeTypeStructure, 4)
-var Treatment_Key *smithy.Schema
-
-var Treatment_Weight *smithy.Schema
-
-var Treatment_Description *smithy.Schema
-
-var Treatment_FlagValue *smithy.Schema
-
-var TreatmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TreatmentInput",
-}, smithy.ShapeTypeStructure, 3)
-var TreatmentInput_Weight *smithy.Schema
-
-var TreatmentInput_Description *smithy.Schema
-
-var TreatmentInput_FlagValue *smithy.Schema
-
-var _TreatmentInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TreatmentInputList",
-}, smithy.ShapeTypeList, 1)
-var _TreatmentInputList_member *smithy.Schema
-
-var _TreatmentKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TreatmentKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TreatmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TreatmentList",
-}, smithy.ShapeTypeList, 1)
-var _TreatmentList_member *smithy.Schema
-
-var _TreatmentOverrideMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TreatmentOverrideMap",
-}, smithy.ShapeTypeMap, 2)
-var _TreatmentOverrideMap_key *smithy.Schema
-
-var _TreatmentOverrideMap_value *smithy.Schema
-
-var TreatmentOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TreatmentOverrides",
-}, smithy.ShapeTypeUnion, 1)
-var TreatmentOverrides_Inline *smithy.Schema
-
-var TriggeredBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TriggeredBy",
-}, smithy.ShapeTypeEnum, 4)
-var TriggeredBy_USER *smithy.Schema
-
-var TriggeredBy_APPCONFIG *smithy.Schema
-
-var TriggeredBy_CLOUDWATCH_ALARM *smithy.Schema
-
-var TriggeredBy_INTERNAL_ERROR *smithy.Schema
-
-var _Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Uri",
-}, smithy.ShapeTypeString, 0)
-
-var Validator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Validator",
-}, smithy.ShapeTypeStructure, 2)
-var Validator_Type *smithy.Schema
-
-var Validator_Content *smithy.Schema
-
-var _ValidatorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ValidatorList",
-}, smithy.ShapeTypeList, 1)
-var _ValidatorList_member *smithy.Schema
-
-var ValidatorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ValidatorType",
-}, smithy.ShapeTypeEnum, 2)
-var ValidatorType_JSON_SCHEMA *smithy.Schema
-
-var ValidatorType_LAMBDA *smithy.Schema
-
-var _ValidatorTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ValidatorTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ValidatorTypeList_member *smithy.Schema
-
-var VendedMetricsSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "VendedMetricsSettings",
-}, smithy.ShapeTypeStructure, 1)
-var VendedMetricsSettings_Enabled *smithy.Schema
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var _VersionLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "VersionLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _Weight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Weight",
-}, smithy.ShapeTypeFloat, 0)
-
-var CreateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateApplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateApplicationRequest_Name *smithy.Schema
-
-var CreateApplicationRequest_Description *smithy.Schema
-
-var CreateApplicationRequest_Tags *smithy.Schema
-
-var CreateConfigurationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateConfigurationProfileRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateConfigurationProfileRequest_ApplicationId *smithy.Schema
-
-var CreateConfigurationProfileRequest_Name *smithy.Schema
-
-var CreateConfigurationProfileRequest_Description *smithy.Schema
-
-var CreateConfigurationProfileRequest_LocationUri *smithy.Schema
-
-var CreateConfigurationProfileRequest_RetrievalRoleArn *smithy.Schema
-
-var CreateConfigurationProfileRequest_Validators *smithy.Schema
-
-var CreateConfigurationProfileRequest_Tags *smithy.Schema
-
-var CreateConfigurationProfileRequest_Type *smithy.Schema
-
-var CreateConfigurationProfileRequest_KmsKeyIdentifier *smithy.Schema
-
-var ConfigurationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ConfigurationProfile",
-}, smithy.ShapeTypeStructure, 10)
-var ConfigurationProfile_ApplicationId *smithy.Schema
-
-var ConfigurationProfile_Id *smithy.Schema
-
-var ConfigurationProfile_Name *smithy.Schema
-
-var ConfigurationProfile_Description *smithy.Schema
-
-var ConfigurationProfile_LocationUri *smithy.Schema
-
-var ConfigurationProfile_RetrievalRoleArn *smithy.Schema
-
-var ConfigurationProfile_Validators *smithy.Schema
-
-var ConfigurationProfile_Type *smithy.Schema
-
-var ConfigurationProfile_KmsKeyArn *smithy.Schema
-
-var ConfigurationProfile_KmsKeyIdentifier *smithy.Schema
-
-var CreateDeploymentStrategyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateDeploymentStrategyRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateDeploymentStrategyRequest_Name *smithy.Schema
-
-var CreateDeploymentStrategyRequest_Description *smithy.Schema
-
-var CreateDeploymentStrategyRequest_DeploymentDurationInMinutes *smithy.Schema
-
-var CreateDeploymentStrategyRequest_FinalBakeTimeInMinutes *smithy.Schema
-
-var CreateDeploymentStrategyRequest_GrowthFactor *smithy.Schema
-
-var CreateDeploymentStrategyRequest_GrowthType *smithy.Schema
-
-var CreateDeploymentStrategyRequest_ReplicateTo *smithy.Schema
-
-var CreateDeploymentStrategyRequest_Tags *smithy.Schema
-
-var CreateEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateEnvironmentRequest_ApplicationId *smithy.Schema
-
-var CreateEnvironmentRequest_Name *smithy.Schema
-
-var CreateEnvironmentRequest_Description *smithy.Schema
-
-var CreateEnvironmentRequest_Monitors *smithy.Schema
-
-var CreateEnvironmentRequest_Tags *smithy.Schema
-
-var CreateExperimentDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateExperimentDefinitionRequest",
-}, smithy.ShapeTypeStructure, 12)
-var CreateExperimentDefinitionRequest_ApplicationIdentifier *smithy.Schema
-
-var CreateExperimentDefinitionRequest_Name *smithy.Schema
-
-var CreateExperimentDefinitionRequest_ConfigurationProfileIdentifier *smithy.Schema
-
-var CreateExperimentDefinitionRequest_EnvironmentIdentifier *smithy.Schema
-
-var CreateExperimentDefinitionRequest_FlagKey *smithy.Schema
-
-var CreateExperimentDefinitionRequest_Treatments *smithy.Schema
-
-var CreateExperimentDefinitionRequest_Control *smithy.Schema
-
-var CreateExperimentDefinitionRequest_AudienceRule *smithy.Schema
-
-var CreateExperimentDefinitionRequest_Hypothesis *smithy.Schema
-
-var CreateExperimentDefinitionRequest_AudienceDescription *smithy.Schema
-
-var CreateExperimentDefinitionRequest_LaunchCriteria *smithy.Schema
-
-var CreateExperimentDefinitionRequest_Tags *smithy.Schema
-
-var ExperimentDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentDefinition",
-}, smithy.ShapeTypeStructure, 16)
-var ExperimentDefinition_ApplicationId *smithy.Schema
-
-var ExperimentDefinition_Id *smithy.Schema
-
-var ExperimentDefinition_Name *smithy.Schema
-
-var ExperimentDefinition_Hypothesis *smithy.Schema
-
-var ExperimentDefinition_Status *smithy.Schema
-
-var ExperimentDefinition_ConfigurationProfileId *smithy.Schema
-
-var ExperimentDefinition_EnvironmentId *smithy.Schema
-
-var ExperimentDefinition_FlagKey *smithy.Schema
-
-var ExperimentDefinition_AudienceRule *smithy.Schema
-
-var ExperimentDefinition_AudienceDescription *smithy.Schema
-
-var ExperimentDefinition_LaunchCriteria *smithy.Schema
-
-var ExperimentDefinition_Treatments *smithy.Schema
-
-var ExperimentDefinition_Control *smithy.Schema
-
-var ExperimentDefinition_CreatedAt *smithy.Schema
-
-var ExperimentDefinition_UpdatedAt *smithy.Schema
-
-var ExperimentDefinition_KmsKeyIdentifier *smithy.Schema
-
-var CreateExtensionAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateExtensionAssociationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateExtensionAssociationRequest_ExtensionIdentifier *smithy.Schema
-
-var CreateExtensionAssociationRequest_ExtensionVersionNumber *smithy.Schema
-
-var CreateExtensionAssociationRequest_ResourceIdentifier *smithy.Schema
-
-var CreateExtensionAssociationRequest_Parameters *smithy.Schema
-
-var CreateExtensionAssociationRequest_Tags *smithy.Schema
-
-var ExtensionAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExtensionAssociation",
-}, smithy.ShapeTypeStructure, 6)
-var ExtensionAssociation_Id *smithy.Schema
-
-var ExtensionAssociation_ExtensionArn *smithy.Schema
-
-var ExtensionAssociation_ResourceArn *smithy.Schema
-
-var ExtensionAssociation_Arn *smithy.Schema
-
-var ExtensionAssociation_Parameters *smithy.Schema
-
-var ExtensionAssociation_ExtensionVersionNumber *smithy.Schema
-
-var CreateExtensionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateExtensionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateExtensionRequest_Name *smithy.Schema
-
-var CreateExtensionRequest_Description *smithy.Schema
-
-var CreateExtensionRequest_Actions *smithy.Schema
-
-var CreateExtensionRequest_Parameters *smithy.Schema
-
-var CreateExtensionRequest_Tags *smithy.Schema
-
-var CreateExtensionRequest_LatestVersionNumber *smithy.Schema
-
-var Extension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Extension",
-}, smithy.ShapeTypeStructure, 7)
-var Extension_Id *smithy.Schema
-
-var Extension_Name *smithy.Schema
-
-var Extension_VersionNumber *smithy.Schema
-
-var Extension_Arn *smithy.Schema
-
-var Extension_Description *smithy.Schema
-
-var Extension_Actions *smithy.Schema
-
-var Extension_Parameters *smithy.Schema
-
-var CreateHostedConfigurationVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "CreateHostedConfigurationVersionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateHostedConfigurationVersionRequest_ApplicationId *smithy.Schema
-
-var CreateHostedConfigurationVersionRequest_ConfigurationProfileId *smithy.Schema
-
-var CreateHostedConfigurationVersionRequest_Description *smithy.Schema
-
-var CreateHostedConfigurationVersionRequest_Content *smithy.Schema
-
-var CreateHostedConfigurationVersionRequest_ContentType *smithy.Schema
-
-var CreateHostedConfigurationVersionRequest_LatestVersionNumber *smithy.Schema
-
-var CreateHostedConfigurationVersionRequest_VersionLabel *smithy.Schema
-
-var HostedConfigurationVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "HostedConfigurationVersion",
-}, smithy.ShapeTypeStructure, 8)
-var HostedConfigurationVersion_ApplicationId *smithy.Schema
-
-var HostedConfigurationVersion_ConfigurationProfileId *smithy.Schema
-
-var HostedConfigurationVersion_VersionNumber *smithy.Schema
-
-var HostedConfigurationVersion_Description *smithy.Schema
-
-var HostedConfigurationVersion_Content *smithy.Schema
-
-var HostedConfigurationVersion_ContentType *smithy.Schema
-
-var HostedConfigurationVersion_VersionLabel *smithy.Schema
-
-var HostedConfigurationVersion_KmsKeyArn *smithy.Schema
-
-var DeleteApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApplicationRequest_ApplicationId *smithy.Schema
-
-var DeleteConfigurationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteConfigurationProfileRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteConfigurationProfileRequest_ApplicationId *smithy.Schema
-
-var DeleteConfigurationProfileRequest_ConfigurationProfileId *smithy.Schema
-
-var DeleteConfigurationProfileRequest_DeletionProtectionCheck *smithy.Schema
-
-var DeleteDeploymentStrategyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteDeploymentStrategyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDeploymentStrategyRequest_DeploymentStrategyId *smithy.Schema
-
-var DeleteEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteEnvironmentRequest_EnvironmentId *smithy.Schema
-
-var DeleteEnvironmentRequest_ApplicationId *smithy.Schema
-
-var DeleteEnvironmentRequest_DeletionProtectionCheck *smithy.Schema
-
-var DeleteExperimentDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteExperimentDefinitionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteExperimentDefinitionRequest_ApplicationIdentifier *smithy.Schema
-
-var DeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var DeleteExperimentDefinitionRequest_DeleteType *smithy.Schema
-
-var DeleteExtensionAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteExtensionAssociationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExtensionAssociationRequest_ExtensionAssociationId *smithy.Schema
-
-var DeleteExtensionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteExtensionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteExtensionRequest_ExtensionIdentifier *smithy.Schema
-
-var DeleteExtensionRequest_VersionNumber *smithy.Schema
-
-var DeleteHostedConfigurationVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeleteHostedConfigurationVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteHostedConfigurationVersionRequest_ApplicationId *smithy.Schema
-
-var DeleteHostedConfigurationVersionRequest_ConfigurationProfileId *smithy.Schema
-
-var DeleteHostedConfigurationVersionRequest_VersionNumber *smithy.Schema
-
-var AccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "AccountSettings",
-}, smithy.ShapeTypeStructure, 2)
-var AccountSettings_DeletionProtection *smithy.Schema
-
-var AccountSettings_VendedMetrics *smithy.Schema
-
-var GetApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApplicationRequest_ApplicationId *smithy.Schema
-
-var GetConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetConfigurationRequest_Application *smithy.Schema
-
-var GetConfigurationRequest_Environment *smithy.Schema
-
-var GetConfigurationRequest_Configuration *smithy.Schema
-
-var GetConfigurationRequest_ClientId *smithy.Schema
-
-var GetConfigurationRequest_ClientConfigurationVersion *smithy.Schema
-
-var Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Configuration",
-}, smithy.ShapeTypeStructure, 3)
-var Configuration_Content *smithy.Schema
-
-var Configuration_ConfigurationVersion *smithy.Schema
-
-var Configuration_ContentType *smithy.Schema
-
-var GetConfigurationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetConfigurationProfileRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetConfigurationProfileRequest_ApplicationId *smithy.Schema
-
-var GetConfigurationProfileRequest_ConfigurationProfileId *smithy.Schema
-
-var GetDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetDeploymentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDeploymentRequest_ApplicationId *smithy.Schema
-
-var GetDeploymentRequest_EnvironmentId *smithy.Schema
-
-var GetDeploymentRequest_DeploymentNumber *smithy.Schema
-
-var Deployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Deployment",
-}, smithy.ShapeTypeStructure, 22)
-var Deployment_ApplicationId *smithy.Schema
-
-var Deployment_EnvironmentId *smithy.Schema
-
-var Deployment_DeploymentStrategyId *smithy.Schema
-
-var Deployment_ConfigurationProfileId *smithy.Schema
-
-var Deployment_DeploymentNumber *smithy.Schema
-
-var Deployment_ConfigurationName *smithy.Schema
-
-var Deployment_ConfigurationLocationUri *smithy.Schema
-
-var Deployment_ConfigurationVersion *smithy.Schema
-
-var Deployment_Description *smithy.Schema
-
-var Deployment_DeploymentDurationInMinutes *smithy.Schema
-
-var Deployment_GrowthType *smithy.Schema
-
-var Deployment_GrowthFactor *smithy.Schema
-
-var Deployment_FinalBakeTimeInMinutes *smithy.Schema
-
-var Deployment_State *smithy.Schema
-
-var Deployment_EventLog *smithy.Schema
-
-var Deployment_PercentageComplete *smithy.Schema
-
-var Deployment_StartedAt *smithy.Schema
-
-var Deployment_CompletedAt *smithy.Schema
-
-var Deployment_AppliedExtensions *smithy.Schema
-
-var Deployment_KmsKeyArn *smithy.Schema
-
-var Deployment_KmsKeyIdentifier *smithy.Schema
-
-var Deployment_VersionLabel *smithy.Schema
-
-var GetDeploymentStrategyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetDeploymentStrategyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentStrategyRequest_DeploymentStrategyId *smithy.Schema
-
-var GetEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetEnvironmentRequest_ApplicationId *smithy.Schema
-
-var GetEnvironmentRequest_EnvironmentId *smithy.Schema
-
-var GetExperimentDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExperimentDefinitionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetExperimentDefinitionRequest_ApplicationIdentifier *smithy.Schema
-
-var GetExperimentDefinitionRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var GetExperimentRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExperimentRunRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetExperimentRunRequest_ApplicationIdentifier *smithy.Schema
-
-var GetExperimentRunRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var GetExperimentRunRequest_Run *smithy.Schema
-
-var ExperimentRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRun",
-}, smithy.ShapeTypeStructure, 12)
-var ExperimentRun_ApplicationId *smithy.Schema
-
-var ExperimentRun_ExperimentDefinitionId *smithy.Schema
-
-var ExperimentRun_Run *smithy.Schema
-
-var ExperimentRun_Description *smithy.Schema
-
-var ExperimentRun_Status *smithy.Schema
-
-var ExperimentRun_ExposurePercentage *smithy.Schema
-
-var ExperimentRun_TreatmentOverrides *smithy.Schema
-
-var ExperimentRun_Result *smithy.Schema
-
-var ExperimentRun_StartedAt *smithy.Schema
-
-var ExperimentRun_UpdatedAt *smithy.Schema
-
-var ExperimentRun_EndedAt *smithy.Schema
-
-var ExperimentRun_ExperimentDefinitionSnapshot *smithy.Schema
-
-var GetExtensionAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExtensionAssociationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetExtensionAssociationRequest_ExtensionAssociationId *smithy.Schema
-
-var GetExtensionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetExtensionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetExtensionRequest_ExtensionIdentifier *smithy.Schema
-
-var GetExtensionRequest_VersionNumber *smithy.Schema
-
-var GetHostedConfigurationVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "GetHostedConfigurationVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetHostedConfigurationVersionRequest_ApplicationId *smithy.Schema
-
-var GetHostedConfigurationVersionRequest_ConfigurationProfileId *smithy.Schema
-
-var GetHostedConfigurationVersionRequest_VersionNumber *smithy.Schema
-
-var ListApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListApplicationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationsRequest_MaxResults *smithy.Schema
-
-var ListApplicationsRequest_NextToken *smithy.Schema
-
-var Applications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Applications",
-}, smithy.ShapeTypeStructure, 2)
-var Applications_Items *smithy.Schema
-
-var Applications_NextToken *smithy.Schema
-
-var ListConfigurationProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListConfigurationProfilesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListConfigurationProfilesRequest_ApplicationId *smithy.Schema
-
-var ListConfigurationProfilesRequest_MaxResults *smithy.Schema
-
-var ListConfigurationProfilesRequest_NextToken *smithy.Schema
-
-var ListConfigurationProfilesRequest_Type *smithy.Schema
-
-var ConfigurationProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ConfigurationProfiles",
-}, smithy.ShapeTypeStructure, 2)
-var ConfigurationProfiles_Items *smithy.Schema
-
-var ConfigurationProfiles_NextToken *smithy.Schema
-
-var ListDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListDeploymentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDeploymentsRequest_ApplicationId *smithy.Schema
-
-var ListDeploymentsRequest_EnvironmentId *smithy.Schema
-
-var ListDeploymentsRequest_MaxResults *smithy.Schema
-
-var ListDeploymentsRequest_NextToken *smithy.Schema
-
-var Deployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Deployments",
-}, smithy.ShapeTypeStructure, 2)
-var Deployments_Items *smithy.Schema
-
-var Deployments_NextToken *smithy.Schema
-
-var ListDeploymentStrategiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListDeploymentStrategiesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeploymentStrategiesRequest_MaxResults *smithy.Schema
-
-var ListDeploymentStrategiesRequest_NextToken *smithy.Schema
-
-var DeploymentStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "DeploymentStrategies",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentStrategies_Items *smithy.Schema
-
-var DeploymentStrategies_NextToken *smithy.Schema
-
-var ListEnvironmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListEnvironmentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEnvironmentsRequest_ApplicationId *smithy.Schema
-
-var ListEnvironmentsRequest_MaxResults *smithy.Schema
-
-var ListEnvironmentsRequest_NextToken *smithy.Schema
-
-var Environments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Environments",
-}, smithy.ShapeTypeStructure, 2)
-var Environments_Items *smithy.Schema
-
-var Environments_NextToken *smithy.Schema
-
-var ListExperimentDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExperimentDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListExperimentDefinitionsRequest_ApplicationIdentifier *smithy.Schema
-
-var ListExperimentDefinitionsRequest_ConfigurationProfileIdentifier *smithy.Schema
-
-var ListExperimentDefinitionsRequest_EnvironmentIdentifier *smithy.Schema
-
-var ListExperimentDefinitionsRequest_Status *smithy.Schema
-
-var ListExperimentDefinitionsRequest_MaxResults *smithy.Schema
-
-var ListExperimentDefinitionsRequest_NextToken *smithy.Schema
-
-var ExperimentDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentDefinitions",
-}, smithy.ShapeTypeStructure, 2)
-var ExperimentDefinitions_Items *smithy.Schema
-
-var ExperimentDefinitions_NextToken *smithy.Schema
-
-var ListExperimentRunEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExperimentRunEventsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListExperimentRunEventsRequest_ApplicationIdentifier *smithy.Schema
-
-var ListExperimentRunEventsRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var ListExperimentRunEventsRequest_Run *smithy.Schema
-
-var ListExperimentRunEventsRequest_MaxResults *smithy.Schema
-
-var ListExperimentRunEventsRequest_NextToken *smithy.Schema
-
-var ExperimentRunEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRunEvents",
-}, smithy.ShapeTypeStructure, 2)
-var ExperimentRunEvents_Items *smithy.Schema
-
-var ExperimentRunEvents_NextToken *smithy.Schema
-
-var ListExperimentRunsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExperimentRunsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListExperimentRunsRequest_ApplicationIdentifier *smithy.Schema
-
-var ListExperimentRunsRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var ListExperimentRunsRequest_MaxResults *smithy.Schema
-
-var ListExperimentRunsRequest_NextToken *smithy.Schema
-
-var ListExperimentRunsRequest_Status *smithy.Schema
-
-var ExperimentRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExperimentRuns",
-}, smithy.ShapeTypeStructure, 2)
-var ExperimentRuns_Items *smithy.Schema
-
-var ExperimentRuns_NextToken *smithy.Schema
-
-var ListExtensionAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExtensionAssociationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListExtensionAssociationsRequest_ResourceIdentifier *smithy.Schema
-
-var ListExtensionAssociationsRequest_ExtensionIdentifier *smithy.Schema
-
-var ListExtensionAssociationsRequest_ExtensionVersionNumber *smithy.Schema
-
-var ListExtensionAssociationsRequest_MaxResults *smithy.Schema
-
-var ListExtensionAssociationsRequest_NextToken *smithy.Schema
-
-var ExtensionAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ExtensionAssociations",
-}, smithy.ShapeTypeStructure, 2)
-var ExtensionAssociations_Items *smithy.Schema
-
-var ExtensionAssociations_NextToken *smithy.Schema
-
-var ListExtensionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListExtensionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExtensionsRequest_MaxResults *smithy.Schema
-
-var ListExtensionsRequest_NextToken *smithy.Schema
-
-var ListExtensionsRequest_Name *smithy.Schema
-
-var Extensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "Extensions",
-}, smithy.ShapeTypeStructure, 2)
-var Extensions_Items *smithy.Schema
-
-var Extensions_NextToken *smithy.Schema
-
-var ListHostedConfigurationVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListHostedConfigurationVersionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListHostedConfigurationVersionsRequest_ApplicationId *smithy.Schema
-
-var ListHostedConfigurationVersionsRequest_ConfigurationProfileId *smithy.Schema
-
-var ListHostedConfigurationVersionsRequest_MaxResults *smithy.Schema
-
-var ListHostedConfigurationVersionsRequest_NextToken *smithy.Schema
-
-var ListHostedConfigurationVersionsRequest_VersionLabel *smithy.Schema
-
-var HostedConfigurationVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "HostedConfigurationVersions",
-}, smithy.ShapeTypeStructure, 2)
-var HostedConfigurationVersions_Items *smithy.Schema
-
-var HostedConfigurationVersions_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ResourceTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ResourceTags",
-}, smithy.ShapeTypeStructure, 1)
-var ResourceTags_Tags *smithy.Schema
-
-var StartDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StartDeploymentRequest",
-}, smithy.ShapeTypeStructure, 10)
-var StartDeploymentRequest_ApplicationId *smithy.Schema
-
-var StartDeploymentRequest_EnvironmentId *smithy.Schema
-
-var StartDeploymentRequest_DeploymentStrategyId *smithy.Schema
-
-var StartDeploymentRequest_ConfigurationProfileId *smithy.Schema
-
-var StartDeploymentRequest_ConfigurationVersion *smithy.Schema
-
-var StartDeploymentRequest_Description *smithy.Schema
-
-var StartDeploymentRequest_Tags *smithy.Schema
-
-var StartDeploymentRequest_KmsKeyIdentifier *smithy.Schema
-
-var StartDeploymentRequest_DynamicExtensionParameters *smithy.Schema
-
-var StartDeploymentRequest_LatestDeploymentNumber *smithy.Schema
-
-var StartExperimentRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StartExperimentRunRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartExperimentRunRequest_ApplicationIdentifier *smithy.Schema
-
-var StartExperimentRunRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var StartExperimentRunRequest_Description *smithy.Schema
-
-var StartExperimentRunRequest_ExposurePercentage *smithy.Schema
-
-var StartExperimentRunRequest_TreatmentOverrides *smithy.Schema
-
-var StartExperimentRunRequest_Tags *smithy.Schema
-
-var StartExperimentRunRequest_DeploymentParameters *smithy.Schema
-
-var StopDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StopDeploymentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StopDeploymentRequest_ApplicationId *smithy.Schema
-
-var StopDeploymentRequest_EnvironmentId *smithy.Schema
-
-var StopDeploymentRequest_DeploymentNumber *smithy.Schema
-
-var StopDeploymentRequest_AllowRevert *smithy.Schema
-
-var StopExperimentRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "StopExperimentRunRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StopExperimentRunRequest_ApplicationIdentifier *smithy.Schema
-
-var StopExperimentRunRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var StopExperimentRunRequest_Run *smithy.Schema
-
-var StopExperimentRunRequest_Result *smithy.Schema
-
-var StopExperimentRunRequest_DeploymentParameters *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateAccountSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAccountSettingsRequest_DeletionProtection *smithy.Schema
-
-var UpdateAccountSettingsRequest_VendedMetrics *smithy.Schema
-
-var UpdateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateApplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateApplicationRequest_ApplicationId *smithy.Schema
-
-var UpdateApplicationRequest_Name *smithy.Schema
-
-var UpdateApplicationRequest_Description *smithy.Schema
-
-var UpdateConfigurationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateConfigurationProfileRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateConfigurationProfileRequest_ApplicationId *smithy.Schema
-
-var UpdateConfigurationProfileRequest_ConfigurationProfileId *smithy.Schema
-
-var UpdateConfigurationProfileRequest_Name *smithy.Schema
-
-var UpdateConfigurationProfileRequest_Description *smithy.Schema
-
-var UpdateConfigurationProfileRequest_RetrievalRoleArn *smithy.Schema
-
-var UpdateConfigurationProfileRequest_Validators *smithy.Schema
-
-var UpdateConfigurationProfileRequest_KmsKeyIdentifier *smithy.Schema
-
-var UpdateDeploymentStrategyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateDeploymentStrategyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateDeploymentStrategyRequest_DeploymentStrategyId *smithy.Schema
-
-var UpdateDeploymentStrategyRequest_Description *smithy.Schema
-
-var UpdateDeploymentStrategyRequest_DeploymentDurationInMinutes *smithy.Schema
-
-var UpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes *smithy.Schema
-
-var UpdateDeploymentStrategyRequest_GrowthFactor *smithy.Schema
-
-var UpdateDeploymentStrategyRequest_GrowthType *smithy.Schema
-
-var UpdateEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateEnvironmentRequest_ApplicationId *smithy.Schema
-
-var UpdateEnvironmentRequest_EnvironmentId *smithy.Schema
-
-var UpdateEnvironmentRequest_Name *smithy.Schema
-
-var UpdateEnvironmentRequest_Description *smithy.Schema
-
-var UpdateEnvironmentRequest_Monitors *smithy.Schema
-
-var UpdateExperimentDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExperimentDefinitionRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateExperimentDefinitionRequest_ApplicationIdentifier *smithy.Schema
-
-var UpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var UpdateExperimentDefinitionRequest_Treatments *smithy.Schema
-
-var UpdateExperimentDefinitionRequest_Control *smithy.Schema
-
-var UpdateExperimentDefinitionRequest_Hypothesis *smithy.Schema
-
-var UpdateExperimentDefinitionRequest_AudienceRule *smithy.Schema
-
-var UpdateExperimentDefinitionRequest_AudienceDescription *smithy.Schema
-
-var UpdateExperimentDefinitionRequest_LaunchCriteria *smithy.Schema
-
-var UpdateExperimentRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExperimentRunRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateExperimentRunRequest_ApplicationIdentifier *smithy.Schema
-
-var UpdateExperimentRunRequest_ExperimentDefinitionIdentifier *smithy.Schema
-
-var UpdateExperimentRunRequest_Run *smithy.Schema
-
-var UpdateExperimentRunRequest_Description *smithy.Schema
-
-var UpdateExperimentRunRequest_ExposurePercentage *smithy.Schema
-
-var UpdateExperimentRunRequest_TreatmentOverrides *smithy.Schema
-
-var UpdateExperimentRunRequest_DeploymentParameters *smithy.Schema
-
-var UpdateExtensionAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExtensionAssociationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateExtensionAssociationRequest_ExtensionAssociationId *smithy.Schema
-
-var UpdateExtensionAssociationRequest_Parameters *smithy.Schema
-
-var UpdateExtensionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "UpdateExtensionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateExtensionRequest_ExtensionIdentifier *smithy.Schema
-
-var UpdateExtensionRequest_Description *smithy.Schema
-
-var UpdateExtensionRequest_Actions *smithy.Schema
-
-var UpdateExtensionRequest_Parameters *smithy.Schema
-
-var UpdateExtensionRequest_VersionNumber *smithy.Schema
-
-var ValidateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfig",
-	Name:      "ValidateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ValidateConfigurationRequest_ApplicationId *smithy.Schema
-
-var ValidateConfigurationRequest_ConfigurationProfileId *smithy.Schema
-
-var ValidateConfigurationRequest_ConfigurationVersion *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Action_Name = Action.AddMember("Name", _Name)
-
-	Action_Description = Action.AddMember("Description", _Description)
-
-	Action_Uri = Action.AddMember("Uri", _Uri)
-
-	Action_RoleArn = Action.AddMember("RoleArn", _Arn)
-
-	ActionInvocation_ExtensionIdentifier = ActionInvocation.AddMember("ExtensionIdentifier", _Identifier)
-
-	ActionInvocation_ActionName = ActionInvocation.AddMember("ActionName", _Name)
-
-	ActionInvocation_Uri = ActionInvocation.AddMember("Uri", _Uri)
-
-	ActionInvocation_RoleArn = ActionInvocation.AddMember("RoleArn", _Arn)
-
-	ActionInvocation_ErrorMessage = ActionInvocation.AddMember("ErrorMessage", _String)
-
-	ActionInvocation_ErrorCode = ActionInvocation.AddMember("ErrorCode", _String)
-
-	ActionInvocation_InvocationId = ActionInvocation.AddMember("InvocationId", _Id)
-
-	_ActionInvocations_member = _ActionInvocations.AddMember("member", ActionInvocation)
-
-	_ActionList_member = _ActionList.AddMember("member", Action)
-
-	ActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION = ActionPoint.AddMember("PRE_CREATE_HOSTED_CONFIGURATION_VERSION", smithyprelude.Unit)
-
-	ActionPoint_PRE_START_DEPLOYMENT = ActionPoint.AddMember("PRE_START_DEPLOYMENT", smithyprelude.Unit)
-
-	ActionPoint_AT_DEPLOYMENT_TICK = ActionPoint.AddMember("AT_DEPLOYMENT_TICK", smithyprelude.Unit)
-
-	ActionPoint_ON_DEPLOYMENT_START = ActionPoint.AddMember("ON_DEPLOYMENT_START", smithyprelude.Unit)
-
-	ActionPoint_ON_DEPLOYMENT_STEP = ActionPoint.AddMember("ON_DEPLOYMENT_STEP", smithyprelude.Unit)
-
-	ActionPoint_ON_DEPLOYMENT_BAKING = ActionPoint.AddMember("ON_DEPLOYMENT_BAKING", smithyprelude.Unit)
-
-	ActionPoint_ON_DEPLOYMENT_COMPLETE = ActionPoint.AddMember("ON_DEPLOYMENT_COMPLETE", smithyprelude.Unit)
-
-	ActionPoint_ON_DEPLOYMENT_ROLLED_BACK = ActionPoint.AddMember("ON_DEPLOYMENT_ROLLED_BACK", smithyprelude.Unit)
-
-	_ActionsMap_key = _ActionsMap.AddMember("key", ActionPoint)
-
-	_ActionsMap_value = _ActionsMap.AddMember("value", _ActionList)
-
-	Application_Id = Application.AddMember("Id", _Id)
-
-	Application_Name = Application.AddMember("Name", _Name)
-
-	Application_Description = Application.AddMember("Description", _Description)
-
-	_ApplicationList_member = _ApplicationList.AddMember("member", Application)
-
-	_ParameterValueMap_key = _ParameterValueMap.AddMember("key", _ExtensionOrParameterName)
-
-	_ParameterValueMap_value = _ParameterValueMap.AddMember("value", _StringWithLengthBetween1And2048)
-
-	AppliedExtension_ExtensionId = AppliedExtension.AddMember("ExtensionId", _Id)
-
-	AppliedExtension_ExtensionAssociationId = AppliedExtension.AddMember("ExtensionAssociationId", _Id)
-
-	AppliedExtension_VersionNumber = AppliedExtension.AddMember("VersionNumber", _Integer)
-
-	AppliedExtension_Parameters = AppliedExtension.AddMember("Parameters", _ParameterValueMap)
-
-	_AppliedExtensions_member = _AppliedExtensions.AddMember("member", AppliedExtension)
-
-	_StringList_member = _StringList.AddMember("member", _AttributeString)
-
-	_NumberList_member = _NumberList.AddMember("member", _Double)
-
-	AttributeValue_StringValue = AttributeValue.AddMember("StringValue", _AttributeString)
-
-	AttributeValue_NumberValue = AttributeValue.AddMember("NumberValue", _Double)
-
-	AttributeValue_BooleanValue = AttributeValue.AddMember("BooleanValue", _Boolean)
-
-	AttributeValue_StringArray = AttributeValue.AddMember("StringArray", _StringList)
-
-	AttributeValue_NumberArray = AttributeValue.AddMember("NumberArray", _NumberList)
-
-	_AttributeValueMap_key = _AttributeValueMap.AddMember("key", _AttributeKey)
-
-	_AttributeValueMap_value = _AttributeValueMap.AddMember("value", AttributeValue)
-
-	InvalidConfigurationDetail_Constraint = InvalidConfigurationDetail.AddMember("Constraint", _String)
-
-	InvalidConfigurationDetail_Location = InvalidConfigurationDetail.AddMember("Location", _String)
-
-	InvalidConfigurationDetail_Reason = InvalidConfigurationDetail.AddMember("Reason", _String)
-
-	InvalidConfigurationDetail_Type = InvalidConfigurationDetail.AddMember("Type", _String)
-
-	InvalidConfigurationDetail_Value = InvalidConfigurationDetail.AddMember("Value", _String)
-
-	_InvalidConfigurationDetailList_member = _InvalidConfigurationDetailList.AddMember("member", InvalidConfigurationDetail)
-
-	BadRequestDetails_InvalidConfiguration = BadRequestDetails.AddMember("InvalidConfiguration", _InvalidConfigurationDetailList)
-
-	BadRequestReason_INVALID_CONFIGURATION = BadRequestReason.AddMember("INVALID_CONFIGURATION", smithyprelude.Unit)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
-
-	BadRequestException_Reason = BadRequestException.AddMember("Reason", BadRequestReason)
-
-	BadRequestException_Details = BadRequestException.AddMember("Details", BadRequestDetails)
-
-	BytesMeasure_KILOBYTES = BytesMeasure.AddMember("KILOBYTES", smithyprelude.Unit)
-
-	ValidatorType_JSON_SCHEMA = ValidatorType.AddMember("JSON_SCHEMA", smithyprelude.Unit)
-
-	ValidatorType_LAMBDA = ValidatorType.AddMember("LAMBDA", smithyprelude.Unit)
-
-	_ValidatorTypeList_member = _ValidatorTypeList.AddMember("member", ValidatorType)
-
-	ConfigurationProfileSummary_ApplicationId = ConfigurationProfileSummary.AddMember("ApplicationId", _Id)
-
-	ConfigurationProfileSummary_Id = ConfigurationProfileSummary.AddMember("Id", _Id)
-
-	ConfigurationProfileSummary_Name = ConfigurationProfileSummary.AddMember("Name", _LongName)
-
-	ConfigurationProfileSummary_LocationUri = ConfigurationProfileSummary.AddMember("LocationUri", _Uri)
-
-	ConfigurationProfileSummary_ValidatorTypes = ConfigurationProfileSummary.AddMember("ValidatorTypes", _ValidatorTypeList)
-
-	ConfigurationProfileSummary_Type = ConfigurationProfileSummary.AddMember("Type", _ConfigurationProfileType)
-
-	_ConfigurationProfileSummaryList_member = _ConfigurationProfileSummaryList.AddMember("member", ConfigurationProfileSummary)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	DeleteType_ARCHIVE = DeleteType.AddMember("ARCHIVE", smithyprelude.Unit)
-
-	DeleteType_DESTROY = DeleteType.AddMember("DESTROY", smithyprelude.Unit)
-
-	DeletionProtectionCheck_ACCOUNT_DEFAULT = DeletionProtectionCheck.AddMember("ACCOUNT_DEFAULT", smithyprelude.Unit)
-
-	DeletionProtectionCheck_APPLY = DeletionProtectionCheck.AddMember("APPLY", smithyprelude.Unit)
-
-	DeletionProtectionCheck_BYPASS = DeletionProtectionCheck.AddMember("BYPASS", smithyprelude.Unit)
-
-	DeletionProtectionSettings_Enabled = DeletionProtectionSettings.AddMember("Enabled", _Boolean)
-
-	DeletionProtectionSettings_ProtectionPeriodInMinutes = DeletionProtectionSettings.AddMember("ProtectionPeriodInMinutes", _DeletionProtectionDuration)
-
-	DeploymentEventType_PERCENTAGE_UPDATED = DeploymentEventType.AddMember("PERCENTAGE_UPDATED", smithyprelude.Unit)
-
-	DeploymentEventType_ROLLBACK_STARTED = DeploymentEventType.AddMember("ROLLBACK_STARTED", smithyprelude.Unit)
-
-	DeploymentEventType_ROLLBACK_COMPLETED = DeploymentEventType.AddMember("ROLLBACK_COMPLETED", smithyprelude.Unit)
-
-	DeploymentEventType_BAKE_TIME_STARTED = DeploymentEventType.AddMember("BAKE_TIME_STARTED", smithyprelude.Unit)
-
-	DeploymentEventType_DEPLOYMENT_STARTED = DeploymentEventType.AddMember("DEPLOYMENT_STARTED", smithyprelude.Unit)
-
-	DeploymentEventType_DEPLOYMENT_COMPLETED = DeploymentEventType.AddMember("DEPLOYMENT_COMPLETED", smithyprelude.Unit)
-
-	DeploymentEventType_REVERT_COMPLETED = DeploymentEventType.AddMember("REVERT_COMPLETED", smithyprelude.Unit)
-
-	TriggeredBy_USER = TriggeredBy.AddMember("USER", smithyprelude.Unit)
-
-	TriggeredBy_APPCONFIG = TriggeredBy.AddMember("APPCONFIG", smithyprelude.Unit)
-
-	TriggeredBy_CLOUDWATCH_ALARM = TriggeredBy.AddMember("CLOUDWATCH_ALARM", smithyprelude.Unit)
-
-	TriggeredBy_INTERNAL_ERROR = TriggeredBy.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	DeploymentEvent_EventType = DeploymentEvent.AddMember("EventType", DeploymentEventType)
-
-	DeploymentEvent_TriggeredBy = DeploymentEvent.AddMember("TriggeredBy", TriggeredBy)
-
-	DeploymentEvent_Description = DeploymentEvent.AddMember("Description", _Description)
-
-	DeploymentEvent_ActionInvocations = DeploymentEvent.AddMember("ActionInvocations", _ActionInvocations)
-
-	DeploymentEvent_OccurredAt = DeploymentEvent.AddMember("OccurredAt", _Iso8601DateTime)
-
-	_DeploymentEvents_member = _DeploymentEvents.AddMember("member", DeploymentEvent)
-
-	GrowthType_LINEAR = GrowthType.AddMember("LINEAR", smithyprelude.Unit)
-
-	GrowthType_EXPONENTIAL = GrowthType.AddMember("EXPONENTIAL", smithyprelude.Unit)
-
-	DeploymentState_BAKING = DeploymentState.AddMember("BAKING", smithyprelude.Unit)
-
-	DeploymentState_VALIDATING = DeploymentState.AddMember("VALIDATING", smithyprelude.Unit)
-
-	DeploymentState_DEPLOYING = DeploymentState.AddMember("DEPLOYING", smithyprelude.Unit)
-
-	DeploymentState_COMPLETE = DeploymentState.AddMember("COMPLETE", smithyprelude.Unit)
-
-	DeploymentState_ROLLING_BACK = DeploymentState.AddMember("ROLLING_BACK", smithyprelude.Unit)
-
-	DeploymentState_ROLLED_BACK = DeploymentState.AddMember("ROLLED_BACK", smithyprelude.Unit)
-
-	DeploymentState_REVERTED = DeploymentState.AddMember("REVERTED", smithyprelude.Unit)
-
-	DeploymentType_USER = DeploymentType.AddMember("USER", smithyprelude.Unit)
-
-	DeploymentType_MANAGED = DeploymentType.AddMember("MANAGED", smithyprelude.Unit)
-
-	DeploymentSummary_DeploymentNumber = DeploymentSummary.AddMember("DeploymentNumber", _Integer)
-
-	DeploymentSummary_ConfigurationProfileId = DeploymentSummary.AddMember("ConfigurationProfileId", _Id)
-
-	DeploymentSummary_ConfigurationName = DeploymentSummary.AddMember("ConfigurationName", _Name)
-
-	DeploymentSummary_ConfigurationVersion = DeploymentSummary.AddMember("ConfigurationVersion", _Version)
-
-	DeploymentSummary_DeploymentDurationInMinutes = DeploymentSummary.AddMember("DeploymentDurationInMinutes", _MinutesBetween0And24Hours)
-
-	DeploymentSummary_GrowthType = DeploymentSummary.AddMember("GrowthType", GrowthType)
-
-	DeploymentSummary_GrowthFactor = DeploymentSummary.AddMember("GrowthFactor", _Percentage)
-
-	DeploymentSummary_FinalBakeTimeInMinutes = DeploymentSummary.AddMember("FinalBakeTimeInMinutes", _MinutesBetween0And24Hours)
-
-	DeploymentSummary_State = DeploymentSummary.AddMember("State", DeploymentState)
-
-	DeploymentSummary_PercentageComplete = DeploymentSummary.AddMember("PercentageComplete", _Percentage)
-
-	DeploymentSummary_StartedAt = DeploymentSummary.AddMember("StartedAt", _Iso8601DateTime)
-
-	DeploymentSummary_CompletedAt = DeploymentSummary.AddMember("CompletedAt", _Iso8601DateTime)
-
-	DeploymentSummary_VersionLabel = DeploymentSummary.AddMember("VersionLabel", _VersionLabel)
-
-	DeploymentSummary_Type = DeploymentSummary.AddMember("Type", DeploymentType)
-
-	_DeploymentList_member = _DeploymentList.AddMember("member", DeploymentSummary)
-
-	_DynamicParameterMap_key = _DynamicParameterMap.AddMember("key", _DynamicParameterKey)
-
-	_DynamicParameterMap_value = _DynamicParameterMap.AddMember("value", _StringWithLengthBetween1And2048)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	DeploymentParameters_DynamicExtensionParameters = DeploymentParameters.AddMember("DynamicExtensionParameters", _DynamicParameterMap)
-
-	DeploymentParameters_Tags = DeploymentParameters.AddMember("Tags", _TagMap)
-
-	ReplicateTo_NONE = ReplicateTo.AddMember("NONE", smithyprelude.Unit)
-
-	ReplicateTo_SSM_DOCUMENT = ReplicateTo.AddMember("SSM_DOCUMENT", smithyprelude.Unit)
-
-	DeploymentStrategy_Id = DeploymentStrategy.AddMember("Id", _Id)
-
-	DeploymentStrategy_Name = DeploymentStrategy.AddMember("Name", _Name)
-
-	DeploymentStrategy_Description = DeploymentStrategy.AddMember("Description", _Description)
-
-	DeploymentStrategy_DeploymentDurationInMinutes = DeploymentStrategy.AddMember("DeploymentDurationInMinutes", _MinutesBetween0And24Hours)
-
-	DeploymentStrategy_GrowthType = DeploymentStrategy.AddMember("GrowthType", GrowthType)
-
-	DeploymentStrategy_GrowthFactor = DeploymentStrategy.AddMember("GrowthFactor", _Percentage)
-
-	DeploymentStrategy_FinalBakeTimeInMinutes = DeploymentStrategy.AddMember("FinalBakeTimeInMinutes", _MinutesBetween0And24Hours)
-
-	DeploymentStrategy_ReplicateTo = DeploymentStrategy.AddMember("ReplicateTo", ReplicateTo)
-
-	_DeploymentStrategyList_member = _DeploymentStrategyList.AddMember("member", DeploymentStrategy)
-
-	EnvironmentState_READY_FOR_DEPLOYMENT = EnvironmentState.AddMember("READY_FOR_DEPLOYMENT", smithyprelude.Unit)
-
-	EnvironmentState_DEPLOYING = EnvironmentState.AddMember("DEPLOYING", smithyprelude.Unit)
-
-	EnvironmentState_ROLLING_BACK = EnvironmentState.AddMember("ROLLING_BACK", smithyprelude.Unit)
-
-	EnvironmentState_ROLLED_BACK = EnvironmentState.AddMember("ROLLED_BACK", smithyprelude.Unit)
-
-	EnvironmentState_REVERTED = EnvironmentState.AddMember("REVERTED", smithyprelude.Unit)
-
-	Monitor_AlarmArn = Monitor.AddMember("AlarmArn", _StringWithLengthBetween1And2048)
-
-	Monitor_AlarmRoleArn = Monitor.AddMember("AlarmRoleArn", _RoleArn)
-
-	_MonitorList_member = _MonitorList.AddMember("member", Monitor)
-
-	Environment_ApplicationId = Environment.AddMember("ApplicationId", _Id)
-
-	Environment_Id = Environment.AddMember("Id", _Id)
-
-	Environment_Name = Environment.AddMember("Name", _Name)
-
-	Environment_Description = Environment.AddMember("Description", _Description)
-
-	Environment_State = Environment.AddMember("State", EnvironmentState)
-
-	Environment_Monitors = Environment.AddMember("Monitors", _MonitorList)
-
-	_EnvironmentList_member = _EnvironmentList.AddMember("member", Environment)
-
-	ExperimentDefinitionStatus_ACTIVE = ExperimentDefinitionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ExperimentDefinitionStatus_IDLE = ExperimentDefinitionStatus.AddMember("IDLE", smithyprelude.Unit)
-
-	ExperimentDefinitionStatus_ARCHIVED = ExperimentDefinitionStatus.AddMember("ARCHIVED", smithyprelude.Unit)
-
-	ExperimentDefinitionSummary_ApplicationId = ExperimentDefinitionSummary.AddMember("ApplicationId", _Id)
-
-	ExperimentDefinitionSummary_Id = ExperimentDefinitionSummary.AddMember("Id", _Id)
-
-	ExperimentDefinitionSummary_Name = ExperimentDefinitionSummary.AddMember("Name", _Name)
-
-	ExperimentDefinitionSummary_Hypothesis = ExperimentDefinitionSummary.AddMember("Hypothesis", _Description)
-
-	ExperimentDefinitionSummary_Status = ExperimentDefinitionSummary.AddMember("Status", ExperimentDefinitionStatus)
-
-	ExperimentDefinitionSummary_ConfigurationProfileId = ExperimentDefinitionSummary.AddMember("ConfigurationProfileId", _Id)
-
-	ExperimentDefinitionSummary_EnvironmentId = ExperimentDefinitionSummary.AddMember("EnvironmentId", _Id)
-
-	ExperimentDefinitionSummary_FlagKey = ExperimentDefinitionSummary.AddMember("FlagKey", _FlagKey)
-
-	ExperimentDefinitionSummary_CreatedAt = ExperimentDefinitionSummary.AddMember("CreatedAt", _Iso8601DateTime)
-
-	ExperimentDefinitionSummary_UpdatedAt = ExperimentDefinitionSummary.AddMember("UpdatedAt", _Iso8601DateTime)
-
-	_ExperimentDefinitionList_member = _ExperimentDefinitionList.AddMember("member", ExperimentDefinitionSummary)
-
-	FlagValue_Enabled = FlagValue.AddMember("Enabled", _Boolean)
-
-	FlagValue_AttributeValues = FlagValue.AddMember("AttributeValues", _AttributeValueMap)
-
-	Treatment_Key = Treatment.AddMember("Key", _TreatmentKey)
-
-	Treatment_Weight = Treatment.AddMember("Weight", _Weight)
-
-	Treatment_Description = Treatment.AddMember("Description", _Description)
-
-	Treatment_FlagValue = Treatment.AddMember("FlagValue", FlagValue)
-
-	_TreatmentList_member = _TreatmentList.AddMember("member", Treatment)
-
-	ExperimentDefinitionSnapshot_ApplicationId = ExperimentDefinitionSnapshot.AddMember("ApplicationId", _Id)
-
-	ExperimentDefinitionSnapshot_Id = ExperimentDefinitionSnapshot.AddMember("Id", _Id)
-
-	ExperimentDefinitionSnapshot_Name = ExperimentDefinitionSnapshot.AddMember("Name", _Name)
-
-	ExperimentDefinitionSnapshot_Hypothesis = ExperimentDefinitionSnapshot.AddMember("Hypothesis", _Description)
-
-	ExperimentDefinitionSnapshot_ConfigurationProfileId = ExperimentDefinitionSnapshot.AddMember("ConfigurationProfileId", _Id)
-
-	ExperimentDefinitionSnapshot_EnvironmentId = ExperimentDefinitionSnapshot.AddMember("EnvironmentId", _Id)
-
-	ExperimentDefinitionSnapshot_FlagKey = ExperimentDefinitionSnapshot.AddMember("FlagKey", _FlagKey)
-
-	ExperimentDefinitionSnapshot_AudienceRule = ExperimentDefinitionSnapshot.AddMember("AudienceRule", _Rule)
-
-	ExperimentDefinitionSnapshot_AudienceDescription = ExperimentDefinitionSnapshot.AddMember("AudienceDescription", _Description)
-
-	ExperimentDefinitionSnapshot_LaunchCriteria = ExperimentDefinitionSnapshot.AddMember("LaunchCriteria", _Description)
-
-	ExperimentDefinitionSnapshot_Treatments = ExperimentDefinitionSnapshot.AddMember("Treatments", _TreatmentList)
-
-	ExperimentDefinitionSnapshot_Control = ExperimentDefinitionSnapshot.AddMember("Control", Treatment)
-
-	ExperimentRunEventType_RUN_STARTED = ExperimentRunEventType.AddMember("RUN_STARTED", smithyprelude.Unit)
-
-	ExperimentRunEventType_EXPOSURE_UPDATED = ExperimentRunEventType.AddMember("EXPOSURE_UPDATED", smithyprelude.Unit)
-
-	ExperimentRunEventType_OVERRIDES_UPDATED = ExperimentRunEventType.AddMember("OVERRIDES_UPDATED", smithyprelude.Unit)
-
-	ExperimentRunEventType_RUN_STOPPED = ExperimentRunEventType.AddMember("RUN_STOPPED", smithyprelude.Unit)
-
-	_TreatmentOverrideMap_key = _TreatmentOverrideMap.AddMember("key", _EntityId)
-
-	_TreatmentOverrideMap_value = _TreatmentOverrideMap.AddMember("value", _TreatmentKey)
-
-	TreatmentOverrides_Inline = TreatmentOverrides.AddMember("Inline", _TreatmentOverrideMap)
-
-	ExperimentRunEvent_Description = ExperimentRunEvent.AddMember("Description", _Description)
-
-	ExperimentRunEvent_AssociatedDeployment = ExperimentRunEvent.AddMember("AssociatedDeployment", _Arn)
-
-	ExperimentRunEvent_EventType = ExperimentRunEvent.AddMember("EventType", ExperimentRunEventType)
-
-	ExperimentRunEvent_OccurredAt = ExperimentRunEvent.AddMember("OccurredAt", _Iso8601DateTime)
-
-	ExperimentRunEvent_TriggeredBy = ExperimentRunEvent.AddMember("TriggeredBy", TriggeredBy)
-
-	ExperimentRunEvent_ExposurePercentage = ExperimentRunEvent.AddMember("ExposurePercentage", _NullablePercentage)
-
-	ExperimentRunEvent_TreatmentOverrides = ExperimentRunEvent.AddMember("TreatmentOverrides", TreatmentOverrides)
-
-	_ExperimentRunEventList_member = _ExperimentRunEventList.AddMember("member", ExperimentRunEvent)
-
-	ExperimentRunResult_ExecutiveSummary = ExperimentRunResult.AddMember("ExecutiveSummary", _Description)
-
-	ExperimentRunResult_ReasonsToLaunch = ExperimentRunResult.AddMember("ReasonsToLaunch", _Description)
-
-	ExperimentRunResult_ReasonsNotToLaunch = ExperimentRunResult.AddMember("ReasonsNotToLaunch", _Description)
-
-	ExperimentRunStatus_RUNNING = ExperimentRunStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	ExperimentRunStatus_DONE = ExperimentRunStatus.AddMember("DONE", smithyprelude.Unit)
-
-	ExperimentRunSummary_ExperimentDefinitionId = ExperimentRunSummary.AddMember("ExperimentDefinitionId", _Id)
-
-	ExperimentRunSummary_Run = ExperimentRunSummary.AddMember("Run", _Integer)
-
-	ExperimentRunSummary_Description = ExperimentRunSummary.AddMember("Description", _Description)
-
-	ExperimentRunSummary_Status = ExperimentRunSummary.AddMember("Status", ExperimentRunStatus)
-
-	ExperimentRunSummary_StartedAt = ExperimentRunSummary.AddMember("StartedAt", _Iso8601DateTime)
-
-	ExperimentRunSummary_UpdatedAt = ExperimentRunSummary.AddMember("UpdatedAt", _Iso8601DateTime)
-
-	ExperimentRunSummary_EndedAt = ExperimentRunSummary.AddMember("EndedAt", _Iso8601DateTime)
-
-	_ExperimentRunSummaryList_member = _ExperimentRunSummaryList.AddMember("member", ExperimentRunSummary)
-
-	ExtensionAssociationSummary_Id = ExtensionAssociationSummary.AddMember("Id", _Identifier)
-
-	ExtensionAssociationSummary_ExtensionArn = ExtensionAssociationSummary.AddMember("ExtensionArn", _Arn)
-
-	ExtensionAssociationSummary_ResourceArn = ExtensionAssociationSummary.AddMember("ResourceArn", _Arn)
-
-	_ExtensionAssociationSummaries_member = _ExtensionAssociationSummaries.AddMember("member", ExtensionAssociationSummary)
-
-	ExtensionSummary_Id = ExtensionSummary.AddMember("Id", _Id)
-
-	ExtensionSummary_Name = ExtensionSummary.AddMember("Name", _Name)
-
-	ExtensionSummary_VersionNumber = ExtensionSummary.AddMember("VersionNumber", _Integer)
-
-	ExtensionSummary_Arn = ExtensionSummary.AddMember("Arn", _Arn)
-
-	ExtensionSummary_Description = ExtensionSummary.AddMember("Description", _Description)
-
-	_ExtensionSummaries_member = _ExtensionSummaries.AddMember("member", ExtensionSummary)
-
-	HostedConfigurationVersionSummary_ApplicationId = HostedConfigurationVersionSummary.AddMember("ApplicationId", _Id)
-
-	HostedConfigurationVersionSummary_ConfigurationProfileId = HostedConfigurationVersionSummary.AddMember("ConfigurationProfileId", _Id)
-
-	HostedConfigurationVersionSummary_VersionNumber = HostedConfigurationVersionSummary.AddMember("VersionNumber", _Integer)
-
-	HostedConfigurationVersionSummary_Description = HostedConfigurationVersionSummary.AddMember("Description", _Description)
-
-	HostedConfigurationVersionSummary_ContentType = HostedConfigurationVersionSummary.AddMember("ContentType", _StringWithLengthBetween1And255)
-
-	HostedConfigurationVersionSummary_VersionLabel = HostedConfigurationVersionSummary.AddMember("VersionLabel", _VersionLabel)
-
-	HostedConfigurationVersionSummary_KmsKeyArn = HostedConfigurationVersionSummary.AddMember("KmsKeyArn", _Arn)
-
-	_HostedConfigurationVersionSummaryList_member = _HostedConfigurationVersionSummaryList.AddMember("member", HostedConfigurationVersionSummary)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	Parameter_Description = Parameter.AddMember("Description", _Description)
-
-	Parameter_Required = Parameter.AddMember("Required", _Boolean)
-
-	Parameter_Dynamic = Parameter.AddMember("Dynamic", _Boolean)
-
-	_ParameterMap_key = _ParameterMap.AddMember("key", _ExtensionOrParameterName)
-
-	_ParameterMap_value = _ParameterMap.AddMember("value", Parameter)
-
-	PayloadTooLargeException_Message = PayloadTooLargeException.AddMember("Message", _String)
-
-	PayloadTooLargeException_Measure = PayloadTooLargeException.AddMember("Measure", BytesMeasure)
-
-	PayloadTooLargeException_Limit = PayloadTooLargeException.AddMember("Limit", _Float)
-
-	PayloadTooLargeException_Size = PayloadTooLargeException.AddMember("Size", _Float)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ResourceNotFoundException_ResourceName = ResourceNotFoundException.AddMember("ResourceName", _String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TreatmentInput_Weight = TreatmentInput.AddMember("Weight", _Weight)
-
-	TreatmentInput_Description = TreatmentInput.AddMember("Description", _Description)
-
-	TreatmentInput_FlagValue = TreatmentInput.AddMember("FlagValue", FlagValue)
-
-	_TreatmentInputList_member = _TreatmentInputList.AddMember("member", TreatmentInput)
-
-	Validator_Type = Validator.AddMember("Type", ValidatorType)
-
-	Validator_Content = Validator.AddMember("Content", _StringWithLengthBetween0And32768)
-
-	_ValidatorList_member = _ValidatorList.AddMember("member", Validator)
-
-	VendedMetricsSettings_Enabled = VendedMetricsSettings.AddMember("Enabled", _Boolean)
-
-	CreateApplicationRequest_Name = CreateApplicationRequest.AddMember("Name", _Name)
-
-	CreateApplicationRequest_Description = CreateApplicationRequest.AddMember("Description", _Description)
-
-	CreateApplicationRequest_Tags = CreateApplicationRequest.AddMember("Tags", _TagMap)
-
-	CreateConfigurationProfileRequest_ApplicationId = CreateConfigurationProfileRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	CreateConfigurationProfileRequest_Name = CreateConfigurationProfileRequest.AddMember("Name", _LongName)
-
-	CreateConfigurationProfileRequest_Description = CreateConfigurationProfileRequest.AddMember("Description", _Description)
-
-	CreateConfigurationProfileRequest_LocationUri = CreateConfigurationProfileRequest.AddMember("LocationUri", _Uri)
-
-	CreateConfigurationProfileRequest_RetrievalRoleArn = CreateConfigurationProfileRequest.AddMember("RetrievalRoleArn", _RoleArn)
-
-	CreateConfigurationProfileRequest_Validators = CreateConfigurationProfileRequest.AddMember("Validators", _ValidatorList)
-
-	CreateConfigurationProfileRequest_Tags = CreateConfigurationProfileRequest.AddMember("Tags", _TagMap)
-
-	CreateConfigurationProfileRequest_Type = CreateConfigurationProfileRequest.AddMember("Type", _ConfigurationProfileType)
-
-	CreateConfigurationProfileRequest_KmsKeyIdentifier = CreateConfigurationProfileRequest.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	ConfigurationProfile_ApplicationId = ConfigurationProfile.AddMember("ApplicationId", _Id)
-
-	ConfigurationProfile_Id = ConfigurationProfile.AddMember("Id", _Id)
-
-	ConfigurationProfile_Name = ConfigurationProfile.AddMember("Name", _LongName)
-
-	ConfigurationProfile_Description = ConfigurationProfile.AddMember("Description", _Description)
-
-	ConfigurationProfile_LocationUri = ConfigurationProfile.AddMember("LocationUri", _Uri)
-
-	ConfigurationProfile_RetrievalRoleArn = ConfigurationProfile.AddMember("RetrievalRoleArn", _RoleArn)
-
-	ConfigurationProfile_Validators = ConfigurationProfile.AddMember("Validators", _ValidatorList)
-
-	ConfigurationProfile_Type = ConfigurationProfile.AddMember("Type", _ConfigurationProfileType)
-
-	ConfigurationProfile_KmsKeyArn = ConfigurationProfile.AddMember("KmsKeyArn", _Arn)
-
-	ConfigurationProfile_KmsKeyIdentifier = ConfigurationProfile.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	CreateDeploymentStrategyRequest_Name = CreateDeploymentStrategyRequest.AddMember("Name", _Name)
-
-	CreateDeploymentStrategyRequest_Description = CreateDeploymentStrategyRequest.AddMember("Description", _Description)
-
-	CreateDeploymentStrategyRequest_DeploymentDurationInMinutes = CreateDeploymentStrategyRequest.AddMember("DeploymentDurationInMinutes", _MinutesBetween0And24Hours)
-
-	CreateDeploymentStrategyRequest_FinalBakeTimeInMinutes = CreateDeploymentStrategyRequest.AddMember("FinalBakeTimeInMinutes", _MinutesBetween0And24Hours)
-
-	CreateDeploymentStrategyRequest_GrowthFactor = CreateDeploymentStrategyRequest.AddMember("GrowthFactor", _GrowthFactor)
-
-	CreateDeploymentStrategyRequest_GrowthType = CreateDeploymentStrategyRequest.AddMember("GrowthType", GrowthType)
-
-	CreateDeploymentStrategyRequest_ReplicateTo = CreateDeploymentStrategyRequest.AddMember("ReplicateTo", ReplicateTo)
-
-	CreateDeploymentStrategyRequest_Tags = CreateDeploymentStrategyRequest.AddMember("Tags", _TagMap)
-
-	CreateEnvironmentRequest_ApplicationId = CreateEnvironmentRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	CreateEnvironmentRequest_Name = CreateEnvironmentRequest.AddMember("Name", _Name)
-
-	CreateEnvironmentRequest_Description = CreateEnvironmentRequest.AddMember("Description", _Description)
-
-	CreateEnvironmentRequest_Monitors = CreateEnvironmentRequest.AddMember("Monitors", _MonitorList)
-
-	CreateEnvironmentRequest_Tags = CreateEnvironmentRequest.AddMember("Tags", _TagMap)
-
-	CreateExperimentDefinitionRequest_ApplicationIdentifier = CreateExperimentDefinitionRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	CreateExperimentDefinitionRequest_Name = CreateExperimentDefinitionRequest.AddMember("Name", _NameWithReservedAwsPrefix)
-
-	CreateExperimentDefinitionRequest_ConfigurationProfileIdentifier = CreateExperimentDefinitionRequest.AddMember("ConfigurationProfileIdentifier", _Identifier)
-
-	CreateExperimentDefinitionRequest_EnvironmentIdentifier = CreateExperimentDefinitionRequest.AddMember("EnvironmentIdentifier", _Identifier)
-
-	CreateExperimentDefinitionRequest_FlagKey = CreateExperimentDefinitionRequest.AddMember("FlagKey", _FlagKey)
-
-	CreateExperimentDefinitionRequest_Treatments = CreateExperimentDefinitionRequest.AddMember("Treatments", _TreatmentInputList)
-
-	CreateExperimentDefinitionRequest_Control = CreateExperimentDefinitionRequest.AddMember("Control", TreatmentInput)
-
-	CreateExperimentDefinitionRequest_AudienceRule = CreateExperimentDefinitionRequest.AddMember("AudienceRule", _Rule)
-
-	CreateExperimentDefinitionRequest_Hypothesis = CreateExperimentDefinitionRequest.AddMember("Hypothesis", _Description)
-
-	CreateExperimentDefinitionRequest_AudienceDescription = CreateExperimentDefinitionRequest.AddMember("AudienceDescription", _Description)
-
-	CreateExperimentDefinitionRequest_LaunchCriteria = CreateExperimentDefinitionRequest.AddMember("LaunchCriteria", _Description)
-
-	CreateExperimentDefinitionRequest_Tags = CreateExperimentDefinitionRequest.AddMember("Tags", _TagMap)
-
-	ExperimentDefinition_ApplicationId = ExperimentDefinition.AddMember("ApplicationId", _Id)
-
-	ExperimentDefinition_Id = ExperimentDefinition.AddMember("Id", _Id)
-
-	ExperimentDefinition_Name = ExperimentDefinition.AddMember("Name", _Name)
-
-	ExperimentDefinition_Hypothesis = ExperimentDefinition.AddMember("Hypothesis", _Description)
-
-	ExperimentDefinition_Status = ExperimentDefinition.AddMember("Status", ExperimentDefinitionStatus)
-
-	ExperimentDefinition_ConfigurationProfileId = ExperimentDefinition.AddMember("ConfigurationProfileId", _Id)
-
-	ExperimentDefinition_EnvironmentId = ExperimentDefinition.AddMember("EnvironmentId", _Id)
-
-	ExperimentDefinition_FlagKey = ExperimentDefinition.AddMember("FlagKey", _FlagKey)
-
-	ExperimentDefinition_AudienceRule = ExperimentDefinition.AddMember("AudienceRule", _Rule)
-
-	ExperimentDefinition_AudienceDescription = ExperimentDefinition.AddMember("AudienceDescription", _Description)
-
-	ExperimentDefinition_LaunchCriteria = ExperimentDefinition.AddMember("LaunchCriteria", _Description)
-
-	ExperimentDefinition_Treatments = ExperimentDefinition.AddMember("Treatments", _TreatmentList)
-
-	ExperimentDefinition_Control = ExperimentDefinition.AddMember("Control", Treatment)
-
-	ExperimentDefinition_CreatedAt = ExperimentDefinition.AddMember("CreatedAt", _Iso8601DateTime)
-
-	ExperimentDefinition_UpdatedAt = ExperimentDefinition.AddMember("UpdatedAt", _Iso8601DateTime)
-
-	ExperimentDefinition_KmsKeyIdentifier = ExperimentDefinition.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	CreateExtensionAssociationRequest_ExtensionIdentifier = CreateExtensionAssociationRequest.AddMember("ExtensionIdentifier", _Identifier)
-
-	CreateExtensionAssociationRequest_ExtensionVersionNumber = CreateExtensionAssociationRequest.AddMember("ExtensionVersionNumber", _Integer)
-
-	CreateExtensionAssociationRequest_ResourceIdentifier = CreateExtensionAssociationRequest.AddMember("ResourceIdentifier", _Identifier)
-
-	CreateExtensionAssociationRequest_Parameters = CreateExtensionAssociationRequest.AddMember("Parameters", _ParameterValueMap)
-
-	CreateExtensionAssociationRequest_Tags = CreateExtensionAssociationRequest.AddMember("Tags", _TagMap)
-
-	ExtensionAssociation_Id = ExtensionAssociation.AddMember("Id", _Identifier)
-
-	ExtensionAssociation_ExtensionArn = ExtensionAssociation.AddMember("ExtensionArn", _Arn)
-
-	ExtensionAssociation_ResourceArn = ExtensionAssociation.AddMember("ResourceArn", _Arn)
-
-	ExtensionAssociation_Arn = ExtensionAssociation.AddMember("Arn", _Arn)
-
-	ExtensionAssociation_Parameters = ExtensionAssociation.AddMember("Parameters", _ParameterValueMap)
-
-	ExtensionAssociation_ExtensionVersionNumber = ExtensionAssociation.AddMember("ExtensionVersionNumber", _Integer)
-
-	CreateExtensionRequest_Name = CreateExtensionRequest.AddMember("Name", _ExtensionOrParameterName)
-
-	CreateExtensionRequest_Description = CreateExtensionRequest.AddMember("Description", _Description)
-
-	CreateExtensionRequest_Actions = CreateExtensionRequest.AddMember("Actions", _ActionsMap)
-
-	CreateExtensionRequest_Parameters = CreateExtensionRequest.AddMember("Parameters", _ParameterMap)
-
-	CreateExtensionRequest_Tags = CreateExtensionRequest.AddMember("Tags", _TagMap)
-
-	CreateExtensionRequest_LatestVersionNumber = CreateExtensionRequest.AddMember("LatestVersionNumber", _Integer, &smithytraits.HTTPHeader{Name: "Latest-Version-Number"})
-
-	Extension_Id = Extension.AddMember("Id", _Id)
-
-	Extension_Name = Extension.AddMember("Name", _Name)
-
-	Extension_VersionNumber = Extension.AddMember("VersionNumber", _Integer)
-
-	Extension_Arn = Extension.AddMember("Arn", _Arn)
-
-	Extension_Description = Extension.AddMember("Description", _Description)
-
-	Extension_Actions = Extension.AddMember("Actions", _ActionsMap)
-
-	Extension_Parameters = Extension.AddMember("Parameters", _ParameterMap)
-
-	CreateHostedConfigurationVersionRequest_ApplicationId = CreateHostedConfigurationVersionRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	CreateHostedConfigurationVersionRequest_ConfigurationProfileId = CreateHostedConfigurationVersionRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	CreateHostedConfigurationVersionRequest_Description = CreateHostedConfigurationVersionRequest.AddMember("Description", _Description, &smithytraits.HTTPHeader{Name: "Description"})
-
-	CreateHostedConfigurationVersionRequest_Content = CreateHostedConfigurationVersionRequest.AddMember("Content", _Blob, &smithytraits.HTTPPayload{})
-
-	CreateHostedConfigurationVersionRequest_ContentType = CreateHostedConfigurationVersionRequest.AddMember("ContentType", _StringWithLengthBetween1And255, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	CreateHostedConfigurationVersionRequest_LatestVersionNumber = CreateHostedConfigurationVersionRequest.AddMember("LatestVersionNumber", _Integer, &smithytraits.HTTPHeader{Name: "Latest-Version-Number"})
-
-	CreateHostedConfigurationVersionRequest_VersionLabel = CreateHostedConfigurationVersionRequest.AddMember("VersionLabel", _VersionLabel, &smithytraits.HTTPHeader{Name: "VersionLabel"})
-
-	HostedConfigurationVersion_ApplicationId = HostedConfigurationVersion.AddMember("ApplicationId", _Id, &smithytraits.HTTPHeader{Name: "Application-Id"})
-
-	HostedConfigurationVersion_ConfigurationProfileId = HostedConfigurationVersion.AddMember("ConfigurationProfileId", _Id, &smithytraits.HTTPHeader{Name: "Configuration-Profile-Id"})
-
-	HostedConfigurationVersion_VersionNumber = HostedConfigurationVersion.AddMember("VersionNumber", _Integer, &smithytraits.HTTPHeader{Name: "Version-Number"})
-
-	HostedConfigurationVersion_Description = HostedConfigurationVersion.AddMember("Description", _Description, &smithytraits.HTTPHeader{Name: "Description"})
-
-	HostedConfigurationVersion_Content = HostedConfigurationVersion.AddMember("Content", _Blob, &smithytraits.HTTPPayload{})
-
-	HostedConfigurationVersion_ContentType = HostedConfigurationVersion.AddMember("ContentType", _StringWithLengthBetween1And255, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	HostedConfigurationVersion_VersionLabel = HostedConfigurationVersion.AddMember("VersionLabel", _VersionLabel, &smithytraits.HTTPHeader{Name: "VersionLabel"})
-
-	HostedConfigurationVersion_KmsKeyArn = HostedConfigurationVersion.AddMember("KmsKeyArn", _Arn, &smithytraits.HTTPHeader{Name: "KmsKeyArn"})
-
-	DeleteApplicationRequest_ApplicationId = DeleteApplicationRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationProfileRequest_ApplicationId = DeleteConfigurationProfileRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationProfileRequest_ConfigurationProfileId = DeleteConfigurationProfileRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationProfileRequest_DeletionProtectionCheck = DeleteConfigurationProfileRequest.AddMember("DeletionProtectionCheck", DeletionProtectionCheck, &smithytraits.HTTPHeader{Name: "x-amzn-deletion-protection-check"})
-
-	DeleteDeploymentStrategyRequest_DeploymentStrategyId = DeleteDeploymentStrategyRequest.AddMember("DeploymentStrategyId", _DeploymentStrategyId, &smithytraits.HTTPLabel{})
-
-	DeleteEnvironmentRequest_EnvironmentId = DeleteEnvironmentRequest.AddMember("EnvironmentId", _Name, &smithytraits.HTTPLabel{})
-
-	DeleteEnvironmentRequest_ApplicationId = DeleteEnvironmentRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	DeleteEnvironmentRequest_DeletionProtectionCheck = DeleteEnvironmentRequest.AddMember("DeletionProtectionCheck", DeletionProtectionCheck, &smithytraits.HTTPHeader{Name: "x-amzn-deletion-protection-check"})
-
-	DeleteExperimentDefinitionRequest_ApplicationIdentifier = DeleteExperimentDefinitionRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier = DeleteExperimentDefinitionRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteExperimentDefinitionRequest_DeleteType = DeleteExperimentDefinitionRequest.AddMember("DeleteType", DeleteType, &smithytraits.HTTPQuery{Name: "delete_type"})
-
-	DeleteExtensionAssociationRequest_ExtensionAssociationId = DeleteExtensionAssociationRequest.AddMember("ExtensionAssociationId", _Id, &smithytraits.HTTPLabel{})
-
-	DeleteExtensionRequest_ExtensionIdentifier = DeleteExtensionRequest.AddMember("ExtensionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteExtensionRequest_VersionNumber = DeleteExtensionRequest.AddMember("VersionNumber", _Integer, &smithytraits.HTTPQuery{Name: "version"})
-
-	DeleteHostedConfigurationVersionRequest_ApplicationId = DeleteHostedConfigurationVersionRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	DeleteHostedConfigurationVersionRequest_ConfigurationProfileId = DeleteHostedConfigurationVersionRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	DeleteHostedConfigurationVersionRequest_VersionNumber = DeleteHostedConfigurationVersionRequest.AddMember("VersionNumber", _Integer, &smithytraits.HTTPLabel{})
-
-	AccountSettings_DeletionProtection = AccountSettings.AddMember("DeletionProtection", DeletionProtectionSettings)
-
-	AccountSettings_VendedMetrics = AccountSettings.AddMember("VendedMetrics", VendedMetricsSettings)
-
-	GetApplicationRequest_ApplicationId = GetApplicationRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	GetConfigurationRequest_Application = GetConfigurationRequest.AddMember("Application", _StringWithLengthBetween1And64, &smithytraits.HTTPLabel{})
-
-	GetConfigurationRequest_Environment = GetConfigurationRequest.AddMember("Environment", _StringWithLengthBetween1And64, &smithytraits.HTTPLabel{})
-
-	GetConfigurationRequest_Configuration = GetConfigurationRequest.AddMember("Configuration", _StringWithLengthBetween1And64, &smithytraits.HTTPLabel{})
-
-	GetConfigurationRequest_ClientId = GetConfigurationRequest.AddMember("ClientId", _StringWithLengthBetween1And64, &smithytraits.HTTPQuery{Name: "client_id"})
-
-	GetConfigurationRequest_ClientConfigurationVersion = GetConfigurationRequest.AddMember("ClientConfigurationVersion", _Version, &smithytraits.HTTPQuery{Name: "client_configuration_version"})
-
-	Configuration_Content = Configuration.AddMember("Content", _Blob, &smithytraits.HTTPPayload{})
-
-	Configuration_ConfigurationVersion = Configuration.AddMember("ConfigurationVersion", _Version, &smithytraits.HTTPHeader{Name: "Configuration-Version"})
-
-	Configuration_ContentType = Configuration.AddMember("ContentType", _String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetConfigurationProfileRequest_ApplicationId = GetConfigurationProfileRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	GetConfigurationProfileRequest_ConfigurationProfileId = GetConfigurationProfileRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	GetDeploymentRequest_ApplicationId = GetDeploymentRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	GetDeploymentRequest_EnvironmentId = GetDeploymentRequest.AddMember("EnvironmentId", _Name, &smithytraits.HTTPLabel{})
-
-	GetDeploymentRequest_DeploymentNumber = GetDeploymentRequest.AddMember("DeploymentNumber", _Integer, &smithytraits.HTTPLabel{})
-
-	Deployment_ApplicationId = Deployment.AddMember("ApplicationId", _Id)
-
-	Deployment_EnvironmentId = Deployment.AddMember("EnvironmentId", _Id)
-
-	Deployment_DeploymentStrategyId = Deployment.AddMember("DeploymentStrategyId", _Id)
-
-	Deployment_ConfigurationProfileId = Deployment.AddMember("ConfigurationProfileId", _Id)
-
-	Deployment_DeploymentNumber = Deployment.AddMember("DeploymentNumber", _Integer)
-
-	Deployment_ConfigurationName = Deployment.AddMember("ConfigurationName", _Name)
-
-	Deployment_ConfigurationLocationUri = Deployment.AddMember("ConfigurationLocationUri", _Uri)
-
-	Deployment_ConfigurationVersion = Deployment.AddMember("ConfigurationVersion", _Version)
-
-	Deployment_Description = Deployment.AddMember("Description", _Description)
-
-	Deployment_DeploymentDurationInMinutes = Deployment.AddMember("DeploymentDurationInMinutes", _MinutesBetween0And24Hours)
-
-	Deployment_GrowthType = Deployment.AddMember("GrowthType", GrowthType)
-
-	Deployment_GrowthFactor = Deployment.AddMember("GrowthFactor", _Percentage)
-
-	Deployment_FinalBakeTimeInMinutes = Deployment.AddMember("FinalBakeTimeInMinutes", _MinutesBetween0And24Hours)
-
-	Deployment_State = Deployment.AddMember("State", DeploymentState)
-
-	Deployment_EventLog = Deployment.AddMember("EventLog", _DeploymentEvents)
-
-	Deployment_PercentageComplete = Deployment.AddMember("PercentageComplete", _Percentage)
-
-	Deployment_StartedAt = Deployment.AddMember("StartedAt", _Iso8601DateTime)
-
-	Deployment_CompletedAt = Deployment.AddMember("CompletedAt", _Iso8601DateTime)
-
-	Deployment_AppliedExtensions = Deployment.AddMember("AppliedExtensions", _AppliedExtensions)
-
-	Deployment_KmsKeyArn = Deployment.AddMember("KmsKeyArn", _Arn)
-
-	Deployment_KmsKeyIdentifier = Deployment.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	Deployment_VersionLabel = Deployment.AddMember("VersionLabel", _VersionLabel)
-
-	GetDeploymentStrategyRequest_DeploymentStrategyId = GetDeploymentStrategyRequest.AddMember("DeploymentStrategyId", _DeploymentStrategyId, &smithytraits.HTTPLabel{})
-
-	GetEnvironmentRequest_ApplicationId = GetEnvironmentRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	GetEnvironmentRequest_EnvironmentId = GetEnvironmentRequest.AddMember("EnvironmentId", _Name, &smithytraits.HTTPLabel{})
-
-	GetExperimentDefinitionRequest_ApplicationIdentifier = GetExperimentDefinitionRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetExperimentDefinitionRequest_ExperimentDefinitionIdentifier = GetExperimentDefinitionRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetExperimentRunRequest_ApplicationIdentifier = GetExperimentRunRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetExperimentRunRequest_ExperimentDefinitionIdentifier = GetExperimentRunRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetExperimentRunRequest_Run = GetExperimentRunRequest.AddMember("Run", _PositiveInteger, &smithytraits.HTTPLabel{})
-
-	ExperimentRun_ApplicationId = ExperimentRun.AddMember("ApplicationId", _Id)
-
-	ExperimentRun_ExperimentDefinitionId = ExperimentRun.AddMember("ExperimentDefinitionId", _Id)
-
-	ExperimentRun_Run = ExperimentRun.AddMember("Run", _Integer)
-
-	ExperimentRun_Description = ExperimentRun.AddMember("Description", _Description)
-
-	ExperimentRun_Status = ExperimentRun.AddMember("Status", ExperimentRunStatus)
-
-	ExperimentRun_ExposurePercentage = ExperimentRun.AddMember("ExposurePercentage", _NullablePercentage)
-
-	ExperimentRun_TreatmentOverrides = ExperimentRun.AddMember("TreatmentOverrides", TreatmentOverrides)
-
-	ExperimentRun_Result = ExperimentRun.AddMember("Result", ExperimentRunResult)
-
-	ExperimentRun_StartedAt = ExperimentRun.AddMember("StartedAt", _Iso8601DateTime)
-
-	ExperimentRun_UpdatedAt = ExperimentRun.AddMember("UpdatedAt", _Iso8601DateTime)
-
-	ExperimentRun_EndedAt = ExperimentRun.AddMember("EndedAt", _Iso8601DateTime)
-
-	ExperimentRun_ExperimentDefinitionSnapshot = ExperimentRun.AddMember("ExperimentDefinitionSnapshot", ExperimentDefinitionSnapshot)
-
-	GetExtensionAssociationRequest_ExtensionAssociationId = GetExtensionAssociationRequest.AddMember("ExtensionAssociationId", _Id, &smithytraits.HTTPLabel{})
-
-	GetExtensionRequest_ExtensionIdentifier = GetExtensionRequest.AddMember("ExtensionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetExtensionRequest_VersionNumber = GetExtensionRequest.AddMember("VersionNumber", _Integer, &smithytraits.HTTPQuery{Name: "version_number"})
-
-	GetHostedConfigurationVersionRequest_ApplicationId = GetHostedConfigurationVersionRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	GetHostedConfigurationVersionRequest_ConfigurationProfileId = GetHostedConfigurationVersionRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	GetHostedConfigurationVersionRequest_VersionNumber = GetHostedConfigurationVersionRequest.AddMember("VersionNumber", _Integer, &smithytraits.HTTPLabel{})
-
-	ListApplicationsRequest_MaxResults = ListApplicationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListApplicationsRequest_NextToken = ListApplicationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	Applications_Items = Applications.AddMember("Items", _ApplicationList)
-
-	Applications_NextToken = Applications.AddMember("NextToken", _NextToken)
-
-	ListConfigurationProfilesRequest_ApplicationId = ListConfigurationProfilesRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	ListConfigurationProfilesRequest_MaxResults = ListConfigurationProfilesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListConfigurationProfilesRequest_NextToken = ListConfigurationProfilesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListConfigurationProfilesRequest_Type = ListConfigurationProfilesRequest.AddMember("Type", _ConfigurationProfileType, &smithytraits.HTTPQuery{Name: "type"})
-
-	ConfigurationProfiles_Items = ConfigurationProfiles.AddMember("Items", _ConfigurationProfileSummaryList)
-
-	ConfigurationProfiles_NextToken = ConfigurationProfiles.AddMember("NextToken", _NextToken)
-
-	ListDeploymentsRequest_ApplicationId = ListDeploymentsRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	ListDeploymentsRequest_EnvironmentId = ListDeploymentsRequest.AddMember("EnvironmentId", _Name, &smithytraits.HTTPLabel{})
-
-	ListDeploymentsRequest_MaxResults = ListDeploymentsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListDeploymentsRequest_NextToken = ListDeploymentsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	Deployments_Items = Deployments.AddMember("Items", _DeploymentList)
-
-	Deployments_NextToken = Deployments.AddMember("NextToken", _NextToken)
-
-	ListDeploymentStrategiesRequest_MaxResults = ListDeploymentStrategiesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListDeploymentStrategiesRequest_NextToken = ListDeploymentStrategiesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	DeploymentStrategies_Items = DeploymentStrategies.AddMember("Items", _DeploymentStrategyList)
-
-	DeploymentStrategies_NextToken = DeploymentStrategies.AddMember("NextToken", _NextToken)
-
-	ListEnvironmentsRequest_ApplicationId = ListEnvironmentsRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	ListEnvironmentsRequest_MaxResults = ListEnvironmentsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListEnvironmentsRequest_NextToken = ListEnvironmentsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	Environments_Items = Environments.AddMember("Items", _EnvironmentList)
-
-	Environments_NextToken = Environments.AddMember("NextToken", _NextToken)
-
-	ListExperimentDefinitionsRequest_ApplicationIdentifier = ListExperimentDefinitionsRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPQuery{Name: "application_identifier"})
-
-	ListExperimentDefinitionsRequest_ConfigurationProfileIdentifier = ListExperimentDefinitionsRequest.AddMember("ConfigurationProfileIdentifier", _Identifier, &smithytraits.HTTPQuery{Name: "configuration_profile_identifier"})
-
-	ListExperimentDefinitionsRequest_EnvironmentIdentifier = ListExperimentDefinitionsRequest.AddMember("EnvironmentIdentifier", _Identifier, &smithytraits.HTTPQuery{Name: "environment_identifier"})
-
-	ListExperimentDefinitionsRequest_Status = ListExperimentDefinitionsRequest.AddMember("Status", ExperimentDefinitionStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListExperimentDefinitionsRequest_MaxResults = ListExperimentDefinitionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListExperimentDefinitionsRequest_NextToken = ListExperimentDefinitionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ExperimentDefinitions_Items = ExperimentDefinitions.AddMember("Items", _ExperimentDefinitionList)
-
-	ExperimentDefinitions_NextToken = ExperimentDefinitions.AddMember("NextToken", _NextToken)
-
-	ListExperimentRunEventsRequest_ApplicationIdentifier = ListExperimentRunEventsRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListExperimentRunEventsRequest_ExperimentDefinitionIdentifier = ListExperimentRunEventsRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListExperimentRunEventsRequest_Run = ListExperimentRunEventsRequest.AddMember("Run", _PositiveInteger, &smithytraits.HTTPLabel{})
-
-	ListExperimentRunEventsRequest_MaxResults = ListExperimentRunEventsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListExperimentRunEventsRequest_NextToken = ListExperimentRunEventsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ExperimentRunEvents_Items = ExperimentRunEvents.AddMember("Items", _ExperimentRunEventList)
-
-	ExperimentRunEvents_NextToken = ExperimentRunEvents.AddMember("NextToken", _NextToken)
-
-	ListExperimentRunsRequest_ApplicationIdentifier = ListExperimentRunsRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListExperimentRunsRequest_ExperimentDefinitionIdentifier = ListExperimentRunsRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListExperimentRunsRequest_MaxResults = ListExperimentRunsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListExperimentRunsRequest_NextToken = ListExperimentRunsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListExperimentRunsRequest_Status = ListExperimentRunsRequest.AddMember("Status", ExperimentRunStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ExperimentRuns_Items = ExperimentRuns.AddMember("Items", _ExperimentRunSummaryList)
-
-	ExperimentRuns_NextToken = ExperimentRuns.AddMember("NextToken", _NextToken)
-
-	ListExtensionAssociationsRequest_ResourceIdentifier = ListExtensionAssociationsRequest.AddMember("ResourceIdentifier", _Arn, &smithytraits.HTTPQuery{Name: "resource_identifier"})
-
-	ListExtensionAssociationsRequest_ExtensionIdentifier = ListExtensionAssociationsRequest.AddMember("ExtensionIdentifier", _Identifier, &smithytraits.HTTPQuery{Name: "extension_identifier"})
-
-	ListExtensionAssociationsRequest_ExtensionVersionNumber = ListExtensionAssociationsRequest.AddMember("ExtensionVersionNumber", _Integer, &smithytraits.HTTPQuery{Name: "extension_version_number"})
-
-	ListExtensionAssociationsRequest_MaxResults = ListExtensionAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListExtensionAssociationsRequest_NextToken = ListExtensionAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ExtensionAssociations_Items = ExtensionAssociations.AddMember("Items", _ExtensionAssociationSummaries)
-
-	ExtensionAssociations_NextToken = ExtensionAssociations.AddMember("NextToken", _NextToken)
-
-	ListExtensionsRequest_MaxResults = ListExtensionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListExtensionsRequest_NextToken = ListExtensionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListExtensionsRequest_Name = ListExtensionsRequest.AddMember("Name", _QueryName, &smithytraits.HTTPQuery{Name: "name"})
-
-	Extensions_Items = Extensions.AddMember("Items", _ExtensionSummaries)
-
-	Extensions_NextToken = Extensions.AddMember("NextToken", _NextToken)
-
-	ListHostedConfigurationVersionsRequest_ApplicationId = ListHostedConfigurationVersionsRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	ListHostedConfigurationVersionsRequest_ConfigurationProfileId = ListHostedConfigurationVersionsRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	ListHostedConfigurationVersionsRequest_MaxResults = ListHostedConfigurationVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListHostedConfigurationVersionsRequest_NextToken = ListHostedConfigurationVersionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListHostedConfigurationVersionsRequest_VersionLabel = ListHostedConfigurationVersionsRequest.AddMember("VersionLabel", _QueryName, &smithytraits.HTTPQuery{Name: "version_label"})
-
-	HostedConfigurationVersions_Items = HostedConfigurationVersions.AddMember("Items", _HostedConfigurationVersionSummaryList)
-
-	HostedConfigurationVersions_NextToken = HostedConfigurationVersions.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ResourceTags_Tags = ResourceTags.AddMember("Tags", _TagMap)
-
-	StartDeploymentRequest_ApplicationId = StartDeploymentRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	StartDeploymentRequest_EnvironmentId = StartDeploymentRequest.AddMember("EnvironmentId", _Name, &smithytraits.HTTPLabel{})
-
-	StartDeploymentRequest_DeploymentStrategyId = StartDeploymentRequest.AddMember("DeploymentStrategyId", _DeploymentStrategyId)
-
-	StartDeploymentRequest_ConfigurationProfileId = StartDeploymentRequest.AddMember("ConfigurationProfileId", _LongName)
-
-	StartDeploymentRequest_ConfigurationVersion = StartDeploymentRequest.AddMember("ConfigurationVersion", _Version)
-
-	StartDeploymentRequest_Description = StartDeploymentRequest.AddMember("Description", _Description)
-
-	StartDeploymentRequest_Tags = StartDeploymentRequest.AddMember("Tags", _TagMap)
-
-	StartDeploymentRequest_KmsKeyIdentifier = StartDeploymentRequest.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	StartDeploymentRequest_DynamicExtensionParameters = StartDeploymentRequest.AddMember("DynamicExtensionParameters", _DynamicParameterMap)
-
-	StartDeploymentRequest_LatestDeploymentNumber = StartDeploymentRequest.AddMember("LatestDeploymentNumber", _Integer)
-
-	StartExperimentRunRequest_ApplicationIdentifier = StartExperimentRunRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	StartExperimentRunRequest_ExperimentDefinitionIdentifier = StartExperimentRunRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	StartExperimentRunRequest_Description = StartExperimentRunRequest.AddMember("Description", _Description)
-
-	StartExperimentRunRequest_ExposurePercentage = StartExperimentRunRequest.AddMember("ExposurePercentage", _NullablePercentage)
-
-	StartExperimentRunRequest_TreatmentOverrides = StartExperimentRunRequest.AddMember("TreatmentOverrides", TreatmentOverrides)
-
-	StartExperimentRunRequest_Tags = StartExperimentRunRequest.AddMember("Tags", _TagMap)
-
-	StartExperimentRunRequest_DeploymentParameters = StartExperimentRunRequest.AddMember("DeploymentParameters", DeploymentParameters)
-
-	StopDeploymentRequest_ApplicationId = StopDeploymentRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	StopDeploymentRequest_EnvironmentId = StopDeploymentRequest.AddMember("EnvironmentId", _Name, &smithytraits.HTTPLabel{})
-
-	StopDeploymentRequest_DeploymentNumber = StopDeploymentRequest.AddMember("DeploymentNumber", _Integer, &smithytraits.HTTPLabel{})
-
-	StopDeploymentRequest_AllowRevert = StopDeploymentRequest.AddMember("AllowRevert", _Boolean, &smithytraits.HTTPHeader{Name: "Allow-Revert"})
-
-	StopExperimentRunRequest_ApplicationIdentifier = StopExperimentRunRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	StopExperimentRunRequest_ExperimentDefinitionIdentifier = StopExperimentRunRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	StopExperimentRunRequest_Run = StopExperimentRunRequest.AddMember("Run", _PositiveInteger, &smithytraits.HTTPLabel{})
-
-	StopExperimentRunRequest_Result = StopExperimentRunRequest.AddMember("Result", ExperimentRunResult)
-
-	StopExperimentRunRequest_DeploymentParameters = StopExperimentRunRequest.AddMember("DeploymentParameters", DeploymentParameters)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAccountSettingsRequest_DeletionProtection = UpdateAccountSettingsRequest.AddMember("DeletionProtection", DeletionProtectionSettings)
-
-	UpdateAccountSettingsRequest_VendedMetrics = UpdateAccountSettingsRequest.AddMember("VendedMetrics", VendedMetricsSettings)
-
-	UpdateApplicationRequest_ApplicationId = UpdateApplicationRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	UpdateApplicationRequest_Name = UpdateApplicationRequest.AddMember("Name", _Name)
-
-	UpdateApplicationRequest_Description = UpdateApplicationRequest.AddMember("Description", _Description)
-
-	UpdateConfigurationProfileRequest_ApplicationId = UpdateConfigurationProfileRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationProfileRequest_ConfigurationProfileId = UpdateConfigurationProfileRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationProfileRequest_Name = UpdateConfigurationProfileRequest.AddMember("Name", _LongName)
-
-	UpdateConfigurationProfileRequest_Description = UpdateConfigurationProfileRequest.AddMember("Description", _Description)
-
-	UpdateConfigurationProfileRequest_RetrievalRoleArn = UpdateConfigurationProfileRequest.AddMember("RetrievalRoleArn", _RoleArn)
-
-	UpdateConfigurationProfileRequest_Validators = UpdateConfigurationProfileRequest.AddMember("Validators", _ValidatorList)
-
-	UpdateConfigurationProfileRequest_KmsKeyIdentifier = UpdateConfigurationProfileRequest.AddMember("KmsKeyIdentifier", _KmsKeyIdentifierOrEmpty)
-
-	UpdateDeploymentStrategyRequest_DeploymentStrategyId = UpdateDeploymentStrategyRequest.AddMember("DeploymentStrategyId", _DeploymentStrategyId, &smithytraits.HTTPLabel{})
-
-	UpdateDeploymentStrategyRequest_Description = UpdateDeploymentStrategyRequest.AddMember("Description", _Description)
-
-	UpdateDeploymentStrategyRequest_DeploymentDurationInMinutes = UpdateDeploymentStrategyRequest.AddMember("DeploymentDurationInMinutes", _MinutesBetween0And24Hours)
-
-	UpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes = UpdateDeploymentStrategyRequest.AddMember("FinalBakeTimeInMinutes", _MinutesBetween0And24Hours)
-
-	UpdateDeploymentStrategyRequest_GrowthFactor = UpdateDeploymentStrategyRequest.AddMember("GrowthFactor", _GrowthFactor)
-
-	UpdateDeploymentStrategyRequest_GrowthType = UpdateDeploymentStrategyRequest.AddMember("GrowthType", GrowthType)
-
-	UpdateEnvironmentRequest_ApplicationId = UpdateEnvironmentRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	UpdateEnvironmentRequest_EnvironmentId = UpdateEnvironmentRequest.AddMember("EnvironmentId", _Name, &smithytraits.HTTPLabel{})
-
-	UpdateEnvironmentRequest_Name = UpdateEnvironmentRequest.AddMember("Name", _Name)
-
-	UpdateEnvironmentRequest_Description = UpdateEnvironmentRequest.AddMember("Description", _Description)
-
-	UpdateEnvironmentRequest_Monitors = UpdateEnvironmentRequest.AddMember("Monitors", _MonitorList)
-
-	UpdateExperimentDefinitionRequest_ApplicationIdentifier = UpdateExperimentDefinitionRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier = UpdateExperimentDefinitionRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateExperimentDefinitionRequest_Treatments = UpdateExperimentDefinitionRequest.AddMember("Treatments", _TreatmentInputList)
-
-	UpdateExperimentDefinitionRequest_Control = UpdateExperimentDefinitionRequest.AddMember("Control", TreatmentInput)
-
-	UpdateExperimentDefinitionRequest_Hypothesis = UpdateExperimentDefinitionRequest.AddMember("Hypothesis", _Description)
-
-	UpdateExperimentDefinitionRequest_AudienceRule = UpdateExperimentDefinitionRequest.AddMember("AudienceRule", _Rule)
-
-	UpdateExperimentDefinitionRequest_AudienceDescription = UpdateExperimentDefinitionRequest.AddMember("AudienceDescription", _Description)
-
-	UpdateExperimentDefinitionRequest_LaunchCriteria = UpdateExperimentDefinitionRequest.AddMember("LaunchCriteria", _Description)
-
-	UpdateExperimentRunRequest_ApplicationIdentifier = UpdateExperimentRunRequest.AddMember("ApplicationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateExperimentRunRequest_ExperimentDefinitionIdentifier = UpdateExperimentRunRequest.AddMember("ExperimentDefinitionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateExperimentRunRequest_Run = UpdateExperimentRunRequest.AddMember("Run", _PositiveInteger, &smithytraits.HTTPLabel{})
-
-	UpdateExperimentRunRequest_Description = UpdateExperimentRunRequest.AddMember("Description", _Description)
-
-	UpdateExperimentRunRequest_ExposurePercentage = UpdateExperimentRunRequest.AddMember("ExposurePercentage", _NullablePercentage)
-
-	UpdateExperimentRunRequest_TreatmentOverrides = UpdateExperimentRunRequest.AddMember("TreatmentOverrides", TreatmentOverrides)
-
-	UpdateExperimentRunRequest_DeploymentParameters = UpdateExperimentRunRequest.AddMember("DeploymentParameters", DeploymentParameters)
-
-	UpdateExtensionAssociationRequest_ExtensionAssociationId = UpdateExtensionAssociationRequest.AddMember("ExtensionAssociationId", _Id, &smithytraits.HTTPLabel{})
-
-	UpdateExtensionAssociationRequest_Parameters = UpdateExtensionAssociationRequest.AddMember("Parameters", _ParameterValueMap)
-
-	UpdateExtensionRequest_ExtensionIdentifier = UpdateExtensionRequest.AddMember("ExtensionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateExtensionRequest_Description = UpdateExtensionRequest.AddMember("Description", _Description)
-
-	UpdateExtensionRequest_Actions = UpdateExtensionRequest.AddMember("Actions", _ActionsMap)
-
-	UpdateExtensionRequest_Parameters = UpdateExtensionRequest.AddMember("Parameters", _ParameterMap)
-
-	UpdateExtensionRequest_VersionNumber = UpdateExtensionRequest.AddMember("VersionNumber", _Integer)
-
-	ValidateConfigurationRequest_ApplicationId = ValidateConfigurationRequest.AddMember("ApplicationId", _Name, &smithytraits.HTTPLabel{})
-
-	ValidateConfigurationRequest_ConfigurationProfileId = ValidateConfigurationRequest.AddMember("ConfigurationProfileId", _LongName, &smithytraits.HTTPLabel{})
-
-	ValidateConfigurationRequest_ConfigurationVersion = ValidateConfigurationRequest.AddMember("ConfigurationVersion", _Version, &smithytraits.HTTPQuery{Name: "configuration_version"})
-
-}
+	Code: 204}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 413}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Latest-Version-Number"}}, DirectMask: 0x80}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Description"}}, DirectMask: 0x80}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "VersionLabel"}}, DirectMask: 0x80}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Application-Id"}}, DirectMask: 0x80}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Configuration-Profile-Id"}}, DirectMask: 0x80}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Version-Number"}}, DirectMask: 0x80}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "KmsKeyArn"}}, DirectMask: 0x80}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-deletion-protection-check"}}, DirectMask: 0x80}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "delete_type"}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version"}}, DirectMask: 0x10}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "client_id"}}, DirectMask: 0x10}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "client_configuration_version"}}, DirectMask: 0x10}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Configuration-Version"}}, DirectMask: 0x80}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version_number"}}, DirectMask: 0x10}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max_results"}}, DirectMask: 0x10}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next_token"}}, DirectMask: 0x10}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "type"}}, DirectMask: 0x10}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "application_identifier"}}, DirectMask: 0x10}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "configuration_profile_identifier"}}, DirectMask: 0x10}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "environment_identifier"}}, DirectMask: 0x10}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resource_identifier"}}, DirectMask: 0x10}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "extension_identifier"}}, DirectMask: 0x10}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "extension_version_number"}}, DirectMask: 0x10}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version_label"}}, DirectMask: 0x10}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Allow-Revert"}}, DirectMask: 0x80}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "configuration_version"}}, DirectMask: 0x10}
+
+var mAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAction_Name, &sAction_Description, &sAction_Uri, &sAction_RoleArn}}
+var mActionInvocation = smithy.SchemaMembers{List: []*smithy.Schema{&sActionInvocation_ExtensionIdentifier, &sActionInvocation_ActionName, &sActionInvocation_Uri, &sActionInvocation_RoleArn, &sActionInvocation_ErrorMessage, &sActionInvocation_ErrorCode, &sActionInvocation_InvocationId}}
+var m_ActionInvocations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionInvocations_member}}
+var m_ActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionList_member}}
+var mActionPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION, &sActionPoint_PRE_START_DEPLOYMENT, &sActionPoint_AT_DEPLOYMENT_TICK, &sActionPoint_ON_DEPLOYMENT_START, &sActionPoint_ON_DEPLOYMENT_STEP, &sActionPoint_ON_DEPLOYMENT_BAKING, &sActionPoint_ON_DEPLOYMENT_COMPLETE, &sActionPoint_ON_DEPLOYMENT_ROLLED_BACK}}
+var m_ActionsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionsMap_key, &s_ActionsMap_value}}
+var mApplication = smithy.SchemaMembers{List: []*smithy.Schema{&sApplication_Id, &sApplication_Name, &sApplication_Description}}
+var m_ApplicationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationList_member}}
+var mAppliedExtension = smithy.SchemaMembers{List: []*smithy.Schema{&sAppliedExtension_ExtensionId, &sAppliedExtension_ExtensionAssociationId, &sAppliedExtension_VersionNumber, &sAppliedExtension_Parameters}}
+var m_AppliedExtensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppliedExtensions_member}}
+var mAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeValue_StringValue, &sAttributeValue_NumberValue, &sAttributeValue_BooleanValue, &sAttributeValue_StringArray, &sAttributeValue_NumberArray}}
+var m_AttributeValueMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeValueMap_key, &s_AttributeValueMap_value}}
+var mBadRequestDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestDetails_InvalidConfiguration}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Message, &sBadRequestException_Reason, &sBadRequestException_Details}}
+var mBadRequestReason = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestReason_INVALID_CONFIGURATION}}
+var mBytesMeasure = smithy.SchemaMembers{List: []*smithy.Schema{&sBytesMeasure_KILOBYTES}}
+var mConfigurationProfileSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationProfileSummary_ApplicationId, &sConfigurationProfileSummary_Id, &sConfigurationProfileSummary_Name, &sConfigurationProfileSummary_LocationUri, &sConfigurationProfileSummary_ValidatorTypes, &sConfigurationProfileSummary_Type}}
+var m_ConfigurationProfileSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationProfileSummaryList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDeleteType = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteType_ARCHIVE, &sDeleteType_DESTROY}}
+var mDeletionProtectionCheck = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletionProtectionCheck_ACCOUNT_DEFAULT, &sDeletionProtectionCheck_APPLY, &sDeletionProtectionCheck_BYPASS}}
+var mDeletionProtectionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletionProtectionSettings_Enabled, &sDeletionProtectionSettings_ProtectionPeriodInMinutes}}
+var mDeploymentEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentEvent_EventType, &sDeploymentEvent_TriggeredBy, &sDeploymentEvent_Description, &sDeploymentEvent_ActionInvocations, &sDeploymentEvent_OccurredAt}}
+var m_DeploymentEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentEvents_member}}
+var mDeploymentEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentEventType_PERCENTAGE_UPDATED, &sDeploymentEventType_ROLLBACK_STARTED, &sDeploymentEventType_ROLLBACK_COMPLETED, &sDeploymentEventType_BAKE_TIME_STARTED, &sDeploymentEventType_DEPLOYMENT_STARTED, &sDeploymentEventType_DEPLOYMENT_COMPLETED, &sDeploymentEventType_REVERT_COMPLETED}}
+var m_DeploymentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentList_member}}
+var mDeploymentParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentParameters_DynamicExtensionParameters, &sDeploymentParameters_Tags}}
+var mDeploymentState = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentState_BAKING, &sDeploymentState_VALIDATING, &sDeploymentState_DEPLOYING, &sDeploymentState_COMPLETE, &sDeploymentState_ROLLING_BACK, &sDeploymentState_ROLLED_BACK, &sDeploymentState_REVERTED}}
+var mDeploymentStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStrategy_Id, &sDeploymentStrategy_Name, &sDeploymentStrategy_Description, &sDeploymentStrategy_DeploymentDurationInMinutes, &sDeploymentStrategy_GrowthType, &sDeploymentStrategy_GrowthFactor, &sDeploymentStrategy_FinalBakeTimeInMinutes, &sDeploymentStrategy_ReplicateTo}}
+var m_DeploymentStrategyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentStrategyList_member}}
+var mDeploymentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentSummary_DeploymentNumber, &sDeploymentSummary_ConfigurationProfileId, &sDeploymentSummary_ConfigurationName, &sDeploymentSummary_ConfigurationVersion, &sDeploymentSummary_DeploymentDurationInMinutes, &sDeploymentSummary_GrowthType, &sDeploymentSummary_GrowthFactor, &sDeploymentSummary_FinalBakeTimeInMinutes, &sDeploymentSummary_State, &sDeploymentSummary_PercentageComplete, &sDeploymentSummary_StartedAt, &sDeploymentSummary_CompletedAt, &sDeploymentSummary_VersionLabel, &sDeploymentSummary_Type}, Hash: &hDeploymentSummary}
+var mDeploymentType = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentType_USER, &sDeploymentType_MANAGED}}
+var m_DynamicParameterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DynamicParameterMap_key, &s_DynamicParameterMap_value}}
+var mEnvironment = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironment_ApplicationId, &sEnvironment_Id, &sEnvironment_Name, &sEnvironment_Description, &sEnvironment_State, &sEnvironment_Monitors}}
+var m_EnvironmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentList_member}}
+var mEnvironmentState = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentState_READY_FOR_DEPLOYMENT, &sEnvironmentState_DEPLOYING, &sEnvironmentState_ROLLING_BACK, &sEnvironmentState_ROLLED_BACK, &sEnvironmentState_REVERTED}}
+var m_ExperimentDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExperimentDefinitionList_member}}
+var mExperimentDefinitionSnapshot = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentDefinitionSnapshot_ApplicationId, &sExperimentDefinitionSnapshot_Id, &sExperimentDefinitionSnapshot_Name, &sExperimentDefinitionSnapshot_Hypothesis, &sExperimentDefinitionSnapshot_ConfigurationProfileId, &sExperimentDefinitionSnapshot_EnvironmentId, &sExperimentDefinitionSnapshot_FlagKey, &sExperimentDefinitionSnapshot_AudienceRule, &sExperimentDefinitionSnapshot_AudienceDescription, &sExperimentDefinitionSnapshot_LaunchCriteria, &sExperimentDefinitionSnapshot_Treatments, &sExperimentDefinitionSnapshot_Control}, Hash: &hExperimentDefinitionSnapshot}
+var mExperimentDefinitionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentDefinitionStatus_ACTIVE, &sExperimentDefinitionStatus_IDLE, &sExperimentDefinitionStatus_ARCHIVED}}
+var mExperimentDefinitionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentDefinitionSummary_ApplicationId, &sExperimentDefinitionSummary_Id, &sExperimentDefinitionSummary_Name, &sExperimentDefinitionSummary_Hypothesis, &sExperimentDefinitionSummary_Status, &sExperimentDefinitionSummary_ConfigurationProfileId, &sExperimentDefinitionSummary_EnvironmentId, &sExperimentDefinitionSummary_FlagKey, &sExperimentDefinitionSummary_CreatedAt, &sExperimentDefinitionSummary_UpdatedAt}, Hash: &hExperimentDefinitionSummary}
+var mExperimentRunEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRunEvent_Description, &sExperimentRunEvent_AssociatedDeployment, &sExperimentRunEvent_EventType, &sExperimentRunEvent_OccurredAt, &sExperimentRunEvent_TriggeredBy, &sExperimentRunEvent_ExposurePercentage, &sExperimentRunEvent_TreatmentOverrides}}
+var m_ExperimentRunEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExperimentRunEventList_member}}
+var mExperimentRunEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRunEventType_RUN_STARTED, &sExperimentRunEventType_EXPOSURE_UPDATED, &sExperimentRunEventType_OVERRIDES_UPDATED, &sExperimentRunEventType_RUN_STOPPED}}
+var mExperimentRunResult = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRunResult_ExecutiveSummary, &sExperimentRunResult_ReasonsToLaunch, &sExperimentRunResult_ReasonsNotToLaunch}}
+var mExperimentRunStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRunStatus_RUNNING, &sExperimentRunStatus_DONE}}
+var mExperimentRunSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRunSummary_ExperimentDefinitionId, &sExperimentRunSummary_Run, &sExperimentRunSummary_Description, &sExperimentRunSummary_Status, &sExperimentRunSummary_StartedAt, &sExperimentRunSummary_UpdatedAt, &sExperimentRunSummary_EndedAt}}
+var m_ExperimentRunSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExperimentRunSummaryList_member}}
+var m_ExtensionAssociationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtensionAssociationSummaries_member}}
+var mExtensionAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensionAssociationSummary_Id, &sExtensionAssociationSummary_ExtensionArn, &sExtensionAssociationSummary_ResourceArn}}
+var m_ExtensionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtensionSummaries_member}}
+var mExtensionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensionSummary_Id, &sExtensionSummary_Name, &sExtensionSummary_VersionNumber, &sExtensionSummary_Arn, &sExtensionSummary_Description}}
+var mFlagValue = smithy.SchemaMembers{List: []*smithy.Schema{&sFlagValue_Enabled, &sFlagValue_AttributeValues}}
+var mGrowthType = smithy.SchemaMembers{List: []*smithy.Schema{&sGrowthType_LINEAR, &sGrowthType_EXPONENTIAL}}
+var mHostedConfigurationVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sHostedConfigurationVersionSummary_ApplicationId, &sHostedConfigurationVersionSummary_ConfigurationProfileId, &sHostedConfigurationVersionSummary_VersionNumber, &sHostedConfigurationVersionSummary_Description, &sHostedConfigurationVersionSummary_ContentType, &sHostedConfigurationVersionSummary_VersionLabel, &sHostedConfigurationVersionSummary_KmsKeyArn}}
+var m_HostedConfigurationVersionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HostedConfigurationVersionSummaryList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidConfigurationDetail_Constraint, &sInvalidConfigurationDetail_Location, &sInvalidConfigurationDetail_Reason, &sInvalidConfigurationDetail_Type, &sInvalidConfigurationDetail_Value}}
+var m_InvalidConfigurationDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvalidConfigurationDetailList_member}}
+var mMonitor = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitor_AlarmArn, &sMonitor_AlarmRoleArn}}
+var m_MonitorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MonitorList_member}}
+var m_NumberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NumberList_member}}
+var mParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sParameter_Description, &sParameter_Required, &sParameter_Dynamic}}
+var m_ParameterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParameterMap_key, &s_ParameterMap_value}}
+var m_ParameterValueMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParameterValueMap_key, &s_ParameterValueMap_value}}
+var mPayloadTooLargeException = smithy.SchemaMembers{List: []*smithy.Schema{&sPayloadTooLargeException_Message, &sPayloadTooLargeException_Measure, &sPayloadTooLargeException_Limit, &sPayloadTooLargeException_Size}}
+var mReplicateTo = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicateTo_NONE, &sReplicateTo_SSM_DOCUMENT}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceName}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTreatment = smithy.SchemaMembers{List: []*smithy.Schema{&sTreatment_Key, &sTreatment_Weight, &sTreatment_Description, &sTreatment_FlagValue}}
+var mTreatmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTreatmentInput_Weight, &sTreatmentInput_Description, &sTreatmentInput_FlagValue}}
+var m_TreatmentInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TreatmentInputList_member}}
+var m_TreatmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TreatmentList_member}}
+var m_TreatmentOverrideMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TreatmentOverrideMap_key, &s_TreatmentOverrideMap_value}}
+var mTreatmentOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sTreatmentOverrides_Inline}}
+var mTriggeredBy = smithy.SchemaMembers{List: []*smithy.Schema{&sTriggeredBy_USER, &sTriggeredBy_APPCONFIG, &sTriggeredBy_CLOUDWATCH_ALARM, &sTriggeredBy_INTERNAL_ERROR}}
+var mValidator = smithy.SchemaMembers{List: []*smithy.Schema{&sValidator_Type, &sValidator_Content}}
+var m_ValidatorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidatorList_member}}
+var mValidatorType = smithy.SchemaMembers{List: []*smithy.Schema{&sValidatorType_JSON_SCHEMA, &sValidatorType_LAMBDA}}
+var m_ValidatorTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidatorTypeList_member}}
+var mVendedMetricsSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sVendedMetricsSettings_Enabled}}
+var mCreateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationRequest_Name, &sCreateApplicationRequest_Description, &sCreateApplicationRequest_Tags}}
+var mCreateConfigurationProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationProfileRequest_ApplicationId, &sCreateConfigurationProfileRequest_Name, &sCreateConfigurationProfileRequest_Description, &sCreateConfigurationProfileRequest_LocationUri, &sCreateConfigurationProfileRequest_RetrievalRoleArn, &sCreateConfigurationProfileRequest_Validators, &sCreateConfigurationProfileRequest_Tags, &sCreateConfigurationProfileRequest_Type, &sCreateConfigurationProfileRequest_KmsKeyIdentifier}, Hash: &hCreateConfigurationProfileRequest}
+var mConfigurationProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationProfile_ApplicationId, &sConfigurationProfile_Id, &sConfigurationProfile_Name, &sConfigurationProfile_Description, &sConfigurationProfile_LocationUri, &sConfigurationProfile_RetrievalRoleArn, &sConfigurationProfile_Validators, &sConfigurationProfile_Type, &sConfigurationProfile_KmsKeyArn, &sConfigurationProfile_KmsKeyIdentifier}, Hash: &hConfigurationProfile}
+var mCreateDeploymentStrategyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeploymentStrategyRequest_Name, &sCreateDeploymentStrategyRequest_Description, &sCreateDeploymentStrategyRequest_DeploymentDurationInMinutes, &sCreateDeploymentStrategyRequest_FinalBakeTimeInMinutes, &sCreateDeploymentStrategyRequest_GrowthFactor, &sCreateDeploymentStrategyRequest_GrowthType, &sCreateDeploymentStrategyRequest_ReplicateTo, &sCreateDeploymentStrategyRequest_Tags}}
+var mCreateEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentRequest_ApplicationId, &sCreateEnvironmentRequest_Name, &sCreateEnvironmentRequest_Description, &sCreateEnvironmentRequest_Monitors, &sCreateEnvironmentRequest_Tags}}
+var mCreateExperimentDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExperimentDefinitionRequest_ApplicationIdentifier, &sCreateExperimentDefinitionRequest_Name, &sCreateExperimentDefinitionRequest_ConfigurationProfileIdentifier, &sCreateExperimentDefinitionRequest_EnvironmentIdentifier, &sCreateExperimentDefinitionRequest_FlagKey, &sCreateExperimentDefinitionRequest_Treatments, &sCreateExperimentDefinitionRequest_Control, &sCreateExperimentDefinitionRequest_AudienceRule, &sCreateExperimentDefinitionRequest_Hypothesis, &sCreateExperimentDefinitionRequest_AudienceDescription, &sCreateExperimentDefinitionRequest_LaunchCriteria, &sCreateExperimentDefinitionRequest_Tags}, Hash: &hCreateExperimentDefinitionRequest}
+var mExperimentDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentDefinition_ApplicationId, &sExperimentDefinition_Id, &sExperimentDefinition_Name, &sExperimentDefinition_Hypothesis, &sExperimentDefinition_Status, &sExperimentDefinition_ConfigurationProfileId, &sExperimentDefinition_EnvironmentId, &sExperimentDefinition_FlagKey, &sExperimentDefinition_AudienceRule, &sExperimentDefinition_AudienceDescription, &sExperimentDefinition_LaunchCriteria, &sExperimentDefinition_Treatments, &sExperimentDefinition_Control, &sExperimentDefinition_CreatedAt, &sExperimentDefinition_UpdatedAt, &sExperimentDefinition_KmsKeyIdentifier}, Hash: &hExperimentDefinition}
+var mCreateExtensionAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExtensionAssociationRequest_ExtensionIdentifier, &sCreateExtensionAssociationRequest_ExtensionVersionNumber, &sCreateExtensionAssociationRequest_ResourceIdentifier, &sCreateExtensionAssociationRequest_Parameters, &sCreateExtensionAssociationRequest_Tags}}
+var mExtensionAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensionAssociation_Id, &sExtensionAssociation_ExtensionArn, &sExtensionAssociation_ResourceArn, &sExtensionAssociation_Arn, &sExtensionAssociation_Parameters, &sExtensionAssociation_ExtensionVersionNumber}}
+var mCreateExtensionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExtensionRequest_Name, &sCreateExtensionRequest_Description, &sCreateExtensionRequest_Actions, &sCreateExtensionRequest_Parameters, &sCreateExtensionRequest_Tags, &sCreateExtensionRequest_LatestVersionNumber}}
+var mExtension = smithy.SchemaMembers{List: []*smithy.Schema{&sExtension_Id, &sExtension_Name, &sExtension_VersionNumber, &sExtension_Arn, &sExtension_Description, &sExtension_Actions, &sExtension_Parameters}}
+var mCreateHostedConfigurationVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHostedConfigurationVersionRequest_ApplicationId, &sCreateHostedConfigurationVersionRequest_ConfigurationProfileId, &sCreateHostedConfigurationVersionRequest_Description, &sCreateHostedConfigurationVersionRequest_Content, &sCreateHostedConfigurationVersionRequest_ContentType, &sCreateHostedConfigurationVersionRequest_LatestVersionNumber, &sCreateHostedConfigurationVersionRequest_VersionLabel}}
+var mHostedConfigurationVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sHostedConfigurationVersion_ApplicationId, &sHostedConfigurationVersion_ConfigurationProfileId, &sHostedConfigurationVersion_VersionNumber, &sHostedConfigurationVersion_Description, &sHostedConfigurationVersion_Content, &sHostedConfigurationVersion_ContentType, &sHostedConfigurationVersion_VersionLabel, &sHostedConfigurationVersion_KmsKeyArn}}
+var mDeleteApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApplicationRequest_ApplicationId}}
+var mDeleteConfigurationProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationProfileRequest_ApplicationId, &sDeleteConfigurationProfileRequest_ConfigurationProfileId, &sDeleteConfigurationProfileRequest_DeletionProtectionCheck}}
+var mDeleteDeploymentStrategyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeploymentStrategyRequest_DeploymentStrategyId}}
+var mDeleteEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentRequest_EnvironmentId, &sDeleteEnvironmentRequest_ApplicationId, &sDeleteEnvironmentRequest_DeletionProtectionCheck}}
+var mDeleteExperimentDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExperimentDefinitionRequest_ApplicationIdentifier, &sDeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier, &sDeleteExperimentDefinitionRequest_DeleteType}}
+var mDeleteExtensionAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExtensionAssociationRequest_ExtensionAssociationId}}
+var mDeleteExtensionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExtensionRequest_ExtensionIdentifier, &sDeleteExtensionRequest_VersionNumber}}
+var mDeleteHostedConfigurationVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHostedConfigurationVersionRequest_ApplicationId, &sDeleteHostedConfigurationVersionRequest_ConfigurationProfileId, &sDeleteHostedConfigurationVersionRequest_VersionNumber}}
+var mAccountSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountSettings_DeletionProtection, &sAccountSettings_VendedMetrics}}
+var mGetApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApplicationRequest_ApplicationId}}
+var mGetConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationRequest_Application, &sGetConfigurationRequest_Environment, &sGetConfigurationRequest_Configuration, &sGetConfigurationRequest_ClientId, &sGetConfigurationRequest_ClientConfigurationVersion}}
+var mConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguration_Content, &sConfiguration_ConfigurationVersion, &sConfiguration_ContentType}}
+var mGetConfigurationProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationProfileRequest_ApplicationId, &sGetConfigurationProfileRequest_ConfigurationProfileId}}
+var mGetDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentRequest_ApplicationId, &sGetDeploymentRequest_EnvironmentId, &sGetDeploymentRequest_DeploymentNumber}}
+var mDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&sDeployment_ApplicationId, &sDeployment_EnvironmentId, &sDeployment_DeploymentStrategyId, &sDeployment_ConfigurationProfileId, &sDeployment_DeploymentNumber, &sDeployment_ConfigurationName, &sDeployment_ConfigurationLocationUri, &sDeployment_ConfigurationVersion, &sDeployment_Description, &sDeployment_DeploymentDurationInMinutes, &sDeployment_GrowthType, &sDeployment_GrowthFactor, &sDeployment_FinalBakeTimeInMinutes, &sDeployment_State, &sDeployment_EventLog, &sDeployment_PercentageComplete, &sDeployment_StartedAt, &sDeployment_CompletedAt, &sDeployment_AppliedExtensions, &sDeployment_KmsKeyArn, &sDeployment_KmsKeyIdentifier, &sDeployment_VersionLabel}, Hash: &hDeployment}
+var mGetDeploymentStrategyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentStrategyRequest_DeploymentStrategyId}}
+var mGetEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentRequest_ApplicationId, &sGetEnvironmentRequest_EnvironmentId}}
+var mGetExperimentDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExperimentDefinitionRequest_ApplicationIdentifier, &sGetExperimentDefinitionRequest_ExperimentDefinitionIdentifier}}
+var mGetExperimentRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExperimentRunRequest_ApplicationIdentifier, &sGetExperimentRunRequest_ExperimentDefinitionIdentifier, &sGetExperimentRunRequest_Run}}
+var mExperimentRun = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRun_ApplicationId, &sExperimentRun_ExperimentDefinitionId, &sExperimentRun_Run, &sExperimentRun_Description, &sExperimentRun_Status, &sExperimentRun_ExposurePercentage, &sExperimentRun_TreatmentOverrides, &sExperimentRun_Result, &sExperimentRun_StartedAt, &sExperimentRun_UpdatedAt, &sExperimentRun_EndedAt, &sExperimentRun_ExperimentDefinitionSnapshot}, Hash: &hExperimentRun}
+var mGetExtensionAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExtensionAssociationRequest_ExtensionAssociationId}}
+var mGetExtensionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExtensionRequest_ExtensionIdentifier, &sGetExtensionRequest_VersionNumber}}
+var mGetHostedConfigurationVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHostedConfigurationVersionRequest_ApplicationId, &sGetHostedConfigurationVersionRequest_ConfigurationProfileId, &sGetHostedConfigurationVersionRequest_VersionNumber}}
+var mListApplicationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationsRequest_MaxResults, &sListApplicationsRequest_NextToken}}
+var mApplications = smithy.SchemaMembers{List: []*smithy.Schema{&sApplications_Items, &sApplications_NextToken}}
+var mListConfigurationProfilesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationProfilesRequest_ApplicationId, &sListConfigurationProfilesRequest_MaxResults, &sListConfigurationProfilesRequest_NextToken, &sListConfigurationProfilesRequest_Type}}
+var mConfigurationProfiles = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationProfiles_Items, &sConfigurationProfiles_NextToken}}
+var mListDeploymentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentsRequest_ApplicationId, &sListDeploymentsRequest_EnvironmentId, &sListDeploymentsRequest_MaxResults, &sListDeploymentsRequest_NextToken}}
+var mDeployments = smithy.SchemaMembers{List: []*smithy.Schema{&sDeployments_Items, &sDeployments_NextToken}}
+var mListDeploymentStrategiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentStrategiesRequest_MaxResults, &sListDeploymentStrategiesRequest_NextToken}}
+var mDeploymentStrategies = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStrategies_Items, &sDeploymentStrategies_NextToken}}
+var mListEnvironmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentsRequest_ApplicationId, &sListEnvironmentsRequest_MaxResults, &sListEnvironmentsRequest_NextToken}}
+var mEnvironments = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironments_Items, &sEnvironments_NextToken}}
+var mListExperimentDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExperimentDefinitionsRequest_ApplicationIdentifier, &sListExperimentDefinitionsRequest_ConfigurationProfileIdentifier, &sListExperimentDefinitionsRequest_EnvironmentIdentifier, &sListExperimentDefinitionsRequest_Status, &sListExperimentDefinitionsRequest_MaxResults, &sListExperimentDefinitionsRequest_NextToken}}
+var mExperimentDefinitions = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentDefinitions_Items, &sExperimentDefinitions_NextToken}}
+var mListExperimentRunEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExperimentRunEventsRequest_ApplicationIdentifier, &sListExperimentRunEventsRequest_ExperimentDefinitionIdentifier, &sListExperimentRunEventsRequest_Run, &sListExperimentRunEventsRequest_MaxResults, &sListExperimentRunEventsRequest_NextToken}}
+var mExperimentRunEvents = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRunEvents_Items, &sExperimentRunEvents_NextToken}}
+var mListExperimentRunsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExperimentRunsRequest_ApplicationIdentifier, &sListExperimentRunsRequest_ExperimentDefinitionIdentifier, &sListExperimentRunsRequest_MaxResults, &sListExperimentRunsRequest_NextToken, &sListExperimentRunsRequest_Status}}
+var mExperimentRuns = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentRuns_Items, &sExperimentRuns_NextToken}}
+var mListExtensionAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExtensionAssociationsRequest_ResourceIdentifier, &sListExtensionAssociationsRequest_ExtensionIdentifier, &sListExtensionAssociationsRequest_ExtensionVersionNumber, &sListExtensionAssociationsRequest_MaxResults, &sListExtensionAssociationsRequest_NextToken}}
+var mExtensionAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensionAssociations_Items, &sExtensionAssociations_NextToken}}
+var mListExtensionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExtensionsRequest_MaxResults, &sListExtensionsRequest_NextToken, &sListExtensionsRequest_Name}}
+var mExtensions = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensions_Items, &sExtensions_NextToken}}
+var mListHostedConfigurationVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListHostedConfigurationVersionsRequest_ApplicationId, &sListHostedConfigurationVersionsRequest_ConfigurationProfileId, &sListHostedConfigurationVersionsRequest_MaxResults, &sListHostedConfigurationVersionsRequest_NextToken, &sListHostedConfigurationVersionsRequest_VersionLabel}}
+var mHostedConfigurationVersions = smithy.SchemaMembers{List: []*smithy.Schema{&sHostedConfigurationVersions_Items, &sHostedConfigurationVersions_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mResourceTags = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTags_Tags}}
+var mStartDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDeploymentRequest_ApplicationId, &sStartDeploymentRequest_EnvironmentId, &sStartDeploymentRequest_DeploymentStrategyId, &sStartDeploymentRequest_ConfigurationProfileId, &sStartDeploymentRequest_ConfigurationVersion, &sStartDeploymentRequest_Description, &sStartDeploymentRequest_Tags, &sStartDeploymentRequest_KmsKeyIdentifier, &sStartDeploymentRequest_DynamicExtensionParameters, &sStartDeploymentRequest_LatestDeploymentNumber}, Hash: &hStartDeploymentRequest}
+var mStartExperimentRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartExperimentRunRequest_ApplicationIdentifier, &sStartExperimentRunRequest_ExperimentDefinitionIdentifier, &sStartExperimentRunRequest_Description, &sStartExperimentRunRequest_ExposurePercentage, &sStartExperimentRunRequest_TreatmentOverrides, &sStartExperimentRunRequest_Tags, &sStartExperimentRunRequest_DeploymentParameters}}
+var mStopDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDeploymentRequest_ApplicationId, &sStopDeploymentRequest_EnvironmentId, &sStopDeploymentRequest_DeploymentNumber, &sStopDeploymentRequest_AllowRevert}}
+var mStopExperimentRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopExperimentRunRequest_ApplicationIdentifier, &sStopExperimentRunRequest_ExperimentDefinitionIdentifier, &sStopExperimentRunRequest_Run, &sStopExperimentRunRequest_Result, &sStopExperimentRunRequest_DeploymentParameters}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateAccountSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsRequest_DeletionProtection, &sUpdateAccountSettingsRequest_VendedMetrics}}
+var mUpdateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationRequest_ApplicationId, &sUpdateApplicationRequest_Name, &sUpdateApplicationRequest_Description}}
+var mUpdateConfigurationProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationProfileRequest_ApplicationId, &sUpdateConfigurationProfileRequest_ConfigurationProfileId, &sUpdateConfigurationProfileRequest_Name, &sUpdateConfigurationProfileRequest_Description, &sUpdateConfigurationProfileRequest_RetrievalRoleArn, &sUpdateConfigurationProfileRequest_Validators, &sUpdateConfigurationProfileRequest_KmsKeyIdentifier}}
+var mUpdateDeploymentStrategyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeploymentStrategyRequest_DeploymentStrategyId, &sUpdateDeploymentStrategyRequest_Description, &sUpdateDeploymentStrategyRequest_DeploymentDurationInMinutes, &sUpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes, &sUpdateDeploymentStrategyRequest_GrowthFactor, &sUpdateDeploymentStrategyRequest_GrowthType}}
+var mUpdateEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentRequest_ApplicationId, &sUpdateEnvironmentRequest_EnvironmentId, &sUpdateEnvironmentRequest_Name, &sUpdateEnvironmentRequest_Description, &sUpdateEnvironmentRequest_Monitors}}
+var mUpdateExperimentDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateExperimentDefinitionRequest_ApplicationIdentifier, &sUpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier, &sUpdateExperimentDefinitionRequest_Treatments, &sUpdateExperimentDefinitionRequest_Control, &sUpdateExperimentDefinitionRequest_Hypothesis, &sUpdateExperimentDefinitionRequest_AudienceRule, &sUpdateExperimentDefinitionRequest_AudienceDescription, &sUpdateExperimentDefinitionRequest_LaunchCriteria}}
+var mUpdateExperimentRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateExperimentRunRequest_ApplicationIdentifier, &sUpdateExperimentRunRequest_ExperimentDefinitionIdentifier, &sUpdateExperimentRunRequest_Run, &sUpdateExperimentRunRequest_Description, &sUpdateExperimentRunRequest_ExposurePercentage, &sUpdateExperimentRunRequest_TreatmentOverrides, &sUpdateExperimentRunRequest_DeploymentParameters}}
+var mUpdateExtensionAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateExtensionAssociationRequest_ExtensionAssociationId, &sUpdateExtensionAssociationRequest_Parameters}}
+var mUpdateExtensionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateExtensionRequest_ExtensionIdentifier, &sUpdateExtensionRequest_Description, &sUpdateExtensionRequest_Actions, &sUpdateExtensionRequest_Parameters, &sUpdateExtensionRequest_VersionNumber}}
+var mValidateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateConfigurationRequest_ApplicationId, &sValidateConfigurationRequest_ConfigurationProfileId, &sValidateConfigurationRequest_ConfigurationVersion}}
+
+var hDeploymentSummary = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	6, 14, 13, 9, 8, 5, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 12, 0, 10, 0, 0, 1, 0, 0,
+	0, 0, 2, 7, 0, 11, 0, 0,
+}}
+var hExperimentDefinitionSnapshot = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	12, 0, 0, 7, 0, 0, 0, 0, 6, 11, 0, 0, 9, 8, 3, 0, 0, 1, 0, 0, 0, 0, 2, 10,
+	0, 4, 0, 0, 0, 5, 0, 0,
+}}
+var hExperimentDefinitionSummary = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	3, 10, 0, 7, 0, 0, 0, 6, 0, 0, 0, 4, 9, 0, 0, 0, 0, 0, 1, 2, 0, 8, 0, 0,
+	5, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hCreateConfigurationProfileRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	5, 7, 0, 2, 0, 0, 0, 8, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+	0, 0, 0, 4, 9, 0, 0, 0,
+}}
+var hConfigurationProfile = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 4, 5, 0, 0, 0, 8, 9, 2, 3, 6, 0, 0, 10, 0, 7, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 1,
+}}
+var hCreateExperimentDefinitionRequest = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	0, 0, 0, 10, 11, 8, 0, 2, 4, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 12, 0, 0, 0,
+	5, 9, 1, 0, 7, 0, 0, 3,
+}}
+var hExperimentDefinition = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	0, 0, 0, 10, 11, 9, 0, 3, 1, 5, 2, 0, 15, 14, 0, 0, 12, 0, 0, 0, 16, 0, 0, 0,
+	8, 4, 6, 0, 13, 0, 7, 0,
+}}
+var hDeployment = smithy.MemberHash{Seed: 37, Slots: []uint16{
+	4, 2, 0, 13, 8, 0, 14, 5, 7, 0, 0, 0, 16, 0, 0, 19, 0, 9, 0, 17, 0, 20, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 15, 0, 1, 0, 0, 0, 3, 12, 0, 0,
+	21, 0, 0, 0, 0, 0, 0, 0, 10, 11, 0, 0, 6, 0, 0, 18,
+}}
+var hExperimentRun = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 2, 0, 0, 10, 0, 0, 5, 0, 0, 3, 9, 0, 7, 0, 0, 1, 0, 0, 11, 0, 12, 0, 0,
+	0, 0, 6, 0, 8, 0, 0, 4,
+}}
+var hStartDeploymentRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 2, 8, 4, 0, 0, 9, 0,
+	10, 0, 0, 0, 5, 3, 0, 1,
+}}
+
+var sCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplication, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateApplication})
+var sCreateConfigurationProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationProfile, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateConfigurationProfile})
+var sCreateDeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentStrategy, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateDeploymentStrategy})
+var sCreateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironment, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateEnvironment})
+var sCreateExperimentDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentDefinition, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateExperimentDefinition})
+var sCreateExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExtension, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateExtension})
+var sCreateExtensionAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExtensionAssociation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateExtensionAssociation})
+var sCreateHostedConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHostedConfigurationVersion, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateHostedConfigurationVersion})
+var sDeleteApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplication, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApplication})
+var sDeleteConfigurationProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationProfile, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConfigurationProfile})
+var sDeleteDeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentStrategy, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDeploymentStrategy})
+var sDeleteEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironment, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEnvironment})
+var sDeleteExperimentDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentDefinition, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExperimentDefinition})
+var sDeleteExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExtension, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExtension})
+var sDeleteExtensionAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExtensionAssociation, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExtensionAssociation})
+var sDeleteHostedConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHostedConfigurationVersion, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteHostedConfigurationVersion})
+var sGetAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettings, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountSettings})
+var sGetApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplication, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetApplication})
+var sGetConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguration, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetConfiguration})
+var sGetConfigurationProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationProfile, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetConfigurationProfile})
+var sGetDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeployment, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eGetDeployment})
+var sGetDeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentStrategy, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eGetDeploymentStrategy})
+var sGetEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironment, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eGetEnvironment})
+var sGetExperimentDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentDefinition, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetExperimentDefinition})
+var sGetExperimentRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentRun, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetExperimentRun})
+var sGetExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExtension, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetExtension})
+var sGetExtensionAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExtensionAssociation, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetExtensionAssociation})
+var sGetHostedConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostedConfigurationVersion, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetHostedConfigurationVersion})
+var sListApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplications, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListApplications})
+var sListConfigurationProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationProfiles, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eListConfigurationProfiles})
+var sListDeployments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployments, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListDeployments})
+var sListDeploymentStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentStrategies, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListDeploymentStrategies})
+var sListEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironments, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eListEnvironments})
+var sListExperimentDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentDefinitions, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListExperimentDefinitions})
+var sListExperimentRunEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentRunEvents, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListExperimentRunEvents})
+var sListExperimentRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentRuns, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListExperimentRuns})
+var sListExtensionAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExtensionAssociations, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListExtensionAssociations})
+var sListExtensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExtensions, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListExtensions})
+var sListHostedConfigurationVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostedConfigurationVersions, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListHostedConfigurationVersions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeployment, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eStartDeployment})
+var sStartExperimentRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentRun, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eStartExperimentRun})
+var sStopDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDeployment, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eStopDeployment})
+var sStopExperimentRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperimentRun, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eStopExperimentRun})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettings, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAccountSettings})
+var sUpdateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplication, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApplication})
+var sUpdateConfigurationProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationProfile, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConfigurationProfile})
+var sUpdateDeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeploymentStrategy, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDeploymentStrategy})
+var sUpdateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironment, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEnvironment})
+var sUpdateExperimentDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentDefinition, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eUpdateExperimentDefinition})
+var sUpdateExperimentRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentRun, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eUpdateExperimentRun})
+var sUpdateExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExtension, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eUpdateExtension})
+var sUpdateExtensionAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExtensionAssociation, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eUpdateExtensionAssociation})
+var sValidateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateConfiguration, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eValidateConfiguration})
+var s_AmazonAppConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonAppConfig, Type: smithy.ShapeTypeService, Ext: &e_AmazonAppConfig})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eAction})
+var sAction_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAction_Name})
+var sAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eAction_Description})
+var sAction_Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uri", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eAction_Uri})
+var sAction_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAction_RoleArn})
+var sActionInvocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionInvocation, Members: &mActionInvocation, Type: smithy.ShapeTypeStructure, Ext: &eActionInvocation})
+var sActionInvocation_ExtensionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eActionInvocation_ExtensionIdentifier})
+var sActionInvocation_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eActionInvocation_ActionName})
+var sActionInvocation_Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uri", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eActionInvocation_Uri})
+var sActionInvocation_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eActionInvocation_RoleArn})
+var sActionInvocation_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eActionInvocation_ErrorMessage})
+var sActionInvocation_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eActionInvocation_ErrorCode})
+var sActionInvocation_InvocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eActionInvocation_InvocationId})
+var s_ActionInvocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionInvocations, Members: &m_ActionInvocations, Type: smithy.ShapeTypeList, Ext: &e_ActionInvocations})
+var s_ActionInvocations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionInvocation, Members: &mActionInvocation, Type: smithy.ShapeTypeStructure, Ext: &e_ActionInvocations_member})
+var s_ActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &e_ActionList})
+var s_ActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &e_ActionList_member})
+var sActionPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionPoint, Members: &mActionPoint, Type: smithy.ShapeTypeEnum, Ext: &eActionPoint})
+var sActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_CREATE_HOSTED_CONFIGURATION_VERSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION})
+var sActionPoint_PRE_START_DEPLOYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_START_DEPLOYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_PRE_START_DEPLOYMENT})
+var sActionPoint_AT_DEPLOYMENT_TICK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_DEPLOYMENT_TICK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_AT_DEPLOYMENT_TICK})
+var sActionPoint_ON_DEPLOYMENT_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEPLOYMENT_START", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_ON_DEPLOYMENT_START})
+var sActionPoint_ON_DEPLOYMENT_STEP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEPLOYMENT_STEP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_ON_DEPLOYMENT_STEP})
+var sActionPoint_ON_DEPLOYMENT_BAKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEPLOYMENT_BAKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_ON_DEPLOYMENT_BAKING})
+var sActionPoint_ON_DEPLOYMENT_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEPLOYMENT_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_ON_DEPLOYMENT_COMPLETE})
+var sActionPoint_ON_DEPLOYMENT_ROLLED_BACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEPLOYMENT_ROLLED_BACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionPoint_ON_DEPLOYMENT_ROLLED_BACK})
+var s_ActionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionsMap, Members: &m_ActionsMap, Type: smithy.ShapeTypeMap, Ext: &e_ActionsMap})
+var s_ActionsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iActionPoint, Members: &mActionPoint, Type: smithy.ShapeTypeEnum, Ext: &e_ActionsMap_key})
+var s_ActionsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &e_ActionsMap_value})
+var sApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure, Ext: &eApplication})
+var sApplication_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eApplication_Id})
+var sApplication_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eApplication_Name})
+var sApplication_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eApplication_Description})
+var s_ApplicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationList, Members: &m_ApplicationList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationList})
+var s_ApplicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure, Ext: &e_ApplicationList_member})
+var sAppliedExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppliedExtension, Members: &mAppliedExtension, Type: smithy.ShapeTypeStructure, Ext: &eAppliedExtension})
+var sAppliedExtension_ExtensionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eAppliedExtension_ExtensionId})
+var sAppliedExtension_ExtensionAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionAssociationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eAppliedExtension_ExtensionAssociationId})
+var sAppliedExtension_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAppliedExtension_VersionNumber})
+var sAppliedExtension_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterValueMap, Members: &m_ParameterValueMap, Type: smithy.ShapeTypeMap, Ext: &eAppliedExtension_Parameters})
+var s_AppliedExtensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppliedExtensions, Members: &m_AppliedExtensions, Type: smithy.ShapeTypeList, Ext: &e_AppliedExtensions})
+var s_AppliedExtensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppliedExtension, Members: &mAppliedExtension, Type: smithy.ShapeTypeStructure, Ext: &e_AppliedExtensions_member})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeKey, Type: smithy.ShapeTypeString, Ext: &e_AttributeKey})
+var s_AttributeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeString, Type: smithy.ShapeTypeString, Ext: &e_AttributeString})
+var sAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eAttributeValue})
+var sAttributeValue_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValue", ID: &i_AttributeString, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_StringValue})
+var sAttributeValue_NumberValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eAttributeValue_NumberValue})
+var sAttributeValue_BooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BooleanValue", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAttributeValue_BooleanValue})
+var sAttributeValue_StringArray = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringArray", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_StringArray})
+var sAttributeValue_NumberArray = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberArray", ID: &i_NumberList, Members: &m_NumberList, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_NumberArray})
+var s_AttributeValueMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValueMap, Members: &m_AttributeValueMap, Type: smithy.ShapeTypeMap, Ext: &e_AttributeValueMap})
+var s_AttributeValueMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeKey, Type: smithy.ShapeTypeString, Ext: &e_AttributeValueMap_key})
+var s_AttributeValueMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_AttributeValueMap_value})
+var sBadRequestDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestDetails, Members: &mBadRequestDetails, Type: smithy.ShapeTypeUnion, Ext: &eBadRequestDetails})
+var sBadRequestDetails_InvalidConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidConfiguration", ID: &i_InvalidConfigurationDetailList, Members: &m_InvalidConfigurationDetailList, Type: smithy.ShapeTypeList, Ext: &eBadRequestDetails_InvalidConfiguration})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sBadRequestException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iBadRequestReason, Members: &mBadRequestReason, Type: smithy.ShapeTypeEnum, Ext: &eBadRequestException_Reason})
+var sBadRequestException_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &iBadRequestDetails, Members: &mBadRequestDetails, Type: smithy.ShapeTypeUnion, Ext: &eBadRequestException_Details})
+var sBadRequestReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestReason, Members: &mBadRequestReason, Type: smithy.ShapeTypeEnum, Ext: &eBadRequestReason})
+var sBadRequestReason_INVALID_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestReason_INVALID_CONFIGURATION})
+var s_Blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blob, Traits: &t57, Type: smithy.ShapeTypeBlob, Ext: &e_Blob})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sBytesMeasure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBytesMeasure, Members: &mBytesMeasure, Type: smithy.ShapeTypeEnum, Ext: &eBytesMeasure})
+var sBytesMeasure_KILOBYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBytesMeasure_KILOBYTES})
+var sConfigurationProfileSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationProfileSummary, Members: &mConfigurationProfileSummary, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationProfileSummary})
+var sConfigurationProfileSummary_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfileSummary_ApplicationId})
+var sConfigurationProfileSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfileSummary_Id})
+var sConfigurationProfileSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LongName, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfileSummary_Name})
+var sConfigurationProfileSummary_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfileSummary_LocationUri})
+var sConfigurationProfileSummary_ValidatorTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidatorTypes", ID: &i_ValidatorTypeList, Members: &m_ValidatorTypeList, Type: smithy.ShapeTypeList, Ext: &eConfigurationProfileSummary_ValidatorTypes})
+var sConfigurationProfileSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConfigurationProfileType, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfileSummary_Type})
+var s_ConfigurationProfileSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationProfileSummaryList, Members: &m_ConfigurationProfileSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationProfileSummaryList})
+var s_ConfigurationProfileSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationProfileSummary, Members: &mConfigurationProfileSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ConfigurationProfileSummaryList_member})
+var s_ConfigurationProfileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationProfileType, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationProfileType})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t58, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sDeleteType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteType, Members: &mDeleteType, Type: smithy.ShapeTypeEnum, Ext: &eDeleteType})
+var sDeleteType_ARCHIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARCHIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeleteType_ARCHIVE})
+var sDeleteType_DESTROY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESTROY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeleteType_DESTROY})
+var sDeletionProtectionCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionProtectionCheck, Members: &mDeletionProtectionCheck, Type: smithy.ShapeTypeEnum, Ext: &eDeletionProtectionCheck})
+var sDeletionProtectionCheck_ACCOUNT_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionProtectionCheck_ACCOUNT_DEFAULT})
+var sDeletionProtectionCheck_APPLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionProtectionCheck_APPLY})
+var sDeletionProtectionCheck_BYPASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYPASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionProtectionCheck_BYPASS})
+var s_DeletionProtectionDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeletionProtectionDuration, Type: smithy.ShapeTypeInteger, Ext: &e_DeletionProtectionDuration})
+var sDeletionProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionProtectionSettings, Members: &mDeletionProtectionSettings, Type: smithy.ShapeTypeStructure, Ext: &eDeletionProtectionSettings})
+var sDeletionProtectionSettings_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDeletionProtectionSettings_Enabled})
+var sDeletionProtectionSettings_ProtectionPeriodInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtectionPeriodInMinutes", ID: &i_DeletionProtectionDuration, Type: smithy.ShapeTypeInteger, Ext: &eDeletionProtectionSettings_ProtectionPeriodInMinutes})
+var sDeploymentEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentEvent, Members: &mDeploymentEvent, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEvent})
+var sDeploymentEvent_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &iDeploymentEventType, Members: &mDeploymentEventType, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentEvent_EventType})
+var sDeploymentEvent_TriggeredBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggeredBy", ID: &iTriggeredBy, Members: &mTriggeredBy, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentEvent_TriggeredBy})
+var sDeploymentEvent_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDeploymentEvent_Description})
+var sDeploymentEvent_ActionInvocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionInvocations", ID: &i_ActionInvocations, Members: &m_ActionInvocations, Type: smithy.ShapeTypeList, Ext: &eDeploymentEvent_ActionInvocations})
+var sDeploymentEvent_OccurredAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OccurredAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentEvent_OccurredAt})
+var s_DeploymentEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentEvents, Members: &m_DeploymentEvents, Type: smithy.ShapeTypeList, Ext: &e_DeploymentEvents})
+var s_DeploymentEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentEvent, Members: &mDeploymentEvent, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentEvents_member})
+var sDeploymentEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentEventType, Members: &mDeploymentEventType, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentEventType})
+var sDeploymentEventType_PERCENTAGE_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENTAGE_UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventType_PERCENTAGE_UPDATED})
+var sDeploymentEventType_ROLLBACK_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventType_ROLLBACK_STARTED})
+var sDeploymentEventType_ROLLBACK_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventType_ROLLBACK_COMPLETED})
+var sDeploymentEventType_BAKE_TIME_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAKE_TIME_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventType_BAKE_TIME_STARTED})
+var sDeploymentEventType_DEPLOYMENT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventType_DEPLOYMENT_STARTED})
+var sDeploymentEventType_DEPLOYMENT_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventType_DEPLOYMENT_COMPLETED})
+var sDeploymentEventType_REVERT_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVERT_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventType_REVERT_COMPLETED})
+var s_DeploymentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentList, Members: &m_DeploymentList, Type: smithy.ShapeTypeList, Ext: &e_DeploymentList})
+var s_DeploymentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentSummary, Members: &mDeploymentSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentList_member})
+var sDeploymentParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentParameters, Members: &mDeploymentParameters, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentParameters})
+var sDeploymentParameters_DynamicExtensionParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicExtensionParameters", ID: &i_DynamicParameterMap, Members: &m_DynamicParameterMap, Traits: &t60, Type: smithy.ShapeTypeMap, Ext: &eDeploymentParameters_DynamicExtensionParameters})
+var sDeploymentParameters_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eDeploymentParameters_Tags})
+var sDeploymentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentState, Members: &mDeploymentState, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentState})
+var sDeploymentState_BAKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentState_BAKING})
+var sDeploymentState_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentState_VALIDATING})
+var sDeploymentState_DEPLOYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentState_DEPLOYING})
+var sDeploymentState_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentState_COMPLETE})
+var sDeploymentState_ROLLING_BACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLING_BACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentState_ROLLING_BACK})
+var sDeploymentState_ROLLED_BACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLED_BACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentState_ROLLED_BACK})
+var sDeploymentState_REVERTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVERTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentState_REVERTED})
+var sDeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStrategy, Members: &mDeploymentStrategy, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategy})
+var sDeploymentStrategy_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eDeploymentStrategy_Id})
+var sDeploymentStrategy_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeploymentStrategy_Name})
+var sDeploymentStrategy_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDeploymentStrategy_Description})
+var sDeploymentStrategy_DeploymentDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentDurationInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eDeploymentStrategy_DeploymentDurationInMinutes})
+var sDeploymentStrategy_GrowthType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthType", ID: &iGrowthType, Members: &mGrowthType, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStrategy_GrowthType})
+var sDeploymentStrategy_GrowthFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthFactor", ID: &i_Percentage, Type: smithy.ShapeTypeFloat, Ext: &eDeploymentStrategy_GrowthFactor})
+var sDeploymentStrategy_FinalBakeTimeInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBakeTimeInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eDeploymentStrategy_FinalBakeTimeInMinutes})
+var sDeploymentStrategy_ReplicateTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicateTo", ID: &iReplicateTo, Members: &mReplicateTo, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStrategy_ReplicateTo})
+var s_DeploymentStrategyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentStrategyId, Type: smithy.ShapeTypeString, Ext: &e_DeploymentStrategyId})
+var s_DeploymentStrategyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentStrategyList, Members: &m_DeploymentStrategyList, Type: smithy.ShapeTypeList, Ext: &e_DeploymentStrategyList})
+var s_DeploymentStrategyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentStrategy, Members: &mDeploymentStrategy, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentStrategyList_member})
+var sDeploymentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentSummary, Members: &mDeploymentSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentSummary})
+var sDeploymentSummary_DeploymentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDeploymentSummary_DeploymentNumber})
+var sDeploymentSummary_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eDeploymentSummary_ConfigurationProfileId})
+var sDeploymentSummary_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeploymentSummary_ConfigurationName})
+var sDeploymentSummary_ConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eDeploymentSummary_ConfigurationVersion})
+var sDeploymentSummary_DeploymentDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentDurationInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eDeploymentSummary_DeploymentDurationInMinutes})
+var sDeploymentSummary_GrowthType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthType", ID: &iGrowthType, Members: &mGrowthType, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentSummary_GrowthType})
+var sDeploymentSummary_GrowthFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthFactor", ID: &i_Percentage, Type: smithy.ShapeTypeFloat, Ext: &eDeploymentSummary_GrowthFactor})
+var sDeploymentSummary_FinalBakeTimeInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBakeTimeInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eDeploymentSummary_FinalBakeTimeInMinutes})
+var sDeploymentSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDeploymentState, Members: &mDeploymentState, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentSummary_State})
+var sDeploymentSummary_PercentageComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageComplete", ID: &i_Percentage, Type: smithy.ShapeTypeFloat, Ext: &eDeploymentSummary_PercentageComplete})
+var sDeploymentSummary_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentSummary_StartedAt})
+var sDeploymentSummary_CompletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentSummary_CompletedAt})
+var sDeploymentSummary_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eDeploymentSummary_VersionLabel})
+var sDeploymentSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDeploymentType, Members: &mDeploymentType, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentSummary_Type})
+var sDeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentType, Members: &mDeploymentType, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentType})
+var sDeploymentType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentType_USER})
+var sDeploymentType_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentType_MANAGED})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var s_DynamicParameterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamicParameterKey, Type: smithy.ShapeTypeString, Ext: &e_DynamicParameterKey})
+var s_DynamicParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamicParameterMap, Members: &m_DynamicParameterMap, Traits: &t57, Type: smithy.ShapeTypeMap, Ext: &e_DynamicParameterMap})
+var s_DynamicParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DynamicParameterKey, Type: smithy.ShapeTypeString, Ext: &e_DynamicParameterMap_key})
+var s_DynamicParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringWithLengthBetween1And2048, Type: smithy.ShapeTypeString, Ext: &e_DynamicParameterMap_value})
+var s_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &e_EntityId})
+var sEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eEnvironment})
+var sEnvironment_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eEnvironment_ApplicationId})
+var sEnvironment_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eEnvironment_Id})
+var sEnvironment_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eEnvironment_Name})
+var sEnvironment_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eEnvironment_Description})
+var sEnvironment_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeEnum, Ext: &eEnvironment_State})
+var sEnvironment_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &eEnvironment_Monitors})
+var s_EnvironmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentList})
+var s_EnvironmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentList_member})
+var sEnvironmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentState})
+var sEnvironmentState_READY_FOR_DEPLOYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY_FOR_DEPLOYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_READY_FOR_DEPLOYMENT})
+var sEnvironmentState_DEPLOYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_DEPLOYING})
+var sEnvironmentState_ROLLING_BACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLING_BACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_ROLLING_BACK})
+var sEnvironmentState_ROLLED_BACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLED_BACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_ROLLED_BACK})
+var sEnvironmentState_REVERTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVERTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_REVERTED})
+var s_ExperimentDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentDefinitionList, Members: &m_ExperimentDefinitionList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentDefinitionList})
+var s_ExperimentDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentDefinitionSummary, Members: &mExperimentDefinitionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentDefinitionList_member})
+var sExperimentDefinitionSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentDefinitionSnapshot, Members: &mExperimentDefinitionSnapshot, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinitionSnapshot})
+var sExperimentDefinitionSnapshot_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_ApplicationId})
+var sExperimentDefinitionSnapshot_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_Id})
+var sExperimentDefinitionSnapshot_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_Name})
+var sExperimentDefinitionSnapshot_Hypothesis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hypothesis", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_Hypothesis})
+var sExperimentDefinitionSnapshot_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_ConfigurationProfileId})
+var sExperimentDefinitionSnapshot_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_EnvironmentId})
+var sExperimentDefinitionSnapshot_FlagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlagKey", ID: &i_FlagKey, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_FlagKey})
+var sExperimentDefinitionSnapshot_AudienceRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceRule", ID: &i_Rule, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_AudienceRule})
+var sExperimentDefinitionSnapshot_AudienceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_AudienceDescription})
+var sExperimentDefinitionSnapshot_LaunchCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchCriteria", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSnapshot_LaunchCriteria})
+var sExperimentDefinitionSnapshot_Treatments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Treatments", ID: &i_TreatmentList, Members: &m_TreatmentList, Type: smithy.ShapeTypeList, Ext: &eExperimentDefinitionSnapshot_Treatments})
+var sExperimentDefinitionSnapshot_Control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Control", ID: &iTreatment, Members: &mTreatment, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinitionSnapshot_Control})
+var sExperimentDefinitionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentDefinitionStatus, Members: &mExperimentDefinitionStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentDefinitionStatus})
+var sExperimentDefinitionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinitionStatus_ACTIVE})
+var sExperimentDefinitionStatus_IDLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinitionStatus_IDLE})
+var sExperimentDefinitionStatus_ARCHIVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARCHIVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinitionStatus_ARCHIVED})
+var sExperimentDefinitionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentDefinitionSummary, Members: &mExperimentDefinitionSummary, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinitionSummary})
+var sExperimentDefinitionSummary_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSummary_ApplicationId})
+var sExperimentDefinitionSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSummary_Id})
+var sExperimentDefinitionSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSummary_Name})
+var sExperimentDefinitionSummary_Hypothesis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hypothesis", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSummary_Hypothesis})
+var sExperimentDefinitionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExperimentDefinitionStatus, Members: &mExperimentDefinitionStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentDefinitionSummary_Status})
+var sExperimentDefinitionSummary_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSummary_ConfigurationProfileId})
+var sExperimentDefinitionSummary_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSummary_EnvironmentId})
+var sExperimentDefinitionSummary_FlagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlagKey", ID: &i_FlagKey, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitionSummary_FlagKey})
+var sExperimentDefinitionSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentDefinitionSummary_CreatedAt})
+var sExperimentDefinitionSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentDefinitionSummary_UpdatedAt})
+var sExperimentRunEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRunEvent, Members: &mExperimentRunEvent, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunEvent})
+var sExperimentRunEvent_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentRunEvent_Description})
+var sExperimentRunEvent_AssociatedDeployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedDeployment", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExperimentRunEvent_AssociatedDeployment})
+var sExperimentRunEvent_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &iExperimentRunEventType, Members: &mExperimentRunEventType, Type: smithy.ShapeTypeEnum, Ext: &eExperimentRunEvent_EventType})
+var sExperimentRunEvent_OccurredAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OccurredAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentRunEvent_OccurredAt})
+var sExperimentRunEvent_TriggeredBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggeredBy", ID: &iTriggeredBy, Members: &mTriggeredBy, Type: smithy.ShapeTypeEnum, Ext: &eExperimentRunEvent_TriggeredBy})
+var sExperimentRunEvent_ExposurePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExposurePercentage", ID: &i_NullablePercentage, Type: smithy.ShapeTypeFloat, Ext: &eExperimentRunEvent_ExposurePercentage})
+var sExperimentRunEvent_TreatmentOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatmentOverrides", ID: &iTreatmentOverrides, Members: &mTreatmentOverrides, Type: smithy.ShapeTypeUnion, Ext: &eExperimentRunEvent_TreatmentOverrides})
+var s_ExperimentRunEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentRunEventList, Members: &m_ExperimentRunEventList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentRunEventList})
+var s_ExperimentRunEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentRunEvent, Members: &mExperimentRunEvent, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentRunEventList_member})
+var sExperimentRunEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRunEventType, Members: &mExperimentRunEventType, Type: smithy.ShapeTypeEnum, Ext: &eExperimentRunEventType})
+var sExperimentRunEventType_RUN_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUN_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunEventType_RUN_STARTED})
+var sExperimentRunEventType_EXPOSURE_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPOSURE_UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunEventType_EXPOSURE_UPDATED})
+var sExperimentRunEventType_OVERRIDES_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERRIDES_UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunEventType_OVERRIDES_UPDATED})
+var sExperimentRunEventType_RUN_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUN_STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunEventType_RUN_STOPPED})
+var sExperimentRunResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRunResult, Members: &mExperimentRunResult, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunResult})
+var sExperimentRunResult_ExecutiveSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutiveSummary", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentRunResult_ExecutiveSummary})
+var sExperimentRunResult_ReasonsToLaunch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonsToLaunch", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentRunResult_ReasonsToLaunch})
+var sExperimentRunResult_ReasonsNotToLaunch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonsNotToLaunch", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentRunResult_ReasonsNotToLaunch})
+var sExperimentRunStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRunStatus, Members: &mExperimentRunStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentRunStatus})
+var sExperimentRunStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunStatus_RUNNING})
+var sExperimentRunStatus_DONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunStatus_DONE})
+var sExperimentRunSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRunSummary, Members: &mExperimentRunSummary, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunSummary})
+var sExperimentRunSummary_ExperimentDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentRunSummary_ExperimentDefinitionId})
+var sExperimentRunSummary_Run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Run", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eExperimentRunSummary_Run})
+var sExperimentRunSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentRunSummary_Description})
+var sExperimentRunSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExperimentRunStatus, Members: &mExperimentRunStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentRunSummary_Status})
+var sExperimentRunSummary_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentRunSummary_StartedAt})
+var sExperimentRunSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentRunSummary_UpdatedAt})
+var sExperimentRunSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentRunSummary_EndedAt})
+var s_ExperimentRunSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentRunSummaryList, Members: &m_ExperimentRunSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentRunSummaryList})
+var s_ExperimentRunSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentRunSummary, Members: &mExperimentRunSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentRunSummaryList_member})
+var s_ExtensionAssociationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtensionAssociationSummaries, Members: &m_ExtensionAssociationSummaries, Type: smithy.ShapeTypeList, Ext: &e_ExtensionAssociationSummaries})
+var s_ExtensionAssociationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtensionAssociationSummary, Members: &mExtensionAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExtensionAssociationSummaries_member})
+var sExtensionAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensionAssociationSummary, Members: &mExtensionAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eExtensionAssociationSummary})
+var sExtensionAssociationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociationSummary_Id})
+var sExtensionAssociationSummary_ExtensionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociationSummary_ExtensionArn})
+var sExtensionAssociationSummary_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociationSummary_ResourceArn})
+var s_ExtensionOrParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtensionOrParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExtensionOrParameterName})
+var s_ExtensionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtensionSummaries, Members: &m_ExtensionSummaries, Type: smithy.ShapeTypeList, Ext: &e_ExtensionSummaries})
+var s_ExtensionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtensionSummary, Members: &mExtensionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExtensionSummaries_member})
+var sExtensionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensionSummary, Members: &mExtensionSummary, Type: smithy.ShapeTypeStructure, Ext: &eExtensionSummary})
+var sExtensionSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExtensionSummary_Id})
+var sExtensionSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eExtensionSummary_Name})
+var sExtensionSummary_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eExtensionSummary_VersionNumber})
+var sExtensionSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExtensionSummary_Arn})
+var sExtensionSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExtensionSummary_Description})
+var s_FlagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlagKey, Type: smithy.ShapeTypeString, Ext: &e_FlagKey})
+var sFlagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlagValue, Members: &mFlagValue, Type: smithy.ShapeTypeStructure, Ext: &eFlagValue})
+var sFlagValue_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFlagValue_Enabled})
+var sFlagValue_AttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValues", ID: &i_AttributeValueMap, Members: &m_AttributeValueMap, Type: smithy.ShapeTypeMap, Ext: &eFlagValue_AttributeValues})
+var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &e_Float})
+var s_GrowthFactor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrowthFactor, Type: smithy.ShapeTypeFloat, Ext: &e_GrowthFactor})
+var sGrowthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrowthType, Members: &mGrowthType, Type: smithy.ShapeTypeEnum, Ext: &eGrowthType})
+var sGrowthType_LINEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrowthType_LINEAR})
+var sGrowthType_EXPONENTIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPONENTIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrowthType_EXPONENTIAL})
+var sHostedConfigurationVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostedConfigurationVersionSummary, Members: &mHostedConfigurationVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &eHostedConfigurationVersionSummary})
+var sHostedConfigurationVersionSummary_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersionSummary_ApplicationId})
+var sHostedConfigurationVersionSummary_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersionSummary_ConfigurationProfileId})
+var sHostedConfigurationVersionSummary_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eHostedConfigurationVersionSummary_VersionNumber})
+var sHostedConfigurationVersionSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersionSummary_Description})
+var sHostedConfigurationVersionSummary_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And255, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersionSummary_ContentType})
+var sHostedConfigurationVersionSummary_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersionSummary_VersionLabel})
+var sHostedConfigurationVersionSummary_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersionSummary_KmsKeyArn})
+var s_HostedConfigurationVersionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedConfigurationVersionSummaryList, Members: &m_HostedConfigurationVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_HostedConfigurationVersionSummaryList})
+var s_HostedConfigurationVersionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHostedConfigurationVersionSummary, Members: &mHostedConfigurationVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_HostedConfigurationVersionSummaryList_member})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &e_Id})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &e_Identifier})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInvalidConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConfigurationDetail, Members: &mInvalidConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eInvalidConfigurationDetail})
+var sInvalidConfigurationDetail_Constraint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Constraint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationDetail_Constraint})
+var sInvalidConfigurationDetail_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationDetail_Location})
+var sInvalidConfigurationDetail_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationDetail_Reason})
+var sInvalidConfigurationDetail_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationDetail_Type})
+var sInvalidConfigurationDetail_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationDetail_Value})
+var s_InvalidConfigurationDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvalidConfigurationDetailList, Members: &m_InvalidConfigurationDetailList, Type: smithy.ShapeTypeList, Ext: &e_InvalidConfigurationDetailList})
+var s_InvalidConfigurationDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvalidConfigurationDetail, Members: &mInvalidConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &e_InvalidConfigurationDetailList_member})
+var s_Iso8601DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601DateTime, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &e_Iso8601DateTime})
+var s_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyIdentifier})
+var s_KmsKeyIdentifierOrEmpty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdentifierOrEmpty, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyIdentifierOrEmpty})
+var s_LongName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongName, Type: smithy.ShapeTypeString, Ext: &e_LongName})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MinutesBetween0And24Hours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &e_MinutesBetween0And24Hours})
+var sMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &eMonitor})
+var sMonitor_AlarmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmArn", ID: &i_StringWithLengthBetween1And2048, Type: smithy.ShapeTypeString, Ext: &eMonitor_AlarmArn})
+var sMonitor_AlarmRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eMonitor_AlarmRoleArn})
+var s_MonitorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &e_MonitorList})
+var s_MonitorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorList_member})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_NameWithReservedAwsPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameWithReservedAwsPrefix, Type: smithy.ShapeTypeString, Ext: &e_NameWithReservedAwsPrefix})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NullablePercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullablePercentage, Type: smithy.ShapeTypeFloat, Ext: &e_NullablePercentage})
+var s_NumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberList, Members: &m_NumberList, Type: smithy.ShapeTypeList, Ext: &e_NumberList})
+var s_NumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_NumberList_member})
+var sParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameter, Members: &mParameter, Type: smithy.ShapeTypeStructure, Ext: &eParameter})
+var sParameter_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eParameter_Description})
+var sParameter_Required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Required", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eParameter_Required})
+var sParameter_Dynamic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dynamic", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eParameter_Dynamic})
+var s_ParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterMap, Members: &m_ParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_ParameterMap})
+var s_ParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExtensionOrParameterName, Type: smithy.ShapeTypeString, Ext: &e_ParameterMap_key})
+var s_ParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iParameter, Members: &mParameter, Type: smithy.ShapeTypeStructure, Ext: &e_ParameterMap_value})
+var s_ParameterValueMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterValueMap, Members: &m_ParameterValueMap, Type: smithy.ShapeTypeMap, Ext: &e_ParameterValueMap})
+var s_ParameterValueMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExtensionOrParameterName, Type: smithy.ShapeTypeString, Ext: &e_ParameterValueMap_key})
+var s_ParameterValueMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringWithLengthBetween1And2048, Type: smithy.ShapeTypeString, Ext: &e_ParameterValueMap_value})
+var sPayloadTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadTooLargeException, Members: &mPayloadTooLargeException, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &ePayloadTooLargeException})
+var sPayloadTooLargeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePayloadTooLargeException_Message})
+var sPayloadTooLargeException_Measure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Measure", ID: &iBytesMeasure, Members: &mBytesMeasure, Type: smithy.ShapeTypeEnum, Ext: &ePayloadTooLargeException_Measure})
+var sPayloadTooLargeException_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &ePayloadTooLargeException_Limit})
+var sPayloadTooLargeException_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &ePayloadTooLargeException_Size})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeFloat, Ext: &e_Percentage})
+var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &e_PositiveInteger})
+var s_QueryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryName, Type: smithy.ShapeTypeString, Ext: &e_QueryName})
+var sReplicateTo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateTo, Members: &mReplicateTo, Type: smithy.ShapeTypeEnum, Ext: &eReplicateTo})
+var sReplicateTo_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicateTo_NONE})
+var sReplicateTo_SSM_DOCUMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSM_DOCUMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicateTo_SSM_DOCUMENT})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceName})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_Rule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Rule, Type: smithy.ShapeTypeString, Ext: &e_Rule})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t65, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttributeString, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_StringWithLengthBetween0And32768 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween0And32768, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &e_StringWithLengthBetween0And32768})
+var s_StringWithLengthBetween1And2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And2048, Type: smithy.ShapeTypeString, Ext: &e_StringWithLengthBetween1And2048})
+var s_StringWithLengthBetween1And255 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And255, Type: smithy.ShapeTypeString, Ext: &e_StringWithLengthBetween1And255})
+var s_StringWithLengthBetween1And64 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And64, Type: smithy.ShapeTypeString, Ext: &e_StringWithLengthBetween1And64})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTreatment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTreatment, Members: &mTreatment, Type: smithy.ShapeTypeStructure, Ext: &eTreatment})
+var sTreatment_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TreatmentKey, Type: smithy.ShapeTypeString, Ext: &eTreatment_Key})
+var sTreatment_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_Weight, Type: smithy.ShapeTypeFloat, Ext: &eTreatment_Weight})
+var sTreatment_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eTreatment_Description})
+var sTreatment_FlagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlagValue", ID: &iFlagValue, Members: &mFlagValue, Type: smithy.ShapeTypeStructure, Ext: &eTreatment_FlagValue})
+var sTreatmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTreatmentInput, Members: &mTreatmentInput, Type: smithy.ShapeTypeStructure, Ext: &eTreatmentInput})
+var sTreatmentInput_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_Weight, Type: smithy.ShapeTypeFloat, Ext: &eTreatmentInput_Weight})
+var sTreatmentInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eTreatmentInput_Description})
+var sTreatmentInput_FlagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlagValue", ID: &iFlagValue, Members: &mFlagValue, Type: smithy.ShapeTypeStructure, Ext: &eTreatmentInput_FlagValue})
+var s_TreatmentInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TreatmentInputList, Members: &m_TreatmentInputList, Type: smithy.ShapeTypeList, Ext: &e_TreatmentInputList})
+var s_TreatmentInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTreatmentInput, Members: &mTreatmentInput, Type: smithy.ShapeTypeStructure, Ext: &e_TreatmentInputList_member})
+var s_TreatmentKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TreatmentKey, Type: smithy.ShapeTypeString, Ext: &e_TreatmentKey})
+var s_TreatmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TreatmentList, Members: &m_TreatmentList, Type: smithy.ShapeTypeList, Ext: &e_TreatmentList})
+var s_TreatmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTreatment, Members: &mTreatment, Type: smithy.ShapeTypeStructure, Ext: &e_TreatmentList_member})
+var s_TreatmentOverrideMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TreatmentOverrideMap, Members: &m_TreatmentOverrideMap, Type: smithy.ShapeTypeMap, Ext: &e_TreatmentOverrideMap})
+var s_TreatmentOverrideMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &e_TreatmentOverrideMap_key})
+var s_TreatmentOverrideMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TreatmentKey, Type: smithy.ShapeTypeString, Ext: &e_TreatmentOverrideMap_value})
+var sTreatmentOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTreatmentOverrides, Members: &mTreatmentOverrides, Type: smithy.ShapeTypeUnion, Ext: &eTreatmentOverrides})
+var sTreatmentOverrides_Inline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inline", ID: &i_TreatmentOverrideMap, Members: &m_TreatmentOverrideMap, Type: smithy.ShapeTypeMap, Ext: &eTreatmentOverrides_Inline})
+var sTriggeredBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggeredBy, Members: &mTriggeredBy, Type: smithy.ShapeTypeEnum, Ext: &eTriggeredBy})
+var sTriggeredBy_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggeredBy_USER})
+var sTriggeredBy_APPCONFIG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPCONFIG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggeredBy_APPCONFIG})
+var sTriggeredBy_CLOUDWATCH_ALARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_ALARM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggeredBy_CLOUDWATCH_ALARM})
+var sTriggeredBy_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggeredBy_INTERNAL_ERROR})
+var s_Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &e_Uri})
+var sValidator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidator, Members: &mValidator, Type: smithy.ShapeTypeStructure, Ext: &eValidator})
+var sValidator_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iValidatorType, Members: &mValidatorType, Type: smithy.ShapeTypeEnum, Ext: &eValidator_Type})
+var sValidator_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_StringWithLengthBetween0And32768, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eValidator_Content})
+var s_ValidatorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatorList, Members: &m_ValidatorList, Type: smithy.ShapeTypeList, Ext: &e_ValidatorList})
+var s_ValidatorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidator, Members: &mValidator, Type: smithy.ShapeTypeStructure, Ext: &e_ValidatorList_member})
+var sValidatorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatorType, Members: &mValidatorType, Type: smithy.ShapeTypeEnum, Ext: &eValidatorType})
+var sValidatorType_JSON_SCHEMA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON_SCHEMA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidatorType_JSON_SCHEMA})
+var sValidatorType_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidatorType_LAMBDA})
+var s_ValidatorTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatorTypeList, Members: &m_ValidatorTypeList, Type: smithy.ShapeTypeList, Ext: &e_ValidatorTypeList})
+var s_ValidatorTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidatorType, Members: &mValidatorType, Type: smithy.ShapeTypeEnum, Ext: &e_ValidatorTypeList_member})
+var sVendedMetricsSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVendedMetricsSettings, Members: &mVendedMetricsSettings, Type: smithy.ShapeTypeStructure, Ext: &eVendedMetricsSettings})
+var sVendedMetricsSettings_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eVendedMetricsSettings_Enabled})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &e_Version})
+var s_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &e_VersionLabel})
+var s_Weight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Weight, Type: smithy.ShapeTypeFloat, Ext: &e_Weight})
+var sCreateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationRequest, Members: &mCreateApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationRequest})
+var sCreateApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_Name})
+var sCreateApplicationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_Description})
+var sCreateApplicationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateApplicationRequest_Tags})
+var sCreateConfigurationProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationProfileRequest, Members: &mCreateConfigurationProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationProfileRequest})
+var sCreateConfigurationProfileRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationProfileRequest_ApplicationId})
+var sCreateConfigurationProfileRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LongName, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationProfileRequest_Name})
+var sCreateConfigurationProfileRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationProfileRequest_Description})
+var sCreateConfigurationProfileRequest_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationProfileRequest_LocationUri})
+var sCreateConfigurationProfileRequest_RetrievalRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrievalRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationProfileRequest_RetrievalRoleArn})
+var sCreateConfigurationProfileRequest_Validators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validators", ID: &i_ValidatorList, Members: &m_ValidatorList, Type: smithy.ShapeTypeList, Ext: &eCreateConfigurationProfileRequest_Validators})
+var sCreateConfigurationProfileRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateConfigurationProfileRequest_Tags})
+var sCreateConfigurationProfileRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConfigurationProfileType, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationProfileRequest_Type})
+var sCreateConfigurationProfileRequest_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationProfileRequest_KmsKeyIdentifier})
+var sConfigurationProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationProfile, Members: &mConfigurationProfile, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationProfile})
+var sConfigurationProfile_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_ApplicationId})
+var sConfigurationProfile_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_Id})
+var sConfigurationProfile_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LongName, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_Name})
+var sConfigurationProfile_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_Description})
+var sConfigurationProfile_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_LocationUri})
+var sConfigurationProfile_RetrievalRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrievalRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_RetrievalRoleArn})
+var sConfigurationProfile_Validators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validators", ID: &i_ValidatorList, Members: &m_ValidatorList, Type: smithy.ShapeTypeList, Ext: &eConfigurationProfile_Validators})
+var sConfigurationProfile_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConfigurationProfileType, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_Type})
+var sConfigurationProfile_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_KmsKeyArn})
+var sConfigurationProfile_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfile_KmsKeyIdentifier})
+var sCreateDeploymentStrategyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentStrategyRequest, Members: &mCreateDeploymentStrategyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeploymentStrategyRequest})
+var sCreateDeploymentStrategyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateDeploymentStrategyRequest_Name})
+var sCreateDeploymentStrategyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateDeploymentStrategyRequest_Description})
+var sCreateDeploymentStrategyRequest_DeploymentDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentDurationInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eCreateDeploymentStrategyRequest_DeploymentDurationInMinutes})
+var sCreateDeploymentStrategyRequest_FinalBakeTimeInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBakeTimeInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eCreateDeploymentStrategyRequest_FinalBakeTimeInMinutes})
+var sCreateDeploymentStrategyRequest_GrowthFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthFactor", ID: &i_GrowthFactor, Type: smithy.ShapeTypeFloat, Ext: &eCreateDeploymentStrategyRequest_GrowthFactor})
+var sCreateDeploymentStrategyRequest_GrowthType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthType", ID: &iGrowthType, Members: &mGrowthType, Type: smithy.ShapeTypeEnum, Ext: &eCreateDeploymentStrategyRequest_GrowthType})
+var sCreateDeploymentStrategyRequest_ReplicateTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicateTo", ID: &iReplicateTo, Members: &mReplicateTo, Type: smithy.ShapeTypeEnum, Ext: &eCreateDeploymentStrategyRequest_ReplicateTo})
+var sCreateDeploymentStrategyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateDeploymentStrategyRequest_Tags})
+var sCreateEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentRequest, Members: &mCreateEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateEnvironmentRequest})
+var sCreateEnvironmentRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentRequest_ApplicationId})
+var sCreateEnvironmentRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentRequest_Name})
+var sCreateEnvironmentRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentRequest_Description})
+var sCreateEnvironmentRequest_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &eCreateEnvironmentRequest_Monitors})
+var sCreateEnvironmentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateEnvironmentRequest_Tags})
+var sCreateExperimentDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentDefinitionRequest, Members: &mCreateExperimentDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentDefinitionRequest})
+var sCreateExperimentDefinitionRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_ApplicationIdentifier})
+var sCreateExperimentDefinitionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameWithReservedAwsPrefix, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_Name})
+var sCreateExperimentDefinitionRequest_ConfigurationProfileIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_ConfigurationProfileIdentifier})
+var sCreateExperimentDefinitionRequest_EnvironmentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_EnvironmentIdentifier})
+var sCreateExperimentDefinitionRequest_FlagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlagKey", ID: &i_FlagKey, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_FlagKey})
+var sCreateExperimentDefinitionRequest_Treatments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Treatments", ID: &i_TreatmentInputList, Members: &m_TreatmentInputList, Type: smithy.ShapeTypeList, Ext: &eCreateExperimentDefinitionRequest_Treatments})
+var sCreateExperimentDefinitionRequest_Control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Control", ID: &iTreatmentInput, Members: &mTreatmentInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentDefinitionRequest_Control})
+var sCreateExperimentDefinitionRequest_AudienceRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceRule", ID: &i_Rule, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_AudienceRule})
+var sCreateExperimentDefinitionRequest_Hypothesis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hypothesis", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_Hypothesis})
+var sCreateExperimentDefinitionRequest_AudienceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_AudienceDescription})
+var sCreateExperimentDefinitionRequest_LaunchCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchCriteria", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentDefinitionRequest_LaunchCriteria})
+var sCreateExperimentDefinitionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentDefinitionRequest_Tags})
+var sExperimentDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentDefinition, Members: &mExperimentDefinition, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinition})
+var sExperimentDefinition_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_ApplicationId})
+var sExperimentDefinition_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_Id})
+var sExperimentDefinition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_Name})
+var sExperimentDefinition_Hypothesis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hypothesis", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_Hypothesis})
+var sExperimentDefinition_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExperimentDefinitionStatus, Members: &mExperimentDefinitionStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentDefinition_Status})
+var sExperimentDefinition_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_ConfigurationProfileId})
+var sExperimentDefinition_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_EnvironmentId})
+var sExperimentDefinition_FlagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlagKey", ID: &i_FlagKey, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_FlagKey})
+var sExperimentDefinition_AudienceRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceRule", ID: &i_Rule, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_AudienceRule})
+var sExperimentDefinition_AudienceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_AudienceDescription})
+var sExperimentDefinition_LaunchCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchCriteria", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_LaunchCriteria})
+var sExperimentDefinition_Treatments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Treatments", ID: &i_TreatmentList, Members: &m_TreatmentList, Type: smithy.ShapeTypeList, Ext: &eExperimentDefinition_Treatments})
+var sExperimentDefinition_Control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Control", ID: &iTreatment, Members: &mTreatment, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinition_Control})
+var sExperimentDefinition_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentDefinition_CreatedAt})
+var sExperimentDefinition_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentDefinition_UpdatedAt})
+var sExperimentDefinition_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinition_KmsKeyIdentifier})
+var sCreateExtensionAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExtensionAssociationRequest, Members: &mCreateExtensionAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExtensionAssociationRequest})
+var sCreateExtensionAssociationRequest_ExtensionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateExtensionAssociationRequest_ExtensionIdentifier})
+var sCreateExtensionAssociationRequest_ExtensionVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionVersionNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateExtensionAssociationRequest_ExtensionVersionNumber})
+var sCreateExtensionAssociationRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateExtensionAssociationRequest_ResourceIdentifier})
+var sCreateExtensionAssociationRequest_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterValueMap, Members: &m_ParameterValueMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExtensionAssociationRequest_Parameters})
+var sCreateExtensionAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExtensionAssociationRequest_Tags})
+var sExtensionAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensionAssociation, Members: &mExtensionAssociation, Type: smithy.ShapeTypeStructure, Ext: &eExtensionAssociation})
+var sExtensionAssociation_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociation_Id})
+var sExtensionAssociation_ExtensionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociation_ExtensionArn})
+var sExtensionAssociation_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociation_ResourceArn})
+var sExtensionAssociation_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociation_Arn})
+var sExtensionAssociation_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterValueMap, Members: &m_ParameterValueMap, Type: smithy.ShapeTypeMap, Ext: &eExtensionAssociation_Parameters})
+var sExtensionAssociation_ExtensionVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionVersionNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eExtensionAssociation_ExtensionVersionNumber})
+var sCreateExtensionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExtensionRequest, Members: &mCreateExtensionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExtensionRequest})
+var sCreateExtensionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ExtensionOrParameterName, Type: smithy.ShapeTypeString, Ext: &eCreateExtensionRequest_Name})
+var sCreateExtensionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateExtensionRequest_Description})
+var sCreateExtensionRequest_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_ActionsMap, Members: &m_ActionsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExtensionRequest_Actions})
+var sCreateExtensionRequest_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterMap, Members: &m_ParameterMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExtensionRequest_Parameters})
+var sCreateExtensionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExtensionRequest_Tags})
+var sCreateExtensionRequest_LatestVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersionNumber", ID: &i_Integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &eCreateExtensionRequest_LatestVersionNumber})
+var sExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtension, Members: &mExtension, Type: smithy.ShapeTypeStructure, Ext: &eExtension})
+var sExtension_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExtension_Id})
+var sExtension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eExtension_Name})
+var sExtension_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eExtension_VersionNumber})
+var sExtension_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExtension_Arn})
+var sExtension_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExtension_Description})
+var sExtension_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_ActionsMap, Members: &m_ActionsMap, Type: smithy.ShapeTypeMap, Ext: &eExtension_Actions})
+var sExtension_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterMap, Members: &m_ParameterMap, Type: smithy.ShapeTypeMap, Ext: &eExtension_Parameters})
+var sCreateHostedConfigurationVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHostedConfigurationVersionRequest, Members: &mCreateHostedConfigurationVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateHostedConfigurationVersionRequest})
+var sCreateHostedConfigurationVersionRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateHostedConfigurationVersionRequest_ApplicationId})
+var sCreateHostedConfigurationVersionRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateHostedConfigurationVersionRequest_ConfigurationProfileId})
+var sCreateHostedConfigurationVersionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t68, Type: smithy.ShapeTypeString, Ext: &eCreateHostedConfigurationVersionRequest_Description})
+var sCreateHostedConfigurationVersionRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Blob, Traits: &t69, Type: smithy.ShapeTypeBlob, Ext: &eCreateHostedConfigurationVersionRequest_Content})
+var sCreateHostedConfigurationVersionRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And255, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eCreateHostedConfigurationVersionRequest_ContentType})
+var sCreateHostedConfigurationVersionRequest_LatestVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersionNumber", ID: &i_Integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &eCreateHostedConfigurationVersionRequest_LatestVersionNumber})
+var sCreateHostedConfigurationVersionRequest_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eCreateHostedConfigurationVersionRequest_VersionLabel})
+var sHostedConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostedConfigurationVersion, Members: &mHostedConfigurationVersion, Type: smithy.ShapeTypeStructure, Ext: &eHostedConfigurationVersion})
+var sHostedConfigurationVersion_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersion_ApplicationId})
+var sHostedConfigurationVersion_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_Id, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersion_ConfigurationProfileId})
+var sHostedConfigurationVersion_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Traits: &t74, Type: smithy.ShapeTypeInteger, Ext: &eHostedConfigurationVersion_VersionNumber})
+var sHostedConfigurationVersion_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t68, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersion_Description})
+var sHostedConfigurationVersion_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Blob, Traits: &t69, Type: smithy.ShapeTypeBlob, Ext: &eHostedConfigurationVersion_Content})
+var sHostedConfigurationVersion_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And255, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersion_ContentType})
+var sHostedConfigurationVersion_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersion_VersionLabel})
+var sHostedConfigurationVersion_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_Arn, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersion_KmsKeyArn})
+var sDeleteApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationRequest, Members: &mDeleteApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationRequest})
+var sDeleteApplicationRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteApplicationRequest_ApplicationId})
+var sDeleteConfigurationProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationProfileRequest, Members: &mDeleteConfigurationProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationProfileRequest})
+var sDeleteConfigurationProfileRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationProfileRequest_ApplicationId})
+var sDeleteConfigurationProfileRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationProfileRequest_ConfigurationProfileId})
+var sDeleteConfigurationProfileRequest_DeletionProtectionCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtectionCheck", ID: &iDeletionProtectionCheck, Members: &mDeletionProtectionCheck, Traits: &t76, Type: smithy.ShapeTypeEnum, Ext: &eDeleteConfigurationProfileRequest_DeletionProtectionCheck})
+var sDeleteDeploymentStrategyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentStrategyRequest, Members: &mDeleteDeploymentStrategyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDeploymentStrategyRequest})
+var sDeleteDeploymentStrategyRequest_DeploymentStrategyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyId", ID: &i_DeploymentStrategyId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteDeploymentStrategyRequest_DeploymentStrategyId})
+var sDeleteEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentRequest, Members: &mDeleteEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEnvironmentRequest})
+var sDeleteEnvironmentRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteEnvironmentRequest_EnvironmentId})
+var sDeleteEnvironmentRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteEnvironmentRequest_ApplicationId})
+var sDeleteEnvironmentRequest_DeletionProtectionCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtectionCheck", ID: &iDeletionProtectionCheck, Members: &mDeletionProtectionCheck, Traits: &t76, Type: smithy.ShapeTypeEnum, Ext: &eDeleteEnvironmentRequest_DeletionProtectionCheck})
+var sDeleteExperimentDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentDefinitionRequest, Members: &mDeleteExperimentDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExperimentDefinitionRequest})
+var sDeleteExperimentDefinitionRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteExperimentDefinitionRequest_ApplicationIdentifier})
+var sDeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier})
+var sDeleteExperimentDefinitionRequest_DeleteType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteType", ID: &iDeleteType, Members: &mDeleteType, Traits: &t77, Type: smithy.ShapeTypeEnum, Ext: &eDeleteExperimentDefinitionRequest_DeleteType})
+var sDeleteExtensionAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExtensionAssociationRequest, Members: &mDeleteExtensionAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExtensionAssociationRequest})
+var sDeleteExtensionAssociationRequest_ExtensionAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionAssociationId", ID: &i_Id, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteExtensionAssociationRequest_ExtensionAssociationId})
+var sDeleteExtensionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExtensionRequest, Members: &mDeleteExtensionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExtensionRequest})
+var sDeleteExtensionRequest_ExtensionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteExtensionRequest_ExtensionIdentifier})
+var sDeleteExtensionRequest_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Traits: &t78, Type: smithy.ShapeTypeInteger, Ext: &eDeleteExtensionRequest_VersionNumber})
+var sDeleteHostedConfigurationVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHostedConfigurationVersionRequest, Members: &mDeleteHostedConfigurationVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHostedConfigurationVersionRequest})
+var sDeleteHostedConfigurationVersionRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteHostedConfigurationVersionRequest_ApplicationId})
+var sDeleteHostedConfigurationVersionRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDeleteHostedConfigurationVersionRequest_ConfigurationProfileId})
+var sDeleteHostedConfigurationVersionRequest_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eDeleteHostedConfigurationVersionRequest_VersionNumber})
+var sAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSettings, Members: &mAccountSettings, Type: smithy.ShapeTypeStructure, Ext: &eAccountSettings})
+var sAccountSettings_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &iDeletionProtectionSettings, Members: &mDeletionProtectionSettings, Type: smithy.ShapeTypeStructure, Ext: &eAccountSettings_DeletionProtection})
+var sAccountSettings_VendedMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendedMetrics", ID: &iVendedMetricsSettings, Members: &mVendedMetricsSettings, Type: smithy.ShapeTypeStructure, Ext: &eAccountSettings_VendedMetrics})
+var sGetApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationRequest, Members: &mGetApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetApplicationRequest})
+var sGetApplicationRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetApplicationRequest_ApplicationId})
+var sGetConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationRequest, Members: &mGetConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationRequest})
+var sGetConfigurationRequest_Application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Application", ID: &i_StringWithLengthBetween1And64, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationRequest_Application})
+var sGetConfigurationRequest_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &i_StringWithLengthBetween1And64, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationRequest_Environment})
+var sGetConfigurationRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &i_StringWithLengthBetween1And64, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationRequest_Configuration})
+var sGetConfigurationRequest_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientId", ID: &i_StringWithLengthBetween1And64, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationRequest_ClientId})
+var sGetConfigurationRequest_ClientConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientConfigurationVersion", ID: &i_Version, Traits: &t80, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationRequest_ClientConfigurationVersion})
+var sConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguration, Members: &mConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConfiguration})
+var sConfiguration_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Blob, Traits: &t69, Type: smithy.ShapeTypeBlob, Ext: &eConfiguration_Content})
+var sConfiguration_ConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationVersion", ID: &i_Version, Traits: &t81, Type: smithy.ShapeTypeString, Ext: &eConfiguration_ConfigurationVersion})
+var sConfiguration_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_String, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eConfiguration_ContentType})
+var sGetConfigurationProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationProfileRequest, Members: &mGetConfigurationProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationProfileRequest})
+var sGetConfigurationProfileRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationProfileRequest_ApplicationId})
+var sGetConfigurationProfileRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationProfileRequest_ConfigurationProfileId})
+var sGetDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentRequest, Members: &mGetDeploymentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentRequest})
+var sGetDeploymentRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetDeploymentRequest_ApplicationId})
+var sGetDeploymentRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetDeploymentRequest_EnvironmentId})
+var sGetDeploymentRequest_DeploymentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentNumber", ID: &i_Integer, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eGetDeploymentRequest_DeploymentNumber})
+var sDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure, Ext: &eDeployment})
+var sDeployment_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eDeployment_ApplicationId})
+var sDeployment_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eDeployment_EnvironmentId})
+var sDeployment_DeploymentStrategyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eDeployment_DeploymentStrategyId})
+var sDeployment_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eDeployment_ConfigurationProfileId})
+var sDeployment_DeploymentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDeployment_DeploymentNumber})
+var sDeployment_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeployment_ConfigurationName})
+var sDeployment_ConfigurationLocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationLocationUri", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eDeployment_ConfigurationLocationUri})
+var sDeployment_ConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eDeployment_ConfigurationVersion})
+var sDeployment_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDeployment_Description})
+var sDeployment_DeploymentDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentDurationInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eDeployment_DeploymentDurationInMinutes})
+var sDeployment_GrowthType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthType", ID: &iGrowthType, Members: &mGrowthType, Type: smithy.ShapeTypeEnum, Ext: &eDeployment_GrowthType})
+var sDeployment_GrowthFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthFactor", ID: &i_Percentage, Type: smithy.ShapeTypeFloat, Ext: &eDeployment_GrowthFactor})
+var sDeployment_FinalBakeTimeInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBakeTimeInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eDeployment_FinalBakeTimeInMinutes})
+var sDeployment_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDeploymentState, Members: &mDeploymentState, Type: smithy.ShapeTypeEnum, Ext: &eDeployment_State})
+var sDeployment_EventLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventLog", ID: &i_DeploymentEvents, Members: &m_DeploymentEvents, Type: smithy.ShapeTypeList, Ext: &eDeployment_EventLog})
+var sDeployment_PercentageComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageComplete", ID: &i_Percentage, Type: smithy.ShapeTypeFloat, Ext: &eDeployment_PercentageComplete})
+var sDeployment_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eDeployment_StartedAt})
+var sDeployment_CompletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eDeployment_CompletedAt})
+var sDeployment_AppliedExtensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedExtensions", ID: &i_AppliedExtensions, Members: &m_AppliedExtensions, Type: smithy.ShapeTypeList, Ext: &eDeployment_AppliedExtensions})
+var sDeployment_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeployment_KmsKeyArn})
+var sDeployment_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeployment_KmsKeyIdentifier})
+var sDeployment_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eDeployment_VersionLabel})
+var sGetDeploymentStrategyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentStrategyRequest, Members: &mGetDeploymentStrategyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentStrategyRequest})
+var sGetDeploymentStrategyRequest_DeploymentStrategyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyId", ID: &i_DeploymentStrategyId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetDeploymentStrategyRequest_DeploymentStrategyId})
+var sGetEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentRequest, Members: &mGetEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEnvironmentRequest})
+var sGetEnvironmentRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetEnvironmentRequest_ApplicationId})
+var sGetEnvironmentRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetEnvironmentRequest_EnvironmentId})
+var sGetExperimentDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentDefinitionRequest, Members: &mGetExperimentDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentDefinitionRequest})
+var sGetExperimentDefinitionRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetExperimentDefinitionRequest_ApplicationIdentifier})
+var sGetExperimentDefinitionRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetExperimentDefinitionRequest_ExperimentDefinitionIdentifier})
+var sGetExperimentRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentRunRequest, Members: &mGetExperimentRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentRunRequest})
+var sGetExperimentRunRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetExperimentRunRequest_ApplicationIdentifier})
+var sGetExperimentRunRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetExperimentRunRequest_ExperimentDefinitionIdentifier})
+var sGetExperimentRunRequest_Run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Run", ID: &i_PositiveInteger, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eGetExperimentRunRequest_Run})
+var sExperimentRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRun, Members: &mExperimentRun, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRun})
+var sExperimentRun_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentRun_ApplicationId})
+var sExperimentRun_ExperimentDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eExperimentRun_ExperimentDefinitionId})
+var sExperimentRun_Run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Run", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eExperimentRun_Run})
+var sExperimentRun_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eExperimentRun_Description})
+var sExperimentRun_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExperimentRunStatus, Members: &mExperimentRunStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentRun_Status})
+var sExperimentRun_ExposurePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExposurePercentage", ID: &i_NullablePercentage, Type: smithy.ShapeTypeFloat, Ext: &eExperimentRun_ExposurePercentage})
+var sExperimentRun_TreatmentOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatmentOverrides", ID: &iTreatmentOverrides, Members: &mTreatmentOverrides, Type: smithy.ShapeTypeUnion, Ext: &eExperimentRun_TreatmentOverrides})
+var sExperimentRun_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &iExperimentRunResult, Members: &mExperimentRunResult, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRun_Result})
+var sExperimentRun_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentRun_StartedAt})
+var sExperimentRun_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentRun_UpdatedAt})
+var sExperimentRun_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Iso8601DateTime, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentRun_EndedAt})
+var sExperimentRun_ExperimentDefinitionSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionSnapshot", ID: &iExperimentDefinitionSnapshot, Members: &mExperimentDefinitionSnapshot, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRun_ExperimentDefinitionSnapshot})
+var sGetExtensionAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExtensionAssociationRequest, Members: &mGetExtensionAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExtensionAssociationRequest})
+var sGetExtensionAssociationRequest_ExtensionAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionAssociationId", ID: &i_Id, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetExtensionAssociationRequest_ExtensionAssociationId})
+var sGetExtensionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExtensionRequest, Members: &mGetExtensionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExtensionRequest})
+var sGetExtensionRequest_ExtensionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetExtensionRequest_ExtensionIdentifier})
+var sGetExtensionRequest_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &eGetExtensionRequest_VersionNumber})
+var sGetHostedConfigurationVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostedConfigurationVersionRequest, Members: &mGetHostedConfigurationVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetHostedConfigurationVersionRequest})
+var sGetHostedConfigurationVersionRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetHostedConfigurationVersionRequest_ApplicationId})
+var sGetHostedConfigurationVersionRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetHostedConfigurationVersionRequest_ConfigurationProfileId})
+var sGetHostedConfigurationVersionRequest_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eGetHostedConfigurationVersionRequest_VersionNumber})
+var sListApplicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsRequest, Members: &mListApplicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListApplicationsRequest})
+var sListApplicationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListApplicationsRequest_MaxResults})
+var sListApplicationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListApplicationsRequest_NextToken})
+var sApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplications, Members: &mApplications, Type: smithy.ShapeTypeStructure, Ext: &eApplications})
+var sApplications_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ApplicationList, Members: &m_ApplicationList, Type: smithy.ShapeTypeList, Ext: &eApplications_Items})
+var sApplications_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eApplications_NextToken})
+var sListConfigurationProfilesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationProfilesRequest, Members: &mListConfigurationProfilesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationProfilesRequest})
+var sListConfigurationProfilesRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListConfigurationProfilesRequest_ApplicationId})
+var sListConfigurationProfilesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationProfilesRequest_MaxResults})
+var sListConfigurationProfilesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListConfigurationProfilesRequest_NextToken})
+var sListConfigurationProfilesRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConfigurationProfileType, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListConfigurationProfilesRequest_Type})
+var sConfigurationProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationProfiles, Members: &mConfigurationProfiles, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationProfiles})
+var sConfigurationProfiles_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ConfigurationProfileSummaryList, Members: &m_ConfigurationProfileSummaryList, Type: smithy.ShapeTypeList, Ext: &eConfigurationProfiles_Items})
+var sConfigurationProfiles_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eConfigurationProfiles_NextToken})
+var sListDeploymentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentsRequest, Members: &mListDeploymentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentsRequest})
+var sListDeploymentsRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListDeploymentsRequest_ApplicationId})
+var sListDeploymentsRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListDeploymentsRequest_EnvironmentId})
+var sListDeploymentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListDeploymentsRequest_MaxResults})
+var sListDeploymentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListDeploymentsRequest_NextToken})
+var sDeployments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployments, Members: &mDeployments, Type: smithy.ShapeTypeStructure, Ext: &eDeployments})
+var sDeployments_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_DeploymentList, Members: &m_DeploymentList, Type: smithy.ShapeTypeList, Ext: &eDeployments_Items})
+var sDeployments_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDeployments_NextToken})
+var sListDeploymentStrategiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentStrategiesRequest, Members: &mListDeploymentStrategiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentStrategiesRequest})
+var sListDeploymentStrategiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListDeploymentStrategiesRequest_MaxResults})
+var sListDeploymentStrategiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListDeploymentStrategiesRequest_NextToken})
+var sDeploymentStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStrategies, Members: &mDeploymentStrategies, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategies})
+var sDeploymentStrategies_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_DeploymentStrategyList, Members: &m_DeploymentStrategyList, Type: smithy.ShapeTypeList, Ext: &eDeploymentStrategies_Items})
+var sDeploymentStrategies_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDeploymentStrategies_NextToken})
+var sListEnvironmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsRequest, Members: &mListEnvironmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEnvironmentsRequest})
+var sListEnvironmentsRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListEnvironmentsRequest_ApplicationId})
+var sListEnvironmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListEnvironmentsRequest_MaxResults})
+var sListEnvironmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListEnvironmentsRequest_NextToken})
+var sEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironments, Members: &mEnvironments, Type: smithy.ShapeTypeStructure, Ext: &eEnvironments})
+var sEnvironments_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList, Ext: &eEnvironments_Items})
+var sEnvironments_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eEnvironments_NextToken})
+var sListExperimentDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentDefinitionsRequest, Members: &mListExperimentDefinitionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentDefinitionsRequest})
+var sListExperimentDefinitionsRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &eListExperimentDefinitionsRequest_ApplicationIdentifier})
+var sListExperimentDefinitionsRequest_ConfigurationProfileIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileIdentifier", ID: &i_Identifier, Traits: &t87, Type: smithy.ShapeTypeString, Ext: &eListExperimentDefinitionsRequest_ConfigurationProfileIdentifier})
+var sListExperimentDefinitionsRequest_EnvironmentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentIdentifier", ID: &i_Identifier, Traits: &t88, Type: smithy.ShapeTypeString, Ext: &eListExperimentDefinitionsRequest_EnvironmentIdentifier})
+var sListExperimentDefinitionsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExperimentDefinitionStatus, Members: &mExperimentDefinitionStatus, Traits: &t89, Type: smithy.ShapeTypeEnum, Ext: &eListExperimentDefinitionsRequest_Status})
+var sListExperimentDefinitionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListExperimentDefinitionsRequest_MaxResults})
+var sListExperimentDefinitionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListExperimentDefinitionsRequest_NextToken})
+var sExperimentDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentDefinitions, Members: &mExperimentDefinitions, Type: smithy.ShapeTypeStructure, Ext: &eExperimentDefinitions})
+var sExperimentDefinitions_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ExperimentDefinitionList, Members: &m_ExperimentDefinitionList, Type: smithy.ShapeTypeList, Ext: &eExperimentDefinitions_Items})
+var sExperimentDefinitions_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eExperimentDefinitions_NextToken})
+var sListExperimentRunEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentRunEventsRequest, Members: &mListExperimentRunEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentRunEventsRequest})
+var sListExperimentRunEventsRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListExperimentRunEventsRequest_ApplicationIdentifier})
+var sListExperimentRunEventsRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListExperimentRunEventsRequest_ExperimentDefinitionIdentifier})
+var sListExperimentRunEventsRequest_Run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Run", ID: &i_PositiveInteger, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListExperimentRunEventsRequest_Run})
+var sListExperimentRunEventsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListExperimentRunEventsRequest_MaxResults})
+var sListExperimentRunEventsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListExperimentRunEventsRequest_NextToken})
+var sExperimentRunEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRunEvents, Members: &mExperimentRunEvents, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRunEvents})
+var sExperimentRunEvents_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ExperimentRunEventList, Members: &m_ExperimentRunEventList, Type: smithy.ShapeTypeList, Ext: &eExperimentRunEvents_Items})
+var sExperimentRunEvents_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eExperimentRunEvents_NextToken})
+var sListExperimentRunsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentRunsRequest, Members: &mListExperimentRunsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentRunsRequest})
+var sListExperimentRunsRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListExperimentRunsRequest_ApplicationIdentifier})
+var sListExperimentRunsRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListExperimentRunsRequest_ExperimentDefinitionIdentifier})
+var sListExperimentRunsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListExperimentRunsRequest_MaxResults})
+var sListExperimentRunsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListExperimentRunsRequest_NextToken})
+var sListExperimentRunsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExperimentRunStatus, Members: &mExperimentRunStatus, Traits: &t89, Type: smithy.ShapeTypeEnum, Ext: &eListExperimentRunsRequest_Status})
+var sExperimentRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentRuns, Members: &mExperimentRuns, Type: smithy.ShapeTypeStructure, Ext: &eExperimentRuns})
+var sExperimentRuns_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ExperimentRunSummaryList, Members: &m_ExperimentRunSummaryList, Type: smithy.ShapeTypeList, Ext: &eExperimentRuns_Items})
+var sExperimentRuns_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eExperimentRuns_NextToken})
+var sListExtensionAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExtensionAssociationsRequest, Members: &mListExtensionAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExtensionAssociationsRequest})
+var sListExtensionAssociationsRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_Arn, Traits: &t90, Type: smithy.ShapeTypeString, Ext: &eListExtensionAssociationsRequest_ResourceIdentifier})
+var sListExtensionAssociationsRequest_ExtensionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionIdentifier", ID: &i_Identifier, Traits: &t91, Type: smithy.ShapeTypeString, Ext: &eListExtensionAssociationsRequest_ExtensionIdentifier})
+var sListExtensionAssociationsRequest_ExtensionVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionVersionNumber", ID: &i_Integer, Traits: &t92, Type: smithy.ShapeTypeInteger, Ext: &eListExtensionAssociationsRequest_ExtensionVersionNumber})
+var sListExtensionAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListExtensionAssociationsRequest_MaxResults})
+var sListExtensionAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListExtensionAssociationsRequest_NextToken})
+var sExtensionAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensionAssociations, Members: &mExtensionAssociations, Type: smithy.ShapeTypeStructure, Ext: &eExtensionAssociations})
+var sExtensionAssociations_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ExtensionAssociationSummaries, Members: &m_ExtensionAssociationSummaries, Type: smithy.ShapeTypeList, Ext: &eExtensionAssociations_Items})
+var sExtensionAssociations_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eExtensionAssociations_NextToken})
+var sListExtensionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExtensionsRequest, Members: &mListExtensionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExtensionsRequest})
+var sListExtensionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListExtensionsRequest_MaxResults})
+var sListExtensionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListExtensionsRequest_NextToken})
+var sListExtensionsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_QueryName, Traits: &t93, Type: smithy.ShapeTypeString, Ext: &eListExtensionsRequest_Name})
+var sExtensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensions, Members: &mExtensions, Type: smithy.ShapeTypeStructure, Ext: &eExtensions})
+var sExtensions_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ExtensionSummaries, Members: &m_ExtensionSummaries, Type: smithy.ShapeTypeList, Ext: &eExtensions_Items})
+var sExtensions_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eExtensions_NextToken})
+var sListHostedConfigurationVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostedConfigurationVersionsRequest, Members: &mListHostedConfigurationVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListHostedConfigurationVersionsRequest})
+var sListHostedConfigurationVersionsRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListHostedConfigurationVersionsRequest_ApplicationId})
+var sListHostedConfigurationVersionsRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListHostedConfigurationVersionsRequest_ConfigurationProfileId})
+var sListHostedConfigurationVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eListHostedConfigurationVersionsRequest_MaxResults})
+var sListHostedConfigurationVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t84, Type: smithy.ShapeTypeString, Ext: &eListHostedConfigurationVersionsRequest_NextToken})
+var sListHostedConfigurationVersionsRequest_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_QueryName, Traits: &t94, Type: smithy.ShapeTypeString, Ext: &eListHostedConfigurationVersionsRequest_VersionLabel})
+var sHostedConfigurationVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostedConfigurationVersions, Members: &mHostedConfigurationVersions, Type: smithy.ShapeTypeStructure, Ext: &eHostedConfigurationVersions})
+var sHostedConfigurationVersions_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_HostedConfigurationVersionSummaryList, Members: &m_HostedConfigurationVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &eHostedConfigurationVersions_Items})
+var sHostedConfigurationVersions_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eHostedConfigurationVersions_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTags, Members: &mResourceTags, Type: smithy.ShapeTypeStructure, Ext: &eResourceTags})
+var sResourceTags_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eResourceTags_Tags})
+var sStartDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeploymentRequest, Members: &mStartDeploymentRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartDeploymentRequest})
+var sStartDeploymentRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStartDeploymentRequest_ApplicationId})
+var sStartDeploymentRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStartDeploymentRequest_EnvironmentId})
+var sStartDeploymentRequest_DeploymentStrategyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyId", ID: &i_DeploymentStrategyId, Type: smithy.ShapeTypeString, Ext: &eStartDeploymentRequest_DeploymentStrategyId})
+var sStartDeploymentRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Type: smithy.ShapeTypeString, Ext: &eStartDeploymentRequest_ConfigurationProfileId})
+var sStartDeploymentRequest_ConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eStartDeploymentRequest_ConfigurationVersion})
+var sStartDeploymentRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStartDeploymentRequest_Description})
+var sStartDeploymentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eStartDeploymentRequest_Tags})
+var sStartDeploymentRequest_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString, Ext: &eStartDeploymentRequest_KmsKeyIdentifier})
+var sStartDeploymentRequest_DynamicExtensionParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicExtensionParameters", ID: &i_DynamicParameterMap, Members: &m_DynamicParameterMap, Traits: &t60, Type: smithy.ShapeTypeMap, Ext: &eStartDeploymentRequest_DynamicExtensionParameters})
+var sStartDeploymentRequest_LatestDeploymentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestDeploymentNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eStartDeploymentRequest_LatestDeploymentNumber})
+var sStartExperimentRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentRunRequest, Members: &mStartExperimentRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartExperimentRunRequest})
+var sStartExperimentRunRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStartExperimentRunRequest_ApplicationIdentifier})
+var sStartExperimentRunRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStartExperimentRunRequest_ExperimentDefinitionIdentifier})
+var sStartExperimentRunRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStartExperimentRunRequest_Description})
+var sStartExperimentRunRequest_ExposurePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExposurePercentage", ID: &i_NullablePercentage, Type: smithy.ShapeTypeFloat, Ext: &eStartExperimentRunRequest_ExposurePercentage})
+var sStartExperimentRunRequest_TreatmentOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatmentOverrides", ID: &iTreatmentOverrides, Members: &mTreatmentOverrides, Type: smithy.ShapeTypeUnion, Ext: &eStartExperimentRunRequest_TreatmentOverrides})
+var sStartExperimentRunRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eStartExperimentRunRequest_Tags})
+var sStartExperimentRunRequest_DeploymentParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentParameters", ID: &iDeploymentParameters, Members: &mDeploymentParameters, Type: smithy.ShapeTypeStructure, Ext: &eStartExperimentRunRequest_DeploymentParameters})
+var sStopDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDeploymentRequest, Members: &mStopDeploymentRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopDeploymentRequest})
+var sStopDeploymentRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStopDeploymentRequest_ApplicationId})
+var sStopDeploymentRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStopDeploymentRequest_EnvironmentId})
+var sStopDeploymentRequest_DeploymentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentNumber", ID: &i_Integer, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eStopDeploymentRequest_DeploymentNumber})
+var sStopDeploymentRequest_AllowRevert = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowRevert", ID: &i_Boolean, Traits: &t95, Type: smithy.ShapeTypeBoolean, Ext: &eStopDeploymentRequest_AllowRevert})
+var sStopExperimentRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperimentRunRequest, Members: &mStopExperimentRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopExperimentRunRequest})
+var sStopExperimentRunRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStopExperimentRunRequest_ApplicationIdentifier})
+var sStopExperimentRunRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eStopExperimentRunRequest_ExperimentDefinitionIdentifier})
+var sStopExperimentRunRequest_Run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Run", ID: &i_PositiveInteger, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eStopExperimentRunRequest_Run})
+var sStopExperimentRunRequest_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &iExperimentRunResult, Members: &mExperimentRunResult, Type: smithy.ShapeTypeStructure, Ext: &eStopExperimentRunRequest_Result})
+var sStopExperimentRunRequest_DeploymentParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentParameters", ID: &iDeploymentParameters, Members: &mDeploymentParameters, Type: smithy.ShapeTypeStructure, Ext: &eStopExperimentRunRequest_DeploymentParameters})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t96, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateAccountSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsRequest, Members: &mUpdateAccountSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountSettingsRequest})
+var sUpdateAccountSettingsRequest_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &iDeletionProtectionSettings, Members: &mDeletionProtectionSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountSettingsRequest_DeletionProtection})
+var sUpdateAccountSettingsRequest_VendedMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendedMetrics", ID: &iVendedMetricsSettings, Members: &mVendedMetricsSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountSettingsRequest_VendedMetrics})
+var sUpdateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationRequest, Members: &mUpdateApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationRequest})
+var sUpdateApplicationRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_ApplicationId})
+var sUpdateApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_Name})
+var sUpdateApplicationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_Description})
+var sUpdateConfigurationProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationProfileRequest, Members: &mUpdateConfigurationProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationProfileRequest})
+var sUpdateConfigurationProfileRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationProfileRequest_ApplicationId})
+var sUpdateConfigurationProfileRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationProfileRequest_ConfigurationProfileId})
+var sUpdateConfigurationProfileRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LongName, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationProfileRequest_Name})
+var sUpdateConfigurationProfileRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationProfileRequest_Description})
+var sUpdateConfigurationProfileRequest_RetrievalRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrievalRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationProfileRequest_RetrievalRoleArn})
+var sUpdateConfigurationProfileRequest_Validators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validators", ID: &i_ValidatorList, Members: &m_ValidatorList, Type: smithy.ShapeTypeList, Ext: &eUpdateConfigurationProfileRequest_Validators})
+var sUpdateConfigurationProfileRequest_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifierOrEmpty, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationProfileRequest_KmsKeyIdentifier})
+var sUpdateDeploymentStrategyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeploymentStrategyRequest, Members: &mUpdateDeploymentStrategyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDeploymentStrategyRequest})
+var sUpdateDeploymentStrategyRequest_DeploymentStrategyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyId", ID: &i_DeploymentStrategyId, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateDeploymentStrategyRequest_DeploymentStrategyId})
+var sUpdateDeploymentStrategyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateDeploymentStrategyRequest_Description})
+var sUpdateDeploymentStrategyRequest_DeploymentDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentDurationInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eUpdateDeploymentStrategyRequest_DeploymentDurationInMinutes})
+var sUpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBakeTimeInMinutes", ID: &i_MinutesBetween0And24Hours, Type: smithy.ShapeTypeInteger, Ext: &eUpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes})
+var sUpdateDeploymentStrategyRequest_GrowthFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthFactor", ID: &i_GrowthFactor, Type: smithy.ShapeTypeFloat, Ext: &eUpdateDeploymentStrategyRequest_GrowthFactor})
+var sUpdateDeploymentStrategyRequest_GrowthType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrowthType", ID: &iGrowthType, Members: &mGrowthType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDeploymentStrategyRequest_GrowthType})
+var sUpdateEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentRequest, Members: &mUpdateEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEnvironmentRequest})
+var sUpdateEnvironmentRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentRequest_ApplicationId})
+var sUpdateEnvironmentRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentRequest_EnvironmentId})
+var sUpdateEnvironmentRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentRequest_Name})
+var sUpdateEnvironmentRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentRequest_Description})
+var sUpdateEnvironmentRequest_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &eUpdateEnvironmentRequest_Monitors})
+var sUpdateExperimentDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentDefinitionRequest, Members: &mUpdateExperimentDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentDefinitionRequest})
+var sUpdateExperimentDefinitionRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentDefinitionRequest_ApplicationIdentifier})
+var sUpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier})
+var sUpdateExperimentDefinitionRequest_Treatments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Treatments", ID: &i_TreatmentInputList, Members: &m_TreatmentInputList, Type: smithy.ShapeTypeList, Ext: &eUpdateExperimentDefinitionRequest_Treatments})
+var sUpdateExperimentDefinitionRequest_Control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Control", ID: &iTreatmentInput, Members: &mTreatmentInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentDefinitionRequest_Control})
+var sUpdateExperimentDefinitionRequest_Hypothesis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hypothesis", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentDefinitionRequest_Hypothesis})
+var sUpdateExperimentDefinitionRequest_AudienceRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceRule", ID: &i_Rule, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentDefinitionRequest_AudienceRule})
+var sUpdateExperimentDefinitionRequest_AudienceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudienceDescription", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentDefinitionRequest_AudienceDescription})
+var sUpdateExperimentDefinitionRequest_LaunchCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchCriteria", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentDefinitionRequest_LaunchCriteria})
+var sUpdateExperimentRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentRunRequest, Members: &mUpdateExperimentRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentRunRequest})
+var sUpdateExperimentRunRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentRunRequest_ApplicationIdentifier})
+var sUpdateExperimentRunRequest_ExperimentDefinitionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperimentDefinitionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentRunRequest_ExperimentDefinitionIdentifier})
+var sUpdateExperimentRunRequest_Run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Run", ID: &i_PositiveInteger, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eUpdateExperimentRunRequest_Run})
+var sUpdateExperimentRunRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentRunRequest_Description})
+var sUpdateExperimentRunRequest_ExposurePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExposurePercentage", ID: &i_NullablePercentage, Type: smithy.ShapeTypeFloat, Ext: &eUpdateExperimentRunRequest_ExposurePercentage})
+var sUpdateExperimentRunRequest_TreatmentOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatmentOverrides", ID: &iTreatmentOverrides, Members: &mTreatmentOverrides, Type: smithy.ShapeTypeUnion, Ext: &eUpdateExperimentRunRequest_TreatmentOverrides})
+var sUpdateExperimentRunRequest_DeploymentParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentParameters", ID: &iDeploymentParameters, Members: &mDeploymentParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentRunRequest_DeploymentParameters})
+var sUpdateExtensionAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExtensionAssociationRequest, Members: &mUpdateExtensionAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExtensionAssociationRequest})
+var sUpdateExtensionAssociationRequest_ExtensionAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionAssociationId", ID: &i_Id, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateExtensionAssociationRequest_ExtensionAssociationId})
+var sUpdateExtensionAssociationRequest_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterValueMap, Members: &m_ParameterValueMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExtensionAssociationRequest_Parameters})
+var sUpdateExtensionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExtensionRequest, Members: &mUpdateExtensionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExtensionRequest})
+var sUpdateExtensionRequest_ExtensionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionIdentifier", ID: &i_Identifier, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateExtensionRequest_ExtensionIdentifier})
+var sUpdateExtensionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateExtensionRequest_Description})
+var sUpdateExtensionRequest_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_ActionsMap, Members: &m_ActionsMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExtensionRequest_Actions})
+var sUpdateExtensionRequest_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterMap, Members: &m_ParameterMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExtensionRequest_Parameters})
+var sUpdateExtensionRequest_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUpdateExtensionRequest_VersionNumber})
+var sValidateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateConfigurationRequest, Members: &mValidateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eValidateConfigurationRequest})
+var sValidateConfigurationRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_Name, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eValidateConfigurationRequest_ApplicationId})
+var sValidateConfigurationRequest_ConfigurationProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileId", ID: &i_LongName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eValidateConfigurationRequest_ConfigurationProfileId})
+var sValidateConfigurationRequest_ConfigurationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationVersion", ID: &i_Version, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eValidateConfigurationRequest_ConfigurationVersion})
+
+var CreateApplication = &sCreateApplication
+
+var CreateConfigurationProfile = &sCreateConfigurationProfile
+
+var CreateDeploymentStrategy = &sCreateDeploymentStrategy
+
+var CreateEnvironment = &sCreateEnvironment
+
+var CreateExperimentDefinition = &sCreateExperimentDefinition
+
+var CreateExtension = &sCreateExtension
+
+var CreateExtensionAssociation = &sCreateExtensionAssociation
+
+var CreateHostedConfigurationVersion = &sCreateHostedConfigurationVersion
+
+var DeleteApplication = &sDeleteApplication
+
+var DeleteConfigurationProfile = &sDeleteConfigurationProfile
+
+var DeleteDeploymentStrategy = &sDeleteDeploymentStrategy
+
+var DeleteEnvironment = &sDeleteEnvironment
+
+var DeleteExperimentDefinition = &sDeleteExperimentDefinition
+
+var DeleteExtension = &sDeleteExtension
+
+var DeleteExtensionAssociation = &sDeleteExtensionAssociation
+
+var DeleteHostedConfigurationVersion = &sDeleteHostedConfigurationVersion
+
+var GetAccountSettings = &sGetAccountSettings
+
+var GetApplication = &sGetApplication
+
+var GetConfiguration = &sGetConfiguration
+
+var GetConfigurationProfile = &sGetConfigurationProfile
+
+var GetDeployment = &sGetDeployment
+
+var GetDeploymentStrategy = &sGetDeploymentStrategy
+
+var GetEnvironment = &sGetEnvironment
+
+var GetExperimentDefinition = &sGetExperimentDefinition
+
+var GetExperimentRun = &sGetExperimentRun
+
+var GetExtension = &sGetExtension
+
+var GetExtensionAssociation = &sGetExtensionAssociation
+
+var GetHostedConfigurationVersion = &sGetHostedConfigurationVersion
+
+var ListApplications = &sListApplications
+
+var ListConfigurationProfiles = &sListConfigurationProfiles
+
+var ListDeployments = &sListDeployments
+
+var ListDeploymentStrategies = &sListDeploymentStrategies
+
+var ListEnvironments = &sListEnvironments
+
+var ListExperimentDefinitions = &sListExperimentDefinitions
+
+var ListExperimentRunEvents = &sListExperimentRunEvents
+
+var ListExperimentRuns = &sListExperimentRuns
+
+var ListExtensionAssociations = &sListExtensionAssociations
+
+var ListExtensions = &sListExtensions
+
+var ListHostedConfigurationVersions = &sListHostedConfigurationVersions
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartDeployment = &sStartDeployment
+
+var StartExperimentRun = &sStartExperimentRun
+
+var StopDeployment = &sStopDeployment
+
+var StopExperimentRun = &sStopExperimentRun
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAccountSettings = &sUpdateAccountSettings
+
+var UpdateApplication = &sUpdateApplication
+
+var UpdateConfigurationProfile = &sUpdateConfigurationProfile
+
+var UpdateDeploymentStrategy = &sUpdateDeploymentStrategy
+
+var UpdateEnvironment = &sUpdateEnvironment
+
+var UpdateExperimentDefinition = &sUpdateExperimentDefinition
+
+var UpdateExperimentRun = &sUpdateExperimentRun
+
+var UpdateExtension = &sUpdateExtension
+
+var UpdateExtensionAssociation = &sUpdateExtensionAssociation
+
+var ValidateConfiguration = &sValidateConfiguration
+
+var _AmazonAppConfig = &s_AmazonAppConfig
+
+var Action = &sAction
+var Action_Name = &sAction_Name
+var Action_Description = &sAction_Description
+var Action_Uri = &sAction_Uri
+var Action_RoleArn = &sAction_RoleArn
+
+var ActionInvocation = &sActionInvocation
+var ActionInvocation_ExtensionIdentifier = &sActionInvocation_ExtensionIdentifier
+var ActionInvocation_ActionName = &sActionInvocation_ActionName
+var ActionInvocation_Uri = &sActionInvocation_Uri
+var ActionInvocation_RoleArn = &sActionInvocation_RoleArn
+var ActionInvocation_ErrorMessage = &sActionInvocation_ErrorMessage
+var ActionInvocation_ErrorCode = &sActionInvocation_ErrorCode
+var ActionInvocation_InvocationId = &sActionInvocation_InvocationId
+
+var _ActionInvocations = &s_ActionInvocations
+var _ActionInvocations_member = &s_ActionInvocations_member
+
+var _ActionList = &s_ActionList
+var _ActionList_member = &s_ActionList_member
+
+var ActionPoint = &sActionPoint
+var ActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION = &sActionPoint_PRE_CREATE_HOSTED_CONFIGURATION_VERSION
+var ActionPoint_PRE_START_DEPLOYMENT = &sActionPoint_PRE_START_DEPLOYMENT
+var ActionPoint_AT_DEPLOYMENT_TICK = &sActionPoint_AT_DEPLOYMENT_TICK
+var ActionPoint_ON_DEPLOYMENT_START = &sActionPoint_ON_DEPLOYMENT_START
+var ActionPoint_ON_DEPLOYMENT_STEP = &sActionPoint_ON_DEPLOYMENT_STEP
+var ActionPoint_ON_DEPLOYMENT_BAKING = &sActionPoint_ON_DEPLOYMENT_BAKING
+var ActionPoint_ON_DEPLOYMENT_COMPLETE = &sActionPoint_ON_DEPLOYMENT_COMPLETE
+var ActionPoint_ON_DEPLOYMENT_ROLLED_BACK = &sActionPoint_ON_DEPLOYMENT_ROLLED_BACK
+
+var _ActionsMap = &s_ActionsMap
+var _ActionsMap_key = &s_ActionsMap_key
+var _ActionsMap_value = &s_ActionsMap_value
+
+var Application = &sApplication
+var Application_Id = &sApplication_Id
+var Application_Name = &sApplication_Name
+var Application_Description = &sApplication_Description
+
+var _ApplicationList = &s_ApplicationList
+var _ApplicationList_member = &s_ApplicationList_member
+
+var AppliedExtension = &sAppliedExtension
+var AppliedExtension_ExtensionId = &sAppliedExtension_ExtensionId
+var AppliedExtension_ExtensionAssociationId = &sAppliedExtension_ExtensionAssociationId
+var AppliedExtension_VersionNumber = &sAppliedExtension_VersionNumber
+var AppliedExtension_Parameters = &sAppliedExtension_Parameters
+
+var _AppliedExtensions = &s_AppliedExtensions
+var _AppliedExtensions_member = &s_AppliedExtensions_member
+
+var _Arn = &s_Arn
+
+var _AttributeKey = &s_AttributeKey
+
+var _AttributeString = &s_AttributeString
+
+var AttributeValue = &sAttributeValue
+var AttributeValue_StringValue = &sAttributeValue_StringValue
+var AttributeValue_NumberValue = &sAttributeValue_NumberValue
+var AttributeValue_BooleanValue = &sAttributeValue_BooleanValue
+var AttributeValue_StringArray = &sAttributeValue_StringArray
+var AttributeValue_NumberArray = &sAttributeValue_NumberArray
+
+var _AttributeValueMap = &s_AttributeValueMap
+var _AttributeValueMap_key = &s_AttributeValueMap_key
+var _AttributeValueMap_value = &s_AttributeValueMap_value
+
+var BadRequestDetails = &sBadRequestDetails
+var BadRequestDetails_InvalidConfiguration = &sBadRequestDetails_InvalidConfiguration
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Message = &sBadRequestException_Message
+var BadRequestException_Reason = &sBadRequestException_Reason
+var BadRequestException_Details = &sBadRequestException_Details
+
+var BadRequestReason = &sBadRequestReason
+var BadRequestReason_INVALID_CONFIGURATION = &sBadRequestReason_INVALID_CONFIGURATION
+
+var _Blob = &s_Blob
+
+var _Boolean = &s_Boolean
+
+var BytesMeasure = &sBytesMeasure
+var BytesMeasure_KILOBYTES = &sBytesMeasure_KILOBYTES
+
+var ConfigurationProfileSummary = &sConfigurationProfileSummary
+var ConfigurationProfileSummary_ApplicationId = &sConfigurationProfileSummary_ApplicationId
+var ConfigurationProfileSummary_Id = &sConfigurationProfileSummary_Id
+var ConfigurationProfileSummary_Name = &sConfigurationProfileSummary_Name
+var ConfigurationProfileSummary_LocationUri = &sConfigurationProfileSummary_LocationUri
+var ConfigurationProfileSummary_ValidatorTypes = &sConfigurationProfileSummary_ValidatorTypes
+var ConfigurationProfileSummary_Type = &sConfigurationProfileSummary_Type
+
+var _ConfigurationProfileSummaryList = &s_ConfigurationProfileSummaryList
+var _ConfigurationProfileSummaryList_member = &s_ConfigurationProfileSummaryList_member
+
+var _ConfigurationProfileType = &s_ConfigurationProfileType
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var DeleteType = &sDeleteType
+var DeleteType_ARCHIVE = &sDeleteType_ARCHIVE
+var DeleteType_DESTROY = &sDeleteType_DESTROY
+
+var DeletionProtectionCheck = &sDeletionProtectionCheck
+var DeletionProtectionCheck_ACCOUNT_DEFAULT = &sDeletionProtectionCheck_ACCOUNT_DEFAULT
+var DeletionProtectionCheck_APPLY = &sDeletionProtectionCheck_APPLY
+var DeletionProtectionCheck_BYPASS = &sDeletionProtectionCheck_BYPASS
+
+var _DeletionProtectionDuration = &s_DeletionProtectionDuration
+
+var DeletionProtectionSettings = &sDeletionProtectionSettings
+var DeletionProtectionSettings_Enabled = &sDeletionProtectionSettings_Enabled
+var DeletionProtectionSettings_ProtectionPeriodInMinutes = &sDeletionProtectionSettings_ProtectionPeriodInMinutes
+
+var DeploymentEvent = &sDeploymentEvent
+var DeploymentEvent_EventType = &sDeploymentEvent_EventType
+var DeploymentEvent_TriggeredBy = &sDeploymentEvent_TriggeredBy
+var DeploymentEvent_Description = &sDeploymentEvent_Description
+var DeploymentEvent_ActionInvocations = &sDeploymentEvent_ActionInvocations
+var DeploymentEvent_OccurredAt = &sDeploymentEvent_OccurredAt
+
+var _DeploymentEvents = &s_DeploymentEvents
+var _DeploymentEvents_member = &s_DeploymentEvents_member
+
+var DeploymentEventType = &sDeploymentEventType
+var DeploymentEventType_PERCENTAGE_UPDATED = &sDeploymentEventType_PERCENTAGE_UPDATED
+var DeploymentEventType_ROLLBACK_STARTED = &sDeploymentEventType_ROLLBACK_STARTED
+var DeploymentEventType_ROLLBACK_COMPLETED = &sDeploymentEventType_ROLLBACK_COMPLETED
+var DeploymentEventType_BAKE_TIME_STARTED = &sDeploymentEventType_BAKE_TIME_STARTED
+var DeploymentEventType_DEPLOYMENT_STARTED = &sDeploymentEventType_DEPLOYMENT_STARTED
+var DeploymentEventType_DEPLOYMENT_COMPLETED = &sDeploymentEventType_DEPLOYMENT_COMPLETED
+var DeploymentEventType_REVERT_COMPLETED = &sDeploymentEventType_REVERT_COMPLETED
+
+var _DeploymentList = &s_DeploymentList
+var _DeploymentList_member = &s_DeploymentList_member
+
+var DeploymentParameters = &sDeploymentParameters
+var DeploymentParameters_DynamicExtensionParameters = &sDeploymentParameters_DynamicExtensionParameters
+var DeploymentParameters_Tags = &sDeploymentParameters_Tags
+
+var DeploymentState = &sDeploymentState
+var DeploymentState_BAKING = &sDeploymentState_BAKING
+var DeploymentState_VALIDATING = &sDeploymentState_VALIDATING
+var DeploymentState_DEPLOYING = &sDeploymentState_DEPLOYING
+var DeploymentState_COMPLETE = &sDeploymentState_COMPLETE
+var DeploymentState_ROLLING_BACK = &sDeploymentState_ROLLING_BACK
+var DeploymentState_ROLLED_BACK = &sDeploymentState_ROLLED_BACK
+var DeploymentState_REVERTED = &sDeploymentState_REVERTED
+
+var DeploymentStrategy = &sDeploymentStrategy
+var DeploymentStrategy_Id = &sDeploymentStrategy_Id
+var DeploymentStrategy_Name = &sDeploymentStrategy_Name
+var DeploymentStrategy_Description = &sDeploymentStrategy_Description
+var DeploymentStrategy_DeploymentDurationInMinutes = &sDeploymentStrategy_DeploymentDurationInMinutes
+var DeploymentStrategy_GrowthType = &sDeploymentStrategy_GrowthType
+var DeploymentStrategy_GrowthFactor = &sDeploymentStrategy_GrowthFactor
+var DeploymentStrategy_FinalBakeTimeInMinutes = &sDeploymentStrategy_FinalBakeTimeInMinutes
+var DeploymentStrategy_ReplicateTo = &sDeploymentStrategy_ReplicateTo
+
+var _DeploymentStrategyId = &s_DeploymentStrategyId
+
+var _DeploymentStrategyList = &s_DeploymentStrategyList
+var _DeploymentStrategyList_member = &s_DeploymentStrategyList_member
+
+var DeploymentSummary = &sDeploymentSummary
+var DeploymentSummary_DeploymentNumber = &sDeploymentSummary_DeploymentNumber
+var DeploymentSummary_ConfigurationProfileId = &sDeploymentSummary_ConfigurationProfileId
+var DeploymentSummary_ConfigurationName = &sDeploymentSummary_ConfigurationName
+var DeploymentSummary_ConfigurationVersion = &sDeploymentSummary_ConfigurationVersion
+var DeploymentSummary_DeploymentDurationInMinutes = &sDeploymentSummary_DeploymentDurationInMinutes
+var DeploymentSummary_GrowthType = &sDeploymentSummary_GrowthType
+var DeploymentSummary_GrowthFactor = &sDeploymentSummary_GrowthFactor
+var DeploymentSummary_FinalBakeTimeInMinutes = &sDeploymentSummary_FinalBakeTimeInMinutes
+var DeploymentSummary_State = &sDeploymentSummary_State
+var DeploymentSummary_PercentageComplete = &sDeploymentSummary_PercentageComplete
+var DeploymentSummary_StartedAt = &sDeploymentSummary_StartedAt
+var DeploymentSummary_CompletedAt = &sDeploymentSummary_CompletedAt
+var DeploymentSummary_VersionLabel = &sDeploymentSummary_VersionLabel
+var DeploymentSummary_Type = &sDeploymentSummary_Type
+
+var DeploymentType = &sDeploymentType
+var DeploymentType_USER = &sDeploymentType_USER
+var DeploymentType_MANAGED = &sDeploymentType_MANAGED
+
+var _Description = &s_Description
+
+var _Double = &s_Double
+
+var _DynamicParameterKey = &s_DynamicParameterKey
+
+var _DynamicParameterMap = &s_DynamicParameterMap
+var _DynamicParameterMap_key = &s_DynamicParameterMap_key
+var _DynamicParameterMap_value = &s_DynamicParameterMap_value
+
+var _EntityId = &s_EntityId
+
+var Environment = &sEnvironment
+var Environment_ApplicationId = &sEnvironment_ApplicationId
+var Environment_Id = &sEnvironment_Id
+var Environment_Name = &sEnvironment_Name
+var Environment_Description = &sEnvironment_Description
+var Environment_State = &sEnvironment_State
+var Environment_Monitors = &sEnvironment_Monitors
+
+var _EnvironmentList = &s_EnvironmentList
+var _EnvironmentList_member = &s_EnvironmentList_member
+
+var EnvironmentState = &sEnvironmentState
+var EnvironmentState_READY_FOR_DEPLOYMENT = &sEnvironmentState_READY_FOR_DEPLOYMENT
+var EnvironmentState_DEPLOYING = &sEnvironmentState_DEPLOYING
+var EnvironmentState_ROLLING_BACK = &sEnvironmentState_ROLLING_BACK
+var EnvironmentState_ROLLED_BACK = &sEnvironmentState_ROLLED_BACK
+var EnvironmentState_REVERTED = &sEnvironmentState_REVERTED
+
+var _ExperimentDefinitionList = &s_ExperimentDefinitionList
+var _ExperimentDefinitionList_member = &s_ExperimentDefinitionList_member
+
+var ExperimentDefinitionSnapshot = &sExperimentDefinitionSnapshot
+var ExperimentDefinitionSnapshot_ApplicationId = &sExperimentDefinitionSnapshot_ApplicationId
+var ExperimentDefinitionSnapshot_Id = &sExperimentDefinitionSnapshot_Id
+var ExperimentDefinitionSnapshot_Name = &sExperimentDefinitionSnapshot_Name
+var ExperimentDefinitionSnapshot_Hypothesis = &sExperimentDefinitionSnapshot_Hypothesis
+var ExperimentDefinitionSnapshot_ConfigurationProfileId = &sExperimentDefinitionSnapshot_ConfigurationProfileId
+var ExperimentDefinitionSnapshot_EnvironmentId = &sExperimentDefinitionSnapshot_EnvironmentId
+var ExperimentDefinitionSnapshot_FlagKey = &sExperimentDefinitionSnapshot_FlagKey
+var ExperimentDefinitionSnapshot_AudienceRule = &sExperimentDefinitionSnapshot_AudienceRule
+var ExperimentDefinitionSnapshot_AudienceDescription = &sExperimentDefinitionSnapshot_AudienceDescription
+var ExperimentDefinitionSnapshot_LaunchCriteria = &sExperimentDefinitionSnapshot_LaunchCriteria
+var ExperimentDefinitionSnapshot_Treatments = &sExperimentDefinitionSnapshot_Treatments
+var ExperimentDefinitionSnapshot_Control = &sExperimentDefinitionSnapshot_Control
+
+var ExperimentDefinitionStatus = &sExperimentDefinitionStatus
+var ExperimentDefinitionStatus_ACTIVE = &sExperimentDefinitionStatus_ACTIVE
+var ExperimentDefinitionStatus_IDLE = &sExperimentDefinitionStatus_IDLE
+var ExperimentDefinitionStatus_ARCHIVED = &sExperimentDefinitionStatus_ARCHIVED
+
+var ExperimentDefinitionSummary = &sExperimentDefinitionSummary
+var ExperimentDefinitionSummary_ApplicationId = &sExperimentDefinitionSummary_ApplicationId
+var ExperimentDefinitionSummary_Id = &sExperimentDefinitionSummary_Id
+var ExperimentDefinitionSummary_Name = &sExperimentDefinitionSummary_Name
+var ExperimentDefinitionSummary_Hypothesis = &sExperimentDefinitionSummary_Hypothesis
+var ExperimentDefinitionSummary_Status = &sExperimentDefinitionSummary_Status
+var ExperimentDefinitionSummary_ConfigurationProfileId = &sExperimentDefinitionSummary_ConfigurationProfileId
+var ExperimentDefinitionSummary_EnvironmentId = &sExperimentDefinitionSummary_EnvironmentId
+var ExperimentDefinitionSummary_FlagKey = &sExperimentDefinitionSummary_FlagKey
+var ExperimentDefinitionSummary_CreatedAt = &sExperimentDefinitionSummary_CreatedAt
+var ExperimentDefinitionSummary_UpdatedAt = &sExperimentDefinitionSummary_UpdatedAt
+
+var ExperimentRunEvent = &sExperimentRunEvent
+var ExperimentRunEvent_Description = &sExperimentRunEvent_Description
+var ExperimentRunEvent_AssociatedDeployment = &sExperimentRunEvent_AssociatedDeployment
+var ExperimentRunEvent_EventType = &sExperimentRunEvent_EventType
+var ExperimentRunEvent_OccurredAt = &sExperimentRunEvent_OccurredAt
+var ExperimentRunEvent_TriggeredBy = &sExperimentRunEvent_TriggeredBy
+var ExperimentRunEvent_ExposurePercentage = &sExperimentRunEvent_ExposurePercentage
+var ExperimentRunEvent_TreatmentOverrides = &sExperimentRunEvent_TreatmentOverrides
+
+var _ExperimentRunEventList = &s_ExperimentRunEventList
+var _ExperimentRunEventList_member = &s_ExperimentRunEventList_member
+
+var ExperimentRunEventType = &sExperimentRunEventType
+var ExperimentRunEventType_RUN_STARTED = &sExperimentRunEventType_RUN_STARTED
+var ExperimentRunEventType_EXPOSURE_UPDATED = &sExperimentRunEventType_EXPOSURE_UPDATED
+var ExperimentRunEventType_OVERRIDES_UPDATED = &sExperimentRunEventType_OVERRIDES_UPDATED
+var ExperimentRunEventType_RUN_STOPPED = &sExperimentRunEventType_RUN_STOPPED
+
+var ExperimentRunResult = &sExperimentRunResult
+var ExperimentRunResult_ExecutiveSummary = &sExperimentRunResult_ExecutiveSummary
+var ExperimentRunResult_ReasonsToLaunch = &sExperimentRunResult_ReasonsToLaunch
+var ExperimentRunResult_ReasonsNotToLaunch = &sExperimentRunResult_ReasonsNotToLaunch
+
+var ExperimentRunStatus = &sExperimentRunStatus
+var ExperimentRunStatus_RUNNING = &sExperimentRunStatus_RUNNING
+var ExperimentRunStatus_DONE = &sExperimentRunStatus_DONE
+
+var ExperimentRunSummary = &sExperimentRunSummary
+var ExperimentRunSummary_ExperimentDefinitionId = &sExperimentRunSummary_ExperimentDefinitionId
+var ExperimentRunSummary_Run = &sExperimentRunSummary_Run
+var ExperimentRunSummary_Description = &sExperimentRunSummary_Description
+var ExperimentRunSummary_Status = &sExperimentRunSummary_Status
+var ExperimentRunSummary_StartedAt = &sExperimentRunSummary_StartedAt
+var ExperimentRunSummary_UpdatedAt = &sExperimentRunSummary_UpdatedAt
+var ExperimentRunSummary_EndedAt = &sExperimentRunSummary_EndedAt
+
+var _ExperimentRunSummaryList = &s_ExperimentRunSummaryList
+var _ExperimentRunSummaryList_member = &s_ExperimentRunSummaryList_member
+
+var _ExtensionAssociationSummaries = &s_ExtensionAssociationSummaries
+var _ExtensionAssociationSummaries_member = &s_ExtensionAssociationSummaries_member
+
+var ExtensionAssociationSummary = &sExtensionAssociationSummary
+var ExtensionAssociationSummary_Id = &sExtensionAssociationSummary_Id
+var ExtensionAssociationSummary_ExtensionArn = &sExtensionAssociationSummary_ExtensionArn
+var ExtensionAssociationSummary_ResourceArn = &sExtensionAssociationSummary_ResourceArn
+
+var _ExtensionOrParameterName = &s_ExtensionOrParameterName
+
+var _ExtensionSummaries = &s_ExtensionSummaries
+var _ExtensionSummaries_member = &s_ExtensionSummaries_member
+
+var ExtensionSummary = &sExtensionSummary
+var ExtensionSummary_Id = &sExtensionSummary_Id
+var ExtensionSummary_Name = &sExtensionSummary_Name
+var ExtensionSummary_VersionNumber = &sExtensionSummary_VersionNumber
+var ExtensionSummary_Arn = &sExtensionSummary_Arn
+var ExtensionSummary_Description = &sExtensionSummary_Description
+
+var _FlagKey = &s_FlagKey
+
+var FlagValue = &sFlagValue
+var FlagValue_Enabled = &sFlagValue_Enabled
+var FlagValue_AttributeValues = &sFlagValue_AttributeValues
+
+var _Float = &s_Float
+
+var _GrowthFactor = &s_GrowthFactor
+
+var GrowthType = &sGrowthType
+var GrowthType_LINEAR = &sGrowthType_LINEAR
+var GrowthType_EXPONENTIAL = &sGrowthType_EXPONENTIAL
+
+var HostedConfigurationVersionSummary = &sHostedConfigurationVersionSummary
+var HostedConfigurationVersionSummary_ApplicationId = &sHostedConfigurationVersionSummary_ApplicationId
+var HostedConfigurationVersionSummary_ConfigurationProfileId = &sHostedConfigurationVersionSummary_ConfigurationProfileId
+var HostedConfigurationVersionSummary_VersionNumber = &sHostedConfigurationVersionSummary_VersionNumber
+var HostedConfigurationVersionSummary_Description = &sHostedConfigurationVersionSummary_Description
+var HostedConfigurationVersionSummary_ContentType = &sHostedConfigurationVersionSummary_ContentType
+var HostedConfigurationVersionSummary_VersionLabel = &sHostedConfigurationVersionSummary_VersionLabel
+var HostedConfigurationVersionSummary_KmsKeyArn = &sHostedConfigurationVersionSummary_KmsKeyArn
+
+var _HostedConfigurationVersionSummaryList = &s_HostedConfigurationVersionSummaryList
+var _HostedConfigurationVersionSummaryList_member = &s_HostedConfigurationVersionSummaryList_member
+
+var _Id = &s_Id
+
+var _Identifier = &s_Identifier
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidConfigurationDetail = &sInvalidConfigurationDetail
+var InvalidConfigurationDetail_Constraint = &sInvalidConfigurationDetail_Constraint
+var InvalidConfigurationDetail_Location = &sInvalidConfigurationDetail_Location
+var InvalidConfigurationDetail_Reason = &sInvalidConfigurationDetail_Reason
+var InvalidConfigurationDetail_Type = &sInvalidConfigurationDetail_Type
+var InvalidConfigurationDetail_Value = &sInvalidConfigurationDetail_Value
+
+var _InvalidConfigurationDetailList = &s_InvalidConfigurationDetailList
+var _InvalidConfigurationDetailList_member = &s_InvalidConfigurationDetailList_member
+
+var _Iso8601DateTime = &s_Iso8601DateTime
+
+var _KmsKeyIdentifier = &s_KmsKeyIdentifier
+
+var _KmsKeyIdentifierOrEmpty = &s_KmsKeyIdentifierOrEmpty
+
+var _LongName = &s_LongName
+
+var _MaxResults = &s_MaxResults
+
+var _MinutesBetween0And24Hours = &s_MinutesBetween0And24Hours
+
+var Monitor = &sMonitor
+var Monitor_AlarmArn = &sMonitor_AlarmArn
+var Monitor_AlarmRoleArn = &sMonitor_AlarmRoleArn
+
+var _MonitorList = &s_MonitorList
+var _MonitorList_member = &s_MonitorList_member
+
+var _Name = &s_Name
+
+var _NameWithReservedAwsPrefix = &s_NameWithReservedAwsPrefix
+
+var _NextToken = &s_NextToken
+
+var _NullablePercentage = &s_NullablePercentage
+
+var _NumberList = &s_NumberList
+var _NumberList_member = &s_NumberList_member
+
+var Parameter = &sParameter
+var Parameter_Description = &sParameter_Description
+var Parameter_Required = &sParameter_Required
+var Parameter_Dynamic = &sParameter_Dynamic
+
+var _ParameterMap = &s_ParameterMap
+var _ParameterMap_key = &s_ParameterMap_key
+var _ParameterMap_value = &s_ParameterMap_value
+
+var _ParameterValueMap = &s_ParameterValueMap
+var _ParameterValueMap_key = &s_ParameterValueMap_key
+var _ParameterValueMap_value = &s_ParameterValueMap_value
+
+var PayloadTooLargeException = &sPayloadTooLargeException
+var PayloadTooLargeException_Message = &sPayloadTooLargeException_Message
+var PayloadTooLargeException_Measure = &sPayloadTooLargeException_Measure
+var PayloadTooLargeException_Limit = &sPayloadTooLargeException_Limit
+var PayloadTooLargeException_Size = &sPayloadTooLargeException_Size
+
+var _Percentage = &s_Percentage
+
+var _PositiveInteger = &s_PositiveInteger
+
+var _QueryName = &s_QueryName
+
+var ReplicateTo = &sReplicateTo
+var ReplicateTo_NONE = &sReplicateTo_NONE
+var ReplicateTo_SSM_DOCUMENT = &sReplicateTo_SSM_DOCUMENT
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceName = &sResourceNotFoundException_ResourceName
+
+var _RoleArn = &s_RoleArn
+
+var _Rule = &s_Rule
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _StringWithLengthBetween0And32768 = &s_StringWithLengthBetween0And32768
+
+var _StringWithLengthBetween1And2048 = &s_StringWithLengthBetween1And2048
+
+var _StringWithLengthBetween1And255 = &s_StringWithLengthBetween1And255
+
+var _StringWithLengthBetween1And64 = &s_StringWithLengthBetween1And64
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var Treatment = &sTreatment
+var Treatment_Key = &sTreatment_Key
+var Treatment_Weight = &sTreatment_Weight
+var Treatment_Description = &sTreatment_Description
+var Treatment_FlagValue = &sTreatment_FlagValue
+
+var TreatmentInput = &sTreatmentInput
+var TreatmentInput_Weight = &sTreatmentInput_Weight
+var TreatmentInput_Description = &sTreatmentInput_Description
+var TreatmentInput_FlagValue = &sTreatmentInput_FlagValue
+
+var _TreatmentInputList = &s_TreatmentInputList
+var _TreatmentInputList_member = &s_TreatmentInputList_member
+
+var _TreatmentKey = &s_TreatmentKey
+
+var _TreatmentList = &s_TreatmentList
+var _TreatmentList_member = &s_TreatmentList_member
+
+var _TreatmentOverrideMap = &s_TreatmentOverrideMap
+var _TreatmentOverrideMap_key = &s_TreatmentOverrideMap_key
+var _TreatmentOverrideMap_value = &s_TreatmentOverrideMap_value
+
+var TreatmentOverrides = &sTreatmentOverrides
+var TreatmentOverrides_Inline = &sTreatmentOverrides_Inline
+
+var TriggeredBy = &sTriggeredBy
+var TriggeredBy_USER = &sTriggeredBy_USER
+var TriggeredBy_APPCONFIG = &sTriggeredBy_APPCONFIG
+var TriggeredBy_CLOUDWATCH_ALARM = &sTriggeredBy_CLOUDWATCH_ALARM
+var TriggeredBy_INTERNAL_ERROR = &sTriggeredBy_INTERNAL_ERROR
+
+var _Uri = &s_Uri
+
+var Validator = &sValidator
+var Validator_Type = &sValidator_Type
+var Validator_Content = &sValidator_Content
+
+var _ValidatorList = &s_ValidatorList
+var _ValidatorList_member = &s_ValidatorList_member
+
+var ValidatorType = &sValidatorType
+var ValidatorType_JSON_SCHEMA = &sValidatorType_JSON_SCHEMA
+var ValidatorType_LAMBDA = &sValidatorType_LAMBDA
+
+var _ValidatorTypeList = &s_ValidatorTypeList
+var _ValidatorTypeList_member = &s_ValidatorTypeList_member
+
+var VendedMetricsSettings = &sVendedMetricsSettings
+var VendedMetricsSettings_Enabled = &sVendedMetricsSettings_Enabled
+
+var _Version = &s_Version
+
+var _VersionLabel = &s_VersionLabel
+
+var _Weight = &s_Weight
+
+var CreateApplicationRequest = &sCreateApplicationRequest
+var CreateApplicationRequest_Name = &sCreateApplicationRequest_Name
+var CreateApplicationRequest_Description = &sCreateApplicationRequest_Description
+var CreateApplicationRequest_Tags = &sCreateApplicationRequest_Tags
+
+var CreateConfigurationProfileRequest = &sCreateConfigurationProfileRequest
+var CreateConfigurationProfileRequest_ApplicationId = &sCreateConfigurationProfileRequest_ApplicationId
+var CreateConfigurationProfileRequest_Name = &sCreateConfigurationProfileRequest_Name
+var CreateConfigurationProfileRequest_Description = &sCreateConfigurationProfileRequest_Description
+var CreateConfigurationProfileRequest_LocationUri = &sCreateConfigurationProfileRequest_LocationUri
+var CreateConfigurationProfileRequest_RetrievalRoleArn = &sCreateConfigurationProfileRequest_RetrievalRoleArn
+var CreateConfigurationProfileRequest_Validators = &sCreateConfigurationProfileRequest_Validators
+var CreateConfigurationProfileRequest_Tags = &sCreateConfigurationProfileRequest_Tags
+var CreateConfigurationProfileRequest_Type = &sCreateConfigurationProfileRequest_Type
+var CreateConfigurationProfileRequest_KmsKeyIdentifier = &sCreateConfigurationProfileRequest_KmsKeyIdentifier
+
+var ConfigurationProfile = &sConfigurationProfile
+var ConfigurationProfile_ApplicationId = &sConfigurationProfile_ApplicationId
+var ConfigurationProfile_Id = &sConfigurationProfile_Id
+var ConfigurationProfile_Name = &sConfigurationProfile_Name
+var ConfigurationProfile_Description = &sConfigurationProfile_Description
+var ConfigurationProfile_LocationUri = &sConfigurationProfile_LocationUri
+var ConfigurationProfile_RetrievalRoleArn = &sConfigurationProfile_RetrievalRoleArn
+var ConfigurationProfile_Validators = &sConfigurationProfile_Validators
+var ConfigurationProfile_Type = &sConfigurationProfile_Type
+var ConfigurationProfile_KmsKeyArn = &sConfigurationProfile_KmsKeyArn
+var ConfigurationProfile_KmsKeyIdentifier = &sConfigurationProfile_KmsKeyIdentifier
+
+var CreateDeploymentStrategyRequest = &sCreateDeploymentStrategyRequest
+var CreateDeploymentStrategyRequest_Name = &sCreateDeploymentStrategyRequest_Name
+var CreateDeploymentStrategyRequest_Description = &sCreateDeploymentStrategyRequest_Description
+var CreateDeploymentStrategyRequest_DeploymentDurationInMinutes = &sCreateDeploymentStrategyRequest_DeploymentDurationInMinutes
+var CreateDeploymentStrategyRequest_FinalBakeTimeInMinutes = &sCreateDeploymentStrategyRequest_FinalBakeTimeInMinutes
+var CreateDeploymentStrategyRequest_GrowthFactor = &sCreateDeploymentStrategyRequest_GrowthFactor
+var CreateDeploymentStrategyRequest_GrowthType = &sCreateDeploymentStrategyRequest_GrowthType
+var CreateDeploymentStrategyRequest_ReplicateTo = &sCreateDeploymentStrategyRequest_ReplicateTo
+var CreateDeploymentStrategyRequest_Tags = &sCreateDeploymentStrategyRequest_Tags
+
+var CreateEnvironmentRequest = &sCreateEnvironmentRequest
+var CreateEnvironmentRequest_ApplicationId = &sCreateEnvironmentRequest_ApplicationId
+var CreateEnvironmentRequest_Name = &sCreateEnvironmentRequest_Name
+var CreateEnvironmentRequest_Description = &sCreateEnvironmentRequest_Description
+var CreateEnvironmentRequest_Monitors = &sCreateEnvironmentRequest_Monitors
+var CreateEnvironmentRequest_Tags = &sCreateEnvironmentRequest_Tags
+
+var CreateExperimentDefinitionRequest = &sCreateExperimentDefinitionRequest
+var CreateExperimentDefinitionRequest_ApplicationIdentifier = &sCreateExperimentDefinitionRequest_ApplicationIdentifier
+var CreateExperimentDefinitionRequest_Name = &sCreateExperimentDefinitionRequest_Name
+var CreateExperimentDefinitionRequest_ConfigurationProfileIdentifier = &sCreateExperimentDefinitionRequest_ConfigurationProfileIdentifier
+var CreateExperimentDefinitionRequest_EnvironmentIdentifier = &sCreateExperimentDefinitionRequest_EnvironmentIdentifier
+var CreateExperimentDefinitionRequest_FlagKey = &sCreateExperimentDefinitionRequest_FlagKey
+var CreateExperimentDefinitionRequest_Treatments = &sCreateExperimentDefinitionRequest_Treatments
+var CreateExperimentDefinitionRequest_Control = &sCreateExperimentDefinitionRequest_Control
+var CreateExperimentDefinitionRequest_AudienceRule = &sCreateExperimentDefinitionRequest_AudienceRule
+var CreateExperimentDefinitionRequest_Hypothesis = &sCreateExperimentDefinitionRequest_Hypothesis
+var CreateExperimentDefinitionRequest_AudienceDescription = &sCreateExperimentDefinitionRequest_AudienceDescription
+var CreateExperimentDefinitionRequest_LaunchCriteria = &sCreateExperimentDefinitionRequest_LaunchCriteria
+var CreateExperimentDefinitionRequest_Tags = &sCreateExperimentDefinitionRequest_Tags
+
+var ExperimentDefinition = &sExperimentDefinition
+var ExperimentDefinition_ApplicationId = &sExperimentDefinition_ApplicationId
+var ExperimentDefinition_Id = &sExperimentDefinition_Id
+var ExperimentDefinition_Name = &sExperimentDefinition_Name
+var ExperimentDefinition_Hypothesis = &sExperimentDefinition_Hypothesis
+var ExperimentDefinition_Status = &sExperimentDefinition_Status
+var ExperimentDefinition_ConfigurationProfileId = &sExperimentDefinition_ConfigurationProfileId
+var ExperimentDefinition_EnvironmentId = &sExperimentDefinition_EnvironmentId
+var ExperimentDefinition_FlagKey = &sExperimentDefinition_FlagKey
+var ExperimentDefinition_AudienceRule = &sExperimentDefinition_AudienceRule
+var ExperimentDefinition_AudienceDescription = &sExperimentDefinition_AudienceDescription
+var ExperimentDefinition_LaunchCriteria = &sExperimentDefinition_LaunchCriteria
+var ExperimentDefinition_Treatments = &sExperimentDefinition_Treatments
+var ExperimentDefinition_Control = &sExperimentDefinition_Control
+var ExperimentDefinition_CreatedAt = &sExperimentDefinition_CreatedAt
+var ExperimentDefinition_UpdatedAt = &sExperimentDefinition_UpdatedAt
+var ExperimentDefinition_KmsKeyIdentifier = &sExperimentDefinition_KmsKeyIdentifier
+
+var CreateExtensionAssociationRequest = &sCreateExtensionAssociationRequest
+var CreateExtensionAssociationRequest_ExtensionIdentifier = &sCreateExtensionAssociationRequest_ExtensionIdentifier
+var CreateExtensionAssociationRequest_ExtensionVersionNumber = &sCreateExtensionAssociationRequest_ExtensionVersionNumber
+var CreateExtensionAssociationRequest_ResourceIdentifier = &sCreateExtensionAssociationRequest_ResourceIdentifier
+var CreateExtensionAssociationRequest_Parameters = &sCreateExtensionAssociationRequest_Parameters
+var CreateExtensionAssociationRequest_Tags = &sCreateExtensionAssociationRequest_Tags
+
+var ExtensionAssociation = &sExtensionAssociation
+var ExtensionAssociation_Id = &sExtensionAssociation_Id
+var ExtensionAssociation_ExtensionArn = &sExtensionAssociation_ExtensionArn
+var ExtensionAssociation_ResourceArn = &sExtensionAssociation_ResourceArn
+var ExtensionAssociation_Arn = &sExtensionAssociation_Arn
+var ExtensionAssociation_Parameters = &sExtensionAssociation_Parameters
+var ExtensionAssociation_ExtensionVersionNumber = &sExtensionAssociation_ExtensionVersionNumber
+
+var CreateExtensionRequest = &sCreateExtensionRequest
+var CreateExtensionRequest_Name = &sCreateExtensionRequest_Name
+var CreateExtensionRequest_Description = &sCreateExtensionRequest_Description
+var CreateExtensionRequest_Actions = &sCreateExtensionRequest_Actions
+var CreateExtensionRequest_Parameters = &sCreateExtensionRequest_Parameters
+var CreateExtensionRequest_Tags = &sCreateExtensionRequest_Tags
+var CreateExtensionRequest_LatestVersionNumber = &sCreateExtensionRequest_LatestVersionNumber
+
+var Extension = &sExtension
+var Extension_Id = &sExtension_Id
+var Extension_Name = &sExtension_Name
+var Extension_VersionNumber = &sExtension_VersionNumber
+var Extension_Arn = &sExtension_Arn
+var Extension_Description = &sExtension_Description
+var Extension_Actions = &sExtension_Actions
+var Extension_Parameters = &sExtension_Parameters
+
+var CreateHostedConfigurationVersionRequest = &sCreateHostedConfigurationVersionRequest
+var CreateHostedConfigurationVersionRequest_ApplicationId = &sCreateHostedConfigurationVersionRequest_ApplicationId
+var CreateHostedConfigurationVersionRequest_ConfigurationProfileId = &sCreateHostedConfigurationVersionRequest_ConfigurationProfileId
+var CreateHostedConfigurationVersionRequest_Description = &sCreateHostedConfigurationVersionRequest_Description
+var CreateHostedConfigurationVersionRequest_Content = &sCreateHostedConfigurationVersionRequest_Content
+var CreateHostedConfigurationVersionRequest_ContentType = &sCreateHostedConfigurationVersionRequest_ContentType
+var CreateHostedConfigurationVersionRequest_LatestVersionNumber = &sCreateHostedConfigurationVersionRequest_LatestVersionNumber
+var CreateHostedConfigurationVersionRequest_VersionLabel = &sCreateHostedConfigurationVersionRequest_VersionLabel
+
+var HostedConfigurationVersion = &sHostedConfigurationVersion
+var HostedConfigurationVersion_ApplicationId = &sHostedConfigurationVersion_ApplicationId
+var HostedConfigurationVersion_ConfigurationProfileId = &sHostedConfigurationVersion_ConfigurationProfileId
+var HostedConfigurationVersion_VersionNumber = &sHostedConfigurationVersion_VersionNumber
+var HostedConfigurationVersion_Description = &sHostedConfigurationVersion_Description
+var HostedConfigurationVersion_Content = &sHostedConfigurationVersion_Content
+var HostedConfigurationVersion_ContentType = &sHostedConfigurationVersion_ContentType
+var HostedConfigurationVersion_VersionLabel = &sHostedConfigurationVersion_VersionLabel
+var HostedConfigurationVersion_KmsKeyArn = &sHostedConfigurationVersion_KmsKeyArn
+
+var DeleteApplicationRequest = &sDeleteApplicationRequest
+var DeleteApplicationRequest_ApplicationId = &sDeleteApplicationRequest_ApplicationId
+
+var DeleteConfigurationProfileRequest = &sDeleteConfigurationProfileRequest
+var DeleteConfigurationProfileRequest_ApplicationId = &sDeleteConfigurationProfileRequest_ApplicationId
+var DeleteConfigurationProfileRequest_ConfigurationProfileId = &sDeleteConfigurationProfileRequest_ConfigurationProfileId
+var DeleteConfigurationProfileRequest_DeletionProtectionCheck = &sDeleteConfigurationProfileRequest_DeletionProtectionCheck
+
+var DeleteDeploymentStrategyRequest = &sDeleteDeploymentStrategyRequest
+var DeleteDeploymentStrategyRequest_DeploymentStrategyId = &sDeleteDeploymentStrategyRequest_DeploymentStrategyId
+
+var DeleteEnvironmentRequest = &sDeleteEnvironmentRequest
+var DeleteEnvironmentRequest_EnvironmentId = &sDeleteEnvironmentRequest_EnvironmentId
+var DeleteEnvironmentRequest_ApplicationId = &sDeleteEnvironmentRequest_ApplicationId
+var DeleteEnvironmentRequest_DeletionProtectionCheck = &sDeleteEnvironmentRequest_DeletionProtectionCheck
+
+var DeleteExperimentDefinitionRequest = &sDeleteExperimentDefinitionRequest
+var DeleteExperimentDefinitionRequest_ApplicationIdentifier = &sDeleteExperimentDefinitionRequest_ApplicationIdentifier
+var DeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier = &sDeleteExperimentDefinitionRequest_ExperimentDefinitionIdentifier
+var DeleteExperimentDefinitionRequest_DeleteType = &sDeleteExperimentDefinitionRequest_DeleteType
+
+var DeleteExtensionAssociationRequest = &sDeleteExtensionAssociationRequest
+var DeleteExtensionAssociationRequest_ExtensionAssociationId = &sDeleteExtensionAssociationRequest_ExtensionAssociationId
+
+var DeleteExtensionRequest = &sDeleteExtensionRequest
+var DeleteExtensionRequest_ExtensionIdentifier = &sDeleteExtensionRequest_ExtensionIdentifier
+var DeleteExtensionRequest_VersionNumber = &sDeleteExtensionRequest_VersionNumber
+
+var DeleteHostedConfigurationVersionRequest = &sDeleteHostedConfigurationVersionRequest
+var DeleteHostedConfigurationVersionRequest_ApplicationId = &sDeleteHostedConfigurationVersionRequest_ApplicationId
+var DeleteHostedConfigurationVersionRequest_ConfigurationProfileId = &sDeleteHostedConfigurationVersionRequest_ConfigurationProfileId
+var DeleteHostedConfigurationVersionRequest_VersionNumber = &sDeleteHostedConfigurationVersionRequest_VersionNumber
+
+var AccountSettings = &sAccountSettings
+var AccountSettings_DeletionProtection = &sAccountSettings_DeletionProtection
+var AccountSettings_VendedMetrics = &sAccountSettings_VendedMetrics
+
+var GetApplicationRequest = &sGetApplicationRequest
+var GetApplicationRequest_ApplicationId = &sGetApplicationRequest_ApplicationId
+
+var GetConfigurationRequest = &sGetConfigurationRequest
+var GetConfigurationRequest_Application = &sGetConfigurationRequest_Application
+var GetConfigurationRequest_Environment = &sGetConfigurationRequest_Environment
+var GetConfigurationRequest_Configuration = &sGetConfigurationRequest_Configuration
+var GetConfigurationRequest_ClientId = &sGetConfigurationRequest_ClientId
+var GetConfigurationRequest_ClientConfigurationVersion = &sGetConfigurationRequest_ClientConfigurationVersion
+
+var Configuration = &sConfiguration
+var Configuration_Content = &sConfiguration_Content
+var Configuration_ConfigurationVersion = &sConfiguration_ConfigurationVersion
+var Configuration_ContentType = &sConfiguration_ContentType
+
+var GetConfigurationProfileRequest = &sGetConfigurationProfileRequest
+var GetConfigurationProfileRequest_ApplicationId = &sGetConfigurationProfileRequest_ApplicationId
+var GetConfigurationProfileRequest_ConfigurationProfileId = &sGetConfigurationProfileRequest_ConfigurationProfileId
+
+var GetDeploymentRequest = &sGetDeploymentRequest
+var GetDeploymentRequest_ApplicationId = &sGetDeploymentRequest_ApplicationId
+var GetDeploymentRequest_EnvironmentId = &sGetDeploymentRequest_EnvironmentId
+var GetDeploymentRequest_DeploymentNumber = &sGetDeploymentRequest_DeploymentNumber
+
+var Deployment = &sDeployment
+var Deployment_ApplicationId = &sDeployment_ApplicationId
+var Deployment_EnvironmentId = &sDeployment_EnvironmentId
+var Deployment_DeploymentStrategyId = &sDeployment_DeploymentStrategyId
+var Deployment_ConfigurationProfileId = &sDeployment_ConfigurationProfileId
+var Deployment_DeploymentNumber = &sDeployment_DeploymentNumber
+var Deployment_ConfigurationName = &sDeployment_ConfigurationName
+var Deployment_ConfigurationLocationUri = &sDeployment_ConfigurationLocationUri
+var Deployment_ConfigurationVersion = &sDeployment_ConfigurationVersion
+var Deployment_Description = &sDeployment_Description
+var Deployment_DeploymentDurationInMinutes = &sDeployment_DeploymentDurationInMinutes
+var Deployment_GrowthType = &sDeployment_GrowthType
+var Deployment_GrowthFactor = &sDeployment_GrowthFactor
+var Deployment_FinalBakeTimeInMinutes = &sDeployment_FinalBakeTimeInMinutes
+var Deployment_State = &sDeployment_State
+var Deployment_EventLog = &sDeployment_EventLog
+var Deployment_PercentageComplete = &sDeployment_PercentageComplete
+var Deployment_StartedAt = &sDeployment_StartedAt
+var Deployment_CompletedAt = &sDeployment_CompletedAt
+var Deployment_AppliedExtensions = &sDeployment_AppliedExtensions
+var Deployment_KmsKeyArn = &sDeployment_KmsKeyArn
+var Deployment_KmsKeyIdentifier = &sDeployment_KmsKeyIdentifier
+var Deployment_VersionLabel = &sDeployment_VersionLabel
+
+var GetDeploymentStrategyRequest = &sGetDeploymentStrategyRequest
+var GetDeploymentStrategyRequest_DeploymentStrategyId = &sGetDeploymentStrategyRequest_DeploymentStrategyId
+
+var GetEnvironmentRequest = &sGetEnvironmentRequest
+var GetEnvironmentRequest_ApplicationId = &sGetEnvironmentRequest_ApplicationId
+var GetEnvironmentRequest_EnvironmentId = &sGetEnvironmentRequest_EnvironmentId
+
+var GetExperimentDefinitionRequest = &sGetExperimentDefinitionRequest
+var GetExperimentDefinitionRequest_ApplicationIdentifier = &sGetExperimentDefinitionRequest_ApplicationIdentifier
+var GetExperimentDefinitionRequest_ExperimentDefinitionIdentifier = &sGetExperimentDefinitionRequest_ExperimentDefinitionIdentifier
+
+var GetExperimentRunRequest = &sGetExperimentRunRequest
+var GetExperimentRunRequest_ApplicationIdentifier = &sGetExperimentRunRequest_ApplicationIdentifier
+var GetExperimentRunRequest_ExperimentDefinitionIdentifier = &sGetExperimentRunRequest_ExperimentDefinitionIdentifier
+var GetExperimentRunRequest_Run = &sGetExperimentRunRequest_Run
+
+var ExperimentRun = &sExperimentRun
+var ExperimentRun_ApplicationId = &sExperimentRun_ApplicationId
+var ExperimentRun_ExperimentDefinitionId = &sExperimentRun_ExperimentDefinitionId
+var ExperimentRun_Run = &sExperimentRun_Run
+var ExperimentRun_Description = &sExperimentRun_Description
+var ExperimentRun_Status = &sExperimentRun_Status
+var ExperimentRun_ExposurePercentage = &sExperimentRun_ExposurePercentage
+var ExperimentRun_TreatmentOverrides = &sExperimentRun_TreatmentOverrides
+var ExperimentRun_Result = &sExperimentRun_Result
+var ExperimentRun_StartedAt = &sExperimentRun_StartedAt
+var ExperimentRun_UpdatedAt = &sExperimentRun_UpdatedAt
+var ExperimentRun_EndedAt = &sExperimentRun_EndedAt
+var ExperimentRun_ExperimentDefinitionSnapshot = &sExperimentRun_ExperimentDefinitionSnapshot
+
+var GetExtensionAssociationRequest = &sGetExtensionAssociationRequest
+var GetExtensionAssociationRequest_ExtensionAssociationId = &sGetExtensionAssociationRequest_ExtensionAssociationId
+
+var GetExtensionRequest = &sGetExtensionRequest
+var GetExtensionRequest_ExtensionIdentifier = &sGetExtensionRequest_ExtensionIdentifier
+var GetExtensionRequest_VersionNumber = &sGetExtensionRequest_VersionNumber
+
+var GetHostedConfigurationVersionRequest = &sGetHostedConfigurationVersionRequest
+var GetHostedConfigurationVersionRequest_ApplicationId = &sGetHostedConfigurationVersionRequest_ApplicationId
+var GetHostedConfigurationVersionRequest_ConfigurationProfileId = &sGetHostedConfigurationVersionRequest_ConfigurationProfileId
+var GetHostedConfigurationVersionRequest_VersionNumber = &sGetHostedConfigurationVersionRequest_VersionNumber
+
+var ListApplicationsRequest = &sListApplicationsRequest
+var ListApplicationsRequest_MaxResults = &sListApplicationsRequest_MaxResults
+var ListApplicationsRequest_NextToken = &sListApplicationsRequest_NextToken
+
+var Applications = &sApplications
+var Applications_Items = &sApplications_Items
+var Applications_NextToken = &sApplications_NextToken
+
+var ListConfigurationProfilesRequest = &sListConfigurationProfilesRequest
+var ListConfigurationProfilesRequest_ApplicationId = &sListConfigurationProfilesRequest_ApplicationId
+var ListConfigurationProfilesRequest_MaxResults = &sListConfigurationProfilesRequest_MaxResults
+var ListConfigurationProfilesRequest_NextToken = &sListConfigurationProfilesRequest_NextToken
+var ListConfigurationProfilesRequest_Type = &sListConfigurationProfilesRequest_Type
+
+var ConfigurationProfiles = &sConfigurationProfiles
+var ConfigurationProfiles_Items = &sConfigurationProfiles_Items
+var ConfigurationProfiles_NextToken = &sConfigurationProfiles_NextToken
+
+var ListDeploymentsRequest = &sListDeploymentsRequest
+var ListDeploymentsRequest_ApplicationId = &sListDeploymentsRequest_ApplicationId
+var ListDeploymentsRequest_EnvironmentId = &sListDeploymentsRequest_EnvironmentId
+var ListDeploymentsRequest_MaxResults = &sListDeploymentsRequest_MaxResults
+var ListDeploymentsRequest_NextToken = &sListDeploymentsRequest_NextToken
+
+var Deployments = &sDeployments
+var Deployments_Items = &sDeployments_Items
+var Deployments_NextToken = &sDeployments_NextToken
+
+var ListDeploymentStrategiesRequest = &sListDeploymentStrategiesRequest
+var ListDeploymentStrategiesRequest_MaxResults = &sListDeploymentStrategiesRequest_MaxResults
+var ListDeploymentStrategiesRequest_NextToken = &sListDeploymentStrategiesRequest_NextToken
+
+var DeploymentStrategies = &sDeploymentStrategies
+var DeploymentStrategies_Items = &sDeploymentStrategies_Items
+var DeploymentStrategies_NextToken = &sDeploymentStrategies_NextToken
+
+var ListEnvironmentsRequest = &sListEnvironmentsRequest
+var ListEnvironmentsRequest_ApplicationId = &sListEnvironmentsRequest_ApplicationId
+var ListEnvironmentsRequest_MaxResults = &sListEnvironmentsRequest_MaxResults
+var ListEnvironmentsRequest_NextToken = &sListEnvironmentsRequest_NextToken
+
+var Environments = &sEnvironments
+var Environments_Items = &sEnvironments_Items
+var Environments_NextToken = &sEnvironments_NextToken
+
+var ListExperimentDefinitionsRequest = &sListExperimentDefinitionsRequest
+var ListExperimentDefinitionsRequest_ApplicationIdentifier = &sListExperimentDefinitionsRequest_ApplicationIdentifier
+var ListExperimentDefinitionsRequest_ConfigurationProfileIdentifier = &sListExperimentDefinitionsRequest_ConfigurationProfileIdentifier
+var ListExperimentDefinitionsRequest_EnvironmentIdentifier = &sListExperimentDefinitionsRequest_EnvironmentIdentifier
+var ListExperimentDefinitionsRequest_Status = &sListExperimentDefinitionsRequest_Status
+var ListExperimentDefinitionsRequest_MaxResults = &sListExperimentDefinitionsRequest_MaxResults
+var ListExperimentDefinitionsRequest_NextToken = &sListExperimentDefinitionsRequest_NextToken
+
+var ExperimentDefinitions = &sExperimentDefinitions
+var ExperimentDefinitions_Items = &sExperimentDefinitions_Items
+var ExperimentDefinitions_NextToken = &sExperimentDefinitions_NextToken
+
+var ListExperimentRunEventsRequest = &sListExperimentRunEventsRequest
+var ListExperimentRunEventsRequest_ApplicationIdentifier = &sListExperimentRunEventsRequest_ApplicationIdentifier
+var ListExperimentRunEventsRequest_ExperimentDefinitionIdentifier = &sListExperimentRunEventsRequest_ExperimentDefinitionIdentifier
+var ListExperimentRunEventsRequest_Run = &sListExperimentRunEventsRequest_Run
+var ListExperimentRunEventsRequest_MaxResults = &sListExperimentRunEventsRequest_MaxResults
+var ListExperimentRunEventsRequest_NextToken = &sListExperimentRunEventsRequest_NextToken
+
+var ExperimentRunEvents = &sExperimentRunEvents
+var ExperimentRunEvents_Items = &sExperimentRunEvents_Items
+var ExperimentRunEvents_NextToken = &sExperimentRunEvents_NextToken
+
+var ListExperimentRunsRequest = &sListExperimentRunsRequest
+var ListExperimentRunsRequest_ApplicationIdentifier = &sListExperimentRunsRequest_ApplicationIdentifier
+var ListExperimentRunsRequest_ExperimentDefinitionIdentifier = &sListExperimentRunsRequest_ExperimentDefinitionIdentifier
+var ListExperimentRunsRequest_MaxResults = &sListExperimentRunsRequest_MaxResults
+var ListExperimentRunsRequest_NextToken = &sListExperimentRunsRequest_NextToken
+var ListExperimentRunsRequest_Status = &sListExperimentRunsRequest_Status
+
+var ExperimentRuns = &sExperimentRuns
+var ExperimentRuns_Items = &sExperimentRuns_Items
+var ExperimentRuns_NextToken = &sExperimentRuns_NextToken
+
+var ListExtensionAssociationsRequest = &sListExtensionAssociationsRequest
+var ListExtensionAssociationsRequest_ResourceIdentifier = &sListExtensionAssociationsRequest_ResourceIdentifier
+var ListExtensionAssociationsRequest_ExtensionIdentifier = &sListExtensionAssociationsRequest_ExtensionIdentifier
+var ListExtensionAssociationsRequest_ExtensionVersionNumber = &sListExtensionAssociationsRequest_ExtensionVersionNumber
+var ListExtensionAssociationsRequest_MaxResults = &sListExtensionAssociationsRequest_MaxResults
+var ListExtensionAssociationsRequest_NextToken = &sListExtensionAssociationsRequest_NextToken
+
+var ExtensionAssociations = &sExtensionAssociations
+var ExtensionAssociations_Items = &sExtensionAssociations_Items
+var ExtensionAssociations_NextToken = &sExtensionAssociations_NextToken
+
+var ListExtensionsRequest = &sListExtensionsRequest
+var ListExtensionsRequest_MaxResults = &sListExtensionsRequest_MaxResults
+var ListExtensionsRequest_NextToken = &sListExtensionsRequest_NextToken
+var ListExtensionsRequest_Name = &sListExtensionsRequest_Name
+
+var Extensions = &sExtensions
+var Extensions_Items = &sExtensions_Items
+var Extensions_NextToken = &sExtensions_NextToken
+
+var ListHostedConfigurationVersionsRequest = &sListHostedConfigurationVersionsRequest
+var ListHostedConfigurationVersionsRequest_ApplicationId = &sListHostedConfigurationVersionsRequest_ApplicationId
+var ListHostedConfigurationVersionsRequest_ConfigurationProfileId = &sListHostedConfigurationVersionsRequest_ConfigurationProfileId
+var ListHostedConfigurationVersionsRequest_MaxResults = &sListHostedConfigurationVersionsRequest_MaxResults
+var ListHostedConfigurationVersionsRequest_NextToken = &sListHostedConfigurationVersionsRequest_NextToken
+var ListHostedConfigurationVersionsRequest_VersionLabel = &sListHostedConfigurationVersionsRequest_VersionLabel
+
+var HostedConfigurationVersions = &sHostedConfigurationVersions
+var HostedConfigurationVersions_Items = &sHostedConfigurationVersions_Items
+var HostedConfigurationVersions_NextToken = &sHostedConfigurationVersions_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ResourceTags = &sResourceTags
+var ResourceTags_Tags = &sResourceTags_Tags
+
+var StartDeploymentRequest = &sStartDeploymentRequest
+var StartDeploymentRequest_ApplicationId = &sStartDeploymentRequest_ApplicationId
+var StartDeploymentRequest_EnvironmentId = &sStartDeploymentRequest_EnvironmentId
+var StartDeploymentRequest_DeploymentStrategyId = &sStartDeploymentRequest_DeploymentStrategyId
+var StartDeploymentRequest_ConfigurationProfileId = &sStartDeploymentRequest_ConfigurationProfileId
+var StartDeploymentRequest_ConfigurationVersion = &sStartDeploymentRequest_ConfigurationVersion
+var StartDeploymentRequest_Description = &sStartDeploymentRequest_Description
+var StartDeploymentRequest_Tags = &sStartDeploymentRequest_Tags
+var StartDeploymentRequest_KmsKeyIdentifier = &sStartDeploymentRequest_KmsKeyIdentifier
+var StartDeploymentRequest_DynamicExtensionParameters = &sStartDeploymentRequest_DynamicExtensionParameters
+var StartDeploymentRequest_LatestDeploymentNumber = &sStartDeploymentRequest_LatestDeploymentNumber
+
+var StartExperimentRunRequest = &sStartExperimentRunRequest
+var StartExperimentRunRequest_ApplicationIdentifier = &sStartExperimentRunRequest_ApplicationIdentifier
+var StartExperimentRunRequest_ExperimentDefinitionIdentifier = &sStartExperimentRunRequest_ExperimentDefinitionIdentifier
+var StartExperimentRunRequest_Description = &sStartExperimentRunRequest_Description
+var StartExperimentRunRequest_ExposurePercentage = &sStartExperimentRunRequest_ExposurePercentage
+var StartExperimentRunRequest_TreatmentOverrides = &sStartExperimentRunRequest_TreatmentOverrides
+var StartExperimentRunRequest_Tags = &sStartExperimentRunRequest_Tags
+var StartExperimentRunRequest_DeploymentParameters = &sStartExperimentRunRequest_DeploymentParameters
+
+var StopDeploymentRequest = &sStopDeploymentRequest
+var StopDeploymentRequest_ApplicationId = &sStopDeploymentRequest_ApplicationId
+var StopDeploymentRequest_EnvironmentId = &sStopDeploymentRequest_EnvironmentId
+var StopDeploymentRequest_DeploymentNumber = &sStopDeploymentRequest_DeploymentNumber
+var StopDeploymentRequest_AllowRevert = &sStopDeploymentRequest_AllowRevert
+
+var StopExperimentRunRequest = &sStopExperimentRunRequest
+var StopExperimentRunRequest_ApplicationIdentifier = &sStopExperimentRunRequest_ApplicationIdentifier
+var StopExperimentRunRequest_ExperimentDefinitionIdentifier = &sStopExperimentRunRequest_ExperimentDefinitionIdentifier
+var StopExperimentRunRequest_Run = &sStopExperimentRunRequest_Run
+var StopExperimentRunRequest_Result = &sStopExperimentRunRequest_Result
+var StopExperimentRunRequest_DeploymentParameters = &sStopExperimentRunRequest_DeploymentParameters
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateAccountSettingsRequest = &sUpdateAccountSettingsRequest
+var UpdateAccountSettingsRequest_DeletionProtection = &sUpdateAccountSettingsRequest_DeletionProtection
+var UpdateAccountSettingsRequest_VendedMetrics = &sUpdateAccountSettingsRequest_VendedMetrics
+
+var UpdateApplicationRequest = &sUpdateApplicationRequest
+var UpdateApplicationRequest_ApplicationId = &sUpdateApplicationRequest_ApplicationId
+var UpdateApplicationRequest_Name = &sUpdateApplicationRequest_Name
+var UpdateApplicationRequest_Description = &sUpdateApplicationRequest_Description
+
+var UpdateConfigurationProfileRequest = &sUpdateConfigurationProfileRequest
+var UpdateConfigurationProfileRequest_ApplicationId = &sUpdateConfigurationProfileRequest_ApplicationId
+var UpdateConfigurationProfileRequest_ConfigurationProfileId = &sUpdateConfigurationProfileRequest_ConfigurationProfileId
+var UpdateConfigurationProfileRequest_Name = &sUpdateConfigurationProfileRequest_Name
+var UpdateConfigurationProfileRequest_Description = &sUpdateConfigurationProfileRequest_Description
+var UpdateConfigurationProfileRequest_RetrievalRoleArn = &sUpdateConfigurationProfileRequest_RetrievalRoleArn
+var UpdateConfigurationProfileRequest_Validators = &sUpdateConfigurationProfileRequest_Validators
+var UpdateConfigurationProfileRequest_KmsKeyIdentifier = &sUpdateConfigurationProfileRequest_KmsKeyIdentifier
+
+var UpdateDeploymentStrategyRequest = &sUpdateDeploymentStrategyRequest
+var UpdateDeploymentStrategyRequest_DeploymentStrategyId = &sUpdateDeploymentStrategyRequest_DeploymentStrategyId
+var UpdateDeploymentStrategyRequest_Description = &sUpdateDeploymentStrategyRequest_Description
+var UpdateDeploymentStrategyRequest_DeploymentDurationInMinutes = &sUpdateDeploymentStrategyRequest_DeploymentDurationInMinutes
+var UpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes = &sUpdateDeploymentStrategyRequest_FinalBakeTimeInMinutes
+var UpdateDeploymentStrategyRequest_GrowthFactor = &sUpdateDeploymentStrategyRequest_GrowthFactor
+var UpdateDeploymentStrategyRequest_GrowthType = &sUpdateDeploymentStrategyRequest_GrowthType
+
+var UpdateEnvironmentRequest = &sUpdateEnvironmentRequest
+var UpdateEnvironmentRequest_ApplicationId = &sUpdateEnvironmentRequest_ApplicationId
+var UpdateEnvironmentRequest_EnvironmentId = &sUpdateEnvironmentRequest_EnvironmentId
+var UpdateEnvironmentRequest_Name = &sUpdateEnvironmentRequest_Name
+var UpdateEnvironmentRequest_Description = &sUpdateEnvironmentRequest_Description
+var UpdateEnvironmentRequest_Monitors = &sUpdateEnvironmentRequest_Monitors
+
+var UpdateExperimentDefinitionRequest = &sUpdateExperimentDefinitionRequest
+var UpdateExperimentDefinitionRequest_ApplicationIdentifier = &sUpdateExperimentDefinitionRequest_ApplicationIdentifier
+var UpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier = &sUpdateExperimentDefinitionRequest_ExperimentDefinitionIdentifier
+var UpdateExperimentDefinitionRequest_Treatments = &sUpdateExperimentDefinitionRequest_Treatments
+var UpdateExperimentDefinitionRequest_Control = &sUpdateExperimentDefinitionRequest_Control
+var UpdateExperimentDefinitionRequest_Hypothesis = &sUpdateExperimentDefinitionRequest_Hypothesis
+var UpdateExperimentDefinitionRequest_AudienceRule = &sUpdateExperimentDefinitionRequest_AudienceRule
+var UpdateExperimentDefinitionRequest_AudienceDescription = &sUpdateExperimentDefinitionRequest_AudienceDescription
+var UpdateExperimentDefinitionRequest_LaunchCriteria = &sUpdateExperimentDefinitionRequest_LaunchCriteria
+
+var UpdateExperimentRunRequest = &sUpdateExperimentRunRequest
+var UpdateExperimentRunRequest_ApplicationIdentifier = &sUpdateExperimentRunRequest_ApplicationIdentifier
+var UpdateExperimentRunRequest_ExperimentDefinitionIdentifier = &sUpdateExperimentRunRequest_ExperimentDefinitionIdentifier
+var UpdateExperimentRunRequest_Run = &sUpdateExperimentRunRequest_Run
+var UpdateExperimentRunRequest_Description = &sUpdateExperimentRunRequest_Description
+var UpdateExperimentRunRequest_ExposurePercentage = &sUpdateExperimentRunRequest_ExposurePercentage
+var UpdateExperimentRunRequest_TreatmentOverrides = &sUpdateExperimentRunRequest_TreatmentOverrides
+var UpdateExperimentRunRequest_DeploymentParameters = &sUpdateExperimentRunRequest_DeploymentParameters
+
+var UpdateExtensionAssociationRequest = &sUpdateExtensionAssociationRequest
+var UpdateExtensionAssociationRequest_ExtensionAssociationId = &sUpdateExtensionAssociationRequest_ExtensionAssociationId
+var UpdateExtensionAssociationRequest_Parameters = &sUpdateExtensionAssociationRequest_Parameters
+
+var UpdateExtensionRequest = &sUpdateExtensionRequest
+var UpdateExtensionRequest_ExtensionIdentifier = &sUpdateExtensionRequest_ExtensionIdentifier
+var UpdateExtensionRequest_Description = &sUpdateExtensionRequest_Description
+var UpdateExtensionRequest_Actions = &sUpdateExtensionRequest_Actions
+var UpdateExtensionRequest_Parameters = &sUpdateExtensionRequest_Parameters
+var UpdateExtensionRequest_VersionNumber = &sUpdateExtensionRequest_VersionNumber
+
+var ValidateConfigurationRequest = &sValidateConfigurationRequest
+var ValidateConfigurationRequest_ApplicationId = &sValidateConfigurationRequest_ApplicationId
+var ValidateConfigurationRequest_ConfigurationProfileId = &sValidateConfigurationRequest_ConfigurationProfileId
+var ValidateConfigurationRequest_ConfigurationVersion = &sValidateConfigurationRequest_ConfigurationVersion
+
+var AmazonAppConfig = &smithy.ServiceSchema{Schema: &s_AmazonAppConfig, Version: "2019-10-09"}

@@ -4,5344 +4,5208 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptInboundCrossClusterSearchConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AcceptInboundCrossClusterSearchConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eAcceptInboundCrossClusterSearchConnection                                                     smithy.SchemaExtensions
+	eAddTags                                                                                       smithy.SchemaExtensions
+	eAssociatePackage                                                                              smithy.SchemaExtensions
+	eAuthorizeVpcEndpointAccess                                                                    smithy.SchemaExtensions
+	eCancelDomainConfigChange                                                                      smithy.SchemaExtensions
+	eCancelElasticsearchServiceSoftwareUpdate                                                      smithy.SchemaExtensions
+	eCreateElasticsearchDomain                                                                     smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnection                                                    smithy.SchemaExtensions
+	eCreatePackage                                                                                 smithy.SchemaExtensions
+	eCreateVpcEndpoint                                                                             smithy.SchemaExtensions
+	eDeleteElasticsearchDomain                                                                     smithy.SchemaExtensions
+	eDeleteElasticsearchServiceRole                                                                smithy.SchemaExtensions
+	eDeleteInboundCrossClusterSearchConnection                                                     smithy.SchemaExtensions
+	eDeleteOutboundCrossClusterSearchConnection                                                    smithy.SchemaExtensions
+	eDeletePackage                                                                                 smithy.SchemaExtensions
+	eDeleteVpcEndpoint                                                                             smithy.SchemaExtensions
+	eDescribeDomainAutoTunes                                                                       smithy.SchemaExtensions
+	eDescribeDomainChangeProgress                                                                  smithy.SchemaExtensions
+	eDescribeElasticsearchDomain                                                                   smithy.SchemaExtensions
+	eDescribeElasticsearchDomainConfig                                                             smithy.SchemaExtensions
+	eDescribeElasticsearchDomains                                                                  smithy.SchemaExtensions
+	eDescribeElasticsearchInstanceTypeLimits                                                       smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnections                                                  smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnections                                                 smithy.SchemaExtensions
+	eDescribePackages                                                                              smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferings                                                smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstances                                                        smithy.SchemaExtensions
+	eDescribeVpcEndpoints                                                                          smithy.SchemaExtensions
+	eDissociatePackage                                                                             smithy.SchemaExtensions
+	eGetCompatibleElasticsearchVersions                                                            smithy.SchemaExtensions
+	eGetPackageVersionHistory                                                                      smithy.SchemaExtensions
+	eGetUpgradeHistory                                                                             smithy.SchemaExtensions
+	eGetUpgradeStatus                                                                              smithy.SchemaExtensions
+	eListDomainNames                                                                               smithy.SchemaExtensions
+	eListDomainsForPackage                                                                         smithy.SchemaExtensions
+	eListElasticsearchInstanceTypes                                                                smithy.SchemaExtensions
+	eListElasticsearchVersions                                                                     smithy.SchemaExtensions
+	eListPackagesForDomain                                                                         smithy.SchemaExtensions
+	eListTags                                                                                      smithy.SchemaExtensions
+	eListVpcEndpointAccess                                                                         smithy.SchemaExtensions
+	eListVpcEndpoints                                                                              smithy.SchemaExtensions
+	eListVpcEndpointsForDomain                                                                     smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOffering                                                 smithy.SchemaExtensions
+	eRejectInboundCrossClusterSearchConnection                                                     smithy.SchemaExtensions
+	eRemoveTags                                                                                    smithy.SchemaExtensions
+	eRevokeVpcEndpointAccess                                                                       smithy.SchemaExtensions
+	eStartElasticsearchServiceSoftwareUpdate                                                       smithy.SchemaExtensions
+	eUpdateClone                                                                                   smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfig                                                               smithy.SchemaExtensions
+	eUpdatePackage                                                                                 smithy.SchemaExtensions
+	eUpdateVpcEndpoint                                                                             smithy.SchemaExtensions
+	eUpgradeElasticsearchDomain                                                                    smithy.SchemaExtensions
+	e_AmazonElasticsearchService2015                                                               smithy.SchemaExtensions
+	eAccessDeniedException                                                                         smithy.SchemaExtensions
+	eAccessDeniedException_message                                                                 smithy.SchemaExtensions
+	eAccessPoliciesStatus                                                                          smithy.SchemaExtensions
+	eAccessPoliciesStatus_Options                                                                  smithy.SchemaExtensions
+	eAccessPoliciesStatus_Status                                                                   smithy.SchemaExtensions
+	eAdditionalLimit                                                                               smithy.SchemaExtensions
+	eAdditionalLimit_LimitName                                                                     smithy.SchemaExtensions
+	eAdditionalLimit_LimitValues                                                                   smithy.SchemaExtensions
+	e_AdditionalLimitList                                                                          smithy.SchemaExtensions
+	e_AdditionalLimitList_member                                                                   smithy.SchemaExtensions
+	e_AdvancedOptions                                                                              smithy.SchemaExtensions
+	e_AdvancedOptions_key                                                                          smithy.SchemaExtensions
+	e_AdvancedOptions_value                                                                        smithy.SchemaExtensions
+	eAdvancedOptionsStatus                                                                         smithy.SchemaExtensions
+	eAdvancedOptionsStatus_Options                                                                 smithy.SchemaExtensions
+	eAdvancedOptionsStatus_Status                                                                  smithy.SchemaExtensions
+	eAdvancedSecurityOptions                                                                       smithy.SchemaExtensions
+	eAdvancedSecurityOptions_Enabled                                                               smithy.SchemaExtensions
+	eAdvancedSecurityOptions_InternalUserDatabaseEnabled                                           smithy.SchemaExtensions
+	eAdvancedSecurityOptions_SAMLOptions                                                           smithy.SchemaExtensions
+	eAdvancedSecurityOptions_AnonymousAuthDisableDate                                              smithy.SchemaExtensions
+	eAdvancedSecurityOptions_AnonymousAuthEnabled                                                  smithy.SchemaExtensions
+	eAdvancedSecurityOptionsInput                                                                  smithy.SchemaExtensions
+	eAdvancedSecurityOptionsInput_Enabled                                                          smithy.SchemaExtensions
+	eAdvancedSecurityOptionsInput_InternalUserDatabaseEnabled                                      smithy.SchemaExtensions
+	eAdvancedSecurityOptionsInput_MasterUserOptions                                                smithy.SchemaExtensions
+	eAdvancedSecurityOptionsInput_SAMLOptions                                                      smithy.SchemaExtensions
+	eAdvancedSecurityOptionsInput_AnonymousAuthEnabled                                             smithy.SchemaExtensions
+	eAdvancedSecurityOptionsStatus                                                                 smithy.SchemaExtensions
+	eAdvancedSecurityOptionsStatus_Options                                                         smithy.SchemaExtensions
+	eAdvancedSecurityOptionsStatus_Status                                                          smithy.SchemaExtensions
+	e_ARN                                                                                          smithy.SchemaExtensions
+	eAuthorizedPrincipal                                                                           smithy.SchemaExtensions
+	eAuthorizedPrincipal_PrincipalType                                                             smithy.SchemaExtensions
+	eAuthorizedPrincipal_Principal                                                                 smithy.SchemaExtensions
+	e_AuthorizedPrincipalList                                                                      smithy.SchemaExtensions
+	e_AuthorizedPrincipalList_member                                                               smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptions                                                                 smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptions_Enabled                                                         smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptions_StartTime                                                       smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptions_EndTime                                                         smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptions_State                                                           smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptionsStatus                                                           smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptionsStatus_Options                                                   smithy.SchemaExtensions
+	eAutomatedSnapshotPauseOptionsStatus_Status                                                    smithy.SchemaExtensions
+	eAutomatedSnapshotPauseRequestOptions                                                          smithy.SchemaExtensions
+	eAutomatedSnapshotPauseRequestOptions_Enabled                                                  smithy.SchemaExtensions
+	eAutomatedSnapshotPauseRequestOptions_StartTime                                                smithy.SchemaExtensions
+	eAutomatedSnapshotPauseRequestOptions_EndTime                                                  smithy.SchemaExtensions
+	eAutoTune                                                                                      smithy.SchemaExtensions
+	eAutoTune_AutoTuneType                                                                         smithy.SchemaExtensions
+	eAutoTune_AutoTuneDetails                                                                      smithy.SchemaExtensions
+	e_AutoTuneDate                                                                                 smithy.SchemaExtensions
+	eAutoTuneDesiredState                                                                          smithy.SchemaExtensions
+	eAutoTuneDesiredState_ENABLED                                                                  smithy.SchemaExtensions
+	eAutoTuneDesiredState_DISABLED                                                                 smithy.SchemaExtensions
+	eAutoTuneDetails                                                                               smithy.SchemaExtensions
+	eAutoTuneDetails_ScheduledAutoTuneDetails                                                      smithy.SchemaExtensions
+	e_AutoTuneList                                                                                 smithy.SchemaExtensions
+	e_AutoTuneList_member                                                                          smithy.SchemaExtensions
+	eAutoTuneMaintenanceSchedule                                                                   smithy.SchemaExtensions
+	eAutoTuneMaintenanceSchedule_StartAt                                                           smithy.SchemaExtensions
+	eAutoTuneMaintenanceSchedule_Duration                                                          smithy.SchemaExtensions
+	eAutoTuneMaintenanceSchedule_CronExpressionForRecurrence                                       smithy.SchemaExtensions
+	e_AutoTuneMaintenanceScheduleList                                                              smithy.SchemaExtensions
+	e_AutoTuneMaintenanceScheduleList_member                                                       smithy.SchemaExtensions
+	eAutoTuneOptions                                                                               smithy.SchemaExtensions
+	eAutoTuneOptions_DesiredState                                                                  smithy.SchemaExtensions
+	eAutoTuneOptions_RollbackOnDisable                                                             smithy.SchemaExtensions
+	eAutoTuneOptions_MaintenanceSchedules                                                          smithy.SchemaExtensions
+	eAutoTuneOptionsInput                                                                          smithy.SchemaExtensions
+	eAutoTuneOptionsInput_DesiredState                                                             smithy.SchemaExtensions
+	eAutoTuneOptionsInput_MaintenanceSchedules                                                     smithy.SchemaExtensions
+	eAutoTuneOptionsOutput                                                                         smithy.SchemaExtensions
+	eAutoTuneOptionsOutput_State                                                                   smithy.SchemaExtensions
+	eAutoTuneOptionsOutput_ErrorMessage                                                            smithy.SchemaExtensions
+	eAutoTuneOptionsStatus                                                                         smithy.SchemaExtensions
+	eAutoTuneOptionsStatus_Options                                                                 smithy.SchemaExtensions
+	eAutoTuneOptionsStatus_Status                                                                  smithy.SchemaExtensions
+	eAutoTuneState                                                                                 smithy.SchemaExtensions
+	eAutoTuneState_ENABLED                                                                         smithy.SchemaExtensions
+	eAutoTuneState_DISABLED                                                                        smithy.SchemaExtensions
+	eAutoTuneState_ENABLE_IN_PROGRESS                                                              smithy.SchemaExtensions
+	eAutoTuneState_DISABLE_IN_PROGRESS                                                             smithy.SchemaExtensions
+	eAutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED                                                 smithy.SchemaExtensions
+	eAutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS                                               smithy.SchemaExtensions
+	eAutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE                                                  smithy.SchemaExtensions
+	eAutoTuneState_DISABLED_AND_ROLLBACK_ERROR                                                     smithy.SchemaExtensions
+	eAutoTuneState_ERROR                                                                           smithy.SchemaExtensions
+	eAutoTuneStatus                                                                                smithy.SchemaExtensions
+	eAutoTuneStatus_CreationDate                                                                   smithy.SchemaExtensions
+	eAutoTuneStatus_UpdateDate                                                                     smithy.SchemaExtensions
+	eAutoTuneStatus_UpdateVersion                                                                  smithy.SchemaExtensions
+	eAutoTuneStatus_State                                                                          smithy.SchemaExtensions
+	eAutoTuneStatus_ErrorMessage                                                                   smithy.SchemaExtensions
+	eAutoTuneStatus_PendingDeletion                                                                smithy.SchemaExtensions
+	eAutoTuneType                                                                                  smithy.SchemaExtensions
+	eAutoTuneType_SCHEDULED_ACTION                                                                 smithy.SchemaExtensions
+	e_AWSAccount                                                                                   smithy.SchemaExtensions
+	e_BackendRole                                                                                  smithy.SchemaExtensions
+	eBaseException                                                                                 smithy.SchemaExtensions
+	eBaseException_message                                                                         smithy.SchemaExtensions
+	e_Boolean                                                                                      smithy.SchemaExtensions
+	eCancelledChangeProperty                                                                       smithy.SchemaExtensions
+	eCancelledChangeProperty_PropertyName                                                          smithy.SchemaExtensions
+	eCancelledChangeProperty_CancelledValue                                                        smithy.SchemaExtensions
+	eCancelledChangeProperty_ActiveValue                                                           smithy.SchemaExtensions
+	e_CancelledChangePropertyList                                                                  smithy.SchemaExtensions
+	e_CancelledChangePropertyList_member                                                           smithy.SchemaExtensions
+	eChangeProgressDetails                                                                         smithy.SchemaExtensions
+	eChangeProgressDetails_ChangeId                                                                smithy.SchemaExtensions
+	eChangeProgressDetails_Message                                                                 smithy.SchemaExtensions
+	eChangeProgressDetails_ConfigChangeStatus                                                      smithy.SchemaExtensions
+	eChangeProgressDetails_StartTime                                                               smithy.SchemaExtensions
+	eChangeProgressDetails_LastUpdatedTime                                                         smithy.SchemaExtensions
+	eChangeProgressDetails_InitiatedBy                                                             smithy.SchemaExtensions
+	eChangeProgressStage                                                                           smithy.SchemaExtensions
+	eChangeProgressStage_Name                                                                      smithy.SchemaExtensions
+	eChangeProgressStage_Status                                                                    smithy.SchemaExtensions
+	eChangeProgressStage_Description                                                               smithy.SchemaExtensions
+	eChangeProgressStage_LastUpdated                                                               smithy.SchemaExtensions
+	e_ChangeProgressStageList                                                                      smithy.SchemaExtensions
+	e_ChangeProgressStageList_member                                                               smithy.SchemaExtensions
+	e_ChangeProgressStageName                                                                      smithy.SchemaExtensions
+	e_ChangeProgressStageStatus                                                                    smithy.SchemaExtensions
+	eChangeProgressStatusDetails                                                                   smithy.SchemaExtensions
+	eChangeProgressStatusDetails_ChangeId                                                          smithy.SchemaExtensions
+	eChangeProgressStatusDetails_StartTime                                                         smithy.SchemaExtensions
+	eChangeProgressStatusDetails_Status                                                            smithy.SchemaExtensions
+	eChangeProgressStatusDetails_PendingProperties                                                 smithy.SchemaExtensions
+	eChangeProgressStatusDetails_CompletedProperties                                               smithy.SchemaExtensions
+	eChangeProgressStatusDetails_TotalNumberOfStages                                               smithy.SchemaExtensions
+	eChangeProgressStatusDetails_ChangeProgressStages                                              smithy.SchemaExtensions
+	eChangeProgressStatusDetails_ConfigChangeStatus                                                smithy.SchemaExtensions
+	eChangeProgressStatusDetails_LastUpdatedTime                                                   smithy.SchemaExtensions
+	eChangeProgressStatusDetails_InitiatedBy                                                       smithy.SchemaExtensions
+	eChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails                                     smithy.SchemaExtensions
+	e_ClientToken                                                                                  smithy.SchemaExtensions
+	eClonedBlueGreenOptions                                                                        smithy.SchemaExtensions
+	eClonedBlueGreenOptions_RetentionOptions                                                       smithy.SchemaExtensions
+	eClonedBlueGreenScheduledAction                                                                smithy.SchemaExtensions
+	eClonedBlueGreenScheduledAction_Action                                                         smithy.SchemaExtensions
+	eClonedBlueGreenScheduledAction_ScheduledTime                                                  smithy.SchemaExtensions
+	eClonedBlueGreenScheduledActionType                                                            smithy.SchemaExtensions
+	eClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY                               smithy.SchemaExtensions
+	eClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER                                     smithy.SchemaExtensions
+	eClonedBlueGreenUpgradeDetails                                                                 smithy.SchemaExtensions
+	eClonedBlueGreenUpgradeDetails_TrafficSplit                                                    smithy.SchemaExtensions
+	eClonedBlueGreenUpgradeDetails_ScheduledAction                                                 smithy.SchemaExtensions
+	eClonedBlueGreenUpgradeDetails_RetentionInHours                                                smithy.SchemaExtensions
+	e_CloudWatchLogsLogGroupArn                                                                    smithy.SchemaExtensions
+	eCognitoOptions                                                                                smithy.SchemaExtensions
+	eCognitoOptions_Enabled                                                                        smithy.SchemaExtensions
+	eCognitoOptions_UserPoolId                                                                     smithy.SchemaExtensions
+	eCognitoOptions_IdentityPoolId                                                                 smithy.SchemaExtensions
+	eCognitoOptions_RoleArn                                                                        smithy.SchemaExtensions
+	eCognitoOptionsStatus                                                                          smithy.SchemaExtensions
+	eCognitoOptionsStatus_Options                                                                  smithy.SchemaExtensions
+	eCognitoOptionsStatus_Status                                                                   smithy.SchemaExtensions
+	eColdStorageOptions                                                                            smithy.SchemaExtensions
+	eColdStorageOptions_Enabled                                                                    smithy.SchemaExtensions
+	e_CommitMessage                                                                                smithy.SchemaExtensions
+	e_CompatibleElasticsearchVersionsList                                                          smithy.SchemaExtensions
+	e_CompatibleElasticsearchVersionsList_member                                                   smithy.SchemaExtensions
+	eCompatibleVersionsMap                                                                         smithy.SchemaExtensions
+	eCompatibleVersionsMap_SourceVersion                                                           smithy.SchemaExtensions
+	eCompatibleVersionsMap_TargetVersions                                                          smithy.SchemaExtensions
+	eConfigChangeStatus                                                                            smithy.SchemaExtensions
+	eConfigChangeStatus_PENDING                                                                    smithy.SchemaExtensions
+	eConfigChangeStatus_INITIALIZING                                                               smithy.SchemaExtensions
+	eConfigChangeStatus_VALIDATING                                                                 smithy.SchemaExtensions
+	eConfigChangeStatus_VALIDATION_FAILED                                                          smithy.SchemaExtensions
+	eConfigChangeStatus_APPLYING_CHANGES                                                           smithy.SchemaExtensions
+	eConfigChangeStatus_COMPLETED                                                                  smithy.SchemaExtensions
+	eConfigChangeStatus_PENDING_USER_INPUT                                                         smithy.SchemaExtensions
+	eConfigChangeStatus_CANCELLED                                                                  smithy.SchemaExtensions
+	eConflictException                                                                             smithy.SchemaExtensions
+	eConflictException_message                                                                     smithy.SchemaExtensions
+	e_ConnectionAlias                                                                              smithy.SchemaExtensions
+	e_CreatedAt                                                                                    smithy.SchemaExtensions
+	e_CrossClusterSearchConnectionId                                                               smithy.SchemaExtensions
+	e_CrossClusterSearchConnectionStatusMessage                                                    smithy.SchemaExtensions
+	eCutoverOptions                                                                                smithy.SchemaExtensions
+	eCutoverOptions_Target                                                                         smithy.SchemaExtensions
+	eCutoverOptions_Status                                                                         smithy.SchemaExtensions
+	eCutoverRequestOptions                                                                         smithy.SchemaExtensions
+	eCutoverRequestOptions_Target                                                                  smithy.SchemaExtensions
+	eCutoverStatus                                                                                 smithy.SchemaExtensions
+	eCutoverStatus_IN_PROGRESS                                                                     smithy.SchemaExtensions
+	eCutoverStatus_COMPLETED                                                                       smithy.SchemaExtensions
+	eCutoverStatus_FAILED                                                                          smithy.SchemaExtensions
+	eCutoverTarget                                                                                 smithy.SchemaExtensions
+	eCutoverTarget_CLONED_CLUSTER                                                                  smithy.SchemaExtensions
+	eCutoverTarget_PRIMARY_CLUSTER                                                                 smithy.SchemaExtensions
+	e_DeploymentCloseDateTimeStamp                                                                 smithy.SchemaExtensions
+	eDeploymentStatus                                                                              smithy.SchemaExtensions
+	eDeploymentStatus_PENDING_UPDATE                                                               smithy.SchemaExtensions
+	eDeploymentStatus_IN_PROGRESS                                                                  smithy.SchemaExtensions
+	eDeploymentStatus_COMPLETED                                                                    smithy.SchemaExtensions
+	eDeploymentStatus_NOT_ELIGIBLE                                                                 smithy.SchemaExtensions
+	eDeploymentStatus_ELIGIBLE                                                                     smithy.SchemaExtensions
+	eDeploymentStrategy                                                                            smithy.SchemaExtensions
+	eDeploymentStrategy_DEFAULT                                                                    smithy.SchemaExtensions
+	eDeploymentStrategy_CAPACITY_OPTIMIZED                                                         smithy.SchemaExtensions
+	eDeploymentStrategyOptions                                                                     smithy.SchemaExtensions
+	eDeploymentStrategyOptions_DeploymentStrategy                                                  smithy.SchemaExtensions
+	eDeploymentStrategyOptionsStatus                                                               smithy.SchemaExtensions
+	eDeploymentStrategyOptionsStatus_Options                                                       smithy.SchemaExtensions
+	eDeploymentStrategyOptionsStatus_Status                                                        smithy.SchemaExtensions
+	eDeploymentStrategyOverride                                                                    smithy.SchemaExtensions
+	eDeploymentStrategyOverride_CLONED_BLUE_GREEN                                                  smithy.SchemaExtensions
+	eDeploymentStrategyOverrideOptions                                                             smithy.SchemaExtensions
+	eDeploymentStrategyOverrideOptions_DeploymentStrategy                                          smithy.SchemaExtensions
+	eDeploymentStrategyOverrideOptions_ClonedBlueGreenOptions                                      smithy.SchemaExtensions
+	e_DeploymentType                                                                               smithy.SchemaExtensions
+	eDescribePackagesFilter                                                                        smithy.SchemaExtensions
+	eDescribePackagesFilter_Name                                                                   smithy.SchemaExtensions
+	eDescribePackagesFilter_Value                                                                  smithy.SchemaExtensions
+	e_DescribePackagesFilterList                                                                   smithy.SchemaExtensions
+	e_DescribePackagesFilterList_member                                                            smithy.SchemaExtensions
+	eDescribePackagesFilterName                                                                    smithy.SchemaExtensions
+	eDescribePackagesFilterName_PackageID                                                          smithy.SchemaExtensions
+	eDescribePackagesFilterName_PackageName                                                        smithy.SchemaExtensions
+	eDescribePackagesFilterName_PackageStatus                                                      smithy.SchemaExtensions
+	e_DescribePackagesFilterValue                                                                  smithy.SchemaExtensions
+	e_DescribePackagesFilterValues                                                                 smithy.SchemaExtensions
+	e_DescribePackagesFilterValues_member                                                          smithy.SchemaExtensions
+	e_Description                                                                                  smithy.SchemaExtensions
+	eDisabledOperationException                                                                    smithy.SchemaExtensions
+	eDisabledOperationException_message                                                            smithy.SchemaExtensions
+	e_DisableTimestamp                                                                             smithy.SchemaExtensions
+	e_DomainArn                                                                                    smithy.SchemaExtensions
+	eDomainEndpointOptions                                                                         smithy.SchemaExtensions
+	eDomainEndpointOptions_EnforceHTTPS                                                            smithy.SchemaExtensions
+	eDomainEndpointOptions_TLSSecurityPolicy                                                       smithy.SchemaExtensions
+	eDomainEndpointOptions_CustomEndpointEnabled                                                   smithy.SchemaExtensions
+	eDomainEndpointOptions_CustomEndpoint                                                          smithy.SchemaExtensions
+	eDomainEndpointOptions_CustomEndpointCertificateArn                                            smithy.SchemaExtensions
+	eDomainEndpointOptionsStatus                                                                   smithy.SchemaExtensions
+	eDomainEndpointOptionsStatus_Options                                                           smithy.SchemaExtensions
+	eDomainEndpointOptionsStatus_Status                                                            smithy.SchemaExtensions
+	eDomainEngineMode                                                                              smithy.SchemaExtensions
+	eDomainEngineMode_GENERAL                                                                      smithy.SchemaExtensions
+	eDomainEngineMode_OPTIMIZED                                                                    smithy.SchemaExtensions
+	e_DomainId                                                                                     smithy.SchemaExtensions
+	eDomainInfo                                                                                    smithy.SchemaExtensions
+	eDomainInfo_DomainName                                                                         smithy.SchemaExtensions
+	eDomainInfo_EngineType                                                                         smithy.SchemaExtensions
+	e_DomainInfoList                                                                               smithy.SchemaExtensions
+	e_DomainInfoList_member                                                                        smithy.SchemaExtensions
+	eDomainInformation                                                                             smithy.SchemaExtensions
+	eDomainInformation_OwnerId                                                                     smithy.SchemaExtensions
+	eDomainInformation_DomainName                                                                  smithy.SchemaExtensions
+	eDomainInformation_Region                                                                      smithy.SchemaExtensions
+	e_DomainName                                                                                   smithy.SchemaExtensions
+	e_DomainNameFqdn                                                                               smithy.SchemaExtensions
+	e_DomainNameList                                                                               smithy.SchemaExtensions
+	e_DomainNameList_member                                                                        smithy.SchemaExtensions
+	eDomainPackageDetails                                                                          smithy.SchemaExtensions
+	eDomainPackageDetails_PackageID                                                                smithy.SchemaExtensions
+	eDomainPackageDetails_PackageName                                                              smithy.SchemaExtensions
+	eDomainPackageDetails_PackageType                                                              smithy.SchemaExtensions
+	eDomainPackageDetails_LastUpdated                                                              smithy.SchemaExtensions
+	eDomainPackageDetails_DomainName                                                               smithy.SchemaExtensions
+	eDomainPackageDetails_DomainPackageStatus                                                      smithy.SchemaExtensions
+	eDomainPackageDetails_PackageVersion                                                           smithy.SchemaExtensions
+	eDomainPackageDetails_ReferencePath                                                            smithy.SchemaExtensions
+	eDomainPackageDetails_ErrorDetails                                                             smithy.SchemaExtensions
+	e_DomainPackageDetailsList                                                                     smithy.SchemaExtensions
+	e_DomainPackageDetailsList_member                                                              smithy.SchemaExtensions
+	eDomainPackageStatus                                                                           smithy.SchemaExtensions
+	eDomainPackageStatus_ASSOCIATING                                                               smithy.SchemaExtensions
+	eDomainPackageStatus_ASSOCIATION_FAILED                                                        smithy.SchemaExtensions
+	eDomainPackageStatus_ACTIVE                                                                    smithy.SchemaExtensions
+	eDomainPackageStatus_DISSOCIATING                                                              smithy.SchemaExtensions
+	eDomainPackageStatus_DISSOCIATION_FAILED                                                       smithy.SchemaExtensions
+	eDomainProcessingStatusType                                                                    smithy.SchemaExtensions
+	eDomainProcessingStatusType_CREATING                                                           smithy.SchemaExtensions
+	eDomainProcessingStatusType_ACTIVE                                                             smithy.SchemaExtensions
+	eDomainProcessingStatusType_MODIFYING                                                          smithy.SchemaExtensions
+	eDomainProcessingStatusType_UPGRADING                                                          smithy.SchemaExtensions
+	eDomainProcessingStatusType_UPDATING                                                           smithy.SchemaExtensions
+	eDomainProcessingStatusType_ISOLATED                                                           smithy.SchemaExtensions
+	eDomainProcessingStatusType_DELETING                                                           smithy.SchemaExtensions
+	eDomainUseCase                                                                                 smithy.SchemaExtensions
+	eDomainUseCase_SEARCH                                                                          smithy.SchemaExtensions
+	eDomainUseCase_VECTOR                                                                          smithy.SchemaExtensions
+	eDomainUseCase_OBSERVABILITY                                                                   smithy.SchemaExtensions
+	eDomainUseCase_MIXED                                                                           smithy.SchemaExtensions
+	e_Double                                                                                       smithy.SchemaExtensions
+	e_DryRun                                                                                       smithy.SchemaExtensions
+	eDryRunResults                                                                                 smithy.SchemaExtensions
+	eDryRunResults_DeploymentType                                                                  smithy.SchemaExtensions
+	eDryRunResults_Message                                                                         smithy.SchemaExtensions
+	eDuration                                                                                      smithy.SchemaExtensions
+	eDuration_Value                                                                                smithy.SchemaExtensions
+	eDuration_Unit                                                                                 smithy.SchemaExtensions
+	e_DurationValue                                                                                smithy.SchemaExtensions
+	eEBSOptions                                                                                    smithy.SchemaExtensions
+	eEBSOptions_EBSEnabled                                                                         smithy.SchemaExtensions
+	eEBSOptions_VolumeType                                                                         smithy.SchemaExtensions
+	eEBSOptions_VolumeSize                                                                         smithy.SchemaExtensions
+	eEBSOptions_Iops                                                                               smithy.SchemaExtensions
+	eEBSOptions_Throughput                                                                         smithy.SchemaExtensions
+	eEBSOptionsStatus                                                                              smithy.SchemaExtensions
+	eEBSOptionsStatus_Options                                                                      smithy.SchemaExtensions
+	eEBSOptionsStatus_Status                                                                       smithy.SchemaExtensions
+	eElasticsearchClusterConfig                                                                    smithy.SchemaExtensions
+	eElasticsearchClusterConfig_InstanceType                                                       smithy.SchemaExtensions
+	eElasticsearchClusterConfig_InstanceCount                                                      smithy.SchemaExtensions
+	eElasticsearchClusterConfig_DedicatedMasterEnabled                                             smithy.SchemaExtensions
+	eElasticsearchClusterConfig_ZoneAwarenessEnabled                                               smithy.SchemaExtensions
+	eElasticsearchClusterConfig_ZoneAwarenessConfig                                                smithy.SchemaExtensions
+	eElasticsearchClusterConfig_DedicatedMasterType                                                smithy.SchemaExtensions
+	eElasticsearchClusterConfig_DedicatedMasterCount                                               smithy.SchemaExtensions
+	eElasticsearchClusterConfig_WarmEnabled                                                        smithy.SchemaExtensions
+	eElasticsearchClusterConfig_WarmType                                                           smithy.SchemaExtensions
+	eElasticsearchClusterConfig_WarmCount                                                          smithy.SchemaExtensions
+	eElasticsearchClusterConfig_ColdStorageOptions                                                 smithy.SchemaExtensions
+	eElasticsearchClusterConfigStatus                                                              smithy.SchemaExtensions
+	eElasticsearchClusterConfigStatus_Options                                                      smithy.SchemaExtensions
+	eElasticsearchClusterConfigStatus_Status                                                       smithy.SchemaExtensions
+	eElasticsearchDomainConfig                                                                     smithy.SchemaExtensions
+	eElasticsearchDomainConfig_ElasticsearchVersion                                                smithy.SchemaExtensions
+	eElasticsearchDomainConfig_ElasticsearchClusterConfig                                          smithy.SchemaExtensions
+	eElasticsearchDomainConfig_EBSOptions                                                          smithy.SchemaExtensions
+	eElasticsearchDomainConfig_AccessPolicies                                                      smithy.SchemaExtensions
+	eElasticsearchDomainConfig_SnapshotOptions                                                     smithy.SchemaExtensions
+	eElasticsearchDomainConfig_VPCOptions                                                          smithy.SchemaExtensions
+	eElasticsearchDomainConfig_CognitoOptions                                                      smithy.SchemaExtensions
+	eElasticsearchDomainConfig_EncryptionAtRestOptions                                             smithy.SchemaExtensions
+	eElasticsearchDomainConfig_NodeToNodeEncryptionOptions                                         smithy.SchemaExtensions
+	eElasticsearchDomainConfig_AdvancedOptions                                                     smithy.SchemaExtensions
+	eElasticsearchDomainConfig_LogPublishingOptions                                                smithy.SchemaExtensions
+	eElasticsearchDomainConfig_DomainEndpointOptions                                               smithy.SchemaExtensions
+	eElasticsearchDomainConfig_AdvancedSecurityOptions                                             smithy.SchemaExtensions
+	eElasticsearchDomainConfig_AutoTuneOptions                                                     smithy.SchemaExtensions
+	eElasticsearchDomainConfig_ChangeProgressDetails                                               smithy.SchemaExtensions
+	eElasticsearchDomainConfig_ModifyingProperties                                                 smithy.SchemaExtensions
+	eElasticsearchDomainConfig_DeploymentStrategyOptions                                           smithy.SchemaExtensions
+	eElasticsearchDomainConfig_AutomatedSnapshotPauseOptions                                       smithy.SchemaExtensions
+	eElasticsearchDomainConfig_UseCase                                                             smithy.SchemaExtensions
+	eElasticsearchDomainConfig_EngineMode                                                          smithy.SchemaExtensions
+	eElasticsearchDomainStatus                                                                     smithy.SchemaExtensions
+	eElasticsearchDomainStatus_DomainId                                                            smithy.SchemaExtensions
+	eElasticsearchDomainStatus_DomainName                                                          smithy.SchemaExtensions
+	eElasticsearchDomainStatus_ARN                                                                 smithy.SchemaExtensions
+	eElasticsearchDomainStatus_Created                                                             smithy.SchemaExtensions
+	eElasticsearchDomainStatus_Deleted                                                             smithy.SchemaExtensions
+	eElasticsearchDomainStatus_Endpoint                                                            smithy.SchemaExtensions
+	eElasticsearchDomainStatus_Endpoints                                                           smithy.SchemaExtensions
+	eElasticsearchDomainStatus_Processing                                                          smithy.SchemaExtensions
+	eElasticsearchDomainStatus_UpgradeProcessing                                                   smithy.SchemaExtensions
+	eElasticsearchDomainStatus_ElasticsearchVersion                                                smithy.SchemaExtensions
+	eElasticsearchDomainStatus_ElasticsearchClusterConfig                                          smithy.SchemaExtensions
+	eElasticsearchDomainStatus_EBSOptions                                                          smithy.SchemaExtensions
+	eElasticsearchDomainStatus_AccessPolicies                                                      smithy.SchemaExtensions
+	eElasticsearchDomainStatus_SnapshotOptions                                                     smithy.SchemaExtensions
+	eElasticsearchDomainStatus_VPCOptions                                                          smithy.SchemaExtensions
+	eElasticsearchDomainStatus_CognitoOptions                                                      smithy.SchemaExtensions
+	eElasticsearchDomainStatus_EncryptionAtRestOptions                                             smithy.SchemaExtensions
+	eElasticsearchDomainStatus_NodeToNodeEncryptionOptions                                         smithy.SchemaExtensions
+	eElasticsearchDomainStatus_AdvancedOptions                                                     smithy.SchemaExtensions
+	eElasticsearchDomainStatus_LogPublishingOptions                                                smithy.SchemaExtensions
+	eElasticsearchDomainStatus_ServiceSoftwareOptions                                              smithy.SchemaExtensions
+	eElasticsearchDomainStatus_DomainEndpointOptions                                               smithy.SchemaExtensions
+	eElasticsearchDomainStatus_AdvancedSecurityOptions                                             smithy.SchemaExtensions
+	eElasticsearchDomainStatus_AutoTuneOptions                                                     smithy.SchemaExtensions
+	eElasticsearchDomainStatus_ChangeProgressDetails                                               smithy.SchemaExtensions
+	eElasticsearchDomainStatus_DomainProcessingStatus                                              smithy.SchemaExtensions
+	eElasticsearchDomainStatus_ModifyingProperties                                                 smithy.SchemaExtensions
+	eElasticsearchDomainStatus_DeploymentStrategyOptions                                           smithy.SchemaExtensions
+	eElasticsearchDomainStatus_AutomatedSnapshotPauseOptions                                       smithy.SchemaExtensions
+	eElasticsearchDomainStatus_UseCase                                                             smithy.SchemaExtensions
+	eElasticsearchDomainStatus_EngineMode                                                          smithy.SchemaExtensions
+	e_ElasticsearchDomainStatusList                                                                smithy.SchemaExtensions
+	e_ElasticsearchDomainStatusList_member                                                         smithy.SchemaExtensions
+	e_ElasticsearchInstanceTypeList                                                                smithy.SchemaExtensions
+	e_ElasticsearchInstanceTypeList_member                                                         smithy.SchemaExtensions
+	e_ElasticsearchVersionList                                                                     smithy.SchemaExtensions
+	e_ElasticsearchVersionList_member                                                              smithy.SchemaExtensions
+	eElasticsearchVersionStatus                                                                    smithy.SchemaExtensions
+	eElasticsearchVersionStatus_Options                                                            smithy.SchemaExtensions
+	eElasticsearchVersionStatus_Status                                                             smithy.SchemaExtensions
+	e_ElasticsearchVersionString                                                                   smithy.SchemaExtensions
+	eEncryptionAtRestOptions                                                                       smithy.SchemaExtensions
+	eEncryptionAtRestOptions_Enabled                                                               smithy.SchemaExtensions
+	eEncryptionAtRestOptions_KmsKeyId                                                              smithy.SchemaExtensions
+	eEncryptionAtRestOptionsStatus                                                                 smithy.SchemaExtensions
+	eEncryptionAtRestOptionsStatus_Options                                                         smithy.SchemaExtensions
+	eEncryptionAtRestOptionsStatus_Status                                                          smithy.SchemaExtensions
+	e_Endpoint                                                                                     smithy.SchemaExtensions
+	e_EndpointsMap                                                                                 smithy.SchemaExtensions
+	e_EndpointsMap_key                                                                             smithy.SchemaExtensions
+	e_EndpointsMap_value                                                                           smithy.SchemaExtensions
+	eEngineModeStatus                                                                              smithy.SchemaExtensions
+	eEngineModeStatus_Options                                                                      smithy.SchemaExtensions
+	eEngineModeStatus_Status                                                                       smithy.SchemaExtensions
+	eEngineType                                                                                    smithy.SchemaExtensions
+	eEngineType_OpenSearch                                                                         smithy.SchemaExtensions
+	eEngineType_Elasticsearch                                                                      smithy.SchemaExtensions
+	eErrorDetails                                                                                  smithy.SchemaExtensions
+	eErrorDetails_ErrorType                                                                        smithy.SchemaExtensions
+	eErrorDetails_ErrorMessage                                                                     smithy.SchemaExtensions
+	e_ErrorMessage                                                                                 smithy.SchemaExtensions
+	e_ErrorType                                                                                    smithy.SchemaExtensions
+	eESPartitionInstanceType                                                                       smithy.SchemaExtensions
+	eESPartitionInstanceType_m3_medium_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_m3_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_m3_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_m3_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_m4_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_m4_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_m4_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_m4_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_m4_10xlarge_elasticsearch                                             smithy.SchemaExtensions
+	eESPartitionInstanceType_m5_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_m5_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_m5_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_m5_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_m5_12xlarge_elasticsearch                                             smithy.SchemaExtensions
+	eESPartitionInstanceType_r5_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_r5_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_r5_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r5_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r5_12xlarge_elasticsearch                                             smithy.SchemaExtensions
+	eESPartitionInstanceType_c5_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_c5_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_c5_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_c5_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_c5_9xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_c5_18xlarge_elasticsearch                                             smithy.SchemaExtensions
+	eESPartitionInstanceType_ultrawarm1_medium_elasticsearch                                       smithy.SchemaExtensions
+	eESPartitionInstanceType_ultrawarm1_large_elasticsearch                                        smithy.SchemaExtensions
+	eESPartitionInstanceType_t2_micro_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_t2_small_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_t2_medium_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_r3_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_r3_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_r3_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r3_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r3_8xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_i2_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_i2_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_d2_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_d2_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_d2_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_d2_8xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_c4_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_c4_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_c4_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_c4_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_c4_8xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r4_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_r4_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_r4_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r4_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r4_8xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_r4_16xlarge_elasticsearch                                             smithy.SchemaExtensions
+	eESPartitionInstanceType_i3_large_elasticsearch                                                smithy.SchemaExtensions
+	eESPartitionInstanceType_i3_xlarge_elasticsearch                                               smithy.SchemaExtensions
+	eESPartitionInstanceType_i3_2xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_i3_4xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_i3_8xlarge_elasticsearch                                              smithy.SchemaExtensions
+	eESPartitionInstanceType_i3_16xlarge_elasticsearch                                             smithy.SchemaExtensions
+	eESWarmPartitionInstanceType                                                                   smithy.SchemaExtensions
+	eESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch                                   smithy.SchemaExtensions
+	eESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch                                    smithy.SchemaExtensions
+	eFilter                                                                                        smithy.SchemaExtensions
+	eFilter_Name                                                                                   smithy.SchemaExtensions
+	eFilter_Values                                                                                 smithy.SchemaExtensions
+	e_FilterList                                                                                   smithy.SchemaExtensions
+	e_FilterList_member                                                                            smithy.SchemaExtensions
+	e_GUID                                                                                         smithy.SchemaExtensions
+	e_GUIDList                                                                                     smithy.SchemaExtensions
+	e_GUIDList_member                                                                              smithy.SchemaExtensions
+	e_IdentityPoolId                                                                               smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnection                                                           smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnection_SourceDomainInfo                                          smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnection_DestinationDomainInfo                                     smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnection_CrossClusterSearchConnectionId                            smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnection_ConnectionStatus                                          smithy.SchemaExtensions
+	e_InboundCrossClusterSearchConnections                                                         smithy.SchemaExtensions
+	e_InboundCrossClusterSearchConnections_member                                                  smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatus                                                     smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatus_StatusCode                                          smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatus_Message                                             smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatusCode                                                 smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE                              smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatusCode_APPROVED                                        smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatusCode_REJECTING                                       smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatusCode_REJECTED                                        smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatusCode_DELETING                                        smithy.SchemaExtensions
+	eInboundCrossClusterSearchConnectionStatusCode_DELETED                                         smithy.SchemaExtensions
+	eInitiatedBy                                                                                   smithy.SchemaExtensions
+	eInitiatedBy_CUSTOMER                                                                          smithy.SchemaExtensions
+	eInitiatedBy_SERVICE                                                                           smithy.SchemaExtensions
+	e_InstanceCount                                                                                smithy.SchemaExtensions
+	eInstanceCountLimits                                                                           smithy.SchemaExtensions
+	eInstanceCountLimits_MinimumInstanceCount                                                      smithy.SchemaExtensions
+	eInstanceCountLimits_MaximumInstanceCount                                                      smithy.SchemaExtensions
+	eInstanceLimits                                                                                smithy.SchemaExtensions
+	eInstanceLimits_InstanceCountLimits                                                            smithy.SchemaExtensions
+	e_InstanceRole                                                                                 smithy.SchemaExtensions
+	e_Integer                                                                                      smithy.SchemaExtensions
+	e_IntegerClass                                                                                 smithy.SchemaExtensions
+	eInternalException                                                                             smithy.SchemaExtensions
+	eInternalException_message                                                                     smithy.SchemaExtensions
+	eInvalidPaginationTokenException                                                               smithy.SchemaExtensions
+	eInvalidPaginationTokenException_message                                                       smithy.SchemaExtensions
+	eInvalidTypeException                                                                          smithy.SchemaExtensions
+	eInvalidTypeException_message                                                                  smithy.SchemaExtensions
+	e_Issue                                                                                        smithy.SchemaExtensions
+	e_Issues                                                                                       smithy.SchemaExtensions
+	e_Issues_member                                                                                smithy.SchemaExtensions
+	e_KmsKeyId                                                                                     smithy.SchemaExtensions
+	e_LastUpdated                                                                                  smithy.SchemaExtensions
+	eLimitExceededException                                                                        smithy.SchemaExtensions
+	eLimitExceededException_message                                                                smithy.SchemaExtensions
+	e_LimitName                                                                                    smithy.SchemaExtensions
+	eLimits                                                                                        smithy.SchemaExtensions
+	eLimits_StorageTypes                                                                           smithy.SchemaExtensions
+	eLimits_InstanceLimits                                                                         smithy.SchemaExtensions
+	eLimits_AdditionalLimits                                                                       smithy.SchemaExtensions
+	e_LimitsByRole                                                                                 smithy.SchemaExtensions
+	e_LimitsByRole_key                                                                             smithy.SchemaExtensions
+	e_LimitsByRole_value                                                                           smithy.SchemaExtensions
+	e_LimitValue                                                                                   smithy.SchemaExtensions
+	e_LimitValueList                                                                               smithy.SchemaExtensions
+	e_LimitValueList_member                                                                        smithy.SchemaExtensions
+	eLogPublishingOption                                                                           smithy.SchemaExtensions
+	eLogPublishingOption_CloudWatchLogsLogGroupArn                                                 smithy.SchemaExtensions
+	eLogPublishingOption_Enabled                                                                   smithy.SchemaExtensions
+	e_LogPublishingOptions                                                                         smithy.SchemaExtensions
+	e_LogPublishingOptions_key                                                                     smithy.SchemaExtensions
+	e_LogPublishingOptions_value                                                                   smithy.SchemaExtensions
+	eLogPublishingOptionsStatus                                                                    smithy.SchemaExtensions
+	eLogPublishingOptionsStatus_Options                                                            smithy.SchemaExtensions
+	eLogPublishingOptionsStatus_Status                                                             smithy.SchemaExtensions
+	eLogType                                                                                       smithy.SchemaExtensions
+	eLogType_INDEX_SLOW_LOGS                                                                       smithy.SchemaExtensions
+	eLogType_SEARCH_SLOW_LOGS                                                                      smithy.SchemaExtensions
+	eLogType_ES_APPLICATION_LOGS                                                                   smithy.SchemaExtensions
+	eLogType_AUDIT_LOGS                                                                            smithy.SchemaExtensions
+	eMasterUserOptions                                                                             smithy.SchemaExtensions
+	eMasterUserOptions_MasterUserARN                                                               smithy.SchemaExtensions
+	eMasterUserOptions_MasterUserName                                                              smithy.SchemaExtensions
+	eMasterUserOptions_MasterUserPassword                                                          smithy.SchemaExtensions
+	e_MaximumInstanceCount                                                                         smithy.SchemaExtensions
+	e_MaxResults                                                                                   smithy.SchemaExtensions
+	e_Message                                                                                      smithy.SchemaExtensions
+	e_MinimumInstanceCount                                                                         smithy.SchemaExtensions
+	eModifyingProperties                                                                           smithy.SchemaExtensions
+	eModifyingProperties_Name                                                                      smithy.SchemaExtensions
+	eModifyingProperties_ActiveValue                                                               smithy.SchemaExtensions
+	eModifyingProperties_PendingValue                                                              smithy.SchemaExtensions
+	eModifyingProperties_ValueType                                                                 smithy.SchemaExtensions
+	e_ModifyingPropertiesList                                                                      smithy.SchemaExtensions
+	e_ModifyingPropertiesList_member                                                               smithy.SchemaExtensions
+	e_NextToken                                                                                    smithy.SchemaExtensions
+	eNodeToNodeEncryptionOptions                                                                   smithy.SchemaExtensions
+	eNodeToNodeEncryptionOptions_Enabled                                                           smithy.SchemaExtensions
+	eNodeToNodeEncryptionOptionsStatus                                                             smithy.SchemaExtensions
+	eNodeToNodeEncryptionOptionsStatus_Options                                                     smithy.SchemaExtensions
+	eNodeToNodeEncryptionOptionsStatus_Status                                                      smithy.SchemaExtensions
+	e_NonEmptyString                                                                               smithy.SchemaExtensions
+	eOptionState                                                                                   smithy.SchemaExtensions
+	eOptionState_RequiresIndexDocuments                                                            smithy.SchemaExtensions
+	eOptionState_Processing                                                                        smithy.SchemaExtensions
+	eOptionState_Active                                                                            smithy.SchemaExtensions
+	eOptionStatus                                                                                  smithy.SchemaExtensions
+	eOptionStatus_CreationDate                                                                     smithy.SchemaExtensions
+	eOptionStatus_UpdateDate                                                                       smithy.SchemaExtensions
+	eOptionStatus_UpdateVersion                                                                    smithy.SchemaExtensions
+	eOptionStatus_State                                                                            smithy.SchemaExtensions
+	eOptionStatus_PendingDeletion                                                                  smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnection                                                          smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnection_SourceDomainInfo                                         smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnection_DestinationDomainInfo                                    smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId                           smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnection_ConnectionAlias                                          smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnection_ConnectionStatus                                         smithy.SchemaExtensions
+	e_OutboundCrossClusterSearchConnections                                                        smithy.SchemaExtensions
+	e_OutboundCrossClusterSearchConnections_member                                                 smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatus                                                    smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatus_StatusCode                                         smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatus_Message                                            smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode                                                smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE                             smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_VALIDATING                                     smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED                              smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_PROVISIONING                                   smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_ACTIVE                                         smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_REJECTED                                       smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_DELETING                                       smithy.SchemaExtensions
+	eOutboundCrossClusterSearchConnectionStatusCode_DELETED                                        smithy.SchemaExtensions
+	eOverallChangeStatus                                                                           smithy.SchemaExtensions
+	eOverallChangeStatus_PENDING                                                                   smithy.SchemaExtensions
+	eOverallChangeStatus_PROCESSING                                                                smithy.SchemaExtensions
+	eOverallChangeStatus_COMPLETED                                                                 smithy.SchemaExtensions
+	eOverallChangeStatus_FAILED                                                                    smithy.SchemaExtensions
+	e_OwnerId                                                                                      smithy.SchemaExtensions
+	e_PackageDescription                                                                           smithy.SchemaExtensions
+	ePackageDetails                                                                                smithy.SchemaExtensions
+	ePackageDetails_PackageID                                                                      smithy.SchemaExtensions
+	ePackageDetails_PackageName                                                                    smithy.SchemaExtensions
+	ePackageDetails_PackageType                                                                    smithy.SchemaExtensions
+	ePackageDetails_PackageDescription                                                             smithy.SchemaExtensions
+	ePackageDetails_PackageStatus                                                                  smithy.SchemaExtensions
+	ePackageDetails_CreatedAt                                                                      smithy.SchemaExtensions
+	ePackageDetails_LastUpdatedAt                                                                  smithy.SchemaExtensions
+	ePackageDetails_AvailablePackageVersion                                                        smithy.SchemaExtensions
+	ePackageDetails_ErrorDetails                                                                   smithy.SchemaExtensions
+	e_PackageDetailsList                                                                           smithy.SchemaExtensions
+	e_PackageDetailsList_member                                                                    smithy.SchemaExtensions
+	e_PackageID                                                                                    smithy.SchemaExtensions
+	e_PackageName                                                                                  smithy.SchemaExtensions
+	ePackageSource                                                                                 smithy.SchemaExtensions
+	ePackageSource_S3BucketName                                                                    smithy.SchemaExtensions
+	ePackageSource_S3Key                                                                           smithy.SchemaExtensions
+	ePackageStatus                                                                                 smithy.SchemaExtensions
+	ePackageStatus_COPYING                                                                         smithy.SchemaExtensions
+	ePackageStatus_COPY_FAILED                                                                     smithy.SchemaExtensions
+	ePackageStatus_VALIDATING                                                                      smithy.SchemaExtensions
+	ePackageStatus_VALIDATION_FAILED                                                               smithy.SchemaExtensions
+	ePackageStatus_AVAILABLE                                                                       smithy.SchemaExtensions
+	ePackageStatus_DELETING                                                                        smithy.SchemaExtensions
+	ePackageStatus_DELETED                                                                         smithy.SchemaExtensions
+	ePackageStatus_DELETE_FAILED                                                                   smithy.SchemaExtensions
+	ePackageType                                                                                   smithy.SchemaExtensions
+	ePackageType_TXT_DICTIONARY                                                                    smithy.SchemaExtensions
+	e_PackageVersion                                                                               smithy.SchemaExtensions
+	ePackageVersionHistory                                                                         smithy.SchemaExtensions
+	ePackageVersionHistory_PackageVersion                                                          smithy.SchemaExtensions
+	ePackageVersionHistory_CommitMessage                                                           smithy.SchemaExtensions
+	ePackageVersionHistory_CreatedAt                                                               smithy.SchemaExtensions
+	e_PackageVersionHistoryList                                                                    smithy.SchemaExtensions
+	e_PackageVersionHistoryList_member                                                             smithy.SchemaExtensions
+	e_Password                                                                                     smithy.SchemaExtensions
+	ePauseState                                                                                    smithy.SchemaExtensions
+	ePauseState_ACTIVE                                                                             smithy.SchemaExtensions
+	ePauseState_COMPLETED                                                                          smithy.SchemaExtensions
+	ePauseState_SCHEDULED                                                                          smithy.SchemaExtensions
+	ePauseState_DISABLED                                                                           smithy.SchemaExtensions
+	e_PolicyDocument                                                                               smithy.SchemaExtensions
+	ePrincipalType                                                                                 smithy.SchemaExtensions
+	ePrincipalType_AWS_ACCOUNT                                                                     smithy.SchemaExtensions
+	ePrincipalType_AWS_SERVICE                                                                     smithy.SchemaExtensions
+	ePropertyValueType                                                                             smithy.SchemaExtensions
+	ePropertyValueType_PLAIN_TEXT                                                                  smithy.SchemaExtensions
+	ePropertyValueType_STRINGIFIED_JSON                                                            smithy.SchemaExtensions
+	eRecurringCharge                                                                               smithy.SchemaExtensions
+	eRecurringCharge_RecurringChargeAmount                                                         smithy.SchemaExtensions
+	eRecurringCharge_RecurringChargeFrequency                                                      smithy.SchemaExtensions
+	e_RecurringChargeList                                                                          smithy.SchemaExtensions
+	e_RecurringChargeList_member                                                                   smithy.SchemaExtensions
+	e_ReferencePath                                                                                smithy.SchemaExtensions
+	e_Region                                                                                       smithy.SchemaExtensions
+	e_ReservationToken                                                                             smithy.SchemaExtensions
+	eReservedElasticsearchInstance                                                                 smithy.SchemaExtensions
+	eReservedElasticsearchInstance_ReservationName                                                 smithy.SchemaExtensions
+	eReservedElasticsearchInstance_ReservedElasticsearchInstanceId                                 smithy.SchemaExtensions
+	eReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId                         smithy.SchemaExtensions
+	eReservedElasticsearchInstance_ElasticsearchInstanceType                                       smithy.SchemaExtensions
+	eReservedElasticsearchInstance_StartTime                                                       smithy.SchemaExtensions
+	eReservedElasticsearchInstance_Duration                                                        smithy.SchemaExtensions
+	eReservedElasticsearchInstance_FixedPrice                                                      smithy.SchemaExtensions
+	eReservedElasticsearchInstance_UsagePrice                                                      smithy.SchemaExtensions
+	eReservedElasticsearchInstance_CurrencyCode                                                    smithy.SchemaExtensions
+	eReservedElasticsearchInstance_ElasticsearchInstanceCount                                      smithy.SchemaExtensions
+	eReservedElasticsearchInstance_State                                                           smithy.SchemaExtensions
+	eReservedElasticsearchInstance_PaymentOption                                                   smithy.SchemaExtensions
+	eReservedElasticsearchInstance_RecurringCharges                                                smithy.SchemaExtensions
+	e_ReservedElasticsearchInstanceList                                                            smithy.SchemaExtensions
+	e_ReservedElasticsearchInstanceList_member                                                     smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering                                                         smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId                 smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_ElasticsearchInstanceType                               smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_Duration                                                smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_FixedPrice                                              smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_UsagePrice                                              smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_CurrencyCode                                            smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_PaymentOption                                           smithy.SchemaExtensions
+	eReservedElasticsearchInstanceOffering_RecurringCharges                                        smithy.SchemaExtensions
+	e_ReservedElasticsearchInstanceOfferingList                                                    smithy.SchemaExtensions
+	e_ReservedElasticsearchInstanceOfferingList_member                                             smithy.SchemaExtensions
+	eReservedElasticsearchInstancePaymentOption                                                    smithy.SchemaExtensions
+	eReservedElasticsearchInstancePaymentOption_ALL_UPFRONT                                        smithy.SchemaExtensions
+	eReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT                                    smithy.SchemaExtensions
+	eReservedElasticsearchInstancePaymentOption_NO_UPFRONT                                         smithy.SchemaExtensions
+	eResourceAlreadyExistsException                                                                smithy.SchemaExtensions
+	eResourceAlreadyExistsException_message                                                        smithy.SchemaExtensions
+	eResourceNotFoundException                                                                     smithy.SchemaExtensions
+	eResourceNotFoundException_message                                                             smithy.SchemaExtensions
+	eRetentionAction                                                                               smithy.SchemaExtensions
+	eRetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER                                                   smithy.SchemaExtensions
+	eRetentionAction_DELETE_PRIMARY_CLUSTER                                                        smithy.SchemaExtensions
+	eRetentionOptions                                                                              smithy.SchemaExtensions
+	eRetentionOptions_RetentionInHours                                                             smithy.SchemaExtensions
+	eRetentionOptions_RetentionAction                                                              smithy.SchemaExtensions
+	e_RoleArn                                                                                      smithy.SchemaExtensions
+	eRollbackOnDisable                                                                             smithy.SchemaExtensions
+	eRollbackOnDisable_NO_ROLLBACK                                                                 smithy.SchemaExtensions
+	eRollbackOnDisable_DEFAULT_ROLLBACK                                                            smithy.SchemaExtensions
+	e_S3BucketName                                                                                 smithy.SchemaExtensions
+	e_S3Key                                                                                        smithy.SchemaExtensions
+	e_SAMLEntityId                                                                                 smithy.SchemaExtensions
+	eSAMLIdp                                                                                       smithy.SchemaExtensions
+	eSAMLIdp_MetadataContent                                                                       smithy.SchemaExtensions
+	eSAMLIdp_EntityId                                                                              smithy.SchemaExtensions
+	e_SAMLMetadata                                                                                 smithy.SchemaExtensions
+	eSAMLOptionsInput                                                                              smithy.SchemaExtensions
+	eSAMLOptionsInput_Enabled                                                                      smithy.SchemaExtensions
+	eSAMLOptionsInput_Idp                                                                          smithy.SchemaExtensions
+	eSAMLOptionsInput_MasterUserName                                                               smithy.SchemaExtensions
+	eSAMLOptionsInput_MasterBackendRole                                                            smithy.SchemaExtensions
+	eSAMLOptionsInput_SubjectKey                                                                   smithy.SchemaExtensions
+	eSAMLOptionsInput_RolesKey                                                                     smithy.SchemaExtensions
+	eSAMLOptionsInput_SessionTimeoutMinutes                                                        smithy.SchemaExtensions
+	eSAMLOptionsOutput                                                                             smithy.SchemaExtensions
+	eSAMLOptionsOutput_Enabled                                                                     smithy.SchemaExtensions
+	eSAMLOptionsOutput_Idp                                                                         smithy.SchemaExtensions
+	eSAMLOptionsOutput_SubjectKey                                                                  smithy.SchemaExtensions
+	eSAMLOptionsOutput_RolesKey                                                                    smithy.SchemaExtensions
+	eSAMLOptionsOutput_SessionTimeoutMinutes                                                       smithy.SchemaExtensions
+	eScheduledAutoTuneActionType                                                                   smithy.SchemaExtensions
+	eScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING                                              smithy.SchemaExtensions
+	eScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING                                              smithy.SchemaExtensions
+	e_ScheduledAutoTuneDescription                                                                 smithy.SchemaExtensions
+	eScheduledAutoTuneDetails                                                                      smithy.SchemaExtensions
+	eScheduledAutoTuneDetails_Date                                                                 smithy.SchemaExtensions
+	eScheduledAutoTuneDetails_ActionType                                                           smithy.SchemaExtensions
+	eScheduledAutoTuneDetails_Action                                                               smithy.SchemaExtensions
+	eScheduledAutoTuneDetails_Severity                                                             smithy.SchemaExtensions
+	eScheduledAutoTuneSeverityType                                                                 smithy.SchemaExtensions
+	eScheduledAutoTuneSeverityType_LOW                                                             smithy.SchemaExtensions
+	eScheduledAutoTuneSeverityType_MEDIUM                                                          smithy.SchemaExtensions
+	eScheduledAutoTuneSeverityType_HIGH                                                            smithy.SchemaExtensions
+	eServiceSoftwareOptions                                                                        smithy.SchemaExtensions
+	eServiceSoftwareOptions_CurrentVersion                                                         smithy.SchemaExtensions
+	eServiceSoftwareOptions_NewVersion                                                             smithy.SchemaExtensions
+	eServiceSoftwareOptions_UpdateAvailable                                                        smithy.SchemaExtensions
+	eServiceSoftwareOptions_Cancellable                                                            smithy.SchemaExtensions
+	eServiceSoftwareOptions_UpdateStatus                                                           smithy.SchemaExtensions
+	eServiceSoftwareOptions_Description                                                            smithy.SchemaExtensions
+	eServiceSoftwareOptions_AutomatedUpdateDate                                                    smithy.SchemaExtensions
+	eServiceSoftwareOptions_OptionalDeployment                                                     smithy.SchemaExtensions
+	e_ServiceUrl                                                                                   smithy.SchemaExtensions
+	eSnapshotOptions                                                                               smithy.SchemaExtensions
+	eSnapshotOptions_AutomatedSnapshotStartHour                                                    smithy.SchemaExtensions
+	eSnapshotOptionsStatus                                                                         smithy.SchemaExtensions
+	eSnapshotOptionsStatus_Options                                                                 smithy.SchemaExtensions
+	eSnapshotOptionsStatus_Status                                                                  smithy.SchemaExtensions
+	e_StartAt                                                                                      smithy.SchemaExtensions
+	e_StartTimestamp                                                                               smithy.SchemaExtensions
+	e_StorageSubTypeName                                                                           smithy.SchemaExtensions
+	eStorageType                                                                                   smithy.SchemaExtensions
+	eStorageType_StorageTypeName                                                                   smithy.SchemaExtensions
+	eStorageType_StorageSubTypeName                                                                smithy.SchemaExtensions
+	eStorageType_StorageTypeLimits                                                                 smithy.SchemaExtensions
+	eStorageTypeLimit                                                                              smithy.SchemaExtensions
+	eStorageTypeLimit_LimitName                                                                    smithy.SchemaExtensions
+	eStorageTypeLimit_LimitValues                                                                  smithy.SchemaExtensions
+	e_StorageTypeLimitList                                                                         smithy.SchemaExtensions
+	e_StorageTypeLimitList_member                                                                  smithy.SchemaExtensions
+	e_StorageTypeList                                                                              smithy.SchemaExtensions
+	e_StorageTypeList_member                                                                       smithy.SchemaExtensions
+	e_StorageTypeName                                                                              smithy.SchemaExtensions
+	e_String                                                                                       smithy.SchemaExtensions
+	e_StringList                                                                                   smithy.SchemaExtensions
+	e_StringList_member                                                                            smithy.SchemaExtensions
+	eTag                                                                                           smithy.SchemaExtensions
+	eTag_Key                                                                                       smithy.SchemaExtensions
+	eTag_Value                                                                                     smithy.SchemaExtensions
+	e_TagKey                                                                                       smithy.SchemaExtensions
+	e_TagList                                                                                      smithy.SchemaExtensions
+	e_TagList_member                                                                               smithy.SchemaExtensions
+	e_TagValue                                                                                     smithy.SchemaExtensions
+	eTimeUnit                                                                                      smithy.SchemaExtensions
+	eTimeUnit_HOURS                                                                                smithy.SchemaExtensions
+	eTLSSecurityPolicy                                                                             smithy.SchemaExtensions
+	eTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07                                                  smithy.SchemaExtensions
+	eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07                                                  smithy.SchemaExtensions
+	eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10                                              smithy.SchemaExtensions
+	eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08                                     smithy.SchemaExtensions
+	e_TotalNumberOfStages                                                                          smithy.SchemaExtensions
+	e_TrafficPercent                                                                               smithy.SchemaExtensions
+	eTrafficPercents                                                                               smithy.SchemaExtensions
+	eTrafficPercents_PrimaryReadTrafficPercent                                                     smithy.SchemaExtensions
+	eTrafficPercents_CloneReadTrafficPercent                                                       smithy.SchemaExtensions
+	eTrafficSplitOptions                                                                           smithy.SchemaExtensions
+	eTrafficSplitOptions_Current                                                                   smithy.SchemaExtensions
+	eTrafficSplitOptions_Target                                                                    smithy.SchemaExtensions
+	eTrafficSplitOptions_Status                                                                    smithy.SchemaExtensions
+	eTrafficSplitRequestOptions                                                                    smithy.SchemaExtensions
+	eTrafficSplitRequestOptions_Strategy                                                           smithy.SchemaExtensions
+	eTrafficSplitRequestOptions_CloneReadTrafficPercent                                            smithy.SchemaExtensions
+	eTrafficSplitStatus                                                                            smithy.SchemaExtensions
+	eTrafficSplitStatus_IN_PROGRESS                                                                smithy.SchemaExtensions
+	eTrafficSplitStatus_COMPLETED                                                                  smithy.SchemaExtensions
+	eTrafficSplitStatus_FAILED                                                                     smithy.SchemaExtensions
+	eTrafficStrategy                                                                               smithy.SchemaExtensions
+	eTrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT                                                    smithy.SchemaExtensions
+	e_UIntValue                                                                                    smithy.SchemaExtensions
+	e_UpdateTimestamp                                                                              smithy.SchemaExtensions
+	eUpgradeHistory                                                                                smithy.SchemaExtensions
+	eUpgradeHistory_UpgradeName                                                                    smithy.SchemaExtensions
+	eUpgradeHistory_StartTimestamp                                                                 smithy.SchemaExtensions
+	eUpgradeHistory_UpgradeStatus                                                                  smithy.SchemaExtensions
+	eUpgradeHistory_StepsList                                                                      smithy.SchemaExtensions
+	e_UpgradeHistoryList                                                                           smithy.SchemaExtensions
+	e_UpgradeHistoryList_member                                                                    smithy.SchemaExtensions
+	e_UpgradeName                                                                                  smithy.SchemaExtensions
+	eUpgradeStatus                                                                                 smithy.SchemaExtensions
+	eUpgradeStatus_IN_PROGRESS                                                                     smithy.SchemaExtensions
+	eUpgradeStatus_SUCCEEDED                                                                       smithy.SchemaExtensions
+	eUpgradeStatus_SUCCEEDED_WITH_ISSUES                                                           smithy.SchemaExtensions
+	eUpgradeStatus_FAILED                                                                          smithy.SchemaExtensions
+	eUpgradeStep                                                                                   smithy.SchemaExtensions
+	eUpgradeStep_PRE_UPGRADE_CHECK                                                                 smithy.SchemaExtensions
+	eUpgradeStep_SNAPSHOT                                                                          smithy.SchemaExtensions
+	eUpgradeStep_UPGRADE                                                                           smithy.SchemaExtensions
+	eUpgradeStepItem                                                                               smithy.SchemaExtensions
+	eUpgradeStepItem_UpgradeStep                                                                   smithy.SchemaExtensions
+	eUpgradeStepItem_UpgradeStepStatus                                                             smithy.SchemaExtensions
+	eUpgradeStepItem_Issues                                                                        smithy.SchemaExtensions
+	eUpgradeStepItem_ProgressPercent                                                               smithy.SchemaExtensions
+	e_UpgradeStepsList                                                                             smithy.SchemaExtensions
+	e_UpgradeStepsList_member                                                                      smithy.SchemaExtensions
+	eUseCaseStatus                                                                                 smithy.SchemaExtensions
+	eUseCaseStatus_Options                                                                         smithy.SchemaExtensions
+	eUseCaseStatus_Status                                                                          smithy.SchemaExtensions
+	e_Username                                                                                     smithy.SchemaExtensions
+	e_UserPoolId                                                                                   smithy.SchemaExtensions
+	eValidationException                                                                           smithy.SchemaExtensions
+	eValidationException_message                                                                   smithy.SchemaExtensions
+	e_ValueStringList                                                                              smithy.SchemaExtensions
+	e_ValueStringList_member                                                                       smithy.SchemaExtensions
+	eVolumeType                                                                                    smithy.SchemaExtensions
+	eVolumeType_standard                                                                           smithy.SchemaExtensions
+	eVolumeType_gp2                                                                                smithy.SchemaExtensions
+	eVolumeType_io1                                                                                smithy.SchemaExtensions
+	eVolumeType_gp3                                                                                smithy.SchemaExtensions
+	eVPCDerivedInfo                                                                                smithy.SchemaExtensions
+	eVPCDerivedInfo_VPCId                                                                          smithy.SchemaExtensions
+	eVPCDerivedInfo_SubnetIds                                                                      smithy.SchemaExtensions
+	eVPCDerivedInfo_AvailabilityZones                                                              smithy.SchemaExtensions
+	eVPCDerivedInfo_SecurityGroupIds                                                               smithy.SchemaExtensions
+	eVPCDerivedInfoStatus                                                                          smithy.SchemaExtensions
+	eVPCDerivedInfoStatus_Options                                                                  smithy.SchemaExtensions
+	eVPCDerivedInfoStatus_Status                                                                   smithy.SchemaExtensions
+	eVpcEndpoint                                                                                   smithy.SchemaExtensions
+	eVpcEndpoint_VpcEndpointId                                                                     smithy.SchemaExtensions
+	eVpcEndpoint_VpcEndpointOwner                                                                  smithy.SchemaExtensions
+	eVpcEndpoint_DomainArn                                                                         smithy.SchemaExtensions
+	eVpcEndpoint_VpcOptions                                                                        smithy.SchemaExtensions
+	eVpcEndpoint_Status                                                                            smithy.SchemaExtensions
+	eVpcEndpoint_Endpoint                                                                          smithy.SchemaExtensions
+	eVpcEndpointError                                                                              smithy.SchemaExtensions
+	eVpcEndpointError_VpcEndpointId                                                                smithy.SchemaExtensions
+	eVpcEndpointError_ErrorCode                                                                    smithy.SchemaExtensions
+	eVpcEndpointError_ErrorMessage                                                                 smithy.SchemaExtensions
+	eVpcEndpointErrorCode                                                                          smithy.SchemaExtensions
+	eVpcEndpointErrorCode_ENDPOINT_NOT_FOUND                                                       smithy.SchemaExtensions
+	eVpcEndpointErrorCode_SERVER_ERROR                                                             smithy.SchemaExtensions
+	e_VpcEndpointErrorList                                                                         smithy.SchemaExtensions
+	e_VpcEndpointErrorList_member                                                                  smithy.SchemaExtensions
+	e_VpcEndpointId                                                                                smithy.SchemaExtensions
+	e_VpcEndpointIdList                                                                            smithy.SchemaExtensions
+	e_VpcEndpointIdList_member                                                                     smithy.SchemaExtensions
+	e_VpcEndpoints                                                                                 smithy.SchemaExtensions
+	e_VpcEndpoints_member                                                                          smithy.SchemaExtensions
+	eVpcEndpointStatus                                                                             smithy.SchemaExtensions
+	eVpcEndpointStatus_CREATING                                                                    smithy.SchemaExtensions
+	eVpcEndpointStatus_CREATE_FAILED                                                               smithy.SchemaExtensions
+	eVpcEndpointStatus_ACTIVE                                                                      smithy.SchemaExtensions
+	eVpcEndpointStatus_UPDATING                                                                    smithy.SchemaExtensions
+	eVpcEndpointStatus_UPDATE_FAILED                                                               smithy.SchemaExtensions
+	eVpcEndpointStatus_DELETING                                                                    smithy.SchemaExtensions
+	eVpcEndpointStatus_DELETE_FAILED                                                               smithy.SchemaExtensions
+	eVpcEndpointSummary                                                                            smithy.SchemaExtensions
+	eVpcEndpointSummary_VpcEndpointId                                                              smithy.SchemaExtensions
+	eVpcEndpointSummary_VpcEndpointOwner                                                           smithy.SchemaExtensions
+	eVpcEndpointSummary_DomainArn                                                                  smithy.SchemaExtensions
+	eVpcEndpointSummary_Status                                                                     smithy.SchemaExtensions
+	e_VpcEndpointSummaryList                                                                       smithy.SchemaExtensions
+	e_VpcEndpointSummaryList_member                                                                smithy.SchemaExtensions
+	eVPCOptions                                                                                    smithy.SchemaExtensions
+	eVPCOptions_SubnetIds                                                                          smithy.SchemaExtensions
+	eVPCOptions_SecurityGroupIds                                                                   smithy.SchemaExtensions
+	eZoneAwarenessConfig                                                                           smithy.SchemaExtensions
+	eZoneAwarenessConfig_AvailabilityZoneCount                                                     smithy.SchemaExtensions
+	eAcceptInboundCrossClusterSearchConnectionRequest                                              smithy.SchemaExtensions
+	eAcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId               smithy.SchemaExtensions
+	eAcceptInboundCrossClusterSearchConnectionResponse                                             smithy.SchemaExtensions
+	eAcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection                smithy.SchemaExtensions
+	eAddTagsRequest                                                                                smithy.SchemaExtensions
+	eAddTagsRequest_ARN                                                                            smithy.SchemaExtensions
+	eAddTagsRequest_TagList                                                                        smithy.SchemaExtensions
+	eAssociatePackageRequest                                                                       smithy.SchemaExtensions
+	eAssociatePackageRequest_PackageID                                                             smithy.SchemaExtensions
+	eAssociatePackageRequest_DomainName                                                            smithy.SchemaExtensions
+	eAssociatePackageResponse                                                                      smithy.SchemaExtensions
+	eAssociatePackageResponse_DomainPackageDetails                                                 smithy.SchemaExtensions
+	eAuthorizeVpcEndpointAccessRequest                                                             smithy.SchemaExtensions
+	eAuthorizeVpcEndpointAccessRequest_DomainName                                                  smithy.SchemaExtensions
+	eAuthorizeVpcEndpointAccessRequest_Account                                                     smithy.SchemaExtensions
+	eAuthorizeVpcEndpointAccessResponse                                                            smithy.SchemaExtensions
+	eAuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal                                        smithy.SchemaExtensions
+	eCancelDomainConfigChangeRequest                                                               smithy.SchemaExtensions
+	eCancelDomainConfigChangeRequest_DomainName                                                    smithy.SchemaExtensions
+	eCancelDomainConfigChangeRequest_DryRun                                                        smithy.SchemaExtensions
+	eCancelDomainConfigChangeResponse                                                              smithy.SchemaExtensions
+	eCancelDomainConfigChangeResponse_DryRun                                                       smithy.SchemaExtensions
+	eCancelDomainConfigChangeResponse_CancelledChangeIds                                           smithy.SchemaExtensions
+	eCancelDomainConfigChangeResponse_CancelledChangeProperties                                    smithy.SchemaExtensions
+	eCancelElasticsearchServiceSoftwareUpdateRequest                                               smithy.SchemaExtensions
+	eCancelElasticsearchServiceSoftwareUpdateRequest_DomainName                                    smithy.SchemaExtensions
+	eCancelElasticsearchServiceSoftwareUpdateResponse                                              smithy.SchemaExtensions
+	eCancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions                       smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest                                                              smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_DomainName                                                   smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_ElasticsearchVersion                                         smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_ElasticsearchClusterConfig                                   smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_EBSOptions                                                   smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_AccessPolicies                                               smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_SnapshotOptions                                              smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_VPCOptions                                                   smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_CognitoOptions                                               smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_EncryptionAtRestOptions                                      smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions                                  smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_AdvancedOptions                                              smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_LogPublishingOptions                                         smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_DomainEndpointOptions                                        smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_AdvancedSecurityOptions                                      smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_AutoTuneOptions                                              smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_TagList                                                      smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_DeploymentStrategyOptions                                    smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions                                smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_UseCase                                                      smithy.SchemaExtensions
+	eCreateElasticsearchDomainRequest_EngineMode                                                   smithy.SchemaExtensions
+	eCreateElasticsearchDomainResponse                                                             smithy.SchemaExtensions
+	eCreateElasticsearchDomainResponse_DomainStatus                                                smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionRequest                                             smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo                            smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo                       smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias                             smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionResponse                                            smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo                           smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo                      smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias                            smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus                           smithy.SchemaExtensions
+	eCreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId             smithy.SchemaExtensions
+	eCreatePackageRequest                                                                          smithy.SchemaExtensions
+	eCreatePackageRequest_PackageName                                                              smithy.SchemaExtensions
+	eCreatePackageRequest_PackageType                                                              smithy.SchemaExtensions
+	eCreatePackageRequest_PackageDescription                                                       smithy.SchemaExtensions
+	eCreatePackageRequest_PackageSource                                                            smithy.SchemaExtensions
+	eCreatePackageResponse                                                                         smithy.SchemaExtensions
+	eCreatePackageResponse_PackageDetails                                                          smithy.SchemaExtensions
+	eCreateVpcEndpointRequest                                                                      smithy.SchemaExtensions
+	eCreateVpcEndpointRequest_DomainArn                                                            smithy.SchemaExtensions
+	eCreateVpcEndpointRequest_VpcOptions                                                           smithy.SchemaExtensions
+	eCreateVpcEndpointRequest_ClientToken                                                          smithy.SchemaExtensions
+	eCreateVpcEndpointResponse                                                                     smithy.SchemaExtensions
+	eCreateVpcEndpointResponse_VpcEndpoint                                                         smithy.SchemaExtensions
+	eDeleteElasticsearchDomainRequest                                                              smithy.SchemaExtensions
+	eDeleteElasticsearchDomainRequest_DomainName                                                   smithy.SchemaExtensions
+	eDeleteElasticsearchDomainResponse                                                             smithy.SchemaExtensions
+	eDeleteElasticsearchDomainResponse_DomainStatus                                                smithy.SchemaExtensions
+	eDeleteInboundCrossClusterSearchConnectionRequest                                              smithy.SchemaExtensions
+	eDeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId               smithy.SchemaExtensions
+	eDeleteInboundCrossClusterSearchConnectionResponse                                             smithy.SchemaExtensions
+	eDeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection                smithy.SchemaExtensions
+	eDeleteOutboundCrossClusterSearchConnectionRequest                                             smithy.SchemaExtensions
+	eDeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId              smithy.SchemaExtensions
+	eDeleteOutboundCrossClusterSearchConnectionResponse                                            smithy.SchemaExtensions
+	eDeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection               smithy.SchemaExtensions
+	eDeletePackageRequest                                                                          smithy.SchemaExtensions
+	eDeletePackageRequest_PackageID                                                                smithy.SchemaExtensions
+	eDeletePackageResponse                                                                         smithy.SchemaExtensions
+	eDeletePackageResponse_PackageDetails                                                          smithy.SchemaExtensions
+	eDeleteVpcEndpointRequest                                                                      smithy.SchemaExtensions
+	eDeleteVpcEndpointRequest_VpcEndpointId                                                        smithy.SchemaExtensions
+	eDeleteVpcEndpointResponse                                                                     smithy.SchemaExtensions
+	eDeleteVpcEndpointResponse_VpcEndpointSummary                                                  smithy.SchemaExtensions
+	eDescribeDomainAutoTunesRequest                                                                smithy.SchemaExtensions
+	eDescribeDomainAutoTunesRequest_DomainName                                                     smithy.SchemaExtensions
+	eDescribeDomainAutoTunesRequest_MaxResults                                                     smithy.SchemaExtensions
+	eDescribeDomainAutoTunesRequest_NextToken                                                      smithy.SchemaExtensions
+	eDescribeDomainAutoTunesResponse                                                               smithy.SchemaExtensions
+	eDescribeDomainAutoTunesResponse_AutoTunes                                                     smithy.SchemaExtensions
+	eDescribeDomainAutoTunesResponse_NextToken                                                     smithy.SchemaExtensions
+	eDescribeDomainChangeProgressRequest                                                           smithy.SchemaExtensions
+	eDescribeDomainChangeProgressRequest_DomainName                                                smithy.SchemaExtensions
+	eDescribeDomainChangeProgressRequest_ChangeId                                                  smithy.SchemaExtensions
+	eDescribeDomainChangeProgressResponse                                                          smithy.SchemaExtensions
+	eDescribeDomainChangeProgressResponse_ChangeProgressStatus                                     smithy.SchemaExtensions
+	eDescribeElasticsearchDomainConfigRequest                                                      smithy.SchemaExtensions
+	eDescribeElasticsearchDomainConfigRequest_DomainName                                           smithy.SchemaExtensions
+	eDescribeElasticsearchDomainConfigResponse                                                     smithy.SchemaExtensions
+	eDescribeElasticsearchDomainConfigResponse_DomainConfig                                        smithy.SchemaExtensions
+	eDescribeElasticsearchDomainRequest                                                            smithy.SchemaExtensions
+	eDescribeElasticsearchDomainRequest_DomainName                                                 smithy.SchemaExtensions
+	eDescribeElasticsearchDomainResponse                                                           smithy.SchemaExtensions
+	eDescribeElasticsearchDomainResponse_DomainStatus                                              smithy.SchemaExtensions
+	eDescribeElasticsearchDomainsRequest                                                           smithy.SchemaExtensions
+	eDescribeElasticsearchDomainsRequest_DomainNames                                               smithy.SchemaExtensions
+	eDescribeElasticsearchDomainsResponse                                                          smithy.SchemaExtensions
+	eDescribeElasticsearchDomainsResponse_DomainStatusList                                         smithy.SchemaExtensions
+	eDescribeElasticsearchInstanceTypeLimitsRequest                                                smithy.SchemaExtensions
+	eDescribeElasticsearchInstanceTypeLimitsRequest_DomainName                                     smithy.SchemaExtensions
+	eDescribeElasticsearchInstanceTypeLimitsRequest_InstanceType                                   smithy.SchemaExtensions
+	eDescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion                           smithy.SchemaExtensions
+	eDescribeElasticsearchInstanceTypeLimitsResponse                                               smithy.SchemaExtensions
+	eDescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole                                  smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnectionsRequest                                           smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnectionsRequest_Filters                                   smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnectionsRequest_MaxResults                                smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnectionsRequest_NextToken                                 smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnectionsResponse                                          smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections            smithy.SchemaExtensions
+	eDescribeInboundCrossClusterSearchConnectionsResponse_NextToken                                smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnectionsRequest                                          smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnectionsRequest_Filters                                  smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults                               smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnectionsRequest_NextToken                                smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnectionsResponse                                         smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections           smithy.SchemaExtensions
+	eDescribeOutboundCrossClusterSearchConnectionsResponse_NextToken                               smithy.SchemaExtensions
+	eDescribePackagesRequest                                                                       smithy.SchemaExtensions
+	eDescribePackagesRequest_Filters                                                               smithy.SchemaExtensions
+	eDescribePackagesRequest_MaxResults                                                            smithy.SchemaExtensions
+	eDescribePackagesRequest_NextToken                                                             smithy.SchemaExtensions
+	eDescribePackagesResponse                                                                      smithy.SchemaExtensions
+	eDescribePackagesResponse_PackageDetailsList                                                   smithy.SchemaExtensions
+	eDescribePackagesResponse_NextToken                                                            smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferingsRequest                                         smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults                              smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferingsRequest_NextToken                               smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferingsResponse                                        smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferingsResponse_NextToken                              smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstancesRequest                                                 smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId                 smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstancesRequest_MaxResults                                      smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstancesRequest_NextToken                                       smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstancesResponse                                                smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstancesResponse_NextToken                                      smithy.SchemaExtensions
+	eDescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances                 smithy.SchemaExtensions
+	eDescribeVpcEndpointsRequest                                                                   smithy.SchemaExtensions
+	eDescribeVpcEndpointsRequest_VpcEndpointIds                                                    smithy.SchemaExtensions
+	eDescribeVpcEndpointsResponse                                                                  smithy.SchemaExtensions
+	eDescribeVpcEndpointsResponse_VpcEndpoints                                                     smithy.SchemaExtensions
+	eDescribeVpcEndpointsResponse_VpcEndpointErrors                                                smithy.SchemaExtensions
+	eDissociatePackageRequest                                                                      smithy.SchemaExtensions
+	eDissociatePackageRequest_PackageID                                                            smithy.SchemaExtensions
+	eDissociatePackageRequest_DomainName                                                           smithy.SchemaExtensions
+	eDissociatePackageResponse                                                                     smithy.SchemaExtensions
+	eDissociatePackageResponse_DomainPackageDetails                                                smithy.SchemaExtensions
+	eGetCompatibleElasticsearchVersionsRequest                                                     smithy.SchemaExtensions
+	eGetCompatibleElasticsearchVersionsRequest_DomainName                                          smithy.SchemaExtensions
+	eGetCompatibleElasticsearchVersionsResponse                                                    smithy.SchemaExtensions
+	eGetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions                    smithy.SchemaExtensions
+	eGetPackageVersionHistoryRequest                                                               smithy.SchemaExtensions
+	eGetPackageVersionHistoryRequest_PackageID                                                     smithy.SchemaExtensions
+	eGetPackageVersionHistoryRequest_MaxResults                                                    smithy.SchemaExtensions
+	eGetPackageVersionHistoryRequest_NextToken                                                     smithy.SchemaExtensions
+	eGetPackageVersionHistoryResponse                                                              smithy.SchemaExtensions
+	eGetPackageVersionHistoryResponse_PackageID                                                    smithy.SchemaExtensions
+	eGetPackageVersionHistoryResponse_PackageVersionHistoryList                                    smithy.SchemaExtensions
+	eGetPackageVersionHistoryResponse_NextToken                                                    smithy.SchemaExtensions
+	eGetUpgradeHistoryRequest                                                                      smithy.SchemaExtensions
+	eGetUpgradeHistoryRequest_DomainName                                                           smithy.SchemaExtensions
+	eGetUpgradeHistoryRequest_MaxResults                                                           smithy.SchemaExtensions
+	eGetUpgradeHistoryRequest_NextToken                                                            smithy.SchemaExtensions
+	eGetUpgradeHistoryResponse                                                                     smithy.SchemaExtensions
+	eGetUpgradeHistoryResponse_UpgradeHistories                                                    smithy.SchemaExtensions
+	eGetUpgradeHistoryResponse_NextToken                                                           smithy.SchemaExtensions
+	eGetUpgradeStatusRequest                                                                       smithy.SchemaExtensions
+	eGetUpgradeStatusRequest_DomainName                                                            smithy.SchemaExtensions
+	eGetUpgradeStatusResponse                                                                      smithy.SchemaExtensions
+	eGetUpgradeStatusResponse_UpgradeStep                                                          smithy.SchemaExtensions
+	eGetUpgradeStatusResponse_StepStatus                                                           smithy.SchemaExtensions
+	eGetUpgradeStatusResponse_UpgradeName                                                          smithy.SchemaExtensions
+	eListDomainNamesRequest                                                                        smithy.SchemaExtensions
+	eListDomainNamesRequest_EngineType                                                             smithy.SchemaExtensions
+	eListDomainNamesResponse                                                                       smithy.SchemaExtensions
+	eListDomainNamesResponse_DomainNames                                                           smithy.SchemaExtensions
+	eListDomainsForPackageRequest                                                                  smithy.SchemaExtensions
+	eListDomainsForPackageRequest_PackageID                                                        smithy.SchemaExtensions
+	eListDomainsForPackageRequest_MaxResults                                                       smithy.SchemaExtensions
+	eListDomainsForPackageRequest_NextToken                                                        smithy.SchemaExtensions
+	eListDomainsForPackageResponse                                                                 smithy.SchemaExtensions
+	eListDomainsForPackageResponse_DomainPackageDetailsList                                        smithy.SchemaExtensions
+	eListDomainsForPackageResponse_NextToken                                                       smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesRequest                                                         smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesRequest_ElasticsearchVersion                                    smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesRequest_DomainName                                              smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesRequest_MaxResults                                              smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesRequest_NextToken                                               smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesResponse                                                        smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes                             smithy.SchemaExtensions
+	eListElasticsearchInstanceTypesResponse_NextToken                                              smithy.SchemaExtensions
+	eListElasticsearchVersionsRequest                                                              smithy.SchemaExtensions
+	eListElasticsearchVersionsRequest_MaxResults                                                   smithy.SchemaExtensions
+	eListElasticsearchVersionsRequest_NextToken                                                    smithy.SchemaExtensions
+	eListElasticsearchVersionsResponse                                                             smithy.SchemaExtensions
+	eListElasticsearchVersionsResponse_ElasticsearchVersions                                       smithy.SchemaExtensions
+	eListElasticsearchVersionsResponse_NextToken                                                   smithy.SchemaExtensions
+	eListPackagesForDomainRequest                                                                  smithy.SchemaExtensions
+	eListPackagesForDomainRequest_DomainName                                                       smithy.SchemaExtensions
+	eListPackagesForDomainRequest_MaxResults                                                       smithy.SchemaExtensions
+	eListPackagesForDomainRequest_NextToken                                                        smithy.SchemaExtensions
+	eListPackagesForDomainResponse                                                                 smithy.SchemaExtensions
+	eListPackagesForDomainResponse_DomainPackageDetailsList                                        smithy.SchemaExtensions
+	eListPackagesForDomainResponse_NextToken                                                       smithy.SchemaExtensions
+	eListTagsRequest                                                                               smithy.SchemaExtensions
+	eListTagsRequest_ARN                                                                           smithy.SchemaExtensions
+	eListTagsResponse                                                                              smithy.SchemaExtensions
+	eListTagsResponse_TagList                                                                      smithy.SchemaExtensions
+	eListVpcEndpointAccessRequest                                                                  smithy.SchemaExtensions
+	eListVpcEndpointAccessRequest_DomainName                                                       smithy.SchemaExtensions
+	eListVpcEndpointAccessRequest_NextToken                                                        smithy.SchemaExtensions
+	eListVpcEndpointAccessResponse                                                                 smithy.SchemaExtensions
+	eListVpcEndpointAccessResponse_AuthorizedPrincipalList                                         smithy.SchemaExtensions
+	eListVpcEndpointAccessResponse_NextToken                                                       smithy.SchemaExtensions
+	eListVpcEndpointsForDomainRequest                                                              smithy.SchemaExtensions
+	eListVpcEndpointsForDomainRequest_DomainName                                                   smithy.SchemaExtensions
+	eListVpcEndpointsForDomainRequest_NextToken                                                    smithy.SchemaExtensions
+	eListVpcEndpointsForDomainResponse                                                             smithy.SchemaExtensions
+	eListVpcEndpointsForDomainResponse_VpcEndpointSummaryList                                      smithy.SchemaExtensions
+	eListVpcEndpointsForDomainResponse_NextToken                                                   smithy.SchemaExtensions
+	eListVpcEndpointsRequest                                                                       smithy.SchemaExtensions
+	eListVpcEndpointsRequest_NextToken                                                             smithy.SchemaExtensions
+	eListVpcEndpointsResponse                                                                      smithy.SchemaExtensions
+	eListVpcEndpointsResponse_VpcEndpointSummaryList                                               smithy.SchemaExtensions
+	eListVpcEndpointsResponse_NextToken                                                            smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOfferingRequest                                          smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId  smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName                          smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount                            smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOfferingResponse                                         smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId         smithy.SchemaExtensions
+	ePurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName                         smithy.SchemaExtensions
+	eRejectInboundCrossClusterSearchConnectionRequest                                              smithy.SchemaExtensions
+	eRejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId               smithy.SchemaExtensions
+	eRejectInboundCrossClusterSearchConnectionResponse                                             smithy.SchemaExtensions
+	eRejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection                smithy.SchemaExtensions
+	eRemoveTagsRequest                                                                             smithy.SchemaExtensions
+	eRemoveTagsRequest_ARN                                                                         smithy.SchemaExtensions
+	eRemoveTagsRequest_TagKeys                                                                     smithy.SchemaExtensions
+	eRevokeVpcEndpointAccessRequest                                                                smithy.SchemaExtensions
+	eRevokeVpcEndpointAccessRequest_DomainName                                                     smithy.SchemaExtensions
+	eRevokeVpcEndpointAccessRequest_Account                                                        smithy.SchemaExtensions
+	eRevokeVpcEndpointAccessResponse                                                               smithy.SchemaExtensions
+	eStartElasticsearchServiceSoftwareUpdateRequest                                                smithy.SchemaExtensions
+	eStartElasticsearchServiceSoftwareUpdateRequest_DomainName                                     smithy.SchemaExtensions
+	eStartElasticsearchServiceSoftwareUpdateResponse                                               smithy.SchemaExtensions
+	eStartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions                        smithy.SchemaExtensions
+	eUpdateCloneRequest                                                                            smithy.SchemaExtensions
+	eUpdateCloneRequest_DomainName                                                                 smithy.SchemaExtensions
+	eUpdateCloneRequest_TrafficSplitOptions                                                        smithy.SchemaExtensions
+	eUpdateCloneRequest_CutoverOptions                                                             smithy.SchemaExtensions
+	eUpdateCloneRequest_RetentionOptions                                                           smithy.SchemaExtensions
+	eUpdateCloneResponse                                                                           smithy.SchemaExtensions
+	eUpdateCloneResponse_DomainName                                                                smithy.SchemaExtensions
+	eUpdateCloneResponse_ChangeId                                                                  smithy.SchemaExtensions
+	eUpdateCloneResponse_CutoverOptions                                                            smithy.SchemaExtensions
+	eUpdateCloneResponse_TrafficSplitOptions                                                       smithy.SchemaExtensions
+	eUpdateCloneResponse_RetentionOptions                                                          smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest                                                        smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_DomainName                                             smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig                             smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_EBSOptions                                             smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_SnapshotOptions                                        smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_VPCOptions                                             smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_CognitoOptions                                         smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_AdvancedOptions                                        smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_AccessPolicies                                         smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_LogPublishingOptions                                   smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_DomainEndpointOptions                                  smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions                                smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions                            smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions                                smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_AutoTuneOptions                                        smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_DryRun                                                 smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions                              smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions                          smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_UseCase                                                smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigRequest_EngineMode                                             smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigResponse                                                       smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigResponse_DomainConfig                                          smithy.SchemaExtensions
+	eUpdateElasticsearchDomainConfigResponse_DryRunResults                                         smithy.SchemaExtensions
+	eUpdatePackageRequest                                                                          smithy.SchemaExtensions
+	eUpdatePackageRequest_PackageID                                                                smithy.SchemaExtensions
+	eUpdatePackageRequest_PackageSource                                                            smithy.SchemaExtensions
+	eUpdatePackageRequest_PackageDescription                                                       smithy.SchemaExtensions
+	eUpdatePackageRequest_CommitMessage                                                            smithy.SchemaExtensions
+	eUpdatePackageResponse                                                                         smithy.SchemaExtensions
+	eUpdatePackageResponse_PackageDetails                                                          smithy.SchemaExtensions
+	eUpdateVpcEndpointRequest                                                                      smithy.SchemaExtensions
+	eUpdateVpcEndpointRequest_VpcEndpointId                                                        smithy.SchemaExtensions
+	eUpdateVpcEndpointRequest_VpcOptions                                                           smithy.SchemaExtensions
+	eUpdateVpcEndpointResponse                                                                     smithy.SchemaExtensions
+	eUpdateVpcEndpointResponse_VpcEndpoint                                                         smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainRequest                                                             smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainRequest_DomainName                                                  smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainRequest_TargetVersion                                               smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainRequest_PerformCheckOnly                                            smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainRequest_DeploymentStrategyOptions                                   smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainResponse                                                            smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainResponse_DomainName                                                 smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainResponse_TargetVersion                                              smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainResponse_PerformCheckOnly                                           smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainResponse_DeploymentStrategyOptions                                  smithy.SchemaExtensions
+	eUpgradeElasticsearchDomainResponse_ChangeProgressDetails                                      smithy.SchemaExtensions
+)
+
+var (
+	iAcceptInboundCrossClusterSearchConnection              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AcceptInboundCrossClusterSearchConnection"}
+	iAddTags                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AddTags"}
+	iAssociatePackage                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AssociatePackage"}
+	iAuthorizeVpcEndpointAccess                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AuthorizeVpcEndpointAccess"}
+	iCancelDomainConfigChange                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelDomainConfigChange"}
+	iCancelElasticsearchServiceSoftwareUpdate               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelElasticsearchServiceSoftwareUpdate"}
+	iCreateElasticsearchDomain                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateElasticsearchDomain"}
+	iCreateOutboundCrossClusterSearchConnection             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateOutboundCrossClusterSearchConnection"}
+	iCreatePackage                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreatePackage"}
+	iCreateVpcEndpoint                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateVpcEndpoint"}
+	iDeleteElasticsearchDomain                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteElasticsearchDomain"}
+	iDeleteElasticsearchServiceRole                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteElasticsearchServiceRole"}
+	iDeleteInboundCrossClusterSearchConnection              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteInboundCrossClusterSearchConnection"}
+	iDeleteOutboundCrossClusterSearchConnection             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteOutboundCrossClusterSearchConnection"}
+	iDeletePackage                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeletePackage"}
+	iDeleteVpcEndpoint                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteVpcEndpoint"}
+	iDescribeDomainAutoTunes                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeDomainAutoTunes"}
+	iDescribeDomainChangeProgress                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeDomainChangeProgress"}
+	iDescribeElasticsearchDomain                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomain"}
+	iDescribeElasticsearchDomainConfig                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomainConfig"}
+	iDescribeElasticsearchDomains                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomains"}
+	iDescribeElasticsearchInstanceTypeLimits                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchInstanceTypeLimits"}
+	iDescribeInboundCrossClusterSearchConnections           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeInboundCrossClusterSearchConnections"}
+	iDescribeOutboundCrossClusterSearchConnections          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeOutboundCrossClusterSearchConnections"}
+	iDescribePackages                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackages"}
+	iDescribeReservedElasticsearchInstanceOfferings         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeReservedElasticsearchInstanceOfferings"}
+	iDescribeReservedElasticsearchInstances                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeReservedElasticsearchInstances"}
+	iDescribeVpcEndpoints                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeVpcEndpoints"}
+	iDissociatePackage                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DissociatePackage"}
+	iGetCompatibleElasticsearchVersions                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetCompatibleElasticsearchVersions"}
+	iGetPackageVersionHistory                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetPackageVersionHistory"}
+	iGetUpgradeHistory                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetUpgradeHistory"}
+	iGetUpgradeStatus                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetUpgradeStatus"}
+	iListDomainNames                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListDomainNames"}
+	iListDomainsForPackage                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListDomainsForPackage"}
+	iListElasticsearchInstanceTypes                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListElasticsearchInstanceTypes"}
+	iListElasticsearchVersions                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListElasticsearchVersions"}
+	iListPackagesForDomain                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListPackagesForDomain"}
+	iListTags                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListTags"}
+	iListVpcEndpointAccess                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointAccess"}
+	iListVpcEndpoints                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpoints"}
+	iListVpcEndpointsForDomain                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointsForDomain"}
+	iPurchaseReservedElasticsearchInstanceOffering          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PurchaseReservedElasticsearchInstanceOffering"}
+	iRejectInboundCrossClusterSearchConnection              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RejectInboundCrossClusterSearchConnection"}
+	iRemoveTags                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RemoveTags"}
+	iRevokeVpcEndpointAccess                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RevokeVpcEndpointAccess"}
+	iStartElasticsearchServiceSoftwareUpdate                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StartElasticsearchServiceSoftwareUpdate"}
+	iUpdateClone                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateClone"}
+	iUpdateElasticsearchDomainConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateElasticsearchDomainConfig"}
+	iUpdatePackage                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdatePackage"}
+	iUpdateVpcEndpoint                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateVpcEndpoint"}
+	iUpgradeElasticsearchDomain                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeElasticsearchDomain"}
+	i_AmazonElasticsearchService2015                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AmazonElasticsearchService2015"}
+	iAccessDeniedException                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AccessDeniedException"}
+	iAccessPoliciesStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AccessPoliciesStatus"}
+	iAdditionalLimit                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AdditionalLimit"}
+	i_AdditionalLimitList                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AdditionalLimitList"}
+	i_AdvancedOptions                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AdvancedOptions"}
+	iAdvancedOptionsStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AdvancedOptionsStatus"}
+	iAdvancedSecurityOptions                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AdvancedSecurityOptions"}
+	iAdvancedSecurityOptionsInput                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AdvancedSecurityOptionsInput"}
+	iAdvancedSecurityOptionsStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AdvancedSecurityOptionsStatus"}
+	i_ARN                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ARN"}
+	iAuthorizedPrincipal                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AuthorizedPrincipal"}
+	i_AuthorizedPrincipalList                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AuthorizedPrincipalList"}
+	iAutomatedSnapshotPauseOptions                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutomatedSnapshotPauseOptions"}
+	iAutomatedSnapshotPauseOptionsStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutomatedSnapshotPauseOptionsStatus"}
+	iAutomatedSnapshotPauseRequestOptions                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutomatedSnapshotPauseRequestOptions"}
+	iAutoTune                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTune"}
+	i_AutoTuneDate                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneDate"}
+	iAutoTuneDesiredState                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneDesiredState"}
+	iAutoTuneDetails                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneDetails"}
+	i_AutoTuneList                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneList"}
+	iAutoTuneMaintenanceSchedule                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneMaintenanceSchedule"}
+	i_AutoTuneMaintenanceScheduleList                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneMaintenanceScheduleList"}
+	iAutoTuneOptions                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneOptions"}
+	iAutoTuneOptionsInput                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneOptionsInput"}
+	iAutoTuneOptionsOutput                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneOptionsOutput"}
+	iAutoTuneOptionsStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneOptionsStatus"}
+	iAutoTuneState                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneState"}
+	iAutoTuneStatus                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneStatus"}
+	iAutoTuneType                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AutoTuneType"}
+	i_AWSAccount                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AWSAccount"}
+	i_BackendRole                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "BackendRole"}
+	iBaseException                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "BaseException"}
+	i_Boolean                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Boolean"}
+	iCancelledChangeProperty                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelledChangeProperty"}
+	i_CancelledChangePropertyList                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelledChangePropertyList"}
+	iChangeProgressDetails                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ChangeProgressDetails"}
+	iChangeProgressStage                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ChangeProgressStage"}
+	i_ChangeProgressStageList                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ChangeProgressStageList"}
+	i_ChangeProgressStageName                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ChangeProgressStageName"}
+	i_ChangeProgressStageStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ChangeProgressStageStatus"}
+	iChangeProgressStatusDetails                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ChangeProgressStatusDetails"}
+	i_ClientToken                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ClientToken"}
+	iClonedBlueGreenOptions                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ClonedBlueGreenOptions"}
+	iClonedBlueGreenScheduledAction                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ClonedBlueGreenScheduledAction"}
+	iClonedBlueGreenScheduledActionType                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ClonedBlueGreenScheduledActionType"}
+	iClonedBlueGreenUpgradeDetails                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ClonedBlueGreenUpgradeDetails"}
+	i_CloudWatchLogsLogGroupArn                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CloudWatchLogsLogGroupArn"}
+	iCognitoOptions                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CognitoOptions"}
+	iCognitoOptionsStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CognitoOptionsStatus"}
+	iColdStorageOptions                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ColdStorageOptions"}
+	i_CommitMessage                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CommitMessage"}
+	i_CompatibleElasticsearchVersionsList                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CompatibleElasticsearchVersionsList"}
+	iCompatibleVersionsMap                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CompatibleVersionsMap"}
+	iConfigChangeStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ConfigChangeStatus"}
+	iConflictException                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ConflictException"}
+	i_ConnectionAlias                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ConnectionAlias"}
+	i_CreatedAt                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreatedAt"}
+	i_CrossClusterSearchConnectionId                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CrossClusterSearchConnectionId"}
+	i_CrossClusterSearchConnectionStatusMessage             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CrossClusterSearchConnectionStatusMessage"}
+	iCutoverOptions                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CutoverOptions"}
+	iCutoverRequestOptions                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CutoverRequestOptions"}
+	iCutoverStatus                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CutoverStatus"}
+	iCutoverTarget                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CutoverTarget"}
+	i_DeploymentCloseDateTimeStamp                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentCloseDateTimeStamp"}
+	iDeploymentStatus                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentStatus"}
+	iDeploymentStrategy                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentStrategy"}
+	iDeploymentStrategyOptions                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentStrategyOptions"}
+	iDeploymentStrategyOptionsStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentStrategyOptionsStatus"}
+	iDeploymentStrategyOverride                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentStrategyOverride"}
+	iDeploymentStrategyOverrideOptions                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentStrategyOverrideOptions"}
+	i_DeploymentType                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeploymentType"}
+	iDescribePackagesFilter                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackagesFilter"}
+	i_DescribePackagesFilterList                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackagesFilterList"}
+	iDescribePackagesFilterName                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackagesFilterName"}
+	i_DescribePackagesFilterValue                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackagesFilterValue"}
+	i_DescribePackagesFilterValues                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackagesFilterValues"}
+	i_Description                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Description"}
+	iDisabledOperationException                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DisabledOperationException"}
+	i_DisableTimestamp                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DisableTimestamp"}
+	i_DomainArn                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainArn"}
+	iDomainEndpointOptions                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainEndpointOptions"}
+	iDomainEndpointOptionsStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainEndpointOptionsStatus"}
+	iDomainEngineMode                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainEngineMode"}
+	i_DomainId                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainId"}
+	iDomainInfo                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainInfo"}
+	i_DomainInfoList                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainInfoList"}
+	iDomainInformation                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainInformation"}
+	i_DomainName                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainName"}
+	i_DomainNameFqdn                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainNameFqdn"}
+	i_DomainNameList                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainNameList"}
+	iDomainPackageDetails                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainPackageDetails"}
+	i_DomainPackageDetailsList                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainPackageDetailsList"}
+	iDomainPackageStatus                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainPackageStatus"}
+	iDomainProcessingStatusType                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainProcessingStatusType"}
+	iDomainUseCase                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DomainUseCase"}
+	i_Double                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Double"}
+	i_DryRun                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DryRun"}
+	iDryRunResults                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DryRunResults"}
+	iDuration                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Duration"}
+	i_DurationValue                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DurationValue"}
+	iEBSOptions                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "EBSOptions"}
+	iEBSOptionsStatus                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "EBSOptionsStatus"}
+	iElasticsearchClusterConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchClusterConfig"}
+	iElasticsearchClusterConfigStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchClusterConfigStatus"}
+	iElasticsearchDomainConfig                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchDomainConfig"}
+	iElasticsearchDomainStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchDomainStatus"}
+	i_ElasticsearchDomainStatusList                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchDomainStatusList"}
+	i_ElasticsearchInstanceTypeList                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchInstanceTypeList"}
+	i_ElasticsearchVersionList                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchVersionList"}
+	iElasticsearchVersionStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchVersionStatus"}
+	i_ElasticsearchVersionString                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ElasticsearchVersionString"}
+	iEncryptionAtRestOptions                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "EncryptionAtRestOptions"}
+	iEncryptionAtRestOptionsStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "EncryptionAtRestOptionsStatus"}
+	i_Endpoint                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Endpoint"}
+	i_EndpointsMap                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "EndpointsMap"}
+	iEngineModeStatus                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "EngineModeStatus"}
+	iEngineType                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "EngineType"}
+	iErrorDetails                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ErrorDetails"}
+	i_ErrorMessage                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ErrorMessage"}
+	i_ErrorType                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ErrorType"}
+	iESPartitionInstanceType                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ESPartitionInstanceType"}
+	iESWarmPartitionInstanceType                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ESWarmPartitionInstanceType"}
+	iFilter                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Filter"}
+	i_FilterList                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "FilterList"}
+	i_GUID                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GUID"}
+	i_GUIDList                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GUIDList"}
+	i_IdentityPoolId                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "IdentityPoolId"}
+	iInboundCrossClusterSearchConnection                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InboundCrossClusterSearchConnection"}
+	i_InboundCrossClusterSearchConnections                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InboundCrossClusterSearchConnections"}
+	iInboundCrossClusterSearchConnectionStatus              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InboundCrossClusterSearchConnectionStatus"}
+	iInboundCrossClusterSearchConnectionStatusCode          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InboundCrossClusterSearchConnectionStatusCode"}
+	iInitiatedBy                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InitiatedBy"}
+	i_InstanceCount                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InstanceCount"}
+	iInstanceCountLimits                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InstanceCountLimits"}
+	iInstanceLimits                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InstanceLimits"}
+	i_InstanceRole                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InstanceRole"}
+	i_Integer                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Integer"}
+	i_IntegerClass                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "IntegerClass"}
+	iInternalException                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InternalException"}
+	iInvalidPaginationTokenException                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InvalidPaginationTokenException"}
+	iInvalidTypeException                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "InvalidTypeException"}
+	i_Issue                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Issue"}
+	i_Issues                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Issues"}
+	i_KmsKeyId                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "KmsKeyId"}
+	i_LastUpdated                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LastUpdated"}
+	iLimitExceededException                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LimitExceededException"}
+	i_LimitName                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LimitName"}
+	iLimits                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Limits"}
+	i_LimitsByRole                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LimitsByRole"}
+	i_LimitValue                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LimitValue"}
+	i_LimitValueList                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LimitValueList"}
+	iLogPublishingOption                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LogPublishingOption"}
+	i_LogPublishingOptions                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LogPublishingOptions"}
+	iLogPublishingOptionsStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LogPublishingOptionsStatus"}
+	iLogType                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "LogType"}
+	iMasterUserOptions                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "MasterUserOptions"}
+	i_MaximumInstanceCount                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "MaximumInstanceCount"}
+	i_MaxResults                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "MaxResults"}
+	i_Message                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Message"}
+	i_MinimumInstanceCount                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "MinimumInstanceCount"}
+	iModifyingProperties                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ModifyingProperties"}
+	i_ModifyingPropertiesList                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ModifyingPropertiesList"}
+	i_NextToken                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "NextToken"}
+	iNodeToNodeEncryptionOptions                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "NodeToNodeEncryptionOptions"}
+	iNodeToNodeEncryptionOptionsStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "NodeToNodeEncryptionOptionsStatus"}
+	i_NonEmptyString                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "NonEmptyString"}
+	iOptionState                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OptionState"}
+	iOptionStatus                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OptionStatus"}
+	iOutboundCrossClusterSearchConnection                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OutboundCrossClusterSearchConnection"}
+	i_OutboundCrossClusterSearchConnections                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OutboundCrossClusterSearchConnections"}
+	iOutboundCrossClusterSearchConnectionStatus             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OutboundCrossClusterSearchConnectionStatus"}
+	iOutboundCrossClusterSearchConnectionStatusCode         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OutboundCrossClusterSearchConnectionStatusCode"}
+	iOverallChangeStatus                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OverallChangeStatus"}
+	i_OwnerId                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "OwnerId"}
+	i_PackageDescription                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageDescription"}
+	iPackageDetails                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageDetails"}
+	i_PackageDetailsList                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageDetailsList"}
+	i_PackageID                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageID"}
+	i_PackageName                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageName"}
+	iPackageSource                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageSource"}
+	iPackageStatus                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageStatus"}
+	iPackageType                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageType"}
+	i_PackageVersion                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageVersion"}
+	iPackageVersionHistory                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageVersionHistory"}
+	i_PackageVersionHistoryList                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PackageVersionHistoryList"}
+	i_Password                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Password"}
+	iPauseState                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PauseState"}
+	i_PolicyDocument                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PolicyDocument"}
+	iPrincipalType                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PrincipalType"}
+	iPropertyValueType                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PropertyValueType"}
+	iRecurringCharge                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RecurringCharge"}
+	i_RecurringChargeList                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RecurringChargeList"}
+	i_ReferencePath                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ReferencePath"}
+	i_Region                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Region"}
+	i_ReservationToken                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ReservationToken"}
+	iReservedElasticsearchInstance                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ReservedElasticsearchInstance"}
+	i_ReservedElasticsearchInstanceList                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ReservedElasticsearchInstanceList"}
+	iReservedElasticsearchInstanceOffering                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ReservedElasticsearchInstanceOffering"}
+	i_ReservedElasticsearchInstanceOfferingList             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ReservedElasticsearchInstanceOfferingList"}
+	iReservedElasticsearchInstancePaymentOption             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ReservedElasticsearchInstancePaymentOption"}
+	iResourceAlreadyExistsException                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ResourceAlreadyExistsException"}
+	iResourceNotFoundException                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ResourceNotFoundException"}
+	iRetentionAction                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RetentionAction"}
+	iRetentionOptions                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RetentionOptions"}
+	i_RoleArn                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RoleArn"}
+	iRollbackOnDisable                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RollbackOnDisable"}
+	i_S3BucketName                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "S3BucketName"}
+	i_S3Key                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "S3Key"}
+	i_SAMLEntityId                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "SAMLEntityId"}
+	iSAMLIdp                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "SAMLIdp"}
+	i_SAMLMetadata                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "SAMLMetadata"}
+	iSAMLOptionsInput                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "SAMLOptionsInput"}
+	iSAMLOptionsOutput                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "SAMLOptionsOutput"}
+	iScheduledAutoTuneActionType                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ScheduledAutoTuneActionType"}
+	i_ScheduledAutoTuneDescription                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ScheduledAutoTuneDescription"}
+	iScheduledAutoTuneDetails                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ScheduledAutoTuneDetails"}
+	iScheduledAutoTuneSeverityType                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ScheduledAutoTuneSeverityType"}
+	iServiceSoftwareOptions                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ServiceSoftwareOptions"}
+	i_ServiceUrl                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ServiceUrl"}
+	iSnapshotOptions                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "SnapshotOptions"}
+	iSnapshotOptionsStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "SnapshotOptionsStatus"}
+	i_StartAt                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StartAt"}
+	i_StartTimestamp                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StartTimestamp"}
+	i_StorageSubTypeName                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StorageSubTypeName"}
+	iStorageType                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StorageType"}
+	iStorageTypeLimit                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StorageTypeLimit"}
+	i_StorageTypeLimitList                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StorageTypeLimitList"}
+	i_StorageTypeList                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StorageTypeList"}
+	i_StorageTypeName                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StorageTypeName"}
+	i_String                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "String"}
+	i_StringList                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StringList"}
+	iTag                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Tag"}
+	i_TagKey                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TagKey"}
+	i_TagList                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TagList"}
+	i_TagValue                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TagValue"}
+	iTimeUnit                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TimeUnit"}
+	iTLSSecurityPolicy                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TLSSecurityPolicy"}
+	i_TotalNumberOfStages                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TotalNumberOfStages"}
+	i_TrafficPercent                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TrafficPercent"}
+	iTrafficPercents                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TrafficPercents"}
+	iTrafficSplitOptions                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TrafficSplitOptions"}
+	iTrafficSplitRequestOptions                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TrafficSplitRequestOptions"}
+	iTrafficSplitStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TrafficSplitStatus"}
+	iTrafficStrategy                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "TrafficStrategy"}
+	i_UIntValue                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UIntValue"}
+	i_UpdateTimestamp                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateTimestamp"}
+	iUpgradeHistory                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeHistory"}
+	i_UpgradeHistoryList                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeHistoryList"}
+	i_UpgradeName                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeName"}
+	iUpgradeStatus                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeStatus"}
+	iUpgradeStep                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeStep"}
+	iUpgradeStepItem                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeStepItem"}
+	i_UpgradeStepsList                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeStepsList"}
+	iUseCaseStatus                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UseCaseStatus"}
+	i_Username                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "Username"}
+	i_UserPoolId                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UserPoolId"}
+	iValidationException                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ValidationException"}
+	i_ValueStringList                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ValueStringList"}
+	iVolumeType                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VolumeType"}
+	iVPCDerivedInfo                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VPCDerivedInfo"}
+	iVPCDerivedInfoStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VPCDerivedInfoStatus"}
+	iVpcEndpoint                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpoint"}
+	iVpcEndpointError                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointError"}
+	iVpcEndpointErrorCode                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointErrorCode"}
+	i_VpcEndpointErrorList                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointErrorList"}
+	i_VpcEndpointId                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointId"}
+	i_VpcEndpointIdList                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointIdList"}
+	i_VpcEndpoints                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpoints"}
+	iVpcEndpointStatus                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointStatus"}
+	iVpcEndpointSummary                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointSummary"}
+	i_VpcEndpointSummaryList                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VpcEndpointSummaryList"}
+	iVPCOptions                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "VPCOptions"}
+	iZoneAwarenessConfig                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ZoneAwarenessConfig"}
+	iAcceptInboundCrossClusterSearchConnectionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AcceptInboundCrossClusterSearchConnectionRequest"}
+	iAcceptInboundCrossClusterSearchConnectionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AcceptInboundCrossClusterSearchConnectionResponse"}
+	iAddTagsRequest                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AddTagsRequest"}
+	iAssociatePackageRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AssociatePackageRequest"}
+	iAssociatePackageResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AssociatePackageResponse"}
+	iAuthorizeVpcEndpointAccessRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AuthorizeVpcEndpointAccessRequest"}
+	iAuthorizeVpcEndpointAccessResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "AuthorizeVpcEndpointAccessResponse"}
+	iCancelDomainConfigChangeRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelDomainConfigChangeRequest"}
+	iCancelDomainConfigChangeResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelDomainConfigChangeResponse"}
+	iCancelElasticsearchServiceSoftwareUpdateRequest        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelElasticsearchServiceSoftwareUpdateRequest"}
+	iCancelElasticsearchServiceSoftwareUpdateResponse       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CancelElasticsearchServiceSoftwareUpdateResponse"}
+	iCreateElasticsearchDomainRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateElasticsearchDomainRequest"}
+	iCreateElasticsearchDomainResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateElasticsearchDomainResponse"}
+	iCreateOutboundCrossClusterSearchConnectionRequest      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateOutboundCrossClusterSearchConnectionRequest"}
+	iCreateOutboundCrossClusterSearchConnectionResponse     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateOutboundCrossClusterSearchConnectionResponse"}
+	iCreatePackageRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreatePackageRequest"}
+	iCreatePackageResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreatePackageResponse"}
+	iCreateVpcEndpointRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateVpcEndpointRequest"}
+	iCreateVpcEndpointResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "CreateVpcEndpointResponse"}
+	iDeleteElasticsearchDomainRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteElasticsearchDomainRequest"}
+	iDeleteElasticsearchDomainResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteElasticsearchDomainResponse"}
+	iDeleteInboundCrossClusterSearchConnectionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteInboundCrossClusterSearchConnectionRequest"}
+	iDeleteInboundCrossClusterSearchConnectionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteInboundCrossClusterSearchConnectionResponse"}
+	iDeleteOutboundCrossClusterSearchConnectionRequest      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteOutboundCrossClusterSearchConnectionRequest"}
+	iDeleteOutboundCrossClusterSearchConnectionResponse     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteOutboundCrossClusterSearchConnectionResponse"}
+	iDeletePackageRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeletePackageRequest"}
+	iDeletePackageResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeletePackageResponse"}
+	iDeleteVpcEndpointRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteVpcEndpointRequest"}
+	iDeleteVpcEndpointResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DeleteVpcEndpointResponse"}
+	iDescribeDomainAutoTunesRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeDomainAutoTunesRequest"}
+	iDescribeDomainAutoTunesResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeDomainAutoTunesResponse"}
+	iDescribeDomainChangeProgressRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeDomainChangeProgressRequest"}
+	iDescribeDomainChangeProgressResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeDomainChangeProgressResponse"}
+	iDescribeElasticsearchDomainConfigRequest               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomainConfigRequest"}
+	iDescribeElasticsearchDomainConfigResponse              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomainConfigResponse"}
+	iDescribeElasticsearchDomainRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomainRequest"}
+	iDescribeElasticsearchDomainResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomainResponse"}
+	iDescribeElasticsearchDomainsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomainsRequest"}
+	iDescribeElasticsearchDomainsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchDomainsResponse"}
+	iDescribeElasticsearchInstanceTypeLimitsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchInstanceTypeLimitsRequest"}
+	iDescribeElasticsearchInstanceTypeLimitsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeElasticsearchInstanceTypeLimitsResponse"}
+	iDescribeInboundCrossClusterSearchConnectionsRequest    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeInboundCrossClusterSearchConnectionsRequest"}
+	iDescribeInboundCrossClusterSearchConnectionsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeInboundCrossClusterSearchConnectionsResponse"}
+	iDescribeOutboundCrossClusterSearchConnectionsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeOutboundCrossClusterSearchConnectionsRequest"}
+	iDescribeOutboundCrossClusterSearchConnectionsResponse  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeOutboundCrossClusterSearchConnectionsResponse"}
+	iDescribePackagesRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackagesRequest"}
+	iDescribePackagesResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribePackagesResponse"}
+	iDescribeReservedElasticsearchInstanceOfferingsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeReservedElasticsearchInstanceOfferingsRequest"}
+	iDescribeReservedElasticsearchInstanceOfferingsResponse = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeReservedElasticsearchInstanceOfferingsResponse"}
+	iDescribeReservedElasticsearchInstancesRequest          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeReservedElasticsearchInstancesRequest"}
+	iDescribeReservedElasticsearchInstancesResponse         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeReservedElasticsearchInstancesResponse"}
+	iDescribeVpcEndpointsRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeVpcEndpointsRequest"}
+	iDescribeVpcEndpointsResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DescribeVpcEndpointsResponse"}
+	iDissociatePackageRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DissociatePackageRequest"}
+	iDissociatePackageResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "DissociatePackageResponse"}
+	iGetCompatibleElasticsearchVersionsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetCompatibleElasticsearchVersionsRequest"}
+	iGetCompatibleElasticsearchVersionsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetCompatibleElasticsearchVersionsResponse"}
+	iGetPackageVersionHistoryRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetPackageVersionHistoryRequest"}
+	iGetPackageVersionHistoryResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetPackageVersionHistoryResponse"}
+	iGetUpgradeHistoryRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetUpgradeHistoryRequest"}
+	iGetUpgradeHistoryResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetUpgradeHistoryResponse"}
+	iGetUpgradeStatusRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetUpgradeStatusRequest"}
+	iGetUpgradeStatusResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "GetUpgradeStatusResponse"}
+	iListDomainNamesRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListDomainNamesRequest"}
+	iListDomainNamesResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListDomainNamesResponse"}
+	iListDomainsForPackageRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListDomainsForPackageRequest"}
+	iListDomainsForPackageResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListDomainsForPackageResponse"}
+	iListElasticsearchInstanceTypesRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListElasticsearchInstanceTypesRequest"}
+	iListElasticsearchInstanceTypesResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListElasticsearchInstanceTypesResponse"}
+	iListElasticsearchVersionsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListElasticsearchVersionsRequest"}
+	iListElasticsearchVersionsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListElasticsearchVersionsResponse"}
+	iListPackagesForDomainRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListPackagesForDomainRequest"}
+	iListPackagesForDomainResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListPackagesForDomainResponse"}
+	iListTagsRequest                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListTagsRequest"}
+	iListTagsResponse                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListTagsResponse"}
+	iListVpcEndpointAccessRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointAccessRequest"}
+	iListVpcEndpointAccessResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointAccessResponse"}
+	iListVpcEndpointsForDomainRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointsForDomainRequest"}
+	iListVpcEndpointsForDomainResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointsForDomainResponse"}
+	iListVpcEndpointsRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointsRequest"}
+	iListVpcEndpointsResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "ListVpcEndpointsResponse"}
+	iPurchaseReservedElasticsearchInstanceOfferingRequest   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PurchaseReservedElasticsearchInstanceOfferingRequest"}
+	iPurchaseReservedElasticsearchInstanceOfferingResponse  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "PurchaseReservedElasticsearchInstanceOfferingResponse"}
+	iRejectInboundCrossClusterSearchConnectionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RejectInboundCrossClusterSearchConnectionRequest"}
+	iRejectInboundCrossClusterSearchConnectionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RejectInboundCrossClusterSearchConnectionResponse"}
+	iRemoveTagsRequest                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RemoveTagsRequest"}
+	iRevokeVpcEndpointAccessRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RevokeVpcEndpointAccessRequest"}
+	iRevokeVpcEndpointAccessResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "RevokeVpcEndpointAccessResponse"}
+	iStartElasticsearchServiceSoftwareUpdateRequest         = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StartElasticsearchServiceSoftwareUpdateRequest"}
+	iStartElasticsearchServiceSoftwareUpdateResponse        = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "StartElasticsearchServiceSoftwareUpdateResponse"}
+	iUpdateCloneRequest                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateCloneRequest"}
+	iUpdateCloneResponse                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateCloneResponse"}
+	iUpdateElasticsearchDomainConfigRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateElasticsearchDomainConfigRequest"}
+	iUpdateElasticsearchDomainConfigResponse                = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateElasticsearchDomainConfigResponse"}
+	iUpdatePackageRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdatePackageRequest"}
+	iUpdatePackageResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdatePackageResponse"}
+	iUpdateVpcEndpointRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateVpcEndpointRequest"}
+	iUpdateVpcEndpointResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpdateVpcEndpointResponse"}
+	iUpgradeElasticsearchDomainRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeElasticsearchDomainRequest"}
+	iUpgradeElasticsearchDomainResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticsearchservice", Name: "UpgradeElasticsearchDomainResponse"}
+	pUnit                                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/2015-01-01/es/ccs/inboundConnection/{CrossClusterSearchConnectionId}/accept",
-	Code: 200})
-
-var AddTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AddTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/tags",
-	Code: 200})
-
-var AssociatePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AssociatePackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/packages/associate/{PackageID}/{DomainName}",
-	Code: 200})
-
-var AuthorizeVpcEndpointAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AuthorizeVpcEndpointAccess",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/domain/{DomainName}/authorizeVpcEndpointAccess",
-	Code: 200})
-
-var CancelDomainConfigChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelDomainConfigChange",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/domain/{DomainName}/config/cancel",
-	Code: 200})
-
-var CancelElasticsearchServiceSoftwareUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelElasticsearchServiceSoftwareUpdate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/serviceSoftwareUpdate/cancel",
-	Code: 200})
-
-var CreateElasticsearchDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateElasticsearchDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/domain",
-	Code: 200})
-
-var CreateOutboundCrossClusterSearchConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateOutboundCrossClusterSearchConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/ccs/outboundConnection",
-	Code: 200})
-
-var CreatePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreatePackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/packages",
-	Code: 200})
-
-var CreateVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateVpcEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/vpcEndpoints",
-	Code: 200})
-
-var DeleteElasticsearchDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteElasticsearchDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2015-01-01/es/domain/{DomainName}",
-	Code: 200})
-
-var DeleteElasticsearchServiceRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteElasticsearchServiceRole",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2015-01-01/es/role",
-	Code: 200})
-
-var DeleteInboundCrossClusterSearchConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteInboundCrossClusterSearchConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2015-01-01/es/ccs/inboundConnection/{CrossClusterSearchConnectionId}",
-	Code: 200})
-
-var DeleteOutboundCrossClusterSearchConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteOutboundCrossClusterSearchConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2015-01-01/es/ccs/outboundConnection/{CrossClusterSearchConnectionId}",
-	Code: 200})
-
-var DeletePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeletePackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2015-01-01/packages/{PackageID}",
-	Code: 200})
-
-var DeleteVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteVpcEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2015-01-01/es/vpcEndpoints/{VpcEndpointId}",
-	Code: 200})
-
-var DescribeDomainAutoTunes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeDomainAutoTunes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/domain/{DomainName}/autoTunes",
-	Code: 200})
-
-var DescribeDomainChangeProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeDomainChangeProgress",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/domain/{DomainName}/progress",
-	Code: 200})
-
-var DescribeElasticsearchDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/domain/{DomainName}",
-	Code: 200})
-
-var DescribeElasticsearchDomainConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomainConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/domain/{DomainName}/config",
-	Code: 200})
-
-var DescribeElasticsearchDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/domain-info",
-	Code: 200})
-
-var DescribeElasticsearchInstanceTypeLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchInstanceTypeLimits",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/instanceTypeLimits/{ElasticsearchVersion}/{InstanceType}",
-	Code: 200})
-
-var DescribeInboundCrossClusterSearchConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeInboundCrossClusterSearchConnections",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/ccs/inboundConnection/search",
-	Code: 200})
-
-var DescribeOutboundCrossClusterSearchConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeOutboundCrossClusterSearchConnections",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/ccs/outboundConnection/search",
-	Code: 200})
-
-var DescribePackages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/packages/describe",
-	Code: 200})
-
-var DescribeReservedElasticsearchInstanceOfferings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeReservedElasticsearchInstanceOfferings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/reservedInstanceOfferings",
-	Code: 200})
-
-var DescribeReservedElasticsearchInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeReservedElasticsearchInstances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/reservedInstances",
-	Code: 200})
-
-var DescribeVpcEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeVpcEndpoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/vpcEndpoints/describe",
-	Code: 200})
-
-var DissociatePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DissociatePackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/packages/dissociate/{PackageID}/{DomainName}",
-	Code: 200})
-
-var GetCompatibleElasticsearchVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetCompatibleElasticsearchVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/compatibleVersions",
-	Code: 200})
-
-var GetPackageVersionHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetPackageVersionHistory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/packages/{PackageID}/history",
-	Code: 200})
-
-var GetUpgradeHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetUpgradeHistory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/upgradeDomain/{DomainName}/history",
-	Code: 200})
-
-var GetUpgradeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetUpgradeStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/upgradeDomain/{DomainName}/status",
-	Code: 200})
-
-var ListDomainNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListDomainNames",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/domain",
-	Code: 200})
-
-var ListDomainsForPackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListDomainsForPackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/packages/{PackageID}/domains",
-	Code: 200})
-
-var ListElasticsearchInstanceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListElasticsearchInstanceTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/instanceTypes/{ElasticsearchVersion}",
-	Code: 200})
-
-var ListElasticsearchVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListElasticsearchVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/versions",
-	Code: 200})
-
-var ListPackagesForDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListPackagesForDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/domain/{DomainName}/packages",
-	Code: 200})
-
-var ListTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/tags",
-	Code: 200})
-
-var ListVpcEndpointAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointAccess",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/domain/{DomainName}/listVpcEndpointAccess",
-	Code: 200})
-
-var ListVpcEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/vpcEndpoints",
-	Code: 200})
-
-var ListVpcEndpointsForDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointsForDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2015-01-01/es/domain/{DomainName}/vpcEndpoints",
-	Code: 200})
-
-var PurchaseReservedElasticsearchInstanceOffering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PurchaseReservedElasticsearchInstanceOffering",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/purchaseReservedInstanceOffering",
-	Code: 200})
-
-var RejectInboundCrossClusterSearchConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RejectInboundCrossClusterSearchConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/2015-01-01/es/ccs/inboundConnection/{CrossClusterSearchConnectionId}/reject",
-	Code: 200})
-
-var RemoveTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RemoveTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/tags-removal",
-	Code: 200})
-
-var RevokeVpcEndpointAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RevokeVpcEndpointAccess",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/domain/{DomainName}/revokeVpcEndpointAccess",
-	Code: 200})
-
-var StartElasticsearchServiceSoftwareUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StartElasticsearchServiceSoftwareUpdate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/serviceSoftwareUpdate/start",
-	Code: 200})
-
-var UpdateClone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateClone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/domain/{DomainName}/clone",
-	Code: 200})
-
-var UpdateElasticsearchDomainConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateElasticsearchDomainConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/domain/{DomainName}/config",
-	Code: 200})
-
-var UpdatePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdatePackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/packages/update",
-	Code: 200})
-
-var UpdateVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateVpcEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/vpcEndpoints/update",
-	Code: 200})
-
-var UpgradeElasticsearchDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeElasticsearchDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2015-01-01/es/upgradeDomain",
-	Code: 200})
-
-var _AmazonElasticsearchService2015 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AmazonElasticsearchService2015",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://es.amazonaws.com/doc/2015-01-01/"})
-
-var AmazonElasticsearchService2015 = smithy.NewServiceSchema(_AmazonElasticsearchService2015, "2015-01-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessPoliciesStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AccessPoliciesStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AccessPoliciesStatus_Options *smithy.Schema
-
-var AccessPoliciesStatus_Status *smithy.Schema
-
-var AdditionalLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AdditionalLimit",
-}, smithy.ShapeTypeStructure, 2)
-var AdditionalLimit_LimitName *smithy.Schema
-
-var AdditionalLimit_LimitValues *smithy.Schema
-
-var _AdditionalLimitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AdditionalLimitList",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalLimitList_member *smithy.Schema
-
-var _AdvancedOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AdvancedOptions",
-}, smithy.ShapeTypeMap, 2)
-var _AdvancedOptions_key *smithy.Schema
-
-var _AdvancedOptions_value *smithy.Schema
-
-var AdvancedOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AdvancedOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AdvancedOptionsStatus_Options *smithy.Schema
-
-var AdvancedOptionsStatus_Status *smithy.Schema
-
-var AdvancedSecurityOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AdvancedSecurityOptions",
-}, smithy.ShapeTypeStructure, 5)
-var AdvancedSecurityOptions_Enabled *smithy.Schema
-
-var AdvancedSecurityOptions_InternalUserDatabaseEnabled *smithy.Schema
-
-var AdvancedSecurityOptions_SAMLOptions *smithy.Schema
-
-var AdvancedSecurityOptions_AnonymousAuthDisableDate *smithy.Schema
-
-var AdvancedSecurityOptions_AnonymousAuthEnabled *smithy.Schema
-
-var AdvancedSecurityOptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AdvancedSecurityOptionsInput",
-}, smithy.ShapeTypeStructure, 5)
-var AdvancedSecurityOptionsInput_Enabled *smithy.Schema
-
-var AdvancedSecurityOptionsInput_InternalUserDatabaseEnabled *smithy.Schema
-
-var AdvancedSecurityOptionsInput_MasterUserOptions *smithy.Schema
-
-var AdvancedSecurityOptionsInput_SAMLOptions *smithy.Schema
-
-var AdvancedSecurityOptionsInput_AnonymousAuthEnabled *smithy.Schema
-
-var AdvancedSecurityOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AdvancedSecurityOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AdvancedSecurityOptionsStatus_Options *smithy.Schema
-
-var AdvancedSecurityOptionsStatus_Status *smithy.Schema
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var AuthorizedPrincipal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AuthorizedPrincipal",
-}, smithy.ShapeTypeStructure, 2)
-var AuthorizedPrincipal_PrincipalType *smithy.Schema
-
-var AuthorizedPrincipal_Principal *smithy.Schema
-
-var _AuthorizedPrincipalList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AuthorizedPrincipalList",
-}, smithy.ShapeTypeList, 1)
-var _AuthorizedPrincipalList_member *smithy.Schema
-
-var AutomatedSnapshotPauseOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutomatedSnapshotPauseOptions",
-}, smithy.ShapeTypeStructure, 4)
-var AutomatedSnapshotPauseOptions_Enabled *smithy.Schema
-
-var AutomatedSnapshotPauseOptions_StartTime *smithy.Schema
-
-var AutomatedSnapshotPauseOptions_EndTime *smithy.Schema
-
-var AutomatedSnapshotPauseOptions_State *smithy.Schema
-
-var AutomatedSnapshotPauseOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutomatedSnapshotPauseOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AutomatedSnapshotPauseOptionsStatus_Options *smithy.Schema
-
-var AutomatedSnapshotPauseOptionsStatus_Status *smithy.Schema
-
-var AutomatedSnapshotPauseRequestOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutomatedSnapshotPauseRequestOptions",
-}, smithy.ShapeTypeStructure, 3)
-var AutomatedSnapshotPauseRequestOptions_Enabled *smithy.Schema
-
-var AutomatedSnapshotPauseRequestOptions_StartTime *smithy.Schema
-
-var AutomatedSnapshotPauseRequestOptions_EndTime *smithy.Schema
-
-var AutoTune = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTune",
-}, smithy.ShapeTypeStructure, 2)
-var AutoTune_AutoTuneType *smithy.Schema
-
-var AutoTune_AutoTuneDetails *smithy.Schema
-
-var _AutoTuneDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var AutoTuneDesiredState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneDesiredState",
-}, smithy.ShapeTypeEnum, 2)
-var AutoTuneDesiredState_ENABLED *smithy.Schema
-
-var AutoTuneDesiredState_DISABLED *smithy.Schema
-
-var AutoTuneDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneDetails",
-}, smithy.ShapeTypeStructure, 1)
-var AutoTuneDetails_ScheduledAutoTuneDetails *smithy.Schema
-
-var _AutoTuneList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneList",
-}, smithy.ShapeTypeList, 1)
-var _AutoTuneList_member *smithy.Schema
-
-var AutoTuneMaintenanceSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneMaintenanceSchedule",
-}, smithy.ShapeTypeStructure, 3)
-var AutoTuneMaintenanceSchedule_StartAt *smithy.Schema
-
-var AutoTuneMaintenanceSchedule_Duration *smithy.Schema
-
-var AutoTuneMaintenanceSchedule_CronExpressionForRecurrence *smithy.Schema
-
-var _AutoTuneMaintenanceScheduleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneMaintenanceScheduleList",
-}, smithy.ShapeTypeList, 1)
-var _AutoTuneMaintenanceScheduleList_member *smithy.Schema
-
-var AutoTuneOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneOptions",
-}, smithy.ShapeTypeStructure, 3)
-var AutoTuneOptions_DesiredState *smithy.Schema
-
-var AutoTuneOptions_RollbackOnDisable *smithy.Schema
-
-var AutoTuneOptions_MaintenanceSchedules *smithy.Schema
-
-var AutoTuneOptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneOptionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AutoTuneOptionsInput_DesiredState *smithy.Schema
-
-var AutoTuneOptionsInput_MaintenanceSchedules *smithy.Schema
-
-var AutoTuneOptionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneOptionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var AutoTuneOptionsOutput_State *smithy.Schema
-
-var AutoTuneOptionsOutput_ErrorMessage *smithy.Schema
-
-var AutoTuneOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AutoTuneOptionsStatus_Options *smithy.Schema
-
-var AutoTuneOptionsStatus_Status *smithy.Schema
-
-var AutoTuneState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneState",
-}, smithy.ShapeTypeEnum, 9)
-var AutoTuneState_ENABLED *smithy.Schema
-
-var AutoTuneState_DISABLED *smithy.Schema
-
-var AutoTuneState_ENABLE_IN_PROGRESS *smithy.Schema
-
-var AutoTuneState_DISABLE_IN_PROGRESS *smithy.Schema
-
-var AutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED *smithy.Schema
-
-var AutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS *smithy.Schema
-
-var AutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE *smithy.Schema
-
-var AutoTuneState_DISABLED_AND_ROLLBACK_ERROR *smithy.Schema
-
-var AutoTuneState_ERROR *smithy.Schema
-
-var AutoTuneStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneStatus",
-}, smithy.ShapeTypeStructure, 6)
-var AutoTuneStatus_CreationDate *smithy.Schema
-
-var AutoTuneStatus_UpdateDate *smithy.Schema
-
-var AutoTuneStatus_UpdateVersion *smithy.Schema
-
-var AutoTuneStatus_State *smithy.Schema
-
-var AutoTuneStatus_ErrorMessage *smithy.Schema
-
-var AutoTuneStatus_PendingDeletion *smithy.Schema
-
-var AutoTuneType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AutoTuneType",
-}, smithy.ShapeTypeEnum, 1)
-var AutoTuneType_SCHEDULED_ACTION *smithy.Schema
-
-var _AWSAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AWSAccount",
-}, smithy.ShapeTypeString, 0)
-
-var _BackendRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "BackendRole",
-}, smithy.ShapeTypeString, 0)
-
-var BaseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "BaseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var BaseException_message *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CancelledChangeProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelledChangeProperty",
-}, smithy.ShapeTypeStructure, 3)
-var CancelledChangeProperty_PropertyName *smithy.Schema
-
-var CancelledChangeProperty_CancelledValue *smithy.Schema
-
-var CancelledChangeProperty_ActiveValue *smithy.Schema
-
-var _CancelledChangePropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelledChangePropertyList",
-}, smithy.ShapeTypeList, 1)
-var _CancelledChangePropertyList_member *smithy.Schema
-
-var ChangeProgressDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ChangeProgressDetails",
-}, smithy.ShapeTypeStructure, 6)
-var ChangeProgressDetails_ChangeId *smithy.Schema
-
-var ChangeProgressDetails_Message *smithy.Schema
-
-var ChangeProgressDetails_ConfigChangeStatus *smithy.Schema
-
-var ChangeProgressDetails_StartTime *smithy.Schema
-
-var ChangeProgressDetails_LastUpdatedTime *smithy.Schema
-
-var ChangeProgressDetails_InitiatedBy *smithy.Schema
-
-var ChangeProgressStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ChangeProgressStage",
-}, smithy.ShapeTypeStructure, 4)
-var ChangeProgressStage_Name *smithy.Schema
-
-var ChangeProgressStage_Status *smithy.Schema
-
-var ChangeProgressStage_Description *smithy.Schema
-
-var ChangeProgressStage_LastUpdated *smithy.Schema
-
-var _ChangeProgressStageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ChangeProgressStageList",
-}, smithy.ShapeTypeList, 1)
-var _ChangeProgressStageList_member *smithy.Schema
-
-var _ChangeProgressStageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ChangeProgressStageName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChangeProgressStageStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ChangeProgressStageStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ChangeProgressStatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ChangeProgressStatusDetails",
-}, smithy.ShapeTypeStructure, 11)
-var ChangeProgressStatusDetails_ChangeId *smithy.Schema
-
-var ChangeProgressStatusDetails_StartTime *smithy.Schema
-
-var ChangeProgressStatusDetails_Status *smithy.Schema
-
-var ChangeProgressStatusDetails_PendingProperties *smithy.Schema
-
-var ChangeProgressStatusDetails_CompletedProperties *smithy.Schema
-
-var ChangeProgressStatusDetails_TotalNumberOfStages *smithy.Schema
-
-var ChangeProgressStatusDetails_ChangeProgressStages *smithy.Schema
-
-var ChangeProgressStatusDetails_ConfigChangeStatus *smithy.Schema
-
-var ChangeProgressStatusDetails_LastUpdatedTime *smithy.Schema
-
-var ChangeProgressStatusDetails_InitiatedBy *smithy.Schema
-
-var ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ClonedBlueGreenOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ClonedBlueGreenOptions",
-}, smithy.ShapeTypeStructure, 1)
-var ClonedBlueGreenOptions_RetentionOptions *smithy.Schema
-
-var ClonedBlueGreenScheduledAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ClonedBlueGreenScheduledAction",
-}, smithy.ShapeTypeStructure, 2)
-var ClonedBlueGreenScheduledAction_Action *smithy.Schema
-
-var ClonedBlueGreenScheduledAction_ScheduledTime *smithy.Schema
-
-var ClonedBlueGreenScheduledActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ClonedBlueGreenScheduledActionType",
-}, smithy.ShapeTypeEnum, 2)
-var ClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY *smithy.Schema
-
-var ClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER *smithy.Schema
-
-var ClonedBlueGreenUpgradeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ClonedBlueGreenUpgradeDetails",
-}, smithy.ShapeTypeStructure, 3)
-var ClonedBlueGreenUpgradeDetails_TrafficSplit *smithy.Schema
-
-var ClonedBlueGreenUpgradeDetails_ScheduledAction *smithy.Schema
-
-var ClonedBlueGreenUpgradeDetails_RetentionInHours *smithy.Schema
-
-var _CloudWatchLogsLogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CloudWatchLogsLogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var CognitoOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CognitoOptions",
-}, smithy.ShapeTypeStructure, 4)
-var CognitoOptions_Enabled *smithy.Schema
-
-var CognitoOptions_UserPoolId *smithy.Schema
-
-var CognitoOptions_IdentityPoolId *smithy.Schema
-
-var CognitoOptions_RoleArn *smithy.Schema
-
-var CognitoOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CognitoOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var CognitoOptionsStatus_Options *smithy.Schema
-
-var CognitoOptionsStatus_Status *smithy.Schema
-
-var ColdStorageOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ColdStorageOptions",
-}, smithy.ShapeTypeStructure, 1)
-var ColdStorageOptions_Enabled *smithy.Schema
-
-var _CommitMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CommitMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _CompatibleElasticsearchVersionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CompatibleElasticsearchVersionsList",
-}, smithy.ShapeTypeList, 1)
-var _CompatibleElasticsearchVersionsList_member *smithy.Schema
-
-var CompatibleVersionsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CompatibleVersionsMap",
-}, smithy.ShapeTypeStructure, 2)
-var CompatibleVersionsMap_SourceVersion *smithy.Schema
-
-var CompatibleVersionsMap_TargetVersions *smithy.Schema
-
-var ConfigChangeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ConfigChangeStatus",
-}, smithy.ShapeTypeEnum, 8)
-var ConfigChangeStatus_PENDING *smithy.Schema
-
-var ConfigChangeStatus_INITIALIZING *smithy.Schema
-
-var ConfigChangeStatus_VALIDATING *smithy.Schema
-
-var ConfigChangeStatus_VALIDATION_FAILED *smithy.Schema
-
-var ConfigChangeStatus_APPLYING_CHANGES *smithy.Schema
-
-var ConfigChangeStatus_COMPLETED *smithy.Schema
-
-var ConfigChangeStatus_PENDING_USER_INPUT *smithy.Schema
-
-var ConfigChangeStatus_CANCELLED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _ConnectionAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ConnectionAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _CreatedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreatedAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CrossClusterSearchConnectionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CrossClusterSearchConnectionId",
-}, smithy.ShapeTypeString, 0)
-
-var _CrossClusterSearchConnectionStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CrossClusterSearchConnectionStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var CutoverOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CutoverOptions",
-}, smithy.ShapeTypeStructure, 2)
-var CutoverOptions_Target *smithy.Schema
-
-var CutoverOptions_Status *smithy.Schema
-
-var CutoverRequestOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CutoverRequestOptions",
-}, smithy.ShapeTypeStructure, 1)
-var CutoverRequestOptions_Target *smithy.Schema
-
-var CutoverStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CutoverStatus",
-}, smithy.ShapeTypeEnum, 3)
-var CutoverStatus_IN_PROGRESS *smithy.Schema
-
-var CutoverStatus_COMPLETED *smithy.Schema
-
-var CutoverStatus_FAILED *smithy.Schema
-
-var CutoverTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CutoverTarget",
-}, smithy.ShapeTypeEnum, 2)
-var CutoverTarget_CLONED_CLUSTER *smithy.Schema
-
-var CutoverTarget_PRIMARY_CLUSTER *smithy.Schema
-
-var _DeploymentCloseDateTimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentCloseDateTimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DeploymentStatus_PENDING_UPDATE *smithy.Schema
-
-var DeploymentStatus_IN_PROGRESS *smithy.Schema
-
-var DeploymentStatus_COMPLETED *smithy.Schema
-
-var DeploymentStatus_NOT_ELIGIBLE *smithy.Schema
-
-var DeploymentStatus_ELIGIBLE *smithy.Schema
-
-var DeploymentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentStrategy_DEFAULT *smithy.Schema
-
-var DeploymentStrategy_CAPACITY_OPTIMIZED *smithy.Schema
-
-var DeploymentStrategyOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentStrategyOptions",
-}, smithy.ShapeTypeStructure, 1)
-var DeploymentStrategyOptions_DeploymentStrategy *smithy.Schema
-
-var DeploymentStrategyOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentStrategyOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentStrategyOptionsStatus_Options *smithy.Schema
-
-var DeploymentStrategyOptionsStatus_Status *smithy.Schema
-
-var DeploymentStrategyOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentStrategyOverride",
-}, smithy.ShapeTypeEnum, 1)
-var DeploymentStrategyOverride_CLONED_BLUE_GREEN *smithy.Schema
-
-var DeploymentStrategyOverrideOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentStrategyOverrideOptions",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentStrategyOverrideOptions_DeploymentStrategy *smithy.Schema
-
-var DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions *smithy.Schema
-
-var _DeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeploymentType",
-}, smithy.ShapeTypeString, 0)
-
-var DescribePackagesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackagesFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DescribePackagesFilter_Name *smithy.Schema
-
-var DescribePackagesFilter_Value *smithy.Schema
-
-var _DescribePackagesFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackagesFilterList",
-}, smithy.ShapeTypeList, 1)
-var _DescribePackagesFilterList_member *smithy.Schema
-
-var DescribePackagesFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackagesFilterName",
-}, smithy.ShapeTypeEnum, 3)
-var DescribePackagesFilterName_PackageID *smithy.Schema
-
-var DescribePackagesFilterName_PackageName *smithy.Schema
-
-var DescribePackagesFilterName_PackageStatus *smithy.Schema
-
-var _DescribePackagesFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackagesFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DescribePackagesFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackagesFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _DescribePackagesFilterValues_member *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DisabledOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DisabledOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var DisabledOperationException_message *smithy.Schema
-
-var _DisableTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DisableTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DomainArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainArn",
-}, smithy.ShapeTypeString, 0)
-
-var DomainEndpointOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainEndpointOptions",
-}, smithy.ShapeTypeStructure, 5)
-var DomainEndpointOptions_EnforceHTTPS *smithy.Schema
-
-var DomainEndpointOptions_TLSSecurityPolicy *smithy.Schema
-
-var DomainEndpointOptions_CustomEndpointEnabled *smithy.Schema
-
-var DomainEndpointOptions_CustomEndpoint *smithy.Schema
-
-var DomainEndpointOptions_CustomEndpointCertificateArn *smithy.Schema
-
-var DomainEndpointOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainEndpointOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var DomainEndpointOptionsStatus_Options *smithy.Schema
-
-var DomainEndpointOptionsStatus_Status *smithy.Schema
-
-var DomainEngineMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainEngineMode",
-}, smithy.ShapeTypeEnum, 2)
-var DomainEngineMode_GENERAL *smithy.Schema
-
-var DomainEngineMode_OPTIMIZED *smithy.Schema
-
-var _DomainId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainId",
-}, smithy.ShapeTypeString, 0)
-
-var DomainInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainInfo",
-}, smithy.ShapeTypeStructure, 2)
-var DomainInfo_DomainName *smithy.Schema
-
-var DomainInfo_EngineType *smithy.Schema
-
-var _DomainInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainInfoList",
-}, smithy.ShapeTypeList, 1)
-var _DomainInfoList_member *smithy.Schema
-
-var DomainInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainInformation",
-}, smithy.ShapeTypeStructure, 3)
-var DomainInformation_OwnerId *smithy.Schema
-
-var DomainInformation_DomainName *smithy.Schema
-
-var DomainInformation_Region *smithy.Schema
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainNameFqdn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainNameFqdn",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainNameList",
-}, smithy.ShapeTypeList, 1)
-var _DomainNameList_member *smithy.Schema
-
-var DomainPackageDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainPackageDetails",
-}, smithy.ShapeTypeStructure, 9)
-var DomainPackageDetails_PackageID *smithy.Schema
-
-var DomainPackageDetails_PackageName *smithy.Schema
-
-var DomainPackageDetails_PackageType *smithy.Schema
-
-var DomainPackageDetails_LastUpdated *smithy.Schema
-
-var DomainPackageDetails_DomainName *smithy.Schema
-
-var DomainPackageDetails_DomainPackageStatus *smithy.Schema
-
-var DomainPackageDetails_PackageVersion *smithy.Schema
-
-var DomainPackageDetails_ReferencePath *smithy.Schema
-
-var DomainPackageDetails_ErrorDetails *smithy.Schema
-
-var _DomainPackageDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainPackageDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _DomainPackageDetailsList_member *smithy.Schema
-
-var DomainPackageStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainPackageStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DomainPackageStatus_ASSOCIATING *smithy.Schema
-
-var DomainPackageStatus_ASSOCIATION_FAILED *smithy.Schema
-
-var DomainPackageStatus_ACTIVE *smithy.Schema
-
-var DomainPackageStatus_DISSOCIATING *smithy.Schema
-
-var DomainPackageStatus_DISSOCIATION_FAILED *smithy.Schema
-
-var DomainProcessingStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainProcessingStatusType",
-}, smithy.ShapeTypeEnum, 7)
-var DomainProcessingStatusType_CREATING *smithy.Schema
-
-var DomainProcessingStatusType_ACTIVE *smithy.Schema
-
-var DomainProcessingStatusType_MODIFYING *smithy.Schema
-
-var DomainProcessingStatusType_UPGRADING *smithy.Schema
-
-var DomainProcessingStatusType_UPDATING *smithy.Schema
-
-var DomainProcessingStatusType_ISOLATED *smithy.Schema
-
-var DomainProcessingStatusType_DELETING *smithy.Schema
-
-var DomainUseCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DomainUseCase",
-}, smithy.ShapeTypeEnum, 4)
-var DomainUseCase_SEARCH *smithy.Schema
-
-var DomainUseCase_VECTOR *smithy.Schema
-
-var DomainUseCase_OBSERVABILITY *smithy.Schema
-
-var DomainUseCase_MIXED *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DryRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DryRun",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DryRunResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DryRunResults",
-}, smithy.ShapeTypeStructure, 2)
-var DryRunResults_DeploymentType *smithy.Schema
-
-var DryRunResults_Message *smithy.Schema
-
-var Duration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Duration",
-}, smithy.ShapeTypeStructure, 2)
-var Duration_Value *smithy.Schema
-
-var Duration_Unit *smithy.Schema
-
-var _DurationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DurationValue",
-}, smithy.ShapeTypeLong, 0)
-
-var EBSOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "EBSOptions",
-}, smithy.ShapeTypeStructure, 5)
-var EBSOptions_EBSEnabled *smithy.Schema
-
-var EBSOptions_VolumeType *smithy.Schema
-
-var EBSOptions_VolumeSize *smithy.Schema
-
-var EBSOptions_Iops *smithy.Schema
-
-var EBSOptions_Throughput *smithy.Schema
-
-var EBSOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "EBSOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var EBSOptionsStatus_Options *smithy.Schema
-
-var EBSOptionsStatus_Status *smithy.Schema
-
-var ElasticsearchClusterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchClusterConfig",
-}, smithy.ShapeTypeStructure, 11)
-var ElasticsearchClusterConfig_InstanceType *smithy.Schema
-
-var ElasticsearchClusterConfig_InstanceCount *smithy.Schema
-
-var ElasticsearchClusterConfig_DedicatedMasterEnabled *smithy.Schema
-
-var ElasticsearchClusterConfig_ZoneAwarenessEnabled *smithy.Schema
-
-var ElasticsearchClusterConfig_ZoneAwarenessConfig *smithy.Schema
-
-var ElasticsearchClusterConfig_DedicatedMasterType *smithy.Schema
-
-var ElasticsearchClusterConfig_DedicatedMasterCount *smithy.Schema
-
-var ElasticsearchClusterConfig_WarmEnabled *smithy.Schema
-
-var ElasticsearchClusterConfig_WarmType *smithy.Schema
-
-var ElasticsearchClusterConfig_WarmCount *smithy.Schema
-
-var ElasticsearchClusterConfig_ColdStorageOptions *smithy.Schema
-
-var ElasticsearchClusterConfigStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchClusterConfigStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ElasticsearchClusterConfigStatus_Options *smithy.Schema
-
-var ElasticsearchClusterConfigStatus_Status *smithy.Schema
-
-var ElasticsearchDomainConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchDomainConfig",
-}, smithy.ShapeTypeStructure, 20)
-var ElasticsearchDomainConfig_ElasticsearchVersion *smithy.Schema
-
-var ElasticsearchDomainConfig_ElasticsearchClusterConfig *smithy.Schema
-
-var ElasticsearchDomainConfig_EBSOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_AccessPolicies *smithy.Schema
-
-var ElasticsearchDomainConfig_SnapshotOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_VPCOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_CognitoOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_EncryptionAtRestOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_NodeToNodeEncryptionOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_AdvancedOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_LogPublishingOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_DomainEndpointOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_AdvancedSecurityOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_AutoTuneOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_ChangeProgressDetails *smithy.Schema
-
-var ElasticsearchDomainConfig_ModifyingProperties *smithy.Schema
-
-var ElasticsearchDomainConfig_DeploymentStrategyOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_AutomatedSnapshotPauseOptions *smithy.Schema
-
-var ElasticsearchDomainConfig_UseCase *smithy.Schema
-
-var ElasticsearchDomainConfig_EngineMode *smithy.Schema
-
-var ElasticsearchDomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchDomainStatus",
-}, smithy.ShapeTypeStructure, 31)
-var ElasticsearchDomainStatus_DomainId *smithy.Schema
-
-var ElasticsearchDomainStatus_DomainName *smithy.Schema
-
-var ElasticsearchDomainStatus_ARN *smithy.Schema
-
-var ElasticsearchDomainStatus_Created *smithy.Schema
-
-var ElasticsearchDomainStatus_Deleted *smithy.Schema
-
-var ElasticsearchDomainStatus_Endpoint *smithy.Schema
-
-var ElasticsearchDomainStatus_Endpoints *smithy.Schema
-
-var ElasticsearchDomainStatus_Processing *smithy.Schema
-
-var ElasticsearchDomainStatus_UpgradeProcessing *smithy.Schema
-
-var ElasticsearchDomainStatus_ElasticsearchVersion *smithy.Schema
-
-var ElasticsearchDomainStatus_ElasticsearchClusterConfig *smithy.Schema
-
-var ElasticsearchDomainStatus_EBSOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_AccessPolicies *smithy.Schema
-
-var ElasticsearchDomainStatus_SnapshotOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_VPCOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_CognitoOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_EncryptionAtRestOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_NodeToNodeEncryptionOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_AdvancedOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_LogPublishingOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_ServiceSoftwareOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_DomainEndpointOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_AdvancedSecurityOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_AutoTuneOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_ChangeProgressDetails *smithy.Schema
-
-var ElasticsearchDomainStatus_DomainProcessingStatus *smithy.Schema
-
-var ElasticsearchDomainStatus_ModifyingProperties *smithy.Schema
-
-var ElasticsearchDomainStatus_DeploymentStrategyOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_AutomatedSnapshotPauseOptions *smithy.Schema
-
-var ElasticsearchDomainStatus_UseCase *smithy.Schema
-
-var ElasticsearchDomainStatus_EngineMode *smithy.Schema
-
-var _ElasticsearchDomainStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchDomainStatusList",
-}, smithy.ShapeTypeList, 1)
-var _ElasticsearchDomainStatusList_member *smithy.Schema
-
-var _ElasticsearchInstanceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchInstanceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ElasticsearchInstanceTypeList_member *smithy.Schema
-
-var _ElasticsearchVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchVersionList",
-}, smithy.ShapeTypeList, 1)
-var _ElasticsearchVersionList_member *smithy.Schema
-
-var ElasticsearchVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchVersionStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ElasticsearchVersionStatus_Options *smithy.Schema
-
-var ElasticsearchVersionStatus_Status *smithy.Schema
-
-var _ElasticsearchVersionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ElasticsearchVersionString",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionAtRestOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "EncryptionAtRestOptions",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionAtRestOptions_Enabled *smithy.Schema
-
-var EncryptionAtRestOptions_KmsKeyId *smithy.Schema
-
-var EncryptionAtRestOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "EncryptionAtRestOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionAtRestOptionsStatus_Options *smithy.Schema
-
-var EncryptionAtRestOptionsStatus_Status *smithy.Schema
-
-var _Endpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Endpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _EndpointsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "EndpointsMap",
-}, smithy.ShapeTypeMap, 2)
-var _EndpointsMap_key *smithy.Schema
-
-var _EndpointsMap_value *smithy.Schema
-
-var EngineModeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "EngineModeStatus",
-}, smithy.ShapeTypeStructure, 2)
-var EngineModeStatus_Options *smithy.Schema
-
-var EngineModeStatus_Status *smithy.Schema
-
-var EngineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "EngineType",
-}, smithy.ShapeTypeEnum, 2)
-var EngineType_OpenSearch *smithy.Schema
-
-var EngineType_Elasticsearch *smithy.Schema
-
-var ErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetails_ErrorType *smithy.Schema
-
-var ErrorDetails_ErrorMessage *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var ESPartitionInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ESPartitionInstanceType",
-}, smithy.ShapeTypeEnum, 58)
-var ESPartitionInstanceType_m3_medium_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m3_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m3_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m3_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m4_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m4_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m4_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m4_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m4_10xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m5_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m5_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m5_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m5_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_m5_12xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r5_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r5_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r5_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r5_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r5_12xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c5_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c5_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c5_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c5_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c5_9xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c5_18xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_ultrawarm1_medium_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_ultrawarm1_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_t2_micro_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_t2_small_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_t2_medium_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r3_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r3_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r3_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r3_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r3_8xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i2_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i2_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_d2_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_d2_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_d2_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_d2_8xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c4_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c4_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c4_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c4_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_c4_8xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r4_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r4_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r4_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r4_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r4_8xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_r4_16xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i3_large_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i3_xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i3_2xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i3_4xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i3_8xlarge_elasticsearch *smithy.Schema
-
-var ESPartitionInstanceType_i3_16xlarge_elasticsearch *smithy.Schema
-
-var ESWarmPartitionInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ESWarmPartitionInstanceType",
-}, smithy.ShapeTypeEnum, 2)
-var ESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch *smithy.Schema
-
-var ESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Name *smithy.Schema
-
-var Filter_Values *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var _GUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GUID",
-}, smithy.ShapeTypeString, 0)
-
-var _GUIDList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GUIDList",
-}, smithy.ShapeTypeList, 1)
-var _GUIDList_member *smithy.Schema
-
-var _IdentityPoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "IdentityPoolId",
-}, smithy.ShapeTypeString, 0)
-
-var InboundCrossClusterSearchConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InboundCrossClusterSearchConnection",
-}, smithy.ShapeTypeStructure, 4)
-var InboundCrossClusterSearchConnection_SourceDomainInfo *smithy.Schema
-
-var InboundCrossClusterSearchConnection_DestinationDomainInfo *smithy.Schema
-
-var InboundCrossClusterSearchConnection_CrossClusterSearchConnectionId *smithy.Schema
-
-var InboundCrossClusterSearchConnection_ConnectionStatus *smithy.Schema
-
-var _InboundCrossClusterSearchConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InboundCrossClusterSearchConnections",
-}, smithy.ShapeTypeList, 1)
-var _InboundCrossClusterSearchConnections_member *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InboundCrossClusterSearchConnectionStatus",
-}, smithy.ShapeTypeStructure, 2)
-var InboundCrossClusterSearchConnectionStatus_StatusCode *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatus_Message *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InboundCrossClusterSearchConnectionStatusCode",
-}, smithy.ShapeTypeEnum, 6)
-var InboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatusCode_APPROVED *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatusCode_REJECTING *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatusCode_REJECTED *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatusCode_DELETING *smithy.Schema
-
-var InboundCrossClusterSearchConnectionStatusCode_DELETED *smithy.Schema
-
-var InitiatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InitiatedBy",
-}, smithy.ShapeTypeEnum, 2)
-var InitiatedBy_CUSTOMER *smithy.Schema
-
-var InitiatedBy_SERVICE *smithy.Schema
-
-var _InstanceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InstanceCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var InstanceCountLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InstanceCountLimits",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceCountLimits_MinimumInstanceCount *smithy.Schema
-
-var InstanceCountLimits_MaximumInstanceCount *smithy.Schema
-
-var InstanceLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InstanceLimits",
-}, smithy.ShapeTypeStructure, 1)
-var InstanceLimits_InstanceCountLimits *smithy.Schema
-
-var _InstanceRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InstanceRole",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "IntegerClass",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalException_message *smithy.Schema
-
-var InvalidPaginationTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InvalidPaginationTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidPaginationTokenException_message *smithy.Schema
-
-var InvalidTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "InvalidTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var InvalidTypeException_message *smithy.Schema
-
-var _Issue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Issue",
-}, smithy.ShapeTypeString, 0)
-
-var _Issues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Issues",
-}, smithy.ShapeTypeList, 1)
-var _Issues_member *smithy.Schema
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _LastUpdated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LastUpdated",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var LimitExceededException_message *smithy.Schema
-
-var _LimitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LimitName",
-}, smithy.ShapeTypeString, 0)
-
-var Limits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Limits",
-}, smithy.ShapeTypeStructure, 3)
-var Limits_StorageTypes *smithy.Schema
-
-var Limits_InstanceLimits *smithy.Schema
-
-var Limits_AdditionalLimits *smithy.Schema
-
-var _LimitsByRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LimitsByRole",
-}, smithy.ShapeTypeMap, 2)
-var _LimitsByRole_key *smithy.Schema
-
-var _LimitsByRole_value *smithy.Schema
-
-var _LimitValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LimitValue",
-}, smithy.ShapeTypeString, 0)
-
-var _LimitValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LimitValueList",
-}, smithy.ShapeTypeList, 1)
-var _LimitValueList_member *smithy.Schema
-
-var LogPublishingOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LogPublishingOption",
-}, smithy.ShapeTypeStructure, 2)
-var LogPublishingOption_CloudWatchLogsLogGroupArn *smithy.Schema
-
-var LogPublishingOption_Enabled *smithy.Schema
-
-var _LogPublishingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LogPublishingOptions",
-}, smithy.ShapeTypeMap, 2)
-var _LogPublishingOptions_key *smithy.Schema
-
-var _LogPublishingOptions_value *smithy.Schema
-
-var LogPublishingOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LogPublishingOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var LogPublishingOptionsStatus_Options *smithy.Schema
-
-var LogPublishingOptionsStatus_Status *smithy.Schema
-
-var LogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 4)
-var LogType_INDEX_SLOW_LOGS *smithy.Schema
-
-var LogType_SEARCH_SLOW_LOGS *smithy.Schema
-
-var LogType_ES_APPLICATION_LOGS *smithy.Schema
-
-var LogType_AUDIT_LOGS *smithy.Schema
-
-var MasterUserOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "MasterUserOptions",
-}, smithy.ShapeTypeStructure, 3)
-var MasterUserOptions_MasterUserARN *smithy.Schema
-
-var MasterUserOptions_MasterUserName *smithy.Schema
-
-var MasterUserOptions_MasterUserPassword *smithy.Schema
-
-var _MaximumInstanceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "MaximumInstanceCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _MinimumInstanceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "MinimumInstanceCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var ModifyingProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ModifyingProperties",
-}, smithy.ShapeTypeStructure, 4)
-var ModifyingProperties_Name *smithy.Schema
-
-var ModifyingProperties_ActiveValue *smithy.Schema
-
-var ModifyingProperties_PendingValue *smithy.Schema
-
-var ModifyingProperties_ValueType *smithy.Schema
-
-var _ModifyingPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ModifyingPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ModifyingPropertiesList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NodeToNodeEncryptionOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "NodeToNodeEncryptionOptions",
-}, smithy.ShapeTypeStructure, 1)
-var NodeToNodeEncryptionOptions_Enabled *smithy.Schema
-
-var NodeToNodeEncryptionOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "NodeToNodeEncryptionOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var NodeToNodeEncryptionOptionsStatus_Options *smithy.Schema
-
-var NodeToNodeEncryptionOptionsStatus_Status *smithy.Schema
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var OptionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OptionState",
-}, smithy.ShapeTypeEnum, 3)
-var OptionState_RequiresIndexDocuments *smithy.Schema
-
-var OptionState_Processing *smithy.Schema
-
-var OptionState_Active *smithy.Schema
-
-var OptionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OptionStatus",
-}, smithy.ShapeTypeStructure, 5)
-var OptionStatus_CreationDate *smithy.Schema
-
-var OptionStatus_UpdateDate *smithy.Schema
-
-var OptionStatus_UpdateVersion *smithy.Schema
-
-var OptionStatus_State *smithy.Schema
-
-var OptionStatus_PendingDeletion *smithy.Schema
-
-var OutboundCrossClusterSearchConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OutboundCrossClusterSearchConnection",
-}, smithy.ShapeTypeStructure, 5)
-var OutboundCrossClusterSearchConnection_SourceDomainInfo *smithy.Schema
-
-var OutboundCrossClusterSearchConnection_DestinationDomainInfo *smithy.Schema
-
-var OutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId *smithy.Schema
-
-var OutboundCrossClusterSearchConnection_ConnectionAlias *smithy.Schema
-
-var OutboundCrossClusterSearchConnection_ConnectionStatus *smithy.Schema
-
-var _OutboundCrossClusterSearchConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OutboundCrossClusterSearchConnections",
-}, smithy.ShapeTypeList, 1)
-var _OutboundCrossClusterSearchConnections_member *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OutboundCrossClusterSearchConnectionStatus",
-}, smithy.ShapeTypeStructure, 2)
-var OutboundCrossClusterSearchConnectionStatus_StatusCode *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatus_Message *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OutboundCrossClusterSearchConnectionStatusCode",
-}, smithy.ShapeTypeEnum, 8)
-var OutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode_VALIDATING *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode_PROVISIONING *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode_ACTIVE *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode_REJECTED *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode_DELETING *smithy.Schema
-
-var OutboundCrossClusterSearchConnectionStatusCode_DELETED *smithy.Schema
-
-var OverallChangeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OverallChangeStatus",
-}, smithy.ShapeTypeEnum, 4)
-var OverallChangeStatus_PENDING *smithy.Schema
-
-var OverallChangeStatus_PROCESSING *smithy.Schema
-
-var OverallChangeStatus_COMPLETED *smithy.Schema
-
-var OverallChangeStatus_FAILED *smithy.Schema
-
-var _OwnerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "OwnerId",
-}, smithy.ShapeTypeString, 0)
-
-var _PackageDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageDescription",
-}, smithy.ShapeTypeString, 0)
-
-var PackageDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageDetails",
-}, smithy.ShapeTypeStructure, 9)
-var PackageDetails_PackageID *smithy.Schema
-
-var PackageDetails_PackageName *smithy.Schema
-
-var PackageDetails_PackageType *smithy.Schema
-
-var PackageDetails_PackageDescription *smithy.Schema
-
-var PackageDetails_PackageStatus *smithy.Schema
-
-var PackageDetails_CreatedAt *smithy.Schema
-
-var PackageDetails_LastUpdatedAt *smithy.Schema
-
-var PackageDetails_AvailablePackageVersion *smithy.Schema
-
-var PackageDetails_ErrorDetails *smithy.Schema
-
-var _PackageDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _PackageDetailsList_member *smithy.Schema
-
-var _PackageID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageID",
-}, smithy.ShapeTypeString, 0)
-
-var _PackageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageName",
-}, smithy.ShapeTypeString, 0)
-
-var PackageSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageSource",
-}, smithy.ShapeTypeStructure, 2)
-var PackageSource_S3BucketName *smithy.Schema
-
-var PackageSource_S3Key *smithy.Schema
-
-var PackageStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageStatus",
-}, smithy.ShapeTypeEnum, 8)
-var PackageStatus_COPYING *smithy.Schema
-
-var PackageStatus_COPY_FAILED *smithy.Schema
-
-var PackageStatus_VALIDATING *smithy.Schema
-
-var PackageStatus_VALIDATION_FAILED *smithy.Schema
-
-var PackageStatus_AVAILABLE *smithy.Schema
-
-var PackageStatus_DELETING *smithy.Schema
-
-var PackageStatus_DELETED *smithy.Schema
-
-var PackageStatus_DELETE_FAILED *smithy.Schema
-
-var PackageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageType",
-}, smithy.ShapeTypeEnum, 1)
-var PackageType_TXT_DICTIONARY *smithy.Schema
-
-var _PackageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageVersion",
-}, smithy.ShapeTypeString, 0)
-
-var PackageVersionHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageVersionHistory",
-}, smithy.ShapeTypeStructure, 3)
-var PackageVersionHistory_PackageVersion *smithy.Schema
-
-var PackageVersionHistory_CommitMessage *smithy.Schema
-
-var PackageVersionHistory_CreatedAt *smithy.Schema
-
-var _PackageVersionHistoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PackageVersionHistoryList",
-}, smithy.ShapeTypeList, 1)
-var _PackageVersionHistoryList_member *smithy.Schema
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PauseState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PauseState",
-}, smithy.ShapeTypeEnum, 4)
-var PauseState_ACTIVE *smithy.Schema
-
-var PauseState_COMPLETED *smithy.Schema
-
-var PauseState_SCHEDULED *smithy.Schema
-
-var PauseState_DISABLED *smithy.Schema
-
-var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var PrincipalType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PrincipalType",
-}, smithy.ShapeTypeEnum, 2)
-var PrincipalType_AWS_ACCOUNT *smithy.Schema
-
-var PrincipalType_AWS_SERVICE *smithy.Schema
-
-var PropertyValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PropertyValueType",
-}, smithy.ShapeTypeEnum, 2)
-var PropertyValueType_PLAIN_TEXT *smithy.Schema
-
-var PropertyValueType_STRINGIFIED_JSON *smithy.Schema
-
-var RecurringCharge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RecurringCharge",
-}, smithy.ShapeTypeStructure, 2)
-var RecurringCharge_RecurringChargeAmount *smithy.Schema
-
-var RecurringCharge_RecurringChargeFrequency *smithy.Schema
-
-var _RecurringChargeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RecurringChargeList",
-}, smithy.ShapeTypeList, 1)
-var _RecurringChargeList_member *smithy.Schema
-
-var _ReferencePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ReferencePath",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _ReservationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ReservationToken",
-}, smithy.ShapeTypeString, 0)
-
-var ReservedElasticsearchInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ReservedElasticsearchInstance",
-}, smithy.ShapeTypeStructure, 13)
-var ReservedElasticsearchInstance_ReservationName *smithy.Schema
-
-var ReservedElasticsearchInstance_ReservedElasticsearchInstanceId *smithy.Schema
-
-var ReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId *smithy.Schema
-
-var ReservedElasticsearchInstance_ElasticsearchInstanceType *smithy.Schema
-
-var ReservedElasticsearchInstance_StartTime *smithy.Schema
-
-var ReservedElasticsearchInstance_Duration *smithy.Schema
-
-var ReservedElasticsearchInstance_FixedPrice *smithy.Schema
-
-var ReservedElasticsearchInstance_UsagePrice *smithy.Schema
-
-var ReservedElasticsearchInstance_CurrencyCode *smithy.Schema
-
-var ReservedElasticsearchInstance_ElasticsearchInstanceCount *smithy.Schema
-
-var ReservedElasticsearchInstance_State *smithy.Schema
-
-var ReservedElasticsearchInstance_PaymentOption *smithy.Schema
-
-var ReservedElasticsearchInstance_RecurringCharges *smithy.Schema
-
-var _ReservedElasticsearchInstanceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ReservedElasticsearchInstanceList",
-}, smithy.ShapeTypeList, 1)
-var _ReservedElasticsearchInstanceList_member *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ReservedElasticsearchInstanceOffering",
-}, smithy.ShapeTypeStructure, 8)
-var ReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering_ElasticsearchInstanceType *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering_Duration *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering_FixedPrice *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering_UsagePrice *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering_CurrencyCode *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering_PaymentOption *smithy.Schema
-
-var ReservedElasticsearchInstanceOffering_RecurringCharges *smithy.Schema
-
-var _ReservedElasticsearchInstanceOfferingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ReservedElasticsearchInstanceOfferingList",
-}, smithy.ShapeTypeList, 1)
-var _ReservedElasticsearchInstanceOfferingList_member *smithy.Schema
-
-var ReservedElasticsearchInstancePaymentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ReservedElasticsearchInstancePaymentOption",
-}, smithy.ShapeTypeEnum, 3)
-var ReservedElasticsearchInstancePaymentOption_ALL_UPFRONT *smithy.Schema
-
-var ReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT *smithy.Schema
-
-var ReservedElasticsearchInstancePaymentOption_NO_UPFRONT *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceAlreadyExistsException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceNotFoundException_message *smithy.Schema
-
-var RetentionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RetentionAction",
-}, smithy.ShapeTypeEnum, 2)
-var RetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER *smithy.Schema
-
-var RetentionAction_DELETE_PRIMARY_CLUSTER *smithy.Schema
-
-var RetentionOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RetentionOptions",
-}, smithy.ShapeTypeUnion, 2)
-var RetentionOptions_RetentionInHours *smithy.Schema
-
-var RetentionOptions_RetentionAction *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var RollbackOnDisable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RollbackOnDisable",
-}, smithy.ShapeTypeEnum, 2)
-var RollbackOnDisable_NO_ROLLBACK *smithy.Schema
-
-var RollbackOnDisable_DEFAULT_ROLLBACK *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var _SAMLEntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "SAMLEntityId",
-}, smithy.ShapeTypeString, 0)
-
-var SAMLIdp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "SAMLIdp",
-}, smithy.ShapeTypeStructure, 2)
-var SAMLIdp_MetadataContent *smithy.Schema
-
-var SAMLIdp_EntityId *smithy.Schema
-
-var _SAMLMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "SAMLMetadata",
-}, smithy.ShapeTypeString, 0)
-
-var SAMLOptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "SAMLOptionsInput",
-}, smithy.ShapeTypeStructure, 7)
-var SAMLOptionsInput_Enabled *smithy.Schema
-
-var SAMLOptionsInput_Idp *smithy.Schema
-
-var SAMLOptionsInput_MasterUserName *smithy.Schema
-
-var SAMLOptionsInput_MasterBackendRole *smithy.Schema
-
-var SAMLOptionsInput_SubjectKey *smithy.Schema
-
-var SAMLOptionsInput_RolesKey *smithy.Schema
-
-var SAMLOptionsInput_SessionTimeoutMinutes *smithy.Schema
-
-var SAMLOptionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "SAMLOptionsOutput",
-}, smithy.ShapeTypeStructure, 5)
-var SAMLOptionsOutput_Enabled *smithy.Schema
-
-var SAMLOptionsOutput_Idp *smithy.Schema
-
-var SAMLOptionsOutput_SubjectKey *smithy.Schema
-
-var SAMLOptionsOutput_RolesKey *smithy.Schema
-
-var SAMLOptionsOutput_SessionTimeoutMinutes *smithy.Schema
-
-var ScheduledAutoTuneActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ScheduledAutoTuneActionType",
-}, smithy.ShapeTypeEnum, 2)
-var ScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING *smithy.Schema
-
-var ScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING *smithy.Schema
-
-var _ScheduledAutoTuneDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ScheduledAutoTuneDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduledAutoTuneDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ScheduledAutoTuneDetails",
-}, smithy.ShapeTypeStructure, 4)
-var ScheduledAutoTuneDetails_Date *smithy.Schema
-
-var ScheduledAutoTuneDetails_ActionType *smithy.Schema
-
-var ScheduledAutoTuneDetails_Action *smithy.Schema
-
-var ScheduledAutoTuneDetails_Severity *smithy.Schema
-
-var ScheduledAutoTuneSeverityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ScheduledAutoTuneSeverityType",
-}, smithy.ShapeTypeEnum, 3)
-var ScheduledAutoTuneSeverityType_LOW *smithy.Schema
-
-var ScheduledAutoTuneSeverityType_MEDIUM *smithy.Schema
-
-var ScheduledAutoTuneSeverityType_HIGH *smithy.Schema
-
-var ServiceSoftwareOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ServiceSoftwareOptions",
-}, smithy.ShapeTypeStructure, 8)
-var ServiceSoftwareOptions_CurrentVersion *smithy.Schema
-
-var ServiceSoftwareOptions_NewVersion *smithy.Schema
-
-var ServiceSoftwareOptions_UpdateAvailable *smithy.Schema
-
-var ServiceSoftwareOptions_Cancellable *smithy.Schema
-
-var ServiceSoftwareOptions_UpdateStatus *smithy.Schema
-
-var ServiceSoftwareOptions_Description *smithy.Schema
-
-var ServiceSoftwareOptions_AutomatedUpdateDate *smithy.Schema
-
-var ServiceSoftwareOptions_OptionalDeployment *smithy.Schema
-
-var _ServiceUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ServiceUrl",
-}, smithy.ShapeTypeString, 0)
-
-var SnapshotOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "SnapshotOptions",
-}, smithy.ShapeTypeStructure, 1)
-var SnapshotOptions_AutomatedSnapshotStartHour *smithy.Schema
-
-var SnapshotOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "SnapshotOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SnapshotOptionsStatus_Options *smithy.Schema
-
-var SnapshotOptionsStatus_Status *smithy.Schema
-
-var _StartAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StartAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _StartTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StartTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _StorageSubTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StorageSubTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var StorageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StorageType",
-}, smithy.ShapeTypeStructure, 3)
-var StorageType_StorageTypeName *smithy.Schema
-
-var StorageType_StorageSubTypeName *smithy.Schema
-
-var StorageType_StorageTypeLimits *smithy.Schema
-
-var StorageTypeLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StorageTypeLimit",
-}, smithy.ShapeTypeStructure, 2)
-var StorageTypeLimit_LimitName *smithy.Schema
-
-var StorageTypeLimit_LimitValues *smithy.Schema
-
-var _StorageTypeLimitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StorageTypeLimitList",
-}, smithy.ShapeTypeList, 1)
-var _StorageTypeLimitList_member *smithy.Schema
-
-var _StorageTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StorageTypeList",
-}, smithy.ShapeTypeList, 1)
-var _StorageTypeList_member *smithy.Schema
-
-var _StorageTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StorageTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TimeUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TimeUnit",
-}, smithy.ShapeTypeEnum, 1)
-var TimeUnit_HOURS *smithy.Schema
-
-var TLSSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TLSSecurityPolicy",
-}, smithy.ShapeTypeEnum, 4)
-var TLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 *smithy.Schema
-
-var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 *smithy.Schema
-
-var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10 *smithy.Schema
-
-var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08 *smithy.Schema
-
-var _TotalNumberOfStages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TotalNumberOfStages",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TrafficPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TrafficPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var TrafficPercents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TrafficPercents",
-}, smithy.ShapeTypeStructure, 2)
-var TrafficPercents_PrimaryReadTrafficPercent *smithy.Schema
-
-var TrafficPercents_CloneReadTrafficPercent *smithy.Schema
-
-var TrafficSplitOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TrafficSplitOptions",
-}, smithy.ShapeTypeStructure, 3)
-var TrafficSplitOptions_Current *smithy.Schema
-
-var TrafficSplitOptions_Target *smithy.Schema
-
-var TrafficSplitOptions_Status *smithy.Schema
-
-var TrafficSplitRequestOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TrafficSplitRequestOptions",
-}, smithy.ShapeTypeStructure, 2)
-var TrafficSplitRequestOptions_Strategy *smithy.Schema
-
-var TrafficSplitRequestOptions_CloneReadTrafficPercent *smithy.Schema
-
-var TrafficSplitStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TrafficSplitStatus",
-}, smithy.ShapeTypeEnum, 3)
-var TrafficSplitStatus_IN_PROGRESS *smithy.Schema
-
-var TrafficSplitStatus_COMPLETED *smithy.Schema
-
-var TrafficSplitStatus_FAILED *smithy.Schema
-
-var TrafficStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "TrafficStrategy",
-}, smithy.ShapeTypeEnum, 1)
-var TrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT *smithy.Schema
-
-var _UIntValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UIntValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _UpdateTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UpgradeHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeHistory",
-}, smithy.ShapeTypeStructure, 4)
-var UpgradeHistory_UpgradeName *smithy.Schema
-
-var UpgradeHistory_StartTimestamp *smithy.Schema
-
-var UpgradeHistory_UpgradeStatus *smithy.Schema
-
-var UpgradeHistory_StepsList *smithy.Schema
-
-var _UpgradeHistoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeHistoryList",
-}, smithy.ShapeTypeList, 1)
-var _UpgradeHistoryList_member *smithy.Schema
-
-var _UpgradeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeName",
-}, smithy.ShapeTypeString, 0)
-
-var UpgradeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeStatus",
-}, smithy.ShapeTypeEnum, 4)
-var UpgradeStatus_IN_PROGRESS *smithy.Schema
-
-var UpgradeStatus_SUCCEEDED *smithy.Schema
-
-var UpgradeStatus_SUCCEEDED_WITH_ISSUES *smithy.Schema
-
-var UpgradeStatus_FAILED *smithy.Schema
-
-var UpgradeStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeStep",
-}, smithy.ShapeTypeEnum, 3)
-var UpgradeStep_PRE_UPGRADE_CHECK *smithy.Schema
-
-var UpgradeStep_SNAPSHOT *smithy.Schema
-
-var UpgradeStep_UPGRADE *smithy.Schema
-
-var UpgradeStepItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeStepItem",
-}, smithy.ShapeTypeStructure, 4)
-var UpgradeStepItem_UpgradeStep *smithy.Schema
-
-var UpgradeStepItem_UpgradeStepStatus *smithy.Schema
-
-var UpgradeStepItem_Issues *smithy.Schema
-
-var UpgradeStepItem_ProgressPercent *smithy.Schema
-
-var _UpgradeStepsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeStepsList",
-}, smithy.ShapeTypeList, 1)
-var _UpgradeStepsList_member *smithy.Schema
-
-var UseCaseStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UseCaseStatus",
-}, smithy.ShapeTypeStructure, 2)
-var UseCaseStatus_Options *smithy.Schema
-
-var UseCaseStatus_Status *smithy.Schema
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UserPoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UserPoolId",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _ValueStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ValueStringList",
-}, smithy.ShapeTypeList, 1)
-var _ValueStringList_member *smithy.Schema
-
-var VolumeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VolumeType",
-}, smithy.ShapeTypeEnum, 4)
-var VolumeType_standard *smithy.Schema
-
-var VolumeType_gp2 *smithy.Schema
-
-var VolumeType_io1 *smithy.Schema
-
-var VolumeType_gp3 *smithy.Schema
-
-var VPCDerivedInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VPCDerivedInfo",
-}, smithy.ShapeTypeStructure, 4)
-var VPCDerivedInfo_VPCId *smithy.Schema
-
-var VPCDerivedInfo_SubnetIds *smithy.Schema
-
-var VPCDerivedInfo_AvailabilityZones *smithy.Schema
-
-var VPCDerivedInfo_SecurityGroupIds *smithy.Schema
-
-var VPCDerivedInfoStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VPCDerivedInfoStatus",
-}, smithy.ShapeTypeStructure, 2)
-var VPCDerivedInfoStatus_Options *smithy.Schema
-
-var VPCDerivedInfoStatus_Status *smithy.Schema
-
-var VpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpoint",
-}, smithy.ShapeTypeStructure, 6)
-var VpcEndpoint_VpcEndpointId *smithy.Schema
-
-var VpcEndpoint_VpcEndpointOwner *smithy.Schema
-
-var VpcEndpoint_DomainArn *smithy.Schema
-
-var VpcEndpoint_VpcOptions *smithy.Schema
-
-var VpcEndpoint_Status *smithy.Schema
-
-var VpcEndpoint_Endpoint *smithy.Schema
-
-var VpcEndpointError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointError",
-}, smithy.ShapeTypeStructure, 3)
-var VpcEndpointError_VpcEndpointId *smithy.Schema
-
-var VpcEndpointError_ErrorCode *smithy.Schema
-
-var VpcEndpointError_ErrorMessage *smithy.Schema
-
-var VpcEndpointErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointErrorCode",
-}, smithy.ShapeTypeEnum, 2)
-var VpcEndpointErrorCode_ENDPOINT_NOT_FOUND *smithy.Schema
-
-var VpcEndpointErrorCode_SERVER_ERROR *smithy.Schema
-
-var _VpcEndpointErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointErrorList",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpointErrorList_member *smithy.Schema
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcEndpointIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointIdList",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpointIdList_member *smithy.Schema
-
-var _VpcEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpoints",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpoints_member *smithy.Schema
-
-var VpcEndpointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointStatus",
-}, smithy.ShapeTypeEnum, 7)
-var VpcEndpointStatus_CREATING *smithy.Schema
-
-var VpcEndpointStatus_CREATE_FAILED *smithy.Schema
-
-var VpcEndpointStatus_ACTIVE *smithy.Schema
-
-var VpcEndpointStatus_UPDATING *smithy.Schema
-
-var VpcEndpointStatus_UPDATE_FAILED *smithy.Schema
-
-var VpcEndpointStatus_DELETING *smithy.Schema
-
-var VpcEndpointStatus_DELETE_FAILED *smithy.Schema
-
-var VpcEndpointSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointSummary",
-}, smithy.ShapeTypeStructure, 4)
-var VpcEndpointSummary_VpcEndpointId *smithy.Schema
-
-var VpcEndpointSummary_VpcEndpointOwner *smithy.Schema
-
-var VpcEndpointSummary_DomainArn *smithy.Schema
-
-var VpcEndpointSummary_Status *smithy.Schema
-
-var _VpcEndpointSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VpcEndpointSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpointSummaryList_member *smithy.Schema
-
-var VPCOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "VPCOptions",
-}, smithy.ShapeTypeStructure, 2)
-var VPCOptions_SubnetIds *smithy.Schema
-
-var VPCOptions_SecurityGroupIds *smithy.Schema
-
-var ZoneAwarenessConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ZoneAwarenessConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ZoneAwarenessConfig_AvailabilityZoneCount *smithy.Schema
-
-var AcceptInboundCrossClusterSearchConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AcceptInboundCrossClusterSearchConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId *smithy.Schema
-
-var AcceptInboundCrossClusterSearchConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AcceptInboundCrossClusterSearchConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection *smithy.Schema
-
-var AddTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AddTagsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsRequest_ARN *smithy.Schema
-
-var AddTagsRequest_TagList *smithy.Schema
-
-var AssociatePackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AssociatePackageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociatePackageRequest_PackageID *smithy.Schema
-
-var AssociatePackageRequest_DomainName *smithy.Schema
-
-var AssociatePackageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AssociatePackageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociatePackageResponse_DomainPackageDetails *smithy.Schema
-
-var AuthorizeVpcEndpointAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AuthorizeVpcEndpointAccessRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AuthorizeVpcEndpointAccessRequest_DomainName *smithy.Schema
-
-var AuthorizeVpcEndpointAccessRequest_Account *smithy.Schema
-
-var AuthorizeVpcEndpointAccessResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "AuthorizeVpcEndpointAccessResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal *smithy.Schema
-
-var CancelDomainConfigChangeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelDomainConfigChangeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelDomainConfigChangeRequest_DomainName *smithy.Schema
-
-var CancelDomainConfigChangeRequest_DryRun *smithy.Schema
-
-var CancelDomainConfigChangeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelDomainConfigChangeResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CancelDomainConfigChangeResponse_DryRun *smithy.Schema
-
-var CancelDomainConfigChangeResponse_CancelledChangeIds *smithy.Schema
-
-var CancelDomainConfigChangeResponse_CancelledChangeProperties *smithy.Schema
-
-var CancelElasticsearchServiceSoftwareUpdateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelElasticsearchServiceSoftwareUpdateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelElasticsearchServiceSoftwareUpdateRequest_DomainName *smithy.Schema
-
-var CancelElasticsearchServiceSoftwareUpdateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CancelElasticsearchServiceSoftwareUpdateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateElasticsearchDomainRequest",
-}, smithy.ShapeTypeStructure, 20)
-var CreateElasticsearchDomainRequest_DomainName *smithy.Schema
-
-var CreateElasticsearchDomainRequest_ElasticsearchVersion *smithy.Schema
-
-var CreateElasticsearchDomainRequest_ElasticsearchClusterConfig *smithy.Schema
-
-var CreateElasticsearchDomainRequest_EBSOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_AccessPolicies *smithy.Schema
-
-var CreateElasticsearchDomainRequest_SnapshotOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_VPCOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_CognitoOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_EncryptionAtRestOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_AdvancedOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_LogPublishingOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_DomainEndpointOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_AdvancedSecurityOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_AutoTuneOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_TagList *smithy.Schema
-
-var CreateElasticsearchDomainRequest_DeploymentStrategyOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions *smithy.Schema
-
-var CreateElasticsearchDomainRequest_UseCase *smithy.Schema
-
-var CreateElasticsearchDomainRequest_EngineMode *smithy.Schema
-
-var CreateElasticsearchDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateElasticsearchDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateElasticsearchDomainResponse_DomainStatus *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateOutboundCrossClusterSearchConnectionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateOutboundCrossClusterSearchConnectionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus *smithy.Schema
-
-var CreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId *smithy.Schema
-
-var CreatePackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreatePackageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePackageRequest_PackageName *smithy.Schema
-
-var CreatePackageRequest_PackageType *smithy.Schema
-
-var CreatePackageRequest_PackageDescription *smithy.Schema
-
-var CreatePackageRequest_PackageSource *smithy.Schema
-
-var CreatePackageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreatePackageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePackageResponse_PackageDetails *smithy.Schema
-
-var CreateVpcEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateVpcEndpointRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateVpcEndpointRequest_DomainArn *smithy.Schema
-
-var CreateVpcEndpointRequest_VpcOptions *smithy.Schema
-
-var CreateVpcEndpointRequest_ClientToken *smithy.Schema
-
-var CreateVpcEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "CreateVpcEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVpcEndpointResponse_VpcEndpoint *smithy.Schema
-
-var DeleteElasticsearchDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteElasticsearchDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteElasticsearchDomainRequest_DomainName *smithy.Schema
-
-var DeleteElasticsearchDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteElasticsearchDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteElasticsearchDomainResponse_DomainStatus *smithy.Schema
-
-var DeleteInboundCrossClusterSearchConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteInboundCrossClusterSearchConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId *smithy.Schema
-
-var DeleteInboundCrossClusterSearchConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteInboundCrossClusterSearchConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection *smithy.Schema
-
-var DeleteOutboundCrossClusterSearchConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteOutboundCrossClusterSearchConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId *smithy.Schema
-
-var DeleteOutboundCrossClusterSearchConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteOutboundCrossClusterSearchConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection *smithy.Schema
-
-var DeletePackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeletePackageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePackageRequest_PackageID *smithy.Schema
-
-var DeletePackageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeletePackageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePackageResponse_PackageDetails *smithy.Schema
-
-var DeleteVpcEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteVpcEndpointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcEndpointRequest_VpcEndpointId *smithy.Schema
-
-var DeleteVpcEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DeleteVpcEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcEndpointResponse_VpcEndpointSummary *smithy.Schema
-
-var DescribeDomainAutoTunesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeDomainAutoTunesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeDomainAutoTunesRequest_DomainName *smithy.Schema
-
-var DescribeDomainAutoTunesRequest_MaxResults *smithy.Schema
-
-var DescribeDomainAutoTunesRequest_NextToken *smithy.Schema
-
-var DescribeDomainAutoTunesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeDomainAutoTunesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDomainAutoTunesResponse_AutoTunes *smithy.Schema
-
-var DescribeDomainAutoTunesResponse_NextToken *smithy.Schema
-
-var DescribeDomainChangeProgressRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeDomainChangeProgressRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDomainChangeProgressRequest_DomainName *smithy.Schema
-
-var DescribeDomainChangeProgressRequest_ChangeId *smithy.Schema
-
-var DescribeDomainChangeProgressResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeDomainChangeProgressResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainChangeProgressResponse_ChangeProgressStatus *smithy.Schema
-
-var DescribeElasticsearchDomainConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomainConfigRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeElasticsearchDomainConfigRequest_DomainName *smithy.Schema
-
-var DescribeElasticsearchDomainConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomainConfigResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeElasticsearchDomainConfigResponse_DomainConfig *smithy.Schema
-
-var DescribeElasticsearchDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeElasticsearchDomainRequest_DomainName *smithy.Schema
-
-var DescribeElasticsearchDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeElasticsearchDomainResponse_DomainStatus *smithy.Schema
-
-var DescribeElasticsearchDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomainsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeElasticsearchDomainsRequest_DomainNames *smithy.Schema
-
-var DescribeElasticsearchDomainsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchDomainsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeElasticsearchDomainsResponse_DomainStatusList *smithy.Schema
-
-var DescribeElasticsearchInstanceTypeLimitsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchInstanceTypeLimitsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeElasticsearchInstanceTypeLimitsRequest_DomainName *smithy.Schema
-
-var DescribeElasticsearchInstanceTypeLimitsRequest_InstanceType *smithy.Schema
-
-var DescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion *smithy.Schema
-
-var DescribeElasticsearchInstanceTypeLimitsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeElasticsearchInstanceTypeLimitsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole *smithy.Schema
-
-var DescribeInboundCrossClusterSearchConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeInboundCrossClusterSearchConnectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeInboundCrossClusterSearchConnectionsRequest_Filters *smithy.Schema
-
-var DescribeInboundCrossClusterSearchConnectionsRequest_MaxResults *smithy.Schema
-
-var DescribeInboundCrossClusterSearchConnectionsRequest_NextToken *smithy.Schema
-
-var DescribeInboundCrossClusterSearchConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeInboundCrossClusterSearchConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections *smithy.Schema
-
-var DescribeInboundCrossClusterSearchConnectionsResponse_NextToken *smithy.Schema
-
-var DescribeOutboundCrossClusterSearchConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeOutboundCrossClusterSearchConnectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeOutboundCrossClusterSearchConnectionsRequest_Filters *smithy.Schema
-
-var DescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults *smithy.Schema
-
-var DescribeOutboundCrossClusterSearchConnectionsRequest_NextToken *smithy.Schema
-
-var DescribeOutboundCrossClusterSearchConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeOutboundCrossClusterSearchConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections *smithy.Schema
-
-var DescribeOutboundCrossClusterSearchConnectionsResponse_NextToken *smithy.Schema
-
-var DescribePackagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackagesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribePackagesRequest_Filters *smithy.Schema
-
-var DescribePackagesRequest_MaxResults *smithy.Schema
-
-var DescribePackagesRequest_NextToken *smithy.Schema
-
-var DescribePackagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribePackagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribePackagesResponse_PackageDetailsList *smithy.Schema
-
-var DescribePackagesResponse_NextToken *smithy.Schema
-
-var DescribeReservedElasticsearchInstanceOfferingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeReservedElasticsearchInstanceOfferingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId *smithy.Schema
-
-var DescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults *smithy.Schema
-
-var DescribeReservedElasticsearchInstanceOfferingsRequest_NextToken *smithy.Schema
-
-var DescribeReservedElasticsearchInstanceOfferingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeReservedElasticsearchInstanceOfferingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeReservedElasticsearchInstanceOfferingsResponse_NextToken *smithy.Schema
-
-var DescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings *smithy.Schema
-
-var DescribeReservedElasticsearchInstancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeReservedElasticsearchInstancesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId *smithy.Schema
-
-var DescribeReservedElasticsearchInstancesRequest_MaxResults *smithy.Schema
-
-var DescribeReservedElasticsearchInstancesRequest_NextToken *smithy.Schema
-
-var DescribeReservedElasticsearchInstancesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeReservedElasticsearchInstancesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeReservedElasticsearchInstancesResponse_NextToken *smithy.Schema
-
-var DescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances *smithy.Schema
-
-var DescribeVpcEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeVpcEndpointsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVpcEndpointsRequest_VpcEndpointIds *smithy.Schema
-
-var DescribeVpcEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DescribeVpcEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeVpcEndpointsResponse_VpcEndpoints *smithy.Schema
-
-var DescribeVpcEndpointsResponse_VpcEndpointErrors *smithy.Schema
-
-var DissociatePackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DissociatePackageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DissociatePackageRequest_PackageID *smithy.Schema
-
-var DissociatePackageRequest_DomainName *smithy.Schema
-
-var DissociatePackageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "DissociatePackageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DissociatePackageResponse_DomainPackageDetails *smithy.Schema
-
-var GetCompatibleElasticsearchVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetCompatibleElasticsearchVersionsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCompatibleElasticsearchVersionsRequest_DomainName *smithy.Schema
-
-var GetCompatibleElasticsearchVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetCompatibleElasticsearchVersionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions *smithy.Schema
-
-var GetPackageVersionHistoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetPackageVersionHistoryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetPackageVersionHistoryRequest_PackageID *smithy.Schema
-
-var GetPackageVersionHistoryRequest_MaxResults *smithy.Schema
-
-var GetPackageVersionHistoryRequest_NextToken *smithy.Schema
-
-var GetPackageVersionHistoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetPackageVersionHistoryResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetPackageVersionHistoryResponse_PackageID *smithy.Schema
-
-var GetPackageVersionHistoryResponse_PackageVersionHistoryList *smithy.Schema
-
-var GetPackageVersionHistoryResponse_NextToken *smithy.Schema
-
-var GetUpgradeHistoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetUpgradeHistoryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetUpgradeHistoryRequest_DomainName *smithy.Schema
-
-var GetUpgradeHistoryRequest_MaxResults *smithy.Schema
-
-var GetUpgradeHistoryRequest_NextToken *smithy.Schema
-
-var GetUpgradeHistoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetUpgradeHistoryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetUpgradeHistoryResponse_UpgradeHistories *smithy.Schema
-
-var GetUpgradeHistoryResponse_NextToken *smithy.Schema
-
-var GetUpgradeStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetUpgradeStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetUpgradeStatusRequest_DomainName *smithy.Schema
-
-var GetUpgradeStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "GetUpgradeStatusResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetUpgradeStatusResponse_UpgradeStep *smithy.Schema
-
-var GetUpgradeStatusResponse_StepStatus *smithy.Schema
-
-var GetUpgradeStatusResponse_UpgradeName *smithy.Schema
-
-var ListDomainNamesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListDomainNamesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListDomainNamesRequest_EngineType *smithy.Schema
-
-var ListDomainNamesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListDomainNamesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListDomainNamesResponse_DomainNames *smithy.Schema
-
-var ListDomainsForPackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListDomainsForPackageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDomainsForPackageRequest_PackageID *smithy.Schema
-
-var ListDomainsForPackageRequest_MaxResults *smithy.Schema
-
-var ListDomainsForPackageRequest_NextToken *smithy.Schema
-
-var ListDomainsForPackageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListDomainsForPackageResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsForPackageResponse_DomainPackageDetailsList *smithy.Schema
-
-var ListDomainsForPackageResponse_NextToken *smithy.Schema
-
-var ListElasticsearchInstanceTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListElasticsearchInstanceTypesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListElasticsearchInstanceTypesRequest_ElasticsearchVersion *smithy.Schema
-
-var ListElasticsearchInstanceTypesRequest_DomainName *smithy.Schema
-
-var ListElasticsearchInstanceTypesRequest_MaxResults *smithy.Schema
-
-var ListElasticsearchInstanceTypesRequest_NextToken *smithy.Schema
-
-var ListElasticsearchInstanceTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListElasticsearchInstanceTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes *smithy.Schema
-
-var ListElasticsearchInstanceTypesResponse_NextToken *smithy.Schema
-
-var ListElasticsearchVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListElasticsearchVersionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListElasticsearchVersionsRequest_MaxResults *smithy.Schema
-
-var ListElasticsearchVersionsRequest_NextToken *smithy.Schema
-
-var ListElasticsearchVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListElasticsearchVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListElasticsearchVersionsResponse_ElasticsearchVersions *smithy.Schema
-
-var ListElasticsearchVersionsResponse_NextToken *smithy.Schema
-
-var ListPackagesForDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListPackagesForDomainRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPackagesForDomainRequest_DomainName *smithy.Schema
-
-var ListPackagesForDomainRequest_MaxResults *smithy.Schema
-
-var ListPackagesForDomainRequest_NextToken *smithy.Schema
-
-var ListPackagesForDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListPackagesForDomainResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPackagesForDomainResponse_DomainPackageDetailsList *smithy.Schema
-
-var ListPackagesForDomainResponse_NextToken *smithy.Schema
-
-var ListTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListTagsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsRequest_ARN *smithy.Schema
-
-var ListTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListTagsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsResponse_TagList *smithy.Schema
-
-var ListVpcEndpointAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointAccessRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcEndpointAccessRequest_DomainName *smithy.Schema
-
-var ListVpcEndpointAccessRequest_NextToken *smithy.Schema
-
-var ListVpcEndpointAccessResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointAccessResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcEndpointAccessResponse_AuthorizedPrincipalList *smithy.Schema
-
-var ListVpcEndpointAccessResponse_NextToken *smithy.Schema
-
-var ListVpcEndpointsForDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointsForDomainRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcEndpointsForDomainRequest_DomainName *smithy.Schema
-
-var ListVpcEndpointsForDomainRequest_NextToken *smithy.Schema
-
-var ListVpcEndpointsForDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointsForDomainResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList *smithy.Schema
-
-var ListVpcEndpointsForDomainResponse_NextToken *smithy.Schema
-
-var ListVpcEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListVpcEndpointsRequest_NextToken *smithy.Schema
-
-var ListVpcEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "ListVpcEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcEndpointsResponse_VpcEndpointSummaryList *smithy.Schema
-
-var ListVpcEndpointsResponse_NextToken *smithy.Schema
-
-var PurchaseReservedElasticsearchInstanceOfferingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PurchaseReservedElasticsearchInstanceOfferingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId *smithy.Schema
-
-var PurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName *smithy.Schema
-
-var PurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount *smithy.Schema
-
-var PurchaseReservedElasticsearchInstanceOfferingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "PurchaseReservedElasticsearchInstanceOfferingResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId *smithy.Schema
-
-var PurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName *smithy.Schema
-
-var RejectInboundCrossClusterSearchConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RejectInboundCrossClusterSearchConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId *smithy.Schema
-
-var RejectInboundCrossClusterSearchConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RejectInboundCrossClusterSearchConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection *smithy.Schema
-
-var RemoveTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RemoveTagsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsRequest_ARN *smithy.Schema
-
-var RemoveTagsRequest_TagKeys *smithy.Schema
-
-var RevokeVpcEndpointAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RevokeVpcEndpointAccessRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RevokeVpcEndpointAccessRequest_DomainName *smithy.Schema
-
-var RevokeVpcEndpointAccessRequest_Account *smithy.Schema
-
-var RevokeVpcEndpointAccessResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "RevokeVpcEndpointAccessResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartElasticsearchServiceSoftwareUpdateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StartElasticsearchServiceSoftwareUpdateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartElasticsearchServiceSoftwareUpdateRequest_DomainName *smithy.Schema
-
-var StartElasticsearchServiceSoftwareUpdateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "StartElasticsearchServiceSoftwareUpdateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions *smithy.Schema
-
-var UpdateCloneRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateCloneRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCloneRequest_DomainName *smithy.Schema
-
-var UpdateCloneRequest_TrafficSplitOptions *smithy.Schema
-
-var UpdateCloneRequest_CutoverOptions *smithy.Schema
-
-var UpdateCloneRequest_RetentionOptions *smithy.Schema
-
-var UpdateCloneResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateCloneResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateCloneResponse_DomainName *smithy.Schema
-
-var UpdateCloneResponse_ChangeId *smithy.Schema
-
-var UpdateCloneResponse_CutoverOptions *smithy.Schema
-
-var UpdateCloneResponse_TrafficSplitOptions *smithy.Schema
-
-var UpdateCloneResponse_RetentionOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateElasticsearchDomainConfigRequest",
-}, smithy.ShapeTypeStructure, 19)
-var UpdateElasticsearchDomainConfigRequest_DomainName *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_EBSOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_SnapshotOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_VPCOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_CognitoOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_AdvancedOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_AccessPolicies *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_LogPublishingOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_DomainEndpointOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_AutoTuneOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_DryRun *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_UseCase *smithy.Schema
-
-var UpdateElasticsearchDomainConfigRequest_EngineMode *smithy.Schema
-
-var UpdateElasticsearchDomainConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateElasticsearchDomainConfigResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateElasticsearchDomainConfigResponse_DomainConfig *smithy.Schema
-
-var UpdateElasticsearchDomainConfigResponse_DryRunResults *smithy.Schema
-
-var UpdatePackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdatePackageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePackageRequest_PackageID *smithy.Schema
-
-var UpdatePackageRequest_PackageSource *smithy.Schema
-
-var UpdatePackageRequest_PackageDescription *smithy.Schema
-
-var UpdatePackageRequest_CommitMessage *smithy.Schema
-
-var UpdatePackageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdatePackageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePackageResponse_PackageDetails *smithy.Schema
-
-var UpdateVpcEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateVpcEndpointRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVpcEndpointRequest_VpcEndpointId *smithy.Schema
-
-var UpdateVpcEndpointRequest_VpcOptions *smithy.Schema
-
-var UpdateVpcEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpdateVpcEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVpcEndpointResponse_VpcEndpoint *smithy.Schema
-
-var UpgradeElasticsearchDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeElasticsearchDomainRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpgradeElasticsearchDomainRequest_DomainName *smithy.Schema
-
-var UpgradeElasticsearchDomainRequest_TargetVersion *smithy.Schema
-
-var UpgradeElasticsearchDomainRequest_PerformCheckOnly *smithy.Schema
-
-var UpgradeElasticsearchDomainRequest_DeploymentStrategyOptions *smithy.Schema
-
-var UpgradeElasticsearchDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticsearchservice",
-	Name:      "UpgradeElasticsearchDomainResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpgradeElasticsearchDomainResponse_DomainName *smithy.Schema
-
-var UpgradeElasticsearchDomainResponse_TargetVersion *smithy.Schema
-
-var UpgradeElasticsearchDomainResponse_PerformCheckOnly *smithy.Schema
-
-var UpgradeElasticsearchDomainResponse_DeploymentStrategyOptions *smithy.Schema
-
-var UpgradeElasticsearchDomainResponse_ChangeProgressDetails *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	OptionState_RequiresIndexDocuments = OptionState.AddMember("RequiresIndexDocuments", smithyprelude.Unit)
-
-	OptionState_Processing = OptionState.AddMember("Processing", smithyprelude.Unit)
-
-	OptionState_Active = OptionState.AddMember("Active", smithyprelude.Unit)
-
-	OptionStatus_CreationDate = OptionStatus.AddMember("CreationDate", _UpdateTimestamp)
-
-	OptionStatus_UpdateDate = OptionStatus.AddMember("UpdateDate", _UpdateTimestamp)
-
-	OptionStatus_UpdateVersion = OptionStatus.AddMember("UpdateVersion", _UIntValue)
-
-	OptionStatus_State = OptionStatus.AddMember("State", OptionState)
-
-	OptionStatus_PendingDeletion = OptionStatus.AddMember("PendingDeletion", _Boolean)
-
-	AccessPoliciesStatus_Options = AccessPoliciesStatus.AddMember("Options", _PolicyDocument)
-
-	AccessPoliciesStatus_Status = AccessPoliciesStatus.AddMember("Status", OptionStatus)
-
-	_LimitValueList_member = _LimitValueList.AddMember("member", _LimitValue)
-
-	AdditionalLimit_LimitName = AdditionalLimit.AddMember("LimitName", _LimitName)
-
-	AdditionalLimit_LimitValues = AdditionalLimit.AddMember("LimitValues", _LimitValueList)
-
-	_AdditionalLimitList_member = _AdditionalLimitList.AddMember("member", AdditionalLimit)
-
-	_AdvancedOptions_key = _AdvancedOptions.AddMember("key", _String)
-
-	_AdvancedOptions_value = _AdvancedOptions.AddMember("value", _String)
-
-	AdvancedOptionsStatus_Options = AdvancedOptionsStatus.AddMember("Options", _AdvancedOptions)
-
-	AdvancedOptionsStatus_Status = AdvancedOptionsStatus.AddMember("Status", OptionStatus)
-
-	SAMLIdp_MetadataContent = SAMLIdp.AddMember("MetadataContent", _SAMLMetadata)
-
-	SAMLIdp_EntityId = SAMLIdp.AddMember("EntityId", _SAMLEntityId)
-
-	SAMLOptionsOutput_Enabled = SAMLOptionsOutput.AddMember("Enabled", _Boolean)
-
-	SAMLOptionsOutput_Idp = SAMLOptionsOutput.AddMember("Idp", SAMLIdp)
-
-	SAMLOptionsOutput_SubjectKey = SAMLOptionsOutput.AddMember("SubjectKey", _String)
-
-	SAMLOptionsOutput_RolesKey = SAMLOptionsOutput.AddMember("RolesKey", _String)
-
-	SAMLOptionsOutput_SessionTimeoutMinutes = SAMLOptionsOutput.AddMember("SessionTimeoutMinutes", _IntegerClass)
-
-	AdvancedSecurityOptions_Enabled = AdvancedSecurityOptions.AddMember("Enabled", _Boolean)
-
-	AdvancedSecurityOptions_InternalUserDatabaseEnabled = AdvancedSecurityOptions.AddMember("InternalUserDatabaseEnabled", _Boolean)
-
-	AdvancedSecurityOptions_SAMLOptions = AdvancedSecurityOptions.AddMember("SAMLOptions", SAMLOptionsOutput)
-
-	AdvancedSecurityOptions_AnonymousAuthDisableDate = AdvancedSecurityOptions.AddMember("AnonymousAuthDisableDate", _DisableTimestamp)
-
-	AdvancedSecurityOptions_AnonymousAuthEnabled = AdvancedSecurityOptions.AddMember("AnonymousAuthEnabled", _Boolean)
-
-	MasterUserOptions_MasterUserARN = MasterUserOptions.AddMember("MasterUserARN", _ARN)
-
-	MasterUserOptions_MasterUserName = MasterUserOptions.AddMember("MasterUserName", _Username)
-
-	MasterUserOptions_MasterUserPassword = MasterUserOptions.AddMember("MasterUserPassword", _Password)
-
-	SAMLOptionsInput_Enabled = SAMLOptionsInput.AddMember("Enabled", _Boolean)
-
-	SAMLOptionsInput_Idp = SAMLOptionsInput.AddMember("Idp", SAMLIdp)
-
-	SAMLOptionsInput_MasterUserName = SAMLOptionsInput.AddMember("MasterUserName", _Username)
-
-	SAMLOptionsInput_MasterBackendRole = SAMLOptionsInput.AddMember("MasterBackendRole", _BackendRole)
-
-	SAMLOptionsInput_SubjectKey = SAMLOptionsInput.AddMember("SubjectKey", _String)
-
-	SAMLOptionsInput_RolesKey = SAMLOptionsInput.AddMember("RolesKey", _String)
-
-	SAMLOptionsInput_SessionTimeoutMinutes = SAMLOptionsInput.AddMember("SessionTimeoutMinutes", _IntegerClass)
-
-	AdvancedSecurityOptionsInput_Enabled = AdvancedSecurityOptionsInput.AddMember("Enabled", _Boolean)
-
-	AdvancedSecurityOptionsInput_InternalUserDatabaseEnabled = AdvancedSecurityOptionsInput.AddMember("InternalUserDatabaseEnabled", _Boolean)
-
-	AdvancedSecurityOptionsInput_MasterUserOptions = AdvancedSecurityOptionsInput.AddMember("MasterUserOptions", MasterUserOptions)
-
-	AdvancedSecurityOptionsInput_SAMLOptions = AdvancedSecurityOptionsInput.AddMember("SAMLOptions", SAMLOptionsInput)
-
-	AdvancedSecurityOptionsInput_AnonymousAuthEnabled = AdvancedSecurityOptionsInput.AddMember("AnonymousAuthEnabled", _Boolean)
-
-	AdvancedSecurityOptionsStatus_Options = AdvancedSecurityOptionsStatus.AddMember("Options", AdvancedSecurityOptions)
-
-	AdvancedSecurityOptionsStatus_Status = AdvancedSecurityOptionsStatus.AddMember("Status", OptionStatus)
-
-	PrincipalType_AWS_ACCOUNT = PrincipalType.AddMember("AWS_ACCOUNT", smithyprelude.Unit)
-
-	PrincipalType_AWS_SERVICE = PrincipalType.AddMember("AWS_SERVICE", smithyprelude.Unit)
-
-	AuthorizedPrincipal_PrincipalType = AuthorizedPrincipal.AddMember("PrincipalType", PrincipalType)
-
-	AuthorizedPrincipal_Principal = AuthorizedPrincipal.AddMember("Principal", _String)
-
-	_AuthorizedPrincipalList_member = _AuthorizedPrincipalList.AddMember("member", AuthorizedPrincipal)
-
-	PauseState_ACTIVE = PauseState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	PauseState_COMPLETED = PauseState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	PauseState_SCHEDULED = PauseState.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	PauseState_DISABLED = PauseState.AddMember("DISABLED", smithyprelude.Unit)
-
-	AutomatedSnapshotPauseOptions_Enabled = AutomatedSnapshotPauseOptions.AddMember("Enabled", _Boolean)
-
-	AutomatedSnapshotPauseOptions_StartTime = AutomatedSnapshotPauseOptions.AddMember("StartTime", _UpdateTimestamp)
-
-	AutomatedSnapshotPauseOptions_EndTime = AutomatedSnapshotPauseOptions.AddMember("EndTime", _UpdateTimestamp)
-
-	AutomatedSnapshotPauseOptions_State = AutomatedSnapshotPauseOptions.AddMember("State", PauseState)
-
-	AutomatedSnapshotPauseOptionsStatus_Options = AutomatedSnapshotPauseOptionsStatus.AddMember("Options", AutomatedSnapshotPauseOptions)
-
-	AutomatedSnapshotPauseOptionsStatus_Status = AutomatedSnapshotPauseOptionsStatus.AddMember("Status", OptionStatus)
-
-	AutomatedSnapshotPauseRequestOptions_Enabled = AutomatedSnapshotPauseRequestOptions.AddMember("Enabled", _Boolean)
-
-	AutomatedSnapshotPauseRequestOptions_StartTime = AutomatedSnapshotPauseRequestOptions.AddMember("StartTime", _UpdateTimestamp)
-
-	AutomatedSnapshotPauseRequestOptions_EndTime = AutomatedSnapshotPauseRequestOptions.AddMember("EndTime", _UpdateTimestamp)
-
-	AutoTuneType_SCHEDULED_ACTION = AutoTuneType.AddMember("SCHEDULED_ACTION", smithyprelude.Unit)
-
-	ScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING = ScheduledAutoTuneActionType.AddMember("JVM_HEAP_SIZE_TUNING", smithyprelude.Unit)
-
-	ScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING = ScheduledAutoTuneActionType.AddMember("JVM_YOUNG_GEN_TUNING", smithyprelude.Unit)
-
-	ScheduledAutoTuneSeverityType_LOW = ScheduledAutoTuneSeverityType.AddMember("LOW", smithyprelude.Unit)
-
-	ScheduledAutoTuneSeverityType_MEDIUM = ScheduledAutoTuneSeverityType.AddMember("MEDIUM", smithyprelude.Unit)
-
-	ScheduledAutoTuneSeverityType_HIGH = ScheduledAutoTuneSeverityType.AddMember("HIGH", smithyprelude.Unit)
-
-	ScheduledAutoTuneDetails_Date = ScheduledAutoTuneDetails.AddMember("Date", _AutoTuneDate)
-
-	ScheduledAutoTuneDetails_ActionType = ScheduledAutoTuneDetails.AddMember("ActionType", ScheduledAutoTuneActionType)
-
-	ScheduledAutoTuneDetails_Action = ScheduledAutoTuneDetails.AddMember("Action", _ScheduledAutoTuneDescription)
-
-	ScheduledAutoTuneDetails_Severity = ScheduledAutoTuneDetails.AddMember("Severity", ScheduledAutoTuneSeverityType)
-
-	AutoTuneDetails_ScheduledAutoTuneDetails = AutoTuneDetails.AddMember("ScheduledAutoTuneDetails", ScheduledAutoTuneDetails)
-
-	AutoTune_AutoTuneType = AutoTune.AddMember("AutoTuneType", AutoTuneType)
-
-	AutoTune_AutoTuneDetails = AutoTune.AddMember("AutoTuneDetails", AutoTuneDetails)
-
-	AutoTuneDesiredState_ENABLED = AutoTuneDesiredState.AddMember("ENABLED", smithyprelude.Unit)
-
-	AutoTuneDesiredState_DISABLED = AutoTuneDesiredState.AddMember("DISABLED", smithyprelude.Unit)
-
-	_AutoTuneList_member = _AutoTuneList.AddMember("member", AutoTune)
-
-	TimeUnit_HOURS = TimeUnit.AddMember("HOURS", smithyprelude.Unit)
-
-	Duration_Value = Duration.AddMember("Value", _DurationValue)
-
-	Duration_Unit = Duration.AddMember("Unit", TimeUnit)
-
-	AutoTuneMaintenanceSchedule_StartAt = AutoTuneMaintenanceSchedule.AddMember("StartAt", _StartAt)
-
-	AutoTuneMaintenanceSchedule_Duration = AutoTuneMaintenanceSchedule.AddMember("Duration", Duration)
-
-	AutoTuneMaintenanceSchedule_CronExpressionForRecurrence = AutoTuneMaintenanceSchedule.AddMember("CronExpressionForRecurrence", _String)
-
-	_AutoTuneMaintenanceScheduleList_member = _AutoTuneMaintenanceScheduleList.AddMember("member", AutoTuneMaintenanceSchedule)
-
-	RollbackOnDisable_NO_ROLLBACK = RollbackOnDisable.AddMember("NO_ROLLBACK", smithyprelude.Unit)
-
-	RollbackOnDisable_DEFAULT_ROLLBACK = RollbackOnDisable.AddMember("DEFAULT_ROLLBACK", smithyprelude.Unit)
-
-	AutoTuneOptions_DesiredState = AutoTuneOptions.AddMember("DesiredState", AutoTuneDesiredState)
-
-	AutoTuneOptions_RollbackOnDisable = AutoTuneOptions.AddMember("RollbackOnDisable", RollbackOnDisable)
-
-	AutoTuneOptions_MaintenanceSchedules = AutoTuneOptions.AddMember("MaintenanceSchedules", _AutoTuneMaintenanceScheduleList)
-
-	AutoTuneOptionsInput_DesiredState = AutoTuneOptionsInput.AddMember("DesiredState", AutoTuneDesiredState)
-
-	AutoTuneOptionsInput_MaintenanceSchedules = AutoTuneOptionsInput.AddMember("MaintenanceSchedules", _AutoTuneMaintenanceScheduleList)
-
-	AutoTuneState_ENABLED = AutoTuneState.AddMember("ENABLED", smithyprelude.Unit)
-
-	AutoTuneState_DISABLED = AutoTuneState.AddMember("DISABLED", smithyprelude.Unit)
-
-	AutoTuneState_ENABLE_IN_PROGRESS = AutoTuneState.AddMember("ENABLE_IN_PROGRESS", smithyprelude.Unit)
-
-	AutoTuneState_DISABLE_IN_PROGRESS = AutoTuneState.AddMember("DISABLE_IN_PROGRESS", smithyprelude.Unit)
-
-	AutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED = AutoTuneState.AddMember("DISABLED_AND_ROLLBACK_SCHEDULED", smithyprelude.Unit)
-
-	AutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS = AutoTuneState.AddMember("DISABLED_AND_ROLLBACK_IN_PROGRESS", smithyprelude.Unit)
-
-	AutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE = AutoTuneState.AddMember("DISABLED_AND_ROLLBACK_COMPLETE", smithyprelude.Unit)
-
-	AutoTuneState_DISABLED_AND_ROLLBACK_ERROR = AutoTuneState.AddMember("DISABLED_AND_ROLLBACK_ERROR", smithyprelude.Unit)
-
-	AutoTuneState_ERROR = AutoTuneState.AddMember("ERROR", smithyprelude.Unit)
-
-	AutoTuneOptionsOutput_State = AutoTuneOptionsOutput.AddMember("State", AutoTuneState)
-
-	AutoTuneOptionsOutput_ErrorMessage = AutoTuneOptionsOutput.AddMember("ErrorMessage", _String)
-
-	AutoTuneStatus_CreationDate = AutoTuneStatus.AddMember("CreationDate", _UpdateTimestamp)
-
-	AutoTuneStatus_UpdateDate = AutoTuneStatus.AddMember("UpdateDate", _UpdateTimestamp)
-
-	AutoTuneStatus_UpdateVersion = AutoTuneStatus.AddMember("UpdateVersion", _UIntValue)
-
-	AutoTuneStatus_State = AutoTuneStatus.AddMember("State", AutoTuneState)
-
-	AutoTuneStatus_ErrorMessage = AutoTuneStatus.AddMember("ErrorMessage", _String)
-
-	AutoTuneStatus_PendingDeletion = AutoTuneStatus.AddMember("PendingDeletion", _Boolean)
-
-	AutoTuneOptionsStatus_Options = AutoTuneOptionsStatus.AddMember("Options", AutoTuneOptions)
-
-	AutoTuneOptionsStatus_Status = AutoTuneOptionsStatus.AddMember("Status", AutoTuneStatus)
-
-	BaseException_message = BaseException.AddMember("message", _ErrorMessage)
-
-	CancelledChangeProperty_PropertyName = CancelledChangeProperty.AddMember("PropertyName", _String)
-
-	CancelledChangeProperty_CancelledValue = CancelledChangeProperty.AddMember("CancelledValue", _String)
-
-	CancelledChangeProperty_ActiveValue = CancelledChangeProperty.AddMember("ActiveValue", _String)
-
-	_CancelledChangePropertyList_member = _CancelledChangePropertyList.AddMember("member", CancelledChangeProperty)
-
-	ConfigChangeStatus_PENDING = ConfigChangeStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ConfigChangeStatus_INITIALIZING = ConfigChangeStatus.AddMember("INITIALIZING", smithyprelude.Unit)
-
-	ConfigChangeStatus_VALIDATING = ConfigChangeStatus.AddMember("VALIDATING", smithyprelude.Unit)
-
-	ConfigChangeStatus_VALIDATION_FAILED = ConfigChangeStatus.AddMember("VALIDATION_FAILED", smithyprelude.Unit)
-
-	ConfigChangeStatus_APPLYING_CHANGES = ConfigChangeStatus.AddMember("APPLYING_CHANGES", smithyprelude.Unit)
-
-	ConfigChangeStatus_COMPLETED = ConfigChangeStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ConfigChangeStatus_PENDING_USER_INPUT = ConfigChangeStatus.AddMember("PENDING_USER_INPUT", smithyprelude.Unit)
-
-	ConfigChangeStatus_CANCELLED = ConfigChangeStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	InitiatedBy_CUSTOMER = InitiatedBy.AddMember("CUSTOMER", smithyprelude.Unit)
-
-	InitiatedBy_SERVICE = InitiatedBy.AddMember("SERVICE", smithyprelude.Unit)
-
-	ChangeProgressDetails_ChangeId = ChangeProgressDetails.AddMember("ChangeId", _GUID)
-
-	ChangeProgressDetails_Message = ChangeProgressDetails.AddMember("Message", _Message)
-
-	ChangeProgressDetails_ConfigChangeStatus = ChangeProgressDetails.AddMember("ConfigChangeStatus", ConfigChangeStatus)
-
-	ChangeProgressDetails_StartTime = ChangeProgressDetails.AddMember("StartTime", _UpdateTimestamp)
-
-	ChangeProgressDetails_LastUpdatedTime = ChangeProgressDetails.AddMember("LastUpdatedTime", _UpdateTimestamp)
-
-	ChangeProgressDetails_InitiatedBy = ChangeProgressDetails.AddMember("InitiatedBy", InitiatedBy)
-
-	ChangeProgressStage_Name = ChangeProgressStage.AddMember("Name", _ChangeProgressStageName)
-
-	ChangeProgressStage_Status = ChangeProgressStage.AddMember("Status", _ChangeProgressStageStatus)
-
-	ChangeProgressStage_Description = ChangeProgressStage.AddMember("Description", _Description)
-
-	ChangeProgressStage_LastUpdated = ChangeProgressStage.AddMember("LastUpdated", _LastUpdated)
-
-	_ChangeProgressStageList_member = _ChangeProgressStageList.AddMember("member", ChangeProgressStage)
-
-	OverallChangeStatus_PENDING = OverallChangeStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	OverallChangeStatus_PROCESSING = OverallChangeStatus.AddMember("PROCESSING", smithyprelude.Unit)
-
-	OverallChangeStatus_COMPLETED = OverallChangeStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	OverallChangeStatus_FAILED = OverallChangeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	TrafficPercents_PrimaryReadTrafficPercent = TrafficPercents.AddMember("PrimaryReadTrafficPercent", _TrafficPercent)
-
-	TrafficPercents_CloneReadTrafficPercent = TrafficPercents.AddMember("CloneReadTrafficPercent", _TrafficPercent)
-
-	ClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY = ClonedBlueGreenScheduledActionType.AddMember("AUTOMATIC_CUTOVER_TO_PRIMARY", smithyprelude.Unit)
-
-	ClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER = ClonedBlueGreenScheduledActionType.AddMember("DELETE_PRIMARY_CLUSTER", smithyprelude.Unit)
-
-	ClonedBlueGreenScheduledAction_Action = ClonedBlueGreenScheduledAction.AddMember("Action", ClonedBlueGreenScheduledActionType)
-
-	ClonedBlueGreenScheduledAction_ScheduledTime = ClonedBlueGreenScheduledAction.AddMember("ScheduledTime", _UpdateTimestamp)
-
-	ClonedBlueGreenUpgradeDetails_TrafficSplit = ClonedBlueGreenUpgradeDetails.AddMember("TrafficSplit", TrafficPercents)
-
-	ClonedBlueGreenUpgradeDetails_ScheduledAction = ClonedBlueGreenUpgradeDetails.AddMember("ScheduledAction", ClonedBlueGreenScheduledAction)
-
-	ClonedBlueGreenUpgradeDetails_RetentionInHours = ClonedBlueGreenUpgradeDetails.AddMember("RetentionInHours", _IntegerClass)
-
-	ChangeProgressStatusDetails_ChangeId = ChangeProgressStatusDetails.AddMember("ChangeId", _GUID)
-
-	ChangeProgressStatusDetails_StartTime = ChangeProgressStatusDetails.AddMember("StartTime", _UpdateTimestamp)
-
-	ChangeProgressStatusDetails_Status = ChangeProgressStatusDetails.AddMember("Status", OverallChangeStatus)
-
-	ChangeProgressStatusDetails_PendingProperties = ChangeProgressStatusDetails.AddMember("PendingProperties", _StringList)
-
-	ChangeProgressStatusDetails_CompletedProperties = ChangeProgressStatusDetails.AddMember("CompletedProperties", _StringList)
-
-	ChangeProgressStatusDetails_TotalNumberOfStages = ChangeProgressStatusDetails.AddMember("TotalNumberOfStages", _TotalNumberOfStages)
-
-	ChangeProgressStatusDetails_ChangeProgressStages = ChangeProgressStatusDetails.AddMember("ChangeProgressStages", _ChangeProgressStageList)
-
-	ChangeProgressStatusDetails_ConfigChangeStatus = ChangeProgressStatusDetails.AddMember("ConfigChangeStatus", ConfigChangeStatus)
-
-	ChangeProgressStatusDetails_LastUpdatedTime = ChangeProgressStatusDetails.AddMember("LastUpdatedTime", _UpdateTimestamp)
-
-	ChangeProgressStatusDetails_InitiatedBy = ChangeProgressStatusDetails.AddMember("InitiatedBy", InitiatedBy)
-
-	ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails = ChangeProgressStatusDetails.AddMember("ClonedBlueGreenUpgradeDetails", ClonedBlueGreenUpgradeDetails)
-
-	RetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER = RetentionAction.AddMember("ROLLBACK_TO_PRIMARY_CLUSTER", smithyprelude.Unit)
-
-	RetentionAction_DELETE_PRIMARY_CLUSTER = RetentionAction.AddMember("DELETE_PRIMARY_CLUSTER", smithyprelude.Unit)
-
-	RetentionOptions_RetentionInHours = RetentionOptions.AddMember("RetentionInHours", _IntegerClass)
-
-	RetentionOptions_RetentionAction = RetentionOptions.AddMember("RetentionAction", RetentionAction)
-
-	ClonedBlueGreenOptions_RetentionOptions = ClonedBlueGreenOptions.AddMember("RetentionOptions", RetentionOptions)
-
-	CognitoOptions_Enabled = CognitoOptions.AddMember("Enabled", _Boolean)
-
-	CognitoOptions_UserPoolId = CognitoOptions.AddMember("UserPoolId", _UserPoolId)
-
-	CognitoOptions_IdentityPoolId = CognitoOptions.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	CognitoOptions_RoleArn = CognitoOptions.AddMember("RoleArn", _RoleArn)
-
-	CognitoOptionsStatus_Options = CognitoOptionsStatus.AddMember("Options", CognitoOptions)
-
-	CognitoOptionsStatus_Status = CognitoOptionsStatus.AddMember("Status", OptionStatus)
-
-	ColdStorageOptions_Enabled = ColdStorageOptions.AddMember("Enabled", _Boolean)
-
-	_ElasticsearchVersionList_member = _ElasticsearchVersionList.AddMember("member", _ElasticsearchVersionString)
-
-	CompatibleVersionsMap_SourceVersion = CompatibleVersionsMap.AddMember("SourceVersion", _ElasticsearchVersionString)
-
-	CompatibleVersionsMap_TargetVersions = CompatibleVersionsMap.AddMember("TargetVersions", _ElasticsearchVersionList)
-
-	_CompatibleElasticsearchVersionsList_member = _CompatibleElasticsearchVersionsList.AddMember("member", CompatibleVersionsMap)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	CutoverTarget_CLONED_CLUSTER = CutoverTarget.AddMember("CLONED_CLUSTER", smithyprelude.Unit)
-
-	CutoverTarget_PRIMARY_CLUSTER = CutoverTarget.AddMember("PRIMARY_CLUSTER", smithyprelude.Unit)
-
-	CutoverStatus_IN_PROGRESS = CutoverStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	CutoverStatus_COMPLETED = CutoverStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	CutoverStatus_FAILED = CutoverStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CutoverOptions_Target = CutoverOptions.AddMember("Target", CutoverTarget)
-
-	CutoverOptions_Status = CutoverOptions.AddMember("Status", CutoverStatus)
-
-	CutoverRequestOptions_Target = CutoverRequestOptions.AddMember("Target", CutoverTarget)
-
-	DeploymentStatus_PENDING_UPDATE = DeploymentStatus.AddMember("PENDING_UPDATE", smithyprelude.Unit)
-
-	DeploymentStatus_IN_PROGRESS = DeploymentStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	DeploymentStatus_COMPLETED = DeploymentStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	DeploymentStatus_NOT_ELIGIBLE = DeploymentStatus.AddMember("NOT_ELIGIBLE", smithyprelude.Unit)
-
-	DeploymentStatus_ELIGIBLE = DeploymentStatus.AddMember("ELIGIBLE", smithyprelude.Unit)
-
-	DeploymentStrategy_DEFAULT = DeploymentStrategy.AddMember("DEFAULT", smithyprelude.Unit)
-
-	DeploymentStrategy_CAPACITY_OPTIMIZED = DeploymentStrategy.AddMember("CAPACITY_OPTIMIZED", smithyprelude.Unit)
-
-	DeploymentStrategyOptions_DeploymentStrategy = DeploymentStrategyOptions.AddMember("DeploymentStrategy", DeploymentStrategy)
-
-	DeploymentStrategyOptionsStatus_Options = DeploymentStrategyOptionsStatus.AddMember("Options", DeploymentStrategyOptions)
-
-	DeploymentStrategyOptionsStatus_Status = DeploymentStrategyOptionsStatus.AddMember("Status", OptionStatus)
-
-	DeploymentStrategyOverride_CLONED_BLUE_GREEN = DeploymentStrategyOverride.AddMember("CLONED_BLUE_GREEN", smithyprelude.Unit)
-
-	DeploymentStrategyOverrideOptions_DeploymentStrategy = DeploymentStrategyOverrideOptions.AddMember("DeploymentStrategy", DeploymentStrategyOverride)
-
-	DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions = DeploymentStrategyOverrideOptions.AddMember("ClonedBlueGreenOptions", ClonedBlueGreenOptions)
-
-	DescribePackagesFilterName_PackageID = DescribePackagesFilterName.AddMember("PackageID", smithyprelude.Unit)
-
-	DescribePackagesFilterName_PackageName = DescribePackagesFilterName.AddMember("PackageName", smithyprelude.Unit)
-
-	DescribePackagesFilterName_PackageStatus = DescribePackagesFilterName.AddMember("PackageStatus", smithyprelude.Unit)
-
-	_DescribePackagesFilterValues_member = _DescribePackagesFilterValues.AddMember("member", _DescribePackagesFilterValue)
-
-	DescribePackagesFilter_Name = DescribePackagesFilter.AddMember("Name", DescribePackagesFilterName)
-
-	DescribePackagesFilter_Value = DescribePackagesFilter.AddMember("Value", _DescribePackagesFilterValues)
-
-	_DescribePackagesFilterList_member = _DescribePackagesFilterList.AddMember("member", DescribePackagesFilter)
-
-	DisabledOperationException_message = DisabledOperationException.AddMember("message", _ErrorMessage)
-
-	TLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_0_2019_07", smithyprelude.Unit)
-
-	TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_2_2019_07", smithyprelude.Unit)
-
-	TLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_2_PFS_2023_10", smithyprelude.Unit)
-
-	TLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08", smithyprelude.Unit)
-
-	DomainEndpointOptions_EnforceHTTPS = DomainEndpointOptions.AddMember("EnforceHTTPS", _Boolean)
-
-	DomainEndpointOptions_TLSSecurityPolicy = DomainEndpointOptions.AddMember("TLSSecurityPolicy", TLSSecurityPolicy)
-
-	DomainEndpointOptions_CustomEndpointEnabled = DomainEndpointOptions.AddMember("CustomEndpointEnabled", _Boolean)
-
-	DomainEndpointOptions_CustomEndpoint = DomainEndpointOptions.AddMember("CustomEndpoint", _DomainNameFqdn)
-
-	DomainEndpointOptions_CustomEndpointCertificateArn = DomainEndpointOptions.AddMember("CustomEndpointCertificateArn", _ARN)
-
-	DomainEndpointOptionsStatus_Options = DomainEndpointOptionsStatus.AddMember("Options", DomainEndpointOptions)
-
-	DomainEndpointOptionsStatus_Status = DomainEndpointOptionsStatus.AddMember("Status", OptionStatus)
-
-	DomainEngineMode_GENERAL = DomainEngineMode.AddMember("GENERAL", smithyprelude.Unit)
-
-	DomainEngineMode_OPTIMIZED = DomainEngineMode.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	EngineType_OpenSearch = EngineType.AddMember("OpenSearch", smithyprelude.Unit)
-
-	EngineType_Elasticsearch = EngineType.AddMember("Elasticsearch", smithyprelude.Unit)
-
-	DomainInfo_DomainName = DomainInfo.AddMember("DomainName", _DomainName)
-
-	DomainInfo_EngineType = DomainInfo.AddMember("EngineType", EngineType)
-
-	_DomainInfoList_member = _DomainInfoList.AddMember("member", DomainInfo)
-
-	DomainInformation_OwnerId = DomainInformation.AddMember("OwnerId", _OwnerId)
-
-	DomainInformation_DomainName = DomainInformation.AddMember("DomainName", _DomainName)
-
-	DomainInformation_Region = DomainInformation.AddMember("Region", _Region)
-
-	_DomainNameList_member = _DomainNameList.AddMember("member", _DomainName)
-
-	PackageType_TXT_DICTIONARY = PackageType.AddMember("TXT_DICTIONARY", smithyprelude.Unit)
-
-	DomainPackageStatus_ASSOCIATING = DomainPackageStatus.AddMember("ASSOCIATING", smithyprelude.Unit)
-
-	DomainPackageStatus_ASSOCIATION_FAILED = DomainPackageStatus.AddMember("ASSOCIATION_FAILED", smithyprelude.Unit)
-
-	DomainPackageStatus_ACTIVE = DomainPackageStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DomainPackageStatus_DISSOCIATING = DomainPackageStatus.AddMember("DISSOCIATING", smithyprelude.Unit)
-
-	DomainPackageStatus_DISSOCIATION_FAILED = DomainPackageStatus.AddMember("DISSOCIATION_FAILED", smithyprelude.Unit)
-
-	ErrorDetails_ErrorType = ErrorDetails.AddMember("ErrorType", _ErrorType)
-
-	ErrorDetails_ErrorMessage = ErrorDetails.AddMember("ErrorMessage", _ErrorMessage)
-
-	DomainPackageDetails_PackageID = DomainPackageDetails.AddMember("PackageID", _PackageID)
-
-	DomainPackageDetails_PackageName = DomainPackageDetails.AddMember("PackageName", _PackageName)
-
-	DomainPackageDetails_PackageType = DomainPackageDetails.AddMember("PackageType", PackageType)
-
-	DomainPackageDetails_LastUpdated = DomainPackageDetails.AddMember("LastUpdated", _LastUpdated)
-
-	DomainPackageDetails_DomainName = DomainPackageDetails.AddMember("DomainName", _DomainName)
-
-	DomainPackageDetails_DomainPackageStatus = DomainPackageDetails.AddMember("DomainPackageStatus", DomainPackageStatus)
-
-	DomainPackageDetails_PackageVersion = DomainPackageDetails.AddMember("PackageVersion", _PackageVersion)
-
-	DomainPackageDetails_ReferencePath = DomainPackageDetails.AddMember("ReferencePath", _ReferencePath)
-
-	DomainPackageDetails_ErrorDetails = DomainPackageDetails.AddMember("ErrorDetails", ErrorDetails)
-
-	_DomainPackageDetailsList_member = _DomainPackageDetailsList.AddMember("member", DomainPackageDetails)
-
-	DomainProcessingStatusType_CREATING = DomainProcessingStatusType.AddMember("CREATING", smithyprelude.Unit)
-
-	DomainProcessingStatusType_ACTIVE = DomainProcessingStatusType.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DomainProcessingStatusType_MODIFYING = DomainProcessingStatusType.AddMember("MODIFYING", smithyprelude.Unit)
-
-	DomainProcessingStatusType_UPGRADING = DomainProcessingStatusType.AddMember("UPGRADING", smithyprelude.Unit)
-
-	DomainProcessingStatusType_UPDATING = DomainProcessingStatusType.AddMember("UPDATING", smithyprelude.Unit)
-
-	DomainProcessingStatusType_ISOLATED = DomainProcessingStatusType.AddMember("ISOLATED", smithyprelude.Unit)
-
-	DomainProcessingStatusType_DELETING = DomainProcessingStatusType.AddMember("DELETING", smithyprelude.Unit)
-
-	DomainUseCase_SEARCH = DomainUseCase.AddMember("SEARCH", smithyprelude.Unit)
-
-	DomainUseCase_VECTOR = DomainUseCase.AddMember("VECTOR", smithyprelude.Unit)
-
-	DomainUseCase_OBSERVABILITY = DomainUseCase.AddMember("OBSERVABILITY", smithyprelude.Unit)
-
-	DomainUseCase_MIXED = DomainUseCase.AddMember("MIXED", smithyprelude.Unit)
-
-	DryRunResults_DeploymentType = DryRunResults.AddMember("DeploymentType", _DeploymentType)
-
-	DryRunResults_Message = DryRunResults.AddMember("Message", _Message)
-
-	VolumeType_standard = VolumeType.AddMember("standard", smithyprelude.Unit)
-
-	VolumeType_gp2 = VolumeType.AddMember("gp2", smithyprelude.Unit)
-
-	VolumeType_io1 = VolumeType.AddMember("io1", smithyprelude.Unit)
-
-	VolumeType_gp3 = VolumeType.AddMember("gp3", smithyprelude.Unit)
-
-	EBSOptions_EBSEnabled = EBSOptions.AddMember("EBSEnabled", _Boolean)
-
-	EBSOptions_VolumeType = EBSOptions.AddMember("VolumeType", VolumeType)
-
-	EBSOptions_VolumeSize = EBSOptions.AddMember("VolumeSize", _IntegerClass)
-
-	EBSOptions_Iops = EBSOptions.AddMember("Iops", _IntegerClass)
-
-	EBSOptions_Throughput = EBSOptions.AddMember("Throughput", _IntegerClass)
-
-	EBSOptionsStatus_Options = EBSOptionsStatus.AddMember("Options", EBSOptions)
-
-	EBSOptionsStatus_Status = EBSOptionsStatus.AddMember("Status", OptionStatus)
-
-	ESPartitionInstanceType_m3_medium_elasticsearch = ESPartitionInstanceType.AddMember("m3_medium_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m3_large_elasticsearch = ESPartitionInstanceType.AddMember("m3_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m3_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m3_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m3_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m3_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m4_large_elasticsearch = ESPartitionInstanceType.AddMember("m4_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m4_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m4_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m4_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m4_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m4_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m4_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m4_10xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m4_10xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m5_large_elasticsearch = ESPartitionInstanceType.AddMember("m5_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m5_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m5_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m5_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m5_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m5_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m5_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_m5_12xlarge_elasticsearch = ESPartitionInstanceType.AddMember("m5_12xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r5_large_elasticsearch = ESPartitionInstanceType.AddMember("r5_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r5_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r5_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r5_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r5_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r5_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r5_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r5_12xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r5_12xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c5_large_elasticsearch = ESPartitionInstanceType.AddMember("c5_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c5_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c5_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c5_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c5_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c5_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c5_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c5_9xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c5_9xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c5_18xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c5_18xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_ultrawarm1_medium_elasticsearch = ESPartitionInstanceType.AddMember("ultrawarm1_medium_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_ultrawarm1_large_elasticsearch = ESPartitionInstanceType.AddMember("ultrawarm1_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_t2_micro_elasticsearch = ESPartitionInstanceType.AddMember("t2_micro_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_t2_small_elasticsearch = ESPartitionInstanceType.AddMember("t2_small_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_t2_medium_elasticsearch = ESPartitionInstanceType.AddMember("t2_medium_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r3_large_elasticsearch = ESPartitionInstanceType.AddMember("r3_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r3_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r3_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r3_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r3_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r3_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r3_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r3_8xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r3_8xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i2_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("i2_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i2_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("i2_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_d2_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("d2_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_d2_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("d2_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_d2_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("d2_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_d2_8xlarge_elasticsearch = ESPartitionInstanceType.AddMember("d2_8xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c4_large_elasticsearch = ESPartitionInstanceType.AddMember("c4_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c4_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c4_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c4_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c4_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c4_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c4_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_c4_8xlarge_elasticsearch = ESPartitionInstanceType.AddMember("c4_8xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r4_large_elasticsearch = ESPartitionInstanceType.AddMember("r4_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r4_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r4_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r4_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r4_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r4_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r4_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r4_8xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r4_8xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_r4_16xlarge_elasticsearch = ESPartitionInstanceType.AddMember("r4_16xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i3_large_elasticsearch = ESPartitionInstanceType.AddMember("i3_large_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i3_xlarge_elasticsearch = ESPartitionInstanceType.AddMember("i3_xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i3_2xlarge_elasticsearch = ESPartitionInstanceType.AddMember("i3_2xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i3_4xlarge_elasticsearch = ESPartitionInstanceType.AddMember("i3_4xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i3_8xlarge_elasticsearch = ESPartitionInstanceType.AddMember("i3_8xlarge_elasticsearch", smithyprelude.Unit)
-
-	ESPartitionInstanceType_i3_16xlarge_elasticsearch = ESPartitionInstanceType.AddMember("i3_16xlarge_elasticsearch", smithyprelude.Unit)
-
-	ZoneAwarenessConfig_AvailabilityZoneCount = ZoneAwarenessConfig.AddMember("AvailabilityZoneCount", _IntegerClass)
-
-	ESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch = ESWarmPartitionInstanceType.AddMember("ultrawarm1_medium_elasticsearch", smithyprelude.Unit)
-
-	ESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch = ESWarmPartitionInstanceType.AddMember("ultrawarm1_large_elasticsearch", smithyprelude.Unit)
-
-	ElasticsearchClusterConfig_InstanceType = ElasticsearchClusterConfig.AddMember("InstanceType", ESPartitionInstanceType)
-
-	ElasticsearchClusterConfig_InstanceCount = ElasticsearchClusterConfig.AddMember("InstanceCount", _IntegerClass)
-
-	ElasticsearchClusterConfig_DedicatedMasterEnabled = ElasticsearchClusterConfig.AddMember("DedicatedMasterEnabled", _Boolean)
-
-	ElasticsearchClusterConfig_ZoneAwarenessEnabled = ElasticsearchClusterConfig.AddMember("ZoneAwarenessEnabled", _Boolean)
-
-	ElasticsearchClusterConfig_ZoneAwarenessConfig = ElasticsearchClusterConfig.AddMember("ZoneAwarenessConfig", ZoneAwarenessConfig)
-
-	ElasticsearchClusterConfig_DedicatedMasterType = ElasticsearchClusterConfig.AddMember("DedicatedMasterType", ESPartitionInstanceType)
-
-	ElasticsearchClusterConfig_DedicatedMasterCount = ElasticsearchClusterConfig.AddMember("DedicatedMasterCount", _IntegerClass)
-
-	ElasticsearchClusterConfig_WarmEnabled = ElasticsearchClusterConfig.AddMember("WarmEnabled", _Boolean)
-
-	ElasticsearchClusterConfig_WarmType = ElasticsearchClusterConfig.AddMember("WarmType", ESWarmPartitionInstanceType)
-
-	ElasticsearchClusterConfig_WarmCount = ElasticsearchClusterConfig.AddMember("WarmCount", _IntegerClass)
-
-	ElasticsearchClusterConfig_ColdStorageOptions = ElasticsearchClusterConfig.AddMember("ColdStorageOptions", ColdStorageOptions)
-
-	ElasticsearchClusterConfigStatus_Options = ElasticsearchClusterConfigStatus.AddMember("Options", ElasticsearchClusterConfig)
-
-	ElasticsearchClusterConfigStatus_Status = ElasticsearchClusterConfigStatus.AddMember("Status", OptionStatus)
-
-	ElasticsearchVersionStatus_Options = ElasticsearchVersionStatus.AddMember("Options", _ElasticsearchVersionString)
-
-	ElasticsearchVersionStatus_Status = ElasticsearchVersionStatus.AddMember("Status", OptionStatus)
-
-	SnapshotOptions_AutomatedSnapshotStartHour = SnapshotOptions.AddMember("AutomatedSnapshotStartHour", _IntegerClass)
-
-	SnapshotOptionsStatus_Options = SnapshotOptionsStatus.AddMember("Options", SnapshotOptions)
-
-	SnapshotOptionsStatus_Status = SnapshotOptionsStatus.AddMember("Status", OptionStatus)
-
-	VPCDerivedInfo_VPCId = VPCDerivedInfo.AddMember("VPCId", _String)
-
-	VPCDerivedInfo_SubnetIds = VPCDerivedInfo.AddMember("SubnetIds", _StringList)
-
-	VPCDerivedInfo_AvailabilityZones = VPCDerivedInfo.AddMember("AvailabilityZones", _StringList)
-
-	VPCDerivedInfo_SecurityGroupIds = VPCDerivedInfo.AddMember("SecurityGroupIds", _StringList)
-
-	VPCDerivedInfoStatus_Options = VPCDerivedInfoStatus.AddMember("Options", VPCDerivedInfo)
-
-	VPCDerivedInfoStatus_Status = VPCDerivedInfoStatus.AddMember("Status", OptionStatus)
-
-	EncryptionAtRestOptions_Enabled = EncryptionAtRestOptions.AddMember("Enabled", _Boolean)
-
-	EncryptionAtRestOptions_KmsKeyId = EncryptionAtRestOptions.AddMember("KmsKeyId", _KmsKeyId)
-
-	EncryptionAtRestOptionsStatus_Options = EncryptionAtRestOptionsStatus.AddMember("Options", EncryptionAtRestOptions)
-
-	EncryptionAtRestOptionsStatus_Status = EncryptionAtRestOptionsStatus.AddMember("Status", OptionStatus)
-
-	NodeToNodeEncryptionOptions_Enabled = NodeToNodeEncryptionOptions.AddMember("Enabled", _Boolean)
-
-	NodeToNodeEncryptionOptionsStatus_Options = NodeToNodeEncryptionOptionsStatus.AddMember("Options", NodeToNodeEncryptionOptions)
-
-	NodeToNodeEncryptionOptionsStatus_Status = NodeToNodeEncryptionOptionsStatus.AddMember("Status", OptionStatus)
-
-	LogType_INDEX_SLOW_LOGS = LogType.AddMember("INDEX_SLOW_LOGS", smithyprelude.Unit)
-
-	LogType_SEARCH_SLOW_LOGS = LogType.AddMember("SEARCH_SLOW_LOGS", smithyprelude.Unit)
-
-	LogType_ES_APPLICATION_LOGS = LogType.AddMember("ES_APPLICATION_LOGS", smithyprelude.Unit)
-
-	LogType_AUDIT_LOGS = LogType.AddMember("AUDIT_LOGS", smithyprelude.Unit)
-
-	LogPublishingOption_CloudWatchLogsLogGroupArn = LogPublishingOption.AddMember("CloudWatchLogsLogGroupArn", _CloudWatchLogsLogGroupArn)
-
-	LogPublishingOption_Enabled = LogPublishingOption.AddMember("Enabled", _Boolean)
-
-	_LogPublishingOptions_key = _LogPublishingOptions.AddMember("key", LogType)
-
-	_LogPublishingOptions_value = _LogPublishingOptions.AddMember("value", LogPublishingOption)
-
-	LogPublishingOptionsStatus_Options = LogPublishingOptionsStatus.AddMember("Options", _LogPublishingOptions)
-
-	LogPublishingOptionsStatus_Status = LogPublishingOptionsStatus.AddMember("Status", OptionStatus)
-
-	PropertyValueType_PLAIN_TEXT = PropertyValueType.AddMember("PLAIN_TEXT", smithyprelude.Unit)
-
-	PropertyValueType_STRINGIFIED_JSON = PropertyValueType.AddMember("STRINGIFIED_JSON", smithyprelude.Unit)
-
-	ModifyingProperties_Name = ModifyingProperties.AddMember("Name", _String)
-
-	ModifyingProperties_ActiveValue = ModifyingProperties.AddMember("ActiveValue", _String)
-
-	ModifyingProperties_PendingValue = ModifyingProperties.AddMember("PendingValue", _String)
-
-	ModifyingProperties_ValueType = ModifyingProperties.AddMember("ValueType", PropertyValueType)
-
-	_ModifyingPropertiesList_member = _ModifyingPropertiesList.AddMember("member", ModifyingProperties)
-
-	UseCaseStatus_Options = UseCaseStatus.AddMember("Options", DomainUseCase)
-
-	UseCaseStatus_Status = UseCaseStatus.AddMember("Status", OptionStatus)
-
-	EngineModeStatus_Options = EngineModeStatus.AddMember("Options", DomainEngineMode)
-
-	EngineModeStatus_Status = EngineModeStatus.AddMember("Status", OptionStatus)
-
-	ElasticsearchDomainConfig_ElasticsearchVersion = ElasticsearchDomainConfig.AddMember("ElasticsearchVersion", ElasticsearchVersionStatus)
-
-	ElasticsearchDomainConfig_ElasticsearchClusterConfig = ElasticsearchDomainConfig.AddMember("ElasticsearchClusterConfig", ElasticsearchClusterConfigStatus)
-
-	ElasticsearchDomainConfig_EBSOptions = ElasticsearchDomainConfig.AddMember("EBSOptions", EBSOptionsStatus)
-
-	ElasticsearchDomainConfig_AccessPolicies = ElasticsearchDomainConfig.AddMember("AccessPolicies", AccessPoliciesStatus)
-
-	ElasticsearchDomainConfig_SnapshotOptions = ElasticsearchDomainConfig.AddMember("SnapshotOptions", SnapshotOptionsStatus)
-
-	ElasticsearchDomainConfig_VPCOptions = ElasticsearchDomainConfig.AddMember("VPCOptions", VPCDerivedInfoStatus)
-
-	ElasticsearchDomainConfig_CognitoOptions = ElasticsearchDomainConfig.AddMember("CognitoOptions", CognitoOptionsStatus)
-
-	ElasticsearchDomainConfig_EncryptionAtRestOptions = ElasticsearchDomainConfig.AddMember("EncryptionAtRestOptions", EncryptionAtRestOptionsStatus)
-
-	ElasticsearchDomainConfig_NodeToNodeEncryptionOptions = ElasticsearchDomainConfig.AddMember("NodeToNodeEncryptionOptions", NodeToNodeEncryptionOptionsStatus)
-
-	ElasticsearchDomainConfig_AdvancedOptions = ElasticsearchDomainConfig.AddMember("AdvancedOptions", AdvancedOptionsStatus)
-
-	ElasticsearchDomainConfig_LogPublishingOptions = ElasticsearchDomainConfig.AddMember("LogPublishingOptions", LogPublishingOptionsStatus)
-
-	ElasticsearchDomainConfig_DomainEndpointOptions = ElasticsearchDomainConfig.AddMember("DomainEndpointOptions", DomainEndpointOptionsStatus)
-
-	ElasticsearchDomainConfig_AdvancedSecurityOptions = ElasticsearchDomainConfig.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptionsStatus)
-
-	ElasticsearchDomainConfig_AutoTuneOptions = ElasticsearchDomainConfig.AddMember("AutoTuneOptions", AutoTuneOptionsStatus)
-
-	ElasticsearchDomainConfig_ChangeProgressDetails = ElasticsearchDomainConfig.AddMember("ChangeProgressDetails", ChangeProgressDetails)
-
-	ElasticsearchDomainConfig_ModifyingProperties = ElasticsearchDomainConfig.AddMember("ModifyingProperties", _ModifyingPropertiesList)
-
-	ElasticsearchDomainConfig_DeploymentStrategyOptions = ElasticsearchDomainConfig.AddMember("DeploymentStrategyOptions", DeploymentStrategyOptionsStatus)
-
-	ElasticsearchDomainConfig_AutomatedSnapshotPauseOptions = ElasticsearchDomainConfig.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseOptionsStatus)
-
-	ElasticsearchDomainConfig_UseCase = ElasticsearchDomainConfig.AddMember("UseCase", UseCaseStatus)
-
-	ElasticsearchDomainConfig_EngineMode = ElasticsearchDomainConfig.AddMember("EngineMode", EngineModeStatus)
-
-	_EndpointsMap_key = _EndpointsMap.AddMember("key", _String)
-
-	_EndpointsMap_value = _EndpointsMap.AddMember("value", _ServiceUrl)
-
-	ServiceSoftwareOptions_CurrentVersion = ServiceSoftwareOptions.AddMember("CurrentVersion", _String)
-
-	ServiceSoftwareOptions_NewVersion = ServiceSoftwareOptions.AddMember("NewVersion", _String)
-
-	ServiceSoftwareOptions_UpdateAvailable = ServiceSoftwareOptions.AddMember("UpdateAvailable", _Boolean)
-
-	ServiceSoftwareOptions_Cancellable = ServiceSoftwareOptions.AddMember("Cancellable", _Boolean)
-
-	ServiceSoftwareOptions_UpdateStatus = ServiceSoftwareOptions.AddMember("UpdateStatus", DeploymentStatus)
-
-	ServiceSoftwareOptions_Description = ServiceSoftwareOptions.AddMember("Description", _String)
-
-	ServiceSoftwareOptions_AutomatedUpdateDate = ServiceSoftwareOptions.AddMember("AutomatedUpdateDate", _DeploymentCloseDateTimeStamp)
-
-	ServiceSoftwareOptions_OptionalDeployment = ServiceSoftwareOptions.AddMember("OptionalDeployment", _Boolean)
-
-	ElasticsearchDomainStatus_DomainId = ElasticsearchDomainStatus.AddMember("DomainId", _DomainId)
-
-	ElasticsearchDomainStatus_DomainName = ElasticsearchDomainStatus.AddMember("DomainName", _DomainName)
-
-	ElasticsearchDomainStatus_ARN = ElasticsearchDomainStatus.AddMember("ARN", _ARN)
-
-	ElasticsearchDomainStatus_Created = ElasticsearchDomainStatus.AddMember("Created", _Boolean)
-
-	ElasticsearchDomainStatus_Deleted = ElasticsearchDomainStatus.AddMember("Deleted", _Boolean)
-
-	ElasticsearchDomainStatus_Endpoint = ElasticsearchDomainStatus.AddMember("Endpoint", _ServiceUrl)
-
-	ElasticsearchDomainStatus_Endpoints = ElasticsearchDomainStatus.AddMember("Endpoints", _EndpointsMap)
-
-	ElasticsearchDomainStatus_Processing = ElasticsearchDomainStatus.AddMember("Processing", _Boolean)
-
-	ElasticsearchDomainStatus_UpgradeProcessing = ElasticsearchDomainStatus.AddMember("UpgradeProcessing", _Boolean)
-
-	ElasticsearchDomainStatus_ElasticsearchVersion = ElasticsearchDomainStatus.AddMember("ElasticsearchVersion", _ElasticsearchVersionString)
-
-	ElasticsearchDomainStatus_ElasticsearchClusterConfig = ElasticsearchDomainStatus.AddMember("ElasticsearchClusterConfig", ElasticsearchClusterConfig)
-
-	ElasticsearchDomainStatus_EBSOptions = ElasticsearchDomainStatus.AddMember("EBSOptions", EBSOptions)
-
-	ElasticsearchDomainStatus_AccessPolicies = ElasticsearchDomainStatus.AddMember("AccessPolicies", _PolicyDocument)
-
-	ElasticsearchDomainStatus_SnapshotOptions = ElasticsearchDomainStatus.AddMember("SnapshotOptions", SnapshotOptions)
-
-	ElasticsearchDomainStatus_VPCOptions = ElasticsearchDomainStatus.AddMember("VPCOptions", VPCDerivedInfo)
-
-	ElasticsearchDomainStatus_CognitoOptions = ElasticsearchDomainStatus.AddMember("CognitoOptions", CognitoOptions)
-
-	ElasticsearchDomainStatus_EncryptionAtRestOptions = ElasticsearchDomainStatus.AddMember("EncryptionAtRestOptions", EncryptionAtRestOptions)
-
-	ElasticsearchDomainStatus_NodeToNodeEncryptionOptions = ElasticsearchDomainStatus.AddMember("NodeToNodeEncryptionOptions", NodeToNodeEncryptionOptions)
-
-	ElasticsearchDomainStatus_AdvancedOptions = ElasticsearchDomainStatus.AddMember("AdvancedOptions", _AdvancedOptions)
-
-	ElasticsearchDomainStatus_LogPublishingOptions = ElasticsearchDomainStatus.AddMember("LogPublishingOptions", _LogPublishingOptions)
-
-	ElasticsearchDomainStatus_ServiceSoftwareOptions = ElasticsearchDomainStatus.AddMember("ServiceSoftwareOptions", ServiceSoftwareOptions)
-
-	ElasticsearchDomainStatus_DomainEndpointOptions = ElasticsearchDomainStatus.AddMember("DomainEndpointOptions", DomainEndpointOptions)
-
-	ElasticsearchDomainStatus_AdvancedSecurityOptions = ElasticsearchDomainStatus.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptions)
-
-	ElasticsearchDomainStatus_AutoTuneOptions = ElasticsearchDomainStatus.AddMember("AutoTuneOptions", AutoTuneOptionsOutput)
-
-	ElasticsearchDomainStatus_ChangeProgressDetails = ElasticsearchDomainStatus.AddMember("ChangeProgressDetails", ChangeProgressDetails)
-
-	ElasticsearchDomainStatus_DomainProcessingStatus = ElasticsearchDomainStatus.AddMember("DomainProcessingStatus", DomainProcessingStatusType)
-
-	ElasticsearchDomainStatus_ModifyingProperties = ElasticsearchDomainStatus.AddMember("ModifyingProperties", _ModifyingPropertiesList)
-
-	ElasticsearchDomainStatus_DeploymentStrategyOptions = ElasticsearchDomainStatus.AddMember("DeploymentStrategyOptions", DeploymentStrategyOptions)
-
-	ElasticsearchDomainStatus_AutomatedSnapshotPauseOptions = ElasticsearchDomainStatus.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseOptions)
-
-	ElasticsearchDomainStatus_UseCase = ElasticsearchDomainStatus.AddMember("UseCase", DomainUseCase)
-
-	ElasticsearchDomainStatus_EngineMode = ElasticsearchDomainStatus.AddMember("EngineMode", DomainEngineMode)
-
-	_ElasticsearchDomainStatusList_member = _ElasticsearchDomainStatusList.AddMember("member", ElasticsearchDomainStatus)
-
-	_ElasticsearchInstanceTypeList_member = _ElasticsearchInstanceTypeList.AddMember("member", ESPartitionInstanceType)
-
-	_ValueStringList_member = _ValueStringList.AddMember("member", _NonEmptyString)
-
-	Filter_Name = Filter.AddMember("Name", _NonEmptyString)
-
-	Filter_Values = Filter.AddMember("Values", _ValueStringList)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	_GUIDList_member = _GUIDList.AddMember("member", _GUID)
-
-	InboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE = InboundCrossClusterSearchConnectionStatusCode.AddMember("PENDING_ACCEPTANCE", smithyprelude.Unit)
-
-	InboundCrossClusterSearchConnectionStatusCode_APPROVED = InboundCrossClusterSearchConnectionStatusCode.AddMember("APPROVED", smithyprelude.Unit)
-
-	InboundCrossClusterSearchConnectionStatusCode_REJECTING = InboundCrossClusterSearchConnectionStatusCode.AddMember("REJECTING", smithyprelude.Unit)
-
-	InboundCrossClusterSearchConnectionStatusCode_REJECTED = InboundCrossClusterSearchConnectionStatusCode.AddMember("REJECTED", smithyprelude.Unit)
-
-	InboundCrossClusterSearchConnectionStatusCode_DELETING = InboundCrossClusterSearchConnectionStatusCode.AddMember("DELETING", smithyprelude.Unit)
-
-	InboundCrossClusterSearchConnectionStatusCode_DELETED = InboundCrossClusterSearchConnectionStatusCode.AddMember("DELETED", smithyprelude.Unit)
-
-	InboundCrossClusterSearchConnectionStatus_StatusCode = InboundCrossClusterSearchConnectionStatus.AddMember("StatusCode", InboundCrossClusterSearchConnectionStatusCode)
-
-	InboundCrossClusterSearchConnectionStatus_Message = InboundCrossClusterSearchConnectionStatus.AddMember("Message", _CrossClusterSearchConnectionStatusMessage)
-
-	InboundCrossClusterSearchConnection_SourceDomainInfo = InboundCrossClusterSearchConnection.AddMember("SourceDomainInfo", DomainInformation)
-
-	InboundCrossClusterSearchConnection_DestinationDomainInfo = InboundCrossClusterSearchConnection.AddMember("DestinationDomainInfo", DomainInformation)
-
-	InboundCrossClusterSearchConnection_CrossClusterSearchConnectionId = InboundCrossClusterSearchConnection.AddMember("CrossClusterSearchConnectionId", _CrossClusterSearchConnectionId)
-
-	InboundCrossClusterSearchConnection_ConnectionStatus = InboundCrossClusterSearchConnection.AddMember("ConnectionStatus", InboundCrossClusterSearchConnectionStatus)
-
-	_InboundCrossClusterSearchConnections_member = _InboundCrossClusterSearchConnections.AddMember("member", InboundCrossClusterSearchConnection)
-
-	InstanceCountLimits_MinimumInstanceCount = InstanceCountLimits.AddMember("MinimumInstanceCount", _MinimumInstanceCount)
-
-	InstanceCountLimits_MaximumInstanceCount = InstanceCountLimits.AddMember("MaximumInstanceCount", _MaximumInstanceCount)
-
-	InstanceLimits_InstanceCountLimits = InstanceLimits.AddMember("InstanceCountLimits", InstanceCountLimits)
-
-	InternalException_message = InternalException.AddMember("message", _ErrorMessage)
-
-	InvalidPaginationTokenException_message = InvalidPaginationTokenException.AddMember("message", _ErrorMessage)
-
-	InvalidTypeException_message = InvalidTypeException.AddMember("message", _ErrorMessage)
-
-	_Issues_member = _Issues.AddMember("member", _Issue)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	StorageTypeLimit_LimitName = StorageTypeLimit.AddMember("LimitName", _LimitName)
-
-	StorageTypeLimit_LimitValues = StorageTypeLimit.AddMember("LimitValues", _LimitValueList)
-
-	_StorageTypeLimitList_member = _StorageTypeLimitList.AddMember("member", StorageTypeLimit)
-
-	StorageType_StorageTypeName = StorageType.AddMember("StorageTypeName", _StorageTypeName)
-
-	StorageType_StorageSubTypeName = StorageType.AddMember("StorageSubTypeName", _StorageSubTypeName)
-
-	StorageType_StorageTypeLimits = StorageType.AddMember("StorageTypeLimits", _StorageTypeLimitList)
-
-	_StorageTypeList_member = _StorageTypeList.AddMember("member", StorageType)
-
-	Limits_StorageTypes = Limits.AddMember("StorageTypes", _StorageTypeList)
-
-	Limits_InstanceLimits = Limits.AddMember("InstanceLimits", InstanceLimits)
-
-	Limits_AdditionalLimits = Limits.AddMember("AdditionalLimits", _AdditionalLimitList)
-
-	_LimitsByRole_key = _LimitsByRole.AddMember("key", _InstanceRole)
-
-	_LimitsByRole_value = _LimitsByRole.AddMember("value", Limits)
-
-	OutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE = OutboundCrossClusterSearchConnectionStatusCode.AddMember("PENDING_ACCEPTANCE", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatusCode_VALIDATING = OutboundCrossClusterSearchConnectionStatusCode.AddMember("VALIDATING", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED = OutboundCrossClusterSearchConnectionStatusCode.AddMember("VALIDATION_FAILED", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatusCode_PROVISIONING = OutboundCrossClusterSearchConnectionStatusCode.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatusCode_ACTIVE = OutboundCrossClusterSearchConnectionStatusCode.AddMember("ACTIVE", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatusCode_REJECTED = OutboundCrossClusterSearchConnectionStatusCode.AddMember("REJECTED", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatusCode_DELETING = OutboundCrossClusterSearchConnectionStatusCode.AddMember("DELETING", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatusCode_DELETED = OutboundCrossClusterSearchConnectionStatusCode.AddMember("DELETED", smithyprelude.Unit)
-
-	OutboundCrossClusterSearchConnectionStatus_StatusCode = OutboundCrossClusterSearchConnectionStatus.AddMember("StatusCode", OutboundCrossClusterSearchConnectionStatusCode)
-
-	OutboundCrossClusterSearchConnectionStatus_Message = OutboundCrossClusterSearchConnectionStatus.AddMember("Message", _CrossClusterSearchConnectionStatusMessage)
-
-	OutboundCrossClusterSearchConnection_SourceDomainInfo = OutboundCrossClusterSearchConnection.AddMember("SourceDomainInfo", DomainInformation)
-
-	OutboundCrossClusterSearchConnection_DestinationDomainInfo = OutboundCrossClusterSearchConnection.AddMember("DestinationDomainInfo", DomainInformation)
-
-	OutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId = OutboundCrossClusterSearchConnection.AddMember("CrossClusterSearchConnectionId", _CrossClusterSearchConnectionId)
-
-	OutboundCrossClusterSearchConnection_ConnectionAlias = OutboundCrossClusterSearchConnection.AddMember("ConnectionAlias", _ConnectionAlias)
-
-	OutboundCrossClusterSearchConnection_ConnectionStatus = OutboundCrossClusterSearchConnection.AddMember("ConnectionStatus", OutboundCrossClusterSearchConnectionStatus)
-
-	_OutboundCrossClusterSearchConnections_member = _OutboundCrossClusterSearchConnections.AddMember("member", OutboundCrossClusterSearchConnection)
-
-	PackageStatus_COPYING = PackageStatus.AddMember("COPYING", smithyprelude.Unit)
-
-	PackageStatus_COPY_FAILED = PackageStatus.AddMember("COPY_FAILED", smithyprelude.Unit)
-
-	PackageStatus_VALIDATING = PackageStatus.AddMember("VALIDATING", smithyprelude.Unit)
-
-	PackageStatus_VALIDATION_FAILED = PackageStatus.AddMember("VALIDATION_FAILED", smithyprelude.Unit)
-
-	PackageStatus_AVAILABLE = PackageStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	PackageStatus_DELETING = PackageStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	PackageStatus_DELETED = PackageStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	PackageStatus_DELETE_FAILED = PackageStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	PackageDetails_PackageID = PackageDetails.AddMember("PackageID", _PackageID)
-
-	PackageDetails_PackageName = PackageDetails.AddMember("PackageName", _PackageName)
-
-	PackageDetails_PackageType = PackageDetails.AddMember("PackageType", PackageType)
-
-	PackageDetails_PackageDescription = PackageDetails.AddMember("PackageDescription", _PackageDescription)
-
-	PackageDetails_PackageStatus = PackageDetails.AddMember("PackageStatus", PackageStatus)
-
-	PackageDetails_CreatedAt = PackageDetails.AddMember("CreatedAt", _CreatedAt)
-
-	PackageDetails_LastUpdatedAt = PackageDetails.AddMember("LastUpdatedAt", _LastUpdated)
-
-	PackageDetails_AvailablePackageVersion = PackageDetails.AddMember("AvailablePackageVersion", _PackageVersion)
-
-	PackageDetails_ErrorDetails = PackageDetails.AddMember("ErrorDetails", ErrorDetails)
-
-	_PackageDetailsList_member = _PackageDetailsList.AddMember("member", PackageDetails)
-
-	PackageSource_S3BucketName = PackageSource.AddMember("S3BucketName", _S3BucketName)
-
-	PackageSource_S3Key = PackageSource.AddMember("S3Key", _S3Key)
-
-	PackageVersionHistory_PackageVersion = PackageVersionHistory.AddMember("PackageVersion", _PackageVersion)
-
-	PackageVersionHistory_CommitMessage = PackageVersionHistory.AddMember("CommitMessage", _CommitMessage)
-
-	PackageVersionHistory_CreatedAt = PackageVersionHistory.AddMember("CreatedAt", _CreatedAt)
-
-	_PackageVersionHistoryList_member = _PackageVersionHistoryList.AddMember("member", PackageVersionHistory)
-
-	RecurringCharge_RecurringChargeAmount = RecurringCharge.AddMember("RecurringChargeAmount", _Double)
-
-	RecurringCharge_RecurringChargeFrequency = RecurringCharge.AddMember("RecurringChargeFrequency", _String)
-
-	_RecurringChargeList_member = _RecurringChargeList.AddMember("member", RecurringCharge, &smithytraits.XMLName{Name: "RecurringCharge"})
-
-	ReservedElasticsearchInstancePaymentOption_ALL_UPFRONT = ReservedElasticsearchInstancePaymentOption.AddMember("ALL_UPFRONT", smithyprelude.Unit)
-
-	ReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT = ReservedElasticsearchInstancePaymentOption.AddMember("PARTIAL_UPFRONT", smithyprelude.Unit)
-
-	ReservedElasticsearchInstancePaymentOption_NO_UPFRONT = ReservedElasticsearchInstancePaymentOption.AddMember("NO_UPFRONT", smithyprelude.Unit)
-
-	ReservedElasticsearchInstance_ReservationName = ReservedElasticsearchInstance.AddMember("ReservationName", _ReservationToken)
-
-	ReservedElasticsearchInstance_ReservedElasticsearchInstanceId = ReservedElasticsearchInstance.AddMember("ReservedElasticsearchInstanceId", _GUID)
-
-	ReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId = ReservedElasticsearchInstance.AddMember("ReservedElasticsearchInstanceOfferingId", _String)
-
-	ReservedElasticsearchInstance_ElasticsearchInstanceType = ReservedElasticsearchInstance.AddMember("ElasticsearchInstanceType", ESPartitionInstanceType)
-
-	ReservedElasticsearchInstance_StartTime = ReservedElasticsearchInstance.AddMember("StartTime", _UpdateTimestamp)
-
-	ReservedElasticsearchInstance_Duration = ReservedElasticsearchInstance.AddMember("Duration", _Integer)
-
-	ReservedElasticsearchInstance_FixedPrice = ReservedElasticsearchInstance.AddMember("FixedPrice", _Double)
-
-	ReservedElasticsearchInstance_UsagePrice = ReservedElasticsearchInstance.AddMember("UsagePrice", _Double)
-
-	ReservedElasticsearchInstance_CurrencyCode = ReservedElasticsearchInstance.AddMember("CurrencyCode", _String)
-
-	ReservedElasticsearchInstance_ElasticsearchInstanceCount = ReservedElasticsearchInstance.AddMember("ElasticsearchInstanceCount", _Integer)
-
-	ReservedElasticsearchInstance_State = ReservedElasticsearchInstance.AddMember("State", _String)
-
-	ReservedElasticsearchInstance_PaymentOption = ReservedElasticsearchInstance.AddMember("PaymentOption", ReservedElasticsearchInstancePaymentOption)
-
-	ReservedElasticsearchInstance_RecurringCharges = ReservedElasticsearchInstance.AddMember("RecurringCharges", _RecurringChargeList)
-
-	_ReservedElasticsearchInstanceList_member = _ReservedElasticsearchInstanceList.AddMember("member", ReservedElasticsearchInstance)
-
-	ReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId = ReservedElasticsearchInstanceOffering.AddMember("ReservedElasticsearchInstanceOfferingId", _GUID)
-
-	ReservedElasticsearchInstanceOffering_ElasticsearchInstanceType = ReservedElasticsearchInstanceOffering.AddMember("ElasticsearchInstanceType", ESPartitionInstanceType)
-
-	ReservedElasticsearchInstanceOffering_Duration = ReservedElasticsearchInstanceOffering.AddMember("Duration", _Integer)
-
-	ReservedElasticsearchInstanceOffering_FixedPrice = ReservedElasticsearchInstanceOffering.AddMember("FixedPrice", _Double)
-
-	ReservedElasticsearchInstanceOffering_UsagePrice = ReservedElasticsearchInstanceOffering.AddMember("UsagePrice", _Double)
-
-	ReservedElasticsearchInstanceOffering_CurrencyCode = ReservedElasticsearchInstanceOffering.AddMember("CurrencyCode", _String)
-
-	ReservedElasticsearchInstanceOffering_PaymentOption = ReservedElasticsearchInstanceOffering.AddMember("PaymentOption", ReservedElasticsearchInstancePaymentOption)
-
-	ReservedElasticsearchInstanceOffering_RecurringCharges = ReservedElasticsearchInstanceOffering.AddMember("RecurringCharges", _RecurringChargeList)
-
-	_ReservedElasticsearchInstanceOfferingList_member = _ReservedElasticsearchInstanceOfferingList.AddMember("member", ReservedElasticsearchInstanceOffering, &smithytraits.XMLName{Name: "ReservedElasticsearchInstanceOffering"})
-
-	ResourceAlreadyExistsException_message = ResourceAlreadyExistsException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TrafficSplitStatus_IN_PROGRESS = TrafficSplitStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	TrafficSplitStatus_COMPLETED = TrafficSplitStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	TrafficSplitStatus_FAILED = TrafficSplitStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	TrafficSplitOptions_Current = TrafficSplitOptions.AddMember("Current", TrafficPercents)
-
-	TrafficSplitOptions_Target = TrafficSplitOptions.AddMember("Target", TrafficPercents)
-
-	TrafficSplitOptions_Status = TrafficSplitOptions.AddMember("Status", TrafficSplitStatus)
-
-	TrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT = TrafficStrategy.AddMember("SHIFT_READ_TRAFFIC_PERCENT", smithyprelude.Unit)
-
-	TrafficSplitRequestOptions_Strategy = TrafficSplitRequestOptions.AddMember("Strategy", TrafficStrategy)
-
-	TrafficSplitRequestOptions_CloneReadTrafficPercent = TrafficSplitRequestOptions.AddMember("CloneReadTrafficPercent", _TrafficPercent)
-
-	UpgradeStatus_IN_PROGRESS = UpgradeStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	UpgradeStatus_SUCCEEDED = UpgradeStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	UpgradeStatus_SUCCEEDED_WITH_ISSUES = UpgradeStatus.AddMember("SUCCEEDED_WITH_ISSUES", smithyprelude.Unit)
-
-	UpgradeStatus_FAILED = UpgradeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	UpgradeStep_PRE_UPGRADE_CHECK = UpgradeStep.AddMember("PRE_UPGRADE_CHECK", smithyprelude.Unit)
-
-	UpgradeStep_SNAPSHOT = UpgradeStep.AddMember("SNAPSHOT", smithyprelude.Unit)
-
-	UpgradeStep_UPGRADE = UpgradeStep.AddMember("UPGRADE", smithyprelude.Unit)
-
-	UpgradeStepItem_UpgradeStep = UpgradeStepItem.AddMember("UpgradeStep", UpgradeStep)
-
-	UpgradeStepItem_UpgradeStepStatus = UpgradeStepItem.AddMember("UpgradeStepStatus", UpgradeStatus)
-
-	UpgradeStepItem_Issues = UpgradeStepItem.AddMember("Issues", _Issues)
-
-	UpgradeStepItem_ProgressPercent = UpgradeStepItem.AddMember("ProgressPercent", _Double)
-
-	_UpgradeStepsList_member = _UpgradeStepsList.AddMember("member", UpgradeStepItem)
-
-	UpgradeHistory_UpgradeName = UpgradeHistory.AddMember("UpgradeName", _UpgradeName)
-
-	UpgradeHistory_StartTimestamp = UpgradeHistory.AddMember("StartTimestamp", _StartTimestamp)
-
-	UpgradeHistory_UpgradeStatus = UpgradeHistory.AddMember("UpgradeStatus", UpgradeStatus)
-
-	UpgradeHistory_StepsList = UpgradeHistory.AddMember("StepsList", _UpgradeStepsList)
-
-	_UpgradeHistoryList_member = _UpgradeHistoryList.AddMember("member", UpgradeHistory)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	VpcEndpointStatus_CREATING = VpcEndpointStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	VpcEndpointStatus_CREATE_FAILED = VpcEndpointStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	VpcEndpointStatus_ACTIVE = VpcEndpointStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	VpcEndpointStatus_UPDATING = VpcEndpointStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	VpcEndpointStatus_UPDATE_FAILED = VpcEndpointStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	VpcEndpointStatus_DELETING = VpcEndpointStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	VpcEndpointStatus_DELETE_FAILED = VpcEndpointStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	VpcEndpoint_VpcEndpointId = VpcEndpoint.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	VpcEndpoint_VpcEndpointOwner = VpcEndpoint.AddMember("VpcEndpointOwner", _AWSAccount)
-
-	VpcEndpoint_DomainArn = VpcEndpoint.AddMember("DomainArn", _DomainArn)
-
-	VpcEndpoint_VpcOptions = VpcEndpoint.AddMember("VpcOptions", VPCDerivedInfo)
-
-	VpcEndpoint_Status = VpcEndpoint.AddMember("Status", VpcEndpointStatus)
-
-	VpcEndpoint_Endpoint = VpcEndpoint.AddMember("Endpoint", _Endpoint)
-
-	VpcEndpointErrorCode_ENDPOINT_NOT_FOUND = VpcEndpointErrorCode.AddMember("ENDPOINT_NOT_FOUND", smithyprelude.Unit)
-
-	VpcEndpointErrorCode_SERVER_ERROR = VpcEndpointErrorCode.AddMember("SERVER_ERROR", smithyprelude.Unit)
-
-	VpcEndpointError_VpcEndpointId = VpcEndpointError.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	VpcEndpointError_ErrorCode = VpcEndpointError.AddMember("ErrorCode", VpcEndpointErrorCode)
-
-	VpcEndpointError_ErrorMessage = VpcEndpointError.AddMember("ErrorMessage", _String)
-
-	_VpcEndpointErrorList_member = _VpcEndpointErrorList.AddMember("member", VpcEndpointError)
-
-	_VpcEndpointIdList_member = _VpcEndpointIdList.AddMember("member", _VpcEndpointId)
-
-	_VpcEndpoints_member = _VpcEndpoints.AddMember("member", VpcEndpoint)
-
-	VpcEndpointSummary_VpcEndpointId = VpcEndpointSummary.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	VpcEndpointSummary_VpcEndpointOwner = VpcEndpointSummary.AddMember("VpcEndpointOwner", _String)
-
-	VpcEndpointSummary_DomainArn = VpcEndpointSummary.AddMember("DomainArn", _DomainArn)
-
-	VpcEndpointSummary_Status = VpcEndpointSummary.AddMember("Status", VpcEndpointStatus)
-
-	_VpcEndpointSummaryList_member = _VpcEndpointSummaryList.AddMember("member", VpcEndpointSummary)
-
-	VPCOptions_SubnetIds = VPCOptions.AddMember("SubnetIds", _StringList)
-
-	VPCOptions_SecurityGroupIds = VPCOptions.AddMember("SecurityGroupIds", _StringList)
-
-	AcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = AcceptInboundCrossClusterSearchConnectionRequest.AddMember("CrossClusterSearchConnectionId", _CrossClusterSearchConnectionId, &smithytraits.HTTPLabel{})
-
-	AcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = AcceptInboundCrossClusterSearchConnectionResponse.AddMember("CrossClusterSearchConnection", InboundCrossClusterSearchConnection)
-
-	AddTagsRequest_ARN = AddTagsRequest.AddMember("ARN", _ARN)
-
-	AddTagsRequest_TagList = AddTagsRequest.AddMember("TagList", _TagList)
-
-	AssociatePackageRequest_PackageID = AssociatePackageRequest.AddMember("PackageID", _PackageID, &smithytraits.HTTPLabel{})
-
-	AssociatePackageRequest_DomainName = AssociatePackageRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	AssociatePackageResponse_DomainPackageDetails = AssociatePackageResponse.AddMember("DomainPackageDetails", DomainPackageDetails)
-
-	AuthorizeVpcEndpointAccessRequest_DomainName = AuthorizeVpcEndpointAccessRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	AuthorizeVpcEndpointAccessRequest_Account = AuthorizeVpcEndpointAccessRequest.AddMember("Account", _AWSAccount)
-
-	AuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal = AuthorizeVpcEndpointAccessResponse.AddMember("AuthorizedPrincipal", AuthorizedPrincipal)
-
-	CancelDomainConfigChangeRequest_DomainName = CancelDomainConfigChangeRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	CancelDomainConfigChangeRequest_DryRun = CancelDomainConfigChangeRequest.AddMember("DryRun", _DryRun)
-
-	CancelDomainConfigChangeResponse_DryRun = CancelDomainConfigChangeResponse.AddMember("DryRun", _DryRun)
-
-	CancelDomainConfigChangeResponse_CancelledChangeIds = CancelDomainConfigChangeResponse.AddMember("CancelledChangeIds", _GUIDList)
-
-	CancelDomainConfigChangeResponse_CancelledChangeProperties = CancelDomainConfigChangeResponse.AddMember("CancelledChangeProperties", _CancelledChangePropertyList)
-
-	CancelElasticsearchServiceSoftwareUpdateRequest_DomainName = CancelElasticsearchServiceSoftwareUpdateRequest.AddMember("DomainName", _DomainName)
-
-	CancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions = CancelElasticsearchServiceSoftwareUpdateResponse.AddMember("ServiceSoftwareOptions", ServiceSoftwareOptions)
-
-	CreateElasticsearchDomainRequest_DomainName = CreateElasticsearchDomainRequest.AddMember("DomainName", _DomainName)
-
-	CreateElasticsearchDomainRequest_ElasticsearchVersion = CreateElasticsearchDomainRequest.AddMember("ElasticsearchVersion", _ElasticsearchVersionString)
-
-	CreateElasticsearchDomainRequest_ElasticsearchClusterConfig = CreateElasticsearchDomainRequest.AddMember("ElasticsearchClusterConfig", ElasticsearchClusterConfig)
-
-	CreateElasticsearchDomainRequest_EBSOptions = CreateElasticsearchDomainRequest.AddMember("EBSOptions", EBSOptions)
-
-	CreateElasticsearchDomainRequest_AccessPolicies = CreateElasticsearchDomainRequest.AddMember("AccessPolicies", _PolicyDocument)
-
-	CreateElasticsearchDomainRequest_SnapshotOptions = CreateElasticsearchDomainRequest.AddMember("SnapshotOptions", SnapshotOptions)
-
-	CreateElasticsearchDomainRequest_VPCOptions = CreateElasticsearchDomainRequest.AddMember("VPCOptions", VPCOptions)
-
-	CreateElasticsearchDomainRequest_CognitoOptions = CreateElasticsearchDomainRequest.AddMember("CognitoOptions", CognitoOptions)
-
-	CreateElasticsearchDomainRequest_EncryptionAtRestOptions = CreateElasticsearchDomainRequest.AddMember("EncryptionAtRestOptions", EncryptionAtRestOptions)
-
-	CreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions = CreateElasticsearchDomainRequest.AddMember("NodeToNodeEncryptionOptions", NodeToNodeEncryptionOptions)
-
-	CreateElasticsearchDomainRequest_AdvancedOptions = CreateElasticsearchDomainRequest.AddMember("AdvancedOptions", _AdvancedOptions)
-
-	CreateElasticsearchDomainRequest_LogPublishingOptions = CreateElasticsearchDomainRequest.AddMember("LogPublishingOptions", _LogPublishingOptions)
-
-	CreateElasticsearchDomainRequest_DomainEndpointOptions = CreateElasticsearchDomainRequest.AddMember("DomainEndpointOptions", DomainEndpointOptions)
-
-	CreateElasticsearchDomainRequest_AdvancedSecurityOptions = CreateElasticsearchDomainRequest.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptionsInput)
-
-	CreateElasticsearchDomainRequest_AutoTuneOptions = CreateElasticsearchDomainRequest.AddMember("AutoTuneOptions", AutoTuneOptionsInput)
-
-	CreateElasticsearchDomainRequest_TagList = CreateElasticsearchDomainRequest.AddMember("TagList", _TagList)
-
-	CreateElasticsearchDomainRequest_DeploymentStrategyOptions = CreateElasticsearchDomainRequest.AddMember("DeploymentStrategyOptions", DeploymentStrategyOptions)
-
-	CreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions = CreateElasticsearchDomainRequest.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseRequestOptions)
-
-	CreateElasticsearchDomainRequest_UseCase = CreateElasticsearchDomainRequest.AddMember("UseCase", DomainUseCase)
-
-	CreateElasticsearchDomainRequest_EngineMode = CreateElasticsearchDomainRequest.AddMember("EngineMode", DomainEngineMode)
-
-	CreateElasticsearchDomainResponse_DomainStatus = CreateElasticsearchDomainResponse.AddMember("DomainStatus", ElasticsearchDomainStatus)
-
-	CreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo = CreateOutboundCrossClusterSearchConnectionRequest.AddMember("SourceDomainInfo", DomainInformation)
-
-	CreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo = CreateOutboundCrossClusterSearchConnectionRequest.AddMember("DestinationDomainInfo", DomainInformation)
-
-	CreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias = CreateOutboundCrossClusterSearchConnectionRequest.AddMember("ConnectionAlias", _ConnectionAlias)
-
-	CreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo = CreateOutboundCrossClusterSearchConnectionResponse.AddMember("SourceDomainInfo", DomainInformation)
-
-	CreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo = CreateOutboundCrossClusterSearchConnectionResponse.AddMember("DestinationDomainInfo", DomainInformation)
-
-	CreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias = CreateOutboundCrossClusterSearchConnectionResponse.AddMember("ConnectionAlias", _ConnectionAlias)
-
-	CreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus = CreateOutboundCrossClusterSearchConnectionResponse.AddMember("ConnectionStatus", OutboundCrossClusterSearchConnectionStatus)
-
-	CreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId = CreateOutboundCrossClusterSearchConnectionResponse.AddMember("CrossClusterSearchConnectionId", _CrossClusterSearchConnectionId)
-
-	CreatePackageRequest_PackageName = CreatePackageRequest.AddMember("PackageName", _PackageName)
-
-	CreatePackageRequest_PackageType = CreatePackageRequest.AddMember("PackageType", PackageType)
-
-	CreatePackageRequest_PackageDescription = CreatePackageRequest.AddMember("PackageDescription", _PackageDescription)
-
-	CreatePackageRequest_PackageSource = CreatePackageRequest.AddMember("PackageSource", PackageSource)
-
-	CreatePackageResponse_PackageDetails = CreatePackageResponse.AddMember("PackageDetails", PackageDetails)
-
-	CreateVpcEndpointRequest_DomainArn = CreateVpcEndpointRequest.AddMember("DomainArn", _DomainArn)
-
-	CreateVpcEndpointRequest_VpcOptions = CreateVpcEndpointRequest.AddMember("VpcOptions", VPCOptions)
-
-	CreateVpcEndpointRequest_ClientToken = CreateVpcEndpointRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateVpcEndpointResponse_VpcEndpoint = CreateVpcEndpointResponse.AddMember("VpcEndpoint", VpcEndpoint)
-
-	DeleteElasticsearchDomainRequest_DomainName = DeleteElasticsearchDomainRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DeleteElasticsearchDomainResponse_DomainStatus = DeleteElasticsearchDomainResponse.AddMember("DomainStatus", ElasticsearchDomainStatus)
-
-	DeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = DeleteInboundCrossClusterSearchConnectionRequest.AddMember("CrossClusterSearchConnectionId", _CrossClusterSearchConnectionId, &smithytraits.HTTPLabel{})
-
-	DeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = DeleteInboundCrossClusterSearchConnectionResponse.AddMember("CrossClusterSearchConnection", InboundCrossClusterSearchConnection)
-
-	DeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = DeleteOutboundCrossClusterSearchConnectionRequest.AddMember("CrossClusterSearchConnectionId", _CrossClusterSearchConnectionId, &smithytraits.HTTPLabel{})
-
-	DeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = DeleteOutboundCrossClusterSearchConnectionResponse.AddMember("CrossClusterSearchConnection", OutboundCrossClusterSearchConnection)
-
-	DeletePackageRequest_PackageID = DeletePackageRequest.AddMember("PackageID", _PackageID, &smithytraits.HTTPLabel{})
-
-	DeletePackageResponse_PackageDetails = DeletePackageResponse.AddMember("PackageDetails", PackageDetails)
-
-	DeleteVpcEndpointRequest_VpcEndpointId = DeleteVpcEndpointRequest.AddMember("VpcEndpointId", _VpcEndpointId, &smithytraits.HTTPLabel{})
-
-	DeleteVpcEndpointResponse_VpcEndpointSummary = DeleteVpcEndpointResponse.AddMember("VpcEndpointSummary", VpcEndpointSummary)
-
-	DescribeDomainAutoTunesRequest_DomainName = DescribeDomainAutoTunesRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DescribeDomainAutoTunesRequest_MaxResults = DescribeDomainAutoTunesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeDomainAutoTunesRequest_NextToken = DescribeDomainAutoTunesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeDomainAutoTunesResponse_AutoTunes = DescribeDomainAutoTunesResponse.AddMember("AutoTunes", _AutoTuneList)
-
-	DescribeDomainAutoTunesResponse_NextToken = DescribeDomainAutoTunesResponse.AddMember("NextToken", _NextToken)
-
-	DescribeDomainChangeProgressRequest_DomainName = DescribeDomainChangeProgressRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DescribeDomainChangeProgressRequest_ChangeId = DescribeDomainChangeProgressRequest.AddMember("ChangeId", _GUID, &smithytraits.HTTPQuery{Name: "changeid"})
-
-	DescribeDomainChangeProgressResponse_ChangeProgressStatus = DescribeDomainChangeProgressResponse.AddMember("ChangeProgressStatus", ChangeProgressStatusDetails)
-
-	DescribeElasticsearchDomainConfigRequest_DomainName = DescribeElasticsearchDomainConfigRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DescribeElasticsearchDomainConfigResponse_DomainConfig = DescribeElasticsearchDomainConfigResponse.AddMember("DomainConfig", ElasticsearchDomainConfig)
-
-	DescribeElasticsearchDomainRequest_DomainName = DescribeElasticsearchDomainRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DescribeElasticsearchDomainResponse_DomainStatus = DescribeElasticsearchDomainResponse.AddMember("DomainStatus", ElasticsearchDomainStatus)
-
-	DescribeElasticsearchDomainsRequest_DomainNames = DescribeElasticsearchDomainsRequest.AddMember("DomainNames", _DomainNameList)
-
-	DescribeElasticsearchDomainsResponse_DomainStatusList = DescribeElasticsearchDomainsResponse.AddMember("DomainStatusList", _ElasticsearchDomainStatusList)
-
-	DescribeElasticsearchInstanceTypeLimitsRequest_DomainName = DescribeElasticsearchInstanceTypeLimitsRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPQuery{Name: "domainName"})
-
-	DescribeElasticsearchInstanceTypeLimitsRequest_InstanceType = DescribeElasticsearchInstanceTypeLimitsRequest.AddMember("InstanceType", ESPartitionInstanceType, &smithytraits.HTTPLabel{})
-
-	DescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion = DescribeElasticsearchInstanceTypeLimitsRequest.AddMember("ElasticsearchVersion", _ElasticsearchVersionString, &smithytraits.HTTPLabel{})
-
-	DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole = DescribeElasticsearchInstanceTypeLimitsResponse.AddMember("LimitsByRole", _LimitsByRole)
-
-	DescribeInboundCrossClusterSearchConnectionsRequest_Filters = DescribeInboundCrossClusterSearchConnectionsRequest.AddMember("Filters", _FilterList)
-
-	DescribeInboundCrossClusterSearchConnectionsRequest_MaxResults = DescribeInboundCrossClusterSearchConnectionsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeInboundCrossClusterSearchConnectionsRequest_NextToken = DescribeInboundCrossClusterSearchConnectionsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections = DescribeInboundCrossClusterSearchConnectionsResponse.AddMember("CrossClusterSearchConnections", _InboundCrossClusterSearchConnections)
-
-	DescribeInboundCrossClusterSearchConnectionsResponse_NextToken = DescribeInboundCrossClusterSearchConnectionsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeOutboundCrossClusterSearchConnectionsRequest_Filters = DescribeOutboundCrossClusterSearchConnectionsRequest.AddMember("Filters", _FilterList)
-
-	DescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults = DescribeOutboundCrossClusterSearchConnectionsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeOutboundCrossClusterSearchConnectionsRequest_NextToken = DescribeOutboundCrossClusterSearchConnectionsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections = DescribeOutboundCrossClusterSearchConnectionsResponse.AddMember("CrossClusterSearchConnections", _OutboundCrossClusterSearchConnections)
-
-	DescribeOutboundCrossClusterSearchConnectionsResponse_NextToken = DescribeOutboundCrossClusterSearchConnectionsResponse.AddMember("NextToken", _NextToken)
-
-	DescribePackagesRequest_Filters = DescribePackagesRequest.AddMember("Filters", _DescribePackagesFilterList)
-
-	DescribePackagesRequest_MaxResults = DescribePackagesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribePackagesRequest_NextToken = DescribePackagesRequest.AddMember("NextToken", _NextToken)
-
-	DescribePackagesResponse_PackageDetailsList = DescribePackagesResponse.AddMember("PackageDetailsList", _PackageDetailsList)
-
-	DescribePackagesResponse_NextToken = DescribePackagesResponse.AddMember("NextToken", _String)
-
-	DescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId = DescribeReservedElasticsearchInstanceOfferingsRequest.AddMember("ReservedElasticsearchInstanceOfferingId", _GUID, &smithytraits.HTTPQuery{Name: "offeringId"})
-
-	DescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults = DescribeReservedElasticsearchInstanceOfferingsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeReservedElasticsearchInstanceOfferingsRequest_NextToken = DescribeReservedElasticsearchInstanceOfferingsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeReservedElasticsearchInstanceOfferingsResponse_NextToken = DescribeReservedElasticsearchInstanceOfferingsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings = DescribeReservedElasticsearchInstanceOfferingsResponse.AddMember("ReservedElasticsearchInstanceOfferings", _ReservedElasticsearchInstanceOfferingList)
-
-	DescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId = DescribeReservedElasticsearchInstancesRequest.AddMember("ReservedElasticsearchInstanceId", _GUID, &smithytraits.HTTPQuery{Name: "reservationId"})
-
-	DescribeReservedElasticsearchInstancesRequest_MaxResults = DescribeReservedElasticsearchInstancesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeReservedElasticsearchInstancesRequest_NextToken = DescribeReservedElasticsearchInstancesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeReservedElasticsearchInstancesResponse_NextToken = DescribeReservedElasticsearchInstancesResponse.AddMember("NextToken", _String)
-
-	DescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances = DescribeReservedElasticsearchInstancesResponse.AddMember("ReservedElasticsearchInstances", _ReservedElasticsearchInstanceList)
-
-	DescribeVpcEndpointsRequest_VpcEndpointIds = DescribeVpcEndpointsRequest.AddMember("VpcEndpointIds", _VpcEndpointIdList)
-
-	DescribeVpcEndpointsResponse_VpcEndpoints = DescribeVpcEndpointsResponse.AddMember("VpcEndpoints", _VpcEndpoints)
-
-	DescribeVpcEndpointsResponse_VpcEndpointErrors = DescribeVpcEndpointsResponse.AddMember("VpcEndpointErrors", _VpcEndpointErrorList)
-
-	DissociatePackageRequest_PackageID = DissociatePackageRequest.AddMember("PackageID", _PackageID, &smithytraits.HTTPLabel{})
-
-	DissociatePackageRequest_DomainName = DissociatePackageRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DissociatePackageResponse_DomainPackageDetails = DissociatePackageResponse.AddMember("DomainPackageDetails", DomainPackageDetails)
-
-	GetCompatibleElasticsearchVersionsRequest_DomainName = GetCompatibleElasticsearchVersionsRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPQuery{Name: "domainName"})
-
-	GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions = GetCompatibleElasticsearchVersionsResponse.AddMember("CompatibleElasticsearchVersions", _CompatibleElasticsearchVersionsList)
-
-	GetPackageVersionHistoryRequest_PackageID = GetPackageVersionHistoryRequest.AddMember("PackageID", _PackageID, &smithytraits.HTTPLabel{})
-
-	GetPackageVersionHistoryRequest_MaxResults = GetPackageVersionHistoryRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetPackageVersionHistoryRequest_NextToken = GetPackageVersionHistoryRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetPackageVersionHistoryResponse_PackageID = GetPackageVersionHistoryResponse.AddMember("PackageID", _PackageID)
-
-	GetPackageVersionHistoryResponse_PackageVersionHistoryList = GetPackageVersionHistoryResponse.AddMember("PackageVersionHistoryList", _PackageVersionHistoryList)
-
-	GetPackageVersionHistoryResponse_NextToken = GetPackageVersionHistoryResponse.AddMember("NextToken", _String)
-
-	GetUpgradeHistoryRequest_DomainName = GetUpgradeHistoryRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	GetUpgradeHistoryRequest_MaxResults = GetUpgradeHistoryRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetUpgradeHistoryRequest_NextToken = GetUpgradeHistoryRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetUpgradeHistoryResponse_UpgradeHistories = GetUpgradeHistoryResponse.AddMember("UpgradeHistories", _UpgradeHistoryList)
-
-	GetUpgradeHistoryResponse_NextToken = GetUpgradeHistoryResponse.AddMember("NextToken", _String)
-
-	GetUpgradeStatusRequest_DomainName = GetUpgradeStatusRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	GetUpgradeStatusResponse_UpgradeStep = GetUpgradeStatusResponse.AddMember("UpgradeStep", UpgradeStep)
-
-	GetUpgradeStatusResponse_StepStatus = GetUpgradeStatusResponse.AddMember("StepStatus", UpgradeStatus)
-
-	GetUpgradeStatusResponse_UpgradeName = GetUpgradeStatusResponse.AddMember("UpgradeName", _UpgradeName)
-
-	ListDomainNamesRequest_EngineType = ListDomainNamesRequest.AddMember("EngineType", EngineType, &smithytraits.HTTPQuery{Name: "engineType"})
-
-	ListDomainNamesResponse_DomainNames = ListDomainNamesResponse.AddMember("DomainNames", _DomainInfoList)
-
-	ListDomainsForPackageRequest_PackageID = ListDomainsForPackageRequest.AddMember("PackageID", _PackageID, &smithytraits.HTTPLabel{})
-
-	ListDomainsForPackageRequest_MaxResults = ListDomainsForPackageRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDomainsForPackageRequest_NextToken = ListDomainsForPackageRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDomainsForPackageResponse_DomainPackageDetailsList = ListDomainsForPackageResponse.AddMember("DomainPackageDetailsList", _DomainPackageDetailsList)
-
-	ListDomainsForPackageResponse_NextToken = ListDomainsForPackageResponse.AddMember("NextToken", _String)
-
-	ListElasticsearchInstanceTypesRequest_ElasticsearchVersion = ListElasticsearchInstanceTypesRequest.AddMember("ElasticsearchVersion", _ElasticsearchVersionString, &smithytraits.HTTPLabel{})
-
-	ListElasticsearchInstanceTypesRequest_DomainName = ListElasticsearchInstanceTypesRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPQuery{Name: "domainName"})
-
-	ListElasticsearchInstanceTypesRequest_MaxResults = ListElasticsearchInstanceTypesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListElasticsearchInstanceTypesRequest_NextToken = ListElasticsearchInstanceTypesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes = ListElasticsearchInstanceTypesResponse.AddMember("ElasticsearchInstanceTypes", _ElasticsearchInstanceTypeList)
-
-	ListElasticsearchInstanceTypesResponse_NextToken = ListElasticsearchInstanceTypesResponse.AddMember("NextToken", _NextToken)
-
-	ListElasticsearchVersionsRequest_MaxResults = ListElasticsearchVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListElasticsearchVersionsRequest_NextToken = ListElasticsearchVersionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListElasticsearchVersionsResponse_ElasticsearchVersions = ListElasticsearchVersionsResponse.AddMember("ElasticsearchVersions", _ElasticsearchVersionList)
-
-	ListElasticsearchVersionsResponse_NextToken = ListElasticsearchVersionsResponse.AddMember("NextToken", _NextToken)
-
-	ListPackagesForDomainRequest_DomainName = ListPackagesForDomainRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	ListPackagesForDomainRequest_MaxResults = ListPackagesForDomainRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListPackagesForDomainRequest_NextToken = ListPackagesForDomainRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListPackagesForDomainResponse_DomainPackageDetailsList = ListPackagesForDomainResponse.AddMember("DomainPackageDetailsList", _DomainPackageDetailsList)
-
-	ListPackagesForDomainResponse_NextToken = ListPackagesForDomainResponse.AddMember("NextToken", _String)
-
-	ListTagsRequest_ARN = ListTagsRequest.AddMember("ARN", _ARN, &smithytraits.HTTPQuery{Name: "arn"})
-
-	ListTagsResponse_TagList = ListTagsResponse.AddMember("TagList", _TagList)
-
-	ListVpcEndpointAccessRequest_DomainName = ListVpcEndpointAccessRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	ListVpcEndpointAccessRequest_NextToken = ListVpcEndpointAccessRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVpcEndpointAccessResponse_AuthorizedPrincipalList = ListVpcEndpointAccessResponse.AddMember("AuthorizedPrincipalList", _AuthorizedPrincipalList)
-
-	ListVpcEndpointAccessResponse_NextToken = ListVpcEndpointAccessResponse.AddMember("NextToken", _NextToken)
-
-	ListVpcEndpointsForDomainRequest_DomainName = ListVpcEndpointsForDomainRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	ListVpcEndpointsForDomainRequest_NextToken = ListVpcEndpointsForDomainRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList = ListVpcEndpointsForDomainResponse.AddMember("VpcEndpointSummaryList", _VpcEndpointSummaryList)
-
-	ListVpcEndpointsForDomainResponse_NextToken = ListVpcEndpointsForDomainResponse.AddMember("NextToken", _NextToken)
-
-	ListVpcEndpointsRequest_NextToken = ListVpcEndpointsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVpcEndpointsResponse_VpcEndpointSummaryList = ListVpcEndpointsResponse.AddMember("VpcEndpointSummaryList", _VpcEndpointSummaryList)
-
-	ListVpcEndpointsResponse_NextToken = ListVpcEndpointsResponse.AddMember("NextToken", _NextToken)
-
-	PurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId = PurchaseReservedElasticsearchInstanceOfferingRequest.AddMember("ReservedElasticsearchInstanceOfferingId", _GUID)
-
-	PurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName = PurchaseReservedElasticsearchInstanceOfferingRequest.AddMember("ReservationName", _ReservationToken)
-
-	PurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount = PurchaseReservedElasticsearchInstanceOfferingRequest.AddMember("InstanceCount", _InstanceCount)
-
-	PurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId = PurchaseReservedElasticsearchInstanceOfferingResponse.AddMember("ReservedElasticsearchInstanceId", _GUID)
-
-	PurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName = PurchaseReservedElasticsearchInstanceOfferingResponse.AddMember("ReservationName", _ReservationToken)
-
-	RejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = RejectInboundCrossClusterSearchConnectionRequest.AddMember("CrossClusterSearchConnectionId", _CrossClusterSearchConnectionId, &smithytraits.HTTPLabel{})
-
-	RejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = RejectInboundCrossClusterSearchConnectionResponse.AddMember("CrossClusterSearchConnection", InboundCrossClusterSearchConnection)
-
-	RemoveTagsRequest_ARN = RemoveTagsRequest.AddMember("ARN", _ARN)
-
-	RemoveTagsRequest_TagKeys = RemoveTagsRequest.AddMember("TagKeys", _StringList)
-
-	RevokeVpcEndpointAccessRequest_DomainName = RevokeVpcEndpointAccessRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	RevokeVpcEndpointAccessRequest_Account = RevokeVpcEndpointAccessRequest.AddMember("Account", _AWSAccount)
-
-	StartElasticsearchServiceSoftwareUpdateRequest_DomainName = StartElasticsearchServiceSoftwareUpdateRequest.AddMember("DomainName", _DomainName)
-
-	StartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions = StartElasticsearchServiceSoftwareUpdateResponse.AddMember("ServiceSoftwareOptions", ServiceSoftwareOptions)
-
-	UpdateCloneRequest_DomainName = UpdateCloneRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	UpdateCloneRequest_TrafficSplitOptions = UpdateCloneRequest.AddMember("TrafficSplitOptions", TrafficSplitRequestOptions)
-
-	UpdateCloneRequest_CutoverOptions = UpdateCloneRequest.AddMember("CutoverOptions", CutoverRequestOptions)
-
-	UpdateCloneRequest_RetentionOptions = UpdateCloneRequest.AddMember("RetentionOptions", RetentionOptions)
-
-	UpdateCloneResponse_DomainName = UpdateCloneResponse.AddMember("DomainName", _DomainName)
-
-	UpdateCloneResponse_ChangeId = UpdateCloneResponse.AddMember("ChangeId", _GUID)
-
-	UpdateCloneResponse_CutoverOptions = UpdateCloneResponse.AddMember("CutoverOptions", CutoverOptions)
-
-	UpdateCloneResponse_TrafficSplitOptions = UpdateCloneResponse.AddMember("TrafficSplitOptions", TrafficSplitOptions)
-
-	UpdateCloneResponse_RetentionOptions = UpdateCloneResponse.AddMember("RetentionOptions", RetentionOptions)
-
-	UpdateElasticsearchDomainConfigRequest_DomainName = UpdateElasticsearchDomainConfigRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	UpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig = UpdateElasticsearchDomainConfigRequest.AddMember("ElasticsearchClusterConfig", ElasticsearchClusterConfig)
-
-	UpdateElasticsearchDomainConfigRequest_EBSOptions = UpdateElasticsearchDomainConfigRequest.AddMember("EBSOptions", EBSOptions)
-
-	UpdateElasticsearchDomainConfigRequest_SnapshotOptions = UpdateElasticsearchDomainConfigRequest.AddMember("SnapshotOptions", SnapshotOptions)
-
-	UpdateElasticsearchDomainConfigRequest_VPCOptions = UpdateElasticsearchDomainConfigRequest.AddMember("VPCOptions", VPCOptions)
-
-	UpdateElasticsearchDomainConfigRequest_CognitoOptions = UpdateElasticsearchDomainConfigRequest.AddMember("CognitoOptions", CognitoOptions)
-
-	UpdateElasticsearchDomainConfigRequest_AdvancedOptions = UpdateElasticsearchDomainConfigRequest.AddMember("AdvancedOptions", _AdvancedOptions)
-
-	UpdateElasticsearchDomainConfigRequest_AccessPolicies = UpdateElasticsearchDomainConfigRequest.AddMember("AccessPolicies", _PolicyDocument)
-
-	UpdateElasticsearchDomainConfigRequest_LogPublishingOptions = UpdateElasticsearchDomainConfigRequest.AddMember("LogPublishingOptions", _LogPublishingOptions)
-
-	UpdateElasticsearchDomainConfigRequest_DomainEndpointOptions = UpdateElasticsearchDomainConfigRequest.AddMember("DomainEndpointOptions", DomainEndpointOptions)
-
-	UpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions = UpdateElasticsearchDomainConfigRequest.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptionsInput)
-
-	UpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions = UpdateElasticsearchDomainConfigRequest.AddMember("NodeToNodeEncryptionOptions", NodeToNodeEncryptionOptions)
-
-	UpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions = UpdateElasticsearchDomainConfigRequest.AddMember("EncryptionAtRestOptions", EncryptionAtRestOptions)
-
-	UpdateElasticsearchDomainConfigRequest_AutoTuneOptions = UpdateElasticsearchDomainConfigRequest.AddMember("AutoTuneOptions", AutoTuneOptions)
-
-	UpdateElasticsearchDomainConfigRequest_DryRun = UpdateElasticsearchDomainConfigRequest.AddMember("DryRun", _DryRun)
-
-	UpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions = UpdateElasticsearchDomainConfigRequest.AddMember("DeploymentStrategyOptions", DeploymentStrategyOptions)
-
-	UpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions = UpdateElasticsearchDomainConfigRequest.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseRequestOptions)
-
-	UpdateElasticsearchDomainConfigRequest_UseCase = UpdateElasticsearchDomainConfigRequest.AddMember("UseCase", DomainUseCase)
-
-	UpdateElasticsearchDomainConfigRequest_EngineMode = UpdateElasticsearchDomainConfigRequest.AddMember("EngineMode", DomainEngineMode)
-
-	UpdateElasticsearchDomainConfigResponse_DomainConfig = UpdateElasticsearchDomainConfigResponse.AddMember("DomainConfig", ElasticsearchDomainConfig)
-
-	UpdateElasticsearchDomainConfigResponse_DryRunResults = UpdateElasticsearchDomainConfigResponse.AddMember("DryRunResults", DryRunResults)
-
-	UpdatePackageRequest_PackageID = UpdatePackageRequest.AddMember("PackageID", _PackageID)
-
-	UpdatePackageRequest_PackageSource = UpdatePackageRequest.AddMember("PackageSource", PackageSource)
-
-	UpdatePackageRequest_PackageDescription = UpdatePackageRequest.AddMember("PackageDescription", _PackageDescription)
-
-	UpdatePackageRequest_CommitMessage = UpdatePackageRequest.AddMember("CommitMessage", _CommitMessage)
-
-	UpdatePackageResponse_PackageDetails = UpdatePackageResponse.AddMember("PackageDetails", PackageDetails)
-
-	UpdateVpcEndpointRequest_VpcEndpointId = UpdateVpcEndpointRequest.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	UpdateVpcEndpointRequest_VpcOptions = UpdateVpcEndpointRequest.AddMember("VpcOptions", VPCOptions)
-
-	UpdateVpcEndpointResponse_VpcEndpoint = UpdateVpcEndpointResponse.AddMember("VpcEndpoint", VpcEndpoint)
-
-	UpgradeElasticsearchDomainRequest_DomainName = UpgradeElasticsearchDomainRequest.AddMember("DomainName", _DomainName)
-
-	UpgradeElasticsearchDomainRequest_TargetVersion = UpgradeElasticsearchDomainRequest.AddMember("TargetVersion", _ElasticsearchVersionString)
-
-	UpgradeElasticsearchDomainRequest_PerformCheckOnly = UpgradeElasticsearchDomainRequest.AddMember("PerformCheckOnly", _Boolean)
-
-	UpgradeElasticsearchDomainRequest_DeploymentStrategyOptions = UpgradeElasticsearchDomainRequest.AddMember("DeploymentStrategyOptions", DeploymentStrategyOverrideOptions)
-
-	UpgradeElasticsearchDomainResponse_DomainName = UpgradeElasticsearchDomainResponse.AddMember("DomainName", _DomainName)
-
-	UpgradeElasticsearchDomainResponse_TargetVersion = UpgradeElasticsearchDomainResponse.AddMember("TargetVersion", _ElasticsearchVersionString)
-
-	UpgradeElasticsearchDomainResponse_PerformCheckOnly = UpgradeElasticsearchDomainResponse.AddMember("PerformCheckOnly", _Boolean)
-
-	UpgradeElasticsearchDomainResponse_DeploymentStrategyOptions = UpgradeElasticsearchDomainResponse.AddMember("DeploymentStrategyOptions", DeploymentStrategyOverrideOptions)
-
-	UpgradeElasticsearchDomainResponse_ChangeProgressDetails = UpgradeElasticsearchDomainResponse.AddMember("ChangeProgressDetails", ChangeProgressDetails)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://es.amazonaws.com/doc/2015-01-01/"}}, DirectMask: 0x8000}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t54 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "RecurringCharge"}}, DirectMask: 0x8}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ReservedElasticsearchInstanceOffering"}}, DirectMask: 0x8}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "changeid"}}, DirectMask: 0x10}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "domainName"}}, DirectMask: 0x10}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "offeringId"}}, DirectMask: 0x10}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "reservationId"}}, DirectMask: 0x10}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "engineType"}}, DirectMask: 0x10}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "arn"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccessPoliciesStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessPoliciesStatus_Options, &sAccessPoliciesStatus_Status}}
+var mAdditionalLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalLimit_LimitName, &sAdditionalLimit_LimitValues}}
+var m_AdditionalLimitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalLimitList_member}}
+var m_AdvancedOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdvancedOptions_key, &s_AdvancedOptions_value}}
+var mAdvancedOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedOptionsStatus_Options, &sAdvancedOptionsStatus_Status}}
+var mAdvancedSecurityOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedSecurityOptions_Enabled, &sAdvancedSecurityOptions_InternalUserDatabaseEnabled, &sAdvancedSecurityOptions_SAMLOptions, &sAdvancedSecurityOptions_AnonymousAuthDisableDate, &sAdvancedSecurityOptions_AnonymousAuthEnabled}}
+var mAdvancedSecurityOptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedSecurityOptionsInput_Enabled, &sAdvancedSecurityOptionsInput_InternalUserDatabaseEnabled, &sAdvancedSecurityOptionsInput_MasterUserOptions, &sAdvancedSecurityOptionsInput_SAMLOptions, &sAdvancedSecurityOptionsInput_AnonymousAuthEnabled}}
+var mAdvancedSecurityOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedSecurityOptionsStatus_Options, &sAdvancedSecurityOptionsStatus_Status}}
+var mAuthorizedPrincipal = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizedPrincipal_PrincipalType, &sAuthorizedPrincipal_Principal}}
+var m_AuthorizedPrincipalList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthorizedPrincipalList_member}}
+var mAutomatedSnapshotPauseOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomatedSnapshotPauseOptions_Enabled, &sAutomatedSnapshotPauseOptions_StartTime, &sAutomatedSnapshotPauseOptions_EndTime, &sAutomatedSnapshotPauseOptions_State}}
+var mAutomatedSnapshotPauseOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomatedSnapshotPauseOptionsStatus_Options, &sAutomatedSnapshotPauseOptionsStatus_Status}}
+var mAutomatedSnapshotPauseRequestOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomatedSnapshotPauseRequestOptions_Enabled, &sAutomatedSnapshotPauseRequestOptions_StartTime, &sAutomatedSnapshotPauseRequestOptions_EndTime}}
+var mAutoTune = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTune_AutoTuneType, &sAutoTune_AutoTuneDetails}}
+var mAutoTuneDesiredState = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneDesiredState_ENABLED, &sAutoTuneDesiredState_DISABLED}}
+var mAutoTuneDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneDetails_ScheduledAutoTuneDetails}}
+var m_AutoTuneList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutoTuneList_member}}
+var mAutoTuneMaintenanceSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneMaintenanceSchedule_StartAt, &sAutoTuneMaintenanceSchedule_Duration, &sAutoTuneMaintenanceSchedule_CronExpressionForRecurrence}}
+var m_AutoTuneMaintenanceScheduleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutoTuneMaintenanceScheduleList_member}}
+var mAutoTuneOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneOptions_DesiredState, &sAutoTuneOptions_RollbackOnDisable, &sAutoTuneOptions_MaintenanceSchedules}}
+var mAutoTuneOptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneOptionsInput_DesiredState, &sAutoTuneOptionsInput_MaintenanceSchedules}}
+var mAutoTuneOptionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneOptionsOutput_State, &sAutoTuneOptionsOutput_ErrorMessage}}
+var mAutoTuneOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneOptionsStatus_Options, &sAutoTuneOptionsStatus_Status}}
+var mAutoTuneState = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneState_ENABLED, &sAutoTuneState_DISABLED, &sAutoTuneState_ENABLE_IN_PROGRESS, &sAutoTuneState_DISABLE_IN_PROGRESS, &sAutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED, &sAutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS, &sAutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE, &sAutoTuneState_DISABLED_AND_ROLLBACK_ERROR, &sAutoTuneState_ERROR}, Hash: &hAutoTuneState}
+var mAutoTuneStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneStatus_CreationDate, &sAutoTuneStatus_UpdateDate, &sAutoTuneStatus_UpdateVersion, &sAutoTuneStatus_State, &sAutoTuneStatus_ErrorMessage, &sAutoTuneStatus_PendingDeletion}}
+var mAutoTuneType = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoTuneType_SCHEDULED_ACTION}}
+var mBaseException = smithy.SchemaMembers{List: []*smithy.Schema{&sBaseException_message}}
+var mCancelledChangeProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelledChangeProperty_PropertyName, &sCancelledChangeProperty_CancelledValue, &sCancelledChangeProperty_ActiveValue}}
+var m_CancelledChangePropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CancelledChangePropertyList_member}}
+var mChangeProgressDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeProgressDetails_ChangeId, &sChangeProgressDetails_Message, &sChangeProgressDetails_ConfigChangeStatus, &sChangeProgressDetails_StartTime, &sChangeProgressDetails_LastUpdatedTime, &sChangeProgressDetails_InitiatedBy}}
+var mChangeProgressStage = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeProgressStage_Name, &sChangeProgressStage_Status, &sChangeProgressStage_Description, &sChangeProgressStage_LastUpdated}}
+var m_ChangeProgressStageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChangeProgressStageList_member}}
+var mChangeProgressStatusDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeProgressStatusDetails_ChangeId, &sChangeProgressStatusDetails_StartTime, &sChangeProgressStatusDetails_Status, &sChangeProgressStatusDetails_PendingProperties, &sChangeProgressStatusDetails_CompletedProperties, &sChangeProgressStatusDetails_TotalNumberOfStages, &sChangeProgressStatusDetails_ChangeProgressStages, &sChangeProgressStatusDetails_ConfigChangeStatus, &sChangeProgressStatusDetails_LastUpdatedTime, &sChangeProgressStatusDetails_InitiatedBy, &sChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails}, Hash: &hChangeProgressStatusDetails}
+var mClonedBlueGreenOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sClonedBlueGreenOptions_RetentionOptions}}
+var mClonedBlueGreenScheduledAction = smithy.SchemaMembers{List: []*smithy.Schema{&sClonedBlueGreenScheduledAction_Action, &sClonedBlueGreenScheduledAction_ScheduledTime}}
+var mClonedBlueGreenScheduledActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY, &sClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER}}
+var mClonedBlueGreenUpgradeDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sClonedBlueGreenUpgradeDetails_TrafficSplit, &sClonedBlueGreenUpgradeDetails_ScheduledAction, &sClonedBlueGreenUpgradeDetails_RetentionInHours}}
+var mCognitoOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoOptions_Enabled, &sCognitoOptions_UserPoolId, &sCognitoOptions_IdentityPoolId, &sCognitoOptions_RoleArn}}
+var mCognitoOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoOptionsStatus_Options, &sCognitoOptionsStatus_Status}}
+var mColdStorageOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sColdStorageOptions_Enabled}}
+var m_CompatibleElasticsearchVersionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompatibleElasticsearchVersionsList_member}}
+var mCompatibleVersionsMap = smithy.SchemaMembers{List: []*smithy.Schema{&sCompatibleVersionsMap_SourceVersion, &sCompatibleVersionsMap_TargetVersions}}
+var mConfigChangeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigChangeStatus_PENDING, &sConfigChangeStatus_INITIALIZING, &sConfigChangeStatus_VALIDATING, &sConfigChangeStatus_VALIDATION_FAILED, &sConfigChangeStatus_APPLYING_CHANGES, &sConfigChangeStatus_COMPLETED, &sConfigChangeStatus_PENDING_USER_INPUT, &sConfigChangeStatus_CANCELLED}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCutoverOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCutoverOptions_Target, &sCutoverOptions_Status}}
+var mCutoverRequestOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCutoverRequestOptions_Target}}
+var mCutoverStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCutoverStatus_IN_PROGRESS, &sCutoverStatus_COMPLETED, &sCutoverStatus_FAILED}}
+var mCutoverTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sCutoverTarget_CLONED_CLUSTER, &sCutoverTarget_PRIMARY_CLUSTER}}
+var mDeploymentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStatus_PENDING_UPDATE, &sDeploymentStatus_IN_PROGRESS, &sDeploymentStatus_COMPLETED, &sDeploymentStatus_NOT_ELIGIBLE, &sDeploymentStatus_ELIGIBLE}}
+var mDeploymentStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStrategy_DEFAULT, &sDeploymentStrategy_CAPACITY_OPTIMIZED}}
+var mDeploymentStrategyOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStrategyOptions_DeploymentStrategy}}
+var mDeploymentStrategyOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStrategyOptionsStatus_Options, &sDeploymentStrategyOptionsStatus_Status}}
+var mDeploymentStrategyOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStrategyOverride_CLONED_BLUE_GREEN}}
+var mDeploymentStrategyOverrideOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStrategyOverrideOptions_DeploymentStrategy, &sDeploymentStrategyOverrideOptions_ClonedBlueGreenOptions}}
+var mDescribePackagesFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackagesFilter_Name, &sDescribePackagesFilter_Value}}
+var m_DescribePackagesFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribePackagesFilterList_member}}
+var mDescribePackagesFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackagesFilterName_PackageID, &sDescribePackagesFilterName_PackageName, &sDescribePackagesFilterName_PackageStatus}}
+var m_DescribePackagesFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribePackagesFilterValues_member}}
+var mDisabledOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDisabledOperationException_message}}
+var mDomainEndpointOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainEndpointOptions_EnforceHTTPS, &sDomainEndpointOptions_TLSSecurityPolicy, &sDomainEndpointOptions_CustomEndpointEnabled, &sDomainEndpointOptions_CustomEndpoint, &sDomainEndpointOptions_CustomEndpointCertificateArn}}
+var mDomainEndpointOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainEndpointOptionsStatus_Options, &sDomainEndpointOptionsStatus_Status}}
+var mDomainEngineMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainEngineMode_GENERAL, &sDomainEngineMode_OPTIMIZED}}
+var mDomainInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainInfo_DomainName, &sDomainInfo_EngineType}}
+var m_DomainInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainInfoList_member}}
+var mDomainInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainInformation_OwnerId, &sDomainInformation_DomainName, &sDomainInformation_Region}}
+var m_DomainNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainNameList_member}}
+var mDomainPackageDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainPackageDetails_PackageID, &sDomainPackageDetails_PackageName, &sDomainPackageDetails_PackageType, &sDomainPackageDetails_LastUpdated, &sDomainPackageDetails_DomainName, &sDomainPackageDetails_DomainPackageStatus, &sDomainPackageDetails_PackageVersion, &sDomainPackageDetails_ReferencePath, &sDomainPackageDetails_ErrorDetails}, Hash: &hDomainPackageDetails}
+var m_DomainPackageDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainPackageDetailsList_member}}
+var mDomainPackageStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainPackageStatus_ASSOCIATING, &sDomainPackageStatus_ASSOCIATION_FAILED, &sDomainPackageStatus_ACTIVE, &sDomainPackageStatus_DISSOCIATING, &sDomainPackageStatus_DISSOCIATION_FAILED}}
+var mDomainProcessingStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainProcessingStatusType_CREATING, &sDomainProcessingStatusType_ACTIVE, &sDomainProcessingStatusType_MODIFYING, &sDomainProcessingStatusType_UPGRADING, &sDomainProcessingStatusType_UPDATING, &sDomainProcessingStatusType_ISOLATED, &sDomainProcessingStatusType_DELETING}}
+var mDomainUseCase = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainUseCase_SEARCH, &sDomainUseCase_VECTOR, &sDomainUseCase_OBSERVABILITY, &sDomainUseCase_MIXED}}
+var mDryRunResults = smithy.SchemaMembers{List: []*smithy.Schema{&sDryRunResults_DeploymentType, &sDryRunResults_Message}}
+var mDuration = smithy.SchemaMembers{List: []*smithy.Schema{&sDuration_Value, &sDuration_Unit}}
+var mEBSOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sEBSOptions_EBSEnabled, &sEBSOptions_VolumeType, &sEBSOptions_VolumeSize, &sEBSOptions_Iops, &sEBSOptions_Throughput}}
+var mEBSOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEBSOptionsStatus_Options, &sEBSOptionsStatus_Status}}
+var mElasticsearchClusterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchClusterConfig_InstanceType, &sElasticsearchClusterConfig_InstanceCount, &sElasticsearchClusterConfig_DedicatedMasterEnabled, &sElasticsearchClusterConfig_ZoneAwarenessEnabled, &sElasticsearchClusterConfig_ZoneAwarenessConfig, &sElasticsearchClusterConfig_DedicatedMasterType, &sElasticsearchClusterConfig_DedicatedMasterCount, &sElasticsearchClusterConfig_WarmEnabled, &sElasticsearchClusterConfig_WarmType, &sElasticsearchClusterConfig_WarmCount, &sElasticsearchClusterConfig_ColdStorageOptions}, Hash: &hElasticsearchClusterConfig}
+var mElasticsearchClusterConfigStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchClusterConfigStatus_Options, &sElasticsearchClusterConfigStatus_Status}}
+var mElasticsearchDomainConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDomainConfig_ElasticsearchVersion, &sElasticsearchDomainConfig_ElasticsearchClusterConfig, &sElasticsearchDomainConfig_EBSOptions, &sElasticsearchDomainConfig_AccessPolicies, &sElasticsearchDomainConfig_SnapshotOptions, &sElasticsearchDomainConfig_VPCOptions, &sElasticsearchDomainConfig_CognitoOptions, &sElasticsearchDomainConfig_EncryptionAtRestOptions, &sElasticsearchDomainConfig_NodeToNodeEncryptionOptions, &sElasticsearchDomainConfig_AdvancedOptions, &sElasticsearchDomainConfig_LogPublishingOptions, &sElasticsearchDomainConfig_DomainEndpointOptions, &sElasticsearchDomainConfig_AdvancedSecurityOptions, &sElasticsearchDomainConfig_AutoTuneOptions, &sElasticsearchDomainConfig_ChangeProgressDetails, &sElasticsearchDomainConfig_ModifyingProperties, &sElasticsearchDomainConfig_DeploymentStrategyOptions, &sElasticsearchDomainConfig_AutomatedSnapshotPauseOptions, &sElasticsearchDomainConfig_UseCase, &sElasticsearchDomainConfig_EngineMode}, Hash: &hElasticsearchDomainConfig}
+var mElasticsearchDomainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDomainStatus_DomainId, &sElasticsearchDomainStatus_DomainName, &sElasticsearchDomainStatus_ARN, &sElasticsearchDomainStatus_Created, &sElasticsearchDomainStatus_Deleted, &sElasticsearchDomainStatus_Endpoint, &sElasticsearchDomainStatus_Endpoints, &sElasticsearchDomainStatus_Processing, &sElasticsearchDomainStatus_UpgradeProcessing, &sElasticsearchDomainStatus_ElasticsearchVersion, &sElasticsearchDomainStatus_ElasticsearchClusterConfig, &sElasticsearchDomainStatus_EBSOptions, &sElasticsearchDomainStatus_AccessPolicies, &sElasticsearchDomainStatus_SnapshotOptions, &sElasticsearchDomainStatus_VPCOptions, &sElasticsearchDomainStatus_CognitoOptions, &sElasticsearchDomainStatus_EncryptionAtRestOptions, &sElasticsearchDomainStatus_NodeToNodeEncryptionOptions, &sElasticsearchDomainStatus_AdvancedOptions, &sElasticsearchDomainStatus_LogPublishingOptions, &sElasticsearchDomainStatus_ServiceSoftwareOptions, &sElasticsearchDomainStatus_DomainEndpointOptions, &sElasticsearchDomainStatus_AdvancedSecurityOptions, &sElasticsearchDomainStatus_AutoTuneOptions, &sElasticsearchDomainStatus_ChangeProgressDetails, &sElasticsearchDomainStatus_DomainProcessingStatus, &sElasticsearchDomainStatus_ModifyingProperties, &sElasticsearchDomainStatus_DeploymentStrategyOptions, &sElasticsearchDomainStatus_AutomatedSnapshotPauseOptions, &sElasticsearchDomainStatus_UseCase, &sElasticsearchDomainStatus_EngineMode}, Hash: &hElasticsearchDomainStatus}
+var m_ElasticsearchDomainStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ElasticsearchDomainStatusList_member}}
+var m_ElasticsearchInstanceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ElasticsearchInstanceTypeList_member}}
+var m_ElasticsearchVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ElasticsearchVersionList_member}}
+var mElasticsearchVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchVersionStatus_Options, &sElasticsearchVersionStatus_Status}}
+var mEncryptionAtRestOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionAtRestOptions_Enabled, &sEncryptionAtRestOptions_KmsKeyId}}
+var mEncryptionAtRestOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionAtRestOptionsStatus_Options, &sEncryptionAtRestOptionsStatus_Status}}
+var m_EndpointsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointsMap_key, &s_EndpointsMap_value}}
+var mEngineModeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineModeStatus_Options, &sEngineModeStatus_Status}}
+var mEngineType = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineType_OpenSearch, &sEngineType_Elasticsearch}}
+var mErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetails_ErrorType, &sErrorDetails_ErrorMessage}}
+var mESPartitionInstanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sESPartitionInstanceType_m3_medium_elasticsearch, &sESPartitionInstanceType_m3_large_elasticsearch, &sESPartitionInstanceType_m3_xlarge_elasticsearch, &sESPartitionInstanceType_m3_2xlarge_elasticsearch, &sESPartitionInstanceType_m4_large_elasticsearch, &sESPartitionInstanceType_m4_xlarge_elasticsearch, &sESPartitionInstanceType_m4_2xlarge_elasticsearch, &sESPartitionInstanceType_m4_4xlarge_elasticsearch, &sESPartitionInstanceType_m4_10xlarge_elasticsearch, &sESPartitionInstanceType_m5_large_elasticsearch, &sESPartitionInstanceType_m5_xlarge_elasticsearch, &sESPartitionInstanceType_m5_2xlarge_elasticsearch, &sESPartitionInstanceType_m5_4xlarge_elasticsearch, &sESPartitionInstanceType_m5_12xlarge_elasticsearch, &sESPartitionInstanceType_r5_large_elasticsearch, &sESPartitionInstanceType_r5_xlarge_elasticsearch, &sESPartitionInstanceType_r5_2xlarge_elasticsearch, &sESPartitionInstanceType_r5_4xlarge_elasticsearch, &sESPartitionInstanceType_r5_12xlarge_elasticsearch, &sESPartitionInstanceType_c5_large_elasticsearch, &sESPartitionInstanceType_c5_xlarge_elasticsearch, &sESPartitionInstanceType_c5_2xlarge_elasticsearch, &sESPartitionInstanceType_c5_4xlarge_elasticsearch, &sESPartitionInstanceType_c5_9xlarge_elasticsearch, &sESPartitionInstanceType_c5_18xlarge_elasticsearch, &sESPartitionInstanceType_ultrawarm1_medium_elasticsearch, &sESPartitionInstanceType_ultrawarm1_large_elasticsearch, &sESPartitionInstanceType_t2_micro_elasticsearch, &sESPartitionInstanceType_t2_small_elasticsearch, &sESPartitionInstanceType_t2_medium_elasticsearch, &sESPartitionInstanceType_r3_large_elasticsearch, &sESPartitionInstanceType_r3_xlarge_elasticsearch, &sESPartitionInstanceType_r3_2xlarge_elasticsearch, &sESPartitionInstanceType_r3_4xlarge_elasticsearch, &sESPartitionInstanceType_r3_8xlarge_elasticsearch, &sESPartitionInstanceType_i2_xlarge_elasticsearch, &sESPartitionInstanceType_i2_2xlarge_elasticsearch, &sESPartitionInstanceType_d2_xlarge_elasticsearch, &sESPartitionInstanceType_d2_2xlarge_elasticsearch, &sESPartitionInstanceType_d2_4xlarge_elasticsearch, &sESPartitionInstanceType_d2_8xlarge_elasticsearch, &sESPartitionInstanceType_c4_large_elasticsearch, &sESPartitionInstanceType_c4_xlarge_elasticsearch, &sESPartitionInstanceType_c4_2xlarge_elasticsearch, &sESPartitionInstanceType_c4_4xlarge_elasticsearch, &sESPartitionInstanceType_c4_8xlarge_elasticsearch, &sESPartitionInstanceType_r4_large_elasticsearch, &sESPartitionInstanceType_r4_xlarge_elasticsearch, &sESPartitionInstanceType_r4_2xlarge_elasticsearch, &sESPartitionInstanceType_r4_4xlarge_elasticsearch, &sESPartitionInstanceType_r4_8xlarge_elasticsearch, &sESPartitionInstanceType_r4_16xlarge_elasticsearch, &sESPartitionInstanceType_i3_large_elasticsearch, &sESPartitionInstanceType_i3_xlarge_elasticsearch, &sESPartitionInstanceType_i3_2xlarge_elasticsearch, &sESPartitionInstanceType_i3_4xlarge_elasticsearch, &sESPartitionInstanceType_i3_8xlarge_elasticsearch, &sESPartitionInstanceType_i3_16xlarge_elasticsearch}, Hash: &hESPartitionInstanceType}
+var mESWarmPartitionInstanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch, &sESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Name, &sFilter_Values}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var m_GUIDList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GUIDList_member}}
+var mInboundCrossClusterSearchConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sInboundCrossClusterSearchConnection_SourceDomainInfo, &sInboundCrossClusterSearchConnection_DestinationDomainInfo, &sInboundCrossClusterSearchConnection_CrossClusterSearchConnectionId, &sInboundCrossClusterSearchConnection_ConnectionStatus}}
+var m_InboundCrossClusterSearchConnections = smithy.SchemaMembers{List: []*smithy.Schema{&s_InboundCrossClusterSearchConnections_member}}
+var mInboundCrossClusterSearchConnectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInboundCrossClusterSearchConnectionStatus_StatusCode, &sInboundCrossClusterSearchConnectionStatus_Message}}
+var mInboundCrossClusterSearchConnectionStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sInboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE, &sInboundCrossClusterSearchConnectionStatusCode_APPROVED, &sInboundCrossClusterSearchConnectionStatusCode_REJECTING, &sInboundCrossClusterSearchConnectionStatusCode_REJECTED, &sInboundCrossClusterSearchConnectionStatusCode_DELETING, &sInboundCrossClusterSearchConnectionStatusCode_DELETED}}
+var mInitiatedBy = smithy.SchemaMembers{List: []*smithy.Schema{&sInitiatedBy_CUSTOMER, &sInitiatedBy_SERVICE}}
+var mInstanceCountLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceCountLimits_MinimumInstanceCount, &sInstanceCountLimits_MaximumInstanceCount}}
+var mInstanceLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceLimits_InstanceCountLimits}}
+var mInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalException_message}}
+var mInvalidPaginationTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPaginationTokenException_message}}
+var mInvalidTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTypeException_message}}
+var m_Issues = smithy.SchemaMembers{List: []*smithy.Schema{&s_Issues_member}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sLimits_StorageTypes, &sLimits_InstanceLimits, &sLimits_AdditionalLimits}}
+var m_LimitsByRole = smithy.SchemaMembers{List: []*smithy.Schema{&s_LimitsByRole_key, &s_LimitsByRole_value}}
+var m_LimitValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LimitValueList_member}}
+var mLogPublishingOption = smithy.SchemaMembers{List: []*smithy.Schema{&sLogPublishingOption_CloudWatchLogsLogGroupArn, &sLogPublishingOption_Enabled}}
+var m_LogPublishingOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogPublishingOptions_key, &s_LogPublishingOptions_value}}
+var mLogPublishingOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLogPublishingOptionsStatus_Options, &sLogPublishingOptionsStatus_Status}}
+var mLogType = smithy.SchemaMembers{List: []*smithy.Schema{&sLogType_INDEX_SLOW_LOGS, &sLogType_SEARCH_SLOW_LOGS, &sLogType_ES_APPLICATION_LOGS, &sLogType_AUDIT_LOGS}}
+var mMasterUserOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sMasterUserOptions_MasterUserARN, &sMasterUserOptions_MasterUserName, &sMasterUserOptions_MasterUserPassword}}
+var mModifyingProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyingProperties_Name, &sModifyingProperties_ActiveValue, &sModifyingProperties_PendingValue, &sModifyingProperties_ValueType}}
+var m_ModifyingPropertiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModifyingPropertiesList_member}}
+var mNodeToNodeEncryptionOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeToNodeEncryptionOptions_Enabled}}
+var mNodeToNodeEncryptionOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeToNodeEncryptionOptionsStatus_Options, &sNodeToNodeEncryptionOptionsStatus_Status}}
+var mOptionState = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionState_RequiresIndexDocuments, &sOptionState_Processing, &sOptionState_Active}}
+var mOptionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionStatus_CreationDate, &sOptionStatus_UpdateDate, &sOptionStatus_UpdateVersion, &sOptionStatus_State, &sOptionStatus_PendingDeletion}}
+var mOutboundCrossClusterSearchConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sOutboundCrossClusterSearchConnection_SourceDomainInfo, &sOutboundCrossClusterSearchConnection_DestinationDomainInfo, &sOutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId, &sOutboundCrossClusterSearchConnection_ConnectionAlias, &sOutboundCrossClusterSearchConnection_ConnectionStatus}}
+var m_OutboundCrossClusterSearchConnections = smithy.SchemaMembers{List: []*smithy.Schema{&s_OutboundCrossClusterSearchConnections_member}}
+var mOutboundCrossClusterSearchConnectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOutboundCrossClusterSearchConnectionStatus_StatusCode, &sOutboundCrossClusterSearchConnectionStatus_Message}}
+var mOutboundCrossClusterSearchConnectionStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sOutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE, &sOutboundCrossClusterSearchConnectionStatusCode_VALIDATING, &sOutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED, &sOutboundCrossClusterSearchConnectionStatusCode_PROVISIONING, &sOutboundCrossClusterSearchConnectionStatusCode_ACTIVE, &sOutboundCrossClusterSearchConnectionStatusCode_REJECTED, &sOutboundCrossClusterSearchConnectionStatusCode_DELETING, &sOutboundCrossClusterSearchConnectionStatusCode_DELETED}}
+var mOverallChangeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOverallChangeStatus_PENDING, &sOverallChangeStatus_PROCESSING, &sOverallChangeStatus_COMPLETED, &sOverallChangeStatus_FAILED}}
+var mPackageDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageDetails_PackageID, &sPackageDetails_PackageName, &sPackageDetails_PackageType, &sPackageDetails_PackageDescription, &sPackageDetails_PackageStatus, &sPackageDetails_CreatedAt, &sPackageDetails_LastUpdatedAt, &sPackageDetails_AvailablePackageVersion, &sPackageDetails_ErrorDetails}, Hash: &hPackageDetails}
+var m_PackageDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageDetailsList_member}}
+var mPackageSource = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageSource_S3BucketName, &sPackageSource_S3Key}}
+var mPackageStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageStatus_COPYING, &sPackageStatus_COPY_FAILED, &sPackageStatus_VALIDATING, &sPackageStatus_VALIDATION_FAILED, &sPackageStatus_AVAILABLE, &sPackageStatus_DELETING, &sPackageStatus_DELETED, &sPackageStatus_DELETE_FAILED}}
+var mPackageType = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageType_TXT_DICTIONARY}}
+var mPackageVersionHistory = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionHistory_PackageVersion, &sPackageVersionHistory_CommitMessage, &sPackageVersionHistory_CreatedAt}}
+var m_PackageVersionHistoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageVersionHistoryList_member}}
+var mPauseState = smithy.SchemaMembers{List: []*smithy.Schema{&sPauseState_ACTIVE, &sPauseState_COMPLETED, &sPauseState_SCHEDULED, &sPauseState_DISABLED}}
+var mPrincipalType = smithy.SchemaMembers{List: []*smithy.Schema{&sPrincipalType_AWS_ACCOUNT, &sPrincipalType_AWS_SERVICE}}
+var mPropertyValueType = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyValueType_PLAIN_TEXT, &sPropertyValueType_STRINGIFIED_JSON}}
+var mRecurringCharge = smithy.SchemaMembers{List: []*smithy.Schema{&sRecurringCharge_RecurringChargeAmount, &sRecurringCharge_RecurringChargeFrequency}}
+var m_RecurringChargeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecurringChargeList_member}}
+var mReservedElasticsearchInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sReservedElasticsearchInstance_ReservationName, &sReservedElasticsearchInstance_ReservedElasticsearchInstanceId, &sReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId, &sReservedElasticsearchInstance_ElasticsearchInstanceType, &sReservedElasticsearchInstance_StartTime, &sReservedElasticsearchInstance_Duration, &sReservedElasticsearchInstance_FixedPrice, &sReservedElasticsearchInstance_UsagePrice, &sReservedElasticsearchInstance_CurrencyCode, &sReservedElasticsearchInstance_ElasticsearchInstanceCount, &sReservedElasticsearchInstance_State, &sReservedElasticsearchInstance_PaymentOption, &sReservedElasticsearchInstance_RecurringCharges}, Hash: &hReservedElasticsearchInstance}
+var m_ReservedElasticsearchInstanceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReservedElasticsearchInstanceList_member}}
+var mReservedElasticsearchInstanceOffering = smithy.SchemaMembers{List: []*smithy.Schema{&sReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId, &sReservedElasticsearchInstanceOffering_ElasticsearchInstanceType, &sReservedElasticsearchInstanceOffering_Duration, &sReservedElasticsearchInstanceOffering_FixedPrice, &sReservedElasticsearchInstanceOffering_UsagePrice, &sReservedElasticsearchInstanceOffering_CurrencyCode, &sReservedElasticsearchInstanceOffering_PaymentOption, &sReservedElasticsearchInstanceOffering_RecurringCharges}}
+var m_ReservedElasticsearchInstanceOfferingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReservedElasticsearchInstanceOfferingList_member}}
+var mReservedElasticsearchInstancePaymentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sReservedElasticsearchInstancePaymentOption_ALL_UPFRONT, &sReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT, &sReservedElasticsearchInstancePaymentOption_NO_UPFRONT}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRetentionAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER, &sRetentionAction_DELETE_PRIMARY_CLUSTER}}
+var mRetentionOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionOptions_RetentionInHours, &sRetentionOptions_RetentionAction}}
+var mRollbackOnDisable = smithy.SchemaMembers{List: []*smithy.Schema{&sRollbackOnDisable_NO_ROLLBACK, &sRollbackOnDisable_DEFAULT_ROLLBACK}}
+var mSAMLIdp = smithy.SchemaMembers{List: []*smithy.Schema{&sSAMLIdp_MetadataContent, &sSAMLIdp_EntityId}}
+var mSAMLOptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSAMLOptionsInput_Enabled, &sSAMLOptionsInput_Idp, &sSAMLOptionsInput_MasterUserName, &sSAMLOptionsInput_MasterBackendRole, &sSAMLOptionsInput_SubjectKey, &sSAMLOptionsInput_RolesKey, &sSAMLOptionsInput_SessionTimeoutMinutes}}
+var mSAMLOptionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSAMLOptionsOutput_Enabled, &sSAMLOptionsOutput_Idp, &sSAMLOptionsOutput_SubjectKey, &sSAMLOptionsOutput_RolesKey, &sSAMLOptionsOutput_SessionTimeoutMinutes}}
+var mScheduledAutoTuneActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING, &sScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING}}
+var mScheduledAutoTuneDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledAutoTuneDetails_Date, &sScheduledAutoTuneDetails_ActionType, &sScheduledAutoTuneDetails_Action, &sScheduledAutoTuneDetails_Severity}}
+var mScheduledAutoTuneSeverityType = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledAutoTuneSeverityType_LOW, &sScheduledAutoTuneSeverityType_MEDIUM, &sScheduledAutoTuneSeverityType_HIGH}}
+var mServiceSoftwareOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSoftwareOptions_CurrentVersion, &sServiceSoftwareOptions_NewVersion, &sServiceSoftwareOptions_UpdateAvailable, &sServiceSoftwareOptions_Cancellable, &sServiceSoftwareOptions_UpdateStatus, &sServiceSoftwareOptions_Description, &sServiceSoftwareOptions_AutomatedUpdateDate, &sServiceSoftwareOptions_OptionalDeployment}}
+var mSnapshotOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotOptions_AutomatedSnapshotStartHour}}
+var mSnapshotOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotOptionsStatus_Options, &sSnapshotOptionsStatus_Status}}
+var mStorageType = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageType_StorageTypeName, &sStorageType_StorageSubTypeName, &sStorageType_StorageTypeLimits}}
+var mStorageTypeLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageTypeLimit_LimitName, &sStorageTypeLimit_LimitValues}}
+var m_StorageTypeLimitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorageTypeLimitList_member}}
+var m_StorageTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorageTypeList_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTimeUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeUnit_HOURS}}
+var mTLSSecurityPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07, &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07, &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10, &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08}}
+var mTrafficPercents = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficPercents_PrimaryReadTrafficPercent, &sTrafficPercents_CloneReadTrafficPercent}}
+var mTrafficSplitOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficSplitOptions_Current, &sTrafficSplitOptions_Target, &sTrafficSplitOptions_Status}}
+var mTrafficSplitRequestOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficSplitRequestOptions_Strategy, &sTrafficSplitRequestOptions_CloneReadTrafficPercent}}
+var mTrafficSplitStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficSplitStatus_IN_PROGRESS, &sTrafficSplitStatus_COMPLETED, &sTrafficSplitStatus_FAILED}}
+var mTrafficStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT}}
+var mUpgradeHistory = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeHistory_UpgradeName, &sUpgradeHistory_StartTimestamp, &sUpgradeHistory_UpgradeStatus, &sUpgradeHistory_StepsList}}
+var m_UpgradeHistoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpgradeHistoryList_member}}
+var mUpgradeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeStatus_IN_PROGRESS, &sUpgradeStatus_SUCCEEDED, &sUpgradeStatus_SUCCEEDED_WITH_ISSUES, &sUpgradeStatus_FAILED}}
+var mUpgradeStep = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeStep_PRE_UPGRADE_CHECK, &sUpgradeStep_SNAPSHOT, &sUpgradeStep_UPGRADE}}
+var mUpgradeStepItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeStepItem_UpgradeStep, &sUpgradeStepItem_UpgradeStepStatus, &sUpgradeStepItem_Issues, &sUpgradeStepItem_ProgressPercent}}
+var m_UpgradeStepsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpgradeStepsList_member}}
+var mUseCaseStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUseCaseStatus_Options, &sUseCaseStatus_Status}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var m_ValueStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValueStringList_member}}
+var mVolumeType = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeType_standard, &sVolumeType_gp2, &sVolumeType_io1, &sVolumeType_gp3}}
+var mVPCDerivedInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sVPCDerivedInfo_VPCId, &sVPCDerivedInfo_SubnetIds, &sVPCDerivedInfo_AvailabilityZones, &sVPCDerivedInfo_SecurityGroupIds}}
+var mVPCDerivedInfoStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVPCDerivedInfoStatus_Options, &sVPCDerivedInfoStatus_Status}}
+var mVpcEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpoint_VpcEndpointId, &sVpcEndpoint_VpcEndpointOwner, &sVpcEndpoint_DomainArn, &sVpcEndpoint_VpcOptions, &sVpcEndpoint_Status, &sVpcEndpoint_Endpoint}}
+var mVpcEndpointError = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointError_VpcEndpointId, &sVpcEndpointError_ErrorCode, &sVpcEndpointError_ErrorMessage}}
+var mVpcEndpointErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointErrorCode_ENDPOINT_NOT_FOUND, &sVpcEndpointErrorCode_SERVER_ERROR}}
+var m_VpcEndpointErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpointErrorList_member}}
+var m_VpcEndpointIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpointIdList_member}}
+var m_VpcEndpoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpoints_member}}
+var mVpcEndpointStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointStatus_CREATING, &sVpcEndpointStatus_CREATE_FAILED, &sVpcEndpointStatus_ACTIVE, &sVpcEndpointStatus_UPDATING, &sVpcEndpointStatus_UPDATE_FAILED, &sVpcEndpointStatus_DELETING, &sVpcEndpointStatus_DELETE_FAILED}}
+var mVpcEndpointSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointSummary_VpcEndpointId, &sVpcEndpointSummary_VpcEndpointOwner, &sVpcEndpointSummary_DomainArn, &sVpcEndpointSummary_Status}}
+var m_VpcEndpointSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpointSummaryList_member}}
+var mVPCOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sVPCOptions_SubnetIds, &sVPCOptions_SecurityGroupIds}}
+var mZoneAwarenessConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sZoneAwarenessConfig_AvailabilityZoneCount}}
+var mAcceptInboundCrossClusterSearchConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId}}
+var mAcceptInboundCrossClusterSearchConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection}}
+var mAddTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsRequest_ARN, &sAddTagsRequest_TagList}}
+var mAssociatePackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatePackageRequest_PackageID, &sAssociatePackageRequest_DomainName}}
+var mAssociatePackageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatePackageResponse_DomainPackageDetails}}
+var mAuthorizeVpcEndpointAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizeVpcEndpointAccessRequest_DomainName, &sAuthorizeVpcEndpointAccessRequest_Account}}
+var mAuthorizeVpcEndpointAccessResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal}}
+var mCancelDomainConfigChangeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelDomainConfigChangeRequest_DomainName, &sCancelDomainConfigChangeRequest_DryRun}}
+var mCancelDomainConfigChangeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelDomainConfigChangeResponse_DryRun, &sCancelDomainConfigChangeResponse_CancelledChangeIds, &sCancelDomainConfigChangeResponse_CancelledChangeProperties}}
+var mCancelElasticsearchServiceSoftwareUpdateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelElasticsearchServiceSoftwareUpdateRequest_DomainName}}
+var mCancelElasticsearchServiceSoftwareUpdateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions}}
+var mCreateElasticsearchDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateElasticsearchDomainRequest_DomainName, &sCreateElasticsearchDomainRequest_ElasticsearchVersion, &sCreateElasticsearchDomainRequest_ElasticsearchClusterConfig, &sCreateElasticsearchDomainRequest_EBSOptions, &sCreateElasticsearchDomainRequest_AccessPolicies, &sCreateElasticsearchDomainRequest_SnapshotOptions, &sCreateElasticsearchDomainRequest_VPCOptions, &sCreateElasticsearchDomainRequest_CognitoOptions, &sCreateElasticsearchDomainRequest_EncryptionAtRestOptions, &sCreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions, &sCreateElasticsearchDomainRequest_AdvancedOptions, &sCreateElasticsearchDomainRequest_LogPublishingOptions, &sCreateElasticsearchDomainRequest_DomainEndpointOptions, &sCreateElasticsearchDomainRequest_AdvancedSecurityOptions, &sCreateElasticsearchDomainRequest_AutoTuneOptions, &sCreateElasticsearchDomainRequest_TagList, &sCreateElasticsearchDomainRequest_DeploymentStrategyOptions, &sCreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions, &sCreateElasticsearchDomainRequest_UseCase, &sCreateElasticsearchDomainRequest_EngineMode}, Hash: &hCreateElasticsearchDomainRequest}
+var mCreateElasticsearchDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateElasticsearchDomainResponse_DomainStatus}}
+var mCreateOutboundCrossClusterSearchConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo, &sCreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo, &sCreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias}}
+var mCreateOutboundCrossClusterSearchConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo, &sCreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo, &sCreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias, &sCreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus, &sCreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId}}
+var mCreatePackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePackageRequest_PackageName, &sCreatePackageRequest_PackageType, &sCreatePackageRequest_PackageDescription, &sCreatePackageRequest_PackageSource}}
+var mCreatePackageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePackageResponse_PackageDetails}}
+var mCreateVpcEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcEndpointRequest_DomainArn, &sCreateVpcEndpointRequest_VpcOptions, &sCreateVpcEndpointRequest_ClientToken}}
+var mCreateVpcEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcEndpointResponse_VpcEndpoint}}
+var mDeleteElasticsearchDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteElasticsearchDomainRequest_DomainName}}
+var mDeleteElasticsearchDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteElasticsearchDomainResponse_DomainStatus}}
+var mDeleteInboundCrossClusterSearchConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId}}
+var mDeleteInboundCrossClusterSearchConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection}}
+var mDeleteOutboundCrossClusterSearchConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId}}
+var mDeleteOutboundCrossClusterSearchConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection}}
+var mDeletePackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageRequest_PackageID}}
+var mDeletePackageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageResponse_PackageDetails}}
+var mDeleteVpcEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcEndpointRequest_VpcEndpointId}}
+var mDeleteVpcEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcEndpointResponse_VpcEndpointSummary}}
+var mDescribeDomainAutoTunesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainAutoTunesRequest_DomainName, &sDescribeDomainAutoTunesRequest_MaxResults, &sDescribeDomainAutoTunesRequest_NextToken}}
+var mDescribeDomainAutoTunesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainAutoTunesResponse_AutoTunes, &sDescribeDomainAutoTunesResponse_NextToken}}
+var mDescribeDomainChangeProgressRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainChangeProgressRequest_DomainName, &sDescribeDomainChangeProgressRequest_ChangeId}}
+var mDescribeDomainChangeProgressResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainChangeProgressResponse_ChangeProgressStatus}}
+var mDescribeElasticsearchDomainConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchDomainConfigRequest_DomainName}}
+var mDescribeElasticsearchDomainConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchDomainConfigResponse_DomainConfig}}
+var mDescribeElasticsearchDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchDomainRequest_DomainName}}
+var mDescribeElasticsearchDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchDomainResponse_DomainStatus}}
+var mDescribeElasticsearchDomainsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchDomainsRequest_DomainNames}}
+var mDescribeElasticsearchDomainsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchDomainsResponse_DomainStatusList}}
+var mDescribeElasticsearchInstanceTypeLimitsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchInstanceTypeLimitsRequest_DomainName, &sDescribeElasticsearchInstanceTypeLimitsRequest_InstanceType, &sDescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion}}
+var mDescribeElasticsearchInstanceTypeLimitsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole}}
+var mDescribeInboundCrossClusterSearchConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInboundCrossClusterSearchConnectionsRequest_Filters, &sDescribeInboundCrossClusterSearchConnectionsRequest_MaxResults, &sDescribeInboundCrossClusterSearchConnectionsRequest_NextToken}}
+var mDescribeInboundCrossClusterSearchConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, &sDescribeInboundCrossClusterSearchConnectionsResponse_NextToken}}
+var mDescribeOutboundCrossClusterSearchConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeOutboundCrossClusterSearchConnectionsRequest_Filters, &sDescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults, &sDescribeOutboundCrossClusterSearchConnectionsRequest_NextToken}}
+var mDescribeOutboundCrossClusterSearchConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, &sDescribeOutboundCrossClusterSearchConnectionsResponse_NextToken}}
+var mDescribePackagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackagesRequest_Filters, &sDescribePackagesRequest_MaxResults, &sDescribePackagesRequest_NextToken}}
+var mDescribePackagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackagesResponse_PackageDetailsList, &sDescribePackagesResponse_NextToken}}
+var mDescribeReservedElasticsearchInstanceOfferingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId, &sDescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults, &sDescribeReservedElasticsearchInstanceOfferingsRequest_NextToken}}
+var mDescribeReservedElasticsearchInstanceOfferingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReservedElasticsearchInstanceOfferingsResponse_NextToken, &sDescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings}}
+var mDescribeReservedElasticsearchInstancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId, &sDescribeReservedElasticsearchInstancesRequest_MaxResults, &sDescribeReservedElasticsearchInstancesRequest_NextToken}}
+var mDescribeReservedElasticsearchInstancesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReservedElasticsearchInstancesResponse_NextToken, &sDescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances}}
+var mDescribeVpcEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcEndpointsRequest_VpcEndpointIds}}
+var mDescribeVpcEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcEndpointsResponse_VpcEndpoints, &sDescribeVpcEndpointsResponse_VpcEndpointErrors}}
+var mDissociatePackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDissociatePackageRequest_PackageID, &sDissociatePackageRequest_DomainName}}
+var mDissociatePackageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDissociatePackageResponse_DomainPackageDetails}}
+var mGetCompatibleElasticsearchVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCompatibleElasticsearchVersionsRequest_DomainName}}
+var mGetCompatibleElasticsearchVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions}}
+var mGetPackageVersionHistoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPackageVersionHistoryRequest_PackageID, &sGetPackageVersionHistoryRequest_MaxResults, &sGetPackageVersionHistoryRequest_NextToken}}
+var mGetPackageVersionHistoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPackageVersionHistoryResponse_PackageID, &sGetPackageVersionHistoryResponse_PackageVersionHistoryList, &sGetPackageVersionHistoryResponse_NextToken}}
+var mGetUpgradeHistoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUpgradeHistoryRequest_DomainName, &sGetUpgradeHistoryRequest_MaxResults, &sGetUpgradeHistoryRequest_NextToken}}
+var mGetUpgradeHistoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUpgradeHistoryResponse_UpgradeHistories, &sGetUpgradeHistoryResponse_NextToken}}
+var mGetUpgradeStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUpgradeStatusRequest_DomainName}}
+var mGetUpgradeStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUpgradeStatusResponse_UpgradeStep, &sGetUpgradeStatusResponse_StepStatus, &sGetUpgradeStatusResponse_UpgradeName}}
+var mListDomainNamesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainNamesRequest_EngineType}}
+var mListDomainNamesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainNamesResponse_DomainNames}}
+var mListDomainsForPackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsForPackageRequest_PackageID, &sListDomainsForPackageRequest_MaxResults, &sListDomainsForPackageRequest_NextToken}}
+var mListDomainsForPackageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsForPackageResponse_DomainPackageDetailsList, &sListDomainsForPackageResponse_NextToken}}
+var mListElasticsearchInstanceTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListElasticsearchInstanceTypesRequest_ElasticsearchVersion, &sListElasticsearchInstanceTypesRequest_DomainName, &sListElasticsearchInstanceTypesRequest_MaxResults, &sListElasticsearchInstanceTypesRequest_NextToken}}
+var mListElasticsearchInstanceTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes, &sListElasticsearchInstanceTypesResponse_NextToken}}
+var mListElasticsearchVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListElasticsearchVersionsRequest_MaxResults, &sListElasticsearchVersionsRequest_NextToken}}
+var mListElasticsearchVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListElasticsearchVersionsResponse_ElasticsearchVersions, &sListElasticsearchVersionsResponse_NextToken}}
+var mListPackagesForDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackagesForDomainRequest_DomainName, &sListPackagesForDomainRequest_MaxResults, &sListPackagesForDomainRequest_NextToken}}
+var mListPackagesForDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackagesForDomainResponse_DomainPackageDetailsList, &sListPackagesForDomainResponse_NextToken}}
+var mListTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsRequest_ARN}}
+var mListTagsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsResponse_TagList}}
+var mListVpcEndpointAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointAccessRequest_DomainName, &sListVpcEndpointAccessRequest_NextToken}}
+var mListVpcEndpointAccessResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointAccessResponse_AuthorizedPrincipalList, &sListVpcEndpointAccessResponse_NextToken}}
+var mListVpcEndpointsForDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointsForDomainRequest_DomainName, &sListVpcEndpointsForDomainRequest_NextToken}}
+var mListVpcEndpointsForDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointsForDomainResponse_VpcEndpointSummaryList, &sListVpcEndpointsForDomainResponse_NextToken}}
+var mListVpcEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointsRequest_NextToken}}
+var mListVpcEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointsResponse_VpcEndpointSummaryList, &sListVpcEndpointsResponse_NextToken}}
+var mPurchaseReservedElasticsearchInstanceOfferingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId, &sPurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName, &sPurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount}}
+var mPurchaseReservedElasticsearchInstanceOfferingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId, &sPurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName}}
+var mRejectInboundCrossClusterSearchConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId}}
+var mRejectInboundCrossClusterSearchConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection}}
+var mRemoveTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsRequest_ARN, &sRemoveTagsRequest_TagKeys}}
+var mRevokeVpcEndpointAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeVpcEndpointAccessRequest_DomainName, &sRevokeVpcEndpointAccessRequest_Account}}
+var mStartElasticsearchServiceSoftwareUpdateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartElasticsearchServiceSoftwareUpdateRequest_DomainName}}
+var mStartElasticsearchServiceSoftwareUpdateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions}}
+var mUpdateCloneRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCloneRequest_DomainName, &sUpdateCloneRequest_TrafficSplitOptions, &sUpdateCloneRequest_CutoverOptions, &sUpdateCloneRequest_RetentionOptions}}
+var mUpdateCloneResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCloneResponse_DomainName, &sUpdateCloneResponse_ChangeId, &sUpdateCloneResponse_CutoverOptions, &sUpdateCloneResponse_TrafficSplitOptions, &sUpdateCloneResponse_RetentionOptions}}
+var mUpdateElasticsearchDomainConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateElasticsearchDomainConfigRequest_DomainName, &sUpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig, &sUpdateElasticsearchDomainConfigRequest_EBSOptions, &sUpdateElasticsearchDomainConfigRequest_SnapshotOptions, &sUpdateElasticsearchDomainConfigRequest_VPCOptions, &sUpdateElasticsearchDomainConfigRequest_CognitoOptions, &sUpdateElasticsearchDomainConfigRequest_AdvancedOptions, &sUpdateElasticsearchDomainConfigRequest_AccessPolicies, &sUpdateElasticsearchDomainConfigRequest_LogPublishingOptions, &sUpdateElasticsearchDomainConfigRequest_DomainEndpointOptions, &sUpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions, &sUpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions, &sUpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions, &sUpdateElasticsearchDomainConfigRequest_AutoTuneOptions, &sUpdateElasticsearchDomainConfigRequest_DryRun, &sUpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions, &sUpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions, &sUpdateElasticsearchDomainConfigRequest_UseCase, &sUpdateElasticsearchDomainConfigRequest_EngineMode}, Hash: &hUpdateElasticsearchDomainConfigRequest}
+var mUpdateElasticsearchDomainConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateElasticsearchDomainConfigResponse_DomainConfig, &sUpdateElasticsearchDomainConfigResponse_DryRunResults}}
+var mUpdatePackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageRequest_PackageID, &sUpdatePackageRequest_PackageSource, &sUpdatePackageRequest_PackageDescription, &sUpdatePackageRequest_CommitMessage}}
+var mUpdatePackageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageResponse_PackageDetails}}
+var mUpdateVpcEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcEndpointRequest_VpcEndpointId, &sUpdateVpcEndpointRequest_VpcOptions}}
+var mUpdateVpcEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcEndpointResponse_VpcEndpoint}}
+var mUpgradeElasticsearchDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeElasticsearchDomainRequest_DomainName, &sUpgradeElasticsearchDomainRequest_TargetVersion, &sUpgradeElasticsearchDomainRequest_PerformCheckOnly, &sUpgradeElasticsearchDomainRequest_DeploymentStrategyOptions}}
+var mUpgradeElasticsearchDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeElasticsearchDomainResponse_DomainName, &sUpgradeElasticsearchDomainResponse_TargetVersion, &sUpgradeElasticsearchDomainResponse_PerformCheckOnly, &sUpgradeElasticsearchDomainResponse_DeploymentStrategyOptions, &sUpgradeElasticsearchDomainResponse_ChangeProgressDetails}}
+
+var hAutoTuneState = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 8, 0, 1, 0, 0, 0, 0, 5, 0, 0, 6, 9, 0, 7, 0, 0, 0, 0, 0, 0, 0, 4, 0,
+	0, 0, 0, 2, 0, 0, 0, 3,
+}}
+var hChangeProgressStatusDetails = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 6, 1, 3, 0, 0, 0, 9, 0, 2, 0, 7, 0, 0, 5, 0, 0, 8, 4, 0,
+	11, 0, 0, 0, 0, 0, 10, 0,
+}}
+var hDomainPackageDetails = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 2, 0, 0, 0, 0, 1, 4, 0, 0, 0, 5, 0, 3, 0, 9, 8, 0, 0, 0, 6, 0, 0, 0,
+	0, 0, 7, 0, 0, 0, 0, 0,
+}}
+var hElasticsearchClusterConfig = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 9, 11, 0, 0, 8, 3, 6, 0, 0, 0, 0, 0, 4, 0, 0, 2, 0, 0, 0, 0,
+	10, 0, 0, 0, 5, 7, 0, 1,
+}}
+var hElasticsearchDomainConfig = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 17, 0, 0, 4, 20, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 16, 9, 0, 0, 0, 0,
+	0, 6, 0, 0, 0, 0, 10, 0, 0, 0, 14, 1, 0, 0, 18, 0, 0, 0, 0, 3, 7, 19, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 12, 15, 8, 0, 13, 0,
+}}
+var hElasticsearchDomainStatus = smithy.MemberHash{Seed: 620, Slots: []uint16{
+	21, 0, 28, 0, 0, 0, 0, 5, 0, 1, 23, 25, 24, 17, 0, 0, 0, 20, 0, 22, 30, 0, 0, 0,
+	6, 27, 0, 16, 0, 0, 13, 8, 0, 0, 14, 31, 0, 0, 12, 0, 18, 0, 11, 0, 4, 0, 15, 0,
+	0, 0, 19, 26, 0, 29, 2, 0, 9, 3, 7, 0, 10, 0, 0, 0,
+}}
+var hESPartitionInstanceType = smithy.MemberHash{Seed: 560, Slots: []uint16{
+	0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 54, 0,
+	32, 0, 48, 0, 0, 5, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 28, 0, 0, 15, 0, 26, 0,
+	0, 0, 0, 0, 19, 0, 0, 0, 0, 50, 3, 0, 0, 10, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
+	0, 20, 0, 0, 0, 0, 0, 57, 0, 16, 53, 0, 21, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 37, 0, 34, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 41, 0, 0, 0,
+	36, 0, 0, 0, 0, 0, 44, 0, 12, 0, 0, 8, 14, 49, 0, 0, 0, 7, 0, 25, 0, 0, 0, 0,
+	0, 58, 47, 0, 46, 42, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 0,
+	0, 6, 0, 0, 38, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 31, 0,
+	43, 0, 0, 0, 39, 0, 0, 0, 0, 52, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 29, 0, 0, 0,
+	22, 0, 0, 2, 0, 0, 0, 0, 9, 0, 0, 56, 0, 0, 18, 24, 0, 0, 0, 30, 0, 55, 11, 0,
+	0, 0, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hPackageDetails = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 2, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 3, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0,
+	0, 0, 7, 8, 0, 0, 0, 0,
+}}
+var hReservedElasticsearchInstance = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 2, 13, 0, 5, 0, 11, 0, 6, 10, 1, 0, 0, 12, 0, 0, 0, 7,
+	8, 0, 0, 3, 4, 0, 9, 0,
+}}
+var hCreateElasticsearchDomainRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 19, 0, 0, 0, 0, 17, 0, 0, 4, 0, 0, 0, 0, 15, 0, 7, 0, 0, 0, 0, 9, 0,
+	0, 0, 0, 0, 12, 0, 0, 1, 0, 0, 16, 13, 0, 11, 8, 10, 0, 0, 6, 2, 18, 0, 0, 0,
+	0, 0, 0, 0, 0, 20, 0, 0, 0, 5, 0, 0, 14, 0, 3, 0,
+}}
+var hUpdateElasticsearchDomainConfigRequest = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 16, 0, 0, 8, 19, 0, 15, 0, 0, 0, 9, 1, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 7, 0, 0, 0, 14, 0, 0, 0, 17, 0, 0, 0, 0, 3, 6, 18, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 10, 0, 13, 0, 11, 0,
+}}
+
+var sAcceptInboundCrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptInboundCrossClusterSearchConnection, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAcceptInboundCrossClusterSearchConnection})
+var sAddTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTags, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAddTags})
+var sAssociatePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePackage, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eAssociatePackage})
+var sAuthorizeVpcEndpointAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizeVpcEndpointAccess, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eAuthorizeVpcEndpointAccess})
+var sCancelDomainConfigChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainConfigChange, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCancelDomainConfigChange})
+var sCancelElasticsearchServiceSoftwareUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelElasticsearchServiceSoftwareUpdate, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCancelElasticsearchServiceSoftwareUpdate})
+var sCreateElasticsearchDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateElasticsearchDomain, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateElasticsearchDomain})
+var sCreateOutboundCrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOutboundCrossClusterSearchConnection, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateOutboundCrossClusterSearchConnection})
+var sCreatePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePackage, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreatePackage})
+var sCreateVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpoint, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eCreateVpcEndpoint})
+var sDeleteElasticsearchDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteElasticsearchDomain, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteElasticsearchDomain})
+var sDeleteElasticsearchServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteElasticsearchServiceRole, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteElasticsearchServiceRole})
+var sDeleteInboundCrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInboundCrossClusterSearchConnection, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteInboundCrossClusterSearchConnection})
+var sDeleteOutboundCrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOutboundCrossClusterSearchConnection, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteOutboundCrossClusterSearchConnection})
+var sDeletePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackage, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeletePackage})
+var sDeleteVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpoint, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVpcEndpoint})
+var sDescribeDomainAutoTunes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainAutoTunes, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDomainAutoTunes})
+var sDescribeDomainChangeProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainChangeProgress, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDomainChangeProgress})
+var sDescribeElasticsearchDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomain, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDescribeElasticsearchDomain})
+var sDescribeElasticsearchDomainConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomainConfig, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDescribeElasticsearchDomainConfig})
+var sDescribeElasticsearchDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomains, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDescribeElasticsearchDomains})
+var sDescribeElasticsearchInstanceTypeLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchInstanceTypeLimits, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDescribeElasticsearchInstanceTypeLimits})
+var sDescribeInboundCrossClusterSearchConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInboundCrossClusterSearchConnections, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDescribeInboundCrossClusterSearchConnections})
+var sDescribeOutboundCrossClusterSearchConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOutboundCrossClusterSearchConnections, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eDescribeOutboundCrossClusterSearchConnections})
+var sDescribePackages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackages, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eDescribePackages})
+var sDescribeReservedElasticsearchInstanceOfferings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReservedElasticsearchInstanceOfferings, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eDescribeReservedElasticsearchInstanceOfferings})
+var sDescribeReservedElasticsearchInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReservedElasticsearchInstances, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eDescribeReservedElasticsearchInstances})
+var sDescribeVpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpoints, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVpcEndpoints})
+var sDissociatePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDissociatePackage, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eDissociatePackage})
+var sGetCompatibleElasticsearchVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCompatibleElasticsearchVersions, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetCompatibleElasticsearchVersions})
+var sGetPackageVersionHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionHistory, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetPackageVersionHistory})
+var sGetUpgradeHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUpgradeHistory, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetUpgradeHistory})
+var sGetUpgradeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUpgradeStatus, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetUpgradeStatus})
+var sListDomainNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNames, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListDomainNames})
+var sListDomainsForPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsForPackage, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListDomainsForPackage})
+var sListElasticsearchInstanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListElasticsearchInstanceTypes, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListElasticsearchInstanceTypes})
+var sListElasticsearchVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListElasticsearchVersions, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListElasticsearchVersions})
+var sListPackagesForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackagesForDomain, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListPackagesForDomain})
+var sListTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTags, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListTags})
+var sListVpcEndpointAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAccess, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eListVpcEndpointAccess})
+var sListVpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpoints, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eListVpcEndpoints})
+var sListVpcEndpointsForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointsForDomain, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eListVpcEndpointsForDomain})
+var sPurchaseReservedElasticsearchInstanceOffering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseReservedElasticsearchInstanceOffering, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &ePurchaseReservedElasticsearchInstanceOffering})
+var sRejectInboundCrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInboundCrossClusterSearchConnection, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eRejectInboundCrossClusterSearchConnection})
+var sRemoveTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTags, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTags})
+var sRevokeVpcEndpointAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeVpcEndpointAccess, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eRevokeVpcEndpointAccess})
+var sStartElasticsearchServiceSoftwareUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartElasticsearchServiceSoftwareUpdate, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eStartElasticsearchServiceSoftwareUpdate})
+var sUpdateClone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClone, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eUpdateClone})
+var sUpdateElasticsearchDomainConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateElasticsearchDomainConfig, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eUpdateElasticsearchDomainConfig})
+var sUpdatePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackage, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePackage})
+var sUpdateVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcEndpoint, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVpcEndpoint})
+var sUpgradeElasticsearchDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeElasticsearchDomain, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eUpgradeElasticsearchDomain})
+var s_AmazonElasticsearchService2015 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonElasticsearchService2015, Traits: &t52, Type: smithy.ShapeTypeService, Ext: &e_AmazonElasticsearchService2015})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t53, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessPoliciesStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPoliciesStatus, Members: &mAccessPoliciesStatus, Type: smithy.ShapeTypeStructure, Ext: &eAccessPoliciesStatus})
+var sAccessPoliciesStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &eAccessPoliciesStatus_Options})
+var sAccessPoliciesStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAccessPoliciesStatus_Status})
+var sAdditionalLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalLimit, Members: &mAdditionalLimit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalLimit})
+var sAdditionalLimit_LimitName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitName", ID: &i_LimitName, Type: smithy.ShapeTypeString, Ext: &eAdditionalLimit_LimitName})
+var sAdditionalLimit_LimitValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitValues", ID: &i_LimitValueList, Members: &m_LimitValueList, Type: smithy.ShapeTypeList, Ext: &eAdditionalLimit_LimitValues})
+var s_AdditionalLimitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalLimitList, Members: &m_AdditionalLimitList, Type: smithy.ShapeTypeList, Ext: &e_AdditionalLimitList})
+var s_AdditionalLimitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdditionalLimit, Members: &mAdditionalLimit, Type: smithy.ShapeTypeStructure, Ext: &e_AdditionalLimitList_member})
+var s_AdvancedOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdvancedOptions, Members: &m_AdvancedOptions, Type: smithy.ShapeTypeMap, Ext: &e_AdvancedOptions})
+var s_AdvancedOptions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_AdvancedOptions_key})
+var s_AdvancedOptions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_AdvancedOptions_value})
+var sAdvancedOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedOptionsStatus, Members: &mAdvancedOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedOptionsStatus})
+var sAdvancedOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_AdvancedOptions, Members: &m_AdvancedOptions, Type: smithy.ShapeTypeMap, Ext: &eAdvancedOptionsStatus_Options})
+var sAdvancedOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedOptionsStatus_Status})
+var sAdvancedSecurityOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedSecurityOptions, Members: &mAdvancedSecurityOptions, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptions})
+var sAdvancedSecurityOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdvancedSecurityOptions_Enabled})
+var sAdvancedSecurityOptions_InternalUserDatabaseEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalUserDatabaseEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdvancedSecurityOptions_InternalUserDatabaseEnabled})
+var sAdvancedSecurityOptions_SAMLOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMLOptions", ID: &iSAMLOptionsOutput, Members: &mSAMLOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptions_SAMLOptions})
+var sAdvancedSecurityOptions_AnonymousAuthDisableDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnonymousAuthDisableDate", ID: &i_DisableTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAdvancedSecurityOptions_AnonymousAuthDisableDate})
+var sAdvancedSecurityOptions_AnonymousAuthEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnonymousAuthEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdvancedSecurityOptions_AnonymousAuthEnabled})
+var sAdvancedSecurityOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedSecurityOptionsInput, Members: &mAdvancedSecurityOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptionsInput})
+var sAdvancedSecurityOptionsInput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdvancedSecurityOptionsInput_Enabled})
+var sAdvancedSecurityOptionsInput_InternalUserDatabaseEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalUserDatabaseEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdvancedSecurityOptionsInput_InternalUserDatabaseEnabled})
+var sAdvancedSecurityOptionsInput_MasterUserOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserOptions", ID: &iMasterUserOptions, Members: &mMasterUserOptions, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptionsInput_MasterUserOptions})
+var sAdvancedSecurityOptionsInput_SAMLOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMLOptions", ID: &iSAMLOptionsInput, Members: &mSAMLOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptionsInput_SAMLOptions})
+var sAdvancedSecurityOptionsInput_AnonymousAuthEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnonymousAuthEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAdvancedSecurityOptionsInput_AnonymousAuthEnabled})
+var sAdvancedSecurityOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedSecurityOptionsStatus, Members: &mAdvancedSecurityOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptionsStatus})
+var sAdvancedSecurityOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iAdvancedSecurityOptions, Members: &mAdvancedSecurityOptions, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptionsStatus_Options})
+var sAdvancedSecurityOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAdvancedSecurityOptionsStatus_Status})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &e_ARN})
+var sAuthorizedPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizedPrincipal, Members: &mAuthorizedPrincipal, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizedPrincipal})
+var sAuthorizedPrincipal_PrincipalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrincipalType", ID: &iPrincipalType, Members: &mPrincipalType, Type: smithy.ShapeTypeEnum, Ext: &eAuthorizedPrincipal_PrincipalType})
+var sAuthorizedPrincipal_Principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Principal", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAuthorizedPrincipal_Principal})
+var s_AuthorizedPrincipalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthorizedPrincipalList, Members: &m_AuthorizedPrincipalList, Type: smithy.ShapeTypeList, Ext: &e_AuthorizedPrincipalList})
+var s_AuthorizedPrincipalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuthorizedPrincipal, Members: &mAuthorizedPrincipal, Type: smithy.ShapeTypeStructure, Ext: &e_AuthorizedPrincipalList_member})
+var sAutomatedSnapshotPauseOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomatedSnapshotPauseOptions, Members: &mAutomatedSnapshotPauseOptions, Type: smithy.ShapeTypeStructure, Ext: &eAutomatedSnapshotPauseOptions})
+var sAutomatedSnapshotPauseOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAutomatedSnapshotPauseOptions_Enabled})
+var sAutomatedSnapshotPauseOptions_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAutomatedSnapshotPauseOptions_StartTime})
+var sAutomatedSnapshotPauseOptions_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAutomatedSnapshotPauseOptions_EndTime})
+var sAutomatedSnapshotPauseOptions_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iPauseState, Members: &mPauseState, Type: smithy.ShapeTypeEnum, Ext: &eAutomatedSnapshotPauseOptions_State})
+var sAutomatedSnapshotPauseOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomatedSnapshotPauseOptionsStatus, Members: &mAutomatedSnapshotPauseOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eAutomatedSnapshotPauseOptionsStatus})
+var sAutomatedSnapshotPauseOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iAutomatedSnapshotPauseOptions, Members: &mAutomatedSnapshotPauseOptions, Type: smithy.ShapeTypeStructure, Ext: &eAutomatedSnapshotPauseOptionsStatus_Options})
+var sAutomatedSnapshotPauseOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAutomatedSnapshotPauseOptionsStatus_Status})
+var sAutomatedSnapshotPauseRequestOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomatedSnapshotPauseRequestOptions, Members: &mAutomatedSnapshotPauseRequestOptions, Type: smithy.ShapeTypeStructure, Ext: &eAutomatedSnapshotPauseRequestOptions})
+var sAutomatedSnapshotPauseRequestOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAutomatedSnapshotPauseRequestOptions_Enabled})
+var sAutomatedSnapshotPauseRequestOptions_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAutomatedSnapshotPauseRequestOptions_StartTime})
+var sAutomatedSnapshotPauseRequestOptions_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAutomatedSnapshotPauseRequestOptions_EndTime})
+var sAutoTune = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTune, Members: &mAutoTune, Type: smithy.ShapeTypeStructure, Ext: &eAutoTune})
+var sAutoTune_AutoTuneType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoTuneType", ID: &iAutoTuneType, Members: &mAutoTuneType, Type: smithy.ShapeTypeEnum, Ext: &eAutoTune_AutoTuneType})
+var sAutoTune_AutoTuneDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoTuneDetails", ID: &iAutoTuneDetails, Members: &mAutoTuneDetails, Type: smithy.ShapeTypeStructure, Ext: &eAutoTune_AutoTuneDetails})
+var s_AutoTuneDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoTuneDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_AutoTuneDate})
+var sAutoTuneDesiredState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneDesiredState, Members: &mAutoTuneDesiredState, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneDesiredState})
+var sAutoTuneDesiredState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneDesiredState_ENABLED})
+var sAutoTuneDesiredState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneDesiredState_DISABLED})
+var sAutoTuneDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneDetails, Members: &mAutoTuneDetails, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneDetails})
+var sAutoTuneDetails_ScheduledAutoTuneDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledAutoTuneDetails", ID: &iScheduledAutoTuneDetails, Members: &mScheduledAutoTuneDetails, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneDetails_ScheduledAutoTuneDetails})
+var s_AutoTuneList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoTuneList, Members: &m_AutoTuneList, Type: smithy.ShapeTypeList, Ext: &e_AutoTuneList})
+var s_AutoTuneList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoTune, Members: &mAutoTune, Type: smithy.ShapeTypeStructure, Ext: &e_AutoTuneList_member})
+var sAutoTuneMaintenanceSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneMaintenanceSchedule, Members: &mAutoTuneMaintenanceSchedule, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneMaintenanceSchedule})
+var sAutoTuneMaintenanceSchedule_StartAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartAt", ID: &i_StartAt, Type: smithy.ShapeTypeTimestamp, Ext: &eAutoTuneMaintenanceSchedule_StartAt})
+var sAutoTuneMaintenanceSchedule_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneMaintenanceSchedule_Duration})
+var sAutoTuneMaintenanceSchedule_CronExpressionForRecurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CronExpressionForRecurrence", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAutoTuneMaintenanceSchedule_CronExpressionForRecurrence})
+var s_AutoTuneMaintenanceScheduleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoTuneMaintenanceScheduleList, Members: &m_AutoTuneMaintenanceScheduleList, Type: smithy.ShapeTypeList, Ext: &e_AutoTuneMaintenanceScheduleList})
+var s_AutoTuneMaintenanceScheduleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoTuneMaintenanceSchedule, Members: &mAutoTuneMaintenanceSchedule, Type: smithy.ShapeTypeStructure, Ext: &e_AutoTuneMaintenanceScheduleList_member})
+var sAutoTuneOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneOptions, Members: &mAutoTuneOptions, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneOptions})
+var sAutoTuneOptions_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &iAutoTuneDesiredState, Members: &mAutoTuneDesiredState, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneOptions_DesiredState})
+var sAutoTuneOptions_RollbackOnDisable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RollbackOnDisable", ID: &iRollbackOnDisable, Members: &mRollbackOnDisable, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneOptions_RollbackOnDisable})
+var sAutoTuneOptions_MaintenanceSchedules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceSchedules", ID: &i_AutoTuneMaintenanceScheduleList, Members: &m_AutoTuneMaintenanceScheduleList, Type: smithy.ShapeTypeList, Ext: &eAutoTuneOptions_MaintenanceSchedules})
+var sAutoTuneOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneOptionsInput, Members: &mAutoTuneOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneOptionsInput})
+var sAutoTuneOptionsInput_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &iAutoTuneDesiredState, Members: &mAutoTuneDesiredState, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneOptionsInput_DesiredState})
+var sAutoTuneOptionsInput_MaintenanceSchedules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceSchedules", ID: &i_AutoTuneMaintenanceScheduleList, Members: &m_AutoTuneMaintenanceScheduleList, Type: smithy.ShapeTypeList, Ext: &eAutoTuneOptionsInput_MaintenanceSchedules})
+var sAutoTuneOptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneOptionsOutput, Members: &mAutoTuneOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneOptionsOutput})
+var sAutoTuneOptionsOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iAutoTuneState, Members: &mAutoTuneState, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneOptionsOutput_State})
+var sAutoTuneOptionsOutput_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAutoTuneOptionsOutput_ErrorMessage})
+var sAutoTuneOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneOptionsStatus, Members: &mAutoTuneOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneOptionsStatus})
+var sAutoTuneOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iAutoTuneOptions, Members: &mAutoTuneOptions, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneOptionsStatus_Options})
+var sAutoTuneOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAutoTuneStatus, Members: &mAutoTuneStatus, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneOptionsStatus_Status})
+var sAutoTuneState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneState, Members: &mAutoTuneState, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneState})
+var sAutoTuneState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_ENABLED})
+var sAutoTuneState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_DISABLED})
+var sAutoTuneState_ENABLE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_ENABLE_IN_PROGRESS})
+var sAutoTuneState_DISABLE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_DISABLE_IN_PROGRESS})
+var sAutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED_AND_ROLLBACK_SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED})
+var sAutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED_AND_ROLLBACK_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS})
+var sAutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED_AND_ROLLBACK_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE})
+var sAutoTuneState_DISABLED_AND_ROLLBACK_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED_AND_ROLLBACK_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_DISABLED_AND_ROLLBACK_ERROR})
+var sAutoTuneState_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneState_ERROR})
+var sAutoTuneStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneStatus, Members: &mAutoTuneStatus, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneStatus})
+var sAutoTuneStatus_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAutoTuneStatus_CreationDate})
+var sAutoTuneStatus_UpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDate", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAutoTuneStatus_UpdateDate})
+var sAutoTuneStatus_UpdateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateVersion", ID: &i_UIntValue, Type: smithy.ShapeTypeInteger, Ext: &eAutoTuneStatus_UpdateVersion})
+var sAutoTuneStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iAutoTuneState, Members: &mAutoTuneState, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneStatus_State})
+var sAutoTuneStatus_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAutoTuneStatus_ErrorMessage})
+var sAutoTuneStatus_PendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAutoTuneStatus_PendingDeletion})
+var sAutoTuneType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTuneType, Members: &mAutoTuneType, Type: smithy.ShapeTypeEnum, Ext: &eAutoTuneType})
+var sAutoTuneType_SCHEDULED_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoTuneType_SCHEDULED_ACTION})
+var s_AWSAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccount, Type: smithy.ShapeTypeString, Ext: &e_AWSAccount})
+var s_BackendRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackendRole, Type: smithy.ShapeTypeString, Ext: &e_BackendRole})
+var sBaseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaseException, Members: &mBaseException, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eBaseException})
+var sBaseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBaseException_message})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sCancelledChangeProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelledChangeProperty, Members: &mCancelledChangeProperty, Type: smithy.ShapeTypeStructure, Ext: &eCancelledChangeProperty})
+var sCancelledChangeProperty_PropertyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCancelledChangeProperty_PropertyName})
+var sCancelledChangeProperty_CancelledValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelledValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCancelledChangeProperty_CancelledValue})
+var sCancelledChangeProperty_ActiveValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCancelledChangeProperty_ActiveValue})
+var s_CancelledChangePropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CancelledChangePropertyList, Members: &m_CancelledChangePropertyList, Type: smithy.ShapeTypeList, Ext: &e_CancelledChangePropertyList})
+var s_CancelledChangePropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCancelledChangeProperty, Members: &mCancelledChangeProperty, Type: smithy.ShapeTypeStructure, Ext: &e_CancelledChangePropertyList_member})
+var sChangeProgressDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressDetails, Members: &mChangeProgressDetails, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressDetails})
+var sChangeProgressDetails_ChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeId", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &eChangeProgressDetails_ChangeId})
+var sChangeProgressDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eChangeProgressDetails_Message})
+var sChangeProgressDetails_ConfigChangeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigChangeStatus", ID: &iConfigChangeStatus, Members: &mConfigChangeStatus, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressDetails_ConfigChangeStatus})
+var sChangeProgressDetails_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeProgressDetails_StartTime})
+var sChangeProgressDetails_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeProgressDetails_LastUpdatedTime})
+var sChangeProgressDetails_InitiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatedBy", ID: &iInitiatedBy, Members: &mInitiatedBy, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressDetails_InitiatedBy})
+var sChangeProgressStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStage, Members: &mChangeProgressStage, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStage})
+var sChangeProgressStage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChangeProgressStageName, Type: smithy.ShapeTypeString, Ext: &eChangeProgressStage_Name})
+var sChangeProgressStage_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_ChangeProgressStageStatus, Type: smithy.ShapeTypeString, Ext: &eChangeProgressStage_Status})
+var sChangeProgressStage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eChangeProgressStage_Description})
+var sChangeProgressStage_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdated", ID: &i_LastUpdated, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeProgressStage_LastUpdated})
+var s_ChangeProgressStageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeProgressStageList, Members: &m_ChangeProgressStageList, Type: smithy.ShapeTypeList, Ext: &e_ChangeProgressStageList})
+var s_ChangeProgressStageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeProgressStage, Members: &mChangeProgressStage, Type: smithy.ShapeTypeStructure, Ext: &e_ChangeProgressStageList_member})
+var s_ChangeProgressStageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeProgressStageName, Type: smithy.ShapeTypeString, Ext: &e_ChangeProgressStageName})
+var s_ChangeProgressStageStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeProgressStageStatus, Type: smithy.ShapeTypeString, Ext: &e_ChangeProgressStageStatus})
+var sChangeProgressStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStatusDetails, Members: &mChangeProgressStatusDetails, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStatusDetails})
+var sChangeProgressStatusDetails_ChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeId", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &eChangeProgressStatusDetails_ChangeId})
+var sChangeProgressStatusDetails_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeProgressStatusDetails_StartTime})
+var sChangeProgressStatusDetails_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOverallChangeStatus, Members: &mOverallChangeStatus, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressStatusDetails_Status})
+var sChangeProgressStatusDetails_PendingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingProperties", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eChangeProgressStatusDetails_PendingProperties})
+var sChangeProgressStatusDetails_CompletedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedProperties", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eChangeProgressStatusDetails_CompletedProperties})
+var sChangeProgressStatusDetails_TotalNumberOfStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfStages", ID: &i_TotalNumberOfStages, Type: smithy.ShapeTypeInteger, Ext: &eChangeProgressStatusDetails_TotalNumberOfStages})
+var sChangeProgressStatusDetails_ChangeProgressStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressStages", ID: &i_ChangeProgressStageList, Members: &m_ChangeProgressStageList, Type: smithy.ShapeTypeList, Ext: &eChangeProgressStatusDetails_ChangeProgressStages})
+var sChangeProgressStatusDetails_ConfigChangeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigChangeStatus", ID: &iConfigChangeStatus, Members: &mConfigChangeStatus, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressStatusDetails_ConfigChangeStatus})
+var sChangeProgressStatusDetails_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeProgressStatusDetails_LastUpdatedTime})
+var sChangeProgressStatusDetails_InitiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatedBy", ID: &iInitiatedBy, Members: &mInitiatedBy, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressStatusDetails_InitiatedBy})
+var sChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClonedBlueGreenUpgradeDetails", ID: &iClonedBlueGreenUpgradeDetails, Members: &mClonedBlueGreenUpgradeDetails, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sClonedBlueGreenOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClonedBlueGreenOptions, Members: &mClonedBlueGreenOptions, Type: smithy.ShapeTypeStructure, Ext: &eClonedBlueGreenOptions})
+var sClonedBlueGreenOptions_RetentionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionOptions", ID: &iRetentionOptions, Members: &mRetentionOptions, Type: smithy.ShapeTypeUnion, Ext: &eClonedBlueGreenOptions_RetentionOptions})
+var sClonedBlueGreenScheduledAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClonedBlueGreenScheduledAction, Members: &mClonedBlueGreenScheduledAction, Type: smithy.ShapeTypeStructure, Ext: &eClonedBlueGreenScheduledAction})
+var sClonedBlueGreenScheduledAction_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iClonedBlueGreenScheduledActionType, Members: &mClonedBlueGreenScheduledActionType, Type: smithy.ShapeTypeEnum, Ext: &eClonedBlueGreenScheduledAction_Action})
+var sClonedBlueGreenScheduledAction_ScheduledTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eClonedBlueGreenScheduledAction_ScheduledTime})
+var sClonedBlueGreenScheduledActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClonedBlueGreenScheduledActionType, Members: &mClonedBlueGreenScheduledActionType, Type: smithy.ShapeTypeEnum, Ext: &eClonedBlueGreenScheduledActionType})
+var sClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC_CUTOVER_TO_PRIMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY})
+var sClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_PRIMARY_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER})
+var sClonedBlueGreenUpgradeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClonedBlueGreenUpgradeDetails, Members: &mClonedBlueGreenUpgradeDetails, Type: smithy.ShapeTypeStructure, Ext: &eClonedBlueGreenUpgradeDetails})
+var sClonedBlueGreenUpgradeDetails_TrafficSplit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficSplit", ID: &iTrafficPercents, Members: &mTrafficPercents, Type: smithy.ShapeTypeStructure, Ext: &eClonedBlueGreenUpgradeDetails_TrafficSplit})
+var sClonedBlueGreenUpgradeDetails_ScheduledAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledAction", ID: &iClonedBlueGreenScheduledAction, Members: &mClonedBlueGreenScheduledAction, Type: smithy.ShapeTypeStructure, Ext: &eClonedBlueGreenUpgradeDetails_ScheduledAction})
+var sClonedBlueGreenUpgradeDetails_RetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionInHours", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eClonedBlueGreenUpgradeDetails_RetentionInHours})
+var s_CloudWatchLogsLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogsLogGroupArn, Type: smithy.ShapeTypeString, Ext: &e_CloudWatchLogsLogGroupArn})
+var sCognitoOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoOptions, Members: &mCognitoOptions, Type: smithy.ShapeTypeStructure, Ext: &eCognitoOptions})
+var sCognitoOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCognitoOptions_Enabled})
+var sCognitoOptions_UserPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolId", ID: &i_UserPoolId, Type: smithy.ShapeTypeString, Ext: &eCognitoOptions_UserPoolId})
+var sCognitoOptions_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &eCognitoOptions_IdentityPoolId})
+var sCognitoOptions_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCognitoOptions_RoleArn})
+var sCognitoOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoOptionsStatus, Members: &mCognitoOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eCognitoOptionsStatus})
+var sCognitoOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iCognitoOptions, Members: &mCognitoOptions, Type: smithy.ShapeTypeStructure, Ext: &eCognitoOptionsStatus_Options})
+var sCognitoOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eCognitoOptionsStatus_Status})
+var sColdStorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColdStorageOptions, Members: &mColdStorageOptions, Type: smithy.ShapeTypeStructure, Ext: &eColdStorageOptions})
+var sColdStorageOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eColdStorageOptions_Enabled})
+var s_CommitMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitMessage, Type: smithy.ShapeTypeString, Ext: &e_CommitMessage})
+var s_CompatibleElasticsearchVersionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompatibleElasticsearchVersionsList, Members: &m_CompatibleElasticsearchVersionsList, Type: smithy.ShapeTypeList, Ext: &e_CompatibleElasticsearchVersionsList})
+var s_CompatibleElasticsearchVersionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompatibleVersionsMap, Members: &mCompatibleVersionsMap, Type: smithy.ShapeTypeStructure, Ext: &e_CompatibleElasticsearchVersionsList_member})
+var sCompatibleVersionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompatibleVersionsMap, Members: &mCompatibleVersionsMap, Type: smithy.ShapeTypeStructure, Ext: &eCompatibleVersionsMap})
+var sCompatibleVersionsMap_SourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceVersion", ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &eCompatibleVersionsMap_SourceVersion})
+var sCompatibleVersionsMap_TargetVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVersions", ID: &i_ElasticsearchVersionList, Members: &m_ElasticsearchVersionList, Type: smithy.ShapeTypeList, Ext: &eCompatibleVersionsMap_TargetVersions})
+var sConfigChangeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigChangeStatus, Members: &mConfigChangeStatus, Type: smithy.ShapeTypeEnum, Ext: &eConfigChangeStatus})
+var sConfigChangeStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_PENDING})
+var sConfigChangeStatus_INITIALIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_INITIALIZING})
+var sConfigChangeStatus_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_VALIDATING})
+var sConfigChangeStatus_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_VALIDATION_FAILED})
+var sConfigChangeStatus_APPLYING_CHANGES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLYING_CHANGES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_APPLYING_CHANGES})
+var sConfigChangeStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_COMPLETED})
+var sConfigChangeStatus_PENDING_USER_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_USER_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_PENDING_USER_INPUT})
+var sConfigChangeStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigChangeStatus_CANCELLED})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_ConnectionAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionAlias, Type: smithy.ShapeTypeString, Ext: &e_ConnectionAlias})
+var s_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedAt, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreatedAt})
+var s_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossClusterSearchConnectionId, Type: smithy.ShapeTypeString, Ext: &e_CrossClusterSearchConnectionId})
+var s_CrossClusterSearchConnectionStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossClusterSearchConnectionStatusMessage, Type: smithy.ShapeTypeString, Ext: &e_CrossClusterSearchConnectionStatusMessage})
+var sCutoverOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCutoverOptions, Members: &mCutoverOptions, Type: smithy.ShapeTypeStructure, Ext: &eCutoverOptions})
+var sCutoverOptions_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iCutoverTarget, Members: &mCutoverTarget, Type: smithy.ShapeTypeEnum, Ext: &eCutoverOptions_Target})
+var sCutoverOptions_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCutoverStatus, Members: &mCutoverStatus, Type: smithy.ShapeTypeEnum, Ext: &eCutoverOptions_Status})
+var sCutoverRequestOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCutoverRequestOptions, Members: &mCutoverRequestOptions, Type: smithy.ShapeTypeStructure, Ext: &eCutoverRequestOptions})
+var sCutoverRequestOptions_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iCutoverTarget, Members: &mCutoverTarget, Type: smithy.ShapeTypeEnum, Ext: &eCutoverRequestOptions_Target})
+var sCutoverStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCutoverStatus, Members: &mCutoverStatus, Type: smithy.ShapeTypeEnum, Ext: &eCutoverStatus})
+var sCutoverStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCutoverStatus_IN_PROGRESS})
+var sCutoverStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCutoverStatus_COMPLETED})
+var sCutoverStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCutoverStatus_FAILED})
+var sCutoverTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCutoverTarget, Members: &mCutoverTarget, Type: smithy.ShapeTypeEnum, Ext: &eCutoverTarget})
+var sCutoverTarget_CLONED_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLONED_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCutoverTarget_CLONED_CLUSTER})
+var sCutoverTarget_PRIMARY_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCutoverTarget_PRIMARY_CLUSTER})
+var s_DeploymentCloseDateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentCloseDateTimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_DeploymentCloseDateTimeStamp})
+var sDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStatus})
+var sDeploymentStatus_PENDING_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_PENDING_UPDATE})
+var sDeploymentStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_IN_PROGRESS})
+var sDeploymentStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_COMPLETED})
+var sDeploymentStatus_NOT_ELIGIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ELIGIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_NOT_ELIGIBLE})
+var sDeploymentStatus_ELIGIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELIGIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_ELIGIBLE})
+var sDeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStrategy, Members: &mDeploymentStrategy, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStrategy})
+var sDeploymentStrategy_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategy_DEFAULT})
+var sDeploymentStrategy_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategy_CAPACITY_OPTIMIZED})
+var sDeploymentStrategyOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStrategyOptions, Members: &mDeploymentStrategyOptions, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategyOptions})
+var sDeploymentStrategyOptions_DeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategy", ID: &iDeploymentStrategy, Members: &mDeploymentStrategy, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStrategyOptions_DeploymentStrategy})
+var sDeploymentStrategyOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStrategyOptionsStatus, Members: &mDeploymentStrategyOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategyOptionsStatus})
+var sDeploymentStrategyOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iDeploymentStrategyOptions, Members: &mDeploymentStrategyOptions, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategyOptionsStatus_Options})
+var sDeploymentStrategyOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategyOptionsStatus_Status})
+var sDeploymentStrategyOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStrategyOverride, Members: &mDeploymentStrategyOverride, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStrategyOverride})
+var sDeploymentStrategyOverride_CLONED_BLUE_GREEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLONED_BLUE_GREEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategyOverride_CLONED_BLUE_GREEN})
+var sDeploymentStrategyOverrideOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStrategyOverrideOptions, Members: &mDeploymentStrategyOverrideOptions, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategyOverrideOptions})
+var sDeploymentStrategyOverrideOptions_DeploymentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategy", ID: &iDeploymentStrategyOverride, Members: &mDeploymentStrategyOverride, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStrategyOverrideOptions_DeploymentStrategy})
+var sDeploymentStrategyOverrideOptions_ClonedBlueGreenOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClonedBlueGreenOptions", ID: &iClonedBlueGreenOptions, Members: &mClonedBlueGreenOptions, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStrategyOverrideOptions_ClonedBlueGreenOptions})
+var s_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentType, Type: smithy.ShapeTypeString, Ext: &e_DeploymentType})
+var sDescribePackagesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackagesFilter, Members: &mDescribePackagesFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribePackagesFilter})
+var sDescribePackagesFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iDescribePackagesFilterName, Members: &mDescribePackagesFilterName, Type: smithy.ShapeTypeEnum, Ext: &eDescribePackagesFilter_Name})
+var sDescribePackagesFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DescribePackagesFilterValues, Members: &m_DescribePackagesFilterValues, Type: smithy.ShapeTypeList, Ext: &eDescribePackagesFilter_Value})
+var s_DescribePackagesFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribePackagesFilterList, Members: &m_DescribePackagesFilterList, Type: smithy.ShapeTypeList, Ext: &e_DescribePackagesFilterList})
+var s_DescribePackagesFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDescribePackagesFilter, Members: &mDescribePackagesFilter, Type: smithy.ShapeTypeStructure, Ext: &e_DescribePackagesFilterList_member})
+var sDescribePackagesFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackagesFilterName, Members: &mDescribePackagesFilterName, Type: smithy.ShapeTypeEnum, Ext: &eDescribePackagesFilterName})
+var sDescribePackagesFilterName_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDescribePackagesFilterName_PackageID})
+var sDescribePackagesFilterName_PackageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageName", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDescribePackagesFilterName_PackageName})
+var sDescribePackagesFilterName_PackageStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageStatus", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDescribePackagesFilterName_PackageStatus})
+var s_DescribePackagesFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribePackagesFilterValue, Type: smithy.ShapeTypeString, Ext: &e_DescribePackagesFilterValue})
+var s_DescribePackagesFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribePackagesFilterValues, Members: &m_DescribePackagesFilterValues, Type: smithy.ShapeTypeList, Ext: &e_DescribePackagesFilterValues})
+var s_DescribePackagesFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DescribePackagesFilterValue, Type: smithy.ShapeTypeString, Ext: &e_DescribePackagesFilterValues_member})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDisabledOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisabledOperationException, Members: &mDisabledOperationException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eDisabledOperationException})
+var sDisabledOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDisabledOperationException_message})
+var s_DisableTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisableTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_DisableTimestamp})
+var s_DomainArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &e_DomainArn})
+var sDomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptions})
+var sDomainEndpointOptions_EnforceHTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceHTTPS", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainEndpointOptions_EnforceHTTPS})
+var sDomainEndpointOptions_TLSSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSSecurityPolicy", ID: &iTLSSecurityPolicy, Members: &mTLSSecurityPolicy, Type: smithy.ShapeTypeEnum, Ext: &eDomainEndpointOptions_TLSSecurityPolicy})
+var sDomainEndpointOptions_CustomEndpointEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEndpointEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainEndpointOptions_CustomEndpointEnabled})
+var sDomainEndpointOptions_CustomEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEndpoint", ID: &i_DomainNameFqdn, Type: smithy.ShapeTypeString, Ext: &eDomainEndpointOptions_CustomEndpoint})
+var sDomainEndpointOptions_CustomEndpointCertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEndpointCertificateArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eDomainEndpointOptions_CustomEndpointCertificateArn})
+var sDomainEndpointOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainEndpointOptionsStatus, Members: &mDomainEndpointOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptionsStatus})
+var sDomainEndpointOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptionsStatus_Options})
+var sDomainEndpointOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptionsStatus_Status})
+var sDomainEngineMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainEngineMode, Members: &mDomainEngineMode, Type: smithy.ShapeTypeEnum, Ext: &eDomainEngineMode})
+var sDomainEngineMode_GENERAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainEngineMode_GENERAL})
+var sDomainEngineMode_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainEngineMode_OPTIMIZED})
+var s_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &e_DomainId})
+var sDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainInfo, Members: &mDomainInfo, Type: smithy.ShapeTypeStructure, Ext: &eDomainInfo})
+var sDomainInfo_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainInfo_DomainName})
+var sDomainInfo_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Type: smithy.ShapeTypeEnum, Ext: &eDomainInfo_EngineType})
+var s_DomainInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainInfoList, Members: &m_DomainInfoList, Type: smithy.ShapeTypeList, Ext: &e_DomainInfoList})
+var s_DomainInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainInfo, Members: &mDomainInfo, Type: smithy.ShapeTypeStructure, Ext: &e_DomainInfoList_member})
+var sDomainInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eDomainInformation})
+var sDomainInformation_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_OwnerId, Type: smithy.ShapeTypeString, Ext: &eDomainInformation_OwnerId})
+var sDomainInformation_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainInformation_DomainName})
+var sDomainInformation_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eDomainInformation_Region})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var s_DomainNameFqdn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNameFqdn, Type: smithy.ShapeTypeString, Ext: &e_DomainNameFqdn})
+var s_DomainNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNameList, Members: &m_DomainNameList, Type: smithy.ShapeTypeList, Ext: &e_DomainNameList})
+var s_DomainNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainNameList_member})
+var sDomainPackageDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainPackageDetails, Members: &mDomainPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &eDomainPackageDetails})
+var sDomainPackageDetails_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Type: smithy.ShapeTypeString, Ext: &eDomainPackageDetails_PackageID})
+var sDomainPackageDetails_PackageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageName", ID: &i_PackageName, Type: smithy.ShapeTypeString, Ext: &eDomainPackageDetails_PackageName})
+var sDomainPackageDetails_PackageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageType", ID: &iPackageType, Members: &mPackageType, Type: smithy.ShapeTypeEnum, Ext: &eDomainPackageDetails_PackageType})
+var sDomainPackageDetails_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdated", ID: &i_LastUpdated, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainPackageDetails_LastUpdated})
+var sDomainPackageDetails_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainPackageDetails_DomainName})
+var sDomainPackageDetails_DomainPackageStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPackageStatus", ID: &iDomainPackageStatus, Members: &mDomainPackageStatus, Type: smithy.ShapeTypeEnum, Ext: &eDomainPackageDetails_DomainPackageStatus})
+var sDomainPackageDetails_PackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageVersion", ID: &i_PackageVersion, Type: smithy.ShapeTypeString, Ext: &eDomainPackageDetails_PackageVersion})
+var sDomainPackageDetails_ReferencePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferencePath", ID: &i_ReferencePath, Type: smithy.ShapeTypeString, Ext: &eDomainPackageDetails_ReferencePath})
+var sDomainPackageDetails_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eDomainPackageDetails_ErrorDetails})
+var s_DomainPackageDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainPackageDetailsList, Members: &m_DomainPackageDetailsList, Type: smithy.ShapeTypeList, Ext: &e_DomainPackageDetailsList})
+var s_DomainPackageDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainPackageDetails, Members: &mDomainPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &e_DomainPackageDetailsList_member})
+var sDomainPackageStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainPackageStatus, Members: &mDomainPackageStatus, Type: smithy.ShapeTypeEnum, Ext: &eDomainPackageStatus})
+var sDomainPackageStatus_ASSOCIATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainPackageStatus_ASSOCIATING})
+var sDomainPackageStatus_ASSOCIATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainPackageStatus_ASSOCIATION_FAILED})
+var sDomainPackageStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainPackageStatus_ACTIVE})
+var sDomainPackageStatus_DISSOCIATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISSOCIATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainPackageStatus_DISSOCIATING})
+var sDomainPackageStatus_DISSOCIATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISSOCIATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainPackageStatus_DISSOCIATION_FAILED})
+var sDomainProcessingStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainProcessingStatusType, Members: &mDomainProcessingStatusType, Type: smithy.ShapeTypeEnum, Ext: &eDomainProcessingStatusType})
+var sDomainProcessingStatusType_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainProcessingStatusType_CREATING})
+var sDomainProcessingStatusType_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainProcessingStatusType_ACTIVE})
+var sDomainProcessingStatusType_MODIFYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainProcessingStatusType_MODIFYING})
+var sDomainProcessingStatusType_UPGRADING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPGRADING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainProcessingStatusType_UPGRADING})
+var sDomainProcessingStatusType_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainProcessingStatusType_UPDATING})
+var sDomainProcessingStatusType_ISOLATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISOLATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainProcessingStatusType_ISOLATED})
+var sDomainProcessingStatusType_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainProcessingStatusType_DELETING})
+var sDomainUseCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainUseCase, Members: &mDomainUseCase, Type: smithy.ShapeTypeEnum, Ext: &eDomainUseCase})
+var sDomainUseCase_SEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainUseCase_SEARCH})
+var sDomainUseCase_VECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainUseCase_VECTOR})
+var sDomainUseCase_OBSERVABILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBSERVABILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainUseCase_OBSERVABILITY})
+var sDomainUseCase_MIXED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIXED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainUseCase_MIXED})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var s_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DryRun, Type: smithy.ShapeTypeBoolean, Ext: &e_DryRun})
+var sDryRunResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunResults, Members: &mDryRunResults, Type: smithy.ShapeTypeStructure, Ext: &eDryRunResults})
+var sDryRunResults_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &i_DeploymentType, Type: smithy.ShapeTypeString, Ext: &eDryRunResults_DeploymentType})
+var sDryRunResults_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDryRunResults_Message})
+var sDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eDuration})
+var sDuration_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DurationValue, Type: smithy.ShapeTypeLong, Ext: &eDuration_Value})
+var sDuration_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eDuration_Unit})
+var s_DurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationValue, Type: smithy.ShapeTypeLong, Ext: &e_DurationValue})
+var sEBSOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEBSOptions, Members: &mEBSOptions, Type: smithy.ShapeTypeStructure, Ext: &eEBSOptions})
+var sEBSOptions_EBSEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBSEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEBSOptions_EBSEnabled})
+var sEBSOptions_VolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeType", ID: &iVolumeType, Members: &mVolumeType, Type: smithy.ShapeTypeEnum, Ext: &eEBSOptions_VolumeType})
+var sEBSOptions_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eEBSOptions_VolumeSize})
+var sEBSOptions_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eEBSOptions_Iops})
+var sEBSOptions_Throughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throughput", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eEBSOptions_Throughput})
+var sEBSOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEBSOptionsStatus, Members: &mEBSOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eEBSOptionsStatus})
+var sEBSOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iEBSOptions, Members: &mEBSOptions, Type: smithy.ShapeTypeStructure, Ext: &eEBSOptionsStatus_Options})
+var sEBSOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eEBSOptionsStatus_Status})
+var sElasticsearchClusterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchClusterConfig, Members: &mElasticsearchClusterConfig, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchClusterConfig})
+var sElasticsearchClusterConfig_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &iESPartitionInstanceType, Members: &mESPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchClusterConfig_InstanceType})
+var sElasticsearchClusterConfig_InstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceCount", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eElasticsearchClusterConfig_InstanceCount})
+var sElasticsearchClusterConfig_DedicatedMasterEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedMasterEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eElasticsearchClusterConfig_DedicatedMasterEnabled})
+var sElasticsearchClusterConfig_ZoneAwarenessEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneAwarenessEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eElasticsearchClusterConfig_ZoneAwarenessEnabled})
+var sElasticsearchClusterConfig_ZoneAwarenessConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneAwarenessConfig", ID: &iZoneAwarenessConfig, Members: &mZoneAwarenessConfig, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchClusterConfig_ZoneAwarenessConfig})
+var sElasticsearchClusterConfig_DedicatedMasterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedMasterType", ID: &iESPartitionInstanceType, Members: &mESPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchClusterConfig_DedicatedMasterType})
+var sElasticsearchClusterConfig_DedicatedMasterCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedMasterCount", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eElasticsearchClusterConfig_DedicatedMasterCount})
+var sElasticsearchClusterConfig_WarmEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eElasticsearchClusterConfig_WarmEnabled})
+var sElasticsearchClusterConfig_WarmType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmType", ID: &iESWarmPartitionInstanceType, Members: &mESWarmPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchClusterConfig_WarmType})
+var sElasticsearchClusterConfig_WarmCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmCount", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eElasticsearchClusterConfig_WarmCount})
+var sElasticsearchClusterConfig_ColdStorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColdStorageOptions", ID: &iColdStorageOptions, Members: &mColdStorageOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchClusterConfig_ColdStorageOptions})
+var sElasticsearchClusterConfigStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchClusterConfigStatus, Members: &mElasticsearchClusterConfigStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchClusterConfigStatus})
+var sElasticsearchClusterConfigStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iElasticsearchClusterConfig, Members: &mElasticsearchClusterConfig, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchClusterConfigStatus_Options})
+var sElasticsearchClusterConfigStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchClusterConfigStatus_Status})
+var sElasticsearchDomainConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDomainConfig, Members: &mElasticsearchDomainConfig, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig})
+var sElasticsearchDomainConfig_ElasticsearchVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchVersion", ID: &iElasticsearchVersionStatus, Members: &mElasticsearchVersionStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_ElasticsearchVersion})
+var sElasticsearchDomainConfig_ElasticsearchClusterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchClusterConfig", ID: &iElasticsearchClusterConfigStatus, Members: &mElasticsearchClusterConfigStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_ElasticsearchClusterConfig})
+var sElasticsearchDomainConfig_EBSOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBSOptions", ID: &iEBSOptionsStatus, Members: &mEBSOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_EBSOptions})
+var sElasticsearchDomainConfig_AccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicies", ID: &iAccessPoliciesStatus, Members: &mAccessPoliciesStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_AccessPolicies})
+var sElasticsearchDomainConfig_SnapshotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotOptions", ID: &iSnapshotOptionsStatus, Members: &mSnapshotOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_SnapshotOptions})
+var sElasticsearchDomainConfig_VPCOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCOptions", ID: &iVPCDerivedInfoStatus, Members: &mVPCDerivedInfoStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_VPCOptions})
+var sElasticsearchDomainConfig_CognitoOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoOptions", ID: &iCognitoOptionsStatus, Members: &mCognitoOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_CognitoOptions})
+var sElasticsearchDomainConfig_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptionsStatus, Members: &mEncryptionAtRestOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_EncryptionAtRestOptions})
+var sElasticsearchDomainConfig_NodeToNodeEncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeToNodeEncryptionOptions", ID: &iNodeToNodeEncryptionOptionsStatus, Members: &mNodeToNodeEncryptionOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_NodeToNodeEncryptionOptions})
+var sElasticsearchDomainConfig_AdvancedOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedOptions", ID: &iAdvancedOptionsStatus, Members: &mAdvancedOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_AdvancedOptions})
+var sElasticsearchDomainConfig_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &iLogPublishingOptionsStatus, Members: &mLogPublishingOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_LogPublishingOptions})
+var sElasticsearchDomainConfig_DomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainEndpointOptions", ID: &iDomainEndpointOptionsStatus, Members: &mDomainEndpointOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_DomainEndpointOptions})
+var sElasticsearchDomainConfig_AdvancedSecurityOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedSecurityOptions", ID: &iAdvancedSecurityOptionsStatus, Members: &mAdvancedSecurityOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_AdvancedSecurityOptions})
+var sElasticsearchDomainConfig_AutoTuneOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoTuneOptions", ID: &iAutoTuneOptionsStatus, Members: &mAutoTuneOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_AutoTuneOptions})
+var sElasticsearchDomainConfig_ChangeProgressDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressDetails", ID: &iChangeProgressDetails, Members: &mChangeProgressDetails, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_ChangeProgressDetails})
+var sElasticsearchDomainConfig_ModifyingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifyingProperties", ID: &i_ModifyingPropertiesList, Members: &m_ModifyingPropertiesList, Type: smithy.ShapeTypeList, Ext: &eElasticsearchDomainConfig_ModifyingProperties})
+var sElasticsearchDomainConfig_DeploymentStrategyOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyOptions", ID: &iDeploymentStrategyOptionsStatus, Members: &mDeploymentStrategyOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_DeploymentStrategyOptions})
+var sElasticsearchDomainConfig_AutomatedSnapshotPauseOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedSnapshotPauseOptions", ID: &iAutomatedSnapshotPauseOptionsStatus, Members: &mAutomatedSnapshotPauseOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_AutomatedSnapshotPauseOptions})
+var sElasticsearchDomainConfig_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &iUseCaseStatus, Members: &mUseCaseStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_UseCase})
+var sElasticsearchDomainConfig_EngineMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineMode", ID: &iEngineModeStatus, Members: &mEngineModeStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainConfig_EngineMode})
+var sElasticsearchDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDomainStatus, Members: &mElasticsearchDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus})
+var sElasticsearchDomainStatus_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDomainStatus_DomainId})
+var sElasticsearchDomainStatus_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDomainStatus_DomainName})
+var sElasticsearchDomainStatus_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDomainStatus_ARN})
+var sElasticsearchDomainStatus_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eElasticsearchDomainStatus_Created})
+var sElasticsearchDomainStatus_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eElasticsearchDomainStatus_Deleted})
+var sElasticsearchDomainStatus_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_ServiceUrl, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDomainStatus_Endpoint})
+var sElasticsearchDomainStatus_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_EndpointsMap, Members: &m_EndpointsMap, Type: smithy.ShapeTypeMap, Ext: &eElasticsearchDomainStatus_Endpoints})
+var sElasticsearchDomainStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eElasticsearchDomainStatus_Processing})
+var sElasticsearchDomainStatus_UpgradeProcessing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeProcessing", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eElasticsearchDomainStatus_UpgradeProcessing})
+var sElasticsearchDomainStatus_ElasticsearchVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchVersion", ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDomainStatus_ElasticsearchVersion})
+var sElasticsearchDomainStatus_ElasticsearchClusterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchClusterConfig", ID: &iElasticsearchClusterConfig, Members: &mElasticsearchClusterConfig, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_ElasticsearchClusterConfig})
+var sElasticsearchDomainStatus_EBSOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBSOptions", ID: &iEBSOptions, Members: &mEBSOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_EBSOptions})
+var sElasticsearchDomainStatus_AccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicies", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDomainStatus_AccessPolicies})
+var sElasticsearchDomainStatus_SnapshotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotOptions", ID: &iSnapshotOptions, Members: &mSnapshotOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_SnapshotOptions})
+var sElasticsearchDomainStatus_VPCOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCOptions", ID: &iVPCDerivedInfo, Members: &mVPCDerivedInfo, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_VPCOptions})
+var sElasticsearchDomainStatus_CognitoOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoOptions", ID: &iCognitoOptions, Members: &mCognitoOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_CognitoOptions})
+var sElasticsearchDomainStatus_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_EncryptionAtRestOptions})
+var sElasticsearchDomainStatus_NodeToNodeEncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeToNodeEncryptionOptions", ID: &iNodeToNodeEncryptionOptions, Members: &mNodeToNodeEncryptionOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_NodeToNodeEncryptionOptions})
+var sElasticsearchDomainStatus_AdvancedOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedOptions", ID: &i_AdvancedOptions, Members: &m_AdvancedOptions, Type: smithy.ShapeTypeMap, Ext: &eElasticsearchDomainStatus_AdvancedOptions})
+var sElasticsearchDomainStatus_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &i_LogPublishingOptions, Members: &m_LogPublishingOptions, Type: smithy.ShapeTypeMap, Ext: &eElasticsearchDomainStatus_LogPublishingOptions})
+var sElasticsearchDomainStatus_ServiceSoftwareOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceSoftwareOptions", ID: &iServiceSoftwareOptions, Members: &mServiceSoftwareOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_ServiceSoftwareOptions})
+var sElasticsearchDomainStatus_DomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainEndpointOptions", ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_DomainEndpointOptions})
+var sElasticsearchDomainStatus_AdvancedSecurityOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedSecurityOptions", ID: &iAdvancedSecurityOptions, Members: &mAdvancedSecurityOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_AdvancedSecurityOptions})
+var sElasticsearchDomainStatus_AutoTuneOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoTuneOptions", ID: &iAutoTuneOptionsOutput, Members: &mAutoTuneOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_AutoTuneOptions})
+var sElasticsearchDomainStatus_ChangeProgressDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressDetails", ID: &iChangeProgressDetails, Members: &mChangeProgressDetails, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_ChangeProgressDetails})
+var sElasticsearchDomainStatus_DomainProcessingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainProcessingStatus", ID: &iDomainProcessingStatusType, Members: &mDomainProcessingStatusType, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchDomainStatus_DomainProcessingStatus})
+var sElasticsearchDomainStatus_ModifyingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifyingProperties", ID: &i_ModifyingPropertiesList, Members: &m_ModifyingPropertiesList, Type: smithy.ShapeTypeList, Ext: &eElasticsearchDomainStatus_ModifyingProperties})
+var sElasticsearchDomainStatus_DeploymentStrategyOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyOptions", ID: &iDeploymentStrategyOptions, Members: &mDeploymentStrategyOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_DeploymentStrategyOptions})
+var sElasticsearchDomainStatus_AutomatedSnapshotPauseOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedSnapshotPauseOptions", ID: &iAutomatedSnapshotPauseOptions, Members: &mAutomatedSnapshotPauseOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDomainStatus_AutomatedSnapshotPauseOptions})
+var sElasticsearchDomainStatus_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &iDomainUseCase, Members: &mDomainUseCase, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchDomainStatus_UseCase})
+var sElasticsearchDomainStatus_EngineMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineMode", ID: &iDomainEngineMode, Members: &mDomainEngineMode, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchDomainStatus_EngineMode})
+var s_ElasticsearchDomainStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchDomainStatusList, Members: &m_ElasticsearchDomainStatusList, Type: smithy.ShapeTypeList, Ext: &e_ElasticsearchDomainStatusList})
+var s_ElasticsearchDomainStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iElasticsearchDomainStatus, Members: &mElasticsearchDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &e_ElasticsearchDomainStatusList_member})
+var s_ElasticsearchInstanceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchInstanceTypeList, Members: &m_ElasticsearchInstanceTypeList, Type: smithy.ShapeTypeList, Ext: &e_ElasticsearchInstanceTypeList})
+var s_ElasticsearchInstanceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iESPartitionInstanceType, Members: &mESPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &e_ElasticsearchInstanceTypeList_member})
+var s_ElasticsearchVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchVersionList, Members: &m_ElasticsearchVersionList, Type: smithy.ShapeTypeList, Ext: &e_ElasticsearchVersionList})
+var s_ElasticsearchVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchVersionList_member})
+var sElasticsearchVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchVersionStatus, Members: &mElasticsearchVersionStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchVersionStatus})
+var sElasticsearchVersionStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &eElasticsearchVersionStatus_Options})
+var sElasticsearchVersionStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchVersionStatus_Status})
+var s_ElasticsearchVersionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchVersionString})
+var sEncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAtRestOptions})
+var sEncryptionAtRestOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEncryptionAtRestOptions_Enabled})
+var sEncryptionAtRestOptions_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eEncryptionAtRestOptions_KmsKeyId})
+var sEncryptionAtRestOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAtRestOptionsStatus, Members: &mEncryptionAtRestOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAtRestOptionsStatus})
+var sEncryptionAtRestOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAtRestOptionsStatus_Options})
+var sEncryptionAtRestOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAtRestOptionsStatus_Status})
+var s_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &e_Endpoint})
+var s_EndpointsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointsMap, Members: &m_EndpointsMap, Type: smithy.ShapeTypeMap, Ext: &e_EndpointsMap})
+var s_EndpointsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_EndpointsMap_key})
+var s_EndpointsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ServiceUrl, Type: smithy.ShapeTypeString, Ext: &e_EndpointsMap_value})
+var sEngineModeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineModeStatus, Members: &mEngineModeStatus, Type: smithy.ShapeTypeStructure, Ext: &eEngineModeStatus})
+var sEngineModeStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iDomainEngineMode, Members: &mDomainEngineMode, Type: smithy.ShapeTypeEnum, Ext: &eEngineModeStatus_Options})
+var sEngineModeStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eEngineModeStatus_Status})
+var sEngineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineType, Members: &mEngineType, Type: smithy.ShapeTypeEnum, Ext: &eEngineType})
+var sEngineType_OpenSearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenSearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngineType_OpenSearch})
+var sEngineType_Elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngineType_Elasticsearch})
+var sErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eErrorDetails})
+var sErrorDetails_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorType", ID: &i_ErrorType, Type: smithy.ShapeTypeString, Ext: &eErrorDetails_ErrorType})
+var sErrorDetails_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eErrorDetails_ErrorMessage})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorType, Type: smithy.ShapeTypeString, Ext: &e_ErrorType})
+var sESPartitionInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iESPartitionInstanceType, Members: &mESPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eESPartitionInstanceType})
+var sESPartitionInstanceType_m3_medium_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m3_medium_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m3_medium_elasticsearch})
+var sESPartitionInstanceType_m3_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m3_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m3_large_elasticsearch})
+var sESPartitionInstanceType_m3_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m3_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m3_xlarge_elasticsearch})
+var sESPartitionInstanceType_m3_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m3_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m3_2xlarge_elasticsearch})
+var sESPartitionInstanceType_m4_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m4_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m4_large_elasticsearch})
+var sESPartitionInstanceType_m4_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m4_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m4_xlarge_elasticsearch})
+var sESPartitionInstanceType_m4_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m4_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m4_2xlarge_elasticsearch})
+var sESPartitionInstanceType_m4_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m4_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m4_4xlarge_elasticsearch})
+var sESPartitionInstanceType_m4_10xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m4_10xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m4_10xlarge_elasticsearch})
+var sESPartitionInstanceType_m5_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m5_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m5_large_elasticsearch})
+var sESPartitionInstanceType_m5_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m5_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m5_xlarge_elasticsearch})
+var sESPartitionInstanceType_m5_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m5_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m5_2xlarge_elasticsearch})
+var sESPartitionInstanceType_m5_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m5_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m5_4xlarge_elasticsearch})
+var sESPartitionInstanceType_m5_12xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "m5_12xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_m5_12xlarge_elasticsearch})
+var sESPartitionInstanceType_r5_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r5_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r5_large_elasticsearch})
+var sESPartitionInstanceType_r5_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r5_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r5_xlarge_elasticsearch})
+var sESPartitionInstanceType_r5_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r5_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r5_2xlarge_elasticsearch})
+var sESPartitionInstanceType_r5_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r5_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r5_4xlarge_elasticsearch})
+var sESPartitionInstanceType_r5_12xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r5_12xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r5_12xlarge_elasticsearch})
+var sESPartitionInstanceType_c5_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c5_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c5_large_elasticsearch})
+var sESPartitionInstanceType_c5_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c5_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c5_xlarge_elasticsearch})
+var sESPartitionInstanceType_c5_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c5_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c5_2xlarge_elasticsearch})
+var sESPartitionInstanceType_c5_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c5_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c5_4xlarge_elasticsearch})
+var sESPartitionInstanceType_c5_9xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c5_9xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c5_9xlarge_elasticsearch})
+var sESPartitionInstanceType_c5_18xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c5_18xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c5_18xlarge_elasticsearch})
+var sESPartitionInstanceType_ultrawarm1_medium_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ultrawarm1_medium_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_ultrawarm1_medium_elasticsearch})
+var sESPartitionInstanceType_ultrawarm1_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ultrawarm1_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_ultrawarm1_large_elasticsearch})
+var sESPartitionInstanceType_t2_micro_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "t2_micro_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_t2_micro_elasticsearch})
+var sESPartitionInstanceType_t2_small_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "t2_small_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_t2_small_elasticsearch})
+var sESPartitionInstanceType_t2_medium_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "t2_medium_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_t2_medium_elasticsearch})
+var sESPartitionInstanceType_r3_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r3_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r3_large_elasticsearch})
+var sESPartitionInstanceType_r3_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r3_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r3_xlarge_elasticsearch})
+var sESPartitionInstanceType_r3_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r3_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r3_2xlarge_elasticsearch})
+var sESPartitionInstanceType_r3_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r3_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r3_4xlarge_elasticsearch})
+var sESPartitionInstanceType_r3_8xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r3_8xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r3_8xlarge_elasticsearch})
+var sESPartitionInstanceType_i2_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i2_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i2_xlarge_elasticsearch})
+var sESPartitionInstanceType_i2_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i2_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i2_2xlarge_elasticsearch})
+var sESPartitionInstanceType_d2_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "d2_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_d2_xlarge_elasticsearch})
+var sESPartitionInstanceType_d2_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "d2_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_d2_2xlarge_elasticsearch})
+var sESPartitionInstanceType_d2_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "d2_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_d2_4xlarge_elasticsearch})
+var sESPartitionInstanceType_d2_8xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "d2_8xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_d2_8xlarge_elasticsearch})
+var sESPartitionInstanceType_c4_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c4_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c4_large_elasticsearch})
+var sESPartitionInstanceType_c4_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c4_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c4_xlarge_elasticsearch})
+var sESPartitionInstanceType_c4_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c4_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c4_2xlarge_elasticsearch})
+var sESPartitionInstanceType_c4_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c4_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c4_4xlarge_elasticsearch})
+var sESPartitionInstanceType_c4_8xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c4_8xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_c4_8xlarge_elasticsearch})
+var sESPartitionInstanceType_r4_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r4_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r4_large_elasticsearch})
+var sESPartitionInstanceType_r4_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r4_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r4_xlarge_elasticsearch})
+var sESPartitionInstanceType_r4_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r4_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r4_2xlarge_elasticsearch})
+var sESPartitionInstanceType_r4_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r4_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r4_4xlarge_elasticsearch})
+var sESPartitionInstanceType_r4_8xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r4_8xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r4_8xlarge_elasticsearch})
+var sESPartitionInstanceType_r4_16xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "r4_16xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_r4_16xlarge_elasticsearch})
+var sESPartitionInstanceType_i3_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i3_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i3_large_elasticsearch})
+var sESPartitionInstanceType_i3_xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i3_xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i3_xlarge_elasticsearch})
+var sESPartitionInstanceType_i3_2xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i3_2xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i3_2xlarge_elasticsearch})
+var sESPartitionInstanceType_i3_4xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i3_4xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i3_4xlarge_elasticsearch})
+var sESPartitionInstanceType_i3_8xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i3_8xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i3_8xlarge_elasticsearch})
+var sESPartitionInstanceType_i3_16xlarge_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "i3_16xlarge_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESPartitionInstanceType_i3_16xlarge_elasticsearch})
+var sESWarmPartitionInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iESWarmPartitionInstanceType, Members: &mESWarmPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eESWarmPartitionInstanceType})
+var sESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ultrawarm1_medium_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch})
+var sESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ultrawarm1_large_elasticsearch", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFilter_Name})
+var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_ValueStringList, Members: &m_ValueStringList, Type: smithy.ShapeTypeList, Ext: &eFilter_Values})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterList_member})
+var s_GUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &e_GUID})
+var s_GUIDList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GUIDList, Members: &m_GUIDList, Type: smithy.ShapeTypeList, Ext: &e_GUIDList})
+var s_GUIDList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &e_GUIDList_member})
+var s_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &e_IdentityPoolId})
+var sInboundCrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInboundCrossClusterSearchConnection, Members: &mInboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnection})
+var sInboundCrossClusterSearchConnection_SourceDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnection_SourceDomainInfo})
+var sInboundCrossClusterSearchConnection_DestinationDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnection_DestinationDomainInfo})
+var sInboundCrossClusterSearchConnection_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnectionId", ID: &i_CrossClusterSearchConnectionId, Type: smithy.ShapeTypeString, Ext: &eInboundCrossClusterSearchConnection_CrossClusterSearchConnectionId})
+var sInboundCrossClusterSearchConnection_ConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionStatus", ID: &iInboundCrossClusterSearchConnectionStatus, Members: &mInboundCrossClusterSearchConnectionStatus, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnection_ConnectionStatus})
+var s_InboundCrossClusterSearchConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InboundCrossClusterSearchConnections, Members: &m_InboundCrossClusterSearchConnections, Type: smithy.ShapeTypeList, Ext: &e_InboundCrossClusterSearchConnections})
+var s_InboundCrossClusterSearchConnections_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInboundCrossClusterSearchConnection, Members: &mInboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &e_InboundCrossClusterSearchConnections_member})
+var sInboundCrossClusterSearchConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInboundCrossClusterSearchConnectionStatus, Members: &mInboundCrossClusterSearchConnectionStatus, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnectionStatus})
+var sInboundCrossClusterSearchConnectionStatus_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iInboundCrossClusterSearchConnectionStatusCode, Members: &mInboundCrossClusterSearchConnectionStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eInboundCrossClusterSearchConnectionStatus_StatusCode})
+var sInboundCrossClusterSearchConnectionStatus_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_CrossClusterSearchConnectionStatusMessage, Type: smithy.ShapeTypeString, Ext: &eInboundCrossClusterSearchConnectionStatus_Message})
+var sInboundCrossClusterSearchConnectionStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInboundCrossClusterSearchConnectionStatusCode, Members: &mInboundCrossClusterSearchConnectionStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eInboundCrossClusterSearchConnectionStatusCode})
+var sInboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE})
+var sInboundCrossClusterSearchConnectionStatusCode_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnectionStatusCode_APPROVED})
+var sInboundCrossClusterSearchConnectionStatusCode_REJECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnectionStatusCode_REJECTING})
+var sInboundCrossClusterSearchConnectionStatusCode_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnectionStatusCode_REJECTED})
+var sInboundCrossClusterSearchConnectionStatusCode_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnectionStatusCode_DELETING})
+var sInboundCrossClusterSearchConnectionStatusCode_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInboundCrossClusterSearchConnectionStatusCode_DELETED})
+var sInitiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInitiatedBy, Members: &mInitiatedBy, Type: smithy.ShapeTypeEnum, Ext: &eInitiatedBy})
+var sInitiatedBy_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInitiatedBy_CUSTOMER})
+var sInitiatedBy_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInitiatedBy_SERVICE})
+var s_InstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceCount, Type: smithy.ShapeTypeInteger, Ext: &e_InstanceCount})
+var sInstanceCountLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceCountLimits, Members: &mInstanceCountLimits, Type: smithy.ShapeTypeStructure, Ext: &eInstanceCountLimits})
+var sInstanceCountLimits_MinimumInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumInstanceCount", ID: &i_MinimumInstanceCount, Type: smithy.ShapeTypeInteger, Ext: &eInstanceCountLimits_MinimumInstanceCount})
+var sInstanceCountLimits_MaximumInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumInstanceCount", ID: &i_MaximumInstanceCount, Type: smithy.ShapeTypeInteger, Ext: &eInstanceCountLimits_MaximumInstanceCount})
+var sInstanceLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceLimits, Members: &mInstanceLimits, Type: smithy.ShapeTypeStructure, Ext: &eInstanceLimits})
+var sInstanceLimits_InstanceCountLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceCountLimits", ID: &iInstanceCountLimits, Members: &mInstanceCountLimits, Type: smithy.ShapeTypeStructure, Ext: &eInstanceLimits_InstanceCountLimits})
+var s_InstanceRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceRole, Type: smithy.ShapeTypeString, Ext: &e_InstanceRole})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var s_IntegerClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerClass})
+var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eInternalException})
+var sInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalException_message})
+var sInvalidPaginationTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationTokenException, Members: &mInvalidPaginationTokenException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPaginationTokenException})
+var sInvalidPaginationTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidPaginationTokenException_message})
+var sInvalidTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTypeException, Members: &mInvalidTypeException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTypeException})
+var sInvalidTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTypeException_message})
+var s_Issue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Issue, Type: smithy.ShapeTypeString, Ext: &e_Issue})
+var s_Issues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Issues, Members: &m_Issues, Type: smithy.ShapeTypeList, Ext: &e_Issues})
+var s_Issues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Issue, Type: smithy.ShapeTypeString, Ext: &e_Issues_member})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyId})
+var s_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdated, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastUpdated})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var s_LimitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitName, Type: smithy.ShapeTypeString, Ext: &e_LimitName})
+var sLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimits, Members: &mLimits, Type: smithy.ShapeTypeStructure, Ext: &eLimits})
+var sLimits_StorageTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageTypes", ID: &i_StorageTypeList, Members: &m_StorageTypeList, Type: smithy.ShapeTypeList, Ext: &eLimits_StorageTypes})
+var sLimits_InstanceLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceLimits", ID: &iInstanceLimits, Members: &mInstanceLimits, Type: smithy.ShapeTypeStructure, Ext: &eLimits_InstanceLimits})
+var sLimits_AdditionalLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLimits", ID: &i_AdditionalLimitList, Members: &m_AdditionalLimitList, Type: smithy.ShapeTypeList, Ext: &eLimits_AdditionalLimits})
+var s_LimitsByRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitsByRole, Members: &m_LimitsByRole, Type: smithy.ShapeTypeMap, Ext: &e_LimitsByRole})
+var s_LimitsByRole_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_InstanceRole, Type: smithy.ShapeTypeString, Ext: &e_LimitsByRole_key})
+var s_LimitsByRole_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iLimits, Members: &mLimits, Type: smithy.ShapeTypeStructure, Ext: &e_LimitsByRole_value})
+var s_LimitValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitValue, Type: smithy.ShapeTypeString, Ext: &e_LimitValue})
+var s_LimitValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitValueList, Members: &m_LimitValueList, Type: smithy.ShapeTypeList, Ext: &e_LimitValueList})
+var s_LimitValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LimitValue, Type: smithy.ShapeTypeString, Ext: &e_LimitValueList_member})
+var sLogPublishingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogPublishingOption, Members: &mLogPublishingOption, Type: smithy.ShapeTypeStructure, Ext: &eLogPublishingOption})
+var sLogPublishingOption_CloudWatchLogsLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsLogGroupArn", ID: &i_CloudWatchLogsLogGroupArn, Type: smithy.ShapeTypeString, Ext: &eLogPublishingOption_CloudWatchLogsLogGroupArn})
+var sLogPublishingOption_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLogPublishingOption_Enabled})
+var s_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogPublishingOptions, Members: &m_LogPublishingOptions, Type: smithy.ShapeTypeMap, Ext: &e_LogPublishingOptions})
+var s_LogPublishingOptions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &e_LogPublishingOptions_key})
+var s_LogPublishingOptions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iLogPublishingOption, Members: &mLogPublishingOption, Type: smithy.ShapeTypeStructure, Ext: &e_LogPublishingOptions_value})
+var sLogPublishingOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogPublishingOptionsStatus, Members: &mLogPublishingOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eLogPublishingOptionsStatus})
+var sLogPublishingOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_LogPublishingOptions, Members: &m_LogPublishingOptions, Type: smithy.ShapeTypeMap, Ext: &eLogPublishingOptionsStatus_Options})
+var sLogPublishingOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eLogPublishingOptionsStatus_Status})
+var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogType})
+var sLogType_INDEX_SLOW_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDEX_SLOW_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_INDEX_SLOW_LOGS})
+var sLogType_SEARCH_SLOW_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEARCH_SLOW_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_SEARCH_SLOW_LOGS})
+var sLogType_ES_APPLICATION_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_APPLICATION_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_ES_APPLICATION_LOGS})
+var sLogType_AUDIT_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIT_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_AUDIT_LOGS})
+var sMasterUserOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMasterUserOptions, Members: &mMasterUserOptions, Type: smithy.ShapeTypeStructure, Ext: &eMasterUserOptions})
+var sMasterUserOptions_MasterUserARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserARN", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eMasterUserOptions_MasterUserARN})
+var sMasterUserOptions_MasterUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserName", ID: &i_Username, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eMasterUserOptions_MasterUserName})
+var sMasterUserOptions_MasterUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserPassword", ID: &i_Password, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eMasterUserOptions_MasterUserPassword})
+var s_MaximumInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumInstanceCount, Type: smithy.ShapeTypeInteger, Ext: &e_MaximumInstanceCount})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_MinimumInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumInstanceCount, Type: smithy.ShapeTypeInteger, Ext: &e_MinimumInstanceCount})
+var sModifyingProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyingProperties, Members: &mModifyingProperties, Type: smithy.ShapeTypeStructure, Ext: &eModifyingProperties})
+var sModifyingProperties_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyingProperties_Name})
+var sModifyingProperties_ActiveValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyingProperties_ActiveValue})
+var sModifyingProperties_PendingValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyingProperties_PendingValue})
+var sModifyingProperties_ValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueType", ID: &iPropertyValueType, Members: &mPropertyValueType, Type: smithy.ShapeTypeEnum, Ext: &eModifyingProperties_ValueType})
+var s_ModifyingPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModifyingPropertiesList, Members: &m_ModifyingPropertiesList, Type: smithy.ShapeTypeList, Ext: &e_ModifyingPropertiesList})
+var s_ModifyingPropertiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModifyingProperties, Members: &mModifyingProperties, Type: smithy.ShapeTypeStructure, Ext: &e_ModifyingPropertiesList_member})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNodeToNodeEncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeToNodeEncryptionOptions, Members: &mNodeToNodeEncryptionOptions, Type: smithy.ShapeTypeStructure, Ext: &eNodeToNodeEncryptionOptions})
+var sNodeToNodeEncryptionOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eNodeToNodeEncryptionOptions_Enabled})
+var sNodeToNodeEncryptionOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeToNodeEncryptionOptionsStatus, Members: &mNodeToNodeEncryptionOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eNodeToNodeEncryptionOptionsStatus})
+var sNodeToNodeEncryptionOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iNodeToNodeEncryptionOptions, Members: &mNodeToNodeEncryptionOptions, Type: smithy.ShapeTypeStructure, Ext: &eNodeToNodeEncryptionOptionsStatus_Options})
+var sNodeToNodeEncryptionOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eNodeToNodeEncryptionOptionsStatus_Status})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var sOptionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionState, Members: &mOptionState, Type: smithy.ShapeTypeEnum, Ext: &eOptionState})
+var sOptionState_RequiresIndexDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiresIndexDocuments", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptionState_RequiresIndexDocuments})
+var sOptionState_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptionState_Processing})
+var sOptionState_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptionState_Active})
+var sOptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eOptionStatus})
+var sOptionStatus_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOptionStatus_CreationDate})
+var sOptionStatus_UpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDate", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOptionStatus_UpdateDate})
+var sOptionStatus_UpdateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateVersion", ID: &i_UIntValue, Type: smithy.ShapeTypeInteger, Ext: &eOptionStatus_UpdateVersion})
+var sOptionStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iOptionState, Members: &mOptionState, Type: smithy.ShapeTypeEnum, Ext: &eOptionStatus_State})
+var sOptionStatus_PendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOptionStatus_PendingDeletion})
+var sOutboundCrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutboundCrossClusterSearchConnection, Members: &mOutboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnection})
+var sOutboundCrossClusterSearchConnection_SourceDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnection_SourceDomainInfo})
+var sOutboundCrossClusterSearchConnection_DestinationDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnection_DestinationDomainInfo})
+var sOutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnectionId", ID: &i_CrossClusterSearchConnectionId, Type: smithy.ShapeTypeString, Ext: &eOutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId})
+var sOutboundCrossClusterSearchConnection_ConnectionAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionAlias", ID: &i_ConnectionAlias, Type: smithy.ShapeTypeString, Ext: &eOutboundCrossClusterSearchConnection_ConnectionAlias})
+var sOutboundCrossClusterSearchConnection_ConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionStatus", ID: &iOutboundCrossClusterSearchConnectionStatus, Members: &mOutboundCrossClusterSearchConnectionStatus, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnection_ConnectionStatus})
+var s_OutboundCrossClusterSearchConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutboundCrossClusterSearchConnections, Members: &m_OutboundCrossClusterSearchConnections, Type: smithy.ShapeTypeList, Ext: &e_OutboundCrossClusterSearchConnections})
+var s_OutboundCrossClusterSearchConnections_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutboundCrossClusterSearchConnection, Members: &mOutboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &e_OutboundCrossClusterSearchConnections_member})
+var sOutboundCrossClusterSearchConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutboundCrossClusterSearchConnectionStatus, Members: &mOutboundCrossClusterSearchConnectionStatus, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatus})
+var sOutboundCrossClusterSearchConnectionStatus_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iOutboundCrossClusterSearchConnectionStatusCode, Members: &mOutboundCrossClusterSearchConnectionStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eOutboundCrossClusterSearchConnectionStatus_StatusCode})
+var sOutboundCrossClusterSearchConnectionStatus_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_CrossClusterSearchConnectionStatusMessage, Type: smithy.ShapeTypeString, Ext: &eOutboundCrossClusterSearchConnectionStatus_Message})
+var sOutboundCrossClusterSearchConnectionStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutboundCrossClusterSearchConnectionStatusCode, Members: &mOutboundCrossClusterSearchConnectionStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eOutboundCrossClusterSearchConnectionStatusCode})
+var sOutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE})
+var sOutboundCrossClusterSearchConnectionStatusCode_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_VALIDATING})
+var sOutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED})
+var sOutboundCrossClusterSearchConnectionStatusCode_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_PROVISIONING})
+var sOutboundCrossClusterSearchConnectionStatusCode_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_ACTIVE})
+var sOutboundCrossClusterSearchConnectionStatusCode_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_REJECTED})
+var sOutboundCrossClusterSearchConnectionStatusCode_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_DELETING})
+var sOutboundCrossClusterSearchConnectionStatusCode_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCrossClusterSearchConnectionStatusCode_DELETED})
+var sOverallChangeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverallChangeStatus, Members: &mOverallChangeStatus, Type: smithy.ShapeTypeEnum, Ext: &eOverallChangeStatus})
+var sOverallChangeStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverallChangeStatus_PENDING})
+var sOverallChangeStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverallChangeStatus_PROCESSING})
+var sOverallChangeStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverallChangeStatus_COMPLETED})
+var sOverallChangeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverallChangeStatus_FAILED})
+var s_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerId, Type: smithy.ShapeTypeString, Ext: &e_OwnerId})
+var s_PackageDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageDescription, Type: smithy.ShapeTypeString, Ext: &e_PackageDescription})
+var sPackageDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageDetails, Members: &mPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &ePackageDetails})
+var sPackageDetails_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Type: smithy.ShapeTypeString, Ext: &ePackageDetails_PackageID})
+var sPackageDetails_PackageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageName", ID: &i_PackageName, Type: smithy.ShapeTypeString, Ext: &ePackageDetails_PackageName})
+var sPackageDetails_PackageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageType", ID: &iPackageType, Members: &mPackageType, Type: smithy.ShapeTypeEnum, Ext: &ePackageDetails_PackageType})
+var sPackageDetails_PackageDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageDescription", ID: &i_PackageDescription, Type: smithy.ShapeTypeString, Ext: &ePackageDetails_PackageDescription})
+var sPackageDetails_PackageStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageStatus", ID: &iPackageStatus, Members: &mPackageStatus, Type: smithy.ShapeTypeEnum, Ext: &ePackageDetails_PackageStatus})
+var sPackageDetails_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_CreatedAt, Type: smithy.ShapeTypeTimestamp, Ext: &ePackageDetails_CreatedAt})
+var sPackageDetails_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_LastUpdated, Type: smithy.ShapeTypeTimestamp, Ext: &ePackageDetails_LastUpdatedAt})
+var sPackageDetails_AvailablePackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailablePackageVersion", ID: &i_PackageVersion, Type: smithy.ShapeTypeString, Ext: &ePackageDetails_AvailablePackageVersion})
+var sPackageDetails_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ePackageDetails_ErrorDetails})
+var s_PackageDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageDetailsList, Members: &m_PackageDetailsList, Type: smithy.ShapeTypeList, Ext: &e_PackageDetailsList})
+var s_PackageDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPackageDetails, Members: &mPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &e_PackageDetailsList_member})
+var s_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageID, Type: smithy.ShapeTypeString, Ext: &e_PackageID})
+var s_PackageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageName, Type: smithy.ShapeTypeString, Ext: &e_PackageName})
+var sPackageSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageSource, Members: &mPackageSource, Type: smithy.ShapeTypeStructure, Ext: &ePackageSource})
+var sPackageSource_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ePackageSource_S3BucketName})
+var sPackageSource_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ePackageSource_S3Key})
+var sPackageStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageStatus, Members: &mPackageStatus, Type: smithy.ShapeTypeEnum, Ext: &ePackageStatus})
+var sPackageStatus_COPYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_COPYING})
+var sPackageStatus_COPY_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPY_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_COPY_FAILED})
+var sPackageStatus_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_VALIDATING})
+var sPackageStatus_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_VALIDATION_FAILED})
+var sPackageStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_AVAILABLE})
+var sPackageStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_DELETING})
+var sPackageStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_DELETED})
+var sPackageStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageStatus_DELETE_FAILED})
+var sPackageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageType, Members: &mPackageType, Type: smithy.ShapeTypeEnum, Ext: &ePackageType})
+var sPackageType_TXT_DICTIONARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TXT_DICTIONARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePackageType_TXT_DICTIONARY})
+var s_PackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersion, Type: smithy.ShapeTypeString, Ext: &e_PackageVersion})
+var sPackageVersionHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionHistory, Members: &mPackageVersionHistory, Type: smithy.ShapeTypeStructure, Ext: &ePackageVersionHistory})
+var sPackageVersionHistory_PackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageVersion", ID: &i_PackageVersion, Type: smithy.ShapeTypeString, Ext: &ePackageVersionHistory_PackageVersion})
+var sPackageVersionHistory_CommitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommitMessage", ID: &i_CommitMessage, Type: smithy.ShapeTypeString, Ext: &ePackageVersionHistory_CommitMessage})
+var sPackageVersionHistory_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_CreatedAt, Type: smithy.ShapeTypeTimestamp, Ext: &ePackageVersionHistory_CreatedAt})
+var s_PackageVersionHistoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersionHistoryList, Members: &m_PackageVersionHistoryList, Type: smithy.ShapeTypeList, Ext: &e_PackageVersionHistoryList})
+var s_PackageVersionHistoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPackageVersionHistory, Members: &mPackageVersionHistory, Type: smithy.ShapeTypeStructure, Ext: &e_PackageVersionHistoryList_member})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &e_Password})
+var sPauseState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseState, Members: &mPauseState, Type: smithy.ShapeTypeEnum, Ext: &ePauseState})
+var sPauseState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePauseState_ACTIVE})
+var sPauseState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePauseState_COMPLETED})
+var sPauseState_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePauseState_SCHEDULED})
+var sPauseState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePauseState_DISABLED})
+var s_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &e_PolicyDocument})
+var sPrincipalType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrincipalType, Members: &mPrincipalType, Type: smithy.ShapeTypeEnum, Ext: &ePrincipalType})
+var sPrincipalType_AWS_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePrincipalType_AWS_ACCOUNT})
+var sPrincipalType_AWS_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePrincipalType_AWS_SERVICE})
+var sPropertyValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyValueType, Members: &mPropertyValueType, Type: smithy.ShapeTypeEnum, Ext: &ePropertyValueType})
+var sPropertyValueType_PLAIN_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAIN_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePropertyValueType_PLAIN_TEXT})
+var sPropertyValueType_STRINGIFIED_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRINGIFIED_JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePropertyValueType_STRINGIFIED_JSON})
+var sRecurringCharge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecurringCharge, Members: &mRecurringCharge, Type: smithy.ShapeTypeStructure, Ext: &eRecurringCharge})
+var sRecurringCharge_RecurringChargeAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringChargeAmount", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eRecurringCharge_RecurringChargeAmount})
+var sRecurringCharge_RecurringChargeFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringChargeFrequency", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRecurringCharge_RecurringChargeFrequency})
+var s_RecurringChargeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecurringChargeList, Members: &m_RecurringChargeList, Type: smithy.ShapeTypeList, Ext: &e_RecurringChargeList})
+var s_RecurringChargeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecurringCharge, Members: &mRecurringCharge, Traits: &t60, Type: smithy.ShapeTypeStructure, Ext: &e_RecurringChargeList_member})
+var s_ReferencePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferencePath, Type: smithy.ShapeTypeString, Ext: &e_ReferencePath})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var s_ReservationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReservationToken, Type: smithy.ShapeTypeString, Ext: &e_ReservationToken})
+var sReservedElasticsearchInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservedElasticsearchInstance, Members: &mReservedElasticsearchInstance, Type: smithy.ShapeTypeStructure, Ext: &eReservedElasticsearchInstance})
+var sReservedElasticsearchInstance_ReservationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservationName", ID: &i_ReservationToken, Type: smithy.ShapeTypeString, Ext: &eReservedElasticsearchInstance_ReservationName})
+var sReservedElasticsearchInstance_ReservedElasticsearchInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceId", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &eReservedElasticsearchInstance_ReservedElasticsearchInstanceId})
+var sReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceOfferingId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId})
+var sReservedElasticsearchInstance_ElasticsearchInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchInstanceType", ID: &iESPartitionInstanceType, Members: &mESPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eReservedElasticsearchInstance_ElasticsearchInstanceType})
+var sReservedElasticsearchInstance_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReservedElasticsearchInstance_StartTime})
+var sReservedElasticsearchInstance_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eReservedElasticsearchInstance_Duration})
+var sReservedElasticsearchInstance_FixedPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FixedPrice", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eReservedElasticsearchInstance_FixedPrice})
+var sReservedElasticsearchInstance_UsagePrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsagePrice", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eReservedElasticsearchInstance_UsagePrice})
+var sReservedElasticsearchInstance_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReservedElasticsearchInstance_CurrencyCode})
+var sReservedElasticsearchInstance_ElasticsearchInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchInstanceCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eReservedElasticsearchInstance_ElasticsearchInstanceCount})
+var sReservedElasticsearchInstance_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReservedElasticsearchInstance_State})
+var sReservedElasticsearchInstance_PaymentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaymentOption", ID: &iReservedElasticsearchInstancePaymentOption, Members: &mReservedElasticsearchInstancePaymentOption, Type: smithy.ShapeTypeEnum, Ext: &eReservedElasticsearchInstance_PaymentOption})
+var sReservedElasticsearchInstance_RecurringCharges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringCharges", ID: &i_RecurringChargeList, Members: &m_RecurringChargeList, Type: smithy.ShapeTypeList, Ext: &eReservedElasticsearchInstance_RecurringCharges})
+var s_ReservedElasticsearchInstanceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReservedElasticsearchInstanceList, Members: &m_ReservedElasticsearchInstanceList, Type: smithy.ShapeTypeList, Ext: &e_ReservedElasticsearchInstanceList})
+var s_ReservedElasticsearchInstanceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReservedElasticsearchInstance, Members: &mReservedElasticsearchInstance, Type: smithy.ShapeTypeStructure, Ext: &e_ReservedElasticsearchInstanceList_member})
+var sReservedElasticsearchInstanceOffering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservedElasticsearchInstanceOffering, Members: &mReservedElasticsearchInstanceOffering, Type: smithy.ShapeTypeStructure, Ext: &eReservedElasticsearchInstanceOffering})
+var sReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceOfferingId", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &eReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId})
+var sReservedElasticsearchInstanceOffering_ElasticsearchInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchInstanceType", ID: &iESPartitionInstanceType, Members: &mESPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eReservedElasticsearchInstanceOffering_ElasticsearchInstanceType})
+var sReservedElasticsearchInstanceOffering_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eReservedElasticsearchInstanceOffering_Duration})
+var sReservedElasticsearchInstanceOffering_FixedPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FixedPrice", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eReservedElasticsearchInstanceOffering_FixedPrice})
+var sReservedElasticsearchInstanceOffering_UsagePrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsagePrice", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eReservedElasticsearchInstanceOffering_UsagePrice})
+var sReservedElasticsearchInstanceOffering_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReservedElasticsearchInstanceOffering_CurrencyCode})
+var sReservedElasticsearchInstanceOffering_PaymentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaymentOption", ID: &iReservedElasticsearchInstancePaymentOption, Members: &mReservedElasticsearchInstancePaymentOption, Type: smithy.ShapeTypeEnum, Ext: &eReservedElasticsearchInstanceOffering_PaymentOption})
+var sReservedElasticsearchInstanceOffering_RecurringCharges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringCharges", ID: &i_RecurringChargeList, Members: &m_RecurringChargeList, Type: smithy.ShapeTypeList, Ext: &eReservedElasticsearchInstanceOffering_RecurringCharges})
+var s_ReservedElasticsearchInstanceOfferingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReservedElasticsearchInstanceOfferingList, Members: &m_ReservedElasticsearchInstanceOfferingList, Type: smithy.ShapeTypeList, Ext: &e_ReservedElasticsearchInstanceOfferingList})
+var s_ReservedElasticsearchInstanceOfferingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReservedElasticsearchInstanceOffering, Members: &mReservedElasticsearchInstanceOffering, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &e_ReservedElasticsearchInstanceOfferingList_member})
+var sReservedElasticsearchInstancePaymentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservedElasticsearchInstancePaymentOption, Members: &mReservedElasticsearchInstancePaymentOption, Type: smithy.ShapeTypeEnum, Ext: &eReservedElasticsearchInstancePaymentOption})
+var sReservedElasticsearchInstancePaymentOption_ALL_UPFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_UPFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReservedElasticsearchInstancePaymentOption_ALL_UPFRONT})
+var sReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_UPFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT})
+var sReservedElasticsearchInstancePaymentOption_NO_UPFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_UPFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReservedElasticsearchInstancePaymentOption_NO_UPFRONT})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sRetentionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionAction, Members: &mRetentionAction, Type: smithy.ShapeTypeEnum, Ext: &eRetentionAction})
+var sRetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_TO_PRIMARY_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER})
+var sRetentionAction_DELETE_PRIMARY_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_PRIMARY_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionAction_DELETE_PRIMARY_CLUSTER})
+var sRetentionOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionOptions, Members: &mRetentionOptions, Type: smithy.ShapeTypeUnion, Ext: &eRetentionOptions})
+var sRetentionOptions_RetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionInHours", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eRetentionOptions_RetentionInHours})
+var sRetentionOptions_RetentionAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionAction", ID: &iRetentionAction, Members: &mRetentionAction, Type: smithy.ShapeTypeEnum, Ext: &eRetentionOptions_RetentionAction})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sRollbackOnDisable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackOnDisable, Members: &mRollbackOnDisable, Type: smithy.ShapeTypeEnum, Ext: &eRollbackOnDisable})
+var sRollbackOnDisable_NO_ROLLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_ROLLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRollbackOnDisable_NO_ROLLBACK})
+var sRollbackOnDisable_DEFAULT_ROLLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_ROLLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRollbackOnDisable_DEFAULT_ROLLBACK})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var s_SAMLEntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SAMLEntityId, Type: smithy.ShapeTypeString, Ext: &e_SAMLEntityId})
+var sSAMLIdp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAMLIdp, Members: &mSAMLIdp, Type: smithy.ShapeTypeStructure, Ext: &eSAMLIdp})
+var sSAMLIdp_MetadataContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataContent", ID: &i_SAMLMetadata, Type: smithy.ShapeTypeString, Ext: &eSAMLIdp_MetadataContent})
+var sSAMLIdp_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_SAMLEntityId, Type: smithy.ShapeTypeString, Ext: &eSAMLIdp_EntityId})
+var s_SAMLMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SAMLMetadata, Type: smithy.ShapeTypeString, Ext: &e_SAMLMetadata})
+var sSAMLOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAMLOptionsInput, Members: &mSAMLOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eSAMLOptionsInput})
+var sSAMLOptionsInput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eSAMLOptionsInput_Enabled})
+var sSAMLOptionsInput_Idp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Idp", ID: &iSAMLIdp, Members: &mSAMLIdp, Type: smithy.ShapeTypeStructure, Ext: &eSAMLOptionsInput_Idp})
+var sSAMLOptionsInput_MasterUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserName", ID: &i_Username, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eSAMLOptionsInput_MasterUserName})
+var sSAMLOptionsInput_MasterBackendRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterBackendRole", ID: &i_BackendRole, Type: smithy.ShapeTypeString, Ext: &eSAMLOptionsInput_MasterBackendRole})
+var sSAMLOptionsInput_SubjectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSAMLOptionsInput_SubjectKey})
+var sSAMLOptionsInput_RolesKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RolesKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSAMLOptionsInput_RolesKey})
+var sSAMLOptionsInput_SessionTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTimeoutMinutes", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eSAMLOptionsInput_SessionTimeoutMinutes})
+var sSAMLOptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAMLOptionsOutput, Members: &mSAMLOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eSAMLOptionsOutput})
+var sSAMLOptionsOutput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eSAMLOptionsOutput_Enabled})
+var sSAMLOptionsOutput_Idp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Idp", ID: &iSAMLIdp, Members: &mSAMLIdp, Type: smithy.ShapeTypeStructure, Ext: &eSAMLOptionsOutput_Idp})
+var sSAMLOptionsOutput_SubjectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSAMLOptionsOutput_SubjectKey})
+var sSAMLOptionsOutput_RolesKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RolesKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSAMLOptionsOutput_RolesKey})
+var sSAMLOptionsOutput_SessionTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTimeoutMinutes", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eSAMLOptionsOutput_SessionTimeoutMinutes})
+var sScheduledAutoTuneActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledAutoTuneActionType, Members: &mScheduledAutoTuneActionType, Type: smithy.ShapeTypeEnum, Ext: &eScheduledAutoTuneActionType})
+var sScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JVM_HEAP_SIZE_TUNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING})
+var sScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JVM_YOUNG_GEN_TUNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING})
+var s_ScheduledAutoTuneDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduledAutoTuneDescription, Type: smithy.ShapeTypeString, Ext: &e_ScheduledAutoTuneDescription})
+var sScheduledAutoTuneDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledAutoTuneDetails, Members: &mScheduledAutoTuneDetails, Type: smithy.ShapeTypeStructure, Ext: &eScheduledAutoTuneDetails})
+var sScheduledAutoTuneDetails_Date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Date", ID: &i_AutoTuneDate, Type: smithy.ShapeTypeTimestamp, Ext: &eScheduledAutoTuneDetails_Date})
+var sScheduledAutoTuneDetails_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iScheduledAutoTuneActionType, Members: &mScheduledAutoTuneActionType, Type: smithy.ShapeTypeEnum, Ext: &eScheduledAutoTuneDetails_ActionType})
+var sScheduledAutoTuneDetails_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_ScheduledAutoTuneDescription, Type: smithy.ShapeTypeString, Ext: &eScheduledAutoTuneDetails_Action})
+var sScheduledAutoTuneDetails_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iScheduledAutoTuneSeverityType, Members: &mScheduledAutoTuneSeverityType, Type: smithy.ShapeTypeEnum, Ext: &eScheduledAutoTuneDetails_Severity})
+var sScheduledAutoTuneSeverityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledAutoTuneSeverityType, Members: &mScheduledAutoTuneSeverityType, Type: smithy.ShapeTypeEnum, Ext: &eScheduledAutoTuneSeverityType})
+var sScheduledAutoTuneSeverityType_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduledAutoTuneSeverityType_LOW})
+var sScheduledAutoTuneSeverityType_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduledAutoTuneSeverityType_MEDIUM})
+var sScheduledAutoTuneSeverityType_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduledAutoTuneSeverityType_HIGH})
+var sServiceSoftwareOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSoftwareOptions, Members: &mServiceSoftwareOptions, Type: smithy.ShapeTypeStructure, Ext: &eServiceSoftwareOptions})
+var sServiceSoftwareOptions_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceSoftwareOptions_CurrentVersion})
+var sServiceSoftwareOptions_NewVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceSoftwareOptions_NewVersion})
+var sServiceSoftwareOptions_UpdateAvailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateAvailable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eServiceSoftwareOptions_UpdateAvailable})
+var sServiceSoftwareOptions_Cancellable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancellable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eServiceSoftwareOptions_Cancellable})
+var sServiceSoftwareOptions_UpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateStatus", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eServiceSoftwareOptions_UpdateStatus})
+var sServiceSoftwareOptions_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceSoftwareOptions_Description})
+var sServiceSoftwareOptions_AutomatedUpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedUpdateDate", ID: &i_DeploymentCloseDateTimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eServiceSoftwareOptions_AutomatedUpdateDate})
+var sServiceSoftwareOptions_OptionalDeployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionalDeployment", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eServiceSoftwareOptions_OptionalDeployment})
+var s_ServiceUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceUrl, Type: smithy.ShapeTypeString, Ext: &e_ServiceUrl})
+var sSnapshotOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotOptions, Members: &mSnapshotOptions, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotOptions})
+var sSnapshotOptions_AutomatedSnapshotStartHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedSnapshotStartHour", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eSnapshotOptions_AutomatedSnapshotStartHour})
+var sSnapshotOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotOptionsStatus, Members: &mSnapshotOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotOptionsStatus})
+var sSnapshotOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iSnapshotOptions, Members: &mSnapshotOptions, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotOptionsStatus_Options})
+var sSnapshotOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotOptionsStatus_Status})
+var s_StartAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartAt, Type: smithy.ShapeTypeTimestamp, Ext: &e_StartAt})
+var s_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_StartTimestamp})
+var s_StorageSubTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageSubTypeName, Type: smithy.ShapeTypeString, Ext: &e_StorageSubTypeName})
+var sStorageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageType, Members: &mStorageType, Type: smithy.ShapeTypeStructure, Ext: &eStorageType})
+var sStorageType_StorageTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageTypeName", ID: &i_StorageTypeName, Type: smithy.ShapeTypeString, Ext: &eStorageType_StorageTypeName})
+var sStorageType_StorageSubTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageSubTypeName", ID: &i_StorageSubTypeName, Type: smithy.ShapeTypeString, Ext: &eStorageType_StorageSubTypeName})
+var sStorageType_StorageTypeLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageTypeLimits", ID: &i_StorageTypeLimitList, Members: &m_StorageTypeLimitList, Type: smithy.ShapeTypeList, Ext: &eStorageType_StorageTypeLimits})
+var sStorageTypeLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageTypeLimit, Members: &mStorageTypeLimit, Type: smithy.ShapeTypeStructure, Ext: &eStorageTypeLimit})
+var sStorageTypeLimit_LimitName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitName", ID: &i_LimitName, Type: smithy.ShapeTypeString, Ext: &eStorageTypeLimit_LimitName})
+var sStorageTypeLimit_LimitValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitValues", ID: &i_LimitValueList, Members: &m_LimitValueList, Type: smithy.ShapeTypeList, Ext: &eStorageTypeLimit_LimitValues})
+var s_StorageTypeLimitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageTypeLimitList, Members: &m_StorageTypeLimitList, Type: smithy.ShapeTypeList, Ext: &e_StorageTypeLimitList})
+var s_StorageTypeLimitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStorageTypeLimit, Members: &mStorageTypeLimit, Type: smithy.ShapeTypeStructure, Ext: &e_StorageTypeLimitList_member})
+var s_StorageTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageTypeList, Members: &m_StorageTypeList, Type: smithy.ShapeTypeList, Ext: &e_StorageTypeList})
+var s_StorageTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStorageType, Members: &mStorageType, Type: smithy.ShapeTypeStructure, Ext: &e_StorageTypeList_member})
+var s_StorageTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageTypeName, Type: smithy.ShapeTypeString, Ext: &e_StorageTypeName})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eTimeUnit})
+var sTimeUnit_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_HOURS})
+var sTLSSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSSecurityPolicy, Members: &mTLSSecurityPolicy, Type: smithy.ShapeTypeEnum, Ext: &eTLSSecurityPolicy})
+var sTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MIN_TLS_1_0_2019_07", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07})
+var sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MIN_TLS_1_2_2019_07", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07})
+var sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MIN_TLS_1_2_PFS_2023_10", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10})
+var sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08})
+var s_TotalNumberOfStages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalNumberOfStages, Type: smithy.ShapeTypeInteger, Ext: &e_TotalNumberOfStages})
+var s_TrafficPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPercent, Type: smithy.ShapeTypeInteger, Ext: &e_TrafficPercent})
+var sTrafficPercents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficPercents, Members: &mTrafficPercents, Type: smithy.ShapeTypeStructure, Ext: &eTrafficPercents})
+var sTrafficPercents_PrimaryReadTrafficPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryReadTrafficPercent", ID: &i_TrafficPercent, Type: smithy.ShapeTypeInteger, Ext: &eTrafficPercents_PrimaryReadTrafficPercent})
+var sTrafficPercents_CloneReadTrafficPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloneReadTrafficPercent", ID: &i_TrafficPercent, Type: smithy.ShapeTypeInteger, Ext: &eTrafficPercents_CloneReadTrafficPercent})
+var sTrafficSplitOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficSplitOptions, Members: &mTrafficSplitOptions, Type: smithy.ShapeTypeStructure, Ext: &eTrafficSplitOptions})
+var sTrafficSplitOptions_Current = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Current", ID: &iTrafficPercents, Members: &mTrafficPercents, Type: smithy.ShapeTypeStructure, Ext: &eTrafficSplitOptions_Current})
+var sTrafficSplitOptions_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iTrafficPercents, Members: &mTrafficPercents, Type: smithy.ShapeTypeStructure, Ext: &eTrafficSplitOptions_Target})
+var sTrafficSplitOptions_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTrafficSplitStatus, Members: &mTrafficSplitStatus, Type: smithy.ShapeTypeEnum, Ext: &eTrafficSplitOptions_Status})
+var sTrafficSplitRequestOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficSplitRequestOptions, Members: &mTrafficSplitRequestOptions, Type: smithy.ShapeTypeStructure, Ext: &eTrafficSplitRequestOptions})
+var sTrafficSplitRequestOptions_Strategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Strategy", ID: &iTrafficStrategy, Members: &mTrafficStrategy, Type: smithy.ShapeTypeEnum, Ext: &eTrafficSplitRequestOptions_Strategy})
+var sTrafficSplitRequestOptions_CloneReadTrafficPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloneReadTrafficPercent", ID: &i_TrafficPercent, Type: smithy.ShapeTypeInteger, Ext: &eTrafficSplitRequestOptions_CloneReadTrafficPercent})
+var sTrafficSplitStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficSplitStatus, Members: &mTrafficSplitStatus, Type: smithy.ShapeTypeEnum, Ext: &eTrafficSplitStatus})
+var sTrafficSplitStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrafficSplitStatus_IN_PROGRESS})
+var sTrafficSplitStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrafficSplitStatus_COMPLETED})
+var sTrafficSplitStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrafficSplitStatus_FAILED})
+var sTrafficStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficStrategy, Members: &mTrafficStrategy, Type: smithy.ShapeTypeEnum, Ext: &eTrafficStrategy})
+var sTrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHIFT_READ_TRAFFIC_PERCENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT})
+var s_UIntValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UIntValue, Type: smithy.ShapeTypeInteger, Ext: &e_UIntValue})
+var s_UpdateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_UpdateTimestamp})
+var sUpgradeHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeHistory, Members: &mUpgradeHistory, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeHistory})
+var sUpgradeHistory_UpgradeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeName", ID: &i_UpgradeName, Type: smithy.ShapeTypeString, Ext: &eUpgradeHistory_UpgradeName})
+var sUpgradeHistory_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_StartTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpgradeHistory_StartTimestamp})
+var sUpgradeHistory_UpgradeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeStatus", ID: &iUpgradeStatus, Members: &mUpgradeStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeHistory_UpgradeStatus})
+var sUpgradeHistory_StepsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepsList", ID: &i_UpgradeStepsList, Members: &m_UpgradeStepsList, Type: smithy.ShapeTypeList, Ext: &eUpgradeHistory_StepsList})
+var s_UpgradeHistoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpgradeHistoryList, Members: &m_UpgradeHistoryList, Type: smithy.ShapeTypeList, Ext: &e_UpgradeHistoryList})
+var s_UpgradeHistoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpgradeHistory, Members: &mUpgradeHistory, Type: smithy.ShapeTypeStructure, Ext: &e_UpgradeHistoryList_member})
+var s_UpgradeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpgradeName, Type: smithy.ShapeTypeString, Ext: &e_UpgradeName})
+var sUpgradeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeStatus, Members: &mUpgradeStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeStatus})
+var sUpgradeStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStatus_IN_PROGRESS})
+var sUpgradeStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStatus_SUCCEEDED})
+var sUpgradeStatus_SUCCEEDED_WITH_ISSUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED_WITH_ISSUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStatus_SUCCEEDED_WITH_ISSUES})
+var sUpgradeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStatus_FAILED})
+var sUpgradeStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeStep, Members: &mUpgradeStep, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeStep})
+var sUpgradeStep_PRE_UPGRADE_CHECK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_UPGRADE_CHECK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStep_PRE_UPGRADE_CHECK})
+var sUpgradeStep_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStep_SNAPSHOT})
+var sUpgradeStep_UPGRADE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPGRADE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStep_UPGRADE})
+var sUpgradeStepItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeStepItem, Members: &mUpgradeStepItem, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeStepItem})
+var sUpgradeStepItem_UpgradeStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeStep", ID: &iUpgradeStep, Members: &mUpgradeStep, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeStepItem_UpgradeStep})
+var sUpgradeStepItem_UpgradeStepStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeStepStatus", ID: &iUpgradeStatus, Members: &mUpgradeStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeStepItem_UpgradeStepStatus})
+var sUpgradeStepItem_Issues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issues", ID: &i_Issues, Members: &m_Issues, Type: smithy.ShapeTypeList, Ext: &eUpgradeStepItem_Issues})
+var sUpgradeStepItem_ProgressPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressPercent", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eUpgradeStepItem_ProgressPercent})
+var s_UpgradeStepsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpgradeStepsList, Members: &m_UpgradeStepsList, Type: smithy.ShapeTypeList, Ext: &e_UpgradeStepsList})
+var s_UpgradeStepsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpgradeStepItem, Members: &mUpgradeStepItem, Type: smithy.ShapeTypeStructure, Ext: &e_UpgradeStepsList_member})
+var sUseCaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUseCaseStatus, Members: &mUseCaseStatus, Type: smithy.ShapeTypeStructure, Ext: &eUseCaseStatus})
+var sUseCaseStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iDomainUseCase, Members: &mDomainUseCase, Type: smithy.ShapeTypeEnum, Ext: &eUseCaseStatus_Options})
+var sUseCaseStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eUseCaseStatus_Status})
+var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &e_Username})
+var s_UserPoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserPoolId, Type: smithy.ShapeTypeString, Ext: &e_UserPoolId})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_ValueStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueStringList, Members: &m_ValueStringList, Type: smithy.ShapeTypeList, Ext: &e_ValueStringList})
+var s_ValueStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ValueStringList_member})
+var sVolumeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeType, Members: &mVolumeType, Type: smithy.ShapeTypeEnum, Ext: &eVolumeType})
+var sVolumeType_standard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standard", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVolumeType_standard})
+var sVolumeType_gp2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gp2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVolumeType_gp2})
+var sVolumeType_io1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "io1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVolumeType_io1})
+var sVolumeType_gp3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gp3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVolumeType_gp3})
+var sVPCDerivedInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVPCDerivedInfo, Members: &mVPCDerivedInfo, Type: smithy.ShapeTypeStructure, Ext: &eVPCDerivedInfo})
+var sVPCDerivedInfo_VPCId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVPCDerivedInfo_VPCId})
+var sVPCDerivedInfo_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eVPCDerivedInfo_SubnetIds})
+var sVPCDerivedInfo_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eVPCDerivedInfo_AvailabilityZones})
+var sVPCDerivedInfo_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eVPCDerivedInfo_SecurityGroupIds})
+var sVPCDerivedInfoStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVPCDerivedInfoStatus, Members: &mVPCDerivedInfoStatus, Type: smithy.ShapeTypeStructure, Ext: &eVPCDerivedInfoStatus})
+var sVPCDerivedInfoStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iVPCDerivedInfo, Members: &mVPCDerivedInfo, Type: smithy.ShapeTypeStructure, Ext: &eVPCDerivedInfoStatus_Options})
+var sVPCDerivedInfoStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eVPCDerivedInfoStatus_Status})
+var sVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpoint})
+var sVpcEndpoint_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eVpcEndpoint_VpcEndpointId})
+var sVpcEndpoint_VpcEndpointOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointOwner", ID: &i_AWSAccount, Type: smithy.ShapeTypeString, Ext: &eVpcEndpoint_VpcEndpointOwner})
+var sVpcEndpoint_DomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainArn", ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &eVpcEndpoint_DomainArn})
+var sVpcEndpoint_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iVPCDerivedInfo, Members: &mVPCDerivedInfo, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpoint_VpcOptions})
+var sVpcEndpoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iVpcEndpointStatus, Members: &mVpcEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpoint_Status})
+var sVpcEndpoint_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &eVpcEndpoint_Endpoint})
+var sVpcEndpointError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointError, Members: &mVpcEndpointError, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointError})
+var sVpcEndpointError_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointError_VpcEndpointId})
+var sVpcEndpointError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iVpcEndpointErrorCode, Members: &mVpcEndpointErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpointError_ErrorCode})
+var sVpcEndpointError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointError_ErrorMessage})
+var sVpcEndpointErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointErrorCode, Members: &mVpcEndpointErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpointErrorCode})
+var sVpcEndpointErrorCode_ENDPOINT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDPOINT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointErrorCode_ENDPOINT_NOT_FOUND})
+var sVpcEndpointErrorCode_SERVER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointErrorCode_SERVER_ERROR})
+var s_VpcEndpointErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointErrorList, Members: &m_VpcEndpointErrorList, Type: smithy.ShapeTypeList, Ext: &e_VpcEndpointErrorList})
+var s_VpcEndpointErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpointError, Members: &mVpcEndpointError, Type: smithy.ShapeTypeStructure, Ext: &e_VpcEndpointErrorList_member})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointId})
+var s_VpcEndpointIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointIdList, Members: &m_VpcEndpointIdList, Type: smithy.ShapeTypeList, Ext: &e_VpcEndpointIdList})
+var s_VpcEndpointIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointIdList_member})
+var s_VpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpoints, Members: &m_VpcEndpoints, Type: smithy.ShapeTypeList, Ext: &e_VpcEndpoints})
+var s_VpcEndpoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_VpcEndpoints_member})
+var sVpcEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointStatus, Members: &mVpcEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpointStatus})
+var sVpcEndpointStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointStatus_CREATING})
+var sVpcEndpointStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointStatus_CREATE_FAILED})
+var sVpcEndpointStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointStatus_ACTIVE})
+var sVpcEndpointStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointStatus_UPDATING})
+var sVpcEndpointStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointStatus_UPDATE_FAILED})
+var sVpcEndpointStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointStatus_DELETING})
+var sVpcEndpointStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointStatus_DELETE_FAILED})
+var sVpcEndpointSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointSummary, Members: &mVpcEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointSummary})
+var sVpcEndpointSummary_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointSummary_VpcEndpointId})
+var sVpcEndpointSummary_VpcEndpointOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointOwner", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointSummary_VpcEndpointOwner})
+var sVpcEndpointSummary_DomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainArn", ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointSummary_DomainArn})
+var sVpcEndpointSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iVpcEndpointStatus, Members: &mVpcEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpointSummary_Status})
+var s_VpcEndpointSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointSummaryList, Members: &m_VpcEndpointSummaryList, Type: smithy.ShapeTypeList, Ext: &e_VpcEndpointSummaryList})
+var s_VpcEndpointSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpointSummary, Members: &mVpcEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &e_VpcEndpointSummaryList_member})
+var sVPCOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVPCOptions, Members: &mVPCOptions, Type: smithy.ShapeTypeStructure, Ext: &eVPCOptions})
+var sVPCOptions_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eVPCOptions_SubnetIds})
+var sVPCOptions_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eVPCOptions_SecurityGroupIds})
+var sZoneAwarenessConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZoneAwarenessConfig, Members: &mZoneAwarenessConfig, Type: smithy.ShapeTypeStructure, Ext: &eZoneAwarenessConfig})
+var sZoneAwarenessConfig_AvailabilityZoneCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneCount", ID: &i_IntegerClass, Type: smithy.ShapeTypeInteger, Ext: &eZoneAwarenessConfig_AvailabilityZoneCount})
+var sAcceptInboundCrossClusterSearchConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptInboundCrossClusterSearchConnectionRequest, Members: &mAcceptInboundCrossClusterSearchConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptInboundCrossClusterSearchConnectionRequest})
+var sAcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnectionId", ID: &i_CrossClusterSearchConnectionId, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eAcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId})
+var sAcceptInboundCrossClusterSearchConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptInboundCrossClusterSearchConnectionResponse, Members: &mAcceptInboundCrossClusterSearchConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptInboundCrossClusterSearchConnectionResponse})
+var sAcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnection", ID: &iInboundCrossClusterSearchConnection, Members: &mInboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &eAcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection})
+var sAddTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsRequest, Members: &mAddTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsRequest})
+var sAddTagsRequest_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eAddTagsRequest_ARN})
+var sAddTagsRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAddTagsRequest_TagList})
+var sAssociatePackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePackageRequest, Members: &mAssociatePackageRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePackageRequest})
+var sAssociatePackageRequest_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eAssociatePackageRequest_PackageID})
+var sAssociatePackageRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eAssociatePackageRequest_DomainName})
+var sAssociatePackageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePackageResponse, Members: &mAssociatePackageResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePackageResponse})
+var sAssociatePackageResponse_DomainPackageDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPackageDetails", ID: &iDomainPackageDetails, Members: &mDomainPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePackageResponse_DomainPackageDetails})
+var sAuthorizeVpcEndpointAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizeVpcEndpointAccessRequest, Members: &mAuthorizeVpcEndpointAccessRequest, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizeVpcEndpointAccessRequest})
+var sAuthorizeVpcEndpointAccessRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eAuthorizeVpcEndpointAccessRequest_DomainName})
+var sAuthorizeVpcEndpointAccessRequest_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_AWSAccount, Type: smithy.ShapeTypeString, Ext: &eAuthorizeVpcEndpointAccessRequest_Account})
+var sAuthorizeVpcEndpointAccessResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizeVpcEndpointAccessResponse, Members: &mAuthorizeVpcEndpointAccessResponse, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizeVpcEndpointAccessResponse})
+var sAuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizedPrincipal", ID: &iAuthorizedPrincipal, Members: &mAuthorizedPrincipal, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal})
+var sCancelDomainConfigChangeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainConfigChangeRequest, Members: &mCancelDomainConfigChangeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelDomainConfigChangeRequest})
+var sCancelDomainConfigChangeRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eCancelDomainConfigChangeRequest_DomainName})
+var sCancelDomainConfigChangeRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean, Ext: &eCancelDomainConfigChangeRequest_DryRun})
+var sCancelDomainConfigChangeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainConfigChangeResponse, Members: &mCancelDomainConfigChangeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelDomainConfigChangeResponse})
+var sCancelDomainConfigChangeResponse_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean, Ext: &eCancelDomainConfigChangeResponse_DryRun})
+var sCancelDomainConfigChangeResponse_CancelledChangeIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelledChangeIds", ID: &i_GUIDList, Members: &m_GUIDList, Type: smithy.ShapeTypeList, Ext: &eCancelDomainConfigChangeResponse_CancelledChangeIds})
+var sCancelDomainConfigChangeResponse_CancelledChangeProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelledChangeProperties", ID: &i_CancelledChangePropertyList, Members: &m_CancelledChangePropertyList, Type: smithy.ShapeTypeList, Ext: &eCancelDomainConfigChangeResponse_CancelledChangeProperties})
+var sCancelElasticsearchServiceSoftwareUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelElasticsearchServiceSoftwareUpdateRequest, Members: &mCancelElasticsearchServiceSoftwareUpdateRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelElasticsearchServiceSoftwareUpdateRequest})
+var sCancelElasticsearchServiceSoftwareUpdateRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCancelElasticsearchServiceSoftwareUpdateRequest_DomainName})
+var sCancelElasticsearchServiceSoftwareUpdateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelElasticsearchServiceSoftwareUpdateResponse, Members: &mCancelElasticsearchServiceSoftwareUpdateResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelElasticsearchServiceSoftwareUpdateResponse})
+var sCancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceSoftwareOptions", ID: &iServiceSoftwareOptions, Members: &mServiceSoftwareOptions, Type: smithy.ShapeTypeStructure, Ext: &eCancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions})
+var sCreateElasticsearchDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateElasticsearchDomainRequest, Members: &mCreateElasticsearchDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest})
+var sCreateElasticsearchDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCreateElasticsearchDomainRequest_DomainName})
+var sCreateElasticsearchDomainRequest_ElasticsearchVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchVersion", ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &eCreateElasticsearchDomainRequest_ElasticsearchVersion})
+var sCreateElasticsearchDomainRequest_ElasticsearchClusterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchClusterConfig", ID: &iElasticsearchClusterConfig, Members: &mElasticsearchClusterConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_ElasticsearchClusterConfig})
+var sCreateElasticsearchDomainRequest_EBSOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBSOptions", ID: &iEBSOptions, Members: &mEBSOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_EBSOptions})
+var sCreateElasticsearchDomainRequest_AccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicies", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &eCreateElasticsearchDomainRequest_AccessPolicies})
+var sCreateElasticsearchDomainRequest_SnapshotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotOptions", ID: &iSnapshotOptions, Members: &mSnapshotOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_SnapshotOptions})
+var sCreateElasticsearchDomainRequest_VPCOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCOptions", ID: &iVPCOptions, Members: &mVPCOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_VPCOptions})
+var sCreateElasticsearchDomainRequest_CognitoOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoOptions", ID: &iCognitoOptions, Members: &mCognitoOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_CognitoOptions})
+var sCreateElasticsearchDomainRequest_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_EncryptionAtRestOptions})
+var sCreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeToNodeEncryptionOptions", ID: &iNodeToNodeEncryptionOptions, Members: &mNodeToNodeEncryptionOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions})
+var sCreateElasticsearchDomainRequest_AdvancedOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedOptions", ID: &i_AdvancedOptions, Members: &m_AdvancedOptions, Type: smithy.ShapeTypeMap, Ext: &eCreateElasticsearchDomainRequest_AdvancedOptions})
+var sCreateElasticsearchDomainRequest_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &i_LogPublishingOptions, Members: &m_LogPublishingOptions, Type: smithy.ShapeTypeMap, Ext: &eCreateElasticsearchDomainRequest_LogPublishingOptions})
+var sCreateElasticsearchDomainRequest_DomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainEndpointOptions", ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_DomainEndpointOptions})
+var sCreateElasticsearchDomainRequest_AdvancedSecurityOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedSecurityOptions", ID: &iAdvancedSecurityOptionsInput, Members: &mAdvancedSecurityOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_AdvancedSecurityOptions})
+var sCreateElasticsearchDomainRequest_AutoTuneOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoTuneOptions", ID: &iAutoTuneOptionsInput, Members: &mAutoTuneOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_AutoTuneOptions})
+var sCreateElasticsearchDomainRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateElasticsearchDomainRequest_TagList})
+var sCreateElasticsearchDomainRequest_DeploymentStrategyOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyOptions", ID: &iDeploymentStrategyOptions, Members: &mDeploymentStrategyOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_DeploymentStrategyOptions})
+var sCreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedSnapshotPauseOptions", ID: &iAutomatedSnapshotPauseRequestOptions, Members: &mAutomatedSnapshotPauseRequestOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions})
+var sCreateElasticsearchDomainRequest_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &iDomainUseCase, Members: &mDomainUseCase, Type: smithy.ShapeTypeEnum, Ext: &eCreateElasticsearchDomainRequest_UseCase})
+var sCreateElasticsearchDomainRequest_EngineMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineMode", ID: &iDomainEngineMode, Members: &mDomainEngineMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateElasticsearchDomainRequest_EngineMode})
+var sCreateElasticsearchDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateElasticsearchDomainResponse, Members: &mCreateElasticsearchDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainResponse})
+var sCreateElasticsearchDomainResponse_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &iElasticsearchDomainStatus, Members: &mElasticsearchDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateElasticsearchDomainResponse_DomainStatus})
+var sCreateOutboundCrossClusterSearchConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOutboundCrossClusterSearchConnectionRequest, Members: &mCreateOutboundCrossClusterSearchConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateOutboundCrossClusterSearchConnectionRequest})
+var sCreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eCreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo})
+var sCreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eCreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo})
+var sCreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionAlias", ID: &i_ConnectionAlias, Type: smithy.ShapeTypeString, Ext: &eCreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias})
+var sCreateOutboundCrossClusterSearchConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOutboundCrossClusterSearchConnectionResponse, Members: &mCreateOutboundCrossClusterSearchConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateOutboundCrossClusterSearchConnectionResponse})
+var sCreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eCreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo})
+var sCreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationDomainInfo", ID: &iDomainInformation, Members: &mDomainInformation, Type: smithy.ShapeTypeStructure, Ext: &eCreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo})
+var sCreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionAlias", ID: &i_ConnectionAlias, Type: smithy.ShapeTypeString, Ext: &eCreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias})
+var sCreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionStatus", ID: &iOutboundCrossClusterSearchConnectionStatus, Members: &mOutboundCrossClusterSearchConnectionStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus})
+var sCreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnectionId", ID: &i_CrossClusterSearchConnectionId, Type: smithy.ShapeTypeString, Ext: &eCreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId})
+var sCreatePackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePackageRequest, Members: &mCreatePackageRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePackageRequest})
+var sCreatePackageRequest_PackageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageName", ID: &i_PackageName, Type: smithy.ShapeTypeString, Ext: &eCreatePackageRequest_PackageName})
+var sCreatePackageRequest_PackageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageType", ID: &iPackageType, Members: &mPackageType, Type: smithy.ShapeTypeEnum, Ext: &eCreatePackageRequest_PackageType})
+var sCreatePackageRequest_PackageDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageDescription", ID: &i_PackageDescription, Type: smithy.ShapeTypeString, Ext: &eCreatePackageRequest_PackageDescription})
+var sCreatePackageRequest_PackageSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageSource", ID: &iPackageSource, Members: &mPackageSource, Type: smithy.ShapeTypeStructure, Ext: &eCreatePackageRequest_PackageSource})
+var sCreatePackageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePackageResponse, Members: &mCreatePackageResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePackageResponse})
+var sCreatePackageResponse_PackageDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageDetails", ID: &iPackageDetails, Members: &mPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreatePackageResponse_PackageDetails})
+var sCreateVpcEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointRequest, Members: &mCreateVpcEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointRequest})
+var sCreateVpcEndpointRequest_DomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainArn", ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &eCreateVpcEndpointRequest_DomainArn})
+var sCreateVpcEndpointRequest_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iVPCOptions, Members: &mVPCOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointRequest_VpcOptions})
+var sCreateVpcEndpointRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateVpcEndpointRequest_ClientToken})
+var sCreateVpcEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointResponse, Members: &mCreateVpcEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointResponse})
+var sCreateVpcEndpointResponse_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoint", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointResponse_VpcEndpoint})
+var sDeleteElasticsearchDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteElasticsearchDomainRequest, Members: &mDeleteElasticsearchDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteElasticsearchDomainRequest})
+var sDeleteElasticsearchDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteElasticsearchDomainRequest_DomainName})
+var sDeleteElasticsearchDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteElasticsearchDomainResponse, Members: &mDeleteElasticsearchDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteElasticsearchDomainResponse})
+var sDeleteElasticsearchDomainResponse_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &iElasticsearchDomainStatus, Members: &mElasticsearchDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteElasticsearchDomainResponse_DomainStatus})
+var sDeleteInboundCrossClusterSearchConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInboundCrossClusterSearchConnectionRequest, Members: &mDeleteInboundCrossClusterSearchConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInboundCrossClusterSearchConnectionRequest})
+var sDeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnectionId", ID: &i_CrossClusterSearchConnectionId, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId})
+var sDeleteInboundCrossClusterSearchConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInboundCrossClusterSearchConnectionResponse, Members: &mDeleteInboundCrossClusterSearchConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInboundCrossClusterSearchConnectionResponse})
+var sDeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnection", ID: &iInboundCrossClusterSearchConnection, Members: &mInboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection})
+var sDeleteOutboundCrossClusterSearchConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOutboundCrossClusterSearchConnectionRequest, Members: &mDeleteOutboundCrossClusterSearchConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteOutboundCrossClusterSearchConnectionRequest})
+var sDeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnectionId", ID: &i_CrossClusterSearchConnectionId, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId})
+var sDeleteOutboundCrossClusterSearchConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOutboundCrossClusterSearchConnectionResponse, Members: &mDeleteOutboundCrossClusterSearchConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteOutboundCrossClusterSearchConnectionResponse})
+var sDeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnection", ID: &iOutboundCrossClusterSearchConnection, Members: &mOutboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &eDeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection})
+var sDeletePackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageRequest, Members: &mDeletePackageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePackageRequest})
+var sDeletePackageRequest_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeletePackageRequest_PackageID})
+var sDeletePackageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageResponse, Members: &mDeletePackageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePackageResponse})
+var sDeletePackageResponse_PackageDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageDetails", ID: &iPackageDetails, Members: &mPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &eDeletePackageResponse_PackageDetails})
+var sDeleteVpcEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointRequest, Members: &mDeleteVpcEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcEndpointRequest})
+var sDeleteVpcEndpointRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteVpcEndpointRequest_VpcEndpointId})
+var sDeleteVpcEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointResponse, Members: &mDeleteVpcEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcEndpointResponse})
+var sDeleteVpcEndpointResponse_VpcEndpointSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointSummary", ID: &iVpcEndpointSummary, Members: &mVpcEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcEndpointResponse_VpcEndpointSummary})
+var sDescribeDomainAutoTunesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainAutoTunesRequest, Members: &mDescribeDomainAutoTunesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainAutoTunesRequest})
+var sDescribeDomainAutoTunesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeDomainAutoTunesRequest_DomainName})
+var sDescribeDomainAutoTunesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDomainAutoTunesRequest_MaxResults})
+var sDescribeDomainAutoTunesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDescribeDomainAutoTunesRequest_NextToken})
+var sDescribeDomainAutoTunesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainAutoTunesResponse, Members: &mDescribeDomainAutoTunesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainAutoTunesResponse})
+var sDescribeDomainAutoTunesResponse_AutoTunes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoTunes", ID: &i_AutoTuneList, Members: &m_AutoTuneList, Type: smithy.ShapeTypeList, Ext: &eDescribeDomainAutoTunesResponse_AutoTunes})
+var sDescribeDomainAutoTunesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeDomainAutoTunesResponse_NextToken})
+var sDescribeDomainChangeProgressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainChangeProgressRequest, Members: &mDescribeDomainChangeProgressRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainChangeProgressRequest})
+var sDescribeDomainChangeProgressRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeDomainChangeProgressRequest_DomainName})
+var sDescribeDomainChangeProgressRequest_ChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeId", ID: &i_GUID, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eDescribeDomainChangeProgressRequest_ChangeId})
+var sDescribeDomainChangeProgressResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainChangeProgressResponse, Members: &mDescribeDomainChangeProgressResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainChangeProgressResponse})
+var sDescribeDomainChangeProgressResponse_ChangeProgressStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressStatus", ID: &iChangeProgressStatusDetails, Members: &mChangeProgressStatusDetails, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainChangeProgressResponse_ChangeProgressStatus})
+var sDescribeElasticsearchDomainConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomainConfigRequest, Members: &mDescribeElasticsearchDomainConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainConfigRequest})
+var sDescribeElasticsearchDomainConfigRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeElasticsearchDomainConfigRequest_DomainName})
+var sDescribeElasticsearchDomainConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomainConfigResponse, Members: &mDescribeElasticsearchDomainConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainConfigResponse})
+var sDescribeElasticsearchDomainConfigResponse_DomainConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainConfig", ID: &iElasticsearchDomainConfig, Members: &mElasticsearchDomainConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainConfigResponse_DomainConfig})
+var sDescribeElasticsearchDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomainRequest, Members: &mDescribeElasticsearchDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainRequest})
+var sDescribeElasticsearchDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeElasticsearchDomainRequest_DomainName})
+var sDescribeElasticsearchDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomainResponse, Members: &mDescribeElasticsearchDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainResponse})
+var sDescribeElasticsearchDomainResponse_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &iElasticsearchDomainStatus, Members: &mElasticsearchDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainResponse_DomainStatus})
+var sDescribeElasticsearchDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomainsRequest, Members: &mDescribeElasticsearchDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainsRequest})
+var sDescribeElasticsearchDomainsRequest_DomainNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNames", ID: &i_DomainNameList, Members: &m_DomainNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeElasticsearchDomainsRequest_DomainNames})
+var sDescribeElasticsearchDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchDomainsResponse, Members: &mDescribeElasticsearchDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchDomainsResponse})
+var sDescribeElasticsearchDomainsResponse_DomainStatusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatusList", ID: &i_ElasticsearchDomainStatusList, Members: &m_ElasticsearchDomainStatusList, Type: smithy.ShapeTypeList, Ext: &eDescribeElasticsearchDomainsResponse_DomainStatusList})
+var sDescribeElasticsearchInstanceTypeLimitsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchInstanceTypeLimitsRequest, Members: &mDescribeElasticsearchInstanceTypeLimitsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchInstanceTypeLimitsRequest})
+var sDescribeElasticsearchInstanceTypeLimitsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eDescribeElasticsearchInstanceTypeLimitsRequest_DomainName})
+var sDescribeElasticsearchInstanceTypeLimitsRequest_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &iESPartitionInstanceType, Members: &mESPartitionInstanceType, Traits: &t62, Type: smithy.ShapeTypeEnum, Ext: &eDescribeElasticsearchInstanceTypeLimitsRequest_InstanceType})
+var sDescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchVersion", ID: &i_ElasticsearchVersionString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion})
+var sDescribeElasticsearchInstanceTypeLimitsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeElasticsearchInstanceTypeLimitsResponse, Members: &mDescribeElasticsearchInstanceTypeLimitsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeElasticsearchInstanceTypeLimitsResponse})
+var sDescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitsByRole", ID: &i_LimitsByRole, Members: &m_LimitsByRole, Type: smithy.ShapeTypeMap, Ext: &eDescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole})
+var sDescribeInboundCrossClusterSearchConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInboundCrossClusterSearchConnectionsRequest, Members: &mDescribeInboundCrossClusterSearchConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeInboundCrossClusterSearchConnectionsRequest})
+var sDescribeInboundCrossClusterSearchConnectionsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeInboundCrossClusterSearchConnectionsRequest_Filters})
+var sDescribeInboundCrossClusterSearchConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeInboundCrossClusterSearchConnectionsRequest_MaxResults})
+var sDescribeInboundCrossClusterSearchConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeInboundCrossClusterSearchConnectionsRequest_NextToken})
+var sDescribeInboundCrossClusterSearchConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInboundCrossClusterSearchConnectionsResponse, Members: &mDescribeInboundCrossClusterSearchConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeInboundCrossClusterSearchConnectionsResponse})
+var sDescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnections", ID: &i_InboundCrossClusterSearchConnections, Members: &m_InboundCrossClusterSearchConnections, Type: smithy.ShapeTypeList, Ext: &eDescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections})
+var sDescribeInboundCrossClusterSearchConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeInboundCrossClusterSearchConnectionsResponse_NextToken})
+var sDescribeOutboundCrossClusterSearchConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOutboundCrossClusterSearchConnectionsRequest, Members: &mDescribeOutboundCrossClusterSearchConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOutboundCrossClusterSearchConnectionsRequest})
+var sDescribeOutboundCrossClusterSearchConnectionsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeOutboundCrossClusterSearchConnectionsRequest_Filters})
+var sDescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults})
+var sDescribeOutboundCrossClusterSearchConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeOutboundCrossClusterSearchConnectionsRequest_NextToken})
+var sDescribeOutboundCrossClusterSearchConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOutboundCrossClusterSearchConnectionsResponse, Members: &mDescribeOutboundCrossClusterSearchConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOutboundCrossClusterSearchConnectionsResponse})
+var sDescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnections", ID: &i_OutboundCrossClusterSearchConnections, Members: &m_OutboundCrossClusterSearchConnections, Type: smithy.ShapeTypeList, Ext: &eDescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections})
+var sDescribeOutboundCrossClusterSearchConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeOutboundCrossClusterSearchConnectionsResponse_NextToken})
+var sDescribePackagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackagesRequest, Members: &mDescribePackagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribePackagesRequest})
+var sDescribePackagesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_DescribePackagesFilterList, Members: &m_DescribePackagesFilterList, Type: smithy.ShapeTypeList, Ext: &eDescribePackagesRequest_Filters})
+var sDescribePackagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribePackagesRequest_MaxResults})
+var sDescribePackagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribePackagesRequest_NextToken})
+var sDescribePackagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackagesResponse, Members: &mDescribePackagesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribePackagesResponse})
+var sDescribePackagesResponse_PackageDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageDetailsList", ID: &i_PackageDetailsList, Members: &m_PackageDetailsList, Type: smithy.ShapeTypeList, Ext: &eDescribePackagesResponse_PackageDetailsList})
+var sDescribePackagesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribePackagesResponse_NextToken})
+var sDescribeReservedElasticsearchInstanceOfferingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReservedElasticsearchInstanceOfferingsRequest, Members: &mDescribeReservedElasticsearchInstanceOfferingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReservedElasticsearchInstanceOfferingsRequest})
+var sDescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceOfferingId", ID: &i_GUID, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eDescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId})
+var sDescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eDescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults})
+var sDescribeReservedElasticsearchInstanceOfferingsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDescribeReservedElasticsearchInstanceOfferingsRequest_NextToken})
+var sDescribeReservedElasticsearchInstanceOfferingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReservedElasticsearchInstanceOfferingsResponse, Members: &mDescribeReservedElasticsearchInstanceOfferingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReservedElasticsearchInstanceOfferingsResponse})
+var sDescribeReservedElasticsearchInstanceOfferingsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeReservedElasticsearchInstanceOfferingsResponse_NextToken})
+var sDescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceOfferings", ID: &i_ReservedElasticsearchInstanceOfferingList, Members: &m_ReservedElasticsearchInstanceOfferingList, Type: smithy.ShapeTypeList, Ext: &eDescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings})
+var sDescribeReservedElasticsearchInstancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReservedElasticsearchInstancesRequest, Members: &mDescribeReservedElasticsearchInstancesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReservedElasticsearchInstancesRequest})
+var sDescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceId", ID: &i_GUID, Traits: &t68, Type: smithy.ShapeTypeString, Ext: &eDescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId})
+var sDescribeReservedElasticsearchInstancesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eDescribeReservedElasticsearchInstancesRequest_MaxResults})
+var sDescribeReservedElasticsearchInstancesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDescribeReservedElasticsearchInstancesRequest_NextToken})
+var sDescribeReservedElasticsearchInstancesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReservedElasticsearchInstancesResponse, Members: &mDescribeReservedElasticsearchInstancesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReservedElasticsearchInstancesResponse})
+var sDescribeReservedElasticsearchInstancesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeReservedElasticsearchInstancesResponse_NextToken})
+var sDescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstances", ID: &i_ReservedElasticsearchInstanceList, Members: &m_ReservedElasticsearchInstanceList, Type: smithy.ShapeTypeList, Ext: &eDescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances})
+var sDescribeVpcEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointsRequest, Members: &mDescribeVpcEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcEndpointsRequest})
+var sDescribeVpcEndpointsRequest_VpcEndpointIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointIds", ID: &i_VpcEndpointIdList, Members: &m_VpcEndpointIdList, Type: smithy.ShapeTypeList, Ext: &eDescribeVpcEndpointsRequest_VpcEndpointIds})
+var sDescribeVpcEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointsResponse, Members: &mDescribeVpcEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcEndpointsResponse})
+var sDescribeVpcEndpointsResponse_VpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoints", ID: &i_VpcEndpoints, Members: &m_VpcEndpoints, Type: smithy.ShapeTypeList, Ext: &eDescribeVpcEndpointsResponse_VpcEndpoints})
+var sDescribeVpcEndpointsResponse_VpcEndpointErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointErrors", ID: &i_VpcEndpointErrorList, Members: &m_VpcEndpointErrorList, Type: smithy.ShapeTypeList, Ext: &eDescribeVpcEndpointsResponse_VpcEndpointErrors})
+var sDissociatePackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDissociatePackageRequest, Members: &mDissociatePackageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDissociatePackageRequest})
+var sDissociatePackageRequest_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDissociatePackageRequest_PackageID})
+var sDissociatePackageRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDissociatePackageRequest_DomainName})
+var sDissociatePackageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDissociatePackageResponse, Members: &mDissociatePackageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDissociatePackageResponse})
+var sDissociatePackageResponse_DomainPackageDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPackageDetails", ID: &iDomainPackageDetails, Members: &mDomainPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &eDissociatePackageResponse_DomainPackageDetails})
+var sGetCompatibleElasticsearchVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCompatibleElasticsearchVersionsRequest, Members: &mGetCompatibleElasticsearchVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCompatibleElasticsearchVersionsRequest})
+var sGetCompatibleElasticsearchVersionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetCompatibleElasticsearchVersionsRequest_DomainName})
+var sGetCompatibleElasticsearchVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCompatibleElasticsearchVersionsResponse, Members: &mGetCompatibleElasticsearchVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCompatibleElasticsearchVersionsResponse})
+var sGetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompatibleElasticsearchVersions", ID: &i_CompatibleElasticsearchVersionsList, Members: &m_CompatibleElasticsearchVersionsList, Type: smithy.ShapeTypeList, Ext: &eGetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions})
+var sGetPackageVersionHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionHistoryRequest, Members: &mGetPackageVersionHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPackageVersionHistoryRequest})
+var sGetPackageVersionHistoryRequest_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eGetPackageVersionHistoryRequest_PackageID})
+var sGetPackageVersionHistoryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eGetPackageVersionHistoryRequest_MaxResults})
+var sGetPackageVersionHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eGetPackageVersionHistoryRequest_NextToken})
+var sGetPackageVersionHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionHistoryResponse, Members: &mGetPackageVersionHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPackageVersionHistoryResponse})
+var sGetPackageVersionHistoryResponse_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Type: smithy.ShapeTypeString, Ext: &eGetPackageVersionHistoryResponse_PackageID})
+var sGetPackageVersionHistoryResponse_PackageVersionHistoryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageVersionHistoryList", ID: &i_PackageVersionHistoryList, Members: &m_PackageVersionHistoryList, Type: smithy.ShapeTypeList, Ext: &eGetPackageVersionHistoryResponse_PackageVersionHistoryList})
+var sGetPackageVersionHistoryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetPackageVersionHistoryResponse_NextToken})
+var sGetUpgradeHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUpgradeHistoryRequest, Members: &mGetUpgradeHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetUpgradeHistoryRequest})
+var sGetUpgradeHistoryRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eGetUpgradeHistoryRequest_DomainName})
+var sGetUpgradeHistoryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eGetUpgradeHistoryRequest_MaxResults})
+var sGetUpgradeHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eGetUpgradeHistoryRequest_NextToken})
+var sGetUpgradeHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUpgradeHistoryResponse, Members: &mGetUpgradeHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetUpgradeHistoryResponse})
+var sGetUpgradeHistoryResponse_UpgradeHistories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeHistories", ID: &i_UpgradeHistoryList, Members: &m_UpgradeHistoryList, Type: smithy.ShapeTypeList, Ext: &eGetUpgradeHistoryResponse_UpgradeHistories})
+var sGetUpgradeHistoryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetUpgradeHistoryResponse_NextToken})
+var sGetUpgradeStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUpgradeStatusRequest, Members: &mGetUpgradeStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetUpgradeStatusRequest})
+var sGetUpgradeStatusRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eGetUpgradeStatusRequest_DomainName})
+var sGetUpgradeStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUpgradeStatusResponse, Members: &mGetUpgradeStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetUpgradeStatusResponse})
+var sGetUpgradeStatusResponse_UpgradeStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeStep", ID: &iUpgradeStep, Members: &mUpgradeStep, Type: smithy.ShapeTypeEnum, Ext: &eGetUpgradeStatusResponse_UpgradeStep})
+var sGetUpgradeStatusResponse_StepStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepStatus", ID: &iUpgradeStatus, Members: &mUpgradeStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetUpgradeStatusResponse_StepStatus})
+var sGetUpgradeStatusResponse_UpgradeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradeName", ID: &i_UpgradeName, Type: smithy.ShapeTypeString, Ext: &eGetUpgradeStatusResponse_UpgradeName})
+var sListDomainNamesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNamesRequest, Members: &mListDomainNamesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDomainNamesRequest})
+var sListDomainNamesRequest_EngineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineType", ID: &iEngineType, Members: &mEngineType, Traits: &t69, Type: smithy.ShapeTypeEnum, Ext: &eListDomainNamesRequest_EngineType})
+var sListDomainNamesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNamesResponse, Members: &mListDomainNamesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDomainNamesResponse})
+var sListDomainNamesResponse_DomainNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNames", ID: &i_DomainInfoList, Members: &m_DomainInfoList, Type: smithy.ShapeTypeList, Ext: &eListDomainNamesResponse_DomainNames})
+var sListDomainsForPackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsForPackageRequest, Members: &mListDomainsForPackageRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsForPackageRequest})
+var sListDomainsForPackageRequest_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListDomainsForPackageRequest_PackageID})
+var sListDomainsForPackageRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eListDomainsForPackageRequest_MaxResults})
+var sListDomainsForPackageRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListDomainsForPackageRequest_NextToken})
+var sListDomainsForPackageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsForPackageResponse, Members: &mListDomainsForPackageResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsForPackageResponse})
+var sListDomainsForPackageResponse_DomainPackageDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPackageDetailsList", ID: &i_DomainPackageDetailsList, Members: &m_DomainPackageDetailsList, Type: smithy.ShapeTypeList, Ext: &eListDomainsForPackageResponse_DomainPackageDetailsList})
+var sListDomainsForPackageResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListDomainsForPackageResponse_NextToken})
+var sListElasticsearchInstanceTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListElasticsearchInstanceTypesRequest, Members: &mListElasticsearchInstanceTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListElasticsearchInstanceTypesRequest})
+var sListElasticsearchInstanceTypesRequest_ElasticsearchVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchVersion", ID: &i_ElasticsearchVersionString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListElasticsearchInstanceTypesRequest_ElasticsearchVersion})
+var sListElasticsearchInstanceTypesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListElasticsearchInstanceTypesRequest_DomainName})
+var sListElasticsearchInstanceTypesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eListElasticsearchInstanceTypesRequest_MaxResults})
+var sListElasticsearchInstanceTypesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListElasticsearchInstanceTypesRequest_NextToken})
+var sListElasticsearchInstanceTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListElasticsearchInstanceTypesResponse, Members: &mListElasticsearchInstanceTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListElasticsearchInstanceTypesResponse})
+var sListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchInstanceTypes", ID: &i_ElasticsearchInstanceTypeList, Members: &m_ElasticsearchInstanceTypeList, Type: smithy.ShapeTypeList, Ext: &eListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes})
+var sListElasticsearchInstanceTypesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListElasticsearchInstanceTypesResponse_NextToken})
+var sListElasticsearchVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListElasticsearchVersionsRequest, Members: &mListElasticsearchVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListElasticsearchVersionsRequest})
+var sListElasticsearchVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eListElasticsearchVersionsRequest_MaxResults})
+var sListElasticsearchVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListElasticsearchVersionsRequest_NextToken})
+var sListElasticsearchVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListElasticsearchVersionsResponse, Members: &mListElasticsearchVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListElasticsearchVersionsResponse})
+var sListElasticsearchVersionsResponse_ElasticsearchVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchVersions", ID: &i_ElasticsearchVersionList, Members: &m_ElasticsearchVersionList, Type: smithy.ShapeTypeList, Ext: &eListElasticsearchVersionsResponse_ElasticsearchVersions})
+var sListElasticsearchVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListElasticsearchVersionsResponse_NextToken})
+var sListPackagesForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackagesForDomainRequest, Members: &mListPackagesForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPackagesForDomainRequest})
+var sListPackagesForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListPackagesForDomainRequest_DomainName})
+var sListPackagesForDomainRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t63, Type: smithy.ShapeTypeInteger, Ext: &eListPackagesForDomainRequest_MaxResults})
+var sListPackagesForDomainRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListPackagesForDomainRequest_NextToken})
+var sListPackagesForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackagesForDomainResponse, Members: &mListPackagesForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPackagesForDomainResponse})
+var sListPackagesForDomainResponse_DomainPackageDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPackageDetailsList", ID: &i_DomainPackageDetailsList, Members: &m_DomainPackageDetailsList, Type: smithy.ShapeTypeList, Ext: &eListPackagesForDomainResponse_DomainPackageDetailsList})
+var sListPackagesForDomainResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPackagesForDomainResponse_NextToken})
+var sListTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsRequest, Members: &mListTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsRequest})
+var sListTagsRequest_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ARN, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eListTagsRequest_ARN})
+var sListTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsResponse, Members: &mListTagsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsResponse})
+var sListTagsResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsResponse_TagList})
+var sListVpcEndpointAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAccessRequest, Members: &mListVpcEndpointAccessRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointAccessRequest})
+var sListVpcEndpointAccessRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointAccessRequest_DomainName})
+var sListVpcEndpointAccessRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointAccessRequest_NextToken})
+var sListVpcEndpointAccessResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAccessResponse, Members: &mListVpcEndpointAccessResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointAccessResponse})
+var sListVpcEndpointAccessResponse_AuthorizedPrincipalList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizedPrincipalList", ID: &i_AuthorizedPrincipalList, Members: &m_AuthorizedPrincipalList, Type: smithy.ShapeTypeList, Ext: &eListVpcEndpointAccessResponse_AuthorizedPrincipalList})
+var sListVpcEndpointAccessResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointAccessResponse_NextToken})
+var sListVpcEndpointsForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointsForDomainRequest, Members: &mListVpcEndpointsForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointsForDomainRequest})
+var sListVpcEndpointsForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointsForDomainRequest_DomainName})
+var sListVpcEndpointsForDomainRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointsForDomainRequest_NextToken})
+var sListVpcEndpointsForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointsForDomainResponse, Members: &mListVpcEndpointsForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointsForDomainResponse})
+var sListVpcEndpointsForDomainResponse_VpcEndpointSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointSummaryList", ID: &i_VpcEndpointSummaryList, Members: &m_VpcEndpointSummaryList, Type: smithy.ShapeTypeList, Ext: &eListVpcEndpointsForDomainResponse_VpcEndpointSummaryList})
+var sListVpcEndpointsForDomainResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointsForDomainResponse_NextToken})
+var sListVpcEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointsRequest, Members: &mListVpcEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointsRequest})
+var sListVpcEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointsRequest_NextToken})
+var sListVpcEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointsResponse, Members: &mListVpcEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointsResponse})
+var sListVpcEndpointsResponse_VpcEndpointSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointSummaryList", ID: &i_VpcEndpointSummaryList, Members: &m_VpcEndpointSummaryList, Type: smithy.ShapeTypeList, Ext: &eListVpcEndpointsResponse_VpcEndpointSummaryList})
+var sListVpcEndpointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointsResponse_NextToken})
+var sPurchaseReservedElasticsearchInstanceOfferingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseReservedElasticsearchInstanceOfferingRequest, Members: &mPurchaseReservedElasticsearchInstanceOfferingRequest, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseReservedElasticsearchInstanceOfferingRequest})
+var sPurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceOfferingId", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &ePurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId})
+var sPurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservationName", ID: &i_ReservationToken, Type: smithy.ShapeTypeString, Ext: &ePurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName})
+var sPurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceCount", ID: &i_InstanceCount, Type: smithy.ShapeTypeInteger, Ext: &ePurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount})
+var sPurchaseReservedElasticsearchInstanceOfferingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseReservedElasticsearchInstanceOfferingResponse, Members: &mPurchaseReservedElasticsearchInstanceOfferingResponse, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseReservedElasticsearchInstanceOfferingResponse})
+var sPurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedElasticsearchInstanceId", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &ePurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId})
+var sPurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservationName", ID: &i_ReservationToken, Type: smithy.ShapeTypeString, Ext: &ePurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName})
+var sRejectInboundCrossClusterSearchConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInboundCrossClusterSearchConnectionRequest, Members: &mRejectInboundCrossClusterSearchConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectInboundCrossClusterSearchConnectionRequest})
+var sRejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnectionId", ID: &i_CrossClusterSearchConnectionId, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eRejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId})
+var sRejectInboundCrossClusterSearchConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInboundCrossClusterSearchConnectionResponse, Members: &mRejectInboundCrossClusterSearchConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectInboundCrossClusterSearchConnectionResponse})
+var sRejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossClusterSearchConnection", ID: &iInboundCrossClusterSearchConnection, Members: &mInboundCrossClusterSearchConnection, Type: smithy.ShapeTypeStructure, Ext: &eRejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection})
+var sRemoveTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsRequest, Members: &mRemoveTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsRequest})
+var sRemoveTagsRequest_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eRemoveTagsRequest_ARN})
+var sRemoveTagsRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsRequest_TagKeys})
+var sRevokeVpcEndpointAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeVpcEndpointAccessRequest, Members: &mRevokeVpcEndpointAccessRequest, Type: smithy.ShapeTypeStructure, Ext: &eRevokeVpcEndpointAccessRequest})
+var sRevokeVpcEndpointAccessRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eRevokeVpcEndpointAccessRequest_DomainName})
+var sRevokeVpcEndpointAccessRequest_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_AWSAccount, Type: smithy.ShapeTypeString, Ext: &eRevokeVpcEndpointAccessRequest_Account})
+var sRevokeVpcEndpointAccessResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeVpcEndpointAccessResponse, Type: smithy.ShapeTypeStructure, Ext: &eRevokeVpcEndpointAccessResponse})
+var sStartElasticsearchServiceSoftwareUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartElasticsearchServiceSoftwareUpdateRequest, Members: &mStartElasticsearchServiceSoftwareUpdateRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartElasticsearchServiceSoftwareUpdateRequest})
+var sStartElasticsearchServiceSoftwareUpdateRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eStartElasticsearchServiceSoftwareUpdateRequest_DomainName})
+var sStartElasticsearchServiceSoftwareUpdateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartElasticsearchServiceSoftwareUpdateResponse, Members: &mStartElasticsearchServiceSoftwareUpdateResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartElasticsearchServiceSoftwareUpdateResponse})
+var sStartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceSoftwareOptions", ID: &iServiceSoftwareOptions, Members: &mServiceSoftwareOptions, Type: smithy.ShapeTypeStructure, Ext: &eStartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions})
+var sUpdateCloneRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCloneRequest, Members: &mUpdateCloneRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCloneRequest})
+var sUpdateCloneRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eUpdateCloneRequest_DomainName})
+var sUpdateCloneRequest_TrafficSplitOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficSplitOptions", ID: &iTrafficSplitRequestOptions, Members: &mTrafficSplitRequestOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCloneRequest_TrafficSplitOptions})
+var sUpdateCloneRequest_CutoverOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CutoverOptions", ID: &iCutoverRequestOptions, Members: &mCutoverRequestOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCloneRequest_CutoverOptions})
+var sUpdateCloneRequest_RetentionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionOptions", ID: &iRetentionOptions, Members: &mRetentionOptions, Type: smithy.ShapeTypeUnion, Ext: &eUpdateCloneRequest_RetentionOptions})
+var sUpdateCloneResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCloneResponse, Members: &mUpdateCloneResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCloneResponse})
+var sUpdateCloneResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateCloneResponse_DomainName})
+var sUpdateCloneResponse_ChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeId", ID: &i_GUID, Type: smithy.ShapeTypeString, Ext: &eUpdateCloneResponse_ChangeId})
+var sUpdateCloneResponse_CutoverOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CutoverOptions", ID: &iCutoverOptions, Members: &mCutoverOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCloneResponse_CutoverOptions})
+var sUpdateCloneResponse_TrafficSplitOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficSplitOptions", ID: &iTrafficSplitOptions, Members: &mTrafficSplitOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCloneResponse_TrafficSplitOptions})
+var sUpdateCloneResponse_RetentionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionOptions", ID: &iRetentionOptions, Members: &mRetentionOptions, Type: smithy.ShapeTypeUnion, Ext: &eUpdateCloneResponse_RetentionOptions})
+var sUpdateElasticsearchDomainConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateElasticsearchDomainConfigRequest, Members: &mUpdateElasticsearchDomainConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest})
+var sUpdateElasticsearchDomainConfigRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eUpdateElasticsearchDomainConfigRequest_DomainName})
+var sUpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticsearchClusterConfig", ID: &iElasticsearchClusterConfig, Members: &mElasticsearchClusterConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig})
+var sUpdateElasticsearchDomainConfigRequest_EBSOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBSOptions", ID: &iEBSOptions, Members: &mEBSOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_EBSOptions})
+var sUpdateElasticsearchDomainConfigRequest_SnapshotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotOptions", ID: &iSnapshotOptions, Members: &mSnapshotOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_SnapshotOptions})
+var sUpdateElasticsearchDomainConfigRequest_VPCOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCOptions", ID: &iVPCOptions, Members: &mVPCOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_VPCOptions})
+var sUpdateElasticsearchDomainConfigRequest_CognitoOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoOptions", ID: &iCognitoOptions, Members: &mCognitoOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_CognitoOptions})
+var sUpdateElasticsearchDomainConfigRequest_AdvancedOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedOptions", ID: &i_AdvancedOptions, Members: &m_AdvancedOptions, Type: smithy.ShapeTypeMap, Ext: &eUpdateElasticsearchDomainConfigRequest_AdvancedOptions})
+var sUpdateElasticsearchDomainConfigRequest_AccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicies", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &eUpdateElasticsearchDomainConfigRequest_AccessPolicies})
+var sUpdateElasticsearchDomainConfigRequest_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &i_LogPublishingOptions, Members: &m_LogPublishingOptions, Type: smithy.ShapeTypeMap, Ext: &eUpdateElasticsearchDomainConfigRequest_LogPublishingOptions})
+var sUpdateElasticsearchDomainConfigRequest_DomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainEndpointOptions", ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_DomainEndpointOptions})
+var sUpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedSecurityOptions", ID: &iAdvancedSecurityOptionsInput, Members: &mAdvancedSecurityOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions})
+var sUpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeToNodeEncryptionOptions", ID: &iNodeToNodeEncryptionOptions, Members: &mNodeToNodeEncryptionOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions})
+var sUpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions})
+var sUpdateElasticsearchDomainConfigRequest_AutoTuneOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoTuneOptions", ID: &iAutoTuneOptions, Members: &mAutoTuneOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_AutoTuneOptions})
+var sUpdateElasticsearchDomainConfigRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateElasticsearchDomainConfigRequest_DryRun})
+var sUpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyOptions", ID: &iDeploymentStrategyOptions, Members: &mDeploymentStrategyOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions})
+var sUpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedSnapshotPauseOptions", ID: &iAutomatedSnapshotPauseRequestOptions, Members: &mAutomatedSnapshotPauseRequestOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions})
+var sUpdateElasticsearchDomainConfigRequest_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &iDomainUseCase, Members: &mDomainUseCase, Type: smithy.ShapeTypeEnum, Ext: &eUpdateElasticsearchDomainConfigRequest_UseCase})
+var sUpdateElasticsearchDomainConfigRequest_EngineMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineMode", ID: &iDomainEngineMode, Members: &mDomainEngineMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateElasticsearchDomainConfigRequest_EngineMode})
+var sUpdateElasticsearchDomainConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateElasticsearchDomainConfigResponse, Members: &mUpdateElasticsearchDomainConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigResponse})
+var sUpdateElasticsearchDomainConfigResponse_DomainConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainConfig", ID: &iElasticsearchDomainConfig, Members: &mElasticsearchDomainConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigResponse_DomainConfig})
+var sUpdateElasticsearchDomainConfigResponse_DryRunResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunResults", ID: &iDryRunResults, Members: &mDryRunResults, Type: smithy.ShapeTypeStructure, Ext: &eUpdateElasticsearchDomainConfigResponse_DryRunResults})
+var sUpdatePackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageRequest, Members: &mUpdatePackageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePackageRequest})
+var sUpdatePackageRequest_PackageID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageID", ID: &i_PackageID, Type: smithy.ShapeTypeString, Ext: &eUpdatePackageRequest_PackageID})
+var sUpdatePackageRequest_PackageSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageSource", ID: &iPackageSource, Members: &mPackageSource, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePackageRequest_PackageSource})
+var sUpdatePackageRequest_PackageDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageDescription", ID: &i_PackageDescription, Type: smithy.ShapeTypeString, Ext: &eUpdatePackageRequest_PackageDescription})
+var sUpdatePackageRequest_CommitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommitMessage", ID: &i_CommitMessage, Type: smithy.ShapeTypeString, Ext: &eUpdatePackageRequest_CommitMessage})
+var sUpdatePackageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageResponse, Members: &mUpdatePackageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePackageResponse})
+var sUpdatePackageResponse_PackageDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PackageDetails", ID: &iPackageDetails, Members: &mPackageDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePackageResponse_PackageDetails})
+var sUpdateVpcEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcEndpointRequest, Members: &mUpdateVpcEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVpcEndpointRequest})
+var sUpdateVpcEndpointRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eUpdateVpcEndpointRequest_VpcEndpointId})
+var sUpdateVpcEndpointRequest_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iVPCOptions, Members: &mVPCOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVpcEndpointRequest_VpcOptions})
+var sUpdateVpcEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcEndpointResponse, Members: &mUpdateVpcEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVpcEndpointResponse})
+var sUpdateVpcEndpointResponse_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoint", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVpcEndpointResponse_VpcEndpoint})
+var sUpgradeElasticsearchDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeElasticsearchDomainRequest, Members: &mUpgradeElasticsearchDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeElasticsearchDomainRequest})
+var sUpgradeElasticsearchDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpgradeElasticsearchDomainRequest_DomainName})
+var sUpgradeElasticsearchDomainRequest_TargetVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVersion", ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &eUpgradeElasticsearchDomainRequest_TargetVersion})
+var sUpgradeElasticsearchDomainRequest_PerformCheckOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformCheckOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpgradeElasticsearchDomainRequest_PerformCheckOnly})
+var sUpgradeElasticsearchDomainRequest_DeploymentStrategyOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyOptions", ID: &iDeploymentStrategyOverrideOptions, Members: &mDeploymentStrategyOverrideOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeElasticsearchDomainRequest_DeploymentStrategyOptions})
+var sUpgradeElasticsearchDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeElasticsearchDomainResponse, Members: &mUpgradeElasticsearchDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeElasticsearchDomainResponse})
+var sUpgradeElasticsearchDomainResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpgradeElasticsearchDomainResponse_DomainName})
+var sUpgradeElasticsearchDomainResponse_TargetVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVersion", ID: &i_ElasticsearchVersionString, Type: smithy.ShapeTypeString, Ext: &eUpgradeElasticsearchDomainResponse_TargetVersion})
+var sUpgradeElasticsearchDomainResponse_PerformCheckOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformCheckOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpgradeElasticsearchDomainResponse_PerformCheckOnly})
+var sUpgradeElasticsearchDomainResponse_DeploymentStrategyOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStrategyOptions", ID: &iDeploymentStrategyOverrideOptions, Members: &mDeploymentStrategyOverrideOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeElasticsearchDomainResponse_DeploymentStrategyOptions})
+var sUpgradeElasticsearchDomainResponse_ChangeProgressDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressDetails", ID: &iChangeProgressDetails, Members: &mChangeProgressDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeElasticsearchDomainResponse_ChangeProgressDetails})
+
+var AcceptInboundCrossClusterSearchConnection = &sAcceptInboundCrossClusterSearchConnection
+
+var AddTags = &sAddTags
+
+var AssociatePackage = &sAssociatePackage
+
+var AuthorizeVpcEndpointAccess = &sAuthorizeVpcEndpointAccess
+
+var CancelDomainConfigChange = &sCancelDomainConfigChange
+
+var CancelElasticsearchServiceSoftwareUpdate = &sCancelElasticsearchServiceSoftwareUpdate
+
+var CreateElasticsearchDomain = &sCreateElasticsearchDomain
+
+var CreateOutboundCrossClusterSearchConnection = &sCreateOutboundCrossClusterSearchConnection
+
+var CreatePackage = &sCreatePackage
+
+var CreateVpcEndpoint = &sCreateVpcEndpoint
+
+var DeleteElasticsearchDomain = &sDeleteElasticsearchDomain
+
+var DeleteElasticsearchServiceRole = &sDeleteElasticsearchServiceRole
+
+var DeleteInboundCrossClusterSearchConnection = &sDeleteInboundCrossClusterSearchConnection
+
+var DeleteOutboundCrossClusterSearchConnection = &sDeleteOutboundCrossClusterSearchConnection
+
+var DeletePackage = &sDeletePackage
+
+var DeleteVpcEndpoint = &sDeleteVpcEndpoint
+
+var DescribeDomainAutoTunes = &sDescribeDomainAutoTunes
+
+var DescribeDomainChangeProgress = &sDescribeDomainChangeProgress
+
+var DescribeElasticsearchDomain = &sDescribeElasticsearchDomain
+
+var DescribeElasticsearchDomainConfig = &sDescribeElasticsearchDomainConfig
+
+var DescribeElasticsearchDomains = &sDescribeElasticsearchDomains
+
+var DescribeElasticsearchInstanceTypeLimits = &sDescribeElasticsearchInstanceTypeLimits
+
+var DescribeInboundCrossClusterSearchConnections = &sDescribeInboundCrossClusterSearchConnections
+
+var DescribeOutboundCrossClusterSearchConnections = &sDescribeOutboundCrossClusterSearchConnections
+
+var DescribePackages = &sDescribePackages
+
+var DescribeReservedElasticsearchInstanceOfferings = &sDescribeReservedElasticsearchInstanceOfferings
+
+var DescribeReservedElasticsearchInstances = &sDescribeReservedElasticsearchInstances
+
+var DescribeVpcEndpoints = &sDescribeVpcEndpoints
+
+var DissociatePackage = &sDissociatePackage
+
+var GetCompatibleElasticsearchVersions = &sGetCompatibleElasticsearchVersions
+
+var GetPackageVersionHistory = &sGetPackageVersionHistory
+
+var GetUpgradeHistory = &sGetUpgradeHistory
+
+var GetUpgradeStatus = &sGetUpgradeStatus
+
+var ListDomainNames = &sListDomainNames
+
+var ListDomainsForPackage = &sListDomainsForPackage
+
+var ListElasticsearchInstanceTypes = &sListElasticsearchInstanceTypes
+
+var ListElasticsearchVersions = &sListElasticsearchVersions
+
+var ListPackagesForDomain = &sListPackagesForDomain
+
+var ListTags = &sListTags
+
+var ListVpcEndpointAccess = &sListVpcEndpointAccess
+
+var ListVpcEndpoints = &sListVpcEndpoints
+
+var ListVpcEndpointsForDomain = &sListVpcEndpointsForDomain
+
+var PurchaseReservedElasticsearchInstanceOffering = &sPurchaseReservedElasticsearchInstanceOffering
+
+var RejectInboundCrossClusterSearchConnection = &sRejectInboundCrossClusterSearchConnection
+
+var RemoveTags = &sRemoveTags
+
+var RevokeVpcEndpointAccess = &sRevokeVpcEndpointAccess
+
+var StartElasticsearchServiceSoftwareUpdate = &sStartElasticsearchServiceSoftwareUpdate
+
+var UpdateClone = &sUpdateClone
+
+var UpdateElasticsearchDomainConfig = &sUpdateElasticsearchDomainConfig
+
+var UpdatePackage = &sUpdatePackage
+
+var UpdateVpcEndpoint = &sUpdateVpcEndpoint
+
+var UpgradeElasticsearchDomain = &sUpgradeElasticsearchDomain
+
+var _AmazonElasticsearchService2015 = &s_AmazonElasticsearchService2015
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AccessPoliciesStatus = &sAccessPoliciesStatus
+var AccessPoliciesStatus_Options = &sAccessPoliciesStatus_Options
+var AccessPoliciesStatus_Status = &sAccessPoliciesStatus_Status
+
+var AdditionalLimit = &sAdditionalLimit
+var AdditionalLimit_LimitName = &sAdditionalLimit_LimitName
+var AdditionalLimit_LimitValues = &sAdditionalLimit_LimitValues
+
+var _AdditionalLimitList = &s_AdditionalLimitList
+var _AdditionalLimitList_member = &s_AdditionalLimitList_member
+
+var _AdvancedOptions = &s_AdvancedOptions
+var _AdvancedOptions_key = &s_AdvancedOptions_key
+var _AdvancedOptions_value = &s_AdvancedOptions_value
+
+var AdvancedOptionsStatus = &sAdvancedOptionsStatus
+var AdvancedOptionsStatus_Options = &sAdvancedOptionsStatus_Options
+var AdvancedOptionsStatus_Status = &sAdvancedOptionsStatus_Status
+
+var AdvancedSecurityOptions = &sAdvancedSecurityOptions
+var AdvancedSecurityOptions_Enabled = &sAdvancedSecurityOptions_Enabled
+var AdvancedSecurityOptions_InternalUserDatabaseEnabled = &sAdvancedSecurityOptions_InternalUserDatabaseEnabled
+var AdvancedSecurityOptions_SAMLOptions = &sAdvancedSecurityOptions_SAMLOptions
+var AdvancedSecurityOptions_AnonymousAuthDisableDate = &sAdvancedSecurityOptions_AnonymousAuthDisableDate
+var AdvancedSecurityOptions_AnonymousAuthEnabled = &sAdvancedSecurityOptions_AnonymousAuthEnabled
+
+var AdvancedSecurityOptionsInput = &sAdvancedSecurityOptionsInput
+var AdvancedSecurityOptionsInput_Enabled = &sAdvancedSecurityOptionsInput_Enabled
+var AdvancedSecurityOptionsInput_InternalUserDatabaseEnabled = &sAdvancedSecurityOptionsInput_InternalUserDatabaseEnabled
+var AdvancedSecurityOptionsInput_MasterUserOptions = &sAdvancedSecurityOptionsInput_MasterUserOptions
+var AdvancedSecurityOptionsInput_SAMLOptions = &sAdvancedSecurityOptionsInput_SAMLOptions
+var AdvancedSecurityOptionsInput_AnonymousAuthEnabled = &sAdvancedSecurityOptionsInput_AnonymousAuthEnabled
+
+var AdvancedSecurityOptionsStatus = &sAdvancedSecurityOptionsStatus
+var AdvancedSecurityOptionsStatus_Options = &sAdvancedSecurityOptionsStatus_Options
+var AdvancedSecurityOptionsStatus_Status = &sAdvancedSecurityOptionsStatus_Status
+
+var _ARN = &s_ARN
+
+var AuthorizedPrincipal = &sAuthorizedPrincipal
+var AuthorizedPrincipal_PrincipalType = &sAuthorizedPrincipal_PrincipalType
+var AuthorizedPrincipal_Principal = &sAuthorizedPrincipal_Principal
+
+var _AuthorizedPrincipalList = &s_AuthorizedPrincipalList
+var _AuthorizedPrincipalList_member = &s_AuthorizedPrincipalList_member
+
+var AutomatedSnapshotPauseOptions = &sAutomatedSnapshotPauseOptions
+var AutomatedSnapshotPauseOptions_Enabled = &sAutomatedSnapshotPauseOptions_Enabled
+var AutomatedSnapshotPauseOptions_StartTime = &sAutomatedSnapshotPauseOptions_StartTime
+var AutomatedSnapshotPauseOptions_EndTime = &sAutomatedSnapshotPauseOptions_EndTime
+var AutomatedSnapshotPauseOptions_State = &sAutomatedSnapshotPauseOptions_State
+
+var AutomatedSnapshotPauseOptionsStatus = &sAutomatedSnapshotPauseOptionsStatus
+var AutomatedSnapshotPauseOptionsStatus_Options = &sAutomatedSnapshotPauseOptionsStatus_Options
+var AutomatedSnapshotPauseOptionsStatus_Status = &sAutomatedSnapshotPauseOptionsStatus_Status
+
+var AutomatedSnapshotPauseRequestOptions = &sAutomatedSnapshotPauseRequestOptions
+var AutomatedSnapshotPauseRequestOptions_Enabled = &sAutomatedSnapshotPauseRequestOptions_Enabled
+var AutomatedSnapshotPauseRequestOptions_StartTime = &sAutomatedSnapshotPauseRequestOptions_StartTime
+var AutomatedSnapshotPauseRequestOptions_EndTime = &sAutomatedSnapshotPauseRequestOptions_EndTime
+
+var AutoTune = &sAutoTune
+var AutoTune_AutoTuneType = &sAutoTune_AutoTuneType
+var AutoTune_AutoTuneDetails = &sAutoTune_AutoTuneDetails
+
+var _AutoTuneDate = &s_AutoTuneDate
+
+var AutoTuneDesiredState = &sAutoTuneDesiredState
+var AutoTuneDesiredState_ENABLED = &sAutoTuneDesiredState_ENABLED
+var AutoTuneDesiredState_DISABLED = &sAutoTuneDesiredState_DISABLED
+
+var AutoTuneDetails = &sAutoTuneDetails
+var AutoTuneDetails_ScheduledAutoTuneDetails = &sAutoTuneDetails_ScheduledAutoTuneDetails
+
+var _AutoTuneList = &s_AutoTuneList
+var _AutoTuneList_member = &s_AutoTuneList_member
+
+var AutoTuneMaintenanceSchedule = &sAutoTuneMaintenanceSchedule
+var AutoTuneMaintenanceSchedule_StartAt = &sAutoTuneMaintenanceSchedule_StartAt
+var AutoTuneMaintenanceSchedule_Duration = &sAutoTuneMaintenanceSchedule_Duration
+var AutoTuneMaintenanceSchedule_CronExpressionForRecurrence = &sAutoTuneMaintenanceSchedule_CronExpressionForRecurrence
+
+var _AutoTuneMaintenanceScheduleList = &s_AutoTuneMaintenanceScheduleList
+var _AutoTuneMaintenanceScheduleList_member = &s_AutoTuneMaintenanceScheduleList_member
+
+var AutoTuneOptions = &sAutoTuneOptions
+var AutoTuneOptions_DesiredState = &sAutoTuneOptions_DesiredState
+var AutoTuneOptions_RollbackOnDisable = &sAutoTuneOptions_RollbackOnDisable
+var AutoTuneOptions_MaintenanceSchedules = &sAutoTuneOptions_MaintenanceSchedules
+
+var AutoTuneOptionsInput = &sAutoTuneOptionsInput
+var AutoTuneOptionsInput_DesiredState = &sAutoTuneOptionsInput_DesiredState
+var AutoTuneOptionsInput_MaintenanceSchedules = &sAutoTuneOptionsInput_MaintenanceSchedules
+
+var AutoTuneOptionsOutput = &sAutoTuneOptionsOutput
+var AutoTuneOptionsOutput_State = &sAutoTuneOptionsOutput_State
+var AutoTuneOptionsOutput_ErrorMessage = &sAutoTuneOptionsOutput_ErrorMessage
+
+var AutoTuneOptionsStatus = &sAutoTuneOptionsStatus
+var AutoTuneOptionsStatus_Options = &sAutoTuneOptionsStatus_Options
+var AutoTuneOptionsStatus_Status = &sAutoTuneOptionsStatus_Status
+
+var AutoTuneState = &sAutoTuneState
+var AutoTuneState_ENABLED = &sAutoTuneState_ENABLED
+var AutoTuneState_DISABLED = &sAutoTuneState_DISABLED
+var AutoTuneState_ENABLE_IN_PROGRESS = &sAutoTuneState_ENABLE_IN_PROGRESS
+var AutoTuneState_DISABLE_IN_PROGRESS = &sAutoTuneState_DISABLE_IN_PROGRESS
+var AutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED = &sAutoTuneState_DISABLED_AND_ROLLBACK_SCHEDULED
+var AutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS = &sAutoTuneState_DISABLED_AND_ROLLBACK_IN_PROGRESS
+var AutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE = &sAutoTuneState_DISABLED_AND_ROLLBACK_COMPLETE
+var AutoTuneState_DISABLED_AND_ROLLBACK_ERROR = &sAutoTuneState_DISABLED_AND_ROLLBACK_ERROR
+var AutoTuneState_ERROR = &sAutoTuneState_ERROR
+
+var AutoTuneStatus = &sAutoTuneStatus
+var AutoTuneStatus_CreationDate = &sAutoTuneStatus_CreationDate
+var AutoTuneStatus_UpdateDate = &sAutoTuneStatus_UpdateDate
+var AutoTuneStatus_UpdateVersion = &sAutoTuneStatus_UpdateVersion
+var AutoTuneStatus_State = &sAutoTuneStatus_State
+var AutoTuneStatus_ErrorMessage = &sAutoTuneStatus_ErrorMessage
+var AutoTuneStatus_PendingDeletion = &sAutoTuneStatus_PendingDeletion
+
+var AutoTuneType = &sAutoTuneType
+var AutoTuneType_SCHEDULED_ACTION = &sAutoTuneType_SCHEDULED_ACTION
+
+var _AWSAccount = &s_AWSAccount
+
+var _BackendRole = &s_BackendRole
+
+var BaseException = &sBaseException
+var BaseException_message = &sBaseException_message
+
+var _Boolean = &s_Boolean
+
+var CancelledChangeProperty = &sCancelledChangeProperty
+var CancelledChangeProperty_PropertyName = &sCancelledChangeProperty_PropertyName
+var CancelledChangeProperty_CancelledValue = &sCancelledChangeProperty_CancelledValue
+var CancelledChangeProperty_ActiveValue = &sCancelledChangeProperty_ActiveValue
+
+var _CancelledChangePropertyList = &s_CancelledChangePropertyList
+var _CancelledChangePropertyList_member = &s_CancelledChangePropertyList_member
+
+var ChangeProgressDetails = &sChangeProgressDetails
+var ChangeProgressDetails_ChangeId = &sChangeProgressDetails_ChangeId
+var ChangeProgressDetails_Message = &sChangeProgressDetails_Message
+var ChangeProgressDetails_ConfigChangeStatus = &sChangeProgressDetails_ConfigChangeStatus
+var ChangeProgressDetails_StartTime = &sChangeProgressDetails_StartTime
+var ChangeProgressDetails_LastUpdatedTime = &sChangeProgressDetails_LastUpdatedTime
+var ChangeProgressDetails_InitiatedBy = &sChangeProgressDetails_InitiatedBy
+
+var ChangeProgressStage = &sChangeProgressStage
+var ChangeProgressStage_Name = &sChangeProgressStage_Name
+var ChangeProgressStage_Status = &sChangeProgressStage_Status
+var ChangeProgressStage_Description = &sChangeProgressStage_Description
+var ChangeProgressStage_LastUpdated = &sChangeProgressStage_LastUpdated
+
+var _ChangeProgressStageList = &s_ChangeProgressStageList
+var _ChangeProgressStageList_member = &s_ChangeProgressStageList_member
+
+var _ChangeProgressStageName = &s_ChangeProgressStageName
+
+var _ChangeProgressStageStatus = &s_ChangeProgressStageStatus
+
+var ChangeProgressStatusDetails = &sChangeProgressStatusDetails
+var ChangeProgressStatusDetails_ChangeId = &sChangeProgressStatusDetails_ChangeId
+var ChangeProgressStatusDetails_StartTime = &sChangeProgressStatusDetails_StartTime
+var ChangeProgressStatusDetails_Status = &sChangeProgressStatusDetails_Status
+var ChangeProgressStatusDetails_PendingProperties = &sChangeProgressStatusDetails_PendingProperties
+var ChangeProgressStatusDetails_CompletedProperties = &sChangeProgressStatusDetails_CompletedProperties
+var ChangeProgressStatusDetails_TotalNumberOfStages = &sChangeProgressStatusDetails_TotalNumberOfStages
+var ChangeProgressStatusDetails_ChangeProgressStages = &sChangeProgressStatusDetails_ChangeProgressStages
+var ChangeProgressStatusDetails_ConfigChangeStatus = &sChangeProgressStatusDetails_ConfigChangeStatus
+var ChangeProgressStatusDetails_LastUpdatedTime = &sChangeProgressStatusDetails_LastUpdatedTime
+var ChangeProgressStatusDetails_InitiatedBy = &sChangeProgressStatusDetails_InitiatedBy
+var ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails = &sChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails
+
+var _ClientToken = &s_ClientToken
+
+var ClonedBlueGreenOptions = &sClonedBlueGreenOptions
+var ClonedBlueGreenOptions_RetentionOptions = &sClonedBlueGreenOptions_RetentionOptions
+
+var ClonedBlueGreenScheduledAction = &sClonedBlueGreenScheduledAction
+var ClonedBlueGreenScheduledAction_Action = &sClonedBlueGreenScheduledAction_Action
+var ClonedBlueGreenScheduledAction_ScheduledTime = &sClonedBlueGreenScheduledAction_ScheduledTime
+
+var ClonedBlueGreenScheduledActionType = &sClonedBlueGreenScheduledActionType
+var ClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY = &sClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY
+var ClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER = &sClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER
+
+var ClonedBlueGreenUpgradeDetails = &sClonedBlueGreenUpgradeDetails
+var ClonedBlueGreenUpgradeDetails_TrafficSplit = &sClonedBlueGreenUpgradeDetails_TrafficSplit
+var ClonedBlueGreenUpgradeDetails_ScheduledAction = &sClonedBlueGreenUpgradeDetails_ScheduledAction
+var ClonedBlueGreenUpgradeDetails_RetentionInHours = &sClonedBlueGreenUpgradeDetails_RetentionInHours
+
+var _CloudWatchLogsLogGroupArn = &s_CloudWatchLogsLogGroupArn
+
+var CognitoOptions = &sCognitoOptions
+var CognitoOptions_Enabled = &sCognitoOptions_Enabled
+var CognitoOptions_UserPoolId = &sCognitoOptions_UserPoolId
+var CognitoOptions_IdentityPoolId = &sCognitoOptions_IdentityPoolId
+var CognitoOptions_RoleArn = &sCognitoOptions_RoleArn
+
+var CognitoOptionsStatus = &sCognitoOptionsStatus
+var CognitoOptionsStatus_Options = &sCognitoOptionsStatus_Options
+var CognitoOptionsStatus_Status = &sCognitoOptionsStatus_Status
+
+var ColdStorageOptions = &sColdStorageOptions
+var ColdStorageOptions_Enabled = &sColdStorageOptions_Enabled
+
+var _CommitMessage = &s_CommitMessage
+
+var _CompatibleElasticsearchVersionsList = &s_CompatibleElasticsearchVersionsList
+var _CompatibleElasticsearchVersionsList_member = &s_CompatibleElasticsearchVersionsList_member
+
+var CompatibleVersionsMap = &sCompatibleVersionsMap
+var CompatibleVersionsMap_SourceVersion = &sCompatibleVersionsMap_SourceVersion
+var CompatibleVersionsMap_TargetVersions = &sCompatibleVersionsMap_TargetVersions
+
+var ConfigChangeStatus = &sConfigChangeStatus
+var ConfigChangeStatus_PENDING = &sConfigChangeStatus_PENDING
+var ConfigChangeStatus_INITIALIZING = &sConfigChangeStatus_INITIALIZING
+var ConfigChangeStatus_VALIDATING = &sConfigChangeStatus_VALIDATING
+var ConfigChangeStatus_VALIDATION_FAILED = &sConfigChangeStatus_VALIDATION_FAILED
+var ConfigChangeStatus_APPLYING_CHANGES = &sConfigChangeStatus_APPLYING_CHANGES
+var ConfigChangeStatus_COMPLETED = &sConfigChangeStatus_COMPLETED
+var ConfigChangeStatus_PENDING_USER_INPUT = &sConfigChangeStatus_PENDING_USER_INPUT
+var ConfigChangeStatus_CANCELLED = &sConfigChangeStatus_CANCELLED
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _ConnectionAlias = &s_ConnectionAlias
+
+var _CreatedAt = &s_CreatedAt
+
+var _CrossClusterSearchConnectionId = &s_CrossClusterSearchConnectionId
+
+var _CrossClusterSearchConnectionStatusMessage = &s_CrossClusterSearchConnectionStatusMessage
+
+var CutoverOptions = &sCutoverOptions
+var CutoverOptions_Target = &sCutoverOptions_Target
+var CutoverOptions_Status = &sCutoverOptions_Status
+
+var CutoverRequestOptions = &sCutoverRequestOptions
+var CutoverRequestOptions_Target = &sCutoverRequestOptions_Target
+
+var CutoverStatus = &sCutoverStatus
+var CutoverStatus_IN_PROGRESS = &sCutoverStatus_IN_PROGRESS
+var CutoverStatus_COMPLETED = &sCutoverStatus_COMPLETED
+var CutoverStatus_FAILED = &sCutoverStatus_FAILED
+
+var CutoverTarget = &sCutoverTarget
+var CutoverTarget_CLONED_CLUSTER = &sCutoverTarget_CLONED_CLUSTER
+var CutoverTarget_PRIMARY_CLUSTER = &sCutoverTarget_PRIMARY_CLUSTER
+
+var _DeploymentCloseDateTimeStamp = &s_DeploymentCloseDateTimeStamp
+
+var DeploymentStatus = &sDeploymentStatus
+var DeploymentStatus_PENDING_UPDATE = &sDeploymentStatus_PENDING_UPDATE
+var DeploymentStatus_IN_PROGRESS = &sDeploymentStatus_IN_PROGRESS
+var DeploymentStatus_COMPLETED = &sDeploymentStatus_COMPLETED
+var DeploymentStatus_NOT_ELIGIBLE = &sDeploymentStatus_NOT_ELIGIBLE
+var DeploymentStatus_ELIGIBLE = &sDeploymentStatus_ELIGIBLE
+
+var DeploymentStrategy = &sDeploymentStrategy
+var DeploymentStrategy_DEFAULT = &sDeploymentStrategy_DEFAULT
+var DeploymentStrategy_CAPACITY_OPTIMIZED = &sDeploymentStrategy_CAPACITY_OPTIMIZED
+
+var DeploymentStrategyOptions = &sDeploymentStrategyOptions
+var DeploymentStrategyOptions_DeploymentStrategy = &sDeploymentStrategyOptions_DeploymentStrategy
+
+var DeploymentStrategyOptionsStatus = &sDeploymentStrategyOptionsStatus
+var DeploymentStrategyOptionsStatus_Options = &sDeploymentStrategyOptionsStatus_Options
+var DeploymentStrategyOptionsStatus_Status = &sDeploymentStrategyOptionsStatus_Status
+
+var DeploymentStrategyOverride = &sDeploymentStrategyOverride
+var DeploymentStrategyOverride_CLONED_BLUE_GREEN = &sDeploymentStrategyOverride_CLONED_BLUE_GREEN
+
+var DeploymentStrategyOverrideOptions = &sDeploymentStrategyOverrideOptions
+var DeploymentStrategyOverrideOptions_DeploymentStrategy = &sDeploymentStrategyOverrideOptions_DeploymentStrategy
+var DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions = &sDeploymentStrategyOverrideOptions_ClonedBlueGreenOptions
+
+var _DeploymentType = &s_DeploymentType
+
+var DescribePackagesFilter = &sDescribePackagesFilter
+var DescribePackagesFilter_Name = &sDescribePackagesFilter_Name
+var DescribePackagesFilter_Value = &sDescribePackagesFilter_Value
+
+var _DescribePackagesFilterList = &s_DescribePackagesFilterList
+var _DescribePackagesFilterList_member = &s_DescribePackagesFilterList_member
+
+var DescribePackagesFilterName = &sDescribePackagesFilterName
+var DescribePackagesFilterName_PackageID = &sDescribePackagesFilterName_PackageID
+var DescribePackagesFilterName_PackageName = &sDescribePackagesFilterName_PackageName
+var DescribePackagesFilterName_PackageStatus = &sDescribePackagesFilterName_PackageStatus
+
+var _DescribePackagesFilterValue = &s_DescribePackagesFilterValue
+
+var _DescribePackagesFilterValues = &s_DescribePackagesFilterValues
+var _DescribePackagesFilterValues_member = &s_DescribePackagesFilterValues_member
+
+var _Description = &s_Description
+
+var DisabledOperationException = &sDisabledOperationException
+var DisabledOperationException_message = &sDisabledOperationException_message
+
+var _DisableTimestamp = &s_DisableTimestamp
+
+var _DomainArn = &s_DomainArn
+
+var DomainEndpointOptions = &sDomainEndpointOptions
+var DomainEndpointOptions_EnforceHTTPS = &sDomainEndpointOptions_EnforceHTTPS
+var DomainEndpointOptions_TLSSecurityPolicy = &sDomainEndpointOptions_TLSSecurityPolicy
+var DomainEndpointOptions_CustomEndpointEnabled = &sDomainEndpointOptions_CustomEndpointEnabled
+var DomainEndpointOptions_CustomEndpoint = &sDomainEndpointOptions_CustomEndpoint
+var DomainEndpointOptions_CustomEndpointCertificateArn = &sDomainEndpointOptions_CustomEndpointCertificateArn
+
+var DomainEndpointOptionsStatus = &sDomainEndpointOptionsStatus
+var DomainEndpointOptionsStatus_Options = &sDomainEndpointOptionsStatus_Options
+var DomainEndpointOptionsStatus_Status = &sDomainEndpointOptionsStatus_Status
+
+var DomainEngineMode = &sDomainEngineMode
+var DomainEngineMode_GENERAL = &sDomainEngineMode_GENERAL
+var DomainEngineMode_OPTIMIZED = &sDomainEngineMode_OPTIMIZED
+
+var _DomainId = &s_DomainId
+
+var DomainInfo = &sDomainInfo
+var DomainInfo_DomainName = &sDomainInfo_DomainName
+var DomainInfo_EngineType = &sDomainInfo_EngineType
+
+var _DomainInfoList = &s_DomainInfoList
+var _DomainInfoList_member = &s_DomainInfoList_member
+
+var DomainInformation = &sDomainInformation
+var DomainInformation_OwnerId = &sDomainInformation_OwnerId
+var DomainInformation_DomainName = &sDomainInformation_DomainName
+var DomainInformation_Region = &sDomainInformation_Region
+
+var _DomainName = &s_DomainName
+
+var _DomainNameFqdn = &s_DomainNameFqdn
+
+var _DomainNameList = &s_DomainNameList
+var _DomainNameList_member = &s_DomainNameList_member
+
+var DomainPackageDetails = &sDomainPackageDetails
+var DomainPackageDetails_PackageID = &sDomainPackageDetails_PackageID
+var DomainPackageDetails_PackageName = &sDomainPackageDetails_PackageName
+var DomainPackageDetails_PackageType = &sDomainPackageDetails_PackageType
+var DomainPackageDetails_LastUpdated = &sDomainPackageDetails_LastUpdated
+var DomainPackageDetails_DomainName = &sDomainPackageDetails_DomainName
+var DomainPackageDetails_DomainPackageStatus = &sDomainPackageDetails_DomainPackageStatus
+var DomainPackageDetails_PackageVersion = &sDomainPackageDetails_PackageVersion
+var DomainPackageDetails_ReferencePath = &sDomainPackageDetails_ReferencePath
+var DomainPackageDetails_ErrorDetails = &sDomainPackageDetails_ErrorDetails
+
+var _DomainPackageDetailsList = &s_DomainPackageDetailsList
+var _DomainPackageDetailsList_member = &s_DomainPackageDetailsList_member
+
+var DomainPackageStatus = &sDomainPackageStatus
+var DomainPackageStatus_ASSOCIATING = &sDomainPackageStatus_ASSOCIATING
+var DomainPackageStatus_ASSOCIATION_FAILED = &sDomainPackageStatus_ASSOCIATION_FAILED
+var DomainPackageStatus_ACTIVE = &sDomainPackageStatus_ACTIVE
+var DomainPackageStatus_DISSOCIATING = &sDomainPackageStatus_DISSOCIATING
+var DomainPackageStatus_DISSOCIATION_FAILED = &sDomainPackageStatus_DISSOCIATION_FAILED
+
+var DomainProcessingStatusType = &sDomainProcessingStatusType
+var DomainProcessingStatusType_CREATING = &sDomainProcessingStatusType_CREATING
+var DomainProcessingStatusType_ACTIVE = &sDomainProcessingStatusType_ACTIVE
+var DomainProcessingStatusType_MODIFYING = &sDomainProcessingStatusType_MODIFYING
+var DomainProcessingStatusType_UPGRADING = &sDomainProcessingStatusType_UPGRADING
+var DomainProcessingStatusType_UPDATING = &sDomainProcessingStatusType_UPDATING
+var DomainProcessingStatusType_ISOLATED = &sDomainProcessingStatusType_ISOLATED
+var DomainProcessingStatusType_DELETING = &sDomainProcessingStatusType_DELETING
+
+var DomainUseCase = &sDomainUseCase
+var DomainUseCase_SEARCH = &sDomainUseCase_SEARCH
+var DomainUseCase_VECTOR = &sDomainUseCase_VECTOR
+var DomainUseCase_OBSERVABILITY = &sDomainUseCase_OBSERVABILITY
+var DomainUseCase_MIXED = &sDomainUseCase_MIXED
+
+var _Double = &s_Double
+
+var _DryRun = &s_DryRun
+
+var DryRunResults = &sDryRunResults
+var DryRunResults_DeploymentType = &sDryRunResults_DeploymentType
+var DryRunResults_Message = &sDryRunResults_Message
+
+var Duration = &sDuration
+var Duration_Value = &sDuration_Value
+var Duration_Unit = &sDuration_Unit
+
+var _DurationValue = &s_DurationValue
+
+var EBSOptions = &sEBSOptions
+var EBSOptions_EBSEnabled = &sEBSOptions_EBSEnabled
+var EBSOptions_VolumeType = &sEBSOptions_VolumeType
+var EBSOptions_VolumeSize = &sEBSOptions_VolumeSize
+var EBSOptions_Iops = &sEBSOptions_Iops
+var EBSOptions_Throughput = &sEBSOptions_Throughput
+
+var EBSOptionsStatus = &sEBSOptionsStatus
+var EBSOptionsStatus_Options = &sEBSOptionsStatus_Options
+var EBSOptionsStatus_Status = &sEBSOptionsStatus_Status
+
+var ElasticsearchClusterConfig = &sElasticsearchClusterConfig
+var ElasticsearchClusterConfig_InstanceType = &sElasticsearchClusterConfig_InstanceType
+var ElasticsearchClusterConfig_InstanceCount = &sElasticsearchClusterConfig_InstanceCount
+var ElasticsearchClusterConfig_DedicatedMasterEnabled = &sElasticsearchClusterConfig_DedicatedMasterEnabled
+var ElasticsearchClusterConfig_ZoneAwarenessEnabled = &sElasticsearchClusterConfig_ZoneAwarenessEnabled
+var ElasticsearchClusterConfig_ZoneAwarenessConfig = &sElasticsearchClusterConfig_ZoneAwarenessConfig
+var ElasticsearchClusterConfig_DedicatedMasterType = &sElasticsearchClusterConfig_DedicatedMasterType
+var ElasticsearchClusterConfig_DedicatedMasterCount = &sElasticsearchClusterConfig_DedicatedMasterCount
+var ElasticsearchClusterConfig_WarmEnabled = &sElasticsearchClusterConfig_WarmEnabled
+var ElasticsearchClusterConfig_WarmType = &sElasticsearchClusterConfig_WarmType
+var ElasticsearchClusterConfig_WarmCount = &sElasticsearchClusterConfig_WarmCount
+var ElasticsearchClusterConfig_ColdStorageOptions = &sElasticsearchClusterConfig_ColdStorageOptions
+
+var ElasticsearchClusterConfigStatus = &sElasticsearchClusterConfigStatus
+var ElasticsearchClusterConfigStatus_Options = &sElasticsearchClusterConfigStatus_Options
+var ElasticsearchClusterConfigStatus_Status = &sElasticsearchClusterConfigStatus_Status
+
+var ElasticsearchDomainConfig = &sElasticsearchDomainConfig
+var ElasticsearchDomainConfig_ElasticsearchVersion = &sElasticsearchDomainConfig_ElasticsearchVersion
+var ElasticsearchDomainConfig_ElasticsearchClusterConfig = &sElasticsearchDomainConfig_ElasticsearchClusterConfig
+var ElasticsearchDomainConfig_EBSOptions = &sElasticsearchDomainConfig_EBSOptions
+var ElasticsearchDomainConfig_AccessPolicies = &sElasticsearchDomainConfig_AccessPolicies
+var ElasticsearchDomainConfig_SnapshotOptions = &sElasticsearchDomainConfig_SnapshotOptions
+var ElasticsearchDomainConfig_VPCOptions = &sElasticsearchDomainConfig_VPCOptions
+var ElasticsearchDomainConfig_CognitoOptions = &sElasticsearchDomainConfig_CognitoOptions
+var ElasticsearchDomainConfig_EncryptionAtRestOptions = &sElasticsearchDomainConfig_EncryptionAtRestOptions
+var ElasticsearchDomainConfig_NodeToNodeEncryptionOptions = &sElasticsearchDomainConfig_NodeToNodeEncryptionOptions
+var ElasticsearchDomainConfig_AdvancedOptions = &sElasticsearchDomainConfig_AdvancedOptions
+var ElasticsearchDomainConfig_LogPublishingOptions = &sElasticsearchDomainConfig_LogPublishingOptions
+var ElasticsearchDomainConfig_DomainEndpointOptions = &sElasticsearchDomainConfig_DomainEndpointOptions
+var ElasticsearchDomainConfig_AdvancedSecurityOptions = &sElasticsearchDomainConfig_AdvancedSecurityOptions
+var ElasticsearchDomainConfig_AutoTuneOptions = &sElasticsearchDomainConfig_AutoTuneOptions
+var ElasticsearchDomainConfig_ChangeProgressDetails = &sElasticsearchDomainConfig_ChangeProgressDetails
+var ElasticsearchDomainConfig_ModifyingProperties = &sElasticsearchDomainConfig_ModifyingProperties
+var ElasticsearchDomainConfig_DeploymentStrategyOptions = &sElasticsearchDomainConfig_DeploymentStrategyOptions
+var ElasticsearchDomainConfig_AutomatedSnapshotPauseOptions = &sElasticsearchDomainConfig_AutomatedSnapshotPauseOptions
+var ElasticsearchDomainConfig_UseCase = &sElasticsearchDomainConfig_UseCase
+var ElasticsearchDomainConfig_EngineMode = &sElasticsearchDomainConfig_EngineMode
+
+var ElasticsearchDomainStatus = &sElasticsearchDomainStatus
+var ElasticsearchDomainStatus_DomainId = &sElasticsearchDomainStatus_DomainId
+var ElasticsearchDomainStatus_DomainName = &sElasticsearchDomainStatus_DomainName
+var ElasticsearchDomainStatus_ARN = &sElasticsearchDomainStatus_ARN
+var ElasticsearchDomainStatus_Created = &sElasticsearchDomainStatus_Created
+var ElasticsearchDomainStatus_Deleted = &sElasticsearchDomainStatus_Deleted
+var ElasticsearchDomainStatus_Endpoint = &sElasticsearchDomainStatus_Endpoint
+var ElasticsearchDomainStatus_Endpoints = &sElasticsearchDomainStatus_Endpoints
+var ElasticsearchDomainStatus_Processing = &sElasticsearchDomainStatus_Processing
+var ElasticsearchDomainStatus_UpgradeProcessing = &sElasticsearchDomainStatus_UpgradeProcessing
+var ElasticsearchDomainStatus_ElasticsearchVersion = &sElasticsearchDomainStatus_ElasticsearchVersion
+var ElasticsearchDomainStatus_ElasticsearchClusterConfig = &sElasticsearchDomainStatus_ElasticsearchClusterConfig
+var ElasticsearchDomainStatus_EBSOptions = &sElasticsearchDomainStatus_EBSOptions
+var ElasticsearchDomainStatus_AccessPolicies = &sElasticsearchDomainStatus_AccessPolicies
+var ElasticsearchDomainStatus_SnapshotOptions = &sElasticsearchDomainStatus_SnapshotOptions
+var ElasticsearchDomainStatus_VPCOptions = &sElasticsearchDomainStatus_VPCOptions
+var ElasticsearchDomainStatus_CognitoOptions = &sElasticsearchDomainStatus_CognitoOptions
+var ElasticsearchDomainStatus_EncryptionAtRestOptions = &sElasticsearchDomainStatus_EncryptionAtRestOptions
+var ElasticsearchDomainStatus_NodeToNodeEncryptionOptions = &sElasticsearchDomainStatus_NodeToNodeEncryptionOptions
+var ElasticsearchDomainStatus_AdvancedOptions = &sElasticsearchDomainStatus_AdvancedOptions
+var ElasticsearchDomainStatus_LogPublishingOptions = &sElasticsearchDomainStatus_LogPublishingOptions
+var ElasticsearchDomainStatus_ServiceSoftwareOptions = &sElasticsearchDomainStatus_ServiceSoftwareOptions
+var ElasticsearchDomainStatus_DomainEndpointOptions = &sElasticsearchDomainStatus_DomainEndpointOptions
+var ElasticsearchDomainStatus_AdvancedSecurityOptions = &sElasticsearchDomainStatus_AdvancedSecurityOptions
+var ElasticsearchDomainStatus_AutoTuneOptions = &sElasticsearchDomainStatus_AutoTuneOptions
+var ElasticsearchDomainStatus_ChangeProgressDetails = &sElasticsearchDomainStatus_ChangeProgressDetails
+var ElasticsearchDomainStatus_DomainProcessingStatus = &sElasticsearchDomainStatus_DomainProcessingStatus
+var ElasticsearchDomainStatus_ModifyingProperties = &sElasticsearchDomainStatus_ModifyingProperties
+var ElasticsearchDomainStatus_DeploymentStrategyOptions = &sElasticsearchDomainStatus_DeploymentStrategyOptions
+var ElasticsearchDomainStatus_AutomatedSnapshotPauseOptions = &sElasticsearchDomainStatus_AutomatedSnapshotPauseOptions
+var ElasticsearchDomainStatus_UseCase = &sElasticsearchDomainStatus_UseCase
+var ElasticsearchDomainStatus_EngineMode = &sElasticsearchDomainStatus_EngineMode
+
+var _ElasticsearchDomainStatusList = &s_ElasticsearchDomainStatusList
+var _ElasticsearchDomainStatusList_member = &s_ElasticsearchDomainStatusList_member
+
+var _ElasticsearchInstanceTypeList = &s_ElasticsearchInstanceTypeList
+var _ElasticsearchInstanceTypeList_member = &s_ElasticsearchInstanceTypeList_member
+
+var _ElasticsearchVersionList = &s_ElasticsearchVersionList
+var _ElasticsearchVersionList_member = &s_ElasticsearchVersionList_member
+
+var ElasticsearchVersionStatus = &sElasticsearchVersionStatus
+var ElasticsearchVersionStatus_Options = &sElasticsearchVersionStatus_Options
+var ElasticsearchVersionStatus_Status = &sElasticsearchVersionStatus_Status
+
+var _ElasticsearchVersionString = &s_ElasticsearchVersionString
+
+var EncryptionAtRestOptions = &sEncryptionAtRestOptions
+var EncryptionAtRestOptions_Enabled = &sEncryptionAtRestOptions_Enabled
+var EncryptionAtRestOptions_KmsKeyId = &sEncryptionAtRestOptions_KmsKeyId
+
+var EncryptionAtRestOptionsStatus = &sEncryptionAtRestOptionsStatus
+var EncryptionAtRestOptionsStatus_Options = &sEncryptionAtRestOptionsStatus_Options
+var EncryptionAtRestOptionsStatus_Status = &sEncryptionAtRestOptionsStatus_Status
+
+var _Endpoint = &s_Endpoint
+
+var _EndpointsMap = &s_EndpointsMap
+var _EndpointsMap_key = &s_EndpointsMap_key
+var _EndpointsMap_value = &s_EndpointsMap_value
+
+var EngineModeStatus = &sEngineModeStatus
+var EngineModeStatus_Options = &sEngineModeStatus_Options
+var EngineModeStatus_Status = &sEngineModeStatus_Status
+
+var EngineType = &sEngineType
+var EngineType_OpenSearch = &sEngineType_OpenSearch
+var EngineType_Elasticsearch = &sEngineType_Elasticsearch
+
+var ErrorDetails = &sErrorDetails
+var ErrorDetails_ErrorType = &sErrorDetails_ErrorType
+var ErrorDetails_ErrorMessage = &sErrorDetails_ErrorMessage
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ErrorType = &s_ErrorType
+
+var ESPartitionInstanceType = &sESPartitionInstanceType
+var ESPartitionInstanceType_m3_medium_elasticsearch = &sESPartitionInstanceType_m3_medium_elasticsearch
+var ESPartitionInstanceType_m3_large_elasticsearch = &sESPartitionInstanceType_m3_large_elasticsearch
+var ESPartitionInstanceType_m3_xlarge_elasticsearch = &sESPartitionInstanceType_m3_xlarge_elasticsearch
+var ESPartitionInstanceType_m3_2xlarge_elasticsearch = &sESPartitionInstanceType_m3_2xlarge_elasticsearch
+var ESPartitionInstanceType_m4_large_elasticsearch = &sESPartitionInstanceType_m4_large_elasticsearch
+var ESPartitionInstanceType_m4_xlarge_elasticsearch = &sESPartitionInstanceType_m4_xlarge_elasticsearch
+var ESPartitionInstanceType_m4_2xlarge_elasticsearch = &sESPartitionInstanceType_m4_2xlarge_elasticsearch
+var ESPartitionInstanceType_m4_4xlarge_elasticsearch = &sESPartitionInstanceType_m4_4xlarge_elasticsearch
+var ESPartitionInstanceType_m4_10xlarge_elasticsearch = &sESPartitionInstanceType_m4_10xlarge_elasticsearch
+var ESPartitionInstanceType_m5_large_elasticsearch = &sESPartitionInstanceType_m5_large_elasticsearch
+var ESPartitionInstanceType_m5_xlarge_elasticsearch = &sESPartitionInstanceType_m5_xlarge_elasticsearch
+var ESPartitionInstanceType_m5_2xlarge_elasticsearch = &sESPartitionInstanceType_m5_2xlarge_elasticsearch
+var ESPartitionInstanceType_m5_4xlarge_elasticsearch = &sESPartitionInstanceType_m5_4xlarge_elasticsearch
+var ESPartitionInstanceType_m5_12xlarge_elasticsearch = &sESPartitionInstanceType_m5_12xlarge_elasticsearch
+var ESPartitionInstanceType_r5_large_elasticsearch = &sESPartitionInstanceType_r5_large_elasticsearch
+var ESPartitionInstanceType_r5_xlarge_elasticsearch = &sESPartitionInstanceType_r5_xlarge_elasticsearch
+var ESPartitionInstanceType_r5_2xlarge_elasticsearch = &sESPartitionInstanceType_r5_2xlarge_elasticsearch
+var ESPartitionInstanceType_r5_4xlarge_elasticsearch = &sESPartitionInstanceType_r5_4xlarge_elasticsearch
+var ESPartitionInstanceType_r5_12xlarge_elasticsearch = &sESPartitionInstanceType_r5_12xlarge_elasticsearch
+var ESPartitionInstanceType_c5_large_elasticsearch = &sESPartitionInstanceType_c5_large_elasticsearch
+var ESPartitionInstanceType_c5_xlarge_elasticsearch = &sESPartitionInstanceType_c5_xlarge_elasticsearch
+var ESPartitionInstanceType_c5_2xlarge_elasticsearch = &sESPartitionInstanceType_c5_2xlarge_elasticsearch
+var ESPartitionInstanceType_c5_4xlarge_elasticsearch = &sESPartitionInstanceType_c5_4xlarge_elasticsearch
+var ESPartitionInstanceType_c5_9xlarge_elasticsearch = &sESPartitionInstanceType_c5_9xlarge_elasticsearch
+var ESPartitionInstanceType_c5_18xlarge_elasticsearch = &sESPartitionInstanceType_c5_18xlarge_elasticsearch
+var ESPartitionInstanceType_ultrawarm1_medium_elasticsearch = &sESPartitionInstanceType_ultrawarm1_medium_elasticsearch
+var ESPartitionInstanceType_ultrawarm1_large_elasticsearch = &sESPartitionInstanceType_ultrawarm1_large_elasticsearch
+var ESPartitionInstanceType_t2_micro_elasticsearch = &sESPartitionInstanceType_t2_micro_elasticsearch
+var ESPartitionInstanceType_t2_small_elasticsearch = &sESPartitionInstanceType_t2_small_elasticsearch
+var ESPartitionInstanceType_t2_medium_elasticsearch = &sESPartitionInstanceType_t2_medium_elasticsearch
+var ESPartitionInstanceType_r3_large_elasticsearch = &sESPartitionInstanceType_r3_large_elasticsearch
+var ESPartitionInstanceType_r3_xlarge_elasticsearch = &sESPartitionInstanceType_r3_xlarge_elasticsearch
+var ESPartitionInstanceType_r3_2xlarge_elasticsearch = &sESPartitionInstanceType_r3_2xlarge_elasticsearch
+var ESPartitionInstanceType_r3_4xlarge_elasticsearch = &sESPartitionInstanceType_r3_4xlarge_elasticsearch
+var ESPartitionInstanceType_r3_8xlarge_elasticsearch = &sESPartitionInstanceType_r3_8xlarge_elasticsearch
+var ESPartitionInstanceType_i2_xlarge_elasticsearch = &sESPartitionInstanceType_i2_xlarge_elasticsearch
+var ESPartitionInstanceType_i2_2xlarge_elasticsearch = &sESPartitionInstanceType_i2_2xlarge_elasticsearch
+var ESPartitionInstanceType_d2_xlarge_elasticsearch = &sESPartitionInstanceType_d2_xlarge_elasticsearch
+var ESPartitionInstanceType_d2_2xlarge_elasticsearch = &sESPartitionInstanceType_d2_2xlarge_elasticsearch
+var ESPartitionInstanceType_d2_4xlarge_elasticsearch = &sESPartitionInstanceType_d2_4xlarge_elasticsearch
+var ESPartitionInstanceType_d2_8xlarge_elasticsearch = &sESPartitionInstanceType_d2_8xlarge_elasticsearch
+var ESPartitionInstanceType_c4_large_elasticsearch = &sESPartitionInstanceType_c4_large_elasticsearch
+var ESPartitionInstanceType_c4_xlarge_elasticsearch = &sESPartitionInstanceType_c4_xlarge_elasticsearch
+var ESPartitionInstanceType_c4_2xlarge_elasticsearch = &sESPartitionInstanceType_c4_2xlarge_elasticsearch
+var ESPartitionInstanceType_c4_4xlarge_elasticsearch = &sESPartitionInstanceType_c4_4xlarge_elasticsearch
+var ESPartitionInstanceType_c4_8xlarge_elasticsearch = &sESPartitionInstanceType_c4_8xlarge_elasticsearch
+var ESPartitionInstanceType_r4_large_elasticsearch = &sESPartitionInstanceType_r4_large_elasticsearch
+var ESPartitionInstanceType_r4_xlarge_elasticsearch = &sESPartitionInstanceType_r4_xlarge_elasticsearch
+var ESPartitionInstanceType_r4_2xlarge_elasticsearch = &sESPartitionInstanceType_r4_2xlarge_elasticsearch
+var ESPartitionInstanceType_r4_4xlarge_elasticsearch = &sESPartitionInstanceType_r4_4xlarge_elasticsearch
+var ESPartitionInstanceType_r4_8xlarge_elasticsearch = &sESPartitionInstanceType_r4_8xlarge_elasticsearch
+var ESPartitionInstanceType_r4_16xlarge_elasticsearch = &sESPartitionInstanceType_r4_16xlarge_elasticsearch
+var ESPartitionInstanceType_i3_large_elasticsearch = &sESPartitionInstanceType_i3_large_elasticsearch
+var ESPartitionInstanceType_i3_xlarge_elasticsearch = &sESPartitionInstanceType_i3_xlarge_elasticsearch
+var ESPartitionInstanceType_i3_2xlarge_elasticsearch = &sESPartitionInstanceType_i3_2xlarge_elasticsearch
+var ESPartitionInstanceType_i3_4xlarge_elasticsearch = &sESPartitionInstanceType_i3_4xlarge_elasticsearch
+var ESPartitionInstanceType_i3_8xlarge_elasticsearch = &sESPartitionInstanceType_i3_8xlarge_elasticsearch
+var ESPartitionInstanceType_i3_16xlarge_elasticsearch = &sESPartitionInstanceType_i3_16xlarge_elasticsearch
+
+var ESWarmPartitionInstanceType = &sESWarmPartitionInstanceType
+var ESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch = &sESWarmPartitionInstanceType_ultrawarm1_medium_elasticsearch
+var ESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch = &sESWarmPartitionInstanceType_ultrawarm1_large_elasticsearch
+
+var Filter = &sFilter
+var Filter_Name = &sFilter_Name
+var Filter_Values = &sFilter_Values
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var _GUID = &s_GUID
+
+var _GUIDList = &s_GUIDList
+var _GUIDList_member = &s_GUIDList_member
+
+var _IdentityPoolId = &s_IdentityPoolId
+
+var InboundCrossClusterSearchConnection = &sInboundCrossClusterSearchConnection
+var InboundCrossClusterSearchConnection_SourceDomainInfo = &sInboundCrossClusterSearchConnection_SourceDomainInfo
+var InboundCrossClusterSearchConnection_DestinationDomainInfo = &sInboundCrossClusterSearchConnection_DestinationDomainInfo
+var InboundCrossClusterSearchConnection_CrossClusterSearchConnectionId = &sInboundCrossClusterSearchConnection_CrossClusterSearchConnectionId
+var InboundCrossClusterSearchConnection_ConnectionStatus = &sInboundCrossClusterSearchConnection_ConnectionStatus
+
+var _InboundCrossClusterSearchConnections = &s_InboundCrossClusterSearchConnections
+var _InboundCrossClusterSearchConnections_member = &s_InboundCrossClusterSearchConnections_member
+
+var InboundCrossClusterSearchConnectionStatus = &sInboundCrossClusterSearchConnectionStatus
+var InboundCrossClusterSearchConnectionStatus_StatusCode = &sInboundCrossClusterSearchConnectionStatus_StatusCode
+var InboundCrossClusterSearchConnectionStatus_Message = &sInboundCrossClusterSearchConnectionStatus_Message
+
+var InboundCrossClusterSearchConnectionStatusCode = &sInboundCrossClusterSearchConnectionStatusCode
+var InboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE = &sInboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE
+var InboundCrossClusterSearchConnectionStatusCode_APPROVED = &sInboundCrossClusterSearchConnectionStatusCode_APPROVED
+var InboundCrossClusterSearchConnectionStatusCode_REJECTING = &sInboundCrossClusterSearchConnectionStatusCode_REJECTING
+var InboundCrossClusterSearchConnectionStatusCode_REJECTED = &sInboundCrossClusterSearchConnectionStatusCode_REJECTED
+var InboundCrossClusterSearchConnectionStatusCode_DELETING = &sInboundCrossClusterSearchConnectionStatusCode_DELETING
+var InboundCrossClusterSearchConnectionStatusCode_DELETED = &sInboundCrossClusterSearchConnectionStatusCode_DELETED
+
+var InitiatedBy = &sInitiatedBy
+var InitiatedBy_CUSTOMER = &sInitiatedBy_CUSTOMER
+var InitiatedBy_SERVICE = &sInitiatedBy_SERVICE
+
+var _InstanceCount = &s_InstanceCount
+
+var InstanceCountLimits = &sInstanceCountLimits
+var InstanceCountLimits_MinimumInstanceCount = &sInstanceCountLimits_MinimumInstanceCount
+var InstanceCountLimits_MaximumInstanceCount = &sInstanceCountLimits_MaximumInstanceCount
+
+var InstanceLimits = &sInstanceLimits
+var InstanceLimits_InstanceCountLimits = &sInstanceLimits_InstanceCountLimits
+
+var _InstanceRole = &s_InstanceRole
+
+var _Integer = &s_Integer
+
+var _IntegerClass = &s_IntegerClass
+
+var InternalException = &sInternalException
+var InternalException_message = &sInternalException_message
+
+var InvalidPaginationTokenException = &sInvalidPaginationTokenException
+var InvalidPaginationTokenException_message = &sInvalidPaginationTokenException_message
+
+var InvalidTypeException = &sInvalidTypeException
+var InvalidTypeException_message = &sInvalidTypeException_message
+
+var _Issue = &s_Issue
+
+var _Issues = &s_Issues
+var _Issues_member = &s_Issues_member
+
+var _KmsKeyId = &s_KmsKeyId
+
+var _LastUpdated = &s_LastUpdated
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _LimitName = &s_LimitName
+
+var Limits = &sLimits
+var Limits_StorageTypes = &sLimits_StorageTypes
+var Limits_InstanceLimits = &sLimits_InstanceLimits
+var Limits_AdditionalLimits = &sLimits_AdditionalLimits
+
+var _LimitsByRole = &s_LimitsByRole
+var _LimitsByRole_key = &s_LimitsByRole_key
+var _LimitsByRole_value = &s_LimitsByRole_value
+
+var _LimitValue = &s_LimitValue
+
+var _LimitValueList = &s_LimitValueList
+var _LimitValueList_member = &s_LimitValueList_member
+
+var LogPublishingOption = &sLogPublishingOption
+var LogPublishingOption_CloudWatchLogsLogGroupArn = &sLogPublishingOption_CloudWatchLogsLogGroupArn
+var LogPublishingOption_Enabled = &sLogPublishingOption_Enabled
+
+var _LogPublishingOptions = &s_LogPublishingOptions
+var _LogPublishingOptions_key = &s_LogPublishingOptions_key
+var _LogPublishingOptions_value = &s_LogPublishingOptions_value
+
+var LogPublishingOptionsStatus = &sLogPublishingOptionsStatus
+var LogPublishingOptionsStatus_Options = &sLogPublishingOptionsStatus_Options
+var LogPublishingOptionsStatus_Status = &sLogPublishingOptionsStatus_Status
+
+var LogType = &sLogType
+var LogType_INDEX_SLOW_LOGS = &sLogType_INDEX_SLOW_LOGS
+var LogType_SEARCH_SLOW_LOGS = &sLogType_SEARCH_SLOW_LOGS
+var LogType_ES_APPLICATION_LOGS = &sLogType_ES_APPLICATION_LOGS
+var LogType_AUDIT_LOGS = &sLogType_AUDIT_LOGS
+
+var MasterUserOptions = &sMasterUserOptions
+var MasterUserOptions_MasterUserARN = &sMasterUserOptions_MasterUserARN
+var MasterUserOptions_MasterUserName = &sMasterUserOptions_MasterUserName
+var MasterUserOptions_MasterUserPassword = &sMasterUserOptions_MasterUserPassword
+
+var _MaximumInstanceCount = &s_MaximumInstanceCount
+
+var _MaxResults = &s_MaxResults
+
+var _Message = &s_Message
+
+var _MinimumInstanceCount = &s_MinimumInstanceCount
+
+var ModifyingProperties = &sModifyingProperties
+var ModifyingProperties_Name = &sModifyingProperties_Name
+var ModifyingProperties_ActiveValue = &sModifyingProperties_ActiveValue
+var ModifyingProperties_PendingValue = &sModifyingProperties_PendingValue
+var ModifyingProperties_ValueType = &sModifyingProperties_ValueType
+
+var _ModifyingPropertiesList = &s_ModifyingPropertiesList
+var _ModifyingPropertiesList_member = &s_ModifyingPropertiesList_member
+
+var _NextToken = &s_NextToken
+
+var NodeToNodeEncryptionOptions = &sNodeToNodeEncryptionOptions
+var NodeToNodeEncryptionOptions_Enabled = &sNodeToNodeEncryptionOptions_Enabled
+
+var NodeToNodeEncryptionOptionsStatus = &sNodeToNodeEncryptionOptionsStatus
+var NodeToNodeEncryptionOptionsStatus_Options = &sNodeToNodeEncryptionOptionsStatus_Options
+var NodeToNodeEncryptionOptionsStatus_Status = &sNodeToNodeEncryptionOptionsStatus_Status
+
+var _NonEmptyString = &s_NonEmptyString
+
+var OptionState = &sOptionState
+var OptionState_RequiresIndexDocuments = &sOptionState_RequiresIndexDocuments
+var OptionState_Processing = &sOptionState_Processing
+var OptionState_Active = &sOptionState_Active
+
+var OptionStatus = &sOptionStatus
+var OptionStatus_CreationDate = &sOptionStatus_CreationDate
+var OptionStatus_UpdateDate = &sOptionStatus_UpdateDate
+var OptionStatus_UpdateVersion = &sOptionStatus_UpdateVersion
+var OptionStatus_State = &sOptionStatus_State
+var OptionStatus_PendingDeletion = &sOptionStatus_PendingDeletion
+
+var OutboundCrossClusterSearchConnection = &sOutboundCrossClusterSearchConnection
+var OutboundCrossClusterSearchConnection_SourceDomainInfo = &sOutboundCrossClusterSearchConnection_SourceDomainInfo
+var OutboundCrossClusterSearchConnection_DestinationDomainInfo = &sOutboundCrossClusterSearchConnection_DestinationDomainInfo
+var OutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId = &sOutboundCrossClusterSearchConnection_CrossClusterSearchConnectionId
+var OutboundCrossClusterSearchConnection_ConnectionAlias = &sOutboundCrossClusterSearchConnection_ConnectionAlias
+var OutboundCrossClusterSearchConnection_ConnectionStatus = &sOutboundCrossClusterSearchConnection_ConnectionStatus
+
+var _OutboundCrossClusterSearchConnections = &s_OutboundCrossClusterSearchConnections
+var _OutboundCrossClusterSearchConnections_member = &s_OutboundCrossClusterSearchConnections_member
+
+var OutboundCrossClusterSearchConnectionStatus = &sOutboundCrossClusterSearchConnectionStatus
+var OutboundCrossClusterSearchConnectionStatus_StatusCode = &sOutboundCrossClusterSearchConnectionStatus_StatusCode
+var OutboundCrossClusterSearchConnectionStatus_Message = &sOutboundCrossClusterSearchConnectionStatus_Message
+
+var OutboundCrossClusterSearchConnectionStatusCode = &sOutboundCrossClusterSearchConnectionStatusCode
+var OutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE = &sOutboundCrossClusterSearchConnectionStatusCode_PENDING_ACCEPTANCE
+var OutboundCrossClusterSearchConnectionStatusCode_VALIDATING = &sOutboundCrossClusterSearchConnectionStatusCode_VALIDATING
+var OutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED = &sOutboundCrossClusterSearchConnectionStatusCode_VALIDATION_FAILED
+var OutboundCrossClusterSearchConnectionStatusCode_PROVISIONING = &sOutboundCrossClusterSearchConnectionStatusCode_PROVISIONING
+var OutboundCrossClusterSearchConnectionStatusCode_ACTIVE = &sOutboundCrossClusterSearchConnectionStatusCode_ACTIVE
+var OutboundCrossClusterSearchConnectionStatusCode_REJECTED = &sOutboundCrossClusterSearchConnectionStatusCode_REJECTED
+var OutboundCrossClusterSearchConnectionStatusCode_DELETING = &sOutboundCrossClusterSearchConnectionStatusCode_DELETING
+var OutboundCrossClusterSearchConnectionStatusCode_DELETED = &sOutboundCrossClusterSearchConnectionStatusCode_DELETED
+
+var OverallChangeStatus = &sOverallChangeStatus
+var OverallChangeStatus_PENDING = &sOverallChangeStatus_PENDING
+var OverallChangeStatus_PROCESSING = &sOverallChangeStatus_PROCESSING
+var OverallChangeStatus_COMPLETED = &sOverallChangeStatus_COMPLETED
+var OverallChangeStatus_FAILED = &sOverallChangeStatus_FAILED
+
+var _OwnerId = &s_OwnerId
+
+var _PackageDescription = &s_PackageDescription
+
+var PackageDetails = &sPackageDetails
+var PackageDetails_PackageID = &sPackageDetails_PackageID
+var PackageDetails_PackageName = &sPackageDetails_PackageName
+var PackageDetails_PackageType = &sPackageDetails_PackageType
+var PackageDetails_PackageDescription = &sPackageDetails_PackageDescription
+var PackageDetails_PackageStatus = &sPackageDetails_PackageStatus
+var PackageDetails_CreatedAt = &sPackageDetails_CreatedAt
+var PackageDetails_LastUpdatedAt = &sPackageDetails_LastUpdatedAt
+var PackageDetails_AvailablePackageVersion = &sPackageDetails_AvailablePackageVersion
+var PackageDetails_ErrorDetails = &sPackageDetails_ErrorDetails
+
+var _PackageDetailsList = &s_PackageDetailsList
+var _PackageDetailsList_member = &s_PackageDetailsList_member
+
+var _PackageID = &s_PackageID
+
+var _PackageName = &s_PackageName
+
+var PackageSource = &sPackageSource
+var PackageSource_S3BucketName = &sPackageSource_S3BucketName
+var PackageSource_S3Key = &sPackageSource_S3Key
+
+var PackageStatus = &sPackageStatus
+var PackageStatus_COPYING = &sPackageStatus_COPYING
+var PackageStatus_COPY_FAILED = &sPackageStatus_COPY_FAILED
+var PackageStatus_VALIDATING = &sPackageStatus_VALIDATING
+var PackageStatus_VALIDATION_FAILED = &sPackageStatus_VALIDATION_FAILED
+var PackageStatus_AVAILABLE = &sPackageStatus_AVAILABLE
+var PackageStatus_DELETING = &sPackageStatus_DELETING
+var PackageStatus_DELETED = &sPackageStatus_DELETED
+var PackageStatus_DELETE_FAILED = &sPackageStatus_DELETE_FAILED
+
+var PackageType = &sPackageType
+var PackageType_TXT_DICTIONARY = &sPackageType_TXT_DICTIONARY
+
+var _PackageVersion = &s_PackageVersion
+
+var PackageVersionHistory = &sPackageVersionHistory
+var PackageVersionHistory_PackageVersion = &sPackageVersionHistory_PackageVersion
+var PackageVersionHistory_CommitMessage = &sPackageVersionHistory_CommitMessage
+var PackageVersionHistory_CreatedAt = &sPackageVersionHistory_CreatedAt
+
+var _PackageVersionHistoryList = &s_PackageVersionHistoryList
+var _PackageVersionHistoryList_member = &s_PackageVersionHistoryList_member
+
+var _Password = &s_Password
+
+var PauseState = &sPauseState
+var PauseState_ACTIVE = &sPauseState_ACTIVE
+var PauseState_COMPLETED = &sPauseState_COMPLETED
+var PauseState_SCHEDULED = &sPauseState_SCHEDULED
+var PauseState_DISABLED = &sPauseState_DISABLED
+
+var _PolicyDocument = &s_PolicyDocument
+
+var PrincipalType = &sPrincipalType
+var PrincipalType_AWS_ACCOUNT = &sPrincipalType_AWS_ACCOUNT
+var PrincipalType_AWS_SERVICE = &sPrincipalType_AWS_SERVICE
+
+var PropertyValueType = &sPropertyValueType
+var PropertyValueType_PLAIN_TEXT = &sPropertyValueType_PLAIN_TEXT
+var PropertyValueType_STRINGIFIED_JSON = &sPropertyValueType_STRINGIFIED_JSON
+
+var RecurringCharge = &sRecurringCharge
+var RecurringCharge_RecurringChargeAmount = &sRecurringCharge_RecurringChargeAmount
+var RecurringCharge_RecurringChargeFrequency = &sRecurringCharge_RecurringChargeFrequency
+
+var _RecurringChargeList = &s_RecurringChargeList
+var _RecurringChargeList_member = &s_RecurringChargeList_member
+
+var _ReferencePath = &s_ReferencePath
+
+var _Region = &s_Region
+
+var _ReservationToken = &s_ReservationToken
+
+var ReservedElasticsearchInstance = &sReservedElasticsearchInstance
+var ReservedElasticsearchInstance_ReservationName = &sReservedElasticsearchInstance_ReservationName
+var ReservedElasticsearchInstance_ReservedElasticsearchInstanceId = &sReservedElasticsearchInstance_ReservedElasticsearchInstanceId
+var ReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId = &sReservedElasticsearchInstance_ReservedElasticsearchInstanceOfferingId
+var ReservedElasticsearchInstance_ElasticsearchInstanceType = &sReservedElasticsearchInstance_ElasticsearchInstanceType
+var ReservedElasticsearchInstance_StartTime = &sReservedElasticsearchInstance_StartTime
+var ReservedElasticsearchInstance_Duration = &sReservedElasticsearchInstance_Duration
+var ReservedElasticsearchInstance_FixedPrice = &sReservedElasticsearchInstance_FixedPrice
+var ReservedElasticsearchInstance_UsagePrice = &sReservedElasticsearchInstance_UsagePrice
+var ReservedElasticsearchInstance_CurrencyCode = &sReservedElasticsearchInstance_CurrencyCode
+var ReservedElasticsearchInstance_ElasticsearchInstanceCount = &sReservedElasticsearchInstance_ElasticsearchInstanceCount
+var ReservedElasticsearchInstance_State = &sReservedElasticsearchInstance_State
+var ReservedElasticsearchInstance_PaymentOption = &sReservedElasticsearchInstance_PaymentOption
+var ReservedElasticsearchInstance_RecurringCharges = &sReservedElasticsearchInstance_RecurringCharges
+
+var _ReservedElasticsearchInstanceList = &s_ReservedElasticsearchInstanceList
+var _ReservedElasticsearchInstanceList_member = &s_ReservedElasticsearchInstanceList_member
+
+var ReservedElasticsearchInstanceOffering = &sReservedElasticsearchInstanceOffering
+var ReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId = &sReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId
+var ReservedElasticsearchInstanceOffering_ElasticsearchInstanceType = &sReservedElasticsearchInstanceOffering_ElasticsearchInstanceType
+var ReservedElasticsearchInstanceOffering_Duration = &sReservedElasticsearchInstanceOffering_Duration
+var ReservedElasticsearchInstanceOffering_FixedPrice = &sReservedElasticsearchInstanceOffering_FixedPrice
+var ReservedElasticsearchInstanceOffering_UsagePrice = &sReservedElasticsearchInstanceOffering_UsagePrice
+var ReservedElasticsearchInstanceOffering_CurrencyCode = &sReservedElasticsearchInstanceOffering_CurrencyCode
+var ReservedElasticsearchInstanceOffering_PaymentOption = &sReservedElasticsearchInstanceOffering_PaymentOption
+var ReservedElasticsearchInstanceOffering_RecurringCharges = &sReservedElasticsearchInstanceOffering_RecurringCharges
+
+var _ReservedElasticsearchInstanceOfferingList = &s_ReservedElasticsearchInstanceOfferingList
+var _ReservedElasticsearchInstanceOfferingList_member = &s_ReservedElasticsearchInstanceOfferingList_member
+
+var ReservedElasticsearchInstancePaymentOption = &sReservedElasticsearchInstancePaymentOption
+var ReservedElasticsearchInstancePaymentOption_ALL_UPFRONT = &sReservedElasticsearchInstancePaymentOption_ALL_UPFRONT
+var ReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT = &sReservedElasticsearchInstancePaymentOption_PARTIAL_UPFRONT
+var ReservedElasticsearchInstancePaymentOption_NO_UPFRONT = &sReservedElasticsearchInstancePaymentOption_NO_UPFRONT
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_message = &sResourceAlreadyExistsException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var RetentionAction = &sRetentionAction
+var RetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER = &sRetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER
+var RetentionAction_DELETE_PRIMARY_CLUSTER = &sRetentionAction_DELETE_PRIMARY_CLUSTER
+
+var RetentionOptions = &sRetentionOptions
+var RetentionOptions_RetentionInHours = &sRetentionOptions_RetentionInHours
+var RetentionOptions_RetentionAction = &sRetentionOptions_RetentionAction
+
+var _RoleArn = &s_RoleArn
+
+var RollbackOnDisable = &sRollbackOnDisable
+var RollbackOnDisable_NO_ROLLBACK = &sRollbackOnDisable_NO_ROLLBACK
+var RollbackOnDisable_DEFAULT_ROLLBACK = &sRollbackOnDisable_DEFAULT_ROLLBACK
+
+var _S3BucketName = &s_S3BucketName
+
+var _S3Key = &s_S3Key
+
+var _SAMLEntityId = &s_SAMLEntityId
+
+var SAMLIdp = &sSAMLIdp
+var SAMLIdp_MetadataContent = &sSAMLIdp_MetadataContent
+var SAMLIdp_EntityId = &sSAMLIdp_EntityId
+
+var _SAMLMetadata = &s_SAMLMetadata
+
+var SAMLOptionsInput = &sSAMLOptionsInput
+var SAMLOptionsInput_Enabled = &sSAMLOptionsInput_Enabled
+var SAMLOptionsInput_Idp = &sSAMLOptionsInput_Idp
+var SAMLOptionsInput_MasterUserName = &sSAMLOptionsInput_MasterUserName
+var SAMLOptionsInput_MasterBackendRole = &sSAMLOptionsInput_MasterBackendRole
+var SAMLOptionsInput_SubjectKey = &sSAMLOptionsInput_SubjectKey
+var SAMLOptionsInput_RolesKey = &sSAMLOptionsInput_RolesKey
+var SAMLOptionsInput_SessionTimeoutMinutes = &sSAMLOptionsInput_SessionTimeoutMinutes
+
+var SAMLOptionsOutput = &sSAMLOptionsOutput
+var SAMLOptionsOutput_Enabled = &sSAMLOptionsOutput_Enabled
+var SAMLOptionsOutput_Idp = &sSAMLOptionsOutput_Idp
+var SAMLOptionsOutput_SubjectKey = &sSAMLOptionsOutput_SubjectKey
+var SAMLOptionsOutput_RolesKey = &sSAMLOptionsOutput_RolesKey
+var SAMLOptionsOutput_SessionTimeoutMinutes = &sSAMLOptionsOutput_SessionTimeoutMinutes
+
+var ScheduledAutoTuneActionType = &sScheduledAutoTuneActionType
+var ScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING = &sScheduledAutoTuneActionType_JVM_HEAP_SIZE_TUNING
+var ScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING = &sScheduledAutoTuneActionType_JVM_YOUNG_GEN_TUNING
+
+var _ScheduledAutoTuneDescription = &s_ScheduledAutoTuneDescription
+
+var ScheduledAutoTuneDetails = &sScheduledAutoTuneDetails
+var ScheduledAutoTuneDetails_Date = &sScheduledAutoTuneDetails_Date
+var ScheduledAutoTuneDetails_ActionType = &sScheduledAutoTuneDetails_ActionType
+var ScheduledAutoTuneDetails_Action = &sScheduledAutoTuneDetails_Action
+var ScheduledAutoTuneDetails_Severity = &sScheduledAutoTuneDetails_Severity
+
+var ScheduledAutoTuneSeverityType = &sScheduledAutoTuneSeverityType
+var ScheduledAutoTuneSeverityType_LOW = &sScheduledAutoTuneSeverityType_LOW
+var ScheduledAutoTuneSeverityType_MEDIUM = &sScheduledAutoTuneSeverityType_MEDIUM
+var ScheduledAutoTuneSeverityType_HIGH = &sScheduledAutoTuneSeverityType_HIGH
+
+var ServiceSoftwareOptions = &sServiceSoftwareOptions
+var ServiceSoftwareOptions_CurrentVersion = &sServiceSoftwareOptions_CurrentVersion
+var ServiceSoftwareOptions_NewVersion = &sServiceSoftwareOptions_NewVersion
+var ServiceSoftwareOptions_UpdateAvailable = &sServiceSoftwareOptions_UpdateAvailable
+var ServiceSoftwareOptions_Cancellable = &sServiceSoftwareOptions_Cancellable
+var ServiceSoftwareOptions_UpdateStatus = &sServiceSoftwareOptions_UpdateStatus
+var ServiceSoftwareOptions_Description = &sServiceSoftwareOptions_Description
+var ServiceSoftwareOptions_AutomatedUpdateDate = &sServiceSoftwareOptions_AutomatedUpdateDate
+var ServiceSoftwareOptions_OptionalDeployment = &sServiceSoftwareOptions_OptionalDeployment
+
+var _ServiceUrl = &s_ServiceUrl
+
+var SnapshotOptions = &sSnapshotOptions
+var SnapshotOptions_AutomatedSnapshotStartHour = &sSnapshotOptions_AutomatedSnapshotStartHour
+
+var SnapshotOptionsStatus = &sSnapshotOptionsStatus
+var SnapshotOptionsStatus_Options = &sSnapshotOptionsStatus_Options
+var SnapshotOptionsStatus_Status = &sSnapshotOptionsStatus_Status
+
+var _StartAt = &s_StartAt
+
+var _StartTimestamp = &s_StartTimestamp
+
+var _StorageSubTypeName = &s_StorageSubTypeName
+
+var StorageType = &sStorageType
+var StorageType_StorageTypeName = &sStorageType_StorageTypeName
+var StorageType_StorageSubTypeName = &sStorageType_StorageSubTypeName
+var StorageType_StorageTypeLimits = &sStorageType_StorageTypeLimits
+
+var StorageTypeLimit = &sStorageTypeLimit
+var StorageTypeLimit_LimitName = &sStorageTypeLimit_LimitName
+var StorageTypeLimit_LimitValues = &sStorageTypeLimit_LimitValues
+
+var _StorageTypeLimitList = &s_StorageTypeLimitList
+var _StorageTypeLimitList_member = &s_StorageTypeLimitList_member
+
+var _StorageTypeList = &s_StorageTypeList
+var _StorageTypeList_member = &s_StorageTypeList_member
+
+var _StorageTypeName = &s_StorageTypeName
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TimeUnit = &sTimeUnit
+var TimeUnit_HOURS = &sTimeUnit_HOURS
+
+var TLSSecurityPolicy = &sTLSSecurityPolicy
+var TLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 = &sTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07
+var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 = &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07
+var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10 = &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10
+var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08 = &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08
+
+var _TotalNumberOfStages = &s_TotalNumberOfStages
+
+var _TrafficPercent = &s_TrafficPercent
+
+var TrafficPercents = &sTrafficPercents
+var TrafficPercents_PrimaryReadTrafficPercent = &sTrafficPercents_PrimaryReadTrafficPercent
+var TrafficPercents_CloneReadTrafficPercent = &sTrafficPercents_CloneReadTrafficPercent
+
+var TrafficSplitOptions = &sTrafficSplitOptions
+var TrafficSplitOptions_Current = &sTrafficSplitOptions_Current
+var TrafficSplitOptions_Target = &sTrafficSplitOptions_Target
+var TrafficSplitOptions_Status = &sTrafficSplitOptions_Status
+
+var TrafficSplitRequestOptions = &sTrafficSplitRequestOptions
+var TrafficSplitRequestOptions_Strategy = &sTrafficSplitRequestOptions_Strategy
+var TrafficSplitRequestOptions_CloneReadTrafficPercent = &sTrafficSplitRequestOptions_CloneReadTrafficPercent
+
+var TrafficSplitStatus = &sTrafficSplitStatus
+var TrafficSplitStatus_IN_PROGRESS = &sTrafficSplitStatus_IN_PROGRESS
+var TrafficSplitStatus_COMPLETED = &sTrafficSplitStatus_COMPLETED
+var TrafficSplitStatus_FAILED = &sTrafficSplitStatus_FAILED
+
+var TrafficStrategy = &sTrafficStrategy
+var TrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT = &sTrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT
+
+var _UIntValue = &s_UIntValue
+
+var _UpdateTimestamp = &s_UpdateTimestamp
+
+var UpgradeHistory = &sUpgradeHistory
+var UpgradeHistory_UpgradeName = &sUpgradeHistory_UpgradeName
+var UpgradeHistory_StartTimestamp = &sUpgradeHistory_StartTimestamp
+var UpgradeHistory_UpgradeStatus = &sUpgradeHistory_UpgradeStatus
+var UpgradeHistory_StepsList = &sUpgradeHistory_StepsList
+
+var _UpgradeHistoryList = &s_UpgradeHistoryList
+var _UpgradeHistoryList_member = &s_UpgradeHistoryList_member
+
+var _UpgradeName = &s_UpgradeName
+
+var UpgradeStatus = &sUpgradeStatus
+var UpgradeStatus_IN_PROGRESS = &sUpgradeStatus_IN_PROGRESS
+var UpgradeStatus_SUCCEEDED = &sUpgradeStatus_SUCCEEDED
+var UpgradeStatus_SUCCEEDED_WITH_ISSUES = &sUpgradeStatus_SUCCEEDED_WITH_ISSUES
+var UpgradeStatus_FAILED = &sUpgradeStatus_FAILED
+
+var UpgradeStep = &sUpgradeStep
+var UpgradeStep_PRE_UPGRADE_CHECK = &sUpgradeStep_PRE_UPGRADE_CHECK
+var UpgradeStep_SNAPSHOT = &sUpgradeStep_SNAPSHOT
+var UpgradeStep_UPGRADE = &sUpgradeStep_UPGRADE
+
+var UpgradeStepItem = &sUpgradeStepItem
+var UpgradeStepItem_UpgradeStep = &sUpgradeStepItem_UpgradeStep
+var UpgradeStepItem_UpgradeStepStatus = &sUpgradeStepItem_UpgradeStepStatus
+var UpgradeStepItem_Issues = &sUpgradeStepItem_Issues
+var UpgradeStepItem_ProgressPercent = &sUpgradeStepItem_ProgressPercent
+
+var _UpgradeStepsList = &s_UpgradeStepsList
+var _UpgradeStepsList_member = &s_UpgradeStepsList_member
+
+var UseCaseStatus = &sUseCaseStatus
+var UseCaseStatus_Options = &sUseCaseStatus_Options
+var UseCaseStatus_Status = &sUseCaseStatus_Status
+
+var _Username = &s_Username
+
+var _UserPoolId = &s_UserPoolId
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _ValueStringList = &s_ValueStringList
+var _ValueStringList_member = &s_ValueStringList_member
+
+var VolumeType = &sVolumeType
+var VolumeType_standard = &sVolumeType_standard
+var VolumeType_gp2 = &sVolumeType_gp2
+var VolumeType_io1 = &sVolumeType_io1
+var VolumeType_gp3 = &sVolumeType_gp3
+
+var VPCDerivedInfo = &sVPCDerivedInfo
+var VPCDerivedInfo_VPCId = &sVPCDerivedInfo_VPCId
+var VPCDerivedInfo_SubnetIds = &sVPCDerivedInfo_SubnetIds
+var VPCDerivedInfo_AvailabilityZones = &sVPCDerivedInfo_AvailabilityZones
+var VPCDerivedInfo_SecurityGroupIds = &sVPCDerivedInfo_SecurityGroupIds
+
+var VPCDerivedInfoStatus = &sVPCDerivedInfoStatus
+var VPCDerivedInfoStatus_Options = &sVPCDerivedInfoStatus_Options
+var VPCDerivedInfoStatus_Status = &sVPCDerivedInfoStatus_Status
+
+var VpcEndpoint = &sVpcEndpoint
+var VpcEndpoint_VpcEndpointId = &sVpcEndpoint_VpcEndpointId
+var VpcEndpoint_VpcEndpointOwner = &sVpcEndpoint_VpcEndpointOwner
+var VpcEndpoint_DomainArn = &sVpcEndpoint_DomainArn
+var VpcEndpoint_VpcOptions = &sVpcEndpoint_VpcOptions
+var VpcEndpoint_Status = &sVpcEndpoint_Status
+var VpcEndpoint_Endpoint = &sVpcEndpoint_Endpoint
+
+var VpcEndpointError = &sVpcEndpointError
+var VpcEndpointError_VpcEndpointId = &sVpcEndpointError_VpcEndpointId
+var VpcEndpointError_ErrorCode = &sVpcEndpointError_ErrorCode
+var VpcEndpointError_ErrorMessage = &sVpcEndpointError_ErrorMessage
+
+var VpcEndpointErrorCode = &sVpcEndpointErrorCode
+var VpcEndpointErrorCode_ENDPOINT_NOT_FOUND = &sVpcEndpointErrorCode_ENDPOINT_NOT_FOUND
+var VpcEndpointErrorCode_SERVER_ERROR = &sVpcEndpointErrorCode_SERVER_ERROR
+
+var _VpcEndpointErrorList = &s_VpcEndpointErrorList
+var _VpcEndpointErrorList_member = &s_VpcEndpointErrorList_member
+
+var _VpcEndpointId = &s_VpcEndpointId
+
+var _VpcEndpointIdList = &s_VpcEndpointIdList
+var _VpcEndpointIdList_member = &s_VpcEndpointIdList_member
+
+var _VpcEndpoints = &s_VpcEndpoints
+var _VpcEndpoints_member = &s_VpcEndpoints_member
+
+var VpcEndpointStatus = &sVpcEndpointStatus
+var VpcEndpointStatus_CREATING = &sVpcEndpointStatus_CREATING
+var VpcEndpointStatus_CREATE_FAILED = &sVpcEndpointStatus_CREATE_FAILED
+var VpcEndpointStatus_ACTIVE = &sVpcEndpointStatus_ACTIVE
+var VpcEndpointStatus_UPDATING = &sVpcEndpointStatus_UPDATING
+var VpcEndpointStatus_UPDATE_FAILED = &sVpcEndpointStatus_UPDATE_FAILED
+var VpcEndpointStatus_DELETING = &sVpcEndpointStatus_DELETING
+var VpcEndpointStatus_DELETE_FAILED = &sVpcEndpointStatus_DELETE_FAILED
+
+var VpcEndpointSummary = &sVpcEndpointSummary
+var VpcEndpointSummary_VpcEndpointId = &sVpcEndpointSummary_VpcEndpointId
+var VpcEndpointSummary_VpcEndpointOwner = &sVpcEndpointSummary_VpcEndpointOwner
+var VpcEndpointSummary_DomainArn = &sVpcEndpointSummary_DomainArn
+var VpcEndpointSummary_Status = &sVpcEndpointSummary_Status
+
+var _VpcEndpointSummaryList = &s_VpcEndpointSummaryList
+var _VpcEndpointSummaryList_member = &s_VpcEndpointSummaryList_member
+
+var VPCOptions = &sVPCOptions
+var VPCOptions_SubnetIds = &sVPCOptions_SubnetIds
+var VPCOptions_SecurityGroupIds = &sVPCOptions_SecurityGroupIds
+
+var ZoneAwarenessConfig = &sZoneAwarenessConfig
+var ZoneAwarenessConfig_AvailabilityZoneCount = &sZoneAwarenessConfig_AvailabilityZoneCount
+
+var AcceptInboundCrossClusterSearchConnectionRequest = &sAcceptInboundCrossClusterSearchConnectionRequest
+var AcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = &sAcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId
+
+var AcceptInboundCrossClusterSearchConnectionResponse = &sAcceptInboundCrossClusterSearchConnectionResponse
+var AcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = &sAcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection
+
+var AddTagsRequest = &sAddTagsRequest
+var AddTagsRequest_ARN = &sAddTagsRequest_ARN
+var AddTagsRequest_TagList = &sAddTagsRequest_TagList
+
+var AssociatePackageRequest = &sAssociatePackageRequest
+var AssociatePackageRequest_PackageID = &sAssociatePackageRequest_PackageID
+var AssociatePackageRequest_DomainName = &sAssociatePackageRequest_DomainName
+
+var AssociatePackageResponse = &sAssociatePackageResponse
+var AssociatePackageResponse_DomainPackageDetails = &sAssociatePackageResponse_DomainPackageDetails
+
+var AuthorizeVpcEndpointAccessRequest = &sAuthorizeVpcEndpointAccessRequest
+var AuthorizeVpcEndpointAccessRequest_DomainName = &sAuthorizeVpcEndpointAccessRequest_DomainName
+var AuthorizeVpcEndpointAccessRequest_Account = &sAuthorizeVpcEndpointAccessRequest_Account
+
+var AuthorizeVpcEndpointAccessResponse = &sAuthorizeVpcEndpointAccessResponse
+var AuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal = &sAuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal
+
+var CancelDomainConfigChangeRequest = &sCancelDomainConfigChangeRequest
+var CancelDomainConfigChangeRequest_DomainName = &sCancelDomainConfigChangeRequest_DomainName
+var CancelDomainConfigChangeRequest_DryRun = &sCancelDomainConfigChangeRequest_DryRun
+
+var CancelDomainConfigChangeResponse = &sCancelDomainConfigChangeResponse
+var CancelDomainConfigChangeResponse_DryRun = &sCancelDomainConfigChangeResponse_DryRun
+var CancelDomainConfigChangeResponse_CancelledChangeIds = &sCancelDomainConfigChangeResponse_CancelledChangeIds
+var CancelDomainConfigChangeResponse_CancelledChangeProperties = &sCancelDomainConfigChangeResponse_CancelledChangeProperties
+
+var CancelElasticsearchServiceSoftwareUpdateRequest = &sCancelElasticsearchServiceSoftwareUpdateRequest
+var CancelElasticsearchServiceSoftwareUpdateRequest_DomainName = &sCancelElasticsearchServiceSoftwareUpdateRequest_DomainName
+
+var CancelElasticsearchServiceSoftwareUpdateResponse = &sCancelElasticsearchServiceSoftwareUpdateResponse
+var CancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions = &sCancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions
+
+var CreateElasticsearchDomainRequest = &sCreateElasticsearchDomainRequest
+var CreateElasticsearchDomainRequest_DomainName = &sCreateElasticsearchDomainRequest_DomainName
+var CreateElasticsearchDomainRequest_ElasticsearchVersion = &sCreateElasticsearchDomainRequest_ElasticsearchVersion
+var CreateElasticsearchDomainRequest_ElasticsearchClusterConfig = &sCreateElasticsearchDomainRequest_ElasticsearchClusterConfig
+var CreateElasticsearchDomainRequest_EBSOptions = &sCreateElasticsearchDomainRequest_EBSOptions
+var CreateElasticsearchDomainRequest_AccessPolicies = &sCreateElasticsearchDomainRequest_AccessPolicies
+var CreateElasticsearchDomainRequest_SnapshotOptions = &sCreateElasticsearchDomainRequest_SnapshotOptions
+var CreateElasticsearchDomainRequest_VPCOptions = &sCreateElasticsearchDomainRequest_VPCOptions
+var CreateElasticsearchDomainRequest_CognitoOptions = &sCreateElasticsearchDomainRequest_CognitoOptions
+var CreateElasticsearchDomainRequest_EncryptionAtRestOptions = &sCreateElasticsearchDomainRequest_EncryptionAtRestOptions
+var CreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions = &sCreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions
+var CreateElasticsearchDomainRequest_AdvancedOptions = &sCreateElasticsearchDomainRequest_AdvancedOptions
+var CreateElasticsearchDomainRequest_LogPublishingOptions = &sCreateElasticsearchDomainRequest_LogPublishingOptions
+var CreateElasticsearchDomainRequest_DomainEndpointOptions = &sCreateElasticsearchDomainRequest_DomainEndpointOptions
+var CreateElasticsearchDomainRequest_AdvancedSecurityOptions = &sCreateElasticsearchDomainRequest_AdvancedSecurityOptions
+var CreateElasticsearchDomainRequest_AutoTuneOptions = &sCreateElasticsearchDomainRequest_AutoTuneOptions
+var CreateElasticsearchDomainRequest_TagList = &sCreateElasticsearchDomainRequest_TagList
+var CreateElasticsearchDomainRequest_DeploymentStrategyOptions = &sCreateElasticsearchDomainRequest_DeploymentStrategyOptions
+var CreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions = &sCreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions
+var CreateElasticsearchDomainRequest_UseCase = &sCreateElasticsearchDomainRequest_UseCase
+var CreateElasticsearchDomainRequest_EngineMode = &sCreateElasticsearchDomainRequest_EngineMode
+
+var CreateElasticsearchDomainResponse = &sCreateElasticsearchDomainResponse
+var CreateElasticsearchDomainResponse_DomainStatus = &sCreateElasticsearchDomainResponse_DomainStatus
+
+var CreateOutboundCrossClusterSearchConnectionRequest = &sCreateOutboundCrossClusterSearchConnectionRequest
+var CreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo = &sCreateOutboundCrossClusterSearchConnectionRequest_SourceDomainInfo
+var CreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo = &sCreateOutboundCrossClusterSearchConnectionRequest_DestinationDomainInfo
+var CreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias = &sCreateOutboundCrossClusterSearchConnectionRequest_ConnectionAlias
+
+var CreateOutboundCrossClusterSearchConnectionResponse = &sCreateOutboundCrossClusterSearchConnectionResponse
+var CreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo = &sCreateOutboundCrossClusterSearchConnectionResponse_SourceDomainInfo
+var CreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo = &sCreateOutboundCrossClusterSearchConnectionResponse_DestinationDomainInfo
+var CreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias = &sCreateOutboundCrossClusterSearchConnectionResponse_ConnectionAlias
+var CreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus = &sCreateOutboundCrossClusterSearchConnectionResponse_ConnectionStatus
+var CreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId = &sCreateOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnectionId
+
+var CreatePackageRequest = &sCreatePackageRequest
+var CreatePackageRequest_PackageName = &sCreatePackageRequest_PackageName
+var CreatePackageRequest_PackageType = &sCreatePackageRequest_PackageType
+var CreatePackageRequest_PackageDescription = &sCreatePackageRequest_PackageDescription
+var CreatePackageRequest_PackageSource = &sCreatePackageRequest_PackageSource
+
+var CreatePackageResponse = &sCreatePackageResponse
+var CreatePackageResponse_PackageDetails = &sCreatePackageResponse_PackageDetails
+
+var CreateVpcEndpointRequest = &sCreateVpcEndpointRequest
+var CreateVpcEndpointRequest_DomainArn = &sCreateVpcEndpointRequest_DomainArn
+var CreateVpcEndpointRequest_VpcOptions = &sCreateVpcEndpointRequest_VpcOptions
+var CreateVpcEndpointRequest_ClientToken = &sCreateVpcEndpointRequest_ClientToken
+
+var CreateVpcEndpointResponse = &sCreateVpcEndpointResponse
+var CreateVpcEndpointResponse_VpcEndpoint = &sCreateVpcEndpointResponse_VpcEndpoint
+
+var DeleteElasticsearchDomainRequest = &sDeleteElasticsearchDomainRequest
+var DeleteElasticsearchDomainRequest_DomainName = &sDeleteElasticsearchDomainRequest_DomainName
+
+var DeleteElasticsearchDomainResponse = &sDeleteElasticsearchDomainResponse
+var DeleteElasticsearchDomainResponse_DomainStatus = &sDeleteElasticsearchDomainResponse_DomainStatus
+
+var DeleteInboundCrossClusterSearchConnectionRequest = &sDeleteInboundCrossClusterSearchConnectionRequest
+var DeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = &sDeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId
+
+var DeleteInboundCrossClusterSearchConnectionResponse = &sDeleteInboundCrossClusterSearchConnectionResponse
+var DeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = &sDeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection
+
+var DeleteOutboundCrossClusterSearchConnectionRequest = &sDeleteOutboundCrossClusterSearchConnectionRequest
+var DeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = &sDeleteOutboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId
+
+var DeleteOutboundCrossClusterSearchConnectionResponse = &sDeleteOutboundCrossClusterSearchConnectionResponse
+var DeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = &sDeleteOutboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection
+
+var DeletePackageRequest = &sDeletePackageRequest
+var DeletePackageRequest_PackageID = &sDeletePackageRequest_PackageID
+
+var DeletePackageResponse = &sDeletePackageResponse
+var DeletePackageResponse_PackageDetails = &sDeletePackageResponse_PackageDetails
+
+var DeleteVpcEndpointRequest = &sDeleteVpcEndpointRequest
+var DeleteVpcEndpointRequest_VpcEndpointId = &sDeleteVpcEndpointRequest_VpcEndpointId
+
+var DeleteVpcEndpointResponse = &sDeleteVpcEndpointResponse
+var DeleteVpcEndpointResponse_VpcEndpointSummary = &sDeleteVpcEndpointResponse_VpcEndpointSummary
+
+var DescribeDomainAutoTunesRequest = &sDescribeDomainAutoTunesRequest
+var DescribeDomainAutoTunesRequest_DomainName = &sDescribeDomainAutoTunesRequest_DomainName
+var DescribeDomainAutoTunesRequest_MaxResults = &sDescribeDomainAutoTunesRequest_MaxResults
+var DescribeDomainAutoTunesRequest_NextToken = &sDescribeDomainAutoTunesRequest_NextToken
+
+var DescribeDomainAutoTunesResponse = &sDescribeDomainAutoTunesResponse
+var DescribeDomainAutoTunesResponse_AutoTunes = &sDescribeDomainAutoTunesResponse_AutoTunes
+var DescribeDomainAutoTunesResponse_NextToken = &sDescribeDomainAutoTunesResponse_NextToken
+
+var DescribeDomainChangeProgressRequest = &sDescribeDomainChangeProgressRequest
+var DescribeDomainChangeProgressRequest_DomainName = &sDescribeDomainChangeProgressRequest_DomainName
+var DescribeDomainChangeProgressRequest_ChangeId = &sDescribeDomainChangeProgressRequest_ChangeId
+
+var DescribeDomainChangeProgressResponse = &sDescribeDomainChangeProgressResponse
+var DescribeDomainChangeProgressResponse_ChangeProgressStatus = &sDescribeDomainChangeProgressResponse_ChangeProgressStatus
+
+var DescribeElasticsearchDomainConfigRequest = &sDescribeElasticsearchDomainConfigRequest
+var DescribeElasticsearchDomainConfigRequest_DomainName = &sDescribeElasticsearchDomainConfigRequest_DomainName
+
+var DescribeElasticsearchDomainConfigResponse = &sDescribeElasticsearchDomainConfigResponse
+var DescribeElasticsearchDomainConfigResponse_DomainConfig = &sDescribeElasticsearchDomainConfigResponse_DomainConfig
+
+var DescribeElasticsearchDomainRequest = &sDescribeElasticsearchDomainRequest
+var DescribeElasticsearchDomainRequest_DomainName = &sDescribeElasticsearchDomainRequest_DomainName
+
+var DescribeElasticsearchDomainResponse = &sDescribeElasticsearchDomainResponse
+var DescribeElasticsearchDomainResponse_DomainStatus = &sDescribeElasticsearchDomainResponse_DomainStatus
+
+var DescribeElasticsearchDomainsRequest = &sDescribeElasticsearchDomainsRequest
+var DescribeElasticsearchDomainsRequest_DomainNames = &sDescribeElasticsearchDomainsRequest_DomainNames
+
+var DescribeElasticsearchDomainsResponse = &sDescribeElasticsearchDomainsResponse
+var DescribeElasticsearchDomainsResponse_DomainStatusList = &sDescribeElasticsearchDomainsResponse_DomainStatusList
+
+var DescribeElasticsearchInstanceTypeLimitsRequest = &sDescribeElasticsearchInstanceTypeLimitsRequest
+var DescribeElasticsearchInstanceTypeLimitsRequest_DomainName = &sDescribeElasticsearchInstanceTypeLimitsRequest_DomainName
+var DescribeElasticsearchInstanceTypeLimitsRequest_InstanceType = &sDescribeElasticsearchInstanceTypeLimitsRequest_InstanceType
+var DescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion = &sDescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion
+
+var DescribeElasticsearchInstanceTypeLimitsResponse = &sDescribeElasticsearchInstanceTypeLimitsResponse
+var DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole = &sDescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole
+
+var DescribeInboundCrossClusterSearchConnectionsRequest = &sDescribeInboundCrossClusterSearchConnectionsRequest
+var DescribeInboundCrossClusterSearchConnectionsRequest_Filters = &sDescribeInboundCrossClusterSearchConnectionsRequest_Filters
+var DescribeInboundCrossClusterSearchConnectionsRequest_MaxResults = &sDescribeInboundCrossClusterSearchConnectionsRequest_MaxResults
+var DescribeInboundCrossClusterSearchConnectionsRequest_NextToken = &sDescribeInboundCrossClusterSearchConnectionsRequest_NextToken
+
+var DescribeInboundCrossClusterSearchConnectionsResponse = &sDescribeInboundCrossClusterSearchConnectionsResponse
+var DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections = &sDescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections
+var DescribeInboundCrossClusterSearchConnectionsResponse_NextToken = &sDescribeInboundCrossClusterSearchConnectionsResponse_NextToken
+
+var DescribeOutboundCrossClusterSearchConnectionsRequest = &sDescribeOutboundCrossClusterSearchConnectionsRequest
+var DescribeOutboundCrossClusterSearchConnectionsRequest_Filters = &sDescribeOutboundCrossClusterSearchConnectionsRequest_Filters
+var DescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults = &sDescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults
+var DescribeOutboundCrossClusterSearchConnectionsRequest_NextToken = &sDescribeOutboundCrossClusterSearchConnectionsRequest_NextToken
+
+var DescribeOutboundCrossClusterSearchConnectionsResponse = &sDescribeOutboundCrossClusterSearchConnectionsResponse
+var DescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections = &sDescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections
+var DescribeOutboundCrossClusterSearchConnectionsResponse_NextToken = &sDescribeOutboundCrossClusterSearchConnectionsResponse_NextToken
+
+var DescribePackagesRequest = &sDescribePackagesRequest
+var DescribePackagesRequest_Filters = &sDescribePackagesRequest_Filters
+var DescribePackagesRequest_MaxResults = &sDescribePackagesRequest_MaxResults
+var DescribePackagesRequest_NextToken = &sDescribePackagesRequest_NextToken
+
+var DescribePackagesResponse = &sDescribePackagesResponse
+var DescribePackagesResponse_PackageDetailsList = &sDescribePackagesResponse_PackageDetailsList
+var DescribePackagesResponse_NextToken = &sDescribePackagesResponse_NextToken
+
+var DescribeReservedElasticsearchInstanceOfferingsRequest = &sDescribeReservedElasticsearchInstanceOfferingsRequest
+var DescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId = &sDescribeReservedElasticsearchInstanceOfferingsRequest_ReservedElasticsearchInstanceOfferingId
+var DescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults = &sDescribeReservedElasticsearchInstanceOfferingsRequest_MaxResults
+var DescribeReservedElasticsearchInstanceOfferingsRequest_NextToken = &sDescribeReservedElasticsearchInstanceOfferingsRequest_NextToken
+
+var DescribeReservedElasticsearchInstanceOfferingsResponse = &sDescribeReservedElasticsearchInstanceOfferingsResponse
+var DescribeReservedElasticsearchInstanceOfferingsResponse_NextToken = &sDescribeReservedElasticsearchInstanceOfferingsResponse_NextToken
+var DescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings = &sDescribeReservedElasticsearchInstanceOfferingsResponse_ReservedElasticsearchInstanceOfferings
+
+var DescribeReservedElasticsearchInstancesRequest = &sDescribeReservedElasticsearchInstancesRequest
+var DescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId = &sDescribeReservedElasticsearchInstancesRequest_ReservedElasticsearchInstanceId
+var DescribeReservedElasticsearchInstancesRequest_MaxResults = &sDescribeReservedElasticsearchInstancesRequest_MaxResults
+var DescribeReservedElasticsearchInstancesRequest_NextToken = &sDescribeReservedElasticsearchInstancesRequest_NextToken
+
+var DescribeReservedElasticsearchInstancesResponse = &sDescribeReservedElasticsearchInstancesResponse
+var DescribeReservedElasticsearchInstancesResponse_NextToken = &sDescribeReservedElasticsearchInstancesResponse_NextToken
+var DescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances = &sDescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances
+
+var DescribeVpcEndpointsRequest = &sDescribeVpcEndpointsRequest
+var DescribeVpcEndpointsRequest_VpcEndpointIds = &sDescribeVpcEndpointsRequest_VpcEndpointIds
+
+var DescribeVpcEndpointsResponse = &sDescribeVpcEndpointsResponse
+var DescribeVpcEndpointsResponse_VpcEndpoints = &sDescribeVpcEndpointsResponse_VpcEndpoints
+var DescribeVpcEndpointsResponse_VpcEndpointErrors = &sDescribeVpcEndpointsResponse_VpcEndpointErrors
+
+var DissociatePackageRequest = &sDissociatePackageRequest
+var DissociatePackageRequest_PackageID = &sDissociatePackageRequest_PackageID
+var DissociatePackageRequest_DomainName = &sDissociatePackageRequest_DomainName
+
+var DissociatePackageResponse = &sDissociatePackageResponse
+var DissociatePackageResponse_DomainPackageDetails = &sDissociatePackageResponse_DomainPackageDetails
+
+var GetCompatibleElasticsearchVersionsRequest = &sGetCompatibleElasticsearchVersionsRequest
+var GetCompatibleElasticsearchVersionsRequest_DomainName = &sGetCompatibleElasticsearchVersionsRequest_DomainName
+
+var GetCompatibleElasticsearchVersionsResponse = &sGetCompatibleElasticsearchVersionsResponse
+var GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions = &sGetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions
+
+var GetPackageVersionHistoryRequest = &sGetPackageVersionHistoryRequest
+var GetPackageVersionHistoryRequest_PackageID = &sGetPackageVersionHistoryRequest_PackageID
+var GetPackageVersionHistoryRequest_MaxResults = &sGetPackageVersionHistoryRequest_MaxResults
+var GetPackageVersionHistoryRequest_NextToken = &sGetPackageVersionHistoryRequest_NextToken
+
+var GetPackageVersionHistoryResponse = &sGetPackageVersionHistoryResponse
+var GetPackageVersionHistoryResponse_PackageID = &sGetPackageVersionHistoryResponse_PackageID
+var GetPackageVersionHistoryResponse_PackageVersionHistoryList = &sGetPackageVersionHistoryResponse_PackageVersionHistoryList
+var GetPackageVersionHistoryResponse_NextToken = &sGetPackageVersionHistoryResponse_NextToken
+
+var GetUpgradeHistoryRequest = &sGetUpgradeHistoryRequest
+var GetUpgradeHistoryRequest_DomainName = &sGetUpgradeHistoryRequest_DomainName
+var GetUpgradeHistoryRequest_MaxResults = &sGetUpgradeHistoryRequest_MaxResults
+var GetUpgradeHistoryRequest_NextToken = &sGetUpgradeHistoryRequest_NextToken
+
+var GetUpgradeHistoryResponse = &sGetUpgradeHistoryResponse
+var GetUpgradeHistoryResponse_UpgradeHistories = &sGetUpgradeHistoryResponse_UpgradeHistories
+var GetUpgradeHistoryResponse_NextToken = &sGetUpgradeHistoryResponse_NextToken
+
+var GetUpgradeStatusRequest = &sGetUpgradeStatusRequest
+var GetUpgradeStatusRequest_DomainName = &sGetUpgradeStatusRequest_DomainName
+
+var GetUpgradeStatusResponse = &sGetUpgradeStatusResponse
+var GetUpgradeStatusResponse_UpgradeStep = &sGetUpgradeStatusResponse_UpgradeStep
+var GetUpgradeStatusResponse_StepStatus = &sGetUpgradeStatusResponse_StepStatus
+var GetUpgradeStatusResponse_UpgradeName = &sGetUpgradeStatusResponse_UpgradeName
+
+var ListDomainNamesRequest = &sListDomainNamesRequest
+var ListDomainNamesRequest_EngineType = &sListDomainNamesRequest_EngineType
+
+var ListDomainNamesResponse = &sListDomainNamesResponse
+var ListDomainNamesResponse_DomainNames = &sListDomainNamesResponse_DomainNames
+
+var ListDomainsForPackageRequest = &sListDomainsForPackageRequest
+var ListDomainsForPackageRequest_PackageID = &sListDomainsForPackageRequest_PackageID
+var ListDomainsForPackageRequest_MaxResults = &sListDomainsForPackageRequest_MaxResults
+var ListDomainsForPackageRequest_NextToken = &sListDomainsForPackageRequest_NextToken
+
+var ListDomainsForPackageResponse = &sListDomainsForPackageResponse
+var ListDomainsForPackageResponse_DomainPackageDetailsList = &sListDomainsForPackageResponse_DomainPackageDetailsList
+var ListDomainsForPackageResponse_NextToken = &sListDomainsForPackageResponse_NextToken
+
+var ListElasticsearchInstanceTypesRequest = &sListElasticsearchInstanceTypesRequest
+var ListElasticsearchInstanceTypesRequest_ElasticsearchVersion = &sListElasticsearchInstanceTypesRequest_ElasticsearchVersion
+var ListElasticsearchInstanceTypesRequest_DomainName = &sListElasticsearchInstanceTypesRequest_DomainName
+var ListElasticsearchInstanceTypesRequest_MaxResults = &sListElasticsearchInstanceTypesRequest_MaxResults
+var ListElasticsearchInstanceTypesRequest_NextToken = &sListElasticsearchInstanceTypesRequest_NextToken
+
+var ListElasticsearchInstanceTypesResponse = &sListElasticsearchInstanceTypesResponse
+var ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes = &sListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes
+var ListElasticsearchInstanceTypesResponse_NextToken = &sListElasticsearchInstanceTypesResponse_NextToken
+
+var ListElasticsearchVersionsRequest = &sListElasticsearchVersionsRequest
+var ListElasticsearchVersionsRequest_MaxResults = &sListElasticsearchVersionsRequest_MaxResults
+var ListElasticsearchVersionsRequest_NextToken = &sListElasticsearchVersionsRequest_NextToken
+
+var ListElasticsearchVersionsResponse = &sListElasticsearchVersionsResponse
+var ListElasticsearchVersionsResponse_ElasticsearchVersions = &sListElasticsearchVersionsResponse_ElasticsearchVersions
+var ListElasticsearchVersionsResponse_NextToken = &sListElasticsearchVersionsResponse_NextToken
+
+var ListPackagesForDomainRequest = &sListPackagesForDomainRequest
+var ListPackagesForDomainRequest_DomainName = &sListPackagesForDomainRequest_DomainName
+var ListPackagesForDomainRequest_MaxResults = &sListPackagesForDomainRequest_MaxResults
+var ListPackagesForDomainRequest_NextToken = &sListPackagesForDomainRequest_NextToken
+
+var ListPackagesForDomainResponse = &sListPackagesForDomainResponse
+var ListPackagesForDomainResponse_DomainPackageDetailsList = &sListPackagesForDomainResponse_DomainPackageDetailsList
+var ListPackagesForDomainResponse_NextToken = &sListPackagesForDomainResponse_NextToken
+
+var ListTagsRequest = &sListTagsRequest
+var ListTagsRequest_ARN = &sListTagsRequest_ARN
+
+var ListTagsResponse = &sListTagsResponse
+var ListTagsResponse_TagList = &sListTagsResponse_TagList
+
+var ListVpcEndpointAccessRequest = &sListVpcEndpointAccessRequest
+var ListVpcEndpointAccessRequest_DomainName = &sListVpcEndpointAccessRequest_DomainName
+var ListVpcEndpointAccessRequest_NextToken = &sListVpcEndpointAccessRequest_NextToken
+
+var ListVpcEndpointAccessResponse = &sListVpcEndpointAccessResponse
+var ListVpcEndpointAccessResponse_AuthorizedPrincipalList = &sListVpcEndpointAccessResponse_AuthorizedPrincipalList
+var ListVpcEndpointAccessResponse_NextToken = &sListVpcEndpointAccessResponse_NextToken
+
+var ListVpcEndpointsForDomainRequest = &sListVpcEndpointsForDomainRequest
+var ListVpcEndpointsForDomainRequest_DomainName = &sListVpcEndpointsForDomainRequest_DomainName
+var ListVpcEndpointsForDomainRequest_NextToken = &sListVpcEndpointsForDomainRequest_NextToken
+
+var ListVpcEndpointsForDomainResponse = &sListVpcEndpointsForDomainResponse
+var ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList = &sListVpcEndpointsForDomainResponse_VpcEndpointSummaryList
+var ListVpcEndpointsForDomainResponse_NextToken = &sListVpcEndpointsForDomainResponse_NextToken
+
+var ListVpcEndpointsRequest = &sListVpcEndpointsRequest
+var ListVpcEndpointsRequest_NextToken = &sListVpcEndpointsRequest_NextToken
+
+var ListVpcEndpointsResponse = &sListVpcEndpointsResponse
+var ListVpcEndpointsResponse_VpcEndpointSummaryList = &sListVpcEndpointsResponse_VpcEndpointSummaryList
+var ListVpcEndpointsResponse_NextToken = &sListVpcEndpointsResponse_NextToken
+
+var PurchaseReservedElasticsearchInstanceOfferingRequest = &sPurchaseReservedElasticsearchInstanceOfferingRequest
+var PurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId = &sPurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId
+var PurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName = &sPurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName
+var PurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount = &sPurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount
+
+var PurchaseReservedElasticsearchInstanceOfferingResponse = &sPurchaseReservedElasticsearchInstanceOfferingResponse
+var PurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId = &sPurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId
+var PurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName = &sPurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName
+
+var RejectInboundCrossClusterSearchConnectionRequest = &sRejectInboundCrossClusterSearchConnectionRequest
+var RejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId = &sRejectInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId
+
+var RejectInboundCrossClusterSearchConnectionResponse = &sRejectInboundCrossClusterSearchConnectionResponse
+var RejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection = &sRejectInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection
+
+var RemoveTagsRequest = &sRemoveTagsRequest
+var RemoveTagsRequest_ARN = &sRemoveTagsRequest_ARN
+var RemoveTagsRequest_TagKeys = &sRemoveTagsRequest_TagKeys
+
+var RevokeVpcEndpointAccessRequest = &sRevokeVpcEndpointAccessRequest
+var RevokeVpcEndpointAccessRequest_DomainName = &sRevokeVpcEndpointAccessRequest_DomainName
+var RevokeVpcEndpointAccessRequest_Account = &sRevokeVpcEndpointAccessRequest_Account
+
+var RevokeVpcEndpointAccessResponse = &sRevokeVpcEndpointAccessResponse
+
+var StartElasticsearchServiceSoftwareUpdateRequest = &sStartElasticsearchServiceSoftwareUpdateRequest
+var StartElasticsearchServiceSoftwareUpdateRequest_DomainName = &sStartElasticsearchServiceSoftwareUpdateRequest_DomainName
+
+var StartElasticsearchServiceSoftwareUpdateResponse = &sStartElasticsearchServiceSoftwareUpdateResponse
+var StartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions = &sStartElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions
+
+var UpdateCloneRequest = &sUpdateCloneRequest
+var UpdateCloneRequest_DomainName = &sUpdateCloneRequest_DomainName
+var UpdateCloneRequest_TrafficSplitOptions = &sUpdateCloneRequest_TrafficSplitOptions
+var UpdateCloneRequest_CutoverOptions = &sUpdateCloneRequest_CutoverOptions
+var UpdateCloneRequest_RetentionOptions = &sUpdateCloneRequest_RetentionOptions
+
+var UpdateCloneResponse = &sUpdateCloneResponse
+var UpdateCloneResponse_DomainName = &sUpdateCloneResponse_DomainName
+var UpdateCloneResponse_ChangeId = &sUpdateCloneResponse_ChangeId
+var UpdateCloneResponse_CutoverOptions = &sUpdateCloneResponse_CutoverOptions
+var UpdateCloneResponse_TrafficSplitOptions = &sUpdateCloneResponse_TrafficSplitOptions
+var UpdateCloneResponse_RetentionOptions = &sUpdateCloneResponse_RetentionOptions
+
+var UpdateElasticsearchDomainConfigRequest = &sUpdateElasticsearchDomainConfigRequest
+var UpdateElasticsearchDomainConfigRequest_DomainName = &sUpdateElasticsearchDomainConfigRequest_DomainName
+var UpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig = &sUpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig
+var UpdateElasticsearchDomainConfigRequest_EBSOptions = &sUpdateElasticsearchDomainConfigRequest_EBSOptions
+var UpdateElasticsearchDomainConfigRequest_SnapshotOptions = &sUpdateElasticsearchDomainConfigRequest_SnapshotOptions
+var UpdateElasticsearchDomainConfigRequest_VPCOptions = &sUpdateElasticsearchDomainConfigRequest_VPCOptions
+var UpdateElasticsearchDomainConfigRequest_CognitoOptions = &sUpdateElasticsearchDomainConfigRequest_CognitoOptions
+var UpdateElasticsearchDomainConfigRequest_AdvancedOptions = &sUpdateElasticsearchDomainConfigRequest_AdvancedOptions
+var UpdateElasticsearchDomainConfigRequest_AccessPolicies = &sUpdateElasticsearchDomainConfigRequest_AccessPolicies
+var UpdateElasticsearchDomainConfigRequest_LogPublishingOptions = &sUpdateElasticsearchDomainConfigRequest_LogPublishingOptions
+var UpdateElasticsearchDomainConfigRequest_DomainEndpointOptions = &sUpdateElasticsearchDomainConfigRequest_DomainEndpointOptions
+var UpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions = &sUpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions
+var UpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions = &sUpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions
+var UpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions = &sUpdateElasticsearchDomainConfigRequest_EncryptionAtRestOptions
+var UpdateElasticsearchDomainConfigRequest_AutoTuneOptions = &sUpdateElasticsearchDomainConfigRequest_AutoTuneOptions
+var UpdateElasticsearchDomainConfigRequest_DryRun = &sUpdateElasticsearchDomainConfigRequest_DryRun
+var UpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions = &sUpdateElasticsearchDomainConfigRequest_DeploymentStrategyOptions
+var UpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions = &sUpdateElasticsearchDomainConfigRequest_AutomatedSnapshotPauseOptions
+var UpdateElasticsearchDomainConfigRequest_UseCase = &sUpdateElasticsearchDomainConfigRequest_UseCase
+var UpdateElasticsearchDomainConfigRequest_EngineMode = &sUpdateElasticsearchDomainConfigRequest_EngineMode
+
+var UpdateElasticsearchDomainConfigResponse = &sUpdateElasticsearchDomainConfigResponse
+var UpdateElasticsearchDomainConfigResponse_DomainConfig = &sUpdateElasticsearchDomainConfigResponse_DomainConfig
+var UpdateElasticsearchDomainConfigResponse_DryRunResults = &sUpdateElasticsearchDomainConfigResponse_DryRunResults
+
+var UpdatePackageRequest = &sUpdatePackageRequest
+var UpdatePackageRequest_PackageID = &sUpdatePackageRequest_PackageID
+var UpdatePackageRequest_PackageSource = &sUpdatePackageRequest_PackageSource
+var UpdatePackageRequest_PackageDescription = &sUpdatePackageRequest_PackageDescription
+var UpdatePackageRequest_CommitMessage = &sUpdatePackageRequest_CommitMessage
+
+var UpdatePackageResponse = &sUpdatePackageResponse
+var UpdatePackageResponse_PackageDetails = &sUpdatePackageResponse_PackageDetails
+
+var UpdateVpcEndpointRequest = &sUpdateVpcEndpointRequest
+var UpdateVpcEndpointRequest_VpcEndpointId = &sUpdateVpcEndpointRequest_VpcEndpointId
+var UpdateVpcEndpointRequest_VpcOptions = &sUpdateVpcEndpointRequest_VpcOptions
+
+var UpdateVpcEndpointResponse = &sUpdateVpcEndpointResponse
+var UpdateVpcEndpointResponse_VpcEndpoint = &sUpdateVpcEndpointResponse_VpcEndpoint
+
+var UpgradeElasticsearchDomainRequest = &sUpgradeElasticsearchDomainRequest
+var UpgradeElasticsearchDomainRequest_DomainName = &sUpgradeElasticsearchDomainRequest_DomainName
+var UpgradeElasticsearchDomainRequest_TargetVersion = &sUpgradeElasticsearchDomainRequest_TargetVersion
+var UpgradeElasticsearchDomainRequest_PerformCheckOnly = &sUpgradeElasticsearchDomainRequest_PerformCheckOnly
+var UpgradeElasticsearchDomainRequest_DeploymentStrategyOptions = &sUpgradeElasticsearchDomainRequest_DeploymentStrategyOptions
+
+var UpgradeElasticsearchDomainResponse = &sUpgradeElasticsearchDomainResponse
+var UpgradeElasticsearchDomainResponse_DomainName = &sUpgradeElasticsearchDomainResponse_DomainName
+var UpgradeElasticsearchDomainResponse_TargetVersion = &sUpgradeElasticsearchDomainResponse_TargetVersion
+var UpgradeElasticsearchDomainResponse_PerformCheckOnly = &sUpgradeElasticsearchDomainResponse_PerformCheckOnly
+var UpgradeElasticsearchDomainResponse_DeploymentStrategyOptions = &sUpgradeElasticsearchDomainResponse_DeploymentStrategyOptions
+var UpgradeElasticsearchDomainResponse_ChangeProgressDetails = &sUpgradeElasticsearchDomainResponse_ChangeProgressDetails
+
+var AmazonElasticsearchService2015 = &smithy.ServiceSchema{Schema: &s_AmazonElasticsearchService2015, Version: "2015-01-01"}

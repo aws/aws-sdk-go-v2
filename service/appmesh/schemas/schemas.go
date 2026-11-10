@@ -4,4185 +4,4125 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateGatewayRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateGatewayRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eCreateGatewayRoute                                                  smithy.SchemaExtensions
+	eCreateMesh                                                          smithy.SchemaExtensions
+	eCreateRoute                                                         smithy.SchemaExtensions
+	eCreateVirtualGateway                                                smithy.SchemaExtensions
+	eCreateVirtualNode                                                   smithy.SchemaExtensions
+	eCreateVirtualRouter                                                 smithy.SchemaExtensions
+	eCreateVirtualService                                                smithy.SchemaExtensions
+	eDeleteGatewayRoute                                                  smithy.SchemaExtensions
+	eDeleteMesh                                                          smithy.SchemaExtensions
+	eDeleteRoute                                                         smithy.SchemaExtensions
+	eDeleteVirtualGateway                                                smithy.SchemaExtensions
+	eDeleteVirtualNode                                                   smithy.SchemaExtensions
+	eDeleteVirtualRouter                                                 smithy.SchemaExtensions
+	eDeleteVirtualService                                                smithy.SchemaExtensions
+	eDescribeGatewayRoute                                                smithy.SchemaExtensions
+	eDescribeMesh                                                        smithy.SchemaExtensions
+	eDescribeRoute                                                       smithy.SchemaExtensions
+	eDescribeVirtualGateway                                              smithy.SchemaExtensions
+	eDescribeVirtualNode                                                 smithy.SchemaExtensions
+	eDescribeVirtualRouter                                               smithy.SchemaExtensions
+	eDescribeVirtualService                                              smithy.SchemaExtensions
+	eListGatewayRoutes                                                   smithy.SchemaExtensions
+	eListMeshes                                                          smithy.SchemaExtensions
+	eListRoutes                                                          smithy.SchemaExtensions
+	eListTagsForResource                                                 smithy.SchemaExtensions
+	eListVirtualGateways                                                 smithy.SchemaExtensions
+	eListVirtualNodes                                                    smithy.SchemaExtensions
+	eListVirtualRouters                                                  smithy.SchemaExtensions
+	eListVirtualServices                                                 smithy.SchemaExtensions
+	eTagResource                                                         smithy.SchemaExtensions
+	eUntagResource                                                       smithy.SchemaExtensions
+	eUpdateGatewayRoute                                                  smithy.SchemaExtensions
+	eUpdateMesh                                                          smithy.SchemaExtensions
+	eUpdateRoute                                                         smithy.SchemaExtensions
+	eUpdateVirtualGateway                                                smithy.SchemaExtensions
+	eUpdateVirtualNode                                                   smithy.SchemaExtensions
+	eUpdateVirtualRouter                                                 smithy.SchemaExtensions
+	eUpdateVirtualService                                                smithy.SchemaExtensions
+	e_AppMesh                                                            smithy.SchemaExtensions
+	eAccessLog                                                           smithy.SchemaExtensions
+	eAccessLog_file                                                      smithy.SchemaExtensions
+	e_AccountId                                                          smithy.SchemaExtensions
+	e_Arn                                                                smithy.SchemaExtensions
+	eAwsCloudMapInstanceAttribute                                        smithy.SchemaExtensions
+	eAwsCloudMapInstanceAttribute_key                                    smithy.SchemaExtensions
+	eAwsCloudMapInstanceAttribute_value                                  smithy.SchemaExtensions
+	e_AwsCloudMapInstanceAttributeKey                                    smithy.SchemaExtensions
+	e_AwsCloudMapInstanceAttributes                                      smithy.SchemaExtensions
+	e_AwsCloudMapInstanceAttributes_member                               smithy.SchemaExtensions
+	e_AwsCloudMapInstanceAttributeValue                                  smithy.SchemaExtensions
+	e_AwsCloudMapName                                                    smithy.SchemaExtensions
+	eAwsCloudMapServiceDiscovery                                         smithy.SchemaExtensions
+	eAwsCloudMapServiceDiscovery_namespaceName                           smithy.SchemaExtensions
+	eAwsCloudMapServiceDiscovery_serviceName                             smithy.SchemaExtensions
+	eAwsCloudMapServiceDiscovery_attributes                              smithy.SchemaExtensions
+	eAwsCloudMapServiceDiscovery_ipPreference                            smithy.SchemaExtensions
+	eBackend                                                             smithy.SchemaExtensions
+	eBackend_virtualService                                              smithy.SchemaExtensions
+	eBackendDefaults                                                     smithy.SchemaExtensions
+	eBackendDefaults_clientPolicy                                        smithy.SchemaExtensions
+	e_Backends                                                           smithy.SchemaExtensions
+	e_Backends_member                                                    smithy.SchemaExtensions
+	eBadRequestException                                                 smithy.SchemaExtensions
+	eBadRequestException_message                                         smithy.SchemaExtensions
+	e_CertificateAuthorityArns                                           smithy.SchemaExtensions
+	e_CertificateAuthorityArns_member                                    smithy.SchemaExtensions
+	eClientPolicy                                                        smithy.SchemaExtensions
+	eClientPolicy_tls                                                    smithy.SchemaExtensions
+	eClientPolicyTls                                                     smithy.SchemaExtensions
+	eClientPolicyTls_enforce                                             smithy.SchemaExtensions
+	eClientPolicyTls_ports                                               smithy.SchemaExtensions
+	eClientPolicyTls_certificate                                         smithy.SchemaExtensions
+	eClientPolicyTls_validation                                          smithy.SchemaExtensions
+	eClientTlsCertificate                                                smithy.SchemaExtensions
+	eClientTlsCertificate_file                                           smithy.SchemaExtensions
+	eClientTlsCertificate_sds                                            smithy.SchemaExtensions
+	eConflictException                                                   smithy.SchemaExtensions
+	eConflictException_message                                           smithy.SchemaExtensions
+	e_DefaultGatewayRouteRewrite                                         smithy.SchemaExtensions
+	e_DnsResponseType                                                    smithy.SchemaExtensions
+	eDnsServiceDiscovery                                                 smithy.SchemaExtensions
+	eDnsServiceDiscovery_hostname                                        smithy.SchemaExtensions
+	eDnsServiceDiscovery_responseType                                    smithy.SchemaExtensions
+	eDnsServiceDiscovery_ipPreference                                    smithy.SchemaExtensions
+	eDuration                                                            smithy.SchemaExtensions
+	eDuration_value                                                      smithy.SchemaExtensions
+	eDuration_unit                                                       smithy.SchemaExtensions
+	e_DurationUnit                                                       smithy.SchemaExtensions
+	e_DurationValue                                                      smithy.SchemaExtensions
+	eEgressFilter                                                        smithy.SchemaExtensions
+	eEgressFilter_type                                                   smithy.SchemaExtensions
+	e_EgressFilterType                                                   smithy.SchemaExtensions
+	e_ExactHostName                                                      smithy.SchemaExtensions
+	eFileAccessLog                                                       smithy.SchemaExtensions
+	eFileAccessLog_path                                                  smithy.SchemaExtensions
+	eFileAccessLog_format                                                smithy.SchemaExtensions
+	e_FilePath                                                           smithy.SchemaExtensions
+	eForbiddenException                                                  smithy.SchemaExtensions
+	eForbiddenException_message                                          smithy.SchemaExtensions
+	eGatewayRouteData                                                    smithy.SchemaExtensions
+	eGatewayRouteData_meshName                                           smithy.SchemaExtensions
+	eGatewayRouteData_gatewayRouteName                                   smithy.SchemaExtensions
+	eGatewayRouteData_virtualGatewayName                                 smithy.SchemaExtensions
+	eGatewayRouteData_spec                                               smithy.SchemaExtensions
+	eGatewayRouteData_metadata                                           smithy.SchemaExtensions
+	eGatewayRouteData_status                                             smithy.SchemaExtensions
+	eGatewayRouteHostnameMatch                                           smithy.SchemaExtensions
+	eGatewayRouteHostnameMatch_exact                                     smithy.SchemaExtensions
+	eGatewayRouteHostnameMatch_suffix                                    smithy.SchemaExtensions
+	eGatewayRouteHostnameRewrite                                         smithy.SchemaExtensions
+	eGatewayRouteHostnameRewrite_defaultTargetHostname                   smithy.SchemaExtensions
+	e_GatewayRouteList                                                   smithy.SchemaExtensions
+	e_GatewayRouteList_member                                            smithy.SchemaExtensions
+	e_GatewayRoutePriority                                               smithy.SchemaExtensions
+	eGatewayRouteRef                                                     smithy.SchemaExtensions
+	eGatewayRouteRef_meshName                                            smithy.SchemaExtensions
+	eGatewayRouteRef_gatewayRouteName                                    smithy.SchemaExtensions
+	eGatewayRouteRef_virtualGatewayName                                  smithy.SchemaExtensions
+	eGatewayRouteRef_meshOwner                                           smithy.SchemaExtensions
+	eGatewayRouteRef_resourceOwner                                       smithy.SchemaExtensions
+	eGatewayRouteRef_arn                                                 smithy.SchemaExtensions
+	eGatewayRouteRef_version                                             smithy.SchemaExtensions
+	eGatewayRouteRef_createdAt                                           smithy.SchemaExtensions
+	eGatewayRouteRef_lastUpdatedAt                                       smithy.SchemaExtensions
+	eGatewayRouteSpec                                                    smithy.SchemaExtensions
+	eGatewayRouteSpec_priority                                           smithy.SchemaExtensions
+	eGatewayRouteSpec_httpRoute                                          smithy.SchemaExtensions
+	eGatewayRouteSpec_http2Route                                         smithy.SchemaExtensions
+	eGatewayRouteSpec_grpcRoute                                          smithy.SchemaExtensions
+	eGatewayRouteStatus                                                  smithy.SchemaExtensions
+	eGatewayRouteStatus_status                                           smithy.SchemaExtensions
+	e_GatewayRouteStatusCode                                             smithy.SchemaExtensions
+	eGatewayRouteTarget                                                  smithy.SchemaExtensions
+	eGatewayRouteTarget_virtualService                                   smithy.SchemaExtensions
+	eGatewayRouteTarget_port                                             smithy.SchemaExtensions
+	eGatewayRouteVirtualService                                          smithy.SchemaExtensions
+	eGatewayRouteVirtualService_virtualServiceName                       smithy.SchemaExtensions
+	eGrpcGatewayRoute                                                    smithy.SchemaExtensions
+	eGrpcGatewayRoute_match                                              smithy.SchemaExtensions
+	eGrpcGatewayRoute_action                                             smithy.SchemaExtensions
+	eGrpcGatewayRouteAction                                              smithy.SchemaExtensions
+	eGrpcGatewayRouteAction_target                                       smithy.SchemaExtensions
+	eGrpcGatewayRouteAction_rewrite                                      smithy.SchemaExtensions
+	eGrpcGatewayRouteMatch                                               smithy.SchemaExtensions
+	eGrpcGatewayRouteMatch_serviceName                                   smithy.SchemaExtensions
+	eGrpcGatewayRouteMatch_hostname                                      smithy.SchemaExtensions
+	eGrpcGatewayRouteMatch_metadata                                      smithy.SchemaExtensions
+	eGrpcGatewayRouteMatch_port                                          smithy.SchemaExtensions
+	eGrpcGatewayRouteMetadata                                            smithy.SchemaExtensions
+	eGrpcGatewayRouteMetadata_name                                       smithy.SchemaExtensions
+	eGrpcGatewayRouteMetadata_invert                                     smithy.SchemaExtensions
+	eGrpcGatewayRouteMetadata_match                                      smithy.SchemaExtensions
+	e_GrpcGatewayRouteMetadataList                                       smithy.SchemaExtensions
+	e_GrpcGatewayRouteMetadataList_member                                smithy.SchemaExtensions
+	eGrpcGatewayRouteRewrite                                             smithy.SchemaExtensions
+	eGrpcGatewayRouteRewrite_hostname                                    smithy.SchemaExtensions
+	eGrpcMetadataMatchMethod                                             smithy.SchemaExtensions
+	eGrpcMetadataMatchMethod_exact                                       smithy.SchemaExtensions
+	eGrpcMetadataMatchMethod_regex                                       smithy.SchemaExtensions
+	eGrpcMetadataMatchMethod_range                                       smithy.SchemaExtensions
+	eGrpcMetadataMatchMethod_prefix                                      smithy.SchemaExtensions
+	eGrpcMetadataMatchMethod_suffix                                      smithy.SchemaExtensions
+	eGrpcRetryPolicy                                                     smithy.SchemaExtensions
+	eGrpcRetryPolicy_perRetryTimeout                                     smithy.SchemaExtensions
+	eGrpcRetryPolicy_maxRetries                                          smithy.SchemaExtensions
+	eGrpcRetryPolicy_httpRetryEvents                                     smithy.SchemaExtensions
+	eGrpcRetryPolicy_tcpRetryEvents                                      smithy.SchemaExtensions
+	eGrpcRetryPolicy_grpcRetryEvents                                     smithy.SchemaExtensions
+	e_GrpcRetryPolicyEvent                                               smithy.SchemaExtensions
+	e_GrpcRetryPolicyEvents                                              smithy.SchemaExtensions
+	e_GrpcRetryPolicyEvents_member                                       smithy.SchemaExtensions
+	eGrpcRoute                                                           smithy.SchemaExtensions
+	eGrpcRoute_action                                                    smithy.SchemaExtensions
+	eGrpcRoute_match                                                     smithy.SchemaExtensions
+	eGrpcRoute_retryPolicy                                               smithy.SchemaExtensions
+	eGrpcRoute_timeout                                                   smithy.SchemaExtensions
+	eGrpcRouteAction                                                     smithy.SchemaExtensions
+	eGrpcRouteAction_weightedTargets                                     smithy.SchemaExtensions
+	eGrpcRouteMatch                                                      smithy.SchemaExtensions
+	eGrpcRouteMatch_serviceName                                          smithy.SchemaExtensions
+	eGrpcRouteMatch_methodName                                           smithy.SchemaExtensions
+	eGrpcRouteMatch_metadata                                             smithy.SchemaExtensions
+	eGrpcRouteMatch_port                                                 smithy.SchemaExtensions
+	eGrpcRouteMetadata                                                   smithy.SchemaExtensions
+	eGrpcRouteMetadata_name                                              smithy.SchemaExtensions
+	eGrpcRouteMetadata_invert                                            smithy.SchemaExtensions
+	eGrpcRouteMetadata_match                                             smithy.SchemaExtensions
+	e_GrpcRouteMetadataList                                              smithy.SchemaExtensions
+	e_GrpcRouteMetadataList_member                                       smithy.SchemaExtensions
+	eGrpcRouteMetadataMatchMethod                                        smithy.SchemaExtensions
+	eGrpcRouteMetadataMatchMethod_exact                                  smithy.SchemaExtensions
+	eGrpcRouteMetadataMatchMethod_regex                                  smithy.SchemaExtensions
+	eGrpcRouteMetadataMatchMethod_range                                  smithy.SchemaExtensions
+	eGrpcRouteMetadataMatchMethod_prefix                                 smithy.SchemaExtensions
+	eGrpcRouteMetadataMatchMethod_suffix                                 smithy.SchemaExtensions
+	eGrpcTimeout                                                         smithy.SchemaExtensions
+	eGrpcTimeout_perRequest                                              smithy.SchemaExtensions
+	eGrpcTimeout_idle                                                    smithy.SchemaExtensions
+	e_HeaderMatch                                                        smithy.SchemaExtensions
+	eHeaderMatchMethod                                                   smithy.SchemaExtensions
+	eHeaderMatchMethod_exact                                             smithy.SchemaExtensions
+	eHeaderMatchMethod_regex                                             smithy.SchemaExtensions
+	eHeaderMatchMethod_range                                             smithy.SchemaExtensions
+	eHeaderMatchMethod_prefix                                            smithy.SchemaExtensions
+	eHeaderMatchMethod_suffix                                            smithy.SchemaExtensions
+	e_HeaderName                                                         smithy.SchemaExtensions
+	e_HealthCheckIntervalMillis                                          smithy.SchemaExtensions
+	eHealthCheckPolicy                                                   smithy.SchemaExtensions
+	eHealthCheckPolicy_timeoutMillis                                     smithy.SchemaExtensions
+	eHealthCheckPolicy_intervalMillis                                    smithy.SchemaExtensions
+	eHealthCheckPolicy_protocol                                          smithy.SchemaExtensions
+	eHealthCheckPolicy_port                                              smithy.SchemaExtensions
+	eHealthCheckPolicy_path                                              smithy.SchemaExtensions
+	eHealthCheckPolicy_healthyThreshold                                  smithy.SchemaExtensions
+	eHealthCheckPolicy_unhealthyThreshold                                smithy.SchemaExtensions
+	e_HealthCheckThreshold                                               smithy.SchemaExtensions
+	e_HealthCheckTimeoutMillis                                           smithy.SchemaExtensions
+	e_Hostname                                                           smithy.SchemaExtensions
+	eHttpGatewayRoute                                                    smithy.SchemaExtensions
+	eHttpGatewayRoute_match                                              smithy.SchemaExtensions
+	eHttpGatewayRoute_action                                             smithy.SchemaExtensions
+	eHttpGatewayRouteAction                                              smithy.SchemaExtensions
+	eHttpGatewayRouteAction_target                                       smithy.SchemaExtensions
+	eHttpGatewayRouteAction_rewrite                                      smithy.SchemaExtensions
+	eHttpGatewayRouteHeader                                              smithy.SchemaExtensions
+	eHttpGatewayRouteHeader_name                                         smithy.SchemaExtensions
+	eHttpGatewayRouteHeader_invert                                       smithy.SchemaExtensions
+	eHttpGatewayRouteHeader_match                                        smithy.SchemaExtensions
+	e_HttpGatewayRouteHeaders                                            smithy.SchemaExtensions
+	e_HttpGatewayRouteHeaders_member                                     smithy.SchemaExtensions
+	eHttpGatewayRouteMatch                                               smithy.SchemaExtensions
+	eHttpGatewayRouteMatch_prefix                                        smithy.SchemaExtensions
+	eHttpGatewayRouteMatch_path                                          smithy.SchemaExtensions
+	eHttpGatewayRouteMatch_queryParameters                               smithy.SchemaExtensions
+	eHttpGatewayRouteMatch_method                                        smithy.SchemaExtensions
+	eHttpGatewayRouteMatch_hostname                                      smithy.SchemaExtensions
+	eHttpGatewayRouteMatch_headers                                       smithy.SchemaExtensions
+	eHttpGatewayRouteMatch_port                                          smithy.SchemaExtensions
+	eHttpGatewayRoutePathRewrite                                         smithy.SchemaExtensions
+	eHttpGatewayRoutePathRewrite_exact                                   smithy.SchemaExtensions
+	e_HttpGatewayRoutePrefix                                             smithy.SchemaExtensions
+	eHttpGatewayRoutePrefixRewrite                                       smithy.SchemaExtensions
+	eHttpGatewayRoutePrefixRewrite_defaultPrefix                         smithy.SchemaExtensions
+	eHttpGatewayRoutePrefixRewrite_value                                 smithy.SchemaExtensions
+	eHttpGatewayRouteRewrite                                             smithy.SchemaExtensions
+	eHttpGatewayRouteRewrite_prefix                                      smithy.SchemaExtensions
+	eHttpGatewayRouteRewrite_path                                        smithy.SchemaExtensions
+	eHttpGatewayRouteRewrite_hostname                                    smithy.SchemaExtensions
+	e_HttpMethod                                                         smithy.SchemaExtensions
+	e_HttpPathExact                                                      smithy.SchemaExtensions
+	eHttpPathMatch                                                       smithy.SchemaExtensions
+	eHttpPathMatch_exact                                                 smithy.SchemaExtensions
+	eHttpPathMatch_regex                                                 smithy.SchemaExtensions
+	e_HttpPathRegex                                                      smithy.SchemaExtensions
+	eHttpQueryParameter                                                  smithy.SchemaExtensions
+	eHttpQueryParameter_name                                             smithy.SchemaExtensions
+	eHttpQueryParameter_match                                            smithy.SchemaExtensions
+	e_HttpQueryParameters                                                smithy.SchemaExtensions
+	e_HttpQueryParameters_member                                         smithy.SchemaExtensions
+	eHttpRetryPolicy                                                     smithy.SchemaExtensions
+	eHttpRetryPolicy_perRetryTimeout                                     smithy.SchemaExtensions
+	eHttpRetryPolicy_maxRetries                                          smithy.SchemaExtensions
+	eHttpRetryPolicy_httpRetryEvents                                     smithy.SchemaExtensions
+	eHttpRetryPolicy_tcpRetryEvents                                      smithy.SchemaExtensions
+	e_HttpRetryPolicyEvent                                               smithy.SchemaExtensions
+	e_HttpRetryPolicyEvents                                              smithy.SchemaExtensions
+	e_HttpRetryPolicyEvents_member                                       smithy.SchemaExtensions
+	eHttpRoute                                                           smithy.SchemaExtensions
+	eHttpRoute_match                                                     smithy.SchemaExtensions
+	eHttpRoute_action                                                    smithy.SchemaExtensions
+	eHttpRoute_retryPolicy                                               smithy.SchemaExtensions
+	eHttpRoute_timeout                                                   smithy.SchemaExtensions
+	eHttpRouteAction                                                     smithy.SchemaExtensions
+	eHttpRouteAction_weightedTargets                                     smithy.SchemaExtensions
+	eHttpRouteHeader                                                     smithy.SchemaExtensions
+	eHttpRouteHeader_name                                                smithy.SchemaExtensions
+	eHttpRouteHeader_invert                                              smithy.SchemaExtensions
+	eHttpRouteHeader_match                                               smithy.SchemaExtensions
+	e_HttpRouteHeaders                                                   smithy.SchemaExtensions
+	e_HttpRouteHeaders_member                                            smithy.SchemaExtensions
+	eHttpRouteMatch                                                      smithy.SchemaExtensions
+	eHttpRouteMatch_prefix                                               smithy.SchemaExtensions
+	eHttpRouteMatch_path                                                 smithy.SchemaExtensions
+	eHttpRouteMatch_queryParameters                                      smithy.SchemaExtensions
+	eHttpRouteMatch_method                                               smithy.SchemaExtensions
+	eHttpRouteMatch_scheme                                               smithy.SchemaExtensions
+	eHttpRouteMatch_headers                                              smithy.SchemaExtensions
+	eHttpRouteMatch_port                                                 smithy.SchemaExtensions
+	e_HttpScheme                                                         smithy.SchemaExtensions
+	eHttpTimeout                                                         smithy.SchemaExtensions
+	eHttpTimeout_perRequest                                              smithy.SchemaExtensions
+	eHttpTimeout_idle                                                    smithy.SchemaExtensions
+	eInternalServerErrorException                                        smithy.SchemaExtensions
+	eInternalServerErrorException_message                                smithy.SchemaExtensions
+	e_IpPreference                                                       smithy.SchemaExtensions
+	e_JsonFormat                                                         smithy.SchemaExtensions
+	e_JsonFormat_member                                                  smithy.SchemaExtensions
+	eJsonFormatRef                                                       smithy.SchemaExtensions
+	eJsonFormatRef_key                                                   smithy.SchemaExtensions
+	eJsonFormatRef_value                                                 smithy.SchemaExtensions
+	e_JsonKey                                                            smithy.SchemaExtensions
+	e_JsonValue                                                          smithy.SchemaExtensions
+	eLimitExceededException                                              smithy.SchemaExtensions
+	eLimitExceededException_message                                      smithy.SchemaExtensions
+	eListener                                                            smithy.SchemaExtensions
+	eListener_portMapping                                                smithy.SchemaExtensions
+	eListener_tls                                                        smithy.SchemaExtensions
+	eListener_healthCheck                                                smithy.SchemaExtensions
+	eListener_timeout                                                    smithy.SchemaExtensions
+	eListener_outlierDetection                                           smithy.SchemaExtensions
+	eListener_connectionPool                                             smithy.SchemaExtensions
+	e_ListenerPort                                                       smithy.SchemaExtensions
+	e_Listeners                                                          smithy.SchemaExtensions
+	e_Listeners_member                                                   smithy.SchemaExtensions
+	eListenerTimeout                                                     smithy.SchemaExtensions
+	eListenerTimeout_tcp                                                 smithy.SchemaExtensions
+	eListenerTimeout_http                                                smithy.SchemaExtensions
+	eListenerTimeout_http2                                               smithy.SchemaExtensions
+	eListenerTimeout_grpc                                                smithy.SchemaExtensions
+	eListenerTls                                                         smithy.SchemaExtensions
+	eListenerTls_mode                                                    smithy.SchemaExtensions
+	eListenerTls_certificate                                             smithy.SchemaExtensions
+	eListenerTls_validation                                              smithy.SchemaExtensions
+	eListenerTlsAcmCertificate                                           smithy.SchemaExtensions
+	eListenerTlsAcmCertificate_certificateArn                            smithy.SchemaExtensions
+	eListenerTlsCertificate                                              smithy.SchemaExtensions
+	eListenerTlsCertificate_acm                                          smithy.SchemaExtensions
+	eListenerTlsCertificate_file                                         smithy.SchemaExtensions
+	eListenerTlsCertificate_sds                                          smithy.SchemaExtensions
+	eListenerTlsFileCertificate                                          smithy.SchemaExtensions
+	eListenerTlsFileCertificate_certificateChain                         smithy.SchemaExtensions
+	eListenerTlsFileCertificate_privateKey                               smithy.SchemaExtensions
+	e_ListenerTlsMode                                                    smithy.SchemaExtensions
+	eListenerTlsSdsCertificate                                           smithy.SchemaExtensions
+	eListenerTlsSdsCertificate_secretName                                smithy.SchemaExtensions
+	eListenerTlsValidationContext                                        smithy.SchemaExtensions
+	eListenerTlsValidationContext_trust                                  smithy.SchemaExtensions
+	eListenerTlsValidationContext_subjectAlternativeNames                smithy.SchemaExtensions
+	eListenerTlsValidationContextTrust                                   smithy.SchemaExtensions
+	eListenerTlsValidationContextTrust_file                              smithy.SchemaExtensions
+	eListenerTlsValidationContextTrust_sds                               smithy.SchemaExtensions
+	e_ListGatewayRoutesLimit                                             smithy.SchemaExtensions
+	e_ListMeshesLimit                                                    smithy.SchemaExtensions
+	e_ListRoutesLimit                                                    smithy.SchemaExtensions
+	e_ListVirtualGatewaysLimit                                           smithy.SchemaExtensions
+	e_ListVirtualNodesLimit                                              smithy.SchemaExtensions
+	e_ListVirtualRoutersLimit                                            smithy.SchemaExtensions
+	e_ListVirtualServicesLimit                                           smithy.SchemaExtensions
+	eLogging                                                             smithy.SchemaExtensions
+	eLogging_accessLog                                                   smithy.SchemaExtensions
+	eLoggingFormat                                                       smithy.SchemaExtensions
+	eLoggingFormat_text                                                  smithy.SchemaExtensions
+	eLoggingFormat_json                                                  smithy.SchemaExtensions
+	eMatchRange                                                          smithy.SchemaExtensions
+	eMatchRange_start                                                    smithy.SchemaExtensions
+	eMatchRange_end                                                      smithy.SchemaExtensions
+	e_MaxConnections                                                     smithy.SchemaExtensions
+	e_MaxPendingRequests                                                 smithy.SchemaExtensions
+	e_MaxRequests                                                        smithy.SchemaExtensions
+	e_MaxRetries                                                         smithy.SchemaExtensions
+	eMeshData                                                            smithy.SchemaExtensions
+	eMeshData_meshName                                                   smithy.SchemaExtensions
+	eMeshData_spec                                                       smithy.SchemaExtensions
+	eMeshData_metadata                                                   smithy.SchemaExtensions
+	eMeshData_status                                                     smithy.SchemaExtensions
+	e_MeshList                                                           smithy.SchemaExtensions
+	e_MeshList_member                                                    smithy.SchemaExtensions
+	eMeshRef                                                             smithy.SchemaExtensions
+	eMeshRef_meshName                                                    smithy.SchemaExtensions
+	eMeshRef_meshOwner                                                   smithy.SchemaExtensions
+	eMeshRef_resourceOwner                                               smithy.SchemaExtensions
+	eMeshRef_arn                                                         smithy.SchemaExtensions
+	eMeshRef_version                                                     smithy.SchemaExtensions
+	eMeshRef_createdAt                                                   smithy.SchemaExtensions
+	eMeshRef_lastUpdatedAt                                               smithy.SchemaExtensions
+	eMeshServiceDiscovery                                                smithy.SchemaExtensions
+	eMeshServiceDiscovery_ipPreference                                   smithy.SchemaExtensions
+	eMeshSpec                                                            smithy.SchemaExtensions
+	eMeshSpec_egressFilter                                               smithy.SchemaExtensions
+	eMeshSpec_serviceDiscovery                                           smithy.SchemaExtensions
+	eMeshStatus                                                          smithy.SchemaExtensions
+	eMeshStatus_status                                                   smithy.SchemaExtensions
+	e_MeshStatusCode                                                     smithy.SchemaExtensions
+	e_MethodName                                                         smithy.SchemaExtensions
+	eNotFoundException                                                   smithy.SchemaExtensions
+	eNotFoundException_message                                           smithy.SchemaExtensions
+	eOutlierDetection                                                    smithy.SchemaExtensions
+	eOutlierDetection_maxServerErrors                                    smithy.SchemaExtensions
+	eOutlierDetection_interval                                           smithy.SchemaExtensions
+	eOutlierDetection_baseEjectionDuration                               smithy.SchemaExtensions
+	eOutlierDetection_maxEjectionPercent                                 smithy.SchemaExtensions
+	e_OutlierDetectionMaxEjectionPercent                                 smithy.SchemaExtensions
+	e_OutlierDetectionMaxServerErrors                                    smithy.SchemaExtensions
+	e_PercentInt                                                         smithy.SchemaExtensions
+	ePortMapping                                                         smithy.SchemaExtensions
+	ePortMapping_port                                                    smithy.SchemaExtensions
+	ePortMapping_protocol                                                smithy.SchemaExtensions
+	e_PortNumber                                                         smithy.SchemaExtensions
+	e_PortProtocol                                                       smithy.SchemaExtensions
+	e_PortSet                                                            smithy.SchemaExtensions
+	e_PortSet_member                                                     smithy.SchemaExtensions
+	eQueryParameterMatch                                                 smithy.SchemaExtensions
+	eQueryParameterMatch_exact                                           smithy.SchemaExtensions
+	e_QueryParameterName                                                 smithy.SchemaExtensions
+	eResourceInUseException                                              smithy.SchemaExtensions
+	eResourceInUseException_message                                      smithy.SchemaExtensions
+	eResourceMetadata                                                    smithy.SchemaExtensions
+	eResourceMetadata_arn                                                smithy.SchemaExtensions
+	eResourceMetadata_version                                            smithy.SchemaExtensions
+	eResourceMetadata_uid                                                smithy.SchemaExtensions
+	eResourceMetadata_createdAt                                          smithy.SchemaExtensions
+	eResourceMetadata_lastUpdatedAt                                      smithy.SchemaExtensions
+	eResourceMetadata_meshOwner                                          smithy.SchemaExtensions
+	eResourceMetadata_resourceOwner                                      smithy.SchemaExtensions
+	e_ResourceName                                                       smithy.SchemaExtensions
+	eRouteData                                                           smithy.SchemaExtensions
+	eRouteData_meshName                                                  smithy.SchemaExtensions
+	eRouteData_virtualRouterName                                         smithy.SchemaExtensions
+	eRouteData_routeName                                                 smithy.SchemaExtensions
+	eRouteData_spec                                                      smithy.SchemaExtensions
+	eRouteData_metadata                                                  smithy.SchemaExtensions
+	eRouteData_status                                                    smithy.SchemaExtensions
+	e_RouteList                                                          smithy.SchemaExtensions
+	e_RouteList_member                                                   smithy.SchemaExtensions
+	e_RoutePriority                                                      smithy.SchemaExtensions
+	eRouteRef                                                            smithy.SchemaExtensions
+	eRouteRef_meshName                                                   smithy.SchemaExtensions
+	eRouteRef_virtualRouterName                                          smithy.SchemaExtensions
+	eRouteRef_routeName                                                  smithy.SchemaExtensions
+	eRouteRef_meshOwner                                                  smithy.SchemaExtensions
+	eRouteRef_resourceOwner                                              smithy.SchemaExtensions
+	eRouteRef_arn                                                        smithy.SchemaExtensions
+	eRouteRef_version                                                    smithy.SchemaExtensions
+	eRouteRef_createdAt                                                  smithy.SchemaExtensions
+	eRouteRef_lastUpdatedAt                                              smithy.SchemaExtensions
+	eRouteSpec                                                           smithy.SchemaExtensions
+	eRouteSpec_priority                                                  smithy.SchemaExtensions
+	eRouteSpec_httpRoute                                                 smithy.SchemaExtensions
+	eRouteSpec_tcpRoute                                                  smithy.SchemaExtensions
+	eRouteSpec_http2Route                                                smithy.SchemaExtensions
+	eRouteSpec_grpcRoute                                                 smithy.SchemaExtensions
+	eRouteStatus                                                         smithy.SchemaExtensions
+	eRouteStatus_status                                                  smithy.SchemaExtensions
+	e_RouteStatusCode                                                    smithy.SchemaExtensions
+	e_SdsSecretName                                                      smithy.SchemaExtensions
+	eServiceDiscovery                                                    smithy.SchemaExtensions
+	eServiceDiscovery_dns                                                smithy.SchemaExtensions
+	eServiceDiscovery_awsCloudMap                                        smithy.SchemaExtensions
+	e_ServiceName                                                        smithy.SchemaExtensions
+	eServiceUnavailableException                                         smithy.SchemaExtensions
+	eServiceUnavailableException_message                                 smithy.SchemaExtensions
+	e_SubjectAlternativeName                                             smithy.SchemaExtensions
+	e_SubjectAlternativeNameList                                         smithy.SchemaExtensions
+	e_SubjectAlternativeNameList_member                                  smithy.SchemaExtensions
+	eSubjectAlternativeNameMatchers                                      smithy.SchemaExtensions
+	eSubjectAlternativeNameMatchers_exact                                smithy.SchemaExtensions
+	eSubjectAlternativeNames                                             smithy.SchemaExtensions
+	eSubjectAlternativeNames_match                                       smithy.SchemaExtensions
+	e_SuffixHostname                                                     smithy.SchemaExtensions
+	e_TagKey                                                             smithy.SchemaExtensions
+	e_TagKeyList                                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                                  smithy.SchemaExtensions
+	e_TagList                                                            smithy.SchemaExtensions
+	e_TagList_member                                                     smithy.SchemaExtensions
+	eTagRef                                                              smithy.SchemaExtensions
+	eTagRef_key                                                          smithy.SchemaExtensions
+	eTagRef_value                                                        smithy.SchemaExtensions
+	e_TagsLimit                                                          smithy.SchemaExtensions
+	e_TagValue                                                           smithy.SchemaExtensions
+	e_TcpRetryPolicyEvent                                                smithy.SchemaExtensions
+	e_TcpRetryPolicyEvents                                               smithy.SchemaExtensions
+	e_TcpRetryPolicyEvents_member                                        smithy.SchemaExtensions
+	eTcpRoute                                                            smithy.SchemaExtensions
+	eTcpRoute_action                                                     smithy.SchemaExtensions
+	eTcpRoute_timeout                                                    smithy.SchemaExtensions
+	eTcpRoute_match                                                      smithy.SchemaExtensions
+	eTcpRouteAction                                                      smithy.SchemaExtensions
+	eTcpRouteAction_weightedTargets                                      smithy.SchemaExtensions
+	eTcpRouteMatch                                                       smithy.SchemaExtensions
+	eTcpRouteMatch_port                                                  smithy.SchemaExtensions
+	eTcpTimeout                                                          smithy.SchemaExtensions
+	eTcpTimeout_idle                                                     smithy.SchemaExtensions
+	e_TextFormat                                                         smithy.SchemaExtensions
+	eTlsValidationContext                                                smithy.SchemaExtensions
+	eTlsValidationContext_trust                                          smithy.SchemaExtensions
+	eTlsValidationContext_subjectAlternativeNames                        smithy.SchemaExtensions
+	eTlsValidationContextAcmTrust                                        smithy.SchemaExtensions
+	eTlsValidationContextAcmTrust_certificateAuthorityArns               smithy.SchemaExtensions
+	eTlsValidationContextFileTrust                                       smithy.SchemaExtensions
+	eTlsValidationContextFileTrust_certificateChain                      smithy.SchemaExtensions
+	eTlsValidationContextSdsTrust                                        smithy.SchemaExtensions
+	eTlsValidationContextSdsTrust_secretName                             smithy.SchemaExtensions
+	eTlsValidationContextTrust                                           smithy.SchemaExtensions
+	eTlsValidationContextTrust_acm                                       smithy.SchemaExtensions
+	eTlsValidationContextTrust_file                                      smithy.SchemaExtensions
+	eTlsValidationContextTrust_sds                                       smithy.SchemaExtensions
+	eTooManyRequestsException                                            smithy.SchemaExtensions
+	eTooManyRequestsException_message                                    smithy.SchemaExtensions
+	eTooManyTagsException                                                smithy.SchemaExtensions
+	eTooManyTagsException_message                                        smithy.SchemaExtensions
+	eVirtualGatewayAccessLog                                             smithy.SchemaExtensions
+	eVirtualGatewayAccessLog_file                                        smithy.SchemaExtensions
+	eVirtualGatewayBackendDefaults                                       smithy.SchemaExtensions
+	eVirtualGatewayBackendDefaults_clientPolicy                          smithy.SchemaExtensions
+	e_VirtualGatewayCertificateAuthorityArns                             smithy.SchemaExtensions
+	e_VirtualGatewayCertificateAuthorityArns_member                      smithy.SchemaExtensions
+	eVirtualGatewayClientPolicy                                          smithy.SchemaExtensions
+	eVirtualGatewayClientPolicy_tls                                      smithy.SchemaExtensions
+	eVirtualGatewayClientPolicyTls                                       smithy.SchemaExtensions
+	eVirtualGatewayClientPolicyTls_enforce                               smithy.SchemaExtensions
+	eVirtualGatewayClientPolicyTls_ports                                 smithy.SchemaExtensions
+	eVirtualGatewayClientPolicyTls_certificate                           smithy.SchemaExtensions
+	eVirtualGatewayClientPolicyTls_validation                            smithy.SchemaExtensions
+	eVirtualGatewayClientTlsCertificate                                  smithy.SchemaExtensions
+	eVirtualGatewayClientTlsCertificate_file                             smithy.SchemaExtensions
+	eVirtualGatewayClientTlsCertificate_sds                              smithy.SchemaExtensions
+	eVirtualGatewayConnectionPool                                        smithy.SchemaExtensions
+	eVirtualGatewayConnectionPool_http                                   smithy.SchemaExtensions
+	eVirtualGatewayConnectionPool_http2                                  smithy.SchemaExtensions
+	eVirtualGatewayConnectionPool_grpc                                   smithy.SchemaExtensions
+	eVirtualGatewayData                                                  smithy.SchemaExtensions
+	eVirtualGatewayData_meshName                                         smithy.SchemaExtensions
+	eVirtualGatewayData_virtualGatewayName                               smithy.SchemaExtensions
+	eVirtualGatewayData_spec                                             smithy.SchemaExtensions
+	eVirtualGatewayData_metadata                                         smithy.SchemaExtensions
+	eVirtualGatewayData_status                                           smithy.SchemaExtensions
+	eVirtualGatewayFileAccessLog                                         smithy.SchemaExtensions
+	eVirtualGatewayFileAccessLog_path                                    smithy.SchemaExtensions
+	eVirtualGatewayFileAccessLog_format                                  smithy.SchemaExtensions
+	eVirtualGatewayGrpcConnectionPool                                    smithy.SchemaExtensions
+	eVirtualGatewayGrpcConnectionPool_maxRequests                        smithy.SchemaExtensions
+	e_VirtualGatewayHealthCheckIntervalMillis                            smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy                                     smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy_timeoutMillis                       smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy_intervalMillis                      smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy_protocol                            smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy_port                                smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy_path                                smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy_healthyThreshold                    smithy.SchemaExtensions
+	eVirtualGatewayHealthCheckPolicy_unhealthyThreshold                  smithy.SchemaExtensions
+	e_VirtualGatewayHealthCheckThreshold                                 smithy.SchemaExtensions
+	e_VirtualGatewayHealthCheckTimeoutMillis                             smithy.SchemaExtensions
+	eVirtualGatewayHttp2ConnectionPool                                   smithy.SchemaExtensions
+	eVirtualGatewayHttp2ConnectionPool_maxRequests                       smithy.SchemaExtensions
+	eVirtualGatewayHttpConnectionPool                                    smithy.SchemaExtensions
+	eVirtualGatewayHttpConnectionPool_maxConnections                     smithy.SchemaExtensions
+	eVirtualGatewayHttpConnectionPool_maxPendingRequests                 smithy.SchemaExtensions
+	e_VirtualGatewayList                                                 smithy.SchemaExtensions
+	e_VirtualGatewayList_member                                          smithy.SchemaExtensions
+	eVirtualGatewayListener                                              smithy.SchemaExtensions
+	eVirtualGatewayListener_healthCheck                                  smithy.SchemaExtensions
+	eVirtualGatewayListener_portMapping                                  smithy.SchemaExtensions
+	eVirtualGatewayListener_tls                                          smithy.SchemaExtensions
+	eVirtualGatewayListener_connectionPool                               smithy.SchemaExtensions
+	e_VirtualGatewayListeners                                            smithy.SchemaExtensions
+	e_VirtualGatewayListeners_member                                     smithy.SchemaExtensions
+	eVirtualGatewayListenerTls                                           smithy.SchemaExtensions
+	eVirtualGatewayListenerTls_mode                                      smithy.SchemaExtensions
+	eVirtualGatewayListenerTls_validation                                smithy.SchemaExtensions
+	eVirtualGatewayListenerTls_certificate                               smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsAcmCertificate                             smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsAcmCertificate_certificateArn              smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsCertificate                                smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsCertificate_acm                            smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsCertificate_file                           smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsCertificate_sds                            smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsFileCertificate                            smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsFileCertificate_certificateChain           smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsFileCertificate_privateKey                 smithy.SchemaExtensions
+	e_VirtualGatewayListenerTlsMode                                      smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsSdsCertificate                             smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsSdsCertificate_secretName                  smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsValidationContext                          smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsValidationContext_trust                    smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsValidationContext_subjectAlternativeNames  smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsValidationContextTrust                     smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsValidationContextTrust_file                smithy.SchemaExtensions
+	eVirtualGatewayListenerTlsValidationContextTrust_sds                 smithy.SchemaExtensions
+	eVirtualGatewayLogging                                               smithy.SchemaExtensions
+	eVirtualGatewayLogging_accessLog                                     smithy.SchemaExtensions
+	eVirtualGatewayPortMapping                                           smithy.SchemaExtensions
+	eVirtualGatewayPortMapping_port                                      smithy.SchemaExtensions
+	eVirtualGatewayPortMapping_protocol                                  smithy.SchemaExtensions
+	e_VirtualGatewayPortProtocol                                         smithy.SchemaExtensions
+	eVirtualGatewayRef                                                   smithy.SchemaExtensions
+	eVirtualGatewayRef_meshName                                          smithy.SchemaExtensions
+	eVirtualGatewayRef_virtualGatewayName                                smithy.SchemaExtensions
+	eVirtualGatewayRef_meshOwner                                         smithy.SchemaExtensions
+	eVirtualGatewayRef_resourceOwner                                     smithy.SchemaExtensions
+	eVirtualGatewayRef_arn                                               smithy.SchemaExtensions
+	eVirtualGatewayRef_version                                           smithy.SchemaExtensions
+	eVirtualGatewayRef_createdAt                                         smithy.SchemaExtensions
+	eVirtualGatewayRef_lastUpdatedAt                                     smithy.SchemaExtensions
+	e_VirtualGatewaySdsSecretName                                        smithy.SchemaExtensions
+	eVirtualGatewaySpec                                                  smithy.SchemaExtensions
+	eVirtualGatewaySpec_backendDefaults                                  smithy.SchemaExtensions
+	eVirtualGatewaySpec_listeners                                        smithy.SchemaExtensions
+	eVirtualGatewaySpec_logging                                          smithy.SchemaExtensions
+	eVirtualGatewayStatus                                                smithy.SchemaExtensions
+	eVirtualGatewayStatus_status                                         smithy.SchemaExtensions
+	e_VirtualGatewayStatusCode                                           smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContext                                  smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContext_trust                            smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContext_subjectAlternativeNames          smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextAcmTrust                          smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextFileTrust                         smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextFileTrust_certificateChain        smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextSdsTrust                          smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextSdsTrust_secretName               smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextTrust                             smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextTrust_acm                         smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextTrust_file                        smithy.SchemaExtensions
+	eVirtualGatewayTlsValidationContextTrust_sds                         smithy.SchemaExtensions
+	eVirtualNodeConnectionPool                                           smithy.SchemaExtensions
+	eVirtualNodeConnectionPool_tcp                                       smithy.SchemaExtensions
+	eVirtualNodeConnectionPool_http                                      smithy.SchemaExtensions
+	eVirtualNodeConnectionPool_http2                                     smithy.SchemaExtensions
+	eVirtualNodeConnectionPool_grpc                                      smithy.SchemaExtensions
+	eVirtualNodeData                                                     smithy.SchemaExtensions
+	eVirtualNodeData_meshName                                            smithy.SchemaExtensions
+	eVirtualNodeData_virtualNodeName                                     smithy.SchemaExtensions
+	eVirtualNodeData_spec                                                smithy.SchemaExtensions
+	eVirtualNodeData_metadata                                            smithy.SchemaExtensions
+	eVirtualNodeData_status                                              smithy.SchemaExtensions
+	eVirtualNodeGrpcConnectionPool                                       smithy.SchemaExtensions
+	eVirtualNodeGrpcConnectionPool_maxRequests                           smithy.SchemaExtensions
+	eVirtualNodeHttp2ConnectionPool                                      smithy.SchemaExtensions
+	eVirtualNodeHttp2ConnectionPool_maxRequests                          smithy.SchemaExtensions
+	eVirtualNodeHttpConnectionPool                                       smithy.SchemaExtensions
+	eVirtualNodeHttpConnectionPool_maxConnections                        smithy.SchemaExtensions
+	eVirtualNodeHttpConnectionPool_maxPendingRequests                    smithy.SchemaExtensions
+	e_VirtualNodeList                                                    smithy.SchemaExtensions
+	e_VirtualNodeList_member                                             smithy.SchemaExtensions
+	eVirtualNodeRef                                                      smithy.SchemaExtensions
+	eVirtualNodeRef_meshName                                             smithy.SchemaExtensions
+	eVirtualNodeRef_virtualNodeName                                      smithy.SchemaExtensions
+	eVirtualNodeRef_meshOwner                                            smithy.SchemaExtensions
+	eVirtualNodeRef_resourceOwner                                        smithy.SchemaExtensions
+	eVirtualNodeRef_arn                                                  smithy.SchemaExtensions
+	eVirtualNodeRef_version                                              smithy.SchemaExtensions
+	eVirtualNodeRef_createdAt                                            smithy.SchemaExtensions
+	eVirtualNodeRef_lastUpdatedAt                                        smithy.SchemaExtensions
+	eVirtualNodeServiceProvider                                          smithy.SchemaExtensions
+	eVirtualNodeServiceProvider_virtualNodeName                          smithy.SchemaExtensions
+	eVirtualNodeSpec                                                     smithy.SchemaExtensions
+	eVirtualNodeSpec_serviceDiscovery                                    smithy.SchemaExtensions
+	eVirtualNodeSpec_listeners                                           smithy.SchemaExtensions
+	eVirtualNodeSpec_backends                                            smithy.SchemaExtensions
+	eVirtualNodeSpec_backendDefaults                                     smithy.SchemaExtensions
+	eVirtualNodeSpec_logging                                             smithy.SchemaExtensions
+	eVirtualNodeStatus                                                   smithy.SchemaExtensions
+	eVirtualNodeStatus_status                                            smithy.SchemaExtensions
+	e_VirtualNodeStatusCode                                              smithy.SchemaExtensions
+	eVirtualNodeTcpConnectionPool                                        smithy.SchemaExtensions
+	eVirtualNodeTcpConnectionPool_maxConnections                         smithy.SchemaExtensions
+	eVirtualRouterData                                                   smithy.SchemaExtensions
+	eVirtualRouterData_meshName                                          smithy.SchemaExtensions
+	eVirtualRouterData_virtualRouterName                                 smithy.SchemaExtensions
+	eVirtualRouterData_spec                                              smithy.SchemaExtensions
+	eVirtualRouterData_metadata                                          smithy.SchemaExtensions
+	eVirtualRouterData_status                                            smithy.SchemaExtensions
+	e_VirtualRouterList                                                  smithy.SchemaExtensions
+	e_VirtualRouterList_member                                           smithy.SchemaExtensions
+	eVirtualRouterListener                                               smithy.SchemaExtensions
+	eVirtualRouterListener_portMapping                                   smithy.SchemaExtensions
+	e_VirtualRouterListeners                                             smithy.SchemaExtensions
+	e_VirtualRouterListeners_member                                      smithy.SchemaExtensions
+	eVirtualRouterRef                                                    smithy.SchemaExtensions
+	eVirtualRouterRef_meshName                                           smithy.SchemaExtensions
+	eVirtualRouterRef_virtualRouterName                                  smithy.SchemaExtensions
+	eVirtualRouterRef_meshOwner                                          smithy.SchemaExtensions
+	eVirtualRouterRef_resourceOwner                                      smithy.SchemaExtensions
+	eVirtualRouterRef_arn                                                smithy.SchemaExtensions
+	eVirtualRouterRef_version                                            smithy.SchemaExtensions
+	eVirtualRouterRef_createdAt                                          smithy.SchemaExtensions
+	eVirtualRouterRef_lastUpdatedAt                                      smithy.SchemaExtensions
+	eVirtualRouterServiceProvider                                        smithy.SchemaExtensions
+	eVirtualRouterServiceProvider_virtualRouterName                      smithy.SchemaExtensions
+	eVirtualRouterSpec                                                   smithy.SchemaExtensions
+	eVirtualRouterSpec_listeners                                         smithy.SchemaExtensions
+	eVirtualRouterStatus                                                 smithy.SchemaExtensions
+	eVirtualRouterStatus_status                                          smithy.SchemaExtensions
+	e_VirtualRouterStatusCode                                            smithy.SchemaExtensions
+	eVirtualServiceBackend                                               smithy.SchemaExtensions
+	eVirtualServiceBackend_virtualServiceName                            smithy.SchemaExtensions
+	eVirtualServiceBackend_clientPolicy                                  smithy.SchemaExtensions
+	eVirtualServiceData                                                  smithy.SchemaExtensions
+	eVirtualServiceData_meshName                                         smithy.SchemaExtensions
+	eVirtualServiceData_virtualServiceName                               smithy.SchemaExtensions
+	eVirtualServiceData_spec                                             smithy.SchemaExtensions
+	eVirtualServiceData_metadata                                         smithy.SchemaExtensions
+	eVirtualServiceData_status                                           smithy.SchemaExtensions
+	e_VirtualServiceList                                                 smithy.SchemaExtensions
+	e_VirtualServiceList_member                                          smithy.SchemaExtensions
+	eVirtualServiceProvider                                              smithy.SchemaExtensions
+	eVirtualServiceProvider_virtualNode                                  smithy.SchemaExtensions
+	eVirtualServiceProvider_virtualRouter                                smithy.SchemaExtensions
+	eVirtualServiceRef                                                   smithy.SchemaExtensions
+	eVirtualServiceRef_meshName                                          smithy.SchemaExtensions
+	eVirtualServiceRef_virtualServiceName                                smithy.SchemaExtensions
+	eVirtualServiceRef_meshOwner                                         smithy.SchemaExtensions
+	eVirtualServiceRef_resourceOwner                                     smithy.SchemaExtensions
+	eVirtualServiceRef_arn                                               smithy.SchemaExtensions
+	eVirtualServiceRef_version                                           smithy.SchemaExtensions
+	eVirtualServiceRef_createdAt                                         smithy.SchemaExtensions
+	eVirtualServiceRef_lastUpdatedAt                                     smithy.SchemaExtensions
+	eVirtualServiceSpec                                                  smithy.SchemaExtensions
+	eVirtualServiceSpec_provider                                         smithy.SchemaExtensions
+	eVirtualServiceStatus                                                smithy.SchemaExtensions
+	eVirtualServiceStatus_status                                         smithy.SchemaExtensions
+	e_VirtualServiceStatusCode                                           smithy.SchemaExtensions
+	eWeightedTarget                                                      smithy.SchemaExtensions
+	eWeightedTarget_virtualNode                                          smithy.SchemaExtensions
+	eWeightedTarget_weight                                               smithy.SchemaExtensions
+	eWeightedTarget_port                                                 smithy.SchemaExtensions
+	e_WeightedTargets                                                    smithy.SchemaExtensions
+	e_WeightedTargets_member                                             smithy.SchemaExtensions
+	eCreateGatewayRouteInput                                             smithy.SchemaExtensions
+	eCreateGatewayRouteInput_gatewayRouteName                            smithy.SchemaExtensions
+	eCreateGatewayRouteInput_meshName                                    smithy.SchemaExtensions
+	eCreateGatewayRouteInput_virtualGatewayName                          smithy.SchemaExtensions
+	eCreateGatewayRouteInput_spec                                        smithy.SchemaExtensions
+	eCreateGatewayRouteInput_tags                                        smithy.SchemaExtensions
+	eCreateGatewayRouteInput_clientToken                                 smithy.SchemaExtensions
+	eCreateGatewayRouteInput_meshOwner                                   smithy.SchemaExtensions
+	eCreateGatewayRouteOutput                                            smithy.SchemaExtensions
+	eCreateGatewayRouteOutput_gatewayRoute                               smithy.SchemaExtensions
+	eCreateMeshInput                                                     smithy.SchemaExtensions
+	eCreateMeshInput_meshName                                            smithy.SchemaExtensions
+	eCreateMeshInput_spec                                                smithy.SchemaExtensions
+	eCreateMeshInput_tags                                                smithy.SchemaExtensions
+	eCreateMeshInput_clientToken                                         smithy.SchemaExtensions
+	eCreateMeshOutput                                                    smithy.SchemaExtensions
+	eCreateMeshOutput_mesh                                               smithy.SchemaExtensions
+	eCreateRouteInput                                                    smithy.SchemaExtensions
+	eCreateRouteInput_routeName                                          smithy.SchemaExtensions
+	eCreateRouteInput_meshName                                           smithy.SchemaExtensions
+	eCreateRouteInput_virtualRouterName                                  smithy.SchemaExtensions
+	eCreateRouteInput_spec                                               smithy.SchemaExtensions
+	eCreateRouteInput_tags                                               smithy.SchemaExtensions
+	eCreateRouteInput_clientToken                                        smithy.SchemaExtensions
+	eCreateRouteInput_meshOwner                                          smithy.SchemaExtensions
+	eCreateRouteOutput                                                   smithy.SchemaExtensions
+	eCreateRouteOutput_route                                             smithy.SchemaExtensions
+	eCreateVirtualGatewayInput                                           smithy.SchemaExtensions
+	eCreateVirtualGatewayInput_virtualGatewayName                        smithy.SchemaExtensions
+	eCreateVirtualGatewayInput_meshName                                  smithy.SchemaExtensions
+	eCreateVirtualGatewayInput_spec                                      smithy.SchemaExtensions
+	eCreateVirtualGatewayInput_tags                                      smithy.SchemaExtensions
+	eCreateVirtualGatewayInput_clientToken                               smithy.SchemaExtensions
+	eCreateVirtualGatewayInput_meshOwner                                 smithy.SchemaExtensions
+	eCreateVirtualGatewayOutput                                          smithy.SchemaExtensions
+	eCreateVirtualGatewayOutput_virtualGateway                           smithy.SchemaExtensions
+	eCreateVirtualNodeInput                                              smithy.SchemaExtensions
+	eCreateVirtualNodeInput_virtualNodeName                              smithy.SchemaExtensions
+	eCreateVirtualNodeInput_meshName                                     smithy.SchemaExtensions
+	eCreateVirtualNodeInput_spec                                         smithy.SchemaExtensions
+	eCreateVirtualNodeInput_tags                                         smithy.SchemaExtensions
+	eCreateVirtualNodeInput_clientToken                                  smithy.SchemaExtensions
+	eCreateVirtualNodeInput_meshOwner                                    smithy.SchemaExtensions
+	eCreateVirtualNodeOutput                                             smithy.SchemaExtensions
+	eCreateVirtualNodeOutput_virtualNode                                 smithy.SchemaExtensions
+	eCreateVirtualRouterInput                                            smithy.SchemaExtensions
+	eCreateVirtualRouterInput_virtualRouterName                          smithy.SchemaExtensions
+	eCreateVirtualRouterInput_meshName                                   smithy.SchemaExtensions
+	eCreateVirtualRouterInput_spec                                       smithy.SchemaExtensions
+	eCreateVirtualRouterInput_tags                                       smithy.SchemaExtensions
+	eCreateVirtualRouterInput_clientToken                                smithy.SchemaExtensions
+	eCreateVirtualRouterInput_meshOwner                                  smithy.SchemaExtensions
+	eCreateVirtualRouterOutput                                           smithy.SchemaExtensions
+	eCreateVirtualRouterOutput_virtualRouter                             smithy.SchemaExtensions
+	eCreateVirtualServiceInput                                           smithy.SchemaExtensions
+	eCreateVirtualServiceInput_virtualServiceName                        smithy.SchemaExtensions
+	eCreateVirtualServiceInput_meshName                                  smithy.SchemaExtensions
+	eCreateVirtualServiceInput_spec                                      smithy.SchemaExtensions
+	eCreateVirtualServiceInput_tags                                      smithy.SchemaExtensions
+	eCreateVirtualServiceInput_clientToken                               smithy.SchemaExtensions
+	eCreateVirtualServiceInput_meshOwner                                 smithy.SchemaExtensions
+	eCreateVirtualServiceOutput                                          smithy.SchemaExtensions
+	eCreateVirtualServiceOutput_virtualService                           smithy.SchemaExtensions
+	eDeleteGatewayRouteInput                                             smithy.SchemaExtensions
+	eDeleteGatewayRouteInput_gatewayRouteName                            smithy.SchemaExtensions
+	eDeleteGatewayRouteInput_meshName                                    smithy.SchemaExtensions
+	eDeleteGatewayRouteInput_virtualGatewayName                          smithy.SchemaExtensions
+	eDeleteGatewayRouteInput_meshOwner                                   smithy.SchemaExtensions
+	eDeleteGatewayRouteOutput                                            smithy.SchemaExtensions
+	eDeleteGatewayRouteOutput_gatewayRoute                               smithy.SchemaExtensions
+	eDeleteMeshInput                                                     smithy.SchemaExtensions
+	eDeleteMeshInput_meshName                                            smithy.SchemaExtensions
+	eDeleteMeshOutput                                                    smithy.SchemaExtensions
+	eDeleteMeshOutput_mesh                                               smithy.SchemaExtensions
+	eDeleteRouteInput                                                    smithy.SchemaExtensions
+	eDeleteRouteInput_routeName                                          smithy.SchemaExtensions
+	eDeleteRouteInput_meshName                                           smithy.SchemaExtensions
+	eDeleteRouteInput_virtualRouterName                                  smithy.SchemaExtensions
+	eDeleteRouteInput_meshOwner                                          smithy.SchemaExtensions
+	eDeleteRouteOutput                                                   smithy.SchemaExtensions
+	eDeleteRouteOutput_route                                             smithy.SchemaExtensions
+	eDeleteVirtualGatewayInput                                           smithy.SchemaExtensions
+	eDeleteVirtualGatewayInput_virtualGatewayName                        smithy.SchemaExtensions
+	eDeleteVirtualGatewayInput_meshName                                  smithy.SchemaExtensions
+	eDeleteVirtualGatewayInput_meshOwner                                 smithy.SchemaExtensions
+	eDeleteVirtualGatewayOutput                                          smithy.SchemaExtensions
+	eDeleteVirtualGatewayOutput_virtualGateway                           smithy.SchemaExtensions
+	eDeleteVirtualNodeInput                                              smithy.SchemaExtensions
+	eDeleteVirtualNodeInput_virtualNodeName                              smithy.SchemaExtensions
+	eDeleteVirtualNodeInput_meshName                                     smithy.SchemaExtensions
+	eDeleteVirtualNodeInput_meshOwner                                    smithy.SchemaExtensions
+	eDeleteVirtualNodeOutput                                             smithy.SchemaExtensions
+	eDeleteVirtualNodeOutput_virtualNode                                 smithy.SchemaExtensions
+	eDeleteVirtualRouterInput                                            smithy.SchemaExtensions
+	eDeleteVirtualRouterInput_virtualRouterName                          smithy.SchemaExtensions
+	eDeleteVirtualRouterInput_meshName                                   smithy.SchemaExtensions
+	eDeleteVirtualRouterInput_meshOwner                                  smithy.SchemaExtensions
+	eDeleteVirtualRouterOutput                                           smithy.SchemaExtensions
+	eDeleteVirtualRouterOutput_virtualRouter                             smithy.SchemaExtensions
+	eDeleteVirtualServiceInput                                           smithy.SchemaExtensions
+	eDeleteVirtualServiceInput_virtualServiceName                        smithy.SchemaExtensions
+	eDeleteVirtualServiceInput_meshName                                  smithy.SchemaExtensions
+	eDeleteVirtualServiceInput_meshOwner                                 smithy.SchemaExtensions
+	eDeleteVirtualServiceOutput                                          smithy.SchemaExtensions
+	eDeleteVirtualServiceOutput_virtualService                           smithy.SchemaExtensions
+	eDescribeGatewayRouteInput                                           smithy.SchemaExtensions
+	eDescribeGatewayRouteInput_gatewayRouteName                          smithy.SchemaExtensions
+	eDescribeGatewayRouteInput_meshName                                  smithy.SchemaExtensions
+	eDescribeGatewayRouteInput_virtualGatewayName                        smithy.SchemaExtensions
+	eDescribeGatewayRouteInput_meshOwner                                 smithy.SchemaExtensions
+	eDescribeGatewayRouteOutput                                          smithy.SchemaExtensions
+	eDescribeGatewayRouteOutput_gatewayRoute                             smithy.SchemaExtensions
+	eDescribeMeshInput                                                   smithy.SchemaExtensions
+	eDescribeMeshInput_meshName                                          smithy.SchemaExtensions
+	eDescribeMeshInput_meshOwner                                         smithy.SchemaExtensions
+	eDescribeMeshOutput                                                  smithy.SchemaExtensions
+	eDescribeMeshOutput_mesh                                             smithy.SchemaExtensions
+	eDescribeRouteInput                                                  smithy.SchemaExtensions
+	eDescribeRouteInput_routeName                                        smithy.SchemaExtensions
+	eDescribeRouteInput_meshName                                         smithy.SchemaExtensions
+	eDescribeRouteInput_meshOwner                                        smithy.SchemaExtensions
+	eDescribeRouteInput_virtualRouterName                                smithy.SchemaExtensions
+	eDescribeRouteOutput                                                 smithy.SchemaExtensions
+	eDescribeRouteOutput_route                                           smithy.SchemaExtensions
+	eDescribeVirtualGatewayInput                                         smithy.SchemaExtensions
+	eDescribeVirtualGatewayInput_virtualGatewayName                      smithy.SchemaExtensions
+	eDescribeVirtualGatewayInput_meshName                                smithy.SchemaExtensions
+	eDescribeVirtualGatewayInput_meshOwner                               smithy.SchemaExtensions
+	eDescribeVirtualGatewayOutput                                        smithy.SchemaExtensions
+	eDescribeVirtualGatewayOutput_virtualGateway                         smithy.SchemaExtensions
+	eDescribeVirtualNodeInput                                            smithy.SchemaExtensions
+	eDescribeVirtualNodeInput_virtualNodeName                            smithy.SchemaExtensions
+	eDescribeVirtualNodeInput_meshName                                   smithy.SchemaExtensions
+	eDescribeVirtualNodeInput_meshOwner                                  smithy.SchemaExtensions
+	eDescribeVirtualNodeOutput                                           smithy.SchemaExtensions
+	eDescribeVirtualNodeOutput_virtualNode                               smithy.SchemaExtensions
+	eDescribeVirtualRouterInput                                          smithy.SchemaExtensions
+	eDescribeVirtualRouterInput_virtualRouterName                        smithy.SchemaExtensions
+	eDescribeVirtualRouterInput_meshName                                 smithy.SchemaExtensions
+	eDescribeVirtualRouterInput_meshOwner                                smithy.SchemaExtensions
+	eDescribeVirtualRouterOutput                                         smithy.SchemaExtensions
+	eDescribeVirtualRouterOutput_virtualRouter                           smithy.SchemaExtensions
+	eDescribeVirtualServiceInput                                         smithy.SchemaExtensions
+	eDescribeVirtualServiceInput_virtualServiceName                      smithy.SchemaExtensions
+	eDescribeVirtualServiceInput_meshName                                smithy.SchemaExtensions
+	eDescribeVirtualServiceInput_meshOwner                               smithy.SchemaExtensions
+	eDescribeVirtualServiceOutput                                        smithy.SchemaExtensions
+	eDescribeVirtualServiceOutput_virtualService                         smithy.SchemaExtensions
+	eListGatewayRoutesInput                                              smithy.SchemaExtensions
+	eListGatewayRoutesInput_meshName                                     smithy.SchemaExtensions
+	eListGatewayRoutesInput_virtualGatewayName                           smithy.SchemaExtensions
+	eListGatewayRoutesInput_nextToken                                    smithy.SchemaExtensions
+	eListGatewayRoutesInput_limit                                        smithy.SchemaExtensions
+	eListGatewayRoutesInput_meshOwner                                    smithy.SchemaExtensions
+	eListGatewayRoutesOutput                                             smithy.SchemaExtensions
+	eListGatewayRoutesOutput_gatewayRoutes                               smithy.SchemaExtensions
+	eListGatewayRoutesOutput_nextToken                                   smithy.SchemaExtensions
+	eListMeshesInput                                                     smithy.SchemaExtensions
+	eListMeshesInput_nextToken                                           smithy.SchemaExtensions
+	eListMeshesInput_limit                                               smithy.SchemaExtensions
+	eListMeshesOutput                                                    smithy.SchemaExtensions
+	eListMeshesOutput_meshes                                             smithy.SchemaExtensions
+	eListMeshesOutput_nextToken                                          smithy.SchemaExtensions
+	eListRoutesInput                                                     smithy.SchemaExtensions
+	eListRoutesInput_meshName                                            smithy.SchemaExtensions
+	eListRoutesInput_virtualRouterName                                   smithy.SchemaExtensions
+	eListRoutesInput_nextToken                                           smithy.SchemaExtensions
+	eListRoutesInput_limit                                               smithy.SchemaExtensions
+	eListRoutesInput_meshOwner                                           smithy.SchemaExtensions
+	eListRoutesOutput                                                    smithy.SchemaExtensions
+	eListRoutesOutput_routes                                             smithy.SchemaExtensions
+	eListRoutesOutput_nextToken                                          smithy.SchemaExtensions
+	eListTagsForResourceInput                                            smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                                smithy.SchemaExtensions
+	eListTagsForResourceInput_nextToken                                  smithy.SchemaExtensions
+	eListTagsForResourceInput_limit                                      smithy.SchemaExtensions
+	eListTagsForResourceOutput                                           smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                      smithy.SchemaExtensions
+	eListTagsForResourceOutput_nextToken                                 smithy.SchemaExtensions
+	eListVirtualGatewaysInput                                            smithy.SchemaExtensions
+	eListVirtualGatewaysInput_meshName                                   smithy.SchemaExtensions
+	eListVirtualGatewaysInput_nextToken                                  smithy.SchemaExtensions
+	eListVirtualGatewaysInput_limit                                      smithy.SchemaExtensions
+	eListVirtualGatewaysInput_meshOwner                                  smithy.SchemaExtensions
+	eListVirtualGatewaysOutput                                           smithy.SchemaExtensions
+	eListVirtualGatewaysOutput_virtualGateways                           smithy.SchemaExtensions
+	eListVirtualGatewaysOutput_nextToken                                 smithy.SchemaExtensions
+	eListVirtualNodesInput                                               smithy.SchemaExtensions
+	eListVirtualNodesInput_meshName                                      smithy.SchemaExtensions
+	eListVirtualNodesInput_nextToken                                     smithy.SchemaExtensions
+	eListVirtualNodesInput_limit                                         smithy.SchemaExtensions
+	eListVirtualNodesInput_meshOwner                                     smithy.SchemaExtensions
+	eListVirtualNodesOutput                                              smithy.SchemaExtensions
+	eListVirtualNodesOutput_virtualNodes                                 smithy.SchemaExtensions
+	eListVirtualNodesOutput_nextToken                                    smithy.SchemaExtensions
+	eListVirtualRoutersInput                                             smithy.SchemaExtensions
+	eListVirtualRoutersInput_meshName                                    smithy.SchemaExtensions
+	eListVirtualRoutersInput_nextToken                                   smithy.SchemaExtensions
+	eListVirtualRoutersInput_limit                                       smithy.SchemaExtensions
+	eListVirtualRoutersInput_meshOwner                                   smithy.SchemaExtensions
+	eListVirtualRoutersOutput                                            smithy.SchemaExtensions
+	eListVirtualRoutersOutput_virtualRouters                             smithy.SchemaExtensions
+	eListVirtualRoutersOutput_nextToken                                  smithy.SchemaExtensions
+	eListVirtualServicesInput                                            smithy.SchemaExtensions
+	eListVirtualServicesInput_meshName                                   smithy.SchemaExtensions
+	eListVirtualServicesInput_nextToken                                  smithy.SchemaExtensions
+	eListVirtualServicesInput_limit                                      smithy.SchemaExtensions
+	eListVirtualServicesInput_meshOwner                                  smithy.SchemaExtensions
+	eListVirtualServicesOutput                                           smithy.SchemaExtensions
+	eListVirtualServicesOutput_virtualServices                           smithy.SchemaExtensions
+	eListVirtualServicesOutput_nextToken                                 smithy.SchemaExtensions
+	eTagResourceInput                                                    smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                        smithy.SchemaExtensions
+	eTagResourceInput_tags                                               smithy.SchemaExtensions
+	eTagResourceOutput                                                   smithy.SchemaExtensions
+	eUntagResourceInput                                                  smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                      smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                          smithy.SchemaExtensions
+	eUntagResourceOutput                                                 smithy.SchemaExtensions
+	eUpdateGatewayRouteInput                                             smithy.SchemaExtensions
+	eUpdateGatewayRouteInput_gatewayRouteName                            smithy.SchemaExtensions
+	eUpdateGatewayRouteInput_meshName                                    smithy.SchemaExtensions
+	eUpdateGatewayRouteInput_virtualGatewayName                          smithy.SchemaExtensions
+	eUpdateGatewayRouteInput_spec                                        smithy.SchemaExtensions
+	eUpdateGatewayRouteInput_clientToken                                 smithy.SchemaExtensions
+	eUpdateGatewayRouteInput_meshOwner                                   smithy.SchemaExtensions
+	eUpdateGatewayRouteOutput                                            smithy.SchemaExtensions
+	eUpdateGatewayRouteOutput_gatewayRoute                               smithy.SchemaExtensions
+	eUpdateMeshInput                                                     smithy.SchemaExtensions
+	eUpdateMeshInput_meshName                                            smithy.SchemaExtensions
+	eUpdateMeshInput_spec                                                smithy.SchemaExtensions
+	eUpdateMeshInput_clientToken                                         smithy.SchemaExtensions
+	eUpdateMeshOutput                                                    smithy.SchemaExtensions
+	eUpdateMeshOutput_mesh                                               smithy.SchemaExtensions
+	eUpdateRouteInput                                                    smithy.SchemaExtensions
+	eUpdateRouteInput_routeName                                          smithy.SchemaExtensions
+	eUpdateRouteInput_meshName                                           smithy.SchemaExtensions
+	eUpdateRouteInput_virtualRouterName                                  smithy.SchemaExtensions
+	eUpdateRouteInput_spec                                               smithy.SchemaExtensions
+	eUpdateRouteInput_clientToken                                        smithy.SchemaExtensions
+	eUpdateRouteInput_meshOwner                                          smithy.SchemaExtensions
+	eUpdateRouteOutput                                                   smithy.SchemaExtensions
+	eUpdateRouteOutput_route                                             smithy.SchemaExtensions
+	eUpdateVirtualGatewayInput                                           smithy.SchemaExtensions
+	eUpdateVirtualGatewayInput_virtualGatewayName                        smithy.SchemaExtensions
+	eUpdateVirtualGatewayInput_meshName                                  smithy.SchemaExtensions
+	eUpdateVirtualGatewayInput_spec                                      smithy.SchemaExtensions
+	eUpdateVirtualGatewayInput_clientToken                               smithy.SchemaExtensions
+	eUpdateVirtualGatewayInput_meshOwner                                 smithy.SchemaExtensions
+	eUpdateVirtualGatewayOutput                                          smithy.SchemaExtensions
+	eUpdateVirtualGatewayOutput_virtualGateway                           smithy.SchemaExtensions
+	eUpdateVirtualNodeInput                                              smithy.SchemaExtensions
+	eUpdateVirtualNodeInput_virtualNodeName                              smithy.SchemaExtensions
+	eUpdateVirtualNodeInput_meshName                                     smithy.SchemaExtensions
+	eUpdateVirtualNodeInput_spec                                         smithy.SchemaExtensions
+	eUpdateVirtualNodeInput_clientToken                                  smithy.SchemaExtensions
+	eUpdateVirtualNodeInput_meshOwner                                    smithy.SchemaExtensions
+	eUpdateVirtualNodeOutput                                             smithy.SchemaExtensions
+	eUpdateVirtualNodeOutput_virtualNode                                 smithy.SchemaExtensions
+	eUpdateVirtualRouterInput                                            smithy.SchemaExtensions
+	eUpdateVirtualRouterInput_virtualRouterName                          smithy.SchemaExtensions
+	eUpdateVirtualRouterInput_meshName                                   smithy.SchemaExtensions
+	eUpdateVirtualRouterInput_spec                                       smithy.SchemaExtensions
+	eUpdateVirtualRouterInput_clientToken                                smithy.SchemaExtensions
+	eUpdateVirtualRouterInput_meshOwner                                  smithy.SchemaExtensions
+	eUpdateVirtualRouterOutput                                           smithy.SchemaExtensions
+	eUpdateVirtualRouterOutput_virtualRouter                             smithy.SchemaExtensions
+	eUpdateVirtualServiceInput                                           smithy.SchemaExtensions
+	eUpdateVirtualServiceInput_virtualServiceName                        smithy.SchemaExtensions
+	eUpdateVirtualServiceInput_meshName                                  smithy.SchemaExtensions
+	eUpdateVirtualServiceInput_spec                                      smithy.SchemaExtensions
+	eUpdateVirtualServiceInput_clientToken                               smithy.SchemaExtensions
+	eUpdateVirtualServiceInput_meshOwner                                 smithy.SchemaExtensions
+	eUpdateVirtualServiceOutput                                          smithy.SchemaExtensions
+	eUpdateVirtualServiceOutput_virtualService                           smithy.SchemaExtensions
+)
+
+var (
+	iCreateGatewayRoute                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateGatewayRoute"}
+	iCreateMesh                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateMesh"}
+	iCreateRoute                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateRoute"}
+	iCreateVirtualGateway                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualGateway"}
+	iCreateVirtualNode                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualNode"}
+	iCreateVirtualRouter                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualRouter"}
+	iCreateVirtualService                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualService"}
+	iDeleteGatewayRoute                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteGatewayRoute"}
+	iDeleteMesh                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteMesh"}
+	iDeleteRoute                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteRoute"}
+	iDeleteVirtualGateway                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualGateway"}
+	iDeleteVirtualNode                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualNode"}
+	iDeleteVirtualRouter                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualRouter"}
+	iDeleteVirtualService                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualService"}
+	iDescribeGatewayRoute                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeGatewayRoute"}
+	iDescribeMesh                                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeMesh"}
+	iDescribeRoute                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeRoute"}
+	iDescribeVirtualGateway                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualGateway"}
+	iDescribeVirtualNode                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualNode"}
+	iDescribeVirtualRouter                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualRouter"}
+	iDescribeVirtualService                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualService"}
+	iListGatewayRoutes                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListGatewayRoutes"}
+	iListMeshes                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListMeshes"}
+	iListRoutes                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListRoutes"}
+	iListTagsForResource                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListTagsForResource"}
+	iListVirtualGateways                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualGateways"}
+	iListVirtualNodes                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualNodes"}
+	iListVirtualRouters                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualRouters"}
+	iListVirtualServices                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualServices"}
+	iTagResource                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagResource"}
+	iUntagResource                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UntagResource"}
+	iUpdateGatewayRoute                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateGatewayRoute"}
+	iUpdateMesh                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateMesh"}
+	iUpdateRoute                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateRoute"}
+	iUpdateVirtualGateway                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualGateway"}
+	iUpdateVirtualNode                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualNode"}
+	iUpdateVirtualRouter                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualRouter"}
+	iUpdateVirtualService                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualService"}
+	i_AppMesh                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AppMesh"}
+	iAccessLog                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AccessLog"}
+	i_AccountId                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AccountId"}
+	i_Arn                                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Arn"}
+	iAwsCloudMapInstanceAttribute                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AwsCloudMapInstanceAttribute"}
+	i_AwsCloudMapInstanceAttributeKey                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AwsCloudMapInstanceAttributeKey"}
+	i_AwsCloudMapInstanceAttributes                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AwsCloudMapInstanceAttributes"}
+	i_AwsCloudMapInstanceAttributeValue              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AwsCloudMapInstanceAttributeValue"}
+	i_AwsCloudMapName                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AwsCloudMapName"}
+	iAwsCloudMapServiceDiscovery                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "AwsCloudMapServiceDiscovery"}
+	iBackend                                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Backend"}
+	iBackendDefaults                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "BackendDefaults"}
+	i_Backends                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Backends"}
+	iBadRequestException                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "BadRequestException"}
+	i_CertificateAuthorityArns                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CertificateAuthorityArns"}
+	iClientPolicy                                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ClientPolicy"}
+	iClientPolicyTls                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ClientPolicyTls"}
+	iClientTlsCertificate                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ClientTlsCertificate"}
+	iConflictException                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ConflictException"}
+	i_DefaultGatewayRouteRewrite                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DefaultGatewayRouteRewrite"}
+	i_DnsResponseType                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DnsResponseType"}
+	iDnsServiceDiscovery                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DnsServiceDiscovery"}
+	iDuration                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Duration"}
+	i_DurationUnit                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DurationUnit"}
+	i_DurationValue                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DurationValue"}
+	iEgressFilter                                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "EgressFilter"}
+	i_EgressFilterType                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "EgressFilterType"}
+	i_ExactHostName                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ExactHostName"}
+	iFileAccessLog                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "FileAccessLog"}
+	i_FilePath                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "FilePath"}
+	iForbiddenException                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ForbiddenException"}
+	iGatewayRouteData                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteData"}
+	iGatewayRouteHostnameMatch                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteHostnameMatch"}
+	iGatewayRouteHostnameRewrite                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteHostnameRewrite"}
+	i_GatewayRouteList                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteList"}
+	i_GatewayRoutePriority                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRoutePriority"}
+	iGatewayRouteRef                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteRef"}
+	iGatewayRouteSpec                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteSpec"}
+	iGatewayRouteStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteStatus"}
+	i_GatewayRouteStatusCode                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteStatusCode"}
+	iGatewayRouteTarget                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteTarget"}
+	iGatewayRouteVirtualService                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GatewayRouteVirtualService"}
+	iGrpcGatewayRoute                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcGatewayRoute"}
+	iGrpcGatewayRouteAction                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcGatewayRouteAction"}
+	iGrpcGatewayRouteMatch                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcGatewayRouteMatch"}
+	iGrpcGatewayRouteMetadata                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcGatewayRouteMetadata"}
+	i_GrpcGatewayRouteMetadataList                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcGatewayRouteMetadataList"}
+	iGrpcGatewayRouteRewrite                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcGatewayRouteRewrite"}
+	iGrpcMetadataMatchMethod                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcMetadataMatchMethod"}
+	iGrpcRetryPolicy                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRetryPolicy"}
+	i_GrpcRetryPolicyEvent                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRetryPolicyEvent"}
+	i_GrpcRetryPolicyEvents                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRetryPolicyEvents"}
+	iGrpcRoute                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRoute"}
+	iGrpcRouteAction                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRouteAction"}
+	iGrpcRouteMatch                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRouteMatch"}
+	iGrpcRouteMetadata                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRouteMetadata"}
+	i_GrpcRouteMetadataList                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRouteMetadataList"}
+	iGrpcRouteMetadataMatchMethod                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcRouteMetadataMatchMethod"}
+	iGrpcTimeout                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "GrpcTimeout"}
+	i_HeaderMatch                                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HeaderMatch"}
+	iHeaderMatchMethod                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HeaderMatchMethod"}
+	i_HeaderName                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HeaderName"}
+	i_HealthCheckIntervalMillis                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HealthCheckIntervalMillis"}
+	iHealthCheckPolicy                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HealthCheckPolicy"}
+	i_HealthCheckThreshold                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HealthCheckThreshold"}
+	i_HealthCheckTimeoutMillis                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HealthCheckTimeoutMillis"}
+	i_Hostname                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Hostname"}
+	iHttpGatewayRoute                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRoute"}
+	iHttpGatewayRouteAction                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRouteAction"}
+	iHttpGatewayRouteHeader                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRouteHeader"}
+	i_HttpGatewayRouteHeaders                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRouteHeaders"}
+	iHttpGatewayRouteMatch                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRouteMatch"}
+	iHttpGatewayRoutePathRewrite                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRoutePathRewrite"}
+	i_HttpGatewayRoutePrefix                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRoutePrefix"}
+	iHttpGatewayRoutePrefixRewrite                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRoutePrefixRewrite"}
+	iHttpGatewayRouteRewrite                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpGatewayRouteRewrite"}
+	i_HttpMethod                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpMethod"}
+	i_HttpPathExact                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpPathExact"}
+	iHttpPathMatch                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpPathMatch"}
+	i_HttpPathRegex                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpPathRegex"}
+	iHttpQueryParameter                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpQueryParameter"}
+	i_HttpQueryParameters                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpQueryParameters"}
+	iHttpRetryPolicy                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRetryPolicy"}
+	i_HttpRetryPolicyEvent                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRetryPolicyEvent"}
+	i_HttpRetryPolicyEvents                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRetryPolicyEvents"}
+	iHttpRoute                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRoute"}
+	iHttpRouteAction                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRouteAction"}
+	iHttpRouteHeader                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRouteHeader"}
+	i_HttpRouteHeaders                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRouteHeaders"}
+	iHttpRouteMatch                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpRouteMatch"}
+	i_HttpScheme                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpScheme"}
+	iHttpTimeout                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "HttpTimeout"}
+	iInternalServerErrorException                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "InternalServerErrorException"}
+	i_IpPreference                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "IpPreference"}
+	i_JsonFormat                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "JsonFormat"}
+	iJsonFormatRef                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "JsonFormatRef"}
+	i_JsonKey                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "JsonKey"}
+	i_JsonValue                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "JsonValue"}
+	iLimitExceededException                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "LimitExceededException"}
+	iListener                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Listener"}
+	i_ListenerPort                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerPort"}
+	i_Listeners                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Listeners"}
+	iListenerTimeout                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTimeout"}
+	iListenerTls                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTls"}
+	iListenerTlsAcmCertificate                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTlsAcmCertificate"}
+	iListenerTlsCertificate                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTlsCertificate"}
+	iListenerTlsFileCertificate                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTlsFileCertificate"}
+	i_ListenerTlsMode                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTlsMode"}
+	iListenerTlsSdsCertificate                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTlsSdsCertificate"}
+	iListenerTlsValidationContext                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTlsValidationContext"}
+	iListenerTlsValidationContextTrust               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListenerTlsValidationContextTrust"}
+	i_ListGatewayRoutesLimit                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListGatewayRoutesLimit"}
+	i_ListMeshesLimit                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListMeshesLimit"}
+	i_ListRoutesLimit                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListRoutesLimit"}
+	i_ListVirtualGatewaysLimit                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualGatewaysLimit"}
+	i_ListVirtualNodesLimit                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualNodesLimit"}
+	i_ListVirtualRoutersLimit                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualRoutersLimit"}
+	i_ListVirtualServicesLimit                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualServicesLimit"}
+	iLogging                                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "Logging"}
+	iLoggingFormat                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "LoggingFormat"}
+	iMatchRange                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MatchRange"}
+	i_MaxConnections                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MaxConnections"}
+	i_MaxPendingRequests                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MaxPendingRequests"}
+	i_MaxRequests                                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MaxRequests"}
+	i_MaxRetries                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MaxRetries"}
+	iMeshData                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MeshData"}
+	i_MeshList                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MeshList"}
+	iMeshRef                                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MeshRef"}
+	iMeshServiceDiscovery                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MeshServiceDiscovery"}
+	iMeshSpec                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MeshSpec"}
+	iMeshStatus                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MeshStatus"}
+	i_MeshStatusCode                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MeshStatusCode"}
+	i_MethodName                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "MethodName"}
+	iNotFoundException                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "NotFoundException"}
+	iOutlierDetection                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "OutlierDetection"}
+	i_OutlierDetectionMaxEjectionPercent             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "OutlierDetectionMaxEjectionPercent"}
+	i_OutlierDetectionMaxServerErrors                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "OutlierDetectionMaxServerErrors"}
+	i_PercentInt                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "PercentInt"}
+	iPortMapping                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "PortMapping"}
+	i_PortNumber                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "PortNumber"}
+	i_PortProtocol                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "PortProtocol"}
+	i_PortSet                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "PortSet"}
+	iQueryParameterMatch                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "QueryParameterMatch"}
+	i_QueryParameterName                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "QueryParameterName"}
+	iResourceInUseException                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ResourceInUseException"}
+	iResourceMetadata                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ResourceMetadata"}
+	i_ResourceName                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ResourceName"}
+	iRouteData                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "RouteData"}
+	i_RouteList                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "RouteList"}
+	i_RoutePriority                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "RoutePriority"}
+	iRouteRef                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "RouteRef"}
+	iRouteSpec                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "RouteSpec"}
+	iRouteStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "RouteStatus"}
+	i_RouteStatusCode                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "RouteStatusCode"}
+	i_SdsSecretName                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "SdsSecretName"}
+	iServiceDiscovery                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ServiceDiscovery"}
+	i_ServiceName                                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ServiceName"}
+	iServiceUnavailableException                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ServiceUnavailableException"}
+	i_SubjectAlternativeName                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "SubjectAlternativeName"}
+	i_SubjectAlternativeNameList                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "SubjectAlternativeNameList"}
+	iSubjectAlternativeNameMatchers                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "SubjectAlternativeNameMatchers"}
+	iSubjectAlternativeNames                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "SubjectAlternativeNames"}
+	i_SuffixHostname                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "SuffixHostname"}
+	i_TagKey                                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagKey"}
+	i_TagKeyList                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagKeyList"}
+	i_TagList                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagList"}
+	iTagRef                                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagRef"}
+	i_TagsLimit                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagsLimit"}
+	i_TagValue                                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagValue"}
+	i_TcpRetryPolicyEvent                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TcpRetryPolicyEvent"}
+	i_TcpRetryPolicyEvents                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TcpRetryPolicyEvents"}
+	iTcpRoute                                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TcpRoute"}
+	iTcpRouteAction                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TcpRouteAction"}
+	iTcpRouteMatch                                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TcpRouteMatch"}
+	iTcpTimeout                                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TcpTimeout"}
+	i_TextFormat                                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TextFormat"}
+	iTlsValidationContext                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TlsValidationContext"}
+	iTlsValidationContextAcmTrust                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TlsValidationContextAcmTrust"}
+	iTlsValidationContextFileTrust                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TlsValidationContextFileTrust"}
+	iTlsValidationContextSdsTrust                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TlsValidationContextSdsTrust"}
+	iTlsValidationContextTrust                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TlsValidationContextTrust"}
+	iTooManyRequestsException                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TooManyRequestsException"}
+	iTooManyTagsException                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TooManyTagsException"}
+	iVirtualGatewayAccessLog                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayAccessLog"}
+	iVirtualGatewayBackendDefaults                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayBackendDefaults"}
+	i_VirtualGatewayCertificateAuthorityArns         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayCertificateAuthorityArns"}
+	iVirtualGatewayClientPolicy                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayClientPolicy"}
+	iVirtualGatewayClientPolicyTls                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayClientPolicyTls"}
+	iVirtualGatewayClientTlsCertificate              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayClientTlsCertificate"}
+	iVirtualGatewayConnectionPool                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayConnectionPool"}
+	iVirtualGatewayData                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayData"}
+	iVirtualGatewayFileAccessLog                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayFileAccessLog"}
+	iVirtualGatewayGrpcConnectionPool                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayGrpcConnectionPool"}
+	i_VirtualGatewayHealthCheckIntervalMillis        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayHealthCheckIntervalMillis"}
+	iVirtualGatewayHealthCheckPolicy                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayHealthCheckPolicy"}
+	i_VirtualGatewayHealthCheckThreshold             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayHealthCheckThreshold"}
+	i_VirtualGatewayHealthCheckTimeoutMillis         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayHealthCheckTimeoutMillis"}
+	iVirtualGatewayHttp2ConnectionPool               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayHttp2ConnectionPool"}
+	iVirtualGatewayHttpConnectionPool                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayHttpConnectionPool"}
+	i_VirtualGatewayList                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayList"}
+	iVirtualGatewayListener                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListener"}
+	i_VirtualGatewayListeners                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListeners"}
+	iVirtualGatewayListenerTls                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTls"}
+	iVirtualGatewayListenerTlsAcmCertificate         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTlsAcmCertificate"}
+	iVirtualGatewayListenerTlsCertificate            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTlsCertificate"}
+	iVirtualGatewayListenerTlsFileCertificate        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTlsFileCertificate"}
+	i_VirtualGatewayListenerTlsMode                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTlsMode"}
+	iVirtualGatewayListenerTlsSdsCertificate         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTlsSdsCertificate"}
+	iVirtualGatewayListenerTlsValidationContext      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTlsValidationContext"}
+	iVirtualGatewayListenerTlsValidationContextTrust = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayListenerTlsValidationContextTrust"}
+	iVirtualGatewayLogging                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayLogging"}
+	iVirtualGatewayPortMapping                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayPortMapping"}
+	i_VirtualGatewayPortProtocol                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayPortProtocol"}
+	iVirtualGatewayRef                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayRef"}
+	i_VirtualGatewaySdsSecretName                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewaySdsSecretName"}
+	iVirtualGatewaySpec                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewaySpec"}
+	iVirtualGatewayStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayStatus"}
+	i_VirtualGatewayStatusCode                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayStatusCode"}
+	iVirtualGatewayTlsValidationContext              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayTlsValidationContext"}
+	iVirtualGatewayTlsValidationContextAcmTrust      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayTlsValidationContextAcmTrust"}
+	iVirtualGatewayTlsValidationContextFileTrust     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayTlsValidationContextFileTrust"}
+	iVirtualGatewayTlsValidationContextSdsTrust      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayTlsValidationContextSdsTrust"}
+	iVirtualGatewayTlsValidationContextTrust         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualGatewayTlsValidationContextTrust"}
+	iVirtualNodeConnectionPool                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeConnectionPool"}
+	iVirtualNodeData                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeData"}
+	iVirtualNodeGrpcConnectionPool                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeGrpcConnectionPool"}
+	iVirtualNodeHttp2ConnectionPool                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeHttp2ConnectionPool"}
+	iVirtualNodeHttpConnectionPool                   = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeHttpConnectionPool"}
+	i_VirtualNodeList                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeList"}
+	iVirtualNodeRef                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeRef"}
+	iVirtualNodeServiceProvider                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeServiceProvider"}
+	iVirtualNodeSpec                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeSpec"}
+	iVirtualNodeStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeStatus"}
+	i_VirtualNodeStatusCode                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeStatusCode"}
+	iVirtualNodeTcpConnectionPool                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualNodeTcpConnectionPool"}
+	iVirtualRouterData                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterData"}
+	i_VirtualRouterList                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterList"}
+	iVirtualRouterListener                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterListener"}
+	i_VirtualRouterListeners                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterListeners"}
+	iVirtualRouterRef                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterRef"}
+	iVirtualRouterServiceProvider                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterServiceProvider"}
+	iVirtualRouterSpec                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterSpec"}
+	iVirtualRouterStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterStatus"}
+	i_VirtualRouterStatusCode                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualRouterStatusCode"}
+	iVirtualServiceBackend                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceBackend"}
+	iVirtualServiceData                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceData"}
+	i_VirtualServiceList                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceList"}
+	iVirtualServiceProvider                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceProvider"}
+	iVirtualServiceRef                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceRef"}
+	iVirtualServiceSpec                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceSpec"}
+	iVirtualServiceStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceStatus"}
+	i_VirtualServiceStatusCode                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "VirtualServiceStatusCode"}
+	iWeightedTarget                                  = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "WeightedTarget"}
+	i_WeightedTargets                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "WeightedTargets"}
+	iCreateGatewayRouteInput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateGatewayRouteInput"}
+	iCreateGatewayRouteOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateGatewayRouteOutput"}
+	iCreateMeshInput                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateMeshInput"}
+	iCreateMeshOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateMeshOutput"}
+	iCreateRouteInput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateRouteInput"}
+	iCreateRouteOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateRouteOutput"}
+	iCreateVirtualGatewayInput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualGatewayInput"}
+	iCreateVirtualGatewayOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualGatewayOutput"}
+	iCreateVirtualNodeInput                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualNodeInput"}
+	iCreateVirtualNodeOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualNodeOutput"}
+	iCreateVirtualRouterInput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualRouterInput"}
+	iCreateVirtualRouterOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualRouterOutput"}
+	iCreateVirtualServiceInput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualServiceInput"}
+	iCreateVirtualServiceOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "CreateVirtualServiceOutput"}
+	iDeleteGatewayRouteInput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteGatewayRouteInput"}
+	iDeleteGatewayRouteOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteGatewayRouteOutput"}
+	iDeleteMeshInput                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteMeshInput"}
+	iDeleteMeshOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteMeshOutput"}
+	iDeleteRouteInput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteRouteInput"}
+	iDeleteRouteOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteRouteOutput"}
+	iDeleteVirtualGatewayInput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualGatewayInput"}
+	iDeleteVirtualGatewayOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualGatewayOutput"}
+	iDeleteVirtualNodeInput                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualNodeInput"}
+	iDeleteVirtualNodeOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualNodeOutput"}
+	iDeleteVirtualRouterInput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualRouterInput"}
+	iDeleteVirtualRouterOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualRouterOutput"}
+	iDeleteVirtualServiceInput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualServiceInput"}
+	iDeleteVirtualServiceOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DeleteVirtualServiceOutput"}
+	iDescribeGatewayRouteInput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeGatewayRouteInput"}
+	iDescribeGatewayRouteOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeGatewayRouteOutput"}
+	iDescribeMeshInput                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeMeshInput"}
+	iDescribeMeshOutput                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeMeshOutput"}
+	iDescribeRouteInput                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeRouteInput"}
+	iDescribeRouteOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeRouteOutput"}
+	iDescribeVirtualGatewayInput                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualGatewayInput"}
+	iDescribeVirtualGatewayOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualGatewayOutput"}
+	iDescribeVirtualNodeInput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualNodeInput"}
+	iDescribeVirtualNodeOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualNodeOutput"}
+	iDescribeVirtualRouterInput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualRouterInput"}
+	iDescribeVirtualRouterOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualRouterOutput"}
+	iDescribeVirtualServiceInput                     = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualServiceInput"}
+	iDescribeVirtualServiceOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "DescribeVirtualServiceOutput"}
+	iListGatewayRoutesInput                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListGatewayRoutesInput"}
+	iListGatewayRoutesOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListGatewayRoutesOutput"}
+	iListMeshesInput                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListMeshesInput"}
+	iListMeshesOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListMeshesOutput"}
+	iListRoutesInput                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListRoutesInput"}
+	iListRoutesOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListRoutesOutput"}
+	iListTagsForResourceInput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListTagsForResourceOutput"}
+	iListVirtualGatewaysInput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualGatewaysInput"}
+	iListVirtualGatewaysOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualGatewaysOutput"}
+	iListVirtualNodesInput                           = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualNodesInput"}
+	iListVirtualNodesOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualNodesOutput"}
+	iListVirtualRoutersInput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualRoutersInput"}
+	iListVirtualRoutersOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualRoutersOutput"}
+	iListVirtualServicesInput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualServicesInput"}
+	iListVirtualServicesOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "ListVirtualServicesOutput"}
+	iTagResourceInput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagResourceInput"}
+	iTagResourceOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "TagResourceOutput"}
+	iUntagResourceInput                              = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UntagResourceInput"}
+	iUntagResourceOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UntagResourceOutput"}
+	iUpdateGatewayRouteInput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateGatewayRouteInput"}
+	iUpdateGatewayRouteOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateGatewayRouteOutput"}
+	iUpdateMeshInput                                 = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateMeshInput"}
+	iUpdateMeshOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateMeshOutput"}
+	iUpdateRouteInput                                = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateRouteInput"}
+	iUpdateRouteOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateRouteOutput"}
+	iUpdateVirtualGatewayInput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualGatewayInput"}
+	iUpdateVirtualGatewayOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualGatewayOutput"}
+	iUpdateVirtualNodeInput                          = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualNodeInput"}
+	iUpdateVirtualNodeOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualNodeOutput"}
+	iUpdateVirtualRouterInput                        = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualRouterInput"}
+	iUpdateVirtualRouterOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualRouterOutput"}
+	iUpdateVirtualServiceInput                       = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualServiceInput"}
+	iUpdateVirtualServiceOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.appmesh", Name: "UpdateVirtualServiceOutput"}
+	pString                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pBoolean                                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pLong                                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pTimestamp                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes",
-	Code: 200})
-
-var CreateMesh = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateMesh",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes",
-	Code: 200})
-
-var CreateRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
-	Code: 200})
-
-var CreateVirtualGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateways",
-	Code: 200})
-
-var CreateVirtualNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualNodes",
-	Code: 200})
-
-var CreateVirtualRouter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualRouter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouters",
-	Code: 200})
-
-var CreateVirtualService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualService",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualServices",
-	Code: 200})
-
-var DeleteGatewayRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteGatewayRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-	Code: 200})
-
-var DeleteMesh = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteMesh",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20190125/meshes/{meshName}",
-	Code: 200})
-
-var DeleteRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-	Code: 200})
-
-var DeleteVirtualGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-	Code: 200})
-
-var DeleteVirtualNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-	Code: 200})
-
-var DeleteVirtualRouter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualRouter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-	Code: 200})
-
-var DeleteVirtualService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualService",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-	Code: 200})
-
-var DescribeGatewayRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeGatewayRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-	Code: 200})
-
-var DescribeMesh = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeMesh",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}",
-	Code: 200})
-
-var DescribeRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-	Code: 200})
-
-var DescribeVirtualGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-	Code: 200})
-
-var DescribeVirtualNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-	Code: 200})
-
-var DescribeVirtualRouter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualRouter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-	Code: 200})
-
-var DescribeVirtualService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualService",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-	Code: 200})
-
-var ListGatewayRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListGatewayRoutes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes",
-	Code: 200})
-
-var ListMeshes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListMeshes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes",
-	Code: 200})
-
-var ListRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListRoutes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/tags",
-	Code: 200})
-
-var ListVirtualGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualGateways",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateways",
-	Code: 200})
-
-var ListVirtualNodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualNodes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualNodes",
-	Code: 200})
-
-var ListVirtualRouters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualRouters",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouters",
-	Code: 200})
-
-var ListVirtualServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualServices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20190125/meshes/{meshName}/virtualServices",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/tag",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/untag",
-	Code: 200})
-
-var UpdateGatewayRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateGatewayRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-	Code: 200})
-
-var UpdateMesh = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateMesh",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}",
-	Code: 200})
-
-var UpdateRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-	Code: 200})
-
-var UpdateVirtualGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-	Code: 200})
-
-var UpdateVirtualNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-	Code: 200})
-
-var UpdateVirtualRouter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualRouter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-	Code: 200})
-
-var UpdateVirtualService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualService",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-	Code: 200})
-
-var _AppMesh = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AppMesh",
-}, smithy.ShapeTypeService, 0)
-
-var AppMesh = smithy.NewServiceSchema(_AppMesh, "2019-01-25")
-
-var AccessLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AccessLog",
-}, smithy.ShapeTypeUnion, 1)
-var AccessLog_file *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var AwsCloudMapInstanceAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AwsCloudMapInstanceAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var AwsCloudMapInstanceAttribute_key *smithy.Schema
-
-var AwsCloudMapInstanceAttribute_value *smithy.Schema
-
-var _AwsCloudMapInstanceAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AwsCloudMapInstanceAttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsCloudMapInstanceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AwsCloudMapInstanceAttributes",
-}, smithy.ShapeTypeList, 1)
-var _AwsCloudMapInstanceAttributes_member *smithy.Schema
-
-var _AwsCloudMapInstanceAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AwsCloudMapInstanceAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsCloudMapName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AwsCloudMapName",
-}, smithy.ShapeTypeString, 0)
-
-var AwsCloudMapServiceDiscovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "AwsCloudMapServiceDiscovery",
-}, smithy.ShapeTypeStructure, 4)
-var AwsCloudMapServiceDiscovery_namespaceName *smithy.Schema
-
-var AwsCloudMapServiceDiscovery_serviceName *smithy.Schema
-
-var AwsCloudMapServiceDiscovery_attributes *smithy.Schema
-
-var AwsCloudMapServiceDiscovery_ipPreference *smithy.Schema
-
-var Backend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Backend",
-}, smithy.ShapeTypeUnion, 1)
-var Backend_virtualService *smithy.Schema
-
-var BackendDefaults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "BackendDefaults",
-}, smithy.ShapeTypeStructure, 1)
-var BackendDefaults_clientPolicy *smithy.Schema
-
-var _Backends = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Backends",
-}, smithy.ShapeTypeList, 1)
-var _Backends_member *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var _CertificateAuthorityArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CertificateAuthorityArns",
-}, smithy.ShapeTypeList, 1)
-var _CertificateAuthorityArns_member *smithy.Schema
-
-var ClientPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ClientPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var ClientPolicy_tls *smithy.Schema
-
-var ClientPolicyTls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ClientPolicyTls",
-}, smithy.ShapeTypeStructure, 4)
-var ClientPolicyTls_enforce *smithy.Schema
-
-var ClientPolicyTls_ports *smithy.Schema
-
-var ClientPolicyTls_certificate *smithy.Schema
-
-var ClientPolicyTls_validation *smithy.Schema
-
-var ClientTlsCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ClientTlsCertificate",
-}, smithy.ShapeTypeUnion, 2)
-var ClientTlsCertificate_file *smithy.Schema
-
-var ClientTlsCertificate_sds *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _DefaultGatewayRouteRewrite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DefaultGatewayRouteRewrite",
-}, smithy.ShapeTypeString, 0)
-
-var _DnsResponseType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DnsResponseType",
-}, smithy.ShapeTypeString, 0)
-
-var DnsServiceDiscovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DnsServiceDiscovery",
-}, smithy.ShapeTypeStructure, 3)
-var DnsServiceDiscovery_hostname *smithy.Schema
-
-var DnsServiceDiscovery_responseType *smithy.Schema
-
-var DnsServiceDiscovery_ipPreference *smithy.Schema
-
-var Duration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Duration",
-}, smithy.ShapeTypeStructure, 2)
-var Duration_value *smithy.Schema
-
-var Duration_unit *smithy.Schema
-
-var _DurationUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DurationUnit",
-}, smithy.ShapeTypeString, 0)
-
-var _DurationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DurationValue",
-}, smithy.ShapeTypeLong, 0)
-
-var EgressFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "EgressFilter",
-}, smithy.ShapeTypeStructure, 1)
-var EgressFilter_type *smithy.Schema
-
-var _EgressFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "EgressFilterType",
-}, smithy.ShapeTypeString, 0)
-
-var _ExactHostName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ExactHostName",
-}, smithy.ShapeTypeString, 0)
-
-var FileAccessLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "FileAccessLog",
-}, smithy.ShapeTypeStructure, 2)
-var FileAccessLog_path *smithy.Schema
-
-var FileAccessLog_format *smithy.Schema
-
-var _FilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "FilePath",
-}, smithy.ShapeTypeString, 0)
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var GatewayRouteData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteData",
-}, smithy.ShapeTypeStructure, 6)
-var GatewayRouteData_meshName *smithy.Schema
-
-var GatewayRouteData_gatewayRouteName *smithy.Schema
-
-var GatewayRouteData_virtualGatewayName *smithy.Schema
-
-var GatewayRouteData_spec *smithy.Schema
-
-var GatewayRouteData_metadata *smithy.Schema
-
-var GatewayRouteData_status *smithy.Schema
-
-var GatewayRouteHostnameMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteHostnameMatch",
-}, smithy.ShapeTypeStructure, 2)
-var GatewayRouteHostnameMatch_exact *smithy.Schema
-
-var GatewayRouteHostnameMatch_suffix *smithy.Schema
-
-var GatewayRouteHostnameRewrite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteHostnameRewrite",
-}, smithy.ShapeTypeStructure, 1)
-var GatewayRouteHostnameRewrite_defaultTargetHostname *smithy.Schema
-
-var _GatewayRouteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteList",
-}, smithy.ShapeTypeList, 1)
-var _GatewayRouteList_member *smithy.Schema
-
-var _GatewayRoutePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRoutePriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var GatewayRouteRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteRef",
-}, smithy.ShapeTypeStructure, 9)
-var GatewayRouteRef_meshName *smithy.Schema
-
-var GatewayRouteRef_gatewayRouteName *smithy.Schema
-
-var GatewayRouteRef_virtualGatewayName *smithy.Schema
-
-var GatewayRouteRef_meshOwner *smithy.Schema
-
-var GatewayRouteRef_resourceOwner *smithy.Schema
-
-var GatewayRouteRef_arn *smithy.Schema
-
-var GatewayRouteRef_version *smithy.Schema
-
-var GatewayRouteRef_createdAt *smithy.Schema
-
-var GatewayRouteRef_lastUpdatedAt *smithy.Schema
-
-var GatewayRouteSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteSpec",
-}, smithy.ShapeTypeStructure, 4)
-var GatewayRouteSpec_priority *smithy.Schema
-
-var GatewayRouteSpec_httpRoute *smithy.Schema
-
-var GatewayRouteSpec_http2Route *smithy.Schema
-
-var GatewayRouteSpec_grpcRoute *smithy.Schema
-
-var GatewayRouteStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteStatus",
-}, smithy.ShapeTypeStructure, 1)
-var GatewayRouteStatus_status *smithy.Schema
-
-var _GatewayRouteStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayRouteTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteTarget",
-}, smithy.ShapeTypeStructure, 2)
-var GatewayRouteTarget_virtualService *smithy.Schema
-
-var GatewayRouteTarget_port *smithy.Schema
-
-var GatewayRouteVirtualService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GatewayRouteVirtualService",
-}, smithy.ShapeTypeStructure, 1)
-var GatewayRouteVirtualService_virtualServiceName *smithy.Schema
-
-var GrpcGatewayRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcGatewayRoute",
-}, smithy.ShapeTypeStructure, 2)
-var GrpcGatewayRoute_match *smithy.Schema
-
-var GrpcGatewayRoute_action *smithy.Schema
-
-var GrpcGatewayRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcGatewayRouteAction",
-}, smithy.ShapeTypeStructure, 2)
-var GrpcGatewayRouteAction_target *smithy.Schema
-
-var GrpcGatewayRouteAction_rewrite *smithy.Schema
-
-var GrpcGatewayRouteMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcGatewayRouteMatch",
-}, smithy.ShapeTypeStructure, 4)
-var GrpcGatewayRouteMatch_serviceName *smithy.Schema
-
-var GrpcGatewayRouteMatch_hostname *smithy.Schema
-
-var GrpcGatewayRouteMatch_metadata *smithy.Schema
-
-var GrpcGatewayRouteMatch_port *smithy.Schema
-
-var GrpcGatewayRouteMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcGatewayRouteMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var GrpcGatewayRouteMetadata_name *smithy.Schema
-
-var GrpcGatewayRouteMetadata_invert *smithy.Schema
-
-var GrpcGatewayRouteMetadata_match *smithy.Schema
-
-var _GrpcGatewayRouteMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcGatewayRouteMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _GrpcGatewayRouteMetadataList_member *smithy.Schema
-
-var GrpcGatewayRouteRewrite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcGatewayRouteRewrite",
-}, smithy.ShapeTypeStructure, 1)
-var GrpcGatewayRouteRewrite_hostname *smithy.Schema
-
-var GrpcMetadataMatchMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcMetadataMatchMethod",
-}, smithy.ShapeTypeUnion, 5)
-var GrpcMetadataMatchMethod_exact *smithy.Schema
-
-var GrpcMetadataMatchMethod_regex *smithy.Schema
-
-var GrpcMetadataMatchMethod_range *smithy.Schema
-
-var GrpcMetadataMatchMethod_prefix *smithy.Schema
-
-var GrpcMetadataMatchMethod_suffix *smithy.Schema
-
-var GrpcRetryPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRetryPolicy",
-}, smithy.ShapeTypeStructure, 5)
-var GrpcRetryPolicy_perRetryTimeout *smithy.Schema
-
-var GrpcRetryPolicy_maxRetries *smithy.Schema
-
-var GrpcRetryPolicy_httpRetryEvents *smithy.Schema
-
-var GrpcRetryPolicy_tcpRetryEvents *smithy.Schema
-
-var GrpcRetryPolicy_grpcRetryEvents *smithy.Schema
-
-var _GrpcRetryPolicyEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRetryPolicyEvent",
-}, smithy.ShapeTypeString, 0)
-
-var _GrpcRetryPolicyEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRetryPolicyEvents",
-}, smithy.ShapeTypeList, 1)
-var _GrpcRetryPolicyEvents_member *smithy.Schema
-
-var GrpcRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRoute",
-}, smithy.ShapeTypeStructure, 4)
-var GrpcRoute_action *smithy.Schema
-
-var GrpcRoute_match *smithy.Schema
-
-var GrpcRoute_retryPolicy *smithy.Schema
-
-var GrpcRoute_timeout *smithy.Schema
-
-var GrpcRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRouteAction",
-}, smithy.ShapeTypeStructure, 1)
-var GrpcRouteAction_weightedTargets *smithy.Schema
-
-var GrpcRouteMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRouteMatch",
-}, smithy.ShapeTypeStructure, 4)
-var GrpcRouteMatch_serviceName *smithy.Schema
-
-var GrpcRouteMatch_methodName *smithy.Schema
-
-var GrpcRouteMatch_metadata *smithy.Schema
-
-var GrpcRouteMatch_port *smithy.Schema
-
-var GrpcRouteMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRouteMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var GrpcRouteMetadata_name *smithy.Schema
-
-var GrpcRouteMetadata_invert *smithy.Schema
-
-var GrpcRouteMetadata_match *smithy.Schema
-
-var _GrpcRouteMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRouteMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _GrpcRouteMetadataList_member *smithy.Schema
-
-var GrpcRouteMetadataMatchMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcRouteMetadataMatchMethod",
-}, smithy.ShapeTypeUnion, 5)
-var GrpcRouteMetadataMatchMethod_exact *smithy.Schema
-
-var GrpcRouteMetadataMatchMethod_regex *smithy.Schema
-
-var GrpcRouteMetadataMatchMethod_range *smithy.Schema
-
-var GrpcRouteMetadataMatchMethod_prefix *smithy.Schema
-
-var GrpcRouteMetadataMatchMethod_suffix *smithy.Schema
-
-var GrpcTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "GrpcTimeout",
-}, smithy.ShapeTypeStructure, 2)
-var GrpcTimeout_perRequest *smithy.Schema
-
-var GrpcTimeout_idle *smithy.Schema
-
-var _HeaderMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HeaderMatch",
-}, smithy.ShapeTypeString, 0)
-
-var HeaderMatchMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HeaderMatchMethod",
-}, smithy.ShapeTypeUnion, 5)
-var HeaderMatchMethod_exact *smithy.Schema
-
-var HeaderMatchMethod_regex *smithy.Schema
-
-var HeaderMatchMethod_range *smithy.Schema
-
-var HeaderMatchMethod_prefix *smithy.Schema
-
-var HeaderMatchMethod_suffix *smithy.Schema
-
-var _HeaderName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HeaderName",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthCheckIntervalMillis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HealthCheckIntervalMillis",
-}, smithy.ShapeTypeLong, 0)
-
-var HealthCheckPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HealthCheckPolicy",
-}, smithy.ShapeTypeStructure, 7)
-var HealthCheckPolicy_timeoutMillis *smithy.Schema
-
-var HealthCheckPolicy_intervalMillis *smithy.Schema
-
-var HealthCheckPolicy_protocol *smithy.Schema
-
-var HealthCheckPolicy_port *smithy.Schema
-
-var HealthCheckPolicy_path *smithy.Schema
-
-var HealthCheckPolicy_healthyThreshold *smithy.Schema
-
-var HealthCheckPolicy_unhealthyThreshold *smithy.Schema
-
-var _HealthCheckThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HealthCheckThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckTimeoutMillis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HealthCheckTimeoutMillis",
-}, smithy.ShapeTypeLong, 0)
-
-var _Hostname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Hostname",
-}, smithy.ShapeTypeString, 0)
-
-var HttpGatewayRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRoute",
-}, smithy.ShapeTypeStructure, 2)
-var HttpGatewayRoute_match *smithy.Schema
-
-var HttpGatewayRoute_action *smithy.Schema
-
-var HttpGatewayRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRouteAction",
-}, smithy.ShapeTypeStructure, 2)
-var HttpGatewayRouteAction_target *smithy.Schema
-
-var HttpGatewayRouteAction_rewrite *smithy.Schema
-
-var HttpGatewayRouteHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRouteHeader",
-}, smithy.ShapeTypeStructure, 3)
-var HttpGatewayRouteHeader_name *smithy.Schema
-
-var HttpGatewayRouteHeader_invert *smithy.Schema
-
-var HttpGatewayRouteHeader_match *smithy.Schema
-
-var _HttpGatewayRouteHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRouteHeaders",
-}, smithy.ShapeTypeList, 1)
-var _HttpGatewayRouteHeaders_member *smithy.Schema
-
-var HttpGatewayRouteMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRouteMatch",
-}, smithy.ShapeTypeStructure, 7)
-var HttpGatewayRouteMatch_prefix *smithy.Schema
-
-var HttpGatewayRouteMatch_path *smithy.Schema
-
-var HttpGatewayRouteMatch_queryParameters *smithy.Schema
-
-var HttpGatewayRouteMatch_method *smithy.Schema
-
-var HttpGatewayRouteMatch_hostname *smithy.Schema
-
-var HttpGatewayRouteMatch_headers *smithy.Schema
-
-var HttpGatewayRouteMatch_port *smithy.Schema
-
-var HttpGatewayRoutePathRewrite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRoutePathRewrite",
-}, smithy.ShapeTypeStructure, 1)
-var HttpGatewayRoutePathRewrite_exact *smithy.Schema
-
-var _HttpGatewayRoutePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRoutePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var HttpGatewayRoutePrefixRewrite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRoutePrefixRewrite",
-}, smithy.ShapeTypeStructure, 2)
-var HttpGatewayRoutePrefixRewrite_defaultPrefix *smithy.Schema
-
-var HttpGatewayRoutePrefixRewrite_value *smithy.Schema
-
-var HttpGatewayRouteRewrite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpGatewayRouteRewrite",
-}, smithy.ShapeTypeStructure, 3)
-var HttpGatewayRouteRewrite_prefix *smithy.Schema
-
-var HttpGatewayRouteRewrite_path *smithy.Schema
-
-var HttpGatewayRouteRewrite_hostname *smithy.Schema
-
-var _HttpMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpMethod",
-}, smithy.ShapeTypeString, 0)
-
-var _HttpPathExact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpPathExact",
-}, smithy.ShapeTypeString, 0)
-
-var HttpPathMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpPathMatch",
-}, smithy.ShapeTypeStructure, 2)
-var HttpPathMatch_exact *smithy.Schema
-
-var HttpPathMatch_regex *smithy.Schema
-
-var _HttpPathRegex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpPathRegex",
-}, smithy.ShapeTypeString, 0)
-
-var HttpQueryParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpQueryParameter",
-}, smithy.ShapeTypeStructure, 2)
-var HttpQueryParameter_name *smithy.Schema
-
-var HttpQueryParameter_match *smithy.Schema
-
-var _HttpQueryParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpQueryParameters",
-}, smithy.ShapeTypeList, 1)
-var _HttpQueryParameters_member *smithy.Schema
-
-var HttpRetryPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRetryPolicy",
-}, smithy.ShapeTypeStructure, 4)
-var HttpRetryPolicy_perRetryTimeout *smithy.Schema
-
-var HttpRetryPolicy_maxRetries *smithy.Schema
-
-var HttpRetryPolicy_httpRetryEvents *smithy.Schema
-
-var HttpRetryPolicy_tcpRetryEvents *smithy.Schema
-
-var _HttpRetryPolicyEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRetryPolicyEvent",
-}, smithy.ShapeTypeString, 0)
-
-var _HttpRetryPolicyEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRetryPolicyEvents",
-}, smithy.ShapeTypeList, 1)
-var _HttpRetryPolicyEvents_member *smithy.Schema
-
-var HttpRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRoute",
-}, smithy.ShapeTypeStructure, 4)
-var HttpRoute_match *smithy.Schema
-
-var HttpRoute_action *smithy.Schema
-
-var HttpRoute_retryPolicy *smithy.Schema
-
-var HttpRoute_timeout *smithy.Schema
-
-var HttpRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRouteAction",
-}, smithy.ShapeTypeStructure, 1)
-var HttpRouteAction_weightedTargets *smithy.Schema
-
-var HttpRouteHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRouteHeader",
-}, smithy.ShapeTypeStructure, 3)
-var HttpRouteHeader_name *smithy.Schema
-
-var HttpRouteHeader_invert *smithy.Schema
-
-var HttpRouteHeader_match *smithy.Schema
-
-var _HttpRouteHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRouteHeaders",
-}, smithy.ShapeTypeList, 1)
-var _HttpRouteHeaders_member *smithy.Schema
-
-var HttpRouteMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpRouteMatch",
-}, smithy.ShapeTypeStructure, 7)
-var HttpRouteMatch_prefix *smithy.Schema
-
-var HttpRouteMatch_path *smithy.Schema
-
-var HttpRouteMatch_queryParameters *smithy.Schema
-
-var HttpRouteMatch_method *smithy.Schema
-
-var HttpRouteMatch_scheme *smithy.Schema
-
-var HttpRouteMatch_headers *smithy.Schema
-
-var HttpRouteMatch_port *smithy.Schema
-
-var _HttpScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpScheme",
-}, smithy.ShapeTypeString, 0)
-
-var HttpTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "HttpTimeout",
-}, smithy.ShapeTypeStructure, 2)
-var HttpTimeout_perRequest *smithy.Schema
-
-var HttpTimeout_idle *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_message *smithy.Schema
-
-var _IpPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "IpPreference",
-}, smithy.ShapeTypeString, 0)
-
-var _JsonFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "JsonFormat",
-}, smithy.ShapeTypeList, 1)
-var _JsonFormat_member *smithy.Schema
-
-var JsonFormatRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "JsonFormatRef",
-}, smithy.ShapeTypeStructure, 2)
-var JsonFormatRef_key *smithy.Schema
-
-var JsonFormatRef_value *smithy.Schema
-
-var _JsonKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "JsonKey",
-}, smithy.ShapeTypeString, 0)
-
-var _JsonValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "JsonValue",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_message *smithy.Schema
-
-var Listener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Listener",
-}, smithy.ShapeTypeStructure, 6)
-var Listener_portMapping *smithy.Schema
-
-var Listener_tls *smithy.Schema
-
-var Listener_healthCheck *smithy.Schema
-
-var Listener_timeout *smithy.Schema
-
-var Listener_outlierDetection *smithy.Schema
-
-var Listener_connectionPool *smithy.Schema
-
-var _ListenerPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Listeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Listeners",
-}, smithy.ShapeTypeList, 1)
-var _Listeners_member *smithy.Schema
-
-var ListenerTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTimeout",
-}, smithy.ShapeTypeUnion, 4)
-var ListenerTimeout_tcp *smithy.Schema
-
-var ListenerTimeout_http *smithy.Schema
-
-var ListenerTimeout_http2 *smithy.Schema
-
-var ListenerTimeout_grpc *smithy.Schema
-
-var ListenerTls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTls",
-}, smithy.ShapeTypeStructure, 3)
-var ListenerTls_mode *smithy.Schema
-
-var ListenerTls_certificate *smithy.Schema
-
-var ListenerTls_validation *smithy.Schema
-
-var ListenerTlsAcmCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTlsAcmCertificate",
-}, smithy.ShapeTypeStructure, 1)
-var ListenerTlsAcmCertificate_certificateArn *smithy.Schema
-
-var ListenerTlsCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTlsCertificate",
-}, smithy.ShapeTypeUnion, 3)
-var ListenerTlsCertificate_acm *smithy.Schema
-
-var ListenerTlsCertificate_file *smithy.Schema
-
-var ListenerTlsCertificate_sds *smithy.Schema
-
-var ListenerTlsFileCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTlsFileCertificate",
-}, smithy.ShapeTypeStructure, 2)
-var ListenerTlsFileCertificate_certificateChain *smithy.Schema
-
-var ListenerTlsFileCertificate_privateKey *smithy.Schema
-
-var _ListenerTlsMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTlsMode",
-}, smithy.ShapeTypeString, 0)
-
-var ListenerTlsSdsCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTlsSdsCertificate",
-}, smithy.ShapeTypeStructure, 1)
-var ListenerTlsSdsCertificate_secretName *smithy.Schema
-
-var ListenerTlsValidationContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTlsValidationContext",
-}, smithy.ShapeTypeStructure, 2)
-var ListenerTlsValidationContext_trust *smithy.Schema
-
-var ListenerTlsValidationContext_subjectAlternativeNames *smithy.Schema
-
-var ListenerTlsValidationContextTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListenerTlsValidationContextTrust",
-}, smithy.ShapeTypeUnion, 2)
-var ListenerTlsValidationContextTrust_file *smithy.Schema
-
-var ListenerTlsValidationContextTrust_sds *smithy.Schema
-
-var _ListGatewayRoutesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListGatewayRoutesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListMeshesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListMeshesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListRoutesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListRoutesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListVirtualGatewaysLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualGatewaysLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListVirtualNodesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualNodesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListVirtualRoutersLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualRoutersLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListVirtualServicesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualServicesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var Logging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "Logging",
-}, smithy.ShapeTypeStructure, 1)
-var Logging_accessLog *smithy.Schema
-
-var LoggingFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "LoggingFormat",
-}, smithy.ShapeTypeUnion, 2)
-var LoggingFormat_text *smithy.Schema
-
-var LoggingFormat_json *smithy.Schema
-
-var MatchRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MatchRange",
-}, smithy.ShapeTypeStructure, 2)
-var MatchRange_start *smithy.Schema
-
-var MatchRange_end *smithy.Schema
-
-var _MaxConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MaxConnections",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxPendingRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MaxPendingRequests",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MaxRequests",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxRetries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MaxRetries",
-}, smithy.ShapeTypeLong, 0)
-
-var MeshData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MeshData",
-}, smithy.ShapeTypeStructure, 4)
-var MeshData_meshName *smithy.Schema
-
-var MeshData_spec *smithy.Schema
-
-var MeshData_metadata *smithy.Schema
-
-var MeshData_status *smithy.Schema
-
-var _MeshList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MeshList",
-}, smithy.ShapeTypeList, 1)
-var _MeshList_member *smithy.Schema
-
-var MeshRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MeshRef",
-}, smithy.ShapeTypeStructure, 7)
-var MeshRef_meshName *smithy.Schema
-
-var MeshRef_meshOwner *smithy.Schema
-
-var MeshRef_resourceOwner *smithy.Schema
-
-var MeshRef_arn *smithy.Schema
-
-var MeshRef_version *smithy.Schema
-
-var MeshRef_createdAt *smithy.Schema
-
-var MeshRef_lastUpdatedAt *smithy.Schema
-
-var MeshServiceDiscovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MeshServiceDiscovery",
-}, smithy.ShapeTypeStructure, 1)
-var MeshServiceDiscovery_ipPreference *smithy.Schema
-
-var MeshSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MeshSpec",
-}, smithy.ShapeTypeStructure, 2)
-var MeshSpec_egressFilter *smithy.Schema
-
-var MeshSpec_serviceDiscovery *smithy.Schema
-
-var MeshStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MeshStatus",
-}, smithy.ShapeTypeStructure, 1)
-var MeshStatus_status *smithy.Schema
-
-var _MeshStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MeshStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var _MethodName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "MethodName",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var OutlierDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "OutlierDetection",
-}, smithy.ShapeTypeStructure, 4)
-var OutlierDetection_maxServerErrors *smithy.Schema
-
-var OutlierDetection_interval *smithy.Schema
-
-var OutlierDetection_baseEjectionDuration *smithy.Schema
-
-var OutlierDetection_maxEjectionPercent *smithy.Schema
-
-var _OutlierDetectionMaxEjectionPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "OutlierDetectionMaxEjectionPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var _OutlierDetectionMaxServerErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "OutlierDetectionMaxServerErrors",
-}, smithy.ShapeTypeLong, 0)
-
-var _PercentInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "PercentInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var PortMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "PortMapping",
-}, smithy.ShapeTypeStructure, 2)
-var PortMapping_port *smithy.Schema
-
-var PortMapping_protocol *smithy.Schema
-
-var _PortNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "PortNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PortProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "PortProtocol",
-}, smithy.ShapeTypeString, 0)
-
-var _PortSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "PortSet",
-}, smithy.ShapeTypeList, 1)
-var _PortSet_member *smithy.Schema
-
-var QueryParameterMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "QueryParameterMatch",
-}, smithy.ShapeTypeStructure, 1)
-var QueryParameterMatch_exact *smithy.Schema
-
-var _QueryParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "QueryParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUseException_message *smithy.Schema
-
-var ResourceMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ResourceMetadata",
-}, smithy.ShapeTypeStructure, 7)
-var ResourceMetadata_arn *smithy.Schema
-
-var ResourceMetadata_version *smithy.Schema
-
-var ResourceMetadata_uid *smithy.Schema
-
-var ResourceMetadata_createdAt *smithy.Schema
-
-var ResourceMetadata_lastUpdatedAt *smithy.Schema
-
-var ResourceMetadata_meshOwner *smithy.Schema
-
-var ResourceMetadata_resourceOwner *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var RouteData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "RouteData",
-}, smithy.ShapeTypeStructure, 6)
-var RouteData_meshName *smithy.Schema
-
-var RouteData_virtualRouterName *smithy.Schema
-
-var RouteData_routeName *smithy.Schema
-
-var RouteData_spec *smithy.Schema
-
-var RouteData_metadata *smithy.Schema
-
-var RouteData_status *smithy.Schema
-
-var _RouteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "RouteList",
-}, smithy.ShapeTypeList, 1)
-var _RouteList_member *smithy.Schema
-
-var _RoutePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "RoutePriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var RouteRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "RouteRef",
-}, smithy.ShapeTypeStructure, 9)
-var RouteRef_meshName *smithy.Schema
-
-var RouteRef_virtualRouterName *smithy.Schema
-
-var RouteRef_routeName *smithy.Schema
-
-var RouteRef_meshOwner *smithy.Schema
-
-var RouteRef_resourceOwner *smithy.Schema
-
-var RouteRef_arn *smithy.Schema
-
-var RouteRef_version *smithy.Schema
-
-var RouteRef_createdAt *smithy.Schema
-
-var RouteRef_lastUpdatedAt *smithy.Schema
-
-var RouteSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "RouteSpec",
-}, smithy.ShapeTypeStructure, 5)
-var RouteSpec_priority *smithy.Schema
-
-var RouteSpec_httpRoute *smithy.Schema
-
-var RouteSpec_tcpRoute *smithy.Schema
-
-var RouteSpec_http2Route *smithy.Schema
-
-var RouteSpec_grpcRoute *smithy.Schema
-
-var RouteStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "RouteStatus",
-}, smithy.ShapeTypeStructure, 1)
-var RouteStatus_status *smithy.Schema
-
-var _RouteStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "RouteStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var _SdsSecretName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "SdsSecretName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceDiscovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ServiceDiscovery",
-}, smithy.ShapeTypeUnion, 2)
-var ServiceDiscovery_dns *smithy.Schema
-
-var ServiceDiscovery_awsCloudMap *smithy.Schema
-
-var _ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var _SubjectAlternativeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "SubjectAlternativeName",
-}, smithy.ShapeTypeString, 0)
-
-var _SubjectAlternativeNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "SubjectAlternativeNameList",
-}, smithy.ShapeTypeList, 1)
-var _SubjectAlternativeNameList_member *smithy.Schema
-
-var SubjectAlternativeNameMatchers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "SubjectAlternativeNameMatchers",
-}, smithy.ShapeTypeStructure, 1)
-var SubjectAlternativeNameMatchers_exact *smithy.Schema
-
-var SubjectAlternativeNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "SubjectAlternativeNames",
-}, smithy.ShapeTypeStructure, 1)
-var SubjectAlternativeNames_match *smithy.Schema
-
-var _SuffixHostname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "SuffixHostname",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TagRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagRef",
-}, smithy.ShapeTypeStructure, 2)
-var TagRef_key *smithy.Schema
-
-var TagRef_value *smithy.Schema
-
-var _TagsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TcpRetryPolicyEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TcpRetryPolicyEvent",
-}, smithy.ShapeTypeString, 0)
-
-var _TcpRetryPolicyEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TcpRetryPolicyEvents",
-}, smithy.ShapeTypeList, 1)
-var _TcpRetryPolicyEvents_member *smithy.Schema
-
-var TcpRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TcpRoute",
-}, smithy.ShapeTypeStructure, 3)
-var TcpRoute_action *smithy.Schema
-
-var TcpRoute_timeout *smithy.Schema
-
-var TcpRoute_match *smithy.Schema
-
-var TcpRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TcpRouteAction",
-}, smithy.ShapeTypeStructure, 1)
-var TcpRouteAction_weightedTargets *smithy.Schema
-
-var TcpRouteMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TcpRouteMatch",
-}, smithy.ShapeTypeStructure, 1)
-var TcpRouteMatch_port *smithy.Schema
-
-var TcpTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TcpTimeout",
-}, smithy.ShapeTypeStructure, 1)
-var TcpTimeout_idle *smithy.Schema
-
-var _TextFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TextFormat",
-}, smithy.ShapeTypeString, 0)
-
-var TlsValidationContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TlsValidationContext",
-}, smithy.ShapeTypeStructure, 2)
-var TlsValidationContext_trust *smithy.Schema
-
-var TlsValidationContext_subjectAlternativeNames *smithy.Schema
-
-var TlsValidationContextAcmTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TlsValidationContextAcmTrust",
-}, smithy.ShapeTypeStructure, 1)
-var TlsValidationContextAcmTrust_certificateAuthorityArns *smithy.Schema
-
-var TlsValidationContextFileTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TlsValidationContextFileTrust",
-}, smithy.ShapeTypeStructure, 1)
-var TlsValidationContextFileTrust_certificateChain *smithy.Schema
-
-var TlsValidationContextSdsTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TlsValidationContextSdsTrust",
-}, smithy.ShapeTypeStructure, 1)
-var TlsValidationContextSdsTrust_secretName *smithy.Schema
-
-var TlsValidationContextTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TlsValidationContextTrust",
-}, smithy.ShapeTypeUnion, 3)
-var TlsValidationContextTrust_acm *smithy.Schema
-
-var TlsValidationContextTrust_file *smithy.Schema
-
-var TlsValidationContextTrust_sds *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var VirtualGatewayAccessLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayAccessLog",
-}, smithy.ShapeTypeUnion, 1)
-var VirtualGatewayAccessLog_file *smithy.Schema
-
-var VirtualGatewayBackendDefaults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayBackendDefaults",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayBackendDefaults_clientPolicy *smithy.Schema
-
-var _VirtualGatewayCertificateAuthorityArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayCertificateAuthorityArns",
-}, smithy.ShapeTypeList, 1)
-var _VirtualGatewayCertificateAuthorityArns_member *smithy.Schema
-
-var VirtualGatewayClientPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayClientPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayClientPolicy_tls *smithy.Schema
-
-var VirtualGatewayClientPolicyTls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayClientPolicyTls",
-}, smithy.ShapeTypeStructure, 4)
-var VirtualGatewayClientPolicyTls_enforce *smithy.Schema
-
-var VirtualGatewayClientPolicyTls_ports *smithy.Schema
-
-var VirtualGatewayClientPolicyTls_certificate *smithy.Schema
-
-var VirtualGatewayClientPolicyTls_validation *smithy.Schema
-
-var VirtualGatewayClientTlsCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayClientTlsCertificate",
-}, smithy.ShapeTypeUnion, 2)
-var VirtualGatewayClientTlsCertificate_file *smithy.Schema
-
-var VirtualGatewayClientTlsCertificate_sds *smithy.Schema
-
-var VirtualGatewayConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayConnectionPool",
-}, smithy.ShapeTypeUnion, 3)
-var VirtualGatewayConnectionPool_http *smithy.Schema
-
-var VirtualGatewayConnectionPool_http2 *smithy.Schema
-
-var VirtualGatewayConnectionPool_grpc *smithy.Schema
-
-var VirtualGatewayData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayData",
-}, smithy.ShapeTypeStructure, 5)
-var VirtualGatewayData_meshName *smithy.Schema
-
-var VirtualGatewayData_virtualGatewayName *smithy.Schema
-
-var VirtualGatewayData_spec *smithy.Schema
-
-var VirtualGatewayData_metadata *smithy.Schema
-
-var VirtualGatewayData_status *smithy.Schema
-
-var VirtualGatewayFileAccessLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayFileAccessLog",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualGatewayFileAccessLog_path *smithy.Schema
-
-var VirtualGatewayFileAccessLog_format *smithy.Schema
-
-var VirtualGatewayGrpcConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayGrpcConnectionPool",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayGrpcConnectionPool_maxRequests *smithy.Schema
-
-var _VirtualGatewayHealthCheckIntervalMillis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayHealthCheckIntervalMillis",
-}, smithy.ShapeTypeLong, 0)
-
-var VirtualGatewayHealthCheckPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayHealthCheckPolicy",
-}, smithy.ShapeTypeStructure, 7)
-var VirtualGatewayHealthCheckPolicy_timeoutMillis *smithy.Schema
-
-var VirtualGatewayHealthCheckPolicy_intervalMillis *smithy.Schema
-
-var VirtualGatewayHealthCheckPolicy_protocol *smithy.Schema
-
-var VirtualGatewayHealthCheckPolicy_port *smithy.Schema
-
-var VirtualGatewayHealthCheckPolicy_path *smithy.Schema
-
-var VirtualGatewayHealthCheckPolicy_healthyThreshold *smithy.Schema
-
-var VirtualGatewayHealthCheckPolicy_unhealthyThreshold *smithy.Schema
-
-var _VirtualGatewayHealthCheckThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayHealthCheckThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VirtualGatewayHealthCheckTimeoutMillis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayHealthCheckTimeoutMillis",
-}, smithy.ShapeTypeLong, 0)
-
-var VirtualGatewayHttp2ConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayHttp2ConnectionPool",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayHttp2ConnectionPool_maxRequests *smithy.Schema
-
-var VirtualGatewayHttpConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayHttpConnectionPool",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualGatewayHttpConnectionPool_maxConnections *smithy.Schema
-
-var VirtualGatewayHttpConnectionPool_maxPendingRequests *smithy.Schema
-
-var _VirtualGatewayList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayList",
-}, smithy.ShapeTypeList, 1)
-var _VirtualGatewayList_member *smithy.Schema
-
-var VirtualGatewayListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListener",
-}, smithy.ShapeTypeStructure, 4)
-var VirtualGatewayListener_healthCheck *smithy.Schema
-
-var VirtualGatewayListener_portMapping *smithy.Schema
-
-var VirtualGatewayListener_tls *smithy.Schema
-
-var VirtualGatewayListener_connectionPool *smithy.Schema
-
-var _VirtualGatewayListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListeners",
-}, smithy.ShapeTypeList, 1)
-var _VirtualGatewayListeners_member *smithy.Schema
-
-var VirtualGatewayListenerTls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTls",
-}, smithy.ShapeTypeStructure, 3)
-var VirtualGatewayListenerTls_mode *smithy.Schema
-
-var VirtualGatewayListenerTls_validation *smithy.Schema
-
-var VirtualGatewayListenerTls_certificate *smithy.Schema
-
-var VirtualGatewayListenerTlsAcmCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTlsAcmCertificate",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayListenerTlsAcmCertificate_certificateArn *smithy.Schema
-
-var VirtualGatewayListenerTlsCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTlsCertificate",
-}, smithy.ShapeTypeUnion, 3)
-var VirtualGatewayListenerTlsCertificate_acm *smithy.Schema
-
-var VirtualGatewayListenerTlsCertificate_file *smithy.Schema
-
-var VirtualGatewayListenerTlsCertificate_sds *smithy.Schema
-
-var VirtualGatewayListenerTlsFileCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTlsFileCertificate",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualGatewayListenerTlsFileCertificate_certificateChain *smithy.Schema
-
-var VirtualGatewayListenerTlsFileCertificate_privateKey *smithy.Schema
-
-var _VirtualGatewayListenerTlsMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTlsMode",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualGatewayListenerTlsSdsCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTlsSdsCertificate",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayListenerTlsSdsCertificate_secretName *smithy.Schema
-
-var VirtualGatewayListenerTlsValidationContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTlsValidationContext",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualGatewayListenerTlsValidationContext_trust *smithy.Schema
-
-var VirtualGatewayListenerTlsValidationContext_subjectAlternativeNames *smithy.Schema
-
-var VirtualGatewayListenerTlsValidationContextTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayListenerTlsValidationContextTrust",
-}, smithy.ShapeTypeUnion, 2)
-var VirtualGatewayListenerTlsValidationContextTrust_file *smithy.Schema
-
-var VirtualGatewayListenerTlsValidationContextTrust_sds *smithy.Schema
-
-var VirtualGatewayLogging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayLogging",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayLogging_accessLog *smithy.Schema
-
-var VirtualGatewayPortMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayPortMapping",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualGatewayPortMapping_port *smithy.Schema
-
-var VirtualGatewayPortMapping_protocol *smithy.Schema
-
-var _VirtualGatewayPortProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayPortProtocol",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualGatewayRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayRef",
-}, smithy.ShapeTypeStructure, 8)
-var VirtualGatewayRef_meshName *smithy.Schema
-
-var VirtualGatewayRef_virtualGatewayName *smithy.Schema
-
-var VirtualGatewayRef_meshOwner *smithy.Schema
-
-var VirtualGatewayRef_resourceOwner *smithy.Schema
-
-var VirtualGatewayRef_arn *smithy.Schema
-
-var VirtualGatewayRef_version *smithy.Schema
-
-var VirtualGatewayRef_createdAt *smithy.Schema
-
-var VirtualGatewayRef_lastUpdatedAt *smithy.Schema
-
-var _VirtualGatewaySdsSecretName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewaySdsSecretName",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualGatewaySpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewaySpec",
-}, smithy.ShapeTypeStructure, 3)
-var VirtualGatewaySpec_backendDefaults *smithy.Schema
-
-var VirtualGatewaySpec_listeners *smithy.Schema
-
-var VirtualGatewaySpec_logging *smithy.Schema
-
-var VirtualGatewayStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayStatus",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayStatus_status *smithy.Schema
-
-var _VirtualGatewayStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualGatewayTlsValidationContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayTlsValidationContext",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualGatewayTlsValidationContext_trust *smithy.Schema
-
-var VirtualGatewayTlsValidationContext_subjectAlternativeNames *smithy.Schema
-
-var VirtualGatewayTlsValidationContextAcmTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayTlsValidationContextAcmTrust",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns *smithy.Schema
-
-var VirtualGatewayTlsValidationContextFileTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayTlsValidationContextFileTrust",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayTlsValidationContextFileTrust_certificateChain *smithy.Schema
-
-var VirtualGatewayTlsValidationContextSdsTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayTlsValidationContextSdsTrust",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGatewayTlsValidationContextSdsTrust_secretName *smithy.Schema
-
-var VirtualGatewayTlsValidationContextTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualGatewayTlsValidationContextTrust",
-}, smithy.ShapeTypeUnion, 3)
-var VirtualGatewayTlsValidationContextTrust_acm *smithy.Schema
-
-var VirtualGatewayTlsValidationContextTrust_file *smithy.Schema
-
-var VirtualGatewayTlsValidationContextTrust_sds *smithy.Schema
-
-var VirtualNodeConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeConnectionPool",
-}, smithy.ShapeTypeUnion, 4)
-var VirtualNodeConnectionPool_tcp *smithy.Schema
-
-var VirtualNodeConnectionPool_http *smithy.Schema
-
-var VirtualNodeConnectionPool_http2 *smithy.Schema
-
-var VirtualNodeConnectionPool_grpc *smithy.Schema
-
-var VirtualNodeData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeData",
-}, smithy.ShapeTypeStructure, 5)
-var VirtualNodeData_meshName *smithy.Schema
-
-var VirtualNodeData_virtualNodeName *smithy.Schema
-
-var VirtualNodeData_spec *smithy.Schema
-
-var VirtualNodeData_metadata *smithy.Schema
-
-var VirtualNodeData_status *smithy.Schema
-
-var VirtualNodeGrpcConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeGrpcConnectionPool",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualNodeGrpcConnectionPool_maxRequests *smithy.Schema
-
-var VirtualNodeHttp2ConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeHttp2ConnectionPool",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualNodeHttp2ConnectionPool_maxRequests *smithy.Schema
-
-var VirtualNodeHttpConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeHttpConnectionPool",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualNodeHttpConnectionPool_maxConnections *smithy.Schema
-
-var VirtualNodeHttpConnectionPool_maxPendingRequests *smithy.Schema
-
-var _VirtualNodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeList",
-}, smithy.ShapeTypeList, 1)
-var _VirtualNodeList_member *smithy.Schema
-
-var VirtualNodeRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeRef",
-}, smithy.ShapeTypeStructure, 8)
-var VirtualNodeRef_meshName *smithy.Schema
-
-var VirtualNodeRef_virtualNodeName *smithy.Schema
-
-var VirtualNodeRef_meshOwner *smithy.Schema
-
-var VirtualNodeRef_resourceOwner *smithy.Schema
-
-var VirtualNodeRef_arn *smithy.Schema
-
-var VirtualNodeRef_version *smithy.Schema
-
-var VirtualNodeRef_createdAt *smithy.Schema
-
-var VirtualNodeRef_lastUpdatedAt *smithy.Schema
-
-var VirtualNodeServiceProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeServiceProvider",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualNodeServiceProvider_virtualNodeName *smithy.Schema
-
-var VirtualNodeSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeSpec",
-}, smithy.ShapeTypeStructure, 5)
-var VirtualNodeSpec_serviceDiscovery *smithy.Schema
-
-var VirtualNodeSpec_listeners *smithy.Schema
-
-var VirtualNodeSpec_backends *smithy.Schema
-
-var VirtualNodeSpec_backendDefaults *smithy.Schema
-
-var VirtualNodeSpec_logging *smithy.Schema
-
-var VirtualNodeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeStatus",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualNodeStatus_status *smithy.Schema
-
-var _VirtualNodeStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualNodeTcpConnectionPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualNodeTcpConnectionPool",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualNodeTcpConnectionPool_maxConnections *smithy.Schema
-
-var VirtualRouterData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterData",
-}, smithy.ShapeTypeStructure, 5)
-var VirtualRouterData_meshName *smithy.Schema
-
-var VirtualRouterData_virtualRouterName *smithy.Schema
-
-var VirtualRouterData_spec *smithy.Schema
-
-var VirtualRouterData_metadata *smithy.Schema
-
-var VirtualRouterData_status *smithy.Schema
-
-var _VirtualRouterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterList",
-}, smithy.ShapeTypeList, 1)
-var _VirtualRouterList_member *smithy.Schema
-
-var VirtualRouterListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterListener",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualRouterListener_portMapping *smithy.Schema
-
-var _VirtualRouterListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterListeners",
-}, smithy.ShapeTypeList, 1)
-var _VirtualRouterListeners_member *smithy.Schema
-
-var VirtualRouterRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterRef",
-}, smithy.ShapeTypeStructure, 8)
-var VirtualRouterRef_meshName *smithy.Schema
-
-var VirtualRouterRef_virtualRouterName *smithy.Schema
-
-var VirtualRouterRef_meshOwner *smithy.Schema
-
-var VirtualRouterRef_resourceOwner *smithy.Schema
-
-var VirtualRouterRef_arn *smithy.Schema
-
-var VirtualRouterRef_version *smithy.Schema
-
-var VirtualRouterRef_createdAt *smithy.Schema
-
-var VirtualRouterRef_lastUpdatedAt *smithy.Schema
-
-var VirtualRouterServiceProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterServiceProvider",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualRouterServiceProvider_virtualRouterName *smithy.Schema
-
-var VirtualRouterSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterSpec",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualRouterSpec_listeners *smithy.Schema
-
-var VirtualRouterStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterStatus",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualRouterStatus_status *smithy.Schema
-
-var _VirtualRouterStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualRouterStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualServiceBackend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceBackend",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualServiceBackend_virtualServiceName *smithy.Schema
-
-var VirtualServiceBackend_clientPolicy *smithy.Schema
-
-var VirtualServiceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceData",
-}, smithy.ShapeTypeStructure, 5)
-var VirtualServiceData_meshName *smithy.Schema
-
-var VirtualServiceData_virtualServiceName *smithy.Schema
-
-var VirtualServiceData_spec *smithy.Schema
-
-var VirtualServiceData_metadata *smithy.Schema
-
-var VirtualServiceData_status *smithy.Schema
-
-var _VirtualServiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceList",
-}, smithy.ShapeTypeList, 1)
-var _VirtualServiceList_member *smithy.Schema
-
-var VirtualServiceProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceProvider",
-}, smithy.ShapeTypeUnion, 2)
-var VirtualServiceProvider_virtualNode *smithy.Schema
-
-var VirtualServiceProvider_virtualRouter *smithy.Schema
-
-var VirtualServiceRef = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceRef",
-}, smithy.ShapeTypeStructure, 8)
-var VirtualServiceRef_meshName *smithy.Schema
-
-var VirtualServiceRef_virtualServiceName *smithy.Schema
-
-var VirtualServiceRef_meshOwner *smithy.Schema
-
-var VirtualServiceRef_resourceOwner *smithy.Schema
-
-var VirtualServiceRef_arn *smithy.Schema
-
-var VirtualServiceRef_version *smithy.Schema
-
-var VirtualServiceRef_createdAt *smithy.Schema
-
-var VirtualServiceRef_lastUpdatedAt *smithy.Schema
-
-var VirtualServiceSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceSpec",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualServiceSpec_provider *smithy.Schema
-
-var VirtualServiceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceStatus",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualServiceStatus_status *smithy.Schema
-
-var _VirtualServiceStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "VirtualServiceStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var WeightedTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "WeightedTarget",
-}, smithy.ShapeTypeStructure, 3)
-var WeightedTarget_virtualNode *smithy.Schema
-
-var WeightedTarget_weight *smithy.Schema
-
-var WeightedTarget_port *smithy.Schema
-
-var _WeightedTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "WeightedTargets",
-}, smithy.ShapeTypeList, 1)
-var _WeightedTargets_member *smithy.Schema
-
-var CreateGatewayRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateGatewayRouteInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateGatewayRouteInput_gatewayRouteName *smithy.Schema
-
-var CreateGatewayRouteInput_meshName *smithy.Schema
-
-var CreateGatewayRouteInput_virtualGatewayName *smithy.Schema
-
-var CreateGatewayRouteInput_spec *smithy.Schema
-
-var CreateGatewayRouteInput_tags *smithy.Schema
-
-var CreateGatewayRouteInput_clientToken *smithy.Schema
-
-var CreateGatewayRouteInput_meshOwner *smithy.Schema
-
-var CreateGatewayRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateGatewayRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGatewayRouteOutput_gatewayRoute *smithy.Schema
-
-var CreateMeshInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateMeshInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMeshInput_meshName *smithy.Schema
-
-var CreateMeshInput_spec *smithy.Schema
-
-var CreateMeshInput_tags *smithy.Schema
-
-var CreateMeshInput_clientToken *smithy.Schema
-
-var CreateMeshOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateMeshOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMeshOutput_mesh *smithy.Schema
-
-var CreateRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateRouteInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateRouteInput_routeName *smithy.Schema
-
-var CreateRouteInput_meshName *smithy.Schema
-
-var CreateRouteInput_virtualRouterName *smithy.Schema
-
-var CreateRouteInput_spec *smithy.Schema
-
-var CreateRouteInput_tags *smithy.Schema
-
-var CreateRouteInput_clientToken *smithy.Schema
-
-var CreateRouteInput_meshOwner *smithy.Schema
-
-var CreateRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRouteOutput_route *smithy.Schema
-
-var CreateVirtualGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualGatewayInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateVirtualGatewayInput_virtualGatewayName *smithy.Schema
-
-var CreateVirtualGatewayInput_meshName *smithy.Schema
-
-var CreateVirtualGatewayInput_spec *smithy.Schema
-
-var CreateVirtualGatewayInput_tags *smithy.Schema
-
-var CreateVirtualGatewayInput_clientToken *smithy.Schema
-
-var CreateVirtualGatewayInput_meshOwner *smithy.Schema
-
-var CreateVirtualGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVirtualGatewayOutput_virtualGateway *smithy.Schema
-
-var CreateVirtualNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualNodeInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateVirtualNodeInput_virtualNodeName *smithy.Schema
-
-var CreateVirtualNodeInput_meshName *smithy.Schema
-
-var CreateVirtualNodeInput_spec *smithy.Schema
-
-var CreateVirtualNodeInput_tags *smithy.Schema
-
-var CreateVirtualNodeInput_clientToken *smithy.Schema
-
-var CreateVirtualNodeInput_meshOwner *smithy.Schema
-
-var CreateVirtualNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualNodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVirtualNodeOutput_virtualNode *smithy.Schema
-
-var CreateVirtualRouterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualRouterInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateVirtualRouterInput_virtualRouterName *smithy.Schema
-
-var CreateVirtualRouterInput_meshName *smithy.Schema
-
-var CreateVirtualRouterInput_spec *smithy.Schema
-
-var CreateVirtualRouterInput_tags *smithy.Schema
-
-var CreateVirtualRouterInput_clientToken *smithy.Schema
-
-var CreateVirtualRouterInput_meshOwner *smithy.Schema
-
-var CreateVirtualRouterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualRouterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVirtualRouterOutput_virtualRouter *smithy.Schema
-
-var CreateVirtualServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualServiceInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateVirtualServiceInput_virtualServiceName *smithy.Schema
-
-var CreateVirtualServiceInput_meshName *smithy.Schema
-
-var CreateVirtualServiceInput_spec *smithy.Schema
-
-var CreateVirtualServiceInput_tags *smithy.Schema
-
-var CreateVirtualServiceInput_clientToken *smithy.Schema
-
-var CreateVirtualServiceInput_meshOwner *smithy.Schema
-
-var CreateVirtualServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "CreateVirtualServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVirtualServiceOutput_virtualService *smithy.Schema
-
-var DeleteGatewayRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteGatewayRouteInput",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteGatewayRouteInput_gatewayRouteName *smithy.Schema
-
-var DeleteGatewayRouteInput_meshName *smithy.Schema
-
-var DeleteGatewayRouteInput_virtualGatewayName *smithy.Schema
-
-var DeleteGatewayRouteInput_meshOwner *smithy.Schema
-
-var DeleteGatewayRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteGatewayRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayRouteOutput_gatewayRoute *smithy.Schema
-
-var DeleteMeshInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteMeshInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMeshInput_meshName *smithy.Schema
-
-var DeleteMeshOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteMeshOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMeshOutput_mesh *smithy.Schema
-
-var DeleteRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteRouteInput",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteRouteInput_routeName *smithy.Schema
-
-var DeleteRouteInput_meshName *smithy.Schema
-
-var DeleteRouteInput_virtualRouterName *smithy.Schema
-
-var DeleteRouteInput_meshOwner *smithy.Schema
-
-var DeleteRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRouteOutput_route *smithy.Schema
-
-var DeleteVirtualGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualGatewayInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteVirtualGatewayInput_virtualGatewayName *smithy.Schema
-
-var DeleteVirtualGatewayInput_meshName *smithy.Schema
-
-var DeleteVirtualGatewayInput_meshOwner *smithy.Schema
-
-var DeleteVirtualGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVirtualGatewayOutput_virtualGateway *smithy.Schema
-
-var DeleteVirtualNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteVirtualNodeInput_virtualNodeName *smithy.Schema
-
-var DeleteVirtualNodeInput_meshName *smithy.Schema
-
-var DeleteVirtualNodeInput_meshOwner *smithy.Schema
-
-var DeleteVirtualNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualNodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVirtualNodeOutput_virtualNode *smithy.Schema
-
-var DeleteVirtualRouterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualRouterInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteVirtualRouterInput_virtualRouterName *smithy.Schema
-
-var DeleteVirtualRouterInput_meshName *smithy.Schema
-
-var DeleteVirtualRouterInput_meshOwner *smithy.Schema
-
-var DeleteVirtualRouterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualRouterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVirtualRouterOutput_virtualRouter *smithy.Schema
-
-var DeleteVirtualServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualServiceInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteVirtualServiceInput_virtualServiceName *smithy.Schema
-
-var DeleteVirtualServiceInput_meshName *smithy.Schema
-
-var DeleteVirtualServiceInput_meshOwner *smithy.Schema
-
-var DeleteVirtualServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DeleteVirtualServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVirtualServiceOutput_virtualService *smithy.Schema
-
-var DescribeGatewayRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeGatewayRouteInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeGatewayRouteInput_gatewayRouteName *smithy.Schema
-
-var DescribeGatewayRouteInput_meshName *smithy.Schema
-
-var DescribeGatewayRouteInput_virtualGatewayName *smithy.Schema
-
-var DescribeGatewayRouteInput_meshOwner *smithy.Schema
-
-var DescribeGatewayRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeGatewayRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeGatewayRouteOutput_gatewayRoute *smithy.Schema
-
-var DescribeMeshInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeMeshInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeMeshInput_meshName *smithy.Schema
-
-var DescribeMeshInput_meshOwner *smithy.Schema
-
-var DescribeMeshOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeMeshOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeMeshOutput_mesh *smithy.Schema
-
-var DescribeRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeRouteInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeRouteInput_routeName *smithy.Schema
-
-var DescribeRouteInput_meshName *smithy.Schema
-
-var DescribeRouteInput_meshOwner *smithy.Schema
-
-var DescribeRouteInput_virtualRouterName *smithy.Schema
-
-var DescribeRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRouteOutput_route *smithy.Schema
-
-var DescribeVirtualGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualGatewayInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeVirtualGatewayInput_virtualGatewayName *smithy.Schema
-
-var DescribeVirtualGatewayInput_meshName *smithy.Schema
-
-var DescribeVirtualGatewayInput_meshOwner *smithy.Schema
-
-var DescribeVirtualGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVirtualGatewayOutput_virtualGateway *smithy.Schema
-
-var DescribeVirtualNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeVirtualNodeInput_virtualNodeName *smithy.Schema
-
-var DescribeVirtualNodeInput_meshName *smithy.Schema
-
-var DescribeVirtualNodeInput_meshOwner *smithy.Schema
-
-var DescribeVirtualNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualNodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVirtualNodeOutput_virtualNode *smithy.Schema
-
-var DescribeVirtualRouterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualRouterInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeVirtualRouterInput_virtualRouterName *smithy.Schema
-
-var DescribeVirtualRouterInput_meshName *smithy.Schema
-
-var DescribeVirtualRouterInput_meshOwner *smithy.Schema
-
-var DescribeVirtualRouterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualRouterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVirtualRouterOutput_virtualRouter *smithy.Schema
-
-var DescribeVirtualServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualServiceInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeVirtualServiceInput_virtualServiceName *smithy.Schema
-
-var DescribeVirtualServiceInput_meshName *smithy.Schema
-
-var DescribeVirtualServiceInput_meshOwner *smithy.Schema
-
-var DescribeVirtualServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "DescribeVirtualServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVirtualServiceOutput_virtualService *smithy.Schema
-
-var ListGatewayRoutesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListGatewayRoutesInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListGatewayRoutesInput_meshName *smithy.Schema
-
-var ListGatewayRoutesInput_virtualGatewayName *smithy.Schema
-
-var ListGatewayRoutesInput_nextToken *smithy.Schema
-
-var ListGatewayRoutesInput_limit *smithy.Schema
-
-var ListGatewayRoutesInput_meshOwner *smithy.Schema
-
-var ListGatewayRoutesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListGatewayRoutesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewayRoutesOutput_gatewayRoutes *smithy.Schema
-
-var ListGatewayRoutesOutput_nextToken *smithy.Schema
-
-var ListMeshesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListMeshesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMeshesInput_nextToken *smithy.Schema
-
-var ListMeshesInput_limit *smithy.Schema
-
-var ListMeshesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListMeshesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMeshesOutput_meshes *smithy.Schema
-
-var ListMeshesOutput_nextToken *smithy.Schema
-
-var ListRoutesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListRoutesInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListRoutesInput_meshName *smithy.Schema
-
-var ListRoutesInput_virtualRouterName *smithy.Schema
-
-var ListRoutesInput_nextToken *smithy.Schema
-
-var ListRoutesInput_limit *smithy.Schema
-
-var ListRoutesInput_meshOwner *smithy.Schema
-
-var ListRoutesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListRoutesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRoutesOutput_routes *smithy.Schema
-
-var ListRoutesOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceInput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput_limit *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ListTagsForResourceOutput_nextToken *smithy.Schema
-
-var ListVirtualGatewaysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualGatewaysInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListVirtualGatewaysInput_meshName *smithy.Schema
-
-var ListVirtualGatewaysInput_nextToken *smithy.Schema
-
-var ListVirtualGatewaysInput_limit *smithy.Schema
-
-var ListVirtualGatewaysInput_meshOwner *smithy.Schema
-
-var ListVirtualGatewaysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualGatewaysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVirtualGatewaysOutput_virtualGateways *smithy.Schema
-
-var ListVirtualGatewaysOutput_nextToken *smithy.Schema
-
-var ListVirtualNodesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualNodesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListVirtualNodesInput_meshName *smithy.Schema
-
-var ListVirtualNodesInput_nextToken *smithy.Schema
-
-var ListVirtualNodesInput_limit *smithy.Schema
-
-var ListVirtualNodesInput_meshOwner *smithy.Schema
-
-var ListVirtualNodesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualNodesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVirtualNodesOutput_virtualNodes *smithy.Schema
-
-var ListVirtualNodesOutput_nextToken *smithy.Schema
-
-var ListVirtualRoutersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualRoutersInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListVirtualRoutersInput_meshName *smithy.Schema
-
-var ListVirtualRoutersInput_nextToken *smithy.Schema
-
-var ListVirtualRoutersInput_limit *smithy.Schema
-
-var ListVirtualRoutersInput_meshOwner *smithy.Schema
-
-var ListVirtualRoutersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualRoutersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVirtualRoutersOutput_virtualRouters *smithy.Schema
-
-var ListVirtualRoutersOutput_nextToken *smithy.Schema
-
-var ListVirtualServicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualServicesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListVirtualServicesInput_meshName *smithy.Schema
-
-var ListVirtualServicesInput_nextToken *smithy.Schema
-
-var ListVirtualServicesInput_limit *smithy.Schema
-
-var ListVirtualServicesInput_meshOwner *smithy.Schema
-
-var ListVirtualServicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "ListVirtualServicesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVirtualServicesOutput_virtualServices *smithy.Schema
-
-var ListVirtualServicesOutput_nextToken *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateGatewayRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateGatewayRouteInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateGatewayRouteInput_gatewayRouteName *smithy.Schema
-
-var UpdateGatewayRouteInput_meshName *smithy.Schema
-
-var UpdateGatewayRouteInput_virtualGatewayName *smithy.Schema
-
-var UpdateGatewayRouteInput_spec *smithy.Schema
-
-var UpdateGatewayRouteInput_clientToken *smithy.Schema
-
-var UpdateGatewayRouteInput_meshOwner *smithy.Schema
-
-var UpdateGatewayRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateGatewayRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewayRouteOutput_gatewayRoute *smithy.Schema
-
-var UpdateMeshInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateMeshInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateMeshInput_meshName *smithy.Schema
-
-var UpdateMeshInput_spec *smithy.Schema
-
-var UpdateMeshInput_clientToken *smithy.Schema
-
-var UpdateMeshOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateMeshOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateMeshOutput_mesh *smithy.Schema
-
-var UpdateRouteInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateRouteInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateRouteInput_routeName *smithy.Schema
-
-var UpdateRouteInput_meshName *smithy.Schema
-
-var UpdateRouteInput_virtualRouterName *smithy.Schema
-
-var UpdateRouteInput_spec *smithy.Schema
-
-var UpdateRouteInput_clientToken *smithy.Schema
-
-var UpdateRouteInput_meshOwner *smithy.Schema
-
-var UpdateRouteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateRouteOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRouteOutput_route *smithy.Schema
-
-var UpdateVirtualGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualGatewayInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateVirtualGatewayInput_virtualGatewayName *smithy.Schema
-
-var UpdateVirtualGatewayInput_meshName *smithy.Schema
-
-var UpdateVirtualGatewayInput_spec *smithy.Schema
-
-var UpdateVirtualGatewayInput_clientToken *smithy.Schema
-
-var UpdateVirtualGatewayInput_meshOwner *smithy.Schema
-
-var UpdateVirtualGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVirtualGatewayOutput_virtualGateway *smithy.Schema
-
-var UpdateVirtualNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualNodeInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateVirtualNodeInput_virtualNodeName *smithy.Schema
-
-var UpdateVirtualNodeInput_meshName *smithy.Schema
-
-var UpdateVirtualNodeInput_spec *smithy.Schema
-
-var UpdateVirtualNodeInput_clientToken *smithy.Schema
-
-var UpdateVirtualNodeInput_meshOwner *smithy.Schema
-
-var UpdateVirtualNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualNodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVirtualNodeOutput_virtualNode *smithy.Schema
-
-var UpdateVirtualRouterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualRouterInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateVirtualRouterInput_virtualRouterName *smithy.Schema
-
-var UpdateVirtualRouterInput_meshName *smithy.Schema
-
-var UpdateVirtualRouterInput_spec *smithy.Schema
-
-var UpdateVirtualRouterInput_clientToken *smithy.Schema
-
-var UpdateVirtualRouterInput_meshOwner *smithy.Schema
-
-var UpdateVirtualRouterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualRouterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVirtualRouterOutput_virtualRouter *smithy.Schema
-
-var UpdateVirtualServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualServiceInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateVirtualServiceInput_virtualServiceName *smithy.Schema
-
-var UpdateVirtualServiceInput_meshName *smithy.Schema
-
-var UpdateVirtualServiceInput_spec *smithy.Schema
-
-var UpdateVirtualServiceInput_clientToken *smithy.Schema
-
-var UpdateVirtualServiceInput_meshOwner *smithy.Schema
-
-var UpdateVirtualServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appmesh",
-	Name:      "UpdateVirtualServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVirtualServiceOutput_virtualService *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	JsonFormatRef_key = JsonFormatRef.AddMember("key", _JsonKey)
-
-	JsonFormatRef_value = JsonFormatRef.AddMember("value", _JsonValue)
-
-	_JsonFormat_member = _JsonFormat.AddMember("member", JsonFormatRef)
-
-	LoggingFormat_text = LoggingFormat.AddMember("text", _TextFormat)
-
-	LoggingFormat_json = LoggingFormat.AddMember("json", _JsonFormat)
-
-	FileAccessLog_path = FileAccessLog.AddMember("path", _FilePath)
-
-	FileAccessLog_format = FileAccessLog.AddMember("format", LoggingFormat)
-
-	AccessLog_file = AccessLog.AddMember("file", FileAccessLog)
-
-	AwsCloudMapInstanceAttribute_key = AwsCloudMapInstanceAttribute.AddMember("key", _AwsCloudMapInstanceAttributeKey)
-
-	AwsCloudMapInstanceAttribute_value = AwsCloudMapInstanceAttribute.AddMember("value", _AwsCloudMapInstanceAttributeValue)
-
-	_AwsCloudMapInstanceAttributes_member = _AwsCloudMapInstanceAttributes.AddMember("member", AwsCloudMapInstanceAttribute)
-
-	AwsCloudMapServiceDiscovery_namespaceName = AwsCloudMapServiceDiscovery.AddMember("namespaceName", _AwsCloudMapName)
-
-	AwsCloudMapServiceDiscovery_serviceName = AwsCloudMapServiceDiscovery.AddMember("serviceName", _AwsCloudMapName)
-
-	AwsCloudMapServiceDiscovery_attributes = AwsCloudMapServiceDiscovery.AddMember("attributes", _AwsCloudMapInstanceAttributes)
-
-	AwsCloudMapServiceDiscovery_ipPreference = AwsCloudMapServiceDiscovery.AddMember("ipPreference", _IpPreference)
-
-	_PortSet_member = _PortSet.AddMember("member", _PortNumber)
-
-	ListenerTlsFileCertificate_certificateChain = ListenerTlsFileCertificate.AddMember("certificateChain", _FilePath)
-
-	ListenerTlsFileCertificate_privateKey = ListenerTlsFileCertificate.AddMember("privateKey", _FilePath)
-
-	ListenerTlsSdsCertificate_secretName = ListenerTlsSdsCertificate.AddMember("secretName", _SdsSecretName)
-
-	ClientTlsCertificate_file = ClientTlsCertificate.AddMember("file", ListenerTlsFileCertificate)
-
-	ClientTlsCertificate_sds = ClientTlsCertificate.AddMember("sds", ListenerTlsSdsCertificate)
-
-	_CertificateAuthorityArns_member = _CertificateAuthorityArns.AddMember("member", _Arn)
-
-	TlsValidationContextAcmTrust_certificateAuthorityArns = TlsValidationContextAcmTrust.AddMember("certificateAuthorityArns", _CertificateAuthorityArns)
-
-	TlsValidationContextFileTrust_certificateChain = TlsValidationContextFileTrust.AddMember("certificateChain", _FilePath)
-
-	TlsValidationContextSdsTrust_secretName = TlsValidationContextSdsTrust.AddMember("secretName", _SdsSecretName)
-
-	TlsValidationContextTrust_acm = TlsValidationContextTrust.AddMember("acm", TlsValidationContextAcmTrust)
-
-	TlsValidationContextTrust_file = TlsValidationContextTrust.AddMember("file", TlsValidationContextFileTrust)
-
-	TlsValidationContextTrust_sds = TlsValidationContextTrust.AddMember("sds", TlsValidationContextSdsTrust)
-
-	_SubjectAlternativeNameList_member = _SubjectAlternativeNameList.AddMember("member", _SubjectAlternativeName)
-
-	SubjectAlternativeNameMatchers_exact = SubjectAlternativeNameMatchers.AddMember("exact", _SubjectAlternativeNameList)
-
-	SubjectAlternativeNames_match = SubjectAlternativeNames.AddMember("match", SubjectAlternativeNameMatchers)
-
-	TlsValidationContext_trust = TlsValidationContext.AddMember("trust", TlsValidationContextTrust)
-
-	TlsValidationContext_subjectAlternativeNames = TlsValidationContext.AddMember("subjectAlternativeNames", SubjectAlternativeNames)
-
-	ClientPolicyTls_enforce = ClientPolicyTls.AddMember("enforce", smithyprelude.Boolean)
-
-	ClientPolicyTls_ports = ClientPolicyTls.AddMember("ports", _PortSet)
-
-	ClientPolicyTls_certificate = ClientPolicyTls.AddMember("certificate", ClientTlsCertificate)
-
-	ClientPolicyTls_validation = ClientPolicyTls.AddMember("validation", TlsValidationContext)
-
-	ClientPolicy_tls = ClientPolicy.AddMember("tls", ClientPolicyTls)
-
-	VirtualServiceBackend_virtualServiceName = VirtualServiceBackend.AddMember("virtualServiceName", _ServiceName)
-
-	VirtualServiceBackend_clientPolicy = VirtualServiceBackend.AddMember("clientPolicy", ClientPolicy)
-
-	Backend_virtualService = Backend.AddMember("virtualService", VirtualServiceBackend)
-
-	BackendDefaults_clientPolicy = BackendDefaults.AddMember("clientPolicy", ClientPolicy)
-
-	_Backends_member = _Backends.AddMember("member", Backend)
-
-	BadRequestException_message = BadRequestException.AddMember("message", smithyprelude.String)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	DnsServiceDiscovery_hostname = DnsServiceDiscovery.AddMember("hostname", _Hostname)
-
-	DnsServiceDiscovery_responseType = DnsServiceDiscovery.AddMember("responseType", _DnsResponseType)
-
-	DnsServiceDiscovery_ipPreference = DnsServiceDiscovery.AddMember("ipPreference", _IpPreference)
-
-	Duration_value = Duration.AddMember("value", _DurationValue)
-
-	Duration_unit = Duration.AddMember("unit", _DurationUnit)
-
-	EgressFilter_type = EgressFilter.AddMember("type", _EgressFilterType)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", smithyprelude.String)
-
-	HttpPathMatch_exact = HttpPathMatch.AddMember("exact", _HttpPathExact)
-
-	HttpPathMatch_regex = HttpPathMatch.AddMember("regex", _HttpPathRegex)
-
-	QueryParameterMatch_exact = QueryParameterMatch.AddMember("exact", smithyprelude.String)
-
-	HttpQueryParameter_name = HttpQueryParameter.AddMember("name", _QueryParameterName)
-
-	HttpQueryParameter_match = HttpQueryParameter.AddMember("match", QueryParameterMatch)
-
-	_HttpQueryParameters_member = _HttpQueryParameters.AddMember("member", HttpQueryParameter)
-
-	GatewayRouteHostnameMatch_exact = GatewayRouteHostnameMatch.AddMember("exact", _ExactHostName)
-
-	GatewayRouteHostnameMatch_suffix = GatewayRouteHostnameMatch.AddMember("suffix", _SuffixHostname)
-
-	MatchRange_start = MatchRange.AddMember("start", smithyprelude.Long)
-
-	MatchRange_end = MatchRange.AddMember("end", smithyprelude.Long)
-
-	HeaderMatchMethod_exact = HeaderMatchMethod.AddMember("exact", _HeaderMatch)
-
-	HeaderMatchMethod_regex = HeaderMatchMethod.AddMember("regex", _HeaderMatch)
-
-	HeaderMatchMethod_range = HeaderMatchMethod.AddMember("range", MatchRange)
-
-	HeaderMatchMethod_prefix = HeaderMatchMethod.AddMember("prefix", _HeaderMatch)
-
-	HeaderMatchMethod_suffix = HeaderMatchMethod.AddMember("suffix", _HeaderMatch)
-
-	HttpGatewayRouteHeader_name = HttpGatewayRouteHeader.AddMember("name", _HeaderName)
-
-	HttpGatewayRouteHeader_invert = HttpGatewayRouteHeader.AddMember("invert", smithyprelude.Boolean)
-
-	HttpGatewayRouteHeader_match = HttpGatewayRouteHeader.AddMember("match", HeaderMatchMethod)
-
-	_HttpGatewayRouteHeaders_member = _HttpGatewayRouteHeaders.AddMember("member", HttpGatewayRouteHeader)
-
-	HttpGatewayRouteMatch_prefix = HttpGatewayRouteMatch.AddMember("prefix", smithyprelude.String)
-
-	HttpGatewayRouteMatch_path = HttpGatewayRouteMatch.AddMember("path", HttpPathMatch)
-
-	HttpGatewayRouteMatch_queryParameters = HttpGatewayRouteMatch.AddMember("queryParameters", _HttpQueryParameters)
-
-	HttpGatewayRouteMatch_method = HttpGatewayRouteMatch.AddMember("method", _HttpMethod)
-
-	HttpGatewayRouteMatch_hostname = HttpGatewayRouteMatch.AddMember("hostname", GatewayRouteHostnameMatch)
-
-	HttpGatewayRouteMatch_headers = HttpGatewayRouteMatch.AddMember("headers", _HttpGatewayRouteHeaders)
-
-	HttpGatewayRouteMatch_port = HttpGatewayRouteMatch.AddMember("port", _ListenerPort)
-
-	GatewayRouteVirtualService_virtualServiceName = GatewayRouteVirtualService.AddMember("virtualServiceName", _ResourceName)
-
-	GatewayRouteTarget_virtualService = GatewayRouteTarget.AddMember("virtualService", GatewayRouteVirtualService)
-
-	GatewayRouteTarget_port = GatewayRouteTarget.AddMember("port", _ListenerPort)
-
-	HttpGatewayRoutePrefixRewrite_defaultPrefix = HttpGatewayRoutePrefixRewrite.AddMember("defaultPrefix", _DefaultGatewayRouteRewrite)
-
-	HttpGatewayRoutePrefixRewrite_value = HttpGatewayRoutePrefixRewrite.AddMember("value", _HttpGatewayRoutePrefix)
-
-	HttpGatewayRoutePathRewrite_exact = HttpGatewayRoutePathRewrite.AddMember("exact", _HttpPathExact)
-
-	GatewayRouteHostnameRewrite_defaultTargetHostname = GatewayRouteHostnameRewrite.AddMember("defaultTargetHostname", _DefaultGatewayRouteRewrite)
-
-	HttpGatewayRouteRewrite_prefix = HttpGatewayRouteRewrite.AddMember("prefix", HttpGatewayRoutePrefixRewrite)
-
-	HttpGatewayRouteRewrite_path = HttpGatewayRouteRewrite.AddMember("path", HttpGatewayRoutePathRewrite)
-
-	HttpGatewayRouteRewrite_hostname = HttpGatewayRouteRewrite.AddMember("hostname", GatewayRouteHostnameRewrite)
-
-	HttpGatewayRouteAction_target = HttpGatewayRouteAction.AddMember("target", GatewayRouteTarget)
-
-	HttpGatewayRouteAction_rewrite = HttpGatewayRouteAction.AddMember("rewrite", HttpGatewayRouteRewrite)
-
-	HttpGatewayRoute_match = HttpGatewayRoute.AddMember("match", HttpGatewayRouteMatch)
-
-	HttpGatewayRoute_action = HttpGatewayRoute.AddMember("action", HttpGatewayRouteAction)
-
-	GrpcMetadataMatchMethod_exact = GrpcMetadataMatchMethod.AddMember("exact", _HeaderMatch)
-
-	GrpcMetadataMatchMethod_regex = GrpcMetadataMatchMethod.AddMember("regex", _HeaderMatch)
-
-	GrpcMetadataMatchMethod_range = GrpcMetadataMatchMethod.AddMember("range", MatchRange)
-
-	GrpcMetadataMatchMethod_prefix = GrpcMetadataMatchMethod.AddMember("prefix", _HeaderMatch)
-
-	GrpcMetadataMatchMethod_suffix = GrpcMetadataMatchMethod.AddMember("suffix", _HeaderMatch)
-
-	GrpcGatewayRouteMetadata_name = GrpcGatewayRouteMetadata.AddMember("name", _HeaderName)
-
-	GrpcGatewayRouteMetadata_invert = GrpcGatewayRouteMetadata.AddMember("invert", smithyprelude.Boolean)
-
-	GrpcGatewayRouteMetadata_match = GrpcGatewayRouteMetadata.AddMember("match", GrpcMetadataMatchMethod)
-
-	_GrpcGatewayRouteMetadataList_member = _GrpcGatewayRouteMetadataList.AddMember("member", GrpcGatewayRouteMetadata)
-
-	GrpcGatewayRouteMatch_serviceName = GrpcGatewayRouteMatch.AddMember("serviceName", _ServiceName)
-
-	GrpcGatewayRouteMatch_hostname = GrpcGatewayRouteMatch.AddMember("hostname", GatewayRouteHostnameMatch)
-
-	GrpcGatewayRouteMatch_metadata = GrpcGatewayRouteMatch.AddMember("metadata", _GrpcGatewayRouteMetadataList)
-
-	GrpcGatewayRouteMatch_port = GrpcGatewayRouteMatch.AddMember("port", _ListenerPort)
-
-	GrpcGatewayRouteRewrite_hostname = GrpcGatewayRouteRewrite.AddMember("hostname", GatewayRouteHostnameRewrite)
-
-	GrpcGatewayRouteAction_target = GrpcGatewayRouteAction.AddMember("target", GatewayRouteTarget)
-
-	GrpcGatewayRouteAction_rewrite = GrpcGatewayRouteAction.AddMember("rewrite", GrpcGatewayRouteRewrite)
-
-	GrpcGatewayRoute_match = GrpcGatewayRoute.AddMember("match", GrpcGatewayRouteMatch)
-
-	GrpcGatewayRoute_action = GrpcGatewayRoute.AddMember("action", GrpcGatewayRouteAction)
-
-	GatewayRouteSpec_priority = GatewayRouteSpec.AddMember("priority", _GatewayRoutePriority)
-
-	GatewayRouteSpec_httpRoute = GatewayRouteSpec.AddMember("httpRoute", HttpGatewayRoute)
-
-	GatewayRouteSpec_http2Route = GatewayRouteSpec.AddMember("http2Route", HttpGatewayRoute)
-
-	GatewayRouteSpec_grpcRoute = GatewayRouteSpec.AddMember("grpcRoute", GrpcGatewayRoute)
-
-	ResourceMetadata_arn = ResourceMetadata.AddMember("arn", _Arn)
-
-	ResourceMetadata_version = ResourceMetadata.AddMember("version", smithyprelude.Long)
-
-	ResourceMetadata_uid = ResourceMetadata.AddMember("uid", smithyprelude.String)
-
-	ResourceMetadata_createdAt = ResourceMetadata.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ResourceMetadata_lastUpdatedAt = ResourceMetadata.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	ResourceMetadata_meshOwner = ResourceMetadata.AddMember("meshOwner", _AccountId)
-
-	ResourceMetadata_resourceOwner = ResourceMetadata.AddMember("resourceOwner", _AccountId)
-
-	GatewayRouteStatus_status = GatewayRouteStatus.AddMember("status", _GatewayRouteStatusCode)
-
-	GatewayRouteData_meshName = GatewayRouteData.AddMember("meshName", _ResourceName)
-
-	GatewayRouteData_gatewayRouteName = GatewayRouteData.AddMember("gatewayRouteName", _ResourceName)
-
-	GatewayRouteData_virtualGatewayName = GatewayRouteData.AddMember("virtualGatewayName", _ResourceName)
-
-	GatewayRouteData_spec = GatewayRouteData.AddMember("spec", GatewayRouteSpec)
-
-	GatewayRouteData_metadata = GatewayRouteData.AddMember("metadata", ResourceMetadata)
-
-	GatewayRouteData_status = GatewayRouteData.AddMember("status", GatewayRouteStatus)
-
-	GatewayRouteRef_meshName = GatewayRouteRef.AddMember("meshName", _ResourceName)
-
-	GatewayRouteRef_gatewayRouteName = GatewayRouteRef.AddMember("gatewayRouteName", _ResourceName)
-
-	GatewayRouteRef_virtualGatewayName = GatewayRouteRef.AddMember("virtualGatewayName", _ResourceName)
-
-	GatewayRouteRef_meshOwner = GatewayRouteRef.AddMember("meshOwner", _AccountId)
-
-	GatewayRouteRef_resourceOwner = GatewayRouteRef.AddMember("resourceOwner", _AccountId)
-
-	GatewayRouteRef_arn = GatewayRouteRef.AddMember("arn", _Arn)
-
-	GatewayRouteRef_version = GatewayRouteRef.AddMember("version", smithyprelude.Long)
-
-	GatewayRouteRef_createdAt = GatewayRouteRef.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GatewayRouteRef_lastUpdatedAt = GatewayRouteRef.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_GatewayRouteList_member = _GatewayRouteList.AddMember("member", GatewayRouteRef)
-
-	_HttpRetryPolicyEvents_member = _HttpRetryPolicyEvents.AddMember("member", _HttpRetryPolicyEvent)
-
-	_TcpRetryPolicyEvents_member = _TcpRetryPolicyEvents.AddMember("member", _TcpRetryPolicyEvent)
-
-	_GrpcRetryPolicyEvents_member = _GrpcRetryPolicyEvents.AddMember("member", _GrpcRetryPolicyEvent)
-
-	GrpcRetryPolicy_perRetryTimeout = GrpcRetryPolicy.AddMember("perRetryTimeout", Duration)
-
-	GrpcRetryPolicy_maxRetries = GrpcRetryPolicy.AddMember("maxRetries", _MaxRetries)
-
-	GrpcRetryPolicy_httpRetryEvents = GrpcRetryPolicy.AddMember("httpRetryEvents", _HttpRetryPolicyEvents)
-
-	GrpcRetryPolicy_tcpRetryEvents = GrpcRetryPolicy.AddMember("tcpRetryEvents", _TcpRetryPolicyEvents)
-
-	GrpcRetryPolicy_grpcRetryEvents = GrpcRetryPolicy.AddMember("grpcRetryEvents", _GrpcRetryPolicyEvents)
-
-	WeightedTarget_virtualNode = WeightedTarget.AddMember("virtualNode", _ResourceName)
-
-	WeightedTarget_weight = WeightedTarget.AddMember("weight", _PercentInt)
-
-	WeightedTarget_port = WeightedTarget.AddMember("port", _ListenerPort)
-
-	_WeightedTargets_member = _WeightedTargets.AddMember("member", WeightedTarget)
-
-	GrpcRouteAction_weightedTargets = GrpcRouteAction.AddMember("weightedTargets", _WeightedTargets)
-
-	GrpcRouteMetadataMatchMethod_exact = GrpcRouteMetadataMatchMethod.AddMember("exact", _HeaderMatch)
-
-	GrpcRouteMetadataMatchMethod_regex = GrpcRouteMetadataMatchMethod.AddMember("regex", _HeaderMatch)
-
-	GrpcRouteMetadataMatchMethod_range = GrpcRouteMetadataMatchMethod.AddMember("range", MatchRange)
-
-	GrpcRouteMetadataMatchMethod_prefix = GrpcRouteMetadataMatchMethod.AddMember("prefix", _HeaderMatch)
-
-	GrpcRouteMetadataMatchMethod_suffix = GrpcRouteMetadataMatchMethod.AddMember("suffix", _HeaderMatch)
-
-	GrpcRouteMetadata_name = GrpcRouteMetadata.AddMember("name", _HeaderName)
-
-	GrpcRouteMetadata_invert = GrpcRouteMetadata.AddMember("invert", smithyprelude.Boolean)
-
-	GrpcRouteMetadata_match = GrpcRouteMetadata.AddMember("match", GrpcRouteMetadataMatchMethod)
-
-	_GrpcRouteMetadataList_member = _GrpcRouteMetadataList.AddMember("member", GrpcRouteMetadata)
-
-	GrpcRouteMatch_serviceName = GrpcRouteMatch.AddMember("serviceName", _ServiceName)
-
-	GrpcRouteMatch_methodName = GrpcRouteMatch.AddMember("methodName", _MethodName)
-
-	GrpcRouteMatch_metadata = GrpcRouteMatch.AddMember("metadata", _GrpcRouteMetadataList)
-
-	GrpcRouteMatch_port = GrpcRouteMatch.AddMember("port", _ListenerPort)
-
-	GrpcTimeout_perRequest = GrpcTimeout.AddMember("perRequest", Duration)
-
-	GrpcTimeout_idle = GrpcTimeout.AddMember("idle", Duration)
-
-	GrpcRoute_action = GrpcRoute.AddMember("action", GrpcRouteAction)
-
-	GrpcRoute_match = GrpcRoute.AddMember("match", GrpcRouteMatch)
-
-	GrpcRoute_retryPolicy = GrpcRoute.AddMember("retryPolicy", GrpcRetryPolicy)
-
-	GrpcRoute_timeout = GrpcRoute.AddMember("timeout", GrpcTimeout)
-
-	HealthCheckPolicy_timeoutMillis = HealthCheckPolicy.AddMember("timeoutMillis", _HealthCheckTimeoutMillis)
-
-	HealthCheckPolicy_intervalMillis = HealthCheckPolicy.AddMember("intervalMillis", _HealthCheckIntervalMillis)
-
-	HealthCheckPolicy_protocol = HealthCheckPolicy.AddMember("protocol", _PortProtocol)
-
-	HealthCheckPolicy_port = HealthCheckPolicy.AddMember("port", _PortNumber)
-
-	HealthCheckPolicy_path = HealthCheckPolicy.AddMember("path", smithyprelude.String)
-
-	HealthCheckPolicy_healthyThreshold = HealthCheckPolicy.AddMember("healthyThreshold", _HealthCheckThreshold)
-
-	HealthCheckPolicy_unhealthyThreshold = HealthCheckPolicy.AddMember("unhealthyThreshold", _HealthCheckThreshold)
-
-	HttpRetryPolicy_perRetryTimeout = HttpRetryPolicy.AddMember("perRetryTimeout", Duration)
-
-	HttpRetryPolicy_maxRetries = HttpRetryPolicy.AddMember("maxRetries", _MaxRetries)
-
-	HttpRetryPolicy_httpRetryEvents = HttpRetryPolicy.AddMember("httpRetryEvents", _HttpRetryPolicyEvents)
-
-	HttpRetryPolicy_tcpRetryEvents = HttpRetryPolicy.AddMember("tcpRetryEvents", _TcpRetryPolicyEvents)
-
-	HttpRouteHeader_name = HttpRouteHeader.AddMember("name", _HeaderName)
-
-	HttpRouteHeader_invert = HttpRouteHeader.AddMember("invert", smithyprelude.Boolean)
-
-	HttpRouteHeader_match = HttpRouteHeader.AddMember("match", HeaderMatchMethod)
-
-	_HttpRouteHeaders_member = _HttpRouteHeaders.AddMember("member", HttpRouteHeader)
-
-	HttpRouteMatch_prefix = HttpRouteMatch.AddMember("prefix", smithyprelude.String)
-
-	HttpRouteMatch_path = HttpRouteMatch.AddMember("path", HttpPathMatch)
-
-	HttpRouteMatch_queryParameters = HttpRouteMatch.AddMember("queryParameters", _HttpQueryParameters)
-
-	HttpRouteMatch_method = HttpRouteMatch.AddMember("method", _HttpMethod)
-
-	HttpRouteMatch_scheme = HttpRouteMatch.AddMember("scheme", _HttpScheme)
-
-	HttpRouteMatch_headers = HttpRouteMatch.AddMember("headers", _HttpRouteHeaders)
-
-	HttpRouteMatch_port = HttpRouteMatch.AddMember("port", _ListenerPort)
-
-	HttpRouteAction_weightedTargets = HttpRouteAction.AddMember("weightedTargets", _WeightedTargets)
-
-	HttpTimeout_perRequest = HttpTimeout.AddMember("perRequest", Duration)
-
-	HttpTimeout_idle = HttpTimeout.AddMember("idle", Duration)
-
-	HttpRoute_match = HttpRoute.AddMember("match", HttpRouteMatch)
-
-	HttpRoute_action = HttpRoute.AddMember("action", HttpRouteAction)
-
-	HttpRoute_retryPolicy = HttpRoute.AddMember("retryPolicy", HttpRetryPolicy)
-
-	HttpRoute_timeout = HttpRoute.AddMember("timeout", HttpTimeout)
-
-	InternalServerErrorException_message = InternalServerErrorException.AddMember("message", smithyprelude.String)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", smithyprelude.String)
-
-	PortMapping_port = PortMapping.AddMember("port", _PortNumber)
-
-	PortMapping_protocol = PortMapping.AddMember("protocol", _PortProtocol)
-
-	ListenerTlsAcmCertificate_certificateArn = ListenerTlsAcmCertificate.AddMember("certificateArn", _Arn)
-
-	ListenerTlsCertificate_acm = ListenerTlsCertificate.AddMember("acm", ListenerTlsAcmCertificate)
-
-	ListenerTlsCertificate_file = ListenerTlsCertificate.AddMember("file", ListenerTlsFileCertificate)
-
-	ListenerTlsCertificate_sds = ListenerTlsCertificate.AddMember("sds", ListenerTlsSdsCertificate)
-
-	ListenerTlsValidationContextTrust_file = ListenerTlsValidationContextTrust.AddMember("file", TlsValidationContextFileTrust)
-
-	ListenerTlsValidationContextTrust_sds = ListenerTlsValidationContextTrust.AddMember("sds", TlsValidationContextSdsTrust)
-
-	ListenerTlsValidationContext_trust = ListenerTlsValidationContext.AddMember("trust", ListenerTlsValidationContextTrust)
-
-	ListenerTlsValidationContext_subjectAlternativeNames = ListenerTlsValidationContext.AddMember("subjectAlternativeNames", SubjectAlternativeNames)
-
-	ListenerTls_mode = ListenerTls.AddMember("mode", _ListenerTlsMode)
-
-	ListenerTls_certificate = ListenerTls.AddMember("certificate", ListenerTlsCertificate)
-
-	ListenerTls_validation = ListenerTls.AddMember("validation", ListenerTlsValidationContext)
-
-	TcpTimeout_idle = TcpTimeout.AddMember("idle", Duration)
-
-	ListenerTimeout_tcp = ListenerTimeout.AddMember("tcp", TcpTimeout)
-
-	ListenerTimeout_http = ListenerTimeout.AddMember("http", HttpTimeout)
-
-	ListenerTimeout_http2 = ListenerTimeout.AddMember("http2", HttpTimeout)
-
-	ListenerTimeout_grpc = ListenerTimeout.AddMember("grpc", GrpcTimeout)
-
-	OutlierDetection_maxServerErrors = OutlierDetection.AddMember("maxServerErrors", _OutlierDetectionMaxServerErrors)
-
-	OutlierDetection_interval = OutlierDetection.AddMember("interval", Duration)
-
-	OutlierDetection_baseEjectionDuration = OutlierDetection.AddMember("baseEjectionDuration", Duration)
-
-	OutlierDetection_maxEjectionPercent = OutlierDetection.AddMember("maxEjectionPercent", _OutlierDetectionMaxEjectionPercent)
-
-	VirtualNodeTcpConnectionPool_maxConnections = VirtualNodeTcpConnectionPool.AddMember("maxConnections", _MaxConnections)
-
-	VirtualNodeHttpConnectionPool_maxConnections = VirtualNodeHttpConnectionPool.AddMember("maxConnections", _MaxConnections)
-
-	VirtualNodeHttpConnectionPool_maxPendingRequests = VirtualNodeHttpConnectionPool.AddMember("maxPendingRequests", _MaxPendingRequests)
-
-	VirtualNodeHttp2ConnectionPool_maxRequests = VirtualNodeHttp2ConnectionPool.AddMember("maxRequests", _MaxRequests)
-
-	VirtualNodeGrpcConnectionPool_maxRequests = VirtualNodeGrpcConnectionPool.AddMember("maxRequests", _MaxRequests)
-
-	VirtualNodeConnectionPool_tcp = VirtualNodeConnectionPool.AddMember("tcp", VirtualNodeTcpConnectionPool)
-
-	VirtualNodeConnectionPool_http = VirtualNodeConnectionPool.AddMember("http", VirtualNodeHttpConnectionPool)
-
-	VirtualNodeConnectionPool_http2 = VirtualNodeConnectionPool.AddMember("http2", VirtualNodeHttp2ConnectionPool)
-
-	VirtualNodeConnectionPool_grpc = VirtualNodeConnectionPool.AddMember("grpc", VirtualNodeGrpcConnectionPool)
-
-	Listener_portMapping = Listener.AddMember("portMapping", PortMapping)
-
-	Listener_tls = Listener.AddMember("tls", ListenerTls)
-
-	Listener_healthCheck = Listener.AddMember("healthCheck", HealthCheckPolicy)
-
-	Listener_timeout = Listener.AddMember("timeout", ListenerTimeout)
-
-	Listener_outlierDetection = Listener.AddMember("outlierDetection", OutlierDetection)
-
-	Listener_connectionPool = Listener.AddMember("connectionPool", VirtualNodeConnectionPool)
-
-	_Listeners_member = _Listeners.AddMember("member", Listener)
-
-	Logging_accessLog = Logging.AddMember("accessLog", AccessLog)
-
-	MeshServiceDiscovery_ipPreference = MeshServiceDiscovery.AddMember("ipPreference", _IpPreference)
-
-	MeshSpec_egressFilter = MeshSpec.AddMember("egressFilter", EgressFilter)
-
-	MeshSpec_serviceDiscovery = MeshSpec.AddMember("serviceDiscovery", MeshServiceDiscovery)
-
-	MeshStatus_status = MeshStatus.AddMember("status", _MeshStatusCode)
-
-	MeshData_meshName = MeshData.AddMember("meshName", _ResourceName)
-
-	MeshData_spec = MeshData.AddMember("spec", MeshSpec)
-
-	MeshData_metadata = MeshData.AddMember("metadata", ResourceMetadata)
-
-	MeshData_status = MeshData.AddMember("status", MeshStatus)
-
-	MeshRef_meshName = MeshRef.AddMember("meshName", _ResourceName)
-
-	MeshRef_meshOwner = MeshRef.AddMember("meshOwner", _AccountId)
-
-	MeshRef_resourceOwner = MeshRef.AddMember("resourceOwner", _AccountId)
-
-	MeshRef_arn = MeshRef.AddMember("arn", _Arn)
-
-	MeshRef_version = MeshRef.AddMember("version", smithyprelude.Long)
-
-	MeshRef_createdAt = MeshRef.AddMember("createdAt", smithyprelude.Timestamp)
-
-	MeshRef_lastUpdatedAt = MeshRef.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_MeshList_member = _MeshList.AddMember("member", MeshRef)
-
-	NotFoundException_message = NotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceInUseException_message = ResourceInUseException.AddMember("message", smithyprelude.String)
-
-	TcpRouteAction_weightedTargets = TcpRouteAction.AddMember("weightedTargets", _WeightedTargets)
-
-	TcpRouteMatch_port = TcpRouteMatch.AddMember("port", _ListenerPort)
-
-	TcpRoute_action = TcpRoute.AddMember("action", TcpRouteAction)
-
-	TcpRoute_timeout = TcpRoute.AddMember("timeout", TcpTimeout)
-
-	TcpRoute_match = TcpRoute.AddMember("match", TcpRouteMatch)
-
-	RouteSpec_priority = RouteSpec.AddMember("priority", _RoutePriority)
-
-	RouteSpec_httpRoute = RouteSpec.AddMember("httpRoute", HttpRoute)
-
-	RouteSpec_tcpRoute = RouteSpec.AddMember("tcpRoute", TcpRoute)
-
-	RouteSpec_http2Route = RouteSpec.AddMember("http2Route", HttpRoute)
-
-	RouteSpec_grpcRoute = RouteSpec.AddMember("grpcRoute", GrpcRoute)
-
-	RouteStatus_status = RouteStatus.AddMember("status", _RouteStatusCode)
-
-	RouteData_meshName = RouteData.AddMember("meshName", _ResourceName)
-
-	RouteData_virtualRouterName = RouteData.AddMember("virtualRouterName", _ResourceName)
-
-	RouteData_routeName = RouteData.AddMember("routeName", _ResourceName)
-
-	RouteData_spec = RouteData.AddMember("spec", RouteSpec)
-
-	RouteData_metadata = RouteData.AddMember("metadata", ResourceMetadata)
-
-	RouteData_status = RouteData.AddMember("status", RouteStatus)
-
-	RouteRef_meshName = RouteRef.AddMember("meshName", _ResourceName)
-
-	RouteRef_virtualRouterName = RouteRef.AddMember("virtualRouterName", _ResourceName)
-
-	RouteRef_routeName = RouteRef.AddMember("routeName", _ResourceName)
-
-	RouteRef_meshOwner = RouteRef.AddMember("meshOwner", _AccountId)
-
-	RouteRef_resourceOwner = RouteRef.AddMember("resourceOwner", _AccountId)
-
-	RouteRef_arn = RouteRef.AddMember("arn", _Arn)
-
-	RouteRef_version = RouteRef.AddMember("version", smithyprelude.Long)
-
-	RouteRef_createdAt = RouteRef.AddMember("createdAt", smithyprelude.Timestamp)
-
-	RouteRef_lastUpdatedAt = RouteRef.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_RouteList_member = _RouteList.AddMember("member", RouteRef)
-
-	ServiceDiscovery_dns = ServiceDiscovery.AddMember("dns", DnsServiceDiscovery)
-
-	ServiceDiscovery_awsCloudMap = ServiceDiscovery.AddMember("awsCloudMap", AwsCloudMapServiceDiscovery)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TagRef_key = TagRef.AddMember("key", _TagKey)
-
-	TagRef_value = TagRef.AddMember("value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", TagRef)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", smithyprelude.String)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", smithyprelude.String)
-
-	VirtualGatewayFileAccessLog_path = VirtualGatewayFileAccessLog.AddMember("path", _FilePath)
-
-	VirtualGatewayFileAccessLog_format = VirtualGatewayFileAccessLog.AddMember("format", LoggingFormat)
-
-	VirtualGatewayAccessLog_file = VirtualGatewayAccessLog.AddMember("file", VirtualGatewayFileAccessLog)
-
-	VirtualGatewayListenerTlsFileCertificate_certificateChain = VirtualGatewayListenerTlsFileCertificate.AddMember("certificateChain", _FilePath)
-
-	VirtualGatewayListenerTlsFileCertificate_privateKey = VirtualGatewayListenerTlsFileCertificate.AddMember("privateKey", _FilePath)
-
-	VirtualGatewayListenerTlsSdsCertificate_secretName = VirtualGatewayListenerTlsSdsCertificate.AddMember("secretName", _VirtualGatewaySdsSecretName)
-
-	VirtualGatewayClientTlsCertificate_file = VirtualGatewayClientTlsCertificate.AddMember("file", VirtualGatewayListenerTlsFileCertificate)
-
-	VirtualGatewayClientTlsCertificate_sds = VirtualGatewayClientTlsCertificate.AddMember("sds", VirtualGatewayListenerTlsSdsCertificate)
-
-	_VirtualGatewayCertificateAuthorityArns_member = _VirtualGatewayCertificateAuthorityArns.AddMember("member", _Arn)
-
-	VirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns = VirtualGatewayTlsValidationContextAcmTrust.AddMember("certificateAuthorityArns", _VirtualGatewayCertificateAuthorityArns)
-
-	VirtualGatewayTlsValidationContextFileTrust_certificateChain = VirtualGatewayTlsValidationContextFileTrust.AddMember("certificateChain", _FilePath)
-
-	VirtualGatewayTlsValidationContextSdsTrust_secretName = VirtualGatewayTlsValidationContextSdsTrust.AddMember("secretName", _VirtualGatewaySdsSecretName)
-
-	VirtualGatewayTlsValidationContextTrust_acm = VirtualGatewayTlsValidationContextTrust.AddMember("acm", VirtualGatewayTlsValidationContextAcmTrust)
-
-	VirtualGatewayTlsValidationContextTrust_file = VirtualGatewayTlsValidationContextTrust.AddMember("file", VirtualGatewayTlsValidationContextFileTrust)
-
-	VirtualGatewayTlsValidationContextTrust_sds = VirtualGatewayTlsValidationContextTrust.AddMember("sds", VirtualGatewayTlsValidationContextSdsTrust)
-
-	VirtualGatewayTlsValidationContext_trust = VirtualGatewayTlsValidationContext.AddMember("trust", VirtualGatewayTlsValidationContextTrust)
-
-	VirtualGatewayTlsValidationContext_subjectAlternativeNames = VirtualGatewayTlsValidationContext.AddMember("subjectAlternativeNames", SubjectAlternativeNames)
-
-	VirtualGatewayClientPolicyTls_enforce = VirtualGatewayClientPolicyTls.AddMember("enforce", smithyprelude.Boolean)
-
-	VirtualGatewayClientPolicyTls_ports = VirtualGatewayClientPolicyTls.AddMember("ports", _PortSet)
-
-	VirtualGatewayClientPolicyTls_certificate = VirtualGatewayClientPolicyTls.AddMember("certificate", VirtualGatewayClientTlsCertificate)
-
-	VirtualGatewayClientPolicyTls_validation = VirtualGatewayClientPolicyTls.AddMember("validation", VirtualGatewayTlsValidationContext)
-
-	VirtualGatewayClientPolicy_tls = VirtualGatewayClientPolicy.AddMember("tls", VirtualGatewayClientPolicyTls)
-
-	VirtualGatewayBackendDefaults_clientPolicy = VirtualGatewayBackendDefaults.AddMember("clientPolicy", VirtualGatewayClientPolicy)
-
-	VirtualGatewayHttpConnectionPool_maxConnections = VirtualGatewayHttpConnectionPool.AddMember("maxConnections", _MaxConnections)
-
-	VirtualGatewayHttpConnectionPool_maxPendingRequests = VirtualGatewayHttpConnectionPool.AddMember("maxPendingRequests", _MaxPendingRequests)
-
-	VirtualGatewayHttp2ConnectionPool_maxRequests = VirtualGatewayHttp2ConnectionPool.AddMember("maxRequests", _MaxRequests)
-
-	VirtualGatewayGrpcConnectionPool_maxRequests = VirtualGatewayGrpcConnectionPool.AddMember("maxRequests", _MaxRequests)
-
-	VirtualGatewayConnectionPool_http = VirtualGatewayConnectionPool.AddMember("http", VirtualGatewayHttpConnectionPool)
-
-	VirtualGatewayConnectionPool_http2 = VirtualGatewayConnectionPool.AddMember("http2", VirtualGatewayHttp2ConnectionPool)
-
-	VirtualGatewayConnectionPool_grpc = VirtualGatewayConnectionPool.AddMember("grpc", VirtualGatewayGrpcConnectionPool)
-
-	VirtualGatewayHealthCheckPolicy_timeoutMillis = VirtualGatewayHealthCheckPolicy.AddMember("timeoutMillis", _VirtualGatewayHealthCheckTimeoutMillis)
-
-	VirtualGatewayHealthCheckPolicy_intervalMillis = VirtualGatewayHealthCheckPolicy.AddMember("intervalMillis", _VirtualGatewayHealthCheckIntervalMillis)
-
-	VirtualGatewayHealthCheckPolicy_protocol = VirtualGatewayHealthCheckPolicy.AddMember("protocol", _VirtualGatewayPortProtocol)
-
-	VirtualGatewayHealthCheckPolicy_port = VirtualGatewayHealthCheckPolicy.AddMember("port", _PortNumber)
-
-	VirtualGatewayHealthCheckPolicy_path = VirtualGatewayHealthCheckPolicy.AddMember("path", smithyprelude.String)
-
-	VirtualGatewayHealthCheckPolicy_healthyThreshold = VirtualGatewayHealthCheckPolicy.AddMember("healthyThreshold", _VirtualGatewayHealthCheckThreshold)
-
-	VirtualGatewayHealthCheckPolicy_unhealthyThreshold = VirtualGatewayHealthCheckPolicy.AddMember("unhealthyThreshold", _VirtualGatewayHealthCheckThreshold)
-
-	VirtualGatewayPortMapping_port = VirtualGatewayPortMapping.AddMember("port", _PortNumber)
-
-	VirtualGatewayPortMapping_protocol = VirtualGatewayPortMapping.AddMember("protocol", _VirtualGatewayPortProtocol)
-
-	VirtualGatewayListenerTlsValidationContextTrust_file = VirtualGatewayListenerTlsValidationContextTrust.AddMember("file", VirtualGatewayTlsValidationContextFileTrust)
-
-	VirtualGatewayListenerTlsValidationContextTrust_sds = VirtualGatewayListenerTlsValidationContextTrust.AddMember("sds", VirtualGatewayTlsValidationContextSdsTrust)
-
-	VirtualGatewayListenerTlsValidationContext_trust = VirtualGatewayListenerTlsValidationContext.AddMember("trust", VirtualGatewayListenerTlsValidationContextTrust)
-
-	VirtualGatewayListenerTlsValidationContext_subjectAlternativeNames = VirtualGatewayListenerTlsValidationContext.AddMember("subjectAlternativeNames", SubjectAlternativeNames)
-
-	VirtualGatewayListenerTlsAcmCertificate_certificateArn = VirtualGatewayListenerTlsAcmCertificate.AddMember("certificateArn", _Arn)
-
-	VirtualGatewayListenerTlsCertificate_acm = VirtualGatewayListenerTlsCertificate.AddMember("acm", VirtualGatewayListenerTlsAcmCertificate)
-
-	VirtualGatewayListenerTlsCertificate_file = VirtualGatewayListenerTlsCertificate.AddMember("file", VirtualGatewayListenerTlsFileCertificate)
-
-	VirtualGatewayListenerTlsCertificate_sds = VirtualGatewayListenerTlsCertificate.AddMember("sds", VirtualGatewayListenerTlsSdsCertificate)
-
-	VirtualGatewayListenerTls_mode = VirtualGatewayListenerTls.AddMember("mode", _VirtualGatewayListenerTlsMode)
-
-	VirtualGatewayListenerTls_validation = VirtualGatewayListenerTls.AddMember("validation", VirtualGatewayListenerTlsValidationContext)
-
-	VirtualGatewayListenerTls_certificate = VirtualGatewayListenerTls.AddMember("certificate", VirtualGatewayListenerTlsCertificate)
-
-	VirtualGatewayListener_healthCheck = VirtualGatewayListener.AddMember("healthCheck", VirtualGatewayHealthCheckPolicy)
-
-	VirtualGatewayListener_portMapping = VirtualGatewayListener.AddMember("portMapping", VirtualGatewayPortMapping)
-
-	VirtualGatewayListener_tls = VirtualGatewayListener.AddMember("tls", VirtualGatewayListenerTls)
-
-	VirtualGatewayListener_connectionPool = VirtualGatewayListener.AddMember("connectionPool", VirtualGatewayConnectionPool)
-
-	_VirtualGatewayListeners_member = _VirtualGatewayListeners.AddMember("member", VirtualGatewayListener)
-
-	VirtualGatewayLogging_accessLog = VirtualGatewayLogging.AddMember("accessLog", VirtualGatewayAccessLog)
-
-	VirtualGatewaySpec_backendDefaults = VirtualGatewaySpec.AddMember("backendDefaults", VirtualGatewayBackendDefaults)
-
-	VirtualGatewaySpec_listeners = VirtualGatewaySpec.AddMember("listeners", _VirtualGatewayListeners)
-
-	VirtualGatewaySpec_logging = VirtualGatewaySpec.AddMember("logging", VirtualGatewayLogging)
-
-	VirtualGatewayStatus_status = VirtualGatewayStatus.AddMember("status", _VirtualGatewayStatusCode)
-
-	VirtualGatewayData_meshName = VirtualGatewayData.AddMember("meshName", _ResourceName)
-
-	VirtualGatewayData_virtualGatewayName = VirtualGatewayData.AddMember("virtualGatewayName", _ResourceName)
-
-	VirtualGatewayData_spec = VirtualGatewayData.AddMember("spec", VirtualGatewaySpec)
-
-	VirtualGatewayData_metadata = VirtualGatewayData.AddMember("metadata", ResourceMetadata)
-
-	VirtualGatewayData_status = VirtualGatewayData.AddMember("status", VirtualGatewayStatus)
-
-	VirtualGatewayRef_meshName = VirtualGatewayRef.AddMember("meshName", _ResourceName)
-
-	VirtualGatewayRef_virtualGatewayName = VirtualGatewayRef.AddMember("virtualGatewayName", _ResourceName)
-
-	VirtualGatewayRef_meshOwner = VirtualGatewayRef.AddMember("meshOwner", _AccountId)
-
-	VirtualGatewayRef_resourceOwner = VirtualGatewayRef.AddMember("resourceOwner", _AccountId)
-
-	VirtualGatewayRef_arn = VirtualGatewayRef.AddMember("arn", _Arn)
-
-	VirtualGatewayRef_version = VirtualGatewayRef.AddMember("version", smithyprelude.Long)
-
-	VirtualGatewayRef_createdAt = VirtualGatewayRef.AddMember("createdAt", smithyprelude.Timestamp)
-
-	VirtualGatewayRef_lastUpdatedAt = VirtualGatewayRef.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_VirtualGatewayList_member = _VirtualGatewayList.AddMember("member", VirtualGatewayRef)
-
-	VirtualNodeSpec_serviceDiscovery = VirtualNodeSpec.AddMember("serviceDiscovery", ServiceDiscovery)
-
-	VirtualNodeSpec_listeners = VirtualNodeSpec.AddMember("listeners", _Listeners)
-
-	VirtualNodeSpec_backends = VirtualNodeSpec.AddMember("backends", _Backends)
-
-	VirtualNodeSpec_backendDefaults = VirtualNodeSpec.AddMember("backendDefaults", BackendDefaults)
-
-	VirtualNodeSpec_logging = VirtualNodeSpec.AddMember("logging", Logging)
-
-	VirtualNodeStatus_status = VirtualNodeStatus.AddMember("status", _VirtualNodeStatusCode)
-
-	VirtualNodeData_meshName = VirtualNodeData.AddMember("meshName", _ResourceName)
-
-	VirtualNodeData_virtualNodeName = VirtualNodeData.AddMember("virtualNodeName", _ResourceName)
-
-	VirtualNodeData_spec = VirtualNodeData.AddMember("spec", VirtualNodeSpec)
-
-	VirtualNodeData_metadata = VirtualNodeData.AddMember("metadata", ResourceMetadata)
-
-	VirtualNodeData_status = VirtualNodeData.AddMember("status", VirtualNodeStatus)
-
-	VirtualNodeRef_meshName = VirtualNodeRef.AddMember("meshName", _ResourceName)
-
-	VirtualNodeRef_virtualNodeName = VirtualNodeRef.AddMember("virtualNodeName", _ResourceName)
-
-	VirtualNodeRef_meshOwner = VirtualNodeRef.AddMember("meshOwner", _AccountId)
-
-	VirtualNodeRef_resourceOwner = VirtualNodeRef.AddMember("resourceOwner", _AccountId)
-
-	VirtualNodeRef_arn = VirtualNodeRef.AddMember("arn", _Arn)
-
-	VirtualNodeRef_version = VirtualNodeRef.AddMember("version", smithyprelude.Long)
-
-	VirtualNodeRef_createdAt = VirtualNodeRef.AddMember("createdAt", smithyprelude.Timestamp)
-
-	VirtualNodeRef_lastUpdatedAt = VirtualNodeRef.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_VirtualNodeList_member = _VirtualNodeList.AddMember("member", VirtualNodeRef)
-
-	VirtualNodeServiceProvider_virtualNodeName = VirtualNodeServiceProvider.AddMember("virtualNodeName", _ResourceName)
-
-	VirtualRouterListener_portMapping = VirtualRouterListener.AddMember("portMapping", PortMapping)
-
-	_VirtualRouterListeners_member = _VirtualRouterListeners.AddMember("member", VirtualRouterListener)
-
-	VirtualRouterSpec_listeners = VirtualRouterSpec.AddMember("listeners", _VirtualRouterListeners)
-
-	VirtualRouterStatus_status = VirtualRouterStatus.AddMember("status", _VirtualRouterStatusCode)
-
-	VirtualRouterData_meshName = VirtualRouterData.AddMember("meshName", _ResourceName)
-
-	VirtualRouterData_virtualRouterName = VirtualRouterData.AddMember("virtualRouterName", _ResourceName)
-
-	VirtualRouterData_spec = VirtualRouterData.AddMember("spec", VirtualRouterSpec)
-
-	VirtualRouterData_metadata = VirtualRouterData.AddMember("metadata", ResourceMetadata)
-
-	VirtualRouterData_status = VirtualRouterData.AddMember("status", VirtualRouterStatus)
-
-	VirtualRouterRef_meshName = VirtualRouterRef.AddMember("meshName", _ResourceName)
-
-	VirtualRouterRef_virtualRouterName = VirtualRouterRef.AddMember("virtualRouterName", _ResourceName)
-
-	VirtualRouterRef_meshOwner = VirtualRouterRef.AddMember("meshOwner", _AccountId)
-
-	VirtualRouterRef_resourceOwner = VirtualRouterRef.AddMember("resourceOwner", _AccountId)
-
-	VirtualRouterRef_arn = VirtualRouterRef.AddMember("arn", _Arn)
-
-	VirtualRouterRef_version = VirtualRouterRef.AddMember("version", smithyprelude.Long)
-
-	VirtualRouterRef_createdAt = VirtualRouterRef.AddMember("createdAt", smithyprelude.Timestamp)
-
-	VirtualRouterRef_lastUpdatedAt = VirtualRouterRef.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_VirtualRouterList_member = _VirtualRouterList.AddMember("member", VirtualRouterRef)
-
-	VirtualRouterServiceProvider_virtualRouterName = VirtualRouterServiceProvider.AddMember("virtualRouterName", _ResourceName)
-
-	VirtualServiceProvider_virtualNode = VirtualServiceProvider.AddMember("virtualNode", VirtualNodeServiceProvider)
-
-	VirtualServiceProvider_virtualRouter = VirtualServiceProvider.AddMember("virtualRouter", VirtualRouterServiceProvider)
-
-	VirtualServiceSpec_provider = VirtualServiceSpec.AddMember("provider", VirtualServiceProvider)
-
-	VirtualServiceStatus_status = VirtualServiceStatus.AddMember("status", _VirtualServiceStatusCode)
-
-	VirtualServiceData_meshName = VirtualServiceData.AddMember("meshName", _ResourceName)
-
-	VirtualServiceData_virtualServiceName = VirtualServiceData.AddMember("virtualServiceName", _ServiceName)
-
-	VirtualServiceData_spec = VirtualServiceData.AddMember("spec", VirtualServiceSpec)
-
-	VirtualServiceData_metadata = VirtualServiceData.AddMember("metadata", ResourceMetadata)
-
-	VirtualServiceData_status = VirtualServiceData.AddMember("status", VirtualServiceStatus)
-
-	VirtualServiceRef_meshName = VirtualServiceRef.AddMember("meshName", _ResourceName)
-
-	VirtualServiceRef_virtualServiceName = VirtualServiceRef.AddMember("virtualServiceName", _ServiceName)
-
-	VirtualServiceRef_meshOwner = VirtualServiceRef.AddMember("meshOwner", _AccountId)
-
-	VirtualServiceRef_resourceOwner = VirtualServiceRef.AddMember("resourceOwner", _AccountId)
-
-	VirtualServiceRef_arn = VirtualServiceRef.AddMember("arn", _Arn)
-
-	VirtualServiceRef_version = VirtualServiceRef.AddMember("version", smithyprelude.Long)
-
-	VirtualServiceRef_createdAt = VirtualServiceRef.AddMember("createdAt", smithyprelude.Timestamp)
-
-	VirtualServiceRef_lastUpdatedAt = VirtualServiceRef.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_VirtualServiceList_member = _VirtualServiceList.AddMember("member", VirtualServiceRef)
-
-	CreateGatewayRouteInput_gatewayRouteName = CreateGatewayRouteInput.AddMember("gatewayRouteName", _ResourceName)
-
-	CreateGatewayRouteInput_meshName = CreateGatewayRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateGatewayRouteInput_virtualGatewayName = CreateGatewayRouteInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateGatewayRouteInput_spec = CreateGatewayRouteInput.AddMember("spec", GatewayRouteSpec)
-
-	CreateGatewayRouteInput_tags = CreateGatewayRouteInput.AddMember("tags", _TagList)
-
-	CreateGatewayRouteInput_clientToken = CreateGatewayRouteInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateGatewayRouteInput_meshOwner = CreateGatewayRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	CreateGatewayRouteOutput_gatewayRoute = CreateGatewayRouteOutput.AddMember("gatewayRoute", GatewayRouteData, &smithytraits.HTTPPayload{})
-
-	CreateMeshInput_meshName = CreateMeshInput.AddMember("meshName", _ResourceName)
-
-	CreateMeshInput_spec = CreateMeshInput.AddMember("spec", MeshSpec)
-
-	CreateMeshInput_tags = CreateMeshInput.AddMember("tags", _TagList)
-
-	CreateMeshInput_clientToken = CreateMeshInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateMeshOutput_mesh = CreateMeshOutput.AddMember("mesh", MeshData, &smithytraits.HTTPPayload{})
-
-	CreateRouteInput_routeName = CreateRouteInput.AddMember("routeName", _ResourceName)
-
-	CreateRouteInput_meshName = CreateRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateRouteInput_virtualRouterName = CreateRouteInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateRouteInput_spec = CreateRouteInput.AddMember("spec", RouteSpec)
-
-	CreateRouteInput_tags = CreateRouteInput.AddMember("tags", _TagList)
-
-	CreateRouteInput_clientToken = CreateRouteInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateRouteInput_meshOwner = CreateRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	CreateRouteOutput_route = CreateRouteOutput.AddMember("route", RouteData, &smithytraits.HTTPPayload{})
-
-	CreateVirtualGatewayInput_virtualGatewayName = CreateVirtualGatewayInput.AddMember("virtualGatewayName", _ResourceName)
-
-	CreateVirtualGatewayInput_meshName = CreateVirtualGatewayInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateVirtualGatewayInput_spec = CreateVirtualGatewayInput.AddMember("spec", VirtualGatewaySpec)
-
-	CreateVirtualGatewayInput_tags = CreateVirtualGatewayInput.AddMember("tags", _TagList)
-
-	CreateVirtualGatewayInput_clientToken = CreateVirtualGatewayInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateVirtualGatewayInput_meshOwner = CreateVirtualGatewayInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	CreateVirtualGatewayOutput_virtualGateway = CreateVirtualGatewayOutput.AddMember("virtualGateway", VirtualGatewayData, &smithytraits.HTTPPayload{})
-
-	CreateVirtualNodeInput_virtualNodeName = CreateVirtualNodeInput.AddMember("virtualNodeName", _ResourceName)
-
-	CreateVirtualNodeInput_meshName = CreateVirtualNodeInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateVirtualNodeInput_spec = CreateVirtualNodeInput.AddMember("spec", VirtualNodeSpec)
-
-	CreateVirtualNodeInput_tags = CreateVirtualNodeInput.AddMember("tags", _TagList)
-
-	CreateVirtualNodeInput_clientToken = CreateVirtualNodeInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateVirtualNodeInput_meshOwner = CreateVirtualNodeInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	CreateVirtualNodeOutput_virtualNode = CreateVirtualNodeOutput.AddMember("virtualNode", VirtualNodeData, &smithytraits.HTTPPayload{})
-
-	CreateVirtualRouterInput_virtualRouterName = CreateVirtualRouterInput.AddMember("virtualRouterName", _ResourceName)
-
-	CreateVirtualRouterInput_meshName = CreateVirtualRouterInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateVirtualRouterInput_spec = CreateVirtualRouterInput.AddMember("spec", VirtualRouterSpec)
-
-	CreateVirtualRouterInput_tags = CreateVirtualRouterInput.AddMember("tags", _TagList)
-
-	CreateVirtualRouterInput_clientToken = CreateVirtualRouterInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateVirtualRouterInput_meshOwner = CreateVirtualRouterInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	CreateVirtualRouterOutput_virtualRouter = CreateVirtualRouterOutput.AddMember("virtualRouter", VirtualRouterData, &smithytraits.HTTPPayload{})
-
-	CreateVirtualServiceInput_virtualServiceName = CreateVirtualServiceInput.AddMember("virtualServiceName", _ServiceName)
-
-	CreateVirtualServiceInput_meshName = CreateVirtualServiceInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateVirtualServiceInput_spec = CreateVirtualServiceInput.AddMember("spec", VirtualServiceSpec)
-
-	CreateVirtualServiceInput_tags = CreateVirtualServiceInput.AddMember("tags", _TagList)
-
-	CreateVirtualServiceInput_clientToken = CreateVirtualServiceInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateVirtualServiceInput_meshOwner = CreateVirtualServiceInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	CreateVirtualServiceOutput_virtualService = CreateVirtualServiceOutput.AddMember("virtualService", VirtualServiceData, &smithytraits.HTTPPayload{})
-
-	DeleteGatewayRouteInput_gatewayRouteName = DeleteGatewayRouteInput.AddMember("gatewayRouteName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteGatewayRouteInput_meshName = DeleteGatewayRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteGatewayRouteInput_virtualGatewayName = DeleteGatewayRouteInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteGatewayRouteInput_meshOwner = DeleteGatewayRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DeleteGatewayRouteOutput_gatewayRoute = DeleteGatewayRouteOutput.AddMember("gatewayRoute", GatewayRouteData, &smithytraits.HTTPPayload{})
-
-	DeleteMeshInput_meshName = DeleteMeshInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteMeshOutput_mesh = DeleteMeshOutput.AddMember("mesh", MeshData, &smithytraits.HTTPPayload{})
-
-	DeleteRouteInput_routeName = DeleteRouteInput.AddMember("routeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteRouteInput_meshName = DeleteRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteRouteInput_virtualRouterName = DeleteRouteInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteRouteInput_meshOwner = DeleteRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DeleteRouteOutput_route = DeleteRouteOutput.AddMember("route", RouteData, &smithytraits.HTTPPayload{})
-
-	DeleteVirtualGatewayInput_virtualGatewayName = DeleteVirtualGatewayInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualGatewayInput_meshName = DeleteVirtualGatewayInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualGatewayInput_meshOwner = DeleteVirtualGatewayInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DeleteVirtualGatewayOutput_virtualGateway = DeleteVirtualGatewayOutput.AddMember("virtualGateway", VirtualGatewayData, &smithytraits.HTTPPayload{})
-
-	DeleteVirtualNodeInput_virtualNodeName = DeleteVirtualNodeInput.AddMember("virtualNodeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualNodeInput_meshName = DeleteVirtualNodeInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualNodeInput_meshOwner = DeleteVirtualNodeInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DeleteVirtualNodeOutput_virtualNode = DeleteVirtualNodeOutput.AddMember("virtualNode", VirtualNodeData, &smithytraits.HTTPPayload{})
-
-	DeleteVirtualRouterInput_virtualRouterName = DeleteVirtualRouterInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualRouterInput_meshName = DeleteVirtualRouterInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualRouterInput_meshOwner = DeleteVirtualRouterInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DeleteVirtualRouterOutput_virtualRouter = DeleteVirtualRouterOutput.AddMember("virtualRouter", VirtualRouterData, &smithytraits.HTTPPayload{})
-
-	DeleteVirtualServiceInput_virtualServiceName = DeleteVirtualServiceInput.AddMember("virtualServiceName", _ServiceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualServiceInput_meshName = DeleteVirtualServiceInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteVirtualServiceInput_meshOwner = DeleteVirtualServiceInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DeleteVirtualServiceOutput_virtualService = DeleteVirtualServiceOutput.AddMember("virtualService", VirtualServiceData, &smithytraits.HTTPPayload{})
-
-	DescribeGatewayRouteInput_gatewayRouteName = DescribeGatewayRouteInput.AddMember("gatewayRouteName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeGatewayRouteInput_meshName = DescribeGatewayRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeGatewayRouteInput_virtualGatewayName = DescribeGatewayRouteInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeGatewayRouteInput_meshOwner = DescribeGatewayRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DescribeGatewayRouteOutput_gatewayRoute = DescribeGatewayRouteOutput.AddMember("gatewayRoute", GatewayRouteData, &smithytraits.HTTPPayload{})
-
-	DescribeMeshInput_meshName = DescribeMeshInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeMeshInput_meshOwner = DescribeMeshInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DescribeMeshOutput_mesh = DescribeMeshOutput.AddMember("mesh", MeshData, &smithytraits.HTTPPayload{})
-
-	DescribeRouteInput_routeName = DescribeRouteInput.AddMember("routeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeRouteInput_meshName = DescribeRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeRouteInput_meshOwner = DescribeRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DescribeRouteInput_virtualRouterName = DescribeRouteInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeRouteOutput_route = DescribeRouteOutput.AddMember("route", RouteData, &smithytraits.HTTPPayload{})
-
-	DescribeVirtualGatewayInput_virtualGatewayName = DescribeVirtualGatewayInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualGatewayInput_meshName = DescribeVirtualGatewayInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualGatewayInput_meshOwner = DescribeVirtualGatewayInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DescribeVirtualGatewayOutput_virtualGateway = DescribeVirtualGatewayOutput.AddMember("virtualGateway", VirtualGatewayData, &smithytraits.HTTPPayload{})
-
-	DescribeVirtualNodeInput_virtualNodeName = DescribeVirtualNodeInput.AddMember("virtualNodeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualNodeInput_meshName = DescribeVirtualNodeInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualNodeInput_meshOwner = DescribeVirtualNodeInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DescribeVirtualNodeOutput_virtualNode = DescribeVirtualNodeOutput.AddMember("virtualNode", VirtualNodeData, &smithytraits.HTTPPayload{})
-
-	DescribeVirtualRouterInput_virtualRouterName = DescribeVirtualRouterInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualRouterInput_meshName = DescribeVirtualRouterInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualRouterInput_meshOwner = DescribeVirtualRouterInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DescribeVirtualRouterOutput_virtualRouter = DescribeVirtualRouterOutput.AddMember("virtualRouter", VirtualRouterData, &smithytraits.HTTPPayload{})
-
-	DescribeVirtualServiceInput_virtualServiceName = DescribeVirtualServiceInput.AddMember("virtualServiceName", _ServiceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualServiceInput_meshName = DescribeVirtualServiceInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DescribeVirtualServiceInput_meshOwner = DescribeVirtualServiceInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	DescribeVirtualServiceOutput_virtualService = DescribeVirtualServiceOutput.AddMember("virtualService", VirtualServiceData, &smithytraits.HTTPPayload{})
-
-	ListGatewayRoutesInput_meshName = ListGatewayRoutesInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListGatewayRoutesInput_virtualGatewayName = ListGatewayRoutesInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListGatewayRoutesInput_nextToken = ListGatewayRoutesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListGatewayRoutesInput_limit = ListGatewayRoutesInput.AddMember("limit", _ListGatewayRoutesLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListGatewayRoutesInput_meshOwner = ListGatewayRoutesInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	ListGatewayRoutesOutput_gatewayRoutes = ListGatewayRoutesOutput.AddMember("gatewayRoutes", _GatewayRouteList)
-
-	ListGatewayRoutesOutput_nextToken = ListGatewayRoutesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListMeshesInput_nextToken = ListMeshesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMeshesInput_limit = ListMeshesInput.AddMember("limit", _ListMeshesLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListMeshesOutput_meshes = ListMeshesOutput.AddMember("meshes", _MeshList)
-
-	ListMeshesOutput_nextToken = ListMeshesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListRoutesInput_meshName = ListRoutesInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListRoutesInput_virtualRouterName = ListRoutesInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListRoutesInput_nextToken = ListRoutesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRoutesInput_limit = ListRoutesInput.AddMember("limit", _ListRoutesLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListRoutesInput_meshOwner = ListRoutesInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	ListRoutesOutput_routes = ListRoutesOutput.AddMember("routes", _RouteList)
-
-	ListRoutesOutput_nextToken = ListRoutesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceInput_nextToken = ListTagsForResourceInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTagsForResourceInput_limit = ListTagsForResourceInput.AddMember("limit", _TagsLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagList)
-
-	ListTagsForResourceOutput_nextToken = ListTagsForResourceOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListVirtualGatewaysInput_meshName = ListVirtualGatewaysInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListVirtualGatewaysInput_nextToken = ListVirtualGatewaysInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVirtualGatewaysInput_limit = ListVirtualGatewaysInput.AddMember("limit", _ListVirtualGatewaysLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListVirtualGatewaysInput_meshOwner = ListVirtualGatewaysInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	ListVirtualGatewaysOutput_virtualGateways = ListVirtualGatewaysOutput.AddMember("virtualGateways", _VirtualGatewayList)
-
-	ListVirtualGatewaysOutput_nextToken = ListVirtualGatewaysOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListVirtualNodesInput_meshName = ListVirtualNodesInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListVirtualNodesInput_nextToken = ListVirtualNodesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVirtualNodesInput_limit = ListVirtualNodesInput.AddMember("limit", _ListVirtualNodesLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListVirtualNodesInput_meshOwner = ListVirtualNodesInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	ListVirtualNodesOutput_virtualNodes = ListVirtualNodesOutput.AddMember("virtualNodes", _VirtualNodeList)
-
-	ListVirtualNodesOutput_nextToken = ListVirtualNodesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListVirtualRoutersInput_meshName = ListVirtualRoutersInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListVirtualRoutersInput_nextToken = ListVirtualRoutersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVirtualRoutersInput_limit = ListVirtualRoutersInput.AddMember("limit", _ListVirtualRoutersLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListVirtualRoutersInput_meshOwner = ListVirtualRoutersInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	ListVirtualRoutersOutput_virtualRouters = ListVirtualRoutersOutput.AddMember("virtualRouters", _VirtualRouterList)
-
-	ListVirtualRoutersOutput_nextToken = ListVirtualRoutersOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListVirtualServicesInput_meshName = ListVirtualServicesInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListVirtualServicesInput_nextToken = ListVirtualServicesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVirtualServicesInput_limit = ListVirtualServicesInput.AddMember("limit", _ListVirtualServicesLimit, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListVirtualServicesInput_meshOwner = ListVirtualServicesInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	ListVirtualServicesOutput_virtualServices = ListVirtualServicesOutput.AddMember("virtualServices", _VirtualServiceList)
-
-	ListVirtualServicesOutput_nextToken = ListVirtualServicesOutput.AddMember("nextToken", smithyprelude.String)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagList)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList)
-
-	UpdateGatewayRouteInput_gatewayRouteName = UpdateGatewayRouteInput.AddMember("gatewayRouteName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateGatewayRouteInput_meshName = UpdateGatewayRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateGatewayRouteInput_virtualGatewayName = UpdateGatewayRouteInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateGatewayRouteInput_spec = UpdateGatewayRouteInput.AddMember("spec", GatewayRouteSpec)
-
-	UpdateGatewayRouteInput_clientToken = UpdateGatewayRouteInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateGatewayRouteInput_meshOwner = UpdateGatewayRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	UpdateGatewayRouteOutput_gatewayRoute = UpdateGatewayRouteOutput.AddMember("gatewayRoute", GatewayRouteData, &smithytraits.HTTPPayload{})
-
-	UpdateMeshInput_meshName = UpdateMeshInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateMeshInput_spec = UpdateMeshInput.AddMember("spec", MeshSpec)
-
-	UpdateMeshInput_clientToken = UpdateMeshInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateMeshOutput_mesh = UpdateMeshOutput.AddMember("mesh", MeshData, &smithytraits.HTTPPayload{})
-
-	UpdateRouteInput_routeName = UpdateRouteInput.AddMember("routeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateRouteInput_meshName = UpdateRouteInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateRouteInput_virtualRouterName = UpdateRouteInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateRouteInput_spec = UpdateRouteInput.AddMember("spec", RouteSpec)
-
-	UpdateRouteInput_clientToken = UpdateRouteInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateRouteInput_meshOwner = UpdateRouteInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	UpdateRouteOutput_route = UpdateRouteOutput.AddMember("route", RouteData, &smithytraits.HTTPPayload{})
-
-	UpdateVirtualGatewayInput_virtualGatewayName = UpdateVirtualGatewayInput.AddMember("virtualGatewayName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualGatewayInput_meshName = UpdateVirtualGatewayInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualGatewayInput_spec = UpdateVirtualGatewayInput.AddMember("spec", VirtualGatewaySpec)
-
-	UpdateVirtualGatewayInput_clientToken = UpdateVirtualGatewayInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateVirtualGatewayInput_meshOwner = UpdateVirtualGatewayInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	UpdateVirtualGatewayOutput_virtualGateway = UpdateVirtualGatewayOutput.AddMember("virtualGateway", VirtualGatewayData, &smithytraits.HTTPPayload{})
-
-	UpdateVirtualNodeInput_virtualNodeName = UpdateVirtualNodeInput.AddMember("virtualNodeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualNodeInput_meshName = UpdateVirtualNodeInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualNodeInput_spec = UpdateVirtualNodeInput.AddMember("spec", VirtualNodeSpec)
-
-	UpdateVirtualNodeInput_clientToken = UpdateVirtualNodeInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateVirtualNodeInput_meshOwner = UpdateVirtualNodeInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	UpdateVirtualNodeOutput_virtualNode = UpdateVirtualNodeOutput.AddMember("virtualNode", VirtualNodeData, &smithytraits.HTTPPayload{})
-
-	UpdateVirtualRouterInput_virtualRouterName = UpdateVirtualRouterInput.AddMember("virtualRouterName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualRouterInput_meshName = UpdateVirtualRouterInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualRouterInput_spec = UpdateVirtualRouterInput.AddMember("spec", VirtualRouterSpec)
-
-	UpdateVirtualRouterInput_clientToken = UpdateVirtualRouterInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateVirtualRouterInput_meshOwner = UpdateVirtualRouterInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	UpdateVirtualRouterOutput_virtualRouter = UpdateVirtualRouterOutput.AddMember("virtualRouter", VirtualRouterData, &smithytraits.HTTPPayload{})
-
-	UpdateVirtualServiceInput_virtualServiceName = UpdateVirtualServiceInput.AddMember("virtualServiceName", _ServiceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualServiceInput_meshName = UpdateVirtualServiceInput.AddMember("meshName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateVirtualServiceInput_spec = UpdateVirtualServiceInput.AddMember("spec", VirtualServiceSpec)
-
-	UpdateVirtualServiceInput_clientToken = UpdateVirtualServiceInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateVirtualServiceInput_meshOwner = UpdateVirtualServiceInput.AddMember("meshOwner", _AccountId, &smithytraits.HTTPQuery{Name: "meshOwner"})
-
-	UpdateVirtualServiceOutput_virtualService = UpdateVirtualServiceOutput.AddMember("virtualService", VirtualServiceData, &smithytraits.HTTPPayload{})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "meshOwner"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "limit"}}, DirectMask: 0x10}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+
+var mAccessLog = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessLog_file}}
+var mAwsCloudMapInstanceAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsCloudMapInstanceAttribute_key, &sAwsCloudMapInstanceAttribute_value}}
+var m_AwsCloudMapInstanceAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsCloudMapInstanceAttributes_member}}
+var mAwsCloudMapServiceDiscovery = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsCloudMapServiceDiscovery_namespaceName, &sAwsCloudMapServiceDiscovery_serviceName, &sAwsCloudMapServiceDiscovery_attributes, &sAwsCloudMapServiceDiscovery_ipPreference}}
+var mBackend = smithy.SchemaMembers{List: []*smithy.Schema{&sBackend_virtualService}}
+var mBackendDefaults = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendDefaults_clientPolicy}}
+var m_Backends = smithy.SchemaMembers{List: []*smithy.Schema{&s_Backends_member}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var m_CertificateAuthorityArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateAuthorityArns_member}}
+var mClientPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sClientPolicy_tls}}
+var mClientPolicyTls = smithy.SchemaMembers{List: []*smithy.Schema{&sClientPolicyTls_enforce, &sClientPolicyTls_ports, &sClientPolicyTls_certificate, &sClientPolicyTls_validation}}
+var mClientTlsCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sClientTlsCertificate_file, &sClientTlsCertificate_sds}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mDnsServiceDiscovery = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsServiceDiscovery_hostname, &sDnsServiceDiscovery_responseType, &sDnsServiceDiscovery_ipPreference}}
+var mDuration = smithy.SchemaMembers{List: []*smithy.Schema{&sDuration_value, &sDuration_unit}}
+var mEgressFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEgressFilter_type}}
+var mFileAccessLog = smithy.SchemaMembers{List: []*smithy.Schema{&sFileAccessLog_path, &sFileAccessLog_format}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_message}}
+var mGatewayRouteData = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteData_meshName, &sGatewayRouteData_gatewayRouteName, &sGatewayRouteData_virtualGatewayName, &sGatewayRouteData_spec, &sGatewayRouteData_metadata, &sGatewayRouteData_status}}
+var mGatewayRouteHostnameMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteHostnameMatch_exact, &sGatewayRouteHostnameMatch_suffix}}
+var mGatewayRouteHostnameRewrite = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteHostnameRewrite_defaultTargetHostname}}
+var m_GatewayRouteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GatewayRouteList_member}}
+var mGatewayRouteRef = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteRef_meshName, &sGatewayRouteRef_gatewayRouteName, &sGatewayRouteRef_virtualGatewayName, &sGatewayRouteRef_meshOwner, &sGatewayRouteRef_resourceOwner, &sGatewayRouteRef_arn, &sGatewayRouteRef_version, &sGatewayRouteRef_createdAt, &sGatewayRouteRef_lastUpdatedAt}, Hash: &hGatewayRouteRef}
+var mGatewayRouteSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteSpec_priority, &sGatewayRouteSpec_httpRoute, &sGatewayRouteSpec_http2Route, &sGatewayRouteSpec_grpcRoute}}
+var mGatewayRouteStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteStatus_status}}
+var mGatewayRouteTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteTarget_virtualService, &sGatewayRouteTarget_port}}
+var mGatewayRouteVirtualService = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayRouteVirtualService_virtualServiceName}}
+var mGrpcGatewayRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcGatewayRoute_match, &sGrpcGatewayRoute_action}}
+var mGrpcGatewayRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcGatewayRouteAction_target, &sGrpcGatewayRouteAction_rewrite}}
+var mGrpcGatewayRouteMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcGatewayRouteMatch_serviceName, &sGrpcGatewayRouteMatch_hostname, &sGrpcGatewayRouteMatch_metadata, &sGrpcGatewayRouteMatch_port}}
+var mGrpcGatewayRouteMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcGatewayRouteMetadata_name, &sGrpcGatewayRouteMetadata_invert, &sGrpcGatewayRouteMetadata_match}}
+var m_GrpcGatewayRouteMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GrpcGatewayRouteMetadataList_member}}
+var mGrpcGatewayRouteRewrite = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcGatewayRouteRewrite_hostname}}
+var mGrpcMetadataMatchMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcMetadataMatchMethod_exact, &sGrpcMetadataMatchMethod_regex, &sGrpcMetadataMatchMethod_range, &sGrpcMetadataMatchMethod_prefix, &sGrpcMetadataMatchMethod_suffix}}
+var mGrpcRetryPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcRetryPolicy_perRetryTimeout, &sGrpcRetryPolicy_maxRetries, &sGrpcRetryPolicy_httpRetryEvents, &sGrpcRetryPolicy_tcpRetryEvents, &sGrpcRetryPolicy_grpcRetryEvents}}
+var m_GrpcRetryPolicyEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_GrpcRetryPolicyEvents_member}}
+var mGrpcRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcRoute_action, &sGrpcRoute_match, &sGrpcRoute_retryPolicy, &sGrpcRoute_timeout}}
+var mGrpcRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcRouteAction_weightedTargets}}
+var mGrpcRouteMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcRouteMatch_serviceName, &sGrpcRouteMatch_methodName, &sGrpcRouteMatch_metadata, &sGrpcRouteMatch_port}}
+var mGrpcRouteMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcRouteMetadata_name, &sGrpcRouteMetadata_invert, &sGrpcRouteMetadata_match}}
+var m_GrpcRouteMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GrpcRouteMetadataList_member}}
+var mGrpcRouteMetadataMatchMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcRouteMetadataMatchMethod_exact, &sGrpcRouteMetadataMatchMethod_regex, &sGrpcRouteMetadataMatchMethod_range, &sGrpcRouteMetadataMatchMethod_prefix, &sGrpcRouteMetadataMatchMethod_suffix}}
+var mGrpcTimeout = smithy.SchemaMembers{List: []*smithy.Schema{&sGrpcTimeout_perRequest, &sGrpcTimeout_idle}}
+var mHeaderMatchMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sHeaderMatchMethod_exact, &sHeaderMatchMethod_regex, &sHeaderMatchMethod_range, &sHeaderMatchMethod_prefix, &sHeaderMatchMethod_suffix}}
+var mHealthCheckPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheckPolicy_timeoutMillis, &sHealthCheckPolicy_intervalMillis, &sHealthCheckPolicy_protocol, &sHealthCheckPolicy_port, &sHealthCheckPolicy_path, &sHealthCheckPolicy_healthyThreshold, &sHealthCheckPolicy_unhealthyThreshold}}
+var mHttpGatewayRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpGatewayRoute_match, &sHttpGatewayRoute_action}}
+var mHttpGatewayRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpGatewayRouteAction_target, &sHttpGatewayRouteAction_rewrite}}
+var mHttpGatewayRouteHeader = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpGatewayRouteHeader_name, &sHttpGatewayRouteHeader_invert, &sHttpGatewayRouteHeader_match}}
+var m_HttpGatewayRouteHeaders = smithy.SchemaMembers{List: []*smithy.Schema{&s_HttpGatewayRouteHeaders_member}}
+var mHttpGatewayRouteMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpGatewayRouteMatch_prefix, &sHttpGatewayRouteMatch_path, &sHttpGatewayRouteMatch_queryParameters, &sHttpGatewayRouteMatch_method, &sHttpGatewayRouteMatch_hostname, &sHttpGatewayRouteMatch_headers, &sHttpGatewayRouteMatch_port}}
+var mHttpGatewayRoutePathRewrite = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpGatewayRoutePathRewrite_exact}}
+var mHttpGatewayRoutePrefixRewrite = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpGatewayRoutePrefixRewrite_defaultPrefix, &sHttpGatewayRoutePrefixRewrite_value}}
+var mHttpGatewayRouteRewrite = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpGatewayRouteRewrite_prefix, &sHttpGatewayRouteRewrite_path, &sHttpGatewayRouteRewrite_hostname}}
+var mHttpPathMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpPathMatch_exact, &sHttpPathMatch_regex}}
+var mHttpQueryParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpQueryParameter_name, &sHttpQueryParameter_match}}
+var m_HttpQueryParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_HttpQueryParameters_member}}
+var mHttpRetryPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRetryPolicy_perRetryTimeout, &sHttpRetryPolicy_maxRetries, &sHttpRetryPolicy_httpRetryEvents, &sHttpRetryPolicy_tcpRetryEvents}}
+var m_HttpRetryPolicyEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_HttpRetryPolicyEvents_member}}
+var mHttpRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRoute_match, &sHttpRoute_action, &sHttpRoute_retryPolicy, &sHttpRoute_timeout}}
+var mHttpRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRouteAction_weightedTargets}}
+var mHttpRouteHeader = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRouteHeader_name, &sHttpRouteHeader_invert, &sHttpRouteHeader_match}}
+var m_HttpRouteHeaders = smithy.SchemaMembers{List: []*smithy.Schema{&s_HttpRouteHeaders_member}}
+var mHttpRouteMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRouteMatch_prefix, &sHttpRouteMatch_path, &sHttpRouteMatch_queryParameters, &sHttpRouteMatch_method, &sHttpRouteMatch_scheme, &sHttpRouteMatch_headers, &sHttpRouteMatch_port}}
+var mHttpTimeout = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpTimeout_perRequest, &sHttpTimeout_idle}}
+var mInternalServerErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerErrorException_message}}
+var m_JsonFormat = smithy.SchemaMembers{List: []*smithy.Schema{&s_JsonFormat_member}}
+var mJsonFormatRef = smithy.SchemaMembers{List: []*smithy.Schema{&sJsonFormatRef_key, &sJsonFormatRef_value}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mListener = smithy.SchemaMembers{List: []*smithy.Schema{&sListener_portMapping, &sListener_tls, &sListener_healthCheck, &sListener_timeout, &sListener_outlierDetection, &sListener_connectionPool}}
+var m_Listeners = smithy.SchemaMembers{List: []*smithy.Schema{&s_Listeners_member}}
+var mListenerTimeout = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTimeout_tcp, &sListenerTimeout_http, &sListenerTimeout_http2, &sListenerTimeout_grpc}}
+var mListenerTls = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTls_mode, &sListenerTls_certificate, &sListenerTls_validation}}
+var mListenerTlsAcmCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTlsAcmCertificate_certificateArn}}
+var mListenerTlsCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTlsCertificate_acm, &sListenerTlsCertificate_file, &sListenerTlsCertificate_sds}}
+var mListenerTlsFileCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTlsFileCertificate_certificateChain, &sListenerTlsFileCertificate_privateKey}}
+var mListenerTlsSdsCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTlsSdsCertificate_secretName}}
+var mListenerTlsValidationContext = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTlsValidationContext_trust, &sListenerTlsValidationContext_subjectAlternativeNames}}
+var mListenerTlsValidationContextTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerTlsValidationContextTrust_file, &sListenerTlsValidationContextTrust_sds}}
+var mLogging = smithy.SchemaMembers{List: []*smithy.Schema{&sLogging_accessLog}}
+var mLoggingFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingFormat_text, &sLoggingFormat_json}}
+var mMatchRange = smithy.SchemaMembers{List: []*smithy.Schema{&sMatchRange_start, &sMatchRange_end}}
+var mMeshData = smithy.SchemaMembers{List: []*smithy.Schema{&sMeshData_meshName, &sMeshData_spec, &sMeshData_metadata, &sMeshData_status}}
+var m_MeshList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MeshList_member}}
+var mMeshRef = smithy.SchemaMembers{List: []*smithy.Schema{&sMeshRef_meshName, &sMeshRef_meshOwner, &sMeshRef_resourceOwner, &sMeshRef_arn, &sMeshRef_version, &sMeshRef_createdAt, &sMeshRef_lastUpdatedAt}}
+var mMeshServiceDiscovery = smithy.SchemaMembers{List: []*smithy.Schema{&sMeshServiceDiscovery_ipPreference}}
+var mMeshSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sMeshSpec_egressFilter, &sMeshSpec_serviceDiscovery}}
+var mMeshStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMeshStatus_status}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mOutlierDetection = smithy.SchemaMembers{List: []*smithy.Schema{&sOutlierDetection_maxServerErrors, &sOutlierDetection_interval, &sOutlierDetection_baseEjectionDuration, &sOutlierDetection_maxEjectionPercent}}
+var mPortMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sPortMapping_port, &sPortMapping_protocol}}
+var m_PortSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_PortSet_member}}
+var mQueryParameterMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryParameterMatch_exact}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_message}}
+var mResourceMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceMetadata_arn, &sResourceMetadata_version, &sResourceMetadata_uid, &sResourceMetadata_createdAt, &sResourceMetadata_lastUpdatedAt, &sResourceMetadata_meshOwner, &sResourceMetadata_resourceOwner}}
+var mRouteData = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteData_meshName, &sRouteData_virtualRouterName, &sRouteData_routeName, &sRouteData_spec, &sRouteData_metadata, &sRouteData_status}}
+var m_RouteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteList_member}}
+var mRouteRef = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteRef_meshName, &sRouteRef_virtualRouterName, &sRouteRef_routeName, &sRouteRef_meshOwner, &sRouteRef_resourceOwner, &sRouteRef_arn, &sRouteRef_version, &sRouteRef_createdAt, &sRouteRef_lastUpdatedAt}, Hash: &hRouteRef}
+var mRouteSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteSpec_priority, &sRouteSpec_httpRoute, &sRouteSpec_tcpRoute, &sRouteSpec_http2Route, &sRouteSpec_grpcRoute}}
+var mRouteStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteStatus_status}}
+var mServiceDiscovery = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceDiscovery_dns, &sServiceDiscovery_awsCloudMap}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var m_SubjectAlternativeNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubjectAlternativeNameList_member}}
+var mSubjectAlternativeNameMatchers = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectAlternativeNameMatchers_exact}}
+var mSubjectAlternativeNames = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectAlternativeNames_match}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTagRef = smithy.SchemaMembers{List: []*smithy.Schema{&sTagRef_key, &sTagRef_value}}
+var m_TcpRetryPolicyEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_TcpRetryPolicyEvents_member}}
+var mTcpRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sTcpRoute_action, &sTcpRoute_timeout, &sTcpRoute_match}}
+var mTcpRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sTcpRouteAction_weightedTargets}}
+var mTcpRouteMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sTcpRouteMatch_port}}
+var mTcpTimeout = smithy.SchemaMembers{List: []*smithy.Schema{&sTcpTimeout_idle}}
+var mTlsValidationContext = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsValidationContext_trust, &sTlsValidationContext_subjectAlternativeNames}}
+var mTlsValidationContextAcmTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsValidationContextAcmTrust_certificateAuthorityArns}}
+var mTlsValidationContextFileTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsValidationContextFileTrust_certificateChain}}
+var mTlsValidationContextSdsTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsValidationContextSdsTrust_secretName}}
+var mTlsValidationContextTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsValidationContextTrust_acm, &sTlsValidationContextTrust_file, &sTlsValidationContextTrust_sds}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_message}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mVirtualGatewayAccessLog = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayAccessLog_file}}
+var mVirtualGatewayBackendDefaults = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayBackendDefaults_clientPolicy}}
+var m_VirtualGatewayCertificateAuthorityArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualGatewayCertificateAuthorityArns_member}}
+var mVirtualGatewayClientPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayClientPolicy_tls}}
+var mVirtualGatewayClientPolicyTls = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayClientPolicyTls_enforce, &sVirtualGatewayClientPolicyTls_ports, &sVirtualGatewayClientPolicyTls_certificate, &sVirtualGatewayClientPolicyTls_validation}}
+var mVirtualGatewayClientTlsCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayClientTlsCertificate_file, &sVirtualGatewayClientTlsCertificate_sds}}
+var mVirtualGatewayConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayConnectionPool_http, &sVirtualGatewayConnectionPool_http2, &sVirtualGatewayConnectionPool_grpc}}
+var mVirtualGatewayData = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayData_meshName, &sVirtualGatewayData_virtualGatewayName, &sVirtualGatewayData_spec, &sVirtualGatewayData_metadata, &sVirtualGatewayData_status}}
+var mVirtualGatewayFileAccessLog = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayFileAccessLog_path, &sVirtualGatewayFileAccessLog_format}}
+var mVirtualGatewayGrpcConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayGrpcConnectionPool_maxRequests}}
+var mVirtualGatewayHealthCheckPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayHealthCheckPolicy_timeoutMillis, &sVirtualGatewayHealthCheckPolicy_intervalMillis, &sVirtualGatewayHealthCheckPolicy_protocol, &sVirtualGatewayHealthCheckPolicy_port, &sVirtualGatewayHealthCheckPolicy_path, &sVirtualGatewayHealthCheckPolicy_healthyThreshold, &sVirtualGatewayHealthCheckPolicy_unhealthyThreshold}}
+var mVirtualGatewayHttp2ConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayHttp2ConnectionPool_maxRequests}}
+var mVirtualGatewayHttpConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayHttpConnectionPool_maxConnections, &sVirtualGatewayHttpConnectionPool_maxPendingRequests}}
+var m_VirtualGatewayList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualGatewayList_member}}
+var mVirtualGatewayListener = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListener_healthCheck, &sVirtualGatewayListener_portMapping, &sVirtualGatewayListener_tls, &sVirtualGatewayListener_connectionPool}}
+var m_VirtualGatewayListeners = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualGatewayListeners_member}}
+var mVirtualGatewayListenerTls = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListenerTls_mode, &sVirtualGatewayListenerTls_validation, &sVirtualGatewayListenerTls_certificate}}
+var mVirtualGatewayListenerTlsAcmCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListenerTlsAcmCertificate_certificateArn}}
+var mVirtualGatewayListenerTlsCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListenerTlsCertificate_acm, &sVirtualGatewayListenerTlsCertificate_file, &sVirtualGatewayListenerTlsCertificate_sds}}
+var mVirtualGatewayListenerTlsFileCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListenerTlsFileCertificate_certificateChain, &sVirtualGatewayListenerTlsFileCertificate_privateKey}}
+var mVirtualGatewayListenerTlsSdsCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListenerTlsSdsCertificate_secretName}}
+var mVirtualGatewayListenerTlsValidationContext = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListenerTlsValidationContext_trust, &sVirtualGatewayListenerTlsValidationContext_subjectAlternativeNames}}
+var mVirtualGatewayListenerTlsValidationContextTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayListenerTlsValidationContextTrust_file, &sVirtualGatewayListenerTlsValidationContextTrust_sds}}
+var mVirtualGatewayLogging = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayLogging_accessLog}}
+var mVirtualGatewayPortMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayPortMapping_port, &sVirtualGatewayPortMapping_protocol}}
+var mVirtualGatewayRef = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayRef_meshName, &sVirtualGatewayRef_virtualGatewayName, &sVirtualGatewayRef_meshOwner, &sVirtualGatewayRef_resourceOwner, &sVirtualGatewayRef_arn, &sVirtualGatewayRef_version, &sVirtualGatewayRef_createdAt, &sVirtualGatewayRef_lastUpdatedAt}}
+var mVirtualGatewaySpec = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewaySpec_backendDefaults, &sVirtualGatewaySpec_listeners, &sVirtualGatewaySpec_logging}}
+var mVirtualGatewayStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayStatus_status}}
+var mVirtualGatewayTlsValidationContext = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayTlsValidationContext_trust, &sVirtualGatewayTlsValidationContext_subjectAlternativeNames}}
+var mVirtualGatewayTlsValidationContextAcmTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns}}
+var mVirtualGatewayTlsValidationContextFileTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayTlsValidationContextFileTrust_certificateChain}}
+var mVirtualGatewayTlsValidationContextSdsTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayTlsValidationContextSdsTrust_secretName}}
+var mVirtualGatewayTlsValidationContextTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGatewayTlsValidationContextTrust_acm, &sVirtualGatewayTlsValidationContextTrust_file, &sVirtualGatewayTlsValidationContextTrust_sds}}
+var mVirtualNodeConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeConnectionPool_tcp, &sVirtualNodeConnectionPool_http, &sVirtualNodeConnectionPool_http2, &sVirtualNodeConnectionPool_grpc}}
+var mVirtualNodeData = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeData_meshName, &sVirtualNodeData_virtualNodeName, &sVirtualNodeData_spec, &sVirtualNodeData_metadata, &sVirtualNodeData_status}}
+var mVirtualNodeGrpcConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeGrpcConnectionPool_maxRequests}}
+var mVirtualNodeHttp2ConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeHttp2ConnectionPool_maxRequests}}
+var mVirtualNodeHttpConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeHttpConnectionPool_maxConnections, &sVirtualNodeHttpConnectionPool_maxPendingRequests}}
+var m_VirtualNodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualNodeList_member}}
+var mVirtualNodeRef = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeRef_meshName, &sVirtualNodeRef_virtualNodeName, &sVirtualNodeRef_meshOwner, &sVirtualNodeRef_resourceOwner, &sVirtualNodeRef_arn, &sVirtualNodeRef_version, &sVirtualNodeRef_createdAt, &sVirtualNodeRef_lastUpdatedAt}}
+var mVirtualNodeServiceProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeServiceProvider_virtualNodeName}}
+var mVirtualNodeSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeSpec_serviceDiscovery, &sVirtualNodeSpec_listeners, &sVirtualNodeSpec_backends, &sVirtualNodeSpec_backendDefaults, &sVirtualNodeSpec_logging}}
+var mVirtualNodeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeStatus_status}}
+var mVirtualNodeTcpConnectionPool = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualNodeTcpConnectionPool_maxConnections}}
+var mVirtualRouterData = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualRouterData_meshName, &sVirtualRouterData_virtualRouterName, &sVirtualRouterData_spec, &sVirtualRouterData_metadata, &sVirtualRouterData_status}}
+var m_VirtualRouterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualRouterList_member}}
+var mVirtualRouterListener = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualRouterListener_portMapping}}
+var m_VirtualRouterListeners = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualRouterListeners_member}}
+var mVirtualRouterRef = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualRouterRef_meshName, &sVirtualRouterRef_virtualRouterName, &sVirtualRouterRef_meshOwner, &sVirtualRouterRef_resourceOwner, &sVirtualRouterRef_arn, &sVirtualRouterRef_version, &sVirtualRouterRef_createdAt, &sVirtualRouterRef_lastUpdatedAt}}
+var mVirtualRouterServiceProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualRouterServiceProvider_virtualRouterName}}
+var mVirtualRouterSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualRouterSpec_listeners}}
+var mVirtualRouterStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualRouterStatus_status}}
+var mVirtualServiceBackend = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualServiceBackend_virtualServiceName, &sVirtualServiceBackend_clientPolicy}}
+var mVirtualServiceData = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualServiceData_meshName, &sVirtualServiceData_virtualServiceName, &sVirtualServiceData_spec, &sVirtualServiceData_metadata, &sVirtualServiceData_status}}
+var m_VirtualServiceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualServiceList_member}}
+var mVirtualServiceProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualServiceProvider_virtualNode, &sVirtualServiceProvider_virtualRouter}}
+var mVirtualServiceRef = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualServiceRef_meshName, &sVirtualServiceRef_virtualServiceName, &sVirtualServiceRef_meshOwner, &sVirtualServiceRef_resourceOwner, &sVirtualServiceRef_arn, &sVirtualServiceRef_version, &sVirtualServiceRef_createdAt, &sVirtualServiceRef_lastUpdatedAt}}
+var mVirtualServiceSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualServiceSpec_provider}}
+var mVirtualServiceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualServiceStatus_status}}
+var mWeightedTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sWeightedTarget_virtualNode, &sWeightedTarget_weight, &sWeightedTarget_port}}
+var m_WeightedTargets = smithy.SchemaMembers{List: []*smithy.Schema{&s_WeightedTargets_member}}
+var mCreateGatewayRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGatewayRouteInput_gatewayRouteName, &sCreateGatewayRouteInput_meshName, &sCreateGatewayRouteInput_virtualGatewayName, &sCreateGatewayRouteInput_spec, &sCreateGatewayRouteInput_tags, &sCreateGatewayRouteInput_clientToken, &sCreateGatewayRouteInput_meshOwner}}
+var mCreateGatewayRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGatewayRouteOutput_gatewayRoute}}
+var mCreateMeshInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMeshInput_meshName, &sCreateMeshInput_spec, &sCreateMeshInput_tags, &sCreateMeshInput_clientToken}}
+var mCreateMeshOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMeshOutput_mesh}}
+var mCreateRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRouteInput_routeName, &sCreateRouteInput_meshName, &sCreateRouteInput_virtualRouterName, &sCreateRouteInput_spec, &sCreateRouteInput_tags, &sCreateRouteInput_clientToken, &sCreateRouteInput_meshOwner}}
+var mCreateRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRouteOutput_route}}
+var mCreateVirtualGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualGatewayInput_virtualGatewayName, &sCreateVirtualGatewayInput_meshName, &sCreateVirtualGatewayInput_spec, &sCreateVirtualGatewayInput_tags, &sCreateVirtualGatewayInput_clientToken, &sCreateVirtualGatewayInput_meshOwner}}
+var mCreateVirtualGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualGatewayOutput_virtualGateway}}
+var mCreateVirtualNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualNodeInput_virtualNodeName, &sCreateVirtualNodeInput_meshName, &sCreateVirtualNodeInput_spec, &sCreateVirtualNodeInput_tags, &sCreateVirtualNodeInput_clientToken, &sCreateVirtualNodeInput_meshOwner}}
+var mCreateVirtualNodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualNodeOutput_virtualNode}}
+var mCreateVirtualRouterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualRouterInput_virtualRouterName, &sCreateVirtualRouterInput_meshName, &sCreateVirtualRouterInput_spec, &sCreateVirtualRouterInput_tags, &sCreateVirtualRouterInput_clientToken, &sCreateVirtualRouterInput_meshOwner}}
+var mCreateVirtualRouterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualRouterOutput_virtualRouter}}
+var mCreateVirtualServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualServiceInput_virtualServiceName, &sCreateVirtualServiceInput_meshName, &sCreateVirtualServiceInput_spec, &sCreateVirtualServiceInput_tags, &sCreateVirtualServiceInput_clientToken, &sCreateVirtualServiceInput_meshOwner}}
+var mCreateVirtualServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVirtualServiceOutput_virtualService}}
+var mDeleteGatewayRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGatewayRouteInput_gatewayRouteName, &sDeleteGatewayRouteInput_meshName, &sDeleteGatewayRouteInput_virtualGatewayName, &sDeleteGatewayRouteInput_meshOwner}}
+var mDeleteGatewayRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGatewayRouteOutput_gatewayRoute}}
+var mDeleteMeshInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMeshInput_meshName}}
+var mDeleteMeshOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMeshOutput_mesh}}
+var mDeleteRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRouteInput_routeName, &sDeleteRouteInput_meshName, &sDeleteRouteInput_virtualRouterName, &sDeleteRouteInput_meshOwner}}
+var mDeleteRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRouteOutput_route}}
+var mDeleteVirtualGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualGatewayInput_virtualGatewayName, &sDeleteVirtualGatewayInput_meshName, &sDeleteVirtualGatewayInput_meshOwner}}
+var mDeleteVirtualGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualGatewayOutput_virtualGateway}}
+var mDeleteVirtualNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualNodeInput_virtualNodeName, &sDeleteVirtualNodeInput_meshName, &sDeleteVirtualNodeInput_meshOwner}}
+var mDeleteVirtualNodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualNodeOutput_virtualNode}}
+var mDeleteVirtualRouterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualRouterInput_virtualRouterName, &sDeleteVirtualRouterInput_meshName, &sDeleteVirtualRouterInput_meshOwner}}
+var mDeleteVirtualRouterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualRouterOutput_virtualRouter}}
+var mDeleteVirtualServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualServiceInput_virtualServiceName, &sDeleteVirtualServiceInput_meshName, &sDeleteVirtualServiceInput_meshOwner}}
+var mDeleteVirtualServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualServiceOutput_virtualService}}
+var mDescribeGatewayRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGatewayRouteInput_gatewayRouteName, &sDescribeGatewayRouteInput_meshName, &sDescribeGatewayRouteInput_virtualGatewayName, &sDescribeGatewayRouteInput_meshOwner}}
+var mDescribeGatewayRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGatewayRouteOutput_gatewayRoute}}
+var mDescribeMeshInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMeshInput_meshName, &sDescribeMeshInput_meshOwner}}
+var mDescribeMeshOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMeshOutput_mesh}}
+var mDescribeRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRouteInput_routeName, &sDescribeRouteInput_meshName, &sDescribeRouteInput_meshOwner, &sDescribeRouteInput_virtualRouterName}}
+var mDescribeRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRouteOutput_route}}
+var mDescribeVirtualGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualGatewayInput_virtualGatewayName, &sDescribeVirtualGatewayInput_meshName, &sDescribeVirtualGatewayInput_meshOwner}}
+var mDescribeVirtualGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualGatewayOutput_virtualGateway}}
+var mDescribeVirtualNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualNodeInput_virtualNodeName, &sDescribeVirtualNodeInput_meshName, &sDescribeVirtualNodeInput_meshOwner}}
+var mDescribeVirtualNodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualNodeOutput_virtualNode}}
+var mDescribeVirtualRouterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualRouterInput_virtualRouterName, &sDescribeVirtualRouterInput_meshName, &sDescribeVirtualRouterInput_meshOwner}}
+var mDescribeVirtualRouterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualRouterOutput_virtualRouter}}
+var mDescribeVirtualServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualServiceInput_virtualServiceName, &sDescribeVirtualServiceInput_meshName, &sDescribeVirtualServiceInput_meshOwner}}
+var mDescribeVirtualServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualServiceOutput_virtualService}}
+var mListGatewayRoutesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGatewayRoutesInput_meshName, &sListGatewayRoutesInput_virtualGatewayName, &sListGatewayRoutesInput_nextToken, &sListGatewayRoutesInput_limit, &sListGatewayRoutesInput_meshOwner}}
+var mListGatewayRoutesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGatewayRoutesOutput_gatewayRoutes, &sListGatewayRoutesOutput_nextToken}}
+var mListMeshesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMeshesInput_nextToken, &sListMeshesInput_limit}}
+var mListMeshesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMeshesOutput_meshes, &sListMeshesOutput_nextToken}}
+var mListRoutesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoutesInput_meshName, &sListRoutesInput_virtualRouterName, &sListRoutesInput_nextToken, &sListRoutesInput_limit, &sListRoutesInput_meshOwner}}
+var mListRoutesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoutesOutput_routes, &sListRoutesOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn, &sListTagsForResourceInput_nextToken, &sListTagsForResourceInput_limit}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags, &sListTagsForResourceOutput_nextToken}}
+var mListVirtualGatewaysInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualGatewaysInput_meshName, &sListVirtualGatewaysInput_nextToken, &sListVirtualGatewaysInput_limit, &sListVirtualGatewaysInput_meshOwner}}
+var mListVirtualGatewaysOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualGatewaysOutput_virtualGateways, &sListVirtualGatewaysOutput_nextToken}}
+var mListVirtualNodesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualNodesInput_meshName, &sListVirtualNodesInput_nextToken, &sListVirtualNodesInput_limit, &sListVirtualNodesInput_meshOwner}}
+var mListVirtualNodesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualNodesOutput_virtualNodes, &sListVirtualNodesOutput_nextToken}}
+var mListVirtualRoutersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualRoutersInput_meshName, &sListVirtualRoutersInput_nextToken, &sListVirtualRoutersInput_limit, &sListVirtualRoutersInput_meshOwner}}
+var mListVirtualRoutersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualRoutersOutput_virtualRouters, &sListVirtualRoutersOutput_nextToken}}
+var mListVirtualServicesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualServicesInput_meshName, &sListVirtualServicesInput_nextToken, &sListVirtualServicesInput_limit, &sListVirtualServicesInput_meshOwner}}
+var mListVirtualServicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualServicesOutput_virtualServices, &sListVirtualServicesOutput_nextToken}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateGatewayRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewayRouteInput_gatewayRouteName, &sUpdateGatewayRouteInput_meshName, &sUpdateGatewayRouteInput_virtualGatewayName, &sUpdateGatewayRouteInput_spec, &sUpdateGatewayRouteInput_clientToken, &sUpdateGatewayRouteInput_meshOwner}}
+var mUpdateGatewayRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewayRouteOutput_gatewayRoute}}
+var mUpdateMeshInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMeshInput_meshName, &sUpdateMeshInput_spec, &sUpdateMeshInput_clientToken}}
+var mUpdateMeshOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMeshOutput_mesh}}
+var mUpdateRouteInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRouteInput_routeName, &sUpdateRouteInput_meshName, &sUpdateRouteInput_virtualRouterName, &sUpdateRouteInput_spec, &sUpdateRouteInput_clientToken, &sUpdateRouteInput_meshOwner}}
+var mUpdateRouteOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRouteOutput_route}}
+var mUpdateVirtualGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualGatewayInput_virtualGatewayName, &sUpdateVirtualGatewayInput_meshName, &sUpdateVirtualGatewayInput_spec, &sUpdateVirtualGatewayInput_clientToken, &sUpdateVirtualGatewayInput_meshOwner}}
+var mUpdateVirtualGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualGatewayOutput_virtualGateway}}
+var mUpdateVirtualNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualNodeInput_virtualNodeName, &sUpdateVirtualNodeInput_meshName, &sUpdateVirtualNodeInput_spec, &sUpdateVirtualNodeInput_clientToken, &sUpdateVirtualNodeInput_meshOwner}}
+var mUpdateVirtualNodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualNodeOutput_virtualNode}}
+var mUpdateVirtualRouterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualRouterInput_virtualRouterName, &sUpdateVirtualRouterInput_meshName, &sUpdateVirtualRouterInput_spec, &sUpdateVirtualRouterInput_clientToken, &sUpdateVirtualRouterInput_meshOwner}}
+var mUpdateVirtualRouterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualRouterOutput_virtualRouter}}
+var mUpdateVirtualServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualServiceInput_virtualServiceName, &sUpdateVirtualServiceInput_meshName, &sUpdateVirtualServiceInput_spec, &sUpdateVirtualServiceInput_clientToken, &sUpdateVirtualServiceInput_meshOwner}}
+var mUpdateVirtualServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualServiceOutput_virtualService}}
+
+var hGatewayRouteRef = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	6, 5, 0, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 7, 0, 0, 8, 0,
+	4, 0, 1, 0, 0, 0, 0, 0,
+}}
+var hRouteRef = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	6, 0, 0, 8, 0, 0, 0, 5, 0, 0, 9, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,
+	7, 4, 1, 3, 0, 0, 0, 0,
+}}
+
+var sCreateGatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGatewayRoute, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateGatewayRoute})
+var sCreateMesh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMesh, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateMesh})
+var sCreateRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoute, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateRoute})
+var sCreateVirtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualGateway, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateVirtualGateway})
+var sCreateVirtualNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualNode, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateVirtualNode})
+var sCreateVirtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualRouter, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateVirtualRouter})
+var sCreateVirtualService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualService, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateVirtualService})
+var sDeleteGatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGatewayRoute, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGatewayRoute})
+var sDeleteMesh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMesh, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMesh})
+var sDeleteRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoute, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRoute})
+var sDeleteVirtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualGateway, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVirtualGateway})
+var sDeleteVirtualNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualNode, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVirtualNode})
+var sDeleteVirtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualRouter, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVirtualRouter})
+var sDeleteVirtualService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualService, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVirtualService})
+var sDescribeGatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGatewayRoute, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDescribeGatewayRoute})
+var sDescribeMesh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMesh, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDescribeMesh})
+var sDescribeRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRoute, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRoute})
+var sDescribeVirtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualGateway, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVirtualGateway})
+var sDescribeVirtualNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualNode, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVirtualNode})
+var sDescribeVirtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualRouter, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVirtualRouter})
+var sDescribeVirtualService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualService, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVirtualService})
+var sListGatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGatewayRoutes, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListGatewayRoutes})
+var sListMeshes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMeshes, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListMeshes})
+var sListRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutes, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListRoutes})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListVirtualGateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualGateways, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListVirtualGateways})
+var sListVirtualNodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualNodes, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eListVirtualNodes})
+var sListVirtualRouters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualRouters, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eListVirtualRouters})
+var sListVirtualServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualServices, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListVirtualServices})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateGatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayRoute, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGatewayRoute})
+var sUpdateMesh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMesh, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMesh})
+var sUpdateRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoute, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRoute})
+var sUpdateVirtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualGateway, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVirtualGateway})
+var sUpdateVirtualNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualNode, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVirtualNode})
+var sUpdateVirtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualRouter, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVirtualRouter})
+var sUpdateVirtualService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualService, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVirtualService})
+var s_AppMesh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppMesh, Type: smithy.ShapeTypeService, Ext: &e_AppMesh})
+var sAccessLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessLog, Members: &mAccessLog, Type: smithy.ShapeTypeUnion, Ext: &eAccessLog})
+var sAccessLog_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iFileAccessLog, Members: &mFileAccessLog, Type: smithy.ShapeTypeStructure, Ext: &eAccessLog_file})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAwsCloudMapInstanceAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsCloudMapInstanceAttribute, Members: &mAwsCloudMapInstanceAttribute, Type: smithy.ShapeTypeStructure, Ext: &eAwsCloudMapInstanceAttribute})
+var sAwsCloudMapInstanceAttribute_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AwsCloudMapInstanceAttributeKey, Type: smithy.ShapeTypeString, Ext: &eAwsCloudMapInstanceAttribute_key})
+var sAwsCloudMapInstanceAttribute_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AwsCloudMapInstanceAttributeValue, Type: smithy.ShapeTypeString, Ext: &eAwsCloudMapInstanceAttribute_value})
+var s_AwsCloudMapInstanceAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsCloudMapInstanceAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_AwsCloudMapInstanceAttributeKey})
+var s_AwsCloudMapInstanceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsCloudMapInstanceAttributes, Members: &m_AwsCloudMapInstanceAttributes, Type: smithy.ShapeTypeList, Ext: &e_AwsCloudMapInstanceAttributes})
+var s_AwsCloudMapInstanceAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsCloudMapInstanceAttribute, Members: &mAwsCloudMapInstanceAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_AwsCloudMapInstanceAttributes_member})
+var s_AwsCloudMapInstanceAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsCloudMapInstanceAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AwsCloudMapInstanceAttributeValue})
+var s_AwsCloudMapName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsCloudMapName, Type: smithy.ShapeTypeString, Ext: &e_AwsCloudMapName})
+var sAwsCloudMapServiceDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsCloudMapServiceDiscovery, Members: &mAwsCloudMapServiceDiscovery, Type: smithy.ShapeTypeStructure, Ext: &eAwsCloudMapServiceDiscovery})
+var sAwsCloudMapServiceDiscovery_namespaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaceName", ID: &i_AwsCloudMapName, Type: smithy.ShapeTypeString, Ext: &eAwsCloudMapServiceDiscovery_namespaceName})
+var sAwsCloudMapServiceDiscovery_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_AwsCloudMapName, Type: smithy.ShapeTypeString, Ext: &eAwsCloudMapServiceDiscovery_serviceName})
+var sAwsCloudMapServiceDiscovery_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_AwsCloudMapInstanceAttributes, Members: &m_AwsCloudMapInstanceAttributes, Type: smithy.ShapeTypeList, Ext: &eAwsCloudMapServiceDiscovery_attributes})
+var sAwsCloudMapServiceDiscovery_ipPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipPreference", ID: &i_IpPreference, Type: smithy.ShapeTypeString, Ext: &eAwsCloudMapServiceDiscovery_ipPreference})
+var sBackend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackend, Members: &mBackend, Type: smithy.ShapeTypeUnion, Ext: &eBackend})
+var sBackend_virtualService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualService", ID: &iVirtualServiceBackend, Members: &mVirtualServiceBackend, Type: smithy.ShapeTypeStructure, Ext: &eBackend_virtualService})
+var sBackendDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendDefaults, Members: &mBackendDefaults, Type: smithy.ShapeTypeStructure, Ext: &eBackendDefaults})
+var sBackendDefaults_clientPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientPolicy", ID: &iClientPolicy, Members: &mClientPolicy, Type: smithy.ShapeTypeStructure, Ext: &eBackendDefaults_clientPolicy})
+var s_Backends = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Backends, Members: &m_Backends, Type: smithy.ShapeTypeList, Ext: &e_Backends})
+var s_Backends_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBackend, Members: &mBackend, Type: smithy.ShapeTypeUnion, Ext: &e_Backends_member})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var s_CertificateAuthorityArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateAuthorityArns, Members: &m_CertificateAuthorityArns, Type: smithy.ShapeTypeList, Ext: &e_CertificateAuthorityArns})
+var s_CertificateAuthorityArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_CertificateAuthorityArns_member})
+var sClientPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientPolicy, Members: &mClientPolicy, Type: smithy.ShapeTypeStructure, Ext: &eClientPolicy})
+var sClientPolicy_tls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tls", ID: &iClientPolicyTls, Members: &mClientPolicyTls, Type: smithy.ShapeTypeStructure, Ext: &eClientPolicy_tls})
+var sClientPolicyTls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientPolicyTls, Members: &mClientPolicyTls, Type: smithy.ShapeTypeStructure, Ext: &eClientPolicyTls})
+var sClientPolicyTls_enforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enforce", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eClientPolicyTls_enforce})
+var sClientPolicyTls_ports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ports", ID: &i_PortSet, Members: &m_PortSet, Type: smithy.ShapeTypeList, Ext: &eClientPolicyTls_ports})
+var sClientPolicyTls_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &iClientTlsCertificate, Members: &mClientTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eClientPolicyTls_certificate})
+var sClientPolicyTls_validation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validation", ID: &iTlsValidationContext, Members: &mTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eClientPolicyTls_validation})
+var sClientTlsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientTlsCertificate, Members: &mClientTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eClientTlsCertificate})
+var sClientTlsCertificate_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iListenerTlsFileCertificate, Members: &mListenerTlsFileCertificate, Type: smithy.ShapeTypeStructure, Ext: &eClientTlsCertificate_file})
+var sClientTlsCertificate_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iListenerTlsSdsCertificate, Members: &mListenerTlsSdsCertificate, Type: smithy.ShapeTypeStructure, Ext: &eClientTlsCertificate_sds})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_DefaultGatewayRouteRewrite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultGatewayRouteRewrite, Type: smithy.ShapeTypeString, Ext: &e_DefaultGatewayRouteRewrite})
+var s_DnsResponseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsResponseType, Type: smithy.ShapeTypeString, Ext: &e_DnsResponseType})
+var sDnsServiceDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsServiceDiscovery, Members: &mDnsServiceDiscovery, Type: smithy.ShapeTypeStructure, Ext: &eDnsServiceDiscovery})
+var sDnsServiceDiscovery_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &i_Hostname, Type: smithy.ShapeTypeString, Ext: &eDnsServiceDiscovery_hostname})
+var sDnsServiceDiscovery_responseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseType", ID: &i_DnsResponseType, Type: smithy.ShapeTypeString, Ext: &eDnsServiceDiscovery_responseType})
+var sDnsServiceDiscovery_ipPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipPreference", ID: &i_IpPreference, Type: smithy.ShapeTypeString, Ext: &eDnsServiceDiscovery_ipPreference})
+var sDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eDuration})
+var sDuration_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DurationValue, Type: smithy.ShapeTypeLong, Ext: &eDuration_value})
+var sDuration_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &i_DurationUnit, Type: smithy.ShapeTypeString, Ext: &eDuration_unit})
+var s_DurationUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationUnit, Type: smithy.ShapeTypeString, Ext: &e_DurationUnit})
+var s_DurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationValue, Type: smithy.ShapeTypeLong, Ext: &e_DurationValue})
+var sEgressFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEgressFilter, Members: &mEgressFilter, Type: smithy.ShapeTypeStructure, Ext: &eEgressFilter})
+var sEgressFilter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_EgressFilterType, Type: smithy.ShapeTypeString, Ext: &eEgressFilter_type})
+var s_EgressFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EgressFilterType, Type: smithy.ShapeTypeString, Ext: &e_EgressFilterType})
+var s_ExactHostName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExactHostName, Type: smithy.ShapeTypeString, Ext: &e_ExactHostName})
+var sFileAccessLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileAccessLog, Members: &mFileAccessLog, Type: smithy.ShapeTypeStructure, Ext: &eFileAccessLog})
+var sFileAccessLog_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eFileAccessLog_path})
+var sFileAccessLog_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iLoggingFormat, Members: &mLoggingFormat, Type: smithy.ShapeTypeUnion, Ext: &eFileAccessLog_format})
+var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &e_FilePath})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_message})
+var sGatewayRouteData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteData, Members: &mGatewayRouteData, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteData})
+var sGatewayRouteData_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteData_meshName})
+var sGatewayRouteData_gatewayRouteName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRouteName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteData_gatewayRouteName})
+var sGatewayRouteData_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteData_virtualGatewayName})
+var sGatewayRouteData_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iGatewayRouteSpec, Members: &mGatewayRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteData_spec})
+var sGatewayRouteData_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteData_metadata})
+var sGatewayRouteData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iGatewayRouteStatus, Members: &mGatewayRouteStatus, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteData_status})
+var sGatewayRouteHostnameMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteHostnameMatch, Members: &mGatewayRouteHostnameMatch, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteHostnameMatch})
+var sGatewayRouteHostnameMatch_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &i_ExactHostName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteHostnameMatch_exact})
+var sGatewayRouteHostnameMatch_suffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suffix", ID: &i_SuffixHostname, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteHostnameMatch_suffix})
+var sGatewayRouteHostnameRewrite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteHostnameRewrite, Members: &mGatewayRouteHostnameRewrite, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteHostnameRewrite})
+var sGatewayRouteHostnameRewrite_defaultTargetHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTargetHostname", ID: &i_DefaultGatewayRouteRewrite, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteHostnameRewrite_defaultTargetHostname})
+var s_GatewayRouteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayRouteList, Members: &m_GatewayRouteList, Type: smithy.ShapeTypeList, Ext: &e_GatewayRouteList})
+var s_GatewayRouteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGatewayRouteRef, Members: &mGatewayRouteRef, Type: smithy.ShapeTypeStructure, Ext: &e_GatewayRouteList_member})
+var s_GatewayRoutePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayRoutePriority, Type: smithy.ShapeTypeInteger, Ext: &e_GatewayRoutePriority})
+var sGatewayRouteRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteRef, Members: &mGatewayRouteRef, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteRef})
+var sGatewayRouteRef_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteRef_meshName})
+var sGatewayRouteRef_gatewayRouteName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRouteName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteRef_gatewayRouteName})
+var sGatewayRouteRef_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteRef_virtualGatewayName})
+var sGatewayRouteRef_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteRef_meshOwner})
+var sGatewayRouteRef_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteRef_resourceOwner})
+var sGatewayRouteRef_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteRef_arn})
+var sGatewayRouteRef_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGatewayRouteRef_version})
+var sGatewayRouteRef_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGatewayRouteRef_createdAt})
+var sGatewayRouteRef_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGatewayRouteRef_lastUpdatedAt})
+var sGatewayRouteSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteSpec, Members: &mGatewayRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteSpec})
+var sGatewayRouteSpec_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_GatewayRoutePriority, Type: smithy.ShapeTypeInteger, Ext: &eGatewayRouteSpec_priority})
+var sGatewayRouteSpec_httpRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpRoute", ID: &iHttpGatewayRoute, Members: &mHttpGatewayRoute, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteSpec_httpRoute})
+var sGatewayRouteSpec_http2Route = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http2Route", ID: &iHttpGatewayRoute, Members: &mHttpGatewayRoute, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteSpec_http2Route})
+var sGatewayRouteSpec_grpcRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grpcRoute", ID: &iGrpcGatewayRoute, Members: &mGrpcGatewayRoute, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteSpec_grpcRoute})
+var sGatewayRouteStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteStatus, Members: &mGatewayRouteStatus, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteStatus})
+var sGatewayRouteStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_GatewayRouteStatusCode, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteStatus_status})
+var s_GatewayRouteStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayRouteStatusCode, Type: smithy.ShapeTypeString, Ext: &e_GatewayRouteStatusCode})
+var sGatewayRouteTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteTarget, Members: &mGatewayRouteTarget, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteTarget})
+var sGatewayRouteTarget_virtualService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualService", ID: &iGatewayRouteVirtualService, Members: &mGatewayRouteVirtualService, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteTarget_virtualService})
+var sGatewayRouteTarget_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &eGatewayRouteTarget_port})
+var sGatewayRouteVirtualService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayRouteVirtualService, Members: &mGatewayRouteVirtualService, Type: smithy.ShapeTypeStructure, Ext: &eGatewayRouteVirtualService})
+var sGatewayRouteVirtualService_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGatewayRouteVirtualService_virtualServiceName})
+var sGrpcGatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcGatewayRoute, Members: &mGrpcGatewayRoute, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRoute})
+var sGrpcGatewayRoute_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iGrpcGatewayRouteMatch, Members: &mGrpcGatewayRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRoute_match})
+var sGrpcGatewayRoute_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGrpcGatewayRouteAction, Members: &mGrpcGatewayRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRoute_action})
+var sGrpcGatewayRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcGatewayRouteAction, Members: &mGrpcGatewayRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteAction})
+var sGrpcGatewayRouteAction_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &iGatewayRouteTarget, Members: &mGatewayRouteTarget, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteAction_target})
+var sGrpcGatewayRouteAction_rewrite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rewrite", ID: &iGrpcGatewayRouteRewrite, Members: &mGrpcGatewayRouteRewrite, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteAction_rewrite})
+var sGrpcGatewayRouteMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcGatewayRouteMatch, Members: &mGrpcGatewayRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteMatch})
+var sGrpcGatewayRouteMatch_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eGrpcGatewayRouteMatch_serviceName})
+var sGrpcGatewayRouteMatch_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &iGatewayRouteHostnameMatch, Members: &mGatewayRouteHostnameMatch, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteMatch_hostname})
+var sGrpcGatewayRouteMatch_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_GrpcGatewayRouteMetadataList, Members: &m_GrpcGatewayRouteMetadataList, Type: smithy.ShapeTypeList, Ext: &eGrpcGatewayRouteMatch_metadata})
+var sGrpcGatewayRouteMatch_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &eGrpcGatewayRouteMatch_port})
+var sGrpcGatewayRouteMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcGatewayRouteMetadata, Members: &mGrpcGatewayRouteMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteMetadata})
+var sGrpcGatewayRouteMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &eGrpcGatewayRouteMetadata_name})
+var sGrpcGatewayRouteMetadata_invert = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invert", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGrpcGatewayRouteMetadata_invert})
+var sGrpcGatewayRouteMetadata_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iGrpcMetadataMatchMethod, Members: &mGrpcMetadataMatchMethod, Type: smithy.ShapeTypeUnion, Ext: &eGrpcGatewayRouteMetadata_match})
+var s_GrpcGatewayRouteMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrpcGatewayRouteMetadataList, Members: &m_GrpcGatewayRouteMetadataList, Type: smithy.ShapeTypeList, Ext: &e_GrpcGatewayRouteMetadataList})
+var s_GrpcGatewayRouteMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGrpcGatewayRouteMetadata, Members: &mGrpcGatewayRouteMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_GrpcGatewayRouteMetadataList_member})
+var sGrpcGatewayRouteRewrite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcGatewayRouteRewrite, Members: &mGrpcGatewayRouteRewrite, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteRewrite})
+var sGrpcGatewayRouteRewrite_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &iGatewayRouteHostnameRewrite, Members: &mGatewayRouteHostnameRewrite, Type: smithy.ShapeTypeStructure, Ext: &eGrpcGatewayRouteRewrite_hostname})
+var sGrpcMetadataMatchMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcMetadataMatchMethod, Members: &mGrpcMetadataMatchMethod, Type: smithy.ShapeTypeUnion, Ext: &eGrpcMetadataMatchMethod})
+var sGrpcMetadataMatchMethod_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcMetadataMatchMethod_exact})
+var sGrpcMetadataMatchMethod_regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regex", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcMetadataMatchMethod_regex})
+var sGrpcMetadataMatchMethod_range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "range", ID: &iMatchRange, Members: &mMatchRange, Type: smithy.ShapeTypeStructure, Ext: &eGrpcMetadataMatchMethod_range})
+var sGrpcMetadataMatchMethod_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcMetadataMatchMethod_prefix})
+var sGrpcMetadataMatchMethod_suffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suffix", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcMetadataMatchMethod_suffix})
+var sGrpcRetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcRetryPolicy, Members: &mGrpcRetryPolicy, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRetryPolicy})
+var sGrpcRetryPolicy_perRetryTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "perRetryTimeout", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRetryPolicy_perRetryTimeout})
+var sGrpcRetryPolicy_maxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeLong, Ext: &eGrpcRetryPolicy_maxRetries})
+var sGrpcRetryPolicy_httpRetryEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpRetryEvents", ID: &i_HttpRetryPolicyEvents, Members: &m_HttpRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &eGrpcRetryPolicy_httpRetryEvents})
+var sGrpcRetryPolicy_tcpRetryEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tcpRetryEvents", ID: &i_TcpRetryPolicyEvents, Members: &m_TcpRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &eGrpcRetryPolicy_tcpRetryEvents})
+var sGrpcRetryPolicy_grpcRetryEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grpcRetryEvents", ID: &i_GrpcRetryPolicyEvents, Members: &m_GrpcRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &eGrpcRetryPolicy_grpcRetryEvents})
+var s_GrpcRetryPolicyEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrpcRetryPolicyEvent, Type: smithy.ShapeTypeString, Ext: &e_GrpcRetryPolicyEvent})
+var s_GrpcRetryPolicyEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrpcRetryPolicyEvents, Members: &m_GrpcRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &e_GrpcRetryPolicyEvents})
+var s_GrpcRetryPolicyEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GrpcRetryPolicyEvent, Type: smithy.ShapeTypeString, Ext: &e_GrpcRetryPolicyEvents_member})
+var sGrpcRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcRoute, Members: &mGrpcRoute, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRoute})
+var sGrpcRoute_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGrpcRouteAction, Members: &mGrpcRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRoute_action})
+var sGrpcRoute_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iGrpcRouteMatch, Members: &mGrpcRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRoute_match})
+var sGrpcRoute_retryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryPolicy", ID: &iGrpcRetryPolicy, Members: &mGrpcRetryPolicy, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRoute_retryPolicy})
+var sGrpcRoute_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iGrpcTimeout, Members: &mGrpcTimeout, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRoute_timeout})
+var sGrpcRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcRouteAction, Members: &mGrpcRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRouteAction})
+var sGrpcRouteAction_weightedTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weightedTargets", ID: &i_WeightedTargets, Members: &m_WeightedTargets, Type: smithy.ShapeTypeList, Ext: &eGrpcRouteAction_weightedTargets})
+var sGrpcRouteMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcRouteMatch, Members: &mGrpcRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRouteMatch})
+var sGrpcRouteMatch_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eGrpcRouteMatch_serviceName})
+var sGrpcRouteMatch_methodName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "methodName", ID: &i_MethodName, Type: smithy.ShapeTypeString, Ext: &eGrpcRouteMatch_methodName})
+var sGrpcRouteMatch_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_GrpcRouteMetadataList, Members: &m_GrpcRouteMetadataList, Type: smithy.ShapeTypeList, Ext: &eGrpcRouteMatch_metadata})
+var sGrpcRouteMatch_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &eGrpcRouteMatch_port})
+var sGrpcRouteMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcRouteMetadata, Members: &mGrpcRouteMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRouteMetadata})
+var sGrpcRouteMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &eGrpcRouteMetadata_name})
+var sGrpcRouteMetadata_invert = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invert", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGrpcRouteMetadata_invert})
+var sGrpcRouteMetadata_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iGrpcRouteMetadataMatchMethod, Members: &mGrpcRouteMetadataMatchMethod, Type: smithy.ShapeTypeUnion, Ext: &eGrpcRouteMetadata_match})
+var s_GrpcRouteMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrpcRouteMetadataList, Members: &m_GrpcRouteMetadataList, Type: smithy.ShapeTypeList, Ext: &e_GrpcRouteMetadataList})
+var s_GrpcRouteMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGrpcRouteMetadata, Members: &mGrpcRouteMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_GrpcRouteMetadataList_member})
+var sGrpcRouteMetadataMatchMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcRouteMetadataMatchMethod, Members: &mGrpcRouteMetadataMatchMethod, Type: smithy.ShapeTypeUnion, Ext: &eGrpcRouteMetadataMatchMethod})
+var sGrpcRouteMetadataMatchMethod_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcRouteMetadataMatchMethod_exact})
+var sGrpcRouteMetadataMatchMethod_regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regex", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcRouteMetadataMatchMethod_regex})
+var sGrpcRouteMetadataMatchMethod_range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "range", ID: &iMatchRange, Members: &mMatchRange, Type: smithy.ShapeTypeStructure, Ext: &eGrpcRouteMetadataMatchMethod_range})
+var sGrpcRouteMetadataMatchMethod_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcRouteMetadataMatchMethod_prefix})
+var sGrpcRouteMetadataMatchMethod_suffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suffix", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eGrpcRouteMetadataMatchMethod_suffix})
+var sGrpcTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrpcTimeout, Members: &mGrpcTimeout, Type: smithy.ShapeTypeStructure, Ext: &eGrpcTimeout})
+var sGrpcTimeout_perRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "perRequest", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eGrpcTimeout_perRequest})
+var sGrpcTimeout_idle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idle", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eGrpcTimeout_idle})
+var s_HeaderMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &e_HeaderMatch})
+var sHeaderMatchMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeaderMatchMethod, Members: &mHeaderMatchMethod, Type: smithy.ShapeTypeUnion, Ext: &eHeaderMatchMethod})
+var sHeaderMatchMethod_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eHeaderMatchMethod_exact})
+var sHeaderMatchMethod_regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regex", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eHeaderMatchMethod_regex})
+var sHeaderMatchMethod_range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "range", ID: &iMatchRange, Members: &mMatchRange, Type: smithy.ShapeTypeStructure, Ext: &eHeaderMatchMethod_range})
+var sHeaderMatchMethod_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eHeaderMatchMethod_prefix})
+var sHeaderMatchMethod_suffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suffix", ID: &i_HeaderMatch, Type: smithy.ShapeTypeString, Ext: &eHeaderMatchMethod_suffix})
+var s_HeaderName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &e_HeaderName})
+var s_HealthCheckIntervalMillis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckIntervalMillis, Type: smithy.ShapeTypeLong, Ext: &e_HealthCheckIntervalMillis})
+var sHealthCheckPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheckPolicy, Members: &mHealthCheckPolicy, Type: smithy.ShapeTypeStructure, Ext: &eHealthCheckPolicy})
+var sHealthCheckPolicy_timeoutMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutMillis", ID: &i_HealthCheckTimeoutMillis, Type: smithy.ShapeTypeLong, Ext: &eHealthCheckPolicy_timeoutMillis})
+var sHealthCheckPolicy_intervalMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intervalMillis", ID: &i_HealthCheckIntervalMillis, Type: smithy.ShapeTypeLong, Ext: &eHealthCheckPolicy_intervalMillis})
+var sHealthCheckPolicy_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &i_PortProtocol, Type: smithy.ShapeTypeString, Ext: &eHealthCheckPolicy_protocol})
+var sHealthCheckPolicy_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheckPolicy_port})
+var sHealthCheckPolicy_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHealthCheckPolicy_path})
+var sHealthCheckPolicy_healthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthyThreshold", ID: &i_HealthCheckThreshold, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheckPolicy_healthyThreshold})
+var sHealthCheckPolicy_unhealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unhealthyThreshold", ID: &i_HealthCheckThreshold, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheckPolicy_unhealthyThreshold})
+var s_HealthCheckThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckThreshold, Type: smithy.ShapeTypeInteger, Ext: &e_HealthCheckThreshold})
+var s_HealthCheckTimeoutMillis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckTimeoutMillis, Type: smithy.ShapeTypeLong, Ext: &e_HealthCheckTimeoutMillis})
+var s_Hostname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Hostname, Type: smithy.ShapeTypeString, Ext: &e_Hostname})
+var sHttpGatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpGatewayRoute, Members: &mHttpGatewayRoute, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRoute})
+var sHttpGatewayRoute_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iHttpGatewayRouteMatch, Members: &mHttpGatewayRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRoute_match})
+var sHttpGatewayRoute_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iHttpGatewayRouteAction, Members: &mHttpGatewayRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRoute_action})
+var sHttpGatewayRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpGatewayRouteAction, Members: &mHttpGatewayRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteAction})
+var sHttpGatewayRouteAction_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &iGatewayRouteTarget, Members: &mGatewayRouteTarget, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteAction_target})
+var sHttpGatewayRouteAction_rewrite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rewrite", ID: &iHttpGatewayRouteRewrite, Members: &mHttpGatewayRouteRewrite, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteAction_rewrite})
+var sHttpGatewayRouteHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpGatewayRouteHeader, Members: &mHttpGatewayRouteHeader, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteHeader})
+var sHttpGatewayRouteHeader_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &eHttpGatewayRouteHeader_name})
+var sHttpGatewayRouteHeader_invert = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invert", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eHttpGatewayRouteHeader_invert})
+var sHttpGatewayRouteHeader_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iHeaderMatchMethod, Members: &mHeaderMatchMethod, Type: smithy.ShapeTypeUnion, Ext: &eHttpGatewayRouteHeader_match})
+var s_HttpGatewayRouteHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpGatewayRouteHeaders, Members: &m_HttpGatewayRouteHeaders, Type: smithy.ShapeTypeList, Ext: &e_HttpGatewayRouteHeaders})
+var s_HttpGatewayRouteHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHttpGatewayRouteHeader, Members: &mHttpGatewayRouteHeader, Type: smithy.ShapeTypeStructure, Ext: &e_HttpGatewayRouteHeaders_member})
+var sHttpGatewayRouteMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpGatewayRouteMatch, Members: &mHttpGatewayRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteMatch})
+var sHttpGatewayRouteMatch_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHttpGatewayRouteMatch_prefix})
+var sHttpGatewayRouteMatch_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &iHttpPathMatch, Members: &mHttpPathMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteMatch_path})
+var sHttpGatewayRouteMatch_queryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParameters", ID: &i_HttpQueryParameters, Members: &m_HttpQueryParameters, Type: smithy.ShapeTypeList, Ext: &eHttpGatewayRouteMatch_queryParameters})
+var sHttpGatewayRouteMatch_method = smithy.NewStaticSchema(smithy.StaticSchema{Member: "method", ID: &i_HttpMethod, Type: smithy.ShapeTypeString, Ext: &eHttpGatewayRouteMatch_method})
+var sHttpGatewayRouteMatch_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &iGatewayRouteHostnameMatch, Members: &mGatewayRouteHostnameMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteMatch_hostname})
+var sHttpGatewayRouteMatch_headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headers", ID: &i_HttpGatewayRouteHeaders, Members: &m_HttpGatewayRouteHeaders, Type: smithy.ShapeTypeList, Ext: &eHttpGatewayRouteMatch_headers})
+var sHttpGatewayRouteMatch_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &eHttpGatewayRouteMatch_port})
+var sHttpGatewayRoutePathRewrite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpGatewayRoutePathRewrite, Members: &mHttpGatewayRoutePathRewrite, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRoutePathRewrite})
+var sHttpGatewayRoutePathRewrite_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &i_HttpPathExact, Type: smithy.ShapeTypeString, Ext: &eHttpGatewayRoutePathRewrite_exact})
+var s_HttpGatewayRoutePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpGatewayRoutePrefix, Type: smithy.ShapeTypeString, Ext: &e_HttpGatewayRoutePrefix})
+var sHttpGatewayRoutePrefixRewrite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpGatewayRoutePrefixRewrite, Members: &mHttpGatewayRoutePrefixRewrite, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRoutePrefixRewrite})
+var sHttpGatewayRoutePrefixRewrite_defaultPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPrefix", ID: &i_DefaultGatewayRouteRewrite, Type: smithy.ShapeTypeString, Ext: &eHttpGatewayRoutePrefixRewrite_defaultPrefix})
+var sHttpGatewayRoutePrefixRewrite_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HttpGatewayRoutePrefix, Type: smithy.ShapeTypeString, Ext: &eHttpGatewayRoutePrefixRewrite_value})
+var sHttpGatewayRouteRewrite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpGatewayRouteRewrite, Members: &mHttpGatewayRouteRewrite, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteRewrite})
+var sHttpGatewayRouteRewrite_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &iHttpGatewayRoutePrefixRewrite, Members: &mHttpGatewayRoutePrefixRewrite, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteRewrite_prefix})
+var sHttpGatewayRouteRewrite_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &iHttpGatewayRoutePathRewrite, Members: &mHttpGatewayRoutePathRewrite, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteRewrite_path})
+var sHttpGatewayRouteRewrite_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &iGatewayRouteHostnameRewrite, Members: &mGatewayRouteHostnameRewrite, Type: smithy.ShapeTypeStructure, Ext: &eHttpGatewayRouteRewrite_hostname})
+var s_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpMethod, Type: smithy.ShapeTypeString, Ext: &e_HttpMethod})
+var s_HttpPathExact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpPathExact, Type: smithy.ShapeTypeString, Ext: &e_HttpPathExact})
+var sHttpPathMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPathMatch, Members: &mHttpPathMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpPathMatch})
+var sHttpPathMatch_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &i_HttpPathExact, Type: smithy.ShapeTypeString, Ext: &eHttpPathMatch_exact})
+var sHttpPathMatch_regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regex", ID: &i_HttpPathRegex, Type: smithy.ShapeTypeString, Ext: &eHttpPathMatch_regex})
+var s_HttpPathRegex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpPathRegex, Type: smithy.ShapeTypeString, Ext: &e_HttpPathRegex})
+var sHttpQueryParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpQueryParameter, Members: &mHttpQueryParameter, Type: smithy.ShapeTypeStructure, Ext: &eHttpQueryParameter})
+var sHttpQueryParameter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_QueryParameterName, Type: smithy.ShapeTypeString, Ext: &eHttpQueryParameter_name})
+var sHttpQueryParameter_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iQueryParameterMatch, Members: &mQueryParameterMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpQueryParameter_match})
+var s_HttpQueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpQueryParameters, Members: &m_HttpQueryParameters, Type: smithy.ShapeTypeList, Ext: &e_HttpQueryParameters})
+var s_HttpQueryParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHttpQueryParameter, Members: &mHttpQueryParameter, Type: smithy.ShapeTypeStructure, Ext: &e_HttpQueryParameters_member})
+var sHttpRetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRetryPolicy, Members: &mHttpRetryPolicy, Type: smithy.ShapeTypeStructure, Ext: &eHttpRetryPolicy})
+var sHttpRetryPolicy_perRetryTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "perRetryTimeout", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eHttpRetryPolicy_perRetryTimeout})
+var sHttpRetryPolicy_maxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeLong, Ext: &eHttpRetryPolicy_maxRetries})
+var sHttpRetryPolicy_httpRetryEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpRetryEvents", ID: &i_HttpRetryPolicyEvents, Members: &m_HttpRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &eHttpRetryPolicy_httpRetryEvents})
+var sHttpRetryPolicy_tcpRetryEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tcpRetryEvents", ID: &i_TcpRetryPolicyEvents, Members: &m_TcpRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &eHttpRetryPolicy_tcpRetryEvents})
+var s_HttpRetryPolicyEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpRetryPolicyEvent, Type: smithy.ShapeTypeString, Ext: &e_HttpRetryPolicyEvent})
+var s_HttpRetryPolicyEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpRetryPolicyEvents, Members: &m_HttpRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &e_HttpRetryPolicyEvents})
+var s_HttpRetryPolicyEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HttpRetryPolicyEvent, Type: smithy.ShapeTypeString, Ext: &e_HttpRetryPolicyEvents_member})
+var sHttpRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRoute, Members: &mHttpRoute, Type: smithy.ShapeTypeStructure, Ext: &eHttpRoute})
+var sHttpRoute_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iHttpRouteMatch, Members: &mHttpRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpRoute_match})
+var sHttpRoute_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iHttpRouteAction, Members: &mHttpRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eHttpRoute_action})
+var sHttpRoute_retryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryPolicy", ID: &iHttpRetryPolicy, Members: &mHttpRetryPolicy, Type: smithy.ShapeTypeStructure, Ext: &eHttpRoute_retryPolicy})
+var sHttpRoute_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iHttpTimeout, Members: &mHttpTimeout, Type: smithy.ShapeTypeStructure, Ext: &eHttpRoute_timeout})
+var sHttpRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRouteAction, Members: &mHttpRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eHttpRouteAction})
+var sHttpRouteAction_weightedTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weightedTargets", ID: &i_WeightedTargets, Members: &m_WeightedTargets, Type: smithy.ShapeTypeList, Ext: &eHttpRouteAction_weightedTargets})
+var sHttpRouteHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRouteHeader, Members: &mHttpRouteHeader, Type: smithy.ShapeTypeStructure, Ext: &eHttpRouteHeader})
+var sHttpRouteHeader_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &eHttpRouteHeader_name})
+var sHttpRouteHeader_invert = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invert", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eHttpRouteHeader_invert})
+var sHttpRouteHeader_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iHeaderMatchMethod, Members: &mHeaderMatchMethod, Type: smithy.ShapeTypeUnion, Ext: &eHttpRouteHeader_match})
+var s_HttpRouteHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpRouteHeaders, Members: &m_HttpRouteHeaders, Type: smithy.ShapeTypeList, Ext: &e_HttpRouteHeaders})
+var s_HttpRouteHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHttpRouteHeader, Members: &mHttpRouteHeader, Type: smithy.ShapeTypeStructure, Ext: &e_HttpRouteHeaders_member})
+var sHttpRouteMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRouteMatch, Members: &mHttpRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpRouteMatch})
+var sHttpRouteMatch_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHttpRouteMatch_prefix})
+var sHttpRouteMatch_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &iHttpPathMatch, Members: &mHttpPathMatch, Type: smithy.ShapeTypeStructure, Ext: &eHttpRouteMatch_path})
+var sHttpRouteMatch_queryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParameters", ID: &i_HttpQueryParameters, Members: &m_HttpQueryParameters, Type: smithy.ShapeTypeList, Ext: &eHttpRouteMatch_queryParameters})
+var sHttpRouteMatch_method = smithy.NewStaticSchema(smithy.StaticSchema{Member: "method", ID: &i_HttpMethod, Type: smithy.ShapeTypeString, Ext: &eHttpRouteMatch_method})
+var sHttpRouteMatch_scheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheme", ID: &i_HttpScheme, Type: smithy.ShapeTypeString, Ext: &eHttpRouteMatch_scheme})
+var sHttpRouteMatch_headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headers", ID: &i_HttpRouteHeaders, Members: &m_HttpRouteHeaders, Type: smithy.ShapeTypeList, Ext: &eHttpRouteMatch_headers})
+var sHttpRouteMatch_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &eHttpRouteMatch_port})
+var s_HttpScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpScheme, Type: smithy.ShapeTypeString, Ext: &e_HttpScheme})
+var sHttpTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpTimeout, Members: &mHttpTimeout, Type: smithy.ShapeTypeStructure, Ext: &eHttpTimeout})
+var sHttpTimeout_perRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "perRequest", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eHttpTimeout_perRequest})
+var sHttpTimeout_idle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idle", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eHttpTimeout_idle})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sInternalServerErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_message})
+var s_IpPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpPreference, Type: smithy.ShapeTypeString, Ext: &e_IpPreference})
+var s_JsonFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonFormat, Members: &m_JsonFormat, Type: smithy.ShapeTypeList, Ext: &e_JsonFormat})
+var s_JsonFormat_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJsonFormatRef, Members: &mJsonFormatRef, Type: smithy.ShapeTypeStructure, Ext: &e_JsonFormat_member})
+var sJsonFormatRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonFormatRef, Members: &mJsonFormatRef, Type: smithy.ShapeTypeStructure, Ext: &eJsonFormatRef})
+var sJsonFormatRef_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_JsonKey, Type: smithy.ShapeTypeString, Ext: &eJsonFormatRef_key})
+var sJsonFormatRef_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_JsonValue, Type: smithy.ShapeTypeString, Ext: &eJsonFormatRef_value})
+var s_JsonKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonKey, Type: smithy.ShapeTypeString, Ext: &e_JsonKey})
+var s_JsonValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonValue, Type: smithy.ShapeTypeString, Ext: &e_JsonValue})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &eListener})
+var sListener_portMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portMapping", ID: &iPortMapping, Members: &mPortMapping, Type: smithy.ShapeTypeStructure, Ext: &eListener_portMapping})
+var sListener_tls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tls", ID: &iListenerTls, Members: &mListenerTls, Type: smithy.ShapeTypeStructure, Ext: &eListener_tls})
+var sListener_healthCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthCheck", ID: &iHealthCheckPolicy, Members: &mHealthCheckPolicy, Type: smithy.ShapeTypeStructure, Ext: &eListener_healthCheck})
+var sListener_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iListenerTimeout, Members: &mListenerTimeout, Type: smithy.ShapeTypeUnion, Ext: &eListener_timeout})
+var sListener_outlierDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outlierDetection", ID: &iOutlierDetection, Members: &mOutlierDetection, Type: smithy.ShapeTypeStructure, Ext: &eListener_outlierDetection})
+var sListener_connectionPool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionPool", ID: &iVirtualNodeConnectionPool, Members: &mVirtualNodeConnectionPool, Type: smithy.ShapeTypeUnion, Ext: &eListener_connectionPool})
+var s_ListenerPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &e_ListenerPort})
+var s_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &e_Listeners})
+var s_Listeners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &e_Listeners_member})
+var sListenerTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTimeout, Members: &mListenerTimeout, Type: smithy.ShapeTypeUnion, Ext: &eListenerTimeout})
+var sListenerTimeout_tcp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tcp", ID: &iTcpTimeout, Members: &mTcpTimeout, Type: smithy.ShapeTypeStructure, Ext: &eListenerTimeout_tcp})
+var sListenerTimeout_http = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http", ID: &iHttpTimeout, Members: &mHttpTimeout, Type: smithy.ShapeTypeStructure, Ext: &eListenerTimeout_http})
+var sListenerTimeout_http2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http2", ID: &iHttpTimeout, Members: &mHttpTimeout, Type: smithy.ShapeTypeStructure, Ext: &eListenerTimeout_http2})
+var sListenerTimeout_grpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grpc", ID: &iGrpcTimeout, Members: &mGrpcTimeout, Type: smithy.ShapeTypeStructure, Ext: &eListenerTimeout_grpc})
+var sListenerTls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTls, Members: &mListenerTls, Type: smithy.ShapeTypeStructure, Ext: &eListenerTls})
+var sListenerTls_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &i_ListenerTlsMode, Type: smithy.ShapeTypeString, Ext: &eListenerTls_mode})
+var sListenerTls_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &iListenerTlsCertificate, Members: &mListenerTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eListenerTls_certificate})
+var sListenerTls_validation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validation", ID: &iListenerTlsValidationContext, Members: &mListenerTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eListenerTls_validation})
+var sListenerTlsAcmCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTlsAcmCertificate, Members: &mListenerTlsAcmCertificate, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsAcmCertificate})
+var sListenerTlsAcmCertificate_certificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListenerTlsAcmCertificate_certificateArn})
+var sListenerTlsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTlsCertificate, Members: &mListenerTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eListenerTlsCertificate})
+var sListenerTlsCertificate_acm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acm", ID: &iListenerTlsAcmCertificate, Members: &mListenerTlsAcmCertificate, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsCertificate_acm})
+var sListenerTlsCertificate_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iListenerTlsFileCertificate, Members: &mListenerTlsFileCertificate, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsCertificate_file})
+var sListenerTlsCertificate_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iListenerTlsSdsCertificate, Members: &mListenerTlsSdsCertificate, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsCertificate_sds})
+var sListenerTlsFileCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTlsFileCertificate, Members: &mListenerTlsFileCertificate, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsFileCertificate})
+var sListenerTlsFileCertificate_certificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateChain", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eListenerTlsFileCertificate_certificateChain})
+var sListenerTlsFileCertificate_privateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateKey", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eListenerTlsFileCertificate_privateKey})
+var s_ListenerTlsMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerTlsMode, Type: smithy.ShapeTypeString, Ext: &e_ListenerTlsMode})
+var sListenerTlsSdsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTlsSdsCertificate, Members: &mListenerTlsSdsCertificate, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsSdsCertificate})
+var sListenerTlsSdsCertificate_secretName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretName", ID: &i_SdsSecretName, Type: smithy.ShapeTypeString, Ext: &eListenerTlsSdsCertificate_secretName})
+var sListenerTlsValidationContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTlsValidationContext, Members: &mListenerTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsValidationContext})
+var sListenerTlsValidationContext_trust = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trust", ID: &iListenerTlsValidationContextTrust, Members: &mListenerTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eListenerTlsValidationContext_trust})
+var sListenerTlsValidationContext_subjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectAlternativeNames", ID: &iSubjectAlternativeNames, Members: &mSubjectAlternativeNames, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsValidationContext_subjectAlternativeNames})
+var sListenerTlsValidationContextTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerTlsValidationContextTrust, Members: &mListenerTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eListenerTlsValidationContextTrust})
+var sListenerTlsValidationContextTrust_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iTlsValidationContextFileTrust, Members: &mTlsValidationContextFileTrust, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsValidationContextTrust_file})
+var sListenerTlsValidationContextTrust_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iTlsValidationContextSdsTrust, Members: &mTlsValidationContextSdsTrust, Type: smithy.ShapeTypeStructure, Ext: &eListenerTlsValidationContextTrust_sds})
+var s_ListGatewayRoutesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListGatewayRoutesLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListGatewayRoutesLimit})
+var s_ListMeshesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListMeshesLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListMeshesLimit})
+var s_ListRoutesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRoutesLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListRoutesLimit})
+var s_ListVirtualGatewaysLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVirtualGatewaysLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListVirtualGatewaysLimit})
+var s_ListVirtualNodesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVirtualNodesLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListVirtualNodesLimit})
+var s_ListVirtualRoutersLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVirtualRoutersLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListVirtualRoutersLimit})
+var s_ListVirtualServicesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVirtualServicesLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListVirtualServicesLimit})
+var sLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeStructure, Ext: &eLogging})
+var sLogging_accessLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessLog", ID: &iAccessLog, Members: &mAccessLog, Type: smithy.ShapeTypeUnion, Ext: &eLogging_accessLog})
+var sLoggingFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingFormat, Members: &mLoggingFormat, Type: smithy.ShapeTypeUnion, Ext: &eLoggingFormat})
+var sLoggingFormat_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_TextFormat, Type: smithy.ShapeTypeString, Ext: &eLoggingFormat_text})
+var sLoggingFormat_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &i_JsonFormat, Members: &m_JsonFormat, Type: smithy.ShapeTypeList, Ext: &eLoggingFormat_json})
+var sMatchRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchRange, Members: &mMatchRange, Type: smithy.ShapeTypeStructure, Ext: &eMatchRange})
+var sMatchRange_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMatchRange_start})
+var sMatchRange_end = smithy.NewStaticSchema(smithy.StaticSchema{Member: "end", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMatchRange_end})
+var s_MaxConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxConnections, Type: smithy.ShapeTypeInteger, Ext: &e_MaxConnections})
+var s_MaxPendingRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPendingRequests, Type: smithy.ShapeTypeInteger, Ext: &e_MaxPendingRequests})
+var s_MaxRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRequests, Type: smithy.ShapeTypeInteger, Ext: &e_MaxRequests})
+var s_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRetries, Type: smithy.ShapeTypeLong, Ext: &e_MaxRetries})
+var sMeshData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeshData, Members: &mMeshData, Type: smithy.ShapeTypeStructure, Ext: &eMeshData})
+var sMeshData_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eMeshData_meshName})
+var sMeshData_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iMeshSpec, Members: &mMeshSpec, Type: smithy.ShapeTypeStructure, Ext: &eMeshData_spec})
+var sMeshData_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eMeshData_metadata})
+var sMeshData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMeshStatus, Members: &mMeshStatus, Type: smithy.ShapeTypeStructure, Ext: &eMeshData_status})
+var s_MeshList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MeshList, Members: &m_MeshList, Type: smithy.ShapeTypeList, Ext: &e_MeshList})
+var s_MeshList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMeshRef, Members: &mMeshRef, Type: smithy.ShapeTypeStructure, Ext: &e_MeshList_member})
+var sMeshRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeshRef, Members: &mMeshRef, Type: smithy.ShapeTypeStructure, Ext: &eMeshRef})
+var sMeshRef_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eMeshRef_meshName})
+var sMeshRef_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eMeshRef_meshOwner})
+var sMeshRef_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eMeshRef_resourceOwner})
+var sMeshRef_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMeshRef_arn})
+var sMeshRef_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMeshRef_version})
+var sMeshRef_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMeshRef_createdAt})
+var sMeshRef_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMeshRef_lastUpdatedAt})
+var sMeshServiceDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeshServiceDiscovery, Members: &mMeshServiceDiscovery, Type: smithy.ShapeTypeStructure, Ext: &eMeshServiceDiscovery})
+var sMeshServiceDiscovery_ipPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipPreference", ID: &i_IpPreference, Type: smithy.ShapeTypeString, Ext: &eMeshServiceDiscovery_ipPreference})
+var sMeshSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeshSpec, Members: &mMeshSpec, Type: smithy.ShapeTypeStructure, Ext: &eMeshSpec})
+var sMeshSpec_egressFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressFilter", ID: &iEgressFilter, Members: &mEgressFilter, Type: smithy.ShapeTypeStructure, Ext: &eMeshSpec_egressFilter})
+var sMeshSpec_serviceDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceDiscovery", ID: &iMeshServiceDiscovery, Members: &mMeshServiceDiscovery, Type: smithy.ShapeTypeStructure, Ext: &eMeshSpec_serviceDiscovery})
+var sMeshStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeshStatus, Members: &mMeshStatus, Type: smithy.ShapeTypeStructure, Ext: &eMeshStatus})
+var sMeshStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MeshStatusCode, Type: smithy.ShapeTypeString, Ext: &eMeshStatus_status})
+var s_MeshStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MeshStatusCode, Type: smithy.ShapeTypeString, Ext: &e_MeshStatusCode})
+var s_MethodName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MethodName, Type: smithy.ShapeTypeString, Ext: &e_MethodName})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sOutlierDetection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutlierDetection, Members: &mOutlierDetection, Type: smithy.ShapeTypeStructure, Ext: &eOutlierDetection})
+var sOutlierDetection_maxServerErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxServerErrors", ID: &i_OutlierDetectionMaxServerErrors, Type: smithy.ShapeTypeLong, Ext: &eOutlierDetection_maxServerErrors})
+var sOutlierDetection_interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interval", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eOutlierDetection_interval})
+var sOutlierDetection_baseEjectionDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseEjectionDuration", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eOutlierDetection_baseEjectionDuration})
+var sOutlierDetection_maxEjectionPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxEjectionPercent", ID: &i_OutlierDetectionMaxEjectionPercent, Type: smithy.ShapeTypeInteger, Ext: &eOutlierDetection_maxEjectionPercent})
+var s_OutlierDetectionMaxEjectionPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutlierDetectionMaxEjectionPercent, Type: smithy.ShapeTypeInteger, Ext: &e_OutlierDetectionMaxEjectionPercent})
+var s_OutlierDetectionMaxServerErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutlierDetectionMaxServerErrors, Type: smithy.ShapeTypeLong, Ext: &e_OutlierDetectionMaxServerErrors})
+var s_PercentInt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PercentInt, Type: smithy.ShapeTypeInteger, Ext: &e_PercentInt})
+var sPortMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortMapping, Members: &mPortMapping, Type: smithy.ShapeTypeStructure, Ext: &ePortMapping})
+var sPortMapping_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ePortMapping_port})
+var sPortMapping_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &i_PortProtocol, Type: smithy.ShapeTypeString, Ext: &ePortMapping_protocol})
+var s_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &e_PortNumber})
+var s_PortProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortProtocol, Type: smithy.ShapeTypeString, Ext: &e_PortProtocol})
+var s_PortSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortSet, Members: &m_PortSet, Type: smithy.ShapeTypeList, Ext: &e_PortSet})
+var s_PortSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &e_PortSet_member})
+var sQueryParameterMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryParameterMatch, Members: &mQueryParameterMatch, Type: smithy.ShapeTypeStructure, Ext: &eQueryParameterMatch})
+var sQueryParameterMatch_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueryParameterMatch_exact})
+var s_QueryParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParameterName, Type: smithy.ShapeTypeString, Ext: &e_QueryParameterName})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_message})
+var sResourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eResourceMetadata})
+var sResourceMetadata_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eResourceMetadata_arn})
+var sResourceMetadata_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eResourceMetadata_version})
+var sResourceMetadata_uid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uid", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceMetadata_uid})
+var sResourceMetadata_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceMetadata_createdAt})
+var sResourceMetadata_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceMetadata_lastUpdatedAt})
+var sResourceMetadata_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eResourceMetadata_meshOwner})
+var sResourceMetadata_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eResourceMetadata_resourceOwner})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sRouteData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteData, Members: &mRouteData, Type: smithy.ShapeTypeStructure, Ext: &eRouteData})
+var sRouteData_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRouteData_meshName})
+var sRouteData_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRouteData_virtualRouterName})
+var sRouteData_routeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRouteData_routeName})
+var sRouteData_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iRouteSpec, Members: &mRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eRouteData_spec})
+var sRouteData_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRouteData_metadata})
+var sRouteData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRouteStatus, Members: &mRouteStatus, Type: smithy.ShapeTypeStructure, Ext: &eRouteData_status})
+var s_RouteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteList, Members: &m_RouteList, Type: smithy.ShapeTypeList, Ext: &e_RouteList})
+var s_RouteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRouteRef, Members: &mRouteRef, Type: smithy.ShapeTypeStructure, Ext: &e_RouteList_member})
+var s_RoutePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoutePriority, Type: smithy.ShapeTypeInteger, Ext: &e_RoutePriority})
+var sRouteRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteRef, Members: &mRouteRef, Type: smithy.ShapeTypeStructure, Ext: &eRouteRef})
+var sRouteRef_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRouteRef_meshName})
+var sRouteRef_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRouteRef_virtualRouterName})
+var sRouteRef_routeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRouteRef_routeName})
+var sRouteRef_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRouteRef_meshOwner})
+var sRouteRef_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRouteRef_resourceOwner})
+var sRouteRef_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRouteRef_arn})
+var sRouteRef_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eRouteRef_version})
+var sRouteRef_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRouteRef_createdAt})
+var sRouteRef_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRouteRef_lastUpdatedAt})
+var sRouteSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteSpec, Members: &mRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eRouteSpec})
+var sRouteSpec_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_RoutePriority, Type: smithy.ShapeTypeInteger, Ext: &eRouteSpec_priority})
+var sRouteSpec_httpRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpRoute", ID: &iHttpRoute, Members: &mHttpRoute, Type: smithy.ShapeTypeStructure, Ext: &eRouteSpec_httpRoute})
+var sRouteSpec_tcpRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tcpRoute", ID: &iTcpRoute, Members: &mTcpRoute, Type: smithy.ShapeTypeStructure, Ext: &eRouteSpec_tcpRoute})
+var sRouteSpec_http2Route = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http2Route", ID: &iHttpRoute, Members: &mHttpRoute, Type: smithy.ShapeTypeStructure, Ext: &eRouteSpec_http2Route})
+var sRouteSpec_grpcRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grpcRoute", ID: &iGrpcRoute, Members: &mGrpcRoute, Type: smithy.ShapeTypeStructure, Ext: &eRouteSpec_grpcRoute})
+var sRouteStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteStatus, Members: &mRouteStatus, Type: smithy.ShapeTypeStructure, Ext: &eRouteStatus})
+var sRouteStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RouteStatusCode, Type: smithy.ShapeTypeString, Ext: &eRouteStatus_status})
+var s_RouteStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteStatusCode, Type: smithy.ShapeTypeString, Ext: &e_RouteStatusCode})
+var s_SdsSecretName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SdsSecretName, Type: smithy.ShapeTypeString, Ext: &e_SdsSecretName})
+var sServiceDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceDiscovery, Members: &mServiceDiscovery, Type: smithy.ShapeTypeUnion, Ext: &eServiceDiscovery})
+var sServiceDiscovery_dns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dns", ID: &iDnsServiceDiscovery, Members: &mDnsServiceDiscovery, Type: smithy.ShapeTypeStructure, Ext: &eServiceDiscovery_dns})
+var sServiceDiscovery_awsCloudMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsCloudMap", ID: &iAwsCloudMapServiceDiscovery, Members: &mAwsCloudMapServiceDiscovery, Type: smithy.ShapeTypeStructure, Ext: &eServiceDiscovery_awsCloudMap})
+var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &e_ServiceName})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var s_SubjectAlternativeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectAlternativeName, Type: smithy.ShapeTypeString, Ext: &e_SubjectAlternativeName})
+var s_SubjectAlternativeNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectAlternativeNameList, Members: &m_SubjectAlternativeNameList, Type: smithy.ShapeTypeList, Ext: &e_SubjectAlternativeNameList})
+var s_SubjectAlternativeNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubjectAlternativeName, Type: smithy.ShapeTypeString, Ext: &e_SubjectAlternativeNameList_member})
+var sSubjectAlternativeNameMatchers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectAlternativeNameMatchers, Members: &mSubjectAlternativeNameMatchers, Type: smithy.ShapeTypeStructure, Ext: &eSubjectAlternativeNameMatchers})
+var sSubjectAlternativeNameMatchers_exact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exact", ID: &i_SubjectAlternativeNameList, Members: &m_SubjectAlternativeNameList, Type: smithy.ShapeTypeList, Ext: &eSubjectAlternativeNameMatchers_exact})
+var sSubjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectAlternativeNames, Members: &mSubjectAlternativeNames, Type: smithy.ShapeTypeStructure, Ext: &eSubjectAlternativeNames})
+var sSubjectAlternativeNames_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iSubjectAlternativeNameMatchers, Members: &mSubjectAlternativeNameMatchers, Type: smithy.ShapeTypeStructure, Ext: &eSubjectAlternativeNames_match})
+var s_SuffixHostname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuffixHostname, Type: smithy.ShapeTypeString, Ext: &e_SuffixHostname})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagRef, Members: &mTagRef, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTagRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagRef, Members: &mTagRef, Type: smithy.ShapeTypeStructure, Ext: &eTagRef})
+var sTagRef_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTagRef_key})
+var sTagRef_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTagRef_value})
+var s_TagsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsLimit, Type: smithy.ShapeTypeInteger, Ext: &e_TagsLimit})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TcpRetryPolicyEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TcpRetryPolicyEvent, Type: smithy.ShapeTypeString, Ext: &e_TcpRetryPolicyEvent})
+var s_TcpRetryPolicyEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TcpRetryPolicyEvents, Members: &m_TcpRetryPolicyEvents, Type: smithy.ShapeTypeList, Ext: &e_TcpRetryPolicyEvents})
+var s_TcpRetryPolicyEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TcpRetryPolicyEvent, Type: smithy.ShapeTypeString, Ext: &e_TcpRetryPolicyEvents_member})
+var sTcpRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTcpRoute, Members: &mTcpRoute, Type: smithy.ShapeTypeStructure, Ext: &eTcpRoute})
+var sTcpRoute_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iTcpRouteAction, Members: &mTcpRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eTcpRoute_action})
+var sTcpRoute_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iTcpTimeout, Members: &mTcpTimeout, Type: smithy.ShapeTypeStructure, Ext: &eTcpRoute_timeout})
+var sTcpRoute_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &iTcpRouteMatch, Members: &mTcpRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eTcpRoute_match})
+var sTcpRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTcpRouteAction, Members: &mTcpRouteAction, Type: smithy.ShapeTypeStructure, Ext: &eTcpRouteAction})
+var sTcpRouteAction_weightedTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weightedTargets", ID: &i_WeightedTargets, Members: &m_WeightedTargets, Type: smithy.ShapeTypeList, Ext: &eTcpRouteAction_weightedTargets})
+var sTcpRouteMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTcpRouteMatch, Members: &mTcpRouteMatch, Type: smithy.ShapeTypeStructure, Ext: &eTcpRouteMatch})
+var sTcpRouteMatch_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &eTcpRouteMatch_port})
+var sTcpTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTcpTimeout, Members: &mTcpTimeout, Type: smithy.ShapeTypeStructure, Ext: &eTcpTimeout})
+var sTcpTimeout_idle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idle", ID: &iDuration, Members: &mDuration, Type: smithy.ShapeTypeStructure, Ext: &eTcpTimeout_idle})
+var s_TextFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextFormat, Type: smithy.ShapeTypeString, Ext: &e_TextFormat})
+var sTlsValidationContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsValidationContext, Members: &mTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContext})
+var sTlsValidationContext_trust = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trust", ID: &iTlsValidationContextTrust, Members: &mTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eTlsValidationContext_trust})
+var sTlsValidationContext_subjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectAlternativeNames", ID: &iSubjectAlternativeNames, Members: &mSubjectAlternativeNames, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContext_subjectAlternativeNames})
+var sTlsValidationContextAcmTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsValidationContextAcmTrust, Members: &mTlsValidationContextAcmTrust, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContextAcmTrust})
+var sTlsValidationContextAcmTrust_certificateAuthorityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateAuthorityArns", ID: &i_CertificateAuthorityArns, Members: &m_CertificateAuthorityArns, Type: smithy.ShapeTypeList, Ext: &eTlsValidationContextAcmTrust_certificateAuthorityArns})
+var sTlsValidationContextFileTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsValidationContextFileTrust, Members: &mTlsValidationContextFileTrust, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContextFileTrust})
+var sTlsValidationContextFileTrust_certificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateChain", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eTlsValidationContextFileTrust_certificateChain})
+var sTlsValidationContextSdsTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsValidationContextSdsTrust, Members: &mTlsValidationContextSdsTrust, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContextSdsTrust})
+var sTlsValidationContextSdsTrust_secretName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretName", ID: &i_SdsSecretName, Type: smithy.ShapeTypeString, Ext: &eTlsValidationContextSdsTrust_secretName})
+var sTlsValidationContextTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsValidationContextTrust, Members: &mTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eTlsValidationContextTrust})
+var sTlsValidationContextTrust_acm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acm", ID: &iTlsValidationContextAcmTrust, Members: &mTlsValidationContextAcmTrust, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContextTrust_acm})
+var sTlsValidationContextTrust_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iTlsValidationContextFileTrust, Members: &mTlsValidationContextFileTrust, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContextTrust_file})
+var sTlsValidationContextTrust_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iTlsValidationContextSdsTrust, Members: &mTlsValidationContextSdsTrust, Type: smithy.ShapeTypeStructure, Ext: &eTlsValidationContextTrust_sds})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var sVirtualGatewayAccessLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayAccessLog, Members: &mVirtualGatewayAccessLog, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayAccessLog})
+var sVirtualGatewayAccessLog_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iVirtualGatewayFileAccessLog, Members: &mVirtualGatewayFileAccessLog, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayAccessLog_file})
+var sVirtualGatewayBackendDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayBackendDefaults, Members: &mVirtualGatewayBackendDefaults, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayBackendDefaults})
+var sVirtualGatewayBackendDefaults_clientPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientPolicy", ID: &iVirtualGatewayClientPolicy, Members: &mVirtualGatewayClientPolicy, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayBackendDefaults_clientPolicy})
+var s_VirtualGatewayCertificateAuthorityArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayCertificateAuthorityArns, Members: &m_VirtualGatewayCertificateAuthorityArns, Type: smithy.ShapeTypeList, Ext: &e_VirtualGatewayCertificateAuthorityArns})
+var s_VirtualGatewayCertificateAuthorityArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_VirtualGatewayCertificateAuthorityArns_member})
+var sVirtualGatewayClientPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayClientPolicy, Members: &mVirtualGatewayClientPolicy, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayClientPolicy})
+var sVirtualGatewayClientPolicy_tls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tls", ID: &iVirtualGatewayClientPolicyTls, Members: &mVirtualGatewayClientPolicyTls, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayClientPolicy_tls})
+var sVirtualGatewayClientPolicyTls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayClientPolicyTls, Members: &mVirtualGatewayClientPolicyTls, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayClientPolicyTls})
+var sVirtualGatewayClientPolicyTls_enforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enforce", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eVirtualGatewayClientPolicyTls_enforce})
+var sVirtualGatewayClientPolicyTls_ports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ports", ID: &i_PortSet, Members: &m_PortSet, Type: smithy.ShapeTypeList, Ext: &eVirtualGatewayClientPolicyTls_ports})
+var sVirtualGatewayClientPolicyTls_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &iVirtualGatewayClientTlsCertificate, Members: &mVirtualGatewayClientTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayClientPolicyTls_certificate})
+var sVirtualGatewayClientPolicyTls_validation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validation", ID: &iVirtualGatewayTlsValidationContext, Members: &mVirtualGatewayTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayClientPolicyTls_validation})
+var sVirtualGatewayClientTlsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayClientTlsCertificate, Members: &mVirtualGatewayClientTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayClientTlsCertificate})
+var sVirtualGatewayClientTlsCertificate_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iVirtualGatewayListenerTlsFileCertificate, Members: &mVirtualGatewayListenerTlsFileCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayClientTlsCertificate_file})
+var sVirtualGatewayClientTlsCertificate_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iVirtualGatewayListenerTlsSdsCertificate, Members: &mVirtualGatewayListenerTlsSdsCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayClientTlsCertificate_sds})
+var sVirtualGatewayConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayConnectionPool, Members: &mVirtualGatewayConnectionPool, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayConnectionPool})
+var sVirtualGatewayConnectionPool_http = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http", ID: &iVirtualGatewayHttpConnectionPool, Members: &mVirtualGatewayHttpConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayConnectionPool_http})
+var sVirtualGatewayConnectionPool_http2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http2", ID: &iVirtualGatewayHttp2ConnectionPool, Members: &mVirtualGatewayHttp2ConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayConnectionPool_http2})
+var sVirtualGatewayConnectionPool_grpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grpc", ID: &iVirtualGatewayGrpcConnectionPool, Members: &mVirtualGatewayGrpcConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayConnectionPool_grpc})
+var sVirtualGatewayData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayData, Members: &mVirtualGatewayData, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayData})
+var sVirtualGatewayData_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayData_meshName})
+var sVirtualGatewayData_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayData_virtualGatewayName})
+var sVirtualGatewayData_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualGatewaySpec, Members: &mVirtualGatewaySpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayData_spec})
+var sVirtualGatewayData_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayData_metadata})
+var sVirtualGatewayData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iVirtualGatewayStatus, Members: &mVirtualGatewayStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayData_status})
+var sVirtualGatewayFileAccessLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayFileAccessLog, Members: &mVirtualGatewayFileAccessLog, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayFileAccessLog})
+var sVirtualGatewayFileAccessLog_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayFileAccessLog_path})
+var sVirtualGatewayFileAccessLog_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iLoggingFormat, Members: &mLoggingFormat, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayFileAccessLog_format})
+var sVirtualGatewayGrpcConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayGrpcConnectionPool, Members: &mVirtualGatewayGrpcConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayGrpcConnectionPool})
+var sVirtualGatewayGrpcConnectionPool_maxRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRequests", ID: &i_MaxRequests, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayGrpcConnectionPool_maxRequests})
+var s_VirtualGatewayHealthCheckIntervalMillis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayHealthCheckIntervalMillis, Type: smithy.ShapeTypeLong, Ext: &e_VirtualGatewayHealthCheckIntervalMillis})
+var sVirtualGatewayHealthCheckPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayHealthCheckPolicy, Members: &mVirtualGatewayHealthCheckPolicy, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayHealthCheckPolicy})
+var sVirtualGatewayHealthCheckPolicy_timeoutMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutMillis", ID: &i_VirtualGatewayHealthCheckTimeoutMillis, Type: smithy.ShapeTypeLong, Ext: &eVirtualGatewayHealthCheckPolicy_timeoutMillis})
+var sVirtualGatewayHealthCheckPolicy_intervalMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intervalMillis", ID: &i_VirtualGatewayHealthCheckIntervalMillis, Type: smithy.ShapeTypeLong, Ext: &eVirtualGatewayHealthCheckPolicy_intervalMillis})
+var sVirtualGatewayHealthCheckPolicy_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &i_VirtualGatewayPortProtocol, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayHealthCheckPolicy_protocol})
+var sVirtualGatewayHealthCheckPolicy_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayHealthCheckPolicy_port})
+var sVirtualGatewayHealthCheckPolicy_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayHealthCheckPolicy_path})
+var sVirtualGatewayHealthCheckPolicy_healthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthyThreshold", ID: &i_VirtualGatewayHealthCheckThreshold, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayHealthCheckPolicy_healthyThreshold})
+var sVirtualGatewayHealthCheckPolicy_unhealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unhealthyThreshold", ID: &i_VirtualGatewayHealthCheckThreshold, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayHealthCheckPolicy_unhealthyThreshold})
+var s_VirtualGatewayHealthCheckThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayHealthCheckThreshold, Type: smithy.ShapeTypeInteger, Ext: &e_VirtualGatewayHealthCheckThreshold})
+var s_VirtualGatewayHealthCheckTimeoutMillis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayHealthCheckTimeoutMillis, Type: smithy.ShapeTypeLong, Ext: &e_VirtualGatewayHealthCheckTimeoutMillis})
+var sVirtualGatewayHttp2ConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayHttp2ConnectionPool, Members: &mVirtualGatewayHttp2ConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayHttp2ConnectionPool})
+var sVirtualGatewayHttp2ConnectionPool_maxRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRequests", ID: &i_MaxRequests, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayHttp2ConnectionPool_maxRequests})
+var sVirtualGatewayHttpConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayHttpConnectionPool, Members: &mVirtualGatewayHttpConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayHttpConnectionPool})
+var sVirtualGatewayHttpConnectionPool_maxConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConnections", ID: &i_MaxConnections, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayHttpConnectionPool_maxConnections})
+var sVirtualGatewayHttpConnectionPool_maxPendingRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxPendingRequests", ID: &i_MaxPendingRequests, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayHttpConnectionPool_maxPendingRequests})
+var s_VirtualGatewayList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayList, Members: &m_VirtualGatewayList, Type: smithy.ShapeTypeList, Ext: &e_VirtualGatewayList})
+var s_VirtualGatewayList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualGatewayRef, Members: &mVirtualGatewayRef, Type: smithy.ShapeTypeStructure, Ext: &e_VirtualGatewayList_member})
+var sVirtualGatewayListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListener, Members: &mVirtualGatewayListener, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListener})
+var sVirtualGatewayListener_healthCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthCheck", ID: &iVirtualGatewayHealthCheckPolicy, Members: &mVirtualGatewayHealthCheckPolicy, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListener_healthCheck})
+var sVirtualGatewayListener_portMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portMapping", ID: &iVirtualGatewayPortMapping, Members: &mVirtualGatewayPortMapping, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListener_portMapping})
+var sVirtualGatewayListener_tls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tls", ID: &iVirtualGatewayListenerTls, Members: &mVirtualGatewayListenerTls, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListener_tls})
+var sVirtualGatewayListener_connectionPool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionPool", ID: &iVirtualGatewayConnectionPool, Members: &mVirtualGatewayConnectionPool, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayListener_connectionPool})
+var s_VirtualGatewayListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayListeners, Members: &m_VirtualGatewayListeners, Type: smithy.ShapeTypeList, Ext: &e_VirtualGatewayListeners})
+var s_VirtualGatewayListeners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualGatewayListener, Members: &mVirtualGatewayListener, Type: smithy.ShapeTypeStructure, Ext: &e_VirtualGatewayListeners_member})
+var sVirtualGatewayListenerTls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListenerTls, Members: &mVirtualGatewayListenerTls, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTls})
+var sVirtualGatewayListenerTls_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &i_VirtualGatewayListenerTlsMode, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayListenerTls_mode})
+var sVirtualGatewayListenerTls_validation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validation", ID: &iVirtualGatewayListenerTlsValidationContext, Members: &mVirtualGatewayListenerTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTls_validation})
+var sVirtualGatewayListenerTls_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &iVirtualGatewayListenerTlsCertificate, Members: &mVirtualGatewayListenerTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayListenerTls_certificate})
+var sVirtualGatewayListenerTlsAcmCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListenerTlsAcmCertificate, Members: &mVirtualGatewayListenerTlsAcmCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsAcmCertificate})
+var sVirtualGatewayListenerTlsAcmCertificate_certificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayListenerTlsAcmCertificate_certificateArn})
+var sVirtualGatewayListenerTlsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListenerTlsCertificate, Members: &mVirtualGatewayListenerTlsCertificate, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayListenerTlsCertificate})
+var sVirtualGatewayListenerTlsCertificate_acm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acm", ID: &iVirtualGatewayListenerTlsAcmCertificate, Members: &mVirtualGatewayListenerTlsAcmCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsCertificate_acm})
+var sVirtualGatewayListenerTlsCertificate_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iVirtualGatewayListenerTlsFileCertificate, Members: &mVirtualGatewayListenerTlsFileCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsCertificate_file})
+var sVirtualGatewayListenerTlsCertificate_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iVirtualGatewayListenerTlsSdsCertificate, Members: &mVirtualGatewayListenerTlsSdsCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsCertificate_sds})
+var sVirtualGatewayListenerTlsFileCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListenerTlsFileCertificate, Members: &mVirtualGatewayListenerTlsFileCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsFileCertificate})
+var sVirtualGatewayListenerTlsFileCertificate_certificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateChain", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayListenerTlsFileCertificate_certificateChain})
+var sVirtualGatewayListenerTlsFileCertificate_privateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateKey", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayListenerTlsFileCertificate_privateKey})
+var s_VirtualGatewayListenerTlsMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayListenerTlsMode, Type: smithy.ShapeTypeString, Ext: &e_VirtualGatewayListenerTlsMode})
+var sVirtualGatewayListenerTlsSdsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListenerTlsSdsCertificate, Members: &mVirtualGatewayListenerTlsSdsCertificate, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsSdsCertificate})
+var sVirtualGatewayListenerTlsSdsCertificate_secretName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretName", ID: &i_VirtualGatewaySdsSecretName, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayListenerTlsSdsCertificate_secretName})
+var sVirtualGatewayListenerTlsValidationContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListenerTlsValidationContext, Members: &mVirtualGatewayListenerTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsValidationContext})
+var sVirtualGatewayListenerTlsValidationContext_trust = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trust", ID: &iVirtualGatewayListenerTlsValidationContextTrust, Members: &mVirtualGatewayListenerTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayListenerTlsValidationContext_trust})
+var sVirtualGatewayListenerTlsValidationContext_subjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectAlternativeNames", ID: &iSubjectAlternativeNames, Members: &mSubjectAlternativeNames, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsValidationContext_subjectAlternativeNames})
+var sVirtualGatewayListenerTlsValidationContextTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayListenerTlsValidationContextTrust, Members: &mVirtualGatewayListenerTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayListenerTlsValidationContextTrust})
+var sVirtualGatewayListenerTlsValidationContextTrust_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iVirtualGatewayTlsValidationContextFileTrust, Members: &mVirtualGatewayTlsValidationContextFileTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsValidationContextTrust_file})
+var sVirtualGatewayListenerTlsValidationContextTrust_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iVirtualGatewayTlsValidationContextSdsTrust, Members: &mVirtualGatewayTlsValidationContextSdsTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayListenerTlsValidationContextTrust_sds})
+var sVirtualGatewayLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayLogging, Members: &mVirtualGatewayLogging, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayLogging})
+var sVirtualGatewayLogging_accessLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessLog", ID: &iVirtualGatewayAccessLog, Members: &mVirtualGatewayAccessLog, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayLogging_accessLog})
+var sVirtualGatewayPortMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayPortMapping, Members: &mVirtualGatewayPortMapping, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayPortMapping})
+var sVirtualGatewayPortMapping_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &eVirtualGatewayPortMapping_port})
+var sVirtualGatewayPortMapping_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &i_VirtualGatewayPortProtocol, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayPortMapping_protocol})
+var s_VirtualGatewayPortProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayPortProtocol, Type: smithy.ShapeTypeString, Ext: &e_VirtualGatewayPortProtocol})
+var sVirtualGatewayRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayRef, Members: &mVirtualGatewayRef, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayRef})
+var sVirtualGatewayRef_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayRef_meshName})
+var sVirtualGatewayRef_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayRef_virtualGatewayName})
+var sVirtualGatewayRef_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayRef_meshOwner})
+var sVirtualGatewayRef_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayRef_resourceOwner})
+var sVirtualGatewayRef_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayRef_arn})
+var sVirtualGatewayRef_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eVirtualGatewayRef_version})
+var sVirtualGatewayRef_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualGatewayRef_createdAt})
+var sVirtualGatewayRef_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualGatewayRef_lastUpdatedAt})
+var s_VirtualGatewaySdsSecretName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewaySdsSecretName, Type: smithy.ShapeTypeString, Ext: &e_VirtualGatewaySdsSecretName})
+var sVirtualGatewaySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewaySpec, Members: &mVirtualGatewaySpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewaySpec})
+var sVirtualGatewaySpec_backendDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backendDefaults", ID: &iVirtualGatewayBackendDefaults, Members: &mVirtualGatewayBackendDefaults, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewaySpec_backendDefaults})
+var sVirtualGatewaySpec_listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listeners", ID: &i_VirtualGatewayListeners, Members: &m_VirtualGatewayListeners, Type: smithy.ShapeTypeList, Ext: &eVirtualGatewaySpec_listeners})
+var sVirtualGatewaySpec_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iVirtualGatewayLogging, Members: &mVirtualGatewayLogging, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewaySpec_logging})
+var sVirtualGatewayStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayStatus, Members: &mVirtualGatewayStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayStatus})
+var sVirtualGatewayStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VirtualGatewayStatusCode, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayStatus_status})
+var s_VirtualGatewayStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayStatusCode, Type: smithy.ShapeTypeString, Ext: &e_VirtualGatewayStatusCode})
+var sVirtualGatewayTlsValidationContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayTlsValidationContext, Members: &mVirtualGatewayTlsValidationContext, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContext})
+var sVirtualGatewayTlsValidationContext_trust = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trust", ID: &iVirtualGatewayTlsValidationContextTrust, Members: &mVirtualGatewayTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayTlsValidationContext_trust})
+var sVirtualGatewayTlsValidationContext_subjectAlternativeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectAlternativeNames", ID: &iSubjectAlternativeNames, Members: &mSubjectAlternativeNames, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContext_subjectAlternativeNames})
+var sVirtualGatewayTlsValidationContextAcmTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayTlsValidationContextAcmTrust, Members: &mVirtualGatewayTlsValidationContextAcmTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContextAcmTrust})
+var sVirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateAuthorityArns", ID: &i_VirtualGatewayCertificateAuthorityArns, Members: &m_VirtualGatewayCertificateAuthorityArns, Type: smithy.ShapeTypeList, Ext: &eVirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns})
+var sVirtualGatewayTlsValidationContextFileTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayTlsValidationContextFileTrust, Members: &mVirtualGatewayTlsValidationContextFileTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContextFileTrust})
+var sVirtualGatewayTlsValidationContextFileTrust_certificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateChain", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayTlsValidationContextFileTrust_certificateChain})
+var sVirtualGatewayTlsValidationContextSdsTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayTlsValidationContextSdsTrust, Members: &mVirtualGatewayTlsValidationContextSdsTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContextSdsTrust})
+var sVirtualGatewayTlsValidationContextSdsTrust_secretName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretName", ID: &i_VirtualGatewaySdsSecretName, Type: smithy.ShapeTypeString, Ext: &eVirtualGatewayTlsValidationContextSdsTrust_secretName})
+var sVirtualGatewayTlsValidationContextTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGatewayTlsValidationContextTrust, Members: &mVirtualGatewayTlsValidationContextTrust, Type: smithy.ShapeTypeUnion, Ext: &eVirtualGatewayTlsValidationContextTrust})
+var sVirtualGatewayTlsValidationContextTrust_acm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acm", ID: &iVirtualGatewayTlsValidationContextAcmTrust, Members: &mVirtualGatewayTlsValidationContextAcmTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContextTrust_acm})
+var sVirtualGatewayTlsValidationContextTrust_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iVirtualGatewayTlsValidationContextFileTrust, Members: &mVirtualGatewayTlsValidationContextFileTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContextTrust_file})
+var sVirtualGatewayTlsValidationContextTrust_sds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sds", ID: &iVirtualGatewayTlsValidationContextSdsTrust, Members: &mVirtualGatewayTlsValidationContextSdsTrust, Type: smithy.ShapeTypeStructure, Ext: &eVirtualGatewayTlsValidationContextTrust_sds})
+var sVirtualNodeConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeConnectionPool, Members: &mVirtualNodeConnectionPool, Type: smithy.ShapeTypeUnion, Ext: &eVirtualNodeConnectionPool})
+var sVirtualNodeConnectionPool_tcp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tcp", ID: &iVirtualNodeTcpConnectionPool, Members: &mVirtualNodeTcpConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeConnectionPool_tcp})
+var sVirtualNodeConnectionPool_http = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http", ID: &iVirtualNodeHttpConnectionPool, Members: &mVirtualNodeHttpConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeConnectionPool_http})
+var sVirtualNodeConnectionPool_http2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http2", ID: &iVirtualNodeHttp2ConnectionPool, Members: &mVirtualNodeHttp2ConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeConnectionPool_http2})
+var sVirtualNodeConnectionPool_grpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grpc", ID: &iVirtualNodeGrpcConnectionPool, Members: &mVirtualNodeGrpcConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeConnectionPool_grpc})
+var sVirtualNodeData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeData, Members: &mVirtualNodeData, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeData})
+var sVirtualNodeData_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeData_meshName})
+var sVirtualNodeData_virtualNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeData_virtualNodeName})
+var sVirtualNodeData_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualNodeSpec, Members: &mVirtualNodeSpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeData_spec})
+var sVirtualNodeData_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeData_metadata})
+var sVirtualNodeData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iVirtualNodeStatus, Members: &mVirtualNodeStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeData_status})
+var sVirtualNodeGrpcConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeGrpcConnectionPool, Members: &mVirtualNodeGrpcConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeGrpcConnectionPool})
+var sVirtualNodeGrpcConnectionPool_maxRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRequests", ID: &i_MaxRequests, Type: smithy.ShapeTypeInteger, Ext: &eVirtualNodeGrpcConnectionPool_maxRequests})
+var sVirtualNodeHttp2ConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeHttp2ConnectionPool, Members: &mVirtualNodeHttp2ConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeHttp2ConnectionPool})
+var sVirtualNodeHttp2ConnectionPool_maxRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRequests", ID: &i_MaxRequests, Type: smithy.ShapeTypeInteger, Ext: &eVirtualNodeHttp2ConnectionPool_maxRequests})
+var sVirtualNodeHttpConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeHttpConnectionPool, Members: &mVirtualNodeHttpConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeHttpConnectionPool})
+var sVirtualNodeHttpConnectionPool_maxConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConnections", ID: &i_MaxConnections, Type: smithy.ShapeTypeInteger, Ext: &eVirtualNodeHttpConnectionPool_maxConnections})
+var sVirtualNodeHttpConnectionPool_maxPendingRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxPendingRequests", ID: &i_MaxPendingRequests, Type: smithy.ShapeTypeInteger, Ext: &eVirtualNodeHttpConnectionPool_maxPendingRequests})
+var s_VirtualNodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualNodeList, Members: &m_VirtualNodeList, Type: smithy.ShapeTypeList, Ext: &e_VirtualNodeList})
+var s_VirtualNodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualNodeRef, Members: &mVirtualNodeRef, Type: smithy.ShapeTypeStructure, Ext: &e_VirtualNodeList_member})
+var sVirtualNodeRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeRef, Members: &mVirtualNodeRef, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeRef})
+var sVirtualNodeRef_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeRef_meshName})
+var sVirtualNodeRef_virtualNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeRef_virtualNodeName})
+var sVirtualNodeRef_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeRef_meshOwner})
+var sVirtualNodeRef_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeRef_resourceOwner})
+var sVirtualNodeRef_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeRef_arn})
+var sVirtualNodeRef_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eVirtualNodeRef_version})
+var sVirtualNodeRef_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualNodeRef_createdAt})
+var sVirtualNodeRef_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualNodeRef_lastUpdatedAt})
+var sVirtualNodeServiceProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeServiceProvider, Members: &mVirtualNodeServiceProvider, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeServiceProvider})
+var sVirtualNodeServiceProvider_virtualNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeServiceProvider_virtualNodeName})
+var sVirtualNodeSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeSpec, Members: &mVirtualNodeSpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeSpec})
+var sVirtualNodeSpec_serviceDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceDiscovery", ID: &iServiceDiscovery, Members: &mServiceDiscovery, Type: smithy.ShapeTypeUnion, Ext: &eVirtualNodeSpec_serviceDiscovery})
+var sVirtualNodeSpec_listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listeners", ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &eVirtualNodeSpec_listeners})
+var sVirtualNodeSpec_backends = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backends", ID: &i_Backends, Members: &m_Backends, Type: smithy.ShapeTypeList, Ext: &eVirtualNodeSpec_backends})
+var sVirtualNodeSpec_backendDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backendDefaults", ID: &iBackendDefaults, Members: &mBackendDefaults, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeSpec_backendDefaults})
+var sVirtualNodeSpec_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeSpec_logging})
+var sVirtualNodeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeStatus, Members: &mVirtualNodeStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeStatus})
+var sVirtualNodeStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VirtualNodeStatusCode, Type: smithy.ShapeTypeString, Ext: &eVirtualNodeStatus_status})
+var s_VirtualNodeStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualNodeStatusCode, Type: smithy.ShapeTypeString, Ext: &e_VirtualNodeStatusCode})
+var sVirtualNodeTcpConnectionPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualNodeTcpConnectionPool, Members: &mVirtualNodeTcpConnectionPool, Type: smithy.ShapeTypeStructure, Ext: &eVirtualNodeTcpConnectionPool})
+var sVirtualNodeTcpConnectionPool_maxConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConnections", ID: &i_MaxConnections, Type: smithy.ShapeTypeInteger, Ext: &eVirtualNodeTcpConnectionPool_maxConnections})
+var sVirtualRouterData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualRouterData, Members: &mVirtualRouterData, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterData})
+var sVirtualRouterData_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterData_meshName})
+var sVirtualRouterData_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterData_virtualRouterName})
+var sVirtualRouterData_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualRouterSpec, Members: &mVirtualRouterSpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterData_spec})
+var sVirtualRouterData_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterData_metadata})
+var sVirtualRouterData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iVirtualRouterStatus, Members: &mVirtualRouterStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterData_status})
+var s_VirtualRouterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualRouterList, Members: &m_VirtualRouterList, Type: smithy.ShapeTypeList, Ext: &e_VirtualRouterList})
+var s_VirtualRouterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualRouterRef, Members: &mVirtualRouterRef, Type: smithy.ShapeTypeStructure, Ext: &e_VirtualRouterList_member})
+var sVirtualRouterListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualRouterListener, Members: &mVirtualRouterListener, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterListener})
+var sVirtualRouterListener_portMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portMapping", ID: &iPortMapping, Members: &mPortMapping, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterListener_portMapping})
+var s_VirtualRouterListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualRouterListeners, Members: &m_VirtualRouterListeners, Type: smithy.ShapeTypeList, Ext: &e_VirtualRouterListeners})
+var s_VirtualRouterListeners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualRouterListener, Members: &mVirtualRouterListener, Type: smithy.ShapeTypeStructure, Ext: &e_VirtualRouterListeners_member})
+var sVirtualRouterRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualRouterRef, Members: &mVirtualRouterRef, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterRef})
+var sVirtualRouterRef_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterRef_meshName})
+var sVirtualRouterRef_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterRef_virtualRouterName})
+var sVirtualRouterRef_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterRef_meshOwner})
+var sVirtualRouterRef_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterRef_resourceOwner})
+var sVirtualRouterRef_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterRef_arn})
+var sVirtualRouterRef_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eVirtualRouterRef_version})
+var sVirtualRouterRef_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualRouterRef_createdAt})
+var sVirtualRouterRef_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualRouterRef_lastUpdatedAt})
+var sVirtualRouterServiceProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualRouterServiceProvider, Members: &mVirtualRouterServiceProvider, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterServiceProvider})
+var sVirtualRouterServiceProvider_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterServiceProvider_virtualRouterName})
+var sVirtualRouterSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualRouterSpec, Members: &mVirtualRouterSpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterSpec})
+var sVirtualRouterSpec_listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listeners", ID: &i_VirtualRouterListeners, Members: &m_VirtualRouterListeners, Type: smithy.ShapeTypeList, Ext: &eVirtualRouterSpec_listeners})
+var sVirtualRouterStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualRouterStatus, Members: &mVirtualRouterStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualRouterStatus})
+var sVirtualRouterStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VirtualRouterStatusCode, Type: smithy.ShapeTypeString, Ext: &eVirtualRouterStatus_status})
+var s_VirtualRouterStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualRouterStatusCode, Type: smithy.ShapeTypeString, Ext: &e_VirtualRouterStatusCode})
+var sVirtualServiceBackend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualServiceBackend, Members: &mVirtualServiceBackend, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceBackend})
+var sVirtualServiceBackend_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceBackend_virtualServiceName})
+var sVirtualServiceBackend_clientPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientPolicy", ID: &iClientPolicy, Members: &mClientPolicy, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceBackend_clientPolicy})
+var sVirtualServiceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualServiceData, Members: &mVirtualServiceData, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceData})
+var sVirtualServiceData_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceData_meshName})
+var sVirtualServiceData_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceData_virtualServiceName})
+var sVirtualServiceData_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualServiceSpec, Members: &mVirtualServiceSpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceData_spec})
+var sVirtualServiceData_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iResourceMetadata, Members: &mResourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceData_metadata})
+var sVirtualServiceData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iVirtualServiceStatus, Members: &mVirtualServiceStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceData_status})
+var s_VirtualServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualServiceList, Members: &m_VirtualServiceList, Type: smithy.ShapeTypeList, Ext: &e_VirtualServiceList})
+var s_VirtualServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualServiceRef, Members: &mVirtualServiceRef, Type: smithy.ShapeTypeStructure, Ext: &e_VirtualServiceList_member})
+var sVirtualServiceProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualServiceProvider, Members: &mVirtualServiceProvider, Type: smithy.ShapeTypeUnion, Ext: &eVirtualServiceProvider})
+var sVirtualServiceProvider_virtualNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNode", ID: &iVirtualNodeServiceProvider, Members: &mVirtualNodeServiceProvider, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceProvider_virtualNode})
+var sVirtualServiceProvider_virtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouter", ID: &iVirtualRouterServiceProvider, Members: &mVirtualRouterServiceProvider, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceProvider_virtualRouter})
+var sVirtualServiceRef = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualServiceRef, Members: &mVirtualServiceRef, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceRef})
+var sVirtualServiceRef_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceRef_meshName})
+var sVirtualServiceRef_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceRef_virtualServiceName})
+var sVirtualServiceRef_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceRef_meshOwner})
+var sVirtualServiceRef_resourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceRef_resourceOwner})
+var sVirtualServiceRef_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceRef_arn})
+var sVirtualServiceRef_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eVirtualServiceRef_version})
+var sVirtualServiceRef_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualServiceRef_createdAt})
+var sVirtualServiceRef_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVirtualServiceRef_lastUpdatedAt})
+var sVirtualServiceSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualServiceSpec, Members: &mVirtualServiceSpec, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceSpec})
+var sVirtualServiceSpec_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iVirtualServiceProvider, Members: &mVirtualServiceProvider, Type: smithy.ShapeTypeUnion, Ext: &eVirtualServiceSpec_provider})
+var sVirtualServiceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualServiceStatus, Members: &mVirtualServiceStatus, Type: smithy.ShapeTypeStructure, Ext: &eVirtualServiceStatus})
+var sVirtualServiceStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VirtualServiceStatusCode, Type: smithy.ShapeTypeString, Ext: &eVirtualServiceStatus_status})
+var s_VirtualServiceStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualServiceStatusCode, Type: smithy.ShapeTypeString, Ext: &e_VirtualServiceStatusCode})
+var sWeightedTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWeightedTarget, Members: &mWeightedTarget, Type: smithy.ShapeTypeStructure, Ext: &eWeightedTarget})
+var sWeightedTarget_virtualNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNode", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eWeightedTarget_virtualNode})
+var sWeightedTarget_weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weight", ID: &i_PercentInt, Type: smithy.ShapeTypeInteger, Ext: &eWeightedTarget_weight})
+var sWeightedTarget_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_ListenerPort, Type: smithy.ShapeTypeInteger, Ext: &eWeightedTarget_port})
+var s_WeightedTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WeightedTargets, Members: &m_WeightedTargets, Type: smithy.ShapeTypeList, Ext: &e_WeightedTargets})
+var s_WeightedTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWeightedTarget, Members: &mWeightedTarget, Type: smithy.ShapeTypeStructure, Ext: &e_WeightedTargets_member})
+var sCreateGatewayRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGatewayRouteInput, Members: &mCreateGatewayRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGatewayRouteInput})
+var sCreateGatewayRouteInput_gatewayRouteName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRouteName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayRouteInput_gatewayRouteName})
+var sCreateGatewayRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayRouteInput_meshName})
+var sCreateGatewayRouteInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayRouteInput_virtualGatewayName})
+var sCreateGatewayRouteInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iGatewayRouteSpec, Members: &mGatewayRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eCreateGatewayRouteInput_spec})
+var sCreateGatewayRouteInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateGatewayRouteInput_tags})
+var sCreateGatewayRouteInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayRouteInput_clientToken})
+var sCreateGatewayRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateGatewayRouteInput_meshOwner})
+var sCreateGatewayRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGatewayRouteOutput, Members: &mCreateGatewayRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGatewayRouteOutput})
+var sCreateGatewayRouteOutput_gatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRoute", ID: &iGatewayRouteData, Members: &mGatewayRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eCreateGatewayRouteOutput_gatewayRoute})
+var sCreateMeshInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMeshInput, Members: &mCreateMeshInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMeshInput})
+var sCreateMeshInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateMeshInput_meshName})
+var sCreateMeshInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iMeshSpec, Members: &mMeshSpec, Type: smithy.ShapeTypeStructure, Ext: &eCreateMeshInput_spec})
+var sCreateMeshInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateMeshInput_tags})
+var sCreateMeshInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMeshInput_clientToken})
+var sCreateMeshOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMeshOutput, Members: &mCreateMeshOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMeshOutput})
+var sCreateMeshOutput_mesh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mesh", ID: &iMeshData, Members: &mMeshData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eCreateMeshOutput_mesh})
+var sCreateRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRouteInput, Members: &mCreateRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRouteInput})
+var sCreateRouteInput_routeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateRouteInput_routeName})
+var sCreateRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateRouteInput_meshName})
+var sCreateRouteInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateRouteInput_virtualRouterName})
+var sCreateRouteInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iRouteSpec, Members: &mRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eCreateRouteInput_spec})
+var sCreateRouteInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRouteInput_tags})
+var sCreateRouteInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateRouteInput_clientToken})
+var sCreateRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateRouteInput_meshOwner})
+var sCreateRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRouteOutput, Members: &mCreateRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRouteOutput})
+var sCreateRouteOutput_route = smithy.NewStaticSchema(smithy.StaticSchema{Member: "route", ID: &iRouteData, Members: &mRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eCreateRouteOutput_route})
+var sCreateVirtualGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualGatewayInput, Members: &mCreateVirtualGatewayInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualGatewayInput})
+var sCreateVirtualGatewayInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualGatewayInput_virtualGatewayName})
+var sCreateVirtualGatewayInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualGatewayInput_meshName})
+var sCreateVirtualGatewayInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualGatewaySpec, Members: &mVirtualGatewaySpec, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualGatewayInput_spec})
+var sCreateVirtualGatewayInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVirtualGatewayInput_tags})
+var sCreateVirtualGatewayInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualGatewayInput_clientToken})
+var sCreateVirtualGatewayInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualGatewayInput_meshOwner})
+var sCreateVirtualGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualGatewayOutput, Members: &mCreateVirtualGatewayOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualGatewayOutput})
+var sCreateVirtualGatewayOutput_virtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGateway", ID: &iVirtualGatewayData, Members: &mVirtualGatewayData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualGatewayOutput_virtualGateway})
+var sCreateVirtualNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualNodeInput, Members: &mCreateVirtualNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualNodeInput})
+var sCreateVirtualNodeInput_virtualNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualNodeInput_virtualNodeName})
+var sCreateVirtualNodeInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualNodeInput_meshName})
+var sCreateVirtualNodeInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualNodeSpec, Members: &mVirtualNodeSpec, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualNodeInput_spec})
+var sCreateVirtualNodeInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVirtualNodeInput_tags})
+var sCreateVirtualNodeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualNodeInput_clientToken})
+var sCreateVirtualNodeInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualNodeInput_meshOwner})
+var sCreateVirtualNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualNodeOutput, Members: &mCreateVirtualNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualNodeOutput})
+var sCreateVirtualNodeOutput_virtualNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNode", ID: &iVirtualNodeData, Members: &mVirtualNodeData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualNodeOutput_virtualNode})
+var sCreateVirtualRouterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualRouterInput, Members: &mCreateVirtualRouterInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualRouterInput})
+var sCreateVirtualRouterInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualRouterInput_virtualRouterName})
+var sCreateVirtualRouterInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualRouterInput_meshName})
+var sCreateVirtualRouterInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualRouterSpec, Members: &mVirtualRouterSpec, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualRouterInput_spec})
+var sCreateVirtualRouterInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVirtualRouterInput_tags})
+var sCreateVirtualRouterInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualRouterInput_clientToken})
+var sCreateVirtualRouterInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualRouterInput_meshOwner})
+var sCreateVirtualRouterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualRouterOutput, Members: &mCreateVirtualRouterOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualRouterOutput})
+var sCreateVirtualRouterOutput_virtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouter", ID: &iVirtualRouterData, Members: &mVirtualRouterData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualRouterOutput_virtualRouter})
+var sCreateVirtualServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualServiceInput, Members: &mCreateVirtualServiceInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualServiceInput})
+var sCreateVirtualServiceInput_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualServiceInput_virtualServiceName})
+var sCreateVirtualServiceInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualServiceInput_meshName})
+var sCreateVirtualServiceInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualServiceSpec, Members: &mVirtualServiceSpec, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualServiceInput_spec})
+var sCreateVirtualServiceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVirtualServiceInput_tags})
+var sCreateVirtualServiceInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualServiceInput_clientToken})
+var sCreateVirtualServiceInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateVirtualServiceInput_meshOwner})
+var sCreateVirtualServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVirtualServiceOutput, Members: &mCreateVirtualServiceOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualServiceOutput})
+var sCreateVirtualServiceOutput_virtualService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualService", ID: &iVirtualServiceData, Members: &mVirtualServiceData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eCreateVirtualServiceOutput_virtualService})
+var sDeleteGatewayRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGatewayRouteInput, Members: &mDeleteGatewayRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGatewayRouteInput})
+var sDeleteGatewayRouteInput_gatewayRouteName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRouteName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteGatewayRouteInput_gatewayRouteName})
+var sDeleteGatewayRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteGatewayRouteInput_meshName})
+var sDeleteGatewayRouteInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteGatewayRouteInput_virtualGatewayName})
+var sDeleteGatewayRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteGatewayRouteInput_meshOwner})
+var sDeleteGatewayRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGatewayRouteOutput, Members: &mDeleteGatewayRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGatewayRouteOutput})
+var sDeleteGatewayRouteOutput_gatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRoute", ID: &iGatewayRouteData, Members: &mGatewayRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGatewayRouteOutput_gatewayRoute})
+var sDeleteMeshInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMeshInput, Members: &mDeleteMeshInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMeshInput})
+var sDeleteMeshInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteMeshInput_meshName})
+var sDeleteMeshOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMeshOutput, Members: &mDeleteMeshOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMeshOutput})
+var sDeleteMeshOutput_mesh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mesh", ID: &iMeshData, Members: &mMeshData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMeshOutput_mesh})
+var sDeleteRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteInput, Members: &mDeleteRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRouteInput})
+var sDeleteRouteInput_routeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteRouteInput_routeName})
+var sDeleteRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteRouteInput_meshName})
+var sDeleteRouteInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteRouteInput_virtualRouterName})
+var sDeleteRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteRouteInput_meshOwner})
+var sDeleteRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteOutput, Members: &mDeleteRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRouteOutput})
+var sDeleteRouteOutput_route = smithy.NewStaticSchema(smithy.StaticSchema{Member: "route", ID: &iRouteData, Members: &mRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRouteOutput_route})
+var sDeleteVirtualGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualGatewayInput, Members: &mDeleteVirtualGatewayInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualGatewayInput})
+var sDeleteVirtualGatewayInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualGatewayInput_virtualGatewayName})
+var sDeleteVirtualGatewayInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualGatewayInput_meshName})
+var sDeleteVirtualGatewayInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualGatewayInput_meshOwner})
+var sDeleteVirtualGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualGatewayOutput, Members: &mDeleteVirtualGatewayOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualGatewayOutput})
+var sDeleteVirtualGatewayOutput_virtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGateway", ID: &iVirtualGatewayData, Members: &mVirtualGatewayData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualGatewayOutput_virtualGateway})
+var sDeleteVirtualNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualNodeInput, Members: &mDeleteVirtualNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualNodeInput})
+var sDeleteVirtualNodeInput_virtualNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodeName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualNodeInput_virtualNodeName})
+var sDeleteVirtualNodeInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualNodeInput_meshName})
+var sDeleteVirtualNodeInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualNodeInput_meshOwner})
+var sDeleteVirtualNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualNodeOutput, Members: &mDeleteVirtualNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualNodeOutput})
+var sDeleteVirtualNodeOutput_virtualNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNode", ID: &iVirtualNodeData, Members: &mVirtualNodeData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualNodeOutput_virtualNode})
+var sDeleteVirtualRouterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualRouterInput, Members: &mDeleteVirtualRouterInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualRouterInput})
+var sDeleteVirtualRouterInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualRouterInput_virtualRouterName})
+var sDeleteVirtualRouterInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualRouterInput_meshName})
+var sDeleteVirtualRouterInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualRouterInput_meshOwner})
+var sDeleteVirtualRouterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualRouterOutput, Members: &mDeleteVirtualRouterOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualRouterOutput})
+var sDeleteVirtualRouterOutput_virtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouter", ID: &iVirtualRouterData, Members: &mVirtualRouterData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualRouterOutput_virtualRouter})
+var sDeleteVirtualServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualServiceInput, Members: &mDeleteVirtualServiceInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualServiceInput})
+var sDeleteVirtualServiceInput_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ServiceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualServiceInput_virtualServiceName})
+var sDeleteVirtualServiceInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualServiceInput_meshName})
+var sDeleteVirtualServiceInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteVirtualServiceInput_meshOwner})
+var sDeleteVirtualServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualServiceOutput, Members: &mDeleteVirtualServiceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualServiceOutput})
+var sDeleteVirtualServiceOutput_virtualService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualService", ID: &iVirtualServiceData, Members: &mVirtualServiceData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVirtualServiceOutput_virtualService})
+var sDescribeGatewayRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGatewayRouteInput, Members: &mDescribeGatewayRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGatewayRouteInput})
+var sDescribeGatewayRouteInput_gatewayRouteName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRouteName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeGatewayRouteInput_gatewayRouteName})
+var sDescribeGatewayRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeGatewayRouteInput_meshName})
+var sDescribeGatewayRouteInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeGatewayRouteInput_virtualGatewayName})
+var sDescribeGatewayRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDescribeGatewayRouteInput_meshOwner})
+var sDescribeGatewayRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGatewayRouteOutput, Members: &mDescribeGatewayRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGatewayRouteOutput})
+var sDescribeGatewayRouteOutput_gatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRoute", ID: &iGatewayRouteData, Members: &mGatewayRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGatewayRouteOutput_gatewayRoute})
+var sDescribeMeshInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMeshInput, Members: &mDescribeMeshInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMeshInput})
+var sDescribeMeshInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeMeshInput_meshName})
+var sDescribeMeshInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDescribeMeshInput_meshOwner})
+var sDescribeMeshOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMeshOutput, Members: &mDescribeMeshOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMeshOutput})
+var sDescribeMeshOutput_mesh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mesh", ID: &iMeshData, Members: &mMeshData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMeshOutput_mesh})
+var sDescribeRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRouteInput, Members: &mDescribeRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRouteInput})
+var sDescribeRouteInput_routeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeRouteInput_routeName})
+var sDescribeRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeRouteInput_meshName})
+var sDescribeRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDescribeRouteInput_meshOwner})
+var sDescribeRouteInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeRouteInput_virtualRouterName})
+var sDescribeRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRouteOutput, Members: &mDescribeRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRouteOutput})
+var sDescribeRouteOutput_route = smithy.NewStaticSchema(smithy.StaticSchema{Member: "route", ID: &iRouteData, Members: &mRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRouteOutput_route})
+var sDescribeVirtualGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualGatewayInput, Members: &mDescribeVirtualGatewayInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualGatewayInput})
+var sDescribeVirtualGatewayInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualGatewayInput_virtualGatewayName})
+var sDescribeVirtualGatewayInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualGatewayInput_meshName})
+var sDescribeVirtualGatewayInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualGatewayInput_meshOwner})
+var sDescribeVirtualGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualGatewayOutput, Members: &mDescribeVirtualGatewayOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualGatewayOutput})
+var sDescribeVirtualGatewayOutput_virtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGateway", ID: &iVirtualGatewayData, Members: &mVirtualGatewayData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualGatewayOutput_virtualGateway})
+var sDescribeVirtualNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualNodeInput, Members: &mDescribeVirtualNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualNodeInput})
+var sDescribeVirtualNodeInput_virtualNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodeName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualNodeInput_virtualNodeName})
+var sDescribeVirtualNodeInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualNodeInput_meshName})
+var sDescribeVirtualNodeInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualNodeInput_meshOwner})
+var sDescribeVirtualNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualNodeOutput, Members: &mDescribeVirtualNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualNodeOutput})
+var sDescribeVirtualNodeOutput_virtualNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNode", ID: &iVirtualNodeData, Members: &mVirtualNodeData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualNodeOutput_virtualNode})
+var sDescribeVirtualRouterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualRouterInput, Members: &mDescribeVirtualRouterInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualRouterInput})
+var sDescribeVirtualRouterInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualRouterInput_virtualRouterName})
+var sDescribeVirtualRouterInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualRouterInput_meshName})
+var sDescribeVirtualRouterInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualRouterInput_meshOwner})
+var sDescribeVirtualRouterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualRouterOutput, Members: &mDescribeVirtualRouterOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualRouterOutput})
+var sDescribeVirtualRouterOutput_virtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouter", ID: &iVirtualRouterData, Members: &mVirtualRouterData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualRouterOutput_virtualRouter})
+var sDescribeVirtualServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualServiceInput, Members: &mDescribeVirtualServiceInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualServiceInput})
+var sDescribeVirtualServiceInput_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ServiceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualServiceInput_virtualServiceName})
+var sDescribeVirtualServiceInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualServiceInput_meshName})
+var sDescribeVirtualServiceInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDescribeVirtualServiceInput_meshOwner})
+var sDescribeVirtualServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualServiceOutput, Members: &mDescribeVirtualServiceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualServiceOutput})
+var sDescribeVirtualServiceOutput_virtualService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualService", ID: &iVirtualServiceData, Members: &mVirtualServiceData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVirtualServiceOutput_virtualService})
+var sListGatewayRoutesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGatewayRoutesInput, Members: &mListGatewayRoutesInput, Type: smithy.ShapeTypeStructure, Ext: &eListGatewayRoutesInput})
+var sListGatewayRoutesInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListGatewayRoutesInput_meshName})
+var sListGatewayRoutesInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListGatewayRoutesInput_virtualGatewayName})
+var sListGatewayRoutesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListGatewayRoutesInput_nextToken})
+var sListGatewayRoutesInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_ListGatewayRoutesLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListGatewayRoutesInput_limit})
+var sListGatewayRoutesInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListGatewayRoutesInput_meshOwner})
+var sListGatewayRoutesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGatewayRoutesOutput, Members: &mListGatewayRoutesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListGatewayRoutesOutput})
+var sListGatewayRoutesOutput_gatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRoutes", ID: &i_GatewayRouteList, Members: &m_GatewayRouteList, Type: smithy.ShapeTypeList, Ext: &eListGatewayRoutesOutput_gatewayRoutes})
+var sListGatewayRoutesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListGatewayRoutesOutput_nextToken})
+var sListMeshesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMeshesInput, Members: &mListMeshesInput, Type: smithy.ShapeTypeStructure, Ext: &eListMeshesInput})
+var sListMeshesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListMeshesInput_nextToken})
+var sListMeshesInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_ListMeshesLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListMeshesInput_limit})
+var sListMeshesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMeshesOutput, Members: &mListMeshesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMeshesOutput})
+var sListMeshesOutput_meshes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshes", ID: &i_MeshList, Members: &m_MeshList, Type: smithy.ShapeTypeList, Ext: &eListMeshesOutput_meshes})
+var sListMeshesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListMeshesOutput_nextToken})
+var sListRoutesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutesInput, Members: &mListRoutesInput, Type: smithy.ShapeTypeStructure, Ext: &eListRoutesInput})
+var sListRoutesInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListRoutesInput_meshName})
+var sListRoutesInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListRoutesInput_virtualRouterName})
+var sListRoutesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListRoutesInput_nextToken})
+var sListRoutesInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_ListRoutesLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListRoutesInput_limit})
+var sListRoutesInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListRoutesInput_meshOwner})
+var sListRoutesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutesOutput, Members: &mListRoutesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRoutesOutput})
+var sListRoutesOutput_routes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routes", ID: &i_RouteList, Members: &m_RouteList, Type: smithy.ShapeTypeList, Ext: &eListRoutesOutput_routes})
+var sListRoutesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListRoutesOutput_nextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_nextToken})
+var sListTagsForResourceInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_TagsLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceInput_limit})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceOutput_tags})
+var sListTagsForResourceOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceOutput_nextToken})
+var sListVirtualGatewaysInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualGatewaysInput, Members: &mListVirtualGatewaysInput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualGatewaysInput})
+var sListVirtualGatewaysInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListVirtualGatewaysInput_meshName})
+var sListVirtualGatewaysInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListVirtualGatewaysInput_nextToken})
+var sListVirtualGatewaysInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_ListVirtualGatewaysLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListVirtualGatewaysInput_limit})
+var sListVirtualGatewaysInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListVirtualGatewaysInput_meshOwner})
+var sListVirtualGatewaysOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualGatewaysOutput, Members: &mListVirtualGatewaysOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualGatewaysOutput})
+var sListVirtualGatewaysOutput_virtualGateways = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGateways", ID: &i_VirtualGatewayList, Members: &m_VirtualGatewayList, Type: smithy.ShapeTypeList, Ext: &eListVirtualGatewaysOutput_virtualGateways})
+var sListVirtualGatewaysOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListVirtualGatewaysOutput_nextToken})
+var sListVirtualNodesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualNodesInput, Members: &mListVirtualNodesInput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualNodesInput})
+var sListVirtualNodesInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListVirtualNodesInput_meshName})
+var sListVirtualNodesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListVirtualNodesInput_nextToken})
+var sListVirtualNodesInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_ListVirtualNodesLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListVirtualNodesInput_limit})
+var sListVirtualNodesInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListVirtualNodesInput_meshOwner})
+var sListVirtualNodesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualNodesOutput, Members: &mListVirtualNodesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualNodesOutput})
+var sListVirtualNodesOutput_virtualNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodes", ID: &i_VirtualNodeList, Members: &m_VirtualNodeList, Type: smithy.ShapeTypeList, Ext: &eListVirtualNodesOutput_virtualNodes})
+var sListVirtualNodesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListVirtualNodesOutput_nextToken})
+var sListVirtualRoutersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualRoutersInput, Members: &mListVirtualRoutersInput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualRoutersInput})
+var sListVirtualRoutersInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListVirtualRoutersInput_meshName})
+var sListVirtualRoutersInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListVirtualRoutersInput_nextToken})
+var sListVirtualRoutersInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_ListVirtualRoutersLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListVirtualRoutersInput_limit})
+var sListVirtualRoutersInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListVirtualRoutersInput_meshOwner})
+var sListVirtualRoutersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualRoutersOutput, Members: &mListVirtualRoutersOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualRoutersOutput})
+var sListVirtualRoutersOutput_virtualRouters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouters", ID: &i_VirtualRouterList, Members: &m_VirtualRouterList, Type: smithy.ShapeTypeList, Ext: &eListVirtualRoutersOutput_virtualRouters})
+var sListVirtualRoutersOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListVirtualRoutersOutput_nextToken})
+var sListVirtualServicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualServicesInput, Members: &mListVirtualServicesInput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualServicesInput})
+var sListVirtualServicesInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListVirtualServicesInput_meshName})
+var sListVirtualServicesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListVirtualServicesInput_nextToken})
+var sListVirtualServicesInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_ListVirtualServicesLimit, Traits: &t49, Type: smithy.ShapeTypeInteger, Ext: &eListVirtualServicesInput_limit})
+var sListVirtualServicesInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListVirtualServicesInput_meshOwner})
+var sListVirtualServicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualServicesOutput, Members: &mListVirtualServicesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVirtualServicesOutput})
+var sListVirtualServicesOutput_virtualServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServices", ID: &i_VirtualServiceList, Members: &m_VirtualServiceList, Type: smithy.ShapeTypeList, Ext: &eListVirtualServicesOutput_virtualServices})
+var sListVirtualServicesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListVirtualServicesOutput_nextToken})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceInput_tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateGatewayRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayRouteInput, Members: &mUpdateGatewayRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewayRouteInput})
+var sUpdateGatewayRouteInput_gatewayRouteName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRouteName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayRouteInput_gatewayRouteName})
+var sUpdateGatewayRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayRouteInput_meshName})
+var sUpdateGatewayRouteInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayRouteInput_virtualGatewayName})
+var sUpdateGatewayRouteInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iGatewayRouteSpec, Members: &mGatewayRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewayRouteInput_spec})
+var sUpdateGatewayRouteInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayRouteInput_clientToken})
+var sUpdateGatewayRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateGatewayRouteInput_meshOwner})
+var sUpdateGatewayRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayRouteOutput, Members: &mUpdateGatewayRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewayRouteOutput})
+var sUpdateGatewayRouteOutput_gatewayRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayRoute", ID: &iGatewayRouteData, Members: &mGatewayRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGatewayRouteOutput_gatewayRoute})
+var sUpdateMeshInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMeshInput, Members: &mUpdateMeshInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMeshInput})
+var sUpdateMeshInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateMeshInput_meshName})
+var sUpdateMeshInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iMeshSpec, Members: &mMeshSpec, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMeshInput_spec})
+var sUpdateMeshInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMeshInput_clientToken})
+var sUpdateMeshOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMeshOutput, Members: &mUpdateMeshOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMeshOutput})
+var sUpdateMeshOutput_mesh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mesh", ID: &iMeshData, Members: &mMeshData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMeshOutput_mesh})
+var sUpdateRouteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRouteInput, Members: &mUpdateRouteInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRouteInput})
+var sUpdateRouteInput_routeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateRouteInput_routeName})
+var sUpdateRouteInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateRouteInput_meshName})
+var sUpdateRouteInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateRouteInput_virtualRouterName})
+var sUpdateRouteInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iRouteSpec, Members: &mRouteSpec, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRouteInput_spec})
+var sUpdateRouteInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateRouteInput_clientToken})
+var sUpdateRouteInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateRouteInput_meshOwner})
+var sUpdateRouteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRouteOutput, Members: &mUpdateRouteOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRouteOutput})
+var sUpdateRouteOutput_route = smithy.NewStaticSchema(smithy.StaticSchema{Member: "route", ID: &iRouteData, Members: &mRouteData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRouteOutput_route})
+var sUpdateVirtualGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualGatewayInput, Members: &mUpdateVirtualGatewayInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualGatewayInput})
+var sUpdateVirtualGatewayInput_virtualGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualGatewayInput_virtualGatewayName})
+var sUpdateVirtualGatewayInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualGatewayInput_meshName})
+var sUpdateVirtualGatewayInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualGatewaySpec, Members: &mVirtualGatewaySpec, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualGatewayInput_spec})
+var sUpdateVirtualGatewayInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualGatewayInput_clientToken})
+var sUpdateVirtualGatewayInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualGatewayInput_meshOwner})
+var sUpdateVirtualGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualGatewayOutput, Members: &mUpdateVirtualGatewayOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualGatewayOutput})
+var sUpdateVirtualGatewayOutput_virtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGateway", ID: &iVirtualGatewayData, Members: &mVirtualGatewayData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualGatewayOutput_virtualGateway})
+var sUpdateVirtualNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualNodeInput, Members: &mUpdateVirtualNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualNodeInput})
+var sUpdateVirtualNodeInput_virtualNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNodeName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualNodeInput_virtualNodeName})
+var sUpdateVirtualNodeInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualNodeInput_meshName})
+var sUpdateVirtualNodeInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualNodeSpec, Members: &mVirtualNodeSpec, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualNodeInput_spec})
+var sUpdateVirtualNodeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualNodeInput_clientToken})
+var sUpdateVirtualNodeInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualNodeInput_meshOwner})
+var sUpdateVirtualNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualNodeOutput, Members: &mUpdateVirtualNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualNodeOutput})
+var sUpdateVirtualNodeOutput_virtualNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualNode", ID: &iVirtualNodeData, Members: &mVirtualNodeData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualNodeOutput_virtualNode})
+var sUpdateVirtualRouterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualRouterInput, Members: &mUpdateVirtualRouterInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualRouterInput})
+var sUpdateVirtualRouterInput_virtualRouterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouterName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualRouterInput_virtualRouterName})
+var sUpdateVirtualRouterInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualRouterInput_meshName})
+var sUpdateVirtualRouterInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualRouterSpec, Members: &mVirtualRouterSpec, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualRouterInput_spec})
+var sUpdateVirtualRouterInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualRouterInput_clientToken})
+var sUpdateVirtualRouterInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualRouterInput_meshOwner})
+var sUpdateVirtualRouterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualRouterOutput, Members: &mUpdateVirtualRouterOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualRouterOutput})
+var sUpdateVirtualRouterOutput_virtualRouter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualRouter", ID: &iVirtualRouterData, Members: &mVirtualRouterData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualRouterOutput_virtualRouter})
+var sUpdateVirtualServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualServiceInput, Members: &mUpdateVirtualServiceInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualServiceInput})
+var sUpdateVirtualServiceInput_virtualServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualServiceName", ID: &i_ServiceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualServiceInput_virtualServiceName})
+var sUpdateVirtualServiceInput_meshName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualServiceInput_meshName})
+var sUpdateVirtualServiceInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &iVirtualServiceSpec, Members: &mVirtualServiceSpec, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualServiceInput_spec})
+var sUpdateVirtualServiceInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualServiceInput_clientToken})
+var sUpdateVirtualServiceInput_meshOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meshOwner", ID: &i_AccountId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateVirtualServiceInput_meshOwner})
+var sUpdateVirtualServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualServiceOutput, Members: &mUpdateVirtualServiceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualServiceOutput})
+var sUpdateVirtualServiceOutput_virtualService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualService", ID: &iVirtualServiceData, Members: &mVirtualServiceData, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVirtualServiceOutput_virtualService})
+
+var CreateGatewayRoute = &sCreateGatewayRoute
+
+var CreateMesh = &sCreateMesh
+
+var CreateRoute = &sCreateRoute
+
+var CreateVirtualGateway = &sCreateVirtualGateway
+
+var CreateVirtualNode = &sCreateVirtualNode
+
+var CreateVirtualRouter = &sCreateVirtualRouter
+
+var CreateVirtualService = &sCreateVirtualService
+
+var DeleteGatewayRoute = &sDeleteGatewayRoute
+
+var DeleteMesh = &sDeleteMesh
+
+var DeleteRoute = &sDeleteRoute
+
+var DeleteVirtualGateway = &sDeleteVirtualGateway
+
+var DeleteVirtualNode = &sDeleteVirtualNode
+
+var DeleteVirtualRouter = &sDeleteVirtualRouter
+
+var DeleteVirtualService = &sDeleteVirtualService
+
+var DescribeGatewayRoute = &sDescribeGatewayRoute
+
+var DescribeMesh = &sDescribeMesh
+
+var DescribeRoute = &sDescribeRoute
+
+var DescribeVirtualGateway = &sDescribeVirtualGateway
+
+var DescribeVirtualNode = &sDescribeVirtualNode
+
+var DescribeVirtualRouter = &sDescribeVirtualRouter
+
+var DescribeVirtualService = &sDescribeVirtualService
+
+var ListGatewayRoutes = &sListGatewayRoutes
+
+var ListMeshes = &sListMeshes
+
+var ListRoutes = &sListRoutes
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListVirtualGateways = &sListVirtualGateways
+
+var ListVirtualNodes = &sListVirtualNodes
+
+var ListVirtualRouters = &sListVirtualRouters
+
+var ListVirtualServices = &sListVirtualServices
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateGatewayRoute = &sUpdateGatewayRoute
+
+var UpdateMesh = &sUpdateMesh
+
+var UpdateRoute = &sUpdateRoute
+
+var UpdateVirtualGateway = &sUpdateVirtualGateway
+
+var UpdateVirtualNode = &sUpdateVirtualNode
+
+var UpdateVirtualRouter = &sUpdateVirtualRouter
+
+var UpdateVirtualService = &sUpdateVirtualService
+
+var _AppMesh = &s_AppMesh
+
+var AccessLog = &sAccessLog
+var AccessLog_file = &sAccessLog_file
+
+var _AccountId = &s_AccountId
+
+var _Arn = &s_Arn
+
+var AwsCloudMapInstanceAttribute = &sAwsCloudMapInstanceAttribute
+var AwsCloudMapInstanceAttribute_key = &sAwsCloudMapInstanceAttribute_key
+var AwsCloudMapInstanceAttribute_value = &sAwsCloudMapInstanceAttribute_value
+
+var _AwsCloudMapInstanceAttributeKey = &s_AwsCloudMapInstanceAttributeKey
+
+var _AwsCloudMapInstanceAttributes = &s_AwsCloudMapInstanceAttributes
+var _AwsCloudMapInstanceAttributes_member = &s_AwsCloudMapInstanceAttributes_member
+
+var _AwsCloudMapInstanceAttributeValue = &s_AwsCloudMapInstanceAttributeValue
+
+var _AwsCloudMapName = &s_AwsCloudMapName
+
+var AwsCloudMapServiceDiscovery = &sAwsCloudMapServiceDiscovery
+var AwsCloudMapServiceDiscovery_namespaceName = &sAwsCloudMapServiceDiscovery_namespaceName
+var AwsCloudMapServiceDiscovery_serviceName = &sAwsCloudMapServiceDiscovery_serviceName
+var AwsCloudMapServiceDiscovery_attributes = &sAwsCloudMapServiceDiscovery_attributes
+var AwsCloudMapServiceDiscovery_ipPreference = &sAwsCloudMapServiceDiscovery_ipPreference
+
+var Backend = &sBackend
+var Backend_virtualService = &sBackend_virtualService
+
+var BackendDefaults = &sBackendDefaults
+var BackendDefaults_clientPolicy = &sBackendDefaults_clientPolicy
+
+var _Backends = &s_Backends
+var _Backends_member = &s_Backends_member
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var _CertificateAuthorityArns = &s_CertificateAuthorityArns
+var _CertificateAuthorityArns_member = &s_CertificateAuthorityArns_member
+
+var ClientPolicy = &sClientPolicy
+var ClientPolicy_tls = &sClientPolicy_tls
+
+var ClientPolicyTls = &sClientPolicyTls
+var ClientPolicyTls_enforce = &sClientPolicyTls_enforce
+var ClientPolicyTls_ports = &sClientPolicyTls_ports
+var ClientPolicyTls_certificate = &sClientPolicyTls_certificate
+var ClientPolicyTls_validation = &sClientPolicyTls_validation
+
+var ClientTlsCertificate = &sClientTlsCertificate
+var ClientTlsCertificate_file = &sClientTlsCertificate_file
+var ClientTlsCertificate_sds = &sClientTlsCertificate_sds
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _DefaultGatewayRouteRewrite = &s_DefaultGatewayRouteRewrite
+
+var _DnsResponseType = &s_DnsResponseType
+
+var DnsServiceDiscovery = &sDnsServiceDiscovery
+var DnsServiceDiscovery_hostname = &sDnsServiceDiscovery_hostname
+var DnsServiceDiscovery_responseType = &sDnsServiceDiscovery_responseType
+var DnsServiceDiscovery_ipPreference = &sDnsServiceDiscovery_ipPreference
+
+var Duration = &sDuration
+var Duration_value = &sDuration_value
+var Duration_unit = &sDuration_unit
+
+var _DurationUnit = &s_DurationUnit
+
+var _DurationValue = &s_DurationValue
+
+var EgressFilter = &sEgressFilter
+var EgressFilter_type = &sEgressFilter_type
+
+var _EgressFilterType = &s_EgressFilterType
+
+var _ExactHostName = &s_ExactHostName
+
+var FileAccessLog = &sFileAccessLog
+var FileAccessLog_path = &sFileAccessLog_path
+var FileAccessLog_format = &sFileAccessLog_format
+
+var _FilePath = &s_FilePath
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_message = &sForbiddenException_message
+
+var GatewayRouteData = &sGatewayRouteData
+var GatewayRouteData_meshName = &sGatewayRouteData_meshName
+var GatewayRouteData_gatewayRouteName = &sGatewayRouteData_gatewayRouteName
+var GatewayRouteData_virtualGatewayName = &sGatewayRouteData_virtualGatewayName
+var GatewayRouteData_spec = &sGatewayRouteData_spec
+var GatewayRouteData_metadata = &sGatewayRouteData_metadata
+var GatewayRouteData_status = &sGatewayRouteData_status
+
+var GatewayRouteHostnameMatch = &sGatewayRouteHostnameMatch
+var GatewayRouteHostnameMatch_exact = &sGatewayRouteHostnameMatch_exact
+var GatewayRouteHostnameMatch_suffix = &sGatewayRouteHostnameMatch_suffix
+
+var GatewayRouteHostnameRewrite = &sGatewayRouteHostnameRewrite
+var GatewayRouteHostnameRewrite_defaultTargetHostname = &sGatewayRouteHostnameRewrite_defaultTargetHostname
+
+var _GatewayRouteList = &s_GatewayRouteList
+var _GatewayRouteList_member = &s_GatewayRouteList_member
+
+var _GatewayRoutePriority = &s_GatewayRoutePriority
+
+var GatewayRouteRef = &sGatewayRouteRef
+var GatewayRouteRef_meshName = &sGatewayRouteRef_meshName
+var GatewayRouteRef_gatewayRouteName = &sGatewayRouteRef_gatewayRouteName
+var GatewayRouteRef_virtualGatewayName = &sGatewayRouteRef_virtualGatewayName
+var GatewayRouteRef_meshOwner = &sGatewayRouteRef_meshOwner
+var GatewayRouteRef_resourceOwner = &sGatewayRouteRef_resourceOwner
+var GatewayRouteRef_arn = &sGatewayRouteRef_arn
+var GatewayRouteRef_version = &sGatewayRouteRef_version
+var GatewayRouteRef_createdAt = &sGatewayRouteRef_createdAt
+var GatewayRouteRef_lastUpdatedAt = &sGatewayRouteRef_lastUpdatedAt
+
+var GatewayRouteSpec = &sGatewayRouteSpec
+var GatewayRouteSpec_priority = &sGatewayRouteSpec_priority
+var GatewayRouteSpec_httpRoute = &sGatewayRouteSpec_httpRoute
+var GatewayRouteSpec_http2Route = &sGatewayRouteSpec_http2Route
+var GatewayRouteSpec_grpcRoute = &sGatewayRouteSpec_grpcRoute
+
+var GatewayRouteStatus = &sGatewayRouteStatus
+var GatewayRouteStatus_status = &sGatewayRouteStatus_status
+
+var _GatewayRouteStatusCode = &s_GatewayRouteStatusCode
+
+var GatewayRouteTarget = &sGatewayRouteTarget
+var GatewayRouteTarget_virtualService = &sGatewayRouteTarget_virtualService
+var GatewayRouteTarget_port = &sGatewayRouteTarget_port
+
+var GatewayRouteVirtualService = &sGatewayRouteVirtualService
+var GatewayRouteVirtualService_virtualServiceName = &sGatewayRouteVirtualService_virtualServiceName
+
+var GrpcGatewayRoute = &sGrpcGatewayRoute
+var GrpcGatewayRoute_match = &sGrpcGatewayRoute_match
+var GrpcGatewayRoute_action = &sGrpcGatewayRoute_action
+
+var GrpcGatewayRouteAction = &sGrpcGatewayRouteAction
+var GrpcGatewayRouteAction_target = &sGrpcGatewayRouteAction_target
+var GrpcGatewayRouteAction_rewrite = &sGrpcGatewayRouteAction_rewrite
+
+var GrpcGatewayRouteMatch = &sGrpcGatewayRouteMatch
+var GrpcGatewayRouteMatch_serviceName = &sGrpcGatewayRouteMatch_serviceName
+var GrpcGatewayRouteMatch_hostname = &sGrpcGatewayRouteMatch_hostname
+var GrpcGatewayRouteMatch_metadata = &sGrpcGatewayRouteMatch_metadata
+var GrpcGatewayRouteMatch_port = &sGrpcGatewayRouteMatch_port
+
+var GrpcGatewayRouteMetadata = &sGrpcGatewayRouteMetadata
+var GrpcGatewayRouteMetadata_name = &sGrpcGatewayRouteMetadata_name
+var GrpcGatewayRouteMetadata_invert = &sGrpcGatewayRouteMetadata_invert
+var GrpcGatewayRouteMetadata_match = &sGrpcGatewayRouteMetadata_match
+
+var _GrpcGatewayRouteMetadataList = &s_GrpcGatewayRouteMetadataList
+var _GrpcGatewayRouteMetadataList_member = &s_GrpcGatewayRouteMetadataList_member
+
+var GrpcGatewayRouteRewrite = &sGrpcGatewayRouteRewrite
+var GrpcGatewayRouteRewrite_hostname = &sGrpcGatewayRouteRewrite_hostname
+
+var GrpcMetadataMatchMethod = &sGrpcMetadataMatchMethod
+var GrpcMetadataMatchMethod_exact = &sGrpcMetadataMatchMethod_exact
+var GrpcMetadataMatchMethod_regex = &sGrpcMetadataMatchMethod_regex
+var GrpcMetadataMatchMethod_range = &sGrpcMetadataMatchMethod_range
+var GrpcMetadataMatchMethod_prefix = &sGrpcMetadataMatchMethod_prefix
+var GrpcMetadataMatchMethod_suffix = &sGrpcMetadataMatchMethod_suffix
+
+var GrpcRetryPolicy = &sGrpcRetryPolicy
+var GrpcRetryPolicy_perRetryTimeout = &sGrpcRetryPolicy_perRetryTimeout
+var GrpcRetryPolicy_maxRetries = &sGrpcRetryPolicy_maxRetries
+var GrpcRetryPolicy_httpRetryEvents = &sGrpcRetryPolicy_httpRetryEvents
+var GrpcRetryPolicy_tcpRetryEvents = &sGrpcRetryPolicy_tcpRetryEvents
+var GrpcRetryPolicy_grpcRetryEvents = &sGrpcRetryPolicy_grpcRetryEvents
+
+var _GrpcRetryPolicyEvent = &s_GrpcRetryPolicyEvent
+
+var _GrpcRetryPolicyEvents = &s_GrpcRetryPolicyEvents
+var _GrpcRetryPolicyEvents_member = &s_GrpcRetryPolicyEvents_member
+
+var GrpcRoute = &sGrpcRoute
+var GrpcRoute_action = &sGrpcRoute_action
+var GrpcRoute_match = &sGrpcRoute_match
+var GrpcRoute_retryPolicy = &sGrpcRoute_retryPolicy
+var GrpcRoute_timeout = &sGrpcRoute_timeout
+
+var GrpcRouteAction = &sGrpcRouteAction
+var GrpcRouteAction_weightedTargets = &sGrpcRouteAction_weightedTargets
+
+var GrpcRouteMatch = &sGrpcRouteMatch
+var GrpcRouteMatch_serviceName = &sGrpcRouteMatch_serviceName
+var GrpcRouteMatch_methodName = &sGrpcRouteMatch_methodName
+var GrpcRouteMatch_metadata = &sGrpcRouteMatch_metadata
+var GrpcRouteMatch_port = &sGrpcRouteMatch_port
+
+var GrpcRouteMetadata = &sGrpcRouteMetadata
+var GrpcRouteMetadata_name = &sGrpcRouteMetadata_name
+var GrpcRouteMetadata_invert = &sGrpcRouteMetadata_invert
+var GrpcRouteMetadata_match = &sGrpcRouteMetadata_match
+
+var _GrpcRouteMetadataList = &s_GrpcRouteMetadataList
+var _GrpcRouteMetadataList_member = &s_GrpcRouteMetadataList_member
+
+var GrpcRouteMetadataMatchMethod = &sGrpcRouteMetadataMatchMethod
+var GrpcRouteMetadataMatchMethod_exact = &sGrpcRouteMetadataMatchMethod_exact
+var GrpcRouteMetadataMatchMethod_regex = &sGrpcRouteMetadataMatchMethod_regex
+var GrpcRouteMetadataMatchMethod_range = &sGrpcRouteMetadataMatchMethod_range
+var GrpcRouteMetadataMatchMethod_prefix = &sGrpcRouteMetadataMatchMethod_prefix
+var GrpcRouteMetadataMatchMethod_suffix = &sGrpcRouteMetadataMatchMethod_suffix
+
+var GrpcTimeout = &sGrpcTimeout
+var GrpcTimeout_perRequest = &sGrpcTimeout_perRequest
+var GrpcTimeout_idle = &sGrpcTimeout_idle
+
+var _HeaderMatch = &s_HeaderMatch
+
+var HeaderMatchMethod = &sHeaderMatchMethod
+var HeaderMatchMethod_exact = &sHeaderMatchMethod_exact
+var HeaderMatchMethod_regex = &sHeaderMatchMethod_regex
+var HeaderMatchMethod_range = &sHeaderMatchMethod_range
+var HeaderMatchMethod_prefix = &sHeaderMatchMethod_prefix
+var HeaderMatchMethod_suffix = &sHeaderMatchMethod_suffix
+
+var _HeaderName = &s_HeaderName
+
+var _HealthCheckIntervalMillis = &s_HealthCheckIntervalMillis
+
+var HealthCheckPolicy = &sHealthCheckPolicy
+var HealthCheckPolicy_timeoutMillis = &sHealthCheckPolicy_timeoutMillis
+var HealthCheckPolicy_intervalMillis = &sHealthCheckPolicy_intervalMillis
+var HealthCheckPolicy_protocol = &sHealthCheckPolicy_protocol
+var HealthCheckPolicy_port = &sHealthCheckPolicy_port
+var HealthCheckPolicy_path = &sHealthCheckPolicy_path
+var HealthCheckPolicy_healthyThreshold = &sHealthCheckPolicy_healthyThreshold
+var HealthCheckPolicy_unhealthyThreshold = &sHealthCheckPolicy_unhealthyThreshold
+
+var _HealthCheckThreshold = &s_HealthCheckThreshold
+
+var _HealthCheckTimeoutMillis = &s_HealthCheckTimeoutMillis
+
+var _Hostname = &s_Hostname
+
+var HttpGatewayRoute = &sHttpGatewayRoute
+var HttpGatewayRoute_match = &sHttpGatewayRoute_match
+var HttpGatewayRoute_action = &sHttpGatewayRoute_action
+
+var HttpGatewayRouteAction = &sHttpGatewayRouteAction
+var HttpGatewayRouteAction_target = &sHttpGatewayRouteAction_target
+var HttpGatewayRouteAction_rewrite = &sHttpGatewayRouteAction_rewrite
+
+var HttpGatewayRouteHeader = &sHttpGatewayRouteHeader
+var HttpGatewayRouteHeader_name = &sHttpGatewayRouteHeader_name
+var HttpGatewayRouteHeader_invert = &sHttpGatewayRouteHeader_invert
+var HttpGatewayRouteHeader_match = &sHttpGatewayRouteHeader_match
+
+var _HttpGatewayRouteHeaders = &s_HttpGatewayRouteHeaders
+var _HttpGatewayRouteHeaders_member = &s_HttpGatewayRouteHeaders_member
+
+var HttpGatewayRouteMatch = &sHttpGatewayRouteMatch
+var HttpGatewayRouteMatch_prefix = &sHttpGatewayRouteMatch_prefix
+var HttpGatewayRouteMatch_path = &sHttpGatewayRouteMatch_path
+var HttpGatewayRouteMatch_queryParameters = &sHttpGatewayRouteMatch_queryParameters
+var HttpGatewayRouteMatch_method = &sHttpGatewayRouteMatch_method
+var HttpGatewayRouteMatch_hostname = &sHttpGatewayRouteMatch_hostname
+var HttpGatewayRouteMatch_headers = &sHttpGatewayRouteMatch_headers
+var HttpGatewayRouteMatch_port = &sHttpGatewayRouteMatch_port
+
+var HttpGatewayRoutePathRewrite = &sHttpGatewayRoutePathRewrite
+var HttpGatewayRoutePathRewrite_exact = &sHttpGatewayRoutePathRewrite_exact
+
+var _HttpGatewayRoutePrefix = &s_HttpGatewayRoutePrefix
+
+var HttpGatewayRoutePrefixRewrite = &sHttpGatewayRoutePrefixRewrite
+var HttpGatewayRoutePrefixRewrite_defaultPrefix = &sHttpGatewayRoutePrefixRewrite_defaultPrefix
+var HttpGatewayRoutePrefixRewrite_value = &sHttpGatewayRoutePrefixRewrite_value
+
+var HttpGatewayRouteRewrite = &sHttpGatewayRouteRewrite
+var HttpGatewayRouteRewrite_prefix = &sHttpGatewayRouteRewrite_prefix
+var HttpGatewayRouteRewrite_path = &sHttpGatewayRouteRewrite_path
+var HttpGatewayRouteRewrite_hostname = &sHttpGatewayRouteRewrite_hostname
+
+var _HttpMethod = &s_HttpMethod
+
+var _HttpPathExact = &s_HttpPathExact
+
+var HttpPathMatch = &sHttpPathMatch
+var HttpPathMatch_exact = &sHttpPathMatch_exact
+var HttpPathMatch_regex = &sHttpPathMatch_regex
+
+var _HttpPathRegex = &s_HttpPathRegex
+
+var HttpQueryParameter = &sHttpQueryParameter
+var HttpQueryParameter_name = &sHttpQueryParameter_name
+var HttpQueryParameter_match = &sHttpQueryParameter_match
+
+var _HttpQueryParameters = &s_HttpQueryParameters
+var _HttpQueryParameters_member = &s_HttpQueryParameters_member
+
+var HttpRetryPolicy = &sHttpRetryPolicy
+var HttpRetryPolicy_perRetryTimeout = &sHttpRetryPolicy_perRetryTimeout
+var HttpRetryPolicy_maxRetries = &sHttpRetryPolicy_maxRetries
+var HttpRetryPolicy_httpRetryEvents = &sHttpRetryPolicy_httpRetryEvents
+var HttpRetryPolicy_tcpRetryEvents = &sHttpRetryPolicy_tcpRetryEvents
+
+var _HttpRetryPolicyEvent = &s_HttpRetryPolicyEvent
+
+var _HttpRetryPolicyEvents = &s_HttpRetryPolicyEvents
+var _HttpRetryPolicyEvents_member = &s_HttpRetryPolicyEvents_member
+
+var HttpRoute = &sHttpRoute
+var HttpRoute_match = &sHttpRoute_match
+var HttpRoute_action = &sHttpRoute_action
+var HttpRoute_retryPolicy = &sHttpRoute_retryPolicy
+var HttpRoute_timeout = &sHttpRoute_timeout
+
+var HttpRouteAction = &sHttpRouteAction
+var HttpRouteAction_weightedTargets = &sHttpRouteAction_weightedTargets
+
+var HttpRouteHeader = &sHttpRouteHeader
+var HttpRouteHeader_name = &sHttpRouteHeader_name
+var HttpRouteHeader_invert = &sHttpRouteHeader_invert
+var HttpRouteHeader_match = &sHttpRouteHeader_match
+
+var _HttpRouteHeaders = &s_HttpRouteHeaders
+var _HttpRouteHeaders_member = &s_HttpRouteHeaders_member
+
+var HttpRouteMatch = &sHttpRouteMatch
+var HttpRouteMatch_prefix = &sHttpRouteMatch_prefix
+var HttpRouteMatch_path = &sHttpRouteMatch_path
+var HttpRouteMatch_queryParameters = &sHttpRouteMatch_queryParameters
+var HttpRouteMatch_method = &sHttpRouteMatch_method
+var HttpRouteMatch_scheme = &sHttpRouteMatch_scheme
+var HttpRouteMatch_headers = &sHttpRouteMatch_headers
+var HttpRouteMatch_port = &sHttpRouteMatch_port
+
+var _HttpScheme = &s_HttpScheme
+
+var HttpTimeout = &sHttpTimeout
+var HttpTimeout_perRequest = &sHttpTimeout_perRequest
+var HttpTimeout_idle = &sHttpTimeout_idle
+
+var InternalServerErrorException = &sInternalServerErrorException
+var InternalServerErrorException_message = &sInternalServerErrorException_message
+
+var _IpPreference = &s_IpPreference
+
+var _JsonFormat = &s_JsonFormat
+var _JsonFormat_member = &s_JsonFormat_member
+
+var JsonFormatRef = &sJsonFormatRef
+var JsonFormatRef_key = &sJsonFormatRef_key
+var JsonFormatRef_value = &sJsonFormatRef_value
+
+var _JsonKey = &s_JsonKey
+
+var _JsonValue = &s_JsonValue
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var Listener = &sListener
+var Listener_portMapping = &sListener_portMapping
+var Listener_tls = &sListener_tls
+var Listener_healthCheck = &sListener_healthCheck
+var Listener_timeout = &sListener_timeout
+var Listener_outlierDetection = &sListener_outlierDetection
+var Listener_connectionPool = &sListener_connectionPool
+
+var _ListenerPort = &s_ListenerPort
+
+var _Listeners = &s_Listeners
+var _Listeners_member = &s_Listeners_member
+
+var ListenerTimeout = &sListenerTimeout
+var ListenerTimeout_tcp = &sListenerTimeout_tcp
+var ListenerTimeout_http = &sListenerTimeout_http
+var ListenerTimeout_http2 = &sListenerTimeout_http2
+var ListenerTimeout_grpc = &sListenerTimeout_grpc
+
+var ListenerTls = &sListenerTls
+var ListenerTls_mode = &sListenerTls_mode
+var ListenerTls_certificate = &sListenerTls_certificate
+var ListenerTls_validation = &sListenerTls_validation
+
+var ListenerTlsAcmCertificate = &sListenerTlsAcmCertificate
+var ListenerTlsAcmCertificate_certificateArn = &sListenerTlsAcmCertificate_certificateArn
+
+var ListenerTlsCertificate = &sListenerTlsCertificate
+var ListenerTlsCertificate_acm = &sListenerTlsCertificate_acm
+var ListenerTlsCertificate_file = &sListenerTlsCertificate_file
+var ListenerTlsCertificate_sds = &sListenerTlsCertificate_sds
+
+var ListenerTlsFileCertificate = &sListenerTlsFileCertificate
+var ListenerTlsFileCertificate_certificateChain = &sListenerTlsFileCertificate_certificateChain
+var ListenerTlsFileCertificate_privateKey = &sListenerTlsFileCertificate_privateKey
+
+var _ListenerTlsMode = &s_ListenerTlsMode
+
+var ListenerTlsSdsCertificate = &sListenerTlsSdsCertificate
+var ListenerTlsSdsCertificate_secretName = &sListenerTlsSdsCertificate_secretName
+
+var ListenerTlsValidationContext = &sListenerTlsValidationContext
+var ListenerTlsValidationContext_trust = &sListenerTlsValidationContext_trust
+var ListenerTlsValidationContext_subjectAlternativeNames = &sListenerTlsValidationContext_subjectAlternativeNames
+
+var ListenerTlsValidationContextTrust = &sListenerTlsValidationContextTrust
+var ListenerTlsValidationContextTrust_file = &sListenerTlsValidationContextTrust_file
+var ListenerTlsValidationContextTrust_sds = &sListenerTlsValidationContextTrust_sds
+
+var _ListGatewayRoutesLimit = &s_ListGatewayRoutesLimit
+
+var _ListMeshesLimit = &s_ListMeshesLimit
+
+var _ListRoutesLimit = &s_ListRoutesLimit
+
+var _ListVirtualGatewaysLimit = &s_ListVirtualGatewaysLimit
+
+var _ListVirtualNodesLimit = &s_ListVirtualNodesLimit
+
+var _ListVirtualRoutersLimit = &s_ListVirtualRoutersLimit
+
+var _ListVirtualServicesLimit = &s_ListVirtualServicesLimit
+
+var Logging = &sLogging
+var Logging_accessLog = &sLogging_accessLog
+
+var LoggingFormat = &sLoggingFormat
+var LoggingFormat_text = &sLoggingFormat_text
+var LoggingFormat_json = &sLoggingFormat_json
+
+var MatchRange = &sMatchRange
+var MatchRange_start = &sMatchRange_start
+var MatchRange_end = &sMatchRange_end
+
+var _MaxConnections = &s_MaxConnections
+
+var _MaxPendingRequests = &s_MaxPendingRequests
+
+var _MaxRequests = &s_MaxRequests
+
+var _MaxRetries = &s_MaxRetries
+
+var MeshData = &sMeshData
+var MeshData_meshName = &sMeshData_meshName
+var MeshData_spec = &sMeshData_spec
+var MeshData_metadata = &sMeshData_metadata
+var MeshData_status = &sMeshData_status
+
+var _MeshList = &s_MeshList
+var _MeshList_member = &s_MeshList_member
+
+var MeshRef = &sMeshRef
+var MeshRef_meshName = &sMeshRef_meshName
+var MeshRef_meshOwner = &sMeshRef_meshOwner
+var MeshRef_resourceOwner = &sMeshRef_resourceOwner
+var MeshRef_arn = &sMeshRef_arn
+var MeshRef_version = &sMeshRef_version
+var MeshRef_createdAt = &sMeshRef_createdAt
+var MeshRef_lastUpdatedAt = &sMeshRef_lastUpdatedAt
+
+var MeshServiceDiscovery = &sMeshServiceDiscovery
+var MeshServiceDiscovery_ipPreference = &sMeshServiceDiscovery_ipPreference
+
+var MeshSpec = &sMeshSpec
+var MeshSpec_egressFilter = &sMeshSpec_egressFilter
+var MeshSpec_serviceDiscovery = &sMeshSpec_serviceDiscovery
+
+var MeshStatus = &sMeshStatus
+var MeshStatus_status = &sMeshStatus_status
+
+var _MeshStatusCode = &s_MeshStatusCode
+
+var _MethodName = &s_MethodName
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var OutlierDetection = &sOutlierDetection
+var OutlierDetection_maxServerErrors = &sOutlierDetection_maxServerErrors
+var OutlierDetection_interval = &sOutlierDetection_interval
+var OutlierDetection_baseEjectionDuration = &sOutlierDetection_baseEjectionDuration
+var OutlierDetection_maxEjectionPercent = &sOutlierDetection_maxEjectionPercent
+
+var _OutlierDetectionMaxEjectionPercent = &s_OutlierDetectionMaxEjectionPercent
+
+var _OutlierDetectionMaxServerErrors = &s_OutlierDetectionMaxServerErrors
+
+var _PercentInt = &s_PercentInt
+
+var PortMapping = &sPortMapping
+var PortMapping_port = &sPortMapping_port
+var PortMapping_protocol = &sPortMapping_protocol
+
+var _PortNumber = &s_PortNumber
+
+var _PortProtocol = &s_PortProtocol
+
+var _PortSet = &s_PortSet
+var _PortSet_member = &s_PortSet_member
+
+var QueryParameterMatch = &sQueryParameterMatch
+var QueryParameterMatch_exact = &sQueryParameterMatch_exact
+
+var _QueryParameterName = &s_QueryParameterName
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_message = &sResourceInUseException_message
+
+var ResourceMetadata = &sResourceMetadata
+var ResourceMetadata_arn = &sResourceMetadata_arn
+var ResourceMetadata_version = &sResourceMetadata_version
+var ResourceMetadata_uid = &sResourceMetadata_uid
+var ResourceMetadata_createdAt = &sResourceMetadata_createdAt
+var ResourceMetadata_lastUpdatedAt = &sResourceMetadata_lastUpdatedAt
+var ResourceMetadata_meshOwner = &sResourceMetadata_meshOwner
+var ResourceMetadata_resourceOwner = &sResourceMetadata_resourceOwner
+
+var _ResourceName = &s_ResourceName
+
+var RouteData = &sRouteData
+var RouteData_meshName = &sRouteData_meshName
+var RouteData_virtualRouterName = &sRouteData_virtualRouterName
+var RouteData_routeName = &sRouteData_routeName
+var RouteData_spec = &sRouteData_spec
+var RouteData_metadata = &sRouteData_metadata
+var RouteData_status = &sRouteData_status
+
+var _RouteList = &s_RouteList
+var _RouteList_member = &s_RouteList_member
+
+var _RoutePriority = &s_RoutePriority
+
+var RouteRef = &sRouteRef
+var RouteRef_meshName = &sRouteRef_meshName
+var RouteRef_virtualRouterName = &sRouteRef_virtualRouterName
+var RouteRef_routeName = &sRouteRef_routeName
+var RouteRef_meshOwner = &sRouteRef_meshOwner
+var RouteRef_resourceOwner = &sRouteRef_resourceOwner
+var RouteRef_arn = &sRouteRef_arn
+var RouteRef_version = &sRouteRef_version
+var RouteRef_createdAt = &sRouteRef_createdAt
+var RouteRef_lastUpdatedAt = &sRouteRef_lastUpdatedAt
+
+var RouteSpec = &sRouteSpec
+var RouteSpec_priority = &sRouteSpec_priority
+var RouteSpec_httpRoute = &sRouteSpec_httpRoute
+var RouteSpec_tcpRoute = &sRouteSpec_tcpRoute
+var RouteSpec_http2Route = &sRouteSpec_http2Route
+var RouteSpec_grpcRoute = &sRouteSpec_grpcRoute
+
+var RouteStatus = &sRouteStatus
+var RouteStatus_status = &sRouteStatus_status
+
+var _RouteStatusCode = &s_RouteStatusCode
+
+var _SdsSecretName = &s_SdsSecretName
+
+var ServiceDiscovery = &sServiceDiscovery
+var ServiceDiscovery_dns = &sServiceDiscovery_dns
+var ServiceDiscovery_awsCloudMap = &sServiceDiscovery_awsCloudMap
+
+var _ServiceName = &s_ServiceName
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var _SubjectAlternativeName = &s_SubjectAlternativeName
+
+var _SubjectAlternativeNameList = &s_SubjectAlternativeNameList
+var _SubjectAlternativeNameList_member = &s_SubjectAlternativeNameList_member
+
+var SubjectAlternativeNameMatchers = &sSubjectAlternativeNameMatchers
+var SubjectAlternativeNameMatchers_exact = &sSubjectAlternativeNameMatchers_exact
+
+var SubjectAlternativeNames = &sSubjectAlternativeNames
+var SubjectAlternativeNames_match = &sSubjectAlternativeNames_match
+
+var _SuffixHostname = &s_SuffixHostname
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TagRef = &sTagRef
+var TagRef_key = &sTagRef_key
+var TagRef_value = &sTagRef_value
+
+var _TagsLimit = &s_TagsLimit
+
+var _TagValue = &s_TagValue
+
+var _TcpRetryPolicyEvent = &s_TcpRetryPolicyEvent
+
+var _TcpRetryPolicyEvents = &s_TcpRetryPolicyEvents
+var _TcpRetryPolicyEvents_member = &s_TcpRetryPolicyEvents_member
+
+var TcpRoute = &sTcpRoute
+var TcpRoute_action = &sTcpRoute_action
+var TcpRoute_timeout = &sTcpRoute_timeout
+var TcpRoute_match = &sTcpRoute_match
+
+var TcpRouteAction = &sTcpRouteAction
+var TcpRouteAction_weightedTargets = &sTcpRouteAction_weightedTargets
+
+var TcpRouteMatch = &sTcpRouteMatch
+var TcpRouteMatch_port = &sTcpRouteMatch_port
+
+var TcpTimeout = &sTcpTimeout
+var TcpTimeout_idle = &sTcpTimeout_idle
+
+var _TextFormat = &s_TextFormat
+
+var TlsValidationContext = &sTlsValidationContext
+var TlsValidationContext_trust = &sTlsValidationContext_trust
+var TlsValidationContext_subjectAlternativeNames = &sTlsValidationContext_subjectAlternativeNames
+
+var TlsValidationContextAcmTrust = &sTlsValidationContextAcmTrust
+var TlsValidationContextAcmTrust_certificateAuthorityArns = &sTlsValidationContextAcmTrust_certificateAuthorityArns
+
+var TlsValidationContextFileTrust = &sTlsValidationContextFileTrust
+var TlsValidationContextFileTrust_certificateChain = &sTlsValidationContextFileTrust_certificateChain
+
+var TlsValidationContextSdsTrust = &sTlsValidationContextSdsTrust
+var TlsValidationContextSdsTrust_secretName = &sTlsValidationContextSdsTrust_secretName
+
+var TlsValidationContextTrust = &sTlsValidationContextTrust
+var TlsValidationContextTrust_acm = &sTlsValidationContextTrust_acm
+var TlsValidationContextTrust_file = &sTlsValidationContextTrust_file
+var TlsValidationContextTrust_sds = &sTlsValidationContextTrust_sds
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_message = &sTooManyRequestsException_message
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var VirtualGatewayAccessLog = &sVirtualGatewayAccessLog
+var VirtualGatewayAccessLog_file = &sVirtualGatewayAccessLog_file
+
+var VirtualGatewayBackendDefaults = &sVirtualGatewayBackendDefaults
+var VirtualGatewayBackendDefaults_clientPolicy = &sVirtualGatewayBackendDefaults_clientPolicy
+
+var _VirtualGatewayCertificateAuthorityArns = &s_VirtualGatewayCertificateAuthorityArns
+var _VirtualGatewayCertificateAuthorityArns_member = &s_VirtualGatewayCertificateAuthorityArns_member
+
+var VirtualGatewayClientPolicy = &sVirtualGatewayClientPolicy
+var VirtualGatewayClientPolicy_tls = &sVirtualGatewayClientPolicy_tls
+
+var VirtualGatewayClientPolicyTls = &sVirtualGatewayClientPolicyTls
+var VirtualGatewayClientPolicyTls_enforce = &sVirtualGatewayClientPolicyTls_enforce
+var VirtualGatewayClientPolicyTls_ports = &sVirtualGatewayClientPolicyTls_ports
+var VirtualGatewayClientPolicyTls_certificate = &sVirtualGatewayClientPolicyTls_certificate
+var VirtualGatewayClientPolicyTls_validation = &sVirtualGatewayClientPolicyTls_validation
+
+var VirtualGatewayClientTlsCertificate = &sVirtualGatewayClientTlsCertificate
+var VirtualGatewayClientTlsCertificate_file = &sVirtualGatewayClientTlsCertificate_file
+var VirtualGatewayClientTlsCertificate_sds = &sVirtualGatewayClientTlsCertificate_sds
+
+var VirtualGatewayConnectionPool = &sVirtualGatewayConnectionPool
+var VirtualGatewayConnectionPool_http = &sVirtualGatewayConnectionPool_http
+var VirtualGatewayConnectionPool_http2 = &sVirtualGatewayConnectionPool_http2
+var VirtualGatewayConnectionPool_grpc = &sVirtualGatewayConnectionPool_grpc
+
+var VirtualGatewayData = &sVirtualGatewayData
+var VirtualGatewayData_meshName = &sVirtualGatewayData_meshName
+var VirtualGatewayData_virtualGatewayName = &sVirtualGatewayData_virtualGatewayName
+var VirtualGatewayData_spec = &sVirtualGatewayData_spec
+var VirtualGatewayData_metadata = &sVirtualGatewayData_metadata
+var VirtualGatewayData_status = &sVirtualGatewayData_status
+
+var VirtualGatewayFileAccessLog = &sVirtualGatewayFileAccessLog
+var VirtualGatewayFileAccessLog_path = &sVirtualGatewayFileAccessLog_path
+var VirtualGatewayFileAccessLog_format = &sVirtualGatewayFileAccessLog_format
+
+var VirtualGatewayGrpcConnectionPool = &sVirtualGatewayGrpcConnectionPool
+var VirtualGatewayGrpcConnectionPool_maxRequests = &sVirtualGatewayGrpcConnectionPool_maxRequests
+
+var _VirtualGatewayHealthCheckIntervalMillis = &s_VirtualGatewayHealthCheckIntervalMillis
+
+var VirtualGatewayHealthCheckPolicy = &sVirtualGatewayHealthCheckPolicy
+var VirtualGatewayHealthCheckPolicy_timeoutMillis = &sVirtualGatewayHealthCheckPolicy_timeoutMillis
+var VirtualGatewayHealthCheckPolicy_intervalMillis = &sVirtualGatewayHealthCheckPolicy_intervalMillis
+var VirtualGatewayHealthCheckPolicy_protocol = &sVirtualGatewayHealthCheckPolicy_protocol
+var VirtualGatewayHealthCheckPolicy_port = &sVirtualGatewayHealthCheckPolicy_port
+var VirtualGatewayHealthCheckPolicy_path = &sVirtualGatewayHealthCheckPolicy_path
+var VirtualGatewayHealthCheckPolicy_healthyThreshold = &sVirtualGatewayHealthCheckPolicy_healthyThreshold
+var VirtualGatewayHealthCheckPolicy_unhealthyThreshold = &sVirtualGatewayHealthCheckPolicy_unhealthyThreshold
+
+var _VirtualGatewayHealthCheckThreshold = &s_VirtualGatewayHealthCheckThreshold
+
+var _VirtualGatewayHealthCheckTimeoutMillis = &s_VirtualGatewayHealthCheckTimeoutMillis
+
+var VirtualGatewayHttp2ConnectionPool = &sVirtualGatewayHttp2ConnectionPool
+var VirtualGatewayHttp2ConnectionPool_maxRequests = &sVirtualGatewayHttp2ConnectionPool_maxRequests
+
+var VirtualGatewayHttpConnectionPool = &sVirtualGatewayHttpConnectionPool
+var VirtualGatewayHttpConnectionPool_maxConnections = &sVirtualGatewayHttpConnectionPool_maxConnections
+var VirtualGatewayHttpConnectionPool_maxPendingRequests = &sVirtualGatewayHttpConnectionPool_maxPendingRequests
+
+var _VirtualGatewayList = &s_VirtualGatewayList
+var _VirtualGatewayList_member = &s_VirtualGatewayList_member
+
+var VirtualGatewayListener = &sVirtualGatewayListener
+var VirtualGatewayListener_healthCheck = &sVirtualGatewayListener_healthCheck
+var VirtualGatewayListener_portMapping = &sVirtualGatewayListener_portMapping
+var VirtualGatewayListener_tls = &sVirtualGatewayListener_tls
+var VirtualGatewayListener_connectionPool = &sVirtualGatewayListener_connectionPool
+
+var _VirtualGatewayListeners = &s_VirtualGatewayListeners
+var _VirtualGatewayListeners_member = &s_VirtualGatewayListeners_member
+
+var VirtualGatewayListenerTls = &sVirtualGatewayListenerTls
+var VirtualGatewayListenerTls_mode = &sVirtualGatewayListenerTls_mode
+var VirtualGatewayListenerTls_validation = &sVirtualGatewayListenerTls_validation
+var VirtualGatewayListenerTls_certificate = &sVirtualGatewayListenerTls_certificate
+
+var VirtualGatewayListenerTlsAcmCertificate = &sVirtualGatewayListenerTlsAcmCertificate
+var VirtualGatewayListenerTlsAcmCertificate_certificateArn = &sVirtualGatewayListenerTlsAcmCertificate_certificateArn
+
+var VirtualGatewayListenerTlsCertificate = &sVirtualGatewayListenerTlsCertificate
+var VirtualGatewayListenerTlsCertificate_acm = &sVirtualGatewayListenerTlsCertificate_acm
+var VirtualGatewayListenerTlsCertificate_file = &sVirtualGatewayListenerTlsCertificate_file
+var VirtualGatewayListenerTlsCertificate_sds = &sVirtualGatewayListenerTlsCertificate_sds
+
+var VirtualGatewayListenerTlsFileCertificate = &sVirtualGatewayListenerTlsFileCertificate
+var VirtualGatewayListenerTlsFileCertificate_certificateChain = &sVirtualGatewayListenerTlsFileCertificate_certificateChain
+var VirtualGatewayListenerTlsFileCertificate_privateKey = &sVirtualGatewayListenerTlsFileCertificate_privateKey
+
+var _VirtualGatewayListenerTlsMode = &s_VirtualGatewayListenerTlsMode
+
+var VirtualGatewayListenerTlsSdsCertificate = &sVirtualGatewayListenerTlsSdsCertificate
+var VirtualGatewayListenerTlsSdsCertificate_secretName = &sVirtualGatewayListenerTlsSdsCertificate_secretName
+
+var VirtualGatewayListenerTlsValidationContext = &sVirtualGatewayListenerTlsValidationContext
+var VirtualGatewayListenerTlsValidationContext_trust = &sVirtualGatewayListenerTlsValidationContext_trust
+var VirtualGatewayListenerTlsValidationContext_subjectAlternativeNames = &sVirtualGatewayListenerTlsValidationContext_subjectAlternativeNames
+
+var VirtualGatewayListenerTlsValidationContextTrust = &sVirtualGatewayListenerTlsValidationContextTrust
+var VirtualGatewayListenerTlsValidationContextTrust_file = &sVirtualGatewayListenerTlsValidationContextTrust_file
+var VirtualGatewayListenerTlsValidationContextTrust_sds = &sVirtualGatewayListenerTlsValidationContextTrust_sds
+
+var VirtualGatewayLogging = &sVirtualGatewayLogging
+var VirtualGatewayLogging_accessLog = &sVirtualGatewayLogging_accessLog
+
+var VirtualGatewayPortMapping = &sVirtualGatewayPortMapping
+var VirtualGatewayPortMapping_port = &sVirtualGatewayPortMapping_port
+var VirtualGatewayPortMapping_protocol = &sVirtualGatewayPortMapping_protocol
+
+var _VirtualGatewayPortProtocol = &s_VirtualGatewayPortProtocol
+
+var VirtualGatewayRef = &sVirtualGatewayRef
+var VirtualGatewayRef_meshName = &sVirtualGatewayRef_meshName
+var VirtualGatewayRef_virtualGatewayName = &sVirtualGatewayRef_virtualGatewayName
+var VirtualGatewayRef_meshOwner = &sVirtualGatewayRef_meshOwner
+var VirtualGatewayRef_resourceOwner = &sVirtualGatewayRef_resourceOwner
+var VirtualGatewayRef_arn = &sVirtualGatewayRef_arn
+var VirtualGatewayRef_version = &sVirtualGatewayRef_version
+var VirtualGatewayRef_createdAt = &sVirtualGatewayRef_createdAt
+var VirtualGatewayRef_lastUpdatedAt = &sVirtualGatewayRef_lastUpdatedAt
+
+var _VirtualGatewaySdsSecretName = &s_VirtualGatewaySdsSecretName
+
+var VirtualGatewaySpec = &sVirtualGatewaySpec
+var VirtualGatewaySpec_backendDefaults = &sVirtualGatewaySpec_backendDefaults
+var VirtualGatewaySpec_listeners = &sVirtualGatewaySpec_listeners
+var VirtualGatewaySpec_logging = &sVirtualGatewaySpec_logging
+
+var VirtualGatewayStatus = &sVirtualGatewayStatus
+var VirtualGatewayStatus_status = &sVirtualGatewayStatus_status
+
+var _VirtualGatewayStatusCode = &s_VirtualGatewayStatusCode
+
+var VirtualGatewayTlsValidationContext = &sVirtualGatewayTlsValidationContext
+var VirtualGatewayTlsValidationContext_trust = &sVirtualGatewayTlsValidationContext_trust
+var VirtualGatewayTlsValidationContext_subjectAlternativeNames = &sVirtualGatewayTlsValidationContext_subjectAlternativeNames
+
+var VirtualGatewayTlsValidationContextAcmTrust = &sVirtualGatewayTlsValidationContextAcmTrust
+var VirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns = &sVirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns
+
+var VirtualGatewayTlsValidationContextFileTrust = &sVirtualGatewayTlsValidationContextFileTrust
+var VirtualGatewayTlsValidationContextFileTrust_certificateChain = &sVirtualGatewayTlsValidationContextFileTrust_certificateChain
+
+var VirtualGatewayTlsValidationContextSdsTrust = &sVirtualGatewayTlsValidationContextSdsTrust
+var VirtualGatewayTlsValidationContextSdsTrust_secretName = &sVirtualGatewayTlsValidationContextSdsTrust_secretName
+
+var VirtualGatewayTlsValidationContextTrust = &sVirtualGatewayTlsValidationContextTrust
+var VirtualGatewayTlsValidationContextTrust_acm = &sVirtualGatewayTlsValidationContextTrust_acm
+var VirtualGatewayTlsValidationContextTrust_file = &sVirtualGatewayTlsValidationContextTrust_file
+var VirtualGatewayTlsValidationContextTrust_sds = &sVirtualGatewayTlsValidationContextTrust_sds
+
+var VirtualNodeConnectionPool = &sVirtualNodeConnectionPool
+var VirtualNodeConnectionPool_tcp = &sVirtualNodeConnectionPool_tcp
+var VirtualNodeConnectionPool_http = &sVirtualNodeConnectionPool_http
+var VirtualNodeConnectionPool_http2 = &sVirtualNodeConnectionPool_http2
+var VirtualNodeConnectionPool_grpc = &sVirtualNodeConnectionPool_grpc
+
+var VirtualNodeData = &sVirtualNodeData
+var VirtualNodeData_meshName = &sVirtualNodeData_meshName
+var VirtualNodeData_virtualNodeName = &sVirtualNodeData_virtualNodeName
+var VirtualNodeData_spec = &sVirtualNodeData_spec
+var VirtualNodeData_metadata = &sVirtualNodeData_metadata
+var VirtualNodeData_status = &sVirtualNodeData_status
+
+var VirtualNodeGrpcConnectionPool = &sVirtualNodeGrpcConnectionPool
+var VirtualNodeGrpcConnectionPool_maxRequests = &sVirtualNodeGrpcConnectionPool_maxRequests
+
+var VirtualNodeHttp2ConnectionPool = &sVirtualNodeHttp2ConnectionPool
+var VirtualNodeHttp2ConnectionPool_maxRequests = &sVirtualNodeHttp2ConnectionPool_maxRequests
+
+var VirtualNodeHttpConnectionPool = &sVirtualNodeHttpConnectionPool
+var VirtualNodeHttpConnectionPool_maxConnections = &sVirtualNodeHttpConnectionPool_maxConnections
+var VirtualNodeHttpConnectionPool_maxPendingRequests = &sVirtualNodeHttpConnectionPool_maxPendingRequests
+
+var _VirtualNodeList = &s_VirtualNodeList
+var _VirtualNodeList_member = &s_VirtualNodeList_member
+
+var VirtualNodeRef = &sVirtualNodeRef
+var VirtualNodeRef_meshName = &sVirtualNodeRef_meshName
+var VirtualNodeRef_virtualNodeName = &sVirtualNodeRef_virtualNodeName
+var VirtualNodeRef_meshOwner = &sVirtualNodeRef_meshOwner
+var VirtualNodeRef_resourceOwner = &sVirtualNodeRef_resourceOwner
+var VirtualNodeRef_arn = &sVirtualNodeRef_arn
+var VirtualNodeRef_version = &sVirtualNodeRef_version
+var VirtualNodeRef_createdAt = &sVirtualNodeRef_createdAt
+var VirtualNodeRef_lastUpdatedAt = &sVirtualNodeRef_lastUpdatedAt
+
+var VirtualNodeServiceProvider = &sVirtualNodeServiceProvider
+var VirtualNodeServiceProvider_virtualNodeName = &sVirtualNodeServiceProvider_virtualNodeName
+
+var VirtualNodeSpec = &sVirtualNodeSpec
+var VirtualNodeSpec_serviceDiscovery = &sVirtualNodeSpec_serviceDiscovery
+var VirtualNodeSpec_listeners = &sVirtualNodeSpec_listeners
+var VirtualNodeSpec_backends = &sVirtualNodeSpec_backends
+var VirtualNodeSpec_backendDefaults = &sVirtualNodeSpec_backendDefaults
+var VirtualNodeSpec_logging = &sVirtualNodeSpec_logging
+
+var VirtualNodeStatus = &sVirtualNodeStatus
+var VirtualNodeStatus_status = &sVirtualNodeStatus_status
+
+var _VirtualNodeStatusCode = &s_VirtualNodeStatusCode
+
+var VirtualNodeTcpConnectionPool = &sVirtualNodeTcpConnectionPool
+var VirtualNodeTcpConnectionPool_maxConnections = &sVirtualNodeTcpConnectionPool_maxConnections
+
+var VirtualRouterData = &sVirtualRouterData
+var VirtualRouterData_meshName = &sVirtualRouterData_meshName
+var VirtualRouterData_virtualRouterName = &sVirtualRouterData_virtualRouterName
+var VirtualRouterData_spec = &sVirtualRouterData_spec
+var VirtualRouterData_metadata = &sVirtualRouterData_metadata
+var VirtualRouterData_status = &sVirtualRouterData_status
+
+var _VirtualRouterList = &s_VirtualRouterList
+var _VirtualRouterList_member = &s_VirtualRouterList_member
+
+var VirtualRouterListener = &sVirtualRouterListener
+var VirtualRouterListener_portMapping = &sVirtualRouterListener_portMapping
+
+var _VirtualRouterListeners = &s_VirtualRouterListeners
+var _VirtualRouterListeners_member = &s_VirtualRouterListeners_member
+
+var VirtualRouterRef = &sVirtualRouterRef
+var VirtualRouterRef_meshName = &sVirtualRouterRef_meshName
+var VirtualRouterRef_virtualRouterName = &sVirtualRouterRef_virtualRouterName
+var VirtualRouterRef_meshOwner = &sVirtualRouterRef_meshOwner
+var VirtualRouterRef_resourceOwner = &sVirtualRouterRef_resourceOwner
+var VirtualRouterRef_arn = &sVirtualRouterRef_arn
+var VirtualRouterRef_version = &sVirtualRouterRef_version
+var VirtualRouterRef_createdAt = &sVirtualRouterRef_createdAt
+var VirtualRouterRef_lastUpdatedAt = &sVirtualRouterRef_lastUpdatedAt
+
+var VirtualRouterServiceProvider = &sVirtualRouterServiceProvider
+var VirtualRouterServiceProvider_virtualRouterName = &sVirtualRouterServiceProvider_virtualRouterName
+
+var VirtualRouterSpec = &sVirtualRouterSpec
+var VirtualRouterSpec_listeners = &sVirtualRouterSpec_listeners
+
+var VirtualRouterStatus = &sVirtualRouterStatus
+var VirtualRouterStatus_status = &sVirtualRouterStatus_status
+
+var _VirtualRouterStatusCode = &s_VirtualRouterStatusCode
+
+var VirtualServiceBackend = &sVirtualServiceBackend
+var VirtualServiceBackend_virtualServiceName = &sVirtualServiceBackend_virtualServiceName
+var VirtualServiceBackend_clientPolicy = &sVirtualServiceBackend_clientPolicy
+
+var VirtualServiceData = &sVirtualServiceData
+var VirtualServiceData_meshName = &sVirtualServiceData_meshName
+var VirtualServiceData_virtualServiceName = &sVirtualServiceData_virtualServiceName
+var VirtualServiceData_spec = &sVirtualServiceData_spec
+var VirtualServiceData_metadata = &sVirtualServiceData_metadata
+var VirtualServiceData_status = &sVirtualServiceData_status
+
+var _VirtualServiceList = &s_VirtualServiceList
+var _VirtualServiceList_member = &s_VirtualServiceList_member
+
+var VirtualServiceProvider = &sVirtualServiceProvider
+var VirtualServiceProvider_virtualNode = &sVirtualServiceProvider_virtualNode
+var VirtualServiceProvider_virtualRouter = &sVirtualServiceProvider_virtualRouter
+
+var VirtualServiceRef = &sVirtualServiceRef
+var VirtualServiceRef_meshName = &sVirtualServiceRef_meshName
+var VirtualServiceRef_virtualServiceName = &sVirtualServiceRef_virtualServiceName
+var VirtualServiceRef_meshOwner = &sVirtualServiceRef_meshOwner
+var VirtualServiceRef_resourceOwner = &sVirtualServiceRef_resourceOwner
+var VirtualServiceRef_arn = &sVirtualServiceRef_arn
+var VirtualServiceRef_version = &sVirtualServiceRef_version
+var VirtualServiceRef_createdAt = &sVirtualServiceRef_createdAt
+var VirtualServiceRef_lastUpdatedAt = &sVirtualServiceRef_lastUpdatedAt
+
+var VirtualServiceSpec = &sVirtualServiceSpec
+var VirtualServiceSpec_provider = &sVirtualServiceSpec_provider
+
+var VirtualServiceStatus = &sVirtualServiceStatus
+var VirtualServiceStatus_status = &sVirtualServiceStatus_status
+
+var _VirtualServiceStatusCode = &s_VirtualServiceStatusCode
+
+var WeightedTarget = &sWeightedTarget
+var WeightedTarget_virtualNode = &sWeightedTarget_virtualNode
+var WeightedTarget_weight = &sWeightedTarget_weight
+var WeightedTarget_port = &sWeightedTarget_port
+
+var _WeightedTargets = &s_WeightedTargets
+var _WeightedTargets_member = &s_WeightedTargets_member
+
+var CreateGatewayRouteInput = &sCreateGatewayRouteInput
+var CreateGatewayRouteInput_gatewayRouteName = &sCreateGatewayRouteInput_gatewayRouteName
+var CreateGatewayRouteInput_meshName = &sCreateGatewayRouteInput_meshName
+var CreateGatewayRouteInput_virtualGatewayName = &sCreateGatewayRouteInput_virtualGatewayName
+var CreateGatewayRouteInput_spec = &sCreateGatewayRouteInput_spec
+var CreateGatewayRouteInput_tags = &sCreateGatewayRouteInput_tags
+var CreateGatewayRouteInput_clientToken = &sCreateGatewayRouteInput_clientToken
+var CreateGatewayRouteInput_meshOwner = &sCreateGatewayRouteInput_meshOwner
+
+var CreateGatewayRouteOutput = &sCreateGatewayRouteOutput
+var CreateGatewayRouteOutput_gatewayRoute = &sCreateGatewayRouteOutput_gatewayRoute
+
+var CreateMeshInput = &sCreateMeshInput
+var CreateMeshInput_meshName = &sCreateMeshInput_meshName
+var CreateMeshInput_spec = &sCreateMeshInput_spec
+var CreateMeshInput_tags = &sCreateMeshInput_tags
+var CreateMeshInput_clientToken = &sCreateMeshInput_clientToken
+
+var CreateMeshOutput = &sCreateMeshOutput
+var CreateMeshOutput_mesh = &sCreateMeshOutput_mesh
+
+var CreateRouteInput = &sCreateRouteInput
+var CreateRouteInput_routeName = &sCreateRouteInput_routeName
+var CreateRouteInput_meshName = &sCreateRouteInput_meshName
+var CreateRouteInput_virtualRouterName = &sCreateRouteInput_virtualRouterName
+var CreateRouteInput_spec = &sCreateRouteInput_spec
+var CreateRouteInput_tags = &sCreateRouteInput_tags
+var CreateRouteInput_clientToken = &sCreateRouteInput_clientToken
+var CreateRouteInput_meshOwner = &sCreateRouteInput_meshOwner
+
+var CreateRouteOutput = &sCreateRouteOutput
+var CreateRouteOutput_route = &sCreateRouteOutput_route
+
+var CreateVirtualGatewayInput = &sCreateVirtualGatewayInput
+var CreateVirtualGatewayInput_virtualGatewayName = &sCreateVirtualGatewayInput_virtualGatewayName
+var CreateVirtualGatewayInput_meshName = &sCreateVirtualGatewayInput_meshName
+var CreateVirtualGatewayInput_spec = &sCreateVirtualGatewayInput_spec
+var CreateVirtualGatewayInput_tags = &sCreateVirtualGatewayInput_tags
+var CreateVirtualGatewayInput_clientToken = &sCreateVirtualGatewayInput_clientToken
+var CreateVirtualGatewayInput_meshOwner = &sCreateVirtualGatewayInput_meshOwner
+
+var CreateVirtualGatewayOutput = &sCreateVirtualGatewayOutput
+var CreateVirtualGatewayOutput_virtualGateway = &sCreateVirtualGatewayOutput_virtualGateway
+
+var CreateVirtualNodeInput = &sCreateVirtualNodeInput
+var CreateVirtualNodeInput_virtualNodeName = &sCreateVirtualNodeInput_virtualNodeName
+var CreateVirtualNodeInput_meshName = &sCreateVirtualNodeInput_meshName
+var CreateVirtualNodeInput_spec = &sCreateVirtualNodeInput_spec
+var CreateVirtualNodeInput_tags = &sCreateVirtualNodeInput_tags
+var CreateVirtualNodeInput_clientToken = &sCreateVirtualNodeInput_clientToken
+var CreateVirtualNodeInput_meshOwner = &sCreateVirtualNodeInput_meshOwner
+
+var CreateVirtualNodeOutput = &sCreateVirtualNodeOutput
+var CreateVirtualNodeOutput_virtualNode = &sCreateVirtualNodeOutput_virtualNode
+
+var CreateVirtualRouterInput = &sCreateVirtualRouterInput
+var CreateVirtualRouterInput_virtualRouterName = &sCreateVirtualRouterInput_virtualRouterName
+var CreateVirtualRouterInput_meshName = &sCreateVirtualRouterInput_meshName
+var CreateVirtualRouterInput_spec = &sCreateVirtualRouterInput_spec
+var CreateVirtualRouterInput_tags = &sCreateVirtualRouterInput_tags
+var CreateVirtualRouterInput_clientToken = &sCreateVirtualRouterInput_clientToken
+var CreateVirtualRouterInput_meshOwner = &sCreateVirtualRouterInput_meshOwner
+
+var CreateVirtualRouterOutput = &sCreateVirtualRouterOutput
+var CreateVirtualRouterOutput_virtualRouter = &sCreateVirtualRouterOutput_virtualRouter
+
+var CreateVirtualServiceInput = &sCreateVirtualServiceInput
+var CreateVirtualServiceInput_virtualServiceName = &sCreateVirtualServiceInput_virtualServiceName
+var CreateVirtualServiceInput_meshName = &sCreateVirtualServiceInput_meshName
+var CreateVirtualServiceInput_spec = &sCreateVirtualServiceInput_spec
+var CreateVirtualServiceInput_tags = &sCreateVirtualServiceInput_tags
+var CreateVirtualServiceInput_clientToken = &sCreateVirtualServiceInput_clientToken
+var CreateVirtualServiceInput_meshOwner = &sCreateVirtualServiceInput_meshOwner
+
+var CreateVirtualServiceOutput = &sCreateVirtualServiceOutput
+var CreateVirtualServiceOutput_virtualService = &sCreateVirtualServiceOutput_virtualService
+
+var DeleteGatewayRouteInput = &sDeleteGatewayRouteInput
+var DeleteGatewayRouteInput_gatewayRouteName = &sDeleteGatewayRouteInput_gatewayRouteName
+var DeleteGatewayRouteInput_meshName = &sDeleteGatewayRouteInput_meshName
+var DeleteGatewayRouteInput_virtualGatewayName = &sDeleteGatewayRouteInput_virtualGatewayName
+var DeleteGatewayRouteInput_meshOwner = &sDeleteGatewayRouteInput_meshOwner
+
+var DeleteGatewayRouteOutput = &sDeleteGatewayRouteOutput
+var DeleteGatewayRouteOutput_gatewayRoute = &sDeleteGatewayRouteOutput_gatewayRoute
+
+var DeleteMeshInput = &sDeleteMeshInput
+var DeleteMeshInput_meshName = &sDeleteMeshInput_meshName
+
+var DeleteMeshOutput = &sDeleteMeshOutput
+var DeleteMeshOutput_mesh = &sDeleteMeshOutput_mesh
+
+var DeleteRouteInput = &sDeleteRouteInput
+var DeleteRouteInput_routeName = &sDeleteRouteInput_routeName
+var DeleteRouteInput_meshName = &sDeleteRouteInput_meshName
+var DeleteRouteInput_virtualRouterName = &sDeleteRouteInput_virtualRouterName
+var DeleteRouteInput_meshOwner = &sDeleteRouteInput_meshOwner
+
+var DeleteRouteOutput = &sDeleteRouteOutput
+var DeleteRouteOutput_route = &sDeleteRouteOutput_route
+
+var DeleteVirtualGatewayInput = &sDeleteVirtualGatewayInput
+var DeleteVirtualGatewayInput_virtualGatewayName = &sDeleteVirtualGatewayInput_virtualGatewayName
+var DeleteVirtualGatewayInput_meshName = &sDeleteVirtualGatewayInput_meshName
+var DeleteVirtualGatewayInput_meshOwner = &sDeleteVirtualGatewayInput_meshOwner
+
+var DeleteVirtualGatewayOutput = &sDeleteVirtualGatewayOutput
+var DeleteVirtualGatewayOutput_virtualGateway = &sDeleteVirtualGatewayOutput_virtualGateway
+
+var DeleteVirtualNodeInput = &sDeleteVirtualNodeInput
+var DeleteVirtualNodeInput_virtualNodeName = &sDeleteVirtualNodeInput_virtualNodeName
+var DeleteVirtualNodeInput_meshName = &sDeleteVirtualNodeInput_meshName
+var DeleteVirtualNodeInput_meshOwner = &sDeleteVirtualNodeInput_meshOwner
+
+var DeleteVirtualNodeOutput = &sDeleteVirtualNodeOutput
+var DeleteVirtualNodeOutput_virtualNode = &sDeleteVirtualNodeOutput_virtualNode
+
+var DeleteVirtualRouterInput = &sDeleteVirtualRouterInput
+var DeleteVirtualRouterInput_virtualRouterName = &sDeleteVirtualRouterInput_virtualRouterName
+var DeleteVirtualRouterInput_meshName = &sDeleteVirtualRouterInput_meshName
+var DeleteVirtualRouterInput_meshOwner = &sDeleteVirtualRouterInput_meshOwner
+
+var DeleteVirtualRouterOutput = &sDeleteVirtualRouterOutput
+var DeleteVirtualRouterOutput_virtualRouter = &sDeleteVirtualRouterOutput_virtualRouter
+
+var DeleteVirtualServiceInput = &sDeleteVirtualServiceInput
+var DeleteVirtualServiceInput_virtualServiceName = &sDeleteVirtualServiceInput_virtualServiceName
+var DeleteVirtualServiceInput_meshName = &sDeleteVirtualServiceInput_meshName
+var DeleteVirtualServiceInput_meshOwner = &sDeleteVirtualServiceInput_meshOwner
+
+var DeleteVirtualServiceOutput = &sDeleteVirtualServiceOutput
+var DeleteVirtualServiceOutput_virtualService = &sDeleteVirtualServiceOutput_virtualService
+
+var DescribeGatewayRouteInput = &sDescribeGatewayRouteInput
+var DescribeGatewayRouteInput_gatewayRouteName = &sDescribeGatewayRouteInput_gatewayRouteName
+var DescribeGatewayRouteInput_meshName = &sDescribeGatewayRouteInput_meshName
+var DescribeGatewayRouteInput_virtualGatewayName = &sDescribeGatewayRouteInput_virtualGatewayName
+var DescribeGatewayRouteInput_meshOwner = &sDescribeGatewayRouteInput_meshOwner
+
+var DescribeGatewayRouteOutput = &sDescribeGatewayRouteOutput
+var DescribeGatewayRouteOutput_gatewayRoute = &sDescribeGatewayRouteOutput_gatewayRoute
+
+var DescribeMeshInput = &sDescribeMeshInput
+var DescribeMeshInput_meshName = &sDescribeMeshInput_meshName
+var DescribeMeshInput_meshOwner = &sDescribeMeshInput_meshOwner
+
+var DescribeMeshOutput = &sDescribeMeshOutput
+var DescribeMeshOutput_mesh = &sDescribeMeshOutput_mesh
+
+var DescribeRouteInput = &sDescribeRouteInput
+var DescribeRouteInput_routeName = &sDescribeRouteInput_routeName
+var DescribeRouteInput_meshName = &sDescribeRouteInput_meshName
+var DescribeRouteInput_meshOwner = &sDescribeRouteInput_meshOwner
+var DescribeRouteInput_virtualRouterName = &sDescribeRouteInput_virtualRouterName
+
+var DescribeRouteOutput = &sDescribeRouteOutput
+var DescribeRouteOutput_route = &sDescribeRouteOutput_route
+
+var DescribeVirtualGatewayInput = &sDescribeVirtualGatewayInput
+var DescribeVirtualGatewayInput_virtualGatewayName = &sDescribeVirtualGatewayInput_virtualGatewayName
+var DescribeVirtualGatewayInput_meshName = &sDescribeVirtualGatewayInput_meshName
+var DescribeVirtualGatewayInput_meshOwner = &sDescribeVirtualGatewayInput_meshOwner
+
+var DescribeVirtualGatewayOutput = &sDescribeVirtualGatewayOutput
+var DescribeVirtualGatewayOutput_virtualGateway = &sDescribeVirtualGatewayOutput_virtualGateway
+
+var DescribeVirtualNodeInput = &sDescribeVirtualNodeInput
+var DescribeVirtualNodeInput_virtualNodeName = &sDescribeVirtualNodeInput_virtualNodeName
+var DescribeVirtualNodeInput_meshName = &sDescribeVirtualNodeInput_meshName
+var DescribeVirtualNodeInput_meshOwner = &sDescribeVirtualNodeInput_meshOwner
+
+var DescribeVirtualNodeOutput = &sDescribeVirtualNodeOutput
+var DescribeVirtualNodeOutput_virtualNode = &sDescribeVirtualNodeOutput_virtualNode
+
+var DescribeVirtualRouterInput = &sDescribeVirtualRouterInput
+var DescribeVirtualRouterInput_virtualRouterName = &sDescribeVirtualRouterInput_virtualRouterName
+var DescribeVirtualRouterInput_meshName = &sDescribeVirtualRouterInput_meshName
+var DescribeVirtualRouterInput_meshOwner = &sDescribeVirtualRouterInput_meshOwner
+
+var DescribeVirtualRouterOutput = &sDescribeVirtualRouterOutput
+var DescribeVirtualRouterOutput_virtualRouter = &sDescribeVirtualRouterOutput_virtualRouter
+
+var DescribeVirtualServiceInput = &sDescribeVirtualServiceInput
+var DescribeVirtualServiceInput_virtualServiceName = &sDescribeVirtualServiceInput_virtualServiceName
+var DescribeVirtualServiceInput_meshName = &sDescribeVirtualServiceInput_meshName
+var DescribeVirtualServiceInput_meshOwner = &sDescribeVirtualServiceInput_meshOwner
+
+var DescribeVirtualServiceOutput = &sDescribeVirtualServiceOutput
+var DescribeVirtualServiceOutput_virtualService = &sDescribeVirtualServiceOutput_virtualService
+
+var ListGatewayRoutesInput = &sListGatewayRoutesInput
+var ListGatewayRoutesInput_meshName = &sListGatewayRoutesInput_meshName
+var ListGatewayRoutesInput_virtualGatewayName = &sListGatewayRoutesInput_virtualGatewayName
+var ListGatewayRoutesInput_nextToken = &sListGatewayRoutesInput_nextToken
+var ListGatewayRoutesInput_limit = &sListGatewayRoutesInput_limit
+var ListGatewayRoutesInput_meshOwner = &sListGatewayRoutesInput_meshOwner
+
+var ListGatewayRoutesOutput = &sListGatewayRoutesOutput
+var ListGatewayRoutesOutput_gatewayRoutes = &sListGatewayRoutesOutput_gatewayRoutes
+var ListGatewayRoutesOutput_nextToken = &sListGatewayRoutesOutput_nextToken
+
+var ListMeshesInput = &sListMeshesInput
+var ListMeshesInput_nextToken = &sListMeshesInput_nextToken
+var ListMeshesInput_limit = &sListMeshesInput_limit
+
+var ListMeshesOutput = &sListMeshesOutput
+var ListMeshesOutput_meshes = &sListMeshesOutput_meshes
+var ListMeshesOutput_nextToken = &sListMeshesOutput_nextToken
+
+var ListRoutesInput = &sListRoutesInput
+var ListRoutesInput_meshName = &sListRoutesInput_meshName
+var ListRoutesInput_virtualRouterName = &sListRoutesInput_virtualRouterName
+var ListRoutesInput_nextToken = &sListRoutesInput_nextToken
+var ListRoutesInput_limit = &sListRoutesInput_limit
+var ListRoutesInput_meshOwner = &sListRoutesInput_meshOwner
+
+var ListRoutesOutput = &sListRoutesOutput
+var ListRoutesOutput_routes = &sListRoutesOutput_routes
+var ListRoutesOutput_nextToken = &sListRoutesOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+var ListTagsForResourceInput_nextToken = &sListTagsForResourceInput_nextToken
+var ListTagsForResourceInput_limit = &sListTagsForResourceInput_limit
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+var ListTagsForResourceOutput_nextToken = &sListTagsForResourceOutput_nextToken
+
+var ListVirtualGatewaysInput = &sListVirtualGatewaysInput
+var ListVirtualGatewaysInput_meshName = &sListVirtualGatewaysInput_meshName
+var ListVirtualGatewaysInput_nextToken = &sListVirtualGatewaysInput_nextToken
+var ListVirtualGatewaysInput_limit = &sListVirtualGatewaysInput_limit
+var ListVirtualGatewaysInput_meshOwner = &sListVirtualGatewaysInput_meshOwner
+
+var ListVirtualGatewaysOutput = &sListVirtualGatewaysOutput
+var ListVirtualGatewaysOutput_virtualGateways = &sListVirtualGatewaysOutput_virtualGateways
+var ListVirtualGatewaysOutput_nextToken = &sListVirtualGatewaysOutput_nextToken
+
+var ListVirtualNodesInput = &sListVirtualNodesInput
+var ListVirtualNodesInput_meshName = &sListVirtualNodesInput_meshName
+var ListVirtualNodesInput_nextToken = &sListVirtualNodesInput_nextToken
+var ListVirtualNodesInput_limit = &sListVirtualNodesInput_limit
+var ListVirtualNodesInput_meshOwner = &sListVirtualNodesInput_meshOwner
+
+var ListVirtualNodesOutput = &sListVirtualNodesOutput
+var ListVirtualNodesOutput_virtualNodes = &sListVirtualNodesOutput_virtualNodes
+var ListVirtualNodesOutput_nextToken = &sListVirtualNodesOutput_nextToken
+
+var ListVirtualRoutersInput = &sListVirtualRoutersInput
+var ListVirtualRoutersInput_meshName = &sListVirtualRoutersInput_meshName
+var ListVirtualRoutersInput_nextToken = &sListVirtualRoutersInput_nextToken
+var ListVirtualRoutersInput_limit = &sListVirtualRoutersInput_limit
+var ListVirtualRoutersInput_meshOwner = &sListVirtualRoutersInput_meshOwner
+
+var ListVirtualRoutersOutput = &sListVirtualRoutersOutput
+var ListVirtualRoutersOutput_virtualRouters = &sListVirtualRoutersOutput_virtualRouters
+var ListVirtualRoutersOutput_nextToken = &sListVirtualRoutersOutput_nextToken
+
+var ListVirtualServicesInput = &sListVirtualServicesInput
+var ListVirtualServicesInput_meshName = &sListVirtualServicesInput_meshName
+var ListVirtualServicesInput_nextToken = &sListVirtualServicesInput_nextToken
+var ListVirtualServicesInput_limit = &sListVirtualServicesInput_limit
+var ListVirtualServicesInput_meshOwner = &sListVirtualServicesInput_meshOwner
+
+var ListVirtualServicesOutput = &sListVirtualServicesOutput
+var ListVirtualServicesOutput_virtualServices = &sListVirtualServicesOutput_virtualServices
+var ListVirtualServicesOutput_nextToken = &sListVirtualServicesOutput_nextToken
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateGatewayRouteInput = &sUpdateGatewayRouteInput
+var UpdateGatewayRouteInput_gatewayRouteName = &sUpdateGatewayRouteInput_gatewayRouteName
+var UpdateGatewayRouteInput_meshName = &sUpdateGatewayRouteInput_meshName
+var UpdateGatewayRouteInput_virtualGatewayName = &sUpdateGatewayRouteInput_virtualGatewayName
+var UpdateGatewayRouteInput_spec = &sUpdateGatewayRouteInput_spec
+var UpdateGatewayRouteInput_clientToken = &sUpdateGatewayRouteInput_clientToken
+var UpdateGatewayRouteInput_meshOwner = &sUpdateGatewayRouteInput_meshOwner
+
+var UpdateGatewayRouteOutput = &sUpdateGatewayRouteOutput
+var UpdateGatewayRouteOutput_gatewayRoute = &sUpdateGatewayRouteOutput_gatewayRoute
+
+var UpdateMeshInput = &sUpdateMeshInput
+var UpdateMeshInput_meshName = &sUpdateMeshInput_meshName
+var UpdateMeshInput_spec = &sUpdateMeshInput_spec
+var UpdateMeshInput_clientToken = &sUpdateMeshInput_clientToken
+
+var UpdateMeshOutput = &sUpdateMeshOutput
+var UpdateMeshOutput_mesh = &sUpdateMeshOutput_mesh
+
+var UpdateRouteInput = &sUpdateRouteInput
+var UpdateRouteInput_routeName = &sUpdateRouteInput_routeName
+var UpdateRouteInput_meshName = &sUpdateRouteInput_meshName
+var UpdateRouteInput_virtualRouterName = &sUpdateRouteInput_virtualRouterName
+var UpdateRouteInput_spec = &sUpdateRouteInput_spec
+var UpdateRouteInput_clientToken = &sUpdateRouteInput_clientToken
+var UpdateRouteInput_meshOwner = &sUpdateRouteInput_meshOwner
+
+var UpdateRouteOutput = &sUpdateRouteOutput
+var UpdateRouteOutput_route = &sUpdateRouteOutput_route
+
+var UpdateVirtualGatewayInput = &sUpdateVirtualGatewayInput
+var UpdateVirtualGatewayInput_virtualGatewayName = &sUpdateVirtualGatewayInput_virtualGatewayName
+var UpdateVirtualGatewayInput_meshName = &sUpdateVirtualGatewayInput_meshName
+var UpdateVirtualGatewayInput_spec = &sUpdateVirtualGatewayInput_spec
+var UpdateVirtualGatewayInput_clientToken = &sUpdateVirtualGatewayInput_clientToken
+var UpdateVirtualGatewayInput_meshOwner = &sUpdateVirtualGatewayInput_meshOwner
+
+var UpdateVirtualGatewayOutput = &sUpdateVirtualGatewayOutput
+var UpdateVirtualGatewayOutput_virtualGateway = &sUpdateVirtualGatewayOutput_virtualGateway
+
+var UpdateVirtualNodeInput = &sUpdateVirtualNodeInput
+var UpdateVirtualNodeInput_virtualNodeName = &sUpdateVirtualNodeInput_virtualNodeName
+var UpdateVirtualNodeInput_meshName = &sUpdateVirtualNodeInput_meshName
+var UpdateVirtualNodeInput_spec = &sUpdateVirtualNodeInput_spec
+var UpdateVirtualNodeInput_clientToken = &sUpdateVirtualNodeInput_clientToken
+var UpdateVirtualNodeInput_meshOwner = &sUpdateVirtualNodeInput_meshOwner
+
+var UpdateVirtualNodeOutput = &sUpdateVirtualNodeOutput
+var UpdateVirtualNodeOutput_virtualNode = &sUpdateVirtualNodeOutput_virtualNode
+
+var UpdateVirtualRouterInput = &sUpdateVirtualRouterInput
+var UpdateVirtualRouterInput_virtualRouterName = &sUpdateVirtualRouterInput_virtualRouterName
+var UpdateVirtualRouterInput_meshName = &sUpdateVirtualRouterInput_meshName
+var UpdateVirtualRouterInput_spec = &sUpdateVirtualRouterInput_spec
+var UpdateVirtualRouterInput_clientToken = &sUpdateVirtualRouterInput_clientToken
+var UpdateVirtualRouterInput_meshOwner = &sUpdateVirtualRouterInput_meshOwner
+
+var UpdateVirtualRouterOutput = &sUpdateVirtualRouterOutput
+var UpdateVirtualRouterOutput_virtualRouter = &sUpdateVirtualRouterOutput_virtualRouter
+
+var UpdateVirtualServiceInput = &sUpdateVirtualServiceInput
+var UpdateVirtualServiceInput_virtualServiceName = &sUpdateVirtualServiceInput_virtualServiceName
+var UpdateVirtualServiceInput_meshName = &sUpdateVirtualServiceInput_meshName
+var UpdateVirtualServiceInput_spec = &sUpdateVirtualServiceInput_spec
+var UpdateVirtualServiceInput_clientToken = &sUpdateVirtualServiceInput_clientToken
+var UpdateVirtualServiceInput_meshOwner = &sUpdateVirtualServiceInput_meshOwner
+
+var UpdateVirtualServiceOutput = &sUpdateVirtualServiceOutput
+var UpdateVirtualServiceOutput_virtualService = &sUpdateVirtualServiceOutput_virtualService
+
+var AppMesh = &smithy.ServiceSchema{Schema: &s_AppMesh, Version: "2019-01-25"}

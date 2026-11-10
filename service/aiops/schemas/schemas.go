@@ -4,640 +4,668 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CreateInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateInvestigationGroup                                        smithy.SchemaExtensions
+	eDeleteInvestigationGroup                                        smithy.SchemaExtensions
+	eDeleteInvestigationGroupPolicy                                  smithy.SchemaExtensions
+	eGetInvestigationGroup                                           smithy.SchemaExtensions
+	eGetInvestigationGroupPolicy                                     smithy.SchemaExtensions
+	eListInvestigationGroups                                         smithy.SchemaExtensions
+	eListTagsForResource                                             smithy.SchemaExtensions
+	ePutInvestigationGroupPolicy                                     smithy.SchemaExtensions
+	eTagResource                                                     smithy.SchemaExtensions
+	eUntagResource                                                   smithy.SchemaExtensions
+	eUpdateInvestigationGroup                                        smithy.SchemaExtensions
+	e_AIOps                                                          smithy.SchemaExtensions
+	eAccessDeniedException                                           smithy.SchemaExtensions
+	eAccessDeniedException_message                                   smithy.SchemaExtensions
+	e_ChatbotNotificationChannel                                     smithy.SchemaExtensions
+	e_ChatbotNotificationChannel_key                                 smithy.SchemaExtensions
+	e_ChatbotNotificationChannel_value                               smithy.SchemaExtensions
+	e_ChatConfigurationArn                                           smithy.SchemaExtensions
+	e_ChatConfigurationArns                                          smithy.SchemaExtensions
+	e_ChatConfigurationArns_member                                   smithy.SchemaExtensions
+	eConflictException                                               smithy.SchemaExtensions
+	eConflictException_message                                       smithy.SchemaExtensions
+	eCrossAccountConfiguration                                       smithy.SchemaExtensions
+	eCrossAccountConfiguration_sourceRoleArn                         smithy.SchemaExtensions
+	e_CrossAccountConfigurations                                     smithy.SchemaExtensions
+	e_CrossAccountConfigurations_member                              smithy.SchemaExtensions
+	eEncryptionConfiguration                                         smithy.SchemaExtensions
+	eEncryptionConfiguration_type                                    smithy.SchemaExtensions
+	eEncryptionConfiguration_kmsKeyId                                smithy.SchemaExtensions
+	eEncryptionConfigurationType                                     smithy.SchemaExtensions
+	eEncryptionConfigurationType_AWS_OWNED_KEY                       smithy.SchemaExtensions
+	eEncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY            smithy.SchemaExtensions
+	eForbiddenException                                              smithy.SchemaExtensions
+	eForbiddenException_message                                      smithy.SchemaExtensions
+	e_IdentifierStringWithPatternAndLengthLimits                     smithy.SchemaExtensions
+	eInternalServerException                                         smithy.SchemaExtensions
+	eInternalServerException_message                                 smithy.SchemaExtensions
+	e_InvestigationGroupArn                                          smithy.SchemaExtensions
+	e_InvestigationGroupIdentifier                                   smithy.SchemaExtensions
+	e_InvestigationGroupPolicyDocument                               smithy.SchemaExtensions
+	e_InvestigationGroups                                            smithy.SchemaExtensions
+	e_InvestigationGroups_member                                     smithy.SchemaExtensions
+	e_KmsKeyId                                                       smithy.SchemaExtensions
+	eListInvestigationGroupsModel                                    smithy.SchemaExtensions
+	eListInvestigationGroupsModel_arn                                smithy.SchemaExtensions
+	eListInvestigationGroupsModel_name                               smithy.SchemaExtensions
+	eResourceNotFoundException                                       smithy.SchemaExtensions
+	eResourceNotFoundException_message                               smithy.SchemaExtensions
+	e_Retention                                                      smithy.SchemaExtensions
+	e_RoleArn                                                        smithy.SchemaExtensions
+	e_SensitiveStringWithLengthLimits                                smithy.SchemaExtensions
+	eServiceQuotaExceededException                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                           smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                        smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                      smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                         smithy.SchemaExtensions
+	e_SNSTopicArn                                                    smithy.SchemaExtensions
+	e_StringWithPatternAndLengthLimits                               smithy.SchemaExtensions
+	e_TagKey                                                         smithy.SchemaExtensions
+	e_TagKeyBoundaries                                               smithy.SchemaExtensions
+	e_TagKeyBoundaries_member                                        smithy.SchemaExtensions
+	e_TagKeys                                                        smithy.SchemaExtensions
+	e_TagKeys_member                                                 smithy.SchemaExtensions
+	e_Tags                                                           smithy.SchemaExtensions
+	e_Tags_key                                                       smithy.SchemaExtensions
+	e_Tags_value                                                     smithy.SchemaExtensions
+	e_TagValue                                                       smithy.SchemaExtensions
+	eThrottlingException                                             smithy.SchemaExtensions
+	eThrottlingException_message                                     smithy.SchemaExtensions
+	eValidationException                                             smithy.SchemaExtensions
+	eValidationException_message                                     smithy.SchemaExtensions
+	eCreateInvestigationGroupInput                                   smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_name                              smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_roleArn                           smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_encryptionConfiguration           smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_retentionInDays                   smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_tags                              smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_tagKeyBoundaries                  smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_chatbotNotificationChannel        smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled   smithy.SchemaExtensions
+	eCreateInvestigationGroupInput_crossAccountConfigurations        smithy.SchemaExtensions
+	eCreateInvestigationGroupOutput                                  smithy.SchemaExtensions
+	eCreateInvestigationGroupOutput_arn                              smithy.SchemaExtensions
+	eDeleteInvestigationGroupRequest                                 smithy.SchemaExtensions
+	eDeleteInvestigationGroupRequest_identifier                      smithy.SchemaExtensions
+	eDeleteInvestigationGroupPolicyRequest                           smithy.SchemaExtensions
+	eDeleteInvestigationGroupPolicyRequest_identifier                smithy.SchemaExtensions
+	eDeleteInvestigationGroupPolicyOutput                            smithy.SchemaExtensions
+	eGetInvestigationGroupRequest                                    smithy.SchemaExtensions
+	eGetInvestigationGroupRequest_identifier                         smithy.SchemaExtensions
+	eGetInvestigationGroupResponse                                   smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_createdBy                         smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_createdAt                         smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_lastModifiedBy                    smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_lastModifiedAt                    smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_name                              smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_arn                               smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_roleArn                           smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_encryptionConfiguration           smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_retentionInDays                   smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_chatbotNotificationChannel        smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_tagKeyBoundaries                  smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled   smithy.SchemaExtensions
+	eGetInvestigationGroupResponse_crossAccountConfigurations        smithy.SchemaExtensions
+	eGetInvestigationGroupPolicyRequest                              smithy.SchemaExtensions
+	eGetInvestigationGroupPolicyRequest_identifier                   smithy.SchemaExtensions
+	eGetInvestigationGroupPolicyResponse                             smithy.SchemaExtensions
+	eGetInvestigationGroupPolicyResponse_investigationGroupArn       smithy.SchemaExtensions
+	eGetInvestigationGroupPolicyResponse_policy                      smithy.SchemaExtensions
+	eListInvestigationGroupsInput                                    smithy.SchemaExtensions
+	eListInvestigationGroupsInput_nextToken                          smithy.SchemaExtensions
+	eListInvestigationGroupsInput_maxResults                         smithy.SchemaExtensions
+	eListInvestigationGroupsOutput                                   smithy.SchemaExtensions
+	eListInvestigationGroupsOutput_nextToken                         smithy.SchemaExtensions
+	eListInvestigationGroupsOutput_investigationGroups               smithy.SchemaExtensions
+	eListTagsForResourceRequest                                      smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                          smithy.SchemaExtensions
+	eListTagsForResourceOutput                                       smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                  smithy.SchemaExtensions
+	ePutInvestigationGroupPolicyRequest                              smithy.SchemaExtensions
+	ePutInvestigationGroupPolicyRequest_identifier                   smithy.SchemaExtensions
+	ePutInvestigationGroupPolicyRequest_policy                       smithy.SchemaExtensions
+	ePutInvestigationGroupPolicyResponse                             smithy.SchemaExtensions
+	ePutInvestigationGroupPolicyResponse_investigationGroupArn       smithy.SchemaExtensions
+	eTagResourceRequest                                              smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                  smithy.SchemaExtensions
+	eTagResourceRequest_tags                                         smithy.SchemaExtensions
+	eTagResourceResponse                                             smithy.SchemaExtensions
+	eUntagResourceRequest                                            smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                    smithy.SchemaExtensions
+	eUntagResourceResponse                                           smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest                                 smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest_identifier                      smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest_roleArn                         smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest_encryptionConfiguration         smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest_tagKeyBoundaries                smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest_chatbotNotificationChannel      smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled smithy.SchemaExtensions
+	eUpdateInvestigationGroupRequest_crossAccountConfigurations      smithy.SchemaExtensions
+	eUpdateInvestigationGroupOutput                                  smithy.SchemaExtensions
+)
+
+var (
+	iCreateInvestigationGroup                    = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "CreateInvestigationGroup"}
+	iDeleteInvestigationGroup                    = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "DeleteInvestigationGroup"}
+	iDeleteInvestigationGroupPolicy              = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "DeleteInvestigationGroupPolicy"}
+	iGetInvestigationGroup                       = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "GetInvestigationGroup"}
+	iGetInvestigationGroupPolicy                 = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "GetInvestigationGroupPolicy"}
+	iListInvestigationGroups                     = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ListInvestigationGroups"}
+	iListTagsForResource                         = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ListTagsForResource"}
+	iPutInvestigationGroupPolicy                 = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "PutInvestigationGroupPolicy"}
+	iTagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "TagResource"}
+	iUntagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "UntagResource"}
+	iUpdateInvestigationGroup                    = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "UpdateInvestigationGroup"}
+	i_AIOps                                      = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "AIOps"}
+	iAccessDeniedException                       = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "AccessDeniedException"}
+	i_ChatbotNotificationChannel                 = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ChatbotNotificationChannel"}
+	i_ChatConfigurationArn                       = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ChatConfigurationArn"}
+	i_ChatConfigurationArns                      = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ChatConfigurationArns"}
+	iConflictException                           = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ConflictException"}
+	iCrossAccountConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "CrossAccountConfiguration"}
+	i_CrossAccountConfigurations                 = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "CrossAccountConfigurations"}
+	iEncryptionConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "EncryptionConfiguration"}
+	iEncryptionConfigurationType                 = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "EncryptionConfigurationType"}
+	iForbiddenException                          = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ForbiddenException"}
+	i_IdentifierStringWithPatternAndLengthLimits = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "IdentifierStringWithPatternAndLengthLimits"}
+	iInternalServerException                     = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "InternalServerException"}
+	i_InvestigationGroupArn                      = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "InvestigationGroupArn"}
+	i_InvestigationGroupIdentifier               = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "InvestigationGroupIdentifier"}
+	i_InvestigationGroupPolicyDocument           = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "InvestigationGroupPolicyDocument"}
+	i_InvestigationGroups                        = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "InvestigationGroups"}
+	i_KmsKeyId                                   = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "KmsKeyId"}
+	iListInvestigationGroupsModel                = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ListInvestigationGroupsModel"}
+	iResourceNotFoundException                   = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ResourceNotFoundException"}
+	i_Retention                                  = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "Retention"}
+	i_RoleArn                                    = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "RoleArn"}
+	i_SensitiveStringWithLengthLimits            = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "SensitiveStringWithLengthLimits"}
+	iServiceQuotaExceededException               = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ServiceQuotaExceededException"}
+	i_SNSTopicArn                                = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "SNSTopicArn"}
+	i_StringWithPatternAndLengthLimits           = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "StringWithPatternAndLengthLimits"}
+	i_TagKey                                     = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "TagKey"}
+	i_TagKeyBoundaries                           = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "TagKeyBoundaries"}
+	i_TagKeys                                    = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "TagKeys"}
+	i_Tags                                       = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "Tags"}
+	i_TagValue                                   = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "TagValue"}
+	iThrottlingException                         = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ThrottlingException"}
+	iValidationException                         = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ValidationException"}
+	iCreateInvestigationGroupInput               = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "CreateInvestigationGroupInput"}
+	iCreateInvestigationGroupOutput              = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "CreateInvestigationGroupOutput"}
+	iDeleteInvestigationGroupRequest             = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "DeleteInvestigationGroupRequest"}
+	iDeleteInvestigationGroupPolicyRequest       = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "DeleteInvestigationGroupPolicyRequest"}
+	iDeleteInvestigationGroupPolicyOutput        = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "DeleteInvestigationGroupPolicyOutput"}
+	iGetInvestigationGroupRequest                = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "GetInvestigationGroupRequest"}
+	iGetInvestigationGroupResponse               = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "GetInvestigationGroupResponse"}
+	iGetInvestigationGroupPolicyRequest          = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "GetInvestigationGroupPolicyRequest"}
+	iGetInvestigationGroupPolicyResponse         = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "GetInvestigationGroupPolicyResponse"}
+	iListInvestigationGroupsInput                = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ListInvestigationGroupsInput"}
+	iListInvestigationGroupsOutput               = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ListInvestigationGroupsOutput"}
+	iListTagsForResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "ListTagsForResourceOutput"}
+	iPutInvestigationGroupPolicyRequest          = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "PutInvestigationGroupPolicyRequest"}
+	iPutInvestigationGroupPolicyResponse         = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "PutInvestigationGroupPolicyResponse"}
+	iTagResourceRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "TagResourceRequest"}
+	iTagResourceResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "TagResourceResponse"}
+	iUntagResourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "UntagResourceResponse"}
+	iUpdateInvestigationGroupRequest             = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "UpdateInvestigationGroupRequest"}
+	iUpdateInvestigationGroupOutput              = smithy.ShapeName{Namespace: "com.amazonaws.aiops", Name: "UpdateInvestigationGroupOutput"}
+	pString                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pLong                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pInteger                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/investigationGroups",
-	Code: 201})
-
-var DeleteInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/investigationGroups/{identifier}",
-	Code: 200})
-
-var DeleteInvestigationGroupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/investigationGroups/{identifier}/policy",
-	Code: 200})
-
-var GetInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/investigationGroups/{identifier}",
-	Code: 200})
-
-var GetInvestigationGroupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/investigationGroups/{identifier}/policy",
-	Code: 200})
-
-var ListInvestigationGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/investigationGroups",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutInvestigationGroupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "PutInvestigationGroupPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/investigationGroups/{identifier}/policy",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UpdateInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/investigationGroups/{identifier}",
-	Code: 200})
-
-var _AIOps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "AIOps",
-}, smithy.ShapeTypeService, 0)
-
-var AIOps = smithy.NewServiceSchema(_AIOps, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ChatbotNotificationChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ChatbotNotificationChannel",
-}, smithy.ShapeTypeMap, 2)
-var _ChatbotNotificationChannel_key *smithy.Schema
-
-var _ChatbotNotificationChannel_value *smithy.Schema
-
-var _ChatConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ChatConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ChatConfigurationArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ChatConfigurationArns",
-}, smithy.ShapeTypeList, 1)
-var _ChatConfigurationArns_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CrossAccountConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CrossAccountConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CrossAccountConfiguration_sourceRoleArn *smithy.Schema
-
-var _CrossAccountConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CrossAccountConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _CrossAccountConfigurations_member *smithy.Schema
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfiguration_type *smithy.Schema
-
-var EncryptionConfiguration_kmsKeyId *smithy.Schema
-
-var EncryptionConfigurationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "EncryptionConfigurationType",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionConfigurationType_AWS_OWNED_KEY *smithy.Schema
-
-var EncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var _IdentifierStringWithPatternAndLengthLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "IdentifierStringWithPatternAndLengthLimits",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _InvestigationGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _InvestigationGroupIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroupIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _InvestigationGroupPolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroupPolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var _InvestigationGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroups",
-}, smithy.ShapeTypeList, 1)
-var _InvestigationGroups_member *smithy.Schema
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var ListInvestigationGroupsModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroupsModel",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvestigationGroupsModel_arn *smithy.Schema
-
-var ListInvestigationGroupsModel_name *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _Retention = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "Retention",
-}, smithy.ShapeTypeLong, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveStringWithLengthLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "SensitiveStringWithLengthLimits",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SNSTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "SNSTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithPatternAndLengthLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "StringWithPatternAndLengthLimits",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyBoundaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagKeyBoundaries",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyBoundaries_member *smithy.Schema
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateInvestigationGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CreateInvestigationGroupInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateInvestigationGroupInput_name *smithy.Schema
-
-var CreateInvestigationGroupInput_roleArn *smithy.Schema
-
-var CreateInvestigationGroupInput_encryptionConfiguration *smithy.Schema
-
-var CreateInvestigationGroupInput_retentionInDays *smithy.Schema
-
-var CreateInvestigationGroupInput_tags *smithy.Schema
-
-var CreateInvestigationGroupInput_tagKeyBoundaries *smithy.Schema
-
-var CreateInvestigationGroupInput_chatbotNotificationChannel *smithy.Schema
-
-var CreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled *smithy.Schema
-
-var CreateInvestigationGroupInput_crossAccountConfigurations *smithy.Schema
-
-var CreateInvestigationGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CreateInvestigationGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateInvestigationGroupOutput_arn *smithy.Schema
-
-var DeleteInvestigationGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInvestigationGroupRequest_identifier *smithy.Schema
-
-var DeleteInvestigationGroupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInvestigationGroupPolicyRequest_identifier *smithy.Schema
-
-var DeleteInvestigationGroupPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupPolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetInvestigationGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetInvestigationGroupRequest_identifier *smithy.Schema
-
-var GetInvestigationGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetInvestigationGroupResponse_createdBy *smithy.Schema
-
-var GetInvestigationGroupResponse_createdAt *smithy.Schema
-
-var GetInvestigationGroupResponse_lastModifiedBy *smithy.Schema
-
-var GetInvestigationGroupResponse_lastModifiedAt *smithy.Schema
-
-var GetInvestigationGroupResponse_name *smithy.Schema
-
-var GetInvestigationGroupResponse_arn *smithy.Schema
-
-var GetInvestigationGroupResponse_roleArn *smithy.Schema
-
-var GetInvestigationGroupResponse_encryptionConfiguration *smithy.Schema
-
-var GetInvestigationGroupResponse_retentionInDays *smithy.Schema
-
-var GetInvestigationGroupResponse_chatbotNotificationChannel *smithy.Schema
-
-var GetInvestigationGroupResponse_tagKeyBoundaries *smithy.Schema
-
-var GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled *smithy.Schema
-
-var GetInvestigationGroupResponse_crossAccountConfigurations *smithy.Schema
-
-var GetInvestigationGroupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetInvestigationGroupPolicyRequest_identifier *smithy.Schema
-
-var GetInvestigationGroupPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetInvestigationGroupPolicyResponse_investigationGroupArn *smithy.Schema
-
-var GetInvestigationGroupPolicyResponse_policy *smithy.Schema
-
-var ListInvestigationGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroupsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvestigationGroupsInput_nextToken *smithy.Schema
-
-var ListInvestigationGroupsInput_maxResults *smithy.Schema
-
-var ListInvestigationGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvestigationGroupsOutput_nextToken *smithy.Schema
-
-var ListInvestigationGroupsOutput_investigationGroups *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var PutInvestigationGroupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "PutInvestigationGroupPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutInvestigationGroupPolicyRequest_identifier *smithy.Schema
-
-var PutInvestigationGroupPolicyRequest_policy *smithy.Schema
-
-var PutInvestigationGroupPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "PutInvestigationGroupPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutInvestigationGroupPolicyResponse_investigationGroupArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateInvestigationGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UpdateInvestigationGroupRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateInvestigationGroupRequest_identifier *smithy.Schema
-
-var UpdateInvestigationGroupRequest_roleArn *smithy.Schema
-
-var UpdateInvestigationGroupRequest_encryptionConfiguration *smithy.Schema
-
-var UpdateInvestigationGroupRequest_tagKeyBoundaries *smithy.Schema
-
-var UpdateInvestigationGroupRequest_chatbotNotificationChannel *smithy.Schema
-
-var UpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled *smithy.Schema
-
-var UpdateInvestigationGroupRequest_crossAccountConfigurations *smithy.Schema
-
-var UpdateInvestigationGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UpdateInvestigationGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_ChatConfigurationArns_member = _ChatConfigurationArns.AddMember("member", _ChatConfigurationArn)
-
-	_ChatbotNotificationChannel_key = _ChatbotNotificationChannel.AddMember("key", _SNSTopicArn)
-
-	_ChatbotNotificationChannel_value = _ChatbotNotificationChannel.AddMember("value", _ChatConfigurationArns)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	CrossAccountConfiguration_sourceRoleArn = CrossAccountConfiguration.AddMember("sourceRoleArn", _RoleArn)
-
-	_CrossAccountConfigurations_member = _CrossAccountConfigurations.AddMember("member", CrossAccountConfiguration)
-
-	EncryptionConfigurationType_AWS_OWNED_KEY = EncryptionConfigurationType.AddMember("AWS_OWNED_KEY", smithyprelude.Unit)
-
-	EncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY = EncryptionConfigurationType.AddMember("CUSTOMER_MANAGED_KMS_KEY", smithyprelude.Unit)
-
-	EncryptionConfiguration_type = EncryptionConfiguration.AddMember("type", EncryptionConfigurationType)
-
-	EncryptionConfiguration_kmsKeyId = EncryptionConfiguration.AddMember("kmsKeyId", _KmsKeyId)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ListInvestigationGroupsModel_arn = ListInvestigationGroupsModel.AddMember("arn", _InvestigationGroupArn)
-
-	ListInvestigationGroupsModel_name = ListInvestigationGroupsModel.AddMember("name", _StringWithPatternAndLengthLimits)
-
-	_InvestigationGroups_member = _InvestigationGroups.AddMember("member", ListInvestigationGroupsModel)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeyBoundaries_member = _TagKeyBoundaries.AddMember("member", _TagKey)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateInvestigationGroupInput_name = CreateInvestigationGroupInput.AddMember("name", _StringWithPatternAndLengthLimits)
-
-	CreateInvestigationGroupInput_roleArn = CreateInvestigationGroupInput.AddMember("roleArn", _RoleArn)
-
-	CreateInvestigationGroupInput_encryptionConfiguration = CreateInvestigationGroupInput.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	CreateInvestigationGroupInput_retentionInDays = CreateInvestigationGroupInput.AddMember("retentionInDays", _Retention)
-
-	CreateInvestigationGroupInput_tags = CreateInvestigationGroupInput.AddMember("tags", _Tags)
-
-	CreateInvestigationGroupInput_tagKeyBoundaries = CreateInvestigationGroupInput.AddMember("tagKeyBoundaries", _TagKeyBoundaries)
-
-	CreateInvestigationGroupInput_chatbotNotificationChannel = CreateInvestigationGroupInput.AddMember("chatbotNotificationChannel", _ChatbotNotificationChannel)
-
-	CreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled = CreateInvestigationGroupInput.AddMember("isCloudTrailEventHistoryEnabled", smithyprelude.Boolean)
-
-	CreateInvestigationGroupInput_crossAccountConfigurations = CreateInvestigationGroupInput.AddMember("crossAccountConfigurations", _CrossAccountConfigurations)
-
-	CreateInvestigationGroupOutput_arn = CreateInvestigationGroupOutput.AddMember("arn", _InvestigationGroupArn)
-
-	DeleteInvestigationGroupRequest_identifier = DeleteInvestigationGroupRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteInvestigationGroupPolicyRequest_identifier = DeleteInvestigationGroupPolicyRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	GetInvestigationGroupRequest_identifier = GetInvestigationGroupRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	GetInvestigationGroupResponse_createdBy = GetInvestigationGroupResponse.AddMember("createdBy", _IdentifierStringWithPatternAndLengthLimits)
-
-	GetInvestigationGroupResponse_createdAt = GetInvestigationGroupResponse.AddMember("createdAt", smithyprelude.Long)
-
-	GetInvestigationGroupResponse_lastModifiedBy = GetInvestigationGroupResponse.AddMember("lastModifiedBy", _IdentifierStringWithPatternAndLengthLimits)
-
-	GetInvestigationGroupResponse_lastModifiedAt = GetInvestigationGroupResponse.AddMember("lastModifiedAt", smithyprelude.Long)
-
-	GetInvestigationGroupResponse_name = GetInvestigationGroupResponse.AddMember("name", _StringWithPatternAndLengthLimits)
-
-	GetInvestigationGroupResponse_arn = GetInvestigationGroupResponse.AddMember("arn", _InvestigationGroupArn)
-
-	GetInvestigationGroupResponse_roleArn = GetInvestigationGroupResponse.AddMember("roleArn", _RoleArn)
-
-	GetInvestigationGroupResponse_encryptionConfiguration = GetInvestigationGroupResponse.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	GetInvestigationGroupResponse_retentionInDays = GetInvestigationGroupResponse.AddMember("retentionInDays", _Retention)
-
-	GetInvestigationGroupResponse_chatbotNotificationChannel = GetInvestigationGroupResponse.AddMember("chatbotNotificationChannel", _ChatbotNotificationChannel)
-
-	GetInvestigationGroupResponse_tagKeyBoundaries = GetInvestigationGroupResponse.AddMember("tagKeyBoundaries", _TagKeyBoundaries)
-
-	GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled = GetInvestigationGroupResponse.AddMember("isCloudTrailEventHistoryEnabled", smithyprelude.Boolean)
-
-	GetInvestigationGroupResponse_crossAccountConfigurations = GetInvestigationGroupResponse.AddMember("crossAccountConfigurations", _CrossAccountConfigurations)
-
-	GetInvestigationGroupPolicyRequest_identifier = GetInvestigationGroupPolicyRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	GetInvestigationGroupPolicyResponse_investigationGroupArn = GetInvestigationGroupPolicyResponse.AddMember("investigationGroupArn", _InvestigationGroupArn)
-
-	GetInvestigationGroupPolicyResponse_policy = GetInvestigationGroupPolicyResponse.AddMember("policy", _InvestigationGroupPolicyDocument)
-
-	ListInvestigationGroupsInput_nextToken = ListInvestigationGroupsInput.AddMember("nextToken", _SensitiveStringWithLengthLimits, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListInvestigationGroupsInput_maxResults = ListInvestigationGroupsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListInvestigationGroupsOutput_nextToken = ListInvestigationGroupsOutput.AddMember("nextToken", _SensitiveStringWithLengthLimits)
-
-	ListInvestigationGroupsOutput_investigationGroups = ListInvestigationGroupsOutput.AddMember("investigationGroups", _InvestigationGroups)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _Tags)
-
-	PutInvestigationGroupPolicyRequest_identifier = PutInvestigationGroupPolicyRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	PutInvestigationGroupPolicyRequest_policy = PutInvestigationGroupPolicyRequest.AddMember("policy", _InvestigationGroupPolicyDocument)
-
-	PutInvestigationGroupPolicyResponse_investigationGroupArn = PutInvestigationGroupPolicyResponse.AddMember("investigationGroupArn", _InvestigationGroupArn)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateInvestigationGroupRequest_identifier = UpdateInvestigationGroupRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateInvestigationGroupRequest_roleArn = UpdateInvestigationGroupRequest.AddMember("roleArn", _RoleArn)
-
-	UpdateInvestigationGroupRequest_encryptionConfiguration = UpdateInvestigationGroupRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	UpdateInvestigationGroupRequest_tagKeyBoundaries = UpdateInvestigationGroupRequest.AddMember("tagKeyBoundaries", _TagKeyBoundaries)
-
-	UpdateInvestigationGroupRequest_chatbotNotificationChannel = UpdateInvestigationGroupRequest.AddMember("chatbotNotificationChannel", _ChatbotNotificationChannel)
-
-	UpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled = UpdateInvestigationGroupRequest.AddMember("isCloudTrailEventHistoryEnabled", smithyprelude.Boolean)
-
-	UpdateInvestigationGroupRequest_crossAccountConfigurations = UpdateInvestigationGroupRequest.AddMember("crossAccountConfigurations", _CrossAccountConfigurations)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_ChatbotNotificationChannel = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChatbotNotificationChannel_key, &s_ChatbotNotificationChannel_value}}
+var m_ChatConfigurationArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChatConfigurationArns_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCrossAccountConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCrossAccountConfiguration_sourceRoleArn}}
+var m_CrossAccountConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_CrossAccountConfigurations_member}}
+var mEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfiguration_type, &sEncryptionConfiguration_kmsKeyId}}
+var mEncryptionConfigurationType = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfigurationType_AWS_OWNED_KEY, &sEncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_message}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_InvestigationGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvestigationGroups_member}}
+var mListInvestigationGroupsModel = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvestigationGroupsModel_arn, &sListInvestigationGroupsModel_name}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var m_TagKeyBoundaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyBoundaries_member}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateInvestigationGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateInvestigationGroupInput_name, &sCreateInvestigationGroupInput_roleArn, &sCreateInvestigationGroupInput_encryptionConfiguration, &sCreateInvestigationGroupInput_retentionInDays, &sCreateInvestigationGroupInput_tags, &sCreateInvestigationGroupInput_tagKeyBoundaries, &sCreateInvestigationGroupInput_chatbotNotificationChannel, &sCreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled, &sCreateInvestigationGroupInput_crossAccountConfigurations}, Hash: &hCreateInvestigationGroupInput}
+var mCreateInvestigationGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateInvestigationGroupOutput_arn}}
+var mDeleteInvestigationGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInvestigationGroupRequest_identifier}}
+var mDeleteInvestigationGroupPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInvestigationGroupPolicyRequest_identifier}}
+var mGetInvestigationGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInvestigationGroupRequest_identifier}}
+var mGetInvestigationGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInvestigationGroupResponse_createdBy, &sGetInvestigationGroupResponse_createdAt, &sGetInvestigationGroupResponse_lastModifiedBy, &sGetInvestigationGroupResponse_lastModifiedAt, &sGetInvestigationGroupResponse_name, &sGetInvestigationGroupResponse_arn, &sGetInvestigationGroupResponse_roleArn, &sGetInvestigationGroupResponse_encryptionConfiguration, &sGetInvestigationGroupResponse_retentionInDays, &sGetInvestigationGroupResponse_chatbotNotificationChannel, &sGetInvestigationGroupResponse_tagKeyBoundaries, &sGetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled, &sGetInvestigationGroupResponse_crossAccountConfigurations}, Hash: &hGetInvestigationGroupResponse}
+var mGetInvestigationGroupPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInvestigationGroupPolicyRequest_identifier}}
+var mGetInvestigationGroupPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInvestigationGroupPolicyResponse_investigationGroupArn, &sGetInvestigationGroupPolicyResponse_policy}}
+var mListInvestigationGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvestigationGroupsInput_nextToken, &sListInvestigationGroupsInput_maxResults}}
+var mListInvestigationGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvestigationGroupsOutput_nextToken, &sListInvestigationGroupsOutput_investigationGroups}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mPutInvestigationGroupPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutInvestigationGroupPolicyRequest_identifier, &sPutInvestigationGroupPolicyRequest_policy}}
+var mPutInvestigationGroupPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutInvestigationGroupPolicyResponse_investigationGroupArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateInvestigationGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateInvestigationGroupRequest_identifier, &sUpdateInvestigationGroupRequest_roleArn, &sUpdateInvestigationGroupRequest_encryptionConfiguration, &sUpdateInvestigationGroupRequest_tagKeyBoundaries, &sUpdateInvestigationGroupRequest_chatbotNotificationChannel, &sUpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled, &sUpdateInvestigationGroupRequest_crossAccountConfigurations}}
+
+var hCreateInvestigationGroupInput = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 8, 0, 3, 0, 0, 0, 7, 0, 0, 0,
+	0, 2, 6, 0, 4, 5, 0, 0,
+}}
+var hGetInvestigationGroupResponse = smithy.MemberHash{Seed: 15, Slots: []uint16{
+	9, 0, 0, 0, 0, 6, 4, 0, 0, 0, 0, 12, 5, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0, 7,
+	8, 10, 0, 0, 11, 0, 13, 2,
+}}
+
+var sCreateInvestigationGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvestigationGroup, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateInvestigationGroup})
+var sDeleteInvestigationGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvestigationGroup, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteInvestigationGroup})
+var sDeleteInvestigationGroupPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvestigationGroupPolicy, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteInvestigationGroupPolicy})
+var sGetInvestigationGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetInvestigationGroup})
+var sGetInvestigationGroupPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationGroupPolicy, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetInvestigationGroupPolicy})
+var sListInvestigationGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvestigationGroups, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListInvestigationGroups})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutInvestigationGroupPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInvestigationGroupPolicy, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ePutInvestigationGroupPolicy})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateInvestigationGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvestigationGroup, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eUpdateInvestigationGroup})
+var s_AIOps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AIOps, Type: smithy.ShapeTypeService, Ext: &e_AIOps})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_ChatbotNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatbotNotificationChannel, Members: &m_ChatbotNotificationChannel, Type: smithy.ShapeTypeMap, Ext: &e_ChatbotNotificationChannel})
+var s_ChatbotNotificationChannel_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SNSTopicArn, Type: smithy.ShapeTypeString, Ext: &e_ChatbotNotificationChannel_key})
+var s_ChatbotNotificationChannel_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ChatConfigurationArns, Members: &m_ChatConfigurationArns, Type: smithy.ShapeTypeList, Ext: &e_ChatbotNotificationChannel_value})
+var s_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_ChatConfigurationArn})
+var s_ChatConfigurationArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatConfigurationArns, Members: &m_ChatConfigurationArns, Type: smithy.ShapeTypeList, Ext: &e_ChatConfigurationArns})
+var s_ChatConfigurationArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_ChatConfigurationArns_member})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sCrossAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossAccountConfiguration, Members: &mCrossAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCrossAccountConfiguration})
+var sCrossAccountConfiguration_sourceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCrossAccountConfiguration_sourceRoleArn})
+var s_CrossAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossAccountConfigurations, Members: &m_CrossAccountConfigurations, Type: smithy.ShapeTypeList, Ext: &e_CrossAccountConfigurations})
+var s_CrossAccountConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossAccountConfiguration, Members: &mCrossAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_CrossAccountConfigurations_member})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
+var sEncryptionConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEncryptionConfigurationType, Members: &mEncryptionConfigurationType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionConfiguration_type})
+var sEncryptionConfiguration_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfiguration_kmsKeyId})
+var sEncryptionConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfigurationType, Members: &mEncryptionConfigurationType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionConfigurationType})
+var sEncryptionConfigurationType_AWS_OWNED_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_OWNED_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfigurationType_AWS_OWNED_KEY})
+var sEncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_MANAGED_KMS_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_message})
+var s_IdentifierStringWithPatternAndLengthLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentifierStringWithPatternAndLengthLimits, Type: smithy.ShapeTypeString, Ext: &e_IdentifierStringWithPatternAndLengthLimits})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_InvestigationGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvestigationGroupArn, Type: smithy.ShapeTypeString, Ext: &e_InvestigationGroupArn})
+var s_InvestigationGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvestigationGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &e_InvestigationGroupIdentifier})
+var s_InvestigationGroupPolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvestigationGroupPolicyDocument, Type: smithy.ShapeTypeString, Ext: &e_InvestigationGroupPolicyDocument})
+var s_InvestigationGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvestigationGroups, Members: &m_InvestigationGroups, Type: smithy.ShapeTypeList, Ext: &e_InvestigationGroups})
+var s_InvestigationGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListInvestigationGroupsModel, Members: &mListInvestigationGroupsModel, Type: smithy.ShapeTypeStructure, Ext: &e_InvestigationGroups_member})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyId})
+var sListInvestigationGroupsModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvestigationGroupsModel, Members: &mListInvestigationGroupsModel, Type: smithy.ShapeTypeStructure, Ext: &eListInvestigationGroupsModel})
+var sListInvestigationGroupsModel_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_InvestigationGroupArn, Type: smithy.ShapeTypeString, Ext: &eListInvestigationGroupsModel_arn})
+var sListInvestigationGroupsModel_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StringWithPatternAndLengthLimits, Type: smithy.ShapeTypeString, Ext: &eListInvestigationGroupsModel_name})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_Retention = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Retention, Type: smithy.ShapeTypeLong, Ext: &e_Retention})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_SensitiveStringWithLengthLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveStringWithLengthLimits, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &e_SensitiveStringWithLengthLimits})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_SNSTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNSTopicArn, Type: smithy.ShapeTypeString, Ext: &e_SNSTopicArn})
+var s_StringWithPatternAndLengthLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithPatternAndLengthLimits, Type: smithy.ShapeTypeString, Ext: &e_StringWithPatternAndLengthLimits})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyBoundaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyBoundaries, Members: &m_TagKeyBoundaries, Type: smithy.ShapeTypeList, Ext: &e_TagKeyBoundaries})
+var s_TagKeyBoundaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyBoundaries_member})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateInvestigationGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvestigationGroupInput, Members: &mCreateInvestigationGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateInvestigationGroupInput})
+var sCreateInvestigationGroupInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StringWithPatternAndLengthLimits, Type: smithy.ShapeTypeString, Ext: &eCreateInvestigationGroupInput_name})
+var sCreateInvestigationGroupInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateInvestigationGroupInput_roleArn})
+var sCreateInvestigationGroupInput_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateInvestigationGroupInput_encryptionConfiguration})
+var sCreateInvestigationGroupInput_retentionInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionInDays", ID: &i_Retention, Type: smithy.ShapeTypeLong, Ext: &eCreateInvestigationGroupInput_retentionInDays})
+var sCreateInvestigationGroupInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateInvestigationGroupInput_tags})
+var sCreateInvestigationGroupInput_tagKeyBoundaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeyBoundaries", ID: &i_TagKeyBoundaries, Members: &m_TagKeyBoundaries, Type: smithy.ShapeTypeList, Ext: &eCreateInvestigationGroupInput_tagKeyBoundaries})
+var sCreateInvestigationGroupInput_chatbotNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatbotNotificationChannel", ID: &i_ChatbotNotificationChannel, Members: &m_ChatbotNotificationChannel, Type: smithy.ShapeTypeMap, Ext: &eCreateInvestigationGroupInput_chatbotNotificationChannel})
+var sCreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCloudTrailEventHistoryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled})
+var sCreateInvestigationGroupInput_crossAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crossAccountConfigurations", ID: &i_CrossAccountConfigurations, Members: &m_CrossAccountConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateInvestigationGroupInput_crossAccountConfigurations})
+var sCreateInvestigationGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvestigationGroupOutput, Members: &mCreateInvestigationGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateInvestigationGroupOutput})
+var sCreateInvestigationGroupOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_InvestigationGroupArn, Type: smithy.ShapeTypeString, Ext: &eCreateInvestigationGroupOutput_arn})
+var sDeleteInvestigationGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvestigationGroupRequest, Members: &mDeleteInvestigationGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInvestigationGroupRequest})
+var sDeleteInvestigationGroupRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_InvestigationGroupIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDeleteInvestigationGroupRequest_identifier})
+var sDeleteInvestigationGroupPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvestigationGroupPolicyRequest, Members: &mDeleteInvestigationGroupPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInvestigationGroupPolicyRequest})
+var sDeleteInvestigationGroupPolicyRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_InvestigationGroupIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDeleteInvestigationGroupPolicyRequest_identifier})
+var sDeleteInvestigationGroupPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvestigationGroupPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInvestigationGroupPolicyOutput})
+var sGetInvestigationGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationGroupRequest, Members: &mGetInvestigationGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInvestigationGroupRequest})
+var sGetInvestigationGroupRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_InvestigationGroupIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupRequest_identifier})
+var sGetInvestigationGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationGroupResponse, Members: &mGetInvestigationGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInvestigationGroupResponse})
+var sGetInvestigationGroupResponse_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_IdentifierStringWithPatternAndLengthLimits, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupResponse_createdBy})
+var sGetInvestigationGroupResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetInvestigationGroupResponse_createdAt})
+var sGetInvestigationGroupResponse_lastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedBy", ID: &i_IdentifierStringWithPatternAndLengthLimits, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupResponse_lastModifiedBy})
+var sGetInvestigationGroupResponse_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetInvestigationGroupResponse_lastModifiedAt})
+var sGetInvestigationGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StringWithPatternAndLengthLimits, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupResponse_name})
+var sGetInvestigationGroupResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_InvestigationGroupArn, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupResponse_arn})
+var sGetInvestigationGroupResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupResponse_roleArn})
+var sGetInvestigationGroupResponse_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetInvestigationGroupResponse_encryptionConfiguration})
+var sGetInvestigationGroupResponse_retentionInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionInDays", ID: &i_Retention, Type: smithy.ShapeTypeLong, Ext: &eGetInvestigationGroupResponse_retentionInDays})
+var sGetInvestigationGroupResponse_chatbotNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatbotNotificationChannel", ID: &i_ChatbotNotificationChannel, Members: &m_ChatbotNotificationChannel, Type: smithy.ShapeTypeMap, Ext: &eGetInvestigationGroupResponse_chatbotNotificationChannel})
+var sGetInvestigationGroupResponse_tagKeyBoundaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeyBoundaries", ID: &i_TagKeyBoundaries, Members: &m_TagKeyBoundaries, Type: smithy.ShapeTypeList, Ext: &eGetInvestigationGroupResponse_tagKeyBoundaries})
+var sGetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCloudTrailEventHistoryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled})
+var sGetInvestigationGroupResponse_crossAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crossAccountConfigurations", ID: &i_CrossAccountConfigurations, Members: &m_CrossAccountConfigurations, Type: smithy.ShapeTypeList, Ext: &eGetInvestigationGroupResponse_crossAccountConfigurations})
+var sGetInvestigationGroupPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationGroupPolicyRequest, Members: &mGetInvestigationGroupPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInvestigationGroupPolicyRequest})
+var sGetInvestigationGroupPolicyRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_InvestigationGroupIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupPolicyRequest_identifier})
+var sGetInvestigationGroupPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationGroupPolicyResponse, Members: &mGetInvestigationGroupPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInvestigationGroupPolicyResponse})
+var sGetInvestigationGroupPolicyResponse_investigationGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "investigationGroupArn", ID: &i_InvestigationGroupArn, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupPolicyResponse_investigationGroupArn})
+var sGetInvestigationGroupPolicyResponse_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_InvestigationGroupPolicyDocument, Type: smithy.ShapeTypeString, Ext: &eGetInvestigationGroupPolicyResponse_policy})
+var sListInvestigationGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvestigationGroupsInput, Members: &mListInvestigationGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eListInvestigationGroupsInput})
+var sListInvestigationGroupsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_SensitiveStringWithLengthLimits, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListInvestigationGroupsInput_nextToken})
+var sListInvestigationGroupsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListInvestigationGroupsInput_maxResults})
+var sListInvestigationGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvestigationGroupsOutput, Members: &mListInvestigationGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListInvestigationGroupsOutput})
+var sListInvestigationGroupsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_SensitiveStringWithLengthLimits, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListInvestigationGroupsOutput_nextToken})
+var sListInvestigationGroupsOutput_investigationGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "investigationGroups", ID: &i_InvestigationGroups, Members: &m_InvestigationGroups, Type: smithy.ShapeTypeList, Ext: &eListInvestigationGroupsOutput_investigationGroups})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sPutInvestigationGroupPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInvestigationGroupPolicyRequest, Members: &mPutInvestigationGroupPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutInvestigationGroupPolicyRequest})
+var sPutInvestigationGroupPolicyRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_InvestigationGroupIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ePutInvestigationGroupPolicyRequest_identifier})
+var sPutInvestigationGroupPolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_InvestigationGroupPolicyDocument, Type: smithy.ShapeTypeString, Ext: &ePutInvestigationGroupPolicyRequest_policy})
+var sPutInvestigationGroupPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInvestigationGroupPolicyResponse, Members: &mPutInvestigationGroupPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutInvestigationGroupPolicyResponse})
+var sPutInvestigationGroupPolicyResponse_investigationGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "investigationGroupArn", ID: &i_InvestigationGroupArn, Type: smithy.ShapeTypeString, Ext: &ePutInvestigationGroupPolicyResponse_investigationGroupArn})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t23, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateInvestigationGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvestigationGroupRequest, Members: &mUpdateInvestigationGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateInvestigationGroupRequest})
+var sUpdateInvestigationGroupRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_InvestigationGroupIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateInvestigationGroupRequest_identifier})
+var sUpdateInvestigationGroupRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateInvestigationGroupRequest_roleArn})
+var sUpdateInvestigationGroupRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateInvestigationGroupRequest_encryptionConfiguration})
+var sUpdateInvestigationGroupRequest_tagKeyBoundaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeyBoundaries", ID: &i_TagKeyBoundaries, Members: &m_TagKeyBoundaries, Type: smithy.ShapeTypeList, Ext: &eUpdateInvestigationGroupRequest_tagKeyBoundaries})
+var sUpdateInvestigationGroupRequest_chatbotNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatbotNotificationChannel", ID: &i_ChatbotNotificationChannel, Members: &m_ChatbotNotificationChannel, Type: smithy.ShapeTypeMap, Ext: &eUpdateInvestigationGroupRequest_chatbotNotificationChannel})
+var sUpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCloudTrailEventHistoryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled})
+var sUpdateInvestigationGroupRequest_crossAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crossAccountConfigurations", ID: &i_CrossAccountConfigurations, Members: &m_CrossAccountConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateInvestigationGroupRequest_crossAccountConfigurations})
+var sUpdateInvestigationGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvestigationGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateInvestigationGroupOutput})
+
+var CreateInvestigationGroup = &sCreateInvestigationGroup
+
+var DeleteInvestigationGroup = &sDeleteInvestigationGroup
+
+var DeleteInvestigationGroupPolicy = &sDeleteInvestigationGroupPolicy
+
+var GetInvestigationGroup = &sGetInvestigationGroup
+
+var GetInvestigationGroupPolicy = &sGetInvestigationGroupPolicy
+
+var ListInvestigationGroups = &sListInvestigationGroups
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutInvestigationGroupPolicy = &sPutInvestigationGroupPolicy
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateInvestigationGroup = &sUpdateInvestigationGroup
+
+var _AIOps = &s_AIOps
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _ChatbotNotificationChannel = &s_ChatbotNotificationChannel
+var _ChatbotNotificationChannel_key = &s_ChatbotNotificationChannel_key
+var _ChatbotNotificationChannel_value = &s_ChatbotNotificationChannel_value
+
+var _ChatConfigurationArn = &s_ChatConfigurationArn
+
+var _ChatConfigurationArns = &s_ChatConfigurationArns
+var _ChatConfigurationArns_member = &s_ChatConfigurationArns_member
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CrossAccountConfiguration = &sCrossAccountConfiguration
+var CrossAccountConfiguration_sourceRoleArn = &sCrossAccountConfiguration_sourceRoleArn
+
+var _CrossAccountConfigurations = &s_CrossAccountConfigurations
+var _CrossAccountConfigurations_member = &s_CrossAccountConfigurations_member
+
+var EncryptionConfiguration = &sEncryptionConfiguration
+var EncryptionConfiguration_type = &sEncryptionConfiguration_type
+var EncryptionConfiguration_kmsKeyId = &sEncryptionConfiguration_kmsKeyId
+
+var EncryptionConfigurationType = &sEncryptionConfigurationType
+var EncryptionConfigurationType_AWS_OWNED_KEY = &sEncryptionConfigurationType_AWS_OWNED_KEY
+var EncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY = &sEncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_message = &sForbiddenException_message
+
+var _IdentifierStringWithPatternAndLengthLimits = &s_IdentifierStringWithPatternAndLengthLimits
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _InvestigationGroupArn = &s_InvestigationGroupArn
+
+var _InvestigationGroupIdentifier = &s_InvestigationGroupIdentifier
+
+var _InvestigationGroupPolicyDocument = &s_InvestigationGroupPolicyDocument
+
+var _InvestigationGroups = &s_InvestigationGroups
+var _InvestigationGroups_member = &s_InvestigationGroups_member
+
+var _KmsKeyId = &s_KmsKeyId
+
+var ListInvestigationGroupsModel = &sListInvestigationGroupsModel
+var ListInvestigationGroupsModel_arn = &sListInvestigationGroupsModel_arn
+var ListInvestigationGroupsModel_name = &sListInvestigationGroupsModel_name
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _Retention = &s_Retention
+
+var _RoleArn = &s_RoleArn
+
+var _SensitiveStringWithLengthLimits = &s_SensitiveStringWithLengthLimits
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _SNSTopicArn = &s_SNSTopicArn
+
+var _StringWithPatternAndLengthLimits = &s_StringWithPatternAndLengthLimits
+
+var _TagKey = &s_TagKey
+
+var _TagKeyBoundaries = &s_TagKeyBoundaries
+var _TagKeyBoundaries_member = &s_TagKeyBoundaries_member
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CreateInvestigationGroupInput = &sCreateInvestigationGroupInput
+var CreateInvestigationGroupInput_name = &sCreateInvestigationGroupInput_name
+var CreateInvestigationGroupInput_roleArn = &sCreateInvestigationGroupInput_roleArn
+var CreateInvestigationGroupInput_encryptionConfiguration = &sCreateInvestigationGroupInput_encryptionConfiguration
+var CreateInvestigationGroupInput_retentionInDays = &sCreateInvestigationGroupInput_retentionInDays
+var CreateInvestigationGroupInput_tags = &sCreateInvestigationGroupInput_tags
+var CreateInvestigationGroupInput_tagKeyBoundaries = &sCreateInvestigationGroupInput_tagKeyBoundaries
+var CreateInvestigationGroupInput_chatbotNotificationChannel = &sCreateInvestigationGroupInput_chatbotNotificationChannel
+var CreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled = &sCreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled
+var CreateInvestigationGroupInput_crossAccountConfigurations = &sCreateInvestigationGroupInput_crossAccountConfigurations
+
+var CreateInvestigationGroupOutput = &sCreateInvestigationGroupOutput
+var CreateInvestigationGroupOutput_arn = &sCreateInvestigationGroupOutput_arn
+
+var DeleteInvestigationGroupRequest = &sDeleteInvestigationGroupRequest
+var DeleteInvestigationGroupRequest_identifier = &sDeleteInvestigationGroupRequest_identifier
+
+var DeleteInvestigationGroupPolicyRequest = &sDeleteInvestigationGroupPolicyRequest
+var DeleteInvestigationGroupPolicyRequest_identifier = &sDeleteInvestigationGroupPolicyRequest_identifier
+
+var DeleteInvestigationGroupPolicyOutput = &sDeleteInvestigationGroupPolicyOutput
+
+var GetInvestigationGroupRequest = &sGetInvestigationGroupRequest
+var GetInvestigationGroupRequest_identifier = &sGetInvestigationGroupRequest_identifier
+
+var GetInvestigationGroupResponse = &sGetInvestigationGroupResponse
+var GetInvestigationGroupResponse_createdBy = &sGetInvestigationGroupResponse_createdBy
+var GetInvestigationGroupResponse_createdAt = &sGetInvestigationGroupResponse_createdAt
+var GetInvestigationGroupResponse_lastModifiedBy = &sGetInvestigationGroupResponse_lastModifiedBy
+var GetInvestigationGroupResponse_lastModifiedAt = &sGetInvestigationGroupResponse_lastModifiedAt
+var GetInvestigationGroupResponse_name = &sGetInvestigationGroupResponse_name
+var GetInvestigationGroupResponse_arn = &sGetInvestigationGroupResponse_arn
+var GetInvestigationGroupResponse_roleArn = &sGetInvestigationGroupResponse_roleArn
+var GetInvestigationGroupResponse_encryptionConfiguration = &sGetInvestigationGroupResponse_encryptionConfiguration
+var GetInvestigationGroupResponse_retentionInDays = &sGetInvestigationGroupResponse_retentionInDays
+var GetInvestigationGroupResponse_chatbotNotificationChannel = &sGetInvestigationGroupResponse_chatbotNotificationChannel
+var GetInvestigationGroupResponse_tagKeyBoundaries = &sGetInvestigationGroupResponse_tagKeyBoundaries
+var GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled = &sGetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled
+var GetInvestigationGroupResponse_crossAccountConfigurations = &sGetInvestigationGroupResponse_crossAccountConfigurations
+
+var GetInvestigationGroupPolicyRequest = &sGetInvestigationGroupPolicyRequest
+var GetInvestigationGroupPolicyRequest_identifier = &sGetInvestigationGroupPolicyRequest_identifier
+
+var GetInvestigationGroupPolicyResponse = &sGetInvestigationGroupPolicyResponse
+var GetInvestigationGroupPolicyResponse_investigationGroupArn = &sGetInvestigationGroupPolicyResponse_investigationGroupArn
+var GetInvestigationGroupPolicyResponse_policy = &sGetInvestigationGroupPolicyResponse_policy
+
+var ListInvestigationGroupsInput = &sListInvestigationGroupsInput
+var ListInvestigationGroupsInput_nextToken = &sListInvestigationGroupsInput_nextToken
+var ListInvestigationGroupsInput_maxResults = &sListInvestigationGroupsInput_maxResults
+
+var ListInvestigationGroupsOutput = &sListInvestigationGroupsOutput
+var ListInvestigationGroupsOutput_nextToken = &sListInvestigationGroupsOutput_nextToken
+var ListInvestigationGroupsOutput_investigationGroups = &sListInvestigationGroupsOutput_investigationGroups
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var PutInvestigationGroupPolicyRequest = &sPutInvestigationGroupPolicyRequest
+var PutInvestigationGroupPolicyRequest_identifier = &sPutInvestigationGroupPolicyRequest_identifier
+var PutInvestigationGroupPolicyRequest_policy = &sPutInvestigationGroupPolicyRequest_policy
+
+var PutInvestigationGroupPolicyResponse = &sPutInvestigationGroupPolicyResponse
+var PutInvestigationGroupPolicyResponse_investigationGroupArn = &sPutInvestigationGroupPolicyResponse_investigationGroupArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateInvestigationGroupRequest = &sUpdateInvestigationGroupRequest
+var UpdateInvestigationGroupRequest_identifier = &sUpdateInvestigationGroupRequest_identifier
+var UpdateInvestigationGroupRequest_roleArn = &sUpdateInvestigationGroupRequest_roleArn
+var UpdateInvestigationGroupRequest_encryptionConfiguration = &sUpdateInvestigationGroupRequest_encryptionConfiguration
+var UpdateInvestigationGroupRequest_tagKeyBoundaries = &sUpdateInvestigationGroupRequest_tagKeyBoundaries
+var UpdateInvestigationGroupRequest_chatbotNotificationChannel = &sUpdateInvestigationGroupRequest_chatbotNotificationChannel
+var UpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled = &sUpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled
+var UpdateInvestigationGroupRequest_crossAccountConfigurations = &sUpdateInvestigationGroupRequest_crossAccountConfigurations
+
+var UpdateInvestigationGroupOutput = &sUpdateInvestigationGroupOutput
+
+var AIOps = &smithy.ServiceSchema{Schema: &s_AIOps, Version: "2018-05-10"}

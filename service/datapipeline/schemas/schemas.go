@@ -4,1062 +4,1062 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ActivatePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ActivatePipeline",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "AddTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "CreatePipeline",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeactivatePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DeactivatePipeline",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DeletePipeline",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeObjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DescribeObjects",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePipelines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DescribePipelines",
-}, smithy.ShapeTypeOperation, 0)
-
-var EvaluateExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "EvaluateExpression",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPipelineDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "GetPipelineDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPipelines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ListPipelines",
-}, smithy.ShapeTypeOperation, 0)
-
-var PollForTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PollForTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutPipelineDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PutPipelineDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var QueryObjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "QueryObjects",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "RemoveTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var ReportTaskProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ReportTaskProgress",
-}, smithy.ShapeTypeOperation, 0)
-
-var ReportTaskRunnerHeartbeat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ReportTaskRunnerHeartbeat",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "SetStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "SetTaskStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var ValidatePipelineDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ValidatePipelineDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var _DataPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DataPipeline",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://datapipeline.amazonaws.com/doc/2012-10-29/"})
-
-var DataPipeline = smithy.NewServiceSchema(_DataPipeline, "2012-10-29")
-
-var _attributeNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "attributeNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _attributeValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "attributeValueString",
-}, smithy.ShapeTypeString, 0)
-
-var _boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _cancelActive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "cancelActive",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Field = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "Field",
-}, smithy.ShapeTypeStructure, 3)
-var Field_key *smithy.Schema
-
-var Field_stringValue *smithy.Schema
-
-var Field_refValue *smithy.Schema
-
-var _fieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "fieldList",
-}, smithy.ShapeTypeList, 1)
-var _fieldList_member *smithy.Schema
-
-var _fieldNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "fieldNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _fieldStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "fieldStringValue",
-}, smithy.ShapeTypeString, 0)
-
-var _id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "id",
-}, smithy.ShapeTypeString, 0)
-
-var _idList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "idList",
-}, smithy.ShapeTypeList, 1)
-var _idList_member *smithy.Schema
-
-var InstanceIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "InstanceIdentity",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceIdentity_document *smithy.Schema
-
-var InstanceIdentity_signature *smithy.Schema
-
-var _int = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "int",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServiceError_message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidRequestException_message *smithy.Schema
-
-var _longString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "longString",
-}, smithy.ShapeTypeString, 0)
-
-var Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "Operator",
-}, smithy.ShapeTypeStructure, 2)
-var Operator_type *smithy.Schema
-
-var Operator_values *smithy.Schema
-
-var OperatorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "OperatorType",
-}, smithy.ShapeTypeEnum, 5)
-var OperatorType_Equal *smithy.Schema
-
-var OperatorType_ReferenceEqual *smithy.Schema
-
-var OperatorType_LessThanOrEqual *smithy.Schema
-
-var OperatorType_GreaterThanOrEqual *smithy.Schema
-
-var OperatorType_Between *smithy.Schema
-
-var ParameterAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ParameterAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var ParameterAttribute_key *smithy.Schema
-
-var ParameterAttribute_stringValue *smithy.Schema
-
-var _ParameterAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ParameterAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _ParameterAttributeList_member *smithy.Schema
-
-var ParameterObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ParameterObject",
-}, smithy.ShapeTypeStructure, 2)
-var ParameterObject_id *smithy.Schema
-
-var ParameterObject_attributes *smithy.Schema
-
-var _ParameterObjectList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ParameterObjectList",
-}, smithy.ShapeTypeList, 1)
-var _ParameterObjectList_member *smithy.Schema
-
-var ParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ParameterValue",
-}, smithy.ShapeTypeStructure, 2)
-var ParameterValue_id *smithy.Schema
-
-var ParameterValue_stringValue *smithy.Schema
-
-var _ParameterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ParameterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ParameterValueList_member *smithy.Schema
-
-var PipelineDeletedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineDeletedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var PipelineDeletedException_message *smithy.Schema
-
-var PipelineDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineDescription",
-}, smithy.ShapeTypeStructure, 5)
-var PipelineDescription_pipelineId *smithy.Schema
-
-var PipelineDescription_name *smithy.Schema
-
-var PipelineDescription_fields *smithy.Schema
-
-var PipelineDescription_description *smithy.Schema
-
-var PipelineDescription_tags *smithy.Schema
-
-var _PipelineDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _PipelineDescriptionList_member *smithy.Schema
-
-var PipelineIdName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineIdName",
-}, smithy.ShapeTypeStructure, 2)
-var PipelineIdName_id *smithy.Schema
-
-var PipelineIdName_name *smithy.Schema
-
-var _pipelineList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "pipelineList",
-}, smithy.ShapeTypeList, 1)
-var _pipelineList_member *smithy.Schema
-
-var PipelineNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var PipelineNotFoundException_message *smithy.Schema
-
-var PipelineObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineObject",
-}, smithy.ShapeTypeStructure, 3)
-var PipelineObject_id *smithy.Schema
-
-var PipelineObject_name *smithy.Schema
-
-var PipelineObject_fields *smithy.Schema
-
-var _PipelineObjectList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineObjectList",
-}, smithy.ShapeTypeList, 1)
-var _PipelineObjectList_member *smithy.Schema
-
-var _PipelineObjectMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PipelineObjectMap",
-}, smithy.ShapeTypeMap, 2)
-var _PipelineObjectMap_key *smithy.Schema
-
-var _PipelineObjectMap_value *smithy.Schema
-
-var Query = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "Query",
-}, smithy.ShapeTypeStructure, 1)
-var Query_selectors *smithy.Schema
-
-var Selector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "Selector",
-}, smithy.ShapeTypeStructure, 2)
-var Selector_fieldName *smithy.Schema
-
-var Selector_operator *smithy.Schema
-
-var _SelectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "SelectorList",
-}, smithy.ShapeTypeList, 1)
-var _SelectorList_member *smithy.Schema
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var _stringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "stringList",
-}, smithy.ShapeTypeList, 1)
-var _stringList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _tagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "tagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _tagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "tagList",
-}, smithy.ShapeTypeList, 1)
-var _tagList_member *smithy.Schema
-
-var _tagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "tagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _taskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "taskId",
-}, smithy.ShapeTypeString, 0)
-
-var TaskNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "TaskNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TaskNotFoundException_message *smithy.Schema
-
-var TaskObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "TaskObject",
-}, smithy.ShapeTypeStructure, 4)
-var TaskObject_taskId *smithy.Schema
-
-var TaskObject_pipelineId *smithy.Schema
-
-var TaskObject_attemptId *smithy.Schema
-
-var TaskObject_objects *smithy.Schema
-
-var TaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "TaskStatus",
-}, smithy.ShapeTypeEnum, 3)
-var TaskStatus_FINISHED *smithy.Schema
-
-var TaskStatus_FAILED *smithy.Schema
-
-var TaskStatus_FALSE *smithy.Schema
-
-var _timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var ValidationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ValidationError",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationError_id *smithy.Schema
-
-var ValidationError_errors *smithy.Schema
-
-var _ValidationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ValidationErrors",
-}, smithy.ShapeTypeList, 1)
-var _ValidationErrors_member *smithy.Schema
-
-var _validationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "validationMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _validationMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "validationMessages",
-}, smithy.ShapeTypeList, 1)
-var _validationMessages_member *smithy.Schema
-
-var ValidationWarning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ValidationWarning",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationWarning_id *smithy.Schema
-
-var ValidationWarning_warnings *smithy.Schema
-
-var _ValidationWarnings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ValidationWarnings",
-}, smithy.ShapeTypeList, 1)
-var _ValidationWarnings_member *smithy.Schema
-
-var ActivatePipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ActivatePipelineInput",
-}, smithy.ShapeTypeStructure, 3)
-var ActivatePipelineInput_pipelineId *smithy.Schema
-
-var ActivatePipelineInput_parameterValues *smithy.Schema
-
-var ActivatePipelineInput_startTimestamp *smithy.Schema
-
-var ActivatePipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ActivatePipelineOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var AddTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "AddTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsInput_pipelineId *smithy.Schema
-
-var AddTagsInput_tags *smithy.Schema
-
-var AddTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "AddTagsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreatePipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "CreatePipelineInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePipelineInput_name *smithy.Schema
-
-var CreatePipelineInput_uniqueId *smithy.Schema
-
-var CreatePipelineInput_description *smithy.Schema
-
-var CreatePipelineInput_tags *smithy.Schema
-
-var CreatePipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "CreatePipelineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePipelineOutput_pipelineId *smithy.Schema
-
-var DeactivatePipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DeactivatePipelineInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeactivatePipelineInput_pipelineId *smithy.Schema
-
-var DeactivatePipelineInput_cancelActive *smithy.Schema
-
-var DeactivatePipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DeactivatePipelineOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DeletePipelineInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePipelineInput_pipelineId *smithy.Schema
-
-var DescribeObjectsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DescribeObjectsInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeObjectsInput_pipelineId *smithy.Schema
-
-var DescribeObjectsInput_objectIds *smithy.Schema
-
-var DescribeObjectsInput_evaluateExpressions *smithy.Schema
-
-var DescribeObjectsInput_marker *smithy.Schema
-
-var DescribeObjectsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DescribeObjectsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeObjectsOutput_pipelineObjects *smithy.Schema
-
-var DescribeObjectsOutput_marker *smithy.Schema
-
-var DescribeObjectsOutput_hasMoreResults *smithy.Schema
-
-var DescribePipelinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DescribePipelinesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePipelinesInput_pipelineIds *smithy.Schema
-
-var DescribePipelinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "DescribePipelinesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePipelinesOutput_pipelineDescriptionList *smithy.Schema
-
-var EvaluateExpressionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "EvaluateExpressionInput",
-}, smithy.ShapeTypeStructure, 3)
-var EvaluateExpressionInput_pipelineId *smithy.Schema
-
-var EvaluateExpressionInput_objectId *smithy.Schema
-
-var EvaluateExpressionInput_expression *smithy.Schema
-
-var EvaluateExpressionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "EvaluateExpressionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var EvaluateExpressionOutput_evaluatedExpression *smithy.Schema
-
-var GetPipelineDefinitionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "GetPipelineDefinitionInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetPipelineDefinitionInput_pipelineId *smithy.Schema
-
-var GetPipelineDefinitionInput_version *smithy.Schema
-
-var GetPipelineDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "GetPipelineDefinitionOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetPipelineDefinitionOutput_pipelineObjects *smithy.Schema
-
-var GetPipelineDefinitionOutput_parameterObjects *smithy.Schema
-
-var GetPipelineDefinitionOutput_parameterValues *smithy.Schema
-
-var ListPipelinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ListPipelinesInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListPipelinesInput_marker *smithy.Schema
-
-var ListPipelinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ListPipelinesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListPipelinesOutput_pipelineIdList *smithy.Schema
-
-var ListPipelinesOutput_marker *smithy.Schema
-
-var ListPipelinesOutput_hasMoreResults *smithy.Schema
-
-var PollForTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PollForTaskInput",
-}, smithy.ShapeTypeStructure, 3)
-var PollForTaskInput_workerGroup *smithy.Schema
-
-var PollForTaskInput_hostname *smithy.Schema
-
-var PollForTaskInput_instanceIdentity *smithy.Schema
-
-var PollForTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PollForTaskOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PollForTaskOutput_taskObject *smithy.Schema
-
-var PutPipelineDefinitionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PutPipelineDefinitionInput",
-}, smithy.ShapeTypeStructure, 4)
-var PutPipelineDefinitionInput_pipelineId *smithy.Schema
-
-var PutPipelineDefinitionInput_pipelineObjects *smithy.Schema
-
-var PutPipelineDefinitionInput_parameterObjects *smithy.Schema
-
-var PutPipelineDefinitionInput_parameterValues *smithy.Schema
-
-var PutPipelineDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "PutPipelineDefinitionOutput",
-}, smithy.ShapeTypeStructure, 3)
-var PutPipelineDefinitionOutput_validationErrors *smithy.Schema
-
-var PutPipelineDefinitionOutput_validationWarnings *smithy.Schema
-
-var PutPipelineDefinitionOutput_errored *smithy.Schema
-
-var QueryObjectsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "QueryObjectsInput",
-}, smithy.ShapeTypeStructure, 5)
-var QueryObjectsInput_pipelineId *smithy.Schema
-
-var QueryObjectsInput_query *smithy.Schema
-
-var QueryObjectsInput_sphere *smithy.Schema
-
-var QueryObjectsInput_marker *smithy.Schema
-
-var QueryObjectsInput_limit *smithy.Schema
-
-var QueryObjectsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "QueryObjectsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var QueryObjectsOutput_ids *smithy.Schema
-
-var QueryObjectsOutput_marker *smithy.Schema
-
-var QueryObjectsOutput_hasMoreResults *smithy.Schema
-
-var RemoveTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "RemoveTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsInput_pipelineId *smithy.Schema
-
-var RemoveTagsInput_tagKeys *smithy.Schema
-
-var RemoveTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "RemoveTagsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ReportTaskProgressInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ReportTaskProgressInput",
-}, smithy.ShapeTypeStructure, 2)
-var ReportTaskProgressInput_taskId *smithy.Schema
-
-var ReportTaskProgressInput_fields *smithy.Schema
-
-var ReportTaskProgressOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ReportTaskProgressOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ReportTaskProgressOutput_canceled *smithy.Schema
-
-var ReportTaskRunnerHeartbeatInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ReportTaskRunnerHeartbeatInput",
-}, smithy.ShapeTypeStructure, 3)
-var ReportTaskRunnerHeartbeatInput_taskrunnerId *smithy.Schema
-
-var ReportTaskRunnerHeartbeatInput_workerGroup *smithy.Schema
-
-var ReportTaskRunnerHeartbeatInput_hostname *smithy.Schema
-
-var ReportTaskRunnerHeartbeatOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ReportTaskRunnerHeartbeatOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ReportTaskRunnerHeartbeatOutput_terminate *smithy.Schema
-
-var SetStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "SetStatusInput",
-}, smithy.ShapeTypeStructure, 3)
-var SetStatusInput_pipelineId *smithy.Schema
-
-var SetStatusInput_objectIds *smithy.Schema
-
-var SetStatusInput_status *smithy.Schema
-
-var SetTaskStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "SetTaskStatusInput",
-}, smithy.ShapeTypeStructure, 5)
-var SetTaskStatusInput_taskId *smithy.Schema
-
-var SetTaskStatusInput_taskStatus *smithy.Schema
-
-var SetTaskStatusInput_errorId *smithy.Schema
-
-var SetTaskStatusInput_errorMessage *smithy.Schema
-
-var SetTaskStatusInput_errorStackTrace *smithy.Schema
-
-var SetTaskStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "SetTaskStatusOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ValidatePipelineDefinitionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ValidatePipelineDefinitionInput",
-}, smithy.ShapeTypeStructure, 4)
-var ValidatePipelineDefinitionInput_pipelineId *smithy.Schema
-
-var ValidatePipelineDefinitionInput_pipelineObjects *smithy.Schema
-
-var ValidatePipelineDefinitionInput_parameterObjects *smithy.Schema
-
-var ValidatePipelineDefinitionInput_parameterValues *smithy.Schema
-
-var ValidatePipelineDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datapipeline",
-	Name:      "ValidatePipelineDefinitionOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ValidatePipelineDefinitionOutput_validationErrors *smithy.Schema
-
-var ValidatePipelineDefinitionOutput_validationWarnings *smithy.Schema
-
-var ValidatePipelineDefinitionOutput_errored *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Field_key = Field.AddMember("key", _fieldNameString)
-
-	Field_stringValue = Field.AddMember("stringValue", _fieldStringValue)
-
-	Field_refValue = Field.AddMember("refValue", _fieldNameString)
-
-	_fieldList_member = _fieldList.AddMember("member", Field)
-
-	_idList_member = _idList.AddMember("member", _id)
-
-	InstanceIdentity_document = InstanceIdentity.AddMember("document", _string)
-
-	InstanceIdentity_signature = InstanceIdentity.AddMember("signature", _string)
-
-	InternalServiceError_message = InternalServiceError.AddMember("message", _errorMessage)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _errorMessage)
-
-	OperatorType_Equal = OperatorType.AddMember("Equal", smithyprelude.Unit)
-
-	OperatorType_ReferenceEqual = OperatorType.AddMember("ReferenceEqual", smithyprelude.Unit)
-
-	OperatorType_LessThanOrEqual = OperatorType.AddMember("LessThanOrEqual", smithyprelude.Unit)
-
-	OperatorType_GreaterThanOrEqual = OperatorType.AddMember("GreaterThanOrEqual", smithyprelude.Unit)
-
-	OperatorType_Between = OperatorType.AddMember("Between", smithyprelude.Unit)
-
-	_stringList_member = _stringList.AddMember("member", _string)
-
-	Operator_type = Operator.AddMember("type", OperatorType)
-
-	Operator_values = Operator.AddMember("values", _stringList)
-
-	ParameterAttribute_key = ParameterAttribute.AddMember("key", _attributeNameString)
-
-	ParameterAttribute_stringValue = ParameterAttribute.AddMember("stringValue", _attributeValueString)
-
-	_ParameterAttributeList_member = _ParameterAttributeList.AddMember("member", ParameterAttribute)
-
-	ParameterObject_id = ParameterObject.AddMember("id", _fieldNameString)
-
-	ParameterObject_attributes = ParameterObject.AddMember("attributes", _ParameterAttributeList)
-
-	_ParameterObjectList_member = _ParameterObjectList.AddMember("member", ParameterObject)
-
-	ParameterValue_id = ParameterValue.AddMember("id", _fieldNameString)
-
-	ParameterValue_stringValue = ParameterValue.AddMember("stringValue", _fieldStringValue)
-
-	_ParameterValueList_member = _ParameterValueList.AddMember("member", ParameterValue)
-
-	PipelineDeletedException_message = PipelineDeletedException.AddMember("message", _errorMessage)
-
-	Tag_key = Tag.AddMember("key", _tagKey)
-
-	Tag_value = Tag.AddMember("value", _tagValue)
-
-	_tagList_member = _tagList.AddMember("member", Tag)
-
-	PipelineDescription_pipelineId = PipelineDescription.AddMember("pipelineId", _id)
-
-	PipelineDescription_name = PipelineDescription.AddMember("name", _id)
-
-	PipelineDescription_fields = PipelineDescription.AddMember("fields", _fieldList)
-
-	PipelineDescription_description = PipelineDescription.AddMember("description", _string)
-
-	PipelineDescription_tags = PipelineDescription.AddMember("tags", _tagList)
-
-	_PipelineDescriptionList_member = _PipelineDescriptionList.AddMember("member", PipelineDescription)
-
-	PipelineIdName_id = PipelineIdName.AddMember("id", _id)
-
-	PipelineIdName_name = PipelineIdName.AddMember("name", _id)
-
-	_pipelineList_member = _pipelineList.AddMember("member", PipelineIdName)
-
-	PipelineNotFoundException_message = PipelineNotFoundException.AddMember("message", _errorMessage)
-
-	PipelineObject_id = PipelineObject.AddMember("id", _id)
-
-	PipelineObject_name = PipelineObject.AddMember("name", _id)
-
-	PipelineObject_fields = PipelineObject.AddMember("fields", _fieldList)
-
-	_PipelineObjectList_member = _PipelineObjectList.AddMember("member", PipelineObject)
-
-	_PipelineObjectMap_key = _PipelineObjectMap.AddMember("key", _id)
-
-	_PipelineObjectMap_value = _PipelineObjectMap.AddMember("value", PipelineObject)
-
-	Selector_fieldName = Selector.AddMember("fieldName", _string)
-
-	Selector_operator = Selector.AddMember("operator", Operator)
-
-	_SelectorList_member = _SelectorList.AddMember("member", Selector)
-
-	Query_selectors = Query.AddMember("selectors", _SelectorList)
-
-	TaskNotFoundException_message = TaskNotFoundException.AddMember("message", _errorMessage)
-
-	TaskObject_taskId = TaskObject.AddMember("taskId", _taskId)
-
-	TaskObject_pipelineId = TaskObject.AddMember("pipelineId", _id)
-
-	TaskObject_attemptId = TaskObject.AddMember("attemptId", _id)
-
-	TaskObject_objects = TaskObject.AddMember("objects", _PipelineObjectMap)
-
-	TaskStatus_FINISHED = TaskStatus.AddMember("FINISHED", smithyprelude.Unit)
-
-	TaskStatus_FAILED = TaskStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	TaskStatus_FALSE = TaskStatus.AddMember("FALSE", smithyprelude.Unit)
-
-	_validationMessages_member = _validationMessages.AddMember("member", _validationMessage)
-
-	ValidationError_id = ValidationError.AddMember("id", _id)
-
-	ValidationError_errors = ValidationError.AddMember("errors", _validationMessages)
-
-	_ValidationErrors_member = _ValidationErrors.AddMember("member", ValidationError)
-
-	ValidationWarning_id = ValidationWarning.AddMember("id", _id)
-
-	ValidationWarning_warnings = ValidationWarning.AddMember("warnings", _validationMessages)
-
-	_ValidationWarnings_member = _ValidationWarnings.AddMember("member", ValidationWarning)
-
-	ActivatePipelineInput_pipelineId = ActivatePipelineInput.AddMember("pipelineId", _id)
-
-	ActivatePipelineInput_parameterValues = ActivatePipelineInput.AddMember("parameterValues", _ParameterValueList)
-
-	ActivatePipelineInput_startTimestamp = ActivatePipelineInput.AddMember("startTimestamp", _timestamp)
-
-	AddTagsInput_pipelineId = AddTagsInput.AddMember("pipelineId", _id)
-
-	AddTagsInput_tags = AddTagsInput.AddMember("tags", _tagList)
-
-	CreatePipelineInput_name = CreatePipelineInput.AddMember("name", _id)
-
-	CreatePipelineInput_uniqueId = CreatePipelineInput.AddMember("uniqueId", _id)
-
-	CreatePipelineInput_description = CreatePipelineInput.AddMember("description", _string)
-
-	CreatePipelineInput_tags = CreatePipelineInput.AddMember("tags", _tagList)
-
-	CreatePipelineOutput_pipelineId = CreatePipelineOutput.AddMember("pipelineId", _id)
-
-	DeactivatePipelineInput_pipelineId = DeactivatePipelineInput.AddMember("pipelineId", _id)
-
-	DeactivatePipelineInput_cancelActive = DeactivatePipelineInput.AddMember("cancelActive", _cancelActive)
-
-	DeletePipelineInput_pipelineId = DeletePipelineInput.AddMember("pipelineId", _id)
-
-	DescribeObjectsInput_pipelineId = DescribeObjectsInput.AddMember("pipelineId", _id)
-
-	DescribeObjectsInput_objectIds = DescribeObjectsInput.AddMember("objectIds", _idList)
-
-	DescribeObjectsInput_evaluateExpressions = DescribeObjectsInput.AddMember("evaluateExpressions", _boolean)
-
-	DescribeObjectsInput_marker = DescribeObjectsInput.AddMember("marker", _string)
-
-	DescribeObjectsOutput_pipelineObjects = DescribeObjectsOutput.AddMember("pipelineObjects", _PipelineObjectList)
-
-	DescribeObjectsOutput_marker = DescribeObjectsOutput.AddMember("marker", _string)
-
-	DescribeObjectsOutput_hasMoreResults = DescribeObjectsOutput.AddMember("hasMoreResults", _boolean)
-
-	DescribePipelinesInput_pipelineIds = DescribePipelinesInput.AddMember("pipelineIds", _idList)
-
-	DescribePipelinesOutput_pipelineDescriptionList = DescribePipelinesOutput.AddMember("pipelineDescriptionList", _PipelineDescriptionList)
-
-	EvaluateExpressionInput_pipelineId = EvaluateExpressionInput.AddMember("pipelineId", _id)
-
-	EvaluateExpressionInput_objectId = EvaluateExpressionInput.AddMember("objectId", _id)
-
-	EvaluateExpressionInput_expression = EvaluateExpressionInput.AddMember("expression", _longString)
-
-	EvaluateExpressionOutput_evaluatedExpression = EvaluateExpressionOutput.AddMember("evaluatedExpression", _longString)
-
-	GetPipelineDefinitionInput_pipelineId = GetPipelineDefinitionInput.AddMember("pipelineId", _id)
-
-	GetPipelineDefinitionInput_version = GetPipelineDefinitionInput.AddMember("version", _string)
-
-	GetPipelineDefinitionOutput_pipelineObjects = GetPipelineDefinitionOutput.AddMember("pipelineObjects", _PipelineObjectList)
-
-	GetPipelineDefinitionOutput_parameterObjects = GetPipelineDefinitionOutput.AddMember("parameterObjects", _ParameterObjectList)
-
-	GetPipelineDefinitionOutput_parameterValues = GetPipelineDefinitionOutput.AddMember("parameterValues", _ParameterValueList)
-
-	ListPipelinesInput_marker = ListPipelinesInput.AddMember("marker", _string)
-
-	ListPipelinesOutput_pipelineIdList = ListPipelinesOutput.AddMember("pipelineIdList", _pipelineList)
-
-	ListPipelinesOutput_marker = ListPipelinesOutput.AddMember("marker", _string)
-
-	ListPipelinesOutput_hasMoreResults = ListPipelinesOutput.AddMember("hasMoreResults", _boolean)
-
-	PollForTaskInput_workerGroup = PollForTaskInput.AddMember("workerGroup", _string)
-
-	PollForTaskInput_hostname = PollForTaskInput.AddMember("hostname", _id)
-
-	PollForTaskInput_instanceIdentity = PollForTaskInput.AddMember("instanceIdentity", InstanceIdentity)
-
-	PollForTaskOutput_taskObject = PollForTaskOutput.AddMember("taskObject", TaskObject)
-
-	PutPipelineDefinitionInput_pipelineId = PutPipelineDefinitionInput.AddMember("pipelineId", _id)
-
-	PutPipelineDefinitionInput_pipelineObjects = PutPipelineDefinitionInput.AddMember("pipelineObjects", _PipelineObjectList)
-
-	PutPipelineDefinitionInput_parameterObjects = PutPipelineDefinitionInput.AddMember("parameterObjects", _ParameterObjectList)
-
-	PutPipelineDefinitionInput_parameterValues = PutPipelineDefinitionInput.AddMember("parameterValues", _ParameterValueList)
-
-	PutPipelineDefinitionOutput_validationErrors = PutPipelineDefinitionOutput.AddMember("validationErrors", _ValidationErrors)
-
-	PutPipelineDefinitionOutput_validationWarnings = PutPipelineDefinitionOutput.AddMember("validationWarnings", _ValidationWarnings)
-
-	PutPipelineDefinitionOutput_errored = PutPipelineDefinitionOutput.AddMember("errored", _boolean)
-
-	QueryObjectsInput_pipelineId = QueryObjectsInput.AddMember("pipelineId", _id)
-
-	QueryObjectsInput_query = QueryObjectsInput.AddMember("query", Query)
-
-	QueryObjectsInput_sphere = QueryObjectsInput.AddMember("sphere", _string)
-
-	QueryObjectsInput_marker = QueryObjectsInput.AddMember("marker", _string)
-
-	QueryObjectsInput_limit = QueryObjectsInput.AddMember("limit", _int)
-
-	QueryObjectsOutput_ids = QueryObjectsOutput.AddMember("ids", _idList)
-
-	QueryObjectsOutput_marker = QueryObjectsOutput.AddMember("marker", _string)
-
-	QueryObjectsOutput_hasMoreResults = QueryObjectsOutput.AddMember("hasMoreResults", _boolean)
-
-	RemoveTagsInput_pipelineId = RemoveTagsInput.AddMember("pipelineId", _id)
-
-	RemoveTagsInput_tagKeys = RemoveTagsInput.AddMember("tagKeys", _stringList)
-
-	ReportTaskProgressInput_taskId = ReportTaskProgressInput.AddMember("taskId", _taskId)
-
-	ReportTaskProgressInput_fields = ReportTaskProgressInput.AddMember("fields", _fieldList)
-
-	ReportTaskProgressOutput_canceled = ReportTaskProgressOutput.AddMember("canceled", _boolean)
-
-	ReportTaskRunnerHeartbeatInput_taskrunnerId = ReportTaskRunnerHeartbeatInput.AddMember("taskrunnerId", _id)
-
-	ReportTaskRunnerHeartbeatInput_workerGroup = ReportTaskRunnerHeartbeatInput.AddMember("workerGroup", _string)
-
-	ReportTaskRunnerHeartbeatInput_hostname = ReportTaskRunnerHeartbeatInput.AddMember("hostname", _id)
-
-	ReportTaskRunnerHeartbeatOutput_terminate = ReportTaskRunnerHeartbeatOutput.AddMember("terminate", _boolean)
-
-	SetStatusInput_pipelineId = SetStatusInput.AddMember("pipelineId", _id)
-
-	SetStatusInput_objectIds = SetStatusInput.AddMember("objectIds", _idList)
-
-	SetStatusInput_status = SetStatusInput.AddMember("status", _string)
-
-	SetTaskStatusInput_taskId = SetTaskStatusInput.AddMember("taskId", _taskId)
-
-	SetTaskStatusInput_taskStatus = SetTaskStatusInput.AddMember("taskStatus", TaskStatus)
-
-	SetTaskStatusInput_errorId = SetTaskStatusInput.AddMember("errorId", _string)
-
-	SetTaskStatusInput_errorMessage = SetTaskStatusInput.AddMember("errorMessage", _errorMessage)
-
-	SetTaskStatusInput_errorStackTrace = SetTaskStatusInput.AddMember("errorStackTrace", _string)
-
-	ValidatePipelineDefinitionInput_pipelineId = ValidatePipelineDefinitionInput.AddMember("pipelineId", _id)
-
-	ValidatePipelineDefinitionInput_pipelineObjects = ValidatePipelineDefinitionInput.AddMember("pipelineObjects", _PipelineObjectList)
-
-	ValidatePipelineDefinitionInput_parameterObjects = ValidatePipelineDefinitionInput.AddMember("parameterObjects", _ParameterObjectList)
-
-	ValidatePipelineDefinitionInput_parameterValues = ValidatePipelineDefinitionInput.AddMember("parameterValues", _ParameterValueList)
-
-	ValidatePipelineDefinitionOutput_validationErrors = ValidatePipelineDefinitionOutput.AddMember("validationErrors", _ValidationErrors)
-
-	ValidatePipelineDefinitionOutput_validationWarnings = ValidatePipelineDefinitionOutput.AddMember("validationWarnings", _ValidationWarnings)
-
-	ValidatePipelineDefinitionOutput_errored = ValidatePipelineDefinitionOutput.AddMember("errored", _boolean)
-
-}
+var (
+	eActivatePipeline                                    smithy.SchemaExtensions
+	eAddTags                                             smithy.SchemaExtensions
+	eCreatePipeline                                      smithy.SchemaExtensions
+	eDeactivatePipeline                                  smithy.SchemaExtensions
+	eDeletePipeline                                      smithy.SchemaExtensions
+	eDescribeObjects                                     smithy.SchemaExtensions
+	eDescribePipelines                                   smithy.SchemaExtensions
+	eEvaluateExpression                                  smithy.SchemaExtensions
+	eGetPipelineDefinition                               smithy.SchemaExtensions
+	eListPipelines                                       smithy.SchemaExtensions
+	ePollForTask                                         smithy.SchemaExtensions
+	ePutPipelineDefinition                               smithy.SchemaExtensions
+	eQueryObjects                                        smithy.SchemaExtensions
+	eRemoveTags                                          smithy.SchemaExtensions
+	eReportTaskProgress                                  smithy.SchemaExtensions
+	eReportTaskRunnerHeartbeat                           smithy.SchemaExtensions
+	eSetStatus                                           smithy.SchemaExtensions
+	eSetTaskStatus                                       smithy.SchemaExtensions
+	eValidatePipelineDefinition                          smithy.SchemaExtensions
+	e_DataPipeline                                       smithy.SchemaExtensions
+	e_attributeNameString                                smithy.SchemaExtensions
+	e_attributeValueString                               smithy.SchemaExtensions
+	e_boolean                                            smithy.SchemaExtensions
+	e_cancelActive                                       smithy.SchemaExtensions
+	e_errorMessage                                       smithy.SchemaExtensions
+	eField                                               smithy.SchemaExtensions
+	eField_key                                           smithy.SchemaExtensions
+	eField_stringValue                                   smithy.SchemaExtensions
+	eField_refValue                                      smithy.SchemaExtensions
+	e_fieldList                                          smithy.SchemaExtensions
+	e_fieldList_member                                   smithy.SchemaExtensions
+	e_fieldNameString                                    smithy.SchemaExtensions
+	e_fieldStringValue                                   smithy.SchemaExtensions
+	e_id                                                 smithy.SchemaExtensions
+	e_idList                                             smithy.SchemaExtensions
+	e_idList_member                                      smithy.SchemaExtensions
+	eInstanceIdentity                                    smithy.SchemaExtensions
+	eInstanceIdentity_document                           smithy.SchemaExtensions
+	eInstanceIdentity_signature                          smithy.SchemaExtensions
+	e_int                                                smithy.SchemaExtensions
+	eInternalServiceError                                smithy.SchemaExtensions
+	eInternalServiceError_message                        smithy.SchemaExtensions
+	eInvalidRequestException                             smithy.SchemaExtensions
+	eInvalidRequestException_message                     smithy.SchemaExtensions
+	e_longString                                         smithy.SchemaExtensions
+	eOperator                                            smithy.SchemaExtensions
+	eOperator_type                                       smithy.SchemaExtensions
+	eOperator_values                                     smithy.SchemaExtensions
+	eOperatorType                                        smithy.SchemaExtensions
+	eOperatorType_Equal                                  smithy.SchemaExtensions
+	eOperatorType_ReferenceEqual                         smithy.SchemaExtensions
+	eOperatorType_LessThanOrEqual                        smithy.SchemaExtensions
+	eOperatorType_GreaterThanOrEqual                     smithy.SchemaExtensions
+	eOperatorType_Between                                smithy.SchemaExtensions
+	eParameterAttribute                                  smithy.SchemaExtensions
+	eParameterAttribute_key                              smithy.SchemaExtensions
+	eParameterAttribute_stringValue                      smithy.SchemaExtensions
+	e_ParameterAttributeList                             smithy.SchemaExtensions
+	e_ParameterAttributeList_member                      smithy.SchemaExtensions
+	eParameterObject                                     smithy.SchemaExtensions
+	eParameterObject_id                                  smithy.SchemaExtensions
+	eParameterObject_attributes                          smithy.SchemaExtensions
+	e_ParameterObjectList                                smithy.SchemaExtensions
+	e_ParameterObjectList_member                         smithy.SchemaExtensions
+	eParameterValue                                      smithy.SchemaExtensions
+	eParameterValue_id                                   smithy.SchemaExtensions
+	eParameterValue_stringValue                          smithy.SchemaExtensions
+	e_ParameterValueList                                 smithy.SchemaExtensions
+	e_ParameterValueList_member                          smithy.SchemaExtensions
+	ePipelineDeletedException                            smithy.SchemaExtensions
+	ePipelineDeletedException_message                    smithy.SchemaExtensions
+	ePipelineDescription                                 smithy.SchemaExtensions
+	ePipelineDescription_pipelineId                      smithy.SchemaExtensions
+	ePipelineDescription_name                            smithy.SchemaExtensions
+	ePipelineDescription_fields                          smithy.SchemaExtensions
+	ePipelineDescription_description                     smithy.SchemaExtensions
+	ePipelineDescription_tags                            smithy.SchemaExtensions
+	e_PipelineDescriptionList                            smithy.SchemaExtensions
+	e_PipelineDescriptionList_member                     smithy.SchemaExtensions
+	ePipelineIdName                                      smithy.SchemaExtensions
+	ePipelineIdName_id                                   smithy.SchemaExtensions
+	ePipelineIdName_name                                 smithy.SchemaExtensions
+	e_pipelineList                                       smithy.SchemaExtensions
+	e_pipelineList_member                                smithy.SchemaExtensions
+	ePipelineNotFoundException                           smithy.SchemaExtensions
+	ePipelineNotFoundException_message                   smithy.SchemaExtensions
+	ePipelineObject                                      smithy.SchemaExtensions
+	ePipelineObject_id                                   smithy.SchemaExtensions
+	ePipelineObject_name                                 smithy.SchemaExtensions
+	ePipelineObject_fields                               smithy.SchemaExtensions
+	e_PipelineObjectList                                 smithy.SchemaExtensions
+	e_PipelineObjectList_member                          smithy.SchemaExtensions
+	e_PipelineObjectMap                                  smithy.SchemaExtensions
+	e_PipelineObjectMap_key                              smithy.SchemaExtensions
+	e_PipelineObjectMap_value                            smithy.SchemaExtensions
+	eQuery                                               smithy.SchemaExtensions
+	eQuery_selectors                                     smithy.SchemaExtensions
+	eSelector                                            smithy.SchemaExtensions
+	eSelector_fieldName                                  smithy.SchemaExtensions
+	eSelector_operator                                   smithy.SchemaExtensions
+	e_SelectorList                                       smithy.SchemaExtensions
+	e_SelectorList_member                                smithy.SchemaExtensions
+	e_string                                             smithy.SchemaExtensions
+	e_stringList                                         smithy.SchemaExtensions
+	e_stringList_member                                  smithy.SchemaExtensions
+	eTag                                                 smithy.SchemaExtensions
+	eTag_key                                             smithy.SchemaExtensions
+	eTag_value                                           smithy.SchemaExtensions
+	e_tagKey                                             smithy.SchemaExtensions
+	e_tagList                                            smithy.SchemaExtensions
+	e_tagList_member                                     smithy.SchemaExtensions
+	e_tagValue                                           smithy.SchemaExtensions
+	e_taskId                                             smithy.SchemaExtensions
+	eTaskNotFoundException                               smithy.SchemaExtensions
+	eTaskNotFoundException_message                       smithy.SchemaExtensions
+	eTaskObject                                          smithy.SchemaExtensions
+	eTaskObject_taskId                                   smithy.SchemaExtensions
+	eTaskObject_pipelineId                               smithy.SchemaExtensions
+	eTaskObject_attemptId                                smithy.SchemaExtensions
+	eTaskObject_objects                                  smithy.SchemaExtensions
+	eTaskStatus                                          smithy.SchemaExtensions
+	eTaskStatus_FINISHED                                 smithy.SchemaExtensions
+	eTaskStatus_FAILED                                   smithy.SchemaExtensions
+	eTaskStatus_FALSE                                    smithy.SchemaExtensions
+	e_timestamp                                          smithy.SchemaExtensions
+	eValidationError                                     smithy.SchemaExtensions
+	eValidationError_id                                  smithy.SchemaExtensions
+	eValidationError_errors                              smithy.SchemaExtensions
+	e_ValidationErrors                                   smithy.SchemaExtensions
+	e_ValidationErrors_member                            smithy.SchemaExtensions
+	e_validationMessage                                  smithy.SchemaExtensions
+	e_validationMessages                                 smithy.SchemaExtensions
+	e_validationMessages_member                          smithy.SchemaExtensions
+	eValidationWarning                                   smithy.SchemaExtensions
+	eValidationWarning_id                                smithy.SchemaExtensions
+	eValidationWarning_warnings                          smithy.SchemaExtensions
+	e_ValidationWarnings                                 smithy.SchemaExtensions
+	e_ValidationWarnings_member                          smithy.SchemaExtensions
+	eActivatePipelineInput                               smithy.SchemaExtensions
+	eActivatePipelineInput_pipelineId                    smithy.SchemaExtensions
+	eActivatePipelineInput_parameterValues               smithy.SchemaExtensions
+	eActivatePipelineInput_startTimestamp                smithy.SchemaExtensions
+	eActivatePipelineOutput                              smithy.SchemaExtensions
+	eAddTagsInput                                        smithy.SchemaExtensions
+	eAddTagsInput_pipelineId                             smithy.SchemaExtensions
+	eAddTagsInput_tags                                   smithy.SchemaExtensions
+	eAddTagsOutput                                       smithy.SchemaExtensions
+	eCreatePipelineInput                                 smithy.SchemaExtensions
+	eCreatePipelineInput_name                            smithy.SchemaExtensions
+	eCreatePipelineInput_uniqueId                        smithy.SchemaExtensions
+	eCreatePipelineInput_description                     smithy.SchemaExtensions
+	eCreatePipelineInput_tags                            smithy.SchemaExtensions
+	eCreatePipelineOutput                                smithy.SchemaExtensions
+	eCreatePipelineOutput_pipelineId                     smithy.SchemaExtensions
+	eDeactivatePipelineInput                             smithy.SchemaExtensions
+	eDeactivatePipelineInput_pipelineId                  smithy.SchemaExtensions
+	eDeactivatePipelineInput_cancelActive                smithy.SchemaExtensions
+	eDeactivatePipelineOutput                            smithy.SchemaExtensions
+	eDeletePipelineInput                                 smithy.SchemaExtensions
+	eDeletePipelineInput_pipelineId                      smithy.SchemaExtensions
+	eDescribeObjectsInput                                smithy.SchemaExtensions
+	eDescribeObjectsInput_pipelineId                     smithy.SchemaExtensions
+	eDescribeObjectsInput_objectIds                      smithy.SchemaExtensions
+	eDescribeObjectsInput_evaluateExpressions            smithy.SchemaExtensions
+	eDescribeObjectsInput_marker                         smithy.SchemaExtensions
+	eDescribeObjectsOutput                               smithy.SchemaExtensions
+	eDescribeObjectsOutput_pipelineObjects               smithy.SchemaExtensions
+	eDescribeObjectsOutput_marker                        smithy.SchemaExtensions
+	eDescribeObjectsOutput_hasMoreResults                smithy.SchemaExtensions
+	eDescribePipelinesInput                              smithy.SchemaExtensions
+	eDescribePipelinesInput_pipelineIds                  smithy.SchemaExtensions
+	eDescribePipelinesOutput                             smithy.SchemaExtensions
+	eDescribePipelinesOutput_pipelineDescriptionList     smithy.SchemaExtensions
+	eEvaluateExpressionInput                             smithy.SchemaExtensions
+	eEvaluateExpressionInput_pipelineId                  smithy.SchemaExtensions
+	eEvaluateExpressionInput_objectId                    smithy.SchemaExtensions
+	eEvaluateExpressionInput_expression                  smithy.SchemaExtensions
+	eEvaluateExpressionOutput                            smithy.SchemaExtensions
+	eEvaluateExpressionOutput_evaluatedExpression        smithy.SchemaExtensions
+	eGetPipelineDefinitionInput                          smithy.SchemaExtensions
+	eGetPipelineDefinitionInput_pipelineId               smithy.SchemaExtensions
+	eGetPipelineDefinitionInput_version                  smithy.SchemaExtensions
+	eGetPipelineDefinitionOutput                         smithy.SchemaExtensions
+	eGetPipelineDefinitionOutput_pipelineObjects         smithy.SchemaExtensions
+	eGetPipelineDefinitionOutput_parameterObjects        smithy.SchemaExtensions
+	eGetPipelineDefinitionOutput_parameterValues         smithy.SchemaExtensions
+	eListPipelinesInput                                  smithy.SchemaExtensions
+	eListPipelinesInput_marker                           smithy.SchemaExtensions
+	eListPipelinesOutput                                 smithy.SchemaExtensions
+	eListPipelinesOutput_pipelineIdList                  smithy.SchemaExtensions
+	eListPipelinesOutput_marker                          smithy.SchemaExtensions
+	eListPipelinesOutput_hasMoreResults                  smithy.SchemaExtensions
+	ePollForTaskInput                                    smithy.SchemaExtensions
+	ePollForTaskInput_workerGroup                        smithy.SchemaExtensions
+	ePollForTaskInput_hostname                           smithy.SchemaExtensions
+	ePollForTaskInput_instanceIdentity                   smithy.SchemaExtensions
+	ePollForTaskOutput                                   smithy.SchemaExtensions
+	ePollForTaskOutput_taskObject                        smithy.SchemaExtensions
+	ePutPipelineDefinitionInput                          smithy.SchemaExtensions
+	ePutPipelineDefinitionInput_pipelineId               smithy.SchemaExtensions
+	ePutPipelineDefinitionInput_pipelineObjects          smithy.SchemaExtensions
+	ePutPipelineDefinitionInput_parameterObjects         smithy.SchemaExtensions
+	ePutPipelineDefinitionInput_parameterValues          smithy.SchemaExtensions
+	ePutPipelineDefinitionOutput                         smithy.SchemaExtensions
+	ePutPipelineDefinitionOutput_validationErrors        smithy.SchemaExtensions
+	ePutPipelineDefinitionOutput_validationWarnings      smithy.SchemaExtensions
+	ePutPipelineDefinitionOutput_errored                 smithy.SchemaExtensions
+	eQueryObjectsInput                                   smithy.SchemaExtensions
+	eQueryObjectsInput_pipelineId                        smithy.SchemaExtensions
+	eQueryObjectsInput_query                             smithy.SchemaExtensions
+	eQueryObjectsInput_sphere                            smithy.SchemaExtensions
+	eQueryObjectsInput_marker                            smithy.SchemaExtensions
+	eQueryObjectsInput_limit                             smithy.SchemaExtensions
+	eQueryObjectsOutput                                  smithy.SchemaExtensions
+	eQueryObjectsOutput_ids                              smithy.SchemaExtensions
+	eQueryObjectsOutput_marker                           smithy.SchemaExtensions
+	eQueryObjectsOutput_hasMoreResults                   smithy.SchemaExtensions
+	eRemoveTagsInput                                     smithy.SchemaExtensions
+	eRemoveTagsInput_pipelineId                          smithy.SchemaExtensions
+	eRemoveTagsInput_tagKeys                             smithy.SchemaExtensions
+	eRemoveTagsOutput                                    smithy.SchemaExtensions
+	eReportTaskProgressInput                             smithy.SchemaExtensions
+	eReportTaskProgressInput_taskId                      smithy.SchemaExtensions
+	eReportTaskProgressInput_fields                      smithy.SchemaExtensions
+	eReportTaskProgressOutput                            smithy.SchemaExtensions
+	eReportTaskProgressOutput_canceled                   smithy.SchemaExtensions
+	eReportTaskRunnerHeartbeatInput                      smithy.SchemaExtensions
+	eReportTaskRunnerHeartbeatInput_taskrunnerId         smithy.SchemaExtensions
+	eReportTaskRunnerHeartbeatInput_workerGroup          smithy.SchemaExtensions
+	eReportTaskRunnerHeartbeatInput_hostname             smithy.SchemaExtensions
+	eReportTaskRunnerHeartbeatOutput                     smithy.SchemaExtensions
+	eReportTaskRunnerHeartbeatOutput_terminate           smithy.SchemaExtensions
+	eSetStatusInput                                      smithy.SchemaExtensions
+	eSetStatusInput_pipelineId                           smithy.SchemaExtensions
+	eSetStatusInput_objectIds                            smithy.SchemaExtensions
+	eSetStatusInput_status                               smithy.SchemaExtensions
+	eSetTaskStatusInput                                  smithy.SchemaExtensions
+	eSetTaskStatusInput_taskId                           smithy.SchemaExtensions
+	eSetTaskStatusInput_taskStatus                       smithy.SchemaExtensions
+	eSetTaskStatusInput_errorId                          smithy.SchemaExtensions
+	eSetTaskStatusInput_errorMessage                     smithy.SchemaExtensions
+	eSetTaskStatusInput_errorStackTrace                  smithy.SchemaExtensions
+	eSetTaskStatusOutput                                 smithy.SchemaExtensions
+	eValidatePipelineDefinitionInput                     smithy.SchemaExtensions
+	eValidatePipelineDefinitionInput_pipelineId          smithy.SchemaExtensions
+	eValidatePipelineDefinitionInput_pipelineObjects     smithy.SchemaExtensions
+	eValidatePipelineDefinitionInput_parameterObjects    smithy.SchemaExtensions
+	eValidatePipelineDefinitionInput_parameterValues     smithy.SchemaExtensions
+	eValidatePipelineDefinitionOutput                    smithy.SchemaExtensions
+	eValidatePipelineDefinitionOutput_validationErrors   smithy.SchemaExtensions
+	eValidatePipelineDefinitionOutput_validationWarnings smithy.SchemaExtensions
+	eValidatePipelineDefinitionOutput_errored            smithy.SchemaExtensions
+)
+
+var (
+	iActivatePipeline                 = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ActivatePipeline"}
+	iAddTags                          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "AddTags"}
+	iCreatePipeline                   = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "CreatePipeline"}
+	iDeactivatePipeline               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DeactivatePipeline"}
+	iDeletePipeline                   = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DeletePipeline"}
+	iDescribeObjects                  = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DescribeObjects"}
+	iDescribePipelines                = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DescribePipelines"}
+	iEvaluateExpression               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "EvaluateExpression"}
+	iGetPipelineDefinition            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "GetPipelineDefinition"}
+	iListPipelines                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ListPipelines"}
+	iPollForTask                      = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PollForTask"}
+	iPutPipelineDefinition            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PutPipelineDefinition"}
+	iQueryObjects                     = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "QueryObjects"}
+	iRemoveTags                       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "RemoveTags"}
+	iReportTaskProgress               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ReportTaskProgress"}
+	iReportTaskRunnerHeartbeat        = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ReportTaskRunnerHeartbeat"}
+	iSetStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "SetStatus"}
+	iSetTaskStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "SetTaskStatus"}
+	iValidatePipelineDefinition       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ValidatePipelineDefinition"}
+	i_DataPipeline                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DataPipeline"}
+	i_attributeNameString             = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "attributeNameString"}
+	i_attributeValueString            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "attributeValueString"}
+	i_boolean                         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "boolean"}
+	i_cancelActive                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "cancelActive"}
+	i_errorMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "errorMessage"}
+	iField                            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "Field"}
+	i_fieldList                       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "fieldList"}
+	i_fieldNameString                 = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "fieldNameString"}
+	i_fieldStringValue                = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "fieldStringValue"}
+	i_id                              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "id"}
+	i_idList                          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "idList"}
+	iInstanceIdentity                 = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "InstanceIdentity"}
+	i_int                             = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "int"}
+	iInternalServiceError             = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "InternalServiceError"}
+	iInvalidRequestException          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "InvalidRequestException"}
+	i_longString                      = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "longString"}
+	iOperator                         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "Operator"}
+	iOperatorType                     = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "OperatorType"}
+	iParameterAttribute               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ParameterAttribute"}
+	i_ParameterAttributeList          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ParameterAttributeList"}
+	iParameterObject                  = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ParameterObject"}
+	i_ParameterObjectList             = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ParameterObjectList"}
+	iParameterValue                   = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ParameterValue"}
+	i_ParameterValueList              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ParameterValueList"}
+	iPipelineDeletedException         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineDeletedException"}
+	iPipelineDescription              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineDescription"}
+	i_PipelineDescriptionList         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineDescriptionList"}
+	iPipelineIdName                   = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineIdName"}
+	i_pipelineList                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "pipelineList"}
+	iPipelineNotFoundException        = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineNotFoundException"}
+	iPipelineObject                   = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineObject"}
+	i_PipelineObjectList              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineObjectList"}
+	i_PipelineObjectMap               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PipelineObjectMap"}
+	iQuery                            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "Query"}
+	iSelector                         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "Selector"}
+	i_SelectorList                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "SelectorList"}
+	i_string                          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "string"}
+	i_stringList                      = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "stringList"}
+	iTag                              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "Tag"}
+	i_tagKey                          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "tagKey"}
+	i_tagList                         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "tagList"}
+	i_tagValue                        = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "tagValue"}
+	i_taskId                          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "taskId"}
+	iTaskNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "TaskNotFoundException"}
+	iTaskObject                       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "TaskObject"}
+	iTaskStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "TaskStatus"}
+	i_timestamp                       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "timestamp"}
+	iValidationError                  = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ValidationError"}
+	i_ValidationErrors                = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ValidationErrors"}
+	i_validationMessage               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "validationMessage"}
+	i_validationMessages              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "validationMessages"}
+	iValidationWarning                = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ValidationWarning"}
+	i_ValidationWarnings              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ValidationWarnings"}
+	iActivatePipelineInput            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ActivatePipelineInput"}
+	iActivatePipelineOutput           = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ActivatePipelineOutput"}
+	iAddTagsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "AddTagsInput"}
+	iAddTagsOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "AddTagsOutput"}
+	iCreatePipelineInput              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "CreatePipelineInput"}
+	iCreatePipelineOutput             = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "CreatePipelineOutput"}
+	iDeactivatePipelineInput          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DeactivatePipelineInput"}
+	iDeactivatePipelineOutput         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DeactivatePipelineOutput"}
+	iDeletePipelineInput              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DeletePipelineInput"}
+	iDescribeObjectsInput             = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DescribeObjectsInput"}
+	iDescribeObjectsOutput            = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DescribeObjectsOutput"}
+	iDescribePipelinesInput           = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DescribePipelinesInput"}
+	iDescribePipelinesOutput          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "DescribePipelinesOutput"}
+	iEvaluateExpressionInput          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "EvaluateExpressionInput"}
+	iEvaluateExpressionOutput         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "EvaluateExpressionOutput"}
+	iGetPipelineDefinitionInput       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "GetPipelineDefinitionInput"}
+	iGetPipelineDefinitionOutput      = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "GetPipelineDefinitionOutput"}
+	iListPipelinesInput               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ListPipelinesInput"}
+	iListPipelinesOutput              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ListPipelinesOutput"}
+	iPollForTaskInput                 = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PollForTaskInput"}
+	iPollForTaskOutput                = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PollForTaskOutput"}
+	iPutPipelineDefinitionInput       = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PutPipelineDefinitionInput"}
+	iPutPipelineDefinitionOutput      = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "PutPipelineDefinitionOutput"}
+	iQueryObjectsInput                = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "QueryObjectsInput"}
+	iQueryObjectsOutput               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "QueryObjectsOutput"}
+	iRemoveTagsInput                  = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "RemoveTagsInput"}
+	iRemoveTagsOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "RemoveTagsOutput"}
+	iReportTaskProgressInput          = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ReportTaskProgressInput"}
+	iReportTaskProgressOutput         = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ReportTaskProgressOutput"}
+	iReportTaskRunnerHeartbeatInput   = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ReportTaskRunnerHeartbeatInput"}
+	iReportTaskRunnerHeartbeatOutput  = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ReportTaskRunnerHeartbeatOutput"}
+	iSetStatusInput                   = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "SetStatusInput"}
+	iSetTaskStatusInput               = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "SetTaskStatusInput"}
+	iSetTaskStatusOutput              = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "SetTaskStatusOutput"}
+	iValidatePipelineDefinitionInput  = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ValidatePipelineDefinitionInput"}
+	iValidatePipelineDefinitionOutput = smithy.ShapeName{Namespace: "com.amazonaws.datapipeline", Name: "ValidatePipelineDefinitionOutput"}
+	pUnit                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://datapipeline.amazonaws.com/doc/2012-10-29/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+
+var mField = smithy.SchemaMembers{List: []*smithy.Schema{&sField_key, &sField_stringValue, &sField_refValue}}
+var m_fieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_fieldList_member}}
+var m_idList = smithy.SchemaMembers{List: []*smithy.Schema{&s_idList_member}}
+var mInstanceIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceIdentity_document, &sInstanceIdentity_signature}}
+var mInternalServiceError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceError_message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_message}}
+var mOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sOperator_type, &sOperator_values}}
+var mOperatorType = smithy.SchemaMembers{List: []*smithy.Schema{&sOperatorType_Equal, &sOperatorType_ReferenceEqual, &sOperatorType_LessThanOrEqual, &sOperatorType_GreaterThanOrEqual, &sOperatorType_Between}}
+var mParameterAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterAttribute_key, &sParameterAttribute_stringValue}}
+var m_ParameterAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParameterAttributeList_member}}
+var mParameterObject = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterObject_id, &sParameterObject_attributes}}
+var m_ParameterObjectList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParameterObjectList_member}}
+var mParameterValue = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterValue_id, &sParameterValue_stringValue}}
+var m_ParameterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParameterValueList_member}}
+var mPipelineDeletedException = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineDeletedException_message}}
+var mPipelineDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineDescription_pipelineId, &sPipelineDescription_name, &sPipelineDescription_fields, &sPipelineDescription_description, &sPipelineDescription_tags}}
+var m_PipelineDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PipelineDescriptionList_member}}
+var mPipelineIdName = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineIdName_id, &sPipelineIdName_name}}
+var m_pipelineList = smithy.SchemaMembers{List: []*smithy.Schema{&s_pipelineList_member}}
+var mPipelineNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineNotFoundException_message}}
+var mPipelineObject = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineObject_id, &sPipelineObject_name, &sPipelineObject_fields}}
+var m_PipelineObjectList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PipelineObjectList_member}}
+var m_PipelineObjectMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PipelineObjectMap_key, &s_PipelineObjectMap_value}}
+var mQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sQuery_selectors}}
+var mSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sSelector_fieldName, &sSelector_operator}}
+var m_SelectorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SelectorList_member}}
+var m_stringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_stringList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_tagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_tagList_member}}
+var mTaskNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskNotFoundException_message}}
+var mTaskObject = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskObject_taskId, &sTaskObject_pipelineId, &sTaskObject_attemptId, &sTaskObject_objects}}
+var mTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskStatus_FINISHED, &sTaskStatus_FAILED, &sTaskStatus_FALSE}}
+var mValidationError = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationError_id, &sValidationError_errors}}
+var m_ValidationErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationErrors_member}}
+var m_validationMessages = smithy.SchemaMembers{List: []*smithy.Schema{&s_validationMessages_member}}
+var mValidationWarning = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationWarning_id, &sValidationWarning_warnings}}
+var m_ValidationWarnings = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationWarnings_member}}
+var mActivatePipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sActivatePipelineInput_pipelineId, &sActivatePipelineInput_parameterValues, &sActivatePipelineInput_startTimestamp}}
+var mAddTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsInput_pipelineId, &sAddTagsInput_tags}}
+var mCreatePipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePipelineInput_name, &sCreatePipelineInput_uniqueId, &sCreatePipelineInput_description, &sCreatePipelineInput_tags}}
+var mCreatePipelineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePipelineOutput_pipelineId}}
+var mDeactivatePipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeactivatePipelineInput_pipelineId, &sDeactivatePipelineInput_cancelActive}}
+var mDeletePipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePipelineInput_pipelineId}}
+var mDescribeObjectsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObjectsInput_pipelineId, &sDescribeObjectsInput_objectIds, &sDescribeObjectsInput_evaluateExpressions, &sDescribeObjectsInput_marker}}
+var mDescribeObjectsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObjectsOutput_pipelineObjects, &sDescribeObjectsOutput_marker, &sDescribeObjectsOutput_hasMoreResults}}
+var mDescribePipelinesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePipelinesInput_pipelineIds}}
+var mDescribePipelinesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePipelinesOutput_pipelineDescriptionList}}
+var mEvaluateExpressionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateExpressionInput_pipelineId, &sEvaluateExpressionInput_objectId, &sEvaluateExpressionInput_expression}}
+var mEvaluateExpressionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateExpressionOutput_evaluatedExpression}}
+var mGetPipelineDefinitionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPipelineDefinitionInput_pipelineId, &sGetPipelineDefinitionInput_version}}
+var mGetPipelineDefinitionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPipelineDefinitionOutput_pipelineObjects, &sGetPipelineDefinitionOutput_parameterObjects, &sGetPipelineDefinitionOutput_parameterValues}}
+var mListPipelinesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPipelinesInput_marker}}
+var mListPipelinesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPipelinesOutput_pipelineIdList, &sListPipelinesOutput_marker, &sListPipelinesOutput_hasMoreResults}}
+var mPollForTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPollForTaskInput_workerGroup, &sPollForTaskInput_hostname, &sPollForTaskInput_instanceIdentity}}
+var mPollForTaskOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPollForTaskOutput_taskObject}}
+var mPutPipelineDefinitionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPipelineDefinitionInput_pipelineId, &sPutPipelineDefinitionInput_pipelineObjects, &sPutPipelineDefinitionInput_parameterObjects, &sPutPipelineDefinitionInput_parameterValues}}
+var mPutPipelineDefinitionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPipelineDefinitionOutput_validationErrors, &sPutPipelineDefinitionOutput_validationWarnings, &sPutPipelineDefinitionOutput_errored}}
+var mQueryObjectsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryObjectsInput_pipelineId, &sQueryObjectsInput_query, &sQueryObjectsInput_sphere, &sQueryObjectsInput_marker, &sQueryObjectsInput_limit}}
+var mQueryObjectsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryObjectsOutput_ids, &sQueryObjectsOutput_marker, &sQueryObjectsOutput_hasMoreResults}}
+var mRemoveTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsInput_pipelineId, &sRemoveTagsInput_tagKeys}}
+var mReportTaskProgressInput = smithy.SchemaMembers{List: []*smithy.Schema{&sReportTaskProgressInput_taskId, &sReportTaskProgressInput_fields}}
+var mReportTaskProgressOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sReportTaskProgressOutput_canceled}}
+var mReportTaskRunnerHeartbeatInput = smithy.SchemaMembers{List: []*smithy.Schema{&sReportTaskRunnerHeartbeatInput_taskrunnerId, &sReportTaskRunnerHeartbeatInput_workerGroup, &sReportTaskRunnerHeartbeatInput_hostname}}
+var mReportTaskRunnerHeartbeatOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sReportTaskRunnerHeartbeatOutput_terminate}}
+var mSetStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetStatusInput_pipelineId, &sSetStatusInput_objectIds, &sSetStatusInput_status}}
+var mSetTaskStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetTaskStatusInput_taskId, &sSetTaskStatusInput_taskStatus, &sSetTaskStatusInput_errorId, &sSetTaskStatusInput_errorMessage, &sSetTaskStatusInput_errorStackTrace}}
+var mValidatePipelineDefinitionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sValidatePipelineDefinitionInput_pipelineId, &sValidatePipelineDefinitionInput_pipelineObjects, &sValidatePipelineDefinitionInput_parameterObjects, &sValidatePipelineDefinitionInput_parameterValues}}
+var mValidatePipelineDefinitionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sValidatePipelineDefinitionOutput_validationErrors, &sValidatePipelineDefinitionOutput_validationWarnings, &sValidatePipelineDefinitionOutput_errored}}
+
+var sActivatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivatePipeline, Type: smithy.ShapeTypeOperation, Ext: &eActivatePipeline})
+var sAddTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTags, Type: smithy.ShapeTypeOperation, Ext: &eAddTags})
+var sCreatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipeline, Type: smithy.ShapeTypeOperation, Ext: &eCreatePipeline})
+var sDeactivatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivatePipeline, Type: smithy.ShapeTypeOperation, Ext: &eDeactivatePipeline})
+var sDeletePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipeline, Type: smithy.ShapeTypeOperation, Ext: &eDeletePipeline})
+var sDescribeObjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObjects, Type: smithy.ShapeTypeOperation, Ext: &eDescribeObjects})
+var sDescribePipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePipelines, Type: smithy.ShapeTypeOperation, Ext: &eDescribePipelines})
+var sEvaluateExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateExpression, Type: smithy.ShapeTypeOperation, Ext: &eEvaluateExpression})
+var sGetPipelineDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineDefinition, Type: smithy.ShapeTypeOperation, Ext: &eGetPipelineDefinition})
+var sListPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelines, Type: smithy.ShapeTypeOperation, Ext: &eListPipelines})
+var sPollForTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForTask, Type: smithy.ShapeTypeOperation, Ext: &ePollForTask})
+var sPutPipelineDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPipelineDefinition, Type: smithy.ShapeTypeOperation, Ext: &ePutPipelineDefinition})
+var sQueryObjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryObjects, Type: smithy.ShapeTypeOperation, Ext: &eQueryObjects})
+var sRemoveTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTags, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTags})
+var sReportTaskProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportTaskProgress, Type: smithy.ShapeTypeOperation, Ext: &eReportTaskProgress})
+var sReportTaskRunnerHeartbeat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportTaskRunnerHeartbeat, Type: smithy.ShapeTypeOperation, Ext: &eReportTaskRunnerHeartbeat})
+var sSetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetStatus, Type: smithy.ShapeTypeOperation, Ext: &eSetStatus})
+var sSetTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetTaskStatus, Type: smithy.ShapeTypeOperation, Ext: &eSetTaskStatus})
+var sValidatePipelineDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipelineDefinition, Type: smithy.ShapeTypeOperation, Ext: &eValidatePipelineDefinition})
+var s_DataPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataPipeline, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_DataPipeline})
+var s_attributeNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeNameString, Type: smithy.ShapeTypeString, Ext: &e_attributeNameString})
+var s_attributeValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeValueString, Type: smithy.ShapeTypeString, Ext: &e_attributeValueString})
+var s_boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_boolean})
+var s_cancelActive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_cancelActive, Type: smithy.ShapeTypeBoolean, Ext: &e_cancelActive})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var sField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iField, Members: &mField, Type: smithy.ShapeTypeStructure, Ext: &eField})
+var sField_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_fieldNameString, Type: smithy.ShapeTypeString, Ext: &eField_key})
+var sField_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_fieldStringValue, Type: smithy.ShapeTypeString, Ext: &eField_stringValue})
+var sField_refValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refValue", ID: &i_fieldNameString, Type: smithy.ShapeTypeString, Ext: &eField_refValue})
+var s_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fieldList, Members: &m_fieldList, Type: smithy.ShapeTypeList, Ext: &e_fieldList})
+var s_fieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iField, Members: &mField, Type: smithy.ShapeTypeStructure, Ext: &e_fieldList_member})
+var s_fieldNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fieldNameString, Type: smithy.ShapeTypeString, Ext: &e_fieldNameString})
+var s_fieldStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fieldStringValue, Type: smithy.ShapeTypeString, Ext: &e_fieldStringValue})
+var s_id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_id, Type: smithy.ShapeTypeString, Ext: &e_id})
+var s_idList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_idList, Members: &m_idList, Type: smithy.ShapeTypeList, Ext: &e_idList})
+var s_idList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &e_idList_member})
+var sInstanceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceIdentity, Members: &mInstanceIdentity, Type: smithy.ShapeTypeStructure, Ext: &eInstanceIdentity})
+var sInstanceIdentity_document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "document", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInstanceIdentity_document})
+var sInstanceIdentity_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInstanceIdentity_signature})
+var s_int = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_int, Type: smithy.ShapeTypeInteger, Ext: &e_int})
+var sInternalServiceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceError, Members: &mInternalServiceError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceError})
+var sInternalServiceError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServiceError_message})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var s_longString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_longString, Type: smithy.ShapeTypeString, Ext: &e_longString})
+var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeStructure, Ext: &eOperator})
+var sOperator_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iOperatorType, Members: &mOperatorType, Type: smithy.ShapeTypeEnum, Ext: &eOperator_type})
+var sOperator_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_stringList, Members: &m_stringList, Type: smithy.ShapeTypeList, Ext: &eOperator_values})
+var sOperatorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperatorType, Members: &mOperatorType, Type: smithy.ShapeTypeEnum, Ext: &eOperatorType})
+var sOperatorType_Equal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equal", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperatorType_Equal})
+var sOperatorType_ReferenceEqual = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceEqual", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperatorType_ReferenceEqual})
+var sOperatorType_LessThanOrEqual = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThanOrEqual", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperatorType_LessThanOrEqual})
+var sOperatorType_GreaterThanOrEqual = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThanOrEqual", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperatorType_GreaterThanOrEqual})
+var sOperatorType_Between = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Between", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperatorType_Between})
+var sParameterAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterAttribute, Members: &mParameterAttribute, Type: smithy.ShapeTypeStructure, Ext: &eParameterAttribute})
+var sParameterAttribute_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_attributeNameString, Type: smithy.ShapeTypeString, Ext: &eParameterAttribute_key})
+var sParameterAttribute_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_attributeValueString, Type: smithy.ShapeTypeString, Ext: &eParameterAttribute_stringValue})
+var s_ParameterAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterAttributeList, Members: &m_ParameterAttributeList, Type: smithy.ShapeTypeList, Ext: &e_ParameterAttributeList})
+var s_ParameterAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParameterAttribute, Members: &mParameterAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_ParameterAttributeList_member})
+var sParameterObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterObject, Members: &mParameterObject, Type: smithy.ShapeTypeStructure, Ext: &eParameterObject})
+var sParameterObject_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_fieldNameString, Type: smithy.ShapeTypeString, Ext: &eParameterObject_id})
+var sParameterObject_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_ParameterAttributeList, Members: &m_ParameterAttributeList, Type: smithy.ShapeTypeList, Ext: &eParameterObject_attributes})
+var s_ParameterObjectList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterObjectList, Members: &m_ParameterObjectList, Type: smithy.ShapeTypeList, Ext: &e_ParameterObjectList})
+var s_ParameterObjectList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParameterObject, Members: &mParameterObject, Type: smithy.ShapeTypeStructure, Ext: &e_ParameterObjectList_member})
+var sParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterValue, Members: &mParameterValue, Type: smithy.ShapeTypeStructure, Ext: &eParameterValue})
+var sParameterValue_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_fieldNameString, Type: smithy.ShapeTypeString, Ext: &eParameterValue_id})
+var sParameterValue_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_fieldStringValue, Type: smithy.ShapeTypeString, Ext: &eParameterValue_stringValue})
+var s_ParameterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterValueList, Members: &m_ParameterValueList, Type: smithy.ShapeTypeList, Ext: &e_ParameterValueList})
+var s_ParameterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParameterValue, Members: &mParameterValue, Type: smithy.ShapeTypeStructure, Ext: &e_ParameterValueList_member})
+var sPipelineDeletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineDeletedException, Members: &mPipelineDeletedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineDeletedException})
+var sPipelineDeletedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ePipelineDeletedException_message})
+var sPipelineDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineDescription, Members: &mPipelineDescription, Type: smithy.ShapeTypeStructure, Ext: &ePipelineDescription})
+var sPipelineDescription_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePipelineDescription_pipelineId})
+var sPipelineDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePipelineDescription_name})
+var sPipelineDescription_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_fieldList, Members: &m_fieldList, Type: smithy.ShapeTypeList, Ext: &ePipelineDescription_fields})
+var sPipelineDescription_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ePipelineDescription_description})
+var sPipelineDescription_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &ePipelineDescription_tags})
+var s_PipelineDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineDescriptionList, Members: &m_PipelineDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_PipelineDescriptionList})
+var s_PipelineDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineDescription, Members: &mPipelineDescription, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineDescriptionList_member})
+var sPipelineIdName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineIdName, Members: &mPipelineIdName, Type: smithy.ShapeTypeStructure, Ext: &ePipelineIdName})
+var sPipelineIdName_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePipelineIdName_id})
+var sPipelineIdName_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePipelineIdName_name})
+var s_pipelineList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_pipelineList, Members: &m_pipelineList, Type: smithy.ShapeTypeList, Ext: &e_pipelineList})
+var s_pipelineList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineIdName, Members: &mPipelineIdName, Type: smithy.ShapeTypeStructure, Ext: &e_pipelineList_member})
+var sPipelineNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineNotFoundException, Members: &mPipelineNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineNotFoundException})
+var sPipelineNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ePipelineNotFoundException_message})
+var sPipelineObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineObject, Members: &mPipelineObject, Type: smithy.ShapeTypeStructure, Ext: &ePipelineObject})
+var sPipelineObject_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePipelineObject_id})
+var sPipelineObject_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePipelineObject_name})
+var sPipelineObject_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_fieldList, Members: &m_fieldList, Type: smithy.ShapeTypeList, Ext: &ePipelineObject_fields})
+var s_PipelineObjectList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineObjectList, Members: &m_PipelineObjectList, Type: smithy.ShapeTypeList, Ext: &e_PipelineObjectList})
+var s_PipelineObjectList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineObject, Members: &mPipelineObject, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineObjectList_member})
+var s_PipelineObjectMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineObjectMap, Members: &m_PipelineObjectMap, Type: smithy.ShapeTypeMap, Ext: &e_PipelineObjectMap})
+var s_PipelineObjectMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &e_PipelineObjectMap_key})
+var s_PipelineObjectMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPipelineObject, Members: &mPipelineObject, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineObjectMap_value})
+var sQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuery, Members: &mQuery, Type: smithy.ShapeTypeStructure, Ext: &eQuery})
+var sQuery_selectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectors", ID: &i_SelectorList, Members: &m_SelectorList, Type: smithy.ShapeTypeList, Ext: &eQuery_selectors})
+var sSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelector, Members: &mSelector, Type: smithy.ShapeTypeStructure, Ext: &eSelector})
+var sSelector_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eSelector_fieldName})
+var sSelector_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeStructure, Ext: &eSelector_operator})
+var s_SelectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectorList, Members: &m_SelectorList, Type: smithy.ShapeTypeList, Ext: &e_SelectorList})
+var s_SelectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSelector, Members: &mSelector, Type: smithy.ShapeTypeStructure, Ext: &e_SelectorList_member})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_string})
+var s_stringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_stringList, Members: &m_stringList, Type: smithy.ShapeTypeList, Ext: &e_stringList})
+var s_stringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_stringList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_tagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &e_tagKey})
+var s_tagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &e_tagList})
+var s_tagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_tagList_member})
+var s_tagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &e_tagValue})
+var s_taskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_taskId, Type: smithy.ShapeTypeString, Ext: &e_taskId})
+var sTaskNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskNotFoundException, Members: &mTaskNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTaskNotFoundException})
+var sTaskNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eTaskNotFoundException_message})
+var sTaskObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskObject, Members: &mTaskObject, Type: smithy.ShapeTypeStructure, Ext: &eTaskObject})
+var sTaskObject_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_taskId, Type: smithy.ShapeTypeString, Ext: &eTaskObject_taskId})
+var sTaskObject_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eTaskObject_pipelineId})
+var sTaskObject_attemptId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attemptId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eTaskObject_attemptId})
+var sTaskObject_objects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objects", ID: &i_PipelineObjectMap, Members: &m_PipelineObjectMap, Type: smithy.ShapeTypeMap, Ext: &eTaskObject_objects})
+var sTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskStatus})
+var sTaskStatus_FINISHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINISHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_FINISHED})
+var sTaskStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_FAILED})
+var sTaskStatus_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_FALSE})
+var s_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_timestamp})
+var sValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationError, Members: &mValidationError, Type: smithy.ShapeTypeStructure, Ext: &eValidationError})
+var sValidationError_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eValidationError_id})
+var sValidationError_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_validationMessages, Members: &m_validationMessages, Type: smithy.ShapeTypeList, Ext: &eValidationError_errors})
+var s_ValidationErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList, Ext: &e_ValidationErrors})
+var s_ValidationErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationError, Members: &mValidationError, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationErrors_member})
+var s_validationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_validationMessage, Type: smithy.ShapeTypeString, Ext: &e_validationMessage})
+var s_validationMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_validationMessages, Members: &m_validationMessages, Type: smithy.ShapeTypeList, Ext: &e_validationMessages})
+var s_validationMessages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_validationMessage, Type: smithy.ShapeTypeString, Ext: &e_validationMessages_member})
+var sValidationWarning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationWarning, Members: &mValidationWarning, Type: smithy.ShapeTypeStructure, Ext: &eValidationWarning})
+var sValidationWarning_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eValidationWarning_id})
+var sValidationWarning_warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warnings", ID: &i_validationMessages, Members: &m_validationMessages, Type: smithy.ShapeTypeList, Ext: &eValidationWarning_warnings})
+var s_ValidationWarnings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationWarnings, Members: &m_ValidationWarnings, Type: smithy.ShapeTypeList, Ext: &e_ValidationWarnings})
+var s_ValidationWarnings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationWarning, Members: &mValidationWarning, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationWarnings_member})
+var sActivatePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivatePipelineInput, Members: &mActivatePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eActivatePipelineInput})
+var sActivatePipelineInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eActivatePipelineInput_pipelineId})
+var sActivatePipelineInput_parameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValues", ID: &i_ParameterValueList, Members: &m_ParameterValueList, Type: smithy.ShapeTypeList, Ext: &eActivatePipelineInput_parameterValues})
+var sActivatePipelineInput_startTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimestamp", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eActivatePipelineInput_startTimestamp})
+var sActivatePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivatePipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &eActivatePipelineOutput})
+var sAddTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsInput, Members: &mAddTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsInput})
+var sAddTagsInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eAddTagsInput_pipelineId})
+var sAddTagsInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eAddTagsInput_tags})
+var sAddTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsOutput})
+var sCreatePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineInput, Members: &mCreatePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineInput})
+var sCreatePipelineInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineInput_name})
+var sCreatePipelineInput_uniqueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uniqueId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineInput_uniqueId})
+var sCreatePipelineInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineInput_description})
+var sCreatePipelineInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreatePipelineInput_tags})
+var sCreatePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineOutput, Members: &mCreatePipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineOutput})
+var sCreatePipelineOutput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineOutput_pipelineId})
+var sDeactivatePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivatePipelineInput, Members: &mDeactivatePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eDeactivatePipelineInput})
+var sDeactivatePipelineInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eDeactivatePipelineInput_pipelineId})
+var sDeactivatePipelineInput_cancelActive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelActive", ID: &i_cancelActive, Type: smithy.ShapeTypeBoolean, Ext: &eDeactivatePipelineInput_cancelActive})
+var sDeactivatePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivatePipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeactivatePipelineOutput})
+var sDeletePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineInput, Members: &mDeletePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePipelineInput})
+var sDeletePipelineInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eDeletePipelineInput_pipelineId})
+var sDescribeObjectsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObjectsInput, Members: &mDescribeObjectsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeObjectsInput})
+var sDescribeObjectsInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eDescribeObjectsInput_pipelineId})
+var sDescribeObjectsInput_objectIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectIds", ID: &i_idList, Members: &m_idList, Type: smithy.ShapeTypeList, Ext: &eDescribeObjectsInput_objectIds})
+var sDescribeObjectsInput_evaluateExpressions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluateExpressions", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeObjectsInput_evaluateExpressions})
+var sDescribeObjectsInput_marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marker", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeObjectsInput_marker})
+var sDescribeObjectsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObjectsOutput, Members: &mDescribeObjectsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeObjectsOutput})
+var sDescribeObjectsOutput_pipelineObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineObjects", ID: &i_PipelineObjectList, Members: &m_PipelineObjectList, Type: smithy.ShapeTypeList, Ext: &eDescribeObjectsOutput_pipelineObjects})
+var sDescribeObjectsOutput_marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marker", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeObjectsOutput_marker})
+var sDescribeObjectsOutput_hasMoreResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasMoreResults", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeObjectsOutput_hasMoreResults})
+var sDescribePipelinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePipelinesInput, Members: &mDescribePipelinesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribePipelinesInput})
+var sDescribePipelinesInput_pipelineIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineIds", ID: &i_idList, Members: &m_idList, Type: smithy.ShapeTypeList, Ext: &eDescribePipelinesInput_pipelineIds})
+var sDescribePipelinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePipelinesOutput, Members: &mDescribePipelinesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribePipelinesOutput})
+var sDescribePipelinesOutput_pipelineDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineDescriptionList", ID: &i_PipelineDescriptionList, Members: &m_PipelineDescriptionList, Type: smithy.ShapeTypeList, Ext: &eDescribePipelinesOutput_pipelineDescriptionList})
+var sEvaluateExpressionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateExpressionInput, Members: &mEvaluateExpressionInput, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateExpressionInput})
+var sEvaluateExpressionInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eEvaluateExpressionInput_pipelineId})
+var sEvaluateExpressionInput_objectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eEvaluateExpressionInput_objectId})
+var sEvaluateExpressionInput_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_longString, Type: smithy.ShapeTypeString, Ext: &eEvaluateExpressionInput_expression})
+var sEvaluateExpressionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateExpressionOutput, Members: &mEvaluateExpressionOutput, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateExpressionOutput})
+var sEvaluateExpressionOutput_evaluatedExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluatedExpression", ID: &i_longString, Type: smithy.ShapeTypeString, Ext: &eEvaluateExpressionOutput_evaluatedExpression})
+var sGetPipelineDefinitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineDefinitionInput, Members: &mGetPipelineDefinitionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineDefinitionInput})
+var sGetPipelineDefinitionInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eGetPipelineDefinitionInput_pipelineId})
+var sGetPipelineDefinitionInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetPipelineDefinitionInput_version})
+var sGetPipelineDefinitionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineDefinitionOutput, Members: &mGetPipelineDefinitionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineDefinitionOutput})
+var sGetPipelineDefinitionOutput_pipelineObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineObjects", ID: &i_PipelineObjectList, Members: &m_PipelineObjectList, Type: smithy.ShapeTypeList, Ext: &eGetPipelineDefinitionOutput_pipelineObjects})
+var sGetPipelineDefinitionOutput_parameterObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterObjects", ID: &i_ParameterObjectList, Members: &m_ParameterObjectList, Type: smithy.ShapeTypeList, Ext: &eGetPipelineDefinitionOutput_parameterObjects})
+var sGetPipelineDefinitionOutput_parameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValues", ID: &i_ParameterValueList, Members: &m_ParameterValueList, Type: smithy.ShapeTypeList, Ext: &eGetPipelineDefinitionOutput_parameterValues})
+var sListPipelinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesInput, Members: &mListPipelinesInput, Type: smithy.ShapeTypeStructure, Ext: &eListPipelinesInput})
+var sListPipelinesInput_marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marker", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eListPipelinesInput_marker})
+var sListPipelinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesOutput, Members: &mListPipelinesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPipelinesOutput})
+var sListPipelinesOutput_pipelineIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineIdList", ID: &i_pipelineList, Members: &m_pipelineList, Type: smithy.ShapeTypeList, Ext: &eListPipelinesOutput_pipelineIdList})
+var sListPipelinesOutput_marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marker", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eListPipelinesOutput_marker})
+var sListPipelinesOutput_hasMoreResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasMoreResults", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListPipelinesOutput_hasMoreResults})
+var sPollForTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForTaskInput, Members: &mPollForTaskInput, Type: smithy.ShapeTypeStructure, Ext: &ePollForTaskInput})
+var sPollForTaskInput_workerGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerGroup", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ePollForTaskInput_workerGroup})
+var sPollForTaskInput_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePollForTaskInput_hostname})
+var sPollForTaskInput_instanceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceIdentity", ID: &iInstanceIdentity, Members: &mInstanceIdentity, Type: smithy.ShapeTypeStructure, Ext: &ePollForTaskInput_instanceIdentity})
+var sPollForTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForTaskOutput, Members: &mPollForTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &ePollForTaskOutput})
+var sPollForTaskOutput_taskObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskObject", ID: &iTaskObject, Members: &mTaskObject, Type: smithy.ShapeTypeStructure, Ext: &ePollForTaskOutput_taskObject})
+var sPutPipelineDefinitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPipelineDefinitionInput, Members: &mPutPipelineDefinitionInput, Type: smithy.ShapeTypeStructure, Ext: &ePutPipelineDefinitionInput})
+var sPutPipelineDefinitionInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &ePutPipelineDefinitionInput_pipelineId})
+var sPutPipelineDefinitionInput_pipelineObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineObjects", ID: &i_PipelineObjectList, Members: &m_PipelineObjectList, Type: smithy.ShapeTypeList, Ext: &ePutPipelineDefinitionInput_pipelineObjects})
+var sPutPipelineDefinitionInput_parameterObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterObjects", ID: &i_ParameterObjectList, Members: &m_ParameterObjectList, Type: smithy.ShapeTypeList, Ext: &ePutPipelineDefinitionInput_parameterObjects})
+var sPutPipelineDefinitionInput_parameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValues", ID: &i_ParameterValueList, Members: &m_ParameterValueList, Type: smithy.ShapeTypeList, Ext: &ePutPipelineDefinitionInput_parameterValues})
+var sPutPipelineDefinitionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPipelineDefinitionOutput, Members: &mPutPipelineDefinitionOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutPipelineDefinitionOutput})
+var sPutPipelineDefinitionOutput_validationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationErrors", ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList, Ext: &ePutPipelineDefinitionOutput_validationErrors})
+var sPutPipelineDefinitionOutput_validationWarnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationWarnings", ID: &i_ValidationWarnings, Members: &m_ValidationWarnings, Type: smithy.ShapeTypeList, Ext: &ePutPipelineDefinitionOutput_validationWarnings})
+var sPutPipelineDefinitionOutput_errored = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errored", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutPipelineDefinitionOutput_errored})
+var sQueryObjectsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryObjectsInput, Members: &mQueryObjectsInput, Type: smithy.ShapeTypeStructure, Ext: &eQueryObjectsInput})
+var sQueryObjectsInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eQueryObjectsInput_pipelineId})
+var sQueryObjectsInput_query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "query", ID: &iQuery, Members: &mQuery, Type: smithy.ShapeTypeStructure, Ext: &eQueryObjectsInput_query})
+var sQueryObjectsInput_sphere = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sphere", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eQueryObjectsInput_sphere})
+var sQueryObjectsInput_marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marker", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eQueryObjectsInput_marker})
+var sQueryObjectsInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_int, Type: smithy.ShapeTypeInteger, Ext: &eQueryObjectsInput_limit})
+var sQueryObjectsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryObjectsOutput, Members: &mQueryObjectsOutput, Type: smithy.ShapeTypeStructure, Ext: &eQueryObjectsOutput})
+var sQueryObjectsOutput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_idList, Members: &m_idList, Type: smithy.ShapeTypeList, Ext: &eQueryObjectsOutput_ids})
+var sQueryObjectsOutput_marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marker", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eQueryObjectsOutput_marker})
+var sQueryObjectsOutput_hasMoreResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasMoreResults", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eQueryObjectsOutput_hasMoreResults})
+var sRemoveTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsInput, Members: &mRemoveTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsInput})
+var sRemoveTagsInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eRemoveTagsInput_pipelineId})
+var sRemoveTagsInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_stringList, Members: &m_stringList, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsInput_tagKeys})
+var sRemoveTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsOutput})
+var sReportTaskProgressInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportTaskProgressInput, Members: &mReportTaskProgressInput, Type: smithy.ShapeTypeStructure, Ext: &eReportTaskProgressInput})
+var sReportTaskProgressInput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_taskId, Type: smithy.ShapeTypeString, Ext: &eReportTaskProgressInput_taskId})
+var sReportTaskProgressInput_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_fieldList, Members: &m_fieldList, Type: smithy.ShapeTypeList, Ext: &eReportTaskProgressInput_fields})
+var sReportTaskProgressOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportTaskProgressOutput, Members: &mReportTaskProgressOutput, Type: smithy.ShapeTypeStructure, Ext: &eReportTaskProgressOutput})
+var sReportTaskProgressOutput_canceled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canceled", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eReportTaskProgressOutput_canceled})
+var sReportTaskRunnerHeartbeatInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportTaskRunnerHeartbeatInput, Members: &mReportTaskRunnerHeartbeatInput, Type: smithy.ShapeTypeStructure, Ext: &eReportTaskRunnerHeartbeatInput})
+var sReportTaskRunnerHeartbeatInput_taskrunnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskrunnerId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eReportTaskRunnerHeartbeatInput_taskrunnerId})
+var sReportTaskRunnerHeartbeatInput_workerGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workerGroup", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eReportTaskRunnerHeartbeatInput_workerGroup})
+var sReportTaskRunnerHeartbeatInput_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eReportTaskRunnerHeartbeatInput_hostname})
+var sReportTaskRunnerHeartbeatOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportTaskRunnerHeartbeatOutput, Members: &mReportTaskRunnerHeartbeatOutput, Type: smithy.ShapeTypeStructure, Ext: &eReportTaskRunnerHeartbeatOutput})
+var sReportTaskRunnerHeartbeatOutput_terminate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminate", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eReportTaskRunnerHeartbeatOutput_terminate})
+var sSetStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetStatusInput, Members: &mSetStatusInput, Type: smithy.ShapeTypeStructure, Ext: &eSetStatusInput})
+var sSetStatusInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eSetStatusInput_pipelineId})
+var sSetStatusInput_objectIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectIds", ID: &i_idList, Members: &m_idList, Type: smithy.ShapeTypeList, Ext: &eSetStatusInput_objectIds})
+var sSetStatusInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eSetStatusInput_status})
+var sSetTaskStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetTaskStatusInput, Members: &mSetTaskStatusInput, Type: smithy.ShapeTypeStructure, Ext: &eSetTaskStatusInput})
+var sSetTaskStatusInput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_taskId, Type: smithy.ShapeTypeString, Ext: &eSetTaskStatusInput_taskId})
+var sSetTaskStatusInput_taskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eSetTaskStatusInput_taskStatus})
+var sSetTaskStatusInput_errorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eSetTaskStatusInput_errorId})
+var sSetTaskStatusInput_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eSetTaskStatusInput_errorMessage})
+var sSetTaskStatusInput_errorStackTrace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorStackTrace", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eSetTaskStatusInput_errorStackTrace})
+var sSetTaskStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetTaskStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetTaskStatusOutput})
+var sValidatePipelineDefinitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipelineDefinitionInput, Members: &mValidatePipelineDefinitionInput, Type: smithy.ShapeTypeStructure, Ext: &eValidatePipelineDefinitionInput})
+var sValidatePipelineDefinitionInput_pipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineId", ID: &i_id, Type: smithy.ShapeTypeString, Ext: &eValidatePipelineDefinitionInput_pipelineId})
+var sValidatePipelineDefinitionInput_pipelineObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineObjects", ID: &i_PipelineObjectList, Members: &m_PipelineObjectList, Type: smithy.ShapeTypeList, Ext: &eValidatePipelineDefinitionInput_pipelineObjects})
+var sValidatePipelineDefinitionInput_parameterObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterObjects", ID: &i_ParameterObjectList, Members: &m_ParameterObjectList, Type: smithy.ShapeTypeList, Ext: &eValidatePipelineDefinitionInput_parameterObjects})
+var sValidatePipelineDefinitionInput_parameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValues", ID: &i_ParameterValueList, Members: &m_ParameterValueList, Type: smithy.ShapeTypeList, Ext: &eValidatePipelineDefinitionInput_parameterValues})
+var sValidatePipelineDefinitionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipelineDefinitionOutput, Members: &mValidatePipelineDefinitionOutput, Type: smithy.ShapeTypeStructure, Ext: &eValidatePipelineDefinitionOutput})
+var sValidatePipelineDefinitionOutput_validationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationErrors", ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList, Ext: &eValidatePipelineDefinitionOutput_validationErrors})
+var sValidatePipelineDefinitionOutput_validationWarnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationWarnings", ID: &i_ValidationWarnings, Members: &m_ValidationWarnings, Type: smithy.ShapeTypeList, Ext: &eValidatePipelineDefinitionOutput_validationWarnings})
+var sValidatePipelineDefinitionOutput_errored = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errored", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eValidatePipelineDefinitionOutput_errored})
+
+var ActivatePipeline = &sActivatePipeline
+
+var AddTags = &sAddTags
+
+var CreatePipeline = &sCreatePipeline
+
+var DeactivatePipeline = &sDeactivatePipeline
+
+var DeletePipeline = &sDeletePipeline
+
+var DescribeObjects = &sDescribeObjects
+
+var DescribePipelines = &sDescribePipelines
+
+var EvaluateExpression = &sEvaluateExpression
+
+var GetPipelineDefinition = &sGetPipelineDefinition
+
+var ListPipelines = &sListPipelines
+
+var PollForTask = &sPollForTask
+
+var PutPipelineDefinition = &sPutPipelineDefinition
+
+var QueryObjects = &sQueryObjects
+
+var RemoveTags = &sRemoveTags
+
+var ReportTaskProgress = &sReportTaskProgress
+
+var ReportTaskRunnerHeartbeat = &sReportTaskRunnerHeartbeat
+
+var SetStatus = &sSetStatus
+
+var SetTaskStatus = &sSetTaskStatus
+
+var ValidatePipelineDefinition = &sValidatePipelineDefinition
+
+var _DataPipeline = &s_DataPipeline
+
+var _attributeNameString = &s_attributeNameString
+
+var _attributeValueString = &s_attributeValueString
+
+var _boolean = &s_boolean
+
+var _cancelActive = &s_cancelActive
+
+var _errorMessage = &s_errorMessage
+
+var Field = &sField
+var Field_key = &sField_key
+var Field_stringValue = &sField_stringValue
+var Field_refValue = &sField_refValue
+
+var _fieldList = &s_fieldList
+var _fieldList_member = &s_fieldList_member
+
+var _fieldNameString = &s_fieldNameString
+
+var _fieldStringValue = &s_fieldStringValue
+
+var _id = &s_id
+
+var _idList = &s_idList
+var _idList_member = &s_idList_member
+
+var InstanceIdentity = &sInstanceIdentity
+var InstanceIdentity_document = &sInstanceIdentity_document
+var InstanceIdentity_signature = &sInstanceIdentity_signature
+
+var _int = &s_int
+
+var InternalServiceError = &sInternalServiceError
+var InternalServiceError_message = &sInternalServiceError_message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_message = &sInvalidRequestException_message
+
+var _longString = &s_longString
+
+var Operator = &sOperator
+var Operator_type = &sOperator_type
+var Operator_values = &sOperator_values
+
+var OperatorType = &sOperatorType
+var OperatorType_Equal = &sOperatorType_Equal
+var OperatorType_ReferenceEqual = &sOperatorType_ReferenceEqual
+var OperatorType_LessThanOrEqual = &sOperatorType_LessThanOrEqual
+var OperatorType_GreaterThanOrEqual = &sOperatorType_GreaterThanOrEqual
+var OperatorType_Between = &sOperatorType_Between
+
+var ParameterAttribute = &sParameterAttribute
+var ParameterAttribute_key = &sParameterAttribute_key
+var ParameterAttribute_stringValue = &sParameterAttribute_stringValue
+
+var _ParameterAttributeList = &s_ParameterAttributeList
+var _ParameterAttributeList_member = &s_ParameterAttributeList_member
+
+var ParameterObject = &sParameterObject
+var ParameterObject_id = &sParameterObject_id
+var ParameterObject_attributes = &sParameterObject_attributes
+
+var _ParameterObjectList = &s_ParameterObjectList
+var _ParameterObjectList_member = &s_ParameterObjectList_member
+
+var ParameterValue = &sParameterValue
+var ParameterValue_id = &sParameterValue_id
+var ParameterValue_stringValue = &sParameterValue_stringValue
+
+var _ParameterValueList = &s_ParameterValueList
+var _ParameterValueList_member = &s_ParameterValueList_member
+
+var PipelineDeletedException = &sPipelineDeletedException
+var PipelineDeletedException_message = &sPipelineDeletedException_message
+
+var PipelineDescription = &sPipelineDescription
+var PipelineDescription_pipelineId = &sPipelineDescription_pipelineId
+var PipelineDescription_name = &sPipelineDescription_name
+var PipelineDescription_fields = &sPipelineDescription_fields
+var PipelineDescription_description = &sPipelineDescription_description
+var PipelineDescription_tags = &sPipelineDescription_tags
+
+var _PipelineDescriptionList = &s_PipelineDescriptionList
+var _PipelineDescriptionList_member = &s_PipelineDescriptionList_member
+
+var PipelineIdName = &sPipelineIdName
+var PipelineIdName_id = &sPipelineIdName_id
+var PipelineIdName_name = &sPipelineIdName_name
+
+var _pipelineList = &s_pipelineList
+var _pipelineList_member = &s_pipelineList_member
+
+var PipelineNotFoundException = &sPipelineNotFoundException
+var PipelineNotFoundException_message = &sPipelineNotFoundException_message
+
+var PipelineObject = &sPipelineObject
+var PipelineObject_id = &sPipelineObject_id
+var PipelineObject_name = &sPipelineObject_name
+var PipelineObject_fields = &sPipelineObject_fields
+
+var _PipelineObjectList = &s_PipelineObjectList
+var _PipelineObjectList_member = &s_PipelineObjectList_member
+
+var _PipelineObjectMap = &s_PipelineObjectMap
+var _PipelineObjectMap_key = &s_PipelineObjectMap_key
+var _PipelineObjectMap_value = &s_PipelineObjectMap_value
+
+var Query = &sQuery
+var Query_selectors = &sQuery_selectors
+
+var Selector = &sSelector
+var Selector_fieldName = &sSelector_fieldName
+var Selector_operator = &sSelector_operator
+
+var _SelectorList = &s_SelectorList
+var _SelectorList_member = &s_SelectorList_member
+
+var _string = &s_string
+
+var _stringList = &s_stringList
+var _stringList_member = &s_stringList_member
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _tagKey = &s_tagKey
+
+var _tagList = &s_tagList
+var _tagList_member = &s_tagList_member
+
+var _tagValue = &s_tagValue
+
+var _taskId = &s_taskId
+
+var TaskNotFoundException = &sTaskNotFoundException
+var TaskNotFoundException_message = &sTaskNotFoundException_message
+
+var TaskObject = &sTaskObject
+var TaskObject_taskId = &sTaskObject_taskId
+var TaskObject_pipelineId = &sTaskObject_pipelineId
+var TaskObject_attemptId = &sTaskObject_attemptId
+var TaskObject_objects = &sTaskObject_objects
+
+var TaskStatus = &sTaskStatus
+var TaskStatus_FINISHED = &sTaskStatus_FINISHED
+var TaskStatus_FAILED = &sTaskStatus_FAILED
+var TaskStatus_FALSE = &sTaskStatus_FALSE
+
+var _timestamp = &s_timestamp
+
+var ValidationError = &sValidationError
+var ValidationError_id = &sValidationError_id
+var ValidationError_errors = &sValidationError_errors
+
+var _ValidationErrors = &s_ValidationErrors
+var _ValidationErrors_member = &s_ValidationErrors_member
+
+var _validationMessage = &s_validationMessage
+
+var _validationMessages = &s_validationMessages
+var _validationMessages_member = &s_validationMessages_member
+
+var ValidationWarning = &sValidationWarning
+var ValidationWarning_id = &sValidationWarning_id
+var ValidationWarning_warnings = &sValidationWarning_warnings
+
+var _ValidationWarnings = &s_ValidationWarnings
+var _ValidationWarnings_member = &s_ValidationWarnings_member
+
+var ActivatePipelineInput = &sActivatePipelineInput
+var ActivatePipelineInput_pipelineId = &sActivatePipelineInput_pipelineId
+var ActivatePipelineInput_parameterValues = &sActivatePipelineInput_parameterValues
+var ActivatePipelineInput_startTimestamp = &sActivatePipelineInput_startTimestamp
+
+var ActivatePipelineOutput = &sActivatePipelineOutput
+
+var AddTagsInput = &sAddTagsInput
+var AddTagsInput_pipelineId = &sAddTagsInput_pipelineId
+var AddTagsInput_tags = &sAddTagsInput_tags
+
+var AddTagsOutput = &sAddTagsOutput
+
+var CreatePipelineInput = &sCreatePipelineInput
+var CreatePipelineInput_name = &sCreatePipelineInput_name
+var CreatePipelineInput_uniqueId = &sCreatePipelineInput_uniqueId
+var CreatePipelineInput_description = &sCreatePipelineInput_description
+var CreatePipelineInput_tags = &sCreatePipelineInput_tags
+
+var CreatePipelineOutput = &sCreatePipelineOutput
+var CreatePipelineOutput_pipelineId = &sCreatePipelineOutput_pipelineId
+
+var DeactivatePipelineInput = &sDeactivatePipelineInput
+var DeactivatePipelineInput_pipelineId = &sDeactivatePipelineInput_pipelineId
+var DeactivatePipelineInput_cancelActive = &sDeactivatePipelineInput_cancelActive
+
+var DeactivatePipelineOutput = &sDeactivatePipelineOutput
+
+var DeletePipelineInput = &sDeletePipelineInput
+var DeletePipelineInput_pipelineId = &sDeletePipelineInput_pipelineId
+
+var DescribeObjectsInput = &sDescribeObjectsInput
+var DescribeObjectsInput_pipelineId = &sDescribeObjectsInput_pipelineId
+var DescribeObjectsInput_objectIds = &sDescribeObjectsInput_objectIds
+var DescribeObjectsInput_evaluateExpressions = &sDescribeObjectsInput_evaluateExpressions
+var DescribeObjectsInput_marker = &sDescribeObjectsInput_marker
+
+var DescribeObjectsOutput = &sDescribeObjectsOutput
+var DescribeObjectsOutput_pipelineObjects = &sDescribeObjectsOutput_pipelineObjects
+var DescribeObjectsOutput_marker = &sDescribeObjectsOutput_marker
+var DescribeObjectsOutput_hasMoreResults = &sDescribeObjectsOutput_hasMoreResults
+
+var DescribePipelinesInput = &sDescribePipelinesInput
+var DescribePipelinesInput_pipelineIds = &sDescribePipelinesInput_pipelineIds
+
+var DescribePipelinesOutput = &sDescribePipelinesOutput
+var DescribePipelinesOutput_pipelineDescriptionList = &sDescribePipelinesOutput_pipelineDescriptionList
+
+var EvaluateExpressionInput = &sEvaluateExpressionInput
+var EvaluateExpressionInput_pipelineId = &sEvaluateExpressionInput_pipelineId
+var EvaluateExpressionInput_objectId = &sEvaluateExpressionInput_objectId
+var EvaluateExpressionInput_expression = &sEvaluateExpressionInput_expression
+
+var EvaluateExpressionOutput = &sEvaluateExpressionOutput
+var EvaluateExpressionOutput_evaluatedExpression = &sEvaluateExpressionOutput_evaluatedExpression
+
+var GetPipelineDefinitionInput = &sGetPipelineDefinitionInput
+var GetPipelineDefinitionInput_pipelineId = &sGetPipelineDefinitionInput_pipelineId
+var GetPipelineDefinitionInput_version = &sGetPipelineDefinitionInput_version
+
+var GetPipelineDefinitionOutput = &sGetPipelineDefinitionOutput
+var GetPipelineDefinitionOutput_pipelineObjects = &sGetPipelineDefinitionOutput_pipelineObjects
+var GetPipelineDefinitionOutput_parameterObjects = &sGetPipelineDefinitionOutput_parameterObjects
+var GetPipelineDefinitionOutput_parameterValues = &sGetPipelineDefinitionOutput_parameterValues
+
+var ListPipelinesInput = &sListPipelinesInput
+var ListPipelinesInput_marker = &sListPipelinesInput_marker
+
+var ListPipelinesOutput = &sListPipelinesOutput
+var ListPipelinesOutput_pipelineIdList = &sListPipelinesOutput_pipelineIdList
+var ListPipelinesOutput_marker = &sListPipelinesOutput_marker
+var ListPipelinesOutput_hasMoreResults = &sListPipelinesOutput_hasMoreResults
+
+var PollForTaskInput = &sPollForTaskInput
+var PollForTaskInput_workerGroup = &sPollForTaskInput_workerGroup
+var PollForTaskInput_hostname = &sPollForTaskInput_hostname
+var PollForTaskInput_instanceIdentity = &sPollForTaskInput_instanceIdentity
+
+var PollForTaskOutput = &sPollForTaskOutput
+var PollForTaskOutput_taskObject = &sPollForTaskOutput_taskObject
+
+var PutPipelineDefinitionInput = &sPutPipelineDefinitionInput
+var PutPipelineDefinitionInput_pipelineId = &sPutPipelineDefinitionInput_pipelineId
+var PutPipelineDefinitionInput_pipelineObjects = &sPutPipelineDefinitionInput_pipelineObjects
+var PutPipelineDefinitionInput_parameterObjects = &sPutPipelineDefinitionInput_parameterObjects
+var PutPipelineDefinitionInput_parameterValues = &sPutPipelineDefinitionInput_parameterValues
+
+var PutPipelineDefinitionOutput = &sPutPipelineDefinitionOutput
+var PutPipelineDefinitionOutput_validationErrors = &sPutPipelineDefinitionOutput_validationErrors
+var PutPipelineDefinitionOutput_validationWarnings = &sPutPipelineDefinitionOutput_validationWarnings
+var PutPipelineDefinitionOutput_errored = &sPutPipelineDefinitionOutput_errored
+
+var QueryObjectsInput = &sQueryObjectsInput
+var QueryObjectsInput_pipelineId = &sQueryObjectsInput_pipelineId
+var QueryObjectsInput_query = &sQueryObjectsInput_query
+var QueryObjectsInput_sphere = &sQueryObjectsInput_sphere
+var QueryObjectsInput_marker = &sQueryObjectsInput_marker
+var QueryObjectsInput_limit = &sQueryObjectsInput_limit
+
+var QueryObjectsOutput = &sQueryObjectsOutput
+var QueryObjectsOutput_ids = &sQueryObjectsOutput_ids
+var QueryObjectsOutput_marker = &sQueryObjectsOutput_marker
+var QueryObjectsOutput_hasMoreResults = &sQueryObjectsOutput_hasMoreResults
+
+var RemoveTagsInput = &sRemoveTagsInput
+var RemoveTagsInput_pipelineId = &sRemoveTagsInput_pipelineId
+var RemoveTagsInput_tagKeys = &sRemoveTagsInput_tagKeys
+
+var RemoveTagsOutput = &sRemoveTagsOutput
+
+var ReportTaskProgressInput = &sReportTaskProgressInput
+var ReportTaskProgressInput_taskId = &sReportTaskProgressInput_taskId
+var ReportTaskProgressInput_fields = &sReportTaskProgressInput_fields
+
+var ReportTaskProgressOutput = &sReportTaskProgressOutput
+var ReportTaskProgressOutput_canceled = &sReportTaskProgressOutput_canceled
+
+var ReportTaskRunnerHeartbeatInput = &sReportTaskRunnerHeartbeatInput
+var ReportTaskRunnerHeartbeatInput_taskrunnerId = &sReportTaskRunnerHeartbeatInput_taskrunnerId
+var ReportTaskRunnerHeartbeatInput_workerGroup = &sReportTaskRunnerHeartbeatInput_workerGroup
+var ReportTaskRunnerHeartbeatInput_hostname = &sReportTaskRunnerHeartbeatInput_hostname
+
+var ReportTaskRunnerHeartbeatOutput = &sReportTaskRunnerHeartbeatOutput
+var ReportTaskRunnerHeartbeatOutput_terminate = &sReportTaskRunnerHeartbeatOutput_terminate
+
+var SetStatusInput = &sSetStatusInput
+var SetStatusInput_pipelineId = &sSetStatusInput_pipelineId
+var SetStatusInput_objectIds = &sSetStatusInput_objectIds
+var SetStatusInput_status = &sSetStatusInput_status
+
+var SetTaskStatusInput = &sSetTaskStatusInput
+var SetTaskStatusInput_taskId = &sSetTaskStatusInput_taskId
+var SetTaskStatusInput_taskStatus = &sSetTaskStatusInput_taskStatus
+var SetTaskStatusInput_errorId = &sSetTaskStatusInput_errorId
+var SetTaskStatusInput_errorMessage = &sSetTaskStatusInput_errorMessage
+var SetTaskStatusInput_errorStackTrace = &sSetTaskStatusInput_errorStackTrace
+
+var SetTaskStatusOutput = &sSetTaskStatusOutput
+
+var ValidatePipelineDefinitionInput = &sValidatePipelineDefinitionInput
+var ValidatePipelineDefinitionInput_pipelineId = &sValidatePipelineDefinitionInput_pipelineId
+var ValidatePipelineDefinitionInput_pipelineObjects = &sValidatePipelineDefinitionInput_pipelineObjects
+var ValidatePipelineDefinitionInput_parameterObjects = &sValidatePipelineDefinitionInput_parameterObjects
+var ValidatePipelineDefinitionInput_parameterValues = &sValidatePipelineDefinitionInput_parameterValues
+
+var ValidatePipelineDefinitionOutput = &sValidatePipelineDefinitionOutput
+var ValidatePipelineDefinitionOutput_validationErrors = &sValidatePipelineDefinitionOutput_validationErrors
+var ValidatePipelineDefinitionOutput_validationWarnings = &sValidatePipelineDefinitionOutput_validationWarnings
+var ValidatePipelineDefinitionOutput_errored = &sValidatePipelineDefinitionOutput_errored
+
+var DataPipeline = &smithy.ServiceSchema{Schema: &s_DataPipeline, Version: "2012-10-29"}

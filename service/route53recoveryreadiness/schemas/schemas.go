@@ -4,1563 +4,1613 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateCell = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateCell",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateCell                                                        smithy.SchemaExtensions
+	eCreateCrossAccountAuthorization                                   smithy.SchemaExtensions
+	eCreateReadinessCheck                                              smithy.SchemaExtensions
+	eCreateRecoveryGroup                                               smithy.SchemaExtensions
+	eCreateResourceSet                                                 smithy.SchemaExtensions
+	eDeleteCell                                                        smithy.SchemaExtensions
+	eDeleteCrossAccountAuthorization                                   smithy.SchemaExtensions
+	eDeleteReadinessCheck                                              smithy.SchemaExtensions
+	eDeleteRecoveryGroup                                               smithy.SchemaExtensions
+	eDeleteResourceSet                                                 smithy.SchemaExtensions
+	eGetArchitectureRecommendations                                    smithy.SchemaExtensions
+	eGetCell                                                           smithy.SchemaExtensions
+	eGetCellReadinessSummary                                           smithy.SchemaExtensions
+	eGetReadinessCheck                                                 smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatus                                   smithy.SchemaExtensions
+	eGetReadinessCheckStatus                                           smithy.SchemaExtensions
+	eGetRecoveryGroup                                                  smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummary                                  smithy.SchemaExtensions
+	eGetResourceSet                                                    smithy.SchemaExtensions
+	eListCells                                                         smithy.SchemaExtensions
+	eListCrossAccountAuthorizations                                    smithy.SchemaExtensions
+	eListReadinessChecks                                               smithy.SchemaExtensions
+	eListRecoveryGroups                                                smithy.SchemaExtensions
+	eListResourceSets                                                  smithy.SchemaExtensions
+	eListRules                                                         smithy.SchemaExtensions
+	eListTagsForResources                                              smithy.SchemaExtensions
+	eTagResource                                                       smithy.SchemaExtensions
+	eUntagResource                                                     smithy.SchemaExtensions
+	eUpdateCell                                                        smithy.SchemaExtensions
+	eUpdateReadinessCheck                                              smithy.SchemaExtensions
+	eUpdateRecoveryGroup                                               smithy.SchemaExtensions
+	eUpdateResourceSet                                                 smithy.SchemaExtensions
+	e_Route53RecoveryReadiness                                         smithy.SchemaExtensions
+	e___listOf__string                                                 smithy.SchemaExtensions
+	e___listOf__string_member                                          smithy.SchemaExtensions
+	e___listOfCellOutput                                               smithy.SchemaExtensions
+	e___listOfCellOutput_member                                        smithy.SchemaExtensions
+	e___listOfCrossAccountAuthorization                                smithy.SchemaExtensions
+	e___listOfCrossAccountAuthorization_member                         smithy.SchemaExtensions
+	e___listOfListRulesOutput                                          smithy.SchemaExtensions
+	e___listOfListRulesOutput_member                                   smithy.SchemaExtensions
+	e___listOfMessage                                                  smithy.SchemaExtensions
+	e___listOfMessage_member                                           smithy.SchemaExtensions
+	e___listOfReadinessCheckOutput                                     smithy.SchemaExtensions
+	e___listOfReadinessCheckOutput_member                              smithy.SchemaExtensions
+	e___listOfReadinessCheckSummary                                    smithy.SchemaExtensions
+	e___listOfReadinessCheckSummary_member                             smithy.SchemaExtensions
+	e___listOfRecommendation                                           smithy.SchemaExtensions
+	e___listOfRecommendation_member                                    smithy.SchemaExtensions
+	e___listOfRecoveryGroupOutput                                      smithy.SchemaExtensions
+	e___listOfRecoveryGroupOutput_member                               smithy.SchemaExtensions
+	e___listOfResource                                                 smithy.SchemaExtensions
+	e___listOfResource_member                                          smithy.SchemaExtensions
+	e___listOfResourceResult                                           smithy.SchemaExtensions
+	e___listOfResourceResult_member                                    smithy.SchemaExtensions
+	e___listOfResourceSetOutput                                        smithy.SchemaExtensions
+	e___listOfResourceSetOutput_member                                 smithy.SchemaExtensions
+	e___listOfRuleResult                                               smithy.SchemaExtensions
+	e___listOfRuleResult_member                                        smithy.SchemaExtensions
+	e___string                                                         smithy.SchemaExtensions
+	e___stringMax256                                                   smithy.SchemaExtensions
+	e___stringMax64                                                    smithy.SchemaExtensions
+	e___stringMax64PatternAAZAZ09Z                                     smithy.SchemaExtensions
+	e___stringPatternAWSAZaZ09AZaZ09                                   smithy.SchemaExtensions
+	eAccessDeniedException                                             smithy.SchemaExtensions
+	eAccessDeniedException_Message                                     smithy.SchemaExtensions
+	eCellOutput                                                        smithy.SchemaExtensions
+	eCellOutput_CellArn                                                smithy.SchemaExtensions
+	eCellOutput_CellName                                               smithy.SchemaExtensions
+	eCellOutput_Cells                                                  smithy.SchemaExtensions
+	eCellOutput_ParentReadinessScopes                                  smithy.SchemaExtensions
+	eCellOutput_Tags                                                   smithy.SchemaExtensions
+	eConflictException                                                 smithy.SchemaExtensions
+	eConflictException_Message                                         smithy.SchemaExtensions
+	e_CrossAccountAuthorization                                        smithy.SchemaExtensions
+	eDNSTargetResource                                                 smithy.SchemaExtensions
+	eDNSTargetResource_DomainName                                      smithy.SchemaExtensions
+	eDNSTargetResource_HostedZoneArn                                   smithy.SchemaExtensions
+	eDNSTargetResource_RecordSetId                                     smithy.SchemaExtensions
+	eDNSTargetResource_RecordType                                      smithy.SchemaExtensions
+	eDNSTargetResource_TargetResource                                  smithy.SchemaExtensions
+	eInternalServerException                                           smithy.SchemaExtensions
+	eInternalServerException_Message                                   smithy.SchemaExtensions
+	e_LastAuditTimestamp                                               smithy.SchemaExtensions
+	eListRulesOutput                                                   smithy.SchemaExtensions
+	eListRulesOutput_ResourceType                                      smithy.SchemaExtensions
+	eListRulesOutput_RuleDescription                                   smithy.SchemaExtensions
+	eListRulesOutput_RuleId                                            smithy.SchemaExtensions
+	e_MaxResults                                                       smithy.SchemaExtensions
+	eMessage                                                           smithy.SchemaExtensions
+	eMessage_MessageText                                               smithy.SchemaExtensions
+	eNLBResource                                                       smithy.SchemaExtensions
+	eNLBResource_Arn                                                   smithy.SchemaExtensions
+	eR53ResourceRecord                                                 smithy.SchemaExtensions
+	eR53ResourceRecord_DomainName                                      smithy.SchemaExtensions
+	eR53ResourceRecord_RecordSetId                                     smithy.SchemaExtensions
+	eReadiness                                                         smithy.SchemaExtensions
+	eReadiness_READY                                                   smithy.SchemaExtensions
+	eReadiness_NOT_READY                                               smithy.SchemaExtensions
+	eReadiness_UNKNOWN                                                 smithy.SchemaExtensions
+	eReadiness_NOT_AUTHORIZED                                          smithy.SchemaExtensions
+	eReadinessCheckOutput                                              smithy.SchemaExtensions
+	eReadinessCheckOutput_ReadinessCheckArn                            smithy.SchemaExtensions
+	eReadinessCheckOutput_ReadinessCheckName                           smithy.SchemaExtensions
+	eReadinessCheckOutput_ResourceSet                                  smithy.SchemaExtensions
+	eReadinessCheckOutput_Tags                                         smithy.SchemaExtensions
+	eReadinessCheckSummary                                             smithy.SchemaExtensions
+	eReadinessCheckSummary_Readiness                                   smithy.SchemaExtensions
+	eReadinessCheckSummary_ReadinessCheckName                          smithy.SchemaExtensions
+	e_ReadinessCheckTimestamp                                          smithy.SchemaExtensions
+	eRecommendation                                                    smithy.SchemaExtensions
+	eRecommendation_RecommendationText                                 smithy.SchemaExtensions
+	eRecoveryGroupOutput                                               smithy.SchemaExtensions
+	eRecoveryGroupOutput_Cells                                         smithy.SchemaExtensions
+	eRecoveryGroupOutput_RecoveryGroupArn                              smithy.SchemaExtensions
+	eRecoveryGroupOutput_RecoveryGroupName                             smithy.SchemaExtensions
+	eRecoveryGroupOutput_Tags                                          smithy.SchemaExtensions
+	eResource                                                          smithy.SchemaExtensions
+	eResource_ComponentId                                              smithy.SchemaExtensions
+	eResource_DnsTargetResource                                        smithy.SchemaExtensions
+	eResource_ReadinessScopes                                          smithy.SchemaExtensions
+	eResource_ResourceArn                                              smithy.SchemaExtensions
+	eResourceNotFoundException                                         smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                 smithy.SchemaExtensions
+	eResourceResult                                                    smithy.SchemaExtensions
+	eResourceResult_ComponentId                                        smithy.SchemaExtensions
+	eResourceResult_LastCheckedTimestamp                               smithy.SchemaExtensions
+	eResourceResult_Readiness                                          smithy.SchemaExtensions
+	eResourceResult_ResourceArn                                        smithy.SchemaExtensions
+	eResourceSetOutput                                                 smithy.SchemaExtensions
+	eResourceSetOutput_ResourceSetArn                                  smithy.SchemaExtensions
+	eResourceSetOutput_ResourceSetName                                 smithy.SchemaExtensions
+	eResourceSetOutput_ResourceSetType                                 smithy.SchemaExtensions
+	eResourceSetOutput_Resources                                       smithy.SchemaExtensions
+	eResourceSetOutput_Tags                                            smithy.SchemaExtensions
+	eRuleResult                                                        smithy.SchemaExtensions
+	eRuleResult_LastCheckedTimestamp                                   smithy.SchemaExtensions
+	eRuleResult_Messages                                               smithy.SchemaExtensions
+	eRuleResult_Readiness                                              smithy.SchemaExtensions
+	eRuleResult_RuleId                                                 smithy.SchemaExtensions
+	e_Tags                                                             smithy.SchemaExtensions
+	e_Tags_key                                                         smithy.SchemaExtensions
+	e_Tags_value                                                       smithy.SchemaExtensions
+	eTargetResource                                                    smithy.SchemaExtensions
+	eTargetResource_NLBResource                                        smithy.SchemaExtensions
+	eTargetResource_R53Resource                                        smithy.SchemaExtensions
+	eThrottlingException                                               smithy.SchemaExtensions
+	eThrottlingException_Message                                       smithy.SchemaExtensions
+	eValidationException                                               smithy.SchemaExtensions
+	eValidationException_Message                                       smithy.SchemaExtensions
+	eCreateCellRequest                                                 smithy.SchemaExtensions
+	eCreateCellRequest_CellName                                        smithy.SchemaExtensions
+	eCreateCellRequest_Cells                                           smithy.SchemaExtensions
+	eCreateCellRequest_Tags                                            smithy.SchemaExtensions
+	eCreateCellResponse                                                smithy.SchemaExtensions
+	eCreateCellResponse_CellArn                                        smithy.SchemaExtensions
+	eCreateCellResponse_CellName                                       smithy.SchemaExtensions
+	eCreateCellResponse_Cells                                          smithy.SchemaExtensions
+	eCreateCellResponse_ParentReadinessScopes                          smithy.SchemaExtensions
+	eCreateCellResponse_Tags                                           smithy.SchemaExtensions
+	eCreateCrossAccountAuthorizationRequest                            smithy.SchemaExtensions
+	eCreateCrossAccountAuthorizationRequest_CrossAccountAuthorization  smithy.SchemaExtensions
+	eCreateCrossAccountAuthorizationResponse                           smithy.SchemaExtensions
+	eCreateCrossAccountAuthorizationResponse_CrossAccountAuthorization smithy.SchemaExtensions
+	eCreateReadinessCheckRequest                                       smithy.SchemaExtensions
+	eCreateReadinessCheckRequest_ReadinessCheckName                    smithy.SchemaExtensions
+	eCreateReadinessCheckRequest_ResourceSetName                       smithy.SchemaExtensions
+	eCreateReadinessCheckRequest_Tags                                  smithy.SchemaExtensions
+	eCreateReadinessCheckResponse                                      smithy.SchemaExtensions
+	eCreateReadinessCheckResponse_ReadinessCheckArn                    smithy.SchemaExtensions
+	eCreateReadinessCheckResponse_ReadinessCheckName                   smithy.SchemaExtensions
+	eCreateReadinessCheckResponse_ResourceSet                          smithy.SchemaExtensions
+	eCreateReadinessCheckResponse_Tags                                 smithy.SchemaExtensions
+	eCreateRecoveryGroupRequest                                        smithy.SchemaExtensions
+	eCreateRecoveryGroupRequest_Cells                                  smithy.SchemaExtensions
+	eCreateRecoveryGroupRequest_RecoveryGroupName                      smithy.SchemaExtensions
+	eCreateRecoveryGroupRequest_Tags                                   smithy.SchemaExtensions
+	eCreateRecoveryGroupResponse                                       smithy.SchemaExtensions
+	eCreateRecoveryGroupResponse_Cells                                 smithy.SchemaExtensions
+	eCreateRecoveryGroupResponse_RecoveryGroupArn                      smithy.SchemaExtensions
+	eCreateRecoveryGroupResponse_RecoveryGroupName                     smithy.SchemaExtensions
+	eCreateRecoveryGroupResponse_Tags                                  smithy.SchemaExtensions
+	eCreateResourceSetRequest                                          smithy.SchemaExtensions
+	eCreateResourceSetRequest_ResourceSetName                          smithy.SchemaExtensions
+	eCreateResourceSetRequest_ResourceSetType                          smithy.SchemaExtensions
+	eCreateResourceSetRequest_Resources                                smithy.SchemaExtensions
+	eCreateResourceSetRequest_Tags                                     smithy.SchemaExtensions
+	eCreateResourceSetResponse                                         smithy.SchemaExtensions
+	eCreateResourceSetResponse_ResourceSetArn                          smithy.SchemaExtensions
+	eCreateResourceSetResponse_ResourceSetName                         smithy.SchemaExtensions
+	eCreateResourceSetResponse_ResourceSetType                         smithy.SchemaExtensions
+	eCreateResourceSetResponse_Resources                               smithy.SchemaExtensions
+	eCreateResourceSetResponse_Tags                                    smithy.SchemaExtensions
+	eDeleteCellRequest                                                 smithy.SchemaExtensions
+	eDeleteCellRequest_CellName                                        smithy.SchemaExtensions
+	eDeleteCrossAccountAuthorizationRequest                            smithy.SchemaExtensions
+	eDeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization  smithy.SchemaExtensions
+	eDeleteCrossAccountAuthorizationResponse                           smithy.SchemaExtensions
+	eDeleteReadinessCheckRequest                                       smithy.SchemaExtensions
+	eDeleteReadinessCheckRequest_ReadinessCheckName                    smithy.SchemaExtensions
+	eDeleteRecoveryGroupRequest                                        smithy.SchemaExtensions
+	eDeleteRecoveryGroupRequest_RecoveryGroupName                      smithy.SchemaExtensions
+	eDeleteResourceSetRequest                                          smithy.SchemaExtensions
+	eDeleteResourceSetRequest_ResourceSetName                          smithy.SchemaExtensions
+	eGetArchitectureRecommendationsRequest                             smithy.SchemaExtensions
+	eGetArchitectureRecommendationsRequest_MaxResults                  smithy.SchemaExtensions
+	eGetArchitectureRecommendationsRequest_NextToken                   smithy.SchemaExtensions
+	eGetArchitectureRecommendationsRequest_RecoveryGroupName           smithy.SchemaExtensions
+	eGetArchitectureRecommendationsResponse                            smithy.SchemaExtensions
+	eGetArchitectureRecommendationsResponse_LastAuditTimestamp         smithy.SchemaExtensions
+	eGetArchitectureRecommendationsResponse_NextToken                  smithy.SchemaExtensions
+	eGetArchitectureRecommendationsResponse_Recommendations            smithy.SchemaExtensions
+	eGetCellRequest                                                    smithy.SchemaExtensions
+	eGetCellRequest_CellName                                           smithy.SchemaExtensions
+	eGetCellResponse                                                   smithy.SchemaExtensions
+	eGetCellResponse_CellArn                                           smithy.SchemaExtensions
+	eGetCellResponse_CellName                                          smithy.SchemaExtensions
+	eGetCellResponse_Cells                                             smithy.SchemaExtensions
+	eGetCellResponse_ParentReadinessScopes                             smithy.SchemaExtensions
+	eGetCellResponse_Tags                                              smithy.SchemaExtensions
+	eGetCellReadinessSummaryRequest                                    smithy.SchemaExtensions
+	eGetCellReadinessSummaryRequest_CellName                           smithy.SchemaExtensions
+	eGetCellReadinessSummaryRequest_MaxResults                         smithy.SchemaExtensions
+	eGetCellReadinessSummaryRequest_NextToken                          smithy.SchemaExtensions
+	eGetCellReadinessSummaryResponse                                   smithy.SchemaExtensions
+	eGetCellReadinessSummaryResponse_NextToken                         smithy.SchemaExtensions
+	eGetCellReadinessSummaryResponse_Readiness                         smithy.SchemaExtensions
+	eGetCellReadinessSummaryResponse_ReadinessChecks                   smithy.SchemaExtensions
+	eGetReadinessCheckRequest                                          smithy.SchemaExtensions
+	eGetReadinessCheckRequest_ReadinessCheckName                       smithy.SchemaExtensions
+	eGetReadinessCheckResponse                                         smithy.SchemaExtensions
+	eGetReadinessCheckResponse_ReadinessCheckArn                       smithy.SchemaExtensions
+	eGetReadinessCheckResponse_ReadinessCheckName                      smithy.SchemaExtensions
+	eGetReadinessCheckResponse_ResourceSet                             smithy.SchemaExtensions
+	eGetReadinessCheckResponse_Tags                                    smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusRequest                            smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusRequest_MaxResults                 smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusRequest_NextToken                  smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusRequest_ReadinessCheckName         smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusRequest_ResourceIdentifier         smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusResponse                           smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusResponse_NextToken                 smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusResponse_Readiness                 smithy.SchemaExtensions
+	eGetReadinessCheckResourceStatusResponse_Rules                     smithy.SchemaExtensions
+	eGetReadinessCheckStatusRequest                                    smithy.SchemaExtensions
+	eGetReadinessCheckStatusRequest_MaxResults                         smithy.SchemaExtensions
+	eGetReadinessCheckStatusRequest_NextToken                          smithy.SchemaExtensions
+	eGetReadinessCheckStatusRequest_ReadinessCheckName                 smithy.SchemaExtensions
+	eGetReadinessCheckStatusResponse                                   smithy.SchemaExtensions
+	eGetReadinessCheckStatusResponse_Messages                          smithy.SchemaExtensions
+	eGetReadinessCheckStatusResponse_NextToken                         smithy.SchemaExtensions
+	eGetReadinessCheckStatusResponse_Readiness                         smithy.SchemaExtensions
+	eGetReadinessCheckStatusResponse_Resources                         smithy.SchemaExtensions
+	eGetRecoveryGroupRequest                                           smithy.SchemaExtensions
+	eGetRecoveryGroupRequest_RecoveryGroupName                         smithy.SchemaExtensions
+	eGetRecoveryGroupResponse                                          smithy.SchemaExtensions
+	eGetRecoveryGroupResponse_Cells                                    smithy.SchemaExtensions
+	eGetRecoveryGroupResponse_RecoveryGroupArn                         smithy.SchemaExtensions
+	eGetRecoveryGroupResponse_RecoveryGroupName                        smithy.SchemaExtensions
+	eGetRecoveryGroupResponse_Tags                                     smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryRequest                           smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryRequest_MaxResults                smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryRequest_NextToken                 smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName         smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryResponse                          smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryResponse_NextToken                smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryResponse_Readiness                smithy.SchemaExtensions
+	eGetRecoveryGroupReadinessSummaryResponse_ReadinessChecks          smithy.SchemaExtensions
+	eGetResourceSetRequest                                             smithy.SchemaExtensions
+	eGetResourceSetRequest_ResourceSetName                             smithy.SchemaExtensions
+	eGetResourceSetResponse                                            smithy.SchemaExtensions
+	eGetResourceSetResponse_ResourceSetArn                             smithy.SchemaExtensions
+	eGetResourceSetResponse_ResourceSetName                            smithy.SchemaExtensions
+	eGetResourceSetResponse_ResourceSetType                            smithy.SchemaExtensions
+	eGetResourceSetResponse_Resources                                  smithy.SchemaExtensions
+	eGetResourceSetResponse_Tags                                       smithy.SchemaExtensions
+	eListCellsRequest                                                  smithy.SchemaExtensions
+	eListCellsRequest_MaxResults                                       smithy.SchemaExtensions
+	eListCellsRequest_NextToken                                        smithy.SchemaExtensions
+	eListCellsResponse                                                 smithy.SchemaExtensions
+	eListCellsResponse_Cells                                           smithy.SchemaExtensions
+	eListCellsResponse_NextToken                                       smithy.SchemaExtensions
+	eListCrossAccountAuthorizationsRequest                             smithy.SchemaExtensions
+	eListCrossAccountAuthorizationsRequest_MaxResults                  smithy.SchemaExtensions
+	eListCrossAccountAuthorizationsRequest_NextToken                   smithy.SchemaExtensions
+	eListCrossAccountAuthorizationsResponse                            smithy.SchemaExtensions
+	eListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations smithy.SchemaExtensions
+	eListCrossAccountAuthorizationsResponse_NextToken                  smithy.SchemaExtensions
+	eListReadinessChecksRequest                                        smithy.SchemaExtensions
+	eListReadinessChecksRequest_MaxResults                             smithy.SchemaExtensions
+	eListReadinessChecksRequest_NextToken                              smithy.SchemaExtensions
+	eListReadinessChecksResponse                                       smithy.SchemaExtensions
+	eListReadinessChecksResponse_NextToken                             smithy.SchemaExtensions
+	eListReadinessChecksResponse_ReadinessChecks                       smithy.SchemaExtensions
+	eListRecoveryGroupsRequest                                         smithy.SchemaExtensions
+	eListRecoveryGroupsRequest_MaxResults                              smithy.SchemaExtensions
+	eListRecoveryGroupsRequest_NextToken                               smithy.SchemaExtensions
+	eListRecoveryGroupsResponse                                        smithy.SchemaExtensions
+	eListRecoveryGroupsResponse_NextToken                              smithy.SchemaExtensions
+	eListRecoveryGroupsResponse_RecoveryGroups                         smithy.SchemaExtensions
+	eListResourceSetsRequest                                           smithy.SchemaExtensions
+	eListResourceSetsRequest_MaxResults                                smithy.SchemaExtensions
+	eListResourceSetsRequest_NextToken                                 smithy.SchemaExtensions
+	eListResourceSetsResponse                                          smithy.SchemaExtensions
+	eListResourceSetsResponse_NextToken                                smithy.SchemaExtensions
+	eListResourceSetsResponse_ResourceSets                             smithy.SchemaExtensions
+	eListRulesRequest                                                  smithy.SchemaExtensions
+	eListRulesRequest_MaxResults                                       smithy.SchemaExtensions
+	eListRulesRequest_NextToken                                        smithy.SchemaExtensions
+	eListRulesRequest_ResourceType                                     smithy.SchemaExtensions
+	eListRulesResponse                                                 smithy.SchemaExtensions
+	eListRulesResponse_NextToken                                       smithy.SchemaExtensions
+	eListRulesResponse_Rules                                           smithy.SchemaExtensions
+	eListTagsForResourcesRequest                                       smithy.SchemaExtensions
+	eListTagsForResourcesRequest_ResourceArn                           smithy.SchemaExtensions
+	eListTagsForResourcesResponse                                      smithy.SchemaExtensions
+	eListTagsForResourcesResponse_Tags                                 smithy.SchemaExtensions
+	eTagResourceRequest                                                smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                    smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                           smithy.SchemaExtensions
+	eTagResourceResponse                                               smithy.SchemaExtensions
+	eUntagResourceRequest                                              smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                  smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                      smithy.SchemaExtensions
+	eUpdateCellRequest                                                 smithy.SchemaExtensions
+	eUpdateCellRequest_CellName                                        smithy.SchemaExtensions
+	eUpdateCellRequest_Cells                                           smithy.SchemaExtensions
+	eUpdateCellResponse                                                smithy.SchemaExtensions
+	eUpdateCellResponse_CellArn                                        smithy.SchemaExtensions
+	eUpdateCellResponse_CellName                                       smithy.SchemaExtensions
+	eUpdateCellResponse_Cells                                          smithy.SchemaExtensions
+	eUpdateCellResponse_ParentReadinessScopes                          smithy.SchemaExtensions
+	eUpdateCellResponse_Tags                                           smithy.SchemaExtensions
+	eUpdateReadinessCheckRequest                                       smithy.SchemaExtensions
+	eUpdateReadinessCheckRequest_ReadinessCheckName                    smithy.SchemaExtensions
+	eUpdateReadinessCheckRequest_ResourceSetName                       smithy.SchemaExtensions
+	eUpdateReadinessCheckResponse                                      smithy.SchemaExtensions
+	eUpdateReadinessCheckResponse_ReadinessCheckArn                    smithy.SchemaExtensions
+	eUpdateReadinessCheckResponse_ReadinessCheckName                   smithy.SchemaExtensions
+	eUpdateReadinessCheckResponse_ResourceSet                          smithy.SchemaExtensions
+	eUpdateReadinessCheckResponse_Tags                                 smithy.SchemaExtensions
+	eUpdateRecoveryGroupRequest                                        smithy.SchemaExtensions
+	eUpdateRecoveryGroupRequest_Cells                                  smithy.SchemaExtensions
+	eUpdateRecoveryGroupRequest_RecoveryGroupName                      smithy.SchemaExtensions
+	eUpdateRecoveryGroupResponse                                       smithy.SchemaExtensions
+	eUpdateRecoveryGroupResponse_Cells                                 smithy.SchemaExtensions
+	eUpdateRecoveryGroupResponse_RecoveryGroupArn                      smithy.SchemaExtensions
+	eUpdateRecoveryGroupResponse_RecoveryGroupName                     smithy.SchemaExtensions
+	eUpdateRecoveryGroupResponse_Tags                                  smithy.SchemaExtensions
+	eUpdateResourceSetRequest                                          smithy.SchemaExtensions
+	eUpdateResourceSetRequest_ResourceSetName                          smithy.SchemaExtensions
+	eUpdateResourceSetRequest_ResourceSetType                          smithy.SchemaExtensions
+	eUpdateResourceSetRequest_Resources                                smithy.SchemaExtensions
+	eUpdateResourceSetResponse                                         smithy.SchemaExtensions
+	eUpdateResourceSetResponse_ResourceSetArn                          smithy.SchemaExtensions
+	eUpdateResourceSetResponse_ResourceSetName                         smithy.SchemaExtensions
+	eUpdateResourceSetResponse_ResourceSetType                         smithy.SchemaExtensions
+	eUpdateResourceSetResponse_Resources                               smithy.SchemaExtensions
+	eUpdateResourceSetResponse_Tags                                    smithy.SchemaExtensions
+)
+
+var (
+	iCreateCell                               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateCell"}
+	iCreateCrossAccountAuthorization          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateCrossAccountAuthorization"}
+	iCreateReadinessCheck                     = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateReadinessCheck"}
+	iCreateRecoveryGroup                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateRecoveryGroup"}
+	iCreateResourceSet                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateResourceSet"}
+	iDeleteCell                               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteCell"}
+	iDeleteCrossAccountAuthorization          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteCrossAccountAuthorization"}
+	iDeleteReadinessCheck                     = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteReadinessCheck"}
+	iDeleteRecoveryGroup                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteRecoveryGroup"}
+	iDeleteResourceSet                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteResourceSet"}
+	iGetArchitectureRecommendations           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetArchitectureRecommendations"}
+	iGetCell                                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetCell"}
+	iGetCellReadinessSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetCellReadinessSummary"}
+	iGetReadinessCheck                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheck"}
+	iGetReadinessCheckResourceStatus          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckResourceStatus"}
+	iGetReadinessCheckStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckStatus"}
+	iGetRecoveryGroup                         = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetRecoveryGroup"}
+	iGetRecoveryGroupReadinessSummary         = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetRecoveryGroupReadinessSummary"}
+	iGetResourceSet                           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetResourceSet"}
+	iListCells                                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListCells"}
+	iListCrossAccountAuthorizations           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListCrossAccountAuthorizations"}
+	iListReadinessChecks                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListReadinessChecks"}
+	iListRecoveryGroups                       = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListRecoveryGroups"}
+	iListResourceSets                         = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListResourceSets"}
+	iListRules                                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListRules"}
+	iListTagsForResources                     = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListTagsForResources"}
+	iTagResource                              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "TagResource"}
+	iUntagResource                            = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UntagResource"}
+	iUpdateCell                               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateCell"}
+	iUpdateReadinessCheck                     = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateReadinessCheck"}
+	iUpdateRecoveryGroup                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateRecoveryGroup"}
+	iUpdateResourceSet                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateResourceSet"}
+	i_Route53RecoveryReadiness                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "Route53RecoveryReadiness"}
+	i___listOf__string                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOf__string"}
+	i___listOfCellOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfCellOutput"}
+	i___listOfCrossAccountAuthorization       = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfCrossAccountAuthorization"}
+	i___listOfListRulesOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfListRulesOutput"}
+	i___listOfMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfMessage"}
+	i___listOfReadinessCheckOutput            = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfReadinessCheckOutput"}
+	i___listOfReadinessCheckSummary           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfReadinessCheckSummary"}
+	i___listOfRecommendation                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfRecommendation"}
+	i___listOfRecoveryGroupOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfRecoveryGroupOutput"}
+	i___listOfResource                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfResource"}
+	i___listOfResourceResult                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfResourceResult"}
+	i___listOfResourceSetOutput               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfResourceSetOutput"}
+	i___listOfRuleResult                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__listOfRuleResult"}
+	i___string                                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__string"}
+	i___stringMax256                          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__stringMax256"}
+	i___stringMax64                           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__stringMax64"}
+	i___stringMax64PatternAAZAZ09Z            = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__stringMax64PatternAAZAZ09Z"}
+	i___stringPatternAWSAZaZ09AZaZ09          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "__stringPatternAWSAZaZ09AZaZ09"}
+	iAccessDeniedException                    = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "AccessDeniedException"}
+	iCellOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CellOutput"}
+	iConflictException                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ConflictException"}
+	i_CrossAccountAuthorization               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CrossAccountAuthorization"}
+	iDNSTargetResource                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DNSTargetResource"}
+	iInternalServerException                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "InternalServerException"}
+	i_LastAuditTimestamp                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "LastAuditTimestamp"}
+	iListRulesOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListRulesOutput"}
+	i_MaxResults                              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "MaxResults"}
+	iMessage                                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "Message"}
+	iNLBResource                              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "NLBResource"}
+	iR53ResourceRecord                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "R53ResourceRecord"}
+	iReadiness                                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "Readiness"}
+	iReadinessCheckOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ReadinessCheckOutput"}
+	iReadinessCheckSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ReadinessCheckSummary"}
+	i_ReadinessCheckTimestamp                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ReadinessCheckTimestamp"}
+	iRecommendation                           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "Recommendation"}
+	iRecoveryGroupOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "RecoveryGroupOutput"}
+	iResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "Resource"}
+	iResourceNotFoundException                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ResourceNotFoundException"}
+	iResourceResult                           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ResourceResult"}
+	iResourceSetOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ResourceSetOutput"}
+	iRuleResult                               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "RuleResult"}
+	i_Tags                                    = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "Tags"}
+	iTargetResource                           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "TargetResource"}
+	iThrottlingException                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ThrottlingException"}
+	iValidationException                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ValidationException"}
+	iCreateCellRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateCellRequest"}
+	iCreateCellResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateCellResponse"}
+	iCreateCrossAccountAuthorizationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateCrossAccountAuthorizationRequest"}
+	iCreateCrossAccountAuthorizationResponse  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateCrossAccountAuthorizationResponse"}
+	iCreateReadinessCheckRequest              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateReadinessCheckRequest"}
+	iCreateReadinessCheckResponse             = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateReadinessCheckResponse"}
+	iCreateRecoveryGroupRequest               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateRecoveryGroupRequest"}
+	iCreateRecoveryGroupResponse              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateRecoveryGroupResponse"}
+	iCreateResourceSetRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateResourceSetRequest"}
+	iCreateResourceSetResponse                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "CreateResourceSetResponse"}
+	iDeleteCellRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteCellRequest"}
+	iDeleteCrossAccountAuthorizationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteCrossAccountAuthorizationRequest"}
+	iDeleteCrossAccountAuthorizationResponse  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteCrossAccountAuthorizationResponse"}
+	iDeleteReadinessCheckRequest              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteReadinessCheckRequest"}
+	iDeleteRecoveryGroupRequest               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteRecoveryGroupRequest"}
+	iDeleteResourceSetRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "DeleteResourceSetRequest"}
+	iGetArchitectureRecommendationsRequest    = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetArchitectureRecommendationsRequest"}
+	iGetArchitectureRecommendationsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetArchitectureRecommendationsResponse"}
+	iGetCellRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetCellRequest"}
+	iGetCellResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetCellResponse"}
+	iGetCellReadinessSummaryRequest           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetCellReadinessSummaryRequest"}
+	iGetCellReadinessSummaryResponse          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetCellReadinessSummaryResponse"}
+	iGetReadinessCheckRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckRequest"}
+	iGetReadinessCheckResponse                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckResponse"}
+	iGetReadinessCheckResourceStatusRequest   = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckResourceStatusRequest"}
+	iGetReadinessCheckResourceStatusResponse  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckResourceStatusResponse"}
+	iGetReadinessCheckStatusRequest           = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckStatusRequest"}
+	iGetReadinessCheckStatusResponse          = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetReadinessCheckStatusResponse"}
+	iGetRecoveryGroupRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetRecoveryGroupRequest"}
+	iGetRecoveryGroupResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetRecoveryGroupResponse"}
+	iGetRecoveryGroupReadinessSummaryRequest  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetRecoveryGroupReadinessSummaryRequest"}
+	iGetRecoveryGroupReadinessSummaryResponse = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetRecoveryGroupReadinessSummaryResponse"}
+	iGetResourceSetRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetResourceSetRequest"}
+	iGetResourceSetResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "GetResourceSetResponse"}
+	iListCellsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListCellsRequest"}
+	iListCellsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListCellsResponse"}
+	iListCrossAccountAuthorizationsRequest    = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListCrossAccountAuthorizationsRequest"}
+	iListCrossAccountAuthorizationsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListCrossAccountAuthorizationsResponse"}
+	iListReadinessChecksRequest               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListReadinessChecksRequest"}
+	iListReadinessChecksResponse              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListReadinessChecksResponse"}
+	iListRecoveryGroupsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListRecoveryGroupsRequest"}
+	iListRecoveryGroupsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListRecoveryGroupsResponse"}
+	iListResourceSetsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListResourceSetsRequest"}
+	iListResourceSetsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListResourceSetsResponse"}
+	iListRulesRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListRulesRequest"}
+	iListRulesResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListRulesResponse"}
+	iListTagsForResourcesRequest              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListTagsForResourcesRequest"}
+	iListTagsForResourcesResponse             = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "ListTagsForResourcesResponse"}
+	iTagResourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "TagResourceRequest"}
+	iTagResourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "TagResourceResponse"}
+	iUntagResourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UntagResourceRequest"}
+	iUpdateCellRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateCellRequest"}
+	iUpdateCellResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateCellResponse"}
+	iUpdateReadinessCheckRequest              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateReadinessCheckRequest"}
+	iUpdateReadinessCheckResponse             = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateReadinessCheckResponse"}
+	iUpdateRecoveryGroupRequest               = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateRecoveryGroupRequest"}
+	iUpdateRecoveryGroupResponse              = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateRecoveryGroupResponse"}
+	iUpdateResourceSetRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateResourceSetRequest"}
+	iUpdateResourceSetResponse                = smithy.ShapeName{Namespace: "com.amazonaws.route53recoveryreadiness", Name: "UpdateResourceSetResponse"}
+	pUnit                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cells",
-	Code: 200})
-
-var CreateCrossAccountAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateCrossAccountAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/crossaccountauthorizations",
-	Code: 200})
-
-var CreateReadinessCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateReadinessCheck",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/readinesschecks",
-	Code: 200})
-
-var CreateRecoveryGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateRecoveryGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/recoverygroups",
-	Code: 200})
-
-var CreateResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateResourceSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/resourcesets",
-	Code: 200})
-
-var DeleteCell = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteCell",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/cells/{CellName}",
-	Code: 204})
-
-var DeleteCrossAccountAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteCrossAccountAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/crossaccountauthorizations/{CrossAccountAuthorization}",
-	Code: 200})
-
-var DeleteReadinessCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteReadinessCheck",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/readinesschecks/{ReadinessCheckName}",
-	Code: 204})
-
-var DeleteRecoveryGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteRecoveryGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/recoverygroups/{RecoveryGroupName}",
-	Code: 204})
-
-var DeleteResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteResourceSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/resourcesets/{ResourceSetName}",
-	Code: 204})
-
-var GetArchitectureRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetArchitectureRecommendations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/recoverygroups/{RecoveryGroupName}/architectureRecommendations",
-	Code: 200})
-
-var GetCell = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetCell",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/cells/{CellName}",
-	Code: 200})
-
-var GetCellReadinessSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetCellReadinessSummary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/cellreadiness/{CellName}",
-	Code: 200})
-
-var GetReadinessCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheck",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/readinesschecks/{ReadinessCheckName}",
-	Code: 200})
-
-var GetReadinessCheckResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckResourceStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/readinesschecks/{ReadinessCheckName}/resource/{ResourceIdentifier}/status",
-	Code: 200})
-
-var GetReadinessCheckStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/readinesschecks/{ReadinessCheckName}/status",
-	Code: 200})
-
-var GetRecoveryGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetRecoveryGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/recoverygroups/{RecoveryGroupName}",
-	Code: 200})
-
-var GetRecoveryGroupReadinessSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetRecoveryGroupReadinessSummary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/recoverygroupreadiness/{RecoveryGroupName}",
-	Code: 200})
-
-var GetResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetResourceSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resourcesets/{ResourceSetName}",
-	Code: 200})
-
-var ListCells = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListCells",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/cells",
-	Code: 200})
-
-var ListCrossAccountAuthorizations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListCrossAccountAuthorizations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/crossaccountauthorizations",
-	Code: 200})
-
-var ListReadinessChecks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListReadinessChecks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/readinesschecks",
-	Code: 200})
-
-var ListRecoveryGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListRecoveryGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/recoverygroups",
-	Code: 200})
-
-var ListResourceSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListResourceSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resourcesets",
-	Code: 200})
-
-var ListRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/rules",
-	Code: 200})
-
-var ListTagsForResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListTagsForResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateCell = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateCell",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/cells/{CellName}",
-	Code: 200})
-
-var UpdateReadinessCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateReadinessCheck",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/readinesschecks/{ReadinessCheckName}",
-	Code: 200})
-
-var UpdateRecoveryGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateRecoveryGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/recoverygroups/{RecoveryGroupName}",
-	Code: 200})
-
-var UpdateResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateResourceSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/resourcesets/{ResourceSetName}",
-	Code: 200})
-
-var _Route53RecoveryReadiness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "Route53RecoveryReadiness",
-}, smithy.ShapeTypeService, 0)
-
-var Route53RecoveryReadiness = smithy.NewServiceSchema(_Route53RecoveryReadiness, "2019-12-02")
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOfCellOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfCellOutput",
-}, smithy.ShapeTypeList, 1)
-var ___listOfCellOutput_member *smithy.Schema
-
-var ___listOfCrossAccountAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfCrossAccountAuthorization",
-}, smithy.ShapeTypeList, 1)
-var ___listOfCrossAccountAuthorization_member *smithy.Schema
-
-var ___listOfListRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfListRulesOutput",
-}, smithy.ShapeTypeList, 1)
-var ___listOfListRulesOutput_member *smithy.Schema
-
-var ___listOfMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfMessage",
-}, smithy.ShapeTypeList, 1)
-var ___listOfMessage_member *smithy.Schema
-
-var ___listOfReadinessCheckOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfReadinessCheckOutput",
-}, smithy.ShapeTypeList, 1)
-var ___listOfReadinessCheckOutput_member *smithy.Schema
-
-var ___listOfReadinessCheckSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfReadinessCheckSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfReadinessCheckSummary_member *smithy.Schema
-
-var ___listOfRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfRecommendation",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRecommendation_member *smithy.Schema
-
-var ___listOfRecoveryGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfRecoveryGroupOutput",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRecoveryGroupOutput_member *smithy.Schema
-
-var ___listOfResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfResource",
-}, smithy.ShapeTypeList, 1)
-var ___listOfResource_member *smithy.Schema
-
-var ___listOfResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfResourceResult",
-}, smithy.ShapeTypeList, 1)
-var ___listOfResourceResult_member *smithy.Schema
-
-var ___listOfResourceSetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfResourceSetOutput",
-}, smithy.ShapeTypeList, 1)
-var ___listOfResourceSetOutput_member *smithy.Schema
-
-var ___listOfRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__listOfRuleResult",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRuleResult_member *smithy.Schema
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__stringMax256",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax64 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__stringMax64",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax64PatternAAZAZ09Z = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__stringMax64PatternAAZAZ09Z",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringPatternAWSAZaZ09AZaZ09 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "__stringPatternAWSAZaZ09AZaZ09",
-}, smithy.ShapeTypeString, 0)
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var CellOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CellOutput",
-}, smithy.ShapeTypeStructure, 5)
-var CellOutput_CellArn *smithy.Schema
-
-var CellOutput_CellName *smithy.Schema
-
-var CellOutput_Cells *smithy.Schema
-
-var CellOutput_ParentReadinessScopes *smithy.Schema
-
-var CellOutput_Tags *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _CrossAccountAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CrossAccountAuthorization",
-}, smithy.ShapeTypeString, 0)
-
-var DNSTargetResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DNSTargetResource",
-}, smithy.ShapeTypeStructure, 5)
-var DNSTargetResource_DomainName *smithy.Schema
-
-var DNSTargetResource_HostedZoneArn *smithy.Schema
-
-var DNSTargetResource_RecordSetId *smithy.Schema
-
-var DNSTargetResource_RecordType *smithy.Schema
-
-var DNSTargetResource_TargetResource *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _LastAuditTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "LastAuditTimestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ListRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListRulesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListRulesOutput_ResourceType *smithy.Schema
-
-var ListRulesOutput_RuleDescription *smithy.Schema
-
-var ListRulesOutput_RuleId *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "Message",
-}, smithy.ShapeTypeStructure, 1)
-var Message_MessageText *smithy.Schema
-
-var NLBResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "NLBResource",
-}, smithy.ShapeTypeStructure, 1)
-var NLBResource_Arn *smithy.Schema
-
-var R53ResourceRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "R53ResourceRecord",
-}, smithy.ShapeTypeStructure, 2)
-var R53ResourceRecord_DomainName *smithy.Schema
-
-var R53ResourceRecord_RecordSetId *smithy.Schema
-
-var Readiness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "Readiness",
-}, smithy.ShapeTypeEnum, 4)
-var Readiness_READY *smithy.Schema
-
-var Readiness_NOT_READY *smithy.Schema
-
-var Readiness_UNKNOWN *smithy.Schema
-
-var Readiness_NOT_AUTHORIZED *smithy.Schema
-
-var ReadinessCheckOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ReadinessCheckOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ReadinessCheckOutput_ReadinessCheckArn *smithy.Schema
-
-var ReadinessCheckOutput_ReadinessCheckName *smithy.Schema
-
-var ReadinessCheckOutput_ResourceSet *smithy.Schema
-
-var ReadinessCheckOutput_Tags *smithy.Schema
-
-var ReadinessCheckSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ReadinessCheckSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ReadinessCheckSummary_Readiness *smithy.Schema
-
-var ReadinessCheckSummary_ReadinessCheckName *smithy.Schema
-
-var _ReadinessCheckTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ReadinessCheckTimestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var Recommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "Recommendation",
-}, smithy.ShapeTypeStructure, 1)
-var Recommendation_RecommendationText *smithy.Schema
-
-var RecoveryGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "RecoveryGroupOutput",
-}, smithy.ShapeTypeStructure, 4)
-var RecoveryGroupOutput_Cells *smithy.Schema
-
-var RecoveryGroupOutput_RecoveryGroupArn *smithy.Schema
-
-var RecoveryGroupOutput_RecoveryGroupName *smithy.Schema
-
-var RecoveryGroupOutput_Tags *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 4)
-var Resource_ComponentId *smithy.Schema
-
-var Resource_DnsTargetResource *smithy.Schema
-
-var Resource_ReadinessScopes *smithy.Schema
-
-var Resource_ResourceArn *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ResourceResult",
-}, smithy.ShapeTypeStructure, 4)
-var ResourceResult_ComponentId *smithy.Schema
-
-var ResourceResult_LastCheckedTimestamp *smithy.Schema
-
-var ResourceResult_Readiness *smithy.Schema
-
-var ResourceResult_ResourceArn *smithy.Schema
-
-var ResourceSetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ResourceSetOutput",
-}, smithy.ShapeTypeStructure, 5)
-var ResourceSetOutput_ResourceSetArn *smithy.Schema
-
-var ResourceSetOutput_ResourceSetName *smithy.Schema
-
-var ResourceSetOutput_ResourceSetType *smithy.Schema
-
-var ResourceSetOutput_Resources *smithy.Schema
-
-var ResourceSetOutput_Tags *smithy.Schema
-
-var RuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "RuleResult",
-}, smithy.ShapeTypeStructure, 4)
-var RuleResult_LastCheckedTimestamp *smithy.Schema
-
-var RuleResult_Messages *smithy.Schema
-
-var RuleResult_Readiness *smithy.Schema
-
-var RuleResult_RuleId *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var TargetResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "TargetResource",
-}, smithy.ShapeTypeStructure, 2)
-var TargetResource_NLBResource *smithy.Schema
-
-var TargetResource_R53Resource *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateCellRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateCellRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCellRequest_CellName *smithy.Schema
-
-var CreateCellRequest_Cells *smithy.Schema
-
-var CreateCellRequest_Tags *smithy.Schema
-
-var CreateCellResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateCellResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCellResponse_CellArn *smithy.Schema
-
-var CreateCellResponse_CellName *smithy.Schema
-
-var CreateCellResponse_Cells *smithy.Schema
-
-var CreateCellResponse_ParentReadinessScopes *smithy.Schema
-
-var CreateCellResponse_Tags *smithy.Schema
-
-var CreateCrossAccountAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateCrossAccountAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCrossAccountAuthorizationRequest_CrossAccountAuthorization *smithy.Schema
-
-var CreateCrossAccountAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateCrossAccountAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCrossAccountAuthorizationResponse_CrossAccountAuthorization *smithy.Schema
-
-var CreateReadinessCheckRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateReadinessCheckRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateReadinessCheckRequest_ReadinessCheckName *smithy.Schema
-
-var CreateReadinessCheckRequest_ResourceSetName *smithy.Schema
-
-var CreateReadinessCheckRequest_Tags *smithy.Schema
-
-var CreateReadinessCheckResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateReadinessCheckResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateReadinessCheckResponse_ReadinessCheckArn *smithy.Schema
-
-var CreateReadinessCheckResponse_ReadinessCheckName *smithy.Schema
-
-var CreateReadinessCheckResponse_ResourceSet *smithy.Schema
-
-var CreateReadinessCheckResponse_Tags *smithy.Schema
-
-var CreateRecoveryGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateRecoveryGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateRecoveryGroupRequest_Cells *smithy.Schema
-
-var CreateRecoveryGroupRequest_RecoveryGroupName *smithy.Schema
-
-var CreateRecoveryGroupRequest_Tags *smithy.Schema
-
-var CreateRecoveryGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateRecoveryGroupResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRecoveryGroupResponse_Cells *smithy.Schema
-
-var CreateRecoveryGroupResponse_RecoveryGroupArn *smithy.Schema
-
-var CreateRecoveryGroupResponse_RecoveryGroupName *smithy.Schema
-
-var CreateRecoveryGroupResponse_Tags *smithy.Schema
-
-var CreateResourceSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateResourceSetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateResourceSetRequest_ResourceSetName *smithy.Schema
-
-var CreateResourceSetRequest_ResourceSetType *smithy.Schema
-
-var CreateResourceSetRequest_Resources *smithy.Schema
-
-var CreateResourceSetRequest_Tags *smithy.Schema
-
-var CreateResourceSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "CreateResourceSetResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateResourceSetResponse_ResourceSetArn *smithy.Schema
-
-var CreateResourceSetResponse_ResourceSetName *smithy.Schema
-
-var CreateResourceSetResponse_ResourceSetType *smithy.Schema
-
-var CreateResourceSetResponse_Resources *smithy.Schema
-
-var CreateResourceSetResponse_Tags *smithy.Schema
-
-var DeleteCellRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteCellRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCellRequest_CellName *smithy.Schema
-
-var DeleteCrossAccountAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteCrossAccountAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization *smithy.Schema
-
-var DeleteCrossAccountAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteCrossAccountAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteReadinessCheckRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteReadinessCheckRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReadinessCheckRequest_ReadinessCheckName *smithy.Schema
-
-var DeleteRecoveryGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteRecoveryGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryGroupRequest_RecoveryGroupName *smithy.Schema
-
-var DeleteResourceSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "DeleteResourceSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourceSetRequest_ResourceSetName *smithy.Schema
-
-var GetArchitectureRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetArchitectureRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetArchitectureRecommendationsRequest_MaxResults *smithy.Schema
-
-var GetArchitectureRecommendationsRequest_NextToken *smithy.Schema
-
-var GetArchitectureRecommendationsRequest_RecoveryGroupName *smithy.Schema
-
-var GetArchitectureRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetArchitectureRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetArchitectureRecommendationsResponse_LastAuditTimestamp *smithy.Schema
-
-var GetArchitectureRecommendationsResponse_NextToken *smithy.Schema
-
-var GetArchitectureRecommendationsResponse_Recommendations *smithy.Schema
-
-var GetCellRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetCellRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCellRequest_CellName *smithy.Schema
-
-var GetCellResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetCellResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetCellResponse_CellArn *smithy.Schema
-
-var GetCellResponse_CellName *smithy.Schema
-
-var GetCellResponse_Cells *smithy.Schema
-
-var GetCellResponse_ParentReadinessScopes *smithy.Schema
-
-var GetCellResponse_Tags *smithy.Schema
-
-var GetCellReadinessSummaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetCellReadinessSummaryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetCellReadinessSummaryRequest_CellName *smithy.Schema
-
-var GetCellReadinessSummaryRequest_MaxResults *smithy.Schema
-
-var GetCellReadinessSummaryRequest_NextToken *smithy.Schema
-
-var GetCellReadinessSummaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetCellReadinessSummaryResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetCellReadinessSummaryResponse_NextToken *smithy.Schema
-
-var GetCellReadinessSummaryResponse_Readiness *smithy.Schema
-
-var GetCellReadinessSummaryResponse_ReadinessChecks *smithy.Schema
-
-var GetReadinessCheckRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetReadinessCheckRequest_ReadinessCheckName *smithy.Schema
-
-var GetReadinessCheckResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetReadinessCheckResponse_ReadinessCheckArn *smithy.Schema
-
-var GetReadinessCheckResponse_ReadinessCheckName *smithy.Schema
-
-var GetReadinessCheckResponse_ResourceSet *smithy.Schema
-
-var GetReadinessCheckResponse_Tags *smithy.Schema
-
-var GetReadinessCheckResourceStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckResourceStatusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetReadinessCheckResourceStatusRequest_MaxResults *smithy.Schema
-
-var GetReadinessCheckResourceStatusRequest_NextToken *smithy.Schema
-
-var GetReadinessCheckResourceStatusRequest_ReadinessCheckName *smithy.Schema
-
-var GetReadinessCheckResourceStatusRequest_ResourceIdentifier *smithy.Schema
-
-var GetReadinessCheckResourceStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckResourceStatusResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetReadinessCheckResourceStatusResponse_NextToken *smithy.Schema
-
-var GetReadinessCheckResourceStatusResponse_Readiness *smithy.Schema
-
-var GetReadinessCheckResourceStatusResponse_Rules *smithy.Schema
-
-var GetReadinessCheckStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetReadinessCheckStatusRequest_MaxResults *smithy.Schema
-
-var GetReadinessCheckStatusRequest_NextToken *smithy.Schema
-
-var GetReadinessCheckStatusRequest_ReadinessCheckName *smithy.Schema
-
-var GetReadinessCheckStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetReadinessCheckStatusResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetReadinessCheckStatusResponse_Messages *smithy.Schema
-
-var GetReadinessCheckStatusResponse_NextToken *smithy.Schema
-
-var GetReadinessCheckStatusResponse_Readiness *smithy.Schema
-
-var GetReadinessCheckStatusResponse_Resources *smithy.Schema
-
-var GetRecoveryGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetRecoveryGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryGroupRequest_RecoveryGroupName *smithy.Schema
-
-var GetRecoveryGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetRecoveryGroupResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetRecoveryGroupResponse_Cells *smithy.Schema
-
-var GetRecoveryGroupResponse_RecoveryGroupArn *smithy.Schema
-
-var GetRecoveryGroupResponse_RecoveryGroupName *smithy.Schema
-
-var GetRecoveryGroupResponse_Tags *smithy.Schema
-
-var GetRecoveryGroupReadinessSummaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetRecoveryGroupReadinessSummaryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRecoveryGroupReadinessSummaryRequest_MaxResults *smithy.Schema
-
-var GetRecoveryGroupReadinessSummaryRequest_NextToken *smithy.Schema
-
-var GetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName *smithy.Schema
-
-var GetRecoveryGroupReadinessSummaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetRecoveryGroupReadinessSummaryResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetRecoveryGroupReadinessSummaryResponse_NextToken *smithy.Schema
-
-var GetRecoveryGroupReadinessSummaryResponse_Readiness *smithy.Schema
-
-var GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks *smithy.Schema
-
-var GetResourceSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetResourceSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceSetRequest_ResourceSetName *smithy.Schema
-
-var GetResourceSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "GetResourceSetResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetResourceSetResponse_ResourceSetArn *smithy.Schema
-
-var GetResourceSetResponse_ResourceSetName *smithy.Schema
-
-var GetResourceSetResponse_ResourceSetType *smithy.Schema
-
-var GetResourceSetResponse_Resources *smithy.Schema
-
-var GetResourceSetResponse_Tags *smithy.Schema
-
-var ListCellsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListCellsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCellsRequest_MaxResults *smithy.Schema
-
-var ListCellsRequest_NextToken *smithy.Schema
-
-var ListCellsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListCellsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCellsResponse_Cells *smithy.Schema
-
-var ListCellsResponse_NextToken *smithy.Schema
-
-var ListCrossAccountAuthorizationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListCrossAccountAuthorizationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCrossAccountAuthorizationsRequest_MaxResults *smithy.Schema
-
-var ListCrossAccountAuthorizationsRequest_NextToken *smithy.Schema
-
-var ListCrossAccountAuthorizationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListCrossAccountAuthorizationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations *smithy.Schema
-
-var ListCrossAccountAuthorizationsResponse_NextToken *smithy.Schema
-
-var ListReadinessChecksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListReadinessChecksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListReadinessChecksRequest_MaxResults *smithy.Schema
-
-var ListReadinessChecksRequest_NextToken *smithy.Schema
-
-var ListReadinessChecksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListReadinessChecksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListReadinessChecksResponse_NextToken *smithy.Schema
-
-var ListReadinessChecksResponse_ReadinessChecks *smithy.Schema
-
-var ListRecoveryGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListRecoveryGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecoveryGroupsRequest_MaxResults *smithy.Schema
-
-var ListRecoveryGroupsRequest_NextToken *smithy.Schema
-
-var ListRecoveryGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListRecoveryGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecoveryGroupsResponse_NextToken *smithy.Schema
-
-var ListRecoveryGroupsResponse_RecoveryGroups *smithy.Schema
-
-var ListResourceSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListResourceSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSetsRequest_MaxResults *smithy.Schema
-
-var ListResourceSetsRequest_NextToken *smithy.Schema
-
-var ListResourceSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListResourceSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSetsResponse_NextToken *smithy.Schema
-
-var ListResourceSetsResponse_ResourceSets *smithy.Schema
-
-var ListRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRulesRequest_MaxResults *smithy.Schema
-
-var ListRulesRequest_NextToken *smithy.Schema
-
-var ListRulesRequest_ResourceType *smithy.Schema
-
-var ListRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRulesResponse_NextToken *smithy.Schema
-
-var ListRulesResponse_Rules *smithy.Schema
-
-var ListTagsForResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListTagsForResourcesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourcesRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "ListTagsForResourcesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourcesResponse_Tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateCellRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateCellRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCellRequest_CellName *smithy.Schema
-
-var UpdateCellRequest_Cells *smithy.Schema
-
-var UpdateCellResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateCellResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateCellResponse_CellArn *smithy.Schema
-
-var UpdateCellResponse_CellName *smithy.Schema
-
-var UpdateCellResponse_Cells *smithy.Schema
-
-var UpdateCellResponse_ParentReadinessScopes *smithy.Schema
-
-var UpdateCellResponse_Tags *smithy.Schema
-
-var UpdateReadinessCheckRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateReadinessCheckRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateReadinessCheckRequest_ReadinessCheckName *smithy.Schema
-
-var UpdateReadinessCheckRequest_ResourceSetName *smithy.Schema
-
-var UpdateReadinessCheckResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateReadinessCheckResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateReadinessCheckResponse_ReadinessCheckArn *smithy.Schema
-
-var UpdateReadinessCheckResponse_ReadinessCheckName *smithy.Schema
-
-var UpdateReadinessCheckResponse_ResourceSet *smithy.Schema
-
-var UpdateReadinessCheckResponse_Tags *smithy.Schema
-
-var UpdateRecoveryGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateRecoveryGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateRecoveryGroupRequest_Cells *smithy.Schema
-
-var UpdateRecoveryGroupRequest_RecoveryGroupName *smithy.Schema
-
-var UpdateRecoveryGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateRecoveryGroupResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRecoveryGroupResponse_Cells *smithy.Schema
-
-var UpdateRecoveryGroupResponse_RecoveryGroupArn *smithy.Schema
-
-var UpdateRecoveryGroupResponse_RecoveryGroupName *smithy.Schema
-
-var UpdateRecoveryGroupResponse_Tags *smithy.Schema
-
-var UpdateResourceSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateResourceSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateResourceSetRequest_ResourceSetName *smithy.Schema
-
-var UpdateResourceSetRequest_ResourceSetType *smithy.Schema
-
-var UpdateResourceSetRequest_Resources *smithy.Schema
-
-var UpdateResourceSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoveryreadiness",
-	Name:      "UpdateResourceSetResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateResourceSetResponse_ResourceSetArn *smithy.Schema
-
-var UpdateResourceSetResponse_ResourceSetName *smithy.Schema
-
-var UpdateResourceSetResponse_ResourceSetType *smithy.Schema
-
-var UpdateResourceSetResponse_Resources *smithy.Schema
-
-var UpdateResourceSetResponse_Tags *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	_Tags_key = _Tags.AddMember("key", ___string)
-
-	_Tags_value = _Tags.AddMember("value", ___string)
-
-	CellOutput_CellArn = CellOutput.AddMember("CellArn", ___stringMax256, &smithytraits.JSONName{Name: "cellArn"})
-
-	CellOutput_CellName = CellOutput.AddMember("CellName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "cellName"})
-
-	CellOutput_Cells = CellOutput.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	CellOutput_ParentReadinessScopes = CellOutput.AddMember("ParentReadinessScopes", ___listOf__string, &smithytraits.JSONName{Name: "parentReadinessScopes"})
-
-	CellOutput_Tags = CellOutput.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfCellOutput_member = ___listOfCellOutput.AddMember("member", CellOutput)
-
-	___listOfCrossAccountAuthorization_member = ___listOfCrossAccountAuthorization.AddMember("member", _CrossAccountAuthorization)
-
-	ListRulesOutput_ResourceType = ListRulesOutput.AddMember("ResourceType", ___stringMax64, &smithytraits.JSONName{Name: "resourceType"})
-
-	ListRulesOutput_RuleDescription = ListRulesOutput.AddMember("RuleDescription", ___stringMax256, &smithytraits.JSONName{Name: "ruleDescription"})
-
-	ListRulesOutput_RuleId = ListRulesOutput.AddMember("RuleId", ___stringMax64, &smithytraits.JSONName{Name: "ruleId"})
-
-	___listOfListRulesOutput_member = ___listOfListRulesOutput.AddMember("member", ListRulesOutput)
-
-	Message_MessageText = Message.AddMember("MessageText", ___string, &smithytraits.JSONName{Name: "messageText"})
-
-	___listOfMessage_member = ___listOfMessage.AddMember("member", Message)
-
-	ReadinessCheckOutput_ReadinessCheckArn = ReadinessCheckOutput.AddMember("ReadinessCheckArn", ___stringMax256, &smithytraits.JSONName{Name: "readinessCheckArn"})
-
-	ReadinessCheckOutput_ReadinessCheckName = ReadinessCheckOutput.AddMember("ReadinessCheckName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "readinessCheckName"})
-
-	ReadinessCheckOutput_ResourceSet = ReadinessCheckOutput.AddMember("ResourceSet", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSet"})
-
-	ReadinessCheckOutput_Tags = ReadinessCheckOutput.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfReadinessCheckOutput_member = ___listOfReadinessCheckOutput.AddMember("member", ReadinessCheckOutput)
-
-	Readiness_READY = Readiness.AddMember("READY", smithyprelude.Unit)
-
-	Readiness_NOT_READY = Readiness.AddMember("NOT_READY", smithyprelude.Unit)
-
-	Readiness_UNKNOWN = Readiness.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	Readiness_NOT_AUTHORIZED = Readiness.AddMember("NOT_AUTHORIZED", smithyprelude.Unit)
-
-	ReadinessCheckSummary_Readiness = ReadinessCheckSummary.AddMember("Readiness", Readiness, &smithytraits.JSONName{Name: "readiness"})
-
-	ReadinessCheckSummary_ReadinessCheckName = ReadinessCheckSummary.AddMember("ReadinessCheckName", ___string, &smithytraits.JSONName{Name: "readinessCheckName"})
-
-	___listOfReadinessCheckSummary_member = ___listOfReadinessCheckSummary.AddMember("member", ReadinessCheckSummary)
-
-	Recommendation_RecommendationText = Recommendation.AddMember("RecommendationText", ___string, &smithytraits.JSONName{Name: "recommendationText"})
-
-	___listOfRecommendation_member = ___listOfRecommendation.AddMember("member", Recommendation)
-
-	RecoveryGroupOutput_Cells = RecoveryGroupOutput.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	RecoveryGroupOutput_RecoveryGroupArn = RecoveryGroupOutput.AddMember("RecoveryGroupArn", ___stringMax256, &smithytraits.JSONName{Name: "recoveryGroupArn"})
-
-	RecoveryGroupOutput_RecoveryGroupName = RecoveryGroupOutput.AddMember("RecoveryGroupName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "recoveryGroupName"})
-
-	RecoveryGroupOutput_Tags = RecoveryGroupOutput.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfRecoveryGroupOutput_member = ___listOfRecoveryGroupOutput.AddMember("member", RecoveryGroupOutput)
-
-	NLBResource_Arn = NLBResource.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	R53ResourceRecord_DomainName = R53ResourceRecord.AddMember("DomainName", ___string, &smithytraits.JSONName{Name: "domainName"})
-
-	R53ResourceRecord_RecordSetId = R53ResourceRecord.AddMember("RecordSetId", ___string, &smithytraits.JSONName{Name: "recordSetId"})
-
-	TargetResource_NLBResource = TargetResource.AddMember("NLBResource", NLBResource, &smithytraits.JSONName{Name: "nLBResource"})
-
-	TargetResource_R53Resource = TargetResource.AddMember("R53Resource", R53ResourceRecord, &smithytraits.JSONName{Name: "r53Resource"})
-
-	DNSTargetResource_DomainName = DNSTargetResource.AddMember("DomainName", ___string, &smithytraits.JSONName{Name: "domainName"})
-
-	DNSTargetResource_HostedZoneArn = DNSTargetResource.AddMember("HostedZoneArn", ___string, &smithytraits.JSONName{Name: "hostedZoneArn"})
-
-	DNSTargetResource_RecordSetId = DNSTargetResource.AddMember("RecordSetId", ___string, &smithytraits.JSONName{Name: "recordSetId"})
-
-	DNSTargetResource_RecordType = DNSTargetResource.AddMember("RecordType", ___string, &smithytraits.JSONName{Name: "recordType"})
-
-	DNSTargetResource_TargetResource = DNSTargetResource.AddMember("TargetResource", TargetResource, &smithytraits.JSONName{Name: "targetResource"})
-
-	Resource_ComponentId = Resource.AddMember("ComponentId", ___string, &smithytraits.JSONName{Name: "componentId"})
-
-	Resource_DnsTargetResource = Resource.AddMember("DnsTargetResource", DNSTargetResource, &smithytraits.JSONName{Name: "dnsTargetResource"})
-
-	Resource_ReadinessScopes = Resource.AddMember("ReadinessScopes", ___listOf__string, &smithytraits.JSONName{Name: "readinessScopes"})
-
-	Resource_ResourceArn = Resource.AddMember("ResourceArn", ___string, &smithytraits.JSONName{Name: "resourceArn"})
-
-	___listOfResource_member = ___listOfResource.AddMember("member", Resource)
-
-	ResourceResult_ComponentId = ResourceResult.AddMember("ComponentId", ___string, &smithytraits.JSONName{Name: "componentId"})
-
-	ResourceResult_LastCheckedTimestamp = ResourceResult.AddMember("LastCheckedTimestamp", _ReadinessCheckTimestamp, &smithytraits.JSONName{Name: "lastCheckedTimestamp"})
-
-	ResourceResult_Readiness = ResourceResult.AddMember("Readiness", Readiness, &smithytraits.JSONName{Name: "readiness"})
-
-	ResourceResult_ResourceArn = ResourceResult.AddMember("ResourceArn", ___string, &smithytraits.JSONName{Name: "resourceArn"})
-
-	___listOfResourceResult_member = ___listOfResourceResult.AddMember("member", ResourceResult)
-
-	ResourceSetOutput_ResourceSetArn = ResourceSetOutput.AddMember("ResourceSetArn", ___stringMax256, &smithytraits.JSONName{Name: "resourceSetArn"})
-
-	ResourceSetOutput_ResourceSetName = ResourceSetOutput.AddMember("ResourceSetName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSetName"})
-
-	ResourceSetOutput_ResourceSetType = ResourceSetOutput.AddMember("ResourceSetType", ___stringPatternAWSAZaZ09AZaZ09, &smithytraits.JSONName{Name: "resourceSetType"})
-
-	ResourceSetOutput_Resources = ResourceSetOutput.AddMember("Resources", ___listOfResource, &smithytraits.JSONName{Name: "resources"})
-
-	ResourceSetOutput_Tags = ResourceSetOutput.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfResourceSetOutput_member = ___listOfResourceSetOutput.AddMember("member", ResourceSetOutput)
-
-	RuleResult_LastCheckedTimestamp = RuleResult.AddMember("LastCheckedTimestamp", _ReadinessCheckTimestamp, &smithytraits.JSONName{Name: "lastCheckedTimestamp"})
-
-	RuleResult_Messages = RuleResult.AddMember("Messages", ___listOfMessage, &smithytraits.JSONName{Name: "messages"})
-
-	RuleResult_Readiness = RuleResult.AddMember("Readiness", Readiness, &smithytraits.JSONName{Name: "readiness"})
-
-	RuleResult_RuleId = RuleResult.AddMember("RuleId", ___string, &smithytraits.JSONName{Name: "ruleId"})
-
-	___listOfRuleResult_member = ___listOfRuleResult.AddMember("member", RuleResult)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ConflictException_Message = ConflictException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ValidationException_Message = ValidationException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	CreateCellRequest_CellName = CreateCellRequest.AddMember("CellName", ___string, &smithytraits.JSONName{Name: "cellName"})
-
-	CreateCellRequest_Cells = CreateCellRequest.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	CreateCellRequest_Tags = CreateCellRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateCellResponse_CellArn = CreateCellResponse.AddMember("CellArn", ___stringMax256, &smithytraits.JSONName{Name: "cellArn"})
-
-	CreateCellResponse_CellName = CreateCellResponse.AddMember("CellName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "cellName"})
-
-	CreateCellResponse_Cells = CreateCellResponse.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	CreateCellResponse_ParentReadinessScopes = CreateCellResponse.AddMember("ParentReadinessScopes", ___listOf__string, &smithytraits.JSONName{Name: "parentReadinessScopes"})
-
-	CreateCellResponse_Tags = CreateCellResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateCrossAccountAuthorizationRequest_CrossAccountAuthorization = CreateCrossAccountAuthorizationRequest.AddMember("CrossAccountAuthorization", _CrossAccountAuthorization, &smithytraits.JSONName{Name: "crossAccountAuthorization"})
-
-	CreateCrossAccountAuthorizationResponse_CrossAccountAuthorization = CreateCrossAccountAuthorizationResponse.AddMember("CrossAccountAuthorization", _CrossAccountAuthorization, &smithytraits.JSONName{Name: "crossAccountAuthorization"})
-
-	CreateReadinessCheckRequest_ReadinessCheckName = CreateReadinessCheckRequest.AddMember("ReadinessCheckName", ___string, &smithytraits.JSONName{Name: "readinessCheckName"})
-
-	CreateReadinessCheckRequest_ResourceSetName = CreateReadinessCheckRequest.AddMember("ResourceSetName", ___string, &smithytraits.JSONName{Name: "resourceSetName"})
-
-	CreateReadinessCheckRequest_Tags = CreateReadinessCheckRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateReadinessCheckResponse_ReadinessCheckArn = CreateReadinessCheckResponse.AddMember("ReadinessCheckArn", ___stringMax256, &smithytraits.JSONName{Name: "readinessCheckArn"})
-
-	CreateReadinessCheckResponse_ReadinessCheckName = CreateReadinessCheckResponse.AddMember("ReadinessCheckName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "readinessCheckName"})
-
-	CreateReadinessCheckResponse_ResourceSet = CreateReadinessCheckResponse.AddMember("ResourceSet", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSet"})
-
-	CreateReadinessCheckResponse_Tags = CreateReadinessCheckResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateRecoveryGroupRequest_Cells = CreateRecoveryGroupRequest.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	CreateRecoveryGroupRequest_RecoveryGroupName = CreateRecoveryGroupRequest.AddMember("RecoveryGroupName", ___string, &smithytraits.JSONName{Name: "recoveryGroupName"})
-
-	CreateRecoveryGroupRequest_Tags = CreateRecoveryGroupRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateRecoveryGroupResponse_Cells = CreateRecoveryGroupResponse.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	CreateRecoveryGroupResponse_RecoveryGroupArn = CreateRecoveryGroupResponse.AddMember("RecoveryGroupArn", ___stringMax256, &smithytraits.JSONName{Name: "recoveryGroupArn"})
-
-	CreateRecoveryGroupResponse_RecoveryGroupName = CreateRecoveryGroupResponse.AddMember("RecoveryGroupName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "recoveryGroupName"})
-
-	CreateRecoveryGroupResponse_Tags = CreateRecoveryGroupResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateResourceSetRequest_ResourceSetName = CreateResourceSetRequest.AddMember("ResourceSetName", ___string, &smithytraits.JSONName{Name: "resourceSetName"})
-
-	CreateResourceSetRequest_ResourceSetType = CreateResourceSetRequest.AddMember("ResourceSetType", ___stringPatternAWSAZaZ09AZaZ09, &smithytraits.JSONName{Name: "resourceSetType"})
-
-	CreateResourceSetRequest_Resources = CreateResourceSetRequest.AddMember("Resources", ___listOfResource, &smithytraits.JSONName{Name: "resources"})
-
-	CreateResourceSetRequest_Tags = CreateResourceSetRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateResourceSetResponse_ResourceSetArn = CreateResourceSetResponse.AddMember("ResourceSetArn", ___stringMax256, &smithytraits.JSONName{Name: "resourceSetArn"})
-
-	CreateResourceSetResponse_ResourceSetName = CreateResourceSetResponse.AddMember("ResourceSetName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSetName"})
-
-	CreateResourceSetResponse_ResourceSetType = CreateResourceSetResponse.AddMember("ResourceSetType", ___stringPatternAWSAZaZ09AZaZ09, &smithytraits.JSONName{Name: "resourceSetType"})
-
-	CreateResourceSetResponse_Resources = CreateResourceSetResponse.AddMember("Resources", ___listOfResource, &smithytraits.JSONName{Name: "resources"})
-
-	CreateResourceSetResponse_Tags = CreateResourceSetResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	DeleteCellRequest_CellName = DeleteCellRequest.AddMember("CellName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization = DeleteCrossAccountAuthorizationRequest.AddMember("CrossAccountAuthorization", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteReadinessCheckRequest_ReadinessCheckName = DeleteReadinessCheckRequest.AddMember("ReadinessCheckName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRecoveryGroupRequest_RecoveryGroupName = DeleteRecoveryGroupRequest.AddMember("RecoveryGroupName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteResourceSetRequest_ResourceSetName = DeleteResourceSetRequest.AddMember("ResourceSetName", ___string, &smithytraits.HTTPLabel{})
-
-	GetArchitectureRecommendationsRequest_MaxResults = GetArchitectureRecommendationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetArchitectureRecommendationsRequest_NextToken = GetArchitectureRecommendationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetArchitectureRecommendationsRequest_RecoveryGroupName = GetArchitectureRecommendationsRequest.AddMember("RecoveryGroupName", ___string, &smithytraits.HTTPLabel{})
-
-	GetArchitectureRecommendationsResponse_LastAuditTimestamp = GetArchitectureRecommendationsResponse.AddMember("LastAuditTimestamp", _LastAuditTimestamp, &smithytraits.JSONName{Name: "lastAuditTimestamp"})
-
-	GetArchitectureRecommendationsResponse_NextToken = GetArchitectureRecommendationsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetArchitectureRecommendationsResponse_Recommendations = GetArchitectureRecommendationsResponse.AddMember("Recommendations", ___listOfRecommendation, &smithytraits.JSONName{Name: "recommendations"})
-
-	GetCellRequest_CellName = GetCellRequest.AddMember("CellName", ___string, &smithytraits.HTTPLabel{})
-
-	GetCellResponse_CellArn = GetCellResponse.AddMember("CellArn", ___stringMax256, &smithytraits.JSONName{Name: "cellArn"})
-
-	GetCellResponse_CellName = GetCellResponse.AddMember("CellName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "cellName"})
-
-	GetCellResponse_Cells = GetCellResponse.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	GetCellResponse_ParentReadinessScopes = GetCellResponse.AddMember("ParentReadinessScopes", ___listOf__string, &smithytraits.JSONName{Name: "parentReadinessScopes"})
-
-	GetCellResponse_Tags = GetCellResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetCellReadinessSummaryRequest_CellName = GetCellReadinessSummaryRequest.AddMember("CellName", ___string, &smithytraits.HTTPLabel{})
-
-	GetCellReadinessSummaryRequest_MaxResults = GetCellReadinessSummaryRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetCellReadinessSummaryRequest_NextToken = GetCellReadinessSummaryRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetCellReadinessSummaryResponse_NextToken = GetCellReadinessSummaryResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetCellReadinessSummaryResponse_Readiness = GetCellReadinessSummaryResponse.AddMember("Readiness", Readiness, &smithytraits.JSONName{Name: "readiness"})
-
-	GetCellReadinessSummaryResponse_ReadinessChecks = GetCellReadinessSummaryResponse.AddMember("ReadinessChecks", ___listOfReadinessCheckSummary, &smithytraits.JSONName{Name: "readinessChecks"})
-
-	GetReadinessCheckRequest_ReadinessCheckName = GetReadinessCheckRequest.AddMember("ReadinessCheckName", ___string, &smithytraits.HTTPLabel{})
-
-	GetReadinessCheckResponse_ReadinessCheckArn = GetReadinessCheckResponse.AddMember("ReadinessCheckArn", ___stringMax256, &smithytraits.JSONName{Name: "readinessCheckArn"})
-
-	GetReadinessCheckResponse_ReadinessCheckName = GetReadinessCheckResponse.AddMember("ReadinessCheckName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "readinessCheckName"})
-
-	GetReadinessCheckResponse_ResourceSet = GetReadinessCheckResponse.AddMember("ResourceSet", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSet"})
-
-	GetReadinessCheckResponse_Tags = GetReadinessCheckResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetReadinessCheckResourceStatusRequest_MaxResults = GetReadinessCheckResourceStatusRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetReadinessCheckResourceStatusRequest_NextToken = GetReadinessCheckResourceStatusRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetReadinessCheckResourceStatusRequest_ReadinessCheckName = GetReadinessCheckResourceStatusRequest.AddMember("ReadinessCheckName", ___string, &smithytraits.HTTPLabel{})
-
-	GetReadinessCheckResourceStatusRequest_ResourceIdentifier = GetReadinessCheckResourceStatusRequest.AddMember("ResourceIdentifier", ___string, &smithytraits.HTTPLabel{})
-
-	GetReadinessCheckResourceStatusResponse_NextToken = GetReadinessCheckResourceStatusResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetReadinessCheckResourceStatusResponse_Readiness = GetReadinessCheckResourceStatusResponse.AddMember("Readiness", Readiness, &smithytraits.JSONName{Name: "readiness"})
-
-	GetReadinessCheckResourceStatusResponse_Rules = GetReadinessCheckResourceStatusResponse.AddMember("Rules", ___listOfRuleResult, &smithytraits.JSONName{Name: "rules"})
-
-	GetReadinessCheckStatusRequest_MaxResults = GetReadinessCheckStatusRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetReadinessCheckStatusRequest_NextToken = GetReadinessCheckStatusRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetReadinessCheckStatusRequest_ReadinessCheckName = GetReadinessCheckStatusRequest.AddMember("ReadinessCheckName", ___string, &smithytraits.HTTPLabel{})
-
-	GetReadinessCheckStatusResponse_Messages = GetReadinessCheckStatusResponse.AddMember("Messages", ___listOfMessage, &smithytraits.JSONName{Name: "messages"})
-
-	GetReadinessCheckStatusResponse_NextToken = GetReadinessCheckStatusResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetReadinessCheckStatusResponse_Readiness = GetReadinessCheckStatusResponse.AddMember("Readiness", Readiness, &smithytraits.JSONName{Name: "readiness"})
-
-	GetReadinessCheckStatusResponse_Resources = GetReadinessCheckStatusResponse.AddMember("Resources", ___listOfResourceResult, &smithytraits.JSONName{Name: "resources"})
-
-	GetRecoveryGroupRequest_RecoveryGroupName = GetRecoveryGroupRequest.AddMember("RecoveryGroupName", ___string, &smithytraits.HTTPLabel{})
-
-	GetRecoveryGroupResponse_Cells = GetRecoveryGroupResponse.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	GetRecoveryGroupResponse_RecoveryGroupArn = GetRecoveryGroupResponse.AddMember("RecoveryGroupArn", ___stringMax256, &smithytraits.JSONName{Name: "recoveryGroupArn"})
-
-	GetRecoveryGroupResponse_RecoveryGroupName = GetRecoveryGroupResponse.AddMember("RecoveryGroupName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "recoveryGroupName"})
-
-	GetRecoveryGroupResponse_Tags = GetRecoveryGroupResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetRecoveryGroupReadinessSummaryRequest_MaxResults = GetRecoveryGroupReadinessSummaryRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetRecoveryGroupReadinessSummaryRequest_NextToken = GetRecoveryGroupReadinessSummaryRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName = GetRecoveryGroupReadinessSummaryRequest.AddMember("RecoveryGroupName", ___string, &smithytraits.HTTPLabel{})
-
-	GetRecoveryGroupReadinessSummaryResponse_NextToken = GetRecoveryGroupReadinessSummaryResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetRecoveryGroupReadinessSummaryResponse_Readiness = GetRecoveryGroupReadinessSummaryResponse.AddMember("Readiness", Readiness, &smithytraits.JSONName{Name: "readiness"})
-
-	GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks = GetRecoveryGroupReadinessSummaryResponse.AddMember("ReadinessChecks", ___listOfReadinessCheckSummary, &smithytraits.JSONName{Name: "readinessChecks"})
-
-	GetResourceSetRequest_ResourceSetName = GetResourceSetRequest.AddMember("ResourceSetName", ___string, &smithytraits.HTTPLabel{})
-
-	GetResourceSetResponse_ResourceSetArn = GetResourceSetResponse.AddMember("ResourceSetArn", ___stringMax256, &smithytraits.JSONName{Name: "resourceSetArn"})
-
-	GetResourceSetResponse_ResourceSetName = GetResourceSetResponse.AddMember("ResourceSetName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSetName"})
-
-	GetResourceSetResponse_ResourceSetType = GetResourceSetResponse.AddMember("ResourceSetType", ___stringPatternAWSAZaZ09AZaZ09, &smithytraits.JSONName{Name: "resourceSetType"})
-
-	GetResourceSetResponse_Resources = GetResourceSetResponse.AddMember("Resources", ___listOfResource, &smithytraits.JSONName{Name: "resources"})
-
-	GetResourceSetResponse_Tags = GetResourceSetResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	ListCellsRequest_MaxResults = ListCellsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCellsRequest_NextToken = ListCellsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCellsResponse_Cells = ListCellsResponse.AddMember("Cells", ___listOfCellOutput, &smithytraits.JSONName{Name: "cells"})
-
-	ListCellsResponse_NextToken = ListCellsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListCrossAccountAuthorizationsRequest_MaxResults = ListCrossAccountAuthorizationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCrossAccountAuthorizationsRequest_NextToken = ListCrossAccountAuthorizationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations = ListCrossAccountAuthorizationsResponse.AddMember("CrossAccountAuthorizations", ___listOfCrossAccountAuthorization, &smithytraits.JSONName{Name: "crossAccountAuthorizations"})
-
-	ListCrossAccountAuthorizationsResponse_NextToken = ListCrossAccountAuthorizationsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListReadinessChecksRequest_MaxResults = ListReadinessChecksRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListReadinessChecksRequest_NextToken = ListReadinessChecksRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListReadinessChecksResponse_NextToken = ListReadinessChecksResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListReadinessChecksResponse_ReadinessChecks = ListReadinessChecksResponse.AddMember("ReadinessChecks", ___listOfReadinessCheckOutput, &smithytraits.JSONName{Name: "readinessChecks"})
-
-	ListRecoveryGroupsRequest_MaxResults = ListRecoveryGroupsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRecoveryGroupsRequest_NextToken = ListRecoveryGroupsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRecoveryGroupsResponse_NextToken = ListRecoveryGroupsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListRecoveryGroupsResponse_RecoveryGroups = ListRecoveryGroupsResponse.AddMember("RecoveryGroups", ___listOfRecoveryGroupOutput, &smithytraits.JSONName{Name: "recoveryGroups"})
-
-	ListResourceSetsRequest_MaxResults = ListResourceSetsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListResourceSetsRequest_NextToken = ListResourceSetsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListResourceSetsResponse_NextToken = ListResourceSetsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListResourceSetsResponse_ResourceSets = ListResourceSetsResponse.AddMember("ResourceSets", ___listOfResourceSetOutput, &smithytraits.JSONName{Name: "resourceSets"})
-
-	ListRulesRequest_MaxResults = ListRulesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRulesRequest_NextToken = ListRulesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRulesRequest_ResourceType = ListRulesRequest.AddMember("ResourceType", ___string, &smithytraits.HTTPQuery{Name: "resourceType"})
-
-	ListRulesResponse_NextToken = ListRulesResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListRulesResponse_Rules = ListRulesResponse.AddMember("Rules", ___listOfListRulesOutput, &smithytraits.JSONName{Name: "rules"})
-
-	ListTagsForResourcesRequest_ResourceArn = ListTagsForResourcesRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourcesResponse_Tags = ListTagsForResourcesResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", ___listOf__string, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateCellRequest_CellName = UpdateCellRequest.AddMember("CellName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateCellRequest_Cells = UpdateCellRequest.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	UpdateCellResponse_CellArn = UpdateCellResponse.AddMember("CellArn", ___stringMax256, &smithytraits.JSONName{Name: "cellArn"})
-
-	UpdateCellResponse_CellName = UpdateCellResponse.AddMember("CellName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "cellName"})
-
-	UpdateCellResponse_Cells = UpdateCellResponse.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	UpdateCellResponse_ParentReadinessScopes = UpdateCellResponse.AddMember("ParentReadinessScopes", ___listOf__string, &smithytraits.JSONName{Name: "parentReadinessScopes"})
-
-	UpdateCellResponse_Tags = UpdateCellResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateReadinessCheckRequest_ReadinessCheckName = UpdateReadinessCheckRequest.AddMember("ReadinessCheckName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateReadinessCheckRequest_ResourceSetName = UpdateReadinessCheckRequest.AddMember("ResourceSetName", ___string, &smithytraits.JSONName{Name: "resourceSetName"})
-
-	UpdateReadinessCheckResponse_ReadinessCheckArn = UpdateReadinessCheckResponse.AddMember("ReadinessCheckArn", ___stringMax256, &smithytraits.JSONName{Name: "readinessCheckArn"})
-
-	UpdateReadinessCheckResponse_ReadinessCheckName = UpdateReadinessCheckResponse.AddMember("ReadinessCheckName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "readinessCheckName"})
-
-	UpdateReadinessCheckResponse_ResourceSet = UpdateReadinessCheckResponse.AddMember("ResourceSet", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSet"})
-
-	UpdateReadinessCheckResponse_Tags = UpdateReadinessCheckResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateRecoveryGroupRequest_Cells = UpdateRecoveryGroupRequest.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	UpdateRecoveryGroupRequest_RecoveryGroupName = UpdateRecoveryGroupRequest.AddMember("RecoveryGroupName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRecoveryGroupResponse_Cells = UpdateRecoveryGroupResponse.AddMember("Cells", ___listOf__string, &smithytraits.JSONName{Name: "cells"})
-
-	UpdateRecoveryGroupResponse_RecoveryGroupArn = UpdateRecoveryGroupResponse.AddMember("RecoveryGroupArn", ___stringMax256, &smithytraits.JSONName{Name: "recoveryGroupArn"})
-
-	UpdateRecoveryGroupResponse_RecoveryGroupName = UpdateRecoveryGroupResponse.AddMember("RecoveryGroupName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "recoveryGroupName"})
-
-	UpdateRecoveryGroupResponse_Tags = UpdateRecoveryGroupResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateResourceSetRequest_ResourceSetName = UpdateResourceSetRequest.AddMember("ResourceSetName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateResourceSetRequest_ResourceSetType = UpdateResourceSetRequest.AddMember("ResourceSetType", ___stringPatternAWSAZaZ09AZaZ09, &smithytraits.JSONName{Name: "resourceSetType"})
-
-	UpdateResourceSetRequest_Resources = UpdateResourceSetRequest.AddMember("Resources", ___listOfResource, &smithytraits.JSONName{Name: "resources"})
-
-	UpdateResourceSetResponse_ResourceSetArn = UpdateResourceSetResponse.AddMember("ResourceSetArn", ___stringMax256, &smithytraits.JSONName{Name: "resourceSetArn"})
-
-	UpdateResourceSetResponse_ResourceSetName = UpdateResourceSetResponse.AddMember("ResourceSetName", ___stringMax64PatternAAZAZ09Z, &smithytraits.JSONName{Name: "resourceSetName"})
-
-	UpdateResourceSetResponse_ResourceSetType = UpdateResourceSetResponse.AddMember("ResourceSetType", ___stringPatternAWSAZaZ09AZaZ09, &smithytraits.JSONName{Name: "resourceSetType"})
-
-	UpdateResourceSetResponse_Resources = UpdateResourceSetResponse.AddMember("Resources", ___listOfResource, &smithytraits.JSONName{Name: "resources"})
-
-	UpdateResourceSetResponse_Tags = UpdateResourceSetResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cellArn"}}, DirectMask: 0x1}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cellName"}}, DirectMask: 0x1}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cells"}}, DirectMask: 0x1}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "parentReadinessScopes"}}, DirectMask: 0x1}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tags"}}, DirectMask: 0x1}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "domainName"}}, DirectMask: 0x1}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "hostedZoneArn"}}, DirectMask: 0x1}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recordSetId"}}, DirectMask: 0x1}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recordType"}}, DirectMask: 0x1}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetResource"}}, DirectMask: 0x1}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceType"}}, DirectMask: 0x1}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ruleDescription"}}, DirectMask: 0x1}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ruleId"}}, DirectMask: 0x1}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "messageText"}}, DirectMask: 0x1}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "arn"}}, DirectMask: 0x1}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "readinessCheckArn"}}, DirectMask: 0x1}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "readinessCheckName"}}, DirectMask: 0x1}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceSet"}}, DirectMask: 0x1}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "readiness"}}, DirectMask: 0x1}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recommendationText"}}, DirectMask: 0x1}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recoveryGroupArn"}}, DirectMask: 0x1}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recoveryGroupName"}}, DirectMask: 0x1}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "componentId"}}, DirectMask: 0x1}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dnsTargetResource"}}, DirectMask: 0x1}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "readinessScopes"}}, DirectMask: 0x1}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceArn"}}, DirectMask: 0x1}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastCheckedTimestamp"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceSetArn"}}, DirectMask: 0x1}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceSetName"}}, DirectMask: 0x1}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceSetType"}}, DirectMask: 0x1}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resources"}}, DirectMask: 0x1}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "messages"}}, DirectMask: 0x1}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nLBResource"}}, DirectMask: 0x1}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "r53Resource"}}, DirectMask: 0x1}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "crossAccountAuthorization"}}, DirectMask: 0x1}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastAuditTimestamp"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nextToken"}}, DirectMask: 0x1}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recommendations"}}, DirectMask: 0x1}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "readinessChecks"}}, DirectMask: 0x1}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "rules"}}, DirectMask: 0x1}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "crossAccountAuthorizations"}}, DirectMask: 0x1}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recoveryGroups"}}, DirectMask: 0x1}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceSets"}}, DirectMask: 0x1}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceType"}}, DirectMask: 0x10}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var m___listOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__string_member}}
+var m___listOfCellOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfCellOutput_member}}
+var m___listOfCrossAccountAuthorization = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfCrossAccountAuthorization_member}}
+var m___listOfListRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfListRulesOutput_member}}
+var m___listOfMessage = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfMessage_member}}
+var m___listOfReadinessCheckOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfReadinessCheckOutput_member}}
+var m___listOfReadinessCheckSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfReadinessCheckSummary_member}}
+var m___listOfRecommendation = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRecommendation_member}}
+var m___listOfRecoveryGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRecoveryGroupOutput_member}}
+var m___listOfResource = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfResource_member}}
+var m___listOfResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfResourceResult_member}}
+var m___listOfResourceSetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfResourceSetOutput_member}}
+var m___listOfRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRuleResult_member}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mCellOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCellOutput_CellArn, &sCellOutput_CellName, &sCellOutput_Cells, &sCellOutput_ParentReadinessScopes, &sCellOutput_Tags}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDNSTargetResource = smithy.SchemaMembers{List: []*smithy.Schema{&sDNSTargetResource_DomainName, &sDNSTargetResource_HostedZoneArn, &sDNSTargetResource_RecordSetId, &sDNSTargetResource_RecordType, &sDNSTargetResource_TargetResource}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mListRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesOutput_ResourceType, &sListRulesOutput_RuleDescription, &sListRulesOutput_RuleId}}
+var mMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sMessage_MessageText}}
+var mNLBResource = smithy.SchemaMembers{List: []*smithy.Schema{&sNLBResource_Arn}}
+var mR53ResourceRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sR53ResourceRecord_DomainName, &sR53ResourceRecord_RecordSetId}}
+var mReadiness = smithy.SchemaMembers{List: []*smithy.Schema{&sReadiness_READY, &sReadiness_NOT_READY, &sReadiness_UNKNOWN, &sReadiness_NOT_AUTHORIZED}}
+var mReadinessCheckOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sReadinessCheckOutput_ReadinessCheckArn, &sReadinessCheckOutput_ReadinessCheckName, &sReadinessCheckOutput_ResourceSet, &sReadinessCheckOutput_Tags}}
+var mReadinessCheckSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sReadinessCheckSummary_Readiness, &sReadinessCheckSummary_ReadinessCheckName}}
+var mRecommendation = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendation_RecommendationText}}
+var mRecoveryGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryGroupOutput_Cells, &sRecoveryGroupOutput_RecoveryGroupArn, &sRecoveryGroupOutput_RecoveryGroupName, &sRecoveryGroupOutput_Tags}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_ComponentId, &sResource_DnsTargetResource, &sResource_ReadinessScopes, &sResource_ResourceArn}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceResult_ComponentId, &sResourceResult_LastCheckedTimestamp, &sResourceResult_Readiness, &sResourceResult_ResourceArn}}
+var mResourceSetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSetOutput_ResourceSetArn, &sResourceSetOutput_ResourceSetName, &sResourceSetOutput_ResourceSetType, &sResourceSetOutput_Resources, &sResourceSetOutput_Tags}}
+var mRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleResult_LastCheckedTimestamp, &sRuleResult_Messages, &sRuleResult_Readiness, &sRuleResult_RuleId}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTargetResource = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetResource_NLBResource, &sTargetResource_R53Resource}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateCellRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCellRequest_CellName, &sCreateCellRequest_Cells, &sCreateCellRequest_Tags}}
+var mCreateCellResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCellResponse_CellArn, &sCreateCellResponse_CellName, &sCreateCellResponse_Cells, &sCreateCellResponse_ParentReadinessScopes, &sCreateCellResponse_Tags}}
+var mCreateCrossAccountAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCrossAccountAuthorizationRequest_CrossAccountAuthorization}}
+var mCreateCrossAccountAuthorizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCrossAccountAuthorizationResponse_CrossAccountAuthorization}}
+var mCreateReadinessCheckRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReadinessCheckRequest_ReadinessCheckName, &sCreateReadinessCheckRequest_ResourceSetName, &sCreateReadinessCheckRequest_Tags}}
+var mCreateReadinessCheckResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReadinessCheckResponse_ReadinessCheckArn, &sCreateReadinessCheckResponse_ReadinessCheckName, &sCreateReadinessCheckResponse_ResourceSet, &sCreateReadinessCheckResponse_Tags}}
+var mCreateRecoveryGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecoveryGroupRequest_Cells, &sCreateRecoveryGroupRequest_RecoveryGroupName, &sCreateRecoveryGroupRequest_Tags}}
+var mCreateRecoveryGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecoveryGroupResponse_Cells, &sCreateRecoveryGroupResponse_RecoveryGroupArn, &sCreateRecoveryGroupResponse_RecoveryGroupName, &sCreateRecoveryGroupResponse_Tags}}
+var mCreateResourceSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceSetRequest_ResourceSetName, &sCreateResourceSetRequest_ResourceSetType, &sCreateResourceSetRequest_Resources, &sCreateResourceSetRequest_Tags}}
+var mCreateResourceSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceSetResponse_ResourceSetArn, &sCreateResourceSetResponse_ResourceSetName, &sCreateResourceSetResponse_ResourceSetType, &sCreateResourceSetResponse_Resources, &sCreateResourceSetResponse_Tags}}
+var mDeleteCellRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCellRequest_CellName}}
+var mDeleteCrossAccountAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization}}
+var mDeleteReadinessCheckRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReadinessCheckRequest_ReadinessCheckName}}
+var mDeleteRecoveryGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryGroupRequest_RecoveryGroupName}}
+var mDeleteResourceSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceSetRequest_ResourceSetName}}
+var mGetArchitectureRecommendationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchitectureRecommendationsRequest_MaxResults, &sGetArchitectureRecommendationsRequest_NextToken, &sGetArchitectureRecommendationsRequest_RecoveryGroupName}}
+var mGetArchitectureRecommendationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchitectureRecommendationsResponse_LastAuditTimestamp, &sGetArchitectureRecommendationsResponse_NextToken, &sGetArchitectureRecommendationsResponse_Recommendations}}
+var mGetCellRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCellRequest_CellName}}
+var mGetCellResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCellResponse_CellArn, &sGetCellResponse_CellName, &sGetCellResponse_Cells, &sGetCellResponse_ParentReadinessScopes, &sGetCellResponse_Tags}}
+var mGetCellReadinessSummaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCellReadinessSummaryRequest_CellName, &sGetCellReadinessSummaryRequest_MaxResults, &sGetCellReadinessSummaryRequest_NextToken}}
+var mGetCellReadinessSummaryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCellReadinessSummaryResponse_NextToken, &sGetCellReadinessSummaryResponse_Readiness, &sGetCellReadinessSummaryResponse_ReadinessChecks}}
+var mGetReadinessCheckRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReadinessCheckRequest_ReadinessCheckName}}
+var mGetReadinessCheckResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReadinessCheckResponse_ReadinessCheckArn, &sGetReadinessCheckResponse_ReadinessCheckName, &sGetReadinessCheckResponse_ResourceSet, &sGetReadinessCheckResponse_Tags}}
+var mGetReadinessCheckResourceStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReadinessCheckResourceStatusRequest_MaxResults, &sGetReadinessCheckResourceStatusRequest_NextToken, &sGetReadinessCheckResourceStatusRequest_ReadinessCheckName, &sGetReadinessCheckResourceStatusRequest_ResourceIdentifier}}
+var mGetReadinessCheckResourceStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReadinessCheckResourceStatusResponse_NextToken, &sGetReadinessCheckResourceStatusResponse_Readiness, &sGetReadinessCheckResourceStatusResponse_Rules}}
+var mGetReadinessCheckStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReadinessCheckStatusRequest_MaxResults, &sGetReadinessCheckStatusRequest_NextToken, &sGetReadinessCheckStatusRequest_ReadinessCheckName}}
+var mGetReadinessCheckStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReadinessCheckStatusResponse_Messages, &sGetReadinessCheckStatusResponse_NextToken, &sGetReadinessCheckStatusResponse_Readiness, &sGetReadinessCheckStatusResponse_Resources}}
+var mGetRecoveryGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryGroupRequest_RecoveryGroupName}}
+var mGetRecoveryGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryGroupResponse_Cells, &sGetRecoveryGroupResponse_RecoveryGroupArn, &sGetRecoveryGroupResponse_RecoveryGroupName, &sGetRecoveryGroupResponse_Tags}}
+var mGetRecoveryGroupReadinessSummaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryGroupReadinessSummaryRequest_MaxResults, &sGetRecoveryGroupReadinessSummaryRequest_NextToken, &sGetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName}}
+var mGetRecoveryGroupReadinessSummaryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryGroupReadinessSummaryResponse_NextToken, &sGetRecoveryGroupReadinessSummaryResponse_Readiness, &sGetRecoveryGroupReadinessSummaryResponse_ReadinessChecks}}
+var mGetResourceSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSetRequest_ResourceSetName}}
+var mGetResourceSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSetResponse_ResourceSetArn, &sGetResourceSetResponse_ResourceSetName, &sGetResourceSetResponse_ResourceSetType, &sGetResourceSetResponse_Resources, &sGetResourceSetResponse_Tags}}
+var mListCellsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCellsRequest_MaxResults, &sListCellsRequest_NextToken}}
+var mListCellsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCellsResponse_Cells, &sListCellsResponse_NextToken}}
+var mListCrossAccountAuthorizationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrossAccountAuthorizationsRequest_MaxResults, &sListCrossAccountAuthorizationsRequest_NextToken}}
+var mListCrossAccountAuthorizationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations, &sListCrossAccountAuthorizationsResponse_NextToken}}
+var mListReadinessChecksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListReadinessChecksRequest_MaxResults, &sListReadinessChecksRequest_NextToken}}
+var mListReadinessChecksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListReadinessChecksResponse_NextToken, &sListReadinessChecksResponse_ReadinessChecks}}
+var mListRecoveryGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryGroupsRequest_MaxResults, &sListRecoveryGroupsRequest_NextToken}}
+var mListRecoveryGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryGroupsResponse_NextToken, &sListRecoveryGroupsResponse_RecoveryGroups}}
+var mListResourceSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSetsRequest_MaxResults, &sListResourceSetsRequest_NextToken}}
+var mListResourceSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSetsResponse_NextToken, &sListResourceSetsResponse_ResourceSets}}
+var mListRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesRequest_MaxResults, &sListRulesRequest_NextToken, &sListRulesRequest_ResourceType}}
+var mListRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesResponse_NextToken, &sListRulesResponse_Rules}}
+var mListTagsForResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourcesRequest_ResourceArn}}
+var mListTagsForResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourcesResponse_Tags}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateCellRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCellRequest_CellName, &sUpdateCellRequest_Cells}}
+var mUpdateCellResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCellResponse_CellArn, &sUpdateCellResponse_CellName, &sUpdateCellResponse_Cells, &sUpdateCellResponse_ParentReadinessScopes, &sUpdateCellResponse_Tags}}
+var mUpdateReadinessCheckRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReadinessCheckRequest_ReadinessCheckName, &sUpdateReadinessCheckRequest_ResourceSetName}}
+var mUpdateReadinessCheckResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReadinessCheckResponse_ReadinessCheckArn, &sUpdateReadinessCheckResponse_ReadinessCheckName, &sUpdateReadinessCheckResponse_ResourceSet, &sUpdateReadinessCheckResponse_Tags}}
+var mUpdateRecoveryGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryGroupRequest_Cells, &sUpdateRecoveryGroupRequest_RecoveryGroupName}}
+var mUpdateRecoveryGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryGroupResponse_Cells, &sUpdateRecoveryGroupResponse_RecoveryGroupArn, &sUpdateRecoveryGroupResponse_RecoveryGroupName, &sUpdateRecoveryGroupResponse_Tags}}
+var mUpdateResourceSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceSetRequest_ResourceSetName, &sUpdateResourceSetRequest_ResourceSetType, &sUpdateResourceSetRequest_Resources}}
+var mUpdateResourceSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceSetResponse_ResourceSetArn, &sUpdateResourceSetResponse_ResourceSetName, &sUpdateResourceSetResponse_ResourceSetType, &sUpdateResourceSetResponse_Resources, &sUpdateResourceSetResponse_Tags}}
+
+var sCreateCell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCell, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateCell})
+var sCreateCrossAccountAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCrossAccountAuthorization, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateCrossAccountAuthorization})
+var sCreateReadinessCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReadinessCheck, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateReadinessCheck})
+var sCreateRecoveryGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateRecoveryGroup})
+var sCreateResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSet, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateResourceSet})
+var sDeleteCell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCell, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCell})
+var sDeleteCrossAccountAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCrossAccountAuthorization, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCrossAccountAuthorization})
+var sDeleteReadinessCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReadinessCheck, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReadinessCheck})
+var sDeleteRecoveryGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryGroup, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRecoveryGroup})
+var sDeleteResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceSet, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourceSet})
+var sGetArchitectureRecommendations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchitectureRecommendations, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetArchitectureRecommendations})
+var sGetCell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCell, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetCell})
+var sGetCellReadinessSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCellReadinessSummary, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetCellReadinessSummary})
+var sGetReadinessCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheck, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetReadinessCheck})
+var sGetReadinessCheckResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckResourceStatus, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetReadinessCheckResourceStatus})
+var sGetReadinessCheckStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckStatus, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetReadinessCheckStatus})
+var sGetRecoveryGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryGroup, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetRecoveryGroup})
+var sGetRecoveryGroupReadinessSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryGroupReadinessSummary, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetRecoveryGroupReadinessSummary})
+var sGetResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSet, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetResourceSet})
+var sListCells = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCells, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListCells})
+var sListCrossAccountAuthorizations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountAuthorizations, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListCrossAccountAuthorizations})
+var sListReadinessChecks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReadinessChecks, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListReadinessChecks})
+var sListRecoveryGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryGroups, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListRecoveryGroups})
+var sListResourceSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSets, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListResourceSets})
+var sListRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRules, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListRules})
+var sListTagsForResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResources, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResources})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateCell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCell, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCell})
+var sUpdateReadinessCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReadinessCheck, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateReadinessCheck})
+var sUpdateRecoveryGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryGroup, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRecoveryGroup})
+var sUpdateResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceSet, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eUpdateResourceSet})
+var s_Route53RecoveryReadiness = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53RecoveryReadiness, Type: smithy.ShapeTypeService, Ext: &e_Route53RecoveryReadiness})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &e___listOf__string})
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___listOf__string_member})
+var s___listOfCellOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfCellOutput, Members: &m___listOfCellOutput, Type: smithy.ShapeTypeList, Ext: &e___listOfCellOutput})
+var s___listOfCellOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCellOutput, Members: &mCellOutput, Type: smithy.ShapeTypeStructure, Ext: &e___listOfCellOutput_member})
+var s___listOfCrossAccountAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfCrossAccountAuthorization, Members: &m___listOfCrossAccountAuthorization, Type: smithy.ShapeTypeList, Ext: &e___listOfCrossAccountAuthorization})
+var s___listOfCrossAccountAuthorization_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CrossAccountAuthorization, Type: smithy.ShapeTypeString, Ext: &e___listOfCrossAccountAuthorization_member})
+var s___listOfListRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfListRulesOutput, Members: &m___listOfListRulesOutput, Type: smithy.ShapeTypeList, Ext: &e___listOfListRulesOutput})
+var s___listOfListRulesOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListRulesOutput, Members: &mListRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &e___listOfListRulesOutput_member})
+var s___listOfMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfMessage, Members: &m___listOfMessage, Type: smithy.ShapeTypeList, Ext: &e___listOfMessage})
+var s___listOfMessage_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &e___listOfMessage_member})
+var s___listOfReadinessCheckOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfReadinessCheckOutput, Members: &m___listOfReadinessCheckOutput, Type: smithy.ShapeTypeList, Ext: &e___listOfReadinessCheckOutput})
+var s___listOfReadinessCheckOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReadinessCheckOutput, Members: &mReadinessCheckOutput, Type: smithy.ShapeTypeStructure, Ext: &e___listOfReadinessCheckOutput_member})
+var s___listOfReadinessCheckSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfReadinessCheckSummary, Members: &m___listOfReadinessCheckSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfReadinessCheckSummary})
+var s___listOfReadinessCheckSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReadinessCheckSummary, Members: &mReadinessCheckSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfReadinessCheckSummary_member})
+var s___listOfRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRecommendation, Members: &m___listOfRecommendation, Type: smithy.ShapeTypeList, Ext: &e___listOfRecommendation})
+var s___listOfRecommendation_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure, Ext: &e___listOfRecommendation_member})
+var s___listOfRecoveryGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRecoveryGroupOutput, Members: &m___listOfRecoveryGroupOutput, Type: smithy.ShapeTypeList, Ext: &e___listOfRecoveryGroupOutput})
+var s___listOfRecoveryGroupOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryGroupOutput, Members: &mRecoveryGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &e___listOfRecoveryGroupOutput_member})
+var s___listOfResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfResource, Members: &m___listOfResource, Type: smithy.ShapeTypeList, Ext: &e___listOfResource})
+var s___listOfResource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &e___listOfResource_member})
+var s___listOfResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfResourceResult, Members: &m___listOfResourceResult, Type: smithy.ShapeTypeList, Ext: &e___listOfResourceResult})
+var s___listOfResourceResult_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceResult, Members: &mResourceResult, Type: smithy.ShapeTypeStructure, Ext: &e___listOfResourceResult_member})
+var s___listOfResourceSetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfResourceSetOutput, Members: &m___listOfResourceSetOutput, Type: smithy.ShapeTypeList, Ext: &e___listOfResourceSetOutput})
+var s___listOfResourceSetOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSetOutput, Members: &mResourceSetOutput, Type: smithy.ShapeTypeStructure, Ext: &e___listOfResourceSetOutput_member})
+var s___listOfRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRuleResult, Members: &m___listOfRuleResult, Type: smithy.ShapeTypeList, Ext: &e___listOfRuleResult})
+var s___listOfRuleResult_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleResult, Members: &mRuleResult, Type: smithy.ShapeTypeStructure, Ext: &e___listOfRuleResult_member})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var s___stringMax256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax256, Type: smithy.ShapeTypeString, Ext: &e___stringMax256})
+var s___stringMax64 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax64, Type: smithy.ShapeTypeString, Ext: &e___stringMax64})
+var s___stringMax64PatternAAZAZ09Z = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax64PatternAAZAZ09Z, Type: smithy.ShapeTypeString, Ext: &e___stringMax64PatternAAZAZ09Z})
+var s___stringPatternAWSAZaZ09AZaZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringPatternAWSAZaZ09AZaZ09, Type: smithy.ShapeTypeString, Ext: &e___stringPatternAWSAZaZ09AZaZ09})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sCellOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCellOutput, Members: &mCellOutput, Type: smithy.ShapeTypeStructure, Ext: &eCellOutput})
+var sCellOutput_CellArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellArn", ID: &i___stringMax256, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eCellOutput_CellArn})
+var sCellOutput_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCellOutput_CellName})
+var sCellOutput_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eCellOutput_Cells})
+var sCellOutput_ParentReadinessScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReadinessScopes", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eCellOutput_ParentReadinessScopes})
+var sCellOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCellOutput_Tags})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_CrossAccountAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossAccountAuthorization, Type: smithy.ShapeTypeString, Ext: &e_CrossAccountAuthorization})
+var sDNSTargetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDNSTargetResource, Members: &mDNSTargetResource, Type: smithy.ShapeTypeStructure, Ext: &eDNSTargetResource})
+var sDNSTargetResource_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eDNSTargetResource_DomainName})
+var sDNSTargetResource_HostedZoneArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneArn", ID: &i___string, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eDNSTargetResource_HostedZoneArn})
+var sDNSTargetResource_RecordSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordSetId", ID: &i___string, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eDNSTargetResource_RecordSetId})
+var sDNSTargetResource_RecordType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordType", ID: &i___string, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eDNSTargetResource_RecordType})
+var sDNSTargetResource_TargetResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetResource", ID: &iTargetResource, Members: &mTargetResource, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eDNSTargetResource_TargetResource})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_LastAuditTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastAuditTimestamp, Traits: &t46, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastAuditTimestamp})
+var sListRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesOutput, Members: &mListRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRulesOutput})
+var sListRulesOutput_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i___stringMax64, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eListRulesOutput_ResourceType})
+var sListRulesOutput_RuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleDescription", ID: &i___stringMax256, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListRulesOutput_RuleDescription})
+var sListRulesOutput_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i___stringMax64, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListRulesOutput_RuleId})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &eMessage})
+var sMessage_MessageText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageText", ID: &i___string, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eMessage_MessageText})
+var sNLBResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNLBResource, Members: &mNLBResource, Type: smithy.ShapeTypeStructure, Ext: &eNLBResource})
+var sNLBResource_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eNLBResource_Arn})
+var sR53ResourceRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iR53ResourceRecord, Members: &mR53ResourceRecord, Type: smithy.ShapeTypeStructure, Ext: &eR53ResourceRecord})
+var sR53ResourceRecord_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eR53ResourceRecord_DomainName})
+var sR53ResourceRecord_RecordSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordSetId", ID: &i___string, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eR53ResourceRecord_RecordSetId})
+var sReadiness = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReadiness, Members: &mReadiness, Type: smithy.ShapeTypeEnum, Ext: &eReadiness})
+var sReadiness_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReadiness_READY})
+var sReadiness_NOT_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReadiness_NOT_READY})
+var sReadiness_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReadiness_UNKNOWN})
+var sReadiness_NOT_AUTHORIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_AUTHORIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReadiness_NOT_AUTHORIZED})
+var sReadinessCheckOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReadinessCheckOutput, Members: &mReadinessCheckOutput, Type: smithy.ShapeTypeStructure, Ext: &eReadinessCheckOutput})
+var sReadinessCheckOutput_ReadinessCheckArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckArn", ID: &i___stringMax256, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eReadinessCheckOutput_ReadinessCheckArn})
+var sReadinessCheckOutput_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eReadinessCheckOutput_ReadinessCheckName})
+var sReadinessCheckOutput_ResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSet", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eReadinessCheckOutput_ResourceSet})
+var sReadinessCheckOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eReadinessCheckOutput_Tags})
+var sReadinessCheckSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReadinessCheckSummary, Members: &mReadinessCheckSummary, Type: smithy.ShapeTypeStructure, Ext: &eReadinessCheckSummary})
+var sReadinessCheckSummary_Readiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readiness", ID: &iReadiness, Members: &mReadiness, Traits: &t55, Type: smithy.ShapeTypeEnum, Ext: &eReadinessCheckSummary_Readiness})
+var sReadinessCheckSummary_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eReadinessCheckSummary_ReadinessCheckName})
+var s_ReadinessCheckTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadinessCheckTimestamp, Traits: &t46, Type: smithy.ShapeTypeTimestamp, Ext: &e_ReadinessCheckTimestamp})
+var sRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eRecommendation})
+var sRecommendation_RecommendationText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationText", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eRecommendation_RecommendationText})
+var sRecoveryGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryGroupOutput, Members: &mRecoveryGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryGroupOutput})
+var sRecoveryGroupOutput_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eRecoveryGroupOutput_Cells})
+var sRecoveryGroupOutput_RecoveryGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupArn", ID: &i___stringMax256, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eRecoveryGroupOutput_RecoveryGroupArn})
+var sRecoveryGroupOutput_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eRecoveryGroupOutput_RecoveryGroupName})
+var sRecoveryGroupOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eRecoveryGroupOutput_Tags})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &eResource})
+var sResource_ComponentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentId", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eResource_ComponentId})
+var sResource_DnsTargetResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsTargetResource", ID: &iDNSTargetResource, Members: &mDNSTargetResource, Traits: &t60, Type: smithy.ShapeTypeStructure, Ext: &eResource_DnsTargetResource})
+var sResource_ReadinessScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessScopes", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t61, Type: smithy.ShapeTypeList, Ext: &eResource_ReadinessScopes})
+var sResource_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eResource_ResourceArn})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceResult, Members: &mResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eResourceResult})
+var sResourceResult_ComponentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentId", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eResourceResult_ComponentId})
+var sResourceResult_LastCheckedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastCheckedTimestamp", ID: &i_ReadinessCheckTimestamp, Traits: &t64, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceResult_LastCheckedTimestamp})
+var sResourceResult_Readiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readiness", ID: &iReadiness, Members: &mReadiness, Traits: &t55, Type: smithy.ShapeTypeEnum, Ext: &eResourceResult_Readiness})
+var sResourceResult_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eResourceResult_ResourceArn})
+var sResourceSetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSetOutput, Members: &mResourceSetOutput, Type: smithy.ShapeTypeStructure, Ext: &eResourceSetOutput})
+var sResourceSetOutput_ResourceSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetArn", ID: &i___stringMax256, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eResourceSetOutput_ResourceSetArn})
+var sResourceSetOutput_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eResourceSetOutput_ResourceSetName})
+var sResourceSetOutput_ResourceSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetType", ID: &i___stringPatternAWSAZaZ09AZaZ09, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eResourceSetOutput_ResourceSetType})
+var sResourceSetOutput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i___listOfResource, Members: &m___listOfResource, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eResourceSetOutput_Resources})
+var sResourceSetOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eResourceSetOutput_Tags})
+var sRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleResult, Members: &mRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eRuleResult})
+var sRuleResult_LastCheckedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastCheckedTimestamp", ID: &i_ReadinessCheckTimestamp, Traits: &t64, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleResult_LastCheckedTimestamp})
+var sRuleResult_Messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Messages", ID: &i___listOfMessage, Members: &m___listOfMessage, Traits: &t69, Type: smithy.ShapeTypeList, Ext: &eRuleResult_Messages})
+var sRuleResult_Readiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readiness", ID: &iReadiness, Members: &mReadiness, Traits: &t55, Type: smithy.ShapeTypeEnum, Ext: &eRuleResult_Readiness})
+var sRuleResult_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i___string, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eRuleResult_RuleId})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sTargetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResource, Members: &mTargetResource, Type: smithy.ShapeTypeStructure, Ext: &eTargetResource})
+var sTargetResource_NLBResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NLBResource", ID: &iNLBResource, Members: &mNLBResource, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eTargetResource_NLBResource})
+var sTargetResource_R53Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "R53Resource", ID: &iR53ResourceRecord, Members: &mR53ResourceRecord, Traits: &t71, Type: smithy.ShapeTypeStructure, Ext: &eTargetResource_R53Resource})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t72, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t73, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sCreateCellRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCellRequest, Members: &mCreateCellRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCellRequest})
+var sCreateCellRequest_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateCellRequest_CellName})
+var sCreateCellRequest_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eCreateCellRequest_Cells})
+var sCreateCellRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateCellRequest_Tags})
+var sCreateCellResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCellResponse, Members: &mCreateCellResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCellResponse})
+var sCreateCellResponse_CellArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellArn", ID: &i___stringMax256, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eCreateCellResponse_CellArn})
+var sCreateCellResponse_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateCellResponse_CellName})
+var sCreateCellResponse_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eCreateCellResponse_Cells})
+var sCreateCellResponse_ParentReadinessScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReadinessScopes", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eCreateCellResponse_ParentReadinessScopes})
+var sCreateCellResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateCellResponse_Tags})
+var sCreateCrossAccountAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCrossAccountAuthorizationRequest, Members: &mCreateCrossAccountAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCrossAccountAuthorizationRequest})
+var sCreateCrossAccountAuthorizationRequest_CrossAccountAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAuthorization", ID: &i_CrossAccountAuthorization, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eCreateCrossAccountAuthorizationRequest_CrossAccountAuthorization})
+var sCreateCrossAccountAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCrossAccountAuthorizationResponse, Members: &mCreateCrossAccountAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCrossAccountAuthorizationResponse})
+var sCreateCrossAccountAuthorizationResponse_CrossAccountAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAuthorization", ID: &i_CrossAccountAuthorization, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eCreateCrossAccountAuthorizationResponse_CrossAccountAuthorization})
+var sCreateReadinessCheckRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReadinessCheckRequest, Members: &mCreateReadinessCheckRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateReadinessCheckRequest})
+var sCreateReadinessCheckRequest_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eCreateReadinessCheckRequest_ReadinessCheckName})
+var sCreateReadinessCheckRequest_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___string, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateReadinessCheckRequest_ResourceSetName})
+var sCreateReadinessCheckRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateReadinessCheckRequest_Tags})
+var sCreateReadinessCheckResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReadinessCheckResponse, Members: &mCreateReadinessCheckResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateReadinessCheckResponse})
+var sCreateReadinessCheckResponse_ReadinessCheckArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckArn", ID: &i___stringMax256, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateReadinessCheckResponse_ReadinessCheckArn})
+var sCreateReadinessCheckResponse_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eCreateReadinessCheckResponse_ReadinessCheckName})
+var sCreateReadinessCheckResponse_ResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSet", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateReadinessCheckResponse_ResourceSet})
+var sCreateReadinessCheckResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateReadinessCheckResponse_Tags})
+var sCreateRecoveryGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryGroupRequest, Members: &mCreateRecoveryGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryGroupRequest})
+var sCreateRecoveryGroupRequest_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eCreateRecoveryGroupRequest_Cells})
+var sCreateRecoveryGroupRequest_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryGroupRequest_RecoveryGroupName})
+var sCreateRecoveryGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateRecoveryGroupRequest_Tags})
+var sCreateRecoveryGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryGroupResponse, Members: &mCreateRecoveryGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryGroupResponse})
+var sCreateRecoveryGroupResponse_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eCreateRecoveryGroupResponse_Cells})
+var sCreateRecoveryGroupResponse_RecoveryGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupArn", ID: &i___stringMax256, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryGroupResponse_RecoveryGroupArn})
+var sCreateRecoveryGroupResponse_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryGroupResponse_RecoveryGroupName})
+var sCreateRecoveryGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateRecoveryGroupResponse_Tags})
+var sCreateResourceSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSetRequest, Members: &mCreateResourceSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceSetRequest})
+var sCreateResourceSetRequest_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___string, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateResourceSetRequest_ResourceSetName})
+var sCreateResourceSetRequest_ResourceSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetType", ID: &i___stringPatternAWSAZaZ09AZaZ09, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eCreateResourceSetRequest_ResourceSetType})
+var sCreateResourceSetRequest_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i___listOfResource, Members: &m___listOfResource, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eCreateResourceSetRequest_Resources})
+var sCreateResourceSetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateResourceSetRequest_Tags})
+var sCreateResourceSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSetResponse, Members: &mCreateResourceSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceSetResponse})
+var sCreateResourceSetResponse_ResourceSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetArn", ID: &i___stringMax256, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eCreateResourceSetResponse_ResourceSetArn})
+var sCreateResourceSetResponse_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eCreateResourceSetResponse_ResourceSetName})
+var sCreateResourceSetResponse_ResourceSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetType", ID: &i___stringPatternAWSAZaZ09AZaZ09, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eCreateResourceSetResponse_ResourceSetType})
+var sCreateResourceSetResponse_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i___listOfResource, Members: &m___listOfResource, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eCreateResourceSetResponse_Resources})
+var sCreateResourceSetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateResourceSetResponse_Tags})
+var sDeleteCellRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCellRequest, Members: &mDeleteCellRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCellRequest})
+var sDeleteCellRequest_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eDeleteCellRequest_CellName})
+var sDeleteCrossAccountAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCrossAccountAuthorizationRequest, Members: &mDeleteCrossAccountAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCrossAccountAuthorizationRequest})
+var sDeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAuthorization", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eDeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization})
+var sDeleteCrossAccountAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCrossAccountAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCrossAccountAuthorizationResponse})
+var sDeleteReadinessCheckRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReadinessCheckRequest, Members: &mDeleteReadinessCheckRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReadinessCheckRequest})
+var sDeleteReadinessCheckRequest_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eDeleteReadinessCheckRequest_ReadinessCheckName})
+var sDeleteRecoveryGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryGroupRequest, Members: &mDeleteRecoveryGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryGroupRequest})
+var sDeleteRecoveryGroupRequest_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryGroupRequest_RecoveryGroupName})
+var sDeleteResourceSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceSetRequest, Members: &mDeleteResourceSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceSetRequest})
+var sDeleteResourceSetRequest_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceSetRequest_ResourceSetName})
+var sGetArchitectureRecommendationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchitectureRecommendationsRequest, Members: &mGetArchitectureRecommendationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetArchitectureRecommendationsRequest})
+var sGetArchitectureRecommendationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eGetArchitectureRecommendationsRequest_MaxResults})
+var sGetArchitectureRecommendationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eGetArchitectureRecommendationsRequest_NextToken})
+var sGetArchitectureRecommendationsRequest_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetArchitectureRecommendationsRequest_RecoveryGroupName})
+var sGetArchitectureRecommendationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchitectureRecommendationsResponse, Members: &mGetArchitectureRecommendationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetArchitectureRecommendationsResponse})
+var sGetArchitectureRecommendationsResponse_LastAuditTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAuditTimestamp", ID: &i_LastAuditTimestamp, Traits: &t78, Type: smithy.ShapeTypeTimestamp, Ext: &eGetArchitectureRecommendationsResponse_LastAuditTimestamp})
+var sGetArchitectureRecommendationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eGetArchitectureRecommendationsResponse_NextToken})
+var sGetArchitectureRecommendationsResponse_Recommendations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recommendations", ID: &i___listOfRecommendation, Members: &m___listOfRecommendation, Traits: &t80, Type: smithy.ShapeTypeList, Ext: &eGetArchitectureRecommendationsResponse_Recommendations})
+var sGetCellRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCellRequest, Members: &mGetCellRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCellRequest})
+var sGetCellRequest_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetCellRequest_CellName})
+var sGetCellResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCellResponse, Members: &mGetCellResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCellResponse})
+var sGetCellResponse_CellArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellArn", ID: &i___stringMax256, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetCellResponse_CellArn})
+var sGetCellResponse_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetCellResponse_CellName})
+var sGetCellResponse_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eGetCellResponse_Cells})
+var sGetCellResponse_ParentReadinessScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReadinessScopes", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eGetCellResponse_ParentReadinessScopes})
+var sGetCellResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eGetCellResponse_Tags})
+var sGetCellReadinessSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCellReadinessSummaryRequest, Members: &mGetCellReadinessSummaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCellReadinessSummaryRequest})
+var sGetCellReadinessSummaryRequest_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetCellReadinessSummaryRequest_CellName})
+var sGetCellReadinessSummaryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eGetCellReadinessSummaryRequest_MaxResults})
+var sGetCellReadinessSummaryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eGetCellReadinessSummaryRequest_NextToken})
+var sGetCellReadinessSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCellReadinessSummaryResponse, Members: &mGetCellReadinessSummaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCellReadinessSummaryResponse})
+var sGetCellReadinessSummaryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eGetCellReadinessSummaryResponse_NextToken})
+var sGetCellReadinessSummaryResponse_Readiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readiness", ID: &iReadiness, Members: &mReadiness, Traits: &t55, Type: smithy.ShapeTypeEnum, Ext: &eGetCellReadinessSummaryResponse_Readiness})
+var sGetCellReadinessSummaryResponse_ReadinessChecks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessChecks", ID: &i___listOfReadinessCheckSummary, Members: &m___listOfReadinessCheckSummary, Traits: &t81, Type: smithy.ShapeTypeList, Ext: &eGetCellReadinessSummaryResponse_ReadinessChecks})
+var sGetReadinessCheckRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckRequest, Members: &mGetReadinessCheckRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetReadinessCheckRequest})
+var sGetReadinessCheckRequest_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckRequest_ReadinessCheckName})
+var sGetReadinessCheckResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckResponse, Members: &mGetReadinessCheckResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetReadinessCheckResponse})
+var sGetReadinessCheckResponse_ReadinessCheckArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckArn", ID: &i___stringMax256, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckResponse_ReadinessCheckArn})
+var sGetReadinessCheckResponse_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckResponse_ReadinessCheckName})
+var sGetReadinessCheckResponse_ResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSet", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckResponse_ResourceSet})
+var sGetReadinessCheckResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eGetReadinessCheckResponse_Tags})
+var sGetReadinessCheckResourceStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckResourceStatusRequest, Members: &mGetReadinessCheckResourceStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetReadinessCheckResourceStatusRequest})
+var sGetReadinessCheckResourceStatusRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eGetReadinessCheckResourceStatusRequest_MaxResults})
+var sGetReadinessCheckResourceStatusRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckResourceStatusRequest_NextToken})
+var sGetReadinessCheckResourceStatusRequest_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckResourceStatusRequest_ReadinessCheckName})
+var sGetReadinessCheckResourceStatusRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckResourceStatusRequest_ResourceIdentifier})
+var sGetReadinessCheckResourceStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckResourceStatusResponse, Members: &mGetReadinessCheckResourceStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetReadinessCheckResourceStatusResponse})
+var sGetReadinessCheckResourceStatusResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckResourceStatusResponse_NextToken})
+var sGetReadinessCheckResourceStatusResponse_Readiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readiness", ID: &iReadiness, Members: &mReadiness, Traits: &t55, Type: smithy.ShapeTypeEnum, Ext: &eGetReadinessCheckResourceStatusResponse_Readiness})
+var sGetReadinessCheckResourceStatusResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i___listOfRuleResult, Members: &m___listOfRuleResult, Traits: &t82, Type: smithy.ShapeTypeList, Ext: &eGetReadinessCheckResourceStatusResponse_Rules})
+var sGetReadinessCheckStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckStatusRequest, Members: &mGetReadinessCheckStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetReadinessCheckStatusRequest})
+var sGetReadinessCheckStatusRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eGetReadinessCheckStatusRequest_MaxResults})
+var sGetReadinessCheckStatusRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckStatusRequest_NextToken})
+var sGetReadinessCheckStatusRequest_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckStatusRequest_ReadinessCheckName})
+var sGetReadinessCheckStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReadinessCheckStatusResponse, Members: &mGetReadinessCheckStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetReadinessCheckStatusResponse})
+var sGetReadinessCheckStatusResponse_Messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Messages", ID: &i___listOfMessage, Members: &m___listOfMessage, Traits: &t69, Type: smithy.ShapeTypeList, Ext: &eGetReadinessCheckStatusResponse_Messages})
+var sGetReadinessCheckStatusResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eGetReadinessCheckStatusResponse_NextToken})
+var sGetReadinessCheckStatusResponse_Readiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readiness", ID: &iReadiness, Members: &mReadiness, Traits: &t55, Type: smithy.ShapeTypeEnum, Ext: &eGetReadinessCheckStatusResponse_Readiness})
+var sGetReadinessCheckStatusResponse_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i___listOfResourceResult, Members: &m___listOfResourceResult, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eGetReadinessCheckStatusResponse_Resources})
+var sGetRecoveryGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryGroupRequest, Members: &mGetRecoveryGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryGroupRequest})
+var sGetRecoveryGroupRequest_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryGroupRequest_RecoveryGroupName})
+var sGetRecoveryGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryGroupResponse, Members: &mGetRecoveryGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryGroupResponse})
+var sGetRecoveryGroupResponse_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eGetRecoveryGroupResponse_Cells})
+var sGetRecoveryGroupResponse_RecoveryGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupArn", ID: &i___stringMax256, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryGroupResponse_RecoveryGroupArn})
+var sGetRecoveryGroupResponse_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryGroupResponse_RecoveryGroupName})
+var sGetRecoveryGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eGetRecoveryGroupResponse_Tags})
+var sGetRecoveryGroupReadinessSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryGroupReadinessSummaryRequest, Members: &mGetRecoveryGroupReadinessSummaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryGroupReadinessSummaryRequest})
+var sGetRecoveryGroupReadinessSummaryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eGetRecoveryGroupReadinessSummaryRequest_MaxResults})
+var sGetRecoveryGroupReadinessSummaryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryGroupReadinessSummaryRequest_NextToken})
+var sGetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName})
+var sGetRecoveryGroupReadinessSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryGroupReadinessSummaryResponse, Members: &mGetRecoveryGroupReadinessSummaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryGroupReadinessSummaryResponse})
+var sGetRecoveryGroupReadinessSummaryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryGroupReadinessSummaryResponse_NextToken})
+var sGetRecoveryGroupReadinessSummaryResponse_Readiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readiness", ID: &iReadiness, Members: &mReadiness, Traits: &t55, Type: smithy.ShapeTypeEnum, Ext: &eGetRecoveryGroupReadinessSummaryResponse_Readiness})
+var sGetRecoveryGroupReadinessSummaryResponse_ReadinessChecks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessChecks", ID: &i___listOfReadinessCheckSummary, Members: &m___listOfReadinessCheckSummary, Traits: &t81, Type: smithy.ShapeTypeList, Ext: &eGetRecoveryGroupReadinessSummaryResponse_ReadinessChecks})
+var sGetResourceSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSetRequest, Members: &mGetResourceSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceSetRequest})
+var sGetResourceSetRequest_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetResourceSetRequest_ResourceSetName})
+var sGetResourceSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSetResponse, Members: &mGetResourceSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceSetResponse})
+var sGetResourceSetResponse_ResourceSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetArn", ID: &i___stringMax256, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eGetResourceSetResponse_ResourceSetArn})
+var sGetResourceSetResponse_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetResourceSetResponse_ResourceSetName})
+var sGetResourceSetResponse_ResourceSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetType", ID: &i___stringPatternAWSAZaZ09AZaZ09, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eGetResourceSetResponse_ResourceSetType})
+var sGetResourceSetResponse_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i___listOfResource, Members: &m___listOfResource, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eGetResourceSetResponse_Resources})
+var sGetResourceSetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eGetResourceSetResponse_Tags})
+var sListCellsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCellsRequest, Members: &mListCellsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCellsRequest})
+var sListCellsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eListCellsRequest_MaxResults})
+var sListCellsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListCellsRequest_NextToken})
+var sListCellsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCellsResponse, Members: &mListCellsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCellsResponse})
+var sListCellsResponse_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOfCellOutput, Members: &m___listOfCellOutput, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eListCellsResponse_Cells})
+var sListCellsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListCellsResponse_NextToken})
+var sListCrossAccountAuthorizationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountAuthorizationsRequest, Members: &mListCrossAccountAuthorizationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCrossAccountAuthorizationsRequest})
+var sListCrossAccountAuthorizationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eListCrossAccountAuthorizationsRequest_MaxResults})
+var sListCrossAccountAuthorizationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListCrossAccountAuthorizationsRequest_NextToken})
+var sListCrossAccountAuthorizationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountAuthorizationsResponse, Members: &mListCrossAccountAuthorizationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCrossAccountAuthorizationsResponse})
+var sListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAuthorizations", ID: &i___listOfCrossAccountAuthorization, Members: &m___listOfCrossAccountAuthorization, Traits: &t83, Type: smithy.ShapeTypeList, Ext: &eListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations})
+var sListCrossAccountAuthorizationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListCrossAccountAuthorizationsResponse_NextToken})
+var sListReadinessChecksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReadinessChecksRequest, Members: &mListReadinessChecksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListReadinessChecksRequest})
+var sListReadinessChecksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eListReadinessChecksRequest_MaxResults})
+var sListReadinessChecksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListReadinessChecksRequest_NextToken})
+var sListReadinessChecksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReadinessChecksResponse, Members: &mListReadinessChecksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListReadinessChecksResponse})
+var sListReadinessChecksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListReadinessChecksResponse_NextToken})
+var sListReadinessChecksResponse_ReadinessChecks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessChecks", ID: &i___listOfReadinessCheckOutput, Members: &m___listOfReadinessCheckOutput, Traits: &t81, Type: smithy.ShapeTypeList, Ext: &eListReadinessChecksResponse_ReadinessChecks})
+var sListRecoveryGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryGroupsRequest, Members: &mListRecoveryGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryGroupsRequest})
+var sListRecoveryGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eListRecoveryGroupsRequest_MaxResults})
+var sListRecoveryGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListRecoveryGroupsRequest_NextToken})
+var sListRecoveryGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryGroupsResponse, Members: &mListRecoveryGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryGroupsResponse})
+var sListRecoveryGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListRecoveryGroupsResponse_NextToken})
+var sListRecoveryGroupsResponse_RecoveryGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroups", ID: &i___listOfRecoveryGroupOutput, Members: &m___listOfRecoveryGroupOutput, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eListRecoveryGroupsResponse_RecoveryGroups})
+var sListResourceSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSetsRequest, Members: &mListResourceSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResourceSetsRequest})
+var sListResourceSetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eListResourceSetsRequest_MaxResults})
+var sListResourceSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListResourceSetsRequest_NextToken})
+var sListResourceSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSetsResponse, Members: &mListResourceSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResourceSetsResponse})
+var sListResourceSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListResourceSetsResponse_NextToken})
+var sListResourceSetsResponse_ResourceSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSets", ID: &i___listOfResourceSetOutput, Members: &m___listOfResourceSetOutput, Traits: &t85, Type: smithy.ShapeTypeList, Ext: &eListResourceSetsResponse_ResourceSets})
+var sListRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesRequest, Members: &mListRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRulesRequest})
+var sListRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t76, Type: smithy.ShapeTypeInteger, Ext: &eListRulesRequest_MaxResults})
+var sListRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListRulesRequest_NextToken})
+var sListRulesRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i___string, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &eListRulesRequest_ResourceType})
+var sListRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesResponse, Members: &mListRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRulesResponse})
+var sListRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t79, Type: smithy.ShapeTypeString, Ext: &eListRulesResponse_NextToken})
+var sListRulesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i___listOfListRulesOutput, Members: &m___listOfListRulesOutput, Traits: &t82, Type: smithy.ShapeTypeList, Ext: &eListRulesResponse_Rules})
+var sListTagsForResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourcesRequest, Members: &mListTagsForResourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourcesRequest})
+var sListTagsForResourcesRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourcesRequest_ResourceArn})
+var sListTagsForResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourcesResponse, Members: &mListTagsForResourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourcesResponse})
+var sListTagsForResourcesResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourcesResponse_Tags})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t87, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateCellRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCellRequest, Members: &mUpdateCellRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCellRequest})
+var sUpdateCellRequest_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eUpdateCellRequest_CellName})
+var sUpdateCellRequest_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eUpdateCellRequest_Cells})
+var sUpdateCellResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCellResponse, Members: &mUpdateCellResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCellResponse})
+var sUpdateCellResponse_CellArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellArn", ID: &i___stringMax256, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eUpdateCellResponse_CellArn})
+var sUpdateCellResponse_CellName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CellName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateCellResponse_CellName})
+var sUpdateCellResponse_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eUpdateCellResponse_Cells})
+var sUpdateCellResponse_ParentReadinessScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReadinessScopes", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eUpdateCellResponse_ParentReadinessScopes})
+var sUpdateCellResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eUpdateCellResponse_Tags})
+var sUpdateReadinessCheckRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReadinessCheckRequest, Members: &mUpdateReadinessCheckRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReadinessCheckRequest})
+var sUpdateReadinessCheckRequest_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eUpdateReadinessCheckRequest_ReadinessCheckName})
+var sUpdateReadinessCheckRequest_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___string, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateReadinessCheckRequest_ResourceSetName})
+var sUpdateReadinessCheckResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReadinessCheckResponse, Members: &mUpdateReadinessCheckResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReadinessCheckResponse})
+var sUpdateReadinessCheckResponse_ReadinessCheckArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckArn", ID: &i___stringMax256, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateReadinessCheckResponse_ReadinessCheckArn})
+var sUpdateReadinessCheckResponse_ReadinessCheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadinessCheckName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eUpdateReadinessCheckResponse_ReadinessCheckName})
+var sUpdateReadinessCheckResponse_ResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSet", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eUpdateReadinessCheckResponse_ResourceSet})
+var sUpdateReadinessCheckResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eUpdateReadinessCheckResponse_Tags})
+var sUpdateRecoveryGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryGroupRequest, Members: &mUpdateRecoveryGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryGroupRequest})
+var sUpdateRecoveryGroupRequest_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eUpdateRecoveryGroupRequest_Cells})
+var sUpdateRecoveryGroupRequest_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryGroupRequest_RecoveryGroupName})
+var sUpdateRecoveryGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryGroupResponse, Members: &mUpdateRecoveryGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryGroupResponse})
+var sUpdateRecoveryGroupResponse_Cells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cells", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eUpdateRecoveryGroupResponse_Cells})
+var sUpdateRecoveryGroupResponse_RecoveryGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupArn", ID: &i___stringMax256, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryGroupResponse_RecoveryGroupArn})
+var sUpdateRecoveryGroupResponse_RecoveryGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryGroupName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryGroupResponse_RecoveryGroupName})
+var sUpdateRecoveryGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eUpdateRecoveryGroupResponse_Tags})
+var sUpdateResourceSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceSetRequest, Members: &mUpdateResourceSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceSetRequest})
+var sUpdateResourceSetRequest_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___string, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceSetRequest_ResourceSetName})
+var sUpdateResourceSetRequest_ResourceSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetType", ID: &i___stringPatternAWSAZaZ09AZaZ09, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceSetRequest_ResourceSetType})
+var sUpdateResourceSetRequest_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i___listOfResource, Members: &m___listOfResource, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eUpdateResourceSetRequest_Resources})
+var sUpdateResourceSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceSetResponse, Members: &mUpdateResourceSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceSetResponse})
+var sUpdateResourceSetResponse_ResourceSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetArn", ID: &i___stringMax256, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceSetResponse_ResourceSetArn})
+var sUpdateResourceSetResponse_ResourceSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetName", ID: &i___stringMax64PatternAAZAZ09Z, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceSetResponse_ResourceSetName})
+var sUpdateResourceSetResponse_ResourceSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetType", ID: &i___stringPatternAWSAZaZ09AZaZ09, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceSetResponse_ResourceSetType})
+var sUpdateResourceSetResponse_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i___listOfResource, Members: &m___listOfResource, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eUpdateResourceSetResponse_Resources})
+var sUpdateResourceSetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eUpdateResourceSetResponse_Tags})
+
+var CreateCell = &sCreateCell
+
+var CreateCrossAccountAuthorization = &sCreateCrossAccountAuthorization
+
+var CreateReadinessCheck = &sCreateReadinessCheck
+
+var CreateRecoveryGroup = &sCreateRecoveryGroup
+
+var CreateResourceSet = &sCreateResourceSet
+
+var DeleteCell = &sDeleteCell
+
+var DeleteCrossAccountAuthorization = &sDeleteCrossAccountAuthorization
+
+var DeleteReadinessCheck = &sDeleteReadinessCheck
+
+var DeleteRecoveryGroup = &sDeleteRecoveryGroup
+
+var DeleteResourceSet = &sDeleteResourceSet
+
+var GetArchitectureRecommendations = &sGetArchitectureRecommendations
+
+var GetCell = &sGetCell
+
+var GetCellReadinessSummary = &sGetCellReadinessSummary
+
+var GetReadinessCheck = &sGetReadinessCheck
+
+var GetReadinessCheckResourceStatus = &sGetReadinessCheckResourceStatus
+
+var GetReadinessCheckStatus = &sGetReadinessCheckStatus
+
+var GetRecoveryGroup = &sGetRecoveryGroup
+
+var GetRecoveryGroupReadinessSummary = &sGetRecoveryGroupReadinessSummary
+
+var GetResourceSet = &sGetResourceSet
+
+var ListCells = &sListCells
+
+var ListCrossAccountAuthorizations = &sListCrossAccountAuthorizations
+
+var ListReadinessChecks = &sListReadinessChecks
+
+var ListRecoveryGroups = &sListRecoveryGroups
+
+var ListResourceSets = &sListResourceSets
+
+var ListRules = &sListRules
+
+var ListTagsForResources = &sListTagsForResources
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateCell = &sUpdateCell
+
+var UpdateReadinessCheck = &sUpdateReadinessCheck
+
+var UpdateRecoveryGroup = &sUpdateRecoveryGroup
+
+var UpdateResourceSet = &sUpdateResourceSet
+
+var _Route53RecoveryReadiness = &s_Route53RecoveryReadiness
+
+var ___listOf__string = &s___listOf__string
+var ___listOf__string_member = &s___listOf__string_member
+
+var ___listOfCellOutput = &s___listOfCellOutput
+var ___listOfCellOutput_member = &s___listOfCellOutput_member
+
+var ___listOfCrossAccountAuthorization = &s___listOfCrossAccountAuthorization
+var ___listOfCrossAccountAuthorization_member = &s___listOfCrossAccountAuthorization_member
+
+var ___listOfListRulesOutput = &s___listOfListRulesOutput
+var ___listOfListRulesOutput_member = &s___listOfListRulesOutput_member
+
+var ___listOfMessage = &s___listOfMessage
+var ___listOfMessage_member = &s___listOfMessage_member
+
+var ___listOfReadinessCheckOutput = &s___listOfReadinessCheckOutput
+var ___listOfReadinessCheckOutput_member = &s___listOfReadinessCheckOutput_member
+
+var ___listOfReadinessCheckSummary = &s___listOfReadinessCheckSummary
+var ___listOfReadinessCheckSummary_member = &s___listOfReadinessCheckSummary_member
+
+var ___listOfRecommendation = &s___listOfRecommendation
+var ___listOfRecommendation_member = &s___listOfRecommendation_member
+
+var ___listOfRecoveryGroupOutput = &s___listOfRecoveryGroupOutput
+var ___listOfRecoveryGroupOutput_member = &s___listOfRecoveryGroupOutput_member
+
+var ___listOfResource = &s___listOfResource
+var ___listOfResource_member = &s___listOfResource_member
+
+var ___listOfResourceResult = &s___listOfResourceResult
+var ___listOfResourceResult_member = &s___listOfResourceResult_member
+
+var ___listOfResourceSetOutput = &s___listOfResourceSetOutput
+var ___listOfResourceSetOutput_member = &s___listOfResourceSetOutput_member
+
+var ___listOfRuleResult = &s___listOfRuleResult
+var ___listOfRuleResult_member = &s___listOfRuleResult_member
+
+var ___string = &s___string
+
+var ___stringMax256 = &s___stringMax256
+
+var ___stringMax64 = &s___stringMax64
+
+var ___stringMax64PatternAAZAZ09Z = &s___stringMax64PatternAAZAZ09Z
+
+var ___stringPatternAWSAZaZ09AZaZ09 = &s___stringPatternAWSAZaZ09AZaZ09
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var CellOutput = &sCellOutput
+var CellOutput_CellArn = &sCellOutput_CellArn
+var CellOutput_CellName = &sCellOutput_CellName
+var CellOutput_Cells = &sCellOutput_Cells
+var CellOutput_ParentReadinessScopes = &sCellOutput_ParentReadinessScopes
+var CellOutput_Tags = &sCellOutput_Tags
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _CrossAccountAuthorization = &s_CrossAccountAuthorization
+
+var DNSTargetResource = &sDNSTargetResource
+var DNSTargetResource_DomainName = &sDNSTargetResource_DomainName
+var DNSTargetResource_HostedZoneArn = &sDNSTargetResource_HostedZoneArn
+var DNSTargetResource_RecordSetId = &sDNSTargetResource_RecordSetId
+var DNSTargetResource_RecordType = &sDNSTargetResource_RecordType
+var DNSTargetResource_TargetResource = &sDNSTargetResource_TargetResource
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var _LastAuditTimestamp = &s_LastAuditTimestamp
+
+var ListRulesOutput = &sListRulesOutput
+var ListRulesOutput_ResourceType = &sListRulesOutput_ResourceType
+var ListRulesOutput_RuleDescription = &sListRulesOutput_RuleDescription
+var ListRulesOutput_RuleId = &sListRulesOutput_RuleId
+
+var _MaxResults = &s_MaxResults
+
+var Message = &sMessage
+var Message_MessageText = &sMessage_MessageText
+
+var NLBResource = &sNLBResource
+var NLBResource_Arn = &sNLBResource_Arn
+
+var R53ResourceRecord = &sR53ResourceRecord
+var R53ResourceRecord_DomainName = &sR53ResourceRecord_DomainName
+var R53ResourceRecord_RecordSetId = &sR53ResourceRecord_RecordSetId
+
+var Readiness = &sReadiness
+var Readiness_READY = &sReadiness_READY
+var Readiness_NOT_READY = &sReadiness_NOT_READY
+var Readiness_UNKNOWN = &sReadiness_UNKNOWN
+var Readiness_NOT_AUTHORIZED = &sReadiness_NOT_AUTHORIZED
+
+var ReadinessCheckOutput = &sReadinessCheckOutput
+var ReadinessCheckOutput_ReadinessCheckArn = &sReadinessCheckOutput_ReadinessCheckArn
+var ReadinessCheckOutput_ReadinessCheckName = &sReadinessCheckOutput_ReadinessCheckName
+var ReadinessCheckOutput_ResourceSet = &sReadinessCheckOutput_ResourceSet
+var ReadinessCheckOutput_Tags = &sReadinessCheckOutput_Tags
+
+var ReadinessCheckSummary = &sReadinessCheckSummary
+var ReadinessCheckSummary_Readiness = &sReadinessCheckSummary_Readiness
+var ReadinessCheckSummary_ReadinessCheckName = &sReadinessCheckSummary_ReadinessCheckName
+
+var _ReadinessCheckTimestamp = &s_ReadinessCheckTimestamp
+
+var Recommendation = &sRecommendation
+var Recommendation_RecommendationText = &sRecommendation_RecommendationText
+
+var RecoveryGroupOutput = &sRecoveryGroupOutput
+var RecoveryGroupOutput_Cells = &sRecoveryGroupOutput_Cells
+var RecoveryGroupOutput_RecoveryGroupArn = &sRecoveryGroupOutput_RecoveryGroupArn
+var RecoveryGroupOutput_RecoveryGroupName = &sRecoveryGroupOutput_RecoveryGroupName
+var RecoveryGroupOutput_Tags = &sRecoveryGroupOutput_Tags
+
+var Resource = &sResource
+var Resource_ComponentId = &sResource_ComponentId
+var Resource_DnsTargetResource = &sResource_DnsTargetResource
+var Resource_ReadinessScopes = &sResource_ReadinessScopes
+var Resource_ResourceArn = &sResource_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceResult = &sResourceResult
+var ResourceResult_ComponentId = &sResourceResult_ComponentId
+var ResourceResult_LastCheckedTimestamp = &sResourceResult_LastCheckedTimestamp
+var ResourceResult_Readiness = &sResourceResult_Readiness
+var ResourceResult_ResourceArn = &sResourceResult_ResourceArn
+
+var ResourceSetOutput = &sResourceSetOutput
+var ResourceSetOutput_ResourceSetArn = &sResourceSetOutput_ResourceSetArn
+var ResourceSetOutput_ResourceSetName = &sResourceSetOutput_ResourceSetName
+var ResourceSetOutput_ResourceSetType = &sResourceSetOutput_ResourceSetType
+var ResourceSetOutput_Resources = &sResourceSetOutput_Resources
+var ResourceSetOutput_Tags = &sResourceSetOutput_Tags
+
+var RuleResult = &sRuleResult
+var RuleResult_LastCheckedTimestamp = &sRuleResult_LastCheckedTimestamp
+var RuleResult_Messages = &sRuleResult_Messages
+var RuleResult_Readiness = &sRuleResult_Readiness
+var RuleResult_RuleId = &sRuleResult_RuleId
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var TargetResource = &sTargetResource
+var TargetResource_NLBResource = &sTargetResource_NLBResource
+var TargetResource_R53Resource = &sTargetResource_R53Resource
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateCellRequest = &sCreateCellRequest
+var CreateCellRequest_CellName = &sCreateCellRequest_CellName
+var CreateCellRequest_Cells = &sCreateCellRequest_Cells
+var CreateCellRequest_Tags = &sCreateCellRequest_Tags
+
+var CreateCellResponse = &sCreateCellResponse
+var CreateCellResponse_CellArn = &sCreateCellResponse_CellArn
+var CreateCellResponse_CellName = &sCreateCellResponse_CellName
+var CreateCellResponse_Cells = &sCreateCellResponse_Cells
+var CreateCellResponse_ParentReadinessScopes = &sCreateCellResponse_ParentReadinessScopes
+var CreateCellResponse_Tags = &sCreateCellResponse_Tags
+
+var CreateCrossAccountAuthorizationRequest = &sCreateCrossAccountAuthorizationRequest
+var CreateCrossAccountAuthorizationRequest_CrossAccountAuthorization = &sCreateCrossAccountAuthorizationRequest_CrossAccountAuthorization
+
+var CreateCrossAccountAuthorizationResponse = &sCreateCrossAccountAuthorizationResponse
+var CreateCrossAccountAuthorizationResponse_CrossAccountAuthorization = &sCreateCrossAccountAuthorizationResponse_CrossAccountAuthorization
+
+var CreateReadinessCheckRequest = &sCreateReadinessCheckRequest
+var CreateReadinessCheckRequest_ReadinessCheckName = &sCreateReadinessCheckRequest_ReadinessCheckName
+var CreateReadinessCheckRequest_ResourceSetName = &sCreateReadinessCheckRequest_ResourceSetName
+var CreateReadinessCheckRequest_Tags = &sCreateReadinessCheckRequest_Tags
+
+var CreateReadinessCheckResponse = &sCreateReadinessCheckResponse
+var CreateReadinessCheckResponse_ReadinessCheckArn = &sCreateReadinessCheckResponse_ReadinessCheckArn
+var CreateReadinessCheckResponse_ReadinessCheckName = &sCreateReadinessCheckResponse_ReadinessCheckName
+var CreateReadinessCheckResponse_ResourceSet = &sCreateReadinessCheckResponse_ResourceSet
+var CreateReadinessCheckResponse_Tags = &sCreateReadinessCheckResponse_Tags
+
+var CreateRecoveryGroupRequest = &sCreateRecoveryGroupRequest
+var CreateRecoveryGroupRequest_Cells = &sCreateRecoveryGroupRequest_Cells
+var CreateRecoveryGroupRequest_RecoveryGroupName = &sCreateRecoveryGroupRequest_RecoveryGroupName
+var CreateRecoveryGroupRequest_Tags = &sCreateRecoveryGroupRequest_Tags
+
+var CreateRecoveryGroupResponse = &sCreateRecoveryGroupResponse
+var CreateRecoveryGroupResponse_Cells = &sCreateRecoveryGroupResponse_Cells
+var CreateRecoveryGroupResponse_RecoveryGroupArn = &sCreateRecoveryGroupResponse_RecoveryGroupArn
+var CreateRecoveryGroupResponse_RecoveryGroupName = &sCreateRecoveryGroupResponse_RecoveryGroupName
+var CreateRecoveryGroupResponse_Tags = &sCreateRecoveryGroupResponse_Tags
+
+var CreateResourceSetRequest = &sCreateResourceSetRequest
+var CreateResourceSetRequest_ResourceSetName = &sCreateResourceSetRequest_ResourceSetName
+var CreateResourceSetRequest_ResourceSetType = &sCreateResourceSetRequest_ResourceSetType
+var CreateResourceSetRequest_Resources = &sCreateResourceSetRequest_Resources
+var CreateResourceSetRequest_Tags = &sCreateResourceSetRequest_Tags
+
+var CreateResourceSetResponse = &sCreateResourceSetResponse
+var CreateResourceSetResponse_ResourceSetArn = &sCreateResourceSetResponse_ResourceSetArn
+var CreateResourceSetResponse_ResourceSetName = &sCreateResourceSetResponse_ResourceSetName
+var CreateResourceSetResponse_ResourceSetType = &sCreateResourceSetResponse_ResourceSetType
+var CreateResourceSetResponse_Resources = &sCreateResourceSetResponse_Resources
+var CreateResourceSetResponse_Tags = &sCreateResourceSetResponse_Tags
+
+var DeleteCellRequest = &sDeleteCellRequest
+var DeleteCellRequest_CellName = &sDeleteCellRequest_CellName
+
+var DeleteCrossAccountAuthorizationRequest = &sDeleteCrossAccountAuthorizationRequest
+var DeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization = &sDeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization
+
+var DeleteCrossAccountAuthorizationResponse = &sDeleteCrossAccountAuthorizationResponse
+
+var DeleteReadinessCheckRequest = &sDeleteReadinessCheckRequest
+var DeleteReadinessCheckRequest_ReadinessCheckName = &sDeleteReadinessCheckRequest_ReadinessCheckName
+
+var DeleteRecoveryGroupRequest = &sDeleteRecoveryGroupRequest
+var DeleteRecoveryGroupRequest_RecoveryGroupName = &sDeleteRecoveryGroupRequest_RecoveryGroupName
+
+var DeleteResourceSetRequest = &sDeleteResourceSetRequest
+var DeleteResourceSetRequest_ResourceSetName = &sDeleteResourceSetRequest_ResourceSetName
+
+var GetArchitectureRecommendationsRequest = &sGetArchitectureRecommendationsRequest
+var GetArchitectureRecommendationsRequest_MaxResults = &sGetArchitectureRecommendationsRequest_MaxResults
+var GetArchitectureRecommendationsRequest_NextToken = &sGetArchitectureRecommendationsRequest_NextToken
+var GetArchitectureRecommendationsRequest_RecoveryGroupName = &sGetArchitectureRecommendationsRequest_RecoveryGroupName
+
+var GetArchitectureRecommendationsResponse = &sGetArchitectureRecommendationsResponse
+var GetArchitectureRecommendationsResponse_LastAuditTimestamp = &sGetArchitectureRecommendationsResponse_LastAuditTimestamp
+var GetArchitectureRecommendationsResponse_NextToken = &sGetArchitectureRecommendationsResponse_NextToken
+var GetArchitectureRecommendationsResponse_Recommendations = &sGetArchitectureRecommendationsResponse_Recommendations
+
+var GetCellRequest = &sGetCellRequest
+var GetCellRequest_CellName = &sGetCellRequest_CellName
+
+var GetCellResponse = &sGetCellResponse
+var GetCellResponse_CellArn = &sGetCellResponse_CellArn
+var GetCellResponse_CellName = &sGetCellResponse_CellName
+var GetCellResponse_Cells = &sGetCellResponse_Cells
+var GetCellResponse_ParentReadinessScopes = &sGetCellResponse_ParentReadinessScopes
+var GetCellResponse_Tags = &sGetCellResponse_Tags
+
+var GetCellReadinessSummaryRequest = &sGetCellReadinessSummaryRequest
+var GetCellReadinessSummaryRequest_CellName = &sGetCellReadinessSummaryRequest_CellName
+var GetCellReadinessSummaryRequest_MaxResults = &sGetCellReadinessSummaryRequest_MaxResults
+var GetCellReadinessSummaryRequest_NextToken = &sGetCellReadinessSummaryRequest_NextToken
+
+var GetCellReadinessSummaryResponse = &sGetCellReadinessSummaryResponse
+var GetCellReadinessSummaryResponse_NextToken = &sGetCellReadinessSummaryResponse_NextToken
+var GetCellReadinessSummaryResponse_Readiness = &sGetCellReadinessSummaryResponse_Readiness
+var GetCellReadinessSummaryResponse_ReadinessChecks = &sGetCellReadinessSummaryResponse_ReadinessChecks
+
+var GetReadinessCheckRequest = &sGetReadinessCheckRequest
+var GetReadinessCheckRequest_ReadinessCheckName = &sGetReadinessCheckRequest_ReadinessCheckName
+
+var GetReadinessCheckResponse = &sGetReadinessCheckResponse
+var GetReadinessCheckResponse_ReadinessCheckArn = &sGetReadinessCheckResponse_ReadinessCheckArn
+var GetReadinessCheckResponse_ReadinessCheckName = &sGetReadinessCheckResponse_ReadinessCheckName
+var GetReadinessCheckResponse_ResourceSet = &sGetReadinessCheckResponse_ResourceSet
+var GetReadinessCheckResponse_Tags = &sGetReadinessCheckResponse_Tags
+
+var GetReadinessCheckResourceStatusRequest = &sGetReadinessCheckResourceStatusRequest
+var GetReadinessCheckResourceStatusRequest_MaxResults = &sGetReadinessCheckResourceStatusRequest_MaxResults
+var GetReadinessCheckResourceStatusRequest_NextToken = &sGetReadinessCheckResourceStatusRequest_NextToken
+var GetReadinessCheckResourceStatusRequest_ReadinessCheckName = &sGetReadinessCheckResourceStatusRequest_ReadinessCheckName
+var GetReadinessCheckResourceStatusRequest_ResourceIdentifier = &sGetReadinessCheckResourceStatusRequest_ResourceIdentifier
+
+var GetReadinessCheckResourceStatusResponse = &sGetReadinessCheckResourceStatusResponse
+var GetReadinessCheckResourceStatusResponse_NextToken = &sGetReadinessCheckResourceStatusResponse_NextToken
+var GetReadinessCheckResourceStatusResponse_Readiness = &sGetReadinessCheckResourceStatusResponse_Readiness
+var GetReadinessCheckResourceStatusResponse_Rules = &sGetReadinessCheckResourceStatusResponse_Rules
+
+var GetReadinessCheckStatusRequest = &sGetReadinessCheckStatusRequest
+var GetReadinessCheckStatusRequest_MaxResults = &sGetReadinessCheckStatusRequest_MaxResults
+var GetReadinessCheckStatusRequest_NextToken = &sGetReadinessCheckStatusRequest_NextToken
+var GetReadinessCheckStatusRequest_ReadinessCheckName = &sGetReadinessCheckStatusRequest_ReadinessCheckName
+
+var GetReadinessCheckStatusResponse = &sGetReadinessCheckStatusResponse
+var GetReadinessCheckStatusResponse_Messages = &sGetReadinessCheckStatusResponse_Messages
+var GetReadinessCheckStatusResponse_NextToken = &sGetReadinessCheckStatusResponse_NextToken
+var GetReadinessCheckStatusResponse_Readiness = &sGetReadinessCheckStatusResponse_Readiness
+var GetReadinessCheckStatusResponse_Resources = &sGetReadinessCheckStatusResponse_Resources
+
+var GetRecoveryGroupRequest = &sGetRecoveryGroupRequest
+var GetRecoveryGroupRequest_RecoveryGroupName = &sGetRecoveryGroupRequest_RecoveryGroupName
+
+var GetRecoveryGroupResponse = &sGetRecoveryGroupResponse
+var GetRecoveryGroupResponse_Cells = &sGetRecoveryGroupResponse_Cells
+var GetRecoveryGroupResponse_RecoveryGroupArn = &sGetRecoveryGroupResponse_RecoveryGroupArn
+var GetRecoveryGroupResponse_RecoveryGroupName = &sGetRecoveryGroupResponse_RecoveryGroupName
+var GetRecoveryGroupResponse_Tags = &sGetRecoveryGroupResponse_Tags
+
+var GetRecoveryGroupReadinessSummaryRequest = &sGetRecoveryGroupReadinessSummaryRequest
+var GetRecoveryGroupReadinessSummaryRequest_MaxResults = &sGetRecoveryGroupReadinessSummaryRequest_MaxResults
+var GetRecoveryGroupReadinessSummaryRequest_NextToken = &sGetRecoveryGroupReadinessSummaryRequest_NextToken
+var GetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName = &sGetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName
+
+var GetRecoveryGroupReadinessSummaryResponse = &sGetRecoveryGroupReadinessSummaryResponse
+var GetRecoveryGroupReadinessSummaryResponse_NextToken = &sGetRecoveryGroupReadinessSummaryResponse_NextToken
+var GetRecoveryGroupReadinessSummaryResponse_Readiness = &sGetRecoveryGroupReadinessSummaryResponse_Readiness
+var GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks = &sGetRecoveryGroupReadinessSummaryResponse_ReadinessChecks
+
+var GetResourceSetRequest = &sGetResourceSetRequest
+var GetResourceSetRequest_ResourceSetName = &sGetResourceSetRequest_ResourceSetName
+
+var GetResourceSetResponse = &sGetResourceSetResponse
+var GetResourceSetResponse_ResourceSetArn = &sGetResourceSetResponse_ResourceSetArn
+var GetResourceSetResponse_ResourceSetName = &sGetResourceSetResponse_ResourceSetName
+var GetResourceSetResponse_ResourceSetType = &sGetResourceSetResponse_ResourceSetType
+var GetResourceSetResponse_Resources = &sGetResourceSetResponse_Resources
+var GetResourceSetResponse_Tags = &sGetResourceSetResponse_Tags
+
+var ListCellsRequest = &sListCellsRequest
+var ListCellsRequest_MaxResults = &sListCellsRequest_MaxResults
+var ListCellsRequest_NextToken = &sListCellsRequest_NextToken
+
+var ListCellsResponse = &sListCellsResponse
+var ListCellsResponse_Cells = &sListCellsResponse_Cells
+var ListCellsResponse_NextToken = &sListCellsResponse_NextToken
+
+var ListCrossAccountAuthorizationsRequest = &sListCrossAccountAuthorizationsRequest
+var ListCrossAccountAuthorizationsRequest_MaxResults = &sListCrossAccountAuthorizationsRequest_MaxResults
+var ListCrossAccountAuthorizationsRequest_NextToken = &sListCrossAccountAuthorizationsRequest_NextToken
+
+var ListCrossAccountAuthorizationsResponse = &sListCrossAccountAuthorizationsResponse
+var ListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations = &sListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations
+var ListCrossAccountAuthorizationsResponse_NextToken = &sListCrossAccountAuthorizationsResponse_NextToken
+
+var ListReadinessChecksRequest = &sListReadinessChecksRequest
+var ListReadinessChecksRequest_MaxResults = &sListReadinessChecksRequest_MaxResults
+var ListReadinessChecksRequest_NextToken = &sListReadinessChecksRequest_NextToken
+
+var ListReadinessChecksResponse = &sListReadinessChecksResponse
+var ListReadinessChecksResponse_NextToken = &sListReadinessChecksResponse_NextToken
+var ListReadinessChecksResponse_ReadinessChecks = &sListReadinessChecksResponse_ReadinessChecks
+
+var ListRecoveryGroupsRequest = &sListRecoveryGroupsRequest
+var ListRecoveryGroupsRequest_MaxResults = &sListRecoveryGroupsRequest_MaxResults
+var ListRecoveryGroupsRequest_NextToken = &sListRecoveryGroupsRequest_NextToken
+
+var ListRecoveryGroupsResponse = &sListRecoveryGroupsResponse
+var ListRecoveryGroupsResponse_NextToken = &sListRecoveryGroupsResponse_NextToken
+var ListRecoveryGroupsResponse_RecoveryGroups = &sListRecoveryGroupsResponse_RecoveryGroups
+
+var ListResourceSetsRequest = &sListResourceSetsRequest
+var ListResourceSetsRequest_MaxResults = &sListResourceSetsRequest_MaxResults
+var ListResourceSetsRequest_NextToken = &sListResourceSetsRequest_NextToken
+
+var ListResourceSetsResponse = &sListResourceSetsResponse
+var ListResourceSetsResponse_NextToken = &sListResourceSetsResponse_NextToken
+var ListResourceSetsResponse_ResourceSets = &sListResourceSetsResponse_ResourceSets
+
+var ListRulesRequest = &sListRulesRequest
+var ListRulesRequest_MaxResults = &sListRulesRequest_MaxResults
+var ListRulesRequest_NextToken = &sListRulesRequest_NextToken
+var ListRulesRequest_ResourceType = &sListRulesRequest_ResourceType
+
+var ListRulesResponse = &sListRulesResponse
+var ListRulesResponse_NextToken = &sListRulesResponse_NextToken
+var ListRulesResponse_Rules = &sListRulesResponse_Rules
+
+var ListTagsForResourcesRequest = &sListTagsForResourcesRequest
+var ListTagsForResourcesRequest_ResourceArn = &sListTagsForResourcesRequest_ResourceArn
+
+var ListTagsForResourcesResponse = &sListTagsForResourcesResponse
+var ListTagsForResourcesResponse_Tags = &sListTagsForResourcesResponse_Tags
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateCellRequest = &sUpdateCellRequest
+var UpdateCellRequest_CellName = &sUpdateCellRequest_CellName
+var UpdateCellRequest_Cells = &sUpdateCellRequest_Cells
+
+var UpdateCellResponse = &sUpdateCellResponse
+var UpdateCellResponse_CellArn = &sUpdateCellResponse_CellArn
+var UpdateCellResponse_CellName = &sUpdateCellResponse_CellName
+var UpdateCellResponse_Cells = &sUpdateCellResponse_Cells
+var UpdateCellResponse_ParentReadinessScopes = &sUpdateCellResponse_ParentReadinessScopes
+var UpdateCellResponse_Tags = &sUpdateCellResponse_Tags
+
+var UpdateReadinessCheckRequest = &sUpdateReadinessCheckRequest
+var UpdateReadinessCheckRequest_ReadinessCheckName = &sUpdateReadinessCheckRequest_ReadinessCheckName
+var UpdateReadinessCheckRequest_ResourceSetName = &sUpdateReadinessCheckRequest_ResourceSetName
+
+var UpdateReadinessCheckResponse = &sUpdateReadinessCheckResponse
+var UpdateReadinessCheckResponse_ReadinessCheckArn = &sUpdateReadinessCheckResponse_ReadinessCheckArn
+var UpdateReadinessCheckResponse_ReadinessCheckName = &sUpdateReadinessCheckResponse_ReadinessCheckName
+var UpdateReadinessCheckResponse_ResourceSet = &sUpdateReadinessCheckResponse_ResourceSet
+var UpdateReadinessCheckResponse_Tags = &sUpdateReadinessCheckResponse_Tags
+
+var UpdateRecoveryGroupRequest = &sUpdateRecoveryGroupRequest
+var UpdateRecoveryGroupRequest_Cells = &sUpdateRecoveryGroupRequest_Cells
+var UpdateRecoveryGroupRequest_RecoveryGroupName = &sUpdateRecoveryGroupRequest_RecoveryGroupName
+
+var UpdateRecoveryGroupResponse = &sUpdateRecoveryGroupResponse
+var UpdateRecoveryGroupResponse_Cells = &sUpdateRecoveryGroupResponse_Cells
+var UpdateRecoveryGroupResponse_RecoveryGroupArn = &sUpdateRecoveryGroupResponse_RecoveryGroupArn
+var UpdateRecoveryGroupResponse_RecoveryGroupName = &sUpdateRecoveryGroupResponse_RecoveryGroupName
+var UpdateRecoveryGroupResponse_Tags = &sUpdateRecoveryGroupResponse_Tags
+
+var UpdateResourceSetRequest = &sUpdateResourceSetRequest
+var UpdateResourceSetRequest_ResourceSetName = &sUpdateResourceSetRequest_ResourceSetName
+var UpdateResourceSetRequest_ResourceSetType = &sUpdateResourceSetRequest_ResourceSetType
+var UpdateResourceSetRequest_Resources = &sUpdateResourceSetRequest_Resources
+
+var UpdateResourceSetResponse = &sUpdateResourceSetResponse
+var UpdateResourceSetResponse_ResourceSetArn = &sUpdateResourceSetResponse_ResourceSetArn
+var UpdateResourceSetResponse_ResourceSetName = &sUpdateResourceSetResponse_ResourceSetName
+var UpdateResourceSetResponse_ResourceSetType = &sUpdateResourceSetResponse_ResourceSetType
+var UpdateResourceSetResponse_Resources = &sUpdateResourceSetResponse_Resources
+var UpdateResourceSetResponse_Tags = &sUpdateResourceSetResponse_Tags
+
+var Route53RecoveryReadiness = &smithy.ServiceSchema{Schema: &s_Route53RecoveryReadiness, Version: "2019-12-02"}

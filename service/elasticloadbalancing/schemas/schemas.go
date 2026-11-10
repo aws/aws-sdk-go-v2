@@ -7,1879 +7,1891 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AddTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var ApplySecurityGroupsToLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ApplySecurityGroupsToLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var AttachLoadBalancerToSubnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AttachLoadBalancerToSubnets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConfigureHealthCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ConfigureHealthCheck",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAppCookieStickinessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateAppCookieStickinessPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLBCookieStickinessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLBCookieStickinessPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLoadBalancerListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLoadBalancerListeners",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLoadBalancerPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLoadBalancerPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLoadBalancerListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteLoadBalancerListeners",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLoadBalancerPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteLoadBalancerPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterInstancesFromLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeregisterInstancesFromLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAccountLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeAccountLimits",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeInstanceHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeInstanceHealth",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLoadBalancerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLoadBalancerPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLoadBalancerPolicyTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerPolicyTypes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLoadBalancers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancers",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetachLoadBalancerFromSubnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DetachLoadBalancerFromSubnets",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableAvailabilityZonesForLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DisableAvailabilityZonesForLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableAvailabilityZonesForLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "EnableAvailabilityZonesForLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyLoadBalancerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ModifyLoadBalancerAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterInstancesWithLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RegisterInstancesWithLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RemoveTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetLoadBalancerListenerSSLCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerListenerSSLCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetLoadBalancerPoliciesForBackendServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerPoliciesForBackendServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetLoadBalancerPoliciesOfListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerPoliciesOfListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ElasticLoadBalancing_v7 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ElasticLoadBalancing_v7",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"})
-
-var ElasticLoadBalancing_v7 = smithy.NewServiceSchema(_ElasticLoadBalancing_v7, "2012-06-01")
-
-var AccessLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AccessLog",
-}, smithy.ShapeTypeStructure, 4)
-var AccessLog_Enabled *smithy.Schema
-
-var AccessLog_S3BucketName *smithy.Schema
-
-var AccessLog_EmitInterval *smithy.Schema
-
-var AccessLog_S3BucketPrefix *smithy.Schema
-
-var _AccessLogEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AccessLogEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AccessLogInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AccessLogInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AccessLogPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AccessLogPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessPointName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AccessPointName",
-}, smithy.ShapeTypeString, 0)
-
-var AccessPointNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AccessPointNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LoadBalancerNotFound",
-		StatusCode: 400})
-var AccessPointNotFoundException_Message *smithy.Schema
-
-var _AccessPointPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AccessPointPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var AdditionalAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AdditionalAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var AdditionalAttribute_Key *smithy.Schema
-
-var AdditionalAttribute_Value *smithy.Schema
-
-var _AdditionalAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AdditionalAttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AdditionalAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AdditionalAttributes",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalAttributes_member *smithy.Schema
-
-var _AdditionalAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AdditionalAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _AppCookieStickinessPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AppCookieStickinessPolicies",
-}, smithy.ShapeTypeList, 1)
-var _AppCookieStickinessPolicies_member *smithy.Schema
-
-var AppCookieStickinessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AppCookieStickinessPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var AppCookieStickinessPolicy_PolicyName *smithy.Schema
-
-var AppCookieStickinessPolicy_CookieName *smithy.Schema
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AttributeType",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AvailabilityZone",
-}, smithy.ShapeTypeString, 0)
-
-var _AvailabilityZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AvailabilityZones",
-}, smithy.ShapeTypeList, 1)
-var _AvailabilityZones_member *smithy.Schema
-
-var BackendServerDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "BackendServerDescription",
-}, smithy.ShapeTypeStructure, 2)
-var BackendServerDescription_InstancePort *smithy.Schema
-
-var BackendServerDescription_PolicyNames *smithy.Schema
-
-var _BackendServerDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "BackendServerDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _BackendServerDescriptions_member *smithy.Schema
-
-var _Cardinality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Cardinality",
-}, smithy.ShapeTypeString, 0)
-
-var CertificateNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CertificateNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CertificateNotFound",
-		StatusCode: 400})
-var CertificateNotFoundException_Message *smithy.Schema
-
-var ConnectionDraining = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ConnectionDraining",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectionDraining_Enabled *smithy.Schema
-
-var ConnectionDraining_Timeout *smithy.Schema
-
-var _ConnectionDrainingEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ConnectionDrainingEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ConnectionDrainingTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ConnectionDrainingTimeout",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConnectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ConnectionSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectionSettings_IdleTimeout *smithy.Schema
-
-var _CookieExpirationPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CookieExpirationPeriod",
-}, smithy.ShapeTypeLong, 0)
-
-var _CookieName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CookieName",
-}, smithy.ShapeTypeString, 0)
-
-var _CreatedTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreatedTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var CrossZoneLoadBalancing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CrossZoneLoadBalancing",
-}, smithy.ShapeTypeStructure, 1)
-var CrossZoneLoadBalancing_Enabled *smithy.Schema
-
-var _CrossZoneLoadBalancingEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CrossZoneLoadBalancingEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _DefaultValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DefaultValue",
-}, smithy.ShapeTypeString, 0)
-
-var DependencyThrottleException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DependencyThrottleException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DependencyThrottle",
-		StatusCode: 400})
-var DependencyThrottleException_Message *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DNSName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DNSName",
-}, smithy.ShapeTypeString, 0)
-
-var DuplicateAccessPointNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DuplicateAccessPointNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateLoadBalancerName",
-		StatusCode: 400})
-var DuplicateAccessPointNameException_Message *smithy.Schema
-
-var DuplicateListenerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DuplicateListenerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateListener",
-		StatusCode: 400})
-var DuplicateListenerException_Message *smithy.Schema
-
-var DuplicatePolicyNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DuplicatePolicyNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicatePolicyName",
-		StatusCode: 400})
-var DuplicatePolicyNameException_Message *smithy.Schema
-
-var DuplicateTagKeysException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DuplicateTagKeysException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateTagKeys",
-		StatusCode: 400})
-var DuplicateTagKeysException_Message *smithy.Schema
-
-var _EndPointPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "EndPointPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ErrorDescription",
-}, smithy.ShapeTypeString, 0)
-
-var HealthCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "HealthCheck",
-}, smithy.ShapeTypeStructure, 5)
-var HealthCheck_Target *smithy.Schema
-
-var HealthCheck_Interval *smithy.Schema
-
-var HealthCheck_Timeout *smithy.Schema
-
-var HealthCheck_UnhealthyThreshold *smithy.Schema
-
-var HealthCheck_HealthyThreshold *smithy.Schema
-
-var _HealthCheckInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "HealthCheckInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "HealthCheckTarget",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthCheckTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "HealthCheckTimeout",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthyThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "HealthyThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IdleTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "IdleTimeout",
-}, smithy.ShapeTypeInteger, 0)
-
-var Instance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Instance",
-}, smithy.ShapeTypeStructure, 1)
-var Instance_InstanceId *smithy.Schema
-
-var _InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _InstancePort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InstancePort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Instances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Instances",
-}, smithy.ShapeTypeList, 1)
-var _Instances_member *smithy.Schema
-
-var InstanceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InstanceState",
-}, smithy.ShapeTypeStructure, 4)
-var InstanceState_InstanceId *smithy.Schema
-
-var InstanceState_State *smithy.Schema
-
-var InstanceState_ReasonCode *smithy.Schema
-
-var InstanceState_Description *smithy.Schema
-
-var _InstanceStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InstanceStates",
-}, smithy.ShapeTypeList, 1)
-var _InstanceStates_member *smithy.Schema
-
-var InvalidConfigurationRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InvalidConfigurationRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidConfigurationRequest",
-		StatusCode: 409})
-var InvalidConfigurationRequestException_Message *smithy.Schema
-
-var InvalidEndPointException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InvalidEndPointException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidInstance",
-		StatusCode: 400})
-var InvalidEndPointException_Message *smithy.Schema
-
-var InvalidSchemeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InvalidSchemeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidScheme",
-		StatusCode: 400})
-var InvalidSchemeException_Message *smithy.Schema
-
-var InvalidSecurityGroupException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InvalidSecurityGroupException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSecurityGroup",
-		StatusCode: 400})
-var InvalidSecurityGroupException_Message *smithy.Schema
-
-var InvalidSubnetException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "InvalidSubnetException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
-		StatusCode: 400})
-var InvalidSubnetException_Message *smithy.Schema
-
-var _LBCookieStickinessPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LBCookieStickinessPolicies",
-}, smithy.ShapeTypeList, 1)
-var _LBCookieStickinessPolicies_member *smithy.Schema
-
-var LBCookieStickinessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LBCookieStickinessPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var LBCookieStickinessPolicy_PolicyName *smithy.Schema
-
-var LBCookieStickinessPolicy_CookieExpirationPeriod *smithy.Schema
-
-var Limit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Limit",
-}, smithy.ShapeTypeStructure, 2)
-var Limit_Name *smithy.Schema
-
-var Limit_Max *smithy.Schema
-
-var _Limits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Limits",
-}, smithy.ShapeTypeList, 1)
-var _Limits_member *smithy.Schema
-
-var Listener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Listener",
-}, smithy.ShapeTypeStructure, 5)
-var Listener_Protocol *smithy.Schema
-
-var Listener_LoadBalancerPort *smithy.Schema
-
-var Listener_InstanceProtocol *smithy.Schema
-
-var Listener_InstancePort *smithy.Schema
-
-var Listener_SSLCertificateId *smithy.Schema
-
-var ListenerDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ListenerDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ListenerDescription_Listener *smithy.Schema
-
-var ListenerDescription_PolicyNames *smithy.Schema
-
-var _ListenerDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ListenerDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _ListenerDescriptions_member *smithy.Schema
-
-var ListenerNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ListenerNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ListenerNotFound",
-		StatusCode: 400})
-var ListenerNotFoundException_Message *smithy.Schema
-
-var _Listeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Listeners",
-}, smithy.ShapeTypeList, 1)
-var _Listeners_member *smithy.Schema
-
-var LoadBalancerAttributeNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LoadBalancerAttributeNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LoadBalancerAttributeNotFound",
-		StatusCode: 400})
-var LoadBalancerAttributeNotFoundException_Message *smithy.Schema
-
-var LoadBalancerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LoadBalancerAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var LoadBalancerAttributes_CrossZoneLoadBalancing *smithy.Schema
-
-var LoadBalancerAttributes_AccessLog *smithy.Schema
-
-var LoadBalancerAttributes_ConnectionDraining *smithy.Schema
-
-var LoadBalancerAttributes_ConnectionSettings *smithy.Schema
-
-var LoadBalancerAttributes_AdditionalAttributes *smithy.Schema
-
-var LoadBalancerDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LoadBalancerDescription",
-}, smithy.ShapeTypeStructure, 16)
-var LoadBalancerDescription_LoadBalancerName *smithy.Schema
-
-var LoadBalancerDescription_DNSName *smithy.Schema
-
-var LoadBalancerDescription_CanonicalHostedZoneName *smithy.Schema
-
-var LoadBalancerDescription_CanonicalHostedZoneNameID *smithy.Schema
-
-var LoadBalancerDescription_ListenerDescriptions *smithy.Schema
-
-var LoadBalancerDescription_Policies *smithy.Schema
-
-var LoadBalancerDescription_BackendServerDescriptions *smithy.Schema
-
-var LoadBalancerDescription_AvailabilityZones *smithy.Schema
-
-var LoadBalancerDescription_Subnets *smithy.Schema
-
-var LoadBalancerDescription_VPCId *smithy.Schema
-
-var LoadBalancerDescription_Instances *smithy.Schema
-
-var LoadBalancerDescription_HealthCheck *smithy.Schema
-
-var LoadBalancerDescription_SourceSecurityGroup *smithy.Schema
-
-var LoadBalancerDescription_SecurityGroups *smithy.Schema
-
-var LoadBalancerDescription_CreatedTime *smithy.Schema
-
-var LoadBalancerDescription_Scheme *smithy.Schema
-
-var _LoadBalancerDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LoadBalancerDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerDescriptions_member *smithy.Schema
-
-var _LoadBalancerNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LoadBalancerNames",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerNames_member *smithy.Schema
-
-var _LoadBalancerNamesMax20 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LoadBalancerNamesMax20",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerNamesMax20_member *smithy.Schema
-
-var _LoadBalancerScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "LoadBalancerScheme",
-}, smithy.ShapeTypeString, 0)
-
-var _Marker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Marker",
-}, smithy.ShapeTypeString, 0)
-
-var _Max = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Max",
-}, smithy.ShapeTypeString, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
-		StatusCode: 400})
-var OperationNotPermittedException_Message *smithy.Schema
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var Policies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Policies",
-}, smithy.ShapeTypeStructure, 3)
-var Policies_AppCookieStickinessPolicies *smithy.Schema
-
-var Policies_LBCookieStickinessPolicies *smithy.Schema
-
-var Policies_OtherPolicies *smithy.Schema
-
-var PolicyAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var PolicyAttribute_AttributeName *smithy.Schema
-
-var PolicyAttribute_AttributeValue *smithy.Schema
-
-var PolicyAttributeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyAttributeDescription",
-}, smithy.ShapeTypeStructure, 2)
-var PolicyAttributeDescription_AttributeName *smithy.Schema
-
-var PolicyAttributeDescription_AttributeValue *smithy.Schema
-
-var _PolicyAttributeDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyAttributeDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _PolicyAttributeDescriptions_member *smithy.Schema
-
-var _PolicyAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyAttributes",
-}, smithy.ShapeTypeList, 1)
-var _PolicyAttributes_member *smithy.Schema
-
-var PolicyAttributeTypeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyAttributeTypeDescription",
-}, smithy.ShapeTypeStructure, 5)
-var PolicyAttributeTypeDescription_AttributeName *smithy.Schema
-
-var PolicyAttributeTypeDescription_AttributeType *smithy.Schema
-
-var PolicyAttributeTypeDescription_Description *smithy.Schema
-
-var PolicyAttributeTypeDescription_DefaultValue *smithy.Schema
-
-var PolicyAttributeTypeDescription_Cardinality *smithy.Schema
-
-var _PolicyAttributeTypeDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyAttributeTypeDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _PolicyAttributeTypeDescriptions_member *smithy.Schema
-
-var PolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyDescription",
-}, smithy.ShapeTypeStructure, 3)
-var PolicyDescription_PolicyName *smithy.Schema
-
-var PolicyDescription_PolicyTypeName *smithy.Schema
-
-var PolicyDescription_PolicyAttributeDescriptions *smithy.Schema
-
-var _PolicyDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _PolicyDescriptions_member *smithy.Schema
-
-var _PolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyNames",
-}, smithy.ShapeTypeList, 1)
-var _PolicyNames_member *smithy.Schema
-
-var PolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PolicyNotFound",
-		StatusCode: 400})
-var PolicyNotFoundException_Message *smithy.Schema
-
-var PolicyTypeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyTypeDescription",
-}, smithy.ShapeTypeStructure, 3)
-var PolicyTypeDescription_PolicyTypeName *smithy.Schema
-
-var PolicyTypeDescription_Description *smithy.Schema
-
-var PolicyTypeDescription_PolicyAttributeTypeDescriptions *smithy.Schema
-
-var _PolicyTypeDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyTypeDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _PolicyTypeDescriptions_member *smithy.Schema
-
-var _PolicyTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyTypeNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyTypeNames",
-}, smithy.ShapeTypeList, 1)
-var _PolicyTypeNames_member *smithy.Schema
-
-var PolicyTypeNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "PolicyTypeNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PolicyTypeNotFound",
-		StatusCode: 400})
-var PolicyTypeNotFoundException_Message *smithy.Schema
-
-var _Ports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Ports",
-}, smithy.ShapeTypeList, 1)
-var _Ports_member *smithy.Schema
-
-var _Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Protocol",
-}, smithy.ShapeTypeString, 0)
-
-var _ReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ReasonCode",
-}, smithy.ShapeTypeString, 0)
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SecurityGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupOwnerAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SecurityGroupOwnerAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SecurityGroups",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroups_member *smithy.Schema
-
-var SourceSecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SourceSecurityGroup",
-}, smithy.ShapeTypeStructure, 2)
-var SourceSecurityGroup_OwnerAlias *smithy.Schema
-
-var SourceSecurityGroup_GroupName *smithy.Schema
-
-var _SSLCertificateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SSLCertificateId",
-}, smithy.ShapeTypeString, 0)
-
-var _State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "State",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var SubnetNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SubnetNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SubnetNotFound",
-		StatusCode: 400})
-var SubnetNotFoundException_Message *smithy.Schema
-
-var _Subnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Subnets",
-}, smithy.ShapeTypeList, 1)
-var _Subnets_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var TagDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TagDescription",
-}, smithy.ShapeTypeStructure, 2)
-var TagDescription_LoadBalancerName *smithy.Schema
-
-var TagDescription_Tags *smithy.Schema
-
-var _TagDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TagDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _TagDescriptions_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var TagKeyOnly = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TagKeyOnly",
-}, smithy.ShapeTypeStructure, 1)
-var TagKeyOnly_Key *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyAccessPointsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TooManyAccessPointsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyLoadBalancers",
-		StatusCode: 400})
-var TooManyAccessPointsException_Message *smithy.Schema
-
-var TooManyPoliciesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TooManyPoliciesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyPolicies",
-		StatusCode: 400})
-var TooManyPoliciesException_Message *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyTags",
-		StatusCode: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var _UnhealthyThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "UnhealthyThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var UnsupportedProtocolException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "UnsupportedProtocolException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "UnsupportedProtocol",
-		StatusCode: 400})
-var UnsupportedProtocolException_Message *smithy.Schema
-
-var _VPCId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "VPCId",
-}, smithy.ShapeTypeString, 0)
-
-var AddTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AddTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsInput_LoadBalancerNames *smithy.Schema
-
-var AddTagsInput_Tags *smithy.Schema
-
-var AddTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AddTagsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ApplySecurityGroupsToLoadBalancerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ApplySecurityGroupsToLoadBalancerInput",
-}, smithy.ShapeTypeStructure, 2)
-var ApplySecurityGroupsToLoadBalancerInput_LoadBalancerName *smithy.Schema
-
-var ApplySecurityGroupsToLoadBalancerInput_SecurityGroups *smithy.Schema
-
-var ApplySecurityGroupsToLoadBalancerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ApplySecurityGroupsToLoadBalancerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ApplySecurityGroupsToLoadBalancerOutput_SecurityGroups *smithy.Schema
-
-var AttachLoadBalancerToSubnetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AttachLoadBalancerToSubnetsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AttachLoadBalancerToSubnetsInput_LoadBalancerName *smithy.Schema
-
-var AttachLoadBalancerToSubnetsInput_Subnets *smithy.Schema
-
-var AttachLoadBalancerToSubnetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AttachLoadBalancerToSubnetsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AttachLoadBalancerToSubnetsOutput_Subnets *smithy.Schema
-
-var ConfigureHealthCheckInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ConfigureHealthCheckInput",
-}, smithy.ShapeTypeStructure, 2)
-var ConfigureHealthCheckInput_LoadBalancerName *smithy.Schema
-
-var ConfigureHealthCheckInput_HealthCheck *smithy.Schema
-
-var ConfigureHealthCheckOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ConfigureHealthCheckOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ConfigureHealthCheckOutput_HealthCheck *smithy.Schema
-
-var CreateAppCookieStickinessPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateAppCookieStickinessPolicyInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAppCookieStickinessPolicyInput_LoadBalancerName *smithy.Schema
-
-var CreateAppCookieStickinessPolicyInput_PolicyName *smithy.Schema
-
-var CreateAppCookieStickinessPolicyInput_CookieName *smithy.Schema
-
-var CreateAppCookieStickinessPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateAppCookieStickinessPolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateLBCookieStickinessPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLBCookieStickinessPolicyInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateLBCookieStickinessPolicyInput_LoadBalancerName *smithy.Schema
-
-var CreateLBCookieStickinessPolicyInput_PolicyName *smithy.Schema
-
-var CreateLBCookieStickinessPolicyInput_CookieExpirationPeriod *smithy.Schema
-
-var CreateLBCookieStickinessPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLBCookieStickinessPolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateAccessPointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateAccessPointInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateAccessPointInput_LoadBalancerName *smithy.Schema
-
-var CreateAccessPointInput_Listeners *smithy.Schema
-
-var CreateAccessPointInput_AvailabilityZones *smithy.Schema
-
-var CreateAccessPointInput_Subnets *smithy.Schema
-
-var CreateAccessPointInput_SecurityGroups *smithy.Schema
-
-var CreateAccessPointInput_Scheme *smithy.Schema
-
-var CreateAccessPointInput_Tags *smithy.Schema
-
-var CreateLoadBalancerListenerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLoadBalancerListenerInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateLoadBalancerListenerInput_LoadBalancerName *smithy.Schema
-
-var CreateLoadBalancerListenerInput_Listeners *smithy.Schema
-
-var CreateLoadBalancerListenerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLoadBalancerListenerOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateAccessPointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateAccessPointOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAccessPointOutput_DNSName *smithy.Schema
-
-var CreateLoadBalancerPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLoadBalancerPolicyInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateLoadBalancerPolicyInput_LoadBalancerName *smithy.Schema
-
-var CreateLoadBalancerPolicyInput_PolicyName *smithy.Schema
-
-var CreateLoadBalancerPolicyInput_PolicyTypeName *smithy.Schema
-
-var CreateLoadBalancerPolicyInput_PolicyAttributes *smithy.Schema
-
-var CreateLoadBalancerPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "CreateLoadBalancerPolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAccessPointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteAccessPointInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAccessPointInput_LoadBalancerName *smithy.Schema
-
-var DeleteLoadBalancerListenerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteLoadBalancerListenerInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLoadBalancerListenerInput_LoadBalancerName *smithy.Schema
-
-var DeleteLoadBalancerListenerInput_LoadBalancerPorts *smithy.Schema
-
-var DeleteLoadBalancerListenerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteLoadBalancerListenerOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAccessPointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteAccessPointOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLoadBalancerPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteLoadBalancerPolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLoadBalancerPolicyInput_LoadBalancerName *smithy.Schema
-
-var DeleteLoadBalancerPolicyInput_PolicyName *smithy.Schema
-
-var DeleteLoadBalancerPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeleteLoadBalancerPolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterEndPointsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeregisterEndPointsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterEndPointsInput_LoadBalancerName *smithy.Schema
-
-var DeregisterEndPointsInput_Instances *smithy.Schema
-
-var DeregisterEndPointsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DeregisterEndPointsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterEndPointsOutput_Instances *smithy.Schema
-
-var DescribeAccountLimitsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeAccountLimitsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAccountLimitsInput_Marker *smithy.Schema
-
-var DescribeAccountLimitsInput_PageSize *smithy.Schema
-
-var DescribeAccountLimitsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeAccountLimitsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAccountLimitsOutput_Limits *smithy.Schema
-
-var DescribeAccountLimitsOutput_NextMarker *smithy.Schema
-
-var DescribeEndPointStateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeEndPointStateInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEndPointStateInput_LoadBalancerName *smithy.Schema
-
-var DescribeEndPointStateInput_Instances *smithy.Schema
-
-var DescribeEndPointStateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeEndPointStateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEndPointStateOutput_InstanceStates *smithy.Schema
-
-var DescribeLoadBalancerAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoadBalancerAttributesInput_LoadBalancerName *smithy.Schema
-
-var DescribeLoadBalancerAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoadBalancerAttributesOutput_LoadBalancerAttributes *smithy.Schema
-
-var DescribeLoadBalancerPoliciesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerPoliciesInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeLoadBalancerPoliciesInput_LoadBalancerName *smithy.Schema
-
-var DescribeLoadBalancerPoliciesInput_PolicyNames *smithy.Schema
-
-var DescribeLoadBalancerPoliciesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerPoliciesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoadBalancerPoliciesOutput_PolicyDescriptions *smithy.Schema
-
-var DescribeLoadBalancerPolicyTypesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerPolicyTypesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoadBalancerPolicyTypesInput_PolicyTypeNames *smithy.Schema
-
-var DescribeLoadBalancerPolicyTypesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeLoadBalancerPolicyTypesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions *smithy.Schema
-
-var DescribeAccessPointsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeAccessPointsInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAccessPointsInput_LoadBalancerNames *smithy.Schema
-
-var DescribeAccessPointsInput_Marker *smithy.Schema
-
-var DescribeAccessPointsInput_PageSize *smithy.Schema
-
-var DescribeAccessPointsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeAccessPointsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAccessPointsOutput_LoadBalancerDescriptions *smithy.Schema
-
-var DescribeAccessPointsOutput_NextMarker *smithy.Schema
-
-var DescribeTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeTagsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTagsInput_LoadBalancerNames *smithy.Schema
-
-var DescribeTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DescribeTagsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTagsOutput_TagDescriptions *smithy.Schema
-
-var DetachLoadBalancerFromSubnetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DetachLoadBalancerFromSubnetsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DetachLoadBalancerFromSubnetsInput_LoadBalancerName *smithy.Schema
-
-var DetachLoadBalancerFromSubnetsInput_Subnets *smithy.Schema
-
-var DetachLoadBalancerFromSubnetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "DetachLoadBalancerFromSubnetsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DetachLoadBalancerFromSubnetsOutput_Subnets *smithy.Schema
-
-var RemoveAvailabilityZonesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RemoveAvailabilityZonesInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveAvailabilityZonesInput_LoadBalancerName *smithy.Schema
-
-var RemoveAvailabilityZonesInput_AvailabilityZones *smithy.Schema
-
-var RemoveAvailabilityZonesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RemoveAvailabilityZonesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveAvailabilityZonesOutput_AvailabilityZones *smithy.Schema
-
-var AddAvailabilityZonesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AddAvailabilityZonesInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddAvailabilityZonesInput_LoadBalancerName *smithy.Schema
-
-var AddAvailabilityZonesInput_AvailabilityZones *smithy.Schema
-
-var AddAvailabilityZonesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "AddAvailabilityZonesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddAvailabilityZonesOutput_AvailabilityZones *smithy.Schema
-
-var ModifyLoadBalancerAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ModifyLoadBalancerAttributesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyLoadBalancerAttributesInput_LoadBalancerName *smithy.Schema
-
-var ModifyLoadBalancerAttributesInput_LoadBalancerAttributes *smithy.Schema
-
-var ModifyLoadBalancerAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "ModifyLoadBalancerAttributesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyLoadBalancerAttributesOutput_LoadBalancerName *smithy.Schema
-
-var ModifyLoadBalancerAttributesOutput_LoadBalancerAttributes *smithy.Schema
-
-var RegisterEndPointsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RegisterEndPointsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterEndPointsInput_LoadBalancerName *smithy.Schema
-
-var RegisterEndPointsInput_Instances *smithy.Schema
-
-var RegisterEndPointsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RegisterEndPointsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterEndPointsOutput_Instances *smithy.Schema
-
-var RemoveTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RemoveTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsInput_LoadBalancerNames *smithy.Schema
-
-var RemoveTagsInput_Tags *smithy.Schema
-
-var RemoveTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "RemoveTagsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SetLoadBalancerListenerSSLCertificateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerListenerSSLCertificateInput",
-}, smithy.ShapeTypeStructure, 3)
-var SetLoadBalancerListenerSSLCertificateInput_LoadBalancerName *smithy.Schema
-
-var SetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort *smithy.Schema
-
-var SetLoadBalancerListenerSSLCertificateInput_SSLCertificateId *smithy.Schema
-
-var SetLoadBalancerListenerSSLCertificateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerListenerSSLCertificateOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SetLoadBalancerPoliciesForBackendServerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerPoliciesForBackendServerInput",
-}, smithy.ShapeTypeStructure, 3)
-var SetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName *smithy.Schema
-
-var SetLoadBalancerPoliciesForBackendServerInput_InstancePort *smithy.Schema
-
-var SetLoadBalancerPoliciesForBackendServerInput_PolicyNames *smithy.Schema
-
-var SetLoadBalancerPoliciesForBackendServerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerPoliciesForBackendServerOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SetLoadBalancerPoliciesOfListenerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerPoliciesOfListenerInput",
-}, smithy.ShapeTypeStructure, 3)
-var SetLoadBalancerPoliciesOfListenerInput_LoadBalancerName *smithy.Schema
-
-var SetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort *smithy.Schema
-
-var SetLoadBalancerPoliciesOfListenerInput_PolicyNames *smithy.Schema
-
-var SetLoadBalancerPoliciesOfListenerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancing",
-	Name:      "SetLoadBalancerPoliciesOfListenerOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessLog_Enabled = AccessLog.AddMember("Enabled", _AccessLogEnabled)
-
-	AccessLog_S3BucketName = AccessLog.AddMember("S3BucketName", _S3BucketName)
-
-	AccessLog_EmitInterval = AccessLog.AddMember("EmitInterval", _AccessLogInterval)
-
-	AccessLog_S3BucketPrefix = AccessLog.AddMember("S3BucketPrefix", _AccessLogPrefix)
-
-	AccessPointNotFoundException_Message = AccessPointNotFoundException.AddMember("Message", _ErrorDescription)
-
-	AdditionalAttribute_Key = AdditionalAttribute.AddMember("Key", _AdditionalAttributeKey)
-
-	AdditionalAttribute_Value = AdditionalAttribute.AddMember("Value", _AdditionalAttributeValue)
-
-	_AdditionalAttributes_member = _AdditionalAttributes.AddMember("member", AdditionalAttribute)
-
-	AppCookieStickinessPolicy_PolicyName = AppCookieStickinessPolicy.AddMember("PolicyName", _PolicyName)
-
-	AppCookieStickinessPolicy_CookieName = AppCookieStickinessPolicy.AddMember("CookieName", _CookieName)
-
-	_AppCookieStickinessPolicies_member = _AppCookieStickinessPolicies.AddMember("member", AppCookieStickinessPolicy)
-
-	_AvailabilityZones_member = _AvailabilityZones.AddMember("member", _AvailabilityZone)
-
-	_PolicyNames_member = _PolicyNames.AddMember("member", _PolicyName)
-
-	BackendServerDescription_InstancePort = BackendServerDescription.AddMember("InstancePort", _InstancePort)
-
-	BackendServerDescription_PolicyNames = BackendServerDescription.AddMember("PolicyNames", _PolicyNames)
-
-	_BackendServerDescriptions_member = _BackendServerDescriptions.AddMember("member", BackendServerDescription)
-
-	CertificateNotFoundException_Message = CertificateNotFoundException.AddMember("Message", _ErrorDescription)
-
-	ConnectionDraining_Enabled = ConnectionDraining.AddMember("Enabled", _ConnectionDrainingEnabled)
-
-	ConnectionDraining_Timeout = ConnectionDraining.AddMember("Timeout", _ConnectionDrainingTimeout)
-
-	ConnectionSettings_IdleTimeout = ConnectionSettings.AddMember("IdleTimeout", _IdleTimeout)
-
-	CrossZoneLoadBalancing_Enabled = CrossZoneLoadBalancing.AddMember("Enabled", _CrossZoneLoadBalancingEnabled)
-
-	DependencyThrottleException_Message = DependencyThrottleException.AddMember("Message", _ErrorDescription)
-
-	DuplicateAccessPointNameException_Message = DuplicateAccessPointNameException.AddMember("Message", _ErrorDescription)
-
-	DuplicateListenerException_Message = DuplicateListenerException.AddMember("Message", _ErrorDescription)
-
-	DuplicatePolicyNameException_Message = DuplicatePolicyNameException.AddMember("Message", _ErrorDescription)
-
-	DuplicateTagKeysException_Message = DuplicateTagKeysException.AddMember("Message", _ErrorDescription)
-
-	HealthCheck_Target = HealthCheck.AddMember("Target", _HealthCheckTarget)
-
-	HealthCheck_Interval = HealthCheck.AddMember("Interval", _HealthCheckInterval)
-
-	HealthCheck_Timeout = HealthCheck.AddMember("Timeout", _HealthCheckTimeout)
-
-	HealthCheck_UnhealthyThreshold = HealthCheck.AddMember("UnhealthyThreshold", _UnhealthyThreshold)
-
-	HealthCheck_HealthyThreshold = HealthCheck.AddMember("HealthyThreshold", _HealthyThreshold)
-
-	Instance_InstanceId = Instance.AddMember("InstanceId", _InstanceId)
-
-	_Instances_member = _Instances.AddMember("member", Instance)
-
-	InstanceState_InstanceId = InstanceState.AddMember("InstanceId", _InstanceId)
-
-	InstanceState_State = InstanceState.AddMember("State", _State)
-
-	InstanceState_ReasonCode = InstanceState.AddMember("ReasonCode", _ReasonCode)
-
-	InstanceState_Description = InstanceState.AddMember("Description", _Description)
-
-	_InstanceStates_member = _InstanceStates.AddMember("member", InstanceState)
-
-	InvalidConfigurationRequestException_Message = InvalidConfigurationRequestException.AddMember("Message", _ErrorDescription)
-
-	InvalidEndPointException_Message = InvalidEndPointException.AddMember("Message", _ErrorDescription)
-
-	InvalidSchemeException_Message = InvalidSchemeException.AddMember("Message", _ErrorDescription)
-
-	InvalidSecurityGroupException_Message = InvalidSecurityGroupException.AddMember("Message", _ErrorDescription)
-
-	InvalidSubnetException_Message = InvalidSubnetException.AddMember("Message", _ErrorDescription)
-
-	LBCookieStickinessPolicy_PolicyName = LBCookieStickinessPolicy.AddMember("PolicyName", _PolicyName)
-
-	LBCookieStickinessPolicy_CookieExpirationPeriod = LBCookieStickinessPolicy.AddMember("CookieExpirationPeriod", _CookieExpirationPeriod)
-
-	_LBCookieStickinessPolicies_member = _LBCookieStickinessPolicies.AddMember("member", LBCookieStickinessPolicy)
-
-	Limit_Name = Limit.AddMember("Name", _Name)
-
-	Limit_Max = Limit.AddMember("Max", _Max)
-
-	_Limits_member = _Limits.AddMember("member", Limit)
-
-	Listener_Protocol = Listener.AddMember("Protocol", _Protocol)
-
-	Listener_LoadBalancerPort = Listener.AddMember("LoadBalancerPort", _AccessPointPort)
-
-	Listener_InstanceProtocol = Listener.AddMember("InstanceProtocol", _Protocol)
-
-	Listener_InstancePort = Listener.AddMember("InstancePort", _InstancePort)
-
-	Listener_SSLCertificateId = Listener.AddMember("SSLCertificateId", _SSLCertificateId)
-
-	ListenerDescription_Listener = ListenerDescription.AddMember("Listener", Listener)
-
-	ListenerDescription_PolicyNames = ListenerDescription.AddMember("PolicyNames", _PolicyNames)
-
-	_ListenerDescriptions_member = _ListenerDescriptions.AddMember("member", ListenerDescription)
-
-	ListenerNotFoundException_Message = ListenerNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_Listeners_member = _Listeners.AddMember("member", Listener)
-
-	LoadBalancerAttributeNotFoundException_Message = LoadBalancerAttributeNotFoundException.AddMember("Message", _ErrorDescription)
-
-	LoadBalancerAttributes_CrossZoneLoadBalancing = LoadBalancerAttributes.AddMember("CrossZoneLoadBalancing", CrossZoneLoadBalancing)
-
-	LoadBalancerAttributes_AccessLog = LoadBalancerAttributes.AddMember("AccessLog", AccessLog)
-
-	LoadBalancerAttributes_ConnectionDraining = LoadBalancerAttributes.AddMember("ConnectionDraining", ConnectionDraining)
-
-	LoadBalancerAttributes_ConnectionSettings = LoadBalancerAttributes.AddMember("ConnectionSettings", ConnectionSettings)
-
-	LoadBalancerAttributes_AdditionalAttributes = LoadBalancerAttributes.AddMember("AdditionalAttributes", _AdditionalAttributes)
-
-	Policies_AppCookieStickinessPolicies = Policies.AddMember("AppCookieStickinessPolicies", _AppCookieStickinessPolicies)
-
-	Policies_LBCookieStickinessPolicies = Policies.AddMember("LBCookieStickinessPolicies", _LBCookieStickinessPolicies)
-
-	Policies_OtherPolicies = Policies.AddMember("OtherPolicies", _PolicyNames)
-
-	_Subnets_member = _Subnets.AddMember("member", _SubnetId)
-
-	SourceSecurityGroup_OwnerAlias = SourceSecurityGroup.AddMember("OwnerAlias", _SecurityGroupOwnerAlias)
-
-	SourceSecurityGroup_GroupName = SourceSecurityGroup.AddMember("GroupName", _SecurityGroupName)
-
-	_SecurityGroups_member = _SecurityGroups.AddMember("member", _SecurityGroupId)
-
-	LoadBalancerDescription_LoadBalancerName = LoadBalancerDescription.AddMember("LoadBalancerName", _AccessPointName)
-
-	LoadBalancerDescription_DNSName = LoadBalancerDescription.AddMember("DNSName", _DNSName)
-
-	LoadBalancerDescription_CanonicalHostedZoneName = LoadBalancerDescription.AddMember("CanonicalHostedZoneName", _DNSName)
-
-	LoadBalancerDescription_CanonicalHostedZoneNameID = LoadBalancerDescription.AddMember("CanonicalHostedZoneNameID", _DNSName)
-
-	LoadBalancerDescription_ListenerDescriptions = LoadBalancerDescription.AddMember("ListenerDescriptions", _ListenerDescriptions)
-
-	LoadBalancerDescription_Policies = LoadBalancerDescription.AddMember("Policies", Policies)
-
-	LoadBalancerDescription_BackendServerDescriptions = LoadBalancerDescription.AddMember("BackendServerDescriptions", _BackendServerDescriptions)
-
-	LoadBalancerDescription_AvailabilityZones = LoadBalancerDescription.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	LoadBalancerDescription_Subnets = LoadBalancerDescription.AddMember("Subnets", _Subnets)
-
-	LoadBalancerDescription_VPCId = LoadBalancerDescription.AddMember("VPCId", _VPCId)
-
-	LoadBalancerDescription_Instances = LoadBalancerDescription.AddMember("Instances", _Instances)
-
-	LoadBalancerDescription_HealthCheck = LoadBalancerDescription.AddMember("HealthCheck", HealthCheck)
-
-	LoadBalancerDescription_SourceSecurityGroup = LoadBalancerDescription.AddMember("SourceSecurityGroup", SourceSecurityGroup)
-
-	LoadBalancerDescription_SecurityGroups = LoadBalancerDescription.AddMember("SecurityGroups", _SecurityGroups)
-
-	LoadBalancerDescription_CreatedTime = LoadBalancerDescription.AddMember("CreatedTime", _CreatedTime)
-
-	LoadBalancerDescription_Scheme = LoadBalancerDescription.AddMember("Scheme", _LoadBalancerScheme)
-
-	_LoadBalancerDescriptions_member = _LoadBalancerDescriptions.AddMember("member", LoadBalancerDescription)
-
-	_LoadBalancerNames_member = _LoadBalancerNames.AddMember("member", _AccessPointName)
-
-	_LoadBalancerNamesMax20_member = _LoadBalancerNamesMax20.AddMember("member", _AccessPointName)
-
-	OperationNotPermittedException_Message = OperationNotPermittedException.AddMember("Message", _ErrorDescription)
-
-	PolicyAttribute_AttributeName = PolicyAttribute.AddMember("AttributeName", _AttributeName)
-
-	PolicyAttribute_AttributeValue = PolicyAttribute.AddMember("AttributeValue", _AttributeValue)
-
-	PolicyAttributeDescription_AttributeName = PolicyAttributeDescription.AddMember("AttributeName", _AttributeName)
-
-	PolicyAttributeDescription_AttributeValue = PolicyAttributeDescription.AddMember("AttributeValue", _AttributeValue)
-
-	_PolicyAttributeDescriptions_member = _PolicyAttributeDescriptions.AddMember("member", PolicyAttributeDescription)
-
-	_PolicyAttributes_member = _PolicyAttributes.AddMember("member", PolicyAttribute)
-
-	PolicyAttributeTypeDescription_AttributeName = PolicyAttributeTypeDescription.AddMember("AttributeName", _AttributeName)
-
-	PolicyAttributeTypeDescription_AttributeType = PolicyAttributeTypeDescription.AddMember("AttributeType", _AttributeType)
-
-	PolicyAttributeTypeDescription_Description = PolicyAttributeTypeDescription.AddMember("Description", _Description)
-
-	PolicyAttributeTypeDescription_DefaultValue = PolicyAttributeTypeDescription.AddMember("DefaultValue", _DefaultValue)
-
-	PolicyAttributeTypeDescription_Cardinality = PolicyAttributeTypeDescription.AddMember("Cardinality", _Cardinality)
-
-	_PolicyAttributeTypeDescriptions_member = _PolicyAttributeTypeDescriptions.AddMember("member", PolicyAttributeTypeDescription)
-
-	PolicyDescription_PolicyName = PolicyDescription.AddMember("PolicyName", _PolicyName)
-
-	PolicyDescription_PolicyTypeName = PolicyDescription.AddMember("PolicyTypeName", _PolicyTypeName)
-
-	PolicyDescription_PolicyAttributeDescriptions = PolicyDescription.AddMember("PolicyAttributeDescriptions", _PolicyAttributeDescriptions)
-
-	_PolicyDescriptions_member = _PolicyDescriptions.AddMember("member", PolicyDescription)
-
-	PolicyNotFoundException_Message = PolicyNotFoundException.AddMember("Message", _ErrorDescription)
-
-	PolicyTypeDescription_PolicyTypeName = PolicyTypeDescription.AddMember("PolicyTypeName", _PolicyTypeName)
-
-	PolicyTypeDescription_Description = PolicyTypeDescription.AddMember("Description", _Description)
-
-	PolicyTypeDescription_PolicyAttributeTypeDescriptions = PolicyTypeDescription.AddMember("PolicyAttributeTypeDescriptions", _PolicyAttributeTypeDescriptions)
-
-	_PolicyTypeDescriptions_member = _PolicyTypeDescriptions.AddMember("member", PolicyTypeDescription)
-
-	_PolicyTypeNames_member = _PolicyTypeNames.AddMember("member", _PolicyTypeName)
-
-	PolicyTypeNotFoundException_Message = PolicyTypeNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_Ports_member = _Ports.AddMember("member", _AccessPointPort)
-
-	SubnetNotFoundException_Message = SubnetNotFoundException.AddMember("Message", _ErrorDescription)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TagDescription_LoadBalancerName = TagDescription.AddMember("LoadBalancerName", _AccessPointName)
-
-	TagDescription_Tags = TagDescription.AddMember("Tags", _TagList)
-
-	_TagDescriptions_member = _TagDescriptions.AddMember("member", TagDescription)
-
-	TagKeyOnly_Key = TagKeyOnly.AddMember("Key", _TagKey)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", TagKeyOnly)
-
-	TooManyAccessPointsException_Message = TooManyAccessPointsException.AddMember("Message", _ErrorDescription)
-
-	TooManyPoliciesException_Message = TooManyPoliciesException.AddMember("Message", _ErrorDescription)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _ErrorDescription)
-
-	UnsupportedProtocolException_Message = UnsupportedProtocolException.AddMember("Message", _ErrorDescription)
-
-	AddTagsInput_LoadBalancerNames = AddTagsInput.AddMember("LoadBalancerNames", _LoadBalancerNames)
-
-	AddTagsInput_Tags = AddTagsInput.AddMember("Tags", _TagList)
-
-	ApplySecurityGroupsToLoadBalancerInput_LoadBalancerName = ApplySecurityGroupsToLoadBalancerInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	ApplySecurityGroupsToLoadBalancerInput_SecurityGroups = ApplySecurityGroupsToLoadBalancerInput.AddMember("SecurityGroups", _SecurityGroups)
-
-	ApplySecurityGroupsToLoadBalancerOutput_SecurityGroups = ApplySecurityGroupsToLoadBalancerOutput.AddMember("SecurityGroups", _SecurityGroups)
-
-	AttachLoadBalancerToSubnetsInput_LoadBalancerName = AttachLoadBalancerToSubnetsInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	AttachLoadBalancerToSubnetsInput_Subnets = AttachLoadBalancerToSubnetsInput.AddMember("Subnets", _Subnets)
-
-	AttachLoadBalancerToSubnetsOutput_Subnets = AttachLoadBalancerToSubnetsOutput.AddMember("Subnets", _Subnets)
-
-	ConfigureHealthCheckInput_LoadBalancerName = ConfigureHealthCheckInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	ConfigureHealthCheckInput_HealthCheck = ConfigureHealthCheckInput.AddMember("HealthCheck", HealthCheck)
-
-	ConfigureHealthCheckOutput_HealthCheck = ConfigureHealthCheckOutput.AddMember("HealthCheck", HealthCheck)
-
-	CreateAppCookieStickinessPolicyInput_LoadBalancerName = CreateAppCookieStickinessPolicyInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	CreateAppCookieStickinessPolicyInput_PolicyName = CreateAppCookieStickinessPolicyInput.AddMember("PolicyName", _PolicyName)
-
-	CreateAppCookieStickinessPolicyInput_CookieName = CreateAppCookieStickinessPolicyInput.AddMember("CookieName", _CookieName)
-
-	CreateLBCookieStickinessPolicyInput_LoadBalancerName = CreateLBCookieStickinessPolicyInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	CreateLBCookieStickinessPolicyInput_PolicyName = CreateLBCookieStickinessPolicyInput.AddMember("PolicyName", _PolicyName)
-
-	CreateLBCookieStickinessPolicyInput_CookieExpirationPeriod = CreateLBCookieStickinessPolicyInput.AddMember("CookieExpirationPeriod", _CookieExpirationPeriod)
-
-	CreateAccessPointInput_LoadBalancerName = CreateAccessPointInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	CreateAccessPointInput_Listeners = CreateAccessPointInput.AddMember("Listeners", _Listeners)
-
-	CreateAccessPointInput_AvailabilityZones = CreateAccessPointInput.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	CreateAccessPointInput_Subnets = CreateAccessPointInput.AddMember("Subnets", _Subnets)
-
-	CreateAccessPointInput_SecurityGroups = CreateAccessPointInput.AddMember("SecurityGroups", _SecurityGroups)
-
-	CreateAccessPointInput_Scheme = CreateAccessPointInput.AddMember("Scheme", _LoadBalancerScheme)
-
-	CreateAccessPointInput_Tags = CreateAccessPointInput.AddMember("Tags", _TagList)
-
-	CreateLoadBalancerListenerInput_LoadBalancerName = CreateLoadBalancerListenerInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	CreateLoadBalancerListenerInput_Listeners = CreateLoadBalancerListenerInput.AddMember("Listeners", _Listeners)
-
-	CreateAccessPointOutput_DNSName = CreateAccessPointOutput.AddMember("DNSName", _DNSName)
-
-	CreateLoadBalancerPolicyInput_LoadBalancerName = CreateLoadBalancerPolicyInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	CreateLoadBalancerPolicyInput_PolicyName = CreateLoadBalancerPolicyInput.AddMember("PolicyName", _PolicyName)
-
-	CreateLoadBalancerPolicyInput_PolicyTypeName = CreateLoadBalancerPolicyInput.AddMember("PolicyTypeName", _PolicyTypeName)
-
-	CreateLoadBalancerPolicyInput_PolicyAttributes = CreateLoadBalancerPolicyInput.AddMember("PolicyAttributes", _PolicyAttributes)
-
-	DeleteAccessPointInput_LoadBalancerName = DeleteAccessPointInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DeleteLoadBalancerListenerInput_LoadBalancerName = DeleteLoadBalancerListenerInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DeleteLoadBalancerListenerInput_LoadBalancerPorts = DeleteLoadBalancerListenerInput.AddMember("LoadBalancerPorts", _Ports)
-
-	DeleteLoadBalancerPolicyInput_LoadBalancerName = DeleteLoadBalancerPolicyInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DeleteLoadBalancerPolicyInput_PolicyName = DeleteLoadBalancerPolicyInput.AddMember("PolicyName", _PolicyName)
-
-	DeregisterEndPointsInput_LoadBalancerName = DeregisterEndPointsInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DeregisterEndPointsInput_Instances = DeregisterEndPointsInput.AddMember("Instances", _Instances)
-
-	DeregisterEndPointsOutput_Instances = DeregisterEndPointsOutput.AddMember("Instances", _Instances)
-
-	DescribeAccountLimitsInput_Marker = DescribeAccountLimitsInput.AddMember("Marker", _Marker)
-
-	DescribeAccountLimitsInput_PageSize = DescribeAccountLimitsInput.AddMember("PageSize", _PageSize)
-
-	DescribeAccountLimitsOutput_Limits = DescribeAccountLimitsOutput.AddMember("Limits", _Limits)
-
-	DescribeAccountLimitsOutput_NextMarker = DescribeAccountLimitsOutput.AddMember("NextMarker", _Marker)
-
-	DescribeEndPointStateInput_LoadBalancerName = DescribeEndPointStateInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DescribeEndPointStateInput_Instances = DescribeEndPointStateInput.AddMember("Instances", _Instances)
-
-	DescribeEndPointStateOutput_InstanceStates = DescribeEndPointStateOutput.AddMember("InstanceStates", _InstanceStates)
-
-	DescribeLoadBalancerAttributesInput_LoadBalancerName = DescribeLoadBalancerAttributesInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DescribeLoadBalancerAttributesOutput_LoadBalancerAttributes = DescribeLoadBalancerAttributesOutput.AddMember("LoadBalancerAttributes", LoadBalancerAttributes)
-
-	DescribeLoadBalancerPoliciesInput_LoadBalancerName = DescribeLoadBalancerPoliciesInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DescribeLoadBalancerPoliciesInput_PolicyNames = DescribeLoadBalancerPoliciesInput.AddMember("PolicyNames", _PolicyNames)
-
-	DescribeLoadBalancerPoliciesOutput_PolicyDescriptions = DescribeLoadBalancerPoliciesOutput.AddMember("PolicyDescriptions", _PolicyDescriptions)
-
-	DescribeLoadBalancerPolicyTypesInput_PolicyTypeNames = DescribeLoadBalancerPolicyTypesInput.AddMember("PolicyTypeNames", _PolicyTypeNames)
-
-	DescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions = DescribeLoadBalancerPolicyTypesOutput.AddMember("PolicyTypeDescriptions", _PolicyTypeDescriptions)
-
-	DescribeAccessPointsInput_LoadBalancerNames = DescribeAccessPointsInput.AddMember("LoadBalancerNames", _LoadBalancerNames)
-
-	DescribeAccessPointsInput_Marker = DescribeAccessPointsInput.AddMember("Marker", _Marker)
-
-	DescribeAccessPointsInput_PageSize = DescribeAccessPointsInput.AddMember("PageSize", _PageSize)
-
-	DescribeAccessPointsOutput_LoadBalancerDescriptions = DescribeAccessPointsOutput.AddMember("LoadBalancerDescriptions", _LoadBalancerDescriptions)
-
-	DescribeAccessPointsOutput_NextMarker = DescribeAccessPointsOutput.AddMember("NextMarker", _Marker)
-
-	DescribeTagsInput_LoadBalancerNames = DescribeTagsInput.AddMember("LoadBalancerNames", _LoadBalancerNamesMax20)
-
-	DescribeTagsOutput_TagDescriptions = DescribeTagsOutput.AddMember("TagDescriptions", _TagDescriptions)
-
-	DetachLoadBalancerFromSubnetsInput_LoadBalancerName = DetachLoadBalancerFromSubnetsInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	DetachLoadBalancerFromSubnetsInput_Subnets = DetachLoadBalancerFromSubnetsInput.AddMember("Subnets", _Subnets)
-
-	DetachLoadBalancerFromSubnetsOutput_Subnets = DetachLoadBalancerFromSubnetsOutput.AddMember("Subnets", _Subnets)
-
-	RemoveAvailabilityZonesInput_LoadBalancerName = RemoveAvailabilityZonesInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	RemoveAvailabilityZonesInput_AvailabilityZones = RemoveAvailabilityZonesInput.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	RemoveAvailabilityZonesOutput_AvailabilityZones = RemoveAvailabilityZonesOutput.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	AddAvailabilityZonesInput_LoadBalancerName = AddAvailabilityZonesInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	AddAvailabilityZonesInput_AvailabilityZones = AddAvailabilityZonesInput.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	AddAvailabilityZonesOutput_AvailabilityZones = AddAvailabilityZonesOutput.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	ModifyLoadBalancerAttributesInput_LoadBalancerName = ModifyLoadBalancerAttributesInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	ModifyLoadBalancerAttributesInput_LoadBalancerAttributes = ModifyLoadBalancerAttributesInput.AddMember("LoadBalancerAttributes", LoadBalancerAttributes)
-
-	ModifyLoadBalancerAttributesOutput_LoadBalancerName = ModifyLoadBalancerAttributesOutput.AddMember("LoadBalancerName", _AccessPointName)
-
-	ModifyLoadBalancerAttributesOutput_LoadBalancerAttributes = ModifyLoadBalancerAttributesOutput.AddMember("LoadBalancerAttributes", LoadBalancerAttributes)
-
-	RegisterEndPointsInput_LoadBalancerName = RegisterEndPointsInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	RegisterEndPointsInput_Instances = RegisterEndPointsInput.AddMember("Instances", _Instances)
-
-	RegisterEndPointsOutput_Instances = RegisterEndPointsOutput.AddMember("Instances", _Instances)
-
-	RemoveTagsInput_LoadBalancerNames = RemoveTagsInput.AddMember("LoadBalancerNames", _LoadBalancerNames)
-
-	RemoveTagsInput_Tags = RemoveTagsInput.AddMember("Tags", _TagKeyList)
-
-	SetLoadBalancerListenerSSLCertificateInput_LoadBalancerName = SetLoadBalancerListenerSSLCertificateInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	SetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort = SetLoadBalancerListenerSSLCertificateInput.AddMember("LoadBalancerPort", _AccessPointPort)
-
-	SetLoadBalancerListenerSSLCertificateInput_SSLCertificateId = SetLoadBalancerListenerSSLCertificateInput.AddMember("SSLCertificateId", _SSLCertificateId)
-
-	SetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName = SetLoadBalancerPoliciesForBackendServerInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	SetLoadBalancerPoliciesForBackendServerInput_InstancePort = SetLoadBalancerPoliciesForBackendServerInput.AddMember("InstancePort", _EndPointPort)
-
-	SetLoadBalancerPoliciesForBackendServerInput_PolicyNames = SetLoadBalancerPoliciesForBackendServerInput.AddMember("PolicyNames", _PolicyNames)
-
-	SetLoadBalancerPoliciesOfListenerInput_LoadBalancerName = SetLoadBalancerPoliciesOfListenerInput.AddMember("LoadBalancerName", _AccessPointName)
-
-	SetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort = SetLoadBalancerPoliciesOfListenerInput.AddMember("LoadBalancerPort", _AccessPointPort)
-
-	SetLoadBalancerPoliciesOfListenerInput_PolicyNames = SetLoadBalancerPoliciesOfListenerInput.AddMember("PolicyNames", _PolicyNames)
-
-}
+var (
+	eAddTags                                                       smithy.SchemaExtensions
+	eApplySecurityGroupsToLoadBalancer                             smithy.SchemaExtensions
+	eAttachLoadBalancerToSubnets                                   smithy.SchemaExtensions
+	eConfigureHealthCheck                                          smithy.SchemaExtensions
+	eCreateAppCookieStickinessPolicy                               smithy.SchemaExtensions
+	eCreateLBCookieStickinessPolicy                                smithy.SchemaExtensions
+	eCreateLoadBalancer                                            smithy.SchemaExtensions
+	eCreateLoadBalancerListeners                                   smithy.SchemaExtensions
+	eCreateLoadBalancerPolicy                                      smithy.SchemaExtensions
+	eDeleteLoadBalancer                                            smithy.SchemaExtensions
+	eDeleteLoadBalancerListeners                                   smithy.SchemaExtensions
+	eDeleteLoadBalancerPolicy                                      smithy.SchemaExtensions
+	eDeregisterInstancesFromLoadBalancer                           smithy.SchemaExtensions
+	eDescribeAccountLimits                                         smithy.SchemaExtensions
+	eDescribeInstanceHealth                                        smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributes                                smithy.SchemaExtensions
+	eDescribeLoadBalancerPolicies                                  smithy.SchemaExtensions
+	eDescribeLoadBalancerPolicyTypes                               smithy.SchemaExtensions
+	eDescribeLoadBalancers                                         smithy.SchemaExtensions
+	eDescribeTags                                                  smithy.SchemaExtensions
+	eDetachLoadBalancerFromSubnets                                 smithy.SchemaExtensions
+	eDisableAvailabilityZonesForLoadBalancer                       smithy.SchemaExtensions
+	eEnableAvailabilityZonesForLoadBalancer                        smithy.SchemaExtensions
+	eModifyLoadBalancerAttributes                                  smithy.SchemaExtensions
+	eRegisterInstancesWithLoadBalancer                             smithy.SchemaExtensions
+	eRemoveTags                                                    smithy.SchemaExtensions
+	eSetLoadBalancerListenerSSLCertificate                         smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesForBackendServer                       smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesOfListener                             smithy.SchemaExtensions
+	e_ElasticLoadBalancing_v7                                      smithy.SchemaExtensions
+	eAccessLog                                                     smithy.SchemaExtensions
+	eAccessLog_Enabled                                             smithy.SchemaExtensions
+	eAccessLog_S3BucketName                                        smithy.SchemaExtensions
+	eAccessLog_EmitInterval                                        smithy.SchemaExtensions
+	eAccessLog_S3BucketPrefix                                      smithy.SchemaExtensions
+	e_AccessLogEnabled                                             smithy.SchemaExtensions
+	e_AccessLogInterval                                            smithy.SchemaExtensions
+	e_AccessLogPrefix                                              smithy.SchemaExtensions
+	e_AccessPointName                                              smithy.SchemaExtensions
+	eAccessPointNotFoundException                                  smithy.SchemaExtensions
+	eAccessPointNotFoundException_Message                          smithy.SchemaExtensions
+	e_AccessPointPort                                              smithy.SchemaExtensions
+	eAdditionalAttribute                                           smithy.SchemaExtensions
+	eAdditionalAttribute_Key                                       smithy.SchemaExtensions
+	eAdditionalAttribute_Value                                     smithy.SchemaExtensions
+	e_AdditionalAttributeKey                                       smithy.SchemaExtensions
+	e_AdditionalAttributes                                         smithy.SchemaExtensions
+	e_AdditionalAttributes_member                                  smithy.SchemaExtensions
+	e_AdditionalAttributeValue                                     smithy.SchemaExtensions
+	e_AppCookieStickinessPolicies                                  smithy.SchemaExtensions
+	e_AppCookieStickinessPolicies_member                           smithy.SchemaExtensions
+	eAppCookieStickinessPolicy                                     smithy.SchemaExtensions
+	eAppCookieStickinessPolicy_PolicyName                          smithy.SchemaExtensions
+	eAppCookieStickinessPolicy_CookieName                          smithy.SchemaExtensions
+	e_AttributeName                                                smithy.SchemaExtensions
+	e_AttributeType                                                smithy.SchemaExtensions
+	e_AttributeValue                                               smithy.SchemaExtensions
+	e_AvailabilityZone                                             smithy.SchemaExtensions
+	e_AvailabilityZones                                            smithy.SchemaExtensions
+	e_AvailabilityZones_member                                     smithy.SchemaExtensions
+	eBackendServerDescription                                      smithy.SchemaExtensions
+	eBackendServerDescription_InstancePort                         smithy.SchemaExtensions
+	eBackendServerDescription_PolicyNames                          smithy.SchemaExtensions
+	e_BackendServerDescriptions                                    smithy.SchemaExtensions
+	e_BackendServerDescriptions_member                             smithy.SchemaExtensions
+	e_Cardinality                                                  smithy.SchemaExtensions
+	eCertificateNotFoundException                                  smithy.SchemaExtensions
+	eCertificateNotFoundException_Message                          smithy.SchemaExtensions
+	eConnectionDraining                                            smithy.SchemaExtensions
+	eConnectionDraining_Enabled                                    smithy.SchemaExtensions
+	eConnectionDraining_Timeout                                    smithy.SchemaExtensions
+	e_ConnectionDrainingEnabled                                    smithy.SchemaExtensions
+	e_ConnectionDrainingTimeout                                    smithy.SchemaExtensions
+	eConnectionSettings                                            smithy.SchemaExtensions
+	eConnectionSettings_IdleTimeout                                smithy.SchemaExtensions
+	e_CookieExpirationPeriod                                       smithy.SchemaExtensions
+	e_CookieName                                                   smithy.SchemaExtensions
+	e_CreatedTime                                                  smithy.SchemaExtensions
+	eCrossZoneLoadBalancing                                        smithy.SchemaExtensions
+	eCrossZoneLoadBalancing_Enabled                                smithy.SchemaExtensions
+	e_CrossZoneLoadBalancingEnabled                                smithy.SchemaExtensions
+	e_DefaultValue                                                 smithy.SchemaExtensions
+	eDependencyThrottleException                                   smithy.SchemaExtensions
+	eDependencyThrottleException_Message                           smithy.SchemaExtensions
+	e_Description                                                  smithy.SchemaExtensions
+	e_DNSName                                                      smithy.SchemaExtensions
+	eDuplicateAccessPointNameException                             smithy.SchemaExtensions
+	eDuplicateAccessPointNameException_Message                     smithy.SchemaExtensions
+	eDuplicateListenerException                                    smithy.SchemaExtensions
+	eDuplicateListenerException_Message                            smithy.SchemaExtensions
+	eDuplicatePolicyNameException                                  smithy.SchemaExtensions
+	eDuplicatePolicyNameException_Message                          smithy.SchemaExtensions
+	eDuplicateTagKeysException                                     smithy.SchemaExtensions
+	eDuplicateTagKeysException_Message                             smithy.SchemaExtensions
+	e_EndPointPort                                                 smithy.SchemaExtensions
+	e_ErrorDescription                                             smithy.SchemaExtensions
+	eHealthCheck                                                   smithy.SchemaExtensions
+	eHealthCheck_Target                                            smithy.SchemaExtensions
+	eHealthCheck_Interval                                          smithy.SchemaExtensions
+	eHealthCheck_Timeout                                           smithy.SchemaExtensions
+	eHealthCheck_UnhealthyThreshold                                smithy.SchemaExtensions
+	eHealthCheck_HealthyThreshold                                  smithy.SchemaExtensions
+	e_HealthCheckInterval                                          smithy.SchemaExtensions
+	e_HealthCheckTarget                                            smithy.SchemaExtensions
+	e_HealthCheckTimeout                                           smithy.SchemaExtensions
+	e_HealthyThreshold                                             smithy.SchemaExtensions
+	e_IdleTimeout                                                  smithy.SchemaExtensions
+	eInstance                                                      smithy.SchemaExtensions
+	eInstance_InstanceId                                           smithy.SchemaExtensions
+	e_InstanceId                                                   smithy.SchemaExtensions
+	e_InstancePort                                                 smithy.SchemaExtensions
+	e_Instances                                                    smithy.SchemaExtensions
+	e_Instances_member                                             smithy.SchemaExtensions
+	eInstanceState                                                 smithy.SchemaExtensions
+	eInstanceState_InstanceId                                      smithy.SchemaExtensions
+	eInstanceState_State                                           smithy.SchemaExtensions
+	eInstanceState_ReasonCode                                      smithy.SchemaExtensions
+	eInstanceState_Description                                     smithy.SchemaExtensions
+	e_InstanceStates                                               smithy.SchemaExtensions
+	e_InstanceStates_member                                        smithy.SchemaExtensions
+	eInvalidConfigurationRequestException                          smithy.SchemaExtensions
+	eInvalidConfigurationRequestException_Message                  smithy.SchemaExtensions
+	eInvalidEndPointException                                      smithy.SchemaExtensions
+	eInvalidEndPointException_Message                              smithy.SchemaExtensions
+	eInvalidSchemeException                                        smithy.SchemaExtensions
+	eInvalidSchemeException_Message                                smithy.SchemaExtensions
+	eInvalidSecurityGroupException                                 smithy.SchemaExtensions
+	eInvalidSecurityGroupException_Message                         smithy.SchemaExtensions
+	eInvalidSubnetException                                        smithy.SchemaExtensions
+	eInvalidSubnetException_Message                                smithy.SchemaExtensions
+	e_LBCookieStickinessPolicies                                   smithy.SchemaExtensions
+	e_LBCookieStickinessPolicies_member                            smithy.SchemaExtensions
+	eLBCookieStickinessPolicy                                      smithy.SchemaExtensions
+	eLBCookieStickinessPolicy_PolicyName                           smithy.SchemaExtensions
+	eLBCookieStickinessPolicy_CookieExpirationPeriod               smithy.SchemaExtensions
+	eLimit                                                         smithy.SchemaExtensions
+	eLimit_Name                                                    smithy.SchemaExtensions
+	eLimit_Max                                                     smithy.SchemaExtensions
+	e_Limits                                                       smithy.SchemaExtensions
+	e_Limits_member                                                smithy.SchemaExtensions
+	eListener                                                      smithy.SchemaExtensions
+	eListener_Protocol                                             smithy.SchemaExtensions
+	eListener_LoadBalancerPort                                     smithy.SchemaExtensions
+	eListener_InstanceProtocol                                     smithy.SchemaExtensions
+	eListener_InstancePort                                         smithy.SchemaExtensions
+	eListener_SSLCertificateId                                     smithy.SchemaExtensions
+	eListenerDescription                                           smithy.SchemaExtensions
+	eListenerDescription_Listener                                  smithy.SchemaExtensions
+	eListenerDescription_PolicyNames                               smithy.SchemaExtensions
+	e_ListenerDescriptions                                         smithy.SchemaExtensions
+	e_ListenerDescriptions_member                                  smithy.SchemaExtensions
+	eListenerNotFoundException                                     smithy.SchemaExtensions
+	eListenerNotFoundException_Message                             smithy.SchemaExtensions
+	e_Listeners                                                    smithy.SchemaExtensions
+	e_Listeners_member                                             smithy.SchemaExtensions
+	eLoadBalancerAttributeNotFoundException                        smithy.SchemaExtensions
+	eLoadBalancerAttributeNotFoundException_Message                smithy.SchemaExtensions
+	eLoadBalancerAttributes                                        smithy.SchemaExtensions
+	eLoadBalancerAttributes_CrossZoneLoadBalancing                 smithy.SchemaExtensions
+	eLoadBalancerAttributes_AccessLog                              smithy.SchemaExtensions
+	eLoadBalancerAttributes_ConnectionDraining                     smithy.SchemaExtensions
+	eLoadBalancerAttributes_ConnectionSettings                     smithy.SchemaExtensions
+	eLoadBalancerAttributes_AdditionalAttributes                   smithy.SchemaExtensions
+	eLoadBalancerDescription                                       smithy.SchemaExtensions
+	eLoadBalancerDescription_LoadBalancerName                      smithy.SchemaExtensions
+	eLoadBalancerDescription_DNSName                               smithy.SchemaExtensions
+	eLoadBalancerDescription_CanonicalHostedZoneName               smithy.SchemaExtensions
+	eLoadBalancerDescription_CanonicalHostedZoneNameID             smithy.SchemaExtensions
+	eLoadBalancerDescription_ListenerDescriptions                  smithy.SchemaExtensions
+	eLoadBalancerDescription_Policies                              smithy.SchemaExtensions
+	eLoadBalancerDescription_BackendServerDescriptions             smithy.SchemaExtensions
+	eLoadBalancerDescription_AvailabilityZones                     smithy.SchemaExtensions
+	eLoadBalancerDescription_Subnets                               smithy.SchemaExtensions
+	eLoadBalancerDescription_VPCId                                 smithy.SchemaExtensions
+	eLoadBalancerDescription_Instances                             smithy.SchemaExtensions
+	eLoadBalancerDescription_HealthCheck                           smithy.SchemaExtensions
+	eLoadBalancerDescription_SourceSecurityGroup                   smithy.SchemaExtensions
+	eLoadBalancerDescription_SecurityGroups                        smithy.SchemaExtensions
+	eLoadBalancerDescription_CreatedTime                           smithy.SchemaExtensions
+	eLoadBalancerDescription_Scheme                                smithy.SchemaExtensions
+	e_LoadBalancerDescriptions                                     smithy.SchemaExtensions
+	e_LoadBalancerDescriptions_member                              smithy.SchemaExtensions
+	e_LoadBalancerNames                                            smithy.SchemaExtensions
+	e_LoadBalancerNames_member                                     smithy.SchemaExtensions
+	e_LoadBalancerNamesMax20                                       smithy.SchemaExtensions
+	e_LoadBalancerNamesMax20_member                                smithy.SchemaExtensions
+	e_LoadBalancerScheme                                           smithy.SchemaExtensions
+	e_Marker                                                       smithy.SchemaExtensions
+	e_Max                                                          smithy.SchemaExtensions
+	e_Name                                                         smithy.SchemaExtensions
+	eOperationNotPermittedException                                smithy.SchemaExtensions
+	eOperationNotPermittedException_Message                        smithy.SchemaExtensions
+	e_PageSize                                                     smithy.SchemaExtensions
+	ePolicies                                                      smithy.SchemaExtensions
+	ePolicies_AppCookieStickinessPolicies                          smithy.SchemaExtensions
+	ePolicies_LBCookieStickinessPolicies                           smithy.SchemaExtensions
+	ePolicies_OtherPolicies                                        smithy.SchemaExtensions
+	ePolicyAttribute                                               smithy.SchemaExtensions
+	ePolicyAttribute_AttributeName                                 smithy.SchemaExtensions
+	ePolicyAttribute_AttributeValue                                smithy.SchemaExtensions
+	ePolicyAttributeDescription                                    smithy.SchemaExtensions
+	ePolicyAttributeDescription_AttributeName                      smithy.SchemaExtensions
+	ePolicyAttributeDescription_AttributeValue                     smithy.SchemaExtensions
+	e_PolicyAttributeDescriptions                                  smithy.SchemaExtensions
+	e_PolicyAttributeDescriptions_member                           smithy.SchemaExtensions
+	e_PolicyAttributes                                             smithy.SchemaExtensions
+	e_PolicyAttributes_member                                      smithy.SchemaExtensions
+	ePolicyAttributeTypeDescription                                smithy.SchemaExtensions
+	ePolicyAttributeTypeDescription_AttributeName                  smithy.SchemaExtensions
+	ePolicyAttributeTypeDescription_AttributeType                  smithy.SchemaExtensions
+	ePolicyAttributeTypeDescription_Description                    smithy.SchemaExtensions
+	ePolicyAttributeTypeDescription_DefaultValue                   smithy.SchemaExtensions
+	ePolicyAttributeTypeDescription_Cardinality                    smithy.SchemaExtensions
+	e_PolicyAttributeTypeDescriptions                              smithy.SchemaExtensions
+	e_PolicyAttributeTypeDescriptions_member                       smithy.SchemaExtensions
+	ePolicyDescription                                             smithy.SchemaExtensions
+	ePolicyDescription_PolicyName                                  smithy.SchemaExtensions
+	ePolicyDescription_PolicyTypeName                              smithy.SchemaExtensions
+	ePolicyDescription_PolicyAttributeDescriptions                 smithy.SchemaExtensions
+	e_PolicyDescriptions                                           smithy.SchemaExtensions
+	e_PolicyDescriptions_member                                    smithy.SchemaExtensions
+	e_PolicyName                                                   smithy.SchemaExtensions
+	e_PolicyNames                                                  smithy.SchemaExtensions
+	e_PolicyNames_member                                           smithy.SchemaExtensions
+	ePolicyNotFoundException                                       smithy.SchemaExtensions
+	ePolicyNotFoundException_Message                               smithy.SchemaExtensions
+	ePolicyTypeDescription                                         smithy.SchemaExtensions
+	ePolicyTypeDescription_PolicyTypeName                          smithy.SchemaExtensions
+	ePolicyTypeDescription_Description                             smithy.SchemaExtensions
+	ePolicyTypeDescription_PolicyAttributeTypeDescriptions         smithy.SchemaExtensions
+	e_PolicyTypeDescriptions                                       smithy.SchemaExtensions
+	e_PolicyTypeDescriptions_member                                smithy.SchemaExtensions
+	e_PolicyTypeName                                               smithy.SchemaExtensions
+	e_PolicyTypeNames                                              smithy.SchemaExtensions
+	e_PolicyTypeNames_member                                       smithy.SchemaExtensions
+	ePolicyTypeNotFoundException                                   smithy.SchemaExtensions
+	ePolicyTypeNotFoundException_Message                           smithy.SchemaExtensions
+	e_Ports                                                        smithy.SchemaExtensions
+	e_Ports_member                                                 smithy.SchemaExtensions
+	e_Protocol                                                     smithy.SchemaExtensions
+	e_ReasonCode                                                   smithy.SchemaExtensions
+	e_S3BucketName                                                 smithy.SchemaExtensions
+	e_SecurityGroupId                                              smithy.SchemaExtensions
+	e_SecurityGroupName                                            smithy.SchemaExtensions
+	e_SecurityGroupOwnerAlias                                      smithy.SchemaExtensions
+	e_SecurityGroups                                               smithy.SchemaExtensions
+	e_SecurityGroups_member                                        smithy.SchemaExtensions
+	eSourceSecurityGroup                                           smithy.SchemaExtensions
+	eSourceSecurityGroup_OwnerAlias                                smithy.SchemaExtensions
+	eSourceSecurityGroup_GroupName                                 smithy.SchemaExtensions
+	e_SSLCertificateId                                             smithy.SchemaExtensions
+	e_State                                                        smithy.SchemaExtensions
+	e_SubnetId                                                     smithy.SchemaExtensions
+	eSubnetNotFoundException                                       smithy.SchemaExtensions
+	eSubnetNotFoundException_Message                               smithy.SchemaExtensions
+	e_Subnets                                                      smithy.SchemaExtensions
+	e_Subnets_member                                               smithy.SchemaExtensions
+	eTag                                                           smithy.SchemaExtensions
+	eTag_Key                                                       smithy.SchemaExtensions
+	eTag_Value                                                     smithy.SchemaExtensions
+	eTagDescription                                                smithy.SchemaExtensions
+	eTagDescription_LoadBalancerName                               smithy.SchemaExtensions
+	eTagDescription_Tags                                           smithy.SchemaExtensions
+	e_TagDescriptions                                              smithy.SchemaExtensions
+	e_TagDescriptions_member                                       smithy.SchemaExtensions
+	e_TagKey                                                       smithy.SchemaExtensions
+	e_TagKeyList                                                   smithy.SchemaExtensions
+	e_TagKeyList_member                                            smithy.SchemaExtensions
+	eTagKeyOnly                                                    smithy.SchemaExtensions
+	eTagKeyOnly_Key                                                smithy.SchemaExtensions
+	e_TagList                                                      smithy.SchemaExtensions
+	e_TagList_member                                               smithy.SchemaExtensions
+	e_TagValue                                                     smithy.SchemaExtensions
+	eTooManyAccessPointsException                                  smithy.SchemaExtensions
+	eTooManyAccessPointsException_Message                          smithy.SchemaExtensions
+	eTooManyPoliciesException                                      smithy.SchemaExtensions
+	eTooManyPoliciesException_Message                              smithy.SchemaExtensions
+	eTooManyTagsException                                          smithy.SchemaExtensions
+	eTooManyTagsException_Message                                  smithy.SchemaExtensions
+	e_UnhealthyThreshold                                           smithy.SchemaExtensions
+	eUnsupportedProtocolException                                  smithy.SchemaExtensions
+	eUnsupportedProtocolException_Message                          smithy.SchemaExtensions
+	e_VPCId                                                        smithy.SchemaExtensions
+	eAddTagsInput                                                  smithy.SchemaExtensions
+	eAddTagsInput_LoadBalancerNames                                smithy.SchemaExtensions
+	eAddTagsInput_Tags                                             smithy.SchemaExtensions
+	eAddTagsOutput                                                 smithy.SchemaExtensions
+	eApplySecurityGroupsToLoadBalancerInput                        smithy.SchemaExtensions
+	eApplySecurityGroupsToLoadBalancerInput_LoadBalancerName       smithy.SchemaExtensions
+	eApplySecurityGroupsToLoadBalancerInput_SecurityGroups         smithy.SchemaExtensions
+	eApplySecurityGroupsToLoadBalancerOutput                       smithy.SchemaExtensions
+	eApplySecurityGroupsToLoadBalancerOutput_SecurityGroups        smithy.SchemaExtensions
+	eAttachLoadBalancerToSubnetsInput                              smithy.SchemaExtensions
+	eAttachLoadBalancerToSubnetsInput_LoadBalancerName             smithy.SchemaExtensions
+	eAttachLoadBalancerToSubnetsInput_Subnets                      smithy.SchemaExtensions
+	eAttachLoadBalancerToSubnetsOutput                             smithy.SchemaExtensions
+	eAttachLoadBalancerToSubnetsOutput_Subnets                     smithy.SchemaExtensions
+	eConfigureHealthCheckInput                                     smithy.SchemaExtensions
+	eConfigureHealthCheckInput_LoadBalancerName                    smithy.SchemaExtensions
+	eConfigureHealthCheckInput_HealthCheck                         smithy.SchemaExtensions
+	eConfigureHealthCheckOutput                                    smithy.SchemaExtensions
+	eConfigureHealthCheckOutput_HealthCheck                        smithy.SchemaExtensions
+	eCreateAppCookieStickinessPolicyInput                          smithy.SchemaExtensions
+	eCreateAppCookieStickinessPolicyInput_LoadBalancerName         smithy.SchemaExtensions
+	eCreateAppCookieStickinessPolicyInput_PolicyName               smithy.SchemaExtensions
+	eCreateAppCookieStickinessPolicyInput_CookieName               smithy.SchemaExtensions
+	eCreateAppCookieStickinessPolicyOutput                         smithy.SchemaExtensions
+	eCreateLBCookieStickinessPolicyInput                           smithy.SchemaExtensions
+	eCreateLBCookieStickinessPolicyInput_LoadBalancerName          smithy.SchemaExtensions
+	eCreateLBCookieStickinessPolicyInput_PolicyName                smithy.SchemaExtensions
+	eCreateLBCookieStickinessPolicyInput_CookieExpirationPeriod    smithy.SchemaExtensions
+	eCreateLBCookieStickinessPolicyOutput                          smithy.SchemaExtensions
+	eCreateAccessPointInput                                        smithy.SchemaExtensions
+	eCreateAccessPointInput_LoadBalancerName                       smithy.SchemaExtensions
+	eCreateAccessPointInput_Listeners                              smithy.SchemaExtensions
+	eCreateAccessPointInput_AvailabilityZones                      smithy.SchemaExtensions
+	eCreateAccessPointInput_Subnets                                smithy.SchemaExtensions
+	eCreateAccessPointInput_SecurityGroups                         smithy.SchemaExtensions
+	eCreateAccessPointInput_Scheme                                 smithy.SchemaExtensions
+	eCreateAccessPointInput_Tags                                   smithy.SchemaExtensions
+	eCreateLoadBalancerListenerInput                               smithy.SchemaExtensions
+	eCreateLoadBalancerListenerInput_LoadBalancerName              smithy.SchemaExtensions
+	eCreateLoadBalancerListenerInput_Listeners                     smithy.SchemaExtensions
+	eCreateLoadBalancerListenerOutput                              smithy.SchemaExtensions
+	eCreateAccessPointOutput                                       smithy.SchemaExtensions
+	eCreateAccessPointOutput_DNSName                               smithy.SchemaExtensions
+	eCreateLoadBalancerPolicyInput                                 smithy.SchemaExtensions
+	eCreateLoadBalancerPolicyInput_LoadBalancerName                smithy.SchemaExtensions
+	eCreateLoadBalancerPolicyInput_PolicyName                      smithy.SchemaExtensions
+	eCreateLoadBalancerPolicyInput_PolicyTypeName                  smithy.SchemaExtensions
+	eCreateLoadBalancerPolicyInput_PolicyAttributes                smithy.SchemaExtensions
+	eCreateLoadBalancerPolicyOutput                                smithy.SchemaExtensions
+	eDeleteAccessPointInput                                        smithy.SchemaExtensions
+	eDeleteAccessPointInput_LoadBalancerName                       smithy.SchemaExtensions
+	eDeleteLoadBalancerListenerInput                               smithy.SchemaExtensions
+	eDeleteLoadBalancerListenerInput_LoadBalancerName              smithy.SchemaExtensions
+	eDeleteLoadBalancerListenerInput_LoadBalancerPorts             smithy.SchemaExtensions
+	eDeleteLoadBalancerListenerOutput                              smithy.SchemaExtensions
+	eDeleteAccessPointOutput                                       smithy.SchemaExtensions
+	eDeleteLoadBalancerPolicyInput                                 smithy.SchemaExtensions
+	eDeleteLoadBalancerPolicyInput_LoadBalancerName                smithy.SchemaExtensions
+	eDeleteLoadBalancerPolicyInput_PolicyName                      smithy.SchemaExtensions
+	eDeleteLoadBalancerPolicyOutput                                smithy.SchemaExtensions
+	eDeregisterEndPointsInput                                      smithy.SchemaExtensions
+	eDeregisterEndPointsInput_LoadBalancerName                     smithy.SchemaExtensions
+	eDeregisterEndPointsInput_Instances                            smithy.SchemaExtensions
+	eDeregisterEndPointsOutput                                     smithy.SchemaExtensions
+	eDeregisterEndPointsOutput_Instances                           smithy.SchemaExtensions
+	eDescribeAccountLimitsInput                                    smithy.SchemaExtensions
+	eDescribeAccountLimitsInput_Marker                             smithy.SchemaExtensions
+	eDescribeAccountLimitsInput_PageSize                           smithy.SchemaExtensions
+	eDescribeAccountLimitsOutput                                   smithy.SchemaExtensions
+	eDescribeAccountLimitsOutput_Limits                            smithy.SchemaExtensions
+	eDescribeAccountLimitsOutput_NextMarker                        smithy.SchemaExtensions
+	eDescribeEndPointStateInput                                    smithy.SchemaExtensions
+	eDescribeEndPointStateInput_LoadBalancerName                   smithy.SchemaExtensions
+	eDescribeEndPointStateInput_Instances                          smithy.SchemaExtensions
+	eDescribeEndPointStateOutput                                   smithy.SchemaExtensions
+	eDescribeEndPointStateOutput_InstanceStates                    smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesInput                           smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesInput_LoadBalancerName          smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesOutput                          smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesOutput_LoadBalancerAttributes   smithy.SchemaExtensions
+	eDescribeLoadBalancerPoliciesInput                             smithy.SchemaExtensions
+	eDescribeLoadBalancerPoliciesInput_LoadBalancerName            smithy.SchemaExtensions
+	eDescribeLoadBalancerPoliciesInput_PolicyNames                 smithy.SchemaExtensions
+	eDescribeLoadBalancerPoliciesOutput                            smithy.SchemaExtensions
+	eDescribeLoadBalancerPoliciesOutput_PolicyDescriptions         smithy.SchemaExtensions
+	eDescribeLoadBalancerPolicyTypesInput                          smithy.SchemaExtensions
+	eDescribeLoadBalancerPolicyTypesInput_PolicyTypeNames          smithy.SchemaExtensions
+	eDescribeLoadBalancerPolicyTypesOutput                         smithy.SchemaExtensions
+	eDescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions  smithy.SchemaExtensions
+	eDescribeAccessPointsInput                                     smithy.SchemaExtensions
+	eDescribeAccessPointsInput_LoadBalancerNames                   smithy.SchemaExtensions
+	eDescribeAccessPointsInput_Marker                              smithy.SchemaExtensions
+	eDescribeAccessPointsInput_PageSize                            smithy.SchemaExtensions
+	eDescribeAccessPointsOutput                                    smithy.SchemaExtensions
+	eDescribeAccessPointsOutput_LoadBalancerDescriptions           smithy.SchemaExtensions
+	eDescribeAccessPointsOutput_NextMarker                         smithy.SchemaExtensions
+	eDescribeTagsInput                                             smithy.SchemaExtensions
+	eDescribeTagsInput_LoadBalancerNames                           smithy.SchemaExtensions
+	eDescribeTagsOutput                                            smithy.SchemaExtensions
+	eDescribeTagsOutput_TagDescriptions                            smithy.SchemaExtensions
+	eDetachLoadBalancerFromSubnetsInput                            smithy.SchemaExtensions
+	eDetachLoadBalancerFromSubnetsInput_LoadBalancerName           smithy.SchemaExtensions
+	eDetachLoadBalancerFromSubnetsInput_Subnets                    smithy.SchemaExtensions
+	eDetachLoadBalancerFromSubnetsOutput                           smithy.SchemaExtensions
+	eDetachLoadBalancerFromSubnetsOutput_Subnets                   smithy.SchemaExtensions
+	eRemoveAvailabilityZonesInput                                  smithy.SchemaExtensions
+	eRemoveAvailabilityZonesInput_LoadBalancerName                 smithy.SchemaExtensions
+	eRemoveAvailabilityZonesInput_AvailabilityZones                smithy.SchemaExtensions
+	eRemoveAvailabilityZonesOutput                                 smithy.SchemaExtensions
+	eRemoveAvailabilityZonesOutput_AvailabilityZones               smithy.SchemaExtensions
+	eAddAvailabilityZonesInput                                     smithy.SchemaExtensions
+	eAddAvailabilityZonesInput_LoadBalancerName                    smithy.SchemaExtensions
+	eAddAvailabilityZonesInput_AvailabilityZones                   smithy.SchemaExtensions
+	eAddAvailabilityZonesOutput                                    smithy.SchemaExtensions
+	eAddAvailabilityZonesOutput_AvailabilityZones                  smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesInput                             smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesInput_LoadBalancerName            smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesInput_LoadBalancerAttributes      smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesOutput                            smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesOutput_LoadBalancerName           smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesOutput_LoadBalancerAttributes     smithy.SchemaExtensions
+	eRegisterEndPointsInput                                        smithy.SchemaExtensions
+	eRegisterEndPointsInput_LoadBalancerName                       smithy.SchemaExtensions
+	eRegisterEndPointsInput_Instances                              smithy.SchemaExtensions
+	eRegisterEndPointsOutput                                       smithy.SchemaExtensions
+	eRegisterEndPointsOutput_Instances                             smithy.SchemaExtensions
+	eRemoveTagsInput                                               smithy.SchemaExtensions
+	eRemoveTagsInput_LoadBalancerNames                             smithy.SchemaExtensions
+	eRemoveTagsInput_Tags                                          smithy.SchemaExtensions
+	eRemoveTagsOutput                                              smithy.SchemaExtensions
+	eSetLoadBalancerListenerSSLCertificateInput                    smithy.SchemaExtensions
+	eSetLoadBalancerListenerSSLCertificateInput_LoadBalancerName   smithy.SchemaExtensions
+	eSetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort   smithy.SchemaExtensions
+	eSetLoadBalancerListenerSSLCertificateInput_SSLCertificateId   smithy.SchemaExtensions
+	eSetLoadBalancerListenerSSLCertificateOutput                   smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesForBackendServerInput                  smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesForBackendServerInput_InstancePort     smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesForBackendServerInput_PolicyNames      smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesForBackendServerOutput                 smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesOfListenerInput                        smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesOfListenerInput_LoadBalancerName       smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort       smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesOfListenerInput_PolicyNames            smithy.SchemaExtensions
+	eSetLoadBalancerPoliciesOfListenerOutput                       smithy.SchemaExtensions
+)
+
+var (
+	iAddTags                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AddTags"}
+	iApplySecurityGroupsToLoadBalancer             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ApplySecurityGroupsToLoadBalancer"}
+	iAttachLoadBalancerToSubnets                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AttachLoadBalancerToSubnets"}
+	iConfigureHealthCheck                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ConfigureHealthCheck"}
+	iCreateAppCookieStickinessPolicy               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateAppCookieStickinessPolicy"}
+	iCreateLBCookieStickinessPolicy                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLBCookieStickinessPolicy"}
+	iCreateLoadBalancer                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLoadBalancer"}
+	iCreateLoadBalancerListeners                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLoadBalancerListeners"}
+	iCreateLoadBalancerPolicy                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLoadBalancerPolicy"}
+	iDeleteLoadBalancer                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteLoadBalancer"}
+	iDeleteLoadBalancerListeners                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteLoadBalancerListeners"}
+	iDeleteLoadBalancerPolicy                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteLoadBalancerPolicy"}
+	iDeregisterInstancesFromLoadBalancer           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeregisterInstancesFromLoadBalancer"}
+	iDescribeAccountLimits                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeAccountLimits"}
+	iDescribeInstanceHealth                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeInstanceHealth"}
+	iDescribeLoadBalancerAttributes                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerAttributes"}
+	iDescribeLoadBalancerPolicies                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerPolicies"}
+	iDescribeLoadBalancerPolicyTypes               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerPolicyTypes"}
+	iDescribeLoadBalancers                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancers"}
+	iDescribeTags                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeTags"}
+	iDetachLoadBalancerFromSubnets                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DetachLoadBalancerFromSubnets"}
+	iDisableAvailabilityZonesForLoadBalancer       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DisableAvailabilityZonesForLoadBalancer"}
+	iEnableAvailabilityZonesForLoadBalancer        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "EnableAvailabilityZonesForLoadBalancer"}
+	iModifyLoadBalancerAttributes                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ModifyLoadBalancerAttributes"}
+	iRegisterInstancesWithLoadBalancer             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RegisterInstancesWithLoadBalancer"}
+	iRemoveTags                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RemoveTags"}
+	iSetLoadBalancerListenerSSLCertificate         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerListenerSSLCertificate"}
+	iSetLoadBalancerPoliciesForBackendServer       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerPoliciesForBackendServer"}
+	iSetLoadBalancerPoliciesOfListener             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerPoliciesOfListener"}
+	i_ElasticLoadBalancing_v7                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ElasticLoadBalancing_v7"}
+	iAccessLog                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AccessLog"}
+	i_AccessLogEnabled                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AccessLogEnabled"}
+	i_AccessLogInterval                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AccessLogInterval"}
+	i_AccessLogPrefix                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AccessLogPrefix"}
+	i_AccessPointName                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AccessPointName"}
+	iAccessPointNotFoundException                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AccessPointNotFoundException"}
+	i_AccessPointPort                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AccessPointPort"}
+	iAdditionalAttribute                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AdditionalAttribute"}
+	i_AdditionalAttributeKey                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AdditionalAttributeKey"}
+	i_AdditionalAttributes                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AdditionalAttributes"}
+	i_AdditionalAttributeValue                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AdditionalAttributeValue"}
+	i_AppCookieStickinessPolicies                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AppCookieStickinessPolicies"}
+	iAppCookieStickinessPolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AppCookieStickinessPolicy"}
+	i_AttributeName                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AttributeName"}
+	i_AttributeType                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AttributeType"}
+	i_AttributeValue                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AttributeValue"}
+	i_AvailabilityZone                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AvailabilityZone"}
+	i_AvailabilityZones                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AvailabilityZones"}
+	iBackendServerDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "BackendServerDescription"}
+	i_BackendServerDescriptions                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "BackendServerDescriptions"}
+	i_Cardinality                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Cardinality"}
+	iCertificateNotFoundException                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CertificateNotFoundException"}
+	iConnectionDraining                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ConnectionDraining"}
+	i_ConnectionDrainingEnabled                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ConnectionDrainingEnabled"}
+	i_ConnectionDrainingTimeout                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ConnectionDrainingTimeout"}
+	iConnectionSettings                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ConnectionSettings"}
+	i_CookieExpirationPeriod                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CookieExpirationPeriod"}
+	i_CookieName                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CookieName"}
+	i_CreatedTime                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreatedTime"}
+	iCrossZoneLoadBalancing                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CrossZoneLoadBalancing"}
+	i_CrossZoneLoadBalancingEnabled                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CrossZoneLoadBalancingEnabled"}
+	i_DefaultValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DefaultValue"}
+	iDependencyThrottleException                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DependencyThrottleException"}
+	i_Description                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Description"}
+	i_DNSName                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DNSName"}
+	iDuplicateAccessPointNameException             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DuplicateAccessPointNameException"}
+	iDuplicateListenerException                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DuplicateListenerException"}
+	iDuplicatePolicyNameException                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DuplicatePolicyNameException"}
+	iDuplicateTagKeysException                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DuplicateTagKeysException"}
+	i_EndPointPort                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "EndPointPort"}
+	i_ErrorDescription                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ErrorDescription"}
+	iHealthCheck                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "HealthCheck"}
+	i_HealthCheckInterval                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "HealthCheckInterval"}
+	i_HealthCheckTarget                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "HealthCheckTarget"}
+	i_HealthCheckTimeout                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "HealthCheckTimeout"}
+	i_HealthyThreshold                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "HealthyThreshold"}
+	i_IdleTimeout                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "IdleTimeout"}
+	iInstance                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Instance"}
+	i_InstanceId                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InstanceId"}
+	i_InstancePort                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InstancePort"}
+	i_Instances                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Instances"}
+	iInstanceState                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InstanceState"}
+	i_InstanceStates                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InstanceStates"}
+	iInvalidConfigurationRequestException          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InvalidConfigurationRequestException"}
+	iInvalidEndPointException                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InvalidEndPointException"}
+	iInvalidSchemeException                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InvalidSchemeException"}
+	iInvalidSecurityGroupException                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InvalidSecurityGroupException"}
+	iInvalidSubnetException                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "InvalidSubnetException"}
+	i_LBCookieStickinessPolicies                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LBCookieStickinessPolicies"}
+	iLBCookieStickinessPolicy                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LBCookieStickinessPolicy"}
+	iLimit                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Limit"}
+	i_Limits                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Limits"}
+	iListener                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Listener"}
+	iListenerDescription                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ListenerDescription"}
+	i_ListenerDescriptions                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ListenerDescriptions"}
+	iListenerNotFoundException                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ListenerNotFoundException"}
+	i_Listeners                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Listeners"}
+	iLoadBalancerAttributeNotFoundException        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LoadBalancerAttributeNotFoundException"}
+	iLoadBalancerAttributes                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LoadBalancerAttributes"}
+	iLoadBalancerDescription                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LoadBalancerDescription"}
+	i_LoadBalancerDescriptions                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LoadBalancerDescriptions"}
+	i_LoadBalancerNames                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LoadBalancerNames"}
+	i_LoadBalancerNamesMax20                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LoadBalancerNamesMax20"}
+	i_LoadBalancerScheme                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "LoadBalancerScheme"}
+	i_Marker                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Marker"}
+	i_Max                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Max"}
+	i_Name                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Name"}
+	iOperationNotPermittedException                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "OperationNotPermittedException"}
+	i_PageSize                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PageSize"}
+	iPolicies                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Policies"}
+	iPolicyAttribute                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyAttribute"}
+	iPolicyAttributeDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyAttributeDescription"}
+	i_PolicyAttributeDescriptions                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyAttributeDescriptions"}
+	i_PolicyAttributes                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyAttributes"}
+	iPolicyAttributeTypeDescription                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyAttributeTypeDescription"}
+	i_PolicyAttributeTypeDescriptions              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyAttributeTypeDescriptions"}
+	iPolicyDescription                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyDescription"}
+	i_PolicyDescriptions                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyDescriptions"}
+	i_PolicyName                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyName"}
+	i_PolicyNames                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyNames"}
+	iPolicyNotFoundException                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyNotFoundException"}
+	iPolicyTypeDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyTypeDescription"}
+	i_PolicyTypeDescriptions                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyTypeDescriptions"}
+	i_PolicyTypeName                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyTypeName"}
+	i_PolicyTypeNames                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyTypeNames"}
+	iPolicyTypeNotFoundException                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "PolicyTypeNotFoundException"}
+	i_Ports                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Ports"}
+	i_Protocol                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Protocol"}
+	i_ReasonCode                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ReasonCode"}
+	i_S3BucketName                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "S3BucketName"}
+	i_SecurityGroupId                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SecurityGroupId"}
+	i_SecurityGroupName                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SecurityGroupName"}
+	i_SecurityGroupOwnerAlias                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SecurityGroupOwnerAlias"}
+	i_SecurityGroups                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SecurityGroups"}
+	iSourceSecurityGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SourceSecurityGroup"}
+	i_SSLCertificateId                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SSLCertificateId"}
+	i_State                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "State"}
+	i_SubnetId                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SubnetId"}
+	iSubnetNotFoundException                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SubnetNotFoundException"}
+	i_Subnets                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Subnets"}
+	iTag                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "Tag"}
+	iTagDescription                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TagDescription"}
+	i_TagDescriptions                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TagDescriptions"}
+	i_TagKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TagKey"}
+	i_TagKeyList                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TagKeyList"}
+	iTagKeyOnly                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TagKeyOnly"}
+	i_TagList                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TagList"}
+	i_TagValue                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TagValue"}
+	iTooManyAccessPointsException                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TooManyAccessPointsException"}
+	iTooManyPoliciesException                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TooManyPoliciesException"}
+	iTooManyTagsException                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "TooManyTagsException"}
+	i_UnhealthyThreshold                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "UnhealthyThreshold"}
+	iUnsupportedProtocolException                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "UnsupportedProtocolException"}
+	i_VPCId                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "VPCId"}
+	iAddTagsInput                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AddTagsInput"}
+	iAddTagsOutput                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AddTagsOutput"}
+	iApplySecurityGroupsToLoadBalancerInput        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ApplySecurityGroupsToLoadBalancerInput"}
+	iApplySecurityGroupsToLoadBalancerOutput       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ApplySecurityGroupsToLoadBalancerOutput"}
+	iAttachLoadBalancerToSubnetsInput              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AttachLoadBalancerToSubnetsInput"}
+	iAttachLoadBalancerToSubnetsOutput             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AttachLoadBalancerToSubnetsOutput"}
+	iConfigureHealthCheckInput                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ConfigureHealthCheckInput"}
+	iConfigureHealthCheckOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ConfigureHealthCheckOutput"}
+	iCreateAppCookieStickinessPolicyInput          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateAppCookieStickinessPolicyInput"}
+	iCreateAppCookieStickinessPolicyOutput         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateAppCookieStickinessPolicyOutput"}
+	iCreateLBCookieStickinessPolicyInput           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLBCookieStickinessPolicyInput"}
+	iCreateLBCookieStickinessPolicyOutput          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLBCookieStickinessPolicyOutput"}
+	iCreateAccessPointInput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateAccessPointInput"}
+	iCreateLoadBalancerListenerInput               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLoadBalancerListenerInput"}
+	iCreateLoadBalancerListenerOutput              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLoadBalancerListenerOutput"}
+	iCreateAccessPointOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateAccessPointOutput"}
+	iCreateLoadBalancerPolicyInput                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLoadBalancerPolicyInput"}
+	iCreateLoadBalancerPolicyOutput                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "CreateLoadBalancerPolicyOutput"}
+	iDeleteAccessPointInput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteAccessPointInput"}
+	iDeleteLoadBalancerListenerInput               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteLoadBalancerListenerInput"}
+	iDeleteLoadBalancerListenerOutput              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteLoadBalancerListenerOutput"}
+	iDeleteAccessPointOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteAccessPointOutput"}
+	iDeleteLoadBalancerPolicyInput                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteLoadBalancerPolicyInput"}
+	iDeleteLoadBalancerPolicyOutput                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeleteLoadBalancerPolicyOutput"}
+	iDeregisterEndPointsInput                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeregisterEndPointsInput"}
+	iDeregisterEndPointsOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DeregisterEndPointsOutput"}
+	iDescribeAccountLimitsInput                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeAccountLimitsInput"}
+	iDescribeAccountLimitsOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeAccountLimitsOutput"}
+	iDescribeEndPointStateInput                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeEndPointStateInput"}
+	iDescribeEndPointStateOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeEndPointStateOutput"}
+	iDescribeLoadBalancerAttributesInput           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerAttributesInput"}
+	iDescribeLoadBalancerAttributesOutput          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerAttributesOutput"}
+	iDescribeLoadBalancerPoliciesInput             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerPoliciesInput"}
+	iDescribeLoadBalancerPoliciesOutput            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerPoliciesOutput"}
+	iDescribeLoadBalancerPolicyTypesInput          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerPolicyTypesInput"}
+	iDescribeLoadBalancerPolicyTypesOutput         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeLoadBalancerPolicyTypesOutput"}
+	iDescribeAccessPointsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeAccessPointsInput"}
+	iDescribeAccessPointsOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeAccessPointsOutput"}
+	iDescribeTagsInput                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeTagsInput"}
+	iDescribeTagsOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DescribeTagsOutput"}
+	iDetachLoadBalancerFromSubnetsInput            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DetachLoadBalancerFromSubnetsInput"}
+	iDetachLoadBalancerFromSubnetsOutput           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "DetachLoadBalancerFromSubnetsOutput"}
+	iRemoveAvailabilityZonesInput                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RemoveAvailabilityZonesInput"}
+	iRemoveAvailabilityZonesOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RemoveAvailabilityZonesOutput"}
+	iAddAvailabilityZonesInput                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AddAvailabilityZonesInput"}
+	iAddAvailabilityZonesOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "AddAvailabilityZonesOutput"}
+	iModifyLoadBalancerAttributesInput             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ModifyLoadBalancerAttributesInput"}
+	iModifyLoadBalancerAttributesOutput            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "ModifyLoadBalancerAttributesOutput"}
+	iRegisterEndPointsInput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RegisterEndPointsInput"}
+	iRegisterEndPointsOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RegisterEndPointsOutput"}
+	iRemoveTagsInput                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RemoveTagsInput"}
+	iRemoveTagsOutput                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "RemoveTagsOutput"}
+	iSetLoadBalancerListenerSSLCertificateInput    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerListenerSSLCertificateInput"}
+	iSetLoadBalancerListenerSSLCertificateOutput   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerListenerSSLCertificateOutput"}
+	iSetLoadBalancerPoliciesForBackendServerInput  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerPoliciesForBackendServerInput"}
+	iSetLoadBalancerPoliciesForBackendServerOutput = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerPoliciesForBackendServerOutput"}
+	iSetLoadBalancerPoliciesOfListenerInput        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerPoliciesOfListenerInput"}
+	iSetLoadBalancerPoliciesOfListenerOutput       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancing", Name: "SetLoadBalancerPoliciesOfListenerOutput"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LoadBalancerNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CertificateNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DependencyThrottle",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateLoadBalancerName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateListener",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicatePolicyName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateTagKeys",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidConfigurationRequest",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidInstance",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidScheme",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSecurityGroup",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ListenerNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LoadBalancerAttributeNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PolicyNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PolicyTypeNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SubnetNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyLoadBalancers",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyPolicies",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyTags",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "UnsupportedProtocol",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAccessLog = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessLog_Enabled, &sAccessLog_S3BucketName, &sAccessLog_EmitInterval, &sAccessLog_S3BucketPrefix}}
+var mAccessPointNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessPointNotFoundException_Message}}
+var mAdditionalAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalAttribute_Key, &sAdditionalAttribute_Value}}
+var m_AdditionalAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalAttributes_member}}
+var m_AppCookieStickinessPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppCookieStickinessPolicies_member}}
+var mAppCookieStickinessPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sAppCookieStickinessPolicy_PolicyName, &sAppCookieStickinessPolicy_CookieName}}
+var m_AvailabilityZones = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailabilityZones_member}}
+var mBackendServerDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendServerDescription_InstancePort, &sBackendServerDescription_PolicyNames}}
+var m_BackendServerDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_BackendServerDescriptions_member}}
+var mCertificateNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateNotFoundException_Message}}
+var mConnectionDraining = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionDraining_Enabled, &sConnectionDraining_Timeout}}
+var mConnectionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionSettings_IdleTimeout}}
+var mCrossZoneLoadBalancing = smithy.SchemaMembers{List: []*smithy.Schema{&sCrossZoneLoadBalancing_Enabled}}
+var mDependencyThrottleException = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyThrottleException_Message}}
+var mDuplicateAccessPointNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateAccessPointNameException_Message}}
+var mDuplicateListenerException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateListenerException_Message}}
+var mDuplicatePolicyNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicatePolicyNameException_Message}}
+var mDuplicateTagKeysException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateTagKeysException_Message}}
+var mHealthCheck = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheck_Target, &sHealthCheck_Interval, &sHealthCheck_Timeout, &sHealthCheck_UnhealthyThreshold, &sHealthCheck_HealthyThreshold}}
+var mInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sInstance_InstanceId}}
+var m_Instances = smithy.SchemaMembers{List: []*smithy.Schema{&s_Instances_member}}
+var mInstanceState = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceState_InstanceId, &sInstanceState_State, &sInstanceState_ReasonCode, &sInstanceState_Description}}
+var m_InstanceStates = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceStates_member}}
+var mInvalidConfigurationRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidConfigurationRequestException_Message}}
+var mInvalidEndPointException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEndPointException_Message}}
+var mInvalidSchemeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSchemeException_Message}}
+var mInvalidSecurityGroupException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSecurityGroupException_Message}}
+var mInvalidSubnetException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSubnetException_Message}}
+var m_LBCookieStickinessPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&s_LBCookieStickinessPolicies_member}}
+var mLBCookieStickinessPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sLBCookieStickinessPolicy_PolicyName, &sLBCookieStickinessPolicy_CookieExpirationPeriod}}
+var mLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sLimit_Name, &sLimit_Max}}
+var m_Limits = smithy.SchemaMembers{List: []*smithy.Schema{&s_Limits_member}}
+var mListener = smithy.SchemaMembers{List: []*smithy.Schema{&sListener_Protocol, &sListener_LoadBalancerPort, &sListener_InstanceProtocol, &sListener_InstancePort, &sListener_SSLCertificateId}}
+var mListenerDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerDescription_Listener, &sListenerDescription_PolicyNames}}
+var m_ListenerDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListenerDescriptions_member}}
+var mListenerNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerNotFoundException_Message}}
+var m_Listeners = smithy.SchemaMembers{List: []*smithy.Schema{&s_Listeners_member}}
+var mLoadBalancerAttributeNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerAttributeNotFoundException_Message}}
+var mLoadBalancerAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerAttributes_CrossZoneLoadBalancing, &sLoadBalancerAttributes_AccessLog, &sLoadBalancerAttributes_ConnectionDraining, &sLoadBalancerAttributes_ConnectionSettings, &sLoadBalancerAttributes_AdditionalAttributes}}
+var mLoadBalancerDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerDescription_LoadBalancerName, &sLoadBalancerDescription_DNSName, &sLoadBalancerDescription_CanonicalHostedZoneName, &sLoadBalancerDescription_CanonicalHostedZoneNameID, &sLoadBalancerDescription_ListenerDescriptions, &sLoadBalancerDescription_Policies, &sLoadBalancerDescription_BackendServerDescriptions, &sLoadBalancerDescription_AvailabilityZones, &sLoadBalancerDescription_Subnets, &sLoadBalancerDescription_VPCId, &sLoadBalancerDescription_Instances, &sLoadBalancerDescription_HealthCheck, &sLoadBalancerDescription_SourceSecurityGroup, &sLoadBalancerDescription_SecurityGroups, &sLoadBalancerDescription_CreatedTime, &sLoadBalancerDescription_Scheme}, Hash: &hLoadBalancerDescription}
+var m_LoadBalancerDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerDescriptions_member}}
+var m_LoadBalancerNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerNames_member}}
+var m_LoadBalancerNamesMax20 = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerNamesMax20_member}}
+var mOperationNotPermittedException = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationNotPermittedException_Message}}
+var mPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicies_AppCookieStickinessPolicies, &sPolicies_LBCookieStickinessPolicies, &sPolicies_OtherPolicies}}
+var mPolicyAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyAttribute_AttributeName, &sPolicyAttribute_AttributeValue}}
+var mPolicyAttributeDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyAttributeDescription_AttributeName, &sPolicyAttributeDescription_AttributeValue}}
+var m_PolicyAttributeDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyAttributeDescriptions_member}}
+var m_PolicyAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyAttributes_member}}
+var mPolicyAttributeTypeDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyAttributeTypeDescription_AttributeName, &sPolicyAttributeTypeDescription_AttributeType, &sPolicyAttributeTypeDescription_Description, &sPolicyAttributeTypeDescription_DefaultValue, &sPolicyAttributeTypeDescription_Cardinality}}
+var m_PolicyAttributeTypeDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyAttributeTypeDescriptions_member}}
+var mPolicyDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyDescription_PolicyName, &sPolicyDescription_PolicyTypeName, &sPolicyDescription_PolicyAttributeDescriptions}}
+var m_PolicyDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyDescriptions_member}}
+var m_PolicyNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyNames_member}}
+var mPolicyNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyNotFoundException_Message}}
+var mPolicyTypeDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyTypeDescription_PolicyTypeName, &sPolicyTypeDescription_Description, &sPolicyTypeDescription_PolicyAttributeTypeDescriptions}}
+var m_PolicyTypeDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyTypeDescriptions_member}}
+var m_PolicyTypeNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyTypeNames_member}}
+var mPolicyTypeNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyTypeNotFoundException_Message}}
+var m_Ports = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ports_member}}
+var m_SecurityGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroups_member}}
+var mSourceSecurityGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceSecurityGroup_OwnerAlias, &sSourceSecurityGroup_GroupName}}
+var mSubnetNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sSubnetNotFoundException_Message}}
+var m_Subnets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Subnets_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var mTagDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sTagDescription_LoadBalancerName, &sTagDescription_Tags}}
+var m_TagDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagDescriptions_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var mTagKeyOnly = smithy.SchemaMembers{List: []*smithy.Schema{&sTagKeyOnly_Key}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTooManyAccessPointsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyAccessPointsException_Message}}
+var mTooManyPoliciesException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyPoliciesException_Message}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message}}
+var mUnsupportedProtocolException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedProtocolException_Message}}
+var mAddTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsInput_LoadBalancerNames, &sAddTagsInput_Tags}}
+var mApplySecurityGroupsToLoadBalancerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sApplySecurityGroupsToLoadBalancerInput_LoadBalancerName, &sApplySecurityGroupsToLoadBalancerInput_SecurityGroups}}
+var mApplySecurityGroupsToLoadBalancerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sApplySecurityGroupsToLoadBalancerOutput_SecurityGroups}}
+var mAttachLoadBalancerToSubnetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachLoadBalancerToSubnetsInput_LoadBalancerName, &sAttachLoadBalancerToSubnetsInput_Subnets}}
+var mAttachLoadBalancerToSubnetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachLoadBalancerToSubnetsOutput_Subnets}}
+var mConfigureHealthCheckInput = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigureHealthCheckInput_LoadBalancerName, &sConfigureHealthCheckInput_HealthCheck}}
+var mConfigureHealthCheckOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigureHealthCheckOutput_HealthCheck}}
+var mCreateAppCookieStickinessPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppCookieStickinessPolicyInput_LoadBalancerName, &sCreateAppCookieStickinessPolicyInput_PolicyName, &sCreateAppCookieStickinessPolicyInput_CookieName}}
+var mCreateLBCookieStickinessPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLBCookieStickinessPolicyInput_LoadBalancerName, &sCreateLBCookieStickinessPolicyInput_PolicyName, &sCreateLBCookieStickinessPolicyInput_CookieExpirationPeriod}}
+var mCreateAccessPointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessPointInput_LoadBalancerName, &sCreateAccessPointInput_Listeners, &sCreateAccessPointInput_AvailabilityZones, &sCreateAccessPointInput_Subnets, &sCreateAccessPointInput_SecurityGroups, &sCreateAccessPointInput_Scheme, &sCreateAccessPointInput_Tags}}
+var mCreateLoadBalancerListenerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLoadBalancerListenerInput_LoadBalancerName, &sCreateLoadBalancerListenerInput_Listeners}}
+var mCreateAccessPointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessPointOutput_DNSName}}
+var mCreateLoadBalancerPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLoadBalancerPolicyInput_LoadBalancerName, &sCreateLoadBalancerPolicyInput_PolicyName, &sCreateLoadBalancerPolicyInput_PolicyTypeName, &sCreateLoadBalancerPolicyInput_PolicyAttributes}}
+var mDeleteAccessPointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessPointInput_LoadBalancerName}}
+var mDeleteLoadBalancerListenerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLoadBalancerListenerInput_LoadBalancerName, &sDeleteLoadBalancerListenerInput_LoadBalancerPorts}}
+var mDeleteLoadBalancerPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLoadBalancerPolicyInput_LoadBalancerName, &sDeleteLoadBalancerPolicyInput_PolicyName}}
+var mDeregisterEndPointsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterEndPointsInput_LoadBalancerName, &sDeregisterEndPointsInput_Instances}}
+var mDeregisterEndPointsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterEndPointsOutput_Instances}}
+var mDescribeAccountLimitsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccountLimitsInput_Marker, &sDescribeAccountLimitsInput_PageSize}}
+var mDescribeAccountLimitsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccountLimitsOutput_Limits, &sDescribeAccountLimitsOutput_NextMarker}}
+var mDescribeEndPointStateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEndPointStateInput_LoadBalancerName, &sDescribeEndPointStateInput_Instances}}
+var mDescribeEndPointStateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEndPointStateOutput_InstanceStates}}
+var mDescribeLoadBalancerAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerAttributesInput_LoadBalancerName}}
+var mDescribeLoadBalancerAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerAttributesOutput_LoadBalancerAttributes}}
+var mDescribeLoadBalancerPoliciesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerPoliciesInput_LoadBalancerName, &sDescribeLoadBalancerPoliciesInput_PolicyNames}}
+var mDescribeLoadBalancerPoliciesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerPoliciesOutput_PolicyDescriptions}}
+var mDescribeLoadBalancerPolicyTypesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerPolicyTypesInput_PolicyTypeNames}}
+var mDescribeLoadBalancerPolicyTypesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions}}
+var mDescribeAccessPointsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccessPointsInput_LoadBalancerNames, &sDescribeAccessPointsInput_Marker, &sDescribeAccessPointsInput_PageSize}}
+var mDescribeAccessPointsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccessPointsOutput_LoadBalancerDescriptions, &sDescribeAccessPointsOutput_NextMarker}}
+var mDescribeTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsInput_LoadBalancerNames}}
+var mDescribeTagsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsOutput_TagDescriptions}}
+var mDetachLoadBalancerFromSubnetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachLoadBalancerFromSubnetsInput_LoadBalancerName, &sDetachLoadBalancerFromSubnetsInput_Subnets}}
+var mDetachLoadBalancerFromSubnetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachLoadBalancerFromSubnetsOutput_Subnets}}
+var mRemoveAvailabilityZonesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveAvailabilityZonesInput_LoadBalancerName, &sRemoveAvailabilityZonesInput_AvailabilityZones}}
+var mRemoveAvailabilityZonesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveAvailabilityZonesOutput_AvailabilityZones}}
+var mAddAvailabilityZonesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddAvailabilityZonesInput_LoadBalancerName, &sAddAvailabilityZonesInput_AvailabilityZones}}
+var mAddAvailabilityZonesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddAvailabilityZonesOutput_AvailabilityZones}}
+var mModifyLoadBalancerAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyLoadBalancerAttributesInput_LoadBalancerName, &sModifyLoadBalancerAttributesInput_LoadBalancerAttributes}}
+var mModifyLoadBalancerAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyLoadBalancerAttributesOutput_LoadBalancerName, &sModifyLoadBalancerAttributesOutput_LoadBalancerAttributes}}
+var mRegisterEndPointsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterEndPointsInput_LoadBalancerName, &sRegisterEndPointsInput_Instances}}
+var mRegisterEndPointsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterEndPointsOutput_Instances}}
+var mRemoveTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsInput_LoadBalancerNames, &sRemoveTagsInput_Tags}}
+var mSetLoadBalancerListenerSSLCertificateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetLoadBalancerListenerSSLCertificateInput_LoadBalancerName, &sSetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort, &sSetLoadBalancerListenerSSLCertificateInput_SSLCertificateId}}
+var mSetLoadBalancerPoliciesForBackendServerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName, &sSetLoadBalancerPoliciesForBackendServerInput_InstancePort, &sSetLoadBalancerPoliciesForBackendServerInput_PolicyNames}}
+var mSetLoadBalancerPoliciesOfListenerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetLoadBalancerPoliciesOfListenerInput_LoadBalancerName, &sSetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort, &sSetLoadBalancerPoliciesOfListenerInput_PolicyNames}}
+
+var hLoadBalancerDescription = smithy.MemberHash{Seed: 59, Slots: []uint16{
+	5, 0, 0, 6, 0, 0, 0, 9, 0, 15, 2, 12, 14, 0, 4, 0, 0, 3, 0, 0, 13, 0, 0, 8,
+	0, 16, 10, 11, 0, 7, 0, 1,
+}}
+
+var sAddTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTags, Type: smithy.ShapeTypeOperation, Ext: &eAddTags})
+var sApplySecurityGroupsToLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplySecurityGroupsToLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eApplySecurityGroupsToLoadBalancer})
+var sAttachLoadBalancerToSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachLoadBalancerToSubnets, Type: smithy.ShapeTypeOperation, Ext: &eAttachLoadBalancerToSubnets})
+var sConfigureHealthCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureHealthCheck, Type: smithy.ShapeTypeOperation, Ext: &eConfigureHealthCheck})
+var sCreateAppCookieStickinessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppCookieStickinessPolicy, Type: smithy.ShapeTypeOperation, Ext: &eCreateAppCookieStickinessPolicy})
+var sCreateLBCookieStickinessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLBCookieStickinessPolicy, Type: smithy.ShapeTypeOperation, Ext: &eCreateLBCookieStickinessPolicy})
+var sCreateLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eCreateLoadBalancer})
+var sCreateLoadBalancerListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerListeners, Type: smithy.ShapeTypeOperation, Ext: &eCreateLoadBalancerListeners})
+var sCreateLoadBalancerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerPolicy, Type: smithy.ShapeTypeOperation, Ext: &eCreateLoadBalancerPolicy})
+var sDeleteLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLoadBalancer})
+var sDeleteLoadBalancerListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerListeners, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLoadBalancerListeners})
+var sDeleteLoadBalancerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLoadBalancerPolicy})
+var sDeregisterInstancesFromLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterInstancesFromLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterInstancesFromLoadBalancer})
+var sDescribeAccountLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountLimits, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAccountLimits})
+var sDescribeInstanceHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInstanceHealth, Type: smithy.ShapeTypeOperation, Ext: &eDescribeInstanceHealth})
+var sDescribeLoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerAttributes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoadBalancerAttributes})
+var sDescribeLoadBalancerPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerPolicies, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoadBalancerPolicies})
+var sDescribeLoadBalancerPolicyTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerPolicyTypes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoadBalancerPolicyTypes})
+var sDescribeLoadBalancers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancers, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoadBalancers})
+var sDescribeTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTags, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTags})
+var sDetachLoadBalancerFromSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachLoadBalancerFromSubnets, Type: smithy.ShapeTypeOperation, Ext: &eDetachLoadBalancerFromSubnets})
+var sDisableAvailabilityZonesForLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableAvailabilityZonesForLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eDisableAvailabilityZonesForLoadBalancer})
+var sEnableAvailabilityZonesForLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableAvailabilityZonesForLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eEnableAvailabilityZonesForLoadBalancer})
+var sModifyLoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLoadBalancerAttributes, Type: smithy.ShapeTypeOperation, Ext: &eModifyLoadBalancerAttributes})
+var sRegisterInstancesWithLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterInstancesWithLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eRegisterInstancesWithLoadBalancer})
+var sRemoveTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTags, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTags})
+var sSetLoadBalancerListenerSSLCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerListenerSSLCertificate, Type: smithy.ShapeTypeOperation, Ext: &eSetLoadBalancerListenerSSLCertificate})
+var sSetLoadBalancerPoliciesForBackendServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerPoliciesForBackendServer, Type: smithy.ShapeTypeOperation, Ext: &eSetLoadBalancerPoliciesForBackendServer})
+var sSetLoadBalancerPoliciesOfListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerPoliciesOfListener, Type: smithy.ShapeTypeOperation, Ext: &eSetLoadBalancerPoliciesOfListener})
+var s_ElasticLoadBalancing_v7 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticLoadBalancing_v7, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_ElasticLoadBalancing_v7})
+var sAccessLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessLog, Members: &mAccessLog, Type: smithy.ShapeTypeStructure, Ext: &eAccessLog})
+var sAccessLog_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_AccessLogEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eAccessLog_Enabled})
+var sAccessLog_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eAccessLog_S3BucketName})
+var sAccessLog_EmitInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmitInterval", ID: &i_AccessLogInterval, Type: smithy.ShapeTypeInteger, Ext: &eAccessLog_EmitInterval})
+var sAccessLog_S3BucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketPrefix", ID: &i_AccessLogPrefix, Type: smithy.ShapeTypeString, Ext: &eAccessLog_S3BucketPrefix})
+var s_AccessLogEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessLogEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_AccessLogEnabled})
+var s_AccessLogInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessLogInterval, Type: smithy.ShapeTypeInteger, Ext: &e_AccessLogInterval})
+var s_AccessLogPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessLogPrefix, Type: smithy.ShapeTypeString, Ext: &e_AccessLogPrefix})
+var s_AccessPointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &e_AccessPointName})
+var sAccessPointNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPointNotFoundException, Members: &mAccessPointNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointNotFoundException})
+var sAccessPointNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eAccessPointNotFoundException_Message})
+var s_AccessPointPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPointPort, Type: smithy.ShapeTypeInteger, Ext: &e_AccessPointPort})
+var sAdditionalAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalAttribute, Members: &mAdditionalAttribute, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalAttribute})
+var sAdditionalAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_AdditionalAttributeKey, Type: smithy.ShapeTypeString, Ext: &eAdditionalAttribute_Key})
+var sAdditionalAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_AdditionalAttributeValue, Type: smithy.ShapeTypeString, Ext: &eAdditionalAttribute_Value})
+var s_AdditionalAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_AdditionalAttributeKey})
+var s_AdditionalAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalAttributes, Members: &m_AdditionalAttributes, Type: smithy.ShapeTypeList, Ext: &e_AdditionalAttributes})
+var s_AdditionalAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdditionalAttribute, Members: &mAdditionalAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_AdditionalAttributes_member})
+var s_AdditionalAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AdditionalAttributeValue})
+var s_AppCookieStickinessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppCookieStickinessPolicies, Members: &m_AppCookieStickinessPolicies, Type: smithy.ShapeTypeList, Ext: &e_AppCookieStickinessPolicies})
+var s_AppCookieStickinessPolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppCookieStickinessPolicy, Members: &mAppCookieStickinessPolicy, Type: smithy.ShapeTypeStructure, Ext: &e_AppCookieStickinessPolicies_member})
+var sAppCookieStickinessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppCookieStickinessPolicy, Members: &mAppCookieStickinessPolicy, Type: smithy.ShapeTypeStructure, Ext: &eAppCookieStickinessPolicy})
+var sAppCookieStickinessPolicy_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eAppCookieStickinessPolicy_PolicyName})
+var sAppCookieStickinessPolicy_CookieName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CookieName", ID: &i_CookieName, Type: smithy.ShapeTypeString, Ext: &eAppCookieStickinessPolicy_CookieName})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeName})
+var s_AttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeType, Type: smithy.ShapeTypeString, Ext: &e_AttributeType})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeValue})
+var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZone})
+var s_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZones})
+var s_AvailabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZones_member})
+var sBackendServerDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendServerDescription, Members: &mBackendServerDescription, Type: smithy.ShapeTypeStructure, Ext: &eBackendServerDescription})
+var sBackendServerDescription_InstancePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstancePort", ID: &i_InstancePort, Type: smithy.ShapeTypeInteger, Ext: &eBackendServerDescription_InstancePort})
+var sBackendServerDescription_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_PolicyNames, Members: &m_PolicyNames, Type: smithy.ShapeTypeList, Ext: &eBackendServerDescription_PolicyNames})
+var s_BackendServerDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackendServerDescriptions, Members: &m_BackendServerDescriptions, Type: smithy.ShapeTypeList, Ext: &e_BackendServerDescriptions})
+var s_BackendServerDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBackendServerDescription, Members: &mBackendServerDescription, Type: smithy.ShapeTypeStructure, Ext: &e_BackendServerDescriptions_member})
+var s_Cardinality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cardinality, Type: smithy.ShapeTypeString, Ext: &e_Cardinality})
+var sCertificateNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateNotFoundException, Members: &mCertificateNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eCertificateNotFoundException})
+var sCertificateNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eCertificateNotFoundException_Message})
+var sConnectionDraining = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionDraining, Members: &mConnectionDraining, Type: smithy.ShapeTypeStructure, Ext: &eConnectionDraining})
+var sConnectionDraining_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_ConnectionDrainingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eConnectionDraining_Enabled})
+var sConnectionDraining_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_ConnectionDrainingTimeout, Type: smithy.ShapeTypeInteger, Ext: &eConnectionDraining_Timeout})
+var s_ConnectionDrainingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionDrainingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_ConnectionDrainingEnabled})
+var s_ConnectionDrainingTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionDrainingTimeout, Type: smithy.ShapeTypeInteger, Ext: &e_ConnectionDrainingTimeout})
+var sConnectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionSettings, Members: &mConnectionSettings, Type: smithy.ShapeTypeStructure, Ext: &eConnectionSettings})
+var sConnectionSettings_IdleTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleTimeout", ID: &i_IdleTimeout, Type: smithy.ShapeTypeInteger, Ext: &eConnectionSettings_IdleTimeout})
+var s_CookieExpirationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CookieExpirationPeriod, Type: smithy.ShapeTypeLong, Ext: &e_CookieExpirationPeriod})
+var s_CookieName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CookieName, Type: smithy.ShapeTypeString, Ext: &e_CookieName})
+var s_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreatedTime})
+var sCrossZoneLoadBalancing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossZoneLoadBalancing, Members: &mCrossZoneLoadBalancing, Type: smithy.ShapeTypeStructure, Ext: &eCrossZoneLoadBalancing})
+var sCrossZoneLoadBalancing_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_CrossZoneLoadBalancingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eCrossZoneLoadBalancing_Enabled})
+var s_CrossZoneLoadBalancingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossZoneLoadBalancingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_CrossZoneLoadBalancingEnabled})
+var s_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultValue, Type: smithy.ShapeTypeString, Ext: &e_DefaultValue})
+var sDependencyThrottleException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyThrottleException, Members: &mDependencyThrottleException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eDependencyThrottleException})
+var sDependencyThrottleException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDependencyThrottleException_Message})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSName, Type: smithy.ShapeTypeString, Ext: &e_DNSName})
+var sDuplicateAccessPointNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateAccessPointNameException, Members: &mDuplicateAccessPointNameException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateAccessPointNameException})
+var sDuplicateAccessPointNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateAccessPointNameException_Message})
+var sDuplicateListenerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateListenerException, Members: &mDuplicateListenerException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateListenerException})
+var sDuplicateListenerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateListenerException_Message})
+var sDuplicatePolicyNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicatePolicyNameException, Members: &mDuplicatePolicyNameException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eDuplicatePolicyNameException})
+var sDuplicatePolicyNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicatePolicyNameException_Message})
+var sDuplicateTagKeysException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateTagKeysException, Members: &mDuplicateTagKeysException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateTagKeysException})
+var sDuplicateTagKeysException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateTagKeysException_Message})
+var s_EndPointPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndPointPort, Type: smithy.ShapeTypeInteger, Ext: &e_EndPointPort})
+var s_ErrorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &e_ErrorDescription})
+var sHealthCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheck, Members: &mHealthCheck, Type: smithy.ShapeTypeStructure, Ext: &eHealthCheck})
+var sHealthCheck_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_HealthCheckTarget, Type: smithy.ShapeTypeString, Ext: &eHealthCheck_Target})
+var sHealthCheck_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_HealthCheckInterval, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheck_Interval})
+var sHealthCheck_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_HealthCheckTimeout, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheck_Timeout})
+var sHealthCheck_UnhealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnhealthyThreshold", ID: &i_UnhealthyThreshold, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheck_UnhealthyThreshold})
+var sHealthCheck_HealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthyThreshold", ID: &i_HealthyThreshold, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheck_HealthyThreshold})
+var s_HealthCheckInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckInterval, Type: smithy.ShapeTypeInteger, Ext: &e_HealthCheckInterval})
+var s_HealthCheckTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckTarget, Type: smithy.ShapeTypeString, Ext: &e_HealthCheckTarget})
+var s_HealthCheckTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckTimeout, Type: smithy.ShapeTypeInteger, Ext: &e_HealthCheckTimeout})
+var s_HealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthyThreshold, Type: smithy.ShapeTypeInteger, Ext: &e_HealthyThreshold})
+var s_IdleTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdleTimeout, Type: smithy.ShapeTypeInteger, Ext: &e_IdleTimeout})
+var sInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &eInstance})
+var sInstance_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eInstance_InstanceId})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var s_InstancePort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstancePort, Type: smithy.ShapeTypeInteger, Ext: &e_InstancePort})
+var s_Instances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Instances, Members: &m_Instances, Type: smithy.ShapeTypeList, Ext: &e_Instances})
+var s_Instances_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &e_Instances_member})
+var sInstanceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceState, Members: &mInstanceState, Type: smithy.ShapeTypeStructure, Ext: &eInstanceState})
+var sInstanceState_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eInstanceState_InstanceId})
+var sInstanceState_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_State, Type: smithy.ShapeTypeString, Ext: &eInstanceState_State})
+var sInstanceState_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &i_ReasonCode, Type: smithy.ShapeTypeString, Ext: &eInstanceState_ReasonCode})
+var sInstanceState_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eInstanceState_Description})
+var s_InstanceStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceStates, Members: &m_InstanceStates, Type: smithy.ShapeTypeList, Ext: &e_InstanceStates})
+var s_InstanceStates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstanceState, Members: &mInstanceState, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceStates_member})
+var sInvalidConfigurationRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConfigurationRequestException, Members: &mInvalidConfigurationRequestException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInvalidConfigurationRequestException})
+var sInvalidConfigurationRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationRequestException_Message})
+var sInvalidEndPointException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEndPointException, Members: &mInvalidEndPointException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eInvalidEndPointException})
+var sInvalidEndPointException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidEndPointException_Message})
+var sInvalidSchemeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSchemeException, Members: &mInvalidSchemeException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSchemeException})
+var sInvalidSchemeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidSchemeException_Message})
+var sInvalidSecurityGroupException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSecurityGroupException, Members: &mInvalidSecurityGroupException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSecurityGroupException})
+var sInvalidSecurityGroupException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidSecurityGroupException_Message})
+var sInvalidSubnetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSubnetException, Members: &mInvalidSubnetException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSubnetException})
+var sInvalidSubnetException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidSubnetException_Message})
+var s_LBCookieStickinessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LBCookieStickinessPolicies, Members: &m_LBCookieStickinessPolicies, Type: smithy.ShapeTypeList, Ext: &e_LBCookieStickinessPolicies})
+var s_LBCookieStickinessPolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLBCookieStickinessPolicy, Members: &mLBCookieStickinessPolicy, Type: smithy.ShapeTypeStructure, Ext: &e_LBCookieStickinessPolicies_member})
+var sLBCookieStickinessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLBCookieStickinessPolicy, Members: &mLBCookieStickinessPolicy, Type: smithy.ShapeTypeStructure, Ext: &eLBCookieStickinessPolicy})
+var sLBCookieStickinessPolicy_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eLBCookieStickinessPolicy_PolicyName})
+var sLBCookieStickinessPolicy_CookieExpirationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CookieExpirationPeriod", ID: &i_CookieExpirationPeriod, Type: smithy.ShapeTypeLong, Ext: &eLBCookieStickinessPolicy_CookieExpirationPeriod})
+var sLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimit, Members: &mLimit, Type: smithy.ShapeTypeStructure, Ext: &eLimit})
+var sLimit_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eLimit_Name})
+var sLimit_Max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Max", ID: &i_Max, Type: smithy.ShapeTypeString, Ext: &eLimit_Max})
+var s_Limits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limits, Members: &m_Limits, Type: smithy.ShapeTypeList, Ext: &e_Limits})
+var s_Limits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLimit, Members: &mLimit, Type: smithy.ShapeTypeStructure, Ext: &e_Limits_member})
+var sListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &eListener})
+var sListener_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_Protocol, Type: smithy.ShapeTypeString, Ext: &eListener_Protocol})
+var sListener_LoadBalancerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerPort", ID: &i_AccessPointPort, Type: smithy.ShapeTypeInteger, Ext: &eListener_LoadBalancerPort})
+var sListener_InstanceProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceProtocol", ID: &i_Protocol, Type: smithy.ShapeTypeString, Ext: &eListener_InstanceProtocol})
+var sListener_InstancePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstancePort", ID: &i_InstancePort, Type: smithy.ShapeTypeInteger, Ext: &eListener_InstancePort})
+var sListener_SSLCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSLCertificateId", ID: &i_SSLCertificateId, Type: smithy.ShapeTypeString, Ext: &eListener_SSLCertificateId})
+var sListenerDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerDescription, Members: &mListenerDescription, Type: smithy.ShapeTypeStructure, Ext: &eListenerDescription})
+var sListenerDescription_Listener = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listener", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &eListenerDescription_Listener})
+var sListenerDescription_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_PolicyNames, Members: &m_PolicyNames, Type: smithy.ShapeTypeList, Ext: &eListenerDescription_PolicyNames})
+var s_ListenerDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerDescriptions, Members: &m_ListenerDescriptions, Type: smithy.ShapeTypeList, Ext: &e_ListenerDescriptions})
+var s_ListenerDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListenerDescription, Members: &mListenerDescription, Type: smithy.ShapeTypeStructure, Ext: &e_ListenerDescriptions_member})
+var sListenerNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerNotFoundException, Members: &mListenerNotFoundException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eListenerNotFoundException})
+var sListenerNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eListenerNotFoundException_Message})
+var s_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &e_Listeners})
+var s_Listeners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &e_Listeners_member})
+var sLoadBalancerAttributeNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerAttributeNotFoundException, Members: &mLoadBalancerAttributeNotFoundException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAttributeNotFoundException})
+var sLoadBalancerAttributeNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerAttributeNotFoundException_Message})
+var sLoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerAttributes, Members: &mLoadBalancerAttributes, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAttributes})
+var sLoadBalancerAttributes_CrossZoneLoadBalancing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossZoneLoadBalancing", ID: &iCrossZoneLoadBalancing, Members: &mCrossZoneLoadBalancing, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAttributes_CrossZoneLoadBalancing})
+var sLoadBalancerAttributes_AccessLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLog", ID: &iAccessLog, Members: &mAccessLog, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAttributes_AccessLog})
+var sLoadBalancerAttributes_ConnectionDraining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionDraining", ID: &iConnectionDraining, Members: &mConnectionDraining, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAttributes_ConnectionDraining})
+var sLoadBalancerAttributes_ConnectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionSettings", ID: &iConnectionSettings, Members: &mConnectionSettings, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAttributes_ConnectionSettings})
+var sLoadBalancerAttributes_AdditionalAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalAttributes", ID: &i_AdditionalAttributes, Members: &m_AdditionalAttributes, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerAttributes_AdditionalAttributes})
+var sLoadBalancerDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerDescription, Members: &mLoadBalancerDescription, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerDescription})
+var sLoadBalancerDescription_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_LoadBalancerName})
+var sLoadBalancerDescription_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_DNSName})
+var sLoadBalancerDescription_CanonicalHostedZoneName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanonicalHostedZoneName", ID: &i_DNSName, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_CanonicalHostedZoneName})
+var sLoadBalancerDescription_CanonicalHostedZoneNameID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanonicalHostedZoneNameID", ID: &i_DNSName, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_CanonicalHostedZoneNameID})
+var sLoadBalancerDescription_ListenerDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerDescriptions", ID: &i_ListenerDescriptions, Members: &m_ListenerDescriptions, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerDescription_ListenerDescriptions})
+var sLoadBalancerDescription_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &iPolicies, Members: &mPolicies, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerDescription_Policies})
+var sLoadBalancerDescription_BackendServerDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendServerDescriptions", ID: &i_BackendServerDescriptions, Members: &m_BackendServerDescriptions, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerDescription_BackendServerDescriptions})
+var sLoadBalancerDescription_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerDescription_AvailabilityZones})
+var sLoadBalancerDescription_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerDescription_Subnets})
+var sLoadBalancerDescription_VPCId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCId", ID: &i_VPCId, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_VPCId})
+var sLoadBalancerDescription_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_Instances, Members: &m_Instances, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerDescription_Instances})
+var sLoadBalancerDescription_HealthCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheck", ID: &iHealthCheck, Members: &mHealthCheck, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerDescription_HealthCheck})
+var sLoadBalancerDescription_SourceSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceSecurityGroup", ID: &iSourceSecurityGroup, Members: &mSourceSecurityGroup, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerDescription_SourceSecurityGroup})
+var sLoadBalancerDescription_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerDescription_SecurityGroups})
+var sLoadBalancerDescription_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_CreatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &eLoadBalancerDescription_CreatedTime})
+var sLoadBalancerDescription_Scheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scheme", ID: &i_LoadBalancerScheme, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_Scheme})
+var s_LoadBalancerDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerDescriptions, Members: &m_LoadBalancerDescriptions, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerDescriptions})
+var s_LoadBalancerDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoadBalancerDescription, Members: &mLoadBalancerDescription, Type: smithy.ShapeTypeStructure, Ext: &e_LoadBalancerDescriptions_member})
+var s_LoadBalancerNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerNames, Members: &m_LoadBalancerNames, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerNames})
+var s_LoadBalancerNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerNames_member})
+var s_LoadBalancerNamesMax20 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerNamesMax20, Members: &m_LoadBalancerNamesMax20, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerNamesMax20})
+var s_LoadBalancerNamesMax20_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerNamesMax20_member})
+var s_LoadBalancerScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerScheme, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerScheme})
+var s_Marker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &e_Marker})
+var s_Max = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Max, Type: smithy.ShapeTypeString, Ext: &e_Max})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var sOperationNotPermittedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotPermittedException, Members: &mOperationNotPermittedException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eOperationNotPermittedException})
+var sOperationNotPermittedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eOperationNotPermittedException_Message})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &e_PageSize})
+var sPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicies, Members: &mPolicies, Type: smithy.ShapeTypeStructure, Ext: &ePolicies})
+var sPolicies_AppCookieStickinessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppCookieStickinessPolicies", ID: &i_AppCookieStickinessPolicies, Members: &m_AppCookieStickinessPolicies, Type: smithy.ShapeTypeList, Ext: &ePolicies_AppCookieStickinessPolicies})
+var sPolicies_LBCookieStickinessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LBCookieStickinessPolicies", ID: &i_LBCookieStickinessPolicies, Members: &m_LBCookieStickinessPolicies, Type: smithy.ShapeTypeList, Ext: &ePolicies_LBCookieStickinessPolicies})
+var sPolicies_OtherPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherPolicies", ID: &i_PolicyNames, Members: &m_PolicyNames, Type: smithy.ShapeTypeList, Ext: &ePolicies_OtherPolicies})
+var sPolicyAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyAttribute, Members: &mPolicyAttribute, Type: smithy.ShapeTypeStructure, Ext: &ePolicyAttribute})
+var sPolicyAttribute_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ePolicyAttribute_AttributeName})
+var sPolicyAttribute_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ePolicyAttribute_AttributeValue})
+var sPolicyAttributeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyAttributeDescription, Members: &mPolicyAttributeDescription, Type: smithy.ShapeTypeStructure, Ext: &ePolicyAttributeDescription})
+var sPolicyAttributeDescription_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ePolicyAttributeDescription_AttributeName})
+var sPolicyAttributeDescription_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ePolicyAttributeDescription_AttributeValue})
+var s_PolicyAttributeDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyAttributeDescriptions, Members: &m_PolicyAttributeDescriptions, Type: smithy.ShapeTypeList, Ext: &e_PolicyAttributeDescriptions})
+var s_PolicyAttributeDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyAttributeDescription, Members: &mPolicyAttributeDescription, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyAttributeDescriptions_member})
+var s_PolicyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyAttributes, Members: &m_PolicyAttributes, Type: smithy.ShapeTypeList, Ext: &e_PolicyAttributes})
+var s_PolicyAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyAttribute, Members: &mPolicyAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyAttributes_member})
+var sPolicyAttributeTypeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyAttributeTypeDescription, Members: &mPolicyAttributeTypeDescription, Type: smithy.ShapeTypeStructure, Ext: &ePolicyAttributeTypeDescription})
+var sPolicyAttributeTypeDescription_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ePolicyAttributeTypeDescription_AttributeName})
+var sPolicyAttributeTypeDescription_AttributeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeType", ID: &i_AttributeType, Type: smithy.ShapeTypeString, Ext: &ePolicyAttributeTypeDescription_AttributeType})
+var sPolicyAttributeTypeDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePolicyAttributeTypeDescription_Description})
+var sPolicyAttributeTypeDescription_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_DefaultValue, Type: smithy.ShapeTypeString, Ext: &ePolicyAttributeTypeDescription_DefaultValue})
+var sPolicyAttributeTypeDescription_Cardinality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cardinality", ID: &i_Cardinality, Type: smithy.ShapeTypeString, Ext: &ePolicyAttributeTypeDescription_Cardinality})
+var s_PolicyAttributeTypeDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyAttributeTypeDescriptions, Members: &m_PolicyAttributeTypeDescriptions, Type: smithy.ShapeTypeList, Ext: &e_PolicyAttributeTypeDescriptions})
+var s_PolicyAttributeTypeDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyAttributeTypeDescription, Members: &mPolicyAttributeTypeDescription, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyAttributeTypeDescriptions_member})
+var sPolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyDescription, Members: &mPolicyDescription, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDescription})
+var sPolicyDescription_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &ePolicyDescription_PolicyName})
+var sPolicyDescription_PolicyTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyTypeName", ID: &i_PolicyTypeName, Type: smithy.ShapeTypeString, Ext: &ePolicyDescription_PolicyTypeName})
+var sPolicyDescription_PolicyAttributeDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyAttributeDescriptions", ID: &i_PolicyAttributeDescriptions, Members: &m_PolicyAttributeDescriptions, Type: smithy.ShapeTypeList, Ext: &ePolicyDescription_PolicyAttributeDescriptions})
+var s_PolicyDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDescriptions, Members: &m_PolicyDescriptions, Type: smithy.ShapeTypeList, Ext: &e_PolicyDescriptions})
+var s_PolicyDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyDescription, Members: &mPolicyDescription, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyDescriptions_member})
+var s_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &e_PolicyName})
+var s_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyNames, Members: &m_PolicyNames, Type: smithy.ShapeTypeList, Ext: &e_PolicyNames})
+var s_PolicyNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &e_PolicyNames_member})
+var sPolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyNotFoundException, Members: &mPolicyNotFoundException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ePolicyNotFoundException})
+var sPolicyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ePolicyNotFoundException_Message})
+var sPolicyTypeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyTypeDescription, Members: &mPolicyTypeDescription, Type: smithy.ShapeTypeStructure, Ext: &ePolicyTypeDescription})
+var sPolicyTypeDescription_PolicyTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyTypeName", ID: &i_PolicyTypeName, Type: smithy.ShapeTypeString, Ext: &ePolicyTypeDescription_PolicyTypeName})
+var sPolicyTypeDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePolicyTypeDescription_Description})
+var sPolicyTypeDescription_PolicyAttributeTypeDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyAttributeTypeDescriptions", ID: &i_PolicyAttributeTypeDescriptions, Members: &m_PolicyAttributeTypeDescriptions, Type: smithy.ShapeTypeList, Ext: &ePolicyTypeDescription_PolicyAttributeTypeDescriptions})
+var s_PolicyTypeDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyTypeDescriptions, Members: &m_PolicyTypeDescriptions, Type: smithy.ShapeTypeList, Ext: &e_PolicyTypeDescriptions})
+var s_PolicyTypeDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyTypeDescription, Members: &mPolicyTypeDescription, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyTypeDescriptions_member})
+var s_PolicyTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyTypeName, Type: smithy.ShapeTypeString, Ext: &e_PolicyTypeName})
+var s_PolicyTypeNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyTypeNames, Members: &m_PolicyTypeNames, Type: smithy.ShapeTypeList, Ext: &e_PolicyTypeNames})
+var s_PolicyTypeNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PolicyTypeName, Type: smithy.ShapeTypeString, Ext: &e_PolicyTypeNames_member})
+var sPolicyTypeNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyTypeNotFoundException, Members: &mPolicyTypeNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ePolicyTypeNotFoundException})
+var sPolicyTypeNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ePolicyTypeNotFoundException_Message})
+var s_Ports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ports, Members: &m_Ports, Type: smithy.ShapeTypeList, Ext: &e_Ports})
+var s_Ports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccessPointPort, Type: smithy.ShapeTypeInteger, Ext: &e_Ports_member})
+var s_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Protocol, Type: smithy.ShapeTypeString, Ext: &e_Protocol})
+var s_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReasonCode, Type: smithy.ShapeTypeString, Ext: &e_ReasonCode})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupId})
+var s_SecurityGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupName, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupName})
+var s_SecurityGroupOwnerAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupOwnerAlias, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupOwnerAlias})
+var s_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroups})
+var s_SecurityGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroups_member})
+var sSourceSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceSecurityGroup, Members: &mSourceSecurityGroup, Type: smithy.ShapeTypeStructure, Ext: &eSourceSecurityGroup})
+var sSourceSecurityGroup_OwnerAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAlias", ID: &i_SecurityGroupOwnerAlias, Type: smithy.ShapeTypeString, Ext: &eSourceSecurityGroup_OwnerAlias})
+var sSourceSecurityGroup_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_SecurityGroupName, Type: smithy.ShapeTypeString, Ext: &eSourceSecurityGroup_GroupName})
+var s_SSLCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SSLCertificateId, Type: smithy.ShapeTypeString, Ext: &e_SSLCertificateId})
+var s_State = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_State, Type: smithy.ShapeTypeString, Ext: &e_State})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var sSubnetNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubnetNotFoundException, Members: &mSubnetNotFoundException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eSubnetNotFoundException})
+var sSubnetNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eSubnetNotFoundException_Message})
+var s_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &e_Subnets})
+var s_Subnets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_Subnets_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var sTagDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagDescription, Members: &mTagDescription, Type: smithy.ShapeTypeStructure, Ext: &eTagDescription})
+var sTagDescription_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eTagDescription_LoadBalancerName})
+var sTagDescription_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagDescription_Tags})
+var s_TagDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagDescriptions, Members: &m_TagDescriptions, Type: smithy.ShapeTypeList, Ext: &e_TagDescriptions})
+var s_TagDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagDescription, Members: &mTagDescription, Type: smithy.ShapeTypeStructure, Ext: &e_TagDescriptions_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagKeyOnly, Members: &mTagKeyOnly, Type: smithy.ShapeTypeStructure, Ext: &e_TagKeyList_member})
+var sTagKeyOnly = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagKeyOnly, Members: &mTagKeyOnly, Type: smithy.ShapeTypeStructure, Ext: &eTagKeyOnly})
+var sTagKeyOnly_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTagKeyOnly_Key})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTooManyAccessPointsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyAccessPointsException, Members: &mTooManyAccessPointsException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eTooManyAccessPointsException})
+var sTooManyAccessPointsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyAccessPointsException_Message})
+var sTooManyPoliciesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyPoliciesException, Members: &mTooManyPoliciesException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eTooManyPoliciesException})
+var sTooManyPoliciesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyPoliciesException_Message})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_Message})
+var s_UnhealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnhealthyThreshold, Type: smithy.ShapeTypeInteger, Ext: &e_UnhealthyThreshold})
+var sUnsupportedProtocolException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedProtocolException, Members: &mUnsupportedProtocolException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedProtocolException})
+var sUnsupportedProtocolException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eUnsupportedProtocolException_Message})
+var s_VPCId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VPCId, Type: smithy.ShapeTypeString, Ext: &e_VPCId})
+var sAddTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsInput, Members: &mAddTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsInput})
+var sAddTagsInput_LoadBalancerNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerNames", ID: &i_LoadBalancerNames, Members: &m_LoadBalancerNames, Type: smithy.ShapeTypeList, Ext: &eAddTagsInput_LoadBalancerNames})
+var sAddTagsInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAddTagsInput_Tags})
+var sAddTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsOutput})
+var sApplySecurityGroupsToLoadBalancerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplySecurityGroupsToLoadBalancerInput, Members: &mApplySecurityGroupsToLoadBalancerInput, Type: smithy.ShapeTypeStructure, Ext: &eApplySecurityGroupsToLoadBalancerInput})
+var sApplySecurityGroupsToLoadBalancerInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eApplySecurityGroupsToLoadBalancerInput_LoadBalancerName})
+var sApplySecurityGroupsToLoadBalancerInput_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eApplySecurityGroupsToLoadBalancerInput_SecurityGroups})
+var sApplySecurityGroupsToLoadBalancerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplySecurityGroupsToLoadBalancerOutput, Members: &mApplySecurityGroupsToLoadBalancerOutput, Type: smithy.ShapeTypeStructure, Ext: &eApplySecurityGroupsToLoadBalancerOutput})
+var sApplySecurityGroupsToLoadBalancerOutput_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eApplySecurityGroupsToLoadBalancerOutput_SecurityGroups})
+var sAttachLoadBalancerToSubnetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachLoadBalancerToSubnetsInput, Members: &mAttachLoadBalancerToSubnetsInput, Type: smithy.ShapeTypeStructure, Ext: &eAttachLoadBalancerToSubnetsInput})
+var sAttachLoadBalancerToSubnetsInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eAttachLoadBalancerToSubnetsInput_LoadBalancerName})
+var sAttachLoadBalancerToSubnetsInput_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eAttachLoadBalancerToSubnetsInput_Subnets})
+var sAttachLoadBalancerToSubnetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachLoadBalancerToSubnetsOutput, Members: &mAttachLoadBalancerToSubnetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAttachLoadBalancerToSubnetsOutput})
+var sAttachLoadBalancerToSubnetsOutput_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eAttachLoadBalancerToSubnetsOutput_Subnets})
+var sConfigureHealthCheckInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureHealthCheckInput, Members: &mConfigureHealthCheckInput, Type: smithy.ShapeTypeStructure, Ext: &eConfigureHealthCheckInput})
+var sConfigureHealthCheckInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eConfigureHealthCheckInput_LoadBalancerName})
+var sConfigureHealthCheckInput_HealthCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheck", ID: &iHealthCheck, Members: &mHealthCheck, Type: smithy.ShapeTypeStructure, Ext: &eConfigureHealthCheckInput_HealthCheck})
+var sConfigureHealthCheckOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureHealthCheckOutput, Members: &mConfigureHealthCheckOutput, Type: smithy.ShapeTypeStructure, Ext: &eConfigureHealthCheckOutput})
+var sConfigureHealthCheckOutput_HealthCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheck", ID: &iHealthCheck, Members: &mHealthCheck, Type: smithy.ShapeTypeStructure, Ext: &eConfigureHealthCheckOutput_HealthCheck})
+var sCreateAppCookieStickinessPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppCookieStickinessPolicyInput, Members: &mCreateAppCookieStickinessPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppCookieStickinessPolicyInput})
+var sCreateAppCookieStickinessPolicyInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eCreateAppCookieStickinessPolicyInput_LoadBalancerName})
+var sCreateAppCookieStickinessPolicyInput_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eCreateAppCookieStickinessPolicyInput_PolicyName})
+var sCreateAppCookieStickinessPolicyInput_CookieName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CookieName", ID: &i_CookieName, Type: smithy.ShapeTypeString, Ext: &eCreateAppCookieStickinessPolicyInput_CookieName})
+var sCreateAppCookieStickinessPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppCookieStickinessPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppCookieStickinessPolicyOutput})
+var sCreateLBCookieStickinessPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLBCookieStickinessPolicyInput, Members: &mCreateLBCookieStickinessPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLBCookieStickinessPolicyInput})
+var sCreateLBCookieStickinessPolicyInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eCreateLBCookieStickinessPolicyInput_LoadBalancerName})
+var sCreateLBCookieStickinessPolicyInput_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eCreateLBCookieStickinessPolicyInput_PolicyName})
+var sCreateLBCookieStickinessPolicyInput_CookieExpirationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CookieExpirationPeriod", ID: &i_CookieExpirationPeriod, Type: smithy.ShapeTypeLong, Ext: &eCreateLBCookieStickinessPolicyInput_CookieExpirationPeriod})
+var sCreateLBCookieStickinessPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLBCookieStickinessPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLBCookieStickinessPolicyOutput})
+var sCreateAccessPointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPointInput, Members: &mCreateAccessPointInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointInput})
+var sCreateAccessPointInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointInput_LoadBalancerName})
+var sCreateAccessPointInput_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &eCreateAccessPointInput_Listeners})
+var sCreateAccessPointInput_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eCreateAccessPointInput_AvailabilityZones})
+var sCreateAccessPointInput_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eCreateAccessPointInput_Subnets})
+var sCreateAccessPointInput_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eCreateAccessPointInput_SecurityGroups})
+var sCreateAccessPointInput_Scheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scheme", ID: &i_LoadBalancerScheme, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointInput_Scheme})
+var sCreateAccessPointInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAccessPointInput_Tags})
+var sCreateLoadBalancerListenerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerListenerInput, Members: &mCreateLoadBalancerListenerInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoadBalancerListenerInput})
+var sCreateLoadBalancerListenerInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eCreateLoadBalancerListenerInput_LoadBalancerName})
+var sCreateLoadBalancerListenerInput_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &eCreateLoadBalancerListenerInput_Listeners})
+var sCreateLoadBalancerListenerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerListenerOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoadBalancerListenerOutput})
+var sCreateAccessPointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPointOutput, Members: &mCreateAccessPointOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointOutput})
+var sCreateAccessPointOutput_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointOutput_DNSName})
+var sCreateLoadBalancerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerPolicyInput, Members: &mCreateLoadBalancerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoadBalancerPolicyInput})
+var sCreateLoadBalancerPolicyInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eCreateLoadBalancerPolicyInput_LoadBalancerName})
+var sCreateLoadBalancerPolicyInput_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eCreateLoadBalancerPolicyInput_PolicyName})
+var sCreateLoadBalancerPolicyInput_PolicyTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyTypeName", ID: &i_PolicyTypeName, Type: smithy.ShapeTypeString, Ext: &eCreateLoadBalancerPolicyInput_PolicyTypeName})
+var sCreateLoadBalancerPolicyInput_PolicyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyAttributes", ID: &i_PolicyAttributes, Members: &m_PolicyAttributes, Type: smithy.ShapeTypeList, Ext: &eCreateLoadBalancerPolicyInput_PolicyAttributes})
+var sCreateLoadBalancerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoadBalancerPolicyOutput})
+var sDeleteAccessPointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessPointInput, Members: &mDeleteAccessPointInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessPointInput})
+var sDeleteAccessPointInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessPointInput_LoadBalancerName})
+var sDeleteLoadBalancerListenerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerListenerInput, Members: &mDeleteLoadBalancerListenerInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoadBalancerListenerInput})
+var sDeleteLoadBalancerListenerInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDeleteLoadBalancerListenerInput_LoadBalancerName})
+var sDeleteLoadBalancerListenerInput_LoadBalancerPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerPorts", ID: &i_Ports, Members: &m_Ports, Type: smithy.ShapeTypeList, Ext: &eDeleteLoadBalancerListenerInput_LoadBalancerPorts})
+var sDeleteLoadBalancerListenerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerListenerOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoadBalancerListenerOutput})
+var sDeleteAccessPointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessPointOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessPointOutput})
+var sDeleteLoadBalancerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerPolicyInput, Members: &mDeleteLoadBalancerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoadBalancerPolicyInput})
+var sDeleteLoadBalancerPolicyInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDeleteLoadBalancerPolicyInput_LoadBalancerName})
+var sDeleteLoadBalancerPolicyInput_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eDeleteLoadBalancerPolicyInput_PolicyName})
+var sDeleteLoadBalancerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoadBalancerPolicyOutput})
+var sDeregisterEndPointsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterEndPointsInput, Members: &mDeregisterEndPointsInput, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterEndPointsInput})
+var sDeregisterEndPointsInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDeregisterEndPointsInput_LoadBalancerName})
+var sDeregisterEndPointsInput_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_Instances, Members: &m_Instances, Type: smithy.ShapeTypeList, Ext: &eDeregisterEndPointsInput_Instances})
+var sDeregisterEndPointsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterEndPointsOutput, Members: &mDeregisterEndPointsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterEndPointsOutput})
+var sDeregisterEndPointsOutput_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_Instances, Members: &m_Instances, Type: smithy.ShapeTypeList, Ext: &eDeregisterEndPointsOutput_Instances})
+var sDescribeAccountLimitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountLimitsInput, Members: &mDescribeAccountLimitsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccountLimitsInput})
+var sDescribeAccountLimitsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeAccountLimitsInput_Marker})
+var sDescribeAccountLimitsInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAccountLimitsInput_PageSize})
+var sDescribeAccountLimitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountLimitsOutput, Members: &mDescribeAccountLimitsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccountLimitsOutput})
+var sDescribeAccountLimitsOutput_Limits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limits", ID: &i_Limits, Members: &m_Limits, Type: smithy.ShapeTypeList, Ext: &eDescribeAccountLimitsOutput_Limits})
+var sDescribeAccountLimitsOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeAccountLimitsOutput_NextMarker})
+var sDescribeEndPointStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndPointStateInput, Members: &mDescribeEndPointStateInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEndPointStateInput})
+var sDescribeEndPointStateInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDescribeEndPointStateInput_LoadBalancerName})
+var sDescribeEndPointStateInput_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_Instances, Members: &m_Instances, Type: smithy.ShapeTypeList, Ext: &eDescribeEndPointStateInput_Instances})
+var sDescribeEndPointStateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndPointStateOutput, Members: &mDescribeEndPointStateOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEndPointStateOutput})
+var sDescribeEndPointStateOutput_InstanceStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceStates", ID: &i_InstanceStates, Members: &m_InstanceStates, Type: smithy.ShapeTypeList, Ext: &eDescribeEndPointStateOutput_InstanceStates})
+var sDescribeLoadBalancerAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerAttributesInput, Members: &mDescribeLoadBalancerAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerAttributesInput})
+var sDescribeLoadBalancerAttributesInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDescribeLoadBalancerAttributesInput_LoadBalancerName})
+var sDescribeLoadBalancerAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerAttributesOutput, Members: &mDescribeLoadBalancerAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerAttributesOutput})
+var sDescribeLoadBalancerAttributesOutput_LoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerAttributes", ID: &iLoadBalancerAttributes, Members: &mLoadBalancerAttributes, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerAttributesOutput_LoadBalancerAttributes})
+var sDescribeLoadBalancerPoliciesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerPoliciesInput, Members: &mDescribeLoadBalancerPoliciesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerPoliciesInput})
+var sDescribeLoadBalancerPoliciesInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDescribeLoadBalancerPoliciesInput_LoadBalancerName})
+var sDescribeLoadBalancerPoliciesInput_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_PolicyNames, Members: &m_PolicyNames, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancerPoliciesInput_PolicyNames})
+var sDescribeLoadBalancerPoliciesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerPoliciesOutput, Members: &mDescribeLoadBalancerPoliciesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerPoliciesOutput})
+var sDescribeLoadBalancerPoliciesOutput_PolicyDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDescriptions", ID: &i_PolicyDescriptions, Members: &m_PolicyDescriptions, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancerPoliciesOutput_PolicyDescriptions})
+var sDescribeLoadBalancerPolicyTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerPolicyTypesInput, Members: &mDescribeLoadBalancerPolicyTypesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerPolicyTypesInput})
+var sDescribeLoadBalancerPolicyTypesInput_PolicyTypeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyTypeNames", ID: &i_PolicyTypeNames, Members: &m_PolicyTypeNames, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancerPolicyTypesInput_PolicyTypeNames})
+var sDescribeLoadBalancerPolicyTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerPolicyTypesOutput, Members: &mDescribeLoadBalancerPolicyTypesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerPolicyTypesOutput})
+var sDescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyTypeDescriptions", ID: &i_PolicyTypeDescriptions, Members: &m_PolicyTypeDescriptions, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions})
+var sDescribeAccessPointsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccessPointsInput, Members: &mDescribeAccessPointsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccessPointsInput})
+var sDescribeAccessPointsInput_LoadBalancerNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerNames", ID: &i_LoadBalancerNames, Members: &m_LoadBalancerNames, Type: smithy.ShapeTypeList, Ext: &eDescribeAccessPointsInput_LoadBalancerNames})
+var sDescribeAccessPointsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeAccessPointsInput_Marker})
+var sDescribeAccessPointsInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAccessPointsInput_PageSize})
+var sDescribeAccessPointsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccessPointsOutput, Members: &mDescribeAccessPointsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccessPointsOutput})
+var sDescribeAccessPointsOutput_LoadBalancerDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerDescriptions", ID: &i_LoadBalancerDescriptions, Members: &m_LoadBalancerDescriptions, Type: smithy.ShapeTypeList, Ext: &eDescribeAccessPointsOutput_LoadBalancerDescriptions})
+var sDescribeAccessPointsOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeAccessPointsOutput_NextMarker})
+var sDescribeTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsInput, Members: &mDescribeTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTagsInput})
+var sDescribeTagsInput_LoadBalancerNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerNames", ID: &i_LoadBalancerNamesMax20, Members: &m_LoadBalancerNamesMax20, Type: smithy.ShapeTypeList, Ext: &eDescribeTagsInput_LoadBalancerNames})
+var sDescribeTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsOutput, Members: &mDescribeTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTagsOutput})
+var sDescribeTagsOutput_TagDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagDescriptions", ID: &i_TagDescriptions, Members: &m_TagDescriptions, Type: smithy.ShapeTypeList, Ext: &eDescribeTagsOutput_TagDescriptions})
+var sDetachLoadBalancerFromSubnetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachLoadBalancerFromSubnetsInput, Members: &mDetachLoadBalancerFromSubnetsInput, Type: smithy.ShapeTypeStructure, Ext: &eDetachLoadBalancerFromSubnetsInput})
+var sDetachLoadBalancerFromSubnetsInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eDetachLoadBalancerFromSubnetsInput_LoadBalancerName})
+var sDetachLoadBalancerFromSubnetsInput_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eDetachLoadBalancerFromSubnetsInput_Subnets})
+var sDetachLoadBalancerFromSubnetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachLoadBalancerFromSubnetsOutput, Members: &mDetachLoadBalancerFromSubnetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDetachLoadBalancerFromSubnetsOutput})
+var sDetachLoadBalancerFromSubnetsOutput_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eDetachLoadBalancerFromSubnetsOutput_Subnets})
+var sRemoveAvailabilityZonesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAvailabilityZonesInput, Members: &mRemoveAvailabilityZonesInput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveAvailabilityZonesInput})
+var sRemoveAvailabilityZonesInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eRemoveAvailabilityZonesInput_LoadBalancerName})
+var sRemoveAvailabilityZonesInput_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eRemoveAvailabilityZonesInput_AvailabilityZones})
+var sRemoveAvailabilityZonesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAvailabilityZonesOutput, Members: &mRemoveAvailabilityZonesOutput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveAvailabilityZonesOutput})
+var sRemoveAvailabilityZonesOutput_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eRemoveAvailabilityZonesOutput_AvailabilityZones})
+var sAddAvailabilityZonesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAvailabilityZonesInput, Members: &mAddAvailabilityZonesInput, Type: smithy.ShapeTypeStructure, Ext: &eAddAvailabilityZonesInput})
+var sAddAvailabilityZonesInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eAddAvailabilityZonesInput_LoadBalancerName})
+var sAddAvailabilityZonesInput_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eAddAvailabilityZonesInput_AvailabilityZones})
+var sAddAvailabilityZonesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAvailabilityZonesOutput, Members: &mAddAvailabilityZonesOutput, Type: smithy.ShapeTypeStructure, Ext: &eAddAvailabilityZonesOutput})
+var sAddAvailabilityZonesOutput_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eAddAvailabilityZonesOutput_AvailabilityZones})
+var sModifyLoadBalancerAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLoadBalancerAttributesInput, Members: &mModifyLoadBalancerAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyLoadBalancerAttributesInput})
+var sModifyLoadBalancerAttributesInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eModifyLoadBalancerAttributesInput_LoadBalancerName})
+var sModifyLoadBalancerAttributesInput_LoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerAttributes", ID: &iLoadBalancerAttributes, Members: &mLoadBalancerAttributes, Type: smithy.ShapeTypeStructure, Ext: &eModifyLoadBalancerAttributesInput_LoadBalancerAttributes})
+var sModifyLoadBalancerAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLoadBalancerAttributesOutput, Members: &mModifyLoadBalancerAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyLoadBalancerAttributesOutput})
+var sModifyLoadBalancerAttributesOutput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eModifyLoadBalancerAttributesOutput_LoadBalancerName})
+var sModifyLoadBalancerAttributesOutput_LoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerAttributes", ID: &iLoadBalancerAttributes, Members: &mLoadBalancerAttributes, Type: smithy.ShapeTypeStructure, Ext: &eModifyLoadBalancerAttributesOutput_LoadBalancerAttributes})
+var sRegisterEndPointsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterEndPointsInput, Members: &mRegisterEndPointsInput, Type: smithy.ShapeTypeStructure, Ext: &eRegisterEndPointsInput})
+var sRegisterEndPointsInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eRegisterEndPointsInput_LoadBalancerName})
+var sRegisterEndPointsInput_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_Instances, Members: &m_Instances, Type: smithy.ShapeTypeList, Ext: &eRegisterEndPointsInput_Instances})
+var sRegisterEndPointsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterEndPointsOutput, Members: &mRegisterEndPointsOutput, Type: smithy.ShapeTypeStructure, Ext: &eRegisterEndPointsOutput})
+var sRegisterEndPointsOutput_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_Instances, Members: &m_Instances, Type: smithy.ShapeTypeList, Ext: &eRegisterEndPointsOutput_Instances})
+var sRemoveTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsInput, Members: &mRemoveTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsInput})
+var sRemoveTagsInput_LoadBalancerNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerNames", ID: &i_LoadBalancerNames, Members: &m_LoadBalancerNames, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsInput_LoadBalancerNames})
+var sRemoveTagsInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsInput_Tags})
+var sRemoveTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsOutput})
+var sSetLoadBalancerListenerSSLCertificateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerListenerSSLCertificateInput, Members: &mSetLoadBalancerListenerSSLCertificateInput, Type: smithy.ShapeTypeStructure, Ext: &eSetLoadBalancerListenerSSLCertificateInput})
+var sSetLoadBalancerListenerSSLCertificateInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eSetLoadBalancerListenerSSLCertificateInput_LoadBalancerName})
+var sSetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerPort", ID: &i_AccessPointPort, Type: smithy.ShapeTypeInteger, Ext: &eSetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort})
+var sSetLoadBalancerListenerSSLCertificateInput_SSLCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSLCertificateId", ID: &i_SSLCertificateId, Type: smithy.ShapeTypeString, Ext: &eSetLoadBalancerListenerSSLCertificateInput_SSLCertificateId})
+var sSetLoadBalancerListenerSSLCertificateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerListenerSSLCertificateOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetLoadBalancerListenerSSLCertificateOutput})
+var sSetLoadBalancerPoliciesForBackendServerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerPoliciesForBackendServerInput, Members: &mSetLoadBalancerPoliciesForBackendServerInput, Type: smithy.ShapeTypeStructure, Ext: &eSetLoadBalancerPoliciesForBackendServerInput})
+var sSetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eSetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName})
+var sSetLoadBalancerPoliciesForBackendServerInput_InstancePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstancePort", ID: &i_EndPointPort, Type: smithy.ShapeTypeInteger, Ext: &eSetLoadBalancerPoliciesForBackendServerInput_InstancePort})
+var sSetLoadBalancerPoliciesForBackendServerInput_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_PolicyNames, Members: &m_PolicyNames, Type: smithy.ShapeTypeList, Ext: &eSetLoadBalancerPoliciesForBackendServerInput_PolicyNames})
+var sSetLoadBalancerPoliciesForBackendServerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerPoliciesForBackendServerOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetLoadBalancerPoliciesForBackendServerOutput})
+var sSetLoadBalancerPoliciesOfListenerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerPoliciesOfListenerInput, Members: &mSetLoadBalancerPoliciesOfListenerInput, Type: smithy.ShapeTypeStructure, Ext: &eSetLoadBalancerPoliciesOfListenerInput})
+var sSetLoadBalancerPoliciesOfListenerInput_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_AccessPointName, Type: smithy.ShapeTypeString, Ext: &eSetLoadBalancerPoliciesOfListenerInput_LoadBalancerName})
+var sSetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerPort", ID: &i_AccessPointPort, Type: smithy.ShapeTypeInteger, Ext: &eSetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort})
+var sSetLoadBalancerPoliciesOfListenerInput_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_PolicyNames, Members: &m_PolicyNames, Type: smithy.ShapeTypeList, Ext: &eSetLoadBalancerPoliciesOfListenerInput_PolicyNames})
+var sSetLoadBalancerPoliciesOfListenerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLoadBalancerPoliciesOfListenerOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetLoadBalancerPoliciesOfListenerOutput})
+
+var AddTags = &sAddTags
+
+var ApplySecurityGroupsToLoadBalancer = &sApplySecurityGroupsToLoadBalancer
+
+var AttachLoadBalancerToSubnets = &sAttachLoadBalancerToSubnets
+
+var ConfigureHealthCheck = &sConfigureHealthCheck
+
+var CreateAppCookieStickinessPolicy = &sCreateAppCookieStickinessPolicy
+
+var CreateLBCookieStickinessPolicy = &sCreateLBCookieStickinessPolicy
+
+var CreateLoadBalancer = &sCreateLoadBalancer
+
+var CreateLoadBalancerListeners = &sCreateLoadBalancerListeners
+
+var CreateLoadBalancerPolicy = &sCreateLoadBalancerPolicy
+
+var DeleteLoadBalancer = &sDeleteLoadBalancer
+
+var DeleteLoadBalancerListeners = &sDeleteLoadBalancerListeners
+
+var DeleteLoadBalancerPolicy = &sDeleteLoadBalancerPolicy
+
+var DeregisterInstancesFromLoadBalancer = &sDeregisterInstancesFromLoadBalancer
+
+var DescribeAccountLimits = &sDescribeAccountLimits
+
+var DescribeInstanceHealth = &sDescribeInstanceHealth
+
+var DescribeLoadBalancerAttributes = &sDescribeLoadBalancerAttributes
+
+var DescribeLoadBalancerPolicies = &sDescribeLoadBalancerPolicies
+
+var DescribeLoadBalancerPolicyTypes = &sDescribeLoadBalancerPolicyTypes
+
+var DescribeLoadBalancers = &sDescribeLoadBalancers
+
+var DescribeTags = &sDescribeTags
+
+var DetachLoadBalancerFromSubnets = &sDetachLoadBalancerFromSubnets
+
+var DisableAvailabilityZonesForLoadBalancer = &sDisableAvailabilityZonesForLoadBalancer
+
+var EnableAvailabilityZonesForLoadBalancer = &sEnableAvailabilityZonesForLoadBalancer
+
+var ModifyLoadBalancerAttributes = &sModifyLoadBalancerAttributes
+
+var RegisterInstancesWithLoadBalancer = &sRegisterInstancesWithLoadBalancer
+
+var RemoveTags = &sRemoveTags
+
+var SetLoadBalancerListenerSSLCertificate = &sSetLoadBalancerListenerSSLCertificate
+
+var SetLoadBalancerPoliciesForBackendServer = &sSetLoadBalancerPoliciesForBackendServer
+
+var SetLoadBalancerPoliciesOfListener = &sSetLoadBalancerPoliciesOfListener
+
+var _ElasticLoadBalancing_v7 = &s_ElasticLoadBalancing_v7
+
+var AccessLog = &sAccessLog
+var AccessLog_Enabled = &sAccessLog_Enabled
+var AccessLog_S3BucketName = &sAccessLog_S3BucketName
+var AccessLog_EmitInterval = &sAccessLog_EmitInterval
+var AccessLog_S3BucketPrefix = &sAccessLog_S3BucketPrefix
+
+var _AccessLogEnabled = &s_AccessLogEnabled
+
+var _AccessLogInterval = &s_AccessLogInterval
+
+var _AccessLogPrefix = &s_AccessLogPrefix
+
+var _AccessPointName = &s_AccessPointName
+
+var AccessPointNotFoundException = &sAccessPointNotFoundException
+var AccessPointNotFoundException_Message = &sAccessPointNotFoundException_Message
+
+var _AccessPointPort = &s_AccessPointPort
+
+var AdditionalAttribute = &sAdditionalAttribute
+var AdditionalAttribute_Key = &sAdditionalAttribute_Key
+var AdditionalAttribute_Value = &sAdditionalAttribute_Value
+
+var _AdditionalAttributeKey = &s_AdditionalAttributeKey
+
+var _AdditionalAttributes = &s_AdditionalAttributes
+var _AdditionalAttributes_member = &s_AdditionalAttributes_member
+
+var _AdditionalAttributeValue = &s_AdditionalAttributeValue
+
+var _AppCookieStickinessPolicies = &s_AppCookieStickinessPolicies
+var _AppCookieStickinessPolicies_member = &s_AppCookieStickinessPolicies_member
+
+var AppCookieStickinessPolicy = &sAppCookieStickinessPolicy
+var AppCookieStickinessPolicy_PolicyName = &sAppCookieStickinessPolicy_PolicyName
+var AppCookieStickinessPolicy_CookieName = &sAppCookieStickinessPolicy_CookieName
+
+var _AttributeName = &s_AttributeName
+
+var _AttributeType = &s_AttributeType
+
+var _AttributeValue = &s_AttributeValue
+
+var _AvailabilityZone = &s_AvailabilityZone
+
+var _AvailabilityZones = &s_AvailabilityZones
+var _AvailabilityZones_member = &s_AvailabilityZones_member
+
+var BackendServerDescription = &sBackendServerDescription
+var BackendServerDescription_InstancePort = &sBackendServerDescription_InstancePort
+var BackendServerDescription_PolicyNames = &sBackendServerDescription_PolicyNames
+
+var _BackendServerDescriptions = &s_BackendServerDescriptions
+var _BackendServerDescriptions_member = &s_BackendServerDescriptions_member
+
+var _Cardinality = &s_Cardinality
+
+var CertificateNotFoundException = &sCertificateNotFoundException
+var CertificateNotFoundException_Message = &sCertificateNotFoundException_Message
+
+var ConnectionDraining = &sConnectionDraining
+var ConnectionDraining_Enabled = &sConnectionDraining_Enabled
+var ConnectionDraining_Timeout = &sConnectionDraining_Timeout
+
+var _ConnectionDrainingEnabled = &s_ConnectionDrainingEnabled
+
+var _ConnectionDrainingTimeout = &s_ConnectionDrainingTimeout
+
+var ConnectionSettings = &sConnectionSettings
+var ConnectionSettings_IdleTimeout = &sConnectionSettings_IdleTimeout
+
+var _CookieExpirationPeriod = &s_CookieExpirationPeriod
+
+var _CookieName = &s_CookieName
+
+var _CreatedTime = &s_CreatedTime
+
+var CrossZoneLoadBalancing = &sCrossZoneLoadBalancing
+var CrossZoneLoadBalancing_Enabled = &sCrossZoneLoadBalancing_Enabled
+
+var _CrossZoneLoadBalancingEnabled = &s_CrossZoneLoadBalancingEnabled
+
+var _DefaultValue = &s_DefaultValue
+
+var DependencyThrottleException = &sDependencyThrottleException
+var DependencyThrottleException_Message = &sDependencyThrottleException_Message
+
+var _Description = &s_Description
+
+var _DNSName = &s_DNSName
+
+var DuplicateAccessPointNameException = &sDuplicateAccessPointNameException
+var DuplicateAccessPointNameException_Message = &sDuplicateAccessPointNameException_Message
+
+var DuplicateListenerException = &sDuplicateListenerException
+var DuplicateListenerException_Message = &sDuplicateListenerException_Message
+
+var DuplicatePolicyNameException = &sDuplicatePolicyNameException
+var DuplicatePolicyNameException_Message = &sDuplicatePolicyNameException_Message
+
+var DuplicateTagKeysException = &sDuplicateTagKeysException
+var DuplicateTagKeysException_Message = &sDuplicateTagKeysException_Message
+
+var _EndPointPort = &s_EndPointPort
+
+var _ErrorDescription = &s_ErrorDescription
+
+var HealthCheck = &sHealthCheck
+var HealthCheck_Target = &sHealthCheck_Target
+var HealthCheck_Interval = &sHealthCheck_Interval
+var HealthCheck_Timeout = &sHealthCheck_Timeout
+var HealthCheck_UnhealthyThreshold = &sHealthCheck_UnhealthyThreshold
+var HealthCheck_HealthyThreshold = &sHealthCheck_HealthyThreshold
+
+var _HealthCheckInterval = &s_HealthCheckInterval
+
+var _HealthCheckTarget = &s_HealthCheckTarget
+
+var _HealthCheckTimeout = &s_HealthCheckTimeout
+
+var _HealthyThreshold = &s_HealthyThreshold
+
+var _IdleTimeout = &s_IdleTimeout
+
+var Instance = &sInstance
+var Instance_InstanceId = &sInstance_InstanceId
+
+var _InstanceId = &s_InstanceId
+
+var _InstancePort = &s_InstancePort
+
+var _Instances = &s_Instances
+var _Instances_member = &s_Instances_member
+
+var InstanceState = &sInstanceState
+var InstanceState_InstanceId = &sInstanceState_InstanceId
+var InstanceState_State = &sInstanceState_State
+var InstanceState_ReasonCode = &sInstanceState_ReasonCode
+var InstanceState_Description = &sInstanceState_Description
+
+var _InstanceStates = &s_InstanceStates
+var _InstanceStates_member = &s_InstanceStates_member
+
+var InvalidConfigurationRequestException = &sInvalidConfigurationRequestException
+var InvalidConfigurationRequestException_Message = &sInvalidConfigurationRequestException_Message
+
+var InvalidEndPointException = &sInvalidEndPointException
+var InvalidEndPointException_Message = &sInvalidEndPointException_Message
+
+var InvalidSchemeException = &sInvalidSchemeException
+var InvalidSchemeException_Message = &sInvalidSchemeException_Message
+
+var InvalidSecurityGroupException = &sInvalidSecurityGroupException
+var InvalidSecurityGroupException_Message = &sInvalidSecurityGroupException_Message
+
+var InvalidSubnetException = &sInvalidSubnetException
+var InvalidSubnetException_Message = &sInvalidSubnetException_Message
+
+var _LBCookieStickinessPolicies = &s_LBCookieStickinessPolicies
+var _LBCookieStickinessPolicies_member = &s_LBCookieStickinessPolicies_member
+
+var LBCookieStickinessPolicy = &sLBCookieStickinessPolicy
+var LBCookieStickinessPolicy_PolicyName = &sLBCookieStickinessPolicy_PolicyName
+var LBCookieStickinessPolicy_CookieExpirationPeriod = &sLBCookieStickinessPolicy_CookieExpirationPeriod
+
+var Limit = &sLimit
+var Limit_Name = &sLimit_Name
+var Limit_Max = &sLimit_Max
+
+var _Limits = &s_Limits
+var _Limits_member = &s_Limits_member
+
+var Listener = &sListener
+var Listener_Protocol = &sListener_Protocol
+var Listener_LoadBalancerPort = &sListener_LoadBalancerPort
+var Listener_InstanceProtocol = &sListener_InstanceProtocol
+var Listener_InstancePort = &sListener_InstancePort
+var Listener_SSLCertificateId = &sListener_SSLCertificateId
+
+var ListenerDescription = &sListenerDescription
+var ListenerDescription_Listener = &sListenerDescription_Listener
+var ListenerDescription_PolicyNames = &sListenerDescription_PolicyNames
+
+var _ListenerDescriptions = &s_ListenerDescriptions
+var _ListenerDescriptions_member = &s_ListenerDescriptions_member
+
+var ListenerNotFoundException = &sListenerNotFoundException
+var ListenerNotFoundException_Message = &sListenerNotFoundException_Message
+
+var _Listeners = &s_Listeners
+var _Listeners_member = &s_Listeners_member
+
+var LoadBalancerAttributeNotFoundException = &sLoadBalancerAttributeNotFoundException
+var LoadBalancerAttributeNotFoundException_Message = &sLoadBalancerAttributeNotFoundException_Message
+
+var LoadBalancerAttributes = &sLoadBalancerAttributes
+var LoadBalancerAttributes_CrossZoneLoadBalancing = &sLoadBalancerAttributes_CrossZoneLoadBalancing
+var LoadBalancerAttributes_AccessLog = &sLoadBalancerAttributes_AccessLog
+var LoadBalancerAttributes_ConnectionDraining = &sLoadBalancerAttributes_ConnectionDraining
+var LoadBalancerAttributes_ConnectionSettings = &sLoadBalancerAttributes_ConnectionSettings
+var LoadBalancerAttributes_AdditionalAttributes = &sLoadBalancerAttributes_AdditionalAttributes
+
+var LoadBalancerDescription = &sLoadBalancerDescription
+var LoadBalancerDescription_LoadBalancerName = &sLoadBalancerDescription_LoadBalancerName
+var LoadBalancerDescription_DNSName = &sLoadBalancerDescription_DNSName
+var LoadBalancerDescription_CanonicalHostedZoneName = &sLoadBalancerDescription_CanonicalHostedZoneName
+var LoadBalancerDescription_CanonicalHostedZoneNameID = &sLoadBalancerDescription_CanonicalHostedZoneNameID
+var LoadBalancerDescription_ListenerDescriptions = &sLoadBalancerDescription_ListenerDescriptions
+var LoadBalancerDescription_Policies = &sLoadBalancerDescription_Policies
+var LoadBalancerDescription_BackendServerDescriptions = &sLoadBalancerDescription_BackendServerDescriptions
+var LoadBalancerDescription_AvailabilityZones = &sLoadBalancerDescription_AvailabilityZones
+var LoadBalancerDescription_Subnets = &sLoadBalancerDescription_Subnets
+var LoadBalancerDescription_VPCId = &sLoadBalancerDescription_VPCId
+var LoadBalancerDescription_Instances = &sLoadBalancerDescription_Instances
+var LoadBalancerDescription_HealthCheck = &sLoadBalancerDescription_HealthCheck
+var LoadBalancerDescription_SourceSecurityGroup = &sLoadBalancerDescription_SourceSecurityGroup
+var LoadBalancerDescription_SecurityGroups = &sLoadBalancerDescription_SecurityGroups
+var LoadBalancerDescription_CreatedTime = &sLoadBalancerDescription_CreatedTime
+var LoadBalancerDescription_Scheme = &sLoadBalancerDescription_Scheme
+
+var _LoadBalancerDescriptions = &s_LoadBalancerDescriptions
+var _LoadBalancerDescriptions_member = &s_LoadBalancerDescriptions_member
+
+var _LoadBalancerNames = &s_LoadBalancerNames
+var _LoadBalancerNames_member = &s_LoadBalancerNames_member
+
+var _LoadBalancerNamesMax20 = &s_LoadBalancerNamesMax20
+var _LoadBalancerNamesMax20_member = &s_LoadBalancerNamesMax20_member
+
+var _LoadBalancerScheme = &s_LoadBalancerScheme
+
+var _Marker = &s_Marker
+
+var _Max = &s_Max
+
+var _Name = &s_Name
+
+var OperationNotPermittedException = &sOperationNotPermittedException
+var OperationNotPermittedException_Message = &sOperationNotPermittedException_Message
+
+var _PageSize = &s_PageSize
+
+var Policies = &sPolicies
+var Policies_AppCookieStickinessPolicies = &sPolicies_AppCookieStickinessPolicies
+var Policies_LBCookieStickinessPolicies = &sPolicies_LBCookieStickinessPolicies
+var Policies_OtherPolicies = &sPolicies_OtherPolicies
+
+var PolicyAttribute = &sPolicyAttribute
+var PolicyAttribute_AttributeName = &sPolicyAttribute_AttributeName
+var PolicyAttribute_AttributeValue = &sPolicyAttribute_AttributeValue
+
+var PolicyAttributeDescription = &sPolicyAttributeDescription
+var PolicyAttributeDescription_AttributeName = &sPolicyAttributeDescription_AttributeName
+var PolicyAttributeDescription_AttributeValue = &sPolicyAttributeDescription_AttributeValue
+
+var _PolicyAttributeDescriptions = &s_PolicyAttributeDescriptions
+var _PolicyAttributeDescriptions_member = &s_PolicyAttributeDescriptions_member
+
+var _PolicyAttributes = &s_PolicyAttributes
+var _PolicyAttributes_member = &s_PolicyAttributes_member
+
+var PolicyAttributeTypeDescription = &sPolicyAttributeTypeDescription
+var PolicyAttributeTypeDescription_AttributeName = &sPolicyAttributeTypeDescription_AttributeName
+var PolicyAttributeTypeDescription_AttributeType = &sPolicyAttributeTypeDescription_AttributeType
+var PolicyAttributeTypeDescription_Description = &sPolicyAttributeTypeDescription_Description
+var PolicyAttributeTypeDescription_DefaultValue = &sPolicyAttributeTypeDescription_DefaultValue
+var PolicyAttributeTypeDescription_Cardinality = &sPolicyAttributeTypeDescription_Cardinality
+
+var _PolicyAttributeTypeDescriptions = &s_PolicyAttributeTypeDescriptions
+var _PolicyAttributeTypeDescriptions_member = &s_PolicyAttributeTypeDescriptions_member
+
+var PolicyDescription = &sPolicyDescription
+var PolicyDescription_PolicyName = &sPolicyDescription_PolicyName
+var PolicyDescription_PolicyTypeName = &sPolicyDescription_PolicyTypeName
+var PolicyDescription_PolicyAttributeDescriptions = &sPolicyDescription_PolicyAttributeDescriptions
+
+var _PolicyDescriptions = &s_PolicyDescriptions
+var _PolicyDescriptions_member = &s_PolicyDescriptions_member
+
+var _PolicyName = &s_PolicyName
+
+var _PolicyNames = &s_PolicyNames
+var _PolicyNames_member = &s_PolicyNames_member
+
+var PolicyNotFoundException = &sPolicyNotFoundException
+var PolicyNotFoundException_Message = &sPolicyNotFoundException_Message
+
+var PolicyTypeDescription = &sPolicyTypeDescription
+var PolicyTypeDescription_PolicyTypeName = &sPolicyTypeDescription_PolicyTypeName
+var PolicyTypeDescription_Description = &sPolicyTypeDescription_Description
+var PolicyTypeDescription_PolicyAttributeTypeDescriptions = &sPolicyTypeDescription_PolicyAttributeTypeDescriptions
+
+var _PolicyTypeDescriptions = &s_PolicyTypeDescriptions
+var _PolicyTypeDescriptions_member = &s_PolicyTypeDescriptions_member
+
+var _PolicyTypeName = &s_PolicyTypeName
+
+var _PolicyTypeNames = &s_PolicyTypeNames
+var _PolicyTypeNames_member = &s_PolicyTypeNames_member
+
+var PolicyTypeNotFoundException = &sPolicyTypeNotFoundException
+var PolicyTypeNotFoundException_Message = &sPolicyTypeNotFoundException_Message
+
+var _Ports = &s_Ports
+var _Ports_member = &s_Ports_member
+
+var _Protocol = &s_Protocol
+
+var _ReasonCode = &s_ReasonCode
+
+var _S3BucketName = &s_S3BucketName
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupName = &s_SecurityGroupName
+
+var _SecurityGroupOwnerAlias = &s_SecurityGroupOwnerAlias
+
+var _SecurityGroups = &s_SecurityGroups
+var _SecurityGroups_member = &s_SecurityGroups_member
+
+var SourceSecurityGroup = &sSourceSecurityGroup
+var SourceSecurityGroup_OwnerAlias = &sSourceSecurityGroup_OwnerAlias
+var SourceSecurityGroup_GroupName = &sSourceSecurityGroup_GroupName
+
+var _SSLCertificateId = &s_SSLCertificateId
+
+var _State = &s_State
+
+var _SubnetId = &s_SubnetId
+
+var SubnetNotFoundException = &sSubnetNotFoundException
+var SubnetNotFoundException_Message = &sSubnetNotFoundException_Message
+
+var _Subnets = &s_Subnets
+var _Subnets_member = &s_Subnets_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var TagDescription = &sTagDescription
+var TagDescription_LoadBalancerName = &sTagDescription_LoadBalancerName
+var TagDescription_Tags = &sTagDescription_Tags
+
+var _TagDescriptions = &s_TagDescriptions
+var _TagDescriptions_member = &s_TagDescriptions_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var TagKeyOnly = &sTagKeyOnly
+var TagKeyOnly_Key = &sTagKeyOnly_Key
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TooManyAccessPointsException = &sTooManyAccessPointsException
+var TooManyAccessPointsException_Message = &sTooManyAccessPointsException_Message
+
+var TooManyPoliciesException = &sTooManyPoliciesException
+var TooManyPoliciesException_Message = &sTooManyPoliciesException_Message
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+
+var _UnhealthyThreshold = &s_UnhealthyThreshold
+
+var UnsupportedProtocolException = &sUnsupportedProtocolException
+var UnsupportedProtocolException_Message = &sUnsupportedProtocolException_Message
+
+var _VPCId = &s_VPCId
+
+var AddTagsInput = &sAddTagsInput
+var AddTagsInput_LoadBalancerNames = &sAddTagsInput_LoadBalancerNames
+var AddTagsInput_Tags = &sAddTagsInput_Tags
+
+var AddTagsOutput = &sAddTagsOutput
+
+var ApplySecurityGroupsToLoadBalancerInput = &sApplySecurityGroupsToLoadBalancerInput
+var ApplySecurityGroupsToLoadBalancerInput_LoadBalancerName = &sApplySecurityGroupsToLoadBalancerInput_LoadBalancerName
+var ApplySecurityGroupsToLoadBalancerInput_SecurityGroups = &sApplySecurityGroupsToLoadBalancerInput_SecurityGroups
+
+var ApplySecurityGroupsToLoadBalancerOutput = &sApplySecurityGroupsToLoadBalancerOutput
+var ApplySecurityGroupsToLoadBalancerOutput_SecurityGroups = &sApplySecurityGroupsToLoadBalancerOutput_SecurityGroups
+
+var AttachLoadBalancerToSubnetsInput = &sAttachLoadBalancerToSubnetsInput
+var AttachLoadBalancerToSubnetsInput_LoadBalancerName = &sAttachLoadBalancerToSubnetsInput_LoadBalancerName
+var AttachLoadBalancerToSubnetsInput_Subnets = &sAttachLoadBalancerToSubnetsInput_Subnets
+
+var AttachLoadBalancerToSubnetsOutput = &sAttachLoadBalancerToSubnetsOutput
+var AttachLoadBalancerToSubnetsOutput_Subnets = &sAttachLoadBalancerToSubnetsOutput_Subnets
+
+var ConfigureHealthCheckInput = &sConfigureHealthCheckInput
+var ConfigureHealthCheckInput_LoadBalancerName = &sConfigureHealthCheckInput_LoadBalancerName
+var ConfigureHealthCheckInput_HealthCheck = &sConfigureHealthCheckInput_HealthCheck
+
+var ConfigureHealthCheckOutput = &sConfigureHealthCheckOutput
+var ConfigureHealthCheckOutput_HealthCheck = &sConfigureHealthCheckOutput_HealthCheck
+
+var CreateAppCookieStickinessPolicyInput = &sCreateAppCookieStickinessPolicyInput
+var CreateAppCookieStickinessPolicyInput_LoadBalancerName = &sCreateAppCookieStickinessPolicyInput_LoadBalancerName
+var CreateAppCookieStickinessPolicyInput_PolicyName = &sCreateAppCookieStickinessPolicyInput_PolicyName
+var CreateAppCookieStickinessPolicyInput_CookieName = &sCreateAppCookieStickinessPolicyInput_CookieName
+
+var CreateAppCookieStickinessPolicyOutput = &sCreateAppCookieStickinessPolicyOutput
+
+var CreateLBCookieStickinessPolicyInput = &sCreateLBCookieStickinessPolicyInput
+var CreateLBCookieStickinessPolicyInput_LoadBalancerName = &sCreateLBCookieStickinessPolicyInput_LoadBalancerName
+var CreateLBCookieStickinessPolicyInput_PolicyName = &sCreateLBCookieStickinessPolicyInput_PolicyName
+var CreateLBCookieStickinessPolicyInput_CookieExpirationPeriod = &sCreateLBCookieStickinessPolicyInput_CookieExpirationPeriod
+
+var CreateLBCookieStickinessPolicyOutput = &sCreateLBCookieStickinessPolicyOutput
+
+var CreateAccessPointInput = &sCreateAccessPointInput
+var CreateAccessPointInput_LoadBalancerName = &sCreateAccessPointInput_LoadBalancerName
+var CreateAccessPointInput_Listeners = &sCreateAccessPointInput_Listeners
+var CreateAccessPointInput_AvailabilityZones = &sCreateAccessPointInput_AvailabilityZones
+var CreateAccessPointInput_Subnets = &sCreateAccessPointInput_Subnets
+var CreateAccessPointInput_SecurityGroups = &sCreateAccessPointInput_SecurityGroups
+var CreateAccessPointInput_Scheme = &sCreateAccessPointInput_Scheme
+var CreateAccessPointInput_Tags = &sCreateAccessPointInput_Tags
+
+var CreateLoadBalancerListenerInput = &sCreateLoadBalancerListenerInput
+var CreateLoadBalancerListenerInput_LoadBalancerName = &sCreateLoadBalancerListenerInput_LoadBalancerName
+var CreateLoadBalancerListenerInput_Listeners = &sCreateLoadBalancerListenerInput_Listeners
+
+var CreateLoadBalancerListenerOutput = &sCreateLoadBalancerListenerOutput
+
+var CreateAccessPointOutput = &sCreateAccessPointOutput
+var CreateAccessPointOutput_DNSName = &sCreateAccessPointOutput_DNSName
+
+var CreateLoadBalancerPolicyInput = &sCreateLoadBalancerPolicyInput
+var CreateLoadBalancerPolicyInput_LoadBalancerName = &sCreateLoadBalancerPolicyInput_LoadBalancerName
+var CreateLoadBalancerPolicyInput_PolicyName = &sCreateLoadBalancerPolicyInput_PolicyName
+var CreateLoadBalancerPolicyInput_PolicyTypeName = &sCreateLoadBalancerPolicyInput_PolicyTypeName
+var CreateLoadBalancerPolicyInput_PolicyAttributes = &sCreateLoadBalancerPolicyInput_PolicyAttributes
+
+var CreateLoadBalancerPolicyOutput = &sCreateLoadBalancerPolicyOutput
+
+var DeleteAccessPointInput = &sDeleteAccessPointInput
+var DeleteAccessPointInput_LoadBalancerName = &sDeleteAccessPointInput_LoadBalancerName
+
+var DeleteLoadBalancerListenerInput = &sDeleteLoadBalancerListenerInput
+var DeleteLoadBalancerListenerInput_LoadBalancerName = &sDeleteLoadBalancerListenerInput_LoadBalancerName
+var DeleteLoadBalancerListenerInput_LoadBalancerPorts = &sDeleteLoadBalancerListenerInput_LoadBalancerPorts
+
+var DeleteLoadBalancerListenerOutput = &sDeleteLoadBalancerListenerOutput
+
+var DeleteAccessPointOutput = &sDeleteAccessPointOutput
+
+var DeleteLoadBalancerPolicyInput = &sDeleteLoadBalancerPolicyInput
+var DeleteLoadBalancerPolicyInput_LoadBalancerName = &sDeleteLoadBalancerPolicyInput_LoadBalancerName
+var DeleteLoadBalancerPolicyInput_PolicyName = &sDeleteLoadBalancerPolicyInput_PolicyName
+
+var DeleteLoadBalancerPolicyOutput = &sDeleteLoadBalancerPolicyOutput
+
+var DeregisterEndPointsInput = &sDeregisterEndPointsInput
+var DeregisterEndPointsInput_LoadBalancerName = &sDeregisterEndPointsInput_LoadBalancerName
+var DeregisterEndPointsInput_Instances = &sDeregisterEndPointsInput_Instances
+
+var DeregisterEndPointsOutput = &sDeregisterEndPointsOutput
+var DeregisterEndPointsOutput_Instances = &sDeregisterEndPointsOutput_Instances
+
+var DescribeAccountLimitsInput = &sDescribeAccountLimitsInput
+var DescribeAccountLimitsInput_Marker = &sDescribeAccountLimitsInput_Marker
+var DescribeAccountLimitsInput_PageSize = &sDescribeAccountLimitsInput_PageSize
+
+var DescribeAccountLimitsOutput = &sDescribeAccountLimitsOutput
+var DescribeAccountLimitsOutput_Limits = &sDescribeAccountLimitsOutput_Limits
+var DescribeAccountLimitsOutput_NextMarker = &sDescribeAccountLimitsOutput_NextMarker
+
+var DescribeEndPointStateInput = &sDescribeEndPointStateInput
+var DescribeEndPointStateInput_LoadBalancerName = &sDescribeEndPointStateInput_LoadBalancerName
+var DescribeEndPointStateInput_Instances = &sDescribeEndPointStateInput_Instances
+
+var DescribeEndPointStateOutput = &sDescribeEndPointStateOutput
+var DescribeEndPointStateOutput_InstanceStates = &sDescribeEndPointStateOutput_InstanceStates
+
+var DescribeLoadBalancerAttributesInput = &sDescribeLoadBalancerAttributesInput
+var DescribeLoadBalancerAttributesInput_LoadBalancerName = &sDescribeLoadBalancerAttributesInput_LoadBalancerName
+
+var DescribeLoadBalancerAttributesOutput = &sDescribeLoadBalancerAttributesOutput
+var DescribeLoadBalancerAttributesOutput_LoadBalancerAttributes = &sDescribeLoadBalancerAttributesOutput_LoadBalancerAttributes
+
+var DescribeLoadBalancerPoliciesInput = &sDescribeLoadBalancerPoliciesInput
+var DescribeLoadBalancerPoliciesInput_LoadBalancerName = &sDescribeLoadBalancerPoliciesInput_LoadBalancerName
+var DescribeLoadBalancerPoliciesInput_PolicyNames = &sDescribeLoadBalancerPoliciesInput_PolicyNames
+
+var DescribeLoadBalancerPoliciesOutput = &sDescribeLoadBalancerPoliciesOutput
+var DescribeLoadBalancerPoliciesOutput_PolicyDescriptions = &sDescribeLoadBalancerPoliciesOutput_PolicyDescriptions
+
+var DescribeLoadBalancerPolicyTypesInput = &sDescribeLoadBalancerPolicyTypesInput
+var DescribeLoadBalancerPolicyTypesInput_PolicyTypeNames = &sDescribeLoadBalancerPolicyTypesInput_PolicyTypeNames
+
+var DescribeLoadBalancerPolicyTypesOutput = &sDescribeLoadBalancerPolicyTypesOutput
+var DescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions = &sDescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions
+
+var DescribeAccessPointsInput = &sDescribeAccessPointsInput
+var DescribeAccessPointsInput_LoadBalancerNames = &sDescribeAccessPointsInput_LoadBalancerNames
+var DescribeAccessPointsInput_Marker = &sDescribeAccessPointsInput_Marker
+var DescribeAccessPointsInput_PageSize = &sDescribeAccessPointsInput_PageSize
+
+var DescribeAccessPointsOutput = &sDescribeAccessPointsOutput
+var DescribeAccessPointsOutput_LoadBalancerDescriptions = &sDescribeAccessPointsOutput_LoadBalancerDescriptions
+var DescribeAccessPointsOutput_NextMarker = &sDescribeAccessPointsOutput_NextMarker
+
+var DescribeTagsInput = &sDescribeTagsInput
+var DescribeTagsInput_LoadBalancerNames = &sDescribeTagsInput_LoadBalancerNames
+
+var DescribeTagsOutput = &sDescribeTagsOutput
+var DescribeTagsOutput_TagDescriptions = &sDescribeTagsOutput_TagDescriptions
+
+var DetachLoadBalancerFromSubnetsInput = &sDetachLoadBalancerFromSubnetsInput
+var DetachLoadBalancerFromSubnetsInput_LoadBalancerName = &sDetachLoadBalancerFromSubnetsInput_LoadBalancerName
+var DetachLoadBalancerFromSubnetsInput_Subnets = &sDetachLoadBalancerFromSubnetsInput_Subnets
+
+var DetachLoadBalancerFromSubnetsOutput = &sDetachLoadBalancerFromSubnetsOutput
+var DetachLoadBalancerFromSubnetsOutput_Subnets = &sDetachLoadBalancerFromSubnetsOutput_Subnets
+
+var RemoveAvailabilityZonesInput = &sRemoveAvailabilityZonesInput
+var RemoveAvailabilityZonesInput_LoadBalancerName = &sRemoveAvailabilityZonesInput_LoadBalancerName
+var RemoveAvailabilityZonesInput_AvailabilityZones = &sRemoveAvailabilityZonesInput_AvailabilityZones
+
+var RemoveAvailabilityZonesOutput = &sRemoveAvailabilityZonesOutput
+var RemoveAvailabilityZonesOutput_AvailabilityZones = &sRemoveAvailabilityZonesOutput_AvailabilityZones
+
+var AddAvailabilityZonesInput = &sAddAvailabilityZonesInput
+var AddAvailabilityZonesInput_LoadBalancerName = &sAddAvailabilityZonesInput_LoadBalancerName
+var AddAvailabilityZonesInput_AvailabilityZones = &sAddAvailabilityZonesInput_AvailabilityZones
+
+var AddAvailabilityZonesOutput = &sAddAvailabilityZonesOutput
+var AddAvailabilityZonesOutput_AvailabilityZones = &sAddAvailabilityZonesOutput_AvailabilityZones
+
+var ModifyLoadBalancerAttributesInput = &sModifyLoadBalancerAttributesInput
+var ModifyLoadBalancerAttributesInput_LoadBalancerName = &sModifyLoadBalancerAttributesInput_LoadBalancerName
+var ModifyLoadBalancerAttributesInput_LoadBalancerAttributes = &sModifyLoadBalancerAttributesInput_LoadBalancerAttributes
+
+var ModifyLoadBalancerAttributesOutput = &sModifyLoadBalancerAttributesOutput
+var ModifyLoadBalancerAttributesOutput_LoadBalancerName = &sModifyLoadBalancerAttributesOutput_LoadBalancerName
+var ModifyLoadBalancerAttributesOutput_LoadBalancerAttributes = &sModifyLoadBalancerAttributesOutput_LoadBalancerAttributes
+
+var RegisterEndPointsInput = &sRegisterEndPointsInput
+var RegisterEndPointsInput_LoadBalancerName = &sRegisterEndPointsInput_LoadBalancerName
+var RegisterEndPointsInput_Instances = &sRegisterEndPointsInput_Instances
+
+var RegisterEndPointsOutput = &sRegisterEndPointsOutput
+var RegisterEndPointsOutput_Instances = &sRegisterEndPointsOutput_Instances
+
+var RemoveTagsInput = &sRemoveTagsInput
+var RemoveTagsInput_LoadBalancerNames = &sRemoveTagsInput_LoadBalancerNames
+var RemoveTagsInput_Tags = &sRemoveTagsInput_Tags
+
+var RemoveTagsOutput = &sRemoveTagsOutput
+
+var SetLoadBalancerListenerSSLCertificateInput = &sSetLoadBalancerListenerSSLCertificateInput
+var SetLoadBalancerListenerSSLCertificateInput_LoadBalancerName = &sSetLoadBalancerListenerSSLCertificateInput_LoadBalancerName
+var SetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort = &sSetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort
+var SetLoadBalancerListenerSSLCertificateInput_SSLCertificateId = &sSetLoadBalancerListenerSSLCertificateInput_SSLCertificateId
+
+var SetLoadBalancerListenerSSLCertificateOutput = &sSetLoadBalancerListenerSSLCertificateOutput
+
+var SetLoadBalancerPoliciesForBackendServerInput = &sSetLoadBalancerPoliciesForBackendServerInput
+var SetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName = &sSetLoadBalancerPoliciesForBackendServerInput_LoadBalancerName
+var SetLoadBalancerPoliciesForBackendServerInput_InstancePort = &sSetLoadBalancerPoliciesForBackendServerInput_InstancePort
+var SetLoadBalancerPoliciesForBackendServerInput_PolicyNames = &sSetLoadBalancerPoliciesForBackendServerInput_PolicyNames
+
+var SetLoadBalancerPoliciesForBackendServerOutput = &sSetLoadBalancerPoliciesForBackendServerOutput
+
+var SetLoadBalancerPoliciesOfListenerInput = &sSetLoadBalancerPoliciesOfListenerInput
+var SetLoadBalancerPoliciesOfListenerInput_LoadBalancerName = &sSetLoadBalancerPoliciesOfListenerInput_LoadBalancerName
+var SetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort = &sSetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort
+var SetLoadBalancerPoliciesOfListenerInput_PolicyNames = &sSetLoadBalancerPoliciesOfListenerInput_PolicyNames
+
+var SetLoadBalancerPoliciesOfListenerOutput = &sSetLoadBalancerPoliciesOfListenerOutput
+
+var ElasticLoadBalancing_v7 = &smithy.ServiceSchema{Schema: &s_ElasticLoadBalancing_v7, Version: "2012-06-01"}

@@ -4,294 +4,275 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GenerateDataSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "GenerateDataSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSupportDataExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "StartSupportDataExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var _MarketplaceCommerceAnalytics20150701 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "MarketplaceCommerceAnalytics20150701",
-}, smithy.ShapeTypeService, 0)
-
-var MarketplaceCommerceAnalytics20150701 = smithy.NewServiceSchema(_MarketplaceCommerceAnalytics20150701, "2015-07-01")
-
-var _CustomerDefinedValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "CustomerDefinedValues",
-}, smithy.ShapeTypeMap, 2)
-var _CustomerDefinedValues_key *smithy.Schema
-
-var _CustomerDefinedValues_value *smithy.Schema
-
-var _DataSetPublicationDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "DataSetPublicationDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DataSetRequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "DataSetRequestId",
-}, smithy.ShapeTypeString, 0)
-
-var DataSetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "DataSetType",
-}, smithy.ShapeTypeEnum, 25)
-var DataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS *smithy.Schema
-
-var DataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS *smithy.Schema
-
-var DataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE *smithy.Schema
-
-var DataSetType_DAILY_BUSINESS_FEES *smithy.Schema
-
-var DataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS *smithy.Schema
-
-var DataSetType_DAILY_BUSINESS_NEW_INSTANCES *smithy.Schema
-
-var DataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS *smithy.Schema
-
-var DataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS *smithy.Schema
-
-var DataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA *smithy.Schema
-
-var DataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS *smithy.Schema
-
-var DataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE *smithy.Schema
-
-var DataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_PRODUCT *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS *smithy.Schema
-
-var DataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN *smithy.Schema
-
-var DataSetType_CUSTOMER_PROFILE_BY_INDUSTRY *smithy.Schema
-
-var DataSetType_CUSTOMER_PROFILE_BY_REVENUE *smithy.Schema
-
-var DataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY *smithy.Schema
-
-var DataSetType_SALES_COMPENSATION_BILLED_REVENUE *smithy.Schema
-
-var DataSetType_US_SALES_AND_USE_TAX_RECORDS *smithy.Schema
-
-var _DestinationS3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "DestinationS3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationS3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "DestinationS3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FromDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "FromDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var MarketplaceCommerceAnalyticsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "MarketplaceCommerceAnalyticsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var MarketplaceCommerceAnalyticsException_message *smithy.Schema
-
-var _OptionalKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "OptionalKey",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionalValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "OptionalValue",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleNameArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "RoleNameArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SnsTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "SnsTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var SupportDataSetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "SupportDataSetType",
-}, smithy.ShapeTypeEnum, 2)
-var SupportDataSetType_customer_support_contacts_data *smithy.Schema
-
-var SupportDataSetType_test_customer_support_contacts_data *smithy.Schema
-
-var GenerateDataSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "GenerateDataSetRequest",
-}, smithy.ShapeTypeStructure, 7)
-var GenerateDataSetRequest_dataSetType *smithy.Schema
-
-var GenerateDataSetRequest_dataSetPublicationDate *smithy.Schema
-
-var GenerateDataSetRequest_roleNameArn *smithy.Schema
-
-var GenerateDataSetRequest_destinationS3BucketName *smithy.Schema
-
-var GenerateDataSetRequest_destinationS3Prefix *smithy.Schema
-
-var GenerateDataSetRequest_snsTopicArn *smithy.Schema
-
-var GenerateDataSetRequest_customerDefinedValues *smithy.Schema
-
-var GenerateDataSetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "GenerateDataSetResult",
-}, smithy.ShapeTypeStructure, 1)
-var GenerateDataSetResult_dataSetRequestId *smithy.Schema
-
-var StartSupportDataExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "StartSupportDataExportRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartSupportDataExportRequest_dataSetType *smithy.Schema
-
-var StartSupportDataExportRequest_fromDate *smithy.Schema
-
-var StartSupportDataExportRequest_roleNameArn *smithy.Schema
-
-var StartSupportDataExportRequest_destinationS3BucketName *smithy.Schema
-
-var StartSupportDataExportRequest_destinationS3Prefix *smithy.Schema
-
-var StartSupportDataExportRequest_snsTopicArn *smithy.Schema
-
-var StartSupportDataExportRequest_customerDefinedValues *smithy.Schema
-
-var StartSupportDataExportResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecommerceanalytics",
-	Name:      "StartSupportDataExportResult",
-}, smithy.ShapeTypeStructure, 1)
-var StartSupportDataExportResult_dataSetRequestId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_CustomerDefinedValues_key = _CustomerDefinedValues.AddMember("key", _OptionalKey)
-
-	_CustomerDefinedValues_value = _CustomerDefinedValues.AddMember("value", _OptionalValue)
-
-	DataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS = DataSetType.AddMember("CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS", smithyprelude.Unit)
-
-	DataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS = DataSetType.AddMember("CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS", smithyprelude.Unit)
-
-	DataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE = DataSetType.AddMember("DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE", smithyprelude.Unit)
-
-	DataSetType_DAILY_BUSINESS_FEES = DataSetType.AddMember("DAILY_BUSINESS_FEES", smithyprelude.Unit)
-
-	DataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS = DataSetType.AddMember("DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS", smithyprelude.Unit)
-
-	DataSetType_DAILY_BUSINESS_NEW_INSTANCES = DataSetType.AddMember("DAILY_BUSINESS_NEW_INSTANCES", smithyprelude.Unit)
-
-	DataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS = DataSetType.AddMember("DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS", smithyprelude.Unit)
-
-	DataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS = DataSetType.AddMember("DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS", smithyprelude.Unit)
-
-	DataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA = DataSetType.AddMember("MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA", smithyprelude.Unit)
-
-	DataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS = DataSetType.AddMember("MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS", smithyprelude.Unit)
-
-	DataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE = DataSetType.AddMember("MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE", smithyprelude.Unit)
-
-	DataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE = DataSetType.AddMember("MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_PRODUCT = DataSetType.AddMember("DISBURSED_AMOUNT_BY_PRODUCT", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS = DataSetType.AddMember("DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS = DataSetType.AddMember("DISBURSED_AMOUNT_BY_INSTANCE_HOURS", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO = DataSetType.AddMember("DISBURSED_AMOUNT_BY_CUSTOMER_GEO", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS = DataSetType.AddMember("DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS = DataSetType.AddMember("DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS = DataSetType.AddMember("DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS", smithyprelude.Unit)
-
-	DataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN = DataSetType.AddMember("DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN", smithyprelude.Unit)
-
-	DataSetType_CUSTOMER_PROFILE_BY_INDUSTRY = DataSetType.AddMember("CUSTOMER_PROFILE_BY_INDUSTRY", smithyprelude.Unit)
-
-	DataSetType_CUSTOMER_PROFILE_BY_REVENUE = DataSetType.AddMember("CUSTOMER_PROFILE_BY_REVENUE", smithyprelude.Unit)
-
-	DataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY = DataSetType.AddMember("CUSTOMER_PROFILE_BY_GEOGRAPHY", smithyprelude.Unit)
-
-	DataSetType_SALES_COMPENSATION_BILLED_REVENUE = DataSetType.AddMember("SALES_COMPENSATION_BILLED_REVENUE", smithyprelude.Unit)
-
-	DataSetType_US_SALES_AND_USE_TAX_RECORDS = DataSetType.AddMember("US_SALES_AND_USE_TAX_RECORDS", smithyprelude.Unit)
-
-	MarketplaceCommerceAnalyticsException_message = MarketplaceCommerceAnalyticsException.AddMember("message", _ExceptionMessage)
-
-	SupportDataSetType_customer_support_contacts_data = SupportDataSetType.AddMember("customer_support_contacts_data", smithyprelude.Unit)
-
-	SupportDataSetType_test_customer_support_contacts_data = SupportDataSetType.AddMember("test_customer_support_contacts_data", smithyprelude.Unit)
-
-	GenerateDataSetRequest_dataSetType = GenerateDataSetRequest.AddMember("dataSetType", DataSetType)
-
-	GenerateDataSetRequest_dataSetPublicationDate = GenerateDataSetRequest.AddMember("dataSetPublicationDate", _DataSetPublicationDate)
-
-	GenerateDataSetRequest_roleNameArn = GenerateDataSetRequest.AddMember("roleNameArn", _RoleNameArn)
-
-	GenerateDataSetRequest_destinationS3BucketName = GenerateDataSetRequest.AddMember("destinationS3BucketName", _DestinationS3BucketName)
-
-	GenerateDataSetRequest_destinationS3Prefix = GenerateDataSetRequest.AddMember("destinationS3Prefix", _DestinationS3Prefix)
-
-	GenerateDataSetRequest_snsTopicArn = GenerateDataSetRequest.AddMember("snsTopicArn", _SnsTopicArn)
-
-	GenerateDataSetRequest_customerDefinedValues = GenerateDataSetRequest.AddMember("customerDefinedValues", _CustomerDefinedValues)
-
-	GenerateDataSetResult_dataSetRequestId = GenerateDataSetResult.AddMember("dataSetRequestId", _DataSetRequestId)
-
-	StartSupportDataExportRequest_dataSetType = StartSupportDataExportRequest.AddMember("dataSetType", SupportDataSetType)
-
-	StartSupportDataExportRequest_fromDate = StartSupportDataExportRequest.AddMember("fromDate", _FromDate)
-
-	StartSupportDataExportRequest_roleNameArn = StartSupportDataExportRequest.AddMember("roleNameArn", _RoleNameArn)
-
-	StartSupportDataExportRequest_destinationS3BucketName = StartSupportDataExportRequest.AddMember("destinationS3BucketName", _DestinationS3BucketName)
-
-	StartSupportDataExportRequest_destinationS3Prefix = StartSupportDataExportRequest.AddMember("destinationS3Prefix", _DestinationS3Prefix)
-
-	StartSupportDataExportRequest_snsTopicArn = StartSupportDataExportRequest.AddMember("snsTopicArn", _SnsTopicArn)
-
-	StartSupportDataExportRequest_customerDefinedValues = StartSupportDataExportRequest.AddMember("customerDefinedValues", _CustomerDefinedValues)
-
-	StartSupportDataExportResult_dataSetRequestId = StartSupportDataExportResult.AddMember("dataSetRequestId", _DataSetRequestId)
-
-}
+var (
+	eGenerateDataSet                                                smithy.SchemaExtensions
+	eStartSupportDataExport                                         smithy.SchemaExtensions
+	e_MarketplaceCommerceAnalytics20150701                          smithy.SchemaExtensions
+	e_CustomerDefinedValues                                         smithy.SchemaExtensions
+	e_CustomerDefinedValues_key                                     smithy.SchemaExtensions
+	e_CustomerDefinedValues_value                                   smithy.SchemaExtensions
+	e_DataSetPublicationDate                                        smithy.SchemaExtensions
+	e_DataSetRequestId                                              smithy.SchemaExtensions
+	eDataSetType                                                    smithy.SchemaExtensions
+	eDataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS   smithy.SchemaExtensions
+	eDataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS           smithy.SchemaExtensions
+	eDataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE              smithy.SchemaExtensions
+	eDataSetType_DAILY_BUSINESS_FEES                                smithy.SchemaExtensions
+	eDataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS              smithy.SchemaExtensions
+	eDataSetType_DAILY_BUSINESS_NEW_INSTANCES                       smithy.SchemaExtensions
+	eDataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS             smithy.SchemaExtensions
+	eDataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS        smithy.SchemaExtensions
+	eDataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA           smithy.SchemaExtensions
+	eDataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS               smithy.SchemaExtensions
+	eDataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE          smithy.SchemaExtensions
+	eDataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE          smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_PRODUCT                        smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS                 smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO                   smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS       smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS         smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS          smithy.SchemaExtensions
+	eDataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN    smithy.SchemaExtensions
+	eDataSetType_CUSTOMER_PROFILE_BY_INDUSTRY                       smithy.SchemaExtensions
+	eDataSetType_CUSTOMER_PROFILE_BY_REVENUE                        smithy.SchemaExtensions
+	eDataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY                      smithy.SchemaExtensions
+	eDataSetType_SALES_COMPENSATION_BILLED_REVENUE                  smithy.SchemaExtensions
+	eDataSetType_US_SALES_AND_USE_TAX_RECORDS                       smithy.SchemaExtensions
+	e_DestinationS3BucketName                                       smithy.SchemaExtensions
+	e_DestinationS3Prefix                                           smithy.SchemaExtensions
+	e_ExceptionMessage                                              smithy.SchemaExtensions
+	e_FromDate                                                      smithy.SchemaExtensions
+	eMarketplaceCommerceAnalyticsException                          smithy.SchemaExtensions
+	eMarketplaceCommerceAnalyticsException_message                  smithy.SchemaExtensions
+	e_OptionalKey                                                   smithy.SchemaExtensions
+	e_OptionalValue                                                 smithy.SchemaExtensions
+	e_RoleNameArn                                                   smithy.SchemaExtensions
+	e_SnsTopicArn                                                   smithy.SchemaExtensions
+	eSupportDataSetType                                             smithy.SchemaExtensions
+	eSupportDataSetType_customer_support_contacts_data              smithy.SchemaExtensions
+	eSupportDataSetType_test_customer_support_contacts_data         smithy.SchemaExtensions
+	eGenerateDataSetRequest                                         smithy.SchemaExtensions
+	eGenerateDataSetRequest_dataSetType                             smithy.SchemaExtensions
+	eGenerateDataSetRequest_dataSetPublicationDate                  smithy.SchemaExtensions
+	eGenerateDataSetRequest_roleNameArn                             smithy.SchemaExtensions
+	eGenerateDataSetRequest_destinationS3BucketName                 smithy.SchemaExtensions
+	eGenerateDataSetRequest_destinationS3Prefix                     smithy.SchemaExtensions
+	eGenerateDataSetRequest_snsTopicArn                             smithy.SchemaExtensions
+	eGenerateDataSetRequest_customerDefinedValues                   smithy.SchemaExtensions
+	eGenerateDataSetResult                                          smithy.SchemaExtensions
+	eGenerateDataSetResult_dataSetRequestId                         smithy.SchemaExtensions
+	eStartSupportDataExportRequest                                  smithy.SchemaExtensions
+	eStartSupportDataExportRequest_dataSetType                      smithy.SchemaExtensions
+	eStartSupportDataExportRequest_fromDate                         smithy.SchemaExtensions
+	eStartSupportDataExportRequest_roleNameArn                      smithy.SchemaExtensions
+	eStartSupportDataExportRequest_destinationS3BucketName          smithy.SchemaExtensions
+	eStartSupportDataExportRequest_destinationS3Prefix              smithy.SchemaExtensions
+	eStartSupportDataExportRequest_snsTopicArn                      smithy.SchemaExtensions
+	eStartSupportDataExportRequest_customerDefinedValues            smithy.SchemaExtensions
+	eStartSupportDataExportResult                                   smithy.SchemaExtensions
+	eStartSupportDataExportResult_dataSetRequestId                  smithy.SchemaExtensions
+)
+
+var (
+	iGenerateDataSet                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "GenerateDataSet"}
+	iStartSupportDataExport                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "StartSupportDataExport"}
+	i_MarketplaceCommerceAnalytics20150701 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "MarketplaceCommerceAnalytics20150701"}
+	i_CustomerDefinedValues                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "CustomerDefinedValues"}
+	i_DataSetPublicationDate               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "DataSetPublicationDate"}
+	i_DataSetRequestId                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "DataSetRequestId"}
+	iDataSetType                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "DataSetType"}
+	i_DestinationS3BucketName              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "DestinationS3BucketName"}
+	i_DestinationS3Prefix                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "DestinationS3Prefix"}
+	i_ExceptionMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "ExceptionMessage"}
+	i_FromDate                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "FromDate"}
+	iMarketplaceCommerceAnalyticsException = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "MarketplaceCommerceAnalyticsException"}
+	i_OptionalKey                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "OptionalKey"}
+	i_OptionalValue                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "OptionalValue"}
+	i_RoleNameArn                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "RoleNameArn"}
+	i_SnsTopicArn                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "SnsTopicArn"}
+	iSupportDataSetType                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "SupportDataSetType"}
+	iGenerateDataSetRequest                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "GenerateDataSetRequest"}
+	iGenerateDataSetResult                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "GenerateDataSetResult"}
+	iStartSupportDataExportRequest         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "StartSupportDataExportRequest"}
+	iStartSupportDataExportResult          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacecommerceanalytics", Name: "StartSupportDataExportResult"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var m_CustomerDefinedValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomerDefinedValues_key, &s_CustomerDefinedValues_value}}
+var mDataSetType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS, &sDataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS, &sDataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE, &sDataSetType_DAILY_BUSINESS_FEES, &sDataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS, &sDataSetType_DAILY_BUSINESS_NEW_INSTANCES, &sDataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS, &sDataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS, &sDataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA, &sDataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS, &sDataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE, &sDataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE, &sDataSetType_DISBURSED_AMOUNT_BY_PRODUCT, &sDataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS, &sDataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS, &sDataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO, &sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS, &sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS, &sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS, &sDataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN, &sDataSetType_CUSTOMER_PROFILE_BY_INDUSTRY, &sDataSetType_CUSTOMER_PROFILE_BY_REVENUE, &sDataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY, &sDataSetType_SALES_COMPENSATION_BILLED_REVENUE, &sDataSetType_US_SALES_AND_USE_TAX_RECORDS}, Hash: &hDataSetType}
+var mMarketplaceCommerceAnalyticsException = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketplaceCommerceAnalyticsException_message}}
+var mSupportDataSetType = smithy.SchemaMembers{List: []*smithy.Schema{&sSupportDataSetType_customer_support_contacts_data, &sSupportDataSetType_test_customer_support_contacts_data}}
+var mGenerateDataSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGenerateDataSetRequest_dataSetType, &sGenerateDataSetRequest_dataSetPublicationDate, &sGenerateDataSetRequest_roleNameArn, &sGenerateDataSetRequest_destinationS3BucketName, &sGenerateDataSetRequest_destinationS3Prefix, &sGenerateDataSetRequest_snsTopicArn, &sGenerateDataSetRequest_customerDefinedValues}}
+var mGenerateDataSetResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGenerateDataSetResult_dataSetRequestId}}
+var mStartSupportDataExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSupportDataExportRequest_dataSetType, &sStartSupportDataExportRequest_fromDate, &sStartSupportDataExportRequest_roleNameArn, &sStartSupportDataExportRequest_destinationS3BucketName, &sStartSupportDataExportRequest_destinationS3Prefix, &sStartSupportDataExportRequest_snsTopicArn, &sStartSupportDataExportRequest_customerDefinedValues}}
+var mStartSupportDataExportResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSupportDataExportResult_dataSetRequestId}}
+
+var hDataSetType = smithy.MemberHash{Seed: 93, Slots: []uint16{
+	23, 0, 0, 1, 0, 0, 0, 0, 21, 0, 15, 0, 0, 0, 0, 0, 17, 20, 0, 0, 2, 0, 18, 16,
+	0, 0, 0, 0, 0, 8, 3, 0, 13, 11, 0, 0, 14, 6, 0, 0, 0, 25, 5, 0, 0, 0, 7, 9,
+	24, 0, 4, 19, 22, 0, 0, 10, 0, 0, 12, 0, 0, 0, 0, 0,
+}}
+
+var sGenerateDataSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataSet, Type: smithy.ShapeTypeOperation, Ext: &eGenerateDataSet})
+var sStartSupportDataExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSupportDataExport, Type: smithy.ShapeTypeOperation, Ext: &eStartSupportDataExport})
+var s_MarketplaceCommerceAnalytics20150701 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceCommerceAnalytics20150701, Type: smithy.ShapeTypeService, Ext: &e_MarketplaceCommerceAnalytics20150701})
+var s_CustomerDefinedValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerDefinedValues, Members: &m_CustomerDefinedValues, Type: smithy.ShapeTypeMap, Ext: &e_CustomerDefinedValues})
+var s_CustomerDefinedValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_OptionalKey, Type: smithy.ShapeTypeString, Ext: &e_CustomerDefinedValues_key})
+var s_CustomerDefinedValues_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_OptionalValue, Type: smithy.ShapeTypeString, Ext: &e_CustomerDefinedValues_value})
+var s_DataSetPublicationDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSetPublicationDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_DataSetPublicationDate})
+var s_DataSetRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSetRequestId, Type: smithy.ShapeTypeString, Ext: &e_DataSetRequestId})
+var sDataSetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSetType, Members: &mDataSetType, Type: smithy.ShapeTypeEnum, Ext: &eDataSetType})
+var sDataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS})
+var sDataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS})
+var sDataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE})
+var sDataSetType_DAILY_BUSINESS_FEES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY_BUSINESS_FEES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DAILY_BUSINESS_FEES})
+var sDataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS})
+var sDataSetType_DAILY_BUSINESS_NEW_INSTANCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY_BUSINESS_NEW_INSTANCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DAILY_BUSINESS_NEW_INSTANCES})
+var sDataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS})
+var sDataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS})
+var sDataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA})
+var sDataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS})
+var sDataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE})
+var sDataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE})
+var sDataSetType_DISBURSED_AMOUNT_BY_PRODUCT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_PRODUCT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_PRODUCT})
+var sDataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS})
+var sDataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_INSTANCE_HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS})
+var sDataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_CUSTOMER_GEO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO})
+var sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS})
+var sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS})
+var sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS})
+var sDataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN})
+var sDataSetType_CUSTOMER_PROFILE_BY_INDUSTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_PROFILE_BY_INDUSTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_CUSTOMER_PROFILE_BY_INDUSTRY})
+var sDataSetType_CUSTOMER_PROFILE_BY_REVENUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_PROFILE_BY_REVENUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_CUSTOMER_PROFILE_BY_REVENUE})
+var sDataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_PROFILE_BY_GEOGRAPHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY})
+var sDataSetType_SALES_COMPENSATION_BILLED_REVENUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SALES_COMPENSATION_BILLED_REVENUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_SALES_COMPENSATION_BILLED_REVENUE})
+var sDataSetType_US_SALES_AND_USE_TAX_RECORDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_SALES_AND_USE_TAX_RECORDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSetType_US_SALES_AND_USE_TAX_RECORDS})
+var s_DestinationS3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationS3BucketName, Type: smithy.ShapeTypeString, Ext: &e_DestinationS3BucketName})
+var s_DestinationS3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationS3Prefix, Type: smithy.ShapeTypeString, Ext: &e_DestinationS3Prefix})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_FromDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FromDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_FromDate})
+var sMarketplaceCommerceAnalyticsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceCommerceAnalyticsException, Members: &mMarketplaceCommerceAnalyticsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eMarketplaceCommerceAnalyticsException})
+var sMarketplaceCommerceAnalyticsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eMarketplaceCommerceAnalyticsException_message})
+var s_OptionalKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalKey, Type: smithy.ShapeTypeString, Ext: &e_OptionalKey})
+var s_OptionalValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalValue, Type: smithy.ShapeTypeString, Ext: &e_OptionalValue})
+var s_RoleNameArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleNameArn, Type: smithy.ShapeTypeString, Ext: &e_RoleNameArn})
+var s_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &e_SnsTopicArn})
+var sSupportDataSetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportDataSetType, Members: &mSupportDataSetType, Type: smithy.ShapeTypeEnum, Ext: &eSupportDataSetType})
+var sSupportDataSetType_customer_support_contacts_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customer_support_contacts_data", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportDataSetType_customer_support_contacts_data})
+var sSupportDataSetType_test_customer_support_contacts_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "test_customer_support_contacts_data", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportDataSetType_test_customer_support_contacts_data})
+var sGenerateDataSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataSetRequest, Members: &mGenerateDataSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataSetRequest})
+var sGenerateDataSetRequest_dataSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSetType", ID: &iDataSetType, Members: &mDataSetType, Type: smithy.ShapeTypeEnum, Ext: &eGenerateDataSetRequest_dataSetType})
+var sGenerateDataSetRequest_dataSetPublicationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSetPublicationDate", ID: &i_DataSetPublicationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eGenerateDataSetRequest_dataSetPublicationDate})
+var sGenerateDataSetRequest_roleNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleNameArn", ID: &i_RoleNameArn, Type: smithy.ShapeTypeString, Ext: &eGenerateDataSetRequest_roleNameArn})
+var sGenerateDataSetRequest_destinationS3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3BucketName", ID: &i_DestinationS3BucketName, Type: smithy.ShapeTypeString, Ext: &eGenerateDataSetRequest_destinationS3BucketName})
+var sGenerateDataSetRequest_destinationS3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3Prefix", ID: &i_DestinationS3Prefix, Type: smithy.ShapeTypeString, Ext: &eGenerateDataSetRequest_destinationS3Prefix})
+var sGenerateDataSetRequest_snsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snsTopicArn", ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &eGenerateDataSetRequest_snsTopicArn})
+var sGenerateDataSetRequest_customerDefinedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerDefinedValues", ID: &i_CustomerDefinedValues, Members: &m_CustomerDefinedValues, Type: smithy.ShapeTypeMap, Ext: &eGenerateDataSetRequest_customerDefinedValues})
+var sGenerateDataSetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataSetResult, Members: &mGenerateDataSetResult, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataSetResult})
+var sGenerateDataSetResult_dataSetRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSetRequestId", ID: &i_DataSetRequestId, Type: smithy.ShapeTypeString, Ext: &eGenerateDataSetResult_dataSetRequestId})
+var sStartSupportDataExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSupportDataExportRequest, Members: &mStartSupportDataExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSupportDataExportRequest})
+var sStartSupportDataExportRequest_dataSetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSetType", ID: &iSupportDataSetType, Members: &mSupportDataSetType, Type: smithy.ShapeTypeEnum, Ext: &eStartSupportDataExportRequest_dataSetType})
+var sStartSupportDataExportRequest_fromDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromDate", ID: &i_FromDate, Type: smithy.ShapeTypeTimestamp, Ext: &eStartSupportDataExportRequest_fromDate})
+var sStartSupportDataExportRequest_roleNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleNameArn", ID: &i_RoleNameArn, Type: smithy.ShapeTypeString, Ext: &eStartSupportDataExportRequest_roleNameArn})
+var sStartSupportDataExportRequest_destinationS3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3BucketName", ID: &i_DestinationS3BucketName, Type: smithy.ShapeTypeString, Ext: &eStartSupportDataExportRequest_destinationS3BucketName})
+var sStartSupportDataExportRequest_destinationS3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3Prefix", ID: &i_DestinationS3Prefix, Type: smithy.ShapeTypeString, Ext: &eStartSupportDataExportRequest_destinationS3Prefix})
+var sStartSupportDataExportRequest_snsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snsTopicArn", ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &eStartSupportDataExportRequest_snsTopicArn})
+var sStartSupportDataExportRequest_customerDefinedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerDefinedValues", ID: &i_CustomerDefinedValues, Members: &m_CustomerDefinedValues, Type: smithy.ShapeTypeMap, Ext: &eStartSupportDataExportRequest_customerDefinedValues})
+var sStartSupportDataExportResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSupportDataExportResult, Members: &mStartSupportDataExportResult, Type: smithy.ShapeTypeStructure, Ext: &eStartSupportDataExportResult})
+var sStartSupportDataExportResult_dataSetRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSetRequestId", ID: &i_DataSetRequestId, Type: smithy.ShapeTypeString, Ext: &eStartSupportDataExportResult_dataSetRequestId})
+
+var GenerateDataSet = &sGenerateDataSet
+
+var StartSupportDataExport = &sStartSupportDataExport
+
+var _MarketplaceCommerceAnalytics20150701 = &s_MarketplaceCommerceAnalytics20150701
+
+var _CustomerDefinedValues = &s_CustomerDefinedValues
+var _CustomerDefinedValues_key = &s_CustomerDefinedValues_key
+var _CustomerDefinedValues_value = &s_CustomerDefinedValues_value
+
+var _DataSetPublicationDate = &s_DataSetPublicationDate
+
+var _DataSetRequestId = &s_DataSetRequestId
+
+var DataSetType = &sDataSetType
+var DataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS = &sDataSetType_CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS
+var DataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS = &sDataSetType_CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS
+var DataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE = &sDataSetType_DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE
+var DataSetType_DAILY_BUSINESS_FEES = &sDataSetType_DAILY_BUSINESS_FEES
+var DataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS = &sDataSetType_DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS
+var DataSetType_DAILY_BUSINESS_NEW_INSTANCES = &sDataSetType_DAILY_BUSINESS_NEW_INSTANCES
+var DataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS = &sDataSetType_DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS
+var DataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS = &sDataSetType_DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS
+var DataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA = &sDataSetType_MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA
+var DataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS = &sDataSetType_MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS
+var DataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE = &sDataSetType_MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE
+var DataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE = &sDataSetType_MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE
+var DataSetType_DISBURSED_AMOUNT_BY_PRODUCT = &sDataSetType_DISBURSED_AMOUNT_BY_PRODUCT
+var DataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS = &sDataSetType_DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS
+var DataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS = &sDataSetType_DISBURSED_AMOUNT_BY_INSTANCE_HOURS
+var DataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO = &sDataSetType_DISBURSED_AMOUNT_BY_CUSTOMER_GEO
+var DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS = &sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS
+var DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS = &sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS
+var DataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS = &sDataSetType_DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS
+var DataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN = &sDataSetType_DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN
+var DataSetType_CUSTOMER_PROFILE_BY_INDUSTRY = &sDataSetType_CUSTOMER_PROFILE_BY_INDUSTRY
+var DataSetType_CUSTOMER_PROFILE_BY_REVENUE = &sDataSetType_CUSTOMER_PROFILE_BY_REVENUE
+var DataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY = &sDataSetType_CUSTOMER_PROFILE_BY_GEOGRAPHY
+var DataSetType_SALES_COMPENSATION_BILLED_REVENUE = &sDataSetType_SALES_COMPENSATION_BILLED_REVENUE
+var DataSetType_US_SALES_AND_USE_TAX_RECORDS = &sDataSetType_US_SALES_AND_USE_TAX_RECORDS
+
+var _DestinationS3BucketName = &s_DestinationS3BucketName
+
+var _DestinationS3Prefix = &s_DestinationS3Prefix
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _FromDate = &s_FromDate
+
+var MarketplaceCommerceAnalyticsException = &sMarketplaceCommerceAnalyticsException
+var MarketplaceCommerceAnalyticsException_message = &sMarketplaceCommerceAnalyticsException_message
+
+var _OptionalKey = &s_OptionalKey
+
+var _OptionalValue = &s_OptionalValue
+
+var _RoleNameArn = &s_RoleNameArn
+
+var _SnsTopicArn = &s_SnsTopicArn
+
+var SupportDataSetType = &sSupportDataSetType
+var SupportDataSetType_customer_support_contacts_data = &sSupportDataSetType_customer_support_contacts_data
+var SupportDataSetType_test_customer_support_contacts_data = &sSupportDataSetType_test_customer_support_contacts_data
+
+var GenerateDataSetRequest = &sGenerateDataSetRequest
+var GenerateDataSetRequest_dataSetType = &sGenerateDataSetRequest_dataSetType
+var GenerateDataSetRequest_dataSetPublicationDate = &sGenerateDataSetRequest_dataSetPublicationDate
+var GenerateDataSetRequest_roleNameArn = &sGenerateDataSetRequest_roleNameArn
+var GenerateDataSetRequest_destinationS3BucketName = &sGenerateDataSetRequest_destinationS3BucketName
+var GenerateDataSetRequest_destinationS3Prefix = &sGenerateDataSetRequest_destinationS3Prefix
+var GenerateDataSetRequest_snsTopicArn = &sGenerateDataSetRequest_snsTopicArn
+var GenerateDataSetRequest_customerDefinedValues = &sGenerateDataSetRequest_customerDefinedValues
+
+var GenerateDataSetResult = &sGenerateDataSetResult
+var GenerateDataSetResult_dataSetRequestId = &sGenerateDataSetResult_dataSetRequestId
+
+var StartSupportDataExportRequest = &sStartSupportDataExportRequest
+var StartSupportDataExportRequest_dataSetType = &sStartSupportDataExportRequest_dataSetType
+var StartSupportDataExportRequest_fromDate = &sStartSupportDataExportRequest_fromDate
+var StartSupportDataExportRequest_roleNameArn = &sStartSupportDataExportRequest_roleNameArn
+var StartSupportDataExportRequest_destinationS3BucketName = &sStartSupportDataExportRequest_destinationS3BucketName
+var StartSupportDataExportRequest_destinationS3Prefix = &sStartSupportDataExportRequest_destinationS3Prefix
+var StartSupportDataExportRequest_snsTopicArn = &sStartSupportDataExportRequest_snsTopicArn
+var StartSupportDataExportRequest_customerDefinedValues = &sStartSupportDataExportRequest_customerDefinedValues
+
+var StartSupportDataExportResult = &sStartSupportDataExportResult
+var StartSupportDataExportResult_dataSetRequestId = &sStartSupportDataExportResult_dataSetRequestId
+
+var MarketplaceCommerceAnalytics20150701 = &smithy.ServiceSchema{Schema: &s_MarketplaceCommerceAnalytics20150701, Version: "2015-07-01"}

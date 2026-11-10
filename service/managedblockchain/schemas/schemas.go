@@ -4,2221 +4,2181 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAccessor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateAccessor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateAccessor                                     smithy.SchemaExtensions
+	eCreateMember                                       smithy.SchemaExtensions
+	eCreateNetwork                                      smithy.SchemaExtensions
+	eCreateNode                                         smithy.SchemaExtensions
+	eCreateProposal                                     smithy.SchemaExtensions
+	eDeleteAccessor                                     smithy.SchemaExtensions
+	eDeleteMember                                       smithy.SchemaExtensions
+	eDeleteNode                                         smithy.SchemaExtensions
+	eGetAccessor                                        smithy.SchemaExtensions
+	eGetMember                                          smithy.SchemaExtensions
+	eGetNetwork                                         smithy.SchemaExtensions
+	eGetNode                                            smithy.SchemaExtensions
+	eGetProposal                                        smithy.SchemaExtensions
+	eListAccessors                                      smithy.SchemaExtensions
+	eListInvitations                                    smithy.SchemaExtensions
+	eListMembers                                        smithy.SchemaExtensions
+	eListNetworks                                       smithy.SchemaExtensions
+	eListNodes                                          smithy.SchemaExtensions
+	eListProposals                                      smithy.SchemaExtensions
+	eListProposalVotes                                  smithy.SchemaExtensions
+	eListTagsForResource                                smithy.SchemaExtensions
+	eRejectInvitation                                   smithy.SchemaExtensions
+	eTagResource                                        smithy.SchemaExtensions
+	eUntagResource                                      smithy.SchemaExtensions
+	eUpdateMember                                       smithy.SchemaExtensions
+	eUpdateNode                                         smithy.SchemaExtensions
+	eVoteOnProposal                                     smithy.SchemaExtensions
+	e_TaigaWebService                                   smithy.SchemaExtensions
+	eAccessDeniedException                              smithy.SchemaExtensions
+	eAccessDeniedException_Message                      smithy.SchemaExtensions
+	eAccessor                                           smithy.SchemaExtensions
+	eAccessor_Id                                        smithy.SchemaExtensions
+	eAccessor_Type                                      smithy.SchemaExtensions
+	eAccessor_BillingToken                              smithy.SchemaExtensions
+	eAccessor_Status                                    smithy.SchemaExtensions
+	eAccessor_CreationDate                              smithy.SchemaExtensions
+	eAccessor_Arn                                       smithy.SchemaExtensions
+	eAccessor_Tags                                      smithy.SchemaExtensions
+	eAccessor_NetworkType                               smithy.SchemaExtensions
+	e_AccessorBillingTokenString                        smithy.SchemaExtensions
+	e_AccessorListMaxResults                            smithy.SchemaExtensions
+	eAccessorNetworkType                                smithy.SchemaExtensions
+	eAccessorNetworkType_ETHEREUM_GOERLI                smithy.SchemaExtensions
+	eAccessorNetworkType_ETHEREUM_MAINNET               smithy.SchemaExtensions
+	eAccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI    smithy.SchemaExtensions
+	eAccessorNetworkType_POLYGON_MAINNET                smithy.SchemaExtensions
+	eAccessorNetworkType_POLYGON_MUMBAI                 smithy.SchemaExtensions
+	eAccessorStatus                                     smithy.SchemaExtensions
+	eAccessorStatus_AVAILABLE                           smithy.SchemaExtensions
+	eAccessorStatus_PENDING_DELETION                    smithy.SchemaExtensions
+	eAccessorStatus_DELETED                             smithy.SchemaExtensions
+	eAccessorSummary                                    smithy.SchemaExtensions
+	eAccessorSummary_Id                                 smithy.SchemaExtensions
+	eAccessorSummary_Type                               smithy.SchemaExtensions
+	eAccessorSummary_Status                             smithy.SchemaExtensions
+	eAccessorSummary_CreationDate                       smithy.SchemaExtensions
+	eAccessorSummary_Arn                                smithy.SchemaExtensions
+	eAccessorSummary_NetworkType                        smithy.SchemaExtensions
+	e_AccessorSummaryList                               smithy.SchemaExtensions
+	e_AccessorSummaryList_member                        smithy.SchemaExtensions
+	eAccessorType                                       smithy.SchemaExtensions
+	eAccessorType_BILLING_TOKEN                         smithy.SchemaExtensions
+	eApprovalThresholdPolicy                            smithy.SchemaExtensions
+	eApprovalThresholdPolicy_ThresholdPercentage        smithy.SchemaExtensions
+	eApprovalThresholdPolicy_ProposalDurationInHours    smithy.SchemaExtensions
+	eApprovalThresholdPolicy_ThresholdComparator        smithy.SchemaExtensions
+	e_ArnString                                         smithy.SchemaExtensions
+	e_AvailabilityZoneString                            smithy.SchemaExtensions
+	e_ClientRequestTokenString                          smithy.SchemaExtensions
+	e_DescriptionString                                 smithy.SchemaExtensions
+	eEdition                                            smithy.SchemaExtensions
+	eEdition_STARTER                                    smithy.SchemaExtensions
+	eEdition_STANDARD                                   smithy.SchemaExtensions
+	e_Enabled                                           smithy.SchemaExtensions
+	e_ExceptionMessage                                  smithy.SchemaExtensions
+	eFramework                                          smithy.SchemaExtensions
+	eFramework_HYPERLEDGER_FABRIC                       smithy.SchemaExtensions
+	eFramework_ETHEREUM                                 smithy.SchemaExtensions
+	e_FrameworkVersionString                            smithy.SchemaExtensions
+	eIllegalActionException                             smithy.SchemaExtensions
+	eIllegalActionException_Message                     smithy.SchemaExtensions
+	e_InputTagMap                                       smithy.SchemaExtensions
+	e_InputTagMap_key                                   smithy.SchemaExtensions
+	e_InputTagMap_value                                 smithy.SchemaExtensions
+	e_InstanceTypeString                                smithy.SchemaExtensions
+	eInternalServiceErrorException                      smithy.SchemaExtensions
+	eInvalidRequestException                            smithy.SchemaExtensions
+	eInvalidRequestException_Message                    smithy.SchemaExtensions
+	eInvitation                                         smithy.SchemaExtensions
+	eInvitation_InvitationId                            smithy.SchemaExtensions
+	eInvitation_CreationDate                            smithy.SchemaExtensions
+	eInvitation_ExpirationDate                          smithy.SchemaExtensions
+	eInvitation_Status                                  smithy.SchemaExtensions
+	eInvitation_NetworkSummary                          smithy.SchemaExtensions
+	eInvitation_Arn                                     smithy.SchemaExtensions
+	e_InvitationList                                    smithy.SchemaExtensions
+	e_InvitationList_member                             smithy.SchemaExtensions
+	eInvitationStatus                                   smithy.SchemaExtensions
+	eInvitationStatus_PENDING                           smithy.SchemaExtensions
+	eInvitationStatus_ACCEPTED                          smithy.SchemaExtensions
+	eInvitationStatus_ACCEPTING                         smithy.SchemaExtensions
+	eInvitationStatus_REJECTED                          smithy.SchemaExtensions
+	eInvitationStatus_EXPIRED                           smithy.SchemaExtensions
+	eInviteAction                                       smithy.SchemaExtensions
+	eInviteAction_Principal                             smithy.SchemaExtensions
+	e_InviteActionList                                  smithy.SchemaExtensions
+	e_InviteActionList_member                           smithy.SchemaExtensions
+	e_IsOwned                                           smithy.SchemaExtensions
+	eLogConfiguration                                   smithy.SchemaExtensions
+	eLogConfiguration_Enabled                           smithy.SchemaExtensions
+	eLogConfigurations                                  smithy.SchemaExtensions
+	eLogConfigurations_Cloudwatch                       smithy.SchemaExtensions
+	eMember                                             smithy.SchemaExtensions
+	eMember_NetworkId                                   smithy.SchemaExtensions
+	eMember_Id                                          smithy.SchemaExtensions
+	eMember_Name                                        smithy.SchemaExtensions
+	eMember_Description                                 smithy.SchemaExtensions
+	eMember_FrameworkAttributes                         smithy.SchemaExtensions
+	eMember_LogPublishingConfiguration                  smithy.SchemaExtensions
+	eMember_Status                                      smithy.SchemaExtensions
+	eMember_CreationDate                                smithy.SchemaExtensions
+	eMember_Tags                                        smithy.SchemaExtensions
+	eMember_Arn                                         smithy.SchemaExtensions
+	eMember_KmsKeyArn                                   smithy.SchemaExtensions
+	eMemberConfiguration                                smithy.SchemaExtensions
+	eMemberConfiguration_Name                           smithy.SchemaExtensions
+	eMemberConfiguration_Description                    smithy.SchemaExtensions
+	eMemberConfiguration_FrameworkConfiguration         smithy.SchemaExtensions
+	eMemberConfiguration_LogPublishingConfiguration     smithy.SchemaExtensions
+	eMemberConfiguration_Tags                           smithy.SchemaExtensions
+	eMemberConfiguration_KmsKeyArn                      smithy.SchemaExtensions
+	eMemberFabricAttributes                             smithy.SchemaExtensions
+	eMemberFabricAttributes_AdminUsername               smithy.SchemaExtensions
+	eMemberFabricAttributes_CaEndpoint                  smithy.SchemaExtensions
+	eMemberFabricConfiguration                          smithy.SchemaExtensions
+	eMemberFabricConfiguration_AdminUsername            smithy.SchemaExtensions
+	eMemberFabricConfiguration_AdminPassword            smithy.SchemaExtensions
+	eMemberFabricLogPublishingConfiguration             smithy.SchemaExtensions
+	eMemberFabricLogPublishingConfiguration_CaLogs      smithy.SchemaExtensions
+	eMemberFrameworkAttributes                          smithy.SchemaExtensions
+	eMemberFrameworkAttributes_Fabric                   smithy.SchemaExtensions
+	eMemberFrameworkConfiguration                       smithy.SchemaExtensions
+	eMemberFrameworkConfiguration_Fabric                smithy.SchemaExtensions
+	e_MemberListMaxResults                              smithy.SchemaExtensions
+	eMemberLogPublishingConfiguration                   smithy.SchemaExtensions
+	eMemberLogPublishingConfiguration_Fabric            smithy.SchemaExtensions
+	eMemberStatus                                       smithy.SchemaExtensions
+	eMemberStatus_CREATING                              smithy.SchemaExtensions
+	eMemberStatus_AVAILABLE                             smithy.SchemaExtensions
+	eMemberStatus_CREATE_FAILED                         smithy.SchemaExtensions
+	eMemberStatus_UPDATING                              smithy.SchemaExtensions
+	eMemberStatus_DELETING                              smithy.SchemaExtensions
+	eMemberStatus_DELETED                               smithy.SchemaExtensions
+	eMemberStatus_INACCESSIBLE_ENCRYPTION_KEY           smithy.SchemaExtensions
+	eMemberSummary                                      smithy.SchemaExtensions
+	eMemberSummary_Id                                   smithy.SchemaExtensions
+	eMemberSummary_Name                                 smithy.SchemaExtensions
+	eMemberSummary_Description                          smithy.SchemaExtensions
+	eMemberSummary_Status                               smithy.SchemaExtensions
+	eMemberSummary_CreationDate                         smithy.SchemaExtensions
+	eMemberSummary_IsOwned                              smithy.SchemaExtensions
+	eMemberSummary_Arn                                  smithy.SchemaExtensions
+	e_MemberSummaryList                                 smithy.SchemaExtensions
+	e_MemberSummaryList_member                          smithy.SchemaExtensions
+	e_NameString                                        smithy.SchemaExtensions
+	eNetwork                                            smithy.SchemaExtensions
+	eNetwork_Id                                         smithy.SchemaExtensions
+	eNetwork_Name                                       smithy.SchemaExtensions
+	eNetwork_Description                                smithy.SchemaExtensions
+	eNetwork_Framework                                  smithy.SchemaExtensions
+	eNetwork_FrameworkVersion                           smithy.SchemaExtensions
+	eNetwork_FrameworkAttributes                        smithy.SchemaExtensions
+	eNetwork_VpcEndpointServiceName                     smithy.SchemaExtensions
+	eNetwork_VotingPolicy                               smithy.SchemaExtensions
+	eNetwork_Status                                     smithy.SchemaExtensions
+	eNetwork_CreationDate                               smithy.SchemaExtensions
+	eNetwork_Tags                                       smithy.SchemaExtensions
+	eNetwork_Arn                                        smithy.SchemaExtensions
+	eNetworkEthereumAttributes                          smithy.SchemaExtensions
+	eNetworkEthereumAttributes_ChainId                  smithy.SchemaExtensions
+	eNetworkFabricAttributes                            smithy.SchemaExtensions
+	eNetworkFabricAttributes_OrderingServiceEndpoint    smithy.SchemaExtensions
+	eNetworkFabricAttributes_Edition                    smithy.SchemaExtensions
+	eNetworkFabricConfiguration                         smithy.SchemaExtensions
+	eNetworkFabricConfiguration_Edition                 smithy.SchemaExtensions
+	eNetworkFrameworkAttributes                         smithy.SchemaExtensions
+	eNetworkFrameworkAttributes_Fabric                  smithy.SchemaExtensions
+	eNetworkFrameworkAttributes_Ethereum                smithy.SchemaExtensions
+	eNetworkFrameworkConfiguration                      smithy.SchemaExtensions
+	eNetworkFrameworkConfiguration_Fabric               smithy.SchemaExtensions
+	e_NetworkListMaxResults                             smithy.SchemaExtensions
+	e_NetworkMemberNameString                           smithy.SchemaExtensions
+	eNetworkStatus                                      smithy.SchemaExtensions
+	eNetworkStatus_CREATING                             smithy.SchemaExtensions
+	eNetworkStatus_AVAILABLE                            smithy.SchemaExtensions
+	eNetworkStatus_CREATE_FAILED                        smithy.SchemaExtensions
+	eNetworkStatus_DELETING                             smithy.SchemaExtensions
+	eNetworkStatus_DELETED                              smithy.SchemaExtensions
+	eNetworkSummary                                     smithy.SchemaExtensions
+	eNetworkSummary_Id                                  smithy.SchemaExtensions
+	eNetworkSummary_Name                                smithy.SchemaExtensions
+	eNetworkSummary_Description                         smithy.SchemaExtensions
+	eNetworkSummary_Framework                           smithy.SchemaExtensions
+	eNetworkSummary_FrameworkVersion                    smithy.SchemaExtensions
+	eNetworkSummary_Status                              smithy.SchemaExtensions
+	eNetworkSummary_CreationDate                        smithy.SchemaExtensions
+	eNetworkSummary_Arn                                 smithy.SchemaExtensions
+	e_NetworkSummaryList                                smithy.SchemaExtensions
+	e_NetworkSummaryList_member                         smithy.SchemaExtensions
+	eNode                                               smithy.SchemaExtensions
+	eNode_NetworkId                                     smithy.SchemaExtensions
+	eNode_MemberId                                      smithy.SchemaExtensions
+	eNode_Id                                            smithy.SchemaExtensions
+	eNode_InstanceType                                  smithy.SchemaExtensions
+	eNode_AvailabilityZone                              smithy.SchemaExtensions
+	eNode_FrameworkAttributes                           smithy.SchemaExtensions
+	eNode_LogPublishingConfiguration                    smithy.SchemaExtensions
+	eNode_StateDB                                       smithy.SchemaExtensions
+	eNode_Status                                        smithy.SchemaExtensions
+	eNode_CreationDate                                  smithy.SchemaExtensions
+	eNode_Tags                                          smithy.SchemaExtensions
+	eNode_Arn                                           smithy.SchemaExtensions
+	eNode_KmsKeyArn                                     smithy.SchemaExtensions
+	eNodeConfiguration                                  smithy.SchemaExtensions
+	eNodeConfiguration_InstanceType                     smithy.SchemaExtensions
+	eNodeConfiguration_AvailabilityZone                 smithy.SchemaExtensions
+	eNodeConfiguration_LogPublishingConfiguration       smithy.SchemaExtensions
+	eNodeConfiguration_StateDB                          smithy.SchemaExtensions
+	eNodeEthereumAttributes                             smithy.SchemaExtensions
+	eNodeEthereumAttributes_HttpEndpoint                smithy.SchemaExtensions
+	eNodeEthereumAttributes_WebSocketEndpoint           smithy.SchemaExtensions
+	eNodeFabricAttributes                               smithy.SchemaExtensions
+	eNodeFabricAttributes_PeerEndpoint                  smithy.SchemaExtensions
+	eNodeFabricAttributes_PeerEventEndpoint             smithy.SchemaExtensions
+	eNodeFabricLogPublishingConfiguration               smithy.SchemaExtensions
+	eNodeFabricLogPublishingConfiguration_ChaincodeLogs smithy.SchemaExtensions
+	eNodeFabricLogPublishingConfiguration_PeerLogs      smithy.SchemaExtensions
+	eNodeFrameworkAttributes                            smithy.SchemaExtensions
+	eNodeFrameworkAttributes_Fabric                     smithy.SchemaExtensions
+	eNodeFrameworkAttributes_Ethereum                   smithy.SchemaExtensions
+	e_NodeListMaxResults                                smithy.SchemaExtensions
+	eNodeLogPublishingConfiguration                     smithy.SchemaExtensions
+	eNodeLogPublishingConfiguration_Fabric              smithy.SchemaExtensions
+	eNodeStatus                                         smithy.SchemaExtensions
+	eNodeStatus_CREATING                                smithy.SchemaExtensions
+	eNodeStatus_AVAILABLE                               smithy.SchemaExtensions
+	eNodeStatus_UNHEALTHY                               smithy.SchemaExtensions
+	eNodeStatus_CREATE_FAILED                           smithy.SchemaExtensions
+	eNodeStatus_UPDATING                                smithy.SchemaExtensions
+	eNodeStatus_DELETING                                smithy.SchemaExtensions
+	eNodeStatus_DELETED                                 smithy.SchemaExtensions
+	eNodeStatus_FAILED                                  smithy.SchemaExtensions
+	eNodeStatus_INACCESSIBLE_ENCRYPTION_KEY             smithy.SchemaExtensions
+	eNodeSummary                                        smithy.SchemaExtensions
+	eNodeSummary_Id                                     smithy.SchemaExtensions
+	eNodeSummary_Status                                 smithy.SchemaExtensions
+	eNodeSummary_CreationDate                           smithy.SchemaExtensions
+	eNodeSummary_AvailabilityZone                       smithy.SchemaExtensions
+	eNodeSummary_InstanceType                           smithy.SchemaExtensions
+	eNodeSummary_Arn                                    smithy.SchemaExtensions
+	e_NodeSummaryList                                   smithy.SchemaExtensions
+	e_NodeSummaryList_member                            smithy.SchemaExtensions
+	e_OutputTagMap                                      smithy.SchemaExtensions
+	e_OutputTagMap_key                                  smithy.SchemaExtensions
+	e_OutputTagMap_value                                smithy.SchemaExtensions
+	e_PaginationToken                                   smithy.SchemaExtensions
+	e_PasswordString                                    smithy.SchemaExtensions
+	e_PrincipalString                                   smithy.SchemaExtensions
+	eProposal                                           smithy.SchemaExtensions
+	eProposal_ProposalId                                smithy.SchemaExtensions
+	eProposal_NetworkId                                 smithy.SchemaExtensions
+	eProposal_Description                               smithy.SchemaExtensions
+	eProposal_Actions                                   smithy.SchemaExtensions
+	eProposal_ProposedByMemberId                        smithy.SchemaExtensions
+	eProposal_ProposedByMemberName                      smithy.SchemaExtensions
+	eProposal_Status                                    smithy.SchemaExtensions
+	eProposal_CreationDate                              smithy.SchemaExtensions
+	eProposal_ExpirationDate                            smithy.SchemaExtensions
+	eProposal_YesVoteCount                              smithy.SchemaExtensions
+	eProposal_NoVoteCount                               smithy.SchemaExtensions
+	eProposal_OutstandingVoteCount                      smithy.SchemaExtensions
+	eProposal_Tags                                      smithy.SchemaExtensions
+	eProposal_Arn                                       smithy.SchemaExtensions
+	eProposalActions                                    smithy.SchemaExtensions
+	eProposalActions_Invitations                        smithy.SchemaExtensions
+	eProposalActions_Removals                           smithy.SchemaExtensions
+	e_ProposalDurationInt                               smithy.SchemaExtensions
+	e_ProposalListMaxResults                            smithy.SchemaExtensions
+	eProposalStatus                                     smithy.SchemaExtensions
+	eProposalStatus_IN_PROGRESS                         smithy.SchemaExtensions
+	eProposalStatus_APPROVED                            smithy.SchemaExtensions
+	eProposalStatus_REJECTED                            smithy.SchemaExtensions
+	eProposalStatus_EXPIRED                             smithy.SchemaExtensions
+	eProposalStatus_ACTION_FAILED                       smithy.SchemaExtensions
+	eProposalSummary                                    smithy.SchemaExtensions
+	eProposalSummary_ProposalId                         smithy.SchemaExtensions
+	eProposalSummary_Description                        smithy.SchemaExtensions
+	eProposalSummary_ProposedByMemberId                 smithy.SchemaExtensions
+	eProposalSummary_ProposedByMemberName               smithy.SchemaExtensions
+	eProposalSummary_Status                             smithy.SchemaExtensions
+	eProposalSummary_CreationDate                       smithy.SchemaExtensions
+	eProposalSummary_ExpirationDate                     smithy.SchemaExtensions
+	eProposalSummary_Arn                                smithy.SchemaExtensions
+	e_ProposalSummaryList                               smithy.SchemaExtensions
+	e_ProposalSummaryList_member                        smithy.SchemaExtensions
+	e_ProposalVoteList                                  smithy.SchemaExtensions
+	e_ProposalVoteList_member                           smithy.SchemaExtensions
+	eRemoveAction                                       smithy.SchemaExtensions
+	eRemoveAction_MemberId                              smithy.SchemaExtensions
+	e_RemoveActionList                                  smithy.SchemaExtensions
+	e_RemoveActionList_member                           smithy.SchemaExtensions
+	eResourceAlreadyExistsException                     smithy.SchemaExtensions
+	eResourceAlreadyExistsException_Message             smithy.SchemaExtensions
+	e_ResourceIdString                                  smithy.SchemaExtensions
+	eResourceLimitExceededException                     smithy.SchemaExtensions
+	eResourceLimitExceededException_Message             smithy.SchemaExtensions
+	eResourceNotFoundException                          smithy.SchemaExtensions
+	eResourceNotFoundException_Message                  smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceName             smithy.SchemaExtensions
+	eResourceNotReadyException                          smithy.SchemaExtensions
+	eResourceNotReadyException_Message                  smithy.SchemaExtensions
+	eStateDBType                                        smithy.SchemaExtensions
+	eStateDBType_LevelDB                                smithy.SchemaExtensions
+	eStateDBType_CouchDB                                smithy.SchemaExtensions
+	e_String                                            smithy.SchemaExtensions
+	e_TagKey                                            smithy.SchemaExtensions
+	e_TagKeyList                                        smithy.SchemaExtensions
+	e_TagKeyList_member                                 smithy.SchemaExtensions
+	e_TagValue                                          smithy.SchemaExtensions
+	eThresholdComparator                                smithy.SchemaExtensions
+	eThresholdComparator_GREATER_THAN                   smithy.SchemaExtensions
+	eThresholdComparator_GREATER_THAN_OR_EQUAL_TO       smithy.SchemaExtensions
+	e_ThresholdPercentageInt                            smithy.SchemaExtensions
+	eThrottlingException                                smithy.SchemaExtensions
+	e_Timestamp                                         smithy.SchemaExtensions
+	eTooManyTagsException                               smithy.SchemaExtensions
+	eTooManyTagsException_Message                       smithy.SchemaExtensions
+	eTooManyTagsException_ResourceName                  smithy.SchemaExtensions
+	e_UsernameString                                    smithy.SchemaExtensions
+	e_VoteCount                                         smithy.SchemaExtensions
+	eVoteSummary                                        smithy.SchemaExtensions
+	eVoteSummary_Vote                                   smithy.SchemaExtensions
+	eVoteSummary_MemberName                             smithy.SchemaExtensions
+	eVoteSummary_MemberId                               smithy.SchemaExtensions
+	eVoteValue                                          smithy.SchemaExtensions
+	eVoteValue_YES                                      smithy.SchemaExtensions
+	eVoteValue_NO                                       smithy.SchemaExtensions
+	eVotingPolicy                                       smithy.SchemaExtensions
+	eVotingPolicy_ApprovalThresholdPolicy               smithy.SchemaExtensions
+	eCreateAccessorInput                                smithy.SchemaExtensions
+	eCreateAccessorInput_ClientRequestToken             smithy.SchemaExtensions
+	eCreateAccessorInput_AccessorType                   smithy.SchemaExtensions
+	eCreateAccessorInput_Tags                           smithy.SchemaExtensions
+	eCreateAccessorInput_NetworkType                    smithy.SchemaExtensions
+	eCreateAccessorOutput                               smithy.SchemaExtensions
+	eCreateAccessorOutput_AccessorId                    smithy.SchemaExtensions
+	eCreateAccessorOutput_BillingToken                  smithy.SchemaExtensions
+	eCreateAccessorOutput_NetworkType                   smithy.SchemaExtensions
+	eCreateMemberInput                                  smithy.SchemaExtensions
+	eCreateMemberInput_ClientRequestToken               smithy.SchemaExtensions
+	eCreateMemberInput_InvitationId                     smithy.SchemaExtensions
+	eCreateMemberInput_NetworkId                        smithy.SchemaExtensions
+	eCreateMemberInput_MemberConfiguration              smithy.SchemaExtensions
+	eCreateMemberOutput                                 smithy.SchemaExtensions
+	eCreateMemberOutput_MemberId                        smithy.SchemaExtensions
+	eCreateNetworkInput                                 smithy.SchemaExtensions
+	eCreateNetworkInput_ClientRequestToken              smithy.SchemaExtensions
+	eCreateNetworkInput_Name                            smithy.SchemaExtensions
+	eCreateNetworkInput_Description                     smithy.SchemaExtensions
+	eCreateNetworkInput_Framework                       smithy.SchemaExtensions
+	eCreateNetworkInput_FrameworkVersion                smithy.SchemaExtensions
+	eCreateNetworkInput_FrameworkConfiguration          smithy.SchemaExtensions
+	eCreateNetworkInput_VotingPolicy                    smithy.SchemaExtensions
+	eCreateNetworkInput_MemberConfiguration             smithy.SchemaExtensions
+	eCreateNetworkInput_Tags                            smithy.SchemaExtensions
+	eCreateNetworkOutput                                smithy.SchemaExtensions
+	eCreateNetworkOutput_NetworkId                      smithy.SchemaExtensions
+	eCreateNetworkOutput_MemberId                       smithy.SchemaExtensions
+	eCreateNodeInput                                    smithy.SchemaExtensions
+	eCreateNodeInput_ClientRequestToken                 smithy.SchemaExtensions
+	eCreateNodeInput_NetworkId                          smithy.SchemaExtensions
+	eCreateNodeInput_MemberId                           smithy.SchemaExtensions
+	eCreateNodeInput_NodeConfiguration                  smithy.SchemaExtensions
+	eCreateNodeInput_Tags                               smithy.SchemaExtensions
+	eCreateNodeOutput                                   smithy.SchemaExtensions
+	eCreateNodeOutput_NodeId                            smithy.SchemaExtensions
+	eCreateProposalInput                                smithy.SchemaExtensions
+	eCreateProposalInput_ClientRequestToken             smithy.SchemaExtensions
+	eCreateProposalInput_NetworkId                      smithy.SchemaExtensions
+	eCreateProposalInput_MemberId                       smithy.SchemaExtensions
+	eCreateProposalInput_Actions                        smithy.SchemaExtensions
+	eCreateProposalInput_Description                    smithy.SchemaExtensions
+	eCreateProposalInput_Tags                           smithy.SchemaExtensions
+	eCreateProposalOutput                               smithy.SchemaExtensions
+	eCreateProposalOutput_ProposalId                    smithy.SchemaExtensions
+	eDeleteAccessorInput                                smithy.SchemaExtensions
+	eDeleteAccessorInput_AccessorId                     smithy.SchemaExtensions
+	eDeleteAccessorOutput                               smithy.SchemaExtensions
+	eDeleteMemberInput                                  smithy.SchemaExtensions
+	eDeleteMemberInput_NetworkId                        smithy.SchemaExtensions
+	eDeleteMemberInput_MemberId                         smithy.SchemaExtensions
+	eDeleteMemberOutput                                 smithy.SchemaExtensions
+	eDeleteNodeInput                                    smithy.SchemaExtensions
+	eDeleteNodeInput_NetworkId                          smithy.SchemaExtensions
+	eDeleteNodeInput_MemberId                           smithy.SchemaExtensions
+	eDeleteNodeInput_NodeId                             smithy.SchemaExtensions
+	eDeleteNodeOutput                                   smithy.SchemaExtensions
+	eGetAccessorInput                                   smithy.SchemaExtensions
+	eGetAccessorInput_AccessorId                        smithy.SchemaExtensions
+	eGetAccessorOutput                                  smithy.SchemaExtensions
+	eGetAccessorOutput_Accessor                         smithy.SchemaExtensions
+	eGetMemberInput                                     smithy.SchemaExtensions
+	eGetMemberInput_NetworkId                           smithy.SchemaExtensions
+	eGetMemberInput_MemberId                            smithy.SchemaExtensions
+	eGetMemberOutput                                    smithy.SchemaExtensions
+	eGetMemberOutput_Member                             smithy.SchemaExtensions
+	eGetNetworkInput                                    smithy.SchemaExtensions
+	eGetNetworkInput_NetworkId                          smithy.SchemaExtensions
+	eGetNetworkOutput                                   smithy.SchemaExtensions
+	eGetNetworkOutput_Network                           smithy.SchemaExtensions
+	eGetNodeInput                                       smithy.SchemaExtensions
+	eGetNodeInput_NetworkId                             smithy.SchemaExtensions
+	eGetNodeInput_MemberId                              smithy.SchemaExtensions
+	eGetNodeInput_NodeId                                smithy.SchemaExtensions
+	eGetNodeOutput                                      smithy.SchemaExtensions
+	eGetNodeOutput_Node                                 smithy.SchemaExtensions
+	eGetProposalInput                                   smithy.SchemaExtensions
+	eGetProposalInput_NetworkId                         smithy.SchemaExtensions
+	eGetProposalInput_ProposalId                        smithy.SchemaExtensions
+	eGetProposalOutput                                  smithy.SchemaExtensions
+	eGetProposalOutput_Proposal                         smithy.SchemaExtensions
+	eListAccessorsInput                                 smithy.SchemaExtensions
+	eListAccessorsInput_MaxResults                      smithy.SchemaExtensions
+	eListAccessorsInput_NextToken                       smithy.SchemaExtensions
+	eListAccessorsInput_NetworkType                     smithy.SchemaExtensions
+	eListAccessorsOutput                                smithy.SchemaExtensions
+	eListAccessorsOutput_Accessors                      smithy.SchemaExtensions
+	eListAccessorsOutput_NextToken                      smithy.SchemaExtensions
+	eListInvitationsInput                               smithy.SchemaExtensions
+	eListInvitationsInput_MaxResults                    smithy.SchemaExtensions
+	eListInvitationsInput_NextToken                     smithy.SchemaExtensions
+	eListInvitationsOutput                              smithy.SchemaExtensions
+	eListInvitationsOutput_Invitations                  smithy.SchemaExtensions
+	eListInvitationsOutput_NextToken                    smithy.SchemaExtensions
+	eListMembersInput                                   smithy.SchemaExtensions
+	eListMembersInput_NetworkId                         smithy.SchemaExtensions
+	eListMembersInput_Name                              smithy.SchemaExtensions
+	eListMembersInput_Status                            smithy.SchemaExtensions
+	eListMembersInput_IsOwned                           smithy.SchemaExtensions
+	eListMembersInput_MaxResults                        smithy.SchemaExtensions
+	eListMembersInput_NextToken                         smithy.SchemaExtensions
+	eListMembersOutput                                  smithy.SchemaExtensions
+	eListMembersOutput_Members                          smithy.SchemaExtensions
+	eListMembersOutput_NextToken                        smithy.SchemaExtensions
+	eListNetworksInput                                  smithy.SchemaExtensions
+	eListNetworksInput_Name                             smithy.SchemaExtensions
+	eListNetworksInput_Framework                        smithy.SchemaExtensions
+	eListNetworksInput_Status                           smithy.SchemaExtensions
+	eListNetworksInput_MaxResults                       smithy.SchemaExtensions
+	eListNetworksInput_NextToken                        smithy.SchemaExtensions
+	eListNetworksOutput                                 smithy.SchemaExtensions
+	eListNetworksOutput_Networks                        smithy.SchemaExtensions
+	eListNetworksOutput_NextToken                       smithy.SchemaExtensions
+	eListNodesInput                                     smithy.SchemaExtensions
+	eListNodesInput_NetworkId                           smithy.SchemaExtensions
+	eListNodesInput_MemberId                            smithy.SchemaExtensions
+	eListNodesInput_Status                              smithy.SchemaExtensions
+	eListNodesInput_MaxResults                          smithy.SchemaExtensions
+	eListNodesInput_NextToken                           smithy.SchemaExtensions
+	eListNodesOutput                                    smithy.SchemaExtensions
+	eListNodesOutput_Nodes                              smithy.SchemaExtensions
+	eListNodesOutput_NextToken                          smithy.SchemaExtensions
+	eListProposalsInput                                 smithy.SchemaExtensions
+	eListProposalsInput_NetworkId                       smithy.SchemaExtensions
+	eListProposalsInput_MaxResults                      smithy.SchemaExtensions
+	eListProposalsInput_NextToken                       smithy.SchemaExtensions
+	eListProposalsOutput                                smithy.SchemaExtensions
+	eListProposalsOutput_Proposals                      smithy.SchemaExtensions
+	eListProposalsOutput_NextToken                      smithy.SchemaExtensions
+	eListProposalVotesInput                             smithy.SchemaExtensions
+	eListProposalVotesInput_NetworkId                   smithy.SchemaExtensions
+	eListProposalVotesInput_ProposalId                  smithy.SchemaExtensions
+	eListProposalVotesInput_MaxResults                  smithy.SchemaExtensions
+	eListProposalVotesInput_NextToken                   smithy.SchemaExtensions
+	eListProposalVotesOutput                            smithy.SchemaExtensions
+	eListProposalVotesOutput_ProposalVotes              smithy.SchemaExtensions
+	eListProposalVotesOutput_NextToken                  smithy.SchemaExtensions
+	eListTagsForResourceRequest                         smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn             smithy.SchemaExtensions
+	eListTagsForResourceResponse                        smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                   smithy.SchemaExtensions
+	eRejectInvitationInput                              smithy.SchemaExtensions
+	eRejectInvitationInput_InvitationId                 smithy.SchemaExtensions
+	eRejectInvitationOutput                             smithy.SchemaExtensions
+	eTagResourceRequest                                 smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                     smithy.SchemaExtensions
+	eTagResourceRequest_Tags                            smithy.SchemaExtensions
+	eTagResourceResponse                                smithy.SchemaExtensions
+	eUntagResourceRequest                               smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                   smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                       smithy.SchemaExtensions
+	eUntagResourceResponse                              smithy.SchemaExtensions
+	eUpdateMemberInput                                  smithy.SchemaExtensions
+	eUpdateMemberInput_NetworkId                        smithy.SchemaExtensions
+	eUpdateMemberInput_MemberId                         smithy.SchemaExtensions
+	eUpdateMemberInput_LogPublishingConfiguration       smithy.SchemaExtensions
+	eUpdateMemberOutput                                 smithy.SchemaExtensions
+	eUpdateNodeInput                                    smithy.SchemaExtensions
+	eUpdateNodeInput_NetworkId                          smithy.SchemaExtensions
+	eUpdateNodeInput_MemberId                           smithy.SchemaExtensions
+	eUpdateNodeInput_NodeId                             smithy.SchemaExtensions
+	eUpdateNodeInput_LogPublishingConfiguration         smithy.SchemaExtensions
+	eUpdateNodeOutput                                   smithy.SchemaExtensions
+	eVoteOnProposalInput                                smithy.SchemaExtensions
+	eVoteOnProposalInput_NetworkId                      smithy.SchemaExtensions
+	eVoteOnProposalInput_ProposalId                     smithy.SchemaExtensions
+	eVoteOnProposalInput_VoterMemberId                  smithy.SchemaExtensions
+	eVoteOnProposalInput_Vote                           smithy.SchemaExtensions
+	eVoteOnProposalOutput                               smithy.SchemaExtensions
+)
+
+var (
+	iCreateAccessor                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateAccessor"}
+	iCreateMember                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateMember"}
+	iCreateNetwork                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateNetwork"}
+	iCreateNode                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateNode"}
+	iCreateProposal                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateProposal"}
+	iDeleteAccessor                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteAccessor"}
+	iDeleteMember                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteMember"}
+	iDeleteNode                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteNode"}
+	iGetAccessor                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetAccessor"}
+	iGetMember                              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetMember"}
+	iGetNetwork                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetNetwork"}
+	iGetNode                                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetNode"}
+	iGetProposal                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetProposal"}
+	iListAccessors                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListAccessors"}
+	iListInvitations                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListInvitations"}
+	iListMembers                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListMembers"}
+	iListNetworks                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListNetworks"}
+	iListNodes                              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListNodes"}
+	iListProposals                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListProposals"}
+	iListProposalVotes                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListProposalVotes"}
+	iListTagsForResource                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListTagsForResource"}
+	iRejectInvitation                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "RejectInvitation"}
+	iTagResource                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TagResource"}
+	iUntagResource                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UntagResource"}
+	iUpdateMember                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UpdateMember"}
+	iUpdateNode                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UpdateNode"}
+	iVoteOnProposal                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "VoteOnProposal"}
+	i_TaigaWebService                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TaigaWebService"}
+	iAccessDeniedException                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessDeniedException"}
+	iAccessor                               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Accessor"}
+	i_AccessorBillingTokenString            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessorBillingTokenString"}
+	i_AccessorListMaxResults                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessorListMaxResults"}
+	iAccessorNetworkType                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessorNetworkType"}
+	iAccessorStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessorStatus"}
+	iAccessorSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessorSummary"}
+	i_AccessorSummaryList                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessorSummaryList"}
+	iAccessorType                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AccessorType"}
+	iApprovalThresholdPolicy                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ApprovalThresholdPolicy"}
+	i_ArnString                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ArnString"}
+	i_AvailabilityZoneString                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "AvailabilityZoneString"}
+	i_ClientRequestTokenString              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ClientRequestTokenString"}
+	i_DescriptionString                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DescriptionString"}
+	iEdition                                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Edition"}
+	i_Enabled                               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Enabled"}
+	i_ExceptionMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ExceptionMessage"}
+	iFramework                              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Framework"}
+	i_FrameworkVersionString                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "FrameworkVersionString"}
+	iIllegalActionException                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "IllegalActionException"}
+	i_InputTagMap                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InputTagMap"}
+	i_InstanceTypeString                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InstanceTypeString"}
+	iInternalServiceErrorException          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InternalServiceErrorException"}
+	iInvalidRequestException                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InvalidRequestException"}
+	iInvitation                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Invitation"}
+	i_InvitationList                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InvitationList"}
+	iInvitationStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InvitationStatus"}
+	iInviteAction                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InviteAction"}
+	i_InviteActionList                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "InviteActionList"}
+	i_IsOwned                               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "IsOwned"}
+	iLogConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "LogConfiguration"}
+	iLogConfigurations                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "LogConfigurations"}
+	iMember                                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Member"}
+	iMemberConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberConfiguration"}
+	iMemberFabricAttributes                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberFabricAttributes"}
+	iMemberFabricConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberFabricConfiguration"}
+	iMemberFabricLogPublishingConfiguration = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberFabricLogPublishingConfiguration"}
+	iMemberFrameworkAttributes              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberFrameworkAttributes"}
+	iMemberFrameworkConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberFrameworkConfiguration"}
+	i_MemberListMaxResults                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberListMaxResults"}
+	iMemberLogPublishingConfiguration       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberLogPublishingConfiguration"}
+	iMemberStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberStatus"}
+	iMemberSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberSummary"}
+	i_MemberSummaryList                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "MemberSummaryList"}
+	i_NameString                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NameString"}
+	iNetwork                                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Network"}
+	iNetworkEthereumAttributes              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkEthereumAttributes"}
+	iNetworkFabricAttributes                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkFabricAttributes"}
+	iNetworkFabricConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkFabricConfiguration"}
+	iNetworkFrameworkAttributes             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkFrameworkAttributes"}
+	iNetworkFrameworkConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkFrameworkConfiguration"}
+	i_NetworkListMaxResults                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkListMaxResults"}
+	i_NetworkMemberNameString               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkMemberNameString"}
+	iNetworkStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkStatus"}
+	iNetworkSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkSummary"}
+	i_NetworkSummaryList                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NetworkSummaryList"}
+	iNode                                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Node"}
+	iNodeConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeConfiguration"}
+	iNodeEthereumAttributes                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeEthereumAttributes"}
+	iNodeFabricAttributes                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeFabricAttributes"}
+	iNodeFabricLogPublishingConfiguration   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeFabricLogPublishingConfiguration"}
+	iNodeFrameworkAttributes                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeFrameworkAttributes"}
+	i_NodeListMaxResults                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeListMaxResults"}
+	iNodeLogPublishingConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeLogPublishingConfiguration"}
+	iNodeStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeStatus"}
+	iNodeSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeSummary"}
+	i_NodeSummaryList                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "NodeSummaryList"}
+	i_OutputTagMap                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "OutputTagMap"}
+	i_PaginationToken                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "PaginationToken"}
+	i_PasswordString                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "PasswordString"}
+	i_PrincipalString                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "PrincipalString"}
+	iProposal                               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Proposal"}
+	iProposalActions                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ProposalActions"}
+	i_ProposalDurationInt                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ProposalDurationInt"}
+	i_ProposalListMaxResults                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ProposalListMaxResults"}
+	iProposalStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ProposalStatus"}
+	iProposalSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ProposalSummary"}
+	i_ProposalSummaryList                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ProposalSummaryList"}
+	i_ProposalVoteList                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ProposalVoteList"}
+	iRemoveAction                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "RemoveAction"}
+	i_RemoveActionList                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "RemoveActionList"}
+	iResourceAlreadyExistsException         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ResourceAlreadyExistsException"}
+	i_ResourceIdString                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ResourceIdString"}
+	iResourceLimitExceededException         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ResourceLimitExceededException"}
+	iResourceNotFoundException              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ResourceNotFoundException"}
+	iResourceNotReadyException              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ResourceNotReadyException"}
+	iStateDBType                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "StateDBType"}
+	i_String                                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "String"}
+	i_TagKey                                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TagKey"}
+	i_TagKeyList                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TagKeyList"}
+	i_TagValue                              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TagValue"}
+	iThresholdComparator                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ThresholdComparator"}
+	i_ThresholdPercentageInt                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ThresholdPercentageInt"}
+	iThrottlingException                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ThrottlingException"}
+	i_Timestamp                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "Timestamp"}
+	iTooManyTagsException                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TooManyTagsException"}
+	i_UsernameString                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UsernameString"}
+	i_VoteCount                             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "VoteCount"}
+	iVoteSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "VoteSummary"}
+	iVoteValue                              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "VoteValue"}
+	iVotingPolicy                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "VotingPolicy"}
+	iCreateAccessorInput                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateAccessorInput"}
+	iCreateAccessorOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateAccessorOutput"}
+	iCreateMemberInput                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateMemberInput"}
+	iCreateMemberOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateMemberOutput"}
+	iCreateNetworkInput                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateNetworkInput"}
+	iCreateNetworkOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateNetworkOutput"}
+	iCreateNodeInput                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateNodeInput"}
+	iCreateNodeOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateNodeOutput"}
+	iCreateProposalInput                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateProposalInput"}
+	iCreateProposalOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "CreateProposalOutput"}
+	iDeleteAccessorInput                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteAccessorInput"}
+	iDeleteAccessorOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteAccessorOutput"}
+	iDeleteMemberInput                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteMemberInput"}
+	iDeleteMemberOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteMemberOutput"}
+	iDeleteNodeInput                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteNodeInput"}
+	iDeleteNodeOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "DeleteNodeOutput"}
+	iGetAccessorInput                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetAccessorInput"}
+	iGetAccessorOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetAccessorOutput"}
+	iGetMemberInput                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetMemberInput"}
+	iGetMemberOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetMemberOutput"}
+	iGetNetworkInput                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetNetworkInput"}
+	iGetNetworkOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetNetworkOutput"}
+	iGetNodeInput                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetNodeInput"}
+	iGetNodeOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetNodeOutput"}
+	iGetProposalInput                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetProposalInput"}
+	iGetProposalOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "GetProposalOutput"}
+	iListAccessorsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListAccessorsInput"}
+	iListAccessorsOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListAccessorsOutput"}
+	iListInvitationsInput                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListInvitationsInput"}
+	iListInvitationsOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListInvitationsOutput"}
+	iListMembersInput                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListMembersInput"}
+	iListMembersOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListMembersOutput"}
+	iListNetworksInput                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListNetworksInput"}
+	iListNetworksOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListNetworksOutput"}
+	iListNodesInput                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListNodesInput"}
+	iListNodesOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListNodesOutput"}
+	iListProposalsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListProposalsInput"}
+	iListProposalsOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListProposalsOutput"}
+	iListProposalVotesInput                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListProposalVotesInput"}
+	iListProposalVotesOutput                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListProposalVotesOutput"}
+	iListTagsForResourceRequest             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "ListTagsForResourceResponse"}
+	iRejectInvitationInput                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "RejectInvitationInput"}
+	iRejectInvitationOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "RejectInvitationOutput"}
+	iTagResourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TagResourceRequest"}
+	iTagResourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "TagResourceResponse"}
+	iUntagResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UntagResourceResponse"}
+	iUpdateMemberInput                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UpdateMemberInput"}
+	iUpdateMemberOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UpdateMemberOutput"}
+	iUpdateNodeInput                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UpdateNodeInput"}
+	iUpdateNodeOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "UpdateNodeOutput"}
+	iVoteOnProposalInput                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "VoteOnProposalInput"}
+	iVoteOnProposalOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchain", Name: "VoteOnProposalOutput"}
+	pUnit                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accessors",
-	Code: 200})
-
-var CreateMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateMember",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{NetworkId}/members",
-	Code: 200})
-
-var CreateNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks",
-	Code: 200})
-
-var CreateNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{NetworkId}/nodes",
-	Code: 200})
-
-var CreateProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateProposal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{NetworkId}/proposals",
-	Code: 200})
-
-var DeleteAccessor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteAccessor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accessors/{AccessorId}",
-	Code: 200})
-
-var DeleteMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteMember",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/networks/{NetworkId}/members/{MemberId}",
-	Code: 200})
-
-var DeleteNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/networks/{NetworkId}/nodes/{NodeId}",
-	Code: 200})
-
-var GetAccessor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetAccessor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accessors/{AccessorId}",
-	Code: 200})
-
-var GetMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetMember",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}/members/{MemberId}",
-	Code: 200})
-
-var GetNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}",
-	Code: 200})
-
-var GetNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}/nodes/{NodeId}",
-	Code: 200})
-
-var GetProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetProposal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}/proposals/{ProposalId}",
-	Code: 200})
-
-var ListAccessors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListAccessors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accessors",
-	Code: 200})
-
-var ListInvitations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListInvitations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/invitations",
-	Code: 200})
-
-var ListMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListMembers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}/members",
-	Code: 200})
-
-var ListNetworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListNetworks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks",
-	Code: 200})
-
-var ListNodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListNodes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}/nodes",
-	Code: 200})
-
-var ListProposals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListProposals",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}/proposals",
-	Code: 200})
-
-var ListProposalVotes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListProposalVotes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{NetworkId}/proposals/{ProposalId}/votes",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var RejectInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "RejectInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/invitations/{InvitationId}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UpdateMember",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{NetworkId}/members/{MemberId}",
-	Code: 200})
-
-var UpdateNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UpdateNode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{NetworkId}/nodes/{NodeId}",
-	Code: 200})
-
-var VoteOnProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "VoteOnProposal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{NetworkId}/proposals/{ProposalId}/votes",
-	Code: 200})
-
-var _TaigaWebService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TaigaWebService",
-}, smithy.ShapeTypeService, 0)
-
-var TaigaWebService = smithy.NewServiceSchema(_TaigaWebService, "2018-09-24")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var Accessor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Accessor",
-}, smithy.ShapeTypeStructure, 8)
-var Accessor_Id *smithy.Schema
-
-var Accessor_Type *smithy.Schema
-
-var Accessor_BillingToken *smithy.Schema
-
-var Accessor_Status *smithy.Schema
-
-var Accessor_CreationDate *smithy.Schema
-
-var Accessor_Arn *smithy.Schema
-
-var Accessor_Tags *smithy.Schema
-
-var Accessor_NetworkType *smithy.Schema
-
-var _AccessorBillingTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessorBillingTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessorListMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessorListMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var AccessorNetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessorNetworkType",
-}, smithy.ShapeTypeEnum, 5)
-var AccessorNetworkType_ETHEREUM_GOERLI *smithy.Schema
-
-var AccessorNetworkType_ETHEREUM_MAINNET *smithy.Schema
-
-var AccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI *smithy.Schema
-
-var AccessorNetworkType_POLYGON_MAINNET *smithy.Schema
-
-var AccessorNetworkType_POLYGON_MUMBAI *smithy.Schema
-
-var AccessorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessorStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AccessorStatus_AVAILABLE *smithy.Schema
-
-var AccessorStatus_PENDING_DELETION *smithy.Schema
-
-var AccessorStatus_DELETED *smithy.Schema
-
-var AccessorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessorSummary",
-}, smithy.ShapeTypeStructure, 6)
-var AccessorSummary_Id *smithy.Schema
-
-var AccessorSummary_Type *smithy.Schema
-
-var AccessorSummary_Status *smithy.Schema
-
-var AccessorSummary_CreationDate *smithy.Schema
-
-var AccessorSummary_Arn *smithy.Schema
-
-var AccessorSummary_NetworkType *smithy.Schema
-
-var _AccessorSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessorSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AccessorSummaryList_member *smithy.Schema
-
-var AccessorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AccessorType",
-}, smithy.ShapeTypeEnum, 1)
-var AccessorType_BILLING_TOKEN *smithy.Schema
-
-var ApprovalThresholdPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ApprovalThresholdPolicy",
-}, smithy.ShapeTypeStructure, 3)
-var ApprovalThresholdPolicy_ThresholdPercentage *smithy.Schema
-
-var ApprovalThresholdPolicy_ProposalDurationInHours *smithy.Schema
-
-var ApprovalThresholdPolicy_ThresholdComparator *smithy.Schema
-
-var _ArnString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ArnString",
-}, smithy.ShapeTypeString, 0)
-
-var _AvailabilityZoneString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "AvailabilityZoneString",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientRequestTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ClientRequestTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _DescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var Edition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Edition",
-}, smithy.ShapeTypeEnum, 2)
-var Edition_STARTER *smithy.Schema
-
-var Edition_STANDARD *smithy.Schema
-
-var _Enabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Enabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Framework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Framework",
-}, smithy.ShapeTypeEnum, 2)
-var Framework_HYPERLEDGER_FABRIC *smithy.Schema
-
-var Framework_ETHEREUM *smithy.Schema
-
-var _FrameworkVersionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "FrameworkVersionString",
-}, smithy.ShapeTypeString, 0)
-
-var IllegalActionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "IllegalActionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var IllegalActionException_Message *smithy.Schema
-
-var _InputTagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InputTagMap",
-}, smithy.ShapeTypeMap, 2)
-var _InputTagMap_key *smithy.Schema
-
-var _InputTagMap_value *smithy.Schema
-
-var _InstanceTypeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InstanceTypeString",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var Invitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Invitation",
-}, smithy.ShapeTypeStructure, 6)
-var Invitation_InvitationId *smithy.Schema
-
-var Invitation_CreationDate *smithy.Schema
-
-var Invitation_ExpirationDate *smithy.Schema
-
-var Invitation_Status *smithy.Schema
-
-var Invitation_NetworkSummary *smithy.Schema
-
-var Invitation_Arn *smithy.Schema
-
-var _InvitationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InvitationList",
-}, smithy.ShapeTypeList, 1)
-var _InvitationList_member *smithy.Schema
-
-var InvitationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InvitationStatus",
-}, smithy.ShapeTypeEnum, 5)
-var InvitationStatus_PENDING *smithy.Schema
-
-var InvitationStatus_ACCEPTED *smithy.Schema
-
-var InvitationStatus_ACCEPTING *smithy.Schema
-
-var InvitationStatus_REJECTED *smithy.Schema
-
-var InvitationStatus_EXPIRED *smithy.Schema
-
-var InviteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InviteAction",
-}, smithy.ShapeTypeStructure, 1)
-var InviteAction_Principal *smithy.Schema
-
-var _InviteActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "InviteActionList",
-}, smithy.ShapeTypeList, 1)
-var _InviteActionList_member *smithy.Schema
-
-var _IsOwned = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "IsOwned",
-}, smithy.ShapeTypeBoolean, 0)
-
-var LogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "LogConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LogConfiguration_Enabled *smithy.Schema
-
-var LogConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "LogConfigurations",
-}, smithy.ShapeTypeStructure, 1)
-var LogConfigurations_Cloudwatch *smithy.Schema
-
-var Member = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Member",
-}, smithy.ShapeTypeStructure, 11)
-var Member_NetworkId *smithy.Schema
-
-var Member_Id *smithy.Schema
-
-var Member_Name *smithy.Schema
-
-var Member_Description *smithy.Schema
-
-var Member_FrameworkAttributes *smithy.Schema
-
-var Member_LogPublishingConfiguration *smithy.Schema
-
-var Member_Status *smithy.Schema
-
-var Member_CreationDate *smithy.Schema
-
-var Member_Tags *smithy.Schema
-
-var Member_Arn *smithy.Schema
-
-var Member_KmsKeyArn *smithy.Schema
-
-var MemberConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var MemberConfiguration_Name *smithy.Schema
-
-var MemberConfiguration_Description *smithy.Schema
-
-var MemberConfiguration_FrameworkConfiguration *smithy.Schema
-
-var MemberConfiguration_LogPublishingConfiguration *smithy.Schema
-
-var MemberConfiguration_Tags *smithy.Schema
-
-var MemberConfiguration_KmsKeyArn *smithy.Schema
-
-var MemberFabricAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberFabricAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var MemberFabricAttributes_AdminUsername *smithy.Schema
-
-var MemberFabricAttributes_CaEndpoint *smithy.Schema
-
-var MemberFabricConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberFabricConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MemberFabricConfiguration_AdminUsername *smithy.Schema
-
-var MemberFabricConfiguration_AdminPassword *smithy.Schema
-
-var MemberFabricLogPublishingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberFabricLogPublishingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MemberFabricLogPublishingConfiguration_CaLogs *smithy.Schema
-
-var MemberFrameworkAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberFrameworkAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var MemberFrameworkAttributes_Fabric *smithy.Schema
-
-var MemberFrameworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberFrameworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MemberFrameworkConfiguration_Fabric *smithy.Schema
-
-var _MemberListMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberListMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MemberLogPublishingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberLogPublishingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MemberLogPublishingConfiguration_Fabric *smithy.Schema
-
-var MemberStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberStatus",
-}, smithy.ShapeTypeEnum, 7)
-var MemberStatus_CREATING *smithy.Schema
-
-var MemberStatus_AVAILABLE *smithy.Schema
-
-var MemberStatus_CREATE_FAILED *smithy.Schema
-
-var MemberStatus_UPDATING *smithy.Schema
-
-var MemberStatus_DELETING *smithy.Schema
-
-var MemberStatus_DELETED *smithy.Schema
-
-var MemberStatus_INACCESSIBLE_ENCRYPTION_KEY *smithy.Schema
-
-var MemberSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberSummary",
-}, smithy.ShapeTypeStructure, 7)
-var MemberSummary_Id *smithy.Schema
-
-var MemberSummary_Name *smithy.Schema
-
-var MemberSummary_Description *smithy.Schema
-
-var MemberSummary_Status *smithy.Schema
-
-var MemberSummary_CreationDate *smithy.Schema
-
-var MemberSummary_IsOwned *smithy.Schema
-
-var MemberSummary_Arn *smithy.Schema
-
-var _MemberSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "MemberSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MemberSummaryList_member *smithy.Schema
-
-var _NameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NameString",
-}, smithy.ShapeTypeString, 0)
-
-var Network = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Network",
-}, smithy.ShapeTypeStructure, 12)
-var Network_Id *smithy.Schema
-
-var Network_Name *smithy.Schema
-
-var Network_Description *smithy.Schema
-
-var Network_Framework *smithy.Schema
-
-var Network_FrameworkVersion *smithy.Schema
-
-var Network_FrameworkAttributes *smithy.Schema
-
-var Network_VpcEndpointServiceName *smithy.Schema
-
-var Network_VotingPolicy *smithy.Schema
-
-var Network_Status *smithy.Schema
-
-var Network_CreationDate *smithy.Schema
-
-var Network_Tags *smithy.Schema
-
-var Network_Arn *smithy.Schema
-
-var NetworkEthereumAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkEthereumAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkEthereumAttributes_ChainId *smithy.Schema
-
-var NetworkFabricAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkFabricAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkFabricAttributes_OrderingServiceEndpoint *smithy.Schema
-
-var NetworkFabricAttributes_Edition *smithy.Schema
-
-var NetworkFabricConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkFabricConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkFabricConfiguration_Edition *smithy.Schema
-
-var NetworkFrameworkAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkFrameworkAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkFrameworkAttributes_Fabric *smithy.Schema
-
-var NetworkFrameworkAttributes_Ethereum *smithy.Schema
-
-var NetworkFrameworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkFrameworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkFrameworkConfiguration_Fabric *smithy.Schema
-
-var _NetworkListMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkListMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NetworkMemberNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkMemberNameString",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkStatus",
-}, smithy.ShapeTypeEnum, 5)
-var NetworkStatus_CREATING *smithy.Schema
-
-var NetworkStatus_AVAILABLE *smithy.Schema
-
-var NetworkStatus_CREATE_FAILED *smithy.Schema
-
-var NetworkStatus_DELETING *smithy.Schema
-
-var NetworkStatus_DELETED *smithy.Schema
-
-var NetworkSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkSummary",
-}, smithy.ShapeTypeStructure, 8)
-var NetworkSummary_Id *smithy.Schema
-
-var NetworkSummary_Name *smithy.Schema
-
-var NetworkSummary_Description *smithy.Schema
-
-var NetworkSummary_Framework *smithy.Schema
-
-var NetworkSummary_FrameworkVersion *smithy.Schema
-
-var NetworkSummary_Status *smithy.Schema
-
-var NetworkSummary_CreationDate *smithy.Schema
-
-var NetworkSummary_Arn *smithy.Schema
-
-var _NetworkSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NetworkSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkSummaryList_member *smithy.Schema
-
-var Node = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Node",
-}, smithy.ShapeTypeStructure, 13)
-var Node_NetworkId *smithy.Schema
-
-var Node_MemberId *smithy.Schema
-
-var Node_Id *smithy.Schema
-
-var Node_InstanceType *smithy.Schema
-
-var Node_AvailabilityZone *smithy.Schema
-
-var Node_FrameworkAttributes *smithy.Schema
-
-var Node_LogPublishingConfiguration *smithy.Schema
-
-var Node_StateDB *smithy.Schema
-
-var Node_Status *smithy.Schema
-
-var Node_CreationDate *smithy.Schema
-
-var Node_Tags *smithy.Schema
-
-var Node_Arn *smithy.Schema
-
-var Node_KmsKeyArn *smithy.Schema
-
-var NodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var NodeConfiguration_InstanceType *smithy.Schema
-
-var NodeConfiguration_AvailabilityZone *smithy.Schema
-
-var NodeConfiguration_LogPublishingConfiguration *smithy.Schema
-
-var NodeConfiguration_StateDB *smithy.Schema
-
-var NodeEthereumAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeEthereumAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var NodeEthereumAttributes_HttpEndpoint *smithy.Schema
-
-var NodeEthereumAttributes_WebSocketEndpoint *smithy.Schema
-
-var NodeFabricAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeFabricAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var NodeFabricAttributes_PeerEndpoint *smithy.Schema
-
-var NodeFabricAttributes_PeerEventEndpoint *smithy.Schema
-
-var NodeFabricLogPublishingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeFabricLogPublishingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var NodeFabricLogPublishingConfiguration_ChaincodeLogs *smithy.Schema
-
-var NodeFabricLogPublishingConfiguration_PeerLogs *smithy.Schema
-
-var NodeFrameworkAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeFrameworkAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var NodeFrameworkAttributes_Fabric *smithy.Schema
-
-var NodeFrameworkAttributes_Ethereum *smithy.Schema
-
-var _NodeListMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeListMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var NodeLogPublishingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeLogPublishingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NodeLogPublishingConfiguration_Fabric *smithy.Schema
-
-var NodeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeStatus",
-}, smithy.ShapeTypeEnum, 9)
-var NodeStatus_CREATING *smithy.Schema
-
-var NodeStatus_AVAILABLE *smithy.Schema
-
-var NodeStatus_UNHEALTHY *smithy.Schema
-
-var NodeStatus_CREATE_FAILED *smithy.Schema
-
-var NodeStatus_UPDATING *smithy.Schema
-
-var NodeStatus_DELETING *smithy.Schema
-
-var NodeStatus_DELETED *smithy.Schema
-
-var NodeStatus_FAILED *smithy.Schema
-
-var NodeStatus_INACCESSIBLE_ENCRYPTION_KEY *smithy.Schema
-
-var NodeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeSummary",
-}, smithy.ShapeTypeStructure, 6)
-var NodeSummary_Id *smithy.Schema
-
-var NodeSummary_Status *smithy.Schema
-
-var NodeSummary_CreationDate *smithy.Schema
-
-var NodeSummary_AvailabilityZone *smithy.Schema
-
-var NodeSummary_InstanceType *smithy.Schema
-
-var NodeSummary_Arn *smithy.Schema
-
-var _NodeSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "NodeSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _NodeSummaryList_member *smithy.Schema
-
-var _OutputTagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "OutputTagMap",
-}, smithy.ShapeTypeMap, 2)
-var _OutputTagMap_key *smithy.Schema
-
-var _OutputTagMap_value *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PasswordString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "PasswordString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PrincipalString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "PrincipalString",
-}, smithy.ShapeTypeString, 0)
-
-var Proposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Proposal",
-}, smithy.ShapeTypeStructure, 14)
-var Proposal_ProposalId *smithy.Schema
-
-var Proposal_NetworkId *smithy.Schema
-
-var Proposal_Description *smithy.Schema
-
-var Proposal_Actions *smithy.Schema
-
-var Proposal_ProposedByMemberId *smithy.Schema
-
-var Proposal_ProposedByMemberName *smithy.Schema
-
-var Proposal_Status *smithy.Schema
-
-var Proposal_CreationDate *smithy.Schema
-
-var Proposal_ExpirationDate *smithy.Schema
-
-var Proposal_YesVoteCount *smithy.Schema
-
-var Proposal_NoVoteCount *smithy.Schema
-
-var Proposal_OutstandingVoteCount *smithy.Schema
-
-var Proposal_Tags *smithy.Schema
-
-var Proposal_Arn *smithy.Schema
-
-var ProposalActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ProposalActions",
-}, smithy.ShapeTypeStructure, 2)
-var ProposalActions_Invitations *smithy.Schema
-
-var ProposalActions_Removals *smithy.Schema
-
-var _ProposalDurationInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ProposalDurationInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProposalListMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ProposalListMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ProposalStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ProposalStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ProposalStatus_IN_PROGRESS *smithy.Schema
-
-var ProposalStatus_APPROVED *smithy.Schema
-
-var ProposalStatus_REJECTED *smithy.Schema
-
-var ProposalStatus_EXPIRED *smithy.Schema
-
-var ProposalStatus_ACTION_FAILED *smithy.Schema
-
-var ProposalSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ProposalSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ProposalSummary_ProposalId *smithy.Schema
-
-var ProposalSummary_Description *smithy.Schema
-
-var ProposalSummary_ProposedByMemberId *smithy.Schema
-
-var ProposalSummary_ProposedByMemberName *smithy.Schema
-
-var ProposalSummary_Status *smithy.Schema
-
-var ProposalSummary_CreationDate *smithy.Schema
-
-var ProposalSummary_ExpirationDate *smithy.Schema
-
-var ProposalSummary_Arn *smithy.Schema
-
-var _ProposalSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ProposalSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ProposalSummaryList_member *smithy.Schema
-
-var _ProposalVoteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ProposalVoteList",
-}, smithy.ShapeTypeList, 1)
-var _ProposalVoteList_member *smithy.Schema
-
-var RemoveAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "RemoveAction",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveAction_MemberId *smithy.Schema
-
-var _RemoveActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "RemoveActionList",
-}, smithy.ShapeTypeList, 1)
-var _RemoveActionList_member *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var _ResourceIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ResourceIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ResourceLimitExceededException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceName *smithy.Schema
-
-var ResourceNotReadyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ResourceNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceNotReadyException_Message *smithy.Schema
-
-var StateDBType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "StateDBType",
-}, smithy.ShapeTypeEnum, 2)
-var StateDBType_LevelDB *smithy.Schema
-
-var StateDBType_CouchDB *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThresholdComparator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ThresholdComparator",
-}, smithy.ShapeTypeEnum, 2)
-var ThresholdComparator_GREATER_THAN *smithy.Schema
-
-var ThresholdComparator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var _ThresholdPercentageInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ThresholdPercentageInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var TooManyTagsException_ResourceName *smithy.Schema
-
-var _UsernameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UsernameString",
-}, smithy.ShapeTypeString, 0)
-
-var _VoteCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "VoteCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var VoteSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "VoteSummary",
-}, smithy.ShapeTypeStructure, 3)
-var VoteSummary_Vote *smithy.Schema
-
-var VoteSummary_MemberName *smithy.Schema
-
-var VoteSummary_MemberId *smithy.Schema
-
-var VoteValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "VoteValue",
-}, smithy.ShapeTypeEnum, 2)
-var VoteValue_YES *smithy.Schema
-
-var VoteValue_NO *smithy.Schema
-
-var VotingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "VotingPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var VotingPolicy_ApprovalThresholdPolicy *smithy.Schema
-
-var CreateAccessorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateAccessorInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAccessorInput_ClientRequestToken *smithy.Schema
-
-var CreateAccessorInput_AccessorType *smithy.Schema
-
-var CreateAccessorInput_Tags *smithy.Schema
-
-var CreateAccessorInput_NetworkType *smithy.Schema
-
-var CreateAccessorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateAccessorOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAccessorOutput_AccessorId *smithy.Schema
-
-var CreateAccessorOutput_BillingToken *smithy.Schema
-
-var CreateAccessorOutput_NetworkType *smithy.Schema
-
-var CreateMemberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateMemberInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMemberInput_ClientRequestToken *smithy.Schema
-
-var CreateMemberInput_InvitationId *smithy.Schema
-
-var CreateMemberInput_NetworkId *smithy.Schema
-
-var CreateMemberInput_MemberConfiguration *smithy.Schema
-
-var CreateMemberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateMemberOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMemberOutput_MemberId *smithy.Schema
-
-var CreateNetworkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateNetworkInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateNetworkInput_ClientRequestToken *smithy.Schema
-
-var CreateNetworkInput_Name *smithy.Schema
-
-var CreateNetworkInput_Description *smithy.Schema
-
-var CreateNetworkInput_Framework *smithy.Schema
-
-var CreateNetworkInput_FrameworkVersion *smithy.Schema
-
-var CreateNetworkInput_FrameworkConfiguration *smithy.Schema
-
-var CreateNetworkInput_VotingPolicy *smithy.Schema
-
-var CreateNetworkInput_MemberConfiguration *smithy.Schema
-
-var CreateNetworkInput_Tags *smithy.Schema
-
-var CreateNetworkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateNetworkOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateNetworkOutput_NetworkId *smithy.Schema
-
-var CreateNetworkOutput_MemberId *smithy.Schema
-
-var CreateNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateNodeInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateNodeInput_ClientRequestToken *smithy.Schema
-
-var CreateNodeInput_NetworkId *smithy.Schema
-
-var CreateNodeInput_MemberId *smithy.Schema
-
-var CreateNodeInput_NodeConfiguration *smithy.Schema
-
-var CreateNodeInput_Tags *smithy.Schema
-
-var CreateNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateNodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNodeOutput_NodeId *smithy.Schema
-
-var CreateProposalInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateProposalInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateProposalInput_ClientRequestToken *smithy.Schema
-
-var CreateProposalInput_NetworkId *smithy.Schema
-
-var CreateProposalInput_MemberId *smithy.Schema
-
-var CreateProposalInput_Actions *smithy.Schema
-
-var CreateProposalInput_Description *smithy.Schema
-
-var CreateProposalInput_Tags *smithy.Schema
-
-var CreateProposalOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "CreateProposalOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProposalOutput_ProposalId *smithy.Schema
-
-var DeleteAccessorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteAccessorInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAccessorInput_AccessorId *smithy.Schema
-
-var DeleteAccessorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteAccessorOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteMemberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteMemberInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMemberInput_NetworkId *smithy.Schema
-
-var DeleteMemberInput_MemberId *smithy.Schema
-
-var DeleteMemberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteMemberOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteNodeInput_NetworkId *smithy.Schema
-
-var DeleteNodeInput_MemberId *smithy.Schema
-
-var DeleteNodeInput_NodeId *smithy.Schema
-
-var DeleteNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "DeleteNodeOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccessorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetAccessorInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessorInput_AccessorId *smithy.Schema
-
-var GetAccessorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetAccessorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessorOutput_Accessor *smithy.Schema
-
-var GetMemberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetMemberInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMemberInput_NetworkId *smithy.Schema
-
-var GetMemberInput_MemberId *smithy.Schema
-
-var GetMemberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetMemberOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMemberOutput_Member *smithy.Schema
-
-var GetNetworkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetNetworkInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkInput_NetworkId *smithy.Schema
-
-var GetNetworkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetNetworkOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkOutput_Network *smithy.Schema
-
-var GetNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetNodeInput_NetworkId *smithy.Schema
-
-var GetNodeInput_MemberId *smithy.Schema
-
-var GetNodeInput_NodeId *smithy.Schema
-
-var GetNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetNodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNodeOutput_Node *smithy.Schema
-
-var GetProposalInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetProposalInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetProposalInput_NetworkId *smithy.Schema
-
-var GetProposalInput_ProposalId *smithy.Schema
-
-var GetProposalOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "GetProposalOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetProposalOutput_Proposal *smithy.Schema
-
-var ListAccessorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListAccessorsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAccessorsInput_MaxResults *smithy.Schema
-
-var ListAccessorsInput_NextToken *smithy.Schema
-
-var ListAccessorsInput_NetworkType *smithy.Schema
-
-var ListAccessorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListAccessorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccessorsOutput_Accessors *smithy.Schema
-
-var ListAccessorsOutput_NextToken *smithy.Schema
-
-var ListInvitationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListInvitationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvitationsInput_MaxResults *smithy.Schema
-
-var ListInvitationsInput_NextToken *smithy.Schema
-
-var ListInvitationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListInvitationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvitationsOutput_Invitations *smithy.Schema
-
-var ListInvitationsOutput_NextToken *smithy.Schema
-
-var ListMembersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListMembersInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListMembersInput_NetworkId *smithy.Schema
-
-var ListMembersInput_Name *smithy.Schema
-
-var ListMembersInput_Status *smithy.Schema
-
-var ListMembersInput_IsOwned *smithy.Schema
-
-var ListMembersInput_MaxResults *smithy.Schema
-
-var ListMembersInput_NextToken *smithy.Schema
-
-var ListMembersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListMembersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMembersOutput_Members *smithy.Schema
-
-var ListMembersOutput_NextToken *smithy.Schema
-
-var ListNetworksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListNetworksInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListNetworksInput_Name *smithy.Schema
-
-var ListNetworksInput_Framework *smithy.Schema
-
-var ListNetworksInput_Status *smithy.Schema
-
-var ListNetworksInput_MaxResults *smithy.Schema
-
-var ListNetworksInput_NextToken *smithy.Schema
-
-var ListNetworksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListNetworksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListNetworksOutput_Networks *smithy.Schema
-
-var ListNetworksOutput_NextToken *smithy.Schema
-
-var ListNodesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListNodesInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListNodesInput_NetworkId *smithy.Schema
-
-var ListNodesInput_MemberId *smithy.Schema
-
-var ListNodesInput_Status *smithy.Schema
-
-var ListNodesInput_MaxResults *smithy.Schema
-
-var ListNodesInput_NextToken *smithy.Schema
-
-var ListNodesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListNodesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListNodesOutput_Nodes *smithy.Schema
-
-var ListNodesOutput_NextToken *smithy.Schema
-
-var ListProposalsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListProposalsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListProposalsInput_NetworkId *smithy.Schema
-
-var ListProposalsInput_MaxResults *smithy.Schema
-
-var ListProposalsInput_NextToken *smithy.Schema
-
-var ListProposalsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListProposalsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListProposalsOutput_Proposals *smithy.Schema
-
-var ListProposalsOutput_NextToken *smithy.Schema
-
-var ListProposalVotesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListProposalVotesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListProposalVotesInput_NetworkId *smithy.Schema
-
-var ListProposalVotesInput_ProposalId *smithy.Schema
-
-var ListProposalVotesInput_MaxResults *smithy.Schema
-
-var ListProposalVotesInput_NextToken *smithy.Schema
-
-var ListProposalVotesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListProposalVotesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListProposalVotesOutput_ProposalVotes *smithy.Schema
-
-var ListProposalVotesOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var RejectInvitationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "RejectInvitationInput",
-}, smithy.ShapeTypeStructure, 1)
-var RejectInvitationInput_InvitationId *smithy.Schema
-
-var RejectInvitationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "RejectInvitationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateMemberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UpdateMemberInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateMemberInput_NetworkId *smithy.Schema
-
-var UpdateMemberInput_MemberId *smithy.Schema
-
-var UpdateMemberInput_LogPublishingConfiguration *smithy.Schema
-
-var UpdateMemberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UpdateMemberOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UpdateNodeInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateNodeInput_NetworkId *smithy.Schema
-
-var UpdateNodeInput_MemberId *smithy.Schema
-
-var UpdateNodeInput_NodeId *smithy.Schema
-
-var UpdateNodeInput_LogPublishingConfiguration *smithy.Schema
-
-var UpdateNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "UpdateNodeOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var VoteOnProposalInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "VoteOnProposalInput",
-}, smithy.ShapeTypeStructure, 4)
-var VoteOnProposalInput_NetworkId *smithy.Schema
-
-var VoteOnProposalInput_ProposalId *smithy.Schema
-
-var VoteOnProposalInput_VoterMemberId *smithy.Schema
-
-var VoteOnProposalInput_Vote *smithy.Schema
-
-var VoteOnProposalOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchain",
-	Name:      "VoteOnProposalOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
-
-	AccessorType_BILLING_TOKEN = AccessorType.AddMember("BILLING_TOKEN", smithyprelude.Unit)
-
-	AccessorStatus_AVAILABLE = AccessorStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	AccessorStatus_PENDING_DELETION = AccessorStatus.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	AccessorStatus_DELETED = AccessorStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	_OutputTagMap_key = _OutputTagMap.AddMember("key", _TagKey)
-
-	_OutputTagMap_value = _OutputTagMap.AddMember("value", _TagValue)
-
-	AccessorNetworkType_ETHEREUM_GOERLI = AccessorNetworkType.AddMember("ETHEREUM_GOERLI", smithyprelude.Unit)
-
-	AccessorNetworkType_ETHEREUM_MAINNET = AccessorNetworkType.AddMember("ETHEREUM_MAINNET", smithyprelude.Unit)
-
-	AccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI = AccessorNetworkType.AddMember("ETHEREUM_MAINNET_AND_GOERLI", smithyprelude.Unit)
-
-	AccessorNetworkType_POLYGON_MAINNET = AccessorNetworkType.AddMember("POLYGON_MAINNET", smithyprelude.Unit)
-
-	AccessorNetworkType_POLYGON_MUMBAI = AccessorNetworkType.AddMember("POLYGON_MUMBAI", smithyprelude.Unit)
-
-	Accessor_Id = Accessor.AddMember("Id", _ResourceIdString)
-
-	Accessor_Type = Accessor.AddMember("Type", AccessorType)
-
-	Accessor_BillingToken = Accessor.AddMember("BillingToken", _AccessorBillingTokenString)
-
-	Accessor_Status = Accessor.AddMember("Status", AccessorStatus)
-
-	Accessor_CreationDate = Accessor.AddMember("CreationDate", _Timestamp)
-
-	Accessor_Arn = Accessor.AddMember("Arn", _ArnString)
-
-	Accessor_Tags = Accessor.AddMember("Tags", _OutputTagMap)
-
-	Accessor_NetworkType = Accessor.AddMember("NetworkType", AccessorNetworkType)
-
-	AccessorSummary_Id = AccessorSummary.AddMember("Id", _ResourceIdString)
-
-	AccessorSummary_Type = AccessorSummary.AddMember("Type", AccessorType)
-
-	AccessorSummary_Status = AccessorSummary.AddMember("Status", AccessorStatus)
-
-	AccessorSummary_CreationDate = AccessorSummary.AddMember("CreationDate", _Timestamp)
-
-	AccessorSummary_Arn = AccessorSummary.AddMember("Arn", _ArnString)
-
-	AccessorSummary_NetworkType = AccessorSummary.AddMember("NetworkType", AccessorNetworkType)
-
-	_AccessorSummaryList_member = _AccessorSummaryList.AddMember("member", AccessorSummary)
-
-	ThresholdComparator_GREATER_THAN = ThresholdComparator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	ThresholdComparator_GREATER_THAN_OR_EQUAL_TO = ThresholdComparator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	ApprovalThresholdPolicy_ThresholdPercentage = ApprovalThresholdPolicy.AddMember("ThresholdPercentage", _ThresholdPercentageInt)
-
-	ApprovalThresholdPolicy_ProposalDurationInHours = ApprovalThresholdPolicy.AddMember("ProposalDurationInHours", _ProposalDurationInt)
-
-	ApprovalThresholdPolicy_ThresholdComparator = ApprovalThresholdPolicy.AddMember("ThresholdComparator", ThresholdComparator)
-
-	Edition_STARTER = Edition.AddMember("STARTER", smithyprelude.Unit)
-
-	Edition_STANDARD = Edition.AddMember("STANDARD", smithyprelude.Unit)
-
-	Framework_HYPERLEDGER_FABRIC = Framework.AddMember("HYPERLEDGER_FABRIC", smithyprelude.Unit)
-
-	Framework_ETHEREUM = Framework.AddMember("ETHEREUM", smithyprelude.Unit)
-
-	IllegalActionException_Message = IllegalActionException.AddMember("Message", _String)
-
-	_InputTagMap_key = _InputTagMap.AddMember("key", _TagKey)
-
-	_InputTagMap_value = _InputTagMap.AddMember("value", _TagValue)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _String)
-
-	InvitationStatus_PENDING = InvitationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	InvitationStatus_ACCEPTED = InvitationStatus.AddMember("ACCEPTED", smithyprelude.Unit)
-
-	InvitationStatus_ACCEPTING = InvitationStatus.AddMember("ACCEPTING", smithyprelude.Unit)
-
-	InvitationStatus_REJECTED = InvitationStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	InvitationStatus_EXPIRED = InvitationStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	NetworkStatus_CREATING = NetworkStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	NetworkStatus_AVAILABLE = NetworkStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	NetworkStatus_CREATE_FAILED = NetworkStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	NetworkStatus_DELETING = NetworkStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	NetworkStatus_DELETED = NetworkStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	NetworkSummary_Id = NetworkSummary.AddMember("Id", _ResourceIdString)
-
-	NetworkSummary_Name = NetworkSummary.AddMember("Name", _NameString)
-
-	NetworkSummary_Description = NetworkSummary.AddMember("Description", _DescriptionString)
-
-	NetworkSummary_Framework = NetworkSummary.AddMember("Framework", Framework)
-
-	NetworkSummary_FrameworkVersion = NetworkSummary.AddMember("FrameworkVersion", _FrameworkVersionString)
-
-	NetworkSummary_Status = NetworkSummary.AddMember("Status", NetworkStatus)
-
-	NetworkSummary_CreationDate = NetworkSummary.AddMember("CreationDate", _Timestamp)
-
-	NetworkSummary_Arn = NetworkSummary.AddMember("Arn", _ArnString)
-
-	Invitation_InvitationId = Invitation.AddMember("InvitationId", _ResourceIdString)
-
-	Invitation_CreationDate = Invitation.AddMember("CreationDate", _Timestamp)
-
-	Invitation_ExpirationDate = Invitation.AddMember("ExpirationDate", _Timestamp)
-
-	Invitation_Status = Invitation.AddMember("Status", InvitationStatus)
-
-	Invitation_NetworkSummary = Invitation.AddMember("NetworkSummary", NetworkSummary)
-
-	Invitation_Arn = Invitation.AddMember("Arn", _ArnString)
-
-	_InvitationList_member = _InvitationList.AddMember("member", Invitation)
-
-	InviteAction_Principal = InviteAction.AddMember("Principal", _PrincipalString)
-
-	_InviteActionList_member = _InviteActionList.AddMember("member", InviteAction)
-
-	LogConfiguration_Enabled = LogConfiguration.AddMember("Enabled", _Enabled)
-
-	LogConfigurations_Cloudwatch = LogConfigurations.AddMember("Cloudwatch", LogConfiguration)
-
-	MemberFabricAttributes_AdminUsername = MemberFabricAttributes.AddMember("AdminUsername", _UsernameString)
-
-	MemberFabricAttributes_CaEndpoint = MemberFabricAttributes.AddMember("CaEndpoint", _String)
-
-	MemberFrameworkAttributes_Fabric = MemberFrameworkAttributes.AddMember("Fabric", MemberFabricAttributes)
-
-	MemberFabricLogPublishingConfiguration_CaLogs = MemberFabricLogPublishingConfiguration.AddMember("CaLogs", LogConfigurations)
-
-	MemberLogPublishingConfiguration_Fabric = MemberLogPublishingConfiguration.AddMember("Fabric", MemberFabricLogPublishingConfiguration)
-
-	MemberStatus_CREATING = MemberStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	MemberStatus_AVAILABLE = MemberStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	MemberStatus_CREATE_FAILED = MemberStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	MemberStatus_UPDATING = MemberStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	MemberStatus_DELETING = MemberStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	MemberStatus_DELETED = MemberStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	MemberStatus_INACCESSIBLE_ENCRYPTION_KEY = MemberStatus.AddMember("INACCESSIBLE_ENCRYPTION_KEY", smithyprelude.Unit)
-
-	Member_NetworkId = Member.AddMember("NetworkId", _ResourceIdString)
-
-	Member_Id = Member.AddMember("Id", _ResourceIdString)
-
-	Member_Name = Member.AddMember("Name", _NetworkMemberNameString)
-
-	Member_Description = Member.AddMember("Description", _DescriptionString)
-
-	Member_FrameworkAttributes = Member.AddMember("FrameworkAttributes", MemberFrameworkAttributes)
-
-	Member_LogPublishingConfiguration = Member.AddMember("LogPublishingConfiguration", MemberLogPublishingConfiguration)
-
-	Member_Status = Member.AddMember("Status", MemberStatus)
-
-	Member_CreationDate = Member.AddMember("CreationDate", _Timestamp)
-
-	Member_Tags = Member.AddMember("Tags", _OutputTagMap)
-
-	Member_Arn = Member.AddMember("Arn", _ArnString)
-
-	Member_KmsKeyArn = Member.AddMember("KmsKeyArn", _String)
-
-	MemberFabricConfiguration_AdminUsername = MemberFabricConfiguration.AddMember("AdminUsername", _UsernameString)
-
-	MemberFabricConfiguration_AdminPassword = MemberFabricConfiguration.AddMember("AdminPassword", _PasswordString)
-
-	MemberFrameworkConfiguration_Fabric = MemberFrameworkConfiguration.AddMember("Fabric", MemberFabricConfiguration)
-
-	MemberConfiguration_Name = MemberConfiguration.AddMember("Name", _NetworkMemberNameString)
-
-	MemberConfiguration_Description = MemberConfiguration.AddMember("Description", _DescriptionString)
-
-	MemberConfiguration_FrameworkConfiguration = MemberConfiguration.AddMember("FrameworkConfiguration", MemberFrameworkConfiguration)
-
-	MemberConfiguration_LogPublishingConfiguration = MemberConfiguration.AddMember("LogPublishingConfiguration", MemberLogPublishingConfiguration)
-
-	MemberConfiguration_Tags = MemberConfiguration.AddMember("Tags", _InputTagMap)
-
-	MemberConfiguration_KmsKeyArn = MemberConfiguration.AddMember("KmsKeyArn", _ArnString)
-
-	MemberSummary_Id = MemberSummary.AddMember("Id", _ResourceIdString)
-
-	MemberSummary_Name = MemberSummary.AddMember("Name", _NetworkMemberNameString)
-
-	MemberSummary_Description = MemberSummary.AddMember("Description", _DescriptionString)
-
-	MemberSummary_Status = MemberSummary.AddMember("Status", MemberStatus)
-
-	MemberSummary_CreationDate = MemberSummary.AddMember("CreationDate", _Timestamp)
-
-	MemberSummary_IsOwned = MemberSummary.AddMember("IsOwned", _IsOwned)
-
-	MemberSummary_Arn = MemberSummary.AddMember("Arn", _ArnString)
-
-	_MemberSummaryList_member = _MemberSummaryList.AddMember("member", MemberSummary)
-
-	NetworkFabricAttributes_OrderingServiceEndpoint = NetworkFabricAttributes.AddMember("OrderingServiceEndpoint", _String)
-
-	NetworkFabricAttributes_Edition = NetworkFabricAttributes.AddMember("Edition", Edition)
-
-	NetworkEthereumAttributes_ChainId = NetworkEthereumAttributes.AddMember("ChainId", _String)
-
-	NetworkFrameworkAttributes_Fabric = NetworkFrameworkAttributes.AddMember("Fabric", NetworkFabricAttributes)
-
-	NetworkFrameworkAttributes_Ethereum = NetworkFrameworkAttributes.AddMember("Ethereum", NetworkEthereumAttributes)
-
-	VotingPolicy_ApprovalThresholdPolicy = VotingPolicy.AddMember("ApprovalThresholdPolicy", ApprovalThresholdPolicy)
-
-	Network_Id = Network.AddMember("Id", _ResourceIdString)
-
-	Network_Name = Network.AddMember("Name", _NameString)
-
-	Network_Description = Network.AddMember("Description", _DescriptionString)
-
-	Network_Framework = Network.AddMember("Framework", Framework)
-
-	Network_FrameworkVersion = Network.AddMember("FrameworkVersion", _FrameworkVersionString)
-
-	Network_FrameworkAttributes = Network.AddMember("FrameworkAttributes", NetworkFrameworkAttributes)
-
-	Network_VpcEndpointServiceName = Network.AddMember("VpcEndpointServiceName", _String)
-
-	Network_VotingPolicy = Network.AddMember("VotingPolicy", VotingPolicy)
-
-	Network_Status = Network.AddMember("Status", NetworkStatus)
-
-	Network_CreationDate = Network.AddMember("CreationDate", _Timestamp)
-
-	Network_Tags = Network.AddMember("Tags", _OutputTagMap)
-
-	Network_Arn = Network.AddMember("Arn", _ArnString)
-
-	NetworkFabricConfiguration_Edition = NetworkFabricConfiguration.AddMember("Edition", Edition)
-
-	NetworkFrameworkConfiguration_Fabric = NetworkFrameworkConfiguration.AddMember("Fabric", NetworkFabricConfiguration)
-
-	_NetworkSummaryList_member = _NetworkSummaryList.AddMember("member", NetworkSummary)
-
-	NodeFabricAttributes_PeerEndpoint = NodeFabricAttributes.AddMember("PeerEndpoint", _String)
-
-	NodeFabricAttributes_PeerEventEndpoint = NodeFabricAttributes.AddMember("PeerEventEndpoint", _String)
-
-	NodeEthereumAttributes_HttpEndpoint = NodeEthereumAttributes.AddMember("HttpEndpoint", _String)
-
-	NodeEthereumAttributes_WebSocketEndpoint = NodeEthereumAttributes.AddMember("WebSocketEndpoint", _String)
-
-	NodeFrameworkAttributes_Fabric = NodeFrameworkAttributes.AddMember("Fabric", NodeFabricAttributes)
-
-	NodeFrameworkAttributes_Ethereum = NodeFrameworkAttributes.AddMember("Ethereum", NodeEthereumAttributes)
-
-	NodeFabricLogPublishingConfiguration_ChaincodeLogs = NodeFabricLogPublishingConfiguration.AddMember("ChaincodeLogs", LogConfigurations)
-
-	NodeFabricLogPublishingConfiguration_PeerLogs = NodeFabricLogPublishingConfiguration.AddMember("PeerLogs", LogConfigurations)
-
-	NodeLogPublishingConfiguration_Fabric = NodeLogPublishingConfiguration.AddMember("Fabric", NodeFabricLogPublishingConfiguration)
-
-	StateDBType_LevelDB = StateDBType.AddMember("LevelDB", smithyprelude.Unit)
-
-	StateDBType_CouchDB = StateDBType.AddMember("CouchDB", smithyprelude.Unit)
-
-	NodeStatus_CREATING = NodeStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	NodeStatus_AVAILABLE = NodeStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	NodeStatus_UNHEALTHY = NodeStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	NodeStatus_CREATE_FAILED = NodeStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	NodeStatus_UPDATING = NodeStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	NodeStatus_DELETING = NodeStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	NodeStatus_DELETED = NodeStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	NodeStatus_FAILED = NodeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	NodeStatus_INACCESSIBLE_ENCRYPTION_KEY = NodeStatus.AddMember("INACCESSIBLE_ENCRYPTION_KEY", smithyprelude.Unit)
-
-	Node_NetworkId = Node.AddMember("NetworkId", _ResourceIdString)
-
-	Node_MemberId = Node.AddMember("MemberId", _ResourceIdString)
-
-	Node_Id = Node.AddMember("Id", _ResourceIdString)
-
-	Node_InstanceType = Node.AddMember("InstanceType", _InstanceTypeString)
-
-	Node_AvailabilityZone = Node.AddMember("AvailabilityZone", _AvailabilityZoneString)
-
-	Node_FrameworkAttributes = Node.AddMember("FrameworkAttributes", NodeFrameworkAttributes)
-
-	Node_LogPublishingConfiguration = Node.AddMember("LogPublishingConfiguration", NodeLogPublishingConfiguration)
-
-	Node_StateDB = Node.AddMember("StateDB", StateDBType)
-
-	Node_Status = Node.AddMember("Status", NodeStatus)
-
-	Node_CreationDate = Node.AddMember("CreationDate", _Timestamp)
-
-	Node_Tags = Node.AddMember("Tags", _OutputTagMap)
-
-	Node_Arn = Node.AddMember("Arn", _ArnString)
-
-	Node_KmsKeyArn = Node.AddMember("KmsKeyArn", _String)
-
-	NodeConfiguration_InstanceType = NodeConfiguration.AddMember("InstanceType", _InstanceTypeString)
-
-	NodeConfiguration_AvailabilityZone = NodeConfiguration.AddMember("AvailabilityZone", _AvailabilityZoneString)
-
-	NodeConfiguration_LogPublishingConfiguration = NodeConfiguration.AddMember("LogPublishingConfiguration", NodeLogPublishingConfiguration)
-
-	NodeConfiguration_StateDB = NodeConfiguration.AddMember("StateDB", StateDBType)
-
-	NodeSummary_Id = NodeSummary.AddMember("Id", _ResourceIdString)
-
-	NodeSummary_Status = NodeSummary.AddMember("Status", NodeStatus)
-
-	NodeSummary_CreationDate = NodeSummary.AddMember("CreationDate", _Timestamp)
-
-	NodeSummary_AvailabilityZone = NodeSummary.AddMember("AvailabilityZone", _AvailabilityZoneString)
-
-	NodeSummary_InstanceType = NodeSummary.AddMember("InstanceType", _InstanceTypeString)
-
-	NodeSummary_Arn = NodeSummary.AddMember("Arn", _ArnString)
-
-	_NodeSummaryList_member = _NodeSummaryList.AddMember("member", NodeSummary)
-
-	RemoveAction_MemberId = RemoveAction.AddMember("MemberId", _ResourceIdString)
-
-	_RemoveActionList_member = _RemoveActionList.AddMember("member", RemoveAction)
-
-	ProposalActions_Invitations = ProposalActions.AddMember("Invitations", _InviteActionList)
-
-	ProposalActions_Removals = ProposalActions.AddMember("Removals", _RemoveActionList)
-
-	ProposalStatus_IN_PROGRESS = ProposalStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ProposalStatus_APPROVED = ProposalStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	ProposalStatus_REJECTED = ProposalStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	ProposalStatus_EXPIRED = ProposalStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	ProposalStatus_ACTION_FAILED = ProposalStatus.AddMember("ACTION_FAILED", smithyprelude.Unit)
-
-	Proposal_ProposalId = Proposal.AddMember("ProposalId", _ResourceIdString)
-
-	Proposal_NetworkId = Proposal.AddMember("NetworkId", _ResourceIdString)
-
-	Proposal_Description = Proposal.AddMember("Description", _DescriptionString)
-
-	Proposal_Actions = Proposal.AddMember("Actions", ProposalActions)
-
-	Proposal_ProposedByMemberId = Proposal.AddMember("ProposedByMemberId", _ResourceIdString)
-
-	Proposal_ProposedByMemberName = Proposal.AddMember("ProposedByMemberName", _NetworkMemberNameString)
-
-	Proposal_Status = Proposal.AddMember("Status", ProposalStatus)
-
-	Proposal_CreationDate = Proposal.AddMember("CreationDate", _Timestamp)
-
-	Proposal_ExpirationDate = Proposal.AddMember("ExpirationDate", _Timestamp)
-
-	Proposal_YesVoteCount = Proposal.AddMember("YesVoteCount", _VoteCount)
-
-	Proposal_NoVoteCount = Proposal.AddMember("NoVoteCount", _VoteCount)
-
-	Proposal_OutstandingVoteCount = Proposal.AddMember("OutstandingVoteCount", _VoteCount)
-
-	Proposal_Tags = Proposal.AddMember("Tags", _OutputTagMap)
-
-	Proposal_Arn = Proposal.AddMember("Arn", _ArnString)
-
-	ProposalSummary_ProposalId = ProposalSummary.AddMember("ProposalId", _ResourceIdString)
-
-	ProposalSummary_Description = ProposalSummary.AddMember("Description", _DescriptionString)
-
-	ProposalSummary_ProposedByMemberId = ProposalSummary.AddMember("ProposedByMemberId", _ResourceIdString)
-
-	ProposalSummary_ProposedByMemberName = ProposalSummary.AddMember("ProposedByMemberName", _NetworkMemberNameString)
-
-	ProposalSummary_Status = ProposalSummary.AddMember("Status", ProposalStatus)
-
-	ProposalSummary_CreationDate = ProposalSummary.AddMember("CreationDate", _Timestamp)
-
-	ProposalSummary_ExpirationDate = ProposalSummary.AddMember("ExpirationDate", _Timestamp)
-
-	ProposalSummary_Arn = ProposalSummary.AddMember("Arn", _ArnString)
-
-	_ProposalSummaryList_member = _ProposalSummaryList.AddMember("member", ProposalSummary)
-
-	VoteValue_YES = VoteValue.AddMember("YES", smithyprelude.Unit)
-
-	VoteValue_NO = VoteValue.AddMember("NO", smithyprelude.Unit)
-
-	VoteSummary_Vote = VoteSummary.AddMember("Vote", VoteValue)
-
-	VoteSummary_MemberName = VoteSummary.AddMember("MemberName", _NetworkMemberNameString)
-
-	VoteSummary_MemberId = VoteSummary.AddMember("MemberId", _ResourceIdString)
-
-	_ProposalVoteList_member = _ProposalVoteList.AddMember("member", VoteSummary)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _String)
-
-	ResourceLimitExceededException_Message = ResourceLimitExceededException.AddMember("Message", _String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ResourceNotFoundException_ResourceName = ResourceNotFoundException.AddMember("ResourceName", _ArnString)
-
-	ResourceNotReadyException_Message = ResourceNotReadyException.AddMember("Message", _String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _ExceptionMessage)
-
-	TooManyTagsException_ResourceName = TooManyTagsException.AddMember("ResourceName", _ArnString)
-
-	CreateAccessorInput_ClientRequestToken = CreateAccessorInput.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	CreateAccessorInput_AccessorType = CreateAccessorInput.AddMember("AccessorType", AccessorType)
-
-	CreateAccessorInput_Tags = CreateAccessorInput.AddMember("Tags", _InputTagMap)
-
-	CreateAccessorInput_NetworkType = CreateAccessorInput.AddMember("NetworkType", AccessorNetworkType)
-
-	CreateAccessorOutput_AccessorId = CreateAccessorOutput.AddMember("AccessorId", _ResourceIdString)
-
-	CreateAccessorOutput_BillingToken = CreateAccessorOutput.AddMember("BillingToken", _AccessorBillingTokenString)
-
-	CreateAccessorOutput_NetworkType = CreateAccessorOutput.AddMember("NetworkType", AccessorNetworkType)
-
-	CreateMemberInput_ClientRequestToken = CreateMemberInput.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	CreateMemberInput_InvitationId = CreateMemberInput.AddMember("InvitationId", _ResourceIdString)
-
-	CreateMemberInput_NetworkId = CreateMemberInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	CreateMemberInput_MemberConfiguration = CreateMemberInput.AddMember("MemberConfiguration", MemberConfiguration)
-
-	CreateMemberOutput_MemberId = CreateMemberOutput.AddMember("MemberId", _ResourceIdString)
-
-	CreateNetworkInput_ClientRequestToken = CreateNetworkInput.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	CreateNetworkInput_Name = CreateNetworkInput.AddMember("Name", _NameString)
-
-	CreateNetworkInput_Description = CreateNetworkInput.AddMember("Description", _DescriptionString)
-
-	CreateNetworkInput_Framework = CreateNetworkInput.AddMember("Framework", Framework)
-
-	CreateNetworkInput_FrameworkVersion = CreateNetworkInput.AddMember("FrameworkVersion", _FrameworkVersionString)
-
-	CreateNetworkInput_FrameworkConfiguration = CreateNetworkInput.AddMember("FrameworkConfiguration", NetworkFrameworkConfiguration)
-
-	CreateNetworkInput_VotingPolicy = CreateNetworkInput.AddMember("VotingPolicy", VotingPolicy)
-
-	CreateNetworkInput_MemberConfiguration = CreateNetworkInput.AddMember("MemberConfiguration", MemberConfiguration)
-
-	CreateNetworkInput_Tags = CreateNetworkInput.AddMember("Tags", _InputTagMap)
-
-	CreateNetworkOutput_NetworkId = CreateNetworkOutput.AddMember("NetworkId", _ResourceIdString)
-
-	CreateNetworkOutput_MemberId = CreateNetworkOutput.AddMember("MemberId", _ResourceIdString)
-
-	CreateNodeInput_ClientRequestToken = CreateNodeInput.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	CreateNodeInput_NetworkId = CreateNodeInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	CreateNodeInput_MemberId = CreateNodeInput.AddMember("MemberId", _ResourceIdString)
-
-	CreateNodeInput_NodeConfiguration = CreateNodeInput.AddMember("NodeConfiguration", NodeConfiguration)
-
-	CreateNodeInput_Tags = CreateNodeInput.AddMember("Tags", _InputTagMap)
-
-	CreateNodeOutput_NodeId = CreateNodeOutput.AddMember("NodeId", _ResourceIdString)
-
-	CreateProposalInput_ClientRequestToken = CreateProposalInput.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	CreateProposalInput_NetworkId = CreateProposalInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	CreateProposalInput_MemberId = CreateProposalInput.AddMember("MemberId", _ResourceIdString)
-
-	CreateProposalInput_Actions = CreateProposalInput.AddMember("Actions", ProposalActions)
-
-	CreateProposalInput_Description = CreateProposalInput.AddMember("Description", _DescriptionString)
-
-	CreateProposalInput_Tags = CreateProposalInput.AddMember("Tags", _InputTagMap)
-
-	CreateProposalOutput_ProposalId = CreateProposalOutput.AddMember("ProposalId", _ResourceIdString)
-
-	DeleteAccessorInput_AccessorId = DeleteAccessorInput.AddMember("AccessorId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	DeleteMemberInput_NetworkId = DeleteMemberInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	DeleteMemberInput_MemberId = DeleteMemberInput.AddMember("MemberId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	DeleteNodeInput_NetworkId = DeleteNodeInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	DeleteNodeInput_MemberId = DeleteNodeInput.AddMember("MemberId", _ResourceIdString, &smithytraits.HTTPQuery{Name: "memberId"})
-
-	DeleteNodeInput_NodeId = DeleteNodeInput.AddMember("NodeId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetAccessorInput_AccessorId = GetAccessorInput.AddMember("AccessorId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetAccessorOutput_Accessor = GetAccessorOutput.AddMember("Accessor", Accessor)
-
-	GetMemberInput_NetworkId = GetMemberInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetMemberInput_MemberId = GetMemberInput.AddMember("MemberId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetMemberOutput_Member = GetMemberOutput.AddMember("Member", Member)
-
-	GetNetworkInput_NetworkId = GetNetworkInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetNetworkOutput_Network = GetNetworkOutput.AddMember("Network", Network)
-
-	GetNodeInput_NetworkId = GetNodeInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetNodeInput_MemberId = GetNodeInput.AddMember("MemberId", _ResourceIdString, &smithytraits.HTTPQuery{Name: "memberId"})
-
-	GetNodeInput_NodeId = GetNodeInput.AddMember("NodeId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetNodeOutput_Node = GetNodeOutput.AddMember("Node", Node)
-
-	GetProposalInput_NetworkId = GetProposalInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetProposalInput_ProposalId = GetProposalInput.AddMember("ProposalId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	GetProposalOutput_Proposal = GetProposalOutput.AddMember("Proposal", Proposal)
-
-	ListAccessorsInput_MaxResults = ListAccessorsInput.AddMember("MaxResults", _AccessorListMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAccessorsInput_NextToken = ListAccessorsInput.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAccessorsInput_NetworkType = ListAccessorsInput.AddMember("NetworkType", AccessorNetworkType, &smithytraits.HTTPQuery{Name: "networkType"})
-
-	ListAccessorsOutput_Accessors = ListAccessorsOutput.AddMember("Accessors", _AccessorSummaryList)
-
-	ListAccessorsOutput_NextToken = ListAccessorsOutput.AddMember("NextToken", _PaginationToken)
-
-	ListInvitationsInput_MaxResults = ListInvitationsInput.AddMember("MaxResults", _ProposalListMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListInvitationsInput_NextToken = ListInvitationsInput.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListInvitationsOutput_Invitations = ListInvitationsOutput.AddMember("Invitations", _InvitationList)
-
-	ListInvitationsOutput_NextToken = ListInvitationsOutput.AddMember("NextToken", _PaginationToken)
-
-	ListMembersInput_NetworkId = ListMembersInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	ListMembersInput_Name = ListMembersInput.AddMember("Name", _String, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListMembersInput_Status = ListMembersInput.AddMember("Status", MemberStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListMembersInput_IsOwned = ListMembersInput.AddMember("IsOwned", _IsOwned, &smithytraits.HTTPQuery{Name: "isOwned"})
-
-	ListMembersInput_MaxResults = ListMembersInput.AddMember("MaxResults", _MemberListMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMembersInput_NextToken = ListMembersInput.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMembersOutput_Members = ListMembersOutput.AddMember("Members", _MemberSummaryList)
-
-	ListMembersOutput_NextToken = ListMembersOutput.AddMember("NextToken", _PaginationToken)
-
-	ListNetworksInput_Name = ListNetworksInput.AddMember("Name", _String, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListNetworksInput_Framework = ListNetworksInput.AddMember("Framework", Framework, &smithytraits.HTTPQuery{Name: "framework"})
-
-	ListNetworksInput_Status = ListNetworksInput.AddMember("Status", NetworkStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListNetworksInput_MaxResults = ListNetworksInput.AddMember("MaxResults", _NetworkListMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNetworksInput_NextToken = ListNetworksInput.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNetworksOutput_Networks = ListNetworksOutput.AddMember("Networks", _NetworkSummaryList)
-
-	ListNetworksOutput_NextToken = ListNetworksOutput.AddMember("NextToken", _PaginationToken)
-
-	ListNodesInput_NetworkId = ListNodesInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	ListNodesInput_MemberId = ListNodesInput.AddMember("MemberId", _ResourceIdString, &smithytraits.HTTPQuery{Name: "memberId"})
-
-	ListNodesInput_Status = ListNodesInput.AddMember("Status", NodeStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListNodesInput_MaxResults = ListNodesInput.AddMember("MaxResults", _NodeListMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNodesInput_NextToken = ListNodesInput.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNodesOutput_Nodes = ListNodesOutput.AddMember("Nodes", _NodeSummaryList)
-
-	ListNodesOutput_NextToken = ListNodesOutput.AddMember("NextToken", _PaginationToken)
-
-	ListProposalsInput_NetworkId = ListProposalsInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	ListProposalsInput_MaxResults = ListProposalsInput.AddMember("MaxResults", _ProposalListMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListProposalsInput_NextToken = ListProposalsInput.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListProposalsOutput_Proposals = ListProposalsOutput.AddMember("Proposals", _ProposalSummaryList)
-
-	ListProposalsOutput_NextToken = ListProposalsOutput.AddMember("NextToken", _PaginationToken)
-
-	ListProposalVotesInput_NetworkId = ListProposalVotesInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	ListProposalVotesInput_ProposalId = ListProposalVotesInput.AddMember("ProposalId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	ListProposalVotesInput_MaxResults = ListProposalVotesInput.AddMember("MaxResults", _ProposalListMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListProposalVotesInput_NextToken = ListProposalVotesInput.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListProposalVotesOutput_ProposalVotes = ListProposalVotesOutput.AddMember("ProposalVotes", _ProposalVoteList)
-
-	ListProposalVotesOutput_NextToken = ListProposalVotesOutput.AddMember("NextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ArnString, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _OutputTagMap)
-
-	RejectInvitationInput_InvitationId = RejectInvitationInput.AddMember("InvitationId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ArnString, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _InputTagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ArnString, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateMemberInput_NetworkId = UpdateMemberInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	UpdateMemberInput_MemberId = UpdateMemberInput.AddMember("MemberId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	UpdateMemberInput_LogPublishingConfiguration = UpdateMemberInput.AddMember("LogPublishingConfiguration", MemberLogPublishingConfiguration)
-
-	UpdateNodeInput_NetworkId = UpdateNodeInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	UpdateNodeInput_MemberId = UpdateNodeInput.AddMember("MemberId", _ResourceIdString)
-
-	UpdateNodeInput_NodeId = UpdateNodeInput.AddMember("NodeId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	UpdateNodeInput_LogPublishingConfiguration = UpdateNodeInput.AddMember("LogPublishingConfiguration", NodeLogPublishingConfiguration)
-
-	VoteOnProposalInput_NetworkId = VoteOnProposalInput.AddMember("NetworkId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	VoteOnProposalInput_ProposalId = VoteOnProposalInput.AddMember("ProposalId", _ResourceIdString, &smithytraits.HTTPLabel{})
-
-	VoteOnProposalInput_VoterMemberId = VoteOnProposalInput.AddMember("VoterMemberId", _ResourceIdString)
-
-	VoteOnProposalInput_Vote = VoteOnProposalInput.AddMember("Vote", VoteValue)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "memberId"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "networkType"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "isOwned"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "framework"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAccessor = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessor_Id, &sAccessor_Type, &sAccessor_BillingToken, &sAccessor_Status, &sAccessor_CreationDate, &sAccessor_Arn, &sAccessor_Tags, &sAccessor_NetworkType}}
+var mAccessorNetworkType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessorNetworkType_ETHEREUM_GOERLI, &sAccessorNetworkType_ETHEREUM_MAINNET, &sAccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI, &sAccessorNetworkType_POLYGON_MAINNET, &sAccessorNetworkType_POLYGON_MUMBAI}}
+var mAccessorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessorStatus_AVAILABLE, &sAccessorStatus_PENDING_DELETION, &sAccessorStatus_DELETED}}
+var mAccessorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessorSummary_Id, &sAccessorSummary_Type, &sAccessorSummary_Status, &sAccessorSummary_CreationDate, &sAccessorSummary_Arn, &sAccessorSummary_NetworkType}}
+var m_AccessorSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessorSummaryList_member}}
+var mAccessorType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessorType_BILLING_TOKEN}}
+var mApprovalThresholdPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovalThresholdPolicy_ThresholdPercentage, &sApprovalThresholdPolicy_ProposalDurationInHours, &sApprovalThresholdPolicy_ThresholdComparator}}
+var mEdition = smithy.SchemaMembers{List: []*smithy.Schema{&sEdition_STARTER, &sEdition_STANDARD}}
+var mFramework = smithy.SchemaMembers{List: []*smithy.Schema{&sFramework_HYPERLEDGER_FABRIC, &sFramework_ETHEREUM}}
+var mIllegalActionException = smithy.SchemaMembers{List: []*smithy.Schema{&sIllegalActionException_Message}}
+var m_InputTagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_InputTagMap_key, &s_InputTagMap_value}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_Message}}
+var mInvitation = smithy.SchemaMembers{List: []*smithy.Schema{&sInvitation_InvitationId, &sInvitation_CreationDate, &sInvitation_ExpirationDate, &sInvitation_Status, &sInvitation_NetworkSummary, &sInvitation_Arn}}
+var m_InvitationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvitationList_member}}
+var mInvitationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInvitationStatus_PENDING, &sInvitationStatus_ACCEPTED, &sInvitationStatus_ACCEPTING, &sInvitationStatus_REJECTED, &sInvitationStatus_EXPIRED}}
+var mInviteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sInviteAction_Principal}}
+var m_InviteActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InviteActionList_member}}
+var mLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfiguration_Enabled}}
+var mLogConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfigurations_Cloudwatch}}
+var mMember = smithy.SchemaMembers{List: []*smithy.Schema{&sMember_NetworkId, &sMember_Id, &sMember_Name, &sMember_Description, &sMember_FrameworkAttributes, &sMember_LogPublishingConfiguration, &sMember_Status, &sMember_CreationDate, &sMember_Tags, &sMember_Arn, &sMember_KmsKeyArn}, Hash: &hMember}
+var mMemberConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberConfiguration_Name, &sMemberConfiguration_Description, &sMemberConfiguration_FrameworkConfiguration, &sMemberConfiguration_LogPublishingConfiguration, &sMemberConfiguration_Tags, &sMemberConfiguration_KmsKeyArn}}
+var mMemberFabricAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberFabricAttributes_AdminUsername, &sMemberFabricAttributes_CaEndpoint}}
+var mMemberFabricConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberFabricConfiguration_AdminUsername, &sMemberFabricConfiguration_AdminPassword}}
+var mMemberFabricLogPublishingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberFabricLogPublishingConfiguration_CaLogs}}
+var mMemberFrameworkAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberFrameworkAttributes_Fabric}}
+var mMemberFrameworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberFrameworkConfiguration_Fabric}}
+var mMemberLogPublishingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberLogPublishingConfiguration_Fabric}}
+var mMemberStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberStatus_CREATING, &sMemberStatus_AVAILABLE, &sMemberStatus_CREATE_FAILED, &sMemberStatus_UPDATING, &sMemberStatus_DELETING, &sMemberStatus_DELETED, &sMemberStatus_INACCESSIBLE_ENCRYPTION_KEY}}
+var mMemberSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberSummary_Id, &sMemberSummary_Name, &sMemberSummary_Description, &sMemberSummary_Status, &sMemberSummary_CreationDate, &sMemberSummary_IsOwned, &sMemberSummary_Arn}}
+var m_MemberSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MemberSummaryList_member}}
+var mNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sNetwork_Id, &sNetwork_Name, &sNetwork_Description, &sNetwork_Framework, &sNetwork_FrameworkVersion, &sNetwork_FrameworkAttributes, &sNetwork_VpcEndpointServiceName, &sNetwork_VotingPolicy, &sNetwork_Status, &sNetwork_CreationDate, &sNetwork_Tags, &sNetwork_Arn}, Hash: &hNetwork}
+var mNetworkEthereumAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkEthereumAttributes_ChainId}}
+var mNetworkFabricAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFabricAttributes_OrderingServiceEndpoint, &sNetworkFabricAttributes_Edition}}
+var mNetworkFabricConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFabricConfiguration_Edition}}
+var mNetworkFrameworkAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFrameworkAttributes_Fabric, &sNetworkFrameworkAttributes_Ethereum}}
+var mNetworkFrameworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFrameworkConfiguration_Fabric}}
+var mNetworkStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkStatus_CREATING, &sNetworkStatus_AVAILABLE, &sNetworkStatus_CREATE_FAILED, &sNetworkStatus_DELETING, &sNetworkStatus_DELETED}}
+var mNetworkSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkSummary_Id, &sNetworkSummary_Name, &sNetworkSummary_Description, &sNetworkSummary_Framework, &sNetworkSummary_FrameworkVersion, &sNetworkSummary_Status, &sNetworkSummary_CreationDate, &sNetworkSummary_Arn}}
+var m_NetworkSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkSummaryList_member}}
+var mNode = smithy.SchemaMembers{List: []*smithy.Schema{&sNode_NetworkId, &sNode_MemberId, &sNode_Id, &sNode_InstanceType, &sNode_AvailabilityZone, &sNode_FrameworkAttributes, &sNode_LogPublishingConfiguration, &sNode_StateDB, &sNode_Status, &sNode_CreationDate, &sNode_Tags, &sNode_Arn, &sNode_KmsKeyArn}, Hash: &hNode}
+var mNodeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeConfiguration_InstanceType, &sNodeConfiguration_AvailabilityZone, &sNodeConfiguration_LogPublishingConfiguration, &sNodeConfiguration_StateDB}}
+var mNodeEthereumAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeEthereumAttributes_HttpEndpoint, &sNodeEthereumAttributes_WebSocketEndpoint}}
+var mNodeFabricAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeFabricAttributes_PeerEndpoint, &sNodeFabricAttributes_PeerEventEndpoint}}
+var mNodeFabricLogPublishingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeFabricLogPublishingConfiguration_ChaincodeLogs, &sNodeFabricLogPublishingConfiguration_PeerLogs}}
+var mNodeFrameworkAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeFrameworkAttributes_Fabric, &sNodeFrameworkAttributes_Ethereum}}
+var mNodeLogPublishingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeLogPublishingConfiguration_Fabric}}
+var mNodeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeStatus_CREATING, &sNodeStatus_AVAILABLE, &sNodeStatus_UNHEALTHY, &sNodeStatus_CREATE_FAILED, &sNodeStatus_UPDATING, &sNodeStatus_DELETING, &sNodeStatus_DELETED, &sNodeStatus_FAILED, &sNodeStatus_INACCESSIBLE_ENCRYPTION_KEY}, Hash: &hNodeStatus}
+var mNodeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeSummary_Id, &sNodeSummary_Status, &sNodeSummary_CreationDate, &sNodeSummary_AvailabilityZone, &sNodeSummary_InstanceType, &sNodeSummary_Arn}}
+var m_NodeSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NodeSummaryList_member}}
+var m_OutputTagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_OutputTagMap_key, &s_OutputTagMap_value}}
+var mProposal = smithy.SchemaMembers{List: []*smithy.Schema{&sProposal_ProposalId, &sProposal_NetworkId, &sProposal_Description, &sProposal_Actions, &sProposal_ProposedByMemberId, &sProposal_ProposedByMemberName, &sProposal_Status, &sProposal_CreationDate, &sProposal_ExpirationDate, &sProposal_YesVoteCount, &sProposal_NoVoteCount, &sProposal_OutstandingVoteCount, &sProposal_Tags, &sProposal_Arn}, Hash: &hProposal}
+var mProposalActions = smithy.SchemaMembers{List: []*smithy.Schema{&sProposalActions_Invitations, &sProposalActions_Removals}}
+var mProposalStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sProposalStatus_IN_PROGRESS, &sProposalStatus_APPROVED, &sProposalStatus_REJECTED, &sProposalStatus_EXPIRED, &sProposalStatus_ACTION_FAILED}}
+var mProposalSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sProposalSummary_ProposalId, &sProposalSummary_Description, &sProposalSummary_ProposedByMemberId, &sProposalSummary_ProposedByMemberName, &sProposalSummary_Status, &sProposalSummary_CreationDate, &sProposalSummary_ExpirationDate, &sProposalSummary_Arn}}
+var m_ProposalSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProposalSummaryList_member}}
+var m_ProposalVoteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProposalVoteList_member}}
+var mRemoveAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveAction_MemberId}}
+var m_RemoveActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RemoveActionList_member}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_Message}}
+var mResourceLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceLimitExceededException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceName}}
+var mResourceNotReadyException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotReadyException_Message}}
+var mStateDBType = smithy.SchemaMembers{List: []*smithy.Schema{&sStateDBType_LevelDB, &sStateDBType_CouchDB}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var mThresholdComparator = smithy.SchemaMembers{List: []*smithy.Schema{&sThresholdComparator_GREATER_THAN, &sThresholdComparator_GREATER_THAN_OR_EQUAL_TO}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message, &sTooManyTagsException_ResourceName}}
+var mVoteSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sVoteSummary_Vote, &sVoteSummary_MemberName, &sVoteSummary_MemberId}}
+var mVoteValue = smithy.SchemaMembers{List: []*smithy.Schema{&sVoteValue_YES, &sVoteValue_NO}}
+var mVotingPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sVotingPolicy_ApprovalThresholdPolicy}}
+var mCreateAccessorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessorInput_ClientRequestToken, &sCreateAccessorInput_AccessorType, &sCreateAccessorInput_Tags, &sCreateAccessorInput_NetworkType}}
+var mCreateAccessorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessorOutput_AccessorId, &sCreateAccessorOutput_BillingToken, &sCreateAccessorOutput_NetworkType}}
+var mCreateMemberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMemberInput_ClientRequestToken, &sCreateMemberInput_InvitationId, &sCreateMemberInput_NetworkId, &sCreateMemberInput_MemberConfiguration}}
+var mCreateMemberOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMemberOutput_MemberId}}
+var mCreateNetworkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkInput_ClientRequestToken, &sCreateNetworkInput_Name, &sCreateNetworkInput_Description, &sCreateNetworkInput_Framework, &sCreateNetworkInput_FrameworkVersion, &sCreateNetworkInput_FrameworkConfiguration, &sCreateNetworkInput_VotingPolicy, &sCreateNetworkInput_MemberConfiguration, &sCreateNetworkInput_Tags}, Hash: &hCreateNetworkInput}
+var mCreateNetworkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkOutput_NetworkId, &sCreateNetworkOutput_MemberId}}
+var mCreateNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNodeInput_ClientRequestToken, &sCreateNodeInput_NetworkId, &sCreateNodeInput_MemberId, &sCreateNodeInput_NodeConfiguration, &sCreateNodeInput_Tags}}
+var mCreateNodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNodeOutput_NodeId}}
+var mCreateProposalInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProposalInput_ClientRequestToken, &sCreateProposalInput_NetworkId, &sCreateProposalInput_MemberId, &sCreateProposalInput_Actions, &sCreateProposalInput_Description, &sCreateProposalInput_Tags}}
+var mCreateProposalOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProposalOutput_ProposalId}}
+var mDeleteAccessorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessorInput_AccessorId}}
+var mDeleteMemberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMemberInput_NetworkId, &sDeleteMemberInput_MemberId}}
+var mDeleteNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNodeInput_NetworkId, &sDeleteNodeInput_MemberId, &sDeleteNodeInput_NodeId}}
+var mGetAccessorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessorInput_AccessorId}}
+var mGetAccessorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessorOutput_Accessor}}
+var mGetMemberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMemberInput_NetworkId, &sGetMemberInput_MemberId}}
+var mGetMemberOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMemberOutput_Member}}
+var mGetNetworkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkInput_NetworkId}}
+var mGetNetworkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkOutput_Network}}
+var mGetNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNodeInput_NetworkId, &sGetNodeInput_MemberId, &sGetNodeInput_NodeId}}
+var mGetNodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNodeOutput_Node}}
+var mGetProposalInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProposalInput_NetworkId, &sGetProposalInput_ProposalId}}
+var mGetProposalOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProposalOutput_Proposal}}
+var mListAccessorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessorsInput_MaxResults, &sListAccessorsInput_NextToken, &sListAccessorsInput_NetworkType}}
+var mListAccessorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessorsOutput_Accessors, &sListAccessorsOutput_NextToken}}
+var mListInvitationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvitationsInput_MaxResults, &sListInvitationsInput_NextToken}}
+var mListInvitationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvitationsOutput_Invitations, &sListInvitationsOutput_NextToken}}
+var mListMembersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMembersInput_NetworkId, &sListMembersInput_Name, &sListMembersInput_Status, &sListMembersInput_IsOwned, &sListMembersInput_MaxResults, &sListMembersInput_NextToken}}
+var mListMembersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMembersOutput_Members, &sListMembersOutput_NextToken}}
+var mListNetworksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworksInput_Name, &sListNetworksInput_Framework, &sListNetworksInput_Status, &sListNetworksInput_MaxResults, &sListNetworksInput_NextToken}}
+var mListNetworksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworksOutput_Networks, &sListNetworksOutput_NextToken}}
+var mListNodesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNodesInput_NetworkId, &sListNodesInput_MemberId, &sListNodesInput_Status, &sListNodesInput_MaxResults, &sListNodesInput_NextToken}}
+var mListNodesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNodesOutput_Nodes, &sListNodesOutput_NextToken}}
+var mListProposalsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListProposalsInput_NetworkId, &sListProposalsInput_MaxResults, &sListProposalsInput_NextToken}}
+var mListProposalsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListProposalsOutput_Proposals, &sListProposalsOutput_NextToken}}
+var mListProposalVotesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListProposalVotesInput_NetworkId, &sListProposalVotesInput_ProposalId, &sListProposalVotesInput_MaxResults, &sListProposalVotesInput_NextToken}}
+var mListProposalVotesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListProposalVotesOutput_ProposalVotes, &sListProposalVotesOutput_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mRejectInvitationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectInvitationInput_InvitationId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateMemberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMemberInput_NetworkId, &sUpdateMemberInput_MemberId, &sUpdateMemberInput_LogPublishingConfiguration}}
+var mUpdateNodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNodeInput_NetworkId, &sUpdateNodeInput_MemberId, &sUpdateNodeInput_NodeId, &sUpdateNodeInput_LogPublishingConfiguration}}
+var mVoteOnProposalInput = smithy.SchemaMembers{List: []*smithy.Schema{&sVoteOnProposalInput_NetworkId, &sVoteOnProposalInput_ProposalId, &sVoteOnProposalInput_VoterMemberId, &sVoteOnProposalInput_Vote}}
+
+var hMember = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	4, 1, 0, 9, 0, 8, 0, 3, 0, 0, 6, 0, 0, 0, 0, 0, 10, 7, 5, 0, 11, 0, 0, 2,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hNetwork = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 0, 0, 6, 0, 0, 4, 0, 0, 9, 0, 0, 12, 0, 1, 8, 0, 3, 0,
+	0, 10, 0, 0, 5, 0, 7, 11,
+}}
+var hNode = smithy.MemberHash{Seed: 47, Slots: []uint16{
+	9, 8, 11, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 10, 2, 0, 0, 13, 0, 0,
+	4, 0, 7, 0, 5, 6, 0, 12,
+}}
+var hNodeStatus = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 4, 0, 6, 0, 8, 0, 2, 3, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0,
+	0, 9, 1, 0, 0, 0, 0, 7,
+}}
+var hProposal = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	2, 4, 11, 1, 0, 8, 0, 13, 10, 0, 9, 0, 0, 3, 0, 0, 14, 6, 0, 0, 0, 7, 0, 0,
+	0, 0, 0, 5, 12, 0, 0, 0,
+}}
+var hCreateNetworkInput = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 8, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 7, 0, 3, 0,
+	0, 0, 0, 6, 5, 0, 0, 9,
+}}
+
+var sCreateAccessor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessor, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateAccessor})
+var sCreateMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMember, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateMember})
+var sCreateNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetwork, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateNetwork})
+var sCreateNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNode, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateNode})
+var sCreateProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProposal, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateProposal})
+var sDeleteAccessor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessor, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAccessor})
+var sDeleteMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMember, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMember})
+var sDeleteNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNode, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNode})
+var sGetAccessor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessor, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetAccessor})
+var sGetMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMember, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetMember})
+var sGetNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetwork, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetNetwork})
+var sGetNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNode, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetNode})
+var sGetProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProposal, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetProposal})
+var sListAccessors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessors, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListAccessors})
+var sListInvitations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvitations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListInvitations})
+var sListMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembers, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListMembers})
+var sListNetworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworks, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListNetworks})
+var sListNodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNodes, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListNodes})
+var sListProposals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProposals, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListProposals})
+var sListProposalVotes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProposalVotes, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListProposalVotes})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRejectInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInvitation, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eRejectInvitation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMember, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMember})
+var sUpdateNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNode, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eUpdateNode})
+var sVoteOnProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoteOnProposal, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eVoteOnProposal})
+var s_TaigaWebService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaigaWebService, Type: smithy.ShapeTypeService, Ext: &e_TaigaWebService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAccessor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessor, Members: &mAccessor, Type: smithy.ShapeTypeStructure, Ext: &eAccessor})
+var sAccessor_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eAccessor_Id})
+var sAccessor_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iAccessorType, Members: &mAccessorType, Type: smithy.ShapeTypeEnum, Ext: &eAccessor_Type})
+var sAccessor_BillingToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingToken", ID: &i_AccessorBillingTokenString, Type: smithy.ShapeTypeString, Ext: &eAccessor_BillingToken})
+var sAccessor_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAccessorStatus, Members: &mAccessorStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccessor_Status})
+var sAccessor_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eAccessor_CreationDate})
+var sAccessor_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eAccessor_Arn})
+var sAccessor_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTagMap, Members: &m_OutputTagMap, Type: smithy.ShapeTypeMap, Ext: &eAccessor_Tags})
+var sAccessor_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iAccessorNetworkType, Members: &mAccessorNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eAccessor_NetworkType})
+var s_AccessorBillingTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessorBillingTokenString, Type: smithy.ShapeTypeString, Ext: &e_AccessorBillingTokenString})
+var s_AccessorListMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessorListMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_AccessorListMaxResults})
+var sAccessorNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessorNetworkType, Members: &mAccessorNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eAccessorNetworkType})
+var sAccessorNetworkType_ETHEREUM_GOERLI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETHEREUM_GOERLI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorNetworkType_ETHEREUM_GOERLI})
+var sAccessorNetworkType_ETHEREUM_MAINNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETHEREUM_MAINNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorNetworkType_ETHEREUM_MAINNET})
+var sAccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETHEREUM_MAINNET_AND_GOERLI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI})
+var sAccessorNetworkType_POLYGON_MAINNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLYGON_MAINNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorNetworkType_POLYGON_MAINNET})
+var sAccessorNetworkType_POLYGON_MUMBAI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLYGON_MUMBAI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorNetworkType_POLYGON_MUMBAI})
+var sAccessorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessorStatus, Members: &mAccessorStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccessorStatus})
+var sAccessorStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorStatus_AVAILABLE})
+var sAccessorStatus_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorStatus_PENDING_DELETION})
+var sAccessorStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorStatus_DELETED})
+var sAccessorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessorSummary, Members: &mAccessorSummary, Type: smithy.ShapeTypeStructure, Ext: &eAccessorSummary})
+var sAccessorSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eAccessorSummary_Id})
+var sAccessorSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iAccessorType, Members: &mAccessorType, Type: smithy.ShapeTypeEnum, Ext: &eAccessorSummary_Type})
+var sAccessorSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAccessorStatus, Members: &mAccessorStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccessorSummary_Status})
+var sAccessorSummary_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eAccessorSummary_CreationDate})
+var sAccessorSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eAccessorSummary_Arn})
+var sAccessorSummary_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iAccessorNetworkType, Members: &mAccessorNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eAccessorSummary_NetworkType})
+var s_AccessorSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessorSummaryList, Members: &m_AccessorSummaryList, Type: smithy.ShapeTypeList, Ext: &e_AccessorSummaryList})
+var s_AccessorSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessorSummary, Members: &mAccessorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AccessorSummaryList_member})
+var sAccessorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessorType, Members: &mAccessorType, Type: smithy.ShapeTypeEnum, Ext: &eAccessorType})
+var sAccessorType_BILLING_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessorType_BILLING_TOKEN})
+var sApprovalThresholdPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalThresholdPolicy, Members: &mApprovalThresholdPolicy, Type: smithy.ShapeTypeStructure, Ext: &eApprovalThresholdPolicy})
+var sApprovalThresholdPolicy_ThresholdPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdPercentage", ID: &i_ThresholdPercentageInt, Type: smithy.ShapeTypeInteger, Ext: &eApprovalThresholdPolicy_ThresholdPercentage})
+var sApprovalThresholdPolicy_ProposalDurationInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalDurationInHours", ID: &i_ProposalDurationInt, Type: smithy.ShapeTypeInteger, Ext: &eApprovalThresholdPolicy_ProposalDurationInHours})
+var sApprovalThresholdPolicy_ThresholdComparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdComparator", ID: &iThresholdComparator, Members: &mThresholdComparator, Type: smithy.ShapeTypeEnum, Ext: &eApprovalThresholdPolicy_ThresholdComparator})
+var s_ArnString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &e_ArnString})
+var s_AvailabilityZoneString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneString, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZoneString})
+var s_ClientRequestTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestTokenString})
+var s_DescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &e_DescriptionString})
+var sEdition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEdition, Members: &mEdition, Type: smithy.ShapeTypeEnum, Ext: &eEdition})
+var sEdition_STARTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEdition_STARTER})
+var sEdition_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEdition_STANDARD})
+var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &e_Enabled})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeEnum, Ext: &eFramework})
+var sFramework_HYPERLEDGER_FABRIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYPERLEDGER_FABRIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFramework_HYPERLEDGER_FABRIC})
+var sFramework_ETHEREUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETHEREUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFramework_ETHEREUM})
+var s_FrameworkVersionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrameworkVersionString, Type: smithy.ShapeTypeString, Ext: &e_FrameworkVersionString})
+var sIllegalActionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIllegalActionException, Members: &mIllegalActionException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eIllegalActionException})
+var sIllegalActionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eIllegalActionException_Message})
+var s_InputTagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTagMap, Members: &m_InputTagMap, Type: smithy.ShapeTypeMap, Ext: &e_InputTagMap})
+var s_InputTagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_InputTagMap_key})
+var s_InputTagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_InputTagMap_value})
+var s_InstanceTypeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceTypeString, Type: smithy.ShapeTypeString, Ext: &e_InstanceTypeString})
+var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceErrorException})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Message})
+var sInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvitation, Members: &mInvitation, Type: smithy.ShapeTypeStructure, Ext: &eInvitation})
+var sInvitation_InvitationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitationId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eInvitation_InvitationId})
+var sInvitation_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eInvitation_CreationDate})
+var sInvitation_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eInvitation_ExpirationDate})
+var sInvitation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInvitationStatus, Members: &mInvitationStatus, Type: smithy.ShapeTypeEnum, Ext: &eInvitation_Status})
+var sInvitation_NetworkSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkSummary", ID: &iNetworkSummary, Members: &mNetworkSummary, Type: smithy.ShapeTypeStructure, Ext: &eInvitation_NetworkSummary})
+var sInvitation_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eInvitation_Arn})
+var s_InvitationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvitationList, Members: &m_InvitationList, Type: smithy.ShapeTypeList, Ext: &e_InvitationList})
+var s_InvitationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvitation, Members: &mInvitation, Type: smithy.ShapeTypeStructure, Ext: &e_InvitationList_member})
+var sInvitationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvitationStatus, Members: &mInvitationStatus, Type: smithy.ShapeTypeEnum, Ext: &eInvitationStatus})
+var sInvitationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvitationStatus_PENDING})
+var sInvitationStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvitationStatus_ACCEPTED})
+var sInvitationStatus_ACCEPTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvitationStatus_ACCEPTING})
+var sInvitationStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvitationStatus_REJECTED})
+var sInvitationStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvitationStatus_EXPIRED})
+var sInviteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInviteAction, Members: &mInviteAction, Type: smithy.ShapeTypeStructure, Ext: &eInviteAction})
+var sInviteAction_Principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Principal", ID: &i_PrincipalString, Type: smithy.ShapeTypeString, Ext: &eInviteAction_Principal})
+var s_InviteActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InviteActionList, Members: &m_InviteActionList, Type: smithy.ShapeTypeList, Ext: &e_InviteActionList})
+var s_InviteActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInviteAction, Members: &mInviteAction, Type: smithy.ShapeTypeStructure, Ext: &e_InviteActionList_member})
+var s_IsOwned = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsOwned, Type: smithy.ShapeTypeBoolean, Ext: &e_IsOwned})
+var sLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLogConfiguration})
+var sLogConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eLogConfiguration_Enabled})
+var sLogConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfigurations, Members: &mLogConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eLogConfigurations})
+var sLogConfigurations_Cloudwatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cloudwatch", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLogConfigurations_Cloudwatch})
+var sMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure, Ext: &eMember})
+var sMember_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eMember_NetworkId})
+var sMember_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eMember_Id})
+var sMember_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkMemberNameString, Type: smithy.ShapeTypeString, Ext: &eMember_Name})
+var sMember_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eMember_Description})
+var sMember_FrameworkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkAttributes", ID: &iMemberFrameworkAttributes, Members: &mMemberFrameworkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eMember_FrameworkAttributes})
+var sMember_LogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingConfiguration", ID: &iMemberLogPublishingConfiguration, Members: &mMemberLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMember_LogPublishingConfiguration})
+var sMember_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMemberStatus, Members: &mMemberStatus, Type: smithy.ShapeTypeEnum, Ext: &eMember_Status})
+var sMember_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eMember_CreationDate})
+var sMember_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTagMap, Members: &m_OutputTagMap, Type: smithy.ShapeTypeMap, Ext: &eMember_Tags})
+var sMember_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eMember_Arn})
+var sMember_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMember_KmsKeyArn})
+var sMemberConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberConfiguration, Members: &mMemberConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberConfiguration})
+var sMemberConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkMemberNameString, Type: smithy.ShapeTypeString, Ext: &eMemberConfiguration_Name})
+var sMemberConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eMemberConfiguration_Description})
+var sMemberConfiguration_FrameworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkConfiguration", ID: &iMemberFrameworkConfiguration, Members: &mMemberFrameworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberConfiguration_FrameworkConfiguration})
+var sMemberConfiguration_LogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingConfiguration", ID: &iMemberLogPublishingConfiguration, Members: &mMemberLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberConfiguration_LogPublishingConfiguration})
+var sMemberConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagMap, Members: &m_InputTagMap, Type: smithy.ShapeTypeMap, Ext: &eMemberConfiguration_Tags})
+var sMemberConfiguration_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eMemberConfiguration_KmsKeyArn})
+var sMemberFabricAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberFabricAttributes, Members: &mMemberFabricAttributes, Type: smithy.ShapeTypeStructure, Ext: &eMemberFabricAttributes})
+var sMemberFabricAttributes_AdminUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminUsername", ID: &i_UsernameString, Type: smithy.ShapeTypeString, Ext: &eMemberFabricAttributes_AdminUsername})
+var sMemberFabricAttributes_CaEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaEndpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMemberFabricAttributes_CaEndpoint})
+var sMemberFabricConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberFabricConfiguration, Members: &mMemberFabricConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberFabricConfiguration})
+var sMemberFabricConfiguration_AdminUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminUsername", ID: &i_UsernameString, Type: smithy.ShapeTypeString, Ext: &eMemberFabricConfiguration_AdminUsername})
+var sMemberFabricConfiguration_AdminPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminPassword", ID: &i_PasswordString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eMemberFabricConfiguration_AdminPassword})
+var sMemberFabricLogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberFabricLogPublishingConfiguration, Members: &mMemberFabricLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberFabricLogPublishingConfiguration})
+var sMemberFabricLogPublishingConfiguration_CaLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaLogs", ID: &iLogConfigurations, Members: &mLogConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eMemberFabricLogPublishingConfiguration_CaLogs})
+var sMemberFrameworkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberFrameworkAttributes, Members: &mMemberFrameworkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eMemberFrameworkAttributes})
+var sMemberFrameworkAttributes_Fabric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fabric", ID: &iMemberFabricAttributes, Members: &mMemberFabricAttributes, Type: smithy.ShapeTypeStructure, Ext: &eMemberFrameworkAttributes_Fabric})
+var sMemberFrameworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberFrameworkConfiguration, Members: &mMemberFrameworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberFrameworkConfiguration})
+var sMemberFrameworkConfiguration_Fabric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fabric", ID: &iMemberFabricConfiguration, Members: &mMemberFabricConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberFrameworkConfiguration_Fabric})
+var s_MemberListMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberListMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MemberListMaxResults})
+var sMemberLogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberLogPublishingConfiguration, Members: &mMemberLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberLogPublishingConfiguration})
+var sMemberLogPublishingConfiguration_Fabric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fabric", ID: &iMemberFabricLogPublishingConfiguration, Members: &mMemberFabricLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMemberLogPublishingConfiguration_Fabric})
+var sMemberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberStatus, Members: &mMemberStatus, Type: smithy.ShapeTypeEnum, Ext: &eMemberStatus})
+var sMemberStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberStatus_CREATING})
+var sMemberStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberStatus_AVAILABLE})
+var sMemberStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberStatus_CREATE_FAILED})
+var sMemberStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberStatus_UPDATING})
+var sMemberStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberStatus_DELETING})
+var sMemberStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberStatus_DELETED})
+var sMemberStatus_INACCESSIBLE_ENCRYPTION_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACCESSIBLE_ENCRYPTION_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberStatus_INACCESSIBLE_ENCRYPTION_KEY})
+var sMemberSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberSummary, Members: &mMemberSummary, Type: smithy.ShapeTypeStructure, Ext: &eMemberSummary})
+var sMemberSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eMemberSummary_Id})
+var sMemberSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkMemberNameString, Type: smithy.ShapeTypeString, Ext: &eMemberSummary_Name})
+var sMemberSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eMemberSummary_Description})
+var sMemberSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMemberStatus, Members: &mMemberStatus, Type: smithy.ShapeTypeEnum, Ext: &eMemberSummary_Status})
+var sMemberSummary_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eMemberSummary_CreationDate})
+var sMemberSummary_IsOwned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsOwned", ID: &i_IsOwned, Type: smithy.ShapeTypeBoolean, Ext: &eMemberSummary_IsOwned})
+var sMemberSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eMemberSummary_Arn})
+var s_MemberSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberSummaryList, Members: &m_MemberSummaryList, Type: smithy.ShapeTypeList, Ext: &e_MemberSummaryList})
+var s_MemberSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMemberSummary, Members: &mMemberSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MemberSummaryList_member})
+var s_NameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &e_NameString})
+var sNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &eNetwork})
+var sNetwork_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eNetwork_Id})
+var sNetwork_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eNetwork_Name})
+var sNetwork_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eNetwork_Description})
+var sNetwork_Framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Framework", ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeEnum, Ext: &eNetwork_Framework})
+var sNetwork_FrameworkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkVersion", ID: &i_FrameworkVersionString, Type: smithy.ShapeTypeString, Ext: &eNetwork_FrameworkVersion})
+var sNetwork_FrameworkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkAttributes", ID: &iNetworkFrameworkAttributes, Members: &mNetworkFrameworkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNetwork_FrameworkAttributes})
+var sNetwork_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNetwork_VpcEndpointServiceName})
+var sNetwork_VotingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VotingPolicy", ID: &iVotingPolicy, Members: &mVotingPolicy, Type: smithy.ShapeTypeStructure, Ext: &eNetwork_VotingPolicy})
+var sNetwork_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNetworkStatus, Members: &mNetworkStatus, Type: smithy.ShapeTypeEnum, Ext: &eNetwork_Status})
+var sNetwork_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eNetwork_CreationDate})
+var sNetwork_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTagMap, Members: &m_OutputTagMap, Type: smithy.ShapeTypeMap, Ext: &eNetwork_Tags})
+var sNetwork_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eNetwork_Arn})
+var sNetworkEthereumAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkEthereumAttributes, Members: &mNetworkEthereumAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNetworkEthereumAttributes})
+var sNetworkEthereumAttributes_ChainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChainId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNetworkEthereumAttributes_ChainId})
+var sNetworkFabricAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFabricAttributes, Members: &mNetworkFabricAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFabricAttributes})
+var sNetworkFabricAttributes_OrderingServiceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderingServiceEndpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNetworkFabricAttributes_OrderingServiceEndpoint})
+var sNetworkFabricAttributes_Edition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Edition", ID: &iEdition, Members: &mEdition, Type: smithy.ShapeTypeEnum, Ext: &eNetworkFabricAttributes_Edition})
+var sNetworkFabricConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFabricConfiguration, Members: &mNetworkFabricConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFabricConfiguration})
+var sNetworkFabricConfiguration_Edition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Edition", ID: &iEdition, Members: &mEdition, Type: smithy.ShapeTypeEnum, Ext: &eNetworkFabricConfiguration_Edition})
+var sNetworkFrameworkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFrameworkAttributes, Members: &mNetworkFrameworkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFrameworkAttributes})
+var sNetworkFrameworkAttributes_Fabric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fabric", ID: &iNetworkFabricAttributes, Members: &mNetworkFabricAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFrameworkAttributes_Fabric})
+var sNetworkFrameworkAttributes_Ethereum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ethereum", ID: &iNetworkEthereumAttributes, Members: &mNetworkEthereumAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFrameworkAttributes_Ethereum})
+var sNetworkFrameworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFrameworkConfiguration, Members: &mNetworkFrameworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFrameworkConfiguration})
+var sNetworkFrameworkConfiguration_Fabric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fabric", ID: &iNetworkFabricConfiguration, Members: &mNetworkFabricConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFrameworkConfiguration_Fabric})
+var s_NetworkListMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkListMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_NetworkListMaxResults})
+var s_NetworkMemberNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkMemberNameString, Type: smithy.ShapeTypeString, Ext: &e_NetworkMemberNameString})
+var sNetworkStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkStatus, Members: &mNetworkStatus, Type: smithy.ShapeTypeEnum, Ext: &eNetworkStatus})
+var sNetworkStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkStatus_CREATING})
+var sNetworkStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkStatus_AVAILABLE})
+var sNetworkStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkStatus_CREATE_FAILED})
+var sNetworkStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkStatus_DELETING})
+var sNetworkStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkStatus_DELETED})
+var sNetworkSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkSummary, Members: &mNetworkSummary, Type: smithy.ShapeTypeStructure, Ext: &eNetworkSummary})
+var sNetworkSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eNetworkSummary_Id})
+var sNetworkSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eNetworkSummary_Name})
+var sNetworkSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eNetworkSummary_Description})
+var sNetworkSummary_Framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Framework", ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeEnum, Ext: &eNetworkSummary_Framework})
+var sNetworkSummary_FrameworkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkVersion", ID: &i_FrameworkVersionString, Type: smithy.ShapeTypeString, Ext: &eNetworkSummary_FrameworkVersion})
+var sNetworkSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNetworkStatus, Members: &mNetworkStatus, Type: smithy.ShapeTypeEnum, Ext: &eNetworkSummary_Status})
+var sNetworkSummary_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eNetworkSummary_CreationDate})
+var sNetworkSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eNetworkSummary_Arn})
+var s_NetworkSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkSummaryList, Members: &m_NetworkSummaryList, Type: smithy.ShapeTypeList, Ext: &e_NetworkSummaryList})
+var s_NetworkSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkSummary, Members: &mNetworkSummary, Type: smithy.ShapeTypeStructure, Ext: &e_NetworkSummaryList_member})
+var sNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNode, Members: &mNode, Type: smithy.ShapeTypeStructure, Ext: &eNode})
+var sNode_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eNode_NetworkId})
+var sNode_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eNode_MemberId})
+var sNode_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eNode_Id})
+var sNode_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_InstanceTypeString, Type: smithy.ShapeTypeString, Ext: &eNode_InstanceType})
+var sNode_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZoneString, Type: smithy.ShapeTypeString, Ext: &eNode_AvailabilityZone})
+var sNode_FrameworkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkAttributes", ID: &iNodeFrameworkAttributes, Members: &mNodeFrameworkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNode_FrameworkAttributes})
+var sNode_LogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingConfiguration", ID: &iNodeLogPublishingConfiguration, Members: &mNodeLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNode_LogPublishingConfiguration})
+var sNode_StateDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateDB", ID: &iStateDBType, Members: &mStateDBType, Type: smithy.ShapeTypeEnum, Ext: &eNode_StateDB})
+var sNode_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNodeStatus, Members: &mNodeStatus, Type: smithy.ShapeTypeEnum, Ext: &eNode_Status})
+var sNode_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eNode_CreationDate})
+var sNode_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTagMap, Members: &m_OutputTagMap, Type: smithy.ShapeTypeMap, Ext: &eNode_Tags})
+var sNode_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eNode_Arn})
+var sNode_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNode_KmsKeyArn})
+var sNodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeConfiguration, Members: &mNodeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNodeConfiguration})
+var sNodeConfiguration_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_InstanceTypeString, Type: smithy.ShapeTypeString, Ext: &eNodeConfiguration_InstanceType})
+var sNodeConfiguration_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZoneString, Type: smithy.ShapeTypeString, Ext: &eNodeConfiguration_AvailabilityZone})
+var sNodeConfiguration_LogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingConfiguration", ID: &iNodeLogPublishingConfiguration, Members: &mNodeLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNodeConfiguration_LogPublishingConfiguration})
+var sNodeConfiguration_StateDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateDB", ID: &iStateDBType, Members: &mStateDBType, Type: smithy.ShapeTypeEnum, Ext: &eNodeConfiguration_StateDB})
+var sNodeEthereumAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeEthereumAttributes, Members: &mNodeEthereumAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNodeEthereumAttributes})
+var sNodeEthereumAttributes_HttpEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpEndpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNodeEthereumAttributes_HttpEndpoint})
+var sNodeEthereumAttributes_WebSocketEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebSocketEndpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNodeEthereumAttributes_WebSocketEndpoint})
+var sNodeFabricAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeFabricAttributes, Members: &mNodeFabricAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNodeFabricAttributes})
+var sNodeFabricAttributes_PeerEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerEndpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNodeFabricAttributes_PeerEndpoint})
+var sNodeFabricAttributes_PeerEventEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerEventEndpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNodeFabricAttributes_PeerEventEndpoint})
+var sNodeFabricLogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeFabricLogPublishingConfiguration, Members: &mNodeFabricLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNodeFabricLogPublishingConfiguration})
+var sNodeFabricLogPublishingConfiguration_ChaincodeLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChaincodeLogs", ID: &iLogConfigurations, Members: &mLogConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eNodeFabricLogPublishingConfiguration_ChaincodeLogs})
+var sNodeFabricLogPublishingConfiguration_PeerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerLogs", ID: &iLogConfigurations, Members: &mLogConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eNodeFabricLogPublishingConfiguration_PeerLogs})
+var sNodeFrameworkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeFrameworkAttributes, Members: &mNodeFrameworkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNodeFrameworkAttributes})
+var sNodeFrameworkAttributes_Fabric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fabric", ID: &iNodeFabricAttributes, Members: &mNodeFabricAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNodeFrameworkAttributes_Fabric})
+var sNodeFrameworkAttributes_Ethereum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ethereum", ID: &iNodeEthereumAttributes, Members: &mNodeEthereumAttributes, Type: smithy.ShapeTypeStructure, Ext: &eNodeFrameworkAttributes_Ethereum})
+var s_NodeListMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeListMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_NodeListMaxResults})
+var sNodeLogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLogPublishingConfiguration, Members: &mNodeLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNodeLogPublishingConfiguration})
+var sNodeLogPublishingConfiguration_Fabric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fabric", ID: &iNodeFabricLogPublishingConfiguration, Members: &mNodeFabricLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNodeLogPublishingConfiguration_Fabric})
+var sNodeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeStatus, Members: &mNodeStatus, Type: smithy.ShapeTypeEnum, Ext: &eNodeStatus})
+var sNodeStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_CREATING})
+var sNodeStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_AVAILABLE})
+var sNodeStatus_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_UNHEALTHY})
+var sNodeStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_CREATE_FAILED})
+var sNodeStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_UPDATING})
+var sNodeStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_DELETING})
+var sNodeStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_DELETED})
+var sNodeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_FAILED})
+var sNodeStatus_INACCESSIBLE_ENCRYPTION_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACCESSIBLE_ENCRYPTION_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeStatus_INACCESSIBLE_ENCRYPTION_KEY})
+var sNodeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeSummary, Members: &mNodeSummary, Type: smithy.ShapeTypeStructure, Ext: &eNodeSummary})
+var sNodeSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eNodeSummary_Id})
+var sNodeSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNodeStatus, Members: &mNodeStatus, Type: smithy.ShapeTypeEnum, Ext: &eNodeSummary_Status})
+var sNodeSummary_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eNodeSummary_CreationDate})
+var sNodeSummary_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZoneString, Type: smithy.ShapeTypeString, Ext: &eNodeSummary_AvailabilityZone})
+var sNodeSummary_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_InstanceTypeString, Type: smithy.ShapeTypeString, Ext: &eNodeSummary_InstanceType})
+var sNodeSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eNodeSummary_Arn})
+var s_NodeSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeSummaryList, Members: &m_NodeSummaryList, Type: smithy.ShapeTypeList, Ext: &e_NodeSummaryList})
+var s_NodeSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNodeSummary, Members: &mNodeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_NodeSummaryList_member})
+var s_OutputTagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputTagMap, Members: &m_OutputTagMap, Type: smithy.ShapeTypeMap, Ext: &e_OutputTagMap})
+var s_OutputTagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_OutputTagMap_key})
+var s_OutputTagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_OutputTagMap_value})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var s_PasswordString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PasswordString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &e_PasswordString})
+var s_PrincipalString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrincipalString, Type: smithy.ShapeTypeString, Ext: &e_PrincipalString})
+var sProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProposal, Members: &mProposal, Type: smithy.ShapeTypeStructure, Ext: &eProposal})
+var sProposal_ProposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eProposal_ProposalId})
+var sProposal_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eProposal_NetworkId})
+var sProposal_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eProposal_Description})
+var sProposal_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &iProposalActions, Members: &mProposalActions, Type: smithy.ShapeTypeStructure, Ext: &eProposal_Actions})
+var sProposal_ProposedByMemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposedByMemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eProposal_ProposedByMemberId})
+var sProposal_ProposedByMemberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposedByMemberName", ID: &i_NetworkMemberNameString, Type: smithy.ShapeTypeString, Ext: &eProposal_ProposedByMemberName})
+var sProposal_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iProposalStatus, Members: &mProposalStatus, Type: smithy.ShapeTypeEnum, Ext: &eProposal_Status})
+var sProposal_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eProposal_CreationDate})
+var sProposal_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eProposal_ExpirationDate})
+var sProposal_YesVoteCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YesVoteCount", ID: &i_VoteCount, Type: smithy.ShapeTypeInteger, Ext: &eProposal_YesVoteCount})
+var sProposal_NoVoteCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoVoteCount", ID: &i_VoteCount, Type: smithy.ShapeTypeInteger, Ext: &eProposal_NoVoteCount})
+var sProposal_OutstandingVoteCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutstandingVoteCount", ID: &i_VoteCount, Type: smithy.ShapeTypeInteger, Ext: &eProposal_OutstandingVoteCount})
+var sProposal_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTagMap, Members: &m_OutputTagMap, Type: smithy.ShapeTypeMap, Ext: &eProposal_Tags})
+var sProposal_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eProposal_Arn})
+var sProposalActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProposalActions, Members: &mProposalActions, Type: smithy.ShapeTypeStructure, Ext: &eProposalActions})
+var sProposalActions_Invitations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Invitations", ID: &i_InviteActionList, Members: &m_InviteActionList, Type: smithy.ShapeTypeList, Ext: &eProposalActions_Invitations})
+var sProposalActions_Removals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Removals", ID: &i_RemoveActionList, Members: &m_RemoveActionList, Type: smithy.ShapeTypeList, Ext: &eProposalActions_Removals})
+var s_ProposalDurationInt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProposalDurationInt, Type: smithy.ShapeTypeInteger, Ext: &e_ProposalDurationInt})
+var s_ProposalListMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProposalListMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ProposalListMaxResults})
+var sProposalStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProposalStatus, Members: &mProposalStatus, Type: smithy.ShapeTypeEnum, Ext: &eProposalStatus})
+var sProposalStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProposalStatus_IN_PROGRESS})
+var sProposalStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProposalStatus_APPROVED})
+var sProposalStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProposalStatus_REJECTED})
+var sProposalStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProposalStatus_EXPIRED})
+var sProposalStatus_ACTION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProposalStatus_ACTION_FAILED})
+var sProposalSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProposalSummary, Members: &mProposalSummary, Type: smithy.ShapeTypeStructure, Ext: &eProposalSummary})
+var sProposalSummary_ProposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eProposalSummary_ProposalId})
+var sProposalSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eProposalSummary_Description})
+var sProposalSummary_ProposedByMemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposedByMemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eProposalSummary_ProposedByMemberId})
+var sProposalSummary_ProposedByMemberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposedByMemberName", ID: &i_NetworkMemberNameString, Type: smithy.ShapeTypeString, Ext: &eProposalSummary_ProposedByMemberName})
+var sProposalSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iProposalStatus, Members: &mProposalStatus, Type: smithy.ShapeTypeEnum, Ext: &eProposalSummary_Status})
+var sProposalSummary_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eProposalSummary_CreationDate})
+var sProposalSummary_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eProposalSummary_ExpirationDate})
+var sProposalSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eProposalSummary_Arn})
+var s_ProposalSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProposalSummaryList, Members: &m_ProposalSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ProposalSummaryList})
+var s_ProposalSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProposalSummary, Members: &mProposalSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ProposalSummaryList_member})
+var s_ProposalVoteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProposalVoteList, Members: &m_ProposalVoteList, Type: smithy.ShapeTypeList, Ext: &e_ProposalVoteList})
+var s_ProposalVoteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoteSummary, Members: &mVoteSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ProposalVoteList_member})
+var sRemoveAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAction, Members: &mRemoveAction, Type: smithy.ShapeTypeStructure, Ext: &eRemoveAction})
+var sRemoveAction_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eRemoveAction_MemberId})
+var s_RemoveActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoveActionList, Members: &m_RemoveActionList, Type: smithy.ShapeTypeList, Ext: &e_RemoveActionList})
+var s_RemoveActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRemoveAction, Members: &mRemoveAction, Type: smithy.ShapeTypeStructure, Ext: &e_RemoveActionList_member})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_Message})
+var s_ResourceIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &e_ResourceIdString})
+var sResourceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceededException, Members: &mResourceLimitExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eResourceLimitExceededException})
+var sResourceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceLimitExceededException_Message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceName})
+var sResourceNotReadyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotReadyException, Members: &mResourceNotReadyException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotReadyException})
+var sResourceNotReadyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotReadyException_Message})
+var sStateDBType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStateDBType, Members: &mStateDBType, Type: smithy.ShapeTypeEnum, Ext: &eStateDBType})
+var sStateDBType_LevelDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LevelDB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStateDBType_LevelDB})
+var sStateDBType_CouchDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CouchDB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStateDBType_CouchDB})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThresholdComparator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThresholdComparator, Members: &mThresholdComparator, Type: smithy.ShapeTypeEnum, Ext: &eThresholdComparator})
+var sThresholdComparator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThresholdComparator_GREATER_THAN})
+var sThresholdComparator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThresholdComparator_GREATER_THAN_OR_EQUAL_TO})
+var s_ThresholdPercentageInt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThresholdPercentageInt, Type: smithy.ShapeTypeInteger, Ext: &e_ThresholdPercentageInt})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t36, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_Message})
+var sTooManyTagsException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ArnString, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_ResourceName})
+var s_UsernameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsernameString, Type: smithy.ShapeTypeString, Ext: &e_UsernameString})
+var s_VoteCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoteCount, Type: smithy.ShapeTypeInteger, Ext: &e_VoteCount})
+var sVoteSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoteSummary, Members: &mVoteSummary, Type: smithy.ShapeTypeStructure, Ext: &eVoteSummary})
+var sVoteSummary_Vote = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vote", ID: &iVoteValue, Members: &mVoteValue, Type: smithy.ShapeTypeEnum, Ext: &eVoteSummary_Vote})
+var sVoteSummary_MemberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberName", ID: &i_NetworkMemberNameString, Type: smithy.ShapeTypeString, Ext: &eVoteSummary_MemberName})
+var sVoteSummary_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eVoteSummary_MemberId})
+var sVoteValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoteValue, Members: &mVoteValue, Type: smithy.ShapeTypeEnum, Ext: &eVoteValue})
+var sVoteValue_YES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoteValue_YES})
+var sVoteValue_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoteValue_NO})
+var sVotingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVotingPolicy, Members: &mVotingPolicy, Type: smithy.ShapeTypeStructure, Ext: &eVotingPolicy})
+var sVotingPolicy_ApprovalThresholdPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalThresholdPolicy", ID: &iApprovalThresholdPolicy, Members: &mApprovalThresholdPolicy, Type: smithy.ShapeTypeStructure, Ext: &eVotingPolicy_ApprovalThresholdPolicy})
+var sCreateAccessorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessorInput, Members: &mCreateAccessorInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessorInput})
+var sCreateAccessorInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateAccessorInput_ClientRequestToken})
+var sCreateAccessorInput_AccessorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessorType", ID: &iAccessorType, Members: &mAccessorType, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessorInput_AccessorType})
+var sCreateAccessorInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagMap, Members: &m_InputTagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateAccessorInput_Tags})
+var sCreateAccessorInput_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iAccessorNetworkType, Members: &mAccessorNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessorInput_NetworkType})
+var sCreateAccessorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessorOutput, Members: &mCreateAccessorOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessorOutput})
+var sCreateAccessorOutput_AccessorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessorId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateAccessorOutput_AccessorId})
+var sCreateAccessorOutput_BillingToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingToken", ID: &i_AccessorBillingTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateAccessorOutput_BillingToken})
+var sCreateAccessorOutput_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iAccessorNetworkType, Members: &mAccessorNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessorOutput_NetworkType})
+var sCreateMemberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMemberInput, Members: &mCreateMemberInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMemberInput})
+var sCreateMemberInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateMemberInput_ClientRequestToken})
+var sCreateMemberInput_InvitationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitationId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateMemberInput_InvitationId})
+var sCreateMemberInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eCreateMemberInput_NetworkId})
+var sCreateMemberInput_MemberConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberConfiguration", ID: &iMemberConfiguration, Members: &mMemberConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateMemberInput_MemberConfiguration})
+var sCreateMemberOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMemberOutput, Members: &mCreateMemberOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMemberOutput})
+var sCreateMemberOutput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateMemberOutput_MemberId})
+var sCreateNetworkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkInput, Members: &mCreateNetworkInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateNetworkInput})
+var sCreateNetworkInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateNetworkInput_ClientRequestToken})
+var sCreateNetworkInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateNetworkInput_Name})
+var sCreateNetworkInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eCreateNetworkInput_Description})
+var sCreateNetworkInput_Framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Framework", ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeEnum, Ext: &eCreateNetworkInput_Framework})
+var sCreateNetworkInput_FrameworkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkVersion", ID: &i_FrameworkVersionString, Type: smithy.ShapeTypeString, Ext: &eCreateNetworkInput_FrameworkVersion})
+var sCreateNetworkInput_FrameworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkConfiguration", ID: &iNetworkFrameworkConfiguration, Members: &mNetworkFrameworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateNetworkInput_FrameworkConfiguration})
+var sCreateNetworkInput_VotingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VotingPolicy", ID: &iVotingPolicy, Members: &mVotingPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreateNetworkInput_VotingPolicy})
+var sCreateNetworkInput_MemberConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberConfiguration", ID: &iMemberConfiguration, Members: &mMemberConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateNetworkInput_MemberConfiguration})
+var sCreateNetworkInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagMap, Members: &m_InputTagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateNetworkInput_Tags})
+var sCreateNetworkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkOutput, Members: &mCreateNetworkOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateNetworkOutput})
+var sCreateNetworkOutput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateNetworkOutput_NetworkId})
+var sCreateNetworkOutput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateNetworkOutput_MemberId})
+var sCreateNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNodeInput, Members: &mCreateNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateNodeInput})
+var sCreateNodeInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateNodeInput_ClientRequestToken})
+var sCreateNodeInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eCreateNodeInput_NetworkId})
+var sCreateNodeInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateNodeInput_MemberId})
+var sCreateNodeInput_NodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeConfiguration", ID: &iNodeConfiguration, Members: &mNodeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateNodeInput_NodeConfiguration})
+var sCreateNodeInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagMap, Members: &m_InputTagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateNodeInput_Tags})
+var sCreateNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNodeOutput, Members: &mCreateNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateNodeOutput})
+var sCreateNodeOutput_NodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateNodeOutput_NodeId})
+var sCreateProposalInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProposalInput, Members: &mCreateProposalInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProposalInput})
+var sCreateProposalInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateProposalInput_ClientRequestToken})
+var sCreateProposalInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eCreateProposalInput_NetworkId})
+var sCreateProposalInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateProposalInput_MemberId})
+var sCreateProposalInput_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &iProposalActions, Members: &mProposalActions, Type: smithy.ShapeTypeStructure, Ext: &eCreateProposalInput_Actions})
+var sCreateProposalInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eCreateProposalInput_Description})
+var sCreateProposalInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagMap, Members: &m_InputTagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateProposalInput_Tags})
+var sCreateProposalOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProposalOutput, Members: &mCreateProposalOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProposalOutput})
+var sCreateProposalOutput_ProposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eCreateProposalOutput_ProposalId})
+var sDeleteAccessorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessorInput, Members: &mDeleteAccessorInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessorInput})
+var sDeleteAccessorInput_AccessorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessorId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessorInput_AccessorId})
+var sDeleteAccessorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessorOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessorOutput})
+var sDeleteMemberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMemberInput, Members: &mDeleteMemberInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMemberInput})
+var sDeleteMemberInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eDeleteMemberInput_NetworkId})
+var sDeleteMemberInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eDeleteMemberInput_MemberId})
+var sDeleteMemberOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMemberOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMemberOutput})
+var sDeleteNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNodeInput, Members: &mDeleteNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNodeInput})
+var sDeleteNodeInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eDeleteNodeInput_NetworkId})
+var sDeleteNodeInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteNodeInput_MemberId})
+var sDeleteNodeInput_NodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eDeleteNodeInput_NodeId})
+var sDeleteNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNodeOutput})
+var sGetAccessorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessorInput, Members: &mGetAccessorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessorInput})
+var sGetAccessorInput_AccessorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessorId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetAccessorInput_AccessorId})
+var sGetAccessorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessorOutput, Members: &mGetAccessorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessorOutput})
+var sGetAccessorOutput_Accessor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accessor", ID: &iAccessor, Members: &mAccessor, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessorOutput_Accessor})
+var sGetMemberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMemberInput, Members: &mGetMemberInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMemberInput})
+var sGetMemberInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetMemberInput_NetworkId})
+var sGetMemberInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetMemberInput_MemberId})
+var sGetMemberOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMemberOutput, Members: &mGetMemberOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMemberOutput})
+var sGetMemberOutput_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure, Ext: &eGetMemberOutput_Member})
+var sGetNetworkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkInput, Members: &mGetNetworkInput, Type: smithy.ShapeTypeStructure, Ext: &eGetNetworkInput})
+var sGetNetworkInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetNetworkInput_NetworkId})
+var sGetNetworkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkOutput, Members: &mGetNetworkOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetNetworkOutput})
+var sGetNetworkOutput_Network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Network", ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &eGetNetworkOutput_Network})
+var sGetNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNodeInput, Members: &mGetNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eGetNodeInput})
+var sGetNodeInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetNodeInput_NetworkId})
+var sGetNodeInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetNodeInput_MemberId})
+var sGetNodeInput_NodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetNodeInput_NodeId})
+var sGetNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNodeOutput, Members: &mGetNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetNodeOutput})
+var sGetNodeOutput_Node = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Node", ID: &iNode, Members: &mNode, Type: smithy.ShapeTypeStructure, Ext: &eGetNodeOutput_Node})
+var sGetProposalInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProposalInput, Members: &mGetProposalInput, Type: smithy.ShapeTypeStructure, Ext: &eGetProposalInput})
+var sGetProposalInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetProposalInput_NetworkId})
+var sGetProposalInput_ProposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetProposalInput_ProposalId})
+var sGetProposalOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProposalOutput, Members: &mGetProposalOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetProposalOutput})
+var sGetProposalOutput_Proposal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proposal", ID: &iProposal, Members: &mProposal, Type: smithy.ShapeTypeStructure, Ext: &eGetProposalOutput_Proposal})
+var sListAccessorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessorsInput, Members: &mListAccessorsInput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessorsInput})
+var sListAccessorsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_AccessorListMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListAccessorsInput_MaxResults})
+var sListAccessorsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListAccessorsInput_NextToken})
+var sListAccessorsInput_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iAccessorNetworkType, Members: &mAccessorNetworkType, Traits: &t41, Type: smithy.ShapeTypeEnum, Ext: &eListAccessorsInput_NetworkType})
+var sListAccessorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessorsOutput, Members: &mListAccessorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessorsOutput})
+var sListAccessorsOutput_Accessors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accessors", ID: &i_AccessorSummaryList, Members: &m_AccessorSummaryList, Type: smithy.ShapeTypeList, Ext: &eListAccessorsOutput_Accessors})
+var sListAccessorsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAccessorsOutput_NextToken})
+var sListInvitationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvitationsInput, Members: &mListInvitationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListInvitationsInput})
+var sListInvitationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ProposalListMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListInvitationsInput_MaxResults})
+var sListInvitationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListInvitationsInput_NextToken})
+var sListInvitationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvitationsOutput, Members: &mListInvitationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListInvitationsOutput})
+var sListInvitationsOutput_Invitations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Invitations", ID: &i_InvitationList, Members: &m_InvitationList, Type: smithy.ShapeTypeList, Ext: &eListInvitationsOutput_Invitations})
+var sListInvitationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListInvitationsOutput_NextToken})
+var sListMembersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembersInput, Members: &mListMembersInput, Type: smithy.ShapeTypeStructure, Ext: &eListMembersInput})
+var sListMembersInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListMembersInput_NetworkId})
+var sListMembersInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListMembersInput_Name})
+var sListMembersInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMemberStatus, Members: &mMemberStatus, Traits: &t43, Type: smithy.ShapeTypeEnum, Ext: &eListMembersInput_Status})
+var sListMembersInput_IsOwned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsOwned", ID: &i_IsOwned, Traits: &t44, Type: smithy.ShapeTypeBoolean, Ext: &eListMembersInput_IsOwned})
+var sListMembersInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MemberListMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListMembersInput_MaxResults})
+var sListMembersInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListMembersInput_NextToken})
+var sListMembersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembersOutput, Members: &mListMembersOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMembersOutput})
+var sListMembersOutput_Members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Members", ID: &i_MemberSummaryList, Members: &m_MemberSummaryList, Type: smithy.ShapeTypeList, Ext: &eListMembersOutput_Members})
+var sListMembersOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListMembersOutput_NextToken})
+var sListNetworksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworksInput, Members: &mListNetworksInput, Type: smithy.ShapeTypeStructure, Ext: &eListNetworksInput})
+var sListNetworksInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListNetworksInput_Name})
+var sListNetworksInput_Framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Framework", ID: &iFramework, Members: &mFramework, Traits: &t45, Type: smithy.ShapeTypeEnum, Ext: &eListNetworksInput_Framework})
+var sListNetworksInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNetworkStatus, Members: &mNetworkStatus, Traits: &t43, Type: smithy.ShapeTypeEnum, Ext: &eListNetworksInput_Status})
+var sListNetworksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NetworkListMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListNetworksInput_MaxResults})
+var sListNetworksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListNetworksInput_NextToken})
+var sListNetworksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworksOutput, Members: &mListNetworksOutput, Type: smithy.ShapeTypeStructure, Ext: &eListNetworksOutput})
+var sListNetworksOutput_Networks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Networks", ID: &i_NetworkSummaryList, Members: &m_NetworkSummaryList, Type: smithy.ShapeTypeList, Ext: &eListNetworksOutput_Networks})
+var sListNetworksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListNetworksOutput_NextToken})
+var sListNodesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNodesInput, Members: &mListNodesInput, Type: smithy.ShapeTypeStructure, Ext: &eListNodesInput})
+var sListNodesInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListNodesInput_NetworkId})
+var sListNodesInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListNodesInput_MemberId})
+var sListNodesInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNodeStatus, Members: &mNodeStatus, Traits: &t43, Type: smithy.ShapeTypeEnum, Ext: &eListNodesInput_Status})
+var sListNodesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NodeListMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListNodesInput_MaxResults})
+var sListNodesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListNodesInput_NextToken})
+var sListNodesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNodesOutput, Members: &mListNodesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListNodesOutput})
+var sListNodesOutput_Nodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nodes", ID: &i_NodeSummaryList, Members: &m_NodeSummaryList, Type: smithy.ShapeTypeList, Ext: &eListNodesOutput_Nodes})
+var sListNodesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListNodesOutput_NextToken})
+var sListProposalsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProposalsInput, Members: &mListProposalsInput, Type: smithy.ShapeTypeStructure, Ext: &eListProposalsInput})
+var sListProposalsInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListProposalsInput_NetworkId})
+var sListProposalsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ProposalListMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListProposalsInput_MaxResults})
+var sListProposalsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListProposalsInput_NextToken})
+var sListProposalsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProposalsOutput, Members: &mListProposalsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListProposalsOutput})
+var sListProposalsOutput_Proposals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proposals", ID: &i_ProposalSummaryList, Members: &m_ProposalSummaryList, Type: smithy.ShapeTypeList, Ext: &eListProposalsOutput_Proposals})
+var sListProposalsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProposalsOutput_NextToken})
+var sListProposalVotesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProposalVotesInput, Members: &mListProposalVotesInput, Type: smithy.ShapeTypeStructure, Ext: &eListProposalVotesInput})
+var sListProposalVotesInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListProposalVotesInput_NetworkId})
+var sListProposalVotesInput_ProposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListProposalVotesInput_ProposalId})
+var sListProposalVotesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ProposalListMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListProposalVotesInput_MaxResults})
+var sListProposalVotesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListProposalVotesInput_NextToken})
+var sListProposalVotesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProposalVotesOutput, Members: &mListProposalVotesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListProposalVotesOutput})
+var sListProposalVotesOutput_ProposalVotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalVotes", ID: &i_ProposalVoteList, Members: &m_ProposalVoteList, Type: smithy.ShapeTypeList, Ext: &eListProposalVotesOutput_ProposalVotes})
+var sListProposalVotesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProposalVotesOutput_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ArnString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTagMap, Members: &m_OutputTagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sRejectInvitationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInvitationInput, Members: &mRejectInvitationInput, Type: smithy.ShapeTypeStructure, Ext: &eRejectInvitationInput})
+var sRejectInvitationInput_InvitationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitationId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eRejectInvitationInput_InvitationId})
+var sRejectInvitationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInvitationOutput, Type: smithy.ShapeTypeStructure, Ext: &eRejectInvitationOutput})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ArnString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagMap, Members: &m_InputTagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ArnString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t46, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateMemberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMemberInput, Members: &mUpdateMemberInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMemberInput})
+var sUpdateMemberInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateMemberInput_NetworkId})
+var sUpdateMemberInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateMemberInput_MemberId})
+var sUpdateMemberInput_LogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingConfiguration", ID: &iMemberLogPublishingConfiguration, Members: &mMemberLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMemberInput_LogPublishingConfiguration})
+var sUpdateMemberOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMemberOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMemberOutput})
+var sUpdateNodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNodeInput, Members: &mUpdateNodeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNodeInput})
+var sUpdateNodeInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateNodeInput_NetworkId})
+var sUpdateNodeInput_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eUpdateNodeInput_MemberId})
+var sUpdateNodeInput_NodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateNodeInput_NodeId})
+var sUpdateNodeInput_LogPublishingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingConfiguration", ID: &iNodeLogPublishingConfiguration, Members: &mNodeLogPublishingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNodeInput_LogPublishingConfiguration})
+var sUpdateNodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNodeOutput})
+var sVoteOnProposalInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoteOnProposalInput, Members: &mVoteOnProposalInput, Type: smithy.ShapeTypeStructure, Ext: &eVoteOnProposalInput})
+var sVoteOnProposalInput_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eVoteOnProposalInput_NetworkId})
+var sVoteOnProposalInput_ProposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposalId", ID: &i_ResourceIdString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eVoteOnProposalInput_ProposalId})
+var sVoteOnProposalInput_VoterMemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoterMemberId", ID: &i_ResourceIdString, Type: smithy.ShapeTypeString, Ext: &eVoteOnProposalInput_VoterMemberId})
+var sVoteOnProposalInput_Vote = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vote", ID: &iVoteValue, Members: &mVoteValue, Type: smithy.ShapeTypeEnum, Ext: &eVoteOnProposalInput_Vote})
+var sVoteOnProposalOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoteOnProposalOutput, Type: smithy.ShapeTypeStructure, Ext: &eVoteOnProposalOutput})
+
+var CreateAccessor = &sCreateAccessor
+
+var CreateMember = &sCreateMember
+
+var CreateNetwork = &sCreateNetwork
+
+var CreateNode = &sCreateNode
+
+var CreateProposal = &sCreateProposal
+
+var DeleteAccessor = &sDeleteAccessor
+
+var DeleteMember = &sDeleteMember
+
+var DeleteNode = &sDeleteNode
+
+var GetAccessor = &sGetAccessor
+
+var GetMember = &sGetMember
+
+var GetNetwork = &sGetNetwork
+
+var GetNode = &sGetNode
+
+var GetProposal = &sGetProposal
+
+var ListAccessors = &sListAccessors
+
+var ListInvitations = &sListInvitations
+
+var ListMembers = &sListMembers
+
+var ListNetworks = &sListNetworks
+
+var ListNodes = &sListNodes
+
+var ListProposals = &sListProposals
+
+var ListProposalVotes = &sListProposalVotes
+
+var ListTagsForResource = &sListTagsForResource
+
+var RejectInvitation = &sRejectInvitation
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateMember = &sUpdateMember
+
+var UpdateNode = &sUpdateNode
+
+var VoteOnProposal = &sVoteOnProposal
+
+var _TaigaWebService = &s_TaigaWebService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var Accessor = &sAccessor
+var Accessor_Id = &sAccessor_Id
+var Accessor_Type = &sAccessor_Type
+var Accessor_BillingToken = &sAccessor_BillingToken
+var Accessor_Status = &sAccessor_Status
+var Accessor_CreationDate = &sAccessor_CreationDate
+var Accessor_Arn = &sAccessor_Arn
+var Accessor_Tags = &sAccessor_Tags
+var Accessor_NetworkType = &sAccessor_NetworkType
+
+var _AccessorBillingTokenString = &s_AccessorBillingTokenString
+
+var _AccessorListMaxResults = &s_AccessorListMaxResults
+
+var AccessorNetworkType = &sAccessorNetworkType
+var AccessorNetworkType_ETHEREUM_GOERLI = &sAccessorNetworkType_ETHEREUM_GOERLI
+var AccessorNetworkType_ETHEREUM_MAINNET = &sAccessorNetworkType_ETHEREUM_MAINNET
+var AccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI = &sAccessorNetworkType_ETHEREUM_MAINNET_AND_GOERLI
+var AccessorNetworkType_POLYGON_MAINNET = &sAccessorNetworkType_POLYGON_MAINNET
+var AccessorNetworkType_POLYGON_MUMBAI = &sAccessorNetworkType_POLYGON_MUMBAI
+
+var AccessorStatus = &sAccessorStatus
+var AccessorStatus_AVAILABLE = &sAccessorStatus_AVAILABLE
+var AccessorStatus_PENDING_DELETION = &sAccessorStatus_PENDING_DELETION
+var AccessorStatus_DELETED = &sAccessorStatus_DELETED
+
+var AccessorSummary = &sAccessorSummary
+var AccessorSummary_Id = &sAccessorSummary_Id
+var AccessorSummary_Type = &sAccessorSummary_Type
+var AccessorSummary_Status = &sAccessorSummary_Status
+var AccessorSummary_CreationDate = &sAccessorSummary_CreationDate
+var AccessorSummary_Arn = &sAccessorSummary_Arn
+var AccessorSummary_NetworkType = &sAccessorSummary_NetworkType
+
+var _AccessorSummaryList = &s_AccessorSummaryList
+var _AccessorSummaryList_member = &s_AccessorSummaryList_member
+
+var AccessorType = &sAccessorType
+var AccessorType_BILLING_TOKEN = &sAccessorType_BILLING_TOKEN
+
+var ApprovalThresholdPolicy = &sApprovalThresholdPolicy
+var ApprovalThresholdPolicy_ThresholdPercentage = &sApprovalThresholdPolicy_ThresholdPercentage
+var ApprovalThresholdPolicy_ProposalDurationInHours = &sApprovalThresholdPolicy_ProposalDurationInHours
+var ApprovalThresholdPolicy_ThresholdComparator = &sApprovalThresholdPolicy_ThresholdComparator
+
+var _ArnString = &s_ArnString
+
+var _AvailabilityZoneString = &s_AvailabilityZoneString
+
+var _ClientRequestTokenString = &s_ClientRequestTokenString
+
+var _DescriptionString = &s_DescriptionString
+
+var Edition = &sEdition
+var Edition_STARTER = &sEdition_STARTER
+var Edition_STANDARD = &sEdition_STANDARD
+
+var _Enabled = &s_Enabled
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var Framework = &sFramework
+var Framework_HYPERLEDGER_FABRIC = &sFramework_HYPERLEDGER_FABRIC
+var Framework_ETHEREUM = &sFramework_ETHEREUM
+
+var _FrameworkVersionString = &s_FrameworkVersionString
+
+var IllegalActionException = &sIllegalActionException
+var IllegalActionException_Message = &sIllegalActionException_Message
+
+var _InputTagMap = &s_InputTagMap
+var _InputTagMap_key = &s_InputTagMap_key
+var _InputTagMap_value = &s_InputTagMap_value
+
+var _InstanceTypeString = &s_InstanceTypeString
+
+var InternalServiceErrorException = &sInternalServiceErrorException
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_Message = &sInvalidRequestException_Message
+
+var Invitation = &sInvitation
+var Invitation_InvitationId = &sInvitation_InvitationId
+var Invitation_CreationDate = &sInvitation_CreationDate
+var Invitation_ExpirationDate = &sInvitation_ExpirationDate
+var Invitation_Status = &sInvitation_Status
+var Invitation_NetworkSummary = &sInvitation_NetworkSummary
+var Invitation_Arn = &sInvitation_Arn
+
+var _InvitationList = &s_InvitationList
+var _InvitationList_member = &s_InvitationList_member
+
+var InvitationStatus = &sInvitationStatus
+var InvitationStatus_PENDING = &sInvitationStatus_PENDING
+var InvitationStatus_ACCEPTED = &sInvitationStatus_ACCEPTED
+var InvitationStatus_ACCEPTING = &sInvitationStatus_ACCEPTING
+var InvitationStatus_REJECTED = &sInvitationStatus_REJECTED
+var InvitationStatus_EXPIRED = &sInvitationStatus_EXPIRED
+
+var InviteAction = &sInviteAction
+var InviteAction_Principal = &sInviteAction_Principal
+
+var _InviteActionList = &s_InviteActionList
+var _InviteActionList_member = &s_InviteActionList_member
+
+var _IsOwned = &s_IsOwned
+
+var LogConfiguration = &sLogConfiguration
+var LogConfiguration_Enabled = &sLogConfiguration_Enabled
+
+var LogConfigurations = &sLogConfigurations
+var LogConfigurations_Cloudwatch = &sLogConfigurations_Cloudwatch
+
+var Member = &sMember
+var Member_NetworkId = &sMember_NetworkId
+var Member_Id = &sMember_Id
+var Member_Name = &sMember_Name
+var Member_Description = &sMember_Description
+var Member_FrameworkAttributes = &sMember_FrameworkAttributes
+var Member_LogPublishingConfiguration = &sMember_LogPublishingConfiguration
+var Member_Status = &sMember_Status
+var Member_CreationDate = &sMember_CreationDate
+var Member_Tags = &sMember_Tags
+var Member_Arn = &sMember_Arn
+var Member_KmsKeyArn = &sMember_KmsKeyArn
+
+var MemberConfiguration = &sMemberConfiguration
+var MemberConfiguration_Name = &sMemberConfiguration_Name
+var MemberConfiguration_Description = &sMemberConfiguration_Description
+var MemberConfiguration_FrameworkConfiguration = &sMemberConfiguration_FrameworkConfiguration
+var MemberConfiguration_LogPublishingConfiguration = &sMemberConfiguration_LogPublishingConfiguration
+var MemberConfiguration_Tags = &sMemberConfiguration_Tags
+var MemberConfiguration_KmsKeyArn = &sMemberConfiguration_KmsKeyArn
+
+var MemberFabricAttributes = &sMemberFabricAttributes
+var MemberFabricAttributes_AdminUsername = &sMemberFabricAttributes_AdminUsername
+var MemberFabricAttributes_CaEndpoint = &sMemberFabricAttributes_CaEndpoint
+
+var MemberFabricConfiguration = &sMemberFabricConfiguration
+var MemberFabricConfiguration_AdminUsername = &sMemberFabricConfiguration_AdminUsername
+var MemberFabricConfiguration_AdminPassword = &sMemberFabricConfiguration_AdminPassword
+
+var MemberFabricLogPublishingConfiguration = &sMemberFabricLogPublishingConfiguration
+var MemberFabricLogPublishingConfiguration_CaLogs = &sMemberFabricLogPublishingConfiguration_CaLogs
+
+var MemberFrameworkAttributes = &sMemberFrameworkAttributes
+var MemberFrameworkAttributes_Fabric = &sMemberFrameworkAttributes_Fabric
+
+var MemberFrameworkConfiguration = &sMemberFrameworkConfiguration
+var MemberFrameworkConfiguration_Fabric = &sMemberFrameworkConfiguration_Fabric
+
+var _MemberListMaxResults = &s_MemberListMaxResults
+
+var MemberLogPublishingConfiguration = &sMemberLogPublishingConfiguration
+var MemberLogPublishingConfiguration_Fabric = &sMemberLogPublishingConfiguration_Fabric
+
+var MemberStatus = &sMemberStatus
+var MemberStatus_CREATING = &sMemberStatus_CREATING
+var MemberStatus_AVAILABLE = &sMemberStatus_AVAILABLE
+var MemberStatus_CREATE_FAILED = &sMemberStatus_CREATE_FAILED
+var MemberStatus_UPDATING = &sMemberStatus_UPDATING
+var MemberStatus_DELETING = &sMemberStatus_DELETING
+var MemberStatus_DELETED = &sMemberStatus_DELETED
+var MemberStatus_INACCESSIBLE_ENCRYPTION_KEY = &sMemberStatus_INACCESSIBLE_ENCRYPTION_KEY
+
+var MemberSummary = &sMemberSummary
+var MemberSummary_Id = &sMemberSummary_Id
+var MemberSummary_Name = &sMemberSummary_Name
+var MemberSummary_Description = &sMemberSummary_Description
+var MemberSummary_Status = &sMemberSummary_Status
+var MemberSummary_CreationDate = &sMemberSummary_CreationDate
+var MemberSummary_IsOwned = &sMemberSummary_IsOwned
+var MemberSummary_Arn = &sMemberSummary_Arn
+
+var _MemberSummaryList = &s_MemberSummaryList
+var _MemberSummaryList_member = &s_MemberSummaryList_member
+
+var _NameString = &s_NameString
+
+var Network = &sNetwork
+var Network_Id = &sNetwork_Id
+var Network_Name = &sNetwork_Name
+var Network_Description = &sNetwork_Description
+var Network_Framework = &sNetwork_Framework
+var Network_FrameworkVersion = &sNetwork_FrameworkVersion
+var Network_FrameworkAttributes = &sNetwork_FrameworkAttributes
+var Network_VpcEndpointServiceName = &sNetwork_VpcEndpointServiceName
+var Network_VotingPolicy = &sNetwork_VotingPolicy
+var Network_Status = &sNetwork_Status
+var Network_CreationDate = &sNetwork_CreationDate
+var Network_Tags = &sNetwork_Tags
+var Network_Arn = &sNetwork_Arn
+
+var NetworkEthereumAttributes = &sNetworkEthereumAttributes
+var NetworkEthereumAttributes_ChainId = &sNetworkEthereumAttributes_ChainId
+
+var NetworkFabricAttributes = &sNetworkFabricAttributes
+var NetworkFabricAttributes_OrderingServiceEndpoint = &sNetworkFabricAttributes_OrderingServiceEndpoint
+var NetworkFabricAttributes_Edition = &sNetworkFabricAttributes_Edition
+
+var NetworkFabricConfiguration = &sNetworkFabricConfiguration
+var NetworkFabricConfiguration_Edition = &sNetworkFabricConfiguration_Edition
+
+var NetworkFrameworkAttributes = &sNetworkFrameworkAttributes
+var NetworkFrameworkAttributes_Fabric = &sNetworkFrameworkAttributes_Fabric
+var NetworkFrameworkAttributes_Ethereum = &sNetworkFrameworkAttributes_Ethereum
+
+var NetworkFrameworkConfiguration = &sNetworkFrameworkConfiguration
+var NetworkFrameworkConfiguration_Fabric = &sNetworkFrameworkConfiguration_Fabric
+
+var _NetworkListMaxResults = &s_NetworkListMaxResults
+
+var _NetworkMemberNameString = &s_NetworkMemberNameString
+
+var NetworkStatus = &sNetworkStatus
+var NetworkStatus_CREATING = &sNetworkStatus_CREATING
+var NetworkStatus_AVAILABLE = &sNetworkStatus_AVAILABLE
+var NetworkStatus_CREATE_FAILED = &sNetworkStatus_CREATE_FAILED
+var NetworkStatus_DELETING = &sNetworkStatus_DELETING
+var NetworkStatus_DELETED = &sNetworkStatus_DELETED
+
+var NetworkSummary = &sNetworkSummary
+var NetworkSummary_Id = &sNetworkSummary_Id
+var NetworkSummary_Name = &sNetworkSummary_Name
+var NetworkSummary_Description = &sNetworkSummary_Description
+var NetworkSummary_Framework = &sNetworkSummary_Framework
+var NetworkSummary_FrameworkVersion = &sNetworkSummary_FrameworkVersion
+var NetworkSummary_Status = &sNetworkSummary_Status
+var NetworkSummary_CreationDate = &sNetworkSummary_CreationDate
+var NetworkSummary_Arn = &sNetworkSummary_Arn
+
+var _NetworkSummaryList = &s_NetworkSummaryList
+var _NetworkSummaryList_member = &s_NetworkSummaryList_member
+
+var Node = &sNode
+var Node_NetworkId = &sNode_NetworkId
+var Node_MemberId = &sNode_MemberId
+var Node_Id = &sNode_Id
+var Node_InstanceType = &sNode_InstanceType
+var Node_AvailabilityZone = &sNode_AvailabilityZone
+var Node_FrameworkAttributes = &sNode_FrameworkAttributes
+var Node_LogPublishingConfiguration = &sNode_LogPublishingConfiguration
+var Node_StateDB = &sNode_StateDB
+var Node_Status = &sNode_Status
+var Node_CreationDate = &sNode_CreationDate
+var Node_Tags = &sNode_Tags
+var Node_Arn = &sNode_Arn
+var Node_KmsKeyArn = &sNode_KmsKeyArn
+
+var NodeConfiguration = &sNodeConfiguration
+var NodeConfiguration_InstanceType = &sNodeConfiguration_InstanceType
+var NodeConfiguration_AvailabilityZone = &sNodeConfiguration_AvailabilityZone
+var NodeConfiguration_LogPublishingConfiguration = &sNodeConfiguration_LogPublishingConfiguration
+var NodeConfiguration_StateDB = &sNodeConfiguration_StateDB
+
+var NodeEthereumAttributes = &sNodeEthereumAttributes
+var NodeEthereumAttributes_HttpEndpoint = &sNodeEthereumAttributes_HttpEndpoint
+var NodeEthereumAttributes_WebSocketEndpoint = &sNodeEthereumAttributes_WebSocketEndpoint
+
+var NodeFabricAttributes = &sNodeFabricAttributes
+var NodeFabricAttributes_PeerEndpoint = &sNodeFabricAttributes_PeerEndpoint
+var NodeFabricAttributes_PeerEventEndpoint = &sNodeFabricAttributes_PeerEventEndpoint
+
+var NodeFabricLogPublishingConfiguration = &sNodeFabricLogPublishingConfiguration
+var NodeFabricLogPublishingConfiguration_ChaincodeLogs = &sNodeFabricLogPublishingConfiguration_ChaincodeLogs
+var NodeFabricLogPublishingConfiguration_PeerLogs = &sNodeFabricLogPublishingConfiguration_PeerLogs
+
+var NodeFrameworkAttributes = &sNodeFrameworkAttributes
+var NodeFrameworkAttributes_Fabric = &sNodeFrameworkAttributes_Fabric
+var NodeFrameworkAttributes_Ethereum = &sNodeFrameworkAttributes_Ethereum
+
+var _NodeListMaxResults = &s_NodeListMaxResults
+
+var NodeLogPublishingConfiguration = &sNodeLogPublishingConfiguration
+var NodeLogPublishingConfiguration_Fabric = &sNodeLogPublishingConfiguration_Fabric
+
+var NodeStatus = &sNodeStatus
+var NodeStatus_CREATING = &sNodeStatus_CREATING
+var NodeStatus_AVAILABLE = &sNodeStatus_AVAILABLE
+var NodeStatus_UNHEALTHY = &sNodeStatus_UNHEALTHY
+var NodeStatus_CREATE_FAILED = &sNodeStatus_CREATE_FAILED
+var NodeStatus_UPDATING = &sNodeStatus_UPDATING
+var NodeStatus_DELETING = &sNodeStatus_DELETING
+var NodeStatus_DELETED = &sNodeStatus_DELETED
+var NodeStatus_FAILED = &sNodeStatus_FAILED
+var NodeStatus_INACCESSIBLE_ENCRYPTION_KEY = &sNodeStatus_INACCESSIBLE_ENCRYPTION_KEY
+
+var NodeSummary = &sNodeSummary
+var NodeSummary_Id = &sNodeSummary_Id
+var NodeSummary_Status = &sNodeSummary_Status
+var NodeSummary_CreationDate = &sNodeSummary_CreationDate
+var NodeSummary_AvailabilityZone = &sNodeSummary_AvailabilityZone
+var NodeSummary_InstanceType = &sNodeSummary_InstanceType
+var NodeSummary_Arn = &sNodeSummary_Arn
+
+var _NodeSummaryList = &s_NodeSummaryList
+var _NodeSummaryList_member = &s_NodeSummaryList_member
+
+var _OutputTagMap = &s_OutputTagMap
+var _OutputTagMap_key = &s_OutputTagMap_key
+var _OutputTagMap_value = &s_OutputTagMap_value
+
+var _PaginationToken = &s_PaginationToken
+
+var _PasswordString = &s_PasswordString
+
+var _PrincipalString = &s_PrincipalString
+
+var Proposal = &sProposal
+var Proposal_ProposalId = &sProposal_ProposalId
+var Proposal_NetworkId = &sProposal_NetworkId
+var Proposal_Description = &sProposal_Description
+var Proposal_Actions = &sProposal_Actions
+var Proposal_ProposedByMemberId = &sProposal_ProposedByMemberId
+var Proposal_ProposedByMemberName = &sProposal_ProposedByMemberName
+var Proposal_Status = &sProposal_Status
+var Proposal_CreationDate = &sProposal_CreationDate
+var Proposal_ExpirationDate = &sProposal_ExpirationDate
+var Proposal_YesVoteCount = &sProposal_YesVoteCount
+var Proposal_NoVoteCount = &sProposal_NoVoteCount
+var Proposal_OutstandingVoteCount = &sProposal_OutstandingVoteCount
+var Proposal_Tags = &sProposal_Tags
+var Proposal_Arn = &sProposal_Arn
+
+var ProposalActions = &sProposalActions
+var ProposalActions_Invitations = &sProposalActions_Invitations
+var ProposalActions_Removals = &sProposalActions_Removals
+
+var _ProposalDurationInt = &s_ProposalDurationInt
+
+var _ProposalListMaxResults = &s_ProposalListMaxResults
+
+var ProposalStatus = &sProposalStatus
+var ProposalStatus_IN_PROGRESS = &sProposalStatus_IN_PROGRESS
+var ProposalStatus_APPROVED = &sProposalStatus_APPROVED
+var ProposalStatus_REJECTED = &sProposalStatus_REJECTED
+var ProposalStatus_EXPIRED = &sProposalStatus_EXPIRED
+var ProposalStatus_ACTION_FAILED = &sProposalStatus_ACTION_FAILED
+
+var ProposalSummary = &sProposalSummary
+var ProposalSummary_ProposalId = &sProposalSummary_ProposalId
+var ProposalSummary_Description = &sProposalSummary_Description
+var ProposalSummary_ProposedByMemberId = &sProposalSummary_ProposedByMemberId
+var ProposalSummary_ProposedByMemberName = &sProposalSummary_ProposedByMemberName
+var ProposalSummary_Status = &sProposalSummary_Status
+var ProposalSummary_CreationDate = &sProposalSummary_CreationDate
+var ProposalSummary_ExpirationDate = &sProposalSummary_ExpirationDate
+var ProposalSummary_Arn = &sProposalSummary_Arn
+
+var _ProposalSummaryList = &s_ProposalSummaryList
+var _ProposalSummaryList_member = &s_ProposalSummaryList_member
+
+var _ProposalVoteList = &s_ProposalVoteList
+var _ProposalVoteList_member = &s_ProposalVoteList_member
+
+var RemoveAction = &sRemoveAction
+var RemoveAction_MemberId = &sRemoveAction_MemberId
+
+var _RemoveActionList = &s_RemoveActionList
+var _RemoveActionList_member = &s_RemoveActionList_member
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_Message = &sResourceAlreadyExistsException_Message
+
+var _ResourceIdString = &s_ResourceIdString
+
+var ResourceLimitExceededException = &sResourceLimitExceededException
+var ResourceLimitExceededException_Message = &sResourceLimitExceededException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceName = &sResourceNotFoundException_ResourceName
+
+var ResourceNotReadyException = &sResourceNotReadyException
+var ResourceNotReadyException_Message = &sResourceNotReadyException_Message
+
+var StateDBType = &sStateDBType
+var StateDBType_LevelDB = &sStateDBType_LevelDB
+var StateDBType_CouchDB = &sStateDBType_CouchDB
+
+var _String = &s_String
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagValue = &s_TagValue
+
+var ThresholdComparator = &sThresholdComparator
+var ThresholdComparator_GREATER_THAN = &sThresholdComparator_GREATER_THAN
+var ThresholdComparator_GREATER_THAN_OR_EQUAL_TO = &sThresholdComparator_GREATER_THAN_OR_EQUAL_TO
+
+var _ThresholdPercentageInt = &s_ThresholdPercentageInt
+
+var ThrottlingException = &sThrottlingException
+
+var _Timestamp = &s_Timestamp
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+var TooManyTagsException_ResourceName = &sTooManyTagsException_ResourceName
+
+var _UsernameString = &s_UsernameString
+
+var _VoteCount = &s_VoteCount
+
+var VoteSummary = &sVoteSummary
+var VoteSummary_Vote = &sVoteSummary_Vote
+var VoteSummary_MemberName = &sVoteSummary_MemberName
+var VoteSummary_MemberId = &sVoteSummary_MemberId
+
+var VoteValue = &sVoteValue
+var VoteValue_YES = &sVoteValue_YES
+var VoteValue_NO = &sVoteValue_NO
+
+var VotingPolicy = &sVotingPolicy
+var VotingPolicy_ApprovalThresholdPolicy = &sVotingPolicy_ApprovalThresholdPolicy
+
+var CreateAccessorInput = &sCreateAccessorInput
+var CreateAccessorInput_ClientRequestToken = &sCreateAccessorInput_ClientRequestToken
+var CreateAccessorInput_AccessorType = &sCreateAccessorInput_AccessorType
+var CreateAccessorInput_Tags = &sCreateAccessorInput_Tags
+var CreateAccessorInput_NetworkType = &sCreateAccessorInput_NetworkType
+
+var CreateAccessorOutput = &sCreateAccessorOutput
+var CreateAccessorOutput_AccessorId = &sCreateAccessorOutput_AccessorId
+var CreateAccessorOutput_BillingToken = &sCreateAccessorOutput_BillingToken
+var CreateAccessorOutput_NetworkType = &sCreateAccessorOutput_NetworkType
+
+var CreateMemberInput = &sCreateMemberInput
+var CreateMemberInput_ClientRequestToken = &sCreateMemberInput_ClientRequestToken
+var CreateMemberInput_InvitationId = &sCreateMemberInput_InvitationId
+var CreateMemberInput_NetworkId = &sCreateMemberInput_NetworkId
+var CreateMemberInput_MemberConfiguration = &sCreateMemberInput_MemberConfiguration
+
+var CreateMemberOutput = &sCreateMemberOutput
+var CreateMemberOutput_MemberId = &sCreateMemberOutput_MemberId
+
+var CreateNetworkInput = &sCreateNetworkInput
+var CreateNetworkInput_ClientRequestToken = &sCreateNetworkInput_ClientRequestToken
+var CreateNetworkInput_Name = &sCreateNetworkInput_Name
+var CreateNetworkInput_Description = &sCreateNetworkInput_Description
+var CreateNetworkInput_Framework = &sCreateNetworkInput_Framework
+var CreateNetworkInput_FrameworkVersion = &sCreateNetworkInput_FrameworkVersion
+var CreateNetworkInput_FrameworkConfiguration = &sCreateNetworkInput_FrameworkConfiguration
+var CreateNetworkInput_VotingPolicy = &sCreateNetworkInput_VotingPolicy
+var CreateNetworkInput_MemberConfiguration = &sCreateNetworkInput_MemberConfiguration
+var CreateNetworkInput_Tags = &sCreateNetworkInput_Tags
+
+var CreateNetworkOutput = &sCreateNetworkOutput
+var CreateNetworkOutput_NetworkId = &sCreateNetworkOutput_NetworkId
+var CreateNetworkOutput_MemberId = &sCreateNetworkOutput_MemberId
+
+var CreateNodeInput = &sCreateNodeInput
+var CreateNodeInput_ClientRequestToken = &sCreateNodeInput_ClientRequestToken
+var CreateNodeInput_NetworkId = &sCreateNodeInput_NetworkId
+var CreateNodeInput_MemberId = &sCreateNodeInput_MemberId
+var CreateNodeInput_NodeConfiguration = &sCreateNodeInput_NodeConfiguration
+var CreateNodeInput_Tags = &sCreateNodeInput_Tags
+
+var CreateNodeOutput = &sCreateNodeOutput
+var CreateNodeOutput_NodeId = &sCreateNodeOutput_NodeId
+
+var CreateProposalInput = &sCreateProposalInput
+var CreateProposalInput_ClientRequestToken = &sCreateProposalInput_ClientRequestToken
+var CreateProposalInput_NetworkId = &sCreateProposalInput_NetworkId
+var CreateProposalInput_MemberId = &sCreateProposalInput_MemberId
+var CreateProposalInput_Actions = &sCreateProposalInput_Actions
+var CreateProposalInput_Description = &sCreateProposalInput_Description
+var CreateProposalInput_Tags = &sCreateProposalInput_Tags
+
+var CreateProposalOutput = &sCreateProposalOutput
+var CreateProposalOutput_ProposalId = &sCreateProposalOutput_ProposalId
+
+var DeleteAccessorInput = &sDeleteAccessorInput
+var DeleteAccessorInput_AccessorId = &sDeleteAccessorInput_AccessorId
+
+var DeleteAccessorOutput = &sDeleteAccessorOutput
+
+var DeleteMemberInput = &sDeleteMemberInput
+var DeleteMemberInput_NetworkId = &sDeleteMemberInput_NetworkId
+var DeleteMemberInput_MemberId = &sDeleteMemberInput_MemberId
+
+var DeleteMemberOutput = &sDeleteMemberOutput
+
+var DeleteNodeInput = &sDeleteNodeInput
+var DeleteNodeInput_NetworkId = &sDeleteNodeInput_NetworkId
+var DeleteNodeInput_MemberId = &sDeleteNodeInput_MemberId
+var DeleteNodeInput_NodeId = &sDeleteNodeInput_NodeId
+
+var DeleteNodeOutput = &sDeleteNodeOutput
+
+var GetAccessorInput = &sGetAccessorInput
+var GetAccessorInput_AccessorId = &sGetAccessorInput_AccessorId
+
+var GetAccessorOutput = &sGetAccessorOutput
+var GetAccessorOutput_Accessor = &sGetAccessorOutput_Accessor
+
+var GetMemberInput = &sGetMemberInput
+var GetMemberInput_NetworkId = &sGetMemberInput_NetworkId
+var GetMemberInput_MemberId = &sGetMemberInput_MemberId
+
+var GetMemberOutput = &sGetMemberOutput
+var GetMemberOutput_Member = &sGetMemberOutput_Member
+
+var GetNetworkInput = &sGetNetworkInput
+var GetNetworkInput_NetworkId = &sGetNetworkInput_NetworkId
+
+var GetNetworkOutput = &sGetNetworkOutput
+var GetNetworkOutput_Network = &sGetNetworkOutput_Network
+
+var GetNodeInput = &sGetNodeInput
+var GetNodeInput_NetworkId = &sGetNodeInput_NetworkId
+var GetNodeInput_MemberId = &sGetNodeInput_MemberId
+var GetNodeInput_NodeId = &sGetNodeInput_NodeId
+
+var GetNodeOutput = &sGetNodeOutput
+var GetNodeOutput_Node = &sGetNodeOutput_Node
+
+var GetProposalInput = &sGetProposalInput
+var GetProposalInput_NetworkId = &sGetProposalInput_NetworkId
+var GetProposalInput_ProposalId = &sGetProposalInput_ProposalId
+
+var GetProposalOutput = &sGetProposalOutput
+var GetProposalOutput_Proposal = &sGetProposalOutput_Proposal
+
+var ListAccessorsInput = &sListAccessorsInput
+var ListAccessorsInput_MaxResults = &sListAccessorsInput_MaxResults
+var ListAccessorsInput_NextToken = &sListAccessorsInput_NextToken
+var ListAccessorsInput_NetworkType = &sListAccessorsInput_NetworkType
+
+var ListAccessorsOutput = &sListAccessorsOutput
+var ListAccessorsOutput_Accessors = &sListAccessorsOutput_Accessors
+var ListAccessorsOutput_NextToken = &sListAccessorsOutput_NextToken
+
+var ListInvitationsInput = &sListInvitationsInput
+var ListInvitationsInput_MaxResults = &sListInvitationsInput_MaxResults
+var ListInvitationsInput_NextToken = &sListInvitationsInput_NextToken
+
+var ListInvitationsOutput = &sListInvitationsOutput
+var ListInvitationsOutput_Invitations = &sListInvitationsOutput_Invitations
+var ListInvitationsOutput_NextToken = &sListInvitationsOutput_NextToken
+
+var ListMembersInput = &sListMembersInput
+var ListMembersInput_NetworkId = &sListMembersInput_NetworkId
+var ListMembersInput_Name = &sListMembersInput_Name
+var ListMembersInput_Status = &sListMembersInput_Status
+var ListMembersInput_IsOwned = &sListMembersInput_IsOwned
+var ListMembersInput_MaxResults = &sListMembersInput_MaxResults
+var ListMembersInput_NextToken = &sListMembersInput_NextToken
+
+var ListMembersOutput = &sListMembersOutput
+var ListMembersOutput_Members = &sListMembersOutput_Members
+var ListMembersOutput_NextToken = &sListMembersOutput_NextToken
+
+var ListNetworksInput = &sListNetworksInput
+var ListNetworksInput_Name = &sListNetworksInput_Name
+var ListNetworksInput_Framework = &sListNetworksInput_Framework
+var ListNetworksInput_Status = &sListNetworksInput_Status
+var ListNetworksInput_MaxResults = &sListNetworksInput_MaxResults
+var ListNetworksInput_NextToken = &sListNetworksInput_NextToken
+
+var ListNetworksOutput = &sListNetworksOutput
+var ListNetworksOutput_Networks = &sListNetworksOutput_Networks
+var ListNetworksOutput_NextToken = &sListNetworksOutput_NextToken
+
+var ListNodesInput = &sListNodesInput
+var ListNodesInput_NetworkId = &sListNodesInput_NetworkId
+var ListNodesInput_MemberId = &sListNodesInput_MemberId
+var ListNodesInput_Status = &sListNodesInput_Status
+var ListNodesInput_MaxResults = &sListNodesInput_MaxResults
+var ListNodesInput_NextToken = &sListNodesInput_NextToken
+
+var ListNodesOutput = &sListNodesOutput
+var ListNodesOutput_Nodes = &sListNodesOutput_Nodes
+var ListNodesOutput_NextToken = &sListNodesOutput_NextToken
+
+var ListProposalsInput = &sListProposalsInput
+var ListProposalsInput_NetworkId = &sListProposalsInput_NetworkId
+var ListProposalsInput_MaxResults = &sListProposalsInput_MaxResults
+var ListProposalsInput_NextToken = &sListProposalsInput_NextToken
+
+var ListProposalsOutput = &sListProposalsOutput
+var ListProposalsOutput_Proposals = &sListProposalsOutput_Proposals
+var ListProposalsOutput_NextToken = &sListProposalsOutput_NextToken
+
+var ListProposalVotesInput = &sListProposalVotesInput
+var ListProposalVotesInput_NetworkId = &sListProposalVotesInput_NetworkId
+var ListProposalVotesInput_ProposalId = &sListProposalVotesInput_ProposalId
+var ListProposalVotesInput_MaxResults = &sListProposalVotesInput_MaxResults
+var ListProposalVotesInput_NextToken = &sListProposalVotesInput_NextToken
+
+var ListProposalVotesOutput = &sListProposalVotesOutput
+var ListProposalVotesOutput_ProposalVotes = &sListProposalVotesOutput_ProposalVotes
+var ListProposalVotesOutput_NextToken = &sListProposalVotesOutput_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var RejectInvitationInput = &sRejectInvitationInput
+var RejectInvitationInput_InvitationId = &sRejectInvitationInput_InvitationId
+
+var RejectInvitationOutput = &sRejectInvitationOutput
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateMemberInput = &sUpdateMemberInput
+var UpdateMemberInput_NetworkId = &sUpdateMemberInput_NetworkId
+var UpdateMemberInput_MemberId = &sUpdateMemberInput_MemberId
+var UpdateMemberInput_LogPublishingConfiguration = &sUpdateMemberInput_LogPublishingConfiguration
+
+var UpdateMemberOutput = &sUpdateMemberOutput
+
+var UpdateNodeInput = &sUpdateNodeInput
+var UpdateNodeInput_NetworkId = &sUpdateNodeInput_NetworkId
+var UpdateNodeInput_MemberId = &sUpdateNodeInput_MemberId
+var UpdateNodeInput_NodeId = &sUpdateNodeInput_NodeId
+var UpdateNodeInput_LogPublishingConfiguration = &sUpdateNodeInput_LogPublishingConfiguration
+
+var UpdateNodeOutput = &sUpdateNodeOutput
+
+var VoteOnProposalInput = &sVoteOnProposalInput
+var VoteOnProposalInput_NetworkId = &sVoteOnProposalInput_NetworkId
+var VoteOnProposalInput_ProposalId = &sVoteOnProposalInput_ProposalId
+var VoteOnProposalInput_VoterMemberId = &sVoteOnProposalInput_VoterMemberId
+var VoteOnProposalInput_Vote = &sVoteOnProposalInput_Vote
+
+var VoteOnProposalOutput = &sVoteOnProposalOutput
+
+var TaigaWebService = &smithy.ServiceSchema{Schema: &s_TaigaWebService, Version: "2018-09-24"}

@@ -4,2076 +4,1986 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteLexicon = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "DeleteLexicon",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/lexicons/{Name}",
-	Code: 200})
+var (
+	eDeleteLexicon                                                       smithy.SchemaExtensions
+	eDescribeVoices                                                      smithy.SchemaExtensions
+	eGetLexicon                                                          smithy.SchemaExtensions
+	eGetSpeechSynthesisTask                                              smithy.SchemaExtensions
+	eListLexicons                                                        smithy.SchemaExtensions
+	eListSpeechSynthesisTasks                                            smithy.SchemaExtensions
+	eListTagsForResource                                                 smithy.SchemaExtensions
+	ePutLexicon                                                          smithy.SchemaExtensions
+	eStartSpeechSynthesisStream                                          smithy.SchemaExtensions
+	eStartSpeechSynthesisTask                                            smithy.SchemaExtensions
+	eSynthesizeSpeech                                                    smithy.SchemaExtensions
+	eTagResource                                                         smithy.SchemaExtensions
+	eUntagResource                                                       smithy.SchemaExtensions
+	e_Parrot_v1                                                          smithy.SchemaExtensions
+	e_Alphabet                                                           smithy.SchemaExtensions
+	e_AmazonResourceName                                                 smithy.SchemaExtensions
+	e_AudioChunk                                                         smithy.SchemaExtensions
+	eAudioEvent                                                          smithy.SchemaExtensions
+	eAudioEvent_AudioChunk                                               smithy.SchemaExtensions
+	e_AudioStream                                                        smithy.SchemaExtensions
+	e_AvailabilityErrorMessage                                           smithy.SchemaExtensions
+	eCloseStreamEvent                                                    smithy.SchemaExtensions
+	e_ContentType                                                        smithy.SchemaExtensions
+	e_CoralAvailabilityThrottledResource                                 smithy.SchemaExtensions
+	e_CoralAvailabilityThrottlingReason                                  smithy.SchemaExtensions
+	e_DateTime                                                           smithy.SchemaExtensions
+	eEngine                                                              smithy.SchemaExtensions
+	eEngine_STANDARD                                                     smithy.SchemaExtensions
+	eEngine_NEURAL                                                       smithy.SchemaExtensions
+	eEngine_LONG_FORM                                                    smithy.SchemaExtensions
+	eEngine_GENERATIVE                                                   smithy.SchemaExtensions
+	e_EngineList                                                         smithy.SchemaExtensions
+	e_EngineList_member                                                  smithy.SchemaExtensions
+	eEngineNotSupportedException                                         smithy.SchemaExtensions
+	eEngineNotSupportedException_message                                 smithy.SchemaExtensions
+	e_ErrorMessage                                                       smithy.SchemaExtensions
+	e_ExceptionMessage                                                   smithy.SchemaExtensions
+	eFlushStreamConfiguration                                            smithy.SchemaExtensions
+	eFlushStreamConfiguration_Force                                      smithy.SchemaExtensions
+	e_Force                                                              smithy.SchemaExtensions
+	eGender                                                              smithy.SchemaExtensions
+	eGender_Female                                                       smithy.SchemaExtensions
+	eGender_Male                                                         smithy.SchemaExtensions
+	e_IncludeAdditionalLanguageCodes                                     smithy.SchemaExtensions
+	eInvalidLexiconException                                             smithy.SchemaExtensions
+	eInvalidLexiconException_message                                     smithy.SchemaExtensions
+	eInvalidNextTokenException                                           smithy.SchemaExtensions
+	eInvalidNextTokenException_message                                   smithy.SchemaExtensions
+	eInvalidS3BucketException                                            smithy.SchemaExtensions
+	eInvalidS3BucketException_message                                    smithy.SchemaExtensions
+	eInvalidS3KeyException                                               smithy.SchemaExtensions
+	eInvalidS3KeyException_message                                       smithy.SchemaExtensions
+	eInvalidSampleRateException                                          smithy.SchemaExtensions
+	eInvalidSampleRateException_message                                  smithy.SchemaExtensions
+	eInvalidSnsTopicArnException                                         smithy.SchemaExtensions
+	eInvalidSnsTopicArnException_message                                 smithy.SchemaExtensions
+	eInvalidSsmlException                                                smithy.SchemaExtensions
+	eInvalidSsmlException_message                                        smithy.SchemaExtensions
+	eInvalidTagParameterException                                        smithy.SchemaExtensions
+	eInvalidTagParameterException_message                                smithy.SchemaExtensions
+	eInvalidTaskIdException                                              smithy.SchemaExtensions
+	eInvalidTaskIdException_message                                      smithy.SchemaExtensions
+	eLanguageCode                                                        smithy.SchemaExtensions
+	eLanguageCode_arb                                                    smithy.SchemaExtensions
+	eLanguageCode_cmn_CN                                                 smithy.SchemaExtensions
+	eLanguageCode_cy_GB                                                  smithy.SchemaExtensions
+	eLanguageCode_da_DK                                                  smithy.SchemaExtensions
+	eLanguageCode_de_DE                                                  smithy.SchemaExtensions
+	eLanguageCode_en_AU                                                  smithy.SchemaExtensions
+	eLanguageCode_en_GB                                                  smithy.SchemaExtensions
+	eLanguageCode_en_GB_WLS                                              smithy.SchemaExtensions
+	eLanguageCode_en_IN                                                  smithy.SchemaExtensions
+	eLanguageCode_en_US                                                  smithy.SchemaExtensions
+	eLanguageCode_es_ES                                                  smithy.SchemaExtensions
+	eLanguageCode_es_MX                                                  smithy.SchemaExtensions
+	eLanguageCode_es_US                                                  smithy.SchemaExtensions
+	eLanguageCode_fr_CA                                                  smithy.SchemaExtensions
+	eLanguageCode_fr_FR                                                  smithy.SchemaExtensions
+	eLanguageCode_is_IS                                                  smithy.SchemaExtensions
+	eLanguageCode_it_IT                                                  smithy.SchemaExtensions
+	eLanguageCode_ja_JP                                                  smithy.SchemaExtensions
+	eLanguageCode_hi_IN                                                  smithy.SchemaExtensions
+	eLanguageCode_ko_KR                                                  smithy.SchemaExtensions
+	eLanguageCode_nb_NO                                                  smithy.SchemaExtensions
+	eLanguageCode_nl_NL                                                  smithy.SchemaExtensions
+	eLanguageCode_pl_PL                                                  smithy.SchemaExtensions
+	eLanguageCode_pt_BR                                                  smithy.SchemaExtensions
+	eLanguageCode_pt_PT                                                  smithy.SchemaExtensions
+	eLanguageCode_ro_RO                                                  smithy.SchemaExtensions
+	eLanguageCode_ru_RU                                                  smithy.SchemaExtensions
+	eLanguageCode_sv_SE                                                  smithy.SchemaExtensions
+	eLanguageCode_tr_TR                                                  smithy.SchemaExtensions
+	eLanguageCode_en_NZ                                                  smithy.SchemaExtensions
+	eLanguageCode_en_ZA                                                  smithy.SchemaExtensions
+	eLanguageCode_ca_ES                                                  smithy.SchemaExtensions
+	eLanguageCode_de_AT                                                  smithy.SchemaExtensions
+	eLanguageCode_yue_CN                                                 smithy.SchemaExtensions
+	eLanguageCode_ar_AE                                                  smithy.SchemaExtensions
+	eLanguageCode_fi_FI                                                  smithy.SchemaExtensions
+	eLanguageCode_en_IE                                                  smithy.SchemaExtensions
+	eLanguageCode_nl_BE                                                  smithy.SchemaExtensions
+	eLanguageCode_fr_BE                                                  smithy.SchemaExtensions
+	eLanguageCode_cs_CZ                                                  smithy.SchemaExtensions
+	eLanguageCode_de_CH                                                  smithy.SchemaExtensions
+	eLanguageCode_en_SG                                                  smithy.SchemaExtensions
+	e_LanguageCodeList                                                   smithy.SchemaExtensions
+	e_LanguageCodeList_member                                            smithy.SchemaExtensions
+	e_LanguageName                                                       smithy.SchemaExtensions
+	eLanguageNotSupportedException                                       smithy.SchemaExtensions
+	eLanguageNotSupportedException_message                               smithy.SchemaExtensions
+	e_LastModified                                                       smithy.SchemaExtensions
+	e_LexemesCount                                                       smithy.SchemaExtensions
+	eLexicon                                                             smithy.SchemaExtensions
+	eLexicon_Content                                                     smithy.SchemaExtensions
+	eLexicon_Name                                                        smithy.SchemaExtensions
+	e_LexiconArn                                                         smithy.SchemaExtensions
+	eLexiconAttributes                                                   smithy.SchemaExtensions
+	eLexiconAttributes_Alphabet                                          smithy.SchemaExtensions
+	eLexiconAttributes_LanguageCode                                      smithy.SchemaExtensions
+	eLexiconAttributes_LastModified                                      smithy.SchemaExtensions
+	eLexiconAttributes_LexiconArn                                        smithy.SchemaExtensions
+	eLexiconAttributes_LexemesCount                                      smithy.SchemaExtensions
+	eLexiconAttributes_Size                                              smithy.SchemaExtensions
+	e_LexiconContent                                                     smithy.SchemaExtensions
+	eLexiconDescription                                                  smithy.SchemaExtensions
+	eLexiconDescription_Name                                             smithy.SchemaExtensions
+	eLexiconDescription_Attributes                                       smithy.SchemaExtensions
+	e_LexiconDescriptionList                                             smithy.SchemaExtensions
+	e_LexiconDescriptionList_member                                      smithy.SchemaExtensions
+	e_LexiconName                                                        smithy.SchemaExtensions
+	e_LexiconNameList                                                    smithy.SchemaExtensions
+	e_LexiconNameList_member                                             smithy.SchemaExtensions
+	eLexiconNotFoundException                                            smithy.SchemaExtensions
+	eLexiconNotFoundException_message                                    smithy.SchemaExtensions
+	eLexiconSizeExceededException                                        smithy.SchemaExtensions
+	eLexiconSizeExceededException_message                                smithy.SchemaExtensions
+	eMarksNotSupportedForFormatException                                 smithy.SchemaExtensions
+	eMarksNotSupportedForFormatException_message                         smithy.SchemaExtensions
+	eMaxLexemeLengthExceededException                                    smithy.SchemaExtensions
+	eMaxLexemeLengthExceededException_message                            smithy.SchemaExtensions
+	eMaxLexiconsNumberExceededException                                  smithy.SchemaExtensions
+	eMaxLexiconsNumberExceededException_message                          smithy.SchemaExtensions
+	e_MaxResults                                                         smithy.SchemaExtensions
+	e_NextToken                                                          smithy.SchemaExtensions
+	eOutputFormat                                                        smithy.SchemaExtensions
+	eOutputFormat_JSON                                                   smithy.SchemaExtensions
+	eOutputFormat_MP3                                                    smithy.SchemaExtensions
+	eOutputFormat_OGG_OPUS                                               smithy.SchemaExtensions
+	eOutputFormat_OGG_VORBIS                                             smithy.SchemaExtensions
+	eOutputFormat_PCM                                                    smithy.SchemaExtensions
+	eOutputFormat_MULAW                                                  smithy.SchemaExtensions
+	eOutputFormat_ALAW                                                   smithy.SchemaExtensions
+	e_OutputS3BucketName                                                 smithy.SchemaExtensions
+	e_OutputS3KeyPrefix                                                  smithy.SchemaExtensions
+	e_OutputUri                                                          smithy.SchemaExtensions
+	eQuotaCode                                                           smithy.SchemaExtensions
+	eQuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT                        smithy.SchemaExtensions
+	eQuotaCode_INPUT_STREAM_TIMEOUT                                      smithy.SchemaExtensions
+	e_RequestCharacters                                                  smithy.SchemaExtensions
+	e_ResourceId                                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                   smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                              smithy.SchemaExtensions
+	eResourceType                                                        smithy.SchemaExtensions
+	eResourceType_LEXICON                                                smithy.SchemaExtensions
+	e_SampleRate                                                         smithy.SchemaExtensions
+	eServiceCode                                                         smithy.SchemaExtensions
+	eServiceCode_POLLY                                                   smithy.SchemaExtensions
+	eServiceFailureException                                             smithy.SchemaExtensions
+	eServiceFailureException_message                                     smithy.SchemaExtensions
+	eServiceQuotaExceededException                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                             smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                           smithy.SchemaExtensions
+	e_Size                                                               smithy.SchemaExtensions
+	e_SnsTopicArn                                                        smithy.SchemaExtensions
+	eSpeechMarkType                                                      smithy.SchemaExtensions
+	eSpeechMarkType_SENTENCE                                             smithy.SchemaExtensions
+	eSpeechMarkType_SSML                                                 smithy.SchemaExtensions
+	eSpeechMarkType_VISEME                                               smithy.SchemaExtensions
+	eSpeechMarkType_WORD                                                 smithy.SchemaExtensions
+	e_SpeechMarkTypeList                                                 smithy.SchemaExtensions
+	e_SpeechMarkTypeList_member                                          smithy.SchemaExtensions
+	eSsmlMarksNotSupportedForTextTypeException                           smithy.SchemaExtensions
+	eSsmlMarksNotSupportedForTextTypeException_message                   smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamActionStream                              smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamActionStream_TextEvent                    smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamActionStream_CloseStreamEvent             smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamEventStream                               smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamEventStream_AudioEvent                    smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamEventStream_StreamClosedEvent             smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamEventStream_ValidationException           smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamEventStream_ServiceFailureException       smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamEventStream_ThrottlingException           smithy.SchemaExtensions
+	eStreamClosedEvent                                                   smithy.SchemaExtensions
+	eStreamClosedEvent_RequestCharacters                                 smithy.SchemaExtensions
+	eSynthesisTask                                                       smithy.SchemaExtensions
+	eSynthesisTask_Engine                                                smithy.SchemaExtensions
+	eSynthesisTask_TaskId                                                smithy.SchemaExtensions
+	eSynthesisTask_TaskStatus                                            smithy.SchemaExtensions
+	eSynthesisTask_TaskStatusReason                                      smithy.SchemaExtensions
+	eSynthesisTask_OutputUri                                             smithy.SchemaExtensions
+	eSynthesisTask_CreationTime                                          smithy.SchemaExtensions
+	eSynthesisTask_RequestCharacters                                     smithy.SchemaExtensions
+	eSynthesisTask_SnsTopicArn                                           smithy.SchemaExtensions
+	eSynthesisTask_LexiconNames                                          smithy.SchemaExtensions
+	eSynthesisTask_OutputFormat                                          smithy.SchemaExtensions
+	eSynthesisTask_SampleRate                                            smithy.SchemaExtensions
+	eSynthesisTask_SpeechMarkTypes                                       smithy.SchemaExtensions
+	eSynthesisTask_TextType                                              smithy.SchemaExtensions
+	eSynthesisTask_VoiceId                                               smithy.SchemaExtensions
+	eSynthesisTask_LanguageCode                                          smithy.SchemaExtensions
+	eSynthesisTaskNotFoundException                                      smithy.SchemaExtensions
+	eSynthesisTaskNotFoundException_message                              smithy.SchemaExtensions
+	e_SynthesisTasks                                                     smithy.SchemaExtensions
+	e_SynthesisTasks_member                                              smithy.SchemaExtensions
+	e_TagKey                                                             smithy.SchemaExtensions
+	e_TagKeyList                                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                                  smithy.SchemaExtensions
+	e_TagMap                                                             smithy.SchemaExtensions
+	e_TagMap_key                                                         smithy.SchemaExtensions
+	e_TagMap_value                                                       smithy.SchemaExtensions
+	e_TagValue                                                           smithy.SchemaExtensions
+	e_TaskId                                                             smithy.SchemaExtensions
+	eTaskStatus                                                          smithy.SchemaExtensions
+	eTaskStatus_SCHEDULED                                                smithy.SchemaExtensions
+	eTaskStatus_IN_PROGRESS                                              smithy.SchemaExtensions
+	eTaskStatus_COMPLETED                                                smithy.SchemaExtensions
+	eTaskStatus_FAILED                                                   smithy.SchemaExtensions
+	e_TaskStatusReason                                                   smithy.SchemaExtensions
+	e_Text                                                               smithy.SchemaExtensions
+	eTextEvent                                                           smithy.SchemaExtensions
+	eTextEvent_Text                                                      smithy.SchemaExtensions
+	eTextEvent_TextType                                                  smithy.SchemaExtensions
+	eTextEvent_FlushStreamConfiguration                                  smithy.SchemaExtensions
+	eTextLengthExceededException                                         smithy.SchemaExtensions
+	eTextLengthExceededException_message                                 smithy.SchemaExtensions
+	eTextType                                                            smithy.SchemaExtensions
+	eTextType_SSML                                                       smithy.SchemaExtensions
+	eTextType_TEXT                                                       smithy.SchemaExtensions
+	eThrottlingException                                                 smithy.SchemaExtensions
+	eThrottlingException_message                                         smithy.SchemaExtensions
+	eThrottlingException_throttlingReasons                               smithy.SchemaExtensions
+	eThrottlingReason                                                    smithy.SchemaExtensions
+	eThrottlingReason_reason                                             smithy.SchemaExtensions
+	eThrottlingReason_resource                                           smithy.SchemaExtensions
+	e_ThrottlingReasonList                                               smithy.SchemaExtensions
+	e_ThrottlingReasonList_member                                        smithy.SchemaExtensions
+	eTooManyTagsException                                                smithy.SchemaExtensions
+	eTooManyTagsException_message                                        smithy.SchemaExtensions
+	eUnsupportedPlsAlphabetException                                     smithy.SchemaExtensions
+	eUnsupportedPlsAlphabetException_message                             smithy.SchemaExtensions
+	eUnsupportedPlsLanguageException                                     smithy.SchemaExtensions
+	eUnsupportedPlsLanguageException_message                             smithy.SchemaExtensions
+	eValidationException                                                 smithy.SchemaExtensions
+	eValidationException_message                                         smithy.SchemaExtensions
+	eValidationException_reason                                          smithy.SchemaExtensions
+	eValidationException_fields                                          smithy.SchemaExtensions
+	eValidationExceptionField                                            smithy.SchemaExtensions
+	eValidationExceptionField_name                                       smithy.SchemaExtensions
+	eValidationExceptionField_message                                    smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                       smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                smithy.SchemaExtensions
+	e_ValidationExceptionFieldMessage                                    smithy.SchemaExtensions
+	e_ValidationExceptionFieldName                                       smithy.SchemaExtensions
+	eValidationExceptionReason                                           smithy.SchemaExtensions
+	eValidationExceptionReason_UNSUPPORTED_OPERATION                     smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                   smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                     smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_INBOUND_EVENT                     smithy.SchemaExtensions
+	eVoice                                                               smithy.SchemaExtensions
+	eVoice_Gender                                                        smithy.SchemaExtensions
+	eVoice_Id                                                            smithy.SchemaExtensions
+	eVoice_LanguageCode                                                  smithy.SchemaExtensions
+	eVoice_LanguageName                                                  smithy.SchemaExtensions
+	eVoice_Name                                                          smithy.SchemaExtensions
+	eVoice_AdditionalLanguageCodes                                       smithy.SchemaExtensions
+	eVoice_SupportedEngines                                              smithy.SchemaExtensions
+	eVoiceId                                                             smithy.SchemaExtensions
+	eVoiceId_Aditi                                                       smithy.SchemaExtensions
+	eVoiceId_Amy                                                         smithy.SchemaExtensions
+	eVoiceId_Astrid                                                      smithy.SchemaExtensions
+	eVoiceId_Bianca                                                      smithy.SchemaExtensions
+	eVoiceId_Brian                                                       smithy.SchemaExtensions
+	eVoiceId_Camila                                                      smithy.SchemaExtensions
+	eVoiceId_Carla                                                       smithy.SchemaExtensions
+	eVoiceId_Carmen                                                      smithy.SchemaExtensions
+	eVoiceId_Celine                                                      smithy.SchemaExtensions
+	eVoiceId_Chantal                                                     smithy.SchemaExtensions
+	eVoiceId_Conchita                                                    smithy.SchemaExtensions
+	eVoiceId_Cristiano                                                   smithy.SchemaExtensions
+	eVoiceId_Dora                                                        smithy.SchemaExtensions
+	eVoiceId_Emma                                                        smithy.SchemaExtensions
+	eVoiceId_Enrique                                                     smithy.SchemaExtensions
+	eVoiceId_Ewa                                                         smithy.SchemaExtensions
+	eVoiceId_Filiz                                                       smithy.SchemaExtensions
+	eVoiceId_Gabrielle                                                   smithy.SchemaExtensions
+	eVoiceId_Geraint                                                     smithy.SchemaExtensions
+	eVoiceId_Giorgio                                                     smithy.SchemaExtensions
+	eVoiceId_Gwyneth                                                     smithy.SchemaExtensions
+	eVoiceId_Hans                                                        smithy.SchemaExtensions
+	eVoiceId_Ines                                                        smithy.SchemaExtensions
+	eVoiceId_Ivy                                                         smithy.SchemaExtensions
+	eVoiceId_Jacek                                                       smithy.SchemaExtensions
+	eVoiceId_Jan                                                         smithy.SchemaExtensions
+	eVoiceId_Joanna                                                      smithy.SchemaExtensions
+	eVoiceId_Joey                                                        smithy.SchemaExtensions
+	eVoiceId_Justin                                                      smithy.SchemaExtensions
+	eVoiceId_Karl                                                        smithy.SchemaExtensions
+	eVoiceId_Kendra                                                      smithy.SchemaExtensions
+	eVoiceId_Kevin                                                       smithy.SchemaExtensions
+	eVoiceId_Kimberly                                                    smithy.SchemaExtensions
+	eVoiceId_Lea                                                         smithy.SchemaExtensions
+	eVoiceId_Liv                                                         smithy.SchemaExtensions
+	eVoiceId_Lotte                                                       smithy.SchemaExtensions
+	eVoiceId_Lucia                                                       smithy.SchemaExtensions
+	eVoiceId_Lupe                                                        smithy.SchemaExtensions
+	eVoiceId_Mads                                                        smithy.SchemaExtensions
+	eVoiceId_Maja                                                        smithy.SchemaExtensions
+	eVoiceId_Marlene                                                     smithy.SchemaExtensions
+	eVoiceId_Mathieu                                                     smithy.SchemaExtensions
+	eVoiceId_Matthew                                                     smithy.SchemaExtensions
+	eVoiceId_Maxim                                                       smithy.SchemaExtensions
+	eVoiceId_Mia                                                         smithy.SchemaExtensions
+	eVoiceId_Miguel                                                      smithy.SchemaExtensions
+	eVoiceId_Mizuki                                                      smithy.SchemaExtensions
+	eVoiceId_Naja                                                        smithy.SchemaExtensions
+	eVoiceId_Nicole                                                      smithy.SchemaExtensions
+	eVoiceId_Olivia                                                      smithy.SchemaExtensions
+	eVoiceId_Penelope                                                    smithy.SchemaExtensions
+	eVoiceId_Raveena                                                     smithy.SchemaExtensions
+	eVoiceId_Ricardo                                                     smithy.SchemaExtensions
+	eVoiceId_Ruben                                                       smithy.SchemaExtensions
+	eVoiceId_Russell                                                     smithy.SchemaExtensions
+	eVoiceId_Salli                                                       smithy.SchemaExtensions
+	eVoiceId_Seoyeon                                                     smithy.SchemaExtensions
+	eVoiceId_Takumi                                                      smithy.SchemaExtensions
+	eVoiceId_Tatyana                                                     smithy.SchemaExtensions
+	eVoiceId_Vicki                                                       smithy.SchemaExtensions
+	eVoiceId_Vitoria                                                     smithy.SchemaExtensions
+	eVoiceId_Zeina                                                       smithy.SchemaExtensions
+	eVoiceId_Zhiyu                                                       smithy.SchemaExtensions
+	eVoiceId_Aria                                                        smithy.SchemaExtensions
+	eVoiceId_Ayanda                                                      smithy.SchemaExtensions
+	eVoiceId_Arlet                                                       smithy.SchemaExtensions
+	eVoiceId_Hannah                                                      smithy.SchemaExtensions
+	eVoiceId_Arthur                                                      smithy.SchemaExtensions
+	eVoiceId_Daniel                                                      smithy.SchemaExtensions
+	eVoiceId_Liam                                                        smithy.SchemaExtensions
+	eVoiceId_Pedro                                                       smithy.SchemaExtensions
+	eVoiceId_Kajal                                                       smithy.SchemaExtensions
+	eVoiceId_Hiujin                                                      smithy.SchemaExtensions
+	eVoiceId_Laura                                                       smithy.SchemaExtensions
+	eVoiceId_Elin                                                        smithy.SchemaExtensions
+	eVoiceId_Ida                                                         smithy.SchemaExtensions
+	eVoiceId_Suvi                                                        smithy.SchemaExtensions
+	eVoiceId_Ola                                                         smithy.SchemaExtensions
+	eVoiceId_Hala                                                        smithy.SchemaExtensions
+	eVoiceId_Andres                                                      smithy.SchemaExtensions
+	eVoiceId_Sergio                                                      smithy.SchemaExtensions
+	eVoiceId_Remi                                                        smithy.SchemaExtensions
+	eVoiceId_Adriano                                                     smithy.SchemaExtensions
+	eVoiceId_Thiago                                                      smithy.SchemaExtensions
+	eVoiceId_Ruth                                                        smithy.SchemaExtensions
+	eVoiceId_Stephen                                                     smithy.SchemaExtensions
+	eVoiceId_Kazuha                                                      smithy.SchemaExtensions
+	eVoiceId_Tomoko                                                      smithy.SchemaExtensions
+	eVoiceId_Niamh                                                       smithy.SchemaExtensions
+	eVoiceId_Sofie                                                       smithy.SchemaExtensions
+	eVoiceId_Lisa                                                        smithy.SchemaExtensions
+	eVoiceId_Isabelle                                                    smithy.SchemaExtensions
+	eVoiceId_Zayd                                                        smithy.SchemaExtensions
+	eVoiceId_Danielle                                                    smithy.SchemaExtensions
+	eVoiceId_Gregory                                                     smithy.SchemaExtensions
+	eVoiceId_Burcu                                                       smithy.SchemaExtensions
+	eVoiceId_Jitka                                                       smithy.SchemaExtensions
+	eVoiceId_Sabrina                                                     smithy.SchemaExtensions
+	eVoiceId_Jasmine                                                     smithy.SchemaExtensions
+	eVoiceId_Jihye                                                       smithy.SchemaExtensions
+	eVoiceId_Ambre                                                       smithy.SchemaExtensions
+	eVoiceId_Beatrice                                                    smithy.SchemaExtensions
+	eVoiceId_Florian                                                     smithy.SchemaExtensions
+	eVoiceId_Lennart                                                     smithy.SchemaExtensions
+	eVoiceId_Lorenzo                                                     smithy.SchemaExtensions
+	eVoiceId_Tiffany                                                     smithy.SchemaExtensions
+	eVoiceId_Arjun                                                       smithy.SchemaExtensions
+	eVoiceId_Carlos                                                      smithy.SchemaExtensions
+	eVoiceId_Carolina                                                    smithy.SchemaExtensions
+	eVoiceId_Curtis                                                      smithy.SchemaExtensions
+	eVoiceId_Hyunduk                                                     smithy.SchemaExtensions
+	eVoiceId_Kenneth                                                     smithy.SchemaExtensions
+	eVoiceId_Kiara                                                       smithy.SchemaExtensions
+	eVoiceId_Leo                                                         smithy.SchemaExtensions
+	eVoiceId_Nate                                                        smithy.SchemaExtensions
+	eVoiceId_Tina                                                        smithy.SchemaExtensions
+	e_VoiceList                                                          smithy.SchemaExtensions
+	e_VoiceList_member                                                   smithy.SchemaExtensions
+	e_VoiceName                                                          smithy.SchemaExtensions
+	eDeleteLexiconInput                                                  smithy.SchemaExtensions
+	eDeleteLexiconInput_Name                                             smithy.SchemaExtensions
+	eDeleteLexiconOutput                                                 smithy.SchemaExtensions
+	eDescribeVoicesInput                                                 smithy.SchemaExtensions
+	eDescribeVoicesInput_Engine                                          smithy.SchemaExtensions
+	eDescribeVoicesInput_LanguageCode                                    smithy.SchemaExtensions
+	eDescribeVoicesInput_IncludeAdditionalLanguageCodes                  smithy.SchemaExtensions
+	eDescribeVoicesInput_NextToken                                       smithy.SchemaExtensions
+	eDescribeVoicesOutput                                                smithy.SchemaExtensions
+	eDescribeVoicesOutput_Voices                                         smithy.SchemaExtensions
+	eDescribeVoicesOutput_NextToken                                      smithy.SchemaExtensions
+	eGetLexiconInput                                                     smithy.SchemaExtensions
+	eGetLexiconInput_Name                                                smithy.SchemaExtensions
+	eGetLexiconOutput                                                    smithy.SchemaExtensions
+	eGetLexiconOutput_Lexicon                                            smithy.SchemaExtensions
+	eGetLexiconOutput_LexiconAttributes                                  smithy.SchemaExtensions
+	eGetSpeechSynthesisTaskInput                                         smithy.SchemaExtensions
+	eGetSpeechSynthesisTaskInput_TaskId                                  smithy.SchemaExtensions
+	eGetSpeechSynthesisTaskOutput                                        smithy.SchemaExtensions
+	eGetSpeechSynthesisTaskOutput_SynthesisTask                          smithy.SchemaExtensions
+	eListLexiconsInput                                                   smithy.SchemaExtensions
+	eListLexiconsInput_NextToken                                         smithy.SchemaExtensions
+	eListLexiconsOutput                                                  smithy.SchemaExtensions
+	eListLexiconsOutput_Lexicons                                         smithy.SchemaExtensions
+	eListLexiconsOutput_NextToken                                        smithy.SchemaExtensions
+	eListSpeechSynthesisTasksInput                                       smithy.SchemaExtensions
+	eListSpeechSynthesisTasksInput_MaxResults                            smithy.SchemaExtensions
+	eListSpeechSynthesisTasksInput_NextToken                             smithy.SchemaExtensions
+	eListSpeechSynthesisTasksInput_Status                                smithy.SchemaExtensions
+	eListSpeechSynthesisTasksOutput                                      smithy.SchemaExtensions
+	eListSpeechSynthesisTasksOutput_NextToken                            smithy.SchemaExtensions
+	eListSpeechSynthesisTasksOutput_SynthesisTasks                       smithy.SchemaExtensions
+	eListTagsForResourceInput                                            smithy.SchemaExtensions
+	eListTagsForResourceInput_ResourceArn                                smithy.SchemaExtensions
+	eListTagsForResourceOutput                                           smithy.SchemaExtensions
+	eListTagsForResourceOutput_Tags                                      smithy.SchemaExtensions
+	ePutLexiconInput                                                     smithy.SchemaExtensions
+	ePutLexiconInput_Name                                                smithy.SchemaExtensions
+	ePutLexiconInput_Content                                             smithy.SchemaExtensions
+	ePutLexiconInput_Tags                                                smithy.SchemaExtensions
+	ePutLexiconOutput                                                    smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput                                     smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput_Engine                              smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput_LanguageCode                        smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput_LexiconNames                        smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput_OutputFormat                        smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput_SampleRate                          smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput_VoiceId                             smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamInput_ActionStream                        smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamOutput                                    smithy.SchemaExtensions
+	eStartSpeechSynthesisStreamOutput_EventStream                        smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput                                       smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_Engine                                smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_LanguageCode                          smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_LexiconNames                          smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_OutputFormat                          smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_OutputS3BucketName                    smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_OutputS3KeyPrefix                     smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_SampleRate                            smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_SnsTopicArn                           smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_SpeechMarkTypes                       smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_Text                                  smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_TextType                              smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskInput_VoiceId                               smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskOutput                                      smithy.SchemaExtensions
+	eStartSpeechSynthesisTaskOutput_SynthesisTask                        smithy.SchemaExtensions
+	eSynthesizeSpeechInput                                               smithy.SchemaExtensions
+	eSynthesizeSpeechInput_Engine                                        smithy.SchemaExtensions
+	eSynthesizeSpeechInput_LanguageCode                                  smithy.SchemaExtensions
+	eSynthesizeSpeechInput_LexiconNames                                  smithy.SchemaExtensions
+	eSynthesizeSpeechInput_OutputFormat                                  smithy.SchemaExtensions
+	eSynthesizeSpeechInput_SampleRate                                    smithy.SchemaExtensions
+	eSynthesizeSpeechInput_SpeechMarkTypes                               smithy.SchemaExtensions
+	eSynthesizeSpeechInput_Text                                          smithy.SchemaExtensions
+	eSynthesizeSpeechInput_TextType                                      smithy.SchemaExtensions
+	eSynthesizeSpeechInput_VoiceId                                       smithy.SchemaExtensions
+	eSynthesizeSpeechOutput                                              smithy.SchemaExtensions
+	eSynthesizeSpeechOutput_AudioStream                                  smithy.SchemaExtensions
+	eSynthesizeSpeechOutput_ContentType                                  smithy.SchemaExtensions
+	eSynthesizeSpeechOutput_RequestCharacters                            smithy.SchemaExtensions
+	eTagResourceInput                                                    smithy.SchemaExtensions
+	eTagResourceInput_ResourceArn                                        smithy.SchemaExtensions
+	eTagResourceInput_Tags                                               smithy.SchemaExtensions
+	eTagResourceOutput                                                   smithy.SchemaExtensions
+	eUntagResourceInput                                                  smithy.SchemaExtensions
+	eUntagResourceInput_ResourceArn                                      smithy.SchemaExtensions
+	eUntagResourceInput_TagKeys                                          smithy.SchemaExtensions
+	eUntagResourceOutput                                                 smithy.SchemaExtensions
+)
 
-var DescribeVoices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "DescribeVoices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	iDeleteLexicon                             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "DeleteLexicon"}
+	iDescribeVoices                            = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "DescribeVoices"}
+	iGetLexicon                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "GetLexicon"}
+	iGetSpeechSynthesisTask                    = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "GetSpeechSynthesisTask"}
+	iListLexicons                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListLexicons"}
+	iListSpeechSynthesisTasks                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListSpeechSynthesisTasks"}
+	iListTagsForResource                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListTagsForResource"}
+	iPutLexicon                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "PutLexicon"}
+	iStartSpeechSynthesisStream                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisStream"}
+	iStartSpeechSynthesisTask                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisTask"}
+	iSynthesizeSpeech                          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SynthesizeSpeech"}
+	iTagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "UntagResource"}
+	i_Parrot_v1                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Parrot_v1"}
+	i_Alphabet                                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Alphabet"}
+	i_AmazonResourceName                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "AmazonResourceName"}
+	i_AudioChunk                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "AudioChunk"}
+	iAudioEvent                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "AudioEvent"}
+	i_AudioStream                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "AudioStream"}
+	i_AvailabilityErrorMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "AvailabilityErrorMessage"}
+	iCloseStreamEvent                          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "CloseStreamEvent"}
+	i_ContentType                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ContentType"}
+	i_CoralAvailabilityThrottledResource       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "CoralAvailabilityThrottledResource"}
+	i_CoralAvailabilityThrottlingReason        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "CoralAvailabilityThrottlingReason"}
+	i_DateTime                                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "DateTime"}
+	iEngine                                    = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Engine"}
+	i_EngineList                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "EngineList"}
+	iEngineNotSupportedException               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "EngineNotSupportedException"}
+	i_ErrorMessage                             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ErrorMessage"}
+	i_ExceptionMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ExceptionMessage"}
+	iFlushStreamConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "FlushStreamConfiguration"}
+	i_Force                                    = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Force"}
+	iGender                                    = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Gender"}
+	i_IncludeAdditionalLanguageCodes           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "IncludeAdditionalLanguageCodes"}
+	iInvalidLexiconException                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidLexiconException"}
+	iInvalidNextTokenException                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidNextTokenException"}
+	iInvalidS3BucketException                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidS3BucketException"}
+	iInvalidS3KeyException                     = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidS3KeyException"}
+	iInvalidSampleRateException                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidSampleRateException"}
+	iInvalidSnsTopicArnException               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidSnsTopicArnException"}
+	iInvalidSsmlException                      = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidSsmlException"}
+	iInvalidTagParameterException              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidTagParameterException"}
+	iInvalidTaskIdException                    = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "InvalidTaskIdException"}
+	iLanguageCode                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LanguageCode"}
+	i_LanguageCodeList                         = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LanguageCodeList"}
+	i_LanguageName                             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LanguageName"}
+	iLanguageNotSupportedException             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LanguageNotSupportedException"}
+	i_LastModified                             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LastModified"}
+	i_LexemesCount                             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexemesCount"}
+	iLexicon                                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Lexicon"}
+	i_LexiconArn                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconArn"}
+	iLexiconAttributes                         = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconAttributes"}
+	i_LexiconContent                           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconContent"}
+	iLexiconDescription                        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconDescription"}
+	i_LexiconDescriptionList                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconDescriptionList"}
+	i_LexiconName                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconName"}
+	i_LexiconNameList                          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconNameList"}
+	iLexiconNotFoundException                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconNotFoundException"}
+	iLexiconSizeExceededException              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "LexiconSizeExceededException"}
+	iMarksNotSupportedForFormatException       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "MarksNotSupportedForFormatException"}
+	iMaxLexemeLengthExceededException          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "MaxLexemeLengthExceededException"}
+	iMaxLexiconsNumberExceededException        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "MaxLexiconsNumberExceededException"}
+	i_MaxResults                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "MaxResults"}
+	i_NextToken                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "NextToken"}
+	iOutputFormat                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "OutputFormat"}
+	i_OutputS3BucketName                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "OutputS3BucketName"}
+	i_OutputS3KeyPrefix                        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "OutputS3KeyPrefix"}
+	i_OutputUri                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "OutputUri"}
+	iQuotaCode                                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "QuotaCode"}
+	i_RequestCharacters                        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "RequestCharacters"}
+	i_ResourceId                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ResourceId"}
+	iResourceNotFoundException                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ResourceNotFoundException"}
+	iResourceType                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ResourceType"}
+	i_SampleRate                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SampleRate"}
+	iServiceCode                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ServiceCode"}
+	iServiceFailureException                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ServiceFailureException"}
+	iServiceQuotaExceededException             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ServiceQuotaExceededException"}
+	i_Size                                     = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Size"}
+	i_SnsTopicArn                              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SnsTopicArn"}
+	iSpeechMarkType                            = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SpeechMarkType"}
+	i_SpeechMarkTypeList                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SpeechMarkTypeList"}
+	iSsmlMarksNotSupportedForTextTypeException = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SsmlMarksNotSupportedForTextTypeException"}
+	iStartSpeechSynthesisStreamActionStream    = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisStreamActionStream"}
+	iStartSpeechSynthesisStreamEventStream     = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisStreamEventStream"}
+	iStreamClosedEvent                         = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StreamClosedEvent"}
+	iSynthesisTask                             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SynthesisTask"}
+	iSynthesisTaskNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SynthesisTaskNotFoundException"}
+	i_SynthesisTasks                           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SynthesisTasks"}
+	i_TagKey                                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TagKey"}
+	i_TagKeyList                               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TagKeyList"}
+	i_TagMap                                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TagMap"}
+	i_TagValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TagValue"}
+	i_TaskId                                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TaskId"}
+	iTaskStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TaskStatus"}
+	i_TaskStatusReason                         = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TaskStatusReason"}
+	i_Text                                     = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Text"}
+	iTextEvent                                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TextEvent"}
+	iTextLengthExceededException               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TextLengthExceededException"}
+	iTextType                                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TextType"}
+	iThrottlingException                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ThrottlingException"}
+	iThrottlingReason                          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ThrottlingReason"}
+	i_ThrottlingReasonList                     = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ThrottlingReasonList"}
+	iTooManyTagsException                      = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TooManyTagsException"}
+	iUnsupportedPlsAlphabetException           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "UnsupportedPlsAlphabetException"}
+	iUnsupportedPlsLanguageException           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "UnsupportedPlsLanguageException"}
+	iValidationException                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ValidationException"}
+	iValidationExceptionField                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ValidationExceptionFieldList"}
+	i_ValidationExceptionFieldMessage          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ValidationExceptionFieldMessage"}
+	i_ValidationExceptionFieldName             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ValidationExceptionFieldName"}
+	iValidationExceptionReason                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ValidationExceptionReason"}
+	iVoice                                     = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "Voice"}
+	iVoiceId                                   = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "VoiceId"}
+	i_VoiceList                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "VoiceList"}
+	i_VoiceName                                = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "VoiceName"}
+	iDeleteLexiconInput                        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "DeleteLexiconInput"}
+	iDeleteLexiconOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "DeleteLexiconOutput"}
+	iDescribeVoicesInput                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "DescribeVoicesInput"}
+	iDescribeVoicesOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "DescribeVoicesOutput"}
+	iGetLexiconInput                           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "GetLexiconInput"}
+	iGetLexiconOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "GetLexiconOutput"}
+	iGetSpeechSynthesisTaskInput               = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "GetSpeechSynthesisTaskInput"}
+	iGetSpeechSynthesisTaskOutput              = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "GetSpeechSynthesisTaskOutput"}
+	iListLexiconsInput                         = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListLexiconsInput"}
+	iListLexiconsOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListLexiconsOutput"}
+	iListSpeechSynthesisTasksInput             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListSpeechSynthesisTasksInput"}
+	iListSpeechSynthesisTasksOutput            = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListSpeechSynthesisTasksOutput"}
+	iListTagsForResourceInput                  = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "ListTagsForResourceOutput"}
+	iPutLexiconInput                           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "PutLexiconInput"}
+	iPutLexiconOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "PutLexiconOutput"}
+	iStartSpeechSynthesisStreamInput           = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisStreamInput"}
+	iStartSpeechSynthesisStreamOutput          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisStreamOutput"}
+	iStartSpeechSynthesisTaskInput             = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisTaskInput"}
+	iStartSpeechSynthesisTaskOutput            = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "StartSpeechSynthesisTaskOutput"}
+	iSynthesizeSpeechInput                     = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SynthesizeSpeechInput"}
+	iSynthesizeSpeechOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "SynthesizeSpeechOutput"}
+	iTagResourceInput                          = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TagResourceInput"}
+	iTagResourceOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "TagResourceOutput"}
+	iUntagResourceInput                        = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "UntagResourceInput"}
+	iUntagResourceOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.polly", Name: "UntagResourceOutput"}
+	pUnit                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/lexicons/{Name}",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/voices",
-	Code: 200})
-
-var GetLexicon = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "GetLexicon",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/lexicons/{Name}",
-	Code: 200})
-
-var GetSpeechSynthesisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "GetSpeechSynthesisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/synthesisTasks/{TaskId}",
-	Code: 200})
-
-var ListLexicons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListLexicons",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/lexicons",
-	Code: 200})
-
-var ListSpeechSynthesisTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListSpeechSynthesisTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/synthesisTasks",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/listTagsForResource",
-	Code: 200})
-
-var PutLexicon = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "PutLexicon",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/lexicons/{Name}",
-	Code: 200})
-
-var StartSpeechSynthesisStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/synthesisStream",
-	Code: 200})
-
-var StartSpeechSynthesisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/synthesisTasks",
-	Code: 200})
-
-var SynthesizeSpeech = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SynthesizeSpeech",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/speech",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/untagResource",
-	Code: 200})
-
-var _Parrot_v1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Parrot_v1",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://polly.amazonaws.com/doc/v1"})
-
-var Parrot_v1 = smithy.NewServiceSchema(_Parrot_v1, "2016-06-10")
-
-var _Alphabet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Alphabet",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _AudioChunk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "AudioChunk",
-}, smithy.ShapeTypeBlob, 0)
-
-var AudioEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "AudioEvent",
-}, smithy.ShapeTypeStructure, 1)
-var AudioEvent_AudioChunk *smithy.Schema
-
-var _AudioStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "AudioStream",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _AvailabilityErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "AvailabilityErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var CloseStreamEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "CloseStreamEvent",
-}, smithy.ShapeTypeStructure, 0)
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _CoralAvailabilityThrottledResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "CoralAvailabilityThrottledResource",
-}, smithy.ShapeTypeString, 0)
-
-var _CoralAvailabilityThrottlingReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "CoralAvailabilityThrottlingReason",
-}, smithy.ShapeTypeString, 0)
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Engine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Engine",
-}, smithy.ShapeTypeEnum, 4)
-var Engine_STANDARD *smithy.Schema
-
-var Engine_NEURAL *smithy.Schema
-
-var Engine_LONG_FORM *smithy.Schema
-
-var Engine_GENERATIVE *smithy.Schema
-
-var _EngineList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "EngineList",
-}, smithy.ShapeTypeList, 1)
-var _EngineList_member *smithy.Schema
-
-var EngineNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "EngineNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var EngineNotSupportedException_message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FlushStreamConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "FlushStreamConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var FlushStreamConfiguration_Force *smithy.Schema
-
-var _Force = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Force",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Gender = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Gender",
-}, smithy.ShapeTypeEnum, 2)
-var Gender_Female *smithy.Schema
-
-var Gender_Male *smithy.Schema
-
-var _IncludeAdditionalLanguageCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "IncludeAdditionalLanguageCodes",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InvalidLexiconException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidLexiconException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidLexiconException_message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_message *smithy.Schema
-
-var InvalidS3BucketException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidS3BucketException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidS3BucketException_message *smithy.Schema
-
-var InvalidS3KeyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidS3KeyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidS3KeyException_message *smithy.Schema
-
-var InvalidSampleRateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidSampleRateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidSampleRateException_message *smithy.Schema
-
-var InvalidSnsTopicArnException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidSnsTopicArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidSnsTopicArnException_message *smithy.Schema
-
-var InvalidSsmlException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidSsmlException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidSsmlException_message *smithy.Schema
-
-var InvalidTagParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidTagParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidTagParameterException_message *smithy.Schema
-
-var InvalidTaskIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "InvalidTaskIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidTaskIdException_message *smithy.Schema
-
-var LanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LanguageCode",
-}, smithy.ShapeTypeEnum, 42)
-var LanguageCode_arb *smithy.Schema
-
-var LanguageCode_cmn_CN *smithy.Schema
-
-var LanguageCode_cy_GB *smithy.Schema
-
-var LanguageCode_da_DK *smithy.Schema
-
-var LanguageCode_de_DE *smithy.Schema
-
-var LanguageCode_en_AU *smithy.Schema
-
-var LanguageCode_en_GB *smithy.Schema
-
-var LanguageCode_en_GB_WLS *smithy.Schema
-
-var LanguageCode_en_IN *smithy.Schema
-
-var LanguageCode_en_US *smithy.Schema
-
-var LanguageCode_es_ES *smithy.Schema
-
-var LanguageCode_es_MX *smithy.Schema
-
-var LanguageCode_es_US *smithy.Schema
-
-var LanguageCode_fr_CA *smithy.Schema
-
-var LanguageCode_fr_FR *smithy.Schema
-
-var LanguageCode_is_IS *smithy.Schema
-
-var LanguageCode_it_IT *smithy.Schema
-
-var LanguageCode_ja_JP *smithy.Schema
-
-var LanguageCode_hi_IN *smithy.Schema
-
-var LanguageCode_ko_KR *smithy.Schema
-
-var LanguageCode_nb_NO *smithy.Schema
-
-var LanguageCode_nl_NL *smithy.Schema
-
-var LanguageCode_pl_PL *smithy.Schema
-
-var LanguageCode_pt_BR *smithy.Schema
-
-var LanguageCode_pt_PT *smithy.Schema
-
-var LanguageCode_ro_RO *smithy.Schema
-
-var LanguageCode_ru_RU *smithy.Schema
-
-var LanguageCode_sv_SE *smithy.Schema
-
-var LanguageCode_tr_TR *smithy.Schema
-
-var LanguageCode_en_NZ *smithy.Schema
-
-var LanguageCode_en_ZA *smithy.Schema
-
-var LanguageCode_ca_ES *smithy.Schema
-
-var LanguageCode_de_AT *smithy.Schema
-
-var LanguageCode_yue_CN *smithy.Schema
-
-var LanguageCode_ar_AE *smithy.Schema
-
-var LanguageCode_fi_FI *smithy.Schema
-
-var LanguageCode_en_IE *smithy.Schema
-
-var LanguageCode_nl_BE *smithy.Schema
-
-var LanguageCode_fr_BE *smithy.Schema
-
-var LanguageCode_cs_CZ *smithy.Schema
-
-var LanguageCode_de_CH *smithy.Schema
-
-var LanguageCode_en_SG *smithy.Schema
-
-var _LanguageCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LanguageCodeList",
-}, smithy.ShapeTypeList, 1)
-var _LanguageCodeList_member *smithy.Schema
-
-var _LanguageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LanguageName",
-}, smithy.ShapeTypeString, 0)
-
-var LanguageNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LanguageNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LanguageNotSupportedException_message *smithy.Schema
-
-var _LastModified = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LastModified",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _LexemesCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexemesCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var Lexicon = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Lexicon",
-}, smithy.ShapeTypeStructure, 2)
-var Lexicon_Content *smithy.Schema
-
-var Lexicon_Name *smithy.Schema
-
-var _LexiconArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconArn",
-}, smithy.ShapeTypeString, 0)
-
-var LexiconAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var LexiconAttributes_Alphabet *smithy.Schema
-
-var LexiconAttributes_LanguageCode *smithy.Schema
-
-var LexiconAttributes_LastModified *smithy.Schema
-
-var LexiconAttributes_LexiconArn *smithy.Schema
-
-var LexiconAttributes_LexemesCount *smithy.Schema
-
-var LexiconAttributes_Size *smithy.Schema
-
-var _LexiconContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconContent",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var LexiconDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconDescription",
-}, smithy.ShapeTypeStructure, 2)
-var LexiconDescription_Name *smithy.Schema
-
-var LexiconDescription_Attributes *smithy.Schema
-
-var _LexiconDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _LexiconDescriptionList_member *smithy.Schema
-
-var _LexiconName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconName",
-}, smithy.ShapeTypeString, 0)
-
-var _LexiconNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconNameList",
-}, smithy.ShapeTypeList, 1)
-var _LexiconNameList_member *smithy.Schema
-
-var LexiconNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var LexiconNotFoundException_message *smithy.Schema
-
-var LexiconSizeExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "LexiconSizeExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LexiconSizeExceededException_message *smithy.Schema
-
-var MarksNotSupportedForFormatException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "MarksNotSupportedForFormatException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MarksNotSupportedForFormatException_message *smithy.Schema
-
-var MaxLexemeLengthExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "MaxLexemeLengthExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MaxLexemeLengthExceededException_message *smithy.Schema
-
-var MaxLexiconsNumberExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "MaxLexiconsNumberExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MaxLexiconsNumberExceededException_message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "OutputFormat",
-}, smithy.ShapeTypeEnum, 7)
-var OutputFormat_JSON *smithy.Schema
-
-var OutputFormat_MP3 *smithy.Schema
-
-var OutputFormat_OGG_OPUS *smithy.Schema
-
-var OutputFormat_OGG_VORBIS *smithy.Schema
-
-var OutputFormat_PCM *smithy.Schema
-
-var OutputFormat_MULAW *smithy.Schema
-
-var OutputFormat_ALAW *smithy.Schema
-
-var _OutputS3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "OutputS3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _OutputS3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "OutputS3KeyPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _OutputUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "OutputUri",
-}, smithy.ShapeTypeString, 0)
-
-var QuotaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "QuotaCode",
-}, smithy.ShapeTypeEnum, 2)
-var QuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT *smithy.Schema
-
-var QuotaCode_INPUT_STREAM_TIMEOUT *smithy.Schema
-
-var _RequestCharacters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "RequestCharacters",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 1)
-var ResourceType_LEXICON *smithy.Schema
-
-var _SampleRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SampleRate",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeEnum, 1)
-var ServiceCode_POLLY *smithy.Schema
-
-var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceFailureException_message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var _Size = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Size",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SnsTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SnsTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var SpeechMarkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SpeechMarkType",
-}, smithy.ShapeTypeEnum, 4)
-var SpeechMarkType_SENTENCE *smithy.Schema
-
-var SpeechMarkType_SSML *smithy.Schema
-
-var SpeechMarkType_VISEME *smithy.Schema
-
-var SpeechMarkType_WORD *smithy.Schema
-
-var _SpeechMarkTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SpeechMarkTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SpeechMarkTypeList_member *smithy.Schema
-
-var SsmlMarksNotSupportedForTextTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SsmlMarksNotSupportedForTextTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SsmlMarksNotSupportedForTextTypeException_message *smithy.Schema
-
-var StartSpeechSynthesisStreamActionStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisStreamActionStream",
-}, smithy.ShapeTypeUnion, 2, &smithytraits.Streaming{})
-var StartSpeechSynthesisStreamActionStream_TextEvent *smithy.Schema
-
-var StartSpeechSynthesisStreamActionStream_CloseStreamEvent *smithy.Schema
-
-var StartSpeechSynthesisStreamEventStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisStreamEventStream",
-}, smithy.ShapeTypeUnion, 6, &smithytraits.Streaming{})
-var StartSpeechSynthesisStreamEventStream_AudioEvent *smithy.Schema
-
-var StartSpeechSynthesisStreamEventStream_StreamClosedEvent *smithy.Schema
-
-var StartSpeechSynthesisStreamEventStream_ValidationException *smithy.Schema
-
-var StartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException *smithy.Schema
-
-var StartSpeechSynthesisStreamEventStream_ServiceFailureException *smithy.Schema
-
-var StartSpeechSynthesisStreamEventStream_ThrottlingException *smithy.Schema
-
-var StreamClosedEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StreamClosedEvent",
-}, smithy.ShapeTypeStructure, 1)
-var StreamClosedEvent_RequestCharacters *smithy.Schema
-
-var SynthesisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SynthesisTask",
-}, smithy.ShapeTypeStructure, 15)
-var SynthesisTask_Engine *smithy.Schema
-
-var SynthesisTask_TaskId *smithy.Schema
-
-var SynthesisTask_TaskStatus *smithy.Schema
-
-var SynthesisTask_TaskStatusReason *smithy.Schema
-
-var SynthesisTask_OutputUri *smithy.Schema
-
-var SynthesisTask_CreationTime *smithy.Schema
-
-var SynthesisTask_RequestCharacters *smithy.Schema
-
-var SynthesisTask_SnsTopicArn *smithy.Schema
-
-var SynthesisTask_LexiconNames *smithy.Schema
-
-var SynthesisTask_OutputFormat *smithy.Schema
-
-var SynthesisTask_SampleRate *smithy.Schema
-
-var SynthesisTask_SpeechMarkTypes *smithy.Schema
-
-var SynthesisTask_TextType *smithy.Schema
-
-var SynthesisTask_VoiceId *smithy.Schema
-
-var SynthesisTask_LanguageCode *smithy.Schema
-
-var SynthesisTaskNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SynthesisTaskNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SynthesisTaskNotFoundException_message *smithy.Schema
-
-var _SynthesisTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SynthesisTasks",
-}, smithy.ShapeTypeList, 1)
-var _SynthesisTasks_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TaskId",
-}, smithy.ShapeTypeString, 0)
-
-var TaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TaskStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TaskStatus_SCHEDULED *smithy.Schema
-
-var TaskStatus_IN_PROGRESS *smithy.Schema
-
-var TaskStatus_COMPLETED *smithy.Schema
-
-var TaskStatus_FAILED *smithy.Schema
-
-var _TaskStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TaskStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _Text = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Text",
-}, smithy.ShapeTypeString, 0)
-
-var TextEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TextEvent",
-}, smithy.ShapeTypeStructure, 3)
-var TextEvent_Text *smithy.Schema
-
-var TextEvent_TextType *smithy.Schema
-
-var TextEvent_FlushStreamConfiguration *smithy.Schema
-
-var TextLengthExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TextLengthExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TextLengthExceededException_message *smithy.Schema
-
-var TextType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TextType",
-}, smithy.ShapeTypeEnum, 2)
-var TextType_SSML *smithy.Schema
-
-var TextType_TEXT *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "Throttling",
-		StatusCode: 400})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_throttlingReasons *smithy.Schema
-
-var ThrottlingReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ThrottlingReason",
-}, smithy.ShapeTypeStructure, 2)
-var ThrottlingReason_reason *smithy.Schema
-
-var ThrottlingReason_resource *smithy.Schema
-
-var _ThrottlingReasonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ThrottlingReasonList",
-}, smithy.ShapeTypeList, 1)
-var _ThrottlingReasonList_member *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var UnsupportedPlsAlphabetException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "UnsupportedPlsAlphabetException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedPlsAlphabetException_message *smithy.Schema
-
-var UnsupportedPlsLanguageException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "UnsupportedPlsLanguageException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedPlsLanguageException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionFieldMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ValidationExceptionFieldMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ValidationExceptionFieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ValidationExceptionFieldName",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNSUPPORTED_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ValidationExceptionReason_INVALID_INBOUND_EVENT *smithy.Schema
-
-var Voice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "Voice",
-}, smithy.ShapeTypeStructure, 7)
-var Voice_Gender *smithy.Schema
-
-var Voice_Id *smithy.Schema
-
-var Voice_LanguageCode *smithy.Schema
-
-var Voice_LanguageName *smithy.Schema
-
-var Voice_Name *smithy.Schema
-
-var Voice_AdditionalLanguageCodes *smithy.Schema
-
-var Voice_SupportedEngines *smithy.Schema
-
-var VoiceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "VoiceId",
-}, smithy.ShapeTypeEnum, 116)
-var VoiceId_Aditi *smithy.Schema
-
-var VoiceId_Amy *smithy.Schema
-
-var VoiceId_Astrid *smithy.Schema
-
-var VoiceId_Bianca *smithy.Schema
-
-var VoiceId_Brian *smithy.Schema
-
-var VoiceId_Camila *smithy.Schema
-
-var VoiceId_Carla *smithy.Schema
-
-var VoiceId_Carmen *smithy.Schema
-
-var VoiceId_Celine *smithy.Schema
-
-var VoiceId_Chantal *smithy.Schema
-
-var VoiceId_Conchita *smithy.Schema
-
-var VoiceId_Cristiano *smithy.Schema
-
-var VoiceId_Dora *smithy.Schema
-
-var VoiceId_Emma *smithy.Schema
-
-var VoiceId_Enrique *smithy.Schema
-
-var VoiceId_Ewa *smithy.Schema
-
-var VoiceId_Filiz *smithy.Schema
-
-var VoiceId_Gabrielle *smithy.Schema
-
-var VoiceId_Geraint *smithy.Schema
-
-var VoiceId_Giorgio *smithy.Schema
-
-var VoiceId_Gwyneth *smithy.Schema
-
-var VoiceId_Hans *smithy.Schema
-
-var VoiceId_Ines *smithy.Schema
-
-var VoiceId_Ivy *smithy.Schema
-
-var VoiceId_Jacek *smithy.Schema
-
-var VoiceId_Jan *smithy.Schema
-
-var VoiceId_Joanna *smithy.Schema
-
-var VoiceId_Joey *smithy.Schema
-
-var VoiceId_Justin *smithy.Schema
-
-var VoiceId_Karl *smithy.Schema
-
-var VoiceId_Kendra *smithy.Schema
-
-var VoiceId_Kevin *smithy.Schema
-
-var VoiceId_Kimberly *smithy.Schema
-
-var VoiceId_Lea *smithy.Schema
-
-var VoiceId_Liv *smithy.Schema
-
-var VoiceId_Lotte *smithy.Schema
-
-var VoiceId_Lucia *smithy.Schema
-
-var VoiceId_Lupe *smithy.Schema
-
-var VoiceId_Mads *smithy.Schema
-
-var VoiceId_Maja *smithy.Schema
-
-var VoiceId_Marlene *smithy.Schema
-
-var VoiceId_Mathieu *smithy.Schema
-
-var VoiceId_Matthew *smithy.Schema
-
-var VoiceId_Maxim *smithy.Schema
-
-var VoiceId_Mia *smithy.Schema
-
-var VoiceId_Miguel *smithy.Schema
-
-var VoiceId_Mizuki *smithy.Schema
-
-var VoiceId_Naja *smithy.Schema
-
-var VoiceId_Nicole *smithy.Schema
-
-var VoiceId_Olivia *smithy.Schema
-
-var VoiceId_Penelope *smithy.Schema
-
-var VoiceId_Raveena *smithy.Schema
-
-var VoiceId_Ricardo *smithy.Schema
-
-var VoiceId_Ruben *smithy.Schema
-
-var VoiceId_Russell *smithy.Schema
-
-var VoiceId_Salli *smithy.Schema
-
-var VoiceId_Seoyeon *smithy.Schema
-
-var VoiceId_Takumi *smithy.Schema
-
-var VoiceId_Tatyana *smithy.Schema
-
-var VoiceId_Vicki *smithy.Schema
-
-var VoiceId_Vitoria *smithy.Schema
-
-var VoiceId_Zeina *smithy.Schema
-
-var VoiceId_Zhiyu *smithy.Schema
-
-var VoiceId_Aria *smithy.Schema
-
-var VoiceId_Ayanda *smithy.Schema
-
-var VoiceId_Arlet *smithy.Schema
-
-var VoiceId_Hannah *smithy.Schema
-
-var VoiceId_Arthur *smithy.Schema
-
-var VoiceId_Daniel *smithy.Schema
-
-var VoiceId_Liam *smithy.Schema
-
-var VoiceId_Pedro *smithy.Schema
-
-var VoiceId_Kajal *smithy.Schema
-
-var VoiceId_Hiujin *smithy.Schema
-
-var VoiceId_Laura *smithy.Schema
-
-var VoiceId_Elin *smithy.Schema
-
-var VoiceId_Ida *smithy.Schema
-
-var VoiceId_Suvi *smithy.Schema
-
-var VoiceId_Ola *smithy.Schema
-
-var VoiceId_Hala *smithy.Schema
-
-var VoiceId_Andres *smithy.Schema
-
-var VoiceId_Sergio *smithy.Schema
-
-var VoiceId_Remi *smithy.Schema
-
-var VoiceId_Adriano *smithy.Schema
-
-var VoiceId_Thiago *smithy.Schema
-
-var VoiceId_Ruth *smithy.Schema
-
-var VoiceId_Stephen *smithy.Schema
-
-var VoiceId_Kazuha *smithy.Schema
-
-var VoiceId_Tomoko *smithy.Schema
-
-var VoiceId_Niamh *smithy.Schema
-
-var VoiceId_Sofie *smithy.Schema
-
-var VoiceId_Lisa *smithy.Schema
-
-var VoiceId_Isabelle *smithy.Schema
-
-var VoiceId_Zayd *smithy.Schema
-
-var VoiceId_Danielle *smithy.Schema
-
-var VoiceId_Gregory *smithy.Schema
-
-var VoiceId_Burcu *smithy.Schema
-
-var VoiceId_Jitka *smithy.Schema
-
-var VoiceId_Sabrina *smithy.Schema
-
-var VoiceId_Jasmine *smithy.Schema
-
-var VoiceId_Jihye *smithy.Schema
-
-var VoiceId_Ambre *smithy.Schema
-
-var VoiceId_Beatrice *smithy.Schema
-
-var VoiceId_Florian *smithy.Schema
-
-var VoiceId_Lennart *smithy.Schema
-
-var VoiceId_Lorenzo *smithy.Schema
-
-var VoiceId_Tiffany *smithy.Schema
-
-var VoiceId_Arjun *smithy.Schema
-
-var VoiceId_Carlos *smithy.Schema
-
-var VoiceId_Carolina *smithy.Schema
-
-var VoiceId_Curtis *smithy.Schema
-
-var VoiceId_Hyunduk *smithy.Schema
-
-var VoiceId_Kenneth *smithy.Schema
-
-var VoiceId_Kiara *smithy.Schema
-
-var VoiceId_Leo *smithy.Schema
-
-var VoiceId_Nate *smithy.Schema
-
-var VoiceId_Tina *smithy.Schema
-
-var _VoiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "VoiceList",
-}, smithy.ShapeTypeList, 1)
-var _VoiceList_member *smithy.Schema
-
-var _VoiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "VoiceName",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteLexiconInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "DeleteLexiconInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLexiconInput_Name *smithy.Schema
-
-var DeleteLexiconOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "DeleteLexiconOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeVoicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "DescribeVoicesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeVoicesInput_Engine *smithy.Schema
-
-var DescribeVoicesInput_LanguageCode *smithy.Schema
-
-var DescribeVoicesInput_IncludeAdditionalLanguageCodes *smithy.Schema
-
-var DescribeVoicesInput_NextToken *smithy.Schema
-
-var DescribeVoicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "DescribeVoicesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeVoicesOutput_Voices *smithy.Schema
-
-var DescribeVoicesOutput_NextToken *smithy.Schema
-
-var GetLexiconInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "GetLexiconInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLexiconInput_Name *smithy.Schema
-
-var GetLexiconOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "GetLexiconOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetLexiconOutput_Lexicon *smithy.Schema
-
-var GetLexiconOutput_LexiconAttributes *smithy.Schema
-
-var GetSpeechSynthesisTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "GetSpeechSynthesisTaskInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSpeechSynthesisTaskInput_TaskId *smithy.Schema
-
-var GetSpeechSynthesisTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "GetSpeechSynthesisTaskOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSpeechSynthesisTaskOutput_SynthesisTask *smithy.Schema
-
-var ListLexiconsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListLexiconsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListLexiconsInput_NextToken *smithy.Schema
-
-var ListLexiconsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListLexiconsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLexiconsOutput_Lexicons *smithy.Schema
-
-var ListLexiconsOutput_NextToken *smithy.Schema
-
-var ListSpeechSynthesisTasksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListSpeechSynthesisTasksInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSpeechSynthesisTasksInput_MaxResults *smithy.Schema
-
-var ListSpeechSynthesisTasksInput_NextToken *smithy.Schema
-
-var ListSpeechSynthesisTasksInput_Status *smithy.Schema
-
-var ListSpeechSynthesisTasksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListSpeechSynthesisTasksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpeechSynthesisTasksOutput_NextToken *smithy.Schema
-
-var ListSpeechSynthesisTasksOutput_SynthesisTasks *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var PutLexiconInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "PutLexiconInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutLexiconInput_Name *smithy.Schema
-
-var PutLexiconInput_Content *smithy.Schema
-
-var PutLexiconInput_Tags *smithy.Schema
-
-var PutLexiconOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "PutLexiconOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartSpeechSynthesisStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisStreamInput",
-}, smithy.ShapeTypeStructure, 7)
-var StartSpeechSynthesisStreamInput_Engine *smithy.Schema
-
-var StartSpeechSynthesisStreamInput_LanguageCode *smithy.Schema
-
-var StartSpeechSynthesisStreamInput_LexiconNames *smithy.Schema
-
-var StartSpeechSynthesisStreamInput_OutputFormat *smithy.Schema
-
-var StartSpeechSynthesisStreamInput_SampleRate *smithy.Schema
-
-var StartSpeechSynthesisStreamInput_VoiceId *smithy.Schema
-
-var StartSpeechSynthesisStreamInput_ActionStream *smithy.Schema
-
-var StartSpeechSynthesisStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisStreamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartSpeechSynthesisStreamOutput_EventStream *smithy.Schema
-
-var StartSpeechSynthesisTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisTaskInput",
-}, smithy.ShapeTypeStructure, 12)
-var StartSpeechSynthesisTaskInput_Engine *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_LanguageCode *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_LexiconNames *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_OutputFormat *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_OutputS3BucketName *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_OutputS3KeyPrefix *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_SampleRate *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_SnsTopicArn *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_SpeechMarkTypes *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_Text *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_TextType *smithy.Schema
-
-var StartSpeechSynthesisTaskInput_VoiceId *smithy.Schema
-
-var StartSpeechSynthesisTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "StartSpeechSynthesisTaskOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartSpeechSynthesisTaskOutput_SynthesisTask *smithy.Schema
-
-var SynthesizeSpeechInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SynthesizeSpeechInput",
-}, smithy.ShapeTypeStructure, 9)
-var SynthesizeSpeechInput_Engine *smithy.Schema
-
-var SynthesizeSpeechInput_LanguageCode *smithy.Schema
-
-var SynthesizeSpeechInput_LexiconNames *smithy.Schema
-
-var SynthesizeSpeechInput_OutputFormat *smithy.Schema
-
-var SynthesizeSpeechInput_SampleRate *smithy.Schema
-
-var SynthesizeSpeechInput_SpeechMarkTypes *smithy.Schema
-
-var SynthesizeSpeechInput_Text *smithy.Schema
-
-var SynthesizeSpeechInput_TextType *smithy.Schema
-
-var SynthesizeSpeechInput_VoiceId *smithy.Schema
-
-var SynthesizeSpeechOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "SynthesizeSpeechOutput",
-}, smithy.ShapeTypeStructure, 3)
-var SynthesizeSpeechOutput_AudioStream *smithy.Schema
-
-var SynthesizeSpeechOutput_ContentType *smithy.Schema
-
-var SynthesizeSpeechOutput_RequestCharacters *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.polly",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AudioEvent_AudioChunk = AudioEvent.AddMember("AudioChunk", _AudioChunk, &smithytraits.EventPayload{})
-
-	Engine_STANDARD = Engine.AddMember("STANDARD", smithyprelude.Unit)
-
-	Engine_NEURAL = Engine.AddMember("NEURAL", smithyprelude.Unit)
-
-	Engine_LONG_FORM = Engine.AddMember("LONG_FORM", smithyprelude.Unit)
-
-	Engine_GENERATIVE = Engine.AddMember("GENERATIVE", smithyprelude.Unit)
-
-	_EngineList_member = _EngineList.AddMember("member", Engine)
-
-	EngineNotSupportedException_message = EngineNotSupportedException.AddMember("message", _ErrorMessage)
-
-	FlushStreamConfiguration_Force = FlushStreamConfiguration.AddMember("Force", _Force)
-
-	Gender_Female = Gender.AddMember("Female", smithyprelude.Unit)
-
-	Gender_Male = Gender.AddMember("Male", smithyprelude.Unit)
-
-	InvalidLexiconException_message = InvalidLexiconException.AddMember("message", _ErrorMessage)
-
-	InvalidNextTokenException_message = InvalidNextTokenException.AddMember("message", _ErrorMessage)
-
-	InvalidS3BucketException_message = InvalidS3BucketException.AddMember("message", _ErrorMessage)
-
-	InvalidS3KeyException_message = InvalidS3KeyException.AddMember("message", _ErrorMessage)
-
-	InvalidSampleRateException_message = InvalidSampleRateException.AddMember("message", _ErrorMessage)
-
-	InvalidSnsTopicArnException_message = InvalidSnsTopicArnException.AddMember("message", _ErrorMessage)
-
-	InvalidSsmlException_message = InvalidSsmlException.AddMember("message", _ErrorMessage)
-
-	InvalidTagParameterException_message = InvalidTagParameterException.AddMember("message", _ExceptionMessage)
-
-	InvalidTaskIdException_message = InvalidTaskIdException.AddMember("message", _ErrorMessage)
-
-	LanguageCode_arb = LanguageCode.AddMember("arb", smithyprelude.Unit)
-
-	LanguageCode_cmn_CN = LanguageCode.AddMember("cmn_CN", smithyprelude.Unit)
-
-	LanguageCode_cy_GB = LanguageCode.AddMember("cy_GB", smithyprelude.Unit)
-
-	LanguageCode_da_DK = LanguageCode.AddMember("da_DK", smithyprelude.Unit)
-
-	LanguageCode_de_DE = LanguageCode.AddMember("de_DE", smithyprelude.Unit)
-
-	LanguageCode_en_AU = LanguageCode.AddMember("en_AU", smithyprelude.Unit)
-
-	LanguageCode_en_GB = LanguageCode.AddMember("en_GB", smithyprelude.Unit)
-
-	LanguageCode_en_GB_WLS = LanguageCode.AddMember("en_GB_WLS", smithyprelude.Unit)
-
-	LanguageCode_en_IN = LanguageCode.AddMember("en_IN", smithyprelude.Unit)
-
-	LanguageCode_en_US = LanguageCode.AddMember("en_US", smithyprelude.Unit)
-
-	LanguageCode_es_ES = LanguageCode.AddMember("es_ES", smithyprelude.Unit)
-
-	LanguageCode_es_MX = LanguageCode.AddMember("es_MX", smithyprelude.Unit)
-
-	LanguageCode_es_US = LanguageCode.AddMember("es_US", smithyprelude.Unit)
-
-	LanguageCode_fr_CA = LanguageCode.AddMember("fr_CA", smithyprelude.Unit)
-
-	LanguageCode_fr_FR = LanguageCode.AddMember("fr_FR", smithyprelude.Unit)
-
-	LanguageCode_is_IS = LanguageCode.AddMember("is_IS", smithyprelude.Unit)
-
-	LanguageCode_it_IT = LanguageCode.AddMember("it_IT", smithyprelude.Unit)
-
-	LanguageCode_ja_JP = LanguageCode.AddMember("ja_JP", smithyprelude.Unit)
-
-	LanguageCode_hi_IN = LanguageCode.AddMember("hi_IN", smithyprelude.Unit)
-
-	LanguageCode_ko_KR = LanguageCode.AddMember("ko_KR", smithyprelude.Unit)
-
-	LanguageCode_nb_NO = LanguageCode.AddMember("nb_NO", smithyprelude.Unit)
-
-	LanguageCode_nl_NL = LanguageCode.AddMember("nl_NL", smithyprelude.Unit)
-
-	LanguageCode_pl_PL = LanguageCode.AddMember("pl_PL", smithyprelude.Unit)
-
-	LanguageCode_pt_BR = LanguageCode.AddMember("pt_BR", smithyprelude.Unit)
-
-	LanguageCode_pt_PT = LanguageCode.AddMember("pt_PT", smithyprelude.Unit)
-
-	LanguageCode_ro_RO = LanguageCode.AddMember("ro_RO", smithyprelude.Unit)
-
-	LanguageCode_ru_RU = LanguageCode.AddMember("ru_RU", smithyprelude.Unit)
-
-	LanguageCode_sv_SE = LanguageCode.AddMember("sv_SE", smithyprelude.Unit)
-
-	LanguageCode_tr_TR = LanguageCode.AddMember("tr_TR", smithyprelude.Unit)
-
-	LanguageCode_en_NZ = LanguageCode.AddMember("en_NZ", smithyprelude.Unit)
-
-	LanguageCode_en_ZA = LanguageCode.AddMember("en_ZA", smithyprelude.Unit)
-
-	LanguageCode_ca_ES = LanguageCode.AddMember("ca_ES", smithyprelude.Unit)
-
-	LanguageCode_de_AT = LanguageCode.AddMember("de_AT", smithyprelude.Unit)
-
-	LanguageCode_yue_CN = LanguageCode.AddMember("yue_CN", smithyprelude.Unit)
-
-	LanguageCode_ar_AE = LanguageCode.AddMember("ar_AE", smithyprelude.Unit)
-
-	LanguageCode_fi_FI = LanguageCode.AddMember("fi_FI", smithyprelude.Unit)
-
-	LanguageCode_en_IE = LanguageCode.AddMember("en_IE", smithyprelude.Unit)
-
-	LanguageCode_nl_BE = LanguageCode.AddMember("nl_BE", smithyprelude.Unit)
-
-	LanguageCode_fr_BE = LanguageCode.AddMember("fr_BE", smithyprelude.Unit)
-
-	LanguageCode_cs_CZ = LanguageCode.AddMember("cs_CZ", smithyprelude.Unit)
-
-	LanguageCode_de_CH = LanguageCode.AddMember("de_CH", smithyprelude.Unit)
-
-	LanguageCode_en_SG = LanguageCode.AddMember("en_SG", smithyprelude.Unit)
-
-	_LanguageCodeList_member = _LanguageCodeList.AddMember("member", LanguageCode)
-
-	LanguageNotSupportedException_message = LanguageNotSupportedException.AddMember("message", _ErrorMessage)
-
-	Lexicon_Content = Lexicon.AddMember("Content", _LexiconContent)
-
-	Lexicon_Name = Lexicon.AddMember("Name", _LexiconName)
-
-	LexiconAttributes_Alphabet = LexiconAttributes.AddMember("Alphabet", _Alphabet)
-
-	LexiconAttributes_LanguageCode = LexiconAttributes.AddMember("LanguageCode", LanguageCode)
-
-	LexiconAttributes_LastModified = LexiconAttributes.AddMember("LastModified", _LastModified)
-
-	LexiconAttributes_LexiconArn = LexiconAttributes.AddMember("LexiconArn", _LexiconArn)
-
-	LexiconAttributes_LexemesCount = LexiconAttributes.AddMember("LexemesCount", _LexemesCount)
-
-	LexiconAttributes_Size = LexiconAttributes.AddMember("Size", _Size)
-
-	LexiconDescription_Name = LexiconDescription.AddMember("Name", _LexiconName)
-
-	LexiconDescription_Attributes = LexiconDescription.AddMember("Attributes", LexiconAttributes)
-
-	_LexiconDescriptionList_member = _LexiconDescriptionList.AddMember("member", LexiconDescription)
-
-	_LexiconNameList_member = _LexiconNameList.AddMember("member", _LexiconName)
-
-	LexiconNotFoundException_message = LexiconNotFoundException.AddMember("message", _ErrorMessage)
-
-	LexiconSizeExceededException_message = LexiconSizeExceededException.AddMember("message", _ErrorMessage)
-
-	MarksNotSupportedForFormatException_message = MarksNotSupportedForFormatException.AddMember("message", _ErrorMessage)
-
-	MaxLexemeLengthExceededException_message = MaxLexemeLengthExceededException.AddMember("message", _ErrorMessage)
-
-	MaxLexiconsNumberExceededException_message = MaxLexiconsNumberExceededException.AddMember("message", _ErrorMessage)
-
-	OutputFormat_JSON = OutputFormat.AddMember("JSON", smithyprelude.Unit)
-
-	OutputFormat_MP3 = OutputFormat.AddMember("MP3", smithyprelude.Unit)
-
-	OutputFormat_OGG_OPUS = OutputFormat.AddMember("OGG_OPUS", smithyprelude.Unit)
-
-	OutputFormat_OGG_VORBIS = OutputFormat.AddMember("OGG_VORBIS", smithyprelude.Unit)
-
-	OutputFormat_PCM = OutputFormat.AddMember("PCM", smithyprelude.Unit)
-
-	OutputFormat_MULAW = OutputFormat.AddMember("MULAW", smithyprelude.Unit)
-
-	OutputFormat_ALAW = OutputFormat.AddMember("ALAW", smithyprelude.Unit)
-
-	QuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT = QuotaCode.AddMember("INPUT_STREAM_INBOUND_EVENT_TIMEOUT", smithyprelude.Unit)
-
-	QuotaCode_INPUT_STREAM_TIMEOUT = QuotaCode.AddMember("INPUT_STREAM_TIMEOUT", smithyprelude.Unit)
-
-	ResourceType_LEXICON = ResourceType.AddMember("LEXICON", smithyprelude.Unit)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", ResourceType)
-
-	ServiceCode_POLLY = ServiceCode.AddMember("POLLY", smithyprelude.Unit)
-
-	ServiceFailureException_message = ServiceFailureException.AddMember("message", _ErrorMessage)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", QuotaCode)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", ServiceCode)
-
-	SpeechMarkType_SENTENCE = SpeechMarkType.AddMember("SENTENCE", smithyprelude.Unit)
-
-	SpeechMarkType_SSML = SpeechMarkType.AddMember("SSML", smithyprelude.Unit)
-
-	SpeechMarkType_VISEME = SpeechMarkType.AddMember("VISEME", smithyprelude.Unit)
-
-	SpeechMarkType_WORD = SpeechMarkType.AddMember("WORD", smithyprelude.Unit)
-
-	_SpeechMarkTypeList_member = _SpeechMarkTypeList.AddMember("member", SpeechMarkType)
-
-	SsmlMarksNotSupportedForTextTypeException_message = SsmlMarksNotSupportedForTextTypeException.AddMember("message", _ErrorMessage)
-
-	TextType_SSML = TextType.AddMember("SSML", smithyprelude.Unit)
-
-	TextType_TEXT = TextType.AddMember("TEXT", smithyprelude.Unit)
-
-	TextEvent_Text = TextEvent.AddMember("Text", _Text)
-
-	TextEvent_TextType = TextEvent.AddMember("TextType", TextType)
-
-	TextEvent_FlushStreamConfiguration = TextEvent.AddMember("FlushStreamConfiguration", FlushStreamConfiguration)
-
-	StartSpeechSynthesisStreamActionStream_TextEvent = StartSpeechSynthesisStreamActionStream.AddMember("TextEvent", TextEvent)
-
-	StartSpeechSynthesisStreamActionStream_CloseStreamEvent = StartSpeechSynthesisStreamActionStream.AddMember("CloseStreamEvent", CloseStreamEvent)
-
-	StreamClosedEvent_RequestCharacters = StreamClosedEvent.AddMember("RequestCharacters", _RequestCharacters)
-
-	ValidationExceptionReason_UNSUPPORTED_OPERATION = ValidationExceptionReason.AddMember("UNSUPPORTED_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_INBOUND_EVENT = ValidationExceptionReason.AddMember("INVALID_INBOUND_EVENT", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _ValidationExceptionFieldName)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _ValidationExceptionFieldMessage)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionFieldList)
-
-	ThrottlingReason_reason = ThrottlingReason.AddMember("reason", _CoralAvailabilityThrottlingReason)
-
-	ThrottlingReason_resource = ThrottlingReason.AddMember("resource", _CoralAvailabilityThrottledResource)
-
-	_ThrottlingReasonList_member = _ThrottlingReasonList.AddMember("member", ThrottlingReason)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _AvailabilityErrorMessage)
-
-	ThrottlingException_throttlingReasons = ThrottlingException.AddMember("throttlingReasons", _ThrottlingReasonList)
-
-	StartSpeechSynthesisStreamEventStream_AudioEvent = StartSpeechSynthesisStreamEventStream.AddMember("AudioEvent", AudioEvent)
-
-	StartSpeechSynthesisStreamEventStream_StreamClosedEvent = StartSpeechSynthesisStreamEventStream.AddMember("StreamClosedEvent", StreamClosedEvent)
-
-	StartSpeechSynthesisStreamEventStream_ValidationException = StartSpeechSynthesisStreamEventStream.AddMember("ValidationException", ValidationException)
-
-	StartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException = StartSpeechSynthesisStreamEventStream.AddMember("ServiceQuotaExceededException", ServiceQuotaExceededException)
-
-	StartSpeechSynthesisStreamEventStream_ServiceFailureException = StartSpeechSynthesisStreamEventStream.AddMember("ServiceFailureException", ServiceFailureException)
-
-	StartSpeechSynthesisStreamEventStream_ThrottlingException = StartSpeechSynthesisStreamEventStream.AddMember("ThrottlingException", ThrottlingException)
-
-	TaskStatus_SCHEDULED = TaskStatus.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	TaskStatus_IN_PROGRESS = TaskStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	TaskStatus_COMPLETED = TaskStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	TaskStatus_FAILED = TaskStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	VoiceId_Aditi = VoiceId.AddMember("Aditi", smithyprelude.Unit)
-
-	VoiceId_Amy = VoiceId.AddMember("Amy", smithyprelude.Unit)
-
-	VoiceId_Astrid = VoiceId.AddMember("Astrid", smithyprelude.Unit)
-
-	VoiceId_Bianca = VoiceId.AddMember("Bianca", smithyprelude.Unit)
-
-	VoiceId_Brian = VoiceId.AddMember("Brian", smithyprelude.Unit)
-
-	VoiceId_Camila = VoiceId.AddMember("Camila", smithyprelude.Unit)
-
-	VoiceId_Carla = VoiceId.AddMember("Carla", smithyprelude.Unit)
-
-	VoiceId_Carmen = VoiceId.AddMember("Carmen", smithyprelude.Unit)
-
-	VoiceId_Celine = VoiceId.AddMember("Celine", smithyprelude.Unit)
-
-	VoiceId_Chantal = VoiceId.AddMember("Chantal", smithyprelude.Unit)
-
-	VoiceId_Conchita = VoiceId.AddMember("Conchita", smithyprelude.Unit)
-
-	VoiceId_Cristiano = VoiceId.AddMember("Cristiano", smithyprelude.Unit)
-
-	VoiceId_Dora = VoiceId.AddMember("Dora", smithyprelude.Unit)
-
-	VoiceId_Emma = VoiceId.AddMember("Emma", smithyprelude.Unit)
-
-	VoiceId_Enrique = VoiceId.AddMember("Enrique", smithyprelude.Unit)
-
-	VoiceId_Ewa = VoiceId.AddMember("Ewa", smithyprelude.Unit)
-
-	VoiceId_Filiz = VoiceId.AddMember("Filiz", smithyprelude.Unit)
-
-	VoiceId_Gabrielle = VoiceId.AddMember("Gabrielle", smithyprelude.Unit)
-
-	VoiceId_Geraint = VoiceId.AddMember("Geraint", smithyprelude.Unit)
-
-	VoiceId_Giorgio = VoiceId.AddMember("Giorgio", smithyprelude.Unit)
-
-	VoiceId_Gwyneth = VoiceId.AddMember("Gwyneth", smithyprelude.Unit)
-
-	VoiceId_Hans = VoiceId.AddMember("Hans", smithyprelude.Unit)
-
-	VoiceId_Ines = VoiceId.AddMember("Ines", smithyprelude.Unit)
-
-	VoiceId_Ivy = VoiceId.AddMember("Ivy", smithyprelude.Unit)
-
-	VoiceId_Jacek = VoiceId.AddMember("Jacek", smithyprelude.Unit)
-
-	VoiceId_Jan = VoiceId.AddMember("Jan", smithyprelude.Unit)
-
-	VoiceId_Joanna = VoiceId.AddMember("Joanna", smithyprelude.Unit)
-
-	VoiceId_Joey = VoiceId.AddMember("Joey", smithyprelude.Unit)
-
-	VoiceId_Justin = VoiceId.AddMember("Justin", smithyprelude.Unit)
-
-	VoiceId_Karl = VoiceId.AddMember("Karl", smithyprelude.Unit)
-
-	VoiceId_Kendra = VoiceId.AddMember("Kendra", smithyprelude.Unit)
-
-	VoiceId_Kevin = VoiceId.AddMember("Kevin", smithyprelude.Unit)
-
-	VoiceId_Kimberly = VoiceId.AddMember("Kimberly", smithyprelude.Unit)
-
-	VoiceId_Lea = VoiceId.AddMember("Lea", smithyprelude.Unit)
-
-	VoiceId_Liv = VoiceId.AddMember("Liv", smithyprelude.Unit)
-
-	VoiceId_Lotte = VoiceId.AddMember("Lotte", smithyprelude.Unit)
-
-	VoiceId_Lucia = VoiceId.AddMember("Lucia", smithyprelude.Unit)
-
-	VoiceId_Lupe = VoiceId.AddMember("Lupe", smithyprelude.Unit)
-
-	VoiceId_Mads = VoiceId.AddMember("Mads", smithyprelude.Unit)
-
-	VoiceId_Maja = VoiceId.AddMember("Maja", smithyprelude.Unit)
-
-	VoiceId_Marlene = VoiceId.AddMember("Marlene", smithyprelude.Unit)
-
-	VoiceId_Mathieu = VoiceId.AddMember("Mathieu", smithyprelude.Unit)
-
-	VoiceId_Matthew = VoiceId.AddMember("Matthew", smithyprelude.Unit)
-
-	VoiceId_Maxim = VoiceId.AddMember("Maxim", smithyprelude.Unit)
-
-	VoiceId_Mia = VoiceId.AddMember("Mia", smithyprelude.Unit)
-
-	VoiceId_Miguel = VoiceId.AddMember("Miguel", smithyprelude.Unit)
-
-	VoiceId_Mizuki = VoiceId.AddMember("Mizuki", smithyprelude.Unit)
-
-	VoiceId_Naja = VoiceId.AddMember("Naja", smithyprelude.Unit)
-
-	VoiceId_Nicole = VoiceId.AddMember("Nicole", smithyprelude.Unit)
-
-	VoiceId_Olivia = VoiceId.AddMember("Olivia", smithyprelude.Unit)
-
-	VoiceId_Penelope = VoiceId.AddMember("Penelope", smithyprelude.Unit)
-
-	VoiceId_Raveena = VoiceId.AddMember("Raveena", smithyprelude.Unit)
-
-	VoiceId_Ricardo = VoiceId.AddMember("Ricardo", smithyprelude.Unit)
-
-	VoiceId_Ruben = VoiceId.AddMember("Ruben", smithyprelude.Unit)
-
-	VoiceId_Russell = VoiceId.AddMember("Russell", smithyprelude.Unit)
-
-	VoiceId_Salli = VoiceId.AddMember("Salli", smithyprelude.Unit)
-
-	VoiceId_Seoyeon = VoiceId.AddMember("Seoyeon", smithyprelude.Unit)
-
-	VoiceId_Takumi = VoiceId.AddMember("Takumi", smithyprelude.Unit)
-
-	VoiceId_Tatyana = VoiceId.AddMember("Tatyana", smithyprelude.Unit)
-
-	VoiceId_Vicki = VoiceId.AddMember("Vicki", smithyprelude.Unit)
-
-	VoiceId_Vitoria = VoiceId.AddMember("Vitoria", smithyprelude.Unit)
-
-	VoiceId_Zeina = VoiceId.AddMember("Zeina", smithyprelude.Unit)
-
-	VoiceId_Zhiyu = VoiceId.AddMember("Zhiyu", smithyprelude.Unit)
-
-	VoiceId_Aria = VoiceId.AddMember("Aria", smithyprelude.Unit)
-
-	VoiceId_Ayanda = VoiceId.AddMember("Ayanda", smithyprelude.Unit)
-
-	VoiceId_Arlet = VoiceId.AddMember("Arlet", smithyprelude.Unit)
-
-	VoiceId_Hannah = VoiceId.AddMember("Hannah", smithyprelude.Unit)
-
-	VoiceId_Arthur = VoiceId.AddMember("Arthur", smithyprelude.Unit)
-
-	VoiceId_Daniel = VoiceId.AddMember("Daniel", smithyprelude.Unit)
-
-	VoiceId_Liam = VoiceId.AddMember("Liam", smithyprelude.Unit)
-
-	VoiceId_Pedro = VoiceId.AddMember("Pedro", smithyprelude.Unit)
-
-	VoiceId_Kajal = VoiceId.AddMember("Kajal", smithyprelude.Unit)
-
-	VoiceId_Hiujin = VoiceId.AddMember("Hiujin", smithyprelude.Unit)
-
-	VoiceId_Laura = VoiceId.AddMember("Laura", smithyprelude.Unit)
-
-	VoiceId_Elin = VoiceId.AddMember("Elin", smithyprelude.Unit)
-
-	VoiceId_Ida = VoiceId.AddMember("Ida", smithyprelude.Unit)
-
-	VoiceId_Suvi = VoiceId.AddMember("Suvi", smithyprelude.Unit)
-
-	VoiceId_Ola = VoiceId.AddMember("Ola", smithyprelude.Unit)
-
-	VoiceId_Hala = VoiceId.AddMember("Hala", smithyprelude.Unit)
-
-	VoiceId_Andres = VoiceId.AddMember("Andres", smithyprelude.Unit)
-
-	VoiceId_Sergio = VoiceId.AddMember("Sergio", smithyprelude.Unit)
-
-	VoiceId_Remi = VoiceId.AddMember("Remi", smithyprelude.Unit)
-
-	VoiceId_Adriano = VoiceId.AddMember("Adriano", smithyprelude.Unit)
-
-	VoiceId_Thiago = VoiceId.AddMember("Thiago", smithyprelude.Unit)
-
-	VoiceId_Ruth = VoiceId.AddMember("Ruth", smithyprelude.Unit)
-
-	VoiceId_Stephen = VoiceId.AddMember("Stephen", smithyprelude.Unit)
-
-	VoiceId_Kazuha = VoiceId.AddMember("Kazuha", smithyprelude.Unit)
-
-	VoiceId_Tomoko = VoiceId.AddMember("Tomoko", smithyprelude.Unit)
-
-	VoiceId_Niamh = VoiceId.AddMember("Niamh", smithyprelude.Unit)
-
-	VoiceId_Sofie = VoiceId.AddMember("Sofie", smithyprelude.Unit)
-
-	VoiceId_Lisa = VoiceId.AddMember("Lisa", smithyprelude.Unit)
-
-	VoiceId_Isabelle = VoiceId.AddMember("Isabelle", smithyprelude.Unit)
-
-	VoiceId_Zayd = VoiceId.AddMember("Zayd", smithyprelude.Unit)
-
-	VoiceId_Danielle = VoiceId.AddMember("Danielle", smithyprelude.Unit)
-
-	VoiceId_Gregory = VoiceId.AddMember("Gregory", smithyprelude.Unit)
-
-	VoiceId_Burcu = VoiceId.AddMember("Burcu", smithyprelude.Unit)
-
-	VoiceId_Jitka = VoiceId.AddMember("Jitka", smithyprelude.Unit)
-
-	VoiceId_Sabrina = VoiceId.AddMember("Sabrina", smithyprelude.Unit)
-
-	VoiceId_Jasmine = VoiceId.AddMember("Jasmine", smithyprelude.Unit)
-
-	VoiceId_Jihye = VoiceId.AddMember("Jihye", smithyprelude.Unit)
-
-	VoiceId_Ambre = VoiceId.AddMember("Ambre", smithyprelude.Unit)
-
-	VoiceId_Beatrice = VoiceId.AddMember("Beatrice", smithyprelude.Unit)
-
-	VoiceId_Florian = VoiceId.AddMember("Florian", smithyprelude.Unit)
-
-	VoiceId_Lennart = VoiceId.AddMember("Lennart", smithyprelude.Unit)
-
-	VoiceId_Lorenzo = VoiceId.AddMember("Lorenzo", smithyprelude.Unit)
-
-	VoiceId_Tiffany = VoiceId.AddMember("Tiffany", smithyprelude.Unit)
-
-	VoiceId_Arjun = VoiceId.AddMember("Arjun", smithyprelude.Unit)
-
-	VoiceId_Carlos = VoiceId.AddMember("Carlos", smithyprelude.Unit)
-
-	VoiceId_Carolina = VoiceId.AddMember("Carolina", smithyprelude.Unit)
-
-	VoiceId_Curtis = VoiceId.AddMember("Curtis", smithyprelude.Unit)
-
-	VoiceId_Hyunduk = VoiceId.AddMember("Hyunduk", smithyprelude.Unit)
-
-	VoiceId_Kenneth = VoiceId.AddMember("Kenneth", smithyprelude.Unit)
-
-	VoiceId_Kiara = VoiceId.AddMember("Kiara", smithyprelude.Unit)
-
-	VoiceId_Leo = VoiceId.AddMember("Leo", smithyprelude.Unit)
-
-	VoiceId_Nate = VoiceId.AddMember("Nate", smithyprelude.Unit)
-
-	VoiceId_Tina = VoiceId.AddMember("Tina", smithyprelude.Unit)
-
-	SynthesisTask_Engine = SynthesisTask.AddMember("Engine", Engine)
-
-	SynthesisTask_TaskId = SynthesisTask.AddMember("TaskId", _TaskId)
-
-	SynthesisTask_TaskStatus = SynthesisTask.AddMember("TaskStatus", TaskStatus)
-
-	SynthesisTask_TaskStatusReason = SynthesisTask.AddMember("TaskStatusReason", _TaskStatusReason)
-
-	SynthesisTask_OutputUri = SynthesisTask.AddMember("OutputUri", _OutputUri)
-
-	SynthesisTask_CreationTime = SynthesisTask.AddMember("CreationTime", _DateTime)
-
-	SynthesisTask_RequestCharacters = SynthesisTask.AddMember("RequestCharacters", _RequestCharacters)
-
-	SynthesisTask_SnsTopicArn = SynthesisTask.AddMember("SnsTopicArn", _SnsTopicArn)
-
-	SynthesisTask_LexiconNames = SynthesisTask.AddMember("LexiconNames", _LexiconNameList)
-
-	SynthesisTask_OutputFormat = SynthesisTask.AddMember("OutputFormat", OutputFormat)
-
-	SynthesisTask_SampleRate = SynthesisTask.AddMember("SampleRate", _SampleRate)
-
-	SynthesisTask_SpeechMarkTypes = SynthesisTask.AddMember("SpeechMarkTypes", _SpeechMarkTypeList)
-
-	SynthesisTask_TextType = SynthesisTask.AddMember("TextType", TextType)
-
-	SynthesisTask_VoiceId = SynthesisTask.AddMember("VoiceId", VoiceId)
-
-	SynthesisTask_LanguageCode = SynthesisTask.AddMember("LanguageCode", LanguageCode)
-
-	SynthesisTaskNotFoundException_message = SynthesisTaskNotFoundException.AddMember("message", _ErrorMessage)
-
-	_SynthesisTasks_member = _SynthesisTasks.AddMember("member", SynthesisTask)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	TextLengthExceededException_message = TextLengthExceededException.AddMember("message", _ErrorMessage)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _ExceptionMessage)
-
-	UnsupportedPlsAlphabetException_message = UnsupportedPlsAlphabetException.AddMember("message", _ErrorMessage)
-
-	UnsupportedPlsLanguageException_message = UnsupportedPlsLanguageException.AddMember("message", _ErrorMessage)
-
-	Voice_Gender = Voice.AddMember("Gender", Gender)
-
-	Voice_Id = Voice.AddMember("Id", VoiceId)
-
-	Voice_LanguageCode = Voice.AddMember("LanguageCode", LanguageCode)
-
-	Voice_LanguageName = Voice.AddMember("LanguageName", _LanguageName)
-
-	Voice_Name = Voice.AddMember("Name", _VoiceName)
-
-	Voice_AdditionalLanguageCodes = Voice.AddMember("AdditionalLanguageCodes", _LanguageCodeList)
-
-	Voice_SupportedEngines = Voice.AddMember("SupportedEngines", _EngineList)
-
-	_VoiceList_member = _VoiceList.AddMember("member", Voice)
-
-	DeleteLexiconInput_Name = DeleteLexiconInput.AddMember("Name", _LexiconName, &smithytraits.HTTPLabel{})
-
-	DescribeVoicesInput_Engine = DescribeVoicesInput.AddMember("Engine", Engine, &smithytraits.HTTPQuery{Name: "Engine"})
-
-	DescribeVoicesInput_LanguageCode = DescribeVoicesInput.AddMember("LanguageCode", LanguageCode, &smithytraits.HTTPQuery{Name: "LanguageCode"})
-
-	DescribeVoicesInput_IncludeAdditionalLanguageCodes = DescribeVoicesInput.AddMember("IncludeAdditionalLanguageCodes", _IncludeAdditionalLanguageCodes, &smithytraits.HTTPQuery{Name: "IncludeAdditionalLanguageCodes"})
-
-	DescribeVoicesInput_NextToken = DescribeVoicesInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	DescribeVoicesOutput_Voices = DescribeVoicesOutput.AddMember("Voices", _VoiceList)
-
-	DescribeVoicesOutput_NextToken = DescribeVoicesOutput.AddMember("NextToken", _NextToken)
-
-	GetLexiconInput_Name = GetLexiconInput.AddMember("Name", _LexiconName, &smithytraits.HTTPLabel{})
-
-	GetLexiconOutput_Lexicon = GetLexiconOutput.AddMember("Lexicon", Lexicon)
-
-	GetLexiconOutput_LexiconAttributes = GetLexiconOutput.AddMember("LexiconAttributes", LexiconAttributes)
-
-	GetSpeechSynthesisTaskInput_TaskId = GetSpeechSynthesisTaskInput.AddMember("TaskId", _TaskId, &smithytraits.HTTPLabel{})
-
-	GetSpeechSynthesisTaskOutput_SynthesisTask = GetSpeechSynthesisTaskOutput.AddMember("SynthesisTask", SynthesisTask)
-
-	ListLexiconsInput_NextToken = ListLexiconsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListLexiconsOutput_Lexicons = ListLexiconsOutput.AddMember("Lexicons", _LexiconDescriptionList)
-
-	ListLexiconsOutput_NextToken = ListLexiconsOutput.AddMember("NextToken", _NextToken)
-
-	ListSpeechSynthesisTasksInput_MaxResults = ListSpeechSynthesisTasksInput.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListSpeechSynthesisTasksInput_NextToken = ListSpeechSynthesisTasksInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListSpeechSynthesisTasksInput_Status = ListSpeechSynthesisTasksInput.AddMember("Status", TaskStatus, &smithytraits.HTTPQuery{Name: "Status"})
-
-	ListSpeechSynthesisTasksOutput_NextToken = ListSpeechSynthesisTasksOutput.AddMember("NextToken", _NextToken)
-
-	ListSpeechSynthesisTasksOutput_SynthesisTasks = ListSpeechSynthesisTasksOutput.AddMember("SynthesisTasks", _SynthesisTasks)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "arn"})
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagMap)
-
-	PutLexiconInput_Name = PutLexiconInput.AddMember("Name", _LexiconName, &smithytraits.HTTPLabel{})
-
-	PutLexiconInput_Content = PutLexiconInput.AddMember("Content", _LexiconContent)
-
-	PutLexiconInput_Tags = PutLexiconInput.AddMember("Tags", _TagMap)
-
-	StartSpeechSynthesisStreamInput_Engine = StartSpeechSynthesisStreamInput.AddMember("Engine", Engine, &smithytraits.HTTPHeader{Name: "x-amzn-Engine"})
-
-	StartSpeechSynthesisStreamInput_LanguageCode = StartSpeechSynthesisStreamInput.AddMember("LanguageCode", LanguageCode, &smithytraits.HTTPHeader{Name: "x-amzn-LanguageCode"})
-
-	StartSpeechSynthesisStreamInput_LexiconNames = StartSpeechSynthesisStreamInput.AddMember("LexiconNames", _LexiconNameList, &smithytraits.HTTPHeader{Name: "x-amzn-LexiconNames"})
-
-	StartSpeechSynthesisStreamInput_OutputFormat = StartSpeechSynthesisStreamInput.AddMember("OutputFormat", OutputFormat, &smithytraits.HTTPHeader{Name: "x-amzn-OutputFormat"})
-
-	StartSpeechSynthesisStreamInput_SampleRate = StartSpeechSynthesisStreamInput.AddMember("SampleRate", _SampleRate, &smithytraits.HTTPHeader{Name: "x-amzn-SampleRate"})
-
-	StartSpeechSynthesisStreamInput_VoiceId = StartSpeechSynthesisStreamInput.AddMember("VoiceId", VoiceId, &smithytraits.HTTPHeader{Name: "x-amzn-VoiceId"})
-
-	StartSpeechSynthesisStreamInput_ActionStream = StartSpeechSynthesisStreamInput.AddMember("ActionStream", StartSpeechSynthesisStreamActionStream, &smithytraits.HTTPPayload{})
-
-	StartSpeechSynthesisStreamOutput_EventStream = StartSpeechSynthesisStreamOutput.AddMember("EventStream", StartSpeechSynthesisStreamEventStream, &smithytraits.HTTPPayload{})
-
-	StartSpeechSynthesisTaskInput_Engine = StartSpeechSynthesisTaskInput.AddMember("Engine", Engine)
-
-	StartSpeechSynthesisTaskInput_LanguageCode = StartSpeechSynthesisTaskInput.AddMember("LanguageCode", LanguageCode)
-
-	StartSpeechSynthesisTaskInput_LexiconNames = StartSpeechSynthesisTaskInput.AddMember("LexiconNames", _LexiconNameList)
-
-	StartSpeechSynthesisTaskInput_OutputFormat = StartSpeechSynthesisTaskInput.AddMember("OutputFormat", OutputFormat)
-
-	StartSpeechSynthesisTaskInput_OutputS3BucketName = StartSpeechSynthesisTaskInput.AddMember("OutputS3BucketName", _OutputS3BucketName)
-
-	StartSpeechSynthesisTaskInput_OutputS3KeyPrefix = StartSpeechSynthesisTaskInput.AddMember("OutputS3KeyPrefix", _OutputS3KeyPrefix)
-
-	StartSpeechSynthesisTaskInput_SampleRate = StartSpeechSynthesisTaskInput.AddMember("SampleRate", _SampleRate)
-
-	StartSpeechSynthesisTaskInput_SnsTopicArn = StartSpeechSynthesisTaskInput.AddMember("SnsTopicArn", _SnsTopicArn)
-
-	StartSpeechSynthesisTaskInput_SpeechMarkTypes = StartSpeechSynthesisTaskInput.AddMember("SpeechMarkTypes", _SpeechMarkTypeList)
-
-	StartSpeechSynthesisTaskInput_Text = StartSpeechSynthesisTaskInput.AddMember("Text", _Text)
-
-	StartSpeechSynthesisTaskInput_TextType = StartSpeechSynthesisTaskInput.AddMember("TextType", TextType)
-
-	StartSpeechSynthesisTaskInput_VoiceId = StartSpeechSynthesisTaskInput.AddMember("VoiceId", VoiceId)
-
-	StartSpeechSynthesisTaskOutput_SynthesisTask = StartSpeechSynthesisTaskOutput.AddMember("SynthesisTask", SynthesisTask)
-
-	SynthesizeSpeechInput_Engine = SynthesizeSpeechInput.AddMember("Engine", Engine)
-
-	SynthesizeSpeechInput_LanguageCode = SynthesizeSpeechInput.AddMember("LanguageCode", LanguageCode)
-
-	SynthesizeSpeechInput_LexiconNames = SynthesizeSpeechInput.AddMember("LexiconNames", _LexiconNameList)
-
-	SynthesizeSpeechInput_OutputFormat = SynthesizeSpeechInput.AddMember("OutputFormat", OutputFormat)
-
-	SynthesizeSpeechInput_SampleRate = SynthesizeSpeechInput.AddMember("SampleRate", _SampleRate)
-
-	SynthesizeSpeechInput_SpeechMarkTypes = SynthesizeSpeechInput.AddMember("SpeechMarkTypes", _SpeechMarkTypeList)
-
-	SynthesizeSpeechInput_Text = SynthesizeSpeechInput.AddMember("Text", _Text)
-
-	SynthesizeSpeechInput_TextType = SynthesizeSpeechInput.AddMember("TextType", TextType)
-
-	SynthesizeSpeechInput_VoiceId = SynthesizeSpeechInput.AddMember("VoiceId", VoiceId)
-
-	SynthesizeSpeechOutput_AudioStream = SynthesizeSpeechOutput.AddMember("AudioStream", _AudioStream, &smithytraits.HTTPPayload{})
-
-	SynthesizeSpeechOutput_ContentType = SynthesizeSpeechOutput.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	SynthesizeSpeechOutput_RequestCharacters = SynthesizeSpeechOutput.AddMember("RequestCharacters", _RequestCharacters, &smithytraits.HTTPHeader{Name: "x-amzn-RequestCharacters"})
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _AmazonResourceName)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMap)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _AmazonResourceName)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://polly.amazonaws.com/doc/v1"}}, DirectMask: 0x8000}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.EventPayload{}}, DirectMask: 0x100000}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Throttling",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Throttling",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Engine"}}, DirectMask: 0x10}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "LanguageCode"}}, DirectMask: 0x10}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "IncludeAdditionalLanguageCodes"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Status"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "arn"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-Engine"}}, DirectMask: 0x80}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-LanguageCode"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-LexiconNames"}}, DirectMask: 0x80}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-OutputFormat"}}, DirectMask: 0x80}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-SampleRate"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-VoiceId"}}, DirectMask: 0x80}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-RequestCharacters"}}, DirectMask: 0x80}
+
+var mAudioEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioEvent_AudioChunk}}
+var mEngine = smithy.SchemaMembers{List: []*smithy.Schema{&sEngine_STANDARD, &sEngine_NEURAL, &sEngine_LONG_FORM, &sEngine_GENERATIVE}}
+var m_EngineList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngineList_member}}
+var mEngineNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineNotSupportedException_message}}
+var mFlushStreamConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFlushStreamConfiguration_Force}}
+var mGender = smithy.SchemaMembers{List: []*smithy.Schema{&sGender_Female, &sGender_Male}}
+var mInvalidLexiconException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidLexiconException_message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_message}}
+var mInvalidS3BucketException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidS3BucketException_message}}
+var mInvalidS3KeyException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidS3KeyException_message}}
+var mInvalidSampleRateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSampleRateException_message}}
+var mInvalidSnsTopicArnException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSnsTopicArnException_message}}
+var mInvalidSsmlException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSsmlException_message}}
+var mInvalidTagParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTagParameterException_message}}
+var mInvalidTaskIdException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTaskIdException_message}}
+var mLanguageCode = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguageCode_arb, &sLanguageCode_cmn_CN, &sLanguageCode_cy_GB, &sLanguageCode_da_DK, &sLanguageCode_de_DE, &sLanguageCode_en_AU, &sLanguageCode_en_GB, &sLanguageCode_en_GB_WLS, &sLanguageCode_en_IN, &sLanguageCode_en_US, &sLanguageCode_es_ES, &sLanguageCode_es_MX, &sLanguageCode_es_US, &sLanguageCode_fr_CA, &sLanguageCode_fr_FR, &sLanguageCode_is_IS, &sLanguageCode_it_IT, &sLanguageCode_ja_JP, &sLanguageCode_hi_IN, &sLanguageCode_ko_KR, &sLanguageCode_nb_NO, &sLanguageCode_nl_NL, &sLanguageCode_pl_PL, &sLanguageCode_pt_BR, &sLanguageCode_pt_PT, &sLanguageCode_ro_RO, &sLanguageCode_ru_RU, &sLanguageCode_sv_SE, &sLanguageCode_tr_TR, &sLanguageCode_en_NZ, &sLanguageCode_en_ZA, &sLanguageCode_ca_ES, &sLanguageCode_de_AT, &sLanguageCode_yue_CN, &sLanguageCode_ar_AE, &sLanguageCode_fi_FI, &sLanguageCode_en_IE, &sLanguageCode_nl_BE, &sLanguageCode_fr_BE, &sLanguageCode_cs_CZ, &sLanguageCode_de_CH, &sLanguageCode_en_SG}, Hash: &hLanguageCode}
+var m_LanguageCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LanguageCodeList_member}}
+var mLanguageNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguageNotSupportedException_message}}
+var mLexicon = smithy.SchemaMembers{List: []*smithy.Schema{&sLexicon_Content, &sLexicon_Name}}
+var mLexiconAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sLexiconAttributes_Alphabet, &sLexiconAttributes_LanguageCode, &sLexiconAttributes_LastModified, &sLexiconAttributes_LexiconArn, &sLexiconAttributes_LexemesCount, &sLexiconAttributes_Size}}
+var mLexiconDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sLexiconDescription_Name, &sLexiconDescription_Attributes}}
+var m_LexiconDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LexiconDescriptionList_member}}
+var m_LexiconNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LexiconNameList_member}}
+var mLexiconNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sLexiconNotFoundException_message}}
+var mLexiconSizeExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLexiconSizeExceededException_message}}
+var mMarksNotSupportedForFormatException = smithy.SchemaMembers{List: []*smithy.Schema{&sMarksNotSupportedForFormatException_message}}
+var mMaxLexemeLengthExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sMaxLexemeLengthExceededException_message}}
+var mMaxLexiconsNumberExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sMaxLexiconsNumberExceededException_message}}
+var mOutputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormat_JSON, &sOutputFormat_MP3, &sOutputFormat_OGG_OPUS, &sOutputFormat_OGG_VORBIS, &sOutputFormat_PCM, &sOutputFormat_MULAW, &sOutputFormat_ALAW}}
+var mQuotaCode = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT, &sQuotaCode_INPUT_STREAM_TIMEOUT}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_LEXICON}}
+var mServiceCode = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceCode_POLLY}}
+var mServiceFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceFailureException_message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_quotaCode, &sServiceQuotaExceededException_serviceCode}}
+var mSpeechMarkType = smithy.SchemaMembers{List: []*smithy.Schema{&sSpeechMarkType_SENTENCE, &sSpeechMarkType_SSML, &sSpeechMarkType_VISEME, &sSpeechMarkType_WORD}}
+var m_SpeechMarkTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SpeechMarkTypeList_member}}
+var mSsmlMarksNotSupportedForTextTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sSsmlMarksNotSupportedForTextTypeException_message}}
+var mStartSpeechSynthesisStreamActionStream = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeechSynthesisStreamActionStream_TextEvent, &sStartSpeechSynthesisStreamActionStream_CloseStreamEvent}}
+var mStartSpeechSynthesisStreamEventStream = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeechSynthesisStreamEventStream_AudioEvent, &sStartSpeechSynthesisStreamEventStream_StreamClosedEvent, &sStartSpeechSynthesisStreamEventStream_ValidationException, &sStartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException, &sStartSpeechSynthesisStreamEventStream_ServiceFailureException, &sStartSpeechSynthesisStreamEventStream_ThrottlingException}}
+var mStreamClosedEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamClosedEvent_RequestCharacters}}
+var mSynthesisTask = smithy.SchemaMembers{List: []*smithy.Schema{&sSynthesisTask_Engine, &sSynthesisTask_TaskId, &sSynthesisTask_TaskStatus, &sSynthesisTask_TaskStatusReason, &sSynthesisTask_OutputUri, &sSynthesisTask_CreationTime, &sSynthesisTask_RequestCharacters, &sSynthesisTask_SnsTopicArn, &sSynthesisTask_LexiconNames, &sSynthesisTask_OutputFormat, &sSynthesisTask_SampleRate, &sSynthesisTask_SpeechMarkTypes, &sSynthesisTask_TextType, &sSynthesisTask_VoiceId, &sSynthesisTask_LanguageCode}, Hash: &hSynthesisTask}
+var mSynthesisTaskNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sSynthesisTaskNotFoundException_message}}
+var m_SynthesisTasks = smithy.SchemaMembers{List: []*smithy.Schema{&s_SynthesisTasks_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskStatus_SCHEDULED, &sTaskStatus_IN_PROGRESS, &sTaskStatus_COMPLETED, &sTaskStatus_FAILED}}
+var mTextEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sTextEvent_Text, &sTextEvent_TextType, &sTextEvent_FlushStreamConfiguration}}
+var mTextLengthExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTextLengthExceededException_message}}
+var mTextType = smithy.SchemaMembers{List: []*smithy.Schema{&sTextType_SSML, &sTextType_TEXT}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_throttlingReasons}}
+var mThrottlingReason = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingReason_reason, &sThrottlingReason_resource}}
+var m_ThrottlingReasonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThrottlingReasonList_member}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mUnsupportedPlsAlphabetException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedPlsAlphabetException_message}}
+var mUnsupportedPlsLanguageException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedPlsLanguageException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fields}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNSUPPORTED_OPERATION, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER, &sValidationExceptionReason_INVALID_INBOUND_EVENT}}
+var mVoice = smithy.SchemaMembers{List: []*smithy.Schema{&sVoice_Gender, &sVoice_Id, &sVoice_LanguageCode, &sVoice_LanguageName, &sVoice_Name, &sVoice_AdditionalLanguageCodes, &sVoice_SupportedEngines}}
+var mVoiceId = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceId_Aditi, &sVoiceId_Amy, &sVoiceId_Astrid, &sVoiceId_Bianca, &sVoiceId_Brian, &sVoiceId_Camila, &sVoiceId_Carla, &sVoiceId_Carmen, &sVoiceId_Celine, &sVoiceId_Chantal, &sVoiceId_Conchita, &sVoiceId_Cristiano, &sVoiceId_Dora, &sVoiceId_Emma, &sVoiceId_Enrique, &sVoiceId_Ewa, &sVoiceId_Filiz, &sVoiceId_Gabrielle, &sVoiceId_Geraint, &sVoiceId_Giorgio, &sVoiceId_Gwyneth, &sVoiceId_Hans, &sVoiceId_Ines, &sVoiceId_Ivy, &sVoiceId_Jacek, &sVoiceId_Jan, &sVoiceId_Joanna, &sVoiceId_Joey, &sVoiceId_Justin, &sVoiceId_Karl, &sVoiceId_Kendra, &sVoiceId_Kevin, &sVoiceId_Kimberly, &sVoiceId_Lea, &sVoiceId_Liv, &sVoiceId_Lotte, &sVoiceId_Lucia, &sVoiceId_Lupe, &sVoiceId_Mads, &sVoiceId_Maja, &sVoiceId_Marlene, &sVoiceId_Mathieu, &sVoiceId_Matthew, &sVoiceId_Maxim, &sVoiceId_Mia, &sVoiceId_Miguel, &sVoiceId_Mizuki, &sVoiceId_Naja, &sVoiceId_Nicole, &sVoiceId_Olivia, &sVoiceId_Penelope, &sVoiceId_Raveena, &sVoiceId_Ricardo, &sVoiceId_Ruben, &sVoiceId_Russell, &sVoiceId_Salli, &sVoiceId_Seoyeon, &sVoiceId_Takumi, &sVoiceId_Tatyana, &sVoiceId_Vicki, &sVoiceId_Vitoria, &sVoiceId_Zeina, &sVoiceId_Zhiyu, &sVoiceId_Aria, &sVoiceId_Ayanda, &sVoiceId_Arlet, &sVoiceId_Hannah, &sVoiceId_Arthur, &sVoiceId_Daniel, &sVoiceId_Liam, &sVoiceId_Pedro, &sVoiceId_Kajal, &sVoiceId_Hiujin, &sVoiceId_Laura, &sVoiceId_Elin, &sVoiceId_Ida, &sVoiceId_Suvi, &sVoiceId_Ola, &sVoiceId_Hala, &sVoiceId_Andres, &sVoiceId_Sergio, &sVoiceId_Remi, &sVoiceId_Adriano, &sVoiceId_Thiago, &sVoiceId_Ruth, &sVoiceId_Stephen, &sVoiceId_Kazuha, &sVoiceId_Tomoko, &sVoiceId_Niamh, &sVoiceId_Sofie, &sVoiceId_Lisa, &sVoiceId_Isabelle, &sVoiceId_Zayd, &sVoiceId_Danielle, &sVoiceId_Gregory, &sVoiceId_Burcu, &sVoiceId_Jitka, &sVoiceId_Sabrina, &sVoiceId_Jasmine, &sVoiceId_Jihye, &sVoiceId_Ambre, &sVoiceId_Beatrice, &sVoiceId_Florian, &sVoiceId_Lennart, &sVoiceId_Lorenzo, &sVoiceId_Tiffany, &sVoiceId_Arjun, &sVoiceId_Carlos, &sVoiceId_Carolina, &sVoiceId_Curtis, &sVoiceId_Hyunduk, &sVoiceId_Kenneth, &sVoiceId_Kiara, &sVoiceId_Leo, &sVoiceId_Nate, &sVoiceId_Tina}, Hash: &hVoiceId}
+var m_VoiceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VoiceList_member}}
+var mDeleteLexiconInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLexiconInput_Name}}
+var mDescribeVoicesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVoicesInput_Engine, &sDescribeVoicesInput_LanguageCode, &sDescribeVoicesInput_IncludeAdditionalLanguageCodes, &sDescribeVoicesInput_NextToken}}
+var mDescribeVoicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVoicesOutput_Voices, &sDescribeVoicesOutput_NextToken}}
+var mGetLexiconInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLexiconInput_Name}}
+var mGetLexiconOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLexiconOutput_Lexicon, &sGetLexiconOutput_LexiconAttributes}}
+var mGetSpeechSynthesisTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpeechSynthesisTaskInput_TaskId}}
+var mGetSpeechSynthesisTaskOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpeechSynthesisTaskOutput_SynthesisTask}}
+var mListLexiconsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLexiconsInput_NextToken}}
+var mListLexiconsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLexiconsOutput_Lexicons, &sListLexiconsOutput_NextToken}}
+var mListSpeechSynthesisTasksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSpeechSynthesisTasksInput_MaxResults, &sListSpeechSynthesisTasksInput_NextToken, &sListSpeechSynthesisTasksInput_Status}}
+var mListSpeechSynthesisTasksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSpeechSynthesisTasksOutput_NextToken, &sListSpeechSynthesisTasksOutput_SynthesisTasks}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mPutLexiconInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLexiconInput_Name, &sPutLexiconInput_Content, &sPutLexiconInput_Tags}}
+var mStartSpeechSynthesisStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeechSynthesisStreamInput_Engine, &sStartSpeechSynthesisStreamInput_LanguageCode, &sStartSpeechSynthesisStreamInput_LexiconNames, &sStartSpeechSynthesisStreamInput_OutputFormat, &sStartSpeechSynthesisStreamInput_SampleRate, &sStartSpeechSynthesisStreamInput_VoiceId, &sStartSpeechSynthesisStreamInput_ActionStream}}
+var mStartSpeechSynthesisStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeechSynthesisStreamOutput_EventStream}}
+var mStartSpeechSynthesisTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeechSynthesisTaskInput_Engine, &sStartSpeechSynthesisTaskInput_LanguageCode, &sStartSpeechSynthesisTaskInput_LexiconNames, &sStartSpeechSynthesisTaskInput_OutputFormat, &sStartSpeechSynthesisTaskInput_OutputS3BucketName, &sStartSpeechSynthesisTaskInput_OutputS3KeyPrefix, &sStartSpeechSynthesisTaskInput_SampleRate, &sStartSpeechSynthesisTaskInput_SnsTopicArn, &sStartSpeechSynthesisTaskInput_SpeechMarkTypes, &sStartSpeechSynthesisTaskInput_Text, &sStartSpeechSynthesisTaskInput_TextType, &sStartSpeechSynthesisTaskInput_VoiceId}, Hash: &hStartSpeechSynthesisTaskInput}
+var mStartSpeechSynthesisTaskOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeechSynthesisTaskOutput_SynthesisTask}}
+var mSynthesizeSpeechInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSynthesizeSpeechInput_Engine, &sSynthesizeSpeechInput_LanguageCode, &sSynthesizeSpeechInput_LexiconNames, &sSynthesizeSpeechInput_OutputFormat, &sSynthesizeSpeechInput_SampleRate, &sSynthesizeSpeechInput_SpeechMarkTypes, &sSynthesizeSpeechInput_Text, &sSynthesizeSpeechInput_TextType, &sSynthesizeSpeechInput_VoiceId}, Hash: &hSynthesizeSpeechInput}
+var mSynthesizeSpeechOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSynthesizeSpeechOutput_AudioStream, &sSynthesizeSpeechOutput_ContentType, &sSynthesizeSpeechOutput_RequestCharacters}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_TagKeys}}
+
+var hLanguageCode = smithy.MemberHash{Seed: 517, Slots: []uint16{
+	4, 0, 0, 0, 0, 0, 0, 0, 5, 15, 0, 42, 13, 0, 0, 0, 0, 0, 0, 11, 0, 9, 0, 22,
+	36, 7, 0, 0, 20, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 23, 19, 0, 0, 39, 10,
+	0, 0, 0, 0, 1, 30, 0, 0, 12, 24, 18, 31, 0, 0, 0, 0, 0, 0, 0, 0, 21, 29, 0, 33,
+	0, 38, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0, 40, 0, 0, 0, 0, 6, 0, 37, 0, 0, 0, 34,
+	26, 0, 14, 17, 0, 0, 0, 32, 0, 0, 0, 0, 3, 0, 35, 25, 0, 0, 0, 8, 0, 0, 28, 0,
+	0, 0, 0, 0, 27, 0, 0, 0,
+}}
+var hSynthesisTask = smithy.MemberHash{Seed: 82, Slots: []uint16{
+	0, 5, 4, 0, 14, 0, 0, 0, 0, 15, 0, 7, 11, 12, 0, 0, 0, 0, 0, 0, 10, 8, 1, 13,
+	2, 0, 0, 0, 6, 3, 0, 9,
+}}
+var hVoiceId = smithy.MemberHash{Seed: 136, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 99, 0, 0, 0, 0, 91, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 101, 108, 0, 0, 0, 79, 95, 0, 0, 0, 0, 0, 114, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 0, 29, 0, 0, 0, 0, 0, 0, 0, 20,
+	0, 0, 0, 0, 0, 0, 1, 76, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0,
+	0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 111, 0, 0, 0, 0, 0, 105, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 14, 72, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 106, 0, 0, 0, 74, 0,
+	0, 0, 48, 0, 0, 88, 0, 0, 0, 110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94,
+	109, 0, 0, 0, 0, 0, 0, 64, 47, 0, 0, 0, 0, 0, 0, 0, 84, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 7, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 83, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 37, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 32, 55, 0, 52, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 85, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 86, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	87, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0,
+	0, 0, 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 0, 0, 0, 25,
+	0, 0, 0, 0, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	4, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
+	0, 0, 0, 92, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 0, 0, 0, 0, 0,
+	0, 0, 113, 0, 0, 0, 0, 0, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 63, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	67, 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 116, 0, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 0, 53, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 81, 0, 0, 0, 0, 0, 0, 0, 0, 97, 0, 0, 31, 0, 0, 0, 45,
+	0, 0, 0, 73, 0, 0, 0, 78, 0, 0, 0, 68, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 46, 0, 0, 0, 54, 0, 0, 0, 0, 38, 0, 0, 58, 5, 0, 0, 0, 0, 0,
+	28, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 112, 0, 0, 0, 0, 0, 0, 80, 0,
+	0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0,
+	0, 0, 0, 0, 89, 0, 0, 56, 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0,
+	0, 50, 0, 0, 104, 0, 0, 39, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 30, 0,
+	115, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 77, 0, 27, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 70, 0, 0, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0,
+}}
+var hStartSpeechSynthesisTaskInput = smithy.MemberHash{Seed: 19, Slots: []uint16{
+	4, 0, 9, 0, 0, 0, 6, 10, 2, 0, 11, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 12, 0, 8,
+	3, 0, 0, 0, 0, 0, 0, 7,
+}}
+var hSynthesizeSpeechInput = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 0, 3, 0, 0, 0, 7, 0, 0, 0, 4, 0, 0, 0, 0, 2, 0, 0, 5, 9, 0, 0, 0,
+	0, 1, 0, 0, 0, 6, 0, 8,
+}}
+
+var sDeleteLexicon = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLexicon, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLexicon})
+var sDescribeVoices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVoices, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVoices})
+var sGetLexicon = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLexicon, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetLexicon})
+var sGetSpeechSynthesisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeechSynthesisTask, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetSpeechSynthesisTask})
+var sListLexicons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLexicons, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListLexicons})
+var sListSpeechSynthesisTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeechSynthesisTasks, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListSpeechSynthesisTasks})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutLexicon = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLexicon, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ePutLexicon})
+var sStartSpeechSynthesisStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisStream, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eStartSpeechSynthesisStream})
+var sStartSpeechSynthesisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisTask, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eStartSpeechSynthesisTask})
+var sSynthesizeSpeech = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSynthesizeSpeech, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eSynthesizeSpeech})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_Parrot_v1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Parrot_v1, Traits: &t13, Type: smithy.ShapeTypeService, Ext: &e_Parrot_v1})
+var s_Alphabet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alphabet, Type: smithy.ShapeTypeString, Ext: &e_Alphabet})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_AudioChunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudioChunk, Type: smithy.ShapeTypeBlob, Ext: &e_AudioChunk})
+var sAudioEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioEvent, Members: &mAudioEvent, Type: smithy.ShapeTypeStructure, Ext: &eAudioEvent})
+var sAudioEvent_AudioChunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioChunk", ID: &i_AudioChunk, Traits: &t14, Type: smithy.ShapeTypeBlob, Ext: &eAudioEvent_AudioChunk})
+var s_AudioStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudioStream, Traits: &t15, Type: smithy.ShapeTypeBlob, Ext: &e_AudioStream})
+var s_AvailabilityErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityErrorMessage})
+var sCloseStreamEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseStreamEvent, Type: smithy.ShapeTypeStructure, Ext: &eCloseStreamEvent})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &e_ContentType})
+var s_CoralAvailabilityThrottledResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &e_CoralAvailabilityThrottledResource})
+var s_CoralAvailabilityThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &e_CoralAvailabilityThrottlingReason})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var sEngine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngine, Members: &mEngine, Type: smithy.ShapeTypeEnum, Ext: &eEngine})
+var sEngine_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngine_STANDARD})
+var sEngine_NEURAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEURAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngine_NEURAL})
+var sEngine_LONG_FORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LONG_FORM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngine_LONG_FORM})
+var sEngine_GENERATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEngine_GENERATIVE})
+var s_EngineList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngineList, Members: &m_EngineList, Type: smithy.ShapeTypeList, Ext: &e_EngineList})
+var s_EngineList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngine, Members: &mEngine, Type: smithy.ShapeTypeEnum, Ext: &e_EngineList_member})
+var sEngineNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineNotSupportedException, Members: &mEngineNotSupportedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eEngineNotSupportedException})
+var sEngineNotSupportedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eEngineNotSupportedException_message})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sFlushStreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlushStreamConfiguration, Members: &mFlushStreamConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFlushStreamConfiguration})
+var sFlushStreamConfiguration_Force = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Force", ID: &i_Force, Type: smithy.ShapeTypeBoolean, Ext: &eFlushStreamConfiguration_Force})
+var s_Force = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Force, Type: smithy.ShapeTypeBoolean, Ext: &e_Force})
+var sGender = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGender, Members: &mGender, Type: smithy.ShapeTypeEnum, Ext: &eGender})
+var sGender_Female = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Female", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGender_Female})
+var sGender_Male = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Male", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGender_Male})
+var s_IncludeAdditionalLanguageCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeAdditionalLanguageCodes, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeAdditionalLanguageCodes})
+var sInvalidLexiconException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidLexiconException, Members: &mInvalidLexiconException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidLexiconException})
+var sInvalidLexiconException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidLexiconException_message})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidNextTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_message})
+var sInvalidS3BucketException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidS3BucketException, Members: &mInvalidS3BucketException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidS3BucketException})
+var sInvalidS3BucketException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidS3BucketException_message})
+var sInvalidS3KeyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidS3KeyException, Members: &mInvalidS3KeyException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidS3KeyException})
+var sInvalidS3KeyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidS3KeyException_message})
+var sInvalidSampleRateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSampleRateException, Members: &mInvalidSampleRateException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSampleRateException})
+var sInvalidSampleRateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidSampleRateException_message})
+var sInvalidSnsTopicArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSnsTopicArnException, Members: &mInvalidSnsTopicArnException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSnsTopicArnException})
+var sInvalidSnsTopicArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidSnsTopicArnException_message})
+var sInvalidSsmlException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSsmlException, Members: &mInvalidSsmlException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSsmlException})
+var sInvalidSsmlException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidSsmlException_message})
+var sInvalidTagParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagParameterException, Members: &mInvalidTagParameterException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTagParameterException})
+var sInvalidTagParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTagParameterException_message})
+var sInvalidTaskIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTaskIdException, Members: &mInvalidTaskIdException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTaskIdException})
+var sInvalidTaskIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTaskIdException_message})
+var sLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eLanguageCode})
+var sLanguageCode_arb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arb", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_arb})
+var sLanguageCode_cmn_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cmn_CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_cmn_CN})
+var sLanguageCode_cy_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cy_GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_cy_GB})
+var sLanguageCode_da_DK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "da_DK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_da_DK})
+var sLanguageCode_de_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "de_DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_de_DE})
+var sLanguageCode_en_AU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_AU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_AU})
+var sLanguageCode_en_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_GB})
+var sLanguageCode_en_GB_WLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_GB_WLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_GB_WLS})
+var sLanguageCode_en_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_IN})
+var sLanguageCode_en_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_US})
+var sLanguageCode_es_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "es_ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_es_ES})
+var sLanguageCode_es_MX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "es_MX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_es_MX})
+var sLanguageCode_es_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "es_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_es_US})
+var sLanguageCode_fr_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fr_CA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_fr_CA})
+var sLanguageCode_fr_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fr_FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_fr_FR})
+var sLanguageCode_is_IS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "is_IS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_is_IS})
+var sLanguageCode_it_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "it_IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_it_IT})
+var sLanguageCode_ja_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ja_JP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ja_JP})
+var sLanguageCode_hi_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hi_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_hi_IN})
+var sLanguageCode_ko_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ko_KR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ko_KR})
+var sLanguageCode_nb_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nb_NO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_nb_NO})
+var sLanguageCode_nl_NL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nl_NL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_nl_NL})
+var sLanguageCode_pl_PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pl_PL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_pl_PL})
+var sLanguageCode_pt_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pt_BR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_pt_BR})
+var sLanguageCode_pt_PT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pt_PT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_pt_PT})
+var sLanguageCode_ro_RO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ro_RO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ro_RO})
+var sLanguageCode_ru_RU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ru_RU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ru_RU})
+var sLanguageCode_sv_SE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sv_SE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_sv_SE})
+var sLanguageCode_tr_TR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tr_TR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_tr_TR})
+var sLanguageCode_en_NZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_NZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_NZ})
+var sLanguageCode_en_ZA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_ZA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_ZA})
+var sLanguageCode_ca_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ca_ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ca_ES})
+var sLanguageCode_de_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "de_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_de_AT})
+var sLanguageCode_yue_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "yue_CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_yue_CN})
+var sLanguageCode_ar_AE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ar_AE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ar_AE})
+var sLanguageCode_fi_FI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fi_FI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_fi_FI})
+var sLanguageCode_en_IE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_IE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_IE})
+var sLanguageCode_nl_BE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nl_BE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_nl_BE})
+var sLanguageCode_fr_BE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fr_BE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_fr_BE})
+var sLanguageCode_cs_CZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cs_CZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_cs_CZ})
+var sLanguageCode_de_CH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "de_CH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_de_CH})
+var sLanguageCode_en_SG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_SG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_en_SG})
+var s_LanguageCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageCodeList, Members: &m_LanguageCodeList, Type: smithy.ShapeTypeList, Ext: &e_LanguageCodeList})
+var s_LanguageCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &e_LanguageCodeList_member})
+var s_LanguageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageName, Type: smithy.ShapeTypeString, Ext: &e_LanguageName})
+var sLanguageNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageNotSupportedException, Members: &mLanguageNotSupportedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eLanguageNotSupportedException})
+var sLanguageNotSupportedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLanguageNotSupportedException_message})
+var s_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModified, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastModified})
+var s_LexemesCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LexemesCount, Type: smithy.ShapeTypeInteger, Ext: &e_LexemesCount})
+var sLexicon = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLexicon, Members: &mLexicon, Type: smithy.ShapeTypeStructure, Ext: &eLexicon})
+var sLexicon_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_LexiconContent, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eLexicon_Content})
+var sLexicon_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LexiconName, Type: smithy.ShapeTypeString, Ext: &eLexicon_Name})
+var s_LexiconArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LexiconArn, Type: smithy.ShapeTypeString, Ext: &e_LexiconArn})
+var sLexiconAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLexiconAttributes, Members: &mLexiconAttributes, Type: smithy.ShapeTypeStructure, Ext: &eLexiconAttributes})
+var sLexiconAttributes_Alphabet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alphabet", ID: &i_Alphabet, Type: smithy.ShapeTypeString, Ext: &eLexiconAttributes_Alphabet})
+var sLexiconAttributes_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eLexiconAttributes_LanguageCode})
+var sLexiconAttributes_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_LastModified, Type: smithy.ShapeTypeTimestamp, Ext: &eLexiconAttributes_LastModified})
+var sLexiconAttributes_LexiconArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LexiconArn", ID: &i_LexiconArn, Type: smithy.ShapeTypeString, Ext: &eLexiconAttributes_LexiconArn})
+var sLexiconAttributes_LexemesCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LexemesCount", ID: &i_LexemesCount, Type: smithy.ShapeTypeInteger, Ext: &eLexiconAttributes_LexemesCount})
+var sLexiconAttributes_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_Size, Type: smithy.ShapeTypeInteger, Ext: &eLexiconAttributes_Size})
+var s_LexiconContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LexiconContent, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &e_LexiconContent})
+var sLexiconDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLexiconDescription, Members: &mLexiconDescription, Type: smithy.ShapeTypeStructure, Ext: &eLexiconDescription})
+var sLexiconDescription_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LexiconName, Type: smithy.ShapeTypeString, Ext: &eLexiconDescription_Name})
+var sLexiconDescription_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &iLexiconAttributes, Members: &mLexiconAttributes, Type: smithy.ShapeTypeStructure, Ext: &eLexiconDescription_Attributes})
+var s_LexiconDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LexiconDescriptionList, Members: &m_LexiconDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_LexiconDescriptionList})
+var s_LexiconDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLexiconDescription, Members: &mLexiconDescription, Type: smithy.ShapeTypeStructure, Ext: &e_LexiconDescriptionList_member})
+var s_LexiconName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LexiconName, Type: smithy.ShapeTypeString, Ext: &e_LexiconName})
+var s_LexiconNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LexiconNameList, Members: &m_LexiconNameList, Type: smithy.ShapeTypeList, Ext: &e_LexiconNameList})
+var s_LexiconNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LexiconName, Type: smithy.ShapeTypeString, Ext: &e_LexiconNameList_member})
+var sLexiconNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLexiconNotFoundException, Members: &mLexiconNotFoundException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eLexiconNotFoundException})
+var sLexiconNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLexiconNotFoundException_message})
+var sLexiconSizeExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLexiconSizeExceededException, Members: &mLexiconSizeExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eLexiconSizeExceededException})
+var sLexiconSizeExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLexiconSizeExceededException_message})
+var sMarksNotSupportedForFormatException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarksNotSupportedForFormatException, Members: &mMarksNotSupportedForFormatException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eMarksNotSupportedForFormatException})
+var sMarksNotSupportedForFormatException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMarksNotSupportedForFormatException_message})
+var sMaxLexemeLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaxLexemeLengthExceededException, Members: &mMaxLexemeLengthExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eMaxLexemeLengthExceededException})
+var sMaxLexemeLengthExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMaxLexemeLengthExceededException_message})
+var sMaxLexiconsNumberExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaxLexiconsNumberExceededException, Members: &mMaxLexiconsNumberExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eMaxLexiconsNumberExceededException})
+var sMaxLexiconsNumberExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMaxLexiconsNumberExceededException_message})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eOutputFormat})
+var sOutputFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_JSON})
+var sOutputFormat_MP3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_MP3})
+var sOutputFormat_OGG_OPUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OGG_OPUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_OGG_OPUS})
+var sOutputFormat_OGG_VORBIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OGG_VORBIS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_OGG_VORBIS})
+var sOutputFormat_PCM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_PCM})
+var sOutputFormat_MULAW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULAW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_MULAW})
+var sOutputFormat_ALAW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALAW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat_ALAW})
+var s_OutputS3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputS3BucketName, Type: smithy.ShapeTypeString, Ext: &e_OutputS3BucketName})
+var s_OutputS3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputS3KeyPrefix, Type: smithy.ShapeTypeString, Ext: &e_OutputS3KeyPrefix})
+var s_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &e_OutputUri})
+var sQuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaCode, Members: &mQuotaCode, Type: smithy.ShapeTypeEnum, Ext: &eQuotaCode})
+var sQuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INPUT_STREAM_INBOUND_EVENT_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT})
+var sQuotaCode_INPUT_STREAM_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INPUT_STREAM_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQuotaCode_INPUT_STREAM_TIMEOUT})
+var s_RequestCharacters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestCharacters, Type: smithy.ShapeTypeInteger, Ext: &e_RequestCharacters})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_resourceType})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sResourceType_LEXICON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEXICON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_LEXICON})
+var s_SampleRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleRate, Type: smithy.ShapeTypeString, Ext: &e_SampleRate})
+var sServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceCode, Members: &mServiceCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceCode})
+var sServiceCode_POLLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceCode_POLLY})
+var sServiceFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFailureException, Members: &mServiceFailureException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eServiceFailureException})
+var sServiceFailureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceFailureException_message})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &iQuotaCode, Members: &mQuotaCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededException_quotaCode})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &iServiceCode, Members: &mServiceCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededException_serviceCode})
+var s_Size = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Size, Type: smithy.ShapeTypeInteger, Ext: &e_Size})
+var s_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &e_SnsTopicArn})
+var sSpeechMarkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeechMarkType, Members: &mSpeechMarkType, Type: smithy.ShapeTypeEnum, Ext: &eSpeechMarkType})
+var sSpeechMarkType_SENTENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENTENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpeechMarkType_SENTENCE})
+var sSpeechMarkType_SSML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpeechMarkType_SSML})
+var sSpeechMarkType_VISEME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VISEME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpeechMarkType_VISEME})
+var sSpeechMarkType_WORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpeechMarkType_WORD})
+var s_SpeechMarkTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeechMarkTypeList, Members: &m_SpeechMarkTypeList, Type: smithy.ShapeTypeList, Ext: &e_SpeechMarkTypeList})
+var s_SpeechMarkTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpeechMarkType, Members: &mSpeechMarkType, Type: smithy.ShapeTypeEnum, Ext: &e_SpeechMarkTypeList_member})
+var sSsmlMarksNotSupportedForTextTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSsmlMarksNotSupportedForTextTypeException, Members: &mSsmlMarksNotSupportedForTextTypeException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eSsmlMarksNotSupportedForTextTypeException})
+var sSsmlMarksNotSupportedForTextTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eSsmlMarksNotSupportedForTextTypeException_message})
+var sStartSpeechSynthesisStreamActionStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisStreamActionStream, Members: &mStartSpeechSynthesisStreamActionStream, Traits: &t15, Type: smithy.ShapeTypeUnion, Ext: &eStartSpeechSynthesisStreamActionStream})
+var sStartSpeechSynthesisStreamActionStream_TextEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextEvent", ID: &iTextEvent, Members: &mTextEvent, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamActionStream_TextEvent})
+var sStartSpeechSynthesisStreamActionStream_CloseStreamEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloseStreamEvent", ID: &iCloseStreamEvent, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamActionStream_CloseStreamEvent})
+var sStartSpeechSynthesisStreamEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisStreamEventStream, Members: &mStartSpeechSynthesisStreamEventStream, Traits: &t15, Type: smithy.ShapeTypeUnion, Ext: &eStartSpeechSynthesisStreamEventStream})
+var sStartSpeechSynthesisStreamEventStream_AudioEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioEvent", ID: &iAudioEvent, Members: &mAudioEvent, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamEventStream_AudioEvent})
+var sStartSpeechSynthesisStreamEventStream_StreamClosedEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClosedEvent", ID: &iStreamClosedEvent, Members: &mStreamClosedEvent, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamEventStream_StreamClosedEvent})
+var sStartSpeechSynthesisStreamEventStream_ValidationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationException", ID: &iValidationException, Members: &mValidationException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamEventStream_ValidationException})
+var sStartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaExceededException", ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException})
+var sStartSpeechSynthesisStreamEventStream_ServiceFailureException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceFailureException", ID: &iServiceFailureException, Members: &mServiceFailureException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamEventStream_ServiceFailureException})
+var sStartSpeechSynthesisStreamEventStream_ThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThrottlingException", ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamEventStream_ThrottlingException})
+var sStreamClosedEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamClosedEvent, Members: &mStreamClosedEvent, Type: smithy.ShapeTypeStructure, Ext: &eStreamClosedEvent})
+var sStreamClosedEvent_RequestCharacters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCharacters", ID: &i_RequestCharacters, Type: smithy.ShapeTypeInteger, Ext: &eStreamClosedEvent_RequestCharacters})
+var sSynthesisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSynthesisTask, Members: &mSynthesisTask, Type: smithy.ShapeTypeStructure, Ext: &eSynthesisTask})
+var sSynthesisTask_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &iEngine, Members: &mEngine, Type: smithy.ShapeTypeEnum, Ext: &eSynthesisTask_Engine})
+var sSynthesisTask_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskId, Type: smithy.ShapeTypeString, Ext: &eSynthesisTask_TaskId})
+var sSynthesisTask_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eSynthesisTask_TaskStatus})
+var sSynthesisTask_TaskStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatusReason", ID: &i_TaskStatusReason, Type: smithy.ShapeTypeString, Ext: &eSynthesisTask_TaskStatusReason})
+var sSynthesisTask_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &eSynthesisTask_OutputUri})
+var sSynthesisTask_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eSynthesisTask_CreationTime})
+var sSynthesisTask_RequestCharacters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCharacters", ID: &i_RequestCharacters, Type: smithy.ShapeTypeInteger, Ext: &eSynthesisTask_RequestCharacters})
+var sSynthesisTask_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArn", ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &eSynthesisTask_SnsTopicArn})
+var sSynthesisTask_LexiconNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LexiconNames", ID: &i_LexiconNameList, Members: &m_LexiconNameList, Type: smithy.ShapeTypeList, Ext: &eSynthesisTask_LexiconNames})
+var sSynthesisTask_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eSynthesisTask_OutputFormat})
+var sSynthesisTask_SampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleRate", ID: &i_SampleRate, Type: smithy.ShapeTypeString, Ext: &eSynthesisTask_SampleRate})
+var sSynthesisTask_SpeechMarkTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeechMarkTypes", ID: &i_SpeechMarkTypeList, Members: &m_SpeechMarkTypeList, Type: smithy.ShapeTypeList, Ext: &eSynthesisTask_SpeechMarkTypes})
+var sSynthesisTask_TextType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextType", ID: &iTextType, Members: &mTextType, Type: smithy.ShapeTypeEnum, Ext: &eSynthesisTask_TextType})
+var sSynthesisTask_VoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceId", ID: &iVoiceId, Members: &mVoiceId, Type: smithy.ShapeTypeEnum, Ext: &eSynthesisTask_VoiceId})
+var sSynthesisTask_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eSynthesisTask_LanguageCode})
+var sSynthesisTaskNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSynthesisTaskNotFoundException, Members: &mSynthesisTaskNotFoundException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eSynthesisTaskNotFoundException})
+var sSynthesisTaskNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eSynthesisTaskNotFoundException_message})
+var s_SynthesisTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesisTasks, Members: &m_SynthesisTasks, Type: smithy.ShapeTypeList, Ext: &e_SynthesisTasks})
+var s_SynthesisTasks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSynthesisTask, Members: &mSynthesisTask, Type: smithy.ShapeTypeStructure, Ext: &e_SynthesisTasks_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskId, Type: smithy.ShapeTypeString, Ext: &e_TaskId})
+var sTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskStatus})
+var sTaskStatus_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_SCHEDULED})
+var sTaskStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_IN_PROGRESS})
+var sTaskStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_COMPLETED})
+var sTaskStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_FAILED})
+var s_TaskStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskStatusReason, Type: smithy.ShapeTypeString, Ext: &e_TaskStatusReason})
+var s_Text = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Text, Type: smithy.ShapeTypeString, Ext: &e_Text})
+var sTextEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextEvent, Members: &mTextEvent, Type: smithy.ShapeTypeStructure, Ext: &eTextEvent})
+var sTextEvent_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_Text, Type: smithy.ShapeTypeString, Ext: &eTextEvent_Text})
+var sTextEvent_TextType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextType", ID: &iTextType, Members: &mTextType, Type: smithy.ShapeTypeEnum, Ext: &eTextEvent_TextType})
+var sTextEvent_FlushStreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlushStreamConfiguration", ID: &iFlushStreamConfiguration, Members: &mFlushStreamConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTextEvent_FlushStreamConfiguration})
+var sTextLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextLengthExceededException, Members: &mTextLengthExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eTextLengthExceededException})
+var sTextLengthExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTextLengthExceededException_message})
+var sTextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextType, Members: &mTextType, Type: smithy.ShapeTypeEnum, Ext: &eTextType})
+var sTextType_SSML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextType_SSML})
+var sTextType_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextType_TEXT})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_throttlingReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttlingReasons", ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &eThrottlingException_throttlingReasons})
+var sThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingReason})
+var sThrottlingReason_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &eThrottlingReason_reason})
+var sThrottlingReason_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &eThrottlingReason_resource})
+var s_ThrottlingReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &e_ThrottlingReasonList})
+var s_ThrottlingReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &e_ThrottlingReasonList_member})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var sUnsupportedPlsAlphabetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedPlsAlphabetException, Members: &mUnsupportedPlsAlphabetException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedPlsAlphabetException})
+var sUnsupportedPlsAlphabetException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eUnsupportedPlsAlphabetException_message})
+var sUnsupportedPlsLanguageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedPlsLanguageException, Members: &mUnsupportedPlsLanguageException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedPlsLanguageException})
+var sUnsupportedPlsLanguageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eUnsupportedPlsLanguageException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fields})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ValidationExceptionFieldName, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ValidationExceptionFieldMessage, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var s_ValidationExceptionFieldMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldMessage, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionFieldMessage})
+var s_ValidationExceptionFieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldName, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionFieldName})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_UNSUPPORTED_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNSUPPORTED_OPERATION})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sValidationExceptionReason_INVALID_INBOUND_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_INBOUND_EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_INBOUND_EVENT})
+var sVoice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoice, Members: &mVoice, Type: smithy.ShapeTypeStructure, Ext: &eVoice})
+var sVoice_Gender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gender", ID: &iGender, Members: &mGender, Type: smithy.ShapeTypeEnum, Ext: &eVoice_Gender})
+var sVoice_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &iVoiceId, Members: &mVoiceId, Type: smithy.ShapeTypeEnum, Ext: &eVoice_Id})
+var sVoice_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eVoice_LanguageCode})
+var sVoice_LanguageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageName", ID: &i_LanguageName, Type: smithy.ShapeTypeString, Ext: &eVoice_LanguageName})
+var sVoice_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceName, Type: smithy.ShapeTypeString, Ext: &eVoice_Name})
+var sVoice_AdditionalLanguageCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLanguageCodes", ID: &i_LanguageCodeList, Members: &m_LanguageCodeList, Type: smithy.ShapeTypeList, Ext: &eVoice_AdditionalLanguageCodes})
+var sVoice_SupportedEngines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedEngines", ID: &i_EngineList, Members: &m_EngineList, Type: smithy.ShapeTypeList, Ext: &eVoice_SupportedEngines})
+var sVoiceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceId, Members: &mVoiceId, Type: smithy.ShapeTypeEnum, Ext: &eVoiceId})
+var sVoiceId_Aditi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aditi", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Aditi})
+var sVoiceId_Amy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amy", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Amy})
+var sVoiceId_Astrid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Astrid", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Astrid})
+var sVoiceId_Bianca = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bianca", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Bianca})
+var sVoiceId_Brian = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Brian", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Brian})
+var sVoiceId_Camila = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Camila", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Camila})
+var sVoiceId_Carla = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Carla", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Carla})
+var sVoiceId_Carmen = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Carmen", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Carmen})
+var sVoiceId_Celine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Celine", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Celine})
+var sVoiceId_Chantal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Chantal", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Chantal})
+var sVoiceId_Conchita = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conchita", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Conchita})
+var sVoiceId_Cristiano = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cristiano", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Cristiano})
+var sVoiceId_Dora = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dora", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Dora})
+var sVoiceId_Emma = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Emma", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Emma})
+var sVoiceId_Enrique = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enrique", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Enrique})
+var sVoiceId_Ewa = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ewa", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ewa})
+var sVoiceId_Filiz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filiz", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Filiz})
+var sVoiceId_Gabrielle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gabrielle", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Gabrielle})
+var sVoiceId_Geraint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geraint", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Geraint})
+var sVoiceId_Giorgio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Giorgio", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Giorgio})
+var sVoiceId_Gwyneth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gwyneth", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Gwyneth})
+var sVoiceId_Hans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hans", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Hans})
+var sVoiceId_Ines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ines", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ines})
+var sVoiceId_Ivy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ivy", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ivy})
+var sVoiceId_Jacek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jacek", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Jacek})
+var sVoiceId_Jan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jan", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Jan})
+var sVoiceId_Joanna = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Joanna", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Joanna})
+var sVoiceId_Joey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Joey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Joey})
+var sVoiceId_Justin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Justin", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Justin})
+var sVoiceId_Karl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Karl", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Karl})
+var sVoiceId_Kendra = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kendra", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Kendra})
+var sVoiceId_Kevin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kevin", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Kevin})
+var sVoiceId_Kimberly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kimberly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Kimberly})
+var sVoiceId_Lea = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lea", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Lea})
+var sVoiceId_Liv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Liv", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Liv})
+var sVoiceId_Lotte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lotte", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Lotte})
+var sVoiceId_Lucia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lucia", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Lucia})
+var sVoiceId_Lupe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lupe", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Lupe})
+var sVoiceId_Mads = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mads", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Mads})
+var sVoiceId_Maja = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maja", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Maja})
+var sVoiceId_Marlene = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marlene", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Marlene})
+var sVoiceId_Mathieu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mathieu", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Mathieu})
+var sVoiceId_Matthew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Matthew", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Matthew})
+var sVoiceId_Maxim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maxim", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Maxim})
+var sVoiceId_Mia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mia", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Mia})
+var sVoiceId_Miguel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Miguel", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Miguel})
+var sVoiceId_Mizuki = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mizuki", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Mizuki})
+var sVoiceId_Naja = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Naja", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Naja})
+var sVoiceId_Nicole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nicole", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Nicole})
+var sVoiceId_Olivia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Olivia", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Olivia})
+var sVoiceId_Penelope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Penelope", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Penelope})
+var sVoiceId_Raveena = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Raveena", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Raveena})
+var sVoiceId_Ricardo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ricardo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ricardo})
+var sVoiceId_Ruben = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ruben", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ruben})
+var sVoiceId_Russell = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Russell", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Russell})
+var sVoiceId_Salli = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Salli", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Salli})
+var sVoiceId_Seoyeon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Seoyeon", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Seoyeon})
+var sVoiceId_Takumi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Takumi", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Takumi})
+var sVoiceId_Tatyana = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tatyana", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Tatyana})
+var sVoiceId_Vicki = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vicki", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Vicki})
+var sVoiceId_Vitoria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vitoria", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Vitoria})
+var sVoiceId_Zeina = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zeina", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Zeina})
+var sVoiceId_Zhiyu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zhiyu", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Zhiyu})
+var sVoiceId_Aria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aria", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Aria})
+var sVoiceId_Ayanda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ayanda", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ayanda})
+var sVoiceId_Arlet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arlet", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Arlet})
+var sVoiceId_Hannah = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hannah", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Hannah})
+var sVoiceId_Arthur = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arthur", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Arthur})
+var sVoiceId_Daniel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Daniel", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Daniel})
+var sVoiceId_Liam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Liam", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Liam})
+var sVoiceId_Pedro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pedro", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Pedro})
+var sVoiceId_Kajal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kajal", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Kajal})
+var sVoiceId_Hiujin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hiujin", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Hiujin})
+var sVoiceId_Laura = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Laura", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Laura})
+var sVoiceId_Elin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Elin", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Elin})
+var sVoiceId_Ida = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ida", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ida})
+var sVoiceId_Suvi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suvi", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Suvi})
+var sVoiceId_Ola = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ola", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ola})
+var sVoiceId_Hala = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hala", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Hala})
+var sVoiceId_Andres = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Andres", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Andres})
+var sVoiceId_Sergio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sergio", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Sergio})
+var sVoiceId_Remi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Remi", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Remi})
+var sVoiceId_Adriano = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Adriano", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Adriano})
+var sVoiceId_Thiago = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Thiago", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Thiago})
+var sVoiceId_Ruth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ruth", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ruth})
+var sVoiceId_Stephen = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stephen", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Stephen})
+var sVoiceId_Kazuha = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kazuha", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Kazuha})
+var sVoiceId_Tomoko = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tomoko", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Tomoko})
+var sVoiceId_Niamh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Niamh", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Niamh})
+var sVoiceId_Sofie = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sofie", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Sofie})
+var sVoiceId_Lisa = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lisa", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Lisa})
+var sVoiceId_Isabelle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Isabelle", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Isabelle})
+var sVoiceId_Zayd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zayd", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Zayd})
+var sVoiceId_Danielle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Danielle", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Danielle})
+var sVoiceId_Gregory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gregory", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Gregory})
+var sVoiceId_Burcu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Burcu", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Burcu})
+var sVoiceId_Jitka = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jitka", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Jitka})
+var sVoiceId_Sabrina = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sabrina", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Sabrina})
+var sVoiceId_Jasmine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jasmine", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Jasmine})
+var sVoiceId_Jihye = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jihye", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Jihye})
+var sVoiceId_Ambre = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ambre", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Ambre})
+var sVoiceId_Beatrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Beatrice", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Beatrice})
+var sVoiceId_Florian = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Florian", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Florian})
+var sVoiceId_Lennart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lennart", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Lennart})
+var sVoiceId_Lorenzo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lorenzo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Lorenzo})
+var sVoiceId_Tiffany = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiffany", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Tiffany})
+var sVoiceId_Arjun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arjun", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Arjun})
+var sVoiceId_Carlos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Carlos", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Carlos})
+var sVoiceId_Carolina = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Carolina", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Carolina})
+var sVoiceId_Curtis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Curtis", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Curtis})
+var sVoiceId_Hyunduk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hyunduk", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Hyunduk})
+var sVoiceId_Kenneth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kenneth", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Kenneth})
+var sVoiceId_Kiara = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kiara", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Kiara})
+var sVoiceId_Leo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Leo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Leo})
+var sVoiceId_Nate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Nate})
+var sVoiceId_Tina = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tina", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceId_Tina})
+var s_VoiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceList, Members: &m_VoiceList, Type: smithy.ShapeTypeList, Ext: &e_VoiceList})
+var s_VoiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoice, Members: &mVoice, Type: smithy.ShapeTypeStructure, Ext: &e_VoiceList_member})
+var s_VoiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceName, Type: smithy.ShapeTypeString, Ext: &e_VoiceName})
+var sDeleteLexiconInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLexiconInput, Members: &mDeleteLexiconInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLexiconInput})
+var sDeleteLexiconInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LexiconName, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDeleteLexiconInput_Name})
+var sDeleteLexiconOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLexiconOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLexiconOutput})
+var sDescribeVoicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVoicesInput, Members: &mDescribeVoicesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVoicesInput})
+var sDescribeVoicesInput_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &iEngine, Members: &mEngine, Traits: &t28, Type: smithy.ShapeTypeEnum, Ext: &eDescribeVoicesInput_Engine})
+var sDescribeVoicesInput_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Traits: &t29, Type: smithy.ShapeTypeEnum, Ext: &eDescribeVoicesInput_LanguageCode})
+var sDescribeVoicesInput_IncludeAdditionalLanguageCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeAdditionalLanguageCodes", ID: &i_IncludeAdditionalLanguageCodes, Traits: &t30, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeVoicesInput_IncludeAdditionalLanguageCodes})
+var sDescribeVoicesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDescribeVoicesInput_NextToken})
+var sDescribeVoicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVoicesOutput, Members: &mDescribeVoicesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVoicesOutput})
+var sDescribeVoicesOutput_Voices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Voices", ID: &i_VoiceList, Members: &m_VoiceList, Type: smithy.ShapeTypeList, Ext: &eDescribeVoicesOutput_Voices})
+var sDescribeVoicesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeVoicesOutput_NextToken})
+var sGetLexiconInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLexiconInput, Members: &mGetLexiconInput, Type: smithy.ShapeTypeStructure, Ext: &eGetLexiconInput})
+var sGetLexiconInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LexiconName, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eGetLexiconInput_Name})
+var sGetLexiconOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLexiconOutput, Members: &mGetLexiconOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetLexiconOutput})
+var sGetLexiconOutput_Lexicon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lexicon", ID: &iLexicon, Members: &mLexicon, Type: smithy.ShapeTypeStructure, Ext: &eGetLexiconOutput_Lexicon})
+var sGetLexiconOutput_LexiconAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LexiconAttributes", ID: &iLexiconAttributes, Members: &mLexiconAttributes, Type: smithy.ShapeTypeStructure, Ext: &eGetLexiconOutput_LexiconAttributes})
+var sGetSpeechSynthesisTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeechSynthesisTaskInput, Members: &mGetSpeechSynthesisTaskInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSpeechSynthesisTaskInput})
+var sGetSpeechSynthesisTaskInput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eGetSpeechSynthesisTaskInput_TaskId})
+var sGetSpeechSynthesisTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeechSynthesisTaskOutput, Members: &mGetSpeechSynthesisTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetSpeechSynthesisTaskOutput})
+var sGetSpeechSynthesisTaskOutput_SynthesisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SynthesisTask", ID: &iSynthesisTask, Members: &mSynthesisTask, Type: smithy.ShapeTypeStructure, Ext: &eGetSpeechSynthesisTaskOutput_SynthesisTask})
+var sListLexiconsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLexiconsInput, Members: &mListLexiconsInput, Type: smithy.ShapeTypeStructure, Ext: &eListLexiconsInput})
+var sListLexiconsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListLexiconsInput_NextToken})
+var sListLexiconsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLexiconsOutput, Members: &mListLexiconsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListLexiconsOutput})
+var sListLexiconsOutput_Lexicons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lexicons", ID: &i_LexiconDescriptionList, Members: &m_LexiconDescriptionList, Type: smithy.ShapeTypeList, Ext: &eListLexiconsOutput_Lexicons})
+var sListLexiconsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListLexiconsOutput_NextToken})
+var sListSpeechSynthesisTasksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeechSynthesisTasksInput, Members: &mListSpeechSynthesisTasksInput, Type: smithy.ShapeTypeStructure, Ext: &eListSpeechSynthesisTasksInput})
+var sListSpeechSynthesisTasksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t32, Type: smithy.ShapeTypeInteger, Ext: &eListSpeechSynthesisTasksInput_MaxResults})
+var sListSpeechSynthesisTasksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListSpeechSynthesisTasksInput_NextToken})
+var sListSpeechSynthesisTasksInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTaskStatus, Members: &mTaskStatus, Traits: &t33, Type: smithy.ShapeTypeEnum, Ext: &eListSpeechSynthesisTasksInput_Status})
+var sListSpeechSynthesisTasksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeechSynthesisTasksOutput, Members: &mListSpeechSynthesisTasksOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSpeechSynthesisTasksOutput})
+var sListSpeechSynthesisTasksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSpeechSynthesisTasksOutput_NextToken})
+var sListSpeechSynthesisTasksOutput_SynthesisTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SynthesisTasks", ID: &i_SynthesisTasks, Members: &m_SynthesisTasks, Type: smithy.ShapeTypeList, Ext: &eListSpeechSynthesisTasksOutput_SynthesisTasks})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_ResourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_Tags})
+var sPutLexiconInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLexiconInput, Members: &mPutLexiconInput, Type: smithy.ShapeTypeStructure, Ext: &ePutLexiconInput})
+var sPutLexiconInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LexiconName, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ePutLexiconInput_Name})
+var sPutLexiconInput_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_LexiconContent, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ePutLexiconInput_Content})
+var sPutLexiconInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ePutLexiconInput_Tags})
+var sPutLexiconOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLexiconOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutLexiconOutput})
+var sStartSpeechSynthesisStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisStreamInput, Members: &mStartSpeechSynthesisStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamInput})
+var sStartSpeechSynthesisStreamInput_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &iEngine, Members: &mEngine, Traits: &t35, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisStreamInput_Engine})
+var sStartSpeechSynthesisStreamInput_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Traits: &t36, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisStreamInput_LanguageCode})
+var sStartSpeechSynthesisStreamInput_LexiconNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LexiconNames", ID: &i_LexiconNameList, Members: &m_LexiconNameList, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eStartSpeechSynthesisStreamInput_LexiconNames})
+var sStartSpeechSynthesisStreamInput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iOutputFormat, Members: &mOutputFormat, Traits: &t38, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisStreamInput_OutputFormat})
+var sStartSpeechSynthesisStreamInput_SampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleRate", ID: &i_SampleRate, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eStartSpeechSynthesisStreamInput_SampleRate})
+var sStartSpeechSynthesisStreamInput_VoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceId", ID: &iVoiceId, Members: &mVoiceId, Traits: &t40, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisStreamInput_VoiceId})
+var sStartSpeechSynthesisStreamInput_ActionStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionStream", ID: &iStartSpeechSynthesisStreamActionStream, Members: &mStartSpeechSynthesisStreamActionStream, Traits: &t41, Type: smithy.ShapeTypeUnion, Ext: &eStartSpeechSynthesisStreamInput_ActionStream})
+var sStartSpeechSynthesisStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisStreamOutput, Members: &mStartSpeechSynthesisStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisStreamOutput})
+var sStartSpeechSynthesisStreamOutput_EventStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStream", ID: &iStartSpeechSynthesisStreamEventStream, Members: &mStartSpeechSynthesisStreamEventStream, Traits: &t41, Type: smithy.ShapeTypeUnion, Ext: &eStartSpeechSynthesisStreamOutput_EventStream})
+var sStartSpeechSynthesisTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisTaskInput, Members: &mStartSpeechSynthesisTaskInput, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisTaskInput})
+var sStartSpeechSynthesisTaskInput_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &iEngine, Members: &mEngine, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisTaskInput_Engine})
+var sStartSpeechSynthesisTaskInput_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisTaskInput_LanguageCode})
+var sStartSpeechSynthesisTaskInput_LexiconNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LexiconNames", ID: &i_LexiconNameList, Members: &m_LexiconNameList, Type: smithy.ShapeTypeList, Ext: &eStartSpeechSynthesisTaskInput_LexiconNames})
+var sStartSpeechSynthesisTaskInput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisTaskInput_OutputFormat})
+var sStartSpeechSynthesisTaskInput_OutputS3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputS3BucketName", ID: &i_OutputS3BucketName, Type: smithy.ShapeTypeString, Ext: &eStartSpeechSynthesisTaskInput_OutputS3BucketName})
+var sStartSpeechSynthesisTaskInput_OutputS3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputS3KeyPrefix", ID: &i_OutputS3KeyPrefix, Type: smithy.ShapeTypeString, Ext: &eStartSpeechSynthesisTaskInput_OutputS3KeyPrefix})
+var sStartSpeechSynthesisTaskInput_SampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleRate", ID: &i_SampleRate, Type: smithy.ShapeTypeString, Ext: &eStartSpeechSynthesisTaskInput_SampleRate})
+var sStartSpeechSynthesisTaskInput_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArn", ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &eStartSpeechSynthesisTaskInput_SnsTopicArn})
+var sStartSpeechSynthesisTaskInput_SpeechMarkTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeechMarkTypes", ID: &i_SpeechMarkTypeList, Members: &m_SpeechMarkTypeList, Type: smithy.ShapeTypeList, Ext: &eStartSpeechSynthesisTaskInput_SpeechMarkTypes})
+var sStartSpeechSynthesisTaskInput_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_Text, Type: smithy.ShapeTypeString, Ext: &eStartSpeechSynthesisTaskInput_Text})
+var sStartSpeechSynthesisTaskInput_TextType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextType", ID: &iTextType, Members: &mTextType, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisTaskInput_TextType})
+var sStartSpeechSynthesisTaskInput_VoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceId", ID: &iVoiceId, Members: &mVoiceId, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeechSynthesisTaskInput_VoiceId})
+var sStartSpeechSynthesisTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeechSynthesisTaskOutput, Members: &mStartSpeechSynthesisTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisTaskOutput})
+var sStartSpeechSynthesisTaskOutput_SynthesisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SynthesisTask", ID: &iSynthesisTask, Members: &mSynthesisTask, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeechSynthesisTaskOutput_SynthesisTask})
+var sSynthesizeSpeechInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSynthesizeSpeechInput, Members: &mSynthesizeSpeechInput, Type: smithy.ShapeTypeStructure, Ext: &eSynthesizeSpeechInput})
+var sSynthesizeSpeechInput_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &iEngine, Members: &mEngine, Type: smithy.ShapeTypeEnum, Ext: &eSynthesizeSpeechInput_Engine})
+var sSynthesizeSpeechInput_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eSynthesizeSpeechInput_LanguageCode})
+var sSynthesizeSpeechInput_LexiconNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LexiconNames", ID: &i_LexiconNameList, Members: &m_LexiconNameList, Type: smithy.ShapeTypeList, Ext: &eSynthesizeSpeechInput_LexiconNames})
+var sSynthesizeSpeechInput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eSynthesizeSpeechInput_OutputFormat})
+var sSynthesizeSpeechInput_SampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleRate", ID: &i_SampleRate, Type: smithy.ShapeTypeString, Ext: &eSynthesizeSpeechInput_SampleRate})
+var sSynthesizeSpeechInput_SpeechMarkTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeechMarkTypes", ID: &i_SpeechMarkTypeList, Members: &m_SpeechMarkTypeList, Type: smithy.ShapeTypeList, Ext: &eSynthesizeSpeechInput_SpeechMarkTypes})
+var sSynthesizeSpeechInput_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_Text, Type: smithy.ShapeTypeString, Ext: &eSynthesizeSpeechInput_Text})
+var sSynthesizeSpeechInput_TextType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextType", ID: &iTextType, Members: &mTextType, Type: smithy.ShapeTypeEnum, Ext: &eSynthesizeSpeechInput_TextType})
+var sSynthesizeSpeechInput_VoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceId", ID: &iVoiceId, Members: &mVoiceId, Type: smithy.ShapeTypeEnum, Ext: &eSynthesizeSpeechInput_VoiceId})
+var sSynthesizeSpeechOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSynthesizeSpeechOutput, Members: &mSynthesizeSpeechOutput, Type: smithy.ShapeTypeStructure, Ext: &eSynthesizeSpeechOutput})
+var sSynthesizeSpeechOutput_AudioStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioStream", ID: &i_AudioStream, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eSynthesizeSpeechOutput_AudioStream})
+var sSynthesizeSpeechOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eSynthesizeSpeechOutput_ContentType})
+var sSynthesizeSpeechOutput_RequestCharacters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCharacters", ID: &i_RequestCharacters, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eSynthesizeSpeechOutput_RequestCharacters})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_ResourceArn})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_Tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_ResourceArn})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_TagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+
+var DeleteLexicon = &sDeleteLexicon
+
+var DescribeVoices = &sDescribeVoices
+
+var GetLexicon = &sGetLexicon
+
+var GetSpeechSynthesisTask = &sGetSpeechSynthesisTask
+
+var ListLexicons = &sListLexicons
+
+var ListSpeechSynthesisTasks = &sListSpeechSynthesisTasks
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutLexicon = &sPutLexicon
+
+var StartSpeechSynthesisStream = &sStartSpeechSynthesisStream
+
+var StartSpeechSynthesisTask = &sStartSpeechSynthesisTask
+
+var SynthesizeSpeech = &sSynthesizeSpeech
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _Parrot_v1 = &s_Parrot_v1
+
+var _Alphabet = &s_Alphabet
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _AudioChunk = &s_AudioChunk
+
+var AudioEvent = &sAudioEvent
+var AudioEvent_AudioChunk = &sAudioEvent_AudioChunk
+
+var _AudioStream = &s_AudioStream
+
+var _AvailabilityErrorMessage = &s_AvailabilityErrorMessage
+
+var CloseStreamEvent = &sCloseStreamEvent
+
+var _ContentType = &s_ContentType
+
+var _CoralAvailabilityThrottledResource = &s_CoralAvailabilityThrottledResource
+
+var _CoralAvailabilityThrottlingReason = &s_CoralAvailabilityThrottlingReason
+
+var _DateTime = &s_DateTime
+
+var Engine = &sEngine
+var Engine_STANDARD = &sEngine_STANDARD
+var Engine_NEURAL = &sEngine_NEURAL
+var Engine_LONG_FORM = &sEngine_LONG_FORM
+var Engine_GENERATIVE = &sEngine_GENERATIVE
+
+var _EngineList = &s_EngineList
+var _EngineList_member = &s_EngineList_member
+
+var EngineNotSupportedException = &sEngineNotSupportedException
+var EngineNotSupportedException_message = &sEngineNotSupportedException_message
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var FlushStreamConfiguration = &sFlushStreamConfiguration
+var FlushStreamConfiguration_Force = &sFlushStreamConfiguration_Force
+
+var _Force = &s_Force
+
+var Gender = &sGender
+var Gender_Female = &sGender_Female
+var Gender_Male = &sGender_Male
+
+var _IncludeAdditionalLanguageCodes = &s_IncludeAdditionalLanguageCodes
+
+var InvalidLexiconException = &sInvalidLexiconException
+var InvalidLexiconException_message = &sInvalidLexiconException_message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_message = &sInvalidNextTokenException_message
+
+var InvalidS3BucketException = &sInvalidS3BucketException
+var InvalidS3BucketException_message = &sInvalidS3BucketException_message
+
+var InvalidS3KeyException = &sInvalidS3KeyException
+var InvalidS3KeyException_message = &sInvalidS3KeyException_message
+
+var InvalidSampleRateException = &sInvalidSampleRateException
+var InvalidSampleRateException_message = &sInvalidSampleRateException_message
+
+var InvalidSnsTopicArnException = &sInvalidSnsTopicArnException
+var InvalidSnsTopicArnException_message = &sInvalidSnsTopicArnException_message
+
+var InvalidSsmlException = &sInvalidSsmlException
+var InvalidSsmlException_message = &sInvalidSsmlException_message
+
+var InvalidTagParameterException = &sInvalidTagParameterException
+var InvalidTagParameterException_message = &sInvalidTagParameterException_message
+
+var InvalidTaskIdException = &sInvalidTaskIdException
+var InvalidTaskIdException_message = &sInvalidTaskIdException_message
+
+var LanguageCode = &sLanguageCode
+var LanguageCode_arb = &sLanguageCode_arb
+var LanguageCode_cmn_CN = &sLanguageCode_cmn_CN
+var LanguageCode_cy_GB = &sLanguageCode_cy_GB
+var LanguageCode_da_DK = &sLanguageCode_da_DK
+var LanguageCode_de_DE = &sLanguageCode_de_DE
+var LanguageCode_en_AU = &sLanguageCode_en_AU
+var LanguageCode_en_GB = &sLanguageCode_en_GB
+var LanguageCode_en_GB_WLS = &sLanguageCode_en_GB_WLS
+var LanguageCode_en_IN = &sLanguageCode_en_IN
+var LanguageCode_en_US = &sLanguageCode_en_US
+var LanguageCode_es_ES = &sLanguageCode_es_ES
+var LanguageCode_es_MX = &sLanguageCode_es_MX
+var LanguageCode_es_US = &sLanguageCode_es_US
+var LanguageCode_fr_CA = &sLanguageCode_fr_CA
+var LanguageCode_fr_FR = &sLanguageCode_fr_FR
+var LanguageCode_is_IS = &sLanguageCode_is_IS
+var LanguageCode_it_IT = &sLanguageCode_it_IT
+var LanguageCode_ja_JP = &sLanguageCode_ja_JP
+var LanguageCode_hi_IN = &sLanguageCode_hi_IN
+var LanguageCode_ko_KR = &sLanguageCode_ko_KR
+var LanguageCode_nb_NO = &sLanguageCode_nb_NO
+var LanguageCode_nl_NL = &sLanguageCode_nl_NL
+var LanguageCode_pl_PL = &sLanguageCode_pl_PL
+var LanguageCode_pt_BR = &sLanguageCode_pt_BR
+var LanguageCode_pt_PT = &sLanguageCode_pt_PT
+var LanguageCode_ro_RO = &sLanguageCode_ro_RO
+var LanguageCode_ru_RU = &sLanguageCode_ru_RU
+var LanguageCode_sv_SE = &sLanguageCode_sv_SE
+var LanguageCode_tr_TR = &sLanguageCode_tr_TR
+var LanguageCode_en_NZ = &sLanguageCode_en_NZ
+var LanguageCode_en_ZA = &sLanguageCode_en_ZA
+var LanguageCode_ca_ES = &sLanguageCode_ca_ES
+var LanguageCode_de_AT = &sLanguageCode_de_AT
+var LanguageCode_yue_CN = &sLanguageCode_yue_CN
+var LanguageCode_ar_AE = &sLanguageCode_ar_AE
+var LanguageCode_fi_FI = &sLanguageCode_fi_FI
+var LanguageCode_en_IE = &sLanguageCode_en_IE
+var LanguageCode_nl_BE = &sLanguageCode_nl_BE
+var LanguageCode_fr_BE = &sLanguageCode_fr_BE
+var LanguageCode_cs_CZ = &sLanguageCode_cs_CZ
+var LanguageCode_de_CH = &sLanguageCode_de_CH
+var LanguageCode_en_SG = &sLanguageCode_en_SG
+
+var _LanguageCodeList = &s_LanguageCodeList
+var _LanguageCodeList_member = &s_LanguageCodeList_member
+
+var _LanguageName = &s_LanguageName
+
+var LanguageNotSupportedException = &sLanguageNotSupportedException
+var LanguageNotSupportedException_message = &sLanguageNotSupportedException_message
+
+var _LastModified = &s_LastModified
+
+var _LexemesCount = &s_LexemesCount
+
+var Lexicon = &sLexicon
+var Lexicon_Content = &sLexicon_Content
+var Lexicon_Name = &sLexicon_Name
+
+var _LexiconArn = &s_LexiconArn
+
+var LexiconAttributes = &sLexiconAttributes
+var LexiconAttributes_Alphabet = &sLexiconAttributes_Alphabet
+var LexiconAttributes_LanguageCode = &sLexiconAttributes_LanguageCode
+var LexiconAttributes_LastModified = &sLexiconAttributes_LastModified
+var LexiconAttributes_LexiconArn = &sLexiconAttributes_LexiconArn
+var LexiconAttributes_LexemesCount = &sLexiconAttributes_LexemesCount
+var LexiconAttributes_Size = &sLexiconAttributes_Size
+
+var _LexiconContent = &s_LexiconContent
+
+var LexiconDescription = &sLexiconDescription
+var LexiconDescription_Name = &sLexiconDescription_Name
+var LexiconDescription_Attributes = &sLexiconDescription_Attributes
+
+var _LexiconDescriptionList = &s_LexiconDescriptionList
+var _LexiconDescriptionList_member = &s_LexiconDescriptionList_member
+
+var _LexiconName = &s_LexiconName
+
+var _LexiconNameList = &s_LexiconNameList
+var _LexiconNameList_member = &s_LexiconNameList_member
+
+var LexiconNotFoundException = &sLexiconNotFoundException
+var LexiconNotFoundException_message = &sLexiconNotFoundException_message
+
+var LexiconSizeExceededException = &sLexiconSizeExceededException
+var LexiconSizeExceededException_message = &sLexiconSizeExceededException_message
+
+var MarksNotSupportedForFormatException = &sMarksNotSupportedForFormatException
+var MarksNotSupportedForFormatException_message = &sMarksNotSupportedForFormatException_message
+
+var MaxLexemeLengthExceededException = &sMaxLexemeLengthExceededException
+var MaxLexemeLengthExceededException_message = &sMaxLexemeLengthExceededException_message
+
+var MaxLexiconsNumberExceededException = &sMaxLexiconsNumberExceededException
+var MaxLexiconsNumberExceededException_message = &sMaxLexiconsNumberExceededException_message
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var OutputFormat = &sOutputFormat
+var OutputFormat_JSON = &sOutputFormat_JSON
+var OutputFormat_MP3 = &sOutputFormat_MP3
+var OutputFormat_OGG_OPUS = &sOutputFormat_OGG_OPUS
+var OutputFormat_OGG_VORBIS = &sOutputFormat_OGG_VORBIS
+var OutputFormat_PCM = &sOutputFormat_PCM
+var OutputFormat_MULAW = &sOutputFormat_MULAW
+var OutputFormat_ALAW = &sOutputFormat_ALAW
+
+var _OutputS3BucketName = &s_OutputS3BucketName
+
+var _OutputS3KeyPrefix = &s_OutputS3KeyPrefix
+
+var _OutputUri = &s_OutputUri
+
+var QuotaCode = &sQuotaCode
+var QuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT = &sQuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT
+var QuotaCode_INPUT_STREAM_TIMEOUT = &sQuotaCode_INPUT_STREAM_TIMEOUT
+
+var _RequestCharacters = &s_RequestCharacters
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ResourceType = &sResourceType
+var ResourceType_LEXICON = &sResourceType_LEXICON
+
+var _SampleRate = &s_SampleRate
+
+var ServiceCode = &sServiceCode
+var ServiceCode_POLLY = &sServiceCode_POLLY
+
+var ServiceFailureException = &sServiceFailureException
+var ServiceFailureException_message = &sServiceFailureException_message
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+
+var _Size = &s_Size
+
+var _SnsTopicArn = &s_SnsTopicArn
+
+var SpeechMarkType = &sSpeechMarkType
+var SpeechMarkType_SENTENCE = &sSpeechMarkType_SENTENCE
+var SpeechMarkType_SSML = &sSpeechMarkType_SSML
+var SpeechMarkType_VISEME = &sSpeechMarkType_VISEME
+var SpeechMarkType_WORD = &sSpeechMarkType_WORD
+
+var _SpeechMarkTypeList = &s_SpeechMarkTypeList
+var _SpeechMarkTypeList_member = &s_SpeechMarkTypeList_member
+
+var SsmlMarksNotSupportedForTextTypeException = &sSsmlMarksNotSupportedForTextTypeException
+var SsmlMarksNotSupportedForTextTypeException_message = &sSsmlMarksNotSupportedForTextTypeException_message
+
+var StartSpeechSynthesisStreamActionStream = &sStartSpeechSynthesisStreamActionStream
+var StartSpeechSynthesisStreamActionStream_TextEvent = &sStartSpeechSynthesisStreamActionStream_TextEvent
+var StartSpeechSynthesisStreamActionStream_CloseStreamEvent = &sStartSpeechSynthesisStreamActionStream_CloseStreamEvent
+
+var StartSpeechSynthesisStreamEventStream = &sStartSpeechSynthesisStreamEventStream
+var StartSpeechSynthesisStreamEventStream_AudioEvent = &sStartSpeechSynthesisStreamEventStream_AudioEvent
+var StartSpeechSynthesisStreamEventStream_StreamClosedEvent = &sStartSpeechSynthesisStreamEventStream_StreamClosedEvent
+var StartSpeechSynthesisStreamEventStream_ValidationException = &sStartSpeechSynthesisStreamEventStream_ValidationException
+var StartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException = &sStartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException
+var StartSpeechSynthesisStreamEventStream_ServiceFailureException = &sStartSpeechSynthesisStreamEventStream_ServiceFailureException
+var StartSpeechSynthesisStreamEventStream_ThrottlingException = &sStartSpeechSynthesisStreamEventStream_ThrottlingException
+
+var StreamClosedEvent = &sStreamClosedEvent
+var StreamClosedEvent_RequestCharacters = &sStreamClosedEvent_RequestCharacters
+
+var SynthesisTask = &sSynthesisTask
+var SynthesisTask_Engine = &sSynthesisTask_Engine
+var SynthesisTask_TaskId = &sSynthesisTask_TaskId
+var SynthesisTask_TaskStatus = &sSynthesisTask_TaskStatus
+var SynthesisTask_TaskStatusReason = &sSynthesisTask_TaskStatusReason
+var SynthesisTask_OutputUri = &sSynthesisTask_OutputUri
+var SynthesisTask_CreationTime = &sSynthesisTask_CreationTime
+var SynthesisTask_RequestCharacters = &sSynthesisTask_RequestCharacters
+var SynthesisTask_SnsTopicArn = &sSynthesisTask_SnsTopicArn
+var SynthesisTask_LexiconNames = &sSynthesisTask_LexiconNames
+var SynthesisTask_OutputFormat = &sSynthesisTask_OutputFormat
+var SynthesisTask_SampleRate = &sSynthesisTask_SampleRate
+var SynthesisTask_SpeechMarkTypes = &sSynthesisTask_SpeechMarkTypes
+var SynthesisTask_TextType = &sSynthesisTask_TextType
+var SynthesisTask_VoiceId = &sSynthesisTask_VoiceId
+var SynthesisTask_LanguageCode = &sSynthesisTask_LanguageCode
+
+var SynthesisTaskNotFoundException = &sSynthesisTaskNotFoundException
+var SynthesisTaskNotFoundException_message = &sSynthesisTaskNotFoundException_message
+
+var _SynthesisTasks = &s_SynthesisTasks
+var _SynthesisTasks_member = &s_SynthesisTasks_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TaskId = &s_TaskId
+
+var TaskStatus = &sTaskStatus
+var TaskStatus_SCHEDULED = &sTaskStatus_SCHEDULED
+var TaskStatus_IN_PROGRESS = &sTaskStatus_IN_PROGRESS
+var TaskStatus_COMPLETED = &sTaskStatus_COMPLETED
+var TaskStatus_FAILED = &sTaskStatus_FAILED
+
+var _TaskStatusReason = &s_TaskStatusReason
+
+var _Text = &s_Text
+
+var TextEvent = &sTextEvent
+var TextEvent_Text = &sTextEvent_Text
+var TextEvent_TextType = &sTextEvent_TextType
+var TextEvent_FlushStreamConfiguration = &sTextEvent_FlushStreamConfiguration
+
+var TextLengthExceededException = &sTextLengthExceededException
+var TextLengthExceededException_message = &sTextLengthExceededException_message
+
+var TextType = &sTextType
+var TextType_SSML = &sTextType_SSML
+var TextType_TEXT = &sTextType_TEXT
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_throttlingReasons = &sThrottlingException_throttlingReasons
+
+var ThrottlingReason = &sThrottlingReason
+var ThrottlingReason_reason = &sThrottlingReason_reason
+var ThrottlingReason_resource = &sThrottlingReason_resource
+
+var _ThrottlingReasonList = &s_ThrottlingReasonList
+var _ThrottlingReasonList_member = &s_ThrottlingReasonList_member
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var UnsupportedPlsAlphabetException = &sUnsupportedPlsAlphabetException
+var UnsupportedPlsAlphabetException_message = &sUnsupportedPlsAlphabetException_message
+
+var UnsupportedPlsLanguageException = &sUnsupportedPlsLanguageException
+var UnsupportedPlsLanguageException_message = &sUnsupportedPlsLanguageException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fields = &sValidationException_fields
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidationExceptionFieldMessage = &s_ValidationExceptionFieldMessage
+
+var _ValidationExceptionFieldName = &s_ValidationExceptionFieldName
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNSUPPORTED_OPERATION = &sValidationExceptionReason_UNSUPPORTED_OPERATION
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+var ValidationExceptionReason_INVALID_INBOUND_EVENT = &sValidationExceptionReason_INVALID_INBOUND_EVENT
+
+var Voice = &sVoice
+var Voice_Gender = &sVoice_Gender
+var Voice_Id = &sVoice_Id
+var Voice_LanguageCode = &sVoice_LanguageCode
+var Voice_LanguageName = &sVoice_LanguageName
+var Voice_Name = &sVoice_Name
+var Voice_AdditionalLanguageCodes = &sVoice_AdditionalLanguageCodes
+var Voice_SupportedEngines = &sVoice_SupportedEngines
+
+var VoiceId = &sVoiceId
+var VoiceId_Aditi = &sVoiceId_Aditi
+var VoiceId_Amy = &sVoiceId_Amy
+var VoiceId_Astrid = &sVoiceId_Astrid
+var VoiceId_Bianca = &sVoiceId_Bianca
+var VoiceId_Brian = &sVoiceId_Brian
+var VoiceId_Camila = &sVoiceId_Camila
+var VoiceId_Carla = &sVoiceId_Carla
+var VoiceId_Carmen = &sVoiceId_Carmen
+var VoiceId_Celine = &sVoiceId_Celine
+var VoiceId_Chantal = &sVoiceId_Chantal
+var VoiceId_Conchita = &sVoiceId_Conchita
+var VoiceId_Cristiano = &sVoiceId_Cristiano
+var VoiceId_Dora = &sVoiceId_Dora
+var VoiceId_Emma = &sVoiceId_Emma
+var VoiceId_Enrique = &sVoiceId_Enrique
+var VoiceId_Ewa = &sVoiceId_Ewa
+var VoiceId_Filiz = &sVoiceId_Filiz
+var VoiceId_Gabrielle = &sVoiceId_Gabrielle
+var VoiceId_Geraint = &sVoiceId_Geraint
+var VoiceId_Giorgio = &sVoiceId_Giorgio
+var VoiceId_Gwyneth = &sVoiceId_Gwyneth
+var VoiceId_Hans = &sVoiceId_Hans
+var VoiceId_Ines = &sVoiceId_Ines
+var VoiceId_Ivy = &sVoiceId_Ivy
+var VoiceId_Jacek = &sVoiceId_Jacek
+var VoiceId_Jan = &sVoiceId_Jan
+var VoiceId_Joanna = &sVoiceId_Joanna
+var VoiceId_Joey = &sVoiceId_Joey
+var VoiceId_Justin = &sVoiceId_Justin
+var VoiceId_Karl = &sVoiceId_Karl
+var VoiceId_Kendra = &sVoiceId_Kendra
+var VoiceId_Kevin = &sVoiceId_Kevin
+var VoiceId_Kimberly = &sVoiceId_Kimberly
+var VoiceId_Lea = &sVoiceId_Lea
+var VoiceId_Liv = &sVoiceId_Liv
+var VoiceId_Lotte = &sVoiceId_Lotte
+var VoiceId_Lucia = &sVoiceId_Lucia
+var VoiceId_Lupe = &sVoiceId_Lupe
+var VoiceId_Mads = &sVoiceId_Mads
+var VoiceId_Maja = &sVoiceId_Maja
+var VoiceId_Marlene = &sVoiceId_Marlene
+var VoiceId_Mathieu = &sVoiceId_Mathieu
+var VoiceId_Matthew = &sVoiceId_Matthew
+var VoiceId_Maxim = &sVoiceId_Maxim
+var VoiceId_Mia = &sVoiceId_Mia
+var VoiceId_Miguel = &sVoiceId_Miguel
+var VoiceId_Mizuki = &sVoiceId_Mizuki
+var VoiceId_Naja = &sVoiceId_Naja
+var VoiceId_Nicole = &sVoiceId_Nicole
+var VoiceId_Olivia = &sVoiceId_Olivia
+var VoiceId_Penelope = &sVoiceId_Penelope
+var VoiceId_Raveena = &sVoiceId_Raveena
+var VoiceId_Ricardo = &sVoiceId_Ricardo
+var VoiceId_Ruben = &sVoiceId_Ruben
+var VoiceId_Russell = &sVoiceId_Russell
+var VoiceId_Salli = &sVoiceId_Salli
+var VoiceId_Seoyeon = &sVoiceId_Seoyeon
+var VoiceId_Takumi = &sVoiceId_Takumi
+var VoiceId_Tatyana = &sVoiceId_Tatyana
+var VoiceId_Vicki = &sVoiceId_Vicki
+var VoiceId_Vitoria = &sVoiceId_Vitoria
+var VoiceId_Zeina = &sVoiceId_Zeina
+var VoiceId_Zhiyu = &sVoiceId_Zhiyu
+var VoiceId_Aria = &sVoiceId_Aria
+var VoiceId_Ayanda = &sVoiceId_Ayanda
+var VoiceId_Arlet = &sVoiceId_Arlet
+var VoiceId_Hannah = &sVoiceId_Hannah
+var VoiceId_Arthur = &sVoiceId_Arthur
+var VoiceId_Daniel = &sVoiceId_Daniel
+var VoiceId_Liam = &sVoiceId_Liam
+var VoiceId_Pedro = &sVoiceId_Pedro
+var VoiceId_Kajal = &sVoiceId_Kajal
+var VoiceId_Hiujin = &sVoiceId_Hiujin
+var VoiceId_Laura = &sVoiceId_Laura
+var VoiceId_Elin = &sVoiceId_Elin
+var VoiceId_Ida = &sVoiceId_Ida
+var VoiceId_Suvi = &sVoiceId_Suvi
+var VoiceId_Ola = &sVoiceId_Ola
+var VoiceId_Hala = &sVoiceId_Hala
+var VoiceId_Andres = &sVoiceId_Andres
+var VoiceId_Sergio = &sVoiceId_Sergio
+var VoiceId_Remi = &sVoiceId_Remi
+var VoiceId_Adriano = &sVoiceId_Adriano
+var VoiceId_Thiago = &sVoiceId_Thiago
+var VoiceId_Ruth = &sVoiceId_Ruth
+var VoiceId_Stephen = &sVoiceId_Stephen
+var VoiceId_Kazuha = &sVoiceId_Kazuha
+var VoiceId_Tomoko = &sVoiceId_Tomoko
+var VoiceId_Niamh = &sVoiceId_Niamh
+var VoiceId_Sofie = &sVoiceId_Sofie
+var VoiceId_Lisa = &sVoiceId_Lisa
+var VoiceId_Isabelle = &sVoiceId_Isabelle
+var VoiceId_Zayd = &sVoiceId_Zayd
+var VoiceId_Danielle = &sVoiceId_Danielle
+var VoiceId_Gregory = &sVoiceId_Gregory
+var VoiceId_Burcu = &sVoiceId_Burcu
+var VoiceId_Jitka = &sVoiceId_Jitka
+var VoiceId_Sabrina = &sVoiceId_Sabrina
+var VoiceId_Jasmine = &sVoiceId_Jasmine
+var VoiceId_Jihye = &sVoiceId_Jihye
+var VoiceId_Ambre = &sVoiceId_Ambre
+var VoiceId_Beatrice = &sVoiceId_Beatrice
+var VoiceId_Florian = &sVoiceId_Florian
+var VoiceId_Lennart = &sVoiceId_Lennart
+var VoiceId_Lorenzo = &sVoiceId_Lorenzo
+var VoiceId_Tiffany = &sVoiceId_Tiffany
+var VoiceId_Arjun = &sVoiceId_Arjun
+var VoiceId_Carlos = &sVoiceId_Carlos
+var VoiceId_Carolina = &sVoiceId_Carolina
+var VoiceId_Curtis = &sVoiceId_Curtis
+var VoiceId_Hyunduk = &sVoiceId_Hyunduk
+var VoiceId_Kenneth = &sVoiceId_Kenneth
+var VoiceId_Kiara = &sVoiceId_Kiara
+var VoiceId_Leo = &sVoiceId_Leo
+var VoiceId_Nate = &sVoiceId_Nate
+var VoiceId_Tina = &sVoiceId_Tina
+
+var _VoiceList = &s_VoiceList
+var _VoiceList_member = &s_VoiceList_member
+
+var _VoiceName = &s_VoiceName
+
+var DeleteLexiconInput = &sDeleteLexiconInput
+var DeleteLexiconInput_Name = &sDeleteLexiconInput_Name
+
+var DeleteLexiconOutput = &sDeleteLexiconOutput
+
+var DescribeVoicesInput = &sDescribeVoicesInput
+var DescribeVoicesInput_Engine = &sDescribeVoicesInput_Engine
+var DescribeVoicesInput_LanguageCode = &sDescribeVoicesInput_LanguageCode
+var DescribeVoicesInput_IncludeAdditionalLanguageCodes = &sDescribeVoicesInput_IncludeAdditionalLanguageCodes
+var DescribeVoicesInput_NextToken = &sDescribeVoicesInput_NextToken
+
+var DescribeVoicesOutput = &sDescribeVoicesOutput
+var DescribeVoicesOutput_Voices = &sDescribeVoicesOutput_Voices
+var DescribeVoicesOutput_NextToken = &sDescribeVoicesOutput_NextToken
+
+var GetLexiconInput = &sGetLexiconInput
+var GetLexiconInput_Name = &sGetLexiconInput_Name
+
+var GetLexiconOutput = &sGetLexiconOutput
+var GetLexiconOutput_Lexicon = &sGetLexiconOutput_Lexicon
+var GetLexiconOutput_LexiconAttributes = &sGetLexiconOutput_LexiconAttributes
+
+var GetSpeechSynthesisTaskInput = &sGetSpeechSynthesisTaskInput
+var GetSpeechSynthesisTaskInput_TaskId = &sGetSpeechSynthesisTaskInput_TaskId
+
+var GetSpeechSynthesisTaskOutput = &sGetSpeechSynthesisTaskOutput
+var GetSpeechSynthesisTaskOutput_SynthesisTask = &sGetSpeechSynthesisTaskOutput_SynthesisTask
+
+var ListLexiconsInput = &sListLexiconsInput
+var ListLexiconsInput_NextToken = &sListLexiconsInput_NextToken
+
+var ListLexiconsOutput = &sListLexiconsOutput
+var ListLexiconsOutput_Lexicons = &sListLexiconsOutput_Lexicons
+var ListLexiconsOutput_NextToken = &sListLexiconsOutput_NextToken
+
+var ListSpeechSynthesisTasksInput = &sListSpeechSynthesisTasksInput
+var ListSpeechSynthesisTasksInput_MaxResults = &sListSpeechSynthesisTasksInput_MaxResults
+var ListSpeechSynthesisTasksInput_NextToken = &sListSpeechSynthesisTasksInput_NextToken
+var ListSpeechSynthesisTasksInput_Status = &sListSpeechSynthesisTasksInput_Status
+
+var ListSpeechSynthesisTasksOutput = &sListSpeechSynthesisTasksOutput
+var ListSpeechSynthesisTasksOutput_NextToken = &sListSpeechSynthesisTasksOutput_NextToken
+var ListSpeechSynthesisTasksOutput_SynthesisTasks = &sListSpeechSynthesisTasksOutput_SynthesisTasks
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var PutLexiconInput = &sPutLexiconInput
+var PutLexiconInput_Name = &sPutLexiconInput_Name
+var PutLexiconInput_Content = &sPutLexiconInput_Content
+var PutLexiconInput_Tags = &sPutLexiconInput_Tags
+
+var PutLexiconOutput = &sPutLexiconOutput
+
+var StartSpeechSynthesisStreamInput = &sStartSpeechSynthesisStreamInput
+var StartSpeechSynthesisStreamInput_Engine = &sStartSpeechSynthesisStreamInput_Engine
+var StartSpeechSynthesisStreamInput_LanguageCode = &sStartSpeechSynthesisStreamInput_LanguageCode
+var StartSpeechSynthesisStreamInput_LexiconNames = &sStartSpeechSynthesisStreamInput_LexiconNames
+var StartSpeechSynthesisStreamInput_OutputFormat = &sStartSpeechSynthesisStreamInput_OutputFormat
+var StartSpeechSynthesisStreamInput_SampleRate = &sStartSpeechSynthesisStreamInput_SampleRate
+var StartSpeechSynthesisStreamInput_VoiceId = &sStartSpeechSynthesisStreamInput_VoiceId
+var StartSpeechSynthesisStreamInput_ActionStream = &sStartSpeechSynthesisStreamInput_ActionStream
+
+var StartSpeechSynthesisStreamOutput = &sStartSpeechSynthesisStreamOutput
+var StartSpeechSynthesisStreamOutput_EventStream = &sStartSpeechSynthesisStreamOutput_EventStream
+
+var StartSpeechSynthesisTaskInput = &sStartSpeechSynthesisTaskInput
+var StartSpeechSynthesisTaskInput_Engine = &sStartSpeechSynthesisTaskInput_Engine
+var StartSpeechSynthesisTaskInput_LanguageCode = &sStartSpeechSynthesisTaskInput_LanguageCode
+var StartSpeechSynthesisTaskInput_LexiconNames = &sStartSpeechSynthesisTaskInput_LexiconNames
+var StartSpeechSynthesisTaskInput_OutputFormat = &sStartSpeechSynthesisTaskInput_OutputFormat
+var StartSpeechSynthesisTaskInput_OutputS3BucketName = &sStartSpeechSynthesisTaskInput_OutputS3BucketName
+var StartSpeechSynthesisTaskInput_OutputS3KeyPrefix = &sStartSpeechSynthesisTaskInput_OutputS3KeyPrefix
+var StartSpeechSynthesisTaskInput_SampleRate = &sStartSpeechSynthesisTaskInput_SampleRate
+var StartSpeechSynthesisTaskInput_SnsTopicArn = &sStartSpeechSynthesisTaskInput_SnsTopicArn
+var StartSpeechSynthesisTaskInput_SpeechMarkTypes = &sStartSpeechSynthesisTaskInput_SpeechMarkTypes
+var StartSpeechSynthesisTaskInput_Text = &sStartSpeechSynthesisTaskInput_Text
+var StartSpeechSynthesisTaskInput_TextType = &sStartSpeechSynthesisTaskInput_TextType
+var StartSpeechSynthesisTaskInput_VoiceId = &sStartSpeechSynthesisTaskInput_VoiceId
+
+var StartSpeechSynthesisTaskOutput = &sStartSpeechSynthesisTaskOutput
+var StartSpeechSynthesisTaskOutput_SynthesisTask = &sStartSpeechSynthesisTaskOutput_SynthesisTask
+
+var SynthesizeSpeechInput = &sSynthesizeSpeechInput
+var SynthesizeSpeechInput_Engine = &sSynthesizeSpeechInput_Engine
+var SynthesizeSpeechInput_LanguageCode = &sSynthesizeSpeechInput_LanguageCode
+var SynthesizeSpeechInput_LexiconNames = &sSynthesizeSpeechInput_LexiconNames
+var SynthesizeSpeechInput_OutputFormat = &sSynthesizeSpeechInput_OutputFormat
+var SynthesizeSpeechInput_SampleRate = &sSynthesizeSpeechInput_SampleRate
+var SynthesizeSpeechInput_SpeechMarkTypes = &sSynthesizeSpeechInput_SpeechMarkTypes
+var SynthesizeSpeechInput_Text = &sSynthesizeSpeechInput_Text
+var SynthesizeSpeechInput_TextType = &sSynthesizeSpeechInput_TextType
+var SynthesizeSpeechInput_VoiceId = &sSynthesizeSpeechInput_VoiceId
+
+var SynthesizeSpeechOutput = &sSynthesizeSpeechOutput
+var SynthesizeSpeechOutput_AudioStream = &sSynthesizeSpeechOutput_AudioStream
+var SynthesizeSpeechOutput_ContentType = &sSynthesizeSpeechOutput_ContentType
+var SynthesizeSpeechOutput_RequestCharacters = &sSynthesizeSpeechOutput_RequestCharacters
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var Parrot_v1 = &smithy.ServiceSchema{Schema: &s_Parrot_v1, Version: "2016-06-10"}

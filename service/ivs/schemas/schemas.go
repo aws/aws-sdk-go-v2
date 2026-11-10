@@ -4,3400 +4,3347 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchGetChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eBatchGetChannel                                                                       smithy.SchemaExtensions
+	eBatchGetStreamKey                                                                     smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocation                                                     smithy.SchemaExtensions
+	eCreateAdConfiguration                                                                 smithy.SchemaExtensions
+	eCreateChannel                                                                         smithy.SchemaExtensions
+	eCreateFailoverSlateConfiguration                                                      smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicy                                                       smithy.SchemaExtensions
+	eCreateRecordingConfiguration                                                          smithy.SchemaExtensions
+	eCreateStreamKey                                                                       smithy.SchemaExtensions
+	eDeleteAdConfiguration                                                                 smithy.SchemaExtensions
+	eDeleteChannel                                                                         smithy.SchemaExtensions
+	eDeleteFailoverSlateConfiguration                                                      smithy.SchemaExtensions
+	eDeletePlaybackKeyPair                                                                 smithy.SchemaExtensions
+	eDeletePlaybackRestrictionPolicy                                                       smithy.SchemaExtensions
+	eDeleteRecordingConfiguration                                                          smithy.SchemaExtensions
+	eDeleteStreamKey                                                                       smithy.SchemaExtensions
+	eGetAdConfiguration                                                                    smithy.SchemaExtensions
+	eGetChannel                                                                            smithy.SchemaExtensions
+	eGetFailoverSlateConfiguration                                                         smithy.SchemaExtensions
+	eGetPlaybackKeyPair                                                                    smithy.SchemaExtensions
+	eGetPlaybackRestrictionPolicy                                                          smithy.SchemaExtensions
+	eGetRecordingConfiguration                                                             smithy.SchemaExtensions
+	eGetStream                                                                             smithy.SchemaExtensions
+	eGetStreamKey                                                                          smithy.SchemaExtensions
+	eGetStreamSession                                                                      smithy.SchemaExtensions
+	eImportPlaybackKeyPair                                                                 smithy.SchemaExtensions
+	eInsertAdBreak                                                                         smithy.SchemaExtensions
+	eListAdConfigurations                                                                  smithy.SchemaExtensions
+	eListChannels                                                                          smithy.SchemaExtensions
+	eListFailoverSlateConfigurations                                                       smithy.SchemaExtensions
+	eListPlaybackKeyPairs                                                                  smithy.SchemaExtensions
+	eListPlaybackRestrictionPolicies                                                       smithy.SchemaExtensions
+	eListRecordingConfigurations                                                           smithy.SchemaExtensions
+	eListStreamKeys                                                                        smithy.SchemaExtensions
+	eListStreams                                                                           smithy.SchemaExtensions
+	eListStreamSessions                                                                    smithy.SchemaExtensions
+	eListTagsForResource                                                                   smithy.SchemaExtensions
+	ePutMetadata                                                                           smithy.SchemaExtensions
+	eStartViewerSessionRevocation                                                          smithy.SchemaExtensions
+	eStopStream                                                                            smithy.SchemaExtensions
+	eTagResource                                                                           smithy.SchemaExtensions
+	eUntagResource                                                                         smithy.SchemaExtensions
+	eUpdateAdConfiguration                                                                 smithy.SchemaExtensions
+	eUpdateChannel                                                                         smithy.SchemaExtensions
+	eUpdateFailoverSlateConfiguration                                                      smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicy                                                       smithy.SchemaExtensions
+	e_AmazonInteractiveVideoService                                                        smithy.SchemaExtensions
+	eAccessDeniedException                                                                 smithy.SchemaExtensions
+	eAccessDeniedException_accessControlAllowOrigin                                        smithy.SchemaExtensions
+	eAccessDeniedException_accessControlExposeHeaders                                      smithy.SchemaExtensions
+	eAccessDeniedException_cacheControl                                                    smithy.SchemaExtensions
+	eAccessDeniedException_contentSecurityPolicy                                           smithy.SchemaExtensions
+	eAccessDeniedException_strictTransportSecurity                                         smithy.SchemaExtensions
+	eAccessDeniedException_xContentTypeOptions                                             smithy.SchemaExtensions
+	eAccessDeniedException_xFrameOptions                                                   smithy.SchemaExtensions
+	eAccessDeniedException_xAmznErrorType                                                  smithy.SchemaExtensions
+	eAccessDeniedException_exceptionMessage                                                smithy.SchemaExtensions
+	e_AdBreakId                                                                            smithy.SchemaExtensions
+	eAdConfiguration                                                                       smithy.SchemaExtensions
+	eAdConfiguration_arn                                                                   smithy.SchemaExtensions
+	eAdConfiguration_name                                                                  smithy.SchemaExtensions
+	eAdConfiguration_mediaTailorPlaybackConfigurations                                     smithy.SchemaExtensions
+	eAdConfiguration_postRollConfiguration                                                 smithy.SchemaExtensions
+	eAdConfiguration_tags                                                                  smithy.SchemaExtensions
+	e_AdConfigurationArn                                                                   smithy.SchemaExtensions
+	e_AdConfigurationList                                                                  smithy.SchemaExtensions
+	e_AdConfigurationList_member                                                           smithy.SchemaExtensions
+	e_AdConfigurationName                                                                  smithy.SchemaExtensions
+	eAdConfigurationSummary                                                                smithy.SchemaExtensions
+	eAdConfigurationSummary_arn                                                            smithy.SchemaExtensions
+	eAdConfigurationSummary_name                                                           smithy.SchemaExtensions
+	eAdConfigurationSummary_mediaTailorPlaybackConfigurations                              smithy.SchemaExtensions
+	eAdConfigurationSummary_postRollConfiguration                                          smithy.SchemaExtensions
+	eAdConfigurationSummary_tags                                                           smithy.SchemaExtensions
+	e_AdDurationSeconds                                                                    smithy.SchemaExtensions
+	eAudioConfiguration                                                                    smithy.SchemaExtensions
+	eAudioConfiguration_codec                                                              smithy.SchemaExtensions
+	eAudioConfiguration_targetBitrate                                                      smithy.SchemaExtensions
+	eAudioConfiguration_sampleRate                                                         smithy.SchemaExtensions
+	eAudioConfiguration_channels                                                           smithy.SchemaExtensions
+	eAudioConfiguration_track                                                              smithy.SchemaExtensions
+	e_AudioConfigurationList                                                               smithy.SchemaExtensions
+	e_AudioConfigurationList_member                                                        smithy.SchemaExtensions
+	eBatchError                                                                            smithy.SchemaExtensions
+	eBatchError_arn                                                                        smithy.SchemaExtensions
+	eBatchError_code                                                                       smithy.SchemaExtensions
+	eBatchError_message                                                                    smithy.SchemaExtensions
+	e_BatchErrors                                                                          smithy.SchemaExtensions
+	e_BatchErrors_member                                                                   smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationError                                                smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationError_channelArn                                     smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationError_viewerId                                       smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationError_code                                           smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationError_message                                        smithy.SchemaExtensions
+	e_BatchStartViewerSessionRevocationErrors                                              smithy.SchemaExtensions
+	e_BatchStartViewerSessionRevocationErrors_member                                       smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationViewerSession                                        smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationViewerSession_channelArn                             smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationViewerSession_viewerId                               smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo smithy.SchemaExtensions
+	e_BatchStartViewerSessionRevocationViewerSessionList                                   smithy.SchemaExtensions
+	e_BatchStartViewerSessionRevocationViewerSessionList_member                            smithy.SchemaExtensions
+	e_Boolean                                                                              smithy.SchemaExtensions
+	eChannel                                                                               smithy.SchemaExtensions
+	eChannel_arn                                                                           smithy.SchemaExtensions
+	eChannel_name                                                                          smithy.SchemaExtensions
+	eChannel_latencyMode                                                                   smithy.SchemaExtensions
+	eChannel_type                                                                          smithy.SchemaExtensions
+	eChannel_recordingConfigurationArn                                                     smithy.SchemaExtensions
+	eChannel_ingestEndpoint                                                                smithy.SchemaExtensions
+	eChannel_playbackUrl                                                                   smithy.SchemaExtensions
+	eChannel_authorized                                                                    smithy.SchemaExtensions
+	eChannel_tags                                                                          smithy.SchemaExtensions
+	eChannel_insecureIngest                                                                smithy.SchemaExtensions
+	eChannel_preset                                                                        smithy.SchemaExtensions
+	eChannel_srt                                                                           smithy.SchemaExtensions
+	eChannel_playbackRestrictionPolicyArn                                                  smithy.SchemaExtensions
+	eChannel_multitrackInputConfiguration                                                  smithy.SchemaExtensions
+	eChannel_containerFormat                                                               smithy.SchemaExtensions
+	eChannel_adConfigurationArn                                                            smithy.SchemaExtensions
+	eChannel_failoverSlateConfigurationArn                                                 smithy.SchemaExtensions
+	e_ChannelAdConfigurationArn                                                            smithy.SchemaExtensions
+	e_ChannelArn                                                                           smithy.SchemaExtensions
+	e_ChannelArnList                                                                       smithy.SchemaExtensions
+	e_ChannelArnList_member                                                                smithy.SchemaExtensions
+	e_ChannelFailoverSlateConfigurationArn                                                 smithy.SchemaExtensions
+	e_ChannelLatencyMode                                                                   smithy.SchemaExtensions
+	e_ChannelList                                                                          smithy.SchemaExtensions
+	e_ChannelList_member                                                                   smithy.SchemaExtensions
+	e_ChannelName                                                                          smithy.SchemaExtensions
+	eChannelNotBroadcasting                                                                smithy.SchemaExtensions
+	eChannelNotBroadcasting_accessControlAllowOrigin                                       smithy.SchemaExtensions
+	eChannelNotBroadcasting_accessControlExposeHeaders                                     smithy.SchemaExtensions
+	eChannelNotBroadcasting_cacheControl                                                   smithy.SchemaExtensions
+	eChannelNotBroadcasting_contentSecurityPolicy                                          smithy.SchemaExtensions
+	eChannelNotBroadcasting_strictTransportSecurity                                        smithy.SchemaExtensions
+	eChannelNotBroadcasting_xContentTypeOptions                                            smithy.SchemaExtensions
+	eChannelNotBroadcasting_xFrameOptions                                                  smithy.SchemaExtensions
+	eChannelNotBroadcasting_xAmznErrorType                                                 smithy.SchemaExtensions
+	eChannelNotBroadcasting_exceptionMessage                                               smithy.SchemaExtensions
+	e_ChannelPlaybackRestrictionPolicyArn                                                  smithy.SchemaExtensions
+	e_ChannelRecordingConfigurationArn                                                     smithy.SchemaExtensions
+	e_Channels                                                                             smithy.SchemaExtensions
+	e_Channels_member                                                                      smithy.SchemaExtensions
+	eChannelSummary                                                                        smithy.SchemaExtensions
+	eChannelSummary_arn                                                                    smithy.SchemaExtensions
+	eChannelSummary_name                                                                   smithy.SchemaExtensions
+	eChannelSummary_latencyMode                                                            smithy.SchemaExtensions
+	eChannelSummary_authorized                                                             smithy.SchemaExtensions
+	eChannelSummary_recordingConfigurationArn                                              smithy.SchemaExtensions
+	eChannelSummary_tags                                                                   smithy.SchemaExtensions
+	eChannelSummary_insecureIngest                                                         smithy.SchemaExtensions
+	eChannelSummary_type                                                                   smithy.SchemaExtensions
+	eChannelSummary_preset                                                                 smithy.SchemaExtensions
+	eChannelSummary_playbackRestrictionPolicyArn                                           smithy.SchemaExtensions
+	eChannelSummary_adConfigurationArn                                                     smithy.SchemaExtensions
+	eChannelSummary_failoverSlateConfigurationArn                                          smithy.SchemaExtensions
+	eChannelType                                                                           smithy.SchemaExtensions
+	eChannelType_BasicChannelType                                                          smithy.SchemaExtensions
+	eChannelType_StandardChannelType                                                       smithy.SchemaExtensions
+	eChannelType_AdvancedSDChannelType                                                     smithy.SchemaExtensions
+	eChannelType_AdvancedHDChannelType                                                     smithy.SchemaExtensions
+	eConflictException                                                                     smithy.SchemaExtensions
+	eConflictException_accessControlAllowOrigin                                            smithy.SchemaExtensions
+	eConflictException_accessControlExposeHeaders                                          smithy.SchemaExtensions
+	eConflictException_cacheControl                                                        smithy.SchemaExtensions
+	eConflictException_contentSecurityPolicy                                               smithy.SchemaExtensions
+	eConflictException_strictTransportSecurity                                             smithy.SchemaExtensions
+	eConflictException_xContentTypeOptions                                                 smithy.SchemaExtensions
+	eConflictException_xFrameOptions                                                       smithy.SchemaExtensions
+	eConflictException_xAmznErrorType                                                      smithy.SchemaExtensions
+	eConflictException_exceptionMessage                                                    smithy.SchemaExtensions
+	e_ContainerFormat                                                                      smithy.SchemaExtensions
+	eDestinationConfiguration                                                              smithy.SchemaExtensions
+	eDestinationConfiguration_s3                                                           smithy.SchemaExtensions
+	e_errorCode                                                                            smithy.SchemaExtensions
+	e_errorMessage                                                                         smithy.SchemaExtensions
+	e_FailoverSlateActivationThresholdSeconds                                              smithy.SchemaExtensions
+	eFailoverSlateConfiguration                                                            smithy.SchemaExtensions
+	eFailoverSlateConfiguration_arn                                                        smithy.SchemaExtensions
+	eFailoverSlateConfiguration_name                                                       smithy.SchemaExtensions
+	eFailoverSlateConfiguration_activationThresholdSeconds                                 smithy.SchemaExtensions
+	eFailoverSlateConfiguration_minSlateDisplaySeconds                                     smithy.SchemaExtensions
+	eFailoverSlateConfiguration_maxSlateDisplaySeconds                                     smithy.SchemaExtensions
+	eFailoverSlateConfiguration_state                                                      smithy.SchemaExtensions
+	eFailoverSlateConfiguration_tags                                                       smithy.SchemaExtensions
+	e_FailoverSlateConfigurationArn                                                        smithy.SchemaExtensions
+	e_FailoverSlateConfigurationList                                                       smithy.SchemaExtensions
+	e_FailoverSlateConfigurationList_member                                                smithy.SchemaExtensions
+	e_FailoverSlateConfigurationName                                                       smithy.SchemaExtensions
+	e_FailoverSlateConfigurationState                                                      smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary                                                     smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary_arn                                                 smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary_name                                                smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary_activationThresholdSeconds                          smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary_minSlateDisplaySeconds                              smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary_maxSlateDisplaySeconds                              smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary_state                                               smithy.SchemaExtensions
+	eFailoverSlateConfigurationSummary_tags                                                smithy.SchemaExtensions
+	e_FailoverSlateMaxDisplaySeconds                                                       smithy.SchemaExtensions
+	e_FailoverSlateMinDisplaySeconds                                                       smithy.SchemaExtensions
+	eIngestConfiguration                                                                   smithy.SchemaExtensions
+	eIngestConfiguration_video                                                             smithy.SchemaExtensions
+	eIngestConfiguration_audio                                                             smithy.SchemaExtensions
+	eIngestConfigurations                                                                  smithy.SchemaExtensions
+	eIngestConfigurations_videoConfigurations                                              smithy.SchemaExtensions
+	eIngestConfigurations_audioConfigurations                                              smithy.SchemaExtensions
+	e_IngestEndpoint                                                                       smithy.SchemaExtensions
+	e_InsecureIngest                                                                       smithy.SchemaExtensions
+	e_Integer                                                                              smithy.SchemaExtensions
+	eInternalServerException                                                               smithy.SchemaExtensions
+	eInternalServerException_accessControlAllowOrigin                                      smithy.SchemaExtensions
+	eInternalServerException_accessControlExposeHeaders                                    smithy.SchemaExtensions
+	eInternalServerException_cacheControl                                                  smithy.SchemaExtensions
+	eInternalServerException_contentSecurityPolicy                                         smithy.SchemaExtensions
+	eInternalServerException_strictTransportSecurity                                       smithy.SchemaExtensions
+	eInternalServerException_xContentTypeOptions                                           smithy.SchemaExtensions
+	eInternalServerException_xFrameOptions                                                 smithy.SchemaExtensions
+	eInternalServerException_xAmznErrorType                                                smithy.SchemaExtensions
+	eInternalServerException_exceptionMessage                                              smithy.SchemaExtensions
+	e_IsAuthorized                                                                         smithy.SchemaExtensions
+	e_IsMultitrackInputEnabled                                                             smithy.SchemaExtensions
+	e_MaxAdConfigurationResults                                                            smithy.SchemaExtensions
+	e_MaxChannelResults                                                                    smithy.SchemaExtensions
+	e_MaxFailoverSlateConfigurationResults                                                 smithy.SchemaExtensions
+	e_MaxPlaybackKeyPairResults                                                            smithy.SchemaExtensions
+	e_MaxPlaybackRestrictionPolicyResults                                                  smithy.SchemaExtensions
+	e_MaxRecordingConfigurationResults                                                     smithy.SchemaExtensions
+	e_MaxStreamKeyResults                                                                  smithy.SchemaExtensions
+	e_MaxStreamResults                                                                     smithy.SchemaExtensions
+	eMediaTailorPlaybackConfiguration                                                      smithy.SchemaExtensions
+	eMediaTailorPlaybackConfiguration_playbackConfigurationArn                             smithy.SchemaExtensions
+	e_MediaTailorPlaybackConfigurationArn                                                  smithy.SchemaExtensions
+	e_MediaTailorPlaybackConfigurationsList                                                smithy.SchemaExtensions
+	e_MediaTailorPlaybackConfigurationsList_member                                         smithy.SchemaExtensions
+	eMultitrackInputConfiguration                                                          smithy.SchemaExtensions
+	eMultitrackInputConfiguration_enabled                                                  smithy.SchemaExtensions
+	eMultitrackInputConfiguration_policy                                                   smithy.SchemaExtensions
+	eMultitrackInputConfiguration_maximumResolution                                        smithy.SchemaExtensions
+	eMultitrackMaximumResolution                                                           smithy.SchemaExtensions
+	eMultitrackMaximumResolution_SD                                                        smithy.SchemaExtensions
+	eMultitrackMaximumResolution_HD                                                        smithy.SchemaExtensions
+	eMultitrackMaximumResolution_FULL_HD                                                   smithy.SchemaExtensions
+	eMultitrackPolicy                                                                      smithy.SchemaExtensions
+	eMultitrackPolicy_ALLOW                                                                smithy.SchemaExtensions
+	eMultitrackPolicy_REQUIRE                                                              smithy.SchemaExtensions
+	e_PaginationToken                                                                      smithy.SchemaExtensions
+	ePendingVerification                                                                   smithy.SchemaExtensions
+	ePendingVerification_accessControlAllowOrigin                                          smithy.SchemaExtensions
+	ePendingVerification_accessControlExposeHeaders                                        smithy.SchemaExtensions
+	ePendingVerification_cacheControl                                                      smithy.SchemaExtensions
+	ePendingVerification_contentSecurityPolicy                                             smithy.SchemaExtensions
+	ePendingVerification_strictTransportSecurity                                           smithy.SchemaExtensions
+	ePendingVerification_xContentTypeOptions                                               smithy.SchemaExtensions
+	ePendingVerification_xFrameOptions                                                     smithy.SchemaExtensions
+	ePendingVerification_xAmznErrorType                                                    smithy.SchemaExtensions
+	ePendingVerification_exceptionMessage                                                  smithy.SchemaExtensions
+	ePlaybackKeyPair                                                                       smithy.SchemaExtensions
+	ePlaybackKeyPair_arn                                                                   smithy.SchemaExtensions
+	ePlaybackKeyPair_name                                                                  smithy.SchemaExtensions
+	ePlaybackKeyPair_fingerprint                                                           smithy.SchemaExtensions
+	ePlaybackKeyPair_tags                                                                  smithy.SchemaExtensions
+	e_PlaybackKeyPairArn                                                                   smithy.SchemaExtensions
+	e_PlaybackKeyPairFingerprint                                                           smithy.SchemaExtensions
+	e_PlaybackKeyPairList                                                                  smithy.SchemaExtensions
+	e_PlaybackKeyPairList_member                                                           smithy.SchemaExtensions
+	e_PlaybackKeyPairName                                                                  smithy.SchemaExtensions
+	ePlaybackKeyPairSummary                                                                smithy.SchemaExtensions
+	ePlaybackKeyPairSummary_arn                                                            smithy.SchemaExtensions
+	ePlaybackKeyPairSummary_name                                                           smithy.SchemaExtensions
+	ePlaybackKeyPairSummary_tags                                                           smithy.SchemaExtensions
+	e_PlaybackPublicKeyMaterial                                                            smithy.SchemaExtensions
+	ePlaybackRestrictionPolicy                                                             smithy.SchemaExtensions
+	ePlaybackRestrictionPolicy_arn                                                         smithy.SchemaExtensions
+	ePlaybackRestrictionPolicy_allowedCountries                                            smithy.SchemaExtensions
+	ePlaybackRestrictionPolicy_allowedOrigins                                              smithy.SchemaExtensions
+	ePlaybackRestrictionPolicy_enableStrictOriginEnforcement                               smithy.SchemaExtensions
+	ePlaybackRestrictionPolicy_name                                                        smithy.SchemaExtensions
+	ePlaybackRestrictionPolicy_tags                                                        smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyAllowedCountry                                              smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyAllowedCountryList                                          smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyAllowedCountryList_member                                   smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyAllowedOrigin                                               smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyAllowedOriginList                                           smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyAllowedOriginList_member                                    smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyArn                                                         smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyEnableStrictOriginEnforcement                               smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyList                                                        smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyList_member                                                 smithy.SchemaExtensions
+	e_PlaybackRestrictionPolicyName                                                        smithy.SchemaExtensions
+	ePlaybackRestrictionPolicySummary                                                      smithy.SchemaExtensions
+	ePlaybackRestrictionPolicySummary_arn                                                  smithy.SchemaExtensions
+	ePlaybackRestrictionPolicySummary_allowedCountries                                     smithy.SchemaExtensions
+	ePlaybackRestrictionPolicySummary_allowedOrigins                                       smithy.SchemaExtensions
+	ePlaybackRestrictionPolicySummary_enableStrictOriginEnforcement                        smithy.SchemaExtensions
+	ePlaybackRestrictionPolicySummary_name                                                 smithy.SchemaExtensions
+	ePlaybackRestrictionPolicySummary_tags                                                 smithy.SchemaExtensions
+	e_PlaybackURL                                                                          smithy.SchemaExtensions
+	ePostRollConfiguration                                                                 smithy.SchemaExtensions
+	ePostRollConfiguration_durationSeconds                                                 smithy.SchemaExtensions
+	ePostRollConfiguration_enabled                                                         smithy.SchemaExtensions
+	eRecordingConfiguration                                                                smithy.SchemaExtensions
+	eRecordingConfiguration_arn                                                            smithy.SchemaExtensions
+	eRecordingConfiguration_name                                                           smithy.SchemaExtensions
+	eRecordingConfiguration_destinationConfiguration                                       smithy.SchemaExtensions
+	eRecordingConfiguration_state                                                          smithy.SchemaExtensions
+	eRecordingConfiguration_tags                                                           smithy.SchemaExtensions
+	eRecordingConfiguration_thumbnailConfiguration                                         smithy.SchemaExtensions
+	eRecordingConfiguration_recordingReconnectWindowSeconds                                smithy.SchemaExtensions
+	eRecordingConfiguration_renditionConfiguration                                         smithy.SchemaExtensions
+	e_RecordingConfigurationArn                                                            smithy.SchemaExtensions
+	e_RecordingConfigurationList                                                           smithy.SchemaExtensions
+	e_RecordingConfigurationList_member                                                    smithy.SchemaExtensions
+	e_RecordingConfigurationName                                                           smithy.SchemaExtensions
+	e_RecordingConfigurationState                                                          smithy.SchemaExtensions
+	eRecordingConfigurationSummary                                                         smithy.SchemaExtensions
+	eRecordingConfigurationSummary_arn                                                     smithy.SchemaExtensions
+	eRecordingConfigurationSummary_name                                                    smithy.SchemaExtensions
+	eRecordingConfigurationSummary_destinationConfiguration                                smithy.SchemaExtensions
+	eRecordingConfigurationSummary_state                                                   smithy.SchemaExtensions
+	eRecordingConfigurationSummary_tags                                                    smithy.SchemaExtensions
+	e_RecordingMode                                                                        smithy.SchemaExtensions
+	e_RecordingReconnectWindowSeconds                                                      smithy.SchemaExtensions
+	eRenditionConfiguration                                                                smithy.SchemaExtensions
+	eRenditionConfiguration_renditionSelection                                             smithy.SchemaExtensions
+	eRenditionConfiguration_renditions                                                     smithy.SchemaExtensions
+	eRenditionConfigurationRendition                                                       smithy.SchemaExtensions
+	eRenditionConfigurationRendition_SD                                                    smithy.SchemaExtensions
+	eRenditionConfigurationRendition_HD                                                    smithy.SchemaExtensions
+	eRenditionConfigurationRendition_FULL_HD                                               smithy.SchemaExtensions
+	eRenditionConfigurationRendition_LOWEST_RESOLUTION                                     smithy.SchemaExtensions
+	e_RenditionConfigurationRenditionList                                                  smithy.SchemaExtensions
+	e_RenditionConfigurationRenditionList_member                                           smithy.SchemaExtensions
+	e_RenditionConfigurationRenditionSelection                                             smithy.SchemaExtensions
+	e_ResourceArn                                                                          smithy.SchemaExtensions
+	eResourceNotFoundException                                                             smithy.SchemaExtensions
+	eResourceNotFoundException_accessControlAllowOrigin                                    smithy.SchemaExtensions
+	eResourceNotFoundException_accessControlExposeHeaders                                  smithy.SchemaExtensions
+	eResourceNotFoundException_cacheControl                                                smithy.SchemaExtensions
+	eResourceNotFoundException_contentSecurityPolicy                                       smithy.SchemaExtensions
+	eResourceNotFoundException_strictTransportSecurity                                     smithy.SchemaExtensions
+	eResourceNotFoundException_xContentTypeOptions                                         smithy.SchemaExtensions
+	eResourceNotFoundException_xFrameOptions                                               smithy.SchemaExtensions
+	eResourceNotFoundException_xAmznErrorType                                              smithy.SchemaExtensions
+	eResourceNotFoundException_exceptionMessage                                            smithy.SchemaExtensions
+	e_S3DestinationBucketName                                                              smithy.SchemaExtensions
+	eS3DestinationConfiguration                                                            smithy.SchemaExtensions
+	eS3DestinationConfiguration_bucketName                                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_accessControlAllowOrigin                                smithy.SchemaExtensions
+	eServiceQuotaExceededException_accessControlExposeHeaders                              smithy.SchemaExtensions
+	eServiceQuotaExceededException_cacheControl                                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_contentSecurityPolicy                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_strictTransportSecurity                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_xContentTypeOptions                                     smithy.SchemaExtensions
+	eServiceQuotaExceededException_xFrameOptions                                           smithy.SchemaExtensions
+	eServiceQuotaExceededException_xAmznErrorType                                          smithy.SchemaExtensions
+	eServiceQuotaExceededException_exceptionMessage                                        smithy.SchemaExtensions
+	eServiceUnavailable                                                                    smithy.SchemaExtensions
+	eServiceUnavailable_accessControlAllowOrigin                                           smithy.SchemaExtensions
+	eServiceUnavailable_accessControlExposeHeaders                                         smithy.SchemaExtensions
+	eServiceUnavailable_cacheControl                                                       smithy.SchemaExtensions
+	eServiceUnavailable_contentSecurityPolicy                                              smithy.SchemaExtensions
+	eServiceUnavailable_strictTransportSecurity                                            smithy.SchemaExtensions
+	eServiceUnavailable_xContentTypeOptions                                                smithy.SchemaExtensions
+	eServiceUnavailable_xFrameOptions                                                      smithy.SchemaExtensions
+	eServiceUnavailable_xAmznErrorType                                                     smithy.SchemaExtensions
+	eServiceUnavailable_exceptionMessage                                                   smithy.SchemaExtensions
+	eSrt                                                                                   smithy.SchemaExtensions
+	eSrt_endpoint                                                                          smithy.SchemaExtensions
+	eSrt_passphrase                                                                        smithy.SchemaExtensions
+	e_SrtEndpoint                                                                          smithy.SchemaExtensions
+	e_SrtPassphrase                                                                        smithy.SchemaExtensions
+	eStream                                                                                smithy.SchemaExtensions
+	eStream_channelArn                                                                     smithy.SchemaExtensions
+	eStream_streamId                                                                       smithy.SchemaExtensions
+	eStream_playbackUrl                                                                    smithy.SchemaExtensions
+	eStream_startTime                                                                      smithy.SchemaExtensions
+	eStream_state                                                                          smithy.SchemaExtensions
+	eStream_health                                                                         smithy.SchemaExtensions
+	eStream_viewerCount                                                                    smithy.SchemaExtensions
+	eStreamEvent                                                                           smithy.SchemaExtensions
+	eStreamEvent_name                                                                      smithy.SchemaExtensions
+	eStreamEvent_type                                                                      smithy.SchemaExtensions
+	eStreamEvent_eventTime                                                                 smithy.SchemaExtensions
+	eStreamEvent_code                                                                      smithy.SchemaExtensions
+	e_StreamEvents                                                                         smithy.SchemaExtensions
+	e_StreamEvents_member                                                                  smithy.SchemaExtensions
+	eStreamFilters                                                                         smithy.SchemaExtensions
+	eStreamFilters_health                                                                  smithy.SchemaExtensions
+	e_StreamHealth                                                                         smithy.SchemaExtensions
+	e_StreamId                                                                             smithy.SchemaExtensions
+	eStreamKey                                                                             smithy.SchemaExtensions
+	eStreamKey_arn                                                                         smithy.SchemaExtensions
+	eStreamKey_value                                                                       smithy.SchemaExtensions
+	eStreamKey_channelArn                                                                  smithy.SchemaExtensions
+	eStreamKey_tags                                                                        smithy.SchemaExtensions
+	e_StreamKeyArn                                                                         smithy.SchemaExtensions
+	e_StreamKeyArnList                                                                     smithy.SchemaExtensions
+	e_StreamKeyArnList_member                                                              smithy.SchemaExtensions
+	e_StreamKeyList                                                                        smithy.SchemaExtensions
+	e_StreamKeyList_member                                                                 smithy.SchemaExtensions
+	e_StreamKeys                                                                           smithy.SchemaExtensions
+	e_StreamKeys_member                                                                    smithy.SchemaExtensions
+	eStreamKeySummary                                                                      smithy.SchemaExtensions
+	eStreamKeySummary_arn                                                                  smithy.SchemaExtensions
+	eStreamKeySummary_channelArn                                                           smithy.SchemaExtensions
+	eStreamKeySummary_tags                                                                 smithy.SchemaExtensions
+	e_StreamKeyValue                                                                       smithy.SchemaExtensions
+	e_StreamList                                                                           smithy.SchemaExtensions
+	e_StreamList_member                                                                    smithy.SchemaExtensions
+	e_StreamMetadata                                                                       smithy.SchemaExtensions
+	eStreamSession                                                                         smithy.SchemaExtensions
+	eStreamSession_streamId                                                                smithy.SchemaExtensions
+	eStreamSession_startTime                                                               smithy.SchemaExtensions
+	eStreamSession_endTime                                                                 smithy.SchemaExtensions
+	eStreamSession_channel                                                                 smithy.SchemaExtensions
+	eStreamSession_ingestConfiguration                                                     smithy.SchemaExtensions
+	eStreamSession_ingestConfigurations                                                    smithy.SchemaExtensions
+	eStreamSession_recordingConfiguration                                                  smithy.SchemaExtensions
+	eStreamSession_truncatedEvents                                                         smithy.SchemaExtensions
+	eStreamSession_failoverSlateConfiguration                                              smithy.SchemaExtensions
+	e_StreamSessionList                                                                    smithy.SchemaExtensions
+	e_StreamSessionList_member                                                             smithy.SchemaExtensions
+	eStreamSessionSummary                                                                  smithy.SchemaExtensions
+	eStreamSessionSummary_streamId                                                         smithy.SchemaExtensions
+	eStreamSessionSummary_startTime                                                        smithy.SchemaExtensions
+	eStreamSessionSummary_endTime                                                          smithy.SchemaExtensions
+	eStreamSessionSummary_hasErrorEvent                                                    smithy.SchemaExtensions
+	e_StreamStartTime                                                                      smithy.SchemaExtensions
+	e_StreamState                                                                          smithy.SchemaExtensions
+	eStreamSummary                                                                         smithy.SchemaExtensions
+	eStreamSummary_channelArn                                                              smithy.SchemaExtensions
+	eStreamSummary_streamId                                                                smithy.SchemaExtensions
+	eStreamSummary_state                                                                   smithy.SchemaExtensions
+	eStreamSummary_health                                                                  smithy.SchemaExtensions
+	eStreamSummary_viewerCount                                                             smithy.SchemaExtensions
+	eStreamSummary_startTime                                                               smithy.SchemaExtensions
+	eStreamUnavailable                                                                     smithy.SchemaExtensions
+	eStreamUnavailable_accessControlAllowOrigin                                            smithy.SchemaExtensions
+	eStreamUnavailable_accessControlExposeHeaders                                          smithy.SchemaExtensions
+	eStreamUnavailable_cacheControl                                                        smithy.SchemaExtensions
+	eStreamUnavailable_contentSecurityPolicy                                               smithy.SchemaExtensions
+	eStreamUnavailable_strictTransportSecurity                                             smithy.SchemaExtensions
+	eStreamUnavailable_xContentTypeOptions                                                 smithy.SchemaExtensions
+	eStreamUnavailable_xFrameOptions                                                       smithy.SchemaExtensions
+	eStreamUnavailable_xAmznErrorType                                                      smithy.SchemaExtensions
+	eStreamUnavailable_exceptionMessage                                                    smithy.SchemaExtensions
+	e_StreamViewerCount                                                                    smithy.SchemaExtensions
+	e_String                                                                               smithy.SchemaExtensions
+	e_TagKey                                                                               smithy.SchemaExtensions
+	e_TagKeyList                                                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                                                    smithy.SchemaExtensions
+	e_Tags                                                                                 smithy.SchemaExtensions
+	e_Tags_key                                                                             smithy.SchemaExtensions
+	e_Tags_value                                                                           smithy.SchemaExtensions
+	e_TagValue                                                                             smithy.SchemaExtensions
+	e_TargetIntervalSeconds                                                                smithy.SchemaExtensions
+	eThrottlingException                                                                   smithy.SchemaExtensions
+	eThrottlingException_accessControlAllowOrigin                                          smithy.SchemaExtensions
+	eThrottlingException_accessControlExposeHeaders                                        smithy.SchemaExtensions
+	eThrottlingException_cacheControl                                                      smithy.SchemaExtensions
+	eThrottlingException_contentSecurityPolicy                                             smithy.SchemaExtensions
+	eThrottlingException_strictTransportSecurity                                           smithy.SchemaExtensions
+	eThrottlingException_xContentTypeOptions                                               smithy.SchemaExtensions
+	eThrottlingException_xFrameOptions                                                     smithy.SchemaExtensions
+	eThrottlingException_xAmznErrorType                                                    smithy.SchemaExtensions
+	eThrottlingException_exceptionMessage                                                  smithy.SchemaExtensions
+	eThumbnailConfiguration                                                                smithy.SchemaExtensions
+	eThumbnailConfiguration_recordingMode                                                  smithy.SchemaExtensions
+	eThumbnailConfiguration_targetIntervalSeconds                                          smithy.SchemaExtensions
+	eThumbnailConfiguration_resolution                                                     smithy.SchemaExtensions
+	eThumbnailConfiguration_storage                                                        smithy.SchemaExtensions
+	eThumbnailConfigurationResolution                                                      smithy.SchemaExtensions
+	eThumbnailConfigurationResolution_SD                                                   smithy.SchemaExtensions
+	eThumbnailConfigurationResolution_HD                                                   smithy.SchemaExtensions
+	eThumbnailConfigurationResolution_FULL_HD                                              smithy.SchemaExtensions
+	eThumbnailConfigurationResolution_LOWEST_RESOLUTION                                    smithy.SchemaExtensions
+	e_ThumbnailConfigurationStorage                                                        smithy.SchemaExtensions
+	e_ThumbnailConfigurationStorageList                                                    smithy.SchemaExtensions
+	e_ThumbnailConfigurationStorageList_member                                             smithy.SchemaExtensions
+	e_Time                                                                                 smithy.SchemaExtensions
+	eTranscodePreset                                                                       smithy.SchemaExtensions
+	eTranscodePreset_HigherBandwidthTranscodePreset                                        smithy.SchemaExtensions
+	eTranscodePreset_ConstrainedBandwidthTranscodePreset                                   smithy.SchemaExtensions
+	eValidationException                                                                   smithy.SchemaExtensions
+	eValidationException_accessControlAllowOrigin                                          smithy.SchemaExtensions
+	eValidationException_accessControlExposeHeaders                                        smithy.SchemaExtensions
+	eValidationException_cacheControl                                                      smithy.SchemaExtensions
+	eValidationException_contentSecurityPolicy                                             smithy.SchemaExtensions
+	eValidationException_strictTransportSecurity                                           smithy.SchemaExtensions
+	eValidationException_xContentTypeOptions                                               smithy.SchemaExtensions
+	eValidationException_xFrameOptions                                                     smithy.SchemaExtensions
+	eValidationException_xAmznErrorType                                                    smithy.SchemaExtensions
+	eValidationException_exceptionMessage                                                  smithy.SchemaExtensions
+	eVideoConfiguration                                                                    smithy.SchemaExtensions
+	eVideoConfiguration_avcProfile                                                         smithy.SchemaExtensions
+	eVideoConfiguration_avcLevel                                                           smithy.SchemaExtensions
+	eVideoConfiguration_codec                                                              smithy.SchemaExtensions
+	eVideoConfiguration_encoder                                                            smithy.SchemaExtensions
+	eVideoConfiguration_targetBitrate                                                      smithy.SchemaExtensions
+	eVideoConfiguration_targetFramerate                                                    smithy.SchemaExtensions
+	eVideoConfiguration_videoHeight                                                        smithy.SchemaExtensions
+	eVideoConfiguration_videoWidth                                                         smithy.SchemaExtensions
+	eVideoConfiguration_level                                                              smithy.SchemaExtensions
+	eVideoConfiguration_track                                                              smithy.SchemaExtensions
+	eVideoConfiguration_profile                                                            smithy.SchemaExtensions
+	e_VideoConfigurationList                                                               smithy.SchemaExtensions
+	e_VideoConfigurationList_member                                                        smithy.SchemaExtensions
+	e_ViewerId                                                                             smithy.SchemaExtensions
+	e_ViewerSessionVersion                                                                 smithy.SchemaExtensions
+	eBatchGetChannelRequest                                                                smithy.SchemaExtensions
+	eBatchGetChannelRequest_arns                                                           smithy.SchemaExtensions
+	eBatchGetChannelResponse                                                               smithy.SchemaExtensions
+	eBatchGetChannelResponse_accessControlAllowOrigin                                      smithy.SchemaExtensions
+	eBatchGetChannelResponse_accessControlExposeHeaders                                    smithy.SchemaExtensions
+	eBatchGetChannelResponse_cacheControl                                                  smithy.SchemaExtensions
+	eBatchGetChannelResponse_contentSecurityPolicy                                         smithy.SchemaExtensions
+	eBatchGetChannelResponse_strictTransportSecurity                                       smithy.SchemaExtensions
+	eBatchGetChannelResponse_xContentTypeOptions                                           smithy.SchemaExtensions
+	eBatchGetChannelResponse_xFrameOptions                                                 smithy.SchemaExtensions
+	eBatchGetChannelResponse_channels                                                      smithy.SchemaExtensions
+	eBatchGetChannelResponse_errors                                                        smithy.SchemaExtensions
+	eBatchGetStreamKeyRequest                                                              smithy.SchemaExtensions
+	eBatchGetStreamKeyRequest_arns                                                         smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse                                                             smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_accessControlAllowOrigin                                    smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_accessControlExposeHeaders                                  smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_cacheControl                                                smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_contentSecurityPolicy                                       smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_strictTransportSecurity                                     smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_xContentTypeOptions                                         smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_xFrameOptions                                               smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_streamKeys                                                  smithy.SchemaExtensions
+	eBatchGetStreamKeyResponse_errors                                                      smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationRequest                                              smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationRequest_viewerSessions                               smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse                                             smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_accessControlAllowOrigin                    smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_accessControlExposeHeaders                  smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_cacheControl                                smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_contentSecurityPolicy                       smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_strictTransportSecurity                     smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_xContentTypeOptions                         smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_xFrameOptions                               smithy.SchemaExtensions
+	eBatchStartViewerSessionRevocationResponse_errors                                      smithy.SchemaExtensions
+	eCreateAdConfigurationRequest                                                          smithy.SchemaExtensions
+	eCreateAdConfigurationRequest_name                                                     smithy.SchemaExtensions
+	eCreateAdConfigurationRequest_mediaTailorPlaybackConfigurations                        smithy.SchemaExtensions
+	eCreateAdConfigurationRequest_postRollConfiguration                                    smithy.SchemaExtensions
+	eCreateAdConfigurationRequest_tags                                                     smithy.SchemaExtensions
+	eCreateAdConfigurationResponse                                                         smithy.SchemaExtensions
+	eCreateAdConfigurationResponse_adConfiguration                                         smithy.SchemaExtensions
+	eCreateChannelRequest                                                                  smithy.SchemaExtensions
+	eCreateChannelRequest_name                                                             smithy.SchemaExtensions
+	eCreateChannelRequest_latencyMode                                                      smithy.SchemaExtensions
+	eCreateChannelRequest_type                                                             smithy.SchemaExtensions
+	eCreateChannelRequest_authorized                                                       smithy.SchemaExtensions
+	eCreateChannelRequest_recordingConfigurationArn                                        smithy.SchemaExtensions
+	eCreateChannelRequest_tags                                                             smithy.SchemaExtensions
+	eCreateChannelRequest_insecureIngest                                                   smithy.SchemaExtensions
+	eCreateChannelRequest_preset                                                           smithy.SchemaExtensions
+	eCreateChannelRequest_playbackRestrictionPolicyArn                                     smithy.SchemaExtensions
+	eCreateChannelRequest_multitrackInputConfiguration                                     smithy.SchemaExtensions
+	eCreateChannelRequest_containerFormat                                                  smithy.SchemaExtensions
+	eCreateChannelRequest_adConfigurationArn                                               smithy.SchemaExtensions
+	eCreateChannelRequest_failoverSlateConfigurationArn                                    smithy.SchemaExtensions
+	eCreateChannelResponse                                                                 smithy.SchemaExtensions
+	eCreateChannelResponse_channel                                                         smithy.SchemaExtensions
+	eCreateChannelResponse_streamKey                                                       smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationRequest                                               smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationRequest_name                                          smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationRequest_activationThresholdSeconds                    smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds                        smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds                        smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationRequest_tags                                          smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationResponse                                              smithy.SchemaExtensions
+	eCreateFailoverSlateConfigurationResponse_failoverSlateConfiguration                   smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyRequest                                                smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyRequest_allowedCountries                               smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyRequest_allowedOrigins                                 smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement                  smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyRequest_name                                           smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyRequest_tags                                           smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyResponse                                               smithy.SchemaExtensions
+	eCreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy                     smithy.SchemaExtensions
+	eCreateRecordingConfigurationRequest                                                   smithy.SchemaExtensions
+	eCreateRecordingConfigurationRequest_name                                              smithy.SchemaExtensions
+	eCreateRecordingConfigurationRequest_destinationConfiguration                          smithy.SchemaExtensions
+	eCreateRecordingConfigurationRequest_tags                                              smithy.SchemaExtensions
+	eCreateRecordingConfigurationRequest_thumbnailConfiguration                            smithy.SchemaExtensions
+	eCreateRecordingConfigurationRequest_recordingReconnectWindowSeconds                   smithy.SchemaExtensions
+	eCreateRecordingConfigurationRequest_renditionConfiguration                            smithy.SchemaExtensions
+	eCreateRecordingConfigurationResponse                                                  smithy.SchemaExtensions
+	eCreateRecordingConfigurationResponse_recordingConfiguration                           smithy.SchemaExtensions
+	eCreateStreamKeyRequest                                                                smithy.SchemaExtensions
+	eCreateStreamKeyRequest_channelArn                                                     smithy.SchemaExtensions
+	eCreateStreamKeyRequest_tags                                                           smithy.SchemaExtensions
+	eCreateStreamKeyResponse                                                               smithy.SchemaExtensions
+	eCreateStreamKeyResponse_streamKey                                                     smithy.SchemaExtensions
+	eDeleteAdConfigurationRequest                                                          smithy.SchemaExtensions
+	eDeleteAdConfigurationRequest_arn                                                      smithy.SchemaExtensions
+	eDeleteChannelRequest                                                                  smithy.SchemaExtensions
+	eDeleteChannelRequest_arn                                                              smithy.SchemaExtensions
+	eDeleteFailoverSlateConfigurationRequest                                               smithy.SchemaExtensions
+	eDeleteFailoverSlateConfigurationRequest_arn                                           smithy.SchemaExtensions
+	eDeletePlaybackKeyPairRequest                                                          smithy.SchemaExtensions
+	eDeletePlaybackKeyPairRequest_arn                                                      smithy.SchemaExtensions
+	eDeletePlaybackKeyPairResponse                                                         smithy.SchemaExtensions
+	eDeletePlaybackRestrictionPolicyRequest                                                smithy.SchemaExtensions
+	eDeletePlaybackRestrictionPolicyRequest_arn                                            smithy.SchemaExtensions
+	eDeleteRecordingConfigurationRequest                                                   smithy.SchemaExtensions
+	eDeleteRecordingConfigurationRequest_arn                                               smithy.SchemaExtensions
+	eDeleteStreamKeyRequest                                                                smithy.SchemaExtensions
+	eDeleteStreamKeyRequest_arn                                                            smithy.SchemaExtensions
+	eGetAdConfigurationRequest                                                             smithy.SchemaExtensions
+	eGetAdConfigurationRequest_arn                                                         smithy.SchemaExtensions
+	eGetAdConfigurationResponse                                                            smithy.SchemaExtensions
+	eGetAdConfigurationResponse_adConfiguration                                            smithy.SchemaExtensions
+	eGetChannelRequest                                                                     smithy.SchemaExtensions
+	eGetChannelRequest_arn                                                                 smithy.SchemaExtensions
+	eGetChannelResponse                                                                    smithy.SchemaExtensions
+	eGetChannelResponse_channel                                                            smithy.SchemaExtensions
+	eGetFailoverSlateConfigurationRequest                                                  smithy.SchemaExtensions
+	eGetFailoverSlateConfigurationRequest_arn                                              smithy.SchemaExtensions
+	eGetFailoverSlateConfigurationResponse                                                 smithy.SchemaExtensions
+	eGetFailoverSlateConfigurationResponse_failoverSlateConfiguration                      smithy.SchemaExtensions
+	eGetPlaybackKeyPairRequest                                                             smithy.SchemaExtensions
+	eGetPlaybackKeyPairRequest_arn                                                         smithy.SchemaExtensions
+	eGetPlaybackKeyPairResponse                                                            smithy.SchemaExtensions
+	eGetPlaybackKeyPairResponse_keyPair                                                    smithy.SchemaExtensions
+	eGetPlaybackRestrictionPolicyRequest                                                   smithy.SchemaExtensions
+	eGetPlaybackRestrictionPolicyRequest_arn                                               smithy.SchemaExtensions
+	eGetPlaybackRestrictionPolicyResponse                                                  smithy.SchemaExtensions
+	eGetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy                        smithy.SchemaExtensions
+	eGetRecordingConfigurationRequest                                                      smithy.SchemaExtensions
+	eGetRecordingConfigurationRequest_arn                                                  smithy.SchemaExtensions
+	eGetRecordingConfigurationResponse                                                     smithy.SchemaExtensions
+	eGetRecordingConfigurationResponse_recordingConfiguration                              smithy.SchemaExtensions
+	eGetStreamRequest                                                                      smithy.SchemaExtensions
+	eGetStreamRequest_channelArn                                                           smithy.SchemaExtensions
+	eGetStreamKeyRequest                                                                   smithy.SchemaExtensions
+	eGetStreamKeyRequest_arn                                                               smithy.SchemaExtensions
+	eGetStreamKeyResponse                                                                  smithy.SchemaExtensions
+	eGetStreamKeyResponse_streamKey                                                        smithy.SchemaExtensions
+	eGetStreamResponse                                                                     smithy.SchemaExtensions
+	eGetStreamResponse_stream                                                              smithy.SchemaExtensions
+	eGetStreamSessionRequest                                                               smithy.SchemaExtensions
+	eGetStreamSessionRequest_channelArn                                                    smithy.SchemaExtensions
+	eGetStreamSessionRequest_streamId                                                      smithy.SchemaExtensions
+	eGetStreamSessionResponse                                                              smithy.SchemaExtensions
+	eGetStreamSessionResponse_streamSession                                                smithy.SchemaExtensions
+	eImportPlaybackKeyPairRequest                                                          smithy.SchemaExtensions
+	eImportPlaybackKeyPairRequest_publicKeyMaterial                                        smithy.SchemaExtensions
+	eImportPlaybackKeyPairRequest_name                                                     smithy.SchemaExtensions
+	eImportPlaybackKeyPairRequest_tags                                                     smithy.SchemaExtensions
+	eImportPlaybackKeyPairResponse                                                         smithy.SchemaExtensions
+	eImportPlaybackKeyPairResponse_keyPair                                                 smithy.SchemaExtensions
+	eInsertAdBreakRequest                                                                  smithy.SchemaExtensions
+	eInsertAdBreakRequest_channelArn                                                       smithy.SchemaExtensions
+	eInsertAdBreakRequest_durationSeconds                                                  smithy.SchemaExtensions
+	eInsertAdBreakRequest_adBreakId                                                        smithy.SchemaExtensions
+	eInsertAdBreakRequest_targetStartAt                                                    smithy.SchemaExtensions
+	eInsertAdBreakResponse                                                                 smithy.SchemaExtensions
+	eInsertAdBreakResponse_adBreakId                                                       smithy.SchemaExtensions
+	eInsertAdBreakResponse_targetStartAt                                                   smithy.SchemaExtensions
+	eListAdConfigurationsRequest                                                           smithy.SchemaExtensions
+	eListAdConfigurationsRequest_nextToken                                                 smithy.SchemaExtensions
+	eListAdConfigurationsRequest_maxResults                                                smithy.SchemaExtensions
+	eListAdConfigurationsResponse                                                          smithy.SchemaExtensions
+	eListAdConfigurationsResponse_adConfigurations                                         smithy.SchemaExtensions
+	eListAdConfigurationsResponse_nextToken                                                smithy.SchemaExtensions
+	eListChannelsRequest                                                                   smithy.SchemaExtensions
+	eListChannelsRequest_filterByName                                                      smithy.SchemaExtensions
+	eListChannelsRequest_filterByRecordingConfigurationArn                                 smithy.SchemaExtensions
+	eListChannelsRequest_filterByPlaybackRestrictionPolicyArn                              smithy.SchemaExtensions
+	eListChannelsRequest_filterByAdConfigurationArn                                        smithy.SchemaExtensions
+	eListChannelsRequest_filterByFailoverSlateConfigurationArn                             smithy.SchemaExtensions
+	eListChannelsRequest_nextToken                                                         smithy.SchemaExtensions
+	eListChannelsRequest_maxResults                                                        smithy.SchemaExtensions
+	eListChannelsResponse                                                                  smithy.SchemaExtensions
+	eListChannelsResponse_channels                                                         smithy.SchemaExtensions
+	eListChannelsResponse_nextToken                                                        smithy.SchemaExtensions
+	eListFailoverSlateConfigurationsRequest                                                smithy.SchemaExtensions
+	eListFailoverSlateConfigurationsRequest_nextToken                                      smithy.SchemaExtensions
+	eListFailoverSlateConfigurationsRequest_maxResults                                     smithy.SchemaExtensions
+	eListFailoverSlateConfigurationsResponse                                               smithy.SchemaExtensions
+	eListFailoverSlateConfigurationsResponse_failoverSlateConfigurations                   smithy.SchemaExtensions
+	eListFailoverSlateConfigurationsResponse_nextToken                                     smithy.SchemaExtensions
+	eListPlaybackKeyPairsRequest                                                           smithy.SchemaExtensions
+	eListPlaybackKeyPairsRequest_nextToken                                                 smithy.SchemaExtensions
+	eListPlaybackKeyPairsRequest_maxResults                                                smithy.SchemaExtensions
+	eListPlaybackKeyPairsResponse                                                          smithy.SchemaExtensions
+	eListPlaybackKeyPairsResponse_keyPairs                                                 smithy.SchemaExtensions
+	eListPlaybackKeyPairsResponse_nextToken                                                smithy.SchemaExtensions
+	eListPlaybackRestrictionPoliciesRequest                                                smithy.SchemaExtensions
+	eListPlaybackRestrictionPoliciesRequest_nextToken                                      smithy.SchemaExtensions
+	eListPlaybackRestrictionPoliciesRequest_maxResults                                     smithy.SchemaExtensions
+	eListPlaybackRestrictionPoliciesResponse                                               smithy.SchemaExtensions
+	eListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies                   smithy.SchemaExtensions
+	eListPlaybackRestrictionPoliciesResponse_nextToken                                     smithy.SchemaExtensions
+	eListRecordingConfigurationsRequest                                                    smithy.SchemaExtensions
+	eListRecordingConfigurationsRequest_nextToken                                          smithy.SchemaExtensions
+	eListRecordingConfigurationsRequest_maxResults                                         smithy.SchemaExtensions
+	eListRecordingConfigurationsResponse                                                   smithy.SchemaExtensions
+	eListRecordingConfigurationsResponse_recordingConfigurations                           smithy.SchemaExtensions
+	eListRecordingConfigurationsResponse_nextToken                                         smithy.SchemaExtensions
+	eListStreamKeysRequest                                                                 smithy.SchemaExtensions
+	eListStreamKeysRequest_channelArn                                                      smithy.SchemaExtensions
+	eListStreamKeysRequest_nextToken                                                       smithy.SchemaExtensions
+	eListStreamKeysRequest_maxResults                                                      smithy.SchemaExtensions
+	eListStreamKeysResponse                                                                smithy.SchemaExtensions
+	eListStreamKeysResponse_streamKeys                                                     smithy.SchemaExtensions
+	eListStreamKeysResponse_nextToken                                                      smithy.SchemaExtensions
+	eListStreamSessionsRequest                                                             smithy.SchemaExtensions
+	eListStreamSessionsRequest_channelArn                                                  smithy.SchemaExtensions
+	eListStreamSessionsRequest_nextToken                                                   smithy.SchemaExtensions
+	eListStreamSessionsRequest_maxResults                                                  smithy.SchemaExtensions
+	eListStreamSessionsResponse                                                            smithy.SchemaExtensions
+	eListStreamSessionsResponse_streamSessions                                             smithy.SchemaExtensions
+	eListStreamSessionsResponse_nextToken                                                  smithy.SchemaExtensions
+	eListStreamsRequest                                                                    smithy.SchemaExtensions
+	eListStreamsRequest_filterBy                                                           smithy.SchemaExtensions
+	eListStreamsRequest_nextToken                                                          smithy.SchemaExtensions
+	eListStreamsRequest_maxResults                                                         smithy.SchemaExtensions
+	eListStreamsResponse                                                                   smithy.SchemaExtensions
+	eListStreamsResponse_streams                                                           smithy.SchemaExtensions
+	eListStreamsResponse_nextToken                                                         smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                                                smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                           smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                                      smithy.SchemaExtensions
+	ePutMetadataRequest                                                                    smithy.SchemaExtensions
+	ePutMetadataRequest_channelArn                                                         smithy.SchemaExtensions
+	ePutMetadataRequest_metadata                                                           smithy.SchemaExtensions
+	eStartViewerSessionRevocationRequest                                                   smithy.SchemaExtensions
+	eStartViewerSessionRevocationRequest_channelArn                                        smithy.SchemaExtensions
+	eStartViewerSessionRevocationRequest_viewerId                                          smithy.SchemaExtensions
+	eStartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo            smithy.SchemaExtensions
+	eStartViewerSessionRevocationResponse                                                  smithy.SchemaExtensions
+	eStopStreamRequest                                                                     smithy.SchemaExtensions
+	eStopStreamRequest_channelArn                                                          smithy.SchemaExtensions
+	eStopStreamResponse                                                                    smithy.SchemaExtensions
+	eTagResourceRequest                                                                    smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                                        smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                               smithy.SchemaExtensions
+	eTagResourceResponse                                                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                                                  smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                                      smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                                          smithy.SchemaExtensions
+	eUntagResourceResponse                                                                 smithy.SchemaExtensions
+	eUpdateAdConfigurationRequest                                                          smithy.SchemaExtensions
+	eUpdateAdConfigurationRequest_arn                                                      smithy.SchemaExtensions
+	eUpdateAdConfigurationRequest_name                                                     smithy.SchemaExtensions
+	eUpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations                        smithy.SchemaExtensions
+	eUpdateAdConfigurationRequest_postRollConfiguration                                    smithy.SchemaExtensions
+	eUpdateAdConfigurationResponse                                                         smithy.SchemaExtensions
+	eUpdateAdConfigurationResponse_adConfiguration                                         smithy.SchemaExtensions
+	eUpdateChannelRequest                                                                  smithy.SchemaExtensions
+	eUpdateChannelRequest_arn                                                              smithy.SchemaExtensions
+	eUpdateChannelRequest_name                                                             smithy.SchemaExtensions
+	eUpdateChannelRequest_latencyMode                                                      smithy.SchemaExtensions
+	eUpdateChannelRequest_type                                                             smithy.SchemaExtensions
+	eUpdateChannelRequest_authorized                                                       smithy.SchemaExtensions
+	eUpdateChannelRequest_recordingConfigurationArn                                        smithy.SchemaExtensions
+	eUpdateChannelRequest_insecureIngest                                                   smithy.SchemaExtensions
+	eUpdateChannelRequest_preset                                                           smithy.SchemaExtensions
+	eUpdateChannelRequest_playbackRestrictionPolicyArn                                     smithy.SchemaExtensions
+	eUpdateChannelRequest_multitrackInputConfiguration                                     smithy.SchemaExtensions
+	eUpdateChannelRequest_containerFormat                                                  smithy.SchemaExtensions
+	eUpdateChannelRequest_adConfigurationArn                                               smithy.SchemaExtensions
+	eUpdateChannelRequest_failoverSlateConfigurationArn                                    smithy.SchemaExtensions
+	eUpdateChannelResponse                                                                 smithy.SchemaExtensions
+	eUpdateChannelResponse_channel                                                         smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationRequest                                               smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationRequest_arn                                           smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationRequest_name                                          smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationRequest_activationThresholdSeconds                    smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds                        smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds                        smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationResponse                                              smithy.SchemaExtensions
+	eUpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration                   smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyRequest                                                smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyRequest_arn                                            smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyRequest_allowedCountries                               smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyRequest_allowedOrigins                                 smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement                  smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyRequest_name                                           smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyResponse                                               smithy.SchemaExtensions
+	eUpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy                     smithy.SchemaExtensions
+)
+
+var (
+	iBatchGetChannel                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchGetChannel"}
+	iBatchGetStreamKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchGetStreamKey"}
+	iBatchStartViewerSessionRevocation                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchStartViewerSessionRevocation"}
+	iCreateAdConfiguration                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateAdConfiguration"}
+	iCreateChannel                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateChannel"}
+	iCreateFailoverSlateConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateFailoverSlateConfiguration"}
+	iCreatePlaybackRestrictionPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreatePlaybackRestrictionPolicy"}
+	iCreateRecordingConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateRecordingConfiguration"}
+	iCreateStreamKey                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateStreamKey"}
+	iDeleteAdConfiguration                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteAdConfiguration"}
+	iDeleteChannel                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteChannel"}
+	iDeleteFailoverSlateConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteFailoverSlateConfiguration"}
+	iDeletePlaybackKeyPair                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeletePlaybackKeyPair"}
+	iDeletePlaybackRestrictionPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeletePlaybackRestrictionPolicy"}
+	iDeleteRecordingConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteRecordingConfiguration"}
+	iDeleteStreamKey                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteStreamKey"}
+	iGetAdConfiguration                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetAdConfiguration"}
+	iGetChannel                                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetChannel"}
+	iGetFailoverSlateConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetFailoverSlateConfiguration"}
+	iGetPlaybackKeyPair                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetPlaybackKeyPair"}
+	iGetPlaybackRestrictionPolicy                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetPlaybackRestrictionPolicy"}
+	iGetRecordingConfiguration                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetRecordingConfiguration"}
+	iGetStream                                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStream"}
+	iGetStreamKey                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamKey"}
+	iGetStreamSession                                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamSession"}
+	iImportPlaybackKeyPair                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ImportPlaybackKeyPair"}
+	iInsertAdBreak                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "InsertAdBreak"}
+	iListAdConfigurations                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListAdConfigurations"}
+	iListChannels                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListChannels"}
+	iListFailoverSlateConfigurations                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListFailoverSlateConfigurations"}
+	iListPlaybackKeyPairs                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListPlaybackKeyPairs"}
+	iListPlaybackRestrictionPolicies                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListPlaybackRestrictionPolicies"}
+	iListRecordingConfigurations                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListRecordingConfigurations"}
+	iListStreamKeys                                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamKeys"}
+	iListStreams                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreams"}
+	iListStreamSessions                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamSessions"}
+	iListTagsForResource                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListTagsForResource"}
+	iPutMetadata                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PutMetadata"}
+	iStartViewerSessionRevocation                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StartViewerSessionRevocation"}
+	iStopStream                                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StopStream"}
+	iTagResource                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TagResource"}
+	iUntagResource                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UntagResource"}
+	iUpdateAdConfiguration                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateAdConfiguration"}
+	iUpdateChannel                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateChannel"}
+	iUpdateFailoverSlateConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateFailoverSlateConfiguration"}
+	iUpdatePlaybackRestrictionPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdatePlaybackRestrictionPolicy"}
+	i_AmazonInteractiveVideoService                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AmazonInteractiveVideoService"}
+	iAccessDeniedException                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AccessDeniedException"}
+	i_AdBreakId                                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AdBreakId"}
+	iAdConfiguration                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AdConfiguration"}
+	i_AdConfigurationArn                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AdConfigurationArn"}
+	i_AdConfigurationList                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AdConfigurationList"}
+	i_AdConfigurationName                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AdConfigurationName"}
+	iAdConfigurationSummary                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AdConfigurationSummary"}
+	i_AdDurationSeconds                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AdDurationSeconds"}
+	iAudioConfiguration                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AudioConfiguration"}
+	i_AudioConfigurationList                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "AudioConfigurationList"}
+	iBatchError                                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchError"}
+	i_BatchErrors                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchErrors"}
+	iBatchStartViewerSessionRevocationError                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchStartViewerSessionRevocationError"}
+	i_BatchStartViewerSessionRevocationErrors                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchStartViewerSessionRevocationErrors"}
+	iBatchStartViewerSessionRevocationViewerSession          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchStartViewerSessionRevocationViewerSession"}
+	i_BatchStartViewerSessionRevocationViewerSessionList     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchStartViewerSessionRevocationViewerSessionList"}
+	i_Boolean                                                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Boolean"}
+	iChannel                                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Channel"}
+	i_ChannelAdConfigurationArn                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelAdConfigurationArn"}
+	i_ChannelArn                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelArn"}
+	i_ChannelArnList                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelArnList"}
+	i_ChannelFailoverSlateConfigurationArn                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelFailoverSlateConfigurationArn"}
+	i_ChannelLatencyMode                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelLatencyMode"}
+	i_ChannelList                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelList"}
+	i_ChannelName                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelName"}
+	iChannelNotBroadcasting                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelNotBroadcasting"}
+	i_ChannelPlaybackRestrictionPolicyArn                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelPlaybackRestrictionPolicyArn"}
+	i_ChannelRecordingConfigurationArn                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelRecordingConfigurationArn"}
+	i_Channels                                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Channels"}
+	iChannelSummary                                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelSummary"}
+	iChannelType                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ChannelType"}
+	iConflictException                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ConflictException"}
+	i_ContainerFormat                                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ContainerFormat"}
+	iDestinationConfiguration                                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DestinationConfiguration"}
+	i_errorCode                                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "errorCode"}
+	i_errorMessage                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "errorMessage"}
+	i_FailoverSlateActivationThresholdSeconds                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateActivationThresholdSeconds"}
+	iFailoverSlateConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateConfiguration"}
+	i_FailoverSlateConfigurationArn                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateConfigurationArn"}
+	i_FailoverSlateConfigurationList                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateConfigurationList"}
+	i_FailoverSlateConfigurationName                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateConfigurationName"}
+	i_FailoverSlateConfigurationState                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateConfigurationState"}
+	iFailoverSlateConfigurationSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateConfigurationSummary"}
+	i_FailoverSlateMaxDisplaySeconds                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateMaxDisplaySeconds"}
+	i_FailoverSlateMinDisplaySeconds                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "FailoverSlateMinDisplaySeconds"}
+	iIngestConfiguration                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "IngestConfiguration"}
+	iIngestConfigurations                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "IngestConfigurations"}
+	i_IngestEndpoint                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "IngestEndpoint"}
+	i_InsecureIngest                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "InsecureIngest"}
+	i_Integer                                                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Integer"}
+	iInternalServerException                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "InternalServerException"}
+	i_IsAuthorized                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "IsAuthorized"}
+	i_IsMultitrackInputEnabled                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "IsMultitrackInputEnabled"}
+	i_MaxAdConfigurationResults                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxAdConfigurationResults"}
+	i_MaxChannelResults                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxChannelResults"}
+	i_MaxFailoverSlateConfigurationResults                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxFailoverSlateConfigurationResults"}
+	i_MaxPlaybackKeyPairResults                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxPlaybackKeyPairResults"}
+	i_MaxPlaybackRestrictionPolicyResults                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxPlaybackRestrictionPolicyResults"}
+	i_MaxRecordingConfigurationResults                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxRecordingConfigurationResults"}
+	i_MaxStreamKeyResults                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxStreamKeyResults"}
+	i_MaxStreamResults                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MaxStreamResults"}
+	iMediaTailorPlaybackConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MediaTailorPlaybackConfiguration"}
+	i_MediaTailorPlaybackConfigurationArn                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MediaTailorPlaybackConfigurationArn"}
+	i_MediaTailorPlaybackConfigurationsList                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MediaTailorPlaybackConfigurationsList"}
+	iMultitrackInputConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MultitrackInputConfiguration"}
+	iMultitrackMaximumResolution                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MultitrackMaximumResolution"}
+	iMultitrackPolicy                                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "MultitrackPolicy"}
+	i_PaginationToken                                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PaginationToken"}
+	iPendingVerification                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PendingVerification"}
+	iPlaybackKeyPair                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackKeyPair"}
+	i_PlaybackKeyPairArn                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackKeyPairArn"}
+	i_PlaybackKeyPairFingerprint                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackKeyPairFingerprint"}
+	i_PlaybackKeyPairList                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackKeyPairList"}
+	i_PlaybackKeyPairName                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackKeyPairName"}
+	iPlaybackKeyPairSummary                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackKeyPairSummary"}
+	i_PlaybackPublicKeyMaterial                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackPublicKeyMaterial"}
+	iPlaybackRestrictionPolicy                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicy"}
+	i_PlaybackRestrictionPolicyAllowedCountry                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyAllowedCountry"}
+	i_PlaybackRestrictionPolicyAllowedCountryList            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyAllowedCountryList"}
+	i_PlaybackRestrictionPolicyAllowedOrigin                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyAllowedOrigin"}
+	i_PlaybackRestrictionPolicyAllowedOriginList             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyAllowedOriginList"}
+	i_PlaybackRestrictionPolicyArn                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyArn"}
+	i_PlaybackRestrictionPolicyEnableStrictOriginEnforcement = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyEnableStrictOriginEnforcement"}
+	i_PlaybackRestrictionPolicyList                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyList"}
+	i_PlaybackRestrictionPolicyName                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicyName"}
+	iPlaybackRestrictionPolicySummary                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackRestrictionPolicySummary"}
+	i_PlaybackURL                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PlaybackURL"}
+	iPostRollConfiguration                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PostRollConfiguration"}
+	iRecordingConfiguration                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingConfiguration"}
+	i_RecordingConfigurationArn                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingConfigurationArn"}
+	i_RecordingConfigurationList                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingConfigurationList"}
+	i_RecordingConfigurationName                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingConfigurationName"}
+	i_RecordingConfigurationState                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingConfigurationState"}
+	iRecordingConfigurationSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingConfigurationSummary"}
+	i_RecordingMode                                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingMode"}
+	i_RecordingReconnectWindowSeconds                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RecordingReconnectWindowSeconds"}
+	iRenditionConfiguration                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RenditionConfiguration"}
+	iRenditionConfigurationRendition                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RenditionConfigurationRendition"}
+	i_RenditionConfigurationRenditionList                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RenditionConfigurationRenditionList"}
+	i_RenditionConfigurationRenditionSelection               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "RenditionConfigurationRenditionSelection"}
+	i_ResourceArn                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ResourceArn"}
+	iResourceNotFoundException                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ResourceNotFoundException"}
+	i_S3DestinationBucketName                                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "S3DestinationBucketName"}
+	iS3DestinationConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "S3DestinationConfiguration"}
+	iServiceQuotaExceededException                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ServiceQuotaExceededException"}
+	iServiceUnavailable                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ServiceUnavailable"}
+	iSrt                                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Srt"}
+	i_SrtEndpoint                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "SrtEndpoint"}
+	i_SrtPassphrase                                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "SrtPassphrase"}
+	iStream                                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Stream"}
+	iStreamEvent                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamEvent"}
+	i_StreamEvents                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamEvents"}
+	iStreamFilters                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamFilters"}
+	i_StreamHealth                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamHealth"}
+	i_StreamId                                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamId"}
+	iStreamKey                                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamKey"}
+	i_StreamKeyArn                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamKeyArn"}
+	i_StreamKeyArnList                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamKeyArnList"}
+	i_StreamKeyList                                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamKeyList"}
+	i_StreamKeys                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamKeys"}
+	iStreamKeySummary                                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamKeySummary"}
+	i_StreamKeyValue                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamKeyValue"}
+	i_StreamList                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamList"}
+	i_StreamMetadata                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamMetadata"}
+	iStreamSession                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamSession"}
+	i_StreamSessionList                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamSessionList"}
+	iStreamSessionSummary                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamSessionSummary"}
+	i_StreamStartTime                                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamStartTime"}
+	i_StreamState                                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamState"}
+	iStreamSummary                                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamSummary"}
+	iStreamUnavailable                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamUnavailable"}
+	i_StreamViewerCount                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StreamViewerCount"}
+	i_String                                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "String"}
+	i_TagKey                                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TagKey"}
+	i_TagKeyList                                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TagKeyList"}
+	i_Tags                                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Tags"}
+	i_TagValue                                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TagValue"}
+	i_TargetIntervalSeconds                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TargetIntervalSeconds"}
+	iThrottlingException                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ThrottlingException"}
+	iThumbnailConfiguration                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ThumbnailConfiguration"}
+	iThumbnailConfigurationResolution                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ThumbnailConfigurationResolution"}
+	i_ThumbnailConfigurationStorage                          = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ThumbnailConfigurationStorage"}
+	i_ThumbnailConfigurationStorageList                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ThumbnailConfigurationStorageList"}
+	i_Time                                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "Time"}
+	iTranscodePreset                                         = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TranscodePreset"}
+	iValidationException                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ValidationException"}
+	iVideoConfiguration                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "VideoConfiguration"}
+	i_VideoConfigurationList                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "VideoConfigurationList"}
+	i_ViewerId                                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ViewerId"}
+	i_ViewerSessionVersion                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ViewerSessionVersion"}
+	iBatchGetChannelRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchGetChannelRequest"}
+	iBatchGetChannelResponse                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchGetChannelResponse"}
+	iBatchGetStreamKeyRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchGetStreamKeyRequest"}
+	iBatchGetStreamKeyResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchGetStreamKeyResponse"}
+	iBatchStartViewerSessionRevocationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchStartViewerSessionRevocationRequest"}
+	iBatchStartViewerSessionRevocationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "BatchStartViewerSessionRevocationResponse"}
+	iCreateAdConfigurationRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateAdConfigurationRequest"}
+	iCreateAdConfigurationResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateAdConfigurationResponse"}
+	iCreateChannelRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateChannelRequest"}
+	iCreateChannelResponse                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateChannelResponse"}
+	iCreateFailoverSlateConfigurationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateFailoverSlateConfigurationRequest"}
+	iCreateFailoverSlateConfigurationResponse                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateFailoverSlateConfigurationResponse"}
+	iCreatePlaybackRestrictionPolicyRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreatePlaybackRestrictionPolicyRequest"}
+	iCreatePlaybackRestrictionPolicyResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreatePlaybackRestrictionPolicyResponse"}
+	iCreateRecordingConfigurationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateRecordingConfigurationRequest"}
+	iCreateRecordingConfigurationResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateRecordingConfigurationResponse"}
+	iCreateStreamKeyRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateStreamKeyRequest"}
+	iCreateStreamKeyResponse                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "CreateStreamKeyResponse"}
+	iDeleteAdConfigurationRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteAdConfigurationRequest"}
+	iDeleteChannelRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteChannelRequest"}
+	iDeleteFailoverSlateConfigurationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteFailoverSlateConfigurationRequest"}
+	iDeletePlaybackKeyPairRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeletePlaybackKeyPairRequest"}
+	iDeletePlaybackKeyPairResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeletePlaybackKeyPairResponse"}
+	iDeletePlaybackRestrictionPolicyRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeletePlaybackRestrictionPolicyRequest"}
+	iDeleteRecordingConfigurationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteRecordingConfigurationRequest"}
+	iDeleteStreamKeyRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "DeleteStreamKeyRequest"}
+	iGetAdConfigurationRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetAdConfigurationRequest"}
+	iGetAdConfigurationResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetAdConfigurationResponse"}
+	iGetChannelRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetChannelRequest"}
+	iGetChannelResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetChannelResponse"}
+	iGetFailoverSlateConfigurationRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetFailoverSlateConfigurationRequest"}
+	iGetFailoverSlateConfigurationResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetFailoverSlateConfigurationResponse"}
+	iGetPlaybackKeyPairRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetPlaybackKeyPairRequest"}
+	iGetPlaybackKeyPairResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetPlaybackKeyPairResponse"}
+	iGetPlaybackRestrictionPolicyRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetPlaybackRestrictionPolicyRequest"}
+	iGetPlaybackRestrictionPolicyResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetPlaybackRestrictionPolicyResponse"}
+	iGetRecordingConfigurationRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetRecordingConfigurationRequest"}
+	iGetRecordingConfigurationResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetRecordingConfigurationResponse"}
+	iGetStreamRequest                                        = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamRequest"}
+	iGetStreamKeyRequest                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamKeyRequest"}
+	iGetStreamKeyResponse                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamKeyResponse"}
+	iGetStreamResponse                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamResponse"}
+	iGetStreamSessionRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamSessionRequest"}
+	iGetStreamSessionResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "GetStreamSessionResponse"}
+	iImportPlaybackKeyPairRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ImportPlaybackKeyPairRequest"}
+	iImportPlaybackKeyPairResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ImportPlaybackKeyPairResponse"}
+	iInsertAdBreakRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "InsertAdBreakRequest"}
+	iInsertAdBreakResponse                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "InsertAdBreakResponse"}
+	iListAdConfigurationsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListAdConfigurationsRequest"}
+	iListAdConfigurationsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListAdConfigurationsResponse"}
+	iListChannelsRequest                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListChannelsRequest"}
+	iListChannelsResponse                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListChannelsResponse"}
+	iListFailoverSlateConfigurationsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListFailoverSlateConfigurationsRequest"}
+	iListFailoverSlateConfigurationsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListFailoverSlateConfigurationsResponse"}
+	iListPlaybackKeyPairsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListPlaybackKeyPairsRequest"}
+	iListPlaybackKeyPairsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListPlaybackKeyPairsResponse"}
+	iListPlaybackRestrictionPoliciesRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListPlaybackRestrictionPoliciesRequest"}
+	iListPlaybackRestrictionPoliciesResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListPlaybackRestrictionPoliciesResponse"}
+	iListRecordingConfigurationsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListRecordingConfigurationsRequest"}
+	iListRecordingConfigurationsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListRecordingConfigurationsResponse"}
+	iListStreamKeysRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamKeysRequest"}
+	iListStreamKeysResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamKeysResponse"}
+	iListStreamSessionsRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamSessionsRequest"}
+	iListStreamSessionsResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamSessionsResponse"}
+	iListStreamsRequest                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamsRequest"}
+	iListStreamsResponse                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListStreamsResponse"}
+	iListTagsForResourceRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "ListTagsForResourceResponse"}
+	iPutMetadataRequest                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "PutMetadataRequest"}
+	iStartViewerSessionRevocationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StartViewerSessionRevocationRequest"}
+	iStartViewerSessionRevocationResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StartViewerSessionRevocationResponse"}
+	iStopStreamRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StopStreamRequest"}
+	iStopStreamResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "StopStreamResponse"}
+	iTagResourceRequest                                      = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TagResourceRequest"}
+	iTagResourceResponse                                     = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UntagResourceResponse"}
+	iUpdateAdConfigurationRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateAdConfigurationRequest"}
+	iUpdateAdConfigurationResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateAdConfigurationResponse"}
+	iUpdateChannelRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateChannelRequest"}
+	iUpdateChannelResponse                                   = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateChannelResponse"}
+	iUpdateFailoverSlateConfigurationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateFailoverSlateConfigurationRequest"}
+	iUpdateFailoverSlateConfigurationResponse                = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdateFailoverSlateConfigurationResponse"}
+	iUpdatePlaybackRestrictionPolicyRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdatePlaybackRestrictionPolicyRequest"}
+	iUpdatePlaybackRestrictionPolicyResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.ivs", Name: "UpdatePlaybackRestrictionPolicyResponse"}
+	pUnit                                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchGetChannel",
-	Code: 200})
-
-var BatchGetStreamKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchGetStreamKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchGetStreamKey",
-	Code: 200})
-
-var BatchStartViewerSessionRevocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchStartViewerSessionRevocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchStartViewerSessionRevocation",
-	Code: 200})
-
-var CreateAdConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateAdConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateAdConfiguration",
-	Code: 200})
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateChannel",
-	Code: 200})
-
-var CreateFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateFailoverSlateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateFailoverSlateConfiguration",
-	Code: 200})
-
-var CreatePlaybackRestrictionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreatePlaybackRestrictionPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreatePlaybackRestrictionPolicy",
-	Code: 200})
-
-var CreateRecordingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateRecordingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateRecordingConfiguration",
-	Code: 200})
-
-var CreateStreamKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateStreamKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateStreamKey",
-	Code: 200})
-
-var DeleteAdConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteAdConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteAdConfiguration",
-	Code: 204})
-
-var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteChannel",
-	Code: 204})
-
-var DeleteFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteFailoverSlateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteFailoverSlateConfiguration",
-	Code: 204})
-
-var DeletePlaybackKeyPair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeletePlaybackKeyPair",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeletePlaybackKeyPair",
-	Code: 200})
-
-var DeletePlaybackRestrictionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeletePlaybackRestrictionPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeletePlaybackRestrictionPolicy",
-	Code: 204})
-
-var DeleteRecordingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteRecordingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteRecordingConfiguration",
-	Code: 204})
-
-var DeleteStreamKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteStreamKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteStreamKey",
-	Code: 204})
-
-var GetAdConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetAdConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetAdConfiguration",
-	Code: 200})
-
-var GetChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetChannel",
-	Code: 200})
-
-var GetFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetFailoverSlateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetFailoverSlateConfiguration",
-	Code: 200})
-
-var GetPlaybackKeyPair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetPlaybackKeyPair",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetPlaybackKeyPair",
-	Code: 200})
-
-var GetPlaybackRestrictionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetPlaybackRestrictionPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetPlaybackRestrictionPolicy",
-	Code: 200})
-
-var GetRecordingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetRecordingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetRecordingConfiguration",
-	Code: 200})
-
-var GetStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetStream",
-	Code: 200})
-
-var GetStreamKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetStreamKey",
-	Code: 200})
-
-var GetStreamSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetStreamSession",
-	Code: 200})
-
-var ImportPlaybackKeyPair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ImportPlaybackKeyPair",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ImportPlaybackKeyPair",
-	Code: 200})
-
-var InsertAdBreak = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "InsertAdBreak",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/InsertAdBreak",
-	Code: 200})
-
-var ListAdConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListAdConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListAdConfigurations",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListChannels",
-	Code: 200})
-
-var ListFailoverSlateConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListFailoverSlateConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListFailoverSlateConfigurations",
-	Code: 200})
-
-var ListPlaybackKeyPairs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListPlaybackKeyPairs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListPlaybackKeyPairs",
-	Code: 200})
-
-var ListPlaybackRestrictionPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListPlaybackRestrictionPolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListPlaybackRestrictionPolicies",
-	Code: 200})
-
-var ListRecordingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListRecordingConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListRecordingConfigurations",
-	Code: 200})
-
-var ListStreamKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamKeys",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListStreamKeys",
-	Code: 200})
-
-var ListStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreams",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListStreams",
-	Code: 200})
-
-var ListStreamSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamSessions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListStreamSessions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PutMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutMetadata",
-	Code: 204})
-
-var StartViewerSessionRevocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StartViewerSessionRevocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartViewerSessionRevocation",
-	Code: 200})
-
-var StopStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StopStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopStream",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateAdConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateAdConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateAdConfiguration",
-	Code: 200})
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateChannel",
-	Code: 200})
-
-var UpdateFailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateFailoverSlateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateFailoverSlateConfiguration",
-	Code: 200})
-
-var UpdatePlaybackRestrictionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdatePlaybackRestrictionPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdatePlaybackRestrictionPolicy",
-	Code: 200})
-
-var _AmazonInteractiveVideoService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AmazonInteractiveVideoService",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonInteractiveVideoService = smithy.NewServiceSchema(_AmazonInteractiveVideoService, "2020-07-14")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_accessControlAllowOrigin *smithy.Schema
-
-var AccessDeniedException_accessControlExposeHeaders *smithy.Schema
-
-var AccessDeniedException_cacheControl *smithy.Schema
-
-var AccessDeniedException_contentSecurityPolicy *smithy.Schema
-
-var AccessDeniedException_strictTransportSecurity *smithy.Schema
-
-var AccessDeniedException_xContentTypeOptions *smithy.Schema
-
-var AccessDeniedException_xFrameOptions *smithy.Schema
-
-var AccessDeniedException_xAmznErrorType *smithy.Schema
-
-var AccessDeniedException_exceptionMessage *smithy.Schema
-
-var _AdBreakId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AdBreakId",
-}, smithy.ShapeTypeString, 0)
-
-var AdConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AdConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var AdConfiguration_arn *smithy.Schema
-
-var AdConfiguration_name *smithy.Schema
-
-var AdConfiguration_mediaTailorPlaybackConfigurations *smithy.Schema
-
-var AdConfiguration_postRollConfiguration *smithy.Schema
-
-var AdConfiguration_tags *smithy.Schema
-
-var _AdConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AdConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AdConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AdConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _AdConfigurationList_member *smithy.Schema
-
-var _AdConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AdConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var AdConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AdConfigurationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var AdConfigurationSummary_arn *smithy.Schema
-
-var AdConfigurationSummary_name *smithy.Schema
-
-var AdConfigurationSummary_mediaTailorPlaybackConfigurations *smithy.Schema
-
-var AdConfigurationSummary_postRollConfiguration *smithy.Schema
-
-var AdConfigurationSummary_tags *smithy.Schema
-
-var _AdDurationSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AdDurationSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var AudioConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AudioConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var AudioConfiguration_codec *smithy.Schema
-
-var AudioConfiguration_targetBitrate *smithy.Schema
-
-var AudioConfiguration_sampleRate *smithy.Schema
-
-var AudioConfiguration_channels *smithy.Schema
-
-var AudioConfiguration_track *smithy.Schema
-
-var _AudioConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "AudioConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _AudioConfigurationList_member *smithy.Schema
-
-var BatchError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchError_arn *smithy.Schema
-
-var BatchError_code *smithy.Schema
-
-var BatchError_message *smithy.Schema
-
-var _BatchErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchErrors_member *smithy.Schema
-
-var BatchStartViewerSessionRevocationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchStartViewerSessionRevocationError",
-}, smithy.ShapeTypeStructure, 4)
-var BatchStartViewerSessionRevocationError_channelArn *smithy.Schema
-
-var BatchStartViewerSessionRevocationError_viewerId *smithy.Schema
-
-var BatchStartViewerSessionRevocationError_code *smithy.Schema
-
-var BatchStartViewerSessionRevocationError_message *smithy.Schema
-
-var _BatchStartViewerSessionRevocationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchStartViewerSessionRevocationErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchStartViewerSessionRevocationErrors_member *smithy.Schema
-
-var BatchStartViewerSessionRevocationViewerSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchStartViewerSessionRevocationViewerSession",
-}, smithy.ShapeTypeStructure, 3)
-var BatchStartViewerSessionRevocationViewerSession_channelArn *smithy.Schema
-
-var BatchStartViewerSessionRevocationViewerSession_viewerId *smithy.Schema
-
-var BatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo *smithy.Schema
-
-var _BatchStartViewerSessionRevocationViewerSessionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchStartViewerSessionRevocationViewerSessionList",
-}, smithy.ShapeTypeList, 1)
-var _BatchStartViewerSessionRevocationViewerSessionList_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Channel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Channel",
-}, smithy.ShapeTypeStructure, 17)
-var Channel_arn *smithy.Schema
-
-var Channel_name *smithy.Schema
-
-var Channel_latencyMode *smithy.Schema
-
-var Channel_type *smithy.Schema
-
-var Channel_recordingConfigurationArn *smithy.Schema
-
-var Channel_ingestEndpoint *smithy.Schema
-
-var Channel_playbackUrl *smithy.Schema
-
-var Channel_authorized *smithy.Schema
-
-var Channel_tags *smithy.Schema
-
-var Channel_insecureIngest *smithy.Schema
-
-var Channel_preset *smithy.Schema
-
-var Channel_srt *smithy.Schema
-
-var Channel_playbackRestrictionPolicyArn *smithy.Schema
-
-var Channel_multitrackInputConfiguration *smithy.Schema
-
-var Channel_containerFormat *smithy.Schema
-
-var Channel_adConfigurationArn *smithy.Schema
-
-var Channel_failoverSlateConfigurationArn *smithy.Schema
-
-var _ChannelAdConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelAdConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelArnList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelArnList_member *smithy.Schema
-
-var _ChannelFailoverSlateConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelFailoverSlateConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelLatencyMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelLatencyMode",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelList_member *smithy.Schema
-
-var _ChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelNotBroadcasting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelNotBroadcasting",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ChannelNotBroadcasting_accessControlAllowOrigin *smithy.Schema
-
-var ChannelNotBroadcasting_accessControlExposeHeaders *smithy.Schema
-
-var ChannelNotBroadcasting_cacheControl *smithy.Schema
-
-var ChannelNotBroadcasting_contentSecurityPolicy *smithy.Schema
-
-var ChannelNotBroadcasting_strictTransportSecurity *smithy.Schema
-
-var ChannelNotBroadcasting_xContentTypeOptions *smithy.Schema
-
-var ChannelNotBroadcasting_xFrameOptions *smithy.Schema
-
-var ChannelNotBroadcasting_xAmznErrorType *smithy.Schema
-
-var ChannelNotBroadcasting_exceptionMessage *smithy.Schema
-
-var _ChannelPlaybackRestrictionPolicyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelPlaybackRestrictionPolicyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelRecordingConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelRecordingConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Channels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Channels",
-}, smithy.ShapeTypeList, 1)
-var _Channels_member *smithy.Schema
-
-var ChannelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelSummary",
-}, smithy.ShapeTypeStructure, 12)
-var ChannelSummary_arn *smithy.Schema
-
-var ChannelSummary_name *smithy.Schema
-
-var ChannelSummary_latencyMode *smithy.Schema
-
-var ChannelSummary_authorized *smithy.Schema
-
-var ChannelSummary_recordingConfigurationArn *smithy.Schema
-
-var ChannelSummary_tags *smithy.Schema
-
-var ChannelSummary_insecureIngest *smithy.Schema
-
-var ChannelSummary_type *smithy.Schema
-
-var ChannelSummary_preset *smithy.Schema
-
-var ChannelSummary_playbackRestrictionPolicyArn *smithy.Schema
-
-var ChannelSummary_adConfigurationArn *smithy.Schema
-
-var ChannelSummary_failoverSlateConfigurationArn *smithy.Schema
-
-var ChannelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ChannelType",
-}, smithy.ShapeTypeEnum, 4)
-var ChannelType_BasicChannelType *smithy.Schema
-
-var ChannelType_StandardChannelType *smithy.Schema
-
-var ChannelType_AdvancedSDChannelType *smithy.Schema
-
-var ChannelType_AdvancedHDChannelType *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_accessControlAllowOrigin *smithy.Schema
-
-var ConflictException_accessControlExposeHeaders *smithy.Schema
-
-var ConflictException_cacheControl *smithy.Schema
-
-var ConflictException_contentSecurityPolicy *smithy.Schema
-
-var ConflictException_strictTransportSecurity *smithy.Schema
-
-var ConflictException_xContentTypeOptions *smithy.Schema
-
-var ConflictException_xFrameOptions *smithy.Schema
-
-var ConflictException_xAmznErrorType *smithy.Schema
-
-var ConflictException_exceptionMessage *smithy.Schema
-
-var _ContainerFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ContainerFormat",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DestinationConfiguration_s3 *smithy.Schema
-
-var _errorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "errorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FailoverSlateActivationThresholdSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateActivationThresholdSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var FailoverSlateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var FailoverSlateConfiguration_arn *smithy.Schema
-
-var FailoverSlateConfiguration_name *smithy.Schema
-
-var FailoverSlateConfiguration_activationThresholdSeconds *smithy.Schema
-
-var FailoverSlateConfiguration_minSlateDisplaySeconds *smithy.Schema
-
-var FailoverSlateConfiguration_maxSlateDisplaySeconds *smithy.Schema
-
-var FailoverSlateConfiguration_state *smithy.Schema
-
-var FailoverSlateConfiguration_tags *smithy.Schema
-
-var _FailoverSlateConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _FailoverSlateConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _FailoverSlateConfigurationList_member *smithy.Schema
-
-var _FailoverSlateConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var _FailoverSlateConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateConfigurationState",
-}, smithy.ShapeTypeString, 0)
-
-var FailoverSlateConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateConfigurationSummary",
-}, smithy.ShapeTypeStructure, 7)
-var FailoverSlateConfigurationSummary_arn *smithy.Schema
-
-var FailoverSlateConfigurationSummary_name *smithy.Schema
-
-var FailoverSlateConfigurationSummary_activationThresholdSeconds *smithy.Schema
-
-var FailoverSlateConfigurationSummary_minSlateDisplaySeconds *smithy.Schema
-
-var FailoverSlateConfigurationSummary_maxSlateDisplaySeconds *smithy.Schema
-
-var FailoverSlateConfigurationSummary_state *smithy.Schema
-
-var FailoverSlateConfigurationSummary_tags *smithy.Schema
-
-var _FailoverSlateMaxDisplaySeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateMaxDisplaySeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _FailoverSlateMinDisplaySeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "FailoverSlateMinDisplaySeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var IngestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "IngestConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var IngestConfiguration_video *smithy.Schema
-
-var IngestConfiguration_audio *smithy.Schema
-
-var IngestConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "IngestConfigurations",
-}, smithy.ShapeTypeStructure, 2)
-var IngestConfigurations_videoConfigurations *smithy.Schema
-
-var IngestConfigurations_audioConfigurations *smithy.Schema
-
-var _IngestEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "IngestEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _InsecureIngest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "InsecureIngest",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Integer",
-}, smithy.ShapeTypeLong, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_accessControlAllowOrigin *smithy.Schema
-
-var InternalServerException_accessControlExposeHeaders *smithy.Schema
-
-var InternalServerException_cacheControl *smithy.Schema
-
-var InternalServerException_contentSecurityPolicy *smithy.Schema
-
-var InternalServerException_strictTransportSecurity *smithy.Schema
-
-var InternalServerException_xContentTypeOptions *smithy.Schema
-
-var InternalServerException_xFrameOptions *smithy.Schema
-
-var InternalServerException_xAmznErrorType *smithy.Schema
-
-var InternalServerException_exceptionMessage *smithy.Schema
-
-var _IsAuthorized = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "IsAuthorized",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _IsMultitrackInputEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "IsMultitrackInputEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _MaxAdConfigurationResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxAdConfigurationResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxChannelResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxChannelResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxFailoverSlateConfigurationResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxFailoverSlateConfigurationResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxPlaybackKeyPairResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxPlaybackKeyPairResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxPlaybackRestrictionPolicyResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxPlaybackRestrictionPolicyResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxRecordingConfigurationResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxRecordingConfigurationResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxStreamKeyResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxStreamKeyResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxStreamResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MaxStreamResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MediaTailorPlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MediaTailorPlaybackConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MediaTailorPlaybackConfiguration_playbackConfigurationArn *smithy.Schema
-
-var _MediaTailorPlaybackConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MediaTailorPlaybackConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MediaTailorPlaybackConfigurationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MediaTailorPlaybackConfigurationsList",
-}, smithy.ShapeTypeList, 1)
-var _MediaTailorPlaybackConfigurationsList_member *smithy.Schema
-
-var MultitrackInputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MultitrackInputConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var MultitrackInputConfiguration_enabled *smithy.Schema
-
-var MultitrackInputConfiguration_policy *smithy.Schema
-
-var MultitrackInputConfiguration_maximumResolution *smithy.Schema
-
-var MultitrackMaximumResolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MultitrackMaximumResolution",
-}, smithy.ShapeTypeEnum, 3)
-var MultitrackMaximumResolution_SD *smithy.Schema
-
-var MultitrackMaximumResolution_HD *smithy.Schema
-
-var MultitrackMaximumResolution_FULL_HD *smithy.Schema
-
-var MultitrackPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "MultitrackPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var MultitrackPolicy_ALLOW *smithy.Schema
-
-var MultitrackPolicy_REQUIRE *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var PendingVerification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PendingVerification",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var PendingVerification_accessControlAllowOrigin *smithy.Schema
-
-var PendingVerification_accessControlExposeHeaders *smithy.Schema
-
-var PendingVerification_cacheControl *smithy.Schema
-
-var PendingVerification_contentSecurityPolicy *smithy.Schema
-
-var PendingVerification_strictTransportSecurity *smithy.Schema
-
-var PendingVerification_xContentTypeOptions *smithy.Schema
-
-var PendingVerification_xFrameOptions *smithy.Schema
-
-var PendingVerification_xAmznErrorType *smithy.Schema
-
-var PendingVerification_exceptionMessage *smithy.Schema
-
-var PlaybackKeyPair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackKeyPair",
-}, smithy.ShapeTypeStructure, 4)
-var PlaybackKeyPair_arn *smithy.Schema
-
-var PlaybackKeyPair_name *smithy.Schema
-
-var PlaybackKeyPair_fingerprint *smithy.Schema
-
-var PlaybackKeyPair_tags *smithy.Schema
-
-var _PlaybackKeyPairArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackKeyPairArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PlaybackKeyPairFingerprint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackKeyPairFingerprint",
-}, smithy.ShapeTypeString, 0)
-
-var _PlaybackKeyPairList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackKeyPairList",
-}, smithy.ShapeTypeList, 1)
-var _PlaybackKeyPairList_member *smithy.Schema
-
-var _PlaybackKeyPairName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackKeyPairName",
-}, smithy.ShapeTypeString, 0)
-
-var PlaybackKeyPairSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackKeyPairSummary",
-}, smithy.ShapeTypeStructure, 3)
-var PlaybackKeyPairSummary_arn *smithy.Schema
-
-var PlaybackKeyPairSummary_name *smithy.Schema
-
-var PlaybackKeyPairSummary_tags *smithy.Schema
-
-var _PlaybackPublicKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackPublicKeyMaterial",
-}, smithy.ShapeTypeString, 0)
-
-var PlaybackRestrictionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicy",
-}, smithy.ShapeTypeStructure, 6)
-var PlaybackRestrictionPolicy_arn *smithy.Schema
-
-var PlaybackRestrictionPolicy_allowedCountries *smithy.Schema
-
-var PlaybackRestrictionPolicy_allowedOrigins *smithy.Schema
-
-var PlaybackRestrictionPolicy_enableStrictOriginEnforcement *smithy.Schema
-
-var PlaybackRestrictionPolicy_name *smithy.Schema
-
-var PlaybackRestrictionPolicy_tags *smithy.Schema
-
-var _PlaybackRestrictionPolicyAllowedCountry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyAllowedCountry",
-}, smithy.ShapeTypeString, 0)
-
-var _PlaybackRestrictionPolicyAllowedCountryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyAllowedCountryList",
-}, smithy.ShapeTypeList, 1)
-var _PlaybackRestrictionPolicyAllowedCountryList_member *smithy.Schema
-
-var _PlaybackRestrictionPolicyAllowedOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyAllowedOrigin",
-}, smithy.ShapeTypeString, 0)
-
-var _PlaybackRestrictionPolicyAllowedOriginList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyAllowedOriginList",
-}, smithy.ShapeTypeList, 1)
-var _PlaybackRestrictionPolicyAllowedOriginList_member *smithy.Schema
-
-var _PlaybackRestrictionPolicyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PlaybackRestrictionPolicyEnableStrictOriginEnforcement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyEnableStrictOriginEnforcement",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _PlaybackRestrictionPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _PlaybackRestrictionPolicyList_member *smithy.Schema
-
-var _PlaybackRestrictionPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var PlaybackRestrictionPolicySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackRestrictionPolicySummary",
-}, smithy.ShapeTypeStructure, 6)
-var PlaybackRestrictionPolicySummary_arn *smithy.Schema
-
-var PlaybackRestrictionPolicySummary_allowedCountries *smithy.Schema
-
-var PlaybackRestrictionPolicySummary_allowedOrigins *smithy.Schema
-
-var PlaybackRestrictionPolicySummary_enableStrictOriginEnforcement *smithy.Schema
-
-var PlaybackRestrictionPolicySummary_name *smithy.Schema
-
-var PlaybackRestrictionPolicySummary_tags *smithy.Schema
-
-var _PlaybackURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PlaybackURL",
-}, smithy.ShapeTypeString, 0)
-
-var PostRollConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PostRollConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var PostRollConfiguration_durationSeconds *smithy.Schema
-
-var PostRollConfiguration_enabled *smithy.Schema
-
-var RecordingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var RecordingConfiguration_arn *smithy.Schema
-
-var RecordingConfiguration_name *smithy.Schema
-
-var RecordingConfiguration_destinationConfiguration *smithy.Schema
-
-var RecordingConfiguration_state *smithy.Schema
-
-var RecordingConfiguration_tags *smithy.Schema
-
-var RecordingConfiguration_thumbnailConfiguration *smithy.Schema
-
-var RecordingConfiguration_recordingReconnectWindowSeconds *smithy.Schema
-
-var RecordingConfiguration_renditionConfiguration *smithy.Schema
-
-var _RecordingConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RecordingConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _RecordingConfigurationList_member *smithy.Schema
-
-var _RecordingConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var _RecordingConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingConfigurationState",
-}, smithy.ShapeTypeString, 0)
-
-var RecordingConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingConfigurationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var RecordingConfigurationSummary_arn *smithy.Schema
-
-var RecordingConfigurationSummary_name *smithy.Schema
-
-var RecordingConfigurationSummary_destinationConfiguration *smithy.Schema
-
-var RecordingConfigurationSummary_state *smithy.Schema
-
-var RecordingConfigurationSummary_tags *smithy.Schema
-
-var _RecordingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingMode",
-}, smithy.ShapeTypeString, 0)
-
-var _RecordingReconnectWindowSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RecordingReconnectWindowSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var RenditionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RenditionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var RenditionConfiguration_renditionSelection *smithy.Schema
-
-var RenditionConfiguration_renditions *smithy.Schema
-
-var RenditionConfigurationRendition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RenditionConfigurationRendition",
-}, smithy.ShapeTypeEnum, 4)
-var RenditionConfigurationRendition_SD *smithy.Schema
-
-var RenditionConfigurationRendition_HD *smithy.Schema
-
-var RenditionConfigurationRendition_FULL_HD *smithy.Schema
-
-var RenditionConfigurationRendition_LOWEST_RESOLUTION *smithy.Schema
-
-var _RenditionConfigurationRenditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RenditionConfigurationRenditionList",
-}, smithy.ShapeTypeList, 1)
-var _RenditionConfigurationRenditionList_member *smithy.Schema
-
-var _RenditionConfigurationRenditionSelection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "RenditionConfigurationRenditionSelection",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_accessControlAllowOrigin *smithy.Schema
-
-var ResourceNotFoundException_accessControlExposeHeaders *smithy.Schema
-
-var ResourceNotFoundException_cacheControl *smithy.Schema
-
-var ResourceNotFoundException_contentSecurityPolicy *smithy.Schema
-
-var ResourceNotFoundException_strictTransportSecurity *smithy.Schema
-
-var ResourceNotFoundException_xContentTypeOptions *smithy.Schema
-
-var ResourceNotFoundException_xFrameOptions *smithy.Schema
-
-var ResourceNotFoundException_xAmznErrorType *smithy.Schema
-
-var ResourceNotFoundException_exceptionMessage *smithy.Schema
-
-var _S3DestinationBucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "S3DestinationBucketName",
-}, smithy.ShapeTypeString, 0)
-
-var S3DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "S3DestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var S3DestinationConfiguration_bucketName *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_accessControlAllowOrigin *smithy.Schema
-
-var ServiceQuotaExceededException_accessControlExposeHeaders *smithy.Schema
-
-var ServiceQuotaExceededException_cacheControl *smithy.Schema
-
-var ServiceQuotaExceededException_contentSecurityPolicy *smithy.Schema
-
-var ServiceQuotaExceededException_strictTransportSecurity *smithy.Schema
-
-var ServiceQuotaExceededException_xContentTypeOptions *smithy.Schema
-
-var ServiceQuotaExceededException_xFrameOptions *smithy.Schema
-
-var ServiceQuotaExceededException_xAmznErrorType *smithy.Schema
-
-var ServiceQuotaExceededException_exceptionMessage *smithy.Schema
-
-var ServiceUnavailable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ServiceUnavailable",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailable_accessControlAllowOrigin *smithy.Schema
-
-var ServiceUnavailable_accessControlExposeHeaders *smithy.Schema
-
-var ServiceUnavailable_cacheControl *smithy.Schema
-
-var ServiceUnavailable_contentSecurityPolicy *smithy.Schema
-
-var ServiceUnavailable_strictTransportSecurity *smithy.Schema
-
-var ServiceUnavailable_xContentTypeOptions *smithy.Schema
-
-var ServiceUnavailable_xFrameOptions *smithy.Schema
-
-var ServiceUnavailable_xAmznErrorType *smithy.Schema
-
-var ServiceUnavailable_exceptionMessage *smithy.Schema
-
-var Srt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Srt",
-}, smithy.ShapeTypeStructure, 2)
-var Srt_endpoint *smithy.Schema
-
-var Srt_passphrase *smithy.Schema
-
-var _SrtEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "SrtEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _SrtPassphrase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "SrtPassphrase",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Stream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Stream",
-}, smithy.ShapeTypeStructure, 7)
-var Stream_channelArn *smithy.Schema
-
-var Stream_streamId *smithy.Schema
-
-var Stream_playbackUrl *smithy.Schema
-
-var Stream_startTime *smithy.Schema
-
-var Stream_state *smithy.Schema
-
-var Stream_health *smithy.Schema
-
-var Stream_viewerCount *smithy.Schema
-
-var StreamEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamEvent",
-}, smithy.ShapeTypeStructure, 4)
-var StreamEvent_name *smithy.Schema
-
-var StreamEvent_type *smithy.Schema
-
-var StreamEvent_eventTime *smithy.Schema
-
-var StreamEvent_code *smithy.Schema
-
-var _StreamEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamEvents",
-}, smithy.ShapeTypeList, 1)
-var _StreamEvents_member *smithy.Schema
-
-var StreamFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamFilters",
-}, smithy.ShapeTypeStructure, 1)
-var StreamFilters_health *smithy.Schema
-
-var _StreamHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamHealth",
-}, smithy.ShapeTypeString, 0)
-
-var _StreamId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamId",
-}, smithy.ShapeTypeString, 0)
-
-var StreamKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamKey",
-}, smithy.ShapeTypeStructure, 4)
-var StreamKey_arn *smithy.Schema
-
-var StreamKey_value *smithy.Schema
-
-var StreamKey_channelArn *smithy.Schema
-
-var StreamKey_tags *smithy.Schema
-
-var _StreamKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StreamKeyArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamKeyArnList",
-}, smithy.ShapeTypeList, 1)
-var _StreamKeyArnList_member *smithy.Schema
-
-var _StreamKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamKeyList",
-}, smithy.ShapeTypeList, 1)
-var _StreamKeyList_member *smithy.Schema
-
-var _StreamKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamKeys",
-}, smithy.ShapeTypeList, 1)
-var _StreamKeys_member *smithy.Schema
-
-var StreamKeySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamKeySummary",
-}, smithy.ShapeTypeStructure, 3)
-var StreamKeySummary_arn *smithy.Schema
-
-var StreamKeySummary_channelArn *smithy.Schema
-
-var StreamKeySummary_tags *smithy.Schema
-
-var _StreamKeyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamKeyValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _StreamList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamList",
-}, smithy.ShapeTypeList, 1)
-var _StreamList_member *smithy.Schema
-
-var _StreamMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamMetadata",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var StreamSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamSession",
-}, smithy.ShapeTypeStructure, 9)
-var StreamSession_streamId *smithy.Schema
-
-var StreamSession_startTime *smithy.Schema
-
-var StreamSession_endTime *smithy.Schema
-
-var StreamSession_channel *smithy.Schema
-
-var StreamSession_ingestConfiguration *smithy.Schema
-
-var StreamSession_ingestConfigurations *smithy.Schema
-
-var StreamSession_recordingConfiguration *smithy.Schema
-
-var StreamSession_truncatedEvents *smithy.Schema
-
-var StreamSession_failoverSlateConfiguration *smithy.Schema
-
-var _StreamSessionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamSessionList",
-}, smithy.ShapeTypeList, 1)
-var _StreamSessionList_member *smithy.Schema
-
-var StreamSessionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamSessionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var StreamSessionSummary_streamId *smithy.Schema
-
-var StreamSessionSummary_startTime *smithy.Schema
-
-var StreamSessionSummary_endTime *smithy.Schema
-
-var StreamSessionSummary_hasErrorEvent *smithy.Schema
-
-var _StreamStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamStartTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _StreamState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamState",
-}, smithy.ShapeTypeString, 0)
-
-var StreamSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamSummary",
-}, smithy.ShapeTypeStructure, 6)
-var StreamSummary_channelArn *smithy.Schema
-
-var StreamSummary_streamId *smithy.Schema
-
-var StreamSummary_state *smithy.Schema
-
-var StreamSummary_health *smithy.Schema
-
-var StreamSummary_viewerCount *smithy.Schema
-
-var StreamSummary_startTime *smithy.Schema
-
-var StreamUnavailable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamUnavailable",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var StreamUnavailable_accessControlAllowOrigin *smithy.Schema
-
-var StreamUnavailable_accessControlExposeHeaders *smithy.Schema
-
-var StreamUnavailable_cacheControl *smithy.Schema
-
-var StreamUnavailable_contentSecurityPolicy *smithy.Schema
-
-var StreamUnavailable_strictTransportSecurity *smithy.Schema
-
-var StreamUnavailable_xContentTypeOptions *smithy.Schema
-
-var StreamUnavailable_xFrameOptions *smithy.Schema
-
-var StreamUnavailable_xAmznErrorType *smithy.Schema
-
-var StreamUnavailable_exceptionMessage *smithy.Schema
-
-var _StreamViewerCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StreamViewerCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetIntervalSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TargetIntervalSeconds",
-}, smithy.ShapeTypeLong, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_accessControlAllowOrigin *smithy.Schema
-
-var ThrottlingException_accessControlExposeHeaders *smithy.Schema
-
-var ThrottlingException_cacheControl *smithy.Schema
-
-var ThrottlingException_contentSecurityPolicy *smithy.Schema
-
-var ThrottlingException_strictTransportSecurity *smithy.Schema
-
-var ThrottlingException_xContentTypeOptions *smithy.Schema
-
-var ThrottlingException_xFrameOptions *smithy.Schema
-
-var ThrottlingException_xAmznErrorType *smithy.Schema
-
-var ThrottlingException_exceptionMessage *smithy.Schema
-
-var ThumbnailConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ThumbnailConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ThumbnailConfiguration_recordingMode *smithy.Schema
-
-var ThumbnailConfiguration_targetIntervalSeconds *smithy.Schema
-
-var ThumbnailConfiguration_resolution *smithy.Schema
-
-var ThumbnailConfiguration_storage *smithy.Schema
-
-var ThumbnailConfigurationResolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ThumbnailConfigurationResolution",
-}, smithy.ShapeTypeEnum, 4)
-var ThumbnailConfigurationResolution_SD *smithy.Schema
-
-var ThumbnailConfigurationResolution_HD *smithy.Schema
-
-var ThumbnailConfigurationResolution_FULL_HD *smithy.Schema
-
-var ThumbnailConfigurationResolution_LOWEST_RESOLUTION *smithy.Schema
-
-var _ThumbnailConfigurationStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ThumbnailConfigurationStorage",
-}, smithy.ShapeTypeString, 0)
-
-var _ThumbnailConfigurationStorageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ThumbnailConfigurationStorageList",
-}, smithy.ShapeTypeList, 1)
-var _ThumbnailConfigurationStorageList_member *smithy.Schema
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "Time",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var TranscodePreset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TranscodePreset",
-}, smithy.ShapeTypeEnum, 2)
-var TranscodePreset_HigherBandwidthTranscodePreset *smithy.Schema
-
-var TranscodePreset_ConstrainedBandwidthTranscodePreset *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_accessControlAllowOrigin *smithy.Schema
-
-var ValidationException_accessControlExposeHeaders *smithy.Schema
-
-var ValidationException_cacheControl *smithy.Schema
-
-var ValidationException_contentSecurityPolicy *smithy.Schema
-
-var ValidationException_strictTransportSecurity *smithy.Schema
-
-var ValidationException_xContentTypeOptions *smithy.Schema
-
-var ValidationException_xFrameOptions *smithy.Schema
-
-var ValidationException_xAmznErrorType *smithy.Schema
-
-var ValidationException_exceptionMessage *smithy.Schema
-
-var VideoConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "VideoConfiguration",
-}, smithy.ShapeTypeStructure, 11)
-var VideoConfiguration_avcProfile *smithy.Schema
-
-var VideoConfiguration_avcLevel *smithy.Schema
-
-var VideoConfiguration_codec *smithy.Schema
-
-var VideoConfiguration_encoder *smithy.Schema
-
-var VideoConfiguration_targetBitrate *smithy.Schema
-
-var VideoConfiguration_targetFramerate *smithy.Schema
-
-var VideoConfiguration_videoHeight *smithy.Schema
-
-var VideoConfiguration_videoWidth *smithy.Schema
-
-var VideoConfiguration_level *smithy.Schema
-
-var VideoConfiguration_track *smithy.Schema
-
-var VideoConfiguration_profile *smithy.Schema
-
-var _VideoConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "VideoConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _VideoConfigurationList_member *smithy.Schema
-
-var _ViewerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ViewerId",
-}, smithy.ShapeTypeString, 0)
-
-var _ViewerSessionVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ViewerSessionVersion",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchGetChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchGetChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetChannelRequest_arns *smithy.Schema
-
-var BatchGetChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchGetChannelResponse",
-}, smithy.ShapeTypeStructure, 9)
-var BatchGetChannelResponse_accessControlAllowOrigin *smithy.Schema
-
-var BatchGetChannelResponse_accessControlExposeHeaders *smithy.Schema
-
-var BatchGetChannelResponse_cacheControl *smithy.Schema
-
-var BatchGetChannelResponse_contentSecurityPolicy *smithy.Schema
-
-var BatchGetChannelResponse_strictTransportSecurity *smithy.Schema
-
-var BatchGetChannelResponse_xContentTypeOptions *smithy.Schema
-
-var BatchGetChannelResponse_xFrameOptions *smithy.Schema
-
-var BatchGetChannelResponse_channels *smithy.Schema
-
-var BatchGetChannelResponse_errors *smithy.Schema
-
-var BatchGetStreamKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchGetStreamKeyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetStreamKeyRequest_arns *smithy.Schema
-
-var BatchGetStreamKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchGetStreamKeyResponse",
-}, smithy.ShapeTypeStructure, 9)
-var BatchGetStreamKeyResponse_accessControlAllowOrigin *smithy.Schema
-
-var BatchGetStreamKeyResponse_accessControlExposeHeaders *smithy.Schema
-
-var BatchGetStreamKeyResponse_cacheControl *smithy.Schema
-
-var BatchGetStreamKeyResponse_contentSecurityPolicy *smithy.Schema
-
-var BatchGetStreamKeyResponse_strictTransportSecurity *smithy.Schema
-
-var BatchGetStreamKeyResponse_xContentTypeOptions *smithy.Schema
-
-var BatchGetStreamKeyResponse_xFrameOptions *smithy.Schema
-
-var BatchGetStreamKeyResponse_streamKeys *smithy.Schema
-
-var BatchGetStreamKeyResponse_errors *smithy.Schema
-
-var BatchStartViewerSessionRevocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchStartViewerSessionRevocationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchStartViewerSessionRevocationRequest_viewerSessions *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "BatchStartViewerSessionRevocationResponse",
-}, smithy.ShapeTypeStructure, 8)
-var BatchStartViewerSessionRevocationResponse_accessControlAllowOrigin *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse_accessControlExposeHeaders *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse_cacheControl *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse_contentSecurityPolicy *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse_strictTransportSecurity *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse_xContentTypeOptions *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse_xFrameOptions *smithy.Schema
-
-var BatchStartViewerSessionRevocationResponse_errors *smithy.Schema
-
-var CreateAdConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateAdConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAdConfigurationRequest_name *smithy.Schema
-
-var CreateAdConfigurationRequest_mediaTailorPlaybackConfigurations *smithy.Schema
-
-var CreateAdConfigurationRequest_postRollConfiguration *smithy.Schema
-
-var CreateAdConfigurationRequest_tags *smithy.Schema
-
-var CreateAdConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateAdConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAdConfigurationResponse_adConfiguration *smithy.Schema
-
-var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateChannelRequest_name *smithy.Schema
-
-var CreateChannelRequest_latencyMode *smithy.Schema
-
-var CreateChannelRequest_type *smithy.Schema
-
-var CreateChannelRequest_authorized *smithy.Schema
-
-var CreateChannelRequest_recordingConfigurationArn *smithy.Schema
-
-var CreateChannelRequest_tags *smithy.Schema
-
-var CreateChannelRequest_insecureIngest *smithy.Schema
-
-var CreateChannelRequest_preset *smithy.Schema
-
-var CreateChannelRequest_playbackRestrictionPolicyArn *smithy.Schema
-
-var CreateChannelRequest_multitrackInputConfiguration *smithy.Schema
-
-var CreateChannelRequest_containerFormat *smithy.Schema
-
-var CreateChannelRequest_adConfigurationArn *smithy.Schema
-
-var CreateChannelRequest_failoverSlateConfigurationArn *smithy.Schema
-
-var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateChannelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateChannelResponse_channel *smithy.Schema
-
-var CreateChannelResponse_streamKey *smithy.Schema
-
-var CreateFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateFailoverSlateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateFailoverSlateConfigurationRequest_name *smithy.Schema
-
-var CreateFailoverSlateConfigurationRequest_activationThresholdSeconds *smithy.Schema
-
-var CreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds *smithy.Schema
-
-var CreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds *smithy.Schema
-
-var CreateFailoverSlateConfigurationRequest_tags *smithy.Schema
-
-var CreateFailoverSlateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateFailoverSlateConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFailoverSlateConfigurationResponse_failoverSlateConfiguration *smithy.Schema
-
-var CreatePlaybackRestrictionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreatePlaybackRestrictionPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreatePlaybackRestrictionPolicyRequest_allowedCountries *smithy.Schema
-
-var CreatePlaybackRestrictionPolicyRequest_allowedOrigins *smithy.Schema
-
-var CreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement *smithy.Schema
-
-var CreatePlaybackRestrictionPolicyRequest_name *smithy.Schema
-
-var CreatePlaybackRestrictionPolicyRequest_tags *smithy.Schema
-
-var CreatePlaybackRestrictionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreatePlaybackRestrictionPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy *smithy.Schema
-
-var CreateRecordingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateRecordingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRecordingConfigurationRequest_name *smithy.Schema
-
-var CreateRecordingConfigurationRequest_destinationConfiguration *smithy.Schema
-
-var CreateRecordingConfigurationRequest_tags *smithy.Schema
-
-var CreateRecordingConfigurationRequest_thumbnailConfiguration *smithy.Schema
-
-var CreateRecordingConfigurationRequest_recordingReconnectWindowSeconds *smithy.Schema
-
-var CreateRecordingConfigurationRequest_renditionConfiguration *smithy.Schema
-
-var CreateRecordingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateRecordingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRecordingConfigurationResponse_recordingConfiguration *smithy.Schema
-
-var CreateStreamKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateStreamKeyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateStreamKeyRequest_channelArn *smithy.Schema
-
-var CreateStreamKeyRequest_tags *smithy.Schema
-
-var CreateStreamKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "CreateStreamKeyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateStreamKeyResponse_streamKey *smithy.Schema
-
-var DeleteAdConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteAdConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAdConfigurationRequest_arn *smithy.Schema
-
-var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChannelRequest_arn *smithy.Schema
-
-var DeleteFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteFailoverSlateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFailoverSlateConfigurationRequest_arn *smithy.Schema
-
-var DeletePlaybackKeyPairRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeletePlaybackKeyPairRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePlaybackKeyPairRequest_arn *smithy.Schema
-
-var DeletePlaybackKeyPairResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeletePlaybackKeyPairResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePlaybackRestrictionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeletePlaybackRestrictionPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePlaybackRestrictionPolicyRequest_arn *smithy.Schema
-
-var DeleteRecordingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteRecordingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecordingConfigurationRequest_arn *smithy.Schema
-
-var DeleteStreamKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "DeleteStreamKeyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteStreamKeyRequest_arn *smithy.Schema
-
-var GetAdConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetAdConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAdConfigurationRequest_arn *smithy.Schema
-
-var GetAdConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetAdConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAdConfigurationResponse_adConfiguration *smithy.Schema
-
-var GetChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelRequest_arn *smithy.Schema
-
-var GetChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetChannelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelResponse_channel *smithy.Schema
-
-var GetFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetFailoverSlateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetFailoverSlateConfigurationRequest_arn *smithy.Schema
-
-var GetFailoverSlateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetFailoverSlateConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetFailoverSlateConfigurationResponse_failoverSlateConfiguration *smithy.Schema
-
-var GetPlaybackKeyPairRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetPlaybackKeyPairRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPlaybackKeyPairRequest_arn *smithy.Schema
-
-var GetPlaybackKeyPairResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetPlaybackKeyPairResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPlaybackKeyPairResponse_keyPair *smithy.Schema
-
-var GetPlaybackRestrictionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetPlaybackRestrictionPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPlaybackRestrictionPolicyRequest_arn *smithy.Schema
-
-var GetPlaybackRestrictionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetPlaybackRestrictionPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy *smithy.Schema
-
-var GetRecordingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetRecordingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecordingConfigurationRequest_arn *smithy.Schema
-
-var GetRecordingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetRecordingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecordingConfigurationResponse_recordingConfiguration *smithy.Schema
-
-var GetStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetStreamRequest_channelArn *smithy.Schema
-
-var GetStreamKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamKeyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetStreamKeyRequest_arn *smithy.Schema
-
-var GetStreamKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamKeyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetStreamKeyResponse_streamKey *smithy.Schema
-
-var GetStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetStreamResponse_stream *smithy.Schema
-
-var GetStreamSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamSessionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetStreamSessionRequest_channelArn *smithy.Schema
-
-var GetStreamSessionRequest_streamId *smithy.Schema
-
-var GetStreamSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "GetStreamSessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetStreamSessionResponse_streamSession *smithy.Schema
-
-var ImportPlaybackKeyPairRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ImportPlaybackKeyPairRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ImportPlaybackKeyPairRequest_publicKeyMaterial *smithy.Schema
-
-var ImportPlaybackKeyPairRequest_name *smithy.Schema
-
-var ImportPlaybackKeyPairRequest_tags *smithy.Schema
-
-var ImportPlaybackKeyPairResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ImportPlaybackKeyPairResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ImportPlaybackKeyPairResponse_keyPair *smithy.Schema
-
-var InsertAdBreakRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "InsertAdBreakRequest",
-}, smithy.ShapeTypeStructure, 4)
-var InsertAdBreakRequest_channelArn *smithy.Schema
-
-var InsertAdBreakRequest_durationSeconds *smithy.Schema
-
-var InsertAdBreakRequest_adBreakId *smithy.Schema
-
-var InsertAdBreakRequest_targetStartAt *smithy.Schema
-
-var InsertAdBreakResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "InsertAdBreakResponse",
-}, smithy.ShapeTypeStructure, 2)
-var InsertAdBreakResponse_adBreakId *smithy.Schema
-
-var InsertAdBreakResponse_targetStartAt *smithy.Schema
-
-var ListAdConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListAdConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdConfigurationsRequest_nextToken *smithy.Schema
-
-var ListAdConfigurationsRequest_maxResults *smithy.Schema
-
-var ListAdConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListAdConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdConfigurationsResponse_adConfigurations *smithy.Schema
-
-var ListAdConfigurationsResponse_nextToken *smithy.Schema
-
-var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListChannelsRequest_filterByName *smithy.Schema
-
-var ListChannelsRequest_filterByRecordingConfigurationArn *smithy.Schema
-
-var ListChannelsRequest_filterByPlaybackRestrictionPolicyArn *smithy.Schema
-
-var ListChannelsRequest_filterByAdConfigurationArn *smithy.Schema
-
-var ListChannelsRequest_filterByFailoverSlateConfigurationArn *smithy.Schema
-
-var ListChannelsRequest_nextToken *smithy.Schema
-
-var ListChannelsRequest_maxResults *smithy.Schema
-
-var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsResponse_channels *smithy.Schema
-
-var ListChannelsResponse_nextToken *smithy.Schema
-
-var ListFailoverSlateConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListFailoverSlateConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListFailoverSlateConfigurationsRequest_nextToken *smithy.Schema
-
-var ListFailoverSlateConfigurationsRequest_maxResults *smithy.Schema
-
-var ListFailoverSlateConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListFailoverSlateConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFailoverSlateConfigurationsResponse_failoverSlateConfigurations *smithy.Schema
-
-var ListFailoverSlateConfigurationsResponse_nextToken *smithy.Schema
-
-var ListPlaybackKeyPairsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListPlaybackKeyPairsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlaybackKeyPairsRequest_nextToken *smithy.Schema
-
-var ListPlaybackKeyPairsRequest_maxResults *smithy.Schema
-
-var ListPlaybackKeyPairsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListPlaybackKeyPairsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlaybackKeyPairsResponse_keyPairs *smithy.Schema
-
-var ListPlaybackKeyPairsResponse_nextToken *smithy.Schema
-
-var ListPlaybackRestrictionPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListPlaybackRestrictionPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlaybackRestrictionPoliciesRequest_nextToken *smithy.Schema
-
-var ListPlaybackRestrictionPoliciesRequest_maxResults *smithy.Schema
-
-var ListPlaybackRestrictionPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListPlaybackRestrictionPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies *smithy.Schema
-
-var ListPlaybackRestrictionPoliciesResponse_nextToken *smithy.Schema
-
-var ListRecordingConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListRecordingConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecordingConfigurationsRequest_nextToken *smithy.Schema
-
-var ListRecordingConfigurationsRequest_maxResults *smithy.Schema
-
-var ListRecordingConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListRecordingConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecordingConfigurationsResponse_recordingConfigurations *smithy.Schema
-
-var ListRecordingConfigurationsResponse_nextToken *smithy.Schema
-
-var ListStreamKeysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamKeysRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListStreamKeysRequest_channelArn *smithy.Schema
-
-var ListStreamKeysRequest_nextToken *smithy.Schema
-
-var ListStreamKeysRequest_maxResults *smithy.Schema
-
-var ListStreamKeysResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamKeysResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamKeysResponse_streamKeys *smithy.Schema
-
-var ListStreamKeysResponse_nextToken *smithy.Schema
-
-var ListStreamSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamSessionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListStreamSessionsRequest_channelArn *smithy.Schema
-
-var ListStreamSessionsRequest_nextToken *smithy.Schema
-
-var ListStreamSessionsRequest_maxResults *smithy.Schema
-
-var ListStreamSessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamSessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamSessionsResponse_streamSessions *smithy.Schema
-
-var ListStreamSessionsResponse_nextToken *smithy.Schema
-
-var ListStreamsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListStreamsRequest_filterBy *smithy.Schema
-
-var ListStreamsRequest_nextToken *smithy.Schema
-
-var ListStreamsRequest_maxResults *smithy.Schema
-
-var ListStreamsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListStreamsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamsResponse_streams *smithy.Schema
-
-var ListStreamsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "PutMetadataRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutMetadataRequest_channelArn *smithy.Schema
-
-var PutMetadataRequest_metadata *smithy.Schema
-
-var StartViewerSessionRevocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StartViewerSessionRevocationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartViewerSessionRevocationRequest_channelArn *smithy.Schema
-
-var StartViewerSessionRevocationRequest_viewerId *smithy.Schema
-
-var StartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo *smithy.Schema
-
-var StartViewerSessionRevocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StartViewerSessionRevocationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StopStreamRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopStreamRequest_channelArn *smithy.Schema
-
-var StopStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "StopStreamResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAdConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateAdConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAdConfigurationRequest_arn *smithy.Schema
-
-var UpdateAdConfigurationRequest_name *smithy.Schema
-
-var UpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations *smithy.Schema
-
-var UpdateAdConfigurationRequest_postRollConfiguration *smithy.Schema
-
-var UpdateAdConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateAdConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAdConfigurationResponse_adConfiguration *smithy.Schema
-
-var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateChannelRequest_arn *smithy.Schema
-
-var UpdateChannelRequest_name *smithy.Schema
-
-var UpdateChannelRequest_latencyMode *smithy.Schema
-
-var UpdateChannelRequest_type *smithy.Schema
-
-var UpdateChannelRequest_authorized *smithy.Schema
-
-var UpdateChannelRequest_recordingConfigurationArn *smithy.Schema
-
-var UpdateChannelRequest_insecureIngest *smithy.Schema
-
-var UpdateChannelRequest_preset *smithy.Schema
-
-var UpdateChannelRequest_playbackRestrictionPolicyArn *smithy.Schema
-
-var UpdateChannelRequest_multitrackInputConfiguration *smithy.Schema
-
-var UpdateChannelRequest_containerFormat *smithy.Schema
-
-var UpdateChannelRequest_adConfigurationArn *smithy.Schema
-
-var UpdateChannelRequest_failoverSlateConfigurationArn *smithy.Schema
-
-var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateChannelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateChannelResponse_channel *smithy.Schema
-
-var UpdateFailoverSlateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateFailoverSlateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateFailoverSlateConfigurationRequest_arn *smithy.Schema
-
-var UpdateFailoverSlateConfigurationRequest_name *smithy.Schema
-
-var UpdateFailoverSlateConfigurationRequest_activationThresholdSeconds *smithy.Schema
-
-var UpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds *smithy.Schema
-
-var UpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds *smithy.Schema
-
-var UpdateFailoverSlateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdateFailoverSlateConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration *smithy.Schema
-
-var UpdatePlaybackRestrictionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdatePlaybackRestrictionPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdatePlaybackRestrictionPolicyRequest_arn *smithy.Schema
-
-var UpdatePlaybackRestrictionPolicyRequest_allowedCountries *smithy.Schema
-
-var UpdatePlaybackRestrictionPolicyRequest_allowedOrigins *smithy.Schema
-
-var UpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement *smithy.Schema
-
-var UpdatePlaybackRestrictionPolicyRequest_name *smithy.Schema
-
-var UpdatePlaybackRestrictionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivs",
-	Name:      "UpdatePlaybackRestrictionPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_accessControlAllowOrigin = AccessDeniedException.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	AccessDeniedException_accessControlExposeHeaders = AccessDeniedException.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	AccessDeniedException_cacheControl = AccessDeniedException.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	AccessDeniedException_contentSecurityPolicy = AccessDeniedException.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	AccessDeniedException_strictTransportSecurity = AccessDeniedException.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	AccessDeniedException_xContentTypeOptions = AccessDeniedException.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	AccessDeniedException_xFrameOptions = AccessDeniedException.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	AccessDeniedException_xAmznErrorType = AccessDeniedException.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	AccessDeniedException_exceptionMessage = AccessDeniedException.AddMember("exceptionMessage", _errorMessage)
-
-	MediaTailorPlaybackConfiguration_playbackConfigurationArn = MediaTailorPlaybackConfiguration.AddMember("playbackConfigurationArn", _MediaTailorPlaybackConfigurationArn)
-
-	_MediaTailorPlaybackConfigurationsList_member = _MediaTailorPlaybackConfigurationsList.AddMember("member", MediaTailorPlaybackConfiguration)
-
-	PostRollConfiguration_durationSeconds = PostRollConfiguration.AddMember("durationSeconds", _AdDurationSeconds)
-
-	PostRollConfiguration_enabled = PostRollConfiguration.AddMember("enabled", _Boolean)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	AdConfiguration_arn = AdConfiguration.AddMember("arn", _AdConfigurationArn)
-
-	AdConfiguration_name = AdConfiguration.AddMember("name", _AdConfigurationName)
-
-	AdConfiguration_mediaTailorPlaybackConfigurations = AdConfiguration.AddMember("mediaTailorPlaybackConfigurations", _MediaTailorPlaybackConfigurationsList)
-
-	AdConfiguration_postRollConfiguration = AdConfiguration.AddMember("postRollConfiguration", PostRollConfiguration)
-
-	AdConfiguration_tags = AdConfiguration.AddMember("tags", _Tags)
-
-	AdConfigurationSummary_arn = AdConfigurationSummary.AddMember("arn", _AdConfigurationArn)
-
-	AdConfigurationSummary_name = AdConfigurationSummary.AddMember("name", _AdConfigurationName)
-
-	AdConfigurationSummary_mediaTailorPlaybackConfigurations = AdConfigurationSummary.AddMember("mediaTailorPlaybackConfigurations", _MediaTailorPlaybackConfigurationsList)
-
-	AdConfigurationSummary_postRollConfiguration = AdConfigurationSummary.AddMember("postRollConfiguration", PostRollConfiguration)
-
-	AdConfigurationSummary_tags = AdConfigurationSummary.AddMember("tags", _Tags)
-
-	_AdConfigurationList_member = _AdConfigurationList.AddMember("member", AdConfigurationSummary)
-
-	AudioConfiguration_codec = AudioConfiguration.AddMember("codec", _String)
-
-	AudioConfiguration_targetBitrate = AudioConfiguration.AddMember("targetBitrate", _Integer)
-
-	AudioConfiguration_sampleRate = AudioConfiguration.AddMember("sampleRate", _Integer)
-
-	AudioConfiguration_channels = AudioConfiguration.AddMember("channels", _Integer)
-
-	AudioConfiguration_track = AudioConfiguration.AddMember("track", _String)
-
-	_AudioConfigurationList_member = _AudioConfigurationList.AddMember("member", AudioConfiguration)
-
-	BatchError_arn = BatchError.AddMember("arn", _ResourceArn)
-
-	BatchError_code = BatchError.AddMember("code", _errorCode)
-
-	BatchError_message = BatchError.AddMember("message", _errorMessage)
-
-	_BatchErrors_member = _BatchErrors.AddMember("member", BatchError)
-
-	BatchStartViewerSessionRevocationError_channelArn = BatchStartViewerSessionRevocationError.AddMember("channelArn", _ChannelArn)
-
-	BatchStartViewerSessionRevocationError_viewerId = BatchStartViewerSessionRevocationError.AddMember("viewerId", _ViewerId)
-
-	BatchStartViewerSessionRevocationError_code = BatchStartViewerSessionRevocationError.AddMember("code", _errorCode)
-
-	BatchStartViewerSessionRevocationError_message = BatchStartViewerSessionRevocationError.AddMember("message", _errorMessage)
-
-	_BatchStartViewerSessionRevocationErrors_member = _BatchStartViewerSessionRevocationErrors.AddMember("member", BatchStartViewerSessionRevocationError)
-
-	BatchStartViewerSessionRevocationViewerSession_channelArn = BatchStartViewerSessionRevocationViewerSession.AddMember("channelArn", _ChannelArn)
-
-	BatchStartViewerSessionRevocationViewerSession_viewerId = BatchStartViewerSessionRevocationViewerSession.AddMember("viewerId", _ViewerId)
-
-	BatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo = BatchStartViewerSessionRevocationViewerSession.AddMember("viewerSessionVersionsLessThanOrEqualTo", _ViewerSessionVersion)
-
-	_BatchStartViewerSessionRevocationViewerSessionList_member = _BatchStartViewerSessionRevocationViewerSessionList.AddMember("member", BatchStartViewerSessionRevocationViewerSession)
-
-	ChannelType_BasicChannelType = ChannelType.AddMember("BasicChannelType", smithyprelude.Unit)
-
-	ChannelType_StandardChannelType = ChannelType.AddMember("StandardChannelType", smithyprelude.Unit)
-
-	ChannelType_AdvancedSDChannelType = ChannelType.AddMember("AdvancedSDChannelType", smithyprelude.Unit)
-
-	ChannelType_AdvancedHDChannelType = ChannelType.AddMember("AdvancedHDChannelType", smithyprelude.Unit)
-
-	TranscodePreset_HigherBandwidthTranscodePreset = TranscodePreset.AddMember("HigherBandwidthTranscodePreset", smithyprelude.Unit)
-
-	TranscodePreset_ConstrainedBandwidthTranscodePreset = TranscodePreset.AddMember("ConstrainedBandwidthTranscodePreset", smithyprelude.Unit)
-
-	Srt_endpoint = Srt.AddMember("endpoint", _SrtEndpoint)
-
-	Srt_passphrase = Srt.AddMember("passphrase", _SrtPassphrase)
-
-	MultitrackPolicy_ALLOW = MultitrackPolicy.AddMember("ALLOW", smithyprelude.Unit)
-
-	MultitrackPolicy_REQUIRE = MultitrackPolicy.AddMember("REQUIRE", smithyprelude.Unit)
-
-	MultitrackMaximumResolution_SD = MultitrackMaximumResolution.AddMember("SD", smithyprelude.Unit)
-
-	MultitrackMaximumResolution_HD = MultitrackMaximumResolution.AddMember("HD", smithyprelude.Unit)
-
-	MultitrackMaximumResolution_FULL_HD = MultitrackMaximumResolution.AddMember("FULL_HD", smithyprelude.Unit)
-
-	MultitrackInputConfiguration_enabled = MultitrackInputConfiguration.AddMember("enabled", _IsMultitrackInputEnabled)
-
-	MultitrackInputConfiguration_policy = MultitrackInputConfiguration.AddMember("policy", MultitrackPolicy)
-
-	MultitrackInputConfiguration_maximumResolution = MultitrackInputConfiguration.AddMember("maximumResolution", MultitrackMaximumResolution)
-
-	Channel_arn = Channel.AddMember("arn", _ChannelArn)
-
-	Channel_name = Channel.AddMember("name", _ChannelName)
-
-	Channel_latencyMode = Channel.AddMember("latencyMode", _ChannelLatencyMode)
-
-	Channel_type = Channel.AddMember("type", ChannelType)
-
-	Channel_recordingConfigurationArn = Channel.AddMember("recordingConfigurationArn", _ChannelRecordingConfigurationArn)
-
-	Channel_ingestEndpoint = Channel.AddMember("ingestEndpoint", _IngestEndpoint)
-
-	Channel_playbackUrl = Channel.AddMember("playbackUrl", _PlaybackURL)
-
-	Channel_authorized = Channel.AddMember("authorized", _IsAuthorized)
-
-	Channel_tags = Channel.AddMember("tags", _Tags)
-
-	Channel_insecureIngest = Channel.AddMember("insecureIngest", _InsecureIngest)
-
-	Channel_preset = Channel.AddMember("preset", TranscodePreset)
-
-	Channel_srt = Channel.AddMember("srt", Srt)
-
-	Channel_playbackRestrictionPolicyArn = Channel.AddMember("playbackRestrictionPolicyArn", _ChannelPlaybackRestrictionPolicyArn)
-
-	Channel_multitrackInputConfiguration = Channel.AddMember("multitrackInputConfiguration", MultitrackInputConfiguration)
-
-	Channel_containerFormat = Channel.AddMember("containerFormat", _ContainerFormat)
-
-	Channel_adConfigurationArn = Channel.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
-
-	Channel_failoverSlateConfigurationArn = Channel.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
-
-	_ChannelArnList_member = _ChannelArnList.AddMember("member", _ChannelArn)
-
-	ChannelSummary_arn = ChannelSummary.AddMember("arn", _ChannelArn)
-
-	ChannelSummary_name = ChannelSummary.AddMember("name", _ChannelName)
-
-	ChannelSummary_latencyMode = ChannelSummary.AddMember("latencyMode", _ChannelLatencyMode)
-
-	ChannelSummary_authorized = ChannelSummary.AddMember("authorized", _IsAuthorized)
-
-	ChannelSummary_recordingConfigurationArn = ChannelSummary.AddMember("recordingConfigurationArn", _ChannelRecordingConfigurationArn)
-
-	ChannelSummary_tags = ChannelSummary.AddMember("tags", _Tags)
-
-	ChannelSummary_insecureIngest = ChannelSummary.AddMember("insecureIngest", _InsecureIngest)
-
-	ChannelSummary_type = ChannelSummary.AddMember("type", ChannelType)
-
-	ChannelSummary_preset = ChannelSummary.AddMember("preset", TranscodePreset)
-
-	ChannelSummary_playbackRestrictionPolicyArn = ChannelSummary.AddMember("playbackRestrictionPolicyArn", _ChannelPlaybackRestrictionPolicyArn)
-
-	ChannelSummary_adConfigurationArn = ChannelSummary.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
-
-	ChannelSummary_failoverSlateConfigurationArn = ChannelSummary.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
-
-	_ChannelList_member = _ChannelList.AddMember("member", ChannelSummary)
-
-	ChannelNotBroadcasting_accessControlAllowOrigin = ChannelNotBroadcasting.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	ChannelNotBroadcasting_accessControlExposeHeaders = ChannelNotBroadcasting.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	ChannelNotBroadcasting_cacheControl = ChannelNotBroadcasting.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	ChannelNotBroadcasting_contentSecurityPolicy = ChannelNotBroadcasting.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	ChannelNotBroadcasting_strictTransportSecurity = ChannelNotBroadcasting.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	ChannelNotBroadcasting_xContentTypeOptions = ChannelNotBroadcasting.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	ChannelNotBroadcasting_xFrameOptions = ChannelNotBroadcasting.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	ChannelNotBroadcasting_xAmznErrorType = ChannelNotBroadcasting.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ChannelNotBroadcasting_exceptionMessage = ChannelNotBroadcasting.AddMember("exceptionMessage", _errorMessage)
-
-	_Channels_member = _Channels.AddMember("member", Channel)
-
-	ConflictException_accessControlAllowOrigin = ConflictException.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	ConflictException_accessControlExposeHeaders = ConflictException.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	ConflictException_cacheControl = ConflictException.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	ConflictException_contentSecurityPolicy = ConflictException.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	ConflictException_strictTransportSecurity = ConflictException.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	ConflictException_xContentTypeOptions = ConflictException.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	ConflictException_xFrameOptions = ConflictException.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	ConflictException_xAmznErrorType = ConflictException.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ConflictException_exceptionMessage = ConflictException.AddMember("exceptionMessage", _errorMessage)
-
-	S3DestinationConfiguration_bucketName = S3DestinationConfiguration.AddMember("bucketName", _S3DestinationBucketName)
-
-	DestinationConfiguration_s3 = DestinationConfiguration.AddMember("s3", S3DestinationConfiguration)
-
-	FailoverSlateConfiguration_arn = FailoverSlateConfiguration.AddMember("arn", _FailoverSlateConfigurationArn)
-
-	FailoverSlateConfiguration_name = FailoverSlateConfiguration.AddMember("name", _FailoverSlateConfigurationName)
-
-	FailoverSlateConfiguration_activationThresholdSeconds = FailoverSlateConfiguration.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
-
-	FailoverSlateConfiguration_minSlateDisplaySeconds = FailoverSlateConfiguration.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
-
-	FailoverSlateConfiguration_maxSlateDisplaySeconds = FailoverSlateConfiguration.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
-
-	FailoverSlateConfiguration_state = FailoverSlateConfiguration.AddMember("state", _FailoverSlateConfigurationState)
-
-	FailoverSlateConfiguration_tags = FailoverSlateConfiguration.AddMember("tags", _Tags)
-
-	FailoverSlateConfigurationSummary_arn = FailoverSlateConfigurationSummary.AddMember("arn", _FailoverSlateConfigurationArn)
-
-	FailoverSlateConfigurationSummary_name = FailoverSlateConfigurationSummary.AddMember("name", _FailoverSlateConfigurationName)
-
-	FailoverSlateConfigurationSummary_activationThresholdSeconds = FailoverSlateConfigurationSummary.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
-
-	FailoverSlateConfigurationSummary_minSlateDisplaySeconds = FailoverSlateConfigurationSummary.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
-
-	FailoverSlateConfigurationSummary_maxSlateDisplaySeconds = FailoverSlateConfigurationSummary.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
-
-	FailoverSlateConfigurationSummary_state = FailoverSlateConfigurationSummary.AddMember("state", _FailoverSlateConfigurationState)
-
-	FailoverSlateConfigurationSummary_tags = FailoverSlateConfigurationSummary.AddMember("tags", _Tags)
-
-	_FailoverSlateConfigurationList_member = _FailoverSlateConfigurationList.AddMember("member", FailoverSlateConfigurationSummary)
-
-	VideoConfiguration_avcProfile = VideoConfiguration.AddMember("avcProfile", _String)
-
-	VideoConfiguration_avcLevel = VideoConfiguration.AddMember("avcLevel", _String)
-
-	VideoConfiguration_codec = VideoConfiguration.AddMember("codec", _String)
-
-	VideoConfiguration_encoder = VideoConfiguration.AddMember("encoder", _String)
-
-	VideoConfiguration_targetBitrate = VideoConfiguration.AddMember("targetBitrate", _Integer)
-
-	VideoConfiguration_targetFramerate = VideoConfiguration.AddMember("targetFramerate", _Integer)
-
-	VideoConfiguration_videoHeight = VideoConfiguration.AddMember("videoHeight", _Integer)
-
-	VideoConfiguration_videoWidth = VideoConfiguration.AddMember("videoWidth", _Integer)
-
-	VideoConfiguration_level = VideoConfiguration.AddMember("level", _String)
-
-	VideoConfiguration_track = VideoConfiguration.AddMember("track", _String)
-
-	VideoConfiguration_profile = VideoConfiguration.AddMember("profile", _String)
-
-	IngestConfiguration_video = IngestConfiguration.AddMember("video", VideoConfiguration)
-
-	IngestConfiguration_audio = IngestConfiguration.AddMember("audio", AudioConfiguration)
-
-	_VideoConfigurationList_member = _VideoConfigurationList.AddMember("member", VideoConfiguration)
-
-	IngestConfigurations_videoConfigurations = IngestConfigurations.AddMember("videoConfigurations", _VideoConfigurationList)
-
-	IngestConfigurations_audioConfigurations = IngestConfigurations.AddMember("audioConfigurations", _AudioConfigurationList)
-
-	InternalServerException_accessControlAllowOrigin = InternalServerException.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	InternalServerException_accessControlExposeHeaders = InternalServerException.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	InternalServerException_cacheControl = InternalServerException.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	InternalServerException_contentSecurityPolicy = InternalServerException.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	InternalServerException_strictTransportSecurity = InternalServerException.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	InternalServerException_xContentTypeOptions = InternalServerException.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	InternalServerException_xFrameOptions = InternalServerException.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	InternalServerException_xAmznErrorType = InternalServerException.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	InternalServerException_exceptionMessage = InternalServerException.AddMember("exceptionMessage", _errorMessage)
-
-	PendingVerification_accessControlAllowOrigin = PendingVerification.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	PendingVerification_accessControlExposeHeaders = PendingVerification.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	PendingVerification_cacheControl = PendingVerification.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	PendingVerification_contentSecurityPolicy = PendingVerification.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	PendingVerification_strictTransportSecurity = PendingVerification.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	PendingVerification_xContentTypeOptions = PendingVerification.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	PendingVerification_xFrameOptions = PendingVerification.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	PendingVerification_xAmznErrorType = PendingVerification.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	PendingVerification_exceptionMessage = PendingVerification.AddMember("exceptionMessage", _errorMessage)
-
-	PlaybackKeyPair_arn = PlaybackKeyPair.AddMember("arn", _PlaybackKeyPairArn)
-
-	PlaybackKeyPair_name = PlaybackKeyPair.AddMember("name", _PlaybackKeyPairName)
-
-	PlaybackKeyPair_fingerprint = PlaybackKeyPair.AddMember("fingerprint", _PlaybackKeyPairFingerprint)
-
-	PlaybackKeyPair_tags = PlaybackKeyPair.AddMember("tags", _Tags)
-
-	PlaybackKeyPairSummary_arn = PlaybackKeyPairSummary.AddMember("arn", _PlaybackKeyPairArn)
-
-	PlaybackKeyPairSummary_name = PlaybackKeyPairSummary.AddMember("name", _PlaybackKeyPairName)
-
-	PlaybackKeyPairSummary_tags = PlaybackKeyPairSummary.AddMember("tags", _Tags)
-
-	_PlaybackKeyPairList_member = _PlaybackKeyPairList.AddMember("member", PlaybackKeyPairSummary)
-
-	_PlaybackRestrictionPolicyAllowedCountryList_member = _PlaybackRestrictionPolicyAllowedCountryList.AddMember("member", _PlaybackRestrictionPolicyAllowedCountry)
-
-	_PlaybackRestrictionPolicyAllowedOriginList_member = _PlaybackRestrictionPolicyAllowedOriginList.AddMember("member", _PlaybackRestrictionPolicyAllowedOrigin)
-
-	PlaybackRestrictionPolicy_arn = PlaybackRestrictionPolicy.AddMember("arn", _PlaybackRestrictionPolicyArn)
-
-	PlaybackRestrictionPolicy_allowedCountries = PlaybackRestrictionPolicy.AddMember("allowedCountries", _PlaybackRestrictionPolicyAllowedCountryList)
-
-	PlaybackRestrictionPolicy_allowedOrigins = PlaybackRestrictionPolicy.AddMember("allowedOrigins", _PlaybackRestrictionPolicyAllowedOriginList)
-
-	PlaybackRestrictionPolicy_enableStrictOriginEnforcement = PlaybackRestrictionPolicy.AddMember("enableStrictOriginEnforcement", _PlaybackRestrictionPolicyEnableStrictOriginEnforcement)
-
-	PlaybackRestrictionPolicy_name = PlaybackRestrictionPolicy.AddMember("name", _PlaybackRestrictionPolicyName)
-
-	PlaybackRestrictionPolicy_tags = PlaybackRestrictionPolicy.AddMember("tags", _Tags)
-
-	PlaybackRestrictionPolicySummary_arn = PlaybackRestrictionPolicySummary.AddMember("arn", _PlaybackRestrictionPolicyArn)
-
-	PlaybackRestrictionPolicySummary_allowedCountries = PlaybackRestrictionPolicySummary.AddMember("allowedCountries", _PlaybackRestrictionPolicyAllowedCountryList)
-
-	PlaybackRestrictionPolicySummary_allowedOrigins = PlaybackRestrictionPolicySummary.AddMember("allowedOrigins", _PlaybackRestrictionPolicyAllowedOriginList)
-
-	PlaybackRestrictionPolicySummary_enableStrictOriginEnforcement = PlaybackRestrictionPolicySummary.AddMember("enableStrictOriginEnforcement", _PlaybackRestrictionPolicyEnableStrictOriginEnforcement)
-
-	PlaybackRestrictionPolicySummary_name = PlaybackRestrictionPolicySummary.AddMember("name", _PlaybackRestrictionPolicyName)
-
-	PlaybackRestrictionPolicySummary_tags = PlaybackRestrictionPolicySummary.AddMember("tags", _Tags)
-
-	_PlaybackRestrictionPolicyList_member = _PlaybackRestrictionPolicyList.AddMember("member", PlaybackRestrictionPolicySummary)
-
-	ThumbnailConfigurationResolution_SD = ThumbnailConfigurationResolution.AddMember("SD", smithyprelude.Unit)
-
-	ThumbnailConfigurationResolution_HD = ThumbnailConfigurationResolution.AddMember("HD", smithyprelude.Unit)
-
-	ThumbnailConfigurationResolution_FULL_HD = ThumbnailConfigurationResolution.AddMember("FULL_HD", smithyprelude.Unit)
-
-	ThumbnailConfigurationResolution_LOWEST_RESOLUTION = ThumbnailConfigurationResolution.AddMember("LOWEST_RESOLUTION", smithyprelude.Unit)
-
-	_ThumbnailConfigurationStorageList_member = _ThumbnailConfigurationStorageList.AddMember("member", _ThumbnailConfigurationStorage)
-
-	ThumbnailConfiguration_recordingMode = ThumbnailConfiguration.AddMember("recordingMode", _RecordingMode)
-
-	ThumbnailConfiguration_targetIntervalSeconds = ThumbnailConfiguration.AddMember("targetIntervalSeconds", _TargetIntervalSeconds)
-
-	ThumbnailConfiguration_resolution = ThumbnailConfiguration.AddMember("resolution", ThumbnailConfigurationResolution)
-
-	ThumbnailConfiguration_storage = ThumbnailConfiguration.AddMember("storage", _ThumbnailConfigurationStorageList)
-
-	RenditionConfigurationRendition_SD = RenditionConfigurationRendition.AddMember("SD", smithyprelude.Unit)
-
-	RenditionConfigurationRendition_HD = RenditionConfigurationRendition.AddMember("HD", smithyprelude.Unit)
-
-	RenditionConfigurationRendition_FULL_HD = RenditionConfigurationRendition.AddMember("FULL_HD", smithyprelude.Unit)
-
-	RenditionConfigurationRendition_LOWEST_RESOLUTION = RenditionConfigurationRendition.AddMember("LOWEST_RESOLUTION", smithyprelude.Unit)
-
-	_RenditionConfigurationRenditionList_member = _RenditionConfigurationRenditionList.AddMember("member", RenditionConfigurationRendition)
-
-	RenditionConfiguration_renditionSelection = RenditionConfiguration.AddMember("renditionSelection", _RenditionConfigurationRenditionSelection)
-
-	RenditionConfiguration_renditions = RenditionConfiguration.AddMember("renditions", _RenditionConfigurationRenditionList)
-
-	RecordingConfiguration_arn = RecordingConfiguration.AddMember("arn", _RecordingConfigurationArn)
-
-	RecordingConfiguration_name = RecordingConfiguration.AddMember("name", _RecordingConfigurationName)
-
-	RecordingConfiguration_destinationConfiguration = RecordingConfiguration.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	RecordingConfiguration_state = RecordingConfiguration.AddMember("state", _RecordingConfigurationState)
-
-	RecordingConfiguration_tags = RecordingConfiguration.AddMember("tags", _Tags)
-
-	RecordingConfiguration_thumbnailConfiguration = RecordingConfiguration.AddMember("thumbnailConfiguration", ThumbnailConfiguration)
-
-	RecordingConfiguration_recordingReconnectWindowSeconds = RecordingConfiguration.AddMember("recordingReconnectWindowSeconds", _RecordingReconnectWindowSeconds)
-
-	RecordingConfiguration_renditionConfiguration = RecordingConfiguration.AddMember("renditionConfiguration", RenditionConfiguration)
-
-	RecordingConfigurationSummary_arn = RecordingConfigurationSummary.AddMember("arn", _RecordingConfigurationArn)
-
-	RecordingConfigurationSummary_name = RecordingConfigurationSummary.AddMember("name", _RecordingConfigurationName)
-
-	RecordingConfigurationSummary_destinationConfiguration = RecordingConfigurationSummary.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	RecordingConfigurationSummary_state = RecordingConfigurationSummary.AddMember("state", _RecordingConfigurationState)
-
-	RecordingConfigurationSummary_tags = RecordingConfigurationSummary.AddMember("tags", _Tags)
-
-	_RecordingConfigurationList_member = _RecordingConfigurationList.AddMember("member", RecordingConfigurationSummary)
-
-	ResourceNotFoundException_accessControlAllowOrigin = ResourceNotFoundException.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	ResourceNotFoundException_accessControlExposeHeaders = ResourceNotFoundException.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	ResourceNotFoundException_cacheControl = ResourceNotFoundException.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	ResourceNotFoundException_contentSecurityPolicy = ResourceNotFoundException.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	ResourceNotFoundException_strictTransportSecurity = ResourceNotFoundException.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	ResourceNotFoundException_xContentTypeOptions = ResourceNotFoundException.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	ResourceNotFoundException_xFrameOptions = ResourceNotFoundException.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	ResourceNotFoundException_xAmznErrorType = ResourceNotFoundException.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ResourceNotFoundException_exceptionMessage = ResourceNotFoundException.AddMember("exceptionMessage", _errorMessage)
-
-	ServiceQuotaExceededException_accessControlAllowOrigin = ServiceQuotaExceededException.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	ServiceQuotaExceededException_accessControlExposeHeaders = ServiceQuotaExceededException.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	ServiceQuotaExceededException_cacheControl = ServiceQuotaExceededException.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	ServiceQuotaExceededException_contentSecurityPolicy = ServiceQuotaExceededException.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	ServiceQuotaExceededException_strictTransportSecurity = ServiceQuotaExceededException.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	ServiceQuotaExceededException_xContentTypeOptions = ServiceQuotaExceededException.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	ServiceQuotaExceededException_xFrameOptions = ServiceQuotaExceededException.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	ServiceQuotaExceededException_xAmznErrorType = ServiceQuotaExceededException.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ServiceQuotaExceededException_exceptionMessage = ServiceQuotaExceededException.AddMember("exceptionMessage", _errorMessage)
-
-	ServiceUnavailable_accessControlAllowOrigin = ServiceUnavailable.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	ServiceUnavailable_accessControlExposeHeaders = ServiceUnavailable.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	ServiceUnavailable_cacheControl = ServiceUnavailable.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	ServiceUnavailable_contentSecurityPolicy = ServiceUnavailable.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	ServiceUnavailable_strictTransportSecurity = ServiceUnavailable.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	ServiceUnavailable_xContentTypeOptions = ServiceUnavailable.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	ServiceUnavailable_xFrameOptions = ServiceUnavailable.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	ServiceUnavailable_xAmznErrorType = ServiceUnavailable.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ServiceUnavailable_exceptionMessage = ServiceUnavailable.AddMember("exceptionMessage", _errorMessage)
-
-	Stream_channelArn = Stream.AddMember("channelArn", _ChannelArn)
-
-	Stream_streamId = Stream.AddMember("streamId", _StreamId)
-
-	Stream_playbackUrl = Stream.AddMember("playbackUrl", _PlaybackURL)
-
-	Stream_startTime = Stream.AddMember("startTime", _StreamStartTime)
-
-	Stream_state = Stream.AddMember("state", _StreamState)
-
-	Stream_health = Stream.AddMember("health", _StreamHealth)
-
-	Stream_viewerCount = Stream.AddMember("viewerCount", _StreamViewerCount)
-
-	StreamEvent_name = StreamEvent.AddMember("name", _String)
-
-	StreamEvent_type = StreamEvent.AddMember("type", _String)
-
-	StreamEvent_eventTime = StreamEvent.AddMember("eventTime", _Time)
-
-	StreamEvent_code = StreamEvent.AddMember("code", _String)
-
-	_StreamEvents_member = _StreamEvents.AddMember("member", StreamEvent)
-
-	StreamFilters_health = StreamFilters.AddMember("health", _StreamHealth)
-
-	StreamKey_arn = StreamKey.AddMember("arn", _StreamKeyArn)
-
-	StreamKey_value = StreamKey.AddMember("value", _StreamKeyValue)
-
-	StreamKey_channelArn = StreamKey.AddMember("channelArn", _ChannelArn)
-
-	StreamKey_tags = StreamKey.AddMember("tags", _Tags)
-
-	_StreamKeyArnList_member = _StreamKeyArnList.AddMember("member", _StreamKeyArn)
-
-	StreamKeySummary_arn = StreamKeySummary.AddMember("arn", _StreamKeyArn)
-
-	StreamKeySummary_channelArn = StreamKeySummary.AddMember("channelArn", _ChannelArn)
-
-	StreamKeySummary_tags = StreamKeySummary.AddMember("tags", _Tags)
-
-	_StreamKeyList_member = _StreamKeyList.AddMember("member", StreamKeySummary)
-
-	_StreamKeys_member = _StreamKeys.AddMember("member", StreamKey)
-
-	StreamSummary_channelArn = StreamSummary.AddMember("channelArn", _ChannelArn)
-
-	StreamSummary_streamId = StreamSummary.AddMember("streamId", _StreamId)
-
-	StreamSummary_state = StreamSummary.AddMember("state", _StreamState)
-
-	StreamSummary_health = StreamSummary.AddMember("health", _StreamHealth)
-
-	StreamSummary_viewerCount = StreamSummary.AddMember("viewerCount", _StreamViewerCount)
-
-	StreamSummary_startTime = StreamSummary.AddMember("startTime", _StreamStartTime)
-
-	_StreamList_member = _StreamList.AddMember("member", StreamSummary)
-
-	StreamSession_streamId = StreamSession.AddMember("streamId", _StreamId)
-
-	StreamSession_startTime = StreamSession.AddMember("startTime", _Time)
-
-	StreamSession_endTime = StreamSession.AddMember("endTime", _Time)
-
-	StreamSession_channel = StreamSession.AddMember("channel", Channel)
-
-	StreamSession_ingestConfiguration = StreamSession.AddMember("ingestConfiguration", IngestConfiguration)
-
-	StreamSession_ingestConfigurations = StreamSession.AddMember("ingestConfigurations", IngestConfigurations)
-
-	StreamSession_recordingConfiguration = StreamSession.AddMember("recordingConfiguration", RecordingConfiguration)
-
-	StreamSession_truncatedEvents = StreamSession.AddMember("truncatedEvents", _StreamEvents)
-
-	StreamSession_failoverSlateConfiguration = StreamSession.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
-
-	StreamSessionSummary_streamId = StreamSessionSummary.AddMember("streamId", _StreamId)
-
-	StreamSessionSummary_startTime = StreamSessionSummary.AddMember("startTime", _Time)
-
-	StreamSessionSummary_endTime = StreamSessionSummary.AddMember("endTime", _Time)
-
-	StreamSessionSummary_hasErrorEvent = StreamSessionSummary.AddMember("hasErrorEvent", _Boolean)
-
-	_StreamSessionList_member = _StreamSessionList.AddMember("member", StreamSessionSummary)
-
-	StreamUnavailable_accessControlAllowOrigin = StreamUnavailable.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	StreamUnavailable_accessControlExposeHeaders = StreamUnavailable.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	StreamUnavailable_cacheControl = StreamUnavailable.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	StreamUnavailable_contentSecurityPolicy = StreamUnavailable.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	StreamUnavailable_strictTransportSecurity = StreamUnavailable.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	StreamUnavailable_xContentTypeOptions = StreamUnavailable.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	StreamUnavailable_xFrameOptions = StreamUnavailable.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	StreamUnavailable_xAmznErrorType = StreamUnavailable.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	StreamUnavailable_exceptionMessage = StreamUnavailable.AddMember("exceptionMessage", _errorMessage)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_accessControlAllowOrigin = ThrottlingException.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	ThrottlingException_accessControlExposeHeaders = ThrottlingException.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	ThrottlingException_cacheControl = ThrottlingException.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	ThrottlingException_contentSecurityPolicy = ThrottlingException.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	ThrottlingException_strictTransportSecurity = ThrottlingException.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	ThrottlingException_xContentTypeOptions = ThrottlingException.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	ThrottlingException_xFrameOptions = ThrottlingException.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	ThrottlingException_xAmznErrorType = ThrottlingException.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ThrottlingException_exceptionMessage = ThrottlingException.AddMember("exceptionMessage", _errorMessage)
-
-	ValidationException_accessControlAllowOrigin = ValidationException.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	ValidationException_accessControlExposeHeaders = ValidationException.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	ValidationException_cacheControl = ValidationException.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	ValidationException_contentSecurityPolicy = ValidationException.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	ValidationException_strictTransportSecurity = ValidationException.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	ValidationException_xContentTypeOptions = ValidationException.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	ValidationException_xFrameOptions = ValidationException.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	ValidationException_xAmznErrorType = ValidationException.AddMember("xAmznErrorType", _String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ValidationException_exceptionMessage = ValidationException.AddMember("exceptionMessage", _errorMessage)
-
-	BatchGetChannelRequest_arns = BatchGetChannelRequest.AddMember("arns", _ChannelArnList)
-
-	BatchGetChannelResponse_accessControlAllowOrigin = BatchGetChannelResponse.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	BatchGetChannelResponse_accessControlExposeHeaders = BatchGetChannelResponse.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	BatchGetChannelResponse_cacheControl = BatchGetChannelResponse.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	BatchGetChannelResponse_contentSecurityPolicy = BatchGetChannelResponse.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	BatchGetChannelResponse_strictTransportSecurity = BatchGetChannelResponse.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	BatchGetChannelResponse_xContentTypeOptions = BatchGetChannelResponse.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	BatchGetChannelResponse_xFrameOptions = BatchGetChannelResponse.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	BatchGetChannelResponse_channels = BatchGetChannelResponse.AddMember("channels", _Channels)
-
-	BatchGetChannelResponse_errors = BatchGetChannelResponse.AddMember("errors", _BatchErrors)
-
-	BatchGetStreamKeyRequest_arns = BatchGetStreamKeyRequest.AddMember("arns", _StreamKeyArnList)
-
-	BatchGetStreamKeyResponse_accessControlAllowOrigin = BatchGetStreamKeyResponse.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	BatchGetStreamKeyResponse_accessControlExposeHeaders = BatchGetStreamKeyResponse.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	BatchGetStreamKeyResponse_cacheControl = BatchGetStreamKeyResponse.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	BatchGetStreamKeyResponse_contentSecurityPolicy = BatchGetStreamKeyResponse.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	BatchGetStreamKeyResponse_strictTransportSecurity = BatchGetStreamKeyResponse.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	BatchGetStreamKeyResponse_xContentTypeOptions = BatchGetStreamKeyResponse.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	BatchGetStreamKeyResponse_xFrameOptions = BatchGetStreamKeyResponse.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	BatchGetStreamKeyResponse_streamKeys = BatchGetStreamKeyResponse.AddMember("streamKeys", _StreamKeys)
-
-	BatchGetStreamKeyResponse_errors = BatchGetStreamKeyResponse.AddMember("errors", _BatchErrors)
-
-	BatchStartViewerSessionRevocationRequest_viewerSessions = BatchStartViewerSessionRevocationRequest.AddMember("viewerSessions", _BatchStartViewerSessionRevocationViewerSessionList)
-
-	BatchStartViewerSessionRevocationResponse_accessControlAllowOrigin = BatchStartViewerSessionRevocationResponse.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
-
-	BatchStartViewerSessionRevocationResponse_accessControlExposeHeaders = BatchStartViewerSessionRevocationResponse.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
-
-	BatchStartViewerSessionRevocationResponse_cacheControl = BatchStartViewerSessionRevocationResponse.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	BatchStartViewerSessionRevocationResponse_contentSecurityPolicy = BatchStartViewerSessionRevocationResponse.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
-
-	BatchStartViewerSessionRevocationResponse_strictTransportSecurity = BatchStartViewerSessionRevocationResponse.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
-
-	BatchStartViewerSessionRevocationResponse_xContentTypeOptions = BatchStartViewerSessionRevocationResponse.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
-
-	BatchStartViewerSessionRevocationResponse_xFrameOptions = BatchStartViewerSessionRevocationResponse.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
-
-	BatchStartViewerSessionRevocationResponse_errors = BatchStartViewerSessionRevocationResponse.AddMember("errors", _BatchStartViewerSessionRevocationErrors)
-
-	CreateAdConfigurationRequest_name = CreateAdConfigurationRequest.AddMember("name", _AdConfigurationName)
-
-	CreateAdConfigurationRequest_mediaTailorPlaybackConfigurations = CreateAdConfigurationRequest.AddMember("mediaTailorPlaybackConfigurations", _MediaTailorPlaybackConfigurationsList)
-
-	CreateAdConfigurationRequest_postRollConfiguration = CreateAdConfigurationRequest.AddMember("postRollConfiguration", PostRollConfiguration)
-
-	CreateAdConfigurationRequest_tags = CreateAdConfigurationRequest.AddMember("tags", _Tags)
-
-	CreateAdConfigurationResponse_adConfiguration = CreateAdConfigurationResponse.AddMember("adConfiguration", AdConfiguration)
-
-	CreateChannelRequest_name = CreateChannelRequest.AddMember("name", _ChannelName)
-
-	CreateChannelRequest_latencyMode = CreateChannelRequest.AddMember("latencyMode", _ChannelLatencyMode)
-
-	CreateChannelRequest_type = CreateChannelRequest.AddMember("type", ChannelType)
-
-	CreateChannelRequest_authorized = CreateChannelRequest.AddMember("authorized", _Boolean)
-
-	CreateChannelRequest_recordingConfigurationArn = CreateChannelRequest.AddMember("recordingConfigurationArn", _ChannelRecordingConfigurationArn)
-
-	CreateChannelRequest_tags = CreateChannelRequest.AddMember("tags", _Tags)
-
-	CreateChannelRequest_insecureIngest = CreateChannelRequest.AddMember("insecureIngest", _Boolean)
-
-	CreateChannelRequest_preset = CreateChannelRequest.AddMember("preset", TranscodePreset)
-
-	CreateChannelRequest_playbackRestrictionPolicyArn = CreateChannelRequest.AddMember("playbackRestrictionPolicyArn", _ChannelPlaybackRestrictionPolicyArn)
-
-	CreateChannelRequest_multitrackInputConfiguration = CreateChannelRequest.AddMember("multitrackInputConfiguration", MultitrackInputConfiguration)
-
-	CreateChannelRequest_containerFormat = CreateChannelRequest.AddMember("containerFormat", _ContainerFormat)
-
-	CreateChannelRequest_adConfigurationArn = CreateChannelRequest.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
-
-	CreateChannelRequest_failoverSlateConfigurationArn = CreateChannelRequest.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
-
-	CreateChannelResponse_channel = CreateChannelResponse.AddMember("channel", Channel)
-
-	CreateChannelResponse_streamKey = CreateChannelResponse.AddMember("streamKey", StreamKey)
-
-	CreateFailoverSlateConfigurationRequest_name = CreateFailoverSlateConfigurationRequest.AddMember("name", _FailoverSlateConfigurationName)
-
-	CreateFailoverSlateConfigurationRequest_activationThresholdSeconds = CreateFailoverSlateConfigurationRequest.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
-
-	CreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = CreateFailoverSlateConfigurationRequest.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
-
-	CreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = CreateFailoverSlateConfigurationRequest.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
-
-	CreateFailoverSlateConfigurationRequest_tags = CreateFailoverSlateConfigurationRequest.AddMember("tags", _Tags)
-
-	CreateFailoverSlateConfigurationResponse_failoverSlateConfiguration = CreateFailoverSlateConfigurationResponse.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
-
-	CreatePlaybackRestrictionPolicyRequest_allowedCountries = CreatePlaybackRestrictionPolicyRequest.AddMember("allowedCountries", _PlaybackRestrictionPolicyAllowedCountryList)
-
-	CreatePlaybackRestrictionPolicyRequest_allowedOrigins = CreatePlaybackRestrictionPolicyRequest.AddMember("allowedOrigins", _PlaybackRestrictionPolicyAllowedOriginList)
-
-	CreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement = CreatePlaybackRestrictionPolicyRequest.AddMember("enableStrictOriginEnforcement", _PlaybackRestrictionPolicyEnableStrictOriginEnforcement)
-
-	CreatePlaybackRestrictionPolicyRequest_name = CreatePlaybackRestrictionPolicyRequest.AddMember("name", _PlaybackRestrictionPolicyName)
-
-	CreatePlaybackRestrictionPolicyRequest_tags = CreatePlaybackRestrictionPolicyRequest.AddMember("tags", _Tags)
-
-	CreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = CreatePlaybackRestrictionPolicyResponse.AddMember("playbackRestrictionPolicy", PlaybackRestrictionPolicy)
-
-	CreateRecordingConfigurationRequest_name = CreateRecordingConfigurationRequest.AddMember("name", _RecordingConfigurationName)
-
-	CreateRecordingConfigurationRequest_destinationConfiguration = CreateRecordingConfigurationRequest.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	CreateRecordingConfigurationRequest_tags = CreateRecordingConfigurationRequest.AddMember("tags", _Tags)
-
-	CreateRecordingConfigurationRequest_thumbnailConfiguration = CreateRecordingConfigurationRequest.AddMember("thumbnailConfiguration", ThumbnailConfiguration)
-
-	CreateRecordingConfigurationRequest_recordingReconnectWindowSeconds = CreateRecordingConfigurationRequest.AddMember("recordingReconnectWindowSeconds", _RecordingReconnectWindowSeconds)
-
-	CreateRecordingConfigurationRequest_renditionConfiguration = CreateRecordingConfigurationRequest.AddMember("renditionConfiguration", RenditionConfiguration)
-
-	CreateRecordingConfigurationResponse_recordingConfiguration = CreateRecordingConfigurationResponse.AddMember("recordingConfiguration", RecordingConfiguration)
-
-	CreateStreamKeyRequest_channelArn = CreateStreamKeyRequest.AddMember("channelArn", _ChannelArn)
-
-	CreateStreamKeyRequest_tags = CreateStreamKeyRequest.AddMember("tags", _Tags)
-
-	CreateStreamKeyResponse_streamKey = CreateStreamKeyResponse.AddMember("streamKey", StreamKey)
-
-	DeleteAdConfigurationRequest_arn = DeleteAdConfigurationRequest.AddMember("arn", _AdConfigurationArn)
-
-	DeleteChannelRequest_arn = DeleteChannelRequest.AddMember("arn", _ChannelArn)
-
-	DeleteFailoverSlateConfigurationRequest_arn = DeleteFailoverSlateConfigurationRequest.AddMember("arn", _FailoverSlateConfigurationArn)
-
-	DeletePlaybackKeyPairRequest_arn = DeletePlaybackKeyPairRequest.AddMember("arn", _PlaybackKeyPairArn)
-
-	DeletePlaybackRestrictionPolicyRequest_arn = DeletePlaybackRestrictionPolicyRequest.AddMember("arn", _PlaybackRestrictionPolicyArn)
-
-	DeleteRecordingConfigurationRequest_arn = DeleteRecordingConfigurationRequest.AddMember("arn", _RecordingConfigurationArn)
-
-	DeleteStreamKeyRequest_arn = DeleteStreamKeyRequest.AddMember("arn", _StreamKeyArn)
-
-	GetAdConfigurationRequest_arn = GetAdConfigurationRequest.AddMember("arn", _AdConfigurationArn)
-
-	GetAdConfigurationResponse_adConfiguration = GetAdConfigurationResponse.AddMember("adConfiguration", AdConfiguration)
-
-	GetChannelRequest_arn = GetChannelRequest.AddMember("arn", _ChannelArn)
-
-	GetChannelResponse_channel = GetChannelResponse.AddMember("channel", Channel)
-
-	GetFailoverSlateConfigurationRequest_arn = GetFailoverSlateConfigurationRequest.AddMember("arn", _FailoverSlateConfigurationArn)
-
-	GetFailoverSlateConfigurationResponse_failoverSlateConfiguration = GetFailoverSlateConfigurationResponse.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
-
-	GetPlaybackKeyPairRequest_arn = GetPlaybackKeyPairRequest.AddMember("arn", _PlaybackKeyPairArn)
-
-	GetPlaybackKeyPairResponse_keyPair = GetPlaybackKeyPairResponse.AddMember("keyPair", PlaybackKeyPair)
-
-	GetPlaybackRestrictionPolicyRequest_arn = GetPlaybackRestrictionPolicyRequest.AddMember("arn", _PlaybackRestrictionPolicyArn)
-
-	GetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = GetPlaybackRestrictionPolicyResponse.AddMember("playbackRestrictionPolicy", PlaybackRestrictionPolicy)
-
-	GetRecordingConfigurationRequest_arn = GetRecordingConfigurationRequest.AddMember("arn", _RecordingConfigurationArn)
-
-	GetRecordingConfigurationResponse_recordingConfiguration = GetRecordingConfigurationResponse.AddMember("recordingConfiguration", RecordingConfiguration)
-
-	GetStreamRequest_channelArn = GetStreamRequest.AddMember("channelArn", _ChannelArn)
-
-	GetStreamKeyRequest_arn = GetStreamKeyRequest.AddMember("arn", _StreamKeyArn)
-
-	GetStreamKeyResponse_streamKey = GetStreamKeyResponse.AddMember("streamKey", StreamKey)
-
-	GetStreamResponse_stream = GetStreamResponse.AddMember("stream", Stream)
-
-	GetStreamSessionRequest_channelArn = GetStreamSessionRequest.AddMember("channelArn", _ChannelArn)
-
-	GetStreamSessionRequest_streamId = GetStreamSessionRequest.AddMember("streamId", _StreamId)
-
-	GetStreamSessionResponse_streamSession = GetStreamSessionResponse.AddMember("streamSession", StreamSession)
-
-	ImportPlaybackKeyPairRequest_publicKeyMaterial = ImportPlaybackKeyPairRequest.AddMember("publicKeyMaterial", _PlaybackPublicKeyMaterial)
-
-	ImportPlaybackKeyPairRequest_name = ImportPlaybackKeyPairRequest.AddMember("name", _PlaybackKeyPairName)
-
-	ImportPlaybackKeyPairRequest_tags = ImportPlaybackKeyPairRequest.AddMember("tags", _Tags)
-
-	ImportPlaybackKeyPairResponse_keyPair = ImportPlaybackKeyPairResponse.AddMember("keyPair", PlaybackKeyPair)
-
-	InsertAdBreakRequest_channelArn = InsertAdBreakRequest.AddMember("channelArn", _ChannelArn)
-
-	InsertAdBreakRequest_durationSeconds = InsertAdBreakRequest.AddMember("durationSeconds", _AdDurationSeconds)
-
-	InsertAdBreakRequest_adBreakId = InsertAdBreakRequest.AddMember("adBreakId", _AdBreakId)
-
-	InsertAdBreakRequest_targetStartAt = InsertAdBreakRequest.AddMember("targetStartAt", _Time)
-
-	InsertAdBreakResponse_adBreakId = InsertAdBreakResponse.AddMember("adBreakId", _AdBreakId)
-
-	InsertAdBreakResponse_targetStartAt = InsertAdBreakResponse.AddMember("targetStartAt", _Time)
-
-	ListAdConfigurationsRequest_nextToken = ListAdConfigurationsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListAdConfigurationsRequest_maxResults = ListAdConfigurationsRequest.AddMember("maxResults", _MaxAdConfigurationResults)
-
-	ListAdConfigurationsResponse_adConfigurations = ListAdConfigurationsResponse.AddMember("adConfigurations", _AdConfigurationList)
-
-	ListAdConfigurationsResponse_nextToken = ListAdConfigurationsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListChannelsRequest_filterByName = ListChannelsRequest.AddMember("filterByName", _ChannelName)
-
-	ListChannelsRequest_filterByRecordingConfigurationArn = ListChannelsRequest.AddMember("filterByRecordingConfigurationArn", _ChannelRecordingConfigurationArn)
-
-	ListChannelsRequest_filterByPlaybackRestrictionPolicyArn = ListChannelsRequest.AddMember("filterByPlaybackRestrictionPolicyArn", _ChannelPlaybackRestrictionPolicyArn)
-
-	ListChannelsRequest_filterByAdConfigurationArn = ListChannelsRequest.AddMember("filterByAdConfigurationArn", _ChannelAdConfigurationArn)
-
-	ListChannelsRequest_filterByFailoverSlateConfigurationArn = ListChannelsRequest.AddMember("filterByFailoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
-
-	ListChannelsRequest_nextToken = ListChannelsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListChannelsRequest_maxResults = ListChannelsRequest.AddMember("maxResults", _MaxChannelResults)
-
-	ListChannelsResponse_channels = ListChannelsResponse.AddMember("channels", _ChannelList)
-
-	ListChannelsResponse_nextToken = ListChannelsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListFailoverSlateConfigurationsRequest_nextToken = ListFailoverSlateConfigurationsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListFailoverSlateConfigurationsRequest_maxResults = ListFailoverSlateConfigurationsRequest.AddMember("maxResults", _MaxFailoverSlateConfigurationResults)
-
-	ListFailoverSlateConfigurationsResponse_failoverSlateConfigurations = ListFailoverSlateConfigurationsResponse.AddMember("failoverSlateConfigurations", _FailoverSlateConfigurationList)
-
-	ListFailoverSlateConfigurationsResponse_nextToken = ListFailoverSlateConfigurationsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListPlaybackKeyPairsRequest_nextToken = ListPlaybackKeyPairsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListPlaybackKeyPairsRequest_maxResults = ListPlaybackKeyPairsRequest.AddMember("maxResults", _MaxPlaybackKeyPairResults)
-
-	ListPlaybackKeyPairsResponse_keyPairs = ListPlaybackKeyPairsResponse.AddMember("keyPairs", _PlaybackKeyPairList)
-
-	ListPlaybackKeyPairsResponse_nextToken = ListPlaybackKeyPairsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListPlaybackRestrictionPoliciesRequest_nextToken = ListPlaybackRestrictionPoliciesRequest.AddMember("nextToken", _PaginationToken)
-
-	ListPlaybackRestrictionPoliciesRequest_maxResults = ListPlaybackRestrictionPoliciesRequest.AddMember("maxResults", _MaxPlaybackRestrictionPolicyResults)
-
-	ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies = ListPlaybackRestrictionPoliciesResponse.AddMember("playbackRestrictionPolicies", _PlaybackRestrictionPolicyList)
-
-	ListPlaybackRestrictionPoliciesResponse_nextToken = ListPlaybackRestrictionPoliciesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListRecordingConfigurationsRequest_nextToken = ListRecordingConfigurationsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListRecordingConfigurationsRequest_maxResults = ListRecordingConfigurationsRequest.AddMember("maxResults", _MaxRecordingConfigurationResults)
-
-	ListRecordingConfigurationsResponse_recordingConfigurations = ListRecordingConfigurationsResponse.AddMember("recordingConfigurations", _RecordingConfigurationList)
-
-	ListRecordingConfigurationsResponse_nextToken = ListRecordingConfigurationsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListStreamKeysRequest_channelArn = ListStreamKeysRequest.AddMember("channelArn", _ChannelArn)
-
-	ListStreamKeysRequest_nextToken = ListStreamKeysRequest.AddMember("nextToken", _PaginationToken)
-
-	ListStreamKeysRequest_maxResults = ListStreamKeysRequest.AddMember("maxResults", _MaxStreamKeyResults)
-
-	ListStreamKeysResponse_streamKeys = ListStreamKeysResponse.AddMember("streamKeys", _StreamKeyList)
-
-	ListStreamKeysResponse_nextToken = ListStreamKeysResponse.AddMember("nextToken", _PaginationToken)
-
-	ListStreamSessionsRequest_channelArn = ListStreamSessionsRequest.AddMember("channelArn", _ChannelArn)
-
-	ListStreamSessionsRequest_nextToken = ListStreamSessionsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListStreamSessionsRequest_maxResults = ListStreamSessionsRequest.AddMember("maxResults", _MaxStreamResults)
-
-	ListStreamSessionsResponse_streamSessions = ListStreamSessionsResponse.AddMember("streamSessions", _StreamSessionList)
-
-	ListStreamSessionsResponse_nextToken = ListStreamSessionsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListStreamsRequest_filterBy = ListStreamsRequest.AddMember("filterBy", StreamFilters)
-
-	ListStreamsRequest_nextToken = ListStreamsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListStreamsRequest_maxResults = ListStreamsRequest.AddMember("maxResults", _MaxStreamResults)
-
-	ListStreamsResponse_streams = ListStreamsResponse.AddMember("streams", _StreamList)
-
-	ListStreamsResponse_nextToken = ListStreamsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	PutMetadataRequest_channelArn = PutMetadataRequest.AddMember("channelArn", _ChannelArn)
-
-	PutMetadataRequest_metadata = PutMetadataRequest.AddMember("metadata", _StreamMetadata)
-
-	StartViewerSessionRevocationRequest_channelArn = StartViewerSessionRevocationRequest.AddMember("channelArn", _ChannelArn)
-
-	StartViewerSessionRevocationRequest_viewerId = StartViewerSessionRevocationRequest.AddMember("viewerId", _ViewerId)
-
-	StartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo = StartViewerSessionRevocationRequest.AddMember("viewerSessionVersionsLessThanOrEqualTo", _ViewerSessionVersion)
-
-	StopStreamRequest_channelArn = StopStreamRequest.AddMember("channelArn", _ChannelArn)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAdConfigurationRequest_arn = UpdateAdConfigurationRequest.AddMember("arn", _AdConfigurationArn)
-
-	UpdateAdConfigurationRequest_name = UpdateAdConfigurationRequest.AddMember("name", _AdConfigurationName)
-
-	UpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations = UpdateAdConfigurationRequest.AddMember("mediaTailorPlaybackConfigurations", _MediaTailorPlaybackConfigurationsList)
-
-	UpdateAdConfigurationRequest_postRollConfiguration = UpdateAdConfigurationRequest.AddMember("postRollConfiguration", PostRollConfiguration)
-
-	UpdateAdConfigurationResponse_adConfiguration = UpdateAdConfigurationResponse.AddMember("adConfiguration", AdConfiguration)
-
-	UpdateChannelRequest_arn = UpdateChannelRequest.AddMember("arn", _ChannelArn)
-
-	UpdateChannelRequest_name = UpdateChannelRequest.AddMember("name", _ChannelName)
-
-	UpdateChannelRequest_latencyMode = UpdateChannelRequest.AddMember("latencyMode", _ChannelLatencyMode)
-
-	UpdateChannelRequest_type = UpdateChannelRequest.AddMember("type", ChannelType)
-
-	UpdateChannelRequest_authorized = UpdateChannelRequest.AddMember("authorized", _Boolean)
-
-	UpdateChannelRequest_recordingConfigurationArn = UpdateChannelRequest.AddMember("recordingConfigurationArn", _ChannelRecordingConfigurationArn)
-
-	UpdateChannelRequest_insecureIngest = UpdateChannelRequest.AddMember("insecureIngest", _Boolean)
-
-	UpdateChannelRequest_preset = UpdateChannelRequest.AddMember("preset", TranscodePreset)
-
-	UpdateChannelRequest_playbackRestrictionPolicyArn = UpdateChannelRequest.AddMember("playbackRestrictionPolicyArn", _ChannelPlaybackRestrictionPolicyArn)
-
-	UpdateChannelRequest_multitrackInputConfiguration = UpdateChannelRequest.AddMember("multitrackInputConfiguration", MultitrackInputConfiguration)
-
-	UpdateChannelRequest_containerFormat = UpdateChannelRequest.AddMember("containerFormat", _ContainerFormat)
-
-	UpdateChannelRequest_adConfigurationArn = UpdateChannelRequest.AddMember("adConfigurationArn", _ChannelAdConfigurationArn)
-
-	UpdateChannelRequest_failoverSlateConfigurationArn = UpdateChannelRequest.AddMember("failoverSlateConfigurationArn", _ChannelFailoverSlateConfigurationArn)
-
-	UpdateChannelResponse_channel = UpdateChannelResponse.AddMember("channel", Channel)
-
-	UpdateFailoverSlateConfigurationRequest_arn = UpdateFailoverSlateConfigurationRequest.AddMember("arn", _FailoverSlateConfigurationArn)
-
-	UpdateFailoverSlateConfigurationRequest_name = UpdateFailoverSlateConfigurationRequest.AddMember("name", _FailoverSlateConfigurationName)
-
-	UpdateFailoverSlateConfigurationRequest_activationThresholdSeconds = UpdateFailoverSlateConfigurationRequest.AddMember("activationThresholdSeconds", _FailoverSlateActivationThresholdSeconds)
-
-	UpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = UpdateFailoverSlateConfigurationRequest.AddMember("minSlateDisplaySeconds", _FailoverSlateMinDisplaySeconds)
-
-	UpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = UpdateFailoverSlateConfigurationRequest.AddMember("maxSlateDisplaySeconds", _FailoverSlateMaxDisplaySeconds)
-
-	UpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration = UpdateFailoverSlateConfigurationResponse.AddMember("failoverSlateConfiguration", FailoverSlateConfiguration)
-
-	UpdatePlaybackRestrictionPolicyRequest_arn = UpdatePlaybackRestrictionPolicyRequest.AddMember("arn", _PlaybackRestrictionPolicyArn)
-
-	UpdatePlaybackRestrictionPolicyRequest_allowedCountries = UpdatePlaybackRestrictionPolicyRequest.AddMember("allowedCountries", _PlaybackRestrictionPolicyAllowedCountryList)
-
-	UpdatePlaybackRestrictionPolicyRequest_allowedOrigins = UpdatePlaybackRestrictionPolicyRequest.AddMember("allowedOrigins", _PlaybackRestrictionPolicyAllowedOriginList)
-
-	UpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement = UpdatePlaybackRestrictionPolicyRequest.AddMember("enableStrictOriginEnforcement", _PlaybackRestrictionPolicyEnableStrictOriginEnforcement)
-
-	UpdatePlaybackRestrictionPolicyRequest_name = UpdatePlaybackRestrictionPolicyRequest.AddMember("name", _PlaybackRestrictionPolicyName)
-
-	UpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = UpdatePlaybackRestrictionPolicyResponse.AddMember("playbackRestrictionPolicy", PlaybackRestrictionPolicy)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"}}, DirectMask: 0x80}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"}}, DirectMask: 0x80}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Cache-Control"}}, DirectMask: 0x80}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"}}, DirectMask: 0x80}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"}}, DirectMask: 0x80}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"}}, DirectMask: 0x80}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Frame-Options"}}, DirectMask: 0x80}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"}}, DirectMask: 0x80}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_accessControlAllowOrigin, &sAccessDeniedException_accessControlExposeHeaders, &sAccessDeniedException_cacheControl, &sAccessDeniedException_contentSecurityPolicy, &sAccessDeniedException_strictTransportSecurity, &sAccessDeniedException_xContentTypeOptions, &sAccessDeniedException_xFrameOptions, &sAccessDeniedException_xAmznErrorType, &sAccessDeniedException_exceptionMessage}, Hash: &hAccessDeniedException}
+var mAdConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAdConfiguration_arn, &sAdConfiguration_name, &sAdConfiguration_mediaTailorPlaybackConfigurations, &sAdConfiguration_postRollConfiguration, &sAdConfiguration_tags}}
+var m_AdConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdConfigurationList_member}}
+var mAdConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAdConfigurationSummary_arn, &sAdConfigurationSummary_name, &sAdConfigurationSummary_mediaTailorPlaybackConfigurations, &sAdConfigurationSummary_postRollConfiguration, &sAdConfigurationSummary_tags}}
+var mAudioConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioConfiguration_codec, &sAudioConfiguration_targetBitrate, &sAudioConfiguration_sampleRate, &sAudioConfiguration_channels, &sAudioConfiguration_track}}
+var m_AudioConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AudioConfigurationList_member}}
+var mBatchError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchError_arn, &sBatchError_code, &sBatchError_message}}
+var m_BatchErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchErrors_member}}
+var mBatchStartViewerSessionRevocationError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchStartViewerSessionRevocationError_channelArn, &sBatchStartViewerSessionRevocationError_viewerId, &sBatchStartViewerSessionRevocationError_code, &sBatchStartViewerSessionRevocationError_message}}
+var m_BatchStartViewerSessionRevocationErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchStartViewerSessionRevocationErrors_member}}
+var mBatchStartViewerSessionRevocationViewerSession = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchStartViewerSessionRevocationViewerSession_channelArn, &sBatchStartViewerSessionRevocationViewerSession_viewerId, &sBatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo}}
+var m_BatchStartViewerSessionRevocationViewerSessionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchStartViewerSessionRevocationViewerSessionList_member}}
+var mChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sChannel_arn, &sChannel_name, &sChannel_latencyMode, &sChannel_type, &sChannel_recordingConfigurationArn, &sChannel_ingestEndpoint, &sChannel_playbackUrl, &sChannel_authorized, &sChannel_tags, &sChannel_insecureIngest, &sChannel_preset, &sChannel_srt, &sChannel_playbackRestrictionPolicyArn, &sChannel_multitrackInputConfiguration, &sChannel_containerFormat, &sChannel_adConfigurationArn, &sChannel_failoverSlateConfigurationArn}, Hash: &hChannel}
+var m_ChannelArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelArnList_member}}
+var m_ChannelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelList_member}}
+var mChannelNotBroadcasting = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelNotBroadcasting_accessControlAllowOrigin, &sChannelNotBroadcasting_accessControlExposeHeaders, &sChannelNotBroadcasting_cacheControl, &sChannelNotBroadcasting_contentSecurityPolicy, &sChannelNotBroadcasting_strictTransportSecurity, &sChannelNotBroadcasting_xContentTypeOptions, &sChannelNotBroadcasting_xFrameOptions, &sChannelNotBroadcasting_xAmznErrorType, &sChannelNotBroadcasting_exceptionMessage}, Hash: &hChannelNotBroadcasting}
+var m_Channels = smithy.SchemaMembers{List: []*smithy.Schema{&s_Channels_member}}
+var mChannelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelSummary_arn, &sChannelSummary_name, &sChannelSummary_latencyMode, &sChannelSummary_authorized, &sChannelSummary_recordingConfigurationArn, &sChannelSummary_tags, &sChannelSummary_insecureIngest, &sChannelSummary_type, &sChannelSummary_preset, &sChannelSummary_playbackRestrictionPolicyArn, &sChannelSummary_adConfigurationArn, &sChannelSummary_failoverSlateConfigurationArn}, Hash: &hChannelSummary}
+var mChannelType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelType_BasicChannelType, &sChannelType_StandardChannelType, &sChannelType_AdvancedSDChannelType, &sChannelType_AdvancedHDChannelType}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_accessControlAllowOrigin, &sConflictException_accessControlExposeHeaders, &sConflictException_cacheControl, &sConflictException_contentSecurityPolicy, &sConflictException_strictTransportSecurity, &sConflictException_xContentTypeOptions, &sConflictException_xFrameOptions, &sConflictException_xAmznErrorType, &sConflictException_exceptionMessage}, Hash: &hConflictException}
+var mDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationConfiguration_s3}}
+var mFailoverSlateConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverSlateConfiguration_arn, &sFailoverSlateConfiguration_name, &sFailoverSlateConfiguration_activationThresholdSeconds, &sFailoverSlateConfiguration_minSlateDisplaySeconds, &sFailoverSlateConfiguration_maxSlateDisplaySeconds, &sFailoverSlateConfiguration_state, &sFailoverSlateConfiguration_tags}}
+var m_FailoverSlateConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FailoverSlateConfigurationList_member}}
+var mFailoverSlateConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverSlateConfigurationSummary_arn, &sFailoverSlateConfigurationSummary_name, &sFailoverSlateConfigurationSummary_activationThresholdSeconds, &sFailoverSlateConfigurationSummary_minSlateDisplaySeconds, &sFailoverSlateConfigurationSummary_maxSlateDisplaySeconds, &sFailoverSlateConfigurationSummary_state, &sFailoverSlateConfigurationSummary_tags}}
+var mIngestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestConfiguration_video, &sIngestConfiguration_audio}}
+var mIngestConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestConfigurations_videoConfigurations, &sIngestConfigurations_audioConfigurations}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_accessControlAllowOrigin, &sInternalServerException_accessControlExposeHeaders, &sInternalServerException_cacheControl, &sInternalServerException_contentSecurityPolicy, &sInternalServerException_strictTransportSecurity, &sInternalServerException_xContentTypeOptions, &sInternalServerException_xFrameOptions, &sInternalServerException_xAmznErrorType, &sInternalServerException_exceptionMessage}, Hash: &hInternalServerException}
+var mMediaTailorPlaybackConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaTailorPlaybackConfiguration_playbackConfigurationArn}}
+var m_MediaTailorPlaybackConfigurationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaTailorPlaybackConfigurationsList_member}}
+var mMultitrackInputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMultitrackInputConfiguration_enabled, &sMultitrackInputConfiguration_policy, &sMultitrackInputConfiguration_maximumResolution}}
+var mMultitrackMaximumResolution = smithy.SchemaMembers{List: []*smithy.Schema{&sMultitrackMaximumResolution_SD, &sMultitrackMaximumResolution_HD, &sMultitrackMaximumResolution_FULL_HD}}
+var mMultitrackPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sMultitrackPolicy_ALLOW, &sMultitrackPolicy_REQUIRE}}
+var mPendingVerification = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingVerification_accessControlAllowOrigin, &sPendingVerification_accessControlExposeHeaders, &sPendingVerification_cacheControl, &sPendingVerification_contentSecurityPolicy, &sPendingVerification_strictTransportSecurity, &sPendingVerification_xContentTypeOptions, &sPendingVerification_xFrameOptions, &sPendingVerification_xAmznErrorType, &sPendingVerification_exceptionMessage}, Hash: &hPendingVerification}
+var mPlaybackKeyPair = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackKeyPair_arn, &sPlaybackKeyPair_name, &sPlaybackKeyPair_fingerprint, &sPlaybackKeyPair_tags}}
+var m_PlaybackKeyPairList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlaybackKeyPairList_member}}
+var mPlaybackKeyPairSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackKeyPairSummary_arn, &sPlaybackKeyPairSummary_name, &sPlaybackKeyPairSummary_tags}}
+var mPlaybackRestrictionPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackRestrictionPolicy_arn, &sPlaybackRestrictionPolicy_allowedCountries, &sPlaybackRestrictionPolicy_allowedOrigins, &sPlaybackRestrictionPolicy_enableStrictOriginEnforcement, &sPlaybackRestrictionPolicy_name, &sPlaybackRestrictionPolicy_tags}}
+var m_PlaybackRestrictionPolicyAllowedCountryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlaybackRestrictionPolicyAllowedCountryList_member}}
+var m_PlaybackRestrictionPolicyAllowedOriginList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlaybackRestrictionPolicyAllowedOriginList_member}}
+var m_PlaybackRestrictionPolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlaybackRestrictionPolicyList_member}}
+var mPlaybackRestrictionPolicySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackRestrictionPolicySummary_arn, &sPlaybackRestrictionPolicySummary_allowedCountries, &sPlaybackRestrictionPolicySummary_allowedOrigins, &sPlaybackRestrictionPolicySummary_enableStrictOriginEnforcement, &sPlaybackRestrictionPolicySummary_name, &sPlaybackRestrictionPolicySummary_tags}}
+var mPostRollConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPostRollConfiguration_durationSeconds, &sPostRollConfiguration_enabled}}
+var mRecordingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordingConfiguration_arn, &sRecordingConfiguration_name, &sRecordingConfiguration_destinationConfiguration, &sRecordingConfiguration_state, &sRecordingConfiguration_tags, &sRecordingConfiguration_thumbnailConfiguration, &sRecordingConfiguration_recordingReconnectWindowSeconds, &sRecordingConfiguration_renditionConfiguration}}
+var m_RecordingConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecordingConfigurationList_member}}
+var mRecordingConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordingConfigurationSummary_arn, &sRecordingConfigurationSummary_name, &sRecordingConfigurationSummary_destinationConfiguration, &sRecordingConfigurationSummary_state, &sRecordingConfigurationSummary_tags}}
+var mRenditionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRenditionConfiguration_renditionSelection, &sRenditionConfiguration_renditions}}
+var mRenditionConfigurationRendition = smithy.SchemaMembers{List: []*smithy.Schema{&sRenditionConfigurationRendition_SD, &sRenditionConfigurationRendition_HD, &sRenditionConfigurationRendition_FULL_HD, &sRenditionConfigurationRendition_LOWEST_RESOLUTION}}
+var m_RenditionConfigurationRenditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RenditionConfigurationRenditionList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_accessControlAllowOrigin, &sResourceNotFoundException_accessControlExposeHeaders, &sResourceNotFoundException_cacheControl, &sResourceNotFoundException_contentSecurityPolicy, &sResourceNotFoundException_strictTransportSecurity, &sResourceNotFoundException_xContentTypeOptions, &sResourceNotFoundException_xFrameOptions, &sResourceNotFoundException_xAmznErrorType, &sResourceNotFoundException_exceptionMessage}, Hash: &hResourceNotFoundException}
+var mS3DestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationConfiguration_bucketName}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_accessControlAllowOrigin, &sServiceQuotaExceededException_accessControlExposeHeaders, &sServiceQuotaExceededException_cacheControl, &sServiceQuotaExceededException_contentSecurityPolicy, &sServiceQuotaExceededException_strictTransportSecurity, &sServiceQuotaExceededException_xContentTypeOptions, &sServiceQuotaExceededException_xFrameOptions, &sServiceQuotaExceededException_xAmznErrorType, &sServiceQuotaExceededException_exceptionMessage}, Hash: &hServiceQuotaExceededException}
+var mServiceUnavailable = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailable_accessControlAllowOrigin, &sServiceUnavailable_accessControlExposeHeaders, &sServiceUnavailable_cacheControl, &sServiceUnavailable_contentSecurityPolicy, &sServiceUnavailable_strictTransportSecurity, &sServiceUnavailable_xContentTypeOptions, &sServiceUnavailable_xFrameOptions, &sServiceUnavailable_xAmznErrorType, &sServiceUnavailable_exceptionMessage}, Hash: &hServiceUnavailable}
+var mSrt = smithy.SchemaMembers{List: []*smithy.Schema{&sSrt_endpoint, &sSrt_passphrase}}
+var mStream = smithy.SchemaMembers{List: []*smithy.Schema{&sStream_channelArn, &sStream_streamId, &sStream_playbackUrl, &sStream_startTime, &sStream_state, &sStream_health, &sStream_viewerCount}}
+var mStreamEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamEvent_name, &sStreamEvent_type, &sStreamEvent_eventTime, &sStreamEvent_code}}
+var m_StreamEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamEvents_member}}
+var mStreamFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamFilters_health}}
+var mStreamKey = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamKey_arn, &sStreamKey_value, &sStreamKey_channelArn, &sStreamKey_tags}}
+var m_StreamKeyArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamKeyArnList_member}}
+var m_StreamKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamKeyList_member}}
+var m_StreamKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamKeys_member}}
+var mStreamKeySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamKeySummary_arn, &sStreamKeySummary_channelArn, &sStreamKeySummary_tags}}
+var m_StreamList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamList_member}}
+var mStreamSession = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamSession_streamId, &sStreamSession_startTime, &sStreamSession_endTime, &sStreamSession_channel, &sStreamSession_ingestConfiguration, &sStreamSession_ingestConfigurations, &sStreamSession_recordingConfiguration, &sStreamSession_truncatedEvents, &sStreamSession_failoverSlateConfiguration}, Hash: &hStreamSession}
+var m_StreamSessionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamSessionList_member}}
+var mStreamSessionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamSessionSummary_streamId, &sStreamSessionSummary_startTime, &sStreamSessionSummary_endTime, &sStreamSessionSummary_hasErrorEvent}}
+var mStreamSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamSummary_channelArn, &sStreamSummary_streamId, &sStreamSummary_state, &sStreamSummary_health, &sStreamSummary_viewerCount, &sStreamSummary_startTime}}
+var mStreamUnavailable = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamUnavailable_accessControlAllowOrigin, &sStreamUnavailable_accessControlExposeHeaders, &sStreamUnavailable_cacheControl, &sStreamUnavailable_contentSecurityPolicy, &sStreamUnavailable_strictTransportSecurity, &sStreamUnavailable_xContentTypeOptions, &sStreamUnavailable_xFrameOptions, &sStreamUnavailable_xAmznErrorType, &sStreamUnavailable_exceptionMessage}, Hash: &hStreamUnavailable}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_accessControlAllowOrigin, &sThrottlingException_accessControlExposeHeaders, &sThrottlingException_cacheControl, &sThrottlingException_contentSecurityPolicy, &sThrottlingException_strictTransportSecurity, &sThrottlingException_xContentTypeOptions, &sThrottlingException_xFrameOptions, &sThrottlingException_xAmznErrorType, &sThrottlingException_exceptionMessage}, Hash: &hThrottlingException}
+var mThumbnailConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sThumbnailConfiguration_recordingMode, &sThumbnailConfiguration_targetIntervalSeconds, &sThumbnailConfiguration_resolution, &sThumbnailConfiguration_storage}}
+var mThumbnailConfigurationResolution = smithy.SchemaMembers{List: []*smithy.Schema{&sThumbnailConfigurationResolution_SD, &sThumbnailConfigurationResolution_HD, &sThumbnailConfigurationResolution_FULL_HD, &sThumbnailConfigurationResolution_LOWEST_RESOLUTION}}
+var m_ThumbnailConfigurationStorageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThumbnailConfigurationStorageList_member}}
+var mTranscodePreset = smithy.SchemaMembers{List: []*smithy.Schema{&sTranscodePreset_HigherBandwidthTranscodePreset, &sTranscodePreset_ConstrainedBandwidthTranscodePreset}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_accessControlAllowOrigin, &sValidationException_accessControlExposeHeaders, &sValidationException_cacheControl, &sValidationException_contentSecurityPolicy, &sValidationException_strictTransportSecurity, &sValidationException_xContentTypeOptions, &sValidationException_xFrameOptions, &sValidationException_xAmznErrorType, &sValidationException_exceptionMessage}, Hash: &hValidationException}
+var mVideoConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoConfiguration_avcProfile, &sVideoConfiguration_avcLevel, &sVideoConfiguration_codec, &sVideoConfiguration_encoder, &sVideoConfiguration_targetBitrate, &sVideoConfiguration_targetFramerate, &sVideoConfiguration_videoHeight, &sVideoConfiguration_videoWidth, &sVideoConfiguration_level, &sVideoConfiguration_track, &sVideoConfiguration_profile}, Hash: &hVideoConfiguration}
+var m_VideoConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VideoConfigurationList_member}}
+var mBatchGetChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetChannelRequest_arns}}
+var mBatchGetChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetChannelResponse_accessControlAllowOrigin, &sBatchGetChannelResponse_accessControlExposeHeaders, &sBatchGetChannelResponse_cacheControl, &sBatchGetChannelResponse_contentSecurityPolicy, &sBatchGetChannelResponse_strictTransportSecurity, &sBatchGetChannelResponse_xContentTypeOptions, &sBatchGetChannelResponse_xFrameOptions, &sBatchGetChannelResponse_channels, &sBatchGetChannelResponse_errors}, Hash: &hBatchGetChannelResponse}
+var mBatchGetStreamKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetStreamKeyRequest_arns}}
+var mBatchGetStreamKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetStreamKeyResponse_accessControlAllowOrigin, &sBatchGetStreamKeyResponse_accessControlExposeHeaders, &sBatchGetStreamKeyResponse_cacheControl, &sBatchGetStreamKeyResponse_contentSecurityPolicy, &sBatchGetStreamKeyResponse_strictTransportSecurity, &sBatchGetStreamKeyResponse_xContentTypeOptions, &sBatchGetStreamKeyResponse_xFrameOptions, &sBatchGetStreamKeyResponse_streamKeys, &sBatchGetStreamKeyResponse_errors}, Hash: &hBatchGetStreamKeyResponse}
+var mBatchStartViewerSessionRevocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchStartViewerSessionRevocationRequest_viewerSessions}}
+var mBatchStartViewerSessionRevocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchStartViewerSessionRevocationResponse_accessControlAllowOrigin, &sBatchStartViewerSessionRevocationResponse_accessControlExposeHeaders, &sBatchStartViewerSessionRevocationResponse_cacheControl, &sBatchStartViewerSessionRevocationResponse_contentSecurityPolicy, &sBatchStartViewerSessionRevocationResponse_strictTransportSecurity, &sBatchStartViewerSessionRevocationResponse_xContentTypeOptions, &sBatchStartViewerSessionRevocationResponse_xFrameOptions, &sBatchStartViewerSessionRevocationResponse_errors}}
+var mCreateAdConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAdConfigurationRequest_name, &sCreateAdConfigurationRequest_mediaTailorPlaybackConfigurations, &sCreateAdConfigurationRequest_postRollConfiguration, &sCreateAdConfigurationRequest_tags}}
+var mCreateAdConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAdConfigurationResponse_adConfiguration}}
+var mCreateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelRequest_name, &sCreateChannelRequest_latencyMode, &sCreateChannelRequest_type, &sCreateChannelRequest_authorized, &sCreateChannelRequest_recordingConfigurationArn, &sCreateChannelRequest_tags, &sCreateChannelRequest_insecureIngest, &sCreateChannelRequest_preset, &sCreateChannelRequest_playbackRestrictionPolicyArn, &sCreateChannelRequest_multitrackInputConfiguration, &sCreateChannelRequest_containerFormat, &sCreateChannelRequest_adConfigurationArn, &sCreateChannelRequest_failoverSlateConfigurationArn}, Hash: &hCreateChannelRequest}
+var mCreateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelResponse_channel, &sCreateChannelResponse_streamKey}}
+var mCreateFailoverSlateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFailoverSlateConfigurationRequest_name, &sCreateFailoverSlateConfigurationRequest_activationThresholdSeconds, &sCreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds, &sCreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds, &sCreateFailoverSlateConfigurationRequest_tags}}
+var mCreateFailoverSlateConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFailoverSlateConfigurationResponse_failoverSlateConfiguration}}
+var mCreatePlaybackRestrictionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePlaybackRestrictionPolicyRequest_allowedCountries, &sCreatePlaybackRestrictionPolicyRequest_allowedOrigins, &sCreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement, &sCreatePlaybackRestrictionPolicyRequest_name, &sCreatePlaybackRestrictionPolicyRequest_tags}}
+var mCreatePlaybackRestrictionPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy}}
+var mCreateRecordingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecordingConfigurationRequest_name, &sCreateRecordingConfigurationRequest_destinationConfiguration, &sCreateRecordingConfigurationRequest_tags, &sCreateRecordingConfigurationRequest_thumbnailConfiguration, &sCreateRecordingConfigurationRequest_recordingReconnectWindowSeconds, &sCreateRecordingConfigurationRequest_renditionConfiguration}}
+var mCreateRecordingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecordingConfigurationResponse_recordingConfiguration}}
+var mCreateStreamKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStreamKeyRequest_channelArn, &sCreateStreamKeyRequest_tags}}
+var mCreateStreamKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStreamKeyResponse_streamKey}}
+var mDeleteAdConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAdConfigurationRequest_arn}}
+var mDeleteChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelRequest_arn}}
+var mDeleteFailoverSlateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFailoverSlateConfigurationRequest_arn}}
+var mDeletePlaybackKeyPairRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePlaybackKeyPairRequest_arn}}
+var mDeletePlaybackRestrictionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePlaybackRestrictionPolicyRequest_arn}}
+var mDeleteRecordingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecordingConfigurationRequest_arn}}
+var mDeleteStreamKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStreamKeyRequest_arn}}
+var mGetAdConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdConfigurationRequest_arn}}
+var mGetAdConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdConfigurationResponse_adConfiguration}}
+var mGetChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelRequest_arn}}
+var mGetChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelResponse_channel}}
+var mGetFailoverSlateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFailoverSlateConfigurationRequest_arn}}
+var mGetFailoverSlateConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFailoverSlateConfigurationResponse_failoverSlateConfiguration}}
+var mGetPlaybackKeyPairRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlaybackKeyPairRequest_arn}}
+var mGetPlaybackKeyPairResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlaybackKeyPairResponse_keyPair}}
+var mGetPlaybackRestrictionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlaybackRestrictionPolicyRequest_arn}}
+var mGetPlaybackRestrictionPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy}}
+var mGetRecordingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordingConfigurationRequest_arn}}
+var mGetRecordingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordingConfigurationResponse_recordingConfiguration}}
+var mGetStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamRequest_channelArn}}
+var mGetStreamKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamKeyRequest_arn}}
+var mGetStreamKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamKeyResponse_streamKey}}
+var mGetStreamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamResponse_stream}}
+var mGetStreamSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamSessionRequest_channelArn, &sGetStreamSessionRequest_streamId}}
+var mGetStreamSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamSessionResponse_streamSession}}
+var mImportPlaybackKeyPairRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportPlaybackKeyPairRequest_publicKeyMaterial, &sImportPlaybackKeyPairRequest_name, &sImportPlaybackKeyPairRequest_tags}}
+var mImportPlaybackKeyPairResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportPlaybackKeyPairResponse_keyPair}}
+var mInsertAdBreakRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInsertAdBreakRequest_channelArn, &sInsertAdBreakRequest_durationSeconds, &sInsertAdBreakRequest_adBreakId, &sInsertAdBreakRequest_targetStartAt}}
+var mInsertAdBreakResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInsertAdBreakResponse_adBreakId, &sInsertAdBreakResponse_targetStartAt}}
+var mListAdConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdConfigurationsRequest_nextToken, &sListAdConfigurationsRequest_maxResults}}
+var mListAdConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdConfigurationsResponse_adConfigurations, &sListAdConfigurationsResponse_nextToken}}
+var mListChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsRequest_filterByName, &sListChannelsRequest_filterByRecordingConfigurationArn, &sListChannelsRequest_filterByPlaybackRestrictionPolicyArn, &sListChannelsRequest_filterByAdConfigurationArn, &sListChannelsRequest_filterByFailoverSlateConfigurationArn, &sListChannelsRequest_nextToken, &sListChannelsRequest_maxResults}}
+var mListChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsResponse_channels, &sListChannelsResponse_nextToken}}
+var mListFailoverSlateConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFailoverSlateConfigurationsRequest_nextToken, &sListFailoverSlateConfigurationsRequest_maxResults}}
+var mListFailoverSlateConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFailoverSlateConfigurationsResponse_failoverSlateConfigurations, &sListFailoverSlateConfigurationsResponse_nextToken}}
+var mListPlaybackKeyPairsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlaybackKeyPairsRequest_nextToken, &sListPlaybackKeyPairsRequest_maxResults}}
+var mListPlaybackKeyPairsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlaybackKeyPairsResponse_keyPairs, &sListPlaybackKeyPairsResponse_nextToken}}
+var mListPlaybackRestrictionPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlaybackRestrictionPoliciesRequest_nextToken, &sListPlaybackRestrictionPoliciesRequest_maxResults}}
+var mListPlaybackRestrictionPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies, &sListPlaybackRestrictionPoliciesResponse_nextToken}}
+var mListRecordingConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecordingConfigurationsRequest_nextToken, &sListRecordingConfigurationsRequest_maxResults}}
+var mListRecordingConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecordingConfigurationsResponse_recordingConfigurations, &sListRecordingConfigurationsResponse_nextToken}}
+var mListStreamKeysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamKeysRequest_channelArn, &sListStreamKeysRequest_nextToken, &sListStreamKeysRequest_maxResults}}
+var mListStreamKeysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamKeysResponse_streamKeys, &sListStreamKeysResponse_nextToken}}
+var mListStreamSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamSessionsRequest_channelArn, &sListStreamSessionsRequest_nextToken, &sListStreamSessionsRequest_maxResults}}
+var mListStreamSessionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamSessionsResponse_streamSessions, &sListStreamSessionsResponse_nextToken}}
+var mListStreamsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsRequest_filterBy, &sListStreamsRequest_nextToken, &sListStreamsRequest_maxResults}}
+var mListStreamsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsResponse_streams, &sListStreamsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mPutMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetadataRequest_channelArn, &sPutMetadataRequest_metadata}}
+var mStartViewerSessionRevocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartViewerSessionRevocationRequest_channelArn, &sStartViewerSessionRevocationRequest_viewerId, &sStartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo}}
+var mStopStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopStreamRequest_channelArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateAdConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAdConfigurationRequest_arn, &sUpdateAdConfigurationRequest_name, &sUpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations, &sUpdateAdConfigurationRequest_postRollConfiguration}}
+var mUpdateAdConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAdConfigurationResponse_adConfiguration}}
+var mUpdateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelRequest_arn, &sUpdateChannelRequest_name, &sUpdateChannelRequest_latencyMode, &sUpdateChannelRequest_type, &sUpdateChannelRequest_authorized, &sUpdateChannelRequest_recordingConfigurationArn, &sUpdateChannelRequest_insecureIngest, &sUpdateChannelRequest_preset, &sUpdateChannelRequest_playbackRestrictionPolicyArn, &sUpdateChannelRequest_multitrackInputConfiguration, &sUpdateChannelRequest_containerFormat, &sUpdateChannelRequest_adConfigurationArn, &sUpdateChannelRequest_failoverSlateConfigurationArn}, Hash: &hUpdateChannelRequest}
+var mUpdateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelResponse_channel}}
+var mUpdateFailoverSlateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFailoverSlateConfigurationRequest_arn, &sUpdateFailoverSlateConfigurationRequest_name, &sUpdateFailoverSlateConfigurationRequest_activationThresholdSeconds, &sUpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds, &sUpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds}}
+var mUpdateFailoverSlateConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration}}
+var mUpdatePlaybackRestrictionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePlaybackRestrictionPolicyRequest_arn, &sUpdatePlaybackRestrictionPolicyRequest_allowedCountries, &sUpdatePlaybackRestrictionPolicyRequest_allowedOrigins, &sUpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement, &sUpdatePlaybackRestrictionPolicyRequest_name}}
+var mUpdatePlaybackRestrictionPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy}}
+
+var hAccessDeniedException = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hChannel = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 0, 13, 0, 0, 0, 2, 0, 0, 7, 0, 0, 0, 0, 0, 5, 0, 16, 0, 0, 0, 0, 0, 0,
+	0, 10, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 8, 0, 6, 0, 0, 0, 0, 0, 0,
+	12, 0, 0, 0, 14, 0, 0, 3, 0, 11, 0, 15, 17, 0, 0, 0,
+}}
+var hChannelNotBroadcasting = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hChannelSummary = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 0, 0, 0, 10, 3, 0, 0, 12, 9, 0, 7, 4, 11, 1, 0, 5, 0, 0, 0, 0, 0, 2, 0,
+	0, 0, 0, 0, 8, 0, 6, 0,
+}}
+var hConflictException = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hInternalServerException = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hPendingVerification = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hResourceNotFoundException = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hServiceQuotaExceededException = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hServiceUnavailable = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hStreamSession = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	2, 9, 0, 0, 3, 0, 6, 4, 0, 0, 8, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0,
+	0, 0, 0, 0, 0, 0, 1, 0,
+}}
+var hStreamUnavailable = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hThrottlingException = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hValidationException = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 8, 0,
+}}
+var hVideoConfiguration = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 1, 4, 0, 8, 0, 0, 0, 2, 0, 11, 0, 0, 0, 0, 0, 0, 3, 0, 0, 5, 0, 0, 0,
+	0, 0, 6, 0, 10, 0, 9, 7,
+}}
+var hBatchGetChannelResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 7, 9, 0, 0, 1, 0, 0, 0, 8, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 0, 0,
+}}
+var hBatchGetStreamKeyResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 7, 9, 8, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 0, 4, 5, 0, 0,
+}}
+var hCreateChannelRequest = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 11, 0, 2, 0, 0, 10, 0, 0, 12, 0, 1, 0, 0, 0, 0, 0, 9, 4, 0, 0, 3, 8,
+	6, 0, 0, 5, 7, 0, 0, 13,
+}}
+var hUpdateChannelRequest = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 0, 0, 0, 9, 3, 0, 0, 13, 8, 0, 7, 5, 12, 1, 0, 6, 0, 0, 0, 0, 0, 2, 0,
+	0, 10, 0, 0, 4, 11, 0, 0,
+}}
+
+var sBatchGetChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetChannel, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetChannel})
+var sBatchGetStreamKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetStreamKey, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetStreamKey})
+var sBatchStartViewerSessionRevocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchStartViewerSessionRevocation, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eBatchStartViewerSessionRevocation})
+var sCreateAdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateAdConfiguration})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannel})
+var sCreateFailoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFailoverSlateConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateFailoverSlateConfiguration})
+var sCreatePlaybackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlaybackRestrictionPolicy, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreatePlaybackRestrictionPolicy})
+var sCreateRecordingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecordingConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateRecordingConfiguration})
+var sCreateStreamKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamKey, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreateStreamKey})
+var sDeleteAdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAdConfiguration})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannel})
+var sDeleteFailoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFailoverSlateConfiguration, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFailoverSlateConfiguration})
+var sDeletePlaybackKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackKeyPair, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeletePlaybackKeyPair})
+var sDeletePlaybackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackRestrictionPolicy, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeletePlaybackRestrictionPolicy})
+var sDeleteRecordingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecordingConfiguration, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRecordingConfiguration})
+var sDeleteStreamKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamKey, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteStreamKey})
+var sGetAdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdConfiguration, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetAdConfiguration})
+var sGetChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannel, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetChannel})
+var sGetFailoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFailoverSlateConfiguration, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetFailoverSlateConfiguration})
+var sGetPlaybackKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackKeyPair, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetPlaybackKeyPair})
+var sGetPlaybackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackRestrictionPolicy, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eGetPlaybackRestrictionPolicy})
+var sGetRecordingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordingConfiguration, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eGetRecordingConfiguration})
+var sGetStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStream, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eGetStream})
+var sGetStreamKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamKey, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetStreamKey})
+var sGetStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSession, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetStreamSession})
+var sImportPlaybackKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportPlaybackKeyPair, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eImportPlaybackKeyPair})
+var sInsertAdBreak = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsertAdBreak, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eInsertAdBreak})
+var sListAdConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdConfigurations, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eListAdConfigurations})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListChannels})
+var sListFailoverSlateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFailoverSlateConfigurations, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eListFailoverSlateConfigurations})
+var sListPlaybackKeyPairs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackKeyPairs, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListPlaybackKeyPairs})
+var sListPlaybackRestrictionPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackRestrictionPolicies, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListPlaybackRestrictionPolicies})
+var sListRecordingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordingConfigurations, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eListRecordingConfigurations})
+var sListStreamKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamKeys, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListStreamKeys})
+var sListStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreams, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListStreams})
+var sListStreamSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessions, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListStreamSessions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetadata, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &ePutMetadata})
+var sStartViewerSessionRevocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartViewerSessionRevocation, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eStartViewerSessionRevocation})
+var sStopStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopStream, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eStopStream})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAdConfiguration, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAdConfiguration})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannel})
+var sUpdateFailoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFailoverSlateConfiguration, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFailoverSlateConfiguration})
+var sUpdatePlaybackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePlaybackRestrictionPolicy, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePlaybackRestrictionPolicy})
+var s_AmazonInteractiveVideoService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonInteractiveVideoService, Type: smithy.ShapeTypeService, Ext: &e_AmazonInteractiveVideoService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_accessControlAllowOrigin})
+var sAccessDeniedException_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_accessControlExposeHeaders})
+var sAccessDeniedException_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_cacheControl})
+var sAccessDeniedException_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_contentSecurityPolicy})
+var sAccessDeniedException_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_strictTransportSecurity})
+var sAccessDeniedException_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_xContentTypeOptions})
+var sAccessDeniedException_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_xFrameOptions})
+var sAccessDeniedException_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_xAmznErrorType})
+var sAccessDeniedException_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_exceptionMessage})
+var s_AdBreakId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdBreakId, Type: smithy.ShapeTypeString, Ext: &e_AdBreakId})
+var sAdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdConfiguration, Members: &mAdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAdConfiguration})
+var sAdConfiguration_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eAdConfiguration_arn})
+var sAdConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AdConfigurationName, Type: smithy.ShapeTypeString, Ext: &eAdConfiguration_name})
+var sAdConfiguration_mediaTailorPlaybackConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaTailorPlaybackConfigurations", ID: &i_MediaTailorPlaybackConfigurationsList, Members: &m_MediaTailorPlaybackConfigurationsList, Type: smithy.ShapeTypeList, Ext: &eAdConfiguration_mediaTailorPlaybackConfigurations})
+var sAdConfiguration_postRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postRollConfiguration", ID: &iPostRollConfiguration, Members: &mPostRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAdConfiguration_postRollConfiguration})
+var sAdConfiguration_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eAdConfiguration_tags})
+var s_AdConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_AdConfigurationArn})
+var s_AdConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdConfigurationList, Members: &m_AdConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_AdConfigurationList})
+var s_AdConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdConfigurationSummary, Members: &mAdConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AdConfigurationList_member})
+var s_AdConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_AdConfigurationName})
+var sAdConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdConfigurationSummary, Members: &mAdConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &eAdConfigurationSummary})
+var sAdConfigurationSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eAdConfigurationSummary_arn})
+var sAdConfigurationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AdConfigurationName, Type: smithy.ShapeTypeString, Ext: &eAdConfigurationSummary_name})
+var sAdConfigurationSummary_mediaTailorPlaybackConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaTailorPlaybackConfigurations", ID: &i_MediaTailorPlaybackConfigurationsList, Members: &m_MediaTailorPlaybackConfigurationsList, Type: smithy.ShapeTypeList, Ext: &eAdConfigurationSummary_mediaTailorPlaybackConfigurations})
+var sAdConfigurationSummary_postRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postRollConfiguration", ID: &iPostRollConfiguration, Members: &mPostRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAdConfigurationSummary_postRollConfiguration})
+var sAdConfigurationSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eAdConfigurationSummary_tags})
+var s_AdDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdDurationSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AdDurationSeconds})
+var sAudioConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioConfiguration, Members: &mAudioConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAudioConfiguration})
+var sAudioConfiguration_codec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codec", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAudioConfiguration_codec})
+var sAudioConfiguration_targetBitrate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBitrate", ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &eAudioConfiguration_targetBitrate})
+var sAudioConfiguration_sampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleRate", ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &eAudioConfiguration_sampleRate})
+var sAudioConfiguration_channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channels", ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &eAudioConfiguration_channels})
+var sAudioConfiguration_track = smithy.NewStaticSchema(smithy.StaticSchema{Member: "track", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAudioConfiguration_track})
+var s_AudioConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudioConfigurationList, Members: &m_AudioConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_AudioConfigurationList})
+var s_AudioConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAudioConfiguration, Members: &mAudioConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_AudioConfigurationList_member})
+var sBatchError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchError, Members: &mBatchError, Type: smithy.ShapeTypeStructure, Ext: &eBatchError})
+var sBatchError_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eBatchError_arn})
+var sBatchError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_errorCode, Type: smithy.ShapeTypeString, Ext: &eBatchError_code})
+var sBatchError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchError_message})
+var s_BatchErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchErrors, Members: &m_BatchErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchErrors})
+var s_BatchErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchError, Members: &mBatchError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchErrors_member})
+var sBatchStartViewerSessionRevocationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchStartViewerSessionRevocationError, Members: &mBatchStartViewerSessionRevocationError, Type: smithy.ShapeTypeStructure, Ext: &eBatchStartViewerSessionRevocationError})
+var sBatchStartViewerSessionRevocationError_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationError_channelArn})
+var sBatchStartViewerSessionRevocationError_viewerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerId", ID: &i_ViewerId, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationError_viewerId})
+var sBatchStartViewerSessionRevocationError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_errorCode, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationError_code})
+var sBatchStartViewerSessionRevocationError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationError_message})
+var s_BatchStartViewerSessionRevocationErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchStartViewerSessionRevocationErrors, Members: &m_BatchStartViewerSessionRevocationErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchStartViewerSessionRevocationErrors})
+var s_BatchStartViewerSessionRevocationErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchStartViewerSessionRevocationError, Members: &mBatchStartViewerSessionRevocationError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchStartViewerSessionRevocationErrors_member})
+var sBatchStartViewerSessionRevocationViewerSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchStartViewerSessionRevocationViewerSession, Members: &mBatchStartViewerSessionRevocationViewerSession, Type: smithy.ShapeTypeStructure, Ext: &eBatchStartViewerSessionRevocationViewerSession})
+var sBatchStartViewerSessionRevocationViewerSession_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationViewerSession_channelArn})
+var sBatchStartViewerSessionRevocationViewerSession_viewerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerId", ID: &i_ViewerId, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationViewerSession_viewerId})
+var sBatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerSessionVersionsLessThanOrEqualTo", ID: &i_ViewerSessionVersion, Type: smithy.ShapeTypeInteger, Ext: &eBatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo})
+var s_BatchStartViewerSessionRevocationViewerSessionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchStartViewerSessionRevocationViewerSessionList, Members: &m_BatchStartViewerSessionRevocationViewerSessionList, Type: smithy.ShapeTypeList, Ext: &e_BatchStartViewerSessionRevocationViewerSessionList})
+var s_BatchStartViewerSessionRevocationViewerSessionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchStartViewerSessionRevocationViewerSession, Members: &mBatchStartViewerSessionRevocationViewerSession, Type: smithy.ShapeTypeStructure, Ext: &e_BatchStartViewerSessionRevocationViewerSessionList_member})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eChannel})
+var sChannel_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eChannel_arn})
+var sChannel_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eChannel_name})
+var sChannel_latencyMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latencyMode", ID: &i_ChannelLatencyMode, Type: smithy.ShapeTypeString, Ext: &eChannel_latencyMode})
+var sChannel_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eChannel_type})
+var sChannel_recordingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfigurationArn", ID: &i_ChannelRecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eChannel_recordingConfigurationArn})
+var sChannel_ingestEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestEndpoint", ID: &i_IngestEndpoint, Type: smithy.ShapeTypeString, Ext: &eChannel_ingestEndpoint})
+var sChannel_playbackUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackUrl", ID: &i_PlaybackURL, Type: smithy.ShapeTypeString, Ext: &eChannel_playbackUrl})
+var sChannel_authorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorized", ID: &i_IsAuthorized, Type: smithy.ShapeTypeBoolean, Ext: &eChannel_authorized})
+var sChannel_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eChannel_tags})
+var sChannel_insecureIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insecureIngest", ID: &i_InsecureIngest, Type: smithy.ShapeTypeBoolean, Ext: &eChannel_insecureIngest})
+var sChannel_preset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preset", ID: &iTranscodePreset, Members: &mTranscodePreset, Type: smithy.ShapeTypeEnum, Ext: &eChannel_preset})
+var sChannel_srt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "srt", ID: &iSrt, Members: &mSrt, Type: smithy.ShapeTypeStructure, Ext: &eChannel_srt})
+var sChannel_playbackRestrictionPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicyArn", ID: &i_ChannelPlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eChannel_playbackRestrictionPolicyArn})
+var sChannel_multitrackInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "multitrackInputConfiguration", ID: &iMultitrackInputConfiguration, Members: &mMultitrackInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eChannel_multitrackInputConfiguration})
+var sChannel_containerFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerFormat", ID: &i_ContainerFormat, Type: smithy.ShapeTypeString, Ext: &eChannel_containerFormat})
+var sChannel_adConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfigurationArn", ID: &i_ChannelAdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eChannel_adConfigurationArn})
+var sChannel_failoverSlateConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfigurationArn", ID: &i_ChannelFailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eChannel_failoverSlateConfigurationArn})
+var s_ChannelAdConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelAdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelAdConfigurationArn})
+var s_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelArn})
+var s_ChannelArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelArnList, Members: &m_ChannelArnList, Type: smithy.ShapeTypeList, Ext: &e_ChannelArnList})
+var s_ChannelArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelArnList_member})
+var s_ChannelFailoverSlateConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelFailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelFailoverSlateConfigurationArn})
+var s_ChannelLatencyMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelLatencyMode, Type: smithy.ShapeTypeString, Ext: &e_ChannelLatencyMode})
+var s_ChannelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelList, Members: &m_ChannelList, Type: smithy.ShapeTypeList, Ext: &e_ChannelList})
+var s_ChannelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelList_member})
+var s_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &e_ChannelName})
+var sChannelNotBroadcasting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelNotBroadcasting, Members: &mChannelNotBroadcasting, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eChannelNotBroadcasting})
+var sChannelNotBroadcasting_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_accessControlAllowOrigin})
+var sChannelNotBroadcasting_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_accessControlExposeHeaders})
+var sChannelNotBroadcasting_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_cacheControl})
+var sChannelNotBroadcasting_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_contentSecurityPolicy})
+var sChannelNotBroadcasting_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_strictTransportSecurity})
+var sChannelNotBroadcasting_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_xContentTypeOptions})
+var sChannelNotBroadcasting_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_xFrameOptions})
+var sChannelNotBroadcasting_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_xAmznErrorType})
+var sChannelNotBroadcasting_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eChannelNotBroadcasting_exceptionMessage})
+var s_ChannelPlaybackRestrictionPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelPlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelPlaybackRestrictionPolicyArn})
+var s_ChannelRecordingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelRecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelRecordingConfigurationArn})
+var s_Channels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList, Ext: &e_Channels})
+var s_Channels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &e_Channels_member})
+var sChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelSummary})
+var sChannelSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_arn})
+var sChannelSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_name})
+var sChannelSummary_latencyMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latencyMode", ID: &i_ChannelLatencyMode, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_latencyMode})
+var sChannelSummary_authorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorized", ID: &i_IsAuthorized, Type: smithy.ShapeTypeBoolean, Ext: &eChannelSummary_authorized})
+var sChannelSummary_recordingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfigurationArn", ID: &i_ChannelRecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_recordingConfigurationArn})
+var sChannelSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eChannelSummary_tags})
+var sChannelSummary_insecureIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insecureIngest", ID: &i_InsecureIngest, Type: smithy.ShapeTypeBoolean, Ext: &eChannelSummary_insecureIngest})
+var sChannelSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eChannelSummary_type})
+var sChannelSummary_preset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preset", ID: &iTranscodePreset, Members: &mTranscodePreset, Type: smithy.ShapeTypeEnum, Ext: &eChannelSummary_preset})
+var sChannelSummary_playbackRestrictionPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicyArn", ID: &i_ChannelPlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_playbackRestrictionPolicyArn})
+var sChannelSummary_adConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfigurationArn", ID: &i_ChannelAdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_adConfigurationArn})
+var sChannelSummary_failoverSlateConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfigurationArn", ID: &i_ChannelFailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_failoverSlateConfigurationArn})
+var sChannelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eChannelType})
+var sChannelType_BasicChannelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicChannelType", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_BasicChannelType})
+var sChannelType_StandardChannelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StandardChannelType", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_StandardChannelType})
+var sChannelType_AdvancedSDChannelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedSDChannelType", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_AdvancedSDChannelType})
+var sChannelType_AdvancedHDChannelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedHDChannelType", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_AdvancedHDChannelType})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eConflictException_accessControlAllowOrigin})
+var sConflictException_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eConflictException_accessControlExposeHeaders})
+var sConflictException_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eConflictException_cacheControl})
+var sConflictException_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eConflictException_contentSecurityPolicy})
+var sConflictException_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eConflictException_strictTransportSecurity})
+var sConflictException_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eConflictException_xContentTypeOptions})
+var sConflictException_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eConflictException_xFrameOptions})
+var sConflictException_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eConflictException_xAmznErrorType})
+var sConflictException_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_exceptionMessage})
+var s_ContainerFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerFormat, Type: smithy.ShapeTypeString, Ext: &e_ContainerFormat})
+var sDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfiguration})
+var sDestinationConfiguration_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfiguration_s3})
+var s_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorCode, Type: smithy.ShapeTypeString, Ext: &e_errorCode})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var s_FailoverSlateActivationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailoverSlateActivationThresholdSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_FailoverSlateActivationThresholdSeconds})
+var sFailoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverSlateConfiguration, Members: &mFailoverSlateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFailoverSlateConfiguration})
+var sFailoverSlateConfiguration_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_FailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eFailoverSlateConfiguration_arn})
+var sFailoverSlateConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FailoverSlateConfigurationName, Type: smithy.ShapeTypeString, Ext: &eFailoverSlateConfiguration_name})
+var sFailoverSlateConfiguration_activationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationThresholdSeconds", ID: &i_FailoverSlateActivationThresholdSeconds, Type: smithy.ShapeTypeInteger, Ext: &eFailoverSlateConfiguration_activationThresholdSeconds})
+var sFailoverSlateConfiguration_minSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minSlateDisplaySeconds", ID: &i_FailoverSlateMinDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eFailoverSlateConfiguration_minSlateDisplaySeconds})
+var sFailoverSlateConfiguration_maxSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSlateDisplaySeconds", ID: &i_FailoverSlateMaxDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eFailoverSlateConfiguration_maxSlateDisplaySeconds})
+var sFailoverSlateConfiguration_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_FailoverSlateConfigurationState, Type: smithy.ShapeTypeString, Ext: &eFailoverSlateConfiguration_state})
+var sFailoverSlateConfiguration_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eFailoverSlateConfiguration_tags})
+var s_FailoverSlateConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_FailoverSlateConfigurationArn})
+var s_FailoverSlateConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailoverSlateConfigurationList, Members: &m_FailoverSlateConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_FailoverSlateConfigurationList})
+var s_FailoverSlateConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFailoverSlateConfigurationSummary, Members: &mFailoverSlateConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FailoverSlateConfigurationList_member})
+var s_FailoverSlateConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailoverSlateConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_FailoverSlateConfigurationName})
+var s_FailoverSlateConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailoverSlateConfigurationState, Type: smithy.ShapeTypeString, Ext: &e_FailoverSlateConfigurationState})
+var sFailoverSlateConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverSlateConfigurationSummary, Members: &mFailoverSlateConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &eFailoverSlateConfigurationSummary})
+var sFailoverSlateConfigurationSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_FailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eFailoverSlateConfigurationSummary_arn})
+var sFailoverSlateConfigurationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FailoverSlateConfigurationName, Type: smithy.ShapeTypeString, Ext: &eFailoverSlateConfigurationSummary_name})
+var sFailoverSlateConfigurationSummary_activationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationThresholdSeconds", ID: &i_FailoverSlateActivationThresholdSeconds, Type: smithy.ShapeTypeInteger, Ext: &eFailoverSlateConfigurationSummary_activationThresholdSeconds})
+var sFailoverSlateConfigurationSummary_minSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minSlateDisplaySeconds", ID: &i_FailoverSlateMinDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eFailoverSlateConfigurationSummary_minSlateDisplaySeconds})
+var sFailoverSlateConfigurationSummary_maxSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSlateDisplaySeconds", ID: &i_FailoverSlateMaxDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eFailoverSlateConfigurationSummary_maxSlateDisplaySeconds})
+var sFailoverSlateConfigurationSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_FailoverSlateConfigurationState, Type: smithy.ShapeTypeString, Ext: &eFailoverSlateConfigurationSummary_state})
+var sFailoverSlateConfigurationSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eFailoverSlateConfigurationSummary_tags})
+var s_FailoverSlateMaxDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailoverSlateMaxDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &e_FailoverSlateMaxDisplaySeconds})
+var s_FailoverSlateMinDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailoverSlateMinDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &e_FailoverSlateMinDisplaySeconds})
+var sIngestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestConfiguration, Members: &mIngestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngestConfiguration})
+var sIngestConfiguration_video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "video", ID: &iVideoConfiguration, Members: &mVideoConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngestConfiguration_video})
+var sIngestConfiguration_audio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audio", ID: &iAudioConfiguration, Members: &mAudioConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngestConfiguration_audio})
+var sIngestConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestConfigurations, Members: &mIngestConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eIngestConfigurations})
+var sIngestConfigurations_videoConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "videoConfigurations", ID: &i_VideoConfigurationList, Members: &m_VideoConfigurationList, Type: smithy.ShapeTypeList, Ext: &eIngestConfigurations_videoConfigurations})
+var sIngestConfigurations_audioConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioConfigurations", ID: &i_AudioConfigurationList, Members: &m_AudioConfigurationList, Type: smithy.ShapeTypeList, Ext: &eIngestConfigurations_audioConfigurations})
+var s_IngestEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestEndpoint, Type: smithy.ShapeTypeString, Ext: &e_IngestEndpoint})
+var s_InsecureIngest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsecureIngest, Type: smithy.ShapeTypeBoolean, Ext: &e_InsecureIngest})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_accessControlAllowOrigin})
+var sInternalServerException_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_accessControlExposeHeaders})
+var sInternalServerException_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_cacheControl})
+var sInternalServerException_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_contentSecurityPolicy})
+var sInternalServerException_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_strictTransportSecurity})
+var sInternalServerException_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_xContentTypeOptions})
+var sInternalServerException_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_xFrameOptions})
+var sInternalServerException_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_xAmznErrorType})
+var sInternalServerException_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_exceptionMessage})
+var s_IsAuthorized = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsAuthorized, Type: smithy.ShapeTypeBoolean, Ext: &e_IsAuthorized})
+var s_IsMultitrackInputEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsMultitrackInputEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_IsMultitrackInputEnabled})
+var s_MaxAdConfigurationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxAdConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxAdConfigurationResults})
+var s_MaxChannelResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxChannelResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxChannelResults})
+var s_MaxFailoverSlateConfigurationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxFailoverSlateConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxFailoverSlateConfigurationResults})
+var s_MaxPlaybackKeyPairResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPlaybackKeyPairResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxPlaybackKeyPairResults})
+var s_MaxPlaybackRestrictionPolicyResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPlaybackRestrictionPolicyResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxPlaybackRestrictionPolicyResults})
+var s_MaxRecordingConfigurationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRecordingConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxRecordingConfigurationResults})
+var s_MaxStreamKeyResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxStreamKeyResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxStreamKeyResults})
+var s_MaxStreamResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxStreamResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxStreamResults})
+var sMediaTailorPlaybackConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaTailorPlaybackConfiguration, Members: &mMediaTailorPlaybackConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMediaTailorPlaybackConfiguration})
+var sMediaTailorPlaybackConfiguration_playbackConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackConfigurationArn", ID: &i_MediaTailorPlaybackConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eMediaTailorPlaybackConfiguration_playbackConfigurationArn})
+var s_MediaTailorPlaybackConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaTailorPlaybackConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_MediaTailorPlaybackConfigurationArn})
+var s_MediaTailorPlaybackConfigurationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaTailorPlaybackConfigurationsList, Members: &m_MediaTailorPlaybackConfigurationsList, Type: smithy.ShapeTypeList, Ext: &e_MediaTailorPlaybackConfigurationsList})
+var s_MediaTailorPlaybackConfigurationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaTailorPlaybackConfiguration, Members: &mMediaTailorPlaybackConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_MediaTailorPlaybackConfigurationsList_member})
+var sMultitrackInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultitrackInputConfiguration, Members: &mMultitrackInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMultitrackInputConfiguration})
+var sMultitrackInputConfiguration_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i_IsMultitrackInputEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eMultitrackInputConfiguration_enabled})
+var sMultitrackInputConfiguration_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &iMultitrackPolicy, Members: &mMultitrackPolicy, Type: smithy.ShapeTypeEnum, Ext: &eMultitrackInputConfiguration_policy})
+var sMultitrackInputConfiguration_maximumResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumResolution", ID: &iMultitrackMaximumResolution, Members: &mMultitrackMaximumResolution, Type: smithy.ShapeTypeEnum, Ext: &eMultitrackInputConfiguration_maximumResolution})
+var sMultitrackMaximumResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultitrackMaximumResolution, Members: &mMultitrackMaximumResolution, Type: smithy.ShapeTypeEnum, Ext: &eMultitrackMaximumResolution})
+var sMultitrackMaximumResolution_SD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMultitrackMaximumResolution_SD})
+var sMultitrackMaximumResolution_HD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMultitrackMaximumResolution_HD})
+var sMultitrackMaximumResolution_FULL_HD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_HD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMultitrackMaximumResolution_FULL_HD})
+var sMultitrackPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultitrackPolicy, Members: &mMultitrackPolicy, Type: smithy.ShapeTypeEnum, Ext: &eMultitrackPolicy})
+var sMultitrackPolicy_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMultitrackPolicy_ALLOW})
+var sMultitrackPolicy_REQUIRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMultitrackPolicy_REQUIRE})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPendingVerification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingVerification, Members: &mPendingVerification, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &ePendingVerification})
+var sPendingVerification_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_accessControlAllowOrigin})
+var sPendingVerification_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_accessControlExposeHeaders})
+var sPendingVerification_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_cacheControl})
+var sPendingVerification_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_contentSecurityPolicy})
+var sPendingVerification_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_strictTransportSecurity})
+var sPendingVerification_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_xContentTypeOptions})
+var sPendingVerification_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_xFrameOptions})
+var sPendingVerification_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_xAmznErrorType})
+var sPendingVerification_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_exceptionMessage})
+var sPlaybackKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackKeyPair, Members: &mPlaybackKeyPair, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackKeyPair})
+var sPlaybackKeyPair_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackKeyPairArn, Type: smithy.ShapeTypeString, Ext: &ePlaybackKeyPair_arn})
+var sPlaybackKeyPair_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PlaybackKeyPairName, Type: smithy.ShapeTypeString, Ext: &ePlaybackKeyPair_name})
+var sPlaybackKeyPair_fingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fingerprint", ID: &i_PlaybackKeyPairFingerprint, Type: smithy.ShapeTypeString, Ext: &ePlaybackKeyPair_fingerprint})
+var sPlaybackKeyPair_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ePlaybackKeyPair_tags})
+var s_PlaybackKeyPairArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackKeyPairArn, Type: smithy.ShapeTypeString, Ext: &e_PlaybackKeyPairArn})
+var s_PlaybackKeyPairFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackKeyPairFingerprint, Type: smithy.ShapeTypeString, Ext: &e_PlaybackKeyPairFingerprint})
+var s_PlaybackKeyPairList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackKeyPairList, Members: &m_PlaybackKeyPairList, Type: smithy.ShapeTypeList, Ext: &e_PlaybackKeyPairList})
+var s_PlaybackKeyPairList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlaybackKeyPairSummary, Members: &mPlaybackKeyPairSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PlaybackKeyPairList_member})
+var s_PlaybackKeyPairName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackKeyPairName, Type: smithy.ShapeTypeString, Ext: &e_PlaybackKeyPairName})
+var sPlaybackKeyPairSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackKeyPairSummary, Members: &mPlaybackKeyPairSummary, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackKeyPairSummary})
+var sPlaybackKeyPairSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackKeyPairArn, Type: smithy.ShapeTypeString, Ext: &ePlaybackKeyPairSummary_arn})
+var sPlaybackKeyPairSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PlaybackKeyPairName, Type: smithy.ShapeTypeString, Ext: &ePlaybackKeyPairSummary_name})
+var sPlaybackKeyPairSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ePlaybackKeyPairSummary_tags})
+var s_PlaybackPublicKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackPublicKeyMaterial, Type: smithy.ShapeTypeString, Ext: &e_PlaybackPublicKeyMaterial})
+var sPlaybackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackRestrictionPolicy, Members: &mPlaybackRestrictionPolicy, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackRestrictionPolicy})
+var sPlaybackRestrictionPolicy_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &ePlaybackRestrictionPolicy_arn})
+var sPlaybackRestrictionPolicy_allowedCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedCountries", ID: &i_PlaybackRestrictionPolicyAllowedCountryList, Members: &m_PlaybackRestrictionPolicyAllowedCountryList, Type: smithy.ShapeTypeList, Ext: &ePlaybackRestrictionPolicy_allowedCountries})
+var sPlaybackRestrictionPolicy_allowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedOrigins", ID: &i_PlaybackRestrictionPolicyAllowedOriginList, Members: &m_PlaybackRestrictionPolicyAllowedOriginList, Type: smithy.ShapeTypeList, Ext: &ePlaybackRestrictionPolicy_allowedOrigins})
+var sPlaybackRestrictionPolicy_enableStrictOriginEnforcement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableStrictOriginEnforcement", ID: &i_PlaybackRestrictionPolicyEnableStrictOriginEnforcement, Type: smithy.ShapeTypeBoolean, Ext: &ePlaybackRestrictionPolicy_enableStrictOriginEnforcement})
+var sPlaybackRestrictionPolicy_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PlaybackRestrictionPolicyName, Type: smithy.ShapeTypeString, Ext: &ePlaybackRestrictionPolicy_name})
+var sPlaybackRestrictionPolicy_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ePlaybackRestrictionPolicy_tags})
+var s_PlaybackRestrictionPolicyAllowedCountry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyAllowedCountry, Type: smithy.ShapeTypeString, Ext: &e_PlaybackRestrictionPolicyAllowedCountry})
+var s_PlaybackRestrictionPolicyAllowedCountryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyAllowedCountryList, Members: &m_PlaybackRestrictionPolicyAllowedCountryList, Type: smithy.ShapeTypeList, Ext: &e_PlaybackRestrictionPolicyAllowedCountryList})
+var s_PlaybackRestrictionPolicyAllowedCountryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PlaybackRestrictionPolicyAllowedCountry, Type: smithy.ShapeTypeString, Ext: &e_PlaybackRestrictionPolicyAllowedCountryList_member})
+var s_PlaybackRestrictionPolicyAllowedOrigin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyAllowedOrigin, Type: smithy.ShapeTypeString, Ext: &e_PlaybackRestrictionPolicyAllowedOrigin})
+var s_PlaybackRestrictionPolicyAllowedOriginList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyAllowedOriginList, Members: &m_PlaybackRestrictionPolicyAllowedOriginList, Type: smithy.ShapeTypeList, Ext: &e_PlaybackRestrictionPolicyAllowedOriginList})
+var s_PlaybackRestrictionPolicyAllowedOriginList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PlaybackRestrictionPolicyAllowedOrigin, Type: smithy.ShapeTypeString, Ext: &e_PlaybackRestrictionPolicyAllowedOriginList_member})
+var s_PlaybackRestrictionPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &e_PlaybackRestrictionPolicyArn})
+var s_PlaybackRestrictionPolicyEnableStrictOriginEnforcement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyEnableStrictOriginEnforcement, Type: smithy.ShapeTypeBoolean, Ext: &e_PlaybackRestrictionPolicyEnableStrictOriginEnforcement})
+var s_PlaybackRestrictionPolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyList, Members: &m_PlaybackRestrictionPolicyList, Type: smithy.ShapeTypeList, Ext: &e_PlaybackRestrictionPolicyList})
+var s_PlaybackRestrictionPolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlaybackRestrictionPolicySummary, Members: &mPlaybackRestrictionPolicySummary, Type: smithy.ShapeTypeStructure, Ext: &e_PlaybackRestrictionPolicyList_member})
+var s_PlaybackRestrictionPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackRestrictionPolicyName, Type: smithy.ShapeTypeString, Ext: &e_PlaybackRestrictionPolicyName})
+var sPlaybackRestrictionPolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackRestrictionPolicySummary, Members: &mPlaybackRestrictionPolicySummary, Type: smithy.ShapeTypeStructure, Ext: &ePlaybackRestrictionPolicySummary})
+var sPlaybackRestrictionPolicySummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &ePlaybackRestrictionPolicySummary_arn})
+var sPlaybackRestrictionPolicySummary_allowedCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedCountries", ID: &i_PlaybackRestrictionPolicyAllowedCountryList, Members: &m_PlaybackRestrictionPolicyAllowedCountryList, Type: smithy.ShapeTypeList, Ext: &ePlaybackRestrictionPolicySummary_allowedCountries})
+var sPlaybackRestrictionPolicySummary_allowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedOrigins", ID: &i_PlaybackRestrictionPolicyAllowedOriginList, Members: &m_PlaybackRestrictionPolicyAllowedOriginList, Type: smithy.ShapeTypeList, Ext: &ePlaybackRestrictionPolicySummary_allowedOrigins})
+var sPlaybackRestrictionPolicySummary_enableStrictOriginEnforcement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableStrictOriginEnforcement", ID: &i_PlaybackRestrictionPolicyEnableStrictOriginEnforcement, Type: smithy.ShapeTypeBoolean, Ext: &ePlaybackRestrictionPolicySummary_enableStrictOriginEnforcement})
+var sPlaybackRestrictionPolicySummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PlaybackRestrictionPolicyName, Type: smithy.ShapeTypeString, Ext: &ePlaybackRestrictionPolicySummary_name})
+var sPlaybackRestrictionPolicySummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ePlaybackRestrictionPolicySummary_tags})
+var s_PlaybackURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaybackURL, Type: smithy.ShapeTypeString, Ext: &e_PlaybackURL})
+var sPostRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostRollConfiguration, Members: &mPostRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePostRollConfiguration})
+var sPostRollConfiguration_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &i_AdDurationSeconds, Type: smithy.ShapeTypeInteger, Ext: &ePostRollConfiguration_durationSeconds})
+var sPostRollConfiguration_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePostRollConfiguration_enabled})
+var sRecordingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordingConfiguration, Members: &mRecordingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecordingConfiguration})
+var sRecordingConfiguration_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eRecordingConfiguration_arn})
+var sRecordingConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecordingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eRecordingConfiguration_name})
+var sRecordingConfiguration_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecordingConfiguration_destinationConfiguration})
+var sRecordingConfiguration_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_RecordingConfigurationState, Type: smithy.ShapeTypeString, Ext: &eRecordingConfiguration_state})
+var sRecordingConfiguration_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eRecordingConfiguration_tags})
+var sRecordingConfiguration_thumbnailConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thumbnailConfiguration", ID: &iThumbnailConfiguration, Members: &mThumbnailConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecordingConfiguration_thumbnailConfiguration})
+var sRecordingConfiguration_recordingReconnectWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingReconnectWindowSeconds", ID: &i_RecordingReconnectWindowSeconds, Type: smithy.ShapeTypeInteger, Ext: &eRecordingConfiguration_recordingReconnectWindowSeconds})
+var sRecordingConfiguration_renditionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renditionConfiguration", ID: &iRenditionConfiguration, Members: &mRenditionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecordingConfiguration_renditionConfiguration})
+var s_RecordingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_RecordingConfigurationArn})
+var s_RecordingConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordingConfigurationList, Members: &m_RecordingConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_RecordingConfigurationList})
+var s_RecordingConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecordingConfigurationSummary, Members: &mRecordingConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RecordingConfigurationList_member})
+var s_RecordingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordingConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_RecordingConfigurationName})
+var s_RecordingConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordingConfigurationState, Type: smithy.ShapeTypeString, Ext: &e_RecordingConfigurationState})
+var sRecordingConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordingConfigurationSummary, Members: &mRecordingConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &eRecordingConfigurationSummary})
+var sRecordingConfigurationSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eRecordingConfigurationSummary_arn})
+var sRecordingConfigurationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecordingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eRecordingConfigurationSummary_name})
+var sRecordingConfigurationSummary_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecordingConfigurationSummary_destinationConfiguration})
+var sRecordingConfigurationSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_RecordingConfigurationState, Type: smithy.ShapeTypeString, Ext: &eRecordingConfigurationSummary_state})
+var sRecordingConfigurationSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eRecordingConfigurationSummary_tags})
+var s_RecordingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordingMode, Type: smithy.ShapeTypeString, Ext: &e_RecordingMode})
+var s_RecordingReconnectWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordingReconnectWindowSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RecordingReconnectWindowSeconds})
+var sRenditionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenditionConfiguration, Members: &mRenditionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRenditionConfiguration})
+var sRenditionConfiguration_renditionSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renditionSelection", ID: &i_RenditionConfigurationRenditionSelection, Type: smithy.ShapeTypeString, Ext: &eRenditionConfiguration_renditionSelection})
+var sRenditionConfiguration_renditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renditions", ID: &i_RenditionConfigurationRenditionList, Members: &m_RenditionConfigurationRenditionList, Type: smithy.ShapeTypeList, Ext: &eRenditionConfiguration_renditions})
+var sRenditionConfigurationRendition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenditionConfigurationRendition, Members: &mRenditionConfigurationRendition, Type: smithy.ShapeTypeEnum, Ext: &eRenditionConfigurationRendition})
+var sRenditionConfigurationRendition_SD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenditionConfigurationRendition_SD})
+var sRenditionConfigurationRendition_HD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenditionConfigurationRendition_HD})
+var sRenditionConfigurationRendition_FULL_HD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_HD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenditionConfigurationRendition_FULL_HD})
+var sRenditionConfigurationRendition_LOWEST_RESOLUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOWEST_RESOLUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRenditionConfigurationRendition_LOWEST_RESOLUTION})
+var s_RenditionConfigurationRenditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RenditionConfigurationRenditionList, Members: &m_RenditionConfigurationRenditionList, Type: smithy.ShapeTypeList, Ext: &e_RenditionConfigurationRenditionList})
+var s_RenditionConfigurationRenditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRenditionConfigurationRendition, Members: &mRenditionConfigurationRendition, Type: smithy.ShapeTypeEnum, Ext: &e_RenditionConfigurationRenditionList_member})
+var s_RenditionConfigurationRenditionSelection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RenditionConfigurationRenditionSelection, Type: smithy.ShapeTypeString, Ext: &e_RenditionConfigurationRenditionSelection})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_accessControlAllowOrigin})
+var sResourceNotFoundException_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_accessControlExposeHeaders})
+var sResourceNotFoundException_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_cacheControl})
+var sResourceNotFoundException_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_contentSecurityPolicy})
+var sResourceNotFoundException_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_strictTransportSecurity})
+var sResourceNotFoundException_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_xContentTypeOptions})
+var sResourceNotFoundException_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_xFrameOptions})
+var sResourceNotFoundException_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_xAmznErrorType})
+var sResourceNotFoundException_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_exceptionMessage})
+var s_S3DestinationBucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3DestinationBucketName, Type: smithy.ShapeTypeString, Ext: &e_S3DestinationBucketName})
+var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration})
+var sS3DestinationConfiguration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3DestinationBucketName, Type: smithy.ShapeTypeString, Ext: &eS3DestinationConfiguration_bucketName})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t58, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_accessControlAllowOrigin})
+var sServiceQuotaExceededException_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_accessControlExposeHeaders})
+var sServiceQuotaExceededException_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_cacheControl})
+var sServiceQuotaExceededException_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_contentSecurityPolicy})
+var sServiceQuotaExceededException_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_strictTransportSecurity})
+var sServiceQuotaExceededException_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_xContentTypeOptions})
+var sServiceQuotaExceededException_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_xFrameOptions})
+var sServiceQuotaExceededException_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_xAmznErrorType})
+var sServiceQuotaExceededException_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_exceptionMessage})
+var sServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailable, Members: &mServiceUnavailable, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailable})
+var sServiceUnavailable_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_accessControlAllowOrigin})
+var sServiceUnavailable_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_accessControlExposeHeaders})
+var sServiceUnavailable_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_cacheControl})
+var sServiceUnavailable_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_contentSecurityPolicy})
+var sServiceUnavailable_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_strictTransportSecurity})
+var sServiceUnavailable_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_xContentTypeOptions})
+var sServiceUnavailable_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_xFrameOptions})
+var sServiceUnavailable_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_xAmznErrorType})
+var sServiceUnavailable_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_exceptionMessage})
+var sSrt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSrt, Members: &mSrt, Type: smithy.ShapeTypeStructure, Ext: &eSrt})
+var sSrt_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &i_SrtEndpoint, Type: smithy.ShapeTypeString, Ext: &eSrt_endpoint})
+var sSrt_passphrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "passphrase", ID: &i_SrtPassphrase, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eSrt_passphrase})
+var s_SrtEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SrtEndpoint, Type: smithy.ShapeTypeString, Ext: &e_SrtEndpoint})
+var s_SrtPassphrase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SrtPassphrase, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &e_SrtPassphrase})
+var sStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &eStream})
+var sStream_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eStream_channelArn})
+var sStream_streamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamId", ID: &i_StreamId, Type: smithy.ShapeTypeString, Ext: &eStream_streamId})
+var sStream_playbackUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackUrl", ID: &i_PlaybackURL, Type: smithy.ShapeTypeString, Ext: &eStream_playbackUrl})
+var sStream_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StreamStartTime, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eStream_startTime})
+var sStream_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_StreamState, Type: smithy.ShapeTypeString, Ext: &eStream_state})
+var sStream_health = smithy.NewStaticSchema(smithy.StaticSchema{Member: "health", ID: &i_StreamHealth, Type: smithy.ShapeTypeString, Ext: &eStream_health})
+var sStream_viewerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerCount", ID: &i_StreamViewerCount, Type: smithy.ShapeTypeLong, Ext: &eStream_viewerCount})
+var sStreamEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamEvent, Members: &mStreamEvent, Type: smithy.ShapeTypeStructure, Ext: &eStreamEvent})
+var sStreamEvent_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStreamEvent_name})
+var sStreamEvent_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStreamEvent_type})
+var sStreamEvent_eventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTime", ID: &i_Time, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamEvent_eventTime})
+var sStreamEvent_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStreamEvent_code})
+var s_StreamEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamEvents, Members: &m_StreamEvents, Type: smithy.ShapeTypeList, Ext: &e_StreamEvents})
+var s_StreamEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamEvent, Members: &mStreamEvent, Type: smithy.ShapeTypeStructure, Ext: &e_StreamEvents_member})
+var sStreamFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamFilters, Members: &mStreamFilters, Type: smithy.ShapeTypeStructure, Ext: &eStreamFilters})
+var sStreamFilters_health = smithy.NewStaticSchema(smithy.StaticSchema{Member: "health", ID: &i_StreamHealth, Type: smithy.ShapeTypeString, Ext: &eStreamFilters_health})
+var s_StreamHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamHealth, Type: smithy.ShapeTypeString, Ext: &e_StreamHealth})
+var s_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamId, Type: smithy.ShapeTypeString, Ext: &e_StreamId})
+var sStreamKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamKey, Members: &mStreamKey, Type: smithy.ShapeTypeStructure, Ext: &eStreamKey})
+var sStreamKey_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_StreamKeyArn, Type: smithy.ShapeTypeString, Ext: &eStreamKey_arn})
+var sStreamKey_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StreamKeyValue, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eStreamKey_value})
+var sStreamKey_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eStreamKey_channelArn})
+var sStreamKey_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eStreamKey_tags})
+var s_StreamKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamKeyArn, Type: smithy.ShapeTypeString, Ext: &e_StreamKeyArn})
+var s_StreamKeyArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamKeyArnList, Members: &m_StreamKeyArnList, Type: smithy.ShapeTypeList, Ext: &e_StreamKeyArnList})
+var s_StreamKeyArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StreamKeyArn, Type: smithy.ShapeTypeString, Ext: &e_StreamKeyArnList_member})
+var s_StreamKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamKeyList, Members: &m_StreamKeyList, Type: smithy.ShapeTypeList, Ext: &e_StreamKeyList})
+var s_StreamKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamKeySummary, Members: &mStreamKeySummary, Type: smithy.ShapeTypeStructure, Ext: &e_StreamKeyList_member})
+var s_StreamKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamKeys, Members: &m_StreamKeys, Type: smithy.ShapeTypeList, Ext: &e_StreamKeys})
+var s_StreamKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamKey, Members: &mStreamKey, Type: smithy.ShapeTypeStructure, Ext: &e_StreamKeys_member})
+var sStreamKeySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamKeySummary, Members: &mStreamKeySummary, Type: smithy.ShapeTypeStructure, Ext: &eStreamKeySummary})
+var sStreamKeySummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_StreamKeyArn, Type: smithy.ShapeTypeString, Ext: &eStreamKeySummary_arn})
+var sStreamKeySummary_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eStreamKeySummary_channelArn})
+var sStreamKeySummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eStreamKeySummary_tags})
+var s_StreamKeyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamKeyValue, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &e_StreamKeyValue})
+var s_StreamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &e_StreamList})
+var s_StreamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamSummary, Members: &mStreamSummary, Type: smithy.ShapeTypeStructure, Ext: &e_StreamList_member})
+var s_StreamMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamMetadata, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &e_StreamMetadata})
+var sStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSession, Members: &mStreamSession, Type: smithy.ShapeTypeStructure, Ext: &eStreamSession})
+var sStreamSession_streamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamId", ID: &i_StreamId, Type: smithy.ShapeTypeString, Ext: &eStreamSession_streamId})
+var sStreamSession_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Time, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamSession_startTime})
+var sStreamSession_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Time, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamSession_endTime})
+var sStreamSession_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eStreamSession_channel})
+var sStreamSession_ingestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestConfiguration", ID: &iIngestConfiguration, Members: &mIngestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStreamSession_ingestConfiguration})
+var sStreamSession_ingestConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestConfigurations", ID: &iIngestConfigurations, Members: &mIngestConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eStreamSession_ingestConfigurations})
+var sStreamSession_recordingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfiguration", ID: &iRecordingConfiguration, Members: &mRecordingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStreamSession_recordingConfiguration})
+var sStreamSession_truncatedEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "truncatedEvents", ID: &i_StreamEvents, Members: &m_StreamEvents, Type: smithy.ShapeTypeList, Ext: &eStreamSession_truncatedEvents})
+var sStreamSession_failoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfiguration", ID: &iFailoverSlateConfiguration, Members: &mFailoverSlateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStreamSession_failoverSlateConfiguration})
+var s_StreamSessionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamSessionList, Members: &m_StreamSessionList, Type: smithy.ShapeTypeList, Ext: &e_StreamSessionList})
+var s_StreamSessionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamSessionSummary, Members: &mStreamSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_StreamSessionList_member})
+var sStreamSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionSummary, Members: &mStreamSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionSummary})
+var sStreamSessionSummary_streamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamId", ID: &i_StreamId, Type: smithy.ShapeTypeString, Ext: &eStreamSessionSummary_streamId})
+var sStreamSessionSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Time, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamSessionSummary_startTime})
+var sStreamSessionSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Time, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamSessionSummary_endTime})
+var sStreamSessionSummary_hasErrorEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasErrorEvent", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eStreamSessionSummary_hasErrorEvent})
+var s_StreamStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamStartTime, Traits: &t63, Type: smithy.ShapeTypeTimestamp, Ext: &e_StreamStartTime})
+var s_StreamState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamState, Type: smithy.ShapeTypeString, Ext: &e_StreamState})
+var sStreamSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSummary, Members: &mStreamSummary, Type: smithy.ShapeTypeStructure, Ext: &eStreamSummary})
+var sStreamSummary_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eStreamSummary_channelArn})
+var sStreamSummary_streamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamId", ID: &i_StreamId, Type: smithy.ShapeTypeString, Ext: &eStreamSummary_streamId})
+var sStreamSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_StreamState, Type: smithy.ShapeTypeString, Ext: &eStreamSummary_state})
+var sStreamSummary_health = smithy.NewStaticSchema(smithy.StaticSchema{Member: "health", ID: &i_StreamHealth, Type: smithy.ShapeTypeString, Ext: &eStreamSummary_health})
+var sStreamSummary_viewerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerCount", ID: &i_StreamViewerCount, Type: smithy.ShapeTypeLong, Ext: &eStreamSummary_viewerCount})
+var sStreamSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StreamStartTime, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamSummary_startTime})
+var sStreamUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamUnavailable, Members: &mStreamUnavailable, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eStreamUnavailable})
+var sStreamUnavailable_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_accessControlAllowOrigin})
+var sStreamUnavailable_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_accessControlExposeHeaders})
+var sStreamUnavailable_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_cacheControl})
+var sStreamUnavailable_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_contentSecurityPolicy})
+var sStreamUnavailable_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_strictTransportSecurity})
+var sStreamUnavailable_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_xContentTypeOptions})
+var sStreamUnavailable_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_xFrameOptions})
+var sStreamUnavailable_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_xAmznErrorType})
+var sStreamUnavailable_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eStreamUnavailable_exceptionMessage})
+var s_StreamViewerCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamViewerCount, Type: smithy.ShapeTypeLong, Ext: &e_StreamViewerCount})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TargetIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIntervalSeconds, Type: smithy.ShapeTypeLong, Ext: &e_TargetIntervalSeconds})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_accessControlAllowOrigin})
+var sThrottlingException_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_accessControlExposeHeaders})
+var sThrottlingException_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_cacheControl})
+var sThrottlingException_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_contentSecurityPolicy})
+var sThrottlingException_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_strictTransportSecurity})
+var sThrottlingException_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_xContentTypeOptions})
+var sThrottlingException_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_xFrameOptions})
+var sThrottlingException_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_xAmznErrorType})
+var sThrottlingException_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_exceptionMessage})
+var sThumbnailConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThumbnailConfiguration, Members: &mThumbnailConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eThumbnailConfiguration})
+var sThumbnailConfiguration_recordingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingMode", ID: &i_RecordingMode, Type: smithy.ShapeTypeString, Ext: &eThumbnailConfiguration_recordingMode})
+var sThumbnailConfiguration_targetIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIntervalSeconds", ID: &i_TargetIntervalSeconds, Type: smithy.ShapeTypeLong, Ext: &eThumbnailConfiguration_targetIntervalSeconds})
+var sThumbnailConfiguration_resolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolution", ID: &iThumbnailConfigurationResolution, Members: &mThumbnailConfigurationResolution, Type: smithy.ShapeTypeEnum, Ext: &eThumbnailConfiguration_resolution})
+var sThumbnailConfiguration_storage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storage", ID: &i_ThumbnailConfigurationStorageList, Members: &m_ThumbnailConfigurationStorageList, Type: smithy.ShapeTypeList, Ext: &eThumbnailConfiguration_storage})
+var sThumbnailConfigurationResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThumbnailConfigurationResolution, Members: &mThumbnailConfigurationResolution, Type: smithy.ShapeTypeEnum, Ext: &eThumbnailConfigurationResolution})
+var sThumbnailConfigurationResolution_SD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThumbnailConfigurationResolution_SD})
+var sThumbnailConfigurationResolution_HD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThumbnailConfigurationResolution_HD})
+var sThumbnailConfigurationResolution_FULL_HD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_HD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThumbnailConfigurationResolution_FULL_HD})
+var sThumbnailConfigurationResolution_LOWEST_RESOLUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOWEST_RESOLUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThumbnailConfigurationResolution_LOWEST_RESOLUTION})
+var s_ThumbnailConfigurationStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThumbnailConfigurationStorage, Type: smithy.ShapeTypeString, Ext: &e_ThumbnailConfigurationStorage})
+var s_ThumbnailConfigurationStorageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThumbnailConfigurationStorageList, Members: &m_ThumbnailConfigurationStorageList, Type: smithy.ShapeTypeList, Ext: &e_ThumbnailConfigurationStorageList})
+var s_ThumbnailConfigurationStorageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ThumbnailConfigurationStorage, Type: smithy.ShapeTypeString, Ext: &e_ThumbnailConfigurationStorageList_member})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Traits: &t63, Type: smithy.ShapeTypeTimestamp, Ext: &e_Time})
+var sTranscodePreset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranscodePreset, Members: &mTranscodePreset, Type: smithy.ShapeTypeEnum, Ext: &eTranscodePreset})
+var sTranscodePreset_HigherBandwidthTranscodePreset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HigherBandwidthTranscodePreset", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranscodePreset_HigherBandwidthTranscodePreset})
+var sTranscodePreset_ConstrainedBandwidthTranscodePreset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConstrainedBandwidthTranscodePreset", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranscodePreset_ConstrainedBandwidthTranscodePreset})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t65, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eValidationException_accessControlAllowOrigin})
+var sValidationException_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eValidationException_accessControlExposeHeaders})
+var sValidationException_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eValidationException_cacheControl})
+var sValidationException_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eValidationException_contentSecurityPolicy})
+var sValidationException_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eValidationException_strictTransportSecurity})
+var sValidationException_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eValidationException_xContentTypeOptions})
+var sValidationException_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eValidationException_xFrameOptions})
+var sValidationException_xAmznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmznErrorType", ID: &i_String, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eValidationException_xAmznErrorType})
+var sValidationException_exceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionMessage", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_exceptionMessage})
+var sVideoConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoConfiguration, Members: &mVideoConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVideoConfiguration})
+var sVideoConfiguration_avcProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "avcProfile", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVideoConfiguration_avcProfile})
+var sVideoConfiguration_avcLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "avcLevel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVideoConfiguration_avcLevel})
+var sVideoConfiguration_codec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codec", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVideoConfiguration_codec})
+var sVideoConfiguration_encoder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encoder", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVideoConfiguration_encoder})
+var sVideoConfiguration_targetBitrate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBitrate", ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &eVideoConfiguration_targetBitrate})
+var sVideoConfiguration_targetFramerate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetFramerate", ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &eVideoConfiguration_targetFramerate})
+var sVideoConfiguration_videoHeight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "videoHeight", ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &eVideoConfiguration_videoHeight})
+var sVideoConfiguration_videoWidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "videoWidth", ID: &i_Integer, Type: smithy.ShapeTypeLong, Ext: &eVideoConfiguration_videoWidth})
+var sVideoConfiguration_level = smithy.NewStaticSchema(smithy.StaticSchema{Member: "level", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVideoConfiguration_level})
+var sVideoConfiguration_track = smithy.NewStaticSchema(smithy.StaticSchema{Member: "track", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVideoConfiguration_track})
+var sVideoConfiguration_profile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profile", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVideoConfiguration_profile})
+var s_VideoConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VideoConfigurationList, Members: &m_VideoConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_VideoConfigurationList})
+var s_VideoConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVideoConfiguration, Members: &mVideoConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_VideoConfigurationList_member})
+var s_ViewerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewerId, Type: smithy.ShapeTypeString, Ext: &e_ViewerId})
+var s_ViewerSessionVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewerSessionVersion, Type: smithy.ShapeTypeInteger, Ext: &e_ViewerSessionVersion})
+var sBatchGetChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetChannelRequest, Members: &mBatchGetChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetChannelRequest})
+var sBatchGetChannelRequest_arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arns", ID: &i_ChannelArnList, Members: &m_ChannelArnList, Type: smithy.ShapeTypeList, Ext: &eBatchGetChannelRequest_arns})
+var sBatchGetChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetChannelResponse, Members: &mBatchGetChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetChannelResponse})
+var sBatchGetChannelResponse_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eBatchGetChannelResponse_accessControlAllowOrigin})
+var sBatchGetChannelResponse_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eBatchGetChannelResponse_accessControlExposeHeaders})
+var sBatchGetChannelResponse_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eBatchGetChannelResponse_cacheControl})
+var sBatchGetChannelResponse_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eBatchGetChannelResponse_contentSecurityPolicy})
+var sBatchGetChannelResponse_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eBatchGetChannelResponse_strictTransportSecurity})
+var sBatchGetChannelResponse_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eBatchGetChannelResponse_xContentTypeOptions})
+var sBatchGetChannelResponse_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eBatchGetChannelResponse_xFrameOptions})
+var sBatchGetChannelResponse_channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channels", ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList, Ext: &eBatchGetChannelResponse_channels})
+var sBatchGetChannelResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchErrors, Members: &m_BatchErrors, Type: smithy.ShapeTypeList, Ext: &eBatchGetChannelResponse_errors})
+var sBatchGetStreamKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetStreamKeyRequest, Members: &mBatchGetStreamKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetStreamKeyRequest})
+var sBatchGetStreamKeyRequest_arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arns", ID: &i_StreamKeyArnList, Members: &m_StreamKeyArnList, Type: smithy.ShapeTypeList, Ext: &eBatchGetStreamKeyRequest_arns})
+var sBatchGetStreamKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetStreamKeyResponse, Members: &mBatchGetStreamKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetStreamKeyResponse})
+var sBatchGetStreamKeyResponse_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eBatchGetStreamKeyResponse_accessControlAllowOrigin})
+var sBatchGetStreamKeyResponse_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eBatchGetStreamKeyResponse_accessControlExposeHeaders})
+var sBatchGetStreamKeyResponse_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eBatchGetStreamKeyResponse_cacheControl})
+var sBatchGetStreamKeyResponse_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eBatchGetStreamKeyResponse_contentSecurityPolicy})
+var sBatchGetStreamKeyResponse_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eBatchGetStreamKeyResponse_strictTransportSecurity})
+var sBatchGetStreamKeyResponse_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eBatchGetStreamKeyResponse_xContentTypeOptions})
+var sBatchGetStreamKeyResponse_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eBatchGetStreamKeyResponse_xFrameOptions})
+var sBatchGetStreamKeyResponse_streamKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamKeys", ID: &i_StreamKeys, Members: &m_StreamKeys, Type: smithy.ShapeTypeList, Ext: &eBatchGetStreamKeyResponse_streamKeys})
+var sBatchGetStreamKeyResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchErrors, Members: &m_BatchErrors, Type: smithy.ShapeTypeList, Ext: &eBatchGetStreamKeyResponse_errors})
+var sBatchStartViewerSessionRevocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchStartViewerSessionRevocationRequest, Members: &mBatchStartViewerSessionRevocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchStartViewerSessionRevocationRequest})
+var sBatchStartViewerSessionRevocationRequest_viewerSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerSessions", ID: &i_BatchStartViewerSessionRevocationViewerSessionList, Members: &m_BatchStartViewerSessionRevocationViewerSessionList, Type: smithy.ShapeTypeList, Ext: &eBatchStartViewerSessionRevocationRequest_viewerSessions})
+var sBatchStartViewerSessionRevocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchStartViewerSessionRevocationResponse, Members: &mBatchStartViewerSessionRevocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchStartViewerSessionRevocationResponse})
+var sBatchStartViewerSessionRevocationResponse_accessControlAllowOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlAllowOrigin", ID: &i_String, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationResponse_accessControlAllowOrigin})
+var sBatchStartViewerSessionRevocationResponse_accessControlExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessControlExposeHeaders", ID: &i_String, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationResponse_accessControlExposeHeaders})
+var sBatchStartViewerSessionRevocationResponse_cacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheControl", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationResponse_cacheControl})
+var sBatchStartViewerSessionRevocationResponse_contentSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSecurityPolicy", ID: &i_String, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationResponse_contentSecurityPolicy})
+var sBatchStartViewerSessionRevocationResponse_strictTransportSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strictTransportSecurity", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationResponse_strictTransportSecurity})
+var sBatchStartViewerSessionRevocationResponse_xContentTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xContentTypeOptions", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationResponse_xContentTypeOptions})
+var sBatchStartViewerSessionRevocationResponse_xFrameOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xFrameOptions", ID: &i_String, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eBatchStartViewerSessionRevocationResponse_xFrameOptions})
+var sBatchStartViewerSessionRevocationResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchStartViewerSessionRevocationErrors, Members: &m_BatchStartViewerSessionRevocationErrors, Type: smithy.ShapeTypeList, Ext: &eBatchStartViewerSessionRevocationResponse_errors})
+var sCreateAdConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdConfigurationRequest, Members: &mCreateAdConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAdConfigurationRequest})
+var sCreateAdConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AdConfigurationName, Type: smithy.ShapeTypeString, Ext: &eCreateAdConfigurationRequest_name})
+var sCreateAdConfigurationRequest_mediaTailorPlaybackConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaTailorPlaybackConfigurations", ID: &i_MediaTailorPlaybackConfigurationsList, Members: &m_MediaTailorPlaybackConfigurationsList, Type: smithy.ShapeTypeList, Ext: &eCreateAdConfigurationRequest_mediaTailorPlaybackConfigurations})
+var sCreateAdConfigurationRequest_postRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postRollConfiguration", ID: &iPostRollConfiguration, Members: &mPostRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateAdConfigurationRequest_postRollConfiguration})
+var sCreateAdConfigurationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateAdConfigurationRequest_tags})
+var sCreateAdConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdConfigurationResponse, Members: &mCreateAdConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAdConfigurationResponse})
+var sCreateAdConfigurationResponse_adConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfiguration", ID: &iAdConfiguration, Members: &mAdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateAdConfigurationResponse_adConfiguration})
+var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest})
+var sCreateChannelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_name})
+var sCreateChannelRequest_latencyMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latencyMode", ID: &i_ChannelLatencyMode, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_latencyMode})
+var sCreateChannelRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelRequest_type})
+var sCreateChannelRequest_authorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorized", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateChannelRequest_authorized})
+var sCreateChannelRequest_recordingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfigurationArn", ID: &i_ChannelRecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_recordingConfigurationArn})
+var sCreateChannelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateChannelRequest_tags})
+var sCreateChannelRequest_insecureIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insecureIngest", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateChannelRequest_insecureIngest})
+var sCreateChannelRequest_preset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preset", ID: &iTranscodePreset, Members: &mTranscodePreset, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelRequest_preset})
+var sCreateChannelRequest_playbackRestrictionPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicyArn", ID: &i_ChannelPlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_playbackRestrictionPolicyArn})
+var sCreateChannelRequest_multitrackInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "multitrackInputConfiguration", ID: &iMultitrackInputConfiguration, Members: &mMultitrackInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_multitrackInputConfiguration})
+var sCreateChannelRequest_containerFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerFormat", ID: &i_ContainerFormat, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_containerFormat})
+var sCreateChannelRequest_adConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfigurationArn", ID: &i_ChannelAdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_adConfigurationArn})
+var sCreateChannelRequest_failoverSlateConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfigurationArn", ID: &i_ChannelFailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_failoverSlateConfigurationArn})
+var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse})
+var sCreateChannelResponse_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse_channel})
+var sCreateChannelResponse_streamKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamKey", ID: &iStreamKey, Members: &mStreamKey, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse_streamKey})
+var sCreateFailoverSlateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFailoverSlateConfigurationRequest, Members: &mCreateFailoverSlateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFailoverSlateConfigurationRequest})
+var sCreateFailoverSlateConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FailoverSlateConfigurationName, Type: smithy.ShapeTypeString, Ext: &eCreateFailoverSlateConfigurationRequest_name})
+var sCreateFailoverSlateConfigurationRequest_activationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationThresholdSeconds", ID: &i_FailoverSlateActivationThresholdSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateFailoverSlateConfigurationRequest_activationThresholdSeconds})
+var sCreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minSlateDisplaySeconds", ID: &i_FailoverSlateMinDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds})
+var sCreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSlateDisplaySeconds", ID: &i_FailoverSlateMaxDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds})
+var sCreateFailoverSlateConfigurationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateFailoverSlateConfigurationRequest_tags})
+var sCreateFailoverSlateConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFailoverSlateConfigurationResponse, Members: &mCreateFailoverSlateConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFailoverSlateConfigurationResponse})
+var sCreateFailoverSlateConfigurationResponse_failoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfiguration", ID: &iFailoverSlateConfiguration, Members: &mFailoverSlateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateFailoverSlateConfigurationResponse_failoverSlateConfiguration})
+var sCreatePlaybackRestrictionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlaybackRestrictionPolicyRequest, Members: &mCreatePlaybackRestrictionPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlaybackRestrictionPolicyRequest})
+var sCreatePlaybackRestrictionPolicyRequest_allowedCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedCountries", ID: &i_PlaybackRestrictionPolicyAllowedCountryList, Members: &m_PlaybackRestrictionPolicyAllowedCountryList, Type: smithy.ShapeTypeList, Ext: &eCreatePlaybackRestrictionPolicyRequest_allowedCountries})
+var sCreatePlaybackRestrictionPolicyRequest_allowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedOrigins", ID: &i_PlaybackRestrictionPolicyAllowedOriginList, Members: &m_PlaybackRestrictionPolicyAllowedOriginList, Type: smithy.ShapeTypeList, Ext: &eCreatePlaybackRestrictionPolicyRequest_allowedOrigins})
+var sCreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableStrictOriginEnforcement", ID: &i_PlaybackRestrictionPolicyEnableStrictOriginEnforcement, Type: smithy.ShapeTypeBoolean, Ext: &eCreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement})
+var sCreatePlaybackRestrictionPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PlaybackRestrictionPolicyName, Type: smithy.ShapeTypeString, Ext: &eCreatePlaybackRestrictionPolicyRequest_name})
+var sCreatePlaybackRestrictionPolicyRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreatePlaybackRestrictionPolicyRequest_tags})
+var sCreatePlaybackRestrictionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlaybackRestrictionPolicyResponse, Members: &mCreatePlaybackRestrictionPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlaybackRestrictionPolicyResponse})
+var sCreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicy", ID: &iPlaybackRestrictionPolicy, Members: &mPlaybackRestrictionPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy})
+var sCreateRecordingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecordingConfigurationRequest, Members: &mCreateRecordingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecordingConfigurationRequest})
+var sCreateRecordingConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecordingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eCreateRecordingConfigurationRequest_name})
+var sCreateRecordingConfigurationRequest_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecordingConfigurationRequest_destinationConfiguration})
+var sCreateRecordingConfigurationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateRecordingConfigurationRequest_tags})
+var sCreateRecordingConfigurationRequest_thumbnailConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thumbnailConfiguration", ID: &iThumbnailConfiguration, Members: &mThumbnailConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecordingConfigurationRequest_thumbnailConfiguration})
+var sCreateRecordingConfigurationRequest_recordingReconnectWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingReconnectWindowSeconds", ID: &i_RecordingReconnectWindowSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateRecordingConfigurationRequest_recordingReconnectWindowSeconds})
+var sCreateRecordingConfigurationRequest_renditionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renditionConfiguration", ID: &iRenditionConfiguration, Members: &mRenditionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecordingConfigurationRequest_renditionConfiguration})
+var sCreateRecordingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecordingConfigurationResponse, Members: &mCreateRecordingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecordingConfigurationResponse})
+var sCreateRecordingConfigurationResponse_recordingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfiguration", ID: &iRecordingConfiguration, Members: &mRecordingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecordingConfigurationResponse_recordingConfiguration})
+var sCreateStreamKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamKeyRequest, Members: &mCreateStreamKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamKeyRequest})
+var sCreateStreamKeyRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eCreateStreamKeyRequest_channelArn})
+var sCreateStreamKeyRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateStreamKeyRequest_tags})
+var sCreateStreamKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamKeyResponse, Members: &mCreateStreamKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamKeyResponse})
+var sCreateStreamKeyResponse_streamKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamKey", ID: &iStreamKey, Members: &mStreamKey, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamKeyResponse_streamKey})
+var sDeleteAdConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdConfigurationRequest, Members: &mDeleteAdConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAdConfigurationRequest})
+var sDeleteAdConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eDeleteAdConfigurationRequest_arn})
+var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelRequest})
+var sDeleteChannelRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelRequest_arn})
+var sDeleteFailoverSlateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFailoverSlateConfigurationRequest, Members: &mDeleteFailoverSlateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFailoverSlateConfigurationRequest})
+var sDeleteFailoverSlateConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_FailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eDeleteFailoverSlateConfigurationRequest_arn})
+var sDeletePlaybackKeyPairRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackKeyPairRequest, Members: &mDeletePlaybackKeyPairRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlaybackKeyPairRequest})
+var sDeletePlaybackKeyPairRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackKeyPairArn, Type: smithy.ShapeTypeString, Ext: &eDeletePlaybackKeyPairRequest_arn})
+var sDeletePlaybackKeyPairResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackKeyPairResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlaybackKeyPairResponse})
+var sDeletePlaybackRestrictionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlaybackRestrictionPolicyRequest, Members: &mDeletePlaybackRestrictionPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlaybackRestrictionPolicyRequest})
+var sDeletePlaybackRestrictionPolicyRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eDeletePlaybackRestrictionPolicyRequest_arn})
+var sDeleteRecordingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecordingConfigurationRequest, Members: &mDeleteRecordingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecordingConfigurationRequest})
+var sDeleteRecordingConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eDeleteRecordingConfigurationRequest_arn})
+var sDeleteStreamKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamKeyRequest, Members: &mDeleteStreamKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteStreamKeyRequest})
+var sDeleteStreamKeyRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_StreamKeyArn, Type: smithy.ShapeTypeString, Ext: &eDeleteStreamKeyRequest_arn})
+var sGetAdConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdConfigurationRequest, Members: &mGetAdConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAdConfigurationRequest})
+var sGetAdConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eGetAdConfigurationRequest_arn})
+var sGetAdConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdConfigurationResponse, Members: &mGetAdConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAdConfigurationResponse})
+var sGetAdConfigurationResponse_adConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfiguration", ID: &iAdConfiguration, Members: &mAdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetAdConfigurationResponse_adConfiguration})
+var sGetChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelRequest, Members: &mGetChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelRequest})
+var sGetChannelRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eGetChannelRequest_arn})
+var sGetChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelResponse, Members: &mGetChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelResponse})
+var sGetChannelResponse_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelResponse_channel})
+var sGetFailoverSlateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFailoverSlateConfigurationRequest, Members: &mGetFailoverSlateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFailoverSlateConfigurationRequest})
+var sGetFailoverSlateConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_FailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eGetFailoverSlateConfigurationRequest_arn})
+var sGetFailoverSlateConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFailoverSlateConfigurationResponse, Members: &mGetFailoverSlateConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFailoverSlateConfigurationResponse})
+var sGetFailoverSlateConfigurationResponse_failoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfiguration", ID: &iFailoverSlateConfiguration, Members: &mFailoverSlateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFailoverSlateConfigurationResponse_failoverSlateConfiguration})
+var sGetPlaybackKeyPairRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackKeyPairRequest, Members: &mGetPlaybackKeyPairRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackKeyPairRequest})
+var sGetPlaybackKeyPairRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackKeyPairArn, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackKeyPairRequest_arn})
+var sGetPlaybackKeyPairResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackKeyPairResponse, Members: &mGetPlaybackKeyPairResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackKeyPairResponse})
+var sGetPlaybackKeyPairResponse_keyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyPair", ID: &iPlaybackKeyPair, Members: &mPlaybackKeyPair, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackKeyPairResponse_keyPair})
+var sGetPlaybackRestrictionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackRestrictionPolicyRequest, Members: &mGetPlaybackRestrictionPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackRestrictionPolicyRequest})
+var sGetPlaybackRestrictionPolicyRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eGetPlaybackRestrictionPolicyRequest_arn})
+var sGetPlaybackRestrictionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaybackRestrictionPolicyResponse, Members: &mGetPlaybackRestrictionPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackRestrictionPolicyResponse})
+var sGetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicy", ID: &iPlaybackRestrictionPolicy, Members: &mPlaybackRestrictionPolicy, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy})
+var sGetRecordingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordingConfigurationRequest, Members: &mGetRecordingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordingConfigurationRequest})
+var sGetRecordingConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eGetRecordingConfigurationRequest_arn})
+var sGetRecordingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordingConfigurationResponse, Members: &mGetRecordingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordingConfigurationResponse})
+var sGetRecordingConfigurationResponse_recordingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfiguration", ID: &iRecordingConfiguration, Members: &mRecordingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordingConfigurationResponse_recordingConfiguration})
+var sGetStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamRequest, Members: &mGetStreamRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamRequest})
+var sGetStreamRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eGetStreamRequest_channelArn})
+var sGetStreamKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamKeyRequest, Members: &mGetStreamKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamKeyRequest})
+var sGetStreamKeyRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_StreamKeyArn, Type: smithy.ShapeTypeString, Ext: &eGetStreamKeyRequest_arn})
+var sGetStreamKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamKeyResponse, Members: &mGetStreamKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamKeyResponse})
+var sGetStreamKeyResponse_streamKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamKey", ID: &iStreamKey, Members: &mStreamKey, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamKeyResponse_streamKey})
+var sGetStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamResponse, Members: &mGetStreamResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamResponse})
+var sGetStreamResponse_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamResponse_stream})
+var sGetStreamSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSessionRequest, Members: &mGetStreamSessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionRequest})
+var sGetStreamSessionRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionRequest_channelArn})
+var sGetStreamSessionRequest_streamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamId", ID: &i_StreamId, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionRequest_streamId})
+var sGetStreamSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSessionResponse, Members: &mGetStreamSessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionResponse})
+var sGetStreamSessionResponse_streamSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamSession", ID: &iStreamSession, Members: &mStreamSession, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionResponse_streamSession})
+var sImportPlaybackKeyPairRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportPlaybackKeyPairRequest, Members: &mImportPlaybackKeyPairRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportPlaybackKeyPairRequest})
+var sImportPlaybackKeyPairRequest_publicKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publicKeyMaterial", ID: &i_PlaybackPublicKeyMaterial, Type: smithy.ShapeTypeString, Ext: &eImportPlaybackKeyPairRequest_publicKeyMaterial})
+var sImportPlaybackKeyPairRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PlaybackKeyPairName, Type: smithy.ShapeTypeString, Ext: &eImportPlaybackKeyPairRequest_name})
+var sImportPlaybackKeyPairRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eImportPlaybackKeyPairRequest_tags})
+var sImportPlaybackKeyPairResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportPlaybackKeyPairResponse, Members: &mImportPlaybackKeyPairResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportPlaybackKeyPairResponse})
+var sImportPlaybackKeyPairResponse_keyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyPair", ID: &iPlaybackKeyPair, Members: &mPlaybackKeyPair, Type: smithy.ShapeTypeStructure, Ext: &eImportPlaybackKeyPairResponse_keyPair})
+var sInsertAdBreakRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsertAdBreakRequest, Members: &mInsertAdBreakRequest, Type: smithy.ShapeTypeStructure, Ext: &eInsertAdBreakRequest})
+var sInsertAdBreakRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eInsertAdBreakRequest_channelArn})
+var sInsertAdBreakRequest_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &i_AdDurationSeconds, Type: smithy.ShapeTypeInteger, Ext: &eInsertAdBreakRequest_durationSeconds})
+var sInsertAdBreakRequest_adBreakId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adBreakId", ID: &i_AdBreakId, Type: smithy.ShapeTypeString, Ext: &eInsertAdBreakRequest_adBreakId})
+var sInsertAdBreakRequest_targetStartAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetStartAt", ID: &i_Time, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eInsertAdBreakRequest_targetStartAt})
+var sInsertAdBreakResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsertAdBreakResponse, Members: &mInsertAdBreakResponse, Type: smithy.ShapeTypeStructure, Ext: &eInsertAdBreakResponse})
+var sInsertAdBreakResponse_adBreakId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adBreakId", ID: &i_AdBreakId, Type: smithy.ShapeTypeString, Ext: &eInsertAdBreakResponse_adBreakId})
+var sInsertAdBreakResponse_targetStartAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetStartAt", ID: &i_Time, Traits: &t62, Type: smithy.ShapeTypeTimestamp, Ext: &eInsertAdBreakResponse_targetStartAt})
+var sListAdConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdConfigurationsRequest, Members: &mListAdConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAdConfigurationsRequest})
+var sListAdConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAdConfigurationsRequest_nextToken})
+var sListAdConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxAdConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &eListAdConfigurationsRequest_maxResults})
+var sListAdConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdConfigurationsResponse, Members: &mListAdConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAdConfigurationsResponse})
+var sListAdConfigurationsResponse_adConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfigurations", ID: &i_AdConfigurationList, Members: &m_AdConfigurationList, Type: smithy.ShapeTypeList, Ext: &eListAdConfigurationsResponse_adConfigurations})
+var sListAdConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAdConfigurationsResponse_nextToken})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsRequest})
+var sListChannelsRequest_filterByName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByName", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_filterByName})
+var sListChannelsRequest_filterByRecordingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByRecordingConfigurationArn", ID: &i_ChannelRecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_filterByRecordingConfigurationArn})
+var sListChannelsRequest_filterByPlaybackRestrictionPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByPlaybackRestrictionPolicyArn", ID: &i_ChannelPlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_filterByPlaybackRestrictionPolicyArn})
+var sListChannelsRequest_filterByAdConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByAdConfigurationArn", ID: &i_ChannelAdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_filterByAdConfigurationArn})
+var sListChannelsRequest_filterByFailoverSlateConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByFailoverSlateConfigurationArn", ID: &i_ChannelFailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_filterByFailoverSlateConfigurationArn})
+var sListChannelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_nextToken})
+var sListChannelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxChannelResults, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsRequest_maxResults})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsResponse})
+var sListChannelsResponse_channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channels", ID: &i_ChannelList, Members: &m_ChannelList, Type: smithy.ShapeTypeList, Ext: &eListChannelsResponse_channels})
+var sListChannelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListChannelsResponse_nextToken})
+var sListFailoverSlateConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFailoverSlateConfigurationsRequest, Members: &mListFailoverSlateConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFailoverSlateConfigurationsRequest})
+var sListFailoverSlateConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFailoverSlateConfigurationsRequest_nextToken})
+var sListFailoverSlateConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxFailoverSlateConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &eListFailoverSlateConfigurationsRequest_maxResults})
+var sListFailoverSlateConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFailoverSlateConfigurationsResponse, Members: &mListFailoverSlateConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFailoverSlateConfigurationsResponse})
+var sListFailoverSlateConfigurationsResponse_failoverSlateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfigurations", ID: &i_FailoverSlateConfigurationList, Members: &m_FailoverSlateConfigurationList, Type: smithy.ShapeTypeList, Ext: &eListFailoverSlateConfigurationsResponse_failoverSlateConfigurations})
+var sListFailoverSlateConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFailoverSlateConfigurationsResponse_nextToken})
+var sListPlaybackKeyPairsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackKeyPairsRequest, Members: &mListPlaybackKeyPairsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPlaybackKeyPairsRequest})
+var sListPlaybackKeyPairsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPlaybackKeyPairsRequest_nextToken})
+var sListPlaybackKeyPairsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPlaybackKeyPairResults, Type: smithy.ShapeTypeInteger, Ext: &eListPlaybackKeyPairsRequest_maxResults})
+var sListPlaybackKeyPairsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackKeyPairsResponse, Members: &mListPlaybackKeyPairsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPlaybackKeyPairsResponse})
+var sListPlaybackKeyPairsResponse_keyPairs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyPairs", ID: &i_PlaybackKeyPairList, Members: &m_PlaybackKeyPairList, Type: smithy.ShapeTypeList, Ext: &eListPlaybackKeyPairsResponse_keyPairs})
+var sListPlaybackKeyPairsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPlaybackKeyPairsResponse_nextToken})
+var sListPlaybackRestrictionPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackRestrictionPoliciesRequest, Members: &mListPlaybackRestrictionPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPlaybackRestrictionPoliciesRequest})
+var sListPlaybackRestrictionPoliciesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPlaybackRestrictionPoliciesRequest_nextToken})
+var sListPlaybackRestrictionPoliciesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPlaybackRestrictionPolicyResults, Type: smithy.ShapeTypeInteger, Ext: &eListPlaybackRestrictionPoliciesRequest_maxResults})
+var sListPlaybackRestrictionPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlaybackRestrictionPoliciesResponse, Members: &mListPlaybackRestrictionPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPlaybackRestrictionPoliciesResponse})
+var sListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicies", ID: &i_PlaybackRestrictionPolicyList, Members: &m_PlaybackRestrictionPolicyList, Type: smithy.ShapeTypeList, Ext: &eListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies})
+var sListPlaybackRestrictionPoliciesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPlaybackRestrictionPoliciesResponse_nextToken})
+var sListRecordingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordingConfigurationsRequest, Members: &mListRecordingConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecordingConfigurationsRequest})
+var sListRecordingConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecordingConfigurationsRequest_nextToken})
+var sListRecordingConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxRecordingConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &eListRecordingConfigurationsRequest_maxResults})
+var sListRecordingConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordingConfigurationsResponse, Members: &mListRecordingConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecordingConfigurationsResponse})
+var sListRecordingConfigurationsResponse_recordingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfigurations", ID: &i_RecordingConfigurationList, Members: &m_RecordingConfigurationList, Type: smithy.ShapeTypeList, Ext: &eListRecordingConfigurationsResponse_recordingConfigurations})
+var sListRecordingConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecordingConfigurationsResponse_nextToken})
+var sListStreamKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamKeysRequest, Members: &mListStreamKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &eListStreamKeysRequest})
+var sListStreamKeysRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eListStreamKeysRequest_channelArn})
+var sListStreamKeysRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListStreamKeysRequest_nextToken})
+var sListStreamKeysRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxStreamKeyResults, Type: smithy.ShapeTypeInteger, Ext: &eListStreamKeysRequest_maxResults})
+var sListStreamKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamKeysResponse, Members: &mListStreamKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &eListStreamKeysResponse})
+var sListStreamKeysResponse_streamKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamKeys", ID: &i_StreamKeyList, Members: &m_StreamKeyList, Type: smithy.ShapeTypeList, Ext: &eListStreamKeysResponse_streamKeys})
+var sListStreamKeysResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListStreamKeysResponse_nextToken})
+var sListStreamSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsRequest, Members: &mListStreamSessionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListStreamSessionsRequest})
+var sListStreamSessionsRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsRequest_channelArn})
+var sListStreamSessionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsRequest_nextToken})
+var sListStreamSessionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxStreamResults, Type: smithy.ShapeTypeInteger, Ext: &eListStreamSessionsRequest_maxResults})
+var sListStreamSessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsResponse, Members: &mListStreamSessionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListStreamSessionsResponse})
+var sListStreamSessionsResponse_streamSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamSessions", ID: &i_StreamSessionList, Members: &m_StreamSessionList, Type: smithy.ShapeTypeList, Ext: &eListStreamSessionsResponse_streamSessions})
+var sListStreamSessionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsResponse_nextToken})
+var sListStreamsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsRequest, Members: &mListStreamsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListStreamsRequest})
+var sListStreamsRequest_filterBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterBy", ID: &iStreamFilters, Members: &mStreamFilters, Type: smithy.ShapeTypeStructure, Ext: &eListStreamsRequest_filterBy})
+var sListStreamsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListStreamsRequest_nextToken})
+var sListStreamsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxStreamResults, Type: smithy.ShapeTypeInteger, Ext: &eListStreamsRequest_maxResults})
+var sListStreamsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsResponse, Members: &mListStreamsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListStreamsResponse})
+var sListStreamsResponse_streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streams", ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &eListStreamsResponse_streams})
+var sListStreamsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListStreamsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sPutMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetadataRequest, Members: &mPutMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutMetadataRequest})
+var sPutMetadataRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &ePutMetadataRequest_channelArn})
+var sPutMetadataRequest_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_StreamMetadata, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &ePutMetadataRequest_metadata})
+var sStartViewerSessionRevocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartViewerSessionRevocationRequest, Members: &mStartViewerSessionRevocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartViewerSessionRevocationRequest})
+var sStartViewerSessionRevocationRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eStartViewerSessionRevocationRequest_channelArn})
+var sStartViewerSessionRevocationRequest_viewerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerId", ID: &i_ViewerId, Type: smithy.ShapeTypeString, Ext: &eStartViewerSessionRevocationRequest_viewerId})
+var sStartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewerSessionVersionsLessThanOrEqualTo", ID: &i_ViewerSessionVersion, Type: smithy.ShapeTypeInteger, Ext: &eStartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo})
+var sStartViewerSessionRevocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartViewerSessionRevocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartViewerSessionRevocationResponse})
+var sStopStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopStreamRequest, Members: &mStopStreamRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopStreamRequest})
+var sStopStreamRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eStopStreamRequest_channelArn})
+var sStopStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopStreamResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopStreamResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t67, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAdConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAdConfigurationRequest, Members: &mUpdateAdConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAdConfigurationRequest})
+var sUpdateAdConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateAdConfigurationRequest_arn})
+var sUpdateAdConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AdConfigurationName, Type: smithy.ShapeTypeString, Ext: &eUpdateAdConfigurationRequest_name})
+var sUpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaTailorPlaybackConfigurations", ID: &i_MediaTailorPlaybackConfigurationsList, Members: &m_MediaTailorPlaybackConfigurationsList, Type: smithy.ShapeTypeList, Ext: &eUpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations})
+var sUpdateAdConfigurationRequest_postRollConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postRollConfiguration", ID: &iPostRollConfiguration, Members: &mPostRollConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAdConfigurationRequest_postRollConfiguration})
+var sUpdateAdConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAdConfigurationResponse, Members: &mUpdateAdConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAdConfigurationResponse})
+var sUpdateAdConfigurationResponse_adConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfiguration", ID: &iAdConfiguration, Members: &mAdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAdConfigurationResponse_adConfiguration})
+var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest})
+var sUpdateChannelRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_arn})
+var sUpdateChannelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_name})
+var sUpdateChannelRequest_latencyMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latencyMode", ID: &i_ChannelLatencyMode, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_latencyMode})
+var sUpdateChannelRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateChannelRequest_type})
+var sUpdateChannelRequest_authorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorized", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateChannelRequest_authorized})
+var sUpdateChannelRequest_recordingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordingConfigurationArn", ID: &i_ChannelRecordingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_recordingConfigurationArn})
+var sUpdateChannelRequest_insecureIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insecureIngest", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateChannelRequest_insecureIngest})
+var sUpdateChannelRequest_preset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preset", ID: &iTranscodePreset, Members: &mTranscodePreset, Type: smithy.ShapeTypeEnum, Ext: &eUpdateChannelRequest_preset})
+var sUpdateChannelRequest_playbackRestrictionPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicyArn", ID: &i_ChannelPlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_playbackRestrictionPolicyArn})
+var sUpdateChannelRequest_multitrackInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "multitrackInputConfiguration", ID: &iMultitrackInputConfiguration, Members: &mMultitrackInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest_multitrackInputConfiguration})
+var sUpdateChannelRequest_containerFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerFormat", ID: &i_ContainerFormat, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_containerFormat})
+var sUpdateChannelRequest_adConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adConfigurationArn", ID: &i_ChannelAdConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_adConfigurationArn})
+var sUpdateChannelRequest_failoverSlateConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfigurationArn", ID: &i_ChannelFailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_failoverSlateConfigurationArn})
+var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse})
+var sUpdateChannelResponse_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse_channel})
+var sUpdateFailoverSlateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFailoverSlateConfigurationRequest, Members: &mUpdateFailoverSlateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFailoverSlateConfigurationRequest})
+var sUpdateFailoverSlateConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_FailoverSlateConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFailoverSlateConfigurationRequest_arn})
+var sUpdateFailoverSlateConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FailoverSlateConfigurationName, Type: smithy.ShapeTypeString, Ext: &eUpdateFailoverSlateConfigurationRequest_name})
+var sUpdateFailoverSlateConfigurationRequest_activationThresholdSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationThresholdSeconds", ID: &i_FailoverSlateActivationThresholdSeconds, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFailoverSlateConfigurationRequest_activationThresholdSeconds})
+var sUpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minSlateDisplaySeconds", ID: &i_FailoverSlateMinDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds})
+var sUpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSlateDisplaySeconds", ID: &i_FailoverSlateMaxDisplaySeconds, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds})
+var sUpdateFailoverSlateConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFailoverSlateConfigurationResponse, Members: &mUpdateFailoverSlateConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFailoverSlateConfigurationResponse})
+var sUpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failoverSlateConfiguration", ID: &iFailoverSlateConfiguration, Members: &mFailoverSlateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration})
+var sUpdatePlaybackRestrictionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePlaybackRestrictionPolicyRequest, Members: &mUpdatePlaybackRestrictionPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePlaybackRestrictionPolicyRequest})
+var sUpdatePlaybackRestrictionPolicyRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_PlaybackRestrictionPolicyArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePlaybackRestrictionPolicyRequest_arn})
+var sUpdatePlaybackRestrictionPolicyRequest_allowedCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedCountries", ID: &i_PlaybackRestrictionPolicyAllowedCountryList, Members: &m_PlaybackRestrictionPolicyAllowedCountryList, Type: smithy.ShapeTypeList, Ext: &eUpdatePlaybackRestrictionPolicyRequest_allowedCountries})
+var sUpdatePlaybackRestrictionPolicyRequest_allowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedOrigins", ID: &i_PlaybackRestrictionPolicyAllowedOriginList, Members: &m_PlaybackRestrictionPolicyAllowedOriginList, Type: smithy.ShapeTypeList, Ext: &eUpdatePlaybackRestrictionPolicyRequest_allowedOrigins})
+var sUpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableStrictOriginEnforcement", ID: &i_PlaybackRestrictionPolicyEnableStrictOriginEnforcement, Type: smithy.ShapeTypeBoolean, Ext: &eUpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement})
+var sUpdatePlaybackRestrictionPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PlaybackRestrictionPolicyName, Type: smithy.ShapeTypeString, Ext: &eUpdatePlaybackRestrictionPolicyRequest_name})
+var sUpdatePlaybackRestrictionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePlaybackRestrictionPolicyResponse, Members: &mUpdatePlaybackRestrictionPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePlaybackRestrictionPolicyResponse})
+var sUpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "playbackRestrictionPolicy", ID: &iPlaybackRestrictionPolicy, Members: &mPlaybackRestrictionPolicy, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy})
+
+var BatchGetChannel = &sBatchGetChannel
+
+var BatchGetStreamKey = &sBatchGetStreamKey
+
+var BatchStartViewerSessionRevocation = &sBatchStartViewerSessionRevocation
+
+var CreateAdConfiguration = &sCreateAdConfiguration
+
+var CreateChannel = &sCreateChannel
+
+var CreateFailoverSlateConfiguration = &sCreateFailoverSlateConfiguration
+
+var CreatePlaybackRestrictionPolicy = &sCreatePlaybackRestrictionPolicy
+
+var CreateRecordingConfiguration = &sCreateRecordingConfiguration
+
+var CreateStreamKey = &sCreateStreamKey
+
+var DeleteAdConfiguration = &sDeleteAdConfiguration
+
+var DeleteChannel = &sDeleteChannel
+
+var DeleteFailoverSlateConfiguration = &sDeleteFailoverSlateConfiguration
+
+var DeletePlaybackKeyPair = &sDeletePlaybackKeyPair
+
+var DeletePlaybackRestrictionPolicy = &sDeletePlaybackRestrictionPolicy
+
+var DeleteRecordingConfiguration = &sDeleteRecordingConfiguration
+
+var DeleteStreamKey = &sDeleteStreamKey
+
+var GetAdConfiguration = &sGetAdConfiguration
+
+var GetChannel = &sGetChannel
+
+var GetFailoverSlateConfiguration = &sGetFailoverSlateConfiguration
+
+var GetPlaybackKeyPair = &sGetPlaybackKeyPair
+
+var GetPlaybackRestrictionPolicy = &sGetPlaybackRestrictionPolicy
+
+var GetRecordingConfiguration = &sGetRecordingConfiguration
+
+var GetStream = &sGetStream
+
+var GetStreamKey = &sGetStreamKey
+
+var GetStreamSession = &sGetStreamSession
+
+var ImportPlaybackKeyPair = &sImportPlaybackKeyPair
+
+var InsertAdBreak = &sInsertAdBreak
+
+var ListAdConfigurations = &sListAdConfigurations
+
+var ListChannels = &sListChannels
+
+var ListFailoverSlateConfigurations = &sListFailoverSlateConfigurations
+
+var ListPlaybackKeyPairs = &sListPlaybackKeyPairs
+
+var ListPlaybackRestrictionPolicies = &sListPlaybackRestrictionPolicies
+
+var ListRecordingConfigurations = &sListRecordingConfigurations
+
+var ListStreamKeys = &sListStreamKeys
+
+var ListStreams = &sListStreams
+
+var ListStreamSessions = &sListStreamSessions
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutMetadata = &sPutMetadata
+
+var StartViewerSessionRevocation = &sStartViewerSessionRevocation
+
+var StopStream = &sStopStream
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAdConfiguration = &sUpdateAdConfiguration
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateFailoverSlateConfiguration = &sUpdateFailoverSlateConfiguration
+
+var UpdatePlaybackRestrictionPolicy = &sUpdatePlaybackRestrictionPolicy
+
+var _AmazonInteractiveVideoService = &s_AmazonInteractiveVideoService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_accessControlAllowOrigin = &sAccessDeniedException_accessControlAllowOrigin
+var AccessDeniedException_accessControlExposeHeaders = &sAccessDeniedException_accessControlExposeHeaders
+var AccessDeniedException_cacheControl = &sAccessDeniedException_cacheControl
+var AccessDeniedException_contentSecurityPolicy = &sAccessDeniedException_contentSecurityPolicy
+var AccessDeniedException_strictTransportSecurity = &sAccessDeniedException_strictTransportSecurity
+var AccessDeniedException_xContentTypeOptions = &sAccessDeniedException_xContentTypeOptions
+var AccessDeniedException_xFrameOptions = &sAccessDeniedException_xFrameOptions
+var AccessDeniedException_xAmznErrorType = &sAccessDeniedException_xAmznErrorType
+var AccessDeniedException_exceptionMessage = &sAccessDeniedException_exceptionMessage
+
+var _AdBreakId = &s_AdBreakId
+
+var AdConfiguration = &sAdConfiguration
+var AdConfiguration_arn = &sAdConfiguration_arn
+var AdConfiguration_name = &sAdConfiguration_name
+var AdConfiguration_mediaTailorPlaybackConfigurations = &sAdConfiguration_mediaTailorPlaybackConfigurations
+var AdConfiguration_postRollConfiguration = &sAdConfiguration_postRollConfiguration
+var AdConfiguration_tags = &sAdConfiguration_tags
+
+var _AdConfigurationArn = &s_AdConfigurationArn
+
+var _AdConfigurationList = &s_AdConfigurationList
+var _AdConfigurationList_member = &s_AdConfigurationList_member
+
+var _AdConfigurationName = &s_AdConfigurationName
+
+var AdConfigurationSummary = &sAdConfigurationSummary
+var AdConfigurationSummary_arn = &sAdConfigurationSummary_arn
+var AdConfigurationSummary_name = &sAdConfigurationSummary_name
+var AdConfigurationSummary_mediaTailorPlaybackConfigurations = &sAdConfigurationSummary_mediaTailorPlaybackConfigurations
+var AdConfigurationSummary_postRollConfiguration = &sAdConfigurationSummary_postRollConfiguration
+var AdConfigurationSummary_tags = &sAdConfigurationSummary_tags
+
+var _AdDurationSeconds = &s_AdDurationSeconds
+
+var AudioConfiguration = &sAudioConfiguration
+var AudioConfiguration_codec = &sAudioConfiguration_codec
+var AudioConfiguration_targetBitrate = &sAudioConfiguration_targetBitrate
+var AudioConfiguration_sampleRate = &sAudioConfiguration_sampleRate
+var AudioConfiguration_channels = &sAudioConfiguration_channels
+var AudioConfiguration_track = &sAudioConfiguration_track
+
+var _AudioConfigurationList = &s_AudioConfigurationList
+var _AudioConfigurationList_member = &s_AudioConfigurationList_member
+
+var BatchError = &sBatchError
+var BatchError_arn = &sBatchError_arn
+var BatchError_code = &sBatchError_code
+var BatchError_message = &sBatchError_message
+
+var _BatchErrors = &s_BatchErrors
+var _BatchErrors_member = &s_BatchErrors_member
+
+var BatchStartViewerSessionRevocationError = &sBatchStartViewerSessionRevocationError
+var BatchStartViewerSessionRevocationError_channelArn = &sBatchStartViewerSessionRevocationError_channelArn
+var BatchStartViewerSessionRevocationError_viewerId = &sBatchStartViewerSessionRevocationError_viewerId
+var BatchStartViewerSessionRevocationError_code = &sBatchStartViewerSessionRevocationError_code
+var BatchStartViewerSessionRevocationError_message = &sBatchStartViewerSessionRevocationError_message
+
+var _BatchStartViewerSessionRevocationErrors = &s_BatchStartViewerSessionRevocationErrors
+var _BatchStartViewerSessionRevocationErrors_member = &s_BatchStartViewerSessionRevocationErrors_member
+
+var BatchStartViewerSessionRevocationViewerSession = &sBatchStartViewerSessionRevocationViewerSession
+var BatchStartViewerSessionRevocationViewerSession_channelArn = &sBatchStartViewerSessionRevocationViewerSession_channelArn
+var BatchStartViewerSessionRevocationViewerSession_viewerId = &sBatchStartViewerSessionRevocationViewerSession_viewerId
+var BatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo = &sBatchStartViewerSessionRevocationViewerSession_viewerSessionVersionsLessThanOrEqualTo
+
+var _BatchStartViewerSessionRevocationViewerSessionList = &s_BatchStartViewerSessionRevocationViewerSessionList
+var _BatchStartViewerSessionRevocationViewerSessionList_member = &s_BatchStartViewerSessionRevocationViewerSessionList_member
+
+var _Boolean = &s_Boolean
+
+var Channel = &sChannel
+var Channel_arn = &sChannel_arn
+var Channel_name = &sChannel_name
+var Channel_latencyMode = &sChannel_latencyMode
+var Channel_type = &sChannel_type
+var Channel_recordingConfigurationArn = &sChannel_recordingConfigurationArn
+var Channel_ingestEndpoint = &sChannel_ingestEndpoint
+var Channel_playbackUrl = &sChannel_playbackUrl
+var Channel_authorized = &sChannel_authorized
+var Channel_tags = &sChannel_tags
+var Channel_insecureIngest = &sChannel_insecureIngest
+var Channel_preset = &sChannel_preset
+var Channel_srt = &sChannel_srt
+var Channel_playbackRestrictionPolicyArn = &sChannel_playbackRestrictionPolicyArn
+var Channel_multitrackInputConfiguration = &sChannel_multitrackInputConfiguration
+var Channel_containerFormat = &sChannel_containerFormat
+var Channel_adConfigurationArn = &sChannel_adConfigurationArn
+var Channel_failoverSlateConfigurationArn = &sChannel_failoverSlateConfigurationArn
+
+var _ChannelAdConfigurationArn = &s_ChannelAdConfigurationArn
+
+var _ChannelArn = &s_ChannelArn
+
+var _ChannelArnList = &s_ChannelArnList
+var _ChannelArnList_member = &s_ChannelArnList_member
+
+var _ChannelFailoverSlateConfigurationArn = &s_ChannelFailoverSlateConfigurationArn
+
+var _ChannelLatencyMode = &s_ChannelLatencyMode
+
+var _ChannelList = &s_ChannelList
+var _ChannelList_member = &s_ChannelList_member
+
+var _ChannelName = &s_ChannelName
+
+var ChannelNotBroadcasting = &sChannelNotBroadcasting
+var ChannelNotBroadcasting_accessControlAllowOrigin = &sChannelNotBroadcasting_accessControlAllowOrigin
+var ChannelNotBroadcasting_accessControlExposeHeaders = &sChannelNotBroadcasting_accessControlExposeHeaders
+var ChannelNotBroadcasting_cacheControl = &sChannelNotBroadcasting_cacheControl
+var ChannelNotBroadcasting_contentSecurityPolicy = &sChannelNotBroadcasting_contentSecurityPolicy
+var ChannelNotBroadcasting_strictTransportSecurity = &sChannelNotBroadcasting_strictTransportSecurity
+var ChannelNotBroadcasting_xContentTypeOptions = &sChannelNotBroadcasting_xContentTypeOptions
+var ChannelNotBroadcasting_xFrameOptions = &sChannelNotBroadcasting_xFrameOptions
+var ChannelNotBroadcasting_xAmznErrorType = &sChannelNotBroadcasting_xAmznErrorType
+var ChannelNotBroadcasting_exceptionMessage = &sChannelNotBroadcasting_exceptionMessage
+
+var _ChannelPlaybackRestrictionPolicyArn = &s_ChannelPlaybackRestrictionPolicyArn
+
+var _ChannelRecordingConfigurationArn = &s_ChannelRecordingConfigurationArn
+
+var _Channels = &s_Channels
+var _Channels_member = &s_Channels_member
+
+var ChannelSummary = &sChannelSummary
+var ChannelSummary_arn = &sChannelSummary_arn
+var ChannelSummary_name = &sChannelSummary_name
+var ChannelSummary_latencyMode = &sChannelSummary_latencyMode
+var ChannelSummary_authorized = &sChannelSummary_authorized
+var ChannelSummary_recordingConfigurationArn = &sChannelSummary_recordingConfigurationArn
+var ChannelSummary_tags = &sChannelSummary_tags
+var ChannelSummary_insecureIngest = &sChannelSummary_insecureIngest
+var ChannelSummary_type = &sChannelSummary_type
+var ChannelSummary_preset = &sChannelSummary_preset
+var ChannelSummary_playbackRestrictionPolicyArn = &sChannelSummary_playbackRestrictionPolicyArn
+var ChannelSummary_adConfigurationArn = &sChannelSummary_adConfigurationArn
+var ChannelSummary_failoverSlateConfigurationArn = &sChannelSummary_failoverSlateConfigurationArn
+
+var ChannelType = &sChannelType
+var ChannelType_BasicChannelType = &sChannelType_BasicChannelType
+var ChannelType_StandardChannelType = &sChannelType_StandardChannelType
+var ChannelType_AdvancedSDChannelType = &sChannelType_AdvancedSDChannelType
+var ChannelType_AdvancedHDChannelType = &sChannelType_AdvancedHDChannelType
+
+var ConflictException = &sConflictException
+var ConflictException_accessControlAllowOrigin = &sConflictException_accessControlAllowOrigin
+var ConflictException_accessControlExposeHeaders = &sConflictException_accessControlExposeHeaders
+var ConflictException_cacheControl = &sConflictException_cacheControl
+var ConflictException_contentSecurityPolicy = &sConflictException_contentSecurityPolicy
+var ConflictException_strictTransportSecurity = &sConflictException_strictTransportSecurity
+var ConflictException_xContentTypeOptions = &sConflictException_xContentTypeOptions
+var ConflictException_xFrameOptions = &sConflictException_xFrameOptions
+var ConflictException_xAmznErrorType = &sConflictException_xAmznErrorType
+var ConflictException_exceptionMessage = &sConflictException_exceptionMessage
+
+var _ContainerFormat = &s_ContainerFormat
+
+var DestinationConfiguration = &sDestinationConfiguration
+var DestinationConfiguration_s3 = &sDestinationConfiguration_s3
+
+var _errorCode = &s_errorCode
+
+var _errorMessage = &s_errorMessage
+
+var _FailoverSlateActivationThresholdSeconds = &s_FailoverSlateActivationThresholdSeconds
+
+var FailoverSlateConfiguration = &sFailoverSlateConfiguration
+var FailoverSlateConfiguration_arn = &sFailoverSlateConfiguration_arn
+var FailoverSlateConfiguration_name = &sFailoverSlateConfiguration_name
+var FailoverSlateConfiguration_activationThresholdSeconds = &sFailoverSlateConfiguration_activationThresholdSeconds
+var FailoverSlateConfiguration_minSlateDisplaySeconds = &sFailoverSlateConfiguration_minSlateDisplaySeconds
+var FailoverSlateConfiguration_maxSlateDisplaySeconds = &sFailoverSlateConfiguration_maxSlateDisplaySeconds
+var FailoverSlateConfiguration_state = &sFailoverSlateConfiguration_state
+var FailoverSlateConfiguration_tags = &sFailoverSlateConfiguration_tags
+
+var _FailoverSlateConfigurationArn = &s_FailoverSlateConfigurationArn
+
+var _FailoverSlateConfigurationList = &s_FailoverSlateConfigurationList
+var _FailoverSlateConfigurationList_member = &s_FailoverSlateConfigurationList_member
+
+var _FailoverSlateConfigurationName = &s_FailoverSlateConfigurationName
+
+var _FailoverSlateConfigurationState = &s_FailoverSlateConfigurationState
+
+var FailoverSlateConfigurationSummary = &sFailoverSlateConfigurationSummary
+var FailoverSlateConfigurationSummary_arn = &sFailoverSlateConfigurationSummary_arn
+var FailoverSlateConfigurationSummary_name = &sFailoverSlateConfigurationSummary_name
+var FailoverSlateConfigurationSummary_activationThresholdSeconds = &sFailoverSlateConfigurationSummary_activationThresholdSeconds
+var FailoverSlateConfigurationSummary_minSlateDisplaySeconds = &sFailoverSlateConfigurationSummary_minSlateDisplaySeconds
+var FailoverSlateConfigurationSummary_maxSlateDisplaySeconds = &sFailoverSlateConfigurationSummary_maxSlateDisplaySeconds
+var FailoverSlateConfigurationSummary_state = &sFailoverSlateConfigurationSummary_state
+var FailoverSlateConfigurationSummary_tags = &sFailoverSlateConfigurationSummary_tags
+
+var _FailoverSlateMaxDisplaySeconds = &s_FailoverSlateMaxDisplaySeconds
+
+var _FailoverSlateMinDisplaySeconds = &s_FailoverSlateMinDisplaySeconds
+
+var IngestConfiguration = &sIngestConfiguration
+var IngestConfiguration_video = &sIngestConfiguration_video
+var IngestConfiguration_audio = &sIngestConfiguration_audio
+
+var IngestConfigurations = &sIngestConfigurations
+var IngestConfigurations_videoConfigurations = &sIngestConfigurations_videoConfigurations
+var IngestConfigurations_audioConfigurations = &sIngestConfigurations_audioConfigurations
+
+var _IngestEndpoint = &s_IngestEndpoint
+
+var _InsecureIngest = &s_InsecureIngest
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_accessControlAllowOrigin = &sInternalServerException_accessControlAllowOrigin
+var InternalServerException_accessControlExposeHeaders = &sInternalServerException_accessControlExposeHeaders
+var InternalServerException_cacheControl = &sInternalServerException_cacheControl
+var InternalServerException_contentSecurityPolicy = &sInternalServerException_contentSecurityPolicy
+var InternalServerException_strictTransportSecurity = &sInternalServerException_strictTransportSecurity
+var InternalServerException_xContentTypeOptions = &sInternalServerException_xContentTypeOptions
+var InternalServerException_xFrameOptions = &sInternalServerException_xFrameOptions
+var InternalServerException_xAmznErrorType = &sInternalServerException_xAmznErrorType
+var InternalServerException_exceptionMessage = &sInternalServerException_exceptionMessage
+
+var _IsAuthorized = &s_IsAuthorized
+
+var _IsMultitrackInputEnabled = &s_IsMultitrackInputEnabled
+
+var _MaxAdConfigurationResults = &s_MaxAdConfigurationResults
+
+var _MaxChannelResults = &s_MaxChannelResults
+
+var _MaxFailoverSlateConfigurationResults = &s_MaxFailoverSlateConfigurationResults
+
+var _MaxPlaybackKeyPairResults = &s_MaxPlaybackKeyPairResults
+
+var _MaxPlaybackRestrictionPolicyResults = &s_MaxPlaybackRestrictionPolicyResults
+
+var _MaxRecordingConfigurationResults = &s_MaxRecordingConfigurationResults
+
+var _MaxStreamKeyResults = &s_MaxStreamKeyResults
+
+var _MaxStreamResults = &s_MaxStreamResults
+
+var MediaTailorPlaybackConfiguration = &sMediaTailorPlaybackConfiguration
+var MediaTailorPlaybackConfiguration_playbackConfigurationArn = &sMediaTailorPlaybackConfiguration_playbackConfigurationArn
+
+var _MediaTailorPlaybackConfigurationArn = &s_MediaTailorPlaybackConfigurationArn
+
+var _MediaTailorPlaybackConfigurationsList = &s_MediaTailorPlaybackConfigurationsList
+var _MediaTailorPlaybackConfigurationsList_member = &s_MediaTailorPlaybackConfigurationsList_member
+
+var MultitrackInputConfiguration = &sMultitrackInputConfiguration
+var MultitrackInputConfiguration_enabled = &sMultitrackInputConfiguration_enabled
+var MultitrackInputConfiguration_policy = &sMultitrackInputConfiguration_policy
+var MultitrackInputConfiguration_maximumResolution = &sMultitrackInputConfiguration_maximumResolution
+
+var MultitrackMaximumResolution = &sMultitrackMaximumResolution
+var MultitrackMaximumResolution_SD = &sMultitrackMaximumResolution_SD
+var MultitrackMaximumResolution_HD = &sMultitrackMaximumResolution_HD
+var MultitrackMaximumResolution_FULL_HD = &sMultitrackMaximumResolution_FULL_HD
+
+var MultitrackPolicy = &sMultitrackPolicy
+var MultitrackPolicy_ALLOW = &sMultitrackPolicy_ALLOW
+var MultitrackPolicy_REQUIRE = &sMultitrackPolicy_REQUIRE
+
+var _PaginationToken = &s_PaginationToken
+
+var PendingVerification = &sPendingVerification
+var PendingVerification_accessControlAllowOrigin = &sPendingVerification_accessControlAllowOrigin
+var PendingVerification_accessControlExposeHeaders = &sPendingVerification_accessControlExposeHeaders
+var PendingVerification_cacheControl = &sPendingVerification_cacheControl
+var PendingVerification_contentSecurityPolicy = &sPendingVerification_contentSecurityPolicy
+var PendingVerification_strictTransportSecurity = &sPendingVerification_strictTransportSecurity
+var PendingVerification_xContentTypeOptions = &sPendingVerification_xContentTypeOptions
+var PendingVerification_xFrameOptions = &sPendingVerification_xFrameOptions
+var PendingVerification_xAmznErrorType = &sPendingVerification_xAmznErrorType
+var PendingVerification_exceptionMessage = &sPendingVerification_exceptionMessage
+
+var PlaybackKeyPair = &sPlaybackKeyPair
+var PlaybackKeyPair_arn = &sPlaybackKeyPair_arn
+var PlaybackKeyPair_name = &sPlaybackKeyPair_name
+var PlaybackKeyPair_fingerprint = &sPlaybackKeyPair_fingerprint
+var PlaybackKeyPair_tags = &sPlaybackKeyPair_tags
+
+var _PlaybackKeyPairArn = &s_PlaybackKeyPairArn
+
+var _PlaybackKeyPairFingerprint = &s_PlaybackKeyPairFingerprint
+
+var _PlaybackKeyPairList = &s_PlaybackKeyPairList
+var _PlaybackKeyPairList_member = &s_PlaybackKeyPairList_member
+
+var _PlaybackKeyPairName = &s_PlaybackKeyPairName
+
+var PlaybackKeyPairSummary = &sPlaybackKeyPairSummary
+var PlaybackKeyPairSummary_arn = &sPlaybackKeyPairSummary_arn
+var PlaybackKeyPairSummary_name = &sPlaybackKeyPairSummary_name
+var PlaybackKeyPairSummary_tags = &sPlaybackKeyPairSummary_tags
+
+var _PlaybackPublicKeyMaterial = &s_PlaybackPublicKeyMaterial
+
+var PlaybackRestrictionPolicy = &sPlaybackRestrictionPolicy
+var PlaybackRestrictionPolicy_arn = &sPlaybackRestrictionPolicy_arn
+var PlaybackRestrictionPolicy_allowedCountries = &sPlaybackRestrictionPolicy_allowedCountries
+var PlaybackRestrictionPolicy_allowedOrigins = &sPlaybackRestrictionPolicy_allowedOrigins
+var PlaybackRestrictionPolicy_enableStrictOriginEnforcement = &sPlaybackRestrictionPolicy_enableStrictOriginEnforcement
+var PlaybackRestrictionPolicy_name = &sPlaybackRestrictionPolicy_name
+var PlaybackRestrictionPolicy_tags = &sPlaybackRestrictionPolicy_tags
+
+var _PlaybackRestrictionPolicyAllowedCountry = &s_PlaybackRestrictionPolicyAllowedCountry
+
+var _PlaybackRestrictionPolicyAllowedCountryList = &s_PlaybackRestrictionPolicyAllowedCountryList
+var _PlaybackRestrictionPolicyAllowedCountryList_member = &s_PlaybackRestrictionPolicyAllowedCountryList_member
+
+var _PlaybackRestrictionPolicyAllowedOrigin = &s_PlaybackRestrictionPolicyAllowedOrigin
+
+var _PlaybackRestrictionPolicyAllowedOriginList = &s_PlaybackRestrictionPolicyAllowedOriginList
+var _PlaybackRestrictionPolicyAllowedOriginList_member = &s_PlaybackRestrictionPolicyAllowedOriginList_member
+
+var _PlaybackRestrictionPolicyArn = &s_PlaybackRestrictionPolicyArn
+
+var _PlaybackRestrictionPolicyEnableStrictOriginEnforcement = &s_PlaybackRestrictionPolicyEnableStrictOriginEnforcement
+
+var _PlaybackRestrictionPolicyList = &s_PlaybackRestrictionPolicyList
+var _PlaybackRestrictionPolicyList_member = &s_PlaybackRestrictionPolicyList_member
+
+var _PlaybackRestrictionPolicyName = &s_PlaybackRestrictionPolicyName
+
+var PlaybackRestrictionPolicySummary = &sPlaybackRestrictionPolicySummary
+var PlaybackRestrictionPolicySummary_arn = &sPlaybackRestrictionPolicySummary_arn
+var PlaybackRestrictionPolicySummary_allowedCountries = &sPlaybackRestrictionPolicySummary_allowedCountries
+var PlaybackRestrictionPolicySummary_allowedOrigins = &sPlaybackRestrictionPolicySummary_allowedOrigins
+var PlaybackRestrictionPolicySummary_enableStrictOriginEnforcement = &sPlaybackRestrictionPolicySummary_enableStrictOriginEnforcement
+var PlaybackRestrictionPolicySummary_name = &sPlaybackRestrictionPolicySummary_name
+var PlaybackRestrictionPolicySummary_tags = &sPlaybackRestrictionPolicySummary_tags
+
+var _PlaybackURL = &s_PlaybackURL
+
+var PostRollConfiguration = &sPostRollConfiguration
+var PostRollConfiguration_durationSeconds = &sPostRollConfiguration_durationSeconds
+var PostRollConfiguration_enabled = &sPostRollConfiguration_enabled
+
+var RecordingConfiguration = &sRecordingConfiguration
+var RecordingConfiguration_arn = &sRecordingConfiguration_arn
+var RecordingConfiguration_name = &sRecordingConfiguration_name
+var RecordingConfiguration_destinationConfiguration = &sRecordingConfiguration_destinationConfiguration
+var RecordingConfiguration_state = &sRecordingConfiguration_state
+var RecordingConfiguration_tags = &sRecordingConfiguration_tags
+var RecordingConfiguration_thumbnailConfiguration = &sRecordingConfiguration_thumbnailConfiguration
+var RecordingConfiguration_recordingReconnectWindowSeconds = &sRecordingConfiguration_recordingReconnectWindowSeconds
+var RecordingConfiguration_renditionConfiguration = &sRecordingConfiguration_renditionConfiguration
+
+var _RecordingConfigurationArn = &s_RecordingConfigurationArn
+
+var _RecordingConfigurationList = &s_RecordingConfigurationList
+var _RecordingConfigurationList_member = &s_RecordingConfigurationList_member
+
+var _RecordingConfigurationName = &s_RecordingConfigurationName
+
+var _RecordingConfigurationState = &s_RecordingConfigurationState
+
+var RecordingConfigurationSummary = &sRecordingConfigurationSummary
+var RecordingConfigurationSummary_arn = &sRecordingConfigurationSummary_arn
+var RecordingConfigurationSummary_name = &sRecordingConfigurationSummary_name
+var RecordingConfigurationSummary_destinationConfiguration = &sRecordingConfigurationSummary_destinationConfiguration
+var RecordingConfigurationSummary_state = &sRecordingConfigurationSummary_state
+var RecordingConfigurationSummary_tags = &sRecordingConfigurationSummary_tags
+
+var _RecordingMode = &s_RecordingMode
+
+var _RecordingReconnectWindowSeconds = &s_RecordingReconnectWindowSeconds
+
+var RenditionConfiguration = &sRenditionConfiguration
+var RenditionConfiguration_renditionSelection = &sRenditionConfiguration_renditionSelection
+var RenditionConfiguration_renditions = &sRenditionConfiguration_renditions
+
+var RenditionConfigurationRendition = &sRenditionConfigurationRendition
+var RenditionConfigurationRendition_SD = &sRenditionConfigurationRendition_SD
+var RenditionConfigurationRendition_HD = &sRenditionConfigurationRendition_HD
+var RenditionConfigurationRendition_FULL_HD = &sRenditionConfigurationRendition_FULL_HD
+var RenditionConfigurationRendition_LOWEST_RESOLUTION = &sRenditionConfigurationRendition_LOWEST_RESOLUTION
+
+var _RenditionConfigurationRenditionList = &s_RenditionConfigurationRenditionList
+var _RenditionConfigurationRenditionList_member = &s_RenditionConfigurationRenditionList_member
+
+var _RenditionConfigurationRenditionSelection = &s_RenditionConfigurationRenditionSelection
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_accessControlAllowOrigin = &sResourceNotFoundException_accessControlAllowOrigin
+var ResourceNotFoundException_accessControlExposeHeaders = &sResourceNotFoundException_accessControlExposeHeaders
+var ResourceNotFoundException_cacheControl = &sResourceNotFoundException_cacheControl
+var ResourceNotFoundException_contentSecurityPolicy = &sResourceNotFoundException_contentSecurityPolicy
+var ResourceNotFoundException_strictTransportSecurity = &sResourceNotFoundException_strictTransportSecurity
+var ResourceNotFoundException_xContentTypeOptions = &sResourceNotFoundException_xContentTypeOptions
+var ResourceNotFoundException_xFrameOptions = &sResourceNotFoundException_xFrameOptions
+var ResourceNotFoundException_xAmznErrorType = &sResourceNotFoundException_xAmznErrorType
+var ResourceNotFoundException_exceptionMessage = &sResourceNotFoundException_exceptionMessage
+
+var _S3DestinationBucketName = &s_S3DestinationBucketName
+
+var S3DestinationConfiguration = &sS3DestinationConfiguration
+var S3DestinationConfiguration_bucketName = &sS3DestinationConfiguration_bucketName
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_accessControlAllowOrigin = &sServiceQuotaExceededException_accessControlAllowOrigin
+var ServiceQuotaExceededException_accessControlExposeHeaders = &sServiceQuotaExceededException_accessControlExposeHeaders
+var ServiceQuotaExceededException_cacheControl = &sServiceQuotaExceededException_cacheControl
+var ServiceQuotaExceededException_contentSecurityPolicy = &sServiceQuotaExceededException_contentSecurityPolicy
+var ServiceQuotaExceededException_strictTransportSecurity = &sServiceQuotaExceededException_strictTransportSecurity
+var ServiceQuotaExceededException_xContentTypeOptions = &sServiceQuotaExceededException_xContentTypeOptions
+var ServiceQuotaExceededException_xFrameOptions = &sServiceQuotaExceededException_xFrameOptions
+var ServiceQuotaExceededException_xAmznErrorType = &sServiceQuotaExceededException_xAmznErrorType
+var ServiceQuotaExceededException_exceptionMessage = &sServiceQuotaExceededException_exceptionMessage
+
+var ServiceUnavailable = &sServiceUnavailable
+var ServiceUnavailable_accessControlAllowOrigin = &sServiceUnavailable_accessControlAllowOrigin
+var ServiceUnavailable_accessControlExposeHeaders = &sServiceUnavailable_accessControlExposeHeaders
+var ServiceUnavailable_cacheControl = &sServiceUnavailable_cacheControl
+var ServiceUnavailable_contentSecurityPolicy = &sServiceUnavailable_contentSecurityPolicy
+var ServiceUnavailable_strictTransportSecurity = &sServiceUnavailable_strictTransportSecurity
+var ServiceUnavailable_xContentTypeOptions = &sServiceUnavailable_xContentTypeOptions
+var ServiceUnavailable_xFrameOptions = &sServiceUnavailable_xFrameOptions
+var ServiceUnavailable_xAmznErrorType = &sServiceUnavailable_xAmznErrorType
+var ServiceUnavailable_exceptionMessage = &sServiceUnavailable_exceptionMessage
+
+var Srt = &sSrt
+var Srt_endpoint = &sSrt_endpoint
+var Srt_passphrase = &sSrt_passphrase
+
+var _SrtEndpoint = &s_SrtEndpoint
+
+var _SrtPassphrase = &s_SrtPassphrase
+
+var Stream = &sStream
+var Stream_channelArn = &sStream_channelArn
+var Stream_streamId = &sStream_streamId
+var Stream_playbackUrl = &sStream_playbackUrl
+var Stream_startTime = &sStream_startTime
+var Stream_state = &sStream_state
+var Stream_health = &sStream_health
+var Stream_viewerCount = &sStream_viewerCount
+
+var StreamEvent = &sStreamEvent
+var StreamEvent_name = &sStreamEvent_name
+var StreamEvent_type = &sStreamEvent_type
+var StreamEvent_eventTime = &sStreamEvent_eventTime
+var StreamEvent_code = &sStreamEvent_code
+
+var _StreamEvents = &s_StreamEvents
+var _StreamEvents_member = &s_StreamEvents_member
+
+var StreamFilters = &sStreamFilters
+var StreamFilters_health = &sStreamFilters_health
+
+var _StreamHealth = &s_StreamHealth
+
+var _StreamId = &s_StreamId
+
+var StreamKey = &sStreamKey
+var StreamKey_arn = &sStreamKey_arn
+var StreamKey_value = &sStreamKey_value
+var StreamKey_channelArn = &sStreamKey_channelArn
+var StreamKey_tags = &sStreamKey_tags
+
+var _StreamKeyArn = &s_StreamKeyArn
+
+var _StreamKeyArnList = &s_StreamKeyArnList
+var _StreamKeyArnList_member = &s_StreamKeyArnList_member
+
+var _StreamKeyList = &s_StreamKeyList
+var _StreamKeyList_member = &s_StreamKeyList_member
+
+var _StreamKeys = &s_StreamKeys
+var _StreamKeys_member = &s_StreamKeys_member
+
+var StreamKeySummary = &sStreamKeySummary
+var StreamKeySummary_arn = &sStreamKeySummary_arn
+var StreamKeySummary_channelArn = &sStreamKeySummary_channelArn
+var StreamKeySummary_tags = &sStreamKeySummary_tags
+
+var _StreamKeyValue = &s_StreamKeyValue
+
+var _StreamList = &s_StreamList
+var _StreamList_member = &s_StreamList_member
+
+var _StreamMetadata = &s_StreamMetadata
+
+var StreamSession = &sStreamSession
+var StreamSession_streamId = &sStreamSession_streamId
+var StreamSession_startTime = &sStreamSession_startTime
+var StreamSession_endTime = &sStreamSession_endTime
+var StreamSession_channel = &sStreamSession_channel
+var StreamSession_ingestConfiguration = &sStreamSession_ingestConfiguration
+var StreamSession_ingestConfigurations = &sStreamSession_ingestConfigurations
+var StreamSession_recordingConfiguration = &sStreamSession_recordingConfiguration
+var StreamSession_truncatedEvents = &sStreamSession_truncatedEvents
+var StreamSession_failoverSlateConfiguration = &sStreamSession_failoverSlateConfiguration
+
+var _StreamSessionList = &s_StreamSessionList
+var _StreamSessionList_member = &s_StreamSessionList_member
+
+var StreamSessionSummary = &sStreamSessionSummary
+var StreamSessionSummary_streamId = &sStreamSessionSummary_streamId
+var StreamSessionSummary_startTime = &sStreamSessionSummary_startTime
+var StreamSessionSummary_endTime = &sStreamSessionSummary_endTime
+var StreamSessionSummary_hasErrorEvent = &sStreamSessionSummary_hasErrorEvent
+
+var _StreamStartTime = &s_StreamStartTime
+
+var _StreamState = &s_StreamState
+
+var StreamSummary = &sStreamSummary
+var StreamSummary_channelArn = &sStreamSummary_channelArn
+var StreamSummary_streamId = &sStreamSummary_streamId
+var StreamSummary_state = &sStreamSummary_state
+var StreamSummary_health = &sStreamSummary_health
+var StreamSummary_viewerCount = &sStreamSummary_viewerCount
+var StreamSummary_startTime = &sStreamSummary_startTime
+
+var StreamUnavailable = &sStreamUnavailable
+var StreamUnavailable_accessControlAllowOrigin = &sStreamUnavailable_accessControlAllowOrigin
+var StreamUnavailable_accessControlExposeHeaders = &sStreamUnavailable_accessControlExposeHeaders
+var StreamUnavailable_cacheControl = &sStreamUnavailable_cacheControl
+var StreamUnavailable_contentSecurityPolicy = &sStreamUnavailable_contentSecurityPolicy
+var StreamUnavailable_strictTransportSecurity = &sStreamUnavailable_strictTransportSecurity
+var StreamUnavailable_xContentTypeOptions = &sStreamUnavailable_xContentTypeOptions
+var StreamUnavailable_xFrameOptions = &sStreamUnavailable_xFrameOptions
+var StreamUnavailable_xAmznErrorType = &sStreamUnavailable_xAmznErrorType
+var StreamUnavailable_exceptionMessage = &sStreamUnavailable_exceptionMessage
+
+var _StreamViewerCount = &s_StreamViewerCount
+
+var _String = &s_String
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var _TargetIntervalSeconds = &s_TargetIntervalSeconds
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_accessControlAllowOrigin = &sThrottlingException_accessControlAllowOrigin
+var ThrottlingException_accessControlExposeHeaders = &sThrottlingException_accessControlExposeHeaders
+var ThrottlingException_cacheControl = &sThrottlingException_cacheControl
+var ThrottlingException_contentSecurityPolicy = &sThrottlingException_contentSecurityPolicy
+var ThrottlingException_strictTransportSecurity = &sThrottlingException_strictTransportSecurity
+var ThrottlingException_xContentTypeOptions = &sThrottlingException_xContentTypeOptions
+var ThrottlingException_xFrameOptions = &sThrottlingException_xFrameOptions
+var ThrottlingException_xAmznErrorType = &sThrottlingException_xAmznErrorType
+var ThrottlingException_exceptionMessage = &sThrottlingException_exceptionMessage
+
+var ThumbnailConfiguration = &sThumbnailConfiguration
+var ThumbnailConfiguration_recordingMode = &sThumbnailConfiguration_recordingMode
+var ThumbnailConfiguration_targetIntervalSeconds = &sThumbnailConfiguration_targetIntervalSeconds
+var ThumbnailConfiguration_resolution = &sThumbnailConfiguration_resolution
+var ThumbnailConfiguration_storage = &sThumbnailConfiguration_storage
+
+var ThumbnailConfigurationResolution = &sThumbnailConfigurationResolution
+var ThumbnailConfigurationResolution_SD = &sThumbnailConfigurationResolution_SD
+var ThumbnailConfigurationResolution_HD = &sThumbnailConfigurationResolution_HD
+var ThumbnailConfigurationResolution_FULL_HD = &sThumbnailConfigurationResolution_FULL_HD
+var ThumbnailConfigurationResolution_LOWEST_RESOLUTION = &sThumbnailConfigurationResolution_LOWEST_RESOLUTION
+
+var _ThumbnailConfigurationStorage = &s_ThumbnailConfigurationStorage
+
+var _ThumbnailConfigurationStorageList = &s_ThumbnailConfigurationStorageList
+var _ThumbnailConfigurationStorageList_member = &s_ThumbnailConfigurationStorageList_member
+
+var _Time = &s_Time
+
+var TranscodePreset = &sTranscodePreset
+var TranscodePreset_HigherBandwidthTranscodePreset = &sTranscodePreset_HigherBandwidthTranscodePreset
+var TranscodePreset_ConstrainedBandwidthTranscodePreset = &sTranscodePreset_ConstrainedBandwidthTranscodePreset
+
+var ValidationException = &sValidationException
+var ValidationException_accessControlAllowOrigin = &sValidationException_accessControlAllowOrigin
+var ValidationException_accessControlExposeHeaders = &sValidationException_accessControlExposeHeaders
+var ValidationException_cacheControl = &sValidationException_cacheControl
+var ValidationException_contentSecurityPolicy = &sValidationException_contentSecurityPolicy
+var ValidationException_strictTransportSecurity = &sValidationException_strictTransportSecurity
+var ValidationException_xContentTypeOptions = &sValidationException_xContentTypeOptions
+var ValidationException_xFrameOptions = &sValidationException_xFrameOptions
+var ValidationException_xAmznErrorType = &sValidationException_xAmznErrorType
+var ValidationException_exceptionMessage = &sValidationException_exceptionMessage
+
+var VideoConfiguration = &sVideoConfiguration
+var VideoConfiguration_avcProfile = &sVideoConfiguration_avcProfile
+var VideoConfiguration_avcLevel = &sVideoConfiguration_avcLevel
+var VideoConfiguration_codec = &sVideoConfiguration_codec
+var VideoConfiguration_encoder = &sVideoConfiguration_encoder
+var VideoConfiguration_targetBitrate = &sVideoConfiguration_targetBitrate
+var VideoConfiguration_targetFramerate = &sVideoConfiguration_targetFramerate
+var VideoConfiguration_videoHeight = &sVideoConfiguration_videoHeight
+var VideoConfiguration_videoWidth = &sVideoConfiguration_videoWidth
+var VideoConfiguration_level = &sVideoConfiguration_level
+var VideoConfiguration_track = &sVideoConfiguration_track
+var VideoConfiguration_profile = &sVideoConfiguration_profile
+
+var _VideoConfigurationList = &s_VideoConfigurationList
+var _VideoConfigurationList_member = &s_VideoConfigurationList_member
+
+var _ViewerId = &s_ViewerId
+
+var _ViewerSessionVersion = &s_ViewerSessionVersion
+
+var BatchGetChannelRequest = &sBatchGetChannelRequest
+var BatchGetChannelRequest_arns = &sBatchGetChannelRequest_arns
+
+var BatchGetChannelResponse = &sBatchGetChannelResponse
+var BatchGetChannelResponse_accessControlAllowOrigin = &sBatchGetChannelResponse_accessControlAllowOrigin
+var BatchGetChannelResponse_accessControlExposeHeaders = &sBatchGetChannelResponse_accessControlExposeHeaders
+var BatchGetChannelResponse_cacheControl = &sBatchGetChannelResponse_cacheControl
+var BatchGetChannelResponse_contentSecurityPolicy = &sBatchGetChannelResponse_contentSecurityPolicy
+var BatchGetChannelResponse_strictTransportSecurity = &sBatchGetChannelResponse_strictTransportSecurity
+var BatchGetChannelResponse_xContentTypeOptions = &sBatchGetChannelResponse_xContentTypeOptions
+var BatchGetChannelResponse_xFrameOptions = &sBatchGetChannelResponse_xFrameOptions
+var BatchGetChannelResponse_channels = &sBatchGetChannelResponse_channels
+var BatchGetChannelResponse_errors = &sBatchGetChannelResponse_errors
+
+var BatchGetStreamKeyRequest = &sBatchGetStreamKeyRequest
+var BatchGetStreamKeyRequest_arns = &sBatchGetStreamKeyRequest_arns
+
+var BatchGetStreamKeyResponse = &sBatchGetStreamKeyResponse
+var BatchGetStreamKeyResponse_accessControlAllowOrigin = &sBatchGetStreamKeyResponse_accessControlAllowOrigin
+var BatchGetStreamKeyResponse_accessControlExposeHeaders = &sBatchGetStreamKeyResponse_accessControlExposeHeaders
+var BatchGetStreamKeyResponse_cacheControl = &sBatchGetStreamKeyResponse_cacheControl
+var BatchGetStreamKeyResponse_contentSecurityPolicy = &sBatchGetStreamKeyResponse_contentSecurityPolicy
+var BatchGetStreamKeyResponse_strictTransportSecurity = &sBatchGetStreamKeyResponse_strictTransportSecurity
+var BatchGetStreamKeyResponse_xContentTypeOptions = &sBatchGetStreamKeyResponse_xContentTypeOptions
+var BatchGetStreamKeyResponse_xFrameOptions = &sBatchGetStreamKeyResponse_xFrameOptions
+var BatchGetStreamKeyResponse_streamKeys = &sBatchGetStreamKeyResponse_streamKeys
+var BatchGetStreamKeyResponse_errors = &sBatchGetStreamKeyResponse_errors
+
+var BatchStartViewerSessionRevocationRequest = &sBatchStartViewerSessionRevocationRequest
+var BatchStartViewerSessionRevocationRequest_viewerSessions = &sBatchStartViewerSessionRevocationRequest_viewerSessions
+
+var BatchStartViewerSessionRevocationResponse = &sBatchStartViewerSessionRevocationResponse
+var BatchStartViewerSessionRevocationResponse_accessControlAllowOrigin = &sBatchStartViewerSessionRevocationResponse_accessControlAllowOrigin
+var BatchStartViewerSessionRevocationResponse_accessControlExposeHeaders = &sBatchStartViewerSessionRevocationResponse_accessControlExposeHeaders
+var BatchStartViewerSessionRevocationResponse_cacheControl = &sBatchStartViewerSessionRevocationResponse_cacheControl
+var BatchStartViewerSessionRevocationResponse_contentSecurityPolicy = &sBatchStartViewerSessionRevocationResponse_contentSecurityPolicy
+var BatchStartViewerSessionRevocationResponse_strictTransportSecurity = &sBatchStartViewerSessionRevocationResponse_strictTransportSecurity
+var BatchStartViewerSessionRevocationResponse_xContentTypeOptions = &sBatchStartViewerSessionRevocationResponse_xContentTypeOptions
+var BatchStartViewerSessionRevocationResponse_xFrameOptions = &sBatchStartViewerSessionRevocationResponse_xFrameOptions
+var BatchStartViewerSessionRevocationResponse_errors = &sBatchStartViewerSessionRevocationResponse_errors
+
+var CreateAdConfigurationRequest = &sCreateAdConfigurationRequest
+var CreateAdConfigurationRequest_name = &sCreateAdConfigurationRequest_name
+var CreateAdConfigurationRequest_mediaTailorPlaybackConfigurations = &sCreateAdConfigurationRequest_mediaTailorPlaybackConfigurations
+var CreateAdConfigurationRequest_postRollConfiguration = &sCreateAdConfigurationRequest_postRollConfiguration
+var CreateAdConfigurationRequest_tags = &sCreateAdConfigurationRequest_tags
+
+var CreateAdConfigurationResponse = &sCreateAdConfigurationResponse
+var CreateAdConfigurationResponse_adConfiguration = &sCreateAdConfigurationResponse_adConfiguration
+
+var CreateChannelRequest = &sCreateChannelRequest
+var CreateChannelRequest_name = &sCreateChannelRequest_name
+var CreateChannelRequest_latencyMode = &sCreateChannelRequest_latencyMode
+var CreateChannelRequest_type = &sCreateChannelRequest_type
+var CreateChannelRequest_authorized = &sCreateChannelRequest_authorized
+var CreateChannelRequest_recordingConfigurationArn = &sCreateChannelRequest_recordingConfigurationArn
+var CreateChannelRequest_tags = &sCreateChannelRequest_tags
+var CreateChannelRequest_insecureIngest = &sCreateChannelRequest_insecureIngest
+var CreateChannelRequest_preset = &sCreateChannelRequest_preset
+var CreateChannelRequest_playbackRestrictionPolicyArn = &sCreateChannelRequest_playbackRestrictionPolicyArn
+var CreateChannelRequest_multitrackInputConfiguration = &sCreateChannelRequest_multitrackInputConfiguration
+var CreateChannelRequest_containerFormat = &sCreateChannelRequest_containerFormat
+var CreateChannelRequest_adConfigurationArn = &sCreateChannelRequest_adConfigurationArn
+var CreateChannelRequest_failoverSlateConfigurationArn = &sCreateChannelRequest_failoverSlateConfigurationArn
+
+var CreateChannelResponse = &sCreateChannelResponse
+var CreateChannelResponse_channel = &sCreateChannelResponse_channel
+var CreateChannelResponse_streamKey = &sCreateChannelResponse_streamKey
+
+var CreateFailoverSlateConfigurationRequest = &sCreateFailoverSlateConfigurationRequest
+var CreateFailoverSlateConfigurationRequest_name = &sCreateFailoverSlateConfigurationRequest_name
+var CreateFailoverSlateConfigurationRequest_activationThresholdSeconds = &sCreateFailoverSlateConfigurationRequest_activationThresholdSeconds
+var CreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = &sCreateFailoverSlateConfigurationRequest_minSlateDisplaySeconds
+var CreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = &sCreateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds
+var CreateFailoverSlateConfigurationRequest_tags = &sCreateFailoverSlateConfigurationRequest_tags
+
+var CreateFailoverSlateConfigurationResponse = &sCreateFailoverSlateConfigurationResponse
+var CreateFailoverSlateConfigurationResponse_failoverSlateConfiguration = &sCreateFailoverSlateConfigurationResponse_failoverSlateConfiguration
+
+var CreatePlaybackRestrictionPolicyRequest = &sCreatePlaybackRestrictionPolicyRequest
+var CreatePlaybackRestrictionPolicyRequest_allowedCountries = &sCreatePlaybackRestrictionPolicyRequest_allowedCountries
+var CreatePlaybackRestrictionPolicyRequest_allowedOrigins = &sCreatePlaybackRestrictionPolicyRequest_allowedOrigins
+var CreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement = &sCreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement
+var CreatePlaybackRestrictionPolicyRequest_name = &sCreatePlaybackRestrictionPolicyRequest_name
+var CreatePlaybackRestrictionPolicyRequest_tags = &sCreatePlaybackRestrictionPolicyRequest_tags
+
+var CreatePlaybackRestrictionPolicyResponse = &sCreatePlaybackRestrictionPolicyResponse
+var CreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = &sCreatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy
+
+var CreateRecordingConfigurationRequest = &sCreateRecordingConfigurationRequest
+var CreateRecordingConfigurationRequest_name = &sCreateRecordingConfigurationRequest_name
+var CreateRecordingConfigurationRequest_destinationConfiguration = &sCreateRecordingConfigurationRequest_destinationConfiguration
+var CreateRecordingConfigurationRequest_tags = &sCreateRecordingConfigurationRequest_tags
+var CreateRecordingConfigurationRequest_thumbnailConfiguration = &sCreateRecordingConfigurationRequest_thumbnailConfiguration
+var CreateRecordingConfigurationRequest_recordingReconnectWindowSeconds = &sCreateRecordingConfigurationRequest_recordingReconnectWindowSeconds
+var CreateRecordingConfigurationRequest_renditionConfiguration = &sCreateRecordingConfigurationRequest_renditionConfiguration
+
+var CreateRecordingConfigurationResponse = &sCreateRecordingConfigurationResponse
+var CreateRecordingConfigurationResponse_recordingConfiguration = &sCreateRecordingConfigurationResponse_recordingConfiguration
+
+var CreateStreamKeyRequest = &sCreateStreamKeyRequest
+var CreateStreamKeyRequest_channelArn = &sCreateStreamKeyRequest_channelArn
+var CreateStreamKeyRequest_tags = &sCreateStreamKeyRequest_tags
+
+var CreateStreamKeyResponse = &sCreateStreamKeyResponse
+var CreateStreamKeyResponse_streamKey = &sCreateStreamKeyResponse_streamKey
+
+var DeleteAdConfigurationRequest = &sDeleteAdConfigurationRequest
+var DeleteAdConfigurationRequest_arn = &sDeleteAdConfigurationRequest_arn
+
+var DeleteChannelRequest = &sDeleteChannelRequest
+var DeleteChannelRequest_arn = &sDeleteChannelRequest_arn
+
+var DeleteFailoverSlateConfigurationRequest = &sDeleteFailoverSlateConfigurationRequest
+var DeleteFailoverSlateConfigurationRequest_arn = &sDeleteFailoverSlateConfigurationRequest_arn
+
+var DeletePlaybackKeyPairRequest = &sDeletePlaybackKeyPairRequest
+var DeletePlaybackKeyPairRequest_arn = &sDeletePlaybackKeyPairRequest_arn
+
+var DeletePlaybackKeyPairResponse = &sDeletePlaybackKeyPairResponse
+
+var DeletePlaybackRestrictionPolicyRequest = &sDeletePlaybackRestrictionPolicyRequest
+var DeletePlaybackRestrictionPolicyRequest_arn = &sDeletePlaybackRestrictionPolicyRequest_arn
+
+var DeleteRecordingConfigurationRequest = &sDeleteRecordingConfigurationRequest
+var DeleteRecordingConfigurationRequest_arn = &sDeleteRecordingConfigurationRequest_arn
+
+var DeleteStreamKeyRequest = &sDeleteStreamKeyRequest
+var DeleteStreamKeyRequest_arn = &sDeleteStreamKeyRequest_arn
+
+var GetAdConfigurationRequest = &sGetAdConfigurationRequest
+var GetAdConfigurationRequest_arn = &sGetAdConfigurationRequest_arn
+
+var GetAdConfigurationResponse = &sGetAdConfigurationResponse
+var GetAdConfigurationResponse_adConfiguration = &sGetAdConfigurationResponse_adConfiguration
+
+var GetChannelRequest = &sGetChannelRequest
+var GetChannelRequest_arn = &sGetChannelRequest_arn
+
+var GetChannelResponse = &sGetChannelResponse
+var GetChannelResponse_channel = &sGetChannelResponse_channel
+
+var GetFailoverSlateConfigurationRequest = &sGetFailoverSlateConfigurationRequest
+var GetFailoverSlateConfigurationRequest_arn = &sGetFailoverSlateConfigurationRequest_arn
+
+var GetFailoverSlateConfigurationResponse = &sGetFailoverSlateConfigurationResponse
+var GetFailoverSlateConfigurationResponse_failoverSlateConfiguration = &sGetFailoverSlateConfigurationResponse_failoverSlateConfiguration
+
+var GetPlaybackKeyPairRequest = &sGetPlaybackKeyPairRequest
+var GetPlaybackKeyPairRequest_arn = &sGetPlaybackKeyPairRequest_arn
+
+var GetPlaybackKeyPairResponse = &sGetPlaybackKeyPairResponse
+var GetPlaybackKeyPairResponse_keyPair = &sGetPlaybackKeyPairResponse_keyPair
+
+var GetPlaybackRestrictionPolicyRequest = &sGetPlaybackRestrictionPolicyRequest
+var GetPlaybackRestrictionPolicyRequest_arn = &sGetPlaybackRestrictionPolicyRequest_arn
+
+var GetPlaybackRestrictionPolicyResponse = &sGetPlaybackRestrictionPolicyResponse
+var GetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = &sGetPlaybackRestrictionPolicyResponse_playbackRestrictionPolicy
+
+var GetRecordingConfigurationRequest = &sGetRecordingConfigurationRequest
+var GetRecordingConfigurationRequest_arn = &sGetRecordingConfigurationRequest_arn
+
+var GetRecordingConfigurationResponse = &sGetRecordingConfigurationResponse
+var GetRecordingConfigurationResponse_recordingConfiguration = &sGetRecordingConfigurationResponse_recordingConfiguration
+
+var GetStreamRequest = &sGetStreamRequest
+var GetStreamRequest_channelArn = &sGetStreamRequest_channelArn
+
+var GetStreamKeyRequest = &sGetStreamKeyRequest
+var GetStreamKeyRequest_arn = &sGetStreamKeyRequest_arn
+
+var GetStreamKeyResponse = &sGetStreamKeyResponse
+var GetStreamKeyResponse_streamKey = &sGetStreamKeyResponse_streamKey
+
+var GetStreamResponse = &sGetStreamResponse
+var GetStreamResponse_stream = &sGetStreamResponse_stream
+
+var GetStreamSessionRequest = &sGetStreamSessionRequest
+var GetStreamSessionRequest_channelArn = &sGetStreamSessionRequest_channelArn
+var GetStreamSessionRequest_streamId = &sGetStreamSessionRequest_streamId
+
+var GetStreamSessionResponse = &sGetStreamSessionResponse
+var GetStreamSessionResponse_streamSession = &sGetStreamSessionResponse_streamSession
+
+var ImportPlaybackKeyPairRequest = &sImportPlaybackKeyPairRequest
+var ImportPlaybackKeyPairRequest_publicKeyMaterial = &sImportPlaybackKeyPairRequest_publicKeyMaterial
+var ImportPlaybackKeyPairRequest_name = &sImportPlaybackKeyPairRequest_name
+var ImportPlaybackKeyPairRequest_tags = &sImportPlaybackKeyPairRequest_tags
+
+var ImportPlaybackKeyPairResponse = &sImportPlaybackKeyPairResponse
+var ImportPlaybackKeyPairResponse_keyPair = &sImportPlaybackKeyPairResponse_keyPair
+
+var InsertAdBreakRequest = &sInsertAdBreakRequest
+var InsertAdBreakRequest_channelArn = &sInsertAdBreakRequest_channelArn
+var InsertAdBreakRequest_durationSeconds = &sInsertAdBreakRequest_durationSeconds
+var InsertAdBreakRequest_adBreakId = &sInsertAdBreakRequest_adBreakId
+var InsertAdBreakRequest_targetStartAt = &sInsertAdBreakRequest_targetStartAt
+
+var InsertAdBreakResponse = &sInsertAdBreakResponse
+var InsertAdBreakResponse_adBreakId = &sInsertAdBreakResponse_adBreakId
+var InsertAdBreakResponse_targetStartAt = &sInsertAdBreakResponse_targetStartAt
+
+var ListAdConfigurationsRequest = &sListAdConfigurationsRequest
+var ListAdConfigurationsRequest_nextToken = &sListAdConfigurationsRequest_nextToken
+var ListAdConfigurationsRequest_maxResults = &sListAdConfigurationsRequest_maxResults
+
+var ListAdConfigurationsResponse = &sListAdConfigurationsResponse
+var ListAdConfigurationsResponse_adConfigurations = &sListAdConfigurationsResponse_adConfigurations
+var ListAdConfigurationsResponse_nextToken = &sListAdConfigurationsResponse_nextToken
+
+var ListChannelsRequest = &sListChannelsRequest
+var ListChannelsRequest_filterByName = &sListChannelsRequest_filterByName
+var ListChannelsRequest_filterByRecordingConfigurationArn = &sListChannelsRequest_filterByRecordingConfigurationArn
+var ListChannelsRequest_filterByPlaybackRestrictionPolicyArn = &sListChannelsRequest_filterByPlaybackRestrictionPolicyArn
+var ListChannelsRequest_filterByAdConfigurationArn = &sListChannelsRequest_filterByAdConfigurationArn
+var ListChannelsRequest_filterByFailoverSlateConfigurationArn = &sListChannelsRequest_filterByFailoverSlateConfigurationArn
+var ListChannelsRequest_nextToken = &sListChannelsRequest_nextToken
+var ListChannelsRequest_maxResults = &sListChannelsRequest_maxResults
+
+var ListChannelsResponse = &sListChannelsResponse
+var ListChannelsResponse_channels = &sListChannelsResponse_channels
+var ListChannelsResponse_nextToken = &sListChannelsResponse_nextToken
+
+var ListFailoverSlateConfigurationsRequest = &sListFailoverSlateConfigurationsRequest
+var ListFailoverSlateConfigurationsRequest_nextToken = &sListFailoverSlateConfigurationsRequest_nextToken
+var ListFailoverSlateConfigurationsRequest_maxResults = &sListFailoverSlateConfigurationsRequest_maxResults
+
+var ListFailoverSlateConfigurationsResponse = &sListFailoverSlateConfigurationsResponse
+var ListFailoverSlateConfigurationsResponse_failoverSlateConfigurations = &sListFailoverSlateConfigurationsResponse_failoverSlateConfigurations
+var ListFailoverSlateConfigurationsResponse_nextToken = &sListFailoverSlateConfigurationsResponse_nextToken
+
+var ListPlaybackKeyPairsRequest = &sListPlaybackKeyPairsRequest
+var ListPlaybackKeyPairsRequest_nextToken = &sListPlaybackKeyPairsRequest_nextToken
+var ListPlaybackKeyPairsRequest_maxResults = &sListPlaybackKeyPairsRequest_maxResults
+
+var ListPlaybackKeyPairsResponse = &sListPlaybackKeyPairsResponse
+var ListPlaybackKeyPairsResponse_keyPairs = &sListPlaybackKeyPairsResponse_keyPairs
+var ListPlaybackKeyPairsResponse_nextToken = &sListPlaybackKeyPairsResponse_nextToken
+
+var ListPlaybackRestrictionPoliciesRequest = &sListPlaybackRestrictionPoliciesRequest
+var ListPlaybackRestrictionPoliciesRequest_nextToken = &sListPlaybackRestrictionPoliciesRequest_nextToken
+var ListPlaybackRestrictionPoliciesRequest_maxResults = &sListPlaybackRestrictionPoliciesRequest_maxResults
+
+var ListPlaybackRestrictionPoliciesResponse = &sListPlaybackRestrictionPoliciesResponse
+var ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies = &sListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies
+var ListPlaybackRestrictionPoliciesResponse_nextToken = &sListPlaybackRestrictionPoliciesResponse_nextToken
+
+var ListRecordingConfigurationsRequest = &sListRecordingConfigurationsRequest
+var ListRecordingConfigurationsRequest_nextToken = &sListRecordingConfigurationsRequest_nextToken
+var ListRecordingConfigurationsRequest_maxResults = &sListRecordingConfigurationsRequest_maxResults
+
+var ListRecordingConfigurationsResponse = &sListRecordingConfigurationsResponse
+var ListRecordingConfigurationsResponse_recordingConfigurations = &sListRecordingConfigurationsResponse_recordingConfigurations
+var ListRecordingConfigurationsResponse_nextToken = &sListRecordingConfigurationsResponse_nextToken
+
+var ListStreamKeysRequest = &sListStreamKeysRequest
+var ListStreamKeysRequest_channelArn = &sListStreamKeysRequest_channelArn
+var ListStreamKeysRequest_nextToken = &sListStreamKeysRequest_nextToken
+var ListStreamKeysRequest_maxResults = &sListStreamKeysRequest_maxResults
+
+var ListStreamKeysResponse = &sListStreamKeysResponse
+var ListStreamKeysResponse_streamKeys = &sListStreamKeysResponse_streamKeys
+var ListStreamKeysResponse_nextToken = &sListStreamKeysResponse_nextToken
+
+var ListStreamSessionsRequest = &sListStreamSessionsRequest
+var ListStreamSessionsRequest_channelArn = &sListStreamSessionsRequest_channelArn
+var ListStreamSessionsRequest_nextToken = &sListStreamSessionsRequest_nextToken
+var ListStreamSessionsRequest_maxResults = &sListStreamSessionsRequest_maxResults
+
+var ListStreamSessionsResponse = &sListStreamSessionsResponse
+var ListStreamSessionsResponse_streamSessions = &sListStreamSessionsResponse_streamSessions
+var ListStreamSessionsResponse_nextToken = &sListStreamSessionsResponse_nextToken
+
+var ListStreamsRequest = &sListStreamsRequest
+var ListStreamsRequest_filterBy = &sListStreamsRequest_filterBy
+var ListStreamsRequest_nextToken = &sListStreamsRequest_nextToken
+var ListStreamsRequest_maxResults = &sListStreamsRequest_maxResults
+
+var ListStreamsResponse = &sListStreamsResponse
+var ListStreamsResponse_streams = &sListStreamsResponse_streams
+var ListStreamsResponse_nextToken = &sListStreamsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var PutMetadataRequest = &sPutMetadataRequest
+var PutMetadataRequest_channelArn = &sPutMetadataRequest_channelArn
+var PutMetadataRequest_metadata = &sPutMetadataRequest_metadata
+
+var StartViewerSessionRevocationRequest = &sStartViewerSessionRevocationRequest
+var StartViewerSessionRevocationRequest_channelArn = &sStartViewerSessionRevocationRequest_channelArn
+var StartViewerSessionRevocationRequest_viewerId = &sStartViewerSessionRevocationRequest_viewerId
+var StartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo = &sStartViewerSessionRevocationRequest_viewerSessionVersionsLessThanOrEqualTo
+
+var StartViewerSessionRevocationResponse = &sStartViewerSessionRevocationResponse
+
+var StopStreamRequest = &sStopStreamRequest
+var StopStreamRequest_channelArn = &sStopStreamRequest_channelArn
+
+var StopStreamResponse = &sStopStreamResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAdConfigurationRequest = &sUpdateAdConfigurationRequest
+var UpdateAdConfigurationRequest_arn = &sUpdateAdConfigurationRequest_arn
+var UpdateAdConfigurationRequest_name = &sUpdateAdConfigurationRequest_name
+var UpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations = &sUpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations
+var UpdateAdConfigurationRequest_postRollConfiguration = &sUpdateAdConfigurationRequest_postRollConfiguration
+
+var UpdateAdConfigurationResponse = &sUpdateAdConfigurationResponse
+var UpdateAdConfigurationResponse_adConfiguration = &sUpdateAdConfigurationResponse_adConfiguration
+
+var UpdateChannelRequest = &sUpdateChannelRequest
+var UpdateChannelRequest_arn = &sUpdateChannelRequest_arn
+var UpdateChannelRequest_name = &sUpdateChannelRequest_name
+var UpdateChannelRequest_latencyMode = &sUpdateChannelRequest_latencyMode
+var UpdateChannelRequest_type = &sUpdateChannelRequest_type
+var UpdateChannelRequest_authorized = &sUpdateChannelRequest_authorized
+var UpdateChannelRequest_recordingConfigurationArn = &sUpdateChannelRequest_recordingConfigurationArn
+var UpdateChannelRequest_insecureIngest = &sUpdateChannelRequest_insecureIngest
+var UpdateChannelRequest_preset = &sUpdateChannelRequest_preset
+var UpdateChannelRequest_playbackRestrictionPolicyArn = &sUpdateChannelRequest_playbackRestrictionPolicyArn
+var UpdateChannelRequest_multitrackInputConfiguration = &sUpdateChannelRequest_multitrackInputConfiguration
+var UpdateChannelRequest_containerFormat = &sUpdateChannelRequest_containerFormat
+var UpdateChannelRequest_adConfigurationArn = &sUpdateChannelRequest_adConfigurationArn
+var UpdateChannelRequest_failoverSlateConfigurationArn = &sUpdateChannelRequest_failoverSlateConfigurationArn
+
+var UpdateChannelResponse = &sUpdateChannelResponse
+var UpdateChannelResponse_channel = &sUpdateChannelResponse_channel
+
+var UpdateFailoverSlateConfigurationRequest = &sUpdateFailoverSlateConfigurationRequest
+var UpdateFailoverSlateConfigurationRequest_arn = &sUpdateFailoverSlateConfigurationRequest_arn
+var UpdateFailoverSlateConfigurationRequest_name = &sUpdateFailoverSlateConfigurationRequest_name
+var UpdateFailoverSlateConfigurationRequest_activationThresholdSeconds = &sUpdateFailoverSlateConfigurationRequest_activationThresholdSeconds
+var UpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds = &sUpdateFailoverSlateConfigurationRequest_minSlateDisplaySeconds
+var UpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds = &sUpdateFailoverSlateConfigurationRequest_maxSlateDisplaySeconds
+
+var UpdateFailoverSlateConfigurationResponse = &sUpdateFailoverSlateConfigurationResponse
+var UpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration = &sUpdateFailoverSlateConfigurationResponse_failoverSlateConfiguration
+
+var UpdatePlaybackRestrictionPolicyRequest = &sUpdatePlaybackRestrictionPolicyRequest
+var UpdatePlaybackRestrictionPolicyRequest_arn = &sUpdatePlaybackRestrictionPolicyRequest_arn
+var UpdatePlaybackRestrictionPolicyRequest_allowedCountries = &sUpdatePlaybackRestrictionPolicyRequest_allowedCountries
+var UpdatePlaybackRestrictionPolicyRequest_allowedOrigins = &sUpdatePlaybackRestrictionPolicyRequest_allowedOrigins
+var UpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement = &sUpdatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement
+var UpdatePlaybackRestrictionPolicyRequest_name = &sUpdatePlaybackRestrictionPolicyRequest_name
+
+var UpdatePlaybackRestrictionPolicyResponse = &sUpdatePlaybackRestrictionPolicyResponse
+var UpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy = &sUpdatePlaybackRestrictionPolicyResponse_playbackRestrictionPolicy
+
+var AmazonInteractiveVideoService = &smithy.ServiceSchema{Schema: &s_AmazonInteractiveVideoService, Version: "2020-07-14"}

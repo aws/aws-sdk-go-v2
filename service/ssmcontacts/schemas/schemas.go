@@ -4,2451 +4,2374 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AcceptPage",
-}, smithy.ShapeTypeOperation, 0)
-
-var ActivateContactChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ActivateContactChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateContact",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateContactChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateContactChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRotation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateRotation",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRotationOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateRotationOverride",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeactivateContactChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeactivateContactChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteContact",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteContactChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteContactChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRotation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteRotation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRotationOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteRotationOverride",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEngagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DescribeEngagement",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DescribePage",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContact",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetContactChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetContactPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRotation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetRotation",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRotationOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetRotationOverride",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListContactChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListContactChannels",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListContacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListContacts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEngagements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListEngagements",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPageReceipts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPageReceipts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPageResolutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPageResolutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPagesByContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPagesByContact",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPagesByEngagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPagesByEngagement",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPreviewRotationShifts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPreviewRotationShifts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRotationOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationOverrides",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRotations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRotationShifts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationShifts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutContactPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PutContactPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var SendActivationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "SendActivationCode",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartEngagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StartEngagement",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopEngagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StopEngagement",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateContact",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateContactChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateContactChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRotation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateRotation",
-}, smithy.ShapeTypeOperation, 0)
-
-var _SSMContacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "SSMContacts",
-}, smithy.ShapeTypeService, 0)
-
-var SSMContacts = smithy.NewServiceSchema(_SSMContacts, "2021-05-03")
-
-var _AcceptCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AcceptCode",
-}, smithy.ShapeTypeString, 0)
-
-var AcceptCodeValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AcceptCodeValidation",
-}, smithy.ShapeTypeEnum, 2)
-var AcceptCodeValidation_IGNORE *smithy.Schema
-
-var AcceptCodeValidation_ENFORCE *smithy.Schema
-
-var AcceptType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AcceptType",
-}, smithy.ShapeTypeEnum, 2)
-var AcceptType_DELIVERED *smithy.Schema
-
-var AcceptType_READ *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ActivationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ActivationCode",
-}, smithy.ShapeTypeString, 0)
-
-var ActivationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ActivationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ActivationStatus_ACTIVATED *smithy.Schema
-
-var ActivationStatus_NOT_ACTIVATED *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelTargetInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ChannelTargetInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelTargetInfo_ContactChannelId *smithy.Schema
-
-var ChannelTargetInfo_RetryIntervalInMinutes *smithy.Schema
-
-var ChannelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ChannelType",
-}, smithy.ShapeTypeEnum, 3)
-var ChannelType_SMS *smithy.Schema
-
-var ChannelType_VOICE *smithy.Schema
-
-var ChannelType_EMAIL *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ResourceId *smithy.Schema
-
-var ConflictException_ResourceType *smithy.Schema
-
-var ConflictException_DependentEntities *smithy.Schema
-
-var Contact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 4)
-var Contact_ContactArn *smithy.Schema
-
-var Contact_Alias *smithy.Schema
-
-var Contact_DisplayName *smithy.Schema
-
-var Contact_Type *smithy.Schema
-
-var _ContactAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactAlias",
-}, smithy.ShapeTypeString, 0)
-
-var ContactChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactChannel",
-}, smithy.ShapeTypeStructure, 6)
-var ContactChannel_ContactChannelArn *smithy.Schema
-
-var ContactChannel_ContactArn *smithy.Schema
-
-var ContactChannel_Name *smithy.Schema
-
-var ContactChannel_Type *smithy.Schema
-
-var ContactChannel_DeliveryAddress *smithy.Schema
-
-var ContactChannel_ActivationStatus *smithy.Schema
-
-var ContactChannelAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactChannelAddress",
-}, smithy.ShapeTypeStructure, 1)
-var ContactChannelAddress_SimpleAddress *smithy.Schema
-
-var _ContactChannelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactChannelList",
-}, smithy.ShapeTypeList, 1)
-var _ContactChannelList_member *smithy.Schema
-
-var _ContactName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactName",
-}, smithy.ShapeTypeString, 0)
-
-var _ContactsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactsList",
-}, smithy.ShapeTypeList, 1)
-var _ContactsList_member *smithy.Schema
-
-var ContactTargetInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactTargetInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ContactTargetInfo_ContactId *smithy.Schema
-
-var ContactTargetInfo_IsEssential *smithy.Schema
-
-var ContactType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ContactType",
-}, smithy.ShapeTypeEnum, 3)
-var ContactType_PERSONAL *smithy.Schema
-
-var ContactType_ESCALATION *smithy.Schema
-
-var ContactType_ONCALL_SCHEDULE *smithy.Schema
-
-var _Content = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Content",
-}, smithy.ShapeTypeString, 0)
-
-var CoverageTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CoverageTime",
-}, smithy.ShapeTypeStructure, 2)
-var CoverageTime_Start *smithy.Schema
-
-var CoverageTime_End *smithy.Schema
-
-var _CoverageTimes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CoverageTimes",
-}, smithy.ShapeTypeList, 1)
-var _CoverageTimes_member *smithy.Schema
-
-var _DailySettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DailySettings",
-}, smithy.ShapeTypeList, 1)
-var _DailySettings_member *smithy.Schema
-
-var DataEncryptionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DataEncryptionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DataEncryptionException_Message *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DayOfMonth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DayOfMonth",
-}, smithy.ShapeTypeInteger, 0)
-
-var DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeEnum, 7)
-var DayOfWeek_MON *smithy.Schema
-
-var DayOfWeek_TUE *smithy.Schema
-
-var DayOfWeek_WED *smithy.Schema
-
-var DayOfWeek_THU *smithy.Schema
-
-var DayOfWeek_FRI *smithy.Schema
-
-var DayOfWeek_SAT *smithy.Schema
-
-var DayOfWeek_SUN *smithy.Schema
-
-var _DeferActivation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeferActivation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DependentEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DependentEntity",
-}, smithy.ShapeTypeStructure, 2)
-var DependentEntity_RelationType *smithy.Schema
-
-var DependentEntity_DependentResourceIds *smithy.Schema
-
-var _DependentEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DependentEntityList",
-}, smithy.ShapeTypeList, 1)
-var _DependentEntityList_member *smithy.Schema
-
-var Engagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Engagement",
-}, smithy.ShapeTypeStructure, 6)
-var Engagement_EngagementArn *smithy.Schema
-
-var Engagement_ContactArn *smithy.Schema
-
-var Engagement_Sender *smithy.Schema
-
-var Engagement_IncidentId *smithy.Schema
-
-var Engagement_StartTime *smithy.Schema
-
-var Engagement_StopTime *smithy.Schema
-
-var _EngagementsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "EngagementsList",
-}, smithy.ShapeTypeList, 1)
-var _EngagementsList_member *smithy.Schema
-
-var HandOffTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "HandOffTime",
-}, smithy.ShapeTypeStructure, 2)
-var HandOffTime_HourOfDay *smithy.Schema
-
-var HandOffTime_MinuteOfHour *smithy.Schema
-
-var _HourOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "HourOfDay",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var _IncidentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "IncidentId",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InternalServerException_RetryAfterSeconds *smithy.Schema
-
-var _IsEssential = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "IsEssential",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Member = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Member",
-}, smithy.ShapeTypeString, 0)
-
-var _MinuteOfHour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "MinuteOfHour",
-}, smithy.ShapeTypeInteger, 0)
-
-var MonthlySetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "MonthlySetting",
-}, smithy.ShapeTypeStructure, 2)
-var MonthlySetting_DayOfMonth *smithy.Schema
-
-var MonthlySetting_HandOffTime *smithy.Schema
-
-var _MonthlySettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "MonthlySettings",
-}, smithy.ShapeTypeList, 1)
-var _MonthlySettings_member *smithy.Schema
-
-var _NumberOfOnCalls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "NumberOfOnCalls",
-}, smithy.ShapeTypeInteger, 0)
-
-var _OverrideList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "OverrideList",
-}, smithy.ShapeTypeList, 1)
-var _OverrideList_member *smithy.Schema
-
-var Page = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Page",
-}, smithy.ShapeTypeStructure, 8)
-var Page_PageArn *smithy.Schema
-
-var Page_EngagementArn *smithy.Schema
-
-var Page_ContactArn *smithy.Schema
-
-var Page_Sender *smithy.Schema
-
-var Page_IncidentId *smithy.Schema
-
-var Page_SentTime *smithy.Schema
-
-var Page_DeliveryTime *smithy.Schema
-
-var Page_ReadTime *smithy.Schema
-
-var _PagesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PagesList",
-}, smithy.ShapeTypeList, 1)
-var _PagesList_member *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var Plan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Plan",
-}, smithy.ShapeTypeStructure, 2)
-var Plan_Stages *smithy.Schema
-
-var Plan_RotationIds *smithy.Schema
-
-var _Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Policy",
-}, smithy.ShapeTypeString, 0)
-
-var PreviewOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PreviewOverride",
-}, smithy.ShapeTypeStructure, 3)
-var PreviewOverride_NewMembers *smithy.Schema
-
-var PreviewOverride_StartTime *smithy.Schema
-
-var PreviewOverride_EndTime *smithy.Schema
-
-var _PublicContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PublicContent",
-}, smithy.ShapeTypeString, 0)
-
-var _PublicSubject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PublicSubject",
-}, smithy.ShapeTypeString, 0)
-
-var Receipt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Receipt",
-}, smithy.ShapeTypeStructure, 4)
-var Receipt_ContactChannelArn *smithy.Schema
-
-var Receipt_ReceiptType *smithy.Schema
-
-var Receipt_ReceiptInfo *smithy.Schema
-
-var Receipt_ReceiptTime *smithy.Schema
-
-var _ReceiptInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ReceiptInfo",
-}, smithy.ShapeTypeString, 0)
-
-var _ReceiptsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ReceiptsList",
-}, smithy.ShapeTypeList, 1)
-var _ReceiptsList_member *smithy.Schema
-
-var ReceiptType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ReceiptType",
-}, smithy.ShapeTypeEnum, 5)
-var ReceiptType_DELIVERED *smithy.Schema
-
-var ReceiptType_ERROR *smithy.Schema
-
-var ReceiptType_READ *smithy.Schema
-
-var ReceiptType_SENT *smithy.Schema
-
-var ReceiptType_STOP *smithy.Schema
-
-var _RecurrenceMultiplier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RecurrenceMultiplier",
-}, smithy.ShapeTypeInteger, 0)
-
-var RecurrenceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RecurrenceSettings",
-}, smithy.ShapeTypeStructure, 6)
-var RecurrenceSettings_MonthlySettings *smithy.Schema
-
-var RecurrenceSettings_WeeklySettings *smithy.Schema
-
-var RecurrenceSettings_DailySettings *smithy.Schema
-
-var RecurrenceSettings_NumberOfOnCalls *smithy.Schema
-
-var RecurrenceSettings_ShiftCoverages *smithy.Schema
-
-var RecurrenceSettings_RecurrenceMultiplier *smithy.Schema
-
-var ResolutionContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ResolutionContact",
-}, smithy.ShapeTypeStructure, 3)
-var ResolutionContact_ContactArn *smithy.Schema
-
-var ResolutionContact_Type *smithy.Schema
-
-var ResolutionContact_StageIndex *smithy.Schema
-
-var _ResolutionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ResolutionList",
-}, smithy.ShapeTypeList, 1)
-var _ResolutionList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RetryIntervalInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RetryIntervalInMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var Rotation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Rotation",
-}, smithy.ShapeTypeStructure, 6)
-var Rotation_RotationArn *smithy.Schema
-
-var Rotation_Name *smithy.Schema
-
-var Rotation_ContactIds *smithy.Schema
-
-var Rotation_StartTime *smithy.Schema
-
-var Rotation_TimeZoneId *smithy.Schema
-
-var Rotation_Recurrence *smithy.Schema
-
-var _RotationContactsArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationContactsArnList",
-}, smithy.ShapeTypeList, 1)
-var _RotationContactsArnList_member *smithy.Schema
-
-var _RotationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationName",
-}, smithy.ShapeTypeString, 0)
-
-var RotationOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationOverride",
-}, smithy.ShapeTypeStructure, 5)
-var RotationOverride_RotationOverrideId *smithy.Schema
-
-var RotationOverride_NewContactIds *smithy.Schema
-
-var RotationOverride_StartTime *smithy.Schema
-
-var RotationOverride_EndTime *smithy.Schema
-
-var RotationOverride_CreateTime *smithy.Schema
-
-var _RotationOverrideContactsArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationOverrideContactsArnList",
-}, smithy.ShapeTypeList, 1)
-var _RotationOverrideContactsArnList_member *smithy.Schema
-
-var _RotationOverridePreviewMemberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationOverridePreviewMemberList",
-}, smithy.ShapeTypeList, 1)
-var _RotationOverridePreviewMemberList_member *smithy.Schema
-
-var _RotationOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationOverrides",
-}, smithy.ShapeTypeList, 1)
-var _RotationOverrides_member *smithy.Schema
-
-var _RotationPreviewMemberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationPreviewMemberList",
-}, smithy.ShapeTypeList, 1)
-var _RotationPreviewMemberList_member *smithy.Schema
-
-var _Rotations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Rotations",
-}, smithy.ShapeTypeList, 1)
-var _Rotations_member *smithy.Schema
-
-var RotationShift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationShift",
-}, smithy.ShapeTypeStructure, 5)
-var RotationShift_ContactIds *smithy.Schema
-
-var RotationShift_StartTime *smithy.Schema
-
-var RotationShift_EndTime *smithy.Schema
-
-var RotationShift_Type *smithy.Schema
-
-var RotationShift_ShiftDetails *smithy.Schema
-
-var _RotationShifts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "RotationShifts",
-}, smithy.ShapeTypeList, 1)
-var _RotationShifts_member *smithy.Schema
-
-var _Sender = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Sender",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceId *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceType *smithy.Schema
-
-var ServiceQuotaExceededException_QuotaCode *smithy.Schema
-
-var ServiceQuotaExceededException_ServiceCode *smithy.Schema
-
-var _ShiftCoveragesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ShiftCoveragesMap",
-}, smithy.ShapeTypeMap, 2)
-var _ShiftCoveragesMap_key *smithy.Schema
-
-var _ShiftCoveragesMap_value *smithy.Schema
-
-var ShiftDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ShiftDetails",
-}, smithy.ShapeTypeStructure, 1)
-var ShiftDetails_OverriddenContactIds *smithy.Schema
-
-var ShiftType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ShiftType",
-}, smithy.ShapeTypeEnum, 2)
-var ShiftType_REGULAR *smithy.Schema
-
-var ShiftType_OVERRIDDEN *smithy.Schema
-
-var _SimpleAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "SimpleAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _SsmContactsArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "SsmContactsArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SsmContactsArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "SsmContactsArnList",
-}, smithy.ShapeTypeList, 1)
-var _SsmContactsArnList_member *smithy.Schema
-
-var Stage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Stage",
-}, smithy.ShapeTypeStructure, 2)
-var Stage_DurationInMinutes *smithy.Schema
-
-var Stage_Targets *smithy.Schema
-
-var _StageDurationInMins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StageDurationInMins",
-}, smithy.ShapeTypeInteger, 0)
-
-var _StageIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StageIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var _StagesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StagesList",
-}, smithy.ShapeTypeList, 1)
-var _StagesList_member *smithy.Schema
-
-var _StopReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StopReason",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _Subject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Subject",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TagsList",
-}, smithy.ShapeTypeList, 1)
-var _TagsList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Target",
-}, smithy.ShapeTypeStructure, 2)
-var Target_ChannelTargetInfo *smithy.Schema
-
-var Target_ContactTargetInfo *smithy.Schema
-
-var _TargetsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TargetsList",
-}, smithy.ShapeTypeList, 1)
-var _TargetsList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_QuotaCode *smithy.Schema
-
-var ThrottlingException_ServiceCode *smithy.Schema
-
-var ThrottlingException_RetryAfterSeconds *smithy.Schema
-
-var TimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimeRange_StartTime *smithy.Schema
-
-var TimeRange_EndTime *smithy.Schema
-
-var _TimeZoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TimeZoneId",
-}, smithy.ShapeTypeString, 0)
-
-var _Uuid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "Uuid",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_Fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var WeeklySetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "WeeklySetting",
-}, smithy.ShapeTypeStructure, 2)
-var WeeklySetting_DayOfWeek *smithy.Schema
-
-var WeeklySetting_HandOffTime *smithy.Schema
-
-var _WeeklySettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "WeeklySettings",
-}, smithy.ShapeTypeList, 1)
-var _WeeklySettings_member *smithy.Schema
-
-var AcceptPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AcceptPageRequest",
-}, smithy.ShapeTypeStructure, 6)
-var AcceptPageRequest_PageId *smithy.Schema
-
-var AcceptPageRequest_ContactChannelId *smithy.Schema
-
-var AcceptPageRequest_AcceptType *smithy.Schema
-
-var AcceptPageRequest_Note *smithy.Schema
-
-var AcceptPageRequest_AcceptCode *smithy.Schema
-
-var AcceptPageRequest_AcceptCodeValidation *smithy.Schema
-
-var AcceptPageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "AcceptPageResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var ActivateContactChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ActivateContactChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ActivateContactChannelRequest_ContactChannelId *smithy.Schema
-
-var ActivateContactChannelRequest_ActivationCode *smithy.Schema
-
-var ActivateContactChannelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ActivateContactChannelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateContactChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateContactChannelRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateContactChannelRequest_ContactId *smithy.Schema
-
-var CreateContactChannelRequest_Name *smithy.Schema
-
-var CreateContactChannelRequest_Type *smithy.Schema
-
-var CreateContactChannelRequest_DeliveryAddress *smithy.Schema
-
-var CreateContactChannelRequest_DeferActivation *smithy.Schema
-
-var CreateContactChannelRequest_IdempotencyToken *smithy.Schema
-
-var CreateContactChannelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateContactChannelResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateContactChannelResult_ContactChannelArn *smithy.Schema
-
-var CreateContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateContactRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateContactRequest_Alias *smithy.Schema
-
-var CreateContactRequest_DisplayName *smithy.Schema
-
-var CreateContactRequest_Type *smithy.Schema
-
-var CreateContactRequest_Plan *smithy.Schema
-
-var CreateContactRequest_Tags *smithy.Schema
-
-var CreateContactRequest_IdempotencyToken *smithy.Schema
-
-var CreateContactResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateContactResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateContactResult_ContactArn *smithy.Schema
-
-var CreateRotationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateRotationRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateRotationRequest_Name *smithy.Schema
-
-var CreateRotationRequest_ContactIds *smithy.Schema
-
-var CreateRotationRequest_StartTime *smithy.Schema
-
-var CreateRotationRequest_TimeZoneId *smithy.Schema
-
-var CreateRotationRequest_Recurrence *smithy.Schema
-
-var CreateRotationRequest_Tags *smithy.Schema
-
-var CreateRotationRequest_IdempotencyToken *smithy.Schema
-
-var CreateRotationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateRotationResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRotationResult_RotationArn *smithy.Schema
-
-var CreateRotationOverrideRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateRotationOverrideRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRotationOverrideRequest_RotationId *smithy.Schema
-
-var CreateRotationOverrideRequest_NewContactIds *smithy.Schema
-
-var CreateRotationOverrideRequest_StartTime *smithy.Schema
-
-var CreateRotationOverrideRequest_EndTime *smithy.Schema
-
-var CreateRotationOverrideRequest_IdempotencyToken *smithy.Schema
-
-var CreateRotationOverrideResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "CreateRotationOverrideResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRotationOverrideResult_RotationOverrideId *smithy.Schema
-
-var DeactivateContactChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeactivateContactChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeactivateContactChannelRequest_ContactChannelId *smithy.Schema
-
-var DeactivateContactChannelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeactivateContactChannelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteContactChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteContactChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteContactChannelRequest_ContactChannelId *smithy.Schema
-
-var DeleteContactChannelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteContactChannelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteContactRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteContactRequest_ContactId *smithy.Schema
-
-var DeleteContactResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteContactResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRotationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteRotationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRotationRequest_RotationId *smithy.Schema
-
-var DeleteRotationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteRotationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRotationOverrideRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteRotationOverrideRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRotationOverrideRequest_RotationId *smithy.Schema
-
-var DeleteRotationOverrideRequest_RotationOverrideId *smithy.Schema
-
-var DeleteRotationOverrideResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DeleteRotationOverrideResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeEngagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DescribeEngagementRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEngagementRequest_EngagementId *smithy.Schema
-
-var DescribeEngagementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DescribeEngagementResult",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeEngagementResult_ContactArn *smithy.Schema
-
-var DescribeEngagementResult_EngagementArn *smithy.Schema
-
-var DescribeEngagementResult_Sender *smithy.Schema
-
-var DescribeEngagementResult_Subject *smithy.Schema
-
-var DescribeEngagementResult_Content *smithy.Schema
-
-var DescribeEngagementResult_PublicSubject *smithy.Schema
-
-var DescribeEngagementResult_PublicContent *smithy.Schema
-
-var DescribeEngagementResult_IncidentId *smithy.Schema
-
-var DescribeEngagementResult_StartTime *smithy.Schema
-
-var DescribeEngagementResult_StopTime *smithy.Schema
-
-var DescribePageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DescribePageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePageRequest_PageId *smithy.Schema
-
-var DescribePageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "DescribePageResult",
-}, smithy.ShapeTypeStructure, 12)
-var DescribePageResult_PageArn *smithy.Schema
-
-var DescribePageResult_EngagementArn *smithy.Schema
-
-var DescribePageResult_ContactArn *smithy.Schema
-
-var DescribePageResult_Sender *smithy.Schema
-
-var DescribePageResult_Subject *smithy.Schema
-
-var DescribePageResult_Content *smithy.Schema
-
-var DescribePageResult_PublicSubject *smithy.Schema
-
-var DescribePageResult_PublicContent *smithy.Schema
-
-var DescribePageResult_IncidentId *smithy.Schema
-
-var DescribePageResult_SentTime *smithy.Schema
-
-var DescribePageResult_ReadTime *smithy.Schema
-
-var DescribePageResult_DeliveryTime *smithy.Schema
-
-var GetContactChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetContactChannelRequest_ContactChannelId *smithy.Schema
-
-var GetContactChannelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactChannelResult",
-}, smithy.ShapeTypeStructure, 6)
-var GetContactChannelResult_ContactArn *smithy.Schema
-
-var GetContactChannelResult_ContactChannelArn *smithy.Schema
-
-var GetContactChannelResult_Name *smithy.Schema
-
-var GetContactChannelResult_Type *smithy.Schema
-
-var GetContactChannelResult_DeliveryAddress *smithy.Schema
-
-var GetContactChannelResult_ActivationStatus *smithy.Schema
-
-var GetContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetContactRequest_ContactId *smithy.Schema
-
-var GetContactResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactResult",
-}, smithy.ShapeTypeStructure, 5)
-var GetContactResult_ContactArn *smithy.Schema
-
-var GetContactResult_Alias *smithy.Schema
-
-var GetContactResult_DisplayName *smithy.Schema
-
-var GetContactResult_Type *smithy.Schema
-
-var GetContactResult_Plan *smithy.Schema
-
-var GetContactPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetContactPolicyRequest_ContactArn *smithy.Schema
-
-var GetContactPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetContactPolicyResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetContactPolicyResult_ContactArn *smithy.Schema
-
-var GetContactPolicyResult_Policy *smithy.Schema
-
-var GetRotationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetRotationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRotationRequest_RotationId *smithy.Schema
-
-var GetRotationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetRotationResult",
-}, smithy.ShapeTypeStructure, 6)
-var GetRotationResult_RotationArn *smithy.Schema
-
-var GetRotationResult_Name *smithy.Schema
-
-var GetRotationResult_ContactIds *smithy.Schema
-
-var GetRotationResult_StartTime *smithy.Schema
-
-var GetRotationResult_TimeZoneId *smithy.Schema
-
-var GetRotationResult_Recurrence *smithy.Schema
-
-var GetRotationOverrideRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetRotationOverrideRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetRotationOverrideRequest_RotationId *smithy.Schema
-
-var GetRotationOverrideRequest_RotationOverrideId *smithy.Schema
-
-var GetRotationOverrideResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "GetRotationOverrideResult",
-}, smithy.ShapeTypeStructure, 6)
-var GetRotationOverrideResult_RotationOverrideId *smithy.Schema
-
-var GetRotationOverrideResult_RotationArn *smithy.Schema
-
-var GetRotationOverrideResult_NewContactIds *smithy.Schema
-
-var GetRotationOverrideResult_StartTime *smithy.Schema
-
-var GetRotationOverrideResult_EndTime *smithy.Schema
-
-var GetRotationOverrideResult_CreateTime *smithy.Schema
-
-var ListContactChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListContactChannelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListContactChannelsRequest_ContactId *smithy.Schema
-
-var ListContactChannelsRequest_NextToken *smithy.Schema
-
-var ListContactChannelsRequest_MaxResults *smithy.Schema
-
-var ListContactChannelsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListContactChannelsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListContactChannelsResult_NextToken *smithy.Schema
-
-var ListContactChannelsResult_ContactChannels *smithy.Schema
-
-var ListContactsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListContactsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListContactsRequest_NextToken *smithy.Schema
-
-var ListContactsRequest_MaxResults *smithy.Schema
-
-var ListContactsRequest_AliasPrefix *smithy.Schema
-
-var ListContactsRequest_Type *smithy.Schema
-
-var ListContactsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListContactsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListContactsResult_NextToken *smithy.Schema
-
-var ListContactsResult_Contacts *smithy.Schema
-
-var ListEngagementsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListEngagementsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEngagementsRequest_NextToken *smithy.Schema
-
-var ListEngagementsRequest_MaxResults *smithy.Schema
-
-var ListEngagementsRequest_IncidentId *smithy.Schema
-
-var ListEngagementsRequest_TimeRangeValue *smithy.Schema
-
-var ListEngagementsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListEngagementsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngagementsResult_NextToken *smithy.Schema
-
-var ListEngagementsResult_Engagements *smithy.Schema
-
-var ListPageReceiptsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPageReceiptsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPageReceiptsRequest_PageId *smithy.Schema
-
-var ListPageReceiptsRequest_NextToken *smithy.Schema
-
-var ListPageReceiptsRequest_MaxResults *smithy.Schema
-
-var ListPageReceiptsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPageReceiptsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPageReceiptsResult_NextToken *smithy.Schema
-
-var ListPageReceiptsResult_Receipts *smithy.Schema
-
-var ListPageResolutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPageResolutionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPageResolutionsRequest_NextToken *smithy.Schema
-
-var ListPageResolutionsRequest_PageId *smithy.Schema
-
-var ListPageResolutionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPageResolutionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPageResolutionsResult_NextToken *smithy.Schema
-
-var ListPageResolutionsResult_PageResolutions *smithy.Schema
-
-var ListPagesByContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPagesByContactRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPagesByContactRequest_ContactId *smithy.Schema
-
-var ListPagesByContactRequest_NextToken *smithy.Schema
-
-var ListPagesByContactRequest_MaxResults *smithy.Schema
-
-var ListPagesByContactResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPagesByContactResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPagesByContactResult_NextToken *smithy.Schema
-
-var ListPagesByContactResult_Pages *smithy.Schema
-
-var ListPagesByEngagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPagesByEngagementRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPagesByEngagementRequest_EngagementId *smithy.Schema
-
-var ListPagesByEngagementRequest_NextToken *smithy.Schema
-
-var ListPagesByEngagementRequest_MaxResults *smithy.Schema
-
-var ListPagesByEngagementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPagesByEngagementResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPagesByEngagementResult_NextToken *smithy.Schema
-
-var ListPagesByEngagementResult_Pages *smithy.Schema
-
-var ListPreviewRotationShiftsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPreviewRotationShiftsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListPreviewRotationShiftsRequest_RotationStartTime *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_StartTime *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_EndTime *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_Members *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_TimeZoneId *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_Recurrence *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_Overrides *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_NextToken *smithy.Schema
-
-var ListPreviewRotationShiftsRequest_MaxResults *smithy.Schema
-
-var ListPreviewRotationShiftsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListPreviewRotationShiftsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPreviewRotationShiftsResult_RotationShifts *smithy.Schema
-
-var ListPreviewRotationShiftsResult_NextToken *smithy.Schema
-
-var ListRotationOverridesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationOverridesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListRotationOverridesRequest_RotationId *smithy.Schema
-
-var ListRotationOverridesRequest_StartTime *smithy.Schema
-
-var ListRotationOverridesRequest_EndTime *smithy.Schema
-
-var ListRotationOverridesRequest_NextToken *smithy.Schema
-
-var ListRotationOverridesRequest_MaxResults *smithy.Schema
-
-var ListRotationOverridesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationOverridesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListRotationOverridesResult_RotationOverrides *smithy.Schema
-
-var ListRotationOverridesResult_NextToken *smithy.Schema
-
-var ListRotationShiftsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationShiftsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListRotationShiftsRequest_RotationId *smithy.Schema
-
-var ListRotationShiftsRequest_StartTime *smithy.Schema
-
-var ListRotationShiftsRequest_EndTime *smithy.Schema
-
-var ListRotationShiftsRequest_NextToken *smithy.Schema
-
-var ListRotationShiftsRequest_MaxResults *smithy.Schema
-
-var ListRotationShiftsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationShiftsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListRotationShiftsResult_RotationShifts *smithy.Schema
-
-var ListRotationShiftsResult_NextToken *smithy.Schema
-
-var ListRotationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRotationsRequest_RotationNamePrefix *smithy.Schema
-
-var ListRotationsRequest_NextToken *smithy.Schema
-
-var ListRotationsRequest_MaxResults *smithy.Schema
-
-var ListRotationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListRotationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListRotationsResult_NextToken *smithy.Schema
-
-var ListRotationsResult_Rotations *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "ListTagsForResourceResult",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResult_Tags *smithy.Schema
-
-var PutContactPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PutContactPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutContactPolicyRequest_ContactArn *smithy.Schema
-
-var PutContactPolicyRequest_Policy *smithy.Schema
-
-var PutContactPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "PutContactPolicyResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var SendActivationCodeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "SendActivationCodeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var SendActivationCodeRequest_ContactChannelId *smithy.Schema
-
-var SendActivationCodeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "SendActivationCodeResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartEngagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StartEngagementRequest",
-}, smithy.ShapeTypeStructure, 8)
-var StartEngagementRequest_ContactId *smithy.Schema
-
-var StartEngagementRequest_Sender *smithy.Schema
-
-var StartEngagementRequest_Subject *smithy.Schema
-
-var StartEngagementRequest_Content *smithy.Schema
-
-var StartEngagementRequest_PublicSubject *smithy.Schema
-
-var StartEngagementRequest_PublicContent *smithy.Schema
-
-var StartEngagementRequest_IncidentId *smithy.Schema
-
-var StartEngagementRequest_IdempotencyToken *smithy.Schema
-
-var StartEngagementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StartEngagementResult",
-}, smithy.ShapeTypeStructure, 1)
-var StartEngagementResult_EngagementArn *smithy.Schema
-
-var StopEngagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StopEngagementRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopEngagementRequest_EngagementId *smithy.Schema
-
-var StopEngagementRequest_Reason *smithy.Schema
-
-var StopEngagementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "StopEngagementResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "TagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UntagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateContactChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateContactChannelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateContactChannelRequest_ContactChannelId *smithy.Schema
-
-var UpdateContactChannelRequest_Name *smithy.Schema
-
-var UpdateContactChannelRequest_DeliveryAddress *smithy.Schema
-
-var UpdateContactChannelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateContactChannelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateContactRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateContactRequest_ContactId *smithy.Schema
-
-var UpdateContactRequest_DisplayName *smithy.Schema
-
-var UpdateContactRequest_Plan *smithy.Schema
-
-var UpdateContactResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateContactResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRotationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateRotationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRotationRequest_RotationId *smithy.Schema
-
-var UpdateRotationRequest_ContactIds *smithy.Schema
-
-var UpdateRotationRequest_StartTime *smithy.Schema
-
-var UpdateRotationRequest_TimeZoneId *smithy.Schema
-
-var UpdateRotationRequest_Recurrence *smithy.Schema
-
-var UpdateRotationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmcontacts",
-	Name:      "UpdateRotationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AcceptCodeValidation_IGNORE = AcceptCodeValidation.AddMember("IGNORE", smithyprelude.Unit)
-
-	AcceptCodeValidation_ENFORCE = AcceptCodeValidation.AddMember("ENFORCE", smithyprelude.Unit)
-
-	AcceptType_DELIVERED = AcceptType.AddMember("DELIVERED", smithyprelude.Unit)
-
-	AcceptType_READ = AcceptType.AddMember("READ", smithyprelude.Unit)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
-
-	ActivationStatus_ACTIVATED = ActivationStatus.AddMember("ACTIVATED", smithyprelude.Unit)
-
-	ActivationStatus_NOT_ACTIVATED = ActivationStatus.AddMember("NOT_ACTIVATED", smithyprelude.Unit)
-
-	ChannelTargetInfo_ContactChannelId = ChannelTargetInfo.AddMember("ContactChannelId", _SsmContactsArn)
-
-	ChannelTargetInfo_RetryIntervalInMinutes = ChannelTargetInfo.AddMember("RetryIntervalInMinutes", _RetryIntervalInMinutes)
-
-	ChannelType_SMS = ChannelType.AddMember("SMS", smithyprelude.Unit)
-
-	ChannelType_VOICE = ChannelType.AddMember("VOICE", smithyprelude.Unit)
-
-	ChannelType_EMAIL = ChannelType.AddMember("EMAIL", smithyprelude.Unit)
-
-	_SsmContactsArnList_member = _SsmContactsArnList.AddMember("member", _SsmContactsArn)
-
-	DependentEntity_RelationType = DependentEntity.AddMember("RelationType", _String)
-
-	DependentEntity_DependentResourceIds = DependentEntity.AddMember("DependentResourceIds", _SsmContactsArnList)
-
-	_DependentEntityList_member = _DependentEntityList.AddMember("member", DependentEntity)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	ConflictException_ResourceId = ConflictException.AddMember("ResourceId", _String)
-
-	ConflictException_ResourceType = ConflictException.AddMember("ResourceType", _String)
-
-	ConflictException_DependentEntities = ConflictException.AddMember("DependentEntities", _DependentEntityList)
-
-	ContactType_PERSONAL = ContactType.AddMember("PERSONAL", smithyprelude.Unit)
-
-	ContactType_ESCALATION = ContactType.AddMember("ESCALATION", smithyprelude.Unit)
-
-	ContactType_ONCALL_SCHEDULE = ContactType.AddMember("ONCALL_SCHEDULE", smithyprelude.Unit)
-
-	Contact_ContactArn = Contact.AddMember("ContactArn", _SsmContactsArn)
-
-	Contact_Alias = Contact.AddMember("Alias", _ContactAlias)
-
-	Contact_DisplayName = Contact.AddMember("DisplayName", _ContactName)
-
-	Contact_Type = Contact.AddMember("Type", ContactType)
-
-	ContactChannelAddress_SimpleAddress = ContactChannelAddress.AddMember("SimpleAddress", _SimpleAddress)
-
-	ContactChannel_ContactChannelArn = ContactChannel.AddMember("ContactChannelArn", _SsmContactsArn)
-
-	ContactChannel_ContactArn = ContactChannel.AddMember("ContactArn", _SsmContactsArn)
-
-	ContactChannel_Name = ContactChannel.AddMember("Name", _ChannelName)
-
-	ContactChannel_Type = ContactChannel.AddMember("Type", ChannelType)
-
-	ContactChannel_DeliveryAddress = ContactChannel.AddMember("DeliveryAddress", ContactChannelAddress)
-
-	ContactChannel_ActivationStatus = ContactChannel.AddMember("ActivationStatus", ActivationStatus)
-
-	_ContactChannelList_member = _ContactChannelList.AddMember("member", ContactChannel)
-
-	_ContactsList_member = _ContactsList.AddMember("member", Contact)
-
-	ContactTargetInfo_ContactId = ContactTargetInfo.AddMember("ContactId", _SsmContactsArn)
-
-	ContactTargetInfo_IsEssential = ContactTargetInfo.AddMember("IsEssential", _IsEssential)
-
-	HandOffTime_HourOfDay = HandOffTime.AddMember("HourOfDay", _HourOfDay)
-
-	HandOffTime_MinuteOfHour = HandOffTime.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	CoverageTime_Start = CoverageTime.AddMember("Start", HandOffTime)
-
-	CoverageTime_End = CoverageTime.AddMember("End", HandOffTime)
-
-	_CoverageTimes_member = _CoverageTimes.AddMember("member", CoverageTime)
-
-	_DailySettings_member = _DailySettings.AddMember("member", HandOffTime)
-
-	DataEncryptionException_Message = DataEncryptionException.AddMember("Message", _String)
-
-	DayOfWeek_MON = DayOfWeek.AddMember("MON", smithyprelude.Unit)
-
-	DayOfWeek_TUE = DayOfWeek.AddMember("TUE", smithyprelude.Unit)
-
-	DayOfWeek_WED = DayOfWeek.AddMember("WED", smithyprelude.Unit)
-
-	DayOfWeek_THU = DayOfWeek.AddMember("THU", smithyprelude.Unit)
-
-	DayOfWeek_FRI = DayOfWeek.AddMember("FRI", smithyprelude.Unit)
-
-	DayOfWeek_SAT = DayOfWeek.AddMember("SAT", smithyprelude.Unit)
-
-	DayOfWeek_SUN = DayOfWeek.AddMember("SUN", smithyprelude.Unit)
-
-	Engagement_EngagementArn = Engagement.AddMember("EngagementArn", _SsmContactsArn)
-
-	Engagement_ContactArn = Engagement.AddMember("ContactArn", _SsmContactsArn)
-
-	Engagement_Sender = Engagement.AddMember("Sender", _Sender)
-
-	Engagement_IncidentId = Engagement.AddMember("IncidentId", _IncidentId)
-
-	Engagement_StartTime = Engagement.AddMember("StartTime", _DateTime)
-
-	Engagement_StopTime = Engagement.AddMember("StopTime", _DateTime)
-
-	_EngagementsList_member = _EngagementsList.AddMember("member", Engagement)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	InternalServerException_RetryAfterSeconds = InternalServerException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	MonthlySetting_DayOfMonth = MonthlySetting.AddMember("DayOfMonth", _DayOfMonth)
-
-	MonthlySetting_HandOffTime = MonthlySetting.AddMember("HandOffTime", HandOffTime)
-
-	_MonthlySettings_member = _MonthlySettings.AddMember("member", MonthlySetting)
-
-	_RotationOverridePreviewMemberList_member = _RotationOverridePreviewMemberList.AddMember("member", _Member)
-
-	PreviewOverride_NewMembers = PreviewOverride.AddMember("NewMembers", _RotationOverridePreviewMemberList)
-
-	PreviewOverride_StartTime = PreviewOverride.AddMember("StartTime", _DateTime)
-
-	PreviewOverride_EndTime = PreviewOverride.AddMember("EndTime", _DateTime)
-
-	_OverrideList_member = _OverrideList.AddMember("member", PreviewOverride)
-
-	Page_PageArn = Page.AddMember("PageArn", _SsmContactsArn)
-
-	Page_EngagementArn = Page.AddMember("EngagementArn", _SsmContactsArn)
-
-	Page_ContactArn = Page.AddMember("ContactArn", _SsmContactsArn)
-
-	Page_Sender = Page.AddMember("Sender", _Sender)
-
-	Page_IncidentId = Page.AddMember("IncidentId", _IncidentId)
-
-	Page_SentTime = Page.AddMember("SentTime", _DateTime)
-
-	Page_DeliveryTime = Page.AddMember("DeliveryTime", _DateTime)
-
-	Page_ReadTime = Page.AddMember("ReadTime", _DateTime)
-
-	_PagesList_member = _PagesList.AddMember("member", Page)
-
-	Target_ChannelTargetInfo = Target.AddMember("ChannelTargetInfo", ChannelTargetInfo)
-
-	Target_ContactTargetInfo = Target.AddMember("ContactTargetInfo", ContactTargetInfo)
-
-	_TargetsList_member = _TargetsList.AddMember("member", Target)
-
-	Stage_DurationInMinutes = Stage.AddMember("DurationInMinutes", _StageDurationInMins)
-
-	Stage_Targets = Stage.AddMember("Targets", _TargetsList)
-
-	_StagesList_member = _StagesList.AddMember("member", Stage)
-
-	Plan_Stages = Plan.AddMember("Stages", _StagesList)
-
-	Plan_RotationIds = Plan.AddMember("RotationIds", _SsmContactsArnList)
-
-	ReceiptType_DELIVERED = ReceiptType.AddMember("DELIVERED", smithyprelude.Unit)
-
-	ReceiptType_ERROR = ReceiptType.AddMember("ERROR", smithyprelude.Unit)
-
-	ReceiptType_READ = ReceiptType.AddMember("READ", smithyprelude.Unit)
-
-	ReceiptType_SENT = ReceiptType.AddMember("SENT", smithyprelude.Unit)
-
-	ReceiptType_STOP = ReceiptType.AddMember("STOP", smithyprelude.Unit)
-
-	Receipt_ContactChannelArn = Receipt.AddMember("ContactChannelArn", _SsmContactsArn)
-
-	Receipt_ReceiptType = Receipt.AddMember("ReceiptType", ReceiptType)
-
-	Receipt_ReceiptInfo = Receipt.AddMember("ReceiptInfo", _ReceiptInfo)
-
-	Receipt_ReceiptTime = Receipt.AddMember("ReceiptTime", _DateTime)
-
-	_ReceiptsList_member = _ReceiptsList.AddMember("member", Receipt)
-
-	WeeklySetting_DayOfWeek = WeeklySetting.AddMember("DayOfWeek", DayOfWeek)
-
-	WeeklySetting_HandOffTime = WeeklySetting.AddMember("HandOffTime", HandOffTime)
-
-	_WeeklySettings_member = _WeeklySettings.AddMember("member", WeeklySetting)
-
-	_ShiftCoveragesMap_key = _ShiftCoveragesMap.AddMember("key", DayOfWeek)
-
-	_ShiftCoveragesMap_value = _ShiftCoveragesMap.AddMember("value", _CoverageTimes)
-
-	RecurrenceSettings_MonthlySettings = RecurrenceSettings.AddMember("MonthlySettings", _MonthlySettings)
-
-	RecurrenceSettings_WeeklySettings = RecurrenceSettings.AddMember("WeeklySettings", _WeeklySettings)
-
-	RecurrenceSettings_DailySettings = RecurrenceSettings.AddMember("DailySettings", _DailySettings)
-
-	RecurrenceSettings_NumberOfOnCalls = RecurrenceSettings.AddMember("NumberOfOnCalls", _NumberOfOnCalls)
-
-	RecurrenceSettings_ShiftCoverages = RecurrenceSettings.AddMember("ShiftCoverages", _ShiftCoveragesMap)
-
-	RecurrenceSettings_RecurrenceMultiplier = RecurrenceSettings.AddMember("RecurrenceMultiplier", _RecurrenceMultiplier)
-
-	ResolutionContact_ContactArn = ResolutionContact.AddMember("ContactArn", _SsmContactsArn)
-
-	ResolutionContact_Type = ResolutionContact.AddMember("Type", ContactType)
-
-	ResolutionContact_StageIndex = ResolutionContact.AddMember("StageIndex", _StageIndex)
-
-	_ResolutionList_member = _ResolutionList.AddMember("member", ResolutionContact)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", _String)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _String)
-
-	Rotation_RotationArn = Rotation.AddMember("RotationArn", _SsmContactsArn)
-
-	Rotation_Name = Rotation.AddMember("Name", _RotationName)
-
-	Rotation_ContactIds = Rotation.AddMember("ContactIds", _SsmContactsArnList)
-
-	Rotation_StartTime = Rotation.AddMember("StartTime", _DateTime)
-
-	Rotation_TimeZoneId = Rotation.AddMember("TimeZoneId", _TimeZoneId)
-
-	Rotation_Recurrence = Rotation.AddMember("Recurrence", RecurrenceSettings)
-
-	_RotationContactsArnList_member = _RotationContactsArnList.AddMember("member", _SsmContactsArn)
-
-	RotationOverride_RotationOverrideId = RotationOverride.AddMember("RotationOverrideId", _Uuid)
-
-	RotationOverride_NewContactIds = RotationOverride.AddMember("NewContactIds", _SsmContactsArnList)
-
-	RotationOverride_StartTime = RotationOverride.AddMember("StartTime", _DateTime)
-
-	RotationOverride_EndTime = RotationOverride.AddMember("EndTime", _DateTime)
-
-	RotationOverride_CreateTime = RotationOverride.AddMember("CreateTime", _DateTime)
-
-	_RotationOverrideContactsArnList_member = _RotationOverrideContactsArnList.AddMember("member", _SsmContactsArn)
-
-	_RotationOverrides_member = _RotationOverrides.AddMember("member", RotationOverride)
-
-	_RotationPreviewMemberList_member = _RotationPreviewMemberList.AddMember("member", _Member)
-
-	_Rotations_member = _Rotations.AddMember("member", Rotation)
-
-	ShiftType_REGULAR = ShiftType.AddMember("REGULAR", smithyprelude.Unit)
-
-	ShiftType_OVERRIDDEN = ShiftType.AddMember("OVERRIDDEN", smithyprelude.Unit)
-
-	ShiftDetails_OverriddenContactIds = ShiftDetails.AddMember("OverriddenContactIds", _SsmContactsArnList)
-
-	RotationShift_ContactIds = RotationShift.AddMember("ContactIds", _SsmContactsArnList)
-
-	RotationShift_StartTime = RotationShift.AddMember("StartTime", _DateTime)
-
-	RotationShift_EndTime = RotationShift.AddMember("EndTime", _DateTime)
-
-	RotationShift_Type = RotationShift.AddMember("Type", ShiftType)
-
-	RotationShift_ShiftDetails = RotationShift.AddMember("ShiftDetails", ShiftDetails)
-
-	_RotationShifts_member = _RotationShifts.AddMember("member", RotationShift)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _String)
-
-	ServiceQuotaExceededException_ResourceId = ServiceQuotaExceededException.AddMember("ResourceId", _String)
-
-	ServiceQuotaExceededException_ResourceType = ServiceQuotaExceededException.AddMember("ResourceType", _String)
-
-	ServiceQuotaExceededException_QuotaCode = ServiceQuotaExceededException.AddMember("QuotaCode", _String)
-
-	ServiceQuotaExceededException_ServiceCode = ServiceQuotaExceededException.AddMember("ServiceCode", _String)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagsList_member = _TagsList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _String)
-
-	ThrottlingException_QuotaCode = ThrottlingException.AddMember("QuotaCode", _String)
-
-	ThrottlingException_ServiceCode = ThrottlingException.AddMember("ServiceCode", _String)
-
-	ThrottlingException_RetryAfterSeconds = ThrottlingException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TimeRange_StartTime = TimeRange.AddMember("StartTime", _DateTime)
-
-	TimeRange_EndTime = TimeRange.AddMember("EndTime", _DateTime)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", _String)
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", _String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationException_Fields = ValidationException.AddMember("Fields", _ValidationExceptionFieldList)
-
-	AcceptPageRequest_PageId = AcceptPageRequest.AddMember("PageId", _SsmContactsArn)
-
-	AcceptPageRequest_ContactChannelId = AcceptPageRequest.AddMember("ContactChannelId", _SsmContactsArn)
-
-	AcceptPageRequest_AcceptType = AcceptPageRequest.AddMember("AcceptType", AcceptType)
-
-	AcceptPageRequest_Note = AcceptPageRequest.AddMember("Note", _ReceiptInfo)
-
-	AcceptPageRequest_AcceptCode = AcceptPageRequest.AddMember("AcceptCode", _AcceptCode)
-
-	AcceptPageRequest_AcceptCodeValidation = AcceptPageRequest.AddMember("AcceptCodeValidation", AcceptCodeValidation)
-
-	ActivateContactChannelRequest_ContactChannelId = ActivateContactChannelRequest.AddMember("ContactChannelId", _SsmContactsArn)
-
-	ActivateContactChannelRequest_ActivationCode = ActivateContactChannelRequest.AddMember("ActivationCode", _ActivationCode)
-
-	CreateContactChannelRequest_ContactId = CreateContactChannelRequest.AddMember("ContactId", _SsmContactsArn)
-
-	CreateContactChannelRequest_Name = CreateContactChannelRequest.AddMember("Name", _ChannelName)
-
-	CreateContactChannelRequest_Type = CreateContactChannelRequest.AddMember("Type", ChannelType)
-
-	CreateContactChannelRequest_DeliveryAddress = CreateContactChannelRequest.AddMember("DeliveryAddress", ContactChannelAddress)
-
-	CreateContactChannelRequest_DeferActivation = CreateContactChannelRequest.AddMember("DeferActivation", _DeferActivation)
-
-	CreateContactChannelRequest_IdempotencyToken = CreateContactChannelRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateContactChannelResult_ContactChannelArn = CreateContactChannelResult.AddMember("ContactChannelArn", _SsmContactsArn)
-
-	CreateContactRequest_Alias = CreateContactRequest.AddMember("Alias", _ContactAlias)
-
-	CreateContactRequest_DisplayName = CreateContactRequest.AddMember("DisplayName", _ContactName)
-
-	CreateContactRequest_Type = CreateContactRequest.AddMember("Type", ContactType)
-
-	CreateContactRequest_Plan = CreateContactRequest.AddMember("Plan", Plan)
-
-	CreateContactRequest_Tags = CreateContactRequest.AddMember("Tags", _TagsList)
-
-	CreateContactRequest_IdempotencyToken = CreateContactRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateContactResult_ContactArn = CreateContactResult.AddMember("ContactArn", _SsmContactsArn)
-
-	CreateRotationRequest_Name = CreateRotationRequest.AddMember("Name", _RotationName)
-
-	CreateRotationRequest_ContactIds = CreateRotationRequest.AddMember("ContactIds", _RotationContactsArnList)
-
-	CreateRotationRequest_StartTime = CreateRotationRequest.AddMember("StartTime", _DateTime)
-
-	CreateRotationRequest_TimeZoneId = CreateRotationRequest.AddMember("TimeZoneId", _TimeZoneId)
-
-	CreateRotationRequest_Recurrence = CreateRotationRequest.AddMember("Recurrence", RecurrenceSettings)
-
-	CreateRotationRequest_Tags = CreateRotationRequest.AddMember("Tags", _TagsList)
-
-	CreateRotationRequest_IdempotencyToken = CreateRotationRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateRotationResult_RotationArn = CreateRotationResult.AddMember("RotationArn", _SsmContactsArn)
-
-	CreateRotationOverrideRequest_RotationId = CreateRotationOverrideRequest.AddMember("RotationId", _SsmContactsArn)
-
-	CreateRotationOverrideRequest_NewContactIds = CreateRotationOverrideRequest.AddMember("NewContactIds", _RotationOverrideContactsArnList)
-
-	CreateRotationOverrideRequest_StartTime = CreateRotationOverrideRequest.AddMember("StartTime", _DateTime)
-
-	CreateRotationOverrideRequest_EndTime = CreateRotationOverrideRequest.AddMember("EndTime", _DateTime)
-
-	CreateRotationOverrideRequest_IdempotencyToken = CreateRotationOverrideRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateRotationOverrideResult_RotationOverrideId = CreateRotationOverrideResult.AddMember("RotationOverrideId", _Uuid)
-
-	DeactivateContactChannelRequest_ContactChannelId = DeactivateContactChannelRequest.AddMember("ContactChannelId", _SsmContactsArn)
-
-	DeleteContactChannelRequest_ContactChannelId = DeleteContactChannelRequest.AddMember("ContactChannelId", _SsmContactsArn)
-
-	DeleteContactRequest_ContactId = DeleteContactRequest.AddMember("ContactId", _SsmContactsArn)
-
-	DeleteRotationRequest_RotationId = DeleteRotationRequest.AddMember("RotationId", _SsmContactsArn)
-
-	DeleteRotationOverrideRequest_RotationId = DeleteRotationOverrideRequest.AddMember("RotationId", _SsmContactsArn)
-
-	DeleteRotationOverrideRequest_RotationOverrideId = DeleteRotationOverrideRequest.AddMember("RotationOverrideId", _Uuid)
-
-	DescribeEngagementRequest_EngagementId = DescribeEngagementRequest.AddMember("EngagementId", _SsmContactsArn)
-
-	DescribeEngagementResult_ContactArn = DescribeEngagementResult.AddMember("ContactArn", _SsmContactsArn)
-
-	DescribeEngagementResult_EngagementArn = DescribeEngagementResult.AddMember("EngagementArn", _SsmContactsArn)
-
-	DescribeEngagementResult_Sender = DescribeEngagementResult.AddMember("Sender", _Sender)
-
-	DescribeEngagementResult_Subject = DescribeEngagementResult.AddMember("Subject", _Subject)
-
-	DescribeEngagementResult_Content = DescribeEngagementResult.AddMember("Content", _Content)
-
-	DescribeEngagementResult_PublicSubject = DescribeEngagementResult.AddMember("PublicSubject", _PublicSubject)
-
-	DescribeEngagementResult_PublicContent = DescribeEngagementResult.AddMember("PublicContent", _PublicContent)
-
-	DescribeEngagementResult_IncidentId = DescribeEngagementResult.AddMember("IncidentId", _IncidentId)
-
-	DescribeEngagementResult_StartTime = DescribeEngagementResult.AddMember("StartTime", _DateTime)
-
-	DescribeEngagementResult_StopTime = DescribeEngagementResult.AddMember("StopTime", _DateTime)
-
-	DescribePageRequest_PageId = DescribePageRequest.AddMember("PageId", _SsmContactsArn)
-
-	DescribePageResult_PageArn = DescribePageResult.AddMember("PageArn", _SsmContactsArn)
-
-	DescribePageResult_EngagementArn = DescribePageResult.AddMember("EngagementArn", _SsmContactsArn)
-
-	DescribePageResult_ContactArn = DescribePageResult.AddMember("ContactArn", _SsmContactsArn)
-
-	DescribePageResult_Sender = DescribePageResult.AddMember("Sender", _Sender)
-
-	DescribePageResult_Subject = DescribePageResult.AddMember("Subject", _Subject)
-
-	DescribePageResult_Content = DescribePageResult.AddMember("Content", _Content)
-
-	DescribePageResult_PublicSubject = DescribePageResult.AddMember("PublicSubject", _PublicSubject)
-
-	DescribePageResult_PublicContent = DescribePageResult.AddMember("PublicContent", _PublicContent)
-
-	DescribePageResult_IncidentId = DescribePageResult.AddMember("IncidentId", _IncidentId)
-
-	DescribePageResult_SentTime = DescribePageResult.AddMember("SentTime", _DateTime)
-
-	DescribePageResult_ReadTime = DescribePageResult.AddMember("ReadTime", _DateTime)
-
-	DescribePageResult_DeliveryTime = DescribePageResult.AddMember("DeliveryTime", _DateTime)
-
-	GetContactChannelRequest_ContactChannelId = GetContactChannelRequest.AddMember("ContactChannelId", _SsmContactsArn)
-
-	GetContactChannelResult_ContactArn = GetContactChannelResult.AddMember("ContactArn", _SsmContactsArn)
-
-	GetContactChannelResult_ContactChannelArn = GetContactChannelResult.AddMember("ContactChannelArn", _SsmContactsArn)
-
-	GetContactChannelResult_Name = GetContactChannelResult.AddMember("Name", _ChannelName)
-
-	GetContactChannelResult_Type = GetContactChannelResult.AddMember("Type", ChannelType)
-
-	GetContactChannelResult_DeliveryAddress = GetContactChannelResult.AddMember("DeliveryAddress", ContactChannelAddress)
-
-	GetContactChannelResult_ActivationStatus = GetContactChannelResult.AddMember("ActivationStatus", ActivationStatus)
-
-	GetContactRequest_ContactId = GetContactRequest.AddMember("ContactId", _SsmContactsArn)
-
-	GetContactResult_ContactArn = GetContactResult.AddMember("ContactArn", _SsmContactsArn)
-
-	GetContactResult_Alias = GetContactResult.AddMember("Alias", _ContactAlias)
-
-	GetContactResult_DisplayName = GetContactResult.AddMember("DisplayName", _ContactName)
-
-	GetContactResult_Type = GetContactResult.AddMember("Type", ContactType)
-
-	GetContactResult_Plan = GetContactResult.AddMember("Plan", Plan)
-
-	GetContactPolicyRequest_ContactArn = GetContactPolicyRequest.AddMember("ContactArn", _SsmContactsArn)
-
-	GetContactPolicyResult_ContactArn = GetContactPolicyResult.AddMember("ContactArn", _SsmContactsArn)
-
-	GetContactPolicyResult_Policy = GetContactPolicyResult.AddMember("Policy", _Policy)
-
-	GetRotationRequest_RotationId = GetRotationRequest.AddMember("RotationId", _SsmContactsArn)
-
-	GetRotationResult_RotationArn = GetRotationResult.AddMember("RotationArn", _SsmContactsArn)
-
-	GetRotationResult_Name = GetRotationResult.AddMember("Name", _RotationName)
-
-	GetRotationResult_ContactIds = GetRotationResult.AddMember("ContactIds", _RotationContactsArnList)
-
-	GetRotationResult_StartTime = GetRotationResult.AddMember("StartTime", _DateTime)
-
-	GetRotationResult_TimeZoneId = GetRotationResult.AddMember("TimeZoneId", _TimeZoneId)
-
-	GetRotationResult_Recurrence = GetRotationResult.AddMember("Recurrence", RecurrenceSettings)
-
-	GetRotationOverrideRequest_RotationId = GetRotationOverrideRequest.AddMember("RotationId", _SsmContactsArn)
-
-	GetRotationOverrideRequest_RotationOverrideId = GetRotationOverrideRequest.AddMember("RotationOverrideId", _Uuid)
-
-	GetRotationOverrideResult_RotationOverrideId = GetRotationOverrideResult.AddMember("RotationOverrideId", _Uuid)
-
-	GetRotationOverrideResult_RotationArn = GetRotationOverrideResult.AddMember("RotationArn", _SsmContactsArn)
-
-	GetRotationOverrideResult_NewContactIds = GetRotationOverrideResult.AddMember("NewContactIds", _SsmContactsArnList)
-
-	GetRotationOverrideResult_StartTime = GetRotationOverrideResult.AddMember("StartTime", _DateTime)
-
-	GetRotationOverrideResult_EndTime = GetRotationOverrideResult.AddMember("EndTime", _DateTime)
-
-	GetRotationOverrideResult_CreateTime = GetRotationOverrideResult.AddMember("CreateTime", _DateTime)
-
-	ListContactChannelsRequest_ContactId = ListContactChannelsRequest.AddMember("ContactId", _SsmContactsArn)
-
-	ListContactChannelsRequest_NextToken = ListContactChannelsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListContactChannelsRequest_MaxResults = ListContactChannelsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListContactChannelsResult_NextToken = ListContactChannelsResult.AddMember("NextToken", _PaginationToken)
-
-	ListContactChannelsResult_ContactChannels = ListContactChannelsResult.AddMember("ContactChannels", _ContactChannelList)
-
-	ListContactsRequest_NextToken = ListContactsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListContactsRequest_MaxResults = ListContactsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListContactsRequest_AliasPrefix = ListContactsRequest.AddMember("AliasPrefix", _ContactAlias)
-
-	ListContactsRequest_Type = ListContactsRequest.AddMember("Type", ContactType)
-
-	ListContactsResult_NextToken = ListContactsResult.AddMember("NextToken", _PaginationToken)
-
-	ListContactsResult_Contacts = ListContactsResult.AddMember("Contacts", _ContactsList)
-
-	ListEngagementsRequest_NextToken = ListEngagementsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListEngagementsRequest_MaxResults = ListEngagementsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListEngagementsRequest_IncidentId = ListEngagementsRequest.AddMember("IncidentId", _IncidentId)
-
-	ListEngagementsRequest_TimeRangeValue = ListEngagementsRequest.AddMember("TimeRangeValue", TimeRange)
-
-	ListEngagementsResult_NextToken = ListEngagementsResult.AddMember("NextToken", _PaginationToken)
-
-	ListEngagementsResult_Engagements = ListEngagementsResult.AddMember("Engagements", _EngagementsList)
-
-	ListPageReceiptsRequest_PageId = ListPageReceiptsRequest.AddMember("PageId", _SsmContactsArn)
-
-	ListPageReceiptsRequest_NextToken = ListPageReceiptsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListPageReceiptsRequest_MaxResults = ListPageReceiptsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPageReceiptsResult_NextToken = ListPageReceiptsResult.AddMember("NextToken", _PaginationToken)
-
-	ListPageReceiptsResult_Receipts = ListPageReceiptsResult.AddMember("Receipts", _ReceiptsList)
-
-	ListPageResolutionsRequest_NextToken = ListPageResolutionsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListPageResolutionsRequest_PageId = ListPageResolutionsRequest.AddMember("PageId", _SsmContactsArn)
-
-	ListPageResolutionsResult_NextToken = ListPageResolutionsResult.AddMember("NextToken", _PaginationToken)
-
-	ListPageResolutionsResult_PageResolutions = ListPageResolutionsResult.AddMember("PageResolutions", _ResolutionList)
-
-	ListPagesByContactRequest_ContactId = ListPagesByContactRequest.AddMember("ContactId", _SsmContactsArn)
-
-	ListPagesByContactRequest_NextToken = ListPagesByContactRequest.AddMember("NextToken", _PaginationToken)
-
-	ListPagesByContactRequest_MaxResults = ListPagesByContactRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPagesByContactResult_NextToken = ListPagesByContactResult.AddMember("NextToken", _PaginationToken)
-
-	ListPagesByContactResult_Pages = ListPagesByContactResult.AddMember("Pages", _PagesList)
-
-	ListPagesByEngagementRequest_EngagementId = ListPagesByEngagementRequest.AddMember("EngagementId", _SsmContactsArn)
-
-	ListPagesByEngagementRequest_NextToken = ListPagesByEngagementRequest.AddMember("NextToken", _PaginationToken)
-
-	ListPagesByEngagementRequest_MaxResults = ListPagesByEngagementRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPagesByEngagementResult_NextToken = ListPagesByEngagementResult.AddMember("NextToken", _PaginationToken)
-
-	ListPagesByEngagementResult_Pages = ListPagesByEngagementResult.AddMember("Pages", _PagesList)
-
-	ListPreviewRotationShiftsRequest_RotationStartTime = ListPreviewRotationShiftsRequest.AddMember("RotationStartTime", _DateTime)
-
-	ListPreviewRotationShiftsRequest_StartTime = ListPreviewRotationShiftsRequest.AddMember("StartTime", _DateTime)
-
-	ListPreviewRotationShiftsRequest_EndTime = ListPreviewRotationShiftsRequest.AddMember("EndTime", _DateTime)
-
-	ListPreviewRotationShiftsRequest_Members = ListPreviewRotationShiftsRequest.AddMember("Members", _RotationPreviewMemberList)
-
-	ListPreviewRotationShiftsRequest_TimeZoneId = ListPreviewRotationShiftsRequest.AddMember("TimeZoneId", _TimeZoneId)
-
-	ListPreviewRotationShiftsRequest_Recurrence = ListPreviewRotationShiftsRequest.AddMember("Recurrence", RecurrenceSettings)
-
-	ListPreviewRotationShiftsRequest_Overrides = ListPreviewRotationShiftsRequest.AddMember("Overrides", _OverrideList)
-
-	ListPreviewRotationShiftsRequest_NextToken = ListPreviewRotationShiftsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListPreviewRotationShiftsRequest_MaxResults = ListPreviewRotationShiftsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPreviewRotationShiftsResult_RotationShifts = ListPreviewRotationShiftsResult.AddMember("RotationShifts", _RotationShifts)
-
-	ListPreviewRotationShiftsResult_NextToken = ListPreviewRotationShiftsResult.AddMember("NextToken", _PaginationToken)
-
-	ListRotationOverridesRequest_RotationId = ListRotationOverridesRequest.AddMember("RotationId", _SsmContactsArn)
-
-	ListRotationOverridesRequest_StartTime = ListRotationOverridesRequest.AddMember("StartTime", _DateTime)
-
-	ListRotationOverridesRequest_EndTime = ListRotationOverridesRequest.AddMember("EndTime", _DateTime)
-
-	ListRotationOverridesRequest_NextToken = ListRotationOverridesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListRotationOverridesRequest_MaxResults = ListRotationOverridesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRotationOverridesResult_RotationOverrides = ListRotationOverridesResult.AddMember("RotationOverrides", _RotationOverrides)
-
-	ListRotationOverridesResult_NextToken = ListRotationOverridesResult.AddMember("NextToken", _PaginationToken)
-
-	ListRotationShiftsRequest_RotationId = ListRotationShiftsRequest.AddMember("RotationId", _SsmContactsArn)
-
-	ListRotationShiftsRequest_StartTime = ListRotationShiftsRequest.AddMember("StartTime", _DateTime)
-
-	ListRotationShiftsRequest_EndTime = ListRotationShiftsRequest.AddMember("EndTime", _DateTime)
-
-	ListRotationShiftsRequest_NextToken = ListRotationShiftsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListRotationShiftsRequest_MaxResults = ListRotationShiftsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRotationShiftsResult_RotationShifts = ListRotationShiftsResult.AddMember("RotationShifts", _RotationShifts)
-
-	ListRotationShiftsResult_NextToken = ListRotationShiftsResult.AddMember("NextToken", _PaginationToken)
-
-	ListRotationsRequest_RotationNamePrefix = ListRotationsRequest.AddMember("RotationNamePrefix", _RotationName)
-
-	ListRotationsRequest_NextToken = ListRotationsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListRotationsRequest_MaxResults = ListRotationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRotationsResult_NextToken = ListRotationsResult.AddMember("NextToken", _PaginationToken)
-
-	ListRotationsResult_Rotations = ListRotationsResult.AddMember("Rotations", _Rotations)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResult_Tags = ListTagsForResourceResult.AddMember("Tags", _TagsList)
-
-	PutContactPolicyRequest_ContactArn = PutContactPolicyRequest.AddMember("ContactArn", _SsmContactsArn)
-
-	PutContactPolicyRequest_Policy = PutContactPolicyRequest.AddMember("Policy", _Policy)
-
-	SendActivationCodeRequest_ContactChannelId = SendActivationCodeRequest.AddMember("ContactChannelId", _SsmContactsArn)
-
-	StartEngagementRequest_ContactId = StartEngagementRequest.AddMember("ContactId", _SsmContactsArn)
-
-	StartEngagementRequest_Sender = StartEngagementRequest.AddMember("Sender", _Sender)
-
-	StartEngagementRequest_Subject = StartEngagementRequest.AddMember("Subject", _Subject)
-
-	StartEngagementRequest_Content = StartEngagementRequest.AddMember("Content", _Content)
-
-	StartEngagementRequest_PublicSubject = StartEngagementRequest.AddMember("PublicSubject", _PublicSubject)
-
-	StartEngagementRequest_PublicContent = StartEngagementRequest.AddMember("PublicContent", _PublicContent)
-
-	StartEngagementRequest_IncidentId = StartEngagementRequest.AddMember("IncidentId", _IncidentId)
-
-	StartEngagementRequest_IdempotencyToken = StartEngagementRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	StartEngagementResult_EngagementArn = StartEngagementResult.AddMember("EngagementArn", _SsmContactsArn)
-
-	StopEngagementRequest_EngagementId = StopEngagementRequest.AddMember("EngagementId", _SsmContactsArn)
-
-	StopEngagementRequest_Reason = StopEngagementRequest.AddMember("Reason", _StopReason)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagsList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateContactChannelRequest_ContactChannelId = UpdateContactChannelRequest.AddMember("ContactChannelId", _SsmContactsArn)
-
-	UpdateContactChannelRequest_Name = UpdateContactChannelRequest.AddMember("Name", _ChannelName)
-
-	UpdateContactChannelRequest_DeliveryAddress = UpdateContactChannelRequest.AddMember("DeliveryAddress", ContactChannelAddress)
-
-	UpdateContactRequest_ContactId = UpdateContactRequest.AddMember("ContactId", _SsmContactsArn)
-
-	UpdateContactRequest_DisplayName = UpdateContactRequest.AddMember("DisplayName", _ContactName)
-
-	UpdateContactRequest_Plan = UpdateContactRequest.AddMember("Plan", Plan)
-
-	UpdateRotationRequest_RotationId = UpdateRotationRequest.AddMember("RotationId", _SsmContactsArn)
-
-	UpdateRotationRequest_ContactIds = UpdateRotationRequest.AddMember("ContactIds", _RotationContactsArnList)
-
-	UpdateRotationRequest_StartTime = UpdateRotationRequest.AddMember("StartTime", _DateTime)
-
-	UpdateRotationRequest_TimeZoneId = UpdateRotationRequest.AddMember("TimeZoneId", _TimeZoneId)
-
-	UpdateRotationRequest_Recurrence = UpdateRotationRequest.AddMember("Recurrence", RecurrenceSettings)
-
-}
+var (
+	eAcceptPage                                         smithy.SchemaExtensions
+	eActivateContactChannel                             smithy.SchemaExtensions
+	eCreateContact                                      smithy.SchemaExtensions
+	eCreateContactChannel                               smithy.SchemaExtensions
+	eCreateRotation                                     smithy.SchemaExtensions
+	eCreateRotationOverride                             smithy.SchemaExtensions
+	eDeactivateContactChannel                           smithy.SchemaExtensions
+	eDeleteContact                                      smithy.SchemaExtensions
+	eDeleteContactChannel                               smithy.SchemaExtensions
+	eDeleteRotation                                     smithy.SchemaExtensions
+	eDeleteRotationOverride                             smithy.SchemaExtensions
+	eDescribeEngagement                                 smithy.SchemaExtensions
+	eDescribePage                                       smithy.SchemaExtensions
+	eGetContact                                         smithy.SchemaExtensions
+	eGetContactChannel                                  smithy.SchemaExtensions
+	eGetContactPolicy                                   smithy.SchemaExtensions
+	eGetRotation                                        smithy.SchemaExtensions
+	eGetRotationOverride                                smithy.SchemaExtensions
+	eListContactChannels                                smithy.SchemaExtensions
+	eListContacts                                       smithy.SchemaExtensions
+	eListEngagements                                    smithy.SchemaExtensions
+	eListPageReceipts                                   smithy.SchemaExtensions
+	eListPageResolutions                                smithy.SchemaExtensions
+	eListPagesByContact                                 smithy.SchemaExtensions
+	eListPagesByEngagement                              smithy.SchemaExtensions
+	eListPreviewRotationShifts                          smithy.SchemaExtensions
+	eListRotationOverrides                              smithy.SchemaExtensions
+	eListRotations                                      smithy.SchemaExtensions
+	eListRotationShifts                                 smithy.SchemaExtensions
+	eListTagsForResource                                smithy.SchemaExtensions
+	ePutContactPolicy                                   smithy.SchemaExtensions
+	eSendActivationCode                                 smithy.SchemaExtensions
+	eStartEngagement                                    smithy.SchemaExtensions
+	eStopEngagement                                     smithy.SchemaExtensions
+	eTagResource                                        smithy.SchemaExtensions
+	eUntagResource                                      smithy.SchemaExtensions
+	eUpdateContact                                      smithy.SchemaExtensions
+	eUpdateContactChannel                               smithy.SchemaExtensions
+	eUpdateRotation                                     smithy.SchemaExtensions
+	e_SSMContacts                                       smithy.SchemaExtensions
+	e_AcceptCode                                        smithy.SchemaExtensions
+	eAcceptCodeValidation                               smithy.SchemaExtensions
+	eAcceptCodeValidation_IGNORE                        smithy.SchemaExtensions
+	eAcceptCodeValidation_ENFORCE                       smithy.SchemaExtensions
+	eAcceptType                                         smithy.SchemaExtensions
+	eAcceptType_DELIVERED                               smithy.SchemaExtensions
+	eAcceptType_READ                                    smithy.SchemaExtensions
+	eAccessDeniedException                              smithy.SchemaExtensions
+	eAccessDeniedException_Message                      smithy.SchemaExtensions
+	e_ActivationCode                                    smithy.SchemaExtensions
+	eActivationStatus                                   smithy.SchemaExtensions
+	eActivationStatus_ACTIVATED                         smithy.SchemaExtensions
+	eActivationStatus_NOT_ACTIVATED                     smithy.SchemaExtensions
+	e_AmazonResourceName                                smithy.SchemaExtensions
+	e_ChannelName                                       smithy.SchemaExtensions
+	eChannelTargetInfo                                  smithy.SchemaExtensions
+	eChannelTargetInfo_ContactChannelId                 smithy.SchemaExtensions
+	eChannelTargetInfo_RetryIntervalInMinutes           smithy.SchemaExtensions
+	eChannelType                                        smithy.SchemaExtensions
+	eChannelType_SMS                                    smithy.SchemaExtensions
+	eChannelType_VOICE                                  smithy.SchemaExtensions
+	eChannelType_EMAIL                                  smithy.SchemaExtensions
+	eConflictException                                  smithy.SchemaExtensions
+	eConflictException_Message                          smithy.SchemaExtensions
+	eConflictException_ResourceId                       smithy.SchemaExtensions
+	eConflictException_ResourceType                     smithy.SchemaExtensions
+	eConflictException_DependentEntities                smithy.SchemaExtensions
+	eContact                                            smithy.SchemaExtensions
+	eContact_ContactArn                                 smithy.SchemaExtensions
+	eContact_Alias                                      smithy.SchemaExtensions
+	eContact_DisplayName                                smithy.SchemaExtensions
+	eContact_Type                                       smithy.SchemaExtensions
+	e_ContactAlias                                      smithy.SchemaExtensions
+	eContactChannel                                     smithy.SchemaExtensions
+	eContactChannel_ContactChannelArn                   smithy.SchemaExtensions
+	eContactChannel_ContactArn                          smithy.SchemaExtensions
+	eContactChannel_Name                                smithy.SchemaExtensions
+	eContactChannel_Type                                smithy.SchemaExtensions
+	eContactChannel_DeliveryAddress                     smithy.SchemaExtensions
+	eContactChannel_ActivationStatus                    smithy.SchemaExtensions
+	eContactChannelAddress                              smithy.SchemaExtensions
+	eContactChannelAddress_SimpleAddress                smithy.SchemaExtensions
+	e_ContactChannelList                                smithy.SchemaExtensions
+	e_ContactChannelList_member                         smithy.SchemaExtensions
+	e_ContactName                                       smithy.SchemaExtensions
+	e_ContactsList                                      smithy.SchemaExtensions
+	e_ContactsList_member                               smithy.SchemaExtensions
+	eContactTargetInfo                                  smithy.SchemaExtensions
+	eContactTargetInfo_ContactId                        smithy.SchemaExtensions
+	eContactTargetInfo_IsEssential                      smithy.SchemaExtensions
+	eContactType                                        smithy.SchemaExtensions
+	eContactType_PERSONAL                               smithy.SchemaExtensions
+	eContactType_ESCALATION                             smithy.SchemaExtensions
+	eContactType_ONCALL_SCHEDULE                        smithy.SchemaExtensions
+	e_Content                                           smithy.SchemaExtensions
+	eCoverageTime                                       smithy.SchemaExtensions
+	eCoverageTime_Start                                 smithy.SchemaExtensions
+	eCoverageTime_End                                   smithy.SchemaExtensions
+	e_CoverageTimes                                     smithy.SchemaExtensions
+	e_CoverageTimes_member                              smithy.SchemaExtensions
+	e_DailySettings                                     smithy.SchemaExtensions
+	e_DailySettings_member                              smithy.SchemaExtensions
+	eDataEncryptionException                            smithy.SchemaExtensions
+	eDataEncryptionException_Message                    smithy.SchemaExtensions
+	e_DateTime                                          smithy.SchemaExtensions
+	e_DayOfMonth                                        smithy.SchemaExtensions
+	eDayOfWeek                                          smithy.SchemaExtensions
+	eDayOfWeek_MON                                      smithy.SchemaExtensions
+	eDayOfWeek_TUE                                      smithy.SchemaExtensions
+	eDayOfWeek_WED                                      smithy.SchemaExtensions
+	eDayOfWeek_THU                                      smithy.SchemaExtensions
+	eDayOfWeek_FRI                                      smithy.SchemaExtensions
+	eDayOfWeek_SAT                                      smithy.SchemaExtensions
+	eDayOfWeek_SUN                                      smithy.SchemaExtensions
+	e_DeferActivation                                   smithy.SchemaExtensions
+	eDependentEntity                                    smithy.SchemaExtensions
+	eDependentEntity_RelationType                       smithy.SchemaExtensions
+	eDependentEntity_DependentResourceIds               smithy.SchemaExtensions
+	e_DependentEntityList                               smithy.SchemaExtensions
+	e_DependentEntityList_member                        smithy.SchemaExtensions
+	eEngagement                                         smithy.SchemaExtensions
+	eEngagement_EngagementArn                           smithy.SchemaExtensions
+	eEngagement_ContactArn                              smithy.SchemaExtensions
+	eEngagement_Sender                                  smithy.SchemaExtensions
+	eEngagement_IncidentId                              smithy.SchemaExtensions
+	eEngagement_StartTime                               smithy.SchemaExtensions
+	eEngagement_StopTime                                smithy.SchemaExtensions
+	e_EngagementsList                                   smithy.SchemaExtensions
+	e_EngagementsList_member                            smithy.SchemaExtensions
+	eHandOffTime                                        smithy.SchemaExtensions
+	eHandOffTime_HourOfDay                              smithy.SchemaExtensions
+	eHandOffTime_MinuteOfHour                           smithy.SchemaExtensions
+	e_HourOfDay                                         smithy.SchemaExtensions
+	e_IdempotencyToken                                  smithy.SchemaExtensions
+	e_IncidentId                                        smithy.SchemaExtensions
+	eInternalServerException                            smithy.SchemaExtensions
+	eInternalServerException_Message                    smithy.SchemaExtensions
+	eInternalServerException_RetryAfterSeconds          smithy.SchemaExtensions
+	e_IsEssential                                       smithy.SchemaExtensions
+	e_MaxResults                                        smithy.SchemaExtensions
+	e_Member                                            smithy.SchemaExtensions
+	e_MinuteOfHour                                      smithy.SchemaExtensions
+	eMonthlySetting                                     smithy.SchemaExtensions
+	eMonthlySetting_DayOfMonth                          smithy.SchemaExtensions
+	eMonthlySetting_HandOffTime                         smithy.SchemaExtensions
+	e_MonthlySettings                                   smithy.SchemaExtensions
+	e_MonthlySettings_member                            smithy.SchemaExtensions
+	e_NumberOfOnCalls                                   smithy.SchemaExtensions
+	e_OverrideList                                      smithy.SchemaExtensions
+	e_OverrideList_member                               smithy.SchemaExtensions
+	ePage                                               smithy.SchemaExtensions
+	ePage_PageArn                                       smithy.SchemaExtensions
+	ePage_EngagementArn                                 smithy.SchemaExtensions
+	ePage_ContactArn                                    smithy.SchemaExtensions
+	ePage_Sender                                        smithy.SchemaExtensions
+	ePage_IncidentId                                    smithy.SchemaExtensions
+	ePage_SentTime                                      smithy.SchemaExtensions
+	ePage_DeliveryTime                                  smithy.SchemaExtensions
+	ePage_ReadTime                                      smithy.SchemaExtensions
+	e_PagesList                                         smithy.SchemaExtensions
+	e_PagesList_member                                  smithy.SchemaExtensions
+	e_PaginationToken                                   smithy.SchemaExtensions
+	ePlan                                               smithy.SchemaExtensions
+	ePlan_Stages                                        smithy.SchemaExtensions
+	ePlan_RotationIds                                   smithy.SchemaExtensions
+	e_Policy                                            smithy.SchemaExtensions
+	ePreviewOverride                                    smithy.SchemaExtensions
+	ePreviewOverride_NewMembers                         smithy.SchemaExtensions
+	ePreviewOverride_StartTime                          smithy.SchemaExtensions
+	ePreviewOverride_EndTime                            smithy.SchemaExtensions
+	e_PublicContent                                     smithy.SchemaExtensions
+	e_PublicSubject                                     smithy.SchemaExtensions
+	eReceipt                                            smithy.SchemaExtensions
+	eReceipt_ContactChannelArn                          smithy.SchemaExtensions
+	eReceipt_ReceiptType                                smithy.SchemaExtensions
+	eReceipt_ReceiptInfo                                smithy.SchemaExtensions
+	eReceipt_ReceiptTime                                smithy.SchemaExtensions
+	e_ReceiptInfo                                       smithy.SchemaExtensions
+	e_ReceiptsList                                      smithy.SchemaExtensions
+	e_ReceiptsList_member                               smithy.SchemaExtensions
+	eReceiptType                                        smithy.SchemaExtensions
+	eReceiptType_DELIVERED                              smithy.SchemaExtensions
+	eReceiptType_ERROR                                  smithy.SchemaExtensions
+	eReceiptType_READ                                   smithy.SchemaExtensions
+	eReceiptType_SENT                                   smithy.SchemaExtensions
+	eReceiptType_STOP                                   smithy.SchemaExtensions
+	e_RecurrenceMultiplier                              smithy.SchemaExtensions
+	eRecurrenceSettings                                 smithy.SchemaExtensions
+	eRecurrenceSettings_MonthlySettings                 smithy.SchemaExtensions
+	eRecurrenceSettings_WeeklySettings                  smithy.SchemaExtensions
+	eRecurrenceSettings_DailySettings                   smithy.SchemaExtensions
+	eRecurrenceSettings_NumberOfOnCalls                 smithy.SchemaExtensions
+	eRecurrenceSettings_ShiftCoverages                  smithy.SchemaExtensions
+	eRecurrenceSettings_RecurrenceMultiplier            smithy.SchemaExtensions
+	eResolutionContact                                  smithy.SchemaExtensions
+	eResolutionContact_ContactArn                       smithy.SchemaExtensions
+	eResolutionContact_Type                             smithy.SchemaExtensions
+	eResolutionContact_StageIndex                       smithy.SchemaExtensions
+	e_ResolutionList                                    smithy.SchemaExtensions
+	e_ResolutionList_member                             smithy.SchemaExtensions
+	eResourceNotFoundException                          smithy.SchemaExtensions
+	eResourceNotFoundException_Message                  smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId               smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType             smithy.SchemaExtensions
+	e_RetryAfterSeconds                                 smithy.SchemaExtensions
+	e_RetryIntervalInMinutes                            smithy.SchemaExtensions
+	eRotation                                           smithy.SchemaExtensions
+	eRotation_RotationArn                               smithy.SchemaExtensions
+	eRotation_Name                                      smithy.SchemaExtensions
+	eRotation_ContactIds                                smithy.SchemaExtensions
+	eRotation_StartTime                                 smithy.SchemaExtensions
+	eRotation_TimeZoneId                                smithy.SchemaExtensions
+	eRotation_Recurrence                                smithy.SchemaExtensions
+	e_RotationContactsArnList                           smithy.SchemaExtensions
+	e_RotationContactsArnList_member                    smithy.SchemaExtensions
+	e_RotationName                                      smithy.SchemaExtensions
+	eRotationOverride                                   smithy.SchemaExtensions
+	eRotationOverride_RotationOverrideId                smithy.SchemaExtensions
+	eRotationOverride_NewContactIds                     smithy.SchemaExtensions
+	eRotationOverride_StartTime                         smithy.SchemaExtensions
+	eRotationOverride_EndTime                           smithy.SchemaExtensions
+	eRotationOverride_CreateTime                        smithy.SchemaExtensions
+	e_RotationOverrideContactsArnList                   smithy.SchemaExtensions
+	e_RotationOverrideContactsArnList_member            smithy.SchemaExtensions
+	e_RotationOverridePreviewMemberList                 smithy.SchemaExtensions
+	e_RotationOverridePreviewMemberList_member          smithy.SchemaExtensions
+	e_RotationOverrides                                 smithy.SchemaExtensions
+	e_RotationOverrides_member                          smithy.SchemaExtensions
+	e_RotationPreviewMemberList                         smithy.SchemaExtensions
+	e_RotationPreviewMemberList_member                  smithy.SchemaExtensions
+	e_Rotations                                         smithy.SchemaExtensions
+	e_Rotations_member                                  smithy.SchemaExtensions
+	eRotationShift                                      smithy.SchemaExtensions
+	eRotationShift_ContactIds                           smithy.SchemaExtensions
+	eRotationShift_StartTime                            smithy.SchemaExtensions
+	eRotationShift_EndTime                              smithy.SchemaExtensions
+	eRotationShift_Type                                 smithy.SchemaExtensions
+	eRotationShift_ShiftDetails                         smithy.SchemaExtensions
+	e_RotationShifts                                    smithy.SchemaExtensions
+	e_RotationShifts_member                             smithy.SchemaExtensions
+	e_Sender                                            smithy.SchemaExtensions
+	eServiceQuotaExceededException                      smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message              smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceId           smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceType         smithy.SchemaExtensions
+	eServiceQuotaExceededException_QuotaCode            smithy.SchemaExtensions
+	eServiceQuotaExceededException_ServiceCode          smithy.SchemaExtensions
+	e_ShiftCoveragesMap                                 smithy.SchemaExtensions
+	e_ShiftCoveragesMap_key                             smithy.SchemaExtensions
+	e_ShiftCoveragesMap_value                           smithy.SchemaExtensions
+	eShiftDetails                                       smithy.SchemaExtensions
+	eShiftDetails_OverriddenContactIds                  smithy.SchemaExtensions
+	eShiftType                                          smithy.SchemaExtensions
+	eShiftType_REGULAR                                  smithy.SchemaExtensions
+	eShiftType_OVERRIDDEN                               smithy.SchemaExtensions
+	e_SimpleAddress                                     smithy.SchemaExtensions
+	e_SsmContactsArn                                    smithy.SchemaExtensions
+	e_SsmContactsArnList                                smithy.SchemaExtensions
+	e_SsmContactsArnList_member                         smithy.SchemaExtensions
+	eStage                                              smithy.SchemaExtensions
+	eStage_DurationInMinutes                            smithy.SchemaExtensions
+	eStage_Targets                                      smithy.SchemaExtensions
+	e_StageDurationInMins                               smithy.SchemaExtensions
+	e_StageIndex                                        smithy.SchemaExtensions
+	e_StagesList                                        smithy.SchemaExtensions
+	e_StagesList_member                                 smithy.SchemaExtensions
+	e_StopReason                                        smithy.SchemaExtensions
+	e_String                                            smithy.SchemaExtensions
+	e_Subject                                           smithy.SchemaExtensions
+	eTag                                                smithy.SchemaExtensions
+	eTag_Key                                            smithy.SchemaExtensions
+	eTag_Value                                          smithy.SchemaExtensions
+	e_TagKey                                            smithy.SchemaExtensions
+	e_TagKeyList                                        smithy.SchemaExtensions
+	e_TagKeyList_member                                 smithy.SchemaExtensions
+	e_TagsList                                          smithy.SchemaExtensions
+	e_TagsList_member                                   smithy.SchemaExtensions
+	e_TagValue                                          smithy.SchemaExtensions
+	eTarget                                             smithy.SchemaExtensions
+	eTarget_ChannelTargetInfo                           smithy.SchemaExtensions
+	eTarget_ContactTargetInfo                           smithy.SchemaExtensions
+	e_TargetsList                                       smithy.SchemaExtensions
+	e_TargetsList_member                                smithy.SchemaExtensions
+	eThrottlingException                                smithy.SchemaExtensions
+	eThrottlingException_Message                        smithy.SchemaExtensions
+	eThrottlingException_QuotaCode                      smithy.SchemaExtensions
+	eThrottlingException_ServiceCode                    smithy.SchemaExtensions
+	eThrottlingException_RetryAfterSeconds              smithy.SchemaExtensions
+	eTimeRange                                          smithy.SchemaExtensions
+	eTimeRange_StartTime                                smithy.SchemaExtensions
+	eTimeRange_EndTime                                  smithy.SchemaExtensions
+	e_TimeZoneId                                        smithy.SchemaExtensions
+	e_Uuid                                              smithy.SchemaExtensions
+	eValidationException                                smithy.SchemaExtensions
+	eValidationException_Message                        smithy.SchemaExtensions
+	eValidationException_Reason                         smithy.SchemaExtensions
+	eValidationException_Fields                         smithy.SchemaExtensions
+	eValidationExceptionField                           smithy.SchemaExtensions
+	eValidationExceptionField_Name                      smithy.SchemaExtensions
+	eValidationExceptionField_Message                   smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                      smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member               smithy.SchemaExtensions
+	eValidationExceptionReason                          smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION        smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE             smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED  smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                    smithy.SchemaExtensions
+	eWeeklySetting                                      smithy.SchemaExtensions
+	eWeeklySetting_DayOfWeek                            smithy.SchemaExtensions
+	eWeeklySetting_HandOffTime                          smithy.SchemaExtensions
+	e_WeeklySettings                                    smithy.SchemaExtensions
+	e_WeeklySettings_member                             smithy.SchemaExtensions
+	eAcceptPageRequest                                  smithy.SchemaExtensions
+	eAcceptPageRequest_PageId                           smithy.SchemaExtensions
+	eAcceptPageRequest_ContactChannelId                 smithy.SchemaExtensions
+	eAcceptPageRequest_AcceptType                       smithy.SchemaExtensions
+	eAcceptPageRequest_Note                             smithy.SchemaExtensions
+	eAcceptPageRequest_AcceptCode                       smithy.SchemaExtensions
+	eAcceptPageRequest_AcceptCodeValidation             smithy.SchemaExtensions
+	eAcceptPageResult                                   smithy.SchemaExtensions
+	eActivateContactChannelRequest                      smithy.SchemaExtensions
+	eActivateContactChannelRequest_ContactChannelId     smithy.SchemaExtensions
+	eActivateContactChannelRequest_ActivationCode       smithy.SchemaExtensions
+	eActivateContactChannelResult                       smithy.SchemaExtensions
+	eCreateContactChannelRequest                        smithy.SchemaExtensions
+	eCreateContactChannelRequest_ContactId              smithy.SchemaExtensions
+	eCreateContactChannelRequest_Name                   smithy.SchemaExtensions
+	eCreateContactChannelRequest_Type                   smithy.SchemaExtensions
+	eCreateContactChannelRequest_DeliveryAddress        smithy.SchemaExtensions
+	eCreateContactChannelRequest_DeferActivation        smithy.SchemaExtensions
+	eCreateContactChannelRequest_IdempotencyToken       smithy.SchemaExtensions
+	eCreateContactChannelResult                         smithy.SchemaExtensions
+	eCreateContactChannelResult_ContactChannelArn       smithy.SchemaExtensions
+	eCreateContactRequest                               smithy.SchemaExtensions
+	eCreateContactRequest_Alias                         smithy.SchemaExtensions
+	eCreateContactRequest_DisplayName                   smithy.SchemaExtensions
+	eCreateContactRequest_Type                          smithy.SchemaExtensions
+	eCreateContactRequest_Plan                          smithy.SchemaExtensions
+	eCreateContactRequest_Tags                          smithy.SchemaExtensions
+	eCreateContactRequest_IdempotencyToken              smithy.SchemaExtensions
+	eCreateContactResult                                smithy.SchemaExtensions
+	eCreateContactResult_ContactArn                     smithy.SchemaExtensions
+	eCreateRotationRequest                              smithy.SchemaExtensions
+	eCreateRotationRequest_Name                         smithy.SchemaExtensions
+	eCreateRotationRequest_ContactIds                   smithy.SchemaExtensions
+	eCreateRotationRequest_StartTime                    smithy.SchemaExtensions
+	eCreateRotationRequest_TimeZoneId                   smithy.SchemaExtensions
+	eCreateRotationRequest_Recurrence                   smithy.SchemaExtensions
+	eCreateRotationRequest_Tags                         smithy.SchemaExtensions
+	eCreateRotationRequest_IdempotencyToken             smithy.SchemaExtensions
+	eCreateRotationResult                               smithy.SchemaExtensions
+	eCreateRotationResult_RotationArn                   smithy.SchemaExtensions
+	eCreateRotationOverrideRequest                      smithy.SchemaExtensions
+	eCreateRotationOverrideRequest_RotationId           smithy.SchemaExtensions
+	eCreateRotationOverrideRequest_NewContactIds        smithy.SchemaExtensions
+	eCreateRotationOverrideRequest_StartTime            smithy.SchemaExtensions
+	eCreateRotationOverrideRequest_EndTime              smithy.SchemaExtensions
+	eCreateRotationOverrideRequest_IdempotencyToken     smithy.SchemaExtensions
+	eCreateRotationOverrideResult                       smithy.SchemaExtensions
+	eCreateRotationOverrideResult_RotationOverrideId    smithy.SchemaExtensions
+	eDeactivateContactChannelRequest                    smithy.SchemaExtensions
+	eDeactivateContactChannelRequest_ContactChannelId   smithy.SchemaExtensions
+	eDeactivateContactChannelResult                     smithy.SchemaExtensions
+	eDeleteContactChannelRequest                        smithy.SchemaExtensions
+	eDeleteContactChannelRequest_ContactChannelId       smithy.SchemaExtensions
+	eDeleteContactChannelResult                         smithy.SchemaExtensions
+	eDeleteContactRequest                               smithy.SchemaExtensions
+	eDeleteContactRequest_ContactId                     smithy.SchemaExtensions
+	eDeleteContactResult                                smithy.SchemaExtensions
+	eDeleteRotationRequest                              smithy.SchemaExtensions
+	eDeleteRotationRequest_RotationId                   smithy.SchemaExtensions
+	eDeleteRotationResult                               smithy.SchemaExtensions
+	eDeleteRotationOverrideRequest                      smithy.SchemaExtensions
+	eDeleteRotationOverrideRequest_RotationId           smithy.SchemaExtensions
+	eDeleteRotationOverrideRequest_RotationOverrideId   smithy.SchemaExtensions
+	eDeleteRotationOverrideResult                       smithy.SchemaExtensions
+	eDescribeEngagementRequest                          smithy.SchemaExtensions
+	eDescribeEngagementRequest_EngagementId             smithy.SchemaExtensions
+	eDescribeEngagementResult                           smithy.SchemaExtensions
+	eDescribeEngagementResult_ContactArn                smithy.SchemaExtensions
+	eDescribeEngagementResult_EngagementArn             smithy.SchemaExtensions
+	eDescribeEngagementResult_Sender                    smithy.SchemaExtensions
+	eDescribeEngagementResult_Subject                   smithy.SchemaExtensions
+	eDescribeEngagementResult_Content                   smithy.SchemaExtensions
+	eDescribeEngagementResult_PublicSubject             smithy.SchemaExtensions
+	eDescribeEngagementResult_PublicContent             smithy.SchemaExtensions
+	eDescribeEngagementResult_IncidentId                smithy.SchemaExtensions
+	eDescribeEngagementResult_StartTime                 smithy.SchemaExtensions
+	eDescribeEngagementResult_StopTime                  smithy.SchemaExtensions
+	eDescribePageRequest                                smithy.SchemaExtensions
+	eDescribePageRequest_PageId                         smithy.SchemaExtensions
+	eDescribePageResult                                 smithy.SchemaExtensions
+	eDescribePageResult_PageArn                         smithy.SchemaExtensions
+	eDescribePageResult_EngagementArn                   smithy.SchemaExtensions
+	eDescribePageResult_ContactArn                      smithy.SchemaExtensions
+	eDescribePageResult_Sender                          smithy.SchemaExtensions
+	eDescribePageResult_Subject                         smithy.SchemaExtensions
+	eDescribePageResult_Content                         smithy.SchemaExtensions
+	eDescribePageResult_PublicSubject                   smithy.SchemaExtensions
+	eDescribePageResult_PublicContent                   smithy.SchemaExtensions
+	eDescribePageResult_IncidentId                      smithy.SchemaExtensions
+	eDescribePageResult_SentTime                        smithy.SchemaExtensions
+	eDescribePageResult_ReadTime                        smithy.SchemaExtensions
+	eDescribePageResult_DeliveryTime                    smithy.SchemaExtensions
+	eGetContactChannelRequest                           smithy.SchemaExtensions
+	eGetContactChannelRequest_ContactChannelId          smithy.SchemaExtensions
+	eGetContactChannelResult                            smithy.SchemaExtensions
+	eGetContactChannelResult_ContactArn                 smithy.SchemaExtensions
+	eGetContactChannelResult_ContactChannelArn          smithy.SchemaExtensions
+	eGetContactChannelResult_Name                       smithy.SchemaExtensions
+	eGetContactChannelResult_Type                       smithy.SchemaExtensions
+	eGetContactChannelResult_DeliveryAddress            smithy.SchemaExtensions
+	eGetContactChannelResult_ActivationStatus           smithy.SchemaExtensions
+	eGetContactRequest                                  smithy.SchemaExtensions
+	eGetContactRequest_ContactId                        smithy.SchemaExtensions
+	eGetContactResult                                   smithy.SchemaExtensions
+	eGetContactResult_ContactArn                        smithy.SchemaExtensions
+	eGetContactResult_Alias                             smithy.SchemaExtensions
+	eGetContactResult_DisplayName                       smithy.SchemaExtensions
+	eGetContactResult_Type                              smithy.SchemaExtensions
+	eGetContactResult_Plan                              smithy.SchemaExtensions
+	eGetContactPolicyRequest                            smithy.SchemaExtensions
+	eGetContactPolicyRequest_ContactArn                 smithy.SchemaExtensions
+	eGetContactPolicyResult                             smithy.SchemaExtensions
+	eGetContactPolicyResult_ContactArn                  smithy.SchemaExtensions
+	eGetContactPolicyResult_Policy                      smithy.SchemaExtensions
+	eGetRotationRequest                                 smithy.SchemaExtensions
+	eGetRotationRequest_RotationId                      smithy.SchemaExtensions
+	eGetRotationResult                                  smithy.SchemaExtensions
+	eGetRotationResult_RotationArn                      smithy.SchemaExtensions
+	eGetRotationResult_Name                             smithy.SchemaExtensions
+	eGetRotationResult_ContactIds                       smithy.SchemaExtensions
+	eGetRotationResult_StartTime                        smithy.SchemaExtensions
+	eGetRotationResult_TimeZoneId                       smithy.SchemaExtensions
+	eGetRotationResult_Recurrence                       smithy.SchemaExtensions
+	eGetRotationOverrideRequest                         smithy.SchemaExtensions
+	eGetRotationOverrideRequest_RotationId              smithy.SchemaExtensions
+	eGetRotationOverrideRequest_RotationOverrideId      smithy.SchemaExtensions
+	eGetRotationOverrideResult                          smithy.SchemaExtensions
+	eGetRotationOverrideResult_RotationOverrideId       smithy.SchemaExtensions
+	eGetRotationOverrideResult_RotationArn              smithy.SchemaExtensions
+	eGetRotationOverrideResult_NewContactIds            smithy.SchemaExtensions
+	eGetRotationOverrideResult_StartTime                smithy.SchemaExtensions
+	eGetRotationOverrideResult_EndTime                  smithy.SchemaExtensions
+	eGetRotationOverrideResult_CreateTime               smithy.SchemaExtensions
+	eListContactChannelsRequest                         smithy.SchemaExtensions
+	eListContactChannelsRequest_ContactId               smithy.SchemaExtensions
+	eListContactChannelsRequest_NextToken               smithy.SchemaExtensions
+	eListContactChannelsRequest_MaxResults              smithy.SchemaExtensions
+	eListContactChannelsResult                          smithy.SchemaExtensions
+	eListContactChannelsResult_NextToken                smithy.SchemaExtensions
+	eListContactChannelsResult_ContactChannels          smithy.SchemaExtensions
+	eListContactsRequest                                smithy.SchemaExtensions
+	eListContactsRequest_NextToken                      smithy.SchemaExtensions
+	eListContactsRequest_MaxResults                     smithy.SchemaExtensions
+	eListContactsRequest_AliasPrefix                    smithy.SchemaExtensions
+	eListContactsRequest_Type                           smithy.SchemaExtensions
+	eListContactsResult                                 smithy.SchemaExtensions
+	eListContactsResult_NextToken                       smithy.SchemaExtensions
+	eListContactsResult_Contacts                        smithy.SchemaExtensions
+	eListEngagementsRequest                             smithy.SchemaExtensions
+	eListEngagementsRequest_NextToken                   smithy.SchemaExtensions
+	eListEngagementsRequest_MaxResults                  smithy.SchemaExtensions
+	eListEngagementsRequest_IncidentId                  smithy.SchemaExtensions
+	eListEngagementsRequest_TimeRangeValue              smithy.SchemaExtensions
+	eListEngagementsResult                              smithy.SchemaExtensions
+	eListEngagementsResult_NextToken                    smithy.SchemaExtensions
+	eListEngagementsResult_Engagements                  smithy.SchemaExtensions
+	eListPageReceiptsRequest                            smithy.SchemaExtensions
+	eListPageReceiptsRequest_PageId                     smithy.SchemaExtensions
+	eListPageReceiptsRequest_NextToken                  smithy.SchemaExtensions
+	eListPageReceiptsRequest_MaxResults                 smithy.SchemaExtensions
+	eListPageReceiptsResult                             smithy.SchemaExtensions
+	eListPageReceiptsResult_NextToken                   smithy.SchemaExtensions
+	eListPageReceiptsResult_Receipts                    smithy.SchemaExtensions
+	eListPageResolutionsRequest                         smithy.SchemaExtensions
+	eListPageResolutionsRequest_NextToken               smithy.SchemaExtensions
+	eListPageResolutionsRequest_PageId                  smithy.SchemaExtensions
+	eListPageResolutionsResult                          smithy.SchemaExtensions
+	eListPageResolutionsResult_NextToken                smithy.SchemaExtensions
+	eListPageResolutionsResult_PageResolutions          smithy.SchemaExtensions
+	eListPagesByContactRequest                          smithy.SchemaExtensions
+	eListPagesByContactRequest_ContactId                smithy.SchemaExtensions
+	eListPagesByContactRequest_NextToken                smithy.SchemaExtensions
+	eListPagesByContactRequest_MaxResults               smithy.SchemaExtensions
+	eListPagesByContactResult                           smithy.SchemaExtensions
+	eListPagesByContactResult_NextToken                 smithy.SchemaExtensions
+	eListPagesByContactResult_Pages                     smithy.SchemaExtensions
+	eListPagesByEngagementRequest                       smithy.SchemaExtensions
+	eListPagesByEngagementRequest_EngagementId          smithy.SchemaExtensions
+	eListPagesByEngagementRequest_NextToken             smithy.SchemaExtensions
+	eListPagesByEngagementRequest_MaxResults            smithy.SchemaExtensions
+	eListPagesByEngagementResult                        smithy.SchemaExtensions
+	eListPagesByEngagementResult_NextToken              smithy.SchemaExtensions
+	eListPagesByEngagementResult_Pages                  smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest                   smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_RotationStartTime smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_StartTime         smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_EndTime           smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_Members           smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_TimeZoneId        smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_Recurrence        smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_Overrides         smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_NextToken         smithy.SchemaExtensions
+	eListPreviewRotationShiftsRequest_MaxResults        smithy.SchemaExtensions
+	eListPreviewRotationShiftsResult                    smithy.SchemaExtensions
+	eListPreviewRotationShiftsResult_RotationShifts     smithy.SchemaExtensions
+	eListPreviewRotationShiftsResult_NextToken          smithy.SchemaExtensions
+	eListRotationOverridesRequest                       smithy.SchemaExtensions
+	eListRotationOverridesRequest_RotationId            smithy.SchemaExtensions
+	eListRotationOverridesRequest_StartTime             smithy.SchemaExtensions
+	eListRotationOverridesRequest_EndTime               smithy.SchemaExtensions
+	eListRotationOverridesRequest_NextToken             smithy.SchemaExtensions
+	eListRotationOverridesRequest_MaxResults            smithy.SchemaExtensions
+	eListRotationOverridesResult                        smithy.SchemaExtensions
+	eListRotationOverridesResult_RotationOverrides      smithy.SchemaExtensions
+	eListRotationOverridesResult_NextToken              smithy.SchemaExtensions
+	eListRotationShiftsRequest                          smithy.SchemaExtensions
+	eListRotationShiftsRequest_RotationId               smithy.SchemaExtensions
+	eListRotationShiftsRequest_StartTime                smithy.SchemaExtensions
+	eListRotationShiftsRequest_EndTime                  smithy.SchemaExtensions
+	eListRotationShiftsRequest_NextToken                smithy.SchemaExtensions
+	eListRotationShiftsRequest_MaxResults               smithy.SchemaExtensions
+	eListRotationShiftsResult                           smithy.SchemaExtensions
+	eListRotationShiftsResult_RotationShifts            smithy.SchemaExtensions
+	eListRotationShiftsResult_NextToken                 smithy.SchemaExtensions
+	eListRotationsRequest                               smithy.SchemaExtensions
+	eListRotationsRequest_RotationNamePrefix            smithy.SchemaExtensions
+	eListRotationsRequest_NextToken                     smithy.SchemaExtensions
+	eListRotationsRequest_MaxResults                    smithy.SchemaExtensions
+	eListRotationsResult                                smithy.SchemaExtensions
+	eListRotationsResult_NextToken                      smithy.SchemaExtensions
+	eListRotationsResult_Rotations                      smithy.SchemaExtensions
+	eListTagsForResourceRequest                         smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN             smithy.SchemaExtensions
+	eListTagsForResourceResult                          smithy.SchemaExtensions
+	eListTagsForResourceResult_Tags                     smithy.SchemaExtensions
+	ePutContactPolicyRequest                            smithy.SchemaExtensions
+	ePutContactPolicyRequest_ContactArn                 smithy.SchemaExtensions
+	ePutContactPolicyRequest_Policy                     smithy.SchemaExtensions
+	ePutContactPolicyResult                             smithy.SchemaExtensions
+	eSendActivationCodeRequest                          smithy.SchemaExtensions
+	eSendActivationCodeRequest_ContactChannelId         smithy.SchemaExtensions
+	eSendActivationCodeResult                           smithy.SchemaExtensions
+	eStartEngagementRequest                             smithy.SchemaExtensions
+	eStartEngagementRequest_ContactId                   smithy.SchemaExtensions
+	eStartEngagementRequest_Sender                      smithy.SchemaExtensions
+	eStartEngagementRequest_Subject                     smithy.SchemaExtensions
+	eStartEngagementRequest_Content                     smithy.SchemaExtensions
+	eStartEngagementRequest_PublicSubject               smithy.SchemaExtensions
+	eStartEngagementRequest_PublicContent               smithy.SchemaExtensions
+	eStartEngagementRequest_IncidentId                  smithy.SchemaExtensions
+	eStartEngagementRequest_IdempotencyToken            smithy.SchemaExtensions
+	eStartEngagementResult                              smithy.SchemaExtensions
+	eStartEngagementResult_EngagementArn                smithy.SchemaExtensions
+	eStopEngagementRequest                              smithy.SchemaExtensions
+	eStopEngagementRequest_EngagementId                 smithy.SchemaExtensions
+	eStopEngagementRequest_Reason                       smithy.SchemaExtensions
+	eStopEngagementResult                               smithy.SchemaExtensions
+	eTagResourceRequest                                 smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                     smithy.SchemaExtensions
+	eTagResourceRequest_Tags                            smithy.SchemaExtensions
+	eTagResourceResult                                  smithy.SchemaExtensions
+	eUntagResourceRequest                               smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                   smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                       smithy.SchemaExtensions
+	eUntagResourceResult                                smithy.SchemaExtensions
+	eUpdateContactChannelRequest                        smithy.SchemaExtensions
+	eUpdateContactChannelRequest_ContactChannelId       smithy.SchemaExtensions
+	eUpdateContactChannelRequest_Name                   smithy.SchemaExtensions
+	eUpdateContactChannelRequest_DeliveryAddress        smithy.SchemaExtensions
+	eUpdateContactChannelResult                         smithy.SchemaExtensions
+	eUpdateContactRequest                               smithy.SchemaExtensions
+	eUpdateContactRequest_ContactId                     smithy.SchemaExtensions
+	eUpdateContactRequest_DisplayName                   smithy.SchemaExtensions
+	eUpdateContactRequest_Plan                          smithy.SchemaExtensions
+	eUpdateContactResult                                smithy.SchemaExtensions
+	eUpdateRotationRequest                              smithy.SchemaExtensions
+	eUpdateRotationRequest_RotationId                   smithy.SchemaExtensions
+	eUpdateRotationRequest_ContactIds                   smithy.SchemaExtensions
+	eUpdateRotationRequest_StartTime                    smithy.SchemaExtensions
+	eUpdateRotationRequest_TimeZoneId                   smithy.SchemaExtensions
+	eUpdateRotationRequest_Recurrence                   smithy.SchemaExtensions
+	eUpdateRotationResult                               smithy.SchemaExtensions
+)
+
+var (
+	iAcceptPage                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AcceptPage"}
+	iActivateContactChannel             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ActivateContactChannel"}
+	iCreateContact                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateContact"}
+	iCreateContactChannel               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateContactChannel"}
+	iCreateRotation                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateRotation"}
+	iCreateRotationOverride             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateRotationOverride"}
+	iDeactivateContactChannel           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeactivateContactChannel"}
+	iDeleteContact                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteContact"}
+	iDeleteContactChannel               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteContactChannel"}
+	iDeleteRotation                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteRotation"}
+	iDeleteRotationOverride             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteRotationOverride"}
+	iDescribeEngagement                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DescribeEngagement"}
+	iDescribePage                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DescribePage"}
+	iGetContact                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContact"}
+	iGetContactChannel                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactChannel"}
+	iGetContactPolicy                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactPolicy"}
+	iGetRotation                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetRotation"}
+	iGetRotationOverride                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetRotationOverride"}
+	iListContactChannels                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListContactChannels"}
+	iListContacts                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListContacts"}
+	iListEngagements                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListEngagements"}
+	iListPageReceipts                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPageReceipts"}
+	iListPageResolutions                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPageResolutions"}
+	iListPagesByContact                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPagesByContact"}
+	iListPagesByEngagement              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPagesByEngagement"}
+	iListPreviewRotationShifts          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPreviewRotationShifts"}
+	iListRotationOverrides              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationOverrides"}
+	iListRotations                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotations"}
+	iListRotationShifts                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationShifts"}
+	iListTagsForResource                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListTagsForResource"}
+	iPutContactPolicy                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PutContactPolicy"}
+	iSendActivationCode                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "SendActivationCode"}
+	iStartEngagement                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StartEngagement"}
+	iStopEngagement                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StopEngagement"}
+	iTagResource                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TagResource"}
+	iUntagResource                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UntagResource"}
+	iUpdateContact                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateContact"}
+	iUpdateContactChannel               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateContactChannel"}
+	iUpdateRotation                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateRotation"}
+	i_SSMContacts                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "SSMContacts"}
+	i_AcceptCode                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AcceptCode"}
+	iAcceptCodeValidation               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AcceptCodeValidation"}
+	iAcceptType                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AcceptType"}
+	iAccessDeniedException              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AccessDeniedException"}
+	i_ActivationCode                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ActivationCode"}
+	iActivationStatus                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ActivationStatus"}
+	i_AmazonResourceName                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AmazonResourceName"}
+	i_ChannelName                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ChannelName"}
+	iChannelTargetInfo                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ChannelTargetInfo"}
+	iChannelType                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ChannelType"}
+	iConflictException                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ConflictException"}
+	iContact                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Contact"}
+	i_ContactAlias                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactAlias"}
+	iContactChannel                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactChannel"}
+	iContactChannelAddress              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactChannelAddress"}
+	i_ContactChannelList                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactChannelList"}
+	i_ContactName                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactName"}
+	i_ContactsList                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactsList"}
+	iContactTargetInfo                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactTargetInfo"}
+	iContactType                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ContactType"}
+	i_Content                           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Content"}
+	iCoverageTime                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CoverageTime"}
+	i_CoverageTimes                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CoverageTimes"}
+	i_DailySettings                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DailySettings"}
+	iDataEncryptionException            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DataEncryptionException"}
+	i_DateTime                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DateTime"}
+	i_DayOfMonth                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DayOfMonth"}
+	iDayOfWeek                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DayOfWeek"}
+	i_DeferActivation                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeferActivation"}
+	iDependentEntity                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DependentEntity"}
+	i_DependentEntityList               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DependentEntityList"}
+	iEngagement                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Engagement"}
+	i_EngagementsList                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "EngagementsList"}
+	iHandOffTime                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "HandOffTime"}
+	i_HourOfDay                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "HourOfDay"}
+	i_IdempotencyToken                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "IdempotencyToken"}
+	i_IncidentId                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "IncidentId"}
+	iInternalServerException            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "InternalServerException"}
+	i_IsEssential                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "IsEssential"}
+	i_MaxResults                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "MaxResults"}
+	i_Member                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Member"}
+	i_MinuteOfHour                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "MinuteOfHour"}
+	iMonthlySetting                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "MonthlySetting"}
+	i_MonthlySettings                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "MonthlySettings"}
+	i_NumberOfOnCalls                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "NumberOfOnCalls"}
+	i_OverrideList                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "OverrideList"}
+	iPage                               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Page"}
+	i_PagesList                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PagesList"}
+	i_PaginationToken                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PaginationToken"}
+	iPlan                               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Plan"}
+	i_Policy                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Policy"}
+	iPreviewOverride                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PreviewOverride"}
+	i_PublicContent                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PublicContent"}
+	i_PublicSubject                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PublicSubject"}
+	iReceipt                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Receipt"}
+	i_ReceiptInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ReceiptInfo"}
+	i_ReceiptsList                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ReceiptsList"}
+	iReceiptType                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ReceiptType"}
+	i_RecurrenceMultiplier              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RecurrenceMultiplier"}
+	iRecurrenceSettings                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RecurrenceSettings"}
+	iResolutionContact                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ResolutionContact"}
+	i_ResolutionList                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ResolutionList"}
+	iResourceNotFoundException          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ResourceNotFoundException"}
+	i_RetryAfterSeconds                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RetryAfterSeconds"}
+	i_RetryIntervalInMinutes            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RetryIntervalInMinutes"}
+	iRotation                           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Rotation"}
+	i_RotationContactsArnList           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationContactsArnList"}
+	i_RotationName                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationName"}
+	iRotationOverride                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationOverride"}
+	i_RotationOverrideContactsArnList   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationOverrideContactsArnList"}
+	i_RotationOverridePreviewMemberList = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationOverridePreviewMemberList"}
+	i_RotationOverrides                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationOverrides"}
+	i_RotationPreviewMemberList         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationPreviewMemberList"}
+	i_Rotations                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Rotations"}
+	iRotationShift                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationShift"}
+	i_RotationShifts                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "RotationShifts"}
+	i_Sender                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Sender"}
+	iServiceQuotaExceededException      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ServiceQuotaExceededException"}
+	i_ShiftCoveragesMap                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ShiftCoveragesMap"}
+	iShiftDetails                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ShiftDetails"}
+	iShiftType                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ShiftType"}
+	i_SimpleAddress                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "SimpleAddress"}
+	i_SsmContactsArn                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "SsmContactsArn"}
+	i_SsmContactsArnList                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "SsmContactsArnList"}
+	iStage                              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Stage"}
+	i_StageDurationInMins               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StageDurationInMins"}
+	i_StageIndex                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StageIndex"}
+	i_StagesList                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StagesList"}
+	i_StopReason                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StopReason"}
+	i_String                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "String"}
+	i_Subject                           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Subject"}
+	iTag                                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Tag"}
+	i_TagKey                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TagKey"}
+	i_TagKeyList                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TagKeyList"}
+	i_TagsList                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TagsList"}
+	i_TagValue                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TagValue"}
+	iTarget                             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Target"}
+	i_TargetsList                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TargetsList"}
+	iThrottlingException                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ThrottlingException"}
+	iTimeRange                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TimeRange"}
+	i_TimeZoneId                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TimeZoneId"}
+	i_Uuid                              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "Uuid"}
+	iValidationException                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ValidationException"}
+	iValidationExceptionField           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ValidationExceptionReason"}
+	iWeeklySetting                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "WeeklySetting"}
+	i_WeeklySettings                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "WeeklySettings"}
+	iAcceptPageRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AcceptPageRequest"}
+	iAcceptPageResult                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "AcceptPageResult"}
+	iActivateContactChannelRequest      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ActivateContactChannelRequest"}
+	iActivateContactChannelResult       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ActivateContactChannelResult"}
+	iCreateContactChannelRequest        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateContactChannelRequest"}
+	iCreateContactChannelResult         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateContactChannelResult"}
+	iCreateContactRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateContactRequest"}
+	iCreateContactResult                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateContactResult"}
+	iCreateRotationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateRotationRequest"}
+	iCreateRotationResult               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateRotationResult"}
+	iCreateRotationOverrideRequest      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateRotationOverrideRequest"}
+	iCreateRotationOverrideResult       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "CreateRotationOverrideResult"}
+	iDeactivateContactChannelRequest    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeactivateContactChannelRequest"}
+	iDeactivateContactChannelResult     = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeactivateContactChannelResult"}
+	iDeleteContactChannelRequest        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteContactChannelRequest"}
+	iDeleteContactChannelResult         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteContactChannelResult"}
+	iDeleteContactRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteContactRequest"}
+	iDeleteContactResult                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteContactResult"}
+	iDeleteRotationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteRotationRequest"}
+	iDeleteRotationResult               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteRotationResult"}
+	iDeleteRotationOverrideRequest      = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteRotationOverrideRequest"}
+	iDeleteRotationOverrideResult       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DeleteRotationOverrideResult"}
+	iDescribeEngagementRequest          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DescribeEngagementRequest"}
+	iDescribeEngagementResult           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DescribeEngagementResult"}
+	iDescribePageRequest                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DescribePageRequest"}
+	iDescribePageResult                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "DescribePageResult"}
+	iGetContactChannelRequest           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactChannelRequest"}
+	iGetContactChannelResult            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactChannelResult"}
+	iGetContactRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactRequest"}
+	iGetContactResult                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactResult"}
+	iGetContactPolicyRequest            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactPolicyRequest"}
+	iGetContactPolicyResult             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetContactPolicyResult"}
+	iGetRotationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetRotationRequest"}
+	iGetRotationResult                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetRotationResult"}
+	iGetRotationOverrideRequest         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetRotationOverrideRequest"}
+	iGetRotationOverrideResult          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "GetRotationOverrideResult"}
+	iListContactChannelsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListContactChannelsRequest"}
+	iListContactChannelsResult          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListContactChannelsResult"}
+	iListContactsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListContactsRequest"}
+	iListContactsResult                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListContactsResult"}
+	iListEngagementsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListEngagementsRequest"}
+	iListEngagementsResult              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListEngagementsResult"}
+	iListPageReceiptsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPageReceiptsRequest"}
+	iListPageReceiptsResult             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPageReceiptsResult"}
+	iListPageResolutionsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPageResolutionsRequest"}
+	iListPageResolutionsResult          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPageResolutionsResult"}
+	iListPagesByContactRequest          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPagesByContactRequest"}
+	iListPagesByContactResult           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPagesByContactResult"}
+	iListPagesByEngagementRequest       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPagesByEngagementRequest"}
+	iListPagesByEngagementResult        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPagesByEngagementResult"}
+	iListPreviewRotationShiftsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPreviewRotationShiftsRequest"}
+	iListPreviewRotationShiftsResult    = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListPreviewRotationShiftsResult"}
+	iListRotationOverridesRequest       = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationOverridesRequest"}
+	iListRotationOverridesResult        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationOverridesResult"}
+	iListRotationShiftsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationShiftsRequest"}
+	iListRotationShiftsResult           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationShiftsResult"}
+	iListRotationsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationsRequest"}
+	iListRotationsResult                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListRotationsResult"}
+	iListTagsForResourceRequest         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResult          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "ListTagsForResourceResult"}
+	iPutContactPolicyRequest            = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PutContactPolicyRequest"}
+	iPutContactPolicyResult             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "PutContactPolicyResult"}
+	iSendActivationCodeRequest          = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "SendActivationCodeRequest"}
+	iSendActivationCodeResult           = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "SendActivationCodeResult"}
+	iStartEngagementRequest             = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StartEngagementRequest"}
+	iStartEngagementResult              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StartEngagementResult"}
+	iStopEngagementRequest              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StopEngagementRequest"}
+	iStopEngagementResult               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "StopEngagementResult"}
+	iTagResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TagResourceRequest"}
+	iTagResourceResult                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "TagResourceResult"}
+	iUntagResourceRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UntagResourceRequest"}
+	iUntagResourceResult                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UntagResourceResult"}
+	iUpdateContactChannelRequest        = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateContactChannelRequest"}
+	iUpdateContactChannelResult         = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateContactChannelResult"}
+	iUpdateContactRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateContactRequest"}
+	iUpdateContactResult                = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateContactResult"}
+	iUpdateRotationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateRotationRequest"}
+	iUpdateRotationResult               = smithy.ShapeName{Namespace: "com.amazonaws.ssmcontacts", Name: "UpdateRotationResult"}
+	pUnit                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAcceptCodeValidation = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptCodeValidation_IGNORE, &sAcceptCodeValidation_ENFORCE}}
+var mAcceptType = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptType_DELIVERED, &sAcceptType_READ}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mActivationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sActivationStatus_ACTIVATED, &sActivationStatus_NOT_ACTIVATED}}
+var mChannelTargetInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelTargetInfo_ContactChannelId, &sChannelTargetInfo_RetryIntervalInMinutes}}
+var mChannelType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelType_SMS, &sChannelType_VOICE, &sChannelType_EMAIL}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_ResourceId, &sConflictException_ResourceType, &sConflictException_DependentEntities}}
+var mContact = smithy.SchemaMembers{List: []*smithy.Schema{&sContact_ContactArn, &sContact_Alias, &sContact_DisplayName, &sContact_Type}}
+var mContactChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sContactChannel_ContactChannelArn, &sContactChannel_ContactArn, &sContactChannel_Name, &sContactChannel_Type, &sContactChannel_DeliveryAddress, &sContactChannel_ActivationStatus}}
+var mContactChannelAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sContactChannelAddress_SimpleAddress}}
+var m_ContactChannelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContactChannelList_member}}
+var m_ContactsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContactsList_member}}
+var mContactTargetInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sContactTargetInfo_ContactId, &sContactTargetInfo_IsEssential}}
+var mContactType = smithy.SchemaMembers{List: []*smithy.Schema{&sContactType_PERSONAL, &sContactType_ESCALATION, &sContactType_ONCALL_SCHEDULE}}
+var mCoverageTime = smithy.SchemaMembers{List: []*smithy.Schema{&sCoverageTime_Start, &sCoverageTime_End}}
+var m_CoverageTimes = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoverageTimes_member}}
+var m_DailySettings = smithy.SchemaMembers{List: []*smithy.Schema{&s_DailySettings_member}}
+var mDataEncryptionException = smithy.SchemaMembers{List: []*smithy.Schema{&sDataEncryptionException_Message}}
+var mDayOfWeek = smithy.SchemaMembers{List: []*smithy.Schema{&sDayOfWeek_MON, &sDayOfWeek_TUE, &sDayOfWeek_WED, &sDayOfWeek_THU, &sDayOfWeek_FRI, &sDayOfWeek_SAT, &sDayOfWeek_SUN}}
+var mDependentEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sDependentEntity_RelationType, &sDependentEntity_DependentResourceIds}}
+var m_DependentEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DependentEntityList_member}}
+var mEngagement = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagement_EngagementArn, &sEngagement_ContactArn, &sEngagement_Sender, &sEngagement_IncidentId, &sEngagement_StartTime, &sEngagement_StopTime}}
+var m_EngagementsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementsList_member}}
+var mHandOffTime = smithy.SchemaMembers{List: []*smithy.Schema{&sHandOffTime_HourOfDay, &sHandOffTime_MinuteOfHour}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message, &sInternalServerException_RetryAfterSeconds}}
+var mMonthlySetting = smithy.SchemaMembers{List: []*smithy.Schema{&sMonthlySetting_DayOfMonth, &sMonthlySetting_HandOffTime}}
+var m_MonthlySettings = smithy.SchemaMembers{List: []*smithy.Schema{&s_MonthlySettings_member}}
+var m_OverrideList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OverrideList_member}}
+var mPage = smithy.SchemaMembers{List: []*smithy.Schema{&sPage_PageArn, &sPage_EngagementArn, &sPage_ContactArn, &sPage_Sender, &sPage_IncidentId, &sPage_SentTime, &sPage_DeliveryTime, &sPage_ReadTime}}
+var m_PagesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PagesList_member}}
+var mPlan = smithy.SchemaMembers{List: []*smithy.Schema{&sPlan_Stages, &sPlan_RotationIds}}
+var mPreviewOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sPreviewOverride_NewMembers, &sPreviewOverride_StartTime, &sPreviewOverride_EndTime}}
+var mReceipt = smithy.SchemaMembers{List: []*smithy.Schema{&sReceipt_ContactChannelArn, &sReceipt_ReceiptType, &sReceipt_ReceiptInfo, &sReceipt_ReceiptTime}}
+var m_ReceiptsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReceiptsList_member}}
+var mReceiptType = smithy.SchemaMembers{List: []*smithy.Schema{&sReceiptType_DELIVERED, &sReceiptType_ERROR, &sReceiptType_READ, &sReceiptType_SENT, &sReceiptType_STOP}}
+var mRecurrenceSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sRecurrenceSettings_MonthlySettings, &sRecurrenceSettings_WeeklySettings, &sRecurrenceSettings_DailySettings, &sRecurrenceSettings_NumberOfOnCalls, &sRecurrenceSettings_ShiftCoverages, &sRecurrenceSettings_RecurrenceMultiplier}}
+var mResolutionContact = smithy.SchemaMembers{List: []*smithy.Schema{&sResolutionContact_ContactArn, &sResolutionContact_Type, &sResolutionContact_StageIndex}}
+var m_ResolutionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResolutionList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_ResourceType}}
+var mRotation = smithy.SchemaMembers{List: []*smithy.Schema{&sRotation_RotationArn, &sRotation_Name, &sRotation_ContactIds, &sRotation_StartTime, &sRotation_TimeZoneId, &sRotation_Recurrence}}
+var m_RotationContactsArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RotationContactsArnList_member}}
+var mRotationOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sRotationOverride_RotationOverrideId, &sRotationOverride_NewContactIds, &sRotationOverride_StartTime, &sRotationOverride_EndTime, &sRotationOverride_CreateTime}}
+var m_RotationOverrideContactsArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RotationOverrideContactsArnList_member}}
+var m_RotationOverridePreviewMemberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RotationOverridePreviewMemberList_member}}
+var m_RotationOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&s_RotationOverrides_member}}
+var m_RotationPreviewMemberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RotationPreviewMemberList_member}}
+var m_Rotations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Rotations_member}}
+var mRotationShift = smithy.SchemaMembers{List: []*smithy.Schema{&sRotationShift_ContactIds, &sRotationShift_StartTime, &sRotationShift_EndTime, &sRotationShift_Type, &sRotationShift_ShiftDetails}}
+var m_RotationShifts = smithy.SchemaMembers{List: []*smithy.Schema{&s_RotationShifts_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_ResourceId, &sServiceQuotaExceededException_ResourceType, &sServiceQuotaExceededException_QuotaCode, &sServiceQuotaExceededException_ServiceCode}}
+var m_ShiftCoveragesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShiftCoveragesMap_key, &s_ShiftCoveragesMap_value}}
+var mShiftDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sShiftDetails_OverriddenContactIds}}
+var mShiftType = smithy.SchemaMembers{List: []*smithy.Schema{&sShiftType_REGULAR, &sShiftType_OVERRIDDEN}}
+var m_SsmContactsArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SsmContactsArnList_member}}
+var mStage = smithy.SchemaMembers{List: []*smithy.Schema{&sStage_DurationInMinutes, &sStage_Targets}}
+var m_StagesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StagesList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagsList_member}}
+var mTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sTarget_ChannelTargetInfo, &sTarget_ContactTargetInfo}}
+var m_TargetsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetsList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message, &sThrottlingException_QuotaCode, &sThrottlingException_ServiceCode, &sThrottlingException_RetryAfterSeconds}}
+var mTimeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeRange_StartTime, &sTimeRange_EndTime}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Reason, &sValidationException_Fields}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_Name, &sValidationExceptionField_Message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mWeeklySetting = smithy.SchemaMembers{List: []*smithy.Schema{&sWeeklySetting_DayOfWeek, &sWeeklySetting_HandOffTime}}
+var m_WeeklySettings = smithy.SchemaMembers{List: []*smithy.Schema{&s_WeeklySettings_member}}
+var mAcceptPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptPageRequest_PageId, &sAcceptPageRequest_ContactChannelId, &sAcceptPageRequest_AcceptType, &sAcceptPageRequest_Note, &sAcceptPageRequest_AcceptCode, &sAcceptPageRequest_AcceptCodeValidation}}
+var mActivateContactChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sActivateContactChannelRequest_ContactChannelId, &sActivateContactChannelRequest_ActivationCode}}
+var mCreateContactChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateContactChannelRequest_ContactId, &sCreateContactChannelRequest_Name, &sCreateContactChannelRequest_Type, &sCreateContactChannelRequest_DeliveryAddress, &sCreateContactChannelRequest_DeferActivation, &sCreateContactChannelRequest_IdempotencyToken}}
+var mCreateContactChannelResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateContactChannelResult_ContactChannelArn}}
+var mCreateContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateContactRequest_Alias, &sCreateContactRequest_DisplayName, &sCreateContactRequest_Type, &sCreateContactRequest_Plan, &sCreateContactRequest_Tags, &sCreateContactRequest_IdempotencyToken}}
+var mCreateContactResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateContactResult_ContactArn}}
+var mCreateRotationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRotationRequest_Name, &sCreateRotationRequest_ContactIds, &sCreateRotationRequest_StartTime, &sCreateRotationRequest_TimeZoneId, &sCreateRotationRequest_Recurrence, &sCreateRotationRequest_Tags, &sCreateRotationRequest_IdempotencyToken}}
+var mCreateRotationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRotationResult_RotationArn}}
+var mCreateRotationOverrideRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRotationOverrideRequest_RotationId, &sCreateRotationOverrideRequest_NewContactIds, &sCreateRotationOverrideRequest_StartTime, &sCreateRotationOverrideRequest_EndTime, &sCreateRotationOverrideRequest_IdempotencyToken}}
+var mCreateRotationOverrideResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRotationOverrideResult_RotationOverrideId}}
+var mDeactivateContactChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeactivateContactChannelRequest_ContactChannelId}}
+var mDeleteContactChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteContactChannelRequest_ContactChannelId}}
+var mDeleteContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteContactRequest_ContactId}}
+var mDeleteRotationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRotationRequest_RotationId}}
+var mDeleteRotationOverrideRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRotationOverrideRequest_RotationId, &sDeleteRotationOverrideRequest_RotationOverrideId}}
+var mDescribeEngagementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEngagementRequest_EngagementId}}
+var mDescribeEngagementResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEngagementResult_ContactArn, &sDescribeEngagementResult_EngagementArn, &sDescribeEngagementResult_Sender, &sDescribeEngagementResult_Subject, &sDescribeEngagementResult_Content, &sDescribeEngagementResult_PublicSubject, &sDescribeEngagementResult_PublicContent, &sDescribeEngagementResult_IncidentId, &sDescribeEngagementResult_StartTime, &sDescribeEngagementResult_StopTime}, Hash: &hDescribeEngagementResult}
+var mDescribePageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePageRequest_PageId}}
+var mDescribePageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePageResult_PageArn, &sDescribePageResult_EngagementArn, &sDescribePageResult_ContactArn, &sDescribePageResult_Sender, &sDescribePageResult_Subject, &sDescribePageResult_Content, &sDescribePageResult_PublicSubject, &sDescribePageResult_PublicContent, &sDescribePageResult_IncidentId, &sDescribePageResult_SentTime, &sDescribePageResult_ReadTime, &sDescribePageResult_DeliveryTime}, Hash: &hDescribePageResult}
+var mGetContactChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetContactChannelRequest_ContactChannelId}}
+var mGetContactChannelResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetContactChannelResult_ContactArn, &sGetContactChannelResult_ContactChannelArn, &sGetContactChannelResult_Name, &sGetContactChannelResult_Type, &sGetContactChannelResult_DeliveryAddress, &sGetContactChannelResult_ActivationStatus}}
+var mGetContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetContactRequest_ContactId}}
+var mGetContactResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetContactResult_ContactArn, &sGetContactResult_Alias, &sGetContactResult_DisplayName, &sGetContactResult_Type, &sGetContactResult_Plan}}
+var mGetContactPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetContactPolicyRequest_ContactArn}}
+var mGetContactPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetContactPolicyResult_ContactArn, &sGetContactPolicyResult_Policy}}
+var mGetRotationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRotationRequest_RotationId}}
+var mGetRotationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRotationResult_RotationArn, &sGetRotationResult_Name, &sGetRotationResult_ContactIds, &sGetRotationResult_StartTime, &sGetRotationResult_TimeZoneId, &sGetRotationResult_Recurrence}}
+var mGetRotationOverrideRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRotationOverrideRequest_RotationId, &sGetRotationOverrideRequest_RotationOverrideId}}
+var mGetRotationOverrideResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRotationOverrideResult_RotationOverrideId, &sGetRotationOverrideResult_RotationArn, &sGetRotationOverrideResult_NewContactIds, &sGetRotationOverrideResult_StartTime, &sGetRotationOverrideResult_EndTime, &sGetRotationOverrideResult_CreateTime}}
+var mListContactChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactChannelsRequest_ContactId, &sListContactChannelsRequest_NextToken, &sListContactChannelsRequest_MaxResults}}
+var mListContactChannelsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactChannelsResult_NextToken, &sListContactChannelsResult_ContactChannels}}
+var mListContactsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactsRequest_NextToken, &sListContactsRequest_MaxResults, &sListContactsRequest_AliasPrefix, &sListContactsRequest_Type}}
+var mListContactsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactsResult_NextToken, &sListContactsResult_Contacts}}
+var mListEngagementsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementsRequest_NextToken, &sListEngagementsRequest_MaxResults, &sListEngagementsRequest_IncidentId, &sListEngagementsRequest_TimeRangeValue}}
+var mListEngagementsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementsResult_NextToken, &sListEngagementsResult_Engagements}}
+var mListPageReceiptsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPageReceiptsRequest_PageId, &sListPageReceiptsRequest_NextToken, &sListPageReceiptsRequest_MaxResults}}
+var mListPageReceiptsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPageReceiptsResult_NextToken, &sListPageReceiptsResult_Receipts}}
+var mListPageResolutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPageResolutionsRequest_NextToken, &sListPageResolutionsRequest_PageId}}
+var mListPageResolutionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPageResolutionsResult_NextToken, &sListPageResolutionsResult_PageResolutions}}
+var mListPagesByContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPagesByContactRequest_ContactId, &sListPagesByContactRequest_NextToken, &sListPagesByContactRequest_MaxResults}}
+var mListPagesByContactResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPagesByContactResult_NextToken, &sListPagesByContactResult_Pages}}
+var mListPagesByEngagementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPagesByEngagementRequest_EngagementId, &sListPagesByEngagementRequest_NextToken, &sListPagesByEngagementRequest_MaxResults}}
+var mListPagesByEngagementResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPagesByEngagementResult_NextToken, &sListPagesByEngagementResult_Pages}}
+var mListPreviewRotationShiftsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPreviewRotationShiftsRequest_RotationStartTime, &sListPreviewRotationShiftsRequest_StartTime, &sListPreviewRotationShiftsRequest_EndTime, &sListPreviewRotationShiftsRequest_Members, &sListPreviewRotationShiftsRequest_TimeZoneId, &sListPreviewRotationShiftsRequest_Recurrence, &sListPreviewRotationShiftsRequest_Overrides, &sListPreviewRotationShiftsRequest_NextToken, &sListPreviewRotationShiftsRequest_MaxResults}, Hash: &hListPreviewRotationShiftsRequest}
+var mListPreviewRotationShiftsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPreviewRotationShiftsResult_RotationShifts, &sListPreviewRotationShiftsResult_NextToken}}
+var mListRotationOverridesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRotationOverridesRequest_RotationId, &sListRotationOverridesRequest_StartTime, &sListRotationOverridesRequest_EndTime, &sListRotationOverridesRequest_NextToken, &sListRotationOverridesRequest_MaxResults}}
+var mListRotationOverridesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListRotationOverridesResult_RotationOverrides, &sListRotationOverridesResult_NextToken}}
+var mListRotationShiftsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRotationShiftsRequest_RotationId, &sListRotationShiftsRequest_StartTime, &sListRotationShiftsRequest_EndTime, &sListRotationShiftsRequest_NextToken, &sListRotationShiftsRequest_MaxResults}}
+var mListRotationShiftsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListRotationShiftsResult_RotationShifts, &sListRotationShiftsResult_NextToken}}
+var mListRotationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRotationsRequest_RotationNamePrefix, &sListRotationsRequest_NextToken, &sListRotationsRequest_MaxResults}}
+var mListRotationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListRotationsResult_NextToken, &sListRotationsResult_Rotations}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResult_Tags}}
+var mPutContactPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutContactPolicyRequest_ContactArn, &sPutContactPolicyRequest_Policy}}
+var mSendActivationCodeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendActivationCodeRequest_ContactChannelId}}
+var mStartEngagementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEngagementRequest_ContactId, &sStartEngagementRequest_Sender, &sStartEngagementRequest_Subject, &sStartEngagementRequest_Content, &sStartEngagementRequest_PublicSubject, &sStartEngagementRequest_PublicContent, &sStartEngagementRequest_IncidentId, &sStartEngagementRequest_IdempotencyToken}}
+var mStartEngagementResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEngagementResult_EngagementArn}}
+var mStopEngagementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopEngagementRequest_EngagementId, &sStopEngagementRequest_Reason}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateContactChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateContactChannelRequest_ContactChannelId, &sUpdateContactChannelRequest_Name, &sUpdateContactChannelRequest_DeliveryAddress}}
+var mUpdateContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateContactRequest_ContactId, &sUpdateContactRequest_DisplayName, &sUpdateContactRequest_Plan}}
+var mUpdateRotationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRotationRequest_RotationId, &sUpdateRotationRequest_ContactIds, &sUpdateRotationRequest_StartTime, &sUpdateRotationRequest_TimeZoneId, &sUpdateRotationRequest_Recurrence}}
+
+var hDescribeEngagementResult = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	3, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 8, 6, 0, 5, 0, 7, 0, 0, 0, 9, 1, 0, 0,
+	0, 0, 0, 0, 0, 4, 10, 0,
+}}
+var hDescribePageResult = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 6, 0, 0, 0, 0, 0, 11, 0, 3, 0, 4, 0, 8, 0, 5, 10, 7, 0, 12, 9, 0, 1,
+	0, 2, 0, 0, 0, 0, 0, 0,
+}}
+var hListPreviewRotationShiftsRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 8, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 3, 0, 6, 0, 2, 0, 0, 0,
+	0, 9, 7, 5, 0, 0, 0, 0,
+}}
+
+var sAcceptPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPage, Type: smithy.ShapeTypeOperation, Ext: &eAcceptPage})
+var sActivateContactChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateContactChannel, Type: smithy.ShapeTypeOperation, Ext: &eActivateContactChannel})
+var sCreateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContact, Type: smithy.ShapeTypeOperation, Ext: &eCreateContact})
+var sCreateContactChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContactChannel, Type: smithy.ShapeTypeOperation, Ext: &eCreateContactChannel})
+var sCreateRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRotation, Type: smithy.ShapeTypeOperation, Ext: &eCreateRotation})
+var sCreateRotationOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRotationOverride, Type: smithy.ShapeTypeOperation, Ext: &eCreateRotationOverride})
+var sDeactivateContactChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateContactChannel, Type: smithy.ShapeTypeOperation, Ext: &eDeactivateContactChannel})
+var sDeleteContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContact, Type: smithy.ShapeTypeOperation, Ext: &eDeleteContact})
+var sDeleteContactChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContactChannel, Type: smithy.ShapeTypeOperation, Ext: &eDeleteContactChannel})
+var sDeleteRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRotation, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRotation})
+var sDeleteRotationOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRotationOverride, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRotationOverride})
+var sDescribeEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngagement, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEngagement})
+var sDescribePage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePage, Type: smithy.ShapeTypeOperation, Ext: &eDescribePage})
+var sGetContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContact, Type: smithy.ShapeTypeOperation, Ext: &eGetContact})
+var sGetContactChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactChannel, Type: smithy.ShapeTypeOperation, Ext: &eGetContactChannel})
+var sGetContactPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetContactPolicy})
+var sGetRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRotation, Type: smithy.ShapeTypeOperation, Ext: &eGetRotation})
+var sGetRotationOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRotationOverride, Type: smithy.ShapeTypeOperation, Ext: &eGetRotationOverride})
+var sListContactChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactChannels, Type: smithy.ShapeTypeOperation, Ext: &eListContactChannels})
+var sListContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContacts, Type: smithy.ShapeTypeOperation, Ext: &eListContacts})
+var sListEngagements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagements, Type: smithy.ShapeTypeOperation, Ext: &eListEngagements})
+var sListPageReceipts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPageReceipts, Type: smithy.ShapeTypeOperation, Ext: &eListPageReceipts})
+var sListPageResolutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPageResolutions, Type: smithy.ShapeTypeOperation, Ext: &eListPageResolutions})
+var sListPagesByContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPagesByContact, Type: smithy.ShapeTypeOperation, Ext: &eListPagesByContact})
+var sListPagesByEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPagesByEngagement, Type: smithy.ShapeTypeOperation, Ext: &eListPagesByEngagement})
+var sListPreviewRotationShifts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPreviewRotationShifts, Type: smithy.ShapeTypeOperation, Ext: &eListPreviewRotationShifts})
+var sListRotationOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationOverrides, Type: smithy.ShapeTypeOperation, Ext: &eListRotationOverrides})
+var sListRotations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotations, Type: smithy.ShapeTypeOperation, Ext: &eListRotations})
+var sListRotationShifts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationShifts, Type: smithy.ShapeTypeOperation, Ext: &eListRotationShifts})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutContactPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContactPolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutContactPolicy})
+var sSendActivationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCode, Type: smithy.ShapeTypeOperation, Ext: &eSendActivationCode})
+var sStartEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagement, Type: smithy.ShapeTypeOperation, Ext: &eStartEngagement})
+var sStopEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEngagement, Type: smithy.ShapeTypeOperation, Ext: &eStopEngagement})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContact, Type: smithy.ShapeTypeOperation, Ext: &eUpdateContact})
+var sUpdateContactChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContactChannel, Type: smithy.ShapeTypeOperation, Ext: &eUpdateContactChannel})
+var sUpdateRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRotation, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRotation})
+var s_SSMContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SSMContacts, Type: smithy.ShapeTypeService, Ext: &e_SSMContacts})
+var s_AcceptCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcceptCode, Type: smithy.ShapeTypeString, Ext: &e_AcceptCode})
+var sAcceptCodeValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptCodeValidation, Members: &mAcceptCodeValidation, Type: smithy.ShapeTypeEnum, Ext: &eAcceptCodeValidation})
+var sAcceptCodeValidation_IGNORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcceptCodeValidation_IGNORE})
+var sAcceptCodeValidation_ENFORCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENFORCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcceptCodeValidation_ENFORCE})
+var sAcceptType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptType, Members: &mAcceptType, Type: smithy.ShapeTypeEnum, Ext: &eAcceptType})
+var sAcceptType_DELIVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcceptType_DELIVERED})
+var sAcceptType_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcceptType_READ})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_ActivationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivationCode, Type: smithy.ShapeTypeString, Ext: &e_ActivationCode})
+var sActivationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivationStatus, Members: &mActivationStatus, Type: smithy.ShapeTypeEnum, Ext: &eActivationStatus})
+var sActivationStatus_ACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActivationStatus_ACTIVATED})
+var sActivationStatus_NOT_ACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActivationStatus_NOT_ACTIVATED})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &e_ChannelName})
+var sChannelTargetInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelTargetInfo, Members: &mChannelTargetInfo, Type: smithy.ShapeTypeStructure, Ext: &eChannelTargetInfo})
+var sChannelTargetInfo_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eChannelTargetInfo_ContactChannelId})
+var sChannelTargetInfo_RetryIntervalInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryIntervalInMinutes", ID: &i_RetryIntervalInMinutes, Type: smithy.ShapeTypeInteger, Ext: &eChannelTargetInfo_RetryIntervalInMinutes})
+var sChannelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eChannelType})
+var sChannelType_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_SMS})
+var sChannelType_VOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_VOICE})
+var sChannelType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_EMAIL})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_ResourceId})
+var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_ResourceType})
+var sConflictException_DependentEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependentEntities", ID: &i_DependentEntityList, Members: &m_DependentEntityList, Type: smithy.ShapeTypeList, Ext: &eConflictException_DependentEntities})
+var sContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure, Ext: &eContact})
+var sContact_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eContact_ContactArn})
+var sContact_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_ContactAlias, Type: smithy.ShapeTypeString, Ext: &eContact_Alias})
+var sContact_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_ContactName, Type: smithy.ShapeTypeString, Ext: &eContact_DisplayName})
+var sContact_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eContact_Type})
+var s_ContactAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactAlias, Type: smithy.ShapeTypeString, Ext: &e_ContactAlias})
+var sContactChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactChannel, Members: &mContactChannel, Type: smithy.ShapeTypeStructure, Ext: &eContactChannel})
+var sContactChannel_ContactChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eContactChannel_ContactChannelArn})
+var sContactChannel_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eContactChannel_ContactArn})
+var sContactChannel_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eContactChannel_Name})
+var sContactChannel_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eContactChannel_Type})
+var sContactChannel_DeliveryAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryAddress", ID: &iContactChannelAddress, Members: &mContactChannelAddress, Type: smithy.ShapeTypeStructure, Ext: &eContactChannel_DeliveryAddress})
+var sContactChannel_ActivationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationStatus", ID: &iActivationStatus, Members: &mActivationStatus, Type: smithy.ShapeTypeEnum, Ext: &eContactChannel_ActivationStatus})
+var sContactChannelAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactChannelAddress, Members: &mContactChannelAddress, Type: smithy.ShapeTypeStructure, Ext: &eContactChannelAddress})
+var sContactChannelAddress_SimpleAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SimpleAddress", ID: &i_SimpleAddress, Type: smithy.ShapeTypeString, Ext: &eContactChannelAddress_SimpleAddress})
+var s_ContactChannelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactChannelList, Members: &m_ContactChannelList, Type: smithy.ShapeTypeList, Ext: &e_ContactChannelList})
+var s_ContactChannelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactChannel, Members: &mContactChannel, Type: smithy.ShapeTypeStructure, Ext: &e_ContactChannelList_member})
+var s_ContactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactName, Type: smithy.ShapeTypeString, Ext: &e_ContactName})
+var s_ContactsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactsList, Members: &m_ContactsList, Type: smithy.ShapeTypeList, Ext: &e_ContactsList})
+var s_ContactsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure, Ext: &e_ContactsList_member})
+var sContactTargetInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactTargetInfo, Members: &mContactTargetInfo, Type: smithy.ShapeTypeStructure, Ext: &eContactTargetInfo})
+var sContactTargetInfo_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eContactTargetInfo_ContactId})
+var sContactTargetInfo_IsEssential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsEssential", ID: &i_IsEssential, Type: smithy.ShapeTypeBoolean, Ext: &eContactTargetInfo_IsEssential})
+var sContactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eContactType})
+var sContactType_PERSONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERSONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_PERSONAL})
+var sContactType_ESCALATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ESCALATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_ESCALATION})
+var sContactType_ONCALL_SCHEDULE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONCALL_SCHEDULE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_ONCALL_SCHEDULE})
+var s_Content = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &e_Content})
+var sCoverageTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoverageTime, Members: &mCoverageTime, Type: smithy.ShapeTypeStructure, Ext: &eCoverageTime})
+var sCoverageTime_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &iHandOffTime, Members: &mHandOffTime, Type: smithy.ShapeTypeStructure, Ext: &eCoverageTime_Start})
+var sCoverageTime_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &iHandOffTime, Members: &mHandOffTime, Type: smithy.ShapeTypeStructure, Ext: &eCoverageTime_End})
+var s_CoverageTimes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoverageTimes, Members: &m_CoverageTimes, Type: smithy.ShapeTypeList, Ext: &e_CoverageTimes})
+var s_CoverageTimes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoverageTime, Members: &mCoverageTime, Type: smithy.ShapeTypeStructure, Ext: &e_CoverageTimes_member})
+var s_DailySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DailySettings, Members: &m_DailySettings, Type: smithy.ShapeTypeList, Ext: &e_DailySettings})
+var s_DailySettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHandOffTime, Members: &mHandOffTime, Type: smithy.ShapeTypeStructure, Ext: &e_DailySettings_member})
+var sDataEncryptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataEncryptionException, Members: &mDataEncryptionException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eDataEncryptionException})
+var sDataEncryptionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataEncryptionException_Message})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var s_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger, Ext: &e_DayOfMonth})
+var sDayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDayOfWeek, Members: &mDayOfWeek, Type: smithy.ShapeTypeEnum, Ext: &eDayOfWeek})
+var sDayOfWeek_MON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_MON})
+var sDayOfWeek_TUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_TUE})
+var sDayOfWeek_WED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_WED})
+var sDayOfWeek_THU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_THU})
+var sDayOfWeek_FRI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_FRI})
+var sDayOfWeek_SAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_SAT})
+var sDayOfWeek_SUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_SUN})
+var s_DeferActivation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeferActivation, Type: smithy.ShapeTypeBoolean, Ext: &e_DeferActivation})
+var sDependentEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependentEntity, Members: &mDependentEntity, Type: smithy.ShapeTypeStructure, Ext: &eDependentEntity})
+var sDependentEntity_RelationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDependentEntity_RelationType})
+var sDependentEntity_DependentResourceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependentResourceIds", ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &eDependentEntity_DependentResourceIds})
+var s_DependentEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DependentEntityList, Members: &m_DependentEntityList, Type: smithy.ShapeTypeList, Ext: &e_DependentEntityList})
+var s_DependentEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDependentEntity, Members: &mDependentEntity, Type: smithy.ShapeTypeStructure, Ext: &e_DependentEntityList_member})
+var sEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagement, Members: &mEngagement, Type: smithy.ShapeTypeStructure, Ext: &eEngagement})
+var sEngagement_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eEngagement_EngagementArn})
+var sEngagement_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eEngagement_ContactArn})
+var sEngagement_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &i_Sender, Type: smithy.ShapeTypeString, Ext: &eEngagement_Sender})
+var sEngagement_IncidentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncidentId", ID: &i_IncidentId, Type: smithy.ShapeTypeString, Ext: &eEngagement_IncidentId})
+var sEngagement_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eEngagement_StartTime})
+var sEngagement_StopTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StopTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eEngagement_StopTime})
+var s_EngagementsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementsList, Members: &m_EngagementsList, Type: smithy.ShapeTypeList, Ext: &e_EngagementsList})
+var s_EngagementsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagement, Members: &mEngagement, Type: smithy.ShapeTypeStructure, Ext: &e_EngagementsList_member})
+var sHandOffTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandOffTime, Members: &mHandOffTime, Type: smithy.ShapeTypeStructure, Ext: &eHandOffTime})
+var sHandOffTime_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger, Ext: &eHandOffTime_HourOfDay})
+var sHandOffTime_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger, Ext: &eHandOffTime_MinuteOfHour})
+var s_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger, Ext: &e_HourOfDay})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var s_IncidentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncidentId, Type: smithy.ShapeTypeString, Ext: &e_IncidentId})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInternalServerException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t4, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_RetryAfterSeconds})
+var s_IsEssential = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsEssential, Type: smithy.ShapeTypeBoolean, Ext: &e_IsEssential})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Member = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Member, Type: smithy.ShapeTypeString, Ext: &e_Member})
+var s_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger, Ext: &e_MinuteOfHour})
+var sMonthlySetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonthlySetting, Members: &mMonthlySetting, Type: smithy.ShapeTypeStructure, Ext: &eMonthlySetting})
+var sMonthlySetting_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfMonth", ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger, Ext: &eMonthlySetting_DayOfMonth})
+var sMonthlySetting_HandOffTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HandOffTime", ID: &iHandOffTime, Members: &mHandOffTime, Type: smithy.ShapeTypeStructure, Ext: &eMonthlySetting_HandOffTime})
+var s_MonthlySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonthlySettings, Members: &m_MonthlySettings, Type: smithy.ShapeTypeList, Ext: &e_MonthlySettings})
+var s_MonthlySettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonthlySetting, Members: &mMonthlySetting, Type: smithy.ShapeTypeStructure, Ext: &e_MonthlySettings_member})
+var s_NumberOfOnCalls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfOnCalls, Type: smithy.ShapeTypeInteger, Ext: &e_NumberOfOnCalls})
+var s_OverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OverrideList, Members: &m_OverrideList, Type: smithy.ShapeTypeList, Ext: &e_OverrideList})
+var s_OverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPreviewOverride, Members: &mPreviewOverride, Type: smithy.ShapeTypeStructure, Ext: &e_OverrideList_member})
+var sPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPage, Members: &mPage, Type: smithy.ShapeTypeStructure, Ext: &ePage})
+var sPage_PageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &ePage_PageArn})
+var sPage_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &ePage_EngagementArn})
+var sPage_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &ePage_ContactArn})
+var sPage_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &i_Sender, Type: smithy.ShapeTypeString, Ext: &ePage_Sender})
+var sPage_IncidentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncidentId", ID: &i_IncidentId, Type: smithy.ShapeTypeString, Ext: &ePage_IncidentId})
+var sPage_SentTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SentTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ePage_SentTime})
+var sPage_DeliveryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ePage_DeliveryTime})
+var sPage_ReadTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ePage_ReadTime})
+var s_PagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PagesList, Members: &m_PagesList, Type: smithy.ShapeTypeList, Ext: &e_PagesList})
+var s_PagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPage, Members: &mPage, Type: smithy.ShapeTypeStructure, Ext: &e_PagesList_member})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlan, Members: &mPlan, Type: smithy.ShapeTypeStructure, Ext: &ePlan})
+var sPlan_Stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stages", ID: &i_StagesList, Members: &m_StagesList, Type: smithy.ShapeTypeList, Ext: &ePlan_Stages})
+var sPlan_RotationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationIds", ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &ePlan_RotationIds})
+var s_Policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &e_Policy})
+var sPreviewOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreviewOverride, Members: &mPreviewOverride, Type: smithy.ShapeTypeStructure, Ext: &ePreviewOverride})
+var sPreviewOverride_NewMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewMembers", ID: &i_RotationOverridePreviewMemberList, Members: &m_RotationOverridePreviewMemberList, Type: smithy.ShapeTypeList, Ext: &ePreviewOverride_NewMembers})
+var sPreviewOverride_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ePreviewOverride_StartTime})
+var sPreviewOverride_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ePreviewOverride_EndTime})
+var s_PublicContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublicContent, Type: smithy.ShapeTypeString, Ext: &e_PublicContent})
+var s_PublicSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublicSubject, Type: smithy.ShapeTypeString, Ext: &e_PublicSubject})
+var sReceipt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceipt, Members: &mReceipt, Type: smithy.ShapeTypeStructure, Ext: &eReceipt})
+var sReceipt_ContactChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eReceipt_ContactChannelArn})
+var sReceipt_ReceiptType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiptType", ID: &iReceiptType, Members: &mReceiptType, Type: smithy.ShapeTypeEnum, Ext: &eReceipt_ReceiptType})
+var sReceipt_ReceiptInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiptInfo", ID: &i_ReceiptInfo, Type: smithy.ShapeTypeString, Ext: &eReceipt_ReceiptInfo})
+var sReceipt_ReceiptTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiptTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eReceipt_ReceiptTime})
+var s_ReceiptInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReceiptInfo, Type: smithy.ShapeTypeString, Ext: &e_ReceiptInfo})
+var s_ReceiptsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReceiptsList, Members: &m_ReceiptsList, Type: smithy.ShapeTypeList, Ext: &e_ReceiptsList})
+var s_ReceiptsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReceipt, Members: &mReceipt, Type: smithy.ShapeTypeStructure, Ext: &e_ReceiptsList_member})
+var sReceiptType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceiptType, Members: &mReceiptType, Type: smithy.ShapeTypeEnum, Ext: &eReceiptType})
+var sReceiptType_DELIVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiptType_DELIVERED})
+var sReceiptType_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiptType_ERROR})
+var sReceiptType_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiptType_READ})
+var sReceiptType_SENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiptType_SENT})
+var sReceiptType_STOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiptType_STOP})
+var s_RecurrenceMultiplier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecurrenceMultiplier, Type: smithy.ShapeTypeInteger, Ext: &e_RecurrenceMultiplier})
+var sRecurrenceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecurrenceSettings, Members: &mRecurrenceSettings, Type: smithy.ShapeTypeStructure, Ext: &eRecurrenceSettings})
+var sRecurrenceSettings_MonthlySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonthlySettings", ID: &i_MonthlySettings, Members: &m_MonthlySettings, Type: smithy.ShapeTypeList, Ext: &eRecurrenceSettings_MonthlySettings})
+var sRecurrenceSettings_WeeklySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklySettings", ID: &i_WeeklySettings, Members: &m_WeeklySettings, Type: smithy.ShapeTypeList, Ext: &eRecurrenceSettings_WeeklySettings})
+var sRecurrenceSettings_DailySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailySettings", ID: &i_DailySettings, Members: &m_DailySettings, Type: smithy.ShapeTypeList, Ext: &eRecurrenceSettings_DailySettings})
+var sRecurrenceSettings_NumberOfOnCalls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfOnCalls", ID: &i_NumberOfOnCalls, Type: smithy.ShapeTypeInteger, Ext: &eRecurrenceSettings_NumberOfOnCalls})
+var sRecurrenceSettings_ShiftCoverages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShiftCoverages", ID: &i_ShiftCoveragesMap, Members: &m_ShiftCoveragesMap, Type: smithy.ShapeTypeMap, Ext: &eRecurrenceSettings_ShiftCoverages})
+var sRecurrenceSettings_RecurrenceMultiplier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurrenceMultiplier", ID: &i_RecurrenceMultiplier, Type: smithy.ShapeTypeInteger, Ext: &eRecurrenceSettings_RecurrenceMultiplier})
+var sResolutionContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolutionContact, Members: &mResolutionContact, Type: smithy.ShapeTypeStructure, Ext: &eResolutionContact})
+var sResolutionContact_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eResolutionContact_ContactArn})
+var sResolutionContact_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eResolutionContact_Type})
+var sResolutionContact_StageIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageIndex", ID: &i_StageIndex, Type: smithy.ShapeTypeInteger, Ext: &eResolutionContact_StageIndex})
+var s_ResolutionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolutionList, Members: &m_ResolutionList, Type: smithy.ShapeTypeList, Ext: &e_ResolutionList})
+var s_ResolutionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolutionContact, Members: &mResolutionContact, Type: smithy.ShapeTypeStructure, Ext: &e_ResolutionList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RetryAfterSeconds})
+var s_RetryIntervalInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryIntervalInMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_RetryIntervalInMinutes})
+var sRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotation, Members: &mRotation, Type: smithy.ShapeTypeStructure, Ext: &eRotation})
+var sRotation_RotationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eRotation_RotationArn})
+var sRotation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RotationName, Type: smithy.ShapeTypeString, Ext: &eRotation_Name})
+var sRotation_ContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactIds", ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &eRotation_ContactIds})
+var sRotation_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRotation_StartTime})
+var sRotation_TimeZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZoneId", ID: &i_TimeZoneId, Type: smithy.ShapeTypeString, Ext: &eRotation_TimeZoneId})
+var sRotation_Recurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recurrence", ID: &iRecurrenceSettings, Members: &mRecurrenceSettings, Type: smithy.ShapeTypeStructure, Ext: &eRotation_Recurrence})
+var s_RotationContactsArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationContactsArnList, Members: &m_RotationContactsArnList, Type: smithy.ShapeTypeList, Ext: &e_RotationContactsArnList})
+var s_RotationContactsArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &e_RotationContactsArnList_member})
+var s_RotationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationName, Type: smithy.ShapeTypeString, Ext: &e_RotationName})
+var sRotationOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationOverride, Members: &mRotationOverride, Type: smithy.ShapeTypeStructure, Ext: &eRotationOverride})
+var sRotationOverride_RotationOverrideId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationOverrideId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eRotationOverride_RotationOverrideId})
+var sRotationOverride_NewContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewContactIds", ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &eRotationOverride_NewContactIds})
+var sRotationOverride_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRotationOverride_StartTime})
+var sRotationOverride_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRotationOverride_EndTime})
+var sRotationOverride_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRotationOverride_CreateTime})
+var s_RotationOverrideContactsArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationOverrideContactsArnList, Members: &m_RotationOverrideContactsArnList, Type: smithy.ShapeTypeList, Ext: &e_RotationOverrideContactsArnList})
+var s_RotationOverrideContactsArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &e_RotationOverrideContactsArnList_member})
+var s_RotationOverridePreviewMemberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationOverridePreviewMemberList, Members: &m_RotationOverridePreviewMemberList, Type: smithy.ShapeTypeList, Ext: &e_RotationOverridePreviewMemberList})
+var s_RotationOverridePreviewMemberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Member, Type: smithy.ShapeTypeString, Ext: &e_RotationOverridePreviewMemberList_member})
+var s_RotationOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationOverrides, Members: &m_RotationOverrides, Type: smithy.ShapeTypeList, Ext: &e_RotationOverrides})
+var s_RotationOverrides_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRotationOverride, Members: &mRotationOverride, Type: smithy.ShapeTypeStructure, Ext: &e_RotationOverrides_member})
+var s_RotationPreviewMemberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationPreviewMemberList, Members: &m_RotationPreviewMemberList, Type: smithy.ShapeTypeList, Ext: &e_RotationPreviewMemberList})
+var s_RotationPreviewMemberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Member, Type: smithy.ShapeTypeString, Ext: &e_RotationPreviewMemberList_member})
+var s_Rotations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Rotations, Members: &m_Rotations, Type: smithy.ShapeTypeList, Ext: &e_Rotations})
+var s_Rotations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRotation, Members: &mRotation, Type: smithy.ShapeTypeStructure, Ext: &e_Rotations_member})
+var sRotationShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationShift, Members: &mRotationShift, Type: smithy.ShapeTypeStructure, Ext: &eRotationShift})
+var sRotationShift_ContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactIds", ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &eRotationShift_ContactIds})
+var sRotationShift_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRotationShift_StartTime})
+var sRotationShift_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRotationShift_EndTime})
+var sRotationShift_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &eRotationShift_Type})
+var sRotationShift_ShiftDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShiftDetails", ID: &iShiftDetails, Members: &mShiftDetails, Type: smithy.ShapeTypeStructure, Ext: &eRotationShift_ShiftDetails})
+var s_RotationShifts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationShifts, Members: &m_RotationShifts, Type: smithy.ShapeTypeList, Ext: &e_RotationShifts})
+var s_RotationShifts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRotationShift, Members: &mRotationShift, Type: smithy.ShapeTypeStructure, Ext: &e_RotationShifts_member})
+var s_Sender = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sender, Type: smithy.ShapeTypeString, Ext: &e_Sender})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceId})
+var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceType})
+var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_QuotaCode})
+var sServiceQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ServiceCode})
+var s_ShiftCoveragesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShiftCoveragesMap, Members: &m_ShiftCoveragesMap, Type: smithy.ShapeTypeMap, Ext: &e_ShiftCoveragesMap})
+var s_ShiftCoveragesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDayOfWeek, Members: &mDayOfWeek, Type: smithy.ShapeTypeEnum, Ext: &e_ShiftCoveragesMap_key})
+var s_ShiftCoveragesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_CoverageTimes, Members: &m_CoverageTimes, Type: smithy.ShapeTypeList, Ext: &e_ShiftCoveragesMap_value})
+var sShiftDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShiftDetails, Members: &mShiftDetails, Type: smithy.ShapeTypeStructure, Ext: &eShiftDetails})
+var sShiftDetails_OverriddenContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverriddenContactIds", ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &eShiftDetails_OverriddenContactIds})
+var sShiftType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &eShiftType})
+var sShiftType_REGULAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGULAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShiftType_REGULAR})
+var sShiftType_OVERRIDDEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERRIDDEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShiftType_OVERRIDDEN})
+var s_SimpleAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SimpleAddress, Type: smithy.ShapeTypeString, Ext: &e_SimpleAddress})
+var s_SsmContactsArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &e_SsmContactsArn})
+var s_SsmContactsArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &e_SsmContactsArnList})
+var s_SsmContactsArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &e_SsmContactsArnList_member})
+var sStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeStructure, Ext: &eStage})
+var sStage_DurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInMinutes", ID: &i_StageDurationInMins, Type: smithy.ShapeTypeInteger, Ext: &eStage_DurationInMinutes})
+var sStage_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetsList, Members: &m_TargetsList, Type: smithy.ShapeTypeList, Ext: &eStage_Targets})
+var s_StageDurationInMins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageDurationInMins, Type: smithy.ShapeTypeInteger, Ext: &e_StageDurationInMins})
+var s_StageIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageIndex, Type: smithy.ShapeTypeInteger, Ext: &e_StageIndex})
+var s_StagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StagesList, Members: &m_StagesList, Type: smithy.ShapeTypeList, Ext: &e_StagesList})
+var s_StagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeStructure, Ext: &e_StagesList_member})
+var s_StopReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopReason, Type: smithy.ShapeTypeString, Ext: &e_StopReason})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_Subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &e_Subject})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList, Ext: &e_TagsList})
+var s_TagsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagsList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &eTarget})
+var sTarget_ChannelTargetInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelTargetInfo", ID: &iChannelTargetInfo, Members: &mChannelTargetInfo, Type: smithy.ShapeTypeStructure, Ext: &eTarget_ChannelTargetInfo})
+var sTarget_ContactTargetInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactTargetInfo", ID: &iContactTargetInfo, Members: &mContactTargetInfo, Type: smithy.ShapeTypeStructure, Ext: &eTarget_ContactTargetInfo})
+var s_TargetsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetsList, Members: &m_TargetsList, Type: smithy.ShapeTypeList, Ext: &e_TargetsList})
+var s_TargetsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &e_TargetsList_member})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sThrottlingException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_QuotaCode})
+var sThrottlingException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_ServiceCode})
+var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t4, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_RetryAfterSeconds})
+var sTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeRange, Members: &mTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eTimeRange})
+var sTimeRange_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRange_StartTime})
+var sTimeRange_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRange_EndTime})
+var s_TimeZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeZoneId, Type: smithy.ShapeTypeString, Ext: &e_TimeZoneId})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &e_Uuid})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationException_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_Fields})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Name})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sWeeklySetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWeeklySetting, Members: &mWeeklySetting, Type: smithy.ShapeTypeStructure, Ext: &eWeeklySetting})
+var sWeeklySetting_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfWeek", ID: &iDayOfWeek, Members: &mDayOfWeek, Type: smithy.ShapeTypeEnum, Ext: &eWeeklySetting_DayOfWeek})
+var sWeeklySetting_HandOffTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HandOffTime", ID: &iHandOffTime, Members: &mHandOffTime, Type: smithy.ShapeTypeStructure, Ext: &eWeeklySetting_HandOffTime})
+var s_WeeklySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WeeklySettings, Members: &m_WeeklySettings, Type: smithy.ShapeTypeList, Ext: &e_WeeklySettings})
+var s_WeeklySettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWeeklySetting, Members: &mWeeklySetting, Type: smithy.ShapeTypeStructure, Ext: &e_WeeklySettings_member})
+var sAcceptPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPageRequest, Members: &mAcceptPageRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptPageRequest})
+var sAcceptPageRequest_PageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eAcceptPageRequest_PageId})
+var sAcceptPageRequest_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eAcceptPageRequest_ContactChannelId})
+var sAcceptPageRequest_AcceptType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptType", ID: &iAcceptType, Members: &mAcceptType, Type: smithy.ShapeTypeEnum, Ext: &eAcceptPageRequest_AcceptType})
+var sAcceptPageRequest_Note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Note", ID: &i_ReceiptInfo, Type: smithy.ShapeTypeString, Ext: &eAcceptPageRequest_Note})
+var sAcceptPageRequest_AcceptCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptCode", ID: &i_AcceptCode, Type: smithy.ShapeTypeString, Ext: &eAcceptPageRequest_AcceptCode})
+var sAcceptPageRequest_AcceptCodeValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptCodeValidation", ID: &iAcceptCodeValidation, Members: &mAcceptCodeValidation, Type: smithy.ShapeTypeEnum, Ext: &eAcceptPageRequest_AcceptCodeValidation})
+var sAcceptPageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPageResult, Type: smithy.ShapeTypeStructure, Ext: &eAcceptPageResult})
+var sActivateContactChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateContactChannelRequest, Members: &mActivateContactChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eActivateContactChannelRequest})
+var sActivateContactChannelRequest_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eActivateContactChannelRequest_ContactChannelId})
+var sActivateContactChannelRequest_ActivationCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationCode", ID: &i_ActivationCode, Type: smithy.ShapeTypeString, Ext: &eActivateContactChannelRequest_ActivationCode})
+var sActivateContactChannelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateContactChannelResult, Type: smithy.ShapeTypeStructure, Ext: &eActivateContactChannelResult})
+var sCreateContactChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContactChannelRequest, Members: &mCreateContactChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateContactChannelRequest})
+var sCreateContactChannelRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eCreateContactChannelRequest_ContactId})
+var sCreateContactChannelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eCreateContactChannelRequest_Name})
+var sCreateContactChannelRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eCreateContactChannelRequest_Type})
+var sCreateContactChannelRequest_DeliveryAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryAddress", ID: &iContactChannelAddress, Members: &mContactChannelAddress, Type: smithy.ShapeTypeStructure, Ext: &eCreateContactChannelRequest_DeliveryAddress})
+var sCreateContactChannelRequest_DeferActivation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeferActivation", ID: &i_DeferActivation, Type: smithy.ShapeTypeBoolean, Ext: &eCreateContactChannelRequest_DeferActivation})
+var sCreateContactChannelRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateContactChannelRequest_IdempotencyToken})
+var sCreateContactChannelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContactChannelResult, Members: &mCreateContactChannelResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateContactChannelResult})
+var sCreateContactChannelResult_ContactChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eCreateContactChannelResult_ContactChannelArn})
+var sCreateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContactRequest, Members: &mCreateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateContactRequest})
+var sCreateContactRequest_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_ContactAlias, Type: smithy.ShapeTypeString, Ext: &eCreateContactRequest_Alias})
+var sCreateContactRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_ContactName, Type: smithy.ShapeTypeString, Ext: &eCreateContactRequest_DisplayName})
+var sCreateContactRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eCreateContactRequest_Type})
+var sCreateContactRequest_Plan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plan", ID: &iPlan, Members: &mPlan, Type: smithy.ShapeTypeStructure, Ext: &eCreateContactRequest_Plan})
+var sCreateContactRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList, Ext: &eCreateContactRequest_Tags})
+var sCreateContactRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateContactRequest_IdempotencyToken})
+var sCreateContactResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContactResult, Members: &mCreateContactResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateContactResult})
+var sCreateContactResult_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eCreateContactResult_ContactArn})
+var sCreateRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRotationRequest, Members: &mCreateRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRotationRequest})
+var sCreateRotationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RotationName, Type: smithy.ShapeTypeString, Ext: &eCreateRotationRequest_Name})
+var sCreateRotationRequest_ContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactIds", ID: &i_RotationContactsArnList, Members: &m_RotationContactsArnList, Type: smithy.ShapeTypeList, Ext: &eCreateRotationRequest_ContactIds})
+var sCreateRotationRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateRotationRequest_StartTime})
+var sCreateRotationRequest_TimeZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZoneId", ID: &i_TimeZoneId, Type: smithy.ShapeTypeString, Ext: &eCreateRotationRequest_TimeZoneId})
+var sCreateRotationRequest_Recurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recurrence", ID: &iRecurrenceSettings, Members: &mRecurrenceSettings, Type: smithy.ShapeTypeStructure, Ext: &eCreateRotationRequest_Recurrence})
+var sCreateRotationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList, Ext: &eCreateRotationRequest_Tags})
+var sCreateRotationRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateRotationRequest_IdempotencyToken})
+var sCreateRotationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRotationResult, Members: &mCreateRotationResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateRotationResult})
+var sCreateRotationResult_RotationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eCreateRotationResult_RotationArn})
+var sCreateRotationOverrideRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRotationOverrideRequest, Members: &mCreateRotationOverrideRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRotationOverrideRequest})
+var sCreateRotationOverrideRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eCreateRotationOverrideRequest_RotationId})
+var sCreateRotationOverrideRequest_NewContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewContactIds", ID: &i_RotationOverrideContactsArnList, Members: &m_RotationOverrideContactsArnList, Type: smithy.ShapeTypeList, Ext: &eCreateRotationOverrideRequest_NewContactIds})
+var sCreateRotationOverrideRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateRotationOverrideRequest_StartTime})
+var sCreateRotationOverrideRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateRotationOverrideRequest_EndTime})
+var sCreateRotationOverrideRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateRotationOverrideRequest_IdempotencyToken})
+var sCreateRotationOverrideResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRotationOverrideResult, Members: &mCreateRotationOverrideResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateRotationOverrideResult})
+var sCreateRotationOverrideResult_RotationOverrideId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationOverrideId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCreateRotationOverrideResult_RotationOverrideId})
+var sDeactivateContactChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateContactChannelRequest, Members: &mDeactivateContactChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeactivateContactChannelRequest})
+var sDeactivateContactChannelRequest_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDeactivateContactChannelRequest_ContactChannelId})
+var sDeactivateContactChannelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateContactChannelResult, Type: smithy.ShapeTypeStructure, Ext: &eDeactivateContactChannelResult})
+var sDeleteContactChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContactChannelRequest, Members: &mDeleteContactChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContactChannelRequest})
+var sDeleteContactChannelRequest_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDeleteContactChannelRequest_ContactChannelId})
+var sDeleteContactChannelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContactChannelResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContactChannelResult})
+var sDeleteContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContactRequest, Members: &mDeleteContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContactRequest})
+var sDeleteContactRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDeleteContactRequest_ContactId})
+var sDeleteContactResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContactResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContactResult})
+var sDeleteRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRotationRequest, Members: &mDeleteRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRotationRequest})
+var sDeleteRotationRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDeleteRotationRequest_RotationId})
+var sDeleteRotationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRotationResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRotationResult})
+var sDeleteRotationOverrideRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRotationOverrideRequest, Members: &mDeleteRotationOverrideRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRotationOverrideRequest})
+var sDeleteRotationOverrideRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDeleteRotationOverrideRequest_RotationId})
+var sDeleteRotationOverrideRequest_RotationOverrideId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationOverrideId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDeleteRotationOverrideRequest_RotationOverrideId})
+var sDeleteRotationOverrideResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRotationOverrideResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRotationOverrideResult})
+var sDescribeEngagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngagementRequest, Members: &mDescribeEngagementRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngagementRequest})
+var sDescribeEngagementRequest_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementRequest_EngagementId})
+var sDescribeEngagementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngagementResult, Members: &mDescribeEngagementResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngagementResult})
+var sDescribeEngagementResult_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_ContactArn})
+var sDescribeEngagementResult_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_EngagementArn})
+var sDescribeEngagementResult_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &i_Sender, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_Sender})
+var sDescribeEngagementResult_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_Subject})
+var sDescribeEngagementResult_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_Content})
+var sDescribeEngagementResult_PublicSubject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicSubject", ID: &i_PublicSubject, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_PublicSubject})
+var sDescribeEngagementResult_PublicContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicContent", ID: &i_PublicContent, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_PublicContent})
+var sDescribeEngagementResult_IncidentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncidentId", ID: &i_IncidentId, Type: smithy.ShapeTypeString, Ext: &eDescribeEngagementResult_IncidentId})
+var sDescribeEngagementResult_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEngagementResult_StartTime})
+var sDescribeEngagementResult_StopTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StopTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEngagementResult_StopTime})
+var sDescribePageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePageRequest, Members: &mDescribePageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribePageRequest})
+var sDescribePageRequest_PageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDescribePageRequest_PageId})
+var sDescribePageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePageResult, Members: &mDescribePageResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribePageResult})
+var sDescribePageResult_PageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_PageArn})
+var sDescribePageResult_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_EngagementArn})
+var sDescribePageResult_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_ContactArn})
+var sDescribePageResult_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &i_Sender, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_Sender})
+var sDescribePageResult_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_Subject})
+var sDescribePageResult_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_Content})
+var sDescribePageResult_PublicSubject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicSubject", ID: &i_PublicSubject, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_PublicSubject})
+var sDescribePageResult_PublicContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicContent", ID: &i_PublicContent, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_PublicContent})
+var sDescribePageResult_IncidentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncidentId", ID: &i_IncidentId, Type: smithy.ShapeTypeString, Ext: &eDescribePageResult_IncidentId})
+var sDescribePageResult_SentTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SentTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribePageResult_SentTime})
+var sDescribePageResult_ReadTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribePageResult_ReadTime})
+var sDescribePageResult_DeliveryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribePageResult_DeliveryTime})
+var sGetContactChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactChannelRequest, Members: &mGetContactChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetContactChannelRequest})
+var sGetContactChannelRequest_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetContactChannelRequest_ContactChannelId})
+var sGetContactChannelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactChannelResult, Members: &mGetContactChannelResult, Type: smithy.ShapeTypeStructure, Ext: &eGetContactChannelResult})
+var sGetContactChannelResult_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetContactChannelResult_ContactArn})
+var sGetContactChannelResult_ContactChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetContactChannelResult_ContactChannelArn})
+var sGetContactChannelResult_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eGetContactChannelResult_Name})
+var sGetContactChannelResult_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eGetContactChannelResult_Type})
+var sGetContactChannelResult_DeliveryAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryAddress", ID: &iContactChannelAddress, Members: &mContactChannelAddress, Type: smithy.ShapeTypeStructure, Ext: &eGetContactChannelResult_DeliveryAddress})
+var sGetContactChannelResult_ActivationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationStatus", ID: &iActivationStatus, Members: &mActivationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetContactChannelResult_ActivationStatus})
+var sGetContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactRequest, Members: &mGetContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetContactRequest})
+var sGetContactRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetContactRequest_ContactId})
+var sGetContactResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactResult, Members: &mGetContactResult, Type: smithy.ShapeTypeStructure, Ext: &eGetContactResult})
+var sGetContactResult_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetContactResult_ContactArn})
+var sGetContactResult_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_ContactAlias, Type: smithy.ShapeTypeString, Ext: &eGetContactResult_Alias})
+var sGetContactResult_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_ContactName, Type: smithy.ShapeTypeString, Ext: &eGetContactResult_DisplayName})
+var sGetContactResult_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eGetContactResult_Type})
+var sGetContactResult_Plan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plan", ID: &iPlan, Members: &mPlan, Type: smithy.ShapeTypeStructure, Ext: &eGetContactResult_Plan})
+var sGetContactPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactPolicyRequest, Members: &mGetContactPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetContactPolicyRequest})
+var sGetContactPolicyRequest_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetContactPolicyRequest_ContactArn})
+var sGetContactPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactPolicyResult, Members: &mGetContactPolicyResult, Type: smithy.ShapeTypeStructure, Ext: &eGetContactPolicyResult})
+var sGetContactPolicyResult_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetContactPolicyResult_ContactArn})
+var sGetContactPolicyResult_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &eGetContactPolicyResult_Policy})
+var sGetRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRotationRequest, Members: &mGetRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRotationRequest})
+var sGetRotationRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetRotationRequest_RotationId})
+var sGetRotationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRotationResult, Members: &mGetRotationResult, Type: smithy.ShapeTypeStructure, Ext: &eGetRotationResult})
+var sGetRotationResult_RotationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetRotationResult_RotationArn})
+var sGetRotationResult_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RotationName, Type: smithy.ShapeTypeString, Ext: &eGetRotationResult_Name})
+var sGetRotationResult_ContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactIds", ID: &i_RotationContactsArnList, Members: &m_RotationContactsArnList, Type: smithy.ShapeTypeList, Ext: &eGetRotationResult_ContactIds})
+var sGetRotationResult_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRotationResult_StartTime})
+var sGetRotationResult_TimeZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZoneId", ID: &i_TimeZoneId, Type: smithy.ShapeTypeString, Ext: &eGetRotationResult_TimeZoneId})
+var sGetRotationResult_Recurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recurrence", ID: &iRecurrenceSettings, Members: &mRecurrenceSettings, Type: smithy.ShapeTypeStructure, Ext: &eGetRotationResult_Recurrence})
+var sGetRotationOverrideRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRotationOverrideRequest, Members: &mGetRotationOverrideRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRotationOverrideRequest})
+var sGetRotationOverrideRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetRotationOverrideRequest_RotationId})
+var sGetRotationOverrideRequest_RotationOverrideId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationOverrideId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetRotationOverrideRequest_RotationOverrideId})
+var sGetRotationOverrideResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRotationOverrideResult, Members: &mGetRotationOverrideResult, Type: smithy.ShapeTypeStructure, Ext: &eGetRotationOverrideResult})
+var sGetRotationOverrideResult_RotationOverrideId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationOverrideId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetRotationOverrideResult_RotationOverrideId})
+var sGetRotationOverrideResult_RotationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eGetRotationOverrideResult_RotationArn})
+var sGetRotationOverrideResult_NewContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewContactIds", ID: &i_SsmContactsArnList, Members: &m_SsmContactsArnList, Type: smithy.ShapeTypeList, Ext: &eGetRotationOverrideResult_NewContactIds})
+var sGetRotationOverrideResult_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRotationOverrideResult_StartTime})
+var sGetRotationOverrideResult_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRotationOverrideResult_EndTime})
+var sGetRotationOverrideResult_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRotationOverrideResult_CreateTime})
+var sListContactChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactChannelsRequest, Members: &mListContactChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListContactChannelsRequest})
+var sListContactChannelsRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eListContactChannelsRequest_ContactId})
+var sListContactChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContactChannelsRequest_NextToken})
+var sListContactChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListContactChannelsRequest_MaxResults})
+var sListContactChannelsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactChannelsResult, Members: &mListContactChannelsResult, Type: smithy.ShapeTypeStructure, Ext: &eListContactChannelsResult})
+var sListContactChannelsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContactChannelsResult_NextToken})
+var sListContactChannelsResult_ContactChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannels", ID: &i_ContactChannelList, Members: &m_ContactChannelList, Type: smithy.ShapeTypeList, Ext: &eListContactChannelsResult_ContactChannels})
+var sListContactsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactsRequest, Members: &mListContactsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListContactsRequest})
+var sListContactsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContactsRequest_NextToken})
+var sListContactsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListContactsRequest_MaxResults})
+var sListContactsRequest_AliasPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasPrefix", ID: &i_ContactAlias, Type: smithy.ShapeTypeString, Ext: &eListContactsRequest_AliasPrefix})
+var sListContactsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eListContactsRequest_Type})
+var sListContactsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactsResult, Members: &mListContactsResult, Type: smithy.ShapeTypeStructure, Ext: &eListContactsResult})
+var sListContactsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContactsResult_NextToken})
+var sListContactsResult_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_ContactsList, Members: &m_ContactsList, Type: smithy.ShapeTypeList, Ext: &eListContactsResult_Contacts})
+var sListEngagementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementsRequest, Members: &mListEngagementsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEngagementsRequest})
+var sListEngagementsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListEngagementsRequest_NextToken})
+var sListEngagementsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListEngagementsRequest_MaxResults})
+var sListEngagementsRequest_IncidentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncidentId", ID: &i_IncidentId, Type: smithy.ShapeTypeString, Ext: &eListEngagementsRequest_IncidentId})
+var sListEngagementsRequest_TimeRangeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeValue", ID: &iTimeRange, Members: &mTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eListEngagementsRequest_TimeRangeValue})
+var sListEngagementsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementsResult, Members: &mListEngagementsResult, Type: smithy.ShapeTypeStructure, Ext: &eListEngagementsResult})
+var sListEngagementsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListEngagementsResult_NextToken})
+var sListEngagementsResult_Engagements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engagements", ID: &i_EngagementsList, Members: &m_EngagementsList, Type: smithy.ShapeTypeList, Ext: &eListEngagementsResult_Engagements})
+var sListPageReceiptsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPageReceiptsRequest, Members: &mListPageReceiptsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPageReceiptsRequest})
+var sListPageReceiptsRequest_PageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eListPageReceiptsRequest_PageId})
+var sListPageReceiptsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPageReceiptsRequest_NextToken})
+var sListPageReceiptsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPageReceiptsRequest_MaxResults})
+var sListPageReceiptsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPageReceiptsResult, Members: &mListPageReceiptsResult, Type: smithy.ShapeTypeStructure, Ext: &eListPageReceiptsResult})
+var sListPageReceiptsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPageReceiptsResult_NextToken})
+var sListPageReceiptsResult_Receipts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Receipts", ID: &i_ReceiptsList, Members: &m_ReceiptsList, Type: smithy.ShapeTypeList, Ext: &eListPageReceiptsResult_Receipts})
+var sListPageResolutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPageResolutionsRequest, Members: &mListPageResolutionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPageResolutionsRequest})
+var sListPageResolutionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPageResolutionsRequest_NextToken})
+var sListPageResolutionsRequest_PageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eListPageResolutionsRequest_PageId})
+var sListPageResolutionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPageResolutionsResult, Members: &mListPageResolutionsResult, Type: smithy.ShapeTypeStructure, Ext: &eListPageResolutionsResult})
+var sListPageResolutionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPageResolutionsResult_NextToken})
+var sListPageResolutionsResult_PageResolutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageResolutions", ID: &i_ResolutionList, Members: &m_ResolutionList, Type: smithy.ShapeTypeList, Ext: &eListPageResolutionsResult_PageResolutions})
+var sListPagesByContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPagesByContactRequest, Members: &mListPagesByContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPagesByContactRequest})
+var sListPagesByContactRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eListPagesByContactRequest_ContactId})
+var sListPagesByContactRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPagesByContactRequest_NextToken})
+var sListPagesByContactRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPagesByContactRequest_MaxResults})
+var sListPagesByContactResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPagesByContactResult, Members: &mListPagesByContactResult, Type: smithy.ShapeTypeStructure, Ext: &eListPagesByContactResult})
+var sListPagesByContactResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPagesByContactResult_NextToken})
+var sListPagesByContactResult_Pages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pages", ID: &i_PagesList, Members: &m_PagesList, Type: smithy.ShapeTypeList, Ext: &eListPagesByContactResult_Pages})
+var sListPagesByEngagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPagesByEngagementRequest, Members: &mListPagesByEngagementRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPagesByEngagementRequest})
+var sListPagesByEngagementRequest_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eListPagesByEngagementRequest_EngagementId})
+var sListPagesByEngagementRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPagesByEngagementRequest_NextToken})
+var sListPagesByEngagementRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPagesByEngagementRequest_MaxResults})
+var sListPagesByEngagementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPagesByEngagementResult, Members: &mListPagesByEngagementResult, Type: smithy.ShapeTypeStructure, Ext: &eListPagesByEngagementResult})
+var sListPagesByEngagementResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPagesByEngagementResult_NextToken})
+var sListPagesByEngagementResult_Pages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pages", ID: &i_PagesList, Members: &m_PagesList, Type: smithy.ShapeTypeList, Ext: &eListPagesByEngagementResult_Pages})
+var sListPreviewRotationShiftsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPreviewRotationShiftsRequest, Members: &mListPreviewRotationShiftsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPreviewRotationShiftsRequest})
+var sListPreviewRotationShiftsRequest_RotationStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationStartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListPreviewRotationShiftsRequest_RotationStartTime})
+var sListPreviewRotationShiftsRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListPreviewRotationShiftsRequest_StartTime})
+var sListPreviewRotationShiftsRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListPreviewRotationShiftsRequest_EndTime})
+var sListPreviewRotationShiftsRequest_Members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Members", ID: &i_RotationPreviewMemberList, Members: &m_RotationPreviewMemberList, Type: smithy.ShapeTypeList, Ext: &eListPreviewRotationShiftsRequest_Members})
+var sListPreviewRotationShiftsRequest_TimeZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZoneId", ID: &i_TimeZoneId, Type: smithy.ShapeTypeString, Ext: &eListPreviewRotationShiftsRequest_TimeZoneId})
+var sListPreviewRotationShiftsRequest_Recurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recurrence", ID: &iRecurrenceSettings, Members: &mRecurrenceSettings, Type: smithy.ShapeTypeStructure, Ext: &eListPreviewRotationShiftsRequest_Recurrence})
+var sListPreviewRotationShiftsRequest_Overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overrides", ID: &i_OverrideList, Members: &m_OverrideList, Type: smithy.ShapeTypeList, Ext: &eListPreviewRotationShiftsRequest_Overrides})
+var sListPreviewRotationShiftsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPreviewRotationShiftsRequest_NextToken})
+var sListPreviewRotationShiftsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPreviewRotationShiftsRequest_MaxResults})
+var sListPreviewRotationShiftsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPreviewRotationShiftsResult, Members: &mListPreviewRotationShiftsResult, Type: smithy.ShapeTypeStructure, Ext: &eListPreviewRotationShiftsResult})
+var sListPreviewRotationShiftsResult_RotationShifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationShifts", ID: &i_RotationShifts, Members: &m_RotationShifts, Type: smithy.ShapeTypeList, Ext: &eListPreviewRotationShiftsResult_RotationShifts})
+var sListPreviewRotationShiftsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListPreviewRotationShiftsResult_NextToken})
+var sListRotationOverridesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationOverridesRequest, Members: &mListRotationOverridesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRotationOverridesRequest})
+var sListRotationOverridesRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eListRotationOverridesRequest_RotationId})
+var sListRotationOverridesRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListRotationOverridesRequest_StartTime})
+var sListRotationOverridesRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListRotationOverridesRequest_EndTime})
+var sListRotationOverridesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRotationOverridesRequest_NextToken})
+var sListRotationOverridesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRotationOverridesRequest_MaxResults})
+var sListRotationOverridesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationOverridesResult, Members: &mListRotationOverridesResult, Type: smithy.ShapeTypeStructure, Ext: &eListRotationOverridesResult})
+var sListRotationOverridesResult_RotationOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationOverrides", ID: &i_RotationOverrides, Members: &m_RotationOverrides, Type: smithy.ShapeTypeList, Ext: &eListRotationOverridesResult_RotationOverrides})
+var sListRotationOverridesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRotationOverridesResult_NextToken})
+var sListRotationShiftsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationShiftsRequest, Members: &mListRotationShiftsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRotationShiftsRequest})
+var sListRotationShiftsRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eListRotationShiftsRequest_RotationId})
+var sListRotationShiftsRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListRotationShiftsRequest_StartTime})
+var sListRotationShiftsRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListRotationShiftsRequest_EndTime})
+var sListRotationShiftsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRotationShiftsRequest_NextToken})
+var sListRotationShiftsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRotationShiftsRequest_MaxResults})
+var sListRotationShiftsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationShiftsResult, Members: &mListRotationShiftsResult, Type: smithy.ShapeTypeStructure, Ext: &eListRotationShiftsResult})
+var sListRotationShiftsResult_RotationShifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationShifts", ID: &i_RotationShifts, Members: &m_RotationShifts, Type: smithy.ShapeTypeList, Ext: &eListRotationShiftsResult_RotationShifts})
+var sListRotationShiftsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRotationShiftsResult_NextToken})
+var sListRotationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationsRequest, Members: &mListRotationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRotationsRequest})
+var sListRotationsRequest_RotationNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationNamePrefix", ID: &i_RotationName, Type: smithy.ShapeTypeString, Ext: &eListRotationsRequest_RotationNamePrefix})
+var sListRotationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRotationsRequest_NextToken})
+var sListRotationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRotationsRequest_MaxResults})
+var sListRotationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRotationsResult, Members: &mListRotationsResult, Type: smithy.ShapeTypeStructure, Ext: &eListRotationsResult})
+var sListRotationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRotationsResult_NextToken})
+var sListRotationsResult_Rotations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rotations", ID: &i_Rotations, Members: &m_Rotations, Type: smithy.ShapeTypeList, Ext: &eListRotationsResult_Rotations})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResult, Members: &mListTagsForResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResult})
+var sListTagsForResourceResult_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResult_Tags})
+var sPutContactPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContactPolicyRequest, Members: &mPutContactPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutContactPolicyRequest})
+var sPutContactPolicyRequest_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &ePutContactPolicyRequest_ContactArn})
+var sPutContactPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &ePutContactPolicyRequest_Policy})
+var sPutContactPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContactPolicyResult, Type: smithy.ShapeTypeStructure, Ext: &ePutContactPolicyResult})
+var sSendActivationCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCodeRequest, Members: &mSendActivationCodeRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendActivationCodeRequest})
+var sSendActivationCodeRequest_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eSendActivationCodeRequest_ContactChannelId})
+var sSendActivationCodeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCodeResult, Type: smithy.ShapeTypeStructure, Ext: &eSendActivationCodeResult})
+var sStartEngagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementRequest, Members: &mStartEngagementRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartEngagementRequest})
+var sStartEngagementRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_ContactId})
+var sStartEngagementRequest_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &i_Sender, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_Sender})
+var sStartEngagementRequest_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_Subject})
+var sStartEngagementRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_Content})
+var sStartEngagementRequest_PublicSubject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicSubject", ID: &i_PublicSubject, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_PublicSubject})
+var sStartEngagementRequest_PublicContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicContent", ID: &i_PublicContent, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_PublicContent})
+var sStartEngagementRequest_IncidentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncidentId", ID: &i_IncidentId, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_IncidentId})
+var sStartEngagementRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eStartEngagementRequest_IdempotencyToken})
+var sStartEngagementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementResult, Members: &mStartEngagementResult, Type: smithy.ShapeTypeStructure, Ext: &eStartEngagementResult})
+var sStartEngagementResult_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementArn", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eStartEngagementResult_EngagementArn})
+var sStopEngagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEngagementRequest, Members: &mStopEngagementRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopEngagementRequest})
+var sStopEngagementRequest_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eStopEngagementRequest_EngagementId})
+var sStopEngagementRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_StopReason, Type: smithy.ShapeTypeString, Ext: &eStopEngagementRequest_Reason})
+var sStopEngagementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEngagementResult, Type: smithy.ShapeTypeStructure, Ext: &eStopEngagementResult})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResult})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResult})
+var sUpdateContactChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContactChannelRequest, Members: &mUpdateContactChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactChannelRequest})
+var sUpdateContactChannelRequest_ContactChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactChannelId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eUpdateContactChannelRequest_ContactChannelId})
+var sUpdateContactChannelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString, Ext: &eUpdateContactChannelRequest_Name})
+var sUpdateContactChannelRequest_DeliveryAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryAddress", ID: &iContactChannelAddress, Members: &mContactChannelAddress, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactChannelRequest_DeliveryAddress})
+var sUpdateContactChannelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContactChannelResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactChannelResult})
+var sUpdateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContactRequest, Members: &mUpdateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactRequest})
+var sUpdateContactRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eUpdateContactRequest_ContactId})
+var sUpdateContactRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_ContactName, Type: smithy.ShapeTypeString, Ext: &eUpdateContactRequest_DisplayName})
+var sUpdateContactRequest_Plan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plan", ID: &iPlan, Members: &mPlan, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactRequest_Plan})
+var sUpdateContactResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContactResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactResult})
+var sUpdateRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRotationRequest, Members: &mUpdateRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRotationRequest})
+var sUpdateRotationRequest_RotationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationId", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &eUpdateRotationRequest_RotationId})
+var sUpdateRotationRequest_ContactIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactIds", ID: &i_RotationContactsArnList, Members: &m_RotationContactsArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateRotationRequest_ContactIds})
+var sUpdateRotationRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateRotationRequest_StartTime})
+var sUpdateRotationRequest_TimeZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZoneId", ID: &i_TimeZoneId, Type: smithy.ShapeTypeString, Ext: &eUpdateRotationRequest_TimeZoneId})
+var sUpdateRotationRequest_Recurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recurrence", ID: &iRecurrenceSettings, Members: &mRecurrenceSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRotationRequest_Recurrence})
+var sUpdateRotationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRotationResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRotationResult})
+
+var AcceptPage = &sAcceptPage
+
+var ActivateContactChannel = &sActivateContactChannel
+
+var CreateContact = &sCreateContact
+
+var CreateContactChannel = &sCreateContactChannel
+
+var CreateRotation = &sCreateRotation
+
+var CreateRotationOverride = &sCreateRotationOverride
+
+var DeactivateContactChannel = &sDeactivateContactChannel
+
+var DeleteContact = &sDeleteContact
+
+var DeleteContactChannel = &sDeleteContactChannel
+
+var DeleteRotation = &sDeleteRotation
+
+var DeleteRotationOverride = &sDeleteRotationOverride
+
+var DescribeEngagement = &sDescribeEngagement
+
+var DescribePage = &sDescribePage
+
+var GetContact = &sGetContact
+
+var GetContactChannel = &sGetContactChannel
+
+var GetContactPolicy = &sGetContactPolicy
+
+var GetRotation = &sGetRotation
+
+var GetRotationOverride = &sGetRotationOverride
+
+var ListContactChannels = &sListContactChannels
+
+var ListContacts = &sListContacts
+
+var ListEngagements = &sListEngagements
+
+var ListPageReceipts = &sListPageReceipts
+
+var ListPageResolutions = &sListPageResolutions
+
+var ListPagesByContact = &sListPagesByContact
+
+var ListPagesByEngagement = &sListPagesByEngagement
+
+var ListPreviewRotationShifts = &sListPreviewRotationShifts
+
+var ListRotationOverrides = &sListRotationOverrides
+
+var ListRotations = &sListRotations
+
+var ListRotationShifts = &sListRotationShifts
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutContactPolicy = &sPutContactPolicy
+
+var SendActivationCode = &sSendActivationCode
+
+var StartEngagement = &sStartEngagement
+
+var StopEngagement = &sStopEngagement
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateContact = &sUpdateContact
+
+var UpdateContactChannel = &sUpdateContactChannel
+
+var UpdateRotation = &sUpdateRotation
+
+var _SSMContacts = &s_SSMContacts
+
+var _AcceptCode = &s_AcceptCode
+
+var AcceptCodeValidation = &sAcceptCodeValidation
+var AcceptCodeValidation_IGNORE = &sAcceptCodeValidation_IGNORE
+var AcceptCodeValidation_ENFORCE = &sAcceptCodeValidation_ENFORCE
+
+var AcceptType = &sAcceptType
+var AcceptType_DELIVERED = &sAcceptType_DELIVERED
+var AcceptType_READ = &sAcceptType_READ
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _ActivationCode = &s_ActivationCode
+
+var ActivationStatus = &sActivationStatus
+var ActivationStatus_ACTIVATED = &sActivationStatus_ACTIVATED
+var ActivationStatus_NOT_ACTIVATED = &sActivationStatus_NOT_ACTIVATED
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _ChannelName = &s_ChannelName
+
+var ChannelTargetInfo = &sChannelTargetInfo
+var ChannelTargetInfo_ContactChannelId = &sChannelTargetInfo_ContactChannelId
+var ChannelTargetInfo_RetryIntervalInMinutes = &sChannelTargetInfo_RetryIntervalInMinutes
+
+var ChannelType = &sChannelType
+var ChannelType_SMS = &sChannelType_SMS
+var ChannelType_VOICE = &sChannelType_VOICE
+var ChannelType_EMAIL = &sChannelType_EMAIL
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_ResourceId = &sConflictException_ResourceId
+var ConflictException_ResourceType = &sConflictException_ResourceType
+var ConflictException_DependentEntities = &sConflictException_DependentEntities
+
+var Contact = &sContact
+var Contact_ContactArn = &sContact_ContactArn
+var Contact_Alias = &sContact_Alias
+var Contact_DisplayName = &sContact_DisplayName
+var Contact_Type = &sContact_Type
+
+var _ContactAlias = &s_ContactAlias
+
+var ContactChannel = &sContactChannel
+var ContactChannel_ContactChannelArn = &sContactChannel_ContactChannelArn
+var ContactChannel_ContactArn = &sContactChannel_ContactArn
+var ContactChannel_Name = &sContactChannel_Name
+var ContactChannel_Type = &sContactChannel_Type
+var ContactChannel_DeliveryAddress = &sContactChannel_DeliveryAddress
+var ContactChannel_ActivationStatus = &sContactChannel_ActivationStatus
+
+var ContactChannelAddress = &sContactChannelAddress
+var ContactChannelAddress_SimpleAddress = &sContactChannelAddress_SimpleAddress
+
+var _ContactChannelList = &s_ContactChannelList
+var _ContactChannelList_member = &s_ContactChannelList_member
+
+var _ContactName = &s_ContactName
+
+var _ContactsList = &s_ContactsList
+var _ContactsList_member = &s_ContactsList_member
+
+var ContactTargetInfo = &sContactTargetInfo
+var ContactTargetInfo_ContactId = &sContactTargetInfo_ContactId
+var ContactTargetInfo_IsEssential = &sContactTargetInfo_IsEssential
+
+var ContactType = &sContactType
+var ContactType_PERSONAL = &sContactType_PERSONAL
+var ContactType_ESCALATION = &sContactType_ESCALATION
+var ContactType_ONCALL_SCHEDULE = &sContactType_ONCALL_SCHEDULE
+
+var _Content = &s_Content
+
+var CoverageTime = &sCoverageTime
+var CoverageTime_Start = &sCoverageTime_Start
+var CoverageTime_End = &sCoverageTime_End
+
+var _CoverageTimes = &s_CoverageTimes
+var _CoverageTimes_member = &s_CoverageTimes_member
+
+var _DailySettings = &s_DailySettings
+var _DailySettings_member = &s_DailySettings_member
+
+var DataEncryptionException = &sDataEncryptionException
+var DataEncryptionException_Message = &sDataEncryptionException_Message
+
+var _DateTime = &s_DateTime
+
+var _DayOfMonth = &s_DayOfMonth
+
+var DayOfWeek = &sDayOfWeek
+var DayOfWeek_MON = &sDayOfWeek_MON
+var DayOfWeek_TUE = &sDayOfWeek_TUE
+var DayOfWeek_WED = &sDayOfWeek_WED
+var DayOfWeek_THU = &sDayOfWeek_THU
+var DayOfWeek_FRI = &sDayOfWeek_FRI
+var DayOfWeek_SAT = &sDayOfWeek_SAT
+var DayOfWeek_SUN = &sDayOfWeek_SUN
+
+var _DeferActivation = &s_DeferActivation
+
+var DependentEntity = &sDependentEntity
+var DependentEntity_RelationType = &sDependentEntity_RelationType
+var DependentEntity_DependentResourceIds = &sDependentEntity_DependentResourceIds
+
+var _DependentEntityList = &s_DependentEntityList
+var _DependentEntityList_member = &s_DependentEntityList_member
+
+var Engagement = &sEngagement
+var Engagement_EngagementArn = &sEngagement_EngagementArn
+var Engagement_ContactArn = &sEngagement_ContactArn
+var Engagement_Sender = &sEngagement_Sender
+var Engagement_IncidentId = &sEngagement_IncidentId
+var Engagement_StartTime = &sEngagement_StartTime
+var Engagement_StopTime = &sEngagement_StopTime
+
+var _EngagementsList = &s_EngagementsList
+var _EngagementsList_member = &s_EngagementsList_member
+
+var HandOffTime = &sHandOffTime
+var HandOffTime_HourOfDay = &sHandOffTime_HourOfDay
+var HandOffTime_MinuteOfHour = &sHandOffTime_MinuteOfHour
+
+var _HourOfDay = &s_HourOfDay
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var _IncidentId = &s_IncidentId
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+var InternalServerException_RetryAfterSeconds = &sInternalServerException_RetryAfterSeconds
+
+var _IsEssential = &s_IsEssential
+
+var _MaxResults = &s_MaxResults
+
+var _Member = &s_Member
+
+var _MinuteOfHour = &s_MinuteOfHour
+
+var MonthlySetting = &sMonthlySetting
+var MonthlySetting_DayOfMonth = &sMonthlySetting_DayOfMonth
+var MonthlySetting_HandOffTime = &sMonthlySetting_HandOffTime
+
+var _MonthlySettings = &s_MonthlySettings
+var _MonthlySettings_member = &s_MonthlySettings_member
+
+var _NumberOfOnCalls = &s_NumberOfOnCalls
+
+var _OverrideList = &s_OverrideList
+var _OverrideList_member = &s_OverrideList_member
+
+var Page = &sPage
+var Page_PageArn = &sPage_PageArn
+var Page_EngagementArn = &sPage_EngagementArn
+var Page_ContactArn = &sPage_ContactArn
+var Page_Sender = &sPage_Sender
+var Page_IncidentId = &sPage_IncidentId
+var Page_SentTime = &sPage_SentTime
+var Page_DeliveryTime = &sPage_DeliveryTime
+var Page_ReadTime = &sPage_ReadTime
+
+var _PagesList = &s_PagesList
+var _PagesList_member = &s_PagesList_member
+
+var _PaginationToken = &s_PaginationToken
+
+var Plan = &sPlan
+var Plan_Stages = &sPlan_Stages
+var Plan_RotationIds = &sPlan_RotationIds
+
+var _Policy = &s_Policy
+
+var PreviewOverride = &sPreviewOverride
+var PreviewOverride_NewMembers = &sPreviewOverride_NewMembers
+var PreviewOverride_StartTime = &sPreviewOverride_StartTime
+var PreviewOverride_EndTime = &sPreviewOverride_EndTime
+
+var _PublicContent = &s_PublicContent
+
+var _PublicSubject = &s_PublicSubject
+
+var Receipt = &sReceipt
+var Receipt_ContactChannelArn = &sReceipt_ContactChannelArn
+var Receipt_ReceiptType = &sReceipt_ReceiptType
+var Receipt_ReceiptInfo = &sReceipt_ReceiptInfo
+var Receipt_ReceiptTime = &sReceipt_ReceiptTime
+
+var _ReceiptInfo = &s_ReceiptInfo
+
+var _ReceiptsList = &s_ReceiptsList
+var _ReceiptsList_member = &s_ReceiptsList_member
+
+var ReceiptType = &sReceiptType
+var ReceiptType_DELIVERED = &sReceiptType_DELIVERED
+var ReceiptType_ERROR = &sReceiptType_ERROR
+var ReceiptType_READ = &sReceiptType_READ
+var ReceiptType_SENT = &sReceiptType_SENT
+var ReceiptType_STOP = &sReceiptType_STOP
+
+var _RecurrenceMultiplier = &s_RecurrenceMultiplier
+
+var RecurrenceSettings = &sRecurrenceSettings
+var RecurrenceSettings_MonthlySettings = &sRecurrenceSettings_MonthlySettings
+var RecurrenceSettings_WeeklySettings = &sRecurrenceSettings_WeeklySettings
+var RecurrenceSettings_DailySettings = &sRecurrenceSettings_DailySettings
+var RecurrenceSettings_NumberOfOnCalls = &sRecurrenceSettings_NumberOfOnCalls
+var RecurrenceSettings_ShiftCoverages = &sRecurrenceSettings_ShiftCoverages
+var RecurrenceSettings_RecurrenceMultiplier = &sRecurrenceSettings_RecurrenceMultiplier
+
+var ResolutionContact = &sResolutionContact
+var ResolutionContact_ContactArn = &sResolutionContact_ContactArn
+var ResolutionContact_Type = &sResolutionContact_Type
+var ResolutionContact_StageIndex = &sResolutionContact_StageIndex
+
+var _ResolutionList = &s_ResolutionList
+var _ResolutionList_member = &s_ResolutionList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var _RetryIntervalInMinutes = &s_RetryIntervalInMinutes
+
+var Rotation = &sRotation
+var Rotation_RotationArn = &sRotation_RotationArn
+var Rotation_Name = &sRotation_Name
+var Rotation_ContactIds = &sRotation_ContactIds
+var Rotation_StartTime = &sRotation_StartTime
+var Rotation_TimeZoneId = &sRotation_TimeZoneId
+var Rotation_Recurrence = &sRotation_Recurrence
+
+var _RotationContactsArnList = &s_RotationContactsArnList
+var _RotationContactsArnList_member = &s_RotationContactsArnList_member
+
+var _RotationName = &s_RotationName
+
+var RotationOverride = &sRotationOverride
+var RotationOverride_RotationOverrideId = &sRotationOverride_RotationOverrideId
+var RotationOverride_NewContactIds = &sRotationOverride_NewContactIds
+var RotationOverride_StartTime = &sRotationOverride_StartTime
+var RotationOverride_EndTime = &sRotationOverride_EndTime
+var RotationOverride_CreateTime = &sRotationOverride_CreateTime
+
+var _RotationOverrideContactsArnList = &s_RotationOverrideContactsArnList
+var _RotationOverrideContactsArnList_member = &s_RotationOverrideContactsArnList_member
+
+var _RotationOverridePreviewMemberList = &s_RotationOverridePreviewMemberList
+var _RotationOverridePreviewMemberList_member = &s_RotationOverridePreviewMemberList_member
+
+var _RotationOverrides = &s_RotationOverrides
+var _RotationOverrides_member = &s_RotationOverrides_member
+
+var _RotationPreviewMemberList = &s_RotationPreviewMemberList
+var _RotationPreviewMemberList_member = &s_RotationPreviewMemberList_member
+
+var _Rotations = &s_Rotations
+var _Rotations_member = &s_Rotations_member
+
+var RotationShift = &sRotationShift
+var RotationShift_ContactIds = &sRotationShift_ContactIds
+var RotationShift_StartTime = &sRotationShift_StartTime
+var RotationShift_EndTime = &sRotationShift_EndTime
+var RotationShift_Type = &sRotationShift_Type
+var RotationShift_ShiftDetails = &sRotationShift_ShiftDetails
+
+var _RotationShifts = &s_RotationShifts
+var _RotationShifts_member = &s_RotationShifts_member
+
+var _Sender = &s_Sender
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_ResourceId = &sServiceQuotaExceededException_ResourceId
+var ServiceQuotaExceededException_ResourceType = &sServiceQuotaExceededException_ResourceType
+var ServiceQuotaExceededException_QuotaCode = &sServiceQuotaExceededException_QuotaCode
+var ServiceQuotaExceededException_ServiceCode = &sServiceQuotaExceededException_ServiceCode
+
+var _ShiftCoveragesMap = &s_ShiftCoveragesMap
+var _ShiftCoveragesMap_key = &s_ShiftCoveragesMap_key
+var _ShiftCoveragesMap_value = &s_ShiftCoveragesMap_value
+
+var ShiftDetails = &sShiftDetails
+var ShiftDetails_OverriddenContactIds = &sShiftDetails_OverriddenContactIds
+
+var ShiftType = &sShiftType
+var ShiftType_REGULAR = &sShiftType_REGULAR
+var ShiftType_OVERRIDDEN = &sShiftType_OVERRIDDEN
+
+var _SimpleAddress = &s_SimpleAddress
+
+var _SsmContactsArn = &s_SsmContactsArn
+
+var _SsmContactsArnList = &s_SsmContactsArnList
+var _SsmContactsArnList_member = &s_SsmContactsArnList_member
+
+var Stage = &sStage
+var Stage_DurationInMinutes = &sStage_DurationInMinutes
+var Stage_Targets = &sStage_Targets
+
+var _StageDurationInMins = &s_StageDurationInMins
+
+var _StageIndex = &s_StageIndex
+
+var _StagesList = &s_StagesList
+var _StagesList_member = &s_StagesList_member
+
+var _StopReason = &s_StopReason
+
+var _String = &s_String
+
+var _Subject = &s_Subject
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagsList = &s_TagsList
+var _TagsList_member = &s_TagsList_member
+
+var _TagValue = &s_TagValue
+
+var Target = &sTarget
+var Target_ChannelTargetInfo = &sTarget_ChannelTargetInfo
+var Target_ContactTargetInfo = &sTarget_ContactTargetInfo
+
+var _TargetsList = &s_TargetsList
+var _TargetsList_member = &s_TargetsList_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+var ThrottlingException_QuotaCode = &sThrottlingException_QuotaCode
+var ThrottlingException_ServiceCode = &sThrottlingException_ServiceCode
+var ThrottlingException_RetryAfterSeconds = &sThrottlingException_RetryAfterSeconds
+
+var TimeRange = &sTimeRange
+var TimeRange_StartTime = &sTimeRange_StartTime
+var TimeRange_EndTime = &sTimeRange_EndTime
+
+var _TimeZoneId = &s_TimeZoneId
+
+var _Uuid = &s_Uuid
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Reason = &sValidationException_Reason
+var ValidationException_Fields = &sValidationException_Fields
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_Name = &sValidationExceptionField_Name
+var ValidationExceptionField_Message = &sValidationExceptionField_Message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var WeeklySetting = &sWeeklySetting
+var WeeklySetting_DayOfWeek = &sWeeklySetting_DayOfWeek
+var WeeklySetting_HandOffTime = &sWeeklySetting_HandOffTime
+
+var _WeeklySettings = &s_WeeklySettings
+var _WeeklySettings_member = &s_WeeklySettings_member
+
+var AcceptPageRequest = &sAcceptPageRequest
+var AcceptPageRequest_PageId = &sAcceptPageRequest_PageId
+var AcceptPageRequest_ContactChannelId = &sAcceptPageRequest_ContactChannelId
+var AcceptPageRequest_AcceptType = &sAcceptPageRequest_AcceptType
+var AcceptPageRequest_Note = &sAcceptPageRequest_Note
+var AcceptPageRequest_AcceptCode = &sAcceptPageRequest_AcceptCode
+var AcceptPageRequest_AcceptCodeValidation = &sAcceptPageRequest_AcceptCodeValidation
+
+var AcceptPageResult = &sAcceptPageResult
+
+var ActivateContactChannelRequest = &sActivateContactChannelRequest
+var ActivateContactChannelRequest_ContactChannelId = &sActivateContactChannelRequest_ContactChannelId
+var ActivateContactChannelRequest_ActivationCode = &sActivateContactChannelRequest_ActivationCode
+
+var ActivateContactChannelResult = &sActivateContactChannelResult
+
+var CreateContactChannelRequest = &sCreateContactChannelRequest
+var CreateContactChannelRequest_ContactId = &sCreateContactChannelRequest_ContactId
+var CreateContactChannelRequest_Name = &sCreateContactChannelRequest_Name
+var CreateContactChannelRequest_Type = &sCreateContactChannelRequest_Type
+var CreateContactChannelRequest_DeliveryAddress = &sCreateContactChannelRequest_DeliveryAddress
+var CreateContactChannelRequest_DeferActivation = &sCreateContactChannelRequest_DeferActivation
+var CreateContactChannelRequest_IdempotencyToken = &sCreateContactChannelRequest_IdempotencyToken
+
+var CreateContactChannelResult = &sCreateContactChannelResult
+var CreateContactChannelResult_ContactChannelArn = &sCreateContactChannelResult_ContactChannelArn
+
+var CreateContactRequest = &sCreateContactRequest
+var CreateContactRequest_Alias = &sCreateContactRequest_Alias
+var CreateContactRequest_DisplayName = &sCreateContactRequest_DisplayName
+var CreateContactRequest_Type = &sCreateContactRequest_Type
+var CreateContactRequest_Plan = &sCreateContactRequest_Plan
+var CreateContactRequest_Tags = &sCreateContactRequest_Tags
+var CreateContactRequest_IdempotencyToken = &sCreateContactRequest_IdempotencyToken
+
+var CreateContactResult = &sCreateContactResult
+var CreateContactResult_ContactArn = &sCreateContactResult_ContactArn
+
+var CreateRotationRequest = &sCreateRotationRequest
+var CreateRotationRequest_Name = &sCreateRotationRequest_Name
+var CreateRotationRequest_ContactIds = &sCreateRotationRequest_ContactIds
+var CreateRotationRequest_StartTime = &sCreateRotationRequest_StartTime
+var CreateRotationRequest_TimeZoneId = &sCreateRotationRequest_TimeZoneId
+var CreateRotationRequest_Recurrence = &sCreateRotationRequest_Recurrence
+var CreateRotationRequest_Tags = &sCreateRotationRequest_Tags
+var CreateRotationRequest_IdempotencyToken = &sCreateRotationRequest_IdempotencyToken
+
+var CreateRotationResult = &sCreateRotationResult
+var CreateRotationResult_RotationArn = &sCreateRotationResult_RotationArn
+
+var CreateRotationOverrideRequest = &sCreateRotationOverrideRequest
+var CreateRotationOverrideRequest_RotationId = &sCreateRotationOverrideRequest_RotationId
+var CreateRotationOverrideRequest_NewContactIds = &sCreateRotationOverrideRequest_NewContactIds
+var CreateRotationOverrideRequest_StartTime = &sCreateRotationOverrideRequest_StartTime
+var CreateRotationOverrideRequest_EndTime = &sCreateRotationOverrideRequest_EndTime
+var CreateRotationOverrideRequest_IdempotencyToken = &sCreateRotationOverrideRequest_IdempotencyToken
+
+var CreateRotationOverrideResult = &sCreateRotationOverrideResult
+var CreateRotationOverrideResult_RotationOverrideId = &sCreateRotationOverrideResult_RotationOverrideId
+
+var DeactivateContactChannelRequest = &sDeactivateContactChannelRequest
+var DeactivateContactChannelRequest_ContactChannelId = &sDeactivateContactChannelRequest_ContactChannelId
+
+var DeactivateContactChannelResult = &sDeactivateContactChannelResult
+
+var DeleteContactChannelRequest = &sDeleteContactChannelRequest
+var DeleteContactChannelRequest_ContactChannelId = &sDeleteContactChannelRequest_ContactChannelId
+
+var DeleteContactChannelResult = &sDeleteContactChannelResult
+
+var DeleteContactRequest = &sDeleteContactRequest
+var DeleteContactRequest_ContactId = &sDeleteContactRequest_ContactId
+
+var DeleteContactResult = &sDeleteContactResult
+
+var DeleteRotationRequest = &sDeleteRotationRequest
+var DeleteRotationRequest_RotationId = &sDeleteRotationRequest_RotationId
+
+var DeleteRotationResult = &sDeleteRotationResult
+
+var DeleteRotationOverrideRequest = &sDeleteRotationOverrideRequest
+var DeleteRotationOverrideRequest_RotationId = &sDeleteRotationOverrideRequest_RotationId
+var DeleteRotationOverrideRequest_RotationOverrideId = &sDeleteRotationOverrideRequest_RotationOverrideId
+
+var DeleteRotationOverrideResult = &sDeleteRotationOverrideResult
+
+var DescribeEngagementRequest = &sDescribeEngagementRequest
+var DescribeEngagementRequest_EngagementId = &sDescribeEngagementRequest_EngagementId
+
+var DescribeEngagementResult = &sDescribeEngagementResult
+var DescribeEngagementResult_ContactArn = &sDescribeEngagementResult_ContactArn
+var DescribeEngagementResult_EngagementArn = &sDescribeEngagementResult_EngagementArn
+var DescribeEngagementResult_Sender = &sDescribeEngagementResult_Sender
+var DescribeEngagementResult_Subject = &sDescribeEngagementResult_Subject
+var DescribeEngagementResult_Content = &sDescribeEngagementResult_Content
+var DescribeEngagementResult_PublicSubject = &sDescribeEngagementResult_PublicSubject
+var DescribeEngagementResult_PublicContent = &sDescribeEngagementResult_PublicContent
+var DescribeEngagementResult_IncidentId = &sDescribeEngagementResult_IncidentId
+var DescribeEngagementResult_StartTime = &sDescribeEngagementResult_StartTime
+var DescribeEngagementResult_StopTime = &sDescribeEngagementResult_StopTime
+
+var DescribePageRequest = &sDescribePageRequest
+var DescribePageRequest_PageId = &sDescribePageRequest_PageId
+
+var DescribePageResult = &sDescribePageResult
+var DescribePageResult_PageArn = &sDescribePageResult_PageArn
+var DescribePageResult_EngagementArn = &sDescribePageResult_EngagementArn
+var DescribePageResult_ContactArn = &sDescribePageResult_ContactArn
+var DescribePageResult_Sender = &sDescribePageResult_Sender
+var DescribePageResult_Subject = &sDescribePageResult_Subject
+var DescribePageResult_Content = &sDescribePageResult_Content
+var DescribePageResult_PublicSubject = &sDescribePageResult_PublicSubject
+var DescribePageResult_PublicContent = &sDescribePageResult_PublicContent
+var DescribePageResult_IncidentId = &sDescribePageResult_IncidentId
+var DescribePageResult_SentTime = &sDescribePageResult_SentTime
+var DescribePageResult_ReadTime = &sDescribePageResult_ReadTime
+var DescribePageResult_DeliveryTime = &sDescribePageResult_DeliveryTime
+
+var GetContactChannelRequest = &sGetContactChannelRequest
+var GetContactChannelRequest_ContactChannelId = &sGetContactChannelRequest_ContactChannelId
+
+var GetContactChannelResult = &sGetContactChannelResult
+var GetContactChannelResult_ContactArn = &sGetContactChannelResult_ContactArn
+var GetContactChannelResult_ContactChannelArn = &sGetContactChannelResult_ContactChannelArn
+var GetContactChannelResult_Name = &sGetContactChannelResult_Name
+var GetContactChannelResult_Type = &sGetContactChannelResult_Type
+var GetContactChannelResult_DeliveryAddress = &sGetContactChannelResult_DeliveryAddress
+var GetContactChannelResult_ActivationStatus = &sGetContactChannelResult_ActivationStatus
+
+var GetContactRequest = &sGetContactRequest
+var GetContactRequest_ContactId = &sGetContactRequest_ContactId
+
+var GetContactResult = &sGetContactResult
+var GetContactResult_ContactArn = &sGetContactResult_ContactArn
+var GetContactResult_Alias = &sGetContactResult_Alias
+var GetContactResult_DisplayName = &sGetContactResult_DisplayName
+var GetContactResult_Type = &sGetContactResult_Type
+var GetContactResult_Plan = &sGetContactResult_Plan
+
+var GetContactPolicyRequest = &sGetContactPolicyRequest
+var GetContactPolicyRequest_ContactArn = &sGetContactPolicyRequest_ContactArn
+
+var GetContactPolicyResult = &sGetContactPolicyResult
+var GetContactPolicyResult_ContactArn = &sGetContactPolicyResult_ContactArn
+var GetContactPolicyResult_Policy = &sGetContactPolicyResult_Policy
+
+var GetRotationRequest = &sGetRotationRequest
+var GetRotationRequest_RotationId = &sGetRotationRequest_RotationId
+
+var GetRotationResult = &sGetRotationResult
+var GetRotationResult_RotationArn = &sGetRotationResult_RotationArn
+var GetRotationResult_Name = &sGetRotationResult_Name
+var GetRotationResult_ContactIds = &sGetRotationResult_ContactIds
+var GetRotationResult_StartTime = &sGetRotationResult_StartTime
+var GetRotationResult_TimeZoneId = &sGetRotationResult_TimeZoneId
+var GetRotationResult_Recurrence = &sGetRotationResult_Recurrence
+
+var GetRotationOverrideRequest = &sGetRotationOverrideRequest
+var GetRotationOverrideRequest_RotationId = &sGetRotationOverrideRequest_RotationId
+var GetRotationOverrideRequest_RotationOverrideId = &sGetRotationOverrideRequest_RotationOverrideId
+
+var GetRotationOverrideResult = &sGetRotationOverrideResult
+var GetRotationOverrideResult_RotationOverrideId = &sGetRotationOverrideResult_RotationOverrideId
+var GetRotationOverrideResult_RotationArn = &sGetRotationOverrideResult_RotationArn
+var GetRotationOverrideResult_NewContactIds = &sGetRotationOverrideResult_NewContactIds
+var GetRotationOverrideResult_StartTime = &sGetRotationOverrideResult_StartTime
+var GetRotationOverrideResult_EndTime = &sGetRotationOverrideResult_EndTime
+var GetRotationOverrideResult_CreateTime = &sGetRotationOverrideResult_CreateTime
+
+var ListContactChannelsRequest = &sListContactChannelsRequest
+var ListContactChannelsRequest_ContactId = &sListContactChannelsRequest_ContactId
+var ListContactChannelsRequest_NextToken = &sListContactChannelsRequest_NextToken
+var ListContactChannelsRequest_MaxResults = &sListContactChannelsRequest_MaxResults
+
+var ListContactChannelsResult = &sListContactChannelsResult
+var ListContactChannelsResult_NextToken = &sListContactChannelsResult_NextToken
+var ListContactChannelsResult_ContactChannels = &sListContactChannelsResult_ContactChannels
+
+var ListContactsRequest = &sListContactsRequest
+var ListContactsRequest_NextToken = &sListContactsRequest_NextToken
+var ListContactsRequest_MaxResults = &sListContactsRequest_MaxResults
+var ListContactsRequest_AliasPrefix = &sListContactsRequest_AliasPrefix
+var ListContactsRequest_Type = &sListContactsRequest_Type
+
+var ListContactsResult = &sListContactsResult
+var ListContactsResult_NextToken = &sListContactsResult_NextToken
+var ListContactsResult_Contacts = &sListContactsResult_Contacts
+
+var ListEngagementsRequest = &sListEngagementsRequest
+var ListEngagementsRequest_NextToken = &sListEngagementsRequest_NextToken
+var ListEngagementsRequest_MaxResults = &sListEngagementsRequest_MaxResults
+var ListEngagementsRequest_IncidentId = &sListEngagementsRequest_IncidentId
+var ListEngagementsRequest_TimeRangeValue = &sListEngagementsRequest_TimeRangeValue
+
+var ListEngagementsResult = &sListEngagementsResult
+var ListEngagementsResult_NextToken = &sListEngagementsResult_NextToken
+var ListEngagementsResult_Engagements = &sListEngagementsResult_Engagements
+
+var ListPageReceiptsRequest = &sListPageReceiptsRequest
+var ListPageReceiptsRequest_PageId = &sListPageReceiptsRequest_PageId
+var ListPageReceiptsRequest_NextToken = &sListPageReceiptsRequest_NextToken
+var ListPageReceiptsRequest_MaxResults = &sListPageReceiptsRequest_MaxResults
+
+var ListPageReceiptsResult = &sListPageReceiptsResult
+var ListPageReceiptsResult_NextToken = &sListPageReceiptsResult_NextToken
+var ListPageReceiptsResult_Receipts = &sListPageReceiptsResult_Receipts
+
+var ListPageResolutionsRequest = &sListPageResolutionsRequest
+var ListPageResolutionsRequest_NextToken = &sListPageResolutionsRequest_NextToken
+var ListPageResolutionsRequest_PageId = &sListPageResolutionsRequest_PageId
+
+var ListPageResolutionsResult = &sListPageResolutionsResult
+var ListPageResolutionsResult_NextToken = &sListPageResolutionsResult_NextToken
+var ListPageResolutionsResult_PageResolutions = &sListPageResolutionsResult_PageResolutions
+
+var ListPagesByContactRequest = &sListPagesByContactRequest
+var ListPagesByContactRequest_ContactId = &sListPagesByContactRequest_ContactId
+var ListPagesByContactRequest_NextToken = &sListPagesByContactRequest_NextToken
+var ListPagesByContactRequest_MaxResults = &sListPagesByContactRequest_MaxResults
+
+var ListPagesByContactResult = &sListPagesByContactResult
+var ListPagesByContactResult_NextToken = &sListPagesByContactResult_NextToken
+var ListPagesByContactResult_Pages = &sListPagesByContactResult_Pages
+
+var ListPagesByEngagementRequest = &sListPagesByEngagementRequest
+var ListPagesByEngagementRequest_EngagementId = &sListPagesByEngagementRequest_EngagementId
+var ListPagesByEngagementRequest_NextToken = &sListPagesByEngagementRequest_NextToken
+var ListPagesByEngagementRequest_MaxResults = &sListPagesByEngagementRequest_MaxResults
+
+var ListPagesByEngagementResult = &sListPagesByEngagementResult
+var ListPagesByEngagementResult_NextToken = &sListPagesByEngagementResult_NextToken
+var ListPagesByEngagementResult_Pages = &sListPagesByEngagementResult_Pages
+
+var ListPreviewRotationShiftsRequest = &sListPreviewRotationShiftsRequest
+var ListPreviewRotationShiftsRequest_RotationStartTime = &sListPreviewRotationShiftsRequest_RotationStartTime
+var ListPreviewRotationShiftsRequest_StartTime = &sListPreviewRotationShiftsRequest_StartTime
+var ListPreviewRotationShiftsRequest_EndTime = &sListPreviewRotationShiftsRequest_EndTime
+var ListPreviewRotationShiftsRequest_Members = &sListPreviewRotationShiftsRequest_Members
+var ListPreviewRotationShiftsRequest_TimeZoneId = &sListPreviewRotationShiftsRequest_TimeZoneId
+var ListPreviewRotationShiftsRequest_Recurrence = &sListPreviewRotationShiftsRequest_Recurrence
+var ListPreviewRotationShiftsRequest_Overrides = &sListPreviewRotationShiftsRequest_Overrides
+var ListPreviewRotationShiftsRequest_NextToken = &sListPreviewRotationShiftsRequest_NextToken
+var ListPreviewRotationShiftsRequest_MaxResults = &sListPreviewRotationShiftsRequest_MaxResults
+
+var ListPreviewRotationShiftsResult = &sListPreviewRotationShiftsResult
+var ListPreviewRotationShiftsResult_RotationShifts = &sListPreviewRotationShiftsResult_RotationShifts
+var ListPreviewRotationShiftsResult_NextToken = &sListPreviewRotationShiftsResult_NextToken
+
+var ListRotationOverridesRequest = &sListRotationOverridesRequest
+var ListRotationOverridesRequest_RotationId = &sListRotationOverridesRequest_RotationId
+var ListRotationOverridesRequest_StartTime = &sListRotationOverridesRequest_StartTime
+var ListRotationOverridesRequest_EndTime = &sListRotationOverridesRequest_EndTime
+var ListRotationOverridesRequest_NextToken = &sListRotationOverridesRequest_NextToken
+var ListRotationOverridesRequest_MaxResults = &sListRotationOverridesRequest_MaxResults
+
+var ListRotationOverridesResult = &sListRotationOverridesResult
+var ListRotationOverridesResult_RotationOverrides = &sListRotationOverridesResult_RotationOverrides
+var ListRotationOverridesResult_NextToken = &sListRotationOverridesResult_NextToken
+
+var ListRotationShiftsRequest = &sListRotationShiftsRequest
+var ListRotationShiftsRequest_RotationId = &sListRotationShiftsRequest_RotationId
+var ListRotationShiftsRequest_StartTime = &sListRotationShiftsRequest_StartTime
+var ListRotationShiftsRequest_EndTime = &sListRotationShiftsRequest_EndTime
+var ListRotationShiftsRequest_NextToken = &sListRotationShiftsRequest_NextToken
+var ListRotationShiftsRequest_MaxResults = &sListRotationShiftsRequest_MaxResults
+
+var ListRotationShiftsResult = &sListRotationShiftsResult
+var ListRotationShiftsResult_RotationShifts = &sListRotationShiftsResult_RotationShifts
+var ListRotationShiftsResult_NextToken = &sListRotationShiftsResult_NextToken
+
+var ListRotationsRequest = &sListRotationsRequest
+var ListRotationsRequest_RotationNamePrefix = &sListRotationsRequest_RotationNamePrefix
+var ListRotationsRequest_NextToken = &sListRotationsRequest_NextToken
+var ListRotationsRequest_MaxResults = &sListRotationsRequest_MaxResults
+
+var ListRotationsResult = &sListRotationsResult
+var ListRotationsResult_NextToken = &sListRotationsResult_NextToken
+var ListRotationsResult_Rotations = &sListRotationsResult_Rotations
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResult = &sListTagsForResourceResult
+var ListTagsForResourceResult_Tags = &sListTagsForResourceResult_Tags
+
+var PutContactPolicyRequest = &sPutContactPolicyRequest
+var PutContactPolicyRequest_ContactArn = &sPutContactPolicyRequest_ContactArn
+var PutContactPolicyRequest_Policy = &sPutContactPolicyRequest_Policy
+
+var PutContactPolicyResult = &sPutContactPolicyResult
+
+var SendActivationCodeRequest = &sSendActivationCodeRequest
+var SendActivationCodeRequest_ContactChannelId = &sSendActivationCodeRequest_ContactChannelId
+
+var SendActivationCodeResult = &sSendActivationCodeResult
+
+var StartEngagementRequest = &sStartEngagementRequest
+var StartEngagementRequest_ContactId = &sStartEngagementRequest_ContactId
+var StartEngagementRequest_Sender = &sStartEngagementRequest_Sender
+var StartEngagementRequest_Subject = &sStartEngagementRequest_Subject
+var StartEngagementRequest_Content = &sStartEngagementRequest_Content
+var StartEngagementRequest_PublicSubject = &sStartEngagementRequest_PublicSubject
+var StartEngagementRequest_PublicContent = &sStartEngagementRequest_PublicContent
+var StartEngagementRequest_IncidentId = &sStartEngagementRequest_IncidentId
+var StartEngagementRequest_IdempotencyToken = &sStartEngagementRequest_IdempotencyToken
+
+var StartEngagementResult = &sStartEngagementResult
+var StartEngagementResult_EngagementArn = &sStartEngagementResult_EngagementArn
+
+var StopEngagementRequest = &sStopEngagementRequest
+var StopEngagementRequest_EngagementId = &sStopEngagementRequest_EngagementId
+var StopEngagementRequest_Reason = &sStopEngagementRequest_Reason
+
+var StopEngagementResult = &sStopEngagementResult
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResult = &sTagResourceResult
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResult = &sUntagResourceResult
+
+var UpdateContactChannelRequest = &sUpdateContactChannelRequest
+var UpdateContactChannelRequest_ContactChannelId = &sUpdateContactChannelRequest_ContactChannelId
+var UpdateContactChannelRequest_Name = &sUpdateContactChannelRequest_Name
+var UpdateContactChannelRequest_DeliveryAddress = &sUpdateContactChannelRequest_DeliveryAddress
+
+var UpdateContactChannelResult = &sUpdateContactChannelResult
+
+var UpdateContactRequest = &sUpdateContactRequest
+var UpdateContactRequest_ContactId = &sUpdateContactRequest_ContactId
+var UpdateContactRequest_DisplayName = &sUpdateContactRequest_DisplayName
+var UpdateContactRequest_Plan = &sUpdateContactRequest_Plan
+
+var UpdateContactResult = &sUpdateContactResult
+
+var UpdateRotationRequest = &sUpdateRotationRequest
+var UpdateRotationRequest_RotationId = &sUpdateRotationRequest_RotationId
+var UpdateRotationRequest_ContactIds = &sUpdateRotationRequest_ContactIds
+var UpdateRotationRequest_StartTime = &sUpdateRotationRequest_StartTime
+var UpdateRotationRequest_TimeZoneId = &sUpdateRotationRequest_TimeZoneId
+var UpdateRotationRequest_Recurrence = &sUpdateRotationRequest_Recurrence
+
+var UpdateRotationResult = &sUpdateRotationResult
+
+var SSMContacts = &smithy.ServiceSchema{Schema: &s_SSMContacts, Version: "2021-05-03"}

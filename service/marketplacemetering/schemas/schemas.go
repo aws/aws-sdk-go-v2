@@ -4,533 +4,549 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchMeterUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "BatchMeterUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var MeterUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "MeterUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "RegisterUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResolveCustomer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ResolveCustomer",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSMPMeteringService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "AWSMPMeteringService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMPMeteringService = smithy.NewServiceSchema(_AWSMPMeteringService, "2016-01-14")
-
-var _AgreementId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "AgreementId",
-}, smithy.ShapeTypeString, 0)
-
-var _AllocatedUsageQuantity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "AllocatedUsageQuantity",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerAWSAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "CustomerAWSAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "CustomerIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var CustomerNotEntitledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "CustomerNotEntitledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CustomerNotEntitledException_message *smithy.Schema
-
-var DisabledApiException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "DisabledApiException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DisabledApiException_message *smithy.Schema
-
-var DuplicateRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "DuplicateRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DuplicateRequestException_message *smithy.Schema
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExpiredTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ExpiredTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ExpiredTokenException_message *smithy.Schema
-
-var IdempotencyConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "IdempotencyConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var IdempotencyConflictException_message *smithy.Schema
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServiceErrorException_message *smithy.Schema
-
-var InvalidCustomerIdentifierException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidCustomerIdentifierException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidCustomerIdentifierException_message *smithy.Schema
-
-var InvalidEndpointRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidEndpointRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidEndpointRegionException_message *smithy.Schema
-
-var InvalidLicenseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidLicenseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidLicenseException_message *smithy.Schema
-
-var InvalidProductCodeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidProductCodeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidProductCodeException_message *smithy.Schema
-
-var InvalidPublicKeyVersionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidPublicKeyVersionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidPublicKeyVersionException_message *smithy.Schema
-
-var InvalidRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidRegionException_message *smithy.Schema
-
-var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidTagException_message *smithy.Schema
-
-var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidTokenException_message *smithy.Schema
-
-var InvalidUsageAllocationsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidUsageAllocationsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidUsageAllocationsException_message *smithy.Schema
-
-var InvalidUsageDimensionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidUsageDimensionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidUsageDimensionException_message *smithy.Schema
-
-var _LicenseArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "LicenseArn",
-}, smithy.ShapeTypeString, 0)
-
-var Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Metadata",
-}, smithy.ShapeTypeStructure, 1)
-var Metadata_AgreementId *smithy.Schema
-
-var _Nonce = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Nonce",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var PlatformNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "PlatformNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var PlatformNotSupportedException_message *smithy.Schema
-
-var _ProductCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ProductCode",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ThrottlingException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimestampOutOfBoundsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TimestampOutOfBoundsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TimestampOutOfBoundsException_message *smithy.Schema
-
-var UsageAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageAllocation",
-}, smithy.ShapeTypeStructure, 2)
-var UsageAllocation_AllocatedUsageQuantity *smithy.Schema
-
-var UsageAllocation_Tags *smithy.Schema
-
-var _UsageAllocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageAllocations",
-}, smithy.ShapeTypeList, 1)
-var _UsageAllocations_member *smithy.Schema
-
-var _UsageDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageDimension",
-}, smithy.ShapeTypeString, 0)
-
-var _UsageQuantity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageQuantity",
-}, smithy.ShapeTypeInteger, 0)
-
-var UsageRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecord",
-}, smithy.ShapeTypeStructure, 7)
-var UsageRecord_Timestamp *smithy.Schema
-
-var UsageRecord_CustomerIdentifier *smithy.Schema
-
-var UsageRecord_Dimension *smithy.Schema
-
-var UsageRecord_Quantity *smithy.Schema
-
-var UsageRecord_UsageAllocations *smithy.Schema
-
-var UsageRecord_CustomerAWSAccountId *smithy.Schema
-
-var UsageRecord_LicenseArn *smithy.Schema
-
-var _UsageRecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordList",
-}, smithy.ShapeTypeList, 1)
-var _UsageRecordList_member *smithy.Schema
-
-var UsageRecordResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordResult",
-}, smithy.ShapeTypeStructure, 3)
-var UsageRecordResult_UsageRecord *smithy.Schema
-
-var UsageRecordResult_MeteringRecordId *smithy.Schema
-
-var UsageRecordResult_Status *smithy.Schema
-
-var _UsageRecordResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordResultList",
-}, smithy.ShapeTypeList, 1)
-var _UsageRecordResultList_member *smithy.Schema
-
-var UsageRecordResultStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordResultStatus",
-}, smithy.ShapeTypeEnum, 3)
-var UsageRecordResultStatus_SUCCESS *smithy.Schema
-
-var UsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED *smithy.Schema
-
-var UsageRecordResultStatus_DUPLICATE_RECORD *smithy.Schema
-
-var _VersionInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "VersionInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchMeterUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "BatchMeterUsageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchMeterUsageRequest_UsageRecords *smithy.Schema
-
-var BatchMeterUsageRequest_ProductCode *smithy.Schema
-
-var BatchMeterUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "BatchMeterUsageResult",
-}, smithy.ShapeTypeStructure, 2)
-var BatchMeterUsageResult_Results *smithy.Schema
-
-var BatchMeterUsageResult_UnprocessedRecords *smithy.Schema
-
-var MeterUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "MeterUsageRequest",
-}, smithy.ShapeTypeStructure, 7)
-var MeterUsageRequest_ProductCode *smithy.Schema
-
-var MeterUsageRequest_Timestamp *smithy.Schema
-
-var MeterUsageRequest_UsageDimension *smithy.Schema
-
-var MeterUsageRequest_UsageQuantity *smithy.Schema
-
-var MeterUsageRequest_DryRun *smithy.Schema
-
-var MeterUsageRequest_UsageAllocations *smithy.Schema
-
-var MeterUsageRequest_ClientToken *smithy.Schema
-
-var MeterUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "MeterUsageResult",
-}, smithy.ShapeTypeStructure, 1)
-var MeterUsageResult_MeteringRecordId *smithy.Schema
-
-var RegisterUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "RegisterUsageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterUsageRequest_ProductCode *smithy.Schema
-
-var RegisterUsageRequest_PublicKeyVersion *smithy.Schema
-
-var RegisterUsageRequest_Nonce *smithy.Schema
-
-var RegisterUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "RegisterUsageResult",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterUsageResult_PublicKeyRotationTimestamp *smithy.Schema
-
-var RegisterUsageResult_Signature *smithy.Schema
-
-var ResolveCustomerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ResolveCustomerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResolveCustomerRequest_RegistrationToken *smithy.Schema
-
-var ResolveCustomerResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ResolveCustomerResult",
-}, smithy.ShapeTypeStructure, 5)
-var ResolveCustomerResult_CustomerIdentifier *smithy.Schema
-
-var ResolveCustomerResult_ProductCode *smithy.Schema
-
-var ResolveCustomerResult_CustomerAWSAccountId *smithy.Schema
-
-var ResolveCustomerResult_LicenseArn *smithy.Schema
-
-var ResolveCustomerResult_Metadata *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	CustomerNotEntitledException_message = CustomerNotEntitledException.AddMember("message", _errorMessage)
-
-	DisabledApiException_message = DisabledApiException.AddMember("message", _errorMessage)
-
-	DuplicateRequestException_message = DuplicateRequestException.AddMember("message", _errorMessage)
-
-	ExpiredTokenException_message = ExpiredTokenException.AddMember("message", _errorMessage)
-
-	IdempotencyConflictException_message = IdempotencyConflictException.AddMember("message", _errorMessage)
-
-	InternalServiceErrorException_message = InternalServiceErrorException.AddMember("message", _errorMessage)
-
-	InvalidCustomerIdentifierException_message = InvalidCustomerIdentifierException.AddMember("message", _errorMessage)
-
-	InvalidEndpointRegionException_message = InvalidEndpointRegionException.AddMember("message", _errorMessage)
-
-	InvalidLicenseException_message = InvalidLicenseException.AddMember("message", _errorMessage)
-
-	InvalidProductCodeException_message = InvalidProductCodeException.AddMember("message", _errorMessage)
-
-	InvalidPublicKeyVersionException_message = InvalidPublicKeyVersionException.AddMember("message", _errorMessage)
-
-	InvalidRegionException_message = InvalidRegionException.AddMember("message", _errorMessage)
-
-	InvalidTagException_message = InvalidTagException.AddMember("message", _errorMessage)
-
-	InvalidTokenException_message = InvalidTokenException.AddMember("message", _errorMessage)
-
-	InvalidUsageAllocationsException_message = InvalidUsageAllocationsException.AddMember("message", _errorMessage)
-
-	InvalidUsageDimensionException_message = InvalidUsageDimensionException.AddMember("message", _errorMessage)
-
-	Metadata_AgreementId = Metadata.AddMember("AgreementId", _AgreementId)
-
-	PlatformNotSupportedException_message = PlatformNotSupportedException.AddMember("message", _errorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _errorMessage)
-
-	TimestampOutOfBoundsException_message = TimestampOutOfBoundsException.AddMember("message", _errorMessage)
-
-	UsageAllocation_AllocatedUsageQuantity = UsageAllocation.AddMember("AllocatedUsageQuantity", _AllocatedUsageQuantity)
-
-	UsageAllocation_Tags = UsageAllocation.AddMember("Tags", _TagList)
-
-	_UsageAllocations_member = _UsageAllocations.AddMember("member", UsageAllocation)
-
-	UsageRecord_Timestamp = UsageRecord.AddMember("Timestamp", _Timestamp)
-
-	UsageRecord_CustomerIdentifier = UsageRecord.AddMember("CustomerIdentifier", _CustomerIdentifier)
-
-	UsageRecord_Dimension = UsageRecord.AddMember("Dimension", _UsageDimension)
-
-	UsageRecord_Quantity = UsageRecord.AddMember("Quantity", _UsageQuantity)
-
-	UsageRecord_UsageAllocations = UsageRecord.AddMember("UsageAllocations", _UsageAllocations)
-
-	UsageRecord_CustomerAWSAccountId = UsageRecord.AddMember("CustomerAWSAccountId", _CustomerAWSAccountId)
-
-	UsageRecord_LicenseArn = UsageRecord.AddMember("LicenseArn", _LicenseArn)
-
-	_UsageRecordList_member = _UsageRecordList.AddMember("member", UsageRecord)
-
-	UsageRecordResultStatus_SUCCESS = UsageRecordResultStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	UsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED = UsageRecordResultStatus.AddMember("CUSTOMER_NOT_SUBSCRIBED", smithyprelude.Unit)
-
-	UsageRecordResultStatus_DUPLICATE_RECORD = UsageRecordResultStatus.AddMember("DUPLICATE_RECORD", smithyprelude.Unit)
-
-	UsageRecordResult_UsageRecord = UsageRecordResult.AddMember("UsageRecord", UsageRecord)
-
-	UsageRecordResult_MeteringRecordId = UsageRecordResult.AddMember("MeteringRecordId", _String)
-
-	UsageRecordResult_Status = UsageRecordResult.AddMember("Status", UsageRecordResultStatus)
-
-	_UsageRecordResultList_member = _UsageRecordResultList.AddMember("member", UsageRecordResult)
-
-	BatchMeterUsageRequest_UsageRecords = BatchMeterUsageRequest.AddMember("UsageRecords", _UsageRecordList)
-
-	BatchMeterUsageRequest_ProductCode = BatchMeterUsageRequest.AddMember("ProductCode", _ProductCode)
-
-	BatchMeterUsageResult_Results = BatchMeterUsageResult.AddMember("Results", _UsageRecordResultList)
-
-	BatchMeterUsageResult_UnprocessedRecords = BatchMeterUsageResult.AddMember("UnprocessedRecords", _UsageRecordList)
-
-	MeterUsageRequest_ProductCode = MeterUsageRequest.AddMember("ProductCode", _ProductCode)
-
-	MeterUsageRequest_Timestamp = MeterUsageRequest.AddMember("Timestamp", _Timestamp)
-
-	MeterUsageRequest_UsageDimension = MeterUsageRequest.AddMember("UsageDimension", _UsageDimension)
-
-	MeterUsageRequest_UsageQuantity = MeterUsageRequest.AddMember("UsageQuantity", _UsageQuantity)
-
-	MeterUsageRequest_DryRun = MeterUsageRequest.AddMember("DryRun", _Boolean)
-
-	MeterUsageRequest_UsageAllocations = MeterUsageRequest.AddMember("UsageAllocations", _UsageAllocations)
-
-	MeterUsageRequest_ClientToken = MeterUsageRequest.AddMember("ClientToken", _ClientToken)
-
-	MeterUsageResult_MeteringRecordId = MeterUsageResult.AddMember("MeteringRecordId", _String)
-
-	RegisterUsageRequest_ProductCode = RegisterUsageRequest.AddMember("ProductCode", _ProductCode)
-
-	RegisterUsageRequest_PublicKeyVersion = RegisterUsageRequest.AddMember("PublicKeyVersion", _VersionInteger)
-
-	RegisterUsageRequest_Nonce = RegisterUsageRequest.AddMember("Nonce", _Nonce)
-
-	RegisterUsageResult_PublicKeyRotationTimestamp = RegisterUsageResult.AddMember("PublicKeyRotationTimestamp", _Timestamp)
-
-	RegisterUsageResult_Signature = RegisterUsageResult.AddMember("Signature", _NonEmptyString)
-
-	ResolveCustomerRequest_RegistrationToken = ResolveCustomerRequest.AddMember("RegistrationToken", _NonEmptyString)
-
-	ResolveCustomerResult_CustomerIdentifier = ResolveCustomerResult.AddMember("CustomerIdentifier", _CustomerIdentifier)
-
-	ResolveCustomerResult_ProductCode = ResolveCustomerResult.AddMember("ProductCode", _ProductCode)
-
-	ResolveCustomerResult_CustomerAWSAccountId = ResolveCustomerResult.AddMember("CustomerAWSAccountId", _CustomerAWSAccountId)
-
-	ResolveCustomerResult_LicenseArn = ResolveCustomerResult.AddMember("LicenseArn", _LicenseArn)
-
-	ResolveCustomerResult_Metadata = ResolveCustomerResult.AddMember("Metadata", Metadata)
-
-}
+var (
+	eBatchMeterUsage                                 smithy.SchemaExtensions
+	eMeterUsage                                      smithy.SchemaExtensions
+	eRegisterUsage                                   smithy.SchemaExtensions
+	eResolveCustomer                                 smithy.SchemaExtensions
+	e_AWSMPMeteringService                           smithy.SchemaExtensions
+	e_AgreementId                                    smithy.SchemaExtensions
+	e_AllocatedUsageQuantity                         smithy.SchemaExtensions
+	e_Boolean                                        smithy.SchemaExtensions
+	e_ClientToken                                    smithy.SchemaExtensions
+	e_CustomerAWSAccountId                           smithy.SchemaExtensions
+	e_CustomerIdentifier                             smithy.SchemaExtensions
+	eCustomerNotEntitledException                    smithy.SchemaExtensions
+	eCustomerNotEntitledException_message            smithy.SchemaExtensions
+	eDisabledApiException                            smithy.SchemaExtensions
+	eDisabledApiException_message                    smithy.SchemaExtensions
+	eDuplicateRequestException                       smithy.SchemaExtensions
+	eDuplicateRequestException_message               smithy.SchemaExtensions
+	e_errorMessage                                   smithy.SchemaExtensions
+	eExpiredTokenException                           smithy.SchemaExtensions
+	eExpiredTokenException_message                   smithy.SchemaExtensions
+	eIdempotencyConflictException                    smithy.SchemaExtensions
+	eIdempotencyConflictException_message            smithy.SchemaExtensions
+	eInternalServiceErrorException                   smithy.SchemaExtensions
+	eInternalServiceErrorException_message           smithy.SchemaExtensions
+	eInvalidCustomerIdentifierException              smithy.SchemaExtensions
+	eInvalidCustomerIdentifierException_message      smithy.SchemaExtensions
+	eInvalidEndpointRegionException                  smithy.SchemaExtensions
+	eInvalidEndpointRegionException_message          smithy.SchemaExtensions
+	eInvalidLicenseException                         smithy.SchemaExtensions
+	eInvalidLicenseException_message                 smithy.SchemaExtensions
+	eInvalidProductCodeException                     smithy.SchemaExtensions
+	eInvalidProductCodeException_message             smithy.SchemaExtensions
+	eInvalidPublicKeyVersionException                smithy.SchemaExtensions
+	eInvalidPublicKeyVersionException_message        smithy.SchemaExtensions
+	eInvalidRegionException                          smithy.SchemaExtensions
+	eInvalidRegionException_message                  smithy.SchemaExtensions
+	eInvalidTagException                             smithy.SchemaExtensions
+	eInvalidTagException_message                     smithy.SchemaExtensions
+	eInvalidTokenException                           smithy.SchemaExtensions
+	eInvalidTokenException_message                   smithy.SchemaExtensions
+	eInvalidUsageAllocationsException                smithy.SchemaExtensions
+	eInvalidUsageAllocationsException_message        smithy.SchemaExtensions
+	eInvalidUsageDimensionException                  smithy.SchemaExtensions
+	eInvalidUsageDimensionException_message          smithy.SchemaExtensions
+	e_LicenseArn                                     smithy.SchemaExtensions
+	eMetadata                                        smithy.SchemaExtensions
+	eMetadata_AgreementId                            smithy.SchemaExtensions
+	e_Nonce                                          smithy.SchemaExtensions
+	e_NonEmptyString                                 smithy.SchemaExtensions
+	ePlatformNotSupportedException                   smithy.SchemaExtensions
+	ePlatformNotSupportedException_message           smithy.SchemaExtensions
+	e_ProductCode                                    smithy.SchemaExtensions
+	e_String                                         smithy.SchemaExtensions
+	eTag                                             smithy.SchemaExtensions
+	eTag_Key                                         smithy.SchemaExtensions
+	eTag_Value                                       smithy.SchemaExtensions
+	e_TagKey                                         smithy.SchemaExtensions
+	e_TagList                                        smithy.SchemaExtensions
+	e_TagList_member                                 smithy.SchemaExtensions
+	e_TagValue                                       smithy.SchemaExtensions
+	eThrottlingException                             smithy.SchemaExtensions
+	eThrottlingException_message                     smithy.SchemaExtensions
+	e_Timestamp                                      smithy.SchemaExtensions
+	eTimestampOutOfBoundsException                   smithy.SchemaExtensions
+	eTimestampOutOfBoundsException_message           smithy.SchemaExtensions
+	eUsageAllocation                                 smithy.SchemaExtensions
+	eUsageAllocation_AllocatedUsageQuantity          smithy.SchemaExtensions
+	eUsageAllocation_Tags                            smithy.SchemaExtensions
+	e_UsageAllocations                               smithy.SchemaExtensions
+	e_UsageAllocations_member                        smithy.SchemaExtensions
+	e_UsageDimension                                 smithy.SchemaExtensions
+	e_UsageQuantity                                  smithy.SchemaExtensions
+	eUsageRecord                                     smithy.SchemaExtensions
+	eUsageRecord_Timestamp                           smithy.SchemaExtensions
+	eUsageRecord_CustomerIdentifier                  smithy.SchemaExtensions
+	eUsageRecord_Dimension                           smithy.SchemaExtensions
+	eUsageRecord_Quantity                            smithy.SchemaExtensions
+	eUsageRecord_UsageAllocations                    smithy.SchemaExtensions
+	eUsageRecord_CustomerAWSAccountId                smithy.SchemaExtensions
+	eUsageRecord_LicenseArn                          smithy.SchemaExtensions
+	e_UsageRecordList                                smithy.SchemaExtensions
+	e_UsageRecordList_member                         smithy.SchemaExtensions
+	eUsageRecordResult                               smithy.SchemaExtensions
+	eUsageRecordResult_UsageRecord                   smithy.SchemaExtensions
+	eUsageRecordResult_MeteringRecordId              smithy.SchemaExtensions
+	eUsageRecordResult_Status                        smithy.SchemaExtensions
+	e_UsageRecordResultList                          smithy.SchemaExtensions
+	e_UsageRecordResultList_member                   smithy.SchemaExtensions
+	eUsageRecordResultStatus                         smithy.SchemaExtensions
+	eUsageRecordResultStatus_SUCCESS                 smithy.SchemaExtensions
+	eUsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED smithy.SchemaExtensions
+	eUsageRecordResultStatus_DUPLICATE_RECORD        smithy.SchemaExtensions
+	e_VersionInteger                                 smithy.SchemaExtensions
+	eBatchMeterUsageRequest                          smithy.SchemaExtensions
+	eBatchMeterUsageRequest_UsageRecords             smithy.SchemaExtensions
+	eBatchMeterUsageRequest_ProductCode              smithy.SchemaExtensions
+	eBatchMeterUsageResult                           smithy.SchemaExtensions
+	eBatchMeterUsageResult_Results                   smithy.SchemaExtensions
+	eBatchMeterUsageResult_UnprocessedRecords        smithy.SchemaExtensions
+	eMeterUsageRequest                               smithy.SchemaExtensions
+	eMeterUsageRequest_ProductCode                   smithy.SchemaExtensions
+	eMeterUsageRequest_Timestamp                     smithy.SchemaExtensions
+	eMeterUsageRequest_UsageDimension                smithy.SchemaExtensions
+	eMeterUsageRequest_UsageQuantity                 smithy.SchemaExtensions
+	eMeterUsageRequest_DryRun                        smithy.SchemaExtensions
+	eMeterUsageRequest_UsageAllocations              smithy.SchemaExtensions
+	eMeterUsageRequest_ClientToken                   smithy.SchemaExtensions
+	eMeterUsageResult                                smithy.SchemaExtensions
+	eMeterUsageResult_MeteringRecordId               smithy.SchemaExtensions
+	eRegisterUsageRequest                            smithy.SchemaExtensions
+	eRegisterUsageRequest_ProductCode                smithy.SchemaExtensions
+	eRegisterUsageRequest_PublicKeyVersion           smithy.SchemaExtensions
+	eRegisterUsageRequest_Nonce                      smithy.SchemaExtensions
+	eRegisterUsageResult                             smithy.SchemaExtensions
+	eRegisterUsageResult_PublicKeyRotationTimestamp  smithy.SchemaExtensions
+	eRegisterUsageResult_Signature                   smithy.SchemaExtensions
+	eResolveCustomerRequest                          smithy.SchemaExtensions
+	eResolveCustomerRequest_RegistrationToken        smithy.SchemaExtensions
+	eResolveCustomerResult                           smithy.SchemaExtensions
+	eResolveCustomerResult_CustomerIdentifier        smithy.SchemaExtensions
+	eResolveCustomerResult_ProductCode               smithy.SchemaExtensions
+	eResolveCustomerResult_CustomerAWSAccountId      smithy.SchemaExtensions
+	eResolveCustomerResult_LicenseArn                smithy.SchemaExtensions
+	eResolveCustomerResult_Metadata                  smithy.SchemaExtensions
+)
+
+var (
+	iBatchMeterUsage                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "BatchMeterUsage"}
+	iMeterUsage                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "MeterUsage"}
+	iRegisterUsage                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "RegisterUsage"}
+	iResolveCustomer                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "ResolveCustomer"}
+	i_AWSMPMeteringService              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "AWSMPMeteringService"}
+	i_AgreementId                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "AgreementId"}
+	i_AllocatedUsageQuantity            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "AllocatedUsageQuantity"}
+	i_Boolean                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "Boolean"}
+	i_ClientToken                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "ClientToken"}
+	i_CustomerAWSAccountId              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "CustomerAWSAccountId"}
+	i_CustomerIdentifier                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "CustomerIdentifier"}
+	iCustomerNotEntitledException       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "CustomerNotEntitledException"}
+	iDisabledApiException               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "DisabledApiException"}
+	iDuplicateRequestException          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "DuplicateRequestException"}
+	i_errorMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "errorMessage"}
+	iExpiredTokenException              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "ExpiredTokenException"}
+	iIdempotencyConflictException       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "IdempotencyConflictException"}
+	iInternalServiceErrorException      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InternalServiceErrorException"}
+	iInvalidCustomerIdentifierException = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidCustomerIdentifierException"}
+	iInvalidEndpointRegionException     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidEndpointRegionException"}
+	iInvalidLicenseException            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidLicenseException"}
+	iInvalidProductCodeException        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidProductCodeException"}
+	iInvalidPublicKeyVersionException   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidPublicKeyVersionException"}
+	iInvalidRegionException             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidRegionException"}
+	iInvalidTagException                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidTagException"}
+	iInvalidTokenException              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidTokenException"}
+	iInvalidUsageAllocationsException   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidUsageAllocationsException"}
+	iInvalidUsageDimensionException     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "InvalidUsageDimensionException"}
+	i_LicenseArn                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "LicenseArn"}
+	iMetadata                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "Metadata"}
+	i_Nonce                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "Nonce"}
+	i_NonEmptyString                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "NonEmptyString"}
+	iPlatformNotSupportedException      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "PlatformNotSupportedException"}
+	i_ProductCode                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "ProductCode"}
+	i_String                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "String"}
+	iTag                                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "Tag"}
+	i_TagKey                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "TagKey"}
+	i_TagList                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "TagList"}
+	i_TagValue                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "TagValue"}
+	iThrottlingException                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "ThrottlingException"}
+	i_Timestamp                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "Timestamp"}
+	iTimestampOutOfBoundsException      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "TimestampOutOfBoundsException"}
+	iUsageAllocation                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageAllocation"}
+	i_UsageAllocations                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageAllocations"}
+	i_UsageDimension                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageDimension"}
+	i_UsageQuantity                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageQuantity"}
+	iUsageRecord                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageRecord"}
+	i_UsageRecordList                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageRecordList"}
+	iUsageRecordResult                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageRecordResult"}
+	i_UsageRecordResultList             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageRecordResultList"}
+	iUsageRecordResultStatus            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "UsageRecordResultStatus"}
+	i_VersionInteger                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "VersionInteger"}
+	iBatchMeterUsageRequest             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "BatchMeterUsageRequest"}
+	iBatchMeterUsageResult              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "BatchMeterUsageResult"}
+	iMeterUsageRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "MeterUsageRequest"}
+	iMeterUsageResult                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "MeterUsageResult"}
+	iRegisterUsageRequest               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "RegisterUsageRequest"}
+	iRegisterUsageResult                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "RegisterUsageResult"}
+	iResolveCustomerRequest             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "ResolveCustomerRequest"}
+	iResolveCustomerResult              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacemetering", Name: "ResolveCustomerResult"}
+	pUnit                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var mCustomerNotEntitledException = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerNotEntitledException_message}}
+var mDisabledApiException = smithy.SchemaMembers{List: []*smithy.Schema{&sDisabledApiException_message}}
+var mDuplicateRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateRequestException_message}}
+var mExpiredTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiredTokenException_message}}
+var mIdempotencyConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sIdempotencyConflictException_message}}
+var mInternalServiceErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceErrorException_message}}
+var mInvalidCustomerIdentifierException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCustomerIdentifierException_message}}
+var mInvalidEndpointRegionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEndpointRegionException_message}}
+var mInvalidLicenseException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidLicenseException_message}}
+var mInvalidProductCodeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidProductCodeException_message}}
+var mInvalidPublicKeyVersionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPublicKeyVersionException_message}}
+var mInvalidRegionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRegionException_message}}
+var mInvalidTagException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTagException_message}}
+var mInvalidTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTokenException_message}}
+var mInvalidUsageAllocationsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidUsageAllocationsException_message}}
+var mInvalidUsageDimensionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidUsageDimensionException_message}}
+var mMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadata_AgreementId}}
+var mPlatformNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformNotSupportedException_message}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTimestampOutOfBoundsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestampOutOfBoundsException_message}}
+var mUsageAllocation = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageAllocation_AllocatedUsageQuantity, &sUsageAllocation_Tags}}
+var m_UsageAllocations = smithy.SchemaMembers{List: []*smithy.Schema{&s_UsageAllocations_member}}
+var mUsageRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageRecord_Timestamp, &sUsageRecord_CustomerIdentifier, &sUsageRecord_Dimension, &sUsageRecord_Quantity, &sUsageRecord_UsageAllocations, &sUsageRecord_CustomerAWSAccountId, &sUsageRecord_LicenseArn}}
+var m_UsageRecordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UsageRecordList_member}}
+var mUsageRecordResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageRecordResult_UsageRecord, &sUsageRecordResult_MeteringRecordId, &sUsageRecordResult_Status}}
+var m_UsageRecordResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UsageRecordResultList_member}}
+var mUsageRecordResultStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageRecordResultStatus_SUCCESS, &sUsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED, &sUsageRecordResultStatus_DUPLICATE_RECORD}}
+var mBatchMeterUsageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchMeterUsageRequest_UsageRecords, &sBatchMeterUsageRequest_ProductCode}}
+var mBatchMeterUsageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchMeterUsageResult_Results, &sBatchMeterUsageResult_UnprocessedRecords}}
+var mMeterUsageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sMeterUsageRequest_ProductCode, &sMeterUsageRequest_Timestamp, &sMeterUsageRequest_UsageDimension, &sMeterUsageRequest_UsageQuantity, &sMeterUsageRequest_DryRun, &sMeterUsageRequest_UsageAllocations, &sMeterUsageRequest_ClientToken}}
+var mMeterUsageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sMeterUsageResult_MeteringRecordId}}
+var mRegisterUsageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterUsageRequest_ProductCode, &sRegisterUsageRequest_PublicKeyVersion, &sRegisterUsageRequest_Nonce}}
+var mRegisterUsageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterUsageResult_PublicKeyRotationTimestamp, &sRegisterUsageResult_Signature}}
+var mResolveCustomerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResolveCustomerRequest_RegistrationToken}}
+var mResolveCustomerResult = smithy.SchemaMembers{List: []*smithy.Schema{&sResolveCustomerResult_CustomerIdentifier, &sResolveCustomerResult_ProductCode, &sResolveCustomerResult_CustomerAWSAccountId, &sResolveCustomerResult_LicenseArn, &sResolveCustomerResult_Metadata}}
+
+var sBatchMeterUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchMeterUsage, Type: smithy.ShapeTypeOperation, Ext: &eBatchMeterUsage})
+var sMeterUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeterUsage, Type: smithy.ShapeTypeOperation, Ext: &eMeterUsage})
+var sRegisterUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterUsage, Type: smithy.ShapeTypeOperation, Ext: &eRegisterUsage})
+var sResolveCustomer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCustomer, Type: smithy.ShapeTypeOperation, Ext: &eResolveCustomer})
+var s_AWSMPMeteringService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMPMeteringService, Type: smithy.ShapeTypeService, Ext: &e_AWSMPMeteringService})
+var s_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgreementId, Type: smithy.ShapeTypeString, Ext: &e_AgreementId})
+var s_AllocatedUsageQuantity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllocatedUsageQuantity, Type: smithy.ShapeTypeInteger, Ext: &e_AllocatedUsageQuantity})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var s_CustomerAWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAWSAccountId, Type: smithy.ShapeTypeString, Ext: &e_CustomerAWSAccountId})
+var s_CustomerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerIdentifier, Type: smithy.ShapeTypeString, Ext: &e_CustomerIdentifier})
+var sCustomerNotEntitledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerNotEntitledException, Members: &mCustomerNotEntitledException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eCustomerNotEntitledException})
+var sCustomerNotEntitledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eCustomerNotEntitledException_message})
+var sDisabledApiException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisabledApiException, Members: &mDisabledApiException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eDisabledApiException})
+var sDisabledApiException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eDisabledApiException_message})
+var sDuplicateRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRequestException, Members: &mDuplicateRequestException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateRequestException})
+var sDuplicateRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eDuplicateRequestException_message})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var sExpiredTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredTokenException, Members: &mExpiredTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eExpiredTokenException})
+var sExpiredTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eExpiredTokenException_message})
+var sIdempotencyConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotencyConflictException, Members: &mIdempotencyConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eIdempotencyConflictException})
+var sIdempotencyConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eIdempotencyConflictException_message})
+var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceErrorException})
+var sInternalServiceErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServiceErrorException_message})
+var sInvalidCustomerIdentifierException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCustomerIdentifierException, Members: &mInvalidCustomerIdentifierException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCustomerIdentifierException})
+var sInvalidCustomerIdentifierException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidCustomerIdentifierException_message})
+var sInvalidEndpointRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEndpointRegionException, Members: &mInvalidEndpointRegionException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidEndpointRegionException})
+var sInvalidEndpointRegionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidEndpointRegionException_message})
+var sInvalidLicenseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidLicenseException, Members: &mInvalidLicenseException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidLicenseException})
+var sInvalidLicenseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidLicenseException_message})
+var sInvalidProductCodeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidProductCodeException, Members: &mInvalidProductCodeException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidProductCodeException})
+var sInvalidProductCodeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidProductCodeException_message})
+var sInvalidPublicKeyVersionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPublicKeyVersionException, Members: &mInvalidPublicKeyVersionException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPublicKeyVersionException})
+var sInvalidPublicKeyVersionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidPublicKeyVersionException_message})
+var sInvalidRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRegionException, Members: &mInvalidRegionException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRegionException})
+var sInvalidRegionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRegionException_message})
+var sInvalidTagException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagException, Members: &mInvalidTagException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTagException})
+var sInvalidTagException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTagException_message})
+var sInvalidTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTokenException, Members: &mInvalidTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTokenException})
+var sInvalidTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTokenException_message})
+var sInvalidUsageAllocationsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidUsageAllocationsException, Members: &mInvalidUsageAllocationsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidUsageAllocationsException})
+var sInvalidUsageAllocationsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidUsageAllocationsException_message})
+var sInvalidUsageDimensionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidUsageDimensionException, Members: &mInvalidUsageDimensionException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidUsageDimensionException})
+var sInvalidUsageDimensionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidUsageDimensionException_message})
+var s_LicenseArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LicenseArn, Type: smithy.ShapeTypeString, Ext: &e_LicenseArn})
+var sMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadata, Members: &mMetadata, Type: smithy.ShapeTypeStructure, Ext: &eMetadata})
+var sMetadata_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString, Ext: &eMetadata_AgreementId})
+var s_Nonce = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &e_Nonce})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var sPlatformNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformNotSupportedException, Members: &mPlatformNotSupportedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ePlatformNotSupportedException})
+var sPlatformNotSupportedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ePlatformNotSupportedException_message})
+var s_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &e_ProductCode})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTimestampOutOfBoundsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampOutOfBoundsException, Members: &mTimestampOutOfBoundsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eTimestampOutOfBoundsException})
+var sTimestampOutOfBoundsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eTimestampOutOfBoundsException_message})
+var sUsageAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageAllocation, Members: &mUsageAllocation, Type: smithy.ShapeTypeStructure, Ext: &eUsageAllocation})
+var sUsageAllocation_AllocatedUsageQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedUsageQuantity", ID: &i_AllocatedUsageQuantity, Type: smithy.ShapeTypeInteger, Ext: &eUsageAllocation_AllocatedUsageQuantity})
+var sUsageAllocation_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUsageAllocation_Tags})
+var s_UsageAllocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageAllocations, Members: &m_UsageAllocations, Type: smithy.ShapeTypeList, Ext: &e_UsageAllocations})
+var s_UsageAllocations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUsageAllocation, Members: &mUsageAllocation, Type: smithy.ShapeTypeStructure, Ext: &e_UsageAllocations_member})
+var s_UsageDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageDimension, Type: smithy.ShapeTypeString, Ext: &e_UsageDimension})
+var s_UsageQuantity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageQuantity, Type: smithy.ShapeTypeInteger, Ext: &e_UsageQuantity})
+var sUsageRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageRecord, Members: &mUsageRecord, Type: smithy.ShapeTypeStructure, Ext: &eUsageRecord})
+var sUsageRecord_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUsageRecord_Timestamp})
+var sUsageRecord_CustomerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerIdentifier", ID: &i_CustomerIdentifier, Type: smithy.ShapeTypeString, Ext: &eUsageRecord_CustomerIdentifier})
+var sUsageRecord_Dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimension", ID: &i_UsageDimension, Type: smithy.ShapeTypeString, Ext: &eUsageRecord_Dimension})
+var sUsageRecord_Quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quantity", ID: &i_UsageQuantity, Type: smithy.ShapeTypeInteger, Ext: &eUsageRecord_Quantity})
+var sUsageRecord_UsageAllocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageAllocations", ID: &i_UsageAllocations, Members: &m_UsageAllocations, Type: smithy.ShapeTypeList, Ext: &eUsageRecord_UsageAllocations})
+var sUsageRecord_CustomerAWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAWSAccountId", ID: &i_CustomerAWSAccountId, Type: smithy.ShapeTypeString, Ext: &eUsageRecord_CustomerAWSAccountId})
+var sUsageRecord_LicenseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseArn", ID: &i_LicenseArn, Type: smithy.ShapeTypeString, Ext: &eUsageRecord_LicenseArn})
+var s_UsageRecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageRecordList, Members: &m_UsageRecordList, Type: smithy.ShapeTypeList, Ext: &e_UsageRecordList})
+var s_UsageRecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUsageRecord, Members: &mUsageRecord, Type: smithy.ShapeTypeStructure, Ext: &e_UsageRecordList_member})
+var sUsageRecordResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageRecordResult, Members: &mUsageRecordResult, Type: smithy.ShapeTypeStructure, Ext: &eUsageRecordResult})
+var sUsageRecordResult_UsageRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageRecord", ID: &iUsageRecord, Members: &mUsageRecord, Type: smithy.ShapeTypeStructure, Ext: &eUsageRecordResult_UsageRecord})
+var sUsageRecordResult_MeteringRecordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeteringRecordId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUsageRecordResult_MeteringRecordId})
+var sUsageRecordResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iUsageRecordResultStatus, Members: &mUsageRecordResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eUsageRecordResult_Status})
+var s_UsageRecordResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageRecordResultList, Members: &m_UsageRecordResultList, Type: smithy.ShapeTypeList, Ext: &e_UsageRecordResultList})
+var s_UsageRecordResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUsageRecordResult, Members: &mUsageRecordResult, Type: smithy.ShapeTypeStructure, Ext: &e_UsageRecordResultList_member})
+var sUsageRecordResultStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageRecordResultStatus, Members: &mUsageRecordResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eUsageRecordResultStatus})
+var sUsageRecordResultStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUsageRecordResultStatus_SUCCESS})
+var sUsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_NOT_SUBSCRIBED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED})
+var sUsageRecordResultStatus_DUPLICATE_RECORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_RECORD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUsageRecordResultStatus_DUPLICATE_RECORD})
+var s_VersionInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionInteger, Type: smithy.ShapeTypeInteger, Ext: &e_VersionInteger})
+var sBatchMeterUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchMeterUsageRequest, Members: &mBatchMeterUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchMeterUsageRequest})
+var sBatchMeterUsageRequest_UsageRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageRecords", ID: &i_UsageRecordList, Members: &m_UsageRecordList, Type: smithy.ShapeTypeList, Ext: &eBatchMeterUsageRequest_UsageRecords})
+var sBatchMeterUsageRequest_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &eBatchMeterUsageRequest_ProductCode})
+var sBatchMeterUsageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchMeterUsageResult, Members: &mBatchMeterUsageResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchMeterUsageResult})
+var sBatchMeterUsageResult_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_UsageRecordResultList, Members: &m_UsageRecordResultList, Type: smithy.ShapeTypeList, Ext: &eBatchMeterUsageResult_Results})
+var sBatchMeterUsageResult_UnprocessedRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedRecords", ID: &i_UsageRecordList, Members: &m_UsageRecordList, Type: smithy.ShapeTypeList, Ext: &eBatchMeterUsageResult_UnprocessedRecords})
+var sMeterUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeterUsageRequest, Members: &mMeterUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eMeterUsageRequest})
+var sMeterUsageRequest_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &eMeterUsageRequest_ProductCode})
+var sMeterUsageRequest_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMeterUsageRequest_Timestamp})
+var sMeterUsageRequest_UsageDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageDimension", ID: &i_UsageDimension, Type: smithy.ShapeTypeString, Ext: &eMeterUsageRequest_UsageDimension})
+var sMeterUsageRequest_UsageQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageQuantity", ID: &i_UsageQuantity, Type: smithy.ShapeTypeInteger, Ext: &eMeterUsageRequest_UsageQuantity})
+var sMeterUsageRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eMeterUsageRequest_DryRun})
+var sMeterUsageRequest_UsageAllocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageAllocations", ID: &i_UsageAllocations, Members: &m_UsageAllocations, Type: smithy.ShapeTypeList, Ext: &eMeterUsageRequest_UsageAllocations})
+var sMeterUsageRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eMeterUsageRequest_ClientToken})
+var sMeterUsageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeterUsageResult, Members: &mMeterUsageResult, Type: smithy.ShapeTypeStructure, Ext: &eMeterUsageResult})
+var sMeterUsageResult_MeteringRecordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeteringRecordId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMeterUsageResult_MeteringRecordId})
+var sRegisterUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterUsageRequest, Members: &mRegisterUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterUsageRequest})
+var sRegisterUsageRequest_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &eRegisterUsageRequest_ProductCode})
+var sRegisterUsageRequest_PublicKeyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyVersion", ID: &i_VersionInteger, Type: smithy.ShapeTypeInteger, Ext: &eRegisterUsageRequest_PublicKeyVersion})
+var sRegisterUsageRequest_Nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &eRegisterUsageRequest_Nonce})
+var sRegisterUsageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterUsageResult, Members: &mRegisterUsageResult, Type: smithy.ShapeTypeStructure, Ext: &eRegisterUsageResult})
+var sRegisterUsageResult_PublicKeyRotationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyRotationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRegisterUsageResult_PublicKeyRotationTimestamp})
+var sRegisterUsageResult_Signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Signature", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eRegisterUsageResult_Signature})
+var sResolveCustomerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCustomerRequest, Members: &mResolveCustomerRequest, Type: smithy.ShapeTypeStructure, Ext: &eResolveCustomerRequest})
+var sResolveCustomerRequest_RegistrationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrationToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eResolveCustomerRequest_RegistrationToken})
+var sResolveCustomerResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCustomerResult, Members: &mResolveCustomerResult, Type: smithy.ShapeTypeStructure, Ext: &eResolveCustomerResult})
+var sResolveCustomerResult_CustomerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerIdentifier", ID: &i_CustomerIdentifier, Type: smithy.ShapeTypeString, Ext: &eResolveCustomerResult_CustomerIdentifier})
+var sResolveCustomerResult_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &eResolveCustomerResult_ProductCode})
+var sResolveCustomerResult_CustomerAWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAWSAccountId", ID: &i_CustomerAWSAccountId, Type: smithy.ShapeTypeString, Ext: &eResolveCustomerResult_CustomerAWSAccountId})
+var sResolveCustomerResult_LicenseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseArn", ID: &i_LicenseArn, Type: smithy.ShapeTypeString, Ext: &eResolveCustomerResult_LicenseArn})
+var sResolveCustomerResult_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &iMetadata, Members: &mMetadata, Type: smithy.ShapeTypeStructure, Ext: &eResolveCustomerResult_Metadata})
+
+var BatchMeterUsage = &sBatchMeterUsage
+
+var MeterUsage = &sMeterUsage
+
+var RegisterUsage = &sRegisterUsage
+
+var ResolveCustomer = &sResolveCustomer
+
+var _AWSMPMeteringService = &s_AWSMPMeteringService
+
+var _AgreementId = &s_AgreementId
+
+var _AllocatedUsageQuantity = &s_AllocatedUsageQuantity
+
+var _Boolean = &s_Boolean
+
+var _ClientToken = &s_ClientToken
+
+var _CustomerAWSAccountId = &s_CustomerAWSAccountId
+
+var _CustomerIdentifier = &s_CustomerIdentifier
+
+var CustomerNotEntitledException = &sCustomerNotEntitledException
+var CustomerNotEntitledException_message = &sCustomerNotEntitledException_message
+
+var DisabledApiException = &sDisabledApiException
+var DisabledApiException_message = &sDisabledApiException_message
+
+var DuplicateRequestException = &sDuplicateRequestException
+var DuplicateRequestException_message = &sDuplicateRequestException_message
+
+var _errorMessage = &s_errorMessage
+
+var ExpiredTokenException = &sExpiredTokenException
+var ExpiredTokenException_message = &sExpiredTokenException_message
+
+var IdempotencyConflictException = &sIdempotencyConflictException
+var IdempotencyConflictException_message = &sIdempotencyConflictException_message
+
+var InternalServiceErrorException = &sInternalServiceErrorException
+var InternalServiceErrorException_message = &sInternalServiceErrorException_message
+
+var InvalidCustomerIdentifierException = &sInvalidCustomerIdentifierException
+var InvalidCustomerIdentifierException_message = &sInvalidCustomerIdentifierException_message
+
+var InvalidEndpointRegionException = &sInvalidEndpointRegionException
+var InvalidEndpointRegionException_message = &sInvalidEndpointRegionException_message
+
+var InvalidLicenseException = &sInvalidLicenseException
+var InvalidLicenseException_message = &sInvalidLicenseException_message
+
+var InvalidProductCodeException = &sInvalidProductCodeException
+var InvalidProductCodeException_message = &sInvalidProductCodeException_message
+
+var InvalidPublicKeyVersionException = &sInvalidPublicKeyVersionException
+var InvalidPublicKeyVersionException_message = &sInvalidPublicKeyVersionException_message
+
+var InvalidRegionException = &sInvalidRegionException
+var InvalidRegionException_message = &sInvalidRegionException_message
+
+var InvalidTagException = &sInvalidTagException
+var InvalidTagException_message = &sInvalidTagException_message
+
+var InvalidTokenException = &sInvalidTokenException
+var InvalidTokenException_message = &sInvalidTokenException_message
+
+var InvalidUsageAllocationsException = &sInvalidUsageAllocationsException
+var InvalidUsageAllocationsException_message = &sInvalidUsageAllocationsException_message
+
+var InvalidUsageDimensionException = &sInvalidUsageDimensionException
+var InvalidUsageDimensionException_message = &sInvalidUsageDimensionException_message
+
+var _LicenseArn = &s_LicenseArn
+
+var Metadata = &sMetadata
+var Metadata_AgreementId = &sMetadata_AgreementId
+
+var _Nonce = &s_Nonce
+
+var _NonEmptyString = &s_NonEmptyString
+
+var PlatformNotSupportedException = &sPlatformNotSupportedException
+var PlatformNotSupportedException_message = &sPlatformNotSupportedException_message
+
+var _ProductCode = &s_ProductCode
+
+var _String = &s_String
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Timestamp = &s_Timestamp
+
+var TimestampOutOfBoundsException = &sTimestampOutOfBoundsException
+var TimestampOutOfBoundsException_message = &sTimestampOutOfBoundsException_message
+
+var UsageAllocation = &sUsageAllocation
+var UsageAllocation_AllocatedUsageQuantity = &sUsageAllocation_AllocatedUsageQuantity
+var UsageAllocation_Tags = &sUsageAllocation_Tags
+
+var _UsageAllocations = &s_UsageAllocations
+var _UsageAllocations_member = &s_UsageAllocations_member
+
+var _UsageDimension = &s_UsageDimension
+
+var _UsageQuantity = &s_UsageQuantity
+
+var UsageRecord = &sUsageRecord
+var UsageRecord_Timestamp = &sUsageRecord_Timestamp
+var UsageRecord_CustomerIdentifier = &sUsageRecord_CustomerIdentifier
+var UsageRecord_Dimension = &sUsageRecord_Dimension
+var UsageRecord_Quantity = &sUsageRecord_Quantity
+var UsageRecord_UsageAllocations = &sUsageRecord_UsageAllocations
+var UsageRecord_CustomerAWSAccountId = &sUsageRecord_CustomerAWSAccountId
+var UsageRecord_LicenseArn = &sUsageRecord_LicenseArn
+
+var _UsageRecordList = &s_UsageRecordList
+var _UsageRecordList_member = &s_UsageRecordList_member
+
+var UsageRecordResult = &sUsageRecordResult
+var UsageRecordResult_UsageRecord = &sUsageRecordResult_UsageRecord
+var UsageRecordResult_MeteringRecordId = &sUsageRecordResult_MeteringRecordId
+var UsageRecordResult_Status = &sUsageRecordResult_Status
+
+var _UsageRecordResultList = &s_UsageRecordResultList
+var _UsageRecordResultList_member = &s_UsageRecordResultList_member
+
+var UsageRecordResultStatus = &sUsageRecordResultStatus
+var UsageRecordResultStatus_SUCCESS = &sUsageRecordResultStatus_SUCCESS
+var UsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED = &sUsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED
+var UsageRecordResultStatus_DUPLICATE_RECORD = &sUsageRecordResultStatus_DUPLICATE_RECORD
+
+var _VersionInteger = &s_VersionInteger
+
+var BatchMeterUsageRequest = &sBatchMeterUsageRequest
+var BatchMeterUsageRequest_UsageRecords = &sBatchMeterUsageRequest_UsageRecords
+var BatchMeterUsageRequest_ProductCode = &sBatchMeterUsageRequest_ProductCode
+
+var BatchMeterUsageResult = &sBatchMeterUsageResult
+var BatchMeterUsageResult_Results = &sBatchMeterUsageResult_Results
+var BatchMeterUsageResult_UnprocessedRecords = &sBatchMeterUsageResult_UnprocessedRecords
+
+var MeterUsageRequest = &sMeterUsageRequest
+var MeterUsageRequest_ProductCode = &sMeterUsageRequest_ProductCode
+var MeterUsageRequest_Timestamp = &sMeterUsageRequest_Timestamp
+var MeterUsageRequest_UsageDimension = &sMeterUsageRequest_UsageDimension
+var MeterUsageRequest_UsageQuantity = &sMeterUsageRequest_UsageQuantity
+var MeterUsageRequest_DryRun = &sMeterUsageRequest_DryRun
+var MeterUsageRequest_UsageAllocations = &sMeterUsageRequest_UsageAllocations
+var MeterUsageRequest_ClientToken = &sMeterUsageRequest_ClientToken
+
+var MeterUsageResult = &sMeterUsageResult
+var MeterUsageResult_MeteringRecordId = &sMeterUsageResult_MeteringRecordId
+
+var RegisterUsageRequest = &sRegisterUsageRequest
+var RegisterUsageRequest_ProductCode = &sRegisterUsageRequest_ProductCode
+var RegisterUsageRequest_PublicKeyVersion = &sRegisterUsageRequest_PublicKeyVersion
+var RegisterUsageRequest_Nonce = &sRegisterUsageRequest_Nonce
+
+var RegisterUsageResult = &sRegisterUsageResult
+var RegisterUsageResult_PublicKeyRotationTimestamp = &sRegisterUsageResult_PublicKeyRotationTimestamp
+var RegisterUsageResult_Signature = &sRegisterUsageResult_Signature
+
+var ResolveCustomerRequest = &sResolveCustomerRequest
+var ResolveCustomerRequest_RegistrationToken = &sResolveCustomerRequest_RegistrationToken
+
+var ResolveCustomerResult = &sResolveCustomerResult
+var ResolveCustomerResult_CustomerIdentifier = &sResolveCustomerResult_CustomerIdentifier
+var ResolveCustomerResult_ProductCode = &sResolveCustomerResult_ProductCode
+var ResolveCustomerResult_CustomerAWSAccountId = &sResolveCustomerResult_CustomerAWSAccountId
+var ResolveCustomerResult_LicenseArn = &sResolveCustomerResult_LicenseArn
+var ResolveCustomerResult_Metadata = &sResolveCustomerResult_Metadata
+
+var AWSMPMeteringService = &smithy.ServiceSchema{Schema: &s_AWSMPMeteringService, Version: "2016-01-14"}

@@ -4,4692 +4,4582 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ApplyGuardrail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ApplyGuardrail",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eApplyGuardrail                                                                        smithy.SchemaExtensions
+	eConverse                                                                              smithy.SchemaExtensions
+	eConverseStream                                                                        smithy.SchemaExtensions
+	eCountTokens                                                                           smithy.SchemaExtensions
+	eGetAsyncInvoke                                                                        smithy.SchemaExtensions
+	eInvokeGuardrailChecks                                                                 smithy.SchemaExtensions
+	eInvokeModel                                                                           smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStream                                                    smithy.SchemaExtensions
+	eInvokeModelWithResponseStream                                                         smithy.SchemaExtensions
+	eListAsyncInvokes                                                                      smithy.SchemaExtensions
+	eStartAsyncInvoke                                                                      smithy.SchemaExtensions
+	e_AmazonBedrockFrontendService                                                         smithy.SchemaExtensions
+	eAccessDeniedException                                                                 smithy.SchemaExtensions
+	eAccessDeniedException_message                                                         smithy.SchemaExtensions
+	e_AccountId                                                                            smithy.SchemaExtensions
+	e_AdditionalModelResponseFieldPaths                                                    smithy.SchemaExtensions
+	e_AdditionalModelResponseFieldPaths_member                                             smithy.SchemaExtensions
+	eAnyToolChoice                                                                         smithy.SchemaExtensions
+	eAppliedGuardrailDetails                                                               smithy.SchemaExtensions
+	eAppliedGuardrailDetails_guardrailId                                                   smithy.SchemaExtensions
+	eAppliedGuardrailDetails_guardrailVersion                                              smithy.SchemaExtensions
+	eAppliedGuardrailDetails_guardrailArn                                                  smithy.SchemaExtensions
+	eAppliedGuardrailDetails_guardrailOrigin                                               smithy.SchemaExtensions
+	eAppliedGuardrailDetails_guardrailOwnership                                            smithy.SchemaExtensions
+	e_AsyncInvokeArn                                                                       smithy.SchemaExtensions
+	e_AsyncInvokeIdempotencyToken                                                          smithy.SchemaExtensions
+	e_AsyncInvokeIdentifier                                                                smithy.SchemaExtensions
+	e_AsyncInvokeMessage                                                                   smithy.SchemaExtensions
+	eAsyncInvokeOutputDataConfig                                                           smithy.SchemaExtensions
+	eAsyncInvokeOutputDataConfig_s3OutputDataConfig                                        smithy.SchemaExtensions
+	eAsyncInvokeS3OutputDataConfig                                                         smithy.SchemaExtensions
+	eAsyncInvokeS3OutputDataConfig_s3Uri                                                   smithy.SchemaExtensions
+	eAsyncInvokeS3OutputDataConfig_kmsKeyId                                                smithy.SchemaExtensions
+	eAsyncInvokeS3OutputDataConfig_bucketOwner                                             smithy.SchemaExtensions
+	eAsyncInvokeStatus                                                                     smithy.SchemaExtensions
+	eAsyncInvokeStatus_IN_PROGRESS                                                         smithy.SchemaExtensions
+	eAsyncInvokeStatus_COMPLETED                                                           smithy.SchemaExtensions
+	eAsyncInvokeStatus_FAILED                                                              smithy.SchemaExtensions
+	e_AsyncInvokeSummaries                                                                 smithy.SchemaExtensions
+	e_AsyncInvokeSummaries_member                                                          smithy.SchemaExtensions
+	eAsyncInvokeSummary                                                                    smithy.SchemaExtensions
+	eAsyncInvokeSummary_invocationArn                                                      smithy.SchemaExtensions
+	eAsyncInvokeSummary_modelArn                                                           smithy.SchemaExtensions
+	eAsyncInvokeSummary_clientRequestToken                                                 smithy.SchemaExtensions
+	eAsyncInvokeSummary_status                                                             smithy.SchemaExtensions
+	eAsyncInvokeSummary_failureMessage                                                     smithy.SchemaExtensions
+	eAsyncInvokeSummary_submitTime                                                         smithy.SchemaExtensions
+	eAsyncInvokeSummary_lastModifiedTime                                                   smithy.SchemaExtensions
+	eAsyncInvokeSummary_endTime                                                            smithy.SchemaExtensions
+	eAsyncInvokeSummary_outputDataConfig                                                   smithy.SchemaExtensions
+	eAudioBlock                                                                            smithy.SchemaExtensions
+	eAudioBlock_format                                                                     smithy.SchemaExtensions
+	eAudioBlock_source                                                                     smithy.SchemaExtensions
+	eAudioBlock_error                                                                      smithy.SchemaExtensions
+	eAudioFormat                                                                           smithy.SchemaExtensions
+	eAudioFormat_MP3                                                                       smithy.SchemaExtensions
+	eAudioFormat_OPUS                                                                      smithy.SchemaExtensions
+	eAudioFormat_WAV                                                                       smithy.SchemaExtensions
+	eAudioFormat_AAC                                                                       smithy.SchemaExtensions
+	eAudioFormat_FLAC                                                                      smithy.SchemaExtensions
+	eAudioFormat_MP4                                                                       smithy.SchemaExtensions
+	eAudioFormat_OGG                                                                       smithy.SchemaExtensions
+	eAudioFormat_MKV                                                                       smithy.SchemaExtensions
+	eAudioFormat_MKA                                                                       smithy.SchemaExtensions
+	eAudioFormat_X_AAC                                                                     smithy.SchemaExtensions
+	eAudioFormat_M4A                                                                       smithy.SchemaExtensions
+	eAudioFormat_MPEG                                                                      smithy.SchemaExtensions
+	eAudioFormat_MPGA                                                                      smithy.SchemaExtensions
+	eAudioFormat_PCM                                                                       smithy.SchemaExtensions
+	eAudioFormat_WEBM                                                                      smithy.SchemaExtensions
+	eAudioSource                                                                           smithy.SchemaExtensions
+	eAudioSource_bytes                                                                     smithy.SchemaExtensions
+	eAudioSource_s3Location                                                                smithy.SchemaExtensions
+	e_AutomatedReasoningRuleIdentifier                                                     smithy.SchemaExtensions
+	eAutoToolChoice                                                                        smithy.SchemaExtensions
+	eBidirectionalInputPayloadPart                                                         smithy.SchemaExtensions
+	eBidirectionalInputPayloadPart_bytes                                                   smithy.SchemaExtensions
+	eBidirectionalOutputPayloadPart                                                        smithy.SchemaExtensions
+	eBidirectionalOutputPayloadPart_bytes                                                  smithy.SchemaExtensions
+	e_Body                                                                                 smithy.SchemaExtensions
+	eCacheDetail                                                                           smithy.SchemaExtensions
+	eCacheDetail_ttl                                                                       smithy.SchemaExtensions
+	eCacheDetail_inputTokens                                                               smithy.SchemaExtensions
+	e_CacheDetailsList                                                                     smithy.SchemaExtensions
+	e_CacheDetailsList_member                                                              smithy.SchemaExtensions
+	eCachePointBlock                                                                       smithy.SchemaExtensions
+	eCachePointBlock_type                                                                  smithy.SchemaExtensions
+	eCachePointBlock_ttl                                                                   smithy.SchemaExtensions
+	eCachePointType                                                                        smithy.SchemaExtensions
+	eCachePointType_DEFAULT                                                                smithy.SchemaExtensions
+	eCacheTTL                                                                              smithy.SchemaExtensions
+	eCacheTTL_FIVE_MINUTES                                                                 smithy.SchemaExtensions
+	eCacheTTL_ONE_HOUR                                                                     smithy.SchemaExtensions
+	eCitation                                                                              smithy.SchemaExtensions
+	eCitation_title                                                                        smithy.SchemaExtensions
+	eCitation_source                                                                       smithy.SchemaExtensions
+	eCitation_sourceContent                                                                smithy.SchemaExtensions
+	eCitation_location                                                                     smithy.SchemaExtensions
+	eCitationGeneratedContent                                                              smithy.SchemaExtensions
+	eCitationGeneratedContent_text                                                         smithy.SchemaExtensions
+	e_CitationGeneratedContentList                                                         smithy.SchemaExtensions
+	e_CitationGeneratedContentList_member                                                  smithy.SchemaExtensions
+	eCitationLocation                                                                      smithy.SchemaExtensions
+	eCitationLocation_web                                                                  smithy.SchemaExtensions
+	eCitationLocation_documentChar                                                         smithy.SchemaExtensions
+	eCitationLocation_documentPage                                                         smithy.SchemaExtensions
+	eCitationLocation_documentChunk                                                        smithy.SchemaExtensions
+	eCitationLocation_searchResultLocation                                                 smithy.SchemaExtensions
+	e_Citations                                                                            smithy.SchemaExtensions
+	e_Citations_member                                                                     smithy.SchemaExtensions
+	eCitationsConfig                                                                       smithy.SchemaExtensions
+	eCitationsConfig_enabled                                                               smithy.SchemaExtensions
+	eCitationsContentBlock                                                                 smithy.SchemaExtensions
+	eCitationsContentBlock_content                                                         smithy.SchemaExtensions
+	eCitationsContentBlock_citations                                                       smithy.SchemaExtensions
+	eCitationsDelta                                                                        smithy.SchemaExtensions
+	eCitationsDelta_title                                                                  smithy.SchemaExtensions
+	eCitationsDelta_source                                                                 smithy.SchemaExtensions
+	eCitationsDelta_sourceContent                                                          smithy.SchemaExtensions
+	eCitationsDelta_location                                                               smithy.SchemaExtensions
+	eCitationSourceContent                                                                 smithy.SchemaExtensions
+	eCitationSourceContent_text                                                            smithy.SchemaExtensions
+	eCitationSourceContentDelta                                                            smithy.SchemaExtensions
+	eCitationSourceContentDelta_text                                                       smithy.SchemaExtensions
+	e_CitationSourceContentList                                                            smithy.SchemaExtensions
+	e_CitationSourceContentList_member                                                     smithy.SchemaExtensions
+	e_CitationSourceContentListDelta                                                       smithy.SchemaExtensions
+	e_CitationSourceContentListDelta_member                                                smithy.SchemaExtensions
+	eConflictException                                                                     smithy.SchemaExtensions
+	eConflictException_message                                                             smithy.SchemaExtensions
+	eContentBlock                                                                          smithy.SchemaExtensions
+	eContentBlock_text                                                                     smithy.SchemaExtensions
+	eContentBlock_image                                                                    smithy.SchemaExtensions
+	eContentBlock_document                                                                 smithy.SchemaExtensions
+	eContentBlock_video                                                                    smithy.SchemaExtensions
+	eContentBlock_audio                                                                    smithy.SchemaExtensions
+	eContentBlock_toolUse                                                                  smithy.SchemaExtensions
+	eContentBlock_toolResult                                                               smithy.SchemaExtensions
+	eContentBlock_guardContent                                                             smithy.SchemaExtensions
+	eContentBlock_cachePoint                                                               smithy.SchemaExtensions
+	eContentBlock_reasoningContent                                                         smithy.SchemaExtensions
+	eContentBlock_citationsContent                                                         smithy.SchemaExtensions
+	eContentBlock_searchResult                                                             smithy.SchemaExtensions
+	eContentBlock_toolAddition                                                             smithy.SchemaExtensions
+	eContentBlock_toolRemoval                                                              smithy.SchemaExtensions
+	eContentBlockDelta                                                                     smithy.SchemaExtensions
+	eContentBlockDelta_text                                                                smithy.SchemaExtensions
+	eContentBlockDelta_toolUse                                                             smithy.SchemaExtensions
+	eContentBlockDelta_toolResult                                                          smithy.SchemaExtensions
+	eContentBlockDelta_reasoningContent                                                    smithy.SchemaExtensions
+	eContentBlockDelta_citation                                                            smithy.SchemaExtensions
+	eContentBlockDelta_image                                                               smithy.SchemaExtensions
+	eContentBlockDeltaEvent                                                                smithy.SchemaExtensions
+	eContentBlockDeltaEvent_delta                                                          smithy.SchemaExtensions
+	eContentBlockDeltaEvent_contentBlockIndex                                              smithy.SchemaExtensions
+	e_ContentBlocks                                                                        smithy.SchemaExtensions
+	e_ContentBlocks_member                                                                 smithy.SchemaExtensions
+	eContentBlockStart                                                                     smithy.SchemaExtensions
+	eContentBlockStart_toolUse                                                             smithy.SchemaExtensions
+	eContentBlockStart_toolResult                                                          smithy.SchemaExtensions
+	eContentBlockStart_image                                                               smithy.SchemaExtensions
+	eContentBlockStartEvent                                                                smithy.SchemaExtensions
+	eContentBlockStartEvent_start                                                          smithy.SchemaExtensions
+	eContentBlockStartEvent_contentBlockIndex                                              smithy.SchemaExtensions
+	eContentBlockStopEvent                                                                 smithy.SchemaExtensions
+	eContentBlockStopEvent_contentBlockIndex                                               smithy.SchemaExtensions
+	e_ConversationalModelId                                                                smithy.SchemaExtensions
+	eConversationRole                                                                      smithy.SchemaExtensions
+	eConversationRole_USER                                                                 smithy.SchemaExtensions
+	eConversationRole_ASSISTANT                                                            smithy.SchemaExtensions
+	eConversationRole_SYSTEM                                                               smithy.SchemaExtensions
+	eConverseMetrics                                                                       smithy.SchemaExtensions
+	eConverseMetrics_latencyMs                                                             smithy.SchemaExtensions
+	eConverseOutput                                                                        smithy.SchemaExtensions
+	eConverseOutput_message                                                                smithy.SchemaExtensions
+	eConverseStreamMetadataEvent                                                           smithy.SchemaExtensions
+	eConverseStreamMetadataEvent_usage                                                     smithy.SchemaExtensions
+	eConverseStreamMetadataEvent_metrics                                                   smithy.SchemaExtensions
+	eConverseStreamMetadataEvent_trace                                                     smithy.SchemaExtensions
+	eConverseStreamMetadataEvent_performanceConfig                                         smithy.SchemaExtensions
+	eConverseStreamMetadataEvent_serviceTier                                               smithy.SchemaExtensions
+	eConverseStreamMetrics                                                                 smithy.SchemaExtensions
+	eConverseStreamMetrics_latencyMs                                                       smithy.SchemaExtensions
+	eConverseStreamOutput                                                                  smithy.SchemaExtensions
+	eConverseStreamOutput_messageStart                                                     smithy.SchemaExtensions
+	eConverseStreamOutput_contentBlockStart                                                smithy.SchemaExtensions
+	eConverseStreamOutput_contentBlockDelta                                                smithy.SchemaExtensions
+	eConverseStreamOutput_contentBlockStop                                                 smithy.SchemaExtensions
+	eConverseStreamOutput_messageStop                                                      smithy.SchemaExtensions
+	eConverseStreamOutput_metadata                                                         smithy.SchemaExtensions
+	eConverseStreamOutput_internalServerException                                          smithy.SchemaExtensions
+	eConverseStreamOutput_modelStreamErrorException                                        smithy.SchemaExtensions
+	eConverseStreamOutput_validationException                                              smithy.SchemaExtensions
+	eConverseStreamOutput_throttlingException                                              smithy.SchemaExtensions
+	eConverseStreamOutput_serviceUnavailableException                                      smithy.SchemaExtensions
+	eConverseStreamTrace                                                                   smithy.SchemaExtensions
+	eConverseStreamTrace_guardrail                                                         smithy.SchemaExtensions
+	eConverseStreamTrace_promptRouter                                                      smithy.SchemaExtensions
+	eConverseTokensRequest                                                                 smithy.SchemaExtensions
+	eConverseTokensRequest_messages                                                        smithy.SchemaExtensions
+	eConverseTokensRequest_system                                                          smithy.SchemaExtensions
+	eConverseTokensRequest_toolConfig                                                      smithy.SchemaExtensions
+	eConverseTokensRequest_additionalModelRequestFields                                    smithy.SchemaExtensions
+	eConverseTrace                                                                         smithy.SchemaExtensions
+	eConverseTrace_guardrail                                                               smithy.SchemaExtensions
+	eConverseTrace_promptRouter                                                            smithy.SchemaExtensions
+	eCountTokensInput                                                                      smithy.SchemaExtensions
+	eCountTokensInput_invokeModel                                                          smithy.SchemaExtensions
+	eCountTokensInput_converse                                                             smithy.SchemaExtensions
+	eDocumentBlock                                                                         smithy.SchemaExtensions
+	eDocumentBlock_format                                                                  smithy.SchemaExtensions
+	eDocumentBlock_name                                                                    smithy.SchemaExtensions
+	eDocumentBlock_source                                                                  smithy.SchemaExtensions
+	eDocumentBlock_context                                                                 smithy.SchemaExtensions
+	eDocumentBlock_citations                                                               smithy.SchemaExtensions
+	eDocumentCharLocation                                                                  smithy.SchemaExtensions
+	eDocumentCharLocation_documentIndex                                                    smithy.SchemaExtensions
+	eDocumentCharLocation_start                                                            smithy.SchemaExtensions
+	eDocumentCharLocation_end                                                              smithy.SchemaExtensions
+	eDocumentChunkLocation                                                                 smithy.SchemaExtensions
+	eDocumentChunkLocation_documentIndex                                                   smithy.SchemaExtensions
+	eDocumentChunkLocation_start                                                           smithy.SchemaExtensions
+	eDocumentChunkLocation_end                                                             smithy.SchemaExtensions
+	eDocumentContentBlock                                                                  smithy.SchemaExtensions
+	eDocumentContentBlock_text                                                             smithy.SchemaExtensions
+	e_DocumentContentBlocks                                                                smithy.SchemaExtensions
+	e_DocumentContentBlocks_member                                                         smithy.SchemaExtensions
+	eDocumentFormat                                                                        smithy.SchemaExtensions
+	eDocumentFormat_PDF                                                                    smithy.SchemaExtensions
+	eDocumentFormat_CSV                                                                    smithy.SchemaExtensions
+	eDocumentFormat_DOC                                                                    smithy.SchemaExtensions
+	eDocumentFormat_DOCX                                                                   smithy.SchemaExtensions
+	eDocumentFormat_XLS                                                                    smithy.SchemaExtensions
+	eDocumentFormat_XLSX                                                                   smithy.SchemaExtensions
+	eDocumentFormat_HTML                                                                   smithy.SchemaExtensions
+	eDocumentFormat_TXT                                                                    smithy.SchemaExtensions
+	eDocumentFormat_MD                                                                     smithy.SchemaExtensions
+	eDocumentPageLocation                                                                  smithy.SchemaExtensions
+	eDocumentPageLocation_documentIndex                                                    smithy.SchemaExtensions
+	eDocumentPageLocation_start                                                            smithy.SchemaExtensions
+	eDocumentPageLocation_end                                                              smithy.SchemaExtensions
+	eDocumentSource                                                                        smithy.SchemaExtensions
+	eDocumentSource_bytes                                                                  smithy.SchemaExtensions
+	eDocumentSource_s3Location                                                             smithy.SchemaExtensions
+	eDocumentSource_text                                                                   smithy.SchemaExtensions
+	eDocumentSource_content                                                                smithy.SchemaExtensions
+	eErrorBlock                                                                            smithy.SchemaExtensions
+	eErrorBlock_message                                                                    smithy.SchemaExtensions
+	e_FoundationModelVersionIdentifier                                                     smithy.SchemaExtensions
+	eGuardrailAction                                                                       smithy.SchemaExtensions
+	eGuardrailAction_NONE                                                                  smithy.SchemaExtensions
+	eGuardrailAction_GUARDRAIL_INTERVENED                                                  smithy.SchemaExtensions
+	e_GuardrailArn                                                                         smithy.SchemaExtensions
+	eGuardrailAssessment                                                                   smithy.SchemaExtensions
+	eGuardrailAssessment_topicPolicy                                                       smithy.SchemaExtensions
+	eGuardrailAssessment_contentPolicy                                                     smithy.SchemaExtensions
+	eGuardrailAssessment_wordPolicy                                                        smithy.SchemaExtensions
+	eGuardrailAssessment_sensitiveInformationPolicy                                        smithy.SchemaExtensions
+	eGuardrailAssessment_contextualGroundingPolicy                                         smithy.SchemaExtensions
+	eGuardrailAssessment_automatedReasoningPolicy                                          smithy.SchemaExtensions
+	eGuardrailAssessment_invocationMetrics                                                 smithy.SchemaExtensions
+	eGuardrailAssessment_appliedGuardrailDetails                                           smithy.SchemaExtensions
+	e_GuardrailAssessmentList                                                              smithy.SchemaExtensions
+	e_GuardrailAssessmentList_member                                                       smithy.SchemaExtensions
+	e_GuardrailAssessmentListMap                                                           smithy.SchemaExtensions
+	e_GuardrailAssessmentListMap_key                                                       smithy.SchemaExtensions
+	e_GuardrailAssessmentListMap_value                                                     smithy.SchemaExtensions
+	e_GuardrailAssessmentMap                                                               smithy.SchemaExtensions
+	e_GuardrailAssessmentMap_key                                                           smithy.SchemaExtensions
+	e_GuardrailAssessmentMap_value                                                         smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningDifferenceScenarioList                                    smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningDifferenceScenarioList_member                             smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding                                                    smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding_valid                                              smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding_invalid                                            smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding_satisfiable                                        smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding_impossible                                         smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding_translationAmbiguous                               smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding_tooComplex                                         smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningFinding_noTranslations                                     smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningFindingList                                               smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningFindingList_member                                        smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningImpossibleFinding                                          smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningImpossibleFinding_translation                              smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningImpossibleFinding_contradictingRules                       smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningImpossibleFinding_logicWarning                             smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningInputTextReference                                         smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningInputTextReference_text                                    smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningInputTextReferenceList                                    smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningInputTextReferenceList_member                             smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningInvalidFinding                                             smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningInvalidFinding_translation                                 smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningInvalidFinding_contradictingRules                          smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningInvalidFinding_logicWarning                                smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningLogicWarning                                               smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningLogicWarning_type                                          smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningLogicWarning_premises                                      smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningLogicWarning_claims                                        smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningLogicWarningType                                           smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE                              smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE                               smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningNoTranslationsFinding                                      smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningPoliciesProcessed                                         smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningPolicyAssessment                                           smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningPolicyAssessment_findings                                  smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningPolicyUnitsProcessed                                      smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningPolicyVersionArn                                          smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningRule                                                       smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningRule_identifier                                            smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningRule_policyVersionArn                                      smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningRuleList                                                  smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningRuleList_member                                           smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningSatisfiableFinding                                         smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningSatisfiableFinding_translation                             smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario                      smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario                     smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningSatisfiableFinding_logicWarning                            smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningScenario                                                   smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningScenario_statements                                        smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningStatement                                                  smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningStatement_logic                                            smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningStatement_naturalLanguage                                  smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningStatementList                                             smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningStatementList_member                                      smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningStatementLogicContent                                     smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningStatementNaturalLanguageContent                           smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTooComplexFinding                                          smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslation                                                smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslation_premises                                       smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslation_claims                                         smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslation_untranslatedPremises                           smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslation_untranslatedClaims                             smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslation_confidence                                     smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslationAmbiguousFinding                                smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslationAmbiguousFinding_options                        smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios            smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningTranslationConfidence                                     smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningTranslationList                                           smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningTranslationList_member                                    smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslationOption                                          smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningTranslationOption_translations                             smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningTranslationOptionList                                     smithy.SchemaExtensions
+	e_GuardrailAutomatedReasoningTranslationOptionList_member                              smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningValidFinding                                               smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningValidFinding_translation                                   smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningValidFinding_claimsTrueScenario                            smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningValidFinding_supportingRules                               smithy.SchemaExtensions
+	eGuardrailAutomatedReasoningValidFinding_logicWarning                                  smithy.SchemaExtensions
+	eGuardrailChecksConfig                                                                 smithy.SchemaExtensions
+	eGuardrailChecksConfig_contentFilter                                                   smithy.SchemaExtensions
+	eGuardrailChecksConfig_promptAttack                                                    smithy.SchemaExtensions
+	eGuardrailChecksConfig_sensitiveInformation                                            smithy.SchemaExtensions
+	eGuardrailChecksContentBlock                                                           smithy.SchemaExtensions
+	eGuardrailChecksContentBlock_text                                                      smithy.SchemaExtensions
+	e_GuardrailChecksContentBlockList                                                      smithy.SchemaExtensions
+	e_GuardrailChecksContentBlockList_member                                               smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategory                                                  smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategory_VIOLENCE                                         smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategory_HATE                                             smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategory_SEXUAL                                           smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategory_MISCONDUCT                                       smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategory_INSULTS                                          smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategoryConfig                                            smithy.SchemaExtensions
+	eGuardrailChecksContentFilterCategoryConfig_category                                   smithy.SchemaExtensions
+	e_GuardrailChecksContentFilterCategoryConfigList                                       smithy.SchemaExtensions
+	e_GuardrailChecksContentFilterCategoryConfigList_member                                smithy.SchemaExtensions
+	eGuardrailChecksContentFilterConfig                                                    smithy.SchemaExtensions
+	eGuardrailChecksContentFilterConfig_categories                                         smithy.SchemaExtensions
+	eGuardrailChecksContentFilterResult                                                    smithy.SchemaExtensions
+	eGuardrailChecksContentFilterResult_results                                            smithy.SchemaExtensions
+	eGuardrailChecksContentFilterResultEntry                                               smithy.SchemaExtensions
+	eGuardrailChecksContentFilterResultEntry_category                                      smithy.SchemaExtensions
+	eGuardrailChecksContentFilterResultEntry_severityScore                                 smithy.SchemaExtensions
+	e_GuardrailChecksContentFilterResultList                                               smithy.SchemaExtensions
+	e_GuardrailChecksContentFilterResultList_member                                        smithy.SchemaExtensions
+	eGuardrailChecksContentFilterUsage                                                     smithy.SchemaExtensions
+	eGuardrailChecksContentFilterUsage_textUnits                                           smithy.SchemaExtensions
+	eGuardrailChecksMessage                                                                smithy.SchemaExtensions
+	eGuardrailChecksMessage_role                                                           smithy.SchemaExtensions
+	eGuardrailChecksMessage_content                                                        smithy.SchemaExtensions
+	e_GuardrailChecksMessageList                                                           smithy.SchemaExtensions
+	e_GuardrailChecksMessageList_member                                                    smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackCategory                                                   smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackCategory_JAILBREAK                                         smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackCategory_PROMPT_INJECTION                                  smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE                                    smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackCategoryConfig                                             smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackCategoryConfig_category                                    smithy.SchemaExtensions
+	e_GuardrailChecksPromptAttackCategoryConfigList                                        smithy.SchemaExtensions
+	e_GuardrailChecksPromptAttackCategoryConfigList_member                                 smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackConfig                                                     smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackConfig_categories                                          smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackResult                                                     smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackResult_results                                             smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackResultEntry                                                smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackResultEntry_category                                       smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackResultEntry_severityScore                                  smithy.SchemaExtensions
+	e_GuardrailChecksPromptAttackResultList                                                smithy.SchemaExtensions
+	e_GuardrailChecksPromptAttackResultList_member                                         smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackUsage                                                      smithy.SchemaExtensions
+	eGuardrailChecksPromptAttackUsage_textUnits                                            smithy.SchemaExtensions
+	eGuardrailChecksResults                                                                smithy.SchemaExtensions
+	eGuardrailChecksResults_contentFilter                                                  smithy.SchemaExtensions
+	eGuardrailChecksResults_promptAttack                                                   smithy.SchemaExtensions
+	eGuardrailChecksResults_sensitiveInformation                                           smithy.SchemaExtensions
+	eGuardrailChecksRole                                                                   smithy.SchemaExtensions
+	eGuardrailChecksRole_USER                                                              smithy.SchemaExtensions
+	eGuardrailChecksRole_ASSISTANT                                                         smithy.SchemaExtensions
+	eGuardrailChecksRole_SYSTEM                                                            smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationConfig                                             smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationConfig_entities                                    smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityConfig                                       smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityConfig_type                                  smithy.SchemaExtensions
+	e_GuardrailChecksSensitiveInformationEntityConfigList                                  smithy.SchemaExtensions
+	e_GuardrailChecksSensitiveInformationEntityConfigList_member                           smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType                                         smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_ADDRESS                                 smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_AGE                                     smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY                          smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY                          smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER                        smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER              smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV                   smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY                smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER                smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_DRIVER_ID                               smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_EMAIL                                   smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER       smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_IP_ADDRESS                              smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE                           smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS                             smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_NAME                                    smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_PASSWORD                                smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_PHONE                                   smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_PIN                                     smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_SWIFT_CODE                              smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER       smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER            smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER     smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_URL                                     smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_USERNAME                                smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER                  smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER                  smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER                      smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER               smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER           smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResult                                             smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResult_results                                     smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResult_truncated                                   smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResultEntry                                        smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResultEntry_type                                   smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResultEntry_confidenceScore                        smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResultEntry_beginOffset                            smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResultEntry_endOffset                              smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResultEntry_messageIndex                           smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationResultEntry_contentIndex                           smithy.SchemaExtensions
+	e_GuardrailChecksSensitiveInformationResultList                                        smithy.SchemaExtensions
+	e_GuardrailChecksSensitiveInformationResultList_member                                 smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationUsage                                              smithy.SchemaExtensions
+	eGuardrailChecksSensitiveInformationUsage_textUnits                                    smithy.SchemaExtensions
+	e_GuardrailChecksTextContent                                                           smithy.SchemaExtensions
+	eGuardrailChecksUsageResults                                                           smithy.SchemaExtensions
+	eGuardrailChecksUsageResults_contentFilter                                             smithy.SchemaExtensions
+	eGuardrailChecksUsageResults_promptAttack                                              smithy.SchemaExtensions
+	eGuardrailChecksUsageResults_sensitiveInformation                                      smithy.SchemaExtensions
+	eGuardrailConfiguration                                                                smithy.SchemaExtensions
+	eGuardrailConfiguration_guardrailIdentifier                                            smithy.SchemaExtensions
+	eGuardrailConfiguration_guardrailVersion                                               smithy.SchemaExtensions
+	eGuardrailConfiguration_trace                                                          smithy.SchemaExtensions
+	eGuardrailContentBlock                                                                 smithy.SchemaExtensions
+	eGuardrailContentBlock_text                                                            smithy.SchemaExtensions
+	eGuardrailContentBlock_image                                                           smithy.SchemaExtensions
+	e_GuardrailContentBlockList                                                            smithy.SchemaExtensions
+	e_GuardrailContentBlockList_member                                                     smithy.SchemaExtensions
+	eGuardrailContentFilter                                                                smithy.SchemaExtensions
+	eGuardrailContentFilter_type                                                           smithy.SchemaExtensions
+	eGuardrailContentFilter_confidence                                                     smithy.SchemaExtensions
+	eGuardrailContentFilter_filterStrength                                                 smithy.SchemaExtensions
+	eGuardrailContentFilter_action                                                         smithy.SchemaExtensions
+	eGuardrailContentFilter_detected                                                       smithy.SchemaExtensions
+	eGuardrailContentFilterConfidence                                                      smithy.SchemaExtensions
+	eGuardrailContentFilterConfidence_NONE                                                 smithy.SchemaExtensions
+	eGuardrailContentFilterConfidence_LOW                                                  smithy.SchemaExtensions
+	eGuardrailContentFilterConfidence_MEDIUM                                               smithy.SchemaExtensions
+	eGuardrailContentFilterConfidence_HIGH                                                 smithy.SchemaExtensions
+	e_GuardrailContentFilterList                                                           smithy.SchemaExtensions
+	e_GuardrailContentFilterList_member                                                    smithy.SchemaExtensions
+	eGuardrailContentFilterStrength                                                        smithy.SchemaExtensions
+	eGuardrailContentFilterStrength_NONE                                                   smithy.SchemaExtensions
+	eGuardrailContentFilterStrength_LOW                                                    smithy.SchemaExtensions
+	eGuardrailContentFilterStrength_MEDIUM                                                 smithy.SchemaExtensions
+	eGuardrailContentFilterStrength_HIGH                                                   smithy.SchemaExtensions
+	eGuardrailContentFilterType                                                            smithy.SchemaExtensions
+	eGuardrailContentFilterType_INSULTS                                                    smithy.SchemaExtensions
+	eGuardrailContentFilterType_HATE                                                       smithy.SchemaExtensions
+	eGuardrailContentFilterType_SEXUAL                                                     smithy.SchemaExtensions
+	eGuardrailContentFilterType_VIOLENCE                                                   smithy.SchemaExtensions
+	eGuardrailContentFilterType_MISCONDUCT                                                 smithy.SchemaExtensions
+	eGuardrailContentFilterType_PROMPT_ATTACK                                              smithy.SchemaExtensions
+	eGuardrailContentPolicyAction                                                          smithy.SchemaExtensions
+	eGuardrailContentPolicyAction_BLOCKED                                                  smithy.SchemaExtensions
+	eGuardrailContentPolicyAction_NONE                                                     smithy.SchemaExtensions
+	eGuardrailContentPolicyAssessment                                                      smithy.SchemaExtensions
+	eGuardrailContentPolicyAssessment_filters                                              smithy.SchemaExtensions
+	e_GuardrailContentPolicyImageUnitsProcessed                                            smithy.SchemaExtensions
+	e_GuardrailContentPolicyUnitsProcessed                                                 smithy.SchemaExtensions
+	eGuardrailContentQualifier                                                             smithy.SchemaExtensions
+	eGuardrailContentQualifier_GROUNDING_SOURCE                                            smithy.SchemaExtensions
+	eGuardrailContentQualifier_QUERY                                                       smithy.SchemaExtensions
+	eGuardrailContentQualifier_GUARD_CONTENT                                               smithy.SchemaExtensions
+	e_GuardrailContentQualifierList                                                        smithy.SchemaExtensions
+	e_GuardrailContentQualifierList_member                                                 smithy.SchemaExtensions
+	eGuardrailContentSource                                                                smithy.SchemaExtensions
+	eGuardrailContentSource_INPUT                                                          smithy.SchemaExtensions
+	eGuardrailContentSource_OUTPUT                                                         smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilter                                                    smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilter_type                                               smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilter_threshold                                          smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilter_score                                              smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilter_action                                             smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilter_detected                                           smithy.SchemaExtensions
+	e_GuardrailContextualGroundingFilters                                                  smithy.SchemaExtensions
+	e_GuardrailContextualGroundingFilters_member                                           smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilterType                                                smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilterType_GROUNDING                                      smithy.SchemaExtensions
+	eGuardrailContextualGroundingFilterType_RELEVANCE                                      smithy.SchemaExtensions
+	eGuardrailContextualGroundingPolicyAction                                              smithy.SchemaExtensions
+	eGuardrailContextualGroundingPolicyAction_BLOCKED                                      smithy.SchemaExtensions
+	eGuardrailContextualGroundingPolicyAction_NONE                                         smithy.SchemaExtensions
+	eGuardrailContextualGroundingPolicyAssessment                                          smithy.SchemaExtensions
+	eGuardrailContextualGroundingPolicyAssessment_filters                                  smithy.SchemaExtensions
+	e_GuardrailContextualGroundingPolicyUnitsProcessed                                     smithy.SchemaExtensions
+	eGuardrailConverseContentBlock                                                         smithy.SchemaExtensions
+	eGuardrailConverseContentBlock_text                                                    smithy.SchemaExtensions
+	eGuardrailConverseContentBlock_image                                                   smithy.SchemaExtensions
+	eGuardrailConverseContentQualifier                                                     smithy.SchemaExtensions
+	eGuardrailConverseContentQualifier_GROUNDING_SOURCE                                    smithy.SchemaExtensions
+	eGuardrailConverseContentQualifier_QUERY                                               smithy.SchemaExtensions
+	eGuardrailConverseContentQualifier_GUARD_CONTENT                                       smithy.SchemaExtensions
+	e_GuardrailConverseContentQualifierList                                                smithy.SchemaExtensions
+	e_GuardrailConverseContentQualifierList_member                                         smithy.SchemaExtensions
+	eGuardrailConverseImageBlock                                                           smithy.SchemaExtensions
+	eGuardrailConverseImageBlock_format                                                    smithy.SchemaExtensions
+	eGuardrailConverseImageBlock_source                                                    smithy.SchemaExtensions
+	eGuardrailConverseImageFormat                                                          smithy.SchemaExtensions
+	eGuardrailConverseImageFormat_PNG                                                      smithy.SchemaExtensions
+	eGuardrailConverseImageFormat_JPEG                                                     smithy.SchemaExtensions
+	eGuardrailConverseImageSource                                                          smithy.SchemaExtensions
+	eGuardrailConverseImageSource_bytes                                                    smithy.SchemaExtensions
+	eGuardrailConverseTextBlock                                                            smithy.SchemaExtensions
+	eGuardrailConverseTextBlock_text                                                       smithy.SchemaExtensions
+	eGuardrailConverseTextBlock_qualifiers                                                 smithy.SchemaExtensions
+	eGuardrailCoverage                                                                     smithy.SchemaExtensions
+	eGuardrailCoverage_textCharacters                                                      smithy.SchemaExtensions
+	eGuardrailCoverage_images                                                              smithy.SchemaExtensions
+	eGuardrailCustomWord                                                                   smithy.SchemaExtensions
+	eGuardrailCustomWord_match                                                             smithy.SchemaExtensions
+	eGuardrailCustomWord_action                                                            smithy.SchemaExtensions
+	eGuardrailCustomWord_detected                                                          smithy.SchemaExtensions
+	e_GuardrailCustomWordList                                                              smithy.SchemaExtensions
+	e_GuardrailCustomWordList_member                                                       smithy.SchemaExtensions
+	e_GuardrailId                                                                          smithy.SchemaExtensions
+	e_GuardrailIdentifier                                                                  smithy.SchemaExtensions
+	eGuardrailImageBlock                                                                   smithy.SchemaExtensions
+	eGuardrailImageBlock_format                                                            smithy.SchemaExtensions
+	eGuardrailImageBlock_source                                                            smithy.SchemaExtensions
+	eGuardrailImageCoverage                                                                smithy.SchemaExtensions
+	eGuardrailImageCoverage_guarded                                                        smithy.SchemaExtensions
+	eGuardrailImageCoverage_total                                                          smithy.SchemaExtensions
+	eGuardrailImageFormat                                                                  smithy.SchemaExtensions
+	eGuardrailImageFormat_PNG                                                              smithy.SchemaExtensions
+	eGuardrailImageFormat_JPEG                                                             smithy.SchemaExtensions
+	eGuardrailImageSource                                                                  smithy.SchemaExtensions
+	eGuardrailImageSource_bytes                                                            smithy.SchemaExtensions
+	eGuardrailInvocationMetrics                                                            smithy.SchemaExtensions
+	eGuardrailInvocationMetrics_guardrailProcessingLatency                                 smithy.SchemaExtensions
+	eGuardrailInvocationMetrics_usage                                                      smithy.SchemaExtensions
+	eGuardrailInvocationMetrics_guardrailCoverage                                          smithy.SchemaExtensions
+	eGuardrailManagedWord                                                                  smithy.SchemaExtensions
+	eGuardrailManagedWord_match                                                            smithy.SchemaExtensions
+	eGuardrailManagedWord_type                                                             smithy.SchemaExtensions
+	eGuardrailManagedWord_action                                                           smithy.SchemaExtensions
+	eGuardrailManagedWord_detected                                                         smithy.SchemaExtensions
+	e_GuardrailManagedWordList                                                             smithy.SchemaExtensions
+	e_GuardrailManagedWordList_member                                                      smithy.SchemaExtensions
+	eGuardrailManagedWordType                                                              smithy.SchemaExtensions
+	eGuardrailManagedWordType_PROFANITY                                                    smithy.SchemaExtensions
+	eGuardrailOrigin                                                                       smithy.SchemaExtensions
+	eGuardrailOrigin_REQUEST                                                               smithy.SchemaExtensions
+	eGuardrailOrigin_ACCOUNT_ENFORCED                                                      smithy.SchemaExtensions
+	eGuardrailOrigin_ORGANIZATION_ENFORCED                                                 smithy.SchemaExtensions
+	e_GuardrailOriginList                                                                  smithy.SchemaExtensions
+	e_GuardrailOriginList_member                                                           smithy.SchemaExtensions
+	eGuardrailOutputContent                                                                smithy.SchemaExtensions
+	eGuardrailOutputContent_text                                                           smithy.SchemaExtensions
+	e_GuardrailOutputContentList                                                           smithy.SchemaExtensions
+	e_GuardrailOutputContentList_member                                                    smithy.SchemaExtensions
+	eGuardrailOutputScope                                                                  smithy.SchemaExtensions
+	eGuardrailOutputScope_INTERVENTIONS                                                    smithy.SchemaExtensions
+	eGuardrailOutputScope_FULL                                                             smithy.SchemaExtensions
+	e_GuardrailOutputText                                                                  smithy.SchemaExtensions
+	eGuardrailOwnership                                                                    smithy.SchemaExtensions
+	eGuardrailOwnership_SELF                                                               smithy.SchemaExtensions
+	eGuardrailOwnership_CROSS_ACCOUNT                                                      smithy.SchemaExtensions
+	eGuardrailPiiEntityFilter                                                              smithy.SchemaExtensions
+	eGuardrailPiiEntityFilter_match                                                        smithy.SchemaExtensions
+	eGuardrailPiiEntityFilter_type                                                         smithy.SchemaExtensions
+	eGuardrailPiiEntityFilter_action                                                       smithy.SchemaExtensions
+	eGuardrailPiiEntityFilter_detected                                                     smithy.SchemaExtensions
+	e_GuardrailPiiEntityFilterList                                                         smithy.SchemaExtensions
+	e_GuardrailPiiEntityFilterList_member                                                  smithy.SchemaExtensions
+	eGuardrailPiiEntityType                                                                smithy.SchemaExtensions
+	eGuardrailPiiEntityType_ADDRESS                                                        smithy.SchemaExtensions
+	eGuardrailPiiEntityType_AGE                                                            smithy.SchemaExtensions
+	eGuardrailPiiEntityType_AWS_ACCESS_KEY                                                 smithy.SchemaExtensions
+	eGuardrailPiiEntityType_AWS_SECRET_KEY                                                 smithy.SchemaExtensions
+	eGuardrailPiiEntityType_CA_HEALTH_NUMBER                                               smithy.SchemaExtensions
+	eGuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER                                     smithy.SchemaExtensions
+	eGuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV                                          smithy.SchemaExtensions
+	eGuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY                                       smithy.SchemaExtensions
+	eGuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER                                       smithy.SchemaExtensions
+	eGuardrailPiiEntityType_DRIVER_ID                                                      smithy.SchemaExtensions
+	eGuardrailPiiEntityType_EMAIL                                                          smithy.SchemaExtensions
+	eGuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER                              smithy.SchemaExtensions
+	eGuardrailPiiEntityType_IP_ADDRESS                                                     smithy.SchemaExtensions
+	eGuardrailPiiEntityType_LICENSE_PLATE                                                  smithy.SchemaExtensions
+	eGuardrailPiiEntityType_MAC_ADDRESS                                                    smithy.SchemaExtensions
+	eGuardrailPiiEntityType_NAME                                                           smithy.SchemaExtensions
+	eGuardrailPiiEntityType_PASSWORD                                                       smithy.SchemaExtensions
+	eGuardrailPiiEntityType_PHONE                                                          smithy.SchemaExtensions
+	eGuardrailPiiEntityType_PIN                                                            smithy.SchemaExtensions
+	eGuardrailPiiEntityType_SWIFT_CODE                                                     smithy.SchemaExtensions
+	eGuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER                              smithy.SchemaExtensions
+	eGuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER                                   smithy.SchemaExtensions
+	eGuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER                            smithy.SchemaExtensions
+	eGuardrailPiiEntityType_URL                                                            smithy.SchemaExtensions
+	eGuardrailPiiEntityType_USERNAME                                                       smithy.SchemaExtensions
+	eGuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER                                         smithy.SchemaExtensions
+	eGuardrailPiiEntityType_US_BANK_ROUTING_NUMBER                                         smithy.SchemaExtensions
+	eGuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER                        smithy.SchemaExtensions
+	eGuardrailPiiEntityType_US_PASSPORT_NUMBER                                             smithy.SchemaExtensions
+	eGuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER                                      smithy.SchemaExtensions
+	eGuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER                                  smithy.SchemaExtensions
+	e_GuardrailProcessingLatency                                                           smithy.SchemaExtensions
+	eGuardrailRegexFilter                                                                  smithy.SchemaExtensions
+	eGuardrailRegexFilter_name                                                             smithy.SchemaExtensions
+	eGuardrailRegexFilter_match                                                            smithy.SchemaExtensions
+	eGuardrailRegexFilter_regex                                                            smithy.SchemaExtensions
+	eGuardrailRegexFilter_action                                                           smithy.SchemaExtensions
+	eGuardrailRegexFilter_detected                                                         smithy.SchemaExtensions
+	e_GuardrailRegexFilterList                                                             smithy.SchemaExtensions
+	e_GuardrailRegexFilterList_member                                                      smithy.SchemaExtensions
+	eGuardrailSensitiveInformationPolicyAction                                             smithy.SchemaExtensions
+	eGuardrailSensitiveInformationPolicyAction_ANONYMIZED                                  smithy.SchemaExtensions
+	eGuardrailSensitiveInformationPolicyAction_BLOCKED                                     smithy.SchemaExtensions
+	eGuardrailSensitiveInformationPolicyAction_NONE                                        smithy.SchemaExtensions
+	eGuardrailSensitiveInformationPolicyAssessment                                         smithy.SchemaExtensions
+	eGuardrailSensitiveInformationPolicyAssessment_piiEntities                             smithy.SchemaExtensions
+	eGuardrailSensitiveInformationPolicyAssessment_regexes                                 smithy.SchemaExtensions
+	e_GuardrailSensitiveInformationPolicyFreeUnitsProcessed                                smithy.SchemaExtensions
+	e_GuardrailSensitiveInformationPolicyUnitsProcessed                                    smithy.SchemaExtensions
+	eGuardrailStreamConfiguration                                                          smithy.SchemaExtensions
+	eGuardrailStreamConfiguration_guardrailIdentifier                                      smithy.SchemaExtensions
+	eGuardrailStreamConfiguration_guardrailVersion                                         smithy.SchemaExtensions
+	eGuardrailStreamConfiguration_trace                                                    smithy.SchemaExtensions
+	eGuardrailStreamConfiguration_streamProcessingMode                                     smithy.SchemaExtensions
+	eGuardrailStreamProcessingMode                                                         smithy.SchemaExtensions
+	eGuardrailStreamProcessingMode_SYNC                                                    smithy.SchemaExtensions
+	eGuardrailStreamProcessingMode_ASYNC                                                   smithy.SchemaExtensions
+	eGuardrailTextBlock                                                                    smithy.SchemaExtensions
+	eGuardrailTextBlock_text                                                               smithy.SchemaExtensions
+	eGuardrailTextBlock_qualifiers                                                         smithy.SchemaExtensions
+	eGuardrailTextCharactersCoverage                                                       smithy.SchemaExtensions
+	eGuardrailTextCharactersCoverage_guarded                                               smithy.SchemaExtensions
+	eGuardrailTextCharactersCoverage_total                                                 smithy.SchemaExtensions
+	eGuardrailTopic                                                                        smithy.SchemaExtensions
+	eGuardrailTopic_name                                                                   smithy.SchemaExtensions
+	eGuardrailTopic_type                                                                   smithy.SchemaExtensions
+	eGuardrailTopic_action                                                                 smithy.SchemaExtensions
+	eGuardrailTopic_detected                                                               smithy.SchemaExtensions
+	e_GuardrailTopicList                                                                   smithy.SchemaExtensions
+	e_GuardrailTopicList_member                                                            smithy.SchemaExtensions
+	eGuardrailTopicPolicyAction                                                            smithy.SchemaExtensions
+	eGuardrailTopicPolicyAction_BLOCKED                                                    smithy.SchemaExtensions
+	eGuardrailTopicPolicyAction_NONE                                                       smithy.SchemaExtensions
+	eGuardrailTopicPolicyAssessment                                                        smithy.SchemaExtensions
+	eGuardrailTopicPolicyAssessment_topics                                                 smithy.SchemaExtensions
+	e_GuardrailTopicPolicyUnitsProcessed                                                   smithy.SchemaExtensions
+	eGuardrailTopicType                                                                    smithy.SchemaExtensions
+	eGuardrailTopicType_DENY                                                               smithy.SchemaExtensions
+	eGuardrailTrace                                                                        smithy.SchemaExtensions
+	eGuardrailTrace_ENABLED                                                                smithy.SchemaExtensions
+	eGuardrailTrace_DISABLED                                                               smithy.SchemaExtensions
+	eGuardrailTrace_ENABLED_FULL                                                           smithy.SchemaExtensions
+	eGuardrailTraceAssessment                                                              smithy.SchemaExtensions
+	eGuardrailTraceAssessment_modelOutput                                                  smithy.SchemaExtensions
+	eGuardrailTraceAssessment_inputAssessment                                              smithy.SchemaExtensions
+	eGuardrailTraceAssessment_outputAssessments                                            smithy.SchemaExtensions
+	eGuardrailTraceAssessment_actionReason                                                 smithy.SchemaExtensions
+	eGuardrailUsage                                                                        smithy.SchemaExtensions
+	eGuardrailUsage_topicPolicyUnits                                                       smithy.SchemaExtensions
+	eGuardrailUsage_contentPolicyUnits                                                     smithy.SchemaExtensions
+	eGuardrailUsage_wordPolicyUnits                                                        smithy.SchemaExtensions
+	eGuardrailUsage_sensitiveInformationPolicyUnits                                        smithy.SchemaExtensions
+	eGuardrailUsage_sensitiveInformationPolicyFreeUnits                                    smithy.SchemaExtensions
+	eGuardrailUsage_contextualGroundingPolicyUnits                                         smithy.SchemaExtensions
+	eGuardrailUsage_contentPolicyImageUnits                                                smithy.SchemaExtensions
+	eGuardrailUsage_automatedReasoningPolicyUnits                                          smithy.SchemaExtensions
+	eGuardrailUsage_automatedReasoningPolicies                                             smithy.SchemaExtensions
+	e_GuardrailVersion                                                                     smithy.SchemaExtensions
+	eGuardrailWordPolicyAction                                                             smithy.SchemaExtensions
+	eGuardrailWordPolicyAction_BLOCKED                                                     smithy.SchemaExtensions
+	eGuardrailWordPolicyAction_NONE                                                        smithy.SchemaExtensions
+	eGuardrailWordPolicyAssessment                                                         smithy.SchemaExtensions
+	eGuardrailWordPolicyAssessment_customWords                                             smithy.SchemaExtensions
+	eGuardrailWordPolicyAssessment_managedWordLists                                        smithy.SchemaExtensions
+	e_GuardrailWordPolicyUnitsProcessed                                                    smithy.SchemaExtensions
+	eImageBlock                                                                            smithy.SchemaExtensions
+	eImageBlock_format                                                                     smithy.SchemaExtensions
+	eImageBlock_source                                                                     smithy.SchemaExtensions
+	eImageBlock_error                                                                      smithy.SchemaExtensions
+	eImageBlockDelta                                                                       smithy.SchemaExtensions
+	eImageBlockDelta_source                                                                smithy.SchemaExtensions
+	eImageBlockDelta_error                                                                 smithy.SchemaExtensions
+	eImageBlockStart                                                                       smithy.SchemaExtensions
+	eImageBlockStart_format                                                                smithy.SchemaExtensions
+	eImageFormat                                                                           smithy.SchemaExtensions
+	eImageFormat_PNG                                                                       smithy.SchemaExtensions
+	eImageFormat_JPEG                                                                      smithy.SchemaExtensions
+	eImageFormat_GIF                                                                       smithy.SchemaExtensions
+	eImageFormat_WEBP                                                                      smithy.SchemaExtensions
+	e_ImagesGuarded                                                                        smithy.SchemaExtensions
+	eImageSource                                                                           smithy.SchemaExtensions
+	eImageSource_bytes                                                                     smithy.SchemaExtensions
+	eImageSource_s3Location                                                                smithy.SchemaExtensions
+	e_ImagesTotal                                                                          smithy.SchemaExtensions
+	eInferenceConfiguration                                                                smithy.SchemaExtensions
+	eInferenceConfiguration_maxTokens                                                      smithy.SchemaExtensions
+	eInferenceConfiguration_temperature                                                    smithy.SchemaExtensions
+	eInferenceConfiguration_topP                                                           smithy.SchemaExtensions
+	eInferenceConfiguration_stopSequences                                                  smithy.SchemaExtensions
+	eInternalServerException                                                               smithy.SchemaExtensions
+	eInternalServerException_message                                                       smithy.SchemaExtensions
+	e_InvocationArn                                                                        smithy.SchemaExtensions
+	e_InvokedModelId                                                                       smithy.SchemaExtensions
+	e_InvokeModelIdentifier                                                                smithy.SchemaExtensions
+	eInvokeModelTokensRequest                                                              smithy.SchemaExtensions
+	eInvokeModelTokensRequest_body                                                         smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamInput                                               smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamInput_chunk                                         smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput                                              smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput_chunk                                        smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput_internalServerException                      smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput_modelStreamErrorException                    smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput_validationException                          smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput_throttlingException                          smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput_modelTimeoutException                        smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamOutput_serviceUnavailableException                  smithy.SchemaExtensions
+	eJsonSchemaDefinition                                                                  smithy.SchemaExtensions
+	eJsonSchemaDefinition_schema                                                           smithy.SchemaExtensions
+	eJsonSchemaDefinition_name                                                             smithy.SchemaExtensions
+	eJsonSchemaDefinition_description                                                      smithy.SchemaExtensions
+	e_KmsKeyId                                                                             smithy.SchemaExtensions
+	e_MaxResults                                                                           smithy.SchemaExtensions
+	eMessage                                                                               smithy.SchemaExtensions
+	eMessage_role                                                                          smithy.SchemaExtensions
+	eMessage_content                                                                       smithy.SchemaExtensions
+	e_Messages                                                                             smithy.SchemaExtensions
+	e_Messages_member                                                                      smithy.SchemaExtensions
+	eMessageStartEvent                                                                     smithy.SchemaExtensions
+	eMessageStartEvent_role                                                                smithy.SchemaExtensions
+	eMessageStopEvent                                                                      smithy.SchemaExtensions
+	eMessageStopEvent_stopReason                                                           smithy.SchemaExtensions
+	eMessageStopEvent_additionalModelResponseFields                                        smithy.SchemaExtensions
+	e_MimeType                                                                             smithy.SchemaExtensions
+	eModelErrorException                                                                   smithy.SchemaExtensions
+	eModelErrorException_message                                                           smithy.SchemaExtensions
+	eModelErrorException_originalStatusCode                                                smithy.SchemaExtensions
+	eModelErrorException_resourceName                                                      smithy.SchemaExtensions
+	e_ModelInputPayload                                                                    smithy.SchemaExtensions
+	eModelNotReadyException                                                                smithy.SchemaExtensions
+	eModelNotReadyException_message                                                        smithy.SchemaExtensions
+	e_ModelOutputs                                                                         smithy.SchemaExtensions
+	e_ModelOutputs_member                                                                  smithy.SchemaExtensions
+	eModelStreamErrorException                                                             smithy.SchemaExtensions
+	eModelStreamErrorException_message                                                     smithy.SchemaExtensions
+	eModelStreamErrorException_originalStatusCode                                          smithy.SchemaExtensions
+	eModelStreamErrorException_originalMessage                                             smithy.SchemaExtensions
+	eModelTimeoutException                                                                 smithy.SchemaExtensions
+	eModelTimeoutException_message                                                         smithy.SchemaExtensions
+	e_NonBlankString                                                                       smithy.SchemaExtensions
+	e_NonEmptyString                                                                       smithy.SchemaExtensions
+	e_NonEmptyStringList                                                                   smithy.SchemaExtensions
+	e_NonEmptyStringList_member                                                            smithy.SchemaExtensions
+	e_NonNegativeInteger                                                                   smithy.SchemaExtensions
+	eOutputConfig                                                                          smithy.SchemaExtensions
+	eOutputConfig_textFormat                                                               smithy.SchemaExtensions
+	eOutputConfig_effort                                                                   smithy.SchemaExtensions
+	eOutputFormat                                                                          smithy.SchemaExtensions
+	eOutputFormat_type                                                                     smithy.SchemaExtensions
+	eOutputFormat_structure                                                                smithy.SchemaExtensions
+	eOutputFormatStructure                                                                 smithy.SchemaExtensions
+	eOutputFormatStructure_jsonSchema                                                      smithy.SchemaExtensions
+	eOutputFormatType                                                                      smithy.SchemaExtensions
+	eOutputFormatType_JSON_SCHEMA                                                          smithy.SchemaExtensions
+	e_PaginationToken                                                                      smithy.SchemaExtensions
+	e_PartBody                                                                             smithy.SchemaExtensions
+	ePayloadPart                                                                           smithy.SchemaExtensions
+	ePayloadPart_bytes                                                                     smithy.SchemaExtensions
+	ePerformanceConfigLatency                                                              smithy.SchemaExtensions
+	ePerformanceConfigLatency_STANDARD                                                     smithy.SchemaExtensions
+	ePerformanceConfigLatency_OPTIMIZED                                                    smithy.SchemaExtensions
+	ePerformanceConfiguration                                                              smithy.SchemaExtensions
+	ePerformanceConfiguration_latency                                                      smithy.SchemaExtensions
+	ePromptRouterTrace                                                                     smithy.SchemaExtensions
+	ePromptRouterTrace_invokedModelId                                                      smithy.SchemaExtensions
+	e_PromptVariableMap                                                                    smithy.SchemaExtensions
+	e_PromptVariableMap_key                                                                smithy.SchemaExtensions
+	e_PromptVariableMap_value                                                              smithy.SchemaExtensions
+	ePromptVariableValues                                                                  smithy.SchemaExtensions
+	ePromptVariableValues_text                                                             smithy.SchemaExtensions
+	eReasoningContentBlock                                                                 smithy.SchemaExtensions
+	eReasoningContentBlock_reasoningText                                                   smithy.SchemaExtensions
+	eReasoningContentBlock_redactedContent                                                 smithy.SchemaExtensions
+	eReasoningContentBlockDelta                                                            smithy.SchemaExtensions
+	eReasoningContentBlockDelta_text                                                       smithy.SchemaExtensions
+	eReasoningContentBlockDelta_redactedContent                                            smithy.SchemaExtensions
+	eReasoningContentBlockDelta_signature                                                  smithy.SchemaExtensions
+	eReasoningTextBlock                                                                    smithy.SchemaExtensions
+	eReasoningTextBlock_text                                                               smithy.SchemaExtensions
+	eReasoningTextBlock_signature                                                          smithy.SchemaExtensions
+	e_RequestMetadata                                                                      smithy.SchemaExtensions
+	e_RequestMetadata_key                                                                  smithy.SchemaExtensions
+	e_RequestMetadata_value                                                                smithy.SchemaExtensions
+	e_RequestMetadataJson                                                                  smithy.SchemaExtensions
+	eResourceNotFoundException                                                             smithy.SchemaExtensions
+	eResourceNotFoundException_message                                                     smithy.SchemaExtensions
+	eResponseStream                                                                        smithy.SchemaExtensions
+	eResponseStream_chunk                                                                  smithy.SchemaExtensions
+	eResponseStream_internalServerException                                                smithy.SchemaExtensions
+	eResponseStream_modelStreamErrorException                                              smithy.SchemaExtensions
+	eResponseStream_validationException                                                    smithy.SchemaExtensions
+	eResponseStream_throttlingException                                                    smithy.SchemaExtensions
+	eResponseStream_modelTimeoutException                                                  smithy.SchemaExtensions
+	eResponseStream_serviceUnavailableException                                            smithy.SchemaExtensions
+	eS3Location                                                                            smithy.SchemaExtensions
+	eS3Location_uri                                                                        smithy.SchemaExtensions
+	eS3Location_bucketOwner                                                                smithy.SchemaExtensions
+	e_S3Uri                                                                                smithy.SchemaExtensions
+	eSearchResultBlock                                                                     smithy.SchemaExtensions
+	eSearchResultBlock_source                                                              smithy.SchemaExtensions
+	eSearchResultBlock_title                                                               smithy.SchemaExtensions
+	eSearchResultBlock_content                                                             smithy.SchemaExtensions
+	eSearchResultBlock_citations                                                           smithy.SchemaExtensions
+	eSearchResultContentBlock                                                              smithy.SchemaExtensions
+	eSearchResultContentBlock_text                                                         smithy.SchemaExtensions
+	e_SearchResultContentBlocks                                                            smithy.SchemaExtensions
+	e_SearchResultContentBlocks_member                                                     smithy.SchemaExtensions
+	eSearchResultLocation                                                                  smithy.SchemaExtensions
+	eSearchResultLocation_searchResultIndex                                                smithy.SchemaExtensions
+	eSearchResultLocation_start                                                            smithy.SchemaExtensions
+	eSearchResultLocation_end                                                              smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                                 smithy.SchemaExtensions
+	eServiceTier                                                                           smithy.SchemaExtensions
+	eServiceTier_type                                                                      smithy.SchemaExtensions
+	eServiceTierType                                                                       smithy.SchemaExtensions
+	eServiceTierType_PRIORITY                                                              smithy.SchemaExtensions
+	eServiceTierType_DEFAULT                                                               smithy.SchemaExtensions
+	eServiceTierType_FLEX                                                                  smithy.SchemaExtensions
+	eServiceTierType_RESERVED                                                              smithy.SchemaExtensions
+	eServiceUnavailableException                                                           smithy.SchemaExtensions
+	eServiceUnavailableException_message                                                   smithy.SchemaExtensions
+	eSortAsyncInvocationBy                                                                 smithy.SchemaExtensions
+	eSortAsyncInvocationBy_SUBMISSION_TIME                                                 smithy.SchemaExtensions
+	eSortOrder                                                                             smithy.SchemaExtensions
+	eSortOrder_ASCENDING                                                                   smithy.SchemaExtensions
+	eSortOrder_DESCENDING                                                                  smithy.SchemaExtensions
+	eSpecificToolChoice                                                                    smithy.SchemaExtensions
+	eSpecificToolChoice_name                                                               smithy.SchemaExtensions
+	e_StatusCode                                                                           smithy.SchemaExtensions
+	eStopReason                                                                            smithy.SchemaExtensions
+	eStopReason_END_TURN                                                                   smithy.SchemaExtensions
+	eStopReason_TOOL_USE                                                                   smithy.SchemaExtensions
+	eStopReason_MAX_TOKENS                                                                 smithy.SchemaExtensions
+	eStopReason_STOP_SEQUENCE                                                              smithy.SchemaExtensions
+	eStopReason_GUARDRAIL_INTERVENED                                                       smithy.SchemaExtensions
+	eStopReason_CONTENT_FILTERED                                                           smithy.SchemaExtensions
+	eStopReason_MALFORMED_MODEL_OUTPUT                                                     smithy.SchemaExtensions
+	eStopReason_MALFORMED_TOOL_USE                                                         smithy.SchemaExtensions
+	eStopReason_MODEL_CONTEXT_WINDOW_EXCEEDED                                              smithy.SchemaExtensions
+	eSystemContentBlock                                                                    smithy.SchemaExtensions
+	eSystemContentBlock_text                                                               smithy.SchemaExtensions
+	eSystemContentBlock_guardContent                                                       smithy.SchemaExtensions
+	eSystemContentBlock_cachePoint                                                         smithy.SchemaExtensions
+	e_SystemContentBlocks                                                                  smithy.SchemaExtensions
+	e_SystemContentBlocks_member                                                           smithy.SchemaExtensions
+	eSystemTool                                                                            smithy.SchemaExtensions
+	eSystemTool_name                                                                       smithy.SchemaExtensions
+	eTag                                                                                   smithy.SchemaExtensions
+	eTag_key                                                                               smithy.SchemaExtensions
+	eTag_value                                                                             smithy.SchemaExtensions
+	e_TagKey                                                                               smithy.SchemaExtensions
+	e_TagList                                                                              smithy.SchemaExtensions
+	e_TagList_member                                                                       smithy.SchemaExtensions
+	e_TagValue                                                                             smithy.SchemaExtensions
+	e_TextCharactersGuarded                                                                smithy.SchemaExtensions
+	e_TextCharactersTotal                                                                  smithy.SchemaExtensions
+	eThrottlingException                                                                   smithy.SchemaExtensions
+	eThrottlingException_message                                                           smithy.SchemaExtensions
+	e_Timestamp                                                                            smithy.SchemaExtensions
+	eTokenUsage                                                                            smithy.SchemaExtensions
+	eTokenUsage_inputTokens                                                                smithy.SchemaExtensions
+	eTokenUsage_outputTokens                                                               smithy.SchemaExtensions
+	eTokenUsage_totalTokens                                                                smithy.SchemaExtensions
+	eTokenUsage_cacheReadInputTokens                                                       smithy.SchemaExtensions
+	eTokenUsage_cacheWriteInputTokens                                                      smithy.SchemaExtensions
+	eTokenUsage_cacheDetails                                                               smithy.SchemaExtensions
+	eTool                                                                                  smithy.SchemaExtensions
+	eTool_toolSpec                                                                         smithy.SchemaExtensions
+	eTool_systemTool                                                                       smithy.SchemaExtensions
+	eTool_cachePoint                                                                       smithy.SchemaExtensions
+	eToolAdditionBlock                                                                     smithy.SchemaExtensions
+	eToolAdditionBlock_tool                                                                smithy.SchemaExtensions
+	eToolChoice                                                                            smithy.SchemaExtensions
+	eToolChoice_auto                                                                       smithy.SchemaExtensions
+	eToolChoice_any                                                                        smithy.SchemaExtensions
+	eToolChoice_tool                                                                       smithy.SchemaExtensions
+	eToolConfiguration                                                                     smithy.SchemaExtensions
+	eToolConfiguration_tools                                                               smithy.SchemaExtensions
+	eToolConfiguration_toolChoice                                                          smithy.SchemaExtensions
+	eToolInputSchema                                                                       smithy.SchemaExtensions
+	eToolInputSchema_json                                                                  smithy.SchemaExtensions
+	e_ToolName                                                                             smithy.SchemaExtensions
+	eToolReference                                                                         smithy.SchemaExtensions
+	eToolReference_type                                                                    smithy.SchemaExtensions
+	eToolReference_name                                                                    smithy.SchemaExtensions
+	eToolReference_serverName                                                              smithy.SchemaExtensions
+	eToolRemovalBlock                                                                      smithy.SchemaExtensions
+	eToolRemovalBlock_tool                                                                 smithy.SchemaExtensions
+	eToolResultBlock                                                                       smithy.SchemaExtensions
+	eToolResultBlock_toolUseId                                                             smithy.SchemaExtensions
+	eToolResultBlock_content                                                               smithy.SchemaExtensions
+	eToolResultBlock_status                                                                smithy.SchemaExtensions
+	eToolResultBlock_type                                                                  smithy.SchemaExtensions
+	eToolResultBlockDelta                                                                  smithy.SchemaExtensions
+	eToolResultBlockDelta_text                                                             smithy.SchemaExtensions
+	eToolResultBlockDelta_json                                                             smithy.SchemaExtensions
+	e_ToolResultBlocksDelta                                                                smithy.SchemaExtensions
+	e_ToolResultBlocksDelta_member                                                         smithy.SchemaExtensions
+	eToolResultBlockStart                                                                  smithy.SchemaExtensions
+	eToolResultBlockStart_toolUseId                                                        smithy.SchemaExtensions
+	eToolResultBlockStart_type                                                             smithy.SchemaExtensions
+	eToolResultBlockStart_status                                                           smithy.SchemaExtensions
+	eToolResultContentBlock                                                                smithy.SchemaExtensions
+	eToolResultContentBlock_json                                                           smithy.SchemaExtensions
+	eToolResultContentBlock_text                                                           smithy.SchemaExtensions
+	eToolResultContentBlock_image                                                          smithy.SchemaExtensions
+	eToolResultContentBlock_document                                                       smithy.SchemaExtensions
+	eToolResultContentBlock_video                                                          smithy.SchemaExtensions
+	eToolResultContentBlock_searchResult                                                   smithy.SchemaExtensions
+	e_ToolResultContentBlocks                                                              smithy.SchemaExtensions
+	e_ToolResultContentBlocks_member                                                       smithy.SchemaExtensions
+	eToolResultStatus                                                                      smithy.SchemaExtensions
+	eToolResultStatus_SUCCESS                                                              smithy.SchemaExtensions
+	eToolResultStatus_ERROR                                                                smithy.SchemaExtensions
+	e_Tools                                                                                smithy.SchemaExtensions
+	e_Tools_member                                                                         smithy.SchemaExtensions
+	eToolSpecification                                                                     smithy.SchemaExtensions
+	eToolSpecification_name                                                                smithy.SchemaExtensions
+	eToolSpecification_description                                                         smithy.SchemaExtensions
+	eToolSpecification_inputSchema                                                         smithy.SchemaExtensions
+	eToolSpecification_strict                                                              smithy.SchemaExtensions
+	eToolUseBlock                                                                          smithy.SchemaExtensions
+	eToolUseBlock_toolUseId                                                                smithy.SchemaExtensions
+	eToolUseBlock_name                                                                     smithy.SchemaExtensions
+	eToolUseBlock_input                                                                    smithy.SchemaExtensions
+	eToolUseBlock_type                                                                     smithy.SchemaExtensions
+	eToolUseBlockDelta                                                                     smithy.SchemaExtensions
+	eToolUseBlockDelta_input                                                               smithy.SchemaExtensions
+	eToolUseBlockStart                                                                     smithy.SchemaExtensions
+	eToolUseBlockStart_toolUseId                                                           smithy.SchemaExtensions
+	eToolUseBlockStart_name                                                                smithy.SchemaExtensions
+	eToolUseBlockStart_type                                                                smithy.SchemaExtensions
+	e_ToolUseId                                                                            smithy.SchemaExtensions
+	eToolUseType                                                                           smithy.SchemaExtensions
+	eToolUseType_SERVER_TOOL_USE                                                           smithy.SchemaExtensions
+	eTrace                                                                                 smithy.SchemaExtensions
+	eTrace_ENABLED                                                                         smithy.SchemaExtensions
+	eTrace_DISABLED                                                                        smithy.SchemaExtensions
+	eTrace_ENABLED_FULL                                                                    smithy.SchemaExtensions
+	eValidationException                                                                   smithy.SchemaExtensions
+	eValidationException_message                                                           smithy.SchemaExtensions
+	eVideoBlock                                                                            smithy.SchemaExtensions
+	eVideoBlock_format                                                                     smithy.SchemaExtensions
+	eVideoBlock_source                                                                     smithy.SchemaExtensions
+	eVideoFormat                                                                           smithy.SchemaExtensions
+	eVideoFormat_MKV                                                                       smithy.SchemaExtensions
+	eVideoFormat_MOV                                                                       smithy.SchemaExtensions
+	eVideoFormat_MP4                                                                       smithy.SchemaExtensions
+	eVideoFormat_WEBM                                                                      smithy.SchemaExtensions
+	eVideoFormat_FLV                                                                       smithy.SchemaExtensions
+	eVideoFormat_MPEG                                                                      smithy.SchemaExtensions
+	eVideoFormat_MPG                                                                       smithy.SchemaExtensions
+	eVideoFormat_WMV                                                                       smithy.SchemaExtensions
+	eVideoFormat_THREE_GP                                                                  smithy.SchemaExtensions
+	eVideoSource                                                                           smithy.SchemaExtensions
+	eVideoSource_bytes                                                                     smithy.SchemaExtensions
+	eVideoSource_s3Location                                                                smithy.SchemaExtensions
+	eWebLocation                                                                           smithy.SchemaExtensions
+	eWebLocation_url                                                                       smithy.SchemaExtensions
+	eWebLocation_domain                                                                    smithy.SchemaExtensions
+	eApplyGuardrailRequest                                                                 smithy.SchemaExtensions
+	eApplyGuardrailRequest_guardrailIdentifier                                             smithy.SchemaExtensions
+	eApplyGuardrailRequest_guardrailVersion                                                smithy.SchemaExtensions
+	eApplyGuardrailRequest_source                                                          smithy.SchemaExtensions
+	eApplyGuardrailRequest_content                                                         smithy.SchemaExtensions
+	eApplyGuardrailRequest_outputScope                                                     smithy.SchemaExtensions
+	eApplyGuardrailResponse                                                                smithy.SchemaExtensions
+	eApplyGuardrailResponse_usage                                                          smithy.SchemaExtensions
+	eApplyGuardrailResponse_action                                                         smithy.SchemaExtensions
+	eApplyGuardrailResponse_actionReason                                                   smithy.SchemaExtensions
+	eApplyGuardrailResponse_outputs                                                        smithy.SchemaExtensions
+	eApplyGuardrailResponse_assessments                                                    smithy.SchemaExtensions
+	eApplyGuardrailResponse_guardrailCoverage                                              smithy.SchemaExtensions
+	eConverseRequest                                                                       smithy.SchemaExtensions
+	eConverseRequest_modelId                                                               smithy.SchemaExtensions
+	eConverseRequest_messages                                                              smithy.SchemaExtensions
+	eConverseRequest_system                                                                smithy.SchemaExtensions
+	eConverseRequest_inferenceConfig                                                       smithy.SchemaExtensions
+	eConverseRequest_toolConfig                                                            smithy.SchemaExtensions
+	eConverseRequest_guardrailConfig                                                       smithy.SchemaExtensions
+	eConverseRequest_additionalModelRequestFields                                          smithy.SchemaExtensions
+	eConverseRequest_promptVariables                                                       smithy.SchemaExtensions
+	eConverseRequest_additionalModelResponseFieldPaths                                     smithy.SchemaExtensions
+	eConverseRequest_requestMetadata                                                       smithy.SchemaExtensions
+	eConverseRequest_performanceConfig                                                     smithy.SchemaExtensions
+	eConverseRequest_serviceTier                                                           smithy.SchemaExtensions
+	eConverseRequest_outputConfig                                                          smithy.SchemaExtensions
+	eConverseResponse                                                                      smithy.SchemaExtensions
+	eConverseResponse_output                                                               smithy.SchemaExtensions
+	eConverseResponse_stopReason                                                           smithy.SchemaExtensions
+	eConverseResponse_usage                                                                smithy.SchemaExtensions
+	eConverseResponse_metrics                                                              smithy.SchemaExtensions
+	eConverseResponse_additionalModelResponseFields                                        smithy.SchemaExtensions
+	eConverseResponse_trace                                                                smithy.SchemaExtensions
+	eConverseResponse_performanceConfig                                                    smithy.SchemaExtensions
+	eConverseResponse_serviceTier                                                          smithy.SchemaExtensions
+	eConverseStreamRequest                                                                 smithy.SchemaExtensions
+	eConverseStreamRequest_modelId                                                         smithy.SchemaExtensions
+	eConverseStreamRequest_messages                                                        smithy.SchemaExtensions
+	eConverseStreamRequest_system                                                          smithy.SchemaExtensions
+	eConverseStreamRequest_inferenceConfig                                                 smithy.SchemaExtensions
+	eConverseStreamRequest_toolConfig                                                      smithy.SchemaExtensions
+	eConverseStreamRequest_guardrailConfig                                                 smithy.SchemaExtensions
+	eConverseStreamRequest_additionalModelRequestFields                                    smithy.SchemaExtensions
+	eConverseStreamRequest_promptVariables                                                 smithy.SchemaExtensions
+	eConverseStreamRequest_additionalModelResponseFieldPaths                               smithy.SchemaExtensions
+	eConverseStreamRequest_requestMetadata                                                 smithy.SchemaExtensions
+	eConverseStreamRequest_performanceConfig                                               smithy.SchemaExtensions
+	eConverseStreamRequest_serviceTier                                                     smithy.SchemaExtensions
+	eConverseStreamRequest_outputConfig                                                    smithy.SchemaExtensions
+	eConverseStreamResponse                                                                smithy.SchemaExtensions
+	eConverseStreamResponse_stream                                                         smithy.SchemaExtensions
+	eCountTokensRequest                                                                    smithy.SchemaExtensions
+	eCountTokensRequest_modelId                                                            smithy.SchemaExtensions
+	eCountTokensRequest_input                                                              smithy.SchemaExtensions
+	eCountTokensResponse                                                                   smithy.SchemaExtensions
+	eCountTokensResponse_inputTokens                                                       smithy.SchemaExtensions
+	eGetAsyncInvokeRequest                                                                 smithy.SchemaExtensions
+	eGetAsyncInvokeRequest_invocationArn                                                   smithy.SchemaExtensions
+	eGetAsyncInvokeResponse                                                                smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_invocationArn                                                  smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_modelArn                                                       smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_clientRequestToken                                             smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_status                                                         smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_failureMessage                                                 smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_submitTime                                                     smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_lastModifiedTime                                               smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_endTime                                                        smithy.SchemaExtensions
+	eGetAsyncInvokeResponse_outputDataConfig                                               smithy.SchemaExtensions
+	eInvokeGuardrailChecksRequest                                                          smithy.SchemaExtensions
+	eInvokeGuardrailChecksRequest_messages                                                 smithy.SchemaExtensions
+	eInvokeGuardrailChecksRequest_checks                                                   smithy.SchemaExtensions
+	eInvokeGuardrailChecksResponse                                                         smithy.SchemaExtensions
+	eInvokeGuardrailChecksResponse_results                                                 smithy.SchemaExtensions
+	eInvokeGuardrailChecksResponse_usage                                                   smithy.SchemaExtensions
+	eInvokeModelRequest                                                                    smithy.SchemaExtensions
+	eInvokeModelRequest_body                                                               smithy.SchemaExtensions
+	eInvokeModelRequest_contentType                                                        smithy.SchemaExtensions
+	eInvokeModelRequest_accept                                                             smithy.SchemaExtensions
+	eInvokeModelRequest_modelId                                                            smithy.SchemaExtensions
+	eInvokeModelRequest_trace                                                              smithy.SchemaExtensions
+	eInvokeModelRequest_guardrailIdentifier                                                smithy.SchemaExtensions
+	eInvokeModelRequest_guardrailVersion                                                   smithy.SchemaExtensions
+	eInvokeModelRequest_performanceConfigLatency                                           smithy.SchemaExtensions
+	eInvokeModelRequest_serviceTier                                                        smithy.SchemaExtensions
+	eInvokeModelRequest_requestMetadata                                                    smithy.SchemaExtensions
+	eInvokeModelResponse                                                                   smithy.SchemaExtensions
+	eInvokeModelResponse_body                                                              smithy.SchemaExtensions
+	eInvokeModelResponse_contentType                                                       smithy.SchemaExtensions
+	eInvokeModelResponse_performanceConfigLatency                                          smithy.SchemaExtensions
+	eInvokeModelResponse_serviceTier                                                       smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamRequest                                             smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamRequest_modelId                                     smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamRequest_body                                        smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamResponse                                            smithy.SchemaExtensions
+	eInvokeModelWithBidirectionalStreamResponse_body                                       smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest                                                  smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_body                                             smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_contentType                                      smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_accept                                           smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_modelId                                          smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_trace                                            smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_guardrailIdentifier                              smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_guardrailVersion                                 smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_performanceConfigLatency                         smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_serviceTier                                      smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamRequest_requestMetadata                                  smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamResponse                                                 smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamResponse_body                                            smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamResponse_contentType                                     smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamResponse_performanceConfigLatency                        smithy.SchemaExtensions
+	eInvokeModelWithResponseStreamResponse_serviceTier                                     smithy.SchemaExtensions
+	eListAsyncInvokesRequest                                                               smithy.SchemaExtensions
+	eListAsyncInvokesRequest_submitTimeAfter                                               smithy.SchemaExtensions
+	eListAsyncInvokesRequest_submitTimeBefore                                              smithy.SchemaExtensions
+	eListAsyncInvokesRequest_statusEquals                                                  smithy.SchemaExtensions
+	eListAsyncInvokesRequest_maxResults                                                    smithy.SchemaExtensions
+	eListAsyncInvokesRequest_nextToken                                                     smithy.SchemaExtensions
+	eListAsyncInvokesRequest_sortBy                                                        smithy.SchemaExtensions
+	eListAsyncInvokesRequest_sortOrder                                                     smithy.SchemaExtensions
+	eListAsyncInvokesResponse                                                              smithy.SchemaExtensions
+	eListAsyncInvokesResponse_nextToken                                                    smithy.SchemaExtensions
+	eListAsyncInvokesResponse_asyncInvokeSummaries                                         smithy.SchemaExtensions
+	eStartAsyncInvokeRequest                                                               smithy.SchemaExtensions
+	eStartAsyncInvokeRequest_clientRequestToken                                            smithy.SchemaExtensions
+	eStartAsyncInvokeRequest_modelId                                                       smithy.SchemaExtensions
+	eStartAsyncInvokeRequest_modelInput                                                    smithy.SchemaExtensions
+	eStartAsyncInvokeRequest_outputDataConfig                                              smithy.SchemaExtensions
+	eStartAsyncInvokeRequest_tags                                                          smithy.SchemaExtensions
+	eStartAsyncInvokeResponse                                                              smithy.SchemaExtensions
+	eStartAsyncInvokeResponse_invocationArn                                                smithy.SchemaExtensions
+)
+
+var (
+	iApplyGuardrail                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ApplyGuardrail"}
+	iConverse                                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Converse"}
+	iConverseStream                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseStream"}
+	iCountTokens                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CountTokens"}
+	iGetAsyncInvoke                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GetAsyncInvoke"}
+	iInvokeGuardrailChecks                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeGuardrailChecks"}
+	iInvokeModel                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModel"}
+	iInvokeModelWithBidirectionalStream                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithBidirectionalStream"}
+	iInvokeModelWithResponseStream                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithResponseStream"}
+	iListAsyncInvokes                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ListAsyncInvokes"}
+	iStartAsyncInvoke                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "StartAsyncInvoke"}
+	i_AmazonBedrockFrontendService                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AmazonBedrockFrontendService"}
+	iAccessDeniedException                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AccessDeniedException"}
+	i_AccountId                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AccountId"}
+	i_AdditionalModelResponseFieldPaths                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AdditionalModelResponseFieldPaths"}
+	iAnyToolChoice                                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AnyToolChoice"}
+	iAppliedGuardrailDetails                                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AppliedGuardrailDetails"}
+	i_AsyncInvokeArn                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeArn"}
+	i_AsyncInvokeIdempotencyToken                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeIdempotencyToken"}
+	i_AsyncInvokeIdentifier                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeIdentifier"}
+	i_AsyncInvokeMessage                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeMessage"}
+	iAsyncInvokeOutputDataConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeOutputDataConfig"}
+	iAsyncInvokeS3OutputDataConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeS3OutputDataConfig"}
+	iAsyncInvokeStatus                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeStatus"}
+	i_AsyncInvokeSummaries                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeSummaries"}
+	iAsyncInvokeSummary                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AsyncInvokeSummary"}
+	iAudioBlock                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AudioBlock"}
+	iAudioFormat                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AudioFormat"}
+	iAudioSource                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AudioSource"}
+	i_AutomatedReasoningRuleIdentifier                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AutomatedReasoningRuleIdentifier"}
+	iAutoToolChoice                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "AutoToolChoice"}
+	iBidirectionalInputPayloadPart                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "BidirectionalInputPayloadPart"}
+	iBidirectionalOutputPayloadPart                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "BidirectionalOutputPayloadPart"}
+	i_Body                                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Body"}
+	iCacheDetail                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CacheDetail"}
+	i_CacheDetailsList                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CacheDetailsList"}
+	iCachePointBlock                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CachePointBlock"}
+	iCachePointType                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CachePointType"}
+	iCacheTTL                                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CacheTTL"}
+	iCitation                                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Citation"}
+	iCitationGeneratedContent                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationGeneratedContent"}
+	i_CitationGeneratedContentList                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationGeneratedContentList"}
+	iCitationLocation                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationLocation"}
+	i_Citations                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Citations"}
+	iCitationsConfig                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationsConfig"}
+	iCitationsContentBlock                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationsContentBlock"}
+	iCitationsDelta                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationsDelta"}
+	iCitationSourceContent                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationSourceContent"}
+	iCitationSourceContentDelta                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationSourceContentDelta"}
+	i_CitationSourceContentList                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationSourceContentList"}
+	i_CitationSourceContentListDelta                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CitationSourceContentListDelta"}
+	iConflictException                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConflictException"}
+	iContentBlock                                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ContentBlock"}
+	iContentBlockDelta                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ContentBlockDelta"}
+	iContentBlockDeltaEvent                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ContentBlockDeltaEvent"}
+	i_ContentBlocks                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ContentBlocks"}
+	iContentBlockStart                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ContentBlockStart"}
+	iContentBlockStartEvent                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ContentBlockStartEvent"}
+	iContentBlockStopEvent                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ContentBlockStopEvent"}
+	i_ConversationalModelId                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConversationalModelId"}
+	iConversationRole                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConversationRole"}
+	iConverseMetrics                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseMetrics"}
+	iConverseOutput                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseOutput"}
+	iConverseStreamMetadataEvent                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseStreamMetadataEvent"}
+	iConverseStreamMetrics                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseStreamMetrics"}
+	iConverseStreamOutput                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseStreamOutput"}
+	iConverseStreamTrace                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseStreamTrace"}
+	iConverseTokensRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseTokensRequest"}
+	iConverseTrace                                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseTrace"}
+	iCountTokensInput                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CountTokensInput"}
+	iDocumentBlock                                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentBlock"}
+	iDocumentCharLocation                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentCharLocation"}
+	iDocumentChunkLocation                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentChunkLocation"}
+	iDocumentContentBlock                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentContentBlock"}
+	i_DocumentContentBlocks                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentContentBlocks"}
+	iDocumentFormat                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentFormat"}
+	iDocumentPageLocation                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentPageLocation"}
+	iDocumentSource                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "DocumentSource"}
+	iErrorBlock                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ErrorBlock"}
+	i_FoundationModelVersionIdentifier                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "FoundationModelVersionIdentifier"}
+	iGuardrailAction                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAction"}
+	i_GuardrailArn                                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailArn"}
+	iGuardrailAssessment                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAssessment"}
+	i_GuardrailAssessmentList                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAssessmentList"}
+	i_GuardrailAssessmentListMap                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAssessmentListMap"}
+	i_GuardrailAssessmentMap                                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAssessmentMap"}
+	i_GuardrailAutomatedReasoningDifferenceScenarioList          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningDifferenceScenarioList"}
+	iGuardrailAutomatedReasoningFinding                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningFinding"}
+	i_GuardrailAutomatedReasoningFindingList                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningFindingList"}
+	iGuardrailAutomatedReasoningImpossibleFinding                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningImpossibleFinding"}
+	iGuardrailAutomatedReasoningInputTextReference               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningInputTextReference"}
+	i_GuardrailAutomatedReasoningInputTextReferenceList          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningInputTextReferenceList"}
+	iGuardrailAutomatedReasoningInvalidFinding                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningInvalidFinding"}
+	iGuardrailAutomatedReasoningLogicWarning                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningLogicWarning"}
+	iGuardrailAutomatedReasoningLogicWarningType                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningLogicWarningType"}
+	iGuardrailAutomatedReasoningNoTranslationsFinding            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningNoTranslationsFinding"}
+	i_GuardrailAutomatedReasoningPoliciesProcessed               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningPoliciesProcessed"}
+	iGuardrailAutomatedReasoningPolicyAssessment                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningPolicyAssessment"}
+	i_GuardrailAutomatedReasoningPolicyUnitsProcessed            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningPolicyUnitsProcessed"}
+	i_GuardrailAutomatedReasoningPolicyVersionArn                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningPolicyVersionArn"}
+	iGuardrailAutomatedReasoningRule                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningRule"}
+	i_GuardrailAutomatedReasoningRuleList                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningRuleList"}
+	iGuardrailAutomatedReasoningSatisfiableFinding               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningSatisfiableFinding"}
+	iGuardrailAutomatedReasoningScenario                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningScenario"}
+	iGuardrailAutomatedReasoningStatement                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningStatement"}
+	i_GuardrailAutomatedReasoningStatementList                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningStatementList"}
+	i_GuardrailAutomatedReasoningStatementLogicContent           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningStatementLogicContent"}
+	i_GuardrailAutomatedReasoningStatementNaturalLanguageContent = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningStatementNaturalLanguageContent"}
+	iGuardrailAutomatedReasoningTooComplexFinding                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningTooComplexFinding"}
+	iGuardrailAutomatedReasoningTranslation                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningTranslation"}
+	iGuardrailAutomatedReasoningTranslationAmbiguousFinding      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningTranslationAmbiguousFinding"}
+	i_GuardrailAutomatedReasoningTranslationConfidence           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningTranslationConfidence"}
+	i_GuardrailAutomatedReasoningTranslationList                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningTranslationList"}
+	iGuardrailAutomatedReasoningTranslationOption                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningTranslationOption"}
+	i_GuardrailAutomatedReasoningTranslationOptionList           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningTranslationOptionList"}
+	iGuardrailAutomatedReasoningValidFinding                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailAutomatedReasoningValidFinding"}
+	iGuardrailChecksConfig                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksConfig"}
+	iGuardrailChecksContentBlock                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentBlock"}
+	i_GuardrailChecksContentBlockList                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentBlockList"}
+	iGuardrailChecksContentFilterCategory                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterCategory"}
+	iGuardrailChecksContentFilterCategoryConfig                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterCategoryConfig"}
+	i_GuardrailChecksContentFilterCategoryConfigList             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterCategoryConfigList"}
+	iGuardrailChecksContentFilterConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterConfig"}
+	iGuardrailChecksContentFilterResult                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterResult"}
+	iGuardrailChecksContentFilterResultEntry                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterResultEntry"}
+	i_GuardrailChecksContentFilterResultList                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterResultList"}
+	iGuardrailChecksContentFilterUsage                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksContentFilterUsage"}
+	iGuardrailChecksMessage                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksMessage"}
+	i_GuardrailChecksMessageList                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksMessageList"}
+	iGuardrailChecksPromptAttackCategory                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackCategory"}
+	iGuardrailChecksPromptAttackCategoryConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackCategoryConfig"}
+	i_GuardrailChecksPromptAttackCategoryConfigList              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackCategoryConfigList"}
+	iGuardrailChecksPromptAttackConfig                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackConfig"}
+	iGuardrailChecksPromptAttackResult                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackResult"}
+	iGuardrailChecksPromptAttackResultEntry                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackResultEntry"}
+	i_GuardrailChecksPromptAttackResultList                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackResultList"}
+	iGuardrailChecksPromptAttackUsage                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksPromptAttackUsage"}
+	iGuardrailChecksResults                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksResults"}
+	iGuardrailChecksRole                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksRole"}
+	iGuardrailChecksSensitiveInformationConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationConfig"}
+	iGuardrailChecksSensitiveInformationEntityConfig             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationEntityConfig"}
+	i_GuardrailChecksSensitiveInformationEntityConfigList        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationEntityConfigList"}
+	iGuardrailChecksSensitiveInformationEntityType               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationEntityType"}
+	iGuardrailChecksSensitiveInformationResult                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationResult"}
+	iGuardrailChecksSensitiveInformationResultEntry              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationResultEntry"}
+	i_GuardrailChecksSensitiveInformationResultList              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationResultList"}
+	iGuardrailChecksSensitiveInformationUsage                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksSensitiveInformationUsage"}
+	i_GuardrailChecksTextContent                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksTextContent"}
+	iGuardrailChecksUsageResults                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailChecksUsageResults"}
+	iGuardrailConfiguration                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConfiguration"}
+	iGuardrailContentBlock                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentBlock"}
+	i_GuardrailContentBlockList                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentBlockList"}
+	iGuardrailContentFilter                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentFilter"}
+	iGuardrailContentFilterConfidence                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentFilterConfidence"}
+	i_GuardrailContentFilterList                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentFilterList"}
+	iGuardrailContentFilterStrength                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentFilterStrength"}
+	iGuardrailContentFilterType                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentFilterType"}
+	iGuardrailContentPolicyAction                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentPolicyAction"}
+	iGuardrailContentPolicyAssessment                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentPolicyAssessment"}
+	i_GuardrailContentPolicyImageUnitsProcessed                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentPolicyImageUnitsProcessed"}
+	i_GuardrailContentPolicyUnitsProcessed                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentPolicyUnitsProcessed"}
+	iGuardrailContentQualifier                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentQualifier"}
+	i_GuardrailContentQualifierList                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentQualifierList"}
+	iGuardrailContentSource                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContentSource"}
+	iGuardrailContextualGroundingFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContextualGroundingFilter"}
+	i_GuardrailContextualGroundingFilters                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContextualGroundingFilters"}
+	iGuardrailContextualGroundingFilterType                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContextualGroundingFilterType"}
+	iGuardrailContextualGroundingPolicyAction                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContextualGroundingPolicyAction"}
+	iGuardrailContextualGroundingPolicyAssessment                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContextualGroundingPolicyAssessment"}
+	i_GuardrailContextualGroundingPolicyUnitsProcessed           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailContextualGroundingPolicyUnitsProcessed"}
+	iGuardrailConverseContentBlock                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConverseContentBlock"}
+	iGuardrailConverseContentQualifier                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConverseContentQualifier"}
+	i_GuardrailConverseContentQualifierList                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConverseContentQualifierList"}
+	iGuardrailConverseImageBlock                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConverseImageBlock"}
+	iGuardrailConverseImageFormat                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConverseImageFormat"}
+	iGuardrailConverseImageSource                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConverseImageSource"}
+	iGuardrailConverseTextBlock                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailConverseTextBlock"}
+	iGuardrailCoverage                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailCoverage"}
+	iGuardrailCustomWord                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailCustomWord"}
+	i_GuardrailCustomWordList                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailCustomWordList"}
+	i_GuardrailId                                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailId"}
+	i_GuardrailIdentifier                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailIdentifier"}
+	iGuardrailImageBlock                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailImageBlock"}
+	iGuardrailImageCoverage                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailImageCoverage"}
+	iGuardrailImageFormat                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailImageFormat"}
+	iGuardrailImageSource                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailImageSource"}
+	iGuardrailInvocationMetrics                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailInvocationMetrics"}
+	iGuardrailManagedWord                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailManagedWord"}
+	i_GuardrailManagedWordList                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailManagedWordList"}
+	iGuardrailManagedWordType                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailManagedWordType"}
+	iGuardrailOrigin                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailOrigin"}
+	i_GuardrailOriginList                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailOriginList"}
+	iGuardrailOutputContent                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailOutputContent"}
+	i_GuardrailOutputContentList                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailOutputContentList"}
+	iGuardrailOutputScope                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailOutputScope"}
+	i_GuardrailOutputText                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailOutputText"}
+	iGuardrailOwnership                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailOwnership"}
+	iGuardrailPiiEntityFilter                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailPiiEntityFilter"}
+	i_GuardrailPiiEntityFilterList                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailPiiEntityFilterList"}
+	iGuardrailPiiEntityType                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailPiiEntityType"}
+	i_GuardrailProcessingLatency                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailProcessingLatency"}
+	iGuardrailRegexFilter                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailRegexFilter"}
+	i_GuardrailRegexFilterList                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailRegexFilterList"}
+	iGuardrailSensitiveInformationPolicyAction                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailSensitiveInformationPolicyAction"}
+	iGuardrailSensitiveInformationPolicyAssessment               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailSensitiveInformationPolicyAssessment"}
+	i_GuardrailSensitiveInformationPolicyFreeUnitsProcessed      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailSensitiveInformationPolicyFreeUnitsProcessed"}
+	i_GuardrailSensitiveInformationPolicyUnitsProcessed          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailSensitiveInformationPolicyUnitsProcessed"}
+	iGuardrailStreamConfiguration                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailStreamConfiguration"}
+	iGuardrailStreamProcessingMode                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailStreamProcessingMode"}
+	iGuardrailTextBlock                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTextBlock"}
+	iGuardrailTextCharactersCoverage                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTextCharactersCoverage"}
+	iGuardrailTopic                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTopic"}
+	i_GuardrailTopicList                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTopicList"}
+	iGuardrailTopicPolicyAction                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTopicPolicyAction"}
+	iGuardrailTopicPolicyAssessment                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTopicPolicyAssessment"}
+	i_GuardrailTopicPolicyUnitsProcessed                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTopicPolicyUnitsProcessed"}
+	iGuardrailTopicType                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTopicType"}
+	iGuardrailTrace                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTrace"}
+	iGuardrailTraceAssessment                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailTraceAssessment"}
+	iGuardrailUsage                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailUsage"}
+	i_GuardrailVersion                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailVersion"}
+	iGuardrailWordPolicyAction                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailWordPolicyAction"}
+	iGuardrailWordPolicyAssessment                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailWordPolicyAssessment"}
+	i_GuardrailWordPolicyUnitsProcessed                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GuardrailWordPolicyUnitsProcessed"}
+	iImageBlock                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ImageBlock"}
+	iImageBlockDelta                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ImageBlockDelta"}
+	iImageBlockStart                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ImageBlockStart"}
+	iImageFormat                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ImageFormat"}
+	i_ImagesGuarded                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ImagesGuarded"}
+	iImageSource                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ImageSource"}
+	i_ImagesTotal                                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ImagesTotal"}
+	iInferenceConfiguration                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InferenceConfiguration"}
+	iInternalServerException                                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InternalServerException"}
+	i_InvocationArn                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvocationArn"}
+	i_InvokedModelId                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokedModelId"}
+	i_InvokeModelIdentifier                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelIdentifier"}
+	iInvokeModelTokensRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelTokensRequest"}
+	iInvokeModelWithBidirectionalStreamInput                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithBidirectionalStreamInput"}
+	iInvokeModelWithBidirectionalStreamOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithBidirectionalStreamOutput"}
+	iJsonSchemaDefinition                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "JsonSchemaDefinition"}
+	i_KmsKeyId                                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "KmsKeyId"}
+	i_MaxResults                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "MaxResults"}
+	iMessage                                                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Message"}
+	i_Messages                                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Messages"}
+	iMessageStartEvent                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "MessageStartEvent"}
+	iMessageStopEvent                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "MessageStopEvent"}
+	i_MimeType                                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "MimeType"}
+	iModelErrorException                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ModelErrorException"}
+	i_ModelInputPayload                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ModelInputPayload"}
+	iModelNotReadyException                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ModelNotReadyException"}
+	i_ModelOutputs                                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ModelOutputs"}
+	iModelStreamErrorException                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ModelStreamErrorException"}
+	iModelTimeoutException                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ModelTimeoutException"}
+	i_NonBlankString                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "NonBlankString"}
+	i_NonEmptyString                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "NonEmptyString"}
+	i_NonEmptyStringList                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "NonEmptyStringList"}
+	i_NonNegativeInteger                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "NonNegativeInteger"}
+	iOutputConfig                                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "OutputConfig"}
+	iOutputFormat                                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "OutputFormat"}
+	iOutputFormatStructure                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "OutputFormatStructure"}
+	iOutputFormatType                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "OutputFormatType"}
+	i_PaginationToken                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PaginationToken"}
+	i_PartBody                                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PartBody"}
+	iPayloadPart                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PayloadPart"}
+	iPerformanceConfigLatency                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PerformanceConfigLatency"}
+	iPerformanceConfiguration                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PerformanceConfiguration"}
+	iPromptRouterTrace                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PromptRouterTrace"}
+	i_PromptVariableMap                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PromptVariableMap"}
+	iPromptVariableValues                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "PromptVariableValues"}
+	iReasoningContentBlock                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ReasoningContentBlock"}
+	iReasoningContentBlockDelta                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ReasoningContentBlockDelta"}
+	iReasoningTextBlock                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ReasoningTextBlock"}
+	i_RequestMetadata                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "RequestMetadata"}
+	i_RequestMetadataJson                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "RequestMetadataJson"}
+	iResourceNotFoundException                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ResourceNotFoundException"}
+	iResponseStream                                              = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ResponseStream"}
+	iS3Location                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "S3Location"}
+	i_S3Uri                                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "S3Uri"}
+	iSearchResultBlock                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SearchResultBlock"}
+	iSearchResultContentBlock                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SearchResultContentBlock"}
+	i_SearchResultContentBlocks                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SearchResultContentBlocks"}
+	iSearchResultLocation                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SearchResultLocation"}
+	iServiceQuotaExceededException                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ServiceQuotaExceededException"}
+	iServiceTier                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ServiceTier"}
+	iServiceTierType                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ServiceTierType"}
+	iServiceUnavailableException                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ServiceUnavailableException"}
+	iSortAsyncInvocationBy                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SortAsyncInvocationBy"}
+	iSortOrder                                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SortOrder"}
+	iSpecificToolChoice                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SpecificToolChoice"}
+	i_StatusCode                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "StatusCode"}
+	iStopReason                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "StopReason"}
+	iSystemContentBlock                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SystemContentBlock"}
+	i_SystemContentBlocks                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SystemContentBlocks"}
+	iSystemTool                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "SystemTool"}
+	iTag                                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Tag"}
+	i_TagKey                                                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "TagKey"}
+	i_TagList                                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "TagList"}
+	i_TagValue                                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "TagValue"}
+	i_TextCharactersGuarded                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "TextCharactersGuarded"}
+	i_TextCharactersTotal                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "TextCharactersTotal"}
+	iThrottlingException                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ThrottlingException"}
+	i_Timestamp                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Timestamp"}
+	iTokenUsage                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "TokenUsage"}
+	iTool                                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Tool"}
+	iToolAdditionBlock                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolAdditionBlock"}
+	iToolChoice                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolChoice"}
+	iToolConfiguration                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolConfiguration"}
+	iToolInputSchema                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolInputSchema"}
+	i_ToolName                                                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolName"}
+	iToolReference                                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolReference"}
+	iToolRemovalBlock                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolRemovalBlock"}
+	iToolResultBlock                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolResultBlock"}
+	iToolResultBlockDelta                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolResultBlockDelta"}
+	i_ToolResultBlocksDelta                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolResultBlocksDelta"}
+	iToolResultBlockStart                                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolResultBlockStart"}
+	iToolResultContentBlock                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolResultContentBlock"}
+	i_ToolResultContentBlocks                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolResultContentBlocks"}
+	iToolResultStatus                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolResultStatus"}
+	i_Tools                                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Tools"}
+	iToolSpecification                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolSpecification"}
+	iToolUseBlock                                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolUseBlock"}
+	iToolUseBlockDelta                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolUseBlockDelta"}
+	iToolUseBlockStart                                           = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolUseBlockStart"}
+	i_ToolUseId                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolUseId"}
+	iToolUseType                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ToolUseType"}
+	iTrace                                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "Trace"}
+	iValidationException                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ValidationException"}
+	iVideoBlock                                                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "VideoBlock"}
+	iVideoFormat                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "VideoFormat"}
+	iVideoSource                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "VideoSource"}
+	iWebLocation                                                 = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "WebLocation"}
+	iApplyGuardrailRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ApplyGuardrailRequest"}
+	iApplyGuardrailResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ApplyGuardrailResponse"}
+	iConverseRequest                                             = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseRequest"}
+	iConverseResponse                                            = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseResponse"}
+	iConverseStreamRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseStreamRequest"}
+	iConverseStreamResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ConverseStreamResponse"}
+	iCountTokensRequest                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CountTokensRequest"}
+	iCountTokensResponse                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "CountTokensResponse"}
+	iGetAsyncInvokeRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GetAsyncInvokeRequest"}
+	iGetAsyncInvokeResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "GetAsyncInvokeResponse"}
+	iInvokeGuardrailChecksRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeGuardrailChecksRequest"}
+	iInvokeGuardrailChecksResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeGuardrailChecksResponse"}
+	iInvokeModelRequest                                          = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelRequest"}
+	iInvokeModelResponse                                         = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelResponse"}
+	iInvokeModelWithBidirectionalStreamRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithBidirectionalStreamRequest"}
+	iInvokeModelWithBidirectionalStreamResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithBidirectionalStreamResponse"}
+	iInvokeModelWithResponseStreamRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithResponseStreamRequest"}
+	iInvokeModelWithResponseStreamResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "InvokeModelWithResponseStreamResponse"}
+	iListAsyncInvokesRequest                                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ListAsyncInvokesRequest"}
+	iListAsyncInvokesResponse                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "ListAsyncInvokesResponse"}
+	iStartAsyncInvokeRequest                                     = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "StartAsyncInvokeRequest"}
+	iStartAsyncInvokeResponse                                    = smithy.ShapeName{Namespace: "com.amazonaws.bedrockruntime", Name: "StartAsyncInvokeResponse"}
+	pString                                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBlob                                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Blob"}
+	pInteger                                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pLong                                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pDocument                                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Document"}
+	pDouble                                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Double"}
+	pFloat                                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Float"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply",
-	Code: 200})
-
-var Converse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Converse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/model/{modelId}/converse",
-	Code: 200})
-
-var ConverseStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/model/{modelId}/converse-stream",
-	Code: 200})
-
-var CountTokens = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CountTokens",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/model/{modelId}/count-tokens",
-	Code: 200})
-
-var GetAsyncInvoke = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GetAsyncInvoke",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/async-invoke/{invocationArn}",
-	Code: 200})
-
-var InvokeGuardrailChecks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeGuardrailChecks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/guardrail-checks/invoke",
-	Code: 200})
-
-var InvokeModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/model/{modelId}/invoke",
-	Code: 200})
-
-var InvokeModelWithBidirectionalStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithBidirectionalStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/model/{modelId}/invoke-with-bidirectional-stream",
-	Code: 200})
-
-var InvokeModelWithResponseStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithResponseStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/model/{modelId}/invoke-with-response-stream",
-	Code: 200})
-
-var ListAsyncInvokes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ListAsyncInvokes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/async-invoke",
-	Code: 200})
-
-var StartAsyncInvoke = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "StartAsyncInvoke",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/async-invoke",
-	Code: 200})
-
-var _AmazonBedrockFrontendService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AmazonBedrockFrontendService",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonBedrockFrontendService = smithy.NewServiceSchema(_AmazonBedrockFrontendService, "2023-09-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AdditionalModelResponseFieldPaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AdditionalModelResponseFieldPaths",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalModelResponseFieldPaths_member *smithy.Schema
-
-var AnyToolChoice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AnyToolChoice",
-}, smithy.ShapeTypeStructure, 0)
-
-var AppliedGuardrailDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AppliedGuardrailDetails",
-}, smithy.ShapeTypeStructure, 5)
-var AppliedGuardrailDetails_guardrailId *smithy.Schema
-
-var AppliedGuardrailDetails_guardrailVersion *smithy.Schema
-
-var AppliedGuardrailDetails_guardrailArn *smithy.Schema
-
-var AppliedGuardrailDetails_guardrailOrigin *smithy.Schema
-
-var AppliedGuardrailDetails_guardrailOwnership *smithy.Schema
-
-var _AsyncInvokeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AsyncInvokeIdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeIdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var _AsyncInvokeIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AsyncInvokeMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AsyncInvokeOutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeOutputDataConfig",
-}, smithy.ShapeTypeUnion, 1)
-var AsyncInvokeOutputDataConfig_s3OutputDataConfig *smithy.Schema
-
-var AsyncInvokeS3OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeS3OutputDataConfig",
-}, smithy.ShapeTypeStructure, 3)
-var AsyncInvokeS3OutputDataConfig_s3Uri *smithy.Schema
-
-var AsyncInvokeS3OutputDataConfig_kmsKeyId *smithy.Schema
-
-var AsyncInvokeS3OutputDataConfig_bucketOwner *smithy.Schema
-
-var AsyncInvokeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AsyncInvokeStatus_IN_PROGRESS *smithy.Schema
-
-var AsyncInvokeStatus_COMPLETED *smithy.Schema
-
-var AsyncInvokeStatus_FAILED *smithy.Schema
-
-var _AsyncInvokeSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeSummaries",
-}, smithy.ShapeTypeList, 1)
-var _AsyncInvokeSummaries_member *smithy.Schema
-
-var AsyncInvokeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AsyncInvokeSummary",
-}, smithy.ShapeTypeStructure, 9)
-var AsyncInvokeSummary_invocationArn *smithy.Schema
-
-var AsyncInvokeSummary_modelArn *smithy.Schema
-
-var AsyncInvokeSummary_clientRequestToken *smithy.Schema
-
-var AsyncInvokeSummary_status *smithy.Schema
-
-var AsyncInvokeSummary_failureMessage *smithy.Schema
-
-var AsyncInvokeSummary_submitTime *smithy.Schema
-
-var AsyncInvokeSummary_lastModifiedTime *smithy.Schema
-
-var AsyncInvokeSummary_endTime *smithy.Schema
-
-var AsyncInvokeSummary_outputDataConfig *smithy.Schema
-
-var AudioBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AudioBlock",
-}, smithy.ShapeTypeStructure, 3)
-var AudioBlock_format *smithy.Schema
-
-var AudioBlock_source *smithy.Schema
-
-var AudioBlock_error *smithy.Schema
-
-var AudioFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AudioFormat",
-}, smithy.ShapeTypeEnum, 15)
-var AudioFormat_MP3 *smithy.Schema
-
-var AudioFormat_OPUS *smithy.Schema
-
-var AudioFormat_WAV *smithy.Schema
-
-var AudioFormat_AAC *smithy.Schema
-
-var AudioFormat_FLAC *smithy.Schema
-
-var AudioFormat_MP4 *smithy.Schema
-
-var AudioFormat_OGG *smithy.Schema
-
-var AudioFormat_MKV *smithy.Schema
-
-var AudioFormat_MKA *smithy.Schema
-
-var AudioFormat_X_AAC *smithy.Schema
-
-var AudioFormat_M4A *smithy.Schema
-
-var AudioFormat_MPEG *smithy.Schema
-
-var AudioFormat_MPGA *smithy.Schema
-
-var AudioFormat_PCM *smithy.Schema
-
-var AudioFormat_WEBM *smithy.Schema
-
-var AudioSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AudioSource",
-}, smithy.ShapeTypeUnion, 2, &smithytraits.Sensitive{})
-var AudioSource_bytes *smithy.Schema
-
-var AudioSource_s3Location *smithy.Schema
-
-var _AutomatedReasoningRuleIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AutomatedReasoningRuleIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var AutoToolChoice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "AutoToolChoice",
-}, smithy.ShapeTypeStructure, 0)
-
-var BidirectionalInputPayloadPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "BidirectionalInputPayloadPart",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var BidirectionalInputPayloadPart_bytes *smithy.Schema
-
-var BidirectionalOutputPayloadPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "BidirectionalOutputPayloadPart",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var BidirectionalOutputPayloadPart_bytes *smithy.Schema
-
-var _Body = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Body",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var CacheDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CacheDetail",
-}, smithy.ShapeTypeStructure, 2)
-var CacheDetail_ttl *smithy.Schema
-
-var CacheDetail_inputTokens *smithy.Schema
-
-var _CacheDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CacheDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _CacheDetailsList_member *smithy.Schema
-
-var CachePointBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CachePointBlock",
-}, smithy.ShapeTypeStructure, 2)
-var CachePointBlock_type *smithy.Schema
-
-var CachePointBlock_ttl *smithy.Schema
-
-var CachePointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CachePointType",
-}, smithy.ShapeTypeEnum, 1)
-var CachePointType_DEFAULT *smithy.Schema
-
-var CacheTTL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CacheTTL",
-}, smithy.ShapeTypeEnum, 2)
-var CacheTTL_FIVE_MINUTES *smithy.Schema
-
-var CacheTTL_ONE_HOUR *smithy.Schema
-
-var Citation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Citation",
-}, smithy.ShapeTypeStructure, 4)
-var Citation_title *smithy.Schema
-
-var Citation_source *smithy.Schema
-
-var Citation_sourceContent *smithy.Schema
-
-var Citation_location *smithy.Schema
-
-var CitationGeneratedContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationGeneratedContent",
-}, smithy.ShapeTypeUnion, 1)
-var CitationGeneratedContent_text *smithy.Schema
-
-var _CitationGeneratedContentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationGeneratedContentList",
-}, smithy.ShapeTypeList, 1)
-var _CitationGeneratedContentList_member *smithy.Schema
-
-var CitationLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationLocation",
-}, smithy.ShapeTypeUnion, 5)
-var CitationLocation_web *smithy.Schema
-
-var CitationLocation_documentChar *smithy.Schema
-
-var CitationLocation_documentPage *smithy.Schema
-
-var CitationLocation_documentChunk *smithy.Schema
-
-var CitationLocation_searchResultLocation *smithy.Schema
-
-var _Citations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Citations",
-}, smithy.ShapeTypeList, 1)
-var _Citations_member *smithy.Schema
-
-var CitationsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationsConfig",
-}, smithy.ShapeTypeStructure, 1)
-var CitationsConfig_enabled *smithy.Schema
-
-var CitationsContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationsContentBlock",
-}, smithy.ShapeTypeStructure, 2)
-var CitationsContentBlock_content *smithy.Schema
-
-var CitationsContentBlock_citations *smithy.Schema
-
-var CitationsDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationsDelta",
-}, smithy.ShapeTypeStructure, 4)
-var CitationsDelta_title *smithy.Schema
-
-var CitationsDelta_source *smithy.Schema
-
-var CitationsDelta_sourceContent *smithy.Schema
-
-var CitationsDelta_location *smithy.Schema
-
-var CitationSourceContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationSourceContent",
-}, smithy.ShapeTypeUnion, 1)
-var CitationSourceContent_text *smithy.Schema
-
-var CitationSourceContentDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationSourceContentDelta",
-}, smithy.ShapeTypeStructure, 1)
-var CitationSourceContentDelta_text *smithy.Schema
-
-var _CitationSourceContentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationSourceContentList",
-}, smithy.ShapeTypeList, 1)
-var _CitationSourceContentList_member *smithy.Schema
-
-var _CitationSourceContentListDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CitationSourceContentListDelta",
-}, smithy.ShapeTypeList, 1)
-var _CitationSourceContentListDelta_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConflictException_message *smithy.Schema
-
-var ContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ContentBlock",
-}, smithy.ShapeTypeUnion, 14)
-var ContentBlock_text *smithy.Schema
-
-var ContentBlock_image *smithy.Schema
-
-var ContentBlock_document *smithy.Schema
-
-var ContentBlock_video *smithy.Schema
-
-var ContentBlock_audio *smithy.Schema
-
-var ContentBlock_toolUse *smithy.Schema
-
-var ContentBlock_toolResult *smithy.Schema
-
-var ContentBlock_guardContent *smithy.Schema
-
-var ContentBlock_cachePoint *smithy.Schema
-
-var ContentBlock_reasoningContent *smithy.Schema
-
-var ContentBlock_citationsContent *smithy.Schema
-
-var ContentBlock_searchResult *smithy.Schema
-
-var ContentBlock_toolAddition *smithy.Schema
-
-var ContentBlock_toolRemoval *smithy.Schema
-
-var ContentBlockDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ContentBlockDelta",
-}, smithy.ShapeTypeUnion, 6)
-var ContentBlockDelta_text *smithy.Schema
-
-var ContentBlockDelta_toolUse *smithy.Schema
-
-var ContentBlockDelta_toolResult *smithy.Schema
-
-var ContentBlockDelta_reasoningContent *smithy.Schema
-
-var ContentBlockDelta_citation *smithy.Schema
-
-var ContentBlockDelta_image *smithy.Schema
-
-var ContentBlockDeltaEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ContentBlockDeltaEvent",
-}, smithy.ShapeTypeStructure, 2)
-var ContentBlockDeltaEvent_delta *smithy.Schema
-
-var ContentBlockDeltaEvent_contentBlockIndex *smithy.Schema
-
-var _ContentBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ContentBlocks",
-}, smithy.ShapeTypeList, 1)
-var _ContentBlocks_member *smithy.Schema
-
-var ContentBlockStart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ContentBlockStart",
-}, smithy.ShapeTypeUnion, 3)
-var ContentBlockStart_toolUse *smithy.Schema
-
-var ContentBlockStart_toolResult *smithy.Schema
-
-var ContentBlockStart_image *smithy.Schema
-
-var ContentBlockStartEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ContentBlockStartEvent",
-}, smithy.ShapeTypeStructure, 2)
-var ContentBlockStartEvent_start *smithy.Schema
-
-var ContentBlockStartEvent_contentBlockIndex *smithy.Schema
-
-var ContentBlockStopEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ContentBlockStopEvent",
-}, smithy.ShapeTypeStructure, 1)
-var ContentBlockStopEvent_contentBlockIndex *smithy.Schema
-
-var _ConversationalModelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConversationalModelId",
-}, smithy.ShapeTypeString, 0)
-
-var ConversationRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConversationRole",
-}, smithy.ShapeTypeEnum, 3)
-var ConversationRole_USER *smithy.Schema
-
-var ConversationRole_ASSISTANT *smithy.Schema
-
-var ConversationRole_SYSTEM *smithy.Schema
-
-var ConverseMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseMetrics",
-}, smithy.ShapeTypeStructure, 1)
-var ConverseMetrics_latencyMs *smithy.Schema
-
-var ConverseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseOutput",
-}, smithy.ShapeTypeUnion, 1)
-var ConverseOutput_message *smithy.Schema
-
-var ConverseStreamMetadataEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseStreamMetadataEvent",
-}, smithy.ShapeTypeStructure, 5)
-var ConverseStreamMetadataEvent_usage *smithy.Schema
-
-var ConverseStreamMetadataEvent_metrics *smithy.Schema
-
-var ConverseStreamMetadataEvent_trace *smithy.Schema
-
-var ConverseStreamMetadataEvent_performanceConfig *smithy.Schema
-
-var ConverseStreamMetadataEvent_serviceTier *smithy.Schema
-
-var ConverseStreamMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseStreamMetrics",
-}, smithy.ShapeTypeStructure, 1)
-var ConverseStreamMetrics_latencyMs *smithy.Schema
-
-var ConverseStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseStreamOutput",
-}, smithy.ShapeTypeUnion, 11, &smithytraits.Streaming{})
-var ConverseStreamOutput_messageStart *smithy.Schema
-
-var ConverseStreamOutput_contentBlockStart *smithy.Schema
-
-var ConverseStreamOutput_contentBlockDelta *smithy.Schema
-
-var ConverseStreamOutput_contentBlockStop *smithy.Schema
-
-var ConverseStreamOutput_messageStop *smithy.Schema
-
-var ConverseStreamOutput_metadata *smithy.Schema
-
-var ConverseStreamOutput_internalServerException *smithy.Schema
-
-var ConverseStreamOutput_modelStreamErrorException *smithy.Schema
-
-var ConverseStreamOutput_validationException *smithy.Schema
-
-var ConverseStreamOutput_throttlingException *smithy.Schema
-
-var ConverseStreamOutput_serviceUnavailableException *smithy.Schema
-
-var ConverseStreamTrace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseStreamTrace",
-}, smithy.ShapeTypeStructure, 2)
-var ConverseStreamTrace_guardrail *smithy.Schema
-
-var ConverseStreamTrace_promptRouter *smithy.Schema
-
-var ConverseTokensRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseTokensRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ConverseTokensRequest_messages *smithy.Schema
-
-var ConverseTokensRequest_system *smithy.Schema
-
-var ConverseTokensRequest_toolConfig *smithy.Schema
-
-var ConverseTokensRequest_additionalModelRequestFields *smithy.Schema
-
-var ConverseTrace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseTrace",
-}, smithy.ShapeTypeStructure, 2)
-var ConverseTrace_guardrail *smithy.Schema
-
-var ConverseTrace_promptRouter *smithy.Schema
-
-var CountTokensInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CountTokensInput",
-}, smithy.ShapeTypeUnion, 2)
-var CountTokensInput_invokeModel *smithy.Schema
-
-var CountTokensInput_converse *smithy.Schema
-
-var DocumentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentBlock",
-}, smithy.ShapeTypeStructure, 5)
-var DocumentBlock_format *smithy.Schema
-
-var DocumentBlock_name *smithy.Schema
-
-var DocumentBlock_source *smithy.Schema
-
-var DocumentBlock_context *smithy.Schema
-
-var DocumentBlock_citations *smithy.Schema
-
-var DocumentCharLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentCharLocation",
-}, smithy.ShapeTypeStructure, 3)
-var DocumentCharLocation_documentIndex *smithy.Schema
-
-var DocumentCharLocation_start *smithy.Schema
-
-var DocumentCharLocation_end *smithy.Schema
-
-var DocumentChunkLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentChunkLocation",
-}, smithy.ShapeTypeStructure, 3)
-var DocumentChunkLocation_documentIndex *smithy.Schema
-
-var DocumentChunkLocation_start *smithy.Schema
-
-var DocumentChunkLocation_end *smithy.Schema
-
-var DocumentContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentContentBlock",
-}, smithy.ShapeTypeUnion, 1)
-var DocumentContentBlock_text *smithy.Schema
-
-var _DocumentContentBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentContentBlocks",
-}, smithy.ShapeTypeList, 1)
-var _DocumentContentBlocks_member *smithy.Schema
-
-var DocumentFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentFormat",
-}, smithy.ShapeTypeEnum, 9)
-var DocumentFormat_PDF *smithy.Schema
-
-var DocumentFormat_CSV *smithy.Schema
-
-var DocumentFormat_DOC *smithy.Schema
-
-var DocumentFormat_DOCX *smithy.Schema
-
-var DocumentFormat_XLS *smithy.Schema
-
-var DocumentFormat_XLSX *smithy.Schema
-
-var DocumentFormat_HTML *smithy.Schema
-
-var DocumentFormat_TXT *smithy.Schema
-
-var DocumentFormat_MD *smithy.Schema
-
-var DocumentPageLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentPageLocation",
-}, smithy.ShapeTypeStructure, 3)
-var DocumentPageLocation_documentIndex *smithy.Schema
-
-var DocumentPageLocation_start *smithy.Schema
-
-var DocumentPageLocation_end *smithy.Schema
-
-var DocumentSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "DocumentSource",
-}, smithy.ShapeTypeUnion, 4)
-var DocumentSource_bytes *smithy.Schema
-
-var DocumentSource_s3Location *smithy.Schema
-
-var DocumentSource_text *smithy.Schema
-
-var DocumentSource_content *smithy.Schema
-
-var ErrorBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ErrorBlock",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var ErrorBlock_message *smithy.Schema
-
-var _FoundationModelVersionIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "FoundationModelVersionIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var GuardrailAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAction",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailAction_NONE *smithy.Schema
-
-var GuardrailAction_GUARDRAIL_INTERVENED *smithy.Schema
-
-var _GuardrailArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailArn",
-}, smithy.ShapeTypeString, 0)
-
-var GuardrailAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAssessment",
-}, smithy.ShapeTypeStructure, 8)
-var GuardrailAssessment_topicPolicy *smithy.Schema
-
-var GuardrailAssessment_contentPolicy *smithy.Schema
-
-var GuardrailAssessment_wordPolicy *smithy.Schema
-
-var GuardrailAssessment_sensitiveInformationPolicy *smithy.Schema
-
-var GuardrailAssessment_contextualGroundingPolicy *smithy.Schema
-
-var GuardrailAssessment_automatedReasoningPolicy *smithy.Schema
-
-var GuardrailAssessment_invocationMetrics *smithy.Schema
-
-var GuardrailAssessment_appliedGuardrailDetails *smithy.Schema
-
-var _GuardrailAssessmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAssessmentList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAssessmentList_member *smithy.Schema
-
-var _GuardrailAssessmentListMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAssessmentListMap",
-}, smithy.ShapeTypeMap, 2)
-var _GuardrailAssessmentListMap_key *smithy.Schema
-
-var _GuardrailAssessmentListMap_value *smithy.Schema
-
-var _GuardrailAssessmentMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAssessmentMap",
-}, smithy.ShapeTypeMap, 2)
-var _GuardrailAssessmentMap_key *smithy.Schema
-
-var _GuardrailAssessmentMap_value *smithy.Schema
-
-var _GuardrailAutomatedReasoningDifferenceScenarioList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningDifferenceScenarioList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAutomatedReasoningDifferenceScenarioList_member *smithy.Schema
-
-var GuardrailAutomatedReasoningFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningFinding",
-}, smithy.ShapeTypeUnion, 7)
-var GuardrailAutomatedReasoningFinding_valid *smithy.Schema
-
-var GuardrailAutomatedReasoningFinding_invalid *smithy.Schema
-
-var GuardrailAutomatedReasoningFinding_satisfiable *smithy.Schema
-
-var GuardrailAutomatedReasoningFinding_impossible *smithy.Schema
-
-var GuardrailAutomatedReasoningFinding_translationAmbiguous *smithy.Schema
-
-var GuardrailAutomatedReasoningFinding_tooComplex *smithy.Schema
-
-var GuardrailAutomatedReasoningFinding_noTranslations *smithy.Schema
-
-var _GuardrailAutomatedReasoningFindingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningFindingList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAutomatedReasoningFindingList_member *smithy.Schema
-
-var GuardrailAutomatedReasoningImpossibleFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningImpossibleFinding",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailAutomatedReasoningImpossibleFinding_translation *smithy.Schema
-
-var GuardrailAutomatedReasoningImpossibleFinding_contradictingRules *smithy.Schema
-
-var GuardrailAutomatedReasoningImpossibleFinding_logicWarning *smithy.Schema
-
-var GuardrailAutomatedReasoningInputTextReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningInputTextReference",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailAutomatedReasoningInputTextReference_text *smithy.Schema
-
-var _GuardrailAutomatedReasoningInputTextReferenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningInputTextReferenceList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAutomatedReasoningInputTextReferenceList_member *smithy.Schema
-
-var GuardrailAutomatedReasoningInvalidFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningInvalidFinding",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailAutomatedReasoningInvalidFinding_translation *smithy.Schema
-
-var GuardrailAutomatedReasoningInvalidFinding_contradictingRules *smithy.Schema
-
-var GuardrailAutomatedReasoningInvalidFinding_logicWarning *smithy.Schema
-
-var GuardrailAutomatedReasoningLogicWarning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningLogicWarning",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailAutomatedReasoningLogicWarning_type *smithy.Schema
-
-var GuardrailAutomatedReasoningLogicWarning_premises *smithy.Schema
-
-var GuardrailAutomatedReasoningLogicWarning_claims *smithy.Schema
-
-var GuardrailAutomatedReasoningLogicWarningType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningLogicWarningType",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE *smithy.Schema
-
-var GuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE *smithy.Schema
-
-var GuardrailAutomatedReasoningNoTranslationsFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningNoTranslationsFinding",
-}, smithy.ShapeTypeStructure, 0)
-
-var _GuardrailAutomatedReasoningPoliciesProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningPoliciesProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var GuardrailAutomatedReasoningPolicyAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningPolicyAssessment",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailAutomatedReasoningPolicyAssessment_findings *smithy.Schema
-
-var _GuardrailAutomatedReasoningPolicyUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningPolicyUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var _GuardrailAutomatedReasoningPolicyVersionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningPolicyVersionArn",
-}, smithy.ShapeTypeString, 0)
-
-var GuardrailAutomatedReasoningRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningRule",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailAutomatedReasoningRule_identifier *smithy.Schema
-
-var GuardrailAutomatedReasoningRule_policyVersionArn *smithy.Schema
-
-var _GuardrailAutomatedReasoningRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningRuleList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAutomatedReasoningRuleList_member *smithy.Schema
-
-var GuardrailAutomatedReasoningSatisfiableFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningSatisfiableFinding",
-}, smithy.ShapeTypeStructure, 4)
-var GuardrailAutomatedReasoningSatisfiableFinding_translation *smithy.Schema
-
-var GuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario *smithy.Schema
-
-var GuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario *smithy.Schema
-
-var GuardrailAutomatedReasoningSatisfiableFinding_logicWarning *smithy.Schema
-
-var GuardrailAutomatedReasoningScenario = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningScenario",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailAutomatedReasoningScenario_statements *smithy.Schema
-
-var GuardrailAutomatedReasoningStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningStatement",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailAutomatedReasoningStatement_logic *smithy.Schema
-
-var GuardrailAutomatedReasoningStatement_naturalLanguage *smithy.Schema
-
-var _GuardrailAutomatedReasoningStatementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningStatementList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAutomatedReasoningStatementList_member *smithy.Schema
-
-var _GuardrailAutomatedReasoningStatementLogicContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningStatementLogicContent",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _GuardrailAutomatedReasoningStatementNaturalLanguageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningStatementNaturalLanguageContent",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var GuardrailAutomatedReasoningTooComplexFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningTooComplexFinding",
-}, smithy.ShapeTypeStructure, 0)
-
-var GuardrailAutomatedReasoningTranslation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningTranslation",
-}, smithy.ShapeTypeStructure, 5)
-var GuardrailAutomatedReasoningTranslation_premises *smithy.Schema
-
-var GuardrailAutomatedReasoningTranslation_claims *smithy.Schema
-
-var GuardrailAutomatedReasoningTranslation_untranslatedPremises *smithy.Schema
-
-var GuardrailAutomatedReasoningTranslation_untranslatedClaims *smithy.Schema
-
-var GuardrailAutomatedReasoningTranslation_confidence *smithy.Schema
-
-var GuardrailAutomatedReasoningTranslationAmbiguousFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningTranslationAmbiguousFinding",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailAutomatedReasoningTranslationAmbiguousFinding_options *smithy.Schema
-
-var GuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios *smithy.Schema
-
-var _GuardrailAutomatedReasoningTranslationConfidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningTranslationConfidence",
-}, smithy.ShapeTypeDouble, 0)
-
-var _GuardrailAutomatedReasoningTranslationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningTranslationList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAutomatedReasoningTranslationList_member *smithy.Schema
-
-var GuardrailAutomatedReasoningTranslationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningTranslationOption",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailAutomatedReasoningTranslationOption_translations *smithy.Schema
-
-var _GuardrailAutomatedReasoningTranslationOptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningTranslationOptionList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailAutomatedReasoningTranslationOptionList_member *smithy.Schema
-
-var GuardrailAutomatedReasoningValidFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailAutomatedReasoningValidFinding",
-}, smithy.ShapeTypeStructure, 4)
-var GuardrailAutomatedReasoningValidFinding_translation *smithy.Schema
-
-var GuardrailAutomatedReasoningValidFinding_claimsTrueScenario *smithy.Schema
-
-var GuardrailAutomatedReasoningValidFinding_supportingRules *smithy.Schema
-
-var GuardrailAutomatedReasoningValidFinding_logicWarning *smithy.Schema
-
-var GuardrailChecksConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksConfig",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailChecksConfig_contentFilter *smithy.Schema
-
-var GuardrailChecksConfig_promptAttack *smithy.Schema
-
-var GuardrailChecksConfig_sensitiveInformation *smithy.Schema
-
-var GuardrailChecksContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentBlock",
-}, smithy.ShapeTypeUnion, 1)
-var GuardrailChecksContentBlock_text *smithy.Schema
-
-var _GuardrailChecksContentBlockList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentBlockList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksContentBlockList_member *smithy.Schema
-
-var GuardrailChecksContentFilterCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterCategory",
-}, smithy.ShapeTypeEnum, 5)
-var GuardrailChecksContentFilterCategory_VIOLENCE *smithy.Schema
-
-var GuardrailChecksContentFilterCategory_HATE *smithy.Schema
-
-var GuardrailChecksContentFilterCategory_SEXUAL *smithy.Schema
-
-var GuardrailChecksContentFilterCategory_MISCONDUCT *smithy.Schema
-
-var GuardrailChecksContentFilterCategory_INSULTS *smithy.Schema
-
-var GuardrailChecksContentFilterCategoryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterCategoryConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksContentFilterCategoryConfig_category *smithy.Schema
-
-var _GuardrailChecksContentFilterCategoryConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterCategoryConfigList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksContentFilterCategoryConfigList_member *smithy.Schema
-
-var GuardrailChecksContentFilterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksContentFilterConfig_categories *smithy.Schema
-
-var GuardrailChecksContentFilterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterResult",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksContentFilterResult_results *smithy.Schema
-
-var GuardrailChecksContentFilterResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterResultEntry",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailChecksContentFilterResultEntry_category *smithy.Schema
-
-var GuardrailChecksContentFilterResultEntry_severityScore *smithy.Schema
-
-var _GuardrailChecksContentFilterResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterResultList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksContentFilterResultList_member *smithy.Schema
-
-var GuardrailChecksContentFilterUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksContentFilterUsage",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksContentFilterUsage_textUnits *smithy.Schema
-
-var GuardrailChecksMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksMessage",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailChecksMessage_role *smithy.Schema
-
-var GuardrailChecksMessage_content *smithy.Schema
-
-var _GuardrailChecksMessageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksMessageList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksMessageList_member *smithy.Schema
-
-var GuardrailChecksPromptAttackCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackCategory",
-}, smithy.ShapeTypeEnum, 3)
-var GuardrailChecksPromptAttackCategory_JAILBREAK *smithy.Schema
-
-var GuardrailChecksPromptAttackCategory_PROMPT_INJECTION *smithy.Schema
-
-var GuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE *smithy.Schema
-
-var GuardrailChecksPromptAttackCategoryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackCategoryConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksPromptAttackCategoryConfig_category *smithy.Schema
-
-var _GuardrailChecksPromptAttackCategoryConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackCategoryConfigList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksPromptAttackCategoryConfigList_member *smithy.Schema
-
-var GuardrailChecksPromptAttackConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksPromptAttackConfig_categories *smithy.Schema
-
-var GuardrailChecksPromptAttackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackResult",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksPromptAttackResult_results *smithy.Schema
-
-var GuardrailChecksPromptAttackResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackResultEntry",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailChecksPromptAttackResultEntry_category *smithy.Schema
-
-var GuardrailChecksPromptAttackResultEntry_severityScore *smithy.Schema
-
-var _GuardrailChecksPromptAttackResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackResultList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksPromptAttackResultList_member *smithy.Schema
-
-var GuardrailChecksPromptAttackUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksPromptAttackUsage",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksPromptAttackUsage_textUnits *smithy.Schema
-
-var GuardrailChecksResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksResults",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailChecksResults_contentFilter *smithy.Schema
-
-var GuardrailChecksResults_promptAttack *smithy.Schema
-
-var GuardrailChecksResults_sensitiveInformation *smithy.Schema
-
-var GuardrailChecksRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksRole",
-}, smithy.ShapeTypeEnum, 3)
-var GuardrailChecksRole_USER *smithy.Schema
-
-var GuardrailChecksRole_ASSISTANT *smithy.Schema
-
-var GuardrailChecksRole_SYSTEM *smithy.Schema
-
-var GuardrailChecksSensitiveInformationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksSensitiveInformationConfig_entities *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationEntityConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksSensitiveInformationEntityConfig_type *smithy.Schema
-
-var _GuardrailChecksSensitiveInformationEntityConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationEntityConfigList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksSensitiveInformationEntityConfigList_member *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationEntityType",
-}, smithy.ShapeTypeEnum, 31)
-var GuardrailChecksSensitiveInformationEntityType_ADDRESS *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_AGE *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_DRIVER_ID *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_EMAIL *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_IP_ADDRESS *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_NAME *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_PASSWORD *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_PHONE *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_PIN *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_SWIFT_CODE *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_URL *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_USERNAME *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationResult",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailChecksSensitiveInformationResult_results *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResult_truncated *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationResultEntry",
-}, smithy.ShapeTypeStructure, 6)
-var GuardrailChecksSensitiveInformationResultEntry_type *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResultEntry_confidenceScore *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResultEntry_beginOffset *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResultEntry_endOffset *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResultEntry_messageIndex *smithy.Schema
-
-var GuardrailChecksSensitiveInformationResultEntry_contentIndex *smithy.Schema
-
-var _GuardrailChecksSensitiveInformationResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationResultList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailChecksSensitiveInformationResultList_member *smithy.Schema
-
-var GuardrailChecksSensitiveInformationUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksSensitiveInformationUsage",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailChecksSensitiveInformationUsage_textUnits *smithy.Schema
-
-var _GuardrailChecksTextContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksTextContent",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var GuardrailChecksUsageResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailChecksUsageResults",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailChecksUsageResults_contentFilter *smithy.Schema
-
-var GuardrailChecksUsageResults_promptAttack *smithy.Schema
-
-var GuardrailChecksUsageResults_sensitiveInformation *smithy.Schema
-
-var GuardrailConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailConfiguration_guardrailIdentifier *smithy.Schema
-
-var GuardrailConfiguration_guardrailVersion *smithy.Schema
-
-var GuardrailConfiguration_trace *smithy.Schema
-
-var GuardrailContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentBlock",
-}, smithy.ShapeTypeUnion, 2)
-var GuardrailContentBlock_text *smithy.Schema
-
-var GuardrailContentBlock_image *smithy.Schema
-
-var _GuardrailContentBlockList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentBlockList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailContentBlockList_member *smithy.Schema
-
-var GuardrailContentFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentFilter",
-}, smithy.ShapeTypeStructure, 5)
-var GuardrailContentFilter_type *smithy.Schema
-
-var GuardrailContentFilter_confidence *smithy.Schema
-
-var GuardrailContentFilter_filterStrength *smithy.Schema
-
-var GuardrailContentFilter_action *smithy.Schema
-
-var GuardrailContentFilter_detected *smithy.Schema
-
-var GuardrailContentFilterConfidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentFilterConfidence",
-}, smithy.ShapeTypeEnum, 4)
-var GuardrailContentFilterConfidence_NONE *smithy.Schema
-
-var GuardrailContentFilterConfidence_LOW *smithy.Schema
-
-var GuardrailContentFilterConfidence_MEDIUM *smithy.Schema
-
-var GuardrailContentFilterConfidence_HIGH *smithy.Schema
-
-var _GuardrailContentFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentFilterList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailContentFilterList_member *smithy.Schema
-
-var GuardrailContentFilterStrength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentFilterStrength",
-}, smithy.ShapeTypeEnum, 4)
-var GuardrailContentFilterStrength_NONE *smithy.Schema
-
-var GuardrailContentFilterStrength_LOW *smithy.Schema
-
-var GuardrailContentFilterStrength_MEDIUM *smithy.Schema
-
-var GuardrailContentFilterStrength_HIGH *smithy.Schema
-
-var GuardrailContentFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentFilterType",
-}, smithy.ShapeTypeEnum, 6)
-var GuardrailContentFilterType_INSULTS *smithy.Schema
-
-var GuardrailContentFilterType_HATE *smithy.Schema
-
-var GuardrailContentFilterType_SEXUAL *smithy.Schema
-
-var GuardrailContentFilterType_VIOLENCE *smithy.Schema
-
-var GuardrailContentFilterType_MISCONDUCT *smithy.Schema
-
-var GuardrailContentFilterType_PROMPT_ATTACK *smithy.Schema
-
-var GuardrailContentPolicyAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentPolicyAction",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailContentPolicyAction_BLOCKED *smithy.Schema
-
-var GuardrailContentPolicyAction_NONE *smithy.Schema
-
-var GuardrailContentPolicyAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentPolicyAssessment",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailContentPolicyAssessment_filters *smithy.Schema
-
-var _GuardrailContentPolicyImageUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentPolicyImageUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var _GuardrailContentPolicyUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentPolicyUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var GuardrailContentQualifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentQualifier",
-}, smithy.ShapeTypeEnum, 3)
-var GuardrailContentQualifier_GROUNDING_SOURCE *smithy.Schema
-
-var GuardrailContentQualifier_QUERY *smithy.Schema
-
-var GuardrailContentQualifier_GUARD_CONTENT *smithy.Schema
-
-var _GuardrailContentQualifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentQualifierList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailContentQualifierList_member *smithy.Schema
-
-var GuardrailContentSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContentSource",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailContentSource_INPUT *smithy.Schema
-
-var GuardrailContentSource_OUTPUT *smithy.Schema
-
-var GuardrailContextualGroundingFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContextualGroundingFilter",
-}, smithy.ShapeTypeStructure, 5)
-var GuardrailContextualGroundingFilter_type *smithy.Schema
-
-var GuardrailContextualGroundingFilter_threshold *smithy.Schema
-
-var GuardrailContextualGroundingFilter_score *smithy.Schema
-
-var GuardrailContextualGroundingFilter_action *smithy.Schema
-
-var GuardrailContextualGroundingFilter_detected *smithy.Schema
-
-var _GuardrailContextualGroundingFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContextualGroundingFilters",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailContextualGroundingFilters_member *smithy.Schema
-
-var GuardrailContextualGroundingFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContextualGroundingFilterType",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailContextualGroundingFilterType_GROUNDING *smithy.Schema
-
-var GuardrailContextualGroundingFilterType_RELEVANCE *smithy.Schema
-
-var GuardrailContextualGroundingPolicyAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContextualGroundingPolicyAction",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailContextualGroundingPolicyAction_BLOCKED *smithy.Schema
-
-var GuardrailContextualGroundingPolicyAction_NONE *smithy.Schema
-
-var GuardrailContextualGroundingPolicyAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContextualGroundingPolicyAssessment",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailContextualGroundingPolicyAssessment_filters *smithy.Schema
-
-var _GuardrailContextualGroundingPolicyUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailContextualGroundingPolicyUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var GuardrailConverseContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConverseContentBlock",
-}, smithy.ShapeTypeUnion, 2)
-var GuardrailConverseContentBlock_text *smithy.Schema
-
-var GuardrailConverseContentBlock_image *smithy.Schema
-
-var GuardrailConverseContentQualifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConverseContentQualifier",
-}, smithy.ShapeTypeEnum, 3)
-var GuardrailConverseContentQualifier_GROUNDING_SOURCE *smithy.Schema
-
-var GuardrailConverseContentQualifier_QUERY *smithy.Schema
-
-var GuardrailConverseContentQualifier_GUARD_CONTENT *smithy.Schema
-
-var _GuardrailConverseContentQualifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConverseContentQualifierList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailConverseContentQualifierList_member *smithy.Schema
-
-var GuardrailConverseImageBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConverseImageBlock",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var GuardrailConverseImageBlock_format *smithy.Schema
-
-var GuardrailConverseImageBlock_source *smithy.Schema
-
-var GuardrailConverseImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConverseImageFormat",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailConverseImageFormat_PNG *smithy.Schema
-
-var GuardrailConverseImageFormat_JPEG *smithy.Schema
-
-var GuardrailConverseImageSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConverseImageSource",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Sensitive{})
-var GuardrailConverseImageSource_bytes *smithy.Schema
-
-var GuardrailConverseTextBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailConverseTextBlock",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailConverseTextBlock_text *smithy.Schema
-
-var GuardrailConverseTextBlock_qualifiers *smithy.Schema
-
-var GuardrailCoverage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailCoverage",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailCoverage_textCharacters *smithy.Schema
-
-var GuardrailCoverage_images *smithy.Schema
-
-var GuardrailCustomWord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailCustomWord",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailCustomWord_match *smithy.Schema
-
-var GuardrailCustomWord_action *smithy.Schema
-
-var GuardrailCustomWord_detected *smithy.Schema
-
-var _GuardrailCustomWordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailCustomWordList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailCustomWordList_member *smithy.Schema
-
-var _GuardrailId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailId",
-}, smithy.ShapeTypeString, 0)
-
-var _GuardrailIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var GuardrailImageBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailImageBlock",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var GuardrailImageBlock_format *smithy.Schema
-
-var GuardrailImageBlock_source *smithy.Schema
-
-var GuardrailImageCoverage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailImageCoverage",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailImageCoverage_guarded *smithy.Schema
-
-var GuardrailImageCoverage_total *smithy.Schema
-
-var GuardrailImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailImageFormat",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailImageFormat_PNG *smithy.Schema
-
-var GuardrailImageFormat_JPEG *smithy.Schema
-
-var GuardrailImageSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailImageSource",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Sensitive{})
-var GuardrailImageSource_bytes *smithy.Schema
-
-var GuardrailInvocationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailInvocationMetrics",
-}, smithy.ShapeTypeStructure, 3)
-var GuardrailInvocationMetrics_guardrailProcessingLatency *smithy.Schema
-
-var GuardrailInvocationMetrics_usage *smithy.Schema
-
-var GuardrailInvocationMetrics_guardrailCoverage *smithy.Schema
-
-var GuardrailManagedWord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailManagedWord",
-}, smithy.ShapeTypeStructure, 4)
-var GuardrailManagedWord_match *smithy.Schema
-
-var GuardrailManagedWord_type *smithy.Schema
-
-var GuardrailManagedWord_action *smithy.Schema
-
-var GuardrailManagedWord_detected *smithy.Schema
-
-var _GuardrailManagedWordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailManagedWordList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailManagedWordList_member *smithy.Schema
-
-var GuardrailManagedWordType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailManagedWordType",
-}, smithy.ShapeTypeEnum, 1)
-var GuardrailManagedWordType_PROFANITY *smithy.Schema
-
-var GuardrailOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailOrigin",
-}, smithy.ShapeTypeEnum, 3)
-var GuardrailOrigin_REQUEST *smithy.Schema
-
-var GuardrailOrigin_ACCOUNT_ENFORCED *smithy.Schema
-
-var GuardrailOrigin_ORGANIZATION_ENFORCED *smithy.Schema
-
-var _GuardrailOriginList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailOriginList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailOriginList_member *smithy.Schema
-
-var GuardrailOutputContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailOutputContent",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailOutputContent_text *smithy.Schema
-
-var _GuardrailOutputContentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailOutputContentList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailOutputContentList_member *smithy.Schema
-
-var GuardrailOutputScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailOutputScope",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailOutputScope_INTERVENTIONS *smithy.Schema
-
-var GuardrailOutputScope_FULL *smithy.Schema
-
-var _GuardrailOutputText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailOutputText",
-}, smithy.ShapeTypeString, 0)
-
-var GuardrailOwnership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailOwnership",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailOwnership_SELF *smithy.Schema
-
-var GuardrailOwnership_CROSS_ACCOUNT *smithy.Schema
-
-var GuardrailPiiEntityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailPiiEntityFilter",
-}, smithy.ShapeTypeStructure, 4)
-var GuardrailPiiEntityFilter_match *smithy.Schema
-
-var GuardrailPiiEntityFilter_type *smithy.Schema
-
-var GuardrailPiiEntityFilter_action *smithy.Schema
-
-var GuardrailPiiEntityFilter_detected *smithy.Schema
-
-var _GuardrailPiiEntityFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailPiiEntityFilterList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailPiiEntityFilterList_member *smithy.Schema
-
-var GuardrailPiiEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailPiiEntityType",
-}, smithy.ShapeTypeEnum, 31)
-var GuardrailPiiEntityType_ADDRESS *smithy.Schema
-
-var GuardrailPiiEntityType_AGE *smithy.Schema
-
-var GuardrailPiiEntityType_AWS_ACCESS_KEY *smithy.Schema
-
-var GuardrailPiiEntityType_AWS_SECRET_KEY *smithy.Schema
-
-var GuardrailPiiEntityType_CA_HEALTH_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV *smithy.Schema
-
-var GuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY *smithy.Schema
-
-var GuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_DRIVER_ID *smithy.Schema
-
-var GuardrailPiiEntityType_EMAIL *smithy.Schema
-
-var GuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_IP_ADDRESS *smithy.Schema
-
-var GuardrailPiiEntityType_LICENSE_PLATE *smithy.Schema
-
-var GuardrailPiiEntityType_MAC_ADDRESS *smithy.Schema
-
-var GuardrailPiiEntityType_NAME *smithy.Schema
-
-var GuardrailPiiEntityType_PASSWORD *smithy.Schema
-
-var GuardrailPiiEntityType_PHONE *smithy.Schema
-
-var GuardrailPiiEntityType_PIN *smithy.Schema
-
-var GuardrailPiiEntityType_SWIFT_CODE *smithy.Schema
-
-var GuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_URL *smithy.Schema
-
-var GuardrailPiiEntityType_USERNAME *smithy.Schema
-
-var GuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_US_BANK_ROUTING_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_US_PASSPORT_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER *smithy.Schema
-
-var GuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER *smithy.Schema
-
-var _GuardrailProcessingLatency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailProcessingLatency",
-}, smithy.ShapeTypeLong, 0)
-
-var GuardrailRegexFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailRegexFilter",
-}, smithy.ShapeTypeStructure, 5)
-var GuardrailRegexFilter_name *smithy.Schema
-
-var GuardrailRegexFilter_match *smithy.Schema
-
-var GuardrailRegexFilter_regex *smithy.Schema
-
-var GuardrailRegexFilter_action *smithy.Schema
-
-var GuardrailRegexFilter_detected *smithy.Schema
-
-var _GuardrailRegexFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailRegexFilterList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailRegexFilterList_member *smithy.Schema
-
-var GuardrailSensitiveInformationPolicyAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailSensitiveInformationPolicyAction",
-}, smithy.ShapeTypeEnum, 3)
-var GuardrailSensitiveInformationPolicyAction_ANONYMIZED *smithy.Schema
-
-var GuardrailSensitiveInformationPolicyAction_BLOCKED *smithy.Schema
-
-var GuardrailSensitiveInformationPolicyAction_NONE *smithy.Schema
-
-var GuardrailSensitiveInformationPolicyAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailSensitiveInformationPolicyAssessment",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailSensitiveInformationPolicyAssessment_piiEntities *smithy.Schema
-
-var GuardrailSensitiveInformationPolicyAssessment_regexes *smithy.Schema
-
-var _GuardrailSensitiveInformationPolicyFreeUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailSensitiveInformationPolicyFreeUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var _GuardrailSensitiveInformationPolicyUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailSensitiveInformationPolicyUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var GuardrailStreamConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailStreamConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var GuardrailStreamConfiguration_guardrailIdentifier *smithy.Schema
-
-var GuardrailStreamConfiguration_guardrailVersion *smithy.Schema
-
-var GuardrailStreamConfiguration_trace *smithy.Schema
-
-var GuardrailStreamConfiguration_streamProcessingMode *smithy.Schema
-
-var GuardrailStreamProcessingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailStreamProcessingMode",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailStreamProcessingMode_SYNC *smithy.Schema
-
-var GuardrailStreamProcessingMode_ASYNC *smithy.Schema
-
-var GuardrailTextBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTextBlock",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailTextBlock_text *smithy.Schema
-
-var GuardrailTextBlock_qualifiers *smithy.Schema
-
-var GuardrailTextCharactersCoverage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTextCharactersCoverage",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailTextCharactersCoverage_guarded *smithy.Schema
-
-var GuardrailTextCharactersCoverage_total *smithy.Schema
-
-var GuardrailTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTopic",
-}, smithy.ShapeTypeStructure, 4)
-var GuardrailTopic_name *smithy.Schema
-
-var GuardrailTopic_type *smithy.Schema
-
-var GuardrailTopic_action *smithy.Schema
-
-var GuardrailTopic_detected *smithy.Schema
-
-var _GuardrailTopicList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTopicList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailTopicList_member *smithy.Schema
-
-var GuardrailTopicPolicyAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTopicPolicyAction",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailTopicPolicyAction_BLOCKED *smithy.Schema
-
-var GuardrailTopicPolicyAction_NONE *smithy.Schema
-
-var GuardrailTopicPolicyAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTopicPolicyAssessment",
-}, smithy.ShapeTypeStructure, 1)
-var GuardrailTopicPolicyAssessment_topics *smithy.Schema
-
-var _GuardrailTopicPolicyUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTopicPolicyUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var GuardrailTopicType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTopicType",
-}, smithy.ShapeTypeEnum, 1)
-var GuardrailTopicType_DENY *smithy.Schema
-
-var GuardrailTrace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTrace",
-}, smithy.ShapeTypeEnum, 3)
-var GuardrailTrace_ENABLED *smithy.Schema
-
-var GuardrailTrace_DISABLED *smithy.Schema
-
-var GuardrailTrace_ENABLED_FULL *smithy.Schema
-
-var GuardrailTraceAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailTraceAssessment",
-}, smithy.ShapeTypeStructure, 4)
-var GuardrailTraceAssessment_modelOutput *smithy.Schema
-
-var GuardrailTraceAssessment_inputAssessment *smithy.Schema
-
-var GuardrailTraceAssessment_outputAssessments *smithy.Schema
-
-var GuardrailTraceAssessment_actionReason *smithy.Schema
-
-var GuardrailUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailUsage",
-}, smithy.ShapeTypeStructure, 9)
-var GuardrailUsage_topicPolicyUnits *smithy.Schema
-
-var GuardrailUsage_contentPolicyUnits *smithy.Schema
-
-var GuardrailUsage_wordPolicyUnits *smithy.Schema
-
-var GuardrailUsage_sensitiveInformationPolicyUnits *smithy.Schema
-
-var GuardrailUsage_sensitiveInformationPolicyFreeUnits *smithy.Schema
-
-var GuardrailUsage_contextualGroundingPolicyUnits *smithy.Schema
-
-var GuardrailUsage_contentPolicyImageUnits *smithy.Schema
-
-var GuardrailUsage_automatedReasoningPolicyUnits *smithy.Schema
-
-var GuardrailUsage_automatedReasoningPolicies *smithy.Schema
-
-var _GuardrailVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailVersion",
-}, smithy.ShapeTypeString, 0)
-
-var GuardrailWordPolicyAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailWordPolicyAction",
-}, smithy.ShapeTypeEnum, 2)
-var GuardrailWordPolicyAction_BLOCKED *smithy.Schema
-
-var GuardrailWordPolicyAction_NONE *smithy.Schema
-
-var GuardrailWordPolicyAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailWordPolicyAssessment",
-}, smithy.ShapeTypeStructure, 2)
-var GuardrailWordPolicyAssessment_customWords *smithy.Schema
-
-var GuardrailWordPolicyAssessment_managedWordLists *smithy.Schema
-
-var _GuardrailWordPolicyUnitsProcessed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GuardrailWordPolicyUnitsProcessed",
-}, smithy.ShapeTypeInteger, 0)
-
-var ImageBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ImageBlock",
-}, smithy.ShapeTypeStructure, 3)
-var ImageBlock_format *smithy.Schema
-
-var ImageBlock_source *smithy.Schema
-
-var ImageBlock_error *smithy.Schema
-
-var ImageBlockDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ImageBlockDelta",
-}, smithy.ShapeTypeStructure, 2)
-var ImageBlockDelta_source *smithy.Schema
-
-var ImageBlockDelta_error *smithy.Schema
-
-var ImageBlockStart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ImageBlockStart",
-}, smithy.ShapeTypeStructure, 1)
-var ImageBlockStart_format *smithy.Schema
-
-var ImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ImageFormat",
-}, smithy.ShapeTypeEnum, 4)
-var ImageFormat_PNG *smithy.Schema
-
-var ImageFormat_JPEG *smithy.Schema
-
-var ImageFormat_GIF *smithy.Schema
-
-var ImageFormat_WEBP *smithy.Schema
-
-var _ImagesGuarded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ImagesGuarded",
-}, smithy.ShapeTypeInteger, 0)
-
-var ImageSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ImageSource",
-}, smithy.ShapeTypeUnion, 2, &smithytraits.Sensitive{})
-var ImageSource_bytes *smithy.Schema
-
-var ImageSource_s3Location *smithy.Schema
-
-var _ImagesTotal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ImagesTotal",
-}, smithy.ShapeTypeInteger, 0)
-
-var InferenceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InferenceConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var InferenceConfiguration_maxTokens *smithy.Schema
-
-var InferenceConfiguration_temperature *smithy.Schema
-
-var InferenceConfiguration_topP *smithy.Schema
-
-var InferenceConfiguration_stopSequences *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _InvocationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvocationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _InvokedModelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokedModelId",
-}, smithy.ShapeTypeString, 0)
-
-var _InvokeModelIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var InvokeModelTokensRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelTokensRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InvokeModelTokensRequest_body *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithBidirectionalStreamInput",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Streaming{})
-var InvokeModelWithBidirectionalStreamInput_chunk *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithBidirectionalStreamOutput",
-}, smithy.ShapeTypeUnion, 7, &smithytraits.Streaming{})
-var InvokeModelWithBidirectionalStreamOutput_chunk *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamOutput_internalServerException *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamOutput_modelStreamErrorException *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamOutput_validationException *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamOutput_throttlingException *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamOutput_modelTimeoutException *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamOutput_serviceUnavailableException *smithy.Schema
-
-var JsonSchemaDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "JsonSchemaDefinition",
-}, smithy.ShapeTypeStructure, 3)
-var JsonSchemaDefinition_schema *smithy.Schema
-
-var JsonSchemaDefinition_name *smithy.Schema
-
-var JsonSchemaDefinition_description *smithy.Schema
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Message",
-}, smithy.ShapeTypeStructure, 2)
-var Message_role *smithy.Schema
-
-var Message_content *smithy.Schema
-
-var _Messages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Messages",
-}, smithy.ShapeTypeList, 1)
-var _Messages_member *smithy.Schema
-
-var MessageStartEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "MessageStartEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MessageStartEvent_role *smithy.Schema
-
-var MessageStopEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "MessageStopEvent",
-}, smithy.ShapeTypeStructure, 2)
-var MessageStopEvent_stopReason *smithy.Schema
-
-var MessageStopEvent_additionalModelResponseFields *smithy.Schema
-
-var _MimeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "MimeType",
-}, smithy.ShapeTypeString, 0)
-
-var ModelErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ModelErrorException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var ModelErrorException_message *smithy.Schema
-
-var ModelErrorException_originalStatusCode *smithy.Schema
-
-var ModelErrorException_resourceName *smithy.Schema
-
-var _ModelInputPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ModelInputPayload",
-}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
-
-var ModelNotReadyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ModelNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ModelNotReadyException_message *smithy.Schema
-
-var _ModelOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ModelOutputs",
-}, smithy.ShapeTypeList, 1)
-var _ModelOutputs_member *smithy.Schema
-
-var ModelStreamErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ModelStreamErrorException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var ModelStreamErrorException_message *smithy.Schema
-
-var ModelStreamErrorException_originalStatusCode *smithy.Schema
-
-var ModelStreamErrorException_originalMessage *smithy.Schema
-
-var ModelTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ModelTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 408})
-var ModelTimeoutException_message *smithy.Schema
-
-var _NonBlankString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "NonBlankString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "NonEmptyStringList",
-}, smithy.ShapeTypeList, 1)
-var _NonEmptyStringList_member *smithy.Schema
-
-var _NonNegativeInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "NonNegativeInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var OutputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "OutputConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OutputConfig_textFormat *smithy.Schema
-
-var OutputConfig_effort *smithy.Schema
-
-var OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "OutputFormat",
-}, smithy.ShapeTypeStructure, 2)
-var OutputFormat_type *smithy.Schema
-
-var OutputFormat_structure *smithy.Schema
-
-var OutputFormatStructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "OutputFormatStructure",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Sensitive{})
-var OutputFormatStructure_jsonSchema *smithy.Schema
-
-var OutputFormatType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "OutputFormatType",
-}, smithy.ShapeTypeEnum, 1)
-var OutputFormatType_JSON_SCHEMA *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PartBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PartBody",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var PayloadPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PayloadPart",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var PayloadPart_bytes *smithy.Schema
-
-var PerformanceConfigLatency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PerformanceConfigLatency",
-}, smithy.ShapeTypeEnum, 2)
-var PerformanceConfigLatency_STANDARD *smithy.Schema
-
-var PerformanceConfigLatency_OPTIMIZED *smithy.Schema
-
-var PerformanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PerformanceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PerformanceConfiguration_latency *smithy.Schema
-
-var PromptRouterTrace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PromptRouterTrace",
-}, smithy.ShapeTypeStructure, 1)
-var PromptRouterTrace_invokedModelId *smithy.Schema
-
-var _PromptVariableMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PromptVariableMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _PromptVariableMap_key *smithy.Schema
-
-var _PromptVariableMap_value *smithy.Schema
-
-var PromptVariableValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "PromptVariableValues",
-}, smithy.ShapeTypeUnion, 1)
-var PromptVariableValues_text *smithy.Schema
-
-var ReasoningContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ReasoningContentBlock",
-}, smithy.ShapeTypeUnion, 2, &smithytraits.Sensitive{})
-var ReasoningContentBlock_reasoningText *smithy.Schema
-
-var ReasoningContentBlock_redactedContent *smithy.Schema
-
-var ReasoningContentBlockDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ReasoningContentBlockDelta",
-}, smithy.ShapeTypeUnion, 3, &smithytraits.Sensitive{})
-var ReasoningContentBlockDelta_text *smithy.Schema
-
-var ReasoningContentBlockDelta_redactedContent *smithy.Schema
-
-var ReasoningContentBlockDelta_signature *smithy.Schema
-
-var ReasoningTextBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ReasoningTextBlock",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var ReasoningTextBlock_text *smithy.Schema
-
-var ReasoningTextBlock_signature *smithy.Schema
-
-var _RequestMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "RequestMetadata",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _RequestMetadata_key *smithy.Schema
-
-var _RequestMetadata_value *smithy.Schema
-
-var _RequestMetadataJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "RequestMetadataJson",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResponseStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ResponseStream",
-}, smithy.ShapeTypeUnion, 7, &smithytraits.Streaming{})
-var ResponseStream_chunk *smithy.Schema
-
-var ResponseStream_internalServerException *smithy.Schema
-
-var ResponseStream_modelStreamErrorException *smithy.Schema
-
-var ResponseStream_validationException *smithy.Schema
-
-var ResponseStream_throttlingException *smithy.Schema
-
-var ResponseStream_modelTimeoutException *smithy.Schema
-
-var ResponseStream_serviceUnavailableException *smithy.Schema
-
-var S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "S3Location",
-}, smithy.ShapeTypeStructure, 2)
-var S3Location_uri *smithy.Schema
-
-var S3Location_bucketOwner *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var SearchResultBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SearchResultBlock",
-}, smithy.ShapeTypeStructure, 4)
-var SearchResultBlock_source *smithy.Schema
-
-var SearchResultBlock_title *smithy.Schema
-
-var SearchResultBlock_content *smithy.Schema
-
-var SearchResultBlock_citations *smithy.Schema
-
-var SearchResultContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SearchResultContentBlock",
-}, smithy.ShapeTypeStructure, 1)
-var SearchResultContentBlock_text *smithy.Schema
-
-var _SearchResultContentBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SearchResultContentBlocks",
-}, smithy.ShapeTypeList, 1)
-var _SearchResultContentBlocks_member *smithy.Schema
-
-var SearchResultLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SearchResultLocation",
-}, smithy.ShapeTypeStructure, 3)
-var SearchResultLocation_searchResultIndex *smithy.Schema
-
-var SearchResultLocation_start *smithy.Schema
-
-var SearchResultLocation_end *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ServiceTier",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceTier_type *smithy.Schema
-
-var ServiceTierType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ServiceTierType",
-}, smithy.ShapeTypeEnum, 4)
-var ServiceTierType_PRIORITY *smithy.Schema
-
-var ServiceTierType_DEFAULT *smithy.Schema
-
-var ServiceTierType_FLEX *smithy.Schema
-
-var ServiceTierType_RESERVED *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var SortAsyncInvocationBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SortAsyncInvocationBy",
-}, smithy.ShapeTypeEnum, 1)
-var SortAsyncInvocationBy_SUBMISSION_TIME *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var SpecificToolChoice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SpecificToolChoice",
-}, smithy.ShapeTypeStructure, 1)
-var SpecificToolChoice_name *smithy.Schema
-
-var _StatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "StatusCode",
-}, smithy.ShapeTypeInteger, 0)
-
-var StopReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "StopReason",
-}, smithy.ShapeTypeEnum, 9)
-var StopReason_END_TURN *smithy.Schema
-
-var StopReason_TOOL_USE *smithy.Schema
-
-var StopReason_MAX_TOKENS *smithy.Schema
-
-var StopReason_STOP_SEQUENCE *smithy.Schema
-
-var StopReason_GUARDRAIL_INTERVENED *smithy.Schema
-
-var StopReason_CONTENT_FILTERED *smithy.Schema
-
-var StopReason_MALFORMED_MODEL_OUTPUT *smithy.Schema
-
-var StopReason_MALFORMED_TOOL_USE *smithy.Schema
-
-var StopReason_MODEL_CONTEXT_WINDOW_EXCEEDED *smithy.Schema
-
-var SystemContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SystemContentBlock",
-}, smithy.ShapeTypeUnion, 3)
-var SystemContentBlock_text *smithy.Schema
-
-var SystemContentBlock_guardContent *smithy.Schema
-
-var SystemContentBlock_cachePoint *smithy.Schema
-
-var _SystemContentBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SystemContentBlocks",
-}, smithy.ShapeTypeList, 1)
-var _SystemContentBlocks_member *smithy.Schema
-
-var SystemTool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "SystemTool",
-}, smithy.ShapeTypeStructure, 1)
-var SystemTool_name *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TextCharactersGuarded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "TextCharactersGuarded",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TextCharactersTotal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "TextCharactersTotal",
-}, smithy.ShapeTypeInteger, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var TokenUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "TokenUsage",
-}, smithy.ShapeTypeStructure, 6)
-var TokenUsage_inputTokens *smithy.Schema
-
-var TokenUsage_outputTokens *smithy.Schema
-
-var TokenUsage_totalTokens *smithy.Schema
-
-var TokenUsage_cacheReadInputTokens *smithy.Schema
-
-var TokenUsage_cacheWriteInputTokens *smithy.Schema
-
-var TokenUsage_cacheDetails *smithy.Schema
-
-var Tool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Tool",
-}, smithy.ShapeTypeUnion, 3)
-var Tool_toolSpec *smithy.Schema
-
-var Tool_systemTool *smithy.Schema
-
-var Tool_cachePoint *smithy.Schema
-
-var ToolAdditionBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolAdditionBlock",
-}, smithy.ShapeTypeStructure, 1)
-var ToolAdditionBlock_tool *smithy.Schema
-
-var ToolChoice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolChoice",
-}, smithy.ShapeTypeUnion, 3)
-var ToolChoice_auto *smithy.Schema
-
-var ToolChoice_any *smithy.Schema
-
-var ToolChoice_tool *smithy.Schema
-
-var ToolConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ToolConfiguration_tools *smithy.Schema
-
-var ToolConfiguration_toolChoice *smithy.Schema
-
-var ToolInputSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolInputSchema",
-}, smithy.ShapeTypeUnion, 1)
-var ToolInputSchema_json *smithy.Schema
-
-var _ToolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolName",
-}, smithy.ShapeTypeString, 0)
-
-var ToolReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolReference",
-}, smithy.ShapeTypeStructure, 3)
-var ToolReference_type *smithy.Schema
-
-var ToolReference_name *smithy.Schema
-
-var ToolReference_serverName *smithy.Schema
-
-var ToolRemovalBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolRemovalBlock",
-}, smithy.ShapeTypeStructure, 1)
-var ToolRemovalBlock_tool *smithy.Schema
-
-var ToolResultBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolResultBlock",
-}, smithy.ShapeTypeStructure, 4)
-var ToolResultBlock_toolUseId *smithy.Schema
-
-var ToolResultBlock_content *smithy.Schema
-
-var ToolResultBlock_status *smithy.Schema
-
-var ToolResultBlock_type *smithy.Schema
-
-var ToolResultBlockDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolResultBlockDelta",
-}, smithy.ShapeTypeUnion, 2)
-var ToolResultBlockDelta_text *smithy.Schema
-
-var ToolResultBlockDelta_json *smithy.Schema
-
-var _ToolResultBlocksDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolResultBlocksDelta",
-}, smithy.ShapeTypeList, 1)
-var _ToolResultBlocksDelta_member *smithy.Schema
-
-var ToolResultBlockStart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolResultBlockStart",
-}, smithy.ShapeTypeStructure, 3)
-var ToolResultBlockStart_toolUseId *smithy.Schema
-
-var ToolResultBlockStart_type *smithy.Schema
-
-var ToolResultBlockStart_status *smithy.Schema
-
-var ToolResultContentBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolResultContentBlock",
-}, smithy.ShapeTypeUnion, 6)
-var ToolResultContentBlock_json *smithy.Schema
-
-var ToolResultContentBlock_text *smithy.Schema
-
-var ToolResultContentBlock_image *smithy.Schema
-
-var ToolResultContentBlock_document *smithy.Schema
-
-var ToolResultContentBlock_video *smithy.Schema
-
-var ToolResultContentBlock_searchResult *smithy.Schema
-
-var _ToolResultContentBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolResultContentBlocks",
-}, smithy.ShapeTypeList, 1)
-var _ToolResultContentBlocks_member *smithy.Schema
-
-var ToolResultStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolResultStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ToolResultStatus_SUCCESS *smithy.Schema
-
-var ToolResultStatus_ERROR *smithy.Schema
-
-var _Tools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Tools",
-}, smithy.ShapeTypeList, 1)
-var _Tools_member *smithy.Schema
-
-var ToolSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolSpecification",
-}, smithy.ShapeTypeStructure, 4)
-var ToolSpecification_name *smithy.Schema
-
-var ToolSpecification_description *smithy.Schema
-
-var ToolSpecification_inputSchema *smithy.Schema
-
-var ToolSpecification_strict *smithy.Schema
-
-var ToolUseBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolUseBlock",
-}, smithy.ShapeTypeStructure, 4)
-var ToolUseBlock_toolUseId *smithy.Schema
-
-var ToolUseBlock_name *smithy.Schema
-
-var ToolUseBlock_input *smithy.Schema
-
-var ToolUseBlock_type *smithy.Schema
-
-var ToolUseBlockDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolUseBlockDelta",
-}, smithy.ShapeTypeStructure, 1)
-var ToolUseBlockDelta_input *smithy.Schema
-
-var ToolUseBlockStart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolUseBlockStart",
-}, smithy.ShapeTypeStructure, 3)
-var ToolUseBlockStart_toolUseId *smithy.Schema
-
-var ToolUseBlockStart_name *smithy.Schema
-
-var ToolUseBlockStart_type *smithy.Schema
-
-var _ToolUseId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolUseId",
-}, smithy.ShapeTypeString, 0)
-
-var ToolUseType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ToolUseType",
-}, smithy.ShapeTypeEnum, 1)
-var ToolUseType_SERVER_TOOL_USE *smithy.Schema
-
-var Trace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "Trace",
-}, smithy.ShapeTypeEnum, 3)
-var Trace_ENABLED *smithy.Schema
-
-var Trace_DISABLED *smithy.Schema
-
-var Trace_ENABLED_FULL *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var VideoBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "VideoBlock",
-}, smithy.ShapeTypeStructure, 2)
-var VideoBlock_format *smithy.Schema
-
-var VideoBlock_source *smithy.Schema
-
-var VideoFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "VideoFormat",
-}, smithy.ShapeTypeEnum, 9)
-var VideoFormat_MKV *smithy.Schema
-
-var VideoFormat_MOV *smithy.Schema
-
-var VideoFormat_MP4 *smithy.Schema
-
-var VideoFormat_WEBM *smithy.Schema
-
-var VideoFormat_FLV *smithy.Schema
-
-var VideoFormat_MPEG *smithy.Schema
-
-var VideoFormat_MPG *smithy.Schema
-
-var VideoFormat_WMV *smithy.Schema
-
-var VideoFormat_THREE_GP *smithy.Schema
-
-var VideoSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "VideoSource",
-}, smithy.ShapeTypeUnion, 2)
-var VideoSource_bytes *smithy.Schema
-
-var VideoSource_s3Location *smithy.Schema
-
-var WebLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "WebLocation",
-}, smithy.ShapeTypeStructure, 2)
-var WebLocation_url *smithy.Schema
-
-var WebLocation_domain *smithy.Schema
-
-var ApplyGuardrailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ApplyGuardrailRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ApplyGuardrailRequest_guardrailIdentifier *smithy.Schema
-
-var ApplyGuardrailRequest_guardrailVersion *smithy.Schema
-
-var ApplyGuardrailRequest_source *smithy.Schema
-
-var ApplyGuardrailRequest_content *smithy.Schema
-
-var ApplyGuardrailRequest_outputScope *smithy.Schema
-
-var ApplyGuardrailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ApplyGuardrailResponse",
-}, smithy.ShapeTypeStructure, 6)
-var ApplyGuardrailResponse_usage *smithy.Schema
-
-var ApplyGuardrailResponse_action *smithy.Schema
-
-var ApplyGuardrailResponse_actionReason *smithy.Schema
-
-var ApplyGuardrailResponse_outputs *smithy.Schema
-
-var ApplyGuardrailResponse_assessments *smithy.Schema
-
-var ApplyGuardrailResponse_guardrailCoverage *smithy.Schema
-
-var ConverseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseRequest",
-}, smithy.ShapeTypeStructure, 13)
-var ConverseRequest_modelId *smithy.Schema
-
-var ConverseRequest_messages *smithy.Schema
-
-var ConverseRequest_system *smithy.Schema
-
-var ConverseRequest_inferenceConfig *smithy.Schema
-
-var ConverseRequest_toolConfig *smithy.Schema
-
-var ConverseRequest_guardrailConfig *smithy.Schema
-
-var ConverseRequest_additionalModelRequestFields *smithy.Schema
-
-var ConverseRequest_promptVariables *smithy.Schema
-
-var ConverseRequest_additionalModelResponseFieldPaths *smithy.Schema
-
-var ConverseRequest_requestMetadata *smithy.Schema
-
-var ConverseRequest_performanceConfig *smithy.Schema
-
-var ConverseRequest_serviceTier *smithy.Schema
-
-var ConverseRequest_outputConfig *smithy.Schema
-
-var ConverseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseResponse",
-}, smithy.ShapeTypeStructure, 8)
-var ConverseResponse_output *smithy.Schema
-
-var ConverseResponse_stopReason *smithy.Schema
-
-var ConverseResponse_usage *smithy.Schema
-
-var ConverseResponse_metrics *smithy.Schema
-
-var ConverseResponse_additionalModelResponseFields *smithy.Schema
-
-var ConverseResponse_trace *smithy.Schema
-
-var ConverseResponse_performanceConfig *smithy.Schema
-
-var ConverseResponse_serviceTier *smithy.Schema
-
-var ConverseStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseStreamRequest",
-}, smithy.ShapeTypeStructure, 13)
-var ConverseStreamRequest_modelId *smithy.Schema
-
-var ConverseStreamRequest_messages *smithy.Schema
-
-var ConverseStreamRequest_system *smithy.Schema
-
-var ConverseStreamRequest_inferenceConfig *smithy.Schema
-
-var ConverseStreamRequest_toolConfig *smithy.Schema
-
-var ConverseStreamRequest_guardrailConfig *smithy.Schema
-
-var ConverseStreamRequest_additionalModelRequestFields *smithy.Schema
-
-var ConverseStreamRequest_promptVariables *smithy.Schema
-
-var ConverseStreamRequest_additionalModelResponseFieldPaths *smithy.Schema
-
-var ConverseStreamRequest_requestMetadata *smithy.Schema
-
-var ConverseStreamRequest_performanceConfig *smithy.Schema
-
-var ConverseStreamRequest_serviceTier *smithy.Schema
-
-var ConverseStreamRequest_outputConfig *smithy.Schema
-
-var ConverseStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ConverseStreamResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConverseStreamResponse_stream *smithy.Schema
-
-var CountTokensRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CountTokensRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CountTokensRequest_modelId *smithy.Schema
-
-var CountTokensRequest_input *smithy.Schema
-
-var CountTokensResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "CountTokensResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CountTokensResponse_inputTokens *smithy.Schema
-
-var GetAsyncInvokeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GetAsyncInvokeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAsyncInvokeRequest_invocationArn *smithy.Schema
-
-var GetAsyncInvokeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "GetAsyncInvokeResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetAsyncInvokeResponse_invocationArn *smithy.Schema
-
-var GetAsyncInvokeResponse_modelArn *smithy.Schema
-
-var GetAsyncInvokeResponse_clientRequestToken *smithy.Schema
-
-var GetAsyncInvokeResponse_status *smithy.Schema
-
-var GetAsyncInvokeResponse_failureMessage *smithy.Schema
-
-var GetAsyncInvokeResponse_submitTime *smithy.Schema
-
-var GetAsyncInvokeResponse_lastModifiedTime *smithy.Schema
-
-var GetAsyncInvokeResponse_endTime *smithy.Schema
-
-var GetAsyncInvokeResponse_outputDataConfig *smithy.Schema
-
-var InvokeGuardrailChecksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeGuardrailChecksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var InvokeGuardrailChecksRequest_messages *smithy.Schema
-
-var InvokeGuardrailChecksRequest_checks *smithy.Schema
-
-var InvokeGuardrailChecksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeGuardrailChecksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var InvokeGuardrailChecksResponse_results *smithy.Schema
-
-var InvokeGuardrailChecksResponse_usage *smithy.Schema
-
-var InvokeModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelRequest",
-}, smithy.ShapeTypeStructure, 10)
-var InvokeModelRequest_body *smithy.Schema
-
-var InvokeModelRequest_contentType *smithy.Schema
-
-var InvokeModelRequest_accept *smithy.Schema
-
-var InvokeModelRequest_modelId *smithy.Schema
-
-var InvokeModelRequest_trace *smithy.Schema
-
-var InvokeModelRequest_guardrailIdentifier *smithy.Schema
-
-var InvokeModelRequest_guardrailVersion *smithy.Schema
-
-var InvokeModelRequest_performanceConfigLatency *smithy.Schema
-
-var InvokeModelRequest_serviceTier *smithy.Schema
-
-var InvokeModelRequest_requestMetadata *smithy.Schema
-
-var InvokeModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelResponse",
-}, smithy.ShapeTypeStructure, 4)
-var InvokeModelResponse_body *smithy.Schema
-
-var InvokeModelResponse_contentType *smithy.Schema
-
-var InvokeModelResponse_performanceConfigLatency *smithy.Schema
-
-var InvokeModelResponse_serviceTier *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithBidirectionalStreamRequest",
-}, smithy.ShapeTypeStructure, 2)
-var InvokeModelWithBidirectionalStreamRequest_modelId *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamRequest_body *smithy.Schema
-
-var InvokeModelWithBidirectionalStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithBidirectionalStreamResponse",
-}, smithy.ShapeTypeStructure, 1)
-var InvokeModelWithBidirectionalStreamResponse_body *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithResponseStreamRequest",
-}, smithy.ShapeTypeStructure, 10)
-var InvokeModelWithResponseStreamRequest_body *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_contentType *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_accept *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_modelId *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_trace *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_guardrailIdentifier *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_guardrailVersion *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_performanceConfigLatency *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_serviceTier *smithy.Schema
-
-var InvokeModelWithResponseStreamRequest_requestMetadata *smithy.Schema
-
-var InvokeModelWithResponseStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "InvokeModelWithResponseStreamResponse",
-}, smithy.ShapeTypeStructure, 4)
-var InvokeModelWithResponseStreamResponse_body *smithy.Schema
-
-var InvokeModelWithResponseStreamResponse_contentType *smithy.Schema
-
-var InvokeModelWithResponseStreamResponse_performanceConfigLatency *smithy.Schema
-
-var InvokeModelWithResponseStreamResponse_serviceTier *smithy.Schema
-
-var ListAsyncInvokesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ListAsyncInvokesRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListAsyncInvokesRequest_submitTimeAfter *smithy.Schema
-
-var ListAsyncInvokesRequest_submitTimeBefore *smithy.Schema
-
-var ListAsyncInvokesRequest_statusEquals *smithy.Schema
-
-var ListAsyncInvokesRequest_maxResults *smithy.Schema
-
-var ListAsyncInvokesRequest_nextToken *smithy.Schema
-
-var ListAsyncInvokesRequest_sortBy *smithy.Schema
-
-var ListAsyncInvokesRequest_sortOrder *smithy.Schema
-
-var ListAsyncInvokesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "ListAsyncInvokesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAsyncInvokesResponse_nextToken *smithy.Schema
-
-var ListAsyncInvokesResponse_asyncInvokeSummaries *smithy.Schema
-
-var StartAsyncInvokeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "StartAsyncInvokeRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartAsyncInvokeRequest_clientRequestToken *smithy.Schema
-
-var StartAsyncInvokeRequest_modelId *smithy.Schema
-
-var StartAsyncInvokeRequest_modelInput *smithy.Schema
-
-var StartAsyncInvokeRequest_outputDataConfig *smithy.Schema
-
-var StartAsyncInvokeRequest_tags *smithy.Schema
-
-var StartAsyncInvokeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockruntime",
-	Name:      "StartAsyncInvokeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartAsyncInvokeResponse_invocationArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _NonBlankString)
-
-	_AdditionalModelResponseFieldPaths_member = _AdditionalModelResponseFieldPaths.AddMember("member", smithyprelude.String)
-
-	GuardrailOrigin_REQUEST = GuardrailOrigin.AddMember("REQUEST", smithyprelude.Unit)
-
-	GuardrailOrigin_ACCOUNT_ENFORCED = GuardrailOrigin.AddMember("ACCOUNT_ENFORCED", smithyprelude.Unit)
-
-	GuardrailOrigin_ORGANIZATION_ENFORCED = GuardrailOrigin.AddMember("ORGANIZATION_ENFORCED", smithyprelude.Unit)
-
-	_GuardrailOriginList_member = _GuardrailOriginList.AddMember("member", GuardrailOrigin)
-
-	GuardrailOwnership_SELF = GuardrailOwnership.AddMember("SELF", smithyprelude.Unit)
-
-	GuardrailOwnership_CROSS_ACCOUNT = GuardrailOwnership.AddMember("CROSS_ACCOUNT", smithyprelude.Unit)
-
-	AppliedGuardrailDetails_guardrailId = AppliedGuardrailDetails.AddMember("guardrailId", _GuardrailId)
-
-	AppliedGuardrailDetails_guardrailVersion = AppliedGuardrailDetails.AddMember("guardrailVersion", _GuardrailVersion)
-
-	AppliedGuardrailDetails_guardrailArn = AppliedGuardrailDetails.AddMember("guardrailArn", _GuardrailArn)
-
-	AppliedGuardrailDetails_guardrailOrigin = AppliedGuardrailDetails.AddMember("guardrailOrigin", _GuardrailOriginList)
-
-	AppliedGuardrailDetails_guardrailOwnership = AppliedGuardrailDetails.AddMember("guardrailOwnership", GuardrailOwnership)
-
-	AsyncInvokeS3OutputDataConfig_s3Uri = AsyncInvokeS3OutputDataConfig.AddMember("s3Uri", _S3Uri)
-
-	AsyncInvokeS3OutputDataConfig_kmsKeyId = AsyncInvokeS3OutputDataConfig.AddMember("kmsKeyId", _KmsKeyId)
-
-	AsyncInvokeS3OutputDataConfig_bucketOwner = AsyncInvokeS3OutputDataConfig.AddMember("bucketOwner", _AccountId)
-
-	AsyncInvokeOutputDataConfig_s3OutputDataConfig = AsyncInvokeOutputDataConfig.AddMember("s3OutputDataConfig", AsyncInvokeS3OutputDataConfig)
-
-	AsyncInvokeStatus_IN_PROGRESS = AsyncInvokeStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	AsyncInvokeStatus_COMPLETED = AsyncInvokeStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	AsyncInvokeStatus_FAILED = AsyncInvokeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AsyncInvokeSummary_invocationArn = AsyncInvokeSummary.AddMember("invocationArn", _InvocationArn)
-
-	AsyncInvokeSummary_modelArn = AsyncInvokeSummary.AddMember("modelArn", _AsyncInvokeArn)
-
-	AsyncInvokeSummary_clientRequestToken = AsyncInvokeSummary.AddMember("clientRequestToken", _AsyncInvokeIdempotencyToken)
-
-	AsyncInvokeSummary_status = AsyncInvokeSummary.AddMember("status", AsyncInvokeStatus)
-
-	AsyncInvokeSummary_failureMessage = AsyncInvokeSummary.AddMember("failureMessage", _AsyncInvokeMessage)
-
-	AsyncInvokeSummary_submitTime = AsyncInvokeSummary.AddMember("submitTime", _Timestamp)
-
-	AsyncInvokeSummary_lastModifiedTime = AsyncInvokeSummary.AddMember("lastModifiedTime", _Timestamp)
-
-	AsyncInvokeSummary_endTime = AsyncInvokeSummary.AddMember("endTime", _Timestamp)
-
-	AsyncInvokeSummary_outputDataConfig = AsyncInvokeSummary.AddMember("outputDataConfig", AsyncInvokeOutputDataConfig)
-
-	_AsyncInvokeSummaries_member = _AsyncInvokeSummaries.AddMember("member", AsyncInvokeSummary)
-
-	AudioFormat_MP3 = AudioFormat.AddMember("MP3", smithyprelude.Unit)
-
-	AudioFormat_OPUS = AudioFormat.AddMember("OPUS", smithyprelude.Unit)
-
-	AudioFormat_WAV = AudioFormat.AddMember("WAV", smithyprelude.Unit)
-
-	AudioFormat_AAC = AudioFormat.AddMember("AAC", smithyprelude.Unit)
-
-	AudioFormat_FLAC = AudioFormat.AddMember("FLAC", smithyprelude.Unit)
-
-	AudioFormat_MP4 = AudioFormat.AddMember("MP4", smithyprelude.Unit)
-
-	AudioFormat_OGG = AudioFormat.AddMember("OGG", smithyprelude.Unit)
-
-	AudioFormat_MKV = AudioFormat.AddMember("MKV", smithyprelude.Unit)
-
-	AudioFormat_MKA = AudioFormat.AddMember("MKA", smithyprelude.Unit)
-
-	AudioFormat_X_AAC = AudioFormat.AddMember("X_AAC", smithyprelude.Unit)
-
-	AudioFormat_M4A = AudioFormat.AddMember("M4A", smithyprelude.Unit)
-
-	AudioFormat_MPEG = AudioFormat.AddMember("MPEG", smithyprelude.Unit)
-
-	AudioFormat_MPGA = AudioFormat.AddMember("MPGA", smithyprelude.Unit)
-
-	AudioFormat_PCM = AudioFormat.AddMember("PCM", smithyprelude.Unit)
-
-	AudioFormat_WEBM = AudioFormat.AddMember("WEBM", smithyprelude.Unit)
-
-	S3Location_uri = S3Location.AddMember("uri", _S3Uri)
-
-	S3Location_bucketOwner = S3Location.AddMember("bucketOwner", _AccountId)
-
-	AudioSource_bytes = AudioSource.AddMember("bytes", smithyprelude.Blob)
-
-	AudioSource_s3Location = AudioSource.AddMember("s3Location", S3Location)
-
-	ErrorBlock_message = ErrorBlock.AddMember("message", smithyprelude.String)
-
-	AudioBlock_format = AudioBlock.AddMember("format", AudioFormat)
-
-	AudioBlock_source = AudioBlock.AddMember("source", AudioSource)
-
-	AudioBlock_error = AudioBlock.AddMember("error", ErrorBlock)
-
-	BidirectionalInputPayloadPart_bytes = BidirectionalInputPayloadPart.AddMember("bytes", _PartBody)
-
-	BidirectionalOutputPayloadPart_bytes = BidirectionalOutputPayloadPart.AddMember("bytes", _PartBody)
-
-	CacheTTL_FIVE_MINUTES = CacheTTL.AddMember("FIVE_MINUTES", smithyprelude.Unit)
-
-	CacheTTL_ONE_HOUR = CacheTTL.AddMember("ONE_HOUR", smithyprelude.Unit)
-
-	CacheDetail_ttl = CacheDetail.AddMember("ttl", CacheTTL)
-
-	CacheDetail_inputTokens = CacheDetail.AddMember("inputTokens", smithyprelude.Integer)
-
-	_CacheDetailsList_member = _CacheDetailsList.AddMember("member", CacheDetail)
-
-	CachePointType_DEFAULT = CachePointType.AddMember("DEFAULT", smithyprelude.Unit)
-
-	CachePointBlock_type = CachePointBlock.AddMember("type", CachePointType)
-
-	CachePointBlock_ttl = CachePointBlock.AddMember("ttl", CacheTTL)
-
-	CitationSourceContent_text = CitationSourceContent.AddMember("text", smithyprelude.String)
-
-	_CitationSourceContentList_member = _CitationSourceContentList.AddMember("member", CitationSourceContent)
-
-	WebLocation_url = WebLocation.AddMember("url", smithyprelude.String)
-
-	WebLocation_domain = WebLocation.AddMember("domain", smithyprelude.String)
-
-	DocumentCharLocation_documentIndex = DocumentCharLocation.AddMember("documentIndex", smithyprelude.Integer)
-
-	DocumentCharLocation_start = DocumentCharLocation.AddMember("start", smithyprelude.Integer)
-
-	DocumentCharLocation_end = DocumentCharLocation.AddMember("end", smithyprelude.Integer)
-
-	DocumentPageLocation_documentIndex = DocumentPageLocation.AddMember("documentIndex", smithyprelude.Integer)
-
-	DocumentPageLocation_start = DocumentPageLocation.AddMember("start", smithyprelude.Integer)
-
-	DocumentPageLocation_end = DocumentPageLocation.AddMember("end", smithyprelude.Integer)
-
-	DocumentChunkLocation_documentIndex = DocumentChunkLocation.AddMember("documentIndex", smithyprelude.Integer)
-
-	DocumentChunkLocation_start = DocumentChunkLocation.AddMember("start", smithyprelude.Integer)
-
-	DocumentChunkLocation_end = DocumentChunkLocation.AddMember("end", smithyprelude.Integer)
-
-	SearchResultLocation_searchResultIndex = SearchResultLocation.AddMember("searchResultIndex", smithyprelude.Integer)
-
-	SearchResultLocation_start = SearchResultLocation.AddMember("start", smithyprelude.Integer)
-
-	SearchResultLocation_end = SearchResultLocation.AddMember("end", smithyprelude.Integer)
-
-	CitationLocation_web = CitationLocation.AddMember("web", WebLocation)
-
-	CitationLocation_documentChar = CitationLocation.AddMember("documentChar", DocumentCharLocation)
-
-	CitationLocation_documentPage = CitationLocation.AddMember("documentPage", DocumentPageLocation)
-
-	CitationLocation_documentChunk = CitationLocation.AddMember("documentChunk", DocumentChunkLocation)
-
-	CitationLocation_searchResultLocation = CitationLocation.AddMember("searchResultLocation", SearchResultLocation)
-
-	Citation_title = Citation.AddMember("title", smithyprelude.String)
-
-	Citation_source = Citation.AddMember("source", smithyprelude.String)
-
-	Citation_sourceContent = Citation.AddMember("sourceContent", _CitationSourceContentList)
-
-	Citation_location = Citation.AddMember("location", CitationLocation)
-
-	CitationGeneratedContent_text = CitationGeneratedContent.AddMember("text", smithyprelude.String)
-
-	_CitationGeneratedContentList_member = _CitationGeneratedContentList.AddMember("member", CitationGeneratedContent)
-
-	_Citations_member = _Citations.AddMember("member", Citation)
-
-	CitationsConfig_enabled = CitationsConfig.AddMember("enabled", smithyprelude.Boolean)
-
-	CitationsContentBlock_content = CitationsContentBlock.AddMember("content", _CitationGeneratedContentList)
-
-	CitationsContentBlock_citations = CitationsContentBlock.AddMember("citations", _Citations)
-
-	CitationSourceContentDelta_text = CitationSourceContentDelta.AddMember("text", smithyprelude.String)
-
-	_CitationSourceContentListDelta_member = _CitationSourceContentListDelta.AddMember("member", CitationSourceContentDelta)
-
-	CitationsDelta_title = CitationsDelta.AddMember("title", smithyprelude.String)
-
-	CitationsDelta_source = CitationsDelta.AddMember("source", smithyprelude.String)
-
-	CitationsDelta_sourceContent = CitationsDelta.AddMember("sourceContent", _CitationSourceContentListDelta)
-
-	CitationsDelta_location = CitationsDelta.AddMember("location", CitationLocation)
-
-	ConflictException_message = ConflictException.AddMember("message", _NonBlankString)
-
-	ImageFormat_PNG = ImageFormat.AddMember("PNG", smithyprelude.Unit)
-
-	ImageFormat_JPEG = ImageFormat.AddMember("JPEG", smithyprelude.Unit)
-
-	ImageFormat_GIF = ImageFormat.AddMember("GIF", smithyprelude.Unit)
-
-	ImageFormat_WEBP = ImageFormat.AddMember("WEBP", smithyprelude.Unit)
-
-	ImageSource_bytes = ImageSource.AddMember("bytes", smithyprelude.Blob)
-
-	ImageSource_s3Location = ImageSource.AddMember("s3Location", S3Location)
-
-	ImageBlock_format = ImageBlock.AddMember("format", ImageFormat)
-
-	ImageBlock_source = ImageBlock.AddMember("source", ImageSource)
-
-	ImageBlock_error = ImageBlock.AddMember("error", ErrorBlock)
-
-	DocumentFormat_PDF = DocumentFormat.AddMember("PDF", smithyprelude.Unit)
-
-	DocumentFormat_CSV = DocumentFormat.AddMember("CSV", smithyprelude.Unit)
-
-	DocumentFormat_DOC = DocumentFormat.AddMember("DOC", smithyprelude.Unit)
-
-	DocumentFormat_DOCX = DocumentFormat.AddMember("DOCX", smithyprelude.Unit)
-
-	DocumentFormat_XLS = DocumentFormat.AddMember("XLS", smithyprelude.Unit)
-
-	DocumentFormat_XLSX = DocumentFormat.AddMember("XLSX", smithyprelude.Unit)
-
-	DocumentFormat_HTML = DocumentFormat.AddMember("HTML", smithyprelude.Unit)
-
-	DocumentFormat_TXT = DocumentFormat.AddMember("TXT", smithyprelude.Unit)
-
-	DocumentFormat_MD = DocumentFormat.AddMember("MD", smithyprelude.Unit)
-
-	DocumentContentBlock_text = DocumentContentBlock.AddMember("text", smithyprelude.String)
-
-	_DocumentContentBlocks_member = _DocumentContentBlocks.AddMember("member", DocumentContentBlock)
-
-	DocumentSource_bytes = DocumentSource.AddMember("bytes", smithyprelude.Blob)
-
-	DocumentSource_s3Location = DocumentSource.AddMember("s3Location", S3Location)
-
-	DocumentSource_text = DocumentSource.AddMember("text", smithyprelude.String)
-
-	DocumentSource_content = DocumentSource.AddMember("content", _DocumentContentBlocks)
-
-	DocumentBlock_format = DocumentBlock.AddMember("format", DocumentFormat)
-
-	DocumentBlock_name = DocumentBlock.AddMember("name", smithyprelude.String)
-
-	DocumentBlock_source = DocumentBlock.AddMember("source", DocumentSource)
-
-	DocumentBlock_context = DocumentBlock.AddMember("context", smithyprelude.String)
-
-	DocumentBlock_citations = DocumentBlock.AddMember("citations", CitationsConfig)
-
-	VideoFormat_MKV = VideoFormat.AddMember("MKV", smithyprelude.Unit)
-
-	VideoFormat_MOV = VideoFormat.AddMember("MOV", smithyprelude.Unit)
-
-	VideoFormat_MP4 = VideoFormat.AddMember("MP4", smithyprelude.Unit)
-
-	VideoFormat_WEBM = VideoFormat.AddMember("WEBM", smithyprelude.Unit)
-
-	VideoFormat_FLV = VideoFormat.AddMember("FLV", smithyprelude.Unit)
-
-	VideoFormat_MPEG = VideoFormat.AddMember("MPEG", smithyprelude.Unit)
-
-	VideoFormat_MPG = VideoFormat.AddMember("MPG", smithyprelude.Unit)
-
-	VideoFormat_WMV = VideoFormat.AddMember("WMV", smithyprelude.Unit)
-
-	VideoFormat_THREE_GP = VideoFormat.AddMember("THREE_GP", smithyprelude.Unit)
-
-	VideoSource_bytes = VideoSource.AddMember("bytes", smithyprelude.Blob)
-
-	VideoSource_s3Location = VideoSource.AddMember("s3Location", S3Location)
-
-	VideoBlock_format = VideoBlock.AddMember("format", VideoFormat)
-
-	VideoBlock_source = VideoBlock.AddMember("source", VideoSource)
-
-	ToolUseType_SERVER_TOOL_USE = ToolUseType.AddMember("SERVER_TOOL_USE", smithyprelude.Unit)
-
-	ToolUseBlock_toolUseId = ToolUseBlock.AddMember("toolUseId", _ToolUseId)
-
-	ToolUseBlock_name = ToolUseBlock.AddMember("name", _ToolName)
-
-	ToolUseBlock_input = ToolUseBlock.AddMember("input", smithyprelude.Document)
-
-	ToolUseBlock_type = ToolUseBlock.AddMember("type", ToolUseType)
-
-	SearchResultContentBlock_text = SearchResultContentBlock.AddMember("text", smithyprelude.String)
-
-	_SearchResultContentBlocks_member = _SearchResultContentBlocks.AddMember("member", SearchResultContentBlock)
-
-	SearchResultBlock_source = SearchResultBlock.AddMember("source", smithyprelude.String)
-
-	SearchResultBlock_title = SearchResultBlock.AddMember("title", smithyprelude.String)
-
-	SearchResultBlock_content = SearchResultBlock.AddMember("content", _SearchResultContentBlocks)
-
-	SearchResultBlock_citations = SearchResultBlock.AddMember("citations", CitationsConfig)
-
-	ToolResultContentBlock_json = ToolResultContentBlock.AddMember("json", smithyprelude.Document)
-
-	ToolResultContentBlock_text = ToolResultContentBlock.AddMember("text", smithyprelude.String)
-
-	ToolResultContentBlock_image = ToolResultContentBlock.AddMember("image", ImageBlock)
-
-	ToolResultContentBlock_document = ToolResultContentBlock.AddMember("document", DocumentBlock)
-
-	ToolResultContentBlock_video = ToolResultContentBlock.AddMember("video", VideoBlock)
-
-	ToolResultContentBlock_searchResult = ToolResultContentBlock.AddMember("searchResult", SearchResultBlock)
-
-	_ToolResultContentBlocks_member = _ToolResultContentBlocks.AddMember("member", ToolResultContentBlock)
-
-	ToolResultStatus_SUCCESS = ToolResultStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	ToolResultStatus_ERROR = ToolResultStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	ToolResultBlock_toolUseId = ToolResultBlock.AddMember("toolUseId", _ToolUseId)
-
-	ToolResultBlock_content = ToolResultBlock.AddMember("content", _ToolResultContentBlocks)
-
-	ToolResultBlock_status = ToolResultBlock.AddMember("status", ToolResultStatus)
-
-	ToolResultBlock_type = ToolResultBlock.AddMember("type", smithyprelude.String)
-
-	GuardrailConverseContentQualifier_GROUNDING_SOURCE = GuardrailConverseContentQualifier.AddMember("GROUNDING_SOURCE", smithyprelude.Unit)
-
-	GuardrailConverseContentQualifier_QUERY = GuardrailConverseContentQualifier.AddMember("QUERY", smithyprelude.Unit)
-
-	GuardrailConverseContentQualifier_GUARD_CONTENT = GuardrailConverseContentQualifier.AddMember("GUARD_CONTENT", smithyprelude.Unit)
-
-	_GuardrailConverseContentQualifierList_member = _GuardrailConverseContentQualifierList.AddMember("member", GuardrailConverseContentQualifier)
-
-	GuardrailConverseTextBlock_text = GuardrailConverseTextBlock.AddMember("text", smithyprelude.String)
-
-	GuardrailConverseTextBlock_qualifiers = GuardrailConverseTextBlock.AddMember("qualifiers", _GuardrailConverseContentQualifierList)
-
-	GuardrailConverseImageFormat_PNG = GuardrailConverseImageFormat.AddMember("PNG", smithyprelude.Unit)
-
-	GuardrailConverseImageFormat_JPEG = GuardrailConverseImageFormat.AddMember("JPEG", smithyprelude.Unit)
-
-	GuardrailConverseImageSource_bytes = GuardrailConverseImageSource.AddMember("bytes", smithyprelude.Blob)
-
-	GuardrailConverseImageBlock_format = GuardrailConverseImageBlock.AddMember("format", GuardrailConverseImageFormat)
-
-	GuardrailConverseImageBlock_source = GuardrailConverseImageBlock.AddMember("source", GuardrailConverseImageSource)
-
-	GuardrailConverseContentBlock_text = GuardrailConverseContentBlock.AddMember("text", GuardrailConverseTextBlock)
-
-	GuardrailConverseContentBlock_image = GuardrailConverseContentBlock.AddMember("image", GuardrailConverseImageBlock)
-
-	ReasoningTextBlock_text = ReasoningTextBlock.AddMember("text", smithyprelude.String)
-
-	ReasoningTextBlock_signature = ReasoningTextBlock.AddMember("signature", smithyprelude.String)
-
-	ReasoningContentBlock_reasoningText = ReasoningContentBlock.AddMember("reasoningText", ReasoningTextBlock)
-
-	ReasoningContentBlock_redactedContent = ReasoningContentBlock.AddMember("redactedContent", smithyprelude.Blob)
-
-	ToolReference_type = ToolReference.AddMember("type", smithyprelude.String)
-
-	ToolReference_name = ToolReference.AddMember("name", smithyprelude.String)
-
-	ToolReference_serverName = ToolReference.AddMember("serverName", smithyprelude.String)
-
-	ToolAdditionBlock_tool = ToolAdditionBlock.AddMember("tool", ToolReference)
-
-	ToolRemovalBlock_tool = ToolRemovalBlock.AddMember("tool", ToolReference)
-
-	ContentBlock_text = ContentBlock.AddMember("text", smithyprelude.String)
-
-	ContentBlock_image = ContentBlock.AddMember("image", ImageBlock)
-
-	ContentBlock_document = ContentBlock.AddMember("document", DocumentBlock)
-
-	ContentBlock_video = ContentBlock.AddMember("video", VideoBlock)
-
-	ContentBlock_audio = ContentBlock.AddMember("audio", AudioBlock)
-
-	ContentBlock_toolUse = ContentBlock.AddMember("toolUse", ToolUseBlock)
-
-	ContentBlock_toolResult = ContentBlock.AddMember("toolResult", ToolResultBlock)
-
-	ContentBlock_guardContent = ContentBlock.AddMember("guardContent", GuardrailConverseContentBlock)
-
-	ContentBlock_cachePoint = ContentBlock.AddMember("cachePoint", CachePointBlock)
-
-	ContentBlock_reasoningContent = ContentBlock.AddMember("reasoningContent", ReasoningContentBlock)
-
-	ContentBlock_citationsContent = ContentBlock.AddMember("citationsContent", CitationsContentBlock)
-
-	ContentBlock_searchResult = ContentBlock.AddMember("searchResult", SearchResultBlock)
-
-	ContentBlock_toolAddition = ContentBlock.AddMember("toolAddition", ToolAdditionBlock)
-
-	ContentBlock_toolRemoval = ContentBlock.AddMember("toolRemoval", ToolRemovalBlock)
-
-	ToolUseBlockDelta_input = ToolUseBlockDelta.AddMember("input", smithyprelude.String)
-
-	ToolResultBlockDelta_text = ToolResultBlockDelta.AddMember("text", smithyprelude.String)
-
-	ToolResultBlockDelta_json = ToolResultBlockDelta.AddMember("json", smithyprelude.Document)
-
-	_ToolResultBlocksDelta_member = _ToolResultBlocksDelta.AddMember("member", ToolResultBlockDelta)
-
-	ReasoningContentBlockDelta_text = ReasoningContentBlockDelta.AddMember("text", smithyprelude.String)
-
-	ReasoningContentBlockDelta_redactedContent = ReasoningContentBlockDelta.AddMember("redactedContent", smithyprelude.Blob)
-
-	ReasoningContentBlockDelta_signature = ReasoningContentBlockDelta.AddMember("signature", smithyprelude.String)
-
-	ImageBlockDelta_source = ImageBlockDelta.AddMember("source", ImageSource)
-
-	ImageBlockDelta_error = ImageBlockDelta.AddMember("error", ErrorBlock)
-
-	ContentBlockDelta_text = ContentBlockDelta.AddMember("text", smithyprelude.String)
-
-	ContentBlockDelta_toolUse = ContentBlockDelta.AddMember("toolUse", ToolUseBlockDelta)
-
-	ContentBlockDelta_toolResult = ContentBlockDelta.AddMember("toolResult", _ToolResultBlocksDelta)
-
-	ContentBlockDelta_reasoningContent = ContentBlockDelta.AddMember("reasoningContent", ReasoningContentBlockDelta)
-
-	ContentBlockDelta_citation = ContentBlockDelta.AddMember("citation", CitationsDelta)
-
-	ContentBlockDelta_image = ContentBlockDelta.AddMember("image", ImageBlockDelta)
-
-	ContentBlockDeltaEvent_delta = ContentBlockDeltaEvent.AddMember("delta", ContentBlockDelta)
-
-	ContentBlockDeltaEvent_contentBlockIndex = ContentBlockDeltaEvent.AddMember("contentBlockIndex", _NonNegativeInteger)
-
-	_ContentBlocks_member = _ContentBlocks.AddMember("member", ContentBlock)
-
-	ToolUseBlockStart_toolUseId = ToolUseBlockStart.AddMember("toolUseId", _ToolUseId)
-
-	ToolUseBlockStart_name = ToolUseBlockStart.AddMember("name", _ToolName)
-
-	ToolUseBlockStart_type = ToolUseBlockStart.AddMember("type", ToolUseType)
-
-	ToolResultBlockStart_toolUseId = ToolResultBlockStart.AddMember("toolUseId", _ToolUseId)
-
-	ToolResultBlockStart_type = ToolResultBlockStart.AddMember("type", smithyprelude.String)
-
-	ToolResultBlockStart_status = ToolResultBlockStart.AddMember("status", ToolResultStatus)
-
-	ImageBlockStart_format = ImageBlockStart.AddMember("format", ImageFormat)
-
-	ContentBlockStart_toolUse = ContentBlockStart.AddMember("toolUse", ToolUseBlockStart)
-
-	ContentBlockStart_toolResult = ContentBlockStart.AddMember("toolResult", ToolResultBlockStart)
-
-	ContentBlockStart_image = ContentBlockStart.AddMember("image", ImageBlockStart)
-
-	ContentBlockStartEvent_start = ContentBlockStartEvent.AddMember("start", ContentBlockStart)
-
-	ContentBlockStartEvent_contentBlockIndex = ContentBlockStartEvent.AddMember("contentBlockIndex", _NonNegativeInteger)
-
-	ContentBlockStopEvent_contentBlockIndex = ContentBlockStopEvent.AddMember("contentBlockIndex", _NonNegativeInteger)
-
-	ConversationRole_USER = ConversationRole.AddMember("USER", smithyprelude.Unit)
-
-	ConversationRole_ASSISTANT = ConversationRole.AddMember("ASSISTANT", smithyprelude.Unit)
-
-	ConversationRole_SYSTEM = ConversationRole.AddMember("SYSTEM", smithyprelude.Unit)
-
-	ConverseMetrics_latencyMs = ConverseMetrics.AddMember("latencyMs", smithyprelude.Long)
-
-	Message_role = Message.AddMember("role", ConversationRole)
-
-	Message_content = Message.AddMember("content", _ContentBlocks)
-
-	ConverseOutput_message = ConverseOutput.AddMember("message", Message)
-
-	TokenUsage_inputTokens = TokenUsage.AddMember("inputTokens", smithyprelude.Integer)
-
-	TokenUsage_outputTokens = TokenUsage.AddMember("outputTokens", smithyprelude.Integer)
-
-	TokenUsage_totalTokens = TokenUsage.AddMember("totalTokens", smithyprelude.Integer)
-
-	TokenUsage_cacheReadInputTokens = TokenUsage.AddMember("cacheReadInputTokens", smithyprelude.Integer)
-
-	TokenUsage_cacheWriteInputTokens = TokenUsage.AddMember("cacheWriteInputTokens", smithyprelude.Integer)
-
-	TokenUsage_cacheDetails = TokenUsage.AddMember("cacheDetails", _CacheDetailsList)
-
-	ConverseStreamMetrics_latencyMs = ConverseStreamMetrics.AddMember("latencyMs", smithyprelude.Long)
-
-	_ModelOutputs_member = _ModelOutputs.AddMember("member", _GuardrailOutputText)
-
-	GuardrailTopicType_DENY = GuardrailTopicType.AddMember("DENY", smithyprelude.Unit)
-
-	GuardrailTopicPolicyAction_BLOCKED = GuardrailTopicPolicyAction.AddMember("BLOCKED", smithyprelude.Unit)
-
-	GuardrailTopicPolicyAction_NONE = GuardrailTopicPolicyAction.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailTopic_name = GuardrailTopic.AddMember("name", smithyprelude.String)
-
-	GuardrailTopic_type = GuardrailTopic.AddMember("type", GuardrailTopicType)
-
-	GuardrailTopic_action = GuardrailTopic.AddMember("action", GuardrailTopicPolicyAction)
-
-	GuardrailTopic_detected = GuardrailTopic.AddMember("detected", smithyprelude.Boolean)
-
-	_GuardrailTopicList_member = _GuardrailTopicList.AddMember("member", GuardrailTopic)
-
-	GuardrailTopicPolicyAssessment_topics = GuardrailTopicPolicyAssessment.AddMember("topics", _GuardrailTopicList)
-
-	GuardrailContentFilterType_INSULTS = GuardrailContentFilterType.AddMember("INSULTS", smithyprelude.Unit)
-
-	GuardrailContentFilterType_HATE = GuardrailContentFilterType.AddMember("HATE", smithyprelude.Unit)
-
-	GuardrailContentFilterType_SEXUAL = GuardrailContentFilterType.AddMember("SEXUAL", smithyprelude.Unit)
-
-	GuardrailContentFilterType_VIOLENCE = GuardrailContentFilterType.AddMember("VIOLENCE", smithyprelude.Unit)
-
-	GuardrailContentFilterType_MISCONDUCT = GuardrailContentFilterType.AddMember("MISCONDUCT", smithyprelude.Unit)
-
-	GuardrailContentFilterType_PROMPT_ATTACK = GuardrailContentFilterType.AddMember("PROMPT_ATTACK", smithyprelude.Unit)
-
-	GuardrailContentFilterConfidence_NONE = GuardrailContentFilterConfidence.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailContentFilterConfidence_LOW = GuardrailContentFilterConfidence.AddMember("LOW", smithyprelude.Unit)
-
-	GuardrailContentFilterConfidence_MEDIUM = GuardrailContentFilterConfidence.AddMember("MEDIUM", smithyprelude.Unit)
-
-	GuardrailContentFilterConfidence_HIGH = GuardrailContentFilterConfidence.AddMember("HIGH", smithyprelude.Unit)
-
-	GuardrailContentFilterStrength_NONE = GuardrailContentFilterStrength.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailContentFilterStrength_LOW = GuardrailContentFilterStrength.AddMember("LOW", smithyprelude.Unit)
-
-	GuardrailContentFilterStrength_MEDIUM = GuardrailContentFilterStrength.AddMember("MEDIUM", smithyprelude.Unit)
-
-	GuardrailContentFilterStrength_HIGH = GuardrailContentFilterStrength.AddMember("HIGH", smithyprelude.Unit)
-
-	GuardrailContentPolicyAction_BLOCKED = GuardrailContentPolicyAction.AddMember("BLOCKED", smithyprelude.Unit)
-
-	GuardrailContentPolicyAction_NONE = GuardrailContentPolicyAction.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailContentFilter_type = GuardrailContentFilter.AddMember("type", GuardrailContentFilterType)
-
-	GuardrailContentFilter_confidence = GuardrailContentFilter.AddMember("confidence", GuardrailContentFilterConfidence)
-
-	GuardrailContentFilter_filterStrength = GuardrailContentFilter.AddMember("filterStrength", GuardrailContentFilterStrength)
-
-	GuardrailContentFilter_action = GuardrailContentFilter.AddMember("action", GuardrailContentPolicyAction)
-
-	GuardrailContentFilter_detected = GuardrailContentFilter.AddMember("detected", smithyprelude.Boolean)
-
-	_GuardrailContentFilterList_member = _GuardrailContentFilterList.AddMember("member", GuardrailContentFilter)
-
-	GuardrailContentPolicyAssessment_filters = GuardrailContentPolicyAssessment.AddMember("filters", _GuardrailContentFilterList)
-
-	GuardrailWordPolicyAction_BLOCKED = GuardrailWordPolicyAction.AddMember("BLOCKED", smithyprelude.Unit)
-
-	GuardrailWordPolicyAction_NONE = GuardrailWordPolicyAction.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailCustomWord_match = GuardrailCustomWord.AddMember("match", smithyprelude.String)
-
-	GuardrailCustomWord_action = GuardrailCustomWord.AddMember("action", GuardrailWordPolicyAction)
-
-	GuardrailCustomWord_detected = GuardrailCustomWord.AddMember("detected", smithyprelude.Boolean)
-
-	_GuardrailCustomWordList_member = _GuardrailCustomWordList.AddMember("member", GuardrailCustomWord)
-
-	GuardrailManagedWordType_PROFANITY = GuardrailManagedWordType.AddMember("PROFANITY", smithyprelude.Unit)
-
-	GuardrailManagedWord_match = GuardrailManagedWord.AddMember("match", smithyprelude.String)
-
-	GuardrailManagedWord_type = GuardrailManagedWord.AddMember("type", GuardrailManagedWordType)
-
-	GuardrailManagedWord_action = GuardrailManagedWord.AddMember("action", GuardrailWordPolicyAction)
-
-	GuardrailManagedWord_detected = GuardrailManagedWord.AddMember("detected", smithyprelude.Boolean)
-
-	_GuardrailManagedWordList_member = _GuardrailManagedWordList.AddMember("member", GuardrailManagedWord)
-
-	GuardrailWordPolicyAssessment_customWords = GuardrailWordPolicyAssessment.AddMember("customWords", _GuardrailCustomWordList)
-
-	GuardrailWordPolicyAssessment_managedWordLists = GuardrailWordPolicyAssessment.AddMember("managedWordLists", _GuardrailManagedWordList)
-
-	GuardrailPiiEntityType_ADDRESS = GuardrailPiiEntityType.AddMember("ADDRESS", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_AGE = GuardrailPiiEntityType.AddMember("AGE", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_AWS_ACCESS_KEY = GuardrailPiiEntityType.AddMember("AWS_ACCESS_KEY", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_AWS_SECRET_KEY = GuardrailPiiEntityType.AddMember("AWS_SECRET_KEY", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_CA_HEALTH_NUMBER = GuardrailPiiEntityType.AddMember("CA_HEALTH_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER = GuardrailPiiEntityType.AddMember("CA_SOCIAL_INSURANCE_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV = GuardrailPiiEntityType.AddMember("CREDIT_DEBIT_CARD_CVV", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY = GuardrailPiiEntityType.AddMember("CREDIT_DEBIT_CARD_EXPIRY", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER = GuardrailPiiEntityType.AddMember("CREDIT_DEBIT_CARD_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_DRIVER_ID = GuardrailPiiEntityType.AddMember("DRIVER_ID", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_EMAIL = GuardrailPiiEntityType.AddMember("EMAIL", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = GuardrailPiiEntityType.AddMember("INTERNATIONAL_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_IP_ADDRESS = GuardrailPiiEntityType.AddMember("IP_ADDRESS", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_LICENSE_PLATE = GuardrailPiiEntityType.AddMember("LICENSE_PLATE", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_MAC_ADDRESS = GuardrailPiiEntityType.AddMember("MAC_ADDRESS", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_NAME = GuardrailPiiEntityType.AddMember("NAME", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_PASSWORD = GuardrailPiiEntityType.AddMember("PASSWORD", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_PHONE = GuardrailPiiEntityType.AddMember("PHONE", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_PIN = GuardrailPiiEntityType.AddMember("PIN", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_SWIFT_CODE = GuardrailPiiEntityType.AddMember("SWIFT_CODE", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER = GuardrailPiiEntityType.AddMember("UK_NATIONAL_HEALTH_SERVICE_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER = GuardrailPiiEntityType.AddMember("UK_NATIONAL_INSURANCE_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = GuardrailPiiEntityType.AddMember("UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_URL = GuardrailPiiEntityType.AddMember("URL", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_USERNAME = GuardrailPiiEntityType.AddMember("USERNAME", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER = GuardrailPiiEntityType.AddMember("US_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_US_BANK_ROUTING_NUMBER = GuardrailPiiEntityType.AddMember("US_BANK_ROUTING_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = GuardrailPiiEntityType.AddMember("US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_US_PASSPORT_NUMBER = GuardrailPiiEntityType.AddMember("US_PASSPORT_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER = GuardrailPiiEntityType.AddMember("US_SOCIAL_SECURITY_NUMBER", smithyprelude.Unit)
-
-	GuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER = GuardrailPiiEntityType.AddMember("VEHICLE_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	GuardrailSensitiveInformationPolicyAction_ANONYMIZED = GuardrailSensitiveInformationPolicyAction.AddMember("ANONYMIZED", smithyprelude.Unit)
-
-	GuardrailSensitiveInformationPolicyAction_BLOCKED = GuardrailSensitiveInformationPolicyAction.AddMember("BLOCKED", smithyprelude.Unit)
-
-	GuardrailSensitiveInformationPolicyAction_NONE = GuardrailSensitiveInformationPolicyAction.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailPiiEntityFilter_match = GuardrailPiiEntityFilter.AddMember("match", smithyprelude.String)
-
-	GuardrailPiiEntityFilter_type = GuardrailPiiEntityFilter.AddMember("type", GuardrailPiiEntityType)
-
-	GuardrailPiiEntityFilter_action = GuardrailPiiEntityFilter.AddMember("action", GuardrailSensitiveInformationPolicyAction)
-
-	GuardrailPiiEntityFilter_detected = GuardrailPiiEntityFilter.AddMember("detected", smithyprelude.Boolean)
-
-	_GuardrailPiiEntityFilterList_member = _GuardrailPiiEntityFilterList.AddMember("member", GuardrailPiiEntityFilter)
-
-	GuardrailRegexFilter_name = GuardrailRegexFilter.AddMember("name", smithyprelude.String)
-
-	GuardrailRegexFilter_match = GuardrailRegexFilter.AddMember("match", smithyprelude.String)
-
-	GuardrailRegexFilter_regex = GuardrailRegexFilter.AddMember("regex", smithyprelude.String)
-
-	GuardrailRegexFilter_action = GuardrailRegexFilter.AddMember("action", GuardrailSensitiveInformationPolicyAction)
-
-	GuardrailRegexFilter_detected = GuardrailRegexFilter.AddMember("detected", smithyprelude.Boolean)
-
-	_GuardrailRegexFilterList_member = _GuardrailRegexFilterList.AddMember("member", GuardrailRegexFilter)
-
-	GuardrailSensitiveInformationPolicyAssessment_piiEntities = GuardrailSensitiveInformationPolicyAssessment.AddMember("piiEntities", _GuardrailPiiEntityFilterList)
-
-	GuardrailSensitiveInformationPolicyAssessment_regexes = GuardrailSensitiveInformationPolicyAssessment.AddMember("regexes", _GuardrailRegexFilterList)
-
-	GuardrailContextualGroundingFilterType_GROUNDING = GuardrailContextualGroundingFilterType.AddMember("GROUNDING", smithyprelude.Unit)
-
-	GuardrailContextualGroundingFilterType_RELEVANCE = GuardrailContextualGroundingFilterType.AddMember("RELEVANCE", smithyprelude.Unit)
-
-	GuardrailContextualGroundingPolicyAction_BLOCKED = GuardrailContextualGroundingPolicyAction.AddMember("BLOCKED", smithyprelude.Unit)
-
-	GuardrailContextualGroundingPolicyAction_NONE = GuardrailContextualGroundingPolicyAction.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailContextualGroundingFilter_type = GuardrailContextualGroundingFilter.AddMember("type", GuardrailContextualGroundingFilterType)
-
-	GuardrailContextualGroundingFilter_threshold = GuardrailContextualGroundingFilter.AddMember("threshold", smithyprelude.Double)
-
-	GuardrailContextualGroundingFilter_score = GuardrailContextualGroundingFilter.AddMember("score", smithyprelude.Double)
-
-	GuardrailContextualGroundingFilter_action = GuardrailContextualGroundingFilter.AddMember("action", GuardrailContextualGroundingPolicyAction)
-
-	GuardrailContextualGroundingFilter_detected = GuardrailContextualGroundingFilter.AddMember("detected", smithyprelude.Boolean)
-
-	_GuardrailContextualGroundingFilters_member = _GuardrailContextualGroundingFilters.AddMember("member", GuardrailContextualGroundingFilter)
-
-	GuardrailContextualGroundingPolicyAssessment_filters = GuardrailContextualGroundingPolicyAssessment.AddMember("filters", _GuardrailContextualGroundingFilters)
-
-	GuardrailAutomatedReasoningStatement_logic = GuardrailAutomatedReasoningStatement.AddMember("logic", _GuardrailAutomatedReasoningStatementLogicContent)
-
-	GuardrailAutomatedReasoningStatement_naturalLanguage = GuardrailAutomatedReasoningStatement.AddMember("naturalLanguage", _GuardrailAutomatedReasoningStatementNaturalLanguageContent)
-
-	_GuardrailAutomatedReasoningStatementList_member = _GuardrailAutomatedReasoningStatementList.AddMember("member", GuardrailAutomatedReasoningStatement)
-
-	GuardrailAutomatedReasoningInputTextReference_text = GuardrailAutomatedReasoningInputTextReference.AddMember("text", _GuardrailAutomatedReasoningStatementNaturalLanguageContent)
-
-	_GuardrailAutomatedReasoningInputTextReferenceList_member = _GuardrailAutomatedReasoningInputTextReferenceList.AddMember("member", GuardrailAutomatedReasoningInputTextReference)
-
-	GuardrailAutomatedReasoningTranslation_premises = GuardrailAutomatedReasoningTranslation.AddMember("premises", _GuardrailAutomatedReasoningStatementList)
-
-	GuardrailAutomatedReasoningTranslation_claims = GuardrailAutomatedReasoningTranslation.AddMember("claims", _GuardrailAutomatedReasoningStatementList)
-
-	GuardrailAutomatedReasoningTranslation_untranslatedPremises = GuardrailAutomatedReasoningTranslation.AddMember("untranslatedPremises", _GuardrailAutomatedReasoningInputTextReferenceList)
-
-	GuardrailAutomatedReasoningTranslation_untranslatedClaims = GuardrailAutomatedReasoningTranslation.AddMember("untranslatedClaims", _GuardrailAutomatedReasoningInputTextReferenceList)
-
-	GuardrailAutomatedReasoningTranslation_confidence = GuardrailAutomatedReasoningTranslation.AddMember("confidence", _GuardrailAutomatedReasoningTranslationConfidence)
-
-	GuardrailAutomatedReasoningScenario_statements = GuardrailAutomatedReasoningScenario.AddMember("statements", _GuardrailAutomatedReasoningStatementList)
-
-	GuardrailAutomatedReasoningRule_identifier = GuardrailAutomatedReasoningRule.AddMember("identifier", _AutomatedReasoningRuleIdentifier)
-
-	GuardrailAutomatedReasoningRule_policyVersionArn = GuardrailAutomatedReasoningRule.AddMember("policyVersionArn", _GuardrailAutomatedReasoningPolicyVersionArn)
-
-	_GuardrailAutomatedReasoningRuleList_member = _GuardrailAutomatedReasoningRuleList.AddMember("member", GuardrailAutomatedReasoningRule)
-
-	GuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE = GuardrailAutomatedReasoningLogicWarningType.AddMember("ALWAYS_FALSE", smithyprelude.Unit)
-
-	GuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE = GuardrailAutomatedReasoningLogicWarningType.AddMember("ALWAYS_TRUE", smithyprelude.Unit)
-
-	GuardrailAutomatedReasoningLogicWarning_type = GuardrailAutomatedReasoningLogicWarning.AddMember("type", GuardrailAutomatedReasoningLogicWarningType)
-
-	GuardrailAutomatedReasoningLogicWarning_premises = GuardrailAutomatedReasoningLogicWarning.AddMember("premises", _GuardrailAutomatedReasoningStatementList)
-
-	GuardrailAutomatedReasoningLogicWarning_claims = GuardrailAutomatedReasoningLogicWarning.AddMember("claims", _GuardrailAutomatedReasoningStatementList)
-
-	GuardrailAutomatedReasoningValidFinding_translation = GuardrailAutomatedReasoningValidFinding.AddMember("translation", GuardrailAutomatedReasoningTranslation)
-
-	GuardrailAutomatedReasoningValidFinding_claimsTrueScenario = GuardrailAutomatedReasoningValidFinding.AddMember("claimsTrueScenario", GuardrailAutomatedReasoningScenario)
-
-	GuardrailAutomatedReasoningValidFinding_supportingRules = GuardrailAutomatedReasoningValidFinding.AddMember("supportingRules", _GuardrailAutomatedReasoningRuleList)
-
-	GuardrailAutomatedReasoningValidFinding_logicWarning = GuardrailAutomatedReasoningValidFinding.AddMember("logicWarning", GuardrailAutomatedReasoningLogicWarning)
-
-	GuardrailAutomatedReasoningInvalidFinding_translation = GuardrailAutomatedReasoningInvalidFinding.AddMember("translation", GuardrailAutomatedReasoningTranslation)
-
-	GuardrailAutomatedReasoningInvalidFinding_contradictingRules = GuardrailAutomatedReasoningInvalidFinding.AddMember("contradictingRules", _GuardrailAutomatedReasoningRuleList)
-
-	GuardrailAutomatedReasoningInvalidFinding_logicWarning = GuardrailAutomatedReasoningInvalidFinding.AddMember("logicWarning", GuardrailAutomatedReasoningLogicWarning)
-
-	GuardrailAutomatedReasoningSatisfiableFinding_translation = GuardrailAutomatedReasoningSatisfiableFinding.AddMember("translation", GuardrailAutomatedReasoningTranslation)
-
-	GuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario = GuardrailAutomatedReasoningSatisfiableFinding.AddMember("claimsTrueScenario", GuardrailAutomatedReasoningScenario)
-
-	GuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario = GuardrailAutomatedReasoningSatisfiableFinding.AddMember("claimsFalseScenario", GuardrailAutomatedReasoningScenario)
-
-	GuardrailAutomatedReasoningSatisfiableFinding_logicWarning = GuardrailAutomatedReasoningSatisfiableFinding.AddMember("logicWarning", GuardrailAutomatedReasoningLogicWarning)
-
-	GuardrailAutomatedReasoningImpossibleFinding_translation = GuardrailAutomatedReasoningImpossibleFinding.AddMember("translation", GuardrailAutomatedReasoningTranslation)
-
-	GuardrailAutomatedReasoningImpossibleFinding_contradictingRules = GuardrailAutomatedReasoningImpossibleFinding.AddMember("contradictingRules", _GuardrailAutomatedReasoningRuleList)
-
-	GuardrailAutomatedReasoningImpossibleFinding_logicWarning = GuardrailAutomatedReasoningImpossibleFinding.AddMember("logicWarning", GuardrailAutomatedReasoningLogicWarning)
-
-	_GuardrailAutomatedReasoningTranslationList_member = _GuardrailAutomatedReasoningTranslationList.AddMember("member", GuardrailAutomatedReasoningTranslation)
-
-	GuardrailAutomatedReasoningTranslationOption_translations = GuardrailAutomatedReasoningTranslationOption.AddMember("translations", _GuardrailAutomatedReasoningTranslationList)
-
-	_GuardrailAutomatedReasoningTranslationOptionList_member = _GuardrailAutomatedReasoningTranslationOptionList.AddMember("member", GuardrailAutomatedReasoningTranslationOption)
-
-	_GuardrailAutomatedReasoningDifferenceScenarioList_member = _GuardrailAutomatedReasoningDifferenceScenarioList.AddMember("member", GuardrailAutomatedReasoningScenario)
-
-	GuardrailAutomatedReasoningTranslationAmbiguousFinding_options = GuardrailAutomatedReasoningTranslationAmbiguousFinding.AddMember("options", _GuardrailAutomatedReasoningTranslationOptionList)
-
-	GuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios = GuardrailAutomatedReasoningTranslationAmbiguousFinding.AddMember("differenceScenarios", _GuardrailAutomatedReasoningDifferenceScenarioList)
-
-	GuardrailAutomatedReasoningFinding_valid = GuardrailAutomatedReasoningFinding.AddMember("valid", GuardrailAutomatedReasoningValidFinding)
-
-	GuardrailAutomatedReasoningFinding_invalid = GuardrailAutomatedReasoningFinding.AddMember("invalid", GuardrailAutomatedReasoningInvalidFinding)
-
-	GuardrailAutomatedReasoningFinding_satisfiable = GuardrailAutomatedReasoningFinding.AddMember("satisfiable", GuardrailAutomatedReasoningSatisfiableFinding)
-
-	GuardrailAutomatedReasoningFinding_impossible = GuardrailAutomatedReasoningFinding.AddMember("impossible", GuardrailAutomatedReasoningImpossibleFinding)
-
-	GuardrailAutomatedReasoningFinding_translationAmbiguous = GuardrailAutomatedReasoningFinding.AddMember("translationAmbiguous", GuardrailAutomatedReasoningTranslationAmbiguousFinding)
-
-	GuardrailAutomatedReasoningFinding_tooComplex = GuardrailAutomatedReasoningFinding.AddMember("tooComplex", GuardrailAutomatedReasoningTooComplexFinding)
-
-	GuardrailAutomatedReasoningFinding_noTranslations = GuardrailAutomatedReasoningFinding.AddMember("noTranslations", GuardrailAutomatedReasoningNoTranslationsFinding)
-
-	_GuardrailAutomatedReasoningFindingList_member = _GuardrailAutomatedReasoningFindingList.AddMember("member", GuardrailAutomatedReasoningFinding)
-
-	GuardrailAutomatedReasoningPolicyAssessment_findings = GuardrailAutomatedReasoningPolicyAssessment.AddMember("findings", _GuardrailAutomatedReasoningFindingList)
-
-	GuardrailUsage_topicPolicyUnits = GuardrailUsage.AddMember("topicPolicyUnits", _GuardrailTopicPolicyUnitsProcessed)
-
-	GuardrailUsage_contentPolicyUnits = GuardrailUsage.AddMember("contentPolicyUnits", _GuardrailContentPolicyUnitsProcessed)
-
-	GuardrailUsage_wordPolicyUnits = GuardrailUsage.AddMember("wordPolicyUnits", _GuardrailWordPolicyUnitsProcessed)
-
-	GuardrailUsage_sensitiveInformationPolicyUnits = GuardrailUsage.AddMember("sensitiveInformationPolicyUnits", _GuardrailSensitiveInformationPolicyUnitsProcessed)
-
-	GuardrailUsage_sensitiveInformationPolicyFreeUnits = GuardrailUsage.AddMember("sensitiveInformationPolicyFreeUnits", _GuardrailSensitiveInformationPolicyFreeUnitsProcessed)
-
-	GuardrailUsage_contextualGroundingPolicyUnits = GuardrailUsage.AddMember("contextualGroundingPolicyUnits", _GuardrailContextualGroundingPolicyUnitsProcessed)
-
-	GuardrailUsage_contentPolicyImageUnits = GuardrailUsage.AddMember("contentPolicyImageUnits", _GuardrailContentPolicyImageUnitsProcessed)
-
-	GuardrailUsage_automatedReasoningPolicyUnits = GuardrailUsage.AddMember("automatedReasoningPolicyUnits", _GuardrailAutomatedReasoningPolicyUnitsProcessed)
-
-	GuardrailUsage_automatedReasoningPolicies = GuardrailUsage.AddMember("automatedReasoningPolicies", _GuardrailAutomatedReasoningPoliciesProcessed)
-
-	GuardrailTextCharactersCoverage_guarded = GuardrailTextCharactersCoverage.AddMember("guarded", _TextCharactersGuarded)
-
-	GuardrailTextCharactersCoverage_total = GuardrailTextCharactersCoverage.AddMember("total", _TextCharactersTotal)
-
-	GuardrailImageCoverage_guarded = GuardrailImageCoverage.AddMember("guarded", _ImagesGuarded)
-
-	GuardrailImageCoverage_total = GuardrailImageCoverage.AddMember("total", _ImagesTotal)
-
-	GuardrailCoverage_textCharacters = GuardrailCoverage.AddMember("textCharacters", GuardrailTextCharactersCoverage)
-
-	GuardrailCoverage_images = GuardrailCoverage.AddMember("images", GuardrailImageCoverage)
-
-	GuardrailInvocationMetrics_guardrailProcessingLatency = GuardrailInvocationMetrics.AddMember("guardrailProcessingLatency", _GuardrailProcessingLatency)
-
-	GuardrailInvocationMetrics_usage = GuardrailInvocationMetrics.AddMember("usage", GuardrailUsage)
-
-	GuardrailInvocationMetrics_guardrailCoverage = GuardrailInvocationMetrics.AddMember("guardrailCoverage", GuardrailCoverage)
-
-	GuardrailAssessment_topicPolicy = GuardrailAssessment.AddMember("topicPolicy", GuardrailTopicPolicyAssessment)
-
-	GuardrailAssessment_contentPolicy = GuardrailAssessment.AddMember("contentPolicy", GuardrailContentPolicyAssessment)
-
-	GuardrailAssessment_wordPolicy = GuardrailAssessment.AddMember("wordPolicy", GuardrailWordPolicyAssessment)
-
-	GuardrailAssessment_sensitiveInformationPolicy = GuardrailAssessment.AddMember("sensitiveInformationPolicy", GuardrailSensitiveInformationPolicyAssessment)
-
-	GuardrailAssessment_contextualGroundingPolicy = GuardrailAssessment.AddMember("contextualGroundingPolicy", GuardrailContextualGroundingPolicyAssessment)
-
-	GuardrailAssessment_automatedReasoningPolicy = GuardrailAssessment.AddMember("automatedReasoningPolicy", GuardrailAutomatedReasoningPolicyAssessment)
-
-	GuardrailAssessment_invocationMetrics = GuardrailAssessment.AddMember("invocationMetrics", GuardrailInvocationMetrics)
-
-	GuardrailAssessment_appliedGuardrailDetails = GuardrailAssessment.AddMember("appliedGuardrailDetails", AppliedGuardrailDetails)
-
-	_GuardrailAssessmentMap_key = _GuardrailAssessmentMap.AddMember("key", smithyprelude.String)
-
-	_GuardrailAssessmentMap_value = _GuardrailAssessmentMap.AddMember("value", GuardrailAssessment)
-
-	_GuardrailAssessmentList_member = _GuardrailAssessmentList.AddMember("member", GuardrailAssessment)
-
-	_GuardrailAssessmentListMap_key = _GuardrailAssessmentListMap.AddMember("key", smithyprelude.String)
-
-	_GuardrailAssessmentListMap_value = _GuardrailAssessmentListMap.AddMember("value", _GuardrailAssessmentList)
-
-	GuardrailTraceAssessment_modelOutput = GuardrailTraceAssessment.AddMember("modelOutput", _ModelOutputs)
-
-	GuardrailTraceAssessment_inputAssessment = GuardrailTraceAssessment.AddMember("inputAssessment", _GuardrailAssessmentMap)
-
-	GuardrailTraceAssessment_outputAssessments = GuardrailTraceAssessment.AddMember("outputAssessments", _GuardrailAssessmentListMap)
-
-	GuardrailTraceAssessment_actionReason = GuardrailTraceAssessment.AddMember("actionReason", smithyprelude.String)
-
-	PromptRouterTrace_invokedModelId = PromptRouterTrace.AddMember("invokedModelId", _InvokedModelId)
-
-	ConverseStreamTrace_guardrail = ConverseStreamTrace.AddMember("guardrail", GuardrailTraceAssessment)
-
-	ConverseStreamTrace_promptRouter = ConverseStreamTrace.AddMember("promptRouter", PromptRouterTrace)
-
-	PerformanceConfigLatency_STANDARD = PerformanceConfigLatency.AddMember("STANDARD", smithyprelude.Unit)
-
-	PerformanceConfigLatency_OPTIMIZED = PerformanceConfigLatency.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	PerformanceConfiguration_latency = PerformanceConfiguration.AddMember("latency", PerformanceConfigLatency)
-
-	ServiceTierType_PRIORITY = ServiceTierType.AddMember("PRIORITY", smithyprelude.Unit)
-
-	ServiceTierType_DEFAULT = ServiceTierType.AddMember("DEFAULT", smithyprelude.Unit)
-
-	ServiceTierType_FLEX = ServiceTierType.AddMember("FLEX", smithyprelude.Unit)
-
-	ServiceTierType_RESERVED = ServiceTierType.AddMember("RESERVED", smithyprelude.Unit)
-
-	ServiceTier_type = ServiceTier.AddMember("type", ServiceTierType)
-
-	ConverseStreamMetadataEvent_usage = ConverseStreamMetadataEvent.AddMember("usage", TokenUsage)
-
-	ConverseStreamMetadataEvent_metrics = ConverseStreamMetadataEvent.AddMember("metrics", ConverseStreamMetrics)
-
-	ConverseStreamMetadataEvent_trace = ConverseStreamMetadataEvent.AddMember("trace", ConverseStreamTrace)
-
-	ConverseStreamMetadataEvent_performanceConfig = ConverseStreamMetadataEvent.AddMember("performanceConfig", PerformanceConfiguration)
-
-	ConverseStreamMetadataEvent_serviceTier = ConverseStreamMetadataEvent.AddMember("serviceTier", ServiceTier)
-
-	MessageStartEvent_role = MessageStartEvent.AddMember("role", ConversationRole)
-
-	StopReason_END_TURN = StopReason.AddMember("END_TURN", smithyprelude.Unit)
-
-	StopReason_TOOL_USE = StopReason.AddMember("TOOL_USE", smithyprelude.Unit)
-
-	StopReason_MAX_TOKENS = StopReason.AddMember("MAX_TOKENS", smithyprelude.Unit)
-
-	StopReason_STOP_SEQUENCE = StopReason.AddMember("STOP_SEQUENCE", smithyprelude.Unit)
-
-	StopReason_GUARDRAIL_INTERVENED = StopReason.AddMember("GUARDRAIL_INTERVENED", smithyprelude.Unit)
-
-	StopReason_CONTENT_FILTERED = StopReason.AddMember("CONTENT_FILTERED", smithyprelude.Unit)
-
-	StopReason_MALFORMED_MODEL_OUTPUT = StopReason.AddMember("MALFORMED_MODEL_OUTPUT", smithyprelude.Unit)
-
-	StopReason_MALFORMED_TOOL_USE = StopReason.AddMember("MALFORMED_TOOL_USE", smithyprelude.Unit)
-
-	StopReason_MODEL_CONTEXT_WINDOW_EXCEEDED = StopReason.AddMember("MODEL_CONTEXT_WINDOW_EXCEEDED", smithyprelude.Unit)
-
-	MessageStopEvent_stopReason = MessageStopEvent.AddMember("stopReason", StopReason)
-
-	MessageStopEvent_additionalModelResponseFields = MessageStopEvent.AddMember("additionalModelResponseFields", smithyprelude.Document)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
-
-	ModelStreamErrorException_message = ModelStreamErrorException.AddMember("message", _NonBlankString)
-
-	ModelStreamErrorException_originalStatusCode = ModelStreamErrorException.AddMember("originalStatusCode", _StatusCode)
-
-	ModelStreamErrorException_originalMessage = ModelStreamErrorException.AddMember("originalMessage", _NonBlankString)
-
-	ValidationException_message = ValidationException.AddMember("message", _NonBlankString)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _NonBlankString)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _NonBlankString)
-
-	ConverseStreamOutput_messageStart = ConverseStreamOutput.AddMember("messageStart", MessageStartEvent)
-
-	ConverseStreamOutput_contentBlockStart = ConverseStreamOutput.AddMember("contentBlockStart", ContentBlockStartEvent)
-
-	ConverseStreamOutput_contentBlockDelta = ConverseStreamOutput.AddMember("contentBlockDelta", ContentBlockDeltaEvent)
-
-	ConverseStreamOutput_contentBlockStop = ConverseStreamOutput.AddMember("contentBlockStop", ContentBlockStopEvent)
-
-	ConverseStreamOutput_messageStop = ConverseStreamOutput.AddMember("messageStop", MessageStopEvent)
-
-	ConverseStreamOutput_metadata = ConverseStreamOutput.AddMember("metadata", ConverseStreamMetadataEvent)
-
-	ConverseStreamOutput_internalServerException = ConverseStreamOutput.AddMember("internalServerException", InternalServerException)
-
-	ConverseStreamOutput_modelStreamErrorException = ConverseStreamOutput.AddMember("modelStreamErrorException", ModelStreamErrorException)
-
-	ConverseStreamOutput_validationException = ConverseStreamOutput.AddMember("validationException", ValidationException)
-
-	ConverseStreamOutput_throttlingException = ConverseStreamOutput.AddMember("throttlingException", ThrottlingException)
-
-	ConverseStreamOutput_serviceUnavailableException = ConverseStreamOutput.AddMember("serviceUnavailableException", ServiceUnavailableException)
-
-	_Messages_member = _Messages.AddMember("member", Message)
-
-	SystemContentBlock_text = SystemContentBlock.AddMember("text", _NonEmptyString)
-
-	SystemContentBlock_guardContent = SystemContentBlock.AddMember("guardContent", GuardrailConverseContentBlock)
-
-	SystemContentBlock_cachePoint = SystemContentBlock.AddMember("cachePoint", CachePointBlock)
-
-	_SystemContentBlocks_member = _SystemContentBlocks.AddMember("member", SystemContentBlock)
-
-	ToolInputSchema_json = ToolInputSchema.AddMember("json", smithyprelude.Document)
-
-	ToolSpecification_name = ToolSpecification.AddMember("name", _ToolName)
-
-	ToolSpecification_description = ToolSpecification.AddMember("description", _NonEmptyString)
-
-	ToolSpecification_inputSchema = ToolSpecification.AddMember("inputSchema", ToolInputSchema)
-
-	ToolSpecification_strict = ToolSpecification.AddMember("strict", smithyprelude.Boolean)
-
-	SystemTool_name = SystemTool.AddMember("name", _ToolName)
-
-	Tool_toolSpec = Tool.AddMember("toolSpec", ToolSpecification)
-
-	Tool_systemTool = Tool.AddMember("systemTool", SystemTool)
-
-	Tool_cachePoint = Tool.AddMember("cachePoint", CachePointBlock)
-
-	_Tools_member = _Tools.AddMember("member", Tool)
-
-	SpecificToolChoice_name = SpecificToolChoice.AddMember("name", _ToolName)
-
-	ToolChoice_auto = ToolChoice.AddMember("auto", AutoToolChoice)
-
-	ToolChoice_any = ToolChoice.AddMember("any", AnyToolChoice)
-
-	ToolChoice_tool = ToolChoice.AddMember("tool", SpecificToolChoice)
-
-	ToolConfiguration_tools = ToolConfiguration.AddMember("tools", _Tools)
-
-	ToolConfiguration_toolChoice = ToolConfiguration.AddMember("toolChoice", ToolChoice)
-
-	ConverseTokensRequest_messages = ConverseTokensRequest.AddMember("messages", _Messages)
-
-	ConverseTokensRequest_system = ConverseTokensRequest.AddMember("system", _SystemContentBlocks)
-
-	ConverseTokensRequest_toolConfig = ConverseTokensRequest.AddMember("toolConfig", ToolConfiguration)
-
-	ConverseTokensRequest_additionalModelRequestFields = ConverseTokensRequest.AddMember("additionalModelRequestFields", smithyprelude.Document)
-
-	ConverseTrace_guardrail = ConverseTrace.AddMember("guardrail", GuardrailTraceAssessment)
-
-	ConverseTrace_promptRouter = ConverseTrace.AddMember("promptRouter", PromptRouterTrace)
-
-	InvokeModelTokensRequest_body = InvokeModelTokensRequest.AddMember("body", _Body)
-
-	CountTokensInput_invokeModel = CountTokensInput.AddMember("invokeModel", InvokeModelTokensRequest)
-
-	CountTokensInput_converse = CountTokensInput.AddMember("converse", ConverseTokensRequest)
-
-	GuardrailAction_NONE = GuardrailAction.AddMember("NONE", smithyprelude.Unit)
-
-	GuardrailAction_GUARDRAIL_INTERVENED = GuardrailAction.AddMember("GUARDRAIL_INTERVENED", smithyprelude.Unit)
-
-	GuardrailChecksContentFilterCategory_VIOLENCE = GuardrailChecksContentFilterCategory.AddMember("VIOLENCE", smithyprelude.Unit)
-
-	GuardrailChecksContentFilterCategory_HATE = GuardrailChecksContentFilterCategory.AddMember("HATE", smithyprelude.Unit)
-
-	GuardrailChecksContentFilterCategory_SEXUAL = GuardrailChecksContentFilterCategory.AddMember("SEXUAL", smithyprelude.Unit)
-
-	GuardrailChecksContentFilterCategory_MISCONDUCT = GuardrailChecksContentFilterCategory.AddMember("MISCONDUCT", smithyprelude.Unit)
-
-	GuardrailChecksContentFilterCategory_INSULTS = GuardrailChecksContentFilterCategory.AddMember("INSULTS", smithyprelude.Unit)
-
-	GuardrailChecksContentFilterCategoryConfig_category = GuardrailChecksContentFilterCategoryConfig.AddMember("category", GuardrailChecksContentFilterCategory)
-
-	_GuardrailChecksContentFilterCategoryConfigList_member = _GuardrailChecksContentFilterCategoryConfigList.AddMember("member", GuardrailChecksContentFilterCategoryConfig)
-
-	GuardrailChecksContentFilterConfig_categories = GuardrailChecksContentFilterConfig.AddMember("categories", _GuardrailChecksContentFilterCategoryConfigList)
-
-	GuardrailChecksPromptAttackCategory_JAILBREAK = GuardrailChecksPromptAttackCategory.AddMember("JAILBREAK", smithyprelude.Unit)
-
-	GuardrailChecksPromptAttackCategory_PROMPT_INJECTION = GuardrailChecksPromptAttackCategory.AddMember("PROMPT_INJECTION", smithyprelude.Unit)
-
-	GuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE = GuardrailChecksPromptAttackCategory.AddMember("PROMPT_LEAKAGE", smithyprelude.Unit)
-
-	GuardrailChecksPromptAttackCategoryConfig_category = GuardrailChecksPromptAttackCategoryConfig.AddMember("category", GuardrailChecksPromptAttackCategory)
-
-	_GuardrailChecksPromptAttackCategoryConfigList_member = _GuardrailChecksPromptAttackCategoryConfigList.AddMember("member", GuardrailChecksPromptAttackCategoryConfig)
-
-	GuardrailChecksPromptAttackConfig_categories = GuardrailChecksPromptAttackConfig.AddMember("categories", _GuardrailChecksPromptAttackCategoryConfigList)
-
-	GuardrailChecksSensitiveInformationEntityType_ADDRESS = GuardrailChecksSensitiveInformationEntityType.AddMember("ADDRESS", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_AGE = GuardrailChecksSensitiveInformationEntityType.AddMember("AGE", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY = GuardrailChecksSensitiveInformationEntityType.AddMember("AWS_ACCESS_KEY", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY = GuardrailChecksSensitiveInformationEntityType.AddMember("AWS_SECRET_KEY", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("CA_HEALTH_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("CA_SOCIAL_INSURANCE_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV = GuardrailChecksSensitiveInformationEntityType.AddMember("CREDIT_DEBIT_CARD_CVV", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY = GuardrailChecksSensitiveInformationEntityType.AddMember("CREDIT_DEBIT_CARD_EXPIRY", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("CREDIT_DEBIT_CARD_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_DRIVER_ID = GuardrailChecksSensitiveInformationEntityType.AddMember("DRIVER_ID", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_EMAIL = GuardrailChecksSensitiveInformationEntityType.AddMember("EMAIL", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("INTERNATIONAL_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_IP_ADDRESS = GuardrailChecksSensitiveInformationEntityType.AddMember("IP_ADDRESS", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE = GuardrailChecksSensitiveInformationEntityType.AddMember("LICENSE_PLATE", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS = GuardrailChecksSensitiveInformationEntityType.AddMember("MAC_ADDRESS", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_NAME = GuardrailChecksSensitiveInformationEntityType.AddMember("NAME", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_PASSWORD = GuardrailChecksSensitiveInformationEntityType.AddMember("PASSWORD", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_PHONE = GuardrailChecksSensitiveInformationEntityType.AddMember("PHONE", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_PIN = GuardrailChecksSensitiveInformationEntityType.AddMember("PIN", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_SWIFT_CODE = GuardrailChecksSensitiveInformationEntityType.AddMember("SWIFT_CODE", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("UK_NATIONAL_HEALTH_SERVICE_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("UK_NATIONAL_INSURANCE_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_URL = GuardrailChecksSensitiveInformationEntityType.AddMember("URL", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_USERNAME = GuardrailChecksSensitiveInformationEntityType.AddMember("USERNAME", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("US_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("US_BANK_ROUTING_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("US_PASSPORT_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("US_SOCIAL_SECURITY_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER = GuardrailChecksSensitiveInformationEntityType.AddMember("VEHICLE_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	GuardrailChecksSensitiveInformationEntityConfig_type = GuardrailChecksSensitiveInformationEntityConfig.AddMember("type", GuardrailChecksSensitiveInformationEntityType)
-
-	_GuardrailChecksSensitiveInformationEntityConfigList_member = _GuardrailChecksSensitiveInformationEntityConfigList.AddMember("member", GuardrailChecksSensitiveInformationEntityConfig)
-
-	GuardrailChecksSensitiveInformationConfig_entities = GuardrailChecksSensitiveInformationConfig.AddMember("entities", _GuardrailChecksSensitiveInformationEntityConfigList)
-
-	GuardrailChecksConfig_contentFilter = GuardrailChecksConfig.AddMember("contentFilter", GuardrailChecksContentFilterConfig)
-
-	GuardrailChecksConfig_promptAttack = GuardrailChecksConfig.AddMember("promptAttack", GuardrailChecksPromptAttackConfig)
-
-	GuardrailChecksConfig_sensitiveInformation = GuardrailChecksConfig.AddMember("sensitiveInformation", GuardrailChecksSensitiveInformationConfig)
-
-	GuardrailChecksContentBlock_text = GuardrailChecksContentBlock.AddMember("text", _GuardrailChecksTextContent)
-
-	_GuardrailChecksContentBlockList_member = _GuardrailChecksContentBlockList.AddMember("member", GuardrailChecksContentBlock)
-
-	GuardrailChecksContentFilterResultEntry_category = GuardrailChecksContentFilterResultEntry.AddMember("category", GuardrailChecksContentFilterCategory)
-
-	GuardrailChecksContentFilterResultEntry_severityScore = GuardrailChecksContentFilterResultEntry.AddMember("severityScore", smithyprelude.Double)
-
-	_GuardrailChecksContentFilterResultList_member = _GuardrailChecksContentFilterResultList.AddMember("member", GuardrailChecksContentFilterResultEntry)
-
-	GuardrailChecksContentFilterResult_results = GuardrailChecksContentFilterResult.AddMember("results", _GuardrailChecksContentFilterResultList)
-
-	GuardrailChecksContentFilterUsage_textUnits = GuardrailChecksContentFilterUsage.AddMember("textUnits", smithyprelude.Integer)
-
-	GuardrailChecksRole_USER = GuardrailChecksRole.AddMember("USER", smithyprelude.Unit)
-
-	GuardrailChecksRole_ASSISTANT = GuardrailChecksRole.AddMember("ASSISTANT", smithyprelude.Unit)
-
-	GuardrailChecksRole_SYSTEM = GuardrailChecksRole.AddMember("SYSTEM", smithyprelude.Unit)
-
-	GuardrailChecksMessage_role = GuardrailChecksMessage.AddMember("role", GuardrailChecksRole)
-
-	GuardrailChecksMessage_content = GuardrailChecksMessage.AddMember("content", _GuardrailChecksContentBlockList)
-
-	_GuardrailChecksMessageList_member = _GuardrailChecksMessageList.AddMember("member", GuardrailChecksMessage)
-
-	GuardrailChecksPromptAttackResultEntry_category = GuardrailChecksPromptAttackResultEntry.AddMember("category", GuardrailChecksPromptAttackCategory)
-
-	GuardrailChecksPromptAttackResultEntry_severityScore = GuardrailChecksPromptAttackResultEntry.AddMember("severityScore", smithyprelude.Double)
-
-	_GuardrailChecksPromptAttackResultList_member = _GuardrailChecksPromptAttackResultList.AddMember("member", GuardrailChecksPromptAttackResultEntry)
-
-	GuardrailChecksPromptAttackResult_results = GuardrailChecksPromptAttackResult.AddMember("results", _GuardrailChecksPromptAttackResultList)
-
-	GuardrailChecksPromptAttackUsage_textUnits = GuardrailChecksPromptAttackUsage.AddMember("textUnits", smithyprelude.Integer)
-
-	GuardrailChecksSensitiveInformationResultEntry_type = GuardrailChecksSensitiveInformationResultEntry.AddMember("type", GuardrailChecksSensitiveInformationEntityType)
-
-	GuardrailChecksSensitiveInformationResultEntry_confidenceScore = GuardrailChecksSensitiveInformationResultEntry.AddMember("confidenceScore", smithyprelude.Double)
-
-	GuardrailChecksSensitiveInformationResultEntry_beginOffset = GuardrailChecksSensitiveInformationResultEntry.AddMember("beginOffset", smithyprelude.Integer)
-
-	GuardrailChecksSensitiveInformationResultEntry_endOffset = GuardrailChecksSensitiveInformationResultEntry.AddMember("endOffset", smithyprelude.Integer)
-
-	GuardrailChecksSensitiveInformationResultEntry_messageIndex = GuardrailChecksSensitiveInformationResultEntry.AddMember("messageIndex", smithyprelude.Integer)
-
-	GuardrailChecksSensitiveInformationResultEntry_contentIndex = GuardrailChecksSensitiveInformationResultEntry.AddMember("contentIndex", smithyprelude.Integer)
-
-	_GuardrailChecksSensitiveInformationResultList_member = _GuardrailChecksSensitiveInformationResultList.AddMember("member", GuardrailChecksSensitiveInformationResultEntry)
-
-	GuardrailChecksSensitiveInformationResult_results = GuardrailChecksSensitiveInformationResult.AddMember("results", _GuardrailChecksSensitiveInformationResultList)
-
-	GuardrailChecksSensitiveInformationResult_truncated = GuardrailChecksSensitiveInformationResult.AddMember("truncated", smithyprelude.Boolean)
-
-	GuardrailChecksResults_contentFilter = GuardrailChecksResults.AddMember("contentFilter", GuardrailChecksContentFilterResult)
-
-	GuardrailChecksResults_promptAttack = GuardrailChecksResults.AddMember("promptAttack", GuardrailChecksPromptAttackResult)
-
-	GuardrailChecksResults_sensitiveInformation = GuardrailChecksResults.AddMember("sensitiveInformation", GuardrailChecksSensitiveInformationResult)
-
-	GuardrailChecksSensitiveInformationUsage_textUnits = GuardrailChecksSensitiveInformationUsage.AddMember("textUnits", smithyprelude.Integer)
-
-	GuardrailChecksUsageResults_contentFilter = GuardrailChecksUsageResults.AddMember("contentFilter", GuardrailChecksContentFilterUsage)
-
-	GuardrailChecksUsageResults_promptAttack = GuardrailChecksUsageResults.AddMember("promptAttack", GuardrailChecksPromptAttackUsage)
-
-	GuardrailChecksUsageResults_sensitiveInformation = GuardrailChecksUsageResults.AddMember("sensitiveInformation", GuardrailChecksSensitiveInformationUsage)
-
-	GuardrailTrace_ENABLED = GuardrailTrace.AddMember("ENABLED", smithyprelude.Unit)
-
-	GuardrailTrace_DISABLED = GuardrailTrace.AddMember("DISABLED", smithyprelude.Unit)
-
-	GuardrailTrace_ENABLED_FULL = GuardrailTrace.AddMember("ENABLED_FULL", smithyprelude.Unit)
-
-	GuardrailConfiguration_guardrailIdentifier = GuardrailConfiguration.AddMember("guardrailIdentifier", _GuardrailIdentifier)
-
-	GuardrailConfiguration_guardrailVersion = GuardrailConfiguration.AddMember("guardrailVersion", _GuardrailVersion)
-
-	GuardrailConfiguration_trace = GuardrailConfiguration.AddMember("trace", GuardrailTrace)
-
-	GuardrailContentQualifier_GROUNDING_SOURCE = GuardrailContentQualifier.AddMember("GROUNDING_SOURCE", smithyprelude.Unit)
-
-	GuardrailContentQualifier_QUERY = GuardrailContentQualifier.AddMember("QUERY", smithyprelude.Unit)
-
-	GuardrailContentQualifier_GUARD_CONTENT = GuardrailContentQualifier.AddMember("GUARD_CONTENT", smithyprelude.Unit)
-
-	_GuardrailContentQualifierList_member = _GuardrailContentQualifierList.AddMember("member", GuardrailContentQualifier)
-
-	GuardrailTextBlock_text = GuardrailTextBlock.AddMember("text", smithyprelude.String)
-
-	GuardrailTextBlock_qualifiers = GuardrailTextBlock.AddMember("qualifiers", _GuardrailContentQualifierList)
-
-	GuardrailImageFormat_PNG = GuardrailImageFormat.AddMember("PNG", smithyprelude.Unit)
-
-	GuardrailImageFormat_JPEG = GuardrailImageFormat.AddMember("JPEG", smithyprelude.Unit)
-
-	GuardrailImageSource_bytes = GuardrailImageSource.AddMember("bytes", smithyprelude.Blob)
-
-	GuardrailImageBlock_format = GuardrailImageBlock.AddMember("format", GuardrailImageFormat)
-
-	GuardrailImageBlock_source = GuardrailImageBlock.AddMember("source", GuardrailImageSource)
-
-	GuardrailContentBlock_text = GuardrailContentBlock.AddMember("text", GuardrailTextBlock)
-
-	GuardrailContentBlock_image = GuardrailContentBlock.AddMember("image", GuardrailImageBlock)
-
-	_GuardrailContentBlockList_member = _GuardrailContentBlockList.AddMember("member", GuardrailContentBlock)
-
-	GuardrailContentSource_INPUT = GuardrailContentSource.AddMember("INPUT", smithyprelude.Unit)
-
-	GuardrailContentSource_OUTPUT = GuardrailContentSource.AddMember("OUTPUT", smithyprelude.Unit)
-
-	GuardrailOutputContent_text = GuardrailOutputContent.AddMember("text", _GuardrailOutputText)
-
-	_GuardrailOutputContentList_member = _GuardrailOutputContentList.AddMember("member", GuardrailOutputContent)
-
-	GuardrailOutputScope_INTERVENTIONS = GuardrailOutputScope.AddMember("INTERVENTIONS", smithyprelude.Unit)
-
-	GuardrailOutputScope_FULL = GuardrailOutputScope.AddMember("FULL", smithyprelude.Unit)
-
-	GuardrailStreamProcessingMode_SYNC = GuardrailStreamProcessingMode.AddMember("SYNC", smithyprelude.Unit)
-
-	GuardrailStreamProcessingMode_ASYNC = GuardrailStreamProcessingMode.AddMember("ASYNC", smithyprelude.Unit)
-
-	GuardrailStreamConfiguration_guardrailIdentifier = GuardrailStreamConfiguration.AddMember("guardrailIdentifier", _GuardrailIdentifier)
-
-	GuardrailStreamConfiguration_guardrailVersion = GuardrailStreamConfiguration.AddMember("guardrailVersion", _GuardrailVersion)
-
-	GuardrailStreamConfiguration_trace = GuardrailStreamConfiguration.AddMember("trace", GuardrailTrace)
-
-	GuardrailStreamConfiguration_streamProcessingMode = GuardrailStreamConfiguration.AddMember("streamProcessingMode", GuardrailStreamProcessingMode)
-
-	_NonEmptyStringList_member = _NonEmptyStringList.AddMember("member", _NonEmptyString)
-
-	InferenceConfiguration_maxTokens = InferenceConfiguration.AddMember("maxTokens", smithyprelude.Integer)
-
-	InferenceConfiguration_temperature = InferenceConfiguration.AddMember("temperature", smithyprelude.Float)
-
-	InferenceConfiguration_topP = InferenceConfiguration.AddMember("topP", smithyprelude.Float)
-
-	InferenceConfiguration_stopSequences = InferenceConfiguration.AddMember("stopSequences", _NonEmptyStringList)
-
-	InvokeModelWithBidirectionalStreamInput_chunk = InvokeModelWithBidirectionalStreamInput.AddMember("chunk", BidirectionalInputPayloadPart)
-
-	ModelTimeoutException_message = ModelTimeoutException.AddMember("message", _NonBlankString)
-
-	InvokeModelWithBidirectionalStreamOutput_chunk = InvokeModelWithBidirectionalStreamOutput.AddMember("chunk", BidirectionalOutputPayloadPart)
-
-	InvokeModelWithBidirectionalStreamOutput_internalServerException = InvokeModelWithBidirectionalStreamOutput.AddMember("internalServerException", InternalServerException)
-
-	InvokeModelWithBidirectionalStreamOutput_modelStreamErrorException = InvokeModelWithBidirectionalStreamOutput.AddMember("modelStreamErrorException", ModelStreamErrorException)
-
-	InvokeModelWithBidirectionalStreamOutput_validationException = InvokeModelWithBidirectionalStreamOutput.AddMember("validationException", ValidationException)
-
-	InvokeModelWithBidirectionalStreamOutput_throttlingException = InvokeModelWithBidirectionalStreamOutput.AddMember("throttlingException", ThrottlingException)
-
-	InvokeModelWithBidirectionalStreamOutput_modelTimeoutException = InvokeModelWithBidirectionalStreamOutput.AddMember("modelTimeoutException", ModelTimeoutException)
-
-	InvokeModelWithBidirectionalStreamOutput_serviceUnavailableException = InvokeModelWithBidirectionalStreamOutput.AddMember("serviceUnavailableException", ServiceUnavailableException)
-
-	JsonSchemaDefinition_schema = JsonSchemaDefinition.AddMember("schema", smithyprelude.String)
-
-	JsonSchemaDefinition_name = JsonSchemaDefinition.AddMember("name", smithyprelude.String)
-
-	JsonSchemaDefinition_description = JsonSchemaDefinition.AddMember("description", smithyprelude.String)
-
-	ModelErrorException_message = ModelErrorException.AddMember("message", _NonBlankString)
-
-	ModelErrorException_originalStatusCode = ModelErrorException.AddMember("originalStatusCode", _StatusCode)
-
-	ModelErrorException_resourceName = ModelErrorException.AddMember("resourceName", _NonBlankString)
-
-	ModelNotReadyException_message = ModelNotReadyException.AddMember("message", _NonBlankString)
-
-	OutputFormatType_JSON_SCHEMA = OutputFormatType.AddMember("JSON_SCHEMA", smithyprelude.Unit)
-
-	OutputFormatStructure_jsonSchema = OutputFormatStructure.AddMember("jsonSchema", JsonSchemaDefinition)
-
-	OutputFormat_type = OutputFormat.AddMember("type", OutputFormatType)
-
-	OutputFormat_structure = OutputFormat.AddMember("structure", OutputFormatStructure)
-
-	OutputConfig_textFormat = OutputConfig.AddMember("textFormat", OutputFormat)
-
-	OutputConfig_effort = OutputConfig.AddMember("effort", smithyprelude.String)
-
-	PayloadPart_bytes = PayloadPart.AddMember("bytes", _PartBody)
-
-	PromptVariableValues_text = PromptVariableValues.AddMember("text", smithyprelude.String)
-
-	_PromptVariableMap_key = _PromptVariableMap.AddMember("key", smithyprelude.String)
-
-	_PromptVariableMap_value = _PromptVariableMap.AddMember("value", PromptVariableValues)
-
-	_RequestMetadata_key = _RequestMetadata.AddMember("key", smithyprelude.String)
-
-	_RequestMetadata_value = _RequestMetadata.AddMember("value", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _NonBlankString)
-
-	ResponseStream_chunk = ResponseStream.AddMember("chunk", PayloadPart)
-
-	ResponseStream_internalServerException = ResponseStream.AddMember("internalServerException", InternalServerException)
-
-	ResponseStream_modelStreamErrorException = ResponseStream.AddMember("modelStreamErrorException", ModelStreamErrorException)
-
-	ResponseStream_validationException = ResponseStream.AddMember("validationException", ValidationException)
-
-	ResponseStream_throttlingException = ResponseStream.AddMember("throttlingException", ThrottlingException)
-
-	ResponseStream_modelTimeoutException = ResponseStream.AddMember("modelTimeoutException", ModelTimeoutException)
-
-	ResponseStream_serviceUnavailableException = ResponseStream.AddMember("serviceUnavailableException", ServiceUnavailableException)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _NonBlankString)
-
-	SortAsyncInvocationBy_SUBMISSION_TIME = SortAsyncInvocationBy.AddMember("SUBMISSION_TIME", smithyprelude.Unit)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	Trace_ENABLED = Trace.AddMember("ENABLED", smithyprelude.Unit)
-
-	Trace_DISABLED = Trace.AddMember("DISABLED", smithyprelude.Unit)
-
-	Trace_ENABLED_FULL = Trace.AddMember("ENABLED_FULL", smithyprelude.Unit)
-
-	ApplyGuardrailRequest_guardrailIdentifier = ApplyGuardrailRequest.AddMember("guardrailIdentifier", _GuardrailIdentifier, &smithytraits.HTTPLabel{})
-
-	ApplyGuardrailRequest_guardrailVersion = ApplyGuardrailRequest.AddMember("guardrailVersion", _GuardrailVersion, &smithytraits.HTTPLabel{})
-
-	ApplyGuardrailRequest_source = ApplyGuardrailRequest.AddMember("source", GuardrailContentSource)
-
-	ApplyGuardrailRequest_content = ApplyGuardrailRequest.AddMember("content", _GuardrailContentBlockList)
-
-	ApplyGuardrailRequest_outputScope = ApplyGuardrailRequest.AddMember("outputScope", GuardrailOutputScope)
-
-	ApplyGuardrailResponse_usage = ApplyGuardrailResponse.AddMember("usage", GuardrailUsage)
-
-	ApplyGuardrailResponse_action = ApplyGuardrailResponse.AddMember("action", GuardrailAction)
-
-	ApplyGuardrailResponse_actionReason = ApplyGuardrailResponse.AddMember("actionReason", smithyprelude.String)
-
-	ApplyGuardrailResponse_outputs = ApplyGuardrailResponse.AddMember("outputs", _GuardrailOutputContentList)
-
-	ApplyGuardrailResponse_assessments = ApplyGuardrailResponse.AddMember("assessments", _GuardrailAssessmentList)
-
-	ApplyGuardrailResponse_guardrailCoverage = ApplyGuardrailResponse.AddMember("guardrailCoverage", GuardrailCoverage)
-
-	ConverseRequest_modelId = ConverseRequest.AddMember("modelId", _ConversationalModelId, &smithytraits.HTTPLabel{})
-
-	ConverseRequest_messages = ConverseRequest.AddMember("messages", _Messages)
-
-	ConverseRequest_system = ConverseRequest.AddMember("system", _SystemContentBlocks)
-
-	ConverseRequest_inferenceConfig = ConverseRequest.AddMember("inferenceConfig", InferenceConfiguration)
-
-	ConverseRequest_toolConfig = ConverseRequest.AddMember("toolConfig", ToolConfiguration)
-
-	ConverseRequest_guardrailConfig = ConverseRequest.AddMember("guardrailConfig", GuardrailConfiguration)
-
-	ConverseRequest_additionalModelRequestFields = ConverseRequest.AddMember("additionalModelRequestFields", smithyprelude.Document)
-
-	ConverseRequest_promptVariables = ConverseRequest.AddMember("promptVariables", _PromptVariableMap)
-
-	ConverseRequest_additionalModelResponseFieldPaths = ConverseRequest.AddMember("additionalModelResponseFieldPaths", _AdditionalModelResponseFieldPaths)
-
-	ConverseRequest_requestMetadata = ConverseRequest.AddMember("requestMetadata", _RequestMetadata)
-
-	ConverseRequest_performanceConfig = ConverseRequest.AddMember("performanceConfig", PerformanceConfiguration)
-
-	ConverseRequest_serviceTier = ConverseRequest.AddMember("serviceTier", ServiceTier)
-
-	ConverseRequest_outputConfig = ConverseRequest.AddMember("outputConfig", OutputConfig)
-
-	ConverseResponse_output = ConverseResponse.AddMember("output", ConverseOutput)
-
-	ConverseResponse_stopReason = ConverseResponse.AddMember("stopReason", StopReason)
-
-	ConverseResponse_usage = ConverseResponse.AddMember("usage", TokenUsage)
-
-	ConverseResponse_metrics = ConverseResponse.AddMember("metrics", ConverseMetrics)
-
-	ConverseResponse_additionalModelResponseFields = ConverseResponse.AddMember("additionalModelResponseFields", smithyprelude.Document)
-
-	ConverseResponse_trace = ConverseResponse.AddMember("trace", ConverseTrace)
-
-	ConverseResponse_performanceConfig = ConverseResponse.AddMember("performanceConfig", PerformanceConfiguration)
-
-	ConverseResponse_serviceTier = ConverseResponse.AddMember("serviceTier", ServiceTier)
-
-	ConverseStreamRequest_modelId = ConverseStreamRequest.AddMember("modelId", _ConversationalModelId, &smithytraits.HTTPLabel{})
-
-	ConverseStreamRequest_messages = ConverseStreamRequest.AddMember("messages", _Messages)
-
-	ConverseStreamRequest_system = ConverseStreamRequest.AddMember("system", _SystemContentBlocks)
-
-	ConverseStreamRequest_inferenceConfig = ConverseStreamRequest.AddMember("inferenceConfig", InferenceConfiguration)
-
-	ConverseStreamRequest_toolConfig = ConverseStreamRequest.AddMember("toolConfig", ToolConfiguration)
-
-	ConverseStreamRequest_guardrailConfig = ConverseStreamRequest.AddMember("guardrailConfig", GuardrailStreamConfiguration)
-
-	ConverseStreamRequest_additionalModelRequestFields = ConverseStreamRequest.AddMember("additionalModelRequestFields", smithyprelude.Document)
-
-	ConverseStreamRequest_promptVariables = ConverseStreamRequest.AddMember("promptVariables", _PromptVariableMap)
-
-	ConverseStreamRequest_additionalModelResponseFieldPaths = ConverseStreamRequest.AddMember("additionalModelResponseFieldPaths", _AdditionalModelResponseFieldPaths)
-
-	ConverseStreamRequest_requestMetadata = ConverseStreamRequest.AddMember("requestMetadata", _RequestMetadata)
-
-	ConverseStreamRequest_performanceConfig = ConverseStreamRequest.AddMember("performanceConfig", PerformanceConfiguration)
-
-	ConverseStreamRequest_serviceTier = ConverseStreamRequest.AddMember("serviceTier", ServiceTier)
-
-	ConverseStreamRequest_outputConfig = ConverseStreamRequest.AddMember("outputConfig", OutputConfig)
-
-	ConverseStreamResponse_stream = ConverseStreamResponse.AddMember("stream", ConverseStreamOutput, &smithytraits.HTTPPayload{})
-
-	CountTokensRequest_modelId = CountTokensRequest.AddMember("modelId", _FoundationModelVersionIdentifier, &smithytraits.HTTPLabel{})
-
-	CountTokensRequest_input = CountTokensRequest.AddMember("input", CountTokensInput)
-
-	CountTokensResponse_inputTokens = CountTokensResponse.AddMember("inputTokens", smithyprelude.Integer)
-
-	GetAsyncInvokeRequest_invocationArn = GetAsyncInvokeRequest.AddMember("invocationArn", _InvocationArn, &smithytraits.HTTPLabel{})
-
-	GetAsyncInvokeResponse_invocationArn = GetAsyncInvokeResponse.AddMember("invocationArn", _InvocationArn)
-
-	GetAsyncInvokeResponse_modelArn = GetAsyncInvokeResponse.AddMember("modelArn", _AsyncInvokeArn)
-
-	GetAsyncInvokeResponse_clientRequestToken = GetAsyncInvokeResponse.AddMember("clientRequestToken", _AsyncInvokeIdempotencyToken)
-
-	GetAsyncInvokeResponse_status = GetAsyncInvokeResponse.AddMember("status", AsyncInvokeStatus)
-
-	GetAsyncInvokeResponse_failureMessage = GetAsyncInvokeResponse.AddMember("failureMessage", _AsyncInvokeMessage)
-
-	GetAsyncInvokeResponse_submitTime = GetAsyncInvokeResponse.AddMember("submitTime", _Timestamp)
-
-	GetAsyncInvokeResponse_lastModifiedTime = GetAsyncInvokeResponse.AddMember("lastModifiedTime", _Timestamp)
-
-	GetAsyncInvokeResponse_endTime = GetAsyncInvokeResponse.AddMember("endTime", _Timestamp)
-
-	GetAsyncInvokeResponse_outputDataConfig = GetAsyncInvokeResponse.AddMember("outputDataConfig", AsyncInvokeOutputDataConfig)
-
-	InvokeGuardrailChecksRequest_messages = InvokeGuardrailChecksRequest.AddMember("messages", _GuardrailChecksMessageList)
-
-	InvokeGuardrailChecksRequest_checks = InvokeGuardrailChecksRequest.AddMember("checks", GuardrailChecksConfig)
-
-	InvokeGuardrailChecksResponse_results = InvokeGuardrailChecksResponse.AddMember("results", GuardrailChecksResults)
-
-	InvokeGuardrailChecksResponse_usage = InvokeGuardrailChecksResponse.AddMember("usage", GuardrailChecksUsageResults)
-
-	InvokeModelRequest_body = InvokeModelRequest.AddMember("body", _Body, &smithytraits.HTTPPayload{})
-
-	InvokeModelRequest_contentType = InvokeModelRequest.AddMember("contentType", _MimeType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	InvokeModelRequest_accept = InvokeModelRequest.AddMember("accept", _MimeType, &smithytraits.HTTPHeader{Name: "Accept"})
-
-	InvokeModelRequest_modelId = InvokeModelRequest.AddMember("modelId", _InvokeModelIdentifier, &smithytraits.HTTPLabel{})
-
-	InvokeModelRequest_trace = InvokeModelRequest.AddMember("trace", Trace, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Trace"})
-
-	InvokeModelRequest_guardrailIdentifier = InvokeModelRequest.AddMember("guardrailIdentifier", _GuardrailIdentifier, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-GuardrailIdentifier"})
-
-	InvokeModelRequest_guardrailVersion = InvokeModelRequest.AddMember("guardrailVersion", _GuardrailVersion, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-GuardrailVersion"})
-
-	InvokeModelRequest_performanceConfigLatency = InvokeModelRequest.AddMember("performanceConfigLatency", PerformanceConfigLatency, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-PerformanceConfig-Latency"})
-
-	InvokeModelRequest_serviceTier = InvokeModelRequest.AddMember("serviceTier", ServiceTierType, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Service-Tier"})
-
-	InvokeModelRequest_requestMetadata = InvokeModelRequest.AddMember("requestMetadata", _RequestMetadataJson, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Request-Metadata"})
-
-	InvokeModelResponse_body = InvokeModelResponse.AddMember("body", _Body, &smithytraits.HTTPPayload{})
-
-	InvokeModelResponse_contentType = InvokeModelResponse.AddMember("contentType", _MimeType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	InvokeModelResponse_performanceConfigLatency = InvokeModelResponse.AddMember("performanceConfigLatency", PerformanceConfigLatency, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-PerformanceConfig-Latency"})
-
-	InvokeModelResponse_serviceTier = InvokeModelResponse.AddMember("serviceTier", ServiceTierType, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Service-Tier"})
-
-	InvokeModelWithBidirectionalStreamRequest_modelId = InvokeModelWithBidirectionalStreamRequest.AddMember("modelId", _InvokeModelIdentifier, &smithytraits.HTTPLabel{})
-
-	InvokeModelWithBidirectionalStreamRequest_body = InvokeModelWithBidirectionalStreamRequest.AddMember("body", InvokeModelWithBidirectionalStreamInput, &smithytraits.HTTPPayload{})
-
-	InvokeModelWithBidirectionalStreamResponse_body = InvokeModelWithBidirectionalStreamResponse.AddMember("body", InvokeModelWithBidirectionalStreamOutput, &smithytraits.HTTPPayload{})
-
-	InvokeModelWithResponseStreamRequest_body = InvokeModelWithResponseStreamRequest.AddMember("body", _Body, &smithytraits.HTTPPayload{})
-
-	InvokeModelWithResponseStreamRequest_contentType = InvokeModelWithResponseStreamRequest.AddMember("contentType", _MimeType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	InvokeModelWithResponseStreamRequest_accept = InvokeModelWithResponseStreamRequest.AddMember("accept", _MimeType, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Accept"})
-
-	InvokeModelWithResponseStreamRequest_modelId = InvokeModelWithResponseStreamRequest.AddMember("modelId", _InvokeModelIdentifier, &smithytraits.HTTPLabel{})
-
-	InvokeModelWithResponseStreamRequest_trace = InvokeModelWithResponseStreamRequest.AddMember("trace", Trace, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Trace"})
-
-	InvokeModelWithResponseStreamRequest_guardrailIdentifier = InvokeModelWithResponseStreamRequest.AddMember("guardrailIdentifier", _GuardrailIdentifier, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-GuardrailIdentifier"})
-
-	InvokeModelWithResponseStreamRequest_guardrailVersion = InvokeModelWithResponseStreamRequest.AddMember("guardrailVersion", _GuardrailVersion, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-GuardrailVersion"})
-
-	InvokeModelWithResponseStreamRequest_performanceConfigLatency = InvokeModelWithResponseStreamRequest.AddMember("performanceConfigLatency", PerformanceConfigLatency, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-PerformanceConfig-Latency"})
-
-	InvokeModelWithResponseStreamRequest_serviceTier = InvokeModelWithResponseStreamRequest.AddMember("serviceTier", ServiceTierType, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Service-Tier"})
-
-	InvokeModelWithResponseStreamRequest_requestMetadata = InvokeModelWithResponseStreamRequest.AddMember("requestMetadata", _RequestMetadataJson, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Request-Metadata"})
-
-	InvokeModelWithResponseStreamResponse_body = InvokeModelWithResponseStreamResponse.AddMember("body", ResponseStream, &smithytraits.HTTPPayload{})
-
-	InvokeModelWithResponseStreamResponse_contentType = InvokeModelWithResponseStreamResponse.AddMember("contentType", _MimeType, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Content-Type"})
-
-	InvokeModelWithResponseStreamResponse_performanceConfigLatency = InvokeModelWithResponseStreamResponse.AddMember("performanceConfigLatency", PerformanceConfigLatency, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-PerformanceConfig-Latency"})
-
-	InvokeModelWithResponseStreamResponse_serviceTier = InvokeModelWithResponseStreamResponse.AddMember("serviceTier", ServiceTierType, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Service-Tier"})
-
-	ListAsyncInvokesRequest_submitTimeAfter = ListAsyncInvokesRequest.AddMember("submitTimeAfter", _Timestamp, &smithytraits.HTTPQuery{Name: "submitTimeAfter"})
-
-	ListAsyncInvokesRequest_submitTimeBefore = ListAsyncInvokesRequest.AddMember("submitTimeBefore", _Timestamp, &smithytraits.HTTPQuery{Name: "submitTimeBefore"})
-
-	ListAsyncInvokesRequest_statusEquals = ListAsyncInvokesRequest.AddMember("statusEquals", AsyncInvokeStatus, &smithytraits.HTTPQuery{Name: "statusEquals"})
-
-	ListAsyncInvokesRequest_maxResults = ListAsyncInvokesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAsyncInvokesRequest_nextToken = ListAsyncInvokesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAsyncInvokesRequest_sortBy = ListAsyncInvokesRequest.AddMember("sortBy", SortAsyncInvocationBy, &smithytraits.HTTPQuery{Name: "sortBy"})
-
-	ListAsyncInvokesRequest_sortOrder = ListAsyncInvokesRequest.AddMember("sortOrder", SortOrder, &smithytraits.HTTPQuery{Name: "sortOrder"})
-
-	ListAsyncInvokesResponse_nextToken = ListAsyncInvokesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListAsyncInvokesResponse_asyncInvokeSummaries = ListAsyncInvokesResponse.AddMember("asyncInvokeSummaries", _AsyncInvokeSummaries)
-
-	StartAsyncInvokeRequest_clientRequestToken = StartAsyncInvokeRequest.AddMember("clientRequestToken", _AsyncInvokeIdempotencyToken)
-
-	StartAsyncInvokeRequest_modelId = StartAsyncInvokeRequest.AddMember("modelId", _AsyncInvokeIdentifier)
-
-	StartAsyncInvokeRequest_modelInput = StartAsyncInvokeRequest.AddMember("modelInput", _ModelInputPayload)
-
-	StartAsyncInvokeRequest_outputDataConfig = StartAsyncInvokeRequest.AddMember("outputDataConfig", AsyncInvokeOutputDataConfig)
-
-	StartAsyncInvokeRequest_tags = StartAsyncInvokeRequest.AddMember("tags", _TagList)
-
-	StartAsyncInvokeResponse_invocationArn = StartAsyncInvokeResponse.AddMember("invocationArn", _InvocationArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 408}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 408}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Accept"}}, DirectMask: 0x80}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Trace"}}, DirectMask: 0x80}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-GuardrailIdentifier"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-GuardrailVersion"}}, DirectMask: 0x80}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-PerformanceConfig-Latency"}}, DirectMask: 0x80}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Service-Tier"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Request-Metadata"}, &smithytraits.Sensitive{}}, DirectMask: 0x80}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Accept"}}, DirectMask: 0x80}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Content-Type"}}, DirectMask: 0x80}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "submitTimeAfter"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "submitTimeBefore"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "statusEquals"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortBy"}}, DirectMask: 0x10}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortOrder"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_AdditionalModelResponseFieldPaths = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalModelResponseFieldPaths_member}}
+var mAppliedGuardrailDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAppliedGuardrailDetails_guardrailId, &sAppliedGuardrailDetails_guardrailVersion, &sAppliedGuardrailDetails_guardrailArn, &sAppliedGuardrailDetails_guardrailOrigin, &sAppliedGuardrailDetails_guardrailOwnership}}
+var mAsyncInvokeOutputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAsyncInvokeOutputDataConfig_s3OutputDataConfig}}
+var mAsyncInvokeS3OutputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAsyncInvokeS3OutputDataConfig_s3Uri, &sAsyncInvokeS3OutputDataConfig_kmsKeyId, &sAsyncInvokeS3OutputDataConfig_bucketOwner}}
+var mAsyncInvokeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAsyncInvokeStatus_IN_PROGRESS, &sAsyncInvokeStatus_COMPLETED, &sAsyncInvokeStatus_FAILED}}
+var m_AsyncInvokeSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_AsyncInvokeSummaries_member}}
+var mAsyncInvokeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAsyncInvokeSummary_invocationArn, &sAsyncInvokeSummary_modelArn, &sAsyncInvokeSummary_clientRequestToken, &sAsyncInvokeSummary_status, &sAsyncInvokeSummary_failureMessage, &sAsyncInvokeSummary_submitTime, &sAsyncInvokeSummary_lastModifiedTime, &sAsyncInvokeSummary_endTime, &sAsyncInvokeSummary_outputDataConfig}, Hash: &hAsyncInvokeSummary}
+var mAudioBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioBlock_format, &sAudioBlock_source, &sAudioBlock_error}}
+var mAudioFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioFormat_MP3, &sAudioFormat_OPUS, &sAudioFormat_WAV, &sAudioFormat_AAC, &sAudioFormat_FLAC, &sAudioFormat_MP4, &sAudioFormat_OGG, &sAudioFormat_MKV, &sAudioFormat_MKA, &sAudioFormat_X_AAC, &sAudioFormat_M4A, &sAudioFormat_MPEG, &sAudioFormat_MPGA, &sAudioFormat_PCM, &sAudioFormat_WEBM}, Hash: &hAudioFormat}
+var mAudioSource = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioSource_bytes, &sAudioSource_s3Location}}
+var mBidirectionalInputPayloadPart = smithy.SchemaMembers{List: []*smithy.Schema{&sBidirectionalInputPayloadPart_bytes}}
+var mBidirectionalOutputPayloadPart = smithy.SchemaMembers{List: []*smithy.Schema{&sBidirectionalOutputPayloadPart_bytes}}
+var mCacheDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheDetail_ttl, &sCacheDetail_inputTokens}}
+var m_CacheDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CacheDetailsList_member}}
+var mCachePointBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sCachePointBlock_type, &sCachePointBlock_ttl}}
+var mCachePointType = smithy.SchemaMembers{List: []*smithy.Schema{&sCachePointType_DEFAULT}}
+var mCacheTTL = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheTTL_FIVE_MINUTES, &sCacheTTL_ONE_HOUR}}
+var mCitation = smithy.SchemaMembers{List: []*smithy.Schema{&sCitation_title, &sCitation_source, &sCitation_sourceContent, &sCitation_location}}
+var mCitationGeneratedContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCitationGeneratedContent_text}}
+var m_CitationGeneratedContentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CitationGeneratedContentList_member}}
+var mCitationLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sCitationLocation_web, &sCitationLocation_documentChar, &sCitationLocation_documentPage, &sCitationLocation_documentChunk, &sCitationLocation_searchResultLocation}}
+var m_Citations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Citations_member}}
+var mCitationsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCitationsConfig_enabled}}
+var mCitationsContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sCitationsContentBlock_content, &sCitationsContentBlock_citations}}
+var mCitationsDelta = smithy.SchemaMembers{List: []*smithy.Schema{&sCitationsDelta_title, &sCitationsDelta_source, &sCitationsDelta_sourceContent, &sCitationsDelta_location}}
+var mCitationSourceContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCitationSourceContent_text}}
+var mCitationSourceContentDelta = smithy.SchemaMembers{List: []*smithy.Schema{&sCitationSourceContentDelta_text}}
+var m_CitationSourceContentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CitationSourceContentList_member}}
+var m_CitationSourceContentListDelta = smithy.SchemaMembers{List: []*smithy.Schema{&s_CitationSourceContentListDelta_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sContentBlock_text, &sContentBlock_image, &sContentBlock_document, &sContentBlock_video, &sContentBlock_audio, &sContentBlock_toolUse, &sContentBlock_toolResult, &sContentBlock_guardContent, &sContentBlock_cachePoint, &sContentBlock_reasoningContent, &sContentBlock_citationsContent, &sContentBlock_searchResult, &sContentBlock_toolAddition, &sContentBlock_toolRemoval}, Hash: &hContentBlock}
+var mContentBlockDelta = smithy.SchemaMembers{List: []*smithy.Schema{&sContentBlockDelta_text, &sContentBlockDelta_toolUse, &sContentBlockDelta_toolResult, &sContentBlockDelta_reasoningContent, &sContentBlockDelta_citation, &sContentBlockDelta_image}}
+var mContentBlockDeltaEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sContentBlockDeltaEvent_delta, &sContentBlockDeltaEvent_contentBlockIndex}}
+var m_ContentBlocks = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContentBlocks_member}}
+var mContentBlockStart = smithy.SchemaMembers{List: []*smithy.Schema{&sContentBlockStart_toolUse, &sContentBlockStart_toolResult, &sContentBlockStart_image}}
+var mContentBlockStartEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sContentBlockStartEvent_start, &sContentBlockStartEvent_contentBlockIndex}}
+var mContentBlockStopEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sContentBlockStopEvent_contentBlockIndex}}
+var mConversationRole = smithy.SchemaMembers{List: []*smithy.Schema{&sConversationRole_USER, &sConversationRole_ASSISTANT, &sConversationRole_SYSTEM}}
+var mConverseMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseMetrics_latencyMs}}
+var mConverseOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseOutput_message}}
+var mConverseStreamMetadataEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseStreamMetadataEvent_usage, &sConverseStreamMetadataEvent_metrics, &sConverseStreamMetadataEvent_trace, &sConverseStreamMetadataEvent_performanceConfig, &sConverseStreamMetadataEvent_serviceTier}}
+var mConverseStreamMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseStreamMetrics_latencyMs}}
+var mConverseStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseStreamOutput_messageStart, &sConverseStreamOutput_contentBlockStart, &sConverseStreamOutput_contentBlockDelta, &sConverseStreamOutput_contentBlockStop, &sConverseStreamOutput_messageStop, &sConverseStreamOutput_metadata, &sConverseStreamOutput_internalServerException, &sConverseStreamOutput_modelStreamErrorException, &sConverseStreamOutput_validationException, &sConverseStreamOutput_throttlingException, &sConverseStreamOutput_serviceUnavailableException}, Hash: &hConverseStreamOutput}
+var mConverseStreamTrace = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseStreamTrace_guardrail, &sConverseStreamTrace_promptRouter}}
+var mConverseTokensRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseTokensRequest_messages, &sConverseTokensRequest_system, &sConverseTokensRequest_toolConfig, &sConverseTokensRequest_additionalModelRequestFields}}
+var mConverseTrace = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseTrace_guardrail, &sConverseTrace_promptRouter}}
+var mCountTokensInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCountTokensInput_invokeModel, &sCountTokensInput_converse}}
+var mDocumentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentBlock_format, &sDocumentBlock_name, &sDocumentBlock_source, &sDocumentBlock_context, &sDocumentBlock_citations}}
+var mDocumentCharLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentCharLocation_documentIndex, &sDocumentCharLocation_start, &sDocumentCharLocation_end}}
+var mDocumentChunkLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentChunkLocation_documentIndex, &sDocumentChunkLocation_start, &sDocumentChunkLocation_end}}
+var mDocumentContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentContentBlock_text}}
+var m_DocumentContentBlocks = smithy.SchemaMembers{List: []*smithy.Schema{&s_DocumentContentBlocks_member}}
+var mDocumentFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentFormat_PDF, &sDocumentFormat_CSV, &sDocumentFormat_DOC, &sDocumentFormat_DOCX, &sDocumentFormat_XLS, &sDocumentFormat_XLSX, &sDocumentFormat_HTML, &sDocumentFormat_TXT, &sDocumentFormat_MD}, Hash: &hDocumentFormat}
+var mDocumentPageLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentPageLocation_documentIndex, &sDocumentPageLocation_start, &sDocumentPageLocation_end}}
+var mDocumentSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentSource_bytes, &sDocumentSource_s3Location, &sDocumentSource_text, &sDocumentSource_content}}
+var mErrorBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorBlock_message}}
+var mGuardrailAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAction_NONE, &sGuardrailAction_GUARDRAIL_INTERVENED}}
+var mGuardrailAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAssessment_topicPolicy, &sGuardrailAssessment_contentPolicy, &sGuardrailAssessment_wordPolicy, &sGuardrailAssessment_sensitiveInformationPolicy, &sGuardrailAssessment_contextualGroundingPolicy, &sGuardrailAssessment_automatedReasoningPolicy, &sGuardrailAssessment_invocationMetrics, &sGuardrailAssessment_appliedGuardrailDetails}}
+var m_GuardrailAssessmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAssessmentList_member}}
+var m_GuardrailAssessmentListMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAssessmentListMap_key, &s_GuardrailAssessmentListMap_value}}
+var m_GuardrailAssessmentMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAssessmentMap_key, &s_GuardrailAssessmentMap_value}}
+var m_GuardrailAutomatedReasoningDifferenceScenarioList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAutomatedReasoningDifferenceScenarioList_member}}
+var mGuardrailAutomatedReasoningFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningFinding_valid, &sGuardrailAutomatedReasoningFinding_invalid, &sGuardrailAutomatedReasoningFinding_satisfiable, &sGuardrailAutomatedReasoningFinding_impossible, &sGuardrailAutomatedReasoningFinding_translationAmbiguous, &sGuardrailAutomatedReasoningFinding_tooComplex, &sGuardrailAutomatedReasoningFinding_noTranslations}}
+var m_GuardrailAutomatedReasoningFindingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAutomatedReasoningFindingList_member}}
+var mGuardrailAutomatedReasoningImpossibleFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningImpossibleFinding_translation, &sGuardrailAutomatedReasoningImpossibleFinding_contradictingRules, &sGuardrailAutomatedReasoningImpossibleFinding_logicWarning}}
+var mGuardrailAutomatedReasoningInputTextReference = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningInputTextReference_text}}
+var m_GuardrailAutomatedReasoningInputTextReferenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAutomatedReasoningInputTextReferenceList_member}}
+var mGuardrailAutomatedReasoningInvalidFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningInvalidFinding_translation, &sGuardrailAutomatedReasoningInvalidFinding_contradictingRules, &sGuardrailAutomatedReasoningInvalidFinding_logicWarning}}
+var mGuardrailAutomatedReasoningLogicWarning = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningLogicWarning_type, &sGuardrailAutomatedReasoningLogicWarning_premises, &sGuardrailAutomatedReasoningLogicWarning_claims}}
+var mGuardrailAutomatedReasoningLogicWarningType = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE, &sGuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE}}
+var mGuardrailAutomatedReasoningPolicyAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningPolicyAssessment_findings}}
+var mGuardrailAutomatedReasoningRule = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningRule_identifier, &sGuardrailAutomatedReasoningRule_policyVersionArn}}
+var m_GuardrailAutomatedReasoningRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAutomatedReasoningRuleList_member}}
+var mGuardrailAutomatedReasoningSatisfiableFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningSatisfiableFinding_translation, &sGuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario, &sGuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario, &sGuardrailAutomatedReasoningSatisfiableFinding_logicWarning}}
+var mGuardrailAutomatedReasoningScenario = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningScenario_statements}}
+var mGuardrailAutomatedReasoningStatement = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningStatement_logic, &sGuardrailAutomatedReasoningStatement_naturalLanguage}}
+var m_GuardrailAutomatedReasoningStatementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAutomatedReasoningStatementList_member}}
+var mGuardrailAutomatedReasoningTranslation = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningTranslation_premises, &sGuardrailAutomatedReasoningTranslation_claims, &sGuardrailAutomatedReasoningTranslation_untranslatedPremises, &sGuardrailAutomatedReasoningTranslation_untranslatedClaims, &sGuardrailAutomatedReasoningTranslation_confidence}}
+var mGuardrailAutomatedReasoningTranslationAmbiguousFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningTranslationAmbiguousFinding_options, &sGuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios}}
+var m_GuardrailAutomatedReasoningTranslationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAutomatedReasoningTranslationList_member}}
+var mGuardrailAutomatedReasoningTranslationOption = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningTranslationOption_translations}}
+var m_GuardrailAutomatedReasoningTranslationOptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailAutomatedReasoningTranslationOptionList_member}}
+var mGuardrailAutomatedReasoningValidFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailAutomatedReasoningValidFinding_translation, &sGuardrailAutomatedReasoningValidFinding_claimsTrueScenario, &sGuardrailAutomatedReasoningValidFinding_supportingRules, &sGuardrailAutomatedReasoningValidFinding_logicWarning}}
+var mGuardrailChecksConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksConfig_contentFilter, &sGuardrailChecksConfig_promptAttack, &sGuardrailChecksConfig_sensitiveInformation}}
+var mGuardrailChecksContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksContentBlock_text}}
+var m_GuardrailChecksContentBlockList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksContentBlockList_member}}
+var mGuardrailChecksContentFilterCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksContentFilterCategory_VIOLENCE, &sGuardrailChecksContentFilterCategory_HATE, &sGuardrailChecksContentFilterCategory_SEXUAL, &sGuardrailChecksContentFilterCategory_MISCONDUCT, &sGuardrailChecksContentFilterCategory_INSULTS}}
+var mGuardrailChecksContentFilterCategoryConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksContentFilterCategoryConfig_category}}
+var m_GuardrailChecksContentFilterCategoryConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksContentFilterCategoryConfigList_member}}
+var mGuardrailChecksContentFilterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksContentFilterConfig_categories}}
+var mGuardrailChecksContentFilterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksContentFilterResult_results}}
+var mGuardrailChecksContentFilterResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksContentFilterResultEntry_category, &sGuardrailChecksContentFilterResultEntry_severityScore}}
+var m_GuardrailChecksContentFilterResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksContentFilterResultList_member}}
+var mGuardrailChecksContentFilterUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksContentFilterUsage_textUnits}}
+var mGuardrailChecksMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksMessage_role, &sGuardrailChecksMessage_content}}
+var m_GuardrailChecksMessageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksMessageList_member}}
+var mGuardrailChecksPromptAttackCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksPromptAttackCategory_JAILBREAK, &sGuardrailChecksPromptAttackCategory_PROMPT_INJECTION, &sGuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE}}
+var mGuardrailChecksPromptAttackCategoryConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksPromptAttackCategoryConfig_category}}
+var m_GuardrailChecksPromptAttackCategoryConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksPromptAttackCategoryConfigList_member}}
+var mGuardrailChecksPromptAttackConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksPromptAttackConfig_categories}}
+var mGuardrailChecksPromptAttackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksPromptAttackResult_results}}
+var mGuardrailChecksPromptAttackResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksPromptAttackResultEntry_category, &sGuardrailChecksPromptAttackResultEntry_severityScore}}
+var m_GuardrailChecksPromptAttackResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksPromptAttackResultList_member}}
+var mGuardrailChecksPromptAttackUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksPromptAttackUsage_textUnits}}
+var mGuardrailChecksResults = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksResults_contentFilter, &sGuardrailChecksResults_promptAttack, &sGuardrailChecksResults_sensitiveInformation}}
+var mGuardrailChecksRole = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksRole_USER, &sGuardrailChecksRole_ASSISTANT, &sGuardrailChecksRole_SYSTEM}}
+var mGuardrailChecksSensitiveInformationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksSensitiveInformationConfig_entities}}
+var mGuardrailChecksSensitiveInformationEntityConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksSensitiveInformationEntityConfig_type}}
+var m_GuardrailChecksSensitiveInformationEntityConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksSensitiveInformationEntityConfigList_member}}
+var mGuardrailChecksSensitiveInformationEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksSensitiveInformationEntityType_ADDRESS, &sGuardrailChecksSensitiveInformationEntityType_AGE, &sGuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY, &sGuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY, &sGuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV, &sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY, &sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_DRIVER_ID, &sGuardrailChecksSensitiveInformationEntityType_EMAIL, &sGuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_IP_ADDRESS, &sGuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE, &sGuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS, &sGuardrailChecksSensitiveInformationEntityType_NAME, &sGuardrailChecksSensitiveInformationEntityType_PASSWORD, &sGuardrailChecksSensitiveInformationEntityType_PHONE, &sGuardrailChecksSensitiveInformationEntityType_PIN, &sGuardrailChecksSensitiveInformationEntityType_SWIFT_CODE, &sGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_URL, &sGuardrailChecksSensitiveInformationEntityType_USERNAME, &sGuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER, &sGuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER}, Hash: &hGuardrailChecksSensitiveInformationEntityType}
+var mGuardrailChecksSensitiveInformationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksSensitiveInformationResult_results, &sGuardrailChecksSensitiveInformationResult_truncated}}
+var mGuardrailChecksSensitiveInformationResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksSensitiveInformationResultEntry_type, &sGuardrailChecksSensitiveInformationResultEntry_confidenceScore, &sGuardrailChecksSensitiveInformationResultEntry_beginOffset, &sGuardrailChecksSensitiveInformationResultEntry_endOffset, &sGuardrailChecksSensitiveInformationResultEntry_messageIndex, &sGuardrailChecksSensitiveInformationResultEntry_contentIndex}}
+var m_GuardrailChecksSensitiveInformationResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailChecksSensitiveInformationResultList_member}}
+var mGuardrailChecksSensitiveInformationUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksSensitiveInformationUsage_textUnits}}
+var mGuardrailChecksUsageResults = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailChecksUsageResults_contentFilter, &sGuardrailChecksUsageResults_promptAttack, &sGuardrailChecksUsageResults_sensitiveInformation}}
+var mGuardrailConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailConfiguration_guardrailIdentifier, &sGuardrailConfiguration_guardrailVersion, &sGuardrailConfiguration_trace}}
+var mGuardrailContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentBlock_text, &sGuardrailContentBlock_image}}
+var m_GuardrailContentBlockList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailContentBlockList_member}}
+var mGuardrailContentFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentFilter_type, &sGuardrailContentFilter_confidence, &sGuardrailContentFilter_filterStrength, &sGuardrailContentFilter_action, &sGuardrailContentFilter_detected}}
+var mGuardrailContentFilterConfidence = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentFilterConfidence_NONE, &sGuardrailContentFilterConfidence_LOW, &sGuardrailContentFilterConfidence_MEDIUM, &sGuardrailContentFilterConfidence_HIGH}}
+var m_GuardrailContentFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailContentFilterList_member}}
+var mGuardrailContentFilterStrength = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentFilterStrength_NONE, &sGuardrailContentFilterStrength_LOW, &sGuardrailContentFilterStrength_MEDIUM, &sGuardrailContentFilterStrength_HIGH}}
+var mGuardrailContentFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentFilterType_INSULTS, &sGuardrailContentFilterType_HATE, &sGuardrailContentFilterType_SEXUAL, &sGuardrailContentFilterType_VIOLENCE, &sGuardrailContentFilterType_MISCONDUCT, &sGuardrailContentFilterType_PROMPT_ATTACK}}
+var mGuardrailContentPolicyAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentPolicyAction_BLOCKED, &sGuardrailContentPolicyAction_NONE}}
+var mGuardrailContentPolicyAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentPolicyAssessment_filters}}
+var mGuardrailContentQualifier = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentQualifier_GROUNDING_SOURCE, &sGuardrailContentQualifier_QUERY, &sGuardrailContentQualifier_GUARD_CONTENT}}
+var m_GuardrailContentQualifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailContentQualifierList_member}}
+var mGuardrailContentSource = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContentSource_INPUT, &sGuardrailContentSource_OUTPUT}}
+var mGuardrailContextualGroundingFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContextualGroundingFilter_type, &sGuardrailContextualGroundingFilter_threshold, &sGuardrailContextualGroundingFilter_score, &sGuardrailContextualGroundingFilter_action, &sGuardrailContextualGroundingFilter_detected}}
+var m_GuardrailContextualGroundingFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailContextualGroundingFilters_member}}
+var mGuardrailContextualGroundingFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContextualGroundingFilterType_GROUNDING, &sGuardrailContextualGroundingFilterType_RELEVANCE}}
+var mGuardrailContextualGroundingPolicyAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContextualGroundingPolicyAction_BLOCKED, &sGuardrailContextualGroundingPolicyAction_NONE}}
+var mGuardrailContextualGroundingPolicyAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailContextualGroundingPolicyAssessment_filters}}
+var mGuardrailConverseContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailConverseContentBlock_text, &sGuardrailConverseContentBlock_image}}
+var mGuardrailConverseContentQualifier = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailConverseContentQualifier_GROUNDING_SOURCE, &sGuardrailConverseContentQualifier_QUERY, &sGuardrailConverseContentQualifier_GUARD_CONTENT}}
+var m_GuardrailConverseContentQualifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailConverseContentQualifierList_member}}
+var mGuardrailConverseImageBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailConverseImageBlock_format, &sGuardrailConverseImageBlock_source}}
+var mGuardrailConverseImageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailConverseImageFormat_PNG, &sGuardrailConverseImageFormat_JPEG}}
+var mGuardrailConverseImageSource = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailConverseImageSource_bytes}}
+var mGuardrailConverseTextBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailConverseTextBlock_text, &sGuardrailConverseTextBlock_qualifiers}}
+var mGuardrailCoverage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailCoverage_textCharacters, &sGuardrailCoverage_images}}
+var mGuardrailCustomWord = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailCustomWord_match, &sGuardrailCustomWord_action, &sGuardrailCustomWord_detected}}
+var m_GuardrailCustomWordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailCustomWordList_member}}
+var mGuardrailImageBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailImageBlock_format, &sGuardrailImageBlock_source}}
+var mGuardrailImageCoverage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailImageCoverage_guarded, &sGuardrailImageCoverage_total}}
+var mGuardrailImageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailImageFormat_PNG, &sGuardrailImageFormat_JPEG}}
+var mGuardrailImageSource = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailImageSource_bytes}}
+var mGuardrailInvocationMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailInvocationMetrics_guardrailProcessingLatency, &sGuardrailInvocationMetrics_usage, &sGuardrailInvocationMetrics_guardrailCoverage}}
+var mGuardrailManagedWord = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailManagedWord_match, &sGuardrailManagedWord_type, &sGuardrailManagedWord_action, &sGuardrailManagedWord_detected}}
+var m_GuardrailManagedWordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailManagedWordList_member}}
+var mGuardrailManagedWordType = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailManagedWordType_PROFANITY}}
+var mGuardrailOrigin = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailOrigin_REQUEST, &sGuardrailOrigin_ACCOUNT_ENFORCED, &sGuardrailOrigin_ORGANIZATION_ENFORCED}}
+var m_GuardrailOriginList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailOriginList_member}}
+var mGuardrailOutputContent = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailOutputContent_text}}
+var m_GuardrailOutputContentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailOutputContentList_member}}
+var mGuardrailOutputScope = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailOutputScope_INTERVENTIONS, &sGuardrailOutputScope_FULL}}
+var mGuardrailOwnership = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailOwnership_SELF, &sGuardrailOwnership_CROSS_ACCOUNT}}
+var mGuardrailPiiEntityFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailPiiEntityFilter_match, &sGuardrailPiiEntityFilter_type, &sGuardrailPiiEntityFilter_action, &sGuardrailPiiEntityFilter_detected}}
+var m_GuardrailPiiEntityFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailPiiEntityFilterList_member}}
+var mGuardrailPiiEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailPiiEntityType_ADDRESS, &sGuardrailPiiEntityType_AGE, &sGuardrailPiiEntityType_AWS_ACCESS_KEY, &sGuardrailPiiEntityType_AWS_SECRET_KEY, &sGuardrailPiiEntityType_CA_HEALTH_NUMBER, &sGuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER, &sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV, &sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY, &sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER, &sGuardrailPiiEntityType_DRIVER_ID, &sGuardrailPiiEntityType_EMAIL, &sGuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER, &sGuardrailPiiEntityType_IP_ADDRESS, &sGuardrailPiiEntityType_LICENSE_PLATE, &sGuardrailPiiEntityType_MAC_ADDRESS, &sGuardrailPiiEntityType_NAME, &sGuardrailPiiEntityType_PASSWORD, &sGuardrailPiiEntityType_PHONE, &sGuardrailPiiEntityType_PIN, &sGuardrailPiiEntityType_SWIFT_CODE, &sGuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER, &sGuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER, &sGuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, &sGuardrailPiiEntityType_URL, &sGuardrailPiiEntityType_USERNAME, &sGuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER, &sGuardrailPiiEntityType_US_BANK_ROUTING_NUMBER, &sGuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, &sGuardrailPiiEntityType_US_PASSPORT_NUMBER, &sGuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER, &sGuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER}, Hash: &hGuardrailPiiEntityType}
+var mGuardrailRegexFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailRegexFilter_name, &sGuardrailRegexFilter_match, &sGuardrailRegexFilter_regex, &sGuardrailRegexFilter_action, &sGuardrailRegexFilter_detected}}
+var m_GuardrailRegexFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailRegexFilterList_member}}
+var mGuardrailSensitiveInformationPolicyAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailSensitiveInformationPolicyAction_ANONYMIZED, &sGuardrailSensitiveInformationPolicyAction_BLOCKED, &sGuardrailSensitiveInformationPolicyAction_NONE}}
+var mGuardrailSensitiveInformationPolicyAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailSensitiveInformationPolicyAssessment_piiEntities, &sGuardrailSensitiveInformationPolicyAssessment_regexes}}
+var mGuardrailStreamConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailStreamConfiguration_guardrailIdentifier, &sGuardrailStreamConfiguration_guardrailVersion, &sGuardrailStreamConfiguration_trace, &sGuardrailStreamConfiguration_streamProcessingMode}}
+var mGuardrailStreamProcessingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailStreamProcessingMode_SYNC, &sGuardrailStreamProcessingMode_ASYNC}}
+var mGuardrailTextBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTextBlock_text, &sGuardrailTextBlock_qualifiers}}
+var mGuardrailTextCharactersCoverage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTextCharactersCoverage_guarded, &sGuardrailTextCharactersCoverage_total}}
+var mGuardrailTopic = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTopic_name, &sGuardrailTopic_type, &sGuardrailTopic_action, &sGuardrailTopic_detected}}
+var m_GuardrailTopicList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailTopicList_member}}
+var mGuardrailTopicPolicyAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTopicPolicyAction_BLOCKED, &sGuardrailTopicPolicyAction_NONE}}
+var mGuardrailTopicPolicyAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTopicPolicyAssessment_topics}}
+var mGuardrailTopicType = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTopicType_DENY}}
+var mGuardrailTrace = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTrace_ENABLED, &sGuardrailTrace_DISABLED, &sGuardrailTrace_ENABLED_FULL}}
+var mGuardrailTraceAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailTraceAssessment_modelOutput, &sGuardrailTraceAssessment_inputAssessment, &sGuardrailTraceAssessment_outputAssessments, &sGuardrailTraceAssessment_actionReason}}
+var mGuardrailUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailUsage_topicPolicyUnits, &sGuardrailUsage_contentPolicyUnits, &sGuardrailUsage_wordPolicyUnits, &sGuardrailUsage_sensitiveInformationPolicyUnits, &sGuardrailUsage_sensitiveInformationPolicyFreeUnits, &sGuardrailUsage_contextualGroundingPolicyUnits, &sGuardrailUsage_contentPolicyImageUnits, &sGuardrailUsage_automatedReasoningPolicyUnits, &sGuardrailUsage_automatedReasoningPolicies}, Hash: &hGuardrailUsage}
+var mGuardrailWordPolicyAction = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailWordPolicyAction_BLOCKED, &sGuardrailWordPolicyAction_NONE}}
+var mGuardrailWordPolicyAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sGuardrailWordPolicyAssessment_customWords, &sGuardrailWordPolicyAssessment_managedWordLists}}
+var mImageBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBlock_format, &sImageBlock_source, &sImageBlock_error}}
+var mImageBlockDelta = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBlockDelta_source, &sImageBlockDelta_error}}
+var mImageBlockStart = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBlockStart_format}}
+var mImageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sImageFormat_PNG, &sImageFormat_JPEG, &sImageFormat_GIF, &sImageFormat_WEBP}}
+var mImageSource = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSource_bytes, &sImageSource_s3Location}}
+var mInferenceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceConfiguration_maxTokens, &sInferenceConfiguration_temperature, &sInferenceConfiguration_topP, &sInferenceConfiguration_stopSequences}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mInvokeModelTokensRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelTokensRequest_body}}
+var mInvokeModelWithBidirectionalStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelWithBidirectionalStreamInput_chunk}}
+var mInvokeModelWithBidirectionalStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelWithBidirectionalStreamOutput_chunk, &sInvokeModelWithBidirectionalStreamOutput_internalServerException, &sInvokeModelWithBidirectionalStreamOutput_modelStreamErrorException, &sInvokeModelWithBidirectionalStreamOutput_validationException, &sInvokeModelWithBidirectionalStreamOutput_throttlingException, &sInvokeModelWithBidirectionalStreamOutput_modelTimeoutException, &sInvokeModelWithBidirectionalStreamOutput_serviceUnavailableException}}
+var mJsonSchemaDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sJsonSchemaDefinition_schema, &sJsonSchemaDefinition_name, &sJsonSchemaDefinition_description}}
+var mMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sMessage_role, &sMessage_content}}
+var m_Messages = smithy.SchemaMembers{List: []*smithy.Schema{&s_Messages_member}}
+var mMessageStartEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageStartEvent_role}}
+var mMessageStopEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageStopEvent_stopReason, &sMessageStopEvent_additionalModelResponseFields}}
+var mModelErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sModelErrorException_message, &sModelErrorException_originalStatusCode, &sModelErrorException_resourceName}}
+var mModelNotReadyException = smithy.SchemaMembers{List: []*smithy.Schema{&sModelNotReadyException_message}}
+var m_ModelOutputs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelOutputs_member}}
+var mModelStreamErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sModelStreamErrorException_message, &sModelStreamErrorException_originalStatusCode, &sModelStreamErrorException_originalMessage}}
+var mModelTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sModelTimeoutException_message}}
+var m_NonEmptyStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NonEmptyStringList_member}}
+var mOutputConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputConfig_textFormat, &sOutputConfig_effort}}
+var mOutputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormat_type, &sOutputFormat_structure}}
+var mOutputFormatStructure = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormatStructure_jsonSchema}}
+var mOutputFormatType = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormatType_JSON_SCHEMA}}
+var mPayloadPart = smithy.SchemaMembers{List: []*smithy.Schema{&sPayloadPart_bytes}}
+var mPerformanceConfigLatency = smithy.SchemaMembers{List: []*smithy.Schema{&sPerformanceConfigLatency_STANDARD, &sPerformanceConfigLatency_OPTIMIZED}}
+var mPerformanceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPerformanceConfiguration_latency}}
+var mPromptRouterTrace = smithy.SchemaMembers{List: []*smithy.Schema{&sPromptRouterTrace_invokedModelId}}
+var m_PromptVariableMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PromptVariableMap_key, &s_PromptVariableMap_value}}
+var mPromptVariableValues = smithy.SchemaMembers{List: []*smithy.Schema{&sPromptVariableValues_text}}
+var mReasoningContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sReasoningContentBlock_reasoningText, &sReasoningContentBlock_redactedContent}}
+var mReasoningContentBlockDelta = smithy.SchemaMembers{List: []*smithy.Schema{&sReasoningContentBlockDelta_text, &sReasoningContentBlockDelta_redactedContent, &sReasoningContentBlockDelta_signature}}
+var mReasoningTextBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sReasoningTextBlock_text, &sReasoningTextBlock_signature}}
+var m_RequestMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_RequestMetadata_key, &s_RequestMetadata_value}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResponseStream = smithy.SchemaMembers{List: []*smithy.Schema{&sResponseStream_chunk, &sResponseStream_internalServerException, &sResponseStream_modelStreamErrorException, &sResponseStream_validationException, &sResponseStream_throttlingException, &sResponseStream_modelTimeoutException, &sResponseStream_serviceUnavailableException}}
+var mS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Location_uri, &sS3Location_bucketOwner}}
+var mSearchResultBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchResultBlock_source, &sSearchResultBlock_title, &sSearchResultBlock_content, &sSearchResultBlock_citations}}
+var mSearchResultContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchResultContentBlock_text}}
+var m_SearchResultContentBlocks = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchResultContentBlocks_member}}
+var mSearchResultLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchResultLocation_searchResultIndex, &sSearchResultLocation_start, &sSearchResultLocation_end}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mServiceTier = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceTier_type}}
+var mServiceTierType = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceTierType_PRIORITY, &sServiceTierType_DEFAULT, &sServiceTierType_FLEX, &sServiceTierType_RESERVED}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var mSortAsyncInvocationBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSortAsyncInvocationBy_SUBMISSION_TIME}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASCENDING, &sSortOrder_DESCENDING}}
+var mSpecificToolChoice = smithy.SchemaMembers{List: []*smithy.Schema{&sSpecificToolChoice_name}}
+var mStopReason = smithy.SchemaMembers{List: []*smithy.Schema{&sStopReason_END_TURN, &sStopReason_TOOL_USE, &sStopReason_MAX_TOKENS, &sStopReason_STOP_SEQUENCE, &sStopReason_GUARDRAIL_INTERVENED, &sStopReason_CONTENT_FILTERED, &sStopReason_MALFORMED_MODEL_OUTPUT, &sStopReason_MALFORMED_TOOL_USE, &sStopReason_MODEL_CONTEXT_WINDOW_EXCEEDED}, Hash: &hStopReason}
+var mSystemContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sSystemContentBlock_text, &sSystemContentBlock_guardContent, &sSystemContentBlock_cachePoint}}
+var m_SystemContentBlocks = smithy.SchemaMembers{List: []*smithy.Schema{&s_SystemContentBlocks_member}}
+var mSystemTool = smithy.SchemaMembers{List: []*smithy.Schema{&sSystemTool_name}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTokenUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sTokenUsage_inputTokens, &sTokenUsage_outputTokens, &sTokenUsage_totalTokens, &sTokenUsage_cacheReadInputTokens, &sTokenUsage_cacheWriteInputTokens, &sTokenUsage_cacheDetails}}
+var mTool = smithy.SchemaMembers{List: []*smithy.Schema{&sTool_toolSpec, &sTool_systemTool, &sTool_cachePoint}}
+var mToolAdditionBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sToolAdditionBlock_tool}}
+var mToolChoice = smithy.SchemaMembers{List: []*smithy.Schema{&sToolChoice_auto, &sToolChoice_any, &sToolChoice_tool}}
+var mToolConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sToolConfiguration_tools, &sToolConfiguration_toolChoice}}
+var mToolInputSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sToolInputSchema_json}}
+var mToolReference = smithy.SchemaMembers{List: []*smithy.Schema{&sToolReference_type, &sToolReference_name, &sToolReference_serverName}}
+var mToolRemovalBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sToolRemovalBlock_tool}}
+var mToolResultBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sToolResultBlock_toolUseId, &sToolResultBlock_content, &sToolResultBlock_status, &sToolResultBlock_type}}
+var mToolResultBlockDelta = smithy.SchemaMembers{List: []*smithy.Schema{&sToolResultBlockDelta_text, &sToolResultBlockDelta_json}}
+var m_ToolResultBlocksDelta = smithy.SchemaMembers{List: []*smithy.Schema{&s_ToolResultBlocksDelta_member}}
+var mToolResultBlockStart = smithy.SchemaMembers{List: []*smithy.Schema{&sToolResultBlockStart_toolUseId, &sToolResultBlockStart_type, &sToolResultBlockStart_status}}
+var mToolResultContentBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sToolResultContentBlock_json, &sToolResultContentBlock_text, &sToolResultContentBlock_image, &sToolResultContentBlock_document, &sToolResultContentBlock_video, &sToolResultContentBlock_searchResult}}
+var m_ToolResultContentBlocks = smithy.SchemaMembers{List: []*smithy.Schema{&s_ToolResultContentBlocks_member}}
+var mToolResultStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sToolResultStatus_SUCCESS, &sToolResultStatus_ERROR}}
+var m_Tools = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tools_member}}
+var mToolSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sToolSpecification_name, &sToolSpecification_description, &sToolSpecification_inputSchema, &sToolSpecification_strict}}
+var mToolUseBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sToolUseBlock_toolUseId, &sToolUseBlock_name, &sToolUseBlock_input, &sToolUseBlock_type}}
+var mToolUseBlockDelta = smithy.SchemaMembers{List: []*smithy.Schema{&sToolUseBlockDelta_input}}
+var mToolUseBlockStart = smithy.SchemaMembers{List: []*smithy.Schema{&sToolUseBlockStart_toolUseId, &sToolUseBlockStart_name, &sToolUseBlockStart_type}}
+var mToolUseType = smithy.SchemaMembers{List: []*smithy.Schema{&sToolUseType_SERVER_TOOL_USE}}
+var mTrace = smithy.SchemaMembers{List: []*smithy.Schema{&sTrace_ENABLED, &sTrace_DISABLED, &sTrace_ENABLED_FULL}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mVideoBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoBlock_format, &sVideoBlock_source}}
+var mVideoFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoFormat_MKV, &sVideoFormat_MOV, &sVideoFormat_MP4, &sVideoFormat_WEBM, &sVideoFormat_FLV, &sVideoFormat_MPEG, &sVideoFormat_MPG, &sVideoFormat_WMV, &sVideoFormat_THREE_GP}, Hash: &hVideoFormat}
+var mVideoSource = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoSource_bytes, &sVideoSource_s3Location}}
+var mWebLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sWebLocation_url, &sWebLocation_domain}}
+var mApplyGuardrailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyGuardrailRequest_guardrailIdentifier, &sApplyGuardrailRequest_guardrailVersion, &sApplyGuardrailRequest_source, &sApplyGuardrailRequest_content, &sApplyGuardrailRequest_outputScope}}
+var mApplyGuardrailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyGuardrailResponse_usage, &sApplyGuardrailResponse_action, &sApplyGuardrailResponse_actionReason, &sApplyGuardrailResponse_outputs, &sApplyGuardrailResponse_assessments, &sApplyGuardrailResponse_guardrailCoverage}}
+var mConverseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseRequest_modelId, &sConverseRequest_messages, &sConverseRequest_system, &sConverseRequest_inferenceConfig, &sConverseRequest_toolConfig, &sConverseRequest_guardrailConfig, &sConverseRequest_additionalModelRequestFields, &sConverseRequest_promptVariables, &sConverseRequest_additionalModelResponseFieldPaths, &sConverseRequest_requestMetadata, &sConverseRequest_performanceConfig, &sConverseRequest_serviceTier, &sConverseRequest_outputConfig}, Hash: &hConverseRequest}
+var mConverseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseResponse_output, &sConverseResponse_stopReason, &sConverseResponse_usage, &sConverseResponse_metrics, &sConverseResponse_additionalModelResponseFields, &sConverseResponse_trace, &sConverseResponse_performanceConfig, &sConverseResponse_serviceTier}}
+var mConverseStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseStreamRequest_modelId, &sConverseStreamRequest_messages, &sConverseStreamRequest_system, &sConverseStreamRequest_inferenceConfig, &sConverseStreamRequest_toolConfig, &sConverseStreamRequest_guardrailConfig, &sConverseStreamRequest_additionalModelRequestFields, &sConverseStreamRequest_promptVariables, &sConverseStreamRequest_additionalModelResponseFieldPaths, &sConverseStreamRequest_requestMetadata, &sConverseStreamRequest_performanceConfig, &sConverseStreamRequest_serviceTier, &sConverseStreamRequest_outputConfig}, Hash: &hConverseStreamRequest}
+var mConverseStreamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConverseStreamResponse_stream}}
+var mCountTokensRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCountTokensRequest_modelId, &sCountTokensRequest_input}}
+var mCountTokensResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCountTokensResponse_inputTokens}}
+var mGetAsyncInvokeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAsyncInvokeRequest_invocationArn}}
+var mGetAsyncInvokeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAsyncInvokeResponse_invocationArn, &sGetAsyncInvokeResponse_modelArn, &sGetAsyncInvokeResponse_clientRequestToken, &sGetAsyncInvokeResponse_status, &sGetAsyncInvokeResponse_failureMessage, &sGetAsyncInvokeResponse_submitTime, &sGetAsyncInvokeResponse_lastModifiedTime, &sGetAsyncInvokeResponse_endTime, &sGetAsyncInvokeResponse_outputDataConfig}, Hash: &hGetAsyncInvokeResponse}
+var mInvokeGuardrailChecksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeGuardrailChecksRequest_messages, &sInvokeGuardrailChecksRequest_checks}}
+var mInvokeGuardrailChecksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeGuardrailChecksResponse_results, &sInvokeGuardrailChecksResponse_usage}}
+var mInvokeModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelRequest_body, &sInvokeModelRequest_contentType, &sInvokeModelRequest_accept, &sInvokeModelRequest_modelId, &sInvokeModelRequest_trace, &sInvokeModelRequest_guardrailIdentifier, &sInvokeModelRequest_guardrailVersion, &sInvokeModelRequest_performanceConfigLatency, &sInvokeModelRequest_serviceTier, &sInvokeModelRequest_requestMetadata}, Hash: &hInvokeModelRequest}
+var mInvokeModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelResponse_body, &sInvokeModelResponse_contentType, &sInvokeModelResponse_performanceConfigLatency, &sInvokeModelResponse_serviceTier}}
+var mInvokeModelWithBidirectionalStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelWithBidirectionalStreamRequest_modelId, &sInvokeModelWithBidirectionalStreamRequest_body}}
+var mInvokeModelWithBidirectionalStreamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelWithBidirectionalStreamResponse_body}}
+var mInvokeModelWithResponseStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelWithResponseStreamRequest_body, &sInvokeModelWithResponseStreamRequest_contentType, &sInvokeModelWithResponseStreamRequest_accept, &sInvokeModelWithResponseStreamRequest_modelId, &sInvokeModelWithResponseStreamRequest_trace, &sInvokeModelWithResponseStreamRequest_guardrailIdentifier, &sInvokeModelWithResponseStreamRequest_guardrailVersion, &sInvokeModelWithResponseStreamRequest_performanceConfigLatency, &sInvokeModelWithResponseStreamRequest_serviceTier, &sInvokeModelWithResponseStreamRequest_requestMetadata}, Hash: &hInvokeModelWithResponseStreamRequest}
+var mInvokeModelWithResponseStreamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeModelWithResponseStreamResponse_body, &sInvokeModelWithResponseStreamResponse_contentType, &sInvokeModelWithResponseStreamResponse_performanceConfigLatency, &sInvokeModelWithResponseStreamResponse_serviceTier}}
+var mListAsyncInvokesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAsyncInvokesRequest_submitTimeAfter, &sListAsyncInvokesRequest_submitTimeBefore, &sListAsyncInvokesRequest_statusEquals, &sListAsyncInvokesRequest_maxResults, &sListAsyncInvokesRequest_nextToken, &sListAsyncInvokesRequest_sortBy, &sListAsyncInvokesRequest_sortOrder}}
+var mListAsyncInvokesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAsyncInvokesResponse_nextToken, &sListAsyncInvokesResponse_asyncInvokeSummaries}}
+var mStartAsyncInvokeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAsyncInvokeRequest_clientRequestToken, &sStartAsyncInvokeRequest_modelId, &sStartAsyncInvokeRequest_modelInput, &sStartAsyncInvokeRequest_outputDataConfig, &sStartAsyncInvokeRequest_tags}}
+var mStartAsyncInvokeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAsyncInvokeResponse_invocationArn}}
+
+var hAsyncInvokeSummary = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 3, 0, 4, 0,
+	2, 0, 0, 7, 1, 5, 0, 6,
+}}
+var hAudioFormat = smithy.MemberHash{Seed: 184, Slots: []uint16{
+	0, 5, 0, 0, 0, 0, 10, 0, 1, 0, 3, 0, 0, 7, 0, 9, 2, 0, 13, 0, 14, 12, 6, 0,
+	0, 8, 4, 15, 0, 0, 11, 0,
+}}
+var hContentBlock = smithy.MemberHash{Seed: 61, Slots: []uint16{
+	0, 3, 12, 11, 4, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 5, 0, 9, 10, 0,
+	0, 7, 14, 0, 0, 8, 13, 0,
+}}
+var hConverseStreamOutput = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 7, 0, 2, 0, 0, 0, 11, 0, 9, 10, 0, 6, 1, 5, 0, 0, 8, 0, 0, 4, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 3,
+}}
+var hDocumentFormat = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 2, 7, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 6, 1, 0, 0, 0, 9, 0,
+	8, 0, 0, 0, 0, 0, 4, 0,
+}}
+var hGuardrailChecksSensitiveInformationEntityType = smithy.MemberHash{Seed: 8447, Slots: []uint16{
+	22, 0, 28, 0, 0, 0, 0, 0, 0, 21, 0, 6, 2, 0, 19, 0, 0, 0, 18, 25, 23, 31, 11, 29,
+	5, 16, 0, 0, 0, 0, 0, 3, 0, 9, 13, 0, 26, 0, 1, 0, 0, 14, 0, 4, 30, 0, 20, 27,
+	0, 10, 0, 0, 0, 8, 12, 0, 0, 17, 15, 0, 7, 0, 0, 24,
+}}
+var hGuardrailPiiEntityType = smithy.MemberHash{Seed: 8447, Slots: []uint16{
+	22, 0, 28, 0, 0, 0, 0, 0, 0, 21, 0, 6, 2, 0, 19, 0, 0, 0, 18, 25, 23, 31, 11, 29,
+	5, 16, 0, 0, 0, 0, 0, 3, 0, 9, 13, 0, 26, 0, 1, 0, 0, 14, 0, 4, 30, 0, 20, 27,
+	0, 10, 0, 0, 0, 8, 12, 0, 0, 17, 15, 0, 7, 0, 0, 24,
+}}
+var hGuardrailUsage = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 5, 6, 0, 0, 4, 0, 0, 0, 0, 7, 0, 3, 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 0,
+	0, 0, 0, 0, 0, 8, 0, 2,
+}}
+var hStopReason = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 9, 0, 5, 0, 0, 7, 0, 0, 8, 3, 0,
+	0, 0, 0, 0, 0, 0, 0, 6,
+}}
+var hVideoFormat = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 7, 0, 0, 0, 2, 4, 0, 0, 8, 0, 0,
+	5, 0, 0, 6, 0, 0, 9, 0,
+}}
+var hConverseRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 10, 0, 0, 4, 0, 6, 0, 0, 12, 0, 13, 5, 2, 7, 0, 0, 0, 0, 1, 0, 0, 8, 0,
+	0, 9, 0, 3, 0, 0, 0, 11,
+}}
+var hConverseStreamRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 10, 0, 0, 4, 0, 6, 0, 0, 12, 0, 13, 5, 2, 7, 0, 0, 0, 0, 1, 0, 0, 8, 0,
+	0, 9, 0, 3, 0, 0, 0, 11,
+}}
+var hGetAsyncInvokeResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 3, 0, 4, 0,
+	2, 0, 0, 7, 1, 5, 0, 6,
+}}
+var hInvokeModelRequest = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	6, 8, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 4, 2, 5, 0,
+	0, 3, 0, 0, 9, 0, 0, 0,
+}}
+var hInvokeModelWithResponseStreamRequest = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	6, 8, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 4, 2, 5, 0,
+	0, 3, 0, 0, 9, 0, 0, 0,
+}}
+
+var sApplyGuardrail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyGuardrail, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eApplyGuardrail})
+var sConverse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverse, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eConverse})
+var sConverseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseStream, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eConverseStream})
+var sCountTokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountTokens, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCountTokens})
+var sGetAsyncInvoke = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAsyncInvoke, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetAsyncInvoke})
+var sInvokeGuardrailChecks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeGuardrailChecks, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eInvokeGuardrailChecks})
+var sInvokeModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModel, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eInvokeModel})
+var sInvokeModelWithBidirectionalStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithBidirectionalStream, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eInvokeModelWithBidirectionalStream})
+var sInvokeModelWithResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithResponseStream, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eInvokeModelWithResponseStream})
+var sListAsyncInvokes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAsyncInvokes, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListAsyncInvokes})
+var sStartAsyncInvoke = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAsyncInvoke, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eStartAsyncInvoke})
+var s_AmazonBedrockFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonBedrockFrontendService, Type: smithy.ShapeTypeService, Ext: &e_AmazonBedrockFrontendService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AdditionalModelResponseFieldPaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalModelResponseFieldPaths, Members: &m_AdditionalModelResponseFieldPaths, Type: smithy.ShapeTypeList, Ext: &e_AdditionalModelResponseFieldPaths})
+var s_AdditionalModelResponseFieldPaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AdditionalModelResponseFieldPaths_member})
+var sAnyToolChoice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnyToolChoice, Type: smithy.ShapeTypeStructure, Ext: &eAnyToolChoice})
+var sAppliedGuardrailDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppliedGuardrailDetails, Members: &mAppliedGuardrailDetails, Type: smithy.ShapeTypeStructure, Ext: &eAppliedGuardrailDetails})
+var sAppliedGuardrailDetails_guardrailId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailId", ID: &i_GuardrailId, Type: smithy.ShapeTypeString, Ext: &eAppliedGuardrailDetails_guardrailId})
+var sAppliedGuardrailDetails_guardrailVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailVersion", ID: &i_GuardrailVersion, Type: smithy.ShapeTypeString, Ext: &eAppliedGuardrailDetails_guardrailVersion})
+var sAppliedGuardrailDetails_guardrailArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailArn", ID: &i_GuardrailArn, Type: smithy.ShapeTypeString, Ext: &eAppliedGuardrailDetails_guardrailArn})
+var sAppliedGuardrailDetails_guardrailOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailOrigin", ID: &i_GuardrailOriginList, Members: &m_GuardrailOriginList, Type: smithy.ShapeTypeList, Ext: &eAppliedGuardrailDetails_guardrailOrigin})
+var sAppliedGuardrailDetails_guardrailOwnership = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailOwnership", ID: &iGuardrailOwnership, Members: &mGuardrailOwnership, Type: smithy.ShapeTypeEnum, Ext: &eAppliedGuardrailDetails_guardrailOwnership})
+var s_AsyncInvokeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncInvokeArn, Type: smithy.ShapeTypeString, Ext: &e_AsyncInvokeArn})
+var s_AsyncInvokeIdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncInvokeIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_AsyncInvokeIdempotencyToken})
+var s_AsyncInvokeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncInvokeIdentifier, Type: smithy.ShapeTypeString, Ext: &e_AsyncInvokeIdentifier})
+var s_AsyncInvokeMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncInvokeMessage, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &e_AsyncInvokeMessage})
+var sAsyncInvokeOutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAsyncInvokeOutputDataConfig, Members: &mAsyncInvokeOutputDataConfig, Type: smithy.ShapeTypeUnion, Ext: &eAsyncInvokeOutputDataConfig})
+var sAsyncInvokeOutputDataConfig_s3OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3OutputDataConfig", ID: &iAsyncInvokeS3OutputDataConfig, Members: &mAsyncInvokeS3OutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eAsyncInvokeOutputDataConfig_s3OutputDataConfig})
+var sAsyncInvokeS3OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAsyncInvokeS3OutputDataConfig, Members: &mAsyncInvokeS3OutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eAsyncInvokeS3OutputDataConfig})
+var sAsyncInvokeS3OutputDataConfig_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eAsyncInvokeS3OutputDataConfig_s3Uri})
+var sAsyncInvokeS3OutputDataConfig_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eAsyncInvokeS3OutputDataConfig_kmsKeyId})
+var sAsyncInvokeS3OutputDataConfig_bucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAsyncInvokeS3OutputDataConfig_bucketOwner})
+var sAsyncInvokeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAsyncInvokeStatus, Members: &mAsyncInvokeStatus, Type: smithy.ShapeTypeEnum, Ext: &eAsyncInvokeStatus})
+var sAsyncInvokeStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncInvokeStatus_IN_PROGRESS})
+var sAsyncInvokeStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncInvokeStatus_COMPLETED})
+var sAsyncInvokeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncInvokeStatus_FAILED})
+var s_AsyncInvokeSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncInvokeSummaries, Members: &m_AsyncInvokeSummaries, Type: smithy.ShapeTypeList, Ext: &e_AsyncInvokeSummaries})
+var s_AsyncInvokeSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAsyncInvokeSummary, Members: &mAsyncInvokeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AsyncInvokeSummaries_member})
+var sAsyncInvokeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAsyncInvokeSummary, Members: &mAsyncInvokeSummary, Type: smithy.ShapeTypeStructure, Ext: &eAsyncInvokeSummary})
+var sAsyncInvokeSummary_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &eAsyncInvokeSummary_invocationArn})
+var sAsyncInvokeSummary_modelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelArn", ID: &i_AsyncInvokeArn, Type: smithy.ShapeTypeString, Ext: &eAsyncInvokeSummary_modelArn})
+var sAsyncInvokeSummary_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_AsyncInvokeIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eAsyncInvokeSummary_clientRequestToken})
+var sAsyncInvokeSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAsyncInvokeStatus, Members: &mAsyncInvokeStatus, Type: smithy.ShapeTypeEnum, Ext: &eAsyncInvokeSummary_status})
+var sAsyncInvokeSummary_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &i_AsyncInvokeMessage, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eAsyncInvokeSummary_failureMessage})
+var sAsyncInvokeSummary_submitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submitTime", ID: &i_Timestamp, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &eAsyncInvokeSummary_submitTime})
+var sAsyncInvokeSummary_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_Timestamp, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &eAsyncInvokeSummary_lastModifiedTime})
+var sAsyncInvokeSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &eAsyncInvokeSummary_endTime})
+var sAsyncInvokeSummary_outputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputDataConfig", ID: &iAsyncInvokeOutputDataConfig, Members: &mAsyncInvokeOutputDataConfig, Type: smithy.ShapeTypeUnion, Ext: &eAsyncInvokeSummary_outputDataConfig})
+var sAudioBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioBlock, Members: &mAudioBlock, Type: smithy.ShapeTypeStructure, Ext: &eAudioBlock})
+var sAudioBlock_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iAudioFormat, Members: &mAudioFormat, Type: smithy.ShapeTypeEnum, Ext: &eAudioBlock_format})
+var sAudioBlock_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iAudioSource, Members: &mAudioSource, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eAudioBlock_source})
+var sAudioBlock_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorBlock, Members: &mErrorBlock, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eAudioBlock_error})
+var sAudioFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioFormat, Members: &mAudioFormat, Type: smithy.ShapeTypeEnum, Ext: &eAudioFormat})
+var sAudioFormat_MP3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_MP3})
+var sAudioFormat_OPUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_OPUS})
+var sAudioFormat_WAV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_WAV})
+var sAudioFormat_AAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_AAC})
+var sAudioFormat_FLAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_FLAC})
+var sAudioFormat_MP4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_MP4})
+var sAudioFormat_OGG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OGG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_OGG})
+var sAudioFormat_MKV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MKV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_MKV})
+var sAudioFormat_MKA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MKA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_MKA})
+var sAudioFormat_X_AAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "X_AAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_X_AAC})
+var sAudioFormat_M4A = smithy.NewStaticSchema(smithy.StaticSchema{Member: "M4A", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_M4A})
+var sAudioFormat_MPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_MPEG})
+var sAudioFormat_MPGA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MPGA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_MPGA})
+var sAudioFormat_PCM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_PCM})
+var sAudioFormat_WEBM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAudioFormat_WEBM})
+var sAudioSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioSource, Members: &mAudioSource, Traits: &t12, Type: smithy.ShapeTypeUnion, Ext: &eAudioSource})
+var sAudioSource_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eAudioSource_bytes})
+var sAudioSource_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eAudioSource_s3Location})
+var s_AutomatedReasoningRuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomatedReasoningRuleIdentifier, Type: smithy.ShapeTypeString, Ext: &e_AutomatedReasoningRuleIdentifier})
+var sAutoToolChoice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoToolChoice, Type: smithy.ShapeTypeStructure, Ext: &eAutoToolChoice})
+var sBidirectionalInputPayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBidirectionalInputPayloadPart, Members: &mBidirectionalInputPayloadPart, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eBidirectionalInputPayloadPart})
+var sBidirectionalInputPayloadPart_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &i_PartBody, Traits: &t13, Type: smithy.ShapeTypeBlob, Ext: &eBidirectionalInputPayloadPart_bytes})
+var sBidirectionalOutputPayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBidirectionalOutputPayloadPart, Members: &mBidirectionalOutputPayloadPart, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eBidirectionalOutputPayloadPart})
+var sBidirectionalOutputPayloadPart_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &i_PartBody, Traits: &t13, Type: smithy.ShapeTypeBlob, Ext: &eBidirectionalOutputPayloadPart_bytes})
+var s_Body = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Body, Traits: &t12, Type: smithy.ShapeTypeBlob, Ext: &e_Body})
+var sCacheDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheDetail, Members: &mCacheDetail, Type: smithy.ShapeTypeStructure, Ext: &eCacheDetail})
+var sCacheDetail_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &iCacheTTL, Members: &mCacheTTL, Type: smithy.ShapeTypeEnum, Ext: &eCacheDetail_ttl})
+var sCacheDetail_inputTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCacheDetail_inputTokens})
+var s_CacheDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheDetailsList, Members: &m_CacheDetailsList, Type: smithy.ShapeTypeList, Ext: &e_CacheDetailsList})
+var s_CacheDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCacheDetail, Members: &mCacheDetail, Type: smithy.ShapeTypeStructure, Ext: &e_CacheDetailsList_member})
+var sCachePointBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCachePointBlock, Members: &mCachePointBlock, Type: smithy.ShapeTypeStructure, Ext: &eCachePointBlock})
+var sCachePointBlock_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCachePointType, Members: &mCachePointType, Type: smithy.ShapeTypeEnum, Ext: &eCachePointBlock_type})
+var sCachePointBlock_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &iCacheTTL, Members: &mCacheTTL, Type: smithy.ShapeTypeEnum, Ext: &eCachePointBlock_ttl})
+var sCachePointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCachePointType, Members: &mCachePointType, Type: smithy.ShapeTypeEnum, Ext: &eCachePointType})
+var sCachePointType_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCachePointType_DEFAULT})
+var sCacheTTL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheTTL, Members: &mCacheTTL, Type: smithy.ShapeTypeEnum, Ext: &eCacheTTL})
+var sCacheTTL_FIVE_MINUTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_MINUTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheTTL_FIVE_MINUTES})
+var sCacheTTL_ONE_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheTTL_ONE_HOUR})
+var sCitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitation, Members: &mCitation, Type: smithy.ShapeTypeStructure, Ext: &eCitation})
+var sCitation_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCitation_title})
+var sCitation_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCitation_source})
+var sCitation_sourceContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceContent", ID: &i_CitationSourceContentList, Members: &m_CitationSourceContentList, Type: smithy.ShapeTypeList, Ext: &eCitation_sourceContent})
+var sCitation_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iCitationLocation, Members: &mCitationLocation, Type: smithy.ShapeTypeUnion, Ext: &eCitation_location})
+var sCitationGeneratedContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitationGeneratedContent, Members: &mCitationGeneratedContent, Type: smithy.ShapeTypeUnion, Ext: &eCitationGeneratedContent})
+var sCitationGeneratedContent_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCitationGeneratedContent_text})
+var s_CitationGeneratedContentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CitationGeneratedContentList, Members: &m_CitationGeneratedContentList, Type: smithy.ShapeTypeList, Ext: &e_CitationGeneratedContentList})
+var s_CitationGeneratedContentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCitationGeneratedContent, Members: &mCitationGeneratedContent, Type: smithy.ShapeTypeUnion, Ext: &e_CitationGeneratedContentList_member})
+var sCitationLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitationLocation, Members: &mCitationLocation, Type: smithy.ShapeTypeUnion, Ext: &eCitationLocation})
+var sCitationLocation_web = smithy.NewStaticSchema(smithy.StaticSchema{Member: "web", ID: &iWebLocation, Members: &mWebLocation, Type: smithy.ShapeTypeStructure, Ext: &eCitationLocation_web})
+var sCitationLocation_documentChar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentChar", ID: &iDocumentCharLocation, Members: &mDocumentCharLocation, Type: smithy.ShapeTypeStructure, Ext: &eCitationLocation_documentChar})
+var sCitationLocation_documentPage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentPage", ID: &iDocumentPageLocation, Members: &mDocumentPageLocation, Type: smithy.ShapeTypeStructure, Ext: &eCitationLocation_documentPage})
+var sCitationLocation_documentChunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentChunk", ID: &iDocumentChunkLocation, Members: &mDocumentChunkLocation, Type: smithy.ShapeTypeStructure, Ext: &eCitationLocation_documentChunk})
+var sCitationLocation_searchResultLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchResultLocation", ID: &iSearchResultLocation, Members: &mSearchResultLocation, Type: smithy.ShapeTypeStructure, Ext: &eCitationLocation_searchResultLocation})
+var s_Citations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Citations, Members: &m_Citations, Type: smithy.ShapeTypeList, Ext: &e_Citations})
+var s_Citations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCitation, Members: &mCitation, Type: smithy.ShapeTypeStructure, Ext: &e_Citations_member})
+var sCitationsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitationsConfig, Members: &mCitationsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCitationsConfig})
+var sCitationsConfig_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCitationsConfig_enabled})
+var sCitationsContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitationsContentBlock, Members: &mCitationsContentBlock, Type: smithy.ShapeTypeStructure, Ext: &eCitationsContentBlock})
+var sCitationsContentBlock_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_CitationGeneratedContentList, Members: &m_CitationGeneratedContentList, Type: smithy.ShapeTypeList, Ext: &eCitationsContentBlock_content})
+var sCitationsContentBlock_citations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "citations", ID: &i_Citations, Members: &m_Citations, Type: smithy.ShapeTypeList, Ext: &eCitationsContentBlock_citations})
+var sCitationsDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitationsDelta, Members: &mCitationsDelta, Type: smithy.ShapeTypeStructure, Ext: &eCitationsDelta})
+var sCitationsDelta_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCitationsDelta_title})
+var sCitationsDelta_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCitationsDelta_source})
+var sCitationsDelta_sourceContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceContent", ID: &i_CitationSourceContentListDelta, Members: &m_CitationSourceContentListDelta, Type: smithy.ShapeTypeList, Ext: &eCitationsDelta_sourceContent})
+var sCitationsDelta_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iCitationLocation, Members: &mCitationLocation, Type: smithy.ShapeTypeUnion, Ext: &eCitationsDelta_location})
+var sCitationSourceContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitationSourceContent, Members: &mCitationSourceContent, Type: smithy.ShapeTypeUnion, Ext: &eCitationSourceContent})
+var sCitationSourceContent_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCitationSourceContent_text})
+var sCitationSourceContentDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCitationSourceContentDelta, Members: &mCitationSourceContentDelta, Type: smithy.ShapeTypeStructure, Ext: &eCitationSourceContentDelta})
+var sCitationSourceContentDelta_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCitationSourceContentDelta_text})
+var s_CitationSourceContentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CitationSourceContentList, Members: &m_CitationSourceContentList, Type: smithy.ShapeTypeList, Ext: &e_CitationSourceContentList})
+var s_CitationSourceContentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCitationSourceContent, Members: &mCitationSourceContent, Type: smithy.ShapeTypeUnion, Ext: &e_CitationSourceContentList_member})
+var s_CitationSourceContentListDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CitationSourceContentListDelta, Members: &m_CitationSourceContentListDelta, Type: smithy.ShapeTypeList, Ext: &e_CitationSourceContentListDelta})
+var s_CitationSourceContentListDelta_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCitationSourceContentDelta, Members: &mCitationSourceContentDelta, Type: smithy.ShapeTypeStructure, Ext: &e_CitationSourceContentListDelta_member})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentBlock, Members: &mContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eContentBlock})
+var sContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContentBlock_text})
+var sContentBlock_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &iImageBlock, Members: &mImageBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_image})
+var sContentBlock_document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "document", ID: &iDocumentBlock, Members: &mDocumentBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_document})
+var sContentBlock_video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "video", ID: &iVideoBlock, Members: &mVideoBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_video})
+var sContentBlock_audio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audio", ID: &iAudioBlock, Members: &mAudioBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_audio})
+var sContentBlock_toolUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolUse", ID: &iToolUseBlock, Members: &mToolUseBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_toolUse})
+var sContentBlock_toolResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolResult", ID: &iToolResultBlock, Members: &mToolResultBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_toolResult})
+var sContentBlock_guardContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardContent", ID: &iGuardrailConverseContentBlock, Members: &mGuardrailConverseContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eContentBlock_guardContent})
+var sContentBlock_cachePoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cachePoint", ID: &iCachePointBlock, Members: &mCachePointBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_cachePoint})
+var sContentBlock_reasoningContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reasoningContent", ID: &iReasoningContentBlock, Members: &mReasoningContentBlock, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eContentBlock_reasoningContent})
+var sContentBlock_citationsContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "citationsContent", ID: &iCitationsContentBlock, Members: &mCitationsContentBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_citationsContent})
+var sContentBlock_searchResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchResult", ID: &iSearchResultBlock, Members: &mSearchResultBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_searchResult})
+var sContentBlock_toolAddition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolAddition", ID: &iToolAdditionBlock, Members: &mToolAdditionBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_toolAddition})
+var sContentBlock_toolRemoval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolRemoval", ID: &iToolRemovalBlock, Members: &mToolRemovalBlock, Type: smithy.ShapeTypeStructure, Ext: &eContentBlock_toolRemoval})
+var sContentBlockDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentBlockDelta, Members: &mContentBlockDelta, Type: smithy.ShapeTypeUnion, Ext: &eContentBlockDelta})
+var sContentBlockDelta_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContentBlockDelta_text})
+var sContentBlockDelta_toolUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolUse", ID: &iToolUseBlockDelta, Members: &mToolUseBlockDelta, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockDelta_toolUse})
+var sContentBlockDelta_toolResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolResult", ID: &i_ToolResultBlocksDelta, Members: &m_ToolResultBlocksDelta, Type: smithy.ShapeTypeList, Ext: &eContentBlockDelta_toolResult})
+var sContentBlockDelta_reasoningContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reasoningContent", ID: &iReasoningContentBlockDelta, Members: &mReasoningContentBlockDelta, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eContentBlockDelta_reasoningContent})
+var sContentBlockDelta_citation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "citation", ID: &iCitationsDelta, Members: &mCitationsDelta, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockDelta_citation})
+var sContentBlockDelta_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &iImageBlockDelta, Members: &mImageBlockDelta, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockDelta_image})
+var sContentBlockDeltaEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentBlockDeltaEvent, Members: &mContentBlockDeltaEvent, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockDeltaEvent})
+var sContentBlockDeltaEvent_delta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delta", ID: &iContentBlockDelta, Members: &mContentBlockDelta, Type: smithy.ShapeTypeUnion, Ext: &eContentBlockDeltaEvent_delta})
+var sContentBlockDeltaEvent_contentBlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentBlockIndex", ID: &i_NonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eContentBlockDeltaEvent_contentBlockIndex})
+var s_ContentBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentBlocks, Members: &m_ContentBlocks, Type: smithy.ShapeTypeList, Ext: &e_ContentBlocks})
+var s_ContentBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContentBlock, Members: &mContentBlock, Type: smithy.ShapeTypeUnion, Ext: &e_ContentBlocks_member})
+var sContentBlockStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentBlockStart, Members: &mContentBlockStart, Type: smithy.ShapeTypeUnion, Ext: &eContentBlockStart})
+var sContentBlockStart_toolUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolUse", ID: &iToolUseBlockStart, Members: &mToolUseBlockStart, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockStart_toolUse})
+var sContentBlockStart_toolResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolResult", ID: &iToolResultBlockStart, Members: &mToolResultBlockStart, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockStart_toolResult})
+var sContentBlockStart_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &iImageBlockStart, Members: &mImageBlockStart, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockStart_image})
+var sContentBlockStartEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentBlockStartEvent, Members: &mContentBlockStartEvent, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockStartEvent})
+var sContentBlockStartEvent_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &iContentBlockStart, Members: &mContentBlockStart, Type: smithy.ShapeTypeUnion, Ext: &eContentBlockStartEvent_start})
+var sContentBlockStartEvent_contentBlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentBlockIndex", ID: &i_NonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eContentBlockStartEvent_contentBlockIndex})
+var sContentBlockStopEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentBlockStopEvent, Members: &mContentBlockStopEvent, Type: smithy.ShapeTypeStructure, Ext: &eContentBlockStopEvent})
+var sContentBlockStopEvent_contentBlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentBlockIndex", ID: &i_NonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &eContentBlockStopEvent_contentBlockIndex})
+var s_ConversationalModelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConversationalModelId, Type: smithy.ShapeTypeString, Ext: &e_ConversationalModelId})
+var sConversationRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConversationRole, Members: &mConversationRole, Type: smithy.ShapeTypeEnum, Ext: &eConversationRole})
+var sConversationRole_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConversationRole_USER})
+var sConversationRole_ASSISTANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSISTANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConversationRole_ASSISTANT})
+var sConversationRole_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConversationRole_SYSTEM})
+var sConverseMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseMetrics, Members: &mConverseMetrics, Type: smithy.ShapeTypeStructure, Ext: &eConverseMetrics})
+var sConverseMetrics_latencyMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latencyMs", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eConverseMetrics_latencyMs})
+var sConverseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseOutput, Members: &mConverseOutput, Type: smithy.ShapeTypeUnion, Ext: &eConverseOutput})
+var sConverseOutput_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &eConverseOutput_message})
+var sConverseStreamMetadataEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseStreamMetadataEvent, Members: &mConverseStreamMetadataEvent, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamMetadataEvent})
+var sConverseStreamMetadataEvent_usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usage", ID: &iTokenUsage, Members: &mTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamMetadataEvent_usage})
+var sConverseStreamMetadataEvent_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &iConverseStreamMetrics, Members: &mConverseStreamMetrics, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamMetadataEvent_metrics})
+var sConverseStreamMetadataEvent_trace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trace", ID: &iConverseStreamTrace, Members: &mConverseStreamTrace, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamMetadataEvent_trace})
+var sConverseStreamMetadataEvent_performanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfig", ID: &iPerformanceConfiguration, Members: &mPerformanceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamMetadataEvent_performanceConfig})
+var sConverseStreamMetadataEvent_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTier, Members: &mServiceTier, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamMetadataEvent_serviceTier})
+var sConverseStreamMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseStreamMetrics, Members: &mConverseStreamMetrics, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamMetrics})
+var sConverseStreamMetrics_latencyMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latencyMs", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eConverseStreamMetrics_latencyMs})
+var sConverseStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseStreamOutput, Members: &mConverseStreamOutput, Traits: &t16, Type: smithy.ShapeTypeUnion, Ext: &eConverseStreamOutput})
+var sConverseStreamOutput_messageStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageStart", ID: &iMessageStartEvent, Members: &mMessageStartEvent, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_messageStart})
+var sConverseStreamOutput_contentBlockStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentBlockStart", ID: &iContentBlockStartEvent, Members: &mContentBlockStartEvent, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_contentBlockStart})
+var sConverseStreamOutput_contentBlockDelta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentBlockDelta", ID: &iContentBlockDeltaEvent, Members: &mContentBlockDeltaEvent, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_contentBlockDelta})
+var sConverseStreamOutput_contentBlockStop = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentBlockStop", ID: &iContentBlockStopEvent, Members: &mContentBlockStopEvent, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_contentBlockStop})
+var sConverseStreamOutput_messageStop = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageStop", ID: &iMessageStopEvent, Members: &mMessageStopEvent, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_messageStop})
+var sConverseStreamOutput_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iConverseStreamMetadataEvent, Members: &mConverseStreamMetadataEvent, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_metadata})
+var sConverseStreamOutput_internalServerException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internalServerException", ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_internalServerException})
+var sConverseStreamOutput_modelStreamErrorException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelStreamErrorException", ID: &iModelStreamErrorException, Members: &mModelStreamErrorException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_modelStreamErrorException})
+var sConverseStreamOutput_validationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationException", ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_validationException})
+var sConverseStreamOutput_throttlingException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttlingException", ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_throttlingException})
+var sConverseStreamOutput_serviceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceUnavailableException", ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamOutput_serviceUnavailableException})
+var sConverseStreamTrace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseStreamTrace, Members: &mConverseStreamTrace, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamTrace})
+var sConverseStreamTrace_guardrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrail", ID: &iGuardrailTraceAssessment, Members: &mGuardrailTraceAssessment, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamTrace_guardrail})
+var sConverseStreamTrace_promptRouter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptRouter", ID: &iPromptRouterTrace, Members: &mPromptRouterTrace, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamTrace_promptRouter})
+var sConverseTokensRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseTokensRequest, Members: &mConverseTokensRequest, Type: smithy.ShapeTypeStructure, Ext: &eConverseTokensRequest})
+var sConverseTokensRequest_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList, Ext: &eConverseTokensRequest_messages})
+var sConverseTokensRequest_system = smithy.NewStaticSchema(smithy.StaticSchema{Member: "system", ID: &i_SystemContentBlocks, Members: &m_SystemContentBlocks, Type: smithy.ShapeTypeList, Ext: &eConverseTokensRequest_system})
+var sConverseTokensRequest_toolConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolConfig", ID: &iToolConfiguration, Members: &mToolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseTokensRequest_toolConfig})
+var sConverseTokensRequest_additionalModelRequestFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalModelRequestFields", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eConverseTokensRequest_additionalModelRequestFields})
+var sConverseTrace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseTrace, Members: &mConverseTrace, Type: smithy.ShapeTypeStructure, Ext: &eConverseTrace})
+var sConverseTrace_guardrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrail", ID: &iGuardrailTraceAssessment, Members: &mGuardrailTraceAssessment, Type: smithy.ShapeTypeStructure, Ext: &eConverseTrace_guardrail})
+var sConverseTrace_promptRouter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptRouter", ID: &iPromptRouterTrace, Members: &mPromptRouterTrace, Type: smithy.ShapeTypeStructure, Ext: &eConverseTrace_promptRouter})
+var sCountTokensInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountTokensInput, Members: &mCountTokensInput, Type: smithy.ShapeTypeUnion, Ext: &eCountTokensInput})
+var sCountTokensInput_invokeModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invokeModel", ID: &iInvokeModelTokensRequest, Members: &mInvokeModelTokensRequest, Type: smithy.ShapeTypeStructure, Ext: &eCountTokensInput_invokeModel})
+var sCountTokensInput_converse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "converse", ID: &iConverseTokensRequest, Members: &mConverseTokensRequest, Type: smithy.ShapeTypeStructure, Ext: &eCountTokensInput_converse})
+var sDocumentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentBlock, Members: &mDocumentBlock, Type: smithy.ShapeTypeStructure, Ext: &eDocumentBlock})
+var sDocumentBlock_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iDocumentFormat, Members: &mDocumentFormat, Type: smithy.ShapeTypeEnum, Ext: &eDocumentBlock_format})
+var sDocumentBlock_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDocumentBlock_name})
+var sDocumentBlock_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDocumentSource, Members: &mDocumentSource, Type: smithy.ShapeTypeUnion, Ext: &eDocumentBlock_source})
+var sDocumentBlock_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDocumentBlock_context})
+var sDocumentBlock_citations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "citations", ID: &iCitationsConfig, Members: &mCitationsConfig, Type: smithy.ShapeTypeStructure, Ext: &eDocumentBlock_citations})
+var sDocumentCharLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentCharLocation, Members: &mDocumentCharLocation, Type: smithy.ShapeTypeStructure, Ext: &eDocumentCharLocation})
+var sDocumentCharLocation_documentIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentCharLocation_documentIndex})
+var sDocumentCharLocation_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentCharLocation_start})
+var sDocumentCharLocation_end = smithy.NewStaticSchema(smithy.StaticSchema{Member: "end", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentCharLocation_end})
+var sDocumentChunkLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentChunkLocation, Members: &mDocumentChunkLocation, Type: smithy.ShapeTypeStructure, Ext: &eDocumentChunkLocation})
+var sDocumentChunkLocation_documentIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentChunkLocation_documentIndex})
+var sDocumentChunkLocation_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentChunkLocation_start})
+var sDocumentChunkLocation_end = smithy.NewStaticSchema(smithy.StaticSchema{Member: "end", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentChunkLocation_end})
+var sDocumentContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentContentBlock, Members: &mDocumentContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eDocumentContentBlock})
+var sDocumentContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDocumentContentBlock_text})
+var s_DocumentContentBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentContentBlocks, Members: &m_DocumentContentBlocks, Type: smithy.ShapeTypeList, Ext: &e_DocumentContentBlocks})
+var s_DocumentContentBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocumentContentBlock, Members: &mDocumentContentBlock, Type: smithy.ShapeTypeUnion, Ext: &e_DocumentContentBlocks_member})
+var sDocumentFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentFormat, Members: &mDocumentFormat, Type: smithy.ShapeTypeEnum, Ext: &eDocumentFormat})
+var sDocumentFormat_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_PDF})
+var sDocumentFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_CSV})
+var sDocumentFormat_DOC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_DOC})
+var sDocumentFormat_DOCX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_DOCX})
+var sDocumentFormat_XLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_XLS})
+var sDocumentFormat_XLSX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XLSX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_XLSX})
+var sDocumentFormat_HTML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_HTML})
+var sDocumentFormat_TXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_TXT})
+var sDocumentFormat_MD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDocumentFormat_MD})
+var sDocumentPageLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentPageLocation, Members: &mDocumentPageLocation, Type: smithy.ShapeTypeStructure, Ext: &eDocumentPageLocation})
+var sDocumentPageLocation_documentIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentPageLocation_documentIndex})
+var sDocumentPageLocation_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentPageLocation_start})
+var sDocumentPageLocation_end = smithy.NewStaticSchema(smithy.StaticSchema{Member: "end", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDocumentPageLocation_end})
+var sDocumentSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentSource, Members: &mDocumentSource, Type: smithy.ShapeTypeUnion, Ext: &eDocumentSource})
+var sDocumentSource_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eDocumentSource_bytes})
+var sDocumentSource_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eDocumentSource_s3Location})
+var sDocumentSource_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDocumentSource_text})
+var sDocumentSource_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_DocumentContentBlocks, Members: &m_DocumentContentBlocks, Type: smithy.ShapeTypeList, Ext: &eDocumentSource_content})
+var sErrorBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorBlock, Members: &mErrorBlock, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eErrorBlock})
+var sErrorBlock_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eErrorBlock_message})
+var s_FoundationModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FoundationModelVersionIdentifier, Type: smithy.ShapeTypeString, Ext: &e_FoundationModelVersionIdentifier})
+var sGuardrailAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAction, Members: &mGuardrailAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailAction})
+var sGuardrailAction_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAction_NONE})
+var sGuardrailAction_GUARDRAIL_INTERVENED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GUARDRAIL_INTERVENED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAction_GUARDRAIL_INTERVENED})
+var s_GuardrailArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailArn, Type: smithy.ShapeTypeString, Ext: &e_GuardrailArn})
+var sGuardrailAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAssessment, Members: &mGuardrailAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment})
+var sGuardrailAssessment_topicPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topicPolicy", ID: &iGuardrailTopicPolicyAssessment, Members: &mGuardrailTopicPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_topicPolicy})
+var sGuardrailAssessment_contentPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentPolicy", ID: &iGuardrailContentPolicyAssessment, Members: &mGuardrailContentPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_contentPolicy})
+var sGuardrailAssessment_wordPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wordPolicy", ID: &iGuardrailWordPolicyAssessment, Members: &mGuardrailWordPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_wordPolicy})
+var sGuardrailAssessment_sensitiveInformationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sensitiveInformationPolicy", ID: &iGuardrailSensitiveInformationPolicyAssessment, Members: &mGuardrailSensitiveInformationPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_sensitiveInformationPolicy})
+var sGuardrailAssessment_contextualGroundingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contextualGroundingPolicy", ID: &iGuardrailContextualGroundingPolicyAssessment, Members: &mGuardrailContextualGroundingPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_contextualGroundingPolicy})
+var sGuardrailAssessment_automatedReasoningPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automatedReasoningPolicy", ID: &iGuardrailAutomatedReasoningPolicyAssessment, Members: &mGuardrailAutomatedReasoningPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_automatedReasoningPolicy})
+var sGuardrailAssessment_invocationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationMetrics", ID: &iGuardrailInvocationMetrics, Members: &mGuardrailInvocationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_invocationMetrics})
+var sGuardrailAssessment_appliedGuardrailDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedGuardrailDetails", ID: &iAppliedGuardrailDetails, Members: &mAppliedGuardrailDetails, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAssessment_appliedGuardrailDetails})
+var s_GuardrailAssessmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAssessmentList, Members: &m_GuardrailAssessmentList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAssessmentList})
+var s_GuardrailAssessmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAssessment, Members: &mGuardrailAssessment, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAssessmentList_member})
+var s_GuardrailAssessmentListMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAssessmentListMap, Members: &m_GuardrailAssessmentListMap, Type: smithy.ShapeTypeMap, Ext: &e_GuardrailAssessmentListMap})
+var s_GuardrailAssessmentListMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_GuardrailAssessmentListMap_key})
+var s_GuardrailAssessmentListMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_GuardrailAssessmentList, Members: &m_GuardrailAssessmentList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAssessmentListMap_value})
+var s_GuardrailAssessmentMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAssessmentMap, Members: &m_GuardrailAssessmentMap, Type: smithy.ShapeTypeMap, Ext: &e_GuardrailAssessmentMap})
+var s_GuardrailAssessmentMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_GuardrailAssessmentMap_key})
+var s_GuardrailAssessmentMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iGuardrailAssessment, Members: &mGuardrailAssessment, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAssessmentMap_value})
+var s_GuardrailAutomatedReasoningDifferenceScenarioList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningDifferenceScenarioList, Members: &m_GuardrailAutomatedReasoningDifferenceScenarioList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAutomatedReasoningDifferenceScenarioList})
+var s_GuardrailAutomatedReasoningDifferenceScenarioList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAutomatedReasoningScenario, Members: &mGuardrailAutomatedReasoningScenario, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAutomatedReasoningDifferenceScenarioList_member})
+var sGuardrailAutomatedReasoningFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningFinding, Members: &mGuardrailAutomatedReasoningFinding, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailAutomatedReasoningFinding})
+var sGuardrailAutomatedReasoningFinding_valid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valid", ID: &iGuardrailAutomatedReasoningValidFinding, Members: &mGuardrailAutomatedReasoningValidFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningFinding_valid})
+var sGuardrailAutomatedReasoningFinding_invalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalid", ID: &iGuardrailAutomatedReasoningInvalidFinding, Members: &mGuardrailAutomatedReasoningInvalidFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningFinding_invalid})
+var sGuardrailAutomatedReasoningFinding_satisfiable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satisfiable", ID: &iGuardrailAutomatedReasoningSatisfiableFinding, Members: &mGuardrailAutomatedReasoningSatisfiableFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningFinding_satisfiable})
+var sGuardrailAutomatedReasoningFinding_impossible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impossible", ID: &iGuardrailAutomatedReasoningImpossibleFinding, Members: &mGuardrailAutomatedReasoningImpossibleFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningFinding_impossible})
+var sGuardrailAutomatedReasoningFinding_translationAmbiguous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "translationAmbiguous", ID: &iGuardrailAutomatedReasoningTranslationAmbiguousFinding, Members: &mGuardrailAutomatedReasoningTranslationAmbiguousFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningFinding_translationAmbiguous})
+var sGuardrailAutomatedReasoningFinding_tooComplex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tooComplex", ID: &iGuardrailAutomatedReasoningTooComplexFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningFinding_tooComplex})
+var sGuardrailAutomatedReasoningFinding_noTranslations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noTranslations", ID: &iGuardrailAutomatedReasoningNoTranslationsFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningFinding_noTranslations})
+var s_GuardrailAutomatedReasoningFindingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningFindingList, Members: &m_GuardrailAutomatedReasoningFindingList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAutomatedReasoningFindingList})
+var s_GuardrailAutomatedReasoningFindingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAutomatedReasoningFinding, Members: &mGuardrailAutomatedReasoningFinding, Type: smithy.ShapeTypeUnion, Ext: &e_GuardrailAutomatedReasoningFindingList_member})
+var sGuardrailAutomatedReasoningImpossibleFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningImpossibleFinding, Members: &mGuardrailAutomatedReasoningImpossibleFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningImpossibleFinding})
+var sGuardrailAutomatedReasoningImpossibleFinding_translation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "translation", ID: &iGuardrailAutomatedReasoningTranslation, Members: &mGuardrailAutomatedReasoningTranslation, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningImpossibleFinding_translation})
+var sGuardrailAutomatedReasoningImpossibleFinding_contradictingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contradictingRules", ID: &i_GuardrailAutomatedReasoningRuleList, Members: &m_GuardrailAutomatedReasoningRuleList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningImpossibleFinding_contradictingRules})
+var sGuardrailAutomatedReasoningImpossibleFinding_logicWarning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logicWarning", ID: &iGuardrailAutomatedReasoningLogicWarning, Members: &mGuardrailAutomatedReasoningLogicWarning, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningImpossibleFinding_logicWarning})
+var sGuardrailAutomatedReasoningInputTextReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningInputTextReference, Members: &mGuardrailAutomatedReasoningInputTextReference, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningInputTextReference})
+var sGuardrailAutomatedReasoningInputTextReference_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_GuardrailAutomatedReasoningStatementNaturalLanguageContent, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGuardrailAutomatedReasoningInputTextReference_text})
+var s_GuardrailAutomatedReasoningInputTextReferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningInputTextReferenceList, Members: &m_GuardrailAutomatedReasoningInputTextReferenceList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAutomatedReasoningInputTextReferenceList})
+var s_GuardrailAutomatedReasoningInputTextReferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAutomatedReasoningInputTextReference, Members: &mGuardrailAutomatedReasoningInputTextReference, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAutomatedReasoningInputTextReferenceList_member})
+var sGuardrailAutomatedReasoningInvalidFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningInvalidFinding, Members: &mGuardrailAutomatedReasoningInvalidFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningInvalidFinding})
+var sGuardrailAutomatedReasoningInvalidFinding_translation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "translation", ID: &iGuardrailAutomatedReasoningTranslation, Members: &mGuardrailAutomatedReasoningTranslation, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningInvalidFinding_translation})
+var sGuardrailAutomatedReasoningInvalidFinding_contradictingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contradictingRules", ID: &i_GuardrailAutomatedReasoningRuleList, Members: &m_GuardrailAutomatedReasoningRuleList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningInvalidFinding_contradictingRules})
+var sGuardrailAutomatedReasoningInvalidFinding_logicWarning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logicWarning", ID: &iGuardrailAutomatedReasoningLogicWarning, Members: &mGuardrailAutomatedReasoningLogicWarning, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningInvalidFinding_logicWarning})
+var sGuardrailAutomatedReasoningLogicWarning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningLogicWarning, Members: &mGuardrailAutomatedReasoningLogicWarning, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningLogicWarning})
+var sGuardrailAutomatedReasoningLogicWarning_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailAutomatedReasoningLogicWarningType, Members: &mGuardrailAutomatedReasoningLogicWarningType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailAutomatedReasoningLogicWarning_type})
+var sGuardrailAutomatedReasoningLogicWarning_premises = smithy.NewStaticSchema(smithy.StaticSchema{Member: "premises", ID: &i_GuardrailAutomatedReasoningStatementList, Members: &m_GuardrailAutomatedReasoningStatementList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningLogicWarning_premises})
+var sGuardrailAutomatedReasoningLogicWarning_claims = smithy.NewStaticSchema(smithy.StaticSchema{Member: "claims", ID: &i_GuardrailAutomatedReasoningStatementList, Members: &m_GuardrailAutomatedReasoningStatementList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningLogicWarning_claims})
+var sGuardrailAutomatedReasoningLogicWarningType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningLogicWarningType, Members: &mGuardrailAutomatedReasoningLogicWarningType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailAutomatedReasoningLogicWarningType})
+var sGuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS_FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE})
+var sGuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS_TRUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE})
+var sGuardrailAutomatedReasoningNoTranslationsFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningNoTranslationsFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningNoTranslationsFinding})
+var s_GuardrailAutomatedReasoningPoliciesProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningPoliciesProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailAutomatedReasoningPoliciesProcessed})
+var sGuardrailAutomatedReasoningPolicyAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningPolicyAssessment, Members: &mGuardrailAutomatedReasoningPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningPolicyAssessment})
+var sGuardrailAutomatedReasoningPolicyAssessment_findings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findings", ID: &i_GuardrailAutomatedReasoningFindingList, Members: &m_GuardrailAutomatedReasoningFindingList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningPolicyAssessment_findings})
+var s_GuardrailAutomatedReasoningPolicyUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailAutomatedReasoningPolicyUnitsProcessed})
+var s_GuardrailAutomatedReasoningPolicyVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningPolicyVersionArn, Type: smithy.ShapeTypeString, Ext: &e_GuardrailAutomatedReasoningPolicyVersionArn})
+var sGuardrailAutomatedReasoningRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningRule, Members: &mGuardrailAutomatedReasoningRule, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningRule})
+var sGuardrailAutomatedReasoningRule_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_AutomatedReasoningRuleIdentifier, Type: smithy.ShapeTypeString, Ext: &eGuardrailAutomatedReasoningRule_identifier})
+var sGuardrailAutomatedReasoningRule_policyVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersionArn", ID: &i_GuardrailAutomatedReasoningPolicyVersionArn, Type: smithy.ShapeTypeString, Ext: &eGuardrailAutomatedReasoningRule_policyVersionArn})
+var s_GuardrailAutomatedReasoningRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningRuleList, Members: &m_GuardrailAutomatedReasoningRuleList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAutomatedReasoningRuleList})
+var s_GuardrailAutomatedReasoningRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAutomatedReasoningRule, Members: &mGuardrailAutomatedReasoningRule, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAutomatedReasoningRuleList_member})
+var sGuardrailAutomatedReasoningSatisfiableFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningSatisfiableFinding, Members: &mGuardrailAutomatedReasoningSatisfiableFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningSatisfiableFinding})
+var sGuardrailAutomatedReasoningSatisfiableFinding_translation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "translation", ID: &iGuardrailAutomatedReasoningTranslation, Members: &mGuardrailAutomatedReasoningTranslation, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningSatisfiableFinding_translation})
+var sGuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario = smithy.NewStaticSchema(smithy.StaticSchema{Member: "claimsTrueScenario", ID: &iGuardrailAutomatedReasoningScenario, Members: &mGuardrailAutomatedReasoningScenario, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario})
+var sGuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario = smithy.NewStaticSchema(smithy.StaticSchema{Member: "claimsFalseScenario", ID: &iGuardrailAutomatedReasoningScenario, Members: &mGuardrailAutomatedReasoningScenario, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario})
+var sGuardrailAutomatedReasoningSatisfiableFinding_logicWarning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logicWarning", ID: &iGuardrailAutomatedReasoningLogicWarning, Members: &mGuardrailAutomatedReasoningLogicWarning, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningSatisfiableFinding_logicWarning})
+var sGuardrailAutomatedReasoningScenario = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningScenario, Members: &mGuardrailAutomatedReasoningScenario, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningScenario})
+var sGuardrailAutomatedReasoningScenario_statements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statements", ID: &i_GuardrailAutomatedReasoningStatementList, Members: &m_GuardrailAutomatedReasoningStatementList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningScenario_statements})
+var sGuardrailAutomatedReasoningStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningStatement, Members: &mGuardrailAutomatedReasoningStatement, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningStatement})
+var sGuardrailAutomatedReasoningStatement_logic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logic", ID: &i_GuardrailAutomatedReasoningStatementLogicContent, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGuardrailAutomatedReasoningStatement_logic})
+var sGuardrailAutomatedReasoningStatement_naturalLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "naturalLanguage", ID: &i_GuardrailAutomatedReasoningStatementNaturalLanguageContent, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGuardrailAutomatedReasoningStatement_naturalLanguage})
+var s_GuardrailAutomatedReasoningStatementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningStatementList, Members: &m_GuardrailAutomatedReasoningStatementList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAutomatedReasoningStatementList})
+var s_GuardrailAutomatedReasoningStatementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAutomatedReasoningStatement, Members: &mGuardrailAutomatedReasoningStatement, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAutomatedReasoningStatementList_member})
+var s_GuardrailAutomatedReasoningStatementLogicContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningStatementLogicContent, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &e_GuardrailAutomatedReasoningStatementLogicContent})
+var s_GuardrailAutomatedReasoningStatementNaturalLanguageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningStatementNaturalLanguageContent, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &e_GuardrailAutomatedReasoningStatementNaturalLanguageContent})
+var sGuardrailAutomatedReasoningTooComplexFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningTooComplexFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningTooComplexFinding})
+var sGuardrailAutomatedReasoningTranslation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningTranslation, Members: &mGuardrailAutomatedReasoningTranslation, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningTranslation})
+var sGuardrailAutomatedReasoningTranslation_premises = smithy.NewStaticSchema(smithy.StaticSchema{Member: "premises", ID: &i_GuardrailAutomatedReasoningStatementList, Members: &m_GuardrailAutomatedReasoningStatementList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningTranslation_premises})
+var sGuardrailAutomatedReasoningTranslation_claims = smithy.NewStaticSchema(smithy.StaticSchema{Member: "claims", ID: &i_GuardrailAutomatedReasoningStatementList, Members: &m_GuardrailAutomatedReasoningStatementList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningTranslation_claims})
+var sGuardrailAutomatedReasoningTranslation_untranslatedPremises = smithy.NewStaticSchema(smithy.StaticSchema{Member: "untranslatedPremises", ID: &i_GuardrailAutomatedReasoningInputTextReferenceList, Members: &m_GuardrailAutomatedReasoningInputTextReferenceList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningTranslation_untranslatedPremises})
+var sGuardrailAutomatedReasoningTranslation_untranslatedClaims = smithy.NewStaticSchema(smithy.StaticSchema{Member: "untranslatedClaims", ID: &i_GuardrailAutomatedReasoningInputTextReferenceList, Members: &m_GuardrailAutomatedReasoningInputTextReferenceList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningTranslation_untranslatedClaims})
+var sGuardrailAutomatedReasoningTranslation_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &i_GuardrailAutomatedReasoningTranslationConfidence, Type: smithy.ShapeTypeDouble, Ext: &eGuardrailAutomatedReasoningTranslation_confidence})
+var sGuardrailAutomatedReasoningTranslationAmbiguousFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningTranslationAmbiguousFinding, Members: &mGuardrailAutomatedReasoningTranslationAmbiguousFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningTranslationAmbiguousFinding})
+var sGuardrailAutomatedReasoningTranslationAmbiguousFinding_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_GuardrailAutomatedReasoningTranslationOptionList, Members: &m_GuardrailAutomatedReasoningTranslationOptionList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningTranslationAmbiguousFinding_options})
+var sGuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios = smithy.NewStaticSchema(smithy.StaticSchema{Member: "differenceScenarios", ID: &i_GuardrailAutomatedReasoningDifferenceScenarioList, Members: &m_GuardrailAutomatedReasoningDifferenceScenarioList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios})
+var s_GuardrailAutomatedReasoningTranslationConfidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningTranslationConfidence, Type: smithy.ShapeTypeDouble, Ext: &e_GuardrailAutomatedReasoningTranslationConfidence})
+var s_GuardrailAutomatedReasoningTranslationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningTranslationList, Members: &m_GuardrailAutomatedReasoningTranslationList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAutomatedReasoningTranslationList})
+var s_GuardrailAutomatedReasoningTranslationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAutomatedReasoningTranslation, Members: &mGuardrailAutomatedReasoningTranslation, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAutomatedReasoningTranslationList_member})
+var sGuardrailAutomatedReasoningTranslationOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningTranslationOption, Members: &mGuardrailAutomatedReasoningTranslationOption, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningTranslationOption})
+var sGuardrailAutomatedReasoningTranslationOption_translations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "translations", ID: &i_GuardrailAutomatedReasoningTranslationList, Members: &m_GuardrailAutomatedReasoningTranslationList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningTranslationOption_translations})
+var s_GuardrailAutomatedReasoningTranslationOptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailAutomatedReasoningTranslationOptionList, Members: &m_GuardrailAutomatedReasoningTranslationOptionList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailAutomatedReasoningTranslationOptionList})
+var s_GuardrailAutomatedReasoningTranslationOptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailAutomatedReasoningTranslationOption, Members: &mGuardrailAutomatedReasoningTranslationOption, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailAutomatedReasoningTranslationOptionList_member})
+var sGuardrailAutomatedReasoningValidFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailAutomatedReasoningValidFinding, Members: &mGuardrailAutomatedReasoningValidFinding, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningValidFinding})
+var sGuardrailAutomatedReasoningValidFinding_translation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "translation", ID: &iGuardrailAutomatedReasoningTranslation, Members: &mGuardrailAutomatedReasoningTranslation, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningValidFinding_translation})
+var sGuardrailAutomatedReasoningValidFinding_claimsTrueScenario = smithy.NewStaticSchema(smithy.StaticSchema{Member: "claimsTrueScenario", ID: &iGuardrailAutomatedReasoningScenario, Members: &mGuardrailAutomatedReasoningScenario, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningValidFinding_claimsTrueScenario})
+var sGuardrailAutomatedReasoningValidFinding_supportingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportingRules", ID: &i_GuardrailAutomatedReasoningRuleList, Members: &m_GuardrailAutomatedReasoningRuleList, Type: smithy.ShapeTypeList, Ext: &eGuardrailAutomatedReasoningValidFinding_supportingRules})
+var sGuardrailAutomatedReasoningValidFinding_logicWarning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logicWarning", ID: &iGuardrailAutomatedReasoningLogicWarning, Members: &mGuardrailAutomatedReasoningLogicWarning, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailAutomatedReasoningValidFinding_logicWarning})
+var sGuardrailChecksConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksConfig, Members: &mGuardrailChecksConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksConfig})
+var sGuardrailChecksConfig_contentFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentFilter", ID: &iGuardrailChecksContentFilterConfig, Members: &mGuardrailChecksContentFilterConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksConfig_contentFilter})
+var sGuardrailChecksConfig_promptAttack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptAttack", ID: &iGuardrailChecksPromptAttackConfig, Members: &mGuardrailChecksPromptAttackConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksConfig_promptAttack})
+var sGuardrailChecksConfig_sensitiveInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sensitiveInformation", ID: &iGuardrailChecksSensitiveInformationConfig, Members: &mGuardrailChecksSensitiveInformationConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksConfig_sensitiveInformation})
+var sGuardrailChecksContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksContentBlock, Members: &mGuardrailChecksContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailChecksContentBlock})
+var sGuardrailChecksContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_GuardrailChecksTextContent, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGuardrailChecksContentBlock_text})
+var s_GuardrailChecksContentBlockList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksContentBlockList, Members: &m_GuardrailChecksContentBlockList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksContentBlockList})
+var s_GuardrailChecksContentBlockList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksContentBlock, Members: &mGuardrailChecksContentBlock, Type: smithy.ShapeTypeUnion, Ext: &e_GuardrailChecksContentBlockList_member})
+var sGuardrailChecksContentFilterCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksContentFilterCategory, Members: &mGuardrailChecksContentFilterCategory, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksContentFilterCategory})
+var sGuardrailChecksContentFilterCategory_VIOLENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIOLENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterCategory_VIOLENCE})
+var sGuardrailChecksContentFilterCategory_HATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterCategory_HATE})
+var sGuardrailChecksContentFilterCategory_SEXUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEXUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterCategory_SEXUAL})
+var sGuardrailChecksContentFilterCategory_MISCONDUCT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONDUCT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterCategory_MISCONDUCT})
+var sGuardrailChecksContentFilterCategory_INSULTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSULTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterCategory_INSULTS})
+var sGuardrailChecksContentFilterCategoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksContentFilterCategoryConfig, Members: &mGuardrailChecksContentFilterCategoryConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterCategoryConfig})
+var sGuardrailChecksContentFilterCategoryConfig_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iGuardrailChecksContentFilterCategory, Members: &mGuardrailChecksContentFilterCategory, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksContentFilterCategoryConfig_category})
+var s_GuardrailChecksContentFilterCategoryConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksContentFilterCategoryConfigList, Members: &m_GuardrailChecksContentFilterCategoryConfigList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksContentFilterCategoryConfigList})
+var s_GuardrailChecksContentFilterCategoryConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksContentFilterCategoryConfig, Members: &mGuardrailChecksContentFilterCategoryConfig, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailChecksContentFilterCategoryConfigList_member})
+var sGuardrailChecksContentFilterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksContentFilterConfig, Members: &mGuardrailChecksContentFilterConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterConfig})
+var sGuardrailChecksContentFilterConfig_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_GuardrailChecksContentFilterCategoryConfigList, Members: &m_GuardrailChecksContentFilterCategoryConfigList, Type: smithy.ShapeTypeList, Ext: &eGuardrailChecksContentFilterConfig_categories})
+var sGuardrailChecksContentFilterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksContentFilterResult, Members: &mGuardrailChecksContentFilterResult, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterResult})
+var sGuardrailChecksContentFilterResult_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_GuardrailChecksContentFilterResultList, Members: &m_GuardrailChecksContentFilterResultList, Type: smithy.ShapeTypeList, Ext: &eGuardrailChecksContentFilterResult_results})
+var sGuardrailChecksContentFilterResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksContentFilterResultEntry, Members: &mGuardrailChecksContentFilterResultEntry, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterResultEntry})
+var sGuardrailChecksContentFilterResultEntry_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iGuardrailChecksContentFilterCategory, Members: &mGuardrailChecksContentFilterCategory, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksContentFilterResultEntry_category})
+var sGuardrailChecksContentFilterResultEntry_severityScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eGuardrailChecksContentFilterResultEntry_severityScore})
+var s_GuardrailChecksContentFilterResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksContentFilterResultList, Members: &m_GuardrailChecksContentFilterResultList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksContentFilterResultList})
+var s_GuardrailChecksContentFilterResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksContentFilterResultEntry, Members: &mGuardrailChecksContentFilterResultEntry, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailChecksContentFilterResultList_member})
+var sGuardrailChecksContentFilterUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksContentFilterUsage, Members: &mGuardrailChecksContentFilterUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksContentFilterUsage})
+var sGuardrailChecksContentFilterUsage_textUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textUnits", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailChecksContentFilterUsage_textUnits})
+var sGuardrailChecksMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksMessage, Members: &mGuardrailChecksMessage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksMessage})
+var sGuardrailChecksMessage_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &iGuardrailChecksRole, Members: &mGuardrailChecksRole, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksMessage_role})
+var sGuardrailChecksMessage_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_GuardrailChecksContentBlockList, Members: &m_GuardrailChecksContentBlockList, Type: smithy.ShapeTypeList, Ext: &eGuardrailChecksMessage_content})
+var s_GuardrailChecksMessageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksMessageList, Members: &m_GuardrailChecksMessageList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksMessageList})
+var s_GuardrailChecksMessageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksMessage, Members: &mGuardrailChecksMessage, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailChecksMessageList_member})
+var sGuardrailChecksPromptAttackCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksPromptAttackCategory, Members: &mGuardrailChecksPromptAttackCategory, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksPromptAttackCategory})
+var sGuardrailChecksPromptAttackCategory_JAILBREAK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JAILBREAK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackCategory_JAILBREAK})
+var sGuardrailChecksPromptAttackCategory_PROMPT_INJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROMPT_INJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackCategory_PROMPT_INJECTION})
+var sGuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROMPT_LEAKAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE})
+var sGuardrailChecksPromptAttackCategoryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksPromptAttackCategoryConfig, Members: &mGuardrailChecksPromptAttackCategoryConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackCategoryConfig})
+var sGuardrailChecksPromptAttackCategoryConfig_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iGuardrailChecksPromptAttackCategory, Members: &mGuardrailChecksPromptAttackCategory, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksPromptAttackCategoryConfig_category})
+var s_GuardrailChecksPromptAttackCategoryConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksPromptAttackCategoryConfigList, Members: &m_GuardrailChecksPromptAttackCategoryConfigList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksPromptAttackCategoryConfigList})
+var s_GuardrailChecksPromptAttackCategoryConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksPromptAttackCategoryConfig, Members: &mGuardrailChecksPromptAttackCategoryConfig, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailChecksPromptAttackCategoryConfigList_member})
+var sGuardrailChecksPromptAttackConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksPromptAttackConfig, Members: &mGuardrailChecksPromptAttackConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackConfig})
+var sGuardrailChecksPromptAttackConfig_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_GuardrailChecksPromptAttackCategoryConfigList, Members: &m_GuardrailChecksPromptAttackCategoryConfigList, Type: smithy.ShapeTypeList, Ext: &eGuardrailChecksPromptAttackConfig_categories})
+var sGuardrailChecksPromptAttackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksPromptAttackResult, Members: &mGuardrailChecksPromptAttackResult, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackResult})
+var sGuardrailChecksPromptAttackResult_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_GuardrailChecksPromptAttackResultList, Members: &m_GuardrailChecksPromptAttackResultList, Type: smithy.ShapeTypeList, Ext: &eGuardrailChecksPromptAttackResult_results})
+var sGuardrailChecksPromptAttackResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksPromptAttackResultEntry, Members: &mGuardrailChecksPromptAttackResultEntry, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackResultEntry})
+var sGuardrailChecksPromptAttackResultEntry_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iGuardrailChecksPromptAttackCategory, Members: &mGuardrailChecksPromptAttackCategory, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksPromptAttackResultEntry_category})
+var sGuardrailChecksPromptAttackResultEntry_severityScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eGuardrailChecksPromptAttackResultEntry_severityScore})
+var s_GuardrailChecksPromptAttackResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksPromptAttackResultList, Members: &m_GuardrailChecksPromptAttackResultList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksPromptAttackResultList})
+var s_GuardrailChecksPromptAttackResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksPromptAttackResultEntry, Members: &mGuardrailChecksPromptAttackResultEntry, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailChecksPromptAttackResultList_member})
+var sGuardrailChecksPromptAttackUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksPromptAttackUsage, Members: &mGuardrailChecksPromptAttackUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksPromptAttackUsage})
+var sGuardrailChecksPromptAttackUsage_textUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textUnits", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailChecksPromptAttackUsage_textUnits})
+var sGuardrailChecksResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksResults, Members: &mGuardrailChecksResults, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksResults})
+var sGuardrailChecksResults_contentFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentFilter", ID: &iGuardrailChecksContentFilterResult, Members: &mGuardrailChecksContentFilterResult, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksResults_contentFilter})
+var sGuardrailChecksResults_promptAttack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptAttack", ID: &iGuardrailChecksPromptAttackResult, Members: &mGuardrailChecksPromptAttackResult, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksResults_promptAttack})
+var sGuardrailChecksResults_sensitiveInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sensitiveInformation", ID: &iGuardrailChecksSensitiveInformationResult, Members: &mGuardrailChecksSensitiveInformationResult, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksResults_sensitiveInformation})
+var sGuardrailChecksRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksRole, Members: &mGuardrailChecksRole, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksRole})
+var sGuardrailChecksRole_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksRole_USER})
+var sGuardrailChecksRole_ASSISTANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSISTANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksRole_ASSISTANT})
+var sGuardrailChecksRole_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksRole_SYSTEM})
+var sGuardrailChecksSensitiveInformationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksSensitiveInformationConfig, Members: &mGuardrailChecksSensitiveInformationConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationConfig})
+var sGuardrailChecksSensitiveInformationConfig_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_GuardrailChecksSensitiveInformationEntityConfigList, Members: &m_GuardrailChecksSensitiveInformationEntityConfigList, Type: smithy.ShapeTypeList, Ext: &eGuardrailChecksSensitiveInformationConfig_entities})
+var sGuardrailChecksSensitiveInformationEntityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksSensitiveInformationEntityConfig, Members: &mGuardrailChecksSensitiveInformationEntityConfig, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityConfig})
+var sGuardrailChecksSensitiveInformationEntityConfig_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailChecksSensitiveInformationEntityType, Members: &mGuardrailChecksSensitiveInformationEntityType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksSensitiveInformationEntityConfig_type})
+var s_GuardrailChecksSensitiveInformationEntityConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksSensitiveInformationEntityConfigList, Members: &m_GuardrailChecksSensitiveInformationEntityConfigList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksSensitiveInformationEntityConfigList})
+var s_GuardrailChecksSensitiveInformationEntityConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksSensitiveInformationEntityConfig, Members: &mGuardrailChecksSensitiveInformationEntityConfig, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailChecksSensitiveInformationEntityConfigList_member})
+var sGuardrailChecksSensitiveInformationEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksSensitiveInformationEntityType, Members: &mGuardrailChecksSensitiveInformationEntityType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksSensitiveInformationEntityType})
+var sGuardrailChecksSensitiveInformationEntityType_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_ADDRESS})
+var sGuardrailChecksSensitiveInformationEntityType_AGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_AGE})
+var sGuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ACCESS_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY})
+var sGuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SECRET_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY})
+var sGuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_HEALTH_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_SOCIAL_INSURANCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_DEBIT_CARD_CVV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV})
+var sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_DEBIT_CARD_EXPIRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY})
+var sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_DEBIT_CARD_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_DRIVER_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIVER_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_DRIVER_ID})
+var sGuardrailChecksSensitiveInformationEntityType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_EMAIL})
+var sGuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNATIONAL_BANK_ACCOUNT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_IP_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_IP_ADDRESS})
+var sGuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LICENSE_PLATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE})
+var sGuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAC_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS})
+var sGuardrailChecksSensitiveInformationEntityType_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_NAME})
+var sGuardrailChecksSensitiveInformationEntityType_PASSWORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSWORD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_PASSWORD})
+var sGuardrailChecksSensitiveInformationEntityType_PHONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_PHONE})
+var sGuardrailChecksSensitiveInformationEntityType_PIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_PIN})
+var sGuardrailChecksSensitiveInformationEntityType_SWIFT_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SWIFT_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_SWIFT_CODE})
+var sGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_NATIONAL_HEALTH_SERVICE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_NATIONAL_INSURANCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_URL})
+var sGuardrailChecksSensitiveInformationEntityType_USERNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USERNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_USERNAME})
+var sGuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_BANK_ACCOUNT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_BANK_ROUTING_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_PASSPORT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_SOCIAL_SECURITY_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER})
+var sGuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VEHICLE_IDENTIFICATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER})
+var sGuardrailChecksSensitiveInformationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksSensitiveInformationResult, Members: &mGuardrailChecksSensitiveInformationResult, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationResult})
+var sGuardrailChecksSensitiveInformationResult_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_GuardrailChecksSensitiveInformationResultList, Members: &m_GuardrailChecksSensitiveInformationResultList, Type: smithy.ShapeTypeList, Ext: &eGuardrailChecksSensitiveInformationResult_results})
+var sGuardrailChecksSensitiveInformationResult_truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "truncated", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailChecksSensitiveInformationResult_truncated})
+var sGuardrailChecksSensitiveInformationResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksSensitiveInformationResultEntry, Members: &mGuardrailChecksSensitiveInformationResultEntry, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationResultEntry})
+var sGuardrailChecksSensitiveInformationResultEntry_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailChecksSensitiveInformationEntityType, Members: &mGuardrailChecksSensitiveInformationEntityType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailChecksSensitiveInformationResultEntry_type})
+var sGuardrailChecksSensitiveInformationResultEntry_confidenceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidenceScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eGuardrailChecksSensitiveInformationResultEntry_confidenceScore})
+var sGuardrailChecksSensitiveInformationResultEntry_beginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beginOffset", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailChecksSensitiveInformationResultEntry_beginOffset})
+var sGuardrailChecksSensitiveInformationResultEntry_endOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endOffset", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailChecksSensitiveInformationResultEntry_endOffset})
+var sGuardrailChecksSensitiveInformationResultEntry_messageIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailChecksSensitiveInformationResultEntry_messageIndex})
+var sGuardrailChecksSensitiveInformationResultEntry_contentIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailChecksSensitiveInformationResultEntry_contentIndex})
+var s_GuardrailChecksSensitiveInformationResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksSensitiveInformationResultList, Members: &m_GuardrailChecksSensitiveInformationResultList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailChecksSensitiveInformationResultList})
+var s_GuardrailChecksSensitiveInformationResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailChecksSensitiveInformationResultEntry, Members: &mGuardrailChecksSensitiveInformationResultEntry, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailChecksSensitiveInformationResultList_member})
+var sGuardrailChecksSensitiveInformationUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksSensitiveInformationUsage, Members: &mGuardrailChecksSensitiveInformationUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksSensitiveInformationUsage})
+var sGuardrailChecksSensitiveInformationUsage_textUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textUnits", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailChecksSensitiveInformationUsage_textUnits})
+var s_GuardrailChecksTextContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailChecksTextContent, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &e_GuardrailChecksTextContent})
+var sGuardrailChecksUsageResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailChecksUsageResults, Members: &mGuardrailChecksUsageResults, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksUsageResults})
+var sGuardrailChecksUsageResults_contentFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentFilter", ID: &iGuardrailChecksContentFilterUsage, Members: &mGuardrailChecksContentFilterUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksUsageResults_contentFilter})
+var sGuardrailChecksUsageResults_promptAttack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptAttack", ID: &iGuardrailChecksPromptAttackUsage, Members: &mGuardrailChecksPromptAttackUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksUsageResults_promptAttack})
+var sGuardrailChecksUsageResults_sensitiveInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sensitiveInformation", ID: &iGuardrailChecksSensitiveInformationUsage, Members: &mGuardrailChecksSensitiveInformationUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailChecksUsageResults_sensitiveInformation})
+var sGuardrailConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailConfiguration, Members: &mGuardrailConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConfiguration})
+var sGuardrailConfiguration_guardrailIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailIdentifier", ID: &i_GuardrailIdentifier, Type: smithy.ShapeTypeString, Ext: &eGuardrailConfiguration_guardrailIdentifier})
+var sGuardrailConfiguration_guardrailVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailVersion", ID: &i_GuardrailVersion, Type: smithy.ShapeTypeString, Ext: &eGuardrailConfiguration_guardrailVersion})
+var sGuardrailConfiguration_trace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trace", ID: &iGuardrailTrace, Members: &mGuardrailTrace, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailConfiguration_trace})
+var sGuardrailContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentBlock, Members: &mGuardrailContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailContentBlock})
+var sGuardrailContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &iGuardrailTextBlock, Members: &mGuardrailTextBlock, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentBlock_text})
+var sGuardrailContentBlock_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &iGuardrailImageBlock, Members: &mGuardrailImageBlock, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentBlock_image})
+var s_GuardrailContentBlockList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailContentBlockList, Members: &m_GuardrailContentBlockList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailContentBlockList})
+var s_GuardrailContentBlockList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailContentBlock, Members: &mGuardrailContentBlock, Type: smithy.ShapeTypeUnion, Ext: &e_GuardrailContentBlockList_member})
+var sGuardrailContentFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentFilter, Members: &mGuardrailContentFilter, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilter})
+var sGuardrailContentFilter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailContentFilterType, Members: &mGuardrailContentFilterType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentFilter_type})
+var sGuardrailContentFilter_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &iGuardrailContentFilterConfidence, Members: &mGuardrailContentFilterConfidence, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentFilter_confidence})
+var sGuardrailContentFilter_filterStrength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterStrength", ID: &iGuardrailContentFilterStrength, Members: &mGuardrailContentFilterStrength, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentFilter_filterStrength})
+var sGuardrailContentFilter_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailContentPolicyAction, Members: &mGuardrailContentPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentFilter_action})
+var sGuardrailContentFilter_detected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailContentFilter_detected})
+var sGuardrailContentFilterConfidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentFilterConfidence, Members: &mGuardrailContentFilterConfidence, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentFilterConfidence})
+var sGuardrailContentFilterConfidence_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterConfidence_NONE})
+var sGuardrailContentFilterConfidence_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterConfidence_LOW})
+var sGuardrailContentFilterConfidence_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterConfidence_MEDIUM})
+var sGuardrailContentFilterConfidence_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterConfidence_HIGH})
+var s_GuardrailContentFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailContentFilterList, Members: &m_GuardrailContentFilterList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailContentFilterList})
+var s_GuardrailContentFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailContentFilter, Members: &mGuardrailContentFilter, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailContentFilterList_member})
+var sGuardrailContentFilterStrength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentFilterStrength, Members: &mGuardrailContentFilterStrength, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentFilterStrength})
+var sGuardrailContentFilterStrength_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterStrength_NONE})
+var sGuardrailContentFilterStrength_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterStrength_LOW})
+var sGuardrailContentFilterStrength_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterStrength_MEDIUM})
+var sGuardrailContentFilterStrength_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterStrength_HIGH})
+var sGuardrailContentFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentFilterType, Members: &mGuardrailContentFilterType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentFilterType})
+var sGuardrailContentFilterType_INSULTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSULTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterType_INSULTS})
+var sGuardrailContentFilterType_HATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterType_HATE})
+var sGuardrailContentFilterType_SEXUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEXUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterType_SEXUAL})
+var sGuardrailContentFilterType_VIOLENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIOLENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterType_VIOLENCE})
+var sGuardrailContentFilterType_MISCONDUCT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONDUCT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterType_MISCONDUCT})
+var sGuardrailContentFilterType_PROMPT_ATTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROMPT_ATTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentFilterType_PROMPT_ATTACK})
+var sGuardrailContentPolicyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentPolicyAction, Members: &mGuardrailContentPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentPolicyAction})
+var sGuardrailContentPolicyAction_BLOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentPolicyAction_BLOCKED})
+var sGuardrailContentPolicyAction_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentPolicyAction_NONE})
+var sGuardrailContentPolicyAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentPolicyAssessment, Members: &mGuardrailContentPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentPolicyAssessment})
+var sGuardrailContentPolicyAssessment_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_GuardrailContentFilterList, Members: &m_GuardrailContentFilterList, Type: smithy.ShapeTypeList, Ext: &eGuardrailContentPolicyAssessment_filters})
+var s_GuardrailContentPolicyImageUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailContentPolicyImageUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailContentPolicyImageUnitsProcessed})
+var s_GuardrailContentPolicyUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailContentPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailContentPolicyUnitsProcessed})
+var sGuardrailContentQualifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentQualifier, Members: &mGuardrailContentQualifier, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentQualifier})
+var sGuardrailContentQualifier_GROUNDING_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUNDING_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentQualifier_GROUNDING_SOURCE})
+var sGuardrailContentQualifier_QUERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentQualifier_QUERY})
+var sGuardrailContentQualifier_GUARD_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GUARD_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentQualifier_GUARD_CONTENT})
+var s_GuardrailContentQualifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailContentQualifierList, Members: &m_GuardrailContentQualifierList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailContentQualifierList})
+var s_GuardrailContentQualifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailContentQualifier, Members: &mGuardrailContentQualifier, Type: smithy.ShapeTypeEnum, Ext: &e_GuardrailContentQualifierList_member})
+var sGuardrailContentSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContentSource, Members: &mGuardrailContentSource, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContentSource})
+var sGuardrailContentSource_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentSource_INPUT})
+var sGuardrailContentSource_OUTPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContentSource_OUTPUT})
+var sGuardrailContextualGroundingFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContextualGroundingFilter, Members: &mGuardrailContextualGroundingFilter, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContextualGroundingFilter})
+var sGuardrailContextualGroundingFilter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailContextualGroundingFilterType, Members: &mGuardrailContextualGroundingFilterType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContextualGroundingFilter_type})
+var sGuardrailContextualGroundingFilter_threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threshold", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eGuardrailContextualGroundingFilter_threshold})
+var sGuardrailContextualGroundingFilter_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eGuardrailContextualGroundingFilter_score})
+var sGuardrailContextualGroundingFilter_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailContextualGroundingPolicyAction, Members: &mGuardrailContextualGroundingPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContextualGroundingFilter_action})
+var sGuardrailContextualGroundingFilter_detected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailContextualGroundingFilter_detected})
+var s_GuardrailContextualGroundingFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailContextualGroundingFilters, Members: &m_GuardrailContextualGroundingFilters, Type: smithy.ShapeTypeList, Ext: &e_GuardrailContextualGroundingFilters})
+var s_GuardrailContextualGroundingFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailContextualGroundingFilter, Members: &mGuardrailContextualGroundingFilter, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailContextualGroundingFilters_member})
+var sGuardrailContextualGroundingFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContextualGroundingFilterType, Members: &mGuardrailContextualGroundingFilterType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContextualGroundingFilterType})
+var sGuardrailContextualGroundingFilterType_GROUNDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUNDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContextualGroundingFilterType_GROUNDING})
+var sGuardrailContextualGroundingFilterType_RELEVANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELEVANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContextualGroundingFilterType_RELEVANCE})
+var sGuardrailContextualGroundingPolicyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContextualGroundingPolicyAction, Members: &mGuardrailContextualGroundingPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailContextualGroundingPolicyAction})
+var sGuardrailContextualGroundingPolicyAction_BLOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContextualGroundingPolicyAction_BLOCKED})
+var sGuardrailContextualGroundingPolicyAction_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContextualGroundingPolicyAction_NONE})
+var sGuardrailContextualGroundingPolicyAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailContextualGroundingPolicyAssessment, Members: &mGuardrailContextualGroundingPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailContextualGroundingPolicyAssessment})
+var sGuardrailContextualGroundingPolicyAssessment_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_GuardrailContextualGroundingFilters, Members: &m_GuardrailContextualGroundingFilters, Type: smithy.ShapeTypeList, Ext: &eGuardrailContextualGroundingPolicyAssessment_filters})
+var s_GuardrailContextualGroundingPolicyUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailContextualGroundingPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailContextualGroundingPolicyUnitsProcessed})
+var sGuardrailConverseContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailConverseContentBlock, Members: &mGuardrailConverseContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailConverseContentBlock})
+var sGuardrailConverseContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &iGuardrailConverseTextBlock, Members: &mGuardrailConverseTextBlock, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseContentBlock_text})
+var sGuardrailConverseContentBlock_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &iGuardrailConverseImageBlock, Members: &mGuardrailConverseImageBlock, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseContentBlock_image})
+var sGuardrailConverseContentQualifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailConverseContentQualifier, Members: &mGuardrailConverseContentQualifier, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailConverseContentQualifier})
+var sGuardrailConverseContentQualifier_GROUNDING_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUNDING_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseContentQualifier_GROUNDING_SOURCE})
+var sGuardrailConverseContentQualifier_QUERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseContentQualifier_QUERY})
+var sGuardrailConverseContentQualifier_GUARD_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GUARD_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseContentQualifier_GUARD_CONTENT})
+var s_GuardrailConverseContentQualifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailConverseContentQualifierList, Members: &m_GuardrailConverseContentQualifierList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailConverseContentQualifierList})
+var s_GuardrailConverseContentQualifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailConverseContentQualifier, Members: &mGuardrailConverseContentQualifier, Type: smithy.ShapeTypeEnum, Ext: &e_GuardrailConverseContentQualifierList_member})
+var sGuardrailConverseImageBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailConverseImageBlock, Members: &mGuardrailConverseImageBlock, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseImageBlock})
+var sGuardrailConverseImageBlock_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iGuardrailConverseImageFormat, Members: &mGuardrailConverseImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailConverseImageBlock_format})
+var sGuardrailConverseImageBlock_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iGuardrailConverseImageSource, Members: &mGuardrailConverseImageSource, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailConverseImageBlock_source})
+var sGuardrailConverseImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailConverseImageFormat, Members: &mGuardrailConverseImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailConverseImageFormat})
+var sGuardrailConverseImageFormat_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseImageFormat_PNG})
+var sGuardrailConverseImageFormat_JPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseImageFormat_JPEG})
+var sGuardrailConverseImageSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailConverseImageSource, Members: &mGuardrailConverseImageSource, Traits: &t12, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailConverseImageSource})
+var sGuardrailConverseImageSource_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eGuardrailConverseImageSource_bytes})
+var sGuardrailConverseTextBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailConverseTextBlock, Members: &mGuardrailConverseTextBlock, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailConverseTextBlock})
+var sGuardrailConverseTextBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailConverseTextBlock_text})
+var sGuardrailConverseTextBlock_qualifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qualifiers", ID: &i_GuardrailConverseContentQualifierList, Members: &m_GuardrailConverseContentQualifierList, Type: smithy.ShapeTypeList, Ext: &eGuardrailConverseTextBlock_qualifiers})
+var sGuardrailCoverage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailCoverage, Members: &mGuardrailCoverage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailCoverage})
+var sGuardrailCoverage_textCharacters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textCharacters", ID: &iGuardrailTextCharactersCoverage, Members: &mGuardrailTextCharactersCoverage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailCoverage_textCharacters})
+var sGuardrailCoverage_images = smithy.NewStaticSchema(smithy.StaticSchema{Member: "images", ID: &iGuardrailImageCoverage, Members: &mGuardrailImageCoverage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailCoverage_images})
+var sGuardrailCustomWord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailCustomWord, Members: &mGuardrailCustomWord, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailCustomWord})
+var sGuardrailCustomWord_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailCustomWord_match})
+var sGuardrailCustomWord_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailWordPolicyAction, Members: &mGuardrailWordPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailCustomWord_action})
+var sGuardrailCustomWord_detected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailCustomWord_detected})
+var s_GuardrailCustomWordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailCustomWordList, Members: &m_GuardrailCustomWordList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailCustomWordList})
+var s_GuardrailCustomWordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailCustomWord, Members: &mGuardrailCustomWord, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailCustomWordList_member})
+var s_GuardrailId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailId, Type: smithy.ShapeTypeString, Ext: &e_GuardrailId})
+var s_GuardrailIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailIdentifier, Type: smithy.ShapeTypeString, Ext: &e_GuardrailIdentifier})
+var sGuardrailImageBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailImageBlock, Members: &mGuardrailImageBlock, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailImageBlock})
+var sGuardrailImageBlock_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iGuardrailImageFormat, Members: &mGuardrailImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailImageBlock_format})
+var sGuardrailImageBlock_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iGuardrailImageSource, Members: &mGuardrailImageSource, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailImageBlock_source})
+var sGuardrailImageCoverage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailImageCoverage, Members: &mGuardrailImageCoverage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailImageCoverage})
+var sGuardrailImageCoverage_guarded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guarded", ID: &i_ImagesGuarded, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailImageCoverage_guarded})
+var sGuardrailImageCoverage_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &i_ImagesTotal, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailImageCoverage_total})
+var sGuardrailImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailImageFormat, Members: &mGuardrailImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailImageFormat})
+var sGuardrailImageFormat_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailImageFormat_PNG})
+var sGuardrailImageFormat_JPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailImageFormat_JPEG})
+var sGuardrailImageSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailImageSource, Members: &mGuardrailImageSource, Traits: &t12, Type: smithy.ShapeTypeUnion, Ext: &eGuardrailImageSource})
+var sGuardrailImageSource_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eGuardrailImageSource_bytes})
+var sGuardrailInvocationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailInvocationMetrics, Members: &mGuardrailInvocationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailInvocationMetrics})
+var sGuardrailInvocationMetrics_guardrailProcessingLatency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailProcessingLatency", ID: &i_GuardrailProcessingLatency, Type: smithy.ShapeTypeLong, Ext: &eGuardrailInvocationMetrics_guardrailProcessingLatency})
+var sGuardrailInvocationMetrics_usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usage", ID: &iGuardrailUsage, Members: &mGuardrailUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailInvocationMetrics_usage})
+var sGuardrailInvocationMetrics_guardrailCoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailCoverage", ID: &iGuardrailCoverage, Members: &mGuardrailCoverage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailInvocationMetrics_guardrailCoverage})
+var sGuardrailManagedWord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailManagedWord, Members: &mGuardrailManagedWord, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailManagedWord})
+var sGuardrailManagedWord_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailManagedWord_match})
+var sGuardrailManagedWord_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailManagedWordType, Members: &mGuardrailManagedWordType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailManagedWord_type})
+var sGuardrailManagedWord_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailWordPolicyAction, Members: &mGuardrailWordPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailManagedWord_action})
+var sGuardrailManagedWord_detected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailManagedWord_detected})
+var s_GuardrailManagedWordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailManagedWordList, Members: &m_GuardrailManagedWordList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailManagedWordList})
+var s_GuardrailManagedWordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailManagedWord, Members: &mGuardrailManagedWord, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailManagedWordList_member})
+var sGuardrailManagedWordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailManagedWordType, Members: &mGuardrailManagedWordType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailManagedWordType})
+var sGuardrailManagedWordType_PROFANITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFANITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailManagedWordType_PROFANITY})
+var sGuardrailOrigin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailOrigin, Members: &mGuardrailOrigin, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailOrigin})
+var sGuardrailOrigin_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOrigin_REQUEST})
+var sGuardrailOrigin_ACCOUNT_ENFORCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_ENFORCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOrigin_ACCOUNT_ENFORCED})
+var sGuardrailOrigin_ORGANIZATION_ENFORCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORGANIZATION_ENFORCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOrigin_ORGANIZATION_ENFORCED})
+var s_GuardrailOriginList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailOriginList, Members: &m_GuardrailOriginList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailOriginList})
+var s_GuardrailOriginList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailOrigin, Members: &mGuardrailOrigin, Type: smithy.ShapeTypeEnum, Ext: &e_GuardrailOriginList_member})
+var sGuardrailOutputContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailOutputContent, Members: &mGuardrailOutputContent, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOutputContent})
+var sGuardrailOutputContent_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_GuardrailOutputText, Type: smithy.ShapeTypeString, Ext: &eGuardrailOutputContent_text})
+var s_GuardrailOutputContentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailOutputContentList, Members: &m_GuardrailOutputContentList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailOutputContentList})
+var s_GuardrailOutputContentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailOutputContent, Members: &mGuardrailOutputContent, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailOutputContentList_member})
+var sGuardrailOutputScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailOutputScope, Members: &mGuardrailOutputScope, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailOutputScope})
+var sGuardrailOutputScope_INTERVENTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERVENTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOutputScope_INTERVENTIONS})
+var sGuardrailOutputScope_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOutputScope_FULL})
+var s_GuardrailOutputText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailOutputText, Type: smithy.ShapeTypeString, Ext: &e_GuardrailOutputText})
+var sGuardrailOwnership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailOwnership, Members: &mGuardrailOwnership, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailOwnership})
+var sGuardrailOwnership_SELF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOwnership_SELF})
+var sGuardrailOwnership_CROSS_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailOwnership_CROSS_ACCOUNT})
+var sGuardrailPiiEntityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailPiiEntityFilter, Members: &mGuardrailPiiEntityFilter, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityFilter})
+var sGuardrailPiiEntityFilter_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailPiiEntityFilter_match})
+var sGuardrailPiiEntityFilter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailPiiEntityType, Members: &mGuardrailPiiEntityType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailPiiEntityFilter_type})
+var sGuardrailPiiEntityFilter_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailSensitiveInformationPolicyAction, Members: &mGuardrailSensitiveInformationPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailPiiEntityFilter_action})
+var sGuardrailPiiEntityFilter_detected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailPiiEntityFilter_detected})
+var s_GuardrailPiiEntityFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailPiiEntityFilterList, Members: &m_GuardrailPiiEntityFilterList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailPiiEntityFilterList})
+var s_GuardrailPiiEntityFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailPiiEntityFilter, Members: &mGuardrailPiiEntityFilter, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailPiiEntityFilterList_member})
+var sGuardrailPiiEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailPiiEntityType, Members: &mGuardrailPiiEntityType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailPiiEntityType})
+var sGuardrailPiiEntityType_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_ADDRESS})
+var sGuardrailPiiEntityType_AGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_AGE})
+var sGuardrailPiiEntityType_AWS_ACCESS_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ACCESS_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_AWS_ACCESS_KEY})
+var sGuardrailPiiEntityType_AWS_SECRET_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SECRET_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_AWS_SECRET_KEY})
+var sGuardrailPiiEntityType_CA_HEALTH_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_HEALTH_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_CA_HEALTH_NUMBER})
+var sGuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_SOCIAL_INSURANCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER})
+var sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_DEBIT_CARD_CVV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV})
+var sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_DEBIT_CARD_EXPIRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY})
+var sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_DEBIT_CARD_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER})
+var sGuardrailPiiEntityType_DRIVER_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIVER_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_DRIVER_ID})
+var sGuardrailPiiEntityType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_EMAIL})
+var sGuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNATIONAL_BANK_ACCOUNT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER})
+var sGuardrailPiiEntityType_IP_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_IP_ADDRESS})
+var sGuardrailPiiEntityType_LICENSE_PLATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LICENSE_PLATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_LICENSE_PLATE})
+var sGuardrailPiiEntityType_MAC_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAC_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_MAC_ADDRESS})
+var sGuardrailPiiEntityType_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_NAME})
+var sGuardrailPiiEntityType_PASSWORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSWORD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_PASSWORD})
+var sGuardrailPiiEntityType_PHONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_PHONE})
+var sGuardrailPiiEntityType_PIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_PIN})
+var sGuardrailPiiEntityType_SWIFT_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SWIFT_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_SWIFT_CODE})
+var sGuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_NATIONAL_HEALTH_SERVICE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER})
+var sGuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_NATIONAL_INSURANCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER})
+var sGuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER})
+var sGuardrailPiiEntityType_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_URL})
+var sGuardrailPiiEntityType_USERNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USERNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_USERNAME})
+var sGuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_BANK_ACCOUNT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER})
+var sGuardrailPiiEntityType_US_BANK_ROUTING_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_BANK_ROUTING_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_US_BANK_ROUTING_NUMBER})
+var sGuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER})
+var sGuardrailPiiEntityType_US_PASSPORT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_PASSPORT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_US_PASSPORT_NUMBER})
+var sGuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_SOCIAL_SECURITY_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER})
+var sGuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VEHICLE_IDENTIFICATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER})
+var s_GuardrailProcessingLatency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailProcessingLatency, Type: smithy.ShapeTypeLong, Ext: &e_GuardrailProcessingLatency})
+var sGuardrailRegexFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailRegexFilter, Members: &mGuardrailRegexFilter, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailRegexFilter})
+var sGuardrailRegexFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailRegexFilter_name})
+var sGuardrailRegexFilter_match = smithy.NewStaticSchema(smithy.StaticSchema{Member: "match", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailRegexFilter_match})
+var sGuardrailRegexFilter_regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regex", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailRegexFilter_regex})
+var sGuardrailRegexFilter_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailSensitiveInformationPolicyAction, Members: &mGuardrailSensitiveInformationPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailRegexFilter_action})
+var sGuardrailRegexFilter_detected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailRegexFilter_detected})
+var s_GuardrailRegexFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailRegexFilterList, Members: &m_GuardrailRegexFilterList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailRegexFilterList})
+var s_GuardrailRegexFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailRegexFilter, Members: &mGuardrailRegexFilter, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailRegexFilterList_member})
+var sGuardrailSensitiveInformationPolicyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailSensitiveInformationPolicyAction, Members: &mGuardrailSensitiveInformationPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailSensitiveInformationPolicyAction})
+var sGuardrailSensitiveInformationPolicyAction_ANONYMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANONYMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailSensitiveInformationPolicyAction_ANONYMIZED})
+var sGuardrailSensitiveInformationPolicyAction_BLOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailSensitiveInformationPolicyAction_BLOCKED})
+var sGuardrailSensitiveInformationPolicyAction_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailSensitiveInformationPolicyAction_NONE})
+var sGuardrailSensitiveInformationPolicyAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailSensitiveInformationPolicyAssessment, Members: &mGuardrailSensitiveInformationPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailSensitiveInformationPolicyAssessment})
+var sGuardrailSensitiveInformationPolicyAssessment_piiEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "piiEntities", ID: &i_GuardrailPiiEntityFilterList, Members: &m_GuardrailPiiEntityFilterList, Type: smithy.ShapeTypeList, Ext: &eGuardrailSensitiveInformationPolicyAssessment_piiEntities})
+var sGuardrailSensitiveInformationPolicyAssessment_regexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regexes", ID: &i_GuardrailRegexFilterList, Members: &m_GuardrailRegexFilterList, Type: smithy.ShapeTypeList, Ext: &eGuardrailSensitiveInformationPolicyAssessment_regexes})
+var s_GuardrailSensitiveInformationPolicyFreeUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailSensitiveInformationPolicyFreeUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailSensitiveInformationPolicyFreeUnitsProcessed})
+var s_GuardrailSensitiveInformationPolicyUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailSensitiveInformationPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailSensitiveInformationPolicyUnitsProcessed})
+var sGuardrailStreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailStreamConfiguration, Members: &mGuardrailStreamConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailStreamConfiguration})
+var sGuardrailStreamConfiguration_guardrailIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailIdentifier", ID: &i_GuardrailIdentifier, Type: smithy.ShapeTypeString, Ext: &eGuardrailStreamConfiguration_guardrailIdentifier})
+var sGuardrailStreamConfiguration_guardrailVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailVersion", ID: &i_GuardrailVersion, Type: smithy.ShapeTypeString, Ext: &eGuardrailStreamConfiguration_guardrailVersion})
+var sGuardrailStreamConfiguration_trace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trace", ID: &iGuardrailTrace, Members: &mGuardrailTrace, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailStreamConfiguration_trace})
+var sGuardrailStreamConfiguration_streamProcessingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamProcessingMode", ID: &iGuardrailStreamProcessingMode, Members: &mGuardrailStreamProcessingMode, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailStreamConfiguration_streamProcessingMode})
+var sGuardrailStreamProcessingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailStreamProcessingMode, Members: &mGuardrailStreamProcessingMode, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailStreamProcessingMode})
+var sGuardrailStreamProcessingMode_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailStreamProcessingMode_SYNC})
+var sGuardrailStreamProcessingMode_ASYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailStreamProcessingMode_ASYNC})
+var sGuardrailTextBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTextBlock, Members: &mGuardrailTextBlock, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTextBlock})
+var sGuardrailTextBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailTextBlock_text})
+var sGuardrailTextBlock_qualifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qualifiers", ID: &i_GuardrailContentQualifierList, Members: &m_GuardrailContentQualifierList, Type: smithy.ShapeTypeList, Ext: &eGuardrailTextBlock_qualifiers})
+var sGuardrailTextCharactersCoverage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTextCharactersCoverage, Members: &mGuardrailTextCharactersCoverage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTextCharactersCoverage})
+var sGuardrailTextCharactersCoverage_guarded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guarded", ID: &i_TextCharactersGuarded, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailTextCharactersCoverage_guarded})
+var sGuardrailTextCharactersCoverage_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &i_TextCharactersTotal, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailTextCharactersCoverage_total})
+var sGuardrailTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTopic, Members: &mGuardrailTopic, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTopic})
+var sGuardrailTopic_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailTopic_name})
+var sGuardrailTopic_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGuardrailTopicType, Members: &mGuardrailTopicType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailTopic_type})
+var sGuardrailTopic_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailTopicPolicyAction, Members: &mGuardrailTopicPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailTopic_action})
+var sGuardrailTopic_detected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGuardrailTopic_detected})
+var s_GuardrailTopicList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailTopicList, Members: &m_GuardrailTopicList, Type: smithy.ShapeTypeList, Ext: &e_GuardrailTopicList})
+var s_GuardrailTopicList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuardrailTopic, Members: &mGuardrailTopic, Type: smithy.ShapeTypeStructure, Ext: &e_GuardrailTopicList_member})
+var sGuardrailTopicPolicyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTopicPolicyAction, Members: &mGuardrailTopicPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailTopicPolicyAction})
+var sGuardrailTopicPolicyAction_BLOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTopicPolicyAction_BLOCKED})
+var sGuardrailTopicPolicyAction_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTopicPolicyAction_NONE})
+var sGuardrailTopicPolicyAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTopicPolicyAssessment, Members: &mGuardrailTopicPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTopicPolicyAssessment})
+var sGuardrailTopicPolicyAssessment_topics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topics", ID: &i_GuardrailTopicList, Members: &m_GuardrailTopicList, Type: smithy.ShapeTypeList, Ext: &eGuardrailTopicPolicyAssessment_topics})
+var s_GuardrailTopicPolicyUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailTopicPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailTopicPolicyUnitsProcessed})
+var sGuardrailTopicType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTopicType, Members: &mGuardrailTopicType, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailTopicType})
+var sGuardrailTopicType_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTopicType_DENY})
+var sGuardrailTrace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTrace, Members: &mGuardrailTrace, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailTrace})
+var sGuardrailTrace_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTrace_ENABLED})
+var sGuardrailTrace_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTrace_DISABLED})
+var sGuardrailTrace_ENABLED_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED_FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTrace_ENABLED_FULL})
+var sGuardrailTraceAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailTraceAssessment, Members: &mGuardrailTraceAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailTraceAssessment})
+var sGuardrailTraceAssessment_modelOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelOutput", ID: &i_ModelOutputs, Members: &m_ModelOutputs, Type: smithy.ShapeTypeList, Ext: &eGuardrailTraceAssessment_modelOutput})
+var sGuardrailTraceAssessment_inputAssessment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputAssessment", ID: &i_GuardrailAssessmentMap, Members: &m_GuardrailAssessmentMap, Type: smithy.ShapeTypeMap, Ext: &eGuardrailTraceAssessment_inputAssessment})
+var sGuardrailTraceAssessment_outputAssessments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputAssessments", ID: &i_GuardrailAssessmentListMap, Members: &m_GuardrailAssessmentListMap, Type: smithy.ShapeTypeMap, Ext: &eGuardrailTraceAssessment_outputAssessments})
+var sGuardrailTraceAssessment_actionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGuardrailTraceAssessment_actionReason})
+var sGuardrailUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailUsage, Members: &mGuardrailUsage, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailUsage})
+var sGuardrailUsage_topicPolicyUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topicPolicyUnits", ID: &i_GuardrailTopicPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_topicPolicyUnits})
+var sGuardrailUsage_contentPolicyUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentPolicyUnits", ID: &i_GuardrailContentPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_contentPolicyUnits})
+var sGuardrailUsage_wordPolicyUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wordPolicyUnits", ID: &i_GuardrailWordPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_wordPolicyUnits})
+var sGuardrailUsage_sensitiveInformationPolicyUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sensitiveInformationPolicyUnits", ID: &i_GuardrailSensitiveInformationPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_sensitiveInformationPolicyUnits})
+var sGuardrailUsage_sensitiveInformationPolicyFreeUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sensitiveInformationPolicyFreeUnits", ID: &i_GuardrailSensitiveInformationPolicyFreeUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_sensitiveInformationPolicyFreeUnits})
+var sGuardrailUsage_contextualGroundingPolicyUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contextualGroundingPolicyUnits", ID: &i_GuardrailContextualGroundingPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_contextualGroundingPolicyUnits})
+var sGuardrailUsage_contentPolicyImageUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentPolicyImageUnits", ID: &i_GuardrailContentPolicyImageUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_contentPolicyImageUnits})
+var sGuardrailUsage_automatedReasoningPolicyUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automatedReasoningPolicyUnits", ID: &i_GuardrailAutomatedReasoningPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_automatedReasoningPolicyUnits})
+var sGuardrailUsage_automatedReasoningPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automatedReasoningPolicies", ID: &i_GuardrailAutomatedReasoningPoliciesProcessed, Type: smithy.ShapeTypeInteger, Ext: &eGuardrailUsage_automatedReasoningPolicies})
+var s_GuardrailVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailVersion, Type: smithy.ShapeTypeString, Ext: &e_GuardrailVersion})
+var sGuardrailWordPolicyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailWordPolicyAction, Members: &mGuardrailWordPolicyAction, Type: smithy.ShapeTypeEnum, Ext: &eGuardrailWordPolicyAction})
+var sGuardrailWordPolicyAction_BLOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailWordPolicyAction_BLOCKED})
+var sGuardrailWordPolicyAction_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailWordPolicyAction_NONE})
+var sGuardrailWordPolicyAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuardrailWordPolicyAssessment, Members: &mGuardrailWordPolicyAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGuardrailWordPolicyAssessment})
+var sGuardrailWordPolicyAssessment_customWords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customWords", ID: &i_GuardrailCustomWordList, Members: &m_GuardrailCustomWordList, Type: smithy.ShapeTypeList, Ext: &eGuardrailWordPolicyAssessment_customWords})
+var sGuardrailWordPolicyAssessment_managedWordLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedWordLists", ID: &i_GuardrailManagedWordList, Members: &m_GuardrailManagedWordList, Type: smithy.ShapeTypeList, Ext: &eGuardrailWordPolicyAssessment_managedWordLists})
+var s_GuardrailWordPolicyUnitsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailWordPolicyUnitsProcessed, Type: smithy.ShapeTypeInteger, Ext: &e_GuardrailWordPolicyUnitsProcessed})
+var sImageBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBlock, Members: &mImageBlock, Type: smithy.ShapeTypeStructure, Ext: &eImageBlock})
+var sImageBlock_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iImageFormat, Members: &mImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eImageBlock_format})
+var sImageBlock_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iImageSource, Members: &mImageSource, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eImageBlock_source})
+var sImageBlock_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorBlock, Members: &mErrorBlock, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eImageBlock_error})
+var sImageBlockDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBlockDelta, Members: &mImageBlockDelta, Type: smithy.ShapeTypeStructure, Ext: &eImageBlockDelta})
+var sImageBlockDelta_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iImageSource, Members: &mImageSource, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eImageBlockDelta_source})
+var sImageBlockDelta_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorBlock, Members: &mErrorBlock, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eImageBlockDelta_error})
+var sImageBlockStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBlockStart, Members: &mImageBlockStart, Type: smithy.ShapeTypeStructure, Ext: &eImageBlockStart})
+var sImageBlockStart_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iImageFormat, Members: &mImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eImageBlockStart_format})
+var sImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageFormat, Members: &mImageFormat, Type: smithy.ShapeTypeEnum, Ext: &eImageFormat})
+var sImageFormat_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageFormat_PNG})
+var sImageFormat_JPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageFormat_JPEG})
+var sImageFormat_GIF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageFormat_GIF})
+var sImageFormat_WEBP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageFormat_WEBP})
+var s_ImagesGuarded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImagesGuarded, Type: smithy.ShapeTypeInteger, Ext: &e_ImagesGuarded})
+var sImageSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSource, Members: &mImageSource, Traits: &t12, Type: smithy.ShapeTypeUnion, Ext: &eImageSource})
+var sImageSource_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eImageSource_bytes})
+var sImageSource_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eImageSource_s3Location})
+var s_ImagesTotal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImagesTotal, Type: smithy.ShapeTypeInteger, Ext: &e_ImagesTotal})
+var sInferenceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceConfiguration, Members: &mInferenceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInferenceConfiguration})
+var sInferenceConfiguration_maxTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eInferenceConfiguration_maxTokens})
+var sInferenceConfiguration_temperature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "temperature", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eInferenceConfiguration_temperature})
+var sInferenceConfiguration_topP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topP", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eInferenceConfiguration_topP})
+var sInferenceConfiguration_stopSequences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopSequences", ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList, Ext: &eInferenceConfiguration_stopSequences})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_InvocationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &e_InvocationArn})
+var s_InvokedModelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvokedModelId, Type: smithy.ShapeTypeString, Ext: &e_InvokedModelId})
+var s_InvokeModelIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvokeModelIdentifier, Type: smithy.ShapeTypeString, Ext: &e_InvokeModelIdentifier})
+var sInvokeModelTokensRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelTokensRequest, Members: &mInvokeModelTokensRequest, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelTokensRequest})
+var sInvokeModelTokensRequest_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_Body, Traits: &t13, Type: smithy.ShapeTypeBlob, Ext: &eInvokeModelTokensRequest_body})
+var sInvokeModelWithBidirectionalStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithBidirectionalStreamInput, Members: &mInvokeModelWithBidirectionalStreamInput, Traits: &t16, Type: smithy.ShapeTypeUnion, Ext: &eInvokeModelWithBidirectionalStreamInput})
+var sInvokeModelWithBidirectionalStreamInput_chunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chunk", ID: &iBidirectionalInputPayloadPart, Members: &mBidirectionalInputPayloadPart, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamInput_chunk})
+var sInvokeModelWithBidirectionalStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithBidirectionalStreamOutput, Members: &mInvokeModelWithBidirectionalStreamOutput, Traits: &t16, Type: smithy.ShapeTypeUnion, Ext: &eInvokeModelWithBidirectionalStreamOutput})
+var sInvokeModelWithBidirectionalStreamOutput_chunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chunk", ID: &iBidirectionalOutputPayloadPart, Members: &mBidirectionalOutputPayloadPart, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamOutput_chunk})
+var sInvokeModelWithBidirectionalStreamOutput_internalServerException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internalServerException", ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamOutput_internalServerException})
+var sInvokeModelWithBidirectionalStreamOutput_modelStreamErrorException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelStreamErrorException", ID: &iModelStreamErrorException, Members: &mModelStreamErrorException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamOutput_modelStreamErrorException})
+var sInvokeModelWithBidirectionalStreamOutput_validationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationException", ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamOutput_validationException})
+var sInvokeModelWithBidirectionalStreamOutput_throttlingException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttlingException", ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamOutput_throttlingException})
+var sInvokeModelWithBidirectionalStreamOutput_modelTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelTimeoutException", ID: &iModelTimeoutException, Members: &mModelTimeoutException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamOutput_modelTimeoutException})
+var sInvokeModelWithBidirectionalStreamOutput_serviceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceUnavailableException", ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamOutput_serviceUnavailableException})
+var sJsonSchemaDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonSchemaDefinition, Members: &mJsonSchemaDefinition, Type: smithy.ShapeTypeStructure, Ext: &eJsonSchemaDefinition})
+var sJsonSchemaDefinition_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eJsonSchemaDefinition_schema})
+var sJsonSchemaDefinition_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eJsonSchemaDefinition_name})
+var sJsonSchemaDefinition_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eJsonSchemaDefinition_description})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyId})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &eMessage})
+var sMessage_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &iConversationRole, Members: &mConversationRole, Type: smithy.ShapeTypeEnum, Ext: &eMessage_role})
+var sMessage_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_ContentBlocks, Members: &m_ContentBlocks, Type: smithy.ShapeTypeList, Ext: &eMessage_content})
+var s_Messages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList, Ext: &e_Messages})
+var s_Messages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &e_Messages_member})
+var sMessageStartEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageStartEvent, Members: &mMessageStartEvent, Type: smithy.ShapeTypeStructure, Ext: &eMessageStartEvent})
+var sMessageStartEvent_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &iConversationRole, Members: &mConversationRole, Type: smithy.ShapeTypeEnum, Ext: &eMessageStartEvent_role})
+var sMessageStopEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageStopEvent, Members: &mMessageStopEvent, Type: smithy.ShapeTypeStructure, Ext: &eMessageStopEvent})
+var sMessageStopEvent_stopReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopReason", ID: &iStopReason, Members: &mStopReason, Type: smithy.ShapeTypeEnum, Ext: &eMessageStopEvent_stopReason})
+var sMessageStopEvent_additionalModelResponseFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalModelResponseFields", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eMessageStopEvent_additionalModelResponseFields})
+var s_MimeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MimeType, Type: smithy.ShapeTypeString, Ext: &e_MimeType})
+var sModelErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelErrorException, Members: &mModelErrorException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eModelErrorException})
+var sModelErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eModelErrorException_message})
+var sModelErrorException_originalStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originalStatusCode", ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &eModelErrorException_originalStatusCode})
+var sModelErrorException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eModelErrorException_resourceName})
+var s_ModelInputPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelInputPayload, Traits: &t12, Type: smithy.ShapeTypeDocument, Ext: &e_ModelInputPayload})
+var sModelNotReadyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelNotReadyException, Members: &mModelNotReadyException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eModelNotReadyException})
+var sModelNotReadyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eModelNotReadyException_message})
+var s_ModelOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelOutputs, Members: &m_ModelOutputs, Type: smithy.ShapeTypeList, Ext: &e_ModelOutputs})
+var s_ModelOutputs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GuardrailOutputText, Type: smithy.ShapeTypeString, Ext: &e_ModelOutputs_member})
+var sModelStreamErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelStreamErrorException, Members: &mModelStreamErrorException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eModelStreamErrorException})
+var sModelStreamErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eModelStreamErrorException_message})
+var sModelStreamErrorException_originalStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originalStatusCode", ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &eModelStreamErrorException_originalStatusCode})
+var sModelStreamErrorException_originalMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originalMessage", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eModelStreamErrorException_originalMessage})
+var sModelTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelTimeoutException, Members: &mModelTimeoutException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eModelTimeoutException})
+var sModelTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eModelTimeoutException_message})
+var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &e_NonBlankString})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_NonEmptyStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList, Ext: &e_NonEmptyStringList})
+var s_NonEmptyStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyStringList_member})
+var s_NonNegativeInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNegativeInteger, Type: smithy.ShapeTypeInteger, Ext: &e_NonNegativeInteger})
+var sOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eOutputConfig})
+var sOutputConfig_textFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textFormat", ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeStructure, Ext: &eOutputConfig_textFormat})
+var sOutputConfig_effort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effort", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOutputConfig_effort})
+var sOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormat})
+var sOutputFormat_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iOutputFormatType, Members: &mOutputFormatType, Type: smithy.ShapeTypeEnum, Ext: &eOutputFormat_type})
+var sOutputFormat_structure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structure", ID: &iOutputFormatStructure, Members: &mOutputFormatStructure, Traits: &t13, Type: smithy.ShapeTypeUnion, Ext: &eOutputFormat_structure})
+var sOutputFormatStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormatStructure, Members: &mOutputFormatStructure, Traits: &t12, Type: smithy.ShapeTypeUnion, Ext: &eOutputFormatStructure})
+var sOutputFormatStructure_jsonSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jsonSchema", ID: &iJsonSchemaDefinition, Members: &mJsonSchemaDefinition, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormatStructure_jsonSchema})
+var sOutputFormatType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormatType, Members: &mOutputFormatType, Type: smithy.ShapeTypeEnum, Ext: &eOutputFormatType})
+var sOutputFormatType_JSON_SCHEMA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON_SCHEMA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormatType_JSON_SCHEMA})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var s_PartBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartBody, Traits: &t12, Type: smithy.ShapeTypeBlob, Ext: &e_PartBody})
+var sPayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadPart, Members: &mPayloadPart, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ePayloadPart})
+var sPayloadPart_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &i_PartBody, Traits: &t13, Type: smithy.ShapeTypeBlob, Ext: &ePayloadPart_bytes})
+var sPerformanceConfigLatency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceConfigLatency, Members: &mPerformanceConfigLatency, Type: smithy.ShapeTypeEnum, Ext: &ePerformanceConfigLatency})
+var sPerformanceConfigLatency_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceConfigLatency_STANDARD})
+var sPerformanceConfigLatency_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceConfigLatency_OPTIMIZED})
+var sPerformanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceConfiguration, Members: &mPerformanceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceConfiguration})
+var sPerformanceConfiguration_latency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latency", ID: &iPerformanceConfigLatency, Members: &mPerformanceConfigLatency, Type: smithy.ShapeTypeEnum, Ext: &ePerformanceConfiguration_latency})
+var sPromptRouterTrace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromptRouterTrace, Members: &mPromptRouterTrace, Type: smithy.ShapeTypeStructure, Ext: &ePromptRouterTrace})
+var sPromptRouterTrace_invokedModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invokedModelId", ID: &i_InvokedModelId, Type: smithy.ShapeTypeString, Ext: &ePromptRouterTrace_invokedModelId})
+var s_PromptVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PromptVariableMap, Members: &m_PromptVariableMap, Traits: &t12, Type: smithy.ShapeTypeMap, Ext: &e_PromptVariableMap})
+var s_PromptVariableMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_PromptVariableMap_key})
+var s_PromptVariableMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPromptVariableValues, Members: &mPromptVariableValues, Type: smithy.ShapeTypeUnion, Ext: &e_PromptVariableMap_value})
+var sPromptVariableValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromptVariableValues, Members: &mPromptVariableValues, Type: smithy.ShapeTypeUnion, Ext: &ePromptVariableValues})
+var sPromptVariableValues_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePromptVariableValues_text})
+var sReasoningContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReasoningContentBlock, Members: &mReasoningContentBlock, Traits: &t12, Type: smithy.ShapeTypeUnion, Ext: &eReasoningContentBlock})
+var sReasoningContentBlock_reasoningText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reasoningText", ID: &iReasoningTextBlock, Members: &mReasoningTextBlock, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eReasoningContentBlock_reasoningText})
+var sReasoningContentBlock_redactedContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redactedContent", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eReasoningContentBlock_redactedContent})
+var sReasoningContentBlockDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReasoningContentBlockDelta, Members: &mReasoningContentBlockDelta, Traits: &t12, Type: smithy.ShapeTypeUnion, Ext: &eReasoningContentBlockDelta})
+var sReasoningContentBlockDelta_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReasoningContentBlockDelta_text})
+var sReasoningContentBlockDelta_redactedContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redactedContent", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eReasoningContentBlockDelta_redactedContent})
+var sReasoningContentBlockDelta_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReasoningContentBlockDelta_signature})
+var sReasoningTextBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReasoningTextBlock, Members: &mReasoningTextBlock, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eReasoningTextBlock})
+var sReasoningTextBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReasoningTextBlock_text})
+var sReasoningTextBlock_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReasoningTextBlock_signature})
+var s_RequestMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestMetadata, Members: &m_RequestMetadata, Traits: &t12, Type: smithy.ShapeTypeMap, Ext: &e_RequestMetadata})
+var s_RequestMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_RequestMetadata_key})
+var s_RequestMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_RequestMetadata_value})
+var s_RequestMetadataJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestMetadataJson, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &e_RequestMetadataJson})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseStream, Members: &mResponseStream, Traits: &t16, Type: smithy.ShapeTypeUnion, Ext: &eResponseStream})
+var sResponseStream_chunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chunk", ID: &iPayloadPart, Members: &mPayloadPart, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_chunk})
+var sResponseStream_internalServerException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internalServerException", ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_internalServerException})
+var sResponseStream_modelStreamErrorException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelStreamErrorException", ID: &iModelStreamErrorException, Members: &mModelStreamErrorException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_modelStreamErrorException})
+var sResponseStream_validationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationException", ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_validationException})
+var sResponseStream_throttlingException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttlingException", ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_throttlingException})
+var sResponseStream_modelTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelTimeoutException", ID: &iModelTimeoutException, Members: &mModelTimeoutException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_modelTimeoutException})
+var sResponseStream_serviceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceUnavailableException", ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_serviceUnavailableException})
+var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eS3Location})
+var sS3Location_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eS3Location_uri})
+var sS3Location_bucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eS3Location_bucketOwner})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &e_S3Uri})
+var sSearchResultBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchResultBlock, Members: &mSearchResultBlock, Type: smithy.ShapeTypeStructure, Ext: &eSearchResultBlock})
+var sSearchResultBlock_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchResultBlock_source})
+var sSearchResultBlock_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchResultBlock_title})
+var sSearchResultBlock_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_SearchResultContentBlocks, Members: &m_SearchResultContentBlocks, Type: smithy.ShapeTypeList, Ext: &eSearchResultBlock_content})
+var sSearchResultBlock_citations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "citations", ID: &iCitationsConfig, Members: &mCitationsConfig, Type: smithy.ShapeTypeStructure, Ext: &eSearchResultBlock_citations})
+var sSearchResultContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchResultContentBlock, Members: &mSearchResultContentBlock, Type: smithy.ShapeTypeStructure, Ext: &eSearchResultContentBlock})
+var sSearchResultContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchResultContentBlock_text})
+var s_SearchResultContentBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchResultContentBlocks, Members: &m_SearchResultContentBlocks, Type: smithy.ShapeTypeList, Ext: &e_SearchResultContentBlocks})
+var s_SearchResultContentBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchResultContentBlock, Members: &mSearchResultContentBlock, Type: smithy.ShapeTypeStructure, Ext: &e_SearchResultContentBlocks_member})
+var sSearchResultLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchResultLocation, Members: &mSearchResultLocation, Type: smithy.ShapeTypeStructure, Ext: &eSearchResultLocation})
+var sSearchResultLocation_searchResultIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchResultIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchResultLocation_searchResultIndex})
+var sSearchResultLocation_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchResultLocation_start})
+var sSearchResultLocation_end = smithy.NewStaticSchema(smithy.StaticSchema{Member: "end", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchResultLocation_end})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceTier, Members: &mServiceTier, Type: smithy.ShapeTypeStructure, Ext: &eServiceTier})
+var sServiceTier_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iServiceTierType, Members: &mServiceTierType, Type: smithy.ShapeTypeEnum, Ext: &eServiceTier_type})
+var sServiceTierType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceTierType, Members: &mServiceTierType, Type: smithy.ShapeTypeEnum, Ext: &eServiceTierType})
+var sServiceTierType_PRIORITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIORITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceTierType_PRIORITY})
+var sServiceTierType_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceTierType_DEFAULT})
+var sServiceTierType_FLEX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLEX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceTierType_FLEX})
+var sServiceTierType_RESERVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceTierType_RESERVED})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var sSortAsyncInvocationBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortAsyncInvocationBy, Members: &mSortAsyncInvocationBy, Type: smithy.ShapeTypeEnum, Ext: &eSortAsyncInvocationBy})
+var sSortAsyncInvocationBy_SUBMISSION_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMISSION_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortAsyncInvocationBy_SUBMISSION_TIME})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASCENDING})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESCENDING})
+var sSpecificToolChoice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpecificToolChoice, Members: &mSpecificToolChoice, Type: smithy.ShapeTypeStructure, Ext: &eSpecificToolChoice})
+var sSpecificToolChoice_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ToolName, Type: smithy.ShapeTypeString, Ext: &eSpecificToolChoice_name})
+var s_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &e_StatusCode})
+var sStopReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReason, Members: &mStopReason, Type: smithy.ShapeTypeEnum, Ext: &eStopReason})
+var sStopReason_END_TURN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_TURN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_END_TURN})
+var sStopReason_TOOL_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOOL_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_TOOL_USE})
+var sStopReason_MAX_TOKENS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_TOKENS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_MAX_TOKENS})
+var sStopReason_STOP_SEQUENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_SEQUENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_STOP_SEQUENCE})
+var sStopReason_GUARDRAIL_INTERVENED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GUARDRAIL_INTERVENED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_GUARDRAIL_INTERVENED})
+var sStopReason_CONTENT_FILTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_FILTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_CONTENT_FILTERED})
+var sStopReason_MALFORMED_MODEL_OUTPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MALFORMED_MODEL_OUTPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_MALFORMED_MODEL_OUTPUT})
+var sStopReason_MALFORMED_TOOL_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MALFORMED_TOOL_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_MALFORMED_TOOL_USE})
+var sStopReason_MODEL_CONTEXT_WINDOW_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODEL_CONTEXT_WINDOW_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_MODEL_CONTEXT_WINDOW_EXCEEDED})
+var sSystemContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSystemContentBlock, Members: &mSystemContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eSystemContentBlock})
+var sSystemContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSystemContentBlock_text})
+var sSystemContentBlock_guardContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardContent", ID: &iGuardrailConverseContentBlock, Members: &mGuardrailConverseContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eSystemContentBlock_guardContent})
+var sSystemContentBlock_cachePoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cachePoint", ID: &iCachePointBlock, Members: &mCachePointBlock, Type: smithy.ShapeTypeStructure, Ext: &eSystemContentBlock_cachePoint})
+var s_SystemContentBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SystemContentBlocks, Members: &m_SystemContentBlocks, Type: smithy.ShapeTypeList, Ext: &e_SystemContentBlocks})
+var s_SystemContentBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSystemContentBlock, Members: &mSystemContentBlock, Type: smithy.ShapeTypeUnion, Ext: &e_SystemContentBlocks_member})
+var sSystemTool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSystemTool, Members: &mSystemTool, Type: smithy.ShapeTypeStructure, Ext: &eSystemTool})
+var sSystemTool_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ToolName, Type: smithy.ShapeTypeString, Ext: &eSystemTool_name})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TextCharactersGuarded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextCharactersGuarded, Type: smithy.ShapeTypeInteger, Ext: &e_TextCharactersGuarded})
+var s_TextCharactersTotal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextCharactersTotal, Type: smithy.ShapeTypeInteger, Ext: &e_TextCharactersTotal})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenUsage, Members: &mTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eTokenUsage})
+var sTokenUsage_inputTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTokenUsage_inputTokens})
+var sTokenUsage_outputTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTokenUsage_outputTokens})
+var sTokenUsage_totalTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTokenUsage_totalTokens})
+var sTokenUsage_cacheReadInputTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheReadInputTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTokenUsage_cacheReadInputTokens})
+var sTokenUsage_cacheWriteInputTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheWriteInputTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTokenUsage_cacheWriteInputTokens})
+var sTokenUsage_cacheDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheDetails", ID: &i_CacheDetailsList, Members: &m_CacheDetailsList, Type: smithy.ShapeTypeList, Ext: &eTokenUsage_cacheDetails})
+var sTool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTool, Members: &mTool, Type: smithy.ShapeTypeUnion, Ext: &eTool})
+var sTool_toolSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolSpec", ID: &iToolSpecification, Members: &mToolSpecification, Type: smithy.ShapeTypeStructure, Ext: &eTool_toolSpec})
+var sTool_systemTool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "systemTool", ID: &iSystemTool, Members: &mSystemTool, Type: smithy.ShapeTypeStructure, Ext: &eTool_systemTool})
+var sTool_cachePoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cachePoint", ID: &iCachePointBlock, Members: &mCachePointBlock, Type: smithy.ShapeTypeStructure, Ext: &eTool_cachePoint})
+var sToolAdditionBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolAdditionBlock, Members: &mToolAdditionBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolAdditionBlock})
+var sToolAdditionBlock_tool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tool", ID: &iToolReference, Members: &mToolReference, Type: smithy.ShapeTypeStructure, Ext: &eToolAdditionBlock_tool})
+var sToolChoice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolChoice, Members: &mToolChoice, Type: smithy.ShapeTypeUnion, Ext: &eToolChoice})
+var sToolChoice_auto = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auto", ID: &iAutoToolChoice, Type: smithy.ShapeTypeStructure, Ext: &eToolChoice_auto})
+var sToolChoice_any = smithy.NewStaticSchema(smithy.StaticSchema{Member: "any", ID: &iAnyToolChoice, Type: smithy.ShapeTypeStructure, Ext: &eToolChoice_any})
+var sToolChoice_tool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tool", ID: &iSpecificToolChoice, Members: &mSpecificToolChoice, Type: smithy.ShapeTypeStructure, Ext: &eToolChoice_tool})
+var sToolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolConfiguration, Members: &mToolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eToolConfiguration})
+var sToolConfiguration_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_Tools, Members: &m_Tools, Type: smithy.ShapeTypeList, Ext: &eToolConfiguration_tools})
+var sToolConfiguration_toolChoice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolChoice", ID: &iToolChoice, Members: &mToolChoice, Type: smithy.ShapeTypeUnion, Ext: &eToolConfiguration_toolChoice})
+var sToolInputSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolInputSchema, Members: &mToolInputSchema, Type: smithy.ShapeTypeUnion, Ext: &eToolInputSchema})
+var sToolInputSchema_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eToolInputSchema_json})
+var s_ToolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolName, Type: smithy.ShapeTypeString, Ext: &e_ToolName})
+var sToolReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolReference, Members: &mToolReference, Type: smithy.ShapeTypeStructure, Ext: &eToolReference})
+var sToolReference_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolReference_type})
+var sToolReference_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolReference_name})
+var sToolReference_serverName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolReference_serverName})
+var sToolRemovalBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolRemovalBlock, Members: &mToolRemovalBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolRemovalBlock})
+var sToolRemovalBlock_tool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tool", ID: &iToolReference, Members: &mToolReference, Type: smithy.ShapeTypeStructure, Ext: &eToolRemovalBlock_tool})
+var sToolResultBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolResultBlock, Members: &mToolResultBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolResultBlock})
+var sToolResultBlock_toolUseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolUseId", ID: &i_ToolUseId, Type: smithy.ShapeTypeString, Ext: &eToolResultBlock_toolUseId})
+var sToolResultBlock_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_ToolResultContentBlocks, Members: &m_ToolResultContentBlocks, Type: smithy.ShapeTypeList, Ext: &eToolResultBlock_content})
+var sToolResultBlock_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iToolResultStatus, Members: &mToolResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eToolResultBlock_status})
+var sToolResultBlock_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolResultBlock_type})
+var sToolResultBlockDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolResultBlockDelta, Members: &mToolResultBlockDelta, Type: smithy.ShapeTypeUnion, Ext: &eToolResultBlockDelta})
+var sToolResultBlockDelta_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolResultBlockDelta_text})
+var sToolResultBlockDelta_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eToolResultBlockDelta_json})
+var s_ToolResultBlocksDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolResultBlocksDelta, Members: &m_ToolResultBlocksDelta, Type: smithy.ShapeTypeList, Ext: &e_ToolResultBlocksDelta})
+var s_ToolResultBlocksDelta_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iToolResultBlockDelta, Members: &mToolResultBlockDelta, Type: smithy.ShapeTypeUnion, Ext: &e_ToolResultBlocksDelta_member})
+var sToolResultBlockStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolResultBlockStart, Members: &mToolResultBlockStart, Type: smithy.ShapeTypeStructure, Ext: &eToolResultBlockStart})
+var sToolResultBlockStart_toolUseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolUseId", ID: &i_ToolUseId, Type: smithy.ShapeTypeString, Ext: &eToolResultBlockStart_toolUseId})
+var sToolResultBlockStart_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolResultBlockStart_type})
+var sToolResultBlockStart_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iToolResultStatus, Members: &mToolResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eToolResultBlockStart_status})
+var sToolResultContentBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolResultContentBlock, Members: &mToolResultContentBlock, Type: smithy.ShapeTypeUnion, Ext: &eToolResultContentBlock})
+var sToolResultContentBlock_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eToolResultContentBlock_json})
+var sToolResultContentBlock_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolResultContentBlock_text})
+var sToolResultContentBlock_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &iImageBlock, Members: &mImageBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolResultContentBlock_image})
+var sToolResultContentBlock_document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "document", ID: &iDocumentBlock, Members: &mDocumentBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolResultContentBlock_document})
+var sToolResultContentBlock_video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "video", ID: &iVideoBlock, Members: &mVideoBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolResultContentBlock_video})
+var sToolResultContentBlock_searchResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchResult", ID: &iSearchResultBlock, Members: &mSearchResultBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolResultContentBlock_searchResult})
+var s_ToolResultContentBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolResultContentBlocks, Members: &m_ToolResultContentBlocks, Type: smithy.ShapeTypeList, Ext: &e_ToolResultContentBlocks})
+var s_ToolResultContentBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iToolResultContentBlock, Members: &mToolResultContentBlock, Type: smithy.ShapeTypeUnion, Ext: &e_ToolResultContentBlocks_member})
+var sToolResultStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolResultStatus, Members: &mToolResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eToolResultStatus})
+var sToolResultStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eToolResultStatus_SUCCESS})
+var sToolResultStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eToolResultStatus_ERROR})
+var s_Tools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tools, Members: &m_Tools, Type: smithy.ShapeTypeList, Ext: &e_Tools})
+var s_Tools_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTool, Members: &mTool, Type: smithy.ShapeTypeUnion, Ext: &e_Tools_member})
+var sToolSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolSpecification, Members: &mToolSpecification, Type: smithy.ShapeTypeStructure, Ext: &eToolSpecification})
+var sToolSpecification_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ToolName, Type: smithy.ShapeTypeString, Ext: &eToolSpecification_name})
+var sToolSpecification_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eToolSpecification_description})
+var sToolSpecification_inputSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputSchema", ID: &iToolInputSchema, Members: &mToolInputSchema, Type: smithy.ShapeTypeUnion, Ext: &eToolSpecification_inputSchema})
+var sToolSpecification_strict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strict", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eToolSpecification_strict})
+var sToolUseBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolUseBlock, Members: &mToolUseBlock, Type: smithy.ShapeTypeStructure, Ext: &eToolUseBlock})
+var sToolUseBlock_toolUseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolUseId", ID: &i_ToolUseId, Type: smithy.ShapeTypeString, Ext: &eToolUseBlock_toolUseId})
+var sToolUseBlock_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ToolName, Type: smithy.ShapeTypeString, Ext: &eToolUseBlock_name})
+var sToolUseBlock_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eToolUseBlock_input})
+var sToolUseBlock_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iToolUseType, Members: &mToolUseType, Type: smithy.ShapeTypeEnum, Ext: &eToolUseBlock_type})
+var sToolUseBlockDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolUseBlockDelta, Members: &mToolUseBlockDelta, Type: smithy.ShapeTypeStructure, Ext: &eToolUseBlockDelta})
+var sToolUseBlockDelta_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eToolUseBlockDelta_input})
+var sToolUseBlockStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolUseBlockStart, Members: &mToolUseBlockStart, Type: smithy.ShapeTypeStructure, Ext: &eToolUseBlockStart})
+var sToolUseBlockStart_toolUseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolUseId", ID: &i_ToolUseId, Type: smithy.ShapeTypeString, Ext: &eToolUseBlockStart_toolUseId})
+var sToolUseBlockStart_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ToolName, Type: smithy.ShapeTypeString, Ext: &eToolUseBlockStart_name})
+var sToolUseBlockStart_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iToolUseType, Members: &mToolUseType, Type: smithy.ShapeTypeEnum, Ext: &eToolUseBlockStart_type})
+var s_ToolUseId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolUseId, Type: smithy.ShapeTypeString, Ext: &e_ToolUseId})
+var sToolUseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolUseType, Members: &mToolUseType, Type: smithy.ShapeTypeEnum, Ext: &eToolUseType})
+var sToolUseType_SERVER_TOOL_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TOOL_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eToolUseType_SERVER_TOOL_USE})
+var sTrace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrace, Members: &mTrace, Type: smithy.ShapeTypeEnum, Ext: &eTrace})
+var sTrace_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrace_ENABLED})
+var sTrace_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrace_DISABLED})
+var sTrace_ENABLED_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED_FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrace_ENABLED_FULL})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sVideoBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoBlock, Members: &mVideoBlock, Type: smithy.ShapeTypeStructure, Ext: &eVideoBlock})
+var sVideoBlock_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iVideoFormat, Members: &mVideoFormat, Type: smithy.ShapeTypeEnum, Ext: &eVideoBlock_format})
+var sVideoBlock_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iVideoSource, Members: &mVideoSource, Type: smithy.ShapeTypeUnion, Ext: &eVideoBlock_source})
+var sVideoFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoFormat, Members: &mVideoFormat, Type: smithy.ShapeTypeEnum, Ext: &eVideoFormat})
+var sVideoFormat_MKV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MKV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_MKV})
+var sVideoFormat_MOV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MOV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_MOV})
+var sVideoFormat_MP4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_MP4})
+var sVideoFormat_WEBM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_WEBM})
+var sVideoFormat_FLV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_FLV})
+var sVideoFormat_MPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_MPEG})
+var sVideoFormat_MPG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MPG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_MPG})
+var sVideoFormat_WMV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WMV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_WMV})
+var sVideoFormat_THREE_GP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THREE_GP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVideoFormat_THREE_GP})
+var sVideoSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoSource, Members: &mVideoSource, Type: smithy.ShapeTypeUnion, Ext: &eVideoSource})
+var sVideoSource_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eVideoSource_bytes})
+var sVideoSource_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eVideoSource_s3Location})
+var sWebLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebLocation, Members: &mWebLocation, Type: smithy.ShapeTypeStructure, Ext: &eWebLocation})
+var sWebLocation_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWebLocation_url})
+var sWebLocation_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWebLocation_domain})
+var sApplyGuardrailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyGuardrailRequest, Members: &mApplyGuardrailRequest, Type: smithy.ShapeTypeStructure, Ext: &eApplyGuardrailRequest})
+var sApplyGuardrailRequest_guardrailIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailIdentifier", ID: &i_GuardrailIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eApplyGuardrailRequest_guardrailIdentifier})
+var sApplyGuardrailRequest_guardrailVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailVersion", ID: &i_GuardrailVersion, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eApplyGuardrailRequest_guardrailVersion})
+var sApplyGuardrailRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iGuardrailContentSource, Members: &mGuardrailContentSource, Type: smithy.ShapeTypeEnum, Ext: &eApplyGuardrailRequest_source})
+var sApplyGuardrailRequest_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_GuardrailContentBlockList, Members: &m_GuardrailContentBlockList, Type: smithy.ShapeTypeList, Ext: &eApplyGuardrailRequest_content})
+var sApplyGuardrailRequest_outputScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputScope", ID: &iGuardrailOutputScope, Members: &mGuardrailOutputScope, Type: smithy.ShapeTypeEnum, Ext: &eApplyGuardrailRequest_outputScope})
+var sApplyGuardrailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyGuardrailResponse, Members: &mApplyGuardrailResponse, Type: smithy.ShapeTypeStructure, Ext: &eApplyGuardrailResponse})
+var sApplyGuardrailResponse_usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usage", ID: &iGuardrailUsage, Members: &mGuardrailUsage, Type: smithy.ShapeTypeStructure, Ext: &eApplyGuardrailResponse_usage})
+var sApplyGuardrailResponse_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iGuardrailAction, Members: &mGuardrailAction, Type: smithy.ShapeTypeEnum, Ext: &eApplyGuardrailResponse_action})
+var sApplyGuardrailResponse_actionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eApplyGuardrailResponse_actionReason})
+var sApplyGuardrailResponse_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_GuardrailOutputContentList, Members: &m_GuardrailOutputContentList, Type: smithy.ShapeTypeList, Ext: &eApplyGuardrailResponse_outputs})
+var sApplyGuardrailResponse_assessments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessments", ID: &i_GuardrailAssessmentList, Members: &m_GuardrailAssessmentList, Type: smithy.ShapeTypeList, Ext: &eApplyGuardrailResponse_assessments})
+var sApplyGuardrailResponse_guardrailCoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailCoverage", ID: &iGuardrailCoverage, Members: &mGuardrailCoverage, Type: smithy.ShapeTypeStructure, Ext: &eApplyGuardrailResponse_guardrailCoverage})
+var sConverseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseRequest, Members: &mConverseRequest, Type: smithy.ShapeTypeStructure, Ext: &eConverseRequest})
+var sConverseRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_ConversationalModelId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eConverseRequest_modelId})
+var sConverseRequest_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList, Ext: &eConverseRequest_messages})
+var sConverseRequest_system = smithy.NewStaticSchema(smithy.StaticSchema{Member: "system", ID: &i_SystemContentBlocks, Members: &m_SystemContentBlocks, Type: smithy.ShapeTypeList, Ext: &eConverseRequest_system})
+var sConverseRequest_inferenceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inferenceConfig", ID: &iInferenceConfiguration, Members: &mInferenceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseRequest_inferenceConfig})
+var sConverseRequest_toolConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolConfig", ID: &iToolConfiguration, Members: &mToolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseRequest_toolConfig})
+var sConverseRequest_guardrailConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailConfig", ID: &iGuardrailConfiguration, Members: &mGuardrailConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseRequest_guardrailConfig})
+var sConverseRequest_additionalModelRequestFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalModelRequestFields", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eConverseRequest_additionalModelRequestFields})
+var sConverseRequest_promptVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptVariables", ID: &i_PromptVariableMap, Members: &m_PromptVariableMap, Traits: &t13, Type: smithy.ShapeTypeMap, Ext: &eConverseRequest_promptVariables})
+var sConverseRequest_additionalModelResponseFieldPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalModelResponseFieldPaths", ID: &i_AdditionalModelResponseFieldPaths, Members: &m_AdditionalModelResponseFieldPaths, Type: smithy.ShapeTypeList, Ext: &eConverseRequest_additionalModelResponseFieldPaths})
+var sConverseRequest_requestMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMetadata", ID: &i_RequestMetadata, Members: &m_RequestMetadata, Traits: &t13, Type: smithy.ShapeTypeMap, Ext: &eConverseRequest_requestMetadata})
+var sConverseRequest_performanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfig", ID: &iPerformanceConfiguration, Members: &mPerformanceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseRequest_performanceConfig})
+var sConverseRequest_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTier, Members: &mServiceTier, Type: smithy.ShapeTypeStructure, Ext: &eConverseRequest_serviceTier})
+var sConverseRequest_outputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eConverseRequest_outputConfig})
+var sConverseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseResponse, Members: &mConverseResponse, Type: smithy.ShapeTypeStructure, Ext: &eConverseResponse})
+var sConverseResponse_output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "output", ID: &iConverseOutput, Members: &mConverseOutput, Type: smithy.ShapeTypeUnion, Ext: &eConverseResponse_output})
+var sConverseResponse_stopReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopReason", ID: &iStopReason, Members: &mStopReason, Type: smithy.ShapeTypeEnum, Ext: &eConverseResponse_stopReason})
+var sConverseResponse_usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usage", ID: &iTokenUsage, Members: &mTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eConverseResponse_usage})
+var sConverseResponse_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &iConverseMetrics, Members: &mConverseMetrics, Type: smithy.ShapeTypeStructure, Ext: &eConverseResponse_metrics})
+var sConverseResponse_additionalModelResponseFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalModelResponseFields", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eConverseResponse_additionalModelResponseFields})
+var sConverseResponse_trace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trace", ID: &iConverseTrace, Members: &mConverseTrace, Type: smithy.ShapeTypeStructure, Ext: &eConverseResponse_trace})
+var sConverseResponse_performanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfig", ID: &iPerformanceConfiguration, Members: &mPerformanceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseResponse_performanceConfig})
+var sConverseResponse_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTier, Members: &mServiceTier, Type: smithy.ShapeTypeStructure, Ext: &eConverseResponse_serviceTier})
+var sConverseStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseStreamRequest, Members: &mConverseStreamRequest, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamRequest})
+var sConverseStreamRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_ConversationalModelId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eConverseStreamRequest_modelId})
+var sConverseStreamRequest_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList, Ext: &eConverseStreamRequest_messages})
+var sConverseStreamRequest_system = smithy.NewStaticSchema(smithy.StaticSchema{Member: "system", ID: &i_SystemContentBlocks, Members: &m_SystemContentBlocks, Type: smithy.ShapeTypeList, Ext: &eConverseStreamRequest_system})
+var sConverseStreamRequest_inferenceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inferenceConfig", ID: &iInferenceConfiguration, Members: &mInferenceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamRequest_inferenceConfig})
+var sConverseStreamRequest_toolConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolConfig", ID: &iToolConfiguration, Members: &mToolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamRequest_toolConfig})
+var sConverseStreamRequest_guardrailConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailConfig", ID: &iGuardrailStreamConfiguration, Members: &mGuardrailStreamConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamRequest_guardrailConfig})
+var sConverseStreamRequest_additionalModelRequestFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalModelRequestFields", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eConverseStreamRequest_additionalModelRequestFields})
+var sConverseStreamRequest_promptVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptVariables", ID: &i_PromptVariableMap, Members: &m_PromptVariableMap, Traits: &t13, Type: smithy.ShapeTypeMap, Ext: &eConverseStreamRequest_promptVariables})
+var sConverseStreamRequest_additionalModelResponseFieldPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalModelResponseFieldPaths", ID: &i_AdditionalModelResponseFieldPaths, Members: &m_AdditionalModelResponseFieldPaths, Type: smithy.ShapeTypeList, Ext: &eConverseStreamRequest_additionalModelResponseFieldPaths})
+var sConverseStreamRequest_requestMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMetadata", ID: &i_RequestMetadata, Members: &m_RequestMetadata, Traits: &t13, Type: smithy.ShapeTypeMap, Ext: &eConverseStreamRequest_requestMetadata})
+var sConverseStreamRequest_performanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfig", ID: &iPerformanceConfiguration, Members: &mPerformanceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamRequest_performanceConfig})
+var sConverseStreamRequest_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTier, Members: &mServiceTier, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamRequest_serviceTier})
+var sConverseStreamRequest_outputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamRequest_outputConfig})
+var sConverseStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConverseStreamResponse, Members: &mConverseStreamResponse, Type: smithy.ShapeTypeStructure, Ext: &eConverseStreamResponse})
+var sConverseStreamResponse_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iConverseStreamOutput, Members: &mConverseStreamOutput, Traits: &t31, Type: smithy.ShapeTypeUnion, Ext: &eConverseStreamResponse_stream})
+var sCountTokensRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountTokensRequest, Members: &mCountTokensRequest, Type: smithy.ShapeTypeStructure, Ext: &eCountTokensRequest})
+var sCountTokensRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_FoundationModelVersionIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eCountTokensRequest_modelId})
+var sCountTokensRequest_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &iCountTokensInput, Members: &mCountTokensInput, Type: smithy.ShapeTypeUnion, Ext: &eCountTokensRequest_input})
+var sCountTokensResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountTokensResponse, Members: &mCountTokensResponse, Type: smithy.ShapeTypeStructure, Ext: &eCountTokensResponse})
+var sCountTokensResponse_inputTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCountTokensResponse_inputTokens})
+var sGetAsyncInvokeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAsyncInvokeRequest, Members: &mGetAsyncInvokeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAsyncInvokeRequest})
+var sGetAsyncInvokeRequest_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetAsyncInvokeRequest_invocationArn})
+var sGetAsyncInvokeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAsyncInvokeResponse, Members: &mGetAsyncInvokeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAsyncInvokeResponse})
+var sGetAsyncInvokeResponse_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &eGetAsyncInvokeResponse_invocationArn})
+var sGetAsyncInvokeResponse_modelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelArn", ID: &i_AsyncInvokeArn, Type: smithy.ShapeTypeString, Ext: &eGetAsyncInvokeResponse_modelArn})
+var sGetAsyncInvokeResponse_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_AsyncInvokeIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eGetAsyncInvokeResponse_clientRequestToken})
+var sGetAsyncInvokeResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAsyncInvokeStatus, Members: &mAsyncInvokeStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAsyncInvokeResponse_status})
+var sGetAsyncInvokeResponse_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &i_AsyncInvokeMessage, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGetAsyncInvokeResponse_failureMessage})
+var sGetAsyncInvokeResponse_submitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submitTime", ID: &i_Timestamp, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAsyncInvokeResponse_submitTime})
+var sGetAsyncInvokeResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_Timestamp, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAsyncInvokeResponse_lastModifiedTime})
+var sGetAsyncInvokeResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAsyncInvokeResponse_endTime})
+var sGetAsyncInvokeResponse_outputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputDataConfig", ID: &iAsyncInvokeOutputDataConfig, Members: &mAsyncInvokeOutputDataConfig, Type: smithy.ShapeTypeUnion, Ext: &eGetAsyncInvokeResponse_outputDataConfig})
+var sInvokeGuardrailChecksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeGuardrailChecksRequest, Members: &mInvokeGuardrailChecksRequest, Type: smithy.ShapeTypeStructure, Ext: &eInvokeGuardrailChecksRequest})
+var sInvokeGuardrailChecksRequest_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_GuardrailChecksMessageList, Members: &m_GuardrailChecksMessageList, Type: smithy.ShapeTypeList, Ext: &eInvokeGuardrailChecksRequest_messages})
+var sInvokeGuardrailChecksRequest_checks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checks", ID: &iGuardrailChecksConfig, Members: &mGuardrailChecksConfig, Type: smithy.ShapeTypeStructure, Ext: &eInvokeGuardrailChecksRequest_checks})
+var sInvokeGuardrailChecksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeGuardrailChecksResponse, Members: &mInvokeGuardrailChecksResponse, Type: smithy.ShapeTypeStructure, Ext: &eInvokeGuardrailChecksResponse})
+var sInvokeGuardrailChecksResponse_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &iGuardrailChecksResults, Members: &mGuardrailChecksResults, Type: smithy.ShapeTypeStructure, Ext: &eInvokeGuardrailChecksResponse_results})
+var sInvokeGuardrailChecksResponse_usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usage", ID: &iGuardrailChecksUsageResults, Members: &mGuardrailChecksUsageResults, Type: smithy.ShapeTypeStructure, Ext: &eInvokeGuardrailChecksResponse_usage})
+var sInvokeModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelRequest, Members: &mInvokeModelRequest, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelRequest})
+var sInvokeModelRequest_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_Body, Traits: &t32, Type: smithy.ShapeTypeBlob, Ext: &eInvokeModelRequest_body})
+var sInvokeModelRequest_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_MimeType, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eInvokeModelRequest_contentType})
+var sInvokeModelRequest_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &i_MimeType, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eInvokeModelRequest_accept})
+var sInvokeModelRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_InvokeModelIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eInvokeModelRequest_modelId})
+var sInvokeModelRequest_trace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trace", ID: &iTrace, Members: &mTrace, Traits: &t35, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelRequest_trace})
+var sInvokeModelRequest_guardrailIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailIdentifier", ID: &i_GuardrailIdentifier, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eInvokeModelRequest_guardrailIdentifier})
+var sInvokeModelRequest_guardrailVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailVersion", ID: &i_GuardrailVersion, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eInvokeModelRequest_guardrailVersion})
+var sInvokeModelRequest_performanceConfigLatency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfigLatency", ID: &iPerformanceConfigLatency, Members: &mPerformanceConfigLatency, Traits: &t38, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelRequest_performanceConfigLatency})
+var sInvokeModelRequest_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTierType, Members: &mServiceTierType, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelRequest_serviceTier})
+var sInvokeModelRequest_requestMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMetadata", ID: &i_RequestMetadataJson, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eInvokeModelRequest_requestMetadata})
+var sInvokeModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelResponse, Members: &mInvokeModelResponse, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelResponse})
+var sInvokeModelResponse_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_Body, Traits: &t32, Type: smithy.ShapeTypeBlob, Ext: &eInvokeModelResponse_body})
+var sInvokeModelResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_MimeType, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eInvokeModelResponse_contentType})
+var sInvokeModelResponse_performanceConfigLatency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfigLatency", ID: &iPerformanceConfigLatency, Members: &mPerformanceConfigLatency, Traits: &t38, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelResponse_performanceConfigLatency})
+var sInvokeModelResponse_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTierType, Members: &mServiceTierType, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelResponse_serviceTier})
+var sInvokeModelWithBidirectionalStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithBidirectionalStreamRequest, Members: &mInvokeModelWithBidirectionalStreamRequest, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamRequest})
+var sInvokeModelWithBidirectionalStreamRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_InvokeModelIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithBidirectionalStreamRequest_modelId})
+var sInvokeModelWithBidirectionalStreamRequest_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &iInvokeModelWithBidirectionalStreamInput, Members: &mInvokeModelWithBidirectionalStreamInput, Traits: &t31, Type: smithy.ShapeTypeUnion, Ext: &eInvokeModelWithBidirectionalStreamRequest_body})
+var sInvokeModelWithBidirectionalStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithBidirectionalStreamResponse, Members: &mInvokeModelWithBidirectionalStreamResponse, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithBidirectionalStreamResponse})
+var sInvokeModelWithBidirectionalStreamResponse_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &iInvokeModelWithBidirectionalStreamOutput, Members: &mInvokeModelWithBidirectionalStreamOutput, Traits: &t31, Type: smithy.ShapeTypeUnion, Ext: &eInvokeModelWithBidirectionalStreamResponse_body})
+var sInvokeModelWithResponseStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithResponseStreamRequest, Members: &mInvokeModelWithResponseStreamRequest, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithResponseStreamRequest})
+var sInvokeModelWithResponseStreamRequest_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_Body, Traits: &t32, Type: smithy.ShapeTypeBlob, Ext: &eInvokeModelWithResponseStreamRequest_body})
+var sInvokeModelWithResponseStreamRequest_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_MimeType, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithResponseStreamRequest_contentType})
+var sInvokeModelWithResponseStreamRequest_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &i_MimeType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithResponseStreamRequest_accept})
+var sInvokeModelWithResponseStreamRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_InvokeModelIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithResponseStreamRequest_modelId})
+var sInvokeModelWithResponseStreamRequest_trace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trace", ID: &iTrace, Members: &mTrace, Traits: &t35, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelWithResponseStreamRequest_trace})
+var sInvokeModelWithResponseStreamRequest_guardrailIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailIdentifier", ID: &i_GuardrailIdentifier, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithResponseStreamRequest_guardrailIdentifier})
+var sInvokeModelWithResponseStreamRequest_guardrailVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guardrailVersion", ID: &i_GuardrailVersion, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithResponseStreamRequest_guardrailVersion})
+var sInvokeModelWithResponseStreamRequest_performanceConfigLatency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfigLatency", ID: &iPerformanceConfigLatency, Members: &mPerformanceConfigLatency, Traits: &t38, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelWithResponseStreamRequest_performanceConfigLatency})
+var sInvokeModelWithResponseStreamRequest_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTierType, Members: &mServiceTierType, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelWithResponseStreamRequest_serviceTier})
+var sInvokeModelWithResponseStreamRequest_requestMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMetadata", ID: &i_RequestMetadataJson, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithResponseStreamRequest_requestMetadata})
+var sInvokeModelWithResponseStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeModelWithResponseStreamResponse, Members: &mInvokeModelWithResponseStreamResponse, Type: smithy.ShapeTypeStructure, Ext: &eInvokeModelWithResponseStreamResponse})
+var sInvokeModelWithResponseStreamResponse_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &iResponseStream, Members: &mResponseStream, Traits: &t31, Type: smithy.ShapeTypeUnion, Ext: &eInvokeModelWithResponseStreamResponse_body})
+var sInvokeModelWithResponseStreamResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_MimeType, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eInvokeModelWithResponseStreamResponse_contentType})
+var sInvokeModelWithResponseStreamResponse_performanceConfigLatency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performanceConfigLatency", ID: &iPerformanceConfigLatency, Members: &mPerformanceConfigLatency, Traits: &t38, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelWithResponseStreamResponse_performanceConfigLatency})
+var sInvokeModelWithResponseStreamResponse_serviceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTier", ID: &iServiceTierType, Members: &mServiceTierType, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eInvokeModelWithResponseStreamResponse_serviceTier})
+var sListAsyncInvokesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAsyncInvokesRequest, Members: &mListAsyncInvokesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAsyncInvokesRequest})
+var sListAsyncInvokesRequest_submitTimeAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submitTimeAfter", ID: &i_Timestamp, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eListAsyncInvokesRequest_submitTimeAfter})
+var sListAsyncInvokesRequest_submitTimeBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submitTimeBefore", ID: &i_Timestamp, Traits: &t44, Type: smithy.ShapeTypeTimestamp, Ext: &eListAsyncInvokesRequest_submitTimeBefore})
+var sListAsyncInvokesRequest_statusEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusEquals", ID: &iAsyncInvokeStatus, Members: &mAsyncInvokeStatus, Traits: &t45, Type: smithy.ShapeTypeEnum, Ext: &eListAsyncInvokesRequest_statusEquals})
+var sListAsyncInvokesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t46, Type: smithy.ShapeTypeInteger, Ext: &eListAsyncInvokesRequest_maxResults})
+var sListAsyncInvokesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eListAsyncInvokesRequest_nextToken})
+var sListAsyncInvokesRequest_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iSortAsyncInvocationBy, Members: &mSortAsyncInvocationBy, Traits: &t48, Type: smithy.ShapeTypeEnum, Ext: &eListAsyncInvokesRequest_sortBy})
+var sListAsyncInvokesRequest_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Traits: &t49, Type: smithy.ShapeTypeEnum, Ext: &eListAsyncInvokesRequest_sortOrder})
+var sListAsyncInvokesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAsyncInvokesResponse, Members: &mListAsyncInvokesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAsyncInvokesResponse})
+var sListAsyncInvokesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAsyncInvokesResponse_nextToken})
+var sListAsyncInvokesResponse_asyncInvokeSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asyncInvokeSummaries", ID: &i_AsyncInvokeSummaries, Members: &m_AsyncInvokeSummaries, Type: smithy.ShapeTypeList, Ext: &eListAsyncInvokesResponse_asyncInvokeSummaries})
+var sStartAsyncInvokeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAsyncInvokeRequest, Members: &mStartAsyncInvokeRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartAsyncInvokeRequest})
+var sStartAsyncInvokeRequest_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_AsyncInvokeIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eStartAsyncInvokeRequest_clientRequestToken})
+var sStartAsyncInvokeRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_AsyncInvokeIdentifier, Type: smithy.ShapeTypeString, Ext: &eStartAsyncInvokeRequest_modelId})
+var sStartAsyncInvokeRequest_modelInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelInput", ID: &i_ModelInputPayload, Traits: &t13, Type: smithy.ShapeTypeDocument, Ext: &eStartAsyncInvokeRequest_modelInput})
+var sStartAsyncInvokeRequest_outputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputDataConfig", ID: &iAsyncInvokeOutputDataConfig, Members: &mAsyncInvokeOutputDataConfig, Type: smithy.ShapeTypeUnion, Ext: &eStartAsyncInvokeRequest_outputDataConfig})
+var sStartAsyncInvokeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eStartAsyncInvokeRequest_tags})
+var sStartAsyncInvokeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAsyncInvokeResponse, Members: &mStartAsyncInvokeResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartAsyncInvokeResponse})
+var sStartAsyncInvokeResponse_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &eStartAsyncInvokeResponse_invocationArn})
+
+var ApplyGuardrail = &sApplyGuardrail
+
+var Converse = &sConverse
+
+var ConverseStream = &sConverseStream
+
+var CountTokens = &sCountTokens
+
+var GetAsyncInvoke = &sGetAsyncInvoke
+
+var InvokeGuardrailChecks = &sInvokeGuardrailChecks
+
+var InvokeModel = &sInvokeModel
+
+var InvokeModelWithBidirectionalStream = &sInvokeModelWithBidirectionalStream
+
+var InvokeModelWithResponseStream = &sInvokeModelWithResponseStream
+
+var ListAsyncInvokes = &sListAsyncInvokes
+
+var StartAsyncInvoke = &sStartAsyncInvoke
+
+var _AmazonBedrockFrontendService = &s_AmazonBedrockFrontendService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var _AdditionalModelResponseFieldPaths = &s_AdditionalModelResponseFieldPaths
+var _AdditionalModelResponseFieldPaths_member = &s_AdditionalModelResponseFieldPaths_member
+
+var AnyToolChoice = &sAnyToolChoice
+
+var AppliedGuardrailDetails = &sAppliedGuardrailDetails
+var AppliedGuardrailDetails_guardrailId = &sAppliedGuardrailDetails_guardrailId
+var AppliedGuardrailDetails_guardrailVersion = &sAppliedGuardrailDetails_guardrailVersion
+var AppliedGuardrailDetails_guardrailArn = &sAppliedGuardrailDetails_guardrailArn
+var AppliedGuardrailDetails_guardrailOrigin = &sAppliedGuardrailDetails_guardrailOrigin
+var AppliedGuardrailDetails_guardrailOwnership = &sAppliedGuardrailDetails_guardrailOwnership
+
+var _AsyncInvokeArn = &s_AsyncInvokeArn
+
+var _AsyncInvokeIdempotencyToken = &s_AsyncInvokeIdempotencyToken
+
+var _AsyncInvokeIdentifier = &s_AsyncInvokeIdentifier
+
+var _AsyncInvokeMessage = &s_AsyncInvokeMessage
+
+var AsyncInvokeOutputDataConfig = &sAsyncInvokeOutputDataConfig
+var AsyncInvokeOutputDataConfig_s3OutputDataConfig = &sAsyncInvokeOutputDataConfig_s3OutputDataConfig
+
+var AsyncInvokeS3OutputDataConfig = &sAsyncInvokeS3OutputDataConfig
+var AsyncInvokeS3OutputDataConfig_s3Uri = &sAsyncInvokeS3OutputDataConfig_s3Uri
+var AsyncInvokeS3OutputDataConfig_kmsKeyId = &sAsyncInvokeS3OutputDataConfig_kmsKeyId
+var AsyncInvokeS3OutputDataConfig_bucketOwner = &sAsyncInvokeS3OutputDataConfig_bucketOwner
+
+var AsyncInvokeStatus = &sAsyncInvokeStatus
+var AsyncInvokeStatus_IN_PROGRESS = &sAsyncInvokeStatus_IN_PROGRESS
+var AsyncInvokeStatus_COMPLETED = &sAsyncInvokeStatus_COMPLETED
+var AsyncInvokeStatus_FAILED = &sAsyncInvokeStatus_FAILED
+
+var _AsyncInvokeSummaries = &s_AsyncInvokeSummaries
+var _AsyncInvokeSummaries_member = &s_AsyncInvokeSummaries_member
+
+var AsyncInvokeSummary = &sAsyncInvokeSummary
+var AsyncInvokeSummary_invocationArn = &sAsyncInvokeSummary_invocationArn
+var AsyncInvokeSummary_modelArn = &sAsyncInvokeSummary_modelArn
+var AsyncInvokeSummary_clientRequestToken = &sAsyncInvokeSummary_clientRequestToken
+var AsyncInvokeSummary_status = &sAsyncInvokeSummary_status
+var AsyncInvokeSummary_failureMessage = &sAsyncInvokeSummary_failureMessage
+var AsyncInvokeSummary_submitTime = &sAsyncInvokeSummary_submitTime
+var AsyncInvokeSummary_lastModifiedTime = &sAsyncInvokeSummary_lastModifiedTime
+var AsyncInvokeSummary_endTime = &sAsyncInvokeSummary_endTime
+var AsyncInvokeSummary_outputDataConfig = &sAsyncInvokeSummary_outputDataConfig
+
+var AudioBlock = &sAudioBlock
+var AudioBlock_format = &sAudioBlock_format
+var AudioBlock_source = &sAudioBlock_source
+var AudioBlock_error = &sAudioBlock_error
+
+var AudioFormat = &sAudioFormat
+var AudioFormat_MP3 = &sAudioFormat_MP3
+var AudioFormat_OPUS = &sAudioFormat_OPUS
+var AudioFormat_WAV = &sAudioFormat_WAV
+var AudioFormat_AAC = &sAudioFormat_AAC
+var AudioFormat_FLAC = &sAudioFormat_FLAC
+var AudioFormat_MP4 = &sAudioFormat_MP4
+var AudioFormat_OGG = &sAudioFormat_OGG
+var AudioFormat_MKV = &sAudioFormat_MKV
+var AudioFormat_MKA = &sAudioFormat_MKA
+var AudioFormat_X_AAC = &sAudioFormat_X_AAC
+var AudioFormat_M4A = &sAudioFormat_M4A
+var AudioFormat_MPEG = &sAudioFormat_MPEG
+var AudioFormat_MPGA = &sAudioFormat_MPGA
+var AudioFormat_PCM = &sAudioFormat_PCM
+var AudioFormat_WEBM = &sAudioFormat_WEBM
+
+var AudioSource = &sAudioSource
+var AudioSource_bytes = &sAudioSource_bytes
+var AudioSource_s3Location = &sAudioSource_s3Location
+
+var _AutomatedReasoningRuleIdentifier = &s_AutomatedReasoningRuleIdentifier
+
+var AutoToolChoice = &sAutoToolChoice
+
+var BidirectionalInputPayloadPart = &sBidirectionalInputPayloadPart
+var BidirectionalInputPayloadPart_bytes = &sBidirectionalInputPayloadPart_bytes
+
+var BidirectionalOutputPayloadPart = &sBidirectionalOutputPayloadPart
+var BidirectionalOutputPayloadPart_bytes = &sBidirectionalOutputPayloadPart_bytes
+
+var _Body = &s_Body
+
+var CacheDetail = &sCacheDetail
+var CacheDetail_ttl = &sCacheDetail_ttl
+var CacheDetail_inputTokens = &sCacheDetail_inputTokens
+
+var _CacheDetailsList = &s_CacheDetailsList
+var _CacheDetailsList_member = &s_CacheDetailsList_member
+
+var CachePointBlock = &sCachePointBlock
+var CachePointBlock_type = &sCachePointBlock_type
+var CachePointBlock_ttl = &sCachePointBlock_ttl
+
+var CachePointType = &sCachePointType
+var CachePointType_DEFAULT = &sCachePointType_DEFAULT
+
+var CacheTTL = &sCacheTTL
+var CacheTTL_FIVE_MINUTES = &sCacheTTL_FIVE_MINUTES
+var CacheTTL_ONE_HOUR = &sCacheTTL_ONE_HOUR
+
+var Citation = &sCitation
+var Citation_title = &sCitation_title
+var Citation_source = &sCitation_source
+var Citation_sourceContent = &sCitation_sourceContent
+var Citation_location = &sCitation_location
+
+var CitationGeneratedContent = &sCitationGeneratedContent
+var CitationGeneratedContent_text = &sCitationGeneratedContent_text
+
+var _CitationGeneratedContentList = &s_CitationGeneratedContentList
+var _CitationGeneratedContentList_member = &s_CitationGeneratedContentList_member
+
+var CitationLocation = &sCitationLocation
+var CitationLocation_web = &sCitationLocation_web
+var CitationLocation_documentChar = &sCitationLocation_documentChar
+var CitationLocation_documentPage = &sCitationLocation_documentPage
+var CitationLocation_documentChunk = &sCitationLocation_documentChunk
+var CitationLocation_searchResultLocation = &sCitationLocation_searchResultLocation
+
+var _Citations = &s_Citations
+var _Citations_member = &s_Citations_member
+
+var CitationsConfig = &sCitationsConfig
+var CitationsConfig_enabled = &sCitationsConfig_enabled
+
+var CitationsContentBlock = &sCitationsContentBlock
+var CitationsContentBlock_content = &sCitationsContentBlock_content
+var CitationsContentBlock_citations = &sCitationsContentBlock_citations
+
+var CitationsDelta = &sCitationsDelta
+var CitationsDelta_title = &sCitationsDelta_title
+var CitationsDelta_source = &sCitationsDelta_source
+var CitationsDelta_sourceContent = &sCitationsDelta_sourceContent
+var CitationsDelta_location = &sCitationsDelta_location
+
+var CitationSourceContent = &sCitationSourceContent
+var CitationSourceContent_text = &sCitationSourceContent_text
+
+var CitationSourceContentDelta = &sCitationSourceContentDelta
+var CitationSourceContentDelta_text = &sCitationSourceContentDelta_text
+
+var _CitationSourceContentList = &s_CitationSourceContentList
+var _CitationSourceContentList_member = &s_CitationSourceContentList_member
+
+var _CitationSourceContentListDelta = &s_CitationSourceContentListDelta
+var _CitationSourceContentListDelta_member = &s_CitationSourceContentListDelta_member
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ContentBlock = &sContentBlock
+var ContentBlock_text = &sContentBlock_text
+var ContentBlock_image = &sContentBlock_image
+var ContentBlock_document = &sContentBlock_document
+var ContentBlock_video = &sContentBlock_video
+var ContentBlock_audio = &sContentBlock_audio
+var ContentBlock_toolUse = &sContentBlock_toolUse
+var ContentBlock_toolResult = &sContentBlock_toolResult
+var ContentBlock_guardContent = &sContentBlock_guardContent
+var ContentBlock_cachePoint = &sContentBlock_cachePoint
+var ContentBlock_reasoningContent = &sContentBlock_reasoningContent
+var ContentBlock_citationsContent = &sContentBlock_citationsContent
+var ContentBlock_searchResult = &sContentBlock_searchResult
+var ContentBlock_toolAddition = &sContentBlock_toolAddition
+var ContentBlock_toolRemoval = &sContentBlock_toolRemoval
+
+var ContentBlockDelta = &sContentBlockDelta
+var ContentBlockDelta_text = &sContentBlockDelta_text
+var ContentBlockDelta_toolUse = &sContentBlockDelta_toolUse
+var ContentBlockDelta_toolResult = &sContentBlockDelta_toolResult
+var ContentBlockDelta_reasoningContent = &sContentBlockDelta_reasoningContent
+var ContentBlockDelta_citation = &sContentBlockDelta_citation
+var ContentBlockDelta_image = &sContentBlockDelta_image
+
+var ContentBlockDeltaEvent = &sContentBlockDeltaEvent
+var ContentBlockDeltaEvent_delta = &sContentBlockDeltaEvent_delta
+var ContentBlockDeltaEvent_contentBlockIndex = &sContentBlockDeltaEvent_contentBlockIndex
+
+var _ContentBlocks = &s_ContentBlocks
+var _ContentBlocks_member = &s_ContentBlocks_member
+
+var ContentBlockStart = &sContentBlockStart
+var ContentBlockStart_toolUse = &sContentBlockStart_toolUse
+var ContentBlockStart_toolResult = &sContentBlockStart_toolResult
+var ContentBlockStart_image = &sContentBlockStart_image
+
+var ContentBlockStartEvent = &sContentBlockStartEvent
+var ContentBlockStartEvent_start = &sContentBlockStartEvent_start
+var ContentBlockStartEvent_contentBlockIndex = &sContentBlockStartEvent_contentBlockIndex
+
+var ContentBlockStopEvent = &sContentBlockStopEvent
+var ContentBlockStopEvent_contentBlockIndex = &sContentBlockStopEvent_contentBlockIndex
+
+var _ConversationalModelId = &s_ConversationalModelId
+
+var ConversationRole = &sConversationRole
+var ConversationRole_USER = &sConversationRole_USER
+var ConversationRole_ASSISTANT = &sConversationRole_ASSISTANT
+var ConversationRole_SYSTEM = &sConversationRole_SYSTEM
+
+var ConverseMetrics = &sConverseMetrics
+var ConverseMetrics_latencyMs = &sConverseMetrics_latencyMs
+
+var ConverseOutput = &sConverseOutput
+var ConverseOutput_message = &sConverseOutput_message
+
+var ConverseStreamMetadataEvent = &sConverseStreamMetadataEvent
+var ConverseStreamMetadataEvent_usage = &sConverseStreamMetadataEvent_usage
+var ConverseStreamMetadataEvent_metrics = &sConverseStreamMetadataEvent_metrics
+var ConverseStreamMetadataEvent_trace = &sConverseStreamMetadataEvent_trace
+var ConverseStreamMetadataEvent_performanceConfig = &sConverseStreamMetadataEvent_performanceConfig
+var ConverseStreamMetadataEvent_serviceTier = &sConverseStreamMetadataEvent_serviceTier
+
+var ConverseStreamMetrics = &sConverseStreamMetrics
+var ConverseStreamMetrics_latencyMs = &sConverseStreamMetrics_latencyMs
+
+var ConverseStreamOutput = &sConverseStreamOutput
+var ConverseStreamOutput_messageStart = &sConverseStreamOutput_messageStart
+var ConverseStreamOutput_contentBlockStart = &sConverseStreamOutput_contentBlockStart
+var ConverseStreamOutput_contentBlockDelta = &sConverseStreamOutput_contentBlockDelta
+var ConverseStreamOutput_contentBlockStop = &sConverseStreamOutput_contentBlockStop
+var ConverseStreamOutput_messageStop = &sConverseStreamOutput_messageStop
+var ConverseStreamOutput_metadata = &sConverseStreamOutput_metadata
+var ConverseStreamOutput_internalServerException = &sConverseStreamOutput_internalServerException
+var ConverseStreamOutput_modelStreamErrorException = &sConverseStreamOutput_modelStreamErrorException
+var ConverseStreamOutput_validationException = &sConverseStreamOutput_validationException
+var ConverseStreamOutput_throttlingException = &sConverseStreamOutput_throttlingException
+var ConverseStreamOutput_serviceUnavailableException = &sConverseStreamOutput_serviceUnavailableException
+
+var ConverseStreamTrace = &sConverseStreamTrace
+var ConverseStreamTrace_guardrail = &sConverseStreamTrace_guardrail
+var ConverseStreamTrace_promptRouter = &sConverseStreamTrace_promptRouter
+
+var ConverseTokensRequest = &sConverseTokensRequest
+var ConverseTokensRequest_messages = &sConverseTokensRequest_messages
+var ConverseTokensRequest_system = &sConverseTokensRequest_system
+var ConverseTokensRequest_toolConfig = &sConverseTokensRequest_toolConfig
+var ConverseTokensRequest_additionalModelRequestFields = &sConverseTokensRequest_additionalModelRequestFields
+
+var ConverseTrace = &sConverseTrace
+var ConverseTrace_guardrail = &sConverseTrace_guardrail
+var ConverseTrace_promptRouter = &sConverseTrace_promptRouter
+
+var CountTokensInput = &sCountTokensInput
+var CountTokensInput_invokeModel = &sCountTokensInput_invokeModel
+var CountTokensInput_converse = &sCountTokensInput_converse
+
+var DocumentBlock = &sDocumentBlock
+var DocumentBlock_format = &sDocumentBlock_format
+var DocumentBlock_name = &sDocumentBlock_name
+var DocumentBlock_source = &sDocumentBlock_source
+var DocumentBlock_context = &sDocumentBlock_context
+var DocumentBlock_citations = &sDocumentBlock_citations
+
+var DocumentCharLocation = &sDocumentCharLocation
+var DocumentCharLocation_documentIndex = &sDocumentCharLocation_documentIndex
+var DocumentCharLocation_start = &sDocumentCharLocation_start
+var DocumentCharLocation_end = &sDocumentCharLocation_end
+
+var DocumentChunkLocation = &sDocumentChunkLocation
+var DocumentChunkLocation_documentIndex = &sDocumentChunkLocation_documentIndex
+var DocumentChunkLocation_start = &sDocumentChunkLocation_start
+var DocumentChunkLocation_end = &sDocumentChunkLocation_end
+
+var DocumentContentBlock = &sDocumentContentBlock
+var DocumentContentBlock_text = &sDocumentContentBlock_text
+
+var _DocumentContentBlocks = &s_DocumentContentBlocks
+var _DocumentContentBlocks_member = &s_DocumentContentBlocks_member
+
+var DocumentFormat = &sDocumentFormat
+var DocumentFormat_PDF = &sDocumentFormat_PDF
+var DocumentFormat_CSV = &sDocumentFormat_CSV
+var DocumentFormat_DOC = &sDocumentFormat_DOC
+var DocumentFormat_DOCX = &sDocumentFormat_DOCX
+var DocumentFormat_XLS = &sDocumentFormat_XLS
+var DocumentFormat_XLSX = &sDocumentFormat_XLSX
+var DocumentFormat_HTML = &sDocumentFormat_HTML
+var DocumentFormat_TXT = &sDocumentFormat_TXT
+var DocumentFormat_MD = &sDocumentFormat_MD
+
+var DocumentPageLocation = &sDocumentPageLocation
+var DocumentPageLocation_documentIndex = &sDocumentPageLocation_documentIndex
+var DocumentPageLocation_start = &sDocumentPageLocation_start
+var DocumentPageLocation_end = &sDocumentPageLocation_end
+
+var DocumentSource = &sDocumentSource
+var DocumentSource_bytes = &sDocumentSource_bytes
+var DocumentSource_s3Location = &sDocumentSource_s3Location
+var DocumentSource_text = &sDocumentSource_text
+var DocumentSource_content = &sDocumentSource_content
+
+var ErrorBlock = &sErrorBlock
+var ErrorBlock_message = &sErrorBlock_message
+
+var _FoundationModelVersionIdentifier = &s_FoundationModelVersionIdentifier
+
+var GuardrailAction = &sGuardrailAction
+var GuardrailAction_NONE = &sGuardrailAction_NONE
+var GuardrailAction_GUARDRAIL_INTERVENED = &sGuardrailAction_GUARDRAIL_INTERVENED
+
+var _GuardrailArn = &s_GuardrailArn
+
+var GuardrailAssessment = &sGuardrailAssessment
+var GuardrailAssessment_topicPolicy = &sGuardrailAssessment_topicPolicy
+var GuardrailAssessment_contentPolicy = &sGuardrailAssessment_contentPolicy
+var GuardrailAssessment_wordPolicy = &sGuardrailAssessment_wordPolicy
+var GuardrailAssessment_sensitiveInformationPolicy = &sGuardrailAssessment_sensitiveInformationPolicy
+var GuardrailAssessment_contextualGroundingPolicy = &sGuardrailAssessment_contextualGroundingPolicy
+var GuardrailAssessment_automatedReasoningPolicy = &sGuardrailAssessment_automatedReasoningPolicy
+var GuardrailAssessment_invocationMetrics = &sGuardrailAssessment_invocationMetrics
+var GuardrailAssessment_appliedGuardrailDetails = &sGuardrailAssessment_appliedGuardrailDetails
+
+var _GuardrailAssessmentList = &s_GuardrailAssessmentList
+var _GuardrailAssessmentList_member = &s_GuardrailAssessmentList_member
+
+var _GuardrailAssessmentListMap = &s_GuardrailAssessmentListMap
+var _GuardrailAssessmentListMap_key = &s_GuardrailAssessmentListMap_key
+var _GuardrailAssessmentListMap_value = &s_GuardrailAssessmentListMap_value
+
+var _GuardrailAssessmentMap = &s_GuardrailAssessmentMap
+var _GuardrailAssessmentMap_key = &s_GuardrailAssessmentMap_key
+var _GuardrailAssessmentMap_value = &s_GuardrailAssessmentMap_value
+
+var _GuardrailAutomatedReasoningDifferenceScenarioList = &s_GuardrailAutomatedReasoningDifferenceScenarioList
+var _GuardrailAutomatedReasoningDifferenceScenarioList_member = &s_GuardrailAutomatedReasoningDifferenceScenarioList_member
+
+var GuardrailAutomatedReasoningFinding = &sGuardrailAutomatedReasoningFinding
+var GuardrailAutomatedReasoningFinding_valid = &sGuardrailAutomatedReasoningFinding_valid
+var GuardrailAutomatedReasoningFinding_invalid = &sGuardrailAutomatedReasoningFinding_invalid
+var GuardrailAutomatedReasoningFinding_satisfiable = &sGuardrailAutomatedReasoningFinding_satisfiable
+var GuardrailAutomatedReasoningFinding_impossible = &sGuardrailAutomatedReasoningFinding_impossible
+var GuardrailAutomatedReasoningFinding_translationAmbiguous = &sGuardrailAutomatedReasoningFinding_translationAmbiguous
+var GuardrailAutomatedReasoningFinding_tooComplex = &sGuardrailAutomatedReasoningFinding_tooComplex
+var GuardrailAutomatedReasoningFinding_noTranslations = &sGuardrailAutomatedReasoningFinding_noTranslations
+
+var _GuardrailAutomatedReasoningFindingList = &s_GuardrailAutomatedReasoningFindingList
+var _GuardrailAutomatedReasoningFindingList_member = &s_GuardrailAutomatedReasoningFindingList_member
+
+var GuardrailAutomatedReasoningImpossibleFinding = &sGuardrailAutomatedReasoningImpossibleFinding
+var GuardrailAutomatedReasoningImpossibleFinding_translation = &sGuardrailAutomatedReasoningImpossibleFinding_translation
+var GuardrailAutomatedReasoningImpossibleFinding_contradictingRules = &sGuardrailAutomatedReasoningImpossibleFinding_contradictingRules
+var GuardrailAutomatedReasoningImpossibleFinding_logicWarning = &sGuardrailAutomatedReasoningImpossibleFinding_logicWarning
+
+var GuardrailAutomatedReasoningInputTextReference = &sGuardrailAutomatedReasoningInputTextReference
+var GuardrailAutomatedReasoningInputTextReference_text = &sGuardrailAutomatedReasoningInputTextReference_text
+
+var _GuardrailAutomatedReasoningInputTextReferenceList = &s_GuardrailAutomatedReasoningInputTextReferenceList
+var _GuardrailAutomatedReasoningInputTextReferenceList_member = &s_GuardrailAutomatedReasoningInputTextReferenceList_member
+
+var GuardrailAutomatedReasoningInvalidFinding = &sGuardrailAutomatedReasoningInvalidFinding
+var GuardrailAutomatedReasoningInvalidFinding_translation = &sGuardrailAutomatedReasoningInvalidFinding_translation
+var GuardrailAutomatedReasoningInvalidFinding_contradictingRules = &sGuardrailAutomatedReasoningInvalidFinding_contradictingRules
+var GuardrailAutomatedReasoningInvalidFinding_logicWarning = &sGuardrailAutomatedReasoningInvalidFinding_logicWarning
+
+var GuardrailAutomatedReasoningLogicWarning = &sGuardrailAutomatedReasoningLogicWarning
+var GuardrailAutomatedReasoningLogicWarning_type = &sGuardrailAutomatedReasoningLogicWarning_type
+var GuardrailAutomatedReasoningLogicWarning_premises = &sGuardrailAutomatedReasoningLogicWarning_premises
+var GuardrailAutomatedReasoningLogicWarning_claims = &sGuardrailAutomatedReasoningLogicWarning_claims
+
+var GuardrailAutomatedReasoningLogicWarningType = &sGuardrailAutomatedReasoningLogicWarningType
+var GuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE = &sGuardrailAutomatedReasoningLogicWarningType_ALWAYS_FALSE
+var GuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE = &sGuardrailAutomatedReasoningLogicWarningType_ALWAYS_TRUE
+
+var GuardrailAutomatedReasoningNoTranslationsFinding = &sGuardrailAutomatedReasoningNoTranslationsFinding
+
+var _GuardrailAutomatedReasoningPoliciesProcessed = &s_GuardrailAutomatedReasoningPoliciesProcessed
+
+var GuardrailAutomatedReasoningPolicyAssessment = &sGuardrailAutomatedReasoningPolicyAssessment
+var GuardrailAutomatedReasoningPolicyAssessment_findings = &sGuardrailAutomatedReasoningPolicyAssessment_findings
+
+var _GuardrailAutomatedReasoningPolicyUnitsProcessed = &s_GuardrailAutomatedReasoningPolicyUnitsProcessed
+
+var _GuardrailAutomatedReasoningPolicyVersionArn = &s_GuardrailAutomatedReasoningPolicyVersionArn
+
+var GuardrailAutomatedReasoningRule = &sGuardrailAutomatedReasoningRule
+var GuardrailAutomatedReasoningRule_identifier = &sGuardrailAutomatedReasoningRule_identifier
+var GuardrailAutomatedReasoningRule_policyVersionArn = &sGuardrailAutomatedReasoningRule_policyVersionArn
+
+var _GuardrailAutomatedReasoningRuleList = &s_GuardrailAutomatedReasoningRuleList
+var _GuardrailAutomatedReasoningRuleList_member = &s_GuardrailAutomatedReasoningRuleList_member
+
+var GuardrailAutomatedReasoningSatisfiableFinding = &sGuardrailAutomatedReasoningSatisfiableFinding
+var GuardrailAutomatedReasoningSatisfiableFinding_translation = &sGuardrailAutomatedReasoningSatisfiableFinding_translation
+var GuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario = &sGuardrailAutomatedReasoningSatisfiableFinding_claimsTrueScenario
+var GuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario = &sGuardrailAutomatedReasoningSatisfiableFinding_claimsFalseScenario
+var GuardrailAutomatedReasoningSatisfiableFinding_logicWarning = &sGuardrailAutomatedReasoningSatisfiableFinding_logicWarning
+
+var GuardrailAutomatedReasoningScenario = &sGuardrailAutomatedReasoningScenario
+var GuardrailAutomatedReasoningScenario_statements = &sGuardrailAutomatedReasoningScenario_statements
+
+var GuardrailAutomatedReasoningStatement = &sGuardrailAutomatedReasoningStatement
+var GuardrailAutomatedReasoningStatement_logic = &sGuardrailAutomatedReasoningStatement_logic
+var GuardrailAutomatedReasoningStatement_naturalLanguage = &sGuardrailAutomatedReasoningStatement_naturalLanguage
+
+var _GuardrailAutomatedReasoningStatementList = &s_GuardrailAutomatedReasoningStatementList
+var _GuardrailAutomatedReasoningStatementList_member = &s_GuardrailAutomatedReasoningStatementList_member
+
+var _GuardrailAutomatedReasoningStatementLogicContent = &s_GuardrailAutomatedReasoningStatementLogicContent
+
+var _GuardrailAutomatedReasoningStatementNaturalLanguageContent = &s_GuardrailAutomatedReasoningStatementNaturalLanguageContent
+
+var GuardrailAutomatedReasoningTooComplexFinding = &sGuardrailAutomatedReasoningTooComplexFinding
+
+var GuardrailAutomatedReasoningTranslation = &sGuardrailAutomatedReasoningTranslation
+var GuardrailAutomatedReasoningTranslation_premises = &sGuardrailAutomatedReasoningTranslation_premises
+var GuardrailAutomatedReasoningTranslation_claims = &sGuardrailAutomatedReasoningTranslation_claims
+var GuardrailAutomatedReasoningTranslation_untranslatedPremises = &sGuardrailAutomatedReasoningTranslation_untranslatedPremises
+var GuardrailAutomatedReasoningTranslation_untranslatedClaims = &sGuardrailAutomatedReasoningTranslation_untranslatedClaims
+var GuardrailAutomatedReasoningTranslation_confidence = &sGuardrailAutomatedReasoningTranslation_confidence
+
+var GuardrailAutomatedReasoningTranslationAmbiguousFinding = &sGuardrailAutomatedReasoningTranslationAmbiguousFinding
+var GuardrailAutomatedReasoningTranslationAmbiguousFinding_options = &sGuardrailAutomatedReasoningTranslationAmbiguousFinding_options
+var GuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios = &sGuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios
+
+var _GuardrailAutomatedReasoningTranslationConfidence = &s_GuardrailAutomatedReasoningTranslationConfidence
+
+var _GuardrailAutomatedReasoningTranslationList = &s_GuardrailAutomatedReasoningTranslationList
+var _GuardrailAutomatedReasoningTranslationList_member = &s_GuardrailAutomatedReasoningTranslationList_member
+
+var GuardrailAutomatedReasoningTranslationOption = &sGuardrailAutomatedReasoningTranslationOption
+var GuardrailAutomatedReasoningTranslationOption_translations = &sGuardrailAutomatedReasoningTranslationOption_translations
+
+var _GuardrailAutomatedReasoningTranslationOptionList = &s_GuardrailAutomatedReasoningTranslationOptionList
+var _GuardrailAutomatedReasoningTranslationOptionList_member = &s_GuardrailAutomatedReasoningTranslationOptionList_member
+
+var GuardrailAutomatedReasoningValidFinding = &sGuardrailAutomatedReasoningValidFinding
+var GuardrailAutomatedReasoningValidFinding_translation = &sGuardrailAutomatedReasoningValidFinding_translation
+var GuardrailAutomatedReasoningValidFinding_claimsTrueScenario = &sGuardrailAutomatedReasoningValidFinding_claimsTrueScenario
+var GuardrailAutomatedReasoningValidFinding_supportingRules = &sGuardrailAutomatedReasoningValidFinding_supportingRules
+var GuardrailAutomatedReasoningValidFinding_logicWarning = &sGuardrailAutomatedReasoningValidFinding_logicWarning
+
+var GuardrailChecksConfig = &sGuardrailChecksConfig
+var GuardrailChecksConfig_contentFilter = &sGuardrailChecksConfig_contentFilter
+var GuardrailChecksConfig_promptAttack = &sGuardrailChecksConfig_promptAttack
+var GuardrailChecksConfig_sensitiveInformation = &sGuardrailChecksConfig_sensitiveInformation
+
+var GuardrailChecksContentBlock = &sGuardrailChecksContentBlock
+var GuardrailChecksContentBlock_text = &sGuardrailChecksContentBlock_text
+
+var _GuardrailChecksContentBlockList = &s_GuardrailChecksContentBlockList
+var _GuardrailChecksContentBlockList_member = &s_GuardrailChecksContentBlockList_member
+
+var GuardrailChecksContentFilterCategory = &sGuardrailChecksContentFilterCategory
+var GuardrailChecksContentFilterCategory_VIOLENCE = &sGuardrailChecksContentFilterCategory_VIOLENCE
+var GuardrailChecksContentFilterCategory_HATE = &sGuardrailChecksContentFilterCategory_HATE
+var GuardrailChecksContentFilterCategory_SEXUAL = &sGuardrailChecksContentFilterCategory_SEXUAL
+var GuardrailChecksContentFilterCategory_MISCONDUCT = &sGuardrailChecksContentFilterCategory_MISCONDUCT
+var GuardrailChecksContentFilterCategory_INSULTS = &sGuardrailChecksContentFilterCategory_INSULTS
+
+var GuardrailChecksContentFilterCategoryConfig = &sGuardrailChecksContentFilterCategoryConfig
+var GuardrailChecksContentFilterCategoryConfig_category = &sGuardrailChecksContentFilterCategoryConfig_category
+
+var _GuardrailChecksContentFilterCategoryConfigList = &s_GuardrailChecksContentFilterCategoryConfigList
+var _GuardrailChecksContentFilterCategoryConfigList_member = &s_GuardrailChecksContentFilterCategoryConfigList_member
+
+var GuardrailChecksContentFilterConfig = &sGuardrailChecksContentFilterConfig
+var GuardrailChecksContentFilterConfig_categories = &sGuardrailChecksContentFilterConfig_categories
+
+var GuardrailChecksContentFilterResult = &sGuardrailChecksContentFilterResult
+var GuardrailChecksContentFilterResult_results = &sGuardrailChecksContentFilterResult_results
+
+var GuardrailChecksContentFilterResultEntry = &sGuardrailChecksContentFilterResultEntry
+var GuardrailChecksContentFilterResultEntry_category = &sGuardrailChecksContentFilterResultEntry_category
+var GuardrailChecksContentFilterResultEntry_severityScore = &sGuardrailChecksContentFilterResultEntry_severityScore
+
+var _GuardrailChecksContentFilterResultList = &s_GuardrailChecksContentFilterResultList
+var _GuardrailChecksContentFilterResultList_member = &s_GuardrailChecksContentFilterResultList_member
+
+var GuardrailChecksContentFilterUsage = &sGuardrailChecksContentFilterUsage
+var GuardrailChecksContentFilterUsage_textUnits = &sGuardrailChecksContentFilterUsage_textUnits
+
+var GuardrailChecksMessage = &sGuardrailChecksMessage
+var GuardrailChecksMessage_role = &sGuardrailChecksMessage_role
+var GuardrailChecksMessage_content = &sGuardrailChecksMessage_content
+
+var _GuardrailChecksMessageList = &s_GuardrailChecksMessageList
+var _GuardrailChecksMessageList_member = &s_GuardrailChecksMessageList_member
+
+var GuardrailChecksPromptAttackCategory = &sGuardrailChecksPromptAttackCategory
+var GuardrailChecksPromptAttackCategory_JAILBREAK = &sGuardrailChecksPromptAttackCategory_JAILBREAK
+var GuardrailChecksPromptAttackCategory_PROMPT_INJECTION = &sGuardrailChecksPromptAttackCategory_PROMPT_INJECTION
+var GuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE = &sGuardrailChecksPromptAttackCategory_PROMPT_LEAKAGE
+
+var GuardrailChecksPromptAttackCategoryConfig = &sGuardrailChecksPromptAttackCategoryConfig
+var GuardrailChecksPromptAttackCategoryConfig_category = &sGuardrailChecksPromptAttackCategoryConfig_category
+
+var _GuardrailChecksPromptAttackCategoryConfigList = &s_GuardrailChecksPromptAttackCategoryConfigList
+var _GuardrailChecksPromptAttackCategoryConfigList_member = &s_GuardrailChecksPromptAttackCategoryConfigList_member
+
+var GuardrailChecksPromptAttackConfig = &sGuardrailChecksPromptAttackConfig
+var GuardrailChecksPromptAttackConfig_categories = &sGuardrailChecksPromptAttackConfig_categories
+
+var GuardrailChecksPromptAttackResult = &sGuardrailChecksPromptAttackResult
+var GuardrailChecksPromptAttackResult_results = &sGuardrailChecksPromptAttackResult_results
+
+var GuardrailChecksPromptAttackResultEntry = &sGuardrailChecksPromptAttackResultEntry
+var GuardrailChecksPromptAttackResultEntry_category = &sGuardrailChecksPromptAttackResultEntry_category
+var GuardrailChecksPromptAttackResultEntry_severityScore = &sGuardrailChecksPromptAttackResultEntry_severityScore
+
+var _GuardrailChecksPromptAttackResultList = &s_GuardrailChecksPromptAttackResultList
+var _GuardrailChecksPromptAttackResultList_member = &s_GuardrailChecksPromptAttackResultList_member
+
+var GuardrailChecksPromptAttackUsage = &sGuardrailChecksPromptAttackUsage
+var GuardrailChecksPromptAttackUsage_textUnits = &sGuardrailChecksPromptAttackUsage_textUnits
+
+var GuardrailChecksResults = &sGuardrailChecksResults
+var GuardrailChecksResults_contentFilter = &sGuardrailChecksResults_contentFilter
+var GuardrailChecksResults_promptAttack = &sGuardrailChecksResults_promptAttack
+var GuardrailChecksResults_sensitiveInformation = &sGuardrailChecksResults_sensitiveInformation
+
+var GuardrailChecksRole = &sGuardrailChecksRole
+var GuardrailChecksRole_USER = &sGuardrailChecksRole_USER
+var GuardrailChecksRole_ASSISTANT = &sGuardrailChecksRole_ASSISTANT
+var GuardrailChecksRole_SYSTEM = &sGuardrailChecksRole_SYSTEM
+
+var GuardrailChecksSensitiveInformationConfig = &sGuardrailChecksSensitiveInformationConfig
+var GuardrailChecksSensitiveInformationConfig_entities = &sGuardrailChecksSensitiveInformationConfig_entities
+
+var GuardrailChecksSensitiveInformationEntityConfig = &sGuardrailChecksSensitiveInformationEntityConfig
+var GuardrailChecksSensitiveInformationEntityConfig_type = &sGuardrailChecksSensitiveInformationEntityConfig_type
+
+var _GuardrailChecksSensitiveInformationEntityConfigList = &s_GuardrailChecksSensitiveInformationEntityConfigList
+var _GuardrailChecksSensitiveInformationEntityConfigList_member = &s_GuardrailChecksSensitiveInformationEntityConfigList_member
+
+var GuardrailChecksSensitiveInformationEntityType = &sGuardrailChecksSensitiveInformationEntityType
+var GuardrailChecksSensitiveInformationEntityType_ADDRESS = &sGuardrailChecksSensitiveInformationEntityType_ADDRESS
+var GuardrailChecksSensitiveInformationEntityType_AGE = &sGuardrailChecksSensitiveInformationEntityType_AGE
+var GuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY = &sGuardrailChecksSensitiveInformationEntityType_AWS_ACCESS_KEY
+var GuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY = &sGuardrailChecksSensitiveInformationEntityType_AWS_SECRET_KEY
+var GuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_CA_HEALTH_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_CA_SOCIAL_INSURANCE_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV = &sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_CVV
+var GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY = &sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_EXPIRY
+var GuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_CREDIT_DEBIT_CARD_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_DRIVER_ID = &sGuardrailChecksSensitiveInformationEntityType_DRIVER_ID
+var GuardrailChecksSensitiveInformationEntityType_EMAIL = &sGuardrailChecksSensitiveInformationEntityType_EMAIL
+var GuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_IP_ADDRESS = &sGuardrailChecksSensitiveInformationEntityType_IP_ADDRESS
+var GuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE = &sGuardrailChecksSensitiveInformationEntityType_LICENSE_PLATE
+var GuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS = &sGuardrailChecksSensitiveInformationEntityType_MAC_ADDRESS
+var GuardrailChecksSensitiveInformationEntityType_NAME = &sGuardrailChecksSensitiveInformationEntityType_NAME
+var GuardrailChecksSensitiveInformationEntityType_PASSWORD = &sGuardrailChecksSensitiveInformationEntityType_PASSWORD
+var GuardrailChecksSensitiveInformationEntityType_PHONE = &sGuardrailChecksSensitiveInformationEntityType_PHONE
+var GuardrailChecksSensitiveInformationEntityType_PIN = &sGuardrailChecksSensitiveInformationEntityType_PIN
+var GuardrailChecksSensitiveInformationEntityType_SWIFT_CODE = &sGuardrailChecksSensitiveInformationEntityType_SWIFT_CODE
+var GuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_UK_NATIONAL_INSURANCE_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_URL = &sGuardrailChecksSensitiveInformationEntityType_URL
+var GuardrailChecksSensitiveInformationEntityType_USERNAME = &sGuardrailChecksSensitiveInformationEntityType_USERNAME
+var GuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_US_BANK_ACCOUNT_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_US_BANK_ROUTING_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_US_PASSPORT_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_US_SOCIAL_SECURITY_NUMBER
+var GuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER = &sGuardrailChecksSensitiveInformationEntityType_VEHICLE_IDENTIFICATION_NUMBER
+
+var GuardrailChecksSensitiveInformationResult = &sGuardrailChecksSensitiveInformationResult
+var GuardrailChecksSensitiveInformationResult_results = &sGuardrailChecksSensitiveInformationResult_results
+var GuardrailChecksSensitiveInformationResult_truncated = &sGuardrailChecksSensitiveInformationResult_truncated
+
+var GuardrailChecksSensitiveInformationResultEntry = &sGuardrailChecksSensitiveInformationResultEntry
+var GuardrailChecksSensitiveInformationResultEntry_type = &sGuardrailChecksSensitiveInformationResultEntry_type
+var GuardrailChecksSensitiveInformationResultEntry_confidenceScore = &sGuardrailChecksSensitiveInformationResultEntry_confidenceScore
+var GuardrailChecksSensitiveInformationResultEntry_beginOffset = &sGuardrailChecksSensitiveInformationResultEntry_beginOffset
+var GuardrailChecksSensitiveInformationResultEntry_endOffset = &sGuardrailChecksSensitiveInformationResultEntry_endOffset
+var GuardrailChecksSensitiveInformationResultEntry_messageIndex = &sGuardrailChecksSensitiveInformationResultEntry_messageIndex
+var GuardrailChecksSensitiveInformationResultEntry_contentIndex = &sGuardrailChecksSensitiveInformationResultEntry_contentIndex
+
+var _GuardrailChecksSensitiveInformationResultList = &s_GuardrailChecksSensitiveInformationResultList
+var _GuardrailChecksSensitiveInformationResultList_member = &s_GuardrailChecksSensitiveInformationResultList_member
+
+var GuardrailChecksSensitiveInformationUsage = &sGuardrailChecksSensitiveInformationUsage
+var GuardrailChecksSensitiveInformationUsage_textUnits = &sGuardrailChecksSensitiveInformationUsage_textUnits
+
+var _GuardrailChecksTextContent = &s_GuardrailChecksTextContent
+
+var GuardrailChecksUsageResults = &sGuardrailChecksUsageResults
+var GuardrailChecksUsageResults_contentFilter = &sGuardrailChecksUsageResults_contentFilter
+var GuardrailChecksUsageResults_promptAttack = &sGuardrailChecksUsageResults_promptAttack
+var GuardrailChecksUsageResults_sensitiveInformation = &sGuardrailChecksUsageResults_sensitiveInformation
+
+var GuardrailConfiguration = &sGuardrailConfiguration
+var GuardrailConfiguration_guardrailIdentifier = &sGuardrailConfiguration_guardrailIdentifier
+var GuardrailConfiguration_guardrailVersion = &sGuardrailConfiguration_guardrailVersion
+var GuardrailConfiguration_trace = &sGuardrailConfiguration_trace
+
+var GuardrailContentBlock = &sGuardrailContentBlock
+var GuardrailContentBlock_text = &sGuardrailContentBlock_text
+var GuardrailContentBlock_image = &sGuardrailContentBlock_image
+
+var _GuardrailContentBlockList = &s_GuardrailContentBlockList
+var _GuardrailContentBlockList_member = &s_GuardrailContentBlockList_member
+
+var GuardrailContentFilter = &sGuardrailContentFilter
+var GuardrailContentFilter_type = &sGuardrailContentFilter_type
+var GuardrailContentFilter_confidence = &sGuardrailContentFilter_confidence
+var GuardrailContentFilter_filterStrength = &sGuardrailContentFilter_filterStrength
+var GuardrailContentFilter_action = &sGuardrailContentFilter_action
+var GuardrailContentFilter_detected = &sGuardrailContentFilter_detected
+
+var GuardrailContentFilterConfidence = &sGuardrailContentFilterConfidence
+var GuardrailContentFilterConfidence_NONE = &sGuardrailContentFilterConfidence_NONE
+var GuardrailContentFilterConfidence_LOW = &sGuardrailContentFilterConfidence_LOW
+var GuardrailContentFilterConfidence_MEDIUM = &sGuardrailContentFilterConfidence_MEDIUM
+var GuardrailContentFilterConfidence_HIGH = &sGuardrailContentFilterConfidence_HIGH
+
+var _GuardrailContentFilterList = &s_GuardrailContentFilterList
+var _GuardrailContentFilterList_member = &s_GuardrailContentFilterList_member
+
+var GuardrailContentFilterStrength = &sGuardrailContentFilterStrength
+var GuardrailContentFilterStrength_NONE = &sGuardrailContentFilterStrength_NONE
+var GuardrailContentFilterStrength_LOW = &sGuardrailContentFilterStrength_LOW
+var GuardrailContentFilterStrength_MEDIUM = &sGuardrailContentFilterStrength_MEDIUM
+var GuardrailContentFilterStrength_HIGH = &sGuardrailContentFilterStrength_HIGH
+
+var GuardrailContentFilterType = &sGuardrailContentFilterType
+var GuardrailContentFilterType_INSULTS = &sGuardrailContentFilterType_INSULTS
+var GuardrailContentFilterType_HATE = &sGuardrailContentFilterType_HATE
+var GuardrailContentFilterType_SEXUAL = &sGuardrailContentFilterType_SEXUAL
+var GuardrailContentFilterType_VIOLENCE = &sGuardrailContentFilterType_VIOLENCE
+var GuardrailContentFilterType_MISCONDUCT = &sGuardrailContentFilterType_MISCONDUCT
+var GuardrailContentFilterType_PROMPT_ATTACK = &sGuardrailContentFilterType_PROMPT_ATTACK
+
+var GuardrailContentPolicyAction = &sGuardrailContentPolicyAction
+var GuardrailContentPolicyAction_BLOCKED = &sGuardrailContentPolicyAction_BLOCKED
+var GuardrailContentPolicyAction_NONE = &sGuardrailContentPolicyAction_NONE
+
+var GuardrailContentPolicyAssessment = &sGuardrailContentPolicyAssessment
+var GuardrailContentPolicyAssessment_filters = &sGuardrailContentPolicyAssessment_filters
+
+var _GuardrailContentPolicyImageUnitsProcessed = &s_GuardrailContentPolicyImageUnitsProcessed
+
+var _GuardrailContentPolicyUnitsProcessed = &s_GuardrailContentPolicyUnitsProcessed
+
+var GuardrailContentQualifier = &sGuardrailContentQualifier
+var GuardrailContentQualifier_GROUNDING_SOURCE = &sGuardrailContentQualifier_GROUNDING_SOURCE
+var GuardrailContentQualifier_QUERY = &sGuardrailContentQualifier_QUERY
+var GuardrailContentQualifier_GUARD_CONTENT = &sGuardrailContentQualifier_GUARD_CONTENT
+
+var _GuardrailContentQualifierList = &s_GuardrailContentQualifierList
+var _GuardrailContentQualifierList_member = &s_GuardrailContentQualifierList_member
+
+var GuardrailContentSource = &sGuardrailContentSource
+var GuardrailContentSource_INPUT = &sGuardrailContentSource_INPUT
+var GuardrailContentSource_OUTPUT = &sGuardrailContentSource_OUTPUT
+
+var GuardrailContextualGroundingFilter = &sGuardrailContextualGroundingFilter
+var GuardrailContextualGroundingFilter_type = &sGuardrailContextualGroundingFilter_type
+var GuardrailContextualGroundingFilter_threshold = &sGuardrailContextualGroundingFilter_threshold
+var GuardrailContextualGroundingFilter_score = &sGuardrailContextualGroundingFilter_score
+var GuardrailContextualGroundingFilter_action = &sGuardrailContextualGroundingFilter_action
+var GuardrailContextualGroundingFilter_detected = &sGuardrailContextualGroundingFilter_detected
+
+var _GuardrailContextualGroundingFilters = &s_GuardrailContextualGroundingFilters
+var _GuardrailContextualGroundingFilters_member = &s_GuardrailContextualGroundingFilters_member
+
+var GuardrailContextualGroundingFilterType = &sGuardrailContextualGroundingFilterType
+var GuardrailContextualGroundingFilterType_GROUNDING = &sGuardrailContextualGroundingFilterType_GROUNDING
+var GuardrailContextualGroundingFilterType_RELEVANCE = &sGuardrailContextualGroundingFilterType_RELEVANCE
+
+var GuardrailContextualGroundingPolicyAction = &sGuardrailContextualGroundingPolicyAction
+var GuardrailContextualGroundingPolicyAction_BLOCKED = &sGuardrailContextualGroundingPolicyAction_BLOCKED
+var GuardrailContextualGroundingPolicyAction_NONE = &sGuardrailContextualGroundingPolicyAction_NONE
+
+var GuardrailContextualGroundingPolicyAssessment = &sGuardrailContextualGroundingPolicyAssessment
+var GuardrailContextualGroundingPolicyAssessment_filters = &sGuardrailContextualGroundingPolicyAssessment_filters
+
+var _GuardrailContextualGroundingPolicyUnitsProcessed = &s_GuardrailContextualGroundingPolicyUnitsProcessed
+
+var GuardrailConverseContentBlock = &sGuardrailConverseContentBlock
+var GuardrailConverseContentBlock_text = &sGuardrailConverseContentBlock_text
+var GuardrailConverseContentBlock_image = &sGuardrailConverseContentBlock_image
+
+var GuardrailConverseContentQualifier = &sGuardrailConverseContentQualifier
+var GuardrailConverseContentQualifier_GROUNDING_SOURCE = &sGuardrailConverseContentQualifier_GROUNDING_SOURCE
+var GuardrailConverseContentQualifier_QUERY = &sGuardrailConverseContentQualifier_QUERY
+var GuardrailConverseContentQualifier_GUARD_CONTENT = &sGuardrailConverseContentQualifier_GUARD_CONTENT
+
+var _GuardrailConverseContentQualifierList = &s_GuardrailConverseContentQualifierList
+var _GuardrailConverseContentQualifierList_member = &s_GuardrailConverseContentQualifierList_member
+
+var GuardrailConverseImageBlock = &sGuardrailConverseImageBlock
+var GuardrailConverseImageBlock_format = &sGuardrailConverseImageBlock_format
+var GuardrailConverseImageBlock_source = &sGuardrailConverseImageBlock_source
+
+var GuardrailConverseImageFormat = &sGuardrailConverseImageFormat
+var GuardrailConverseImageFormat_PNG = &sGuardrailConverseImageFormat_PNG
+var GuardrailConverseImageFormat_JPEG = &sGuardrailConverseImageFormat_JPEG
+
+var GuardrailConverseImageSource = &sGuardrailConverseImageSource
+var GuardrailConverseImageSource_bytes = &sGuardrailConverseImageSource_bytes
+
+var GuardrailConverseTextBlock = &sGuardrailConverseTextBlock
+var GuardrailConverseTextBlock_text = &sGuardrailConverseTextBlock_text
+var GuardrailConverseTextBlock_qualifiers = &sGuardrailConverseTextBlock_qualifiers
+
+var GuardrailCoverage = &sGuardrailCoverage
+var GuardrailCoverage_textCharacters = &sGuardrailCoverage_textCharacters
+var GuardrailCoverage_images = &sGuardrailCoverage_images
+
+var GuardrailCustomWord = &sGuardrailCustomWord
+var GuardrailCustomWord_match = &sGuardrailCustomWord_match
+var GuardrailCustomWord_action = &sGuardrailCustomWord_action
+var GuardrailCustomWord_detected = &sGuardrailCustomWord_detected
+
+var _GuardrailCustomWordList = &s_GuardrailCustomWordList
+var _GuardrailCustomWordList_member = &s_GuardrailCustomWordList_member
+
+var _GuardrailId = &s_GuardrailId
+
+var _GuardrailIdentifier = &s_GuardrailIdentifier
+
+var GuardrailImageBlock = &sGuardrailImageBlock
+var GuardrailImageBlock_format = &sGuardrailImageBlock_format
+var GuardrailImageBlock_source = &sGuardrailImageBlock_source
+
+var GuardrailImageCoverage = &sGuardrailImageCoverage
+var GuardrailImageCoverage_guarded = &sGuardrailImageCoverage_guarded
+var GuardrailImageCoverage_total = &sGuardrailImageCoverage_total
+
+var GuardrailImageFormat = &sGuardrailImageFormat
+var GuardrailImageFormat_PNG = &sGuardrailImageFormat_PNG
+var GuardrailImageFormat_JPEG = &sGuardrailImageFormat_JPEG
+
+var GuardrailImageSource = &sGuardrailImageSource
+var GuardrailImageSource_bytes = &sGuardrailImageSource_bytes
+
+var GuardrailInvocationMetrics = &sGuardrailInvocationMetrics
+var GuardrailInvocationMetrics_guardrailProcessingLatency = &sGuardrailInvocationMetrics_guardrailProcessingLatency
+var GuardrailInvocationMetrics_usage = &sGuardrailInvocationMetrics_usage
+var GuardrailInvocationMetrics_guardrailCoverage = &sGuardrailInvocationMetrics_guardrailCoverage
+
+var GuardrailManagedWord = &sGuardrailManagedWord
+var GuardrailManagedWord_match = &sGuardrailManagedWord_match
+var GuardrailManagedWord_type = &sGuardrailManagedWord_type
+var GuardrailManagedWord_action = &sGuardrailManagedWord_action
+var GuardrailManagedWord_detected = &sGuardrailManagedWord_detected
+
+var _GuardrailManagedWordList = &s_GuardrailManagedWordList
+var _GuardrailManagedWordList_member = &s_GuardrailManagedWordList_member
+
+var GuardrailManagedWordType = &sGuardrailManagedWordType
+var GuardrailManagedWordType_PROFANITY = &sGuardrailManagedWordType_PROFANITY
+
+var GuardrailOrigin = &sGuardrailOrigin
+var GuardrailOrigin_REQUEST = &sGuardrailOrigin_REQUEST
+var GuardrailOrigin_ACCOUNT_ENFORCED = &sGuardrailOrigin_ACCOUNT_ENFORCED
+var GuardrailOrigin_ORGANIZATION_ENFORCED = &sGuardrailOrigin_ORGANIZATION_ENFORCED
+
+var _GuardrailOriginList = &s_GuardrailOriginList
+var _GuardrailOriginList_member = &s_GuardrailOriginList_member
+
+var GuardrailOutputContent = &sGuardrailOutputContent
+var GuardrailOutputContent_text = &sGuardrailOutputContent_text
+
+var _GuardrailOutputContentList = &s_GuardrailOutputContentList
+var _GuardrailOutputContentList_member = &s_GuardrailOutputContentList_member
+
+var GuardrailOutputScope = &sGuardrailOutputScope
+var GuardrailOutputScope_INTERVENTIONS = &sGuardrailOutputScope_INTERVENTIONS
+var GuardrailOutputScope_FULL = &sGuardrailOutputScope_FULL
+
+var _GuardrailOutputText = &s_GuardrailOutputText
+
+var GuardrailOwnership = &sGuardrailOwnership
+var GuardrailOwnership_SELF = &sGuardrailOwnership_SELF
+var GuardrailOwnership_CROSS_ACCOUNT = &sGuardrailOwnership_CROSS_ACCOUNT
+
+var GuardrailPiiEntityFilter = &sGuardrailPiiEntityFilter
+var GuardrailPiiEntityFilter_match = &sGuardrailPiiEntityFilter_match
+var GuardrailPiiEntityFilter_type = &sGuardrailPiiEntityFilter_type
+var GuardrailPiiEntityFilter_action = &sGuardrailPiiEntityFilter_action
+var GuardrailPiiEntityFilter_detected = &sGuardrailPiiEntityFilter_detected
+
+var _GuardrailPiiEntityFilterList = &s_GuardrailPiiEntityFilterList
+var _GuardrailPiiEntityFilterList_member = &s_GuardrailPiiEntityFilterList_member
+
+var GuardrailPiiEntityType = &sGuardrailPiiEntityType
+var GuardrailPiiEntityType_ADDRESS = &sGuardrailPiiEntityType_ADDRESS
+var GuardrailPiiEntityType_AGE = &sGuardrailPiiEntityType_AGE
+var GuardrailPiiEntityType_AWS_ACCESS_KEY = &sGuardrailPiiEntityType_AWS_ACCESS_KEY
+var GuardrailPiiEntityType_AWS_SECRET_KEY = &sGuardrailPiiEntityType_AWS_SECRET_KEY
+var GuardrailPiiEntityType_CA_HEALTH_NUMBER = &sGuardrailPiiEntityType_CA_HEALTH_NUMBER
+var GuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER = &sGuardrailPiiEntityType_CA_SOCIAL_INSURANCE_NUMBER
+var GuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV = &sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_CVV
+var GuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY = &sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_EXPIRY
+var GuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER = &sGuardrailPiiEntityType_CREDIT_DEBIT_CARD_NUMBER
+var GuardrailPiiEntityType_DRIVER_ID = &sGuardrailPiiEntityType_DRIVER_ID
+var GuardrailPiiEntityType_EMAIL = &sGuardrailPiiEntityType_EMAIL
+var GuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = &sGuardrailPiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER
+var GuardrailPiiEntityType_IP_ADDRESS = &sGuardrailPiiEntityType_IP_ADDRESS
+var GuardrailPiiEntityType_LICENSE_PLATE = &sGuardrailPiiEntityType_LICENSE_PLATE
+var GuardrailPiiEntityType_MAC_ADDRESS = &sGuardrailPiiEntityType_MAC_ADDRESS
+var GuardrailPiiEntityType_NAME = &sGuardrailPiiEntityType_NAME
+var GuardrailPiiEntityType_PASSWORD = &sGuardrailPiiEntityType_PASSWORD
+var GuardrailPiiEntityType_PHONE = &sGuardrailPiiEntityType_PHONE
+var GuardrailPiiEntityType_PIN = &sGuardrailPiiEntityType_PIN
+var GuardrailPiiEntityType_SWIFT_CODE = &sGuardrailPiiEntityType_SWIFT_CODE
+var GuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER = &sGuardrailPiiEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER
+var GuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER = &sGuardrailPiiEntityType_UK_NATIONAL_INSURANCE_NUMBER
+var GuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = &sGuardrailPiiEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+var GuardrailPiiEntityType_URL = &sGuardrailPiiEntityType_URL
+var GuardrailPiiEntityType_USERNAME = &sGuardrailPiiEntityType_USERNAME
+var GuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER = &sGuardrailPiiEntityType_US_BANK_ACCOUNT_NUMBER
+var GuardrailPiiEntityType_US_BANK_ROUTING_NUMBER = &sGuardrailPiiEntityType_US_BANK_ROUTING_NUMBER
+var GuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = &sGuardrailPiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER
+var GuardrailPiiEntityType_US_PASSPORT_NUMBER = &sGuardrailPiiEntityType_US_PASSPORT_NUMBER
+var GuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER = &sGuardrailPiiEntityType_US_SOCIAL_SECURITY_NUMBER
+var GuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER = &sGuardrailPiiEntityType_VEHICLE_IDENTIFICATION_NUMBER
+
+var _GuardrailProcessingLatency = &s_GuardrailProcessingLatency
+
+var GuardrailRegexFilter = &sGuardrailRegexFilter
+var GuardrailRegexFilter_name = &sGuardrailRegexFilter_name
+var GuardrailRegexFilter_match = &sGuardrailRegexFilter_match
+var GuardrailRegexFilter_regex = &sGuardrailRegexFilter_regex
+var GuardrailRegexFilter_action = &sGuardrailRegexFilter_action
+var GuardrailRegexFilter_detected = &sGuardrailRegexFilter_detected
+
+var _GuardrailRegexFilterList = &s_GuardrailRegexFilterList
+var _GuardrailRegexFilterList_member = &s_GuardrailRegexFilterList_member
+
+var GuardrailSensitiveInformationPolicyAction = &sGuardrailSensitiveInformationPolicyAction
+var GuardrailSensitiveInformationPolicyAction_ANONYMIZED = &sGuardrailSensitiveInformationPolicyAction_ANONYMIZED
+var GuardrailSensitiveInformationPolicyAction_BLOCKED = &sGuardrailSensitiveInformationPolicyAction_BLOCKED
+var GuardrailSensitiveInformationPolicyAction_NONE = &sGuardrailSensitiveInformationPolicyAction_NONE
+
+var GuardrailSensitiveInformationPolicyAssessment = &sGuardrailSensitiveInformationPolicyAssessment
+var GuardrailSensitiveInformationPolicyAssessment_piiEntities = &sGuardrailSensitiveInformationPolicyAssessment_piiEntities
+var GuardrailSensitiveInformationPolicyAssessment_regexes = &sGuardrailSensitiveInformationPolicyAssessment_regexes
+
+var _GuardrailSensitiveInformationPolicyFreeUnitsProcessed = &s_GuardrailSensitiveInformationPolicyFreeUnitsProcessed
+
+var _GuardrailSensitiveInformationPolicyUnitsProcessed = &s_GuardrailSensitiveInformationPolicyUnitsProcessed
+
+var GuardrailStreamConfiguration = &sGuardrailStreamConfiguration
+var GuardrailStreamConfiguration_guardrailIdentifier = &sGuardrailStreamConfiguration_guardrailIdentifier
+var GuardrailStreamConfiguration_guardrailVersion = &sGuardrailStreamConfiguration_guardrailVersion
+var GuardrailStreamConfiguration_trace = &sGuardrailStreamConfiguration_trace
+var GuardrailStreamConfiguration_streamProcessingMode = &sGuardrailStreamConfiguration_streamProcessingMode
+
+var GuardrailStreamProcessingMode = &sGuardrailStreamProcessingMode
+var GuardrailStreamProcessingMode_SYNC = &sGuardrailStreamProcessingMode_SYNC
+var GuardrailStreamProcessingMode_ASYNC = &sGuardrailStreamProcessingMode_ASYNC
+
+var GuardrailTextBlock = &sGuardrailTextBlock
+var GuardrailTextBlock_text = &sGuardrailTextBlock_text
+var GuardrailTextBlock_qualifiers = &sGuardrailTextBlock_qualifiers
+
+var GuardrailTextCharactersCoverage = &sGuardrailTextCharactersCoverage
+var GuardrailTextCharactersCoverage_guarded = &sGuardrailTextCharactersCoverage_guarded
+var GuardrailTextCharactersCoverage_total = &sGuardrailTextCharactersCoverage_total
+
+var GuardrailTopic = &sGuardrailTopic
+var GuardrailTopic_name = &sGuardrailTopic_name
+var GuardrailTopic_type = &sGuardrailTopic_type
+var GuardrailTopic_action = &sGuardrailTopic_action
+var GuardrailTopic_detected = &sGuardrailTopic_detected
+
+var _GuardrailTopicList = &s_GuardrailTopicList
+var _GuardrailTopicList_member = &s_GuardrailTopicList_member
+
+var GuardrailTopicPolicyAction = &sGuardrailTopicPolicyAction
+var GuardrailTopicPolicyAction_BLOCKED = &sGuardrailTopicPolicyAction_BLOCKED
+var GuardrailTopicPolicyAction_NONE = &sGuardrailTopicPolicyAction_NONE
+
+var GuardrailTopicPolicyAssessment = &sGuardrailTopicPolicyAssessment
+var GuardrailTopicPolicyAssessment_topics = &sGuardrailTopicPolicyAssessment_topics
+
+var _GuardrailTopicPolicyUnitsProcessed = &s_GuardrailTopicPolicyUnitsProcessed
+
+var GuardrailTopicType = &sGuardrailTopicType
+var GuardrailTopicType_DENY = &sGuardrailTopicType_DENY
+
+var GuardrailTrace = &sGuardrailTrace
+var GuardrailTrace_ENABLED = &sGuardrailTrace_ENABLED
+var GuardrailTrace_DISABLED = &sGuardrailTrace_DISABLED
+var GuardrailTrace_ENABLED_FULL = &sGuardrailTrace_ENABLED_FULL
+
+var GuardrailTraceAssessment = &sGuardrailTraceAssessment
+var GuardrailTraceAssessment_modelOutput = &sGuardrailTraceAssessment_modelOutput
+var GuardrailTraceAssessment_inputAssessment = &sGuardrailTraceAssessment_inputAssessment
+var GuardrailTraceAssessment_outputAssessments = &sGuardrailTraceAssessment_outputAssessments
+var GuardrailTraceAssessment_actionReason = &sGuardrailTraceAssessment_actionReason
+
+var GuardrailUsage = &sGuardrailUsage
+var GuardrailUsage_topicPolicyUnits = &sGuardrailUsage_topicPolicyUnits
+var GuardrailUsage_contentPolicyUnits = &sGuardrailUsage_contentPolicyUnits
+var GuardrailUsage_wordPolicyUnits = &sGuardrailUsage_wordPolicyUnits
+var GuardrailUsage_sensitiveInformationPolicyUnits = &sGuardrailUsage_sensitiveInformationPolicyUnits
+var GuardrailUsage_sensitiveInformationPolicyFreeUnits = &sGuardrailUsage_sensitiveInformationPolicyFreeUnits
+var GuardrailUsage_contextualGroundingPolicyUnits = &sGuardrailUsage_contextualGroundingPolicyUnits
+var GuardrailUsage_contentPolicyImageUnits = &sGuardrailUsage_contentPolicyImageUnits
+var GuardrailUsage_automatedReasoningPolicyUnits = &sGuardrailUsage_automatedReasoningPolicyUnits
+var GuardrailUsage_automatedReasoningPolicies = &sGuardrailUsage_automatedReasoningPolicies
+
+var _GuardrailVersion = &s_GuardrailVersion
+
+var GuardrailWordPolicyAction = &sGuardrailWordPolicyAction
+var GuardrailWordPolicyAction_BLOCKED = &sGuardrailWordPolicyAction_BLOCKED
+var GuardrailWordPolicyAction_NONE = &sGuardrailWordPolicyAction_NONE
+
+var GuardrailWordPolicyAssessment = &sGuardrailWordPolicyAssessment
+var GuardrailWordPolicyAssessment_customWords = &sGuardrailWordPolicyAssessment_customWords
+var GuardrailWordPolicyAssessment_managedWordLists = &sGuardrailWordPolicyAssessment_managedWordLists
+
+var _GuardrailWordPolicyUnitsProcessed = &s_GuardrailWordPolicyUnitsProcessed
+
+var ImageBlock = &sImageBlock
+var ImageBlock_format = &sImageBlock_format
+var ImageBlock_source = &sImageBlock_source
+var ImageBlock_error = &sImageBlock_error
+
+var ImageBlockDelta = &sImageBlockDelta
+var ImageBlockDelta_source = &sImageBlockDelta_source
+var ImageBlockDelta_error = &sImageBlockDelta_error
+
+var ImageBlockStart = &sImageBlockStart
+var ImageBlockStart_format = &sImageBlockStart_format
+
+var ImageFormat = &sImageFormat
+var ImageFormat_PNG = &sImageFormat_PNG
+var ImageFormat_JPEG = &sImageFormat_JPEG
+var ImageFormat_GIF = &sImageFormat_GIF
+var ImageFormat_WEBP = &sImageFormat_WEBP
+
+var _ImagesGuarded = &s_ImagesGuarded
+
+var ImageSource = &sImageSource
+var ImageSource_bytes = &sImageSource_bytes
+var ImageSource_s3Location = &sImageSource_s3Location
+
+var _ImagesTotal = &s_ImagesTotal
+
+var InferenceConfiguration = &sInferenceConfiguration
+var InferenceConfiguration_maxTokens = &sInferenceConfiguration_maxTokens
+var InferenceConfiguration_temperature = &sInferenceConfiguration_temperature
+var InferenceConfiguration_topP = &sInferenceConfiguration_topP
+var InferenceConfiguration_stopSequences = &sInferenceConfiguration_stopSequences
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _InvocationArn = &s_InvocationArn
+
+var _InvokedModelId = &s_InvokedModelId
+
+var _InvokeModelIdentifier = &s_InvokeModelIdentifier
+
+var InvokeModelTokensRequest = &sInvokeModelTokensRequest
+var InvokeModelTokensRequest_body = &sInvokeModelTokensRequest_body
+
+var InvokeModelWithBidirectionalStreamInput = &sInvokeModelWithBidirectionalStreamInput
+var InvokeModelWithBidirectionalStreamInput_chunk = &sInvokeModelWithBidirectionalStreamInput_chunk
+
+var InvokeModelWithBidirectionalStreamOutput = &sInvokeModelWithBidirectionalStreamOutput
+var InvokeModelWithBidirectionalStreamOutput_chunk = &sInvokeModelWithBidirectionalStreamOutput_chunk
+var InvokeModelWithBidirectionalStreamOutput_internalServerException = &sInvokeModelWithBidirectionalStreamOutput_internalServerException
+var InvokeModelWithBidirectionalStreamOutput_modelStreamErrorException = &sInvokeModelWithBidirectionalStreamOutput_modelStreamErrorException
+var InvokeModelWithBidirectionalStreamOutput_validationException = &sInvokeModelWithBidirectionalStreamOutput_validationException
+var InvokeModelWithBidirectionalStreamOutput_throttlingException = &sInvokeModelWithBidirectionalStreamOutput_throttlingException
+var InvokeModelWithBidirectionalStreamOutput_modelTimeoutException = &sInvokeModelWithBidirectionalStreamOutput_modelTimeoutException
+var InvokeModelWithBidirectionalStreamOutput_serviceUnavailableException = &sInvokeModelWithBidirectionalStreamOutput_serviceUnavailableException
+
+var JsonSchemaDefinition = &sJsonSchemaDefinition
+var JsonSchemaDefinition_schema = &sJsonSchemaDefinition_schema
+var JsonSchemaDefinition_name = &sJsonSchemaDefinition_name
+var JsonSchemaDefinition_description = &sJsonSchemaDefinition_description
+
+var _KmsKeyId = &s_KmsKeyId
+
+var _MaxResults = &s_MaxResults
+
+var Message = &sMessage
+var Message_role = &sMessage_role
+var Message_content = &sMessage_content
+
+var _Messages = &s_Messages
+var _Messages_member = &s_Messages_member
+
+var MessageStartEvent = &sMessageStartEvent
+var MessageStartEvent_role = &sMessageStartEvent_role
+
+var MessageStopEvent = &sMessageStopEvent
+var MessageStopEvent_stopReason = &sMessageStopEvent_stopReason
+var MessageStopEvent_additionalModelResponseFields = &sMessageStopEvent_additionalModelResponseFields
+
+var _MimeType = &s_MimeType
+
+var ModelErrorException = &sModelErrorException
+var ModelErrorException_message = &sModelErrorException_message
+var ModelErrorException_originalStatusCode = &sModelErrorException_originalStatusCode
+var ModelErrorException_resourceName = &sModelErrorException_resourceName
+
+var _ModelInputPayload = &s_ModelInputPayload
+
+var ModelNotReadyException = &sModelNotReadyException
+var ModelNotReadyException_message = &sModelNotReadyException_message
+
+var _ModelOutputs = &s_ModelOutputs
+var _ModelOutputs_member = &s_ModelOutputs_member
+
+var ModelStreamErrorException = &sModelStreamErrorException
+var ModelStreamErrorException_message = &sModelStreamErrorException_message
+var ModelStreamErrorException_originalStatusCode = &sModelStreamErrorException_originalStatusCode
+var ModelStreamErrorException_originalMessage = &sModelStreamErrorException_originalMessage
+
+var ModelTimeoutException = &sModelTimeoutException
+var ModelTimeoutException_message = &sModelTimeoutException_message
+
+var _NonBlankString = &s_NonBlankString
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _NonEmptyStringList = &s_NonEmptyStringList
+var _NonEmptyStringList_member = &s_NonEmptyStringList_member
+
+var _NonNegativeInteger = &s_NonNegativeInteger
+
+var OutputConfig = &sOutputConfig
+var OutputConfig_textFormat = &sOutputConfig_textFormat
+var OutputConfig_effort = &sOutputConfig_effort
+
+var OutputFormat = &sOutputFormat
+var OutputFormat_type = &sOutputFormat_type
+var OutputFormat_structure = &sOutputFormat_structure
+
+var OutputFormatStructure = &sOutputFormatStructure
+var OutputFormatStructure_jsonSchema = &sOutputFormatStructure_jsonSchema
+
+var OutputFormatType = &sOutputFormatType
+var OutputFormatType_JSON_SCHEMA = &sOutputFormatType_JSON_SCHEMA
+
+var _PaginationToken = &s_PaginationToken
+
+var _PartBody = &s_PartBody
+
+var PayloadPart = &sPayloadPart
+var PayloadPart_bytes = &sPayloadPart_bytes
+
+var PerformanceConfigLatency = &sPerformanceConfigLatency
+var PerformanceConfigLatency_STANDARD = &sPerformanceConfigLatency_STANDARD
+var PerformanceConfigLatency_OPTIMIZED = &sPerformanceConfigLatency_OPTIMIZED
+
+var PerformanceConfiguration = &sPerformanceConfiguration
+var PerformanceConfiguration_latency = &sPerformanceConfiguration_latency
+
+var PromptRouterTrace = &sPromptRouterTrace
+var PromptRouterTrace_invokedModelId = &sPromptRouterTrace_invokedModelId
+
+var _PromptVariableMap = &s_PromptVariableMap
+var _PromptVariableMap_key = &s_PromptVariableMap_key
+var _PromptVariableMap_value = &s_PromptVariableMap_value
+
+var PromptVariableValues = &sPromptVariableValues
+var PromptVariableValues_text = &sPromptVariableValues_text
+
+var ReasoningContentBlock = &sReasoningContentBlock
+var ReasoningContentBlock_reasoningText = &sReasoningContentBlock_reasoningText
+var ReasoningContentBlock_redactedContent = &sReasoningContentBlock_redactedContent
+
+var ReasoningContentBlockDelta = &sReasoningContentBlockDelta
+var ReasoningContentBlockDelta_text = &sReasoningContentBlockDelta_text
+var ReasoningContentBlockDelta_redactedContent = &sReasoningContentBlockDelta_redactedContent
+var ReasoningContentBlockDelta_signature = &sReasoningContentBlockDelta_signature
+
+var ReasoningTextBlock = &sReasoningTextBlock
+var ReasoningTextBlock_text = &sReasoningTextBlock_text
+var ReasoningTextBlock_signature = &sReasoningTextBlock_signature
+
+var _RequestMetadata = &s_RequestMetadata
+var _RequestMetadata_key = &s_RequestMetadata_key
+var _RequestMetadata_value = &s_RequestMetadata_value
+
+var _RequestMetadataJson = &s_RequestMetadataJson
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResponseStream = &sResponseStream
+var ResponseStream_chunk = &sResponseStream_chunk
+var ResponseStream_internalServerException = &sResponseStream_internalServerException
+var ResponseStream_modelStreamErrorException = &sResponseStream_modelStreamErrorException
+var ResponseStream_validationException = &sResponseStream_validationException
+var ResponseStream_throttlingException = &sResponseStream_throttlingException
+var ResponseStream_modelTimeoutException = &sResponseStream_modelTimeoutException
+var ResponseStream_serviceUnavailableException = &sResponseStream_serviceUnavailableException
+
+var S3Location = &sS3Location
+var S3Location_uri = &sS3Location_uri
+var S3Location_bucketOwner = &sS3Location_bucketOwner
+
+var _S3Uri = &s_S3Uri
+
+var SearchResultBlock = &sSearchResultBlock
+var SearchResultBlock_source = &sSearchResultBlock_source
+var SearchResultBlock_title = &sSearchResultBlock_title
+var SearchResultBlock_content = &sSearchResultBlock_content
+var SearchResultBlock_citations = &sSearchResultBlock_citations
+
+var SearchResultContentBlock = &sSearchResultContentBlock
+var SearchResultContentBlock_text = &sSearchResultContentBlock_text
+
+var _SearchResultContentBlocks = &s_SearchResultContentBlocks
+var _SearchResultContentBlocks_member = &s_SearchResultContentBlocks_member
+
+var SearchResultLocation = &sSearchResultLocation
+var SearchResultLocation_searchResultIndex = &sSearchResultLocation_searchResultIndex
+var SearchResultLocation_start = &sSearchResultLocation_start
+var SearchResultLocation_end = &sSearchResultLocation_end
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var ServiceTier = &sServiceTier
+var ServiceTier_type = &sServiceTier_type
+
+var ServiceTierType = &sServiceTierType
+var ServiceTierType_PRIORITY = &sServiceTierType_PRIORITY
+var ServiceTierType_DEFAULT = &sServiceTierType_DEFAULT
+var ServiceTierType_FLEX = &sServiceTierType_FLEX
+var ServiceTierType_RESERVED = &sServiceTierType_RESERVED
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var SortAsyncInvocationBy = &sSortAsyncInvocationBy
+var SortAsyncInvocationBy_SUBMISSION_TIME = &sSortAsyncInvocationBy_SUBMISSION_TIME
+
+var SortOrder = &sSortOrder
+var SortOrder_ASCENDING = &sSortOrder_ASCENDING
+var SortOrder_DESCENDING = &sSortOrder_DESCENDING
+
+var SpecificToolChoice = &sSpecificToolChoice
+var SpecificToolChoice_name = &sSpecificToolChoice_name
+
+var _StatusCode = &s_StatusCode
+
+var StopReason = &sStopReason
+var StopReason_END_TURN = &sStopReason_END_TURN
+var StopReason_TOOL_USE = &sStopReason_TOOL_USE
+var StopReason_MAX_TOKENS = &sStopReason_MAX_TOKENS
+var StopReason_STOP_SEQUENCE = &sStopReason_STOP_SEQUENCE
+var StopReason_GUARDRAIL_INTERVENED = &sStopReason_GUARDRAIL_INTERVENED
+var StopReason_CONTENT_FILTERED = &sStopReason_CONTENT_FILTERED
+var StopReason_MALFORMED_MODEL_OUTPUT = &sStopReason_MALFORMED_MODEL_OUTPUT
+var StopReason_MALFORMED_TOOL_USE = &sStopReason_MALFORMED_TOOL_USE
+var StopReason_MODEL_CONTEXT_WINDOW_EXCEEDED = &sStopReason_MODEL_CONTEXT_WINDOW_EXCEEDED
+
+var SystemContentBlock = &sSystemContentBlock
+var SystemContentBlock_text = &sSystemContentBlock_text
+var SystemContentBlock_guardContent = &sSystemContentBlock_guardContent
+var SystemContentBlock_cachePoint = &sSystemContentBlock_cachePoint
+
+var _SystemContentBlocks = &s_SystemContentBlocks
+var _SystemContentBlocks_member = &s_SystemContentBlocks_member
+
+var SystemTool = &sSystemTool
+var SystemTool_name = &sSystemTool_name
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TextCharactersGuarded = &s_TextCharactersGuarded
+
+var _TextCharactersTotal = &s_TextCharactersTotal
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Timestamp = &s_Timestamp
+
+var TokenUsage = &sTokenUsage
+var TokenUsage_inputTokens = &sTokenUsage_inputTokens
+var TokenUsage_outputTokens = &sTokenUsage_outputTokens
+var TokenUsage_totalTokens = &sTokenUsage_totalTokens
+var TokenUsage_cacheReadInputTokens = &sTokenUsage_cacheReadInputTokens
+var TokenUsage_cacheWriteInputTokens = &sTokenUsage_cacheWriteInputTokens
+var TokenUsage_cacheDetails = &sTokenUsage_cacheDetails
+
+var Tool = &sTool
+var Tool_toolSpec = &sTool_toolSpec
+var Tool_systemTool = &sTool_systemTool
+var Tool_cachePoint = &sTool_cachePoint
+
+var ToolAdditionBlock = &sToolAdditionBlock
+var ToolAdditionBlock_tool = &sToolAdditionBlock_tool
+
+var ToolChoice = &sToolChoice
+var ToolChoice_auto = &sToolChoice_auto
+var ToolChoice_any = &sToolChoice_any
+var ToolChoice_tool = &sToolChoice_tool
+
+var ToolConfiguration = &sToolConfiguration
+var ToolConfiguration_tools = &sToolConfiguration_tools
+var ToolConfiguration_toolChoice = &sToolConfiguration_toolChoice
+
+var ToolInputSchema = &sToolInputSchema
+var ToolInputSchema_json = &sToolInputSchema_json
+
+var _ToolName = &s_ToolName
+
+var ToolReference = &sToolReference
+var ToolReference_type = &sToolReference_type
+var ToolReference_name = &sToolReference_name
+var ToolReference_serverName = &sToolReference_serverName
+
+var ToolRemovalBlock = &sToolRemovalBlock
+var ToolRemovalBlock_tool = &sToolRemovalBlock_tool
+
+var ToolResultBlock = &sToolResultBlock
+var ToolResultBlock_toolUseId = &sToolResultBlock_toolUseId
+var ToolResultBlock_content = &sToolResultBlock_content
+var ToolResultBlock_status = &sToolResultBlock_status
+var ToolResultBlock_type = &sToolResultBlock_type
+
+var ToolResultBlockDelta = &sToolResultBlockDelta
+var ToolResultBlockDelta_text = &sToolResultBlockDelta_text
+var ToolResultBlockDelta_json = &sToolResultBlockDelta_json
+
+var _ToolResultBlocksDelta = &s_ToolResultBlocksDelta
+var _ToolResultBlocksDelta_member = &s_ToolResultBlocksDelta_member
+
+var ToolResultBlockStart = &sToolResultBlockStart
+var ToolResultBlockStart_toolUseId = &sToolResultBlockStart_toolUseId
+var ToolResultBlockStart_type = &sToolResultBlockStart_type
+var ToolResultBlockStart_status = &sToolResultBlockStart_status
+
+var ToolResultContentBlock = &sToolResultContentBlock
+var ToolResultContentBlock_json = &sToolResultContentBlock_json
+var ToolResultContentBlock_text = &sToolResultContentBlock_text
+var ToolResultContentBlock_image = &sToolResultContentBlock_image
+var ToolResultContentBlock_document = &sToolResultContentBlock_document
+var ToolResultContentBlock_video = &sToolResultContentBlock_video
+var ToolResultContentBlock_searchResult = &sToolResultContentBlock_searchResult
+
+var _ToolResultContentBlocks = &s_ToolResultContentBlocks
+var _ToolResultContentBlocks_member = &s_ToolResultContentBlocks_member
+
+var ToolResultStatus = &sToolResultStatus
+var ToolResultStatus_SUCCESS = &sToolResultStatus_SUCCESS
+var ToolResultStatus_ERROR = &sToolResultStatus_ERROR
+
+var _Tools = &s_Tools
+var _Tools_member = &s_Tools_member
+
+var ToolSpecification = &sToolSpecification
+var ToolSpecification_name = &sToolSpecification_name
+var ToolSpecification_description = &sToolSpecification_description
+var ToolSpecification_inputSchema = &sToolSpecification_inputSchema
+var ToolSpecification_strict = &sToolSpecification_strict
+
+var ToolUseBlock = &sToolUseBlock
+var ToolUseBlock_toolUseId = &sToolUseBlock_toolUseId
+var ToolUseBlock_name = &sToolUseBlock_name
+var ToolUseBlock_input = &sToolUseBlock_input
+var ToolUseBlock_type = &sToolUseBlock_type
+
+var ToolUseBlockDelta = &sToolUseBlockDelta
+var ToolUseBlockDelta_input = &sToolUseBlockDelta_input
+
+var ToolUseBlockStart = &sToolUseBlockStart
+var ToolUseBlockStart_toolUseId = &sToolUseBlockStart_toolUseId
+var ToolUseBlockStart_name = &sToolUseBlockStart_name
+var ToolUseBlockStart_type = &sToolUseBlockStart_type
+
+var _ToolUseId = &s_ToolUseId
+
+var ToolUseType = &sToolUseType
+var ToolUseType_SERVER_TOOL_USE = &sToolUseType_SERVER_TOOL_USE
+
+var Trace = &sTrace
+var Trace_ENABLED = &sTrace_ENABLED
+var Trace_DISABLED = &sTrace_DISABLED
+var Trace_ENABLED_FULL = &sTrace_ENABLED_FULL
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var VideoBlock = &sVideoBlock
+var VideoBlock_format = &sVideoBlock_format
+var VideoBlock_source = &sVideoBlock_source
+
+var VideoFormat = &sVideoFormat
+var VideoFormat_MKV = &sVideoFormat_MKV
+var VideoFormat_MOV = &sVideoFormat_MOV
+var VideoFormat_MP4 = &sVideoFormat_MP4
+var VideoFormat_WEBM = &sVideoFormat_WEBM
+var VideoFormat_FLV = &sVideoFormat_FLV
+var VideoFormat_MPEG = &sVideoFormat_MPEG
+var VideoFormat_MPG = &sVideoFormat_MPG
+var VideoFormat_WMV = &sVideoFormat_WMV
+var VideoFormat_THREE_GP = &sVideoFormat_THREE_GP
+
+var VideoSource = &sVideoSource
+var VideoSource_bytes = &sVideoSource_bytes
+var VideoSource_s3Location = &sVideoSource_s3Location
+
+var WebLocation = &sWebLocation
+var WebLocation_url = &sWebLocation_url
+var WebLocation_domain = &sWebLocation_domain
+
+var ApplyGuardrailRequest = &sApplyGuardrailRequest
+var ApplyGuardrailRequest_guardrailIdentifier = &sApplyGuardrailRequest_guardrailIdentifier
+var ApplyGuardrailRequest_guardrailVersion = &sApplyGuardrailRequest_guardrailVersion
+var ApplyGuardrailRequest_source = &sApplyGuardrailRequest_source
+var ApplyGuardrailRequest_content = &sApplyGuardrailRequest_content
+var ApplyGuardrailRequest_outputScope = &sApplyGuardrailRequest_outputScope
+
+var ApplyGuardrailResponse = &sApplyGuardrailResponse
+var ApplyGuardrailResponse_usage = &sApplyGuardrailResponse_usage
+var ApplyGuardrailResponse_action = &sApplyGuardrailResponse_action
+var ApplyGuardrailResponse_actionReason = &sApplyGuardrailResponse_actionReason
+var ApplyGuardrailResponse_outputs = &sApplyGuardrailResponse_outputs
+var ApplyGuardrailResponse_assessments = &sApplyGuardrailResponse_assessments
+var ApplyGuardrailResponse_guardrailCoverage = &sApplyGuardrailResponse_guardrailCoverage
+
+var ConverseRequest = &sConverseRequest
+var ConverseRequest_modelId = &sConverseRequest_modelId
+var ConverseRequest_messages = &sConverseRequest_messages
+var ConverseRequest_system = &sConverseRequest_system
+var ConverseRequest_inferenceConfig = &sConverseRequest_inferenceConfig
+var ConverseRequest_toolConfig = &sConverseRequest_toolConfig
+var ConverseRequest_guardrailConfig = &sConverseRequest_guardrailConfig
+var ConverseRequest_additionalModelRequestFields = &sConverseRequest_additionalModelRequestFields
+var ConverseRequest_promptVariables = &sConverseRequest_promptVariables
+var ConverseRequest_additionalModelResponseFieldPaths = &sConverseRequest_additionalModelResponseFieldPaths
+var ConverseRequest_requestMetadata = &sConverseRequest_requestMetadata
+var ConverseRequest_performanceConfig = &sConverseRequest_performanceConfig
+var ConverseRequest_serviceTier = &sConverseRequest_serviceTier
+var ConverseRequest_outputConfig = &sConverseRequest_outputConfig
+
+var ConverseResponse = &sConverseResponse
+var ConverseResponse_output = &sConverseResponse_output
+var ConverseResponse_stopReason = &sConverseResponse_stopReason
+var ConverseResponse_usage = &sConverseResponse_usage
+var ConverseResponse_metrics = &sConverseResponse_metrics
+var ConverseResponse_additionalModelResponseFields = &sConverseResponse_additionalModelResponseFields
+var ConverseResponse_trace = &sConverseResponse_trace
+var ConverseResponse_performanceConfig = &sConverseResponse_performanceConfig
+var ConverseResponse_serviceTier = &sConverseResponse_serviceTier
+
+var ConverseStreamRequest = &sConverseStreamRequest
+var ConverseStreamRequest_modelId = &sConverseStreamRequest_modelId
+var ConverseStreamRequest_messages = &sConverseStreamRequest_messages
+var ConverseStreamRequest_system = &sConverseStreamRequest_system
+var ConverseStreamRequest_inferenceConfig = &sConverseStreamRequest_inferenceConfig
+var ConverseStreamRequest_toolConfig = &sConverseStreamRequest_toolConfig
+var ConverseStreamRequest_guardrailConfig = &sConverseStreamRequest_guardrailConfig
+var ConverseStreamRequest_additionalModelRequestFields = &sConverseStreamRequest_additionalModelRequestFields
+var ConverseStreamRequest_promptVariables = &sConverseStreamRequest_promptVariables
+var ConverseStreamRequest_additionalModelResponseFieldPaths = &sConverseStreamRequest_additionalModelResponseFieldPaths
+var ConverseStreamRequest_requestMetadata = &sConverseStreamRequest_requestMetadata
+var ConverseStreamRequest_performanceConfig = &sConverseStreamRequest_performanceConfig
+var ConverseStreamRequest_serviceTier = &sConverseStreamRequest_serviceTier
+var ConverseStreamRequest_outputConfig = &sConverseStreamRequest_outputConfig
+
+var ConverseStreamResponse = &sConverseStreamResponse
+var ConverseStreamResponse_stream = &sConverseStreamResponse_stream
+
+var CountTokensRequest = &sCountTokensRequest
+var CountTokensRequest_modelId = &sCountTokensRequest_modelId
+var CountTokensRequest_input = &sCountTokensRequest_input
+
+var CountTokensResponse = &sCountTokensResponse
+var CountTokensResponse_inputTokens = &sCountTokensResponse_inputTokens
+
+var GetAsyncInvokeRequest = &sGetAsyncInvokeRequest
+var GetAsyncInvokeRequest_invocationArn = &sGetAsyncInvokeRequest_invocationArn
+
+var GetAsyncInvokeResponse = &sGetAsyncInvokeResponse
+var GetAsyncInvokeResponse_invocationArn = &sGetAsyncInvokeResponse_invocationArn
+var GetAsyncInvokeResponse_modelArn = &sGetAsyncInvokeResponse_modelArn
+var GetAsyncInvokeResponse_clientRequestToken = &sGetAsyncInvokeResponse_clientRequestToken
+var GetAsyncInvokeResponse_status = &sGetAsyncInvokeResponse_status
+var GetAsyncInvokeResponse_failureMessage = &sGetAsyncInvokeResponse_failureMessage
+var GetAsyncInvokeResponse_submitTime = &sGetAsyncInvokeResponse_submitTime
+var GetAsyncInvokeResponse_lastModifiedTime = &sGetAsyncInvokeResponse_lastModifiedTime
+var GetAsyncInvokeResponse_endTime = &sGetAsyncInvokeResponse_endTime
+var GetAsyncInvokeResponse_outputDataConfig = &sGetAsyncInvokeResponse_outputDataConfig
+
+var InvokeGuardrailChecksRequest = &sInvokeGuardrailChecksRequest
+var InvokeGuardrailChecksRequest_messages = &sInvokeGuardrailChecksRequest_messages
+var InvokeGuardrailChecksRequest_checks = &sInvokeGuardrailChecksRequest_checks
+
+var InvokeGuardrailChecksResponse = &sInvokeGuardrailChecksResponse
+var InvokeGuardrailChecksResponse_results = &sInvokeGuardrailChecksResponse_results
+var InvokeGuardrailChecksResponse_usage = &sInvokeGuardrailChecksResponse_usage
+
+var InvokeModelRequest = &sInvokeModelRequest
+var InvokeModelRequest_body = &sInvokeModelRequest_body
+var InvokeModelRequest_contentType = &sInvokeModelRequest_contentType
+var InvokeModelRequest_accept = &sInvokeModelRequest_accept
+var InvokeModelRequest_modelId = &sInvokeModelRequest_modelId
+var InvokeModelRequest_trace = &sInvokeModelRequest_trace
+var InvokeModelRequest_guardrailIdentifier = &sInvokeModelRequest_guardrailIdentifier
+var InvokeModelRequest_guardrailVersion = &sInvokeModelRequest_guardrailVersion
+var InvokeModelRequest_performanceConfigLatency = &sInvokeModelRequest_performanceConfigLatency
+var InvokeModelRequest_serviceTier = &sInvokeModelRequest_serviceTier
+var InvokeModelRequest_requestMetadata = &sInvokeModelRequest_requestMetadata
+
+var InvokeModelResponse = &sInvokeModelResponse
+var InvokeModelResponse_body = &sInvokeModelResponse_body
+var InvokeModelResponse_contentType = &sInvokeModelResponse_contentType
+var InvokeModelResponse_performanceConfigLatency = &sInvokeModelResponse_performanceConfigLatency
+var InvokeModelResponse_serviceTier = &sInvokeModelResponse_serviceTier
+
+var InvokeModelWithBidirectionalStreamRequest = &sInvokeModelWithBidirectionalStreamRequest
+var InvokeModelWithBidirectionalStreamRequest_modelId = &sInvokeModelWithBidirectionalStreamRequest_modelId
+var InvokeModelWithBidirectionalStreamRequest_body = &sInvokeModelWithBidirectionalStreamRequest_body
+
+var InvokeModelWithBidirectionalStreamResponse = &sInvokeModelWithBidirectionalStreamResponse
+var InvokeModelWithBidirectionalStreamResponse_body = &sInvokeModelWithBidirectionalStreamResponse_body
+
+var InvokeModelWithResponseStreamRequest = &sInvokeModelWithResponseStreamRequest
+var InvokeModelWithResponseStreamRequest_body = &sInvokeModelWithResponseStreamRequest_body
+var InvokeModelWithResponseStreamRequest_contentType = &sInvokeModelWithResponseStreamRequest_contentType
+var InvokeModelWithResponseStreamRequest_accept = &sInvokeModelWithResponseStreamRequest_accept
+var InvokeModelWithResponseStreamRequest_modelId = &sInvokeModelWithResponseStreamRequest_modelId
+var InvokeModelWithResponseStreamRequest_trace = &sInvokeModelWithResponseStreamRequest_trace
+var InvokeModelWithResponseStreamRequest_guardrailIdentifier = &sInvokeModelWithResponseStreamRequest_guardrailIdentifier
+var InvokeModelWithResponseStreamRequest_guardrailVersion = &sInvokeModelWithResponseStreamRequest_guardrailVersion
+var InvokeModelWithResponseStreamRequest_performanceConfigLatency = &sInvokeModelWithResponseStreamRequest_performanceConfigLatency
+var InvokeModelWithResponseStreamRequest_serviceTier = &sInvokeModelWithResponseStreamRequest_serviceTier
+var InvokeModelWithResponseStreamRequest_requestMetadata = &sInvokeModelWithResponseStreamRequest_requestMetadata
+
+var InvokeModelWithResponseStreamResponse = &sInvokeModelWithResponseStreamResponse
+var InvokeModelWithResponseStreamResponse_body = &sInvokeModelWithResponseStreamResponse_body
+var InvokeModelWithResponseStreamResponse_contentType = &sInvokeModelWithResponseStreamResponse_contentType
+var InvokeModelWithResponseStreamResponse_performanceConfigLatency = &sInvokeModelWithResponseStreamResponse_performanceConfigLatency
+var InvokeModelWithResponseStreamResponse_serviceTier = &sInvokeModelWithResponseStreamResponse_serviceTier
+
+var ListAsyncInvokesRequest = &sListAsyncInvokesRequest
+var ListAsyncInvokesRequest_submitTimeAfter = &sListAsyncInvokesRequest_submitTimeAfter
+var ListAsyncInvokesRequest_submitTimeBefore = &sListAsyncInvokesRequest_submitTimeBefore
+var ListAsyncInvokesRequest_statusEquals = &sListAsyncInvokesRequest_statusEquals
+var ListAsyncInvokesRequest_maxResults = &sListAsyncInvokesRequest_maxResults
+var ListAsyncInvokesRequest_nextToken = &sListAsyncInvokesRequest_nextToken
+var ListAsyncInvokesRequest_sortBy = &sListAsyncInvokesRequest_sortBy
+var ListAsyncInvokesRequest_sortOrder = &sListAsyncInvokesRequest_sortOrder
+
+var ListAsyncInvokesResponse = &sListAsyncInvokesResponse
+var ListAsyncInvokesResponse_nextToken = &sListAsyncInvokesResponse_nextToken
+var ListAsyncInvokesResponse_asyncInvokeSummaries = &sListAsyncInvokesResponse_asyncInvokeSummaries
+
+var StartAsyncInvokeRequest = &sStartAsyncInvokeRequest
+var StartAsyncInvokeRequest_clientRequestToken = &sStartAsyncInvokeRequest_clientRequestToken
+var StartAsyncInvokeRequest_modelId = &sStartAsyncInvokeRequest_modelId
+var StartAsyncInvokeRequest_modelInput = &sStartAsyncInvokeRequest_modelInput
+var StartAsyncInvokeRequest_outputDataConfig = &sStartAsyncInvokeRequest_outputDataConfig
+var StartAsyncInvokeRequest_tags = &sStartAsyncInvokeRequest_tags
+
+var StartAsyncInvokeResponse = &sStartAsyncInvokeResponse
+var StartAsyncInvokeResponse_invocationArn = &sStartAsyncInvokeResponse_invocationArn
+
+var AmazonBedrockFrontendService = &smithy.ServiceSchema{Schema: &s_AmazonBedrockFrontendService, Version: "2023-09-30"}

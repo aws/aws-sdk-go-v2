@@ -4,5841 +4,5525 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchDeleteBuilds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchDeleteBuilds",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetBuildBatches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetBuildBatches",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetBuilds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetBuilds",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetCommandExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetCommandExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetFleets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetFleets",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetProjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetProjects",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetReportGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetReportGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetReports",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetSandboxes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetSandboxes",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateProject",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateReportGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateReportGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWebhook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateWebhook",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBuildBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteBuildBatch",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteProject",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteReportGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteReportGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSourceCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteSourceCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWebhook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteWebhook",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCodeCoverages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DescribeCodeCoverages",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTestCases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DescribeTestCases",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetReportGroupTrend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GetReportGroupTrend",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportSourceCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ImportSourceCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var InvalidateProjectCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "InvalidateProjectCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListBuildBatches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildBatches",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListBuildBatchesForProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildBatchesForProject",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListBuilds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuilds",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListBuildsForProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildsForProject",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCommandExecutionsForSandbox = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListCommandExecutionsForSandbox",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCuratedEnvironmentImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListCuratedEnvironmentImages",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFleets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListFleets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListProjects",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListReportGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListReportsForReportGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportsForReportGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSandboxes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSandboxes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSandboxesForProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSandboxesForProject",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSharedProjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSharedProjects",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSharedReportGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSharedReportGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSourceCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSourceCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RetryBuild = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RetryBuild",
-}, smithy.ShapeTypeOperation, 0)
-
-var RetryBuildBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RetryBuildBatch",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartBuild = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartBuild",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartBuildBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartBuildBatch",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartCommandExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartCommandExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSandbox = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartSandbox",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSandboxConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartSandboxConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopBuild = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopBuild",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopBuildBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopBuildBatch",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopSandbox = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopSandbox",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateFleet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateProject",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProjectVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateProjectVisibility",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateReportGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateReportGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateWebhook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateWebhook",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CodeBuild_20161006 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CodeBuild_20161006",
-}, smithy.ShapeTypeService, 0)
-
-var CodeBuild_20161006 = smithy.NewServiceSchema(_CodeBuild_20161006, "2016-10-06")
-
-var AccountLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "AccountLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var AccountLimitExceededException_message *smithy.Schema
-
-var AccountSuspendedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "AccountSuspendedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var AccountSuspendedException_message *smithy.Schema
-
-var ArtifactNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ArtifactNamespace",
-}, smithy.ShapeTypeEnum, 2)
-var ArtifactNamespace_NONE *smithy.Schema
-
-var ArtifactNamespace_BUILD_ID *smithy.Schema
-
-var ArtifactPackaging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ArtifactPackaging",
-}, smithy.ShapeTypeEnum, 2)
-var ArtifactPackaging_NONE *smithy.Schema
-
-var ArtifactPackaging_ZIP *smithy.Schema
-
-var ArtifactsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ArtifactsType",
-}, smithy.ShapeTypeEnum, 3)
-var ArtifactsType_CODEPIPELINE *smithy.Schema
-
-var ArtifactsType_S3 *smithy.Schema
-
-var ArtifactsType_NO_ARTIFACTS *smithy.Schema
-
-var AuthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "AuthType",
-}, smithy.ShapeTypeEnum, 5)
-var AuthType_OAUTH *smithy.Schema
-
-var AuthType_BASIC_AUTH *smithy.Schema
-
-var AuthType_PERSONAL_ACCESS_TOKEN *smithy.Schema
-
-var AuthType_CODECONNECTIONS *smithy.Schema
-
-var AuthType_SECRETS_MANAGER *smithy.Schema
-
-var AutoRetryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "AutoRetryConfig",
-}, smithy.ShapeTypeStructure, 4)
-var AutoRetryConfig_autoRetryLimit *smithy.Schema
-
-var AutoRetryConfig_autoRetryNumber *smithy.Schema
-
-var AutoRetryConfig_nextAutoRetry *smithy.Schema
-
-var AutoRetryConfig_previousAutoRetry *smithy.Schema
-
-var BatchReportModeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchReportModeType",
-}, smithy.ShapeTypeEnum, 2)
-var BatchReportModeType_REPORT_INDIVIDUAL_BUILDS *smithy.Schema
-
-var BatchReportModeType_REPORT_AGGREGATED_BATCH *smithy.Schema
-
-var BatchRestrictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchRestrictions",
-}, smithy.ShapeTypeStructure, 3)
-var BatchRestrictions_maximumBuildsAllowed *smithy.Schema
-
-var BatchRestrictions_computeTypesAllowed *smithy.Schema
-
-var BatchRestrictions_fleetsAllowed *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BucketOwnerAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BucketOwnerAccess",
-}, smithy.ShapeTypeEnum, 3)
-var BucketOwnerAccess_NONE *smithy.Schema
-
-var BucketOwnerAccess_READ_ONLY *smithy.Schema
-
-var BucketOwnerAccess_FULL *smithy.Schema
-
-var Build = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Build",
-}, smithy.ShapeTypeStructure, 33)
-var Build_id *smithy.Schema
-
-var Build_arn *smithy.Schema
-
-var Build_buildNumber *smithy.Schema
-
-var Build_startTime *smithy.Schema
-
-var Build_endTime *smithy.Schema
-
-var Build_currentPhase *smithy.Schema
-
-var Build_buildStatus *smithy.Schema
-
-var Build_sourceVersion *smithy.Schema
-
-var Build_resolvedSourceVersion *smithy.Schema
-
-var Build_projectName *smithy.Schema
-
-var Build_phases *smithy.Schema
-
-var Build_source *smithy.Schema
-
-var Build_secondarySources *smithy.Schema
-
-var Build_secondarySourceVersions *smithy.Schema
-
-var Build_artifacts *smithy.Schema
-
-var Build_secondaryArtifacts *smithy.Schema
-
-var Build_cache *smithy.Schema
-
-var Build_environment *smithy.Schema
-
-var Build_serviceRole *smithy.Schema
-
-var Build_logs *smithy.Schema
-
-var Build_timeoutInMinutes *smithy.Schema
-
-var Build_queuedTimeoutInMinutes *smithy.Schema
-
-var Build_buildComplete *smithy.Schema
-
-var Build_initiator *smithy.Schema
-
-var Build_vpcConfig *smithy.Schema
-
-var Build_networkInterface *smithy.Schema
-
-var Build_encryptionKey *smithy.Schema
-
-var Build_exportedEnvironmentVariables *smithy.Schema
-
-var Build_reportArns *smithy.Schema
-
-var Build_fileSystemLocations *smithy.Schema
-
-var Build_debugSession *smithy.Schema
-
-var Build_buildBatchArn *smithy.Schema
-
-var Build_autoRetryConfig *smithy.Schema
-
-var BuildArtifacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildArtifacts",
-}, smithy.ShapeTypeStructure, 7)
-var BuildArtifacts_location *smithy.Schema
-
-var BuildArtifacts_sha256sum *smithy.Schema
-
-var BuildArtifacts_md5sum *smithy.Schema
-
-var BuildArtifacts_overrideArtifactName *smithy.Schema
-
-var BuildArtifacts_encryptionDisabled *smithy.Schema
-
-var BuildArtifacts_artifactIdentifier *smithy.Schema
-
-var BuildArtifacts_bucketOwnerAccess *smithy.Schema
-
-var _BuildArtifactsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildArtifactsList",
-}, smithy.ShapeTypeList, 1)
-var _BuildArtifactsList_member *smithy.Schema
-
-var BuildBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildBatch",
-}, smithy.ShapeTypeStructure, 31)
-var BuildBatch_id *smithy.Schema
-
-var BuildBatch_arn *smithy.Schema
-
-var BuildBatch_startTime *smithy.Schema
-
-var BuildBatch_endTime *smithy.Schema
-
-var BuildBatch_currentPhase *smithy.Schema
-
-var BuildBatch_buildBatchStatus *smithy.Schema
-
-var BuildBatch_sourceVersion *smithy.Schema
-
-var BuildBatch_resolvedSourceVersion *smithy.Schema
-
-var BuildBatch_projectName *smithy.Schema
-
-var BuildBatch_phases *smithy.Schema
-
-var BuildBatch_source *smithy.Schema
-
-var BuildBatch_secondarySources *smithy.Schema
-
-var BuildBatch_secondarySourceVersions *smithy.Schema
-
-var BuildBatch_artifacts *smithy.Schema
-
-var BuildBatch_secondaryArtifacts *smithy.Schema
-
-var BuildBatch_cache *smithy.Schema
-
-var BuildBatch_environment *smithy.Schema
-
-var BuildBatch_serviceRole *smithy.Schema
-
-var BuildBatch_logConfig *smithy.Schema
-
-var BuildBatch_buildTimeoutInMinutes *smithy.Schema
-
-var BuildBatch_queuedTimeoutInMinutes *smithy.Schema
-
-var BuildBatch_complete *smithy.Schema
-
-var BuildBatch_initiator *smithy.Schema
-
-var BuildBatch_vpcConfig *smithy.Schema
-
-var BuildBatch_encryptionKey *smithy.Schema
-
-var BuildBatch_buildBatchNumber *smithy.Schema
-
-var BuildBatch_fileSystemLocations *smithy.Schema
-
-var BuildBatch_buildBatchConfig *smithy.Schema
-
-var BuildBatch_buildGroups *smithy.Schema
-
-var BuildBatch_debugSessionEnabled *smithy.Schema
-
-var BuildBatch_reportArns *smithy.Schema
-
-var _BuildBatches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildBatches",
-}, smithy.ShapeTypeList, 1)
-var _BuildBatches_member *smithy.Schema
-
-var BuildBatchFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildBatchFilter",
-}, smithy.ShapeTypeStructure, 1)
-var BuildBatchFilter_status *smithy.Schema
-
-var _BuildBatchIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildBatchIds",
-}, smithy.ShapeTypeList, 1)
-var _BuildBatchIds_member *smithy.Schema
-
-var BuildBatchPhase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildBatchPhase",
-}, smithy.ShapeTypeStructure, 6)
-var BuildBatchPhase_phaseType *smithy.Schema
-
-var BuildBatchPhase_phaseStatus *smithy.Schema
-
-var BuildBatchPhase_startTime *smithy.Schema
-
-var BuildBatchPhase_endTime *smithy.Schema
-
-var BuildBatchPhase_durationInSeconds *smithy.Schema
-
-var BuildBatchPhase_contexts *smithy.Schema
-
-var _BuildBatchPhases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildBatchPhases",
-}, smithy.ShapeTypeList, 1)
-var _BuildBatchPhases_member *smithy.Schema
-
-var BuildBatchPhaseType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildBatchPhaseType",
-}, smithy.ShapeTypeEnum, 7)
-var BuildBatchPhaseType_SUBMITTED *smithy.Schema
-
-var BuildBatchPhaseType_DOWNLOAD_BATCHSPEC *smithy.Schema
-
-var BuildBatchPhaseType_IN_PROGRESS *smithy.Schema
-
-var BuildBatchPhaseType_COMBINE_ARTIFACTS *smithy.Schema
-
-var BuildBatchPhaseType_SUCCEEDED *smithy.Schema
-
-var BuildBatchPhaseType_FAILED *smithy.Schema
-
-var BuildBatchPhaseType_STOPPED *smithy.Schema
-
-var BuildGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildGroup",
-}, smithy.ShapeTypeStructure, 5)
-var BuildGroup_identifier *smithy.Schema
-
-var BuildGroup_dependsOn *smithy.Schema
-
-var BuildGroup_ignoreFailure *smithy.Schema
-
-var BuildGroup_currentBuildSummary *smithy.Schema
-
-var BuildGroup_priorBuildSummaryList *smithy.Schema
-
-var _BuildGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildGroups",
-}, smithy.ShapeTypeList, 1)
-var _BuildGroups_member *smithy.Schema
-
-var _BuildIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildIds",
-}, smithy.ShapeTypeList, 1)
-var _BuildIds_member *smithy.Schema
-
-var BuildNotDeleted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildNotDeleted",
-}, smithy.ShapeTypeStructure, 2)
-var BuildNotDeleted_id *smithy.Schema
-
-var BuildNotDeleted_statusCode *smithy.Schema
-
-var BuildPhase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildPhase",
-}, smithy.ShapeTypeStructure, 6)
-var BuildPhase_phaseType *smithy.Schema
-
-var BuildPhase_phaseStatus *smithy.Schema
-
-var BuildPhase_startTime *smithy.Schema
-
-var BuildPhase_endTime *smithy.Schema
-
-var BuildPhase_durationInSeconds *smithy.Schema
-
-var BuildPhase_contexts *smithy.Schema
-
-var _BuildPhases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildPhases",
-}, smithy.ShapeTypeList, 1)
-var _BuildPhases_member *smithy.Schema
-
-var BuildPhaseType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildPhaseType",
-}, smithy.ShapeTypeEnum, 11)
-var BuildPhaseType_SUBMITTED *smithy.Schema
-
-var BuildPhaseType_QUEUED *smithy.Schema
-
-var BuildPhaseType_PROVISIONING *smithy.Schema
-
-var BuildPhaseType_DOWNLOAD_SOURCE *smithy.Schema
-
-var BuildPhaseType_INSTALL *smithy.Schema
-
-var BuildPhaseType_PRE_BUILD *smithy.Schema
-
-var BuildPhaseType_BUILD *smithy.Schema
-
-var BuildPhaseType_POST_BUILD *smithy.Schema
-
-var BuildPhaseType_UPLOAD_ARTIFACTS *smithy.Schema
-
-var BuildPhaseType_FINALIZING *smithy.Schema
-
-var BuildPhaseType_COMPLETED *smithy.Schema
-
-var _BuildReportArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildReportArns",
-}, smithy.ShapeTypeList, 1)
-var _BuildReportArns_member *smithy.Schema
-
-var _Builds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Builds",
-}, smithy.ShapeTypeList, 1)
-var _Builds_member *smithy.Schema
-
-var _BuildsNotDeleted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildsNotDeleted",
-}, smithy.ShapeTypeList, 1)
-var _BuildsNotDeleted_member *smithy.Schema
-
-var BuildStatusConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildStatusConfig",
-}, smithy.ShapeTypeStructure, 2)
-var BuildStatusConfig_context *smithy.Schema
-
-var BuildStatusConfig_targetUrl *smithy.Schema
-
-var _BuildSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildSummaries",
-}, smithy.ShapeTypeList, 1)
-var _BuildSummaries_member *smithy.Schema
-
-var BuildSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildSummary",
-}, smithy.ShapeTypeStructure, 5)
-var BuildSummary_arn *smithy.Schema
-
-var BuildSummary_requestedOn *smithy.Schema
-
-var BuildSummary_buildStatus *smithy.Schema
-
-var BuildSummary_primaryArtifact *smithy.Schema
-
-var BuildSummary_secondaryArtifacts *smithy.Schema
-
-var _BuildTimeOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BuildTimeOut",
-}, smithy.ShapeTypeInteger, 0)
-
-var CacheMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CacheMode",
-}, smithy.ShapeTypeEnum, 3)
-var CacheMode_LOCAL_DOCKER_LAYER_CACHE *smithy.Schema
-
-var CacheMode_LOCAL_SOURCE_CACHE *smithy.Schema
-
-var CacheMode_LOCAL_CUSTOM_CACHE *smithy.Schema
-
-var CacheType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CacheType",
-}, smithy.ShapeTypeEnum, 3)
-var CacheType_NO_CACHE *smithy.Schema
-
-var CacheType_S3 *smithy.Schema
-
-var CacheType_LOCAL *smithy.Schema
-
-var CloudWatchLogsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CloudWatchLogsConfig",
-}, smithy.ShapeTypeStructure, 3)
-var CloudWatchLogsConfig_status *smithy.Schema
-
-var CloudWatchLogsConfig_groupName *smithy.Schema
-
-var CloudWatchLogsConfig_streamName *smithy.Schema
-
-var CodeCoverage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CodeCoverage",
-}, smithy.ShapeTypeStructure, 10)
-var CodeCoverage_id *smithy.Schema
-
-var CodeCoverage_reportARN *smithy.Schema
-
-var CodeCoverage_filePath *smithy.Schema
-
-var CodeCoverage_lineCoveragePercentage *smithy.Schema
-
-var CodeCoverage_linesCovered *smithy.Schema
-
-var CodeCoverage_linesMissed *smithy.Schema
-
-var CodeCoverage_branchCoveragePercentage *smithy.Schema
-
-var CodeCoverage_branchesCovered *smithy.Schema
-
-var CodeCoverage_branchesMissed *smithy.Schema
-
-var CodeCoverage_expired *smithy.Schema
-
-var CodeCoverageReportSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CodeCoverageReportSummary",
-}, smithy.ShapeTypeStructure, 6)
-var CodeCoverageReportSummary_lineCoveragePercentage *smithy.Schema
-
-var CodeCoverageReportSummary_linesCovered *smithy.Schema
-
-var CodeCoverageReportSummary_linesMissed *smithy.Schema
-
-var CodeCoverageReportSummary_branchCoveragePercentage *smithy.Schema
-
-var CodeCoverageReportSummary_branchesCovered *smithy.Schema
-
-var CodeCoverageReportSummary_branchesMissed *smithy.Schema
-
-var _CodeCoverages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CodeCoverages",
-}, smithy.ShapeTypeList, 1)
-var _CodeCoverages_member *smithy.Schema
-
-var CommandExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CommandExecution",
-}, smithy.ShapeTypeStructure, 13)
-var CommandExecution_id *smithy.Schema
-
-var CommandExecution_sandboxId *smithy.Schema
-
-var CommandExecution_submitTime *smithy.Schema
-
-var CommandExecution_startTime *smithy.Schema
-
-var CommandExecution_endTime *smithy.Schema
-
-var CommandExecution_status *smithy.Schema
-
-var CommandExecution_command *smithy.Schema
-
-var CommandExecution_type *smithy.Schema
-
-var CommandExecution_exitCode *smithy.Schema
-
-var CommandExecution_standardOutputContent *smithy.Schema
-
-var CommandExecution_standardErrContent *smithy.Schema
-
-var CommandExecution_logs *smithy.Schema
-
-var CommandExecution_sandboxArn *smithy.Schema
-
-var _CommandExecutionIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CommandExecutionIds",
-}, smithy.ShapeTypeList, 1)
-var _CommandExecutionIds_member *smithy.Schema
-
-var _CommandExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CommandExecutions",
-}, smithy.ShapeTypeList, 1)
-var _CommandExecutions_member *smithy.Schema
-
-var CommandType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CommandType",
-}, smithy.ShapeTypeEnum, 1)
-var CommandType_SHELL *smithy.Schema
-
-var ComputeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ComputeConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var ComputeConfiguration_vCpu *smithy.Schema
-
-var ComputeConfiguration_memory *smithy.Schema
-
-var ComputeConfiguration_disk *smithy.Schema
-
-var ComputeConfiguration_machineType *smithy.Schema
-
-var ComputeConfiguration_instanceType *smithy.Schema
-
-var ComputeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ComputeType",
-}, smithy.ShapeTypeEnum, 12)
-var ComputeType_BUILD_GENERAL1_SMALL *smithy.Schema
-
-var ComputeType_BUILD_GENERAL1_MEDIUM *smithy.Schema
-
-var ComputeType_BUILD_GENERAL1_LARGE *smithy.Schema
-
-var ComputeType_BUILD_GENERAL1_XLARGE *smithy.Schema
-
-var ComputeType_BUILD_GENERAL1_2XLARGE *smithy.Schema
-
-var ComputeType_BUILD_LAMBDA_1GB *smithy.Schema
-
-var ComputeType_BUILD_LAMBDA_2GB *smithy.Schema
-
-var ComputeType_BUILD_LAMBDA_4GB *smithy.Schema
-
-var ComputeType_BUILD_LAMBDA_8GB *smithy.Schema
-
-var ComputeType_BUILD_LAMBDA_10GB *smithy.Schema
-
-var ComputeType_ATTRIBUTE_BASED_COMPUTE *smithy.Schema
-
-var ComputeType_CUSTOM_INSTANCE_TYPE *smithy.Schema
-
-var _ComputeTypesAllowed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ComputeTypesAllowed",
-}, smithy.ShapeTypeList, 1)
-var _ComputeTypesAllowed_member *smithy.Schema
-
-var CredentialProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CredentialProviderType",
-}, smithy.ShapeTypeEnum, 1)
-var CredentialProviderType_SECRETS_MANAGER *smithy.Schema
-
-var DebugSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DebugSession",
-}, smithy.ShapeTypeStructure, 2)
-var DebugSession_sessionEnabled *smithy.Schema
-
-var DebugSession_sessionTarget *smithy.Schema
-
-var DockerServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DockerServer",
-}, smithy.ShapeTypeStructure, 3)
-var DockerServer_computeType *smithy.Schema
-
-var DockerServer_securityGroupIds *smithy.Schema
-
-var DockerServer_status *smithy.Schema
-
-var DockerServerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DockerServerStatus",
-}, smithy.ShapeTypeStructure, 2)
-var DockerServerStatus_status *smithy.Schema
-
-var DockerServerStatus_message *smithy.Schema
-
-var EnvironmentImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentImage",
-}, smithy.ShapeTypeStructure, 3)
-var EnvironmentImage_name *smithy.Schema
-
-var EnvironmentImage_description *smithy.Schema
-
-var EnvironmentImage_versions *smithy.Schema
-
-var _EnvironmentImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentImages",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentImages_member *smithy.Schema
-
-var EnvironmentLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentLanguage",
-}, smithy.ShapeTypeStructure, 2)
-var EnvironmentLanguage_language *smithy.Schema
-
-var EnvironmentLanguage_images *smithy.Schema
-
-var _EnvironmentLanguages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentLanguages",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentLanguages_member *smithy.Schema
-
-var EnvironmentPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentPlatform",
-}, smithy.ShapeTypeStructure, 2)
-var EnvironmentPlatform_platform *smithy.Schema
-
-var EnvironmentPlatform_languages *smithy.Schema
-
-var _EnvironmentPlatforms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentPlatforms",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentPlatforms_member *smithy.Schema
-
-var EnvironmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentType",
-}, smithy.ShapeTypeEnum, 12)
-var EnvironmentType_WINDOWS_CONTAINER *smithy.Schema
-
-var EnvironmentType_LINUX_CONTAINER *smithy.Schema
-
-var EnvironmentType_LINUX_GPU_CONTAINER *smithy.Schema
-
-var EnvironmentType_ARM_CONTAINER *smithy.Schema
-
-var EnvironmentType_WINDOWS_SERVER_2019_CONTAINER *smithy.Schema
-
-var EnvironmentType_WINDOWS_SERVER_2022_CONTAINER *smithy.Schema
-
-var EnvironmentType_LINUX_LAMBDA_CONTAINER *smithy.Schema
-
-var EnvironmentType_ARM_LAMBDA_CONTAINER *smithy.Schema
-
-var EnvironmentType_LINUX_EC2 *smithy.Schema
-
-var EnvironmentType_ARM_EC2 *smithy.Schema
-
-var EnvironmentType_WINDOWS_EC2 *smithy.Schema
-
-var EnvironmentType_MAC_ARM *smithy.Schema
-
-var EnvironmentVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentVariable",
-}, smithy.ShapeTypeStructure, 3)
-var EnvironmentVariable_name *smithy.Schema
-
-var EnvironmentVariable_value *smithy.Schema
-
-var EnvironmentVariable_type *smithy.Schema
-
-var _EnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentVariables",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentVariables_member *smithy.Schema
-
-var EnvironmentVariableType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "EnvironmentVariableType",
-}, smithy.ShapeTypeEnum, 3)
-var EnvironmentVariableType_PLAINTEXT *smithy.Schema
-
-var EnvironmentVariableType_PARAMETER_STORE *smithy.Schema
-
-var EnvironmentVariableType_SECRETS_MANAGER *smithy.Schema
-
-var ExportedEnvironmentVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ExportedEnvironmentVariable",
-}, smithy.ShapeTypeStructure, 2)
-var ExportedEnvironmentVariable_name *smithy.Schema
-
-var ExportedEnvironmentVariable_value *smithy.Schema
-
-var _ExportedEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ExportedEnvironmentVariables",
-}, smithy.ShapeTypeList, 1)
-var _ExportedEnvironmentVariables_member *smithy.Schema
-
-var FileSystemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FileSystemType",
-}, smithy.ShapeTypeEnum, 1)
-var FileSystemType_EFS *smithy.Schema
-
-var _FilterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FilterGroup",
-}, smithy.ShapeTypeList, 1)
-var _FilterGroup_member *smithy.Schema
-
-var _FilterGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FilterGroups",
-}, smithy.ShapeTypeList, 1)
-var _FilterGroups_member *smithy.Schema
-
-var Fleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Fleet",
-}, smithy.ShapeTypeStructure, 17)
-var Fleet_arn *smithy.Schema
-
-var Fleet_name *smithy.Schema
-
-var Fleet_id *smithy.Schema
-
-var Fleet_created *smithy.Schema
-
-var Fleet_lastModified *smithy.Schema
-
-var Fleet_status *smithy.Schema
-
-var Fleet_baseCapacity *smithy.Schema
-
-var Fleet_environmentType *smithy.Schema
-
-var Fleet_computeType *smithy.Schema
-
-var Fleet_computeConfiguration *smithy.Schema
-
-var Fleet_scalingConfiguration *smithy.Schema
-
-var Fleet_overflowBehavior *smithy.Schema
-
-var Fleet_vpcConfig *smithy.Schema
-
-var Fleet_proxyConfiguration *smithy.Schema
-
-var Fleet_imageId *smithy.Schema
-
-var Fleet_fleetServiceRole *smithy.Schema
-
-var Fleet_tags *smithy.Schema
-
-var _FleetArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetArns",
-}, smithy.ShapeTypeList, 1)
-var _FleetArns_member *smithy.Schema
-
-var _FleetCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var FleetContextCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetContextCode",
-}, smithy.ShapeTypeEnum, 5)
-var FleetContextCode_CREATE_FAILED *smithy.Schema
-
-var FleetContextCode_UPDATE_FAILED *smithy.Schema
-
-var FleetContextCode_ACTION_REQUIRED *smithy.Schema
-
-var FleetContextCode_PENDING_DELETION *smithy.Schema
-
-var FleetContextCode_INSUFFICIENT_CAPACITY *smithy.Schema
-
-var _FleetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetName",
-}, smithy.ShapeTypeString, 0)
-
-var _FleetNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetNames",
-}, smithy.ShapeTypeList, 1)
-var _FleetNames_member *smithy.Schema
-
-var FleetOverflowBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetOverflowBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var FleetOverflowBehavior_QUEUE *smithy.Schema
-
-var FleetOverflowBehavior_ON_DEMAND *smithy.Schema
-
-var FleetProxyRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetProxyRule",
-}, smithy.ShapeTypeStructure, 3)
-var FleetProxyRule_type *smithy.Schema
-
-var FleetProxyRule_effect *smithy.Schema
-
-var FleetProxyRule_entities *smithy.Schema
-
-var FleetProxyRuleBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetProxyRuleBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var FleetProxyRuleBehavior_ALLOW_ALL *smithy.Schema
-
-var FleetProxyRuleBehavior_DENY_ALL *smithy.Schema
-
-var FleetProxyRuleEffectType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetProxyRuleEffectType",
-}, smithy.ShapeTypeEnum, 2)
-var FleetProxyRuleEffectType_ALLOW *smithy.Schema
-
-var FleetProxyRuleEffectType_DENY *smithy.Schema
-
-var _FleetProxyRuleEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetProxyRuleEntities",
-}, smithy.ShapeTypeList, 1)
-var _FleetProxyRuleEntities_member *smithy.Schema
-
-var _FleetProxyRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetProxyRules",
-}, smithy.ShapeTypeList, 1)
-var _FleetProxyRules_member *smithy.Schema
-
-var FleetProxyRuleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetProxyRuleType",
-}, smithy.ShapeTypeEnum, 2)
-var FleetProxyRuleType_DOMAIN *smithy.Schema
-
-var FleetProxyRuleType_IP *smithy.Schema
-
-var _Fleets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Fleets",
-}, smithy.ShapeTypeList, 1)
-var _Fleets_member *smithy.Schema
-
-var _FleetsAllowed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetsAllowed",
-}, smithy.ShapeTypeList, 1)
-var _FleetsAllowed_member *smithy.Schema
-
-var FleetScalingMetricType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetScalingMetricType",
-}, smithy.ShapeTypeEnum, 1)
-var FleetScalingMetricType_FLEET_UTILIZATION_RATE *smithy.Schema
-
-var FleetScalingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetScalingType",
-}, smithy.ShapeTypeEnum, 1)
-var FleetScalingType_TARGET_TRACKING_SCALING *smithy.Schema
-
-var FleetSortByType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetSortByType",
-}, smithy.ShapeTypeEnum, 3)
-var FleetSortByType_NAME *smithy.Schema
-
-var FleetSortByType_CREATED_TIME *smithy.Schema
-
-var FleetSortByType_LAST_MODIFIED_TIME *smithy.Schema
-
-var FleetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetStatus",
-}, smithy.ShapeTypeStructure, 3)
-var FleetStatus_statusCode *smithy.Schema
-
-var FleetStatus_context *smithy.Schema
-
-var FleetStatus_message *smithy.Schema
-
-var FleetStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "FleetStatusCode",
-}, smithy.ShapeTypeEnum, 8)
-var FleetStatusCode_CREATING *smithy.Schema
-
-var FleetStatusCode_UPDATING *smithy.Schema
-
-var FleetStatusCode_ROTATING *smithy.Schema
-
-var FleetStatusCode_PENDING_DELETION *smithy.Schema
-
-var FleetStatusCode_DELETING *smithy.Schema
-
-var FleetStatusCode_CREATE_FAILED *smithy.Schema
-
-var FleetStatusCode_UPDATE_ROLLBACK_FAILED *smithy.Schema
-
-var FleetStatusCode_ACTIVE *smithy.Schema
-
-var _GitCloneDepth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GitCloneDepth",
-}, smithy.ShapeTypeInteger, 0)
-
-var GitSubmodulesConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GitSubmodulesConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GitSubmodulesConfig_fetchSubmodules *smithy.Schema
-
-var HostKernel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "HostKernel",
-}, smithy.ShapeTypeEnum, 3)
-var HostKernel_LINUX_KERNEL_4 *smithy.Schema
-
-var HostKernel_LINUX_KERNEL_6 *smithy.Schema
-
-var HostKernel_LINUX_KERNEL_LATEST *smithy.Schema
-
-var _Identifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Identifiers",
-}, smithy.ShapeTypeList, 1)
-var _Identifiers_member *smithy.Schema
-
-var ImagePullCredentialsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ImagePullCredentialsType",
-}, smithy.ShapeTypeEnum, 2)
-var ImagePullCredentialsType_CODEBUILD *smithy.Schema
-
-var ImagePullCredentialsType_SERVICE_ROLE *smithy.Schema
-
-var _ImageVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ImageVersions",
-}, smithy.ShapeTypeList, 1)
-var _ImageVersions_member *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidInputException_message *smithy.Schema
-
-var _KeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "KeyInput",
-}, smithy.ShapeTypeString, 0)
-
-var LanguageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "LanguageType",
-}, smithy.ShapeTypeEnum, 10)
-var LanguageType_JAVA *smithy.Schema
-
-var LanguageType_PYTHON *smithy.Schema
-
-var LanguageType_NODE_JS *smithy.Schema
-
-var LanguageType_RUBY *smithy.Schema
-
-var LanguageType_GOLANG *smithy.Schema
-
-var LanguageType_DOCKER *smithy.Schema
-
-var LanguageType_ANDROID *smithy.Schema
-
-var LanguageType_DOTNET *smithy.Schema
-
-var LanguageType_BASE *smithy.Schema
-
-var LanguageType_PHP *smithy.Schema
-
-var LogsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "LogsConfig",
-}, smithy.ShapeTypeStructure, 2)
-var LogsConfig_cloudWatchLogs *smithy.Schema
-
-var LogsConfig_s3Logs *smithy.Schema
-
-var LogsConfigStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "LogsConfigStatusType",
-}, smithy.ShapeTypeEnum, 2)
-var LogsConfigStatusType_ENABLED *smithy.Schema
-
-var LogsConfigStatusType_DISABLED *smithy.Schema
-
-var LogsLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "LogsLocation",
-}, smithy.ShapeTypeStructure, 8)
-var LogsLocation_groupName *smithy.Schema
-
-var LogsLocation_streamName *smithy.Schema
-
-var LogsLocation_deepLink *smithy.Schema
-
-var LogsLocation_s3DeepLink *smithy.Schema
-
-var LogsLocation_cloudWatchLogsArn *smithy.Schema
-
-var LogsLocation_s3LogsArn *smithy.Schema
-
-var LogsLocation_cloudWatchLogs *smithy.Schema
-
-var LogsLocation_s3Logs *smithy.Schema
-
-var MachineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "MachineType",
-}, smithy.ShapeTypeEnum, 2)
-var MachineType_GENERAL *smithy.Schema
-
-var MachineType_NVME *smithy.Schema
-
-var NetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "NetworkInterface",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkInterface_subnetId *smithy.Schema
-
-var NetworkInterface_networkInterfaceId *smithy.Schema
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonNegativeInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "NonNegativeInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var OAuthProviderException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "OAuthProviderException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var OAuthProviderException_message *smithy.Schema
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Percentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Percentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var PhaseContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PhaseContext",
-}, smithy.ShapeTypeStructure, 2)
-var PhaseContext_statusCode *smithy.Schema
-
-var PhaseContext_message *smithy.Schema
-
-var _PhaseContexts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PhaseContexts",
-}, smithy.ShapeTypeList, 1)
-var _PhaseContexts_member *smithy.Schema
-
-var PlatformType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PlatformType",
-}, smithy.ShapeTypeEnum, 4)
-var PlatformType_DEBIAN *smithy.Schema
-
-var PlatformType_AMAZON_LINUX *smithy.Schema
-
-var PlatformType_UBUNTU *smithy.Schema
-
-var PlatformType_WINDOWS_SERVER *smithy.Schema
-
-var Project = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Project",
-}, smithy.ShapeTypeStructure, 29)
-var Project_name *smithy.Schema
-
-var Project_arn *smithy.Schema
-
-var Project_description *smithy.Schema
-
-var Project_source *smithy.Schema
-
-var Project_secondarySources *smithy.Schema
-
-var Project_sourceVersion *smithy.Schema
-
-var Project_secondarySourceVersions *smithy.Schema
-
-var Project_artifacts *smithy.Schema
-
-var Project_secondaryArtifacts *smithy.Schema
-
-var Project_cache *smithy.Schema
-
-var Project_environment *smithy.Schema
-
-var Project_serviceRole *smithy.Schema
-
-var Project_timeoutInMinutes *smithy.Schema
-
-var Project_queuedTimeoutInMinutes *smithy.Schema
-
-var Project_encryptionKey *smithy.Schema
-
-var Project_tags *smithy.Schema
-
-var Project_created *smithy.Schema
-
-var Project_lastModified *smithy.Schema
-
-var Project_webhook *smithy.Schema
-
-var Project_vpcConfig *smithy.Schema
-
-var Project_badge *smithy.Schema
-
-var Project_logsConfig *smithy.Schema
-
-var Project_fileSystemLocations *smithy.Schema
-
-var Project_buildBatchConfig *smithy.Schema
-
-var Project_concurrentBuildLimit *smithy.Schema
-
-var Project_projectVisibility *smithy.Schema
-
-var Project_publicProjectAlias *smithy.Schema
-
-var Project_resourceAccessRole *smithy.Schema
-
-var Project_autoRetryLimit *smithy.Schema
-
-var _ProjectArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectArns",
-}, smithy.ShapeTypeList, 1)
-var _ProjectArns_member *smithy.Schema
-
-var ProjectArtifacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectArtifacts",
-}, smithy.ShapeTypeStructure, 10)
-var ProjectArtifacts_type *smithy.Schema
-
-var ProjectArtifacts_location *smithy.Schema
-
-var ProjectArtifacts_path *smithy.Schema
-
-var ProjectArtifacts_namespaceType *smithy.Schema
-
-var ProjectArtifacts_name *smithy.Schema
-
-var ProjectArtifacts_packaging *smithy.Schema
-
-var ProjectArtifacts_overrideArtifactName *smithy.Schema
-
-var ProjectArtifacts_encryptionDisabled *smithy.Schema
-
-var ProjectArtifacts_artifactIdentifier *smithy.Schema
-
-var ProjectArtifacts_bucketOwnerAccess *smithy.Schema
-
-var _ProjectArtifactsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectArtifactsList",
-}, smithy.ShapeTypeList, 1)
-var _ProjectArtifactsList_member *smithy.Schema
-
-var ProjectBadge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectBadge",
-}, smithy.ShapeTypeStructure, 2)
-var ProjectBadge_badgeEnabled *smithy.Schema
-
-var ProjectBadge_badgeRequestUrl *smithy.Schema
-
-var ProjectBuildBatchConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectBuildBatchConfig",
-}, smithy.ShapeTypeStructure, 5)
-var ProjectBuildBatchConfig_serviceRole *smithy.Schema
-
-var ProjectBuildBatchConfig_combineArtifacts *smithy.Schema
-
-var ProjectBuildBatchConfig_restrictions *smithy.Schema
-
-var ProjectBuildBatchConfig_timeoutInMins *smithy.Schema
-
-var ProjectBuildBatchConfig_batchReportMode *smithy.Schema
-
-var ProjectCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectCache",
-}, smithy.ShapeTypeStructure, 4)
-var ProjectCache_type *smithy.Schema
-
-var ProjectCache_location *smithy.Schema
-
-var ProjectCache_modes *smithy.Schema
-
-var ProjectCache_cacheNamespace *smithy.Schema
-
-var _ProjectCacheModes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectCacheModes",
-}, smithy.ShapeTypeList, 1)
-var _ProjectCacheModes_member *smithy.Schema
-
-var _ProjectDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ProjectEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectEnvironment",
-}, smithy.ShapeTypeStructure, 12)
-var ProjectEnvironment_type *smithy.Schema
-
-var ProjectEnvironment_image *smithy.Schema
-
-var ProjectEnvironment_computeType *smithy.Schema
-
-var ProjectEnvironment_computeConfiguration *smithy.Schema
-
-var ProjectEnvironment_fleet *smithy.Schema
-
-var ProjectEnvironment_environmentVariables *smithy.Schema
-
-var ProjectEnvironment_privilegedMode *smithy.Schema
-
-var ProjectEnvironment_certificate *smithy.Schema
-
-var ProjectEnvironment_registryCredential *smithy.Schema
-
-var ProjectEnvironment_imagePullCredentialsType *smithy.Schema
-
-var ProjectEnvironment_dockerServer *smithy.Schema
-
-var ProjectEnvironment_hostKernel *smithy.Schema
-
-var ProjectFileSystemLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectFileSystemLocation",
-}, smithy.ShapeTypeStructure, 5)
-var ProjectFileSystemLocation_type *smithy.Schema
-
-var ProjectFileSystemLocation_location *smithy.Schema
-
-var ProjectFileSystemLocation_mountPoint *smithy.Schema
-
-var ProjectFileSystemLocation_identifier *smithy.Schema
-
-var ProjectFileSystemLocation_mountOptions *smithy.Schema
-
-var _ProjectFileSystemLocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectFileSystemLocations",
-}, smithy.ShapeTypeList, 1)
-var _ProjectFileSystemLocations_member *smithy.Schema
-
-var ProjectFleet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectFleet",
-}, smithy.ShapeTypeStructure, 1)
-var ProjectFleet_fleetArn *smithy.Schema
-
-var _ProjectName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectName",
-}, smithy.ShapeTypeString, 0)
-
-var _ProjectNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectNames",
-}, smithy.ShapeTypeList, 1)
-var _ProjectNames_member *smithy.Schema
-
-var _Projects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Projects",
-}, smithy.ShapeTypeList, 1)
-var _Projects_member *smithy.Schema
-
-var _ProjectSecondarySourceVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectSecondarySourceVersions",
-}, smithy.ShapeTypeList, 1)
-var _ProjectSecondarySourceVersions_member *smithy.Schema
-
-var ProjectSortByType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectSortByType",
-}, smithy.ShapeTypeEnum, 3)
-var ProjectSortByType_NAME *smithy.Schema
-
-var ProjectSortByType_CREATED_TIME *smithy.Schema
-
-var ProjectSortByType_LAST_MODIFIED_TIME *smithy.Schema
-
-var ProjectSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectSource",
-}, smithy.ShapeTypeStructure, 10)
-var ProjectSource_type *smithy.Schema
-
-var ProjectSource_location *smithy.Schema
-
-var ProjectSource_gitCloneDepth *smithy.Schema
-
-var ProjectSource_gitSubmodulesConfig *smithy.Schema
-
-var ProjectSource_buildspec *smithy.Schema
-
-var ProjectSource_auth *smithy.Schema
-
-var ProjectSource_reportBuildStatus *smithy.Schema
-
-var ProjectSource_buildStatusConfig *smithy.Schema
-
-var ProjectSource_insecureSsl *smithy.Schema
-
-var ProjectSource_sourceIdentifier *smithy.Schema
-
-var _ProjectSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectSources",
-}, smithy.ShapeTypeList, 1)
-var _ProjectSources_member *smithy.Schema
-
-var ProjectSourceVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectSourceVersion",
-}, smithy.ShapeTypeStructure, 2)
-var ProjectSourceVersion_sourceIdentifier *smithy.Schema
-
-var ProjectSourceVersion_sourceVersion *smithy.Schema
-
-var ProjectVisibilityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProjectVisibilityType",
-}, smithy.ShapeTypeEnum, 2)
-var ProjectVisibilityType_PUBLIC_READ *smithy.Schema
-
-var ProjectVisibilityType_PRIVATE *smithy.Schema
-
-var ProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ProxyConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyConfiguration_defaultBehavior *smithy.Schema
-
-var ProxyConfiguration_orderedProxyRules *smithy.Schema
-
-var PullRequestBuildApproverRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PullRequestBuildApproverRole",
-}, smithy.ShapeTypeEnum, 14)
-var PullRequestBuildApproverRole_GITHUB_READ *smithy.Schema
-
-var PullRequestBuildApproverRole_GITHUB_TRIAGE *smithy.Schema
-
-var PullRequestBuildApproverRole_GITHUB_WRITE *smithy.Schema
-
-var PullRequestBuildApproverRole_GITHUB_MAINTAIN *smithy.Schema
-
-var PullRequestBuildApproverRole_GITHUB_ADMIN *smithy.Schema
-
-var PullRequestBuildApproverRole_GITLAB_GUEST *smithy.Schema
-
-var PullRequestBuildApproverRole_GITLAB_PLANNER *smithy.Schema
-
-var PullRequestBuildApproverRole_GITLAB_REPORTER *smithy.Schema
-
-var PullRequestBuildApproverRole_GITLAB_DEVELOPER *smithy.Schema
-
-var PullRequestBuildApproverRole_GITLAB_MAINTAINER *smithy.Schema
-
-var PullRequestBuildApproverRole_GITLAB_OWNER *smithy.Schema
-
-var PullRequestBuildApproverRole_BITBUCKET_READ *smithy.Schema
-
-var PullRequestBuildApproverRole_BITBUCKET_WRITE *smithy.Schema
-
-var PullRequestBuildApproverRole_BITBUCKET_ADMIN *smithy.Schema
-
-var _PullRequestBuildApproverRoles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PullRequestBuildApproverRoles",
-}, smithy.ShapeTypeList, 1)
-var _PullRequestBuildApproverRoles_member *smithy.Schema
-
-var PullRequestBuildCommentApproval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PullRequestBuildCommentApproval",
-}, smithy.ShapeTypeEnum, 3)
-var PullRequestBuildCommentApproval_DISABLED *smithy.Schema
-
-var PullRequestBuildCommentApproval_ALL_PULL_REQUESTS *smithy.Schema
-
-var PullRequestBuildCommentApproval_FORK_PULL_REQUESTS *smithy.Schema
-
-var PullRequestBuildPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PullRequestBuildPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var PullRequestBuildPolicy_requiresCommentApproval *smithy.Schema
-
-var PullRequestBuildPolicy_approverRoles *smithy.Schema
-
-var RegistryCredential = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RegistryCredential",
-}, smithy.ShapeTypeStructure, 2)
-var RegistryCredential_credential *smithy.Schema
-
-var RegistryCredential_credentialProvider *smithy.Schema
-
-var Report = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Report",
-}, smithy.ShapeTypeStructure, 12)
-var Report_arn *smithy.Schema
-
-var Report_type *smithy.Schema
-
-var Report_name *smithy.Schema
-
-var Report_reportGroupArn *smithy.Schema
-
-var Report_executionId *smithy.Schema
-
-var Report_status *smithy.Schema
-
-var Report_created *smithy.Schema
-
-var Report_expired *smithy.Schema
-
-var Report_exportConfig *smithy.Schema
-
-var Report_truncated *smithy.Schema
-
-var Report_testSummary *smithy.Schema
-
-var Report_codeCoverageSummary *smithy.Schema
-
-var _ReportArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportArns",
-}, smithy.ShapeTypeList, 1)
-var _ReportArns_member *smithy.Schema
-
-var ReportCodeCoverageSortByType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportCodeCoverageSortByType",
-}, smithy.ShapeTypeEnum, 2)
-var ReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE *smithy.Schema
-
-var ReportCodeCoverageSortByType_FILE_PATH *smithy.Schema
-
-var ReportExportConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportExportConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ReportExportConfig_exportConfigType *smithy.Schema
-
-var ReportExportConfig_s3Destination *smithy.Schema
-
-var ReportExportConfigType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportExportConfigType",
-}, smithy.ShapeTypeEnum, 2)
-var ReportExportConfigType_S3 *smithy.Schema
-
-var ReportExportConfigType_NO_EXPORT *smithy.Schema
-
-var ReportFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ReportFilter_status *smithy.Schema
-
-var ReportGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroup",
-}, smithy.ShapeTypeStructure, 8)
-var ReportGroup_arn *smithy.Schema
-
-var ReportGroup_name *smithy.Schema
-
-var ReportGroup_type *smithy.Schema
-
-var ReportGroup_exportConfig *smithy.Schema
-
-var ReportGroup_created *smithy.Schema
-
-var ReportGroup_lastModified *smithy.Schema
-
-var ReportGroup_tags *smithy.Schema
-
-var ReportGroup_status *smithy.Schema
-
-var _ReportGroupArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroupArns",
-}, smithy.ShapeTypeList, 1)
-var _ReportGroupArns_member *smithy.Schema
-
-var _ReportGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroups",
-}, smithy.ShapeTypeList, 1)
-var _ReportGroups_member *smithy.Schema
-
-var ReportGroupSortByType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroupSortByType",
-}, smithy.ShapeTypeEnum, 3)
-var ReportGroupSortByType_NAME *smithy.Schema
-
-var ReportGroupSortByType_CREATED_TIME *smithy.Schema
-
-var ReportGroupSortByType_LAST_MODIFIED_TIME *smithy.Schema
-
-var ReportGroupStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroupStatusType",
-}, smithy.ShapeTypeEnum, 2)
-var ReportGroupStatusType_ACTIVE *smithy.Schema
-
-var ReportGroupStatusType_DELETING *smithy.Schema
-
-var ReportGroupTrendFieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroupTrendFieldType",
-}, smithy.ShapeTypeEnum, 9)
-var ReportGroupTrendFieldType_PASS_RATE *smithy.Schema
-
-var ReportGroupTrendFieldType_DURATION *smithy.Schema
-
-var ReportGroupTrendFieldType_TOTAL *smithy.Schema
-
-var ReportGroupTrendFieldType_LINE_COVERAGE *smithy.Schema
-
-var ReportGroupTrendFieldType_LINES_COVERED *smithy.Schema
-
-var ReportGroupTrendFieldType_LINES_MISSED *smithy.Schema
-
-var ReportGroupTrendFieldType_BRANCH_COVERAGE *smithy.Schema
-
-var ReportGroupTrendFieldType_BRANCHES_COVERED *smithy.Schema
-
-var ReportGroupTrendFieldType_BRANCHES_MISSED *smithy.Schema
-
-var _ReportGroupTrendRawDataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroupTrendRawDataList",
-}, smithy.ShapeTypeList, 1)
-var _ReportGroupTrendRawDataList_member *smithy.Schema
-
-var ReportGroupTrendStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportGroupTrendStats",
-}, smithy.ShapeTypeStructure, 3)
-var ReportGroupTrendStats_average *smithy.Schema
-
-var ReportGroupTrendStats_max *smithy.Schema
-
-var ReportGroupTrendStats_min *smithy.Schema
-
-var ReportPackagingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportPackagingType",
-}, smithy.ShapeTypeEnum, 2)
-var ReportPackagingType_ZIP *smithy.Schema
-
-var ReportPackagingType_NONE *smithy.Schema
-
-var _Reports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Reports",
-}, smithy.ShapeTypeList, 1)
-var _Reports_member *smithy.Schema
-
-var _ReportStatusCounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportStatusCounts",
-}, smithy.ShapeTypeMap, 2)
-var _ReportStatusCounts_key *smithy.Schema
-
-var _ReportStatusCounts_value *smithy.Schema
-
-var ReportStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportStatusType",
-}, smithy.ShapeTypeEnum, 5)
-var ReportStatusType_GENERATING *smithy.Schema
-
-var ReportStatusType_SUCCEEDED *smithy.Schema
-
-var ReportStatusType_FAILED *smithy.Schema
-
-var ReportStatusType_INCOMPLETE *smithy.Schema
-
-var ReportStatusType_DELETING *smithy.Schema
-
-var ReportType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportType",
-}, smithy.ShapeTypeEnum, 2)
-var ReportType_TEST *smithy.Schema
-
-var ReportType_CODE_COVERAGE *smithy.Schema
-
-var ReportWithRawData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ReportWithRawData",
-}, smithy.ShapeTypeStructure, 2)
-var ReportWithRawData_reportArn *smithy.Schema
-
-var ReportWithRawData_data *smithy.Schema
-
-var ResolvedArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ResolvedArtifact",
-}, smithy.ShapeTypeStructure, 3)
-var ResolvedArtifact_type *smithy.Schema
-
-var ResolvedArtifact_location *smithy.Schema
-
-var ResolvedArtifact_identifier *smithy.Schema
-
-var _ResolvedSecondaryArtifacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ResolvedSecondaryArtifacts",
-}, smithy.ShapeTypeList, 1)
-var _ResolvedSecondaryArtifacts_member *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceAlreadyExistsException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_message *smithy.Schema
-
-var RetryBuildBatchType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RetryBuildBatchType",
-}, smithy.ShapeTypeEnum, 2)
-var RetryBuildBatchType_RETRY_ALL_BUILDS *smithy.Schema
-
-var RetryBuildBatchType_RETRY_FAILED_BUILDS *smithy.Schema
-
-var S3LogsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "S3LogsConfig",
-}, smithy.ShapeTypeStructure, 4)
-var S3LogsConfig_status *smithy.Schema
-
-var S3LogsConfig_location *smithy.Schema
-
-var S3LogsConfig_encryptionDisabled *smithy.Schema
-
-var S3LogsConfig_bucketOwnerAccess *smithy.Schema
-
-var S3ReportExportConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "S3ReportExportConfig",
-}, smithy.ShapeTypeStructure, 6)
-var S3ReportExportConfig_bucket *smithy.Schema
-
-var S3ReportExportConfig_bucketOwner *smithy.Schema
-
-var S3ReportExportConfig_path *smithy.Schema
-
-var S3ReportExportConfig_packaging *smithy.Schema
-
-var S3ReportExportConfig_encryptionKey *smithy.Schema
-
-var S3ReportExportConfig_encryptionDisabled *smithy.Schema
-
-var Sandbox = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Sandbox",
-}, smithy.ShapeTypeStructure, 20)
-var Sandbox_id *smithy.Schema
-
-var Sandbox_arn *smithy.Schema
-
-var Sandbox_projectName *smithy.Schema
-
-var Sandbox_requestTime *smithy.Schema
-
-var Sandbox_startTime *smithy.Schema
-
-var Sandbox_endTime *smithy.Schema
-
-var Sandbox_status *smithy.Schema
-
-var Sandbox_source *smithy.Schema
-
-var Sandbox_sourceVersion *smithy.Schema
-
-var Sandbox_secondarySources *smithy.Schema
-
-var Sandbox_secondarySourceVersions *smithy.Schema
-
-var Sandbox_environment *smithy.Schema
-
-var Sandbox_fileSystemLocations *smithy.Schema
-
-var Sandbox_timeoutInMinutes *smithy.Schema
-
-var Sandbox_queuedTimeoutInMinutes *smithy.Schema
-
-var Sandbox_vpcConfig *smithy.Schema
-
-var Sandbox_logConfig *smithy.Schema
-
-var Sandbox_encryptionKey *smithy.Schema
-
-var Sandbox_serviceRole *smithy.Schema
-
-var Sandbox_currentSession *smithy.Schema
-
-var _Sandboxes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Sandboxes",
-}, smithy.ShapeTypeList, 1)
-var _Sandboxes_member *smithy.Schema
-
-var _SandboxIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SandboxIds",
-}, smithy.ShapeTypeList, 1)
-var _SandboxIds_member *smithy.Schema
-
-var SandboxSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SandboxSession",
-}, smithy.ShapeTypeStructure, 9)
-var SandboxSession_id *smithy.Schema
-
-var SandboxSession_status *smithy.Schema
-
-var SandboxSession_startTime *smithy.Schema
-
-var SandboxSession_endTime *smithy.Schema
-
-var SandboxSession_currentPhase *smithy.Schema
-
-var SandboxSession_phases *smithy.Schema
-
-var SandboxSession_resolvedSourceVersion *smithy.Schema
-
-var SandboxSession_logs *smithy.Schema
-
-var SandboxSession_networkInterface *smithy.Schema
-
-var SandboxSessionPhase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SandboxSessionPhase",
-}, smithy.ShapeTypeStructure, 6)
-var SandboxSessionPhase_phaseType *smithy.Schema
-
-var SandboxSessionPhase_phaseStatus *smithy.Schema
-
-var SandboxSessionPhase_startTime *smithy.Schema
-
-var SandboxSessionPhase_endTime *smithy.Schema
-
-var SandboxSessionPhase_durationInSeconds *smithy.Schema
-
-var SandboxSessionPhase_contexts *smithy.Schema
-
-var _SandboxSessionPhases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SandboxSessionPhases",
-}, smithy.ShapeTypeList, 1)
-var _SandboxSessionPhases_member *smithy.Schema
-
-var ScalingConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ScalingConfigurationInput",
-}, smithy.ShapeTypeStructure, 3)
-var ScalingConfigurationInput_scalingType *smithy.Schema
-
-var ScalingConfigurationInput_targetTrackingScalingConfigs *smithy.Schema
-
-var ScalingConfigurationInput_maxCapacity *smithy.Schema
-
-var ScalingConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ScalingConfigurationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ScalingConfigurationOutput_scalingType *smithy.Schema
-
-var ScalingConfigurationOutput_targetTrackingScalingConfigs *smithy.Schema
-
-var ScalingConfigurationOutput_maxCapacity *smithy.Schema
-
-var ScalingConfigurationOutput_desiredCapacity *smithy.Schema
-
-var ScopeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ScopeConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ScopeConfiguration_name *smithy.Schema
-
-var ScopeConfiguration_domain *smithy.Schema
-
-var ScopeConfiguration_scope *smithy.Schema
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SensitiveNonEmptyString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ServerType",
-}, smithy.ShapeTypeEnum, 5)
-var ServerType_GITHUB *smithy.Schema
-
-var ServerType_BITBUCKET *smithy.Schema
-
-var ServerType_GITHUB_ENTERPRISE *smithy.Schema
-
-var ServerType_GITLAB *smithy.Schema
-
-var ServerType_GITLAB_SELF_MANAGED *smithy.Schema
-
-var SharedResourceSortByType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SharedResourceSortByType",
-}, smithy.ShapeTypeEnum, 2)
-var SharedResourceSortByType_ARN *smithy.Schema
-
-var SharedResourceSortByType_MODIFIED_TIME *smithy.Schema
-
-var SortOrderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SortOrderType",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrderType_ASCENDING *smithy.Schema
-
-var SortOrderType_DESCENDING *smithy.Schema
-
-var SourceAuth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SourceAuth",
-}, smithy.ShapeTypeStructure, 2)
-var SourceAuth_type *smithy.Schema
-
-var SourceAuth_resource *smithy.Schema
-
-var SourceAuthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SourceAuthType",
-}, smithy.ShapeTypeEnum, 3)
-var SourceAuthType_OAUTH *smithy.Schema
-
-var SourceAuthType_CODECONNECTIONS *smithy.Schema
-
-var SourceAuthType_SECRETS_MANAGER *smithy.Schema
-
-var SourceCredentialsInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SourceCredentialsInfo",
-}, smithy.ShapeTypeStructure, 4)
-var SourceCredentialsInfo_arn *smithy.Schema
-
-var SourceCredentialsInfo_serverType *smithy.Schema
-
-var SourceCredentialsInfo_authType *smithy.Schema
-
-var SourceCredentialsInfo_resource *smithy.Schema
-
-var _SourceCredentialsInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SourceCredentialsInfos",
-}, smithy.ShapeTypeList, 1)
-var _SourceCredentialsInfos_member *smithy.Schema
-
-var SourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SourceType",
-}, smithy.ShapeTypeEnum, 9)
-var SourceType_CODECOMMIT *smithy.Schema
-
-var SourceType_CODEPIPELINE *smithy.Schema
-
-var SourceType_GITHUB *smithy.Schema
-
-var SourceType_GITLAB *smithy.Schema
-
-var SourceType_GITLAB_SELF_MANAGED *smithy.Schema
-
-var SourceType_S3 *smithy.Schema
-
-var SourceType_BITBUCKET *smithy.Schema
-
-var SourceType_GITHUB_ENTERPRISE *smithy.Schema
-
-var SourceType_NO_SOURCE *smithy.Schema
-
-var SSMSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "SSMSession",
-}, smithy.ShapeTypeStructure, 3)
-var SSMSession_sessionId *smithy.Schema
-
-var SSMSession_tokenValue *smithy.Schema
-
-var SSMSession_streamUrl *smithy.Schema
-
-var StatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StatusType",
-}, smithy.ShapeTypeEnum, 6)
-var StatusType_SUCCEEDED *smithy.Schema
-
-var StatusType_FAILED *smithy.Schema
-
-var StatusType_FAULT *smithy.Schema
-
-var StatusType_TIMED_OUT *smithy.Schema
-
-var StatusType_IN_PROGRESS *smithy.Schema
-
-var StatusType_STOPPED *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _Subnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Subnets",
-}, smithy.ShapeTypeList, 1)
-var _Subnets_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TargetTrackingScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TargetTrackingScalingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var TargetTrackingScalingConfiguration_metricType *smithy.Schema
-
-var TargetTrackingScalingConfiguration_targetValue *smithy.Schema
-
-var _TargetTrackingScalingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TargetTrackingScalingConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _TargetTrackingScalingConfigurations_member *smithy.Schema
-
-var TestCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TestCase",
-}, smithy.ShapeTypeStructure, 9)
-var TestCase_reportArn *smithy.Schema
-
-var TestCase_testRawDataPath *smithy.Schema
-
-var TestCase_prefix *smithy.Schema
-
-var TestCase_name *smithy.Schema
-
-var TestCase_status *smithy.Schema
-
-var TestCase_durationInNanoSeconds *smithy.Schema
-
-var TestCase_message *smithy.Schema
-
-var TestCase_expired *smithy.Schema
-
-var TestCase_testSuiteName *smithy.Schema
-
-var TestCaseFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TestCaseFilter",
-}, smithy.ShapeTypeStructure, 2)
-var TestCaseFilter_status *smithy.Schema
-
-var TestCaseFilter_keyword *smithy.Schema
-
-var _TestCases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TestCases",
-}, smithy.ShapeTypeList, 1)
-var _TestCases_member *smithy.Schema
-
-var TestReportSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TestReportSummary",
-}, smithy.ShapeTypeStructure, 3)
-var TestReportSummary_total *smithy.Schema
-
-var TestReportSummary_statusCounts *smithy.Schema
-
-var TestReportSummary_durationInNanoSeconds *smithy.Schema
-
-var _TimeOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "TimeOut",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ValueInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ValueInput",
-}, smithy.ShapeTypeString, 0)
-
-var VpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "VpcConfig",
-}, smithy.ShapeTypeStructure, 3)
-var VpcConfig_vpcId *smithy.Schema
-
-var VpcConfig_subnets *smithy.Schema
-
-var VpcConfig_securityGroupIds *smithy.Schema
-
-var Webhook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "Webhook",
-}, smithy.ShapeTypeStructure, 12)
-var Webhook_url *smithy.Schema
-
-var Webhook_payloadUrl *smithy.Schema
-
-var Webhook_secret *smithy.Schema
-
-var Webhook_branchFilter *smithy.Schema
-
-var Webhook_filterGroups *smithy.Schema
-
-var Webhook_buildType *smithy.Schema
-
-var Webhook_manualCreation *smithy.Schema
-
-var Webhook_lastModifiedSecret *smithy.Schema
-
-var Webhook_scopeConfiguration *smithy.Schema
-
-var Webhook_status *smithy.Schema
-
-var Webhook_statusMessage *smithy.Schema
-
-var Webhook_pullRequestBuildPolicy *smithy.Schema
-
-var WebhookBuildType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WebhookBuildType",
-}, smithy.ShapeTypeEnum, 3)
-var WebhookBuildType_BUILD *smithy.Schema
-
-var WebhookBuildType_BUILD_BATCH *smithy.Schema
-
-var WebhookBuildType_RUNNER_BUILDKITE_BUILD *smithy.Schema
-
-var WebhookFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WebhookFilter",
-}, smithy.ShapeTypeStructure, 3)
-var WebhookFilter_type *smithy.Schema
-
-var WebhookFilter_pattern *smithy.Schema
-
-var WebhookFilter_excludeMatchedPattern *smithy.Schema
-
-var WebhookFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WebhookFilterType",
-}, smithy.ShapeTypeEnum, 11)
-var WebhookFilterType_EVENT *smithy.Schema
-
-var WebhookFilterType_BASE_REF *smithy.Schema
-
-var WebhookFilterType_HEAD_REF *smithy.Schema
-
-var WebhookFilterType_ACTOR_ACCOUNT_ID *smithy.Schema
-
-var WebhookFilterType_FILE_PATH *smithy.Schema
-
-var WebhookFilterType_COMMIT_MESSAGE *smithy.Schema
-
-var WebhookFilterType_WORKFLOW_NAME *smithy.Schema
-
-var WebhookFilterType_TAG_NAME *smithy.Schema
-
-var WebhookFilterType_RELEASE_NAME *smithy.Schema
-
-var WebhookFilterType_REPOSITORY_NAME *smithy.Schema
-
-var WebhookFilterType_ORGANIZATION_NAME *smithy.Schema
-
-var WebhookScopeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WebhookScopeType",
-}, smithy.ShapeTypeEnum, 3)
-var WebhookScopeType_GITHUB_ORGANIZATION *smithy.Schema
-
-var WebhookScopeType_GITHUB_GLOBAL *smithy.Schema
-
-var WebhookScopeType_GITLAB_GROUP *smithy.Schema
-
-var WebhookStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WebhookStatus",
-}, smithy.ShapeTypeEnum, 4)
-var WebhookStatus_CREATING *smithy.Schema
-
-var WebhookStatus_CREATE_FAILED *smithy.Schema
-
-var WebhookStatus_ACTIVE *smithy.Schema
-
-var WebhookStatus_DELETING *smithy.Schema
-
-var _WrapperBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WrapperBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _WrapperDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WrapperDouble",
-}, smithy.ShapeTypeDouble, 0)
-
-var _WrapperInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WrapperInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var _WrapperLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "WrapperLong",
-}, smithy.ShapeTypeLong, 0)
-
-var BatchDeleteBuildsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchDeleteBuildsInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteBuildsInput_ids *smithy.Schema
-
-var BatchDeleteBuildsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchDeleteBuildsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteBuildsOutput_buildsDeleted *smithy.Schema
-
-var BatchDeleteBuildsOutput_buildsNotDeleted *smithy.Schema
-
-var BatchGetBuildBatchesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetBuildBatchesInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetBuildBatchesInput_ids *smithy.Schema
-
-var BatchGetBuildBatchesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetBuildBatchesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetBuildBatchesOutput_buildBatches *smithy.Schema
-
-var BatchGetBuildBatchesOutput_buildBatchesNotFound *smithy.Schema
-
-var BatchGetBuildsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetBuildsInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetBuildsInput_ids *smithy.Schema
-
-var BatchGetBuildsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetBuildsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetBuildsOutput_builds *smithy.Schema
-
-var BatchGetBuildsOutput_buildsNotFound *smithy.Schema
-
-var BatchGetCommandExecutionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetCommandExecutionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetCommandExecutionsInput_sandboxId *smithy.Schema
-
-var BatchGetCommandExecutionsInput_commandExecutionIds *smithy.Schema
-
-var BatchGetCommandExecutionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetCommandExecutionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetCommandExecutionsOutput_commandExecutions *smithy.Schema
-
-var BatchGetCommandExecutionsOutput_commandExecutionsNotFound *smithy.Schema
-
-var BatchGetFleetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetFleetsInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetFleetsInput_names *smithy.Schema
-
-var BatchGetFleetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetFleetsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetFleetsOutput_fleets *smithy.Schema
-
-var BatchGetFleetsOutput_fleetsNotFound *smithy.Schema
-
-var BatchGetProjectsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetProjectsInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetProjectsInput_names *smithy.Schema
-
-var BatchGetProjectsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetProjectsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetProjectsOutput_projects *smithy.Schema
-
-var BatchGetProjectsOutput_projectsNotFound *smithy.Schema
-
-var BatchGetReportGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetReportGroupsInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetReportGroupsInput_reportGroupArns *smithy.Schema
-
-var BatchGetReportGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetReportGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetReportGroupsOutput_reportGroups *smithy.Schema
-
-var BatchGetReportGroupsOutput_reportGroupsNotFound *smithy.Schema
-
-var BatchGetReportsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetReportsInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetReportsInput_reportArns *smithy.Schema
-
-var BatchGetReportsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetReportsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetReportsOutput_reports *smithy.Schema
-
-var BatchGetReportsOutput_reportsNotFound *smithy.Schema
-
-var BatchGetSandboxesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetSandboxesInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetSandboxesInput_ids *smithy.Schema
-
-var BatchGetSandboxesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "BatchGetSandboxesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetSandboxesOutput_sandboxes *smithy.Schema
-
-var BatchGetSandboxesOutput_sandboxesNotFound *smithy.Schema
-
-var CreateFleetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateFleetInput",
-}, smithy.ShapeTypeStructure, 12)
-var CreateFleetInput_name *smithy.Schema
-
-var CreateFleetInput_baseCapacity *smithy.Schema
-
-var CreateFleetInput_environmentType *smithy.Schema
-
-var CreateFleetInput_computeType *smithy.Schema
-
-var CreateFleetInput_computeConfiguration *smithy.Schema
-
-var CreateFleetInput_scalingConfiguration *smithy.Schema
-
-var CreateFleetInput_overflowBehavior *smithy.Schema
-
-var CreateFleetInput_vpcConfig *smithy.Schema
-
-var CreateFleetInput_proxyConfiguration *smithy.Schema
-
-var CreateFleetInput_imageId *smithy.Schema
-
-var CreateFleetInput_fleetServiceRole *smithy.Schema
-
-var CreateFleetInput_tags *smithy.Schema
-
-var CreateFleetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateFleetOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFleetOutput_fleet *smithy.Schema
-
-var CreateProjectInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateProjectInput",
-}, smithy.ShapeTypeStructure, 22)
-var CreateProjectInput_name *smithy.Schema
-
-var CreateProjectInput_description *smithy.Schema
-
-var CreateProjectInput_source *smithy.Schema
-
-var CreateProjectInput_secondarySources *smithy.Schema
-
-var CreateProjectInput_sourceVersion *smithy.Schema
-
-var CreateProjectInput_secondarySourceVersions *smithy.Schema
-
-var CreateProjectInput_artifacts *smithy.Schema
-
-var CreateProjectInput_secondaryArtifacts *smithy.Schema
-
-var CreateProjectInput_cache *smithy.Schema
-
-var CreateProjectInput_environment *smithy.Schema
-
-var CreateProjectInput_serviceRole *smithy.Schema
-
-var CreateProjectInput_timeoutInMinutes *smithy.Schema
-
-var CreateProjectInput_queuedTimeoutInMinutes *smithy.Schema
-
-var CreateProjectInput_encryptionKey *smithy.Schema
-
-var CreateProjectInput_tags *smithy.Schema
-
-var CreateProjectInput_vpcConfig *smithy.Schema
-
-var CreateProjectInput_badgeEnabled *smithy.Schema
-
-var CreateProjectInput_logsConfig *smithy.Schema
-
-var CreateProjectInput_fileSystemLocations *smithy.Schema
-
-var CreateProjectInput_buildBatchConfig *smithy.Schema
-
-var CreateProjectInput_concurrentBuildLimit *smithy.Schema
-
-var CreateProjectInput_autoRetryLimit *smithy.Schema
-
-var CreateProjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateProjectOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProjectOutput_project *smithy.Schema
-
-var CreateReportGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateReportGroupInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateReportGroupInput_name *smithy.Schema
-
-var CreateReportGroupInput_type *smithy.Schema
-
-var CreateReportGroupInput_exportConfig *smithy.Schema
-
-var CreateReportGroupInput_tags *smithy.Schema
-
-var CreateReportGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateReportGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateReportGroupOutput_reportGroup *smithy.Schema
-
-var CreateWebhookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateWebhookInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateWebhookInput_projectName *smithy.Schema
-
-var CreateWebhookInput_branchFilter *smithy.Schema
-
-var CreateWebhookInput_filterGroups *smithy.Schema
-
-var CreateWebhookInput_buildType *smithy.Schema
-
-var CreateWebhookInput_manualCreation *smithy.Schema
-
-var CreateWebhookInput_scopeConfiguration *smithy.Schema
-
-var CreateWebhookInput_pullRequestBuildPolicy *smithy.Schema
-
-var CreateWebhookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "CreateWebhookOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWebhookOutput_webhook *smithy.Schema
-
-var DeleteBuildBatchInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteBuildBatchInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBuildBatchInput_id *smithy.Schema
-
-var DeleteBuildBatchOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteBuildBatchOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteBuildBatchOutput_statusCode *smithy.Schema
-
-var DeleteBuildBatchOutput_buildsDeleted *smithy.Schema
-
-var DeleteBuildBatchOutput_buildsNotDeleted *smithy.Schema
-
-var DeleteFleetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteFleetInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFleetInput_arn *smithy.Schema
-
-var DeleteFleetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteFleetOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteProjectInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteProjectInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteProjectInput_name *smithy.Schema
-
-var DeleteProjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteProjectOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteReportGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteReportGroupInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteReportGroupInput_arn *smithy.Schema
-
-var DeleteReportGroupInput_deleteReports *smithy.Schema
-
-var DeleteReportGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteReportGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteReportInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReportInput_arn *smithy.Schema
-
-var DeleteReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteReportOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyInput_resourceArn *smithy.Schema
-
-var DeleteResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSourceCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteSourceCredentialsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSourceCredentialsInput_arn *smithy.Schema
-
-var DeleteSourceCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteSourceCredentialsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSourceCredentialsOutput_arn *smithy.Schema
-
-var DeleteWebhookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteWebhookInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWebhookInput_projectName *smithy.Schema
-
-var DeleteWebhookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DeleteWebhookOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeCodeCoveragesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DescribeCodeCoveragesInput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeCodeCoveragesInput_reportArn *smithy.Schema
-
-var DescribeCodeCoveragesInput_nextToken *smithy.Schema
-
-var DescribeCodeCoveragesInput_maxResults *smithy.Schema
-
-var DescribeCodeCoveragesInput_sortOrder *smithy.Schema
-
-var DescribeCodeCoveragesInput_sortBy *smithy.Schema
-
-var DescribeCodeCoveragesInput_minLineCoveragePercentage *smithy.Schema
-
-var DescribeCodeCoveragesInput_maxLineCoveragePercentage *smithy.Schema
-
-var DescribeCodeCoveragesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DescribeCodeCoveragesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeCodeCoveragesOutput_nextToken *smithy.Schema
-
-var DescribeCodeCoveragesOutput_codeCoverages *smithy.Schema
-
-var DescribeTestCasesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DescribeTestCasesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTestCasesInput_reportArn *smithy.Schema
-
-var DescribeTestCasesInput_nextToken *smithy.Schema
-
-var DescribeTestCasesInput_maxResults *smithy.Schema
-
-var DescribeTestCasesInput_filter *smithy.Schema
-
-var DescribeTestCasesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "DescribeTestCasesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTestCasesOutput_nextToken *smithy.Schema
-
-var DescribeTestCasesOutput_testCases *smithy.Schema
-
-var GetReportGroupTrendInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GetReportGroupTrendInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetReportGroupTrendInput_reportGroupArn *smithy.Schema
-
-var GetReportGroupTrendInput_numOfReports *smithy.Schema
-
-var GetReportGroupTrendInput_trendField *smithy.Schema
-
-var GetReportGroupTrendOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GetReportGroupTrendOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetReportGroupTrendOutput_stats *smithy.Schema
-
-var GetReportGroupTrendOutput_rawData *smithy.Schema
-
-var GetResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GetResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyInput_resourceArn *smithy.Schema
-
-var GetResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "GetResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyOutput_policy *smithy.Schema
-
-var ImportSourceCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ImportSourceCredentialsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ImportSourceCredentialsInput_username *smithy.Schema
-
-var ImportSourceCredentialsInput_token *smithy.Schema
-
-var ImportSourceCredentialsInput_serverType *smithy.Schema
-
-var ImportSourceCredentialsInput_authType *smithy.Schema
-
-var ImportSourceCredentialsInput_shouldOverwrite *smithy.Schema
-
-var ImportSourceCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ImportSourceCredentialsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ImportSourceCredentialsOutput_arn *smithy.Schema
-
-var InvalidateProjectCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "InvalidateProjectCacheInput",
-}, smithy.ShapeTypeStructure, 1)
-var InvalidateProjectCacheInput_projectName *smithy.Schema
-
-var InvalidateProjectCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "InvalidateProjectCacheOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListBuildBatchesForProjectInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildBatchesForProjectInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListBuildBatchesForProjectInput_projectName *smithy.Schema
-
-var ListBuildBatchesForProjectInput_filter *smithy.Schema
-
-var ListBuildBatchesForProjectInput_maxResults *smithy.Schema
-
-var ListBuildBatchesForProjectInput_sortOrder *smithy.Schema
-
-var ListBuildBatchesForProjectInput_nextToken *smithy.Schema
-
-var ListBuildBatchesForProjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildBatchesForProjectOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBuildBatchesForProjectOutput_ids *smithy.Schema
-
-var ListBuildBatchesForProjectOutput_nextToken *smithy.Schema
-
-var ListBuildBatchesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildBatchesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListBuildBatchesInput_filter *smithy.Schema
-
-var ListBuildBatchesInput_maxResults *smithy.Schema
-
-var ListBuildBatchesInput_sortOrder *smithy.Schema
-
-var ListBuildBatchesInput_nextToken *smithy.Schema
-
-var ListBuildBatchesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildBatchesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBuildBatchesOutput_ids *smithy.Schema
-
-var ListBuildBatchesOutput_nextToken *smithy.Schema
-
-var ListBuildsForProjectInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildsForProjectInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListBuildsForProjectInput_projectName *smithy.Schema
-
-var ListBuildsForProjectInput_sortOrder *smithy.Schema
-
-var ListBuildsForProjectInput_nextToken *smithy.Schema
-
-var ListBuildsForProjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildsForProjectOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBuildsForProjectOutput_ids *smithy.Schema
-
-var ListBuildsForProjectOutput_nextToken *smithy.Schema
-
-var ListBuildsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBuildsInput_sortOrder *smithy.Schema
-
-var ListBuildsInput_nextToken *smithy.Schema
-
-var ListBuildsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListBuildsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBuildsOutput_ids *smithy.Schema
-
-var ListBuildsOutput_nextToken *smithy.Schema
-
-var ListCommandExecutionsForSandboxInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListCommandExecutionsForSandboxInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListCommandExecutionsForSandboxInput_sandboxId *smithy.Schema
-
-var ListCommandExecutionsForSandboxInput_maxResults *smithy.Schema
-
-var ListCommandExecutionsForSandboxInput_sortOrder *smithy.Schema
-
-var ListCommandExecutionsForSandboxInput_nextToken *smithy.Schema
-
-var ListCommandExecutionsForSandboxOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListCommandExecutionsForSandboxOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCommandExecutionsForSandboxOutput_commandExecutions *smithy.Schema
-
-var ListCommandExecutionsForSandboxOutput_nextToken *smithy.Schema
-
-var ListCuratedEnvironmentImagesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListCuratedEnvironmentImagesInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListCuratedEnvironmentImagesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListCuratedEnvironmentImagesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListCuratedEnvironmentImagesOutput_platforms *smithy.Schema
-
-var ListFleetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListFleetsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListFleetsInput_nextToken *smithy.Schema
-
-var ListFleetsInput_maxResults *smithy.Schema
-
-var ListFleetsInput_sortOrder *smithy.Schema
-
-var ListFleetsInput_sortBy *smithy.Schema
-
-var ListFleetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListFleetsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFleetsOutput_nextToken *smithy.Schema
-
-var ListFleetsOutput_fleets *smithy.Schema
-
-var ListProjectsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListProjectsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListProjectsInput_sortBy *smithy.Schema
-
-var ListProjectsInput_sortOrder *smithy.Schema
-
-var ListProjectsInput_nextToken *smithy.Schema
-
-var ListProjectsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListProjectsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListProjectsOutput_nextToken *smithy.Schema
-
-var ListProjectsOutput_projects *smithy.Schema
-
-var ListReportGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportGroupsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListReportGroupsInput_sortOrder *smithy.Schema
-
-var ListReportGroupsInput_sortBy *smithy.Schema
-
-var ListReportGroupsInput_nextToken *smithy.Schema
-
-var ListReportGroupsInput_maxResults *smithy.Schema
-
-var ListReportGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListReportGroupsOutput_nextToken *smithy.Schema
-
-var ListReportGroupsOutput_reportGroups *smithy.Schema
-
-var ListReportsForReportGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportsForReportGroupInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListReportsForReportGroupInput_reportGroupArn *smithy.Schema
-
-var ListReportsForReportGroupInput_nextToken *smithy.Schema
-
-var ListReportsForReportGroupInput_sortOrder *smithy.Schema
-
-var ListReportsForReportGroupInput_maxResults *smithy.Schema
-
-var ListReportsForReportGroupInput_filter *smithy.Schema
-
-var ListReportsForReportGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportsForReportGroupOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListReportsForReportGroupOutput_nextToken *smithy.Schema
-
-var ListReportsForReportGroupOutput_reports *smithy.Schema
-
-var ListReportsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListReportsInput_sortOrder *smithy.Schema
-
-var ListReportsInput_nextToken *smithy.Schema
-
-var ListReportsInput_maxResults *smithy.Schema
-
-var ListReportsInput_filter *smithy.Schema
-
-var ListReportsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListReportsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListReportsOutput_nextToken *smithy.Schema
-
-var ListReportsOutput_reports *smithy.Schema
-
-var ListSandboxesForProjectInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSandboxesForProjectInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListSandboxesForProjectInput_projectName *smithy.Schema
-
-var ListSandboxesForProjectInput_maxResults *smithy.Schema
-
-var ListSandboxesForProjectInput_sortOrder *smithy.Schema
-
-var ListSandboxesForProjectInput_nextToken *smithy.Schema
-
-var ListSandboxesForProjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSandboxesForProjectOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSandboxesForProjectOutput_ids *smithy.Schema
-
-var ListSandboxesForProjectOutput_nextToken *smithy.Schema
-
-var ListSandboxesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSandboxesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSandboxesInput_maxResults *smithy.Schema
-
-var ListSandboxesInput_sortOrder *smithy.Schema
-
-var ListSandboxesInput_nextToken *smithy.Schema
-
-var ListSandboxesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSandboxesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSandboxesOutput_ids *smithy.Schema
-
-var ListSandboxesOutput_nextToken *smithy.Schema
-
-var ListSharedProjectsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSharedProjectsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListSharedProjectsInput_sortBy *smithy.Schema
-
-var ListSharedProjectsInput_sortOrder *smithy.Schema
-
-var ListSharedProjectsInput_maxResults *smithy.Schema
-
-var ListSharedProjectsInput_nextToken *smithy.Schema
-
-var ListSharedProjectsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSharedProjectsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSharedProjectsOutput_nextToken *smithy.Schema
-
-var ListSharedProjectsOutput_projects *smithy.Schema
-
-var ListSharedReportGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSharedReportGroupsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListSharedReportGroupsInput_sortOrder *smithy.Schema
-
-var ListSharedReportGroupsInput_sortBy *smithy.Schema
-
-var ListSharedReportGroupsInput_nextToken *smithy.Schema
-
-var ListSharedReportGroupsInput_maxResults *smithy.Schema
-
-var ListSharedReportGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSharedReportGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSharedReportGroupsOutput_nextToken *smithy.Schema
-
-var ListSharedReportGroupsOutput_reportGroups *smithy.Schema
-
-var ListSourceCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSourceCredentialsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListSourceCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "ListSourceCredentialsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListSourceCredentialsOutput_sourceCredentialsInfos *smithy.Schema
-
-var PutResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PutResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyInput_policy *smithy.Schema
-
-var PutResourcePolicyInput_resourceArn *smithy.Schema
-
-var PutResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "PutResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutResourcePolicyOutput_resourceArn *smithy.Schema
-
-var RetryBuildBatchInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RetryBuildBatchInput",
-}, smithy.ShapeTypeStructure, 3)
-var RetryBuildBatchInput_id *smithy.Schema
-
-var RetryBuildBatchInput_idempotencyToken *smithy.Schema
-
-var RetryBuildBatchInput_retryType *smithy.Schema
-
-var RetryBuildBatchOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RetryBuildBatchOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RetryBuildBatchOutput_buildBatch *smithy.Schema
-
-var RetryBuildInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RetryBuildInput",
-}, smithy.ShapeTypeStructure, 2)
-var RetryBuildInput_id *smithy.Schema
-
-var RetryBuildInput_idempotencyToken *smithy.Schema
-
-var RetryBuildOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "RetryBuildOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RetryBuildOutput_build *smithy.Schema
-
-var StartBuildBatchInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartBuildBatchInput",
-}, smithy.ShapeTypeStructure, 31)
-var StartBuildBatchInput_projectName *smithy.Schema
-
-var StartBuildBatchInput_secondarySourcesOverride *smithy.Schema
-
-var StartBuildBatchInput_secondarySourcesVersionOverride *smithy.Schema
-
-var StartBuildBatchInput_sourceVersion *smithy.Schema
-
-var StartBuildBatchInput_artifactsOverride *smithy.Schema
-
-var StartBuildBatchInput_secondaryArtifactsOverride *smithy.Schema
-
-var StartBuildBatchInput_environmentVariablesOverride *smithy.Schema
-
-var StartBuildBatchInput_sourceTypeOverride *smithy.Schema
-
-var StartBuildBatchInput_sourceLocationOverride *smithy.Schema
-
-var StartBuildBatchInput_sourceAuthOverride *smithy.Schema
-
-var StartBuildBatchInput_gitCloneDepthOverride *smithy.Schema
-
-var StartBuildBatchInput_gitSubmodulesConfigOverride *smithy.Schema
-
-var StartBuildBatchInput_buildspecOverride *smithy.Schema
-
-var StartBuildBatchInput_insecureSslOverride *smithy.Schema
-
-var StartBuildBatchInput_reportBuildBatchStatusOverride *smithy.Schema
-
-var StartBuildBatchInput_environmentTypeOverride *smithy.Schema
-
-var StartBuildBatchInput_imageOverride *smithy.Schema
-
-var StartBuildBatchInput_computeTypeOverride *smithy.Schema
-
-var StartBuildBatchInput_certificateOverride *smithy.Schema
-
-var StartBuildBatchInput_cacheOverride *smithy.Schema
-
-var StartBuildBatchInput_serviceRoleOverride *smithy.Schema
-
-var StartBuildBatchInput_privilegedModeOverride *smithy.Schema
-
-var StartBuildBatchInput_buildTimeoutInMinutesOverride *smithy.Schema
-
-var StartBuildBatchInput_queuedTimeoutInMinutesOverride *smithy.Schema
-
-var StartBuildBatchInput_encryptionKeyOverride *smithy.Schema
-
-var StartBuildBatchInput_idempotencyToken *smithy.Schema
-
-var StartBuildBatchInput_logsConfigOverride *smithy.Schema
-
-var StartBuildBatchInput_registryCredentialOverride *smithy.Schema
-
-var StartBuildBatchInput_imagePullCredentialsTypeOverride *smithy.Schema
-
-var StartBuildBatchInput_buildBatchConfigOverride *smithy.Schema
-
-var StartBuildBatchInput_debugSessionEnabled *smithy.Schema
-
-var StartBuildBatchOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartBuildBatchOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartBuildBatchOutput_buildBatch *smithy.Schema
-
-var StartBuildInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartBuildInput",
-}, smithy.ShapeTypeStructure, 34)
-var StartBuildInput_projectName *smithy.Schema
-
-var StartBuildInput_secondarySourcesOverride *smithy.Schema
-
-var StartBuildInput_secondarySourcesVersionOverride *smithy.Schema
-
-var StartBuildInput_sourceVersion *smithy.Schema
-
-var StartBuildInput_artifactsOverride *smithy.Schema
-
-var StartBuildInput_secondaryArtifactsOverride *smithy.Schema
-
-var StartBuildInput_environmentVariablesOverride *smithy.Schema
-
-var StartBuildInput_sourceTypeOverride *smithy.Schema
-
-var StartBuildInput_sourceLocationOverride *smithy.Schema
-
-var StartBuildInput_sourceAuthOverride *smithy.Schema
-
-var StartBuildInput_gitCloneDepthOverride *smithy.Schema
-
-var StartBuildInput_gitSubmodulesConfigOverride *smithy.Schema
-
-var StartBuildInput_buildspecOverride *smithy.Schema
-
-var StartBuildInput_insecureSslOverride *smithy.Schema
-
-var StartBuildInput_reportBuildStatusOverride *smithy.Schema
-
-var StartBuildInput_buildStatusConfigOverride *smithy.Schema
-
-var StartBuildInput_environmentTypeOverride *smithy.Schema
-
-var StartBuildInput_imageOverride *smithy.Schema
-
-var StartBuildInput_computeTypeOverride *smithy.Schema
-
-var StartBuildInput_certificateOverride *smithy.Schema
-
-var StartBuildInput_cacheOverride *smithy.Schema
-
-var StartBuildInput_serviceRoleOverride *smithy.Schema
-
-var StartBuildInput_privilegedModeOverride *smithy.Schema
-
-var StartBuildInput_timeoutInMinutesOverride *smithy.Schema
-
-var StartBuildInput_queuedTimeoutInMinutesOverride *smithy.Schema
-
-var StartBuildInput_encryptionKeyOverride *smithy.Schema
-
-var StartBuildInput_idempotencyToken *smithy.Schema
-
-var StartBuildInput_logsConfigOverride *smithy.Schema
-
-var StartBuildInput_registryCredentialOverride *smithy.Schema
-
-var StartBuildInput_imagePullCredentialsTypeOverride *smithy.Schema
-
-var StartBuildInput_debugSessionEnabled *smithy.Schema
-
-var StartBuildInput_fleetOverride *smithy.Schema
-
-var StartBuildInput_autoRetryLimitOverride *smithy.Schema
-
-var StartBuildInput_hostKernelOverride *smithy.Schema
-
-var StartBuildOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartBuildOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartBuildOutput_build *smithy.Schema
-
-var StartCommandExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartCommandExecutionInput",
-}, smithy.ShapeTypeStructure, 3)
-var StartCommandExecutionInput_sandboxId *smithy.Schema
-
-var StartCommandExecutionInput_command *smithy.Schema
-
-var StartCommandExecutionInput_type *smithy.Schema
-
-var StartCommandExecutionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartCommandExecutionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartCommandExecutionOutput_commandExecution *smithy.Schema
-
-var StartSandboxConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartSandboxConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartSandboxConnectionInput_sandboxId *smithy.Schema
-
-var StartSandboxConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartSandboxConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartSandboxConnectionOutput_ssmSession *smithy.Schema
-
-var StartSandboxInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartSandboxInput",
-}, smithy.ShapeTypeStructure, 2)
-var StartSandboxInput_projectName *smithy.Schema
-
-var StartSandboxInput_idempotencyToken *smithy.Schema
-
-var StartSandboxOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StartSandboxOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartSandboxOutput_sandbox *smithy.Schema
-
-var StopBuildBatchInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopBuildBatchInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopBuildBatchInput_id *smithy.Schema
-
-var StopBuildBatchOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopBuildBatchOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StopBuildBatchOutput_buildBatch *smithy.Schema
-
-var StopBuildInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopBuildInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopBuildInput_id *smithy.Schema
-
-var StopBuildOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopBuildOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StopBuildOutput_build *smithy.Schema
-
-var StopSandboxInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopSandboxInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopSandboxInput_id *smithy.Schema
-
-var StopSandboxOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "StopSandboxOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StopSandboxOutput_sandbox *smithy.Schema
-
-var UpdateFleetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateFleetInput",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateFleetInput_arn *smithy.Schema
-
-var UpdateFleetInput_baseCapacity *smithy.Schema
-
-var UpdateFleetInput_environmentType *smithy.Schema
-
-var UpdateFleetInput_computeType *smithy.Schema
-
-var UpdateFleetInput_computeConfiguration *smithy.Schema
-
-var UpdateFleetInput_scalingConfiguration *smithy.Schema
-
-var UpdateFleetInput_overflowBehavior *smithy.Schema
-
-var UpdateFleetInput_vpcConfig *smithy.Schema
-
-var UpdateFleetInput_proxyConfiguration *smithy.Schema
-
-var UpdateFleetInput_imageId *smithy.Schema
-
-var UpdateFleetInput_fleetServiceRole *smithy.Schema
-
-var UpdateFleetInput_tags *smithy.Schema
-
-var UpdateFleetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateFleetOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFleetOutput_fleet *smithy.Schema
-
-var UpdateProjectInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateProjectInput",
-}, smithy.ShapeTypeStructure, 22)
-var UpdateProjectInput_name *smithy.Schema
-
-var UpdateProjectInput_description *smithy.Schema
-
-var UpdateProjectInput_source *smithy.Schema
-
-var UpdateProjectInput_secondarySources *smithy.Schema
-
-var UpdateProjectInput_sourceVersion *smithy.Schema
-
-var UpdateProjectInput_secondarySourceVersions *smithy.Schema
-
-var UpdateProjectInput_artifacts *smithy.Schema
-
-var UpdateProjectInput_secondaryArtifacts *smithy.Schema
-
-var UpdateProjectInput_cache *smithy.Schema
-
-var UpdateProjectInput_environment *smithy.Schema
-
-var UpdateProjectInput_serviceRole *smithy.Schema
-
-var UpdateProjectInput_timeoutInMinutes *smithy.Schema
-
-var UpdateProjectInput_queuedTimeoutInMinutes *smithy.Schema
-
-var UpdateProjectInput_encryptionKey *smithy.Schema
-
-var UpdateProjectInput_tags *smithy.Schema
-
-var UpdateProjectInput_vpcConfig *smithy.Schema
-
-var UpdateProjectInput_badgeEnabled *smithy.Schema
-
-var UpdateProjectInput_logsConfig *smithy.Schema
-
-var UpdateProjectInput_fileSystemLocations *smithy.Schema
-
-var UpdateProjectInput_buildBatchConfig *smithy.Schema
-
-var UpdateProjectInput_concurrentBuildLimit *smithy.Schema
-
-var UpdateProjectInput_autoRetryLimit *smithy.Schema
-
-var UpdateProjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateProjectOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateProjectOutput_project *smithy.Schema
-
-var UpdateProjectVisibilityInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateProjectVisibilityInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProjectVisibilityInput_projectArn *smithy.Schema
-
-var UpdateProjectVisibilityInput_projectVisibility *smithy.Schema
-
-var UpdateProjectVisibilityInput_resourceAccessRole *smithy.Schema
-
-var UpdateProjectVisibilityOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateProjectVisibilityOutput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProjectVisibilityOutput_projectArn *smithy.Schema
-
-var UpdateProjectVisibilityOutput_publicProjectAlias *smithy.Schema
-
-var UpdateProjectVisibilityOutput_projectVisibility *smithy.Schema
-
-var UpdateReportGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateReportGroupInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateReportGroupInput_arn *smithy.Schema
-
-var UpdateReportGroupInput_exportConfig *smithy.Schema
-
-var UpdateReportGroupInput_tags *smithy.Schema
-
-var UpdateReportGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateReportGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateReportGroupOutput_reportGroup *smithy.Schema
-
-var UpdateWebhookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateWebhookInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateWebhookInput_projectName *smithy.Schema
-
-var UpdateWebhookInput_branchFilter *smithy.Schema
-
-var UpdateWebhookInput_rotateSecret *smithy.Schema
-
-var UpdateWebhookInput_filterGroups *smithy.Schema
-
-var UpdateWebhookInput_buildType *smithy.Schema
-
-var UpdateWebhookInput_pullRequestBuildPolicy *smithy.Schema
-
-var UpdateWebhookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codebuild",
-	Name:      "UpdateWebhookOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWebhookOutput_webhook *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccountLimitExceededException_message = AccountLimitExceededException.AddMember("message", _String)
-
-	AccountSuspendedException_message = AccountSuspendedException.AddMember("message", _String)
-
-	ArtifactNamespace_NONE = ArtifactNamespace.AddMember("NONE", smithyprelude.Unit)
-
-	ArtifactNamespace_BUILD_ID = ArtifactNamespace.AddMember("BUILD_ID", smithyprelude.Unit)
-
-	ArtifactPackaging_NONE = ArtifactPackaging.AddMember("NONE", smithyprelude.Unit)
-
-	ArtifactPackaging_ZIP = ArtifactPackaging.AddMember("ZIP", smithyprelude.Unit)
-
-	ArtifactsType_CODEPIPELINE = ArtifactsType.AddMember("CODEPIPELINE", smithyprelude.Unit)
-
-	ArtifactsType_S3 = ArtifactsType.AddMember("S3", smithyprelude.Unit)
-
-	ArtifactsType_NO_ARTIFACTS = ArtifactsType.AddMember("NO_ARTIFACTS", smithyprelude.Unit)
-
-	AuthType_OAUTH = AuthType.AddMember("OAUTH", smithyprelude.Unit)
-
-	AuthType_BASIC_AUTH = AuthType.AddMember("BASIC_AUTH", smithyprelude.Unit)
-
-	AuthType_PERSONAL_ACCESS_TOKEN = AuthType.AddMember("PERSONAL_ACCESS_TOKEN", smithyprelude.Unit)
-
-	AuthType_CODECONNECTIONS = AuthType.AddMember("CODECONNECTIONS", smithyprelude.Unit)
-
-	AuthType_SECRETS_MANAGER = AuthType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
-
-	AutoRetryConfig_autoRetryLimit = AutoRetryConfig.AddMember("autoRetryLimit", _WrapperInt)
-
-	AutoRetryConfig_autoRetryNumber = AutoRetryConfig.AddMember("autoRetryNumber", _WrapperInt)
-
-	AutoRetryConfig_nextAutoRetry = AutoRetryConfig.AddMember("nextAutoRetry", _String)
-
-	AutoRetryConfig_previousAutoRetry = AutoRetryConfig.AddMember("previousAutoRetry", _String)
-
-	BatchReportModeType_REPORT_INDIVIDUAL_BUILDS = BatchReportModeType.AddMember("REPORT_INDIVIDUAL_BUILDS", smithyprelude.Unit)
-
-	BatchReportModeType_REPORT_AGGREGATED_BATCH = BatchReportModeType.AddMember("REPORT_AGGREGATED_BATCH", smithyprelude.Unit)
-
-	_ComputeTypesAllowed_member = _ComputeTypesAllowed.AddMember("member", _NonEmptyString)
-
-	_FleetsAllowed_member = _FleetsAllowed.AddMember("member", _NonEmptyString)
-
-	BatchRestrictions_maximumBuildsAllowed = BatchRestrictions.AddMember("maximumBuildsAllowed", _WrapperInt)
-
-	BatchRestrictions_computeTypesAllowed = BatchRestrictions.AddMember("computeTypesAllowed", _ComputeTypesAllowed)
-
-	BatchRestrictions_fleetsAllowed = BatchRestrictions.AddMember("fleetsAllowed", _FleetsAllowed)
-
-	BucketOwnerAccess_NONE = BucketOwnerAccess.AddMember("NONE", smithyprelude.Unit)
-
-	BucketOwnerAccess_READ_ONLY = BucketOwnerAccess.AddMember("READ_ONLY", smithyprelude.Unit)
-
-	BucketOwnerAccess_FULL = BucketOwnerAccess.AddMember("FULL", smithyprelude.Unit)
-
-	StatusType_SUCCEEDED = StatusType.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	StatusType_FAILED = StatusType.AddMember("FAILED", smithyprelude.Unit)
-
-	StatusType_FAULT = StatusType.AddMember("FAULT", smithyprelude.Unit)
-
-	StatusType_TIMED_OUT = StatusType.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	StatusType_IN_PROGRESS = StatusType.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	StatusType_STOPPED = StatusType.AddMember("STOPPED", smithyprelude.Unit)
-
-	BuildPhaseType_SUBMITTED = BuildPhaseType.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	BuildPhaseType_QUEUED = BuildPhaseType.AddMember("QUEUED", smithyprelude.Unit)
-
-	BuildPhaseType_PROVISIONING = BuildPhaseType.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	BuildPhaseType_DOWNLOAD_SOURCE = BuildPhaseType.AddMember("DOWNLOAD_SOURCE", smithyprelude.Unit)
-
-	BuildPhaseType_INSTALL = BuildPhaseType.AddMember("INSTALL", smithyprelude.Unit)
-
-	BuildPhaseType_PRE_BUILD = BuildPhaseType.AddMember("PRE_BUILD", smithyprelude.Unit)
-
-	BuildPhaseType_BUILD = BuildPhaseType.AddMember("BUILD", smithyprelude.Unit)
-
-	BuildPhaseType_POST_BUILD = BuildPhaseType.AddMember("POST_BUILD", smithyprelude.Unit)
-
-	BuildPhaseType_UPLOAD_ARTIFACTS = BuildPhaseType.AddMember("UPLOAD_ARTIFACTS", smithyprelude.Unit)
-
-	BuildPhaseType_FINALIZING = BuildPhaseType.AddMember("FINALIZING", smithyprelude.Unit)
-
-	BuildPhaseType_COMPLETED = BuildPhaseType.AddMember("COMPLETED", smithyprelude.Unit)
-
-	PhaseContext_statusCode = PhaseContext.AddMember("statusCode", _String)
-
-	PhaseContext_message = PhaseContext.AddMember("message", _String)
-
-	_PhaseContexts_member = _PhaseContexts.AddMember("member", PhaseContext)
-
-	BuildPhase_phaseType = BuildPhase.AddMember("phaseType", BuildPhaseType)
-
-	BuildPhase_phaseStatus = BuildPhase.AddMember("phaseStatus", StatusType)
-
-	BuildPhase_startTime = BuildPhase.AddMember("startTime", _Timestamp)
-
-	BuildPhase_endTime = BuildPhase.AddMember("endTime", _Timestamp)
-
-	BuildPhase_durationInSeconds = BuildPhase.AddMember("durationInSeconds", _WrapperLong)
-
-	BuildPhase_contexts = BuildPhase.AddMember("contexts", _PhaseContexts)
-
-	_BuildPhases_member = _BuildPhases.AddMember("member", BuildPhase)
-
-	SourceType_CODECOMMIT = SourceType.AddMember("CODECOMMIT", smithyprelude.Unit)
-
-	SourceType_CODEPIPELINE = SourceType.AddMember("CODEPIPELINE", smithyprelude.Unit)
-
-	SourceType_GITHUB = SourceType.AddMember("GITHUB", smithyprelude.Unit)
-
-	SourceType_GITLAB = SourceType.AddMember("GITLAB", smithyprelude.Unit)
-
-	SourceType_GITLAB_SELF_MANAGED = SourceType.AddMember("GITLAB_SELF_MANAGED", smithyprelude.Unit)
-
-	SourceType_S3 = SourceType.AddMember("S3", smithyprelude.Unit)
-
-	SourceType_BITBUCKET = SourceType.AddMember("BITBUCKET", smithyprelude.Unit)
-
-	SourceType_GITHUB_ENTERPRISE = SourceType.AddMember("GITHUB_ENTERPRISE", smithyprelude.Unit)
-
-	SourceType_NO_SOURCE = SourceType.AddMember("NO_SOURCE", smithyprelude.Unit)
-
-	GitSubmodulesConfig_fetchSubmodules = GitSubmodulesConfig.AddMember("fetchSubmodules", _WrapperBoolean)
-
-	SourceAuthType_OAUTH = SourceAuthType.AddMember("OAUTH", smithyprelude.Unit)
-
-	SourceAuthType_CODECONNECTIONS = SourceAuthType.AddMember("CODECONNECTIONS", smithyprelude.Unit)
-
-	SourceAuthType_SECRETS_MANAGER = SourceAuthType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
-
-	SourceAuth_type = SourceAuth.AddMember("type", SourceAuthType)
-
-	SourceAuth_resource = SourceAuth.AddMember("resource", _String)
-
-	BuildStatusConfig_context = BuildStatusConfig.AddMember("context", _String)
-
-	BuildStatusConfig_targetUrl = BuildStatusConfig.AddMember("targetUrl", _String)
-
-	ProjectSource_type = ProjectSource.AddMember("type", SourceType)
-
-	ProjectSource_location = ProjectSource.AddMember("location", _String)
-
-	ProjectSource_gitCloneDepth = ProjectSource.AddMember("gitCloneDepth", _GitCloneDepth)
-
-	ProjectSource_gitSubmodulesConfig = ProjectSource.AddMember("gitSubmodulesConfig", GitSubmodulesConfig)
-
-	ProjectSource_buildspec = ProjectSource.AddMember("buildspec", _String)
-
-	ProjectSource_auth = ProjectSource.AddMember("auth", SourceAuth)
-
-	ProjectSource_reportBuildStatus = ProjectSource.AddMember("reportBuildStatus", _WrapperBoolean)
-
-	ProjectSource_buildStatusConfig = ProjectSource.AddMember("buildStatusConfig", BuildStatusConfig)
-
-	ProjectSource_insecureSsl = ProjectSource.AddMember("insecureSsl", _WrapperBoolean)
-
-	ProjectSource_sourceIdentifier = ProjectSource.AddMember("sourceIdentifier", _String)
-
-	_ProjectSources_member = _ProjectSources.AddMember("member", ProjectSource)
-
-	ProjectSourceVersion_sourceIdentifier = ProjectSourceVersion.AddMember("sourceIdentifier", _String)
-
-	ProjectSourceVersion_sourceVersion = ProjectSourceVersion.AddMember("sourceVersion", _String)
-
-	_ProjectSecondarySourceVersions_member = _ProjectSecondarySourceVersions.AddMember("member", ProjectSourceVersion)
-
-	BuildArtifacts_location = BuildArtifacts.AddMember("location", _String)
-
-	BuildArtifacts_sha256sum = BuildArtifacts.AddMember("sha256sum", _String)
-
-	BuildArtifacts_md5sum = BuildArtifacts.AddMember("md5sum", _String)
-
-	BuildArtifacts_overrideArtifactName = BuildArtifacts.AddMember("overrideArtifactName", _WrapperBoolean)
-
-	BuildArtifacts_encryptionDisabled = BuildArtifacts.AddMember("encryptionDisabled", _WrapperBoolean)
-
-	BuildArtifacts_artifactIdentifier = BuildArtifacts.AddMember("artifactIdentifier", _String)
-
-	BuildArtifacts_bucketOwnerAccess = BuildArtifacts.AddMember("bucketOwnerAccess", BucketOwnerAccess)
-
-	_BuildArtifactsList_member = _BuildArtifactsList.AddMember("member", BuildArtifacts)
-
-	CacheType_NO_CACHE = CacheType.AddMember("NO_CACHE", smithyprelude.Unit)
-
-	CacheType_S3 = CacheType.AddMember("S3", smithyprelude.Unit)
-
-	CacheType_LOCAL = CacheType.AddMember("LOCAL", smithyprelude.Unit)
-
-	CacheMode_LOCAL_DOCKER_LAYER_CACHE = CacheMode.AddMember("LOCAL_DOCKER_LAYER_CACHE", smithyprelude.Unit)
-
-	CacheMode_LOCAL_SOURCE_CACHE = CacheMode.AddMember("LOCAL_SOURCE_CACHE", smithyprelude.Unit)
-
-	CacheMode_LOCAL_CUSTOM_CACHE = CacheMode.AddMember("LOCAL_CUSTOM_CACHE", smithyprelude.Unit)
-
-	_ProjectCacheModes_member = _ProjectCacheModes.AddMember("member", CacheMode)
-
-	ProjectCache_type = ProjectCache.AddMember("type", CacheType)
-
-	ProjectCache_location = ProjectCache.AddMember("location", _String)
-
-	ProjectCache_modes = ProjectCache.AddMember("modes", _ProjectCacheModes)
-
-	ProjectCache_cacheNamespace = ProjectCache.AddMember("cacheNamespace", _String)
-
-	EnvironmentType_WINDOWS_CONTAINER = EnvironmentType.AddMember("WINDOWS_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_LINUX_CONTAINER = EnvironmentType.AddMember("LINUX_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_LINUX_GPU_CONTAINER = EnvironmentType.AddMember("LINUX_GPU_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_ARM_CONTAINER = EnvironmentType.AddMember("ARM_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_WINDOWS_SERVER_2019_CONTAINER = EnvironmentType.AddMember("WINDOWS_SERVER_2019_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_WINDOWS_SERVER_2022_CONTAINER = EnvironmentType.AddMember("WINDOWS_SERVER_2022_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_LINUX_LAMBDA_CONTAINER = EnvironmentType.AddMember("LINUX_LAMBDA_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_ARM_LAMBDA_CONTAINER = EnvironmentType.AddMember("ARM_LAMBDA_CONTAINER", smithyprelude.Unit)
-
-	EnvironmentType_LINUX_EC2 = EnvironmentType.AddMember("LINUX_EC2", smithyprelude.Unit)
-
-	EnvironmentType_ARM_EC2 = EnvironmentType.AddMember("ARM_EC2", smithyprelude.Unit)
-
-	EnvironmentType_WINDOWS_EC2 = EnvironmentType.AddMember("WINDOWS_EC2", smithyprelude.Unit)
-
-	EnvironmentType_MAC_ARM = EnvironmentType.AddMember("MAC_ARM", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_SMALL = ComputeType.AddMember("BUILD_GENERAL1_SMALL", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_MEDIUM = ComputeType.AddMember("BUILD_GENERAL1_MEDIUM", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_LARGE = ComputeType.AddMember("BUILD_GENERAL1_LARGE", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_XLARGE = ComputeType.AddMember("BUILD_GENERAL1_XLARGE", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_2XLARGE = ComputeType.AddMember("BUILD_GENERAL1_2XLARGE", smithyprelude.Unit)
-
-	ComputeType_BUILD_LAMBDA_1GB = ComputeType.AddMember("BUILD_LAMBDA_1GB", smithyprelude.Unit)
-
-	ComputeType_BUILD_LAMBDA_2GB = ComputeType.AddMember("BUILD_LAMBDA_2GB", smithyprelude.Unit)
-
-	ComputeType_BUILD_LAMBDA_4GB = ComputeType.AddMember("BUILD_LAMBDA_4GB", smithyprelude.Unit)
-
-	ComputeType_BUILD_LAMBDA_8GB = ComputeType.AddMember("BUILD_LAMBDA_8GB", smithyprelude.Unit)
-
-	ComputeType_BUILD_LAMBDA_10GB = ComputeType.AddMember("BUILD_LAMBDA_10GB", smithyprelude.Unit)
-
-	ComputeType_ATTRIBUTE_BASED_COMPUTE = ComputeType.AddMember("ATTRIBUTE_BASED_COMPUTE", smithyprelude.Unit)
-
-	ComputeType_CUSTOM_INSTANCE_TYPE = ComputeType.AddMember("CUSTOM_INSTANCE_TYPE", smithyprelude.Unit)
-
-	MachineType_GENERAL = MachineType.AddMember("GENERAL", smithyprelude.Unit)
-
-	MachineType_NVME = MachineType.AddMember("NVME", smithyprelude.Unit)
-
-	ComputeConfiguration_vCpu = ComputeConfiguration.AddMember("vCpu", _WrapperLong)
-
-	ComputeConfiguration_memory = ComputeConfiguration.AddMember("memory", _WrapperLong)
-
-	ComputeConfiguration_disk = ComputeConfiguration.AddMember("disk", _WrapperLong)
-
-	ComputeConfiguration_machineType = ComputeConfiguration.AddMember("machineType", MachineType)
-
-	ComputeConfiguration_instanceType = ComputeConfiguration.AddMember("instanceType", _NonEmptyString)
-
-	ProjectFleet_fleetArn = ProjectFleet.AddMember("fleetArn", _String)
-
-	EnvironmentVariableType_PLAINTEXT = EnvironmentVariableType.AddMember("PLAINTEXT", smithyprelude.Unit)
-
-	EnvironmentVariableType_PARAMETER_STORE = EnvironmentVariableType.AddMember("PARAMETER_STORE", smithyprelude.Unit)
-
-	EnvironmentVariableType_SECRETS_MANAGER = EnvironmentVariableType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
-
-	EnvironmentVariable_name = EnvironmentVariable.AddMember("name", _NonEmptyString)
-
-	EnvironmentVariable_value = EnvironmentVariable.AddMember("value", _String)
-
-	EnvironmentVariable_type = EnvironmentVariable.AddMember("type", EnvironmentVariableType)
-
-	_EnvironmentVariables_member = _EnvironmentVariables.AddMember("member", EnvironmentVariable)
-
-	CredentialProviderType_SECRETS_MANAGER = CredentialProviderType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
-
-	RegistryCredential_credential = RegistryCredential.AddMember("credential", _NonEmptyString)
-
-	RegistryCredential_credentialProvider = RegistryCredential.AddMember("credentialProvider", CredentialProviderType)
-
-	ImagePullCredentialsType_CODEBUILD = ImagePullCredentialsType.AddMember("CODEBUILD", smithyprelude.Unit)
-
-	ImagePullCredentialsType_SERVICE_ROLE = ImagePullCredentialsType.AddMember("SERVICE_ROLE", smithyprelude.Unit)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _NonEmptyString)
-
-	DockerServerStatus_status = DockerServerStatus.AddMember("status", _String)
-
-	DockerServerStatus_message = DockerServerStatus.AddMember("message", _String)
-
-	DockerServer_computeType = DockerServer.AddMember("computeType", ComputeType)
-
-	DockerServer_securityGroupIds = DockerServer.AddMember("securityGroupIds", _SecurityGroupIds)
-
-	DockerServer_status = DockerServer.AddMember("status", DockerServerStatus)
-
-	HostKernel_LINUX_KERNEL_4 = HostKernel.AddMember("LINUX_KERNEL_4", smithyprelude.Unit)
-
-	HostKernel_LINUX_KERNEL_6 = HostKernel.AddMember("LINUX_KERNEL_6", smithyprelude.Unit)
-
-	HostKernel_LINUX_KERNEL_LATEST = HostKernel.AddMember("LINUX_KERNEL_LATEST", smithyprelude.Unit)
-
-	ProjectEnvironment_type = ProjectEnvironment.AddMember("type", EnvironmentType)
-
-	ProjectEnvironment_image = ProjectEnvironment.AddMember("image", _NonEmptyString)
-
-	ProjectEnvironment_computeType = ProjectEnvironment.AddMember("computeType", ComputeType)
-
-	ProjectEnvironment_computeConfiguration = ProjectEnvironment.AddMember("computeConfiguration", ComputeConfiguration)
-
-	ProjectEnvironment_fleet = ProjectEnvironment.AddMember("fleet", ProjectFleet)
-
-	ProjectEnvironment_environmentVariables = ProjectEnvironment.AddMember("environmentVariables", _EnvironmentVariables)
-
-	ProjectEnvironment_privilegedMode = ProjectEnvironment.AddMember("privilegedMode", _WrapperBoolean)
-
-	ProjectEnvironment_certificate = ProjectEnvironment.AddMember("certificate", _String)
-
-	ProjectEnvironment_registryCredential = ProjectEnvironment.AddMember("registryCredential", RegistryCredential)
-
-	ProjectEnvironment_imagePullCredentialsType = ProjectEnvironment.AddMember("imagePullCredentialsType", ImagePullCredentialsType)
-
-	ProjectEnvironment_dockerServer = ProjectEnvironment.AddMember("dockerServer", DockerServer)
-
-	ProjectEnvironment_hostKernel = ProjectEnvironment.AddMember("hostKernel", HostKernel)
-
-	LogsConfigStatusType_ENABLED = LogsConfigStatusType.AddMember("ENABLED", smithyprelude.Unit)
-
-	LogsConfigStatusType_DISABLED = LogsConfigStatusType.AddMember("DISABLED", smithyprelude.Unit)
-
-	CloudWatchLogsConfig_status = CloudWatchLogsConfig.AddMember("status", LogsConfigStatusType)
-
-	CloudWatchLogsConfig_groupName = CloudWatchLogsConfig.AddMember("groupName", _String)
-
-	CloudWatchLogsConfig_streamName = CloudWatchLogsConfig.AddMember("streamName", _String)
-
-	S3LogsConfig_status = S3LogsConfig.AddMember("status", LogsConfigStatusType)
-
-	S3LogsConfig_location = S3LogsConfig.AddMember("location", _String)
-
-	S3LogsConfig_encryptionDisabled = S3LogsConfig.AddMember("encryptionDisabled", _WrapperBoolean)
-
-	S3LogsConfig_bucketOwnerAccess = S3LogsConfig.AddMember("bucketOwnerAccess", BucketOwnerAccess)
-
-	LogsLocation_groupName = LogsLocation.AddMember("groupName", _String)
-
-	LogsLocation_streamName = LogsLocation.AddMember("streamName", _String)
-
-	LogsLocation_deepLink = LogsLocation.AddMember("deepLink", _String)
-
-	LogsLocation_s3DeepLink = LogsLocation.AddMember("s3DeepLink", _String)
-
-	LogsLocation_cloudWatchLogsArn = LogsLocation.AddMember("cloudWatchLogsArn", _String)
-
-	LogsLocation_s3LogsArn = LogsLocation.AddMember("s3LogsArn", _String)
-
-	LogsLocation_cloudWatchLogs = LogsLocation.AddMember("cloudWatchLogs", CloudWatchLogsConfig)
-
-	LogsLocation_s3Logs = LogsLocation.AddMember("s3Logs", S3LogsConfig)
-
-	_Subnets_member = _Subnets.AddMember("member", _NonEmptyString)
-
-	VpcConfig_vpcId = VpcConfig.AddMember("vpcId", _NonEmptyString)
-
-	VpcConfig_subnets = VpcConfig.AddMember("subnets", _Subnets)
-
-	VpcConfig_securityGroupIds = VpcConfig.AddMember("securityGroupIds", _SecurityGroupIds)
-
-	NetworkInterface_subnetId = NetworkInterface.AddMember("subnetId", _NonEmptyString)
-
-	NetworkInterface_networkInterfaceId = NetworkInterface.AddMember("networkInterfaceId", _NonEmptyString)
-
-	ExportedEnvironmentVariable_name = ExportedEnvironmentVariable.AddMember("name", _NonEmptyString)
-
-	ExportedEnvironmentVariable_value = ExportedEnvironmentVariable.AddMember("value", _String)
-
-	_ExportedEnvironmentVariables_member = _ExportedEnvironmentVariables.AddMember("member", ExportedEnvironmentVariable)
-
-	_BuildReportArns_member = _BuildReportArns.AddMember("member", _String)
-
-	FileSystemType_EFS = FileSystemType.AddMember("EFS", smithyprelude.Unit)
-
-	ProjectFileSystemLocation_type = ProjectFileSystemLocation.AddMember("type", FileSystemType)
-
-	ProjectFileSystemLocation_location = ProjectFileSystemLocation.AddMember("location", _String)
-
-	ProjectFileSystemLocation_mountPoint = ProjectFileSystemLocation.AddMember("mountPoint", _String)
-
-	ProjectFileSystemLocation_identifier = ProjectFileSystemLocation.AddMember("identifier", _String)
-
-	ProjectFileSystemLocation_mountOptions = ProjectFileSystemLocation.AddMember("mountOptions", _String)
-
-	_ProjectFileSystemLocations_member = _ProjectFileSystemLocations.AddMember("member", ProjectFileSystemLocation)
-
-	DebugSession_sessionEnabled = DebugSession.AddMember("sessionEnabled", _WrapperBoolean)
-
-	DebugSession_sessionTarget = DebugSession.AddMember("sessionTarget", _NonEmptyString)
-
-	Build_id = Build.AddMember("id", _NonEmptyString)
-
-	Build_arn = Build.AddMember("arn", _NonEmptyString)
-
-	Build_buildNumber = Build.AddMember("buildNumber", _WrapperLong)
-
-	Build_startTime = Build.AddMember("startTime", _Timestamp)
-
-	Build_endTime = Build.AddMember("endTime", _Timestamp)
-
-	Build_currentPhase = Build.AddMember("currentPhase", _String)
-
-	Build_buildStatus = Build.AddMember("buildStatus", StatusType)
-
-	Build_sourceVersion = Build.AddMember("sourceVersion", _NonEmptyString)
-
-	Build_resolvedSourceVersion = Build.AddMember("resolvedSourceVersion", _NonEmptyString)
-
-	Build_projectName = Build.AddMember("projectName", _NonEmptyString)
-
-	Build_phases = Build.AddMember("phases", _BuildPhases)
-
-	Build_source = Build.AddMember("source", ProjectSource)
-
-	Build_secondarySources = Build.AddMember("secondarySources", _ProjectSources)
-
-	Build_secondarySourceVersions = Build.AddMember("secondarySourceVersions", _ProjectSecondarySourceVersions)
-
-	Build_artifacts = Build.AddMember("artifacts", BuildArtifacts)
-
-	Build_secondaryArtifacts = Build.AddMember("secondaryArtifacts", _BuildArtifactsList)
-
-	Build_cache = Build.AddMember("cache", ProjectCache)
-
-	Build_environment = Build.AddMember("environment", ProjectEnvironment)
-
-	Build_serviceRole = Build.AddMember("serviceRole", _NonEmptyString)
-
-	Build_logs = Build.AddMember("logs", LogsLocation)
-
-	Build_timeoutInMinutes = Build.AddMember("timeoutInMinutes", _WrapperInt)
-
-	Build_queuedTimeoutInMinutes = Build.AddMember("queuedTimeoutInMinutes", _WrapperInt)
-
-	Build_buildComplete = Build.AddMember("buildComplete", _Boolean)
-
-	Build_initiator = Build.AddMember("initiator", _String)
-
-	Build_vpcConfig = Build.AddMember("vpcConfig", VpcConfig)
-
-	Build_networkInterface = Build.AddMember("networkInterface", NetworkInterface)
-
-	Build_encryptionKey = Build.AddMember("encryptionKey", _NonEmptyString)
-
-	Build_exportedEnvironmentVariables = Build.AddMember("exportedEnvironmentVariables", _ExportedEnvironmentVariables)
-
-	Build_reportArns = Build.AddMember("reportArns", _BuildReportArns)
-
-	Build_fileSystemLocations = Build.AddMember("fileSystemLocations", _ProjectFileSystemLocations)
-
-	Build_debugSession = Build.AddMember("debugSession", DebugSession)
-
-	Build_buildBatchArn = Build.AddMember("buildBatchArn", _String)
-
-	Build_autoRetryConfig = Build.AddMember("autoRetryConfig", AutoRetryConfig)
-
-	BuildBatchPhaseType_SUBMITTED = BuildBatchPhaseType.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	BuildBatchPhaseType_DOWNLOAD_BATCHSPEC = BuildBatchPhaseType.AddMember("DOWNLOAD_BATCHSPEC", smithyprelude.Unit)
-
-	BuildBatchPhaseType_IN_PROGRESS = BuildBatchPhaseType.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	BuildBatchPhaseType_COMBINE_ARTIFACTS = BuildBatchPhaseType.AddMember("COMBINE_ARTIFACTS", smithyprelude.Unit)
-
-	BuildBatchPhaseType_SUCCEEDED = BuildBatchPhaseType.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	BuildBatchPhaseType_FAILED = BuildBatchPhaseType.AddMember("FAILED", smithyprelude.Unit)
-
-	BuildBatchPhaseType_STOPPED = BuildBatchPhaseType.AddMember("STOPPED", smithyprelude.Unit)
-
-	BuildBatchPhase_phaseType = BuildBatchPhase.AddMember("phaseType", BuildBatchPhaseType)
-
-	BuildBatchPhase_phaseStatus = BuildBatchPhase.AddMember("phaseStatus", StatusType)
-
-	BuildBatchPhase_startTime = BuildBatchPhase.AddMember("startTime", _Timestamp)
-
-	BuildBatchPhase_endTime = BuildBatchPhase.AddMember("endTime", _Timestamp)
-
-	BuildBatchPhase_durationInSeconds = BuildBatchPhase.AddMember("durationInSeconds", _WrapperLong)
-
-	BuildBatchPhase_contexts = BuildBatchPhase.AddMember("contexts", _PhaseContexts)
-
-	_BuildBatchPhases_member = _BuildBatchPhases.AddMember("member", BuildBatchPhase)
-
-	LogsConfig_cloudWatchLogs = LogsConfig.AddMember("cloudWatchLogs", CloudWatchLogsConfig)
-
-	LogsConfig_s3Logs = LogsConfig.AddMember("s3Logs", S3LogsConfig)
-
-	ProjectBuildBatchConfig_serviceRole = ProjectBuildBatchConfig.AddMember("serviceRole", _NonEmptyString)
-
-	ProjectBuildBatchConfig_combineArtifacts = ProjectBuildBatchConfig.AddMember("combineArtifacts", _WrapperBoolean)
-
-	ProjectBuildBatchConfig_restrictions = ProjectBuildBatchConfig.AddMember("restrictions", BatchRestrictions)
-
-	ProjectBuildBatchConfig_timeoutInMins = ProjectBuildBatchConfig.AddMember("timeoutInMins", _WrapperInt)
-
-	ProjectBuildBatchConfig_batchReportMode = ProjectBuildBatchConfig.AddMember("batchReportMode", BatchReportModeType)
-
-	_Identifiers_member = _Identifiers.AddMember("member", _NonEmptyString)
-
-	ResolvedArtifact_type = ResolvedArtifact.AddMember("type", ArtifactsType)
-
-	ResolvedArtifact_location = ResolvedArtifact.AddMember("location", _String)
-
-	ResolvedArtifact_identifier = ResolvedArtifact.AddMember("identifier", _String)
-
-	_ResolvedSecondaryArtifacts_member = _ResolvedSecondaryArtifacts.AddMember("member", ResolvedArtifact)
-
-	BuildSummary_arn = BuildSummary.AddMember("arn", _String)
-
-	BuildSummary_requestedOn = BuildSummary.AddMember("requestedOn", _Timestamp)
-
-	BuildSummary_buildStatus = BuildSummary.AddMember("buildStatus", StatusType)
-
-	BuildSummary_primaryArtifact = BuildSummary.AddMember("primaryArtifact", ResolvedArtifact)
-
-	BuildSummary_secondaryArtifacts = BuildSummary.AddMember("secondaryArtifacts", _ResolvedSecondaryArtifacts)
-
-	_BuildSummaries_member = _BuildSummaries.AddMember("member", BuildSummary)
-
-	BuildGroup_identifier = BuildGroup.AddMember("identifier", _String)
-
-	BuildGroup_dependsOn = BuildGroup.AddMember("dependsOn", _Identifiers)
-
-	BuildGroup_ignoreFailure = BuildGroup.AddMember("ignoreFailure", _Boolean)
-
-	BuildGroup_currentBuildSummary = BuildGroup.AddMember("currentBuildSummary", BuildSummary)
-
-	BuildGroup_priorBuildSummaryList = BuildGroup.AddMember("priorBuildSummaryList", _BuildSummaries)
-
-	_BuildGroups_member = _BuildGroups.AddMember("member", BuildGroup)
-
-	BuildBatch_id = BuildBatch.AddMember("id", _NonEmptyString)
-
-	BuildBatch_arn = BuildBatch.AddMember("arn", _NonEmptyString)
-
-	BuildBatch_startTime = BuildBatch.AddMember("startTime", _Timestamp)
-
-	BuildBatch_endTime = BuildBatch.AddMember("endTime", _Timestamp)
-
-	BuildBatch_currentPhase = BuildBatch.AddMember("currentPhase", _String)
-
-	BuildBatch_buildBatchStatus = BuildBatch.AddMember("buildBatchStatus", StatusType)
-
-	BuildBatch_sourceVersion = BuildBatch.AddMember("sourceVersion", _NonEmptyString)
-
-	BuildBatch_resolvedSourceVersion = BuildBatch.AddMember("resolvedSourceVersion", _NonEmptyString)
-
-	BuildBatch_projectName = BuildBatch.AddMember("projectName", _NonEmptyString)
-
-	BuildBatch_phases = BuildBatch.AddMember("phases", _BuildBatchPhases)
-
-	BuildBatch_source = BuildBatch.AddMember("source", ProjectSource)
-
-	BuildBatch_secondarySources = BuildBatch.AddMember("secondarySources", _ProjectSources)
-
-	BuildBatch_secondarySourceVersions = BuildBatch.AddMember("secondarySourceVersions", _ProjectSecondarySourceVersions)
-
-	BuildBatch_artifacts = BuildBatch.AddMember("artifacts", BuildArtifacts)
-
-	BuildBatch_secondaryArtifacts = BuildBatch.AddMember("secondaryArtifacts", _BuildArtifactsList)
-
-	BuildBatch_cache = BuildBatch.AddMember("cache", ProjectCache)
-
-	BuildBatch_environment = BuildBatch.AddMember("environment", ProjectEnvironment)
-
-	BuildBatch_serviceRole = BuildBatch.AddMember("serviceRole", _NonEmptyString)
-
-	BuildBatch_logConfig = BuildBatch.AddMember("logConfig", LogsConfig)
-
-	BuildBatch_buildTimeoutInMinutes = BuildBatch.AddMember("buildTimeoutInMinutes", _WrapperInt)
-
-	BuildBatch_queuedTimeoutInMinutes = BuildBatch.AddMember("queuedTimeoutInMinutes", _WrapperInt)
-
-	BuildBatch_complete = BuildBatch.AddMember("complete", _Boolean)
-
-	BuildBatch_initiator = BuildBatch.AddMember("initiator", _String)
-
-	BuildBatch_vpcConfig = BuildBatch.AddMember("vpcConfig", VpcConfig)
-
-	BuildBatch_encryptionKey = BuildBatch.AddMember("encryptionKey", _NonEmptyString)
-
-	BuildBatch_buildBatchNumber = BuildBatch.AddMember("buildBatchNumber", _WrapperLong)
-
-	BuildBatch_fileSystemLocations = BuildBatch.AddMember("fileSystemLocations", _ProjectFileSystemLocations)
-
-	BuildBatch_buildBatchConfig = BuildBatch.AddMember("buildBatchConfig", ProjectBuildBatchConfig)
-
-	BuildBatch_buildGroups = BuildBatch.AddMember("buildGroups", _BuildGroups)
-
-	BuildBatch_debugSessionEnabled = BuildBatch.AddMember("debugSessionEnabled", _WrapperBoolean)
-
-	BuildBatch_reportArns = BuildBatch.AddMember("reportArns", _BuildReportArns)
-
-	_BuildBatches_member = _BuildBatches.AddMember("member", BuildBatch)
-
-	BuildBatchFilter_status = BuildBatchFilter.AddMember("status", StatusType)
-
-	_BuildBatchIds_member = _BuildBatchIds.AddMember("member", _NonEmptyString)
-
-	_BuildIds_member = _BuildIds.AddMember("member", _NonEmptyString)
-
-	BuildNotDeleted_id = BuildNotDeleted.AddMember("id", _NonEmptyString)
-
-	BuildNotDeleted_statusCode = BuildNotDeleted.AddMember("statusCode", _String)
-
-	_Builds_member = _Builds.AddMember("member", Build)
-
-	_BuildsNotDeleted_member = _BuildsNotDeleted.AddMember("member", BuildNotDeleted)
-
-	CodeCoverage_id = CodeCoverage.AddMember("id", _NonEmptyString)
-
-	CodeCoverage_reportARN = CodeCoverage.AddMember("reportARN", _NonEmptyString)
-
-	CodeCoverage_filePath = CodeCoverage.AddMember("filePath", _NonEmptyString)
-
-	CodeCoverage_lineCoveragePercentage = CodeCoverage.AddMember("lineCoveragePercentage", _Percentage)
-
-	CodeCoverage_linesCovered = CodeCoverage.AddMember("linesCovered", _NonNegativeInt)
-
-	CodeCoverage_linesMissed = CodeCoverage.AddMember("linesMissed", _NonNegativeInt)
-
-	CodeCoverage_branchCoveragePercentage = CodeCoverage.AddMember("branchCoveragePercentage", _Percentage)
-
-	CodeCoverage_branchesCovered = CodeCoverage.AddMember("branchesCovered", _NonNegativeInt)
-
-	CodeCoverage_branchesMissed = CodeCoverage.AddMember("branchesMissed", _NonNegativeInt)
-
-	CodeCoverage_expired = CodeCoverage.AddMember("expired", _Timestamp)
-
-	CodeCoverageReportSummary_lineCoveragePercentage = CodeCoverageReportSummary.AddMember("lineCoveragePercentage", _Percentage)
-
-	CodeCoverageReportSummary_linesCovered = CodeCoverageReportSummary.AddMember("linesCovered", _NonNegativeInt)
-
-	CodeCoverageReportSummary_linesMissed = CodeCoverageReportSummary.AddMember("linesMissed", _NonNegativeInt)
-
-	CodeCoverageReportSummary_branchCoveragePercentage = CodeCoverageReportSummary.AddMember("branchCoveragePercentage", _Percentage)
-
-	CodeCoverageReportSummary_branchesCovered = CodeCoverageReportSummary.AddMember("branchesCovered", _NonNegativeInt)
-
-	CodeCoverageReportSummary_branchesMissed = CodeCoverageReportSummary.AddMember("branchesMissed", _NonNegativeInt)
-
-	_CodeCoverages_member = _CodeCoverages.AddMember("member", CodeCoverage)
-
-	CommandType_SHELL = CommandType.AddMember("SHELL", smithyprelude.Unit)
-
-	CommandExecution_id = CommandExecution.AddMember("id", _NonEmptyString)
-
-	CommandExecution_sandboxId = CommandExecution.AddMember("sandboxId", _NonEmptyString)
-
-	CommandExecution_submitTime = CommandExecution.AddMember("submitTime", _Timestamp)
-
-	CommandExecution_startTime = CommandExecution.AddMember("startTime", _Timestamp)
-
-	CommandExecution_endTime = CommandExecution.AddMember("endTime", _Timestamp)
-
-	CommandExecution_status = CommandExecution.AddMember("status", _NonEmptyString)
-
-	CommandExecution_command = CommandExecution.AddMember("command", _SensitiveNonEmptyString)
-
-	CommandExecution_type = CommandExecution.AddMember("type", CommandType)
-
-	CommandExecution_exitCode = CommandExecution.AddMember("exitCode", _NonEmptyString)
-
-	CommandExecution_standardOutputContent = CommandExecution.AddMember("standardOutputContent", _SensitiveNonEmptyString)
-
-	CommandExecution_standardErrContent = CommandExecution.AddMember("standardErrContent", _SensitiveNonEmptyString)
-
-	CommandExecution_logs = CommandExecution.AddMember("logs", LogsLocation)
-
-	CommandExecution_sandboxArn = CommandExecution.AddMember("sandboxArn", _NonEmptyString)
-
-	_CommandExecutionIds_member = _CommandExecutionIds.AddMember("member", _NonEmptyString)
-
-	_CommandExecutions_member = _CommandExecutions.AddMember("member", CommandExecution)
-
-	_ImageVersions_member = _ImageVersions.AddMember("member", _String)
-
-	EnvironmentImage_name = EnvironmentImage.AddMember("name", _String)
-
-	EnvironmentImage_description = EnvironmentImage.AddMember("description", _String)
-
-	EnvironmentImage_versions = EnvironmentImage.AddMember("versions", _ImageVersions)
-
-	_EnvironmentImages_member = _EnvironmentImages.AddMember("member", EnvironmentImage)
-
-	LanguageType_JAVA = LanguageType.AddMember("JAVA", smithyprelude.Unit)
-
-	LanguageType_PYTHON = LanguageType.AddMember("PYTHON", smithyprelude.Unit)
-
-	LanguageType_NODE_JS = LanguageType.AddMember("NODE_JS", smithyprelude.Unit)
-
-	LanguageType_RUBY = LanguageType.AddMember("RUBY", smithyprelude.Unit)
-
-	LanguageType_GOLANG = LanguageType.AddMember("GOLANG", smithyprelude.Unit)
-
-	LanguageType_DOCKER = LanguageType.AddMember("DOCKER", smithyprelude.Unit)
-
-	LanguageType_ANDROID = LanguageType.AddMember("ANDROID", smithyprelude.Unit)
-
-	LanguageType_DOTNET = LanguageType.AddMember("DOTNET", smithyprelude.Unit)
-
-	LanguageType_BASE = LanguageType.AddMember("BASE", smithyprelude.Unit)
-
-	LanguageType_PHP = LanguageType.AddMember("PHP", smithyprelude.Unit)
-
-	EnvironmentLanguage_language = EnvironmentLanguage.AddMember("language", LanguageType)
-
-	EnvironmentLanguage_images = EnvironmentLanguage.AddMember("images", _EnvironmentImages)
-
-	_EnvironmentLanguages_member = _EnvironmentLanguages.AddMember("member", EnvironmentLanguage)
-
-	PlatformType_DEBIAN = PlatformType.AddMember("DEBIAN", smithyprelude.Unit)
-
-	PlatformType_AMAZON_LINUX = PlatformType.AddMember("AMAZON_LINUX", smithyprelude.Unit)
-
-	PlatformType_UBUNTU = PlatformType.AddMember("UBUNTU", smithyprelude.Unit)
-
-	PlatformType_WINDOWS_SERVER = PlatformType.AddMember("WINDOWS_SERVER", smithyprelude.Unit)
-
-	EnvironmentPlatform_platform = EnvironmentPlatform.AddMember("platform", PlatformType)
-
-	EnvironmentPlatform_languages = EnvironmentPlatform.AddMember("languages", _EnvironmentLanguages)
-
-	_EnvironmentPlatforms_member = _EnvironmentPlatforms.AddMember("member", EnvironmentPlatform)
-
-	WebhookFilterType_EVENT = WebhookFilterType.AddMember("EVENT", smithyprelude.Unit)
-
-	WebhookFilterType_BASE_REF = WebhookFilterType.AddMember("BASE_REF", smithyprelude.Unit)
-
-	WebhookFilterType_HEAD_REF = WebhookFilterType.AddMember("HEAD_REF", smithyprelude.Unit)
-
-	WebhookFilterType_ACTOR_ACCOUNT_ID = WebhookFilterType.AddMember("ACTOR_ACCOUNT_ID", smithyprelude.Unit)
-
-	WebhookFilterType_FILE_PATH = WebhookFilterType.AddMember("FILE_PATH", smithyprelude.Unit)
-
-	WebhookFilterType_COMMIT_MESSAGE = WebhookFilterType.AddMember("COMMIT_MESSAGE", smithyprelude.Unit)
-
-	WebhookFilterType_WORKFLOW_NAME = WebhookFilterType.AddMember("WORKFLOW_NAME", smithyprelude.Unit)
-
-	WebhookFilterType_TAG_NAME = WebhookFilterType.AddMember("TAG_NAME", smithyprelude.Unit)
-
-	WebhookFilterType_RELEASE_NAME = WebhookFilterType.AddMember("RELEASE_NAME", smithyprelude.Unit)
-
-	WebhookFilterType_REPOSITORY_NAME = WebhookFilterType.AddMember("REPOSITORY_NAME", smithyprelude.Unit)
-
-	WebhookFilterType_ORGANIZATION_NAME = WebhookFilterType.AddMember("ORGANIZATION_NAME", smithyprelude.Unit)
-
-	WebhookFilter_type = WebhookFilter.AddMember("type", WebhookFilterType)
-
-	WebhookFilter_pattern = WebhookFilter.AddMember("pattern", _String)
-
-	WebhookFilter_excludeMatchedPattern = WebhookFilter.AddMember("excludeMatchedPattern", _WrapperBoolean)
-
-	_FilterGroup_member = _FilterGroup.AddMember("member", WebhookFilter)
-
-	_FilterGroups_member = _FilterGroups.AddMember("member", _FilterGroup)
-
-	FleetStatusCode_CREATING = FleetStatusCode.AddMember("CREATING", smithyprelude.Unit)
-
-	FleetStatusCode_UPDATING = FleetStatusCode.AddMember("UPDATING", smithyprelude.Unit)
-
-	FleetStatusCode_ROTATING = FleetStatusCode.AddMember("ROTATING", smithyprelude.Unit)
-
-	FleetStatusCode_PENDING_DELETION = FleetStatusCode.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	FleetStatusCode_DELETING = FleetStatusCode.AddMember("DELETING", smithyprelude.Unit)
-
-	FleetStatusCode_CREATE_FAILED = FleetStatusCode.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	FleetStatusCode_UPDATE_ROLLBACK_FAILED = FleetStatusCode.AddMember("UPDATE_ROLLBACK_FAILED", smithyprelude.Unit)
-
-	FleetStatusCode_ACTIVE = FleetStatusCode.AddMember("ACTIVE", smithyprelude.Unit)
-
-	FleetContextCode_CREATE_FAILED = FleetContextCode.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	FleetContextCode_UPDATE_FAILED = FleetContextCode.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	FleetContextCode_ACTION_REQUIRED = FleetContextCode.AddMember("ACTION_REQUIRED", smithyprelude.Unit)
-
-	FleetContextCode_PENDING_DELETION = FleetContextCode.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	FleetContextCode_INSUFFICIENT_CAPACITY = FleetContextCode.AddMember("INSUFFICIENT_CAPACITY", smithyprelude.Unit)
-
-	FleetStatus_statusCode = FleetStatus.AddMember("statusCode", FleetStatusCode)
-
-	FleetStatus_context = FleetStatus.AddMember("context", FleetContextCode)
-
-	FleetStatus_message = FleetStatus.AddMember("message", _String)
-
-	FleetScalingType_TARGET_TRACKING_SCALING = FleetScalingType.AddMember("TARGET_TRACKING_SCALING", smithyprelude.Unit)
-
-	FleetScalingMetricType_FLEET_UTILIZATION_RATE = FleetScalingMetricType.AddMember("FLEET_UTILIZATION_RATE", smithyprelude.Unit)
-
-	TargetTrackingScalingConfiguration_metricType = TargetTrackingScalingConfiguration.AddMember("metricType", FleetScalingMetricType)
-
-	TargetTrackingScalingConfiguration_targetValue = TargetTrackingScalingConfiguration.AddMember("targetValue", _WrapperDouble)
-
-	_TargetTrackingScalingConfigurations_member = _TargetTrackingScalingConfigurations.AddMember("member", TargetTrackingScalingConfiguration)
-
-	ScalingConfigurationOutput_scalingType = ScalingConfigurationOutput.AddMember("scalingType", FleetScalingType)
-
-	ScalingConfigurationOutput_targetTrackingScalingConfigs = ScalingConfigurationOutput.AddMember("targetTrackingScalingConfigs", _TargetTrackingScalingConfigurations)
-
-	ScalingConfigurationOutput_maxCapacity = ScalingConfigurationOutput.AddMember("maxCapacity", _FleetCapacity)
-
-	ScalingConfigurationOutput_desiredCapacity = ScalingConfigurationOutput.AddMember("desiredCapacity", _FleetCapacity)
-
-	FleetOverflowBehavior_QUEUE = FleetOverflowBehavior.AddMember("QUEUE", smithyprelude.Unit)
-
-	FleetOverflowBehavior_ON_DEMAND = FleetOverflowBehavior.AddMember("ON_DEMAND", smithyprelude.Unit)
-
-	FleetProxyRuleBehavior_ALLOW_ALL = FleetProxyRuleBehavior.AddMember("ALLOW_ALL", smithyprelude.Unit)
-
-	FleetProxyRuleBehavior_DENY_ALL = FleetProxyRuleBehavior.AddMember("DENY_ALL", smithyprelude.Unit)
-
-	FleetProxyRuleType_DOMAIN = FleetProxyRuleType.AddMember("DOMAIN", smithyprelude.Unit)
-
-	FleetProxyRuleType_IP = FleetProxyRuleType.AddMember("IP", smithyprelude.Unit)
-
-	FleetProxyRuleEffectType_ALLOW = FleetProxyRuleEffectType.AddMember("ALLOW", smithyprelude.Unit)
-
-	FleetProxyRuleEffectType_DENY = FleetProxyRuleEffectType.AddMember("DENY", smithyprelude.Unit)
-
-	_FleetProxyRuleEntities_member = _FleetProxyRuleEntities.AddMember("member", _String)
-
-	FleetProxyRule_type = FleetProxyRule.AddMember("type", FleetProxyRuleType)
-
-	FleetProxyRule_effect = FleetProxyRule.AddMember("effect", FleetProxyRuleEffectType)
-
-	FleetProxyRule_entities = FleetProxyRule.AddMember("entities", _FleetProxyRuleEntities)
-
-	_FleetProxyRules_member = _FleetProxyRules.AddMember("member", FleetProxyRule)
-
-	ProxyConfiguration_defaultBehavior = ProxyConfiguration.AddMember("defaultBehavior", FleetProxyRuleBehavior)
-
-	ProxyConfiguration_orderedProxyRules = ProxyConfiguration.AddMember("orderedProxyRules", _FleetProxyRules)
-
-	Tag_key = Tag.AddMember("key", _KeyInput)
-
-	Tag_value = Tag.AddMember("value", _ValueInput)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	Fleet_arn = Fleet.AddMember("arn", _NonEmptyString)
-
-	Fleet_name = Fleet.AddMember("name", _FleetName)
-
-	Fleet_id = Fleet.AddMember("id", _NonEmptyString)
-
-	Fleet_created = Fleet.AddMember("created", _Timestamp)
-
-	Fleet_lastModified = Fleet.AddMember("lastModified", _Timestamp)
-
-	Fleet_status = Fleet.AddMember("status", FleetStatus)
-
-	Fleet_baseCapacity = Fleet.AddMember("baseCapacity", _FleetCapacity)
-
-	Fleet_environmentType = Fleet.AddMember("environmentType", EnvironmentType)
-
-	Fleet_computeType = Fleet.AddMember("computeType", ComputeType)
-
-	Fleet_computeConfiguration = Fleet.AddMember("computeConfiguration", ComputeConfiguration)
-
-	Fleet_scalingConfiguration = Fleet.AddMember("scalingConfiguration", ScalingConfigurationOutput)
-
-	Fleet_overflowBehavior = Fleet.AddMember("overflowBehavior", FleetOverflowBehavior)
-
-	Fleet_vpcConfig = Fleet.AddMember("vpcConfig", VpcConfig)
-
-	Fleet_proxyConfiguration = Fleet.AddMember("proxyConfiguration", ProxyConfiguration)
-
-	Fleet_imageId = Fleet.AddMember("imageId", _NonEmptyString)
-
-	Fleet_fleetServiceRole = Fleet.AddMember("fleetServiceRole", _NonEmptyString)
-
-	Fleet_tags = Fleet.AddMember("tags", _TagList)
-
-	_FleetArns_member = _FleetArns.AddMember("member", _NonEmptyString)
-
-	_FleetNames_member = _FleetNames.AddMember("member", _NonEmptyString)
-
-	_Fleets_member = _Fleets.AddMember("member", Fleet)
-
-	FleetSortByType_NAME = FleetSortByType.AddMember("NAME", smithyprelude.Unit)
-
-	FleetSortByType_CREATED_TIME = FleetSortByType.AddMember("CREATED_TIME", smithyprelude.Unit)
-
-	FleetSortByType_LAST_MODIFIED_TIME = FleetSortByType.AddMember("LAST_MODIFIED_TIME", smithyprelude.Unit)
-
-	InvalidInputException_message = InvalidInputException.AddMember("message", _String)
-
-	OAuthProviderException_message = OAuthProviderException.AddMember("message", _String)
-
-	ProjectArtifacts_type = ProjectArtifacts.AddMember("type", ArtifactsType)
-
-	ProjectArtifacts_location = ProjectArtifacts.AddMember("location", _String)
-
-	ProjectArtifacts_path = ProjectArtifacts.AddMember("path", _String)
-
-	ProjectArtifacts_namespaceType = ProjectArtifacts.AddMember("namespaceType", ArtifactNamespace)
-
-	ProjectArtifacts_name = ProjectArtifacts.AddMember("name", _String)
-
-	ProjectArtifacts_packaging = ProjectArtifacts.AddMember("packaging", ArtifactPackaging)
-
-	ProjectArtifacts_overrideArtifactName = ProjectArtifacts.AddMember("overrideArtifactName", _WrapperBoolean)
-
-	ProjectArtifacts_encryptionDisabled = ProjectArtifacts.AddMember("encryptionDisabled", _WrapperBoolean)
-
-	ProjectArtifacts_artifactIdentifier = ProjectArtifacts.AddMember("artifactIdentifier", _String)
-
-	ProjectArtifacts_bucketOwnerAccess = ProjectArtifacts.AddMember("bucketOwnerAccess", BucketOwnerAccess)
-
-	_ProjectArtifactsList_member = _ProjectArtifactsList.AddMember("member", ProjectArtifacts)
-
-	WebhookBuildType_BUILD = WebhookBuildType.AddMember("BUILD", smithyprelude.Unit)
-
-	WebhookBuildType_BUILD_BATCH = WebhookBuildType.AddMember("BUILD_BATCH", smithyprelude.Unit)
-
-	WebhookBuildType_RUNNER_BUILDKITE_BUILD = WebhookBuildType.AddMember("RUNNER_BUILDKITE_BUILD", smithyprelude.Unit)
-
-	WebhookScopeType_GITHUB_ORGANIZATION = WebhookScopeType.AddMember("GITHUB_ORGANIZATION", smithyprelude.Unit)
-
-	WebhookScopeType_GITHUB_GLOBAL = WebhookScopeType.AddMember("GITHUB_GLOBAL", smithyprelude.Unit)
-
-	WebhookScopeType_GITLAB_GROUP = WebhookScopeType.AddMember("GITLAB_GROUP", smithyprelude.Unit)
-
-	ScopeConfiguration_name = ScopeConfiguration.AddMember("name", _String)
-
-	ScopeConfiguration_domain = ScopeConfiguration.AddMember("domain", _String)
-
-	ScopeConfiguration_scope = ScopeConfiguration.AddMember("scope", WebhookScopeType)
-
-	WebhookStatus_CREATING = WebhookStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	WebhookStatus_CREATE_FAILED = WebhookStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	WebhookStatus_ACTIVE = WebhookStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	WebhookStatus_DELETING = WebhookStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	PullRequestBuildCommentApproval_DISABLED = PullRequestBuildCommentApproval.AddMember("DISABLED", smithyprelude.Unit)
-
-	PullRequestBuildCommentApproval_ALL_PULL_REQUESTS = PullRequestBuildCommentApproval.AddMember("ALL_PULL_REQUESTS", smithyprelude.Unit)
-
-	PullRequestBuildCommentApproval_FORK_PULL_REQUESTS = PullRequestBuildCommentApproval.AddMember("FORK_PULL_REQUESTS", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITHUB_READ = PullRequestBuildApproverRole.AddMember("GITHUB_READ", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITHUB_TRIAGE = PullRequestBuildApproverRole.AddMember("GITHUB_TRIAGE", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITHUB_WRITE = PullRequestBuildApproverRole.AddMember("GITHUB_WRITE", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITHUB_MAINTAIN = PullRequestBuildApproverRole.AddMember("GITHUB_MAINTAIN", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITHUB_ADMIN = PullRequestBuildApproverRole.AddMember("GITHUB_ADMIN", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITLAB_GUEST = PullRequestBuildApproverRole.AddMember("GITLAB_GUEST", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITLAB_PLANNER = PullRequestBuildApproverRole.AddMember("GITLAB_PLANNER", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITLAB_REPORTER = PullRequestBuildApproverRole.AddMember("GITLAB_REPORTER", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITLAB_DEVELOPER = PullRequestBuildApproverRole.AddMember("GITLAB_DEVELOPER", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITLAB_MAINTAINER = PullRequestBuildApproverRole.AddMember("GITLAB_MAINTAINER", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_GITLAB_OWNER = PullRequestBuildApproverRole.AddMember("GITLAB_OWNER", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_BITBUCKET_READ = PullRequestBuildApproverRole.AddMember("BITBUCKET_READ", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_BITBUCKET_WRITE = PullRequestBuildApproverRole.AddMember("BITBUCKET_WRITE", smithyprelude.Unit)
-
-	PullRequestBuildApproverRole_BITBUCKET_ADMIN = PullRequestBuildApproverRole.AddMember("BITBUCKET_ADMIN", smithyprelude.Unit)
-
-	_PullRequestBuildApproverRoles_member = _PullRequestBuildApproverRoles.AddMember("member", PullRequestBuildApproverRole)
-
-	PullRequestBuildPolicy_requiresCommentApproval = PullRequestBuildPolicy.AddMember("requiresCommentApproval", PullRequestBuildCommentApproval)
-
-	PullRequestBuildPolicy_approverRoles = PullRequestBuildPolicy.AddMember("approverRoles", _PullRequestBuildApproverRoles)
-
-	Webhook_url = Webhook.AddMember("url", _NonEmptyString)
-
-	Webhook_payloadUrl = Webhook.AddMember("payloadUrl", _NonEmptyString)
-
-	Webhook_secret = Webhook.AddMember("secret", _NonEmptyString)
-
-	Webhook_branchFilter = Webhook.AddMember("branchFilter", _String)
-
-	Webhook_filterGroups = Webhook.AddMember("filterGroups", _FilterGroups)
-
-	Webhook_buildType = Webhook.AddMember("buildType", WebhookBuildType)
-
-	Webhook_manualCreation = Webhook.AddMember("manualCreation", _WrapperBoolean)
-
-	Webhook_lastModifiedSecret = Webhook.AddMember("lastModifiedSecret", _Timestamp)
-
-	Webhook_scopeConfiguration = Webhook.AddMember("scopeConfiguration", ScopeConfiguration)
-
-	Webhook_status = Webhook.AddMember("status", WebhookStatus)
-
-	Webhook_statusMessage = Webhook.AddMember("statusMessage", _String)
-
-	Webhook_pullRequestBuildPolicy = Webhook.AddMember("pullRequestBuildPolicy", PullRequestBuildPolicy)
-
-	ProjectBadge_badgeEnabled = ProjectBadge.AddMember("badgeEnabled", _Boolean)
-
-	ProjectBadge_badgeRequestUrl = ProjectBadge.AddMember("badgeRequestUrl", _String)
-
-	ProjectVisibilityType_PUBLIC_READ = ProjectVisibilityType.AddMember("PUBLIC_READ", smithyprelude.Unit)
-
-	ProjectVisibilityType_PRIVATE = ProjectVisibilityType.AddMember("PRIVATE", smithyprelude.Unit)
-
-	Project_name = Project.AddMember("name", _ProjectName)
-
-	Project_arn = Project.AddMember("arn", _String)
-
-	Project_description = Project.AddMember("description", _ProjectDescription)
-
-	Project_source = Project.AddMember("source", ProjectSource)
-
-	Project_secondarySources = Project.AddMember("secondarySources", _ProjectSources)
-
-	Project_sourceVersion = Project.AddMember("sourceVersion", _String)
-
-	Project_secondarySourceVersions = Project.AddMember("secondarySourceVersions", _ProjectSecondarySourceVersions)
-
-	Project_artifacts = Project.AddMember("artifacts", ProjectArtifacts)
-
-	Project_secondaryArtifacts = Project.AddMember("secondaryArtifacts", _ProjectArtifactsList)
-
-	Project_cache = Project.AddMember("cache", ProjectCache)
-
-	Project_environment = Project.AddMember("environment", ProjectEnvironment)
-
-	Project_serviceRole = Project.AddMember("serviceRole", _NonEmptyString)
-
-	Project_timeoutInMinutes = Project.AddMember("timeoutInMinutes", _BuildTimeOut)
-
-	Project_queuedTimeoutInMinutes = Project.AddMember("queuedTimeoutInMinutes", _TimeOut)
-
-	Project_encryptionKey = Project.AddMember("encryptionKey", _NonEmptyString)
-
-	Project_tags = Project.AddMember("tags", _TagList)
-
-	Project_created = Project.AddMember("created", _Timestamp)
-
-	Project_lastModified = Project.AddMember("lastModified", _Timestamp)
-
-	Project_webhook = Project.AddMember("webhook", Webhook)
-
-	Project_vpcConfig = Project.AddMember("vpcConfig", VpcConfig)
-
-	Project_badge = Project.AddMember("badge", ProjectBadge)
-
-	Project_logsConfig = Project.AddMember("logsConfig", LogsConfig)
-
-	Project_fileSystemLocations = Project.AddMember("fileSystemLocations", _ProjectFileSystemLocations)
-
-	Project_buildBatchConfig = Project.AddMember("buildBatchConfig", ProjectBuildBatchConfig)
-
-	Project_concurrentBuildLimit = Project.AddMember("concurrentBuildLimit", _WrapperInt)
-
-	Project_projectVisibility = Project.AddMember("projectVisibility", ProjectVisibilityType)
-
-	Project_publicProjectAlias = Project.AddMember("publicProjectAlias", _NonEmptyString)
-
-	Project_resourceAccessRole = Project.AddMember("resourceAccessRole", _NonEmptyString)
-
-	Project_autoRetryLimit = Project.AddMember("autoRetryLimit", _WrapperInt)
-
-	_ProjectArns_member = _ProjectArns.AddMember("member", _NonEmptyString)
-
-	_ProjectNames_member = _ProjectNames.AddMember("member", _NonEmptyString)
-
-	_Projects_member = _Projects.AddMember("member", Project)
-
-	ProjectSortByType_NAME = ProjectSortByType.AddMember("NAME", smithyprelude.Unit)
-
-	ProjectSortByType_CREATED_TIME = ProjectSortByType.AddMember("CREATED_TIME", smithyprelude.Unit)
-
-	ProjectSortByType_LAST_MODIFIED_TIME = ProjectSortByType.AddMember("LAST_MODIFIED_TIME", smithyprelude.Unit)
-
-	ReportType_TEST = ReportType.AddMember("TEST", smithyprelude.Unit)
-
-	ReportType_CODE_COVERAGE = ReportType.AddMember("CODE_COVERAGE", smithyprelude.Unit)
-
-	ReportStatusType_GENERATING = ReportStatusType.AddMember("GENERATING", smithyprelude.Unit)
-
-	ReportStatusType_SUCCEEDED = ReportStatusType.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ReportStatusType_FAILED = ReportStatusType.AddMember("FAILED", smithyprelude.Unit)
-
-	ReportStatusType_INCOMPLETE = ReportStatusType.AddMember("INCOMPLETE", smithyprelude.Unit)
-
-	ReportStatusType_DELETING = ReportStatusType.AddMember("DELETING", smithyprelude.Unit)
-
-	ReportExportConfigType_S3 = ReportExportConfigType.AddMember("S3", smithyprelude.Unit)
-
-	ReportExportConfigType_NO_EXPORT = ReportExportConfigType.AddMember("NO_EXPORT", smithyprelude.Unit)
-
-	ReportPackagingType_ZIP = ReportPackagingType.AddMember("ZIP", smithyprelude.Unit)
-
-	ReportPackagingType_NONE = ReportPackagingType.AddMember("NONE", smithyprelude.Unit)
-
-	S3ReportExportConfig_bucket = S3ReportExportConfig.AddMember("bucket", _NonEmptyString)
-
-	S3ReportExportConfig_bucketOwner = S3ReportExportConfig.AddMember("bucketOwner", _String)
-
-	S3ReportExportConfig_path = S3ReportExportConfig.AddMember("path", _String)
-
-	S3ReportExportConfig_packaging = S3ReportExportConfig.AddMember("packaging", ReportPackagingType)
-
-	S3ReportExportConfig_encryptionKey = S3ReportExportConfig.AddMember("encryptionKey", _NonEmptyString)
-
-	S3ReportExportConfig_encryptionDisabled = S3ReportExportConfig.AddMember("encryptionDisabled", _WrapperBoolean)
-
-	ReportExportConfig_exportConfigType = ReportExportConfig.AddMember("exportConfigType", ReportExportConfigType)
-
-	ReportExportConfig_s3Destination = ReportExportConfig.AddMember("s3Destination", S3ReportExportConfig)
-
-	_ReportStatusCounts_key = _ReportStatusCounts.AddMember("key", _String)
-
-	_ReportStatusCounts_value = _ReportStatusCounts.AddMember("value", _WrapperInt)
-
-	TestReportSummary_total = TestReportSummary.AddMember("total", _WrapperInt)
-
-	TestReportSummary_statusCounts = TestReportSummary.AddMember("statusCounts", _ReportStatusCounts)
-
-	TestReportSummary_durationInNanoSeconds = TestReportSummary.AddMember("durationInNanoSeconds", _WrapperLong)
-
-	Report_arn = Report.AddMember("arn", _NonEmptyString)
-
-	Report_type = Report.AddMember("type", ReportType)
-
-	Report_name = Report.AddMember("name", _String)
-
-	Report_reportGroupArn = Report.AddMember("reportGroupArn", _NonEmptyString)
-
-	Report_executionId = Report.AddMember("executionId", _String)
-
-	Report_status = Report.AddMember("status", ReportStatusType)
-
-	Report_created = Report.AddMember("created", _Timestamp)
-
-	Report_expired = Report.AddMember("expired", _Timestamp)
-
-	Report_exportConfig = Report.AddMember("exportConfig", ReportExportConfig)
-
-	Report_truncated = Report.AddMember("truncated", _WrapperBoolean)
-
-	Report_testSummary = Report.AddMember("testSummary", TestReportSummary)
-
-	Report_codeCoverageSummary = Report.AddMember("codeCoverageSummary", CodeCoverageReportSummary)
-
-	_ReportArns_member = _ReportArns.AddMember("member", _NonEmptyString)
-
-	ReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE = ReportCodeCoverageSortByType.AddMember("LINE_COVERAGE_PERCENTAGE", smithyprelude.Unit)
-
-	ReportCodeCoverageSortByType_FILE_PATH = ReportCodeCoverageSortByType.AddMember("FILE_PATH", smithyprelude.Unit)
-
-	ReportFilter_status = ReportFilter.AddMember("status", ReportStatusType)
-
-	ReportGroupStatusType_ACTIVE = ReportGroupStatusType.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ReportGroupStatusType_DELETING = ReportGroupStatusType.AddMember("DELETING", smithyprelude.Unit)
-
-	ReportGroup_arn = ReportGroup.AddMember("arn", _NonEmptyString)
-
-	ReportGroup_name = ReportGroup.AddMember("name", _ReportGroupName)
-
-	ReportGroup_type = ReportGroup.AddMember("type", ReportType)
-
-	ReportGroup_exportConfig = ReportGroup.AddMember("exportConfig", ReportExportConfig)
-
-	ReportGroup_created = ReportGroup.AddMember("created", _Timestamp)
-
-	ReportGroup_lastModified = ReportGroup.AddMember("lastModified", _Timestamp)
-
-	ReportGroup_tags = ReportGroup.AddMember("tags", _TagList)
-
-	ReportGroup_status = ReportGroup.AddMember("status", ReportGroupStatusType)
-
-	_ReportGroupArns_member = _ReportGroupArns.AddMember("member", _NonEmptyString)
-
-	_ReportGroups_member = _ReportGroups.AddMember("member", ReportGroup)
-
-	ReportGroupSortByType_NAME = ReportGroupSortByType.AddMember("NAME", smithyprelude.Unit)
-
-	ReportGroupSortByType_CREATED_TIME = ReportGroupSortByType.AddMember("CREATED_TIME", smithyprelude.Unit)
-
-	ReportGroupSortByType_LAST_MODIFIED_TIME = ReportGroupSortByType.AddMember("LAST_MODIFIED_TIME", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_PASS_RATE = ReportGroupTrendFieldType.AddMember("PASS_RATE", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_DURATION = ReportGroupTrendFieldType.AddMember("DURATION", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_TOTAL = ReportGroupTrendFieldType.AddMember("TOTAL", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_LINE_COVERAGE = ReportGroupTrendFieldType.AddMember("LINE_COVERAGE", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_LINES_COVERED = ReportGroupTrendFieldType.AddMember("LINES_COVERED", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_LINES_MISSED = ReportGroupTrendFieldType.AddMember("LINES_MISSED", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_BRANCH_COVERAGE = ReportGroupTrendFieldType.AddMember("BRANCH_COVERAGE", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_BRANCHES_COVERED = ReportGroupTrendFieldType.AddMember("BRANCHES_COVERED", smithyprelude.Unit)
-
-	ReportGroupTrendFieldType_BRANCHES_MISSED = ReportGroupTrendFieldType.AddMember("BRANCHES_MISSED", smithyprelude.Unit)
-
-	ReportWithRawData_reportArn = ReportWithRawData.AddMember("reportArn", _NonEmptyString)
-
-	ReportWithRawData_data = ReportWithRawData.AddMember("data", _String)
-
-	_ReportGroupTrendRawDataList_member = _ReportGroupTrendRawDataList.AddMember("member", ReportWithRawData)
-
-	ReportGroupTrendStats_average = ReportGroupTrendStats.AddMember("average", _String)
-
-	ReportGroupTrendStats_max = ReportGroupTrendStats.AddMember("max", _String)
-
-	ReportGroupTrendStats_min = ReportGroupTrendStats.AddMember("min", _String)
-
-	_Reports_member = _Reports.AddMember("member", Report)
-
-	ResourceAlreadyExistsException_message = ResourceAlreadyExistsException.AddMember("message", _String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	RetryBuildBatchType_RETRY_ALL_BUILDS = RetryBuildBatchType.AddMember("RETRY_ALL_BUILDS", smithyprelude.Unit)
-
-	RetryBuildBatchType_RETRY_FAILED_BUILDS = RetryBuildBatchType.AddMember("RETRY_FAILED_BUILDS", smithyprelude.Unit)
-
-	SandboxSessionPhase_phaseType = SandboxSessionPhase.AddMember("phaseType", _String)
-
-	SandboxSessionPhase_phaseStatus = SandboxSessionPhase.AddMember("phaseStatus", StatusType)
-
-	SandboxSessionPhase_startTime = SandboxSessionPhase.AddMember("startTime", _Timestamp)
-
-	SandboxSessionPhase_endTime = SandboxSessionPhase.AddMember("endTime", _Timestamp)
-
-	SandboxSessionPhase_durationInSeconds = SandboxSessionPhase.AddMember("durationInSeconds", _WrapperLong)
-
-	SandboxSessionPhase_contexts = SandboxSessionPhase.AddMember("contexts", _PhaseContexts)
-
-	_SandboxSessionPhases_member = _SandboxSessionPhases.AddMember("member", SandboxSessionPhase)
-
-	SandboxSession_id = SandboxSession.AddMember("id", _NonEmptyString)
-
-	SandboxSession_status = SandboxSession.AddMember("status", _String)
-
-	SandboxSession_startTime = SandboxSession.AddMember("startTime", _Timestamp)
-
-	SandboxSession_endTime = SandboxSession.AddMember("endTime", _Timestamp)
-
-	SandboxSession_currentPhase = SandboxSession.AddMember("currentPhase", _String)
-
-	SandboxSession_phases = SandboxSession.AddMember("phases", _SandboxSessionPhases)
-
-	SandboxSession_resolvedSourceVersion = SandboxSession.AddMember("resolvedSourceVersion", _NonEmptyString)
-
-	SandboxSession_logs = SandboxSession.AddMember("logs", LogsLocation)
-
-	SandboxSession_networkInterface = SandboxSession.AddMember("networkInterface", NetworkInterface)
-
-	Sandbox_id = Sandbox.AddMember("id", _NonEmptyString)
-
-	Sandbox_arn = Sandbox.AddMember("arn", _NonEmptyString)
-
-	Sandbox_projectName = Sandbox.AddMember("projectName", _NonEmptyString)
-
-	Sandbox_requestTime = Sandbox.AddMember("requestTime", _Timestamp)
-
-	Sandbox_startTime = Sandbox.AddMember("startTime", _Timestamp)
-
-	Sandbox_endTime = Sandbox.AddMember("endTime", _Timestamp)
-
-	Sandbox_status = Sandbox.AddMember("status", _String)
-
-	Sandbox_source = Sandbox.AddMember("source", ProjectSource)
-
-	Sandbox_sourceVersion = Sandbox.AddMember("sourceVersion", _NonEmptyString)
-
-	Sandbox_secondarySources = Sandbox.AddMember("secondarySources", _ProjectSources)
-
-	Sandbox_secondarySourceVersions = Sandbox.AddMember("secondarySourceVersions", _ProjectSecondarySourceVersions)
-
-	Sandbox_environment = Sandbox.AddMember("environment", ProjectEnvironment)
-
-	Sandbox_fileSystemLocations = Sandbox.AddMember("fileSystemLocations", _ProjectFileSystemLocations)
-
-	Sandbox_timeoutInMinutes = Sandbox.AddMember("timeoutInMinutes", _WrapperInt)
-
-	Sandbox_queuedTimeoutInMinutes = Sandbox.AddMember("queuedTimeoutInMinutes", _WrapperInt)
-
-	Sandbox_vpcConfig = Sandbox.AddMember("vpcConfig", VpcConfig)
-
-	Sandbox_logConfig = Sandbox.AddMember("logConfig", LogsConfig)
-
-	Sandbox_encryptionKey = Sandbox.AddMember("encryptionKey", _NonEmptyString)
-
-	Sandbox_serviceRole = Sandbox.AddMember("serviceRole", _NonEmptyString)
-
-	Sandbox_currentSession = Sandbox.AddMember("currentSession", SandboxSession)
-
-	_Sandboxes_member = _Sandboxes.AddMember("member", Sandbox)
-
-	_SandboxIds_member = _SandboxIds.AddMember("member", _NonEmptyString)
-
-	ScalingConfigurationInput_scalingType = ScalingConfigurationInput.AddMember("scalingType", FleetScalingType)
-
-	ScalingConfigurationInput_targetTrackingScalingConfigs = ScalingConfigurationInput.AddMember("targetTrackingScalingConfigs", _TargetTrackingScalingConfigurations)
-
-	ScalingConfigurationInput_maxCapacity = ScalingConfigurationInput.AddMember("maxCapacity", _FleetCapacity)
-
-	ServerType_GITHUB = ServerType.AddMember("GITHUB", smithyprelude.Unit)
-
-	ServerType_BITBUCKET = ServerType.AddMember("BITBUCKET", smithyprelude.Unit)
-
-	ServerType_GITHUB_ENTERPRISE = ServerType.AddMember("GITHUB_ENTERPRISE", smithyprelude.Unit)
-
-	ServerType_GITLAB = ServerType.AddMember("GITLAB", smithyprelude.Unit)
-
-	ServerType_GITLAB_SELF_MANAGED = ServerType.AddMember("GITLAB_SELF_MANAGED", smithyprelude.Unit)
-
-	SharedResourceSortByType_ARN = SharedResourceSortByType.AddMember("ARN", smithyprelude.Unit)
-
-	SharedResourceSortByType_MODIFIED_TIME = SharedResourceSortByType.AddMember("MODIFIED_TIME", smithyprelude.Unit)
-
-	SortOrderType_ASCENDING = SortOrderType.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrderType_DESCENDING = SortOrderType.AddMember("DESCENDING", smithyprelude.Unit)
-
-	SourceCredentialsInfo_arn = SourceCredentialsInfo.AddMember("arn", _NonEmptyString)
-
-	SourceCredentialsInfo_serverType = SourceCredentialsInfo.AddMember("serverType", ServerType)
-
-	SourceCredentialsInfo_authType = SourceCredentialsInfo.AddMember("authType", AuthType)
-
-	SourceCredentialsInfo_resource = SourceCredentialsInfo.AddMember("resource", _String)
-
-	_SourceCredentialsInfos_member = _SourceCredentialsInfos.AddMember("member", SourceCredentialsInfo)
-
-	SSMSession_sessionId = SSMSession.AddMember("sessionId", _String)
-
-	SSMSession_tokenValue = SSMSession.AddMember("tokenValue", _String)
-
-	SSMSession_streamUrl = SSMSession.AddMember("streamUrl", _String)
-
-	TestCase_reportArn = TestCase.AddMember("reportArn", _NonEmptyString)
-
-	TestCase_testRawDataPath = TestCase.AddMember("testRawDataPath", _String)
-
-	TestCase_prefix = TestCase.AddMember("prefix", _String)
-
-	TestCase_name = TestCase.AddMember("name", _String)
-
-	TestCase_status = TestCase.AddMember("status", _String)
-
-	TestCase_durationInNanoSeconds = TestCase.AddMember("durationInNanoSeconds", _WrapperLong)
-
-	TestCase_message = TestCase.AddMember("message", _String)
-
-	TestCase_expired = TestCase.AddMember("expired", _Timestamp)
-
-	TestCase_testSuiteName = TestCase.AddMember("testSuiteName", _String)
-
-	TestCaseFilter_status = TestCaseFilter.AddMember("status", _String)
-
-	TestCaseFilter_keyword = TestCaseFilter.AddMember("keyword", _String)
-
-	_TestCases_member = _TestCases.AddMember("member", TestCase)
-
-	BatchDeleteBuildsInput_ids = BatchDeleteBuildsInput.AddMember("ids", _BuildIds)
-
-	BatchDeleteBuildsOutput_buildsDeleted = BatchDeleteBuildsOutput.AddMember("buildsDeleted", _BuildIds)
-
-	BatchDeleteBuildsOutput_buildsNotDeleted = BatchDeleteBuildsOutput.AddMember("buildsNotDeleted", _BuildsNotDeleted)
-
-	BatchGetBuildBatchesInput_ids = BatchGetBuildBatchesInput.AddMember("ids", _BuildBatchIds)
-
-	BatchGetBuildBatchesOutput_buildBatches = BatchGetBuildBatchesOutput.AddMember("buildBatches", _BuildBatches)
-
-	BatchGetBuildBatchesOutput_buildBatchesNotFound = BatchGetBuildBatchesOutput.AddMember("buildBatchesNotFound", _BuildBatchIds)
-
-	BatchGetBuildsInput_ids = BatchGetBuildsInput.AddMember("ids", _BuildIds)
-
-	BatchGetBuildsOutput_builds = BatchGetBuildsOutput.AddMember("builds", _Builds)
-
-	BatchGetBuildsOutput_buildsNotFound = BatchGetBuildsOutput.AddMember("buildsNotFound", _BuildIds)
-
-	BatchGetCommandExecutionsInput_sandboxId = BatchGetCommandExecutionsInput.AddMember("sandboxId", _NonEmptyString)
-
-	BatchGetCommandExecutionsInput_commandExecutionIds = BatchGetCommandExecutionsInput.AddMember("commandExecutionIds", _CommandExecutionIds)
-
-	BatchGetCommandExecutionsOutput_commandExecutions = BatchGetCommandExecutionsOutput.AddMember("commandExecutions", _CommandExecutions)
-
-	BatchGetCommandExecutionsOutput_commandExecutionsNotFound = BatchGetCommandExecutionsOutput.AddMember("commandExecutionsNotFound", _CommandExecutionIds)
-
-	BatchGetFleetsInput_names = BatchGetFleetsInput.AddMember("names", _FleetNames)
-
-	BatchGetFleetsOutput_fleets = BatchGetFleetsOutput.AddMember("fleets", _Fleets)
-
-	BatchGetFleetsOutput_fleetsNotFound = BatchGetFleetsOutput.AddMember("fleetsNotFound", _FleetNames)
-
-	BatchGetProjectsInput_names = BatchGetProjectsInput.AddMember("names", _ProjectNames)
-
-	BatchGetProjectsOutput_projects = BatchGetProjectsOutput.AddMember("projects", _Projects)
-
-	BatchGetProjectsOutput_projectsNotFound = BatchGetProjectsOutput.AddMember("projectsNotFound", _ProjectNames)
-
-	BatchGetReportGroupsInput_reportGroupArns = BatchGetReportGroupsInput.AddMember("reportGroupArns", _ReportGroupArns)
-
-	BatchGetReportGroupsOutput_reportGroups = BatchGetReportGroupsOutput.AddMember("reportGroups", _ReportGroups)
-
-	BatchGetReportGroupsOutput_reportGroupsNotFound = BatchGetReportGroupsOutput.AddMember("reportGroupsNotFound", _ReportGroupArns)
-
-	BatchGetReportsInput_reportArns = BatchGetReportsInput.AddMember("reportArns", _ReportArns)
-
-	BatchGetReportsOutput_reports = BatchGetReportsOutput.AddMember("reports", _Reports)
-
-	BatchGetReportsOutput_reportsNotFound = BatchGetReportsOutput.AddMember("reportsNotFound", _ReportArns)
-
-	BatchGetSandboxesInput_ids = BatchGetSandboxesInput.AddMember("ids", _SandboxIds)
-
-	BatchGetSandboxesOutput_sandboxes = BatchGetSandboxesOutput.AddMember("sandboxes", _Sandboxes)
-
-	BatchGetSandboxesOutput_sandboxesNotFound = BatchGetSandboxesOutput.AddMember("sandboxesNotFound", _SandboxIds)
-
-	CreateFleetInput_name = CreateFleetInput.AddMember("name", _FleetName)
-
-	CreateFleetInput_baseCapacity = CreateFleetInput.AddMember("baseCapacity", _FleetCapacity)
-
-	CreateFleetInput_environmentType = CreateFleetInput.AddMember("environmentType", EnvironmentType)
-
-	CreateFleetInput_computeType = CreateFleetInput.AddMember("computeType", ComputeType)
-
-	CreateFleetInput_computeConfiguration = CreateFleetInput.AddMember("computeConfiguration", ComputeConfiguration)
-
-	CreateFleetInput_scalingConfiguration = CreateFleetInput.AddMember("scalingConfiguration", ScalingConfigurationInput)
-
-	CreateFleetInput_overflowBehavior = CreateFleetInput.AddMember("overflowBehavior", FleetOverflowBehavior)
-
-	CreateFleetInput_vpcConfig = CreateFleetInput.AddMember("vpcConfig", VpcConfig)
-
-	CreateFleetInput_proxyConfiguration = CreateFleetInput.AddMember("proxyConfiguration", ProxyConfiguration)
-
-	CreateFleetInput_imageId = CreateFleetInput.AddMember("imageId", _NonEmptyString)
-
-	CreateFleetInput_fleetServiceRole = CreateFleetInput.AddMember("fleetServiceRole", _NonEmptyString)
-
-	CreateFleetInput_tags = CreateFleetInput.AddMember("tags", _TagList)
-
-	CreateFleetOutput_fleet = CreateFleetOutput.AddMember("fleet", Fleet)
-
-	CreateProjectInput_name = CreateProjectInput.AddMember("name", _ProjectName)
-
-	CreateProjectInput_description = CreateProjectInput.AddMember("description", _ProjectDescription)
-
-	CreateProjectInput_source = CreateProjectInput.AddMember("source", ProjectSource)
-
-	CreateProjectInput_secondarySources = CreateProjectInput.AddMember("secondarySources", _ProjectSources)
-
-	CreateProjectInput_sourceVersion = CreateProjectInput.AddMember("sourceVersion", _String)
-
-	CreateProjectInput_secondarySourceVersions = CreateProjectInput.AddMember("secondarySourceVersions", _ProjectSecondarySourceVersions)
-
-	CreateProjectInput_artifacts = CreateProjectInput.AddMember("artifacts", ProjectArtifacts)
-
-	CreateProjectInput_secondaryArtifacts = CreateProjectInput.AddMember("secondaryArtifacts", _ProjectArtifactsList)
-
-	CreateProjectInput_cache = CreateProjectInput.AddMember("cache", ProjectCache)
-
-	CreateProjectInput_environment = CreateProjectInput.AddMember("environment", ProjectEnvironment)
-
-	CreateProjectInput_serviceRole = CreateProjectInput.AddMember("serviceRole", _NonEmptyString)
-
-	CreateProjectInput_timeoutInMinutes = CreateProjectInput.AddMember("timeoutInMinutes", _BuildTimeOut)
-
-	CreateProjectInput_queuedTimeoutInMinutes = CreateProjectInput.AddMember("queuedTimeoutInMinutes", _TimeOut)
-
-	CreateProjectInput_encryptionKey = CreateProjectInput.AddMember("encryptionKey", _NonEmptyString)
-
-	CreateProjectInput_tags = CreateProjectInput.AddMember("tags", _TagList)
-
-	CreateProjectInput_vpcConfig = CreateProjectInput.AddMember("vpcConfig", VpcConfig)
-
-	CreateProjectInput_badgeEnabled = CreateProjectInput.AddMember("badgeEnabled", _WrapperBoolean)
-
-	CreateProjectInput_logsConfig = CreateProjectInput.AddMember("logsConfig", LogsConfig)
-
-	CreateProjectInput_fileSystemLocations = CreateProjectInput.AddMember("fileSystemLocations", _ProjectFileSystemLocations)
-
-	CreateProjectInput_buildBatchConfig = CreateProjectInput.AddMember("buildBatchConfig", ProjectBuildBatchConfig)
-
-	CreateProjectInput_concurrentBuildLimit = CreateProjectInput.AddMember("concurrentBuildLimit", _WrapperInt)
-
-	CreateProjectInput_autoRetryLimit = CreateProjectInput.AddMember("autoRetryLimit", _WrapperInt)
-
-	CreateProjectOutput_project = CreateProjectOutput.AddMember("project", Project)
-
-	CreateReportGroupInput_name = CreateReportGroupInput.AddMember("name", _ReportGroupName)
-
-	CreateReportGroupInput_type = CreateReportGroupInput.AddMember("type", ReportType)
-
-	CreateReportGroupInput_exportConfig = CreateReportGroupInput.AddMember("exportConfig", ReportExportConfig)
-
-	CreateReportGroupInput_tags = CreateReportGroupInput.AddMember("tags", _TagList)
-
-	CreateReportGroupOutput_reportGroup = CreateReportGroupOutput.AddMember("reportGroup", ReportGroup)
-
-	CreateWebhookInput_projectName = CreateWebhookInput.AddMember("projectName", _ProjectName)
-
-	CreateWebhookInput_branchFilter = CreateWebhookInput.AddMember("branchFilter", _String)
-
-	CreateWebhookInput_filterGroups = CreateWebhookInput.AddMember("filterGroups", _FilterGroups)
-
-	CreateWebhookInput_buildType = CreateWebhookInput.AddMember("buildType", WebhookBuildType)
-
-	CreateWebhookInput_manualCreation = CreateWebhookInput.AddMember("manualCreation", _WrapperBoolean)
-
-	CreateWebhookInput_scopeConfiguration = CreateWebhookInput.AddMember("scopeConfiguration", ScopeConfiguration)
-
-	CreateWebhookInput_pullRequestBuildPolicy = CreateWebhookInput.AddMember("pullRequestBuildPolicy", PullRequestBuildPolicy)
-
-	CreateWebhookOutput_webhook = CreateWebhookOutput.AddMember("webhook", Webhook)
-
-	DeleteBuildBatchInput_id = DeleteBuildBatchInput.AddMember("id", _NonEmptyString)
-
-	DeleteBuildBatchOutput_statusCode = DeleteBuildBatchOutput.AddMember("statusCode", _String)
-
-	DeleteBuildBatchOutput_buildsDeleted = DeleteBuildBatchOutput.AddMember("buildsDeleted", _BuildIds)
-
-	DeleteBuildBatchOutput_buildsNotDeleted = DeleteBuildBatchOutput.AddMember("buildsNotDeleted", _BuildsNotDeleted)
-
-	DeleteFleetInput_arn = DeleteFleetInput.AddMember("arn", _NonEmptyString)
-
-	DeleteProjectInput_name = DeleteProjectInput.AddMember("name", _NonEmptyString)
-
-	DeleteReportGroupInput_arn = DeleteReportGroupInput.AddMember("arn", _NonEmptyString)
-
-	DeleteReportGroupInput_deleteReports = DeleteReportGroupInput.AddMember("deleteReports", _Boolean)
-
-	DeleteReportInput_arn = DeleteReportInput.AddMember("arn", _NonEmptyString)
-
-	DeleteResourcePolicyInput_resourceArn = DeleteResourcePolicyInput.AddMember("resourceArn", _NonEmptyString)
-
-	DeleteSourceCredentialsInput_arn = DeleteSourceCredentialsInput.AddMember("arn", _NonEmptyString)
-
-	DeleteSourceCredentialsOutput_arn = DeleteSourceCredentialsOutput.AddMember("arn", _NonEmptyString)
-
-	DeleteWebhookInput_projectName = DeleteWebhookInput.AddMember("projectName", _ProjectName)
-
-	DescribeCodeCoveragesInput_reportArn = DescribeCodeCoveragesInput.AddMember("reportArn", _NonEmptyString)
-
-	DescribeCodeCoveragesInput_nextToken = DescribeCodeCoveragesInput.AddMember("nextToken", _String)
-
-	DescribeCodeCoveragesInput_maxResults = DescribeCodeCoveragesInput.AddMember("maxResults", _PageSize)
-
-	DescribeCodeCoveragesInput_sortOrder = DescribeCodeCoveragesInput.AddMember("sortOrder", SortOrderType)
-
-	DescribeCodeCoveragesInput_sortBy = DescribeCodeCoveragesInput.AddMember("sortBy", ReportCodeCoverageSortByType)
-
-	DescribeCodeCoveragesInput_minLineCoveragePercentage = DescribeCodeCoveragesInput.AddMember("minLineCoveragePercentage", _Percentage)
-
-	DescribeCodeCoveragesInput_maxLineCoveragePercentage = DescribeCodeCoveragesInput.AddMember("maxLineCoveragePercentage", _Percentage)
-
-	DescribeCodeCoveragesOutput_nextToken = DescribeCodeCoveragesOutput.AddMember("nextToken", _String)
-
-	DescribeCodeCoveragesOutput_codeCoverages = DescribeCodeCoveragesOutput.AddMember("codeCoverages", _CodeCoverages)
-
-	DescribeTestCasesInput_reportArn = DescribeTestCasesInput.AddMember("reportArn", _String)
-
-	DescribeTestCasesInput_nextToken = DescribeTestCasesInput.AddMember("nextToken", _String)
-
-	DescribeTestCasesInput_maxResults = DescribeTestCasesInput.AddMember("maxResults", _PageSize)
-
-	DescribeTestCasesInput_filter = DescribeTestCasesInput.AddMember("filter", TestCaseFilter)
-
-	DescribeTestCasesOutput_nextToken = DescribeTestCasesOutput.AddMember("nextToken", _String)
-
-	DescribeTestCasesOutput_testCases = DescribeTestCasesOutput.AddMember("testCases", _TestCases)
-
-	GetReportGroupTrendInput_reportGroupArn = GetReportGroupTrendInput.AddMember("reportGroupArn", _NonEmptyString)
-
-	GetReportGroupTrendInput_numOfReports = GetReportGroupTrendInput.AddMember("numOfReports", _PageSize)
-
-	GetReportGroupTrendInput_trendField = GetReportGroupTrendInput.AddMember("trendField", ReportGroupTrendFieldType)
-
-	GetReportGroupTrendOutput_stats = GetReportGroupTrendOutput.AddMember("stats", ReportGroupTrendStats)
-
-	GetReportGroupTrendOutput_rawData = GetReportGroupTrendOutput.AddMember("rawData", _ReportGroupTrendRawDataList)
-
-	GetResourcePolicyInput_resourceArn = GetResourcePolicyInput.AddMember("resourceArn", _NonEmptyString)
-
-	GetResourcePolicyOutput_policy = GetResourcePolicyOutput.AddMember("policy", _NonEmptyString)
-
-	ImportSourceCredentialsInput_username = ImportSourceCredentialsInput.AddMember("username", _NonEmptyString)
-
-	ImportSourceCredentialsInput_token = ImportSourceCredentialsInput.AddMember("token", _SensitiveNonEmptyString)
-
-	ImportSourceCredentialsInput_serverType = ImportSourceCredentialsInput.AddMember("serverType", ServerType)
-
-	ImportSourceCredentialsInput_authType = ImportSourceCredentialsInput.AddMember("authType", AuthType)
-
-	ImportSourceCredentialsInput_shouldOverwrite = ImportSourceCredentialsInput.AddMember("shouldOverwrite", _WrapperBoolean)
-
-	ImportSourceCredentialsOutput_arn = ImportSourceCredentialsOutput.AddMember("arn", _NonEmptyString)
-
-	InvalidateProjectCacheInput_projectName = InvalidateProjectCacheInput.AddMember("projectName", _NonEmptyString)
-
-	ListBuildBatchesForProjectInput_projectName = ListBuildBatchesForProjectInput.AddMember("projectName", _NonEmptyString)
-
-	ListBuildBatchesForProjectInput_filter = ListBuildBatchesForProjectInput.AddMember("filter", BuildBatchFilter)
-
-	ListBuildBatchesForProjectInput_maxResults = ListBuildBatchesForProjectInput.AddMember("maxResults", _PageSize)
-
-	ListBuildBatchesForProjectInput_sortOrder = ListBuildBatchesForProjectInput.AddMember("sortOrder", SortOrderType)
-
-	ListBuildBatchesForProjectInput_nextToken = ListBuildBatchesForProjectInput.AddMember("nextToken", _String)
-
-	ListBuildBatchesForProjectOutput_ids = ListBuildBatchesForProjectOutput.AddMember("ids", _BuildBatchIds)
-
-	ListBuildBatchesForProjectOutput_nextToken = ListBuildBatchesForProjectOutput.AddMember("nextToken", _String)
-
-	ListBuildBatchesInput_filter = ListBuildBatchesInput.AddMember("filter", BuildBatchFilter)
-
-	ListBuildBatchesInput_maxResults = ListBuildBatchesInput.AddMember("maxResults", _PageSize)
-
-	ListBuildBatchesInput_sortOrder = ListBuildBatchesInput.AddMember("sortOrder", SortOrderType)
-
-	ListBuildBatchesInput_nextToken = ListBuildBatchesInput.AddMember("nextToken", _String)
-
-	ListBuildBatchesOutput_ids = ListBuildBatchesOutput.AddMember("ids", _BuildBatchIds)
-
-	ListBuildBatchesOutput_nextToken = ListBuildBatchesOutput.AddMember("nextToken", _String)
-
-	ListBuildsForProjectInput_projectName = ListBuildsForProjectInput.AddMember("projectName", _NonEmptyString)
-
-	ListBuildsForProjectInput_sortOrder = ListBuildsForProjectInput.AddMember("sortOrder", SortOrderType)
-
-	ListBuildsForProjectInput_nextToken = ListBuildsForProjectInput.AddMember("nextToken", _String)
-
-	ListBuildsForProjectOutput_ids = ListBuildsForProjectOutput.AddMember("ids", _BuildIds)
-
-	ListBuildsForProjectOutput_nextToken = ListBuildsForProjectOutput.AddMember("nextToken", _String)
-
-	ListBuildsInput_sortOrder = ListBuildsInput.AddMember("sortOrder", SortOrderType)
-
-	ListBuildsInput_nextToken = ListBuildsInput.AddMember("nextToken", _String)
-
-	ListBuildsOutput_ids = ListBuildsOutput.AddMember("ids", _BuildIds)
-
-	ListBuildsOutput_nextToken = ListBuildsOutput.AddMember("nextToken", _String)
-
-	ListCommandExecutionsForSandboxInput_sandboxId = ListCommandExecutionsForSandboxInput.AddMember("sandboxId", _NonEmptyString)
-
-	ListCommandExecutionsForSandboxInput_maxResults = ListCommandExecutionsForSandboxInput.AddMember("maxResults", _PageSize)
-
-	ListCommandExecutionsForSandboxInput_sortOrder = ListCommandExecutionsForSandboxInput.AddMember("sortOrder", SortOrderType)
-
-	ListCommandExecutionsForSandboxInput_nextToken = ListCommandExecutionsForSandboxInput.AddMember("nextToken", _SensitiveString)
-
-	ListCommandExecutionsForSandboxOutput_commandExecutions = ListCommandExecutionsForSandboxOutput.AddMember("commandExecutions", _CommandExecutions)
-
-	ListCommandExecutionsForSandboxOutput_nextToken = ListCommandExecutionsForSandboxOutput.AddMember("nextToken", _String)
-
-	ListCuratedEnvironmentImagesOutput_platforms = ListCuratedEnvironmentImagesOutput.AddMember("platforms", _EnvironmentPlatforms)
-
-	ListFleetsInput_nextToken = ListFleetsInput.AddMember("nextToken", _SensitiveString)
-
-	ListFleetsInput_maxResults = ListFleetsInput.AddMember("maxResults", _PageSize)
-
-	ListFleetsInput_sortOrder = ListFleetsInput.AddMember("sortOrder", SortOrderType)
-
-	ListFleetsInput_sortBy = ListFleetsInput.AddMember("sortBy", FleetSortByType)
-
-	ListFleetsOutput_nextToken = ListFleetsOutput.AddMember("nextToken", _String)
-
-	ListFleetsOutput_fleets = ListFleetsOutput.AddMember("fleets", _FleetArns)
-
-	ListProjectsInput_sortBy = ListProjectsInput.AddMember("sortBy", ProjectSortByType)
-
-	ListProjectsInput_sortOrder = ListProjectsInput.AddMember("sortOrder", SortOrderType)
-
-	ListProjectsInput_nextToken = ListProjectsInput.AddMember("nextToken", _NonEmptyString)
-
-	ListProjectsOutput_nextToken = ListProjectsOutput.AddMember("nextToken", _String)
-
-	ListProjectsOutput_projects = ListProjectsOutput.AddMember("projects", _ProjectNames)
-
-	ListReportGroupsInput_sortOrder = ListReportGroupsInput.AddMember("sortOrder", SortOrderType)
-
-	ListReportGroupsInput_sortBy = ListReportGroupsInput.AddMember("sortBy", ReportGroupSortByType)
-
-	ListReportGroupsInput_nextToken = ListReportGroupsInput.AddMember("nextToken", _String)
-
-	ListReportGroupsInput_maxResults = ListReportGroupsInput.AddMember("maxResults", _PageSize)
-
-	ListReportGroupsOutput_nextToken = ListReportGroupsOutput.AddMember("nextToken", _String)
-
-	ListReportGroupsOutput_reportGroups = ListReportGroupsOutput.AddMember("reportGroups", _ReportGroupArns)
-
-	ListReportsForReportGroupInput_reportGroupArn = ListReportsForReportGroupInput.AddMember("reportGroupArn", _String)
-
-	ListReportsForReportGroupInput_nextToken = ListReportsForReportGroupInput.AddMember("nextToken", _String)
-
-	ListReportsForReportGroupInput_sortOrder = ListReportsForReportGroupInput.AddMember("sortOrder", SortOrderType)
-
-	ListReportsForReportGroupInput_maxResults = ListReportsForReportGroupInput.AddMember("maxResults", _PageSize)
-
-	ListReportsForReportGroupInput_filter = ListReportsForReportGroupInput.AddMember("filter", ReportFilter)
-
-	ListReportsForReportGroupOutput_nextToken = ListReportsForReportGroupOutput.AddMember("nextToken", _String)
-
-	ListReportsForReportGroupOutput_reports = ListReportsForReportGroupOutput.AddMember("reports", _ReportArns)
-
-	ListReportsInput_sortOrder = ListReportsInput.AddMember("sortOrder", SortOrderType)
-
-	ListReportsInput_nextToken = ListReportsInput.AddMember("nextToken", _String)
-
-	ListReportsInput_maxResults = ListReportsInput.AddMember("maxResults", _PageSize)
-
-	ListReportsInput_filter = ListReportsInput.AddMember("filter", ReportFilter)
-
-	ListReportsOutput_nextToken = ListReportsOutput.AddMember("nextToken", _String)
-
-	ListReportsOutput_reports = ListReportsOutput.AddMember("reports", _ReportArns)
-
-	ListSandboxesForProjectInput_projectName = ListSandboxesForProjectInput.AddMember("projectName", _NonEmptyString)
-
-	ListSandboxesForProjectInput_maxResults = ListSandboxesForProjectInput.AddMember("maxResults", _PageSize)
-
-	ListSandboxesForProjectInput_sortOrder = ListSandboxesForProjectInput.AddMember("sortOrder", SortOrderType)
-
-	ListSandboxesForProjectInput_nextToken = ListSandboxesForProjectInput.AddMember("nextToken", _SensitiveString)
-
-	ListSandboxesForProjectOutput_ids = ListSandboxesForProjectOutput.AddMember("ids", _SandboxIds)
-
-	ListSandboxesForProjectOutput_nextToken = ListSandboxesForProjectOutput.AddMember("nextToken", _String)
-
-	ListSandboxesInput_maxResults = ListSandboxesInput.AddMember("maxResults", _PageSize)
-
-	ListSandboxesInput_sortOrder = ListSandboxesInput.AddMember("sortOrder", SortOrderType)
-
-	ListSandboxesInput_nextToken = ListSandboxesInput.AddMember("nextToken", _String)
-
-	ListSandboxesOutput_ids = ListSandboxesOutput.AddMember("ids", _SandboxIds)
-
-	ListSandboxesOutput_nextToken = ListSandboxesOutput.AddMember("nextToken", _String)
-
-	ListSharedProjectsInput_sortBy = ListSharedProjectsInput.AddMember("sortBy", SharedResourceSortByType)
-
-	ListSharedProjectsInput_sortOrder = ListSharedProjectsInput.AddMember("sortOrder", SortOrderType)
-
-	ListSharedProjectsInput_maxResults = ListSharedProjectsInput.AddMember("maxResults", _PageSize)
-
-	ListSharedProjectsInput_nextToken = ListSharedProjectsInput.AddMember("nextToken", _NonEmptyString)
-
-	ListSharedProjectsOutput_nextToken = ListSharedProjectsOutput.AddMember("nextToken", _String)
-
-	ListSharedProjectsOutput_projects = ListSharedProjectsOutput.AddMember("projects", _ProjectArns)
-
-	ListSharedReportGroupsInput_sortOrder = ListSharedReportGroupsInput.AddMember("sortOrder", SortOrderType)
-
-	ListSharedReportGroupsInput_sortBy = ListSharedReportGroupsInput.AddMember("sortBy", SharedResourceSortByType)
-
-	ListSharedReportGroupsInput_nextToken = ListSharedReportGroupsInput.AddMember("nextToken", _String)
-
-	ListSharedReportGroupsInput_maxResults = ListSharedReportGroupsInput.AddMember("maxResults", _PageSize)
-
-	ListSharedReportGroupsOutput_nextToken = ListSharedReportGroupsOutput.AddMember("nextToken", _String)
-
-	ListSharedReportGroupsOutput_reportGroups = ListSharedReportGroupsOutput.AddMember("reportGroups", _ReportGroupArns)
-
-	ListSourceCredentialsOutput_sourceCredentialsInfos = ListSourceCredentialsOutput.AddMember("sourceCredentialsInfos", _SourceCredentialsInfos)
-
-	PutResourcePolicyInput_policy = PutResourcePolicyInput.AddMember("policy", _NonEmptyString)
-
-	PutResourcePolicyInput_resourceArn = PutResourcePolicyInput.AddMember("resourceArn", _NonEmptyString)
-
-	PutResourcePolicyOutput_resourceArn = PutResourcePolicyOutput.AddMember("resourceArn", _NonEmptyString)
-
-	RetryBuildBatchInput_id = RetryBuildBatchInput.AddMember("id", _NonEmptyString)
-
-	RetryBuildBatchInput_idempotencyToken = RetryBuildBatchInput.AddMember("idempotencyToken", _String)
-
-	RetryBuildBatchInput_retryType = RetryBuildBatchInput.AddMember("retryType", RetryBuildBatchType)
-
-	RetryBuildBatchOutput_buildBatch = RetryBuildBatchOutput.AddMember("buildBatch", BuildBatch)
-
-	RetryBuildInput_id = RetryBuildInput.AddMember("id", _NonEmptyString)
-
-	RetryBuildInput_idempotencyToken = RetryBuildInput.AddMember("idempotencyToken", _String)
-
-	RetryBuildOutput_build = RetryBuildOutput.AddMember("build", Build)
-
-	StartBuildBatchInput_projectName = StartBuildBatchInput.AddMember("projectName", _NonEmptyString)
-
-	StartBuildBatchInput_secondarySourcesOverride = StartBuildBatchInput.AddMember("secondarySourcesOverride", _ProjectSources)
-
-	StartBuildBatchInput_secondarySourcesVersionOverride = StartBuildBatchInput.AddMember("secondarySourcesVersionOverride", _ProjectSecondarySourceVersions)
-
-	StartBuildBatchInput_sourceVersion = StartBuildBatchInput.AddMember("sourceVersion", _String)
-
-	StartBuildBatchInput_artifactsOverride = StartBuildBatchInput.AddMember("artifactsOverride", ProjectArtifacts)
-
-	StartBuildBatchInput_secondaryArtifactsOverride = StartBuildBatchInput.AddMember("secondaryArtifactsOverride", _ProjectArtifactsList)
-
-	StartBuildBatchInput_environmentVariablesOverride = StartBuildBatchInput.AddMember("environmentVariablesOverride", _EnvironmentVariables)
-
-	StartBuildBatchInput_sourceTypeOverride = StartBuildBatchInput.AddMember("sourceTypeOverride", SourceType)
-
-	StartBuildBatchInput_sourceLocationOverride = StartBuildBatchInput.AddMember("sourceLocationOverride", _String)
-
-	StartBuildBatchInput_sourceAuthOverride = StartBuildBatchInput.AddMember("sourceAuthOverride", SourceAuth)
-
-	StartBuildBatchInput_gitCloneDepthOverride = StartBuildBatchInput.AddMember("gitCloneDepthOverride", _GitCloneDepth)
-
-	StartBuildBatchInput_gitSubmodulesConfigOverride = StartBuildBatchInput.AddMember("gitSubmodulesConfigOverride", GitSubmodulesConfig)
-
-	StartBuildBatchInput_buildspecOverride = StartBuildBatchInput.AddMember("buildspecOverride", _String)
-
-	StartBuildBatchInput_insecureSslOverride = StartBuildBatchInput.AddMember("insecureSslOverride", _WrapperBoolean)
-
-	StartBuildBatchInput_reportBuildBatchStatusOverride = StartBuildBatchInput.AddMember("reportBuildBatchStatusOverride", _WrapperBoolean)
-
-	StartBuildBatchInput_environmentTypeOverride = StartBuildBatchInput.AddMember("environmentTypeOverride", EnvironmentType)
-
-	StartBuildBatchInput_imageOverride = StartBuildBatchInput.AddMember("imageOverride", _NonEmptyString)
-
-	StartBuildBatchInput_computeTypeOverride = StartBuildBatchInput.AddMember("computeTypeOverride", ComputeType)
-
-	StartBuildBatchInput_certificateOverride = StartBuildBatchInput.AddMember("certificateOverride", _String)
-
-	StartBuildBatchInput_cacheOverride = StartBuildBatchInput.AddMember("cacheOverride", ProjectCache)
-
-	StartBuildBatchInput_serviceRoleOverride = StartBuildBatchInput.AddMember("serviceRoleOverride", _NonEmptyString)
-
-	StartBuildBatchInput_privilegedModeOverride = StartBuildBatchInput.AddMember("privilegedModeOverride", _WrapperBoolean)
-
-	StartBuildBatchInput_buildTimeoutInMinutesOverride = StartBuildBatchInput.AddMember("buildTimeoutInMinutesOverride", _BuildTimeOut)
-
-	StartBuildBatchInput_queuedTimeoutInMinutesOverride = StartBuildBatchInput.AddMember("queuedTimeoutInMinutesOverride", _TimeOut)
-
-	StartBuildBatchInput_encryptionKeyOverride = StartBuildBatchInput.AddMember("encryptionKeyOverride", _NonEmptyString)
-
-	StartBuildBatchInput_idempotencyToken = StartBuildBatchInput.AddMember("idempotencyToken", _String)
-
-	StartBuildBatchInput_logsConfigOverride = StartBuildBatchInput.AddMember("logsConfigOverride", LogsConfig)
-
-	StartBuildBatchInput_registryCredentialOverride = StartBuildBatchInput.AddMember("registryCredentialOverride", RegistryCredential)
-
-	StartBuildBatchInput_imagePullCredentialsTypeOverride = StartBuildBatchInput.AddMember("imagePullCredentialsTypeOverride", ImagePullCredentialsType)
-
-	StartBuildBatchInput_buildBatchConfigOverride = StartBuildBatchInput.AddMember("buildBatchConfigOverride", ProjectBuildBatchConfig)
-
-	StartBuildBatchInput_debugSessionEnabled = StartBuildBatchInput.AddMember("debugSessionEnabled", _WrapperBoolean)
-
-	StartBuildBatchOutput_buildBatch = StartBuildBatchOutput.AddMember("buildBatch", BuildBatch)
-
-	StartBuildInput_projectName = StartBuildInput.AddMember("projectName", _NonEmptyString)
-
-	StartBuildInput_secondarySourcesOverride = StartBuildInput.AddMember("secondarySourcesOverride", _ProjectSources)
-
-	StartBuildInput_secondarySourcesVersionOverride = StartBuildInput.AddMember("secondarySourcesVersionOverride", _ProjectSecondarySourceVersions)
-
-	StartBuildInput_sourceVersion = StartBuildInput.AddMember("sourceVersion", _String)
-
-	StartBuildInput_artifactsOverride = StartBuildInput.AddMember("artifactsOverride", ProjectArtifacts)
-
-	StartBuildInput_secondaryArtifactsOverride = StartBuildInput.AddMember("secondaryArtifactsOverride", _ProjectArtifactsList)
-
-	StartBuildInput_environmentVariablesOverride = StartBuildInput.AddMember("environmentVariablesOverride", _EnvironmentVariables)
-
-	StartBuildInput_sourceTypeOverride = StartBuildInput.AddMember("sourceTypeOverride", SourceType)
-
-	StartBuildInput_sourceLocationOverride = StartBuildInput.AddMember("sourceLocationOverride", _String)
-
-	StartBuildInput_sourceAuthOverride = StartBuildInput.AddMember("sourceAuthOverride", SourceAuth)
-
-	StartBuildInput_gitCloneDepthOverride = StartBuildInput.AddMember("gitCloneDepthOverride", _GitCloneDepth)
-
-	StartBuildInput_gitSubmodulesConfigOverride = StartBuildInput.AddMember("gitSubmodulesConfigOverride", GitSubmodulesConfig)
-
-	StartBuildInput_buildspecOverride = StartBuildInput.AddMember("buildspecOverride", _String)
-
-	StartBuildInput_insecureSslOverride = StartBuildInput.AddMember("insecureSslOverride", _WrapperBoolean)
-
-	StartBuildInput_reportBuildStatusOverride = StartBuildInput.AddMember("reportBuildStatusOverride", _WrapperBoolean)
-
-	StartBuildInput_buildStatusConfigOverride = StartBuildInput.AddMember("buildStatusConfigOverride", BuildStatusConfig)
-
-	StartBuildInput_environmentTypeOverride = StartBuildInput.AddMember("environmentTypeOverride", EnvironmentType)
-
-	StartBuildInput_imageOverride = StartBuildInput.AddMember("imageOverride", _NonEmptyString)
-
-	StartBuildInput_computeTypeOverride = StartBuildInput.AddMember("computeTypeOverride", ComputeType)
-
-	StartBuildInput_certificateOverride = StartBuildInput.AddMember("certificateOverride", _String)
-
-	StartBuildInput_cacheOverride = StartBuildInput.AddMember("cacheOverride", ProjectCache)
-
-	StartBuildInput_serviceRoleOverride = StartBuildInput.AddMember("serviceRoleOverride", _NonEmptyString)
-
-	StartBuildInput_privilegedModeOverride = StartBuildInput.AddMember("privilegedModeOverride", _WrapperBoolean)
-
-	StartBuildInput_timeoutInMinutesOverride = StartBuildInput.AddMember("timeoutInMinutesOverride", _BuildTimeOut)
-
-	StartBuildInput_queuedTimeoutInMinutesOverride = StartBuildInput.AddMember("queuedTimeoutInMinutesOverride", _TimeOut)
-
-	StartBuildInput_encryptionKeyOverride = StartBuildInput.AddMember("encryptionKeyOverride", _NonEmptyString)
-
-	StartBuildInput_idempotencyToken = StartBuildInput.AddMember("idempotencyToken", _String)
-
-	StartBuildInput_logsConfigOverride = StartBuildInput.AddMember("logsConfigOverride", LogsConfig)
-
-	StartBuildInput_registryCredentialOverride = StartBuildInput.AddMember("registryCredentialOverride", RegistryCredential)
-
-	StartBuildInput_imagePullCredentialsTypeOverride = StartBuildInput.AddMember("imagePullCredentialsTypeOverride", ImagePullCredentialsType)
-
-	StartBuildInput_debugSessionEnabled = StartBuildInput.AddMember("debugSessionEnabled", _WrapperBoolean)
-
-	StartBuildInput_fleetOverride = StartBuildInput.AddMember("fleetOverride", ProjectFleet)
-
-	StartBuildInput_autoRetryLimitOverride = StartBuildInput.AddMember("autoRetryLimitOverride", _WrapperInt)
-
-	StartBuildInput_hostKernelOverride = StartBuildInput.AddMember("hostKernelOverride", HostKernel)
-
-	StartBuildOutput_build = StartBuildOutput.AddMember("build", Build)
-
-	StartCommandExecutionInput_sandboxId = StartCommandExecutionInput.AddMember("sandboxId", _NonEmptyString)
-
-	StartCommandExecutionInput_command = StartCommandExecutionInput.AddMember("command", _SensitiveNonEmptyString)
-
-	StartCommandExecutionInput_type = StartCommandExecutionInput.AddMember("type", CommandType)
-
-	StartCommandExecutionOutput_commandExecution = StartCommandExecutionOutput.AddMember("commandExecution", CommandExecution)
-
-	StartSandboxConnectionInput_sandboxId = StartSandboxConnectionInput.AddMember("sandboxId", _NonEmptyString)
-
-	StartSandboxConnectionOutput_ssmSession = StartSandboxConnectionOutput.AddMember("ssmSession", SSMSession)
-
-	StartSandboxInput_projectName = StartSandboxInput.AddMember("projectName", _NonEmptyString)
-
-	StartSandboxInput_idempotencyToken = StartSandboxInput.AddMember("idempotencyToken", _SensitiveString)
-
-	StartSandboxOutput_sandbox = StartSandboxOutput.AddMember("sandbox", Sandbox)
-
-	StopBuildBatchInput_id = StopBuildBatchInput.AddMember("id", _NonEmptyString)
-
-	StopBuildBatchOutput_buildBatch = StopBuildBatchOutput.AddMember("buildBatch", BuildBatch)
-
-	StopBuildInput_id = StopBuildInput.AddMember("id", _NonEmptyString)
-
-	StopBuildOutput_build = StopBuildOutput.AddMember("build", Build)
-
-	StopSandboxInput_id = StopSandboxInput.AddMember("id", _NonEmptyString)
-
-	StopSandboxOutput_sandbox = StopSandboxOutput.AddMember("sandbox", Sandbox)
-
-	UpdateFleetInput_arn = UpdateFleetInput.AddMember("arn", _NonEmptyString)
-
-	UpdateFleetInput_baseCapacity = UpdateFleetInput.AddMember("baseCapacity", _FleetCapacity)
-
-	UpdateFleetInput_environmentType = UpdateFleetInput.AddMember("environmentType", EnvironmentType)
-
-	UpdateFleetInput_computeType = UpdateFleetInput.AddMember("computeType", ComputeType)
-
-	UpdateFleetInput_computeConfiguration = UpdateFleetInput.AddMember("computeConfiguration", ComputeConfiguration)
-
-	UpdateFleetInput_scalingConfiguration = UpdateFleetInput.AddMember("scalingConfiguration", ScalingConfigurationInput)
-
-	UpdateFleetInput_overflowBehavior = UpdateFleetInput.AddMember("overflowBehavior", FleetOverflowBehavior)
-
-	UpdateFleetInput_vpcConfig = UpdateFleetInput.AddMember("vpcConfig", VpcConfig)
-
-	UpdateFleetInput_proxyConfiguration = UpdateFleetInput.AddMember("proxyConfiguration", ProxyConfiguration)
-
-	UpdateFleetInput_imageId = UpdateFleetInput.AddMember("imageId", _NonEmptyString)
-
-	UpdateFleetInput_fleetServiceRole = UpdateFleetInput.AddMember("fleetServiceRole", _NonEmptyString)
-
-	UpdateFleetInput_tags = UpdateFleetInput.AddMember("tags", _TagList)
-
-	UpdateFleetOutput_fleet = UpdateFleetOutput.AddMember("fleet", Fleet)
-
-	UpdateProjectInput_name = UpdateProjectInput.AddMember("name", _NonEmptyString)
-
-	UpdateProjectInput_description = UpdateProjectInput.AddMember("description", _ProjectDescription)
-
-	UpdateProjectInput_source = UpdateProjectInput.AddMember("source", ProjectSource)
-
-	UpdateProjectInput_secondarySources = UpdateProjectInput.AddMember("secondarySources", _ProjectSources)
-
-	UpdateProjectInput_sourceVersion = UpdateProjectInput.AddMember("sourceVersion", _String)
-
-	UpdateProjectInput_secondarySourceVersions = UpdateProjectInput.AddMember("secondarySourceVersions", _ProjectSecondarySourceVersions)
-
-	UpdateProjectInput_artifacts = UpdateProjectInput.AddMember("artifacts", ProjectArtifacts)
-
-	UpdateProjectInput_secondaryArtifacts = UpdateProjectInput.AddMember("secondaryArtifacts", _ProjectArtifactsList)
-
-	UpdateProjectInput_cache = UpdateProjectInput.AddMember("cache", ProjectCache)
-
-	UpdateProjectInput_environment = UpdateProjectInput.AddMember("environment", ProjectEnvironment)
-
-	UpdateProjectInput_serviceRole = UpdateProjectInput.AddMember("serviceRole", _NonEmptyString)
-
-	UpdateProjectInput_timeoutInMinutes = UpdateProjectInput.AddMember("timeoutInMinutes", _BuildTimeOut)
-
-	UpdateProjectInput_queuedTimeoutInMinutes = UpdateProjectInput.AddMember("queuedTimeoutInMinutes", _TimeOut)
-
-	UpdateProjectInput_encryptionKey = UpdateProjectInput.AddMember("encryptionKey", _NonEmptyString)
-
-	UpdateProjectInput_tags = UpdateProjectInput.AddMember("tags", _TagList)
-
-	UpdateProjectInput_vpcConfig = UpdateProjectInput.AddMember("vpcConfig", VpcConfig)
-
-	UpdateProjectInput_badgeEnabled = UpdateProjectInput.AddMember("badgeEnabled", _WrapperBoolean)
-
-	UpdateProjectInput_logsConfig = UpdateProjectInput.AddMember("logsConfig", LogsConfig)
-
-	UpdateProjectInput_fileSystemLocations = UpdateProjectInput.AddMember("fileSystemLocations", _ProjectFileSystemLocations)
-
-	UpdateProjectInput_buildBatchConfig = UpdateProjectInput.AddMember("buildBatchConfig", ProjectBuildBatchConfig)
-
-	UpdateProjectInput_concurrentBuildLimit = UpdateProjectInput.AddMember("concurrentBuildLimit", _WrapperInt)
-
-	UpdateProjectInput_autoRetryLimit = UpdateProjectInput.AddMember("autoRetryLimit", _WrapperInt)
-
-	UpdateProjectOutput_project = UpdateProjectOutput.AddMember("project", Project)
-
-	UpdateProjectVisibilityInput_projectArn = UpdateProjectVisibilityInput.AddMember("projectArn", _NonEmptyString)
-
-	UpdateProjectVisibilityInput_projectVisibility = UpdateProjectVisibilityInput.AddMember("projectVisibility", ProjectVisibilityType)
-
-	UpdateProjectVisibilityInput_resourceAccessRole = UpdateProjectVisibilityInput.AddMember("resourceAccessRole", _NonEmptyString)
-
-	UpdateProjectVisibilityOutput_projectArn = UpdateProjectVisibilityOutput.AddMember("projectArn", _NonEmptyString)
-
-	UpdateProjectVisibilityOutput_publicProjectAlias = UpdateProjectVisibilityOutput.AddMember("publicProjectAlias", _NonEmptyString)
-
-	UpdateProjectVisibilityOutput_projectVisibility = UpdateProjectVisibilityOutput.AddMember("projectVisibility", ProjectVisibilityType)
-
-	UpdateReportGroupInput_arn = UpdateReportGroupInput.AddMember("arn", _NonEmptyString)
-
-	UpdateReportGroupInput_exportConfig = UpdateReportGroupInput.AddMember("exportConfig", ReportExportConfig)
-
-	UpdateReportGroupInput_tags = UpdateReportGroupInput.AddMember("tags", _TagList)
-
-	UpdateReportGroupOutput_reportGroup = UpdateReportGroupOutput.AddMember("reportGroup", ReportGroup)
-
-	UpdateWebhookInput_projectName = UpdateWebhookInput.AddMember("projectName", _ProjectName)
-
-	UpdateWebhookInput_branchFilter = UpdateWebhookInput.AddMember("branchFilter", _String)
-
-	UpdateWebhookInput_rotateSecret = UpdateWebhookInput.AddMember("rotateSecret", _Boolean)
-
-	UpdateWebhookInput_filterGroups = UpdateWebhookInput.AddMember("filterGroups", _FilterGroups)
-
-	UpdateWebhookInput_buildType = UpdateWebhookInput.AddMember("buildType", WebhookBuildType)
-
-	UpdateWebhookInput_pullRequestBuildPolicy = UpdateWebhookInput.AddMember("pullRequestBuildPolicy", PullRequestBuildPolicy)
-
-	UpdateWebhookOutput_webhook = UpdateWebhookOutput.AddMember("webhook", Webhook)
-
-}
+var (
+	eBatchDeleteBuilds                                         smithy.SchemaExtensions
+	eBatchGetBuildBatches                                      smithy.SchemaExtensions
+	eBatchGetBuilds                                            smithy.SchemaExtensions
+	eBatchGetCommandExecutions                                 smithy.SchemaExtensions
+	eBatchGetFleets                                            smithy.SchemaExtensions
+	eBatchGetProjects                                          smithy.SchemaExtensions
+	eBatchGetReportGroups                                      smithy.SchemaExtensions
+	eBatchGetReports                                           smithy.SchemaExtensions
+	eBatchGetSandboxes                                         smithy.SchemaExtensions
+	eCreateFleet                                               smithy.SchemaExtensions
+	eCreateProject                                             smithy.SchemaExtensions
+	eCreateReportGroup                                         smithy.SchemaExtensions
+	eCreateWebhook                                             smithy.SchemaExtensions
+	eDeleteBuildBatch                                          smithy.SchemaExtensions
+	eDeleteFleet                                               smithy.SchemaExtensions
+	eDeleteProject                                             smithy.SchemaExtensions
+	eDeleteReport                                              smithy.SchemaExtensions
+	eDeleteReportGroup                                         smithy.SchemaExtensions
+	eDeleteResourcePolicy                                      smithy.SchemaExtensions
+	eDeleteSourceCredentials                                   smithy.SchemaExtensions
+	eDeleteWebhook                                             smithy.SchemaExtensions
+	eDescribeCodeCoverages                                     smithy.SchemaExtensions
+	eDescribeTestCases                                         smithy.SchemaExtensions
+	eGetReportGroupTrend                                       smithy.SchemaExtensions
+	eGetResourcePolicy                                         smithy.SchemaExtensions
+	eImportSourceCredentials                                   smithy.SchemaExtensions
+	eInvalidateProjectCache                                    smithy.SchemaExtensions
+	eListBuildBatches                                          smithy.SchemaExtensions
+	eListBuildBatchesForProject                                smithy.SchemaExtensions
+	eListBuilds                                                smithy.SchemaExtensions
+	eListBuildsForProject                                      smithy.SchemaExtensions
+	eListCommandExecutionsForSandbox                           smithy.SchemaExtensions
+	eListCuratedEnvironmentImages                              smithy.SchemaExtensions
+	eListFleets                                                smithy.SchemaExtensions
+	eListProjects                                              smithy.SchemaExtensions
+	eListReportGroups                                          smithy.SchemaExtensions
+	eListReports                                               smithy.SchemaExtensions
+	eListReportsForReportGroup                                 smithy.SchemaExtensions
+	eListSandboxes                                             smithy.SchemaExtensions
+	eListSandboxesForProject                                   smithy.SchemaExtensions
+	eListSharedProjects                                        smithy.SchemaExtensions
+	eListSharedReportGroups                                    smithy.SchemaExtensions
+	eListSourceCredentials                                     smithy.SchemaExtensions
+	ePutResourcePolicy                                         smithy.SchemaExtensions
+	eRetryBuild                                                smithy.SchemaExtensions
+	eRetryBuildBatch                                           smithy.SchemaExtensions
+	eStartBuild                                                smithy.SchemaExtensions
+	eStartBuildBatch                                           smithy.SchemaExtensions
+	eStartCommandExecution                                     smithy.SchemaExtensions
+	eStartSandbox                                              smithy.SchemaExtensions
+	eStartSandboxConnection                                    smithy.SchemaExtensions
+	eStopBuild                                                 smithy.SchemaExtensions
+	eStopBuildBatch                                            smithy.SchemaExtensions
+	eStopSandbox                                               smithy.SchemaExtensions
+	eUpdateFleet                                               smithy.SchemaExtensions
+	eUpdateProject                                             smithy.SchemaExtensions
+	eUpdateProjectVisibility                                   smithy.SchemaExtensions
+	eUpdateReportGroup                                         smithy.SchemaExtensions
+	eUpdateWebhook                                             smithy.SchemaExtensions
+	e_CodeBuild_20161006                                       smithy.SchemaExtensions
+	eAccountLimitExceededException                             smithy.SchemaExtensions
+	eAccountLimitExceededException_message                     smithy.SchemaExtensions
+	eAccountSuspendedException                                 smithy.SchemaExtensions
+	eAccountSuspendedException_message                         smithy.SchemaExtensions
+	eArtifactNamespace                                         smithy.SchemaExtensions
+	eArtifactNamespace_NONE                                    smithy.SchemaExtensions
+	eArtifactNamespace_BUILD_ID                                smithy.SchemaExtensions
+	eArtifactPackaging                                         smithy.SchemaExtensions
+	eArtifactPackaging_NONE                                    smithy.SchemaExtensions
+	eArtifactPackaging_ZIP                                     smithy.SchemaExtensions
+	eArtifactsType                                             smithy.SchemaExtensions
+	eArtifactsType_CODEPIPELINE                                smithy.SchemaExtensions
+	eArtifactsType_S3                                          smithy.SchemaExtensions
+	eArtifactsType_NO_ARTIFACTS                                smithy.SchemaExtensions
+	eAuthType                                                  smithy.SchemaExtensions
+	eAuthType_OAUTH                                            smithy.SchemaExtensions
+	eAuthType_BASIC_AUTH                                       smithy.SchemaExtensions
+	eAuthType_PERSONAL_ACCESS_TOKEN                            smithy.SchemaExtensions
+	eAuthType_CODECONNECTIONS                                  smithy.SchemaExtensions
+	eAuthType_SECRETS_MANAGER                                  smithy.SchemaExtensions
+	eAutoRetryConfig                                           smithy.SchemaExtensions
+	eAutoRetryConfig_autoRetryLimit                            smithy.SchemaExtensions
+	eAutoRetryConfig_autoRetryNumber                           smithy.SchemaExtensions
+	eAutoRetryConfig_nextAutoRetry                             smithy.SchemaExtensions
+	eAutoRetryConfig_previousAutoRetry                         smithy.SchemaExtensions
+	eBatchReportModeType                                       smithy.SchemaExtensions
+	eBatchReportModeType_REPORT_INDIVIDUAL_BUILDS              smithy.SchemaExtensions
+	eBatchReportModeType_REPORT_AGGREGATED_BATCH               smithy.SchemaExtensions
+	eBatchRestrictions                                         smithy.SchemaExtensions
+	eBatchRestrictions_maximumBuildsAllowed                    smithy.SchemaExtensions
+	eBatchRestrictions_computeTypesAllowed                     smithy.SchemaExtensions
+	eBatchRestrictions_fleetsAllowed                           smithy.SchemaExtensions
+	e_Boolean                                                  smithy.SchemaExtensions
+	eBucketOwnerAccess                                         smithy.SchemaExtensions
+	eBucketOwnerAccess_NONE                                    smithy.SchemaExtensions
+	eBucketOwnerAccess_READ_ONLY                               smithy.SchemaExtensions
+	eBucketOwnerAccess_FULL                                    smithy.SchemaExtensions
+	eBuild                                                     smithy.SchemaExtensions
+	eBuild_id                                                  smithy.SchemaExtensions
+	eBuild_arn                                                 smithy.SchemaExtensions
+	eBuild_buildNumber                                         smithy.SchemaExtensions
+	eBuild_startTime                                           smithy.SchemaExtensions
+	eBuild_endTime                                             smithy.SchemaExtensions
+	eBuild_currentPhase                                        smithy.SchemaExtensions
+	eBuild_buildStatus                                         smithy.SchemaExtensions
+	eBuild_sourceVersion                                       smithy.SchemaExtensions
+	eBuild_resolvedSourceVersion                               smithy.SchemaExtensions
+	eBuild_projectName                                         smithy.SchemaExtensions
+	eBuild_phases                                              smithy.SchemaExtensions
+	eBuild_source                                              smithy.SchemaExtensions
+	eBuild_secondarySources                                    smithy.SchemaExtensions
+	eBuild_secondarySourceVersions                             smithy.SchemaExtensions
+	eBuild_artifacts                                           smithy.SchemaExtensions
+	eBuild_secondaryArtifacts                                  smithy.SchemaExtensions
+	eBuild_cache                                               smithy.SchemaExtensions
+	eBuild_environment                                         smithy.SchemaExtensions
+	eBuild_serviceRole                                         smithy.SchemaExtensions
+	eBuild_logs                                                smithy.SchemaExtensions
+	eBuild_timeoutInMinutes                                    smithy.SchemaExtensions
+	eBuild_queuedTimeoutInMinutes                              smithy.SchemaExtensions
+	eBuild_buildComplete                                       smithy.SchemaExtensions
+	eBuild_initiator                                           smithy.SchemaExtensions
+	eBuild_vpcConfig                                           smithy.SchemaExtensions
+	eBuild_networkInterface                                    smithy.SchemaExtensions
+	eBuild_encryptionKey                                       smithy.SchemaExtensions
+	eBuild_exportedEnvironmentVariables                        smithy.SchemaExtensions
+	eBuild_reportArns                                          smithy.SchemaExtensions
+	eBuild_fileSystemLocations                                 smithy.SchemaExtensions
+	eBuild_debugSession                                        smithy.SchemaExtensions
+	eBuild_buildBatchArn                                       smithy.SchemaExtensions
+	eBuild_autoRetryConfig                                     smithy.SchemaExtensions
+	eBuildArtifacts                                            smithy.SchemaExtensions
+	eBuildArtifacts_location                                   smithy.SchemaExtensions
+	eBuildArtifacts_sha256sum                                  smithy.SchemaExtensions
+	eBuildArtifacts_md5sum                                     smithy.SchemaExtensions
+	eBuildArtifacts_overrideArtifactName                       smithy.SchemaExtensions
+	eBuildArtifacts_encryptionDisabled                         smithy.SchemaExtensions
+	eBuildArtifacts_artifactIdentifier                         smithy.SchemaExtensions
+	eBuildArtifacts_bucketOwnerAccess                          smithy.SchemaExtensions
+	e_BuildArtifactsList                                       smithy.SchemaExtensions
+	e_BuildArtifactsList_member                                smithy.SchemaExtensions
+	eBuildBatch                                                smithy.SchemaExtensions
+	eBuildBatch_id                                             smithy.SchemaExtensions
+	eBuildBatch_arn                                            smithy.SchemaExtensions
+	eBuildBatch_startTime                                      smithy.SchemaExtensions
+	eBuildBatch_endTime                                        smithy.SchemaExtensions
+	eBuildBatch_currentPhase                                   smithy.SchemaExtensions
+	eBuildBatch_buildBatchStatus                               smithy.SchemaExtensions
+	eBuildBatch_sourceVersion                                  smithy.SchemaExtensions
+	eBuildBatch_resolvedSourceVersion                          smithy.SchemaExtensions
+	eBuildBatch_projectName                                    smithy.SchemaExtensions
+	eBuildBatch_phases                                         smithy.SchemaExtensions
+	eBuildBatch_source                                         smithy.SchemaExtensions
+	eBuildBatch_secondarySources                               smithy.SchemaExtensions
+	eBuildBatch_secondarySourceVersions                        smithy.SchemaExtensions
+	eBuildBatch_artifacts                                      smithy.SchemaExtensions
+	eBuildBatch_secondaryArtifacts                             smithy.SchemaExtensions
+	eBuildBatch_cache                                          smithy.SchemaExtensions
+	eBuildBatch_environment                                    smithy.SchemaExtensions
+	eBuildBatch_serviceRole                                    smithy.SchemaExtensions
+	eBuildBatch_logConfig                                      smithy.SchemaExtensions
+	eBuildBatch_buildTimeoutInMinutes                          smithy.SchemaExtensions
+	eBuildBatch_queuedTimeoutInMinutes                         smithy.SchemaExtensions
+	eBuildBatch_complete                                       smithy.SchemaExtensions
+	eBuildBatch_initiator                                      smithy.SchemaExtensions
+	eBuildBatch_vpcConfig                                      smithy.SchemaExtensions
+	eBuildBatch_encryptionKey                                  smithy.SchemaExtensions
+	eBuildBatch_buildBatchNumber                               smithy.SchemaExtensions
+	eBuildBatch_fileSystemLocations                            smithy.SchemaExtensions
+	eBuildBatch_buildBatchConfig                               smithy.SchemaExtensions
+	eBuildBatch_buildGroups                                    smithy.SchemaExtensions
+	eBuildBatch_debugSessionEnabled                            smithy.SchemaExtensions
+	eBuildBatch_reportArns                                     smithy.SchemaExtensions
+	e_BuildBatches                                             smithy.SchemaExtensions
+	e_BuildBatches_member                                      smithy.SchemaExtensions
+	eBuildBatchFilter                                          smithy.SchemaExtensions
+	eBuildBatchFilter_status                                   smithy.SchemaExtensions
+	e_BuildBatchIds                                            smithy.SchemaExtensions
+	e_BuildBatchIds_member                                     smithy.SchemaExtensions
+	eBuildBatchPhase                                           smithy.SchemaExtensions
+	eBuildBatchPhase_phaseType                                 smithy.SchemaExtensions
+	eBuildBatchPhase_phaseStatus                               smithy.SchemaExtensions
+	eBuildBatchPhase_startTime                                 smithy.SchemaExtensions
+	eBuildBatchPhase_endTime                                   smithy.SchemaExtensions
+	eBuildBatchPhase_durationInSeconds                         smithy.SchemaExtensions
+	eBuildBatchPhase_contexts                                  smithy.SchemaExtensions
+	e_BuildBatchPhases                                         smithy.SchemaExtensions
+	e_BuildBatchPhases_member                                  smithy.SchemaExtensions
+	eBuildBatchPhaseType                                       smithy.SchemaExtensions
+	eBuildBatchPhaseType_SUBMITTED                             smithy.SchemaExtensions
+	eBuildBatchPhaseType_DOWNLOAD_BATCHSPEC                    smithy.SchemaExtensions
+	eBuildBatchPhaseType_IN_PROGRESS                           smithy.SchemaExtensions
+	eBuildBatchPhaseType_COMBINE_ARTIFACTS                     smithy.SchemaExtensions
+	eBuildBatchPhaseType_SUCCEEDED                             smithy.SchemaExtensions
+	eBuildBatchPhaseType_FAILED                                smithy.SchemaExtensions
+	eBuildBatchPhaseType_STOPPED                               smithy.SchemaExtensions
+	eBuildGroup                                                smithy.SchemaExtensions
+	eBuildGroup_identifier                                     smithy.SchemaExtensions
+	eBuildGroup_dependsOn                                      smithy.SchemaExtensions
+	eBuildGroup_ignoreFailure                                  smithy.SchemaExtensions
+	eBuildGroup_currentBuildSummary                            smithy.SchemaExtensions
+	eBuildGroup_priorBuildSummaryList                          smithy.SchemaExtensions
+	e_BuildGroups                                              smithy.SchemaExtensions
+	e_BuildGroups_member                                       smithy.SchemaExtensions
+	e_BuildIds                                                 smithy.SchemaExtensions
+	e_BuildIds_member                                          smithy.SchemaExtensions
+	eBuildNotDeleted                                           smithy.SchemaExtensions
+	eBuildNotDeleted_id                                        smithy.SchemaExtensions
+	eBuildNotDeleted_statusCode                                smithy.SchemaExtensions
+	eBuildPhase                                                smithy.SchemaExtensions
+	eBuildPhase_phaseType                                      smithy.SchemaExtensions
+	eBuildPhase_phaseStatus                                    smithy.SchemaExtensions
+	eBuildPhase_startTime                                      smithy.SchemaExtensions
+	eBuildPhase_endTime                                        smithy.SchemaExtensions
+	eBuildPhase_durationInSeconds                              smithy.SchemaExtensions
+	eBuildPhase_contexts                                       smithy.SchemaExtensions
+	e_BuildPhases                                              smithy.SchemaExtensions
+	e_BuildPhases_member                                       smithy.SchemaExtensions
+	eBuildPhaseType                                            smithy.SchemaExtensions
+	eBuildPhaseType_SUBMITTED                                  smithy.SchemaExtensions
+	eBuildPhaseType_QUEUED                                     smithy.SchemaExtensions
+	eBuildPhaseType_PROVISIONING                               smithy.SchemaExtensions
+	eBuildPhaseType_DOWNLOAD_SOURCE                            smithy.SchemaExtensions
+	eBuildPhaseType_INSTALL                                    smithy.SchemaExtensions
+	eBuildPhaseType_PRE_BUILD                                  smithy.SchemaExtensions
+	eBuildPhaseType_BUILD                                      smithy.SchemaExtensions
+	eBuildPhaseType_POST_BUILD                                 smithy.SchemaExtensions
+	eBuildPhaseType_UPLOAD_ARTIFACTS                           smithy.SchemaExtensions
+	eBuildPhaseType_FINALIZING                                 smithy.SchemaExtensions
+	eBuildPhaseType_COMPLETED                                  smithy.SchemaExtensions
+	e_BuildReportArns                                          smithy.SchemaExtensions
+	e_BuildReportArns_member                                   smithy.SchemaExtensions
+	e_Builds                                                   smithy.SchemaExtensions
+	e_Builds_member                                            smithy.SchemaExtensions
+	e_BuildsNotDeleted                                         smithy.SchemaExtensions
+	e_BuildsNotDeleted_member                                  smithy.SchemaExtensions
+	eBuildStatusConfig                                         smithy.SchemaExtensions
+	eBuildStatusConfig_context                                 smithy.SchemaExtensions
+	eBuildStatusConfig_targetUrl                               smithy.SchemaExtensions
+	e_BuildSummaries                                           smithy.SchemaExtensions
+	e_BuildSummaries_member                                    smithy.SchemaExtensions
+	eBuildSummary                                              smithy.SchemaExtensions
+	eBuildSummary_arn                                          smithy.SchemaExtensions
+	eBuildSummary_requestedOn                                  smithy.SchemaExtensions
+	eBuildSummary_buildStatus                                  smithy.SchemaExtensions
+	eBuildSummary_primaryArtifact                              smithy.SchemaExtensions
+	eBuildSummary_secondaryArtifacts                           smithy.SchemaExtensions
+	e_BuildTimeOut                                             smithy.SchemaExtensions
+	eCacheMode                                                 smithy.SchemaExtensions
+	eCacheMode_LOCAL_DOCKER_LAYER_CACHE                        smithy.SchemaExtensions
+	eCacheMode_LOCAL_SOURCE_CACHE                              smithy.SchemaExtensions
+	eCacheMode_LOCAL_CUSTOM_CACHE                              smithy.SchemaExtensions
+	eCacheType                                                 smithy.SchemaExtensions
+	eCacheType_NO_CACHE                                        smithy.SchemaExtensions
+	eCacheType_S3                                              smithy.SchemaExtensions
+	eCacheType_LOCAL                                           smithy.SchemaExtensions
+	eCloudWatchLogsConfig                                      smithy.SchemaExtensions
+	eCloudWatchLogsConfig_status                               smithy.SchemaExtensions
+	eCloudWatchLogsConfig_groupName                            smithy.SchemaExtensions
+	eCloudWatchLogsConfig_streamName                           smithy.SchemaExtensions
+	eCodeCoverage                                              smithy.SchemaExtensions
+	eCodeCoverage_id                                           smithy.SchemaExtensions
+	eCodeCoverage_reportARN                                    smithy.SchemaExtensions
+	eCodeCoverage_filePath                                     smithy.SchemaExtensions
+	eCodeCoverage_lineCoveragePercentage                       smithy.SchemaExtensions
+	eCodeCoverage_linesCovered                                 smithy.SchemaExtensions
+	eCodeCoverage_linesMissed                                  smithy.SchemaExtensions
+	eCodeCoverage_branchCoveragePercentage                     smithy.SchemaExtensions
+	eCodeCoverage_branchesCovered                              smithy.SchemaExtensions
+	eCodeCoverage_branchesMissed                               smithy.SchemaExtensions
+	eCodeCoverage_expired                                      smithy.SchemaExtensions
+	eCodeCoverageReportSummary                                 smithy.SchemaExtensions
+	eCodeCoverageReportSummary_lineCoveragePercentage          smithy.SchemaExtensions
+	eCodeCoverageReportSummary_linesCovered                    smithy.SchemaExtensions
+	eCodeCoverageReportSummary_linesMissed                     smithy.SchemaExtensions
+	eCodeCoverageReportSummary_branchCoveragePercentage        smithy.SchemaExtensions
+	eCodeCoverageReportSummary_branchesCovered                 smithy.SchemaExtensions
+	eCodeCoverageReportSummary_branchesMissed                  smithy.SchemaExtensions
+	e_CodeCoverages                                            smithy.SchemaExtensions
+	e_CodeCoverages_member                                     smithy.SchemaExtensions
+	eCommandExecution                                          smithy.SchemaExtensions
+	eCommandExecution_id                                       smithy.SchemaExtensions
+	eCommandExecution_sandboxId                                smithy.SchemaExtensions
+	eCommandExecution_submitTime                               smithy.SchemaExtensions
+	eCommandExecution_startTime                                smithy.SchemaExtensions
+	eCommandExecution_endTime                                  smithy.SchemaExtensions
+	eCommandExecution_status                                   smithy.SchemaExtensions
+	eCommandExecution_command                                  smithy.SchemaExtensions
+	eCommandExecution_type                                     smithy.SchemaExtensions
+	eCommandExecution_exitCode                                 smithy.SchemaExtensions
+	eCommandExecution_standardOutputContent                    smithy.SchemaExtensions
+	eCommandExecution_standardErrContent                       smithy.SchemaExtensions
+	eCommandExecution_logs                                     smithy.SchemaExtensions
+	eCommandExecution_sandboxArn                               smithy.SchemaExtensions
+	e_CommandExecutionIds                                      smithy.SchemaExtensions
+	e_CommandExecutionIds_member                               smithy.SchemaExtensions
+	e_CommandExecutions                                        smithy.SchemaExtensions
+	e_CommandExecutions_member                                 smithy.SchemaExtensions
+	eCommandType                                               smithy.SchemaExtensions
+	eCommandType_SHELL                                         smithy.SchemaExtensions
+	eComputeConfiguration                                      smithy.SchemaExtensions
+	eComputeConfiguration_vCpu                                 smithy.SchemaExtensions
+	eComputeConfiguration_memory                               smithy.SchemaExtensions
+	eComputeConfiguration_disk                                 smithy.SchemaExtensions
+	eComputeConfiguration_machineType                          smithy.SchemaExtensions
+	eComputeConfiguration_instanceType                         smithy.SchemaExtensions
+	eComputeType                                               smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_SMALL                          smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_MEDIUM                         smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_LARGE                          smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_XLARGE                         smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_2XLARGE                        smithy.SchemaExtensions
+	eComputeType_BUILD_LAMBDA_1GB                              smithy.SchemaExtensions
+	eComputeType_BUILD_LAMBDA_2GB                              smithy.SchemaExtensions
+	eComputeType_BUILD_LAMBDA_4GB                              smithy.SchemaExtensions
+	eComputeType_BUILD_LAMBDA_8GB                              smithy.SchemaExtensions
+	eComputeType_BUILD_LAMBDA_10GB                             smithy.SchemaExtensions
+	eComputeType_ATTRIBUTE_BASED_COMPUTE                       smithy.SchemaExtensions
+	eComputeType_CUSTOM_INSTANCE_TYPE                          smithy.SchemaExtensions
+	e_ComputeTypesAllowed                                      smithy.SchemaExtensions
+	e_ComputeTypesAllowed_member                               smithy.SchemaExtensions
+	eCredentialProviderType                                    smithy.SchemaExtensions
+	eCredentialProviderType_SECRETS_MANAGER                    smithy.SchemaExtensions
+	eDebugSession                                              smithy.SchemaExtensions
+	eDebugSession_sessionEnabled                               smithy.SchemaExtensions
+	eDebugSession_sessionTarget                                smithy.SchemaExtensions
+	eDockerServer                                              smithy.SchemaExtensions
+	eDockerServer_computeType                                  smithy.SchemaExtensions
+	eDockerServer_securityGroupIds                             smithy.SchemaExtensions
+	eDockerServer_status                                       smithy.SchemaExtensions
+	eDockerServerStatus                                        smithy.SchemaExtensions
+	eDockerServerStatus_status                                 smithy.SchemaExtensions
+	eDockerServerStatus_message                                smithy.SchemaExtensions
+	eEnvironmentImage                                          smithy.SchemaExtensions
+	eEnvironmentImage_name                                     smithy.SchemaExtensions
+	eEnvironmentImage_description                              smithy.SchemaExtensions
+	eEnvironmentImage_versions                                 smithy.SchemaExtensions
+	e_EnvironmentImages                                        smithy.SchemaExtensions
+	e_EnvironmentImages_member                                 smithy.SchemaExtensions
+	eEnvironmentLanguage                                       smithy.SchemaExtensions
+	eEnvironmentLanguage_language                              smithy.SchemaExtensions
+	eEnvironmentLanguage_images                                smithy.SchemaExtensions
+	e_EnvironmentLanguages                                     smithy.SchemaExtensions
+	e_EnvironmentLanguages_member                              smithy.SchemaExtensions
+	eEnvironmentPlatform                                       smithy.SchemaExtensions
+	eEnvironmentPlatform_platform                              smithy.SchemaExtensions
+	eEnvironmentPlatform_languages                             smithy.SchemaExtensions
+	e_EnvironmentPlatforms                                     smithy.SchemaExtensions
+	e_EnvironmentPlatforms_member                              smithy.SchemaExtensions
+	eEnvironmentType                                           smithy.SchemaExtensions
+	eEnvironmentType_WINDOWS_CONTAINER                         smithy.SchemaExtensions
+	eEnvironmentType_LINUX_CONTAINER                           smithy.SchemaExtensions
+	eEnvironmentType_LINUX_GPU_CONTAINER                       smithy.SchemaExtensions
+	eEnvironmentType_ARM_CONTAINER                             smithy.SchemaExtensions
+	eEnvironmentType_WINDOWS_SERVER_2019_CONTAINER             smithy.SchemaExtensions
+	eEnvironmentType_WINDOWS_SERVER_2022_CONTAINER             smithy.SchemaExtensions
+	eEnvironmentType_LINUX_LAMBDA_CONTAINER                    smithy.SchemaExtensions
+	eEnvironmentType_ARM_LAMBDA_CONTAINER                      smithy.SchemaExtensions
+	eEnvironmentType_LINUX_EC2                                 smithy.SchemaExtensions
+	eEnvironmentType_ARM_EC2                                   smithy.SchemaExtensions
+	eEnvironmentType_WINDOWS_EC2                               smithy.SchemaExtensions
+	eEnvironmentType_MAC_ARM                                   smithy.SchemaExtensions
+	eEnvironmentVariable                                       smithy.SchemaExtensions
+	eEnvironmentVariable_name                                  smithy.SchemaExtensions
+	eEnvironmentVariable_value                                 smithy.SchemaExtensions
+	eEnvironmentVariable_type                                  smithy.SchemaExtensions
+	e_EnvironmentVariables                                     smithy.SchemaExtensions
+	e_EnvironmentVariables_member                              smithy.SchemaExtensions
+	eEnvironmentVariableType                                   smithy.SchemaExtensions
+	eEnvironmentVariableType_PLAINTEXT                         smithy.SchemaExtensions
+	eEnvironmentVariableType_PARAMETER_STORE                   smithy.SchemaExtensions
+	eEnvironmentVariableType_SECRETS_MANAGER                   smithy.SchemaExtensions
+	eExportedEnvironmentVariable                               smithy.SchemaExtensions
+	eExportedEnvironmentVariable_name                          smithy.SchemaExtensions
+	eExportedEnvironmentVariable_value                         smithy.SchemaExtensions
+	e_ExportedEnvironmentVariables                             smithy.SchemaExtensions
+	e_ExportedEnvironmentVariables_member                      smithy.SchemaExtensions
+	eFileSystemType                                            smithy.SchemaExtensions
+	eFileSystemType_EFS                                        smithy.SchemaExtensions
+	e_FilterGroup                                              smithy.SchemaExtensions
+	e_FilterGroup_member                                       smithy.SchemaExtensions
+	e_FilterGroups                                             smithy.SchemaExtensions
+	e_FilterGroups_member                                      smithy.SchemaExtensions
+	eFleet                                                     smithy.SchemaExtensions
+	eFleet_arn                                                 smithy.SchemaExtensions
+	eFleet_name                                                smithy.SchemaExtensions
+	eFleet_id                                                  smithy.SchemaExtensions
+	eFleet_created                                             smithy.SchemaExtensions
+	eFleet_lastModified                                        smithy.SchemaExtensions
+	eFleet_status                                              smithy.SchemaExtensions
+	eFleet_baseCapacity                                        smithy.SchemaExtensions
+	eFleet_environmentType                                     smithy.SchemaExtensions
+	eFleet_computeType                                         smithy.SchemaExtensions
+	eFleet_computeConfiguration                                smithy.SchemaExtensions
+	eFleet_scalingConfiguration                                smithy.SchemaExtensions
+	eFleet_overflowBehavior                                    smithy.SchemaExtensions
+	eFleet_vpcConfig                                           smithy.SchemaExtensions
+	eFleet_proxyConfiguration                                  smithy.SchemaExtensions
+	eFleet_imageId                                             smithy.SchemaExtensions
+	eFleet_fleetServiceRole                                    smithy.SchemaExtensions
+	eFleet_tags                                                smithy.SchemaExtensions
+	e_FleetArns                                                smithy.SchemaExtensions
+	e_FleetArns_member                                         smithy.SchemaExtensions
+	e_FleetCapacity                                            smithy.SchemaExtensions
+	eFleetContextCode                                          smithy.SchemaExtensions
+	eFleetContextCode_CREATE_FAILED                            smithy.SchemaExtensions
+	eFleetContextCode_UPDATE_FAILED                            smithy.SchemaExtensions
+	eFleetContextCode_ACTION_REQUIRED                          smithy.SchemaExtensions
+	eFleetContextCode_PENDING_DELETION                         smithy.SchemaExtensions
+	eFleetContextCode_INSUFFICIENT_CAPACITY                    smithy.SchemaExtensions
+	e_FleetName                                                smithy.SchemaExtensions
+	e_FleetNames                                               smithy.SchemaExtensions
+	e_FleetNames_member                                        smithy.SchemaExtensions
+	eFleetOverflowBehavior                                     smithy.SchemaExtensions
+	eFleetOverflowBehavior_QUEUE                               smithy.SchemaExtensions
+	eFleetOverflowBehavior_ON_DEMAND                           smithy.SchemaExtensions
+	eFleetProxyRule                                            smithy.SchemaExtensions
+	eFleetProxyRule_type                                       smithy.SchemaExtensions
+	eFleetProxyRule_effect                                     smithy.SchemaExtensions
+	eFleetProxyRule_entities                                   smithy.SchemaExtensions
+	eFleetProxyRuleBehavior                                    smithy.SchemaExtensions
+	eFleetProxyRuleBehavior_ALLOW_ALL                          smithy.SchemaExtensions
+	eFleetProxyRuleBehavior_DENY_ALL                           smithy.SchemaExtensions
+	eFleetProxyRuleEffectType                                  smithy.SchemaExtensions
+	eFleetProxyRuleEffectType_ALLOW                            smithy.SchemaExtensions
+	eFleetProxyRuleEffectType_DENY                             smithy.SchemaExtensions
+	e_FleetProxyRuleEntities                                   smithy.SchemaExtensions
+	e_FleetProxyRuleEntities_member                            smithy.SchemaExtensions
+	e_FleetProxyRules                                          smithy.SchemaExtensions
+	e_FleetProxyRules_member                                   smithy.SchemaExtensions
+	eFleetProxyRuleType                                        smithy.SchemaExtensions
+	eFleetProxyRuleType_DOMAIN                                 smithy.SchemaExtensions
+	eFleetProxyRuleType_IP                                     smithy.SchemaExtensions
+	e_Fleets                                                   smithy.SchemaExtensions
+	e_Fleets_member                                            smithy.SchemaExtensions
+	e_FleetsAllowed                                            smithy.SchemaExtensions
+	e_FleetsAllowed_member                                     smithy.SchemaExtensions
+	eFleetScalingMetricType                                    smithy.SchemaExtensions
+	eFleetScalingMetricType_FLEET_UTILIZATION_RATE             smithy.SchemaExtensions
+	eFleetScalingType                                          smithy.SchemaExtensions
+	eFleetScalingType_TARGET_TRACKING_SCALING                  smithy.SchemaExtensions
+	eFleetSortByType                                           smithy.SchemaExtensions
+	eFleetSortByType_NAME                                      smithy.SchemaExtensions
+	eFleetSortByType_CREATED_TIME                              smithy.SchemaExtensions
+	eFleetSortByType_LAST_MODIFIED_TIME                        smithy.SchemaExtensions
+	eFleetStatus                                               smithy.SchemaExtensions
+	eFleetStatus_statusCode                                    smithy.SchemaExtensions
+	eFleetStatus_context                                       smithy.SchemaExtensions
+	eFleetStatus_message                                       smithy.SchemaExtensions
+	eFleetStatusCode                                           smithy.SchemaExtensions
+	eFleetStatusCode_CREATING                                  smithy.SchemaExtensions
+	eFleetStatusCode_UPDATING                                  smithy.SchemaExtensions
+	eFleetStatusCode_ROTATING                                  smithy.SchemaExtensions
+	eFleetStatusCode_PENDING_DELETION                          smithy.SchemaExtensions
+	eFleetStatusCode_DELETING                                  smithy.SchemaExtensions
+	eFleetStatusCode_CREATE_FAILED                             smithy.SchemaExtensions
+	eFleetStatusCode_UPDATE_ROLLBACK_FAILED                    smithy.SchemaExtensions
+	eFleetStatusCode_ACTIVE                                    smithy.SchemaExtensions
+	e_GitCloneDepth                                            smithy.SchemaExtensions
+	eGitSubmodulesConfig                                       smithy.SchemaExtensions
+	eGitSubmodulesConfig_fetchSubmodules                       smithy.SchemaExtensions
+	eHostKernel                                                smithy.SchemaExtensions
+	eHostKernel_LINUX_KERNEL_4                                 smithy.SchemaExtensions
+	eHostKernel_LINUX_KERNEL_6                                 smithy.SchemaExtensions
+	eHostKernel_LINUX_KERNEL_LATEST                            smithy.SchemaExtensions
+	e_Identifiers                                              smithy.SchemaExtensions
+	e_Identifiers_member                                       smithy.SchemaExtensions
+	eImagePullCredentialsType                                  smithy.SchemaExtensions
+	eImagePullCredentialsType_CODEBUILD                        smithy.SchemaExtensions
+	eImagePullCredentialsType_SERVICE_ROLE                     smithy.SchemaExtensions
+	e_ImageVersions                                            smithy.SchemaExtensions
+	e_ImageVersions_member                                     smithy.SchemaExtensions
+	eInvalidInputException                                     smithy.SchemaExtensions
+	eInvalidInputException_message                             smithy.SchemaExtensions
+	e_KeyInput                                                 smithy.SchemaExtensions
+	eLanguageType                                              smithy.SchemaExtensions
+	eLanguageType_JAVA                                         smithy.SchemaExtensions
+	eLanguageType_PYTHON                                       smithy.SchemaExtensions
+	eLanguageType_NODE_JS                                      smithy.SchemaExtensions
+	eLanguageType_RUBY                                         smithy.SchemaExtensions
+	eLanguageType_GOLANG                                       smithy.SchemaExtensions
+	eLanguageType_DOCKER                                       smithy.SchemaExtensions
+	eLanguageType_ANDROID                                      smithy.SchemaExtensions
+	eLanguageType_DOTNET                                       smithy.SchemaExtensions
+	eLanguageType_BASE                                         smithy.SchemaExtensions
+	eLanguageType_PHP                                          smithy.SchemaExtensions
+	eLogsConfig                                                smithy.SchemaExtensions
+	eLogsConfig_cloudWatchLogs                                 smithy.SchemaExtensions
+	eLogsConfig_s3Logs                                         smithy.SchemaExtensions
+	eLogsConfigStatusType                                      smithy.SchemaExtensions
+	eLogsConfigStatusType_ENABLED                              smithy.SchemaExtensions
+	eLogsConfigStatusType_DISABLED                             smithy.SchemaExtensions
+	eLogsLocation                                              smithy.SchemaExtensions
+	eLogsLocation_groupName                                    smithy.SchemaExtensions
+	eLogsLocation_streamName                                   smithy.SchemaExtensions
+	eLogsLocation_deepLink                                     smithy.SchemaExtensions
+	eLogsLocation_s3DeepLink                                   smithy.SchemaExtensions
+	eLogsLocation_cloudWatchLogsArn                            smithy.SchemaExtensions
+	eLogsLocation_s3LogsArn                                    smithy.SchemaExtensions
+	eLogsLocation_cloudWatchLogs                               smithy.SchemaExtensions
+	eLogsLocation_s3Logs                                       smithy.SchemaExtensions
+	eMachineType                                               smithy.SchemaExtensions
+	eMachineType_GENERAL                                       smithy.SchemaExtensions
+	eMachineType_NVME                                          smithy.SchemaExtensions
+	eNetworkInterface                                          smithy.SchemaExtensions
+	eNetworkInterface_subnetId                                 smithy.SchemaExtensions
+	eNetworkInterface_networkInterfaceId                       smithy.SchemaExtensions
+	e_NonEmptyString                                           smithy.SchemaExtensions
+	e_NonNegativeInt                                           smithy.SchemaExtensions
+	eOAuthProviderException                                    smithy.SchemaExtensions
+	eOAuthProviderException_message                            smithy.SchemaExtensions
+	e_PageSize                                                 smithy.SchemaExtensions
+	e_Percentage                                               smithy.SchemaExtensions
+	ePhaseContext                                              smithy.SchemaExtensions
+	ePhaseContext_statusCode                                   smithy.SchemaExtensions
+	ePhaseContext_message                                      smithy.SchemaExtensions
+	e_PhaseContexts                                            smithy.SchemaExtensions
+	e_PhaseContexts_member                                     smithy.SchemaExtensions
+	ePlatformType                                              smithy.SchemaExtensions
+	ePlatformType_DEBIAN                                       smithy.SchemaExtensions
+	ePlatformType_AMAZON_LINUX                                 smithy.SchemaExtensions
+	ePlatformType_UBUNTU                                       smithy.SchemaExtensions
+	ePlatformType_WINDOWS_SERVER                               smithy.SchemaExtensions
+	eProject                                                   smithy.SchemaExtensions
+	eProject_name                                              smithy.SchemaExtensions
+	eProject_arn                                               smithy.SchemaExtensions
+	eProject_description                                       smithy.SchemaExtensions
+	eProject_source                                            smithy.SchemaExtensions
+	eProject_secondarySources                                  smithy.SchemaExtensions
+	eProject_sourceVersion                                     smithy.SchemaExtensions
+	eProject_secondarySourceVersions                           smithy.SchemaExtensions
+	eProject_artifacts                                         smithy.SchemaExtensions
+	eProject_secondaryArtifacts                                smithy.SchemaExtensions
+	eProject_cache                                             smithy.SchemaExtensions
+	eProject_environment                                       smithy.SchemaExtensions
+	eProject_serviceRole                                       smithy.SchemaExtensions
+	eProject_timeoutInMinutes                                  smithy.SchemaExtensions
+	eProject_queuedTimeoutInMinutes                            smithy.SchemaExtensions
+	eProject_encryptionKey                                     smithy.SchemaExtensions
+	eProject_tags                                              smithy.SchemaExtensions
+	eProject_created                                           smithy.SchemaExtensions
+	eProject_lastModified                                      smithy.SchemaExtensions
+	eProject_webhook                                           smithy.SchemaExtensions
+	eProject_vpcConfig                                         smithy.SchemaExtensions
+	eProject_badge                                             smithy.SchemaExtensions
+	eProject_logsConfig                                        smithy.SchemaExtensions
+	eProject_fileSystemLocations                               smithy.SchemaExtensions
+	eProject_buildBatchConfig                                  smithy.SchemaExtensions
+	eProject_concurrentBuildLimit                              smithy.SchemaExtensions
+	eProject_projectVisibility                                 smithy.SchemaExtensions
+	eProject_publicProjectAlias                                smithy.SchemaExtensions
+	eProject_resourceAccessRole                                smithy.SchemaExtensions
+	eProject_autoRetryLimit                                    smithy.SchemaExtensions
+	e_ProjectArns                                              smithy.SchemaExtensions
+	e_ProjectArns_member                                       smithy.SchemaExtensions
+	eProjectArtifacts                                          smithy.SchemaExtensions
+	eProjectArtifacts_type                                     smithy.SchemaExtensions
+	eProjectArtifacts_location                                 smithy.SchemaExtensions
+	eProjectArtifacts_path                                     smithy.SchemaExtensions
+	eProjectArtifacts_namespaceType                            smithy.SchemaExtensions
+	eProjectArtifacts_name                                     smithy.SchemaExtensions
+	eProjectArtifacts_packaging                                smithy.SchemaExtensions
+	eProjectArtifacts_overrideArtifactName                     smithy.SchemaExtensions
+	eProjectArtifacts_encryptionDisabled                       smithy.SchemaExtensions
+	eProjectArtifacts_artifactIdentifier                       smithy.SchemaExtensions
+	eProjectArtifacts_bucketOwnerAccess                        smithy.SchemaExtensions
+	e_ProjectArtifactsList                                     smithy.SchemaExtensions
+	e_ProjectArtifactsList_member                              smithy.SchemaExtensions
+	eProjectBadge                                              smithy.SchemaExtensions
+	eProjectBadge_badgeEnabled                                 smithy.SchemaExtensions
+	eProjectBadge_badgeRequestUrl                              smithy.SchemaExtensions
+	eProjectBuildBatchConfig                                   smithy.SchemaExtensions
+	eProjectBuildBatchConfig_serviceRole                       smithy.SchemaExtensions
+	eProjectBuildBatchConfig_combineArtifacts                  smithy.SchemaExtensions
+	eProjectBuildBatchConfig_restrictions                      smithy.SchemaExtensions
+	eProjectBuildBatchConfig_timeoutInMins                     smithy.SchemaExtensions
+	eProjectBuildBatchConfig_batchReportMode                   smithy.SchemaExtensions
+	eProjectCache                                              smithy.SchemaExtensions
+	eProjectCache_type                                         smithy.SchemaExtensions
+	eProjectCache_location                                     smithy.SchemaExtensions
+	eProjectCache_modes                                        smithy.SchemaExtensions
+	eProjectCache_cacheNamespace                               smithy.SchemaExtensions
+	e_ProjectCacheModes                                        smithy.SchemaExtensions
+	e_ProjectCacheModes_member                                 smithy.SchemaExtensions
+	e_ProjectDescription                                       smithy.SchemaExtensions
+	eProjectEnvironment                                        smithy.SchemaExtensions
+	eProjectEnvironment_type                                   smithy.SchemaExtensions
+	eProjectEnvironment_image                                  smithy.SchemaExtensions
+	eProjectEnvironment_computeType                            smithy.SchemaExtensions
+	eProjectEnvironment_computeConfiguration                   smithy.SchemaExtensions
+	eProjectEnvironment_fleet                                  smithy.SchemaExtensions
+	eProjectEnvironment_environmentVariables                   smithy.SchemaExtensions
+	eProjectEnvironment_privilegedMode                         smithy.SchemaExtensions
+	eProjectEnvironment_certificate                            smithy.SchemaExtensions
+	eProjectEnvironment_registryCredential                     smithy.SchemaExtensions
+	eProjectEnvironment_imagePullCredentialsType               smithy.SchemaExtensions
+	eProjectEnvironment_dockerServer                           smithy.SchemaExtensions
+	eProjectEnvironment_hostKernel                             smithy.SchemaExtensions
+	eProjectFileSystemLocation                                 smithy.SchemaExtensions
+	eProjectFileSystemLocation_type                            smithy.SchemaExtensions
+	eProjectFileSystemLocation_location                        smithy.SchemaExtensions
+	eProjectFileSystemLocation_mountPoint                      smithy.SchemaExtensions
+	eProjectFileSystemLocation_identifier                      smithy.SchemaExtensions
+	eProjectFileSystemLocation_mountOptions                    smithy.SchemaExtensions
+	e_ProjectFileSystemLocations                               smithy.SchemaExtensions
+	e_ProjectFileSystemLocations_member                        smithy.SchemaExtensions
+	eProjectFleet                                              smithy.SchemaExtensions
+	eProjectFleet_fleetArn                                     smithy.SchemaExtensions
+	e_ProjectName                                              smithy.SchemaExtensions
+	e_ProjectNames                                             smithy.SchemaExtensions
+	e_ProjectNames_member                                      smithy.SchemaExtensions
+	e_Projects                                                 smithy.SchemaExtensions
+	e_Projects_member                                          smithy.SchemaExtensions
+	e_ProjectSecondarySourceVersions                           smithy.SchemaExtensions
+	e_ProjectSecondarySourceVersions_member                    smithy.SchemaExtensions
+	eProjectSortByType                                         smithy.SchemaExtensions
+	eProjectSortByType_NAME                                    smithy.SchemaExtensions
+	eProjectSortByType_CREATED_TIME                            smithy.SchemaExtensions
+	eProjectSortByType_LAST_MODIFIED_TIME                      smithy.SchemaExtensions
+	eProjectSource                                             smithy.SchemaExtensions
+	eProjectSource_type                                        smithy.SchemaExtensions
+	eProjectSource_location                                    smithy.SchemaExtensions
+	eProjectSource_gitCloneDepth                               smithy.SchemaExtensions
+	eProjectSource_gitSubmodulesConfig                         smithy.SchemaExtensions
+	eProjectSource_buildspec                                   smithy.SchemaExtensions
+	eProjectSource_auth                                        smithy.SchemaExtensions
+	eProjectSource_reportBuildStatus                           smithy.SchemaExtensions
+	eProjectSource_buildStatusConfig                           smithy.SchemaExtensions
+	eProjectSource_insecureSsl                                 smithy.SchemaExtensions
+	eProjectSource_sourceIdentifier                            smithy.SchemaExtensions
+	e_ProjectSources                                           smithy.SchemaExtensions
+	e_ProjectSources_member                                    smithy.SchemaExtensions
+	eProjectSourceVersion                                      smithy.SchemaExtensions
+	eProjectSourceVersion_sourceIdentifier                     smithy.SchemaExtensions
+	eProjectSourceVersion_sourceVersion                        smithy.SchemaExtensions
+	eProjectVisibilityType                                     smithy.SchemaExtensions
+	eProjectVisibilityType_PUBLIC_READ                         smithy.SchemaExtensions
+	eProjectVisibilityType_PRIVATE                             smithy.SchemaExtensions
+	eProxyConfiguration                                        smithy.SchemaExtensions
+	eProxyConfiguration_defaultBehavior                        smithy.SchemaExtensions
+	eProxyConfiguration_orderedProxyRules                      smithy.SchemaExtensions
+	ePullRequestBuildApproverRole                              smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITHUB_READ                  smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITHUB_TRIAGE                smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITHUB_WRITE                 smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITHUB_MAINTAIN              smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITHUB_ADMIN                 smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITLAB_GUEST                 smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITLAB_PLANNER               smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITLAB_REPORTER              smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITLAB_DEVELOPER             smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITLAB_MAINTAINER            smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_GITLAB_OWNER                 smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_BITBUCKET_READ               smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_BITBUCKET_WRITE              smithy.SchemaExtensions
+	ePullRequestBuildApproverRole_BITBUCKET_ADMIN              smithy.SchemaExtensions
+	e_PullRequestBuildApproverRoles                            smithy.SchemaExtensions
+	e_PullRequestBuildApproverRoles_member                     smithy.SchemaExtensions
+	ePullRequestBuildCommentApproval                           smithy.SchemaExtensions
+	ePullRequestBuildCommentApproval_DISABLED                  smithy.SchemaExtensions
+	ePullRequestBuildCommentApproval_ALL_PULL_REQUESTS         smithy.SchemaExtensions
+	ePullRequestBuildCommentApproval_FORK_PULL_REQUESTS        smithy.SchemaExtensions
+	ePullRequestBuildPolicy                                    smithy.SchemaExtensions
+	ePullRequestBuildPolicy_requiresCommentApproval            smithy.SchemaExtensions
+	ePullRequestBuildPolicy_approverRoles                      smithy.SchemaExtensions
+	eRegistryCredential                                        smithy.SchemaExtensions
+	eRegistryCredential_credential                             smithy.SchemaExtensions
+	eRegistryCredential_credentialProvider                     smithy.SchemaExtensions
+	eReport                                                    smithy.SchemaExtensions
+	eReport_arn                                                smithy.SchemaExtensions
+	eReport_type                                               smithy.SchemaExtensions
+	eReport_name                                               smithy.SchemaExtensions
+	eReport_reportGroupArn                                     smithy.SchemaExtensions
+	eReport_executionId                                        smithy.SchemaExtensions
+	eReport_status                                             smithy.SchemaExtensions
+	eReport_created                                            smithy.SchemaExtensions
+	eReport_expired                                            smithy.SchemaExtensions
+	eReport_exportConfig                                       smithy.SchemaExtensions
+	eReport_truncated                                          smithy.SchemaExtensions
+	eReport_testSummary                                        smithy.SchemaExtensions
+	eReport_codeCoverageSummary                                smithy.SchemaExtensions
+	e_ReportArns                                               smithy.SchemaExtensions
+	e_ReportArns_member                                        smithy.SchemaExtensions
+	eReportCodeCoverageSortByType                              smithy.SchemaExtensions
+	eReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE     smithy.SchemaExtensions
+	eReportCodeCoverageSortByType_FILE_PATH                    smithy.SchemaExtensions
+	eReportExportConfig                                        smithy.SchemaExtensions
+	eReportExportConfig_exportConfigType                       smithy.SchemaExtensions
+	eReportExportConfig_s3Destination                          smithy.SchemaExtensions
+	eReportExportConfigType                                    smithy.SchemaExtensions
+	eReportExportConfigType_S3                                 smithy.SchemaExtensions
+	eReportExportConfigType_NO_EXPORT                          smithy.SchemaExtensions
+	eReportFilter                                              smithy.SchemaExtensions
+	eReportFilter_status                                       smithy.SchemaExtensions
+	eReportGroup                                               smithy.SchemaExtensions
+	eReportGroup_arn                                           smithy.SchemaExtensions
+	eReportGroup_name                                          smithy.SchemaExtensions
+	eReportGroup_type                                          smithy.SchemaExtensions
+	eReportGroup_exportConfig                                  smithy.SchemaExtensions
+	eReportGroup_created                                       smithy.SchemaExtensions
+	eReportGroup_lastModified                                  smithy.SchemaExtensions
+	eReportGroup_tags                                          smithy.SchemaExtensions
+	eReportGroup_status                                        smithy.SchemaExtensions
+	e_ReportGroupArns                                          smithy.SchemaExtensions
+	e_ReportGroupArns_member                                   smithy.SchemaExtensions
+	e_ReportGroupName                                          smithy.SchemaExtensions
+	e_ReportGroups                                             smithy.SchemaExtensions
+	e_ReportGroups_member                                      smithy.SchemaExtensions
+	eReportGroupSortByType                                     smithy.SchemaExtensions
+	eReportGroupSortByType_NAME                                smithy.SchemaExtensions
+	eReportGroupSortByType_CREATED_TIME                        smithy.SchemaExtensions
+	eReportGroupSortByType_LAST_MODIFIED_TIME                  smithy.SchemaExtensions
+	eReportGroupStatusType                                     smithy.SchemaExtensions
+	eReportGroupStatusType_ACTIVE                              smithy.SchemaExtensions
+	eReportGroupStatusType_DELETING                            smithy.SchemaExtensions
+	eReportGroupTrendFieldType                                 smithy.SchemaExtensions
+	eReportGroupTrendFieldType_PASS_RATE                       smithy.SchemaExtensions
+	eReportGroupTrendFieldType_DURATION                        smithy.SchemaExtensions
+	eReportGroupTrendFieldType_TOTAL                           smithy.SchemaExtensions
+	eReportGroupTrendFieldType_LINE_COVERAGE                   smithy.SchemaExtensions
+	eReportGroupTrendFieldType_LINES_COVERED                   smithy.SchemaExtensions
+	eReportGroupTrendFieldType_LINES_MISSED                    smithy.SchemaExtensions
+	eReportGroupTrendFieldType_BRANCH_COVERAGE                 smithy.SchemaExtensions
+	eReportGroupTrendFieldType_BRANCHES_COVERED                smithy.SchemaExtensions
+	eReportGroupTrendFieldType_BRANCHES_MISSED                 smithy.SchemaExtensions
+	e_ReportGroupTrendRawDataList                              smithy.SchemaExtensions
+	e_ReportGroupTrendRawDataList_member                       smithy.SchemaExtensions
+	eReportGroupTrendStats                                     smithy.SchemaExtensions
+	eReportGroupTrendStats_average                             smithy.SchemaExtensions
+	eReportGroupTrendStats_max                                 smithy.SchemaExtensions
+	eReportGroupTrendStats_min                                 smithy.SchemaExtensions
+	eReportPackagingType                                       smithy.SchemaExtensions
+	eReportPackagingType_ZIP                                   smithy.SchemaExtensions
+	eReportPackagingType_NONE                                  smithy.SchemaExtensions
+	e_Reports                                                  smithy.SchemaExtensions
+	e_Reports_member                                           smithy.SchemaExtensions
+	e_ReportStatusCounts                                       smithy.SchemaExtensions
+	e_ReportStatusCounts_key                                   smithy.SchemaExtensions
+	e_ReportStatusCounts_value                                 smithy.SchemaExtensions
+	eReportStatusType                                          smithy.SchemaExtensions
+	eReportStatusType_GENERATING                               smithy.SchemaExtensions
+	eReportStatusType_SUCCEEDED                                smithy.SchemaExtensions
+	eReportStatusType_FAILED                                   smithy.SchemaExtensions
+	eReportStatusType_INCOMPLETE                               smithy.SchemaExtensions
+	eReportStatusType_DELETING                                 smithy.SchemaExtensions
+	eReportType                                                smithy.SchemaExtensions
+	eReportType_TEST                                           smithy.SchemaExtensions
+	eReportType_CODE_COVERAGE                                  smithy.SchemaExtensions
+	eReportWithRawData                                         smithy.SchemaExtensions
+	eReportWithRawData_reportArn                               smithy.SchemaExtensions
+	eReportWithRawData_data                                    smithy.SchemaExtensions
+	eResolvedArtifact                                          smithy.SchemaExtensions
+	eResolvedArtifact_type                                     smithy.SchemaExtensions
+	eResolvedArtifact_location                                 smithy.SchemaExtensions
+	eResolvedArtifact_identifier                               smithy.SchemaExtensions
+	e_ResolvedSecondaryArtifacts                               smithy.SchemaExtensions
+	e_ResolvedSecondaryArtifacts_member                        smithy.SchemaExtensions
+	eResourceAlreadyExistsException                            smithy.SchemaExtensions
+	eResourceAlreadyExistsException_message                    smithy.SchemaExtensions
+	eResourceNotFoundException                                 smithy.SchemaExtensions
+	eResourceNotFoundException_message                         smithy.SchemaExtensions
+	eRetryBuildBatchType                                       smithy.SchemaExtensions
+	eRetryBuildBatchType_RETRY_ALL_BUILDS                      smithy.SchemaExtensions
+	eRetryBuildBatchType_RETRY_FAILED_BUILDS                   smithy.SchemaExtensions
+	eS3LogsConfig                                              smithy.SchemaExtensions
+	eS3LogsConfig_status                                       smithy.SchemaExtensions
+	eS3LogsConfig_location                                     smithy.SchemaExtensions
+	eS3LogsConfig_encryptionDisabled                           smithy.SchemaExtensions
+	eS3LogsConfig_bucketOwnerAccess                            smithy.SchemaExtensions
+	eS3ReportExportConfig                                      smithy.SchemaExtensions
+	eS3ReportExportConfig_bucket                               smithy.SchemaExtensions
+	eS3ReportExportConfig_bucketOwner                          smithy.SchemaExtensions
+	eS3ReportExportConfig_path                                 smithy.SchemaExtensions
+	eS3ReportExportConfig_packaging                            smithy.SchemaExtensions
+	eS3ReportExportConfig_encryptionKey                        smithy.SchemaExtensions
+	eS3ReportExportConfig_encryptionDisabled                   smithy.SchemaExtensions
+	eSandbox                                                   smithy.SchemaExtensions
+	eSandbox_id                                                smithy.SchemaExtensions
+	eSandbox_arn                                               smithy.SchemaExtensions
+	eSandbox_projectName                                       smithy.SchemaExtensions
+	eSandbox_requestTime                                       smithy.SchemaExtensions
+	eSandbox_startTime                                         smithy.SchemaExtensions
+	eSandbox_endTime                                           smithy.SchemaExtensions
+	eSandbox_status                                            smithy.SchemaExtensions
+	eSandbox_source                                            smithy.SchemaExtensions
+	eSandbox_sourceVersion                                     smithy.SchemaExtensions
+	eSandbox_secondarySources                                  smithy.SchemaExtensions
+	eSandbox_secondarySourceVersions                           smithy.SchemaExtensions
+	eSandbox_environment                                       smithy.SchemaExtensions
+	eSandbox_fileSystemLocations                               smithy.SchemaExtensions
+	eSandbox_timeoutInMinutes                                  smithy.SchemaExtensions
+	eSandbox_queuedTimeoutInMinutes                            smithy.SchemaExtensions
+	eSandbox_vpcConfig                                         smithy.SchemaExtensions
+	eSandbox_logConfig                                         smithy.SchemaExtensions
+	eSandbox_encryptionKey                                     smithy.SchemaExtensions
+	eSandbox_serviceRole                                       smithy.SchemaExtensions
+	eSandbox_currentSession                                    smithy.SchemaExtensions
+	e_Sandboxes                                                smithy.SchemaExtensions
+	e_Sandboxes_member                                         smithy.SchemaExtensions
+	e_SandboxIds                                               smithy.SchemaExtensions
+	e_SandboxIds_member                                        smithy.SchemaExtensions
+	eSandboxSession                                            smithy.SchemaExtensions
+	eSandboxSession_id                                         smithy.SchemaExtensions
+	eSandboxSession_status                                     smithy.SchemaExtensions
+	eSandboxSession_startTime                                  smithy.SchemaExtensions
+	eSandboxSession_endTime                                    smithy.SchemaExtensions
+	eSandboxSession_currentPhase                               smithy.SchemaExtensions
+	eSandboxSession_phases                                     smithy.SchemaExtensions
+	eSandboxSession_resolvedSourceVersion                      smithy.SchemaExtensions
+	eSandboxSession_logs                                       smithy.SchemaExtensions
+	eSandboxSession_networkInterface                           smithy.SchemaExtensions
+	eSandboxSessionPhase                                       smithy.SchemaExtensions
+	eSandboxSessionPhase_phaseType                             smithy.SchemaExtensions
+	eSandboxSessionPhase_phaseStatus                           smithy.SchemaExtensions
+	eSandboxSessionPhase_startTime                             smithy.SchemaExtensions
+	eSandboxSessionPhase_endTime                               smithy.SchemaExtensions
+	eSandboxSessionPhase_durationInSeconds                     smithy.SchemaExtensions
+	eSandboxSessionPhase_contexts                              smithy.SchemaExtensions
+	e_SandboxSessionPhases                                     smithy.SchemaExtensions
+	e_SandboxSessionPhases_member                              smithy.SchemaExtensions
+	eScalingConfigurationInput                                 smithy.SchemaExtensions
+	eScalingConfigurationInput_scalingType                     smithy.SchemaExtensions
+	eScalingConfigurationInput_targetTrackingScalingConfigs    smithy.SchemaExtensions
+	eScalingConfigurationInput_maxCapacity                     smithy.SchemaExtensions
+	eScalingConfigurationOutput                                smithy.SchemaExtensions
+	eScalingConfigurationOutput_scalingType                    smithy.SchemaExtensions
+	eScalingConfigurationOutput_targetTrackingScalingConfigs   smithy.SchemaExtensions
+	eScalingConfigurationOutput_maxCapacity                    smithy.SchemaExtensions
+	eScalingConfigurationOutput_desiredCapacity                smithy.SchemaExtensions
+	eScopeConfiguration                                        smithy.SchemaExtensions
+	eScopeConfiguration_name                                   smithy.SchemaExtensions
+	eScopeConfiguration_domain                                 smithy.SchemaExtensions
+	eScopeConfiguration_scope                                  smithy.SchemaExtensions
+	e_SecurityGroupIds                                         smithy.SchemaExtensions
+	e_SecurityGroupIds_member                                  smithy.SchemaExtensions
+	e_SensitiveNonEmptyString                                  smithy.SchemaExtensions
+	e_SensitiveString                                          smithy.SchemaExtensions
+	eServerType                                                smithy.SchemaExtensions
+	eServerType_GITHUB                                         smithy.SchemaExtensions
+	eServerType_BITBUCKET                                      smithy.SchemaExtensions
+	eServerType_GITHUB_ENTERPRISE                              smithy.SchemaExtensions
+	eServerType_GITLAB                                         smithy.SchemaExtensions
+	eServerType_GITLAB_SELF_MANAGED                            smithy.SchemaExtensions
+	eSharedResourceSortByType                                  smithy.SchemaExtensions
+	eSharedResourceSortByType_ARN                              smithy.SchemaExtensions
+	eSharedResourceSortByType_MODIFIED_TIME                    smithy.SchemaExtensions
+	eSortOrderType                                             smithy.SchemaExtensions
+	eSortOrderType_ASCENDING                                   smithy.SchemaExtensions
+	eSortOrderType_DESCENDING                                  smithy.SchemaExtensions
+	eSourceAuth                                                smithy.SchemaExtensions
+	eSourceAuth_type                                           smithy.SchemaExtensions
+	eSourceAuth_resource                                       smithy.SchemaExtensions
+	eSourceAuthType                                            smithy.SchemaExtensions
+	eSourceAuthType_OAUTH                                      smithy.SchemaExtensions
+	eSourceAuthType_CODECONNECTIONS                            smithy.SchemaExtensions
+	eSourceAuthType_SECRETS_MANAGER                            smithy.SchemaExtensions
+	eSourceCredentialsInfo                                     smithy.SchemaExtensions
+	eSourceCredentialsInfo_arn                                 smithy.SchemaExtensions
+	eSourceCredentialsInfo_serverType                          smithy.SchemaExtensions
+	eSourceCredentialsInfo_authType                            smithy.SchemaExtensions
+	eSourceCredentialsInfo_resource                            smithy.SchemaExtensions
+	e_SourceCredentialsInfos                                   smithy.SchemaExtensions
+	e_SourceCredentialsInfos_member                            smithy.SchemaExtensions
+	eSourceType                                                smithy.SchemaExtensions
+	eSourceType_CODECOMMIT                                     smithy.SchemaExtensions
+	eSourceType_CODEPIPELINE                                   smithy.SchemaExtensions
+	eSourceType_GITHUB                                         smithy.SchemaExtensions
+	eSourceType_GITLAB                                         smithy.SchemaExtensions
+	eSourceType_GITLAB_SELF_MANAGED                            smithy.SchemaExtensions
+	eSourceType_S3                                             smithy.SchemaExtensions
+	eSourceType_BITBUCKET                                      smithy.SchemaExtensions
+	eSourceType_GITHUB_ENTERPRISE                              smithy.SchemaExtensions
+	eSourceType_NO_SOURCE                                      smithy.SchemaExtensions
+	eSSMSession                                                smithy.SchemaExtensions
+	eSSMSession_sessionId                                      smithy.SchemaExtensions
+	eSSMSession_tokenValue                                     smithy.SchemaExtensions
+	eSSMSession_streamUrl                                      smithy.SchemaExtensions
+	eStatusType                                                smithy.SchemaExtensions
+	eStatusType_SUCCEEDED                                      smithy.SchemaExtensions
+	eStatusType_FAILED                                         smithy.SchemaExtensions
+	eStatusType_FAULT                                          smithy.SchemaExtensions
+	eStatusType_TIMED_OUT                                      smithy.SchemaExtensions
+	eStatusType_IN_PROGRESS                                    smithy.SchemaExtensions
+	eStatusType_STOPPED                                        smithy.SchemaExtensions
+	e_String                                                   smithy.SchemaExtensions
+	e_Subnets                                                  smithy.SchemaExtensions
+	e_Subnets_member                                           smithy.SchemaExtensions
+	eTag                                                       smithy.SchemaExtensions
+	eTag_key                                                   smithy.SchemaExtensions
+	eTag_value                                                 smithy.SchemaExtensions
+	e_TagList                                                  smithy.SchemaExtensions
+	e_TagList_member                                           smithy.SchemaExtensions
+	eTargetTrackingScalingConfiguration                        smithy.SchemaExtensions
+	eTargetTrackingScalingConfiguration_metricType             smithy.SchemaExtensions
+	eTargetTrackingScalingConfiguration_targetValue            smithy.SchemaExtensions
+	e_TargetTrackingScalingConfigurations                      smithy.SchemaExtensions
+	e_TargetTrackingScalingConfigurations_member               smithy.SchemaExtensions
+	eTestCase                                                  smithy.SchemaExtensions
+	eTestCase_reportArn                                        smithy.SchemaExtensions
+	eTestCase_testRawDataPath                                  smithy.SchemaExtensions
+	eTestCase_prefix                                           smithy.SchemaExtensions
+	eTestCase_name                                             smithy.SchemaExtensions
+	eTestCase_status                                           smithy.SchemaExtensions
+	eTestCase_durationInNanoSeconds                            smithy.SchemaExtensions
+	eTestCase_message                                          smithy.SchemaExtensions
+	eTestCase_expired                                          smithy.SchemaExtensions
+	eTestCase_testSuiteName                                    smithy.SchemaExtensions
+	eTestCaseFilter                                            smithy.SchemaExtensions
+	eTestCaseFilter_status                                     smithy.SchemaExtensions
+	eTestCaseFilter_keyword                                    smithy.SchemaExtensions
+	e_TestCases                                                smithy.SchemaExtensions
+	e_TestCases_member                                         smithy.SchemaExtensions
+	eTestReportSummary                                         smithy.SchemaExtensions
+	eTestReportSummary_total                                   smithy.SchemaExtensions
+	eTestReportSummary_statusCounts                            smithy.SchemaExtensions
+	eTestReportSummary_durationInNanoSeconds                   smithy.SchemaExtensions
+	e_TimeOut                                                  smithy.SchemaExtensions
+	e_Timestamp                                                smithy.SchemaExtensions
+	e_ValueInput                                               smithy.SchemaExtensions
+	eVpcConfig                                                 smithy.SchemaExtensions
+	eVpcConfig_vpcId                                           smithy.SchemaExtensions
+	eVpcConfig_subnets                                         smithy.SchemaExtensions
+	eVpcConfig_securityGroupIds                                smithy.SchemaExtensions
+	eWebhook                                                   smithy.SchemaExtensions
+	eWebhook_url                                               smithy.SchemaExtensions
+	eWebhook_payloadUrl                                        smithy.SchemaExtensions
+	eWebhook_secret                                            smithy.SchemaExtensions
+	eWebhook_branchFilter                                      smithy.SchemaExtensions
+	eWebhook_filterGroups                                      smithy.SchemaExtensions
+	eWebhook_buildType                                         smithy.SchemaExtensions
+	eWebhook_manualCreation                                    smithy.SchemaExtensions
+	eWebhook_lastModifiedSecret                                smithy.SchemaExtensions
+	eWebhook_scopeConfiguration                                smithy.SchemaExtensions
+	eWebhook_status                                            smithy.SchemaExtensions
+	eWebhook_statusMessage                                     smithy.SchemaExtensions
+	eWebhook_pullRequestBuildPolicy                            smithy.SchemaExtensions
+	eWebhookBuildType                                          smithy.SchemaExtensions
+	eWebhookBuildType_BUILD                                    smithy.SchemaExtensions
+	eWebhookBuildType_BUILD_BATCH                              smithy.SchemaExtensions
+	eWebhookBuildType_RUNNER_BUILDKITE_BUILD                   smithy.SchemaExtensions
+	eWebhookFilter                                             smithy.SchemaExtensions
+	eWebhookFilter_type                                        smithy.SchemaExtensions
+	eWebhookFilter_pattern                                     smithy.SchemaExtensions
+	eWebhookFilter_excludeMatchedPattern                       smithy.SchemaExtensions
+	eWebhookFilterType                                         smithy.SchemaExtensions
+	eWebhookFilterType_EVENT                                   smithy.SchemaExtensions
+	eWebhookFilterType_BASE_REF                                smithy.SchemaExtensions
+	eWebhookFilterType_HEAD_REF                                smithy.SchemaExtensions
+	eWebhookFilterType_ACTOR_ACCOUNT_ID                        smithy.SchemaExtensions
+	eWebhookFilterType_FILE_PATH                               smithy.SchemaExtensions
+	eWebhookFilterType_COMMIT_MESSAGE                          smithy.SchemaExtensions
+	eWebhookFilterType_WORKFLOW_NAME                           smithy.SchemaExtensions
+	eWebhookFilterType_TAG_NAME                                smithy.SchemaExtensions
+	eWebhookFilterType_RELEASE_NAME                            smithy.SchemaExtensions
+	eWebhookFilterType_REPOSITORY_NAME                         smithy.SchemaExtensions
+	eWebhookFilterType_ORGANIZATION_NAME                       smithy.SchemaExtensions
+	eWebhookScopeType                                          smithy.SchemaExtensions
+	eWebhookScopeType_GITHUB_ORGANIZATION                      smithy.SchemaExtensions
+	eWebhookScopeType_GITHUB_GLOBAL                            smithy.SchemaExtensions
+	eWebhookScopeType_GITLAB_GROUP                             smithy.SchemaExtensions
+	eWebhookStatus                                             smithy.SchemaExtensions
+	eWebhookStatus_CREATING                                    smithy.SchemaExtensions
+	eWebhookStatus_CREATE_FAILED                               smithy.SchemaExtensions
+	eWebhookStatus_ACTIVE                                      smithy.SchemaExtensions
+	eWebhookStatus_DELETING                                    smithy.SchemaExtensions
+	e_WrapperBoolean                                           smithy.SchemaExtensions
+	e_WrapperDouble                                            smithy.SchemaExtensions
+	e_WrapperInt                                               smithy.SchemaExtensions
+	e_WrapperLong                                              smithy.SchemaExtensions
+	eBatchDeleteBuildsInput                                    smithy.SchemaExtensions
+	eBatchDeleteBuildsInput_ids                                smithy.SchemaExtensions
+	eBatchDeleteBuildsOutput                                   smithy.SchemaExtensions
+	eBatchDeleteBuildsOutput_buildsDeleted                     smithy.SchemaExtensions
+	eBatchDeleteBuildsOutput_buildsNotDeleted                  smithy.SchemaExtensions
+	eBatchGetBuildBatchesInput                                 smithy.SchemaExtensions
+	eBatchGetBuildBatchesInput_ids                             smithy.SchemaExtensions
+	eBatchGetBuildBatchesOutput                                smithy.SchemaExtensions
+	eBatchGetBuildBatchesOutput_buildBatches                   smithy.SchemaExtensions
+	eBatchGetBuildBatchesOutput_buildBatchesNotFound           smithy.SchemaExtensions
+	eBatchGetBuildsInput                                       smithy.SchemaExtensions
+	eBatchGetBuildsInput_ids                                   smithy.SchemaExtensions
+	eBatchGetBuildsOutput                                      smithy.SchemaExtensions
+	eBatchGetBuildsOutput_builds                               smithy.SchemaExtensions
+	eBatchGetBuildsOutput_buildsNotFound                       smithy.SchemaExtensions
+	eBatchGetCommandExecutionsInput                            smithy.SchemaExtensions
+	eBatchGetCommandExecutionsInput_sandboxId                  smithy.SchemaExtensions
+	eBatchGetCommandExecutionsInput_commandExecutionIds        smithy.SchemaExtensions
+	eBatchGetCommandExecutionsOutput                           smithy.SchemaExtensions
+	eBatchGetCommandExecutionsOutput_commandExecutions         smithy.SchemaExtensions
+	eBatchGetCommandExecutionsOutput_commandExecutionsNotFound smithy.SchemaExtensions
+	eBatchGetFleetsInput                                       smithy.SchemaExtensions
+	eBatchGetFleetsInput_names                                 smithy.SchemaExtensions
+	eBatchGetFleetsOutput                                      smithy.SchemaExtensions
+	eBatchGetFleetsOutput_fleets                               smithy.SchemaExtensions
+	eBatchGetFleetsOutput_fleetsNotFound                       smithy.SchemaExtensions
+	eBatchGetProjectsInput                                     smithy.SchemaExtensions
+	eBatchGetProjectsInput_names                               smithy.SchemaExtensions
+	eBatchGetProjectsOutput                                    smithy.SchemaExtensions
+	eBatchGetProjectsOutput_projects                           smithy.SchemaExtensions
+	eBatchGetProjectsOutput_projectsNotFound                   smithy.SchemaExtensions
+	eBatchGetReportGroupsInput                                 smithy.SchemaExtensions
+	eBatchGetReportGroupsInput_reportGroupArns                 smithy.SchemaExtensions
+	eBatchGetReportGroupsOutput                                smithy.SchemaExtensions
+	eBatchGetReportGroupsOutput_reportGroups                   smithy.SchemaExtensions
+	eBatchGetReportGroupsOutput_reportGroupsNotFound           smithy.SchemaExtensions
+	eBatchGetReportsInput                                      smithy.SchemaExtensions
+	eBatchGetReportsInput_reportArns                           smithy.SchemaExtensions
+	eBatchGetReportsOutput                                     smithy.SchemaExtensions
+	eBatchGetReportsOutput_reports                             smithy.SchemaExtensions
+	eBatchGetReportsOutput_reportsNotFound                     smithy.SchemaExtensions
+	eBatchGetSandboxesInput                                    smithy.SchemaExtensions
+	eBatchGetSandboxesInput_ids                                smithy.SchemaExtensions
+	eBatchGetSandboxesOutput                                   smithy.SchemaExtensions
+	eBatchGetSandboxesOutput_sandboxes                         smithy.SchemaExtensions
+	eBatchGetSandboxesOutput_sandboxesNotFound                 smithy.SchemaExtensions
+	eCreateFleetInput                                          smithy.SchemaExtensions
+	eCreateFleetInput_name                                     smithy.SchemaExtensions
+	eCreateFleetInput_baseCapacity                             smithy.SchemaExtensions
+	eCreateFleetInput_environmentType                          smithy.SchemaExtensions
+	eCreateFleetInput_computeType                              smithy.SchemaExtensions
+	eCreateFleetInput_computeConfiguration                     smithy.SchemaExtensions
+	eCreateFleetInput_scalingConfiguration                     smithy.SchemaExtensions
+	eCreateFleetInput_overflowBehavior                         smithy.SchemaExtensions
+	eCreateFleetInput_vpcConfig                                smithy.SchemaExtensions
+	eCreateFleetInput_proxyConfiguration                       smithy.SchemaExtensions
+	eCreateFleetInput_imageId                                  smithy.SchemaExtensions
+	eCreateFleetInput_fleetServiceRole                         smithy.SchemaExtensions
+	eCreateFleetInput_tags                                     smithy.SchemaExtensions
+	eCreateFleetOutput                                         smithy.SchemaExtensions
+	eCreateFleetOutput_fleet                                   smithy.SchemaExtensions
+	eCreateProjectInput                                        smithy.SchemaExtensions
+	eCreateProjectInput_name                                   smithy.SchemaExtensions
+	eCreateProjectInput_description                            smithy.SchemaExtensions
+	eCreateProjectInput_source                                 smithy.SchemaExtensions
+	eCreateProjectInput_secondarySources                       smithy.SchemaExtensions
+	eCreateProjectInput_sourceVersion                          smithy.SchemaExtensions
+	eCreateProjectInput_secondarySourceVersions                smithy.SchemaExtensions
+	eCreateProjectInput_artifacts                              smithy.SchemaExtensions
+	eCreateProjectInput_secondaryArtifacts                     smithy.SchemaExtensions
+	eCreateProjectInput_cache                                  smithy.SchemaExtensions
+	eCreateProjectInput_environment                            smithy.SchemaExtensions
+	eCreateProjectInput_serviceRole                            smithy.SchemaExtensions
+	eCreateProjectInput_timeoutInMinutes                       smithy.SchemaExtensions
+	eCreateProjectInput_queuedTimeoutInMinutes                 smithy.SchemaExtensions
+	eCreateProjectInput_encryptionKey                          smithy.SchemaExtensions
+	eCreateProjectInput_tags                                   smithy.SchemaExtensions
+	eCreateProjectInput_vpcConfig                              smithy.SchemaExtensions
+	eCreateProjectInput_badgeEnabled                           smithy.SchemaExtensions
+	eCreateProjectInput_logsConfig                             smithy.SchemaExtensions
+	eCreateProjectInput_fileSystemLocations                    smithy.SchemaExtensions
+	eCreateProjectInput_buildBatchConfig                       smithy.SchemaExtensions
+	eCreateProjectInput_concurrentBuildLimit                   smithy.SchemaExtensions
+	eCreateProjectInput_autoRetryLimit                         smithy.SchemaExtensions
+	eCreateProjectOutput                                       smithy.SchemaExtensions
+	eCreateProjectOutput_project                               smithy.SchemaExtensions
+	eCreateReportGroupInput                                    smithy.SchemaExtensions
+	eCreateReportGroupInput_name                               smithy.SchemaExtensions
+	eCreateReportGroupInput_type                               smithy.SchemaExtensions
+	eCreateReportGroupInput_exportConfig                       smithy.SchemaExtensions
+	eCreateReportGroupInput_tags                               smithy.SchemaExtensions
+	eCreateReportGroupOutput                                   smithy.SchemaExtensions
+	eCreateReportGroupOutput_reportGroup                       smithy.SchemaExtensions
+	eCreateWebhookInput                                        smithy.SchemaExtensions
+	eCreateWebhookInput_projectName                            smithy.SchemaExtensions
+	eCreateWebhookInput_branchFilter                           smithy.SchemaExtensions
+	eCreateWebhookInput_filterGroups                           smithy.SchemaExtensions
+	eCreateWebhookInput_buildType                              smithy.SchemaExtensions
+	eCreateWebhookInput_manualCreation                         smithy.SchemaExtensions
+	eCreateWebhookInput_scopeConfiguration                     smithy.SchemaExtensions
+	eCreateWebhookInput_pullRequestBuildPolicy                 smithy.SchemaExtensions
+	eCreateWebhookOutput                                       smithy.SchemaExtensions
+	eCreateWebhookOutput_webhook                               smithy.SchemaExtensions
+	eDeleteBuildBatchInput                                     smithy.SchemaExtensions
+	eDeleteBuildBatchInput_id                                  smithy.SchemaExtensions
+	eDeleteBuildBatchOutput                                    smithy.SchemaExtensions
+	eDeleteBuildBatchOutput_statusCode                         smithy.SchemaExtensions
+	eDeleteBuildBatchOutput_buildsDeleted                      smithy.SchemaExtensions
+	eDeleteBuildBatchOutput_buildsNotDeleted                   smithy.SchemaExtensions
+	eDeleteFleetInput                                          smithy.SchemaExtensions
+	eDeleteFleetInput_arn                                      smithy.SchemaExtensions
+	eDeleteFleetOutput                                         smithy.SchemaExtensions
+	eDeleteProjectInput                                        smithy.SchemaExtensions
+	eDeleteProjectInput_name                                   smithy.SchemaExtensions
+	eDeleteProjectOutput                                       smithy.SchemaExtensions
+	eDeleteReportGroupInput                                    smithy.SchemaExtensions
+	eDeleteReportGroupInput_arn                                smithy.SchemaExtensions
+	eDeleteReportGroupInput_deleteReports                      smithy.SchemaExtensions
+	eDeleteReportGroupOutput                                   smithy.SchemaExtensions
+	eDeleteReportInput                                         smithy.SchemaExtensions
+	eDeleteReportInput_arn                                     smithy.SchemaExtensions
+	eDeleteReportOutput                                        smithy.SchemaExtensions
+	eDeleteResourcePolicyInput                                 smithy.SchemaExtensions
+	eDeleteResourcePolicyInput_resourceArn                     smithy.SchemaExtensions
+	eDeleteResourcePolicyOutput                                smithy.SchemaExtensions
+	eDeleteSourceCredentialsInput                              smithy.SchemaExtensions
+	eDeleteSourceCredentialsInput_arn                          smithy.SchemaExtensions
+	eDeleteSourceCredentialsOutput                             smithy.SchemaExtensions
+	eDeleteSourceCredentialsOutput_arn                         smithy.SchemaExtensions
+	eDeleteWebhookInput                                        smithy.SchemaExtensions
+	eDeleteWebhookInput_projectName                            smithy.SchemaExtensions
+	eDeleteWebhookOutput                                       smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput                                smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput_reportArn                      smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput_nextToken                      smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput_maxResults                     smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput_sortOrder                      smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput_sortBy                         smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput_minLineCoveragePercentage      smithy.SchemaExtensions
+	eDescribeCodeCoveragesInput_maxLineCoveragePercentage      smithy.SchemaExtensions
+	eDescribeCodeCoveragesOutput                               smithy.SchemaExtensions
+	eDescribeCodeCoveragesOutput_nextToken                     smithy.SchemaExtensions
+	eDescribeCodeCoveragesOutput_codeCoverages                 smithy.SchemaExtensions
+	eDescribeTestCasesInput                                    smithy.SchemaExtensions
+	eDescribeTestCasesInput_reportArn                          smithy.SchemaExtensions
+	eDescribeTestCasesInput_nextToken                          smithy.SchemaExtensions
+	eDescribeTestCasesInput_maxResults                         smithy.SchemaExtensions
+	eDescribeTestCasesInput_filter                             smithy.SchemaExtensions
+	eDescribeTestCasesOutput                                   smithy.SchemaExtensions
+	eDescribeTestCasesOutput_nextToken                         smithy.SchemaExtensions
+	eDescribeTestCasesOutput_testCases                         smithy.SchemaExtensions
+	eGetReportGroupTrendInput                                  smithy.SchemaExtensions
+	eGetReportGroupTrendInput_reportGroupArn                   smithy.SchemaExtensions
+	eGetReportGroupTrendInput_numOfReports                     smithy.SchemaExtensions
+	eGetReportGroupTrendInput_trendField                       smithy.SchemaExtensions
+	eGetReportGroupTrendOutput                                 smithy.SchemaExtensions
+	eGetReportGroupTrendOutput_stats                           smithy.SchemaExtensions
+	eGetReportGroupTrendOutput_rawData                         smithy.SchemaExtensions
+	eGetResourcePolicyInput                                    smithy.SchemaExtensions
+	eGetResourcePolicyInput_resourceArn                        smithy.SchemaExtensions
+	eGetResourcePolicyOutput                                   smithy.SchemaExtensions
+	eGetResourcePolicyOutput_policy                            smithy.SchemaExtensions
+	eImportSourceCredentialsInput                              smithy.SchemaExtensions
+	eImportSourceCredentialsInput_username                     smithy.SchemaExtensions
+	eImportSourceCredentialsInput_token                        smithy.SchemaExtensions
+	eImportSourceCredentialsInput_serverType                   smithy.SchemaExtensions
+	eImportSourceCredentialsInput_authType                     smithy.SchemaExtensions
+	eImportSourceCredentialsInput_shouldOverwrite              smithy.SchemaExtensions
+	eImportSourceCredentialsOutput                             smithy.SchemaExtensions
+	eImportSourceCredentialsOutput_arn                         smithy.SchemaExtensions
+	eInvalidateProjectCacheInput                               smithy.SchemaExtensions
+	eInvalidateProjectCacheInput_projectName                   smithy.SchemaExtensions
+	eInvalidateProjectCacheOutput                              smithy.SchemaExtensions
+	eListBuildBatchesForProjectInput                           smithy.SchemaExtensions
+	eListBuildBatchesForProjectInput_projectName               smithy.SchemaExtensions
+	eListBuildBatchesForProjectInput_filter                    smithy.SchemaExtensions
+	eListBuildBatchesForProjectInput_maxResults                smithy.SchemaExtensions
+	eListBuildBatchesForProjectInput_sortOrder                 smithy.SchemaExtensions
+	eListBuildBatchesForProjectInput_nextToken                 smithy.SchemaExtensions
+	eListBuildBatchesForProjectOutput                          smithy.SchemaExtensions
+	eListBuildBatchesForProjectOutput_ids                      smithy.SchemaExtensions
+	eListBuildBatchesForProjectOutput_nextToken                smithy.SchemaExtensions
+	eListBuildBatchesInput                                     smithy.SchemaExtensions
+	eListBuildBatchesInput_filter                              smithy.SchemaExtensions
+	eListBuildBatchesInput_maxResults                          smithy.SchemaExtensions
+	eListBuildBatchesInput_sortOrder                           smithy.SchemaExtensions
+	eListBuildBatchesInput_nextToken                           smithy.SchemaExtensions
+	eListBuildBatchesOutput                                    smithy.SchemaExtensions
+	eListBuildBatchesOutput_ids                                smithy.SchemaExtensions
+	eListBuildBatchesOutput_nextToken                          smithy.SchemaExtensions
+	eListBuildsForProjectInput                                 smithy.SchemaExtensions
+	eListBuildsForProjectInput_projectName                     smithy.SchemaExtensions
+	eListBuildsForProjectInput_sortOrder                       smithy.SchemaExtensions
+	eListBuildsForProjectInput_nextToken                       smithy.SchemaExtensions
+	eListBuildsForProjectOutput                                smithy.SchemaExtensions
+	eListBuildsForProjectOutput_ids                            smithy.SchemaExtensions
+	eListBuildsForProjectOutput_nextToken                      smithy.SchemaExtensions
+	eListBuildsInput                                           smithy.SchemaExtensions
+	eListBuildsInput_sortOrder                                 smithy.SchemaExtensions
+	eListBuildsInput_nextToken                                 smithy.SchemaExtensions
+	eListBuildsOutput                                          smithy.SchemaExtensions
+	eListBuildsOutput_ids                                      smithy.SchemaExtensions
+	eListBuildsOutput_nextToken                                smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxInput                      smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxInput_sandboxId            smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxInput_maxResults           smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxInput_sortOrder            smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxInput_nextToken            smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxOutput                     smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxOutput_commandExecutions   smithy.SchemaExtensions
+	eListCommandExecutionsForSandboxOutput_nextToken           smithy.SchemaExtensions
+	eListCuratedEnvironmentImagesInput                         smithy.SchemaExtensions
+	eListCuratedEnvironmentImagesOutput                        smithy.SchemaExtensions
+	eListCuratedEnvironmentImagesOutput_platforms              smithy.SchemaExtensions
+	eListFleetsInput                                           smithy.SchemaExtensions
+	eListFleetsInput_nextToken                                 smithy.SchemaExtensions
+	eListFleetsInput_maxResults                                smithy.SchemaExtensions
+	eListFleetsInput_sortOrder                                 smithy.SchemaExtensions
+	eListFleetsInput_sortBy                                    smithy.SchemaExtensions
+	eListFleetsOutput                                          smithy.SchemaExtensions
+	eListFleetsOutput_nextToken                                smithy.SchemaExtensions
+	eListFleetsOutput_fleets                                   smithy.SchemaExtensions
+	eListProjectsInput                                         smithy.SchemaExtensions
+	eListProjectsInput_sortBy                                  smithy.SchemaExtensions
+	eListProjectsInput_sortOrder                               smithy.SchemaExtensions
+	eListProjectsInput_nextToken                               smithy.SchemaExtensions
+	eListProjectsOutput                                        smithy.SchemaExtensions
+	eListProjectsOutput_nextToken                              smithy.SchemaExtensions
+	eListProjectsOutput_projects                               smithy.SchemaExtensions
+	eListReportGroupsInput                                     smithy.SchemaExtensions
+	eListReportGroupsInput_sortOrder                           smithy.SchemaExtensions
+	eListReportGroupsInput_sortBy                              smithy.SchemaExtensions
+	eListReportGroupsInput_nextToken                           smithy.SchemaExtensions
+	eListReportGroupsInput_maxResults                          smithy.SchemaExtensions
+	eListReportGroupsOutput                                    smithy.SchemaExtensions
+	eListReportGroupsOutput_nextToken                          smithy.SchemaExtensions
+	eListReportGroupsOutput_reportGroups                       smithy.SchemaExtensions
+	eListReportsForReportGroupInput                            smithy.SchemaExtensions
+	eListReportsForReportGroupInput_reportGroupArn             smithy.SchemaExtensions
+	eListReportsForReportGroupInput_nextToken                  smithy.SchemaExtensions
+	eListReportsForReportGroupInput_sortOrder                  smithy.SchemaExtensions
+	eListReportsForReportGroupInput_maxResults                 smithy.SchemaExtensions
+	eListReportsForReportGroupInput_filter                     smithy.SchemaExtensions
+	eListReportsForReportGroupOutput                           smithy.SchemaExtensions
+	eListReportsForReportGroupOutput_nextToken                 smithy.SchemaExtensions
+	eListReportsForReportGroupOutput_reports                   smithy.SchemaExtensions
+	eListReportsInput                                          smithy.SchemaExtensions
+	eListReportsInput_sortOrder                                smithy.SchemaExtensions
+	eListReportsInput_nextToken                                smithy.SchemaExtensions
+	eListReportsInput_maxResults                               smithy.SchemaExtensions
+	eListReportsInput_filter                                   smithy.SchemaExtensions
+	eListReportsOutput                                         smithy.SchemaExtensions
+	eListReportsOutput_nextToken                               smithy.SchemaExtensions
+	eListReportsOutput_reports                                 smithy.SchemaExtensions
+	eListSandboxesForProjectInput                              smithy.SchemaExtensions
+	eListSandboxesForProjectInput_projectName                  smithy.SchemaExtensions
+	eListSandboxesForProjectInput_maxResults                   smithy.SchemaExtensions
+	eListSandboxesForProjectInput_sortOrder                    smithy.SchemaExtensions
+	eListSandboxesForProjectInput_nextToken                    smithy.SchemaExtensions
+	eListSandboxesForProjectOutput                             smithy.SchemaExtensions
+	eListSandboxesForProjectOutput_ids                         smithy.SchemaExtensions
+	eListSandboxesForProjectOutput_nextToken                   smithy.SchemaExtensions
+	eListSandboxesInput                                        smithy.SchemaExtensions
+	eListSandboxesInput_maxResults                             smithy.SchemaExtensions
+	eListSandboxesInput_sortOrder                              smithy.SchemaExtensions
+	eListSandboxesInput_nextToken                              smithy.SchemaExtensions
+	eListSandboxesOutput                                       smithy.SchemaExtensions
+	eListSandboxesOutput_ids                                   smithy.SchemaExtensions
+	eListSandboxesOutput_nextToken                             smithy.SchemaExtensions
+	eListSharedProjectsInput                                   smithy.SchemaExtensions
+	eListSharedProjectsInput_sortBy                            smithy.SchemaExtensions
+	eListSharedProjectsInput_sortOrder                         smithy.SchemaExtensions
+	eListSharedProjectsInput_maxResults                        smithy.SchemaExtensions
+	eListSharedProjectsInput_nextToken                         smithy.SchemaExtensions
+	eListSharedProjectsOutput                                  smithy.SchemaExtensions
+	eListSharedProjectsOutput_nextToken                        smithy.SchemaExtensions
+	eListSharedProjectsOutput_projects                         smithy.SchemaExtensions
+	eListSharedReportGroupsInput                               smithy.SchemaExtensions
+	eListSharedReportGroupsInput_sortOrder                     smithy.SchemaExtensions
+	eListSharedReportGroupsInput_sortBy                        smithy.SchemaExtensions
+	eListSharedReportGroupsInput_nextToken                     smithy.SchemaExtensions
+	eListSharedReportGroupsInput_maxResults                    smithy.SchemaExtensions
+	eListSharedReportGroupsOutput                              smithy.SchemaExtensions
+	eListSharedReportGroupsOutput_nextToken                    smithy.SchemaExtensions
+	eListSharedReportGroupsOutput_reportGroups                 smithy.SchemaExtensions
+	eListSourceCredentialsInput                                smithy.SchemaExtensions
+	eListSourceCredentialsOutput                               smithy.SchemaExtensions
+	eListSourceCredentialsOutput_sourceCredentialsInfos        smithy.SchemaExtensions
+	ePutResourcePolicyInput                                    smithy.SchemaExtensions
+	ePutResourcePolicyInput_policy                             smithy.SchemaExtensions
+	ePutResourcePolicyInput_resourceArn                        smithy.SchemaExtensions
+	ePutResourcePolicyOutput                                   smithy.SchemaExtensions
+	ePutResourcePolicyOutput_resourceArn                       smithy.SchemaExtensions
+	eRetryBuildBatchInput                                      smithy.SchemaExtensions
+	eRetryBuildBatchInput_id                                   smithy.SchemaExtensions
+	eRetryBuildBatchInput_idempotencyToken                     smithy.SchemaExtensions
+	eRetryBuildBatchInput_retryType                            smithy.SchemaExtensions
+	eRetryBuildBatchOutput                                     smithy.SchemaExtensions
+	eRetryBuildBatchOutput_buildBatch                          smithy.SchemaExtensions
+	eRetryBuildInput                                           smithy.SchemaExtensions
+	eRetryBuildInput_id                                        smithy.SchemaExtensions
+	eRetryBuildInput_idempotencyToken                          smithy.SchemaExtensions
+	eRetryBuildOutput                                          smithy.SchemaExtensions
+	eRetryBuildOutput_build                                    smithy.SchemaExtensions
+	eStartBuildBatchInput                                      smithy.SchemaExtensions
+	eStartBuildBatchInput_projectName                          smithy.SchemaExtensions
+	eStartBuildBatchInput_secondarySourcesOverride             smithy.SchemaExtensions
+	eStartBuildBatchInput_secondarySourcesVersionOverride      smithy.SchemaExtensions
+	eStartBuildBatchInput_sourceVersion                        smithy.SchemaExtensions
+	eStartBuildBatchInput_artifactsOverride                    smithy.SchemaExtensions
+	eStartBuildBatchInput_secondaryArtifactsOverride           smithy.SchemaExtensions
+	eStartBuildBatchInput_environmentVariablesOverride         smithy.SchemaExtensions
+	eStartBuildBatchInput_sourceTypeOverride                   smithy.SchemaExtensions
+	eStartBuildBatchInput_sourceLocationOverride               smithy.SchemaExtensions
+	eStartBuildBatchInput_sourceAuthOverride                   smithy.SchemaExtensions
+	eStartBuildBatchInput_gitCloneDepthOverride                smithy.SchemaExtensions
+	eStartBuildBatchInput_gitSubmodulesConfigOverride          smithy.SchemaExtensions
+	eStartBuildBatchInput_buildspecOverride                    smithy.SchemaExtensions
+	eStartBuildBatchInput_insecureSslOverride                  smithy.SchemaExtensions
+	eStartBuildBatchInput_reportBuildBatchStatusOverride       smithy.SchemaExtensions
+	eStartBuildBatchInput_environmentTypeOverride              smithy.SchemaExtensions
+	eStartBuildBatchInput_imageOverride                        smithy.SchemaExtensions
+	eStartBuildBatchInput_computeTypeOverride                  smithy.SchemaExtensions
+	eStartBuildBatchInput_certificateOverride                  smithy.SchemaExtensions
+	eStartBuildBatchInput_cacheOverride                        smithy.SchemaExtensions
+	eStartBuildBatchInput_serviceRoleOverride                  smithy.SchemaExtensions
+	eStartBuildBatchInput_privilegedModeOverride               smithy.SchemaExtensions
+	eStartBuildBatchInput_buildTimeoutInMinutesOverride        smithy.SchemaExtensions
+	eStartBuildBatchInput_queuedTimeoutInMinutesOverride       smithy.SchemaExtensions
+	eStartBuildBatchInput_encryptionKeyOverride                smithy.SchemaExtensions
+	eStartBuildBatchInput_idempotencyToken                     smithy.SchemaExtensions
+	eStartBuildBatchInput_logsConfigOverride                   smithy.SchemaExtensions
+	eStartBuildBatchInput_registryCredentialOverride           smithy.SchemaExtensions
+	eStartBuildBatchInput_imagePullCredentialsTypeOverride     smithy.SchemaExtensions
+	eStartBuildBatchInput_buildBatchConfigOverride             smithy.SchemaExtensions
+	eStartBuildBatchInput_debugSessionEnabled                  smithy.SchemaExtensions
+	eStartBuildBatchOutput                                     smithy.SchemaExtensions
+	eStartBuildBatchOutput_buildBatch                          smithy.SchemaExtensions
+	eStartBuildInput                                           smithy.SchemaExtensions
+	eStartBuildInput_projectName                               smithy.SchemaExtensions
+	eStartBuildInput_secondarySourcesOverride                  smithy.SchemaExtensions
+	eStartBuildInput_secondarySourcesVersionOverride           smithy.SchemaExtensions
+	eStartBuildInput_sourceVersion                             smithy.SchemaExtensions
+	eStartBuildInput_artifactsOverride                         smithy.SchemaExtensions
+	eStartBuildInput_secondaryArtifactsOverride                smithy.SchemaExtensions
+	eStartBuildInput_environmentVariablesOverride              smithy.SchemaExtensions
+	eStartBuildInput_sourceTypeOverride                        smithy.SchemaExtensions
+	eStartBuildInput_sourceLocationOverride                    smithy.SchemaExtensions
+	eStartBuildInput_sourceAuthOverride                        smithy.SchemaExtensions
+	eStartBuildInput_gitCloneDepthOverride                     smithy.SchemaExtensions
+	eStartBuildInput_gitSubmodulesConfigOverride               smithy.SchemaExtensions
+	eStartBuildInput_buildspecOverride                         smithy.SchemaExtensions
+	eStartBuildInput_insecureSslOverride                       smithy.SchemaExtensions
+	eStartBuildInput_reportBuildStatusOverride                 smithy.SchemaExtensions
+	eStartBuildInput_buildStatusConfigOverride                 smithy.SchemaExtensions
+	eStartBuildInput_environmentTypeOverride                   smithy.SchemaExtensions
+	eStartBuildInput_imageOverride                             smithy.SchemaExtensions
+	eStartBuildInput_computeTypeOverride                       smithy.SchemaExtensions
+	eStartBuildInput_certificateOverride                       smithy.SchemaExtensions
+	eStartBuildInput_cacheOverride                             smithy.SchemaExtensions
+	eStartBuildInput_serviceRoleOverride                       smithy.SchemaExtensions
+	eStartBuildInput_privilegedModeOverride                    smithy.SchemaExtensions
+	eStartBuildInput_timeoutInMinutesOverride                  smithy.SchemaExtensions
+	eStartBuildInput_queuedTimeoutInMinutesOverride            smithy.SchemaExtensions
+	eStartBuildInput_encryptionKeyOverride                     smithy.SchemaExtensions
+	eStartBuildInput_idempotencyToken                          smithy.SchemaExtensions
+	eStartBuildInput_logsConfigOverride                        smithy.SchemaExtensions
+	eStartBuildInput_registryCredentialOverride                smithy.SchemaExtensions
+	eStartBuildInput_imagePullCredentialsTypeOverride          smithy.SchemaExtensions
+	eStartBuildInput_debugSessionEnabled                       smithy.SchemaExtensions
+	eStartBuildInput_fleetOverride                             smithy.SchemaExtensions
+	eStartBuildInput_autoRetryLimitOverride                    smithy.SchemaExtensions
+	eStartBuildInput_hostKernelOverride                        smithy.SchemaExtensions
+	eStartBuildOutput                                          smithy.SchemaExtensions
+	eStartBuildOutput_build                                    smithy.SchemaExtensions
+	eStartCommandExecutionInput                                smithy.SchemaExtensions
+	eStartCommandExecutionInput_sandboxId                      smithy.SchemaExtensions
+	eStartCommandExecutionInput_command                        smithy.SchemaExtensions
+	eStartCommandExecutionInput_type                           smithy.SchemaExtensions
+	eStartCommandExecutionOutput                               smithy.SchemaExtensions
+	eStartCommandExecutionOutput_commandExecution              smithy.SchemaExtensions
+	eStartSandboxConnectionInput                               smithy.SchemaExtensions
+	eStartSandboxConnectionInput_sandboxId                     smithy.SchemaExtensions
+	eStartSandboxConnectionOutput                              smithy.SchemaExtensions
+	eStartSandboxConnectionOutput_ssmSession                   smithy.SchemaExtensions
+	eStartSandboxInput                                         smithy.SchemaExtensions
+	eStartSandboxInput_projectName                             smithy.SchemaExtensions
+	eStartSandboxInput_idempotencyToken                        smithy.SchemaExtensions
+	eStartSandboxOutput                                        smithy.SchemaExtensions
+	eStartSandboxOutput_sandbox                                smithy.SchemaExtensions
+	eStopBuildBatchInput                                       smithy.SchemaExtensions
+	eStopBuildBatchInput_id                                    smithy.SchemaExtensions
+	eStopBuildBatchOutput                                      smithy.SchemaExtensions
+	eStopBuildBatchOutput_buildBatch                           smithy.SchemaExtensions
+	eStopBuildInput                                            smithy.SchemaExtensions
+	eStopBuildInput_id                                         smithy.SchemaExtensions
+	eStopBuildOutput                                           smithy.SchemaExtensions
+	eStopBuildOutput_build                                     smithy.SchemaExtensions
+	eStopSandboxInput                                          smithy.SchemaExtensions
+	eStopSandboxInput_id                                       smithy.SchemaExtensions
+	eStopSandboxOutput                                         smithy.SchemaExtensions
+	eStopSandboxOutput_sandbox                                 smithy.SchemaExtensions
+	eUpdateFleetInput                                          smithy.SchemaExtensions
+	eUpdateFleetInput_arn                                      smithy.SchemaExtensions
+	eUpdateFleetInput_baseCapacity                             smithy.SchemaExtensions
+	eUpdateFleetInput_environmentType                          smithy.SchemaExtensions
+	eUpdateFleetInput_computeType                              smithy.SchemaExtensions
+	eUpdateFleetInput_computeConfiguration                     smithy.SchemaExtensions
+	eUpdateFleetInput_scalingConfiguration                     smithy.SchemaExtensions
+	eUpdateFleetInput_overflowBehavior                         smithy.SchemaExtensions
+	eUpdateFleetInput_vpcConfig                                smithy.SchemaExtensions
+	eUpdateFleetInput_proxyConfiguration                       smithy.SchemaExtensions
+	eUpdateFleetInput_imageId                                  smithy.SchemaExtensions
+	eUpdateFleetInput_fleetServiceRole                         smithy.SchemaExtensions
+	eUpdateFleetInput_tags                                     smithy.SchemaExtensions
+	eUpdateFleetOutput                                         smithy.SchemaExtensions
+	eUpdateFleetOutput_fleet                                   smithy.SchemaExtensions
+	eUpdateProjectInput                                        smithy.SchemaExtensions
+	eUpdateProjectInput_name                                   smithy.SchemaExtensions
+	eUpdateProjectInput_description                            smithy.SchemaExtensions
+	eUpdateProjectInput_source                                 smithy.SchemaExtensions
+	eUpdateProjectInput_secondarySources                       smithy.SchemaExtensions
+	eUpdateProjectInput_sourceVersion                          smithy.SchemaExtensions
+	eUpdateProjectInput_secondarySourceVersions                smithy.SchemaExtensions
+	eUpdateProjectInput_artifacts                              smithy.SchemaExtensions
+	eUpdateProjectInput_secondaryArtifacts                     smithy.SchemaExtensions
+	eUpdateProjectInput_cache                                  smithy.SchemaExtensions
+	eUpdateProjectInput_environment                            smithy.SchemaExtensions
+	eUpdateProjectInput_serviceRole                            smithy.SchemaExtensions
+	eUpdateProjectInput_timeoutInMinutes                       smithy.SchemaExtensions
+	eUpdateProjectInput_queuedTimeoutInMinutes                 smithy.SchemaExtensions
+	eUpdateProjectInput_encryptionKey                          smithy.SchemaExtensions
+	eUpdateProjectInput_tags                                   smithy.SchemaExtensions
+	eUpdateProjectInput_vpcConfig                              smithy.SchemaExtensions
+	eUpdateProjectInput_badgeEnabled                           smithy.SchemaExtensions
+	eUpdateProjectInput_logsConfig                             smithy.SchemaExtensions
+	eUpdateProjectInput_fileSystemLocations                    smithy.SchemaExtensions
+	eUpdateProjectInput_buildBatchConfig                       smithy.SchemaExtensions
+	eUpdateProjectInput_concurrentBuildLimit                   smithy.SchemaExtensions
+	eUpdateProjectInput_autoRetryLimit                         smithy.SchemaExtensions
+	eUpdateProjectOutput                                       smithy.SchemaExtensions
+	eUpdateProjectOutput_project                               smithy.SchemaExtensions
+	eUpdateProjectVisibilityInput                              smithy.SchemaExtensions
+	eUpdateProjectVisibilityInput_projectArn                   smithy.SchemaExtensions
+	eUpdateProjectVisibilityInput_projectVisibility            smithy.SchemaExtensions
+	eUpdateProjectVisibilityInput_resourceAccessRole           smithy.SchemaExtensions
+	eUpdateProjectVisibilityOutput                             smithy.SchemaExtensions
+	eUpdateProjectVisibilityOutput_projectArn                  smithy.SchemaExtensions
+	eUpdateProjectVisibilityOutput_publicProjectAlias          smithy.SchemaExtensions
+	eUpdateProjectVisibilityOutput_projectVisibility           smithy.SchemaExtensions
+	eUpdateReportGroupInput                                    smithy.SchemaExtensions
+	eUpdateReportGroupInput_arn                                smithy.SchemaExtensions
+	eUpdateReportGroupInput_exportConfig                       smithy.SchemaExtensions
+	eUpdateReportGroupInput_tags                               smithy.SchemaExtensions
+	eUpdateReportGroupOutput                                   smithy.SchemaExtensions
+	eUpdateReportGroupOutput_reportGroup                       smithy.SchemaExtensions
+	eUpdateWebhookInput                                        smithy.SchemaExtensions
+	eUpdateWebhookInput_projectName                            smithy.SchemaExtensions
+	eUpdateWebhookInput_branchFilter                           smithy.SchemaExtensions
+	eUpdateWebhookInput_rotateSecret                           smithy.SchemaExtensions
+	eUpdateWebhookInput_filterGroups                           smithy.SchemaExtensions
+	eUpdateWebhookInput_buildType                              smithy.SchemaExtensions
+	eUpdateWebhookInput_pullRequestBuildPolicy                 smithy.SchemaExtensions
+	eUpdateWebhookOutput                                       smithy.SchemaExtensions
+	eUpdateWebhookOutput_webhook                               smithy.SchemaExtensions
+)
+
+var (
+	iBatchDeleteBuilds                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchDeleteBuilds"}
+	iBatchGetBuildBatches                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetBuildBatches"}
+	iBatchGetBuilds                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetBuilds"}
+	iBatchGetCommandExecutions             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetCommandExecutions"}
+	iBatchGetFleets                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetFleets"}
+	iBatchGetProjects                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetProjects"}
+	iBatchGetReportGroups                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetReportGroups"}
+	iBatchGetReports                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetReports"}
+	iBatchGetSandboxes                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetSandboxes"}
+	iCreateFleet                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateFleet"}
+	iCreateProject                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateProject"}
+	iCreateReportGroup                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateReportGroup"}
+	iCreateWebhook                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateWebhook"}
+	iDeleteBuildBatch                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteBuildBatch"}
+	iDeleteFleet                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteFleet"}
+	iDeleteProject                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteProject"}
+	iDeleteReport                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteReport"}
+	iDeleteReportGroup                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteReportGroup"}
+	iDeleteResourcePolicy                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteResourcePolicy"}
+	iDeleteSourceCredentials               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteSourceCredentials"}
+	iDeleteWebhook                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteWebhook"}
+	iDescribeCodeCoverages                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DescribeCodeCoverages"}
+	iDescribeTestCases                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DescribeTestCases"}
+	iGetReportGroupTrend                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GetReportGroupTrend"}
+	iGetResourcePolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GetResourcePolicy"}
+	iImportSourceCredentials               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ImportSourceCredentials"}
+	iInvalidateProjectCache                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "InvalidateProjectCache"}
+	iListBuildBatches                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildBatches"}
+	iListBuildBatchesForProject            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildBatchesForProject"}
+	iListBuilds                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuilds"}
+	iListBuildsForProject                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildsForProject"}
+	iListCommandExecutionsForSandbox       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListCommandExecutionsForSandbox"}
+	iListCuratedEnvironmentImages          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListCuratedEnvironmentImages"}
+	iListFleets                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListFleets"}
+	iListProjects                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListProjects"}
+	iListReportGroups                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportGroups"}
+	iListReports                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReports"}
+	iListReportsForReportGroup             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportsForReportGroup"}
+	iListSandboxes                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSandboxes"}
+	iListSandboxesForProject               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSandboxesForProject"}
+	iListSharedProjects                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSharedProjects"}
+	iListSharedReportGroups                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSharedReportGroups"}
+	iListSourceCredentials                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSourceCredentials"}
+	iPutResourcePolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PutResourcePolicy"}
+	iRetryBuild                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RetryBuild"}
+	iRetryBuildBatch                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RetryBuildBatch"}
+	iStartBuild                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartBuild"}
+	iStartBuildBatch                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartBuildBatch"}
+	iStartCommandExecution                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartCommandExecution"}
+	iStartSandbox                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartSandbox"}
+	iStartSandboxConnection                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartSandboxConnection"}
+	iStopBuild                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopBuild"}
+	iStopBuildBatch                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopBuildBatch"}
+	iStopSandbox                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopSandbox"}
+	iUpdateFleet                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateFleet"}
+	iUpdateProject                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateProject"}
+	iUpdateProjectVisibility               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateProjectVisibility"}
+	iUpdateReportGroup                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateReportGroup"}
+	iUpdateWebhook                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateWebhook"}
+	i_CodeBuild_20161006                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CodeBuild_20161006"}
+	iAccountLimitExceededException         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "AccountLimitExceededException"}
+	iAccountSuspendedException             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "AccountSuspendedException"}
+	iArtifactNamespace                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ArtifactNamespace"}
+	iArtifactPackaging                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ArtifactPackaging"}
+	iArtifactsType                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ArtifactsType"}
+	iAuthType                              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "AuthType"}
+	iAutoRetryConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "AutoRetryConfig"}
+	iBatchReportModeType                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchReportModeType"}
+	iBatchRestrictions                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchRestrictions"}
+	i_Boolean                              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Boolean"}
+	iBucketOwnerAccess                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BucketOwnerAccess"}
+	iBuild                                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Build"}
+	iBuildArtifacts                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildArtifacts"}
+	i_BuildArtifactsList                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildArtifactsList"}
+	iBuildBatch                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildBatch"}
+	i_BuildBatches                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildBatches"}
+	iBuildBatchFilter                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildBatchFilter"}
+	i_BuildBatchIds                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildBatchIds"}
+	iBuildBatchPhase                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildBatchPhase"}
+	i_BuildBatchPhases                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildBatchPhases"}
+	iBuildBatchPhaseType                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildBatchPhaseType"}
+	iBuildGroup                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildGroup"}
+	i_BuildGroups                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildGroups"}
+	i_BuildIds                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildIds"}
+	iBuildNotDeleted                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildNotDeleted"}
+	iBuildPhase                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildPhase"}
+	i_BuildPhases                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildPhases"}
+	iBuildPhaseType                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildPhaseType"}
+	i_BuildReportArns                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildReportArns"}
+	i_Builds                               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Builds"}
+	i_BuildsNotDeleted                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildsNotDeleted"}
+	iBuildStatusConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildStatusConfig"}
+	i_BuildSummaries                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildSummaries"}
+	iBuildSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildSummary"}
+	i_BuildTimeOut                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BuildTimeOut"}
+	iCacheMode                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CacheMode"}
+	iCacheType                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CacheType"}
+	iCloudWatchLogsConfig                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CloudWatchLogsConfig"}
+	iCodeCoverage                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CodeCoverage"}
+	iCodeCoverageReportSummary             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CodeCoverageReportSummary"}
+	i_CodeCoverages                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CodeCoverages"}
+	iCommandExecution                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CommandExecution"}
+	i_CommandExecutionIds                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CommandExecutionIds"}
+	i_CommandExecutions                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CommandExecutions"}
+	iCommandType                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CommandType"}
+	iComputeConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ComputeConfiguration"}
+	iComputeType                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ComputeType"}
+	i_ComputeTypesAllowed                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ComputeTypesAllowed"}
+	iCredentialProviderType                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CredentialProviderType"}
+	iDebugSession                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DebugSession"}
+	iDockerServer                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DockerServer"}
+	iDockerServerStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DockerServerStatus"}
+	iEnvironmentImage                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentImage"}
+	i_EnvironmentImages                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentImages"}
+	iEnvironmentLanguage                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentLanguage"}
+	i_EnvironmentLanguages                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentLanguages"}
+	iEnvironmentPlatform                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentPlatform"}
+	i_EnvironmentPlatforms                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentPlatforms"}
+	iEnvironmentType                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentType"}
+	iEnvironmentVariable                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentVariable"}
+	i_EnvironmentVariables                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentVariables"}
+	iEnvironmentVariableType               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "EnvironmentVariableType"}
+	iExportedEnvironmentVariable           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ExportedEnvironmentVariable"}
+	i_ExportedEnvironmentVariables         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ExportedEnvironmentVariables"}
+	iFileSystemType                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FileSystemType"}
+	i_FilterGroup                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FilterGroup"}
+	i_FilterGroups                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FilterGroups"}
+	iFleet                                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Fleet"}
+	i_FleetArns                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetArns"}
+	i_FleetCapacity                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetCapacity"}
+	iFleetContextCode                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetContextCode"}
+	i_FleetName                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetName"}
+	i_FleetNames                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetNames"}
+	iFleetOverflowBehavior                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetOverflowBehavior"}
+	iFleetProxyRule                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetProxyRule"}
+	iFleetProxyRuleBehavior                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetProxyRuleBehavior"}
+	iFleetProxyRuleEffectType              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetProxyRuleEffectType"}
+	i_FleetProxyRuleEntities               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetProxyRuleEntities"}
+	i_FleetProxyRules                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetProxyRules"}
+	iFleetProxyRuleType                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetProxyRuleType"}
+	i_Fleets                               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Fleets"}
+	i_FleetsAllowed                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetsAllowed"}
+	iFleetScalingMetricType                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetScalingMetricType"}
+	iFleetScalingType                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetScalingType"}
+	iFleetSortByType                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetSortByType"}
+	iFleetStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetStatus"}
+	iFleetStatusCode                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "FleetStatusCode"}
+	i_GitCloneDepth                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GitCloneDepth"}
+	iGitSubmodulesConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GitSubmodulesConfig"}
+	iHostKernel                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "HostKernel"}
+	i_Identifiers                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Identifiers"}
+	iImagePullCredentialsType              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ImagePullCredentialsType"}
+	i_ImageVersions                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ImageVersions"}
+	iInvalidInputException                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "InvalidInputException"}
+	i_KeyInput                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "KeyInput"}
+	iLanguageType                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "LanguageType"}
+	iLogsConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "LogsConfig"}
+	iLogsConfigStatusType                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "LogsConfigStatusType"}
+	iLogsLocation                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "LogsLocation"}
+	iMachineType                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "MachineType"}
+	iNetworkInterface                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "NetworkInterface"}
+	i_NonEmptyString                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "NonEmptyString"}
+	i_NonNegativeInt                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "NonNegativeInt"}
+	iOAuthProviderException                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "OAuthProviderException"}
+	i_PageSize                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PageSize"}
+	i_Percentage                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Percentage"}
+	iPhaseContext                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PhaseContext"}
+	i_PhaseContexts                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PhaseContexts"}
+	iPlatformType                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PlatformType"}
+	iProject                               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Project"}
+	i_ProjectArns                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectArns"}
+	iProjectArtifacts                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectArtifacts"}
+	i_ProjectArtifactsList                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectArtifactsList"}
+	iProjectBadge                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectBadge"}
+	iProjectBuildBatchConfig               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectBuildBatchConfig"}
+	iProjectCache                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectCache"}
+	i_ProjectCacheModes                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectCacheModes"}
+	i_ProjectDescription                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectDescription"}
+	iProjectEnvironment                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectEnvironment"}
+	iProjectFileSystemLocation             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectFileSystemLocation"}
+	i_ProjectFileSystemLocations           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectFileSystemLocations"}
+	iProjectFleet                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectFleet"}
+	i_ProjectName                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectName"}
+	i_ProjectNames                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectNames"}
+	i_Projects                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Projects"}
+	i_ProjectSecondarySourceVersions       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectSecondarySourceVersions"}
+	iProjectSortByType                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectSortByType"}
+	iProjectSource                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectSource"}
+	i_ProjectSources                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectSources"}
+	iProjectSourceVersion                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectSourceVersion"}
+	iProjectVisibilityType                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProjectVisibilityType"}
+	iProxyConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ProxyConfiguration"}
+	iPullRequestBuildApproverRole          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PullRequestBuildApproverRole"}
+	i_PullRequestBuildApproverRoles        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PullRequestBuildApproverRoles"}
+	iPullRequestBuildCommentApproval       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PullRequestBuildCommentApproval"}
+	iPullRequestBuildPolicy                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PullRequestBuildPolicy"}
+	iRegistryCredential                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RegistryCredential"}
+	iReport                                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Report"}
+	i_ReportArns                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportArns"}
+	iReportCodeCoverageSortByType          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportCodeCoverageSortByType"}
+	iReportExportConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportExportConfig"}
+	iReportExportConfigType                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportExportConfigType"}
+	iReportFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportFilter"}
+	iReportGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroup"}
+	i_ReportGroupArns                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroupArns"}
+	i_ReportGroupName                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroupName"}
+	i_ReportGroups                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroups"}
+	iReportGroupSortByType                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroupSortByType"}
+	iReportGroupStatusType                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroupStatusType"}
+	iReportGroupTrendFieldType             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroupTrendFieldType"}
+	i_ReportGroupTrendRawDataList          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroupTrendRawDataList"}
+	iReportGroupTrendStats                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportGroupTrendStats"}
+	iReportPackagingType                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportPackagingType"}
+	i_Reports                              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Reports"}
+	i_ReportStatusCounts                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportStatusCounts"}
+	iReportStatusType                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportStatusType"}
+	iReportType                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportType"}
+	iReportWithRawData                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ReportWithRawData"}
+	iResolvedArtifact                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ResolvedArtifact"}
+	i_ResolvedSecondaryArtifacts           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ResolvedSecondaryArtifacts"}
+	iResourceAlreadyExistsException        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ResourceAlreadyExistsException"}
+	iResourceNotFoundException             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ResourceNotFoundException"}
+	iRetryBuildBatchType                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RetryBuildBatchType"}
+	iS3LogsConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "S3LogsConfig"}
+	iS3ReportExportConfig                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "S3ReportExportConfig"}
+	iSandbox                               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Sandbox"}
+	i_Sandboxes                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Sandboxes"}
+	i_SandboxIds                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SandboxIds"}
+	iSandboxSession                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SandboxSession"}
+	iSandboxSessionPhase                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SandboxSessionPhase"}
+	i_SandboxSessionPhases                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SandboxSessionPhases"}
+	iScalingConfigurationInput             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ScalingConfigurationInput"}
+	iScalingConfigurationOutput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ScalingConfigurationOutput"}
+	iScopeConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ScopeConfiguration"}
+	i_SecurityGroupIds                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SecurityGroupIds"}
+	i_SensitiveNonEmptyString              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SensitiveNonEmptyString"}
+	i_SensitiveString                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SensitiveString"}
+	iServerType                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ServerType"}
+	iSharedResourceSortByType              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SharedResourceSortByType"}
+	iSortOrderType                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SortOrderType"}
+	iSourceAuth                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SourceAuth"}
+	iSourceAuthType                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SourceAuthType"}
+	iSourceCredentialsInfo                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SourceCredentialsInfo"}
+	i_SourceCredentialsInfos               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SourceCredentialsInfos"}
+	iSourceType                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SourceType"}
+	iSSMSession                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "SSMSession"}
+	iStatusType                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StatusType"}
+	i_String                               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "String"}
+	i_Subnets                              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Subnets"}
+	iTag                                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Tag"}
+	i_TagList                              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TagList"}
+	iTargetTrackingScalingConfiguration    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TargetTrackingScalingConfiguration"}
+	i_TargetTrackingScalingConfigurations  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TargetTrackingScalingConfigurations"}
+	iTestCase                              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TestCase"}
+	iTestCaseFilter                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TestCaseFilter"}
+	i_TestCases                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TestCases"}
+	iTestReportSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TestReportSummary"}
+	i_TimeOut                              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "TimeOut"}
+	i_Timestamp                            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Timestamp"}
+	i_ValueInput                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ValueInput"}
+	iVpcConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "VpcConfig"}
+	iWebhook                               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "Webhook"}
+	iWebhookBuildType                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WebhookBuildType"}
+	iWebhookFilter                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WebhookFilter"}
+	iWebhookFilterType                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WebhookFilterType"}
+	iWebhookScopeType                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WebhookScopeType"}
+	iWebhookStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WebhookStatus"}
+	i_WrapperBoolean                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WrapperBoolean"}
+	i_WrapperDouble                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WrapperDouble"}
+	i_WrapperInt                           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WrapperInt"}
+	i_WrapperLong                          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "WrapperLong"}
+	iBatchDeleteBuildsInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchDeleteBuildsInput"}
+	iBatchDeleteBuildsOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchDeleteBuildsOutput"}
+	iBatchGetBuildBatchesInput             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetBuildBatchesInput"}
+	iBatchGetBuildBatchesOutput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetBuildBatchesOutput"}
+	iBatchGetBuildsInput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetBuildsInput"}
+	iBatchGetBuildsOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetBuildsOutput"}
+	iBatchGetCommandExecutionsInput        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetCommandExecutionsInput"}
+	iBatchGetCommandExecutionsOutput       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetCommandExecutionsOutput"}
+	iBatchGetFleetsInput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetFleetsInput"}
+	iBatchGetFleetsOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetFleetsOutput"}
+	iBatchGetProjectsInput                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetProjectsInput"}
+	iBatchGetProjectsOutput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetProjectsOutput"}
+	iBatchGetReportGroupsInput             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetReportGroupsInput"}
+	iBatchGetReportGroupsOutput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetReportGroupsOutput"}
+	iBatchGetReportsInput                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetReportsInput"}
+	iBatchGetReportsOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetReportsOutput"}
+	iBatchGetSandboxesInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetSandboxesInput"}
+	iBatchGetSandboxesOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "BatchGetSandboxesOutput"}
+	iCreateFleetInput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateFleetInput"}
+	iCreateFleetOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateFleetOutput"}
+	iCreateProjectInput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateProjectInput"}
+	iCreateProjectOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateProjectOutput"}
+	iCreateReportGroupInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateReportGroupInput"}
+	iCreateReportGroupOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateReportGroupOutput"}
+	iCreateWebhookInput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateWebhookInput"}
+	iCreateWebhookOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "CreateWebhookOutput"}
+	iDeleteBuildBatchInput                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteBuildBatchInput"}
+	iDeleteBuildBatchOutput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteBuildBatchOutput"}
+	iDeleteFleetInput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteFleetInput"}
+	iDeleteFleetOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteFleetOutput"}
+	iDeleteProjectInput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteProjectInput"}
+	iDeleteProjectOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteProjectOutput"}
+	iDeleteReportGroupInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteReportGroupInput"}
+	iDeleteReportGroupOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteReportGroupOutput"}
+	iDeleteReportInput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteReportInput"}
+	iDeleteReportOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteReportOutput"}
+	iDeleteResourcePolicyInput             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteResourcePolicyInput"}
+	iDeleteResourcePolicyOutput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteResourcePolicyOutput"}
+	iDeleteSourceCredentialsInput          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteSourceCredentialsInput"}
+	iDeleteSourceCredentialsOutput         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteSourceCredentialsOutput"}
+	iDeleteWebhookInput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteWebhookInput"}
+	iDeleteWebhookOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DeleteWebhookOutput"}
+	iDescribeCodeCoveragesInput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DescribeCodeCoveragesInput"}
+	iDescribeCodeCoveragesOutput           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DescribeCodeCoveragesOutput"}
+	iDescribeTestCasesInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DescribeTestCasesInput"}
+	iDescribeTestCasesOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "DescribeTestCasesOutput"}
+	iGetReportGroupTrendInput              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GetReportGroupTrendInput"}
+	iGetReportGroupTrendOutput             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GetReportGroupTrendOutput"}
+	iGetResourcePolicyInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GetResourcePolicyInput"}
+	iGetResourcePolicyOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "GetResourcePolicyOutput"}
+	iImportSourceCredentialsInput          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ImportSourceCredentialsInput"}
+	iImportSourceCredentialsOutput         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ImportSourceCredentialsOutput"}
+	iInvalidateProjectCacheInput           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "InvalidateProjectCacheInput"}
+	iInvalidateProjectCacheOutput          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "InvalidateProjectCacheOutput"}
+	iListBuildBatchesForProjectInput       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildBatchesForProjectInput"}
+	iListBuildBatchesForProjectOutput      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildBatchesForProjectOutput"}
+	iListBuildBatchesInput                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildBatchesInput"}
+	iListBuildBatchesOutput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildBatchesOutput"}
+	iListBuildsForProjectInput             = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildsForProjectInput"}
+	iListBuildsForProjectOutput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildsForProjectOutput"}
+	iListBuildsInput                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildsInput"}
+	iListBuildsOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListBuildsOutput"}
+	iListCommandExecutionsForSandboxInput  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListCommandExecutionsForSandboxInput"}
+	iListCommandExecutionsForSandboxOutput = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListCommandExecutionsForSandboxOutput"}
+	iListCuratedEnvironmentImagesInput     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListCuratedEnvironmentImagesInput"}
+	iListCuratedEnvironmentImagesOutput    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListCuratedEnvironmentImagesOutput"}
+	iListFleetsInput                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListFleetsInput"}
+	iListFleetsOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListFleetsOutput"}
+	iListProjectsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListProjectsInput"}
+	iListProjectsOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListProjectsOutput"}
+	iListReportGroupsInput                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportGroupsInput"}
+	iListReportGroupsOutput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportGroupsOutput"}
+	iListReportsForReportGroupInput        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportsForReportGroupInput"}
+	iListReportsForReportGroupOutput       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportsForReportGroupOutput"}
+	iListReportsInput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportsInput"}
+	iListReportsOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListReportsOutput"}
+	iListSandboxesForProjectInput          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSandboxesForProjectInput"}
+	iListSandboxesForProjectOutput         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSandboxesForProjectOutput"}
+	iListSandboxesInput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSandboxesInput"}
+	iListSandboxesOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSandboxesOutput"}
+	iListSharedProjectsInput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSharedProjectsInput"}
+	iListSharedProjectsOutput              = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSharedProjectsOutput"}
+	iListSharedReportGroupsInput           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSharedReportGroupsInput"}
+	iListSharedReportGroupsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSharedReportGroupsOutput"}
+	iListSourceCredentialsInput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSourceCredentialsInput"}
+	iListSourceCredentialsOutput           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "ListSourceCredentialsOutput"}
+	iPutResourcePolicyInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PutResourcePolicyInput"}
+	iPutResourcePolicyOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "PutResourcePolicyOutput"}
+	iRetryBuildBatchInput                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RetryBuildBatchInput"}
+	iRetryBuildBatchOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RetryBuildBatchOutput"}
+	iRetryBuildInput                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RetryBuildInput"}
+	iRetryBuildOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "RetryBuildOutput"}
+	iStartBuildBatchInput                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartBuildBatchInput"}
+	iStartBuildBatchOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartBuildBatchOutput"}
+	iStartBuildInput                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartBuildInput"}
+	iStartBuildOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartBuildOutput"}
+	iStartCommandExecutionInput            = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartCommandExecutionInput"}
+	iStartCommandExecutionOutput           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartCommandExecutionOutput"}
+	iStartSandboxConnectionInput           = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartSandboxConnectionInput"}
+	iStartSandboxConnectionOutput          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartSandboxConnectionOutput"}
+	iStartSandboxInput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartSandboxInput"}
+	iStartSandboxOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StartSandboxOutput"}
+	iStopBuildBatchInput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopBuildBatchInput"}
+	iStopBuildBatchOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopBuildBatchOutput"}
+	iStopBuildInput                        = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopBuildInput"}
+	iStopBuildOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopBuildOutput"}
+	iStopSandboxInput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopSandboxInput"}
+	iStopSandboxOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "StopSandboxOutput"}
+	iUpdateFleetInput                      = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateFleetInput"}
+	iUpdateFleetOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateFleetOutput"}
+	iUpdateProjectInput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateProjectInput"}
+	iUpdateProjectOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateProjectOutput"}
+	iUpdateProjectVisibilityInput          = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateProjectVisibilityInput"}
+	iUpdateProjectVisibilityOutput         = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateProjectVisibilityOutput"}
+	iUpdateReportGroupInput                = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateReportGroupInput"}
+	iUpdateReportGroupOutput               = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateReportGroupOutput"}
+	iUpdateWebhookInput                    = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateWebhookInput"}
+	iUpdateWebhookOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.codebuild", Name: "UpdateWebhookOutput"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+
+var mAccountLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountLimitExceededException_message}}
+var mAccountSuspendedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountSuspendedException_message}}
+var mArtifactNamespace = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactNamespace_NONE, &sArtifactNamespace_BUILD_ID}}
+var mArtifactPackaging = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactPackaging_NONE, &sArtifactPackaging_ZIP}}
+var mArtifactsType = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactsType_CODEPIPELINE, &sArtifactsType_S3, &sArtifactsType_NO_ARTIFACTS}}
+var mAuthType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthType_OAUTH, &sAuthType_BASIC_AUTH, &sAuthType_PERSONAL_ACCESS_TOKEN, &sAuthType_CODECONNECTIONS, &sAuthType_SECRETS_MANAGER}}
+var mAutoRetryConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoRetryConfig_autoRetryLimit, &sAutoRetryConfig_autoRetryNumber, &sAutoRetryConfig_nextAutoRetry, &sAutoRetryConfig_previousAutoRetry}}
+var mBatchReportModeType = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReportModeType_REPORT_INDIVIDUAL_BUILDS, &sBatchReportModeType_REPORT_AGGREGATED_BATCH}}
+var mBatchRestrictions = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRestrictions_maximumBuildsAllowed, &sBatchRestrictions_computeTypesAllowed, &sBatchRestrictions_fleetsAllowed}}
+var mBucketOwnerAccess = smithy.SchemaMembers{List: []*smithy.Schema{&sBucketOwnerAccess_NONE, &sBucketOwnerAccess_READ_ONLY, &sBucketOwnerAccess_FULL}}
+var mBuild = smithy.SchemaMembers{List: []*smithy.Schema{&sBuild_id, &sBuild_arn, &sBuild_buildNumber, &sBuild_startTime, &sBuild_endTime, &sBuild_currentPhase, &sBuild_buildStatus, &sBuild_sourceVersion, &sBuild_resolvedSourceVersion, &sBuild_projectName, &sBuild_phases, &sBuild_source, &sBuild_secondarySources, &sBuild_secondarySourceVersions, &sBuild_artifacts, &sBuild_secondaryArtifacts, &sBuild_cache, &sBuild_environment, &sBuild_serviceRole, &sBuild_logs, &sBuild_timeoutInMinutes, &sBuild_queuedTimeoutInMinutes, &sBuild_buildComplete, &sBuild_initiator, &sBuild_vpcConfig, &sBuild_networkInterface, &sBuild_encryptionKey, &sBuild_exportedEnvironmentVariables, &sBuild_reportArns, &sBuild_fileSystemLocations, &sBuild_debugSession, &sBuild_buildBatchArn, &sBuild_autoRetryConfig}, Hash: &hBuild}
+var mBuildArtifacts = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildArtifacts_location, &sBuildArtifacts_sha256sum, &sBuildArtifacts_md5sum, &sBuildArtifacts_overrideArtifactName, &sBuildArtifacts_encryptionDisabled, &sBuildArtifacts_artifactIdentifier, &sBuildArtifacts_bucketOwnerAccess}}
+var m_BuildArtifactsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildArtifactsList_member}}
+var mBuildBatch = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildBatch_id, &sBuildBatch_arn, &sBuildBatch_startTime, &sBuildBatch_endTime, &sBuildBatch_currentPhase, &sBuildBatch_buildBatchStatus, &sBuildBatch_sourceVersion, &sBuildBatch_resolvedSourceVersion, &sBuildBatch_projectName, &sBuildBatch_phases, &sBuildBatch_source, &sBuildBatch_secondarySources, &sBuildBatch_secondarySourceVersions, &sBuildBatch_artifacts, &sBuildBatch_secondaryArtifacts, &sBuildBatch_cache, &sBuildBatch_environment, &sBuildBatch_serviceRole, &sBuildBatch_logConfig, &sBuildBatch_buildTimeoutInMinutes, &sBuildBatch_queuedTimeoutInMinutes, &sBuildBatch_complete, &sBuildBatch_initiator, &sBuildBatch_vpcConfig, &sBuildBatch_encryptionKey, &sBuildBatch_buildBatchNumber, &sBuildBatch_fileSystemLocations, &sBuildBatch_buildBatchConfig, &sBuildBatch_buildGroups, &sBuildBatch_debugSessionEnabled, &sBuildBatch_reportArns}, Hash: &hBuildBatch}
+var m_BuildBatches = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildBatches_member}}
+var mBuildBatchFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildBatchFilter_status}}
+var m_BuildBatchIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildBatchIds_member}}
+var mBuildBatchPhase = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildBatchPhase_phaseType, &sBuildBatchPhase_phaseStatus, &sBuildBatchPhase_startTime, &sBuildBatchPhase_endTime, &sBuildBatchPhase_durationInSeconds, &sBuildBatchPhase_contexts}}
+var m_BuildBatchPhases = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildBatchPhases_member}}
+var mBuildBatchPhaseType = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildBatchPhaseType_SUBMITTED, &sBuildBatchPhaseType_DOWNLOAD_BATCHSPEC, &sBuildBatchPhaseType_IN_PROGRESS, &sBuildBatchPhaseType_COMBINE_ARTIFACTS, &sBuildBatchPhaseType_SUCCEEDED, &sBuildBatchPhaseType_FAILED, &sBuildBatchPhaseType_STOPPED}}
+var mBuildGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildGroup_identifier, &sBuildGroup_dependsOn, &sBuildGroup_ignoreFailure, &sBuildGroup_currentBuildSummary, &sBuildGroup_priorBuildSummaryList}}
+var m_BuildGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildGroups_member}}
+var m_BuildIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildIds_member}}
+var mBuildNotDeleted = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildNotDeleted_id, &sBuildNotDeleted_statusCode}}
+var mBuildPhase = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildPhase_phaseType, &sBuildPhase_phaseStatus, &sBuildPhase_startTime, &sBuildPhase_endTime, &sBuildPhase_durationInSeconds, &sBuildPhase_contexts}}
+var m_BuildPhases = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildPhases_member}}
+var mBuildPhaseType = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildPhaseType_SUBMITTED, &sBuildPhaseType_QUEUED, &sBuildPhaseType_PROVISIONING, &sBuildPhaseType_DOWNLOAD_SOURCE, &sBuildPhaseType_INSTALL, &sBuildPhaseType_PRE_BUILD, &sBuildPhaseType_BUILD, &sBuildPhaseType_POST_BUILD, &sBuildPhaseType_UPLOAD_ARTIFACTS, &sBuildPhaseType_FINALIZING, &sBuildPhaseType_COMPLETED}, Hash: &hBuildPhaseType}
+var m_BuildReportArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildReportArns_member}}
+var m_Builds = smithy.SchemaMembers{List: []*smithy.Schema{&s_Builds_member}}
+var m_BuildsNotDeleted = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildsNotDeleted_member}}
+var mBuildStatusConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildStatusConfig_context, &sBuildStatusConfig_targetUrl}}
+var m_BuildSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuildSummaries_member}}
+var mBuildSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildSummary_arn, &sBuildSummary_requestedOn, &sBuildSummary_buildStatus, &sBuildSummary_primaryArtifact, &sBuildSummary_secondaryArtifacts}}
+var mCacheMode = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheMode_LOCAL_DOCKER_LAYER_CACHE, &sCacheMode_LOCAL_SOURCE_CACHE, &sCacheMode_LOCAL_CUSTOM_CACHE}}
+var mCacheType = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheType_NO_CACHE, &sCacheType_S3, &sCacheType_LOCAL}}
+var mCloudWatchLogsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogsConfig_status, &sCloudWatchLogsConfig_groupName, &sCloudWatchLogsConfig_streamName}}
+var mCodeCoverage = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeCoverage_id, &sCodeCoverage_reportARN, &sCodeCoverage_filePath, &sCodeCoverage_lineCoveragePercentage, &sCodeCoverage_linesCovered, &sCodeCoverage_linesMissed, &sCodeCoverage_branchCoveragePercentage, &sCodeCoverage_branchesCovered, &sCodeCoverage_branchesMissed, &sCodeCoverage_expired}, Hash: &hCodeCoverage}
+var mCodeCoverageReportSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeCoverageReportSummary_lineCoveragePercentage, &sCodeCoverageReportSummary_linesCovered, &sCodeCoverageReportSummary_linesMissed, &sCodeCoverageReportSummary_branchCoveragePercentage, &sCodeCoverageReportSummary_branchesCovered, &sCodeCoverageReportSummary_branchesMissed}}
+var m_CodeCoverages = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodeCoverages_member}}
+var mCommandExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sCommandExecution_id, &sCommandExecution_sandboxId, &sCommandExecution_submitTime, &sCommandExecution_startTime, &sCommandExecution_endTime, &sCommandExecution_status, &sCommandExecution_command, &sCommandExecution_type, &sCommandExecution_exitCode, &sCommandExecution_standardOutputContent, &sCommandExecution_standardErrContent, &sCommandExecution_logs, &sCommandExecution_sandboxArn}, Hash: &hCommandExecution}
+var m_CommandExecutionIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_CommandExecutionIds_member}}
+var m_CommandExecutions = smithy.SchemaMembers{List: []*smithy.Schema{&s_CommandExecutions_member}}
+var mCommandType = smithy.SchemaMembers{List: []*smithy.Schema{&sCommandType_SHELL}}
+var mComputeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeConfiguration_vCpu, &sComputeConfiguration_memory, &sComputeConfiguration_disk, &sComputeConfiguration_machineType, &sComputeConfiguration_instanceType}}
+var mComputeType = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeType_BUILD_GENERAL1_SMALL, &sComputeType_BUILD_GENERAL1_MEDIUM, &sComputeType_BUILD_GENERAL1_LARGE, &sComputeType_BUILD_GENERAL1_XLARGE, &sComputeType_BUILD_GENERAL1_2XLARGE, &sComputeType_BUILD_LAMBDA_1GB, &sComputeType_BUILD_LAMBDA_2GB, &sComputeType_BUILD_LAMBDA_4GB, &sComputeType_BUILD_LAMBDA_8GB, &sComputeType_BUILD_LAMBDA_10GB, &sComputeType_ATTRIBUTE_BASED_COMPUTE, &sComputeType_CUSTOM_INSTANCE_TYPE}, Hash: &hComputeType}
+var m_ComputeTypesAllowed = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComputeTypesAllowed_member}}
+var mCredentialProviderType = smithy.SchemaMembers{List: []*smithy.Schema{&sCredentialProviderType_SECRETS_MANAGER}}
+var mDebugSession = smithy.SchemaMembers{List: []*smithy.Schema{&sDebugSession_sessionEnabled, &sDebugSession_sessionTarget}}
+var mDockerServer = smithy.SchemaMembers{List: []*smithy.Schema{&sDockerServer_computeType, &sDockerServer_securityGroupIds, &sDockerServer_status}}
+var mDockerServerStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDockerServerStatus_status, &sDockerServerStatus_message}}
+var mEnvironmentImage = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentImage_name, &sEnvironmentImage_description, &sEnvironmentImage_versions}}
+var m_EnvironmentImages = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentImages_member}}
+var mEnvironmentLanguage = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentLanguage_language, &sEnvironmentLanguage_images}}
+var m_EnvironmentLanguages = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentLanguages_member}}
+var mEnvironmentPlatform = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentPlatform_platform, &sEnvironmentPlatform_languages}}
+var m_EnvironmentPlatforms = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentPlatforms_member}}
+var mEnvironmentType = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentType_WINDOWS_CONTAINER, &sEnvironmentType_LINUX_CONTAINER, &sEnvironmentType_LINUX_GPU_CONTAINER, &sEnvironmentType_ARM_CONTAINER, &sEnvironmentType_WINDOWS_SERVER_2019_CONTAINER, &sEnvironmentType_WINDOWS_SERVER_2022_CONTAINER, &sEnvironmentType_LINUX_LAMBDA_CONTAINER, &sEnvironmentType_ARM_LAMBDA_CONTAINER, &sEnvironmentType_LINUX_EC2, &sEnvironmentType_ARM_EC2, &sEnvironmentType_WINDOWS_EC2, &sEnvironmentType_MAC_ARM}, Hash: &hEnvironmentType}
+var mEnvironmentVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentVariable_name, &sEnvironmentVariable_value, &sEnvironmentVariable_type}}
+var m_EnvironmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentVariables_member}}
+var mEnvironmentVariableType = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentVariableType_PLAINTEXT, &sEnvironmentVariableType_PARAMETER_STORE, &sEnvironmentVariableType_SECRETS_MANAGER}}
+var mExportedEnvironmentVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sExportedEnvironmentVariable_name, &sExportedEnvironmentVariable_value}}
+var m_ExportedEnvironmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExportedEnvironmentVariables_member}}
+var mFileSystemType = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemType_EFS}}
+var m_FilterGroup = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterGroup_member}}
+var m_FilterGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterGroups_member}}
+var mFleet = smithy.SchemaMembers{List: []*smithy.Schema{&sFleet_arn, &sFleet_name, &sFleet_id, &sFleet_created, &sFleet_lastModified, &sFleet_status, &sFleet_baseCapacity, &sFleet_environmentType, &sFleet_computeType, &sFleet_computeConfiguration, &sFleet_scalingConfiguration, &sFleet_overflowBehavior, &sFleet_vpcConfig, &sFleet_proxyConfiguration, &sFleet_imageId, &sFleet_fleetServiceRole, &sFleet_tags}, Hash: &hFleet}
+var m_FleetArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetArns_member}}
+var mFleetContextCode = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetContextCode_CREATE_FAILED, &sFleetContextCode_UPDATE_FAILED, &sFleetContextCode_ACTION_REQUIRED, &sFleetContextCode_PENDING_DELETION, &sFleetContextCode_INSUFFICIENT_CAPACITY}}
+var m_FleetNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetNames_member}}
+var mFleetOverflowBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetOverflowBehavior_QUEUE, &sFleetOverflowBehavior_ON_DEMAND}}
+var mFleetProxyRule = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetProxyRule_type, &sFleetProxyRule_effect, &sFleetProxyRule_entities}}
+var mFleetProxyRuleBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetProxyRuleBehavior_ALLOW_ALL, &sFleetProxyRuleBehavior_DENY_ALL}}
+var mFleetProxyRuleEffectType = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetProxyRuleEffectType_ALLOW, &sFleetProxyRuleEffectType_DENY}}
+var m_FleetProxyRuleEntities = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetProxyRuleEntities_member}}
+var m_FleetProxyRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetProxyRules_member}}
+var mFleetProxyRuleType = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetProxyRuleType_DOMAIN, &sFleetProxyRuleType_IP}}
+var m_Fleets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Fleets_member}}
+var m_FleetsAllowed = smithy.SchemaMembers{List: []*smithy.Schema{&s_FleetsAllowed_member}}
+var mFleetScalingMetricType = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetScalingMetricType_FLEET_UTILIZATION_RATE}}
+var mFleetScalingType = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetScalingType_TARGET_TRACKING_SCALING}}
+var mFleetSortByType = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetSortByType_NAME, &sFleetSortByType_CREATED_TIME, &sFleetSortByType_LAST_MODIFIED_TIME}}
+var mFleetStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetStatus_statusCode, &sFleetStatus_context, &sFleetStatus_message}}
+var mFleetStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sFleetStatusCode_CREATING, &sFleetStatusCode_UPDATING, &sFleetStatusCode_ROTATING, &sFleetStatusCode_PENDING_DELETION, &sFleetStatusCode_DELETING, &sFleetStatusCode_CREATE_FAILED, &sFleetStatusCode_UPDATE_ROLLBACK_FAILED, &sFleetStatusCode_ACTIVE}}
+var mGitSubmodulesConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGitSubmodulesConfig_fetchSubmodules}}
+var mHostKernel = smithy.SchemaMembers{List: []*smithy.Schema{&sHostKernel_LINUX_KERNEL_4, &sHostKernel_LINUX_KERNEL_6, &sHostKernel_LINUX_KERNEL_LATEST}}
+var m_Identifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_Identifiers_member}}
+var mImagePullCredentialsType = smithy.SchemaMembers{List: []*smithy.Schema{&sImagePullCredentialsType_CODEBUILD, &sImagePullCredentialsType_SERVICE_ROLE}}
+var m_ImageVersions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImageVersions_member}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_message}}
+var mLanguageType = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguageType_JAVA, &sLanguageType_PYTHON, &sLanguageType_NODE_JS, &sLanguageType_RUBY, &sLanguageType_GOLANG, &sLanguageType_DOCKER, &sLanguageType_ANDROID, &sLanguageType_DOTNET, &sLanguageType_BASE, &sLanguageType_PHP}, Hash: &hLanguageType}
+var mLogsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsConfig_cloudWatchLogs, &sLogsConfig_s3Logs}}
+var mLogsConfigStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsConfigStatusType_ENABLED, &sLogsConfigStatusType_DISABLED}}
+var mLogsLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsLocation_groupName, &sLogsLocation_streamName, &sLogsLocation_deepLink, &sLogsLocation_s3DeepLink, &sLogsLocation_cloudWatchLogsArn, &sLogsLocation_s3LogsArn, &sLogsLocation_cloudWatchLogs, &sLogsLocation_s3Logs}}
+var mMachineType = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineType_GENERAL, &sMachineType_NVME}}
+var mNetworkInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInterface_subnetId, &sNetworkInterface_networkInterfaceId}}
+var mOAuthProviderException = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuthProviderException_message}}
+var mPhaseContext = smithy.SchemaMembers{List: []*smithy.Schema{&sPhaseContext_statusCode, &sPhaseContext_message}}
+var m_PhaseContexts = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhaseContexts_member}}
+var mPlatformType = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformType_DEBIAN, &sPlatformType_AMAZON_LINUX, &sPlatformType_UBUNTU, &sPlatformType_WINDOWS_SERVER}}
+var mProject = smithy.SchemaMembers{List: []*smithy.Schema{&sProject_name, &sProject_arn, &sProject_description, &sProject_source, &sProject_secondarySources, &sProject_sourceVersion, &sProject_secondarySourceVersions, &sProject_artifacts, &sProject_secondaryArtifacts, &sProject_cache, &sProject_environment, &sProject_serviceRole, &sProject_timeoutInMinutes, &sProject_queuedTimeoutInMinutes, &sProject_encryptionKey, &sProject_tags, &sProject_created, &sProject_lastModified, &sProject_webhook, &sProject_vpcConfig, &sProject_badge, &sProject_logsConfig, &sProject_fileSystemLocations, &sProject_buildBatchConfig, &sProject_concurrentBuildLimit, &sProject_projectVisibility, &sProject_publicProjectAlias, &sProject_resourceAccessRole, &sProject_autoRetryLimit}, Hash: &hProject}
+var m_ProjectArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectArns_member}}
+var mProjectArtifacts = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectArtifacts_type, &sProjectArtifacts_location, &sProjectArtifacts_path, &sProjectArtifacts_namespaceType, &sProjectArtifacts_name, &sProjectArtifacts_packaging, &sProjectArtifacts_overrideArtifactName, &sProjectArtifacts_encryptionDisabled, &sProjectArtifacts_artifactIdentifier, &sProjectArtifacts_bucketOwnerAccess}, Hash: &hProjectArtifacts}
+var m_ProjectArtifactsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectArtifactsList_member}}
+var mProjectBadge = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectBadge_badgeEnabled, &sProjectBadge_badgeRequestUrl}}
+var mProjectBuildBatchConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectBuildBatchConfig_serviceRole, &sProjectBuildBatchConfig_combineArtifacts, &sProjectBuildBatchConfig_restrictions, &sProjectBuildBatchConfig_timeoutInMins, &sProjectBuildBatchConfig_batchReportMode}}
+var mProjectCache = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectCache_type, &sProjectCache_location, &sProjectCache_modes, &sProjectCache_cacheNamespace}}
+var m_ProjectCacheModes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectCacheModes_member}}
+var mProjectEnvironment = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectEnvironment_type, &sProjectEnvironment_image, &sProjectEnvironment_computeType, &sProjectEnvironment_computeConfiguration, &sProjectEnvironment_fleet, &sProjectEnvironment_environmentVariables, &sProjectEnvironment_privilegedMode, &sProjectEnvironment_certificate, &sProjectEnvironment_registryCredential, &sProjectEnvironment_imagePullCredentialsType, &sProjectEnvironment_dockerServer, &sProjectEnvironment_hostKernel}, Hash: &hProjectEnvironment}
+var mProjectFileSystemLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectFileSystemLocation_type, &sProjectFileSystemLocation_location, &sProjectFileSystemLocation_mountPoint, &sProjectFileSystemLocation_identifier, &sProjectFileSystemLocation_mountOptions}}
+var m_ProjectFileSystemLocations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectFileSystemLocations_member}}
+var mProjectFleet = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectFleet_fleetArn}}
+var m_ProjectNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectNames_member}}
+var m_Projects = smithy.SchemaMembers{List: []*smithy.Schema{&s_Projects_member}}
+var m_ProjectSecondarySourceVersions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectSecondarySourceVersions_member}}
+var mProjectSortByType = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectSortByType_NAME, &sProjectSortByType_CREATED_TIME, &sProjectSortByType_LAST_MODIFIED_TIME}}
+var mProjectSource = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectSource_type, &sProjectSource_location, &sProjectSource_gitCloneDepth, &sProjectSource_gitSubmodulesConfig, &sProjectSource_buildspec, &sProjectSource_auth, &sProjectSource_reportBuildStatus, &sProjectSource_buildStatusConfig, &sProjectSource_insecureSsl, &sProjectSource_sourceIdentifier}, Hash: &hProjectSource}
+var m_ProjectSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectSources_member}}
+var mProjectSourceVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectSourceVersion_sourceIdentifier, &sProjectSourceVersion_sourceVersion}}
+var mProjectVisibilityType = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectVisibilityType_PUBLIC_READ, &sProjectVisibilityType_PRIVATE}}
+var mProxyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sProxyConfiguration_defaultBehavior, &sProxyConfiguration_orderedProxyRules}}
+var mPullRequestBuildApproverRole = smithy.SchemaMembers{List: []*smithy.Schema{&sPullRequestBuildApproverRole_GITHUB_READ, &sPullRequestBuildApproverRole_GITHUB_TRIAGE, &sPullRequestBuildApproverRole_GITHUB_WRITE, &sPullRequestBuildApproverRole_GITHUB_MAINTAIN, &sPullRequestBuildApproverRole_GITHUB_ADMIN, &sPullRequestBuildApproverRole_GITLAB_GUEST, &sPullRequestBuildApproverRole_GITLAB_PLANNER, &sPullRequestBuildApproverRole_GITLAB_REPORTER, &sPullRequestBuildApproverRole_GITLAB_DEVELOPER, &sPullRequestBuildApproverRole_GITLAB_MAINTAINER, &sPullRequestBuildApproverRole_GITLAB_OWNER, &sPullRequestBuildApproverRole_BITBUCKET_READ, &sPullRequestBuildApproverRole_BITBUCKET_WRITE, &sPullRequestBuildApproverRole_BITBUCKET_ADMIN}, Hash: &hPullRequestBuildApproverRole}
+var m_PullRequestBuildApproverRoles = smithy.SchemaMembers{List: []*smithy.Schema{&s_PullRequestBuildApproverRoles_member}}
+var mPullRequestBuildCommentApproval = smithy.SchemaMembers{List: []*smithy.Schema{&sPullRequestBuildCommentApproval_DISABLED, &sPullRequestBuildCommentApproval_ALL_PULL_REQUESTS, &sPullRequestBuildCommentApproval_FORK_PULL_REQUESTS}}
+var mPullRequestBuildPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sPullRequestBuildPolicy_requiresCommentApproval, &sPullRequestBuildPolicy_approverRoles}}
+var mRegistryCredential = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistryCredential_credential, &sRegistryCredential_credentialProvider}}
+var mReport = smithy.SchemaMembers{List: []*smithy.Schema{&sReport_arn, &sReport_type, &sReport_name, &sReport_reportGroupArn, &sReport_executionId, &sReport_status, &sReport_created, &sReport_expired, &sReport_exportConfig, &sReport_truncated, &sReport_testSummary, &sReport_codeCoverageSummary}, Hash: &hReport}
+var m_ReportArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportArns_member}}
+var mReportCodeCoverageSortByType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE, &sReportCodeCoverageSortByType_FILE_PATH}}
+var mReportExportConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sReportExportConfig_exportConfigType, &sReportExportConfig_s3Destination}}
+var mReportExportConfigType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportExportConfigType_S3, &sReportExportConfigType_NO_EXPORT}}
+var mReportFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sReportFilter_status}}
+var mReportGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sReportGroup_arn, &sReportGroup_name, &sReportGroup_type, &sReportGroup_exportConfig, &sReportGroup_created, &sReportGroup_lastModified, &sReportGroup_tags, &sReportGroup_status}}
+var m_ReportGroupArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportGroupArns_member}}
+var m_ReportGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportGroups_member}}
+var mReportGroupSortByType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportGroupSortByType_NAME, &sReportGroupSortByType_CREATED_TIME, &sReportGroupSortByType_LAST_MODIFIED_TIME}}
+var mReportGroupStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportGroupStatusType_ACTIVE, &sReportGroupStatusType_DELETING}}
+var mReportGroupTrendFieldType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportGroupTrendFieldType_PASS_RATE, &sReportGroupTrendFieldType_DURATION, &sReportGroupTrendFieldType_TOTAL, &sReportGroupTrendFieldType_LINE_COVERAGE, &sReportGroupTrendFieldType_LINES_COVERED, &sReportGroupTrendFieldType_LINES_MISSED, &sReportGroupTrendFieldType_BRANCH_COVERAGE, &sReportGroupTrendFieldType_BRANCHES_COVERED, &sReportGroupTrendFieldType_BRANCHES_MISSED}, Hash: &hReportGroupTrendFieldType}
+var m_ReportGroupTrendRawDataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportGroupTrendRawDataList_member}}
+var mReportGroupTrendStats = smithy.SchemaMembers{List: []*smithy.Schema{&sReportGroupTrendStats_average, &sReportGroupTrendStats_max, &sReportGroupTrendStats_min}}
+var mReportPackagingType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportPackagingType_ZIP, &sReportPackagingType_NONE}}
+var m_Reports = smithy.SchemaMembers{List: []*smithy.Schema{&s_Reports_member}}
+var m_ReportStatusCounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportStatusCounts_key, &s_ReportStatusCounts_value}}
+var mReportStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportStatusType_GENERATING, &sReportStatusType_SUCCEEDED, &sReportStatusType_FAILED, &sReportStatusType_INCOMPLETE, &sReportStatusType_DELETING}}
+var mReportType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportType_TEST, &sReportType_CODE_COVERAGE}}
+var mReportWithRawData = smithy.SchemaMembers{List: []*smithy.Schema{&sReportWithRawData_reportArn, &sReportWithRawData_data}}
+var mResolvedArtifact = smithy.SchemaMembers{List: []*smithy.Schema{&sResolvedArtifact_type, &sResolvedArtifact_location, &sResolvedArtifact_identifier}}
+var m_ResolvedSecondaryArtifacts = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResolvedSecondaryArtifacts_member}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRetryBuildBatchType = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryBuildBatchType_RETRY_ALL_BUILDS, &sRetryBuildBatchType_RETRY_FAILED_BUILDS}}
+var mS3LogsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LogsConfig_status, &sS3LogsConfig_location, &sS3LogsConfig_encryptionDisabled, &sS3LogsConfig_bucketOwnerAccess}}
+var mS3ReportExportConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ReportExportConfig_bucket, &sS3ReportExportConfig_bucketOwner, &sS3ReportExportConfig_path, &sS3ReportExportConfig_packaging, &sS3ReportExportConfig_encryptionKey, &sS3ReportExportConfig_encryptionDisabled}}
+var mSandbox = smithy.SchemaMembers{List: []*smithy.Schema{&sSandbox_id, &sSandbox_arn, &sSandbox_projectName, &sSandbox_requestTime, &sSandbox_startTime, &sSandbox_endTime, &sSandbox_status, &sSandbox_source, &sSandbox_sourceVersion, &sSandbox_secondarySources, &sSandbox_secondarySourceVersions, &sSandbox_environment, &sSandbox_fileSystemLocations, &sSandbox_timeoutInMinutes, &sSandbox_queuedTimeoutInMinutes, &sSandbox_vpcConfig, &sSandbox_logConfig, &sSandbox_encryptionKey, &sSandbox_serviceRole, &sSandbox_currentSession}, Hash: &hSandbox}
+var m_Sandboxes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Sandboxes_member}}
+var m_SandboxIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SandboxIds_member}}
+var mSandboxSession = smithy.SchemaMembers{List: []*smithy.Schema{&sSandboxSession_id, &sSandboxSession_status, &sSandboxSession_startTime, &sSandboxSession_endTime, &sSandboxSession_currentPhase, &sSandboxSession_phases, &sSandboxSession_resolvedSourceVersion, &sSandboxSession_logs, &sSandboxSession_networkInterface}, Hash: &hSandboxSession}
+var mSandboxSessionPhase = smithy.SchemaMembers{List: []*smithy.Schema{&sSandboxSessionPhase_phaseType, &sSandboxSessionPhase_phaseStatus, &sSandboxSessionPhase_startTime, &sSandboxSessionPhase_endTime, &sSandboxSessionPhase_durationInSeconds, &sSandboxSessionPhase_contexts}}
+var m_SandboxSessionPhases = smithy.SchemaMembers{List: []*smithy.Schema{&s_SandboxSessionPhases_member}}
+var mScalingConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingConfigurationInput_scalingType, &sScalingConfigurationInput_targetTrackingScalingConfigs, &sScalingConfigurationInput_maxCapacity}}
+var mScalingConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingConfigurationOutput_scalingType, &sScalingConfigurationOutput_targetTrackingScalingConfigs, &sScalingConfigurationOutput_maxCapacity, &sScalingConfigurationOutput_desiredCapacity}}
+var mScopeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sScopeConfiguration_name, &sScopeConfiguration_domain, &sScopeConfiguration_scope}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var mServerType = smithy.SchemaMembers{List: []*smithy.Schema{&sServerType_GITHUB, &sServerType_BITBUCKET, &sServerType_GITHUB_ENTERPRISE, &sServerType_GITLAB, &sServerType_GITLAB_SELF_MANAGED}}
+var mSharedResourceSortByType = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedResourceSortByType_ARN, &sSharedResourceSortByType_MODIFIED_TIME}}
+var mSortOrderType = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrderType_ASCENDING, &sSortOrderType_DESCENDING}}
+var mSourceAuth = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceAuth_type, &sSourceAuth_resource}}
+var mSourceAuthType = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceAuthType_OAUTH, &sSourceAuthType_CODECONNECTIONS, &sSourceAuthType_SECRETS_MANAGER}}
+var mSourceCredentialsInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCredentialsInfo_arn, &sSourceCredentialsInfo_serverType, &sSourceCredentialsInfo_authType, &sSourceCredentialsInfo_resource}}
+var m_SourceCredentialsInfos = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceCredentialsInfos_member}}
+var mSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceType_CODECOMMIT, &sSourceType_CODEPIPELINE, &sSourceType_GITHUB, &sSourceType_GITLAB, &sSourceType_GITLAB_SELF_MANAGED, &sSourceType_S3, &sSourceType_BITBUCKET, &sSourceType_GITHUB_ENTERPRISE, &sSourceType_NO_SOURCE}, Hash: &hSourceType}
+var mSSMSession = smithy.SchemaMembers{List: []*smithy.Schema{&sSSMSession_sessionId, &sSSMSession_tokenValue, &sSSMSession_streamUrl}}
+var mStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusType_SUCCEEDED, &sStatusType_FAILED, &sStatusType_FAULT, &sStatusType_TIMED_OUT, &sStatusType_IN_PROGRESS, &sStatusType_STOPPED}}
+var m_Subnets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Subnets_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTargetTrackingScalingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTrackingScalingConfiguration_metricType, &sTargetTrackingScalingConfiguration_targetValue}}
+var m_TargetTrackingScalingConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetTrackingScalingConfigurations_member}}
+var mTestCase = smithy.SchemaMembers{List: []*smithy.Schema{&sTestCase_reportArn, &sTestCase_testRawDataPath, &sTestCase_prefix, &sTestCase_name, &sTestCase_status, &sTestCase_durationInNanoSeconds, &sTestCase_message, &sTestCase_expired, &sTestCase_testSuiteName}, Hash: &hTestCase}
+var mTestCaseFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTestCaseFilter_status, &sTestCaseFilter_keyword}}
+var m_TestCases = smithy.SchemaMembers{List: []*smithy.Schema{&s_TestCases_member}}
+var mTestReportSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTestReportSummary_total, &sTestReportSummary_statusCounts, &sTestReportSummary_durationInNanoSeconds}}
+var mVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfig_vpcId, &sVpcConfig_subnets, &sVpcConfig_securityGroupIds}}
+var mWebhook = smithy.SchemaMembers{List: []*smithy.Schema{&sWebhook_url, &sWebhook_payloadUrl, &sWebhook_secret, &sWebhook_branchFilter, &sWebhook_filterGroups, &sWebhook_buildType, &sWebhook_manualCreation, &sWebhook_lastModifiedSecret, &sWebhook_scopeConfiguration, &sWebhook_status, &sWebhook_statusMessage, &sWebhook_pullRequestBuildPolicy}, Hash: &hWebhook}
+var mWebhookBuildType = smithy.SchemaMembers{List: []*smithy.Schema{&sWebhookBuildType_BUILD, &sWebhookBuildType_BUILD_BATCH, &sWebhookBuildType_RUNNER_BUILDKITE_BUILD}}
+var mWebhookFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sWebhookFilter_type, &sWebhookFilter_pattern, &sWebhookFilter_excludeMatchedPattern}}
+var mWebhookFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sWebhookFilterType_EVENT, &sWebhookFilterType_BASE_REF, &sWebhookFilterType_HEAD_REF, &sWebhookFilterType_ACTOR_ACCOUNT_ID, &sWebhookFilterType_FILE_PATH, &sWebhookFilterType_COMMIT_MESSAGE, &sWebhookFilterType_WORKFLOW_NAME, &sWebhookFilterType_TAG_NAME, &sWebhookFilterType_RELEASE_NAME, &sWebhookFilterType_REPOSITORY_NAME, &sWebhookFilterType_ORGANIZATION_NAME}, Hash: &hWebhookFilterType}
+var mWebhookScopeType = smithy.SchemaMembers{List: []*smithy.Schema{&sWebhookScopeType_GITHUB_ORGANIZATION, &sWebhookScopeType_GITHUB_GLOBAL, &sWebhookScopeType_GITLAB_GROUP}}
+var mWebhookStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWebhookStatus_CREATING, &sWebhookStatus_CREATE_FAILED, &sWebhookStatus_ACTIVE, &sWebhookStatus_DELETING}}
+var mBatchDeleteBuildsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteBuildsInput_ids}}
+var mBatchDeleteBuildsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteBuildsOutput_buildsDeleted, &sBatchDeleteBuildsOutput_buildsNotDeleted}}
+var mBatchGetBuildBatchesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetBuildBatchesInput_ids}}
+var mBatchGetBuildBatchesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetBuildBatchesOutput_buildBatches, &sBatchGetBuildBatchesOutput_buildBatchesNotFound}}
+var mBatchGetBuildsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetBuildsInput_ids}}
+var mBatchGetBuildsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetBuildsOutput_builds, &sBatchGetBuildsOutput_buildsNotFound}}
+var mBatchGetCommandExecutionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCommandExecutionsInput_sandboxId, &sBatchGetCommandExecutionsInput_commandExecutionIds}}
+var mBatchGetCommandExecutionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCommandExecutionsOutput_commandExecutions, &sBatchGetCommandExecutionsOutput_commandExecutionsNotFound}}
+var mBatchGetFleetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetFleetsInput_names}}
+var mBatchGetFleetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetFleetsOutput_fleets, &sBatchGetFleetsOutput_fleetsNotFound}}
+var mBatchGetProjectsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetProjectsInput_names}}
+var mBatchGetProjectsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetProjectsOutput_projects, &sBatchGetProjectsOutput_projectsNotFound}}
+var mBatchGetReportGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetReportGroupsInput_reportGroupArns}}
+var mBatchGetReportGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetReportGroupsOutput_reportGroups, &sBatchGetReportGroupsOutput_reportGroupsNotFound}}
+var mBatchGetReportsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetReportsInput_reportArns}}
+var mBatchGetReportsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetReportsOutput_reports, &sBatchGetReportsOutput_reportsNotFound}}
+var mBatchGetSandboxesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetSandboxesInput_ids}}
+var mBatchGetSandboxesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetSandboxesOutput_sandboxes, &sBatchGetSandboxesOutput_sandboxesNotFound}}
+var mCreateFleetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFleetInput_name, &sCreateFleetInput_baseCapacity, &sCreateFleetInput_environmentType, &sCreateFleetInput_computeType, &sCreateFleetInput_computeConfiguration, &sCreateFleetInput_scalingConfiguration, &sCreateFleetInput_overflowBehavior, &sCreateFleetInput_vpcConfig, &sCreateFleetInput_proxyConfiguration, &sCreateFleetInput_imageId, &sCreateFleetInput_fleetServiceRole, &sCreateFleetInput_tags}, Hash: &hCreateFleetInput}
+var mCreateFleetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFleetOutput_fleet}}
+var mCreateProjectInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProjectInput_name, &sCreateProjectInput_description, &sCreateProjectInput_source, &sCreateProjectInput_secondarySources, &sCreateProjectInput_sourceVersion, &sCreateProjectInput_secondarySourceVersions, &sCreateProjectInput_artifacts, &sCreateProjectInput_secondaryArtifacts, &sCreateProjectInput_cache, &sCreateProjectInput_environment, &sCreateProjectInput_serviceRole, &sCreateProjectInput_timeoutInMinutes, &sCreateProjectInput_queuedTimeoutInMinutes, &sCreateProjectInput_encryptionKey, &sCreateProjectInput_tags, &sCreateProjectInput_vpcConfig, &sCreateProjectInput_badgeEnabled, &sCreateProjectInput_logsConfig, &sCreateProjectInput_fileSystemLocations, &sCreateProjectInput_buildBatchConfig, &sCreateProjectInput_concurrentBuildLimit, &sCreateProjectInput_autoRetryLimit}, Hash: &hCreateProjectInput}
+var mCreateProjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProjectOutput_project}}
+var mCreateReportGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReportGroupInput_name, &sCreateReportGroupInput_type, &sCreateReportGroupInput_exportConfig, &sCreateReportGroupInput_tags}}
+var mCreateReportGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReportGroupOutput_reportGroup}}
+var mCreateWebhookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebhookInput_projectName, &sCreateWebhookInput_branchFilter, &sCreateWebhookInput_filterGroups, &sCreateWebhookInput_buildType, &sCreateWebhookInput_manualCreation, &sCreateWebhookInput_scopeConfiguration, &sCreateWebhookInput_pullRequestBuildPolicy}}
+var mCreateWebhookOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebhookOutput_webhook}}
+var mDeleteBuildBatchInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBuildBatchInput_id}}
+var mDeleteBuildBatchOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBuildBatchOutput_statusCode, &sDeleteBuildBatchOutput_buildsDeleted, &sDeleteBuildBatchOutput_buildsNotDeleted}}
+var mDeleteFleetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFleetInput_arn}}
+var mDeleteProjectInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProjectInput_name}}
+var mDeleteReportGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReportGroupInput_arn, &sDeleteReportGroupInput_deleteReports}}
+var mDeleteReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReportInput_arn}}
+var mDeleteResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyInput_resourceArn}}
+var mDeleteSourceCredentialsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSourceCredentialsInput_arn}}
+var mDeleteSourceCredentialsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSourceCredentialsOutput_arn}}
+var mDeleteWebhookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebhookInput_projectName}}
+var mDescribeCodeCoveragesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCodeCoveragesInput_reportArn, &sDescribeCodeCoveragesInput_nextToken, &sDescribeCodeCoveragesInput_maxResults, &sDescribeCodeCoveragesInput_sortOrder, &sDescribeCodeCoveragesInput_sortBy, &sDescribeCodeCoveragesInput_minLineCoveragePercentage, &sDescribeCodeCoveragesInput_maxLineCoveragePercentage}}
+var mDescribeCodeCoveragesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCodeCoveragesOutput_nextToken, &sDescribeCodeCoveragesOutput_codeCoverages}}
+var mDescribeTestCasesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTestCasesInput_reportArn, &sDescribeTestCasesInput_nextToken, &sDescribeTestCasesInput_maxResults, &sDescribeTestCasesInput_filter}}
+var mDescribeTestCasesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTestCasesOutput_nextToken, &sDescribeTestCasesOutput_testCases}}
+var mGetReportGroupTrendInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReportGroupTrendInput_reportGroupArn, &sGetReportGroupTrendInput_numOfReports, &sGetReportGroupTrendInput_trendField}}
+var mGetReportGroupTrendOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReportGroupTrendOutput_stats, &sGetReportGroupTrendOutput_rawData}}
+var mGetResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyInput_resourceArn}}
+var mGetResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyOutput_policy}}
+var mImportSourceCredentialsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportSourceCredentialsInput_username, &sImportSourceCredentialsInput_token, &sImportSourceCredentialsInput_serverType, &sImportSourceCredentialsInput_authType, &sImportSourceCredentialsInput_shouldOverwrite}}
+var mImportSourceCredentialsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportSourceCredentialsOutput_arn}}
+var mInvalidateProjectCacheInput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidateProjectCacheInput_projectName}}
+var mListBuildBatchesForProjectInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildBatchesForProjectInput_projectName, &sListBuildBatchesForProjectInput_filter, &sListBuildBatchesForProjectInput_maxResults, &sListBuildBatchesForProjectInput_sortOrder, &sListBuildBatchesForProjectInput_nextToken}}
+var mListBuildBatchesForProjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildBatchesForProjectOutput_ids, &sListBuildBatchesForProjectOutput_nextToken}}
+var mListBuildBatchesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildBatchesInput_filter, &sListBuildBatchesInput_maxResults, &sListBuildBatchesInput_sortOrder, &sListBuildBatchesInput_nextToken}}
+var mListBuildBatchesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildBatchesOutput_ids, &sListBuildBatchesOutput_nextToken}}
+var mListBuildsForProjectInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildsForProjectInput_projectName, &sListBuildsForProjectInput_sortOrder, &sListBuildsForProjectInput_nextToken}}
+var mListBuildsForProjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildsForProjectOutput_ids, &sListBuildsForProjectOutput_nextToken}}
+var mListBuildsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildsInput_sortOrder, &sListBuildsInput_nextToken}}
+var mListBuildsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBuildsOutput_ids, &sListBuildsOutput_nextToken}}
+var mListCommandExecutionsForSandboxInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCommandExecutionsForSandboxInput_sandboxId, &sListCommandExecutionsForSandboxInput_maxResults, &sListCommandExecutionsForSandboxInput_sortOrder, &sListCommandExecutionsForSandboxInput_nextToken}}
+var mListCommandExecutionsForSandboxOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCommandExecutionsForSandboxOutput_commandExecutions, &sListCommandExecutionsForSandboxOutput_nextToken}}
+var mListCuratedEnvironmentImagesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCuratedEnvironmentImagesOutput_platforms}}
+var mListFleetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFleetsInput_nextToken, &sListFleetsInput_maxResults, &sListFleetsInput_sortOrder, &sListFleetsInput_sortBy}}
+var mListFleetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFleetsOutput_nextToken, &sListFleetsOutput_fleets}}
+var mListProjectsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListProjectsInput_sortBy, &sListProjectsInput_sortOrder, &sListProjectsInput_nextToken}}
+var mListProjectsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListProjectsOutput_nextToken, &sListProjectsOutput_projects}}
+var mListReportGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportGroupsInput_sortOrder, &sListReportGroupsInput_sortBy, &sListReportGroupsInput_nextToken, &sListReportGroupsInput_maxResults}}
+var mListReportGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportGroupsOutput_nextToken, &sListReportGroupsOutput_reportGroups}}
+var mListReportsForReportGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportsForReportGroupInput_reportGroupArn, &sListReportsForReportGroupInput_nextToken, &sListReportsForReportGroupInput_sortOrder, &sListReportsForReportGroupInput_maxResults, &sListReportsForReportGroupInput_filter}}
+var mListReportsForReportGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportsForReportGroupOutput_nextToken, &sListReportsForReportGroupOutput_reports}}
+var mListReportsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportsInput_sortOrder, &sListReportsInput_nextToken, &sListReportsInput_maxResults, &sListReportsInput_filter}}
+var mListReportsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReportsOutput_nextToken, &sListReportsOutput_reports}}
+var mListSandboxesForProjectInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSandboxesForProjectInput_projectName, &sListSandboxesForProjectInput_maxResults, &sListSandboxesForProjectInput_sortOrder, &sListSandboxesForProjectInput_nextToken}}
+var mListSandboxesForProjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSandboxesForProjectOutput_ids, &sListSandboxesForProjectOutput_nextToken}}
+var mListSandboxesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSandboxesInput_maxResults, &sListSandboxesInput_sortOrder, &sListSandboxesInput_nextToken}}
+var mListSandboxesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSandboxesOutput_ids, &sListSandboxesOutput_nextToken}}
+var mListSharedProjectsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSharedProjectsInput_sortBy, &sListSharedProjectsInput_sortOrder, &sListSharedProjectsInput_maxResults, &sListSharedProjectsInput_nextToken}}
+var mListSharedProjectsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSharedProjectsOutput_nextToken, &sListSharedProjectsOutput_projects}}
+var mListSharedReportGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSharedReportGroupsInput_sortOrder, &sListSharedReportGroupsInput_sortBy, &sListSharedReportGroupsInput_nextToken, &sListSharedReportGroupsInput_maxResults}}
+var mListSharedReportGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSharedReportGroupsOutput_nextToken, &sListSharedReportGroupsOutput_reportGroups}}
+var mListSourceCredentialsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceCredentialsOutput_sourceCredentialsInfos}}
+var mPutResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyInput_policy, &sPutResourcePolicyInput_resourceArn}}
+var mPutResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyOutput_resourceArn}}
+var mRetryBuildBatchInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryBuildBatchInput_id, &sRetryBuildBatchInput_idempotencyToken, &sRetryBuildBatchInput_retryType}}
+var mRetryBuildBatchOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryBuildBatchOutput_buildBatch}}
+var mRetryBuildInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryBuildInput_id, &sRetryBuildInput_idempotencyToken}}
+var mRetryBuildOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryBuildOutput_build}}
+var mStartBuildBatchInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartBuildBatchInput_projectName, &sStartBuildBatchInput_secondarySourcesOverride, &sStartBuildBatchInput_secondarySourcesVersionOverride, &sStartBuildBatchInput_sourceVersion, &sStartBuildBatchInput_artifactsOverride, &sStartBuildBatchInput_secondaryArtifactsOverride, &sStartBuildBatchInput_environmentVariablesOverride, &sStartBuildBatchInput_sourceTypeOverride, &sStartBuildBatchInput_sourceLocationOverride, &sStartBuildBatchInput_sourceAuthOverride, &sStartBuildBatchInput_gitCloneDepthOverride, &sStartBuildBatchInput_gitSubmodulesConfigOverride, &sStartBuildBatchInput_buildspecOverride, &sStartBuildBatchInput_insecureSslOverride, &sStartBuildBatchInput_reportBuildBatchStatusOverride, &sStartBuildBatchInput_environmentTypeOverride, &sStartBuildBatchInput_imageOverride, &sStartBuildBatchInput_computeTypeOverride, &sStartBuildBatchInput_certificateOverride, &sStartBuildBatchInput_cacheOverride, &sStartBuildBatchInput_serviceRoleOverride, &sStartBuildBatchInput_privilegedModeOverride, &sStartBuildBatchInput_buildTimeoutInMinutesOverride, &sStartBuildBatchInput_queuedTimeoutInMinutesOverride, &sStartBuildBatchInput_encryptionKeyOverride, &sStartBuildBatchInput_idempotencyToken, &sStartBuildBatchInput_logsConfigOverride, &sStartBuildBatchInput_registryCredentialOverride, &sStartBuildBatchInput_imagePullCredentialsTypeOverride, &sStartBuildBatchInput_buildBatchConfigOverride, &sStartBuildBatchInput_debugSessionEnabled}, Hash: &hStartBuildBatchInput}
+var mStartBuildBatchOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartBuildBatchOutput_buildBatch}}
+var mStartBuildInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartBuildInput_projectName, &sStartBuildInput_secondarySourcesOverride, &sStartBuildInput_secondarySourcesVersionOverride, &sStartBuildInput_sourceVersion, &sStartBuildInput_artifactsOverride, &sStartBuildInput_secondaryArtifactsOverride, &sStartBuildInput_environmentVariablesOverride, &sStartBuildInput_sourceTypeOverride, &sStartBuildInput_sourceLocationOverride, &sStartBuildInput_sourceAuthOverride, &sStartBuildInput_gitCloneDepthOverride, &sStartBuildInput_gitSubmodulesConfigOverride, &sStartBuildInput_buildspecOverride, &sStartBuildInput_insecureSslOverride, &sStartBuildInput_reportBuildStatusOverride, &sStartBuildInput_buildStatusConfigOverride, &sStartBuildInput_environmentTypeOverride, &sStartBuildInput_imageOverride, &sStartBuildInput_computeTypeOverride, &sStartBuildInput_certificateOverride, &sStartBuildInput_cacheOverride, &sStartBuildInput_serviceRoleOverride, &sStartBuildInput_privilegedModeOverride, &sStartBuildInput_timeoutInMinutesOverride, &sStartBuildInput_queuedTimeoutInMinutesOverride, &sStartBuildInput_encryptionKeyOverride, &sStartBuildInput_idempotencyToken, &sStartBuildInput_logsConfigOverride, &sStartBuildInput_registryCredentialOverride, &sStartBuildInput_imagePullCredentialsTypeOverride, &sStartBuildInput_debugSessionEnabled, &sStartBuildInput_fleetOverride, &sStartBuildInput_autoRetryLimitOverride, &sStartBuildInput_hostKernelOverride}, Hash: &hStartBuildInput}
+var mStartBuildOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartBuildOutput_build}}
+var mStartCommandExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCommandExecutionInput_sandboxId, &sStartCommandExecutionInput_command, &sStartCommandExecutionInput_type}}
+var mStartCommandExecutionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCommandExecutionOutput_commandExecution}}
+var mStartSandboxConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSandboxConnectionInput_sandboxId}}
+var mStartSandboxConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSandboxConnectionOutput_ssmSession}}
+var mStartSandboxInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSandboxInput_projectName, &sStartSandboxInput_idempotencyToken}}
+var mStartSandboxOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSandboxOutput_sandbox}}
+var mStopBuildBatchInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopBuildBatchInput_id}}
+var mStopBuildBatchOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopBuildBatchOutput_buildBatch}}
+var mStopBuildInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopBuildInput_id}}
+var mStopBuildOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopBuildOutput_build}}
+var mStopSandboxInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSandboxInput_id}}
+var mStopSandboxOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSandboxOutput_sandbox}}
+var mUpdateFleetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFleetInput_arn, &sUpdateFleetInput_baseCapacity, &sUpdateFleetInput_environmentType, &sUpdateFleetInput_computeType, &sUpdateFleetInput_computeConfiguration, &sUpdateFleetInput_scalingConfiguration, &sUpdateFleetInput_overflowBehavior, &sUpdateFleetInput_vpcConfig, &sUpdateFleetInput_proxyConfiguration, &sUpdateFleetInput_imageId, &sUpdateFleetInput_fleetServiceRole, &sUpdateFleetInput_tags}, Hash: &hUpdateFleetInput}
+var mUpdateFleetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFleetOutput_fleet}}
+var mUpdateProjectInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectInput_name, &sUpdateProjectInput_description, &sUpdateProjectInput_source, &sUpdateProjectInput_secondarySources, &sUpdateProjectInput_sourceVersion, &sUpdateProjectInput_secondarySourceVersions, &sUpdateProjectInput_artifacts, &sUpdateProjectInput_secondaryArtifacts, &sUpdateProjectInput_cache, &sUpdateProjectInput_environment, &sUpdateProjectInput_serviceRole, &sUpdateProjectInput_timeoutInMinutes, &sUpdateProjectInput_queuedTimeoutInMinutes, &sUpdateProjectInput_encryptionKey, &sUpdateProjectInput_tags, &sUpdateProjectInput_vpcConfig, &sUpdateProjectInput_badgeEnabled, &sUpdateProjectInput_logsConfig, &sUpdateProjectInput_fileSystemLocations, &sUpdateProjectInput_buildBatchConfig, &sUpdateProjectInput_concurrentBuildLimit, &sUpdateProjectInput_autoRetryLimit}, Hash: &hUpdateProjectInput}
+var mUpdateProjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectOutput_project}}
+var mUpdateProjectVisibilityInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectVisibilityInput_projectArn, &sUpdateProjectVisibilityInput_projectVisibility, &sUpdateProjectVisibilityInput_resourceAccessRole}}
+var mUpdateProjectVisibilityOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectVisibilityOutput_projectArn, &sUpdateProjectVisibilityOutput_publicProjectAlias, &sUpdateProjectVisibilityOutput_projectVisibility}}
+var mUpdateReportGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReportGroupInput_arn, &sUpdateReportGroupInput_exportConfig, &sUpdateReportGroupInput_tags}}
+var mUpdateReportGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReportGroupOutput_reportGroup}}
+var mUpdateWebhookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebhookInput_projectName, &sUpdateWebhookInput_branchFilter, &sUpdateWebhookInput_rotateSecret, &sUpdateWebhookInput_filterGroups, &sUpdateWebhookInput_buildType, &sUpdateWebhookInput_pullRequestBuildPolicy}}
+var mUpdateWebhookOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebhookOutput_webhook}}
+
+var hBuild = smithy.MemberHash{Seed: 167, Slots: []uint16{
+	0, 22, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 7, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
+	16, 1, 0, 11, 0, 0, 28, 0, 15, 0, 26, 0, 0, 0, 0, 0, 13, 0, 0, 21, 27, 0, 2, 25,
+	0, 0, 0, 0, 0, 0, 0, 8, 0, 5, 0, 0, 17, 0, 0, 0, 33, 0, 32, 31, 9, 0, 0, 0,
+	0, 6, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 18,
+	0, 0, 20, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 24, 0, 0, 29, 0, 0,
+	0, 0, 0, 10, 0, 0, 0, 3,
+}}
+var hBuildBatch = smithy.MemberHash{Seed: 11829, Slots: []uint16{
+	26, 20, 29, 6, 23, 19, 0, 0, 13, 0, 21, 0, 25, 0, 15, 18, 10, 0, 0, 0, 1, 16, 22, 0,
+	0, 0, 11, 2, 0, 0, 0, 0, 0, 0, 31, 8, 7, 0, 27, 0, 0, 0, 4, 12, 28, 0, 0, 0,
+	0, 0, 14, 3, 0, 0, 0, 0, 5, 0, 30, 24, 9, 0, 0, 17,
+}}
+var hBuildPhaseType = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 3, 1, 0, 0, 6, 0, 4, 0, 5, 11, 0, 8, 0, 0, 0, 9, 7, 2, 0,
+	10, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hCodeCoverage = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	1, 0, 3, 2, 0, 0, 5, 0, 6, 0, 0, 0, 0, 0, 0, 0, 10, 0, 7, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 9, 0, 4, 8,
+}}
+var hCommandExecution = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	5, 10, 0, 0, 0, 3, 0, 0, 0, 2, 6, 9, 0, 0, 7, 0, 0, 0, 0, 8, 0, 0, 0, 0,
+	1, 0, 11, 4, 13, 0, 0, 12,
+}}
+var hComputeType = smithy.MemberHash{Seed: 32, Slots: []uint16{
+	0, 0, 8, 0, 7, 0, 9, 0, 0, 3, 0, 6, 4, 0, 11, 2, 0, 0, 0, 0, 5, 0, 0, 0,
+	0, 10, 1, 0, 12, 0, 0, 0,
+}}
+var hEnvironmentType = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 8, 0, 11, 0, 6, 0, 2, 0, 0, 0, 0, 0, 3, 4, 7, 0, 10, 1, 0, 0, 12, 5, 0,
+	9, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hFleet = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	1, 0, 15, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 12, 0,
+	0, 0, 14, 11, 0, 8, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 4, 0, 3, 0,
+	0, 0, 6, 13, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 10, 0,
+}}
+var hLanguageType = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 0, 8, 0, 0, 0, 9, 10, 3, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 0, 0, 0, 2,
+	0, 7, 0, 0, 0, 4, 0, 5,
+}}
+var hProject = smithy.MemberHash{Seed: 1652, Slots: []uint16{
+	0, 0, 1, 0, 29, 0, 18, 0, 0, 7, 28, 6, 19, 0, 2, 0, 22, 0, 0, 21, 4, 14, 9, 0,
+	0, 0, 11, 26, 12, 0, 16, 3, 13, 0, 0, 25, 17, 0, 0, 24, 0, 15, 0, 0, 0, 20, 0, 0,
+	5, 0, 0, 0, 23, 10, 0, 8, 0, 0, 0, 27, 0, 0, 0, 0,
+}}
+var hProjectArtifacts = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	3, 5, 0, 0, 6, 7, 0, 0, 9, 0, 0, 0, 0, 0, 0, 1, 4, 0, 0, 0, 8, 0, 10, 0,
+	0, 0, 0, 2, 0, 0, 0, 0,
+}}
+var hProjectEnvironment = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 7, 0, 0, 0, 0, 3, 0, 0, 0, 9, 0, 0, 2, 6, 1, 12, 0, 0, 0, 0, 0, 0, 5,
+	0, 4, 11, 0, 0, 0, 8, 10,
+}}
+var hProjectSource = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 2, 0, 10, 0, 0, 5, 6, 3, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 0,
+	0, 0, 0, 0, 0, 0, 0, 7,
+}}
+var hPullRequestBuildApproverRole = smithy.MemberHash{Seed: 60, Slots: []uint16{
+	0, 12, 11, 9, 0, 0, 0, 0, 0, 6, 8, 0, 2, 0, 7, 3, 0, 0, 0, 0, 0, 14, 4, 1,
+	10, 13, 0, 0, 0, 0, 5, 0,
+}}
+var hReport = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 7, 9, 0, 1, 0, 12, 0, 0, 0, 0, 4, 3, 0, 0, 6, 0, 8, 0, 5, 0, 0, 2, 0,
+	11, 0, 10, 0, 0, 0, 0, 0,
+}}
+var hReportGroupTrendFieldType = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 7, 0, 0, 3, 0, 6, 0, 2, 0, 0, 0,
+	0, 0, 0, 1, 0, 0, 0, 4,
+}}
+var hSandbox = smithy.MemberHash{Seed: 40, Slots: []uint16{
+	0, 0, 0, 14, 6, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 12, 0, 0,
+	9, 0, 0, 0, 0, 0, 0, 13, 4, 8, 15, 0, 3, 0, 0, 0, 5, 1, 7, 0, 0, 0, 0, 0,
+	0, 10, 2, 0, 18, 0, 19, 0, 0, 17, 11, 0, 0, 0, 0, 0,
+}}
+var hSandboxSession = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 0, 5, 0, 1, 3, 6, 4, 8, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 9,
+	0, 0, 0, 0, 0, 0, 2, 0,
+}}
+var hSourceType = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 0, 0, 0, 9, 4, 0, 0, 0, 6, 0, 0, 0, 0, 8, 1, 0, 0, 0,
+	0, 0, 0, 0, 2, 5, 7, 0,
+}}
+var hTestCase = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 4, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 6, 3, 8, 0, 5, 0,
+	0, 0, 0, 0, 0, 0, 9, 2,
+}}
+var hWebhook = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 12, 0, 0, 3, 0, 10, 11, 0, 0, 0, 0, 0, 7, 0, 2, 0, 6, 9, 8, 0, 0, 1,
+	0, 0, 0, 0, 4, 0, 0, 5,
+}}
+var hWebhookFilterType = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	2, 0, 6, 10, 0, 0, 0, 0, 0, 1, 9, 3, 0, 0, 0, 0, 0, 11, 8, 0, 0, 0, 0, 0,
+	7, 0, 4, 5, 0, 0, 0, 0,
+}}
+var hCreateFleetInput = smithy.MemberHash{Seed: 32, Slots: []uint16{
+	0, 0, 2, 9, 5, 0, 0, 0, 10, 0, 0, 12, 3, 0, 11, 0, 4, 0, 7, 1, 0, 0, 0, 0,
+	0, 0, 6, 0, 0, 0, 8, 0,
+}}
+var hCreateProjectInput = smithy.MemberHash{Seed: 96, Slots: []uint16{
+	0, 13, 0, 21, 0, 0, 0, 0, 0, 0, 22, 1, 16, 0, 0, 0, 17, 0, 0, 0, 4, 0, 3, 0,
+	7, 0, 0, 0, 0, 6, 0, 0, 5, 0, 0, 11, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 10,
+	19, 2, 0, 15, 0, 0, 0, 8, 12, 0, 20, 0, 9, 0, 0, 14,
+}}
+var hStartBuildBatchInput = smithy.MemberHash{Seed: 17245, Slots: []uint16{
+	0, 8, 19, 17, 0, 0, 1, 10, 0, 30, 0, 9, 0, 0, 0, 3, 0, 5, 28, 7, 6, 2, 23, 31,
+	0, 0, 0, 0, 13, 11, 0, 18, 0, 0, 0, 24, 12, 4, 0, 29, 27, 0, 0, 0, 25, 0, 0, 0,
+	22, 0, 0, 16, 14, 0, 0, 26, 0, 20, 21, 15, 0, 0, 0, 0,
+}}
+var hStartBuildInput = smithy.MemberHash{Seed: 38, Slots: []uint16{
+	0, 0, 0, 15, 0, 0, 17, 0, 0, 0, 6, 0, 0, 0, 0, 9, 0, 1, 0, 0, 0, 0, 0, 0,
+	5, 0, 13, 0, 0, 0, 16, 0, 0, 0, 3, 0, 0, 0, 0, 0, 14, 0, 34, 0, 0, 7, 0, 26,
+	0, 0, 20, 0, 0, 0, 0, 0, 0, 22, 31, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0,
+	0, 0, 28, 0, 0, 10, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 32, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 33, 0, 0, 21, 0, 30, 8, 18, 0, 0, 0, 19, 0, 29, 25, 0, 0, 23, 12, 0, 0,
+	4, 0, 0, 0, 0, 0, 0, 27,
+}}
+var hUpdateFleetInput = smithy.MemberHash{Seed: 25, Slots: []uint16{
+	0, 6, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 12, 10, 0, 11, 7, 0, 0, 0, 4, 0, 0,
+	2, 9, 0, 0, 8, 0, 0, 5,
+}}
+var hUpdateProjectInput = smithy.MemberHash{Seed: 96, Slots: []uint16{
+	0, 13, 0, 21, 0, 0, 0, 0, 0, 0, 22, 1, 16, 0, 0, 0, 17, 0, 0, 0, 4, 0, 3, 0,
+	7, 0, 0, 0, 0, 6, 0, 0, 5, 0, 0, 11, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 10,
+	19, 2, 0, 15, 0, 0, 0, 8, 12, 0, 20, 0, 9, 0, 0, 14,
+}}
+
+var sBatchDeleteBuilds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteBuilds, Type: smithy.ShapeTypeOperation, Ext: &eBatchDeleteBuilds})
+var sBatchGetBuildBatches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetBuildBatches, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetBuildBatches})
+var sBatchGetBuilds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetBuilds, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetBuilds})
+var sBatchGetCommandExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommandExecutions, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetCommandExecutions})
+var sBatchGetFleets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFleets, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetFleets})
+var sBatchGetProjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetProjects, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetProjects})
+var sBatchGetReportGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetReportGroups, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetReportGroups})
+var sBatchGetReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetReports, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetReports})
+var sBatchGetSandboxes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSandboxes, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetSandboxes})
+var sCreateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleet, Type: smithy.ShapeTypeOperation, Ext: &eCreateFleet})
+var sCreateProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProject, Type: smithy.ShapeTypeOperation, Ext: &eCreateProject})
+var sCreateReportGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReportGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateReportGroup})
+var sCreateWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebhook, Type: smithy.ShapeTypeOperation, Ext: &eCreateWebhook})
+var sDeleteBuildBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBuildBatch, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBuildBatch})
+var sDeleteFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFleet})
+var sDeleteProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProject, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProject})
+var sDeleteReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReport, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReport})
+var sDeleteReportGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReportGroup})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePolicy})
+var sDeleteSourceCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceCredentials, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSourceCredentials})
+var sDeleteWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhook, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWebhook})
+var sDescribeCodeCoverages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeCoverages, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCodeCoverages})
+var sDescribeTestCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTestCases, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTestCases})
+var sGetReportGroupTrend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReportGroupTrend, Type: smithy.ShapeTypeOperation, Ext: &eGetReportGroupTrend})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicy})
+var sImportSourceCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSourceCredentials, Type: smithy.ShapeTypeOperation, Ext: &eImportSourceCredentials})
+var sInvalidateProjectCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidateProjectCache, Type: smithy.ShapeTypeOperation, Ext: &eInvalidateProjectCache})
+var sListBuildBatches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildBatches, Type: smithy.ShapeTypeOperation, Ext: &eListBuildBatches})
+var sListBuildBatchesForProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildBatchesForProject, Type: smithy.ShapeTypeOperation, Ext: &eListBuildBatchesForProject})
+var sListBuilds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuilds, Type: smithy.ShapeTypeOperation, Ext: &eListBuilds})
+var sListBuildsForProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildsForProject, Type: smithy.ShapeTypeOperation, Ext: &eListBuildsForProject})
+var sListCommandExecutionsForSandbox = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCommandExecutionsForSandbox, Type: smithy.ShapeTypeOperation, Ext: &eListCommandExecutionsForSandbox})
+var sListCuratedEnvironmentImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCuratedEnvironmentImages, Type: smithy.ShapeTypeOperation, Ext: &eListCuratedEnvironmentImages})
+var sListFleets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleets, Type: smithy.ShapeTypeOperation, Ext: &eListFleets})
+var sListProjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjects, Type: smithy.ShapeTypeOperation, Ext: &eListProjects})
+var sListReportGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportGroups, Type: smithy.ShapeTypeOperation, Ext: &eListReportGroups})
+var sListReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReports, Type: smithy.ShapeTypeOperation, Ext: &eListReports})
+var sListReportsForReportGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportsForReportGroup, Type: smithy.ShapeTypeOperation, Ext: &eListReportsForReportGroup})
+var sListSandboxes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSandboxes, Type: smithy.ShapeTypeOperation, Ext: &eListSandboxes})
+var sListSandboxesForProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSandboxesForProject, Type: smithy.ShapeTypeOperation, Ext: &eListSandboxesForProject})
+var sListSharedProjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedProjects, Type: smithy.ShapeTypeOperation, Ext: &eListSharedProjects})
+var sListSharedReportGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedReportGroups, Type: smithy.ShapeTypeOperation, Ext: &eListSharedReportGroups})
+var sListSourceCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceCredentials, Type: smithy.ShapeTypeOperation, Ext: &eListSourceCredentials})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePolicy})
+var sRetryBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryBuild, Type: smithy.ShapeTypeOperation, Ext: &eRetryBuild})
+var sRetryBuildBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryBuildBatch, Type: smithy.ShapeTypeOperation, Ext: &eRetryBuildBatch})
+var sStartBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBuild, Type: smithy.ShapeTypeOperation, Ext: &eStartBuild})
+var sStartBuildBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBuildBatch, Type: smithy.ShapeTypeOperation, Ext: &eStartBuildBatch})
+var sStartCommandExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCommandExecution, Type: smithy.ShapeTypeOperation, Ext: &eStartCommandExecution})
+var sStartSandbox = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSandbox, Type: smithy.ShapeTypeOperation, Ext: &eStartSandbox})
+var sStartSandboxConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSandboxConnection, Type: smithy.ShapeTypeOperation, Ext: &eStartSandboxConnection})
+var sStopBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBuild, Type: smithy.ShapeTypeOperation, Ext: &eStopBuild})
+var sStopBuildBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBuildBatch, Type: smithy.ShapeTypeOperation, Ext: &eStopBuildBatch})
+var sStopSandbox = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSandbox, Type: smithy.ShapeTypeOperation, Ext: &eStopSandbox})
+var sUpdateFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFleet})
+var sUpdateProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProject, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProject})
+var sUpdateProjectVisibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectVisibility, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProjectVisibility})
+var sUpdateReportGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReportGroup, Type: smithy.ShapeTypeOperation, Ext: &eUpdateReportGroup})
+var sUpdateWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebhook, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWebhook})
+var s_CodeBuild_20161006 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeBuild_20161006, Type: smithy.ShapeTypeService, Ext: &e_CodeBuild_20161006})
+var sAccountLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountLimitExceededException, Members: &mAccountLimitExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccountLimitExceededException})
+var sAccountLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccountLimitExceededException_message})
+var sAccountSuspendedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSuspendedException, Members: &mAccountSuspendedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccountSuspendedException})
+var sAccountSuspendedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccountSuspendedException_message})
+var sArtifactNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactNamespace, Members: &mArtifactNamespace, Type: smithy.ShapeTypeEnum, Ext: &eArtifactNamespace})
+var sArtifactNamespace_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactNamespace_NONE})
+var sArtifactNamespace_BUILD_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactNamespace_BUILD_ID})
+var sArtifactPackaging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactPackaging, Members: &mArtifactPackaging, Type: smithy.ShapeTypeEnum, Ext: &eArtifactPackaging})
+var sArtifactPackaging_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactPackaging_NONE})
+var sArtifactPackaging_ZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactPackaging_ZIP})
+var sArtifactsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactsType, Members: &mArtifactsType, Type: smithy.ShapeTypeEnum, Ext: &eArtifactsType})
+var sArtifactsType_CODEPIPELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODEPIPELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactsType_CODEPIPELINE})
+var sArtifactsType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactsType_S3})
+var sArtifactsType_NO_ARTIFACTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_ARTIFACTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactsType_NO_ARTIFACTS})
+var sAuthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eAuthType})
+var sAuthType_OAUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_OAUTH})
+var sAuthType_BASIC_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC_AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_BASIC_AUTH})
+var sAuthType_PERSONAL_ACCESS_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERSONAL_ACCESS_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_PERSONAL_ACCESS_TOKEN})
+var sAuthType_CODECONNECTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODECONNECTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_CODECONNECTIONS})
+var sAuthType_SECRETS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_SECRETS_MANAGER})
+var sAutoRetryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoRetryConfig, Members: &mAutoRetryConfig, Type: smithy.ShapeTypeStructure, Ext: &eAutoRetryConfig})
+var sAutoRetryConfig_autoRetryLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRetryLimit", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eAutoRetryConfig_autoRetryLimit})
+var sAutoRetryConfig_autoRetryNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRetryNumber", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eAutoRetryConfig_autoRetryNumber})
+var sAutoRetryConfig_nextAutoRetry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextAutoRetry", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAutoRetryConfig_nextAutoRetry})
+var sAutoRetryConfig_previousAutoRetry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previousAutoRetry", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAutoRetryConfig_previousAutoRetry})
+var sBatchReportModeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReportModeType, Members: &mBatchReportModeType, Type: smithy.ShapeTypeEnum, Ext: &eBatchReportModeType})
+var sBatchReportModeType_REPORT_INDIVIDUAL_BUILDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPORT_INDIVIDUAL_BUILDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReportModeType_REPORT_INDIVIDUAL_BUILDS})
+var sBatchReportModeType_REPORT_AGGREGATED_BATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPORT_AGGREGATED_BATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReportModeType_REPORT_AGGREGATED_BATCH})
+var sBatchRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRestrictions, Members: &mBatchRestrictions, Type: smithy.ShapeTypeStructure, Ext: &eBatchRestrictions})
+var sBatchRestrictions_maximumBuildsAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumBuildsAllowed", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eBatchRestrictions_maximumBuildsAllowed})
+var sBatchRestrictions_computeTypesAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeTypesAllowed", ID: &i_ComputeTypesAllowed, Members: &m_ComputeTypesAllowed, Type: smithy.ShapeTypeList, Ext: &eBatchRestrictions_computeTypesAllowed})
+var sBatchRestrictions_fleetsAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetsAllowed", ID: &i_FleetsAllowed, Members: &m_FleetsAllowed, Type: smithy.ShapeTypeList, Ext: &eBatchRestrictions_fleetsAllowed})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sBucketOwnerAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBucketOwnerAccess, Members: &mBucketOwnerAccess, Type: smithy.ShapeTypeEnum, Ext: &eBucketOwnerAccess})
+var sBucketOwnerAccess_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBucketOwnerAccess_NONE})
+var sBucketOwnerAccess_READ_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBucketOwnerAccess_READ_ONLY})
+var sBucketOwnerAccess_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBucketOwnerAccess_FULL})
+var sBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuild, Members: &mBuild, Type: smithy.ShapeTypeStructure, Ext: &eBuild})
+var sBuild_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuild_id})
+var sBuild_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuild_arn})
+var sBuild_buildNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildNumber", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eBuild_buildNumber})
+var sBuild_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuild_startTime})
+var sBuild_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuild_endTime})
+var sBuild_currentPhase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentPhase", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuild_currentPhase})
+var sBuild_buildStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildStatus", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eBuild_buildStatus})
+var sBuild_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuild_sourceVersion})
+var sBuild_resolvedSourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedSourceVersion", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuild_resolvedSourceVersion})
+var sBuild_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuild_projectName})
+var sBuild_phases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phases", ID: &i_BuildPhases, Members: &m_BuildPhases, Type: smithy.ShapeTypeList, Ext: &eBuild_phases})
+var sBuild_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &eBuild_source})
+var sBuild_secondarySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySources", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eBuild_secondarySources})
+var sBuild_secondarySourceVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourceVersions", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eBuild_secondarySourceVersions})
+var sBuild_artifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifacts", ID: &iBuildArtifacts, Members: &mBuildArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eBuild_artifacts})
+var sBuild_secondaryArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifacts", ID: &i_BuildArtifactsList, Members: &m_BuildArtifactsList, Type: smithy.ShapeTypeList, Ext: &eBuild_secondaryArtifacts})
+var sBuild_cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cache", ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eBuild_cache})
+var sBuild_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iProjectEnvironment, Members: &mProjectEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eBuild_environment})
+var sBuild_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuild_serviceRole})
+var sBuild_logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logs", ID: &iLogsLocation, Members: &mLogsLocation, Type: smithy.ShapeTypeStructure, Ext: &eBuild_logs})
+var sBuild_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eBuild_timeoutInMinutes})
+var sBuild_queuedTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutes", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eBuild_queuedTimeoutInMinutes})
+var sBuild_buildComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildComplete", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eBuild_buildComplete})
+var sBuild_initiator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiator", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuild_initiator})
+var sBuild_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuild_vpcConfig})
+var sBuild_networkInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterface", ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &eBuild_networkInterface})
+var sBuild_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuild_encryptionKey})
+var sBuild_exportedEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportedEnvironmentVariables", ID: &i_ExportedEnvironmentVariables, Members: &m_ExportedEnvironmentVariables, Type: smithy.ShapeTypeList, Ext: &eBuild_exportedEnvironmentVariables})
+var sBuild_reportArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportArns", ID: &i_BuildReportArns, Members: &m_BuildReportArns, Type: smithy.ShapeTypeList, Ext: &eBuild_reportArns})
+var sBuild_fileSystemLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemLocations", ID: &i_ProjectFileSystemLocations, Members: &m_ProjectFileSystemLocations, Type: smithy.ShapeTypeList, Ext: &eBuild_fileSystemLocations})
+var sBuild_debugSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "debugSession", ID: &iDebugSession, Members: &mDebugSession, Type: smithy.ShapeTypeStructure, Ext: &eBuild_debugSession})
+var sBuild_buildBatchArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuild_buildBatchArn})
+var sBuild_autoRetryConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRetryConfig", ID: &iAutoRetryConfig, Members: &mAutoRetryConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuild_autoRetryConfig})
+var sBuildArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildArtifacts, Members: &mBuildArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eBuildArtifacts})
+var sBuildArtifacts_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildArtifacts_location})
+var sBuildArtifacts_sha256sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sha256sum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildArtifacts_sha256sum})
+var sBuildArtifacts_md5sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "md5sum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildArtifacts_md5sum})
+var sBuildArtifacts_overrideArtifactName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideArtifactName", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eBuildArtifacts_overrideArtifactName})
+var sBuildArtifacts_encryptionDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionDisabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eBuildArtifacts_encryptionDisabled})
+var sBuildArtifacts_artifactIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildArtifacts_artifactIdentifier})
+var sBuildArtifacts_bucketOwnerAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwnerAccess", ID: &iBucketOwnerAccess, Members: &mBucketOwnerAccess, Type: smithy.ShapeTypeEnum, Ext: &eBuildArtifacts_bucketOwnerAccess})
+var s_BuildArtifactsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildArtifactsList, Members: &m_BuildArtifactsList, Type: smithy.ShapeTypeList, Ext: &e_BuildArtifactsList})
+var s_BuildArtifactsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuildArtifacts, Members: &mBuildArtifacts, Type: smithy.ShapeTypeStructure, Ext: &e_BuildArtifactsList_member})
+var sBuildBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildBatch, Members: &mBuildBatch, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch})
+var sBuildBatch_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_id})
+var sBuildBatch_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_arn})
+var sBuildBatch_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuildBatch_startTime})
+var sBuildBatch_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuildBatch_endTime})
+var sBuildBatch_currentPhase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentPhase", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_currentPhase})
+var sBuildBatch_buildBatchStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchStatus", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eBuildBatch_buildBatchStatus})
+var sBuildBatch_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_sourceVersion})
+var sBuildBatch_resolvedSourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedSourceVersion", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_resolvedSourceVersion})
+var sBuildBatch_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_projectName})
+var sBuildBatch_phases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phases", ID: &i_BuildBatchPhases, Members: &m_BuildBatchPhases, Type: smithy.ShapeTypeList, Ext: &eBuildBatch_phases})
+var sBuildBatch_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch_source})
+var sBuildBatch_secondarySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySources", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eBuildBatch_secondarySources})
+var sBuildBatch_secondarySourceVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourceVersions", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eBuildBatch_secondarySourceVersions})
+var sBuildBatch_artifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifacts", ID: &iBuildArtifacts, Members: &mBuildArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch_artifacts})
+var sBuildBatch_secondaryArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifacts", ID: &i_BuildArtifactsList, Members: &m_BuildArtifactsList, Type: smithy.ShapeTypeList, Ext: &eBuildBatch_secondaryArtifacts})
+var sBuildBatch_cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cache", ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch_cache})
+var sBuildBatch_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iProjectEnvironment, Members: &mProjectEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch_environment})
+var sBuildBatch_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_serviceRole})
+var sBuildBatch_logConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfig", ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch_logConfig})
+var sBuildBatch_buildTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildTimeoutInMinutes", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eBuildBatch_buildTimeoutInMinutes})
+var sBuildBatch_queuedTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutes", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eBuildBatch_queuedTimeoutInMinutes})
+var sBuildBatch_complete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complete", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eBuildBatch_complete})
+var sBuildBatch_initiator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiator", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_initiator})
+var sBuildBatch_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch_vpcConfig})
+var sBuildBatch_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildBatch_encryptionKey})
+var sBuildBatch_buildBatchNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchNumber", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eBuildBatch_buildBatchNumber})
+var sBuildBatch_fileSystemLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemLocations", ID: &i_ProjectFileSystemLocations, Members: &m_ProjectFileSystemLocations, Type: smithy.ShapeTypeList, Ext: &eBuildBatch_fileSystemLocations})
+var sBuildBatch_buildBatchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchConfig", ID: &iProjectBuildBatchConfig, Members: &mProjectBuildBatchConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatch_buildBatchConfig})
+var sBuildBatch_buildGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildGroups", ID: &i_BuildGroups, Members: &m_BuildGroups, Type: smithy.ShapeTypeList, Ext: &eBuildBatch_buildGroups})
+var sBuildBatch_debugSessionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "debugSessionEnabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eBuildBatch_debugSessionEnabled})
+var sBuildBatch_reportArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportArns", ID: &i_BuildReportArns, Members: &m_BuildReportArns, Type: smithy.ShapeTypeList, Ext: &eBuildBatch_reportArns})
+var s_BuildBatches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildBatches, Members: &m_BuildBatches, Type: smithy.ShapeTypeList, Ext: &e_BuildBatches})
+var s_BuildBatches_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuildBatch, Members: &mBuildBatch, Type: smithy.ShapeTypeStructure, Ext: &e_BuildBatches_member})
+var sBuildBatchFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildBatchFilter, Members: &mBuildBatchFilter, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchFilter})
+var sBuildBatchFilter_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eBuildBatchFilter_status})
+var s_BuildBatchIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildBatchIds, Members: &m_BuildBatchIds, Type: smithy.ShapeTypeList, Ext: &e_BuildBatchIds})
+var s_BuildBatchIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_BuildBatchIds_member})
+var sBuildBatchPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildBatchPhase, Members: &mBuildBatchPhase, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhase})
+var sBuildBatchPhase_phaseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phaseType", ID: &iBuildBatchPhaseType, Members: &mBuildBatchPhaseType, Type: smithy.ShapeTypeEnum, Ext: &eBuildBatchPhase_phaseType})
+var sBuildBatchPhase_phaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phaseStatus", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eBuildBatchPhase_phaseStatus})
+var sBuildBatchPhase_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuildBatchPhase_startTime})
+var sBuildBatchPhase_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuildBatchPhase_endTime})
+var sBuildBatchPhase_durationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationInSeconds", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eBuildBatchPhase_durationInSeconds})
+var sBuildBatchPhase_contexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contexts", ID: &i_PhaseContexts, Members: &m_PhaseContexts, Type: smithy.ShapeTypeList, Ext: &eBuildBatchPhase_contexts})
+var s_BuildBatchPhases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildBatchPhases, Members: &m_BuildBatchPhases, Type: smithy.ShapeTypeList, Ext: &e_BuildBatchPhases})
+var s_BuildBatchPhases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuildBatchPhase, Members: &mBuildBatchPhase, Type: smithy.ShapeTypeStructure, Ext: &e_BuildBatchPhases_member})
+var sBuildBatchPhaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildBatchPhaseType, Members: &mBuildBatchPhaseType, Type: smithy.ShapeTypeEnum, Ext: &eBuildBatchPhaseType})
+var sBuildBatchPhaseType_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhaseType_SUBMITTED})
+var sBuildBatchPhaseType_DOWNLOAD_BATCHSPEC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNLOAD_BATCHSPEC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhaseType_DOWNLOAD_BATCHSPEC})
+var sBuildBatchPhaseType_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhaseType_IN_PROGRESS})
+var sBuildBatchPhaseType_COMBINE_ARTIFACTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMBINE_ARTIFACTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhaseType_COMBINE_ARTIFACTS})
+var sBuildBatchPhaseType_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhaseType_SUCCEEDED})
+var sBuildBatchPhaseType_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhaseType_FAILED})
+var sBuildBatchPhaseType_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildBatchPhaseType_STOPPED})
+var sBuildGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildGroup, Members: &mBuildGroup, Type: smithy.ShapeTypeStructure, Ext: &eBuildGroup})
+var sBuildGroup_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildGroup_identifier})
+var sBuildGroup_dependsOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependsOn", ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &eBuildGroup_dependsOn})
+var sBuildGroup_ignoreFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ignoreFailure", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eBuildGroup_ignoreFailure})
+var sBuildGroup_currentBuildSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentBuildSummary", ID: &iBuildSummary, Members: &mBuildSummary, Type: smithy.ShapeTypeStructure, Ext: &eBuildGroup_currentBuildSummary})
+var sBuildGroup_priorBuildSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priorBuildSummaryList", ID: &i_BuildSummaries, Members: &m_BuildSummaries, Type: smithy.ShapeTypeList, Ext: &eBuildGroup_priorBuildSummaryList})
+var s_BuildGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildGroups, Members: &m_BuildGroups, Type: smithy.ShapeTypeList, Ext: &e_BuildGroups})
+var s_BuildGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuildGroup, Members: &mBuildGroup, Type: smithy.ShapeTypeStructure, Ext: &e_BuildGroups_member})
+var s_BuildIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &e_BuildIds})
+var s_BuildIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_BuildIds_member})
+var sBuildNotDeleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildNotDeleted, Members: &mBuildNotDeleted, Type: smithy.ShapeTypeStructure, Ext: &eBuildNotDeleted})
+var sBuildNotDeleted_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildNotDeleted_id})
+var sBuildNotDeleted_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildNotDeleted_statusCode})
+var sBuildPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildPhase, Members: &mBuildPhase, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhase})
+var sBuildPhase_phaseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phaseType", ID: &iBuildPhaseType, Members: &mBuildPhaseType, Type: smithy.ShapeTypeEnum, Ext: &eBuildPhase_phaseType})
+var sBuildPhase_phaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phaseStatus", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eBuildPhase_phaseStatus})
+var sBuildPhase_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuildPhase_startTime})
+var sBuildPhase_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuildPhase_endTime})
+var sBuildPhase_durationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationInSeconds", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eBuildPhase_durationInSeconds})
+var sBuildPhase_contexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contexts", ID: &i_PhaseContexts, Members: &m_PhaseContexts, Type: smithy.ShapeTypeList, Ext: &eBuildPhase_contexts})
+var s_BuildPhases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildPhases, Members: &m_BuildPhases, Type: smithy.ShapeTypeList, Ext: &e_BuildPhases})
+var s_BuildPhases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuildPhase, Members: &mBuildPhase, Type: smithy.ShapeTypeStructure, Ext: &e_BuildPhases_member})
+var sBuildPhaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildPhaseType, Members: &mBuildPhaseType, Type: smithy.ShapeTypeEnum, Ext: &eBuildPhaseType})
+var sBuildPhaseType_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_SUBMITTED})
+var sBuildPhaseType_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_QUEUED})
+var sBuildPhaseType_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_PROVISIONING})
+var sBuildPhaseType_DOWNLOAD_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNLOAD_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_DOWNLOAD_SOURCE})
+var sBuildPhaseType_INSTALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_INSTALL})
+var sBuildPhaseType_PRE_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_PRE_BUILD})
+var sBuildPhaseType_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_BUILD})
+var sBuildPhaseType_POST_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_POST_BUILD})
+var sBuildPhaseType_UPLOAD_ARTIFACTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPLOAD_ARTIFACTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_UPLOAD_ARTIFACTS})
+var sBuildPhaseType_FINALIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINALIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_FINALIZING})
+var sBuildPhaseType_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildPhaseType_COMPLETED})
+var s_BuildReportArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildReportArns, Members: &m_BuildReportArns, Type: smithy.ShapeTypeList, Ext: &e_BuildReportArns})
+var s_BuildReportArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_BuildReportArns_member})
+var s_Builds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Builds, Members: &m_Builds, Type: smithy.ShapeTypeList, Ext: &e_Builds})
+var s_Builds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuild, Members: &mBuild, Type: smithy.ShapeTypeStructure, Ext: &e_Builds_member})
+var s_BuildsNotDeleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildsNotDeleted, Members: &m_BuildsNotDeleted, Type: smithy.ShapeTypeList, Ext: &e_BuildsNotDeleted})
+var s_BuildsNotDeleted_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuildNotDeleted, Members: &mBuildNotDeleted, Type: smithy.ShapeTypeStructure, Ext: &e_BuildsNotDeleted_member})
+var sBuildStatusConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildStatusConfig, Members: &mBuildStatusConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuildStatusConfig})
+var sBuildStatusConfig_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildStatusConfig_context})
+var sBuildStatusConfig_targetUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetUrl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildStatusConfig_targetUrl})
+var s_BuildSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildSummaries, Members: &m_BuildSummaries, Type: smithy.ShapeTypeList, Ext: &e_BuildSummaries})
+var s_BuildSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuildSummary, Members: &mBuildSummary, Type: smithy.ShapeTypeStructure, Ext: &e_BuildSummaries_member})
+var sBuildSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildSummary, Members: &mBuildSummary, Type: smithy.ShapeTypeStructure, Ext: &eBuildSummary})
+var sBuildSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildSummary_arn})
+var sBuildSummary_requestedOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedOn", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBuildSummary_requestedOn})
+var sBuildSummary_buildStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildStatus", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eBuildSummary_buildStatus})
+var sBuildSummary_primaryArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primaryArtifact", ID: &iResolvedArtifact, Members: &mResolvedArtifact, Type: smithy.ShapeTypeStructure, Ext: &eBuildSummary_primaryArtifact})
+var sBuildSummary_secondaryArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifacts", ID: &i_ResolvedSecondaryArtifacts, Members: &m_ResolvedSecondaryArtifacts, Type: smithy.ShapeTypeList, Ext: &eBuildSummary_secondaryArtifacts})
+var s_BuildTimeOut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildTimeOut, Type: smithy.ShapeTypeInteger, Ext: &e_BuildTimeOut})
+var sCacheMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheMode, Members: &mCacheMode, Type: smithy.ShapeTypeEnum, Ext: &eCacheMode})
+var sCacheMode_LOCAL_DOCKER_LAYER_CACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_DOCKER_LAYER_CACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheMode_LOCAL_DOCKER_LAYER_CACHE})
+var sCacheMode_LOCAL_SOURCE_CACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_SOURCE_CACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheMode_LOCAL_SOURCE_CACHE})
+var sCacheMode_LOCAL_CUSTOM_CACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_CUSTOM_CACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheMode_LOCAL_CUSTOM_CACHE})
+var sCacheType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheType, Members: &mCacheType, Type: smithy.ShapeTypeEnum, Ext: &eCacheType})
+var sCacheType_NO_CACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheType_NO_CACHE})
+var sCacheType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheType_S3})
+var sCacheType_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheType_LOCAL})
+var sCloudWatchLogsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogsConfig, Members: &mCloudWatchLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogsConfig})
+var sCloudWatchLogsConfig_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLogsConfigStatusType, Members: &mLogsConfigStatusType, Type: smithy.ShapeTypeEnum, Ext: &eCloudWatchLogsConfig_status})
+var sCloudWatchLogsConfig_groupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogsConfig_groupName})
+var sCloudWatchLogsConfig_streamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogsConfig_streamName})
+var sCodeCoverage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeCoverage, Members: &mCodeCoverage, Type: smithy.ShapeTypeStructure, Ext: &eCodeCoverage})
+var sCodeCoverage_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCodeCoverage_id})
+var sCodeCoverage_reportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportARN", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCodeCoverage_reportARN})
+var sCodeCoverage_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCodeCoverage_filePath})
+var sCodeCoverage_lineCoveragePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lineCoveragePercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eCodeCoverage_lineCoveragePercentage})
+var sCodeCoverage_linesCovered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linesCovered", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverage_linesCovered})
+var sCodeCoverage_linesMissed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linesMissed", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverage_linesMissed})
+var sCodeCoverage_branchCoveragePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchCoveragePercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eCodeCoverage_branchCoveragePercentage})
+var sCodeCoverage_branchesCovered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchesCovered", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverage_branchesCovered})
+var sCodeCoverage_branchesMissed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchesMissed", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverage_branchesMissed})
+var sCodeCoverage_expired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expired", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCodeCoverage_expired})
+var sCodeCoverageReportSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeCoverageReportSummary, Members: &mCodeCoverageReportSummary, Type: smithy.ShapeTypeStructure, Ext: &eCodeCoverageReportSummary})
+var sCodeCoverageReportSummary_lineCoveragePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lineCoveragePercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eCodeCoverageReportSummary_lineCoveragePercentage})
+var sCodeCoverageReportSummary_linesCovered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linesCovered", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverageReportSummary_linesCovered})
+var sCodeCoverageReportSummary_linesMissed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linesMissed", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverageReportSummary_linesMissed})
+var sCodeCoverageReportSummary_branchCoveragePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchCoveragePercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eCodeCoverageReportSummary_branchCoveragePercentage})
+var sCodeCoverageReportSummary_branchesCovered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchesCovered", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverageReportSummary_branchesCovered})
+var sCodeCoverageReportSummary_branchesMissed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchesMissed", ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &eCodeCoverageReportSummary_branchesMissed})
+var s_CodeCoverages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeCoverages, Members: &m_CodeCoverages, Type: smithy.ShapeTypeList, Ext: &e_CodeCoverages})
+var s_CodeCoverages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodeCoverage, Members: &mCodeCoverage, Type: smithy.ShapeTypeStructure, Ext: &e_CodeCoverages_member})
+var sCommandExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommandExecution, Members: &mCommandExecution, Type: smithy.ShapeTypeStructure, Ext: &eCommandExecution})
+var sCommandExecution_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_id})
+var sCommandExecution_sandboxId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_sandboxId})
+var sCommandExecution_submitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submitTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCommandExecution_submitTime})
+var sCommandExecution_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCommandExecution_startTime})
+var sCommandExecution_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCommandExecution_endTime})
+var sCommandExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_status})
+var sCommandExecution_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_SensitiveNonEmptyString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_command})
+var sCommandExecution_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCommandType, Members: &mCommandType, Type: smithy.ShapeTypeEnum, Ext: &eCommandExecution_type})
+var sCommandExecution_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_exitCode})
+var sCommandExecution_standardOutputContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standardOutputContent", ID: &i_SensitiveNonEmptyString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_standardOutputContent})
+var sCommandExecution_standardErrContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standardErrContent", ID: &i_SensitiveNonEmptyString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_standardErrContent})
+var sCommandExecution_logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logs", ID: &iLogsLocation, Members: &mLogsLocation, Type: smithy.ShapeTypeStructure, Ext: &eCommandExecution_logs})
+var sCommandExecution_sandboxArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCommandExecution_sandboxArn})
+var s_CommandExecutionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandExecutionIds, Members: &m_CommandExecutionIds, Type: smithy.ShapeTypeList, Ext: &e_CommandExecutionIds})
+var s_CommandExecutionIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_CommandExecutionIds_member})
+var s_CommandExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandExecutions, Members: &m_CommandExecutions, Type: smithy.ShapeTypeList, Ext: &e_CommandExecutions})
+var s_CommandExecutions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommandExecution, Members: &mCommandExecution, Type: smithy.ShapeTypeStructure, Ext: &e_CommandExecutions_member})
+var sCommandType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommandType, Members: &mCommandType, Type: smithy.ShapeTypeEnum, Ext: &eCommandType})
+var sCommandType_SHELL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHELL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCommandType_SHELL})
+var sComputeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eComputeConfiguration})
+var sComputeConfiguration_vCpu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vCpu", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eComputeConfiguration_vCpu})
+var sComputeConfiguration_memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memory", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eComputeConfiguration_memory})
+var sComputeConfiguration_disk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disk", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eComputeConfiguration_disk})
+var sComputeConfiguration_machineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "machineType", ID: &iMachineType, Members: &mMachineType, Type: smithy.ShapeTypeEnum, Ext: &eComputeConfiguration_machineType})
+var sComputeConfiguration_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eComputeConfiguration_instanceType})
+var sComputeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eComputeType})
+var sComputeType_BUILD_GENERAL1_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_SMALL})
+var sComputeType_BUILD_GENERAL1_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_MEDIUM})
+var sComputeType_BUILD_GENERAL1_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_LARGE})
+var sComputeType_BUILD_GENERAL1_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_XLARGE})
+var sComputeType_BUILD_GENERAL1_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_2XLARGE})
+var sComputeType_BUILD_LAMBDA_1GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_LAMBDA_1GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_LAMBDA_1GB})
+var sComputeType_BUILD_LAMBDA_2GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_LAMBDA_2GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_LAMBDA_2GB})
+var sComputeType_BUILD_LAMBDA_4GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_LAMBDA_4GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_LAMBDA_4GB})
+var sComputeType_BUILD_LAMBDA_8GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_LAMBDA_8GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_LAMBDA_8GB})
+var sComputeType_BUILD_LAMBDA_10GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_LAMBDA_10GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_LAMBDA_10GB})
+var sComputeType_ATTRIBUTE_BASED_COMPUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTRIBUTE_BASED_COMPUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_ATTRIBUTE_BASED_COMPUTE})
+var sComputeType_CUSTOM_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_CUSTOM_INSTANCE_TYPE})
+var s_ComputeTypesAllowed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeTypesAllowed, Members: &m_ComputeTypesAllowed, Type: smithy.ShapeTypeList, Ext: &e_ComputeTypesAllowed})
+var s_ComputeTypesAllowed_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ComputeTypesAllowed_member})
+var sCredentialProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredentialProviderType, Members: &mCredentialProviderType, Type: smithy.ShapeTypeEnum, Ext: &eCredentialProviderType})
+var sCredentialProviderType_SECRETS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCredentialProviderType_SECRETS_MANAGER})
+var sDebugSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDebugSession, Members: &mDebugSession, Type: smithy.ShapeTypeStructure, Ext: &eDebugSession})
+var sDebugSession_sessionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionEnabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDebugSession_sessionEnabled})
+var sDebugSession_sessionTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionTarget", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDebugSession_sessionTarget})
+var sDockerServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDockerServer, Members: &mDockerServer, Type: smithy.ShapeTypeStructure, Ext: &eDockerServer})
+var sDockerServer_computeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeType", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eDockerServer_computeType})
+var sDockerServer_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &eDockerServer_securityGroupIds})
+var sDockerServer_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDockerServerStatus, Members: &mDockerServerStatus, Type: smithy.ShapeTypeStructure, Ext: &eDockerServer_status})
+var sDockerServerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDockerServerStatus, Members: &mDockerServerStatus, Type: smithy.ShapeTypeStructure, Ext: &eDockerServerStatus})
+var sDockerServerStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDockerServerStatus_status})
+var sDockerServerStatus_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDockerServerStatus_message})
+var sEnvironmentImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentImage, Members: &mEnvironmentImage, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentImage})
+var sEnvironmentImage_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentImage_name})
+var sEnvironmentImage_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentImage_description})
+var sEnvironmentImage_versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versions", ID: &i_ImageVersions, Members: &m_ImageVersions, Type: smithy.ShapeTypeList, Ext: &eEnvironmentImage_versions})
+var s_EnvironmentImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentImages, Members: &m_EnvironmentImages, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentImages})
+var s_EnvironmentImages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentImage, Members: &mEnvironmentImage, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentImages_member})
+var sEnvironmentLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentLanguage, Members: &mEnvironmentLanguage, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentLanguage})
+var sEnvironmentLanguage_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &iLanguageType, Members: &mLanguageType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentLanguage_language})
+var sEnvironmentLanguage_images = smithy.NewStaticSchema(smithy.StaticSchema{Member: "images", ID: &i_EnvironmentImages, Members: &m_EnvironmentImages, Type: smithy.ShapeTypeList, Ext: &eEnvironmentLanguage_images})
+var s_EnvironmentLanguages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentLanguages, Members: &m_EnvironmentLanguages, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentLanguages})
+var s_EnvironmentLanguages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentLanguage, Members: &mEnvironmentLanguage, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentLanguages_member})
+var sEnvironmentPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentPlatform, Members: &mEnvironmentPlatform, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentPlatform})
+var sEnvironmentPlatform_platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platform", ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentPlatform_platform})
+var sEnvironmentPlatform_languages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languages", ID: &i_EnvironmentLanguages, Members: &m_EnvironmentLanguages, Type: smithy.ShapeTypeList, Ext: &eEnvironmentPlatform_languages})
+var s_EnvironmentPlatforms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentPlatforms, Members: &m_EnvironmentPlatforms, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentPlatforms})
+var s_EnvironmentPlatforms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentPlatform, Members: &mEnvironmentPlatform, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentPlatforms_member})
+var sEnvironmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentType, Members: &mEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentType})
+var sEnvironmentType_WINDOWS_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_WINDOWS_CONTAINER})
+var sEnvironmentType_LINUX_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_LINUX_CONTAINER})
+var sEnvironmentType_LINUX_GPU_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX_GPU_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_LINUX_GPU_CONTAINER})
+var sEnvironmentType_ARM_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARM_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_ARM_CONTAINER})
+var sEnvironmentType_WINDOWS_SERVER_2019_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2019_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_WINDOWS_SERVER_2019_CONTAINER})
+var sEnvironmentType_WINDOWS_SERVER_2022_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2022_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_WINDOWS_SERVER_2022_CONTAINER})
+var sEnvironmentType_LINUX_LAMBDA_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX_LAMBDA_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_LINUX_LAMBDA_CONTAINER})
+var sEnvironmentType_ARM_LAMBDA_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARM_LAMBDA_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_ARM_LAMBDA_CONTAINER})
+var sEnvironmentType_LINUX_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX_EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_LINUX_EC2})
+var sEnvironmentType_ARM_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARM_EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_ARM_EC2})
+var sEnvironmentType_WINDOWS_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_WINDOWS_EC2})
+var sEnvironmentType_MAC_ARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAC_ARM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentType_MAC_ARM})
+var sEnvironmentVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentVariable, Members: &mEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentVariable})
+var sEnvironmentVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eEnvironmentVariable_name})
+var sEnvironmentVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentVariable_value})
+var sEnvironmentVariable_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEnvironmentVariableType, Members: &mEnvironmentVariableType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentVariable_type})
+var s_EnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentVariables})
+var s_EnvironmentVariables_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentVariable, Members: &mEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentVariables_member})
+var sEnvironmentVariableType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentVariableType, Members: &mEnvironmentVariableType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentVariableType})
+var sEnvironmentVariableType_PLAINTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAINTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentVariableType_PLAINTEXT})
+var sEnvironmentVariableType_PARAMETER_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARAMETER_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentVariableType_PARAMETER_STORE})
+var sEnvironmentVariableType_SECRETS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentVariableType_SECRETS_MANAGER})
+var sExportedEnvironmentVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportedEnvironmentVariable, Members: &mExportedEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &eExportedEnvironmentVariable})
+var sExportedEnvironmentVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eExportedEnvironmentVariable_name})
+var sExportedEnvironmentVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eExportedEnvironmentVariable_value})
+var s_ExportedEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportedEnvironmentVariables, Members: &m_ExportedEnvironmentVariables, Type: smithy.ShapeTypeList, Ext: &e_ExportedEnvironmentVariables})
+var s_ExportedEnvironmentVariables_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExportedEnvironmentVariable, Members: &mExportedEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &e_ExportedEnvironmentVariables_member})
+var sFileSystemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemType, Members: &mFileSystemType, Type: smithy.ShapeTypeEnum, Ext: &eFileSystemType})
+var sFileSystemType_EFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EFS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileSystemType_EFS})
+var s_FilterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterGroup, Members: &m_FilterGroup, Type: smithy.ShapeTypeList, Ext: &e_FilterGroup})
+var s_FilterGroup_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWebhookFilter, Members: &mWebhookFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterGroup_member})
+var s_FilterGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterGroups, Members: &m_FilterGroups, Type: smithy.ShapeTypeList, Ext: &e_FilterGroups})
+var s_FilterGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterGroup, Members: &m_FilterGroup, Type: smithy.ShapeTypeList, Ext: &e_FilterGroups_member})
+var sFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &eFleet})
+var sFleet_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFleet_arn})
+var sFleet_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FleetName, Type: smithy.ShapeTypeString, Ext: &eFleet_name})
+var sFleet_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFleet_id})
+var sFleet_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFleet_created})
+var sFleet_lastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFleet_lastModified})
+var sFleet_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iFleetStatus, Members: &mFleetStatus, Type: smithy.ShapeTypeStructure, Ext: &eFleet_status})
+var sFleet_baseCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCapacity", ID: &i_FleetCapacity, Type: smithy.ShapeTypeInteger, Ext: &eFleet_baseCapacity})
+var sFleet_environmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentType", ID: &iEnvironmentType, Members: &mEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eFleet_environmentType})
+var sFleet_computeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeType", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eFleet_computeType})
+var sFleet_computeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeConfiguration", ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFleet_computeConfiguration})
+var sFleet_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfigurationOutput, Members: &mScalingConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eFleet_scalingConfiguration})
+var sFleet_overflowBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overflowBehavior", ID: &iFleetOverflowBehavior, Members: &mFleetOverflowBehavior, Type: smithy.ShapeTypeEnum, Ext: &eFleet_overflowBehavior})
+var sFleet_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eFleet_vpcConfig})
+var sFleet_proxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFleet_proxyConfiguration})
+var sFleet_imageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFleet_imageId})
+var sFleet_fleetServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetServiceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFleet_fleetServiceRole})
+var sFleet_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eFleet_tags})
+var s_FleetArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetArns, Members: &m_FleetArns, Type: smithy.ShapeTypeList, Ext: &e_FleetArns})
+var s_FleetArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_FleetArns_member})
+var s_FleetCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetCapacity, Type: smithy.ShapeTypeInteger, Ext: &e_FleetCapacity})
+var sFleetContextCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetContextCode, Members: &mFleetContextCode, Type: smithy.ShapeTypeEnum, Ext: &eFleetContextCode})
+var sFleetContextCode_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetContextCode_CREATE_FAILED})
+var sFleetContextCode_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetContextCode_UPDATE_FAILED})
+var sFleetContextCode_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetContextCode_ACTION_REQUIRED})
+var sFleetContextCode_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetContextCode_PENDING_DELETION})
+var sFleetContextCode_INSUFFICIENT_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetContextCode_INSUFFICIENT_CAPACITY})
+var s_FleetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetName, Type: smithy.ShapeTypeString, Ext: &e_FleetName})
+var s_FleetNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetNames, Members: &m_FleetNames, Type: smithy.ShapeTypeList, Ext: &e_FleetNames})
+var s_FleetNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_FleetNames_member})
+var sFleetOverflowBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetOverflowBehavior, Members: &mFleetOverflowBehavior, Type: smithy.ShapeTypeEnum, Ext: &eFleetOverflowBehavior})
+var sFleetOverflowBehavior_QUEUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetOverflowBehavior_QUEUE})
+var sFleetOverflowBehavior_ON_DEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetOverflowBehavior_ON_DEMAND})
+var sFleetProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetProxyRule, Members: &mFleetProxyRule, Type: smithy.ShapeTypeStructure, Ext: &eFleetProxyRule})
+var sFleetProxyRule_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFleetProxyRuleType, Members: &mFleetProxyRuleType, Type: smithy.ShapeTypeEnum, Ext: &eFleetProxyRule_type})
+var sFleetProxyRule_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &iFleetProxyRuleEffectType, Members: &mFleetProxyRuleEffectType, Type: smithy.ShapeTypeEnum, Ext: &eFleetProxyRule_effect})
+var sFleetProxyRule_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_FleetProxyRuleEntities, Members: &m_FleetProxyRuleEntities, Type: smithy.ShapeTypeList, Ext: &eFleetProxyRule_entities})
+var sFleetProxyRuleBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetProxyRuleBehavior, Members: &mFleetProxyRuleBehavior, Type: smithy.ShapeTypeEnum, Ext: &eFleetProxyRuleBehavior})
+var sFleetProxyRuleBehavior_ALLOW_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetProxyRuleBehavior_ALLOW_ALL})
+var sFleetProxyRuleBehavior_DENY_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetProxyRuleBehavior_DENY_ALL})
+var sFleetProxyRuleEffectType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetProxyRuleEffectType, Members: &mFleetProxyRuleEffectType, Type: smithy.ShapeTypeEnum, Ext: &eFleetProxyRuleEffectType})
+var sFleetProxyRuleEffectType_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetProxyRuleEffectType_ALLOW})
+var sFleetProxyRuleEffectType_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetProxyRuleEffectType_DENY})
+var s_FleetProxyRuleEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetProxyRuleEntities, Members: &m_FleetProxyRuleEntities, Type: smithy.ShapeTypeList, Ext: &e_FleetProxyRuleEntities})
+var s_FleetProxyRuleEntities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_FleetProxyRuleEntities_member})
+var s_FleetProxyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetProxyRules, Members: &m_FleetProxyRules, Type: smithy.ShapeTypeList, Ext: &e_FleetProxyRules})
+var s_FleetProxyRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFleetProxyRule, Members: &mFleetProxyRule, Type: smithy.ShapeTypeStructure, Ext: &e_FleetProxyRules_member})
+var sFleetProxyRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetProxyRuleType, Members: &mFleetProxyRuleType, Type: smithy.ShapeTypeEnum, Ext: &eFleetProxyRuleType})
+var sFleetProxyRuleType_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetProxyRuleType_DOMAIN})
+var sFleetProxyRuleType_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetProxyRuleType_IP})
+var s_Fleets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Fleets, Members: &m_Fleets, Type: smithy.ShapeTypeList, Ext: &e_Fleets})
+var s_Fleets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &e_Fleets_member})
+var s_FleetsAllowed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FleetsAllowed, Members: &m_FleetsAllowed, Type: smithy.ShapeTypeList, Ext: &e_FleetsAllowed})
+var s_FleetsAllowed_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_FleetsAllowed_member})
+var sFleetScalingMetricType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetScalingMetricType, Members: &mFleetScalingMetricType, Type: smithy.ShapeTypeEnum, Ext: &eFleetScalingMetricType})
+var sFleetScalingMetricType_FLEET_UTILIZATION_RATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLEET_UTILIZATION_RATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetScalingMetricType_FLEET_UTILIZATION_RATE})
+var sFleetScalingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetScalingType, Members: &mFleetScalingType, Type: smithy.ShapeTypeEnum, Ext: &eFleetScalingType})
+var sFleetScalingType_TARGET_TRACKING_SCALING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_TRACKING_SCALING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetScalingType_TARGET_TRACKING_SCALING})
+var sFleetSortByType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetSortByType, Members: &mFleetSortByType, Type: smithy.ShapeTypeEnum, Ext: &eFleetSortByType})
+var sFleetSortByType_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetSortByType_NAME})
+var sFleetSortByType_CREATED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetSortByType_CREATED_TIME})
+var sFleetSortByType_LAST_MODIFIED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetSortByType_LAST_MODIFIED_TIME})
+var sFleetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetStatus, Members: &mFleetStatus, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatus})
+var sFleetStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &iFleetStatusCode, Members: &mFleetStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eFleetStatus_statusCode})
+var sFleetStatus_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &iFleetContextCode, Members: &mFleetContextCode, Type: smithy.ShapeTypeEnum, Ext: &eFleetStatus_context})
+var sFleetStatus_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFleetStatus_message})
+var sFleetStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFleetStatusCode, Members: &mFleetStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eFleetStatusCode})
+var sFleetStatusCode_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_CREATING})
+var sFleetStatusCode_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_UPDATING})
+var sFleetStatusCode_ROTATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROTATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_ROTATING})
+var sFleetStatusCode_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_PENDING_DELETION})
+var sFleetStatusCode_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_DELETING})
+var sFleetStatusCode_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_CREATE_FAILED})
+var sFleetStatusCode_UPDATE_ROLLBACK_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ROLLBACK_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_UPDATE_ROLLBACK_FAILED})
+var sFleetStatusCode_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFleetStatusCode_ACTIVE})
+var s_GitCloneDepth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitCloneDepth, Type: smithy.ShapeTypeInteger, Ext: &e_GitCloneDepth})
+var sGitSubmodulesConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitSubmodulesConfig, Members: &mGitSubmodulesConfig, Type: smithy.ShapeTypeStructure, Ext: &eGitSubmodulesConfig})
+var sGitSubmodulesConfig_fetchSubmodules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fetchSubmodules", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGitSubmodulesConfig_fetchSubmodules})
+var sHostKernel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostKernel, Members: &mHostKernel, Type: smithy.ShapeTypeEnum, Ext: &eHostKernel})
+var sHostKernel_LINUX_KERNEL_4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX_KERNEL_4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHostKernel_LINUX_KERNEL_4})
+var sHostKernel_LINUX_KERNEL_6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX_KERNEL_6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHostKernel_LINUX_KERNEL_6})
+var sHostKernel_LINUX_KERNEL_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX_KERNEL_LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHostKernel_LINUX_KERNEL_LATEST})
+var s_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &e_Identifiers})
+var s_Identifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_Identifiers_member})
+var sImagePullCredentialsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImagePullCredentialsType, Members: &mImagePullCredentialsType, Type: smithy.ShapeTypeEnum, Ext: &eImagePullCredentialsType})
+var sImagePullCredentialsType_CODEBUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODEBUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImagePullCredentialsType_CODEBUILD})
+var sImagePullCredentialsType_SERVICE_ROLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_ROLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImagePullCredentialsType_SERVICE_ROLE})
+var s_ImageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageVersions, Members: &m_ImageVersions, Type: smithy.ShapeTypeList, Ext: &e_ImageVersions})
+var s_ImageVersions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ImageVersions_member})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidInputException})
+var sInvalidInputException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidInputException_message})
+var s_KeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyInput, Type: smithy.ShapeTypeString, Ext: &e_KeyInput})
+var sLanguageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageType, Members: &mLanguageType, Type: smithy.ShapeTypeEnum, Ext: &eLanguageType})
+var sLanguageType_JAVA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JAVA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_JAVA})
+var sLanguageType_PYTHON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYTHON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_PYTHON})
+var sLanguageType_NODE_JS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODE_JS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_NODE_JS})
+var sLanguageType_RUBY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUBY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_RUBY})
+var sLanguageType_GOLANG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOLANG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_GOLANG})
+var sLanguageType_DOCKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_DOCKER})
+var sLanguageType_ANDROID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANDROID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_ANDROID})
+var sLanguageType_DOTNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOTNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_DOTNET})
+var sLanguageType_BASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_BASE})
+var sLanguageType_PHP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageType_PHP})
+var sLogsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eLogsConfig})
+var sLogsConfig_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogsConfig, Members: &mCloudWatchLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eLogsConfig_cloudWatchLogs})
+var sLogsConfig_s3Logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Logs", ID: &iS3LogsConfig, Members: &mS3LogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eLogsConfig_s3Logs})
+var sLogsConfigStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsConfigStatusType, Members: &mLogsConfigStatusType, Type: smithy.ShapeTypeEnum, Ext: &eLogsConfigStatusType})
+var sLogsConfigStatusType_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogsConfigStatusType_ENABLED})
+var sLogsConfigStatusType_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogsConfigStatusType_DISABLED})
+var sLogsLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsLocation, Members: &mLogsLocation, Type: smithy.ShapeTypeStructure, Ext: &eLogsLocation})
+var sLogsLocation_groupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLogsLocation_groupName})
+var sLogsLocation_streamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLogsLocation_streamName})
+var sLogsLocation_deepLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deepLink", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLogsLocation_deepLink})
+var sLogsLocation_s3DeepLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3DeepLink", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLogsLocation_s3DeepLink})
+var sLogsLocation_cloudWatchLogsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLogsLocation_cloudWatchLogsArn})
+var sLogsLocation_s3LogsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3LogsArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLogsLocation_s3LogsArn})
+var sLogsLocation_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogsConfig, Members: &mCloudWatchLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eLogsLocation_cloudWatchLogs})
+var sLogsLocation_s3Logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Logs", ID: &iS3LogsConfig, Members: &mS3LogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eLogsLocation_s3Logs})
+var sMachineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineType, Members: &mMachineType, Type: smithy.ShapeTypeEnum, Ext: &eMachineType})
+var sMachineType_GENERAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMachineType_GENERAL})
+var sMachineType_NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NVME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMachineType_NVME})
+var sNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface})
+var sNetworkInterface_subnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eNetworkInterface_subnetId})
+var sNetworkInterface_networkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaceId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eNetworkInterface_networkInterfaceId})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_NonNegativeInt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNegativeInt, Type: smithy.ShapeTypeInteger, Ext: &e_NonNegativeInt})
+var sOAuthProviderException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuthProviderException, Members: &mOAuthProviderException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eOAuthProviderException})
+var sOAuthProviderException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOAuthProviderException_message})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &e_PageSize})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &e_Percentage})
+var sPhaseContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhaseContext, Members: &mPhaseContext, Type: smithy.ShapeTypeStructure, Ext: &ePhaseContext})
+var sPhaseContext_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePhaseContext_statusCode})
+var sPhaseContext_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePhaseContext_message})
+var s_PhaseContexts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhaseContexts, Members: &m_PhaseContexts, Type: smithy.ShapeTypeList, Ext: &e_PhaseContexts})
+var s_PhaseContexts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhaseContext, Members: &mPhaseContext, Type: smithy.ShapeTypeStructure, Ext: &e_PhaseContexts_member})
+var sPlatformType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformType, Members: &mPlatformType, Type: smithy.ShapeTypeEnum, Ext: &ePlatformType})
+var sPlatformType_DEBIAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEBIAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_DEBIAN})
+var sPlatformType_AMAZON_LINUX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_LINUX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_AMAZON_LINUX})
+var sPlatformType_UBUNTU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UBUNTU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_UBUNTU})
+var sPlatformType_WINDOWS_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformType_WINDOWS_SERVER})
+var sProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure, Ext: &eProject})
+var sProject_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ProjectName, Type: smithy.ShapeTypeString, Ext: &eProject_name})
+var sProject_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProject_arn})
+var sProject_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ProjectDescription, Type: smithy.ShapeTypeString, Ext: &eProject_description})
+var sProject_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &eProject_source})
+var sProject_secondarySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySources", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eProject_secondarySources})
+var sProject_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProject_sourceVersion})
+var sProject_secondarySourceVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourceVersions", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eProject_secondarySourceVersions})
+var sProject_artifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifacts", ID: &iProjectArtifacts, Members: &mProjectArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eProject_artifacts})
+var sProject_secondaryArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifacts", ID: &i_ProjectArtifactsList, Members: &m_ProjectArtifactsList, Type: smithy.ShapeTypeList, Ext: &eProject_secondaryArtifacts})
+var sProject_cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cache", ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eProject_cache})
+var sProject_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iProjectEnvironment, Members: &mProjectEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eProject_environment})
+var sProject_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eProject_serviceRole})
+var sProject_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_BuildTimeOut, Type: smithy.ShapeTypeInteger, Ext: &eProject_timeoutInMinutes})
+var sProject_queuedTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutes", ID: &i_TimeOut, Type: smithy.ShapeTypeInteger, Ext: &eProject_queuedTimeoutInMinutes})
+var sProject_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eProject_encryptionKey})
+var sProject_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eProject_tags})
+var sProject_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProject_created})
+var sProject_lastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProject_lastModified})
+var sProject_webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhook", ID: &iWebhook, Members: &mWebhook, Type: smithy.ShapeTypeStructure, Ext: &eProject_webhook})
+var sProject_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eProject_vpcConfig})
+var sProject_badge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badge", ID: &iProjectBadge, Members: &mProjectBadge, Type: smithy.ShapeTypeStructure, Ext: &eProject_badge})
+var sProject_logsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsConfig", ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eProject_logsConfig})
+var sProject_fileSystemLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemLocations", ID: &i_ProjectFileSystemLocations, Members: &m_ProjectFileSystemLocations, Type: smithy.ShapeTypeList, Ext: &eProject_fileSystemLocations})
+var sProject_buildBatchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchConfig", ID: &iProjectBuildBatchConfig, Members: &mProjectBuildBatchConfig, Type: smithy.ShapeTypeStructure, Ext: &eProject_buildBatchConfig})
+var sProject_concurrentBuildLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "concurrentBuildLimit", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eProject_concurrentBuildLimit})
+var sProject_projectVisibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectVisibility", ID: &iProjectVisibilityType, Members: &mProjectVisibilityType, Type: smithy.ShapeTypeEnum, Ext: &eProject_projectVisibility})
+var sProject_publicProjectAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publicProjectAlias", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eProject_publicProjectAlias})
+var sProject_resourceAccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceAccessRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eProject_resourceAccessRole})
+var sProject_autoRetryLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRetryLimit", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eProject_autoRetryLimit})
+var s_ProjectArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectArns, Members: &m_ProjectArns, Type: smithy.ShapeTypeList, Ext: &e_ProjectArns})
+var s_ProjectArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ProjectArns_member})
+var sProjectArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectArtifacts, Members: &mProjectArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eProjectArtifacts})
+var sProjectArtifacts_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iArtifactsType, Members: &mArtifactsType, Type: smithy.ShapeTypeEnum, Ext: &eProjectArtifacts_type})
+var sProjectArtifacts_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectArtifacts_location})
+var sProjectArtifacts_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectArtifacts_path})
+var sProjectArtifacts_namespaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaceType", ID: &iArtifactNamespace, Members: &mArtifactNamespace, Type: smithy.ShapeTypeEnum, Ext: &eProjectArtifacts_namespaceType})
+var sProjectArtifacts_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectArtifacts_name})
+var sProjectArtifacts_packaging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packaging", ID: &iArtifactPackaging, Members: &mArtifactPackaging, Type: smithy.ShapeTypeEnum, Ext: &eProjectArtifacts_packaging})
+var sProjectArtifacts_overrideArtifactName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideArtifactName", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProjectArtifacts_overrideArtifactName})
+var sProjectArtifacts_encryptionDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionDisabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProjectArtifacts_encryptionDisabled})
+var sProjectArtifacts_artifactIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectArtifacts_artifactIdentifier})
+var sProjectArtifacts_bucketOwnerAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwnerAccess", ID: &iBucketOwnerAccess, Members: &mBucketOwnerAccess, Type: smithy.ShapeTypeEnum, Ext: &eProjectArtifacts_bucketOwnerAccess})
+var s_ProjectArtifactsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectArtifactsList, Members: &m_ProjectArtifactsList, Type: smithy.ShapeTypeList, Ext: &e_ProjectArtifactsList})
+var s_ProjectArtifactsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProjectArtifacts, Members: &mProjectArtifacts, Type: smithy.ShapeTypeStructure, Ext: &e_ProjectArtifactsList_member})
+var sProjectBadge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectBadge, Members: &mProjectBadge, Type: smithy.ShapeTypeStructure, Ext: &eProjectBadge})
+var sProjectBadge_badgeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badgeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eProjectBadge_badgeEnabled})
+var sProjectBadge_badgeRequestUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badgeRequestUrl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectBadge_badgeRequestUrl})
+var sProjectBuildBatchConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectBuildBatchConfig, Members: &mProjectBuildBatchConfig, Type: smithy.ShapeTypeStructure, Ext: &eProjectBuildBatchConfig})
+var sProjectBuildBatchConfig_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eProjectBuildBatchConfig_serviceRole})
+var sProjectBuildBatchConfig_combineArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "combineArtifacts", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProjectBuildBatchConfig_combineArtifacts})
+var sProjectBuildBatchConfig_restrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restrictions", ID: &iBatchRestrictions, Members: &mBatchRestrictions, Type: smithy.ShapeTypeStructure, Ext: &eProjectBuildBatchConfig_restrictions})
+var sProjectBuildBatchConfig_timeoutInMins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMins", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eProjectBuildBatchConfig_timeoutInMins})
+var sProjectBuildBatchConfig_batchReportMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "batchReportMode", ID: &iBatchReportModeType, Members: &mBatchReportModeType, Type: smithy.ShapeTypeEnum, Ext: &eProjectBuildBatchConfig_batchReportMode})
+var sProjectCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eProjectCache})
+var sProjectCache_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCacheType, Members: &mCacheType, Type: smithy.ShapeTypeEnum, Ext: &eProjectCache_type})
+var sProjectCache_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectCache_location})
+var sProjectCache_modes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modes", ID: &i_ProjectCacheModes, Members: &m_ProjectCacheModes, Type: smithy.ShapeTypeList, Ext: &eProjectCache_modes})
+var sProjectCache_cacheNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheNamespace", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectCache_cacheNamespace})
+var s_ProjectCacheModes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectCacheModes, Members: &m_ProjectCacheModes, Type: smithy.ShapeTypeList, Ext: &e_ProjectCacheModes})
+var s_ProjectCacheModes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCacheMode, Members: &mCacheMode, Type: smithy.ShapeTypeEnum, Ext: &e_ProjectCacheModes_member})
+var s_ProjectDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectDescription, Type: smithy.ShapeTypeString, Ext: &e_ProjectDescription})
+var sProjectEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectEnvironment, Members: &mProjectEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eProjectEnvironment})
+var sProjectEnvironment_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEnvironmentType, Members: &mEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eProjectEnvironment_type})
+var sProjectEnvironment_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eProjectEnvironment_image})
+var sProjectEnvironment_computeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeType", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eProjectEnvironment_computeType})
+var sProjectEnvironment_computeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeConfiguration", ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProjectEnvironment_computeConfiguration})
+var sProjectEnvironment_fleet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleet", ID: &iProjectFleet, Members: &mProjectFleet, Type: smithy.ShapeTypeStructure, Ext: &eProjectEnvironment_fleet})
+var sProjectEnvironment_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList, Ext: &eProjectEnvironment_environmentVariables})
+var sProjectEnvironment_privilegedMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privilegedMode", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProjectEnvironment_privilegedMode})
+var sProjectEnvironment_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectEnvironment_certificate})
+var sProjectEnvironment_registryCredential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryCredential", ID: &iRegistryCredential, Members: &mRegistryCredential, Type: smithy.ShapeTypeStructure, Ext: &eProjectEnvironment_registryCredential})
+var sProjectEnvironment_imagePullCredentialsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePullCredentialsType", ID: &iImagePullCredentialsType, Members: &mImagePullCredentialsType, Type: smithy.ShapeTypeEnum, Ext: &eProjectEnvironment_imagePullCredentialsType})
+var sProjectEnvironment_dockerServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dockerServer", ID: &iDockerServer, Members: &mDockerServer, Type: smithy.ShapeTypeStructure, Ext: &eProjectEnvironment_dockerServer})
+var sProjectEnvironment_hostKernel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostKernel", ID: &iHostKernel, Members: &mHostKernel, Type: smithy.ShapeTypeEnum, Ext: &eProjectEnvironment_hostKernel})
+var sProjectFileSystemLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectFileSystemLocation, Members: &mProjectFileSystemLocation, Type: smithy.ShapeTypeStructure, Ext: &eProjectFileSystemLocation})
+var sProjectFileSystemLocation_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFileSystemType, Members: &mFileSystemType, Type: smithy.ShapeTypeEnum, Ext: &eProjectFileSystemLocation_type})
+var sProjectFileSystemLocation_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectFileSystemLocation_location})
+var sProjectFileSystemLocation_mountPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountPoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectFileSystemLocation_mountPoint})
+var sProjectFileSystemLocation_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectFileSystemLocation_identifier})
+var sProjectFileSystemLocation_mountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountOptions", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectFileSystemLocation_mountOptions})
+var s_ProjectFileSystemLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectFileSystemLocations, Members: &m_ProjectFileSystemLocations, Type: smithy.ShapeTypeList, Ext: &e_ProjectFileSystemLocations})
+var s_ProjectFileSystemLocations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProjectFileSystemLocation, Members: &mProjectFileSystemLocation, Type: smithy.ShapeTypeStructure, Ext: &e_ProjectFileSystemLocations_member})
+var sProjectFleet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectFleet, Members: &mProjectFleet, Type: smithy.ShapeTypeStructure, Ext: &eProjectFleet})
+var sProjectFleet_fleetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectFleet_fleetArn})
+var s_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectName, Type: smithy.ShapeTypeString, Ext: &e_ProjectName})
+var s_ProjectNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectNames, Members: &m_ProjectNames, Type: smithy.ShapeTypeList, Ext: &e_ProjectNames})
+var s_ProjectNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ProjectNames_member})
+var s_Projects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Projects, Members: &m_Projects, Type: smithy.ShapeTypeList, Ext: &e_Projects})
+var s_Projects_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure, Ext: &e_Projects_member})
+var s_ProjectSecondarySourceVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &e_ProjectSecondarySourceVersions})
+var s_ProjectSecondarySourceVersions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProjectSourceVersion, Members: &mProjectSourceVersion, Type: smithy.ShapeTypeStructure, Ext: &e_ProjectSecondarySourceVersions_member})
+var sProjectSortByType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectSortByType, Members: &mProjectSortByType, Type: smithy.ShapeTypeEnum, Ext: &eProjectSortByType})
+var sProjectSortByType_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProjectSortByType_NAME})
+var sProjectSortByType_CREATED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProjectSortByType_CREATED_TIME})
+var sProjectSortByType_LAST_MODIFIED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProjectSortByType_LAST_MODIFIED_TIME})
+var sProjectSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &eProjectSource})
+var sProjectSource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eProjectSource_type})
+var sProjectSource_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectSource_location})
+var sProjectSource_gitCloneDepth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitCloneDepth", ID: &i_GitCloneDepth, Type: smithy.ShapeTypeInteger, Ext: &eProjectSource_gitCloneDepth})
+var sProjectSource_gitSubmodulesConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitSubmodulesConfig", ID: &iGitSubmodulesConfig, Members: &mGitSubmodulesConfig, Type: smithy.ShapeTypeStructure, Ext: &eProjectSource_gitSubmodulesConfig})
+var sProjectSource_buildspec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildspec", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectSource_buildspec})
+var sProjectSource_auth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auth", ID: &iSourceAuth, Members: &mSourceAuth, Type: smithy.ShapeTypeStructure, Ext: &eProjectSource_auth})
+var sProjectSource_reportBuildStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportBuildStatus", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProjectSource_reportBuildStatus})
+var sProjectSource_buildStatusConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildStatusConfig", ID: &iBuildStatusConfig, Members: &mBuildStatusConfig, Type: smithy.ShapeTypeStructure, Ext: &eProjectSource_buildStatusConfig})
+var sProjectSource_insecureSsl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insecureSsl", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProjectSource_insecureSsl})
+var sProjectSource_sourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectSource_sourceIdentifier})
+var s_ProjectSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &e_ProjectSources})
+var s_ProjectSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &e_ProjectSources_member})
+var sProjectSourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectSourceVersion, Members: &mProjectSourceVersion, Type: smithy.ShapeTypeStructure, Ext: &eProjectSourceVersion})
+var sProjectSourceVersion_sourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectSourceVersion_sourceIdentifier})
+var sProjectSourceVersion_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eProjectSourceVersion_sourceVersion})
+var sProjectVisibilityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectVisibilityType, Members: &mProjectVisibilityType, Type: smithy.ShapeTypeEnum, Ext: &eProjectVisibilityType})
+var sProjectVisibilityType_PUBLIC_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_READ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProjectVisibilityType_PUBLIC_READ})
+var sProjectVisibilityType_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProjectVisibilityType_PRIVATE})
+var sProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProxyConfiguration})
+var sProxyConfiguration_defaultBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBehavior", ID: &iFleetProxyRuleBehavior, Members: &mFleetProxyRuleBehavior, Type: smithy.ShapeTypeEnum, Ext: &eProxyConfiguration_defaultBehavior})
+var sProxyConfiguration_orderedProxyRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orderedProxyRules", ID: &i_FleetProxyRules, Members: &m_FleetProxyRules, Type: smithy.ShapeTypeList, Ext: &eProxyConfiguration_orderedProxyRules})
+var sPullRequestBuildApproverRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestBuildApproverRole, Members: &mPullRequestBuildApproverRole, Type: smithy.ShapeTypeEnum, Ext: &ePullRequestBuildApproverRole})
+var sPullRequestBuildApproverRole_GITHUB_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_READ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITHUB_READ})
+var sPullRequestBuildApproverRole_GITHUB_TRIAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_TRIAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITHUB_TRIAGE})
+var sPullRequestBuildApproverRole_GITHUB_WRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_WRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITHUB_WRITE})
+var sPullRequestBuildApproverRole_GITHUB_MAINTAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_MAINTAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITHUB_MAINTAIN})
+var sPullRequestBuildApproverRole_GITHUB_ADMIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_ADMIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITHUB_ADMIN})
+var sPullRequestBuildApproverRole_GITLAB_GUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_GUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITLAB_GUEST})
+var sPullRequestBuildApproverRole_GITLAB_PLANNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_PLANNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITLAB_PLANNER})
+var sPullRequestBuildApproverRole_GITLAB_REPORTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_REPORTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITLAB_REPORTER})
+var sPullRequestBuildApproverRole_GITLAB_DEVELOPER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_DEVELOPER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITLAB_DEVELOPER})
+var sPullRequestBuildApproverRole_GITLAB_MAINTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_MAINTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITLAB_MAINTAINER})
+var sPullRequestBuildApproverRole_GITLAB_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_GITLAB_OWNER})
+var sPullRequestBuildApproverRole_BITBUCKET_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET_READ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_BITBUCKET_READ})
+var sPullRequestBuildApproverRole_BITBUCKET_WRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET_WRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_BITBUCKET_WRITE})
+var sPullRequestBuildApproverRole_BITBUCKET_ADMIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET_ADMIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildApproverRole_BITBUCKET_ADMIN})
+var s_PullRequestBuildApproverRoles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestBuildApproverRoles, Members: &m_PullRequestBuildApproverRoles, Type: smithy.ShapeTypeList, Ext: &e_PullRequestBuildApproverRoles})
+var s_PullRequestBuildApproverRoles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPullRequestBuildApproverRole, Members: &mPullRequestBuildApproverRole, Type: smithy.ShapeTypeEnum, Ext: &e_PullRequestBuildApproverRoles_member})
+var sPullRequestBuildCommentApproval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestBuildCommentApproval, Members: &mPullRequestBuildCommentApproval, Type: smithy.ShapeTypeEnum, Ext: &ePullRequestBuildCommentApproval})
+var sPullRequestBuildCommentApproval_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildCommentApproval_DISABLED})
+var sPullRequestBuildCommentApproval_ALL_PULL_REQUESTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_PULL_REQUESTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildCommentApproval_ALL_PULL_REQUESTS})
+var sPullRequestBuildCommentApproval_FORK_PULL_REQUESTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORK_PULL_REQUESTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildCommentApproval_FORK_PULL_REQUESTS})
+var sPullRequestBuildPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestBuildPolicy, Members: &mPullRequestBuildPolicy, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestBuildPolicy})
+var sPullRequestBuildPolicy_requiresCommentApproval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requiresCommentApproval", ID: &iPullRequestBuildCommentApproval, Members: &mPullRequestBuildCommentApproval, Type: smithy.ShapeTypeEnum, Ext: &ePullRequestBuildPolicy_requiresCommentApproval})
+var sPullRequestBuildPolicy_approverRoles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approverRoles", ID: &i_PullRequestBuildApproverRoles, Members: &m_PullRequestBuildApproverRoles, Type: smithy.ShapeTypeList, Ext: &ePullRequestBuildPolicy_approverRoles})
+var sRegistryCredential = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryCredential, Members: &mRegistryCredential, Type: smithy.ShapeTypeStructure, Ext: &eRegistryCredential})
+var sRegistryCredential_credential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credential", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eRegistryCredential_credential})
+var sRegistryCredential_credentialProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentialProvider", ID: &iCredentialProviderType, Members: &mCredentialProviderType, Type: smithy.ShapeTypeEnum, Ext: &eRegistryCredential_credentialProvider})
+var sReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReport, Members: &mReport, Type: smithy.ShapeTypeStructure, Ext: &eReport})
+var sReport_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eReport_arn})
+var sReport_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iReportType, Members: &mReportType, Type: smithy.ShapeTypeEnum, Ext: &eReport_type})
+var sReport_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReport_name})
+var sReport_reportGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroupArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eReport_reportGroupArn})
+var sReport_executionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReport_executionId})
+var sReport_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iReportStatusType, Members: &mReportStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReport_status})
+var sReport_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReport_created})
+var sReport_expired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expired", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReport_expired})
+var sReport_exportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportConfig", ID: &iReportExportConfig, Members: &mReportExportConfig, Type: smithy.ShapeTypeStructure, Ext: &eReport_exportConfig})
+var sReport_truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "truncated", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReport_truncated})
+var sReport_testSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testSummary", ID: &iTestReportSummary, Members: &mTestReportSummary, Type: smithy.ShapeTypeStructure, Ext: &eReport_testSummary})
+var sReport_codeCoverageSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeCoverageSummary", ID: &iCodeCoverageReportSummary, Members: &mCodeCoverageReportSummary, Type: smithy.ShapeTypeStructure, Ext: &eReport_codeCoverageSummary})
+var s_ReportArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportArns, Members: &m_ReportArns, Type: smithy.ShapeTypeList, Ext: &e_ReportArns})
+var s_ReportArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ReportArns_member})
+var sReportCodeCoverageSortByType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportCodeCoverageSortByType, Members: &mReportCodeCoverageSortByType, Type: smithy.ShapeTypeEnum, Ext: &eReportCodeCoverageSortByType})
+var sReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE_COVERAGE_PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE})
+var sReportCodeCoverageSortByType_FILE_PATH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_PATH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportCodeCoverageSortByType_FILE_PATH})
+var sReportExportConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportExportConfig, Members: &mReportExportConfig, Type: smithy.ShapeTypeStructure, Ext: &eReportExportConfig})
+var sReportExportConfig_exportConfigType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportConfigType", ID: &iReportExportConfigType, Members: &mReportExportConfigType, Type: smithy.ShapeTypeEnum, Ext: &eReportExportConfig_exportConfigType})
+var sReportExportConfig_s3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Destination", ID: &iS3ReportExportConfig, Members: &mS3ReportExportConfig, Type: smithy.ShapeTypeStructure, Ext: &eReportExportConfig_s3Destination})
+var sReportExportConfigType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportExportConfigType, Members: &mReportExportConfigType, Type: smithy.ShapeTypeEnum, Ext: &eReportExportConfigType})
+var sReportExportConfigType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportExportConfigType_S3})
+var sReportExportConfigType_NO_EXPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_EXPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportExportConfigType_NO_EXPORT})
+var sReportFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportFilter, Members: &mReportFilter, Type: smithy.ShapeTypeStructure, Ext: &eReportFilter})
+var sReportFilter_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iReportStatusType, Members: &mReportStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReportFilter_status})
+var sReportGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportGroup, Members: &mReportGroup, Type: smithy.ShapeTypeStructure, Ext: &eReportGroup})
+var sReportGroup_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eReportGroup_arn})
+var sReportGroup_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ReportGroupName, Type: smithy.ShapeTypeString, Ext: &eReportGroup_name})
+var sReportGroup_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iReportType, Members: &mReportType, Type: smithy.ShapeTypeEnum, Ext: &eReportGroup_type})
+var sReportGroup_exportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportConfig", ID: &iReportExportConfig, Members: &mReportExportConfig, Type: smithy.ShapeTypeStructure, Ext: &eReportGroup_exportConfig})
+var sReportGroup_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReportGroup_created})
+var sReportGroup_lastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReportGroup_lastModified})
+var sReportGroup_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eReportGroup_tags})
+var sReportGroup_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iReportGroupStatusType, Members: &mReportGroupStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReportGroup_status})
+var s_ReportGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportGroupArns, Members: &m_ReportGroupArns, Type: smithy.ShapeTypeList, Ext: &e_ReportGroupArns})
+var s_ReportGroupArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ReportGroupArns_member})
+var s_ReportGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportGroupName, Type: smithy.ShapeTypeString, Ext: &e_ReportGroupName})
+var s_ReportGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportGroups, Members: &m_ReportGroups, Type: smithy.ShapeTypeList, Ext: &e_ReportGroups})
+var s_ReportGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReportGroup, Members: &mReportGroup, Type: smithy.ShapeTypeStructure, Ext: &e_ReportGroups_member})
+var sReportGroupSortByType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportGroupSortByType, Members: &mReportGroupSortByType, Type: smithy.ShapeTypeEnum, Ext: &eReportGroupSortByType})
+var sReportGroupSortByType_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupSortByType_NAME})
+var sReportGroupSortByType_CREATED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupSortByType_CREATED_TIME})
+var sReportGroupSortByType_LAST_MODIFIED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupSortByType_LAST_MODIFIED_TIME})
+var sReportGroupStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportGroupStatusType, Members: &mReportGroupStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReportGroupStatusType})
+var sReportGroupStatusType_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupStatusType_ACTIVE})
+var sReportGroupStatusType_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupStatusType_DELETING})
+var sReportGroupTrendFieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportGroupTrendFieldType, Members: &mReportGroupTrendFieldType, Type: smithy.ShapeTypeEnum, Ext: &eReportGroupTrendFieldType})
+var sReportGroupTrendFieldType_PASS_RATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS_RATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_PASS_RATE})
+var sReportGroupTrendFieldType_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_DURATION})
+var sReportGroupTrendFieldType_TOTAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_TOTAL})
+var sReportGroupTrendFieldType_LINE_COVERAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE_COVERAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_LINE_COVERAGE})
+var sReportGroupTrendFieldType_LINES_COVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINES_COVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_LINES_COVERED})
+var sReportGroupTrendFieldType_LINES_MISSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINES_MISSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_LINES_MISSED})
+var sReportGroupTrendFieldType_BRANCH_COVERAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRANCH_COVERAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_BRANCH_COVERAGE})
+var sReportGroupTrendFieldType_BRANCHES_COVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRANCHES_COVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_BRANCHES_COVERED})
+var sReportGroupTrendFieldType_BRANCHES_MISSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRANCHES_MISSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendFieldType_BRANCHES_MISSED})
+var s_ReportGroupTrendRawDataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportGroupTrendRawDataList, Members: &m_ReportGroupTrendRawDataList, Type: smithy.ShapeTypeList, Ext: &e_ReportGroupTrendRawDataList})
+var s_ReportGroupTrendRawDataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReportWithRawData, Members: &mReportWithRawData, Type: smithy.ShapeTypeStructure, Ext: &e_ReportGroupTrendRawDataList_member})
+var sReportGroupTrendStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportGroupTrendStats, Members: &mReportGroupTrendStats, Type: smithy.ShapeTypeStructure, Ext: &eReportGroupTrendStats})
+var sReportGroupTrendStats_average = smithy.NewStaticSchema(smithy.StaticSchema{Member: "average", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReportGroupTrendStats_average})
+var sReportGroupTrendStats_max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "max", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReportGroupTrendStats_max})
+var sReportGroupTrendStats_min = smithy.NewStaticSchema(smithy.StaticSchema{Member: "min", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReportGroupTrendStats_min})
+var sReportPackagingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportPackagingType, Members: &mReportPackagingType, Type: smithy.ShapeTypeEnum, Ext: &eReportPackagingType})
+var sReportPackagingType_ZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportPackagingType_ZIP})
+var sReportPackagingType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportPackagingType_NONE})
+var s_Reports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reports, Members: &m_Reports, Type: smithy.ShapeTypeList, Ext: &e_Reports})
+var s_Reports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReport, Members: &mReport, Type: smithy.ShapeTypeStructure, Ext: &e_Reports_member})
+var s_ReportStatusCounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportStatusCounts, Members: &m_ReportStatusCounts, Type: smithy.ShapeTypeMap, Ext: &e_ReportStatusCounts})
+var s_ReportStatusCounts_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ReportStatusCounts_key})
+var s_ReportStatusCounts_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &e_ReportStatusCounts_value})
+var sReportStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportStatusType, Members: &mReportStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReportStatusType})
+var sReportStatusType_GENERATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatusType_GENERATING})
+var sReportStatusType_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatusType_SUCCEEDED})
+var sReportStatusType_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatusType_FAILED})
+var sReportStatusType_INCOMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatusType_INCOMPLETE})
+var sReportStatusType_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatusType_DELETING})
+var sReportType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportType, Members: &mReportType, Type: smithy.ShapeTypeEnum, Ext: &eReportType})
+var sReportType_TEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportType_TEST})
+var sReportType_CODE_COVERAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_COVERAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportType_CODE_COVERAGE})
+var sReportWithRawData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportWithRawData, Members: &mReportWithRawData, Type: smithy.ShapeTypeStructure, Ext: &eReportWithRawData})
+var sReportWithRawData_reportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eReportWithRawData_reportArn})
+var sReportWithRawData_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReportWithRawData_data})
+var sResolvedArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolvedArtifact, Members: &mResolvedArtifact, Type: smithy.ShapeTypeStructure, Ext: &eResolvedArtifact})
+var sResolvedArtifact_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iArtifactsType, Members: &mArtifactsType, Type: smithy.ShapeTypeEnum, Ext: &eResolvedArtifact_type})
+var sResolvedArtifact_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResolvedArtifact_location})
+var sResolvedArtifact_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResolvedArtifact_identifier})
+var s_ResolvedSecondaryArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedSecondaryArtifacts, Members: &m_ResolvedSecondaryArtifacts, Type: smithy.ShapeTypeList, Ext: &e_ResolvedSecondaryArtifacts})
+var s_ResolvedSecondaryArtifacts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolvedArtifact, Members: &mResolvedArtifact, Type: smithy.ShapeTypeStructure, Ext: &e_ResolvedSecondaryArtifacts_member})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sRetryBuildBatchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryBuildBatchType, Members: &mRetryBuildBatchType, Type: smithy.ShapeTypeEnum, Ext: &eRetryBuildBatchType})
+var sRetryBuildBatchType_RETRY_ALL_BUILDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRY_ALL_BUILDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildBatchType_RETRY_ALL_BUILDS})
+var sRetryBuildBatchType_RETRY_FAILED_BUILDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRY_FAILED_BUILDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildBatchType_RETRY_FAILED_BUILDS})
+var sS3LogsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LogsConfig, Members: &mS3LogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eS3LogsConfig})
+var sS3LogsConfig_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLogsConfigStatusType, Members: &mLogsConfigStatusType, Type: smithy.ShapeTypeEnum, Ext: &eS3LogsConfig_status})
+var sS3LogsConfig_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eS3LogsConfig_location})
+var sS3LogsConfig_encryptionDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionDisabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eS3LogsConfig_encryptionDisabled})
+var sS3LogsConfig_bucketOwnerAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwnerAccess", ID: &iBucketOwnerAccess, Members: &mBucketOwnerAccess, Type: smithy.ShapeTypeEnum, Ext: &eS3LogsConfig_bucketOwnerAccess})
+var sS3ReportExportConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ReportExportConfig, Members: &mS3ReportExportConfig, Type: smithy.ShapeTypeStructure, Ext: &eS3ReportExportConfig})
+var sS3ReportExportConfig_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eS3ReportExportConfig_bucket})
+var sS3ReportExportConfig_bucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwner", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eS3ReportExportConfig_bucketOwner})
+var sS3ReportExportConfig_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eS3ReportExportConfig_path})
+var sS3ReportExportConfig_packaging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packaging", ID: &iReportPackagingType, Members: &mReportPackagingType, Type: smithy.ShapeTypeEnum, Ext: &eS3ReportExportConfig_packaging})
+var sS3ReportExportConfig_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eS3ReportExportConfig_encryptionKey})
+var sS3ReportExportConfig_encryptionDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionDisabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eS3ReportExportConfig_encryptionDisabled})
+var sSandbox = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSandbox, Members: &mSandbox, Type: smithy.ShapeTypeStructure, Ext: &eSandbox})
+var sSandbox_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandbox_id})
+var sSandbox_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandbox_arn})
+var sSandbox_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandbox_projectName})
+var sSandbox_requestTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSandbox_requestTime})
+var sSandbox_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSandbox_startTime})
+var sSandbox_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSandbox_endTime})
+var sSandbox_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSandbox_status})
+var sSandbox_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &eSandbox_source})
+var sSandbox_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandbox_sourceVersion})
+var sSandbox_secondarySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySources", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eSandbox_secondarySources})
+var sSandbox_secondarySourceVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourceVersions", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eSandbox_secondarySourceVersions})
+var sSandbox_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iProjectEnvironment, Members: &mProjectEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eSandbox_environment})
+var sSandbox_fileSystemLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemLocations", ID: &i_ProjectFileSystemLocations, Members: &m_ProjectFileSystemLocations, Type: smithy.ShapeTypeList, Ext: &eSandbox_fileSystemLocations})
+var sSandbox_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eSandbox_timeoutInMinutes})
+var sSandbox_queuedTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutes", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eSandbox_queuedTimeoutInMinutes})
+var sSandbox_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eSandbox_vpcConfig})
+var sSandbox_logConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfig", ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eSandbox_logConfig})
+var sSandbox_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandbox_encryptionKey})
+var sSandbox_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandbox_serviceRole})
+var sSandbox_currentSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentSession", ID: &iSandboxSession, Members: &mSandboxSession, Type: smithy.ShapeTypeStructure, Ext: &eSandbox_currentSession})
+var s_Sandboxes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sandboxes, Members: &m_Sandboxes, Type: smithy.ShapeTypeList, Ext: &e_Sandboxes})
+var s_Sandboxes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSandbox, Members: &mSandbox, Type: smithy.ShapeTypeStructure, Ext: &e_Sandboxes_member})
+var s_SandboxIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SandboxIds, Members: &m_SandboxIds, Type: smithy.ShapeTypeList, Ext: &e_SandboxIds})
+var s_SandboxIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_SandboxIds_member})
+var sSandboxSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSandboxSession, Members: &mSandboxSession, Type: smithy.ShapeTypeStructure, Ext: &eSandboxSession})
+var sSandboxSession_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandboxSession_id})
+var sSandboxSession_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSandboxSession_status})
+var sSandboxSession_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSandboxSession_startTime})
+var sSandboxSession_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSandboxSession_endTime})
+var sSandboxSession_currentPhase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentPhase", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSandboxSession_currentPhase})
+var sSandboxSession_phases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phases", ID: &i_SandboxSessionPhases, Members: &m_SandboxSessionPhases, Type: smithy.ShapeTypeList, Ext: &eSandboxSession_phases})
+var sSandboxSession_resolvedSourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedSourceVersion", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSandboxSession_resolvedSourceVersion})
+var sSandboxSession_logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logs", ID: &iLogsLocation, Members: &mLogsLocation, Type: smithy.ShapeTypeStructure, Ext: &eSandboxSession_logs})
+var sSandboxSession_networkInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterface", ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &eSandboxSession_networkInterface})
+var sSandboxSessionPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSandboxSessionPhase, Members: &mSandboxSessionPhase, Type: smithy.ShapeTypeStructure, Ext: &eSandboxSessionPhase})
+var sSandboxSessionPhase_phaseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phaseType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSandboxSessionPhase_phaseType})
+var sSandboxSessionPhase_phaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phaseStatus", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eSandboxSessionPhase_phaseStatus})
+var sSandboxSessionPhase_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSandboxSessionPhase_startTime})
+var sSandboxSessionPhase_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSandboxSessionPhase_endTime})
+var sSandboxSessionPhase_durationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationInSeconds", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eSandboxSessionPhase_durationInSeconds})
+var sSandboxSessionPhase_contexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contexts", ID: &i_PhaseContexts, Members: &m_PhaseContexts, Type: smithy.ShapeTypeList, Ext: &eSandboxSessionPhase_contexts})
+var s_SandboxSessionPhases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SandboxSessionPhases, Members: &m_SandboxSessionPhases, Type: smithy.ShapeTypeList, Ext: &e_SandboxSessionPhases})
+var s_SandboxSessionPhases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSandboxSessionPhase, Members: &mSandboxSessionPhase, Type: smithy.ShapeTypeStructure, Ext: &e_SandboxSessionPhases_member})
+var sScalingConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingConfigurationInput, Members: &mScalingConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eScalingConfigurationInput})
+var sScalingConfigurationInput_scalingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingType", ID: &iFleetScalingType, Members: &mFleetScalingType, Type: smithy.ShapeTypeEnum, Ext: &eScalingConfigurationInput_scalingType})
+var sScalingConfigurationInput_targetTrackingScalingConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetTrackingScalingConfigs", ID: &i_TargetTrackingScalingConfigurations, Members: &m_TargetTrackingScalingConfigurations, Type: smithy.ShapeTypeList, Ext: &eScalingConfigurationInput_targetTrackingScalingConfigs})
+var sScalingConfigurationInput_maxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxCapacity", ID: &i_FleetCapacity, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfigurationInput_maxCapacity})
+var sScalingConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingConfigurationOutput, Members: &mScalingConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eScalingConfigurationOutput})
+var sScalingConfigurationOutput_scalingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingType", ID: &iFleetScalingType, Members: &mFleetScalingType, Type: smithy.ShapeTypeEnum, Ext: &eScalingConfigurationOutput_scalingType})
+var sScalingConfigurationOutput_targetTrackingScalingConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetTrackingScalingConfigs", ID: &i_TargetTrackingScalingConfigurations, Members: &m_TargetTrackingScalingConfigurations, Type: smithy.ShapeTypeList, Ext: &eScalingConfigurationOutput_targetTrackingScalingConfigs})
+var sScalingConfigurationOutput_maxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxCapacity", ID: &i_FleetCapacity, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfigurationOutput_maxCapacity})
+var sScalingConfigurationOutput_desiredCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desiredCapacity", ID: &i_FleetCapacity, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfigurationOutput_desiredCapacity})
+var sScopeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScopeConfiguration, Members: &mScopeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScopeConfiguration})
+var sScopeConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eScopeConfiguration_name})
+var sScopeConfiguration_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eScopeConfiguration_domain})
+var sScopeConfiguration_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &iWebhookScopeType, Members: &mWebhookScopeType, Type: smithy.ShapeTypeEnum, Ext: &eScopeConfiguration_scope})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIds})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIds_member})
+var s_SensitiveNonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveNonEmptyString, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SensitiveNonEmptyString})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var sServerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerType, Members: &mServerType, Type: smithy.ShapeTypeEnum, Ext: &eServerType})
+var sServerType_GITHUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServerType_GITHUB})
+var sServerType_BITBUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServerType_BITBUCKET})
+var sServerType_GITHUB_ENTERPRISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_ENTERPRISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServerType_GITHUB_ENTERPRISE})
+var sServerType_GITLAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServerType_GITLAB})
+var sServerType_GITLAB_SELF_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_SELF_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServerType_GITLAB_SELF_MANAGED})
+var sSharedResourceSortByType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedResourceSortByType, Members: &mSharedResourceSortByType, Type: smithy.ShapeTypeEnum, Ext: &eSharedResourceSortByType})
+var sSharedResourceSortByType_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceSortByType_ARN})
+var sSharedResourceSortByType_MODIFIED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFIED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSharedResourceSortByType_MODIFIED_TIME})
+var sSortOrderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eSortOrderType})
+var sSortOrderType_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrderType_ASCENDING})
+var sSortOrderType_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrderType_DESCENDING})
+var sSourceAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceAuth, Members: &mSourceAuth, Type: smithy.ShapeTypeStructure, Ext: &eSourceAuth})
+var sSourceAuth_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSourceAuthType, Members: &mSourceAuthType, Type: smithy.ShapeTypeEnum, Ext: &eSourceAuth_type})
+var sSourceAuth_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceAuth_resource})
+var sSourceAuthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceAuthType, Members: &mSourceAuthType, Type: smithy.ShapeTypeEnum, Ext: &eSourceAuthType})
+var sSourceAuthType_OAUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceAuthType_OAUTH})
+var sSourceAuthType_CODECONNECTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODECONNECTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceAuthType_CODECONNECTIONS})
+var sSourceAuthType_SECRETS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceAuthType_SECRETS_MANAGER})
+var sSourceCredentialsInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCredentialsInfo, Members: &mSourceCredentialsInfo, Type: smithy.ShapeTypeStructure, Ext: &eSourceCredentialsInfo})
+var sSourceCredentialsInfo_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSourceCredentialsInfo_arn})
+var sSourceCredentialsInfo_serverType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverType", ID: &iServerType, Members: &mServerType, Type: smithy.ShapeTypeEnum, Ext: &eSourceCredentialsInfo_serverType})
+var sSourceCredentialsInfo_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eSourceCredentialsInfo_authType})
+var sSourceCredentialsInfo_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceCredentialsInfo_resource})
+var s_SourceCredentialsInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceCredentialsInfos, Members: &m_SourceCredentialsInfos, Type: smithy.ShapeTypeList, Ext: &e_SourceCredentialsInfos})
+var s_SourceCredentialsInfos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceCredentialsInfo, Members: &mSourceCredentialsInfo, Type: smithy.ShapeTypeStructure, Ext: &e_SourceCredentialsInfos_member})
+var sSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eSourceType})
+var sSourceType_CODECOMMIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODECOMMIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_CODECOMMIT})
+var sSourceType_CODEPIPELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODEPIPELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_CODEPIPELINE})
+var sSourceType_GITHUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_GITHUB})
+var sSourceType_GITLAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_GITLAB})
+var sSourceType_GITLAB_SELF_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_SELF_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_GITLAB_SELF_MANAGED})
+var sSourceType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_S3})
+var sSourceType_BITBUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_BITBUCKET})
+var sSourceType_GITHUB_ENTERPRISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_ENTERPRISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_GITHUB_ENTERPRISE})
+var sSourceType_NO_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_NO_SOURCE})
+var sSSMSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSMSession, Members: &mSSMSession, Type: smithy.ShapeTypeStructure, Ext: &eSSMSession})
+var sSSMSession_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSSMSession_sessionId})
+var sSSMSession_tokenValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSSMSession_tokenValue})
+var sSSMSession_streamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamUrl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSSMSession_streamUrl})
+var sStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eStatusType})
+var sStatusType_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_SUCCEEDED})
+var sStatusType_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_FAILED})
+var sStatusType_FAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_FAULT})
+var sStatusType_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_TIMED_OUT})
+var sStatusType_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_IN_PROGRESS})
+var sStatusType_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_STOPPED})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &e_Subnets})
+var s_Subnets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_Subnets_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_KeyInput, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ValueInput, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTargetTrackingScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTrackingScalingConfiguration, Members: &mTargetTrackingScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTargetTrackingScalingConfiguration})
+var sTargetTrackingScalingConfiguration_metricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricType", ID: &iFleetScalingMetricType, Members: &mFleetScalingMetricType, Type: smithy.ShapeTypeEnum, Ext: &eTargetTrackingScalingConfiguration_metricType})
+var sTargetTrackingScalingConfiguration_targetValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetValue", ID: &i_WrapperDouble, Type: smithy.ShapeTypeDouble, Ext: &eTargetTrackingScalingConfiguration_targetValue})
+var s_TargetTrackingScalingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingScalingConfigurations, Members: &m_TargetTrackingScalingConfigurations, Type: smithy.ShapeTypeList, Ext: &e_TargetTrackingScalingConfigurations})
+var s_TargetTrackingScalingConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetTrackingScalingConfiguration, Members: &mTargetTrackingScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_TargetTrackingScalingConfigurations_member})
+var sTestCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestCase, Members: &mTestCase, Type: smithy.ShapeTypeStructure, Ext: &eTestCase})
+var sTestCase_reportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eTestCase_reportArn})
+var sTestCase_testRawDataPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testRawDataPath", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCase_testRawDataPath})
+var sTestCase_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCase_prefix})
+var sTestCase_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCase_name})
+var sTestCase_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCase_status})
+var sTestCase_durationInNanoSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationInNanoSeconds", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eTestCase_durationInNanoSeconds})
+var sTestCase_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCase_message})
+var sTestCase_expired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expired", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTestCase_expired})
+var sTestCase_testSuiteName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testSuiteName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCase_testSuiteName})
+var sTestCaseFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestCaseFilter, Members: &mTestCaseFilter, Type: smithy.ShapeTypeStructure, Ext: &eTestCaseFilter})
+var sTestCaseFilter_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCaseFilter_status})
+var sTestCaseFilter_keyword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyword", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTestCaseFilter_keyword})
+var s_TestCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestCases, Members: &m_TestCases, Type: smithy.ShapeTypeList, Ext: &e_TestCases})
+var s_TestCases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTestCase, Members: &mTestCase, Type: smithy.ShapeTypeStructure, Ext: &e_TestCases_member})
+var sTestReportSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestReportSummary, Members: &mTestReportSummary, Type: smithy.ShapeTypeStructure, Ext: &eTestReportSummary})
+var sTestReportSummary_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eTestReportSummary_total})
+var sTestReportSummary_statusCounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCounts", ID: &i_ReportStatusCounts, Members: &m_ReportStatusCounts, Type: smithy.ShapeTypeMap, Ext: &eTestReportSummary_statusCounts})
+var sTestReportSummary_durationInNanoSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationInNanoSeconds", ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &eTestReportSummary_durationInNanoSeconds})
+var s_TimeOut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeOut, Type: smithy.ShapeTypeInteger, Ext: &e_TimeOut})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_ValueInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueInput, Type: smithy.ShapeTypeString, Ext: &e_ValueInput})
+var sVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfig})
+var sVpcConfig_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eVpcConfig_vpcId})
+var sVpcConfig_subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eVpcConfig_subnets})
+var sVpcConfig_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &eVpcConfig_securityGroupIds})
+var sWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhook, Members: &mWebhook, Type: smithy.ShapeTypeStructure, Ext: &eWebhook})
+var sWebhook_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eWebhook_url})
+var sWebhook_payloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payloadUrl", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eWebhook_payloadUrl})
+var sWebhook_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eWebhook_secret})
+var sWebhook_branchFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchFilter", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eWebhook_branchFilter})
+var sWebhook_filterGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterGroups", ID: &i_FilterGroups, Members: &m_FilterGroups, Type: smithy.ShapeTypeList, Ext: &eWebhook_filterGroups})
+var sWebhook_buildType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildType", ID: &iWebhookBuildType, Members: &mWebhookBuildType, Type: smithy.ShapeTypeEnum, Ext: &eWebhook_buildType})
+var sWebhook_manualCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manualCreation", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eWebhook_manualCreation})
+var sWebhook_lastModifiedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedSecret", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWebhook_lastModifiedSecret})
+var sWebhook_scopeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeConfiguration", ID: &iScopeConfiguration, Members: &mScopeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWebhook_scopeConfiguration})
+var sWebhook_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWebhookStatus, Members: &mWebhookStatus, Type: smithy.ShapeTypeEnum, Ext: &eWebhook_status})
+var sWebhook_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eWebhook_statusMessage})
+var sWebhook_pullRequestBuildPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestBuildPolicy", ID: &iPullRequestBuildPolicy, Members: &mPullRequestBuildPolicy, Type: smithy.ShapeTypeStructure, Ext: &eWebhook_pullRequestBuildPolicy})
+var sWebhookBuildType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookBuildType, Members: &mWebhookBuildType, Type: smithy.ShapeTypeEnum, Ext: &eWebhookBuildType})
+var sWebhookBuildType_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookBuildType_BUILD})
+var sWebhookBuildType_BUILD_BATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_BATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookBuildType_BUILD_BATCH})
+var sWebhookBuildType_RUNNER_BUILDKITE_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNER_BUILDKITE_BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookBuildType_RUNNER_BUILDKITE_BUILD})
+var sWebhookFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookFilter, Members: &mWebhookFilter, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilter})
+var sWebhookFilter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iWebhookFilterType, Members: &mWebhookFilterType, Type: smithy.ShapeTypeEnum, Ext: &eWebhookFilter_type})
+var sWebhookFilter_pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pattern", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eWebhookFilter_pattern})
+var sWebhookFilter_excludeMatchedPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludeMatchedPattern", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eWebhookFilter_excludeMatchedPattern})
+var sWebhookFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookFilterType, Members: &mWebhookFilterType, Type: smithy.ShapeTypeEnum, Ext: &eWebhookFilterType})
+var sWebhookFilterType_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_EVENT})
+var sWebhookFilterType_BASE_REF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASE_REF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_BASE_REF})
+var sWebhookFilterType_HEAD_REF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEAD_REF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_HEAD_REF})
+var sWebhookFilterType_ACTOR_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTOR_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_ACTOR_ACCOUNT_ID})
+var sWebhookFilterType_FILE_PATH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_PATH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_FILE_PATH})
+var sWebhookFilterType_COMMIT_MESSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMIT_MESSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_COMMIT_MESSAGE})
+var sWebhookFilterType_WORKFLOW_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKFLOW_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_WORKFLOW_NAME})
+var sWebhookFilterType_TAG_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_TAG_NAME})
+var sWebhookFilterType_RELEASE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELEASE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_RELEASE_NAME})
+var sWebhookFilterType_REPOSITORY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_REPOSITORY_NAME})
+var sWebhookFilterType_ORGANIZATION_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORGANIZATION_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterType_ORGANIZATION_NAME})
+var sWebhookScopeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookScopeType, Members: &mWebhookScopeType, Type: smithy.ShapeTypeEnum, Ext: &eWebhookScopeType})
+var sWebhookScopeType_GITHUB_ORGANIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_ORGANIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookScopeType_GITHUB_ORGANIZATION})
+var sWebhookScopeType_GITHUB_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookScopeType_GITHUB_GLOBAL})
+var sWebhookScopeType_GITLAB_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookScopeType_GITLAB_GROUP})
+var sWebhookStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookStatus, Members: &mWebhookStatus, Type: smithy.ShapeTypeEnum, Ext: &eWebhookStatus})
+var sWebhookStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookStatus_CREATING})
+var sWebhookStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookStatus_CREATE_FAILED})
+var sWebhookStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookStatus_ACTIVE})
+var sWebhookStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookStatus_DELETING})
+var s_WrapperBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_WrapperBoolean})
+var s_WrapperDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WrapperDouble, Type: smithy.ShapeTypeDouble, Ext: &e_WrapperDouble})
+var s_WrapperInt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &e_WrapperInt})
+var s_WrapperLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WrapperLong, Type: smithy.ShapeTypeLong, Ext: &e_WrapperLong})
+var sBatchDeleteBuildsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteBuildsInput, Members: &mBatchDeleteBuildsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteBuildsInput})
+var sBatchDeleteBuildsInput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteBuildsInput_ids})
+var sBatchDeleteBuildsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteBuildsOutput, Members: &mBatchDeleteBuildsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteBuildsOutput})
+var sBatchDeleteBuildsOutput_buildsDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildsDeleted", ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteBuildsOutput_buildsDeleted})
+var sBatchDeleteBuildsOutput_buildsNotDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildsNotDeleted", ID: &i_BuildsNotDeleted, Members: &m_BuildsNotDeleted, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteBuildsOutput_buildsNotDeleted})
+var sBatchGetBuildBatchesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetBuildBatchesInput, Members: &mBatchGetBuildBatchesInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetBuildBatchesInput})
+var sBatchGetBuildBatchesInput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_BuildBatchIds, Members: &m_BuildBatchIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetBuildBatchesInput_ids})
+var sBatchGetBuildBatchesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetBuildBatchesOutput, Members: &mBatchGetBuildBatchesOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetBuildBatchesOutput})
+var sBatchGetBuildBatchesOutput_buildBatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatches", ID: &i_BuildBatches, Members: &m_BuildBatches, Type: smithy.ShapeTypeList, Ext: &eBatchGetBuildBatchesOutput_buildBatches})
+var sBatchGetBuildBatchesOutput_buildBatchesNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchesNotFound", ID: &i_BuildBatchIds, Members: &m_BuildBatchIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetBuildBatchesOutput_buildBatchesNotFound})
+var sBatchGetBuildsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetBuildsInput, Members: &mBatchGetBuildsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetBuildsInput})
+var sBatchGetBuildsInput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetBuildsInput_ids})
+var sBatchGetBuildsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetBuildsOutput, Members: &mBatchGetBuildsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetBuildsOutput})
+var sBatchGetBuildsOutput_builds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "builds", ID: &i_Builds, Members: &m_Builds, Type: smithy.ShapeTypeList, Ext: &eBatchGetBuildsOutput_builds})
+var sBatchGetBuildsOutput_buildsNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildsNotFound", ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetBuildsOutput_buildsNotFound})
+var sBatchGetCommandExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommandExecutionsInput, Members: &mBatchGetCommandExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetCommandExecutionsInput})
+var sBatchGetCommandExecutionsInput_sandboxId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBatchGetCommandExecutionsInput_sandboxId})
+var sBatchGetCommandExecutionsInput_commandExecutionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commandExecutionIds", ID: &i_CommandExecutionIds, Members: &m_CommandExecutionIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetCommandExecutionsInput_commandExecutionIds})
+var sBatchGetCommandExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommandExecutionsOutput, Members: &mBatchGetCommandExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetCommandExecutionsOutput})
+var sBatchGetCommandExecutionsOutput_commandExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commandExecutions", ID: &i_CommandExecutions, Members: &m_CommandExecutions, Type: smithy.ShapeTypeList, Ext: &eBatchGetCommandExecutionsOutput_commandExecutions})
+var sBatchGetCommandExecutionsOutput_commandExecutionsNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commandExecutionsNotFound", ID: &i_CommandExecutionIds, Members: &m_CommandExecutionIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetCommandExecutionsOutput_commandExecutionsNotFound})
+var sBatchGetFleetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFleetsInput, Members: &mBatchGetFleetsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetFleetsInput})
+var sBatchGetFleetsInput_names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "names", ID: &i_FleetNames, Members: &m_FleetNames, Type: smithy.ShapeTypeList, Ext: &eBatchGetFleetsInput_names})
+var sBatchGetFleetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFleetsOutput, Members: &mBatchGetFleetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetFleetsOutput})
+var sBatchGetFleetsOutput_fleets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleets", ID: &i_Fleets, Members: &m_Fleets, Type: smithy.ShapeTypeList, Ext: &eBatchGetFleetsOutput_fleets})
+var sBatchGetFleetsOutput_fleetsNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetsNotFound", ID: &i_FleetNames, Members: &m_FleetNames, Type: smithy.ShapeTypeList, Ext: &eBatchGetFleetsOutput_fleetsNotFound})
+var sBatchGetProjectsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetProjectsInput, Members: &mBatchGetProjectsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetProjectsInput})
+var sBatchGetProjectsInput_names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "names", ID: &i_ProjectNames, Members: &m_ProjectNames, Type: smithy.ShapeTypeList, Ext: &eBatchGetProjectsInput_names})
+var sBatchGetProjectsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetProjectsOutput, Members: &mBatchGetProjectsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetProjectsOutput})
+var sBatchGetProjectsOutput_projects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projects", ID: &i_Projects, Members: &m_Projects, Type: smithy.ShapeTypeList, Ext: &eBatchGetProjectsOutput_projects})
+var sBatchGetProjectsOutput_projectsNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectsNotFound", ID: &i_ProjectNames, Members: &m_ProjectNames, Type: smithy.ShapeTypeList, Ext: &eBatchGetProjectsOutput_projectsNotFound})
+var sBatchGetReportGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetReportGroupsInput, Members: &mBatchGetReportGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetReportGroupsInput})
+var sBatchGetReportGroupsInput_reportGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroupArns", ID: &i_ReportGroupArns, Members: &m_ReportGroupArns, Type: smithy.ShapeTypeList, Ext: &eBatchGetReportGroupsInput_reportGroupArns})
+var sBatchGetReportGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetReportGroupsOutput, Members: &mBatchGetReportGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetReportGroupsOutput})
+var sBatchGetReportGroupsOutput_reportGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroups", ID: &i_ReportGroups, Members: &m_ReportGroups, Type: smithy.ShapeTypeList, Ext: &eBatchGetReportGroupsOutput_reportGroups})
+var sBatchGetReportGroupsOutput_reportGroupsNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroupsNotFound", ID: &i_ReportGroupArns, Members: &m_ReportGroupArns, Type: smithy.ShapeTypeList, Ext: &eBatchGetReportGroupsOutput_reportGroupsNotFound})
+var sBatchGetReportsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetReportsInput, Members: &mBatchGetReportsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetReportsInput})
+var sBatchGetReportsInput_reportArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportArns", ID: &i_ReportArns, Members: &m_ReportArns, Type: smithy.ShapeTypeList, Ext: &eBatchGetReportsInput_reportArns})
+var sBatchGetReportsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetReportsOutput, Members: &mBatchGetReportsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetReportsOutput})
+var sBatchGetReportsOutput_reports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reports", ID: &i_Reports, Members: &m_Reports, Type: smithy.ShapeTypeList, Ext: &eBatchGetReportsOutput_reports})
+var sBatchGetReportsOutput_reportsNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportsNotFound", ID: &i_ReportArns, Members: &m_ReportArns, Type: smithy.ShapeTypeList, Ext: &eBatchGetReportsOutput_reportsNotFound})
+var sBatchGetSandboxesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSandboxesInput, Members: &mBatchGetSandboxesInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetSandboxesInput})
+var sBatchGetSandboxesInput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_SandboxIds, Members: &m_SandboxIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetSandboxesInput_ids})
+var sBatchGetSandboxesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSandboxesOutput, Members: &mBatchGetSandboxesOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetSandboxesOutput})
+var sBatchGetSandboxesOutput_sandboxes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxes", ID: &i_Sandboxes, Members: &m_Sandboxes, Type: smithy.ShapeTypeList, Ext: &eBatchGetSandboxesOutput_sandboxes})
+var sBatchGetSandboxesOutput_sandboxesNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxesNotFound", ID: &i_SandboxIds, Members: &m_SandboxIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetSandboxesOutput_sandboxesNotFound})
+var sCreateFleetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleetInput, Members: &mCreateFleetInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetInput})
+var sCreateFleetInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FleetName, Type: smithy.ShapeTypeString, Ext: &eCreateFleetInput_name})
+var sCreateFleetInput_baseCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCapacity", ID: &i_FleetCapacity, Type: smithy.ShapeTypeInteger, Ext: &eCreateFleetInput_baseCapacity})
+var sCreateFleetInput_environmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentType", ID: &iEnvironmentType, Members: &mEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFleetInput_environmentType})
+var sCreateFleetInput_computeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeType", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFleetInput_computeType})
+var sCreateFleetInput_computeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeConfiguration", ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetInput_computeConfiguration})
+var sCreateFleetInput_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfigurationInput, Members: &mScalingConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetInput_scalingConfiguration})
+var sCreateFleetInput_overflowBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overflowBehavior", ID: &iFleetOverflowBehavior, Members: &mFleetOverflowBehavior, Type: smithy.ShapeTypeEnum, Ext: &eCreateFleetInput_overflowBehavior})
+var sCreateFleetInput_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetInput_vpcConfig})
+var sCreateFleetInput_proxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetInput_proxyConfiguration})
+var sCreateFleetInput_imageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCreateFleetInput_imageId})
+var sCreateFleetInput_fleetServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetServiceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCreateFleetInput_fleetServiceRole})
+var sCreateFleetInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateFleetInput_tags})
+var sCreateFleetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFleetOutput, Members: &mCreateFleetOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetOutput})
+var sCreateFleetOutput_fleet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleet", ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &eCreateFleetOutput_fleet})
+var sCreateProjectInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProjectInput, Members: &mCreateProjectInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput})
+var sCreateProjectInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ProjectName, Type: smithy.ShapeTypeString, Ext: &eCreateProjectInput_name})
+var sCreateProjectInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ProjectDescription, Type: smithy.ShapeTypeString, Ext: &eCreateProjectInput_description})
+var sCreateProjectInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput_source})
+var sCreateProjectInput_secondarySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySources", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eCreateProjectInput_secondarySources})
+var sCreateProjectInput_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateProjectInput_sourceVersion})
+var sCreateProjectInput_secondarySourceVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourceVersions", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eCreateProjectInput_secondarySourceVersions})
+var sCreateProjectInput_artifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifacts", ID: &iProjectArtifacts, Members: &mProjectArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput_artifacts})
+var sCreateProjectInput_secondaryArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifacts", ID: &i_ProjectArtifactsList, Members: &m_ProjectArtifactsList, Type: smithy.ShapeTypeList, Ext: &eCreateProjectInput_secondaryArtifacts})
+var sCreateProjectInput_cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cache", ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput_cache})
+var sCreateProjectInput_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iProjectEnvironment, Members: &mProjectEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput_environment})
+var sCreateProjectInput_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCreateProjectInput_serviceRole})
+var sCreateProjectInput_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_BuildTimeOut, Type: smithy.ShapeTypeInteger, Ext: &eCreateProjectInput_timeoutInMinutes})
+var sCreateProjectInput_queuedTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutes", ID: &i_TimeOut, Type: smithy.ShapeTypeInteger, Ext: &eCreateProjectInput_queuedTimeoutInMinutes})
+var sCreateProjectInput_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCreateProjectInput_encryptionKey})
+var sCreateProjectInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateProjectInput_tags})
+var sCreateProjectInput_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput_vpcConfig})
+var sCreateProjectInput_badgeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badgeEnabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateProjectInput_badgeEnabled})
+var sCreateProjectInput_logsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsConfig", ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput_logsConfig})
+var sCreateProjectInput_fileSystemLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemLocations", ID: &i_ProjectFileSystemLocations, Members: &m_ProjectFileSystemLocations, Type: smithy.ShapeTypeList, Ext: &eCreateProjectInput_fileSystemLocations})
+var sCreateProjectInput_buildBatchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchConfig", ID: &iProjectBuildBatchConfig, Members: &mProjectBuildBatchConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectInput_buildBatchConfig})
+var sCreateProjectInput_concurrentBuildLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "concurrentBuildLimit", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eCreateProjectInput_concurrentBuildLimit})
+var sCreateProjectInput_autoRetryLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRetryLimit", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eCreateProjectInput_autoRetryLimit})
+var sCreateProjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProjectOutput, Members: &mCreateProjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectOutput})
+var sCreateProjectOutput_project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "project", ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectOutput_project})
+var sCreateReportGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReportGroupInput, Members: &mCreateReportGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateReportGroupInput})
+var sCreateReportGroupInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ReportGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateReportGroupInput_name})
+var sCreateReportGroupInput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iReportType, Members: &mReportType, Type: smithy.ShapeTypeEnum, Ext: &eCreateReportGroupInput_type})
+var sCreateReportGroupInput_exportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportConfig", ID: &iReportExportConfig, Members: &mReportExportConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateReportGroupInput_exportConfig})
+var sCreateReportGroupInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateReportGroupInput_tags})
+var sCreateReportGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReportGroupOutput, Members: &mCreateReportGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateReportGroupOutput})
+var sCreateReportGroupOutput_reportGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroup", ID: &iReportGroup, Members: &mReportGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateReportGroupOutput_reportGroup})
+var sCreateWebhookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebhookInput, Members: &mCreateWebhookInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebhookInput})
+var sCreateWebhookInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString, Ext: &eCreateWebhookInput_projectName})
+var sCreateWebhookInput_branchFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchFilter", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateWebhookInput_branchFilter})
+var sCreateWebhookInput_filterGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterGroups", ID: &i_FilterGroups, Members: &m_FilterGroups, Type: smithy.ShapeTypeList, Ext: &eCreateWebhookInput_filterGroups})
+var sCreateWebhookInput_buildType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildType", ID: &iWebhookBuildType, Members: &mWebhookBuildType, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebhookInput_buildType})
+var sCreateWebhookInput_manualCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manualCreation", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateWebhookInput_manualCreation})
+var sCreateWebhookInput_scopeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeConfiguration", ID: &iScopeConfiguration, Members: &mScopeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebhookInput_scopeConfiguration})
+var sCreateWebhookInput_pullRequestBuildPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestBuildPolicy", ID: &iPullRequestBuildPolicy, Members: &mPullRequestBuildPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebhookInput_pullRequestBuildPolicy})
+var sCreateWebhookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebhookOutput, Members: &mCreateWebhookOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebhookOutput})
+var sCreateWebhookOutput_webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhook", ID: &iWebhook, Members: &mWebhook, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebhookOutput_webhook})
+var sDeleteBuildBatchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBuildBatchInput, Members: &mDeleteBuildBatchInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBuildBatchInput})
+var sDeleteBuildBatchInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteBuildBatchInput_id})
+var sDeleteBuildBatchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBuildBatchOutput, Members: &mDeleteBuildBatchOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBuildBatchOutput})
+var sDeleteBuildBatchOutput_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteBuildBatchOutput_statusCode})
+var sDeleteBuildBatchOutput_buildsDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildsDeleted", ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &eDeleteBuildBatchOutput_buildsDeleted})
+var sDeleteBuildBatchOutput_buildsNotDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildsNotDeleted", ID: &i_BuildsNotDeleted, Members: &m_BuildsNotDeleted, Type: smithy.ShapeTypeList, Ext: &eDeleteBuildBatchOutput_buildsNotDeleted})
+var sDeleteFleetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleetInput, Members: &mDeleteFleetInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFleetInput})
+var sDeleteFleetInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteFleetInput_arn})
+var sDeleteFleetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFleetOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFleetOutput})
+var sDeleteProjectInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProjectInput, Members: &mDeleteProjectInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProjectInput})
+var sDeleteProjectInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteProjectInput_name})
+var sDeleteProjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProjectOutput})
+var sDeleteReportGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportGroupInput, Members: &mDeleteReportGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportGroupInput})
+var sDeleteReportGroupInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteReportGroupInput_arn})
+var sDeleteReportGroupInput_deleteReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteReports", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteReportGroupInput_deleteReports})
+var sDeleteReportGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportGroupOutput})
+var sDeleteReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportInput, Members: &mDeleteReportInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportInput})
+var sDeleteReportInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteReportInput_arn})
+var sDeleteReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportOutput})
+var sDeleteResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyInput, Members: &mDeleteResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyInput})
+var sDeleteResourcePolicyInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyInput_resourceArn})
+var sDeleteResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyOutput})
+var sDeleteSourceCredentialsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceCredentialsInput, Members: &mDeleteSourceCredentialsInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceCredentialsInput})
+var sDeleteSourceCredentialsInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceCredentialsInput_arn})
+var sDeleteSourceCredentialsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceCredentialsOutput, Members: &mDeleteSourceCredentialsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceCredentialsOutput})
+var sDeleteSourceCredentialsOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceCredentialsOutput_arn})
+var sDeleteWebhookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhookInput, Members: &mDeleteWebhookInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebhookInput})
+var sDeleteWebhookInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString, Ext: &eDeleteWebhookInput_projectName})
+var sDeleteWebhookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhookOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebhookOutput})
+var sDescribeCodeCoveragesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeCoveragesInput, Members: &mDescribeCodeCoveragesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCodeCoveragesInput})
+var sDescribeCodeCoveragesInput_reportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDescribeCodeCoveragesInput_reportArn})
+var sDescribeCodeCoveragesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeCodeCoveragesInput_nextToken})
+var sDescribeCodeCoveragesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeCodeCoveragesInput_maxResults})
+var sDescribeCodeCoveragesInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeCodeCoveragesInput_sortOrder})
+var sDescribeCodeCoveragesInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iReportCodeCoverageSortByType, Members: &mReportCodeCoverageSortByType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeCodeCoveragesInput_sortBy})
+var sDescribeCodeCoveragesInput_minLineCoveragePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minLineCoveragePercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eDescribeCodeCoveragesInput_minLineCoveragePercentage})
+var sDescribeCodeCoveragesInput_maxLineCoveragePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxLineCoveragePercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eDescribeCodeCoveragesInput_maxLineCoveragePercentage})
+var sDescribeCodeCoveragesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeCoveragesOutput, Members: &mDescribeCodeCoveragesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCodeCoveragesOutput})
+var sDescribeCodeCoveragesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeCodeCoveragesOutput_nextToken})
+var sDescribeCodeCoveragesOutput_codeCoverages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeCoverages", ID: &i_CodeCoverages, Members: &m_CodeCoverages, Type: smithy.ShapeTypeList, Ext: &eDescribeCodeCoveragesOutput_codeCoverages})
+var sDescribeTestCasesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTestCasesInput, Members: &mDescribeTestCasesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTestCasesInput})
+var sDescribeTestCasesInput_reportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeTestCasesInput_reportArn})
+var sDescribeTestCasesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeTestCasesInput_nextToken})
+var sDescribeTestCasesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTestCasesInput_maxResults})
+var sDescribeTestCasesInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iTestCaseFilter, Members: &mTestCaseFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTestCasesInput_filter})
+var sDescribeTestCasesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTestCasesOutput, Members: &mDescribeTestCasesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTestCasesOutput})
+var sDescribeTestCasesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeTestCasesOutput_nextToken})
+var sDescribeTestCasesOutput_testCases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testCases", ID: &i_TestCases, Members: &m_TestCases, Type: smithy.ShapeTypeList, Ext: &eDescribeTestCasesOutput_testCases})
+var sGetReportGroupTrendInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReportGroupTrendInput, Members: &mGetReportGroupTrendInput, Type: smithy.ShapeTypeStructure, Ext: &eGetReportGroupTrendInput})
+var sGetReportGroupTrendInput_reportGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroupArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetReportGroupTrendInput_reportGroupArn})
+var sGetReportGroupTrendInput_numOfReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numOfReports", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eGetReportGroupTrendInput_numOfReports})
+var sGetReportGroupTrendInput_trendField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trendField", ID: &iReportGroupTrendFieldType, Members: &mReportGroupTrendFieldType, Type: smithy.ShapeTypeEnum, Ext: &eGetReportGroupTrendInput_trendField})
+var sGetReportGroupTrendOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReportGroupTrendOutput, Members: &mGetReportGroupTrendOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetReportGroupTrendOutput})
+var sGetReportGroupTrendOutput_stats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stats", ID: &iReportGroupTrendStats, Members: &mReportGroupTrendStats, Type: smithy.ShapeTypeStructure, Ext: &eGetReportGroupTrendOutput_stats})
+var sGetReportGroupTrendOutput_rawData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rawData", ID: &i_ReportGroupTrendRawDataList, Members: &m_ReportGroupTrendRawDataList, Type: smithy.ShapeTypeList, Ext: &eGetReportGroupTrendOutput_rawData})
+var sGetResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyInput, Members: &mGetResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyInput})
+var sGetResourcePolicyInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyInput_resourceArn})
+var sGetResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyOutput, Members: &mGetResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyOutput})
+var sGetResourcePolicyOutput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyOutput_policy})
+var sImportSourceCredentialsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSourceCredentialsInput, Members: &mImportSourceCredentialsInput, Type: smithy.ShapeTypeStructure, Ext: &eImportSourceCredentialsInput})
+var sImportSourceCredentialsInput_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eImportSourceCredentialsInput_username})
+var sImportSourceCredentialsInput_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_SensitiveNonEmptyString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eImportSourceCredentialsInput_token})
+var sImportSourceCredentialsInput_serverType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverType", ID: &iServerType, Members: &mServerType, Type: smithy.ShapeTypeEnum, Ext: &eImportSourceCredentialsInput_serverType})
+var sImportSourceCredentialsInput_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eImportSourceCredentialsInput_authType})
+var sImportSourceCredentialsInput_shouldOverwrite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shouldOverwrite", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eImportSourceCredentialsInput_shouldOverwrite})
+var sImportSourceCredentialsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSourceCredentialsOutput, Members: &mImportSourceCredentialsOutput, Type: smithy.ShapeTypeStructure, Ext: &eImportSourceCredentialsOutput})
+var sImportSourceCredentialsOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eImportSourceCredentialsOutput_arn})
+var sInvalidateProjectCacheInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidateProjectCacheInput, Members: &mInvalidateProjectCacheInput, Type: smithy.ShapeTypeStructure, Ext: &eInvalidateProjectCacheInput})
+var sInvalidateProjectCacheInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eInvalidateProjectCacheInput_projectName})
+var sInvalidateProjectCacheOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidateProjectCacheOutput, Type: smithy.ShapeTypeStructure, Ext: &eInvalidateProjectCacheOutput})
+var sListBuildBatchesForProjectInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildBatchesForProjectInput, Members: &mListBuildBatchesForProjectInput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildBatchesForProjectInput})
+var sListBuildBatchesForProjectInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListBuildBatchesForProjectInput_projectName})
+var sListBuildBatchesForProjectInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iBuildBatchFilter, Members: &mBuildBatchFilter, Type: smithy.ShapeTypeStructure, Ext: &eListBuildBatchesForProjectInput_filter})
+var sListBuildBatchesForProjectInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListBuildBatchesForProjectInput_maxResults})
+var sListBuildBatchesForProjectInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListBuildBatchesForProjectInput_sortOrder})
+var sListBuildBatchesForProjectInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildBatchesForProjectInput_nextToken})
+var sListBuildBatchesForProjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildBatchesForProjectOutput, Members: &mListBuildBatchesForProjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildBatchesForProjectOutput})
+var sListBuildBatchesForProjectOutput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_BuildBatchIds, Members: &m_BuildBatchIds, Type: smithy.ShapeTypeList, Ext: &eListBuildBatchesForProjectOutput_ids})
+var sListBuildBatchesForProjectOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildBatchesForProjectOutput_nextToken})
+var sListBuildBatchesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildBatchesInput, Members: &mListBuildBatchesInput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildBatchesInput})
+var sListBuildBatchesInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iBuildBatchFilter, Members: &mBuildBatchFilter, Type: smithy.ShapeTypeStructure, Ext: &eListBuildBatchesInput_filter})
+var sListBuildBatchesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListBuildBatchesInput_maxResults})
+var sListBuildBatchesInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListBuildBatchesInput_sortOrder})
+var sListBuildBatchesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildBatchesInput_nextToken})
+var sListBuildBatchesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildBatchesOutput, Members: &mListBuildBatchesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildBatchesOutput})
+var sListBuildBatchesOutput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_BuildBatchIds, Members: &m_BuildBatchIds, Type: smithy.ShapeTypeList, Ext: &eListBuildBatchesOutput_ids})
+var sListBuildBatchesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildBatchesOutput_nextToken})
+var sListBuildsForProjectInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildsForProjectInput, Members: &mListBuildsForProjectInput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildsForProjectInput})
+var sListBuildsForProjectInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListBuildsForProjectInput_projectName})
+var sListBuildsForProjectInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListBuildsForProjectInput_sortOrder})
+var sListBuildsForProjectInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildsForProjectInput_nextToken})
+var sListBuildsForProjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildsForProjectOutput, Members: &mListBuildsForProjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildsForProjectOutput})
+var sListBuildsForProjectOutput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &eListBuildsForProjectOutput_ids})
+var sListBuildsForProjectOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildsForProjectOutput_nextToken})
+var sListBuildsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildsInput, Members: &mListBuildsInput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildsInput})
+var sListBuildsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListBuildsInput_sortOrder})
+var sListBuildsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildsInput_nextToken})
+var sListBuildsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBuildsOutput, Members: &mListBuildsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBuildsOutput})
+var sListBuildsOutput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_BuildIds, Members: &m_BuildIds, Type: smithy.ShapeTypeList, Ext: &eListBuildsOutput_ids})
+var sListBuildsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListBuildsOutput_nextToken})
+var sListCommandExecutionsForSandboxInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCommandExecutionsForSandboxInput, Members: &mListCommandExecutionsForSandboxInput, Type: smithy.ShapeTypeStructure, Ext: &eListCommandExecutionsForSandboxInput})
+var sListCommandExecutionsForSandboxInput_sandboxId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListCommandExecutionsForSandboxInput_sandboxId})
+var sListCommandExecutionsForSandboxInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListCommandExecutionsForSandboxInput_maxResults})
+var sListCommandExecutionsForSandboxInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListCommandExecutionsForSandboxInput_sortOrder})
+var sListCommandExecutionsForSandboxInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_SensitiveString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eListCommandExecutionsForSandboxInput_nextToken})
+var sListCommandExecutionsForSandboxOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCommandExecutionsForSandboxOutput, Members: &mListCommandExecutionsForSandboxOutput, Type: smithy.ShapeTypeStructure, Ext: &eListCommandExecutionsForSandboxOutput})
+var sListCommandExecutionsForSandboxOutput_commandExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commandExecutions", ID: &i_CommandExecutions, Members: &m_CommandExecutions, Type: smithy.ShapeTypeList, Ext: &eListCommandExecutionsForSandboxOutput_commandExecutions})
+var sListCommandExecutionsForSandboxOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListCommandExecutionsForSandboxOutput_nextToken})
+var sListCuratedEnvironmentImagesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCuratedEnvironmentImagesInput, Type: smithy.ShapeTypeStructure, Ext: &eListCuratedEnvironmentImagesInput})
+var sListCuratedEnvironmentImagesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCuratedEnvironmentImagesOutput, Members: &mListCuratedEnvironmentImagesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListCuratedEnvironmentImagesOutput})
+var sListCuratedEnvironmentImagesOutput_platforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platforms", ID: &i_EnvironmentPlatforms, Members: &m_EnvironmentPlatforms, Type: smithy.ShapeTypeList, Ext: &eListCuratedEnvironmentImagesOutput_platforms})
+var sListFleetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleetsInput, Members: &mListFleetsInput, Type: smithy.ShapeTypeStructure, Ext: &eListFleetsInput})
+var sListFleetsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_SensitiveString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eListFleetsInput_nextToken})
+var sListFleetsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListFleetsInput_maxResults})
+var sListFleetsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListFleetsInput_sortOrder})
+var sListFleetsInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iFleetSortByType, Members: &mFleetSortByType, Type: smithy.ShapeTypeEnum, Ext: &eListFleetsInput_sortBy})
+var sListFleetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFleetsOutput, Members: &mListFleetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFleetsOutput})
+var sListFleetsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListFleetsOutput_nextToken})
+var sListFleetsOutput_fleets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleets", ID: &i_FleetArns, Members: &m_FleetArns, Type: smithy.ShapeTypeList, Ext: &eListFleetsOutput_fleets})
+var sListProjectsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjectsInput, Members: &mListProjectsInput, Type: smithy.ShapeTypeStructure, Ext: &eListProjectsInput})
+var sListProjectsInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iProjectSortByType, Members: &mProjectSortByType, Type: smithy.ShapeTypeEnum, Ext: &eListProjectsInput_sortBy})
+var sListProjectsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListProjectsInput_sortOrder})
+var sListProjectsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListProjectsInput_nextToken})
+var sListProjectsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjectsOutput, Members: &mListProjectsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListProjectsOutput})
+var sListProjectsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListProjectsOutput_nextToken})
+var sListProjectsOutput_projects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projects", ID: &i_ProjectNames, Members: &m_ProjectNames, Type: smithy.ShapeTypeList, Ext: &eListProjectsOutput_projects})
+var sListReportGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportGroupsInput, Members: &mListReportGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eListReportGroupsInput})
+var sListReportGroupsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListReportGroupsInput_sortOrder})
+var sListReportGroupsInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iReportGroupSortByType, Members: &mReportGroupSortByType, Type: smithy.ShapeTypeEnum, Ext: &eListReportGroupsInput_sortBy})
+var sListReportGroupsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReportGroupsInput_nextToken})
+var sListReportGroupsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListReportGroupsInput_maxResults})
+var sListReportGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportGroupsOutput, Members: &mListReportGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListReportGroupsOutput})
+var sListReportGroupsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReportGroupsOutput_nextToken})
+var sListReportGroupsOutput_reportGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroups", ID: &i_ReportGroupArns, Members: &m_ReportGroupArns, Type: smithy.ShapeTypeList, Ext: &eListReportGroupsOutput_reportGroups})
+var sListReportsForReportGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportsForReportGroupInput, Members: &mListReportsForReportGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eListReportsForReportGroupInput})
+var sListReportsForReportGroupInput_reportGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroupArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReportsForReportGroupInput_reportGroupArn})
+var sListReportsForReportGroupInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReportsForReportGroupInput_nextToken})
+var sListReportsForReportGroupInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListReportsForReportGroupInput_sortOrder})
+var sListReportsForReportGroupInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListReportsForReportGroupInput_maxResults})
+var sListReportsForReportGroupInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iReportFilter, Members: &mReportFilter, Type: smithy.ShapeTypeStructure, Ext: &eListReportsForReportGroupInput_filter})
+var sListReportsForReportGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportsForReportGroupOutput, Members: &mListReportsForReportGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eListReportsForReportGroupOutput})
+var sListReportsForReportGroupOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReportsForReportGroupOutput_nextToken})
+var sListReportsForReportGroupOutput_reports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reports", ID: &i_ReportArns, Members: &m_ReportArns, Type: smithy.ShapeTypeList, Ext: &eListReportsForReportGroupOutput_reports})
+var sListReportsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportsInput, Members: &mListReportsInput, Type: smithy.ShapeTypeStructure, Ext: &eListReportsInput})
+var sListReportsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListReportsInput_sortOrder})
+var sListReportsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReportsInput_nextToken})
+var sListReportsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListReportsInput_maxResults})
+var sListReportsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iReportFilter, Members: &mReportFilter, Type: smithy.ShapeTypeStructure, Ext: &eListReportsInput_filter})
+var sListReportsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReportsOutput, Members: &mListReportsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListReportsOutput})
+var sListReportsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListReportsOutput_nextToken})
+var sListReportsOutput_reports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reports", ID: &i_ReportArns, Members: &m_ReportArns, Type: smithy.ShapeTypeList, Ext: &eListReportsOutput_reports})
+var sListSandboxesForProjectInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSandboxesForProjectInput, Members: &mListSandboxesForProjectInput, Type: smithy.ShapeTypeStructure, Ext: &eListSandboxesForProjectInput})
+var sListSandboxesForProjectInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListSandboxesForProjectInput_projectName})
+var sListSandboxesForProjectInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListSandboxesForProjectInput_maxResults})
+var sListSandboxesForProjectInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListSandboxesForProjectInput_sortOrder})
+var sListSandboxesForProjectInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_SensitiveString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eListSandboxesForProjectInput_nextToken})
+var sListSandboxesForProjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSandboxesForProjectOutput, Members: &mListSandboxesForProjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSandboxesForProjectOutput})
+var sListSandboxesForProjectOutput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_SandboxIds, Members: &m_SandboxIds, Type: smithy.ShapeTypeList, Ext: &eListSandboxesForProjectOutput_ids})
+var sListSandboxesForProjectOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSandboxesForProjectOutput_nextToken})
+var sListSandboxesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSandboxesInput, Members: &mListSandboxesInput, Type: smithy.ShapeTypeStructure, Ext: &eListSandboxesInput})
+var sListSandboxesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListSandboxesInput_maxResults})
+var sListSandboxesInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListSandboxesInput_sortOrder})
+var sListSandboxesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSandboxesInput_nextToken})
+var sListSandboxesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSandboxesOutput, Members: &mListSandboxesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSandboxesOutput})
+var sListSandboxesOutput_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_SandboxIds, Members: &m_SandboxIds, Type: smithy.ShapeTypeList, Ext: &eListSandboxesOutput_ids})
+var sListSandboxesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSandboxesOutput_nextToken})
+var sListSharedProjectsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedProjectsInput, Members: &mListSharedProjectsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedProjectsInput})
+var sListSharedProjectsInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iSharedResourceSortByType, Members: &mSharedResourceSortByType, Type: smithy.ShapeTypeEnum, Ext: &eListSharedProjectsInput_sortBy})
+var sListSharedProjectsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListSharedProjectsInput_sortOrder})
+var sListSharedProjectsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListSharedProjectsInput_maxResults})
+var sListSharedProjectsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListSharedProjectsInput_nextToken})
+var sListSharedProjectsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedProjectsOutput, Members: &mListSharedProjectsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedProjectsOutput})
+var sListSharedProjectsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSharedProjectsOutput_nextToken})
+var sListSharedProjectsOutput_projects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projects", ID: &i_ProjectArns, Members: &m_ProjectArns, Type: smithy.ShapeTypeList, Ext: &eListSharedProjectsOutput_projects})
+var sListSharedReportGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedReportGroupsInput, Members: &mListSharedReportGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedReportGroupsInput})
+var sListSharedReportGroupsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListSharedReportGroupsInput_sortOrder})
+var sListSharedReportGroupsInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iSharedResourceSortByType, Members: &mSharedResourceSortByType, Type: smithy.ShapeTypeEnum, Ext: &eListSharedReportGroupsInput_sortBy})
+var sListSharedReportGroupsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSharedReportGroupsInput_nextToken})
+var sListSharedReportGroupsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListSharedReportGroupsInput_maxResults})
+var sListSharedReportGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedReportGroupsOutput, Members: &mListSharedReportGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedReportGroupsOutput})
+var sListSharedReportGroupsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSharedReportGroupsOutput_nextToken})
+var sListSharedReportGroupsOutput_reportGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroups", ID: &i_ReportGroupArns, Members: &m_ReportGroupArns, Type: smithy.ShapeTypeList, Ext: &eListSharedReportGroupsOutput_reportGroups})
+var sListSourceCredentialsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceCredentialsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSourceCredentialsInput})
+var sListSourceCredentialsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceCredentialsOutput, Members: &mListSourceCredentialsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSourceCredentialsOutput})
+var sListSourceCredentialsOutput_sourceCredentialsInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCredentialsInfos", ID: &i_SourceCredentialsInfos, Members: &m_SourceCredentialsInfos, Type: smithy.ShapeTypeList, Ext: &eListSourceCredentialsOutput_sourceCredentialsInfos})
+var sPutResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyInput, Members: &mPutResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyInput})
+var sPutResourcePolicyInput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyInput_policy})
+var sPutResourcePolicyInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyInput_resourceArn})
+var sPutResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyOutput, Members: &mPutResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyOutput})
+var sPutResourcePolicyOutput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyOutput_resourceArn})
+var sRetryBuildBatchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryBuildBatchInput, Members: &mRetryBuildBatchInput, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildBatchInput})
+var sRetryBuildBatchInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eRetryBuildBatchInput_id})
+var sRetryBuildBatchInput_idempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idempotencyToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRetryBuildBatchInput_idempotencyToken})
+var sRetryBuildBatchInput_retryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryType", ID: &iRetryBuildBatchType, Members: &mRetryBuildBatchType, Type: smithy.ShapeTypeEnum, Ext: &eRetryBuildBatchInput_retryType})
+var sRetryBuildBatchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryBuildBatchOutput, Members: &mRetryBuildBatchOutput, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildBatchOutput})
+var sRetryBuildBatchOutput_buildBatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatch", ID: &iBuildBatch, Members: &mBuildBatch, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildBatchOutput_buildBatch})
+var sRetryBuildInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryBuildInput, Members: &mRetryBuildInput, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildInput})
+var sRetryBuildInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eRetryBuildInput_id})
+var sRetryBuildInput_idempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idempotencyToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRetryBuildInput_idempotencyToken})
+var sRetryBuildOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryBuildOutput, Members: &mRetryBuildOutput, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildOutput})
+var sRetryBuildOutput_build = smithy.NewStaticSchema(smithy.StaticSchema{Member: "build", ID: &iBuild, Members: &mBuild, Type: smithy.ShapeTypeStructure, Ext: &eRetryBuildOutput_build})
+var sStartBuildBatchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBuildBatchInput, Members: &mStartBuildBatchInput, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput})
+var sStartBuildBatchInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_projectName})
+var sStartBuildBatchInput_secondarySourcesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourcesOverride", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eStartBuildBatchInput_secondarySourcesOverride})
+var sStartBuildBatchInput_secondarySourcesVersionOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourcesVersionOverride", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eStartBuildBatchInput_secondarySourcesVersionOverride})
+var sStartBuildBatchInput_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_sourceVersion})
+var sStartBuildBatchInput_artifactsOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactsOverride", ID: &iProjectArtifacts, Members: &mProjectArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput_artifactsOverride})
+var sStartBuildBatchInput_secondaryArtifactsOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifactsOverride", ID: &i_ProjectArtifactsList, Members: &m_ProjectArtifactsList, Type: smithy.ShapeTypeList, Ext: &eStartBuildBatchInput_secondaryArtifactsOverride})
+var sStartBuildBatchInput_environmentVariablesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariablesOverride", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList, Ext: &eStartBuildBatchInput_environmentVariablesOverride})
+var sStartBuildBatchInput_sourceTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceTypeOverride", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildBatchInput_sourceTypeOverride})
+var sStartBuildBatchInput_sourceLocationOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceLocationOverride", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_sourceLocationOverride})
+var sStartBuildBatchInput_sourceAuthOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAuthOverride", ID: &iSourceAuth, Members: &mSourceAuth, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput_sourceAuthOverride})
+var sStartBuildBatchInput_gitCloneDepthOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitCloneDepthOverride", ID: &i_GitCloneDepth, Type: smithy.ShapeTypeInteger, Ext: &eStartBuildBatchInput_gitCloneDepthOverride})
+var sStartBuildBatchInput_gitSubmodulesConfigOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitSubmodulesConfigOverride", ID: &iGitSubmodulesConfig, Members: &mGitSubmodulesConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput_gitSubmodulesConfigOverride})
+var sStartBuildBatchInput_buildspecOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildspecOverride", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_buildspecOverride})
+var sStartBuildBatchInput_insecureSslOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insecureSslOverride", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildBatchInput_insecureSslOverride})
+var sStartBuildBatchInput_reportBuildBatchStatusOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportBuildBatchStatusOverride", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildBatchInput_reportBuildBatchStatusOverride})
+var sStartBuildBatchInput_environmentTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTypeOverride", ID: &iEnvironmentType, Members: &mEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildBatchInput_environmentTypeOverride})
+var sStartBuildBatchInput_imageOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageOverride", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_imageOverride})
+var sStartBuildBatchInput_computeTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeTypeOverride", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildBatchInput_computeTypeOverride})
+var sStartBuildBatchInput_certificateOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateOverride", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_certificateOverride})
+var sStartBuildBatchInput_cacheOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheOverride", ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput_cacheOverride})
+var sStartBuildBatchInput_serviceRoleOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRoleOverride", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_serviceRoleOverride})
+var sStartBuildBatchInput_privilegedModeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privilegedModeOverride", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildBatchInput_privilegedModeOverride})
+var sStartBuildBatchInput_buildTimeoutInMinutesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildTimeoutInMinutesOverride", ID: &i_BuildTimeOut, Type: smithy.ShapeTypeInteger, Ext: &eStartBuildBatchInput_buildTimeoutInMinutesOverride})
+var sStartBuildBatchInput_queuedTimeoutInMinutesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutesOverride", ID: &i_TimeOut, Type: smithy.ShapeTypeInteger, Ext: &eStartBuildBatchInput_queuedTimeoutInMinutesOverride})
+var sStartBuildBatchInput_encryptionKeyOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKeyOverride", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_encryptionKeyOverride})
+var sStartBuildBatchInput_idempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idempotencyToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildBatchInput_idempotencyToken})
+var sStartBuildBatchInput_logsConfigOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsConfigOverride", ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput_logsConfigOverride})
+var sStartBuildBatchInput_registryCredentialOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryCredentialOverride", ID: &iRegistryCredential, Members: &mRegistryCredential, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput_registryCredentialOverride})
+var sStartBuildBatchInput_imagePullCredentialsTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePullCredentialsTypeOverride", ID: &iImagePullCredentialsType, Members: &mImagePullCredentialsType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildBatchInput_imagePullCredentialsTypeOverride})
+var sStartBuildBatchInput_buildBatchConfigOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchConfigOverride", ID: &iProjectBuildBatchConfig, Members: &mProjectBuildBatchConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchInput_buildBatchConfigOverride})
+var sStartBuildBatchInput_debugSessionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "debugSessionEnabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildBatchInput_debugSessionEnabled})
+var sStartBuildBatchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBuildBatchOutput, Members: &mStartBuildBatchOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchOutput})
+var sStartBuildBatchOutput_buildBatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatch", ID: &iBuildBatch, Members: &mBuildBatch, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildBatchOutput_buildBatch})
+var sStartBuildInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBuildInput, Members: &mStartBuildInput, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput})
+var sStartBuildInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_projectName})
+var sStartBuildInput_secondarySourcesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourcesOverride", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eStartBuildInput_secondarySourcesOverride})
+var sStartBuildInput_secondarySourcesVersionOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourcesVersionOverride", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eStartBuildInput_secondarySourcesVersionOverride})
+var sStartBuildInput_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_sourceVersion})
+var sStartBuildInput_artifactsOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactsOverride", ID: &iProjectArtifacts, Members: &mProjectArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_artifactsOverride})
+var sStartBuildInput_secondaryArtifactsOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifactsOverride", ID: &i_ProjectArtifactsList, Members: &m_ProjectArtifactsList, Type: smithy.ShapeTypeList, Ext: &eStartBuildInput_secondaryArtifactsOverride})
+var sStartBuildInput_environmentVariablesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariablesOverride", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList, Ext: &eStartBuildInput_environmentVariablesOverride})
+var sStartBuildInput_sourceTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceTypeOverride", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildInput_sourceTypeOverride})
+var sStartBuildInput_sourceLocationOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceLocationOverride", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_sourceLocationOverride})
+var sStartBuildInput_sourceAuthOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAuthOverride", ID: &iSourceAuth, Members: &mSourceAuth, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_sourceAuthOverride})
+var sStartBuildInput_gitCloneDepthOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitCloneDepthOverride", ID: &i_GitCloneDepth, Type: smithy.ShapeTypeInteger, Ext: &eStartBuildInput_gitCloneDepthOverride})
+var sStartBuildInput_gitSubmodulesConfigOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitSubmodulesConfigOverride", ID: &iGitSubmodulesConfig, Members: &mGitSubmodulesConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_gitSubmodulesConfigOverride})
+var sStartBuildInput_buildspecOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildspecOverride", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_buildspecOverride})
+var sStartBuildInput_insecureSslOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insecureSslOverride", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildInput_insecureSslOverride})
+var sStartBuildInput_reportBuildStatusOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportBuildStatusOverride", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildInput_reportBuildStatusOverride})
+var sStartBuildInput_buildStatusConfigOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildStatusConfigOverride", ID: &iBuildStatusConfig, Members: &mBuildStatusConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_buildStatusConfigOverride})
+var sStartBuildInput_environmentTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTypeOverride", ID: &iEnvironmentType, Members: &mEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildInput_environmentTypeOverride})
+var sStartBuildInput_imageOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageOverride", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_imageOverride})
+var sStartBuildInput_computeTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeTypeOverride", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildInput_computeTypeOverride})
+var sStartBuildInput_certificateOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateOverride", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_certificateOverride})
+var sStartBuildInput_cacheOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cacheOverride", ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_cacheOverride})
+var sStartBuildInput_serviceRoleOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRoleOverride", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_serviceRoleOverride})
+var sStartBuildInput_privilegedModeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privilegedModeOverride", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildInput_privilegedModeOverride})
+var sStartBuildInput_timeoutInMinutesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutesOverride", ID: &i_BuildTimeOut, Type: smithy.ShapeTypeInteger, Ext: &eStartBuildInput_timeoutInMinutesOverride})
+var sStartBuildInput_queuedTimeoutInMinutesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutesOverride", ID: &i_TimeOut, Type: smithy.ShapeTypeInteger, Ext: &eStartBuildInput_queuedTimeoutInMinutesOverride})
+var sStartBuildInput_encryptionKeyOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKeyOverride", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_encryptionKeyOverride})
+var sStartBuildInput_idempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idempotencyToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartBuildInput_idempotencyToken})
+var sStartBuildInput_logsConfigOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsConfigOverride", ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_logsConfigOverride})
+var sStartBuildInput_registryCredentialOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryCredentialOverride", ID: &iRegistryCredential, Members: &mRegistryCredential, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_registryCredentialOverride})
+var sStartBuildInput_imagePullCredentialsTypeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePullCredentialsTypeOverride", ID: &iImagePullCredentialsType, Members: &mImagePullCredentialsType, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildInput_imagePullCredentialsTypeOverride})
+var sStartBuildInput_debugSessionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "debugSessionEnabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartBuildInput_debugSessionEnabled})
+var sStartBuildInput_fleetOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetOverride", ID: &iProjectFleet, Members: &mProjectFleet, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildInput_fleetOverride})
+var sStartBuildInput_autoRetryLimitOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRetryLimitOverride", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eStartBuildInput_autoRetryLimitOverride})
+var sStartBuildInput_hostKernelOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostKernelOverride", ID: &iHostKernel, Members: &mHostKernel, Type: smithy.ShapeTypeEnum, Ext: &eStartBuildInput_hostKernelOverride})
+var sStartBuildOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBuildOutput, Members: &mStartBuildOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildOutput})
+var sStartBuildOutput_build = smithy.NewStaticSchema(smithy.StaticSchema{Member: "build", ID: &iBuild, Members: &mBuild, Type: smithy.ShapeTypeStructure, Ext: &eStartBuildOutput_build})
+var sStartCommandExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCommandExecutionInput, Members: &mStartCommandExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eStartCommandExecutionInput})
+var sStartCommandExecutionInput_sandboxId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartCommandExecutionInput_sandboxId})
+var sStartCommandExecutionInput_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_SensitiveNonEmptyString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eStartCommandExecutionInput_command})
+var sStartCommandExecutionInput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCommandType, Members: &mCommandType, Type: smithy.ShapeTypeEnum, Ext: &eStartCommandExecutionInput_type})
+var sStartCommandExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCommandExecutionOutput, Members: &mStartCommandExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartCommandExecutionOutput})
+var sStartCommandExecutionOutput_commandExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commandExecution", ID: &iCommandExecution, Members: &mCommandExecution, Type: smithy.ShapeTypeStructure, Ext: &eStartCommandExecutionOutput_commandExecution})
+var sStartSandboxConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSandboxConnectionInput, Members: &mStartSandboxConnectionInput, Type: smithy.ShapeTypeStructure, Ext: &eStartSandboxConnectionInput})
+var sStartSandboxConnectionInput_sandboxId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandboxId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartSandboxConnectionInput_sandboxId})
+var sStartSandboxConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSandboxConnectionOutput, Members: &mStartSandboxConnectionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartSandboxConnectionOutput})
+var sStartSandboxConnectionOutput_ssmSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssmSession", ID: &iSSMSession, Members: &mSSMSession, Type: smithy.ShapeTypeStructure, Ext: &eStartSandboxConnectionOutput_ssmSession})
+var sStartSandboxInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSandboxInput, Members: &mStartSandboxInput, Type: smithy.ShapeTypeStructure, Ext: &eStartSandboxInput})
+var sStartSandboxInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartSandboxInput_projectName})
+var sStartSandboxInput_idempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idempotencyToken", ID: &i_SensitiveString, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eStartSandboxInput_idempotencyToken})
+var sStartSandboxOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSandboxOutput, Members: &mStartSandboxOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartSandboxOutput})
+var sStartSandboxOutput_sandbox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandbox", ID: &iSandbox, Members: &mSandbox, Type: smithy.ShapeTypeStructure, Ext: &eStartSandboxOutput_sandbox})
+var sStopBuildBatchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBuildBatchInput, Members: &mStopBuildBatchInput, Type: smithy.ShapeTypeStructure, Ext: &eStopBuildBatchInput})
+var sStopBuildBatchInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStopBuildBatchInput_id})
+var sStopBuildBatchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBuildBatchOutput, Members: &mStopBuildBatchOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopBuildBatchOutput})
+var sStopBuildBatchOutput_buildBatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatch", ID: &iBuildBatch, Members: &mBuildBatch, Type: smithy.ShapeTypeStructure, Ext: &eStopBuildBatchOutput_buildBatch})
+var sStopBuildInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBuildInput, Members: &mStopBuildInput, Type: smithy.ShapeTypeStructure, Ext: &eStopBuildInput})
+var sStopBuildInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStopBuildInput_id})
+var sStopBuildOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBuildOutput, Members: &mStopBuildOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopBuildOutput})
+var sStopBuildOutput_build = smithy.NewStaticSchema(smithy.StaticSchema{Member: "build", ID: &iBuild, Members: &mBuild, Type: smithy.ShapeTypeStructure, Ext: &eStopBuildOutput_build})
+var sStopSandboxInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSandboxInput, Members: &mStopSandboxInput, Type: smithy.ShapeTypeStructure, Ext: &eStopSandboxInput})
+var sStopSandboxInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStopSandboxInput_id})
+var sStopSandboxOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSandboxOutput, Members: &mStopSandboxOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopSandboxOutput})
+var sStopSandboxOutput_sandbox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sandbox", ID: &iSandbox, Members: &mSandbox, Type: smithy.ShapeTypeStructure, Ext: &eStopSandboxOutput_sandbox})
+var sUpdateFleetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleetInput, Members: &mUpdateFleetInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetInput})
+var sUpdateFleetInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetInput_arn})
+var sUpdateFleetInput_baseCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCapacity", ID: &i_FleetCapacity, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFleetInput_baseCapacity})
+var sUpdateFleetInput_environmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentType", ID: &iEnvironmentType, Members: &mEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFleetInput_environmentType})
+var sUpdateFleetInput_computeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeType", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFleetInput_computeType})
+var sUpdateFleetInput_computeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeConfiguration", ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetInput_computeConfiguration})
+var sUpdateFleetInput_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfigurationInput, Members: &mScalingConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetInput_scalingConfiguration})
+var sUpdateFleetInput_overflowBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overflowBehavior", ID: &iFleetOverflowBehavior, Members: &mFleetOverflowBehavior, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFleetInput_overflowBehavior})
+var sUpdateFleetInput_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetInput_vpcConfig})
+var sUpdateFleetInput_proxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetInput_proxyConfiguration})
+var sUpdateFleetInput_imageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetInput_imageId})
+var sUpdateFleetInput_fleetServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleetServiceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateFleetInput_fleetServiceRole})
+var sUpdateFleetInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUpdateFleetInput_tags})
+var sUpdateFleetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFleetOutput, Members: &mUpdateFleetOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetOutput})
+var sUpdateFleetOutput_fleet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fleet", ID: &iFleet, Members: &mFleet, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFleetOutput_fleet})
+var sUpdateProjectInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectInput, Members: &mUpdateProjectInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput})
+var sUpdateProjectInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectInput_name})
+var sUpdateProjectInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ProjectDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectInput_description})
+var sUpdateProjectInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iProjectSource, Members: &mProjectSource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput_source})
+var sUpdateProjectInput_secondarySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySources", ID: &i_ProjectSources, Members: &m_ProjectSources, Type: smithy.ShapeTypeList, Ext: &eUpdateProjectInput_secondarySources})
+var sUpdateProjectInput_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectInput_sourceVersion})
+var sUpdateProjectInput_secondarySourceVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondarySourceVersions", ID: &i_ProjectSecondarySourceVersions, Members: &m_ProjectSecondarySourceVersions, Type: smithy.ShapeTypeList, Ext: &eUpdateProjectInput_secondarySourceVersions})
+var sUpdateProjectInput_artifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifacts", ID: &iProjectArtifacts, Members: &mProjectArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput_artifacts})
+var sUpdateProjectInput_secondaryArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryArtifacts", ID: &i_ProjectArtifactsList, Members: &m_ProjectArtifactsList, Type: smithy.ShapeTypeList, Ext: &eUpdateProjectInput_secondaryArtifacts})
+var sUpdateProjectInput_cache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cache", ID: &iProjectCache, Members: &mProjectCache, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput_cache})
+var sUpdateProjectInput_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iProjectEnvironment, Members: &mProjectEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput_environment})
+var sUpdateProjectInput_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectInput_serviceRole})
+var sUpdateProjectInput_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_BuildTimeOut, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProjectInput_timeoutInMinutes})
+var sUpdateProjectInput_queuedTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedTimeoutInMinutes", ID: &i_TimeOut, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProjectInput_queuedTimeoutInMinutes})
+var sUpdateProjectInput_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectInput_encryptionKey})
+var sUpdateProjectInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUpdateProjectInput_tags})
+var sUpdateProjectInput_vpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfig", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput_vpcConfig})
+var sUpdateProjectInput_badgeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badgeEnabled", ID: &i_WrapperBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateProjectInput_badgeEnabled})
+var sUpdateProjectInput_logsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsConfig", ID: &iLogsConfig, Members: &mLogsConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput_logsConfig})
+var sUpdateProjectInput_fileSystemLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemLocations", ID: &i_ProjectFileSystemLocations, Members: &m_ProjectFileSystemLocations, Type: smithy.ShapeTypeList, Ext: &eUpdateProjectInput_fileSystemLocations})
+var sUpdateProjectInput_buildBatchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildBatchConfig", ID: &iProjectBuildBatchConfig, Members: &mProjectBuildBatchConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectInput_buildBatchConfig})
+var sUpdateProjectInput_concurrentBuildLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "concurrentBuildLimit", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProjectInput_concurrentBuildLimit})
+var sUpdateProjectInput_autoRetryLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRetryLimit", ID: &i_WrapperInt, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProjectInput_autoRetryLimit})
+var sUpdateProjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectOutput, Members: &mUpdateProjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectOutput})
+var sUpdateProjectOutput_project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "project", ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectOutput_project})
+var sUpdateProjectVisibilityInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectVisibilityInput, Members: &mUpdateProjectVisibilityInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectVisibilityInput})
+var sUpdateProjectVisibilityInput_projectArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectVisibilityInput_projectArn})
+var sUpdateProjectVisibilityInput_projectVisibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectVisibility", ID: &iProjectVisibilityType, Members: &mProjectVisibilityType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProjectVisibilityInput_projectVisibility})
+var sUpdateProjectVisibilityInput_resourceAccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceAccessRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectVisibilityInput_resourceAccessRole})
+var sUpdateProjectVisibilityOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectVisibilityOutput, Members: &mUpdateProjectVisibilityOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectVisibilityOutput})
+var sUpdateProjectVisibilityOutput_projectArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectVisibilityOutput_projectArn})
+var sUpdateProjectVisibilityOutput_publicProjectAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publicProjectAlias", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectVisibilityOutput_publicProjectAlias})
+var sUpdateProjectVisibilityOutput_projectVisibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectVisibility", ID: &iProjectVisibilityType, Members: &mProjectVisibilityType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProjectVisibilityOutput_projectVisibility})
+var sUpdateReportGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReportGroupInput, Members: &mUpdateReportGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReportGroupInput})
+var sUpdateReportGroupInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUpdateReportGroupInput_arn})
+var sUpdateReportGroupInput_exportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportConfig", ID: &iReportExportConfig, Members: &mReportExportConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReportGroupInput_exportConfig})
+var sUpdateReportGroupInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUpdateReportGroupInput_tags})
+var sUpdateReportGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReportGroupOutput, Members: &mUpdateReportGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReportGroupOutput})
+var sUpdateReportGroupOutput_reportGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportGroup", ID: &iReportGroup, Members: &mReportGroup, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReportGroupOutput_reportGroup})
+var sUpdateWebhookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebhookInput, Members: &mUpdateWebhookInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebhookInput})
+var sUpdateWebhookInput_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString, Ext: &eUpdateWebhookInput_projectName})
+var sUpdateWebhookInput_branchFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchFilter", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateWebhookInput_branchFilter})
+var sUpdateWebhookInput_rotateSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rotateSecret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateWebhookInput_rotateSecret})
+var sUpdateWebhookInput_filterGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterGroups", ID: &i_FilterGroups, Members: &m_FilterGroups, Type: smithy.ShapeTypeList, Ext: &eUpdateWebhookInput_filterGroups})
+var sUpdateWebhookInput_buildType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildType", ID: &iWebhookBuildType, Members: &mWebhookBuildType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebhookInput_buildType})
+var sUpdateWebhookInput_pullRequestBuildPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestBuildPolicy", ID: &iPullRequestBuildPolicy, Members: &mPullRequestBuildPolicy, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebhookInput_pullRequestBuildPolicy})
+var sUpdateWebhookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebhookOutput, Members: &mUpdateWebhookOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebhookOutput})
+var sUpdateWebhookOutput_webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhook", ID: &iWebhook, Members: &mWebhook, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebhookOutput_webhook})
+
+var BatchDeleteBuilds = &sBatchDeleteBuilds
+
+var BatchGetBuildBatches = &sBatchGetBuildBatches
+
+var BatchGetBuilds = &sBatchGetBuilds
+
+var BatchGetCommandExecutions = &sBatchGetCommandExecutions
+
+var BatchGetFleets = &sBatchGetFleets
+
+var BatchGetProjects = &sBatchGetProjects
+
+var BatchGetReportGroups = &sBatchGetReportGroups
+
+var BatchGetReports = &sBatchGetReports
+
+var BatchGetSandboxes = &sBatchGetSandboxes
+
+var CreateFleet = &sCreateFleet
+
+var CreateProject = &sCreateProject
+
+var CreateReportGroup = &sCreateReportGroup
+
+var CreateWebhook = &sCreateWebhook
+
+var DeleteBuildBatch = &sDeleteBuildBatch
+
+var DeleteFleet = &sDeleteFleet
+
+var DeleteProject = &sDeleteProject
+
+var DeleteReport = &sDeleteReport
+
+var DeleteReportGroup = &sDeleteReportGroup
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteSourceCredentials = &sDeleteSourceCredentials
+
+var DeleteWebhook = &sDeleteWebhook
+
+var DescribeCodeCoverages = &sDescribeCodeCoverages
+
+var DescribeTestCases = &sDescribeTestCases
+
+var GetReportGroupTrend = &sGetReportGroupTrend
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var ImportSourceCredentials = &sImportSourceCredentials
+
+var InvalidateProjectCache = &sInvalidateProjectCache
+
+var ListBuildBatches = &sListBuildBatches
+
+var ListBuildBatchesForProject = &sListBuildBatchesForProject
+
+var ListBuilds = &sListBuilds
+
+var ListBuildsForProject = &sListBuildsForProject
+
+var ListCommandExecutionsForSandbox = &sListCommandExecutionsForSandbox
+
+var ListCuratedEnvironmentImages = &sListCuratedEnvironmentImages
+
+var ListFleets = &sListFleets
+
+var ListProjects = &sListProjects
+
+var ListReportGroups = &sListReportGroups
+
+var ListReports = &sListReports
+
+var ListReportsForReportGroup = &sListReportsForReportGroup
+
+var ListSandboxes = &sListSandboxes
+
+var ListSandboxesForProject = &sListSandboxesForProject
+
+var ListSharedProjects = &sListSharedProjects
+
+var ListSharedReportGroups = &sListSharedReportGroups
+
+var ListSourceCredentials = &sListSourceCredentials
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var RetryBuild = &sRetryBuild
+
+var RetryBuildBatch = &sRetryBuildBatch
+
+var StartBuild = &sStartBuild
+
+var StartBuildBatch = &sStartBuildBatch
+
+var StartCommandExecution = &sStartCommandExecution
+
+var StartSandbox = &sStartSandbox
+
+var StartSandboxConnection = &sStartSandboxConnection
+
+var StopBuild = &sStopBuild
+
+var StopBuildBatch = &sStopBuildBatch
+
+var StopSandbox = &sStopSandbox
+
+var UpdateFleet = &sUpdateFleet
+
+var UpdateProject = &sUpdateProject
+
+var UpdateProjectVisibility = &sUpdateProjectVisibility
+
+var UpdateReportGroup = &sUpdateReportGroup
+
+var UpdateWebhook = &sUpdateWebhook
+
+var _CodeBuild_20161006 = &s_CodeBuild_20161006
+
+var AccountLimitExceededException = &sAccountLimitExceededException
+var AccountLimitExceededException_message = &sAccountLimitExceededException_message
+
+var AccountSuspendedException = &sAccountSuspendedException
+var AccountSuspendedException_message = &sAccountSuspendedException_message
+
+var ArtifactNamespace = &sArtifactNamespace
+var ArtifactNamespace_NONE = &sArtifactNamespace_NONE
+var ArtifactNamespace_BUILD_ID = &sArtifactNamespace_BUILD_ID
+
+var ArtifactPackaging = &sArtifactPackaging
+var ArtifactPackaging_NONE = &sArtifactPackaging_NONE
+var ArtifactPackaging_ZIP = &sArtifactPackaging_ZIP
+
+var ArtifactsType = &sArtifactsType
+var ArtifactsType_CODEPIPELINE = &sArtifactsType_CODEPIPELINE
+var ArtifactsType_S3 = &sArtifactsType_S3
+var ArtifactsType_NO_ARTIFACTS = &sArtifactsType_NO_ARTIFACTS
+
+var AuthType = &sAuthType
+var AuthType_OAUTH = &sAuthType_OAUTH
+var AuthType_BASIC_AUTH = &sAuthType_BASIC_AUTH
+var AuthType_PERSONAL_ACCESS_TOKEN = &sAuthType_PERSONAL_ACCESS_TOKEN
+var AuthType_CODECONNECTIONS = &sAuthType_CODECONNECTIONS
+var AuthType_SECRETS_MANAGER = &sAuthType_SECRETS_MANAGER
+
+var AutoRetryConfig = &sAutoRetryConfig
+var AutoRetryConfig_autoRetryLimit = &sAutoRetryConfig_autoRetryLimit
+var AutoRetryConfig_autoRetryNumber = &sAutoRetryConfig_autoRetryNumber
+var AutoRetryConfig_nextAutoRetry = &sAutoRetryConfig_nextAutoRetry
+var AutoRetryConfig_previousAutoRetry = &sAutoRetryConfig_previousAutoRetry
+
+var BatchReportModeType = &sBatchReportModeType
+var BatchReportModeType_REPORT_INDIVIDUAL_BUILDS = &sBatchReportModeType_REPORT_INDIVIDUAL_BUILDS
+var BatchReportModeType_REPORT_AGGREGATED_BATCH = &sBatchReportModeType_REPORT_AGGREGATED_BATCH
+
+var BatchRestrictions = &sBatchRestrictions
+var BatchRestrictions_maximumBuildsAllowed = &sBatchRestrictions_maximumBuildsAllowed
+var BatchRestrictions_computeTypesAllowed = &sBatchRestrictions_computeTypesAllowed
+var BatchRestrictions_fleetsAllowed = &sBatchRestrictions_fleetsAllowed
+
+var _Boolean = &s_Boolean
+
+var BucketOwnerAccess = &sBucketOwnerAccess
+var BucketOwnerAccess_NONE = &sBucketOwnerAccess_NONE
+var BucketOwnerAccess_READ_ONLY = &sBucketOwnerAccess_READ_ONLY
+var BucketOwnerAccess_FULL = &sBucketOwnerAccess_FULL
+
+var Build = &sBuild
+var Build_id = &sBuild_id
+var Build_arn = &sBuild_arn
+var Build_buildNumber = &sBuild_buildNumber
+var Build_startTime = &sBuild_startTime
+var Build_endTime = &sBuild_endTime
+var Build_currentPhase = &sBuild_currentPhase
+var Build_buildStatus = &sBuild_buildStatus
+var Build_sourceVersion = &sBuild_sourceVersion
+var Build_resolvedSourceVersion = &sBuild_resolvedSourceVersion
+var Build_projectName = &sBuild_projectName
+var Build_phases = &sBuild_phases
+var Build_source = &sBuild_source
+var Build_secondarySources = &sBuild_secondarySources
+var Build_secondarySourceVersions = &sBuild_secondarySourceVersions
+var Build_artifacts = &sBuild_artifacts
+var Build_secondaryArtifacts = &sBuild_secondaryArtifacts
+var Build_cache = &sBuild_cache
+var Build_environment = &sBuild_environment
+var Build_serviceRole = &sBuild_serviceRole
+var Build_logs = &sBuild_logs
+var Build_timeoutInMinutes = &sBuild_timeoutInMinutes
+var Build_queuedTimeoutInMinutes = &sBuild_queuedTimeoutInMinutes
+var Build_buildComplete = &sBuild_buildComplete
+var Build_initiator = &sBuild_initiator
+var Build_vpcConfig = &sBuild_vpcConfig
+var Build_networkInterface = &sBuild_networkInterface
+var Build_encryptionKey = &sBuild_encryptionKey
+var Build_exportedEnvironmentVariables = &sBuild_exportedEnvironmentVariables
+var Build_reportArns = &sBuild_reportArns
+var Build_fileSystemLocations = &sBuild_fileSystemLocations
+var Build_debugSession = &sBuild_debugSession
+var Build_buildBatchArn = &sBuild_buildBatchArn
+var Build_autoRetryConfig = &sBuild_autoRetryConfig
+
+var BuildArtifacts = &sBuildArtifacts
+var BuildArtifacts_location = &sBuildArtifacts_location
+var BuildArtifacts_sha256sum = &sBuildArtifacts_sha256sum
+var BuildArtifacts_md5sum = &sBuildArtifacts_md5sum
+var BuildArtifacts_overrideArtifactName = &sBuildArtifacts_overrideArtifactName
+var BuildArtifacts_encryptionDisabled = &sBuildArtifacts_encryptionDisabled
+var BuildArtifacts_artifactIdentifier = &sBuildArtifacts_artifactIdentifier
+var BuildArtifacts_bucketOwnerAccess = &sBuildArtifacts_bucketOwnerAccess
+
+var _BuildArtifactsList = &s_BuildArtifactsList
+var _BuildArtifactsList_member = &s_BuildArtifactsList_member
+
+var BuildBatch = &sBuildBatch
+var BuildBatch_id = &sBuildBatch_id
+var BuildBatch_arn = &sBuildBatch_arn
+var BuildBatch_startTime = &sBuildBatch_startTime
+var BuildBatch_endTime = &sBuildBatch_endTime
+var BuildBatch_currentPhase = &sBuildBatch_currentPhase
+var BuildBatch_buildBatchStatus = &sBuildBatch_buildBatchStatus
+var BuildBatch_sourceVersion = &sBuildBatch_sourceVersion
+var BuildBatch_resolvedSourceVersion = &sBuildBatch_resolvedSourceVersion
+var BuildBatch_projectName = &sBuildBatch_projectName
+var BuildBatch_phases = &sBuildBatch_phases
+var BuildBatch_source = &sBuildBatch_source
+var BuildBatch_secondarySources = &sBuildBatch_secondarySources
+var BuildBatch_secondarySourceVersions = &sBuildBatch_secondarySourceVersions
+var BuildBatch_artifacts = &sBuildBatch_artifacts
+var BuildBatch_secondaryArtifacts = &sBuildBatch_secondaryArtifacts
+var BuildBatch_cache = &sBuildBatch_cache
+var BuildBatch_environment = &sBuildBatch_environment
+var BuildBatch_serviceRole = &sBuildBatch_serviceRole
+var BuildBatch_logConfig = &sBuildBatch_logConfig
+var BuildBatch_buildTimeoutInMinutes = &sBuildBatch_buildTimeoutInMinutes
+var BuildBatch_queuedTimeoutInMinutes = &sBuildBatch_queuedTimeoutInMinutes
+var BuildBatch_complete = &sBuildBatch_complete
+var BuildBatch_initiator = &sBuildBatch_initiator
+var BuildBatch_vpcConfig = &sBuildBatch_vpcConfig
+var BuildBatch_encryptionKey = &sBuildBatch_encryptionKey
+var BuildBatch_buildBatchNumber = &sBuildBatch_buildBatchNumber
+var BuildBatch_fileSystemLocations = &sBuildBatch_fileSystemLocations
+var BuildBatch_buildBatchConfig = &sBuildBatch_buildBatchConfig
+var BuildBatch_buildGroups = &sBuildBatch_buildGroups
+var BuildBatch_debugSessionEnabled = &sBuildBatch_debugSessionEnabled
+var BuildBatch_reportArns = &sBuildBatch_reportArns
+
+var _BuildBatches = &s_BuildBatches
+var _BuildBatches_member = &s_BuildBatches_member
+
+var BuildBatchFilter = &sBuildBatchFilter
+var BuildBatchFilter_status = &sBuildBatchFilter_status
+
+var _BuildBatchIds = &s_BuildBatchIds
+var _BuildBatchIds_member = &s_BuildBatchIds_member
+
+var BuildBatchPhase = &sBuildBatchPhase
+var BuildBatchPhase_phaseType = &sBuildBatchPhase_phaseType
+var BuildBatchPhase_phaseStatus = &sBuildBatchPhase_phaseStatus
+var BuildBatchPhase_startTime = &sBuildBatchPhase_startTime
+var BuildBatchPhase_endTime = &sBuildBatchPhase_endTime
+var BuildBatchPhase_durationInSeconds = &sBuildBatchPhase_durationInSeconds
+var BuildBatchPhase_contexts = &sBuildBatchPhase_contexts
+
+var _BuildBatchPhases = &s_BuildBatchPhases
+var _BuildBatchPhases_member = &s_BuildBatchPhases_member
+
+var BuildBatchPhaseType = &sBuildBatchPhaseType
+var BuildBatchPhaseType_SUBMITTED = &sBuildBatchPhaseType_SUBMITTED
+var BuildBatchPhaseType_DOWNLOAD_BATCHSPEC = &sBuildBatchPhaseType_DOWNLOAD_BATCHSPEC
+var BuildBatchPhaseType_IN_PROGRESS = &sBuildBatchPhaseType_IN_PROGRESS
+var BuildBatchPhaseType_COMBINE_ARTIFACTS = &sBuildBatchPhaseType_COMBINE_ARTIFACTS
+var BuildBatchPhaseType_SUCCEEDED = &sBuildBatchPhaseType_SUCCEEDED
+var BuildBatchPhaseType_FAILED = &sBuildBatchPhaseType_FAILED
+var BuildBatchPhaseType_STOPPED = &sBuildBatchPhaseType_STOPPED
+
+var BuildGroup = &sBuildGroup
+var BuildGroup_identifier = &sBuildGroup_identifier
+var BuildGroup_dependsOn = &sBuildGroup_dependsOn
+var BuildGroup_ignoreFailure = &sBuildGroup_ignoreFailure
+var BuildGroup_currentBuildSummary = &sBuildGroup_currentBuildSummary
+var BuildGroup_priorBuildSummaryList = &sBuildGroup_priorBuildSummaryList
+
+var _BuildGroups = &s_BuildGroups
+var _BuildGroups_member = &s_BuildGroups_member
+
+var _BuildIds = &s_BuildIds
+var _BuildIds_member = &s_BuildIds_member
+
+var BuildNotDeleted = &sBuildNotDeleted
+var BuildNotDeleted_id = &sBuildNotDeleted_id
+var BuildNotDeleted_statusCode = &sBuildNotDeleted_statusCode
+
+var BuildPhase = &sBuildPhase
+var BuildPhase_phaseType = &sBuildPhase_phaseType
+var BuildPhase_phaseStatus = &sBuildPhase_phaseStatus
+var BuildPhase_startTime = &sBuildPhase_startTime
+var BuildPhase_endTime = &sBuildPhase_endTime
+var BuildPhase_durationInSeconds = &sBuildPhase_durationInSeconds
+var BuildPhase_contexts = &sBuildPhase_contexts
+
+var _BuildPhases = &s_BuildPhases
+var _BuildPhases_member = &s_BuildPhases_member
+
+var BuildPhaseType = &sBuildPhaseType
+var BuildPhaseType_SUBMITTED = &sBuildPhaseType_SUBMITTED
+var BuildPhaseType_QUEUED = &sBuildPhaseType_QUEUED
+var BuildPhaseType_PROVISIONING = &sBuildPhaseType_PROVISIONING
+var BuildPhaseType_DOWNLOAD_SOURCE = &sBuildPhaseType_DOWNLOAD_SOURCE
+var BuildPhaseType_INSTALL = &sBuildPhaseType_INSTALL
+var BuildPhaseType_PRE_BUILD = &sBuildPhaseType_PRE_BUILD
+var BuildPhaseType_BUILD = &sBuildPhaseType_BUILD
+var BuildPhaseType_POST_BUILD = &sBuildPhaseType_POST_BUILD
+var BuildPhaseType_UPLOAD_ARTIFACTS = &sBuildPhaseType_UPLOAD_ARTIFACTS
+var BuildPhaseType_FINALIZING = &sBuildPhaseType_FINALIZING
+var BuildPhaseType_COMPLETED = &sBuildPhaseType_COMPLETED
+
+var _BuildReportArns = &s_BuildReportArns
+var _BuildReportArns_member = &s_BuildReportArns_member
+
+var _Builds = &s_Builds
+var _Builds_member = &s_Builds_member
+
+var _BuildsNotDeleted = &s_BuildsNotDeleted
+var _BuildsNotDeleted_member = &s_BuildsNotDeleted_member
+
+var BuildStatusConfig = &sBuildStatusConfig
+var BuildStatusConfig_context = &sBuildStatusConfig_context
+var BuildStatusConfig_targetUrl = &sBuildStatusConfig_targetUrl
+
+var _BuildSummaries = &s_BuildSummaries
+var _BuildSummaries_member = &s_BuildSummaries_member
+
+var BuildSummary = &sBuildSummary
+var BuildSummary_arn = &sBuildSummary_arn
+var BuildSummary_requestedOn = &sBuildSummary_requestedOn
+var BuildSummary_buildStatus = &sBuildSummary_buildStatus
+var BuildSummary_primaryArtifact = &sBuildSummary_primaryArtifact
+var BuildSummary_secondaryArtifacts = &sBuildSummary_secondaryArtifacts
+
+var _BuildTimeOut = &s_BuildTimeOut
+
+var CacheMode = &sCacheMode
+var CacheMode_LOCAL_DOCKER_LAYER_CACHE = &sCacheMode_LOCAL_DOCKER_LAYER_CACHE
+var CacheMode_LOCAL_SOURCE_CACHE = &sCacheMode_LOCAL_SOURCE_CACHE
+var CacheMode_LOCAL_CUSTOM_CACHE = &sCacheMode_LOCAL_CUSTOM_CACHE
+
+var CacheType = &sCacheType
+var CacheType_NO_CACHE = &sCacheType_NO_CACHE
+var CacheType_S3 = &sCacheType_S3
+var CacheType_LOCAL = &sCacheType_LOCAL
+
+var CloudWatchLogsConfig = &sCloudWatchLogsConfig
+var CloudWatchLogsConfig_status = &sCloudWatchLogsConfig_status
+var CloudWatchLogsConfig_groupName = &sCloudWatchLogsConfig_groupName
+var CloudWatchLogsConfig_streamName = &sCloudWatchLogsConfig_streamName
+
+var CodeCoverage = &sCodeCoverage
+var CodeCoverage_id = &sCodeCoverage_id
+var CodeCoverage_reportARN = &sCodeCoverage_reportARN
+var CodeCoverage_filePath = &sCodeCoverage_filePath
+var CodeCoverage_lineCoveragePercentage = &sCodeCoverage_lineCoveragePercentage
+var CodeCoverage_linesCovered = &sCodeCoverage_linesCovered
+var CodeCoverage_linesMissed = &sCodeCoverage_linesMissed
+var CodeCoverage_branchCoveragePercentage = &sCodeCoverage_branchCoveragePercentage
+var CodeCoverage_branchesCovered = &sCodeCoverage_branchesCovered
+var CodeCoverage_branchesMissed = &sCodeCoverage_branchesMissed
+var CodeCoverage_expired = &sCodeCoverage_expired
+
+var CodeCoverageReportSummary = &sCodeCoverageReportSummary
+var CodeCoverageReportSummary_lineCoveragePercentage = &sCodeCoverageReportSummary_lineCoveragePercentage
+var CodeCoverageReportSummary_linesCovered = &sCodeCoverageReportSummary_linesCovered
+var CodeCoverageReportSummary_linesMissed = &sCodeCoverageReportSummary_linesMissed
+var CodeCoverageReportSummary_branchCoveragePercentage = &sCodeCoverageReportSummary_branchCoveragePercentage
+var CodeCoverageReportSummary_branchesCovered = &sCodeCoverageReportSummary_branchesCovered
+var CodeCoverageReportSummary_branchesMissed = &sCodeCoverageReportSummary_branchesMissed
+
+var _CodeCoverages = &s_CodeCoverages
+var _CodeCoverages_member = &s_CodeCoverages_member
+
+var CommandExecution = &sCommandExecution
+var CommandExecution_id = &sCommandExecution_id
+var CommandExecution_sandboxId = &sCommandExecution_sandboxId
+var CommandExecution_submitTime = &sCommandExecution_submitTime
+var CommandExecution_startTime = &sCommandExecution_startTime
+var CommandExecution_endTime = &sCommandExecution_endTime
+var CommandExecution_status = &sCommandExecution_status
+var CommandExecution_command = &sCommandExecution_command
+var CommandExecution_type = &sCommandExecution_type
+var CommandExecution_exitCode = &sCommandExecution_exitCode
+var CommandExecution_standardOutputContent = &sCommandExecution_standardOutputContent
+var CommandExecution_standardErrContent = &sCommandExecution_standardErrContent
+var CommandExecution_logs = &sCommandExecution_logs
+var CommandExecution_sandboxArn = &sCommandExecution_sandboxArn
+
+var _CommandExecutionIds = &s_CommandExecutionIds
+var _CommandExecutionIds_member = &s_CommandExecutionIds_member
+
+var _CommandExecutions = &s_CommandExecutions
+var _CommandExecutions_member = &s_CommandExecutions_member
+
+var CommandType = &sCommandType
+var CommandType_SHELL = &sCommandType_SHELL
+
+var ComputeConfiguration = &sComputeConfiguration
+var ComputeConfiguration_vCpu = &sComputeConfiguration_vCpu
+var ComputeConfiguration_memory = &sComputeConfiguration_memory
+var ComputeConfiguration_disk = &sComputeConfiguration_disk
+var ComputeConfiguration_machineType = &sComputeConfiguration_machineType
+var ComputeConfiguration_instanceType = &sComputeConfiguration_instanceType
+
+var ComputeType = &sComputeType
+var ComputeType_BUILD_GENERAL1_SMALL = &sComputeType_BUILD_GENERAL1_SMALL
+var ComputeType_BUILD_GENERAL1_MEDIUM = &sComputeType_BUILD_GENERAL1_MEDIUM
+var ComputeType_BUILD_GENERAL1_LARGE = &sComputeType_BUILD_GENERAL1_LARGE
+var ComputeType_BUILD_GENERAL1_XLARGE = &sComputeType_BUILD_GENERAL1_XLARGE
+var ComputeType_BUILD_GENERAL1_2XLARGE = &sComputeType_BUILD_GENERAL1_2XLARGE
+var ComputeType_BUILD_LAMBDA_1GB = &sComputeType_BUILD_LAMBDA_1GB
+var ComputeType_BUILD_LAMBDA_2GB = &sComputeType_BUILD_LAMBDA_2GB
+var ComputeType_BUILD_LAMBDA_4GB = &sComputeType_BUILD_LAMBDA_4GB
+var ComputeType_BUILD_LAMBDA_8GB = &sComputeType_BUILD_LAMBDA_8GB
+var ComputeType_BUILD_LAMBDA_10GB = &sComputeType_BUILD_LAMBDA_10GB
+var ComputeType_ATTRIBUTE_BASED_COMPUTE = &sComputeType_ATTRIBUTE_BASED_COMPUTE
+var ComputeType_CUSTOM_INSTANCE_TYPE = &sComputeType_CUSTOM_INSTANCE_TYPE
+
+var _ComputeTypesAllowed = &s_ComputeTypesAllowed
+var _ComputeTypesAllowed_member = &s_ComputeTypesAllowed_member
+
+var CredentialProviderType = &sCredentialProviderType
+var CredentialProviderType_SECRETS_MANAGER = &sCredentialProviderType_SECRETS_MANAGER
+
+var DebugSession = &sDebugSession
+var DebugSession_sessionEnabled = &sDebugSession_sessionEnabled
+var DebugSession_sessionTarget = &sDebugSession_sessionTarget
+
+var DockerServer = &sDockerServer
+var DockerServer_computeType = &sDockerServer_computeType
+var DockerServer_securityGroupIds = &sDockerServer_securityGroupIds
+var DockerServer_status = &sDockerServer_status
+
+var DockerServerStatus = &sDockerServerStatus
+var DockerServerStatus_status = &sDockerServerStatus_status
+var DockerServerStatus_message = &sDockerServerStatus_message
+
+var EnvironmentImage = &sEnvironmentImage
+var EnvironmentImage_name = &sEnvironmentImage_name
+var EnvironmentImage_description = &sEnvironmentImage_description
+var EnvironmentImage_versions = &sEnvironmentImage_versions
+
+var _EnvironmentImages = &s_EnvironmentImages
+var _EnvironmentImages_member = &s_EnvironmentImages_member
+
+var EnvironmentLanguage = &sEnvironmentLanguage
+var EnvironmentLanguage_language = &sEnvironmentLanguage_language
+var EnvironmentLanguage_images = &sEnvironmentLanguage_images
+
+var _EnvironmentLanguages = &s_EnvironmentLanguages
+var _EnvironmentLanguages_member = &s_EnvironmentLanguages_member
+
+var EnvironmentPlatform = &sEnvironmentPlatform
+var EnvironmentPlatform_platform = &sEnvironmentPlatform_platform
+var EnvironmentPlatform_languages = &sEnvironmentPlatform_languages
+
+var _EnvironmentPlatforms = &s_EnvironmentPlatforms
+var _EnvironmentPlatforms_member = &s_EnvironmentPlatforms_member
+
+var EnvironmentType = &sEnvironmentType
+var EnvironmentType_WINDOWS_CONTAINER = &sEnvironmentType_WINDOWS_CONTAINER
+var EnvironmentType_LINUX_CONTAINER = &sEnvironmentType_LINUX_CONTAINER
+var EnvironmentType_LINUX_GPU_CONTAINER = &sEnvironmentType_LINUX_GPU_CONTAINER
+var EnvironmentType_ARM_CONTAINER = &sEnvironmentType_ARM_CONTAINER
+var EnvironmentType_WINDOWS_SERVER_2019_CONTAINER = &sEnvironmentType_WINDOWS_SERVER_2019_CONTAINER
+var EnvironmentType_WINDOWS_SERVER_2022_CONTAINER = &sEnvironmentType_WINDOWS_SERVER_2022_CONTAINER
+var EnvironmentType_LINUX_LAMBDA_CONTAINER = &sEnvironmentType_LINUX_LAMBDA_CONTAINER
+var EnvironmentType_ARM_LAMBDA_CONTAINER = &sEnvironmentType_ARM_LAMBDA_CONTAINER
+var EnvironmentType_LINUX_EC2 = &sEnvironmentType_LINUX_EC2
+var EnvironmentType_ARM_EC2 = &sEnvironmentType_ARM_EC2
+var EnvironmentType_WINDOWS_EC2 = &sEnvironmentType_WINDOWS_EC2
+var EnvironmentType_MAC_ARM = &sEnvironmentType_MAC_ARM
+
+var EnvironmentVariable = &sEnvironmentVariable
+var EnvironmentVariable_name = &sEnvironmentVariable_name
+var EnvironmentVariable_value = &sEnvironmentVariable_value
+var EnvironmentVariable_type = &sEnvironmentVariable_type
+
+var _EnvironmentVariables = &s_EnvironmentVariables
+var _EnvironmentVariables_member = &s_EnvironmentVariables_member
+
+var EnvironmentVariableType = &sEnvironmentVariableType
+var EnvironmentVariableType_PLAINTEXT = &sEnvironmentVariableType_PLAINTEXT
+var EnvironmentVariableType_PARAMETER_STORE = &sEnvironmentVariableType_PARAMETER_STORE
+var EnvironmentVariableType_SECRETS_MANAGER = &sEnvironmentVariableType_SECRETS_MANAGER
+
+var ExportedEnvironmentVariable = &sExportedEnvironmentVariable
+var ExportedEnvironmentVariable_name = &sExportedEnvironmentVariable_name
+var ExportedEnvironmentVariable_value = &sExportedEnvironmentVariable_value
+
+var _ExportedEnvironmentVariables = &s_ExportedEnvironmentVariables
+var _ExportedEnvironmentVariables_member = &s_ExportedEnvironmentVariables_member
+
+var FileSystemType = &sFileSystemType
+var FileSystemType_EFS = &sFileSystemType_EFS
+
+var _FilterGroup = &s_FilterGroup
+var _FilterGroup_member = &s_FilterGroup_member
+
+var _FilterGroups = &s_FilterGroups
+var _FilterGroups_member = &s_FilterGroups_member
+
+var Fleet = &sFleet
+var Fleet_arn = &sFleet_arn
+var Fleet_name = &sFleet_name
+var Fleet_id = &sFleet_id
+var Fleet_created = &sFleet_created
+var Fleet_lastModified = &sFleet_lastModified
+var Fleet_status = &sFleet_status
+var Fleet_baseCapacity = &sFleet_baseCapacity
+var Fleet_environmentType = &sFleet_environmentType
+var Fleet_computeType = &sFleet_computeType
+var Fleet_computeConfiguration = &sFleet_computeConfiguration
+var Fleet_scalingConfiguration = &sFleet_scalingConfiguration
+var Fleet_overflowBehavior = &sFleet_overflowBehavior
+var Fleet_vpcConfig = &sFleet_vpcConfig
+var Fleet_proxyConfiguration = &sFleet_proxyConfiguration
+var Fleet_imageId = &sFleet_imageId
+var Fleet_fleetServiceRole = &sFleet_fleetServiceRole
+var Fleet_tags = &sFleet_tags
+
+var _FleetArns = &s_FleetArns
+var _FleetArns_member = &s_FleetArns_member
+
+var _FleetCapacity = &s_FleetCapacity
+
+var FleetContextCode = &sFleetContextCode
+var FleetContextCode_CREATE_FAILED = &sFleetContextCode_CREATE_FAILED
+var FleetContextCode_UPDATE_FAILED = &sFleetContextCode_UPDATE_FAILED
+var FleetContextCode_ACTION_REQUIRED = &sFleetContextCode_ACTION_REQUIRED
+var FleetContextCode_PENDING_DELETION = &sFleetContextCode_PENDING_DELETION
+var FleetContextCode_INSUFFICIENT_CAPACITY = &sFleetContextCode_INSUFFICIENT_CAPACITY
+
+var _FleetName = &s_FleetName
+
+var _FleetNames = &s_FleetNames
+var _FleetNames_member = &s_FleetNames_member
+
+var FleetOverflowBehavior = &sFleetOverflowBehavior
+var FleetOverflowBehavior_QUEUE = &sFleetOverflowBehavior_QUEUE
+var FleetOverflowBehavior_ON_DEMAND = &sFleetOverflowBehavior_ON_DEMAND
+
+var FleetProxyRule = &sFleetProxyRule
+var FleetProxyRule_type = &sFleetProxyRule_type
+var FleetProxyRule_effect = &sFleetProxyRule_effect
+var FleetProxyRule_entities = &sFleetProxyRule_entities
+
+var FleetProxyRuleBehavior = &sFleetProxyRuleBehavior
+var FleetProxyRuleBehavior_ALLOW_ALL = &sFleetProxyRuleBehavior_ALLOW_ALL
+var FleetProxyRuleBehavior_DENY_ALL = &sFleetProxyRuleBehavior_DENY_ALL
+
+var FleetProxyRuleEffectType = &sFleetProxyRuleEffectType
+var FleetProxyRuleEffectType_ALLOW = &sFleetProxyRuleEffectType_ALLOW
+var FleetProxyRuleEffectType_DENY = &sFleetProxyRuleEffectType_DENY
+
+var _FleetProxyRuleEntities = &s_FleetProxyRuleEntities
+var _FleetProxyRuleEntities_member = &s_FleetProxyRuleEntities_member
+
+var _FleetProxyRules = &s_FleetProxyRules
+var _FleetProxyRules_member = &s_FleetProxyRules_member
+
+var FleetProxyRuleType = &sFleetProxyRuleType
+var FleetProxyRuleType_DOMAIN = &sFleetProxyRuleType_DOMAIN
+var FleetProxyRuleType_IP = &sFleetProxyRuleType_IP
+
+var _Fleets = &s_Fleets
+var _Fleets_member = &s_Fleets_member
+
+var _FleetsAllowed = &s_FleetsAllowed
+var _FleetsAllowed_member = &s_FleetsAllowed_member
+
+var FleetScalingMetricType = &sFleetScalingMetricType
+var FleetScalingMetricType_FLEET_UTILIZATION_RATE = &sFleetScalingMetricType_FLEET_UTILIZATION_RATE
+
+var FleetScalingType = &sFleetScalingType
+var FleetScalingType_TARGET_TRACKING_SCALING = &sFleetScalingType_TARGET_TRACKING_SCALING
+
+var FleetSortByType = &sFleetSortByType
+var FleetSortByType_NAME = &sFleetSortByType_NAME
+var FleetSortByType_CREATED_TIME = &sFleetSortByType_CREATED_TIME
+var FleetSortByType_LAST_MODIFIED_TIME = &sFleetSortByType_LAST_MODIFIED_TIME
+
+var FleetStatus = &sFleetStatus
+var FleetStatus_statusCode = &sFleetStatus_statusCode
+var FleetStatus_context = &sFleetStatus_context
+var FleetStatus_message = &sFleetStatus_message
+
+var FleetStatusCode = &sFleetStatusCode
+var FleetStatusCode_CREATING = &sFleetStatusCode_CREATING
+var FleetStatusCode_UPDATING = &sFleetStatusCode_UPDATING
+var FleetStatusCode_ROTATING = &sFleetStatusCode_ROTATING
+var FleetStatusCode_PENDING_DELETION = &sFleetStatusCode_PENDING_DELETION
+var FleetStatusCode_DELETING = &sFleetStatusCode_DELETING
+var FleetStatusCode_CREATE_FAILED = &sFleetStatusCode_CREATE_FAILED
+var FleetStatusCode_UPDATE_ROLLBACK_FAILED = &sFleetStatusCode_UPDATE_ROLLBACK_FAILED
+var FleetStatusCode_ACTIVE = &sFleetStatusCode_ACTIVE
+
+var _GitCloneDepth = &s_GitCloneDepth
+
+var GitSubmodulesConfig = &sGitSubmodulesConfig
+var GitSubmodulesConfig_fetchSubmodules = &sGitSubmodulesConfig_fetchSubmodules
+
+var HostKernel = &sHostKernel
+var HostKernel_LINUX_KERNEL_4 = &sHostKernel_LINUX_KERNEL_4
+var HostKernel_LINUX_KERNEL_6 = &sHostKernel_LINUX_KERNEL_6
+var HostKernel_LINUX_KERNEL_LATEST = &sHostKernel_LINUX_KERNEL_LATEST
+
+var _Identifiers = &s_Identifiers
+var _Identifiers_member = &s_Identifiers_member
+
+var ImagePullCredentialsType = &sImagePullCredentialsType
+var ImagePullCredentialsType_CODEBUILD = &sImagePullCredentialsType_CODEBUILD
+var ImagePullCredentialsType_SERVICE_ROLE = &sImagePullCredentialsType_SERVICE_ROLE
+
+var _ImageVersions = &s_ImageVersions
+var _ImageVersions_member = &s_ImageVersions_member
+
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_message = &sInvalidInputException_message
+
+var _KeyInput = &s_KeyInput
+
+var LanguageType = &sLanguageType
+var LanguageType_JAVA = &sLanguageType_JAVA
+var LanguageType_PYTHON = &sLanguageType_PYTHON
+var LanguageType_NODE_JS = &sLanguageType_NODE_JS
+var LanguageType_RUBY = &sLanguageType_RUBY
+var LanguageType_GOLANG = &sLanguageType_GOLANG
+var LanguageType_DOCKER = &sLanguageType_DOCKER
+var LanguageType_ANDROID = &sLanguageType_ANDROID
+var LanguageType_DOTNET = &sLanguageType_DOTNET
+var LanguageType_BASE = &sLanguageType_BASE
+var LanguageType_PHP = &sLanguageType_PHP
+
+var LogsConfig = &sLogsConfig
+var LogsConfig_cloudWatchLogs = &sLogsConfig_cloudWatchLogs
+var LogsConfig_s3Logs = &sLogsConfig_s3Logs
+
+var LogsConfigStatusType = &sLogsConfigStatusType
+var LogsConfigStatusType_ENABLED = &sLogsConfigStatusType_ENABLED
+var LogsConfigStatusType_DISABLED = &sLogsConfigStatusType_DISABLED
+
+var LogsLocation = &sLogsLocation
+var LogsLocation_groupName = &sLogsLocation_groupName
+var LogsLocation_streamName = &sLogsLocation_streamName
+var LogsLocation_deepLink = &sLogsLocation_deepLink
+var LogsLocation_s3DeepLink = &sLogsLocation_s3DeepLink
+var LogsLocation_cloudWatchLogsArn = &sLogsLocation_cloudWatchLogsArn
+var LogsLocation_s3LogsArn = &sLogsLocation_s3LogsArn
+var LogsLocation_cloudWatchLogs = &sLogsLocation_cloudWatchLogs
+var LogsLocation_s3Logs = &sLogsLocation_s3Logs
+
+var MachineType = &sMachineType
+var MachineType_GENERAL = &sMachineType_GENERAL
+var MachineType_NVME = &sMachineType_NVME
+
+var NetworkInterface = &sNetworkInterface
+var NetworkInterface_subnetId = &sNetworkInterface_subnetId
+var NetworkInterface_networkInterfaceId = &sNetworkInterface_networkInterfaceId
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _NonNegativeInt = &s_NonNegativeInt
+
+var OAuthProviderException = &sOAuthProviderException
+var OAuthProviderException_message = &sOAuthProviderException_message
+
+var _PageSize = &s_PageSize
+
+var _Percentage = &s_Percentage
+
+var PhaseContext = &sPhaseContext
+var PhaseContext_statusCode = &sPhaseContext_statusCode
+var PhaseContext_message = &sPhaseContext_message
+
+var _PhaseContexts = &s_PhaseContexts
+var _PhaseContexts_member = &s_PhaseContexts_member
+
+var PlatformType = &sPlatformType
+var PlatformType_DEBIAN = &sPlatformType_DEBIAN
+var PlatformType_AMAZON_LINUX = &sPlatformType_AMAZON_LINUX
+var PlatformType_UBUNTU = &sPlatformType_UBUNTU
+var PlatformType_WINDOWS_SERVER = &sPlatformType_WINDOWS_SERVER
+
+var Project = &sProject
+var Project_name = &sProject_name
+var Project_arn = &sProject_arn
+var Project_description = &sProject_description
+var Project_source = &sProject_source
+var Project_secondarySources = &sProject_secondarySources
+var Project_sourceVersion = &sProject_sourceVersion
+var Project_secondarySourceVersions = &sProject_secondarySourceVersions
+var Project_artifacts = &sProject_artifacts
+var Project_secondaryArtifacts = &sProject_secondaryArtifacts
+var Project_cache = &sProject_cache
+var Project_environment = &sProject_environment
+var Project_serviceRole = &sProject_serviceRole
+var Project_timeoutInMinutes = &sProject_timeoutInMinutes
+var Project_queuedTimeoutInMinutes = &sProject_queuedTimeoutInMinutes
+var Project_encryptionKey = &sProject_encryptionKey
+var Project_tags = &sProject_tags
+var Project_created = &sProject_created
+var Project_lastModified = &sProject_lastModified
+var Project_webhook = &sProject_webhook
+var Project_vpcConfig = &sProject_vpcConfig
+var Project_badge = &sProject_badge
+var Project_logsConfig = &sProject_logsConfig
+var Project_fileSystemLocations = &sProject_fileSystemLocations
+var Project_buildBatchConfig = &sProject_buildBatchConfig
+var Project_concurrentBuildLimit = &sProject_concurrentBuildLimit
+var Project_projectVisibility = &sProject_projectVisibility
+var Project_publicProjectAlias = &sProject_publicProjectAlias
+var Project_resourceAccessRole = &sProject_resourceAccessRole
+var Project_autoRetryLimit = &sProject_autoRetryLimit
+
+var _ProjectArns = &s_ProjectArns
+var _ProjectArns_member = &s_ProjectArns_member
+
+var ProjectArtifacts = &sProjectArtifacts
+var ProjectArtifacts_type = &sProjectArtifacts_type
+var ProjectArtifacts_location = &sProjectArtifacts_location
+var ProjectArtifacts_path = &sProjectArtifacts_path
+var ProjectArtifacts_namespaceType = &sProjectArtifacts_namespaceType
+var ProjectArtifacts_name = &sProjectArtifacts_name
+var ProjectArtifacts_packaging = &sProjectArtifacts_packaging
+var ProjectArtifacts_overrideArtifactName = &sProjectArtifacts_overrideArtifactName
+var ProjectArtifacts_encryptionDisabled = &sProjectArtifacts_encryptionDisabled
+var ProjectArtifacts_artifactIdentifier = &sProjectArtifacts_artifactIdentifier
+var ProjectArtifacts_bucketOwnerAccess = &sProjectArtifacts_bucketOwnerAccess
+
+var _ProjectArtifactsList = &s_ProjectArtifactsList
+var _ProjectArtifactsList_member = &s_ProjectArtifactsList_member
+
+var ProjectBadge = &sProjectBadge
+var ProjectBadge_badgeEnabled = &sProjectBadge_badgeEnabled
+var ProjectBadge_badgeRequestUrl = &sProjectBadge_badgeRequestUrl
+
+var ProjectBuildBatchConfig = &sProjectBuildBatchConfig
+var ProjectBuildBatchConfig_serviceRole = &sProjectBuildBatchConfig_serviceRole
+var ProjectBuildBatchConfig_combineArtifacts = &sProjectBuildBatchConfig_combineArtifacts
+var ProjectBuildBatchConfig_restrictions = &sProjectBuildBatchConfig_restrictions
+var ProjectBuildBatchConfig_timeoutInMins = &sProjectBuildBatchConfig_timeoutInMins
+var ProjectBuildBatchConfig_batchReportMode = &sProjectBuildBatchConfig_batchReportMode
+
+var ProjectCache = &sProjectCache
+var ProjectCache_type = &sProjectCache_type
+var ProjectCache_location = &sProjectCache_location
+var ProjectCache_modes = &sProjectCache_modes
+var ProjectCache_cacheNamespace = &sProjectCache_cacheNamespace
+
+var _ProjectCacheModes = &s_ProjectCacheModes
+var _ProjectCacheModes_member = &s_ProjectCacheModes_member
+
+var _ProjectDescription = &s_ProjectDescription
+
+var ProjectEnvironment = &sProjectEnvironment
+var ProjectEnvironment_type = &sProjectEnvironment_type
+var ProjectEnvironment_image = &sProjectEnvironment_image
+var ProjectEnvironment_computeType = &sProjectEnvironment_computeType
+var ProjectEnvironment_computeConfiguration = &sProjectEnvironment_computeConfiguration
+var ProjectEnvironment_fleet = &sProjectEnvironment_fleet
+var ProjectEnvironment_environmentVariables = &sProjectEnvironment_environmentVariables
+var ProjectEnvironment_privilegedMode = &sProjectEnvironment_privilegedMode
+var ProjectEnvironment_certificate = &sProjectEnvironment_certificate
+var ProjectEnvironment_registryCredential = &sProjectEnvironment_registryCredential
+var ProjectEnvironment_imagePullCredentialsType = &sProjectEnvironment_imagePullCredentialsType
+var ProjectEnvironment_dockerServer = &sProjectEnvironment_dockerServer
+var ProjectEnvironment_hostKernel = &sProjectEnvironment_hostKernel
+
+var ProjectFileSystemLocation = &sProjectFileSystemLocation
+var ProjectFileSystemLocation_type = &sProjectFileSystemLocation_type
+var ProjectFileSystemLocation_location = &sProjectFileSystemLocation_location
+var ProjectFileSystemLocation_mountPoint = &sProjectFileSystemLocation_mountPoint
+var ProjectFileSystemLocation_identifier = &sProjectFileSystemLocation_identifier
+var ProjectFileSystemLocation_mountOptions = &sProjectFileSystemLocation_mountOptions
+
+var _ProjectFileSystemLocations = &s_ProjectFileSystemLocations
+var _ProjectFileSystemLocations_member = &s_ProjectFileSystemLocations_member
+
+var ProjectFleet = &sProjectFleet
+var ProjectFleet_fleetArn = &sProjectFleet_fleetArn
+
+var _ProjectName = &s_ProjectName
+
+var _ProjectNames = &s_ProjectNames
+var _ProjectNames_member = &s_ProjectNames_member
+
+var _Projects = &s_Projects
+var _Projects_member = &s_Projects_member
+
+var _ProjectSecondarySourceVersions = &s_ProjectSecondarySourceVersions
+var _ProjectSecondarySourceVersions_member = &s_ProjectSecondarySourceVersions_member
+
+var ProjectSortByType = &sProjectSortByType
+var ProjectSortByType_NAME = &sProjectSortByType_NAME
+var ProjectSortByType_CREATED_TIME = &sProjectSortByType_CREATED_TIME
+var ProjectSortByType_LAST_MODIFIED_TIME = &sProjectSortByType_LAST_MODIFIED_TIME
+
+var ProjectSource = &sProjectSource
+var ProjectSource_type = &sProjectSource_type
+var ProjectSource_location = &sProjectSource_location
+var ProjectSource_gitCloneDepth = &sProjectSource_gitCloneDepth
+var ProjectSource_gitSubmodulesConfig = &sProjectSource_gitSubmodulesConfig
+var ProjectSource_buildspec = &sProjectSource_buildspec
+var ProjectSource_auth = &sProjectSource_auth
+var ProjectSource_reportBuildStatus = &sProjectSource_reportBuildStatus
+var ProjectSource_buildStatusConfig = &sProjectSource_buildStatusConfig
+var ProjectSource_insecureSsl = &sProjectSource_insecureSsl
+var ProjectSource_sourceIdentifier = &sProjectSource_sourceIdentifier
+
+var _ProjectSources = &s_ProjectSources
+var _ProjectSources_member = &s_ProjectSources_member
+
+var ProjectSourceVersion = &sProjectSourceVersion
+var ProjectSourceVersion_sourceIdentifier = &sProjectSourceVersion_sourceIdentifier
+var ProjectSourceVersion_sourceVersion = &sProjectSourceVersion_sourceVersion
+
+var ProjectVisibilityType = &sProjectVisibilityType
+var ProjectVisibilityType_PUBLIC_READ = &sProjectVisibilityType_PUBLIC_READ
+var ProjectVisibilityType_PRIVATE = &sProjectVisibilityType_PRIVATE
+
+var ProxyConfiguration = &sProxyConfiguration
+var ProxyConfiguration_defaultBehavior = &sProxyConfiguration_defaultBehavior
+var ProxyConfiguration_orderedProxyRules = &sProxyConfiguration_orderedProxyRules
+
+var PullRequestBuildApproverRole = &sPullRequestBuildApproverRole
+var PullRequestBuildApproverRole_GITHUB_READ = &sPullRequestBuildApproverRole_GITHUB_READ
+var PullRequestBuildApproverRole_GITHUB_TRIAGE = &sPullRequestBuildApproverRole_GITHUB_TRIAGE
+var PullRequestBuildApproverRole_GITHUB_WRITE = &sPullRequestBuildApproverRole_GITHUB_WRITE
+var PullRequestBuildApproverRole_GITHUB_MAINTAIN = &sPullRequestBuildApproverRole_GITHUB_MAINTAIN
+var PullRequestBuildApproverRole_GITHUB_ADMIN = &sPullRequestBuildApproverRole_GITHUB_ADMIN
+var PullRequestBuildApproverRole_GITLAB_GUEST = &sPullRequestBuildApproverRole_GITLAB_GUEST
+var PullRequestBuildApproverRole_GITLAB_PLANNER = &sPullRequestBuildApproverRole_GITLAB_PLANNER
+var PullRequestBuildApproverRole_GITLAB_REPORTER = &sPullRequestBuildApproverRole_GITLAB_REPORTER
+var PullRequestBuildApproverRole_GITLAB_DEVELOPER = &sPullRequestBuildApproverRole_GITLAB_DEVELOPER
+var PullRequestBuildApproverRole_GITLAB_MAINTAINER = &sPullRequestBuildApproverRole_GITLAB_MAINTAINER
+var PullRequestBuildApproverRole_GITLAB_OWNER = &sPullRequestBuildApproverRole_GITLAB_OWNER
+var PullRequestBuildApproverRole_BITBUCKET_READ = &sPullRequestBuildApproverRole_BITBUCKET_READ
+var PullRequestBuildApproverRole_BITBUCKET_WRITE = &sPullRequestBuildApproverRole_BITBUCKET_WRITE
+var PullRequestBuildApproverRole_BITBUCKET_ADMIN = &sPullRequestBuildApproverRole_BITBUCKET_ADMIN
+
+var _PullRequestBuildApproverRoles = &s_PullRequestBuildApproverRoles
+var _PullRequestBuildApproverRoles_member = &s_PullRequestBuildApproverRoles_member
+
+var PullRequestBuildCommentApproval = &sPullRequestBuildCommentApproval
+var PullRequestBuildCommentApproval_DISABLED = &sPullRequestBuildCommentApproval_DISABLED
+var PullRequestBuildCommentApproval_ALL_PULL_REQUESTS = &sPullRequestBuildCommentApproval_ALL_PULL_REQUESTS
+var PullRequestBuildCommentApproval_FORK_PULL_REQUESTS = &sPullRequestBuildCommentApproval_FORK_PULL_REQUESTS
+
+var PullRequestBuildPolicy = &sPullRequestBuildPolicy
+var PullRequestBuildPolicy_requiresCommentApproval = &sPullRequestBuildPolicy_requiresCommentApproval
+var PullRequestBuildPolicy_approverRoles = &sPullRequestBuildPolicy_approverRoles
+
+var RegistryCredential = &sRegistryCredential
+var RegistryCredential_credential = &sRegistryCredential_credential
+var RegistryCredential_credentialProvider = &sRegistryCredential_credentialProvider
+
+var Report = &sReport
+var Report_arn = &sReport_arn
+var Report_type = &sReport_type
+var Report_name = &sReport_name
+var Report_reportGroupArn = &sReport_reportGroupArn
+var Report_executionId = &sReport_executionId
+var Report_status = &sReport_status
+var Report_created = &sReport_created
+var Report_expired = &sReport_expired
+var Report_exportConfig = &sReport_exportConfig
+var Report_truncated = &sReport_truncated
+var Report_testSummary = &sReport_testSummary
+var Report_codeCoverageSummary = &sReport_codeCoverageSummary
+
+var _ReportArns = &s_ReportArns
+var _ReportArns_member = &s_ReportArns_member
+
+var ReportCodeCoverageSortByType = &sReportCodeCoverageSortByType
+var ReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE = &sReportCodeCoverageSortByType_LINE_COVERAGE_PERCENTAGE
+var ReportCodeCoverageSortByType_FILE_PATH = &sReportCodeCoverageSortByType_FILE_PATH
+
+var ReportExportConfig = &sReportExportConfig
+var ReportExportConfig_exportConfigType = &sReportExportConfig_exportConfigType
+var ReportExportConfig_s3Destination = &sReportExportConfig_s3Destination
+
+var ReportExportConfigType = &sReportExportConfigType
+var ReportExportConfigType_S3 = &sReportExportConfigType_S3
+var ReportExportConfigType_NO_EXPORT = &sReportExportConfigType_NO_EXPORT
+
+var ReportFilter = &sReportFilter
+var ReportFilter_status = &sReportFilter_status
+
+var ReportGroup = &sReportGroup
+var ReportGroup_arn = &sReportGroup_arn
+var ReportGroup_name = &sReportGroup_name
+var ReportGroup_type = &sReportGroup_type
+var ReportGroup_exportConfig = &sReportGroup_exportConfig
+var ReportGroup_created = &sReportGroup_created
+var ReportGroup_lastModified = &sReportGroup_lastModified
+var ReportGroup_tags = &sReportGroup_tags
+var ReportGroup_status = &sReportGroup_status
+
+var _ReportGroupArns = &s_ReportGroupArns
+var _ReportGroupArns_member = &s_ReportGroupArns_member
+
+var _ReportGroupName = &s_ReportGroupName
+
+var _ReportGroups = &s_ReportGroups
+var _ReportGroups_member = &s_ReportGroups_member
+
+var ReportGroupSortByType = &sReportGroupSortByType
+var ReportGroupSortByType_NAME = &sReportGroupSortByType_NAME
+var ReportGroupSortByType_CREATED_TIME = &sReportGroupSortByType_CREATED_TIME
+var ReportGroupSortByType_LAST_MODIFIED_TIME = &sReportGroupSortByType_LAST_MODIFIED_TIME
+
+var ReportGroupStatusType = &sReportGroupStatusType
+var ReportGroupStatusType_ACTIVE = &sReportGroupStatusType_ACTIVE
+var ReportGroupStatusType_DELETING = &sReportGroupStatusType_DELETING
+
+var ReportGroupTrendFieldType = &sReportGroupTrendFieldType
+var ReportGroupTrendFieldType_PASS_RATE = &sReportGroupTrendFieldType_PASS_RATE
+var ReportGroupTrendFieldType_DURATION = &sReportGroupTrendFieldType_DURATION
+var ReportGroupTrendFieldType_TOTAL = &sReportGroupTrendFieldType_TOTAL
+var ReportGroupTrendFieldType_LINE_COVERAGE = &sReportGroupTrendFieldType_LINE_COVERAGE
+var ReportGroupTrendFieldType_LINES_COVERED = &sReportGroupTrendFieldType_LINES_COVERED
+var ReportGroupTrendFieldType_LINES_MISSED = &sReportGroupTrendFieldType_LINES_MISSED
+var ReportGroupTrendFieldType_BRANCH_COVERAGE = &sReportGroupTrendFieldType_BRANCH_COVERAGE
+var ReportGroupTrendFieldType_BRANCHES_COVERED = &sReportGroupTrendFieldType_BRANCHES_COVERED
+var ReportGroupTrendFieldType_BRANCHES_MISSED = &sReportGroupTrendFieldType_BRANCHES_MISSED
+
+var _ReportGroupTrendRawDataList = &s_ReportGroupTrendRawDataList
+var _ReportGroupTrendRawDataList_member = &s_ReportGroupTrendRawDataList_member
+
+var ReportGroupTrendStats = &sReportGroupTrendStats
+var ReportGroupTrendStats_average = &sReportGroupTrendStats_average
+var ReportGroupTrendStats_max = &sReportGroupTrendStats_max
+var ReportGroupTrendStats_min = &sReportGroupTrendStats_min
+
+var ReportPackagingType = &sReportPackagingType
+var ReportPackagingType_ZIP = &sReportPackagingType_ZIP
+var ReportPackagingType_NONE = &sReportPackagingType_NONE
+
+var _Reports = &s_Reports
+var _Reports_member = &s_Reports_member
+
+var _ReportStatusCounts = &s_ReportStatusCounts
+var _ReportStatusCounts_key = &s_ReportStatusCounts_key
+var _ReportStatusCounts_value = &s_ReportStatusCounts_value
+
+var ReportStatusType = &sReportStatusType
+var ReportStatusType_GENERATING = &sReportStatusType_GENERATING
+var ReportStatusType_SUCCEEDED = &sReportStatusType_SUCCEEDED
+var ReportStatusType_FAILED = &sReportStatusType_FAILED
+var ReportStatusType_INCOMPLETE = &sReportStatusType_INCOMPLETE
+var ReportStatusType_DELETING = &sReportStatusType_DELETING
+
+var ReportType = &sReportType
+var ReportType_TEST = &sReportType_TEST
+var ReportType_CODE_COVERAGE = &sReportType_CODE_COVERAGE
+
+var ReportWithRawData = &sReportWithRawData
+var ReportWithRawData_reportArn = &sReportWithRawData_reportArn
+var ReportWithRawData_data = &sReportWithRawData_data
+
+var ResolvedArtifact = &sResolvedArtifact
+var ResolvedArtifact_type = &sResolvedArtifact_type
+var ResolvedArtifact_location = &sResolvedArtifact_location
+var ResolvedArtifact_identifier = &sResolvedArtifact_identifier
+
+var _ResolvedSecondaryArtifacts = &s_ResolvedSecondaryArtifacts
+var _ResolvedSecondaryArtifacts_member = &s_ResolvedSecondaryArtifacts_member
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_message = &sResourceAlreadyExistsException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var RetryBuildBatchType = &sRetryBuildBatchType
+var RetryBuildBatchType_RETRY_ALL_BUILDS = &sRetryBuildBatchType_RETRY_ALL_BUILDS
+var RetryBuildBatchType_RETRY_FAILED_BUILDS = &sRetryBuildBatchType_RETRY_FAILED_BUILDS
+
+var S3LogsConfig = &sS3LogsConfig
+var S3LogsConfig_status = &sS3LogsConfig_status
+var S3LogsConfig_location = &sS3LogsConfig_location
+var S3LogsConfig_encryptionDisabled = &sS3LogsConfig_encryptionDisabled
+var S3LogsConfig_bucketOwnerAccess = &sS3LogsConfig_bucketOwnerAccess
+
+var S3ReportExportConfig = &sS3ReportExportConfig
+var S3ReportExportConfig_bucket = &sS3ReportExportConfig_bucket
+var S3ReportExportConfig_bucketOwner = &sS3ReportExportConfig_bucketOwner
+var S3ReportExportConfig_path = &sS3ReportExportConfig_path
+var S3ReportExportConfig_packaging = &sS3ReportExportConfig_packaging
+var S3ReportExportConfig_encryptionKey = &sS3ReportExportConfig_encryptionKey
+var S3ReportExportConfig_encryptionDisabled = &sS3ReportExportConfig_encryptionDisabled
+
+var Sandbox = &sSandbox
+var Sandbox_id = &sSandbox_id
+var Sandbox_arn = &sSandbox_arn
+var Sandbox_projectName = &sSandbox_projectName
+var Sandbox_requestTime = &sSandbox_requestTime
+var Sandbox_startTime = &sSandbox_startTime
+var Sandbox_endTime = &sSandbox_endTime
+var Sandbox_status = &sSandbox_status
+var Sandbox_source = &sSandbox_source
+var Sandbox_sourceVersion = &sSandbox_sourceVersion
+var Sandbox_secondarySources = &sSandbox_secondarySources
+var Sandbox_secondarySourceVersions = &sSandbox_secondarySourceVersions
+var Sandbox_environment = &sSandbox_environment
+var Sandbox_fileSystemLocations = &sSandbox_fileSystemLocations
+var Sandbox_timeoutInMinutes = &sSandbox_timeoutInMinutes
+var Sandbox_queuedTimeoutInMinutes = &sSandbox_queuedTimeoutInMinutes
+var Sandbox_vpcConfig = &sSandbox_vpcConfig
+var Sandbox_logConfig = &sSandbox_logConfig
+var Sandbox_encryptionKey = &sSandbox_encryptionKey
+var Sandbox_serviceRole = &sSandbox_serviceRole
+var Sandbox_currentSession = &sSandbox_currentSession
+
+var _Sandboxes = &s_Sandboxes
+var _Sandboxes_member = &s_Sandboxes_member
+
+var _SandboxIds = &s_SandboxIds
+var _SandboxIds_member = &s_SandboxIds_member
+
+var SandboxSession = &sSandboxSession
+var SandboxSession_id = &sSandboxSession_id
+var SandboxSession_status = &sSandboxSession_status
+var SandboxSession_startTime = &sSandboxSession_startTime
+var SandboxSession_endTime = &sSandboxSession_endTime
+var SandboxSession_currentPhase = &sSandboxSession_currentPhase
+var SandboxSession_phases = &sSandboxSession_phases
+var SandboxSession_resolvedSourceVersion = &sSandboxSession_resolvedSourceVersion
+var SandboxSession_logs = &sSandboxSession_logs
+var SandboxSession_networkInterface = &sSandboxSession_networkInterface
+
+var SandboxSessionPhase = &sSandboxSessionPhase
+var SandboxSessionPhase_phaseType = &sSandboxSessionPhase_phaseType
+var SandboxSessionPhase_phaseStatus = &sSandboxSessionPhase_phaseStatus
+var SandboxSessionPhase_startTime = &sSandboxSessionPhase_startTime
+var SandboxSessionPhase_endTime = &sSandboxSessionPhase_endTime
+var SandboxSessionPhase_durationInSeconds = &sSandboxSessionPhase_durationInSeconds
+var SandboxSessionPhase_contexts = &sSandboxSessionPhase_contexts
+
+var _SandboxSessionPhases = &s_SandboxSessionPhases
+var _SandboxSessionPhases_member = &s_SandboxSessionPhases_member
+
+var ScalingConfigurationInput = &sScalingConfigurationInput
+var ScalingConfigurationInput_scalingType = &sScalingConfigurationInput_scalingType
+var ScalingConfigurationInput_targetTrackingScalingConfigs = &sScalingConfigurationInput_targetTrackingScalingConfigs
+var ScalingConfigurationInput_maxCapacity = &sScalingConfigurationInput_maxCapacity
+
+var ScalingConfigurationOutput = &sScalingConfigurationOutput
+var ScalingConfigurationOutput_scalingType = &sScalingConfigurationOutput_scalingType
+var ScalingConfigurationOutput_targetTrackingScalingConfigs = &sScalingConfigurationOutput_targetTrackingScalingConfigs
+var ScalingConfigurationOutput_maxCapacity = &sScalingConfigurationOutput_maxCapacity
+var ScalingConfigurationOutput_desiredCapacity = &sScalingConfigurationOutput_desiredCapacity
+
+var ScopeConfiguration = &sScopeConfiguration
+var ScopeConfiguration_name = &sScopeConfiguration_name
+var ScopeConfiguration_domain = &sScopeConfiguration_domain
+var ScopeConfiguration_scope = &sScopeConfiguration_scope
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var _SensitiveNonEmptyString = &s_SensitiveNonEmptyString
+
+var _SensitiveString = &s_SensitiveString
+
+var ServerType = &sServerType
+var ServerType_GITHUB = &sServerType_GITHUB
+var ServerType_BITBUCKET = &sServerType_BITBUCKET
+var ServerType_GITHUB_ENTERPRISE = &sServerType_GITHUB_ENTERPRISE
+var ServerType_GITLAB = &sServerType_GITLAB
+var ServerType_GITLAB_SELF_MANAGED = &sServerType_GITLAB_SELF_MANAGED
+
+var SharedResourceSortByType = &sSharedResourceSortByType
+var SharedResourceSortByType_ARN = &sSharedResourceSortByType_ARN
+var SharedResourceSortByType_MODIFIED_TIME = &sSharedResourceSortByType_MODIFIED_TIME
+
+var SortOrderType = &sSortOrderType
+var SortOrderType_ASCENDING = &sSortOrderType_ASCENDING
+var SortOrderType_DESCENDING = &sSortOrderType_DESCENDING
+
+var SourceAuth = &sSourceAuth
+var SourceAuth_type = &sSourceAuth_type
+var SourceAuth_resource = &sSourceAuth_resource
+
+var SourceAuthType = &sSourceAuthType
+var SourceAuthType_OAUTH = &sSourceAuthType_OAUTH
+var SourceAuthType_CODECONNECTIONS = &sSourceAuthType_CODECONNECTIONS
+var SourceAuthType_SECRETS_MANAGER = &sSourceAuthType_SECRETS_MANAGER
+
+var SourceCredentialsInfo = &sSourceCredentialsInfo
+var SourceCredentialsInfo_arn = &sSourceCredentialsInfo_arn
+var SourceCredentialsInfo_serverType = &sSourceCredentialsInfo_serverType
+var SourceCredentialsInfo_authType = &sSourceCredentialsInfo_authType
+var SourceCredentialsInfo_resource = &sSourceCredentialsInfo_resource
+
+var _SourceCredentialsInfos = &s_SourceCredentialsInfos
+var _SourceCredentialsInfos_member = &s_SourceCredentialsInfos_member
+
+var SourceType = &sSourceType
+var SourceType_CODECOMMIT = &sSourceType_CODECOMMIT
+var SourceType_CODEPIPELINE = &sSourceType_CODEPIPELINE
+var SourceType_GITHUB = &sSourceType_GITHUB
+var SourceType_GITLAB = &sSourceType_GITLAB
+var SourceType_GITLAB_SELF_MANAGED = &sSourceType_GITLAB_SELF_MANAGED
+var SourceType_S3 = &sSourceType_S3
+var SourceType_BITBUCKET = &sSourceType_BITBUCKET
+var SourceType_GITHUB_ENTERPRISE = &sSourceType_GITHUB_ENTERPRISE
+var SourceType_NO_SOURCE = &sSourceType_NO_SOURCE
+
+var SSMSession = &sSSMSession
+var SSMSession_sessionId = &sSSMSession_sessionId
+var SSMSession_tokenValue = &sSSMSession_tokenValue
+var SSMSession_streamUrl = &sSSMSession_streamUrl
+
+var StatusType = &sStatusType
+var StatusType_SUCCEEDED = &sStatusType_SUCCEEDED
+var StatusType_FAILED = &sStatusType_FAILED
+var StatusType_FAULT = &sStatusType_FAULT
+var StatusType_TIMED_OUT = &sStatusType_TIMED_OUT
+var StatusType_IN_PROGRESS = &sStatusType_IN_PROGRESS
+var StatusType_STOPPED = &sStatusType_STOPPED
+
+var _String = &s_String
+
+var _Subnets = &s_Subnets
+var _Subnets_member = &s_Subnets_member
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TargetTrackingScalingConfiguration = &sTargetTrackingScalingConfiguration
+var TargetTrackingScalingConfiguration_metricType = &sTargetTrackingScalingConfiguration_metricType
+var TargetTrackingScalingConfiguration_targetValue = &sTargetTrackingScalingConfiguration_targetValue
+
+var _TargetTrackingScalingConfigurations = &s_TargetTrackingScalingConfigurations
+var _TargetTrackingScalingConfigurations_member = &s_TargetTrackingScalingConfigurations_member
+
+var TestCase = &sTestCase
+var TestCase_reportArn = &sTestCase_reportArn
+var TestCase_testRawDataPath = &sTestCase_testRawDataPath
+var TestCase_prefix = &sTestCase_prefix
+var TestCase_name = &sTestCase_name
+var TestCase_status = &sTestCase_status
+var TestCase_durationInNanoSeconds = &sTestCase_durationInNanoSeconds
+var TestCase_message = &sTestCase_message
+var TestCase_expired = &sTestCase_expired
+var TestCase_testSuiteName = &sTestCase_testSuiteName
+
+var TestCaseFilter = &sTestCaseFilter
+var TestCaseFilter_status = &sTestCaseFilter_status
+var TestCaseFilter_keyword = &sTestCaseFilter_keyword
+
+var _TestCases = &s_TestCases
+var _TestCases_member = &s_TestCases_member
+
+var TestReportSummary = &sTestReportSummary
+var TestReportSummary_total = &sTestReportSummary_total
+var TestReportSummary_statusCounts = &sTestReportSummary_statusCounts
+var TestReportSummary_durationInNanoSeconds = &sTestReportSummary_durationInNanoSeconds
+
+var _TimeOut = &s_TimeOut
+
+var _Timestamp = &s_Timestamp
+
+var _ValueInput = &s_ValueInput
+
+var VpcConfig = &sVpcConfig
+var VpcConfig_vpcId = &sVpcConfig_vpcId
+var VpcConfig_subnets = &sVpcConfig_subnets
+var VpcConfig_securityGroupIds = &sVpcConfig_securityGroupIds
+
+var Webhook = &sWebhook
+var Webhook_url = &sWebhook_url
+var Webhook_payloadUrl = &sWebhook_payloadUrl
+var Webhook_secret = &sWebhook_secret
+var Webhook_branchFilter = &sWebhook_branchFilter
+var Webhook_filterGroups = &sWebhook_filterGroups
+var Webhook_buildType = &sWebhook_buildType
+var Webhook_manualCreation = &sWebhook_manualCreation
+var Webhook_lastModifiedSecret = &sWebhook_lastModifiedSecret
+var Webhook_scopeConfiguration = &sWebhook_scopeConfiguration
+var Webhook_status = &sWebhook_status
+var Webhook_statusMessage = &sWebhook_statusMessage
+var Webhook_pullRequestBuildPolicy = &sWebhook_pullRequestBuildPolicy
+
+var WebhookBuildType = &sWebhookBuildType
+var WebhookBuildType_BUILD = &sWebhookBuildType_BUILD
+var WebhookBuildType_BUILD_BATCH = &sWebhookBuildType_BUILD_BATCH
+var WebhookBuildType_RUNNER_BUILDKITE_BUILD = &sWebhookBuildType_RUNNER_BUILDKITE_BUILD
+
+var WebhookFilter = &sWebhookFilter
+var WebhookFilter_type = &sWebhookFilter_type
+var WebhookFilter_pattern = &sWebhookFilter_pattern
+var WebhookFilter_excludeMatchedPattern = &sWebhookFilter_excludeMatchedPattern
+
+var WebhookFilterType = &sWebhookFilterType
+var WebhookFilterType_EVENT = &sWebhookFilterType_EVENT
+var WebhookFilterType_BASE_REF = &sWebhookFilterType_BASE_REF
+var WebhookFilterType_HEAD_REF = &sWebhookFilterType_HEAD_REF
+var WebhookFilterType_ACTOR_ACCOUNT_ID = &sWebhookFilterType_ACTOR_ACCOUNT_ID
+var WebhookFilterType_FILE_PATH = &sWebhookFilterType_FILE_PATH
+var WebhookFilterType_COMMIT_MESSAGE = &sWebhookFilterType_COMMIT_MESSAGE
+var WebhookFilterType_WORKFLOW_NAME = &sWebhookFilterType_WORKFLOW_NAME
+var WebhookFilterType_TAG_NAME = &sWebhookFilterType_TAG_NAME
+var WebhookFilterType_RELEASE_NAME = &sWebhookFilterType_RELEASE_NAME
+var WebhookFilterType_REPOSITORY_NAME = &sWebhookFilterType_REPOSITORY_NAME
+var WebhookFilterType_ORGANIZATION_NAME = &sWebhookFilterType_ORGANIZATION_NAME
+
+var WebhookScopeType = &sWebhookScopeType
+var WebhookScopeType_GITHUB_ORGANIZATION = &sWebhookScopeType_GITHUB_ORGANIZATION
+var WebhookScopeType_GITHUB_GLOBAL = &sWebhookScopeType_GITHUB_GLOBAL
+var WebhookScopeType_GITLAB_GROUP = &sWebhookScopeType_GITLAB_GROUP
+
+var WebhookStatus = &sWebhookStatus
+var WebhookStatus_CREATING = &sWebhookStatus_CREATING
+var WebhookStatus_CREATE_FAILED = &sWebhookStatus_CREATE_FAILED
+var WebhookStatus_ACTIVE = &sWebhookStatus_ACTIVE
+var WebhookStatus_DELETING = &sWebhookStatus_DELETING
+
+var _WrapperBoolean = &s_WrapperBoolean
+
+var _WrapperDouble = &s_WrapperDouble
+
+var _WrapperInt = &s_WrapperInt
+
+var _WrapperLong = &s_WrapperLong
+
+var BatchDeleteBuildsInput = &sBatchDeleteBuildsInput
+var BatchDeleteBuildsInput_ids = &sBatchDeleteBuildsInput_ids
+
+var BatchDeleteBuildsOutput = &sBatchDeleteBuildsOutput
+var BatchDeleteBuildsOutput_buildsDeleted = &sBatchDeleteBuildsOutput_buildsDeleted
+var BatchDeleteBuildsOutput_buildsNotDeleted = &sBatchDeleteBuildsOutput_buildsNotDeleted
+
+var BatchGetBuildBatchesInput = &sBatchGetBuildBatchesInput
+var BatchGetBuildBatchesInput_ids = &sBatchGetBuildBatchesInput_ids
+
+var BatchGetBuildBatchesOutput = &sBatchGetBuildBatchesOutput
+var BatchGetBuildBatchesOutput_buildBatches = &sBatchGetBuildBatchesOutput_buildBatches
+var BatchGetBuildBatchesOutput_buildBatchesNotFound = &sBatchGetBuildBatchesOutput_buildBatchesNotFound
+
+var BatchGetBuildsInput = &sBatchGetBuildsInput
+var BatchGetBuildsInput_ids = &sBatchGetBuildsInput_ids
+
+var BatchGetBuildsOutput = &sBatchGetBuildsOutput
+var BatchGetBuildsOutput_builds = &sBatchGetBuildsOutput_builds
+var BatchGetBuildsOutput_buildsNotFound = &sBatchGetBuildsOutput_buildsNotFound
+
+var BatchGetCommandExecutionsInput = &sBatchGetCommandExecutionsInput
+var BatchGetCommandExecutionsInput_sandboxId = &sBatchGetCommandExecutionsInput_sandboxId
+var BatchGetCommandExecutionsInput_commandExecutionIds = &sBatchGetCommandExecutionsInput_commandExecutionIds
+
+var BatchGetCommandExecutionsOutput = &sBatchGetCommandExecutionsOutput
+var BatchGetCommandExecutionsOutput_commandExecutions = &sBatchGetCommandExecutionsOutput_commandExecutions
+var BatchGetCommandExecutionsOutput_commandExecutionsNotFound = &sBatchGetCommandExecutionsOutput_commandExecutionsNotFound
+
+var BatchGetFleetsInput = &sBatchGetFleetsInput
+var BatchGetFleetsInput_names = &sBatchGetFleetsInput_names
+
+var BatchGetFleetsOutput = &sBatchGetFleetsOutput
+var BatchGetFleetsOutput_fleets = &sBatchGetFleetsOutput_fleets
+var BatchGetFleetsOutput_fleetsNotFound = &sBatchGetFleetsOutput_fleetsNotFound
+
+var BatchGetProjectsInput = &sBatchGetProjectsInput
+var BatchGetProjectsInput_names = &sBatchGetProjectsInput_names
+
+var BatchGetProjectsOutput = &sBatchGetProjectsOutput
+var BatchGetProjectsOutput_projects = &sBatchGetProjectsOutput_projects
+var BatchGetProjectsOutput_projectsNotFound = &sBatchGetProjectsOutput_projectsNotFound
+
+var BatchGetReportGroupsInput = &sBatchGetReportGroupsInput
+var BatchGetReportGroupsInput_reportGroupArns = &sBatchGetReportGroupsInput_reportGroupArns
+
+var BatchGetReportGroupsOutput = &sBatchGetReportGroupsOutput
+var BatchGetReportGroupsOutput_reportGroups = &sBatchGetReportGroupsOutput_reportGroups
+var BatchGetReportGroupsOutput_reportGroupsNotFound = &sBatchGetReportGroupsOutput_reportGroupsNotFound
+
+var BatchGetReportsInput = &sBatchGetReportsInput
+var BatchGetReportsInput_reportArns = &sBatchGetReportsInput_reportArns
+
+var BatchGetReportsOutput = &sBatchGetReportsOutput
+var BatchGetReportsOutput_reports = &sBatchGetReportsOutput_reports
+var BatchGetReportsOutput_reportsNotFound = &sBatchGetReportsOutput_reportsNotFound
+
+var BatchGetSandboxesInput = &sBatchGetSandboxesInput
+var BatchGetSandboxesInput_ids = &sBatchGetSandboxesInput_ids
+
+var BatchGetSandboxesOutput = &sBatchGetSandboxesOutput
+var BatchGetSandboxesOutput_sandboxes = &sBatchGetSandboxesOutput_sandboxes
+var BatchGetSandboxesOutput_sandboxesNotFound = &sBatchGetSandboxesOutput_sandboxesNotFound
+
+var CreateFleetInput = &sCreateFleetInput
+var CreateFleetInput_name = &sCreateFleetInput_name
+var CreateFleetInput_baseCapacity = &sCreateFleetInput_baseCapacity
+var CreateFleetInput_environmentType = &sCreateFleetInput_environmentType
+var CreateFleetInput_computeType = &sCreateFleetInput_computeType
+var CreateFleetInput_computeConfiguration = &sCreateFleetInput_computeConfiguration
+var CreateFleetInput_scalingConfiguration = &sCreateFleetInput_scalingConfiguration
+var CreateFleetInput_overflowBehavior = &sCreateFleetInput_overflowBehavior
+var CreateFleetInput_vpcConfig = &sCreateFleetInput_vpcConfig
+var CreateFleetInput_proxyConfiguration = &sCreateFleetInput_proxyConfiguration
+var CreateFleetInput_imageId = &sCreateFleetInput_imageId
+var CreateFleetInput_fleetServiceRole = &sCreateFleetInput_fleetServiceRole
+var CreateFleetInput_tags = &sCreateFleetInput_tags
+
+var CreateFleetOutput = &sCreateFleetOutput
+var CreateFleetOutput_fleet = &sCreateFleetOutput_fleet
+
+var CreateProjectInput = &sCreateProjectInput
+var CreateProjectInput_name = &sCreateProjectInput_name
+var CreateProjectInput_description = &sCreateProjectInput_description
+var CreateProjectInput_source = &sCreateProjectInput_source
+var CreateProjectInput_secondarySources = &sCreateProjectInput_secondarySources
+var CreateProjectInput_sourceVersion = &sCreateProjectInput_sourceVersion
+var CreateProjectInput_secondarySourceVersions = &sCreateProjectInput_secondarySourceVersions
+var CreateProjectInput_artifacts = &sCreateProjectInput_artifacts
+var CreateProjectInput_secondaryArtifacts = &sCreateProjectInput_secondaryArtifacts
+var CreateProjectInput_cache = &sCreateProjectInput_cache
+var CreateProjectInput_environment = &sCreateProjectInput_environment
+var CreateProjectInput_serviceRole = &sCreateProjectInput_serviceRole
+var CreateProjectInput_timeoutInMinutes = &sCreateProjectInput_timeoutInMinutes
+var CreateProjectInput_queuedTimeoutInMinutes = &sCreateProjectInput_queuedTimeoutInMinutes
+var CreateProjectInput_encryptionKey = &sCreateProjectInput_encryptionKey
+var CreateProjectInput_tags = &sCreateProjectInput_tags
+var CreateProjectInput_vpcConfig = &sCreateProjectInput_vpcConfig
+var CreateProjectInput_badgeEnabled = &sCreateProjectInput_badgeEnabled
+var CreateProjectInput_logsConfig = &sCreateProjectInput_logsConfig
+var CreateProjectInput_fileSystemLocations = &sCreateProjectInput_fileSystemLocations
+var CreateProjectInput_buildBatchConfig = &sCreateProjectInput_buildBatchConfig
+var CreateProjectInput_concurrentBuildLimit = &sCreateProjectInput_concurrentBuildLimit
+var CreateProjectInput_autoRetryLimit = &sCreateProjectInput_autoRetryLimit
+
+var CreateProjectOutput = &sCreateProjectOutput
+var CreateProjectOutput_project = &sCreateProjectOutput_project
+
+var CreateReportGroupInput = &sCreateReportGroupInput
+var CreateReportGroupInput_name = &sCreateReportGroupInput_name
+var CreateReportGroupInput_type = &sCreateReportGroupInput_type
+var CreateReportGroupInput_exportConfig = &sCreateReportGroupInput_exportConfig
+var CreateReportGroupInput_tags = &sCreateReportGroupInput_tags
+
+var CreateReportGroupOutput = &sCreateReportGroupOutput
+var CreateReportGroupOutput_reportGroup = &sCreateReportGroupOutput_reportGroup
+
+var CreateWebhookInput = &sCreateWebhookInput
+var CreateWebhookInput_projectName = &sCreateWebhookInput_projectName
+var CreateWebhookInput_branchFilter = &sCreateWebhookInput_branchFilter
+var CreateWebhookInput_filterGroups = &sCreateWebhookInput_filterGroups
+var CreateWebhookInput_buildType = &sCreateWebhookInput_buildType
+var CreateWebhookInput_manualCreation = &sCreateWebhookInput_manualCreation
+var CreateWebhookInput_scopeConfiguration = &sCreateWebhookInput_scopeConfiguration
+var CreateWebhookInput_pullRequestBuildPolicy = &sCreateWebhookInput_pullRequestBuildPolicy
+
+var CreateWebhookOutput = &sCreateWebhookOutput
+var CreateWebhookOutput_webhook = &sCreateWebhookOutput_webhook
+
+var DeleteBuildBatchInput = &sDeleteBuildBatchInput
+var DeleteBuildBatchInput_id = &sDeleteBuildBatchInput_id
+
+var DeleteBuildBatchOutput = &sDeleteBuildBatchOutput
+var DeleteBuildBatchOutput_statusCode = &sDeleteBuildBatchOutput_statusCode
+var DeleteBuildBatchOutput_buildsDeleted = &sDeleteBuildBatchOutput_buildsDeleted
+var DeleteBuildBatchOutput_buildsNotDeleted = &sDeleteBuildBatchOutput_buildsNotDeleted
+
+var DeleteFleetInput = &sDeleteFleetInput
+var DeleteFleetInput_arn = &sDeleteFleetInput_arn
+
+var DeleteFleetOutput = &sDeleteFleetOutput
+
+var DeleteProjectInput = &sDeleteProjectInput
+var DeleteProjectInput_name = &sDeleteProjectInput_name
+
+var DeleteProjectOutput = &sDeleteProjectOutput
+
+var DeleteReportGroupInput = &sDeleteReportGroupInput
+var DeleteReportGroupInput_arn = &sDeleteReportGroupInput_arn
+var DeleteReportGroupInput_deleteReports = &sDeleteReportGroupInput_deleteReports
+
+var DeleteReportGroupOutput = &sDeleteReportGroupOutput
+
+var DeleteReportInput = &sDeleteReportInput
+var DeleteReportInput_arn = &sDeleteReportInput_arn
+
+var DeleteReportOutput = &sDeleteReportOutput
+
+var DeleteResourcePolicyInput = &sDeleteResourcePolicyInput
+var DeleteResourcePolicyInput_resourceArn = &sDeleteResourcePolicyInput_resourceArn
+
+var DeleteResourcePolicyOutput = &sDeleteResourcePolicyOutput
+
+var DeleteSourceCredentialsInput = &sDeleteSourceCredentialsInput
+var DeleteSourceCredentialsInput_arn = &sDeleteSourceCredentialsInput_arn
+
+var DeleteSourceCredentialsOutput = &sDeleteSourceCredentialsOutput
+var DeleteSourceCredentialsOutput_arn = &sDeleteSourceCredentialsOutput_arn
+
+var DeleteWebhookInput = &sDeleteWebhookInput
+var DeleteWebhookInput_projectName = &sDeleteWebhookInput_projectName
+
+var DeleteWebhookOutput = &sDeleteWebhookOutput
+
+var DescribeCodeCoveragesInput = &sDescribeCodeCoveragesInput
+var DescribeCodeCoveragesInput_reportArn = &sDescribeCodeCoveragesInput_reportArn
+var DescribeCodeCoveragesInput_nextToken = &sDescribeCodeCoveragesInput_nextToken
+var DescribeCodeCoveragesInput_maxResults = &sDescribeCodeCoveragesInput_maxResults
+var DescribeCodeCoveragesInput_sortOrder = &sDescribeCodeCoveragesInput_sortOrder
+var DescribeCodeCoveragesInput_sortBy = &sDescribeCodeCoveragesInput_sortBy
+var DescribeCodeCoveragesInput_minLineCoveragePercentage = &sDescribeCodeCoveragesInput_minLineCoveragePercentage
+var DescribeCodeCoveragesInput_maxLineCoveragePercentage = &sDescribeCodeCoveragesInput_maxLineCoveragePercentage
+
+var DescribeCodeCoveragesOutput = &sDescribeCodeCoveragesOutput
+var DescribeCodeCoveragesOutput_nextToken = &sDescribeCodeCoveragesOutput_nextToken
+var DescribeCodeCoveragesOutput_codeCoverages = &sDescribeCodeCoveragesOutput_codeCoverages
+
+var DescribeTestCasesInput = &sDescribeTestCasesInput
+var DescribeTestCasesInput_reportArn = &sDescribeTestCasesInput_reportArn
+var DescribeTestCasesInput_nextToken = &sDescribeTestCasesInput_nextToken
+var DescribeTestCasesInput_maxResults = &sDescribeTestCasesInput_maxResults
+var DescribeTestCasesInput_filter = &sDescribeTestCasesInput_filter
+
+var DescribeTestCasesOutput = &sDescribeTestCasesOutput
+var DescribeTestCasesOutput_nextToken = &sDescribeTestCasesOutput_nextToken
+var DescribeTestCasesOutput_testCases = &sDescribeTestCasesOutput_testCases
+
+var GetReportGroupTrendInput = &sGetReportGroupTrendInput
+var GetReportGroupTrendInput_reportGroupArn = &sGetReportGroupTrendInput_reportGroupArn
+var GetReportGroupTrendInput_numOfReports = &sGetReportGroupTrendInput_numOfReports
+var GetReportGroupTrendInput_trendField = &sGetReportGroupTrendInput_trendField
+
+var GetReportGroupTrendOutput = &sGetReportGroupTrendOutput
+var GetReportGroupTrendOutput_stats = &sGetReportGroupTrendOutput_stats
+var GetReportGroupTrendOutput_rawData = &sGetReportGroupTrendOutput_rawData
+
+var GetResourcePolicyInput = &sGetResourcePolicyInput
+var GetResourcePolicyInput_resourceArn = &sGetResourcePolicyInput_resourceArn
+
+var GetResourcePolicyOutput = &sGetResourcePolicyOutput
+var GetResourcePolicyOutput_policy = &sGetResourcePolicyOutput_policy
+
+var ImportSourceCredentialsInput = &sImportSourceCredentialsInput
+var ImportSourceCredentialsInput_username = &sImportSourceCredentialsInput_username
+var ImportSourceCredentialsInput_token = &sImportSourceCredentialsInput_token
+var ImportSourceCredentialsInput_serverType = &sImportSourceCredentialsInput_serverType
+var ImportSourceCredentialsInput_authType = &sImportSourceCredentialsInput_authType
+var ImportSourceCredentialsInput_shouldOverwrite = &sImportSourceCredentialsInput_shouldOverwrite
+
+var ImportSourceCredentialsOutput = &sImportSourceCredentialsOutput
+var ImportSourceCredentialsOutput_arn = &sImportSourceCredentialsOutput_arn
+
+var InvalidateProjectCacheInput = &sInvalidateProjectCacheInput
+var InvalidateProjectCacheInput_projectName = &sInvalidateProjectCacheInput_projectName
+
+var InvalidateProjectCacheOutput = &sInvalidateProjectCacheOutput
+
+var ListBuildBatchesForProjectInput = &sListBuildBatchesForProjectInput
+var ListBuildBatchesForProjectInput_projectName = &sListBuildBatchesForProjectInput_projectName
+var ListBuildBatchesForProjectInput_filter = &sListBuildBatchesForProjectInput_filter
+var ListBuildBatchesForProjectInput_maxResults = &sListBuildBatchesForProjectInput_maxResults
+var ListBuildBatchesForProjectInput_sortOrder = &sListBuildBatchesForProjectInput_sortOrder
+var ListBuildBatchesForProjectInput_nextToken = &sListBuildBatchesForProjectInput_nextToken
+
+var ListBuildBatchesForProjectOutput = &sListBuildBatchesForProjectOutput
+var ListBuildBatchesForProjectOutput_ids = &sListBuildBatchesForProjectOutput_ids
+var ListBuildBatchesForProjectOutput_nextToken = &sListBuildBatchesForProjectOutput_nextToken
+
+var ListBuildBatchesInput = &sListBuildBatchesInput
+var ListBuildBatchesInput_filter = &sListBuildBatchesInput_filter
+var ListBuildBatchesInput_maxResults = &sListBuildBatchesInput_maxResults
+var ListBuildBatchesInput_sortOrder = &sListBuildBatchesInput_sortOrder
+var ListBuildBatchesInput_nextToken = &sListBuildBatchesInput_nextToken
+
+var ListBuildBatchesOutput = &sListBuildBatchesOutput
+var ListBuildBatchesOutput_ids = &sListBuildBatchesOutput_ids
+var ListBuildBatchesOutput_nextToken = &sListBuildBatchesOutput_nextToken
+
+var ListBuildsForProjectInput = &sListBuildsForProjectInput
+var ListBuildsForProjectInput_projectName = &sListBuildsForProjectInput_projectName
+var ListBuildsForProjectInput_sortOrder = &sListBuildsForProjectInput_sortOrder
+var ListBuildsForProjectInput_nextToken = &sListBuildsForProjectInput_nextToken
+
+var ListBuildsForProjectOutput = &sListBuildsForProjectOutput
+var ListBuildsForProjectOutput_ids = &sListBuildsForProjectOutput_ids
+var ListBuildsForProjectOutput_nextToken = &sListBuildsForProjectOutput_nextToken
+
+var ListBuildsInput = &sListBuildsInput
+var ListBuildsInput_sortOrder = &sListBuildsInput_sortOrder
+var ListBuildsInput_nextToken = &sListBuildsInput_nextToken
+
+var ListBuildsOutput = &sListBuildsOutput
+var ListBuildsOutput_ids = &sListBuildsOutput_ids
+var ListBuildsOutput_nextToken = &sListBuildsOutput_nextToken
+
+var ListCommandExecutionsForSandboxInput = &sListCommandExecutionsForSandboxInput
+var ListCommandExecutionsForSandboxInput_sandboxId = &sListCommandExecutionsForSandboxInput_sandboxId
+var ListCommandExecutionsForSandboxInput_maxResults = &sListCommandExecutionsForSandboxInput_maxResults
+var ListCommandExecutionsForSandboxInput_sortOrder = &sListCommandExecutionsForSandboxInput_sortOrder
+var ListCommandExecutionsForSandboxInput_nextToken = &sListCommandExecutionsForSandboxInput_nextToken
+
+var ListCommandExecutionsForSandboxOutput = &sListCommandExecutionsForSandboxOutput
+var ListCommandExecutionsForSandboxOutput_commandExecutions = &sListCommandExecutionsForSandboxOutput_commandExecutions
+var ListCommandExecutionsForSandboxOutput_nextToken = &sListCommandExecutionsForSandboxOutput_nextToken
+
+var ListCuratedEnvironmentImagesInput = &sListCuratedEnvironmentImagesInput
+
+var ListCuratedEnvironmentImagesOutput = &sListCuratedEnvironmentImagesOutput
+var ListCuratedEnvironmentImagesOutput_platforms = &sListCuratedEnvironmentImagesOutput_platforms
+
+var ListFleetsInput = &sListFleetsInput
+var ListFleetsInput_nextToken = &sListFleetsInput_nextToken
+var ListFleetsInput_maxResults = &sListFleetsInput_maxResults
+var ListFleetsInput_sortOrder = &sListFleetsInput_sortOrder
+var ListFleetsInput_sortBy = &sListFleetsInput_sortBy
+
+var ListFleetsOutput = &sListFleetsOutput
+var ListFleetsOutput_nextToken = &sListFleetsOutput_nextToken
+var ListFleetsOutput_fleets = &sListFleetsOutput_fleets
+
+var ListProjectsInput = &sListProjectsInput
+var ListProjectsInput_sortBy = &sListProjectsInput_sortBy
+var ListProjectsInput_sortOrder = &sListProjectsInput_sortOrder
+var ListProjectsInput_nextToken = &sListProjectsInput_nextToken
+
+var ListProjectsOutput = &sListProjectsOutput
+var ListProjectsOutput_nextToken = &sListProjectsOutput_nextToken
+var ListProjectsOutput_projects = &sListProjectsOutput_projects
+
+var ListReportGroupsInput = &sListReportGroupsInput
+var ListReportGroupsInput_sortOrder = &sListReportGroupsInput_sortOrder
+var ListReportGroupsInput_sortBy = &sListReportGroupsInput_sortBy
+var ListReportGroupsInput_nextToken = &sListReportGroupsInput_nextToken
+var ListReportGroupsInput_maxResults = &sListReportGroupsInput_maxResults
+
+var ListReportGroupsOutput = &sListReportGroupsOutput
+var ListReportGroupsOutput_nextToken = &sListReportGroupsOutput_nextToken
+var ListReportGroupsOutput_reportGroups = &sListReportGroupsOutput_reportGroups
+
+var ListReportsForReportGroupInput = &sListReportsForReportGroupInput
+var ListReportsForReportGroupInput_reportGroupArn = &sListReportsForReportGroupInput_reportGroupArn
+var ListReportsForReportGroupInput_nextToken = &sListReportsForReportGroupInput_nextToken
+var ListReportsForReportGroupInput_sortOrder = &sListReportsForReportGroupInput_sortOrder
+var ListReportsForReportGroupInput_maxResults = &sListReportsForReportGroupInput_maxResults
+var ListReportsForReportGroupInput_filter = &sListReportsForReportGroupInput_filter
+
+var ListReportsForReportGroupOutput = &sListReportsForReportGroupOutput
+var ListReportsForReportGroupOutput_nextToken = &sListReportsForReportGroupOutput_nextToken
+var ListReportsForReportGroupOutput_reports = &sListReportsForReportGroupOutput_reports
+
+var ListReportsInput = &sListReportsInput
+var ListReportsInput_sortOrder = &sListReportsInput_sortOrder
+var ListReportsInput_nextToken = &sListReportsInput_nextToken
+var ListReportsInput_maxResults = &sListReportsInput_maxResults
+var ListReportsInput_filter = &sListReportsInput_filter
+
+var ListReportsOutput = &sListReportsOutput
+var ListReportsOutput_nextToken = &sListReportsOutput_nextToken
+var ListReportsOutput_reports = &sListReportsOutput_reports
+
+var ListSandboxesForProjectInput = &sListSandboxesForProjectInput
+var ListSandboxesForProjectInput_projectName = &sListSandboxesForProjectInput_projectName
+var ListSandboxesForProjectInput_maxResults = &sListSandboxesForProjectInput_maxResults
+var ListSandboxesForProjectInput_sortOrder = &sListSandboxesForProjectInput_sortOrder
+var ListSandboxesForProjectInput_nextToken = &sListSandboxesForProjectInput_nextToken
+
+var ListSandboxesForProjectOutput = &sListSandboxesForProjectOutput
+var ListSandboxesForProjectOutput_ids = &sListSandboxesForProjectOutput_ids
+var ListSandboxesForProjectOutput_nextToken = &sListSandboxesForProjectOutput_nextToken
+
+var ListSandboxesInput = &sListSandboxesInput
+var ListSandboxesInput_maxResults = &sListSandboxesInput_maxResults
+var ListSandboxesInput_sortOrder = &sListSandboxesInput_sortOrder
+var ListSandboxesInput_nextToken = &sListSandboxesInput_nextToken
+
+var ListSandboxesOutput = &sListSandboxesOutput
+var ListSandboxesOutput_ids = &sListSandboxesOutput_ids
+var ListSandboxesOutput_nextToken = &sListSandboxesOutput_nextToken
+
+var ListSharedProjectsInput = &sListSharedProjectsInput
+var ListSharedProjectsInput_sortBy = &sListSharedProjectsInput_sortBy
+var ListSharedProjectsInput_sortOrder = &sListSharedProjectsInput_sortOrder
+var ListSharedProjectsInput_maxResults = &sListSharedProjectsInput_maxResults
+var ListSharedProjectsInput_nextToken = &sListSharedProjectsInput_nextToken
+
+var ListSharedProjectsOutput = &sListSharedProjectsOutput
+var ListSharedProjectsOutput_nextToken = &sListSharedProjectsOutput_nextToken
+var ListSharedProjectsOutput_projects = &sListSharedProjectsOutput_projects
+
+var ListSharedReportGroupsInput = &sListSharedReportGroupsInput
+var ListSharedReportGroupsInput_sortOrder = &sListSharedReportGroupsInput_sortOrder
+var ListSharedReportGroupsInput_sortBy = &sListSharedReportGroupsInput_sortBy
+var ListSharedReportGroupsInput_nextToken = &sListSharedReportGroupsInput_nextToken
+var ListSharedReportGroupsInput_maxResults = &sListSharedReportGroupsInput_maxResults
+
+var ListSharedReportGroupsOutput = &sListSharedReportGroupsOutput
+var ListSharedReportGroupsOutput_nextToken = &sListSharedReportGroupsOutput_nextToken
+var ListSharedReportGroupsOutput_reportGroups = &sListSharedReportGroupsOutput_reportGroups
+
+var ListSourceCredentialsInput = &sListSourceCredentialsInput
+
+var ListSourceCredentialsOutput = &sListSourceCredentialsOutput
+var ListSourceCredentialsOutput_sourceCredentialsInfos = &sListSourceCredentialsOutput_sourceCredentialsInfos
+
+var PutResourcePolicyInput = &sPutResourcePolicyInput
+var PutResourcePolicyInput_policy = &sPutResourcePolicyInput_policy
+var PutResourcePolicyInput_resourceArn = &sPutResourcePolicyInput_resourceArn
+
+var PutResourcePolicyOutput = &sPutResourcePolicyOutput
+var PutResourcePolicyOutput_resourceArn = &sPutResourcePolicyOutput_resourceArn
+
+var RetryBuildBatchInput = &sRetryBuildBatchInput
+var RetryBuildBatchInput_id = &sRetryBuildBatchInput_id
+var RetryBuildBatchInput_idempotencyToken = &sRetryBuildBatchInput_idempotencyToken
+var RetryBuildBatchInput_retryType = &sRetryBuildBatchInput_retryType
+
+var RetryBuildBatchOutput = &sRetryBuildBatchOutput
+var RetryBuildBatchOutput_buildBatch = &sRetryBuildBatchOutput_buildBatch
+
+var RetryBuildInput = &sRetryBuildInput
+var RetryBuildInput_id = &sRetryBuildInput_id
+var RetryBuildInput_idempotencyToken = &sRetryBuildInput_idempotencyToken
+
+var RetryBuildOutput = &sRetryBuildOutput
+var RetryBuildOutput_build = &sRetryBuildOutput_build
+
+var StartBuildBatchInput = &sStartBuildBatchInput
+var StartBuildBatchInput_projectName = &sStartBuildBatchInput_projectName
+var StartBuildBatchInput_secondarySourcesOverride = &sStartBuildBatchInput_secondarySourcesOverride
+var StartBuildBatchInput_secondarySourcesVersionOverride = &sStartBuildBatchInput_secondarySourcesVersionOverride
+var StartBuildBatchInput_sourceVersion = &sStartBuildBatchInput_sourceVersion
+var StartBuildBatchInput_artifactsOverride = &sStartBuildBatchInput_artifactsOverride
+var StartBuildBatchInput_secondaryArtifactsOverride = &sStartBuildBatchInput_secondaryArtifactsOverride
+var StartBuildBatchInput_environmentVariablesOverride = &sStartBuildBatchInput_environmentVariablesOverride
+var StartBuildBatchInput_sourceTypeOverride = &sStartBuildBatchInput_sourceTypeOverride
+var StartBuildBatchInput_sourceLocationOverride = &sStartBuildBatchInput_sourceLocationOverride
+var StartBuildBatchInput_sourceAuthOverride = &sStartBuildBatchInput_sourceAuthOverride
+var StartBuildBatchInput_gitCloneDepthOverride = &sStartBuildBatchInput_gitCloneDepthOverride
+var StartBuildBatchInput_gitSubmodulesConfigOverride = &sStartBuildBatchInput_gitSubmodulesConfigOverride
+var StartBuildBatchInput_buildspecOverride = &sStartBuildBatchInput_buildspecOverride
+var StartBuildBatchInput_insecureSslOverride = &sStartBuildBatchInput_insecureSslOverride
+var StartBuildBatchInput_reportBuildBatchStatusOverride = &sStartBuildBatchInput_reportBuildBatchStatusOverride
+var StartBuildBatchInput_environmentTypeOverride = &sStartBuildBatchInput_environmentTypeOverride
+var StartBuildBatchInput_imageOverride = &sStartBuildBatchInput_imageOverride
+var StartBuildBatchInput_computeTypeOverride = &sStartBuildBatchInput_computeTypeOverride
+var StartBuildBatchInput_certificateOverride = &sStartBuildBatchInput_certificateOverride
+var StartBuildBatchInput_cacheOverride = &sStartBuildBatchInput_cacheOverride
+var StartBuildBatchInput_serviceRoleOverride = &sStartBuildBatchInput_serviceRoleOverride
+var StartBuildBatchInput_privilegedModeOverride = &sStartBuildBatchInput_privilegedModeOverride
+var StartBuildBatchInput_buildTimeoutInMinutesOverride = &sStartBuildBatchInput_buildTimeoutInMinutesOverride
+var StartBuildBatchInput_queuedTimeoutInMinutesOverride = &sStartBuildBatchInput_queuedTimeoutInMinutesOverride
+var StartBuildBatchInput_encryptionKeyOverride = &sStartBuildBatchInput_encryptionKeyOverride
+var StartBuildBatchInput_idempotencyToken = &sStartBuildBatchInput_idempotencyToken
+var StartBuildBatchInput_logsConfigOverride = &sStartBuildBatchInput_logsConfigOverride
+var StartBuildBatchInput_registryCredentialOverride = &sStartBuildBatchInput_registryCredentialOverride
+var StartBuildBatchInput_imagePullCredentialsTypeOverride = &sStartBuildBatchInput_imagePullCredentialsTypeOverride
+var StartBuildBatchInput_buildBatchConfigOverride = &sStartBuildBatchInput_buildBatchConfigOverride
+var StartBuildBatchInput_debugSessionEnabled = &sStartBuildBatchInput_debugSessionEnabled
+
+var StartBuildBatchOutput = &sStartBuildBatchOutput
+var StartBuildBatchOutput_buildBatch = &sStartBuildBatchOutput_buildBatch
+
+var StartBuildInput = &sStartBuildInput
+var StartBuildInput_projectName = &sStartBuildInput_projectName
+var StartBuildInput_secondarySourcesOverride = &sStartBuildInput_secondarySourcesOverride
+var StartBuildInput_secondarySourcesVersionOverride = &sStartBuildInput_secondarySourcesVersionOverride
+var StartBuildInput_sourceVersion = &sStartBuildInput_sourceVersion
+var StartBuildInput_artifactsOverride = &sStartBuildInput_artifactsOverride
+var StartBuildInput_secondaryArtifactsOverride = &sStartBuildInput_secondaryArtifactsOverride
+var StartBuildInput_environmentVariablesOverride = &sStartBuildInput_environmentVariablesOverride
+var StartBuildInput_sourceTypeOverride = &sStartBuildInput_sourceTypeOverride
+var StartBuildInput_sourceLocationOverride = &sStartBuildInput_sourceLocationOverride
+var StartBuildInput_sourceAuthOverride = &sStartBuildInput_sourceAuthOverride
+var StartBuildInput_gitCloneDepthOverride = &sStartBuildInput_gitCloneDepthOverride
+var StartBuildInput_gitSubmodulesConfigOverride = &sStartBuildInput_gitSubmodulesConfigOverride
+var StartBuildInput_buildspecOverride = &sStartBuildInput_buildspecOverride
+var StartBuildInput_insecureSslOverride = &sStartBuildInput_insecureSslOverride
+var StartBuildInput_reportBuildStatusOverride = &sStartBuildInput_reportBuildStatusOverride
+var StartBuildInput_buildStatusConfigOverride = &sStartBuildInput_buildStatusConfigOverride
+var StartBuildInput_environmentTypeOverride = &sStartBuildInput_environmentTypeOverride
+var StartBuildInput_imageOverride = &sStartBuildInput_imageOverride
+var StartBuildInput_computeTypeOverride = &sStartBuildInput_computeTypeOverride
+var StartBuildInput_certificateOverride = &sStartBuildInput_certificateOverride
+var StartBuildInput_cacheOverride = &sStartBuildInput_cacheOverride
+var StartBuildInput_serviceRoleOverride = &sStartBuildInput_serviceRoleOverride
+var StartBuildInput_privilegedModeOverride = &sStartBuildInput_privilegedModeOverride
+var StartBuildInput_timeoutInMinutesOverride = &sStartBuildInput_timeoutInMinutesOverride
+var StartBuildInput_queuedTimeoutInMinutesOverride = &sStartBuildInput_queuedTimeoutInMinutesOverride
+var StartBuildInput_encryptionKeyOverride = &sStartBuildInput_encryptionKeyOverride
+var StartBuildInput_idempotencyToken = &sStartBuildInput_idempotencyToken
+var StartBuildInput_logsConfigOverride = &sStartBuildInput_logsConfigOverride
+var StartBuildInput_registryCredentialOverride = &sStartBuildInput_registryCredentialOverride
+var StartBuildInput_imagePullCredentialsTypeOverride = &sStartBuildInput_imagePullCredentialsTypeOverride
+var StartBuildInput_debugSessionEnabled = &sStartBuildInput_debugSessionEnabled
+var StartBuildInput_fleetOverride = &sStartBuildInput_fleetOverride
+var StartBuildInput_autoRetryLimitOverride = &sStartBuildInput_autoRetryLimitOverride
+var StartBuildInput_hostKernelOverride = &sStartBuildInput_hostKernelOverride
+
+var StartBuildOutput = &sStartBuildOutput
+var StartBuildOutput_build = &sStartBuildOutput_build
+
+var StartCommandExecutionInput = &sStartCommandExecutionInput
+var StartCommandExecutionInput_sandboxId = &sStartCommandExecutionInput_sandboxId
+var StartCommandExecutionInput_command = &sStartCommandExecutionInput_command
+var StartCommandExecutionInput_type = &sStartCommandExecutionInput_type
+
+var StartCommandExecutionOutput = &sStartCommandExecutionOutput
+var StartCommandExecutionOutput_commandExecution = &sStartCommandExecutionOutput_commandExecution
+
+var StartSandboxConnectionInput = &sStartSandboxConnectionInput
+var StartSandboxConnectionInput_sandboxId = &sStartSandboxConnectionInput_sandboxId
+
+var StartSandboxConnectionOutput = &sStartSandboxConnectionOutput
+var StartSandboxConnectionOutput_ssmSession = &sStartSandboxConnectionOutput_ssmSession
+
+var StartSandboxInput = &sStartSandboxInput
+var StartSandboxInput_projectName = &sStartSandboxInput_projectName
+var StartSandboxInput_idempotencyToken = &sStartSandboxInput_idempotencyToken
+
+var StartSandboxOutput = &sStartSandboxOutput
+var StartSandboxOutput_sandbox = &sStartSandboxOutput_sandbox
+
+var StopBuildBatchInput = &sStopBuildBatchInput
+var StopBuildBatchInput_id = &sStopBuildBatchInput_id
+
+var StopBuildBatchOutput = &sStopBuildBatchOutput
+var StopBuildBatchOutput_buildBatch = &sStopBuildBatchOutput_buildBatch
+
+var StopBuildInput = &sStopBuildInput
+var StopBuildInput_id = &sStopBuildInput_id
+
+var StopBuildOutput = &sStopBuildOutput
+var StopBuildOutput_build = &sStopBuildOutput_build
+
+var StopSandboxInput = &sStopSandboxInput
+var StopSandboxInput_id = &sStopSandboxInput_id
+
+var StopSandboxOutput = &sStopSandboxOutput
+var StopSandboxOutput_sandbox = &sStopSandboxOutput_sandbox
+
+var UpdateFleetInput = &sUpdateFleetInput
+var UpdateFleetInput_arn = &sUpdateFleetInput_arn
+var UpdateFleetInput_baseCapacity = &sUpdateFleetInput_baseCapacity
+var UpdateFleetInput_environmentType = &sUpdateFleetInput_environmentType
+var UpdateFleetInput_computeType = &sUpdateFleetInput_computeType
+var UpdateFleetInput_computeConfiguration = &sUpdateFleetInput_computeConfiguration
+var UpdateFleetInput_scalingConfiguration = &sUpdateFleetInput_scalingConfiguration
+var UpdateFleetInput_overflowBehavior = &sUpdateFleetInput_overflowBehavior
+var UpdateFleetInput_vpcConfig = &sUpdateFleetInput_vpcConfig
+var UpdateFleetInput_proxyConfiguration = &sUpdateFleetInput_proxyConfiguration
+var UpdateFleetInput_imageId = &sUpdateFleetInput_imageId
+var UpdateFleetInput_fleetServiceRole = &sUpdateFleetInput_fleetServiceRole
+var UpdateFleetInput_tags = &sUpdateFleetInput_tags
+
+var UpdateFleetOutput = &sUpdateFleetOutput
+var UpdateFleetOutput_fleet = &sUpdateFleetOutput_fleet
+
+var UpdateProjectInput = &sUpdateProjectInput
+var UpdateProjectInput_name = &sUpdateProjectInput_name
+var UpdateProjectInput_description = &sUpdateProjectInput_description
+var UpdateProjectInput_source = &sUpdateProjectInput_source
+var UpdateProjectInput_secondarySources = &sUpdateProjectInput_secondarySources
+var UpdateProjectInput_sourceVersion = &sUpdateProjectInput_sourceVersion
+var UpdateProjectInput_secondarySourceVersions = &sUpdateProjectInput_secondarySourceVersions
+var UpdateProjectInput_artifacts = &sUpdateProjectInput_artifacts
+var UpdateProjectInput_secondaryArtifacts = &sUpdateProjectInput_secondaryArtifacts
+var UpdateProjectInput_cache = &sUpdateProjectInput_cache
+var UpdateProjectInput_environment = &sUpdateProjectInput_environment
+var UpdateProjectInput_serviceRole = &sUpdateProjectInput_serviceRole
+var UpdateProjectInput_timeoutInMinutes = &sUpdateProjectInput_timeoutInMinutes
+var UpdateProjectInput_queuedTimeoutInMinutes = &sUpdateProjectInput_queuedTimeoutInMinutes
+var UpdateProjectInput_encryptionKey = &sUpdateProjectInput_encryptionKey
+var UpdateProjectInput_tags = &sUpdateProjectInput_tags
+var UpdateProjectInput_vpcConfig = &sUpdateProjectInput_vpcConfig
+var UpdateProjectInput_badgeEnabled = &sUpdateProjectInput_badgeEnabled
+var UpdateProjectInput_logsConfig = &sUpdateProjectInput_logsConfig
+var UpdateProjectInput_fileSystemLocations = &sUpdateProjectInput_fileSystemLocations
+var UpdateProjectInput_buildBatchConfig = &sUpdateProjectInput_buildBatchConfig
+var UpdateProjectInput_concurrentBuildLimit = &sUpdateProjectInput_concurrentBuildLimit
+var UpdateProjectInput_autoRetryLimit = &sUpdateProjectInput_autoRetryLimit
+
+var UpdateProjectOutput = &sUpdateProjectOutput
+var UpdateProjectOutput_project = &sUpdateProjectOutput_project
+
+var UpdateProjectVisibilityInput = &sUpdateProjectVisibilityInput
+var UpdateProjectVisibilityInput_projectArn = &sUpdateProjectVisibilityInput_projectArn
+var UpdateProjectVisibilityInput_projectVisibility = &sUpdateProjectVisibilityInput_projectVisibility
+var UpdateProjectVisibilityInput_resourceAccessRole = &sUpdateProjectVisibilityInput_resourceAccessRole
+
+var UpdateProjectVisibilityOutput = &sUpdateProjectVisibilityOutput
+var UpdateProjectVisibilityOutput_projectArn = &sUpdateProjectVisibilityOutput_projectArn
+var UpdateProjectVisibilityOutput_publicProjectAlias = &sUpdateProjectVisibilityOutput_publicProjectAlias
+var UpdateProjectVisibilityOutput_projectVisibility = &sUpdateProjectVisibilityOutput_projectVisibility
+
+var UpdateReportGroupInput = &sUpdateReportGroupInput
+var UpdateReportGroupInput_arn = &sUpdateReportGroupInput_arn
+var UpdateReportGroupInput_exportConfig = &sUpdateReportGroupInput_exportConfig
+var UpdateReportGroupInput_tags = &sUpdateReportGroupInput_tags
+
+var UpdateReportGroupOutput = &sUpdateReportGroupOutput
+var UpdateReportGroupOutput_reportGroup = &sUpdateReportGroupOutput_reportGroup
+
+var UpdateWebhookInput = &sUpdateWebhookInput
+var UpdateWebhookInput_projectName = &sUpdateWebhookInput_projectName
+var UpdateWebhookInput_branchFilter = &sUpdateWebhookInput_branchFilter
+var UpdateWebhookInput_rotateSecret = &sUpdateWebhookInput_rotateSecret
+var UpdateWebhookInput_filterGroups = &sUpdateWebhookInput_filterGroups
+var UpdateWebhookInput_buildType = &sUpdateWebhookInput_buildType
+var UpdateWebhookInput_pullRequestBuildPolicy = &sUpdateWebhookInput_pullRequestBuildPolicy
+
+var UpdateWebhookOutput = &sUpdateWebhookOutput
+var UpdateWebhookOutput_webhook = &sUpdateWebhookOutput_webhook
+
+var CodeBuild_20161006 = &smithy.ServiceSchema{Schema: &s_CodeBuild_20161006, Version: "2016-10-06"}

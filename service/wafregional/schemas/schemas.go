@@ -4,5065 +4,5015 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateWebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "AssociateWebACL",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateByteMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateByteMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateGeoMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateGeoMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateIPSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateIPSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRateBasedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRateBasedRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRegexMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRegexMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRegexPatternSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRegexPatternSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSizeConstraintSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateSizeConstraintSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSqlInjectionMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateSqlInjectionMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateWebACL",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWebACLMigrationStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateWebACLMigrationStack",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateXssMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateXssMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteByteMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteByteMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGeoMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteGeoMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIPSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteIPSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePermissionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeletePermissionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRateBasedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRateBasedRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRegexMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRegexMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRegexPatternSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRegexPatternSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSizeConstraintSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteSizeConstraintSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSqlInjectionMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteSqlInjectionMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteWebACL",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteXssMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteXssMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateWebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DisassociateWebACL",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetByteMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetByteMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetChangeToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetChangeToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetChangeTokenStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetChangeTokenStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetGeoMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetGeoMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetIPSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetIPSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPermissionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetPermissionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRateBasedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRateBasedRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRateBasedRuleManagedKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRateBasedRuleManagedKeys",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRegexMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRegexMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRegexPatternSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRegexPatternSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSampledRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSampledRequests",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSizeConstraintSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSizeConstraintSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSqlInjectionMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSqlInjectionMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetWebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetWebACL",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetWebACLForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetWebACLForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetXssMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetXssMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListActivatedRulesInRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListActivatedRulesInRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListByteMatchSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListByteMatchSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGeoMatchSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListGeoMatchSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListIPSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListIPSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLoggingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListLoggingConfigurations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRateBasedRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRateBasedRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRegexMatchSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRegexMatchSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRegexPatternSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRegexPatternSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResourcesForWebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListResourcesForWebACL",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRuleGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRuleGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSizeConstraintSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSizeConstraintSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSqlInjectionMatchSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSqlInjectionMatchSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSubscribedRuleGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSubscribedRuleGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWebACLs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListWebACLs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListXssMatchSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListXssMatchSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PutLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutPermissionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PutPermissionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateByteMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateByteMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGeoMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateGeoMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateIPSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateIPSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRateBasedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRateBasedRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRegexMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRegexMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRegexPatternSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRegexPatternSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSizeConstraintSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateSizeConstraintSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSqlInjectionMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateSqlInjectionMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateWebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateWebACL",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateXssMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateXssMatchSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSWAF_Regional_20161128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "AWSWAF_Regional_20161128",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://waf.amazonaws.com/doc/2015-08-24/"})
-
-var AWSWAF_Regional_20161128 = smithy.NewServiceSchema(_AWSWAF_Regional_20161128, "2016-11-28")
-
-var _Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Action",
-}, smithy.ShapeTypeString, 0)
-
-var ActivatedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ActivatedRule",
-}, smithy.ShapeTypeStructure, 6)
-var ActivatedRule_Priority *smithy.Schema
-
-var ActivatedRule_RuleId *smithy.Schema
-
-var ActivatedRule_Action *smithy.Schema
-
-var ActivatedRule_OverrideAction *smithy.Schema
-
-var ActivatedRule_Type *smithy.Schema
-
-var ActivatedRule_ExcludedRules *smithy.Schema
-
-var _ActivatedRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ActivatedRules",
-}, smithy.ShapeTypeList, 1)
-var _ActivatedRules_member *smithy.Schema
-
-var ByteMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchSet",
-}, smithy.ShapeTypeStructure, 3)
-var ByteMatchSet_ByteMatchSetId *smithy.Schema
-
-var ByteMatchSet_Name *smithy.Schema
-
-var ByteMatchSet_ByteMatchTuples *smithy.Schema
-
-var _ByteMatchSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ByteMatchSetSummaries_member *smithy.Schema
-
-var ByteMatchSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ByteMatchSetSummary_ByteMatchSetId *smithy.Schema
-
-var ByteMatchSetSummary_Name *smithy.Schema
-
-var ByteMatchSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var ByteMatchSetUpdate_Action *smithy.Schema
-
-var ByteMatchSetUpdate_ByteMatchTuple *smithy.Schema
-
-var _ByteMatchSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _ByteMatchSetUpdates_member *smithy.Schema
-
-var _ByteMatchTargetString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchTargetString",
-}, smithy.ShapeTypeBlob, 0)
-
-var ByteMatchTuple = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchTuple",
-}, smithy.ShapeTypeStructure, 4)
-var ByteMatchTuple_FieldToMatch *smithy.Schema
-
-var ByteMatchTuple_TargetString *smithy.Schema
-
-var ByteMatchTuple_TextTransformation *smithy.Schema
-
-var ByteMatchTuple_PositionalConstraint *smithy.Schema
-
-var _ByteMatchTuples = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ByteMatchTuples",
-}, smithy.ShapeTypeList, 1)
-var _ByteMatchTuples_member *smithy.Schema
-
-var ChangeAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ChangeAction",
-}, smithy.ShapeTypeEnum, 2)
-var ChangeAction_INSERT *smithy.Schema
-
-var ChangeAction_DELETE *smithy.Schema
-
-var _ChangeToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ChangeToken",
-}, smithy.ShapeTypeString, 0)
-
-var ChangeTokenStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ChangeTokenStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ChangeTokenStatus_PROVISIONED *smithy.Schema
-
-var ChangeTokenStatus_PENDING *smithy.Schema
-
-var ChangeTokenStatus_INSYNC *smithy.Schema
-
-var ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeEnum, 6)
-var ComparisonOperator_EQ *smithy.Schema
-
-var ComparisonOperator_NE *smithy.Schema
-
-var ComparisonOperator_LE *smithy.Schema
-
-var ComparisonOperator_LT *smithy.Schema
-
-var ComparisonOperator_GE *smithy.Schema
-
-var ComparisonOperator_GT *smithy.Schema
-
-var _Country = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Country",
-}, smithy.ShapeTypeString, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ErrorReason",
-}, smithy.ShapeTypeString, 0)
-
-var ExcludedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ExcludedRule",
-}, smithy.ShapeTypeStructure, 1)
-var ExcludedRule_RuleId *smithy.Schema
-
-var _ExcludedRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ExcludedRules",
-}, smithy.ShapeTypeList, 1)
-var _ExcludedRules_member *smithy.Schema
-
-var FieldToMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "FieldToMatch",
-}, smithy.ShapeTypeStructure, 2)
-var FieldToMatch_Type *smithy.Schema
-
-var FieldToMatch_Data *smithy.Schema
-
-var GeoMatchConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchConstraint",
-}, smithy.ShapeTypeStructure, 2)
-var GeoMatchConstraint_Type *smithy.Schema
-
-var GeoMatchConstraint_Value *smithy.Schema
-
-var _GeoMatchConstraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchConstraints",
-}, smithy.ShapeTypeList, 1)
-var _GeoMatchConstraints_member *smithy.Schema
-
-var GeoMatchConstraintType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchConstraintType",
-}, smithy.ShapeTypeEnum, 1)
-var GeoMatchConstraintType_Country *smithy.Schema
-
-var GeoMatchConstraintValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchConstraintValue",
-}, smithy.ShapeTypeEnum, 249)
-var GeoMatchConstraintValue_AF *smithy.Schema
-
-var GeoMatchConstraintValue_AX *smithy.Schema
-
-var GeoMatchConstraintValue_AL *smithy.Schema
-
-var GeoMatchConstraintValue_DZ *smithy.Schema
-
-var GeoMatchConstraintValue_AS *smithy.Schema
-
-var GeoMatchConstraintValue_AD *smithy.Schema
-
-var GeoMatchConstraintValue_AO *smithy.Schema
-
-var GeoMatchConstraintValue_AI *smithy.Schema
-
-var GeoMatchConstraintValue_AQ *smithy.Schema
-
-var GeoMatchConstraintValue_AG *smithy.Schema
-
-var GeoMatchConstraintValue_AR *smithy.Schema
-
-var GeoMatchConstraintValue_AM *smithy.Schema
-
-var GeoMatchConstraintValue_AW *smithy.Schema
-
-var GeoMatchConstraintValue_AU *smithy.Schema
-
-var GeoMatchConstraintValue_AT *smithy.Schema
-
-var GeoMatchConstraintValue_AZ *smithy.Schema
-
-var GeoMatchConstraintValue_BS *smithy.Schema
-
-var GeoMatchConstraintValue_BH *smithy.Schema
-
-var GeoMatchConstraintValue_BD *smithy.Schema
-
-var GeoMatchConstraintValue_BB *smithy.Schema
-
-var GeoMatchConstraintValue_BY *smithy.Schema
-
-var GeoMatchConstraintValue_BE *smithy.Schema
-
-var GeoMatchConstraintValue_BZ *smithy.Schema
-
-var GeoMatchConstraintValue_BJ *smithy.Schema
-
-var GeoMatchConstraintValue_BM *smithy.Schema
-
-var GeoMatchConstraintValue_BT *smithy.Schema
-
-var GeoMatchConstraintValue_BO *smithy.Schema
-
-var GeoMatchConstraintValue_BQ *smithy.Schema
-
-var GeoMatchConstraintValue_BA *smithy.Schema
-
-var GeoMatchConstraintValue_BW *smithy.Schema
-
-var GeoMatchConstraintValue_BV *smithy.Schema
-
-var GeoMatchConstraintValue_BR *smithy.Schema
-
-var GeoMatchConstraintValue_IO *smithy.Schema
-
-var GeoMatchConstraintValue_BN *smithy.Schema
-
-var GeoMatchConstraintValue_BG *smithy.Schema
-
-var GeoMatchConstraintValue_BF *smithy.Schema
-
-var GeoMatchConstraintValue_BI *smithy.Schema
-
-var GeoMatchConstraintValue_KH *smithy.Schema
-
-var GeoMatchConstraintValue_CM *smithy.Schema
-
-var GeoMatchConstraintValue_CA *smithy.Schema
-
-var GeoMatchConstraintValue_CV *smithy.Schema
-
-var GeoMatchConstraintValue_KY *smithy.Schema
-
-var GeoMatchConstraintValue_CF *smithy.Schema
-
-var GeoMatchConstraintValue_TD *smithy.Schema
-
-var GeoMatchConstraintValue_CL *smithy.Schema
-
-var GeoMatchConstraintValue_CN *smithy.Schema
-
-var GeoMatchConstraintValue_CX *smithy.Schema
-
-var GeoMatchConstraintValue_CC *smithy.Schema
-
-var GeoMatchConstraintValue_CO *smithy.Schema
-
-var GeoMatchConstraintValue_KM *smithy.Schema
-
-var GeoMatchConstraintValue_CG *smithy.Schema
-
-var GeoMatchConstraintValue_CD *smithy.Schema
-
-var GeoMatchConstraintValue_CK *smithy.Schema
-
-var GeoMatchConstraintValue_CR *smithy.Schema
-
-var GeoMatchConstraintValue_CI *smithy.Schema
-
-var GeoMatchConstraintValue_HR *smithy.Schema
-
-var GeoMatchConstraintValue_CU *smithy.Schema
-
-var GeoMatchConstraintValue_CW *smithy.Schema
-
-var GeoMatchConstraintValue_CY *smithy.Schema
-
-var GeoMatchConstraintValue_CZ *smithy.Schema
-
-var GeoMatchConstraintValue_DK *smithy.Schema
-
-var GeoMatchConstraintValue_DJ *smithy.Schema
-
-var GeoMatchConstraintValue_DM *smithy.Schema
-
-var GeoMatchConstraintValue_DO *smithy.Schema
-
-var GeoMatchConstraintValue_EC *smithy.Schema
-
-var GeoMatchConstraintValue_EG *smithy.Schema
-
-var GeoMatchConstraintValue_SV *smithy.Schema
-
-var GeoMatchConstraintValue_GQ *smithy.Schema
-
-var GeoMatchConstraintValue_ER *smithy.Schema
-
-var GeoMatchConstraintValue_EE *smithy.Schema
-
-var GeoMatchConstraintValue_ET *smithy.Schema
-
-var GeoMatchConstraintValue_FK *smithy.Schema
-
-var GeoMatchConstraintValue_FO *smithy.Schema
-
-var GeoMatchConstraintValue_FJ *smithy.Schema
-
-var GeoMatchConstraintValue_FI *smithy.Schema
-
-var GeoMatchConstraintValue_FR *smithy.Schema
-
-var GeoMatchConstraintValue_GF *smithy.Schema
-
-var GeoMatchConstraintValue_PF *smithy.Schema
-
-var GeoMatchConstraintValue_TF *smithy.Schema
-
-var GeoMatchConstraintValue_GA *smithy.Schema
-
-var GeoMatchConstraintValue_GM *smithy.Schema
-
-var GeoMatchConstraintValue_GE *smithy.Schema
-
-var GeoMatchConstraintValue_DE *smithy.Schema
-
-var GeoMatchConstraintValue_GH *smithy.Schema
-
-var GeoMatchConstraintValue_GI *smithy.Schema
-
-var GeoMatchConstraintValue_GR *smithy.Schema
-
-var GeoMatchConstraintValue_GL *smithy.Schema
-
-var GeoMatchConstraintValue_GD *smithy.Schema
-
-var GeoMatchConstraintValue_GP *smithy.Schema
-
-var GeoMatchConstraintValue_GU *smithy.Schema
-
-var GeoMatchConstraintValue_GT *smithy.Schema
-
-var GeoMatchConstraintValue_GG *smithy.Schema
-
-var GeoMatchConstraintValue_GN *smithy.Schema
-
-var GeoMatchConstraintValue_GW *smithy.Schema
-
-var GeoMatchConstraintValue_GY *smithy.Schema
-
-var GeoMatchConstraintValue_HT *smithy.Schema
-
-var GeoMatchConstraintValue_HM *smithy.Schema
-
-var GeoMatchConstraintValue_VA *smithy.Schema
-
-var GeoMatchConstraintValue_HN *smithy.Schema
-
-var GeoMatchConstraintValue_HK *smithy.Schema
-
-var GeoMatchConstraintValue_HU *smithy.Schema
-
-var GeoMatchConstraintValue_IS *smithy.Schema
-
-var GeoMatchConstraintValue_IN *smithy.Schema
-
-var GeoMatchConstraintValue_ID *smithy.Schema
-
-var GeoMatchConstraintValue_IR *smithy.Schema
-
-var GeoMatchConstraintValue_IQ *smithy.Schema
-
-var GeoMatchConstraintValue_IE *smithy.Schema
-
-var GeoMatchConstraintValue_IM *smithy.Schema
-
-var GeoMatchConstraintValue_IL *smithy.Schema
-
-var GeoMatchConstraintValue_IT *smithy.Schema
-
-var GeoMatchConstraintValue_JM *smithy.Schema
-
-var GeoMatchConstraintValue_JP *smithy.Schema
-
-var GeoMatchConstraintValue_JE *smithy.Schema
-
-var GeoMatchConstraintValue_JO *smithy.Schema
-
-var GeoMatchConstraintValue_KZ *smithy.Schema
-
-var GeoMatchConstraintValue_KE *smithy.Schema
-
-var GeoMatchConstraintValue_KI *smithy.Schema
-
-var GeoMatchConstraintValue_KP *smithy.Schema
-
-var GeoMatchConstraintValue_KR *smithy.Schema
-
-var GeoMatchConstraintValue_KW *smithy.Schema
-
-var GeoMatchConstraintValue_KG *smithy.Schema
-
-var GeoMatchConstraintValue_LA *smithy.Schema
-
-var GeoMatchConstraintValue_LV *smithy.Schema
-
-var GeoMatchConstraintValue_LB *smithy.Schema
-
-var GeoMatchConstraintValue_LS *smithy.Schema
-
-var GeoMatchConstraintValue_LR *smithy.Schema
-
-var GeoMatchConstraintValue_LY *smithy.Schema
-
-var GeoMatchConstraintValue_LI *smithy.Schema
-
-var GeoMatchConstraintValue_LT *smithy.Schema
-
-var GeoMatchConstraintValue_LU *smithy.Schema
-
-var GeoMatchConstraintValue_MO *smithy.Schema
-
-var GeoMatchConstraintValue_MK *smithy.Schema
-
-var GeoMatchConstraintValue_MG *smithy.Schema
-
-var GeoMatchConstraintValue_MW *smithy.Schema
-
-var GeoMatchConstraintValue_MY *smithy.Schema
-
-var GeoMatchConstraintValue_MV *smithy.Schema
-
-var GeoMatchConstraintValue_ML *smithy.Schema
-
-var GeoMatchConstraintValue_MT *smithy.Schema
-
-var GeoMatchConstraintValue_MH *smithy.Schema
-
-var GeoMatchConstraintValue_MQ *smithy.Schema
-
-var GeoMatchConstraintValue_MR *smithy.Schema
-
-var GeoMatchConstraintValue_MU *smithy.Schema
-
-var GeoMatchConstraintValue_YT *smithy.Schema
-
-var GeoMatchConstraintValue_MX *smithy.Schema
-
-var GeoMatchConstraintValue_FM *smithy.Schema
-
-var GeoMatchConstraintValue_MD *smithy.Schema
-
-var GeoMatchConstraintValue_MC *smithy.Schema
-
-var GeoMatchConstraintValue_MN *smithy.Schema
-
-var GeoMatchConstraintValue_ME *smithy.Schema
-
-var GeoMatchConstraintValue_MS *smithy.Schema
-
-var GeoMatchConstraintValue_MA *smithy.Schema
-
-var GeoMatchConstraintValue_MZ *smithy.Schema
-
-var GeoMatchConstraintValue_MM *smithy.Schema
-
-var GeoMatchConstraintValue_NA *smithy.Schema
-
-var GeoMatchConstraintValue_NR *smithy.Schema
-
-var GeoMatchConstraintValue_NP *smithy.Schema
-
-var GeoMatchConstraintValue_NL *smithy.Schema
-
-var GeoMatchConstraintValue_NC *smithy.Schema
-
-var GeoMatchConstraintValue_NZ *smithy.Schema
-
-var GeoMatchConstraintValue_NI *smithy.Schema
-
-var GeoMatchConstraintValue_NE *smithy.Schema
-
-var GeoMatchConstraintValue_NG *smithy.Schema
-
-var GeoMatchConstraintValue_NU *smithy.Schema
-
-var GeoMatchConstraintValue_NF *smithy.Schema
-
-var GeoMatchConstraintValue_MP *smithy.Schema
-
-var GeoMatchConstraintValue_NO *smithy.Schema
-
-var GeoMatchConstraintValue_OM *smithy.Schema
-
-var GeoMatchConstraintValue_PK *smithy.Schema
-
-var GeoMatchConstraintValue_PW *smithy.Schema
-
-var GeoMatchConstraintValue_PS *smithy.Schema
-
-var GeoMatchConstraintValue_PA *smithy.Schema
-
-var GeoMatchConstraintValue_PG *smithy.Schema
-
-var GeoMatchConstraintValue_PY *smithy.Schema
-
-var GeoMatchConstraintValue_PE *smithy.Schema
-
-var GeoMatchConstraintValue_PH *smithy.Schema
-
-var GeoMatchConstraintValue_PN *smithy.Schema
-
-var GeoMatchConstraintValue_PL *smithy.Schema
-
-var GeoMatchConstraintValue_PT *smithy.Schema
-
-var GeoMatchConstraintValue_PR *smithy.Schema
-
-var GeoMatchConstraintValue_QA *smithy.Schema
-
-var GeoMatchConstraintValue_RE *smithy.Schema
-
-var GeoMatchConstraintValue_RO *smithy.Schema
-
-var GeoMatchConstraintValue_RU *smithy.Schema
-
-var GeoMatchConstraintValue_RW *smithy.Schema
-
-var GeoMatchConstraintValue_BL *smithy.Schema
-
-var GeoMatchConstraintValue_SH *smithy.Schema
-
-var GeoMatchConstraintValue_KN *smithy.Schema
-
-var GeoMatchConstraintValue_LC *smithy.Schema
-
-var GeoMatchConstraintValue_MF *smithy.Schema
-
-var GeoMatchConstraintValue_PM *smithy.Schema
-
-var GeoMatchConstraintValue_VC *smithy.Schema
-
-var GeoMatchConstraintValue_WS *smithy.Schema
-
-var GeoMatchConstraintValue_SM *smithy.Schema
-
-var GeoMatchConstraintValue_ST *smithy.Schema
-
-var GeoMatchConstraintValue_SA *smithy.Schema
-
-var GeoMatchConstraintValue_SN *smithy.Schema
-
-var GeoMatchConstraintValue_RS *smithy.Schema
-
-var GeoMatchConstraintValue_SC *smithy.Schema
-
-var GeoMatchConstraintValue_SL *smithy.Schema
-
-var GeoMatchConstraintValue_SG *smithy.Schema
-
-var GeoMatchConstraintValue_SX *smithy.Schema
-
-var GeoMatchConstraintValue_SK *smithy.Schema
-
-var GeoMatchConstraintValue_SI *smithy.Schema
-
-var GeoMatchConstraintValue_SB *smithy.Schema
-
-var GeoMatchConstraintValue_SO *smithy.Schema
-
-var GeoMatchConstraintValue_ZA *smithy.Schema
-
-var GeoMatchConstraintValue_GS *smithy.Schema
-
-var GeoMatchConstraintValue_SS *smithy.Schema
-
-var GeoMatchConstraintValue_ES *smithy.Schema
-
-var GeoMatchConstraintValue_LK *smithy.Schema
-
-var GeoMatchConstraintValue_SD *smithy.Schema
-
-var GeoMatchConstraintValue_SR *smithy.Schema
-
-var GeoMatchConstraintValue_SJ *smithy.Schema
-
-var GeoMatchConstraintValue_SZ *smithy.Schema
-
-var GeoMatchConstraintValue_SE *smithy.Schema
-
-var GeoMatchConstraintValue_CH *smithy.Schema
-
-var GeoMatchConstraintValue_SY *smithy.Schema
-
-var GeoMatchConstraintValue_TW *smithy.Schema
-
-var GeoMatchConstraintValue_TJ *smithy.Schema
-
-var GeoMatchConstraintValue_TZ *smithy.Schema
-
-var GeoMatchConstraintValue_TH *smithy.Schema
-
-var GeoMatchConstraintValue_TL *smithy.Schema
-
-var GeoMatchConstraintValue_TG *smithy.Schema
-
-var GeoMatchConstraintValue_TK *smithy.Schema
-
-var GeoMatchConstraintValue_TO *smithy.Schema
-
-var GeoMatchConstraintValue_TT *smithy.Schema
-
-var GeoMatchConstraintValue_TN *smithy.Schema
-
-var GeoMatchConstraintValue_TR *smithy.Schema
-
-var GeoMatchConstraintValue_TM *smithy.Schema
-
-var GeoMatchConstraintValue_TC *smithy.Schema
-
-var GeoMatchConstraintValue_TV *smithy.Schema
-
-var GeoMatchConstraintValue_UG *smithy.Schema
-
-var GeoMatchConstraintValue_UA *smithy.Schema
-
-var GeoMatchConstraintValue_AE *smithy.Schema
-
-var GeoMatchConstraintValue_GB *smithy.Schema
-
-var GeoMatchConstraintValue_US *smithy.Schema
-
-var GeoMatchConstraintValue_UM *smithy.Schema
-
-var GeoMatchConstraintValue_UY *smithy.Schema
-
-var GeoMatchConstraintValue_UZ *smithy.Schema
-
-var GeoMatchConstraintValue_VU *smithy.Schema
-
-var GeoMatchConstraintValue_VE *smithy.Schema
-
-var GeoMatchConstraintValue_VN *smithy.Schema
-
-var GeoMatchConstraintValue_VG *smithy.Schema
-
-var GeoMatchConstraintValue_VI *smithy.Schema
-
-var GeoMatchConstraintValue_WF *smithy.Schema
-
-var GeoMatchConstraintValue_EH *smithy.Schema
-
-var GeoMatchConstraintValue_YE *smithy.Schema
-
-var GeoMatchConstraintValue_ZM *smithy.Schema
-
-var GeoMatchConstraintValue_ZW *smithy.Schema
-
-var GeoMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchSet",
-}, smithy.ShapeTypeStructure, 3)
-var GeoMatchSet_GeoMatchSetId *smithy.Schema
-
-var GeoMatchSet_Name *smithy.Schema
-
-var GeoMatchSet_GeoMatchConstraints *smithy.Schema
-
-var _GeoMatchSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _GeoMatchSetSummaries_member *smithy.Schema
-
-var GeoMatchSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var GeoMatchSetSummary_GeoMatchSetId *smithy.Schema
-
-var GeoMatchSetSummary_Name *smithy.Schema
-
-var GeoMatchSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var GeoMatchSetUpdate_Action *smithy.Schema
-
-var GeoMatchSetUpdate_GeoMatchConstraint *smithy.Schema
-
-var _GeoMatchSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GeoMatchSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _GeoMatchSetUpdates_member *smithy.Schema
-
-var _GetSampledRequestsMaxItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSampledRequestsMaxItems",
-}, smithy.ShapeTypeLong, 0)
-
-var _HeaderName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "HeaderName",
-}, smithy.ShapeTypeString, 0)
-
-var _HeaderValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "HeaderValue",
-}, smithy.ShapeTypeString, 0)
-
-var HTTPHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "HTTPHeader",
-}, smithy.ShapeTypeStructure, 2)
-var HTTPHeader_Name *smithy.Schema
-
-var HTTPHeader_Value *smithy.Schema
-
-var _HTTPHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "HTTPHeaders",
-}, smithy.ShapeTypeList, 1)
-var _HTTPHeaders_member *smithy.Schema
-
-var _HTTPMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "HTTPMethod",
-}, smithy.ShapeTypeString, 0)
-
-var HTTPRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "HTTPRequest",
-}, smithy.ShapeTypeStructure, 6)
-var HTTPRequest_ClientIP *smithy.Schema
-
-var HTTPRequest_Country *smithy.Schema
-
-var HTTPRequest_URI *smithy.Schema
-
-var HTTPRequest_Method *smithy.Schema
-
-var HTTPRequest_HTTPVersion *smithy.Schema
-
-var HTTPRequest_Headers *smithy.Schema
-
-var _HTTPVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "HTTPVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _IgnoreUnsupportedType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IgnoreUnsupportedType",
-}, smithy.ShapeTypeBoolean, 0)
-
-var IPSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSet",
-}, smithy.ShapeTypeStructure, 3)
-var IPSet_IPSetId *smithy.Schema
-
-var IPSet_Name *smithy.Schema
-
-var IPSet_IPSetDescriptors *smithy.Schema
-
-var IPSetDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetDescriptor",
-}, smithy.ShapeTypeStructure, 2)
-var IPSetDescriptor_Type *smithy.Schema
-
-var IPSetDescriptor_Value *smithy.Schema
-
-var _IPSetDescriptors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetDescriptors",
-}, smithy.ShapeTypeList, 1)
-var _IPSetDescriptors_member *smithy.Schema
-
-var IPSetDescriptorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetDescriptorType",
-}, smithy.ShapeTypeEnum, 2)
-var IPSetDescriptorType_IPV4 *smithy.Schema
-
-var IPSetDescriptorType_IPV6 *smithy.Schema
-
-var _IPSetDescriptorValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetDescriptorValue",
-}, smithy.ShapeTypeString, 0)
-
-var _IPSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _IPSetSummaries_member *smithy.Schema
-
-var IPSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var IPSetSummary_IPSetId *smithy.Schema
-
-var IPSetSummary_Name *smithy.Schema
-
-var IPSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var IPSetUpdate_Action *smithy.Schema
-
-var IPSetUpdate_IPSetDescriptor *smithy.Schema
-
-var _IPSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _IPSetUpdates_member *smithy.Schema
-
-var _IPString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "IPString",
-}, smithy.ShapeTypeString, 0)
-
-var _LogDestinationConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "LogDestinationConfigs",
-}, smithy.ShapeTypeList, 1)
-var _LogDestinationConfigs_member *smithy.Schema
-
-var LoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "LoggingConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var LoggingConfiguration_ResourceArn *smithy.Schema
-
-var LoggingConfiguration_LogDestinationConfigs *smithy.Schema
-
-var LoggingConfiguration_RedactedFields *smithy.Schema
-
-var _LoggingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "LoggingConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _LoggingConfigurations_member *smithy.Schema
-
-var _ManagedKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ManagedKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ManagedKeys",
-}, smithy.ShapeTypeList, 1)
-var _ManagedKeys_member *smithy.Schema
-
-var _MatchFieldData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "MatchFieldData",
-}, smithy.ShapeTypeString, 0)
-
-var MatchFieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "MatchFieldType",
-}, smithy.ShapeTypeEnum, 7)
-var MatchFieldType_URI *smithy.Schema
-
-var MatchFieldType_QUERY_STRING *smithy.Schema
-
-var MatchFieldType_HEADER *smithy.Schema
-
-var MatchFieldType_METHOD *smithy.Schema
-
-var MatchFieldType_BODY *smithy.Schema
-
-var MatchFieldType_SINGLE_QUERY_ARG *smithy.Schema
-
-var MatchFieldType_ALL_QUERY_ARGS *smithy.Schema
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "MigrationErrorType",
-}, smithy.ShapeTypeEnum, 7)
-var MigrationErrorType_ENTITY_NOT_SUPPORTED *smithy.Schema
-
-var MigrationErrorType_ENTITY_NOT_FOUND *smithy.Schema
-
-var MigrationErrorType_S3_BUCKET_NO_PERMISSION *smithy.Schema
-
-var MigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE *smithy.Schema
-
-var MigrationErrorType_S3_BUCKET_NOT_FOUND *smithy.Schema
-
-var MigrationErrorType_S3_BUCKET_INVALID_REGION *smithy.Schema
-
-var MigrationErrorType_S3_INTERNAL_ERROR *smithy.Schema
-
-var _Negated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Negated",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _NextMarker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "NextMarker",
-}, smithy.ShapeTypeString, 0)
-
-var _PaginationLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PaginationLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var ParameterExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ParameterExceptionField",
-}, smithy.ShapeTypeEnum, 18)
-var ParameterExceptionField_CHANGE_ACTION *smithy.Schema
-
-var ParameterExceptionField_WAF_ACTION *smithy.Schema
-
-var ParameterExceptionField_WAF_OVERRIDE_ACTION *smithy.Schema
-
-var ParameterExceptionField_PREDICATE_TYPE *smithy.Schema
-
-var ParameterExceptionField_IPSET_TYPE *smithy.Schema
-
-var ParameterExceptionField_BYTE_MATCH_FIELD_TYPE *smithy.Schema
-
-var ParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE *smithy.Schema
-
-var ParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION *smithy.Schema
-
-var ParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT *smithy.Schema
-
-var ParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR *smithy.Schema
-
-var ParameterExceptionField_GEO_MATCH_LOCATION_TYPE *smithy.Schema
-
-var ParameterExceptionField_GEO_MATCH_LOCATION_VALUE *smithy.Schema
-
-var ParameterExceptionField_RATE_KEY *smithy.Schema
-
-var ParameterExceptionField_RULE_TYPE *smithy.Schema
-
-var ParameterExceptionField_NEXT_MARKER *smithy.Schema
-
-var ParameterExceptionField_RESOURCE_ARN *smithy.Schema
-
-var ParameterExceptionField_TAGS *smithy.Schema
-
-var ParameterExceptionField_TAG_KEYS *smithy.Schema
-
-var _ParameterExceptionParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ParameterExceptionParameter",
-}, smithy.ShapeTypeString, 0)
-
-var ParameterExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ParameterExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ParameterExceptionReason_INVALID_OPTION *smithy.Schema
-
-var ParameterExceptionReason_ILLEGAL_COMBINATION *smithy.Schema
-
-var ParameterExceptionReason_ILLEGAL_ARGUMENT *smithy.Schema
-
-var ParameterExceptionReason_INVALID_TAG_KEY *smithy.Schema
-
-var _PolicyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PolicyString",
-}, smithy.ShapeTypeString, 0)
-
-var _PopulationSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PopulationSize",
-}, smithy.ShapeTypeLong, 0)
-
-var PositionalConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PositionalConstraint",
-}, smithy.ShapeTypeEnum, 5)
-var PositionalConstraint_EXACTLY *smithy.Schema
-
-var PositionalConstraint_STARTS_WITH *smithy.Schema
-
-var PositionalConstraint_ENDS_WITH *smithy.Schema
-
-var PositionalConstraint_CONTAINS *smithy.Schema
-
-var PositionalConstraint_CONTAINS_WORD *smithy.Schema
-
-var Predicate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Predicate",
-}, smithy.ShapeTypeStructure, 3)
-var Predicate_Negated *smithy.Schema
-
-var Predicate_Type *smithy.Schema
-
-var Predicate_DataId *smithy.Schema
-
-var _Predicates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Predicates",
-}, smithy.ShapeTypeList, 1)
-var _Predicates_member *smithy.Schema
-
-var PredicateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PredicateType",
-}, smithy.ShapeTypeEnum, 7)
-var PredicateType_IP_MATCH *smithy.Schema
-
-var PredicateType_BYTE_MATCH *smithy.Schema
-
-var PredicateType_SQL_INJECTION_MATCH *smithy.Schema
-
-var PredicateType_GEO_MATCH *smithy.Schema
-
-var PredicateType_SIZE_CONSTRAINT *smithy.Schema
-
-var PredicateType_XSS_MATCH *smithy.Schema
-
-var PredicateType_REGEX_MATCH *smithy.Schema
-
-var RateBasedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RateBasedRule",
-}, smithy.ShapeTypeStructure, 6)
-var RateBasedRule_RuleId *smithy.Schema
-
-var RateBasedRule_Name *smithy.Schema
-
-var RateBasedRule_MetricName *smithy.Schema
-
-var RateBasedRule_MatchPredicates *smithy.Schema
-
-var RateBasedRule_RateKey *smithy.Schema
-
-var RateBasedRule_RateLimit *smithy.Schema
-
-var RateKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RateKey",
-}, smithy.ShapeTypeEnum, 1)
-var RateKey_IP *smithy.Schema
-
-var _RateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RateLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var _RedactedFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RedactedFields",
-}, smithy.ShapeTypeList, 1)
-var _RedactedFields_member *smithy.Schema
-
-var RegexMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexMatchSet",
-}, smithy.ShapeTypeStructure, 3)
-var RegexMatchSet_RegexMatchSetId *smithy.Schema
-
-var RegexMatchSet_Name *smithy.Schema
-
-var RegexMatchSet_RegexMatchTuples *smithy.Schema
-
-var _RegexMatchSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexMatchSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RegexMatchSetSummaries_member *smithy.Schema
-
-var RegexMatchSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexMatchSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RegexMatchSetSummary_RegexMatchSetId *smithy.Schema
-
-var RegexMatchSetSummary_Name *smithy.Schema
-
-var RegexMatchSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexMatchSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var RegexMatchSetUpdate_Action *smithy.Schema
-
-var RegexMatchSetUpdate_RegexMatchTuple *smithy.Schema
-
-var _RegexMatchSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexMatchSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _RegexMatchSetUpdates_member *smithy.Schema
-
-var RegexMatchTuple = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexMatchTuple",
-}, smithy.ShapeTypeStructure, 3)
-var RegexMatchTuple_FieldToMatch *smithy.Schema
-
-var RegexMatchTuple_TextTransformation *smithy.Schema
-
-var RegexMatchTuple_RegexPatternSetId *smithy.Schema
-
-var _RegexMatchTuples = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexMatchTuples",
-}, smithy.ShapeTypeList, 1)
-var _RegexMatchTuples_member *smithy.Schema
-
-var RegexPatternSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexPatternSet",
-}, smithy.ShapeTypeStructure, 3)
-var RegexPatternSet_RegexPatternSetId *smithy.Schema
-
-var RegexPatternSet_Name *smithy.Schema
-
-var RegexPatternSet_RegexPatternStrings *smithy.Schema
-
-var _RegexPatternSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexPatternSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RegexPatternSetSummaries_member *smithy.Schema
-
-var RegexPatternSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexPatternSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RegexPatternSetSummary_RegexPatternSetId *smithy.Schema
-
-var RegexPatternSetSummary_Name *smithy.Schema
-
-var RegexPatternSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexPatternSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var RegexPatternSetUpdate_Action *smithy.Schema
-
-var RegexPatternSetUpdate_RegexPatternString *smithy.Schema
-
-var _RegexPatternSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexPatternSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _RegexPatternSetUpdates_member *smithy.Schema
-
-var _RegexPatternString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexPatternString",
-}, smithy.ShapeTypeString, 0)
-
-var _RegexPatternStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RegexPatternStrings",
-}, smithy.ShapeTypeList, 1)
-var _RegexPatternStrings_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ResourceArns",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArns_member *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceType_APPLICATION_LOAD_BALANCER *smithy.Schema
-
-var ResourceType_API_GATEWAY *smithy.Schema
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 4)
-var Rule_RuleId *smithy.Schema
-
-var Rule_Name *smithy.Schema
-
-var Rule_MetricName *smithy.Schema
-
-var Rule_Predicates *smithy.Schema
-
-var RuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleGroup",
-}, smithy.ShapeTypeStructure, 3)
-var RuleGroup_RuleGroupId *smithy.Schema
-
-var RuleGroup_Name *smithy.Schema
-
-var RuleGroup_MetricName *smithy.Schema
-
-var _RuleGroupSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleGroupSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RuleGroupSummaries_member *smithy.Schema
-
-var RuleGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleGroupSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RuleGroupSummary_RuleGroupId *smithy.Schema
-
-var RuleGroupSummary_Name *smithy.Schema
-
-var RuleGroupUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleGroupUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var RuleGroupUpdate_Action *smithy.Schema
-
-var RuleGroupUpdate_ActivatedRule *smithy.Schema
-
-var _RuleGroupUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleGroupUpdates",
-}, smithy.ShapeTypeList, 1)
-var _RuleGroupUpdates_member *smithy.Schema
-
-var _RulePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RulePriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RuleSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RuleSummaries_member *smithy.Schema
-
-var RuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RuleSummary_RuleId *smithy.Schema
-
-var RuleSummary_Name *smithy.Schema
-
-var RuleUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var RuleUpdate_Action *smithy.Schema
-
-var RuleUpdate_Predicate *smithy.Schema
-
-var _RuleUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "RuleUpdates",
-}, smithy.ShapeTypeList, 1)
-var _RuleUpdates_member *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3ObjectUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "S3ObjectUrl",
-}, smithy.ShapeTypeString, 0)
-
-var SampledHTTPRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SampledHTTPRequest",
-}, smithy.ShapeTypeStructure, 5)
-var SampledHTTPRequest_Request *smithy.Schema
-
-var SampledHTTPRequest_Weight *smithy.Schema
-
-var SampledHTTPRequest_Timestamp *smithy.Schema
-
-var SampledHTTPRequest_Action *smithy.Schema
-
-var SampledHTTPRequest_RuleWithinRuleGroup *smithy.Schema
-
-var _SampledHTTPRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SampledHTTPRequests",
-}, smithy.ShapeTypeList, 1)
-var _SampledHTTPRequests_member *smithy.Schema
-
-var _SampleWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SampleWeight",
-}, smithy.ShapeTypeLong, 0)
-
-var _Size = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Size",
-}, smithy.ShapeTypeLong, 0)
-
-var SizeConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SizeConstraint",
-}, smithy.ShapeTypeStructure, 4)
-var SizeConstraint_FieldToMatch *smithy.Schema
-
-var SizeConstraint_TextTransformation *smithy.Schema
-
-var SizeConstraint_ComparisonOperator *smithy.Schema
-
-var SizeConstraint_Size *smithy.Schema
-
-var _SizeConstraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SizeConstraints",
-}, smithy.ShapeTypeList, 1)
-var _SizeConstraints_member *smithy.Schema
-
-var SizeConstraintSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SizeConstraintSet",
-}, smithy.ShapeTypeStructure, 3)
-var SizeConstraintSet_SizeConstraintSetId *smithy.Schema
-
-var SizeConstraintSet_Name *smithy.Schema
-
-var SizeConstraintSet_SizeConstraints *smithy.Schema
-
-var _SizeConstraintSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SizeConstraintSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SizeConstraintSetSummaries_member *smithy.Schema
-
-var SizeConstraintSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SizeConstraintSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SizeConstraintSetSummary_SizeConstraintSetId *smithy.Schema
-
-var SizeConstraintSetSummary_Name *smithy.Schema
-
-var SizeConstraintSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SizeConstraintSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var SizeConstraintSetUpdate_Action *smithy.Schema
-
-var SizeConstraintSetUpdate_SizeConstraint *smithy.Schema
-
-var _SizeConstraintSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SizeConstraintSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _SizeConstraintSetUpdates_member *smithy.Schema
-
-var SqlInjectionMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SqlInjectionMatchSet",
-}, smithy.ShapeTypeStructure, 3)
-var SqlInjectionMatchSet_SqlInjectionMatchSetId *smithy.Schema
-
-var SqlInjectionMatchSet_Name *smithy.Schema
-
-var SqlInjectionMatchSet_SqlInjectionMatchTuples *smithy.Schema
-
-var _SqlInjectionMatchSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SqlInjectionMatchSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SqlInjectionMatchSetSummaries_member *smithy.Schema
-
-var SqlInjectionMatchSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SqlInjectionMatchSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SqlInjectionMatchSetSummary_SqlInjectionMatchSetId *smithy.Schema
-
-var SqlInjectionMatchSetSummary_Name *smithy.Schema
-
-var SqlInjectionMatchSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SqlInjectionMatchSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var SqlInjectionMatchSetUpdate_Action *smithy.Schema
-
-var SqlInjectionMatchSetUpdate_SqlInjectionMatchTuple *smithy.Schema
-
-var _SqlInjectionMatchSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SqlInjectionMatchSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _SqlInjectionMatchSetUpdates_member *smithy.Schema
-
-var SqlInjectionMatchTuple = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SqlInjectionMatchTuple",
-}, smithy.ShapeTypeStructure, 2)
-var SqlInjectionMatchTuple_FieldToMatch *smithy.Schema
-
-var SqlInjectionMatchTuple_TextTransformation *smithy.Schema
-
-var _SqlInjectionMatchTuples = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SqlInjectionMatchTuples",
-}, smithy.ShapeTypeList, 1)
-var _SqlInjectionMatchTuples_member *smithy.Schema
-
-var _SubscribedRuleGroupSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SubscribedRuleGroupSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SubscribedRuleGroupSummaries_member *smithy.Schema
-
-var SubscribedRuleGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "SubscribedRuleGroupSummary",
-}, smithy.ShapeTypeStructure, 3)
-var SubscribedRuleGroupSummary_RuleGroupId *smithy.Schema
-
-var SubscribedRuleGroupSummary_Name *smithy.Schema
-
-var SubscribedRuleGroupSummary_MetricName *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var TagInfoForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagInfoForResource",
-}, smithy.ShapeTypeStructure, 2)
-var TagInfoForResource_ResourceARN *smithy.Schema
-
-var TagInfoForResource_TagList *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TextTransformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TextTransformation",
-}, smithy.ShapeTypeEnum, 6)
-var TextTransformation_NONE *smithy.Schema
-
-var TextTransformation_COMPRESS_WHITE_SPACE *smithy.Schema
-
-var TextTransformation_HTML_ENTITY_DECODE *smithy.Schema
-
-var TextTransformation_LOWERCASE *smithy.Schema
-
-var TextTransformation_CMD_LINE *smithy.Schema
-
-var TextTransformation_URL_DECODE *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimeWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TimeWindow",
-}, smithy.ShapeTypeStructure, 2)
-var TimeWindow_StartTime *smithy.Schema
-
-var TimeWindow_EndTime *smithy.Schema
-
-var _URIString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "URIString",
-}, smithy.ShapeTypeString, 0)
-
-var WafAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WafAction",
-}, smithy.ShapeTypeStructure, 1)
-var WafAction_Type *smithy.Schema
-
-var WafActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WafActionType",
-}, smithy.ShapeTypeEnum, 3)
-var WafActionType_BLOCK *smithy.Schema
-
-var WafActionType_ALLOW *smithy.Schema
-
-var WafActionType_COUNT *smithy.Schema
-
-var WAFBadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFBadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFBadRequestException_message *smithy.Schema
-
-var WAFDisallowedNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFDisallowedNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFDisallowedNameException_message *smithy.Schema
-
-var WAFEntityMigrationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFEntityMigrationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
-var WAFEntityMigrationException_message *smithy.Schema
-
-var WAFEntityMigrationException_MigrationErrorType *smithy.Schema
-
-var WAFEntityMigrationException_MigrationErrorReason *smithy.Schema
-
-var WAFInternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFInternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var WAFInternalErrorException_message *smithy.Schema
-
-var WAFInvalidAccountException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFInvalidAccountException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
-
-var WAFInvalidOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFInvalidOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFInvalidOperationException_message *smithy.Schema
-
-var WAFInvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFInvalidParameterException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
-var WAFInvalidParameterException_field *smithy.Schema
-
-var WAFInvalidParameterException_parameter *smithy.Schema
-
-var WAFInvalidParameterException_reason *smithy.Schema
-
-var WAFInvalidPermissionPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFInvalidPermissionPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFInvalidPermissionPolicyException_message *smithy.Schema
-
-var WAFInvalidRegexPatternException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFInvalidRegexPatternException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFInvalidRegexPatternException_message *smithy.Schema
-
-var WAFLimitsExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFLimitsExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFLimitsExceededException_message *smithy.Schema
-
-var WAFNonEmptyEntityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFNonEmptyEntityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFNonEmptyEntityException_message *smithy.Schema
-
-var WAFNonexistentContainerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFNonexistentContainerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFNonexistentContainerException_message *smithy.Schema
-
-var WAFNonexistentItemException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFNonexistentItemException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFNonexistentItemException_message *smithy.Schema
-
-var WafOverrideAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WafOverrideAction",
-}, smithy.ShapeTypeStructure, 1)
-var WafOverrideAction_Type *smithy.Schema
-
-var WafOverrideActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WafOverrideActionType",
-}, smithy.ShapeTypeEnum, 2)
-var WafOverrideActionType_NONE *smithy.Schema
-
-var WafOverrideActionType_COUNT *smithy.Schema
-
-var WAFReferencedItemException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFReferencedItemException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFReferencedItemException_message *smithy.Schema
-
-var WafRuleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WafRuleType",
-}, smithy.ShapeTypeEnum, 3)
-var WafRuleType_REGULAR *smithy.Schema
-
-var WafRuleType_RATE_BASED *smithy.Schema
-
-var WafRuleType_GROUP *smithy.Schema
-
-var WAFServiceLinkedRoleErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFServiceLinkedRoleErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFServiceLinkedRoleErrorException_message *smithy.Schema
-
-var WAFStaleDataException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFStaleDataException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFStaleDataException_message *smithy.Schema
-
-var WAFSubscriptionNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFSubscriptionNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFSubscriptionNotFoundException_message *smithy.Schema
-
-var WAFTagOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFTagOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFTagOperationException_message *smithy.Schema
-
-var WAFTagOperationInternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFTagOperationInternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var WAFTagOperationInternalErrorException_message *smithy.Schema
-
-var WAFUnavailableEntityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WAFUnavailableEntityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WAFUnavailableEntityException_message *smithy.Schema
-
-var WebACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WebACL",
-}, smithy.ShapeTypeStructure, 6)
-var WebACL_WebACLId *smithy.Schema
-
-var WebACL_Name *smithy.Schema
-
-var WebACL_MetricName *smithy.Schema
-
-var WebACL_DefaultAction *smithy.Schema
-
-var WebACL_Rules *smithy.Schema
-
-var WebACL_WebACLArn *smithy.Schema
-
-var _WebACLSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WebACLSummaries",
-}, smithy.ShapeTypeList, 1)
-var _WebACLSummaries_member *smithy.Schema
-
-var WebACLSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WebACLSummary",
-}, smithy.ShapeTypeStructure, 2)
-var WebACLSummary_WebACLId *smithy.Schema
-
-var WebACLSummary_Name *smithy.Schema
-
-var WebACLUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WebACLUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var WebACLUpdate_Action *smithy.Schema
-
-var WebACLUpdate_ActivatedRule *smithy.Schema
-
-var _WebACLUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "WebACLUpdates",
-}, smithy.ShapeTypeList, 1)
-var _WebACLUpdates_member *smithy.Schema
-
-var XssMatchSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "XssMatchSet",
-}, smithy.ShapeTypeStructure, 3)
-var XssMatchSet_XssMatchSetId *smithy.Schema
-
-var XssMatchSet_Name *smithy.Schema
-
-var XssMatchSet_XssMatchTuples *smithy.Schema
-
-var _XssMatchSetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "XssMatchSetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _XssMatchSetSummaries_member *smithy.Schema
-
-var XssMatchSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "XssMatchSetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var XssMatchSetSummary_XssMatchSetId *smithy.Schema
-
-var XssMatchSetSummary_Name *smithy.Schema
-
-var XssMatchSetUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "XssMatchSetUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var XssMatchSetUpdate_Action *smithy.Schema
-
-var XssMatchSetUpdate_XssMatchTuple *smithy.Schema
-
-var _XssMatchSetUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "XssMatchSetUpdates",
-}, smithy.ShapeTypeList, 1)
-var _XssMatchSetUpdates_member *smithy.Schema
-
-var XssMatchTuple = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "XssMatchTuple",
-}, smithy.ShapeTypeStructure, 2)
-var XssMatchTuple_FieldToMatch *smithy.Schema
-
-var XssMatchTuple_TextTransformation *smithy.Schema
-
-var _XssMatchTuples = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "XssMatchTuples",
-}, smithy.ShapeTypeList, 1)
-var _XssMatchTuples_member *smithy.Schema
-
-var AssociateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "AssociateWebACLRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateWebACLRequest_WebACLId *smithy.Schema
-
-var AssociateWebACLRequest_ResourceArn *smithy.Schema
-
-var AssociateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "AssociateWebACLResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateByteMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateByteMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateByteMatchSetRequest_Name *smithy.Schema
-
-var CreateByteMatchSetRequest_ChangeToken *smithy.Schema
-
-var CreateByteMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateByteMatchSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateByteMatchSetResponse_ByteMatchSet *smithy.Schema
-
-var CreateByteMatchSetResponse_ChangeToken *smithy.Schema
-
-var CreateGeoMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateGeoMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateGeoMatchSetRequest_Name *smithy.Schema
-
-var CreateGeoMatchSetRequest_ChangeToken *smithy.Schema
-
-var CreateGeoMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateGeoMatchSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateGeoMatchSetResponse_GeoMatchSet *smithy.Schema
-
-var CreateGeoMatchSetResponse_ChangeToken *smithy.Schema
-
-var CreateIPSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateIPSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateIPSetRequest_Name *smithy.Schema
-
-var CreateIPSetRequest_ChangeToken *smithy.Schema
-
-var CreateIPSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateIPSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateIPSetResponse_IPSet *smithy.Schema
-
-var CreateIPSetResponse_ChangeToken *smithy.Schema
-
-var CreateRateBasedRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRateBasedRuleRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRateBasedRuleRequest_Name *smithy.Schema
-
-var CreateRateBasedRuleRequest_MetricName *smithy.Schema
-
-var CreateRateBasedRuleRequest_RateKey *smithy.Schema
-
-var CreateRateBasedRuleRequest_RateLimit *smithy.Schema
-
-var CreateRateBasedRuleRequest_ChangeToken *smithy.Schema
-
-var CreateRateBasedRuleRequest_Tags *smithy.Schema
-
-var CreateRateBasedRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRateBasedRuleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRateBasedRuleResponse_Rule *smithy.Schema
-
-var CreateRateBasedRuleResponse_ChangeToken *smithy.Schema
-
-var CreateRegexMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRegexMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRegexMatchSetRequest_Name *smithy.Schema
-
-var CreateRegexMatchSetRequest_ChangeToken *smithy.Schema
-
-var CreateRegexMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRegexMatchSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRegexMatchSetResponse_RegexMatchSet *smithy.Schema
-
-var CreateRegexMatchSetResponse_ChangeToken *smithy.Schema
-
-var CreateRegexPatternSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRegexPatternSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRegexPatternSetRequest_Name *smithy.Schema
-
-var CreateRegexPatternSetRequest_ChangeToken *smithy.Schema
-
-var CreateRegexPatternSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRegexPatternSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRegexPatternSetResponse_RegexPatternSet *smithy.Schema
-
-var CreateRegexPatternSetResponse_ChangeToken *smithy.Schema
-
-var CreateRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRuleGroupRequest_Name *smithy.Schema
-
-var CreateRuleGroupRequest_MetricName *smithy.Schema
-
-var CreateRuleGroupRequest_ChangeToken *smithy.Schema
-
-var CreateRuleGroupRequest_Tags *smithy.Schema
-
-var CreateRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRuleGroupResponse_RuleGroup *smithy.Schema
-
-var CreateRuleGroupResponse_ChangeToken *smithy.Schema
-
-var CreateRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRuleRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRuleRequest_Name *smithy.Schema
-
-var CreateRuleRequest_MetricName *smithy.Schema
-
-var CreateRuleRequest_ChangeToken *smithy.Schema
-
-var CreateRuleRequest_Tags *smithy.Schema
-
-var CreateRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateRuleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRuleResponse_Rule *smithy.Schema
-
-var CreateRuleResponse_ChangeToken *smithy.Schema
-
-var CreateSizeConstraintSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateSizeConstraintSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSizeConstraintSetRequest_Name *smithy.Schema
-
-var CreateSizeConstraintSetRequest_ChangeToken *smithy.Schema
-
-var CreateSizeConstraintSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateSizeConstraintSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSizeConstraintSetResponse_SizeConstraintSet *smithy.Schema
-
-var CreateSizeConstraintSetResponse_ChangeToken *smithy.Schema
-
-var CreateSqlInjectionMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateSqlInjectionMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSqlInjectionMatchSetRequest_Name *smithy.Schema
-
-var CreateSqlInjectionMatchSetRequest_ChangeToken *smithy.Schema
-
-var CreateSqlInjectionMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateSqlInjectionMatchSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet *smithy.Schema
-
-var CreateSqlInjectionMatchSetResponse_ChangeToken *smithy.Schema
-
-var CreateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateWebACLRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWebACLRequest_Name *smithy.Schema
-
-var CreateWebACLRequest_MetricName *smithy.Schema
-
-var CreateWebACLRequest_DefaultAction *smithy.Schema
-
-var CreateWebACLRequest_ChangeToken *smithy.Schema
-
-var CreateWebACLRequest_Tags *smithy.Schema
-
-var CreateWebACLMigrationStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateWebACLMigrationStackRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateWebACLMigrationStackRequest_WebACLId *smithy.Schema
-
-var CreateWebACLMigrationStackRequest_S3BucketName *smithy.Schema
-
-var CreateWebACLMigrationStackRequest_IgnoreUnsupportedType *smithy.Schema
-
-var CreateWebACLMigrationStackResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateWebACLMigrationStackResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWebACLMigrationStackResponse_S3ObjectUrl *smithy.Schema
-
-var CreateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateWebACLResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWebACLResponse_WebACL *smithy.Schema
-
-var CreateWebACLResponse_ChangeToken *smithy.Schema
-
-var CreateXssMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateXssMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateXssMatchSetRequest_Name *smithy.Schema
-
-var CreateXssMatchSetRequest_ChangeToken *smithy.Schema
-
-var CreateXssMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "CreateXssMatchSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateXssMatchSetResponse_XssMatchSet *smithy.Schema
-
-var CreateXssMatchSetResponse_ChangeToken *smithy.Schema
-
-var DeleteByteMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteByteMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteByteMatchSetRequest_ByteMatchSetId *smithy.Schema
-
-var DeleteByteMatchSetRequest_ChangeToken *smithy.Schema
-
-var DeleteByteMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteByteMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteByteMatchSetResponse_ChangeToken *smithy.Schema
-
-var DeleteGeoMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteGeoMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteGeoMatchSetRequest_GeoMatchSetId *smithy.Schema
-
-var DeleteGeoMatchSetRequest_ChangeToken *smithy.Schema
-
-var DeleteGeoMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteGeoMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGeoMatchSetResponse_ChangeToken *smithy.Schema
-
-var DeleteIPSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteIPSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIPSetRequest_IPSetId *smithy.Schema
-
-var DeleteIPSetRequest_ChangeToken *smithy.Schema
-
-var DeleteIPSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteIPSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIPSetResponse_ChangeToken *smithy.Schema
-
-var DeleteLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLoggingConfigurationRequest_ResourceArn *smithy.Schema
-
-var DeleteLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePermissionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeletePermissionPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePermissionPolicyRequest_ResourceArn *smithy.Schema
-
-var DeletePermissionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeletePermissionPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRateBasedRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRateBasedRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRateBasedRuleRequest_RuleId *smithy.Schema
-
-var DeleteRateBasedRuleRequest_ChangeToken *smithy.Schema
-
-var DeleteRateBasedRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRateBasedRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRateBasedRuleResponse_ChangeToken *smithy.Schema
-
-var DeleteRegexMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRegexMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRegexMatchSetRequest_RegexMatchSetId *smithy.Schema
-
-var DeleteRegexMatchSetRequest_ChangeToken *smithy.Schema
-
-var DeleteRegexMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRegexMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRegexMatchSetResponse_ChangeToken *smithy.Schema
-
-var DeleteRegexPatternSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRegexPatternSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRegexPatternSetRequest_RegexPatternSetId *smithy.Schema
-
-var DeleteRegexPatternSetRequest_ChangeToken *smithy.Schema
-
-var DeleteRegexPatternSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRegexPatternSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRegexPatternSetResponse_ChangeToken *smithy.Schema
-
-var DeleteRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRuleGroupRequest_RuleGroupId *smithy.Schema
-
-var DeleteRuleGroupRequest_ChangeToken *smithy.Schema
-
-var DeleteRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRuleGroupResponse_ChangeToken *smithy.Schema
-
-var DeleteRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRuleRequest_RuleId *smithy.Schema
-
-var DeleteRuleRequest_ChangeToken *smithy.Schema
-
-var DeleteRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRuleResponse_ChangeToken *smithy.Schema
-
-var DeleteSizeConstraintSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteSizeConstraintSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSizeConstraintSetRequest_SizeConstraintSetId *smithy.Schema
-
-var DeleteSizeConstraintSetRequest_ChangeToken *smithy.Schema
-
-var DeleteSizeConstraintSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteSizeConstraintSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSizeConstraintSetResponse_ChangeToken *smithy.Schema
-
-var DeleteSqlInjectionMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteSqlInjectionMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId *smithy.Schema
-
-var DeleteSqlInjectionMatchSetRequest_ChangeToken *smithy.Schema
-
-var DeleteSqlInjectionMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteSqlInjectionMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSqlInjectionMatchSetResponse_ChangeToken *smithy.Schema
-
-var DeleteWebACLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteWebACLRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWebACLRequest_WebACLId *smithy.Schema
-
-var DeleteWebACLRequest_ChangeToken *smithy.Schema
-
-var DeleteWebACLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteWebACLResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWebACLResponse_ChangeToken *smithy.Schema
-
-var DeleteXssMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteXssMatchSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteXssMatchSetRequest_XssMatchSetId *smithy.Schema
-
-var DeleteXssMatchSetRequest_ChangeToken *smithy.Schema
-
-var DeleteXssMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DeleteXssMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteXssMatchSetResponse_ChangeToken *smithy.Schema
-
-var DisassociateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DisassociateWebACLRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateWebACLRequest_ResourceArn *smithy.Schema
-
-var DisassociateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "DisassociateWebACLResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetByteMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetByteMatchSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetByteMatchSetRequest_ByteMatchSetId *smithy.Schema
-
-var GetByteMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetByteMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetByteMatchSetResponse_ByteMatchSet *smithy.Schema
-
-var GetChangeTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetChangeTokenRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetChangeTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetChangeTokenResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChangeTokenResponse_ChangeToken *smithy.Schema
-
-var GetChangeTokenStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetChangeTokenStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetChangeTokenStatusRequest_ChangeToken *smithy.Schema
-
-var GetChangeTokenStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetChangeTokenStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChangeTokenStatusResponse_ChangeTokenStatus *smithy.Schema
-
-var GetGeoMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetGeoMatchSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetGeoMatchSetRequest_GeoMatchSetId *smithy.Schema
-
-var GetGeoMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetGeoMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetGeoMatchSetResponse_GeoMatchSet *smithy.Schema
-
-var GetIPSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetIPSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetIPSetRequest_IPSetId *smithy.Schema
-
-var GetIPSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetIPSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIPSetResponse_IPSet *smithy.Schema
-
-var GetLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetLoggingConfigurationRequest_ResourceArn *smithy.Schema
-
-var GetLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetLoggingConfigurationResponse_LoggingConfiguration *smithy.Schema
-
-var GetPermissionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetPermissionPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPermissionPolicyRequest_ResourceArn *smithy.Schema
-
-var GetPermissionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetPermissionPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPermissionPolicyResponse_Policy *smithy.Schema
-
-var GetRateBasedRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRateBasedRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRateBasedRuleRequest_RuleId *smithy.Schema
-
-var GetRateBasedRuleManagedKeysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRateBasedRuleManagedKeysRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetRateBasedRuleManagedKeysRequest_RuleId *smithy.Schema
-
-var GetRateBasedRuleManagedKeysRequest_NextMarker *smithy.Schema
-
-var GetRateBasedRuleManagedKeysResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRateBasedRuleManagedKeysResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRateBasedRuleManagedKeysResponse_ManagedKeys *smithy.Schema
-
-var GetRateBasedRuleManagedKeysResponse_NextMarker *smithy.Schema
-
-var GetRateBasedRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRateBasedRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRateBasedRuleResponse_Rule *smithy.Schema
-
-var GetRegexMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRegexMatchSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRegexMatchSetRequest_RegexMatchSetId *smithy.Schema
-
-var GetRegexMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRegexMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRegexMatchSetResponse_RegexMatchSet *smithy.Schema
-
-var GetRegexPatternSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRegexPatternSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRegexPatternSetRequest_RegexPatternSetId *smithy.Schema
-
-var GetRegexPatternSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRegexPatternSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRegexPatternSetResponse_RegexPatternSet *smithy.Schema
-
-var GetRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRuleGroupRequest_RuleGroupId *smithy.Schema
-
-var GetRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRuleGroupResponse_RuleGroup *smithy.Schema
-
-var GetRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRuleRequest_RuleId *smithy.Schema
-
-var GetRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRuleResponse_Rule *smithy.Schema
-
-var GetSampledRequestsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSampledRequestsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetSampledRequestsRequest_WebAclId *smithy.Schema
-
-var GetSampledRequestsRequest_RuleId *smithy.Schema
-
-var GetSampledRequestsRequest_TimeWindow *smithy.Schema
-
-var GetSampledRequestsRequest_MaxItems *smithy.Schema
-
-var GetSampledRequestsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSampledRequestsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetSampledRequestsResponse_SampledRequests *smithy.Schema
-
-var GetSampledRequestsResponse_PopulationSize *smithy.Schema
-
-var GetSampledRequestsResponse_TimeWindow *smithy.Schema
-
-var GetSizeConstraintSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSizeConstraintSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSizeConstraintSetRequest_SizeConstraintSetId *smithy.Schema
-
-var GetSizeConstraintSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSizeConstraintSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSizeConstraintSetResponse_SizeConstraintSet *smithy.Schema
-
-var GetSqlInjectionMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSqlInjectionMatchSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId *smithy.Schema
-
-var GetSqlInjectionMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetSqlInjectionMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSqlInjectionMatchSetResponse_SqlInjectionMatchSet *smithy.Schema
-
-var GetWebACLForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetWebACLForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetWebACLForResourceRequest_ResourceArn *smithy.Schema
-
-var GetWebACLForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetWebACLForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetWebACLForResourceResponse_WebACLSummary *smithy.Schema
-
-var GetWebACLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetWebACLRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetWebACLRequest_WebACLId *smithy.Schema
-
-var GetWebACLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetWebACLResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetWebACLResponse_WebACL *smithy.Schema
-
-var GetXssMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetXssMatchSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetXssMatchSetRequest_XssMatchSetId *smithy.Schema
-
-var GetXssMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "GetXssMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetXssMatchSetResponse_XssMatchSet *smithy.Schema
-
-var ListActivatedRulesInRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListActivatedRulesInRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListActivatedRulesInRuleGroupRequest_RuleGroupId *smithy.Schema
-
-var ListActivatedRulesInRuleGroupRequest_NextMarker *smithy.Schema
-
-var ListActivatedRulesInRuleGroupRequest_Limit *smithy.Schema
-
-var ListActivatedRulesInRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListActivatedRulesInRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListActivatedRulesInRuleGroupResponse_NextMarker *smithy.Schema
-
-var ListActivatedRulesInRuleGroupResponse_ActivatedRules *smithy.Schema
-
-var ListByteMatchSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListByteMatchSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListByteMatchSetsRequest_NextMarker *smithy.Schema
-
-var ListByteMatchSetsRequest_Limit *smithy.Schema
-
-var ListByteMatchSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListByteMatchSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListByteMatchSetsResponse_NextMarker *smithy.Schema
-
-var ListByteMatchSetsResponse_ByteMatchSets *smithy.Schema
-
-var ListGeoMatchSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListGeoMatchSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListGeoMatchSetsRequest_NextMarker *smithy.Schema
-
-var ListGeoMatchSetsRequest_Limit *smithy.Schema
-
-var ListGeoMatchSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListGeoMatchSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGeoMatchSetsResponse_NextMarker *smithy.Schema
-
-var ListGeoMatchSetsResponse_GeoMatchSets *smithy.Schema
-
-var ListIPSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListIPSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListIPSetsRequest_NextMarker *smithy.Schema
-
-var ListIPSetsRequest_Limit *smithy.Schema
-
-var ListIPSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListIPSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIPSetsResponse_NextMarker *smithy.Schema
-
-var ListIPSetsResponse_IPSets *smithy.Schema
-
-var ListLoggingConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListLoggingConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListLoggingConfigurationsRequest_NextMarker *smithy.Schema
-
-var ListLoggingConfigurationsRequest_Limit *smithy.Schema
-
-var ListLoggingConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListLoggingConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLoggingConfigurationsResponse_LoggingConfigurations *smithy.Schema
-
-var ListLoggingConfigurationsResponse_NextMarker *smithy.Schema
-
-var ListRateBasedRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRateBasedRulesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRateBasedRulesRequest_NextMarker *smithy.Schema
-
-var ListRateBasedRulesRequest_Limit *smithy.Schema
-
-var ListRateBasedRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRateBasedRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRateBasedRulesResponse_NextMarker *smithy.Schema
-
-var ListRateBasedRulesResponse_Rules *smithy.Schema
-
-var ListRegexMatchSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRegexMatchSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRegexMatchSetsRequest_NextMarker *smithy.Schema
-
-var ListRegexMatchSetsRequest_Limit *smithy.Schema
-
-var ListRegexMatchSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRegexMatchSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRegexMatchSetsResponse_NextMarker *smithy.Schema
-
-var ListRegexMatchSetsResponse_RegexMatchSets *smithy.Schema
-
-var ListRegexPatternSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRegexPatternSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRegexPatternSetsRequest_NextMarker *smithy.Schema
-
-var ListRegexPatternSetsRequest_Limit *smithy.Schema
-
-var ListRegexPatternSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRegexPatternSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRegexPatternSetsResponse_NextMarker *smithy.Schema
-
-var ListRegexPatternSetsResponse_RegexPatternSets *smithy.Schema
-
-var ListResourcesForWebACLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListResourcesForWebACLRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourcesForWebACLRequest_WebACLId *smithy.Schema
-
-var ListResourcesForWebACLRequest_ResourceType *smithy.Schema
-
-var ListResourcesForWebACLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListResourcesForWebACLResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListResourcesForWebACLResponse_ResourceArns *smithy.Schema
-
-var ListRuleGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRuleGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRuleGroupsRequest_NextMarker *smithy.Schema
-
-var ListRuleGroupsRequest_Limit *smithy.Schema
-
-var ListRuleGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRuleGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRuleGroupsResponse_NextMarker *smithy.Schema
-
-var ListRuleGroupsResponse_RuleGroups *smithy.Schema
-
-var ListRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRulesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRulesRequest_NextMarker *smithy.Schema
-
-var ListRulesRequest_Limit *smithy.Schema
-
-var ListRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRulesResponse_NextMarker *smithy.Schema
-
-var ListRulesResponse_Rules *smithy.Schema
-
-var ListSizeConstraintSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSizeConstraintSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSizeConstraintSetsRequest_NextMarker *smithy.Schema
-
-var ListSizeConstraintSetsRequest_Limit *smithy.Schema
-
-var ListSizeConstraintSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSizeConstraintSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSizeConstraintSetsResponse_NextMarker *smithy.Schema
-
-var ListSizeConstraintSetsResponse_SizeConstraintSets *smithy.Schema
-
-var ListSqlInjectionMatchSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSqlInjectionMatchSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSqlInjectionMatchSetsRequest_NextMarker *smithy.Schema
-
-var ListSqlInjectionMatchSetsRequest_Limit *smithy.Schema
-
-var ListSqlInjectionMatchSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSqlInjectionMatchSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSqlInjectionMatchSetsResponse_NextMarker *smithy.Schema
-
-var ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets *smithy.Schema
-
-var ListSubscribedRuleGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSubscribedRuleGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscribedRuleGroupsRequest_NextMarker *smithy.Schema
-
-var ListSubscribedRuleGroupsRequest_Limit *smithy.Schema
-
-var ListSubscribedRuleGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListSubscribedRuleGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscribedRuleGroupsResponse_NextMarker *smithy.Schema
-
-var ListSubscribedRuleGroupsResponse_RuleGroups *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_NextMarker *smithy.Schema
-
-var ListTagsForResourceRequest_Limit *smithy.Schema
-
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_NextMarker *smithy.Schema
-
-var ListTagsForResourceResponse_TagInfoForResource *smithy.Schema
-
-var ListWebACLsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListWebACLsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListWebACLsRequest_NextMarker *smithy.Schema
-
-var ListWebACLsRequest_Limit *smithy.Schema
-
-var ListWebACLsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListWebACLsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWebACLsResponse_NextMarker *smithy.Schema
-
-var ListWebACLsResponse_WebACLs *smithy.Schema
-
-var ListXssMatchSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListXssMatchSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListXssMatchSetsRequest_NextMarker *smithy.Schema
-
-var ListXssMatchSetsRequest_Limit *smithy.Schema
-
-var ListXssMatchSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "ListXssMatchSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListXssMatchSetsResponse_NextMarker *smithy.Schema
-
-var ListXssMatchSetsResponse_XssMatchSets *smithy.Schema
-
-var PutLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PutLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutLoggingConfigurationRequest_LoggingConfiguration *smithy.Schema
-
-var PutLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PutLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutLoggingConfigurationResponse_LoggingConfiguration *smithy.Schema
-
-var PutPermissionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PutPermissionPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutPermissionPolicyRequest_ResourceArn *smithy.Schema
-
-var PutPermissionPolicyRequest_Policy *smithy.Schema
-
-var PutPermissionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "PutPermissionPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateByteMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateByteMatchSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateByteMatchSetRequest_ByteMatchSetId *smithy.Schema
-
-var UpdateByteMatchSetRequest_ChangeToken *smithy.Schema
-
-var UpdateByteMatchSetRequest_Updates *smithy.Schema
-
-var UpdateByteMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateByteMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateByteMatchSetResponse_ChangeToken *smithy.Schema
-
-var UpdateGeoMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateGeoMatchSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateGeoMatchSetRequest_GeoMatchSetId *smithy.Schema
-
-var UpdateGeoMatchSetRequest_ChangeToken *smithy.Schema
-
-var UpdateGeoMatchSetRequest_Updates *smithy.Schema
-
-var UpdateGeoMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateGeoMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGeoMatchSetResponse_ChangeToken *smithy.Schema
-
-var UpdateIPSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateIPSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateIPSetRequest_IPSetId *smithy.Schema
-
-var UpdateIPSetRequest_ChangeToken *smithy.Schema
-
-var UpdateIPSetRequest_Updates *smithy.Schema
-
-var UpdateIPSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateIPSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateIPSetResponse_ChangeToken *smithy.Schema
-
-var UpdateRateBasedRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRateBasedRuleRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRateBasedRuleRequest_RuleId *smithy.Schema
-
-var UpdateRateBasedRuleRequest_ChangeToken *smithy.Schema
-
-var UpdateRateBasedRuleRequest_Updates *smithy.Schema
-
-var UpdateRateBasedRuleRequest_RateLimit *smithy.Schema
-
-var UpdateRateBasedRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRateBasedRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRateBasedRuleResponse_ChangeToken *smithy.Schema
-
-var UpdateRegexMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRegexMatchSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRegexMatchSetRequest_RegexMatchSetId *smithy.Schema
-
-var UpdateRegexMatchSetRequest_Updates *smithy.Schema
-
-var UpdateRegexMatchSetRequest_ChangeToken *smithy.Schema
-
-var UpdateRegexMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRegexMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRegexMatchSetResponse_ChangeToken *smithy.Schema
-
-var UpdateRegexPatternSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRegexPatternSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRegexPatternSetRequest_RegexPatternSetId *smithy.Schema
-
-var UpdateRegexPatternSetRequest_Updates *smithy.Schema
-
-var UpdateRegexPatternSetRequest_ChangeToken *smithy.Schema
-
-var UpdateRegexPatternSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRegexPatternSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRegexPatternSetResponse_ChangeToken *smithy.Schema
-
-var UpdateRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRuleGroupRequest_RuleGroupId *smithy.Schema
-
-var UpdateRuleGroupRequest_Updates *smithy.Schema
-
-var UpdateRuleGroupRequest_ChangeToken *smithy.Schema
-
-var UpdateRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRuleGroupResponse_ChangeToken *smithy.Schema
-
-var UpdateRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRuleRequest_RuleId *smithy.Schema
-
-var UpdateRuleRequest_ChangeToken *smithy.Schema
-
-var UpdateRuleRequest_Updates *smithy.Schema
-
-var UpdateRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRuleResponse_ChangeToken *smithy.Schema
-
-var UpdateSizeConstraintSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateSizeConstraintSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSizeConstraintSetRequest_SizeConstraintSetId *smithy.Schema
-
-var UpdateSizeConstraintSetRequest_ChangeToken *smithy.Schema
-
-var UpdateSizeConstraintSetRequest_Updates *smithy.Schema
-
-var UpdateSizeConstraintSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateSizeConstraintSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSizeConstraintSetResponse_ChangeToken *smithy.Schema
-
-var UpdateSqlInjectionMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateSqlInjectionMatchSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId *smithy.Schema
-
-var UpdateSqlInjectionMatchSetRequest_ChangeToken *smithy.Schema
-
-var UpdateSqlInjectionMatchSetRequest_Updates *smithy.Schema
-
-var UpdateSqlInjectionMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateSqlInjectionMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSqlInjectionMatchSetResponse_ChangeToken *smithy.Schema
-
-var UpdateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateWebACLRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateWebACLRequest_WebACLId *smithy.Schema
-
-var UpdateWebACLRequest_ChangeToken *smithy.Schema
-
-var UpdateWebACLRequest_Updates *smithy.Schema
-
-var UpdateWebACLRequest_DefaultAction *smithy.Schema
-
-var UpdateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateWebACLResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWebACLResponse_ChangeToken *smithy.Schema
-
-var UpdateXssMatchSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateXssMatchSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateXssMatchSetRequest_XssMatchSetId *smithy.Schema
-
-var UpdateXssMatchSetRequest_ChangeToken *smithy.Schema
-
-var UpdateXssMatchSetRequest_Updates *smithy.Schema
-
-var UpdateXssMatchSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wafregional",
-	Name:      "UpdateXssMatchSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateXssMatchSetResponse_ChangeToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	WafActionType_BLOCK = WafActionType.AddMember("BLOCK", smithyprelude.Unit)
-
-	WafActionType_ALLOW = WafActionType.AddMember("ALLOW", smithyprelude.Unit)
-
-	WafActionType_COUNT = WafActionType.AddMember("COUNT", smithyprelude.Unit)
-
-	WafAction_Type = WafAction.AddMember("Type", WafActionType)
-
-	WafOverrideActionType_NONE = WafOverrideActionType.AddMember("NONE", smithyprelude.Unit)
-
-	WafOverrideActionType_COUNT = WafOverrideActionType.AddMember("COUNT", smithyprelude.Unit)
-
-	WafOverrideAction_Type = WafOverrideAction.AddMember("Type", WafOverrideActionType)
-
-	WafRuleType_REGULAR = WafRuleType.AddMember("REGULAR", smithyprelude.Unit)
-
-	WafRuleType_RATE_BASED = WafRuleType.AddMember("RATE_BASED", smithyprelude.Unit)
-
-	WafRuleType_GROUP = WafRuleType.AddMember("GROUP", smithyprelude.Unit)
-
-	ExcludedRule_RuleId = ExcludedRule.AddMember("RuleId", _ResourceId)
-
-	_ExcludedRules_member = _ExcludedRules.AddMember("member", ExcludedRule)
-
-	ActivatedRule_Priority = ActivatedRule.AddMember("Priority", _RulePriority)
-
-	ActivatedRule_RuleId = ActivatedRule.AddMember("RuleId", _ResourceId)
-
-	ActivatedRule_Action = ActivatedRule.AddMember("Action", WafAction)
-
-	ActivatedRule_OverrideAction = ActivatedRule.AddMember("OverrideAction", WafOverrideAction)
-
-	ActivatedRule_Type = ActivatedRule.AddMember("Type", WafRuleType)
-
-	ActivatedRule_ExcludedRules = ActivatedRule.AddMember("ExcludedRules", _ExcludedRules)
-
-	_ActivatedRules_member = _ActivatedRules.AddMember("member", ActivatedRule)
-
-	MatchFieldType_URI = MatchFieldType.AddMember("URI", smithyprelude.Unit)
-
-	MatchFieldType_QUERY_STRING = MatchFieldType.AddMember("QUERY_STRING", smithyprelude.Unit)
-
-	MatchFieldType_HEADER = MatchFieldType.AddMember("HEADER", smithyprelude.Unit)
-
-	MatchFieldType_METHOD = MatchFieldType.AddMember("METHOD", smithyprelude.Unit)
-
-	MatchFieldType_BODY = MatchFieldType.AddMember("BODY", smithyprelude.Unit)
-
-	MatchFieldType_SINGLE_QUERY_ARG = MatchFieldType.AddMember("SINGLE_QUERY_ARG", smithyprelude.Unit)
-
-	MatchFieldType_ALL_QUERY_ARGS = MatchFieldType.AddMember("ALL_QUERY_ARGS", smithyprelude.Unit)
-
-	FieldToMatch_Type = FieldToMatch.AddMember("Type", MatchFieldType)
-
-	FieldToMatch_Data = FieldToMatch.AddMember("Data", _MatchFieldData)
-
-	TextTransformation_NONE = TextTransformation.AddMember("NONE", smithyprelude.Unit)
-
-	TextTransformation_COMPRESS_WHITE_SPACE = TextTransformation.AddMember("COMPRESS_WHITE_SPACE", smithyprelude.Unit)
-
-	TextTransformation_HTML_ENTITY_DECODE = TextTransformation.AddMember("HTML_ENTITY_DECODE", smithyprelude.Unit)
-
-	TextTransformation_LOWERCASE = TextTransformation.AddMember("LOWERCASE", smithyprelude.Unit)
-
-	TextTransformation_CMD_LINE = TextTransformation.AddMember("CMD_LINE", smithyprelude.Unit)
-
-	TextTransformation_URL_DECODE = TextTransformation.AddMember("URL_DECODE", smithyprelude.Unit)
-
-	PositionalConstraint_EXACTLY = PositionalConstraint.AddMember("EXACTLY", smithyprelude.Unit)
-
-	PositionalConstraint_STARTS_WITH = PositionalConstraint.AddMember("STARTS_WITH", smithyprelude.Unit)
-
-	PositionalConstraint_ENDS_WITH = PositionalConstraint.AddMember("ENDS_WITH", smithyprelude.Unit)
-
-	PositionalConstraint_CONTAINS = PositionalConstraint.AddMember("CONTAINS", smithyprelude.Unit)
-
-	PositionalConstraint_CONTAINS_WORD = PositionalConstraint.AddMember("CONTAINS_WORD", smithyprelude.Unit)
-
-	ByteMatchTuple_FieldToMatch = ByteMatchTuple.AddMember("FieldToMatch", FieldToMatch)
-
-	ByteMatchTuple_TargetString = ByteMatchTuple.AddMember("TargetString", _ByteMatchTargetString)
-
-	ByteMatchTuple_TextTransformation = ByteMatchTuple.AddMember("TextTransformation", TextTransformation)
-
-	ByteMatchTuple_PositionalConstraint = ByteMatchTuple.AddMember("PositionalConstraint", PositionalConstraint)
-
-	_ByteMatchTuples_member = _ByteMatchTuples.AddMember("member", ByteMatchTuple)
-
-	ByteMatchSet_ByteMatchSetId = ByteMatchSet.AddMember("ByteMatchSetId", _ResourceId)
-
-	ByteMatchSet_Name = ByteMatchSet.AddMember("Name", _ResourceName)
-
-	ByteMatchSet_ByteMatchTuples = ByteMatchSet.AddMember("ByteMatchTuples", _ByteMatchTuples)
-
-	ByteMatchSetSummary_ByteMatchSetId = ByteMatchSetSummary.AddMember("ByteMatchSetId", _ResourceId)
-
-	ByteMatchSetSummary_Name = ByteMatchSetSummary.AddMember("Name", _ResourceName)
-
-	_ByteMatchSetSummaries_member = _ByteMatchSetSummaries.AddMember("member", ByteMatchSetSummary)
-
-	ChangeAction_INSERT = ChangeAction.AddMember("INSERT", smithyprelude.Unit)
-
-	ChangeAction_DELETE = ChangeAction.AddMember("DELETE", smithyprelude.Unit)
-
-	ByteMatchSetUpdate_Action = ByteMatchSetUpdate.AddMember("Action", ChangeAction)
-
-	ByteMatchSetUpdate_ByteMatchTuple = ByteMatchSetUpdate.AddMember("ByteMatchTuple", ByteMatchTuple)
-
-	_ByteMatchSetUpdates_member = _ByteMatchSetUpdates.AddMember("member", ByteMatchSetUpdate)
-
-	ChangeTokenStatus_PROVISIONED = ChangeTokenStatus.AddMember("PROVISIONED", smithyprelude.Unit)
-
-	ChangeTokenStatus_PENDING = ChangeTokenStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ChangeTokenStatus_INSYNC = ChangeTokenStatus.AddMember("INSYNC", smithyprelude.Unit)
-
-	ComparisonOperator_EQ = ComparisonOperator.AddMember("EQ", smithyprelude.Unit)
-
-	ComparisonOperator_NE = ComparisonOperator.AddMember("NE", smithyprelude.Unit)
-
-	ComparisonOperator_LE = ComparisonOperator.AddMember("LE", smithyprelude.Unit)
-
-	ComparisonOperator_LT = ComparisonOperator.AddMember("LT", smithyprelude.Unit)
-
-	ComparisonOperator_GE = ComparisonOperator.AddMember("GE", smithyprelude.Unit)
-
-	ComparisonOperator_GT = ComparisonOperator.AddMember("GT", smithyprelude.Unit)
-
-	GeoMatchConstraintType_Country = GeoMatchConstraintType.AddMember("Country", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AF = GeoMatchConstraintValue.AddMember("AF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AX = GeoMatchConstraintValue.AddMember("AX", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AL = GeoMatchConstraintValue.AddMember("AL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_DZ = GeoMatchConstraintValue.AddMember("DZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AS = GeoMatchConstraintValue.AddMember("AS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AD = GeoMatchConstraintValue.AddMember("AD", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AO = GeoMatchConstraintValue.AddMember("AO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AI = GeoMatchConstraintValue.AddMember("AI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AQ = GeoMatchConstraintValue.AddMember("AQ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AG = GeoMatchConstraintValue.AddMember("AG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AR = GeoMatchConstraintValue.AddMember("AR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AM = GeoMatchConstraintValue.AddMember("AM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AW = GeoMatchConstraintValue.AddMember("AW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AU = GeoMatchConstraintValue.AddMember("AU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AT = GeoMatchConstraintValue.AddMember("AT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AZ = GeoMatchConstraintValue.AddMember("AZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BS = GeoMatchConstraintValue.AddMember("BS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BH = GeoMatchConstraintValue.AddMember("BH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BD = GeoMatchConstraintValue.AddMember("BD", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BB = GeoMatchConstraintValue.AddMember("BB", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BY = GeoMatchConstraintValue.AddMember("BY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BE = GeoMatchConstraintValue.AddMember("BE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BZ = GeoMatchConstraintValue.AddMember("BZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BJ = GeoMatchConstraintValue.AddMember("BJ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BM = GeoMatchConstraintValue.AddMember("BM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BT = GeoMatchConstraintValue.AddMember("BT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BO = GeoMatchConstraintValue.AddMember("BO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BQ = GeoMatchConstraintValue.AddMember("BQ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BA = GeoMatchConstraintValue.AddMember("BA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BW = GeoMatchConstraintValue.AddMember("BW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BV = GeoMatchConstraintValue.AddMember("BV", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BR = GeoMatchConstraintValue.AddMember("BR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IO = GeoMatchConstraintValue.AddMember("IO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BN = GeoMatchConstraintValue.AddMember("BN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BG = GeoMatchConstraintValue.AddMember("BG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BF = GeoMatchConstraintValue.AddMember("BF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BI = GeoMatchConstraintValue.AddMember("BI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KH = GeoMatchConstraintValue.AddMember("KH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CM = GeoMatchConstraintValue.AddMember("CM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CA = GeoMatchConstraintValue.AddMember("CA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CV = GeoMatchConstraintValue.AddMember("CV", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KY = GeoMatchConstraintValue.AddMember("KY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CF = GeoMatchConstraintValue.AddMember("CF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TD = GeoMatchConstraintValue.AddMember("TD", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CL = GeoMatchConstraintValue.AddMember("CL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CN = GeoMatchConstraintValue.AddMember("CN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CX = GeoMatchConstraintValue.AddMember("CX", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CC = GeoMatchConstraintValue.AddMember("CC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CO = GeoMatchConstraintValue.AddMember("CO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KM = GeoMatchConstraintValue.AddMember("KM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CG = GeoMatchConstraintValue.AddMember("CG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CD = GeoMatchConstraintValue.AddMember("CD", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CK = GeoMatchConstraintValue.AddMember("CK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CR = GeoMatchConstraintValue.AddMember("CR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CI = GeoMatchConstraintValue.AddMember("CI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_HR = GeoMatchConstraintValue.AddMember("HR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CU = GeoMatchConstraintValue.AddMember("CU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CW = GeoMatchConstraintValue.AddMember("CW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CY = GeoMatchConstraintValue.AddMember("CY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CZ = GeoMatchConstraintValue.AddMember("CZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_DK = GeoMatchConstraintValue.AddMember("DK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_DJ = GeoMatchConstraintValue.AddMember("DJ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_DM = GeoMatchConstraintValue.AddMember("DM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_DO = GeoMatchConstraintValue.AddMember("DO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_EC = GeoMatchConstraintValue.AddMember("EC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_EG = GeoMatchConstraintValue.AddMember("EG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SV = GeoMatchConstraintValue.AddMember("SV", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GQ = GeoMatchConstraintValue.AddMember("GQ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ER = GeoMatchConstraintValue.AddMember("ER", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_EE = GeoMatchConstraintValue.AddMember("EE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ET = GeoMatchConstraintValue.AddMember("ET", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_FK = GeoMatchConstraintValue.AddMember("FK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_FO = GeoMatchConstraintValue.AddMember("FO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_FJ = GeoMatchConstraintValue.AddMember("FJ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_FI = GeoMatchConstraintValue.AddMember("FI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_FR = GeoMatchConstraintValue.AddMember("FR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GF = GeoMatchConstraintValue.AddMember("GF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PF = GeoMatchConstraintValue.AddMember("PF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TF = GeoMatchConstraintValue.AddMember("TF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GA = GeoMatchConstraintValue.AddMember("GA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GM = GeoMatchConstraintValue.AddMember("GM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GE = GeoMatchConstraintValue.AddMember("GE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_DE = GeoMatchConstraintValue.AddMember("DE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GH = GeoMatchConstraintValue.AddMember("GH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GI = GeoMatchConstraintValue.AddMember("GI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GR = GeoMatchConstraintValue.AddMember("GR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GL = GeoMatchConstraintValue.AddMember("GL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GD = GeoMatchConstraintValue.AddMember("GD", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GP = GeoMatchConstraintValue.AddMember("GP", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GU = GeoMatchConstraintValue.AddMember("GU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GT = GeoMatchConstraintValue.AddMember("GT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GG = GeoMatchConstraintValue.AddMember("GG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GN = GeoMatchConstraintValue.AddMember("GN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GW = GeoMatchConstraintValue.AddMember("GW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GY = GeoMatchConstraintValue.AddMember("GY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_HT = GeoMatchConstraintValue.AddMember("HT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_HM = GeoMatchConstraintValue.AddMember("HM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_VA = GeoMatchConstraintValue.AddMember("VA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_HN = GeoMatchConstraintValue.AddMember("HN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_HK = GeoMatchConstraintValue.AddMember("HK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_HU = GeoMatchConstraintValue.AddMember("HU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IS = GeoMatchConstraintValue.AddMember("IS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IN = GeoMatchConstraintValue.AddMember("IN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ID = GeoMatchConstraintValue.AddMember("ID", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IR = GeoMatchConstraintValue.AddMember("IR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IQ = GeoMatchConstraintValue.AddMember("IQ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IE = GeoMatchConstraintValue.AddMember("IE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IM = GeoMatchConstraintValue.AddMember("IM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IL = GeoMatchConstraintValue.AddMember("IL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_IT = GeoMatchConstraintValue.AddMember("IT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_JM = GeoMatchConstraintValue.AddMember("JM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_JP = GeoMatchConstraintValue.AddMember("JP", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_JE = GeoMatchConstraintValue.AddMember("JE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_JO = GeoMatchConstraintValue.AddMember("JO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KZ = GeoMatchConstraintValue.AddMember("KZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KE = GeoMatchConstraintValue.AddMember("KE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KI = GeoMatchConstraintValue.AddMember("KI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KP = GeoMatchConstraintValue.AddMember("KP", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KR = GeoMatchConstraintValue.AddMember("KR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KW = GeoMatchConstraintValue.AddMember("KW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KG = GeoMatchConstraintValue.AddMember("KG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LA = GeoMatchConstraintValue.AddMember("LA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LV = GeoMatchConstraintValue.AddMember("LV", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LB = GeoMatchConstraintValue.AddMember("LB", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LS = GeoMatchConstraintValue.AddMember("LS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LR = GeoMatchConstraintValue.AddMember("LR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LY = GeoMatchConstraintValue.AddMember("LY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LI = GeoMatchConstraintValue.AddMember("LI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LT = GeoMatchConstraintValue.AddMember("LT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LU = GeoMatchConstraintValue.AddMember("LU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MO = GeoMatchConstraintValue.AddMember("MO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MK = GeoMatchConstraintValue.AddMember("MK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MG = GeoMatchConstraintValue.AddMember("MG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MW = GeoMatchConstraintValue.AddMember("MW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MY = GeoMatchConstraintValue.AddMember("MY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MV = GeoMatchConstraintValue.AddMember("MV", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ML = GeoMatchConstraintValue.AddMember("ML", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MT = GeoMatchConstraintValue.AddMember("MT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MH = GeoMatchConstraintValue.AddMember("MH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MQ = GeoMatchConstraintValue.AddMember("MQ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MR = GeoMatchConstraintValue.AddMember("MR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MU = GeoMatchConstraintValue.AddMember("MU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_YT = GeoMatchConstraintValue.AddMember("YT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MX = GeoMatchConstraintValue.AddMember("MX", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_FM = GeoMatchConstraintValue.AddMember("FM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MD = GeoMatchConstraintValue.AddMember("MD", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MC = GeoMatchConstraintValue.AddMember("MC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MN = GeoMatchConstraintValue.AddMember("MN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ME = GeoMatchConstraintValue.AddMember("ME", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MS = GeoMatchConstraintValue.AddMember("MS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MA = GeoMatchConstraintValue.AddMember("MA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MZ = GeoMatchConstraintValue.AddMember("MZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MM = GeoMatchConstraintValue.AddMember("MM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NA = GeoMatchConstraintValue.AddMember("NA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NR = GeoMatchConstraintValue.AddMember("NR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NP = GeoMatchConstraintValue.AddMember("NP", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NL = GeoMatchConstraintValue.AddMember("NL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NC = GeoMatchConstraintValue.AddMember("NC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NZ = GeoMatchConstraintValue.AddMember("NZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NI = GeoMatchConstraintValue.AddMember("NI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NE = GeoMatchConstraintValue.AddMember("NE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NG = GeoMatchConstraintValue.AddMember("NG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NU = GeoMatchConstraintValue.AddMember("NU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NF = GeoMatchConstraintValue.AddMember("NF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MP = GeoMatchConstraintValue.AddMember("MP", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_NO = GeoMatchConstraintValue.AddMember("NO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_OM = GeoMatchConstraintValue.AddMember("OM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PK = GeoMatchConstraintValue.AddMember("PK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PW = GeoMatchConstraintValue.AddMember("PW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PS = GeoMatchConstraintValue.AddMember("PS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PA = GeoMatchConstraintValue.AddMember("PA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PG = GeoMatchConstraintValue.AddMember("PG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PY = GeoMatchConstraintValue.AddMember("PY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PE = GeoMatchConstraintValue.AddMember("PE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PH = GeoMatchConstraintValue.AddMember("PH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PN = GeoMatchConstraintValue.AddMember("PN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PL = GeoMatchConstraintValue.AddMember("PL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PT = GeoMatchConstraintValue.AddMember("PT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PR = GeoMatchConstraintValue.AddMember("PR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_QA = GeoMatchConstraintValue.AddMember("QA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_RE = GeoMatchConstraintValue.AddMember("RE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_RO = GeoMatchConstraintValue.AddMember("RO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_RU = GeoMatchConstraintValue.AddMember("RU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_RW = GeoMatchConstraintValue.AddMember("RW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_BL = GeoMatchConstraintValue.AddMember("BL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SH = GeoMatchConstraintValue.AddMember("SH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_KN = GeoMatchConstraintValue.AddMember("KN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LC = GeoMatchConstraintValue.AddMember("LC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_MF = GeoMatchConstraintValue.AddMember("MF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_PM = GeoMatchConstraintValue.AddMember("PM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_VC = GeoMatchConstraintValue.AddMember("VC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_WS = GeoMatchConstraintValue.AddMember("WS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SM = GeoMatchConstraintValue.AddMember("SM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ST = GeoMatchConstraintValue.AddMember("ST", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SA = GeoMatchConstraintValue.AddMember("SA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SN = GeoMatchConstraintValue.AddMember("SN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_RS = GeoMatchConstraintValue.AddMember("RS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SC = GeoMatchConstraintValue.AddMember("SC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SL = GeoMatchConstraintValue.AddMember("SL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SG = GeoMatchConstraintValue.AddMember("SG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SX = GeoMatchConstraintValue.AddMember("SX", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SK = GeoMatchConstraintValue.AddMember("SK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SI = GeoMatchConstraintValue.AddMember("SI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SB = GeoMatchConstraintValue.AddMember("SB", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SO = GeoMatchConstraintValue.AddMember("SO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ZA = GeoMatchConstraintValue.AddMember("ZA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GS = GeoMatchConstraintValue.AddMember("GS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SS = GeoMatchConstraintValue.AddMember("SS", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ES = GeoMatchConstraintValue.AddMember("ES", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_LK = GeoMatchConstraintValue.AddMember("LK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SD = GeoMatchConstraintValue.AddMember("SD", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SR = GeoMatchConstraintValue.AddMember("SR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SJ = GeoMatchConstraintValue.AddMember("SJ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SZ = GeoMatchConstraintValue.AddMember("SZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SE = GeoMatchConstraintValue.AddMember("SE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_CH = GeoMatchConstraintValue.AddMember("CH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_SY = GeoMatchConstraintValue.AddMember("SY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TW = GeoMatchConstraintValue.AddMember("TW", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TJ = GeoMatchConstraintValue.AddMember("TJ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TZ = GeoMatchConstraintValue.AddMember("TZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TH = GeoMatchConstraintValue.AddMember("TH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TL = GeoMatchConstraintValue.AddMember("TL", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TG = GeoMatchConstraintValue.AddMember("TG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TK = GeoMatchConstraintValue.AddMember("TK", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TO = GeoMatchConstraintValue.AddMember("TO", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TT = GeoMatchConstraintValue.AddMember("TT", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TN = GeoMatchConstraintValue.AddMember("TN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TR = GeoMatchConstraintValue.AddMember("TR", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TM = GeoMatchConstraintValue.AddMember("TM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TC = GeoMatchConstraintValue.AddMember("TC", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_TV = GeoMatchConstraintValue.AddMember("TV", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_UG = GeoMatchConstraintValue.AddMember("UG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_UA = GeoMatchConstraintValue.AddMember("UA", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_AE = GeoMatchConstraintValue.AddMember("AE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_GB = GeoMatchConstraintValue.AddMember("GB", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_US = GeoMatchConstraintValue.AddMember("US", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_UM = GeoMatchConstraintValue.AddMember("UM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_UY = GeoMatchConstraintValue.AddMember("UY", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_UZ = GeoMatchConstraintValue.AddMember("UZ", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_VU = GeoMatchConstraintValue.AddMember("VU", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_VE = GeoMatchConstraintValue.AddMember("VE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_VN = GeoMatchConstraintValue.AddMember("VN", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_VG = GeoMatchConstraintValue.AddMember("VG", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_VI = GeoMatchConstraintValue.AddMember("VI", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_WF = GeoMatchConstraintValue.AddMember("WF", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_EH = GeoMatchConstraintValue.AddMember("EH", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_YE = GeoMatchConstraintValue.AddMember("YE", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ZM = GeoMatchConstraintValue.AddMember("ZM", smithyprelude.Unit)
-
-	GeoMatchConstraintValue_ZW = GeoMatchConstraintValue.AddMember("ZW", smithyprelude.Unit)
-
-	GeoMatchConstraint_Type = GeoMatchConstraint.AddMember("Type", GeoMatchConstraintType)
-
-	GeoMatchConstraint_Value = GeoMatchConstraint.AddMember("Value", GeoMatchConstraintValue)
-
-	_GeoMatchConstraints_member = _GeoMatchConstraints.AddMember("member", GeoMatchConstraint)
-
-	GeoMatchSet_GeoMatchSetId = GeoMatchSet.AddMember("GeoMatchSetId", _ResourceId)
-
-	GeoMatchSet_Name = GeoMatchSet.AddMember("Name", _ResourceName)
-
-	GeoMatchSet_GeoMatchConstraints = GeoMatchSet.AddMember("GeoMatchConstraints", _GeoMatchConstraints)
-
-	GeoMatchSetSummary_GeoMatchSetId = GeoMatchSetSummary.AddMember("GeoMatchSetId", _ResourceId)
-
-	GeoMatchSetSummary_Name = GeoMatchSetSummary.AddMember("Name", _ResourceName)
-
-	_GeoMatchSetSummaries_member = _GeoMatchSetSummaries.AddMember("member", GeoMatchSetSummary)
-
-	GeoMatchSetUpdate_Action = GeoMatchSetUpdate.AddMember("Action", ChangeAction)
-
-	GeoMatchSetUpdate_GeoMatchConstraint = GeoMatchSetUpdate.AddMember("GeoMatchConstraint", GeoMatchConstraint)
-
-	_GeoMatchSetUpdates_member = _GeoMatchSetUpdates.AddMember("member", GeoMatchSetUpdate)
-
-	HTTPHeader_Name = HTTPHeader.AddMember("Name", _HeaderName)
-
-	HTTPHeader_Value = HTTPHeader.AddMember("Value", _HeaderValue)
-
-	_HTTPHeaders_member = _HTTPHeaders.AddMember("member", HTTPHeader)
-
-	HTTPRequest_ClientIP = HTTPRequest.AddMember("ClientIP", _IPString)
-
-	HTTPRequest_Country = HTTPRequest.AddMember("Country", _Country)
-
-	HTTPRequest_URI = HTTPRequest.AddMember("URI", _URIString)
-
-	HTTPRequest_Method = HTTPRequest.AddMember("Method", _HTTPMethod)
-
-	HTTPRequest_HTTPVersion = HTTPRequest.AddMember("HTTPVersion", _HTTPVersion)
-
-	HTTPRequest_Headers = HTTPRequest.AddMember("Headers", _HTTPHeaders)
-
-	IPSetDescriptorType_IPV4 = IPSetDescriptorType.AddMember("IPV4", smithyprelude.Unit)
-
-	IPSetDescriptorType_IPV6 = IPSetDescriptorType.AddMember("IPV6", smithyprelude.Unit)
-
-	IPSetDescriptor_Type = IPSetDescriptor.AddMember("Type", IPSetDescriptorType)
-
-	IPSetDescriptor_Value = IPSetDescriptor.AddMember("Value", _IPSetDescriptorValue)
-
-	_IPSetDescriptors_member = _IPSetDescriptors.AddMember("member", IPSetDescriptor)
-
-	IPSet_IPSetId = IPSet.AddMember("IPSetId", _ResourceId)
-
-	IPSet_Name = IPSet.AddMember("Name", _ResourceName)
-
-	IPSet_IPSetDescriptors = IPSet.AddMember("IPSetDescriptors", _IPSetDescriptors)
-
-	IPSetSummary_IPSetId = IPSetSummary.AddMember("IPSetId", _ResourceId)
-
-	IPSetSummary_Name = IPSetSummary.AddMember("Name", _ResourceName)
-
-	_IPSetSummaries_member = _IPSetSummaries.AddMember("member", IPSetSummary)
-
-	IPSetUpdate_Action = IPSetUpdate.AddMember("Action", ChangeAction)
-
-	IPSetUpdate_IPSetDescriptor = IPSetUpdate.AddMember("IPSetDescriptor", IPSetDescriptor)
-
-	_IPSetUpdates_member = _IPSetUpdates.AddMember("member", IPSetUpdate)
-
-	_LogDestinationConfigs_member = _LogDestinationConfigs.AddMember("member", _ResourceArn)
-
-	_RedactedFields_member = _RedactedFields.AddMember("member", FieldToMatch)
-
-	LoggingConfiguration_ResourceArn = LoggingConfiguration.AddMember("ResourceArn", _ResourceArn)
-
-	LoggingConfiguration_LogDestinationConfigs = LoggingConfiguration.AddMember("LogDestinationConfigs", _LogDestinationConfigs)
-
-	LoggingConfiguration_RedactedFields = LoggingConfiguration.AddMember("RedactedFields", _RedactedFields)
-
-	_LoggingConfigurations_member = _LoggingConfigurations.AddMember("member", LoggingConfiguration)
-
-	_ManagedKeys_member = _ManagedKeys.AddMember("member", _ManagedKey)
-
-	MigrationErrorType_ENTITY_NOT_SUPPORTED = MigrationErrorType.AddMember("ENTITY_NOT_SUPPORTED", smithyprelude.Unit)
-
-	MigrationErrorType_ENTITY_NOT_FOUND = MigrationErrorType.AddMember("ENTITY_NOT_FOUND", smithyprelude.Unit)
-
-	MigrationErrorType_S3_BUCKET_NO_PERMISSION = MigrationErrorType.AddMember("S3_BUCKET_NO_PERMISSION", smithyprelude.Unit)
-
-	MigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE = MigrationErrorType.AddMember("S3_BUCKET_NOT_ACCESSIBLE", smithyprelude.Unit)
-
-	MigrationErrorType_S3_BUCKET_NOT_FOUND = MigrationErrorType.AddMember("S3_BUCKET_NOT_FOUND", smithyprelude.Unit)
-
-	MigrationErrorType_S3_BUCKET_INVALID_REGION = MigrationErrorType.AddMember("S3_BUCKET_INVALID_REGION", smithyprelude.Unit)
-
-	MigrationErrorType_S3_INTERNAL_ERROR = MigrationErrorType.AddMember("S3_INTERNAL_ERROR", smithyprelude.Unit)
-
-	ParameterExceptionField_CHANGE_ACTION = ParameterExceptionField.AddMember("CHANGE_ACTION", smithyprelude.Unit)
-
-	ParameterExceptionField_WAF_ACTION = ParameterExceptionField.AddMember("WAF_ACTION", smithyprelude.Unit)
-
-	ParameterExceptionField_WAF_OVERRIDE_ACTION = ParameterExceptionField.AddMember("WAF_OVERRIDE_ACTION", smithyprelude.Unit)
-
-	ParameterExceptionField_PREDICATE_TYPE = ParameterExceptionField.AddMember("PREDICATE_TYPE", smithyprelude.Unit)
-
-	ParameterExceptionField_IPSET_TYPE = ParameterExceptionField.AddMember("IPSET_TYPE", smithyprelude.Unit)
-
-	ParameterExceptionField_BYTE_MATCH_FIELD_TYPE = ParameterExceptionField.AddMember("BYTE_MATCH_FIELD_TYPE", smithyprelude.Unit)
-
-	ParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE = ParameterExceptionField.AddMember("SQL_INJECTION_MATCH_FIELD_TYPE", smithyprelude.Unit)
-
-	ParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION = ParameterExceptionField.AddMember("BYTE_MATCH_TEXT_TRANSFORMATION", smithyprelude.Unit)
-
-	ParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT = ParameterExceptionField.AddMember("BYTE_MATCH_POSITIONAL_CONSTRAINT", smithyprelude.Unit)
-
-	ParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR = ParameterExceptionField.AddMember("SIZE_CONSTRAINT_COMPARISON_OPERATOR", smithyprelude.Unit)
-
-	ParameterExceptionField_GEO_MATCH_LOCATION_TYPE = ParameterExceptionField.AddMember("GEO_MATCH_LOCATION_TYPE", smithyprelude.Unit)
-
-	ParameterExceptionField_GEO_MATCH_LOCATION_VALUE = ParameterExceptionField.AddMember("GEO_MATCH_LOCATION_VALUE", smithyprelude.Unit)
-
-	ParameterExceptionField_RATE_KEY = ParameterExceptionField.AddMember("RATE_KEY", smithyprelude.Unit)
-
-	ParameterExceptionField_RULE_TYPE = ParameterExceptionField.AddMember("RULE_TYPE", smithyprelude.Unit)
-
-	ParameterExceptionField_NEXT_MARKER = ParameterExceptionField.AddMember("NEXT_MARKER", smithyprelude.Unit)
-
-	ParameterExceptionField_RESOURCE_ARN = ParameterExceptionField.AddMember("RESOURCE_ARN", smithyprelude.Unit)
-
-	ParameterExceptionField_TAGS = ParameterExceptionField.AddMember("TAGS", smithyprelude.Unit)
-
-	ParameterExceptionField_TAG_KEYS = ParameterExceptionField.AddMember("TAG_KEYS", smithyprelude.Unit)
-
-	ParameterExceptionReason_INVALID_OPTION = ParameterExceptionReason.AddMember("INVALID_OPTION", smithyprelude.Unit)
-
-	ParameterExceptionReason_ILLEGAL_COMBINATION = ParameterExceptionReason.AddMember("ILLEGAL_COMBINATION", smithyprelude.Unit)
-
-	ParameterExceptionReason_ILLEGAL_ARGUMENT = ParameterExceptionReason.AddMember("ILLEGAL_ARGUMENT", smithyprelude.Unit)
-
-	ParameterExceptionReason_INVALID_TAG_KEY = ParameterExceptionReason.AddMember("INVALID_TAG_KEY", smithyprelude.Unit)
-
-	PredicateType_IP_MATCH = PredicateType.AddMember("IP_MATCH", smithyprelude.Unit)
-
-	PredicateType_BYTE_MATCH = PredicateType.AddMember("BYTE_MATCH", smithyprelude.Unit)
-
-	PredicateType_SQL_INJECTION_MATCH = PredicateType.AddMember("SQL_INJECTION_MATCH", smithyprelude.Unit)
-
-	PredicateType_GEO_MATCH = PredicateType.AddMember("GEO_MATCH", smithyprelude.Unit)
-
-	PredicateType_SIZE_CONSTRAINT = PredicateType.AddMember("SIZE_CONSTRAINT", smithyprelude.Unit)
-
-	PredicateType_XSS_MATCH = PredicateType.AddMember("XSS_MATCH", smithyprelude.Unit)
-
-	PredicateType_REGEX_MATCH = PredicateType.AddMember("REGEX_MATCH", smithyprelude.Unit)
-
-	Predicate_Negated = Predicate.AddMember("Negated", _Negated)
-
-	Predicate_Type = Predicate.AddMember("Type", PredicateType)
-
-	Predicate_DataId = Predicate.AddMember("DataId", _ResourceId)
-
-	_Predicates_member = _Predicates.AddMember("member", Predicate)
-
-	RateKey_IP = RateKey.AddMember("IP", smithyprelude.Unit)
-
-	RateBasedRule_RuleId = RateBasedRule.AddMember("RuleId", _ResourceId)
-
-	RateBasedRule_Name = RateBasedRule.AddMember("Name", _ResourceName)
-
-	RateBasedRule_MetricName = RateBasedRule.AddMember("MetricName", _MetricName)
-
-	RateBasedRule_MatchPredicates = RateBasedRule.AddMember("MatchPredicates", _Predicates)
-
-	RateBasedRule_RateKey = RateBasedRule.AddMember("RateKey", RateKey)
-
-	RateBasedRule_RateLimit = RateBasedRule.AddMember("RateLimit", _RateLimit)
-
-	RegexMatchTuple_FieldToMatch = RegexMatchTuple.AddMember("FieldToMatch", FieldToMatch)
-
-	RegexMatchTuple_TextTransformation = RegexMatchTuple.AddMember("TextTransformation", TextTransformation)
-
-	RegexMatchTuple_RegexPatternSetId = RegexMatchTuple.AddMember("RegexPatternSetId", _ResourceId)
-
-	_RegexMatchTuples_member = _RegexMatchTuples.AddMember("member", RegexMatchTuple)
-
-	RegexMatchSet_RegexMatchSetId = RegexMatchSet.AddMember("RegexMatchSetId", _ResourceId)
-
-	RegexMatchSet_Name = RegexMatchSet.AddMember("Name", _ResourceName)
-
-	RegexMatchSet_RegexMatchTuples = RegexMatchSet.AddMember("RegexMatchTuples", _RegexMatchTuples)
-
-	RegexMatchSetSummary_RegexMatchSetId = RegexMatchSetSummary.AddMember("RegexMatchSetId", _ResourceId)
-
-	RegexMatchSetSummary_Name = RegexMatchSetSummary.AddMember("Name", _ResourceName)
-
-	_RegexMatchSetSummaries_member = _RegexMatchSetSummaries.AddMember("member", RegexMatchSetSummary)
-
-	RegexMatchSetUpdate_Action = RegexMatchSetUpdate.AddMember("Action", ChangeAction)
-
-	RegexMatchSetUpdate_RegexMatchTuple = RegexMatchSetUpdate.AddMember("RegexMatchTuple", RegexMatchTuple)
-
-	_RegexMatchSetUpdates_member = _RegexMatchSetUpdates.AddMember("member", RegexMatchSetUpdate)
-
-	_RegexPatternStrings_member = _RegexPatternStrings.AddMember("member", _RegexPatternString)
-
-	RegexPatternSet_RegexPatternSetId = RegexPatternSet.AddMember("RegexPatternSetId", _ResourceId)
-
-	RegexPatternSet_Name = RegexPatternSet.AddMember("Name", _ResourceName)
-
-	RegexPatternSet_RegexPatternStrings = RegexPatternSet.AddMember("RegexPatternStrings", _RegexPatternStrings)
-
-	RegexPatternSetSummary_RegexPatternSetId = RegexPatternSetSummary.AddMember("RegexPatternSetId", _ResourceId)
-
-	RegexPatternSetSummary_Name = RegexPatternSetSummary.AddMember("Name", _ResourceName)
-
-	_RegexPatternSetSummaries_member = _RegexPatternSetSummaries.AddMember("member", RegexPatternSetSummary)
-
-	RegexPatternSetUpdate_Action = RegexPatternSetUpdate.AddMember("Action", ChangeAction)
-
-	RegexPatternSetUpdate_RegexPatternString = RegexPatternSetUpdate.AddMember("RegexPatternString", _RegexPatternString)
-
-	_RegexPatternSetUpdates_member = _RegexPatternSetUpdates.AddMember("member", RegexPatternSetUpdate)
-
-	_ResourceArns_member = _ResourceArns.AddMember("member", _ResourceArn)
-
-	ResourceType_APPLICATION_LOAD_BALANCER = ResourceType.AddMember("APPLICATION_LOAD_BALANCER", smithyprelude.Unit)
-
-	ResourceType_API_GATEWAY = ResourceType.AddMember("API_GATEWAY", smithyprelude.Unit)
-
-	Rule_RuleId = Rule.AddMember("RuleId", _ResourceId)
-
-	Rule_Name = Rule.AddMember("Name", _ResourceName)
-
-	Rule_MetricName = Rule.AddMember("MetricName", _MetricName)
-
-	Rule_Predicates = Rule.AddMember("Predicates", _Predicates)
-
-	RuleGroup_RuleGroupId = RuleGroup.AddMember("RuleGroupId", _ResourceId)
-
-	RuleGroup_Name = RuleGroup.AddMember("Name", _ResourceName)
-
-	RuleGroup_MetricName = RuleGroup.AddMember("MetricName", _MetricName)
-
-	RuleGroupSummary_RuleGroupId = RuleGroupSummary.AddMember("RuleGroupId", _ResourceId)
-
-	RuleGroupSummary_Name = RuleGroupSummary.AddMember("Name", _ResourceName)
-
-	_RuleGroupSummaries_member = _RuleGroupSummaries.AddMember("member", RuleGroupSummary)
-
-	RuleGroupUpdate_Action = RuleGroupUpdate.AddMember("Action", ChangeAction)
-
-	RuleGroupUpdate_ActivatedRule = RuleGroupUpdate.AddMember("ActivatedRule", ActivatedRule)
-
-	_RuleGroupUpdates_member = _RuleGroupUpdates.AddMember("member", RuleGroupUpdate)
-
-	RuleSummary_RuleId = RuleSummary.AddMember("RuleId", _ResourceId)
-
-	RuleSummary_Name = RuleSummary.AddMember("Name", _ResourceName)
-
-	_RuleSummaries_member = _RuleSummaries.AddMember("member", RuleSummary)
-
-	RuleUpdate_Action = RuleUpdate.AddMember("Action", ChangeAction)
-
-	RuleUpdate_Predicate = RuleUpdate.AddMember("Predicate", Predicate)
-
-	_RuleUpdates_member = _RuleUpdates.AddMember("member", RuleUpdate)
-
-	SampledHTTPRequest_Request = SampledHTTPRequest.AddMember("Request", HTTPRequest)
-
-	SampledHTTPRequest_Weight = SampledHTTPRequest.AddMember("Weight", _SampleWeight)
-
-	SampledHTTPRequest_Timestamp = SampledHTTPRequest.AddMember("Timestamp", _Timestamp)
-
-	SampledHTTPRequest_Action = SampledHTTPRequest.AddMember("Action", _Action)
-
-	SampledHTTPRequest_RuleWithinRuleGroup = SampledHTTPRequest.AddMember("RuleWithinRuleGroup", _ResourceId)
-
-	_SampledHTTPRequests_member = _SampledHTTPRequests.AddMember("member", SampledHTTPRequest)
-
-	SizeConstraint_FieldToMatch = SizeConstraint.AddMember("FieldToMatch", FieldToMatch)
-
-	SizeConstraint_TextTransformation = SizeConstraint.AddMember("TextTransformation", TextTransformation)
-
-	SizeConstraint_ComparisonOperator = SizeConstraint.AddMember("ComparisonOperator", ComparisonOperator)
-
-	SizeConstraint_Size = SizeConstraint.AddMember("Size", _Size)
-
-	_SizeConstraints_member = _SizeConstraints.AddMember("member", SizeConstraint)
-
-	SizeConstraintSet_SizeConstraintSetId = SizeConstraintSet.AddMember("SizeConstraintSetId", _ResourceId)
-
-	SizeConstraintSet_Name = SizeConstraintSet.AddMember("Name", _ResourceName)
-
-	SizeConstraintSet_SizeConstraints = SizeConstraintSet.AddMember("SizeConstraints", _SizeConstraints)
-
-	SizeConstraintSetSummary_SizeConstraintSetId = SizeConstraintSetSummary.AddMember("SizeConstraintSetId", _ResourceId)
-
-	SizeConstraintSetSummary_Name = SizeConstraintSetSummary.AddMember("Name", _ResourceName)
-
-	_SizeConstraintSetSummaries_member = _SizeConstraintSetSummaries.AddMember("member", SizeConstraintSetSummary)
-
-	SizeConstraintSetUpdate_Action = SizeConstraintSetUpdate.AddMember("Action", ChangeAction)
-
-	SizeConstraintSetUpdate_SizeConstraint = SizeConstraintSetUpdate.AddMember("SizeConstraint", SizeConstraint)
-
-	_SizeConstraintSetUpdates_member = _SizeConstraintSetUpdates.AddMember("member", SizeConstraintSetUpdate)
-
-	SqlInjectionMatchTuple_FieldToMatch = SqlInjectionMatchTuple.AddMember("FieldToMatch", FieldToMatch)
-
-	SqlInjectionMatchTuple_TextTransformation = SqlInjectionMatchTuple.AddMember("TextTransformation", TextTransformation)
-
-	_SqlInjectionMatchTuples_member = _SqlInjectionMatchTuples.AddMember("member", SqlInjectionMatchTuple)
-
-	SqlInjectionMatchSet_SqlInjectionMatchSetId = SqlInjectionMatchSet.AddMember("SqlInjectionMatchSetId", _ResourceId)
-
-	SqlInjectionMatchSet_Name = SqlInjectionMatchSet.AddMember("Name", _ResourceName)
-
-	SqlInjectionMatchSet_SqlInjectionMatchTuples = SqlInjectionMatchSet.AddMember("SqlInjectionMatchTuples", _SqlInjectionMatchTuples)
-
-	SqlInjectionMatchSetSummary_SqlInjectionMatchSetId = SqlInjectionMatchSetSummary.AddMember("SqlInjectionMatchSetId", _ResourceId)
-
-	SqlInjectionMatchSetSummary_Name = SqlInjectionMatchSetSummary.AddMember("Name", _ResourceName)
-
-	_SqlInjectionMatchSetSummaries_member = _SqlInjectionMatchSetSummaries.AddMember("member", SqlInjectionMatchSetSummary)
-
-	SqlInjectionMatchSetUpdate_Action = SqlInjectionMatchSetUpdate.AddMember("Action", ChangeAction)
-
-	SqlInjectionMatchSetUpdate_SqlInjectionMatchTuple = SqlInjectionMatchSetUpdate.AddMember("SqlInjectionMatchTuple", SqlInjectionMatchTuple)
-
-	_SqlInjectionMatchSetUpdates_member = _SqlInjectionMatchSetUpdates.AddMember("member", SqlInjectionMatchSetUpdate)
-
-	SubscribedRuleGroupSummary_RuleGroupId = SubscribedRuleGroupSummary.AddMember("RuleGroupId", _ResourceId)
-
-	SubscribedRuleGroupSummary_Name = SubscribedRuleGroupSummary.AddMember("Name", _ResourceName)
-
-	SubscribedRuleGroupSummary_MetricName = SubscribedRuleGroupSummary.AddMember("MetricName", _MetricName)
-
-	_SubscribedRuleGroupSummaries_member = _SubscribedRuleGroupSummaries.AddMember("member", SubscribedRuleGroupSummary)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TagInfoForResource_ResourceARN = TagInfoForResource.AddMember("ResourceARN", _ResourceArn)
-
-	TagInfoForResource_TagList = TagInfoForResource.AddMember("TagList", _TagList)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TimeWindow_StartTime = TimeWindow.AddMember("StartTime", _Timestamp)
-
-	TimeWindow_EndTime = TimeWindow.AddMember("EndTime", _Timestamp)
-
-	WAFBadRequestException_message = WAFBadRequestException.AddMember("message", _errorMessage)
-
-	WAFDisallowedNameException_message = WAFDisallowedNameException.AddMember("message", _errorMessage)
-
-	WAFEntityMigrationException_message = WAFEntityMigrationException.AddMember("message", _errorMessage)
-
-	WAFEntityMigrationException_MigrationErrorType = WAFEntityMigrationException.AddMember("MigrationErrorType", MigrationErrorType)
-
-	WAFEntityMigrationException_MigrationErrorReason = WAFEntityMigrationException.AddMember("MigrationErrorReason", _ErrorReason)
-
-	WAFInternalErrorException_message = WAFInternalErrorException.AddMember("message", _errorMessage)
-
-	WAFInvalidOperationException_message = WAFInvalidOperationException.AddMember("message", _errorMessage)
-
-	WAFInvalidParameterException_field = WAFInvalidParameterException.AddMember("field", ParameterExceptionField)
-
-	WAFInvalidParameterException_parameter = WAFInvalidParameterException.AddMember("parameter", _ParameterExceptionParameter)
-
-	WAFInvalidParameterException_reason = WAFInvalidParameterException.AddMember("reason", ParameterExceptionReason)
-
-	WAFInvalidPermissionPolicyException_message = WAFInvalidPermissionPolicyException.AddMember("message", _errorMessage)
-
-	WAFInvalidRegexPatternException_message = WAFInvalidRegexPatternException.AddMember("message", _errorMessage)
-
-	WAFLimitsExceededException_message = WAFLimitsExceededException.AddMember("message", _errorMessage)
-
-	WAFNonEmptyEntityException_message = WAFNonEmptyEntityException.AddMember("message", _errorMessage)
-
-	WAFNonexistentContainerException_message = WAFNonexistentContainerException.AddMember("message", _errorMessage)
-
-	WAFNonexistentItemException_message = WAFNonexistentItemException.AddMember("message", _errorMessage)
-
-	WAFReferencedItemException_message = WAFReferencedItemException.AddMember("message", _errorMessage)
-
-	WAFServiceLinkedRoleErrorException_message = WAFServiceLinkedRoleErrorException.AddMember("message", _errorMessage)
-
-	WAFStaleDataException_message = WAFStaleDataException.AddMember("message", _errorMessage)
-
-	WAFSubscriptionNotFoundException_message = WAFSubscriptionNotFoundException.AddMember("message", _errorMessage)
-
-	WAFTagOperationException_message = WAFTagOperationException.AddMember("message", _errorMessage)
-
-	WAFTagOperationInternalErrorException_message = WAFTagOperationInternalErrorException.AddMember("message", _errorMessage)
-
-	WAFUnavailableEntityException_message = WAFUnavailableEntityException.AddMember("message", _errorMessage)
-
-	WebACL_WebACLId = WebACL.AddMember("WebACLId", _ResourceId)
-
-	WebACL_Name = WebACL.AddMember("Name", _ResourceName)
-
-	WebACL_MetricName = WebACL.AddMember("MetricName", _MetricName)
-
-	WebACL_DefaultAction = WebACL.AddMember("DefaultAction", WafAction)
-
-	WebACL_Rules = WebACL.AddMember("Rules", _ActivatedRules)
-
-	WebACL_WebACLArn = WebACL.AddMember("WebACLArn", _ResourceArn)
-
-	WebACLSummary_WebACLId = WebACLSummary.AddMember("WebACLId", _ResourceId)
-
-	WebACLSummary_Name = WebACLSummary.AddMember("Name", _ResourceName)
-
-	_WebACLSummaries_member = _WebACLSummaries.AddMember("member", WebACLSummary)
-
-	WebACLUpdate_Action = WebACLUpdate.AddMember("Action", ChangeAction)
-
-	WebACLUpdate_ActivatedRule = WebACLUpdate.AddMember("ActivatedRule", ActivatedRule)
-
-	_WebACLUpdates_member = _WebACLUpdates.AddMember("member", WebACLUpdate)
-
-	XssMatchTuple_FieldToMatch = XssMatchTuple.AddMember("FieldToMatch", FieldToMatch)
-
-	XssMatchTuple_TextTransformation = XssMatchTuple.AddMember("TextTransformation", TextTransformation)
-
-	_XssMatchTuples_member = _XssMatchTuples.AddMember("member", XssMatchTuple)
-
-	XssMatchSet_XssMatchSetId = XssMatchSet.AddMember("XssMatchSetId", _ResourceId)
-
-	XssMatchSet_Name = XssMatchSet.AddMember("Name", _ResourceName)
-
-	XssMatchSet_XssMatchTuples = XssMatchSet.AddMember("XssMatchTuples", _XssMatchTuples)
-
-	XssMatchSetSummary_XssMatchSetId = XssMatchSetSummary.AddMember("XssMatchSetId", _ResourceId)
-
-	XssMatchSetSummary_Name = XssMatchSetSummary.AddMember("Name", _ResourceName)
-
-	_XssMatchSetSummaries_member = _XssMatchSetSummaries.AddMember("member", XssMatchSetSummary)
-
-	XssMatchSetUpdate_Action = XssMatchSetUpdate.AddMember("Action", ChangeAction)
-
-	XssMatchSetUpdate_XssMatchTuple = XssMatchSetUpdate.AddMember("XssMatchTuple", XssMatchTuple)
-
-	_XssMatchSetUpdates_member = _XssMatchSetUpdates.AddMember("member", XssMatchSetUpdate)
-
-	AssociateWebACLRequest_WebACLId = AssociateWebACLRequest.AddMember("WebACLId", _ResourceId)
-
-	AssociateWebACLRequest_ResourceArn = AssociateWebACLRequest.AddMember("ResourceArn", _ResourceArn)
-
-	CreateByteMatchSetRequest_Name = CreateByteMatchSetRequest.AddMember("Name", _ResourceName)
-
-	CreateByteMatchSetRequest_ChangeToken = CreateByteMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateByteMatchSetResponse_ByteMatchSet = CreateByteMatchSetResponse.AddMember("ByteMatchSet", ByteMatchSet)
-
-	CreateByteMatchSetResponse_ChangeToken = CreateByteMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateGeoMatchSetRequest_Name = CreateGeoMatchSetRequest.AddMember("Name", _ResourceName)
-
-	CreateGeoMatchSetRequest_ChangeToken = CreateGeoMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateGeoMatchSetResponse_GeoMatchSet = CreateGeoMatchSetResponse.AddMember("GeoMatchSet", GeoMatchSet)
-
-	CreateGeoMatchSetResponse_ChangeToken = CreateGeoMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateIPSetRequest_Name = CreateIPSetRequest.AddMember("Name", _ResourceName)
-
-	CreateIPSetRequest_ChangeToken = CreateIPSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateIPSetResponse_IPSet = CreateIPSetResponse.AddMember("IPSet", IPSet)
-
-	CreateIPSetResponse_ChangeToken = CreateIPSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRateBasedRuleRequest_Name = CreateRateBasedRuleRequest.AddMember("Name", _ResourceName)
-
-	CreateRateBasedRuleRequest_MetricName = CreateRateBasedRuleRequest.AddMember("MetricName", _MetricName)
-
-	CreateRateBasedRuleRequest_RateKey = CreateRateBasedRuleRequest.AddMember("RateKey", RateKey)
-
-	CreateRateBasedRuleRequest_RateLimit = CreateRateBasedRuleRequest.AddMember("RateLimit", _RateLimit)
-
-	CreateRateBasedRuleRequest_ChangeToken = CreateRateBasedRuleRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRateBasedRuleRequest_Tags = CreateRateBasedRuleRequest.AddMember("Tags", _TagList)
-
-	CreateRateBasedRuleResponse_Rule = CreateRateBasedRuleResponse.AddMember("Rule", RateBasedRule)
-
-	CreateRateBasedRuleResponse_ChangeToken = CreateRateBasedRuleResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRegexMatchSetRequest_Name = CreateRegexMatchSetRequest.AddMember("Name", _ResourceName)
-
-	CreateRegexMatchSetRequest_ChangeToken = CreateRegexMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRegexMatchSetResponse_RegexMatchSet = CreateRegexMatchSetResponse.AddMember("RegexMatchSet", RegexMatchSet)
-
-	CreateRegexMatchSetResponse_ChangeToken = CreateRegexMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRegexPatternSetRequest_Name = CreateRegexPatternSetRequest.AddMember("Name", _ResourceName)
-
-	CreateRegexPatternSetRequest_ChangeToken = CreateRegexPatternSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRegexPatternSetResponse_RegexPatternSet = CreateRegexPatternSetResponse.AddMember("RegexPatternSet", RegexPatternSet)
-
-	CreateRegexPatternSetResponse_ChangeToken = CreateRegexPatternSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRuleGroupRequest_Name = CreateRuleGroupRequest.AddMember("Name", _ResourceName)
-
-	CreateRuleGroupRequest_MetricName = CreateRuleGroupRequest.AddMember("MetricName", _MetricName)
-
-	CreateRuleGroupRequest_ChangeToken = CreateRuleGroupRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRuleGroupRequest_Tags = CreateRuleGroupRequest.AddMember("Tags", _TagList)
-
-	CreateRuleGroupResponse_RuleGroup = CreateRuleGroupResponse.AddMember("RuleGroup", RuleGroup)
-
-	CreateRuleGroupResponse_ChangeToken = CreateRuleGroupResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRuleRequest_Name = CreateRuleRequest.AddMember("Name", _ResourceName)
-
-	CreateRuleRequest_MetricName = CreateRuleRequest.AddMember("MetricName", _MetricName)
-
-	CreateRuleRequest_ChangeToken = CreateRuleRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateRuleRequest_Tags = CreateRuleRequest.AddMember("Tags", _TagList)
-
-	CreateRuleResponse_Rule = CreateRuleResponse.AddMember("Rule", Rule)
-
-	CreateRuleResponse_ChangeToken = CreateRuleResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateSizeConstraintSetRequest_Name = CreateSizeConstraintSetRequest.AddMember("Name", _ResourceName)
-
-	CreateSizeConstraintSetRequest_ChangeToken = CreateSizeConstraintSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateSizeConstraintSetResponse_SizeConstraintSet = CreateSizeConstraintSetResponse.AddMember("SizeConstraintSet", SizeConstraintSet)
-
-	CreateSizeConstraintSetResponse_ChangeToken = CreateSizeConstraintSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateSqlInjectionMatchSetRequest_Name = CreateSqlInjectionMatchSetRequest.AddMember("Name", _ResourceName)
-
-	CreateSqlInjectionMatchSetRequest_ChangeToken = CreateSqlInjectionMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet = CreateSqlInjectionMatchSetResponse.AddMember("SqlInjectionMatchSet", SqlInjectionMatchSet)
-
-	CreateSqlInjectionMatchSetResponse_ChangeToken = CreateSqlInjectionMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateWebACLRequest_Name = CreateWebACLRequest.AddMember("Name", _ResourceName)
-
-	CreateWebACLRequest_MetricName = CreateWebACLRequest.AddMember("MetricName", _MetricName)
-
-	CreateWebACLRequest_DefaultAction = CreateWebACLRequest.AddMember("DefaultAction", WafAction)
-
-	CreateWebACLRequest_ChangeToken = CreateWebACLRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateWebACLRequest_Tags = CreateWebACLRequest.AddMember("Tags", _TagList)
-
-	CreateWebACLMigrationStackRequest_WebACLId = CreateWebACLMigrationStackRequest.AddMember("WebACLId", _ResourceId)
-
-	CreateWebACLMigrationStackRequest_S3BucketName = CreateWebACLMigrationStackRequest.AddMember("S3BucketName", _S3BucketName)
-
-	CreateWebACLMigrationStackRequest_IgnoreUnsupportedType = CreateWebACLMigrationStackRequest.AddMember("IgnoreUnsupportedType", _IgnoreUnsupportedType)
-
-	CreateWebACLMigrationStackResponse_S3ObjectUrl = CreateWebACLMigrationStackResponse.AddMember("S3ObjectUrl", _S3ObjectUrl)
-
-	CreateWebACLResponse_WebACL = CreateWebACLResponse.AddMember("WebACL", WebACL)
-
-	CreateWebACLResponse_ChangeToken = CreateWebACLResponse.AddMember("ChangeToken", _ChangeToken)
-
-	CreateXssMatchSetRequest_Name = CreateXssMatchSetRequest.AddMember("Name", _ResourceName)
-
-	CreateXssMatchSetRequest_ChangeToken = CreateXssMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	CreateXssMatchSetResponse_XssMatchSet = CreateXssMatchSetResponse.AddMember("XssMatchSet", XssMatchSet)
-
-	CreateXssMatchSetResponse_ChangeToken = CreateXssMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteByteMatchSetRequest_ByteMatchSetId = DeleteByteMatchSetRequest.AddMember("ByteMatchSetId", _ResourceId)
-
-	DeleteByteMatchSetRequest_ChangeToken = DeleteByteMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteByteMatchSetResponse_ChangeToken = DeleteByteMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteGeoMatchSetRequest_GeoMatchSetId = DeleteGeoMatchSetRequest.AddMember("GeoMatchSetId", _ResourceId)
-
-	DeleteGeoMatchSetRequest_ChangeToken = DeleteGeoMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteGeoMatchSetResponse_ChangeToken = DeleteGeoMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteIPSetRequest_IPSetId = DeleteIPSetRequest.AddMember("IPSetId", _ResourceId)
-
-	DeleteIPSetRequest_ChangeToken = DeleteIPSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteIPSetResponse_ChangeToken = DeleteIPSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteLoggingConfigurationRequest_ResourceArn = DeleteLoggingConfigurationRequest.AddMember("ResourceArn", _ResourceArn)
-
-	DeletePermissionPolicyRequest_ResourceArn = DeletePermissionPolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	DeleteRateBasedRuleRequest_RuleId = DeleteRateBasedRuleRequest.AddMember("RuleId", _ResourceId)
-
-	DeleteRateBasedRuleRequest_ChangeToken = DeleteRateBasedRuleRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRateBasedRuleResponse_ChangeToken = DeleteRateBasedRuleResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRegexMatchSetRequest_RegexMatchSetId = DeleteRegexMatchSetRequest.AddMember("RegexMatchSetId", _ResourceId)
-
-	DeleteRegexMatchSetRequest_ChangeToken = DeleteRegexMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRegexMatchSetResponse_ChangeToken = DeleteRegexMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRegexPatternSetRequest_RegexPatternSetId = DeleteRegexPatternSetRequest.AddMember("RegexPatternSetId", _ResourceId)
-
-	DeleteRegexPatternSetRequest_ChangeToken = DeleteRegexPatternSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRegexPatternSetResponse_ChangeToken = DeleteRegexPatternSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRuleGroupRequest_RuleGroupId = DeleteRuleGroupRequest.AddMember("RuleGroupId", _ResourceId)
-
-	DeleteRuleGroupRequest_ChangeToken = DeleteRuleGroupRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRuleGroupResponse_ChangeToken = DeleteRuleGroupResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRuleRequest_RuleId = DeleteRuleRequest.AddMember("RuleId", _ResourceId)
-
-	DeleteRuleRequest_ChangeToken = DeleteRuleRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteRuleResponse_ChangeToken = DeleteRuleResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteSizeConstraintSetRequest_SizeConstraintSetId = DeleteSizeConstraintSetRequest.AddMember("SizeConstraintSetId", _ResourceId)
-
-	DeleteSizeConstraintSetRequest_ChangeToken = DeleteSizeConstraintSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteSizeConstraintSetResponse_ChangeToken = DeleteSizeConstraintSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = DeleteSqlInjectionMatchSetRequest.AddMember("SqlInjectionMatchSetId", _ResourceId)
-
-	DeleteSqlInjectionMatchSetRequest_ChangeToken = DeleteSqlInjectionMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteSqlInjectionMatchSetResponse_ChangeToken = DeleteSqlInjectionMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteWebACLRequest_WebACLId = DeleteWebACLRequest.AddMember("WebACLId", _ResourceId)
-
-	DeleteWebACLRequest_ChangeToken = DeleteWebACLRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteWebACLResponse_ChangeToken = DeleteWebACLResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteXssMatchSetRequest_XssMatchSetId = DeleteXssMatchSetRequest.AddMember("XssMatchSetId", _ResourceId)
-
-	DeleteXssMatchSetRequest_ChangeToken = DeleteXssMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	DeleteXssMatchSetResponse_ChangeToken = DeleteXssMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	DisassociateWebACLRequest_ResourceArn = DisassociateWebACLRequest.AddMember("ResourceArn", _ResourceArn)
-
-	GetByteMatchSetRequest_ByteMatchSetId = GetByteMatchSetRequest.AddMember("ByteMatchSetId", _ResourceId)
-
-	GetByteMatchSetResponse_ByteMatchSet = GetByteMatchSetResponse.AddMember("ByteMatchSet", ByteMatchSet)
-
-	GetChangeTokenResponse_ChangeToken = GetChangeTokenResponse.AddMember("ChangeToken", _ChangeToken)
-
-	GetChangeTokenStatusRequest_ChangeToken = GetChangeTokenStatusRequest.AddMember("ChangeToken", _ChangeToken)
-
-	GetChangeTokenStatusResponse_ChangeTokenStatus = GetChangeTokenStatusResponse.AddMember("ChangeTokenStatus", ChangeTokenStatus)
-
-	GetGeoMatchSetRequest_GeoMatchSetId = GetGeoMatchSetRequest.AddMember("GeoMatchSetId", _ResourceId)
-
-	GetGeoMatchSetResponse_GeoMatchSet = GetGeoMatchSetResponse.AddMember("GeoMatchSet", GeoMatchSet)
-
-	GetIPSetRequest_IPSetId = GetIPSetRequest.AddMember("IPSetId", _ResourceId)
-
-	GetIPSetResponse_IPSet = GetIPSetResponse.AddMember("IPSet", IPSet)
-
-	GetLoggingConfigurationRequest_ResourceArn = GetLoggingConfigurationRequest.AddMember("ResourceArn", _ResourceArn)
-
-	GetLoggingConfigurationResponse_LoggingConfiguration = GetLoggingConfigurationResponse.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	GetPermissionPolicyRequest_ResourceArn = GetPermissionPolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	GetPermissionPolicyResponse_Policy = GetPermissionPolicyResponse.AddMember("Policy", _PolicyString)
-
-	GetRateBasedRuleRequest_RuleId = GetRateBasedRuleRequest.AddMember("RuleId", _ResourceId)
-
-	GetRateBasedRuleManagedKeysRequest_RuleId = GetRateBasedRuleManagedKeysRequest.AddMember("RuleId", _ResourceId)
-
-	GetRateBasedRuleManagedKeysRequest_NextMarker = GetRateBasedRuleManagedKeysRequest.AddMember("NextMarker", _NextMarker)
-
-	GetRateBasedRuleManagedKeysResponse_ManagedKeys = GetRateBasedRuleManagedKeysResponse.AddMember("ManagedKeys", _ManagedKeys)
-
-	GetRateBasedRuleManagedKeysResponse_NextMarker = GetRateBasedRuleManagedKeysResponse.AddMember("NextMarker", _NextMarker)
-
-	GetRateBasedRuleResponse_Rule = GetRateBasedRuleResponse.AddMember("Rule", RateBasedRule)
-
-	GetRegexMatchSetRequest_RegexMatchSetId = GetRegexMatchSetRequest.AddMember("RegexMatchSetId", _ResourceId)
-
-	GetRegexMatchSetResponse_RegexMatchSet = GetRegexMatchSetResponse.AddMember("RegexMatchSet", RegexMatchSet)
-
-	GetRegexPatternSetRequest_RegexPatternSetId = GetRegexPatternSetRequest.AddMember("RegexPatternSetId", _ResourceId)
-
-	GetRegexPatternSetResponse_RegexPatternSet = GetRegexPatternSetResponse.AddMember("RegexPatternSet", RegexPatternSet)
-
-	GetRuleGroupRequest_RuleGroupId = GetRuleGroupRequest.AddMember("RuleGroupId", _ResourceId)
-
-	GetRuleGroupResponse_RuleGroup = GetRuleGroupResponse.AddMember("RuleGroup", RuleGroup)
-
-	GetRuleRequest_RuleId = GetRuleRequest.AddMember("RuleId", _ResourceId)
-
-	GetRuleResponse_Rule = GetRuleResponse.AddMember("Rule", Rule)
-
-	GetSampledRequestsRequest_WebAclId = GetSampledRequestsRequest.AddMember("WebAclId", _ResourceId)
-
-	GetSampledRequestsRequest_RuleId = GetSampledRequestsRequest.AddMember("RuleId", _ResourceId)
-
-	GetSampledRequestsRequest_TimeWindow = GetSampledRequestsRequest.AddMember("TimeWindow", TimeWindow)
-
-	GetSampledRequestsRequest_MaxItems = GetSampledRequestsRequest.AddMember("MaxItems", _GetSampledRequestsMaxItems)
-
-	GetSampledRequestsResponse_SampledRequests = GetSampledRequestsResponse.AddMember("SampledRequests", _SampledHTTPRequests)
-
-	GetSampledRequestsResponse_PopulationSize = GetSampledRequestsResponse.AddMember("PopulationSize", _PopulationSize)
-
-	GetSampledRequestsResponse_TimeWindow = GetSampledRequestsResponse.AddMember("TimeWindow", TimeWindow)
-
-	GetSizeConstraintSetRequest_SizeConstraintSetId = GetSizeConstraintSetRequest.AddMember("SizeConstraintSetId", _ResourceId)
-
-	GetSizeConstraintSetResponse_SizeConstraintSet = GetSizeConstraintSetResponse.AddMember("SizeConstraintSet", SizeConstraintSet)
-
-	GetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = GetSqlInjectionMatchSetRequest.AddMember("SqlInjectionMatchSetId", _ResourceId)
-
-	GetSqlInjectionMatchSetResponse_SqlInjectionMatchSet = GetSqlInjectionMatchSetResponse.AddMember("SqlInjectionMatchSet", SqlInjectionMatchSet)
-
-	GetWebACLForResourceRequest_ResourceArn = GetWebACLForResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	GetWebACLForResourceResponse_WebACLSummary = GetWebACLForResourceResponse.AddMember("WebACLSummary", WebACLSummary)
-
-	GetWebACLRequest_WebACLId = GetWebACLRequest.AddMember("WebACLId", _ResourceId)
-
-	GetWebACLResponse_WebACL = GetWebACLResponse.AddMember("WebACL", WebACL)
-
-	GetXssMatchSetRequest_XssMatchSetId = GetXssMatchSetRequest.AddMember("XssMatchSetId", _ResourceId)
-
-	GetXssMatchSetResponse_XssMatchSet = GetXssMatchSetResponse.AddMember("XssMatchSet", XssMatchSet)
-
-	ListActivatedRulesInRuleGroupRequest_RuleGroupId = ListActivatedRulesInRuleGroupRequest.AddMember("RuleGroupId", _ResourceId)
-
-	ListActivatedRulesInRuleGroupRequest_NextMarker = ListActivatedRulesInRuleGroupRequest.AddMember("NextMarker", _NextMarker)
-
-	ListActivatedRulesInRuleGroupRequest_Limit = ListActivatedRulesInRuleGroupRequest.AddMember("Limit", _PaginationLimit)
-
-	ListActivatedRulesInRuleGroupResponse_NextMarker = ListActivatedRulesInRuleGroupResponse.AddMember("NextMarker", _NextMarker)
-
-	ListActivatedRulesInRuleGroupResponse_ActivatedRules = ListActivatedRulesInRuleGroupResponse.AddMember("ActivatedRules", _ActivatedRules)
-
-	ListByteMatchSetsRequest_NextMarker = ListByteMatchSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListByteMatchSetsRequest_Limit = ListByteMatchSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListByteMatchSetsResponse_NextMarker = ListByteMatchSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListByteMatchSetsResponse_ByteMatchSets = ListByteMatchSetsResponse.AddMember("ByteMatchSets", _ByteMatchSetSummaries)
-
-	ListGeoMatchSetsRequest_NextMarker = ListGeoMatchSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListGeoMatchSetsRequest_Limit = ListGeoMatchSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListGeoMatchSetsResponse_NextMarker = ListGeoMatchSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListGeoMatchSetsResponse_GeoMatchSets = ListGeoMatchSetsResponse.AddMember("GeoMatchSets", _GeoMatchSetSummaries)
-
-	ListIPSetsRequest_NextMarker = ListIPSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListIPSetsRequest_Limit = ListIPSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListIPSetsResponse_NextMarker = ListIPSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListIPSetsResponse_IPSets = ListIPSetsResponse.AddMember("IPSets", _IPSetSummaries)
-
-	ListLoggingConfigurationsRequest_NextMarker = ListLoggingConfigurationsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListLoggingConfigurationsRequest_Limit = ListLoggingConfigurationsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListLoggingConfigurationsResponse_LoggingConfigurations = ListLoggingConfigurationsResponse.AddMember("LoggingConfigurations", _LoggingConfigurations)
-
-	ListLoggingConfigurationsResponse_NextMarker = ListLoggingConfigurationsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListRateBasedRulesRequest_NextMarker = ListRateBasedRulesRequest.AddMember("NextMarker", _NextMarker)
-
-	ListRateBasedRulesRequest_Limit = ListRateBasedRulesRequest.AddMember("Limit", _PaginationLimit)
-
-	ListRateBasedRulesResponse_NextMarker = ListRateBasedRulesResponse.AddMember("NextMarker", _NextMarker)
-
-	ListRateBasedRulesResponse_Rules = ListRateBasedRulesResponse.AddMember("Rules", _RuleSummaries)
-
-	ListRegexMatchSetsRequest_NextMarker = ListRegexMatchSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListRegexMatchSetsRequest_Limit = ListRegexMatchSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListRegexMatchSetsResponse_NextMarker = ListRegexMatchSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListRegexMatchSetsResponse_RegexMatchSets = ListRegexMatchSetsResponse.AddMember("RegexMatchSets", _RegexMatchSetSummaries)
-
-	ListRegexPatternSetsRequest_NextMarker = ListRegexPatternSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListRegexPatternSetsRequest_Limit = ListRegexPatternSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListRegexPatternSetsResponse_NextMarker = ListRegexPatternSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListRegexPatternSetsResponse_RegexPatternSets = ListRegexPatternSetsResponse.AddMember("RegexPatternSets", _RegexPatternSetSummaries)
-
-	ListResourcesForWebACLRequest_WebACLId = ListResourcesForWebACLRequest.AddMember("WebACLId", _ResourceId)
-
-	ListResourcesForWebACLRequest_ResourceType = ListResourcesForWebACLRequest.AddMember("ResourceType", ResourceType)
-
-	ListResourcesForWebACLResponse_ResourceArns = ListResourcesForWebACLResponse.AddMember("ResourceArns", _ResourceArns)
-
-	ListRuleGroupsRequest_NextMarker = ListRuleGroupsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListRuleGroupsRequest_Limit = ListRuleGroupsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListRuleGroupsResponse_NextMarker = ListRuleGroupsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListRuleGroupsResponse_RuleGroups = ListRuleGroupsResponse.AddMember("RuleGroups", _RuleGroupSummaries)
-
-	ListRulesRequest_NextMarker = ListRulesRequest.AddMember("NextMarker", _NextMarker)
-
-	ListRulesRequest_Limit = ListRulesRequest.AddMember("Limit", _PaginationLimit)
-
-	ListRulesResponse_NextMarker = ListRulesResponse.AddMember("NextMarker", _NextMarker)
-
-	ListRulesResponse_Rules = ListRulesResponse.AddMember("Rules", _RuleSummaries)
-
-	ListSizeConstraintSetsRequest_NextMarker = ListSizeConstraintSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListSizeConstraintSetsRequest_Limit = ListSizeConstraintSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListSizeConstraintSetsResponse_NextMarker = ListSizeConstraintSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListSizeConstraintSetsResponse_SizeConstraintSets = ListSizeConstraintSetsResponse.AddMember("SizeConstraintSets", _SizeConstraintSetSummaries)
-
-	ListSqlInjectionMatchSetsRequest_NextMarker = ListSqlInjectionMatchSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListSqlInjectionMatchSetsRequest_Limit = ListSqlInjectionMatchSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListSqlInjectionMatchSetsResponse_NextMarker = ListSqlInjectionMatchSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets = ListSqlInjectionMatchSetsResponse.AddMember("SqlInjectionMatchSets", _SqlInjectionMatchSetSummaries)
-
-	ListSubscribedRuleGroupsRequest_NextMarker = ListSubscribedRuleGroupsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListSubscribedRuleGroupsRequest_Limit = ListSubscribedRuleGroupsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListSubscribedRuleGroupsResponse_NextMarker = ListSubscribedRuleGroupsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListSubscribedRuleGroupsResponse_RuleGroups = ListSubscribedRuleGroupsResponse.AddMember("RuleGroups", _SubscribedRuleGroupSummaries)
-
-	ListTagsForResourceRequest_NextMarker = ListTagsForResourceRequest.AddMember("NextMarker", _NextMarker)
-
-	ListTagsForResourceRequest_Limit = ListTagsForResourceRequest.AddMember("Limit", _PaginationLimit)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _ResourceArn)
-
-	ListTagsForResourceResponse_NextMarker = ListTagsForResourceResponse.AddMember("NextMarker", _NextMarker)
-
-	ListTagsForResourceResponse_TagInfoForResource = ListTagsForResourceResponse.AddMember("TagInfoForResource", TagInfoForResource)
-
-	ListWebACLsRequest_NextMarker = ListWebACLsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListWebACLsRequest_Limit = ListWebACLsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListWebACLsResponse_NextMarker = ListWebACLsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListWebACLsResponse_WebACLs = ListWebACLsResponse.AddMember("WebACLs", _WebACLSummaries)
-
-	ListXssMatchSetsRequest_NextMarker = ListXssMatchSetsRequest.AddMember("NextMarker", _NextMarker)
-
-	ListXssMatchSetsRequest_Limit = ListXssMatchSetsRequest.AddMember("Limit", _PaginationLimit)
-
-	ListXssMatchSetsResponse_NextMarker = ListXssMatchSetsResponse.AddMember("NextMarker", _NextMarker)
-
-	ListXssMatchSetsResponse_XssMatchSets = ListXssMatchSetsResponse.AddMember("XssMatchSets", _XssMatchSetSummaries)
-
-	PutLoggingConfigurationRequest_LoggingConfiguration = PutLoggingConfigurationRequest.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	PutLoggingConfigurationResponse_LoggingConfiguration = PutLoggingConfigurationResponse.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	PutPermissionPolicyRequest_ResourceArn = PutPermissionPolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	PutPermissionPolicyRequest_Policy = PutPermissionPolicyRequest.AddMember("Policy", _PolicyString)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _ResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _ResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateByteMatchSetRequest_ByteMatchSetId = UpdateByteMatchSetRequest.AddMember("ByteMatchSetId", _ResourceId)
-
-	UpdateByteMatchSetRequest_ChangeToken = UpdateByteMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateByteMatchSetRequest_Updates = UpdateByteMatchSetRequest.AddMember("Updates", _ByteMatchSetUpdates)
-
-	UpdateByteMatchSetResponse_ChangeToken = UpdateByteMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateGeoMatchSetRequest_GeoMatchSetId = UpdateGeoMatchSetRequest.AddMember("GeoMatchSetId", _ResourceId)
-
-	UpdateGeoMatchSetRequest_ChangeToken = UpdateGeoMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateGeoMatchSetRequest_Updates = UpdateGeoMatchSetRequest.AddMember("Updates", _GeoMatchSetUpdates)
-
-	UpdateGeoMatchSetResponse_ChangeToken = UpdateGeoMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateIPSetRequest_IPSetId = UpdateIPSetRequest.AddMember("IPSetId", _ResourceId)
-
-	UpdateIPSetRequest_ChangeToken = UpdateIPSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateIPSetRequest_Updates = UpdateIPSetRequest.AddMember("Updates", _IPSetUpdates)
-
-	UpdateIPSetResponse_ChangeToken = UpdateIPSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRateBasedRuleRequest_RuleId = UpdateRateBasedRuleRequest.AddMember("RuleId", _ResourceId)
-
-	UpdateRateBasedRuleRequest_ChangeToken = UpdateRateBasedRuleRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRateBasedRuleRequest_Updates = UpdateRateBasedRuleRequest.AddMember("Updates", _RuleUpdates)
-
-	UpdateRateBasedRuleRequest_RateLimit = UpdateRateBasedRuleRequest.AddMember("RateLimit", _RateLimit)
-
-	UpdateRateBasedRuleResponse_ChangeToken = UpdateRateBasedRuleResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRegexMatchSetRequest_RegexMatchSetId = UpdateRegexMatchSetRequest.AddMember("RegexMatchSetId", _ResourceId)
-
-	UpdateRegexMatchSetRequest_Updates = UpdateRegexMatchSetRequest.AddMember("Updates", _RegexMatchSetUpdates)
-
-	UpdateRegexMatchSetRequest_ChangeToken = UpdateRegexMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRegexMatchSetResponse_ChangeToken = UpdateRegexMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRegexPatternSetRequest_RegexPatternSetId = UpdateRegexPatternSetRequest.AddMember("RegexPatternSetId", _ResourceId)
-
-	UpdateRegexPatternSetRequest_Updates = UpdateRegexPatternSetRequest.AddMember("Updates", _RegexPatternSetUpdates)
-
-	UpdateRegexPatternSetRequest_ChangeToken = UpdateRegexPatternSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRegexPatternSetResponse_ChangeToken = UpdateRegexPatternSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRuleGroupRequest_RuleGroupId = UpdateRuleGroupRequest.AddMember("RuleGroupId", _ResourceId)
-
-	UpdateRuleGroupRequest_Updates = UpdateRuleGroupRequest.AddMember("Updates", _RuleGroupUpdates)
-
-	UpdateRuleGroupRequest_ChangeToken = UpdateRuleGroupRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRuleGroupResponse_ChangeToken = UpdateRuleGroupResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRuleRequest_RuleId = UpdateRuleRequest.AddMember("RuleId", _ResourceId)
-
-	UpdateRuleRequest_ChangeToken = UpdateRuleRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateRuleRequest_Updates = UpdateRuleRequest.AddMember("Updates", _RuleUpdates)
-
-	UpdateRuleResponse_ChangeToken = UpdateRuleResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateSizeConstraintSetRequest_SizeConstraintSetId = UpdateSizeConstraintSetRequest.AddMember("SizeConstraintSetId", _ResourceId)
-
-	UpdateSizeConstraintSetRequest_ChangeToken = UpdateSizeConstraintSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateSizeConstraintSetRequest_Updates = UpdateSizeConstraintSetRequest.AddMember("Updates", _SizeConstraintSetUpdates)
-
-	UpdateSizeConstraintSetResponse_ChangeToken = UpdateSizeConstraintSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = UpdateSqlInjectionMatchSetRequest.AddMember("SqlInjectionMatchSetId", _ResourceId)
-
-	UpdateSqlInjectionMatchSetRequest_ChangeToken = UpdateSqlInjectionMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateSqlInjectionMatchSetRequest_Updates = UpdateSqlInjectionMatchSetRequest.AddMember("Updates", _SqlInjectionMatchSetUpdates)
-
-	UpdateSqlInjectionMatchSetResponse_ChangeToken = UpdateSqlInjectionMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateWebACLRequest_WebACLId = UpdateWebACLRequest.AddMember("WebACLId", _ResourceId)
-
-	UpdateWebACLRequest_ChangeToken = UpdateWebACLRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateWebACLRequest_Updates = UpdateWebACLRequest.AddMember("Updates", _WebACLUpdates)
-
-	UpdateWebACLRequest_DefaultAction = UpdateWebACLRequest.AddMember("DefaultAction", WafAction)
-
-	UpdateWebACLResponse_ChangeToken = UpdateWebACLResponse.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateXssMatchSetRequest_XssMatchSetId = UpdateXssMatchSetRequest.AddMember("XssMatchSetId", _ResourceId)
-
-	UpdateXssMatchSetRequest_ChangeToken = UpdateXssMatchSetRequest.AddMember("ChangeToken", _ChangeToken)
-
-	UpdateXssMatchSetRequest_Updates = UpdateXssMatchSetRequest.AddMember("Updates", _XssMatchSetUpdates)
-
-	UpdateXssMatchSetResponse_ChangeToken = UpdateXssMatchSetResponse.AddMember("ChangeToken", _ChangeToken)
-
-}
+var (
+	eAssociateWebACL                                             smithy.SchemaExtensions
+	eCreateByteMatchSet                                          smithy.SchemaExtensions
+	eCreateGeoMatchSet                                           smithy.SchemaExtensions
+	eCreateIPSet                                                 smithy.SchemaExtensions
+	eCreateRateBasedRule                                         smithy.SchemaExtensions
+	eCreateRegexMatchSet                                         smithy.SchemaExtensions
+	eCreateRegexPatternSet                                       smithy.SchemaExtensions
+	eCreateRule                                                  smithy.SchemaExtensions
+	eCreateRuleGroup                                             smithy.SchemaExtensions
+	eCreateSizeConstraintSet                                     smithy.SchemaExtensions
+	eCreateSqlInjectionMatchSet                                  smithy.SchemaExtensions
+	eCreateWebACL                                                smithy.SchemaExtensions
+	eCreateWebACLMigrationStack                                  smithy.SchemaExtensions
+	eCreateXssMatchSet                                           smithy.SchemaExtensions
+	eDeleteByteMatchSet                                          smithy.SchemaExtensions
+	eDeleteGeoMatchSet                                           smithy.SchemaExtensions
+	eDeleteIPSet                                                 smithy.SchemaExtensions
+	eDeleteLoggingConfiguration                                  smithy.SchemaExtensions
+	eDeletePermissionPolicy                                      smithy.SchemaExtensions
+	eDeleteRateBasedRule                                         smithy.SchemaExtensions
+	eDeleteRegexMatchSet                                         smithy.SchemaExtensions
+	eDeleteRegexPatternSet                                       smithy.SchemaExtensions
+	eDeleteRule                                                  smithy.SchemaExtensions
+	eDeleteRuleGroup                                             smithy.SchemaExtensions
+	eDeleteSizeConstraintSet                                     smithy.SchemaExtensions
+	eDeleteSqlInjectionMatchSet                                  smithy.SchemaExtensions
+	eDeleteWebACL                                                smithy.SchemaExtensions
+	eDeleteXssMatchSet                                           smithy.SchemaExtensions
+	eDisassociateWebACL                                          smithy.SchemaExtensions
+	eGetByteMatchSet                                             smithy.SchemaExtensions
+	eGetChangeToken                                              smithy.SchemaExtensions
+	eGetChangeTokenStatus                                        smithy.SchemaExtensions
+	eGetGeoMatchSet                                              smithy.SchemaExtensions
+	eGetIPSet                                                    smithy.SchemaExtensions
+	eGetLoggingConfiguration                                     smithy.SchemaExtensions
+	eGetPermissionPolicy                                         smithy.SchemaExtensions
+	eGetRateBasedRule                                            smithy.SchemaExtensions
+	eGetRateBasedRuleManagedKeys                                 smithy.SchemaExtensions
+	eGetRegexMatchSet                                            smithy.SchemaExtensions
+	eGetRegexPatternSet                                          smithy.SchemaExtensions
+	eGetRule                                                     smithy.SchemaExtensions
+	eGetRuleGroup                                                smithy.SchemaExtensions
+	eGetSampledRequests                                          smithy.SchemaExtensions
+	eGetSizeConstraintSet                                        smithy.SchemaExtensions
+	eGetSqlInjectionMatchSet                                     smithy.SchemaExtensions
+	eGetWebACL                                                   smithy.SchemaExtensions
+	eGetWebACLForResource                                        smithy.SchemaExtensions
+	eGetXssMatchSet                                              smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroup                               smithy.SchemaExtensions
+	eListByteMatchSets                                           smithy.SchemaExtensions
+	eListGeoMatchSets                                            smithy.SchemaExtensions
+	eListIPSets                                                  smithy.SchemaExtensions
+	eListLoggingConfigurations                                   smithy.SchemaExtensions
+	eListRateBasedRules                                          smithy.SchemaExtensions
+	eListRegexMatchSets                                          smithy.SchemaExtensions
+	eListRegexPatternSets                                        smithy.SchemaExtensions
+	eListResourcesForWebACL                                      smithy.SchemaExtensions
+	eListRuleGroups                                              smithy.SchemaExtensions
+	eListRules                                                   smithy.SchemaExtensions
+	eListSizeConstraintSets                                      smithy.SchemaExtensions
+	eListSqlInjectionMatchSets                                   smithy.SchemaExtensions
+	eListSubscribedRuleGroups                                    smithy.SchemaExtensions
+	eListTagsForResource                                         smithy.SchemaExtensions
+	eListWebACLs                                                 smithy.SchemaExtensions
+	eListXssMatchSets                                            smithy.SchemaExtensions
+	ePutLoggingConfiguration                                     smithy.SchemaExtensions
+	ePutPermissionPolicy                                         smithy.SchemaExtensions
+	eTagResource                                                 smithy.SchemaExtensions
+	eUntagResource                                               smithy.SchemaExtensions
+	eUpdateByteMatchSet                                          smithy.SchemaExtensions
+	eUpdateGeoMatchSet                                           smithy.SchemaExtensions
+	eUpdateIPSet                                                 smithy.SchemaExtensions
+	eUpdateRateBasedRule                                         smithy.SchemaExtensions
+	eUpdateRegexMatchSet                                         smithy.SchemaExtensions
+	eUpdateRegexPatternSet                                       smithy.SchemaExtensions
+	eUpdateRule                                                  smithy.SchemaExtensions
+	eUpdateRuleGroup                                             smithy.SchemaExtensions
+	eUpdateSizeConstraintSet                                     smithy.SchemaExtensions
+	eUpdateSqlInjectionMatchSet                                  smithy.SchemaExtensions
+	eUpdateWebACL                                                smithy.SchemaExtensions
+	eUpdateXssMatchSet                                           smithy.SchemaExtensions
+	e_AWSWAF_Regional_20161128                                   smithy.SchemaExtensions
+	e_Action                                                     smithy.SchemaExtensions
+	eActivatedRule                                               smithy.SchemaExtensions
+	eActivatedRule_Priority                                      smithy.SchemaExtensions
+	eActivatedRule_RuleId                                        smithy.SchemaExtensions
+	eActivatedRule_Action                                        smithy.SchemaExtensions
+	eActivatedRule_OverrideAction                                smithy.SchemaExtensions
+	eActivatedRule_Type                                          smithy.SchemaExtensions
+	eActivatedRule_ExcludedRules                                 smithy.SchemaExtensions
+	e_ActivatedRules                                             smithy.SchemaExtensions
+	e_ActivatedRules_member                                      smithy.SchemaExtensions
+	eByteMatchSet                                                smithy.SchemaExtensions
+	eByteMatchSet_ByteMatchSetId                                 smithy.SchemaExtensions
+	eByteMatchSet_Name                                           smithy.SchemaExtensions
+	eByteMatchSet_ByteMatchTuples                                smithy.SchemaExtensions
+	e_ByteMatchSetSummaries                                      smithy.SchemaExtensions
+	e_ByteMatchSetSummaries_member                               smithy.SchemaExtensions
+	eByteMatchSetSummary                                         smithy.SchemaExtensions
+	eByteMatchSetSummary_ByteMatchSetId                          smithy.SchemaExtensions
+	eByteMatchSetSummary_Name                                    smithy.SchemaExtensions
+	eByteMatchSetUpdate                                          smithy.SchemaExtensions
+	eByteMatchSetUpdate_Action                                   smithy.SchemaExtensions
+	eByteMatchSetUpdate_ByteMatchTuple                           smithy.SchemaExtensions
+	e_ByteMatchSetUpdates                                        smithy.SchemaExtensions
+	e_ByteMatchSetUpdates_member                                 smithy.SchemaExtensions
+	e_ByteMatchTargetString                                      smithy.SchemaExtensions
+	eByteMatchTuple                                              smithy.SchemaExtensions
+	eByteMatchTuple_FieldToMatch                                 smithy.SchemaExtensions
+	eByteMatchTuple_TargetString                                 smithy.SchemaExtensions
+	eByteMatchTuple_TextTransformation                           smithy.SchemaExtensions
+	eByteMatchTuple_PositionalConstraint                         smithy.SchemaExtensions
+	e_ByteMatchTuples                                            smithy.SchemaExtensions
+	e_ByteMatchTuples_member                                     smithy.SchemaExtensions
+	eChangeAction                                                smithy.SchemaExtensions
+	eChangeAction_INSERT                                         smithy.SchemaExtensions
+	eChangeAction_DELETE                                         smithy.SchemaExtensions
+	e_ChangeToken                                                smithy.SchemaExtensions
+	eChangeTokenStatus                                           smithy.SchemaExtensions
+	eChangeTokenStatus_PROVISIONED                               smithy.SchemaExtensions
+	eChangeTokenStatus_PENDING                                   smithy.SchemaExtensions
+	eChangeTokenStatus_INSYNC                                    smithy.SchemaExtensions
+	eComparisonOperator                                          smithy.SchemaExtensions
+	eComparisonOperator_EQ                                       smithy.SchemaExtensions
+	eComparisonOperator_NE                                       smithy.SchemaExtensions
+	eComparisonOperator_LE                                       smithy.SchemaExtensions
+	eComparisonOperator_LT                                       smithy.SchemaExtensions
+	eComparisonOperator_GE                                       smithy.SchemaExtensions
+	eComparisonOperator_GT                                       smithy.SchemaExtensions
+	e_Country                                                    smithy.SchemaExtensions
+	e_errorMessage                                               smithy.SchemaExtensions
+	e_ErrorReason                                                smithy.SchemaExtensions
+	eExcludedRule                                                smithy.SchemaExtensions
+	eExcludedRule_RuleId                                         smithy.SchemaExtensions
+	e_ExcludedRules                                              smithy.SchemaExtensions
+	e_ExcludedRules_member                                       smithy.SchemaExtensions
+	eFieldToMatch                                                smithy.SchemaExtensions
+	eFieldToMatch_Type                                           smithy.SchemaExtensions
+	eFieldToMatch_Data                                           smithy.SchemaExtensions
+	eGeoMatchConstraint                                          smithy.SchemaExtensions
+	eGeoMatchConstraint_Type                                     smithy.SchemaExtensions
+	eGeoMatchConstraint_Value                                    smithy.SchemaExtensions
+	e_GeoMatchConstraints                                        smithy.SchemaExtensions
+	e_GeoMatchConstraints_member                                 smithy.SchemaExtensions
+	eGeoMatchConstraintType                                      smithy.SchemaExtensions
+	eGeoMatchConstraintType_Country                              smithy.SchemaExtensions
+	eGeoMatchConstraintValue                                     smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AX                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_DZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AD                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AQ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BD                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BB                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BJ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BQ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BV                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CV                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TD                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CX                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CD                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_HR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_DK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_DJ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_DM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_DO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_EC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_EG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SV                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GQ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ER                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_EE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ET                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_FK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_FO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_FJ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_FI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_FR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_DE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GD                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GP                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_HT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_HM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_VA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_HN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_HK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_HU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ID                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IQ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_IT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_JM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_JP                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_JE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_JO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KP                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LV                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LB                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MV                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ML                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MQ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_YT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MX                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_FM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MD                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ME                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NP                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MP                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_NO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_OM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_QA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_RE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_RO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_RU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_RW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_BL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_KN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_MF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_PM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_VC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_WS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ST                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_RS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SX                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SB                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ZA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SS                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ES                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_LK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SD                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SJ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_CH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_SY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TW                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TJ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TL                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TK                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TO                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TT                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TR                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TC                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_TV                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_UG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_UA                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_AE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_GB                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_US                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_UM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_UY                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_UZ                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_VU                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_VE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_VN                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_VG                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_VI                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_WF                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_EH                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_YE                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ZM                                  smithy.SchemaExtensions
+	eGeoMatchConstraintValue_ZW                                  smithy.SchemaExtensions
+	eGeoMatchSet                                                 smithy.SchemaExtensions
+	eGeoMatchSet_GeoMatchSetId                                   smithy.SchemaExtensions
+	eGeoMatchSet_Name                                            smithy.SchemaExtensions
+	eGeoMatchSet_GeoMatchConstraints                             smithy.SchemaExtensions
+	e_GeoMatchSetSummaries                                       smithy.SchemaExtensions
+	e_GeoMatchSetSummaries_member                                smithy.SchemaExtensions
+	eGeoMatchSetSummary                                          smithy.SchemaExtensions
+	eGeoMatchSetSummary_GeoMatchSetId                            smithy.SchemaExtensions
+	eGeoMatchSetSummary_Name                                     smithy.SchemaExtensions
+	eGeoMatchSetUpdate                                           smithy.SchemaExtensions
+	eGeoMatchSetUpdate_Action                                    smithy.SchemaExtensions
+	eGeoMatchSetUpdate_GeoMatchConstraint                        smithy.SchemaExtensions
+	e_GeoMatchSetUpdates                                         smithy.SchemaExtensions
+	e_GeoMatchSetUpdates_member                                  smithy.SchemaExtensions
+	e_GetSampledRequestsMaxItems                                 smithy.SchemaExtensions
+	e_HeaderName                                                 smithy.SchemaExtensions
+	e_HeaderValue                                                smithy.SchemaExtensions
+	eHTTPHeader                                                  smithy.SchemaExtensions
+	eHTTPHeader_Name                                             smithy.SchemaExtensions
+	eHTTPHeader_Value                                            smithy.SchemaExtensions
+	e_HTTPHeaders                                                smithy.SchemaExtensions
+	e_HTTPHeaders_member                                         smithy.SchemaExtensions
+	e_HTTPMethod                                                 smithy.SchemaExtensions
+	eHTTPRequest                                                 smithy.SchemaExtensions
+	eHTTPRequest_ClientIP                                        smithy.SchemaExtensions
+	eHTTPRequest_Country                                         smithy.SchemaExtensions
+	eHTTPRequest_URI                                             smithy.SchemaExtensions
+	eHTTPRequest_Method                                          smithy.SchemaExtensions
+	eHTTPRequest_HTTPVersion                                     smithy.SchemaExtensions
+	eHTTPRequest_Headers                                         smithy.SchemaExtensions
+	e_HTTPVersion                                                smithy.SchemaExtensions
+	e_IgnoreUnsupportedType                                      smithy.SchemaExtensions
+	eIPSet                                                       smithy.SchemaExtensions
+	eIPSet_IPSetId                                               smithy.SchemaExtensions
+	eIPSet_Name                                                  smithy.SchemaExtensions
+	eIPSet_IPSetDescriptors                                      smithy.SchemaExtensions
+	eIPSetDescriptor                                             smithy.SchemaExtensions
+	eIPSetDescriptor_Type                                        smithy.SchemaExtensions
+	eIPSetDescriptor_Value                                       smithy.SchemaExtensions
+	e_IPSetDescriptors                                           smithy.SchemaExtensions
+	e_IPSetDescriptors_member                                    smithy.SchemaExtensions
+	eIPSetDescriptorType                                         smithy.SchemaExtensions
+	eIPSetDescriptorType_IPV4                                    smithy.SchemaExtensions
+	eIPSetDescriptorType_IPV6                                    smithy.SchemaExtensions
+	e_IPSetDescriptorValue                                       smithy.SchemaExtensions
+	e_IPSetSummaries                                             smithy.SchemaExtensions
+	e_IPSetSummaries_member                                      smithy.SchemaExtensions
+	eIPSetSummary                                                smithy.SchemaExtensions
+	eIPSetSummary_IPSetId                                        smithy.SchemaExtensions
+	eIPSetSummary_Name                                           smithy.SchemaExtensions
+	eIPSetUpdate                                                 smithy.SchemaExtensions
+	eIPSetUpdate_Action                                          smithy.SchemaExtensions
+	eIPSetUpdate_IPSetDescriptor                                 smithy.SchemaExtensions
+	e_IPSetUpdates                                               smithy.SchemaExtensions
+	e_IPSetUpdates_member                                        smithy.SchemaExtensions
+	e_IPString                                                   smithy.SchemaExtensions
+	e_LogDestinationConfigs                                      smithy.SchemaExtensions
+	e_LogDestinationConfigs_member                               smithy.SchemaExtensions
+	eLoggingConfiguration                                        smithy.SchemaExtensions
+	eLoggingConfiguration_ResourceArn                            smithy.SchemaExtensions
+	eLoggingConfiguration_LogDestinationConfigs                  smithy.SchemaExtensions
+	eLoggingConfiguration_RedactedFields                         smithy.SchemaExtensions
+	e_LoggingConfigurations                                      smithy.SchemaExtensions
+	e_LoggingConfigurations_member                               smithy.SchemaExtensions
+	e_ManagedKey                                                 smithy.SchemaExtensions
+	e_ManagedKeys                                                smithy.SchemaExtensions
+	e_ManagedKeys_member                                         smithy.SchemaExtensions
+	e_MatchFieldData                                             smithy.SchemaExtensions
+	eMatchFieldType                                              smithy.SchemaExtensions
+	eMatchFieldType_URI                                          smithy.SchemaExtensions
+	eMatchFieldType_QUERY_STRING                                 smithy.SchemaExtensions
+	eMatchFieldType_HEADER                                       smithy.SchemaExtensions
+	eMatchFieldType_METHOD                                       smithy.SchemaExtensions
+	eMatchFieldType_BODY                                         smithy.SchemaExtensions
+	eMatchFieldType_SINGLE_QUERY_ARG                             smithy.SchemaExtensions
+	eMatchFieldType_ALL_QUERY_ARGS                               smithy.SchemaExtensions
+	e_MetricName                                                 smithy.SchemaExtensions
+	eMigrationErrorType                                          smithy.SchemaExtensions
+	eMigrationErrorType_ENTITY_NOT_SUPPORTED                     smithy.SchemaExtensions
+	eMigrationErrorType_ENTITY_NOT_FOUND                         smithy.SchemaExtensions
+	eMigrationErrorType_S3_BUCKET_NO_PERMISSION                  smithy.SchemaExtensions
+	eMigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE                 smithy.SchemaExtensions
+	eMigrationErrorType_S3_BUCKET_NOT_FOUND                      smithy.SchemaExtensions
+	eMigrationErrorType_S3_BUCKET_INVALID_REGION                 smithy.SchemaExtensions
+	eMigrationErrorType_S3_INTERNAL_ERROR                        smithy.SchemaExtensions
+	e_Negated                                                    smithy.SchemaExtensions
+	e_NextMarker                                                 smithy.SchemaExtensions
+	e_PaginationLimit                                            smithy.SchemaExtensions
+	eParameterExceptionField                                     smithy.SchemaExtensions
+	eParameterExceptionField_CHANGE_ACTION                       smithy.SchemaExtensions
+	eParameterExceptionField_WAF_ACTION                          smithy.SchemaExtensions
+	eParameterExceptionField_WAF_OVERRIDE_ACTION                 smithy.SchemaExtensions
+	eParameterExceptionField_PREDICATE_TYPE                      smithy.SchemaExtensions
+	eParameterExceptionField_IPSET_TYPE                          smithy.SchemaExtensions
+	eParameterExceptionField_BYTE_MATCH_FIELD_TYPE               smithy.SchemaExtensions
+	eParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE      smithy.SchemaExtensions
+	eParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION      smithy.SchemaExtensions
+	eParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT    smithy.SchemaExtensions
+	eParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR smithy.SchemaExtensions
+	eParameterExceptionField_GEO_MATCH_LOCATION_TYPE             smithy.SchemaExtensions
+	eParameterExceptionField_GEO_MATCH_LOCATION_VALUE            smithy.SchemaExtensions
+	eParameterExceptionField_RATE_KEY                            smithy.SchemaExtensions
+	eParameterExceptionField_RULE_TYPE                           smithy.SchemaExtensions
+	eParameterExceptionField_NEXT_MARKER                         smithy.SchemaExtensions
+	eParameterExceptionField_RESOURCE_ARN                        smithy.SchemaExtensions
+	eParameterExceptionField_TAGS                                smithy.SchemaExtensions
+	eParameterExceptionField_TAG_KEYS                            smithy.SchemaExtensions
+	e_ParameterExceptionParameter                                smithy.SchemaExtensions
+	eParameterExceptionReason                                    smithy.SchemaExtensions
+	eParameterExceptionReason_INVALID_OPTION                     smithy.SchemaExtensions
+	eParameterExceptionReason_ILLEGAL_COMBINATION                smithy.SchemaExtensions
+	eParameterExceptionReason_ILLEGAL_ARGUMENT                   smithy.SchemaExtensions
+	eParameterExceptionReason_INVALID_TAG_KEY                    smithy.SchemaExtensions
+	e_PolicyString                                               smithy.SchemaExtensions
+	e_PopulationSize                                             smithy.SchemaExtensions
+	ePositionalConstraint                                        smithy.SchemaExtensions
+	ePositionalConstraint_EXACTLY                                smithy.SchemaExtensions
+	ePositionalConstraint_STARTS_WITH                            smithy.SchemaExtensions
+	ePositionalConstraint_ENDS_WITH                              smithy.SchemaExtensions
+	ePositionalConstraint_CONTAINS                               smithy.SchemaExtensions
+	ePositionalConstraint_CONTAINS_WORD                          smithy.SchemaExtensions
+	ePredicate                                                   smithy.SchemaExtensions
+	ePredicate_Negated                                           smithy.SchemaExtensions
+	ePredicate_Type                                              smithy.SchemaExtensions
+	ePredicate_DataId                                            smithy.SchemaExtensions
+	e_Predicates                                                 smithy.SchemaExtensions
+	e_Predicates_member                                          smithy.SchemaExtensions
+	ePredicateType                                               smithy.SchemaExtensions
+	ePredicateType_IP_MATCH                                      smithy.SchemaExtensions
+	ePredicateType_BYTE_MATCH                                    smithy.SchemaExtensions
+	ePredicateType_SQL_INJECTION_MATCH                           smithy.SchemaExtensions
+	ePredicateType_GEO_MATCH                                     smithy.SchemaExtensions
+	ePredicateType_SIZE_CONSTRAINT                               smithy.SchemaExtensions
+	ePredicateType_XSS_MATCH                                     smithy.SchemaExtensions
+	ePredicateType_REGEX_MATCH                                   smithy.SchemaExtensions
+	eRateBasedRule                                               smithy.SchemaExtensions
+	eRateBasedRule_RuleId                                        smithy.SchemaExtensions
+	eRateBasedRule_Name                                          smithy.SchemaExtensions
+	eRateBasedRule_MetricName                                    smithy.SchemaExtensions
+	eRateBasedRule_MatchPredicates                               smithy.SchemaExtensions
+	eRateBasedRule_RateKey                                       smithy.SchemaExtensions
+	eRateBasedRule_RateLimit                                     smithy.SchemaExtensions
+	eRateKey                                                     smithy.SchemaExtensions
+	eRateKey_IP                                                  smithy.SchemaExtensions
+	e_RateLimit                                                  smithy.SchemaExtensions
+	e_RedactedFields                                             smithy.SchemaExtensions
+	e_RedactedFields_member                                      smithy.SchemaExtensions
+	eRegexMatchSet                                               smithy.SchemaExtensions
+	eRegexMatchSet_RegexMatchSetId                               smithy.SchemaExtensions
+	eRegexMatchSet_Name                                          smithy.SchemaExtensions
+	eRegexMatchSet_RegexMatchTuples                              smithy.SchemaExtensions
+	e_RegexMatchSetSummaries                                     smithy.SchemaExtensions
+	e_RegexMatchSetSummaries_member                              smithy.SchemaExtensions
+	eRegexMatchSetSummary                                        smithy.SchemaExtensions
+	eRegexMatchSetSummary_RegexMatchSetId                        smithy.SchemaExtensions
+	eRegexMatchSetSummary_Name                                   smithy.SchemaExtensions
+	eRegexMatchSetUpdate                                         smithy.SchemaExtensions
+	eRegexMatchSetUpdate_Action                                  smithy.SchemaExtensions
+	eRegexMatchSetUpdate_RegexMatchTuple                         smithy.SchemaExtensions
+	e_RegexMatchSetUpdates                                       smithy.SchemaExtensions
+	e_RegexMatchSetUpdates_member                                smithy.SchemaExtensions
+	eRegexMatchTuple                                             smithy.SchemaExtensions
+	eRegexMatchTuple_FieldToMatch                                smithy.SchemaExtensions
+	eRegexMatchTuple_TextTransformation                          smithy.SchemaExtensions
+	eRegexMatchTuple_RegexPatternSetId                           smithy.SchemaExtensions
+	e_RegexMatchTuples                                           smithy.SchemaExtensions
+	e_RegexMatchTuples_member                                    smithy.SchemaExtensions
+	eRegexPatternSet                                             smithy.SchemaExtensions
+	eRegexPatternSet_RegexPatternSetId                           smithy.SchemaExtensions
+	eRegexPatternSet_Name                                        smithy.SchemaExtensions
+	eRegexPatternSet_RegexPatternStrings                         smithy.SchemaExtensions
+	e_RegexPatternSetSummaries                                   smithy.SchemaExtensions
+	e_RegexPatternSetSummaries_member                            smithy.SchemaExtensions
+	eRegexPatternSetSummary                                      smithy.SchemaExtensions
+	eRegexPatternSetSummary_RegexPatternSetId                    smithy.SchemaExtensions
+	eRegexPatternSetSummary_Name                                 smithy.SchemaExtensions
+	eRegexPatternSetUpdate                                       smithy.SchemaExtensions
+	eRegexPatternSetUpdate_Action                                smithy.SchemaExtensions
+	eRegexPatternSetUpdate_RegexPatternString                    smithy.SchemaExtensions
+	e_RegexPatternSetUpdates                                     smithy.SchemaExtensions
+	e_RegexPatternSetUpdates_member                              smithy.SchemaExtensions
+	e_RegexPatternString                                         smithy.SchemaExtensions
+	e_RegexPatternStrings                                        smithy.SchemaExtensions
+	e_RegexPatternStrings_member                                 smithy.SchemaExtensions
+	e_ResourceArn                                                smithy.SchemaExtensions
+	e_ResourceArns                                               smithy.SchemaExtensions
+	e_ResourceArns_member                                        smithy.SchemaExtensions
+	e_ResourceId                                                 smithy.SchemaExtensions
+	e_ResourceName                                               smithy.SchemaExtensions
+	eResourceType                                                smithy.SchemaExtensions
+	eResourceType_APPLICATION_LOAD_BALANCER                      smithy.SchemaExtensions
+	eResourceType_API_GATEWAY                                    smithy.SchemaExtensions
+	eRule                                                        smithy.SchemaExtensions
+	eRule_RuleId                                                 smithy.SchemaExtensions
+	eRule_Name                                                   smithy.SchemaExtensions
+	eRule_MetricName                                             smithy.SchemaExtensions
+	eRule_Predicates                                             smithy.SchemaExtensions
+	eRuleGroup                                                   smithy.SchemaExtensions
+	eRuleGroup_RuleGroupId                                       smithy.SchemaExtensions
+	eRuleGroup_Name                                              smithy.SchemaExtensions
+	eRuleGroup_MetricName                                        smithy.SchemaExtensions
+	e_RuleGroupSummaries                                         smithy.SchemaExtensions
+	e_RuleGroupSummaries_member                                  smithy.SchemaExtensions
+	eRuleGroupSummary                                            smithy.SchemaExtensions
+	eRuleGroupSummary_RuleGroupId                                smithy.SchemaExtensions
+	eRuleGroupSummary_Name                                       smithy.SchemaExtensions
+	eRuleGroupUpdate                                             smithy.SchemaExtensions
+	eRuleGroupUpdate_Action                                      smithy.SchemaExtensions
+	eRuleGroupUpdate_ActivatedRule                               smithy.SchemaExtensions
+	e_RuleGroupUpdates                                           smithy.SchemaExtensions
+	e_RuleGroupUpdates_member                                    smithy.SchemaExtensions
+	e_RulePriority                                               smithy.SchemaExtensions
+	e_RuleSummaries                                              smithy.SchemaExtensions
+	e_RuleSummaries_member                                       smithy.SchemaExtensions
+	eRuleSummary                                                 smithy.SchemaExtensions
+	eRuleSummary_RuleId                                          smithy.SchemaExtensions
+	eRuleSummary_Name                                            smithy.SchemaExtensions
+	eRuleUpdate                                                  smithy.SchemaExtensions
+	eRuleUpdate_Action                                           smithy.SchemaExtensions
+	eRuleUpdate_Predicate                                        smithy.SchemaExtensions
+	e_RuleUpdates                                                smithy.SchemaExtensions
+	e_RuleUpdates_member                                         smithy.SchemaExtensions
+	e_S3BucketName                                               smithy.SchemaExtensions
+	e_S3ObjectUrl                                                smithy.SchemaExtensions
+	eSampledHTTPRequest                                          smithy.SchemaExtensions
+	eSampledHTTPRequest_Request                                  smithy.SchemaExtensions
+	eSampledHTTPRequest_Weight                                   smithy.SchemaExtensions
+	eSampledHTTPRequest_Timestamp                                smithy.SchemaExtensions
+	eSampledHTTPRequest_Action                                   smithy.SchemaExtensions
+	eSampledHTTPRequest_RuleWithinRuleGroup                      smithy.SchemaExtensions
+	e_SampledHTTPRequests                                        smithy.SchemaExtensions
+	e_SampledHTTPRequests_member                                 smithy.SchemaExtensions
+	e_SampleWeight                                               smithy.SchemaExtensions
+	e_Size                                                       smithy.SchemaExtensions
+	eSizeConstraint                                              smithy.SchemaExtensions
+	eSizeConstraint_FieldToMatch                                 smithy.SchemaExtensions
+	eSizeConstraint_TextTransformation                           smithy.SchemaExtensions
+	eSizeConstraint_ComparisonOperator                           smithy.SchemaExtensions
+	eSizeConstraint_Size                                         smithy.SchemaExtensions
+	e_SizeConstraints                                            smithy.SchemaExtensions
+	e_SizeConstraints_member                                     smithy.SchemaExtensions
+	eSizeConstraintSet                                           smithy.SchemaExtensions
+	eSizeConstraintSet_SizeConstraintSetId                       smithy.SchemaExtensions
+	eSizeConstraintSet_Name                                      smithy.SchemaExtensions
+	eSizeConstraintSet_SizeConstraints                           smithy.SchemaExtensions
+	e_SizeConstraintSetSummaries                                 smithy.SchemaExtensions
+	e_SizeConstraintSetSummaries_member                          smithy.SchemaExtensions
+	eSizeConstraintSetSummary                                    smithy.SchemaExtensions
+	eSizeConstraintSetSummary_SizeConstraintSetId                smithy.SchemaExtensions
+	eSizeConstraintSetSummary_Name                               smithy.SchemaExtensions
+	eSizeConstraintSetUpdate                                     smithy.SchemaExtensions
+	eSizeConstraintSetUpdate_Action                              smithy.SchemaExtensions
+	eSizeConstraintSetUpdate_SizeConstraint                      smithy.SchemaExtensions
+	e_SizeConstraintSetUpdates                                   smithy.SchemaExtensions
+	e_SizeConstraintSetUpdates_member                            smithy.SchemaExtensions
+	eSqlInjectionMatchSet                                        smithy.SchemaExtensions
+	eSqlInjectionMatchSet_SqlInjectionMatchSetId                 smithy.SchemaExtensions
+	eSqlInjectionMatchSet_Name                                   smithy.SchemaExtensions
+	eSqlInjectionMatchSet_SqlInjectionMatchTuples                smithy.SchemaExtensions
+	e_SqlInjectionMatchSetSummaries                              smithy.SchemaExtensions
+	e_SqlInjectionMatchSetSummaries_member                       smithy.SchemaExtensions
+	eSqlInjectionMatchSetSummary                                 smithy.SchemaExtensions
+	eSqlInjectionMatchSetSummary_SqlInjectionMatchSetId          smithy.SchemaExtensions
+	eSqlInjectionMatchSetSummary_Name                            smithy.SchemaExtensions
+	eSqlInjectionMatchSetUpdate                                  smithy.SchemaExtensions
+	eSqlInjectionMatchSetUpdate_Action                           smithy.SchemaExtensions
+	eSqlInjectionMatchSetUpdate_SqlInjectionMatchTuple           smithy.SchemaExtensions
+	e_SqlInjectionMatchSetUpdates                                smithy.SchemaExtensions
+	e_SqlInjectionMatchSetUpdates_member                         smithy.SchemaExtensions
+	eSqlInjectionMatchTuple                                      smithy.SchemaExtensions
+	eSqlInjectionMatchTuple_FieldToMatch                         smithy.SchemaExtensions
+	eSqlInjectionMatchTuple_TextTransformation                   smithy.SchemaExtensions
+	e_SqlInjectionMatchTuples                                    smithy.SchemaExtensions
+	e_SqlInjectionMatchTuples_member                             smithy.SchemaExtensions
+	e_SubscribedRuleGroupSummaries                               smithy.SchemaExtensions
+	e_SubscribedRuleGroupSummaries_member                        smithy.SchemaExtensions
+	eSubscribedRuleGroupSummary                                  smithy.SchemaExtensions
+	eSubscribedRuleGroupSummary_RuleGroupId                      smithy.SchemaExtensions
+	eSubscribedRuleGroupSummary_Name                             smithy.SchemaExtensions
+	eSubscribedRuleGroupSummary_MetricName                       smithy.SchemaExtensions
+	eTag                                                         smithy.SchemaExtensions
+	eTag_Key                                                     smithy.SchemaExtensions
+	eTag_Value                                                   smithy.SchemaExtensions
+	eTagInfoForResource                                          smithy.SchemaExtensions
+	eTagInfoForResource_ResourceARN                              smithy.SchemaExtensions
+	eTagInfoForResource_TagList                                  smithy.SchemaExtensions
+	e_TagKey                                                     smithy.SchemaExtensions
+	e_TagKeyList                                                 smithy.SchemaExtensions
+	e_TagKeyList_member                                          smithy.SchemaExtensions
+	e_TagList                                                    smithy.SchemaExtensions
+	e_TagList_member                                             smithy.SchemaExtensions
+	e_TagValue                                                   smithy.SchemaExtensions
+	eTextTransformation                                          smithy.SchemaExtensions
+	eTextTransformation_NONE                                     smithy.SchemaExtensions
+	eTextTransformation_COMPRESS_WHITE_SPACE                     smithy.SchemaExtensions
+	eTextTransformation_HTML_ENTITY_DECODE                       smithy.SchemaExtensions
+	eTextTransformation_LOWERCASE                                smithy.SchemaExtensions
+	eTextTransformation_CMD_LINE                                 smithy.SchemaExtensions
+	eTextTransformation_URL_DECODE                               smithy.SchemaExtensions
+	e_Timestamp                                                  smithy.SchemaExtensions
+	eTimeWindow                                                  smithy.SchemaExtensions
+	eTimeWindow_StartTime                                        smithy.SchemaExtensions
+	eTimeWindow_EndTime                                          smithy.SchemaExtensions
+	e_URIString                                                  smithy.SchemaExtensions
+	eWafAction                                                   smithy.SchemaExtensions
+	eWafAction_Type                                              smithy.SchemaExtensions
+	eWafActionType                                               smithy.SchemaExtensions
+	eWafActionType_BLOCK                                         smithy.SchemaExtensions
+	eWafActionType_ALLOW                                         smithy.SchemaExtensions
+	eWafActionType_COUNT                                         smithy.SchemaExtensions
+	eWAFBadRequestException                                      smithy.SchemaExtensions
+	eWAFBadRequestException_message                              smithy.SchemaExtensions
+	eWAFDisallowedNameException                                  smithy.SchemaExtensions
+	eWAFDisallowedNameException_message                          smithy.SchemaExtensions
+	eWAFEntityMigrationException                                 smithy.SchemaExtensions
+	eWAFEntityMigrationException_message                         smithy.SchemaExtensions
+	eWAFEntityMigrationException_MigrationErrorType              smithy.SchemaExtensions
+	eWAFEntityMigrationException_MigrationErrorReason            smithy.SchemaExtensions
+	eWAFInternalErrorException                                   smithy.SchemaExtensions
+	eWAFInternalErrorException_message                           smithy.SchemaExtensions
+	eWAFInvalidAccountException                                  smithy.SchemaExtensions
+	eWAFInvalidOperationException                                smithy.SchemaExtensions
+	eWAFInvalidOperationException_message                        smithy.SchemaExtensions
+	eWAFInvalidParameterException                                smithy.SchemaExtensions
+	eWAFInvalidParameterException_field                          smithy.SchemaExtensions
+	eWAFInvalidParameterException_parameter                      smithy.SchemaExtensions
+	eWAFInvalidParameterException_reason                         smithy.SchemaExtensions
+	eWAFInvalidPermissionPolicyException                         smithy.SchemaExtensions
+	eWAFInvalidPermissionPolicyException_message                 smithy.SchemaExtensions
+	eWAFInvalidRegexPatternException                             smithy.SchemaExtensions
+	eWAFInvalidRegexPatternException_message                     smithy.SchemaExtensions
+	eWAFLimitsExceededException                                  smithy.SchemaExtensions
+	eWAFLimitsExceededException_message                          smithy.SchemaExtensions
+	eWAFNonEmptyEntityException                                  smithy.SchemaExtensions
+	eWAFNonEmptyEntityException_message                          smithy.SchemaExtensions
+	eWAFNonexistentContainerException                            smithy.SchemaExtensions
+	eWAFNonexistentContainerException_message                    smithy.SchemaExtensions
+	eWAFNonexistentItemException                                 smithy.SchemaExtensions
+	eWAFNonexistentItemException_message                         smithy.SchemaExtensions
+	eWafOverrideAction                                           smithy.SchemaExtensions
+	eWafOverrideAction_Type                                      smithy.SchemaExtensions
+	eWafOverrideActionType                                       smithy.SchemaExtensions
+	eWafOverrideActionType_NONE                                  smithy.SchemaExtensions
+	eWafOverrideActionType_COUNT                                 smithy.SchemaExtensions
+	eWAFReferencedItemException                                  smithy.SchemaExtensions
+	eWAFReferencedItemException_message                          smithy.SchemaExtensions
+	eWafRuleType                                                 smithy.SchemaExtensions
+	eWafRuleType_REGULAR                                         smithy.SchemaExtensions
+	eWafRuleType_RATE_BASED                                      smithy.SchemaExtensions
+	eWafRuleType_GROUP                                           smithy.SchemaExtensions
+	eWAFServiceLinkedRoleErrorException                          smithy.SchemaExtensions
+	eWAFServiceLinkedRoleErrorException_message                  smithy.SchemaExtensions
+	eWAFStaleDataException                                       smithy.SchemaExtensions
+	eWAFStaleDataException_message                               smithy.SchemaExtensions
+	eWAFSubscriptionNotFoundException                            smithy.SchemaExtensions
+	eWAFSubscriptionNotFoundException_message                    smithy.SchemaExtensions
+	eWAFTagOperationException                                    smithy.SchemaExtensions
+	eWAFTagOperationException_message                            smithy.SchemaExtensions
+	eWAFTagOperationInternalErrorException                       smithy.SchemaExtensions
+	eWAFTagOperationInternalErrorException_message               smithy.SchemaExtensions
+	eWAFUnavailableEntityException                               smithy.SchemaExtensions
+	eWAFUnavailableEntityException_message                       smithy.SchemaExtensions
+	eWebACL                                                      smithy.SchemaExtensions
+	eWebACL_WebACLId                                             smithy.SchemaExtensions
+	eWebACL_Name                                                 smithy.SchemaExtensions
+	eWebACL_MetricName                                           smithy.SchemaExtensions
+	eWebACL_DefaultAction                                        smithy.SchemaExtensions
+	eWebACL_Rules                                                smithy.SchemaExtensions
+	eWebACL_WebACLArn                                            smithy.SchemaExtensions
+	e_WebACLSummaries                                            smithy.SchemaExtensions
+	e_WebACLSummaries_member                                     smithy.SchemaExtensions
+	eWebACLSummary                                               smithy.SchemaExtensions
+	eWebACLSummary_WebACLId                                      smithy.SchemaExtensions
+	eWebACLSummary_Name                                          smithy.SchemaExtensions
+	eWebACLUpdate                                                smithy.SchemaExtensions
+	eWebACLUpdate_Action                                         smithy.SchemaExtensions
+	eWebACLUpdate_ActivatedRule                                  smithy.SchemaExtensions
+	e_WebACLUpdates                                              smithy.SchemaExtensions
+	e_WebACLUpdates_member                                       smithy.SchemaExtensions
+	eXssMatchSet                                                 smithy.SchemaExtensions
+	eXssMatchSet_XssMatchSetId                                   smithy.SchemaExtensions
+	eXssMatchSet_Name                                            smithy.SchemaExtensions
+	eXssMatchSet_XssMatchTuples                                  smithy.SchemaExtensions
+	e_XssMatchSetSummaries                                       smithy.SchemaExtensions
+	e_XssMatchSetSummaries_member                                smithy.SchemaExtensions
+	eXssMatchSetSummary                                          smithy.SchemaExtensions
+	eXssMatchSetSummary_XssMatchSetId                            smithy.SchemaExtensions
+	eXssMatchSetSummary_Name                                     smithy.SchemaExtensions
+	eXssMatchSetUpdate                                           smithy.SchemaExtensions
+	eXssMatchSetUpdate_Action                                    smithy.SchemaExtensions
+	eXssMatchSetUpdate_XssMatchTuple                             smithy.SchemaExtensions
+	e_XssMatchSetUpdates                                         smithy.SchemaExtensions
+	e_XssMatchSetUpdates_member                                  smithy.SchemaExtensions
+	eXssMatchTuple                                               smithy.SchemaExtensions
+	eXssMatchTuple_FieldToMatch                                  smithy.SchemaExtensions
+	eXssMatchTuple_TextTransformation                            smithy.SchemaExtensions
+	e_XssMatchTuples                                             smithy.SchemaExtensions
+	e_XssMatchTuples_member                                      smithy.SchemaExtensions
+	eAssociateWebACLRequest                                      smithy.SchemaExtensions
+	eAssociateWebACLRequest_WebACLId                             smithy.SchemaExtensions
+	eAssociateWebACLRequest_ResourceArn                          smithy.SchemaExtensions
+	eAssociateWebACLResponse                                     smithy.SchemaExtensions
+	eCreateByteMatchSetRequest                                   smithy.SchemaExtensions
+	eCreateByteMatchSetRequest_Name                              smithy.SchemaExtensions
+	eCreateByteMatchSetRequest_ChangeToken                       smithy.SchemaExtensions
+	eCreateByteMatchSetResponse                                  smithy.SchemaExtensions
+	eCreateByteMatchSetResponse_ByteMatchSet                     smithy.SchemaExtensions
+	eCreateByteMatchSetResponse_ChangeToken                      smithy.SchemaExtensions
+	eCreateGeoMatchSetRequest                                    smithy.SchemaExtensions
+	eCreateGeoMatchSetRequest_Name                               smithy.SchemaExtensions
+	eCreateGeoMatchSetRequest_ChangeToken                        smithy.SchemaExtensions
+	eCreateGeoMatchSetResponse                                   smithy.SchemaExtensions
+	eCreateGeoMatchSetResponse_GeoMatchSet                       smithy.SchemaExtensions
+	eCreateGeoMatchSetResponse_ChangeToken                       smithy.SchemaExtensions
+	eCreateIPSetRequest                                          smithy.SchemaExtensions
+	eCreateIPSetRequest_Name                                     smithy.SchemaExtensions
+	eCreateIPSetRequest_ChangeToken                              smithy.SchemaExtensions
+	eCreateIPSetResponse                                         smithy.SchemaExtensions
+	eCreateIPSetResponse_IPSet                                   smithy.SchemaExtensions
+	eCreateIPSetResponse_ChangeToken                             smithy.SchemaExtensions
+	eCreateRateBasedRuleRequest                                  smithy.SchemaExtensions
+	eCreateRateBasedRuleRequest_Name                             smithy.SchemaExtensions
+	eCreateRateBasedRuleRequest_MetricName                       smithy.SchemaExtensions
+	eCreateRateBasedRuleRequest_RateKey                          smithy.SchemaExtensions
+	eCreateRateBasedRuleRequest_RateLimit                        smithy.SchemaExtensions
+	eCreateRateBasedRuleRequest_ChangeToken                      smithy.SchemaExtensions
+	eCreateRateBasedRuleRequest_Tags                             smithy.SchemaExtensions
+	eCreateRateBasedRuleResponse                                 smithy.SchemaExtensions
+	eCreateRateBasedRuleResponse_Rule                            smithy.SchemaExtensions
+	eCreateRateBasedRuleResponse_ChangeToken                     smithy.SchemaExtensions
+	eCreateRegexMatchSetRequest                                  smithy.SchemaExtensions
+	eCreateRegexMatchSetRequest_Name                             smithy.SchemaExtensions
+	eCreateRegexMatchSetRequest_ChangeToken                      smithy.SchemaExtensions
+	eCreateRegexMatchSetResponse                                 smithy.SchemaExtensions
+	eCreateRegexMatchSetResponse_RegexMatchSet                   smithy.SchemaExtensions
+	eCreateRegexMatchSetResponse_ChangeToken                     smithy.SchemaExtensions
+	eCreateRegexPatternSetRequest                                smithy.SchemaExtensions
+	eCreateRegexPatternSetRequest_Name                           smithy.SchemaExtensions
+	eCreateRegexPatternSetRequest_ChangeToken                    smithy.SchemaExtensions
+	eCreateRegexPatternSetResponse                               smithy.SchemaExtensions
+	eCreateRegexPatternSetResponse_RegexPatternSet               smithy.SchemaExtensions
+	eCreateRegexPatternSetResponse_ChangeToken                   smithy.SchemaExtensions
+	eCreateRuleGroupRequest                                      smithy.SchemaExtensions
+	eCreateRuleGroupRequest_Name                                 smithy.SchemaExtensions
+	eCreateRuleGroupRequest_MetricName                           smithy.SchemaExtensions
+	eCreateRuleGroupRequest_ChangeToken                          smithy.SchemaExtensions
+	eCreateRuleGroupRequest_Tags                                 smithy.SchemaExtensions
+	eCreateRuleGroupResponse                                     smithy.SchemaExtensions
+	eCreateRuleGroupResponse_RuleGroup                           smithy.SchemaExtensions
+	eCreateRuleGroupResponse_ChangeToken                         smithy.SchemaExtensions
+	eCreateRuleRequest                                           smithy.SchemaExtensions
+	eCreateRuleRequest_Name                                      smithy.SchemaExtensions
+	eCreateRuleRequest_MetricName                                smithy.SchemaExtensions
+	eCreateRuleRequest_ChangeToken                               smithy.SchemaExtensions
+	eCreateRuleRequest_Tags                                      smithy.SchemaExtensions
+	eCreateRuleResponse                                          smithy.SchemaExtensions
+	eCreateRuleResponse_Rule                                     smithy.SchemaExtensions
+	eCreateRuleResponse_ChangeToken                              smithy.SchemaExtensions
+	eCreateSizeConstraintSetRequest                              smithy.SchemaExtensions
+	eCreateSizeConstraintSetRequest_Name                         smithy.SchemaExtensions
+	eCreateSizeConstraintSetRequest_ChangeToken                  smithy.SchemaExtensions
+	eCreateSizeConstraintSetResponse                             smithy.SchemaExtensions
+	eCreateSizeConstraintSetResponse_SizeConstraintSet           smithy.SchemaExtensions
+	eCreateSizeConstraintSetResponse_ChangeToken                 smithy.SchemaExtensions
+	eCreateSqlInjectionMatchSetRequest                           smithy.SchemaExtensions
+	eCreateSqlInjectionMatchSetRequest_Name                      smithy.SchemaExtensions
+	eCreateSqlInjectionMatchSetRequest_ChangeToken               smithy.SchemaExtensions
+	eCreateSqlInjectionMatchSetResponse                          smithy.SchemaExtensions
+	eCreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet     smithy.SchemaExtensions
+	eCreateSqlInjectionMatchSetResponse_ChangeToken              smithy.SchemaExtensions
+	eCreateWebACLRequest                                         smithy.SchemaExtensions
+	eCreateWebACLRequest_Name                                    smithy.SchemaExtensions
+	eCreateWebACLRequest_MetricName                              smithy.SchemaExtensions
+	eCreateWebACLRequest_DefaultAction                           smithy.SchemaExtensions
+	eCreateWebACLRequest_ChangeToken                             smithy.SchemaExtensions
+	eCreateWebACLRequest_Tags                                    smithy.SchemaExtensions
+	eCreateWebACLMigrationStackRequest                           smithy.SchemaExtensions
+	eCreateWebACLMigrationStackRequest_WebACLId                  smithy.SchemaExtensions
+	eCreateWebACLMigrationStackRequest_S3BucketName              smithy.SchemaExtensions
+	eCreateWebACLMigrationStackRequest_IgnoreUnsupportedType     smithy.SchemaExtensions
+	eCreateWebACLMigrationStackResponse                          smithy.SchemaExtensions
+	eCreateWebACLMigrationStackResponse_S3ObjectUrl              smithy.SchemaExtensions
+	eCreateWebACLResponse                                        smithy.SchemaExtensions
+	eCreateWebACLResponse_WebACL                                 smithy.SchemaExtensions
+	eCreateWebACLResponse_ChangeToken                            smithy.SchemaExtensions
+	eCreateXssMatchSetRequest                                    smithy.SchemaExtensions
+	eCreateXssMatchSetRequest_Name                               smithy.SchemaExtensions
+	eCreateXssMatchSetRequest_ChangeToken                        smithy.SchemaExtensions
+	eCreateXssMatchSetResponse                                   smithy.SchemaExtensions
+	eCreateXssMatchSetResponse_XssMatchSet                       smithy.SchemaExtensions
+	eCreateXssMatchSetResponse_ChangeToken                       smithy.SchemaExtensions
+	eDeleteByteMatchSetRequest                                   smithy.SchemaExtensions
+	eDeleteByteMatchSetRequest_ByteMatchSetId                    smithy.SchemaExtensions
+	eDeleteByteMatchSetRequest_ChangeToken                       smithy.SchemaExtensions
+	eDeleteByteMatchSetResponse                                  smithy.SchemaExtensions
+	eDeleteByteMatchSetResponse_ChangeToken                      smithy.SchemaExtensions
+	eDeleteGeoMatchSetRequest                                    smithy.SchemaExtensions
+	eDeleteGeoMatchSetRequest_GeoMatchSetId                      smithy.SchemaExtensions
+	eDeleteGeoMatchSetRequest_ChangeToken                        smithy.SchemaExtensions
+	eDeleteGeoMatchSetResponse                                   smithy.SchemaExtensions
+	eDeleteGeoMatchSetResponse_ChangeToken                       smithy.SchemaExtensions
+	eDeleteIPSetRequest                                          smithy.SchemaExtensions
+	eDeleteIPSetRequest_IPSetId                                  smithy.SchemaExtensions
+	eDeleteIPSetRequest_ChangeToken                              smithy.SchemaExtensions
+	eDeleteIPSetResponse                                         smithy.SchemaExtensions
+	eDeleteIPSetResponse_ChangeToken                             smithy.SchemaExtensions
+	eDeleteLoggingConfigurationRequest                           smithy.SchemaExtensions
+	eDeleteLoggingConfigurationRequest_ResourceArn               smithy.SchemaExtensions
+	eDeleteLoggingConfigurationResponse                          smithy.SchemaExtensions
+	eDeletePermissionPolicyRequest                               smithy.SchemaExtensions
+	eDeletePermissionPolicyRequest_ResourceArn                   smithy.SchemaExtensions
+	eDeletePermissionPolicyResponse                              smithy.SchemaExtensions
+	eDeleteRateBasedRuleRequest                                  smithy.SchemaExtensions
+	eDeleteRateBasedRuleRequest_RuleId                           smithy.SchemaExtensions
+	eDeleteRateBasedRuleRequest_ChangeToken                      smithy.SchemaExtensions
+	eDeleteRateBasedRuleResponse                                 smithy.SchemaExtensions
+	eDeleteRateBasedRuleResponse_ChangeToken                     smithy.SchemaExtensions
+	eDeleteRegexMatchSetRequest                                  smithy.SchemaExtensions
+	eDeleteRegexMatchSetRequest_RegexMatchSetId                  smithy.SchemaExtensions
+	eDeleteRegexMatchSetRequest_ChangeToken                      smithy.SchemaExtensions
+	eDeleteRegexMatchSetResponse                                 smithy.SchemaExtensions
+	eDeleteRegexMatchSetResponse_ChangeToken                     smithy.SchemaExtensions
+	eDeleteRegexPatternSetRequest                                smithy.SchemaExtensions
+	eDeleteRegexPatternSetRequest_RegexPatternSetId              smithy.SchemaExtensions
+	eDeleteRegexPatternSetRequest_ChangeToken                    smithy.SchemaExtensions
+	eDeleteRegexPatternSetResponse                               smithy.SchemaExtensions
+	eDeleteRegexPatternSetResponse_ChangeToken                   smithy.SchemaExtensions
+	eDeleteRuleGroupRequest                                      smithy.SchemaExtensions
+	eDeleteRuleGroupRequest_RuleGroupId                          smithy.SchemaExtensions
+	eDeleteRuleGroupRequest_ChangeToken                          smithy.SchemaExtensions
+	eDeleteRuleGroupResponse                                     smithy.SchemaExtensions
+	eDeleteRuleGroupResponse_ChangeToken                         smithy.SchemaExtensions
+	eDeleteRuleRequest                                           smithy.SchemaExtensions
+	eDeleteRuleRequest_RuleId                                    smithy.SchemaExtensions
+	eDeleteRuleRequest_ChangeToken                               smithy.SchemaExtensions
+	eDeleteRuleResponse                                          smithy.SchemaExtensions
+	eDeleteRuleResponse_ChangeToken                              smithy.SchemaExtensions
+	eDeleteSizeConstraintSetRequest                              smithy.SchemaExtensions
+	eDeleteSizeConstraintSetRequest_SizeConstraintSetId          smithy.SchemaExtensions
+	eDeleteSizeConstraintSetRequest_ChangeToken                  smithy.SchemaExtensions
+	eDeleteSizeConstraintSetResponse                             smithy.SchemaExtensions
+	eDeleteSizeConstraintSetResponse_ChangeToken                 smithy.SchemaExtensions
+	eDeleteSqlInjectionMatchSetRequest                           smithy.SchemaExtensions
+	eDeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId    smithy.SchemaExtensions
+	eDeleteSqlInjectionMatchSetRequest_ChangeToken               smithy.SchemaExtensions
+	eDeleteSqlInjectionMatchSetResponse                          smithy.SchemaExtensions
+	eDeleteSqlInjectionMatchSetResponse_ChangeToken              smithy.SchemaExtensions
+	eDeleteWebACLRequest                                         smithy.SchemaExtensions
+	eDeleteWebACLRequest_WebACLId                                smithy.SchemaExtensions
+	eDeleteWebACLRequest_ChangeToken                             smithy.SchemaExtensions
+	eDeleteWebACLResponse                                        smithy.SchemaExtensions
+	eDeleteWebACLResponse_ChangeToken                            smithy.SchemaExtensions
+	eDeleteXssMatchSetRequest                                    smithy.SchemaExtensions
+	eDeleteXssMatchSetRequest_XssMatchSetId                      smithy.SchemaExtensions
+	eDeleteXssMatchSetRequest_ChangeToken                        smithy.SchemaExtensions
+	eDeleteXssMatchSetResponse                                   smithy.SchemaExtensions
+	eDeleteXssMatchSetResponse_ChangeToken                       smithy.SchemaExtensions
+	eDisassociateWebACLRequest                                   smithy.SchemaExtensions
+	eDisassociateWebACLRequest_ResourceArn                       smithy.SchemaExtensions
+	eDisassociateWebACLResponse                                  smithy.SchemaExtensions
+	eGetByteMatchSetRequest                                      smithy.SchemaExtensions
+	eGetByteMatchSetRequest_ByteMatchSetId                       smithy.SchemaExtensions
+	eGetByteMatchSetResponse                                     smithy.SchemaExtensions
+	eGetByteMatchSetResponse_ByteMatchSet                        smithy.SchemaExtensions
+	eGetChangeTokenRequest                                       smithy.SchemaExtensions
+	eGetChangeTokenResponse                                      smithy.SchemaExtensions
+	eGetChangeTokenResponse_ChangeToken                          smithy.SchemaExtensions
+	eGetChangeTokenStatusRequest                                 smithy.SchemaExtensions
+	eGetChangeTokenStatusRequest_ChangeToken                     smithy.SchemaExtensions
+	eGetChangeTokenStatusResponse                                smithy.SchemaExtensions
+	eGetChangeTokenStatusResponse_ChangeTokenStatus              smithy.SchemaExtensions
+	eGetGeoMatchSetRequest                                       smithy.SchemaExtensions
+	eGetGeoMatchSetRequest_GeoMatchSetId                         smithy.SchemaExtensions
+	eGetGeoMatchSetResponse                                      smithy.SchemaExtensions
+	eGetGeoMatchSetResponse_GeoMatchSet                          smithy.SchemaExtensions
+	eGetIPSetRequest                                             smithy.SchemaExtensions
+	eGetIPSetRequest_IPSetId                                     smithy.SchemaExtensions
+	eGetIPSetResponse                                            smithy.SchemaExtensions
+	eGetIPSetResponse_IPSet                                      smithy.SchemaExtensions
+	eGetLoggingConfigurationRequest                              smithy.SchemaExtensions
+	eGetLoggingConfigurationRequest_ResourceArn                  smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse                             smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_LoggingConfiguration        smithy.SchemaExtensions
+	eGetPermissionPolicyRequest                                  smithy.SchemaExtensions
+	eGetPermissionPolicyRequest_ResourceArn                      smithy.SchemaExtensions
+	eGetPermissionPolicyResponse                                 smithy.SchemaExtensions
+	eGetPermissionPolicyResponse_Policy                          smithy.SchemaExtensions
+	eGetRateBasedRuleRequest                                     smithy.SchemaExtensions
+	eGetRateBasedRuleRequest_RuleId                              smithy.SchemaExtensions
+	eGetRateBasedRuleManagedKeysRequest                          smithy.SchemaExtensions
+	eGetRateBasedRuleManagedKeysRequest_RuleId                   smithy.SchemaExtensions
+	eGetRateBasedRuleManagedKeysRequest_NextMarker               smithy.SchemaExtensions
+	eGetRateBasedRuleManagedKeysResponse                         smithy.SchemaExtensions
+	eGetRateBasedRuleManagedKeysResponse_ManagedKeys             smithy.SchemaExtensions
+	eGetRateBasedRuleManagedKeysResponse_NextMarker              smithy.SchemaExtensions
+	eGetRateBasedRuleResponse                                    smithy.SchemaExtensions
+	eGetRateBasedRuleResponse_Rule                               smithy.SchemaExtensions
+	eGetRegexMatchSetRequest                                     smithy.SchemaExtensions
+	eGetRegexMatchSetRequest_RegexMatchSetId                     smithy.SchemaExtensions
+	eGetRegexMatchSetResponse                                    smithy.SchemaExtensions
+	eGetRegexMatchSetResponse_RegexMatchSet                      smithy.SchemaExtensions
+	eGetRegexPatternSetRequest                                   smithy.SchemaExtensions
+	eGetRegexPatternSetRequest_RegexPatternSetId                 smithy.SchemaExtensions
+	eGetRegexPatternSetResponse                                  smithy.SchemaExtensions
+	eGetRegexPatternSetResponse_RegexPatternSet                  smithy.SchemaExtensions
+	eGetRuleGroupRequest                                         smithy.SchemaExtensions
+	eGetRuleGroupRequest_RuleGroupId                             smithy.SchemaExtensions
+	eGetRuleGroupResponse                                        smithy.SchemaExtensions
+	eGetRuleGroupResponse_RuleGroup                              smithy.SchemaExtensions
+	eGetRuleRequest                                              smithy.SchemaExtensions
+	eGetRuleRequest_RuleId                                       smithy.SchemaExtensions
+	eGetRuleResponse                                             smithy.SchemaExtensions
+	eGetRuleResponse_Rule                                        smithy.SchemaExtensions
+	eGetSampledRequestsRequest                                   smithy.SchemaExtensions
+	eGetSampledRequestsRequest_WebAclId                          smithy.SchemaExtensions
+	eGetSampledRequestsRequest_RuleId                            smithy.SchemaExtensions
+	eGetSampledRequestsRequest_TimeWindow                        smithy.SchemaExtensions
+	eGetSampledRequestsRequest_MaxItems                          smithy.SchemaExtensions
+	eGetSampledRequestsResponse                                  smithy.SchemaExtensions
+	eGetSampledRequestsResponse_SampledRequests                  smithy.SchemaExtensions
+	eGetSampledRequestsResponse_PopulationSize                   smithy.SchemaExtensions
+	eGetSampledRequestsResponse_TimeWindow                       smithy.SchemaExtensions
+	eGetSizeConstraintSetRequest                                 smithy.SchemaExtensions
+	eGetSizeConstraintSetRequest_SizeConstraintSetId             smithy.SchemaExtensions
+	eGetSizeConstraintSetResponse                                smithy.SchemaExtensions
+	eGetSizeConstraintSetResponse_SizeConstraintSet              smithy.SchemaExtensions
+	eGetSqlInjectionMatchSetRequest                              smithy.SchemaExtensions
+	eGetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId       smithy.SchemaExtensions
+	eGetSqlInjectionMatchSetResponse                             smithy.SchemaExtensions
+	eGetSqlInjectionMatchSetResponse_SqlInjectionMatchSet        smithy.SchemaExtensions
+	eGetWebACLForResourceRequest                                 smithy.SchemaExtensions
+	eGetWebACLForResourceRequest_ResourceArn                     smithy.SchemaExtensions
+	eGetWebACLForResourceResponse                                smithy.SchemaExtensions
+	eGetWebACLForResourceResponse_WebACLSummary                  smithy.SchemaExtensions
+	eGetWebACLRequest                                            smithy.SchemaExtensions
+	eGetWebACLRequest_WebACLId                                   smithy.SchemaExtensions
+	eGetWebACLResponse                                           smithy.SchemaExtensions
+	eGetWebACLResponse_WebACL                                    smithy.SchemaExtensions
+	eGetXssMatchSetRequest                                       smithy.SchemaExtensions
+	eGetXssMatchSetRequest_XssMatchSetId                         smithy.SchemaExtensions
+	eGetXssMatchSetResponse                                      smithy.SchemaExtensions
+	eGetXssMatchSetResponse_XssMatchSet                          smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroupRequest                        smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroupRequest_RuleGroupId            smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroupRequest_NextMarker             smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroupRequest_Limit                  smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroupResponse                       smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroupResponse_NextMarker            smithy.SchemaExtensions
+	eListActivatedRulesInRuleGroupResponse_ActivatedRules        smithy.SchemaExtensions
+	eListByteMatchSetsRequest                                    smithy.SchemaExtensions
+	eListByteMatchSetsRequest_NextMarker                         smithy.SchemaExtensions
+	eListByteMatchSetsRequest_Limit                              smithy.SchemaExtensions
+	eListByteMatchSetsResponse                                   smithy.SchemaExtensions
+	eListByteMatchSetsResponse_NextMarker                        smithy.SchemaExtensions
+	eListByteMatchSetsResponse_ByteMatchSets                     smithy.SchemaExtensions
+	eListGeoMatchSetsRequest                                     smithy.SchemaExtensions
+	eListGeoMatchSetsRequest_NextMarker                          smithy.SchemaExtensions
+	eListGeoMatchSetsRequest_Limit                               smithy.SchemaExtensions
+	eListGeoMatchSetsResponse                                    smithy.SchemaExtensions
+	eListGeoMatchSetsResponse_NextMarker                         smithy.SchemaExtensions
+	eListGeoMatchSetsResponse_GeoMatchSets                       smithy.SchemaExtensions
+	eListIPSetsRequest                                           smithy.SchemaExtensions
+	eListIPSetsRequest_NextMarker                                smithy.SchemaExtensions
+	eListIPSetsRequest_Limit                                     smithy.SchemaExtensions
+	eListIPSetsResponse                                          smithy.SchemaExtensions
+	eListIPSetsResponse_NextMarker                               smithy.SchemaExtensions
+	eListIPSetsResponse_IPSets                                   smithy.SchemaExtensions
+	eListLoggingConfigurationsRequest                            smithy.SchemaExtensions
+	eListLoggingConfigurationsRequest_NextMarker                 smithy.SchemaExtensions
+	eListLoggingConfigurationsRequest_Limit                      smithy.SchemaExtensions
+	eListLoggingConfigurationsResponse                           smithy.SchemaExtensions
+	eListLoggingConfigurationsResponse_LoggingConfigurations     smithy.SchemaExtensions
+	eListLoggingConfigurationsResponse_NextMarker                smithy.SchemaExtensions
+	eListRateBasedRulesRequest                                   smithy.SchemaExtensions
+	eListRateBasedRulesRequest_NextMarker                        smithy.SchemaExtensions
+	eListRateBasedRulesRequest_Limit                             smithy.SchemaExtensions
+	eListRateBasedRulesResponse                                  smithy.SchemaExtensions
+	eListRateBasedRulesResponse_NextMarker                       smithy.SchemaExtensions
+	eListRateBasedRulesResponse_Rules                            smithy.SchemaExtensions
+	eListRegexMatchSetsRequest                                   smithy.SchemaExtensions
+	eListRegexMatchSetsRequest_NextMarker                        smithy.SchemaExtensions
+	eListRegexMatchSetsRequest_Limit                             smithy.SchemaExtensions
+	eListRegexMatchSetsResponse                                  smithy.SchemaExtensions
+	eListRegexMatchSetsResponse_NextMarker                       smithy.SchemaExtensions
+	eListRegexMatchSetsResponse_RegexMatchSets                   smithy.SchemaExtensions
+	eListRegexPatternSetsRequest                                 smithy.SchemaExtensions
+	eListRegexPatternSetsRequest_NextMarker                      smithy.SchemaExtensions
+	eListRegexPatternSetsRequest_Limit                           smithy.SchemaExtensions
+	eListRegexPatternSetsResponse                                smithy.SchemaExtensions
+	eListRegexPatternSetsResponse_NextMarker                     smithy.SchemaExtensions
+	eListRegexPatternSetsResponse_RegexPatternSets               smithy.SchemaExtensions
+	eListResourcesForWebACLRequest                               smithy.SchemaExtensions
+	eListResourcesForWebACLRequest_WebACLId                      smithy.SchemaExtensions
+	eListResourcesForWebACLRequest_ResourceType                  smithy.SchemaExtensions
+	eListResourcesForWebACLResponse                              smithy.SchemaExtensions
+	eListResourcesForWebACLResponse_ResourceArns                 smithy.SchemaExtensions
+	eListRuleGroupsRequest                                       smithy.SchemaExtensions
+	eListRuleGroupsRequest_NextMarker                            smithy.SchemaExtensions
+	eListRuleGroupsRequest_Limit                                 smithy.SchemaExtensions
+	eListRuleGroupsResponse                                      smithy.SchemaExtensions
+	eListRuleGroupsResponse_NextMarker                           smithy.SchemaExtensions
+	eListRuleGroupsResponse_RuleGroups                           smithy.SchemaExtensions
+	eListRulesRequest                                            smithy.SchemaExtensions
+	eListRulesRequest_NextMarker                                 smithy.SchemaExtensions
+	eListRulesRequest_Limit                                      smithy.SchemaExtensions
+	eListRulesResponse                                           smithy.SchemaExtensions
+	eListRulesResponse_NextMarker                                smithy.SchemaExtensions
+	eListRulesResponse_Rules                                     smithy.SchemaExtensions
+	eListSizeConstraintSetsRequest                               smithy.SchemaExtensions
+	eListSizeConstraintSetsRequest_NextMarker                    smithy.SchemaExtensions
+	eListSizeConstraintSetsRequest_Limit                         smithy.SchemaExtensions
+	eListSizeConstraintSetsResponse                              smithy.SchemaExtensions
+	eListSizeConstraintSetsResponse_NextMarker                   smithy.SchemaExtensions
+	eListSizeConstraintSetsResponse_SizeConstraintSets           smithy.SchemaExtensions
+	eListSqlInjectionMatchSetsRequest                            smithy.SchemaExtensions
+	eListSqlInjectionMatchSetsRequest_NextMarker                 smithy.SchemaExtensions
+	eListSqlInjectionMatchSetsRequest_Limit                      smithy.SchemaExtensions
+	eListSqlInjectionMatchSetsResponse                           smithy.SchemaExtensions
+	eListSqlInjectionMatchSetsResponse_NextMarker                smithy.SchemaExtensions
+	eListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets     smithy.SchemaExtensions
+	eListSubscribedRuleGroupsRequest                             smithy.SchemaExtensions
+	eListSubscribedRuleGroupsRequest_NextMarker                  smithy.SchemaExtensions
+	eListSubscribedRuleGroupsRequest_Limit                       smithy.SchemaExtensions
+	eListSubscribedRuleGroupsResponse                            smithy.SchemaExtensions
+	eListSubscribedRuleGroupsResponse_NextMarker                 smithy.SchemaExtensions
+	eListSubscribedRuleGroupsResponse_RuleGroups                 smithy.SchemaExtensions
+	eListTagsForResourceRequest                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_NextMarker                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_Limit                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_NextMarker                      smithy.SchemaExtensions
+	eListTagsForResourceResponse_TagInfoForResource              smithy.SchemaExtensions
+	eListWebACLsRequest                                          smithy.SchemaExtensions
+	eListWebACLsRequest_NextMarker                               smithy.SchemaExtensions
+	eListWebACLsRequest_Limit                                    smithy.SchemaExtensions
+	eListWebACLsResponse                                         smithy.SchemaExtensions
+	eListWebACLsResponse_NextMarker                              smithy.SchemaExtensions
+	eListWebACLsResponse_WebACLs                                 smithy.SchemaExtensions
+	eListXssMatchSetsRequest                                     smithy.SchemaExtensions
+	eListXssMatchSetsRequest_NextMarker                          smithy.SchemaExtensions
+	eListXssMatchSetsRequest_Limit                               smithy.SchemaExtensions
+	eListXssMatchSetsResponse                                    smithy.SchemaExtensions
+	eListXssMatchSetsResponse_NextMarker                         smithy.SchemaExtensions
+	eListXssMatchSetsResponse_XssMatchSets                       smithy.SchemaExtensions
+	ePutLoggingConfigurationRequest                              smithy.SchemaExtensions
+	ePutLoggingConfigurationRequest_LoggingConfiguration         smithy.SchemaExtensions
+	ePutLoggingConfigurationResponse                             smithy.SchemaExtensions
+	ePutLoggingConfigurationResponse_LoggingConfiguration        smithy.SchemaExtensions
+	ePutPermissionPolicyRequest                                  smithy.SchemaExtensions
+	ePutPermissionPolicyRequest_ResourceArn                      smithy.SchemaExtensions
+	ePutPermissionPolicyRequest_Policy                           smithy.SchemaExtensions
+	ePutPermissionPolicyResponse                                 smithy.SchemaExtensions
+	eTagResourceRequest                                          smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                              smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                     smithy.SchemaExtensions
+	eTagResourceResponse                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                        smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                            smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                smithy.SchemaExtensions
+	eUntagResourceResponse                                       smithy.SchemaExtensions
+	eUpdateByteMatchSetRequest                                   smithy.SchemaExtensions
+	eUpdateByteMatchSetRequest_ByteMatchSetId                    smithy.SchemaExtensions
+	eUpdateByteMatchSetRequest_ChangeToken                       smithy.SchemaExtensions
+	eUpdateByteMatchSetRequest_Updates                           smithy.SchemaExtensions
+	eUpdateByteMatchSetResponse                                  smithy.SchemaExtensions
+	eUpdateByteMatchSetResponse_ChangeToken                      smithy.SchemaExtensions
+	eUpdateGeoMatchSetRequest                                    smithy.SchemaExtensions
+	eUpdateGeoMatchSetRequest_GeoMatchSetId                      smithy.SchemaExtensions
+	eUpdateGeoMatchSetRequest_ChangeToken                        smithy.SchemaExtensions
+	eUpdateGeoMatchSetRequest_Updates                            smithy.SchemaExtensions
+	eUpdateGeoMatchSetResponse                                   smithy.SchemaExtensions
+	eUpdateGeoMatchSetResponse_ChangeToken                       smithy.SchemaExtensions
+	eUpdateIPSetRequest                                          smithy.SchemaExtensions
+	eUpdateIPSetRequest_IPSetId                                  smithy.SchemaExtensions
+	eUpdateIPSetRequest_ChangeToken                              smithy.SchemaExtensions
+	eUpdateIPSetRequest_Updates                                  smithy.SchemaExtensions
+	eUpdateIPSetResponse                                         smithy.SchemaExtensions
+	eUpdateIPSetResponse_ChangeToken                             smithy.SchemaExtensions
+	eUpdateRateBasedRuleRequest                                  smithy.SchemaExtensions
+	eUpdateRateBasedRuleRequest_RuleId                           smithy.SchemaExtensions
+	eUpdateRateBasedRuleRequest_ChangeToken                      smithy.SchemaExtensions
+	eUpdateRateBasedRuleRequest_Updates                          smithy.SchemaExtensions
+	eUpdateRateBasedRuleRequest_RateLimit                        smithy.SchemaExtensions
+	eUpdateRateBasedRuleResponse                                 smithy.SchemaExtensions
+	eUpdateRateBasedRuleResponse_ChangeToken                     smithy.SchemaExtensions
+	eUpdateRegexMatchSetRequest                                  smithy.SchemaExtensions
+	eUpdateRegexMatchSetRequest_RegexMatchSetId                  smithy.SchemaExtensions
+	eUpdateRegexMatchSetRequest_Updates                          smithy.SchemaExtensions
+	eUpdateRegexMatchSetRequest_ChangeToken                      smithy.SchemaExtensions
+	eUpdateRegexMatchSetResponse                                 smithy.SchemaExtensions
+	eUpdateRegexMatchSetResponse_ChangeToken                     smithy.SchemaExtensions
+	eUpdateRegexPatternSetRequest                                smithy.SchemaExtensions
+	eUpdateRegexPatternSetRequest_RegexPatternSetId              smithy.SchemaExtensions
+	eUpdateRegexPatternSetRequest_Updates                        smithy.SchemaExtensions
+	eUpdateRegexPatternSetRequest_ChangeToken                    smithy.SchemaExtensions
+	eUpdateRegexPatternSetResponse                               smithy.SchemaExtensions
+	eUpdateRegexPatternSetResponse_ChangeToken                   smithy.SchemaExtensions
+	eUpdateRuleGroupRequest                                      smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_RuleGroupId                          smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_Updates                              smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_ChangeToken                          smithy.SchemaExtensions
+	eUpdateRuleGroupResponse                                     smithy.SchemaExtensions
+	eUpdateRuleGroupResponse_ChangeToken                         smithy.SchemaExtensions
+	eUpdateRuleRequest                                           smithy.SchemaExtensions
+	eUpdateRuleRequest_RuleId                                    smithy.SchemaExtensions
+	eUpdateRuleRequest_ChangeToken                               smithy.SchemaExtensions
+	eUpdateRuleRequest_Updates                                   smithy.SchemaExtensions
+	eUpdateRuleResponse                                          smithy.SchemaExtensions
+	eUpdateRuleResponse_ChangeToken                              smithy.SchemaExtensions
+	eUpdateSizeConstraintSetRequest                              smithy.SchemaExtensions
+	eUpdateSizeConstraintSetRequest_SizeConstraintSetId          smithy.SchemaExtensions
+	eUpdateSizeConstraintSetRequest_ChangeToken                  smithy.SchemaExtensions
+	eUpdateSizeConstraintSetRequest_Updates                      smithy.SchemaExtensions
+	eUpdateSizeConstraintSetResponse                             smithy.SchemaExtensions
+	eUpdateSizeConstraintSetResponse_ChangeToken                 smithy.SchemaExtensions
+	eUpdateSqlInjectionMatchSetRequest                           smithy.SchemaExtensions
+	eUpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId    smithy.SchemaExtensions
+	eUpdateSqlInjectionMatchSetRequest_ChangeToken               smithy.SchemaExtensions
+	eUpdateSqlInjectionMatchSetRequest_Updates                   smithy.SchemaExtensions
+	eUpdateSqlInjectionMatchSetResponse                          smithy.SchemaExtensions
+	eUpdateSqlInjectionMatchSetResponse_ChangeToken              smithy.SchemaExtensions
+	eUpdateWebACLRequest                                         smithy.SchemaExtensions
+	eUpdateWebACLRequest_WebACLId                                smithy.SchemaExtensions
+	eUpdateWebACLRequest_ChangeToken                             smithy.SchemaExtensions
+	eUpdateWebACLRequest_Updates                                 smithy.SchemaExtensions
+	eUpdateWebACLRequest_DefaultAction                           smithy.SchemaExtensions
+	eUpdateWebACLResponse                                        smithy.SchemaExtensions
+	eUpdateWebACLResponse_ChangeToken                            smithy.SchemaExtensions
+	eUpdateXssMatchSetRequest                                    smithy.SchemaExtensions
+	eUpdateXssMatchSetRequest_XssMatchSetId                      smithy.SchemaExtensions
+	eUpdateXssMatchSetRequest_ChangeToken                        smithy.SchemaExtensions
+	eUpdateXssMatchSetRequest_Updates                            smithy.SchemaExtensions
+	eUpdateXssMatchSetResponse                                   smithy.SchemaExtensions
+	eUpdateXssMatchSetResponse_ChangeToken                       smithy.SchemaExtensions
+)
+
+var (
+	iAssociateWebACL                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "AssociateWebACL"}
+	iCreateByteMatchSet                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateByteMatchSet"}
+	iCreateGeoMatchSet                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateGeoMatchSet"}
+	iCreateIPSet                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateIPSet"}
+	iCreateRateBasedRule                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRateBasedRule"}
+	iCreateRegexMatchSet                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRegexMatchSet"}
+	iCreateRegexPatternSet                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRegexPatternSet"}
+	iCreateRule                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRule"}
+	iCreateRuleGroup                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRuleGroup"}
+	iCreateSizeConstraintSet               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateSizeConstraintSet"}
+	iCreateSqlInjectionMatchSet            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateSqlInjectionMatchSet"}
+	iCreateWebACL                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateWebACL"}
+	iCreateWebACLMigrationStack            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateWebACLMigrationStack"}
+	iCreateXssMatchSet                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateXssMatchSet"}
+	iDeleteByteMatchSet                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteByteMatchSet"}
+	iDeleteGeoMatchSet                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteGeoMatchSet"}
+	iDeleteIPSet                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteIPSet"}
+	iDeleteLoggingConfiguration            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteLoggingConfiguration"}
+	iDeletePermissionPolicy                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeletePermissionPolicy"}
+	iDeleteRateBasedRule                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRateBasedRule"}
+	iDeleteRegexMatchSet                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRegexMatchSet"}
+	iDeleteRegexPatternSet                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRegexPatternSet"}
+	iDeleteRule                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRule"}
+	iDeleteRuleGroup                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRuleGroup"}
+	iDeleteSizeConstraintSet               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteSizeConstraintSet"}
+	iDeleteSqlInjectionMatchSet            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteSqlInjectionMatchSet"}
+	iDeleteWebACL                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteWebACL"}
+	iDeleteXssMatchSet                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteXssMatchSet"}
+	iDisassociateWebACL                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DisassociateWebACL"}
+	iGetByteMatchSet                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetByteMatchSet"}
+	iGetChangeToken                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetChangeToken"}
+	iGetChangeTokenStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetChangeTokenStatus"}
+	iGetGeoMatchSet                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetGeoMatchSet"}
+	iGetIPSet                              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetIPSet"}
+	iGetLoggingConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetLoggingConfiguration"}
+	iGetPermissionPolicy                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetPermissionPolicy"}
+	iGetRateBasedRule                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRateBasedRule"}
+	iGetRateBasedRuleManagedKeys           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRateBasedRuleManagedKeys"}
+	iGetRegexMatchSet                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRegexMatchSet"}
+	iGetRegexPatternSet                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRegexPatternSet"}
+	iGetRule                               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRule"}
+	iGetRuleGroup                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRuleGroup"}
+	iGetSampledRequests                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSampledRequests"}
+	iGetSizeConstraintSet                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSizeConstraintSet"}
+	iGetSqlInjectionMatchSet               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSqlInjectionMatchSet"}
+	iGetWebACL                             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetWebACL"}
+	iGetWebACLForResource                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetWebACLForResource"}
+	iGetXssMatchSet                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetXssMatchSet"}
+	iListActivatedRulesInRuleGroup         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListActivatedRulesInRuleGroup"}
+	iListByteMatchSets                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListByteMatchSets"}
+	iListGeoMatchSets                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListGeoMatchSets"}
+	iListIPSets                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListIPSets"}
+	iListLoggingConfigurations             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListLoggingConfigurations"}
+	iListRateBasedRules                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRateBasedRules"}
+	iListRegexMatchSets                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRegexMatchSets"}
+	iListRegexPatternSets                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRegexPatternSets"}
+	iListResourcesForWebACL                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListResourcesForWebACL"}
+	iListRuleGroups                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRuleGroups"}
+	iListRules                             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRules"}
+	iListSizeConstraintSets                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSizeConstraintSets"}
+	iListSqlInjectionMatchSets             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSqlInjectionMatchSets"}
+	iListSubscribedRuleGroups              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSubscribedRuleGroups"}
+	iListTagsForResource                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListTagsForResource"}
+	iListWebACLs                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListWebACLs"}
+	iListXssMatchSets                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListXssMatchSets"}
+	iPutLoggingConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PutLoggingConfiguration"}
+	iPutPermissionPolicy                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PutPermissionPolicy"}
+	iTagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagResource"}
+	iUntagResource                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UntagResource"}
+	iUpdateByteMatchSet                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateByteMatchSet"}
+	iUpdateGeoMatchSet                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateGeoMatchSet"}
+	iUpdateIPSet                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateIPSet"}
+	iUpdateRateBasedRule                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRateBasedRule"}
+	iUpdateRegexMatchSet                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRegexMatchSet"}
+	iUpdateRegexPatternSet                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRegexPatternSet"}
+	iUpdateRule                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRule"}
+	iUpdateRuleGroup                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRuleGroup"}
+	iUpdateSizeConstraintSet               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateSizeConstraintSet"}
+	iUpdateSqlInjectionMatchSet            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateSqlInjectionMatchSet"}
+	iUpdateWebACL                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateWebACL"}
+	iUpdateXssMatchSet                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateXssMatchSet"}
+	i_AWSWAF_Regional_20161128             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "AWSWAF_Regional_20161128"}
+	i_Action                               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Action"}
+	iActivatedRule                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ActivatedRule"}
+	i_ActivatedRules                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ActivatedRules"}
+	iByteMatchSet                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchSet"}
+	i_ByteMatchSetSummaries                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchSetSummaries"}
+	iByteMatchSetSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchSetSummary"}
+	iByteMatchSetUpdate                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchSetUpdate"}
+	i_ByteMatchSetUpdates                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchSetUpdates"}
+	i_ByteMatchTargetString                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchTargetString"}
+	iByteMatchTuple                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchTuple"}
+	i_ByteMatchTuples                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ByteMatchTuples"}
+	iChangeAction                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ChangeAction"}
+	i_ChangeToken                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ChangeToken"}
+	iChangeTokenStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ChangeTokenStatus"}
+	iComparisonOperator                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ComparisonOperator"}
+	i_Country                              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Country"}
+	i_errorMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "errorMessage"}
+	i_ErrorReason                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ErrorReason"}
+	iExcludedRule                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ExcludedRule"}
+	i_ExcludedRules                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ExcludedRules"}
+	iFieldToMatch                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "FieldToMatch"}
+	iGeoMatchConstraint                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchConstraint"}
+	i_GeoMatchConstraints                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchConstraints"}
+	iGeoMatchConstraintType                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchConstraintType"}
+	iGeoMatchConstraintValue               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchConstraintValue"}
+	iGeoMatchSet                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchSet"}
+	i_GeoMatchSetSummaries                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchSetSummaries"}
+	iGeoMatchSetSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchSetSummary"}
+	iGeoMatchSetUpdate                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchSetUpdate"}
+	i_GeoMatchSetUpdates                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GeoMatchSetUpdates"}
+	i_GetSampledRequestsMaxItems           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSampledRequestsMaxItems"}
+	i_HeaderName                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "HeaderName"}
+	i_HeaderValue                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "HeaderValue"}
+	iHTTPHeader                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "HTTPHeader"}
+	i_HTTPHeaders                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "HTTPHeaders"}
+	i_HTTPMethod                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "HTTPMethod"}
+	iHTTPRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "HTTPRequest"}
+	i_HTTPVersion                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "HTTPVersion"}
+	i_IgnoreUnsupportedType                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IgnoreUnsupportedType"}
+	iIPSet                                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSet"}
+	iIPSetDescriptor                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetDescriptor"}
+	i_IPSetDescriptors                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetDescriptors"}
+	iIPSetDescriptorType                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetDescriptorType"}
+	i_IPSetDescriptorValue                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetDescriptorValue"}
+	i_IPSetSummaries                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetSummaries"}
+	iIPSetSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetSummary"}
+	iIPSetUpdate                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetUpdate"}
+	i_IPSetUpdates                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPSetUpdates"}
+	i_IPString                             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "IPString"}
+	i_LogDestinationConfigs                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "LogDestinationConfigs"}
+	iLoggingConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "LoggingConfiguration"}
+	i_LoggingConfigurations                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "LoggingConfigurations"}
+	i_ManagedKey                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ManagedKey"}
+	i_ManagedKeys                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ManagedKeys"}
+	i_MatchFieldData                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "MatchFieldData"}
+	iMatchFieldType                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "MatchFieldType"}
+	i_MetricName                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "MetricName"}
+	iMigrationErrorType                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "MigrationErrorType"}
+	i_Negated                              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Negated"}
+	i_NextMarker                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "NextMarker"}
+	i_PaginationLimit                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PaginationLimit"}
+	iParameterExceptionField               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ParameterExceptionField"}
+	i_ParameterExceptionParameter          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ParameterExceptionParameter"}
+	iParameterExceptionReason              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ParameterExceptionReason"}
+	i_PolicyString                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PolicyString"}
+	i_PopulationSize                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PopulationSize"}
+	iPositionalConstraint                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PositionalConstraint"}
+	iPredicate                             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Predicate"}
+	i_Predicates                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Predicates"}
+	iPredicateType                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PredicateType"}
+	iRateBasedRule                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RateBasedRule"}
+	iRateKey                               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RateKey"}
+	i_RateLimit                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RateLimit"}
+	i_RedactedFields                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RedactedFields"}
+	iRegexMatchSet                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexMatchSet"}
+	i_RegexMatchSetSummaries               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexMatchSetSummaries"}
+	iRegexMatchSetSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexMatchSetSummary"}
+	iRegexMatchSetUpdate                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexMatchSetUpdate"}
+	i_RegexMatchSetUpdates                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexMatchSetUpdates"}
+	iRegexMatchTuple                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexMatchTuple"}
+	i_RegexMatchTuples                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexMatchTuples"}
+	iRegexPatternSet                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexPatternSet"}
+	i_RegexPatternSetSummaries             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexPatternSetSummaries"}
+	iRegexPatternSetSummary                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexPatternSetSummary"}
+	iRegexPatternSetUpdate                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexPatternSetUpdate"}
+	i_RegexPatternSetUpdates               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexPatternSetUpdates"}
+	i_RegexPatternString                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexPatternString"}
+	i_RegexPatternStrings                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RegexPatternStrings"}
+	i_ResourceArn                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ResourceArn"}
+	i_ResourceArns                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ResourceArns"}
+	i_ResourceId                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ResourceId"}
+	i_ResourceName                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ResourceName"}
+	iResourceType                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ResourceType"}
+	iRule                                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Rule"}
+	iRuleGroup                             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleGroup"}
+	i_RuleGroupSummaries                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleGroupSummaries"}
+	iRuleGroupSummary                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleGroupSummary"}
+	iRuleGroupUpdate                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleGroupUpdate"}
+	i_RuleGroupUpdates                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleGroupUpdates"}
+	i_RulePriority                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RulePriority"}
+	i_RuleSummaries                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleSummaries"}
+	iRuleSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleSummary"}
+	iRuleUpdate                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleUpdate"}
+	i_RuleUpdates                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "RuleUpdates"}
+	i_S3BucketName                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "S3BucketName"}
+	i_S3ObjectUrl                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "S3ObjectUrl"}
+	iSampledHTTPRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SampledHTTPRequest"}
+	i_SampledHTTPRequests                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SampledHTTPRequests"}
+	i_SampleWeight                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SampleWeight"}
+	i_Size                                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Size"}
+	iSizeConstraint                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SizeConstraint"}
+	i_SizeConstraints                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SizeConstraints"}
+	iSizeConstraintSet                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SizeConstraintSet"}
+	i_SizeConstraintSetSummaries           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SizeConstraintSetSummaries"}
+	iSizeConstraintSetSummary              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SizeConstraintSetSummary"}
+	iSizeConstraintSetUpdate               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SizeConstraintSetUpdate"}
+	i_SizeConstraintSetUpdates             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SizeConstraintSetUpdates"}
+	iSqlInjectionMatchSet                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SqlInjectionMatchSet"}
+	i_SqlInjectionMatchSetSummaries        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SqlInjectionMatchSetSummaries"}
+	iSqlInjectionMatchSetSummary           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SqlInjectionMatchSetSummary"}
+	iSqlInjectionMatchSetUpdate            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SqlInjectionMatchSetUpdate"}
+	i_SqlInjectionMatchSetUpdates          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SqlInjectionMatchSetUpdates"}
+	iSqlInjectionMatchTuple                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SqlInjectionMatchTuple"}
+	i_SqlInjectionMatchTuples              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SqlInjectionMatchTuples"}
+	i_SubscribedRuleGroupSummaries         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SubscribedRuleGroupSummaries"}
+	iSubscribedRuleGroupSummary            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "SubscribedRuleGroupSummary"}
+	iTag                                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Tag"}
+	iTagInfoForResource                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagInfoForResource"}
+	i_TagKey                               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagKey"}
+	i_TagKeyList                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagKeyList"}
+	i_TagList                              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagList"}
+	i_TagValue                             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagValue"}
+	iTextTransformation                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TextTransformation"}
+	i_Timestamp                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "Timestamp"}
+	iTimeWindow                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TimeWindow"}
+	i_URIString                            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "URIString"}
+	iWafAction                             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WafAction"}
+	iWafActionType                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WafActionType"}
+	iWAFBadRequestException                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFBadRequestException"}
+	iWAFDisallowedNameException            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFDisallowedNameException"}
+	iWAFEntityMigrationException           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFEntityMigrationException"}
+	iWAFInternalErrorException             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFInternalErrorException"}
+	iWAFInvalidAccountException            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFInvalidAccountException"}
+	iWAFInvalidOperationException          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFInvalidOperationException"}
+	iWAFInvalidParameterException          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFInvalidParameterException"}
+	iWAFInvalidPermissionPolicyException   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFInvalidPermissionPolicyException"}
+	iWAFInvalidRegexPatternException       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFInvalidRegexPatternException"}
+	iWAFLimitsExceededException            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFLimitsExceededException"}
+	iWAFNonEmptyEntityException            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFNonEmptyEntityException"}
+	iWAFNonexistentContainerException      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFNonexistentContainerException"}
+	iWAFNonexistentItemException           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFNonexistentItemException"}
+	iWafOverrideAction                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WafOverrideAction"}
+	iWafOverrideActionType                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WafOverrideActionType"}
+	iWAFReferencedItemException            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFReferencedItemException"}
+	iWafRuleType                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WafRuleType"}
+	iWAFServiceLinkedRoleErrorException    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFServiceLinkedRoleErrorException"}
+	iWAFStaleDataException                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFStaleDataException"}
+	iWAFSubscriptionNotFoundException      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFSubscriptionNotFoundException"}
+	iWAFTagOperationException              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFTagOperationException"}
+	iWAFTagOperationInternalErrorException = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFTagOperationInternalErrorException"}
+	iWAFUnavailableEntityException         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WAFUnavailableEntityException"}
+	iWebACL                                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WebACL"}
+	i_WebACLSummaries                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WebACLSummaries"}
+	iWebACLSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WebACLSummary"}
+	iWebACLUpdate                          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WebACLUpdate"}
+	i_WebACLUpdates                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "WebACLUpdates"}
+	iXssMatchSet                           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "XssMatchSet"}
+	i_XssMatchSetSummaries                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "XssMatchSetSummaries"}
+	iXssMatchSetSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "XssMatchSetSummary"}
+	iXssMatchSetUpdate                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "XssMatchSetUpdate"}
+	i_XssMatchSetUpdates                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "XssMatchSetUpdates"}
+	iXssMatchTuple                         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "XssMatchTuple"}
+	i_XssMatchTuples                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "XssMatchTuples"}
+	iAssociateWebACLRequest                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "AssociateWebACLRequest"}
+	iAssociateWebACLResponse               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "AssociateWebACLResponse"}
+	iCreateByteMatchSetRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateByteMatchSetRequest"}
+	iCreateByteMatchSetResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateByteMatchSetResponse"}
+	iCreateGeoMatchSetRequest              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateGeoMatchSetRequest"}
+	iCreateGeoMatchSetResponse             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateGeoMatchSetResponse"}
+	iCreateIPSetRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateIPSetRequest"}
+	iCreateIPSetResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateIPSetResponse"}
+	iCreateRateBasedRuleRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRateBasedRuleRequest"}
+	iCreateRateBasedRuleResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRateBasedRuleResponse"}
+	iCreateRegexMatchSetRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRegexMatchSetRequest"}
+	iCreateRegexMatchSetResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRegexMatchSetResponse"}
+	iCreateRegexPatternSetRequest          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRegexPatternSetRequest"}
+	iCreateRegexPatternSetResponse         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRegexPatternSetResponse"}
+	iCreateRuleGroupRequest                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRuleGroupRequest"}
+	iCreateRuleGroupResponse               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRuleGroupResponse"}
+	iCreateRuleRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRuleRequest"}
+	iCreateRuleResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateRuleResponse"}
+	iCreateSizeConstraintSetRequest        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateSizeConstraintSetRequest"}
+	iCreateSizeConstraintSetResponse       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateSizeConstraintSetResponse"}
+	iCreateSqlInjectionMatchSetRequest     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateSqlInjectionMatchSetRequest"}
+	iCreateSqlInjectionMatchSetResponse    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateSqlInjectionMatchSetResponse"}
+	iCreateWebACLRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateWebACLRequest"}
+	iCreateWebACLMigrationStackRequest     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateWebACLMigrationStackRequest"}
+	iCreateWebACLMigrationStackResponse    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateWebACLMigrationStackResponse"}
+	iCreateWebACLResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateWebACLResponse"}
+	iCreateXssMatchSetRequest              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateXssMatchSetRequest"}
+	iCreateXssMatchSetResponse             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "CreateXssMatchSetResponse"}
+	iDeleteByteMatchSetRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteByteMatchSetRequest"}
+	iDeleteByteMatchSetResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteByteMatchSetResponse"}
+	iDeleteGeoMatchSetRequest              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteGeoMatchSetRequest"}
+	iDeleteGeoMatchSetResponse             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteGeoMatchSetResponse"}
+	iDeleteIPSetRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteIPSetRequest"}
+	iDeleteIPSetResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteIPSetResponse"}
+	iDeleteLoggingConfigurationRequest     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteLoggingConfigurationRequest"}
+	iDeleteLoggingConfigurationResponse    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteLoggingConfigurationResponse"}
+	iDeletePermissionPolicyRequest         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeletePermissionPolicyRequest"}
+	iDeletePermissionPolicyResponse        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeletePermissionPolicyResponse"}
+	iDeleteRateBasedRuleRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRateBasedRuleRequest"}
+	iDeleteRateBasedRuleResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRateBasedRuleResponse"}
+	iDeleteRegexMatchSetRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRegexMatchSetRequest"}
+	iDeleteRegexMatchSetResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRegexMatchSetResponse"}
+	iDeleteRegexPatternSetRequest          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRegexPatternSetRequest"}
+	iDeleteRegexPatternSetResponse         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRegexPatternSetResponse"}
+	iDeleteRuleGroupRequest                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRuleGroupRequest"}
+	iDeleteRuleGroupResponse               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRuleGroupResponse"}
+	iDeleteRuleRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRuleRequest"}
+	iDeleteRuleResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteRuleResponse"}
+	iDeleteSizeConstraintSetRequest        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteSizeConstraintSetRequest"}
+	iDeleteSizeConstraintSetResponse       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteSizeConstraintSetResponse"}
+	iDeleteSqlInjectionMatchSetRequest     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteSqlInjectionMatchSetRequest"}
+	iDeleteSqlInjectionMatchSetResponse    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteSqlInjectionMatchSetResponse"}
+	iDeleteWebACLRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteWebACLRequest"}
+	iDeleteWebACLResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteWebACLResponse"}
+	iDeleteXssMatchSetRequest              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteXssMatchSetRequest"}
+	iDeleteXssMatchSetResponse             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DeleteXssMatchSetResponse"}
+	iDisassociateWebACLRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DisassociateWebACLRequest"}
+	iDisassociateWebACLResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "DisassociateWebACLResponse"}
+	iGetByteMatchSetRequest                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetByteMatchSetRequest"}
+	iGetByteMatchSetResponse               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetByteMatchSetResponse"}
+	iGetChangeTokenRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetChangeTokenRequest"}
+	iGetChangeTokenResponse                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetChangeTokenResponse"}
+	iGetChangeTokenStatusRequest           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetChangeTokenStatusRequest"}
+	iGetChangeTokenStatusResponse          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetChangeTokenStatusResponse"}
+	iGetGeoMatchSetRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetGeoMatchSetRequest"}
+	iGetGeoMatchSetResponse                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetGeoMatchSetResponse"}
+	iGetIPSetRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetIPSetRequest"}
+	iGetIPSetResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetIPSetResponse"}
+	iGetLoggingConfigurationRequest        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetLoggingConfigurationRequest"}
+	iGetLoggingConfigurationResponse       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetLoggingConfigurationResponse"}
+	iGetPermissionPolicyRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetPermissionPolicyRequest"}
+	iGetPermissionPolicyResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetPermissionPolicyResponse"}
+	iGetRateBasedRuleRequest               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRateBasedRuleRequest"}
+	iGetRateBasedRuleManagedKeysRequest    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRateBasedRuleManagedKeysRequest"}
+	iGetRateBasedRuleManagedKeysResponse   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRateBasedRuleManagedKeysResponse"}
+	iGetRateBasedRuleResponse              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRateBasedRuleResponse"}
+	iGetRegexMatchSetRequest               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRegexMatchSetRequest"}
+	iGetRegexMatchSetResponse              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRegexMatchSetResponse"}
+	iGetRegexPatternSetRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRegexPatternSetRequest"}
+	iGetRegexPatternSetResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRegexPatternSetResponse"}
+	iGetRuleGroupRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRuleGroupRequest"}
+	iGetRuleGroupResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRuleGroupResponse"}
+	iGetRuleRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRuleRequest"}
+	iGetRuleResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetRuleResponse"}
+	iGetSampledRequestsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSampledRequestsRequest"}
+	iGetSampledRequestsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSampledRequestsResponse"}
+	iGetSizeConstraintSetRequest           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSizeConstraintSetRequest"}
+	iGetSizeConstraintSetResponse          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSizeConstraintSetResponse"}
+	iGetSqlInjectionMatchSetRequest        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSqlInjectionMatchSetRequest"}
+	iGetSqlInjectionMatchSetResponse       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetSqlInjectionMatchSetResponse"}
+	iGetWebACLForResourceRequest           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetWebACLForResourceRequest"}
+	iGetWebACLForResourceResponse          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetWebACLForResourceResponse"}
+	iGetWebACLRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetWebACLRequest"}
+	iGetWebACLResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetWebACLResponse"}
+	iGetXssMatchSetRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetXssMatchSetRequest"}
+	iGetXssMatchSetResponse                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "GetXssMatchSetResponse"}
+	iListActivatedRulesInRuleGroupRequest  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListActivatedRulesInRuleGroupRequest"}
+	iListActivatedRulesInRuleGroupResponse = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListActivatedRulesInRuleGroupResponse"}
+	iListByteMatchSetsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListByteMatchSetsRequest"}
+	iListByteMatchSetsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListByteMatchSetsResponse"}
+	iListGeoMatchSetsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListGeoMatchSetsRequest"}
+	iListGeoMatchSetsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListGeoMatchSetsResponse"}
+	iListIPSetsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListIPSetsRequest"}
+	iListIPSetsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListIPSetsResponse"}
+	iListLoggingConfigurationsRequest      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListLoggingConfigurationsRequest"}
+	iListLoggingConfigurationsResponse     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListLoggingConfigurationsResponse"}
+	iListRateBasedRulesRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRateBasedRulesRequest"}
+	iListRateBasedRulesResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRateBasedRulesResponse"}
+	iListRegexMatchSetsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRegexMatchSetsRequest"}
+	iListRegexMatchSetsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRegexMatchSetsResponse"}
+	iListRegexPatternSetsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRegexPatternSetsRequest"}
+	iListRegexPatternSetsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRegexPatternSetsResponse"}
+	iListResourcesForWebACLRequest         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListResourcesForWebACLRequest"}
+	iListResourcesForWebACLResponse        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListResourcesForWebACLResponse"}
+	iListRuleGroupsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRuleGroupsRequest"}
+	iListRuleGroupsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRuleGroupsResponse"}
+	iListRulesRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRulesRequest"}
+	iListRulesResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListRulesResponse"}
+	iListSizeConstraintSetsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSizeConstraintSetsRequest"}
+	iListSizeConstraintSetsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSizeConstraintSetsResponse"}
+	iListSqlInjectionMatchSetsRequest      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSqlInjectionMatchSetsRequest"}
+	iListSqlInjectionMatchSetsResponse     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSqlInjectionMatchSetsResponse"}
+	iListSubscribedRuleGroupsRequest       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSubscribedRuleGroupsRequest"}
+	iListSubscribedRuleGroupsResponse      = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListSubscribedRuleGroupsResponse"}
+	iListTagsForResourceRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListTagsForResourceResponse"}
+	iListWebACLsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListWebACLsRequest"}
+	iListWebACLsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListWebACLsResponse"}
+	iListXssMatchSetsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListXssMatchSetsRequest"}
+	iListXssMatchSetsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "ListXssMatchSetsResponse"}
+	iPutLoggingConfigurationRequest        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PutLoggingConfigurationRequest"}
+	iPutLoggingConfigurationResponse       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PutLoggingConfigurationResponse"}
+	iPutPermissionPolicyRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PutPermissionPolicyRequest"}
+	iPutPermissionPolicyResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "PutPermissionPolicyResponse"}
+	iTagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagResourceRequest"}
+	iTagResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "TagResourceResponse"}
+	iUntagResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UntagResourceResponse"}
+	iUpdateByteMatchSetRequest             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateByteMatchSetRequest"}
+	iUpdateByteMatchSetResponse            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateByteMatchSetResponse"}
+	iUpdateGeoMatchSetRequest              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateGeoMatchSetRequest"}
+	iUpdateGeoMatchSetResponse             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateGeoMatchSetResponse"}
+	iUpdateIPSetRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateIPSetRequest"}
+	iUpdateIPSetResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateIPSetResponse"}
+	iUpdateRateBasedRuleRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRateBasedRuleRequest"}
+	iUpdateRateBasedRuleResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRateBasedRuleResponse"}
+	iUpdateRegexMatchSetRequest            = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRegexMatchSetRequest"}
+	iUpdateRegexMatchSetResponse           = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRegexMatchSetResponse"}
+	iUpdateRegexPatternSetRequest          = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRegexPatternSetRequest"}
+	iUpdateRegexPatternSetResponse         = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRegexPatternSetResponse"}
+	iUpdateRuleGroupRequest                = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRuleGroupRequest"}
+	iUpdateRuleGroupResponse               = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRuleGroupResponse"}
+	iUpdateRuleRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRuleRequest"}
+	iUpdateRuleResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateRuleResponse"}
+	iUpdateSizeConstraintSetRequest        = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateSizeConstraintSetRequest"}
+	iUpdateSizeConstraintSetResponse       = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateSizeConstraintSetResponse"}
+	iUpdateSqlInjectionMatchSetRequest     = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateSqlInjectionMatchSetRequest"}
+	iUpdateSqlInjectionMatchSetResponse    = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateSqlInjectionMatchSetResponse"}
+	iUpdateWebACLRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateWebACLRequest"}
+	iUpdateWebACLResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateWebACLResponse"}
+	iUpdateXssMatchSetRequest              = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateXssMatchSetRequest"}
+	iUpdateXssMatchSetResponse             = smithy.ShapeName{Namespace: "com.amazonaws.wafregional", Name: "UpdateXssMatchSetResponse"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://waf.amazonaws.com/doc/2015-08-24/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var mActivatedRule = smithy.SchemaMembers{List: []*smithy.Schema{&sActivatedRule_Priority, &sActivatedRule_RuleId, &sActivatedRule_Action, &sActivatedRule_OverrideAction, &sActivatedRule_Type, &sActivatedRule_ExcludedRules}}
+var m_ActivatedRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActivatedRules_member}}
+var mByteMatchSet = smithy.SchemaMembers{List: []*smithy.Schema{&sByteMatchSet_ByteMatchSetId, &sByteMatchSet_Name, &sByteMatchSet_ByteMatchTuples}}
+var m_ByteMatchSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ByteMatchSetSummaries_member}}
+var mByteMatchSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sByteMatchSetSummary_ByteMatchSetId, &sByteMatchSetSummary_Name}}
+var mByteMatchSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sByteMatchSetUpdate_Action, &sByteMatchSetUpdate_ByteMatchTuple}}
+var m_ByteMatchSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_ByteMatchSetUpdates_member}}
+var mByteMatchTuple = smithy.SchemaMembers{List: []*smithy.Schema{&sByteMatchTuple_FieldToMatch, &sByteMatchTuple_TargetString, &sByteMatchTuple_TextTransformation, &sByteMatchTuple_PositionalConstraint}}
+var m_ByteMatchTuples = smithy.SchemaMembers{List: []*smithy.Schema{&s_ByteMatchTuples_member}}
+var mChangeAction = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeAction_INSERT, &sChangeAction_DELETE}}
+var mChangeTokenStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeTokenStatus_PROVISIONED, &sChangeTokenStatus_PENDING, &sChangeTokenStatus_INSYNC}}
+var mComparisonOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sComparisonOperator_EQ, &sComparisonOperator_NE, &sComparisonOperator_LE, &sComparisonOperator_LT, &sComparisonOperator_GE, &sComparisonOperator_GT}}
+var mExcludedRule = smithy.SchemaMembers{List: []*smithy.Schema{&sExcludedRule_RuleId}}
+var m_ExcludedRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExcludedRules_member}}
+var mFieldToMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldToMatch_Type, &sFieldToMatch_Data}}
+var mGeoMatchConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sGeoMatchConstraint_Type, &sGeoMatchConstraint_Value}}
+var m_GeoMatchConstraints = smithy.SchemaMembers{List: []*smithy.Schema{&s_GeoMatchConstraints_member}}
+var mGeoMatchConstraintType = smithy.SchemaMembers{List: []*smithy.Schema{&sGeoMatchConstraintType_Country}}
+var mGeoMatchConstraintValue = smithy.SchemaMembers{List: []*smithy.Schema{&sGeoMatchConstraintValue_AF, &sGeoMatchConstraintValue_AX, &sGeoMatchConstraintValue_AL, &sGeoMatchConstraintValue_DZ, &sGeoMatchConstraintValue_AS, &sGeoMatchConstraintValue_AD, &sGeoMatchConstraintValue_AO, &sGeoMatchConstraintValue_AI, &sGeoMatchConstraintValue_AQ, &sGeoMatchConstraintValue_AG, &sGeoMatchConstraintValue_AR, &sGeoMatchConstraintValue_AM, &sGeoMatchConstraintValue_AW, &sGeoMatchConstraintValue_AU, &sGeoMatchConstraintValue_AT, &sGeoMatchConstraintValue_AZ, &sGeoMatchConstraintValue_BS, &sGeoMatchConstraintValue_BH, &sGeoMatchConstraintValue_BD, &sGeoMatchConstraintValue_BB, &sGeoMatchConstraintValue_BY, &sGeoMatchConstraintValue_BE, &sGeoMatchConstraintValue_BZ, &sGeoMatchConstraintValue_BJ, &sGeoMatchConstraintValue_BM, &sGeoMatchConstraintValue_BT, &sGeoMatchConstraintValue_BO, &sGeoMatchConstraintValue_BQ, &sGeoMatchConstraintValue_BA, &sGeoMatchConstraintValue_BW, &sGeoMatchConstraintValue_BV, &sGeoMatchConstraintValue_BR, &sGeoMatchConstraintValue_IO, &sGeoMatchConstraintValue_BN, &sGeoMatchConstraintValue_BG, &sGeoMatchConstraintValue_BF, &sGeoMatchConstraintValue_BI, &sGeoMatchConstraintValue_KH, &sGeoMatchConstraintValue_CM, &sGeoMatchConstraintValue_CA, &sGeoMatchConstraintValue_CV, &sGeoMatchConstraintValue_KY, &sGeoMatchConstraintValue_CF, &sGeoMatchConstraintValue_TD, &sGeoMatchConstraintValue_CL, &sGeoMatchConstraintValue_CN, &sGeoMatchConstraintValue_CX, &sGeoMatchConstraintValue_CC, &sGeoMatchConstraintValue_CO, &sGeoMatchConstraintValue_KM, &sGeoMatchConstraintValue_CG, &sGeoMatchConstraintValue_CD, &sGeoMatchConstraintValue_CK, &sGeoMatchConstraintValue_CR, &sGeoMatchConstraintValue_CI, &sGeoMatchConstraintValue_HR, &sGeoMatchConstraintValue_CU, &sGeoMatchConstraintValue_CW, &sGeoMatchConstraintValue_CY, &sGeoMatchConstraintValue_CZ, &sGeoMatchConstraintValue_DK, &sGeoMatchConstraintValue_DJ, &sGeoMatchConstraintValue_DM, &sGeoMatchConstraintValue_DO, &sGeoMatchConstraintValue_EC, &sGeoMatchConstraintValue_EG, &sGeoMatchConstraintValue_SV, &sGeoMatchConstraintValue_GQ, &sGeoMatchConstraintValue_ER, &sGeoMatchConstraintValue_EE, &sGeoMatchConstraintValue_ET, &sGeoMatchConstraintValue_FK, &sGeoMatchConstraintValue_FO, &sGeoMatchConstraintValue_FJ, &sGeoMatchConstraintValue_FI, &sGeoMatchConstraintValue_FR, &sGeoMatchConstraintValue_GF, &sGeoMatchConstraintValue_PF, &sGeoMatchConstraintValue_TF, &sGeoMatchConstraintValue_GA, &sGeoMatchConstraintValue_GM, &sGeoMatchConstraintValue_GE, &sGeoMatchConstraintValue_DE, &sGeoMatchConstraintValue_GH, &sGeoMatchConstraintValue_GI, &sGeoMatchConstraintValue_GR, &sGeoMatchConstraintValue_GL, &sGeoMatchConstraintValue_GD, &sGeoMatchConstraintValue_GP, &sGeoMatchConstraintValue_GU, &sGeoMatchConstraintValue_GT, &sGeoMatchConstraintValue_GG, &sGeoMatchConstraintValue_GN, &sGeoMatchConstraintValue_GW, &sGeoMatchConstraintValue_GY, &sGeoMatchConstraintValue_HT, &sGeoMatchConstraintValue_HM, &sGeoMatchConstraintValue_VA, &sGeoMatchConstraintValue_HN, &sGeoMatchConstraintValue_HK, &sGeoMatchConstraintValue_HU, &sGeoMatchConstraintValue_IS, &sGeoMatchConstraintValue_IN, &sGeoMatchConstraintValue_ID, &sGeoMatchConstraintValue_IR, &sGeoMatchConstraintValue_IQ, &sGeoMatchConstraintValue_IE, &sGeoMatchConstraintValue_IM, &sGeoMatchConstraintValue_IL, &sGeoMatchConstraintValue_IT, &sGeoMatchConstraintValue_JM, &sGeoMatchConstraintValue_JP, &sGeoMatchConstraintValue_JE, &sGeoMatchConstraintValue_JO, &sGeoMatchConstraintValue_KZ, &sGeoMatchConstraintValue_KE, &sGeoMatchConstraintValue_KI, &sGeoMatchConstraintValue_KP, &sGeoMatchConstraintValue_KR, &sGeoMatchConstraintValue_KW, &sGeoMatchConstraintValue_KG, &sGeoMatchConstraintValue_LA, &sGeoMatchConstraintValue_LV, &sGeoMatchConstraintValue_LB, &sGeoMatchConstraintValue_LS, &sGeoMatchConstraintValue_LR, &sGeoMatchConstraintValue_LY, &sGeoMatchConstraintValue_LI, &sGeoMatchConstraintValue_LT, &sGeoMatchConstraintValue_LU, &sGeoMatchConstraintValue_MO, &sGeoMatchConstraintValue_MK, &sGeoMatchConstraintValue_MG, &sGeoMatchConstraintValue_MW, &sGeoMatchConstraintValue_MY, &sGeoMatchConstraintValue_MV, &sGeoMatchConstraintValue_ML, &sGeoMatchConstraintValue_MT, &sGeoMatchConstraintValue_MH, &sGeoMatchConstraintValue_MQ, &sGeoMatchConstraintValue_MR, &sGeoMatchConstraintValue_MU, &sGeoMatchConstraintValue_YT, &sGeoMatchConstraintValue_MX, &sGeoMatchConstraintValue_FM, &sGeoMatchConstraintValue_MD, &sGeoMatchConstraintValue_MC, &sGeoMatchConstraintValue_MN, &sGeoMatchConstraintValue_ME, &sGeoMatchConstraintValue_MS, &sGeoMatchConstraintValue_MA, &sGeoMatchConstraintValue_MZ, &sGeoMatchConstraintValue_MM, &sGeoMatchConstraintValue_NA, &sGeoMatchConstraintValue_NR, &sGeoMatchConstraintValue_NP, &sGeoMatchConstraintValue_NL, &sGeoMatchConstraintValue_NC, &sGeoMatchConstraintValue_NZ, &sGeoMatchConstraintValue_NI, &sGeoMatchConstraintValue_NE, &sGeoMatchConstraintValue_NG, &sGeoMatchConstraintValue_NU, &sGeoMatchConstraintValue_NF, &sGeoMatchConstraintValue_MP, &sGeoMatchConstraintValue_NO, &sGeoMatchConstraintValue_OM, &sGeoMatchConstraintValue_PK, &sGeoMatchConstraintValue_PW, &sGeoMatchConstraintValue_PS, &sGeoMatchConstraintValue_PA, &sGeoMatchConstraintValue_PG, &sGeoMatchConstraintValue_PY, &sGeoMatchConstraintValue_PE, &sGeoMatchConstraintValue_PH, &sGeoMatchConstraintValue_PN, &sGeoMatchConstraintValue_PL, &sGeoMatchConstraintValue_PT, &sGeoMatchConstraintValue_PR, &sGeoMatchConstraintValue_QA, &sGeoMatchConstraintValue_RE, &sGeoMatchConstraintValue_RO, &sGeoMatchConstraintValue_RU, &sGeoMatchConstraintValue_RW, &sGeoMatchConstraintValue_BL, &sGeoMatchConstraintValue_SH, &sGeoMatchConstraintValue_KN, &sGeoMatchConstraintValue_LC, &sGeoMatchConstraintValue_MF, &sGeoMatchConstraintValue_PM, &sGeoMatchConstraintValue_VC, &sGeoMatchConstraintValue_WS, &sGeoMatchConstraintValue_SM, &sGeoMatchConstraintValue_ST, &sGeoMatchConstraintValue_SA, &sGeoMatchConstraintValue_SN, &sGeoMatchConstraintValue_RS, &sGeoMatchConstraintValue_SC, &sGeoMatchConstraintValue_SL, &sGeoMatchConstraintValue_SG, &sGeoMatchConstraintValue_SX, &sGeoMatchConstraintValue_SK, &sGeoMatchConstraintValue_SI, &sGeoMatchConstraintValue_SB, &sGeoMatchConstraintValue_SO, &sGeoMatchConstraintValue_ZA, &sGeoMatchConstraintValue_GS, &sGeoMatchConstraintValue_SS, &sGeoMatchConstraintValue_ES, &sGeoMatchConstraintValue_LK, &sGeoMatchConstraintValue_SD, &sGeoMatchConstraintValue_SR, &sGeoMatchConstraintValue_SJ, &sGeoMatchConstraintValue_SZ, &sGeoMatchConstraintValue_SE, &sGeoMatchConstraintValue_CH, &sGeoMatchConstraintValue_SY, &sGeoMatchConstraintValue_TW, &sGeoMatchConstraintValue_TJ, &sGeoMatchConstraintValue_TZ, &sGeoMatchConstraintValue_TH, &sGeoMatchConstraintValue_TL, &sGeoMatchConstraintValue_TG, &sGeoMatchConstraintValue_TK, &sGeoMatchConstraintValue_TO, &sGeoMatchConstraintValue_TT, &sGeoMatchConstraintValue_TN, &sGeoMatchConstraintValue_TR, &sGeoMatchConstraintValue_TM, &sGeoMatchConstraintValue_TC, &sGeoMatchConstraintValue_TV, &sGeoMatchConstraintValue_UG, &sGeoMatchConstraintValue_UA, &sGeoMatchConstraintValue_AE, &sGeoMatchConstraintValue_GB, &sGeoMatchConstraintValue_US, &sGeoMatchConstraintValue_UM, &sGeoMatchConstraintValue_UY, &sGeoMatchConstraintValue_UZ, &sGeoMatchConstraintValue_VU, &sGeoMatchConstraintValue_VE, &sGeoMatchConstraintValue_VN, &sGeoMatchConstraintValue_VG, &sGeoMatchConstraintValue_VI, &sGeoMatchConstraintValue_WF, &sGeoMatchConstraintValue_EH, &sGeoMatchConstraintValue_YE, &sGeoMatchConstraintValue_ZM, &sGeoMatchConstraintValue_ZW}, Hash: &hGeoMatchConstraintValue}
+var mGeoMatchSet = smithy.SchemaMembers{List: []*smithy.Schema{&sGeoMatchSet_GeoMatchSetId, &sGeoMatchSet_Name, &sGeoMatchSet_GeoMatchConstraints}}
+var m_GeoMatchSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_GeoMatchSetSummaries_member}}
+var mGeoMatchSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sGeoMatchSetSummary_GeoMatchSetId, &sGeoMatchSetSummary_Name}}
+var mGeoMatchSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sGeoMatchSetUpdate_Action, &sGeoMatchSetUpdate_GeoMatchConstraint}}
+var m_GeoMatchSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_GeoMatchSetUpdates_member}}
+var mHTTPHeader = smithy.SchemaMembers{List: []*smithy.Schema{&sHTTPHeader_Name, &sHTTPHeader_Value}}
+var m_HTTPHeaders = smithy.SchemaMembers{List: []*smithy.Schema{&s_HTTPHeaders_member}}
+var mHTTPRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sHTTPRequest_ClientIP, &sHTTPRequest_Country, &sHTTPRequest_URI, &sHTTPRequest_Method, &sHTTPRequest_HTTPVersion, &sHTTPRequest_Headers}}
+var mIPSet = smithy.SchemaMembers{List: []*smithy.Schema{&sIPSet_IPSetId, &sIPSet_Name, &sIPSet_IPSetDescriptors}}
+var mIPSetDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sIPSetDescriptor_Type, &sIPSetDescriptor_Value}}
+var m_IPSetDescriptors = smithy.SchemaMembers{List: []*smithy.Schema{&s_IPSetDescriptors_member}}
+var mIPSetDescriptorType = smithy.SchemaMembers{List: []*smithy.Schema{&sIPSetDescriptorType_IPV4, &sIPSetDescriptorType_IPV6}}
+var m_IPSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_IPSetSummaries_member}}
+var mIPSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIPSetSummary_IPSetId, &sIPSetSummary_Name}}
+var mIPSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sIPSetUpdate_Action, &sIPSetUpdate_IPSetDescriptor}}
+var m_IPSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_IPSetUpdates_member}}
+var m_LogDestinationConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogDestinationConfigs_member}}
+var mLoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingConfiguration_ResourceArn, &sLoggingConfiguration_LogDestinationConfigs, &sLoggingConfiguration_RedactedFields}}
+var m_LoggingConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoggingConfigurations_member}}
+var m_ManagedKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedKeys_member}}
+var mMatchFieldType = smithy.SchemaMembers{List: []*smithy.Schema{&sMatchFieldType_URI, &sMatchFieldType_QUERY_STRING, &sMatchFieldType_HEADER, &sMatchFieldType_METHOD, &sMatchFieldType_BODY, &sMatchFieldType_SINGLE_QUERY_ARG, &sMatchFieldType_ALL_QUERY_ARGS}}
+var mMigrationErrorType = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationErrorType_ENTITY_NOT_SUPPORTED, &sMigrationErrorType_ENTITY_NOT_FOUND, &sMigrationErrorType_S3_BUCKET_NO_PERMISSION, &sMigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE, &sMigrationErrorType_S3_BUCKET_NOT_FOUND, &sMigrationErrorType_S3_BUCKET_INVALID_REGION, &sMigrationErrorType_S3_INTERNAL_ERROR}}
+var mParameterExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterExceptionField_CHANGE_ACTION, &sParameterExceptionField_WAF_ACTION, &sParameterExceptionField_WAF_OVERRIDE_ACTION, &sParameterExceptionField_PREDICATE_TYPE, &sParameterExceptionField_IPSET_TYPE, &sParameterExceptionField_BYTE_MATCH_FIELD_TYPE, &sParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE, &sParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION, &sParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT, &sParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR, &sParameterExceptionField_GEO_MATCH_LOCATION_TYPE, &sParameterExceptionField_GEO_MATCH_LOCATION_VALUE, &sParameterExceptionField_RATE_KEY, &sParameterExceptionField_RULE_TYPE, &sParameterExceptionField_NEXT_MARKER, &sParameterExceptionField_RESOURCE_ARN, &sParameterExceptionField_TAGS, &sParameterExceptionField_TAG_KEYS}, Hash: &hParameterExceptionField}
+var mParameterExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterExceptionReason_INVALID_OPTION, &sParameterExceptionReason_ILLEGAL_COMBINATION, &sParameterExceptionReason_ILLEGAL_ARGUMENT, &sParameterExceptionReason_INVALID_TAG_KEY}}
+var mPositionalConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sPositionalConstraint_EXACTLY, &sPositionalConstraint_STARTS_WITH, &sPositionalConstraint_ENDS_WITH, &sPositionalConstraint_CONTAINS, &sPositionalConstraint_CONTAINS_WORD}}
+var mPredicate = smithy.SchemaMembers{List: []*smithy.Schema{&sPredicate_Negated, &sPredicate_Type, &sPredicate_DataId}}
+var m_Predicates = smithy.SchemaMembers{List: []*smithy.Schema{&s_Predicates_member}}
+var mPredicateType = smithy.SchemaMembers{List: []*smithy.Schema{&sPredicateType_IP_MATCH, &sPredicateType_BYTE_MATCH, &sPredicateType_SQL_INJECTION_MATCH, &sPredicateType_GEO_MATCH, &sPredicateType_SIZE_CONSTRAINT, &sPredicateType_XSS_MATCH, &sPredicateType_REGEX_MATCH}}
+var mRateBasedRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRateBasedRule_RuleId, &sRateBasedRule_Name, &sRateBasedRule_MetricName, &sRateBasedRule_MatchPredicates, &sRateBasedRule_RateKey, &sRateBasedRule_RateLimit}}
+var mRateKey = smithy.SchemaMembers{List: []*smithy.Schema{&sRateKey_IP}}
+var m_RedactedFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_RedactedFields_member}}
+var mRegexMatchSet = smithy.SchemaMembers{List: []*smithy.Schema{&sRegexMatchSet_RegexMatchSetId, &sRegexMatchSet_Name, &sRegexMatchSet_RegexMatchTuples}}
+var m_RegexMatchSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegexMatchSetSummaries_member}}
+var mRegexMatchSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRegexMatchSetSummary_RegexMatchSetId, &sRegexMatchSetSummary_Name}}
+var mRegexMatchSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sRegexMatchSetUpdate_Action, &sRegexMatchSetUpdate_RegexMatchTuple}}
+var m_RegexMatchSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegexMatchSetUpdates_member}}
+var mRegexMatchTuple = smithy.SchemaMembers{List: []*smithy.Schema{&sRegexMatchTuple_FieldToMatch, &sRegexMatchTuple_TextTransformation, &sRegexMatchTuple_RegexPatternSetId}}
+var m_RegexMatchTuples = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegexMatchTuples_member}}
+var mRegexPatternSet = smithy.SchemaMembers{List: []*smithy.Schema{&sRegexPatternSet_RegexPatternSetId, &sRegexPatternSet_Name, &sRegexPatternSet_RegexPatternStrings}}
+var m_RegexPatternSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegexPatternSetSummaries_member}}
+var mRegexPatternSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRegexPatternSetSummary_RegexPatternSetId, &sRegexPatternSetSummary_Name}}
+var mRegexPatternSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sRegexPatternSetUpdate_Action, &sRegexPatternSetUpdate_RegexPatternString}}
+var m_RegexPatternSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegexPatternSetUpdates_member}}
+var m_RegexPatternStrings = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegexPatternStrings_member}}
+var m_ResourceArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceArns_member}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_APPLICATION_LOAD_BALANCER, &sResourceType_API_GATEWAY}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_RuleId, &sRule_Name, &sRule_MetricName, &sRule_Predicates}}
+var mRuleGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleGroup_RuleGroupId, &sRuleGroup_Name, &sRuleGroup_MetricName}}
+var m_RuleGroupSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleGroupSummaries_member}}
+var mRuleGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleGroupSummary_RuleGroupId, &sRuleGroupSummary_Name}}
+var mRuleGroupUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleGroupUpdate_Action, &sRuleGroupUpdate_ActivatedRule}}
+var m_RuleGroupUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleGroupUpdates_member}}
+var m_RuleSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleSummaries_member}}
+var mRuleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleSummary_RuleId, &sRuleSummary_Name}}
+var mRuleUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleUpdate_Action, &sRuleUpdate_Predicate}}
+var m_RuleUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleUpdates_member}}
+var mSampledHTTPRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSampledHTTPRequest_Request, &sSampledHTTPRequest_Weight, &sSampledHTTPRequest_Timestamp, &sSampledHTTPRequest_Action, &sSampledHTTPRequest_RuleWithinRuleGroup}}
+var m_SampledHTTPRequests = smithy.SchemaMembers{List: []*smithy.Schema{&s_SampledHTTPRequests_member}}
+var mSizeConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sSizeConstraint_FieldToMatch, &sSizeConstraint_TextTransformation, &sSizeConstraint_ComparisonOperator, &sSizeConstraint_Size}}
+var m_SizeConstraints = smithy.SchemaMembers{List: []*smithy.Schema{&s_SizeConstraints_member}}
+var mSizeConstraintSet = smithy.SchemaMembers{List: []*smithy.Schema{&sSizeConstraintSet_SizeConstraintSetId, &sSizeConstraintSet_Name, &sSizeConstraintSet_SizeConstraints}}
+var m_SizeConstraintSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SizeConstraintSetSummaries_member}}
+var mSizeConstraintSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSizeConstraintSetSummary_SizeConstraintSetId, &sSizeConstraintSetSummary_Name}}
+var mSizeConstraintSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sSizeConstraintSetUpdate_Action, &sSizeConstraintSetUpdate_SizeConstraint}}
+var m_SizeConstraintSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_SizeConstraintSetUpdates_member}}
+var mSqlInjectionMatchSet = smithy.SchemaMembers{List: []*smithy.Schema{&sSqlInjectionMatchSet_SqlInjectionMatchSetId, &sSqlInjectionMatchSet_Name, &sSqlInjectionMatchSet_SqlInjectionMatchTuples}}
+var m_SqlInjectionMatchSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqlInjectionMatchSetSummaries_member}}
+var mSqlInjectionMatchSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSqlInjectionMatchSetSummary_SqlInjectionMatchSetId, &sSqlInjectionMatchSetSummary_Name}}
+var mSqlInjectionMatchSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sSqlInjectionMatchSetUpdate_Action, &sSqlInjectionMatchSetUpdate_SqlInjectionMatchTuple}}
+var m_SqlInjectionMatchSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqlInjectionMatchSetUpdates_member}}
+var mSqlInjectionMatchTuple = smithy.SchemaMembers{List: []*smithy.Schema{&sSqlInjectionMatchTuple_FieldToMatch, &sSqlInjectionMatchTuple_TextTransformation}}
+var m_SqlInjectionMatchTuples = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqlInjectionMatchTuples_member}}
+var m_SubscribedRuleGroupSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscribedRuleGroupSummaries_member}}
+var mSubscribedRuleGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribedRuleGroupSummary_RuleGroupId, &sSubscribedRuleGroupSummary_Name, &sSubscribedRuleGroupSummary_MetricName}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var mTagInfoForResource = smithy.SchemaMembers{List: []*smithy.Schema{&sTagInfoForResource_ResourceARN, &sTagInfoForResource_TagList}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTextTransformation = smithy.SchemaMembers{List: []*smithy.Schema{&sTextTransformation_NONE, &sTextTransformation_COMPRESS_WHITE_SPACE, &sTextTransformation_HTML_ENTITY_DECODE, &sTextTransformation_LOWERCASE, &sTextTransformation_CMD_LINE, &sTextTransformation_URL_DECODE}}
+var mTimeWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeWindow_StartTime, &sTimeWindow_EndTime}}
+var mWafAction = smithy.SchemaMembers{List: []*smithy.Schema{&sWafAction_Type}}
+var mWafActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sWafActionType_BLOCK, &sWafActionType_ALLOW, &sWafActionType_COUNT}}
+var mWAFBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFBadRequestException_message}}
+var mWAFDisallowedNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFDisallowedNameException_message}}
+var mWAFEntityMigrationException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFEntityMigrationException_message, &sWAFEntityMigrationException_MigrationErrorType, &sWAFEntityMigrationException_MigrationErrorReason}}
+var mWAFInternalErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFInternalErrorException_message}}
+var mWAFInvalidOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFInvalidOperationException_message}}
+var mWAFInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFInvalidParameterException_field, &sWAFInvalidParameterException_parameter, &sWAFInvalidParameterException_reason}}
+var mWAFInvalidPermissionPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFInvalidPermissionPolicyException_message}}
+var mWAFInvalidRegexPatternException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFInvalidRegexPatternException_message}}
+var mWAFLimitsExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFLimitsExceededException_message}}
+var mWAFNonEmptyEntityException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFNonEmptyEntityException_message}}
+var mWAFNonexistentContainerException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFNonexistentContainerException_message}}
+var mWAFNonexistentItemException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFNonexistentItemException_message}}
+var mWafOverrideAction = smithy.SchemaMembers{List: []*smithy.Schema{&sWafOverrideAction_Type}}
+var mWafOverrideActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sWafOverrideActionType_NONE, &sWafOverrideActionType_COUNT}}
+var mWAFReferencedItemException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFReferencedItemException_message}}
+var mWafRuleType = smithy.SchemaMembers{List: []*smithy.Schema{&sWafRuleType_REGULAR, &sWafRuleType_RATE_BASED, &sWafRuleType_GROUP}}
+var mWAFServiceLinkedRoleErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFServiceLinkedRoleErrorException_message}}
+var mWAFStaleDataException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFStaleDataException_message}}
+var mWAFSubscriptionNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFSubscriptionNotFoundException_message}}
+var mWAFTagOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFTagOperationException_message}}
+var mWAFTagOperationInternalErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFTagOperationInternalErrorException_message}}
+var mWAFUnavailableEntityException = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFUnavailableEntityException_message}}
+var mWebACL = smithy.SchemaMembers{List: []*smithy.Schema{&sWebACL_WebACLId, &sWebACL_Name, &sWebACL_MetricName, &sWebACL_DefaultAction, &sWebACL_Rules, &sWebACL_WebACLArn}}
+var m_WebACLSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_WebACLSummaries_member}}
+var mWebACLSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWebACLSummary_WebACLId, &sWebACLSummary_Name}}
+var mWebACLUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sWebACLUpdate_Action, &sWebACLUpdate_ActivatedRule}}
+var m_WebACLUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_WebACLUpdates_member}}
+var mXssMatchSet = smithy.SchemaMembers{List: []*smithy.Schema{&sXssMatchSet_XssMatchSetId, &sXssMatchSet_Name, &sXssMatchSet_XssMatchTuples}}
+var m_XssMatchSetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_XssMatchSetSummaries_member}}
+var mXssMatchSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sXssMatchSetSummary_XssMatchSetId, &sXssMatchSetSummary_Name}}
+var mXssMatchSetUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sXssMatchSetUpdate_Action, &sXssMatchSetUpdate_XssMatchTuple}}
+var m_XssMatchSetUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_XssMatchSetUpdates_member}}
+var mXssMatchTuple = smithy.SchemaMembers{List: []*smithy.Schema{&sXssMatchTuple_FieldToMatch, &sXssMatchTuple_TextTransformation}}
+var m_XssMatchTuples = smithy.SchemaMembers{List: []*smithy.Schema{&s_XssMatchTuples_member}}
+var mAssociateWebACLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateWebACLRequest_WebACLId, &sAssociateWebACLRequest_ResourceArn}}
+var mCreateByteMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateByteMatchSetRequest_Name, &sCreateByteMatchSetRequest_ChangeToken}}
+var mCreateByteMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateByteMatchSetResponse_ByteMatchSet, &sCreateByteMatchSetResponse_ChangeToken}}
+var mCreateGeoMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGeoMatchSetRequest_Name, &sCreateGeoMatchSetRequest_ChangeToken}}
+var mCreateGeoMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGeoMatchSetResponse_GeoMatchSet, &sCreateGeoMatchSetResponse_ChangeToken}}
+var mCreateIPSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIPSetRequest_Name, &sCreateIPSetRequest_ChangeToken}}
+var mCreateIPSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIPSetResponse_IPSet, &sCreateIPSetResponse_ChangeToken}}
+var mCreateRateBasedRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRateBasedRuleRequest_Name, &sCreateRateBasedRuleRequest_MetricName, &sCreateRateBasedRuleRequest_RateKey, &sCreateRateBasedRuleRequest_RateLimit, &sCreateRateBasedRuleRequest_ChangeToken, &sCreateRateBasedRuleRequest_Tags}}
+var mCreateRateBasedRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRateBasedRuleResponse_Rule, &sCreateRateBasedRuleResponse_ChangeToken}}
+var mCreateRegexMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegexMatchSetRequest_Name, &sCreateRegexMatchSetRequest_ChangeToken}}
+var mCreateRegexMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegexMatchSetResponse_RegexMatchSet, &sCreateRegexMatchSetResponse_ChangeToken}}
+var mCreateRegexPatternSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegexPatternSetRequest_Name, &sCreateRegexPatternSetRequest_ChangeToken}}
+var mCreateRegexPatternSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegexPatternSetResponse_RegexPatternSet, &sCreateRegexPatternSetResponse_ChangeToken}}
+var mCreateRuleGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleGroupRequest_Name, &sCreateRuleGroupRequest_MetricName, &sCreateRuleGroupRequest_ChangeToken, &sCreateRuleGroupRequest_Tags}}
+var mCreateRuleGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleGroupResponse_RuleGroup, &sCreateRuleGroupResponse_ChangeToken}}
+var mCreateRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleRequest_Name, &sCreateRuleRequest_MetricName, &sCreateRuleRequest_ChangeToken, &sCreateRuleRequest_Tags}}
+var mCreateRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleResponse_Rule, &sCreateRuleResponse_ChangeToken}}
+var mCreateSizeConstraintSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSizeConstraintSetRequest_Name, &sCreateSizeConstraintSetRequest_ChangeToken}}
+var mCreateSizeConstraintSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSizeConstraintSetResponse_SizeConstraintSet, &sCreateSizeConstraintSetResponse_ChangeToken}}
+var mCreateSqlInjectionMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSqlInjectionMatchSetRequest_Name, &sCreateSqlInjectionMatchSetRequest_ChangeToken}}
+var mCreateSqlInjectionMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet, &sCreateSqlInjectionMatchSetResponse_ChangeToken}}
+var mCreateWebACLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebACLRequest_Name, &sCreateWebACLRequest_MetricName, &sCreateWebACLRequest_DefaultAction, &sCreateWebACLRequest_ChangeToken, &sCreateWebACLRequest_Tags}}
+var mCreateWebACLMigrationStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebACLMigrationStackRequest_WebACLId, &sCreateWebACLMigrationStackRequest_S3BucketName, &sCreateWebACLMigrationStackRequest_IgnoreUnsupportedType}}
+var mCreateWebACLMigrationStackResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebACLMigrationStackResponse_S3ObjectUrl}}
+var mCreateWebACLResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebACLResponse_WebACL, &sCreateWebACLResponse_ChangeToken}}
+var mCreateXssMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateXssMatchSetRequest_Name, &sCreateXssMatchSetRequest_ChangeToken}}
+var mCreateXssMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateXssMatchSetResponse_XssMatchSet, &sCreateXssMatchSetResponse_ChangeToken}}
+var mDeleteByteMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteByteMatchSetRequest_ByteMatchSetId, &sDeleteByteMatchSetRequest_ChangeToken}}
+var mDeleteByteMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteByteMatchSetResponse_ChangeToken}}
+var mDeleteGeoMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGeoMatchSetRequest_GeoMatchSetId, &sDeleteGeoMatchSetRequest_ChangeToken}}
+var mDeleteGeoMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGeoMatchSetResponse_ChangeToken}}
+var mDeleteIPSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIPSetRequest_IPSetId, &sDeleteIPSetRequest_ChangeToken}}
+var mDeleteIPSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIPSetResponse_ChangeToken}}
+var mDeleteLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLoggingConfigurationRequest_ResourceArn}}
+var mDeletePermissionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePermissionPolicyRequest_ResourceArn}}
+var mDeleteRateBasedRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRateBasedRuleRequest_RuleId, &sDeleteRateBasedRuleRequest_ChangeToken}}
+var mDeleteRateBasedRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRateBasedRuleResponse_ChangeToken}}
+var mDeleteRegexMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRegexMatchSetRequest_RegexMatchSetId, &sDeleteRegexMatchSetRequest_ChangeToken}}
+var mDeleteRegexMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRegexMatchSetResponse_ChangeToken}}
+var mDeleteRegexPatternSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRegexPatternSetRequest_RegexPatternSetId, &sDeleteRegexPatternSetRequest_ChangeToken}}
+var mDeleteRegexPatternSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRegexPatternSetResponse_ChangeToken}}
+var mDeleteRuleGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleGroupRequest_RuleGroupId, &sDeleteRuleGroupRequest_ChangeToken}}
+var mDeleteRuleGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleGroupResponse_ChangeToken}}
+var mDeleteRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleRequest_RuleId, &sDeleteRuleRequest_ChangeToken}}
+var mDeleteRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleResponse_ChangeToken}}
+var mDeleteSizeConstraintSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSizeConstraintSetRequest_SizeConstraintSetId, &sDeleteSizeConstraintSetRequest_ChangeToken}}
+var mDeleteSizeConstraintSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSizeConstraintSetResponse_ChangeToken}}
+var mDeleteSqlInjectionMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId, &sDeleteSqlInjectionMatchSetRequest_ChangeToken}}
+var mDeleteSqlInjectionMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSqlInjectionMatchSetResponse_ChangeToken}}
+var mDeleteWebACLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebACLRequest_WebACLId, &sDeleteWebACLRequest_ChangeToken}}
+var mDeleteWebACLResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebACLResponse_ChangeToken}}
+var mDeleteXssMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteXssMatchSetRequest_XssMatchSetId, &sDeleteXssMatchSetRequest_ChangeToken}}
+var mDeleteXssMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteXssMatchSetResponse_ChangeToken}}
+var mDisassociateWebACLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateWebACLRequest_ResourceArn}}
+var mGetByteMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetByteMatchSetRequest_ByteMatchSetId}}
+var mGetByteMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetByteMatchSetResponse_ByteMatchSet}}
+var mGetChangeTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChangeTokenResponse_ChangeToken}}
+var mGetChangeTokenStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChangeTokenStatusRequest_ChangeToken}}
+var mGetChangeTokenStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChangeTokenStatusResponse_ChangeTokenStatus}}
+var mGetGeoMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGeoMatchSetRequest_GeoMatchSetId}}
+var mGetGeoMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGeoMatchSetResponse_GeoMatchSet}}
+var mGetIPSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIPSetRequest_IPSetId}}
+var mGetIPSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIPSetResponse_IPSet}}
+var mGetLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLoggingConfigurationRequest_ResourceArn}}
+var mGetLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLoggingConfigurationResponse_LoggingConfiguration}}
+var mGetPermissionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPermissionPolicyRequest_ResourceArn}}
+var mGetPermissionPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPermissionPolicyResponse_Policy}}
+var mGetRateBasedRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRateBasedRuleRequest_RuleId}}
+var mGetRateBasedRuleManagedKeysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRateBasedRuleManagedKeysRequest_RuleId, &sGetRateBasedRuleManagedKeysRequest_NextMarker}}
+var mGetRateBasedRuleManagedKeysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRateBasedRuleManagedKeysResponse_ManagedKeys, &sGetRateBasedRuleManagedKeysResponse_NextMarker}}
+var mGetRateBasedRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRateBasedRuleResponse_Rule}}
+var mGetRegexMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRegexMatchSetRequest_RegexMatchSetId}}
+var mGetRegexMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRegexMatchSetResponse_RegexMatchSet}}
+var mGetRegexPatternSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRegexPatternSetRequest_RegexPatternSetId}}
+var mGetRegexPatternSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRegexPatternSetResponse_RegexPatternSet}}
+var mGetRuleGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleGroupRequest_RuleGroupId}}
+var mGetRuleGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleGroupResponse_RuleGroup}}
+var mGetRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleRequest_RuleId}}
+var mGetRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleResponse_Rule}}
+var mGetSampledRequestsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSampledRequestsRequest_WebAclId, &sGetSampledRequestsRequest_RuleId, &sGetSampledRequestsRequest_TimeWindow, &sGetSampledRequestsRequest_MaxItems}}
+var mGetSampledRequestsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSampledRequestsResponse_SampledRequests, &sGetSampledRequestsResponse_PopulationSize, &sGetSampledRequestsResponse_TimeWindow}}
+var mGetSizeConstraintSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSizeConstraintSetRequest_SizeConstraintSetId}}
+var mGetSizeConstraintSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSizeConstraintSetResponse_SizeConstraintSet}}
+var mGetSqlInjectionMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId}}
+var mGetSqlInjectionMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSqlInjectionMatchSetResponse_SqlInjectionMatchSet}}
+var mGetWebACLForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebACLForResourceRequest_ResourceArn}}
+var mGetWebACLForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebACLForResourceResponse_WebACLSummary}}
+var mGetWebACLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebACLRequest_WebACLId}}
+var mGetWebACLResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebACLResponse_WebACL}}
+var mGetXssMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetXssMatchSetRequest_XssMatchSetId}}
+var mGetXssMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetXssMatchSetResponse_XssMatchSet}}
+var mListActivatedRulesInRuleGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListActivatedRulesInRuleGroupRequest_RuleGroupId, &sListActivatedRulesInRuleGroupRequest_NextMarker, &sListActivatedRulesInRuleGroupRequest_Limit}}
+var mListActivatedRulesInRuleGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListActivatedRulesInRuleGroupResponse_NextMarker, &sListActivatedRulesInRuleGroupResponse_ActivatedRules}}
+var mListByteMatchSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListByteMatchSetsRequest_NextMarker, &sListByteMatchSetsRequest_Limit}}
+var mListByteMatchSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListByteMatchSetsResponse_NextMarker, &sListByteMatchSetsResponse_ByteMatchSets}}
+var mListGeoMatchSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGeoMatchSetsRequest_NextMarker, &sListGeoMatchSetsRequest_Limit}}
+var mListGeoMatchSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGeoMatchSetsResponse_NextMarker, &sListGeoMatchSetsResponse_GeoMatchSets}}
+var mListIPSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIPSetsRequest_NextMarker, &sListIPSetsRequest_Limit}}
+var mListIPSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIPSetsResponse_NextMarker, &sListIPSetsResponse_IPSets}}
+var mListLoggingConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLoggingConfigurationsRequest_NextMarker, &sListLoggingConfigurationsRequest_Limit}}
+var mListLoggingConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLoggingConfigurationsResponse_LoggingConfigurations, &sListLoggingConfigurationsResponse_NextMarker}}
+var mListRateBasedRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRateBasedRulesRequest_NextMarker, &sListRateBasedRulesRequest_Limit}}
+var mListRateBasedRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRateBasedRulesResponse_NextMarker, &sListRateBasedRulesResponse_Rules}}
+var mListRegexMatchSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegexMatchSetsRequest_NextMarker, &sListRegexMatchSetsRequest_Limit}}
+var mListRegexMatchSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegexMatchSetsResponse_NextMarker, &sListRegexMatchSetsResponse_RegexMatchSets}}
+var mListRegexPatternSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegexPatternSetsRequest_NextMarker, &sListRegexPatternSetsRequest_Limit}}
+var mListRegexPatternSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegexPatternSetsResponse_NextMarker, &sListRegexPatternSetsResponse_RegexPatternSets}}
+var mListResourcesForWebACLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesForWebACLRequest_WebACLId, &sListResourcesForWebACLRequest_ResourceType}}
+var mListResourcesForWebACLResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesForWebACLResponse_ResourceArns}}
+var mListRuleGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleGroupsRequest_NextMarker, &sListRuleGroupsRequest_Limit}}
+var mListRuleGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleGroupsResponse_NextMarker, &sListRuleGroupsResponse_RuleGroups}}
+var mListRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesRequest_NextMarker, &sListRulesRequest_Limit}}
+var mListRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesResponse_NextMarker, &sListRulesResponse_Rules}}
+var mListSizeConstraintSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSizeConstraintSetsRequest_NextMarker, &sListSizeConstraintSetsRequest_Limit}}
+var mListSizeConstraintSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSizeConstraintSetsResponse_NextMarker, &sListSizeConstraintSetsResponse_SizeConstraintSets}}
+var mListSqlInjectionMatchSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSqlInjectionMatchSetsRequest_NextMarker, &sListSqlInjectionMatchSetsRequest_Limit}}
+var mListSqlInjectionMatchSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSqlInjectionMatchSetsResponse_NextMarker, &sListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets}}
+var mListSubscribedRuleGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscribedRuleGroupsRequest_NextMarker, &sListSubscribedRuleGroupsRequest_Limit}}
+var mListSubscribedRuleGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscribedRuleGroupsResponse_NextMarker, &sListSubscribedRuleGroupsResponse_RuleGroups}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_NextMarker, &sListTagsForResourceRequest_Limit, &sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_NextMarker, &sListTagsForResourceResponse_TagInfoForResource}}
+var mListWebACLsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebACLsRequest_NextMarker, &sListWebACLsRequest_Limit}}
+var mListWebACLsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebACLsResponse_NextMarker, &sListWebACLsResponse_WebACLs}}
+var mListXssMatchSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListXssMatchSetsRequest_NextMarker, &sListXssMatchSetsRequest_Limit}}
+var mListXssMatchSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListXssMatchSetsResponse_NextMarker, &sListXssMatchSetsResponse_XssMatchSets}}
+var mPutLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLoggingConfigurationRequest_LoggingConfiguration}}
+var mPutLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLoggingConfigurationResponse_LoggingConfiguration}}
+var mPutPermissionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPermissionPolicyRequest_ResourceArn, &sPutPermissionPolicyRequest_Policy}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateByteMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateByteMatchSetRequest_ByteMatchSetId, &sUpdateByteMatchSetRequest_ChangeToken, &sUpdateByteMatchSetRequest_Updates}}
+var mUpdateByteMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateByteMatchSetResponse_ChangeToken}}
+var mUpdateGeoMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGeoMatchSetRequest_GeoMatchSetId, &sUpdateGeoMatchSetRequest_ChangeToken, &sUpdateGeoMatchSetRequest_Updates}}
+var mUpdateGeoMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGeoMatchSetResponse_ChangeToken}}
+var mUpdateIPSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIPSetRequest_IPSetId, &sUpdateIPSetRequest_ChangeToken, &sUpdateIPSetRequest_Updates}}
+var mUpdateIPSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIPSetResponse_ChangeToken}}
+var mUpdateRateBasedRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRateBasedRuleRequest_RuleId, &sUpdateRateBasedRuleRequest_ChangeToken, &sUpdateRateBasedRuleRequest_Updates, &sUpdateRateBasedRuleRequest_RateLimit}}
+var mUpdateRateBasedRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRateBasedRuleResponse_ChangeToken}}
+var mUpdateRegexMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegexMatchSetRequest_RegexMatchSetId, &sUpdateRegexMatchSetRequest_Updates, &sUpdateRegexMatchSetRequest_ChangeToken}}
+var mUpdateRegexMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegexMatchSetResponse_ChangeToken}}
+var mUpdateRegexPatternSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegexPatternSetRequest_RegexPatternSetId, &sUpdateRegexPatternSetRequest_Updates, &sUpdateRegexPatternSetRequest_ChangeToken}}
+var mUpdateRegexPatternSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegexPatternSetResponse_ChangeToken}}
+var mUpdateRuleGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleGroupRequest_RuleGroupId, &sUpdateRuleGroupRequest_Updates, &sUpdateRuleGroupRequest_ChangeToken}}
+var mUpdateRuleGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleGroupResponse_ChangeToken}}
+var mUpdateRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleRequest_RuleId, &sUpdateRuleRequest_ChangeToken, &sUpdateRuleRequest_Updates}}
+var mUpdateRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleResponse_ChangeToken}}
+var mUpdateSizeConstraintSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSizeConstraintSetRequest_SizeConstraintSetId, &sUpdateSizeConstraintSetRequest_ChangeToken, &sUpdateSizeConstraintSetRequest_Updates}}
+var mUpdateSizeConstraintSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSizeConstraintSetResponse_ChangeToken}}
+var mUpdateSqlInjectionMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId, &sUpdateSqlInjectionMatchSetRequest_ChangeToken, &sUpdateSqlInjectionMatchSetRequest_Updates}}
+var mUpdateSqlInjectionMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSqlInjectionMatchSetResponse_ChangeToken}}
+var mUpdateWebACLRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebACLRequest_WebACLId, &sUpdateWebACLRequest_ChangeToken, &sUpdateWebACLRequest_Updates, &sUpdateWebACLRequest_DefaultAction}}
+var mUpdateWebACLResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebACLResponse_ChangeToken}}
+var mUpdateXssMatchSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateXssMatchSetRequest_XssMatchSetId, &sUpdateXssMatchSetRequest_ChangeToken, &sUpdateXssMatchSetRequest_Updates}}
+var mUpdateXssMatchSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateXssMatchSetResponse_ChangeToken}}
+
+var hGeoMatchConstraintValue = smithy.MemberHash{Seed: 2039, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 17, 211, 0, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 170, 0, 0, 0,
+	0, 0, 0, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 45, 0, 0, 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 110, 159, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 217, 0, 0, 0, 218, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 234, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 139, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 161, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 189, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 154, 0, 0, 0, 56, 190, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 0,
+	0, 0, 202, 0, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 182, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 227, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 207, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	133, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 87, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 205, 0, 0, 0, 0,
+	34, 0, 0, 0, 0, 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 167, 0, 85,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 145,
+	0, 0, 229, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 241,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 173, 0, 0, 181, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 195, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 176, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123, 21, 0, 0, 0, 0, 0, 0,
+	0, 0, 187, 0, 0, 240, 0, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 166, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 188, 0, 244,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 164, 0, 0,
+	0, 225, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 243, 0, 0,
+	0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 0, 0, 0, 84, 0, 0, 0, 0, 0, 184, 0, 0, 0,
+	0, 0, 0, 0, 68, 0, 0, 0, 0, 228, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 111, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 149, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 76, 0, 0, 0,
+	0, 193, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 119, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 62, 47, 0, 0, 0, 91, 0, 0, 0,
+	0, 0, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 236, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 233, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 80, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 137, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 156, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 90, 0, 0, 0, 0, 0,
+	0, 0, 27, 0, 0, 0, 0, 0, 0, 0, 216, 0, 0, 179, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 136, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	4, 126, 196, 0, 0, 0, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 152, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 86, 0, 0, 112, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 178, 0, 0, 0, 0, 0, 0, 143, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 109, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 0, 0, 147, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 221, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 135, 0, 0, 0, 249, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 79, 82, 0, 0, 134, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 155, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 148, 0, 0, 10, 0, 0, 0, 61, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 0, 0, 0,
+	0, 0, 0, 0, 0, 162, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 132, 0, 0, 0, 0, 235, 230, 0,
+	0, 209, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 197, 0, 0, 0, 0, 0,
+	0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 60, 0, 0, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 160, 0,
+	0, 0, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 226, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 186, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 194, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 108,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 38, 116, 0, 0, 0, 0,
+	104, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 212, 18, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 206, 0, 0, 0, 0, 0, 0, 151, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 242, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 157, 0, 0,
+	0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 144, 0, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 174, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 245, 0, 0, 0, 0, 0, 0, 247, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 63, 0, 0, 248, 0, 239, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 0, 153, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 220, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 165, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 201,
+	94, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 213, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 208, 0, 0, 0, 0,
+	0, 0, 0, 117, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 177, 0, 98, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 158, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 172, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 77, 0, 0, 0, 0, 131, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 246, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 204, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 183, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 97, 0,
+	0, 0, 0, 0, 105, 0, 0, 0, 0, 0, 0, 0, 0, 74, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 231, 0, 0, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 69, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 219, 0,
+	0, 0, 0, 0, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0,
+	0, 0, 0, 222, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 198, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 53, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75, 192, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 215, 0, 0, 0, 0, 0, 0, 0, 0, 81, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 106, 0, 0, 0, 0, 0, 163, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 210, 0, 0, 0, 237, 0, 0, 0, 0, 203, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0,
+	232, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0,
+	0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92, 0, 0, 0, 0, 113, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hParameterExceptionField = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 16, 15, 0, 0, 3, 4, 0, 0, 0, 0, 8, 0,
+	0, 0, 0, 6, 7, 13, 0, 0, 0, 0, 14, 0, 10, 0, 0, 0, 0, 12, 0, 0, 0, 17, 1, 5,
+	0, 0, 11, 0, 0, 0, 9, 0, 0, 0, 0, 18, 0, 0, 0, 0,
+}}
+
+var sAssociateWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateWebACL, Type: smithy.ShapeTypeOperation, Ext: &eAssociateWebACL})
+var sCreateByteMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateByteMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateByteMatchSet})
+var sCreateGeoMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGeoMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateGeoMatchSet})
+var sCreateIPSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIPSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateIPSet})
+var sCreateRateBasedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRateBasedRule, Type: smithy.ShapeTypeOperation, Ext: &eCreateRateBasedRule})
+var sCreateRegexMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegexMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateRegexMatchSet})
+var sCreateRegexPatternSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegexPatternSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateRegexPatternSet})
+var sCreateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRule, Type: smithy.ShapeTypeOperation, Ext: &eCreateRule})
+var sCreateRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateRuleGroup})
+var sCreateSizeConstraintSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSizeConstraintSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateSizeConstraintSet})
+var sCreateSqlInjectionMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSqlInjectionMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateSqlInjectionMatchSet})
+var sCreateWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebACL, Type: smithy.ShapeTypeOperation, Ext: &eCreateWebACL})
+var sCreateWebACLMigrationStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebACLMigrationStack, Type: smithy.ShapeTypeOperation, Ext: &eCreateWebACLMigrationStack})
+var sCreateXssMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateXssMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateXssMatchSet})
+var sDeleteByteMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteByteMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteByteMatchSet})
+var sDeleteGeoMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGeoMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGeoMatchSet})
+var sDeleteIPSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIPSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIPSet})
+var sDeleteLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLoggingConfiguration})
+var sDeletePermissionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeletePermissionPolicy})
+var sDeleteRateBasedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRateBasedRule, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRateBasedRule})
+var sDeleteRegexMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegexMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRegexMatchSet})
+var sDeleteRegexPatternSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegexPatternSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRegexPatternSet})
+var sDeleteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRule, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRule})
+var sDeleteRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRuleGroup})
+var sDeleteSizeConstraintSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSizeConstraintSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSizeConstraintSet})
+var sDeleteSqlInjectionMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSqlInjectionMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSqlInjectionMatchSet})
+var sDeleteWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebACL, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWebACL})
+var sDeleteXssMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteXssMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteXssMatchSet})
+var sDisassociateWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateWebACL, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateWebACL})
+var sGetByteMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetByteMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eGetByteMatchSet})
+var sGetChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeToken, Type: smithy.ShapeTypeOperation, Ext: &eGetChangeToken})
+var sGetChangeTokenStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeTokenStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetChangeTokenStatus})
+var sGetGeoMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGeoMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eGetGeoMatchSet})
+var sGetIPSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIPSet, Type: smithy.ShapeTypeOperation, Ext: &eGetIPSet})
+var sGetLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eGetLoggingConfiguration})
+var sGetPermissionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPermissionPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetPermissionPolicy})
+var sGetRateBasedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRateBasedRule, Type: smithy.ShapeTypeOperation, Ext: &eGetRateBasedRule})
+var sGetRateBasedRuleManagedKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRateBasedRuleManagedKeys, Type: smithy.ShapeTypeOperation, Ext: &eGetRateBasedRuleManagedKeys})
+var sGetRegexMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegexMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eGetRegexMatchSet})
+var sGetRegexPatternSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegexPatternSet, Type: smithy.ShapeTypeOperation, Ext: &eGetRegexPatternSet})
+var sGetRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRule, Type: smithy.ShapeTypeOperation, Ext: &eGetRule})
+var sGetRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eGetRuleGroup})
+var sGetSampledRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSampledRequests, Type: smithy.ShapeTypeOperation, Ext: &eGetSampledRequests})
+var sGetSizeConstraintSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSizeConstraintSet, Type: smithy.ShapeTypeOperation, Ext: &eGetSizeConstraintSet})
+var sGetSqlInjectionMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSqlInjectionMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eGetSqlInjectionMatchSet})
+var sGetWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebACL, Type: smithy.ShapeTypeOperation, Ext: &eGetWebACL})
+var sGetWebACLForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebACLForResource, Type: smithy.ShapeTypeOperation, Ext: &eGetWebACLForResource})
+var sGetXssMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetXssMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eGetXssMatchSet})
+var sListActivatedRulesInRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActivatedRulesInRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eListActivatedRulesInRuleGroup})
+var sListByteMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListByteMatchSets, Type: smithy.ShapeTypeOperation, Ext: &eListByteMatchSets})
+var sListGeoMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGeoMatchSets, Type: smithy.ShapeTypeOperation, Ext: &eListGeoMatchSets})
+var sListIPSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIPSets, Type: smithy.ShapeTypeOperation, Ext: &eListIPSets})
+var sListLoggingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurations, Type: smithy.ShapeTypeOperation, Ext: &eListLoggingConfigurations})
+var sListRateBasedRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRateBasedRules, Type: smithy.ShapeTypeOperation, Ext: &eListRateBasedRules})
+var sListRegexMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegexMatchSets, Type: smithy.ShapeTypeOperation, Ext: &eListRegexMatchSets})
+var sListRegexPatternSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegexPatternSets, Type: smithy.ShapeTypeOperation, Ext: &eListRegexPatternSets})
+var sListResourcesForWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesForWebACL, Type: smithy.ShapeTypeOperation, Ext: &eListResourcesForWebACL})
+var sListRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroups, Type: smithy.ShapeTypeOperation, Ext: &eListRuleGroups})
+var sListRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRules, Type: smithy.ShapeTypeOperation, Ext: &eListRules})
+var sListSizeConstraintSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSizeConstraintSets, Type: smithy.ShapeTypeOperation, Ext: &eListSizeConstraintSets})
+var sListSqlInjectionMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSqlInjectionMatchSets, Type: smithy.ShapeTypeOperation, Ext: &eListSqlInjectionMatchSets})
+var sListSubscribedRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribedRuleGroups, Type: smithy.ShapeTypeOperation, Ext: &eListSubscribedRuleGroups})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWebACLs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebACLs, Type: smithy.ShapeTypeOperation, Ext: &eListWebACLs})
+var sListXssMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListXssMatchSets, Type: smithy.ShapeTypeOperation, Ext: &eListXssMatchSets})
+var sPutLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLoggingConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ePutLoggingConfiguration})
+var sPutPermissionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPermissionPolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutPermissionPolicy})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateByteMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateByteMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateByteMatchSet})
+var sUpdateGeoMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGeoMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGeoMatchSet})
+var sUpdateIPSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIPSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateIPSet})
+var sUpdateRateBasedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRateBasedRule, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRateBasedRule})
+var sUpdateRegexMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegexMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRegexMatchSet})
+var sUpdateRegexPatternSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegexPatternSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRegexPatternSet})
+var sUpdateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRule, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRule})
+var sUpdateRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRuleGroup})
+var sUpdateSizeConstraintSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSizeConstraintSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSizeConstraintSet})
+var sUpdateSqlInjectionMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSqlInjectionMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSqlInjectionMatchSet})
+var sUpdateWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebACL, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWebACL})
+var sUpdateXssMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateXssMatchSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateXssMatchSet})
+var s_AWSWAF_Regional_20161128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSWAF_Regional_20161128, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_AWSWAF_Regional_20161128})
+var s_Action = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &e_Action})
+var sActivatedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivatedRule, Members: &mActivatedRule, Type: smithy.ShapeTypeStructure, Ext: &eActivatedRule})
+var sActivatedRule_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RulePriority, Type: smithy.ShapeTypeInteger, Ext: &eActivatedRule_Priority})
+var sActivatedRule_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eActivatedRule_RuleId})
+var sActivatedRule_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iWafAction, Members: &mWafAction, Type: smithy.ShapeTypeStructure, Ext: &eActivatedRule_Action})
+var sActivatedRule_OverrideAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverrideAction", ID: &iWafOverrideAction, Members: &mWafOverrideAction, Type: smithy.ShapeTypeStructure, Ext: &eActivatedRule_OverrideAction})
+var sActivatedRule_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iWafRuleType, Members: &mWafRuleType, Type: smithy.ShapeTypeEnum, Ext: &eActivatedRule_Type})
+var sActivatedRule_ExcludedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedRules", ID: &i_ExcludedRules, Members: &m_ExcludedRules, Type: smithy.ShapeTypeList, Ext: &eActivatedRule_ExcludedRules})
+var s_ActivatedRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivatedRules, Members: &m_ActivatedRules, Type: smithy.ShapeTypeList, Ext: &e_ActivatedRules})
+var s_ActivatedRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActivatedRule, Members: &mActivatedRule, Type: smithy.ShapeTypeStructure, Ext: &e_ActivatedRules_member})
+var sByteMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByteMatchSet, Members: &mByteMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eByteMatchSet})
+var sByteMatchSet_ByteMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eByteMatchSet_ByteMatchSetId})
+var sByteMatchSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eByteMatchSet_Name})
+var sByteMatchSet_ByteMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchTuples", ID: &i_ByteMatchTuples, Members: &m_ByteMatchTuples, Type: smithy.ShapeTypeList, Ext: &eByteMatchSet_ByteMatchTuples})
+var s_ByteMatchSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteMatchSetSummaries, Members: &m_ByteMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_ByteMatchSetSummaries})
+var s_ByteMatchSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iByteMatchSetSummary, Members: &mByteMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ByteMatchSetSummaries_member})
+var sByteMatchSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByteMatchSetSummary, Members: &mByteMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eByteMatchSetSummary})
+var sByteMatchSetSummary_ByteMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eByteMatchSetSummary_ByteMatchSetId})
+var sByteMatchSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eByteMatchSetSummary_Name})
+var sByteMatchSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByteMatchSetUpdate, Members: &mByteMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eByteMatchSetUpdate})
+var sByteMatchSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eByteMatchSetUpdate_Action})
+var sByteMatchSetUpdate_ByteMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchTuple", ID: &iByteMatchTuple, Members: &mByteMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eByteMatchSetUpdate_ByteMatchTuple})
+var s_ByteMatchSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteMatchSetUpdates, Members: &m_ByteMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_ByteMatchSetUpdates})
+var s_ByteMatchSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iByteMatchSetUpdate, Members: &mByteMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_ByteMatchSetUpdates_member})
+var s_ByteMatchTargetString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteMatchTargetString, Type: smithy.ShapeTypeBlob, Ext: &e_ByteMatchTargetString})
+var sByteMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByteMatchTuple, Members: &mByteMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eByteMatchTuple})
+var sByteMatchTuple_FieldToMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldToMatch", ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure, Ext: &eByteMatchTuple_FieldToMatch})
+var sByteMatchTuple_TargetString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetString", ID: &i_ByteMatchTargetString, Type: smithy.ShapeTypeBlob, Ext: &eByteMatchTuple_TargetString})
+var sByteMatchTuple_TextTransformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextTransformation", ID: &iTextTransformation, Members: &mTextTransformation, Type: smithy.ShapeTypeEnum, Ext: &eByteMatchTuple_TextTransformation})
+var sByteMatchTuple_PositionalConstraint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PositionalConstraint", ID: &iPositionalConstraint, Members: &mPositionalConstraint, Type: smithy.ShapeTypeEnum, Ext: &eByteMatchTuple_PositionalConstraint})
+var s_ByteMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteMatchTuples, Members: &m_ByteMatchTuples, Type: smithy.ShapeTypeList, Ext: &e_ByteMatchTuples})
+var s_ByteMatchTuples_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iByteMatchTuple, Members: &mByteMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &e_ByteMatchTuples_member})
+var sChangeAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eChangeAction})
+var sChangeAction_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeAction_INSERT})
+var sChangeAction_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeAction_DELETE})
+var s_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &e_ChangeToken})
+var sChangeTokenStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeTokenStatus, Members: &mChangeTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eChangeTokenStatus})
+var sChangeTokenStatus_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeTokenStatus_PROVISIONED})
+var sChangeTokenStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeTokenStatus_PENDING})
+var sChangeTokenStatus_INSYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeTokenStatus_INSYNC})
+var sComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eComparisonOperator})
+var sComparisonOperator_EQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_EQ})
+var sComparisonOperator_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_NE})
+var sComparisonOperator_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_LE})
+var sComparisonOperator_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_LT})
+var sComparisonOperator_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_GE})
+var sComparisonOperator_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_GT})
+var s_Country = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &e_Country})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var s_ErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorReason, Type: smithy.ShapeTypeString, Ext: &e_ErrorReason})
+var sExcludedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExcludedRule, Members: &mExcludedRule, Type: smithy.ShapeTypeStructure, Ext: &eExcludedRule})
+var sExcludedRule_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eExcludedRule_RuleId})
+var s_ExcludedRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedRules, Members: &m_ExcludedRules, Type: smithy.ShapeTypeList, Ext: &e_ExcludedRules})
+var s_ExcludedRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExcludedRule, Members: &mExcludedRule, Type: smithy.ShapeTypeStructure, Ext: &e_ExcludedRules_member})
+var sFieldToMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure, Ext: &eFieldToMatch})
+var sFieldToMatch_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMatchFieldType, Members: &mMatchFieldType, Type: smithy.ShapeTypeEnum, Ext: &eFieldToMatch_Type})
+var sFieldToMatch_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_MatchFieldData, Type: smithy.ShapeTypeString, Ext: &eFieldToMatch_Data})
+var sGeoMatchConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchConstraint, Members: &mGeoMatchConstraint, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraint})
+var sGeoMatchConstraint_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iGeoMatchConstraintType, Members: &mGeoMatchConstraintType, Type: smithy.ShapeTypeEnum, Ext: &eGeoMatchConstraint_Type})
+var sGeoMatchConstraint_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iGeoMatchConstraintValue, Members: &mGeoMatchConstraintValue, Type: smithy.ShapeTypeEnum, Ext: &eGeoMatchConstraint_Value})
+var s_GeoMatchConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeoMatchConstraints, Members: &m_GeoMatchConstraints, Type: smithy.ShapeTypeList, Ext: &e_GeoMatchConstraints})
+var s_GeoMatchConstraints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeoMatchConstraint, Members: &mGeoMatchConstraint, Type: smithy.ShapeTypeStructure, Ext: &e_GeoMatchConstraints_member})
+var sGeoMatchConstraintType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchConstraintType, Members: &mGeoMatchConstraintType, Type: smithy.ShapeTypeEnum, Ext: &eGeoMatchConstraintType})
+var sGeoMatchConstraintType_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintType_Country})
+var sGeoMatchConstraintValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchConstraintValue, Members: &mGeoMatchConstraintValue, Type: smithy.ShapeTypeEnum, Ext: &eGeoMatchConstraintValue})
+var sGeoMatchConstraintValue_AF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AF})
+var sGeoMatchConstraintValue_AX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AX})
+var sGeoMatchConstraintValue_AL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AL})
+var sGeoMatchConstraintValue_DZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_DZ})
+var sGeoMatchConstraintValue_AS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AS})
+var sGeoMatchConstraintValue_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AD})
+var sGeoMatchConstraintValue_AO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AO})
+var sGeoMatchConstraintValue_AI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AI})
+var sGeoMatchConstraintValue_AQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AQ})
+var sGeoMatchConstraintValue_AG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AG})
+var sGeoMatchConstraintValue_AR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AR})
+var sGeoMatchConstraintValue_AM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AM})
+var sGeoMatchConstraintValue_AW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AW})
+var sGeoMatchConstraintValue_AU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AU})
+var sGeoMatchConstraintValue_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AT})
+var sGeoMatchConstraintValue_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AZ})
+var sGeoMatchConstraintValue_BS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BS})
+var sGeoMatchConstraintValue_BH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BH})
+var sGeoMatchConstraintValue_BD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BD})
+var sGeoMatchConstraintValue_BB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BB})
+var sGeoMatchConstraintValue_BY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BY})
+var sGeoMatchConstraintValue_BE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BE})
+var sGeoMatchConstraintValue_BZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BZ})
+var sGeoMatchConstraintValue_BJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BJ})
+var sGeoMatchConstraintValue_BM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BM})
+var sGeoMatchConstraintValue_BT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BT})
+var sGeoMatchConstraintValue_BO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BO})
+var sGeoMatchConstraintValue_BQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BQ})
+var sGeoMatchConstraintValue_BA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BA})
+var sGeoMatchConstraintValue_BW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BW})
+var sGeoMatchConstraintValue_BV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BV})
+var sGeoMatchConstraintValue_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BR})
+var sGeoMatchConstraintValue_IO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IO})
+var sGeoMatchConstraintValue_BN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BN})
+var sGeoMatchConstraintValue_BG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BG})
+var sGeoMatchConstraintValue_BF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BF})
+var sGeoMatchConstraintValue_BI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BI})
+var sGeoMatchConstraintValue_KH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KH})
+var sGeoMatchConstraintValue_CM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CM})
+var sGeoMatchConstraintValue_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CA})
+var sGeoMatchConstraintValue_CV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CV})
+var sGeoMatchConstraintValue_KY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KY})
+var sGeoMatchConstraintValue_CF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CF})
+var sGeoMatchConstraintValue_TD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TD})
+var sGeoMatchConstraintValue_CL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CL})
+var sGeoMatchConstraintValue_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CN})
+var sGeoMatchConstraintValue_CX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CX})
+var sGeoMatchConstraintValue_CC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CC})
+var sGeoMatchConstraintValue_CO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CO})
+var sGeoMatchConstraintValue_KM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KM})
+var sGeoMatchConstraintValue_CG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CG})
+var sGeoMatchConstraintValue_CD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CD})
+var sGeoMatchConstraintValue_CK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CK})
+var sGeoMatchConstraintValue_CR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CR})
+var sGeoMatchConstraintValue_CI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CI})
+var sGeoMatchConstraintValue_HR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_HR})
+var sGeoMatchConstraintValue_CU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CU})
+var sGeoMatchConstraintValue_CW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CW})
+var sGeoMatchConstraintValue_CY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CY})
+var sGeoMatchConstraintValue_CZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CZ})
+var sGeoMatchConstraintValue_DK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_DK})
+var sGeoMatchConstraintValue_DJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_DJ})
+var sGeoMatchConstraintValue_DM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_DM})
+var sGeoMatchConstraintValue_DO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_DO})
+var sGeoMatchConstraintValue_EC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_EC})
+var sGeoMatchConstraintValue_EG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_EG})
+var sGeoMatchConstraintValue_SV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SV})
+var sGeoMatchConstraintValue_GQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GQ})
+var sGeoMatchConstraintValue_ER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ER})
+var sGeoMatchConstraintValue_EE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_EE})
+var sGeoMatchConstraintValue_ET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ET})
+var sGeoMatchConstraintValue_FK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_FK})
+var sGeoMatchConstraintValue_FO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_FO})
+var sGeoMatchConstraintValue_FJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_FJ})
+var sGeoMatchConstraintValue_FI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_FI})
+var sGeoMatchConstraintValue_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_FR})
+var sGeoMatchConstraintValue_GF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GF})
+var sGeoMatchConstraintValue_PF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PF})
+var sGeoMatchConstraintValue_TF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TF})
+var sGeoMatchConstraintValue_GA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GA})
+var sGeoMatchConstraintValue_GM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GM})
+var sGeoMatchConstraintValue_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GE})
+var sGeoMatchConstraintValue_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_DE})
+var sGeoMatchConstraintValue_GH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GH})
+var sGeoMatchConstraintValue_GI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GI})
+var sGeoMatchConstraintValue_GR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GR})
+var sGeoMatchConstraintValue_GL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GL})
+var sGeoMatchConstraintValue_GD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GD})
+var sGeoMatchConstraintValue_GP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GP})
+var sGeoMatchConstraintValue_GU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GU})
+var sGeoMatchConstraintValue_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GT})
+var sGeoMatchConstraintValue_GG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GG})
+var sGeoMatchConstraintValue_GN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GN})
+var sGeoMatchConstraintValue_GW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GW})
+var sGeoMatchConstraintValue_GY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GY})
+var sGeoMatchConstraintValue_HT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_HT})
+var sGeoMatchConstraintValue_HM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_HM})
+var sGeoMatchConstraintValue_VA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_VA})
+var sGeoMatchConstraintValue_HN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_HN})
+var sGeoMatchConstraintValue_HK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_HK})
+var sGeoMatchConstraintValue_HU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_HU})
+var sGeoMatchConstraintValue_IS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IS})
+var sGeoMatchConstraintValue_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IN})
+var sGeoMatchConstraintValue_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ID})
+var sGeoMatchConstraintValue_IR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IR})
+var sGeoMatchConstraintValue_IQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IQ})
+var sGeoMatchConstraintValue_IE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IE})
+var sGeoMatchConstraintValue_IM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IM})
+var sGeoMatchConstraintValue_IL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IL})
+var sGeoMatchConstraintValue_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_IT})
+var sGeoMatchConstraintValue_JM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_JM})
+var sGeoMatchConstraintValue_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_JP})
+var sGeoMatchConstraintValue_JE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_JE})
+var sGeoMatchConstraintValue_JO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_JO})
+var sGeoMatchConstraintValue_KZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KZ})
+var sGeoMatchConstraintValue_KE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KE})
+var sGeoMatchConstraintValue_KI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KI})
+var sGeoMatchConstraintValue_KP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KP})
+var sGeoMatchConstraintValue_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KR})
+var sGeoMatchConstraintValue_KW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KW})
+var sGeoMatchConstraintValue_KG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KG})
+var sGeoMatchConstraintValue_LA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LA})
+var sGeoMatchConstraintValue_LV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LV})
+var sGeoMatchConstraintValue_LB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LB})
+var sGeoMatchConstraintValue_LS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LS})
+var sGeoMatchConstraintValue_LR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LR})
+var sGeoMatchConstraintValue_LY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LY})
+var sGeoMatchConstraintValue_LI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LI})
+var sGeoMatchConstraintValue_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LT})
+var sGeoMatchConstraintValue_LU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LU})
+var sGeoMatchConstraintValue_MO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MO})
+var sGeoMatchConstraintValue_MK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MK})
+var sGeoMatchConstraintValue_MG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MG})
+var sGeoMatchConstraintValue_MW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MW})
+var sGeoMatchConstraintValue_MY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MY})
+var sGeoMatchConstraintValue_MV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MV})
+var sGeoMatchConstraintValue_ML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ML})
+var sGeoMatchConstraintValue_MT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MT})
+var sGeoMatchConstraintValue_MH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MH})
+var sGeoMatchConstraintValue_MQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MQ})
+var sGeoMatchConstraintValue_MR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MR})
+var sGeoMatchConstraintValue_MU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MU})
+var sGeoMatchConstraintValue_YT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_YT})
+var sGeoMatchConstraintValue_MX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MX})
+var sGeoMatchConstraintValue_FM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_FM})
+var sGeoMatchConstraintValue_MD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MD})
+var sGeoMatchConstraintValue_MC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MC})
+var sGeoMatchConstraintValue_MN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MN})
+var sGeoMatchConstraintValue_ME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ME})
+var sGeoMatchConstraintValue_MS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MS})
+var sGeoMatchConstraintValue_MA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MA})
+var sGeoMatchConstraintValue_MZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MZ})
+var sGeoMatchConstraintValue_MM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MM})
+var sGeoMatchConstraintValue_NA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NA})
+var sGeoMatchConstraintValue_NR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NR})
+var sGeoMatchConstraintValue_NP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NP})
+var sGeoMatchConstraintValue_NL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NL})
+var sGeoMatchConstraintValue_NC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NC})
+var sGeoMatchConstraintValue_NZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NZ})
+var sGeoMatchConstraintValue_NI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NI})
+var sGeoMatchConstraintValue_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NE})
+var sGeoMatchConstraintValue_NG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NG})
+var sGeoMatchConstraintValue_NU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NU})
+var sGeoMatchConstraintValue_NF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NF})
+var sGeoMatchConstraintValue_MP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MP})
+var sGeoMatchConstraintValue_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_NO})
+var sGeoMatchConstraintValue_OM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_OM})
+var sGeoMatchConstraintValue_PK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PK})
+var sGeoMatchConstraintValue_PW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PW})
+var sGeoMatchConstraintValue_PS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PS})
+var sGeoMatchConstraintValue_PA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PA})
+var sGeoMatchConstraintValue_PG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PG})
+var sGeoMatchConstraintValue_PY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PY})
+var sGeoMatchConstraintValue_PE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PE})
+var sGeoMatchConstraintValue_PH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PH})
+var sGeoMatchConstraintValue_PN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PN})
+var sGeoMatchConstraintValue_PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PL})
+var sGeoMatchConstraintValue_PT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PT})
+var sGeoMatchConstraintValue_PR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PR})
+var sGeoMatchConstraintValue_QA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_QA})
+var sGeoMatchConstraintValue_RE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_RE})
+var sGeoMatchConstraintValue_RO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_RO})
+var sGeoMatchConstraintValue_RU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_RU})
+var sGeoMatchConstraintValue_RW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_RW})
+var sGeoMatchConstraintValue_BL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_BL})
+var sGeoMatchConstraintValue_SH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SH})
+var sGeoMatchConstraintValue_KN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_KN})
+var sGeoMatchConstraintValue_LC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LC})
+var sGeoMatchConstraintValue_MF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_MF})
+var sGeoMatchConstraintValue_PM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_PM})
+var sGeoMatchConstraintValue_VC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_VC})
+var sGeoMatchConstraintValue_WS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_WS})
+var sGeoMatchConstraintValue_SM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SM})
+var sGeoMatchConstraintValue_ST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ST})
+var sGeoMatchConstraintValue_SA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SA})
+var sGeoMatchConstraintValue_SN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SN})
+var sGeoMatchConstraintValue_RS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_RS})
+var sGeoMatchConstraintValue_SC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SC})
+var sGeoMatchConstraintValue_SL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SL})
+var sGeoMatchConstraintValue_SG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SG})
+var sGeoMatchConstraintValue_SX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SX})
+var sGeoMatchConstraintValue_SK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SK})
+var sGeoMatchConstraintValue_SI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SI})
+var sGeoMatchConstraintValue_SB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SB})
+var sGeoMatchConstraintValue_SO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SO})
+var sGeoMatchConstraintValue_ZA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ZA})
+var sGeoMatchConstraintValue_GS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GS})
+var sGeoMatchConstraintValue_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SS})
+var sGeoMatchConstraintValue_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ES})
+var sGeoMatchConstraintValue_LK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_LK})
+var sGeoMatchConstraintValue_SD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SD})
+var sGeoMatchConstraintValue_SR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SR})
+var sGeoMatchConstraintValue_SJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SJ})
+var sGeoMatchConstraintValue_SZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SZ})
+var sGeoMatchConstraintValue_SE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SE})
+var sGeoMatchConstraintValue_CH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_CH})
+var sGeoMatchConstraintValue_SY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_SY})
+var sGeoMatchConstraintValue_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TW})
+var sGeoMatchConstraintValue_TJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TJ})
+var sGeoMatchConstraintValue_TZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TZ})
+var sGeoMatchConstraintValue_TH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TH})
+var sGeoMatchConstraintValue_TL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TL})
+var sGeoMatchConstraintValue_TG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TG})
+var sGeoMatchConstraintValue_TK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TK})
+var sGeoMatchConstraintValue_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TO})
+var sGeoMatchConstraintValue_TT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TT})
+var sGeoMatchConstraintValue_TN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TN})
+var sGeoMatchConstraintValue_TR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TR})
+var sGeoMatchConstraintValue_TM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TM})
+var sGeoMatchConstraintValue_TC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TC})
+var sGeoMatchConstraintValue_TV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_TV})
+var sGeoMatchConstraintValue_UG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_UG})
+var sGeoMatchConstraintValue_UA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_UA})
+var sGeoMatchConstraintValue_AE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_AE})
+var sGeoMatchConstraintValue_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_GB})
+var sGeoMatchConstraintValue_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_US})
+var sGeoMatchConstraintValue_UM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_UM})
+var sGeoMatchConstraintValue_UY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_UY})
+var sGeoMatchConstraintValue_UZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_UZ})
+var sGeoMatchConstraintValue_VU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_VU})
+var sGeoMatchConstraintValue_VE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_VE})
+var sGeoMatchConstraintValue_VN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_VN})
+var sGeoMatchConstraintValue_VG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_VG})
+var sGeoMatchConstraintValue_VI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_VI})
+var sGeoMatchConstraintValue_WF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_WF})
+var sGeoMatchConstraintValue_EH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_EH})
+var sGeoMatchConstraintValue_YE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_YE})
+var sGeoMatchConstraintValue_ZM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ZM})
+var sGeoMatchConstraintValue_ZW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchConstraintValue_ZW})
+var sGeoMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchSet, Members: &mGeoMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchSet})
+var sGeoMatchSet_GeoMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGeoMatchSet_GeoMatchSetId})
+var sGeoMatchSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGeoMatchSet_Name})
+var sGeoMatchSet_GeoMatchConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchConstraints", ID: &i_GeoMatchConstraints, Members: &m_GeoMatchConstraints, Type: smithy.ShapeTypeList, Ext: &eGeoMatchSet_GeoMatchConstraints})
+var s_GeoMatchSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeoMatchSetSummaries, Members: &m_GeoMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_GeoMatchSetSummaries})
+var s_GeoMatchSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeoMatchSetSummary, Members: &mGeoMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_GeoMatchSetSummaries_member})
+var sGeoMatchSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchSetSummary, Members: &mGeoMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchSetSummary})
+var sGeoMatchSetSummary_GeoMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGeoMatchSetSummary_GeoMatchSetId})
+var sGeoMatchSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGeoMatchSetSummary_Name})
+var sGeoMatchSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchSetUpdate, Members: &mGeoMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchSetUpdate})
+var sGeoMatchSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eGeoMatchSetUpdate_Action})
+var sGeoMatchSetUpdate_GeoMatchConstraint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchConstraint", ID: &iGeoMatchConstraint, Members: &mGeoMatchConstraint, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchSetUpdate_GeoMatchConstraint})
+var s_GeoMatchSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeoMatchSetUpdates, Members: &m_GeoMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_GeoMatchSetUpdates})
+var s_GeoMatchSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeoMatchSetUpdate, Members: &mGeoMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_GeoMatchSetUpdates_member})
+var s_GetSampledRequestsMaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetSampledRequestsMaxItems, Type: smithy.ShapeTypeLong, Ext: &e_GetSampledRequestsMaxItems})
+var s_HeaderName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &e_HeaderName})
+var s_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &e_HeaderValue})
+var sHTTPHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHTTPHeader, Members: &mHTTPHeader, Type: smithy.ShapeTypeStructure, Ext: &eHTTPHeader})
+var sHTTPHeader_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &eHTTPHeader_Name})
+var sHTTPHeader_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &eHTTPHeader_Value})
+var s_HTTPHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HTTPHeaders, Members: &m_HTTPHeaders, Type: smithy.ShapeTypeList, Ext: &e_HTTPHeaders})
+var s_HTTPHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHTTPHeader, Members: &mHTTPHeader, Type: smithy.ShapeTypeStructure, Ext: &e_HTTPHeaders_member})
+var s_HTTPMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HTTPMethod, Type: smithy.ShapeTypeString, Ext: &e_HTTPMethod})
+var sHTTPRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHTTPRequest, Members: &mHTTPRequest, Type: smithy.ShapeTypeStructure, Ext: &eHTTPRequest})
+var sHTTPRequest_ClientIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientIP", ID: &i_IPString, Type: smithy.ShapeTypeString, Ext: &eHTTPRequest_ClientIP})
+var sHTTPRequest_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &eHTTPRequest_Country})
+var sHTTPRequest_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URI", ID: &i_URIString, Type: smithy.ShapeTypeString, Ext: &eHTTPRequest_URI})
+var sHTTPRequest_Method = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Method", ID: &i_HTTPMethod, Type: smithy.ShapeTypeString, Ext: &eHTTPRequest_Method})
+var sHTTPRequest_HTTPVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPVersion", ID: &i_HTTPVersion, Type: smithy.ShapeTypeString, Ext: &eHTTPRequest_HTTPVersion})
+var sHTTPRequest_Headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Headers", ID: &i_HTTPHeaders, Members: &m_HTTPHeaders, Type: smithy.ShapeTypeList, Ext: &eHTTPRequest_Headers})
+var s_HTTPVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HTTPVersion, Type: smithy.ShapeTypeString, Ext: &e_HTTPVersion})
+var s_IgnoreUnsupportedType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IgnoreUnsupportedType, Type: smithy.ShapeTypeBoolean, Ext: &e_IgnoreUnsupportedType})
+var sIPSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSet, Members: &mIPSet, Type: smithy.ShapeTypeStructure, Ext: &eIPSet})
+var sIPSet_IPSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eIPSet_IPSetId})
+var sIPSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eIPSet_Name})
+var sIPSet_IPSetDescriptors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetDescriptors", ID: &i_IPSetDescriptors, Members: &m_IPSetDescriptors, Type: smithy.ShapeTypeList, Ext: &eIPSet_IPSetDescriptors})
+var sIPSetDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetDescriptor, Members: &mIPSetDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eIPSetDescriptor})
+var sIPSetDescriptor_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iIPSetDescriptorType, Members: &mIPSetDescriptorType, Type: smithy.ShapeTypeEnum, Ext: &eIPSetDescriptor_Type})
+var sIPSetDescriptor_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_IPSetDescriptorValue, Type: smithy.ShapeTypeString, Ext: &eIPSetDescriptor_Value})
+var s_IPSetDescriptors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetDescriptors, Members: &m_IPSetDescriptors, Type: smithy.ShapeTypeList, Ext: &e_IPSetDescriptors})
+var s_IPSetDescriptors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIPSetDescriptor, Members: &mIPSetDescriptor, Type: smithy.ShapeTypeStructure, Ext: &e_IPSetDescriptors_member})
+var sIPSetDescriptorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetDescriptorType, Members: &mIPSetDescriptorType, Type: smithy.ShapeTypeEnum, Ext: &eIPSetDescriptorType})
+var sIPSetDescriptorType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIPSetDescriptorType_IPV4})
+var sIPSetDescriptorType_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIPSetDescriptorType_IPV6})
+var s_IPSetDescriptorValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetDescriptorValue, Type: smithy.ShapeTypeString, Ext: &e_IPSetDescriptorValue})
+var s_IPSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetSummaries, Members: &m_IPSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_IPSetSummaries})
+var s_IPSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIPSetSummary, Members: &mIPSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_IPSetSummaries_member})
+var sIPSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetSummary, Members: &mIPSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eIPSetSummary})
+var sIPSetSummary_IPSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eIPSetSummary_IPSetId})
+var sIPSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eIPSetSummary_Name})
+var sIPSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetUpdate, Members: &mIPSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eIPSetUpdate})
+var sIPSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eIPSetUpdate_Action})
+var sIPSetUpdate_IPSetDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetDescriptor", ID: &iIPSetDescriptor, Members: &mIPSetDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eIPSetUpdate_IPSetDescriptor})
+var s_IPSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetUpdates, Members: &m_IPSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_IPSetUpdates})
+var s_IPSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIPSetUpdate, Members: &mIPSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_IPSetUpdates_member})
+var s_IPString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPString, Type: smithy.ShapeTypeString, Ext: &e_IPString})
+var s_LogDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDestinationConfigs, Members: &m_LogDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &e_LogDestinationConfigs})
+var s_LogDestinationConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_LogDestinationConfigs_member})
+var sLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfiguration})
+var sLoggingConfiguration_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eLoggingConfiguration_ResourceArn})
+var sLoggingConfiguration_LogDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDestinationConfigs", ID: &i_LogDestinationConfigs, Members: &m_LogDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &eLoggingConfiguration_LogDestinationConfigs})
+var sLoggingConfiguration_RedactedFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedactedFields", ID: &i_RedactedFields, Members: &m_RedactedFields, Type: smithy.ShapeTypeList, Ext: &eLoggingConfiguration_RedactedFields})
+var s_LoggingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurations, Members: &m_LoggingConfigurations, Type: smithy.ShapeTypeList, Ext: &e_LoggingConfigurations})
+var s_LoggingConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_LoggingConfigurations_member})
+var s_ManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedKey, Type: smithy.ShapeTypeString, Ext: &e_ManagedKey})
+var s_ManagedKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedKeys, Members: &m_ManagedKeys, Type: smithy.ShapeTypeList, Ext: &e_ManagedKeys})
+var s_ManagedKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ManagedKey, Type: smithy.ShapeTypeString, Ext: &e_ManagedKeys_member})
+var s_MatchFieldData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchFieldData, Type: smithy.ShapeTypeString, Ext: &e_MatchFieldData})
+var sMatchFieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchFieldType, Members: &mMatchFieldType, Type: smithy.ShapeTypeEnum, Ext: &eMatchFieldType})
+var sMatchFieldType_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchFieldType_URI})
+var sMatchFieldType_QUERY_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY_STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchFieldType_QUERY_STRING})
+var sMatchFieldType_HEADER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEADER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchFieldType_HEADER})
+var sMatchFieldType_METHOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METHOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchFieldType_METHOD})
+var sMatchFieldType_BODY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BODY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchFieldType_BODY})
+var sMatchFieldType_SINGLE_QUERY_ARG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_QUERY_ARG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchFieldType_SINGLE_QUERY_ARG})
+var sMatchFieldType_ALL_QUERY_ARGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_QUERY_ARGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchFieldType_ALL_QUERY_ARGS})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricName})
+var sMigrationErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationErrorType, Members: &mMigrationErrorType, Type: smithy.ShapeTypeEnum, Ext: &eMigrationErrorType})
+var sMigrationErrorType_ENTITY_NOT_SUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTITY_NOT_SUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationErrorType_ENTITY_NOT_SUPPORTED})
+var sMigrationErrorType_ENTITY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTITY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationErrorType_ENTITY_NOT_FOUND})
+var sMigrationErrorType_S3_BUCKET_NO_PERMISSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_BUCKET_NO_PERMISSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationErrorType_S3_BUCKET_NO_PERMISSION})
+var sMigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_BUCKET_NOT_ACCESSIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE})
+var sMigrationErrorType_S3_BUCKET_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_BUCKET_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationErrorType_S3_BUCKET_NOT_FOUND})
+var sMigrationErrorType_S3_BUCKET_INVALID_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_BUCKET_INVALID_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationErrorType_S3_BUCKET_INVALID_REGION})
+var sMigrationErrorType_S3_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationErrorType_S3_INTERNAL_ERROR})
+var s_Negated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Negated, Type: smithy.ShapeTypeBoolean, Ext: &e_Negated})
+var s_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &e_NextMarker})
+var s_PaginationLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &e_PaginationLimit})
+var sParameterExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterExceptionField, Members: &mParameterExceptionField, Type: smithy.ShapeTypeEnum, Ext: &eParameterExceptionField})
+var sParameterExceptionField_CHANGE_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGE_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_CHANGE_ACTION})
+var sParameterExceptionField_WAF_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAF_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_WAF_ACTION})
+var sParameterExceptionField_WAF_OVERRIDE_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAF_OVERRIDE_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_WAF_OVERRIDE_ACTION})
+var sParameterExceptionField_PREDICATE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREDICATE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_PREDICATE_TYPE})
+var sParameterExceptionField_IPSET_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSET_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_IPSET_TYPE})
+var sParameterExceptionField_BYTE_MATCH_FIELD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTE_MATCH_FIELD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_BYTE_MATCH_FIELD_TYPE})
+var sParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQL_INJECTION_MATCH_FIELD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE})
+var sParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTE_MATCH_TEXT_TRANSFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION})
+var sParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTE_MATCH_POSITIONAL_CONSTRAINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT})
+var sParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIZE_CONSTRAINT_COMPARISON_OPERATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR})
+var sParameterExceptionField_GEO_MATCH_LOCATION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GEO_MATCH_LOCATION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_GEO_MATCH_LOCATION_TYPE})
+var sParameterExceptionField_GEO_MATCH_LOCATION_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GEO_MATCH_LOCATION_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_GEO_MATCH_LOCATION_VALUE})
+var sParameterExceptionField_RATE_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RATE_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_RATE_KEY})
+var sParameterExceptionField_RULE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RULE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_RULE_TYPE})
+var sParameterExceptionField_NEXT_MARKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEXT_MARKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_NEXT_MARKER})
+var sParameterExceptionField_RESOURCE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_RESOURCE_ARN})
+var sParameterExceptionField_TAGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_TAGS})
+var sParameterExceptionField_TAG_KEYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG_KEYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionField_TAG_KEYS})
+var s_ParameterExceptionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterExceptionParameter, Type: smithy.ShapeTypeString, Ext: &e_ParameterExceptionParameter})
+var sParameterExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterExceptionReason, Members: &mParameterExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eParameterExceptionReason})
+var sParameterExceptionReason_INVALID_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionReason_INVALID_OPTION})
+var sParameterExceptionReason_ILLEGAL_COMBINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_COMBINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionReason_ILLEGAL_COMBINATION})
+var sParameterExceptionReason_ILLEGAL_ARGUMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_ARGUMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionReason_ILLEGAL_ARGUMENT})
+var sParameterExceptionReason_INVALID_TAG_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TAG_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParameterExceptionReason_INVALID_TAG_KEY})
+var s_PolicyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &e_PolicyString})
+var s_PopulationSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PopulationSize, Type: smithy.ShapeTypeLong, Ext: &e_PopulationSize})
+var sPositionalConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPositionalConstraint, Members: &mPositionalConstraint, Type: smithy.ShapeTypeEnum, Ext: &ePositionalConstraint})
+var sPositionalConstraint_EXACTLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXACTLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePositionalConstraint_EXACTLY})
+var sPositionalConstraint_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePositionalConstraint_STARTS_WITH})
+var sPositionalConstraint_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePositionalConstraint_ENDS_WITH})
+var sPositionalConstraint_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePositionalConstraint_CONTAINS})
+var sPositionalConstraint_CONTAINS_WORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS_WORD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePositionalConstraint_CONTAINS_WORD})
+var sPredicate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredicate, Members: &mPredicate, Type: smithy.ShapeTypeStructure, Ext: &ePredicate})
+var sPredicate_Negated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Negated", ID: &i_Negated, Type: smithy.ShapeTypeBoolean, Ext: &ePredicate_Negated})
+var sPredicate_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPredicateType, Members: &mPredicateType, Type: smithy.ShapeTypeEnum, Ext: &ePredicate_Type})
+var sPredicate_DataId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ePredicate_DataId})
+var s_Predicates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Predicates, Members: &m_Predicates, Type: smithy.ShapeTypeList, Ext: &e_Predicates})
+var s_Predicates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredicate, Members: &mPredicate, Type: smithy.ShapeTypeStructure, Ext: &e_Predicates_member})
+var sPredicateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredicateType, Members: &mPredicateType, Type: smithy.ShapeTypeEnum, Ext: &ePredicateType})
+var sPredicateType_IP_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePredicateType_IP_MATCH})
+var sPredicateType_BYTE_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTE_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePredicateType_BYTE_MATCH})
+var sPredicateType_SQL_INJECTION_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQL_INJECTION_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePredicateType_SQL_INJECTION_MATCH})
+var sPredicateType_GEO_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GEO_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePredicateType_GEO_MATCH})
+var sPredicateType_SIZE_CONSTRAINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIZE_CONSTRAINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePredicateType_SIZE_CONSTRAINT})
+var sPredicateType_XSS_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XSS_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePredicateType_XSS_MATCH})
+var sPredicateType_REGEX_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGEX_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePredicateType_REGEX_MATCH})
+var sRateBasedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRateBasedRule, Members: &mRateBasedRule, Type: smithy.ShapeTypeStructure, Ext: &eRateBasedRule})
+var sRateBasedRule_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRateBasedRule_RuleId})
+var sRateBasedRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRateBasedRule_Name})
+var sRateBasedRule_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eRateBasedRule_MetricName})
+var sRateBasedRule_MatchPredicates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchPredicates", ID: &i_Predicates, Members: &m_Predicates, Type: smithy.ShapeTypeList, Ext: &eRateBasedRule_MatchPredicates})
+var sRateBasedRule_RateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RateKey", ID: &iRateKey, Members: &mRateKey, Type: smithy.ShapeTypeEnum, Ext: &eRateBasedRule_RateKey})
+var sRateBasedRule_RateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeLong, Ext: &eRateBasedRule_RateLimit})
+var sRateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRateKey, Members: &mRateKey, Type: smithy.ShapeTypeEnum, Ext: &eRateKey})
+var sRateKey_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRateKey_IP})
+var s_RateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RateLimit, Type: smithy.ShapeTypeLong, Ext: &e_RateLimit})
+var s_RedactedFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedactedFields, Members: &m_RedactedFields, Type: smithy.ShapeTypeList, Ext: &e_RedactedFields})
+var s_RedactedFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure, Ext: &e_RedactedFields_member})
+var sRegexMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegexMatchSet, Members: &mRegexMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eRegexMatchSet})
+var sRegexMatchSet_RegexMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRegexMatchSet_RegexMatchSetId})
+var sRegexMatchSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRegexMatchSet_Name})
+var sRegexMatchSet_RegexMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchTuples", ID: &i_RegexMatchTuples, Members: &m_RegexMatchTuples, Type: smithy.ShapeTypeList, Ext: &eRegexMatchSet_RegexMatchTuples})
+var s_RegexMatchSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexMatchSetSummaries, Members: &m_RegexMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_RegexMatchSetSummaries})
+var s_RegexMatchSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegexMatchSetSummary, Members: &mRegexMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RegexMatchSetSummaries_member})
+var sRegexMatchSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegexMatchSetSummary, Members: &mRegexMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eRegexMatchSetSummary})
+var sRegexMatchSetSummary_RegexMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRegexMatchSetSummary_RegexMatchSetId})
+var sRegexMatchSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRegexMatchSetSummary_Name})
+var sRegexMatchSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegexMatchSetUpdate, Members: &mRegexMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eRegexMatchSetUpdate})
+var sRegexMatchSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eRegexMatchSetUpdate_Action})
+var sRegexMatchSetUpdate_RegexMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchTuple", ID: &iRegexMatchTuple, Members: &mRegexMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eRegexMatchSetUpdate_RegexMatchTuple})
+var s_RegexMatchSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexMatchSetUpdates, Members: &m_RegexMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_RegexMatchSetUpdates})
+var s_RegexMatchSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegexMatchSetUpdate, Members: &mRegexMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_RegexMatchSetUpdates_member})
+var sRegexMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegexMatchTuple, Members: &mRegexMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eRegexMatchTuple})
+var sRegexMatchTuple_FieldToMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldToMatch", ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure, Ext: &eRegexMatchTuple_FieldToMatch})
+var sRegexMatchTuple_TextTransformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextTransformation", ID: &iTextTransformation, Members: &mTextTransformation, Type: smithy.ShapeTypeEnum, Ext: &eRegexMatchTuple_TextTransformation})
+var sRegexMatchTuple_RegexPatternSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRegexMatchTuple_RegexPatternSetId})
+var s_RegexMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexMatchTuples, Members: &m_RegexMatchTuples, Type: smithy.ShapeTypeList, Ext: &e_RegexMatchTuples})
+var s_RegexMatchTuples_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegexMatchTuple, Members: &mRegexMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &e_RegexMatchTuples_member})
+var sRegexPatternSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegexPatternSet, Members: &mRegexPatternSet, Type: smithy.ShapeTypeStructure, Ext: &eRegexPatternSet})
+var sRegexPatternSet_RegexPatternSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRegexPatternSet_RegexPatternSetId})
+var sRegexPatternSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRegexPatternSet_Name})
+var sRegexPatternSet_RegexPatternStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternStrings", ID: &i_RegexPatternStrings, Members: &m_RegexPatternStrings, Type: smithy.ShapeTypeList, Ext: &eRegexPatternSet_RegexPatternStrings})
+var s_RegexPatternSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexPatternSetSummaries, Members: &m_RegexPatternSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_RegexPatternSetSummaries})
+var s_RegexPatternSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegexPatternSetSummary, Members: &mRegexPatternSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RegexPatternSetSummaries_member})
+var sRegexPatternSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegexPatternSetSummary, Members: &mRegexPatternSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eRegexPatternSetSummary})
+var sRegexPatternSetSummary_RegexPatternSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRegexPatternSetSummary_RegexPatternSetId})
+var sRegexPatternSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRegexPatternSetSummary_Name})
+var sRegexPatternSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegexPatternSetUpdate, Members: &mRegexPatternSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eRegexPatternSetUpdate})
+var sRegexPatternSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eRegexPatternSetUpdate_Action})
+var sRegexPatternSetUpdate_RegexPatternString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternString", ID: &i_RegexPatternString, Type: smithy.ShapeTypeString, Ext: &eRegexPatternSetUpdate_RegexPatternString})
+var s_RegexPatternSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexPatternSetUpdates, Members: &m_RegexPatternSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_RegexPatternSetUpdates})
+var s_RegexPatternSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegexPatternSetUpdate, Members: &mRegexPatternSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_RegexPatternSetUpdates_member})
+var s_RegexPatternString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexPatternString, Type: smithy.ShapeTypeString, Ext: &e_RegexPatternString})
+var s_RegexPatternStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexPatternStrings, Members: &m_RegexPatternStrings, Type: smithy.ShapeTypeList, Ext: &e_RegexPatternStrings})
+var s_RegexPatternStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegexPatternString, Type: smithy.ShapeTypeString, Ext: &e_RegexPatternStrings_member})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &e_ResourceArns})
+var s_ResourceArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArns_member})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sResourceType_APPLICATION_LOAD_BALANCER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION_LOAD_BALANCER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_APPLICATION_LOAD_BALANCER})
+var sResourceType_API_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_API_GATEWAY})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eRule})
+var sRule_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRule_RuleId})
+var sRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRule_Name})
+var sRule_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eRule_MetricName})
+var sRule_Predicates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Predicates", ID: &i_Predicates, Members: &m_Predicates, Type: smithy.ShapeTypeList, Ext: &eRule_Predicates})
+var sRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroup})
+var sRuleGroup_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRuleGroup_RuleGroupId})
+var sRuleGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRuleGroup_Name})
+var sRuleGroup_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eRuleGroup_MetricName})
+var s_RuleGroupSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroupSummaries, Members: &m_RuleGroupSummaries, Type: smithy.ShapeTypeList, Ext: &e_RuleGroupSummaries})
+var s_RuleGroupSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleGroupSummary, Members: &mRuleGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RuleGroupSummaries_member})
+var sRuleGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupSummary, Members: &mRuleGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupSummary})
+var sRuleGroupSummary_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRuleGroupSummary_RuleGroupId})
+var sRuleGroupSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRuleGroupSummary_Name})
+var sRuleGroupUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupUpdate, Members: &mRuleGroupUpdate, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupUpdate})
+var sRuleGroupUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eRuleGroupUpdate_Action})
+var sRuleGroupUpdate_ActivatedRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivatedRule", ID: &iActivatedRule, Members: &mActivatedRule, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupUpdate_ActivatedRule})
+var s_RuleGroupUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroupUpdates, Members: &m_RuleGroupUpdates, Type: smithy.ShapeTypeList, Ext: &e_RuleGroupUpdates})
+var s_RuleGroupUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleGroupUpdate, Members: &mRuleGroupUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_RuleGroupUpdates_member})
+var s_RulePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulePriority, Type: smithy.ShapeTypeInteger, Ext: &e_RulePriority})
+var s_RuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSummaries, Members: &m_RuleSummaries, Type: smithy.ShapeTypeList, Ext: &e_RuleSummaries})
+var s_RuleSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RuleSummaries_member})
+var sRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &eRuleSummary})
+var sRuleSummary_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_RuleId})
+var sRuleSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_Name})
+var sRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleUpdate, Members: &mRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &eRuleUpdate})
+var sRuleUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eRuleUpdate_Action})
+var sRuleUpdate_Predicate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Predicate", ID: &iPredicate, Members: &mPredicate, Type: smithy.ShapeTypeStructure, Ext: &eRuleUpdate_Predicate})
+var s_RuleUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleUpdates, Members: &m_RuleUpdates, Type: smithy.ShapeTypeList, Ext: &e_RuleUpdates})
+var s_RuleUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleUpdate, Members: &mRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_RuleUpdates_member})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_S3ObjectUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectUrl, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectUrl})
+var sSampledHTTPRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampledHTTPRequest, Members: &mSampledHTTPRequest, Type: smithy.ShapeTypeStructure, Ext: &eSampledHTTPRequest})
+var sSampledHTTPRequest_Request = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Request", ID: &iHTTPRequest, Members: &mHTTPRequest, Type: smithy.ShapeTypeStructure, Ext: &eSampledHTTPRequest_Request})
+var sSampledHTTPRequest_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_SampleWeight, Type: smithy.ShapeTypeLong, Ext: &eSampledHTTPRequest_Weight})
+var sSampledHTTPRequest_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSampledHTTPRequest_Timestamp})
+var sSampledHTTPRequest_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &eSampledHTTPRequest_Action})
+var sSampledHTTPRequest_RuleWithinRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleWithinRuleGroup", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eSampledHTTPRequest_RuleWithinRuleGroup})
+var s_SampledHTTPRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampledHTTPRequests, Members: &m_SampledHTTPRequests, Type: smithy.ShapeTypeList, Ext: &e_SampledHTTPRequests})
+var s_SampledHTTPRequests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSampledHTTPRequest, Members: &mSampledHTTPRequest, Type: smithy.ShapeTypeStructure, Ext: &e_SampledHTTPRequests_member})
+var s_SampleWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleWeight, Type: smithy.ShapeTypeLong, Ext: &e_SampleWeight})
+var s_Size = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Size, Type: smithy.ShapeTypeLong, Ext: &e_Size})
+var sSizeConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSizeConstraint, Members: &mSizeConstraint, Type: smithy.ShapeTypeStructure, Ext: &eSizeConstraint})
+var sSizeConstraint_FieldToMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldToMatch", ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure, Ext: &eSizeConstraint_FieldToMatch})
+var sSizeConstraint_TextTransformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextTransformation", ID: &iTextTransformation, Members: &mTextTransformation, Type: smithy.ShapeTypeEnum, Ext: &eSizeConstraint_TextTransformation})
+var sSizeConstraint_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eSizeConstraint_ComparisonOperator})
+var sSizeConstraint_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_Size, Type: smithy.ShapeTypeLong, Ext: &eSizeConstraint_Size})
+var s_SizeConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SizeConstraints, Members: &m_SizeConstraints, Type: smithy.ShapeTypeList, Ext: &e_SizeConstraints})
+var s_SizeConstraints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSizeConstraint, Members: &mSizeConstraint, Type: smithy.ShapeTypeStructure, Ext: &e_SizeConstraints_member})
+var sSizeConstraintSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSizeConstraintSet, Members: &mSizeConstraintSet, Type: smithy.ShapeTypeStructure, Ext: &eSizeConstraintSet})
+var sSizeConstraintSet_SizeConstraintSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eSizeConstraintSet_SizeConstraintSetId})
+var sSizeConstraintSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eSizeConstraintSet_Name})
+var sSizeConstraintSet_SizeConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraints", ID: &i_SizeConstraints, Members: &m_SizeConstraints, Type: smithy.ShapeTypeList, Ext: &eSizeConstraintSet_SizeConstraints})
+var s_SizeConstraintSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SizeConstraintSetSummaries, Members: &m_SizeConstraintSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_SizeConstraintSetSummaries})
+var s_SizeConstraintSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSizeConstraintSetSummary, Members: &mSizeConstraintSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SizeConstraintSetSummaries_member})
+var sSizeConstraintSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSizeConstraintSetSummary, Members: &mSizeConstraintSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eSizeConstraintSetSummary})
+var sSizeConstraintSetSummary_SizeConstraintSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eSizeConstraintSetSummary_SizeConstraintSetId})
+var sSizeConstraintSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eSizeConstraintSetSummary_Name})
+var sSizeConstraintSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSizeConstraintSetUpdate, Members: &mSizeConstraintSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eSizeConstraintSetUpdate})
+var sSizeConstraintSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eSizeConstraintSetUpdate_Action})
+var sSizeConstraintSetUpdate_SizeConstraint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraint", ID: &iSizeConstraint, Members: &mSizeConstraint, Type: smithy.ShapeTypeStructure, Ext: &eSizeConstraintSetUpdate_SizeConstraint})
+var s_SizeConstraintSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SizeConstraintSetUpdates, Members: &m_SizeConstraintSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_SizeConstraintSetUpdates})
+var s_SizeConstraintSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSizeConstraintSetUpdate, Members: &mSizeConstraintSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_SizeConstraintSetUpdates_member})
+var sSqlInjectionMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqlInjectionMatchSet, Members: &mSqlInjectionMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eSqlInjectionMatchSet})
+var sSqlInjectionMatchSet_SqlInjectionMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eSqlInjectionMatchSet_SqlInjectionMatchSetId})
+var sSqlInjectionMatchSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eSqlInjectionMatchSet_Name})
+var sSqlInjectionMatchSet_SqlInjectionMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchTuples", ID: &i_SqlInjectionMatchTuples, Members: &m_SqlInjectionMatchTuples, Type: smithy.ShapeTypeList, Ext: &eSqlInjectionMatchSet_SqlInjectionMatchTuples})
+var s_SqlInjectionMatchSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlInjectionMatchSetSummaries, Members: &m_SqlInjectionMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_SqlInjectionMatchSetSummaries})
+var s_SqlInjectionMatchSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSqlInjectionMatchSetSummary, Members: &mSqlInjectionMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SqlInjectionMatchSetSummaries_member})
+var sSqlInjectionMatchSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqlInjectionMatchSetSummary, Members: &mSqlInjectionMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eSqlInjectionMatchSetSummary})
+var sSqlInjectionMatchSetSummary_SqlInjectionMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eSqlInjectionMatchSetSummary_SqlInjectionMatchSetId})
+var sSqlInjectionMatchSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eSqlInjectionMatchSetSummary_Name})
+var sSqlInjectionMatchSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqlInjectionMatchSetUpdate, Members: &mSqlInjectionMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eSqlInjectionMatchSetUpdate})
+var sSqlInjectionMatchSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eSqlInjectionMatchSetUpdate_Action})
+var sSqlInjectionMatchSetUpdate_SqlInjectionMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchTuple", ID: &iSqlInjectionMatchTuple, Members: &mSqlInjectionMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eSqlInjectionMatchSetUpdate_SqlInjectionMatchTuple})
+var s_SqlInjectionMatchSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlInjectionMatchSetUpdates, Members: &m_SqlInjectionMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_SqlInjectionMatchSetUpdates})
+var s_SqlInjectionMatchSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSqlInjectionMatchSetUpdate, Members: &mSqlInjectionMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_SqlInjectionMatchSetUpdates_member})
+var sSqlInjectionMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqlInjectionMatchTuple, Members: &mSqlInjectionMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eSqlInjectionMatchTuple})
+var sSqlInjectionMatchTuple_FieldToMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldToMatch", ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure, Ext: &eSqlInjectionMatchTuple_FieldToMatch})
+var sSqlInjectionMatchTuple_TextTransformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextTransformation", ID: &iTextTransformation, Members: &mTextTransformation, Type: smithy.ShapeTypeEnum, Ext: &eSqlInjectionMatchTuple_TextTransformation})
+var s_SqlInjectionMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlInjectionMatchTuples, Members: &m_SqlInjectionMatchTuples, Type: smithy.ShapeTypeList, Ext: &e_SqlInjectionMatchTuples})
+var s_SqlInjectionMatchTuples_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSqlInjectionMatchTuple, Members: &mSqlInjectionMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &e_SqlInjectionMatchTuples_member})
+var s_SubscribedRuleGroupSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscribedRuleGroupSummaries, Members: &m_SubscribedRuleGroupSummaries, Type: smithy.ShapeTypeList, Ext: &e_SubscribedRuleGroupSummaries})
+var s_SubscribedRuleGroupSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscribedRuleGroupSummary, Members: &mSubscribedRuleGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SubscribedRuleGroupSummaries_member})
+var sSubscribedRuleGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribedRuleGroupSummary, Members: &mSubscribedRuleGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eSubscribedRuleGroupSummary})
+var sSubscribedRuleGroupSummary_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eSubscribedRuleGroupSummary_RuleGroupId})
+var sSubscribedRuleGroupSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eSubscribedRuleGroupSummary_Name})
+var sSubscribedRuleGroupSummary_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eSubscribedRuleGroupSummary_MetricName})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var sTagInfoForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagInfoForResource, Members: &mTagInfoForResource, Type: smithy.ShapeTypeStructure, Ext: &eTagInfoForResource})
+var sTagInfoForResource_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagInfoForResource_ResourceARN})
+var sTagInfoForResource_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagInfoForResource_TagList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTextTransformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextTransformation, Members: &mTextTransformation, Type: smithy.ShapeTypeEnum, Ext: &eTextTransformation})
+var sTextTransformation_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextTransformation_NONE})
+var sTextTransformation_COMPRESS_WHITE_SPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPRESS_WHITE_SPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextTransformation_COMPRESS_WHITE_SPACE})
+var sTextTransformation_HTML_ENTITY_DECODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTML_ENTITY_DECODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextTransformation_HTML_ENTITY_DECODE})
+var sTextTransformation_LOWERCASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOWERCASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextTransformation_LOWERCASE})
+var sTextTransformation_CMD_LINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CMD_LINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextTransformation_CMD_LINE})
+var sTextTransformation_URL_DECODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_DECODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTextTransformation_URL_DECODE})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeWindow, Members: &mTimeWindow, Type: smithy.ShapeTypeStructure, Ext: &eTimeWindow})
+var sTimeWindow_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeWindow_StartTime})
+var sTimeWindow_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeWindow_EndTime})
+var s_URIString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_URIString, Type: smithy.ShapeTypeString, Ext: &e_URIString})
+var sWafAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWafAction, Members: &mWafAction, Type: smithy.ShapeTypeStructure, Ext: &eWafAction})
+var sWafAction_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iWafActionType, Members: &mWafActionType, Type: smithy.ShapeTypeEnum, Ext: &eWafAction_Type})
+var sWafActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWafActionType, Members: &mWafActionType, Type: smithy.ShapeTypeEnum, Ext: &eWafActionType})
+var sWafActionType_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafActionType_BLOCK})
+var sWafActionType_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafActionType_ALLOW})
+var sWafActionType_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafActionType_COUNT})
+var sWAFBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFBadRequestException, Members: &mWAFBadRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFBadRequestException})
+var sWAFBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFBadRequestException_message})
+var sWAFDisallowedNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFDisallowedNameException, Members: &mWAFDisallowedNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFDisallowedNameException})
+var sWAFDisallowedNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFDisallowedNameException_message})
+var sWAFEntityMigrationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFEntityMigrationException, Members: &mWAFEntityMigrationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFEntityMigrationException})
+var sWAFEntityMigrationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFEntityMigrationException_message})
+var sWAFEntityMigrationException_MigrationErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationErrorType", ID: &iMigrationErrorType, Members: &mMigrationErrorType, Type: smithy.ShapeTypeEnum, Ext: &eWAFEntityMigrationException_MigrationErrorType})
+var sWAFEntityMigrationException_MigrationErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationErrorReason", ID: &i_ErrorReason, Type: smithy.ShapeTypeString, Ext: &eWAFEntityMigrationException_MigrationErrorReason})
+var sWAFInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFInternalErrorException, Members: &mWAFInternalErrorException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eWAFInternalErrorException})
+var sWAFInternalErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFInternalErrorException_message})
+var sWAFInvalidAccountException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFInvalidAccountException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFInvalidAccountException})
+var sWAFInvalidOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFInvalidOperationException, Members: &mWAFInvalidOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFInvalidOperationException})
+var sWAFInvalidOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFInvalidOperationException_message})
+var sWAFInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFInvalidParameterException, Members: &mWAFInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFInvalidParameterException})
+var sWAFInvalidParameterException_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &iParameterExceptionField, Members: &mParameterExceptionField, Type: smithy.ShapeTypeEnum, Ext: &eWAFInvalidParameterException_field})
+var sWAFInvalidParameterException_parameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameter", ID: &i_ParameterExceptionParameter, Type: smithy.ShapeTypeString, Ext: &eWAFInvalidParameterException_parameter})
+var sWAFInvalidParameterException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iParameterExceptionReason, Members: &mParameterExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eWAFInvalidParameterException_reason})
+var sWAFInvalidPermissionPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFInvalidPermissionPolicyException, Members: &mWAFInvalidPermissionPolicyException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFInvalidPermissionPolicyException})
+var sWAFInvalidPermissionPolicyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFInvalidPermissionPolicyException_message})
+var sWAFInvalidRegexPatternException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFInvalidRegexPatternException, Members: &mWAFInvalidRegexPatternException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFInvalidRegexPatternException})
+var sWAFInvalidRegexPatternException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFInvalidRegexPatternException_message})
+var sWAFLimitsExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFLimitsExceededException, Members: &mWAFLimitsExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFLimitsExceededException})
+var sWAFLimitsExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFLimitsExceededException_message})
+var sWAFNonEmptyEntityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFNonEmptyEntityException, Members: &mWAFNonEmptyEntityException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFNonEmptyEntityException})
+var sWAFNonEmptyEntityException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFNonEmptyEntityException_message})
+var sWAFNonexistentContainerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFNonexistentContainerException, Members: &mWAFNonexistentContainerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFNonexistentContainerException})
+var sWAFNonexistentContainerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFNonexistentContainerException_message})
+var sWAFNonexistentItemException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFNonexistentItemException, Members: &mWAFNonexistentItemException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFNonexistentItemException})
+var sWAFNonexistentItemException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFNonexistentItemException_message})
+var sWafOverrideAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWafOverrideAction, Members: &mWafOverrideAction, Type: smithy.ShapeTypeStructure, Ext: &eWafOverrideAction})
+var sWafOverrideAction_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iWafOverrideActionType, Members: &mWafOverrideActionType, Type: smithy.ShapeTypeEnum, Ext: &eWafOverrideAction_Type})
+var sWafOverrideActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWafOverrideActionType, Members: &mWafOverrideActionType, Type: smithy.ShapeTypeEnum, Ext: &eWafOverrideActionType})
+var sWafOverrideActionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafOverrideActionType_NONE})
+var sWafOverrideActionType_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafOverrideActionType_COUNT})
+var sWAFReferencedItemException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFReferencedItemException, Members: &mWAFReferencedItemException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFReferencedItemException})
+var sWAFReferencedItemException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFReferencedItemException_message})
+var sWafRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWafRuleType, Members: &mWafRuleType, Type: smithy.ShapeTypeEnum, Ext: &eWafRuleType})
+var sWafRuleType_REGULAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGULAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafRuleType_REGULAR})
+var sWafRuleType_RATE_BASED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RATE_BASED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafRuleType_RATE_BASED})
+var sWafRuleType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWafRuleType_GROUP})
+var sWAFServiceLinkedRoleErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFServiceLinkedRoleErrorException, Members: &mWAFServiceLinkedRoleErrorException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFServiceLinkedRoleErrorException})
+var sWAFServiceLinkedRoleErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFServiceLinkedRoleErrorException_message})
+var sWAFStaleDataException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFStaleDataException, Members: &mWAFStaleDataException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFStaleDataException})
+var sWAFStaleDataException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFStaleDataException_message})
+var sWAFSubscriptionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFSubscriptionNotFoundException, Members: &mWAFSubscriptionNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFSubscriptionNotFoundException})
+var sWAFSubscriptionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFSubscriptionNotFoundException_message})
+var sWAFTagOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFTagOperationException, Members: &mWAFTagOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFTagOperationException})
+var sWAFTagOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFTagOperationException_message})
+var sWAFTagOperationInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFTagOperationInternalErrorException, Members: &mWAFTagOperationInternalErrorException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eWAFTagOperationInternalErrorException})
+var sWAFTagOperationInternalErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFTagOperationInternalErrorException_message})
+var sWAFUnavailableEntityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFUnavailableEntityException, Members: &mWAFUnavailableEntityException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eWAFUnavailableEntityException})
+var sWAFUnavailableEntityException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eWAFUnavailableEntityException_message})
+var sWebACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebACL, Members: &mWebACL, Type: smithy.ShapeTypeStructure, Ext: &eWebACL})
+var sWebACL_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eWebACL_WebACLId})
+var sWebACL_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eWebACL_Name})
+var sWebACL_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eWebACL_MetricName})
+var sWebACL_DefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAction", ID: &iWafAction, Members: &mWafAction, Type: smithy.ShapeTypeStructure, Ext: &eWebACL_DefaultAction})
+var sWebACL_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ActivatedRules, Members: &m_ActivatedRules, Type: smithy.ShapeTypeList, Ext: &eWebACL_Rules})
+var sWebACL_WebACLArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eWebACL_WebACLArn})
+var s_WebACLSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebACLSummaries, Members: &m_WebACLSummaries, Type: smithy.ShapeTypeList, Ext: &e_WebACLSummaries})
+var s_WebACLSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWebACLSummary, Members: &mWebACLSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WebACLSummaries_member})
+var sWebACLSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebACLSummary, Members: &mWebACLSummary, Type: smithy.ShapeTypeStructure, Ext: &eWebACLSummary})
+var sWebACLSummary_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eWebACLSummary_WebACLId})
+var sWebACLSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eWebACLSummary_Name})
+var sWebACLUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebACLUpdate, Members: &mWebACLUpdate, Type: smithy.ShapeTypeStructure, Ext: &eWebACLUpdate})
+var sWebACLUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eWebACLUpdate_Action})
+var sWebACLUpdate_ActivatedRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivatedRule", ID: &iActivatedRule, Members: &mActivatedRule, Type: smithy.ShapeTypeStructure, Ext: &eWebACLUpdate_ActivatedRule})
+var s_WebACLUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebACLUpdates, Members: &m_WebACLUpdates, Type: smithy.ShapeTypeList, Ext: &e_WebACLUpdates})
+var s_WebACLUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWebACLUpdate, Members: &mWebACLUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_WebACLUpdates_member})
+var sXssMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXssMatchSet, Members: &mXssMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eXssMatchSet})
+var sXssMatchSet_XssMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eXssMatchSet_XssMatchSetId})
+var sXssMatchSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eXssMatchSet_Name})
+var sXssMatchSet_XssMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchTuples", ID: &i_XssMatchTuples, Members: &m_XssMatchTuples, Type: smithy.ShapeTypeList, Ext: &eXssMatchSet_XssMatchTuples})
+var s_XssMatchSetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XssMatchSetSummaries, Members: &m_XssMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &e_XssMatchSetSummaries})
+var s_XssMatchSetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iXssMatchSetSummary, Members: &mXssMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_XssMatchSetSummaries_member})
+var sXssMatchSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXssMatchSetSummary, Members: &mXssMatchSetSummary, Type: smithy.ShapeTypeStructure, Ext: &eXssMatchSetSummary})
+var sXssMatchSetSummary_XssMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eXssMatchSetSummary_XssMatchSetId})
+var sXssMatchSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eXssMatchSetSummary_Name})
+var sXssMatchSetUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXssMatchSetUpdate, Members: &mXssMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &eXssMatchSetUpdate})
+var sXssMatchSetUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum, Ext: &eXssMatchSetUpdate_Action})
+var sXssMatchSetUpdate_XssMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchTuple", ID: &iXssMatchTuple, Members: &mXssMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eXssMatchSetUpdate_XssMatchTuple})
+var s_XssMatchSetUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XssMatchSetUpdates, Members: &m_XssMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &e_XssMatchSetUpdates})
+var s_XssMatchSetUpdates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iXssMatchSetUpdate, Members: &mXssMatchSetUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_XssMatchSetUpdates_member})
+var sXssMatchTuple = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXssMatchTuple, Members: &mXssMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &eXssMatchTuple})
+var sXssMatchTuple_FieldToMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldToMatch", ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure, Ext: &eXssMatchTuple_FieldToMatch})
+var sXssMatchTuple_TextTransformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextTransformation", ID: &iTextTransformation, Members: &mTextTransformation, Type: smithy.ShapeTypeEnum, Ext: &eXssMatchTuple_TextTransformation})
+var s_XssMatchTuples = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XssMatchTuples, Members: &m_XssMatchTuples, Type: smithy.ShapeTypeList, Ext: &e_XssMatchTuples})
+var s_XssMatchTuples_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iXssMatchTuple, Members: &mXssMatchTuple, Type: smithy.ShapeTypeStructure, Ext: &e_XssMatchTuples_member})
+var sAssociateWebACLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateWebACLRequest, Members: &mAssociateWebACLRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateWebACLRequest})
+var sAssociateWebACLRequest_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eAssociateWebACLRequest_WebACLId})
+var sAssociateWebACLRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateWebACLRequest_ResourceArn})
+var sAssociateWebACLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateWebACLResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateWebACLResponse})
+var sCreateByteMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateByteMatchSetRequest, Members: &mCreateByteMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateByteMatchSetRequest})
+var sCreateByteMatchSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateByteMatchSetRequest_Name})
+var sCreateByteMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateByteMatchSetRequest_ChangeToken})
+var sCreateByteMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateByteMatchSetResponse, Members: &mCreateByteMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateByteMatchSetResponse})
+var sCreateByteMatchSetResponse_ByteMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSet", ID: &iByteMatchSet, Members: &mByteMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateByteMatchSetResponse_ByteMatchSet})
+var sCreateByteMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateByteMatchSetResponse_ChangeToken})
+var sCreateGeoMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGeoMatchSetRequest, Members: &mCreateGeoMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateGeoMatchSetRequest})
+var sCreateGeoMatchSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateGeoMatchSetRequest_Name})
+var sCreateGeoMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateGeoMatchSetRequest_ChangeToken})
+var sCreateGeoMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGeoMatchSetResponse, Members: &mCreateGeoMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateGeoMatchSetResponse})
+var sCreateGeoMatchSetResponse_GeoMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSet", ID: &iGeoMatchSet, Members: &mGeoMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateGeoMatchSetResponse_GeoMatchSet})
+var sCreateGeoMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateGeoMatchSetResponse_ChangeToken})
+var sCreateIPSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIPSetRequest, Members: &mCreateIPSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateIPSetRequest})
+var sCreateIPSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateIPSetRequest_Name})
+var sCreateIPSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateIPSetRequest_ChangeToken})
+var sCreateIPSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIPSetResponse, Members: &mCreateIPSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateIPSetResponse})
+var sCreateIPSetResponse_IPSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSet", ID: &iIPSet, Members: &mIPSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateIPSetResponse_IPSet})
+var sCreateIPSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateIPSetResponse_ChangeToken})
+var sCreateRateBasedRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRateBasedRuleRequest, Members: &mCreateRateBasedRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRateBasedRuleRequest})
+var sCreateRateBasedRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateRateBasedRuleRequest_Name})
+var sCreateRateBasedRuleRequest_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eCreateRateBasedRuleRequest_MetricName})
+var sCreateRateBasedRuleRequest_RateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RateKey", ID: &iRateKey, Members: &mRateKey, Type: smithy.ShapeTypeEnum, Ext: &eCreateRateBasedRuleRequest_RateKey})
+var sCreateRateBasedRuleRequest_RateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeLong, Ext: &eCreateRateBasedRuleRequest_RateLimit})
+var sCreateRateBasedRuleRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRateBasedRuleRequest_ChangeToken})
+var sCreateRateBasedRuleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRateBasedRuleRequest_Tags})
+var sCreateRateBasedRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRateBasedRuleResponse, Members: &mCreateRateBasedRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRateBasedRuleResponse})
+var sCreateRateBasedRuleResponse_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iRateBasedRule, Members: &mRateBasedRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateRateBasedRuleResponse_Rule})
+var sCreateRateBasedRuleResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRateBasedRuleResponse_ChangeToken})
+var sCreateRegexMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegexMatchSetRequest, Members: &mCreateRegexMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegexMatchSetRequest})
+var sCreateRegexMatchSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateRegexMatchSetRequest_Name})
+var sCreateRegexMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRegexMatchSetRequest_ChangeToken})
+var sCreateRegexMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegexMatchSetResponse, Members: &mCreateRegexMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegexMatchSetResponse})
+var sCreateRegexMatchSetResponse_RegexMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSet", ID: &iRegexMatchSet, Members: &mRegexMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegexMatchSetResponse_RegexMatchSet})
+var sCreateRegexMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRegexMatchSetResponse_ChangeToken})
+var sCreateRegexPatternSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegexPatternSetRequest, Members: &mCreateRegexPatternSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegexPatternSetRequest})
+var sCreateRegexPatternSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateRegexPatternSetRequest_Name})
+var sCreateRegexPatternSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRegexPatternSetRequest_ChangeToken})
+var sCreateRegexPatternSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegexPatternSetResponse, Members: &mCreateRegexPatternSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegexPatternSetResponse})
+var sCreateRegexPatternSetResponse_RegexPatternSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSet", ID: &iRegexPatternSet, Members: &mRegexPatternSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegexPatternSetResponse_RegexPatternSet})
+var sCreateRegexPatternSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRegexPatternSetResponse_ChangeToken})
+var sCreateRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupRequest, Members: &mCreateRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupRequest})
+var sCreateRuleGroupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupRequest_Name})
+var sCreateRuleGroupRequest_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupRequest_MetricName})
+var sCreateRuleGroupRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupRequest_ChangeToken})
+var sCreateRuleGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleGroupRequest_Tags})
+var sCreateRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupResponse, Members: &mCreateRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupResponse})
+var sCreateRuleGroupResponse_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupResponse_RuleGroup})
+var sCreateRuleGroupResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupResponse_ChangeToken})
+var sCreateRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleRequest, Members: &mCreateRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleRequest})
+var sCreateRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_Name})
+var sCreateRuleRequest_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_MetricName})
+var sCreateRuleRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_ChangeToken})
+var sCreateRuleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleRequest_Tags})
+var sCreateRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleResponse, Members: &mCreateRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleResponse})
+var sCreateRuleResponse_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleResponse_Rule})
+var sCreateRuleResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateRuleResponse_ChangeToken})
+var sCreateSizeConstraintSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSizeConstraintSetRequest, Members: &mCreateSizeConstraintSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSizeConstraintSetRequest})
+var sCreateSizeConstraintSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateSizeConstraintSetRequest_Name})
+var sCreateSizeConstraintSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateSizeConstraintSetRequest_ChangeToken})
+var sCreateSizeConstraintSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSizeConstraintSetResponse, Members: &mCreateSizeConstraintSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSizeConstraintSetResponse})
+var sCreateSizeConstraintSetResponse_SizeConstraintSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSet", ID: &iSizeConstraintSet, Members: &mSizeConstraintSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateSizeConstraintSetResponse_SizeConstraintSet})
+var sCreateSizeConstraintSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateSizeConstraintSetResponse_ChangeToken})
+var sCreateSqlInjectionMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSqlInjectionMatchSetRequest, Members: &mCreateSqlInjectionMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSqlInjectionMatchSetRequest})
+var sCreateSqlInjectionMatchSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateSqlInjectionMatchSetRequest_Name})
+var sCreateSqlInjectionMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateSqlInjectionMatchSetRequest_ChangeToken})
+var sCreateSqlInjectionMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSqlInjectionMatchSetResponse, Members: &mCreateSqlInjectionMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSqlInjectionMatchSetResponse})
+var sCreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSet", ID: &iSqlInjectionMatchSet, Members: &mSqlInjectionMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet})
+var sCreateSqlInjectionMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateSqlInjectionMatchSetResponse_ChangeToken})
+var sCreateWebACLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebACLRequest, Members: &mCreateWebACLRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebACLRequest})
+var sCreateWebACLRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateWebACLRequest_Name})
+var sCreateWebACLRequest_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eCreateWebACLRequest_MetricName})
+var sCreateWebACLRequest_DefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAction", ID: &iWafAction, Members: &mWafAction, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebACLRequest_DefaultAction})
+var sCreateWebACLRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateWebACLRequest_ChangeToken})
+var sCreateWebACLRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateWebACLRequest_Tags})
+var sCreateWebACLMigrationStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebACLMigrationStackRequest, Members: &mCreateWebACLMigrationStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebACLMigrationStackRequest})
+var sCreateWebACLMigrationStackRequest_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateWebACLMigrationStackRequest_WebACLId})
+var sCreateWebACLMigrationStackRequest_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eCreateWebACLMigrationStackRequest_S3BucketName})
+var sCreateWebACLMigrationStackRequest_IgnoreUnsupportedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IgnoreUnsupportedType", ID: &i_IgnoreUnsupportedType, Type: smithy.ShapeTypeBoolean, Ext: &eCreateWebACLMigrationStackRequest_IgnoreUnsupportedType})
+var sCreateWebACLMigrationStackResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebACLMigrationStackResponse, Members: &mCreateWebACLMigrationStackResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebACLMigrationStackResponse})
+var sCreateWebACLMigrationStackResponse_S3ObjectUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3ObjectUrl", ID: &i_S3ObjectUrl, Type: smithy.ShapeTypeString, Ext: &eCreateWebACLMigrationStackResponse_S3ObjectUrl})
+var sCreateWebACLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebACLResponse, Members: &mCreateWebACLResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebACLResponse})
+var sCreateWebACLResponse_WebACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACL", ID: &iWebACL, Members: &mWebACL, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebACLResponse_WebACL})
+var sCreateWebACLResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateWebACLResponse_ChangeToken})
+var sCreateXssMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateXssMatchSetRequest, Members: &mCreateXssMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateXssMatchSetRequest})
+var sCreateXssMatchSetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateXssMatchSetRequest_Name})
+var sCreateXssMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateXssMatchSetRequest_ChangeToken})
+var sCreateXssMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateXssMatchSetResponse, Members: &mCreateXssMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateXssMatchSetResponse})
+var sCreateXssMatchSetResponse_XssMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSet", ID: &iXssMatchSet, Members: &mXssMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateXssMatchSetResponse_XssMatchSet})
+var sCreateXssMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eCreateXssMatchSetResponse_ChangeToken})
+var sDeleteByteMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteByteMatchSetRequest, Members: &mDeleteByteMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteByteMatchSetRequest})
+var sDeleteByteMatchSetRequest_ByteMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteByteMatchSetRequest_ByteMatchSetId})
+var sDeleteByteMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteByteMatchSetRequest_ChangeToken})
+var sDeleteByteMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteByteMatchSetResponse, Members: &mDeleteByteMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteByteMatchSetResponse})
+var sDeleteByteMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteByteMatchSetResponse_ChangeToken})
+var sDeleteGeoMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGeoMatchSetRequest, Members: &mDeleteGeoMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGeoMatchSetRequest})
+var sDeleteGeoMatchSetRequest_GeoMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteGeoMatchSetRequest_GeoMatchSetId})
+var sDeleteGeoMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteGeoMatchSetRequest_ChangeToken})
+var sDeleteGeoMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGeoMatchSetResponse, Members: &mDeleteGeoMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGeoMatchSetResponse})
+var sDeleteGeoMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteGeoMatchSetResponse_ChangeToken})
+var sDeleteIPSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIPSetRequest, Members: &mDeleteIPSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIPSetRequest})
+var sDeleteIPSetRequest_IPSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteIPSetRequest_IPSetId})
+var sDeleteIPSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteIPSetRequest_ChangeToken})
+var sDeleteIPSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIPSetResponse, Members: &mDeleteIPSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIPSetResponse})
+var sDeleteIPSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteIPSetResponse_ChangeToken})
+var sDeleteLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfigurationRequest, Members: &mDeleteLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoggingConfigurationRequest})
+var sDeleteLoggingConfigurationRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteLoggingConfigurationRequest_ResourceArn})
+var sDeleteLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoggingConfigurationResponse})
+var sDeletePermissionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionPolicyRequest, Members: &mDeletePermissionPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePermissionPolicyRequest})
+var sDeletePermissionPolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeletePermissionPolicyRequest_ResourceArn})
+var sDeletePermissionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePermissionPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePermissionPolicyResponse})
+var sDeleteRateBasedRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRateBasedRuleRequest, Members: &mDeleteRateBasedRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRateBasedRuleRequest})
+var sDeleteRateBasedRuleRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteRateBasedRuleRequest_RuleId})
+var sDeleteRateBasedRuleRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRateBasedRuleRequest_ChangeToken})
+var sDeleteRateBasedRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRateBasedRuleResponse, Members: &mDeleteRateBasedRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRateBasedRuleResponse})
+var sDeleteRateBasedRuleResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRateBasedRuleResponse_ChangeToken})
+var sDeleteRegexMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegexMatchSetRequest, Members: &mDeleteRegexMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRegexMatchSetRequest})
+var sDeleteRegexMatchSetRequest_RegexMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteRegexMatchSetRequest_RegexMatchSetId})
+var sDeleteRegexMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRegexMatchSetRequest_ChangeToken})
+var sDeleteRegexMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegexMatchSetResponse, Members: &mDeleteRegexMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRegexMatchSetResponse})
+var sDeleteRegexMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRegexMatchSetResponse_ChangeToken})
+var sDeleteRegexPatternSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegexPatternSetRequest, Members: &mDeleteRegexPatternSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRegexPatternSetRequest})
+var sDeleteRegexPatternSetRequest_RegexPatternSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteRegexPatternSetRequest_RegexPatternSetId})
+var sDeleteRegexPatternSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRegexPatternSetRequest_ChangeToken})
+var sDeleteRegexPatternSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegexPatternSetResponse, Members: &mDeleteRegexPatternSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRegexPatternSetResponse})
+var sDeleteRegexPatternSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRegexPatternSetResponse_ChangeToken})
+var sDeleteRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupRequest, Members: &mDeleteRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleGroupRequest})
+var sDeleteRuleGroupRequest_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupRequest_RuleGroupId})
+var sDeleteRuleGroupRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupRequest_ChangeToken})
+var sDeleteRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupResponse, Members: &mDeleteRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleGroupResponse})
+var sDeleteRuleGroupResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupResponse_ChangeToken})
+var sDeleteRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleRequest, Members: &mDeleteRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleRequest})
+var sDeleteRuleRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleRequest_RuleId})
+var sDeleteRuleRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleRequest_ChangeToken})
+var sDeleteRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleResponse, Members: &mDeleteRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleResponse})
+var sDeleteRuleResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleResponse_ChangeToken})
+var sDeleteSizeConstraintSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSizeConstraintSetRequest, Members: &mDeleteSizeConstraintSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSizeConstraintSetRequest})
+var sDeleteSizeConstraintSetRequest_SizeConstraintSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteSizeConstraintSetRequest_SizeConstraintSetId})
+var sDeleteSizeConstraintSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteSizeConstraintSetRequest_ChangeToken})
+var sDeleteSizeConstraintSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSizeConstraintSetResponse, Members: &mDeleteSizeConstraintSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSizeConstraintSetResponse})
+var sDeleteSizeConstraintSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteSizeConstraintSetResponse_ChangeToken})
+var sDeleteSqlInjectionMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSqlInjectionMatchSetRequest, Members: &mDeleteSqlInjectionMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSqlInjectionMatchSetRequest})
+var sDeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId})
+var sDeleteSqlInjectionMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteSqlInjectionMatchSetRequest_ChangeToken})
+var sDeleteSqlInjectionMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSqlInjectionMatchSetResponse, Members: &mDeleteSqlInjectionMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSqlInjectionMatchSetResponse})
+var sDeleteSqlInjectionMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteSqlInjectionMatchSetResponse_ChangeToken})
+var sDeleteWebACLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebACLRequest, Members: &mDeleteWebACLRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebACLRequest})
+var sDeleteWebACLRequest_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteWebACLRequest_WebACLId})
+var sDeleteWebACLRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteWebACLRequest_ChangeToken})
+var sDeleteWebACLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebACLResponse, Members: &mDeleteWebACLResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebACLResponse})
+var sDeleteWebACLResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteWebACLResponse_ChangeToken})
+var sDeleteXssMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteXssMatchSetRequest, Members: &mDeleteXssMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteXssMatchSetRequest})
+var sDeleteXssMatchSetRequest_XssMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteXssMatchSetRequest_XssMatchSetId})
+var sDeleteXssMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteXssMatchSetRequest_ChangeToken})
+var sDeleteXssMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteXssMatchSetResponse, Members: &mDeleteXssMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteXssMatchSetResponse})
+var sDeleteXssMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eDeleteXssMatchSetResponse_ChangeToken})
+var sDisassociateWebACLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateWebACLRequest, Members: &mDisassociateWebACLRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateWebACLRequest})
+var sDisassociateWebACLRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateWebACLRequest_ResourceArn})
+var sDisassociateWebACLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateWebACLResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateWebACLResponse})
+var sGetByteMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetByteMatchSetRequest, Members: &mGetByteMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetByteMatchSetRequest})
+var sGetByteMatchSetRequest_ByteMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetByteMatchSetRequest_ByteMatchSetId})
+var sGetByteMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetByteMatchSetResponse, Members: &mGetByteMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetByteMatchSetResponse})
+var sGetByteMatchSetResponse_ByteMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSet", ID: &iByteMatchSet, Members: &mByteMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eGetByteMatchSetResponse_ByteMatchSet})
+var sGetChangeTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChangeTokenRequest})
+var sGetChangeTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeTokenResponse, Members: &mGetChangeTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChangeTokenResponse})
+var sGetChangeTokenResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eGetChangeTokenResponse_ChangeToken})
+var sGetChangeTokenStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeTokenStatusRequest, Members: &mGetChangeTokenStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChangeTokenStatusRequest})
+var sGetChangeTokenStatusRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eGetChangeTokenStatusRequest_ChangeToken})
+var sGetChangeTokenStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeTokenStatusResponse, Members: &mGetChangeTokenStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChangeTokenStatusResponse})
+var sGetChangeTokenStatusResponse_ChangeTokenStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeTokenStatus", ID: &iChangeTokenStatus, Members: &mChangeTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetChangeTokenStatusResponse_ChangeTokenStatus})
+var sGetGeoMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGeoMatchSetRequest, Members: &mGetGeoMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetGeoMatchSetRequest})
+var sGetGeoMatchSetRequest_GeoMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetGeoMatchSetRequest_GeoMatchSetId})
+var sGetGeoMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGeoMatchSetResponse, Members: &mGetGeoMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGeoMatchSetResponse})
+var sGetGeoMatchSetResponse_GeoMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSet", ID: &iGeoMatchSet, Members: &mGeoMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eGetGeoMatchSetResponse_GeoMatchSet})
+var sGetIPSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIPSetRequest, Members: &mGetIPSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIPSetRequest})
+var sGetIPSetRequest_IPSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetIPSetRequest_IPSetId})
+var sGetIPSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIPSetResponse, Members: &mGetIPSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIPSetResponse})
+var sGetIPSetResponse_IPSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSet", ID: &iIPSet, Members: &mIPSet, Type: smithy.ShapeTypeStructure, Ext: &eGetIPSetResponse_IPSet})
+var sGetLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfigurationRequest, Members: &mGetLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingConfigurationRequest})
+var sGetLoggingConfigurationRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetLoggingConfigurationRequest_ResourceArn})
+var sGetLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfigurationResponse, Members: &mGetLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingConfigurationResponse})
+var sGetLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingConfigurationResponse_LoggingConfiguration})
+var sGetPermissionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPermissionPolicyRequest, Members: &mGetPermissionPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPermissionPolicyRequest})
+var sGetPermissionPolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetPermissionPolicyRequest_ResourceArn})
+var sGetPermissionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPermissionPolicyResponse, Members: &mGetPermissionPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPermissionPolicyResponse})
+var sGetPermissionPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &eGetPermissionPolicyResponse_Policy})
+var sGetRateBasedRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRateBasedRuleRequest, Members: &mGetRateBasedRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRateBasedRuleRequest})
+var sGetRateBasedRuleRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetRateBasedRuleRequest_RuleId})
+var sGetRateBasedRuleManagedKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRateBasedRuleManagedKeysRequest, Members: &mGetRateBasedRuleManagedKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRateBasedRuleManagedKeysRequest})
+var sGetRateBasedRuleManagedKeysRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetRateBasedRuleManagedKeysRequest_RuleId})
+var sGetRateBasedRuleManagedKeysRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eGetRateBasedRuleManagedKeysRequest_NextMarker})
+var sGetRateBasedRuleManagedKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRateBasedRuleManagedKeysResponse, Members: &mGetRateBasedRuleManagedKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRateBasedRuleManagedKeysResponse})
+var sGetRateBasedRuleManagedKeysResponse_ManagedKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedKeys", ID: &i_ManagedKeys, Members: &m_ManagedKeys, Type: smithy.ShapeTypeList, Ext: &eGetRateBasedRuleManagedKeysResponse_ManagedKeys})
+var sGetRateBasedRuleManagedKeysResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eGetRateBasedRuleManagedKeysResponse_NextMarker})
+var sGetRateBasedRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRateBasedRuleResponse, Members: &mGetRateBasedRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRateBasedRuleResponse})
+var sGetRateBasedRuleResponse_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iRateBasedRule, Members: &mRateBasedRule, Type: smithy.ShapeTypeStructure, Ext: &eGetRateBasedRuleResponse_Rule})
+var sGetRegexMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegexMatchSetRequest, Members: &mGetRegexMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRegexMatchSetRequest})
+var sGetRegexMatchSetRequest_RegexMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetRegexMatchSetRequest_RegexMatchSetId})
+var sGetRegexMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegexMatchSetResponse, Members: &mGetRegexMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRegexMatchSetResponse})
+var sGetRegexMatchSetResponse_RegexMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSet", ID: &iRegexMatchSet, Members: &mRegexMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eGetRegexMatchSetResponse_RegexMatchSet})
+var sGetRegexPatternSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegexPatternSetRequest, Members: &mGetRegexPatternSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRegexPatternSetRequest})
+var sGetRegexPatternSetRequest_RegexPatternSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetRegexPatternSetRequest_RegexPatternSetId})
+var sGetRegexPatternSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegexPatternSetResponse, Members: &mGetRegexPatternSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRegexPatternSetResponse})
+var sGetRegexPatternSetResponse_RegexPatternSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSet", ID: &iRegexPatternSet, Members: &mRegexPatternSet, Type: smithy.ShapeTypeStructure, Ext: &eGetRegexPatternSetResponse_RegexPatternSet})
+var sGetRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleGroupRequest, Members: &mGetRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleGroupRequest})
+var sGetRuleGroupRequest_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetRuleGroupRequest_RuleGroupId})
+var sGetRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleGroupResponse, Members: &mGetRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleGroupResponse})
+var sGetRuleGroupResponse_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleGroupResponse_RuleGroup})
+var sGetRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleRequest, Members: &mGetRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleRequest})
+var sGetRuleRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetRuleRequest_RuleId})
+var sGetRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleResponse, Members: &mGetRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleResponse})
+var sGetRuleResponse_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleResponse_Rule})
+var sGetSampledRequestsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSampledRequestsRequest, Members: &mGetSampledRequestsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSampledRequestsRequest})
+var sGetSampledRequestsRequest_WebAclId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAclId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetSampledRequestsRequest_WebAclId})
+var sGetSampledRequestsRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetSampledRequestsRequest_RuleId})
+var sGetSampledRequestsRequest_TimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeWindow", ID: &iTimeWindow, Members: &mTimeWindow, Type: smithy.ShapeTypeStructure, Ext: &eGetSampledRequestsRequest_TimeWindow})
+var sGetSampledRequestsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_GetSampledRequestsMaxItems, Type: smithy.ShapeTypeLong, Ext: &eGetSampledRequestsRequest_MaxItems})
+var sGetSampledRequestsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSampledRequestsResponse, Members: &mGetSampledRequestsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSampledRequestsResponse})
+var sGetSampledRequestsResponse_SampledRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampledRequests", ID: &i_SampledHTTPRequests, Members: &m_SampledHTTPRequests, Type: smithy.ShapeTypeList, Ext: &eGetSampledRequestsResponse_SampledRequests})
+var sGetSampledRequestsResponse_PopulationSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PopulationSize", ID: &i_PopulationSize, Type: smithy.ShapeTypeLong, Ext: &eGetSampledRequestsResponse_PopulationSize})
+var sGetSampledRequestsResponse_TimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeWindow", ID: &iTimeWindow, Members: &mTimeWindow, Type: smithy.ShapeTypeStructure, Ext: &eGetSampledRequestsResponse_TimeWindow})
+var sGetSizeConstraintSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSizeConstraintSetRequest, Members: &mGetSizeConstraintSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSizeConstraintSetRequest})
+var sGetSizeConstraintSetRequest_SizeConstraintSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetSizeConstraintSetRequest_SizeConstraintSetId})
+var sGetSizeConstraintSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSizeConstraintSetResponse, Members: &mGetSizeConstraintSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSizeConstraintSetResponse})
+var sGetSizeConstraintSetResponse_SizeConstraintSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSet", ID: &iSizeConstraintSet, Members: &mSizeConstraintSet, Type: smithy.ShapeTypeStructure, Ext: &eGetSizeConstraintSetResponse_SizeConstraintSet})
+var sGetSqlInjectionMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSqlInjectionMatchSetRequest, Members: &mGetSqlInjectionMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSqlInjectionMatchSetRequest})
+var sGetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId})
+var sGetSqlInjectionMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSqlInjectionMatchSetResponse, Members: &mGetSqlInjectionMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSqlInjectionMatchSetResponse})
+var sGetSqlInjectionMatchSetResponse_SqlInjectionMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSet", ID: &iSqlInjectionMatchSet, Members: &mSqlInjectionMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eGetSqlInjectionMatchSetResponse_SqlInjectionMatchSet})
+var sGetWebACLForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebACLForResourceRequest, Members: &mGetWebACLForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWebACLForResourceRequest})
+var sGetWebACLForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetWebACLForResourceRequest_ResourceArn})
+var sGetWebACLForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebACLForResourceResponse, Members: &mGetWebACLForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWebACLForResourceResponse})
+var sGetWebACLForResourceResponse_WebACLSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLSummary", ID: &iWebACLSummary, Members: &mWebACLSummary, Type: smithy.ShapeTypeStructure, Ext: &eGetWebACLForResourceResponse_WebACLSummary})
+var sGetWebACLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebACLRequest, Members: &mGetWebACLRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWebACLRequest})
+var sGetWebACLRequest_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetWebACLRequest_WebACLId})
+var sGetWebACLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebACLResponse, Members: &mGetWebACLResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWebACLResponse})
+var sGetWebACLResponse_WebACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACL", ID: &iWebACL, Members: &mWebACL, Type: smithy.ShapeTypeStructure, Ext: &eGetWebACLResponse_WebACL})
+var sGetXssMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetXssMatchSetRequest, Members: &mGetXssMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetXssMatchSetRequest})
+var sGetXssMatchSetRequest_XssMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetXssMatchSetRequest_XssMatchSetId})
+var sGetXssMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetXssMatchSetResponse, Members: &mGetXssMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetXssMatchSetResponse})
+var sGetXssMatchSetResponse_XssMatchSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSet", ID: &iXssMatchSet, Members: &mXssMatchSet, Type: smithy.ShapeTypeStructure, Ext: &eGetXssMatchSetResponse_XssMatchSet})
+var sListActivatedRulesInRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActivatedRulesInRuleGroupRequest, Members: &mListActivatedRulesInRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eListActivatedRulesInRuleGroupRequest})
+var sListActivatedRulesInRuleGroupRequest_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eListActivatedRulesInRuleGroupRequest_RuleGroupId})
+var sListActivatedRulesInRuleGroupRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListActivatedRulesInRuleGroupRequest_NextMarker})
+var sListActivatedRulesInRuleGroupRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListActivatedRulesInRuleGroupRequest_Limit})
+var sListActivatedRulesInRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActivatedRulesInRuleGroupResponse, Members: &mListActivatedRulesInRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eListActivatedRulesInRuleGroupResponse})
+var sListActivatedRulesInRuleGroupResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListActivatedRulesInRuleGroupResponse_NextMarker})
+var sListActivatedRulesInRuleGroupResponse_ActivatedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivatedRules", ID: &i_ActivatedRules, Members: &m_ActivatedRules, Type: smithy.ShapeTypeList, Ext: &eListActivatedRulesInRuleGroupResponse_ActivatedRules})
+var sListByteMatchSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListByteMatchSetsRequest, Members: &mListByteMatchSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListByteMatchSetsRequest})
+var sListByteMatchSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListByteMatchSetsRequest_NextMarker})
+var sListByteMatchSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListByteMatchSetsRequest_Limit})
+var sListByteMatchSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListByteMatchSetsResponse, Members: &mListByteMatchSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListByteMatchSetsResponse})
+var sListByteMatchSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListByteMatchSetsResponse_NextMarker})
+var sListByteMatchSetsResponse_ByteMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSets", ID: &i_ByteMatchSetSummaries, Members: &m_ByteMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListByteMatchSetsResponse_ByteMatchSets})
+var sListGeoMatchSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGeoMatchSetsRequest, Members: &mListGeoMatchSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGeoMatchSetsRequest})
+var sListGeoMatchSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListGeoMatchSetsRequest_NextMarker})
+var sListGeoMatchSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListGeoMatchSetsRequest_Limit})
+var sListGeoMatchSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGeoMatchSetsResponse, Members: &mListGeoMatchSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGeoMatchSetsResponse})
+var sListGeoMatchSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListGeoMatchSetsResponse_NextMarker})
+var sListGeoMatchSetsResponse_GeoMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSets", ID: &i_GeoMatchSetSummaries, Members: &m_GeoMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListGeoMatchSetsResponse_GeoMatchSets})
+var sListIPSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIPSetsRequest, Members: &mListIPSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIPSetsRequest})
+var sListIPSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListIPSetsRequest_NextMarker})
+var sListIPSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListIPSetsRequest_Limit})
+var sListIPSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIPSetsResponse, Members: &mListIPSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIPSetsResponse})
+var sListIPSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListIPSetsResponse_NextMarker})
+var sListIPSetsResponse_IPSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSets", ID: &i_IPSetSummaries, Members: &m_IPSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListIPSetsResponse_IPSets})
+var sListLoggingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurationsRequest, Members: &mListLoggingConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLoggingConfigurationsRequest})
+var sListLoggingConfigurationsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListLoggingConfigurationsRequest_NextMarker})
+var sListLoggingConfigurationsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListLoggingConfigurationsRequest_Limit})
+var sListLoggingConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurationsResponse, Members: &mListLoggingConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLoggingConfigurationsResponse})
+var sListLoggingConfigurationsResponse_LoggingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfigurations", ID: &i_LoggingConfigurations, Members: &m_LoggingConfigurations, Type: smithy.ShapeTypeList, Ext: &eListLoggingConfigurationsResponse_LoggingConfigurations})
+var sListLoggingConfigurationsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListLoggingConfigurationsResponse_NextMarker})
+var sListRateBasedRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRateBasedRulesRequest, Members: &mListRateBasedRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRateBasedRulesRequest})
+var sListRateBasedRulesRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRateBasedRulesRequest_NextMarker})
+var sListRateBasedRulesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListRateBasedRulesRequest_Limit})
+var sListRateBasedRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRateBasedRulesResponse, Members: &mListRateBasedRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRateBasedRulesResponse})
+var sListRateBasedRulesResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRateBasedRulesResponse_NextMarker})
+var sListRateBasedRulesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleSummaries, Members: &m_RuleSummaries, Type: smithy.ShapeTypeList, Ext: &eListRateBasedRulesResponse_Rules})
+var sListRegexMatchSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegexMatchSetsRequest, Members: &mListRegexMatchSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRegexMatchSetsRequest})
+var sListRegexMatchSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRegexMatchSetsRequest_NextMarker})
+var sListRegexMatchSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListRegexMatchSetsRequest_Limit})
+var sListRegexMatchSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegexMatchSetsResponse, Members: &mListRegexMatchSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRegexMatchSetsResponse})
+var sListRegexMatchSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRegexMatchSetsResponse_NextMarker})
+var sListRegexMatchSetsResponse_RegexMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSets", ID: &i_RegexMatchSetSummaries, Members: &m_RegexMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListRegexMatchSetsResponse_RegexMatchSets})
+var sListRegexPatternSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegexPatternSetsRequest, Members: &mListRegexPatternSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRegexPatternSetsRequest})
+var sListRegexPatternSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRegexPatternSetsRequest_NextMarker})
+var sListRegexPatternSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListRegexPatternSetsRequest_Limit})
+var sListRegexPatternSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegexPatternSetsResponse, Members: &mListRegexPatternSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRegexPatternSetsResponse})
+var sListRegexPatternSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRegexPatternSetsResponse_NextMarker})
+var sListRegexPatternSetsResponse_RegexPatternSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSets", ID: &i_RegexPatternSetSummaries, Members: &m_RegexPatternSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListRegexPatternSetsResponse_RegexPatternSets})
+var sListResourcesForWebACLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesForWebACLRequest, Members: &mListResourcesForWebACLRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesForWebACLRequest})
+var sListResourcesForWebACLRequest_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eListResourcesForWebACLRequest_WebACLId})
+var sListResourcesForWebACLRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eListResourcesForWebACLRequest_ResourceType})
+var sListResourcesForWebACLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesForWebACLResponse, Members: &mListResourcesForWebACLResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesForWebACLResponse})
+var sListResourcesForWebACLResponse_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eListResourcesForWebACLResponse_ResourceArns})
+var sListRuleGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsRequest, Members: &mListRuleGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRuleGroupsRequest})
+var sListRuleGroupsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsRequest_NextMarker})
+var sListRuleGroupsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListRuleGroupsRequest_Limit})
+var sListRuleGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsResponse, Members: &mListRuleGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRuleGroupsResponse})
+var sListRuleGroupsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsResponse_NextMarker})
+var sListRuleGroupsResponse_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_RuleGroupSummaries, Members: &m_RuleGroupSummaries, Type: smithy.ShapeTypeList, Ext: &eListRuleGroupsResponse_RuleGroups})
+var sListRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesRequest, Members: &mListRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRulesRequest})
+var sListRulesRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRulesRequest_NextMarker})
+var sListRulesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListRulesRequest_Limit})
+var sListRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesResponse, Members: &mListRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRulesResponse})
+var sListRulesResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListRulesResponse_NextMarker})
+var sListRulesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleSummaries, Members: &m_RuleSummaries, Type: smithy.ShapeTypeList, Ext: &eListRulesResponse_Rules})
+var sListSizeConstraintSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSizeConstraintSetsRequest, Members: &mListSizeConstraintSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSizeConstraintSetsRequest})
+var sListSizeConstraintSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListSizeConstraintSetsRequest_NextMarker})
+var sListSizeConstraintSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListSizeConstraintSetsRequest_Limit})
+var sListSizeConstraintSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSizeConstraintSetsResponse, Members: &mListSizeConstraintSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSizeConstraintSetsResponse})
+var sListSizeConstraintSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListSizeConstraintSetsResponse_NextMarker})
+var sListSizeConstraintSetsResponse_SizeConstraintSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSets", ID: &i_SizeConstraintSetSummaries, Members: &m_SizeConstraintSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListSizeConstraintSetsResponse_SizeConstraintSets})
+var sListSqlInjectionMatchSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSqlInjectionMatchSetsRequest, Members: &mListSqlInjectionMatchSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSqlInjectionMatchSetsRequest})
+var sListSqlInjectionMatchSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListSqlInjectionMatchSetsRequest_NextMarker})
+var sListSqlInjectionMatchSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListSqlInjectionMatchSetsRequest_Limit})
+var sListSqlInjectionMatchSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSqlInjectionMatchSetsResponse, Members: &mListSqlInjectionMatchSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSqlInjectionMatchSetsResponse})
+var sListSqlInjectionMatchSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListSqlInjectionMatchSetsResponse_NextMarker})
+var sListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSets", ID: &i_SqlInjectionMatchSetSummaries, Members: &m_SqlInjectionMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets})
+var sListSubscribedRuleGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribedRuleGroupsRequest, Members: &mListSubscribedRuleGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSubscribedRuleGroupsRequest})
+var sListSubscribedRuleGroupsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListSubscribedRuleGroupsRequest_NextMarker})
+var sListSubscribedRuleGroupsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListSubscribedRuleGroupsRequest_Limit})
+var sListSubscribedRuleGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribedRuleGroupsResponse, Members: &mListSubscribedRuleGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSubscribedRuleGroupsResponse})
+var sListSubscribedRuleGroupsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListSubscribedRuleGroupsResponse_NextMarker})
+var sListSubscribedRuleGroupsResponse_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_SubscribedRuleGroupSummaries, Members: &m_SubscribedRuleGroupSummaries, Type: smithy.ShapeTypeList, Ext: &eListSubscribedRuleGroupsResponse_RuleGroups})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_NextMarker})
+var sListTagsForResourceRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceRequest_Limit})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceResponse_NextMarker})
+var sListTagsForResourceResponse_TagInfoForResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagInfoForResource", ID: &iTagInfoForResource, Members: &mTagInfoForResource, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse_TagInfoForResource})
+var sListWebACLsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebACLsRequest, Members: &mListWebACLsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWebACLsRequest})
+var sListWebACLsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListWebACLsRequest_NextMarker})
+var sListWebACLsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListWebACLsRequest_Limit})
+var sListWebACLsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebACLsResponse, Members: &mListWebACLsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWebACLsResponse})
+var sListWebACLsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListWebACLsResponse_NextMarker})
+var sListWebACLsResponse_WebACLs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLs", ID: &i_WebACLSummaries, Members: &m_WebACLSummaries, Type: smithy.ShapeTypeList, Ext: &eListWebACLsResponse_WebACLs})
+var sListXssMatchSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListXssMatchSetsRequest, Members: &mListXssMatchSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListXssMatchSetsRequest})
+var sListXssMatchSetsRequest_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListXssMatchSetsRequest_NextMarker})
+var sListXssMatchSetsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PaginationLimit, Type: smithy.ShapeTypeInteger, Ext: &eListXssMatchSetsRequest_Limit})
+var sListXssMatchSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListXssMatchSetsResponse, Members: &mListXssMatchSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListXssMatchSetsResponse})
+var sListXssMatchSetsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_NextMarker, Type: smithy.ShapeTypeString, Ext: &eListXssMatchSetsResponse_NextMarker})
+var sListXssMatchSetsResponse_XssMatchSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSets", ID: &i_XssMatchSetSummaries, Members: &m_XssMatchSetSummaries, Type: smithy.ShapeTypeList, Ext: &eListXssMatchSetsResponse_XssMatchSets})
+var sPutLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLoggingConfigurationRequest, Members: &mPutLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutLoggingConfigurationRequest})
+var sPutLoggingConfigurationRequest_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutLoggingConfigurationRequest_LoggingConfiguration})
+var sPutLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLoggingConfigurationResponse, Members: &mPutLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutLoggingConfigurationResponse})
+var sPutLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutLoggingConfigurationResponse_LoggingConfiguration})
+var sPutPermissionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPermissionPolicyRequest, Members: &mPutPermissionPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutPermissionPolicyRequest})
+var sPutPermissionPolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ePutPermissionPolicyRequest_ResourceArn})
+var sPutPermissionPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &ePutPermissionPolicyRequest_Policy})
+var sPutPermissionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPermissionPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutPermissionPolicyResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateByteMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateByteMatchSetRequest, Members: &mUpdateByteMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateByteMatchSetRequest})
+var sUpdateByteMatchSetRequest_ByteMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateByteMatchSetRequest_ByteMatchSetId})
+var sUpdateByteMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateByteMatchSetRequest_ChangeToken})
+var sUpdateByteMatchSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_ByteMatchSetUpdates, Members: &m_ByteMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateByteMatchSetRequest_Updates})
+var sUpdateByteMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateByteMatchSetResponse, Members: &mUpdateByteMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateByteMatchSetResponse})
+var sUpdateByteMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateByteMatchSetResponse_ChangeToken})
+var sUpdateGeoMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGeoMatchSetRequest, Members: &mUpdateGeoMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGeoMatchSetRequest})
+var sUpdateGeoMatchSetRequest_GeoMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateGeoMatchSetRequest_GeoMatchSetId})
+var sUpdateGeoMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateGeoMatchSetRequest_ChangeToken})
+var sUpdateGeoMatchSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_GeoMatchSetUpdates, Members: &m_GeoMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateGeoMatchSetRequest_Updates})
+var sUpdateGeoMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGeoMatchSetResponse, Members: &mUpdateGeoMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGeoMatchSetResponse})
+var sUpdateGeoMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateGeoMatchSetResponse_ChangeToken})
+var sUpdateIPSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIPSetRequest, Members: &mUpdateIPSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIPSetRequest})
+var sUpdateIPSetRequest_IPSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateIPSetRequest_IPSetId})
+var sUpdateIPSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateIPSetRequest_ChangeToken})
+var sUpdateIPSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_IPSetUpdates, Members: &m_IPSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateIPSetRequest_Updates})
+var sUpdateIPSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIPSetResponse, Members: &mUpdateIPSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIPSetResponse})
+var sUpdateIPSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateIPSetResponse_ChangeToken})
+var sUpdateRateBasedRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRateBasedRuleRequest, Members: &mUpdateRateBasedRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRateBasedRuleRequest})
+var sUpdateRateBasedRuleRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateRateBasedRuleRequest_RuleId})
+var sUpdateRateBasedRuleRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRateBasedRuleRequest_ChangeToken})
+var sUpdateRateBasedRuleRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_RuleUpdates, Members: &m_RuleUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateRateBasedRuleRequest_Updates})
+var sUpdateRateBasedRuleRequest_RateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeLong, Ext: &eUpdateRateBasedRuleRequest_RateLimit})
+var sUpdateRateBasedRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRateBasedRuleResponse, Members: &mUpdateRateBasedRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRateBasedRuleResponse})
+var sUpdateRateBasedRuleResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRateBasedRuleResponse_ChangeToken})
+var sUpdateRegexMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegexMatchSetRequest, Members: &mUpdateRegexMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRegexMatchSetRequest})
+var sUpdateRegexMatchSetRequest_RegexMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateRegexMatchSetRequest_RegexMatchSetId})
+var sUpdateRegexMatchSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_RegexMatchSetUpdates, Members: &m_RegexMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateRegexMatchSetRequest_Updates})
+var sUpdateRegexMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRegexMatchSetRequest_ChangeToken})
+var sUpdateRegexMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegexMatchSetResponse, Members: &mUpdateRegexMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRegexMatchSetResponse})
+var sUpdateRegexMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRegexMatchSetResponse_ChangeToken})
+var sUpdateRegexPatternSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegexPatternSetRequest, Members: &mUpdateRegexPatternSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRegexPatternSetRequest})
+var sUpdateRegexPatternSetRequest_RegexPatternSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexPatternSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateRegexPatternSetRequest_RegexPatternSetId})
+var sUpdateRegexPatternSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_RegexPatternSetUpdates, Members: &m_RegexPatternSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateRegexPatternSetRequest_Updates})
+var sUpdateRegexPatternSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRegexPatternSetRequest_ChangeToken})
+var sUpdateRegexPatternSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegexPatternSetResponse, Members: &mUpdateRegexPatternSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRegexPatternSetResponse})
+var sUpdateRegexPatternSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRegexPatternSetResponse_ChangeToken})
+var sUpdateRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroupRequest, Members: &mUpdateRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupRequest})
+var sUpdateRuleGroupRequest_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupRequest_RuleGroupId})
+var sUpdateRuleGroupRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_RuleGroupUpdates, Members: &m_RuleGroupUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleGroupRequest_Updates})
+var sUpdateRuleGroupRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupRequest_ChangeToken})
+var sUpdateRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroupResponse, Members: &mUpdateRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupResponse})
+var sUpdateRuleGroupResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupResponse_ChangeToken})
+var sUpdateRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleRequest, Members: &mUpdateRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleRequest})
+var sUpdateRuleRequest_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleRequest_RuleId})
+var sUpdateRuleRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleRequest_ChangeToken})
+var sUpdateRuleRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_RuleUpdates, Members: &m_RuleUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleRequest_Updates})
+var sUpdateRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleResponse, Members: &mUpdateRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleResponse})
+var sUpdateRuleResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleResponse_ChangeToken})
+var sUpdateSizeConstraintSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSizeConstraintSetRequest, Members: &mUpdateSizeConstraintSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSizeConstraintSetRequest})
+var sUpdateSizeConstraintSetRequest_SizeConstraintSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeConstraintSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateSizeConstraintSetRequest_SizeConstraintSetId})
+var sUpdateSizeConstraintSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateSizeConstraintSetRequest_ChangeToken})
+var sUpdateSizeConstraintSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_SizeConstraintSetUpdates, Members: &m_SizeConstraintSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateSizeConstraintSetRequest_Updates})
+var sUpdateSizeConstraintSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSizeConstraintSetResponse, Members: &mUpdateSizeConstraintSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSizeConstraintSetResponse})
+var sUpdateSizeConstraintSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateSizeConstraintSetResponse_ChangeToken})
+var sUpdateSqlInjectionMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSqlInjectionMatchSetRequest, Members: &mUpdateSqlInjectionMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSqlInjectionMatchSetRequest})
+var sUpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqlInjectionMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId})
+var sUpdateSqlInjectionMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateSqlInjectionMatchSetRequest_ChangeToken})
+var sUpdateSqlInjectionMatchSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_SqlInjectionMatchSetUpdates, Members: &m_SqlInjectionMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateSqlInjectionMatchSetRequest_Updates})
+var sUpdateSqlInjectionMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSqlInjectionMatchSetResponse, Members: &mUpdateSqlInjectionMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSqlInjectionMatchSetResponse})
+var sUpdateSqlInjectionMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateSqlInjectionMatchSetResponse_ChangeToken})
+var sUpdateWebACLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebACLRequest, Members: &mUpdateWebACLRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebACLRequest})
+var sUpdateWebACLRequest_WebACLId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateWebACLRequest_WebACLId})
+var sUpdateWebACLRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateWebACLRequest_ChangeToken})
+var sUpdateWebACLRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_WebACLUpdates, Members: &m_WebACLUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateWebACLRequest_Updates})
+var sUpdateWebACLRequest_DefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAction", ID: &iWafAction, Members: &mWafAction, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebACLRequest_DefaultAction})
+var sUpdateWebACLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebACLResponse, Members: &mUpdateWebACLResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebACLResponse})
+var sUpdateWebACLResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateWebACLResponse_ChangeToken})
+var sUpdateXssMatchSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateXssMatchSetRequest, Members: &mUpdateXssMatchSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateXssMatchSetRequest})
+var sUpdateXssMatchSetRequest_XssMatchSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XssMatchSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateXssMatchSetRequest_XssMatchSetId})
+var sUpdateXssMatchSetRequest_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateXssMatchSetRequest_ChangeToken})
+var sUpdateXssMatchSetRequest_Updates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updates", ID: &i_XssMatchSetUpdates, Members: &m_XssMatchSetUpdates, Type: smithy.ShapeTypeList, Ext: &eUpdateXssMatchSetRequest_Updates})
+var sUpdateXssMatchSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateXssMatchSetResponse, Members: &mUpdateXssMatchSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateXssMatchSetResponse})
+var sUpdateXssMatchSetResponse_ChangeToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeToken", ID: &i_ChangeToken, Type: smithy.ShapeTypeString, Ext: &eUpdateXssMatchSetResponse_ChangeToken})
+
+var AssociateWebACL = &sAssociateWebACL
+
+var CreateByteMatchSet = &sCreateByteMatchSet
+
+var CreateGeoMatchSet = &sCreateGeoMatchSet
+
+var CreateIPSet = &sCreateIPSet
+
+var CreateRateBasedRule = &sCreateRateBasedRule
+
+var CreateRegexMatchSet = &sCreateRegexMatchSet
+
+var CreateRegexPatternSet = &sCreateRegexPatternSet
+
+var CreateRule = &sCreateRule
+
+var CreateRuleGroup = &sCreateRuleGroup
+
+var CreateSizeConstraintSet = &sCreateSizeConstraintSet
+
+var CreateSqlInjectionMatchSet = &sCreateSqlInjectionMatchSet
+
+var CreateWebACL = &sCreateWebACL
+
+var CreateWebACLMigrationStack = &sCreateWebACLMigrationStack
+
+var CreateXssMatchSet = &sCreateXssMatchSet
+
+var DeleteByteMatchSet = &sDeleteByteMatchSet
+
+var DeleteGeoMatchSet = &sDeleteGeoMatchSet
+
+var DeleteIPSet = &sDeleteIPSet
+
+var DeleteLoggingConfiguration = &sDeleteLoggingConfiguration
+
+var DeletePermissionPolicy = &sDeletePermissionPolicy
+
+var DeleteRateBasedRule = &sDeleteRateBasedRule
+
+var DeleteRegexMatchSet = &sDeleteRegexMatchSet
+
+var DeleteRegexPatternSet = &sDeleteRegexPatternSet
+
+var DeleteRule = &sDeleteRule
+
+var DeleteRuleGroup = &sDeleteRuleGroup
+
+var DeleteSizeConstraintSet = &sDeleteSizeConstraintSet
+
+var DeleteSqlInjectionMatchSet = &sDeleteSqlInjectionMatchSet
+
+var DeleteWebACL = &sDeleteWebACL
+
+var DeleteXssMatchSet = &sDeleteXssMatchSet
+
+var DisassociateWebACL = &sDisassociateWebACL
+
+var GetByteMatchSet = &sGetByteMatchSet
+
+var GetChangeToken = &sGetChangeToken
+
+var GetChangeTokenStatus = &sGetChangeTokenStatus
+
+var GetGeoMatchSet = &sGetGeoMatchSet
+
+var GetIPSet = &sGetIPSet
+
+var GetLoggingConfiguration = &sGetLoggingConfiguration
+
+var GetPermissionPolicy = &sGetPermissionPolicy
+
+var GetRateBasedRule = &sGetRateBasedRule
+
+var GetRateBasedRuleManagedKeys = &sGetRateBasedRuleManagedKeys
+
+var GetRegexMatchSet = &sGetRegexMatchSet
+
+var GetRegexPatternSet = &sGetRegexPatternSet
+
+var GetRule = &sGetRule
+
+var GetRuleGroup = &sGetRuleGroup
+
+var GetSampledRequests = &sGetSampledRequests
+
+var GetSizeConstraintSet = &sGetSizeConstraintSet
+
+var GetSqlInjectionMatchSet = &sGetSqlInjectionMatchSet
+
+var GetWebACL = &sGetWebACL
+
+var GetWebACLForResource = &sGetWebACLForResource
+
+var GetXssMatchSet = &sGetXssMatchSet
+
+var ListActivatedRulesInRuleGroup = &sListActivatedRulesInRuleGroup
+
+var ListByteMatchSets = &sListByteMatchSets
+
+var ListGeoMatchSets = &sListGeoMatchSets
+
+var ListIPSets = &sListIPSets
+
+var ListLoggingConfigurations = &sListLoggingConfigurations
+
+var ListRateBasedRules = &sListRateBasedRules
+
+var ListRegexMatchSets = &sListRegexMatchSets
+
+var ListRegexPatternSets = &sListRegexPatternSets
+
+var ListResourcesForWebACL = &sListResourcesForWebACL
+
+var ListRuleGroups = &sListRuleGroups
+
+var ListRules = &sListRules
+
+var ListSizeConstraintSets = &sListSizeConstraintSets
+
+var ListSqlInjectionMatchSets = &sListSqlInjectionMatchSets
+
+var ListSubscribedRuleGroups = &sListSubscribedRuleGroups
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWebACLs = &sListWebACLs
+
+var ListXssMatchSets = &sListXssMatchSets
+
+var PutLoggingConfiguration = &sPutLoggingConfiguration
+
+var PutPermissionPolicy = &sPutPermissionPolicy
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateByteMatchSet = &sUpdateByteMatchSet
+
+var UpdateGeoMatchSet = &sUpdateGeoMatchSet
+
+var UpdateIPSet = &sUpdateIPSet
+
+var UpdateRateBasedRule = &sUpdateRateBasedRule
+
+var UpdateRegexMatchSet = &sUpdateRegexMatchSet
+
+var UpdateRegexPatternSet = &sUpdateRegexPatternSet
+
+var UpdateRule = &sUpdateRule
+
+var UpdateRuleGroup = &sUpdateRuleGroup
+
+var UpdateSizeConstraintSet = &sUpdateSizeConstraintSet
+
+var UpdateSqlInjectionMatchSet = &sUpdateSqlInjectionMatchSet
+
+var UpdateWebACL = &sUpdateWebACL
+
+var UpdateXssMatchSet = &sUpdateXssMatchSet
+
+var _AWSWAF_Regional_20161128 = &s_AWSWAF_Regional_20161128
+
+var _Action = &s_Action
+
+var ActivatedRule = &sActivatedRule
+var ActivatedRule_Priority = &sActivatedRule_Priority
+var ActivatedRule_RuleId = &sActivatedRule_RuleId
+var ActivatedRule_Action = &sActivatedRule_Action
+var ActivatedRule_OverrideAction = &sActivatedRule_OverrideAction
+var ActivatedRule_Type = &sActivatedRule_Type
+var ActivatedRule_ExcludedRules = &sActivatedRule_ExcludedRules
+
+var _ActivatedRules = &s_ActivatedRules
+var _ActivatedRules_member = &s_ActivatedRules_member
+
+var ByteMatchSet = &sByteMatchSet
+var ByteMatchSet_ByteMatchSetId = &sByteMatchSet_ByteMatchSetId
+var ByteMatchSet_Name = &sByteMatchSet_Name
+var ByteMatchSet_ByteMatchTuples = &sByteMatchSet_ByteMatchTuples
+
+var _ByteMatchSetSummaries = &s_ByteMatchSetSummaries
+var _ByteMatchSetSummaries_member = &s_ByteMatchSetSummaries_member
+
+var ByteMatchSetSummary = &sByteMatchSetSummary
+var ByteMatchSetSummary_ByteMatchSetId = &sByteMatchSetSummary_ByteMatchSetId
+var ByteMatchSetSummary_Name = &sByteMatchSetSummary_Name
+
+var ByteMatchSetUpdate = &sByteMatchSetUpdate
+var ByteMatchSetUpdate_Action = &sByteMatchSetUpdate_Action
+var ByteMatchSetUpdate_ByteMatchTuple = &sByteMatchSetUpdate_ByteMatchTuple
+
+var _ByteMatchSetUpdates = &s_ByteMatchSetUpdates
+var _ByteMatchSetUpdates_member = &s_ByteMatchSetUpdates_member
+
+var _ByteMatchTargetString = &s_ByteMatchTargetString
+
+var ByteMatchTuple = &sByteMatchTuple
+var ByteMatchTuple_FieldToMatch = &sByteMatchTuple_FieldToMatch
+var ByteMatchTuple_TargetString = &sByteMatchTuple_TargetString
+var ByteMatchTuple_TextTransformation = &sByteMatchTuple_TextTransformation
+var ByteMatchTuple_PositionalConstraint = &sByteMatchTuple_PositionalConstraint
+
+var _ByteMatchTuples = &s_ByteMatchTuples
+var _ByteMatchTuples_member = &s_ByteMatchTuples_member
+
+var ChangeAction = &sChangeAction
+var ChangeAction_INSERT = &sChangeAction_INSERT
+var ChangeAction_DELETE = &sChangeAction_DELETE
+
+var _ChangeToken = &s_ChangeToken
+
+var ChangeTokenStatus = &sChangeTokenStatus
+var ChangeTokenStatus_PROVISIONED = &sChangeTokenStatus_PROVISIONED
+var ChangeTokenStatus_PENDING = &sChangeTokenStatus_PENDING
+var ChangeTokenStatus_INSYNC = &sChangeTokenStatus_INSYNC
+
+var ComparisonOperator = &sComparisonOperator
+var ComparisonOperator_EQ = &sComparisonOperator_EQ
+var ComparisonOperator_NE = &sComparisonOperator_NE
+var ComparisonOperator_LE = &sComparisonOperator_LE
+var ComparisonOperator_LT = &sComparisonOperator_LT
+var ComparisonOperator_GE = &sComparisonOperator_GE
+var ComparisonOperator_GT = &sComparisonOperator_GT
+
+var _Country = &s_Country
+
+var _errorMessage = &s_errorMessage
+
+var _ErrorReason = &s_ErrorReason
+
+var ExcludedRule = &sExcludedRule
+var ExcludedRule_RuleId = &sExcludedRule_RuleId
+
+var _ExcludedRules = &s_ExcludedRules
+var _ExcludedRules_member = &s_ExcludedRules_member
+
+var FieldToMatch = &sFieldToMatch
+var FieldToMatch_Type = &sFieldToMatch_Type
+var FieldToMatch_Data = &sFieldToMatch_Data
+
+var GeoMatchConstraint = &sGeoMatchConstraint
+var GeoMatchConstraint_Type = &sGeoMatchConstraint_Type
+var GeoMatchConstraint_Value = &sGeoMatchConstraint_Value
+
+var _GeoMatchConstraints = &s_GeoMatchConstraints
+var _GeoMatchConstraints_member = &s_GeoMatchConstraints_member
+
+var GeoMatchConstraintType = &sGeoMatchConstraintType
+var GeoMatchConstraintType_Country = &sGeoMatchConstraintType_Country
+
+var GeoMatchConstraintValue = &sGeoMatchConstraintValue
+var GeoMatchConstraintValue_AF = &sGeoMatchConstraintValue_AF
+var GeoMatchConstraintValue_AX = &sGeoMatchConstraintValue_AX
+var GeoMatchConstraintValue_AL = &sGeoMatchConstraintValue_AL
+var GeoMatchConstraintValue_DZ = &sGeoMatchConstraintValue_DZ
+var GeoMatchConstraintValue_AS = &sGeoMatchConstraintValue_AS
+var GeoMatchConstraintValue_AD = &sGeoMatchConstraintValue_AD
+var GeoMatchConstraintValue_AO = &sGeoMatchConstraintValue_AO
+var GeoMatchConstraintValue_AI = &sGeoMatchConstraintValue_AI
+var GeoMatchConstraintValue_AQ = &sGeoMatchConstraintValue_AQ
+var GeoMatchConstraintValue_AG = &sGeoMatchConstraintValue_AG
+var GeoMatchConstraintValue_AR = &sGeoMatchConstraintValue_AR
+var GeoMatchConstraintValue_AM = &sGeoMatchConstraintValue_AM
+var GeoMatchConstraintValue_AW = &sGeoMatchConstraintValue_AW
+var GeoMatchConstraintValue_AU = &sGeoMatchConstraintValue_AU
+var GeoMatchConstraintValue_AT = &sGeoMatchConstraintValue_AT
+var GeoMatchConstraintValue_AZ = &sGeoMatchConstraintValue_AZ
+var GeoMatchConstraintValue_BS = &sGeoMatchConstraintValue_BS
+var GeoMatchConstraintValue_BH = &sGeoMatchConstraintValue_BH
+var GeoMatchConstraintValue_BD = &sGeoMatchConstraintValue_BD
+var GeoMatchConstraintValue_BB = &sGeoMatchConstraintValue_BB
+var GeoMatchConstraintValue_BY = &sGeoMatchConstraintValue_BY
+var GeoMatchConstraintValue_BE = &sGeoMatchConstraintValue_BE
+var GeoMatchConstraintValue_BZ = &sGeoMatchConstraintValue_BZ
+var GeoMatchConstraintValue_BJ = &sGeoMatchConstraintValue_BJ
+var GeoMatchConstraintValue_BM = &sGeoMatchConstraintValue_BM
+var GeoMatchConstraintValue_BT = &sGeoMatchConstraintValue_BT
+var GeoMatchConstraintValue_BO = &sGeoMatchConstraintValue_BO
+var GeoMatchConstraintValue_BQ = &sGeoMatchConstraintValue_BQ
+var GeoMatchConstraintValue_BA = &sGeoMatchConstraintValue_BA
+var GeoMatchConstraintValue_BW = &sGeoMatchConstraintValue_BW
+var GeoMatchConstraintValue_BV = &sGeoMatchConstraintValue_BV
+var GeoMatchConstraintValue_BR = &sGeoMatchConstraintValue_BR
+var GeoMatchConstraintValue_IO = &sGeoMatchConstraintValue_IO
+var GeoMatchConstraintValue_BN = &sGeoMatchConstraintValue_BN
+var GeoMatchConstraintValue_BG = &sGeoMatchConstraintValue_BG
+var GeoMatchConstraintValue_BF = &sGeoMatchConstraintValue_BF
+var GeoMatchConstraintValue_BI = &sGeoMatchConstraintValue_BI
+var GeoMatchConstraintValue_KH = &sGeoMatchConstraintValue_KH
+var GeoMatchConstraintValue_CM = &sGeoMatchConstraintValue_CM
+var GeoMatchConstraintValue_CA = &sGeoMatchConstraintValue_CA
+var GeoMatchConstraintValue_CV = &sGeoMatchConstraintValue_CV
+var GeoMatchConstraintValue_KY = &sGeoMatchConstraintValue_KY
+var GeoMatchConstraintValue_CF = &sGeoMatchConstraintValue_CF
+var GeoMatchConstraintValue_TD = &sGeoMatchConstraintValue_TD
+var GeoMatchConstraintValue_CL = &sGeoMatchConstraintValue_CL
+var GeoMatchConstraintValue_CN = &sGeoMatchConstraintValue_CN
+var GeoMatchConstraintValue_CX = &sGeoMatchConstraintValue_CX
+var GeoMatchConstraintValue_CC = &sGeoMatchConstraintValue_CC
+var GeoMatchConstraintValue_CO = &sGeoMatchConstraintValue_CO
+var GeoMatchConstraintValue_KM = &sGeoMatchConstraintValue_KM
+var GeoMatchConstraintValue_CG = &sGeoMatchConstraintValue_CG
+var GeoMatchConstraintValue_CD = &sGeoMatchConstraintValue_CD
+var GeoMatchConstraintValue_CK = &sGeoMatchConstraintValue_CK
+var GeoMatchConstraintValue_CR = &sGeoMatchConstraintValue_CR
+var GeoMatchConstraintValue_CI = &sGeoMatchConstraintValue_CI
+var GeoMatchConstraintValue_HR = &sGeoMatchConstraintValue_HR
+var GeoMatchConstraintValue_CU = &sGeoMatchConstraintValue_CU
+var GeoMatchConstraintValue_CW = &sGeoMatchConstraintValue_CW
+var GeoMatchConstraintValue_CY = &sGeoMatchConstraintValue_CY
+var GeoMatchConstraintValue_CZ = &sGeoMatchConstraintValue_CZ
+var GeoMatchConstraintValue_DK = &sGeoMatchConstraintValue_DK
+var GeoMatchConstraintValue_DJ = &sGeoMatchConstraintValue_DJ
+var GeoMatchConstraintValue_DM = &sGeoMatchConstraintValue_DM
+var GeoMatchConstraintValue_DO = &sGeoMatchConstraintValue_DO
+var GeoMatchConstraintValue_EC = &sGeoMatchConstraintValue_EC
+var GeoMatchConstraintValue_EG = &sGeoMatchConstraintValue_EG
+var GeoMatchConstraintValue_SV = &sGeoMatchConstraintValue_SV
+var GeoMatchConstraintValue_GQ = &sGeoMatchConstraintValue_GQ
+var GeoMatchConstraintValue_ER = &sGeoMatchConstraintValue_ER
+var GeoMatchConstraintValue_EE = &sGeoMatchConstraintValue_EE
+var GeoMatchConstraintValue_ET = &sGeoMatchConstraintValue_ET
+var GeoMatchConstraintValue_FK = &sGeoMatchConstraintValue_FK
+var GeoMatchConstraintValue_FO = &sGeoMatchConstraintValue_FO
+var GeoMatchConstraintValue_FJ = &sGeoMatchConstraintValue_FJ
+var GeoMatchConstraintValue_FI = &sGeoMatchConstraintValue_FI
+var GeoMatchConstraintValue_FR = &sGeoMatchConstraintValue_FR
+var GeoMatchConstraintValue_GF = &sGeoMatchConstraintValue_GF
+var GeoMatchConstraintValue_PF = &sGeoMatchConstraintValue_PF
+var GeoMatchConstraintValue_TF = &sGeoMatchConstraintValue_TF
+var GeoMatchConstraintValue_GA = &sGeoMatchConstraintValue_GA
+var GeoMatchConstraintValue_GM = &sGeoMatchConstraintValue_GM
+var GeoMatchConstraintValue_GE = &sGeoMatchConstraintValue_GE
+var GeoMatchConstraintValue_DE = &sGeoMatchConstraintValue_DE
+var GeoMatchConstraintValue_GH = &sGeoMatchConstraintValue_GH
+var GeoMatchConstraintValue_GI = &sGeoMatchConstraintValue_GI
+var GeoMatchConstraintValue_GR = &sGeoMatchConstraintValue_GR
+var GeoMatchConstraintValue_GL = &sGeoMatchConstraintValue_GL
+var GeoMatchConstraintValue_GD = &sGeoMatchConstraintValue_GD
+var GeoMatchConstraintValue_GP = &sGeoMatchConstraintValue_GP
+var GeoMatchConstraintValue_GU = &sGeoMatchConstraintValue_GU
+var GeoMatchConstraintValue_GT = &sGeoMatchConstraintValue_GT
+var GeoMatchConstraintValue_GG = &sGeoMatchConstraintValue_GG
+var GeoMatchConstraintValue_GN = &sGeoMatchConstraintValue_GN
+var GeoMatchConstraintValue_GW = &sGeoMatchConstraintValue_GW
+var GeoMatchConstraintValue_GY = &sGeoMatchConstraintValue_GY
+var GeoMatchConstraintValue_HT = &sGeoMatchConstraintValue_HT
+var GeoMatchConstraintValue_HM = &sGeoMatchConstraintValue_HM
+var GeoMatchConstraintValue_VA = &sGeoMatchConstraintValue_VA
+var GeoMatchConstraintValue_HN = &sGeoMatchConstraintValue_HN
+var GeoMatchConstraintValue_HK = &sGeoMatchConstraintValue_HK
+var GeoMatchConstraintValue_HU = &sGeoMatchConstraintValue_HU
+var GeoMatchConstraintValue_IS = &sGeoMatchConstraintValue_IS
+var GeoMatchConstraintValue_IN = &sGeoMatchConstraintValue_IN
+var GeoMatchConstraintValue_ID = &sGeoMatchConstraintValue_ID
+var GeoMatchConstraintValue_IR = &sGeoMatchConstraintValue_IR
+var GeoMatchConstraintValue_IQ = &sGeoMatchConstraintValue_IQ
+var GeoMatchConstraintValue_IE = &sGeoMatchConstraintValue_IE
+var GeoMatchConstraintValue_IM = &sGeoMatchConstraintValue_IM
+var GeoMatchConstraintValue_IL = &sGeoMatchConstraintValue_IL
+var GeoMatchConstraintValue_IT = &sGeoMatchConstraintValue_IT
+var GeoMatchConstraintValue_JM = &sGeoMatchConstraintValue_JM
+var GeoMatchConstraintValue_JP = &sGeoMatchConstraintValue_JP
+var GeoMatchConstraintValue_JE = &sGeoMatchConstraintValue_JE
+var GeoMatchConstraintValue_JO = &sGeoMatchConstraintValue_JO
+var GeoMatchConstraintValue_KZ = &sGeoMatchConstraintValue_KZ
+var GeoMatchConstraintValue_KE = &sGeoMatchConstraintValue_KE
+var GeoMatchConstraintValue_KI = &sGeoMatchConstraintValue_KI
+var GeoMatchConstraintValue_KP = &sGeoMatchConstraintValue_KP
+var GeoMatchConstraintValue_KR = &sGeoMatchConstraintValue_KR
+var GeoMatchConstraintValue_KW = &sGeoMatchConstraintValue_KW
+var GeoMatchConstraintValue_KG = &sGeoMatchConstraintValue_KG
+var GeoMatchConstraintValue_LA = &sGeoMatchConstraintValue_LA
+var GeoMatchConstraintValue_LV = &sGeoMatchConstraintValue_LV
+var GeoMatchConstraintValue_LB = &sGeoMatchConstraintValue_LB
+var GeoMatchConstraintValue_LS = &sGeoMatchConstraintValue_LS
+var GeoMatchConstraintValue_LR = &sGeoMatchConstraintValue_LR
+var GeoMatchConstraintValue_LY = &sGeoMatchConstraintValue_LY
+var GeoMatchConstraintValue_LI = &sGeoMatchConstraintValue_LI
+var GeoMatchConstraintValue_LT = &sGeoMatchConstraintValue_LT
+var GeoMatchConstraintValue_LU = &sGeoMatchConstraintValue_LU
+var GeoMatchConstraintValue_MO = &sGeoMatchConstraintValue_MO
+var GeoMatchConstraintValue_MK = &sGeoMatchConstraintValue_MK
+var GeoMatchConstraintValue_MG = &sGeoMatchConstraintValue_MG
+var GeoMatchConstraintValue_MW = &sGeoMatchConstraintValue_MW
+var GeoMatchConstraintValue_MY = &sGeoMatchConstraintValue_MY
+var GeoMatchConstraintValue_MV = &sGeoMatchConstraintValue_MV
+var GeoMatchConstraintValue_ML = &sGeoMatchConstraintValue_ML
+var GeoMatchConstraintValue_MT = &sGeoMatchConstraintValue_MT
+var GeoMatchConstraintValue_MH = &sGeoMatchConstraintValue_MH
+var GeoMatchConstraintValue_MQ = &sGeoMatchConstraintValue_MQ
+var GeoMatchConstraintValue_MR = &sGeoMatchConstraintValue_MR
+var GeoMatchConstraintValue_MU = &sGeoMatchConstraintValue_MU
+var GeoMatchConstraintValue_YT = &sGeoMatchConstraintValue_YT
+var GeoMatchConstraintValue_MX = &sGeoMatchConstraintValue_MX
+var GeoMatchConstraintValue_FM = &sGeoMatchConstraintValue_FM
+var GeoMatchConstraintValue_MD = &sGeoMatchConstraintValue_MD
+var GeoMatchConstraintValue_MC = &sGeoMatchConstraintValue_MC
+var GeoMatchConstraintValue_MN = &sGeoMatchConstraintValue_MN
+var GeoMatchConstraintValue_ME = &sGeoMatchConstraintValue_ME
+var GeoMatchConstraintValue_MS = &sGeoMatchConstraintValue_MS
+var GeoMatchConstraintValue_MA = &sGeoMatchConstraintValue_MA
+var GeoMatchConstraintValue_MZ = &sGeoMatchConstraintValue_MZ
+var GeoMatchConstraintValue_MM = &sGeoMatchConstraintValue_MM
+var GeoMatchConstraintValue_NA = &sGeoMatchConstraintValue_NA
+var GeoMatchConstraintValue_NR = &sGeoMatchConstraintValue_NR
+var GeoMatchConstraintValue_NP = &sGeoMatchConstraintValue_NP
+var GeoMatchConstraintValue_NL = &sGeoMatchConstraintValue_NL
+var GeoMatchConstraintValue_NC = &sGeoMatchConstraintValue_NC
+var GeoMatchConstraintValue_NZ = &sGeoMatchConstraintValue_NZ
+var GeoMatchConstraintValue_NI = &sGeoMatchConstraintValue_NI
+var GeoMatchConstraintValue_NE = &sGeoMatchConstraintValue_NE
+var GeoMatchConstraintValue_NG = &sGeoMatchConstraintValue_NG
+var GeoMatchConstraintValue_NU = &sGeoMatchConstraintValue_NU
+var GeoMatchConstraintValue_NF = &sGeoMatchConstraintValue_NF
+var GeoMatchConstraintValue_MP = &sGeoMatchConstraintValue_MP
+var GeoMatchConstraintValue_NO = &sGeoMatchConstraintValue_NO
+var GeoMatchConstraintValue_OM = &sGeoMatchConstraintValue_OM
+var GeoMatchConstraintValue_PK = &sGeoMatchConstraintValue_PK
+var GeoMatchConstraintValue_PW = &sGeoMatchConstraintValue_PW
+var GeoMatchConstraintValue_PS = &sGeoMatchConstraintValue_PS
+var GeoMatchConstraintValue_PA = &sGeoMatchConstraintValue_PA
+var GeoMatchConstraintValue_PG = &sGeoMatchConstraintValue_PG
+var GeoMatchConstraintValue_PY = &sGeoMatchConstraintValue_PY
+var GeoMatchConstraintValue_PE = &sGeoMatchConstraintValue_PE
+var GeoMatchConstraintValue_PH = &sGeoMatchConstraintValue_PH
+var GeoMatchConstraintValue_PN = &sGeoMatchConstraintValue_PN
+var GeoMatchConstraintValue_PL = &sGeoMatchConstraintValue_PL
+var GeoMatchConstraintValue_PT = &sGeoMatchConstraintValue_PT
+var GeoMatchConstraintValue_PR = &sGeoMatchConstraintValue_PR
+var GeoMatchConstraintValue_QA = &sGeoMatchConstraintValue_QA
+var GeoMatchConstraintValue_RE = &sGeoMatchConstraintValue_RE
+var GeoMatchConstraintValue_RO = &sGeoMatchConstraintValue_RO
+var GeoMatchConstraintValue_RU = &sGeoMatchConstraintValue_RU
+var GeoMatchConstraintValue_RW = &sGeoMatchConstraintValue_RW
+var GeoMatchConstraintValue_BL = &sGeoMatchConstraintValue_BL
+var GeoMatchConstraintValue_SH = &sGeoMatchConstraintValue_SH
+var GeoMatchConstraintValue_KN = &sGeoMatchConstraintValue_KN
+var GeoMatchConstraintValue_LC = &sGeoMatchConstraintValue_LC
+var GeoMatchConstraintValue_MF = &sGeoMatchConstraintValue_MF
+var GeoMatchConstraintValue_PM = &sGeoMatchConstraintValue_PM
+var GeoMatchConstraintValue_VC = &sGeoMatchConstraintValue_VC
+var GeoMatchConstraintValue_WS = &sGeoMatchConstraintValue_WS
+var GeoMatchConstraintValue_SM = &sGeoMatchConstraintValue_SM
+var GeoMatchConstraintValue_ST = &sGeoMatchConstraintValue_ST
+var GeoMatchConstraintValue_SA = &sGeoMatchConstraintValue_SA
+var GeoMatchConstraintValue_SN = &sGeoMatchConstraintValue_SN
+var GeoMatchConstraintValue_RS = &sGeoMatchConstraintValue_RS
+var GeoMatchConstraintValue_SC = &sGeoMatchConstraintValue_SC
+var GeoMatchConstraintValue_SL = &sGeoMatchConstraintValue_SL
+var GeoMatchConstraintValue_SG = &sGeoMatchConstraintValue_SG
+var GeoMatchConstraintValue_SX = &sGeoMatchConstraintValue_SX
+var GeoMatchConstraintValue_SK = &sGeoMatchConstraintValue_SK
+var GeoMatchConstraintValue_SI = &sGeoMatchConstraintValue_SI
+var GeoMatchConstraintValue_SB = &sGeoMatchConstraintValue_SB
+var GeoMatchConstraintValue_SO = &sGeoMatchConstraintValue_SO
+var GeoMatchConstraintValue_ZA = &sGeoMatchConstraintValue_ZA
+var GeoMatchConstraintValue_GS = &sGeoMatchConstraintValue_GS
+var GeoMatchConstraintValue_SS = &sGeoMatchConstraintValue_SS
+var GeoMatchConstraintValue_ES = &sGeoMatchConstraintValue_ES
+var GeoMatchConstraintValue_LK = &sGeoMatchConstraintValue_LK
+var GeoMatchConstraintValue_SD = &sGeoMatchConstraintValue_SD
+var GeoMatchConstraintValue_SR = &sGeoMatchConstraintValue_SR
+var GeoMatchConstraintValue_SJ = &sGeoMatchConstraintValue_SJ
+var GeoMatchConstraintValue_SZ = &sGeoMatchConstraintValue_SZ
+var GeoMatchConstraintValue_SE = &sGeoMatchConstraintValue_SE
+var GeoMatchConstraintValue_CH = &sGeoMatchConstraintValue_CH
+var GeoMatchConstraintValue_SY = &sGeoMatchConstraintValue_SY
+var GeoMatchConstraintValue_TW = &sGeoMatchConstraintValue_TW
+var GeoMatchConstraintValue_TJ = &sGeoMatchConstraintValue_TJ
+var GeoMatchConstraintValue_TZ = &sGeoMatchConstraintValue_TZ
+var GeoMatchConstraintValue_TH = &sGeoMatchConstraintValue_TH
+var GeoMatchConstraintValue_TL = &sGeoMatchConstraintValue_TL
+var GeoMatchConstraintValue_TG = &sGeoMatchConstraintValue_TG
+var GeoMatchConstraintValue_TK = &sGeoMatchConstraintValue_TK
+var GeoMatchConstraintValue_TO = &sGeoMatchConstraintValue_TO
+var GeoMatchConstraintValue_TT = &sGeoMatchConstraintValue_TT
+var GeoMatchConstraintValue_TN = &sGeoMatchConstraintValue_TN
+var GeoMatchConstraintValue_TR = &sGeoMatchConstraintValue_TR
+var GeoMatchConstraintValue_TM = &sGeoMatchConstraintValue_TM
+var GeoMatchConstraintValue_TC = &sGeoMatchConstraintValue_TC
+var GeoMatchConstraintValue_TV = &sGeoMatchConstraintValue_TV
+var GeoMatchConstraintValue_UG = &sGeoMatchConstraintValue_UG
+var GeoMatchConstraintValue_UA = &sGeoMatchConstraintValue_UA
+var GeoMatchConstraintValue_AE = &sGeoMatchConstraintValue_AE
+var GeoMatchConstraintValue_GB = &sGeoMatchConstraintValue_GB
+var GeoMatchConstraintValue_US = &sGeoMatchConstraintValue_US
+var GeoMatchConstraintValue_UM = &sGeoMatchConstraintValue_UM
+var GeoMatchConstraintValue_UY = &sGeoMatchConstraintValue_UY
+var GeoMatchConstraintValue_UZ = &sGeoMatchConstraintValue_UZ
+var GeoMatchConstraintValue_VU = &sGeoMatchConstraintValue_VU
+var GeoMatchConstraintValue_VE = &sGeoMatchConstraintValue_VE
+var GeoMatchConstraintValue_VN = &sGeoMatchConstraintValue_VN
+var GeoMatchConstraintValue_VG = &sGeoMatchConstraintValue_VG
+var GeoMatchConstraintValue_VI = &sGeoMatchConstraintValue_VI
+var GeoMatchConstraintValue_WF = &sGeoMatchConstraintValue_WF
+var GeoMatchConstraintValue_EH = &sGeoMatchConstraintValue_EH
+var GeoMatchConstraintValue_YE = &sGeoMatchConstraintValue_YE
+var GeoMatchConstraintValue_ZM = &sGeoMatchConstraintValue_ZM
+var GeoMatchConstraintValue_ZW = &sGeoMatchConstraintValue_ZW
+
+var GeoMatchSet = &sGeoMatchSet
+var GeoMatchSet_GeoMatchSetId = &sGeoMatchSet_GeoMatchSetId
+var GeoMatchSet_Name = &sGeoMatchSet_Name
+var GeoMatchSet_GeoMatchConstraints = &sGeoMatchSet_GeoMatchConstraints
+
+var _GeoMatchSetSummaries = &s_GeoMatchSetSummaries
+var _GeoMatchSetSummaries_member = &s_GeoMatchSetSummaries_member
+
+var GeoMatchSetSummary = &sGeoMatchSetSummary
+var GeoMatchSetSummary_GeoMatchSetId = &sGeoMatchSetSummary_GeoMatchSetId
+var GeoMatchSetSummary_Name = &sGeoMatchSetSummary_Name
+
+var GeoMatchSetUpdate = &sGeoMatchSetUpdate
+var GeoMatchSetUpdate_Action = &sGeoMatchSetUpdate_Action
+var GeoMatchSetUpdate_GeoMatchConstraint = &sGeoMatchSetUpdate_GeoMatchConstraint
+
+var _GeoMatchSetUpdates = &s_GeoMatchSetUpdates
+var _GeoMatchSetUpdates_member = &s_GeoMatchSetUpdates_member
+
+var _GetSampledRequestsMaxItems = &s_GetSampledRequestsMaxItems
+
+var _HeaderName = &s_HeaderName
+
+var _HeaderValue = &s_HeaderValue
+
+var HTTPHeader = &sHTTPHeader
+var HTTPHeader_Name = &sHTTPHeader_Name
+var HTTPHeader_Value = &sHTTPHeader_Value
+
+var _HTTPHeaders = &s_HTTPHeaders
+var _HTTPHeaders_member = &s_HTTPHeaders_member
+
+var _HTTPMethod = &s_HTTPMethod
+
+var HTTPRequest = &sHTTPRequest
+var HTTPRequest_ClientIP = &sHTTPRequest_ClientIP
+var HTTPRequest_Country = &sHTTPRequest_Country
+var HTTPRequest_URI = &sHTTPRequest_URI
+var HTTPRequest_Method = &sHTTPRequest_Method
+var HTTPRequest_HTTPVersion = &sHTTPRequest_HTTPVersion
+var HTTPRequest_Headers = &sHTTPRequest_Headers
+
+var _HTTPVersion = &s_HTTPVersion
+
+var _IgnoreUnsupportedType = &s_IgnoreUnsupportedType
+
+var IPSet = &sIPSet
+var IPSet_IPSetId = &sIPSet_IPSetId
+var IPSet_Name = &sIPSet_Name
+var IPSet_IPSetDescriptors = &sIPSet_IPSetDescriptors
+
+var IPSetDescriptor = &sIPSetDescriptor
+var IPSetDescriptor_Type = &sIPSetDescriptor_Type
+var IPSetDescriptor_Value = &sIPSetDescriptor_Value
+
+var _IPSetDescriptors = &s_IPSetDescriptors
+var _IPSetDescriptors_member = &s_IPSetDescriptors_member
+
+var IPSetDescriptorType = &sIPSetDescriptorType
+var IPSetDescriptorType_IPV4 = &sIPSetDescriptorType_IPV4
+var IPSetDescriptorType_IPV6 = &sIPSetDescriptorType_IPV6
+
+var _IPSetDescriptorValue = &s_IPSetDescriptorValue
+
+var _IPSetSummaries = &s_IPSetSummaries
+var _IPSetSummaries_member = &s_IPSetSummaries_member
+
+var IPSetSummary = &sIPSetSummary
+var IPSetSummary_IPSetId = &sIPSetSummary_IPSetId
+var IPSetSummary_Name = &sIPSetSummary_Name
+
+var IPSetUpdate = &sIPSetUpdate
+var IPSetUpdate_Action = &sIPSetUpdate_Action
+var IPSetUpdate_IPSetDescriptor = &sIPSetUpdate_IPSetDescriptor
+
+var _IPSetUpdates = &s_IPSetUpdates
+var _IPSetUpdates_member = &s_IPSetUpdates_member
+
+var _IPString = &s_IPString
+
+var _LogDestinationConfigs = &s_LogDestinationConfigs
+var _LogDestinationConfigs_member = &s_LogDestinationConfigs_member
+
+var LoggingConfiguration = &sLoggingConfiguration
+var LoggingConfiguration_ResourceArn = &sLoggingConfiguration_ResourceArn
+var LoggingConfiguration_LogDestinationConfigs = &sLoggingConfiguration_LogDestinationConfigs
+var LoggingConfiguration_RedactedFields = &sLoggingConfiguration_RedactedFields
+
+var _LoggingConfigurations = &s_LoggingConfigurations
+var _LoggingConfigurations_member = &s_LoggingConfigurations_member
+
+var _ManagedKey = &s_ManagedKey
+
+var _ManagedKeys = &s_ManagedKeys
+var _ManagedKeys_member = &s_ManagedKeys_member
+
+var _MatchFieldData = &s_MatchFieldData
+
+var MatchFieldType = &sMatchFieldType
+var MatchFieldType_URI = &sMatchFieldType_URI
+var MatchFieldType_QUERY_STRING = &sMatchFieldType_QUERY_STRING
+var MatchFieldType_HEADER = &sMatchFieldType_HEADER
+var MatchFieldType_METHOD = &sMatchFieldType_METHOD
+var MatchFieldType_BODY = &sMatchFieldType_BODY
+var MatchFieldType_SINGLE_QUERY_ARG = &sMatchFieldType_SINGLE_QUERY_ARG
+var MatchFieldType_ALL_QUERY_ARGS = &sMatchFieldType_ALL_QUERY_ARGS
+
+var _MetricName = &s_MetricName
+
+var MigrationErrorType = &sMigrationErrorType
+var MigrationErrorType_ENTITY_NOT_SUPPORTED = &sMigrationErrorType_ENTITY_NOT_SUPPORTED
+var MigrationErrorType_ENTITY_NOT_FOUND = &sMigrationErrorType_ENTITY_NOT_FOUND
+var MigrationErrorType_S3_BUCKET_NO_PERMISSION = &sMigrationErrorType_S3_BUCKET_NO_PERMISSION
+var MigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE = &sMigrationErrorType_S3_BUCKET_NOT_ACCESSIBLE
+var MigrationErrorType_S3_BUCKET_NOT_FOUND = &sMigrationErrorType_S3_BUCKET_NOT_FOUND
+var MigrationErrorType_S3_BUCKET_INVALID_REGION = &sMigrationErrorType_S3_BUCKET_INVALID_REGION
+var MigrationErrorType_S3_INTERNAL_ERROR = &sMigrationErrorType_S3_INTERNAL_ERROR
+
+var _Negated = &s_Negated
+
+var _NextMarker = &s_NextMarker
+
+var _PaginationLimit = &s_PaginationLimit
+
+var ParameterExceptionField = &sParameterExceptionField
+var ParameterExceptionField_CHANGE_ACTION = &sParameterExceptionField_CHANGE_ACTION
+var ParameterExceptionField_WAF_ACTION = &sParameterExceptionField_WAF_ACTION
+var ParameterExceptionField_WAF_OVERRIDE_ACTION = &sParameterExceptionField_WAF_OVERRIDE_ACTION
+var ParameterExceptionField_PREDICATE_TYPE = &sParameterExceptionField_PREDICATE_TYPE
+var ParameterExceptionField_IPSET_TYPE = &sParameterExceptionField_IPSET_TYPE
+var ParameterExceptionField_BYTE_MATCH_FIELD_TYPE = &sParameterExceptionField_BYTE_MATCH_FIELD_TYPE
+var ParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE = &sParameterExceptionField_SQL_INJECTION_MATCH_FIELD_TYPE
+var ParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION = &sParameterExceptionField_BYTE_MATCH_TEXT_TRANSFORMATION
+var ParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT = &sParameterExceptionField_BYTE_MATCH_POSITIONAL_CONSTRAINT
+var ParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR = &sParameterExceptionField_SIZE_CONSTRAINT_COMPARISON_OPERATOR
+var ParameterExceptionField_GEO_MATCH_LOCATION_TYPE = &sParameterExceptionField_GEO_MATCH_LOCATION_TYPE
+var ParameterExceptionField_GEO_MATCH_LOCATION_VALUE = &sParameterExceptionField_GEO_MATCH_LOCATION_VALUE
+var ParameterExceptionField_RATE_KEY = &sParameterExceptionField_RATE_KEY
+var ParameterExceptionField_RULE_TYPE = &sParameterExceptionField_RULE_TYPE
+var ParameterExceptionField_NEXT_MARKER = &sParameterExceptionField_NEXT_MARKER
+var ParameterExceptionField_RESOURCE_ARN = &sParameterExceptionField_RESOURCE_ARN
+var ParameterExceptionField_TAGS = &sParameterExceptionField_TAGS
+var ParameterExceptionField_TAG_KEYS = &sParameterExceptionField_TAG_KEYS
+
+var _ParameterExceptionParameter = &s_ParameterExceptionParameter
+
+var ParameterExceptionReason = &sParameterExceptionReason
+var ParameterExceptionReason_INVALID_OPTION = &sParameterExceptionReason_INVALID_OPTION
+var ParameterExceptionReason_ILLEGAL_COMBINATION = &sParameterExceptionReason_ILLEGAL_COMBINATION
+var ParameterExceptionReason_ILLEGAL_ARGUMENT = &sParameterExceptionReason_ILLEGAL_ARGUMENT
+var ParameterExceptionReason_INVALID_TAG_KEY = &sParameterExceptionReason_INVALID_TAG_KEY
+
+var _PolicyString = &s_PolicyString
+
+var _PopulationSize = &s_PopulationSize
+
+var PositionalConstraint = &sPositionalConstraint
+var PositionalConstraint_EXACTLY = &sPositionalConstraint_EXACTLY
+var PositionalConstraint_STARTS_WITH = &sPositionalConstraint_STARTS_WITH
+var PositionalConstraint_ENDS_WITH = &sPositionalConstraint_ENDS_WITH
+var PositionalConstraint_CONTAINS = &sPositionalConstraint_CONTAINS
+var PositionalConstraint_CONTAINS_WORD = &sPositionalConstraint_CONTAINS_WORD
+
+var Predicate = &sPredicate
+var Predicate_Negated = &sPredicate_Negated
+var Predicate_Type = &sPredicate_Type
+var Predicate_DataId = &sPredicate_DataId
+
+var _Predicates = &s_Predicates
+var _Predicates_member = &s_Predicates_member
+
+var PredicateType = &sPredicateType
+var PredicateType_IP_MATCH = &sPredicateType_IP_MATCH
+var PredicateType_BYTE_MATCH = &sPredicateType_BYTE_MATCH
+var PredicateType_SQL_INJECTION_MATCH = &sPredicateType_SQL_INJECTION_MATCH
+var PredicateType_GEO_MATCH = &sPredicateType_GEO_MATCH
+var PredicateType_SIZE_CONSTRAINT = &sPredicateType_SIZE_CONSTRAINT
+var PredicateType_XSS_MATCH = &sPredicateType_XSS_MATCH
+var PredicateType_REGEX_MATCH = &sPredicateType_REGEX_MATCH
+
+var RateBasedRule = &sRateBasedRule
+var RateBasedRule_RuleId = &sRateBasedRule_RuleId
+var RateBasedRule_Name = &sRateBasedRule_Name
+var RateBasedRule_MetricName = &sRateBasedRule_MetricName
+var RateBasedRule_MatchPredicates = &sRateBasedRule_MatchPredicates
+var RateBasedRule_RateKey = &sRateBasedRule_RateKey
+var RateBasedRule_RateLimit = &sRateBasedRule_RateLimit
+
+var RateKey = &sRateKey
+var RateKey_IP = &sRateKey_IP
+
+var _RateLimit = &s_RateLimit
+
+var _RedactedFields = &s_RedactedFields
+var _RedactedFields_member = &s_RedactedFields_member
+
+var RegexMatchSet = &sRegexMatchSet
+var RegexMatchSet_RegexMatchSetId = &sRegexMatchSet_RegexMatchSetId
+var RegexMatchSet_Name = &sRegexMatchSet_Name
+var RegexMatchSet_RegexMatchTuples = &sRegexMatchSet_RegexMatchTuples
+
+var _RegexMatchSetSummaries = &s_RegexMatchSetSummaries
+var _RegexMatchSetSummaries_member = &s_RegexMatchSetSummaries_member
+
+var RegexMatchSetSummary = &sRegexMatchSetSummary
+var RegexMatchSetSummary_RegexMatchSetId = &sRegexMatchSetSummary_RegexMatchSetId
+var RegexMatchSetSummary_Name = &sRegexMatchSetSummary_Name
+
+var RegexMatchSetUpdate = &sRegexMatchSetUpdate
+var RegexMatchSetUpdate_Action = &sRegexMatchSetUpdate_Action
+var RegexMatchSetUpdate_RegexMatchTuple = &sRegexMatchSetUpdate_RegexMatchTuple
+
+var _RegexMatchSetUpdates = &s_RegexMatchSetUpdates
+var _RegexMatchSetUpdates_member = &s_RegexMatchSetUpdates_member
+
+var RegexMatchTuple = &sRegexMatchTuple
+var RegexMatchTuple_FieldToMatch = &sRegexMatchTuple_FieldToMatch
+var RegexMatchTuple_TextTransformation = &sRegexMatchTuple_TextTransformation
+var RegexMatchTuple_RegexPatternSetId = &sRegexMatchTuple_RegexPatternSetId
+
+var _RegexMatchTuples = &s_RegexMatchTuples
+var _RegexMatchTuples_member = &s_RegexMatchTuples_member
+
+var RegexPatternSet = &sRegexPatternSet
+var RegexPatternSet_RegexPatternSetId = &sRegexPatternSet_RegexPatternSetId
+var RegexPatternSet_Name = &sRegexPatternSet_Name
+var RegexPatternSet_RegexPatternStrings = &sRegexPatternSet_RegexPatternStrings
+
+var _RegexPatternSetSummaries = &s_RegexPatternSetSummaries
+var _RegexPatternSetSummaries_member = &s_RegexPatternSetSummaries_member
+
+var RegexPatternSetSummary = &sRegexPatternSetSummary
+var RegexPatternSetSummary_RegexPatternSetId = &sRegexPatternSetSummary_RegexPatternSetId
+var RegexPatternSetSummary_Name = &sRegexPatternSetSummary_Name
+
+var RegexPatternSetUpdate = &sRegexPatternSetUpdate
+var RegexPatternSetUpdate_Action = &sRegexPatternSetUpdate_Action
+var RegexPatternSetUpdate_RegexPatternString = &sRegexPatternSetUpdate_RegexPatternString
+
+var _RegexPatternSetUpdates = &s_RegexPatternSetUpdates
+var _RegexPatternSetUpdates_member = &s_RegexPatternSetUpdates_member
+
+var _RegexPatternString = &s_RegexPatternString
+
+var _RegexPatternStrings = &s_RegexPatternStrings
+var _RegexPatternStrings_member = &s_RegexPatternStrings_member
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceArns = &s_ResourceArns
+var _ResourceArns_member = &s_ResourceArns_member
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceName = &s_ResourceName
+
+var ResourceType = &sResourceType
+var ResourceType_APPLICATION_LOAD_BALANCER = &sResourceType_APPLICATION_LOAD_BALANCER
+var ResourceType_API_GATEWAY = &sResourceType_API_GATEWAY
+
+var Rule = &sRule
+var Rule_RuleId = &sRule_RuleId
+var Rule_Name = &sRule_Name
+var Rule_MetricName = &sRule_MetricName
+var Rule_Predicates = &sRule_Predicates
+
+var RuleGroup = &sRuleGroup
+var RuleGroup_RuleGroupId = &sRuleGroup_RuleGroupId
+var RuleGroup_Name = &sRuleGroup_Name
+var RuleGroup_MetricName = &sRuleGroup_MetricName
+
+var _RuleGroupSummaries = &s_RuleGroupSummaries
+var _RuleGroupSummaries_member = &s_RuleGroupSummaries_member
+
+var RuleGroupSummary = &sRuleGroupSummary
+var RuleGroupSummary_RuleGroupId = &sRuleGroupSummary_RuleGroupId
+var RuleGroupSummary_Name = &sRuleGroupSummary_Name
+
+var RuleGroupUpdate = &sRuleGroupUpdate
+var RuleGroupUpdate_Action = &sRuleGroupUpdate_Action
+var RuleGroupUpdate_ActivatedRule = &sRuleGroupUpdate_ActivatedRule
+
+var _RuleGroupUpdates = &s_RuleGroupUpdates
+var _RuleGroupUpdates_member = &s_RuleGroupUpdates_member
+
+var _RulePriority = &s_RulePriority
+
+var _RuleSummaries = &s_RuleSummaries
+var _RuleSummaries_member = &s_RuleSummaries_member
+
+var RuleSummary = &sRuleSummary
+var RuleSummary_RuleId = &sRuleSummary_RuleId
+var RuleSummary_Name = &sRuleSummary_Name
+
+var RuleUpdate = &sRuleUpdate
+var RuleUpdate_Action = &sRuleUpdate_Action
+var RuleUpdate_Predicate = &sRuleUpdate_Predicate
+
+var _RuleUpdates = &s_RuleUpdates
+var _RuleUpdates_member = &s_RuleUpdates_member
+
+var _S3BucketName = &s_S3BucketName
+
+var _S3ObjectUrl = &s_S3ObjectUrl
+
+var SampledHTTPRequest = &sSampledHTTPRequest
+var SampledHTTPRequest_Request = &sSampledHTTPRequest_Request
+var SampledHTTPRequest_Weight = &sSampledHTTPRequest_Weight
+var SampledHTTPRequest_Timestamp = &sSampledHTTPRequest_Timestamp
+var SampledHTTPRequest_Action = &sSampledHTTPRequest_Action
+var SampledHTTPRequest_RuleWithinRuleGroup = &sSampledHTTPRequest_RuleWithinRuleGroup
+
+var _SampledHTTPRequests = &s_SampledHTTPRequests
+var _SampledHTTPRequests_member = &s_SampledHTTPRequests_member
+
+var _SampleWeight = &s_SampleWeight
+
+var _Size = &s_Size
+
+var SizeConstraint = &sSizeConstraint
+var SizeConstraint_FieldToMatch = &sSizeConstraint_FieldToMatch
+var SizeConstraint_TextTransformation = &sSizeConstraint_TextTransformation
+var SizeConstraint_ComparisonOperator = &sSizeConstraint_ComparisonOperator
+var SizeConstraint_Size = &sSizeConstraint_Size
+
+var _SizeConstraints = &s_SizeConstraints
+var _SizeConstraints_member = &s_SizeConstraints_member
+
+var SizeConstraintSet = &sSizeConstraintSet
+var SizeConstraintSet_SizeConstraintSetId = &sSizeConstraintSet_SizeConstraintSetId
+var SizeConstraintSet_Name = &sSizeConstraintSet_Name
+var SizeConstraintSet_SizeConstraints = &sSizeConstraintSet_SizeConstraints
+
+var _SizeConstraintSetSummaries = &s_SizeConstraintSetSummaries
+var _SizeConstraintSetSummaries_member = &s_SizeConstraintSetSummaries_member
+
+var SizeConstraintSetSummary = &sSizeConstraintSetSummary
+var SizeConstraintSetSummary_SizeConstraintSetId = &sSizeConstraintSetSummary_SizeConstraintSetId
+var SizeConstraintSetSummary_Name = &sSizeConstraintSetSummary_Name
+
+var SizeConstraintSetUpdate = &sSizeConstraintSetUpdate
+var SizeConstraintSetUpdate_Action = &sSizeConstraintSetUpdate_Action
+var SizeConstraintSetUpdate_SizeConstraint = &sSizeConstraintSetUpdate_SizeConstraint
+
+var _SizeConstraintSetUpdates = &s_SizeConstraintSetUpdates
+var _SizeConstraintSetUpdates_member = &s_SizeConstraintSetUpdates_member
+
+var SqlInjectionMatchSet = &sSqlInjectionMatchSet
+var SqlInjectionMatchSet_SqlInjectionMatchSetId = &sSqlInjectionMatchSet_SqlInjectionMatchSetId
+var SqlInjectionMatchSet_Name = &sSqlInjectionMatchSet_Name
+var SqlInjectionMatchSet_SqlInjectionMatchTuples = &sSqlInjectionMatchSet_SqlInjectionMatchTuples
+
+var _SqlInjectionMatchSetSummaries = &s_SqlInjectionMatchSetSummaries
+var _SqlInjectionMatchSetSummaries_member = &s_SqlInjectionMatchSetSummaries_member
+
+var SqlInjectionMatchSetSummary = &sSqlInjectionMatchSetSummary
+var SqlInjectionMatchSetSummary_SqlInjectionMatchSetId = &sSqlInjectionMatchSetSummary_SqlInjectionMatchSetId
+var SqlInjectionMatchSetSummary_Name = &sSqlInjectionMatchSetSummary_Name
+
+var SqlInjectionMatchSetUpdate = &sSqlInjectionMatchSetUpdate
+var SqlInjectionMatchSetUpdate_Action = &sSqlInjectionMatchSetUpdate_Action
+var SqlInjectionMatchSetUpdate_SqlInjectionMatchTuple = &sSqlInjectionMatchSetUpdate_SqlInjectionMatchTuple
+
+var _SqlInjectionMatchSetUpdates = &s_SqlInjectionMatchSetUpdates
+var _SqlInjectionMatchSetUpdates_member = &s_SqlInjectionMatchSetUpdates_member
+
+var SqlInjectionMatchTuple = &sSqlInjectionMatchTuple
+var SqlInjectionMatchTuple_FieldToMatch = &sSqlInjectionMatchTuple_FieldToMatch
+var SqlInjectionMatchTuple_TextTransformation = &sSqlInjectionMatchTuple_TextTransformation
+
+var _SqlInjectionMatchTuples = &s_SqlInjectionMatchTuples
+var _SqlInjectionMatchTuples_member = &s_SqlInjectionMatchTuples_member
+
+var _SubscribedRuleGroupSummaries = &s_SubscribedRuleGroupSummaries
+var _SubscribedRuleGroupSummaries_member = &s_SubscribedRuleGroupSummaries_member
+
+var SubscribedRuleGroupSummary = &sSubscribedRuleGroupSummary
+var SubscribedRuleGroupSummary_RuleGroupId = &sSubscribedRuleGroupSummary_RuleGroupId
+var SubscribedRuleGroupSummary_Name = &sSubscribedRuleGroupSummary_Name
+var SubscribedRuleGroupSummary_MetricName = &sSubscribedRuleGroupSummary_MetricName
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var TagInfoForResource = &sTagInfoForResource
+var TagInfoForResource_ResourceARN = &sTagInfoForResource_ResourceARN
+var TagInfoForResource_TagList = &sTagInfoForResource_TagList
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TextTransformation = &sTextTransformation
+var TextTransformation_NONE = &sTextTransformation_NONE
+var TextTransformation_COMPRESS_WHITE_SPACE = &sTextTransformation_COMPRESS_WHITE_SPACE
+var TextTransformation_HTML_ENTITY_DECODE = &sTextTransformation_HTML_ENTITY_DECODE
+var TextTransformation_LOWERCASE = &sTextTransformation_LOWERCASE
+var TextTransformation_CMD_LINE = &sTextTransformation_CMD_LINE
+var TextTransformation_URL_DECODE = &sTextTransformation_URL_DECODE
+
+var _Timestamp = &s_Timestamp
+
+var TimeWindow = &sTimeWindow
+var TimeWindow_StartTime = &sTimeWindow_StartTime
+var TimeWindow_EndTime = &sTimeWindow_EndTime
+
+var _URIString = &s_URIString
+
+var WafAction = &sWafAction
+var WafAction_Type = &sWafAction_Type
+
+var WafActionType = &sWafActionType
+var WafActionType_BLOCK = &sWafActionType_BLOCK
+var WafActionType_ALLOW = &sWafActionType_ALLOW
+var WafActionType_COUNT = &sWafActionType_COUNT
+
+var WAFBadRequestException = &sWAFBadRequestException
+var WAFBadRequestException_message = &sWAFBadRequestException_message
+
+var WAFDisallowedNameException = &sWAFDisallowedNameException
+var WAFDisallowedNameException_message = &sWAFDisallowedNameException_message
+
+var WAFEntityMigrationException = &sWAFEntityMigrationException
+var WAFEntityMigrationException_message = &sWAFEntityMigrationException_message
+var WAFEntityMigrationException_MigrationErrorType = &sWAFEntityMigrationException_MigrationErrorType
+var WAFEntityMigrationException_MigrationErrorReason = &sWAFEntityMigrationException_MigrationErrorReason
+
+var WAFInternalErrorException = &sWAFInternalErrorException
+var WAFInternalErrorException_message = &sWAFInternalErrorException_message
+
+var WAFInvalidAccountException = &sWAFInvalidAccountException
+
+var WAFInvalidOperationException = &sWAFInvalidOperationException
+var WAFInvalidOperationException_message = &sWAFInvalidOperationException_message
+
+var WAFInvalidParameterException = &sWAFInvalidParameterException
+var WAFInvalidParameterException_field = &sWAFInvalidParameterException_field
+var WAFInvalidParameterException_parameter = &sWAFInvalidParameterException_parameter
+var WAFInvalidParameterException_reason = &sWAFInvalidParameterException_reason
+
+var WAFInvalidPermissionPolicyException = &sWAFInvalidPermissionPolicyException
+var WAFInvalidPermissionPolicyException_message = &sWAFInvalidPermissionPolicyException_message
+
+var WAFInvalidRegexPatternException = &sWAFInvalidRegexPatternException
+var WAFInvalidRegexPatternException_message = &sWAFInvalidRegexPatternException_message
+
+var WAFLimitsExceededException = &sWAFLimitsExceededException
+var WAFLimitsExceededException_message = &sWAFLimitsExceededException_message
+
+var WAFNonEmptyEntityException = &sWAFNonEmptyEntityException
+var WAFNonEmptyEntityException_message = &sWAFNonEmptyEntityException_message
+
+var WAFNonexistentContainerException = &sWAFNonexistentContainerException
+var WAFNonexistentContainerException_message = &sWAFNonexistentContainerException_message
+
+var WAFNonexistentItemException = &sWAFNonexistentItemException
+var WAFNonexistentItemException_message = &sWAFNonexistentItemException_message
+
+var WafOverrideAction = &sWafOverrideAction
+var WafOverrideAction_Type = &sWafOverrideAction_Type
+
+var WafOverrideActionType = &sWafOverrideActionType
+var WafOverrideActionType_NONE = &sWafOverrideActionType_NONE
+var WafOverrideActionType_COUNT = &sWafOverrideActionType_COUNT
+
+var WAFReferencedItemException = &sWAFReferencedItemException
+var WAFReferencedItemException_message = &sWAFReferencedItemException_message
+
+var WafRuleType = &sWafRuleType
+var WafRuleType_REGULAR = &sWafRuleType_REGULAR
+var WafRuleType_RATE_BASED = &sWafRuleType_RATE_BASED
+var WafRuleType_GROUP = &sWafRuleType_GROUP
+
+var WAFServiceLinkedRoleErrorException = &sWAFServiceLinkedRoleErrorException
+var WAFServiceLinkedRoleErrorException_message = &sWAFServiceLinkedRoleErrorException_message
+
+var WAFStaleDataException = &sWAFStaleDataException
+var WAFStaleDataException_message = &sWAFStaleDataException_message
+
+var WAFSubscriptionNotFoundException = &sWAFSubscriptionNotFoundException
+var WAFSubscriptionNotFoundException_message = &sWAFSubscriptionNotFoundException_message
+
+var WAFTagOperationException = &sWAFTagOperationException
+var WAFTagOperationException_message = &sWAFTagOperationException_message
+
+var WAFTagOperationInternalErrorException = &sWAFTagOperationInternalErrorException
+var WAFTagOperationInternalErrorException_message = &sWAFTagOperationInternalErrorException_message
+
+var WAFUnavailableEntityException = &sWAFUnavailableEntityException
+var WAFUnavailableEntityException_message = &sWAFUnavailableEntityException_message
+
+var WebACL = &sWebACL
+var WebACL_WebACLId = &sWebACL_WebACLId
+var WebACL_Name = &sWebACL_Name
+var WebACL_MetricName = &sWebACL_MetricName
+var WebACL_DefaultAction = &sWebACL_DefaultAction
+var WebACL_Rules = &sWebACL_Rules
+var WebACL_WebACLArn = &sWebACL_WebACLArn
+
+var _WebACLSummaries = &s_WebACLSummaries
+var _WebACLSummaries_member = &s_WebACLSummaries_member
+
+var WebACLSummary = &sWebACLSummary
+var WebACLSummary_WebACLId = &sWebACLSummary_WebACLId
+var WebACLSummary_Name = &sWebACLSummary_Name
+
+var WebACLUpdate = &sWebACLUpdate
+var WebACLUpdate_Action = &sWebACLUpdate_Action
+var WebACLUpdate_ActivatedRule = &sWebACLUpdate_ActivatedRule
+
+var _WebACLUpdates = &s_WebACLUpdates
+var _WebACLUpdates_member = &s_WebACLUpdates_member
+
+var XssMatchSet = &sXssMatchSet
+var XssMatchSet_XssMatchSetId = &sXssMatchSet_XssMatchSetId
+var XssMatchSet_Name = &sXssMatchSet_Name
+var XssMatchSet_XssMatchTuples = &sXssMatchSet_XssMatchTuples
+
+var _XssMatchSetSummaries = &s_XssMatchSetSummaries
+var _XssMatchSetSummaries_member = &s_XssMatchSetSummaries_member
+
+var XssMatchSetSummary = &sXssMatchSetSummary
+var XssMatchSetSummary_XssMatchSetId = &sXssMatchSetSummary_XssMatchSetId
+var XssMatchSetSummary_Name = &sXssMatchSetSummary_Name
+
+var XssMatchSetUpdate = &sXssMatchSetUpdate
+var XssMatchSetUpdate_Action = &sXssMatchSetUpdate_Action
+var XssMatchSetUpdate_XssMatchTuple = &sXssMatchSetUpdate_XssMatchTuple
+
+var _XssMatchSetUpdates = &s_XssMatchSetUpdates
+var _XssMatchSetUpdates_member = &s_XssMatchSetUpdates_member
+
+var XssMatchTuple = &sXssMatchTuple
+var XssMatchTuple_FieldToMatch = &sXssMatchTuple_FieldToMatch
+var XssMatchTuple_TextTransformation = &sXssMatchTuple_TextTransformation
+
+var _XssMatchTuples = &s_XssMatchTuples
+var _XssMatchTuples_member = &s_XssMatchTuples_member
+
+var AssociateWebACLRequest = &sAssociateWebACLRequest
+var AssociateWebACLRequest_WebACLId = &sAssociateWebACLRequest_WebACLId
+var AssociateWebACLRequest_ResourceArn = &sAssociateWebACLRequest_ResourceArn
+
+var AssociateWebACLResponse = &sAssociateWebACLResponse
+
+var CreateByteMatchSetRequest = &sCreateByteMatchSetRequest
+var CreateByteMatchSetRequest_Name = &sCreateByteMatchSetRequest_Name
+var CreateByteMatchSetRequest_ChangeToken = &sCreateByteMatchSetRequest_ChangeToken
+
+var CreateByteMatchSetResponse = &sCreateByteMatchSetResponse
+var CreateByteMatchSetResponse_ByteMatchSet = &sCreateByteMatchSetResponse_ByteMatchSet
+var CreateByteMatchSetResponse_ChangeToken = &sCreateByteMatchSetResponse_ChangeToken
+
+var CreateGeoMatchSetRequest = &sCreateGeoMatchSetRequest
+var CreateGeoMatchSetRequest_Name = &sCreateGeoMatchSetRequest_Name
+var CreateGeoMatchSetRequest_ChangeToken = &sCreateGeoMatchSetRequest_ChangeToken
+
+var CreateGeoMatchSetResponse = &sCreateGeoMatchSetResponse
+var CreateGeoMatchSetResponse_GeoMatchSet = &sCreateGeoMatchSetResponse_GeoMatchSet
+var CreateGeoMatchSetResponse_ChangeToken = &sCreateGeoMatchSetResponse_ChangeToken
+
+var CreateIPSetRequest = &sCreateIPSetRequest
+var CreateIPSetRequest_Name = &sCreateIPSetRequest_Name
+var CreateIPSetRequest_ChangeToken = &sCreateIPSetRequest_ChangeToken
+
+var CreateIPSetResponse = &sCreateIPSetResponse
+var CreateIPSetResponse_IPSet = &sCreateIPSetResponse_IPSet
+var CreateIPSetResponse_ChangeToken = &sCreateIPSetResponse_ChangeToken
+
+var CreateRateBasedRuleRequest = &sCreateRateBasedRuleRequest
+var CreateRateBasedRuleRequest_Name = &sCreateRateBasedRuleRequest_Name
+var CreateRateBasedRuleRequest_MetricName = &sCreateRateBasedRuleRequest_MetricName
+var CreateRateBasedRuleRequest_RateKey = &sCreateRateBasedRuleRequest_RateKey
+var CreateRateBasedRuleRequest_RateLimit = &sCreateRateBasedRuleRequest_RateLimit
+var CreateRateBasedRuleRequest_ChangeToken = &sCreateRateBasedRuleRequest_ChangeToken
+var CreateRateBasedRuleRequest_Tags = &sCreateRateBasedRuleRequest_Tags
+
+var CreateRateBasedRuleResponse = &sCreateRateBasedRuleResponse
+var CreateRateBasedRuleResponse_Rule = &sCreateRateBasedRuleResponse_Rule
+var CreateRateBasedRuleResponse_ChangeToken = &sCreateRateBasedRuleResponse_ChangeToken
+
+var CreateRegexMatchSetRequest = &sCreateRegexMatchSetRequest
+var CreateRegexMatchSetRequest_Name = &sCreateRegexMatchSetRequest_Name
+var CreateRegexMatchSetRequest_ChangeToken = &sCreateRegexMatchSetRequest_ChangeToken
+
+var CreateRegexMatchSetResponse = &sCreateRegexMatchSetResponse
+var CreateRegexMatchSetResponse_RegexMatchSet = &sCreateRegexMatchSetResponse_RegexMatchSet
+var CreateRegexMatchSetResponse_ChangeToken = &sCreateRegexMatchSetResponse_ChangeToken
+
+var CreateRegexPatternSetRequest = &sCreateRegexPatternSetRequest
+var CreateRegexPatternSetRequest_Name = &sCreateRegexPatternSetRequest_Name
+var CreateRegexPatternSetRequest_ChangeToken = &sCreateRegexPatternSetRequest_ChangeToken
+
+var CreateRegexPatternSetResponse = &sCreateRegexPatternSetResponse
+var CreateRegexPatternSetResponse_RegexPatternSet = &sCreateRegexPatternSetResponse_RegexPatternSet
+var CreateRegexPatternSetResponse_ChangeToken = &sCreateRegexPatternSetResponse_ChangeToken
+
+var CreateRuleGroupRequest = &sCreateRuleGroupRequest
+var CreateRuleGroupRequest_Name = &sCreateRuleGroupRequest_Name
+var CreateRuleGroupRequest_MetricName = &sCreateRuleGroupRequest_MetricName
+var CreateRuleGroupRequest_ChangeToken = &sCreateRuleGroupRequest_ChangeToken
+var CreateRuleGroupRequest_Tags = &sCreateRuleGroupRequest_Tags
+
+var CreateRuleGroupResponse = &sCreateRuleGroupResponse
+var CreateRuleGroupResponse_RuleGroup = &sCreateRuleGroupResponse_RuleGroup
+var CreateRuleGroupResponse_ChangeToken = &sCreateRuleGroupResponse_ChangeToken
+
+var CreateRuleRequest = &sCreateRuleRequest
+var CreateRuleRequest_Name = &sCreateRuleRequest_Name
+var CreateRuleRequest_MetricName = &sCreateRuleRequest_MetricName
+var CreateRuleRequest_ChangeToken = &sCreateRuleRequest_ChangeToken
+var CreateRuleRequest_Tags = &sCreateRuleRequest_Tags
+
+var CreateRuleResponse = &sCreateRuleResponse
+var CreateRuleResponse_Rule = &sCreateRuleResponse_Rule
+var CreateRuleResponse_ChangeToken = &sCreateRuleResponse_ChangeToken
+
+var CreateSizeConstraintSetRequest = &sCreateSizeConstraintSetRequest
+var CreateSizeConstraintSetRequest_Name = &sCreateSizeConstraintSetRequest_Name
+var CreateSizeConstraintSetRequest_ChangeToken = &sCreateSizeConstraintSetRequest_ChangeToken
+
+var CreateSizeConstraintSetResponse = &sCreateSizeConstraintSetResponse
+var CreateSizeConstraintSetResponse_SizeConstraintSet = &sCreateSizeConstraintSetResponse_SizeConstraintSet
+var CreateSizeConstraintSetResponse_ChangeToken = &sCreateSizeConstraintSetResponse_ChangeToken
+
+var CreateSqlInjectionMatchSetRequest = &sCreateSqlInjectionMatchSetRequest
+var CreateSqlInjectionMatchSetRequest_Name = &sCreateSqlInjectionMatchSetRequest_Name
+var CreateSqlInjectionMatchSetRequest_ChangeToken = &sCreateSqlInjectionMatchSetRequest_ChangeToken
+
+var CreateSqlInjectionMatchSetResponse = &sCreateSqlInjectionMatchSetResponse
+var CreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet = &sCreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet
+var CreateSqlInjectionMatchSetResponse_ChangeToken = &sCreateSqlInjectionMatchSetResponse_ChangeToken
+
+var CreateWebACLRequest = &sCreateWebACLRequest
+var CreateWebACLRequest_Name = &sCreateWebACLRequest_Name
+var CreateWebACLRequest_MetricName = &sCreateWebACLRequest_MetricName
+var CreateWebACLRequest_DefaultAction = &sCreateWebACLRequest_DefaultAction
+var CreateWebACLRequest_ChangeToken = &sCreateWebACLRequest_ChangeToken
+var CreateWebACLRequest_Tags = &sCreateWebACLRequest_Tags
+
+var CreateWebACLMigrationStackRequest = &sCreateWebACLMigrationStackRequest
+var CreateWebACLMigrationStackRequest_WebACLId = &sCreateWebACLMigrationStackRequest_WebACLId
+var CreateWebACLMigrationStackRequest_S3BucketName = &sCreateWebACLMigrationStackRequest_S3BucketName
+var CreateWebACLMigrationStackRequest_IgnoreUnsupportedType = &sCreateWebACLMigrationStackRequest_IgnoreUnsupportedType
+
+var CreateWebACLMigrationStackResponse = &sCreateWebACLMigrationStackResponse
+var CreateWebACLMigrationStackResponse_S3ObjectUrl = &sCreateWebACLMigrationStackResponse_S3ObjectUrl
+
+var CreateWebACLResponse = &sCreateWebACLResponse
+var CreateWebACLResponse_WebACL = &sCreateWebACLResponse_WebACL
+var CreateWebACLResponse_ChangeToken = &sCreateWebACLResponse_ChangeToken
+
+var CreateXssMatchSetRequest = &sCreateXssMatchSetRequest
+var CreateXssMatchSetRequest_Name = &sCreateXssMatchSetRequest_Name
+var CreateXssMatchSetRequest_ChangeToken = &sCreateXssMatchSetRequest_ChangeToken
+
+var CreateXssMatchSetResponse = &sCreateXssMatchSetResponse
+var CreateXssMatchSetResponse_XssMatchSet = &sCreateXssMatchSetResponse_XssMatchSet
+var CreateXssMatchSetResponse_ChangeToken = &sCreateXssMatchSetResponse_ChangeToken
+
+var DeleteByteMatchSetRequest = &sDeleteByteMatchSetRequest
+var DeleteByteMatchSetRequest_ByteMatchSetId = &sDeleteByteMatchSetRequest_ByteMatchSetId
+var DeleteByteMatchSetRequest_ChangeToken = &sDeleteByteMatchSetRequest_ChangeToken
+
+var DeleteByteMatchSetResponse = &sDeleteByteMatchSetResponse
+var DeleteByteMatchSetResponse_ChangeToken = &sDeleteByteMatchSetResponse_ChangeToken
+
+var DeleteGeoMatchSetRequest = &sDeleteGeoMatchSetRequest
+var DeleteGeoMatchSetRequest_GeoMatchSetId = &sDeleteGeoMatchSetRequest_GeoMatchSetId
+var DeleteGeoMatchSetRequest_ChangeToken = &sDeleteGeoMatchSetRequest_ChangeToken
+
+var DeleteGeoMatchSetResponse = &sDeleteGeoMatchSetResponse
+var DeleteGeoMatchSetResponse_ChangeToken = &sDeleteGeoMatchSetResponse_ChangeToken
+
+var DeleteIPSetRequest = &sDeleteIPSetRequest
+var DeleteIPSetRequest_IPSetId = &sDeleteIPSetRequest_IPSetId
+var DeleteIPSetRequest_ChangeToken = &sDeleteIPSetRequest_ChangeToken
+
+var DeleteIPSetResponse = &sDeleteIPSetResponse
+var DeleteIPSetResponse_ChangeToken = &sDeleteIPSetResponse_ChangeToken
+
+var DeleteLoggingConfigurationRequest = &sDeleteLoggingConfigurationRequest
+var DeleteLoggingConfigurationRequest_ResourceArn = &sDeleteLoggingConfigurationRequest_ResourceArn
+
+var DeleteLoggingConfigurationResponse = &sDeleteLoggingConfigurationResponse
+
+var DeletePermissionPolicyRequest = &sDeletePermissionPolicyRequest
+var DeletePermissionPolicyRequest_ResourceArn = &sDeletePermissionPolicyRequest_ResourceArn
+
+var DeletePermissionPolicyResponse = &sDeletePermissionPolicyResponse
+
+var DeleteRateBasedRuleRequest = &sDeleteRateBasedRuleRequest
+var DeleteRateBasedRuleRequest_RuleId = &sDeleteRateBasedRuleRequest_RuleId
+var DeleteRateBasedRuleRequest_ChangeToken = &sDeleteRateBasedRuleRequest_ChangeToken
+
+var DeleteRateBasedRuleResponse = &sDeleteRateBasedRuleResponse
+var DeleteRateBasedRuleResponse_ChangeToken = &sDeleteRateBasedRuleResponse_ChangeToken
+
+var DeleteRegexMatchSetRequest = &sDeleteRegexMatchSetRequest
+var DeleteRegexMatchSetRequest_RegexMatchSetId = &sDeleteRegexMatchSetRequest_RegexMatchSetId
+var DeleteRegexMatchSetRequest_ChangeToken = &sDeleteRegexMatchSetRequest_ChangeToken
+
+var DeleteRegexMatchSetResponse = &sDeleteRegexMatchSetResponse
+var DeleteRegexMatchSetResponse_ChangeToken = &sDeleteRegexMatchSetResponse_ChangeToken
+
+var DeleteRegexPatternSetRequest = &sDeleteRegexPatternSetRequest
+var DeleteRegexPatternSetRequest_RegexPatternSetId = &sDeleteRegexPatternSetRequest_RegexPatternSetId
+var DeleteRegexPatternSetRequest_ChangeToken = &sDeleteRegexPatternSetRequest_ChangeToken
+
+var DeleteRegexPatternSetResponse = &sDeleteRegexPatternSetResponse
+var DeleteRegexPatternSetResponse_ChangeToken = &sDeleteRegexPatternSetResponse_ChangeToken
+
+var DeleteRuleGroupRequest = &sDeleteRuleGroupRequest
+var DeleteRuleGroupRequest_RuleGroupId = &sDeleteRuleGroupRequest_RuleGroupId
+var DeleteRuleGroupRequest_ChangeToken = &sDeleteRuleGroupRequest_ChangeToken
+
+var DeleteRuleGroupResponse = &sDeleteRuleGroupResponse
+var DeleteRuleGroupResponse_ChangeToken = &sDeleteRuleGroupResponse_ChangeToken
+
+var DeleteRuleRequest = &sDeleteRuleRequest
+var DeleteRuleRequest_RuleId = &sDeleteRuleRequest_RuleId
+var DeleteRuleRequest_ChangeToken = &sDeleteRuleRequest_ChangeToken
+
+var DeleteRuleResponse = &sDeleteRuleResponse
+var DeleteRuleResponse_ChangeToken = &sDeleteRuleResponse_ChangeToken
+
+var DeleteSizeConstraintSetRequest = &sDeleteSizeConstraintSetRequest
+var DeleteSizeConstraintSetRequest_SizeConstraintSetId = &sDeleteSizeConstraintSetRequest_SizeConstraintSetId
+var DeleteSizeConstraintSetRequest_ChangeToken = &sDeleteSizeConstraintSetRequest_ChangeToken
+
+var DeleteSizeConstraintSetResponse = &sDeleteSizeConstraintSetResponse
+var DeleteSizeConstraintSetResponse_ChangeToken = &sDeleteSizeConstraintSetResponse_ChangeToken
+
+var DeleteSqlInjectionMatchSetRequest = &sDeleteSqlInjectionMatchSetRequest
+var DeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = &sDeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId
+var DeleteSqlInjectionMatchSetRequest_ChangeToken = &sDeleteSqlInjectionMatchSetRequest_ChangeToken
+
+var DeleteSqlInjectionMatchSetResponse = &sDeleteSqlInjectionMatchSetResponse
+var DeleteSqlInjectionMatchSetResponse_ChangeToken = &sDeleteSqlInjectionMatchSetResponse_ChangeToken
+
+var DeleteWebACLRequest = &sDeleteWebACLRequest
+var DeleteWebACLRequest_WebACLId = &sDeleteWebACLRequest_WebACLId
+var DeleteWebACLRequest_ChangeToken = &sDeleteWebACLRequest_ChangeToken
+
+var DeleteWebACLResponse = &sDeleteWebACLResponse
+var DeleteWebACLResponse_ChangeToken = &sDeleteWebACLResponse_ChangeToken
+
+var DeleteXssMatchSetRequest = &sDeleteXssMatchSetRequest
+var DeleteXssMatchSetRequest_XssMatchSetId = &sDeleteXssMatchSetRequest_XssMatchSetId
+var DeleteXssMatchSetRequest_ChangeToken = &sDeleteXssMatchSetRequest_ChangeToken
+
+var DeleteXssMatchSetResponse = &sDeleteXssMatchSetResponse
+var DeleteXssMatchSetResponse_ChangeToken = &sDeleteXssMatchSetResponse_ChangeToken
+
+var DisassociateWebACLRequest = &sDisassociateWebACLRequest
+var DisassociateWebACLRequest_ResourceArn = &sDisassociateWebACLRequest_ResourceArn
+
+var DisassociateWebACLResponse = &sDisassociateWebACLResponse
+
+var GetByteMatchSetRequest = &sGetByteMatchSetRequest
+var GetByteMatchSetRequest_ByteMatchSetId = &sGetByteMatchSetRequest_ByteMatchSetId
+
+var GetByteMatchSetResponse = &sGetByteMatchSetResponse
+var GetByteMatchSetResponse_ByteMatchSet = &sGetByteMatchSetResponse_ByteMatchSet
+
+var GetChangeTokenRequest = &sGetChangeTokenRequest
+
+var GetChangeTokenResponse = &sGetChangeTokenResponse
+var GetChangeTokenResponse_ChangeToken = &sGetChangeTokenResponse_ChangeToken
+
+var GetChangeTokenStatusRequest = &sGetChangeTokenStatusRequest
+var GetChangeTokenStatusRequest_ChangeToken = &sGetChangeTokenStatusRequest_ChangeToken
+
+var GetChangeTokenStatusResponse = &sGetChangeTokenStatusResponse
+var GetChangeTokenStatusResponse_ChangeTokenStatus = &sGetChangeTokenStatusResponse_ChangeTokenStatus
+
+var GetGeoMatchSetRequest = &sGetGeoMatchSetRequest
+var GetGeoMatchSetRequest_GeoMatchSetId = &sGetGeoMatchSetRequest_GeoMatchSetId
+
+var GetGeoMatchSetResponse = &sGetGeoMatchSetResponse
+var GetGeoMatchSetResponse_GeoMatchSet = &sGetGeoMatchSetResponse_GeoMatchSet
+
+var GetIPSetRequest = &sGetIPSetRequest
+var GetIPSetRequest_IPSetId = &sGetIPSetRequest_IPSetId
+
+var GetIPSetResponse = &sGetIPSetResponse
+var GetIPSetResponse_IPSet = &sGetIPSetResponse_IPSet
+
+var GetLoggingConfigurationRequest = &sGetLoggingConfigurationRequest
+var GetLoggingConfigurationRequest_ResourceArn = &sGetLoggingConfigurationRequest_ResourceArn
+
+var GetLoggingConfigurationResponse = &sGetLoggingConfigurationResponse
+var GetLoggingConfigurationResponse_LoggingConfiguration = &sGetLoggingConfigurationResponse_LoggingConfiguration
+
+var GetPermissionPolicyRequest = &sGetPermissionPolicyRequest
+var GetPermissionPolicyRequest_ResourceArn = &sGetPermissionPolicyRequest_ResourceArn
+
+var GetPermissionPolicyResponse = &sGetPermissionPolicyResponse
+var GetPermissionPolicyResponse_Policy = &sGetPermissionPolicyResponse_Policy
+
+var GetRateBasedRuleRequest = &sGetRateBasedRuleRequest
+var GetRateBasedRuleRequest_RuleId = &sGetRateBasedRuleRequest_RuleId
+
+var GetRateBasedRuleManagedKeysRequest = &sGetRateBasedRuleManagedKeysRequest
+var GetRateBasedRuleManagedKeysRequest_RuleId = &sGetRateBasedRuleManagedKeysRequest_RuleId
+var GetRateBasedRuleManagedKeysRequest_NextMarker = &sGetRateBasedRuleManagedKeysRequest_NextMarker
+
+var GetRateBasedRuleManagedKeysResponse = &sGetRateBasedRuleManagedKeysResponse
+var GetRateBasedRuleManagedKeysResponse_ManagedKeys = &sGetRateBasedRuleManagedKeysResponse_ManagedKeys
+var GetRateBasedRuleManagedKeysResponse_NextMarker = &sGetRateBasedRuleManagedKeysResponse_NextMarker
+
+var GetRateBasedRuleResponse = &sGetRateBasedRuleResponse
+var GetRateBasedRuleResponse_Rule = &sGetRateBasedRuleResponse_Rule
+
+var GetRegexMatchSetRequest = &sGetRegexMatchSetRequest
+var GetRegexMatchSetRequest_RegexMatchSetId = &sGetRegexMatchSetRequest_RegexMatchSetId
+
+var GetRegexMatchSetResponse = &sGetRegexMatchSetResponse
+var GetRegexMatchSetResponse_RegexMatchSet = &sGetRegexMatchSetResponse_RegexMatchSet
+
+var GetRegexPatternSetRequest = &sGetRegexPatternSetRequest
+var GetRegexPatternSetRequest_RegexPatternSetId = &sGetRegexPatternSetRequest_RegexPatternSetId
+
+var GetRegexPatternSetResponse = &sGetRegexPatternSetResponse
+var GetRegexPatternSetResponse_RegexPatternSet = &sGetRegexPatternSetResponse_RegexPatternSet
+
+var GetRuleGroupRequest = &sGetRuleGroupRequest
+var GetRuleGroupRequest_RuleGroupId = &sGetRuleGroupRequest_RuleGroupId
+
+var GetRuleGroupResponse = &sGetRuleGroupResponse
+var GetRuleGroupResponse_RuleGroup = &sGetRuleGroupResponse_RuleGroup
+
+var GetRuleRequest = &sGetRuleRequest
+var GetRuleRequest_RuleId = &sGetRuleRequest_RuleId
+
+var GetRuleResponse = &sGetRuleResponse
+var GetRuleResponse_Rule = &sGetRuleResponse_Rule
+
+var GetSampledRequestsRequest = &sGetSampledRequestsRequest
+var GetSampledRequestsRequest_WebAclId = &sGetSampledRequestsRequest_WebAclId
+var GetSampledRequestsRequest_RuleId = &sGetSampledRequestsRequest_RuleId
+var GetSampledRequestsRequest_TimeWindow = &sGetSampledRequestsRequest_TimeWindow
+var GetSampledRequestsRequest_MaxItems = &sGetSampledRequestsRequest_MaxItems
+
+var GetSampledRequestsResponse = &sGetSampledRequestsResponse
+var GetSampledRequestsResponse_SampledRequests = &sGetSampledRequestsResponse_SampledRequests
+var GetSampledRequestsResponse_PopulationSize = &sGetSampledRequestsResponse_PopulationSize
+var GetSampledRequestsResponse_TimeWindow = &sGetSampledRequestsResponse_TimeWindow
+
+var GetSizeConstraintSetRequest = &sGetSizeConstraintSetRequest
+var GetSizeConstraintSetRequest_SizeConstraintSetId = &sGetSizeConstraintSetRequest_SizeConstraintSetId
+
+var GetSizeConstraintSetResponse = &sGetSizeConstraintSetResponse
+var GetSizeConstraintSetResponse_SizeConstraintSet = &sGetSizeConstraintSetResponse_SizeConstraintSet
+
+var GetSqlInjectionMatchSetRequest = &sGetSqlInjectionMatchSetRequest
+var GetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = &sGetSqlInjectionMatchSetRequest_SqlInjectionMatchSetId
+
+var GetSqlInjectionMatchSetResponse = &sGetSqlInjectionMatchSetResponse
+var GetSqlInjectionMatchSetResponse_SqlInjectionMatchSet = &sGetSqlInjectionMatchSetResponse_SqlInjectionMatchSet
+
+var GetWebACLForResourceRequest = &sGetWebACLForResourceRequest
+var GetWebACLForResourceRequest_ResourceArn = &sGetWebACLForResourceRequest_ResourceArn
+
+var GetWebACLForResourceResponse = &sGetWebACLForResourceResponse
+var GetWebACLForResourceResponse_WebACLSummary = &sGetWebACLForResourceResponse_WebACLSummary
+
+var GetWebACLRequest = &sGetWebACLRequest
+var GetWebACLRequest_WebACLId = &sGetWebACLRequest_WebACLId
+
+var GetWebACLResponse = &sGetWebACLResponse
+var GetWebACLResponse_WebACL = &sGetWebACLResponse_WebACL
+
+var GetXssMatchSetRequest = &sGetXssMatchSetRequest
+var GetXssMatchSetRequest_XssMatchSetId = &sGetXssMatchSetRequest_XssMatchSetId
+
+var GetXssMatchSetResponse = &sGetXssMatchSetResponse
+var GetXssMatchSetResponse_XssMatchSet = &sGetXssMatchSetResponse_XssMatchSet
+
+var ListActivatedRulesInRuleGroupRequest = &sListActivatedRulesInRuleGroupRequest
+var ListActivatedRulesInRuleGroupRequest_RuleGroupId = &sListActivatedRulesInRuleGroupRequest_RuleGroupId
+var ListActivatedRulesInRuleGroupRequest_NextMarker = &sListActivatedRulesInRuleGroupRequest_NextMarker
+var ListActivatedRulesInRuleGroupRequest_Limit = &sListActivatedRulesInRuleGroupRequest_Limit
+
+var ListActivatedRulesInRuleGroupResponse = &sListActivatedRulesInRuleGroupResponse
+var ListActivatedRulesInRuleGroupResponse_NextMarker = &sListActivatedRulesInRuleGroupResponse_NextMarker
+var ListActivatedRulesInRuleGroupResponse_ActivatedRules = &sListActivatedRulesInRuleGroupResponse_ActivatedRules
+
+var ListByteMatchSetsRequest = &sListByteMatchSetsRequest
+var ListByteMatchSetsRequest_NextMarker = &sListByteMatchSetsRequest_NextMarker
+var ListByteMatchSetsRequest_Limit = &sListByteMatchSetsRequest_Limit
+
+var ListByteMatchSetsResponse = &sListByteMatchSetsResponse
+var ListByteMatchSetsResponse_NextMarker = &sListByteMatchSetsResponse_NextMarker
+var ListByteMatchSetsResponse_ByteMatchSets = &sListByteMatchSetsResponse_ByteMatchSets
+
+var ListGeoMatchSetsRequest = &sListGeoMatchSetsRequest
+var ListGeoMatchSetsRequest_NextMarker = &sListGeoMatchSetsRequest_NextMarker
+var ListGeoMatchSetsRequest_Limit = &sListGeoMatchSetsRequest_Limit
+
+var ListGeoMatchSetsResponse = &sListGeoMatchSetsResponse
+var ListGeoMatchSetsResponse_NextMarker = &sListGeoMatchSetsResponse_NextMarker
+var ListGeoMatchSetsResponse_GeoMatchSets = &sListGeoMatchSetsResponse_GeoMatchSets
+
+var ListIPSetsRequest = &sListIPSetsRequest
+var ListIPSetsRequest_NextMarker = &sListIPSetsRequest_NextMarker
+var ListIPSetsRequest_Limit = &sListIPSetsRequest_Limit
+
+var ListIPSetsResponse = &sListIPSetsResponse
+var ListIPSetsResponse_NextMarker = &sListIPSetsResponse_NextMarker
+var ListIPSetsResponse_IPSets = &sListIPSetsResponse_IPSets
+
+var ListLoggingConfigurationsRequest = &sListLoggingConfigurationsRequest
+var ListLoggingConfigurationsRequest_NextMarker = &sListLoggingConfigurationsRequest_NextMarker
+var ListLoggingConfigurationsRequest_Limit = &sListLoggingConfigurationsRequest_Limit
+
+var ListLoggingConfigurationsResponse = &sListLoggingConfigurationsResponse
+var ListLoggingConfigurationsResponse_LoggingConfigurations = &sListLoggingConfigurationsResponse_LoggingConfigurations
+var ListLoggingConfigurationsResponse_NextMarker = &sListLoggingConfigurationsResponse_NextMarker
+
+var ListRateBasedRulesRequest = &sListRateBasedRulesRequest
+var ListRateBasedRulesRequest_NextMarker = &sListRateBasedRulesRequest_NextMarker
+var ListRateBasedRulesRequest_Limit = &sListRateBasedRulesRequest_Limit
+
+var ListRateBasedRulesResponse = &sListRateBasedRulesResponse
+var ListRateBasedRulesResponse_NextMarker = &sListRateBasedRulesResponse_NextMarker
+var ListRateBasedRulesResponse_Rules = &sListRateBasedRulesResponse_Rules
+
+var ListRegexMatchSetsRequest = &sListRegexMatchSetsRequest
+var ListRegexMatchSetsRequest_NextMarker = &sListRegexMatchSetsRequest_NextMarker
+var ListRegexMatchSetsRequest_Limit = &sListRegexMatchSetsRequest_Limit
+
+var ListRegexMatchSetsResponse = &sListRegexMatchSetsResponse
+var ListRegexMatchSetsResponse_NextMarker = &sListRegexMatchSetsResponse_NextMarker
+var ListRegexMatchSetsResponse_RegexMatchSets = &sListRegexMatchSetsResponse_RegexMatchSets
+
+var ListRegexPatternSetsRequest = &sListRegexPatternSetsRequest
+var ListRegexPatternSetsRequest_NextMarker = &sListRegexPatternSetsRequest_NextMarker
+var ListRegexPatternSetsRequest_Limit = &sListRegexPatternSetsRequest_Limit
+
+var ListRegexPatternSetsResponse = &sListRegexPatternSetsResponse
+var ListRegexPatternSetsResponse_NextMarker = &sListRegexPatternSetsResponse_NextMarker
+var ListRegexPatternSetsResponse_RegexPatternSets = &sListRegexPatternSetsResponse_RegexPatternSets
+
+var ListResourcesForWebACLRequest = &sListResourcesForWebACLRequest
+var ListResourcesForWebACLRequest_WebACLId = &sListResourcesForWebACLRequest_WebACLId
+var ListResourcesForWebACLRequest_ResourceType = &sListResourcesForWebACLRequest_ResourceType
+
+var ListResourcesForWebACLResponse = &sListResourcesForWebACLResponse
+var ListResourcesForWebACLResponse_ResourceArns = &sListResourcesForWebACLResponse_ResourceArns
+
+var ListRuleGroupsRequest = &sListRuleGroupsRequest
+var ListRuleGroupsRequest_NextMarker = &sListRuleGroupsRequest_NextMarker
+var ListRuleGroupsRequest_Limit = &sListRuleGroupsRequest_Limit
+
+var ListRuleGroupsResponse = &sListRuleGroupsResponse
+var ListRuleGroupsResponse_NextMarker = &sListRuleGroupsResponse_NextMarker
+var ListRuleGroupsResponse_RuleGroups = &sListRuleGroupsResponse_RuleGroups
+
+var ListRulesRequest = &sListRulesRequest
+var ListRulesRequest_NextMarker = &sListRulesRequest_NextMarker
+var ListRulesRequest_Limit = &sListRulesRequest_Limit
+
+var ListRulesResponse = &sListRulesResponse
+var ListRulesResponse_NextMarker = &sListRulesResponse_NextMarker
+var ListRulesResponse_Rules = &sListRulesResponse_Rules
+
+var ListSizeConstraintSetsRequest = &sListSizeConstraintSetsRequest
+var ListSizeConstraintSetsRequest_NextMarker = &sListSizeConstraintSetsRequest_NextMarker
+var ListSizeConstraintSetsRequest_Limit = &sListSizeConstraintSetsRequest_Limit
+
+var ListSizeConstraintSetsResponse = &sListSizeConstraintSetsResponse
+var ListSizeConstraintSetsResponse_NextMarker = &sListSizeConstraintSetsResponse_NextMarker
+var ListSizeConstraintSetsResponse_SizeConstraintSets = &sListSizeConstraintSetsResponse_SizeConstraintSets
+
+var ListSqlInjectionMatchSetsRequest = &sListSqlInjectionMatchSetsRequest
+var ListSqlInjectionMatchSetsRequest_NextMarker = &sListSqlInjectionMatchSetsRequest_NextMarker
+var ListSqlInjectionMatchSetsRequest_Limit = &sListSqlInjectionMatchSetsRequest_Limit
+
+var ListSqlInjectionMatchSetsResponse = &sListSqlInjectionMatchSetsResponse
+var ListSqlInjectionMatchSetsResponse_NextMarker = &sListSqlInjectionMatchSetsResponse_NextMarker
+var ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets = &sListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets
+
+var ListSubscribedRuleGroupsRequest = &sListSubscribedRuleGroupsRequest
+var ListSubscribedRuleGroupsRequest_NextMarker = &sListSubscribedRuleGroupsRequest_NextMarker
+var ListSubscribedRuleGroupsRequest_Limit = &sListSubscribedRuleGroupsRequest_Limit
+
+var ListSubscribedRuleGroupsResponse = &sListSubscribedRuleGroupsResponse
+var ListSubscribedRuleGroupsResponse_NextMarker = &sListSubscribedRuleGroupsResponse_NextMarker
+var ListSubscribedRuleGroupsResponse_RuleGroups = &sListSubscribedRuleGroupsResponse_RuleGroups
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_NextMarker = &sListTagsForResourceRequest_NextMarker
+var ListTagsForResourceRequest_Limit = &sListTagsForResourceRequest_Limit
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_NextMarker = &sListTagsForResourceResponse_NextMarker
+var ListTagsForResourceResponse_TagInfoForResource = &sListTagsForResourceResponse_TagInfoForResource
+
+var ListWebACLsRequest = &sListWebACLsRequest
+var ListWebACLsRequest_NextMarker = &sListWebACLsRequest_NextMarker
+var ListWebACLsRequest_Limit = &sListWebACLsRequest_Limit
+
+var ListWebACLsResponse = &sListWebACLsResponse
+var ListWebACLsResponse_NextMarker = &sListWebACLsResponse_NextMarker
+var ListWebACLsResponse_WebACLs = &sListWebACLsResponse_WebACLs
+
+var ListXssMatchSetsRequest = &sListXssMatchSetsRequest
+var ListXssMatchSetsRequest_NextMarker = &sListXssMatchSetsRequest_NextMarker
+var ListXssMatchSetsRequest_Limit = &sListXssMatchSetsRequest_Limit
+
+var ListXssMatchSetsResponse = &sListXssMatchSetsResponse
+var ListXssMatchSetsResponse_NextMarker = &sListXssMatchSetsResponse_NextMarker
+var ListXssMatchSetsResponse_XssMatchSets = &sListXssMatchSetsResponse_XssMatchSets
+
+var PutLoggingConfigurationRequest = &sPutLoggingConfigurationRequest
+var PutLoggingConfigurationRequest_LoggingConfiguration = &sPutLoggingConfigurationRequest_LoggingConfiguration
+
+var PutLoggingConfigurationResponse = &sPutLoggingConfigurationResponse
+var PutLoggingConfigurationResponse_LoggingConfiguration = &sPutLoggingConfigurationResponse_LoggingConfiguration
+
+var PutPermissionPolicyRequest = &sPutPermissionPolicyRequest
+var PutPermissionPolicyRequest_ResourceArn = &sPutPermissionPolicyRequest_ResourceArn
+var PutPermissionPolicyRequest_Policy = &sPutPermissionPolicyRequest_Policy
+
+var PutPermissionPolicyResponse = &sPutPermissionPolicyResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateByteMatchSetRequest = &sUpdateByteMatchSetRequest
+var UpdateByteMatchSetRequest_ByteMatchSetId = &sUpdateByteMatchSetRequest_ByteMatchSetId
+var UpdateByteMatchSetRequest_ChangeToken = &sUpdateByteMatchSetRequest_ChangeToken
+var UpdateByteMatchSetRequest_Updates = &sUpdateByteMatchSetRequest_Updates
+
+var UpdateByteMatchSetResponse = &sUpdateByteMatchSetResponse
+var UpdateByteMatchSetResponse_ChangeToken = &sUpdateByteMatchSetResponse_ChangeToken
+
+var UpdateGeoMatchSetRequest = &sUpdateGeoMatchSetRequest
+var UpdateGeoMatchSetRequest_GeoMatchSetId = &sUpdateGeoMatchSetRequest_GeoMatchSetId
+var UpdateGeoMatchSetRequest_ChangeToken = &sUpdateGeoMatchSetRequest_ChangeToken
+var UpdateGeoMatchSetRequest_Updates = &sUpdateGeoMatchSetRequest_Updates
+
+var UpdateGeoMatchSetResponse = &sUpdateGeoMatchSetResponse
+var UpdateGeoMatchSetResponse_ChangeToken = &sUpdateGeoMatchSetResponse_ChangeToken
+
+var UpdateIPSetRequest = &sUpdateIPSetRequest
+var UpdateIPSetRequest_IPSetId = &sUpdateIPSetRequest_IPSetId
+var UpdateIPSetRequest_ChangeToken = &sUpdateIPSetRequest_ChangeToken
+var UpdateIPSetRequest_Updates = &sUpdateIPSetRequest_Updates
+
+var UpdateIPSetResponse = &sUpdateIPSetResponse
+var UpdateIPSetResponse_ChangeToken = &sUpdateIPSetResponse_ChangeToken
+
+var UpdateRateBasedRuleRequest = &sUpdateRateBasedRuleRequest
+var UpdateRateBasedRuleRequest_RuleId = &sUpdateRateBasedRuleRequest_RuleId
+var UpdateRateBasedRuleRequest_ChangeToken = &sUpdateRateBasedRuleRequest_ChangeToken
+var UpdateRateBasedRuleRequest_Updates = &sUpdateRateBasedRuleRequest_Updates
+var UpdateRateBasedRuleRequest_RateLimit = &sUpdateRateBasedRuleRequest_RateLimit
+
+var UpdateRateBasedRuleResponse = &sUpdateRateBasedRuleResponse
+var UpdateRateBasedRuleResponse_ChangeToken = &sUpdateRateBasedRuleResponse_ChangeToken
+
+var UpdateRegexMatchSetRequest = &sUpdateRegexMatchSetRequest
+var UpdateRegexMatchSetRequest_RegexMatchSetId = &sUpdateRegexMatchSetRequest_RegexMatchSetId
+var UpdateRegexMatchSetRequest_Updates = &sUpdateRegexMatchSetRequest_Updates
+var UpdateRegexMatchSetRequest_ChangeToken = &sUpdateRegexMatchSetRequest_ChangeToken
+
+var UpdateRegexMatchSetResponse = &sUpdateRegexMatchSetResponse
+var UpdateRegexMatchSetResponse_ChangeToken = &sUpdateRegexMatchSetResponse_ChangeToken
+
+var UpdateRegexPatternSetRequest = &sUpdateRegexPatternSetRequest
+var UpdateRegexPatternSetRequest_RegexPatternSetId = &sUpdateRegexPatternSetRequest_RegexPatternSetId
+var UpdateRegexPatternSetRequest_Updates = &sUpdateRegexPatternSetRequest_Updates
+var UpdateRegexPatternSetRequest_ChangeToken = &sUpdateRegexPatternSetRequest_ChangeToken
+
+var UpdateRegexPatternSetResponse = &sUpdateRegexPatternSetResponse
+var UpdateRegexPatternSetResponse_ChangeToken = &sUpdateRegexPatternSetResponse_ChangeToken
+
+var UpdateRuleGroupRequest = &sUpdateRuleGroupRequest
+var UpdateRuleGroupRequest_RuleGroupId = &sUpdateRuleGroupRequest_RuleGroupId
+var UpdateRuleGroupRequest_Updates = &sUpdateRuleGroupRequest_Updates
+var UpdateRuleGroupRequest_ChangeToken = &sUpdateRuleGroupRequest_ChangeToken
+
+var UpdateRuleGroupResponse = &sUpdateRuleGroupResponse
+var UpdateRuleGroupResponse_ChangeToken = &sUpdateRuleGroupResponse_ChangeToken
+
+var UpdateRuleRequest = &sUpdateRuleRequest
+var UpdateRuleRequest_RuleId = &sUpdateRuleRequest_RuleId
+var UpdateRuleRequest_ChangeToken = &sUpdateRuleRequest_ChangeToken
+var UpdateRuleRequest_Updates = &sUpdateRuleRequest_Updates
+
+var UpdateRuleResponse = &sUpdateRuleResponse
+var UpdateRuleResponse_ChangeToken = &sUpdateRuleResponse_ChangeToken
+
+var UpdateSizeConstraintSetRequest = &sUpdateSizeConstraintSetRequest
+var UpdateSizeConstraintSetRequest_SizeConstraintSetId = &sUpdateSizeConstraintSetRequest_SizeConstraintSetId
+var UpdateSizeConstraintSetRequest_ChangeToken = &sUpdateSizeConstraintSetRequest_ChangeToken
+var UpdateSizeConstraintSetRequest_Updates = &sUpdateSizeConstraintSetRequest_Updates
+
+var UpdateSizeConstraintSetResponse = &sUpdateSizeConstraintSetResponse
+var UpdateSizeConstraintSetResponse_ChangeToken = &sUpdateSizeConstraintSetResponse_ChangeToken
+
+var UpdateSqlInjectionMatchSetRequest = &sUpdateSqlInjectionMatchSetRequest
+var UpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId = &sUpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId
+var UpdateSqlInjectionMatchSetRequest_ChangeToken = &sUpdateSqlInjectionMatchSetRequest_ChangeToken
+var UpdateSqlInjectionMatchSetRequest_Updates = &sUpdateSqlInjectionMatchSetRequest_Updates
+
+var UpdateSqlInjectionMatchSetResponse = &sUpdateSqlInjectionMatchSetResponse
+var UpdateSqlInjectionMatchSetResponse_ChangeToken = &sUpdateSqlInjectionMatchSetResponse_ChangeToken
+
+var UpdateWebACLRequest = &sUpdateWebACLRequest
+var UpdateWebACLRequest_WebACLId = &sUpdateWebACLRequest_WebACLId
+var UpdateWebACLRequest_ChangeToken = &sUpdateWebACLRequest_ChangeToken
+var UpdateWebACLRequest_Updates = &sUpdateWebACLRequest_Updates
+var UpdateWebACLRequest_DefaultAction = &sUpdateWebACLRequest_DefaultAction
+
+var UpdateWebACLResponse = &sUpdateWebACLResponse
+var UpdateWebACLResponse_ChangeToken = &sUpdateWebACLResponse_ChangeToken
+
+var UpdateXssMatchSetRequest = &sUpdateXssMatchSetRequest
+var UpdateXssMatchSetRequest_XssMatchSetId = &sUpdateXssMatchSetRequest_XssMatchSetId
+var UpdateXssMatchSetRequest_ChangeToken = &sUpdateXssMatchSetRequest_ChangeToken
+var UpdateXssMatchSetRequest_Updates = &sUpdateXssMatchSetRequest_Updates
+
+var UpdateXssMatchSetResponse = &sUpdateXssMatchSetResponse
+var UpdateXssMatchSetResponse_ChangeToken = &sUpdateXssMatchSetResponse_ChangeToken
+
+var AWSWAF_Regional_20161128 = &smithy.ServiceSchema{Schema: &s_AWSWAF_Regional_20161128, Version: "2016-11-28"}

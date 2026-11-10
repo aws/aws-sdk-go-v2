@@ -4,668 +4,662 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DescribeJobExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DescribeJobExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/things/{thingName}/jobs/{jobId}",
-	Code: 200})
+var (
+	eDescribeJobExecution                                     smithy.SchemaExtensions
+	eGetPendingJobExecutions                                  smithy.SchemaExtensions
+	eStartCommandExecution                                    smithy.SchemaExtensions
+	eStartNextPendingJobExecution                             smithy.SchemaExtensions
+	eUpdateJobExecution                                       smithy.SchemaExtensions
+	e_IotLaserThingJobManagerExternalService                  smithy.SchemaExtensions
+	e_ApproximateSecondsBeforeTimedOut                        smithy.SchemaExtensions
+	e_BinaryBlob                                              smithy.SchemaExtensions
+	e_BinaryParameterValue                                    smithy.SchemaExtensions
+	e_BooleanParameterValue                                   smithy.SchemaExtensions
+	eCertificateValidationException                           smithy.SchemaExtensions
+	eCertificateValidationException_message                   smithy.SchemaExtensions
+	e_ClientRequestTokenV2                                    smithy.SchemaExtensions
+	e_CommandArn                                              smithy.SchemaExtensions
+	e_CommandExecutionId                                      smithy.SchemaExtensions
+	e_CommandExecutionParameterMap                            smithy.SchemaExtensions
+	e_CommandExecutionParameterMap_key                        smithy.SchemaExtensions
+	e_CommandExecutionParameterMap_value                      smithy.SchemaExtensions
+	e_CommandExecutionTimeoutInSeconds                        smithy.SchemaExtensions
+	e_CommandParameterName                                    smithy.SchemaExtensions
+	eCommandParameterValue                                    smithy.SchemaExtensions
+	eCommandParameterValue_S                                  smithy.SchemaExtensions
+	eCommandParameterValue_B                                  smithy.SchemaExtensions
+	eCommandParameterValue_I                                  smithy.SchemaExtensions
+	eCommandParameterValue_L                                  smithy.SchemaExtensions
+	eCommandParameterValue_D                                  smithy.SchemaExtensions
+	eCommandParameterValue_BIN                                smithy.SchemaExtensions
+	eCommandParameterValue_UL                                 smithy.SchemaExtensions
+	eConflictException                                        smithy.SchemaExtensions
+	eConflictException_message                                smithy.SchemaExtensions
+	eConflictException_resourceId                             smithy.SchemaExtensions
+	e_DescribeJobExecutionJobId                               smithy.SchemaExtensions
+	e_DetailsKey                                              smithy.SchemaExtensions
+	e_DetailsMap                                              smithy.SchemaExtensions
+	e_DetailsMap_key                                          smithy.SchemaExtensions
+	e_DetailsMap_value                                        smithy.SchemaExtensions
+	e_DetailsValue                                            smithy.SchemaExtensions
+	e_DoubleParameterValue                                    smithy.SchemaExtensions
+	e_errorMessage                                            smithy.SchemaExtensions
+	e_ExecutionNumber                                         smithy.SchemaExtensions
+	e_ExpectedVersion                                         smithy.SchemaExtensions
+	e_IncludeExecutionState                                   smithy.SchemaExtensions
+	e_IncludeJobDocument                                      smithy.SchemaExtensions
+	e_IntegerParameterValue                                   smithy.SchemaExtensions
+	eInternalServerException                                  smithy.SchemaExtensions
+	eInternalServerException_message                          smithy.SchemaExtensions
+	eInvalidRequestException                                  smithy.SchemaExtensions
+	eInvalidRequestException_message                          smithy.SchemaExtensions
+	eInvalidStateTransitionException                          smithy.SchemaExtensions
+	eInvalidStateTransitionException_message                  smithy.SchemaExtensions
+	e_JobDocument                                             smithy.SchemaExtensions
+	eJobExecution                                             smithy.SchemaExtensions
+	eJobExecution_jobId                                       smithy.SchemaExtensions
+	eJobExecution_thingName                                   smithy.SchemaExtensions
+	eJobExecution_status                                      smithy.SchemaExtensions
+	eJobExecution_statusDetails                               smithy.SchemaExtensions
+	eJobExecution_queuedAt                                    smithy.SchemaExtensions
+	eJobExecution_startedAt                                   smithy.SchemaExtensions
+	eJobExecution_lastUpdatedAt                               smithy.SchemaExtensions
+	eJobExecution_approximateSecondsBeforeTimedOut            smithy.SchemaExtensions
+	eJobExecution_versionNumber                               smithy.SchemaExtensions
+	eJobExecution_executionNumber                             smithy.SchemaExtensions
+	eJobExecution_jobDocument                                 smithy.SchemaExtensions
+	eJobExecutionState                                        smithy.SchemaExtensions
+	eJobExecutionState_status                                 smithy.SchemaExtensions
+	eJobExecutionState_statusDetails                          smithy.SchemaExtensions
+	eJobExecutionState_versionNumber                          smithy.SchemaExtensions
+	eJobExecutionStatus                                       smithy.SchemaExtensions
+	eJobExecutionStatus_QUEUED                                smithy.SchemaExtensions
+	eJobExecutionStatus_IN_PROGRESS                           smithy.SchemaExtensions
+	eJobExecutionStatus_SUCCEEDED                             smithy.SchemaExtensions
+	eJobExecutionStatus_FAILED                                smithy.SchemaExtensions
+	eJobExecutionStatus_TIMED_OUT                             smithy.SchemaExtensions
+	eJobExecutionStatus_REJECTED                              smithy.SchemaExtensions
+	eJobExecutionStatus_REMOVED                               smithy.SchemaExtensions
+	eJobExecutionStatus_CANCELED                              smithy.SchemaExtensions
+	eJobExecutionSummary                                      smithy.SchemaExtensions
+	eJobExecutionSummary_jobId                                smithy.SchemaExtensions
+	eJobExecutionSummary_queuedAt                             smithy.SchemaExtensions
+	eJobExecutionSummary_startedAt                            smithy.SchemaExtensions
+	eJobExecutionSummary_lastUpdatedAt                        smithy.SchemaExtensions
+	eJobExecutionSummary_versionNumber                        smithy.SchemaExtensions
+	eJobExecutionSummary_executionNumber                      smithy.SchemaExtensions
+	e_JobExecutionSummaryList                                 smithy.SchemaExtensions
+	e_JobExecutionSummaryList_member                          smithy.SchemaExtensions
+	e_JobId                                                   smithy.SchemaExtensions
+	e_LastUpdatedAt                                           smithy.SchemaExtensions
+	e_LongParameterValue                                      smithy.SchemaExtensions
+	e_QueuedAt                                                smithy.SchemaExtensions
+	e_resourceId                                              smithy.SchemaExtensions
+	eResourceNotFoundException                                smithy.SchemaExtensions
+	eResourceNotFoundException_message                        smithy.SchemaExtensions
+	eServiceQuotaExceededException                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                    smithy.SchemaExtensions
+	eServiceUnavailableException                              smithy.SchemaExtensions
+	eServiceUnavailableException_message                      smithy.SchemaExtensions
+	e_StartedAt                                               smithy.SchemaExtensions
+	e_StepTimeoutInMinutes                                    smithy.SchemaExtensions
+	e_StringParameterValue                                    smithy.SchemaExtensions
+	e_TargetArn                                               smithy.SchemaExtensions
+	eTerminalStateException                                   smithy.SchemaExtensions
+	eTerminalStateException_message                           smithy.SchemaExtensions
+	e_ThingName                                               smithy.SchemaExtensions
+	eThrottlingException                                      smithy.SchemaExtensions
+	eThrottlingException_message                              smithy.SchemaExtensions
+	eThrottlingException_payload                              smithy.SchemaExtensions
+	e_UnsignedLongParameterValue                              smithy.SchemaExtensions
+	eValidationException                                      smithy.SchemaExtensions
+	eValidationException_message                              smithy.SchemaExtensions
+	e_VersionNumber                                           smithy.SchemaExtensions
+	eDescribeJobExecutionRequest                              smithy.SchemaExtensions
+	eDescribeJobExecutionRequest_jobId                        smithy.SchemaExtensions
+	eDescribeJobExecutionRequest_thingName                    smithy.SchemaExtensions
+	eDescribeJobExecutionRequest_includeJobDocument           smithy.SchemaExtensions
+	eDescribeJobExecutionRequest_executionNumber              smithy.SchemaExtensions
+	eDescribeJobExecutionResponse                             smithy.SchemaExtensions
+	eDescribeJobExecutionResponse_execution                   smithy.SchemaExtensions
+	eGetPendingJobExecutionsRequest                           smithy.SchemaExtensions
+	eGetPendingJobExecutionsRequest_thingName                 smithy.SchemaExtensions
+	eGetPendingJobExecutionsResponse                          smithy.SchemaExtensions
+	eGetPendingJobExecutionsResponse_inProgressJobs           smithy.SchemaExtensions
+	eGetPendingJobExecutionsResponse_queuedJobs               smithy.SchemaExtensions
+	eStartCommandExecutionRequest                             smithy.SchemaExtensions
+	eStartCommandExecutionRequest_targetArn                   smithy.SchemaExtensions
+	eStartCommandExecutionRequest_commandArn                  smithy.SchemaExtensions
+	eStartCommandExecutionRequest_parameters                  smithy.SchemaExtensions
+	eStartCommandExecutionRequest_executionTimeoutSeconds     smithy.SchemaExtensions
+	eStartCommandExecutionRequest_clientToken                 smithy.SchemaExtensions
+	eStartCommandExecutionResponse                            smithy.SchemaExtensions
+	eStartCommandExecutionResponse_executionId                smithy.SchemaExtensions
+	eStartNextPendingJobExecutionRequest                      smithy.SchemaExtensions
+	eStartNextPendingJobExecutionRequest_thingName            smithy.SchemaExtensions
+	eStartNextPendingJobExecutionRequest_statusDetails        smithy.SchemaExtensions
+	eStartNextPendingJobExecutionRequest_stepTimeoutInMinutes smithy.SchemaExtensions
+	eStartNextPendingJobExecutionResponse                     smithy.SchemaExtensions
+	eStartNextPendingJobExecutionResponse_execution           smithy.SchemaExtensions
+	eUpdateJobExecutionRequest                                smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_jobId                          smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_thingName                      smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_status                         smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_statusDetails                  smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_stepTimeoutInMinutes           smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_expectedVersion                smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_includeJobExecutionState       smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_includeJobDocument             smithy.SchemaExtensions
+	eUpdateJobExecutionRequest_executionNumber                smithy.SchemaExtensions
+	eUpdateJobExecutionResponse                               smithy.SchemaExtensions
+	eUpdateJobExecutionResponse_executionState                smithy.SchemaExtensions
+	eUpdateJobExecutionResponse_jobDocument                   smithy.SchemaExtensions
+)
 
-var GetPendingJobExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "GetPendingJobExecutions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	iDescribeJobExecution                    = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DescribeJobExecution"}
+	iGetPendingJobExecutions                 = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "GetPendingJobExecutions"}
+	iStartCommandExecution                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StartCommandExecution"}
+	iStartNextPendingJobExecution            = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StartNextPendingJobExecution"}
+	iUpdateJobExecution                      = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "UpdateJobExecution"}
+	i_IotLaserThingJobManagerExternalService = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "IotLaserThingJobManagerExternalService"}
+	i_ApproximateSecondsBeforeTimedOut       = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ApproximateSecondsBeforeTimedOut"}
+	i_BinaryBlob                             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "BinaryBlob"}
+	i_BinaryParameterValue                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "BinaryParameterValue"}
+	i_BooleanParameterValue                  = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "BooleanParameterValue"}
+	iCertificateValidationException          = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "CertificateValidationException"}
+	i_ClientRequestTokenV2                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ClientRequestTokenV2"}
+	i_CommandArn                             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "CommandArn"}
+	i_CommandExecutionId                     = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "CommandExecutionId"}
+	i_CommandExecutionParameterMap           = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "CommandExecutionParameterMap"}
+	i_CommandExecutionTimeoutInSeconds       = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "CommandExecutionTimeoutInSeconds"}
+	i_CommandParameterName                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "CommandParameterName"}
+	iCommandParameterValue                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "CommandParameterValue"}
+	iConflictException                       = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ConflictException"}
+	i_DescribeJobExecutionJobId              = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DescribeJobExecutionJobId"}
+	i_DetailsKey                             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DetailsKey"}
+	i_DetailsMap                             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DetailsMap"}
+	i_DetailsValue                           = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DetailsValue"}
+	i_DoubleParameterValue                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DoubleParameterValue"}
+	i_errorMessage                           = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "errorMessage"}
+	i_ExecutionNumber                        = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ExecutionNumber"}
+	i_ExpectedVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ExpectedVersion"}
+	i_IncludeExecutionState                  = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "IncludeExecutionState"}
+	i_IncludeJobDocument                     = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "IncludeJobDocument"}
+	i_IntegerParameterValue                  = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "IntegerParameterValue"}
+	iInternalServerException                 = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "InternalServerException"}
+	iInvalidRequestException                 = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "InvalidRequestException"}
+	iInvalidStateTransitionException         = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "InvalidStateTransitionException"}
+	i_JobDocument                            = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "JobDocument"}
+	iJobExecution                            = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "JobExecution"}
+	iJobExecutionState                       = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "JobExecutionState"}
+	iJobExecutionStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "JobExecutionStatus"}
+	iJobExecutionSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "JobExecutionSummary"}
+	i_JobExecutionSummaryList                = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "JobExecutionSummaryList"}
+	i_JobId                                  = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "JobId"}
+	i_LastUpdatedAt                          = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "LastUpdatedAt"}
+	i_LongParameterValue                     = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "LongParameterValue"}
+	i_QueuedAt                               = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "QueuedAt"}
+	i_resourceId                             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "resourceId"}
+	iResourceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ResourceNotFoundException"}
+	iServiceQuotaExceededException           = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ServiceQuotaExceededException"}
+	iServiceUnavailableException             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ServiceUnavailableException"}
+	i_StartedAt                              = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StartedAt"}
+	i_StepTimeoutInMinutes                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StepTimeoutInMinutes"}
+	i_StringParameterValue                   = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StringParameterValue"}
+	i_TargetArn                              = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "TargetArn"}
+	iTerminalStateException                  = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "TerminalStateException"}
+	i_ThingName                              = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ThingName"}
+	iThrottlingException                     = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ThrottlingException"}
+	i_UnsignedLongParameterValue             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "UnsignedLongParameterValue"}
+	iValidationException                     = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "ValidationException"}
+	i_VersionNumber                          = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "VersionNumber"}
+	iDescribeJobExecutionRequest             = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DescribeJobExecutionRequest"}
+	iDescribeJobExecutionResponse            = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "DescribeJobExecutionResponse"}
+	iGetPendingJobExecutionsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "GetPendingJobExecutionsRequest"}
+	iGetPendingJobExecutionsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "GetPendingJobExecutionsResponse"}
+	iStartCommandExecutionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StartCommandExecutionRequest"}
+	iStartCommandExecutionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StartCommandExecutionResponse"}
+	iStartNextPendingJobExecutionRequest     = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StartNextPendingJobExecutionRequest"}
+	iStartNextPendingJobExecutionResponse    = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "StartNextPendingJobExecutionResponse"}
+	iUpdateJobExecutionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "UpdateJobExecutionRequest"}
+	iUpdateJobExecutionResponse              = smithy.ShapeName{Namespace: "com.amazonaws.iotjobsdataplane", Name: "UpdateJobExecutionResponse"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+	URI:  "/things/{thingName}/jobs/{jobId}",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/things/{thingName}/jobs",
-	Code: 200})
-
-var StartCommandExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StartCommandExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/command-executions",
-	Code: 200})
-
-var StartNextPendingJobExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StartNextPendingJobExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/things/{thingName}/jobs/$next",
-	Code: 200})
-
-var UpdateJobExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "UpdateJobExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/things/{thingName}/jobs/{jobId}",
-	Code: 200})
-
-var _IotLaserThingJobManagerExternalService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "IotLaserThingJobManagerExternalService",
-}, smithy.ShapeTypeService, 0)
-
-var IotLaserThingJobManagerExternalService = smithy.NewServiceSchema(_IotLaserThingJobManagerExternalService, "2017-09-29")
-
-var _ApproximateSecondsBeforeTimedOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ApproximateSecondsBeforeTimedOut",
-}, smithy.ShapeTypeLong, 0)
-
-var _BinaryBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "BinaryBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _BinaryParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "BinaryParameterValue",
-}, smithy.ShapeTypeBlob, 0)
-
-var _BooleanParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "BooleanParameterValue",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CertificateValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "CertificateValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var CertificateValidationException_message *smithy.Schema
-
-var _ClientRequestTokenV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ClientRequestTokenV2",
-}, smithy.ShapeTypeString, 0)
-
-var _CommandArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "CommandArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CommandExecutionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "CommandExecutionId",
-}, smithy.ShapeTypeString, 0)
-
-var _CommandExecutionParameterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "CommandExecutionParameterMap",
-}, smithy.ShapeTypeMap, 2)
-var _CommandExecutionParameterMap_key *smithy.Schema
-
-var _CommandExecutionParameterMap_value *smithy.Schema
-
-var _CommandExecutionTimeoutInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "CommandExecutionTimeoutInSeconds",
-}, smithy.ShapeTypeLong, 0)
-
-var _CommandParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "CommandParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var CommandParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "CommandParameterValue",
-}, smithy.ShapeTypeStructure, 7)
-var CommandParameterValue_S *smithy.Schema
-
-var CommandParameterValue_B *smithy.Schema
-
-var CommandParameterValue_I *smithy.Schema
-
-var CommandParameterValue_L *smithy.Schema
-
-var CommandParameterValue_D *smithy.Schema
-
-var CommandParameterValue_BIN *smithy.Schema
-
-var CommandParameterValue_UL *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var _DescribeJobExecutionJobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DescribeJobExecutionJobId",
-}, smithy.ShapeTypeString, 0)
-
-var _DetailsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DetailsKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DetailsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DetailsMap",
-}, smithy.ShapeTypeMap, 2)
-var _DetailsMap_key *smithy.Schema
-
-var _DetailsMap_value *smithy.Schema
-
-var _DetailsValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DetailsValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DoubleParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DoubleParameterValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExecutionNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ExecutionNumber",
-}, smithy.ShapeTypeLong, 0)
-
-var _ExpectedVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ExpectedVersion",
-}, smithy.ShapeTypeLong, 0)
-
-var _IncludeExecutionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "IncludeExecutionState",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _IncludeJobDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "IncludeJobDocument",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _IntegerParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "IntegerParameterValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_message *smithy.Schema
-
-var InvalidStateTransitionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "InvalidStateTransitionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var InvalidStateTransitionException_message *smithy.Schema
-
-var _JobDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "JobDocument",
-}, smithy.ShapeTypeString, 0)
-
-var JobExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "JobExecution",
-}, smithy.ShapeTypeStructure, 11)
-var JobExecution_jobId *smithy.Schema
-
-var JobExecution_thingName *smithy.Schema
-
-var JobExecution_status *smithy.Schema
-
-var JobExecution_statusDetails *smithy.Schema
-
-var JobExecution_queuedAt *smithy.Schema
-
-var JobExecution_startedAt *smithy.Schema
-
-var JobExecution_lastUpdatedAt *smithy.Schema
-
-var JobExecution_approximateSecondsBeforeTimedOut *smithy.Schema
-
-var JobExecution_versionNumber *smithy.Schema
-
-var JobExecution_executionNumber *smithy.Schema
-
-var JobExecution_jobDocument *smithy.Schema
-
-var JobExecutionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "JobExecutionState",
-}, smithy.ShapeTypeStructure, 3)
-var JobExecutionState_status *smithy.Schema
-
-var JobExecutionState_statusDetails *smithy.Schema
-
-var JobExecutionState_versionNumber *smithy.Schema
-
-var JobExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "JobExecutionStatus",
-}, smithy.ShapeTypeEnum, 8)
-var JobExecutionStatus_QUEUED *smithy.Schema
-
-var JobExecutionStatus_IN_PROGRESS *smithy.Schema
-
-var JobExecutionStatus_SUCCEEDED *smithy.Schema
-
-var JobExecutionStatus_FAILED *smithy.Schema
-
-var JobExecutionStatus_TIMED_OUT *smithy.Schema
-
-var JobExecutionStatus_REJECTED *smithy.Schema
-
-var JobExecutionStatus_REMOVED *smithy.Schema
-
-var JobExecutionStatus_CANCELED *smithy.Schema
-
-var JobExecutionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "JobExecutionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var JobExecutionSummary_jobId *smithy.Schema
-
-var JobExecutionSummary_queuedAt *smithy.Schema
-
-var JobExecutionSummary_startedAt *smithy.Schema
-
-var JobExecutionSummary_lastUpdatedAt *smithy.Schema
-
-var JobExecutionSummary_versionNumber *smithy.Schema
-
-var JobExecutionSummary_executionNumber *smithy.Schema
-
-var _JobExecutionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "JobExecutionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _JobExecutionSummaryList_member *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _LastUpdatedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "LastUpdatedAt",
-}, smithy.ShapeTypeLong, 0)
-
-var _LongParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "LongParameterValue",
-}, smithy.ShapeTypeLong, 0)
-
-var _QueuedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "QueuedAt",
-}, smithy.ShapeTypeLong, 0)
-
-var _resourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "resourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var _StartedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StartedAt",
-}, smithy.ShapeTypeLong, 0)
-
-var _StepTimeoutInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StepTimeoutInMinutes",
-}, smithy.ShapeTypeLong, 0)
-
-var _StringParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StringParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "TargetArn",
-}, smithy.ShapeTypeString, 0)
-
-var TerminalStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "TerminalStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 410})
-var TerminalStateException_message *smithy.Schema
-
-var _ThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ThingName",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_payload *smithy.Schema
-
-var _UnsignedLongParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "UnsignedLongParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _VersionNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "VersionNumber",
-}, smithy.ShapeTypeLong, 0)
-
-var DescribeJobExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DescribeJobExecutionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeJobExecutionRequest_jobId *smithy.Schema
-
-var DescribeJobExecutionRequest_thingName *smithy.Schema
-
-var DescribeJobExecutionRequest_includeJobDocument *smithy.Schema
-
-var DescribeJobExecutionRequest_executionNumber *smithy.Schema
-
-var DescribeJobExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "DescribeJobExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeJobExecutionResponse_execution *smithy.Schema
-
-var GetPendingJobExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "GetPendingJobExecutionsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPendingJobExecutionsRequest_thingName *smithy.Schema
-
-var GetPendingJobExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "GetPendingJobExecutionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPendingJobExecutionsResponse_inProgressJobs *smithy.Schema
-
-var GetPendingJobExecutionsResponse_queuedJobs *smithy.Schema
-
-var StartCommandExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StartCommandExecutionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartCommandExecutionRequest_targetArn *smithy.Schema
-
-var StartCommandExecutionRequest_commandArn *smithy.Schema
-
-var StartCommandExecutionRequest_parameters *smithy.Schema
-
-var StartCommandExecutionRequest_executionTimeoutSeconds *smithy.Schema
-
-var StartCommandExecutionRequest_clientToken *smithy.Schema
-
-var StartCommandExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StartCommandExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartCommandExecutionResponse_executionId *smithy.Schema
-
-var StartNextPendingJobExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StartNextPendingJobExecutionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartNextPendingJobExecutionRequest_thingName *smithy.Schema
-
-var StartNextPendingJobExecutionRequest_statusDetails *smithy.Schema
-
-var StartNextPendingJobExecutionRequest_stepTimeoutInMinutes *smithy.Schema
-
-var StartNextPendingJobExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "StartNextPendingJobExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartNextPendingJobExecutionResponse_execution *smithy.Schema
-
-var UpdateJobExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "UpdateJobExecutionRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateJobExecutionRequest_jobId *smithy.Schema
-
-var UpdateJobExecutionRequest_thingName *smithy.Schema
-
-var UpdateJobExecutionRequest_status *smithy.Schema
-
-var UpdateJobExecutionRequest_statusDetails *smithy.Schema
-
-var UpdateJobExecutionRequest_stepTimeoutInMinutes *smithy.Schema
-
-var UpdateJobExecutionRequest_expectedVersion *smithy.Schema
-
-var UpdateJobExecutionRequest_includeJobExecutionState *smithy.Schema
-
-var UpdateJobExecutionRequest_includeJobDocument *smithy.Schema
-
-var UpdateJobExecutionRequest_executionNumber *smithy.Schema
-
-var UpdateJobExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotjobsdataplane",
-	Name:      "UpdateJobExecutionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateJobExecutionResponse_executionState *smithy.Schema
-
-var UpdateJobExecutionResponse_jobDocument *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	CertificateValidationException_message = CertificateValidationException.AddMember("message", _errorMessage)
-
-	CommandParameterValue_S = CommandParameterValue.AddMember("S", _StringParameterValue)
-
-	CommandParameterValue_B = CommandParameterValue.AddMember("B", _BooleanParameterValue)
-
-	CommandParameterValue_I = CommandParameterValue.AddMember("I", _IntegerParameterValue)
-
-	CommandParameterValue_L = CommandParameterValue.AddMember("L", _LongParameterValue)
-
-	CommandParameterValue_D = CommandParameterValue.AddMember("D", _DoubleParameterValue)
-
-	CommandParameterValue_BIN = CommandParameterValue.AddMember("BIN", _BinaryParameterValue)
-
-	CommandParameterValue_UL = CommandParameterValue.AddMember("UL", _UnsignedLongParameterValue)
-
-	_CommandExecutionParameterMap_key = _CommandExecutionParameterMap.AddMember("key", _CommandParameterName)
-
-	_CommandExecutionParameterMap_value = _CommandExecutionParameterMap.AddMember("value", CommandParameterValue)
-
-	ConflictException_message = ConflictException.AddMember("message", _errorMessage)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _resourceId)
-
-	_DetailsMap_key = _DetailsMap.AddMember("key", _DetailsKey)
-
-	_DetailsMap_value = _DetailsMap.AddMember("value", _DetailsValue)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _errorMessage)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _errorMessage)
-
-	InvalidStateTransitionException_message = InvalidStateTransitionException.AddMember("message", _errorMessage)
-
-	JobExecutionStatus_QUEUED = JobExecutionStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	JobExecutionStatus_IN_PROGRESS = JobExecutionStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobExecutionStatus_SUCCEEDED = JobExecutionStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	JobExecutionStatus_FAILED = JobExecutionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobExecutionStatus_TIMED_OUT = JobExecutionStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	JobExecutionStatus_REJECTED = JobExecutionStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	JobExecutionStatus_REMOVED = JobExecutionStatus.AddMember("REMOVED", smithyprelude.Unit)
-
-	JobExecutionStatus_CANCELED = JobExecutionStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	JobExecution_jobId = JobExecution.AddMember("jobId", _JobId)
-
-	JobExecution_thingName = JobExecution.AddMember("thingName", _ThingName)
-
-	JobExecution_status = JobExecution.AddMember("status", JobExecutionStatus)
-
-	JobExecution_statusDetails = JobExecution.AddMember("statusDetails", _DetailsMap)
-
-	JobExecution_queuedAt = JobExecution.AddMember("queuedAt", _QueuedAt)
-
-	JobExecution_startedAt = JobExecution.AddMember("startedAt", _StartedAt)
-
-	JobExecution_lastUpdatedAt = JobExecution.AddMember("lastUpdatedAt", _LastUpdatedAt)
-
-	JobExecution_approximateSecondsBeforeTimedOut = JobExecution.AddMember("approximateSecondsBeforeTimedOut", _ApproximateSecondsBeforeTimedOut)
-
-	JobExecution_versionNumber = JobExecution.AddMember("versionNumber", _VersionNumber)
-
-	JobExecution_executionNumber = JobExecution.AddMember("executionNumber", _ExecutionNumber)
-
-	JobExecution_jobDocument = JobExecution.AddMember("jobDocument", _JobDocument)
-
-	JobExecutionState_status = JobExecutionState.AddMember("status", JobExecutionStatus)
-
-	JobExecutionState_statusDetails = JobExecutionState.AddMember("statusDetails", _DetailsMap)
-
-	JobExecutionState_versionNumber = JobExecutionState.AddMember("versionNumber", _VersionNumber)
-
-	JobExecutionSummary_jobId = JobExecutionSummary.AddMember("jobId", _JobId)
-
-	JobExecutionSummary_queuedAt = JobExecutionSummary.AddMember("queuedAt", _QueuedAt)
-
-	JobExecutionSummary_startedAt = JobExecutionSummary.AddMember("startedAt", _StartedAt)
-
-	JobExecutionSummary_lastUpdatedAt = JobExecutionSummary.AddMember("lastUpdatedAt", _LastUpdatedAt)
-
-	JobExecutionSummary_versionNumber = JobExecutionSummary.AddMember("versionNumber", _VersionNumber)
-
-	JobExecutionSummary_executionNumber = JobExecutionSummary.AddMember("executionNumber", _ExecutionNumber)
-
-	_JobExecutionSummaryList_member = _JobExecutionSummaryList.AddMember("member", JobExecutionSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _errorMessage)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _errorMessage)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _errorMessage)
-
-	TerminalStateException_message = TerminalStateException.AddMember("message", _errorMessage)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _errorMessage)
-
-	ThrottlingException_payload = ThrottlingException.AddMember("payload", _BinaryBlob)
-
-	ValidationException_message = ValidationException.AddMember("message", _errorMessage)
-
-	DescribeJobExecutionRequest_jobId = DescribeJobExecutionRequest.AddMember("jobId", _DescribeJobExecutionJobId, &smithytraits.HTTPLabel{})
-
-	DescribeJobExecutionRequest_thingName = DescribeJobExecutionRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	DescribeJobExecutionRequest_includeJobDocument = DescribeJobExecutionRequest.AddMember("includeJobDocument", _IncludeJobDocument, &smithytraits.HTTPQuery{Name: "includeJobDocument"})
-
-	DescribeJobExecutionRequest_executionNumber = DescribeJobExecutionRequest.AddMember("executionNumber", _ExecutionNumber, &smithytraits.HTTPQuery{Name: "executionNumber"})
-
-	DescribeJobExecutionResponse_execution = DescribeJobExecutionResponse.AddMember("execution", JobExecution)
-
-	GetPendingJobExecutionsRequest_thingName = GetPendingJobExecutionsRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	GetPendingJobExecutionsResponse_inProgressJobs = GetPendingJobExecutionsResponse.AddMember("inProgressJobs", _JobExecutionSummaryList)
-
-	GetPendingJobExecutionsResponse_queuedJobs = GetPendingJobExecutionsResponse.AddMember("queuedJobs", _JobExecutionSummaryList)
-
-	StartCommandExecutionRequest_targetArn = StartCommandExecutionRequest.AddMember("targetArn", _TargetArn)
-
-	StartCommandExecutionRequest_commandArn = StartCommandExecutionRequest.AddMember("commandArn", _CommandArn)
-
-	StartCommandExecutionRequest_parameters = StartCommandExecutionRequest.AddMember("parameters", _CommandExecutionParameterMap)
-
-	StartCommandExecutionRequest_executionTimeoutSeconds = StartCommandExecutionRequest.AddMember("executionTimeoutSeconds", _CommandExecutionTimeoutInSeconds)
-
-	StartCommandExecutionRequest_clientToken = StartCommandExecutionRequest.AddMember("clientToken", _ClientRequestTokenV2)
-
-	StartCommandExecutionResponse_executionId = StartCommandExecutionResponse.AddMember("executionId", _CommandExecutionId)
-
-	StartNextPendingJobExecutionRequest_thingName = StartNextPendingJobExecutionRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	StartNextPendingJobExecutionRequest_statusDetails = StartNextPendingJobExecutionRequest.AddMember("statusDetails", _DetailsMap)
-
-	StartNextPendingJobExecutionRequest_stepTimeoutInMinutes = StartNextPendingJobExecutionRequest.AddMember("stepTimeoutInMinutes", _StepTimeoutInMinutes)
-
-	StartNextPendingJobExecutionResponse_execution = StartNextPendingJobExecutionResponse.AddMember("execution", JobExecution)
-
-	UpdateJobExecutionRequest_jobId = UpdateJobExecutionRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	UpdateJobExecutionRequest_thingName = UpdateJobExecutionRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	UpdateJobExecutionRequest_status = UpdateJobExecutionRequest.AddMember("status", JobExecutionStatus)
-
-	UpdateJobExecutionRequest_statusDetails = UpdateJobExecutionRequest.AddMember("statusDetails", _DetailsMap)
-
-	UpdateJobExecutionRequest_stepTimeoutInMinutes = UpdateJobExecutionRequest.AddMember("stepTimeoutInMinutes", _StepTimeoutInMinutes)
-
-	UpdateJobExecutionRequest_expectedVersion = UpdateJobExecutionRequest.AddMember("expectedVersion", _ExpectedVersion)
-
-	UpdateJobExecutionRequest_includeJobExecutionState = UpdateJobExecutionRequest.AddMember("includeJobExecutionState", _IncludeExecutionState)
-
-	UpdateJobExecutionRequest_includeJobDocument = UpdateJobExecutionRequest.AddMember("includeJobDocument", _IncludeJobDocument)
-
-	UpdateJobExecutionRequest_executionNumber = UpdateJobExecutionRequest.AddMember("executionNumber", _ExecutionNumber)
-
-	UpdateJobExecutionResponse_executionState = UpdateJobExecutionResponse.AddMember("executionState", JobExecutionState)
-
-	UpdateJobExecutionResponse_jobDocument = UpdateJobExecutionResponse.AddMember("jobDocument", _JobDocument)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 410}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeJobDocument"}}, DirectMask: 0x10}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "executionNumber"}}, DirectMask: 0x10}
+
+var mCertificateValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateValidationException_message}}
+var m_CommandExecutionParameterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_CommandExecutionParameterMap_key, &s_CommandExecutionParameterMap_value}}
+var mCommandParameterValue = smithy.SchemaMembers{List: []*smithy.Schema{&sCommandParameterValue_S, &sCommandParameterValue_B, &sCommandParameterValue_I, &sCommandParameterValue_L, &sCommandParameterValue_D, &sCommandParameterValue_BIN, &sCommandParameterValue_UL}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId}}
+var m_DetailsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DetailsMap_key, &s_DetailsMap_value}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_message}}
+var mInvalidStateTransitionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateTransitionException_message}}
+var mJobExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sJobExecution_jobId, &sJobExecution_thingName, &sJobExecution_status, &sJobExecution_statusDetails, &sJobExecution_queuedAt, &sJobExecution_startedAt, &sJobExecution_lastUpdatedAt, &sJobExecution_approximateSecondsBeforeTimedOut, &sJobExecution_versionNumber, &sJobExecution_executionNumber, &sJobExecution_jobDocument}, Hash: &hJobExecution}
+var mJobExecutionState = smithy.SchemaMembers{List: []*smithy.Schema{&sJobExecutionState_status, &sJobExecutionState_statusDetails, &sJobExecutionState_versionNumber}}
+var mJobExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobExecutionStatus_QUEUED, &sJobExecutionStatus_IN_PROGRESS, &sJobExecutionStatus_SUCCEEDED, &sJobExecutionStatus_FAILED, &sJobExecutionStatus_TIMED_OUT, &sJobExecutionStatus_REJECTED, &sJobExecutionStatus_REMOVED, &sJobExecutionStatus_CANCELED}}
+var mJobExecutionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sJobExecutionSummary_jobId, &sJobExecutionSummary_queuedAt, &sJobExecutionSummary_startedAt, &sJobExecutionSummary_lastUpdatedAt, &sJobExecutionSummary_versionNumber, &sJobExecutionSummary_executionNumber}}
+var m_JobExecutionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobExecutionSummaryList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var mTerminalStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminalStateException_message}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_payload}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mDescribeJobExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobExecutionRequest_jobId, &sDescribeJobExecutionRequest_thingName, &sDescribeJobExecutionRequest_includeJobDocument, &sDescribeJobExecutionRequest_executionNumber}}
+var mDescribeJobExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobExecutionResponse_execution}}
+var mGetPendingJobExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPendingJobExecutionsRequest_thingName}}
+var mGetPendingJobExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPendingJobExecutionsResponse_inProgressJobs, &sGetPendingJobExecutionsResponse_queuedJobs}}
+var mStartCommandExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCommandExecutionRequest_targetArn, &sStartCommandExecutionRequest_commandArn, &sStartCommandExecutionRequest_parameters, &sStartCommandExecutionRequest_executionTimeoutSeconds, &sStartCommandExecutionRequest_clientToken}}
+var mStartCommandExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCommandExecutionResponse_executionId}}
+var mStartNextPendingJobExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartNextPendingJobExecutionRequest_thingName, &sStartNextPendingJobExecutionRequest_statusDetails, &sStartNextPendingJobExecutionRequest_stepTimeoutInMinutes}}
+var mStartNextPendingJobExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartNextPendingJobExecutionResponse_execution}}
+var mUpdateJobExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateJobExecutionRequest_jobId, &sUpdateJobExecutionRequest_thingName, &sUpdateJobExecutionRequest_status, &sUpdateJobExecutionRequest_statusDetails, &sUpdateJobExecutionRequest_stepTimeoutInMinutes, &sUpdateJobExecutionRequest_expectedVersion, &sUpdateJobExecutionRequest_includeJobExecutionState, &sUpdateJobExecutionRequest_includeJobDocument, &sUpdateJobExecutionRequest_executionNumber}, Hash: &hUpdateJobExecutionRequest}
+var mUpdateJobExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateJobExecutionResponse_executionState, &sUpdateJobExecutionResponse_jobDocument}}
+
+var hJobExecution = smithy.MemberHash{Seed: 25, Slots: []uint16{
+	11, 0, 0, 8, 0, 1, 0, 3, 0, 0, 6, 0, 0, 0, 0, 10, 5, 0, 0, 0, 7, 0, 2, 0,
+	0, 4, 0, 0, 0, 0, 0, 9,
+}}
+var hUpdateJobExecutionRequest = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 1, 0, 0, 6, 7, 0, 0, 0, 3, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 5, 4, 0, 0,
+	0, 0, 8, 0, 0, 2, 0, 0,
+}}
+
+var sDescribeJobExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobExecution, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDescribeJobExecution})
+var sGetPendingJobExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPendingJobExecutions, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetPendingJobExecutions})
+var sStartCommandExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCommandExecution, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eStartCommandExecution})
+var sStartNextPendingJobExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartNextPendingJobExecution, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eStartNextPendingJobExecution})
+var sUpdateJobExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobExecution, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eUpdateJobExecution})
+var s_IotLaserThingJobManagerExternalService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IotLaserThingJobManagerExternalService, Type: smithy.ShapeTypeService, Ext: &e_IotLaserThingJobManagerExternalService})
+var s_ApproximateSecondsBeforeTimedOut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApproximateSecondsBeforeTimedOut, Type: smithy.ShapeTypeLong, Ext: &e_ApproximateSecondsBeforeTimedOut})
+var s_BinaryBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryBlob, Type: smithy.ShapeTypeBlob, Ext: &e_BinaryBlob})
+var s_BinaryParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryParameterValue, Type: smithy.ShapeTypeBlob, Ext: &e_BinaryParameterValue})
+var s_BooleanParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanParameterValue, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanParameterValue})
+var sCertificateValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateValidationException, Members: &mCertificateValidationException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eCertificateValidationException})
+var sCertificateValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eCertificateValidationException_message})
+var s_ClientRequestTokenV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestTokenV2, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestTokenV2})
+var s_CommandArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandArn, Type: smithy.ShapeTypeString, Ext: &e_CommandArn})
+var s_CommandExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandExecutionId, Type: smithy.ShapeTypeString, Ext: &e_CommandExecutionId})
+var s_CommandExecutionParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandExecutionParameterMap, Members: &m_CommandExecutionParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_CommandExecutionParameterMap})
+var s_CommandExecutionParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CommandParameterName, Type: smithy.ShapeTypeString, Ext: &e_CommandExecutionParameterMap_key})
+var s_CommandExecutionParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCommandParameterValue, Members: &mCommandParameterValue, Type: smithy.ShapeTypeStructure, Ext: &e_CommandExecutionParameterMap_value})
+var s_CommandExecutionTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandExecutionTimeoutInSeconds, Type: smithy.ShapeTypeLong, Ext: &e_CommandExecutionTimeoutInSeconds})
+var s_CommandParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandParameterName, Type: smithy.ShapeTypeString, Ext: &e_CommandParameterName})
+var sCommandParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommandParameterValue, Members: &mCommandParameterValue, Type: smithy.ShapeTypeStructure, Ext: &eCommandParameterValue})
+var sCommandParameterValue_S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S", ID: &i_StringParameterValue, Type: smithy.ShapeTypeString, Ext: &eCommandParameterValue_S})
+var sCommandParameterValue_B = smithy.NewStaticSchema(smithy.StaticSchema{Member: "B", ID: &i_BooleanParameterValue, Type: smithy.ShapeTypeBoolean, Ext: &eCommandParameterValue_B})
+var sCommandParameterValue_I = smithy.NewStaticSchema(smithy.StaticSchema{Member: "I", ID: &i_IntegerParameterValue, Type: smithy.ShapeTypeInteger, Ext: &eCommandParameterValue_I})
+var sCommandParameterValue_L = smithy.NewStaticSchema(smithy.StaticSchema{Member: "L", ID: &i_LongParameterValue, Type: smithy.ShapeTypeLong, Ext: &eCommandParameterValue_L})
+var sCommandParameterValue_D = smithy.NewStaticSchema(smithy.StaticSchema{Member: "D", ID: &i_DoubleParameterValue, Type: smithy.ShapeTypeDouble, Ext: &eCommandParameterValue_D})
+var sCommandParameterValue_BIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIN", ID: &i_BinaryParameterValue, Type: smithy.ShapeTypeBlob, Ext: &eCommandParameterValue_BIN})
+var sCommandParameterValue_UL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UL", ID: &i_UnsignedLongParameterValue, Type: smithy.ShapeTypeString, Ext: &eCommandParameterValue_UL})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_resourceId, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var s_DescribeJobExecutionJobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeJobExecutionJobId, Type: smithy.ShapeTypeString, Ext: &e_DescribeJobExecutionJobId})
+var s_DetailsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailsKey, Type: smithy.ShapeTypeString, Ext: &e_DetailsKey})
+var s_DetailsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailsMap, Members: &m_DetailsMap, Type: smithy.ShapeTypeMap, Ext: &e_DetailsMap})
+var s_DetailsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DetailsKey, Type: smithy.ShapeTypeString, Ext: &e_DetailsMap_key})
+var s_DetailsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DetailsValue, Type: smithy.ShapeTypeString, Ext: &e_DetailsMap_value})
+var s_DetailsValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailsValue, Type: smithy.ShapeTypeString, Ext: &e_DetailsValue})
+var s_DoubleParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleParameterValue, Type: smithy.ShapeTypeDouble, Ext: &e_DoubleParameterValue})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var s_ExecutionNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionNumber, Type: smithy.ShapeTypeLong, Ext: &e_ExecutionNumber})
+var s_ExpectedVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpectedVersion, Type: smithy.ShapeTypeLong, Ext: &e_ExpectedVersion})
+var s_IncludeExecutionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeExecutionState, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeExecutionState})
+var s_IncludeJobDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeJobDocument, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeJobDocument})
+var s_IntegerParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerParameterValue, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerParameterValue})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var sInvalidStateTransitionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateTransitionException, Members: &mInvalidStateTransitionException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStateTransitionException})
+var sInvalidStateTransitionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidStateTransitionException_message})
+var s_JobDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobDocument, Type: smithy.ShapeTypeString, Ext: &e_JobDocument})
+var sJobExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobExecution, Members: &mJobExecution, Type: smithy.ShapeTypeStructure, Ext: &eJobExecution})
+var sJobExecution_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eJobExecution_jobId})
+var sJobExecution_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &eJobExecution_thingName})
+var sJobExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobExecutionStatus, Members: &mJobExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobExecution_status})
+var sJobExecution_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &i_DetailsMap, Members: &m_DetailsMap, Type: smithy.ShapeTypeMap, Ext: &eJobExecution_statusDetails})
+var sJobExecution_queuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedAt", ID: &i_QueuedAt, Type: smithy.ShapeTypeLong, Ext: &eJobExecution_queuedAt})
+var sJobExecution_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_StartedAt, Type: smithy.ShapeTypeLong, Ext: &eJobExecution_startedAt})
+var sJobExecution_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_LastUpdatedAt, Type: smithy.ShapeTypeLong, Ext: &eJobExecution_lastUpdatedAt})
+var sJobExecution_approximateSecondsBeforeTimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approximateSecondsBeforeTimedOut", ID: &i_ApproximateSecondsBeforeTimedOut, Type: smithy.ShapeTypeLong, Ext: &eJobExecution_approximateSecondsBeforeTimedOut})
+var sJobExecution_versionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionNumber", ID: &i_VersionNumber, Type: smithy.ShapeTypeLong, Ext: &eJobExecution_versionNumber})
+var sJobExecution_executionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionNumber", ID: &i_ExecutionNumber, Type: smithy.ShapeTypeLong, Ext: &eJobExecution_executionNumber})
+var sJobExecution_jobDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDocument", ID: &i_JobDocument, Type: smithy.ShapeTypeString, Ext: &eJobExecution_jobDocument})
+var sJobExecutionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobExecutionState, Members: &mJobExecutionState, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionState})
+var sJobExecutionState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobExecutionStatus, Members: &mJobExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobExecutionState_status})
+var sJobExecutionState_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &i_DetailsMap, Members: &m_DetailsMap, Type: smithy.ShapeTypeMap, Ext: &eJobExecutionState_statusDetails})
+var sJobExecutionState_versionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionNumber", ID: &i_VersionNumber, Type: smithy.ShapeTypeLong, Ext: &eJobExecutionState_versionNumber})
+var sJobExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobExecutionStatus, Members: &mJobExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobExecutionStatus})
+var sJobExecutionStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_QUEUED})
+var sJobExecutionStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_IN_PROGRESS})
+var sJobExecutionStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_SUCCEEDED})
+var sJobExecutionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_FAILED})
+var sJobExecutionStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_TIMED_OUT})
+var sJobExecutionStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_REJECTED})
+var sJobExecutionStatus_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_REMOVED})
+var sJobExecutionStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionStatus_CANCELED})
+var sJobExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobExecutionSummary, Members: &mJobExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &eJobExecutionSummary})
+var sJobExecutionSummary_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eJobExecutionSummary_jobId})
+var sJobExecutionSummary_queuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedAt", ID: &i_QueuedAt, Type: smithy.ShapeTypeLong, Ext: &eJobExecutionSummary_queuedAt})
+var sJobExecutionSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_StartedAt, Type: smithy.ShapeTypeLong, Ext: &eJobExecutionSummary_startedAt})
+var sJobExecutionSummary_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_LastUpdatedAt, Type: smithy.ShapeTypeLong, Ext: &eJobExecutionSummary_lastUpdatedAt})
+var sJobExecutionSummary_versionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionNumber", ID: &i_VersionNumber, Type: smithy.ShapeTypeLong, Ext: &eJobExecutionSummary_versionNumber})
+var sJobExecutionSummary_executionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionNumber", ID: &i_ExecutionNumber, Type: smithy.ShapeTypeLong, Ext: &eJobExecutionSummary_executionNumber})
+var s_JobExecutionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobExecutionSummaryList, Members: &m_JobExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_JobExecutionSummaryList})
+var s_JobExecutionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobExecutionSummary, Members: &mJobExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_JobExecutionSummaryList_member})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdatedAt, Type: smithy.ShapeTypeLong, Ext: &e_LastUpdatedAt})
+var s_LongParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongParameterValue, Type: smithy.ShapeTypeLong, Ext: &e_LongParameterValue})
+var s_QueuedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueuedAt, Type: smithy.ShapeTypeLong, Ext: &e_QueuedAt})
+var s_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_resourceId, Type: smithy.ShapeTypeString, Ext: &e_resourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var s_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartedAt, Type: smithy.ShapeTypeLong, Ext: &e_StartedAt})
+var s_StepTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepTimeoutInMinutes, Type: smithy.ShapeTypeLong, Ext: &e_StepTimeoutInMinutes})
+var s_StringParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringParameterValue, Type: smithy.ShapeTypeString, Ext: &e_StringParameterValue})
+var s_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetArn, Type: smithy.ShapeTypeString, Ext: &e_TargetArn})
+var sTerminalStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminalStateException, Members: &mTerminalStateException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eTerminalStateException})
+var sTerminalStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eTerminalStateException_message})
+var s_ThingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &e_ThingName})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_BinaryBlob, Type: smithy.ShapeTypeBlob, Ext: &eThrottlingException_payload})
+var s_UnsignedLongParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnsignedLongParameterValue, Type: smithy.ShapeTypeString, Ext: &e_UnsignedLongParameterValue})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_VersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionNumber, Type: smithy.ShapeTypeLong, Ext: &e_VersionNumber})
+var sDescribeJobExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobExecutionRequest, Members: &mDescribeJobExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobExecutionRequest})
+var sDescribeJobExecutionRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_DescribeJobExecutionJobId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eDescribeJobExecutionRequest_jobId})
+var sDescribeJobExecutionRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eDescribeJobExecutionRequest_thingName})
+var sDescribeJobExecutionRequest_includeJobDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeJobDocument", ID: &i_IncludeJobDocument, Traits: &t14, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeJobExecutionRequest_includeJobDocument})
+var sDescribeJobExecutionRequest_executionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionNumber", ID: &i_ExecutionNumber, Traits: &t15, Type: smithy.ShapeTypeLong, Ext: &eDescribeJobExecutionRequest_executionNumber})
+var sDescribeJobExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobExecutionResponse, Members: &mDescribeJobExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobExecutionResponse})
+var sDescribeJobExecutionResponse_execution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "execution", ID: &iJobExecution, Members: &mJobExecution, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobExecutionResponse_execution})
+var sGetPendingJobExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPendingJobExecutionsRequest, Members: &mGetPendingJobExecutionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPendingJobExecutionsRequest})
+var sGetPendingJobExecutionsRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGetPendingJobExecutionsRequest_thingName})
+var sGetPendingJobExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPendingJobExecutionsResponse, Members: &mGetPendingJobExecutionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPendingJobExecutionsResponse})
+var sGetPendingJobExecutionsResponse_inProgressJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inProgressJobs", ID: &i_JobExecutionSummaryList, Members: &m_JobExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &eGetPendingJobExecutionsResponse_inProgressJobs})
+var sGetPendingJobExecutionsResponse_queuedJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedJobs", ID: &i_JobExecutionSummaryList, Members: &m_JobExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &eGetPendingJobExecutionsResponse_queuedJobs})
+var sStartCommandExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCommandExecutionRequest, Members: &mStartCommandExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartCommandExecutionRequest})
+var sStartCommandExecutionRequest_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_TargetArn, Type: smithy.ShapeTypeString, Ext: &eStartCommandExecutionRequest_targetArn})
+var sStartCommandExecutionRequest_commandArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commandArn", ID: &i_CommandArn, Type: smithy.ShapeTypeString, Ext: &eStartCommandExecutionRequest_commandArn})
+var sStartCommandExecutionRequest_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_CommandExecutionParameterMap, Members: &m_CommandExecutionParameterMap, Type: smithy.ShapeTypeMap, Ext: &eStartCommandExecutionRequest_parameters})
+var sStartCommandExecutionRequest_executionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionTimeoutSeconds", ID: &i_CommandExecutionTimeoutInSeconds, Type: smithy.ShapeTypeLong, Ext: &eStartCommandExecutionRequest_executionTimeoutSeconds})
+var sStartCommandExecutionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientRequestTokenV2, Type: smithy.ShapeTypeString, Ext: &eStartCommandExecutionRequest_clientToken})
+var sStartCommandExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCommandExecutionResponse, Members: &mStartCommandExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartCommandExecutionResponse})
+var sStartCommandExecutionResponse_executionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionId", ID: &i_CommandExecutionId, Type: smithy.ShapeTypeString, Ext: &eStartCommandExecutionResponse_executionId})
+var sStartNextPendingJobExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartNextPendingJobExecutionRequest, Members: &mStartNextPendingJobExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartNextPendingJobExecutionRequest})
+var sStartNextPendingJobExecutionRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eStartNextPendingJobExecutionRequest_thingName})
+var sStartNextPendingJobExecutionRequest_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &i_DetailsMap, Members: &m_DetailsMap, Type: smithy.ShapeTypeMap, Ext: &eStartNextPendingJobExecutionRequest_statusDetails})
+var sStartNextPendingJobExecutionRequest_stepTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTimeoutInMinutes", ID: &i_StepTimeoutInMinutes, Type: smithy.ShapeTypeLong, Ext: &eStartNextPendingJobExecutionRequest_stepTimeoutInMinutes})
+var sStartNextPendingJobExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartNextPendingJobExecutionResponse, Members: &mStartNextPendingJobExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartNextPendingJobExecutionResponse})
+var sStartNextPendingJobExecutionResponse_execution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "execution", ID: &iJobExecution, Members: &mJobExecution, Type: smithy.ShapeTypeStructure, Ext: &eStartNextPendingJobExecutionResponse_execution})
+var sUpdateJobExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobExecutionRequest, Members: &mUpdateJobExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobExecutionRequest})
+var sUpdateJobExecutionRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eUpdateJobExecutionRequest_jobId})
+var sUpdateJobExecutionRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eUpdateJobExecutionRequest_thingName})
+var sUpdateJobExecutionRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobExecutionStatus, Members: &mJobExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateJobExecutionRequest_status})
+var sUpdateJobExecutionRequest_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &i_DetailsMap, Members: &m_DetailsMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateJobExecutionRequest_statusDetails})
+var sUpdateJobExecutionRequest_stepTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTimeoutInMinutes", ID: &i_StepTimeoutInMinutes, Type: smithy.ShapeTypeLong, Ext: &eUpdateJobExecutionRequest_stepTimeoutInMinutes})
+var sUpdateJobExecutionRequest_expectedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expectedVersion", ID: &i_ExpectedVersion, Type: smithy.ShapeTypeLong, Ext: &eUpdateJobExecutionRequest_expectedVersion})
+var sUpdateJobExecutionRequest_includeJobExecutionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeJobExecutionState", ID: &i_IncludeExecutionState, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateJobExecutionRequest_includeJobExecutionState})
+var sUpdateJobExecutionRequest_includeJobDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeJobDocument", ID: &i_IncludeJobDocument, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateJobExecutionRequest_includeJobDocument})
+var sUpdateJobExecutionRequest_executionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionNumber", ID: &i_ExecutionNumber, Type: smithy.ShapeTypeLong, Ext: &eUpdateJobExecutionRequest_executionNumber})
+var sUpdateJobExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobExecutionResponse, Members: &mUpdateJobExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobExecutionResponse})
+var sUpdateJobExecutionResponse_executionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionState", ID: &iJobExecutionState, Members: &mJobExecutionState, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobExecutionResponse_executionState})
+var sUpdateJobExecutionResponse_jobDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDocument", ID: &i_JobDocument, Type: smithy.ShapeTypeString, Ext: &eUpdateJobExecutionResponse_jobDocument})
+
+var DescribeJobExecution = &sDescribeJobExecution
+
+var GetPendingJobExecutions = &sGetPendingJobExecutions
+
+var StartCommandExecution = &sStartCommandExecution
+
+var StartNextPendingJobExecution = &sStartNextPendingJobExecution
+
+var UpdateJobExecution = &sUpdateJobExecution
+
+var _IotLaserThingJobManagerExternalService = &s_IotLaserThingJobManagerExternalService
+
+var _ApproximateSecondsBeforeTimedOut = &s_ApproximateSecondsBeforeTimedOut
+
+var _BinaryBlob = &s_BinaryBlob
+
+var _BinaryParameterValue = &s_BinaryParameterValue
+
+var _BooleanParameterValue = &s_BooleanParameterValue
+
+var CertificateValidationException = &sCertificateValidationException
+var CertificateValidationException_message = &sCertificateValidationException_message
+
+var _ClientRequestTokenV2 = &s_ClientRequestTokenV2
+
+var _CommandArn = &s_CommandArn
+
+var _CommandExecutionId = &s_CommandExecutionId
+
+var _CommandExecutionParameterMap = &s_CommandExecutionParameterMap
+var _CommandExecutionParameterMap_key = &s_CommandExecutionParameterMap_key
+var _CommandExecutionParameterMap_value = &s_CommandExecutionParameterMap_value
+
+var _CommandExecutionTimeoutInSeconds = &s_CommandExecutionTimeoutInSeconds
+
+var _CommandParameterName = &s_CommandParameterName
+
+var CommandParameterValue = &sCommandParameterValue
+var CommandParameterValue_S = &sCommandParameterValue_S
+var CommandParameterValue_B = &sCommandParameterValue_B
+var CommandParameterValue_I = &sCommandParameterValue_I
+var CommandParameterValue_L = &sCommandParameterValue_L
+var CommandParameterValue_D = &sCommandParameterValue_D
+var CommandParameterValue_BIN = &sCommandParameterValue_BIN
+var CommandParameterValue_UL = &sCommandParameterValue_UL
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+
+var _DescribeJobExecutionJobId = &s_DescribeJobExecutionJobId
+
+var _DetailsKey = &s_DetailsKey
+
+var _DetailsMap = &s_DetailsMap
+var _DetailsMap_key = &s_DetailsMap_key
+var _DetailsMap_value = &s_DetailsMap_value
+
+var _DetailsValue = &s_DetailsValue
+
+var _DoubleParameterValue = &s_DoubleParameterValue
+
+var _errorMessage = &s_errorMessage
+
+var _ExecutionNumber = &s_ExecutionNumber
+
+var _ExpectedVersion = &s_ExpectedVersion
+
+var _IncludeExecutionState = &s_IncludeExecutionState
+
+var _IncludeJobDocument = &s_IncludeJobDocument
+
+var _IntegerParameterValue = &s_IntegerParameterValue
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_message = &sInvalidRequestException_message
+
+var InvalidStateTransitionException = &sInvalidStateTransitionException
+var InvalidStateTransitionException_message = &sInvalidStateTransitionException_message
+
+var _JobDocument = &s_JobDocument
+
+var JobExecution = &sJobExecution
+var JobExecution_jobId = &sJobExecution_jobId
+var JobExecution_thingName = &sJobExecution_thingName
+var JobExecution_status = &sJobExecution_status
+var JobExecution_statusDetails = &sJobExecution_statusDetails
+var JobExecution_queuedAt = &sJobExecution_queuedAt
+var JobExecution_startedAt = &sJobExecution_startedAt
+var JobExecution_lastUpdatedAt = &sJobExecution_lastUpdatedAt
+var JobExecution_approximateSecondsBeforeTimedOut = &sJobExecution_approximateSecondsBeforeTimedOut
+var JobExecution_versionNumber = &sJobExecution_versionNumber
+var JobExecution_executionNumber = &sJobExecution_executionNumber
+var JobExecution_jobDocument = &sJobExecution_jobDocument
+
+var JobExecutionState = &sJobExecutionState
+var JobExecutionState_status = &sJobExecutionState_status
+var JobExecutionState_statusDetails = &sJobExecutionState_statusDetails
+var JobExecutionState_versionNumber = &sJobExecutionState_versionNumber
+
+var JobExecutionStatus = &sJobExecutionStatus
+var JobExecutionStatus_QUEUED = &sJobExecutionStatus_QUEUED
+var JobExecutionStatus_IN_PROGRESS = &sJobExecutionStatus_IN_PROGRESS
+var JobExecutionStatus_SUCCEEDED = &sJobExecutionStatus_SUCCEEDED
+var JobExecutionStatus_FAILED = &sJobExecutionStatus_FAILED
+var JobExecutionStatus_TIMED_OUT = &sJobExecutionStatus_TIMED_OUT
+var JobExecutionStatus_REJECTED = &sJobExecutionStatus_REJECTED
+var JobExecutionStatus_REMOVED = &sJobExecutionStatus_REMOVED
+var JobExecutionStatus_CANCELED = &sJobExecutionStatus_CANCELED
+
+var JobExecutionSummary = &sJobExecutionSummary
+var JobExecutionSummary_jobId = &sJobExecutionSummary_jobId
+var JobExecutionSummary_queuedAt = &sJobExecutionSummary_queuedAt
+var JobExecutionSummary_startedAt = &sJobExecutionSummary_startedAt
+var JobExecutionSummary_lastUpdatedAt = &sJobExecutionSummary_lastUpdatedAt
+var JobExecutionSummary_versionNumber = &sJobExecutionSummary_versionNumber
+var JobExecutionSummary_executionNumber = &sJobExecutionSummary_executionNumber
+
+var _JobExecutionSummaryList = &s_JobExecutionSummaryList
+var _JobExecutionSummaryList_member = &s_JobExecutionSummaryList_member
+
+var _JobId = &s_JobId
+
+var _LastUpdatedAt = &s_LastUpdatedAt
+
+var _LongParameterValue = &s_LongParameterValue
+
+var _QueuedAt = &s_QueuedAt
+
+var _resourceId = &s_resourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var _StartedAt = &s_StartedAt
+
+var _StepTimeoutInMinutes = &s_StepTimeoutInMinutes
+
+var _StringParameterValue = &s_StringParameterValue
+
+var _TargetArn = &s_TargetArn
+
+var TerminalStateException = &sTerminalStateException
+var TerminalStateException_message = &sTerminalStateException_message
+
+var _ThingName = &s_ThingName
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_payload = &sThrottlingException_payload
+
+var _UnsignedLongParameterValue = &s_UnsignedLongParameterValue
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _VersionNumber = &s_VersionNumber
+
+var DescribeJobExecutionRequest = &sDescribeJobExecutionRequest
+var DescribeJobExecutionRequest_jobId = &sDescribeJobExecutionRequest_jobId
+var DescribeJobExecutionRequest_thingName = &sDescribeJobExecutionRequest_thingName
+var DescribeJobExecutionRequest_includeJobDocument = &sDescribeJobExecutionRequest_includeJobDocument
+var DescribeJobExecutionRequest_executionNumber = &sDescribeJobExecutionRequest_executionNumber
+
+var DescribeJobExecutionResponse = &sDescribeJobExecutionResponse
+var DescribeJobExecutionResponse_execution = &sDescribeJobExecutionResponse_execution
+
+var GetPendingJobExecutionsRequest = &sGetPendingJobExecutionsRequest
+var GetPendingJobExecutionsRequest_thingName = &sGetPendingJobExecutionsRequest_thingName
+
+var GetPendingJobExecutionsResponse = &sGetPendingJobExecutionsResponse
+var GetPendingJobExecutionsResponse_inProgressJobs = &sGetPendingJobExecutionsResponse_inProgressJobs
+var GetPendingJobExecutionsResponse_queuedJobs = &sGetPendingJobExecutionsResponse_queuedJobs
+
+var StartCommandExecutionRequest = &sStartCommandExecutionRequest
+var StartCommandExecutionRequest_targetArn = &sStartCommandExecutionRequest_targetArn
+var StartCommandExecutionRequest_commandArn = &sStartCommandExecutionRequest_commandArn
+var StartCommandExecutionRequest_parameters = &sStartCommandExecutionRequest_parameters
+var StartCommandExecutionRequest_executionTimeoutSeconds = &sStartCommandExecutionRequest_executionTimeoutSeconds
+var StartCommandExecutionRequest_clientToken = &sStartCommandExecutionRequest_clientToken
+
+var StartCommandExecutionResponse = &sStartCommandExecutionResponse
+var StartCommandExecutionResponse_executionId = &sStartCommandExecutionResponse_executionId
+
+var StartNextPendingJobExecutionRequest = &sStartNextPendingJobExecutionRequest
+var StartNextPendingJobExecutionRequest_thingName = &sStartNextPendingJobExecutionRequest_thingName
+var StartNextPendingJobExecutionRequest_statusDetails = &sStartNextPendingJobExecutionRequest_statusDetails
+var StartNextPendingJobExecutionRequest_stepTimeoutInMinutes = &sStartNextPendingJobExecutionRequest_stepTimeoutInMinutes
+
+var StartNextPendingJobExecutionResponse = &sStartNextPendingJobExecutionResponse
+var StartNextPendingJobExecutionResponse_execution = &sStartNextPendingJobExecutionResponse_execution
+
+var UpdateJobExecutionRequest = &sUpdateJobExecutionRequest
+var UpdateJobExecutionRequest_jobId = &sUpdateJobExecutionRequest_jobId
+var UpdateJobExecutionRequest_thingName = &sUpdateJobExecutionRequest_thingName
+var UpdateJobExecutionRequest_status = &sUpdateJobExecutionRequest_status
+var UpdateJobExecutionRequest_statusDetails = &sUpdateJobExecutionRequest_statusDetails
+var UpdateJobExecutionRequest_stepTimeoutInMinutes = &sUpdateJobExecutionRequest_stepTimeoutInMinutes
+var UpdateJobExecutionRequest_expectedVersion = &sUpdateJobExecutionRequest_expectedVersion
+var UpdateJobExecutionRequest_includeJobExecutionState = &sUpdateJobExecutionRequest_includeJobExecutionState
+var UpdateJobExecutionRequest_includeJobDocument = &sUpdateJobExecutionRequest_includeJobDocument
+var UpdateJobExecutionRequest_executionNumber = &sUpdateJobExecutionRequest_executionNumber
+
+var UpdateJobExecutionResponse = &sUpdateJobExecutionResponse
+var UpdateJobExecutionResponse_executionState = &sUpdateJobExecutionResponse_executionState
+var UpdateJobExecutionResponse_jobDocument = &sUpdateJobExecutionResponse_jobDocument
+
+var IotLaserThingJobManagerExternalService = &smithy.ServiceSchema{Schema: &s_IotLaserThingJobManagerExternalService, Version: "2017-09-29"}

@@ -4,216 +4,237 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetRoleCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "GetRoleCredentials",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	eGetRoleCredentials                            smithy.SchemaExtensions
+	eListRoles                                     smithy.SchemaExtensions
+	e_AWSAccountAccessRuntime                      smithy.SchemaExtensions
+	eAccessDeniedException                         smithy.SchemaExtensions
+	eAccessDeniedException_message                 smithy.SchemaExtensions
+	eAccessDetails                                 smithy.SchemaExtensions
+	eAccessDetails_accountId                       smithy.SchemaExtensions
+	eAccessDetails_accountName                     smithy.SchemaExtensions
+	eAccessDetails_roleArn                         smithy.SchemaExtensions
+	e_AccessDetailsList                            smithy.SchemaExtensions
+	e_AccessDetailsList_member                     smithy.SchemaExtensions
+	eAccessType                                    smithy.SchemaExtensions
+	eAccessType_PROGRAMMATIC_ACCESS                smithy.SchemaExtensions
+	e_Account                                      smithy.SchemaExtensions
+	eCredentialsDetails                            smithy.SchemaExtensions
+	eCredentialsDetails_programmaticAccess         smithy.SchemaExtensions
+	eInternalServerException                       smithy.SchemaExtensions
+	eInternalServerException_message               smithy.SchemaExtensions
+	eProgrammaticAccessDetails                     smithy.SchemaExtensions
+	eProgrammaticAccessDetails_accessKeyId         smithy.SchemaExtensions
+	eProgrammaticAccessDetails_secretAccessKey     smithy.SchemaExtensions
+	eProgrammaticAccessDetails_sessionToken        smithy.SchemaExtensions
+	eProgrammaticAccessDetails_expiresAt           smithy.SchemaExtensions
+	e_SessionName                                  smithy.SchemaExtensions
+	e_TenantId                                     smithy.SchemaExtensions
+	eThrottlingException                           smithy.SchemaExtensions
+	eThrottlingException_message                   smithy.SchemaExtensions
+	e_Token                                        smithy.SchemaExtensions
+	eUnauthorizedException                         smithy.SchemaExtensions
+	eUnauthorizedException_message                 smithy.SchemaExtensions
+	eValidationException                           smithy.SchemaExtensions
+	eValidationException_message                   smithy.SchemaExtensions
+	eGetRoleCredentialsRequest                     smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_tenantId            smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_roleArn             smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_accessType          smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_sessionName         smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_sessionDuration     smithy.SchemaExtensions
+	eGetRoleCredentialsResponse                    smithy.SchemaExtensions
+	eGetRoleCredentialsResponse_credentialsDetails smithy.SchemaExtensions
+	eListRolesRequest                              smithy.SchemaExtensions
+	eListRolesRequest_tenantId                     smithy.SchemaExtensions
+	eListRolesRequest_maxResults                   smithy.SchemaExtensions
+	eListRolesRequest_nextToken                    smithy.SchemaExtensions
+	eListRolesResponse                             smithy.SchemaExtensions
+	eListRolesResponse_roles                       smithy.SchemaExtensions
+	eListRolesResponse_nextToken                   smithy.SchemaExtensions
+)
+
+var (
+	iGetRoleCredentials         = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "GetRoleCredentials"}
+	iListRoles                  = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "ListRoles"}
+	i_AWSAccountAccessRuntime   = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "AWSAccountAccessRuntime"}
+	iAccessDeniedException      = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "AccessDeniedException"}
+	iAccessDetails              = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "AccessDetails"}
+	i_AccessDetailsList         = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "AccessDetailsList"}
+	iAccessType                 = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "AccessType"}
+	i_Account                   = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "Account"}
+	iCredentialsDetails         = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "CredentialsDetails"}
+	iInternalServerException    = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "InternalServerException"}
+	iProgrammaticAccessDetails  = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "ProgrammaticAccessDetails"}
+	i_SessionName               = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "SessionName"}
+	i_TenantId                  = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "TenantId"}
+	iThrottlingException        = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "ThrottlingException"}
+	i_Token                     = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "Token"}
+	iUnauthorizedException      = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "UnauthorizedException"}
+	iValidationException        = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "ValidationException"}
+	iGetRoleCredentialsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "GetRoleCredentialsRequest"}
+	iGetRoleCredentialsResponse = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "GetRoleCredentialsResponse"}
+	iListRolesRequest           = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "ListRolesRequest"}
+	iListRolesResponse          = smithy.ShapeName{Namespace: "com.amazonaws.accountaccessruntime", Name: "ListRolesResponse"}
+	pString                     = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/access/credentials",
-	Code: 200})
-
-var ListRoles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "ListRoles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/access",
-	Code: 200})
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t5 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tenantId"}}, DirectMask: 0x10}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "roleArn"}}, DirectMask: 0x10}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "accessType"}}, DirectMask: 0x10}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sessionName"}}, DirectMask: 0x10}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sessionDuration"}}, DirectMask: 0x10}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
 
-var _AWSAccountAccessRuntime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "AWSAccountAccessRuntime",
-}, smithy.ShapeTypeService, 0)
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccessDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDetails_accountId, &sAccessDetails_accountName, &sAccessDetails_roleArn}}
+var m_AccessDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessDetailsList_member}}
+var mAccessType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessType_PROGRAMMATIC_ACCESS}}
+var mCredentialsDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCredentialsDetails_programmaticAccess}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mProgrammaticAccessDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sProgrammaticAccessDetails_accessKeyId, &sProgrammaticAccessDetails_secretAccessKey, &sProgrammaticAccessDetails_sessionToken, &sProgrammaticAccessDetails_expiresAt}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mGetRoleCredentialsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoleCredentialsRequest_tenantId, &sGetRoleCredentialsRequest_roleArn, &sGetRoleCredentialsRequest_accessType, &sGetRoleCredentialsRequest_sessionName, &sGetRoleCredentialsRequest_sessionDuration}}
+var mGetRoleCredentialsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoleCredentialsResponse_credentialsDetails}}
+var mListRolesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRolesRequest_tenantId, &sListRolesRequest_maxResults, &sListRolesRequest_nextToken}}
+var mListRolesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRolesResponse_roles, &sListRolesResponse_nextToken}}
 
-var AWSAccountAccessRuntime = smithy.NewServiceSchema(_AWSAccountAccessRuntime, "2018-05-10")
+var sGetRoleCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentials, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetRoleCredentials})
+var sListRoles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoles, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eListRoles})
+var s_AWSAccountAccessRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountAccessRuntime, Type: smithy.ShapeTypeService, Ext: &e_AWSAccountAccessRuntime})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDetails, Members: &mAccessDetails, Type: smithy.ShapeTypeStructure, Ext: &eAccessDetails})
+var sAccessDetails_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_Account, Type: smithy.ShapeTypeString, Ext: &eAccessDetails_accountId})
+var sAccessDetails_accountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDetails_accountName})
+var sAccessDetails_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDetails_roleArn})
+var s_AccessDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessDetailsList, Members: &m_AccessDetailsList, Type: smithy.ShapeTypeList, Ext: &e_AccessDetailsList})
+var s_AccessDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessDetails, Members: &mAccessDetails, Type: smithy.ShapeTypeStructure, Ext: &e_AccessDetailsList_member})
+var sAccessType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessType, Members: &mAccessType, Type: smithy.ShapeTypeEnum, Ext: &eAccessType})
+var sAccessType_PROGRAMMATIC_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROGRAMMATIC_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessType_PROGRAMMATIC_ACCESS})
+var s_Account = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Account, Type: smithy.ShapeTypeString, Ext: &e_Account})
+var sCredentialsDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredentialsDetails, Members: &mCredentialsDetails, Traits: &t3, Type: smithy.ShapeTypeUnion, Ext: &eCredentialsDetails})
+var sCredentialsDetails_programmaticAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programmaticAccess", ID: &iProgrammaticAccessDetails, Members: &mProgrammaticAccessDetails, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eCredentialsDetails_programmaticAccess})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sProgrammaticAccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgrammaticAccessDetails, Members: &mProgrammaticAccessDetails, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eProgrammaticAccessDetails})
+var sProgrammaticAccessDetails_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProgrammaticAccessDetails_accessKeyId})
+var sProgrammaticAccessDetails_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProgrammaticAccessDetails_secretAccessKey})
+var sProgrammaticAccessDetails_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProgrammaticAccessDetails_sessionToken})
+var sProgrammaticAccessDetails_expiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProgrammaticAccessDetails_expiresAt})
+var s_SessionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionName, Type: smithy.ShapeTypeString, Ext: &e_SessionName})
+var s_TenantId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TenantId, Type: smithy.ShapeTypeString, Ext: &e_TenantId})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sGetRoleCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentialsRequest, Members: &mGetRoleCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRoleCredentialsRequest})
+var sGetRoleCredentialsRequest_tenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantId", ID: &i_TenantId, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGetRoleCredentialsRequest_tenantId})
+var sGetRoleCredentialsRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &pString, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eGetRoleCredentialsRequest_roleArn})
+var sGetRoleCredentialsRequest_accessType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessType", ID: &iAccessType, Members: &mAccessType, Traits: &t11, Type: smithy.ShapeTypeEnum, Ext: &eGetRoleCredentialsRequest_accessType})
+var sGetRoleCredentialsRequest_sessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionName", ID: &i_SessionName, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eGetRoleCredentialsRequest_sessionName})
+var sGetRoleCredentialsRequest_sessionDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionDuration", ID: &pInteger, Traits: &t13, Type: smithy.ShapeTypeInteger, Ext: &eGetRoleCredentialsRequest_sessionDuration})
+var sGetRoleCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentialsResponse, Members: &mGetRoleCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRoleCredentialsResponse})
+var sGetRoleCredentialsResponse_credentialsDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentialsDetails", ID: &iCredentialsDetails, Members: &mCredentialsDetails, Traits: &t4, Type: smithy.ShapeTypeUnion, Ext: &eGetRoleCredentialsResponse_credentialsDetails})
+var sListRolesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRolesRequest, Members: &mListRolesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRolesRequest})
+var sListRolesRequest_tenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantId", ID: &i_TenantId, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eListRolesRequest_tenantId})
+var sListRolesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eListRolesRequest_maxResults})
+var sListRolesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eListRolesRequest_nextToken})
+var sListRolesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRolesResponse, Members: &mListRolesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRolesResponse})
+var sListRolesResponse_roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roles", ID: &i_AccessDetailsList, Members: &m_AccessDetailsList, Type: smithy.ShapeTypeList, Ext: &eListRolesResponse_roles})
+var sListRolesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListRolesResponse_nextToken})
 
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
+var GetRoleCredentials = &sGetRoleCredentials
 
-var AccessDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "AccessDetails",
-}, smithy.ShapeTypeStructure, 3)
-var AccessDetails_accountId *smithy.Schema
+var ListRoles = &sListRoles
 
-var AccessDetails_accountName *smithy.Schema
+var _AWSAccountAccessRuntime = &s_AWSAccountAccessRuntime
 
-var AccessDetails_roleArn *smithy.Schema
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
 
-var _AccessDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "AccessDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _AccessDetailsList_member *smithy.Schema
+var AccessDetails = &sAccessDetails
+var AccessDetails_accountId = &sAccessDetails_accountId
+var AccessDetails_accountName = &sAccessDetails_accountName
+var AccessDetails_roleArn = &sAccessDetails_roleArn
 
-var AccessType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "AccessType",
-}, smithy.ShapeTypeEnum, 1)
-var AccessType_PROGRAMMATIC_ACCESS *smithy.Schema
+var _AccessDetailsList = &s_AccessDetailsList
+var _AccessDetailsList_member = &s_AccessDetailsList_member
 
-var _Account = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "Account",
-}, smithy.ShapeTypeString, 0)
+var AccessType = &sAccessType
+var AccessType_PROGRAMMATIC_ACCESS = &sAccessType_PROGRAMMATIC_ACCESS
 
-var CredentialsDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "CredentialsDetails",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Sensitive{})
-var CredentialsDetails_programmaticAccess *smithy.Schema
+var _Account = &s_Account
 
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerException_message *smithy.Schema
+var CredentialsDetails = &sCredentialsDetails
+var CredentialsDetails_programmaticAccess = &sCredentialsDetails_programmaticAccess
 
-var ProgrammaticAccessDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "ProgrammaticAccessDetails",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var ProgrammaticAccessDetails_accessKeyId *smithy.Schema
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
 
-var ProgrammaticAccessDetails_secretAccessKey *smithy.Schema
+var ProgrammaticAccessDetails = &sProgrammaticAccessDetails
+var ProgrammaticAccessDetails_accessKeyId = &sProgrammaticAccessDetails_accessKeyId
+var ProgrammaticAccessDetails_secretAccessKey = &sProgrammaticAccessDetails_secretAccessKey
+var ProgrammaticAccessDetails_sessionToken = &sProgrammaticAccessDetails_sessionToken
+var ProgrammaticAccessDetails_expiresAt = &sProgrammaticAccessDetails_expiresAt
 
-var ProgrammaticAccessDetails_sessionToken *smithy.Schema
+var _SessionName = &s_SessionName
 
-var ProgrammaticAccessDetails_expiresAt *smithy.Schema
+var _TenantId = &s_TenantId
 
-var _SessionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "SessionName",
-}, smithy.ShapeTypeString, 0)
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
 
-var _TenantId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "TenantId",
-}, smithy.ShapeTypeString, 0)
+var _Token = &s_Token
 
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
 
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
 
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
+var GetRoleCredentialsRequest = &sGetRoleCredentialsRequest
+var GetRoleCredentialsRequest_tenantId = &sGetRoleCredentialsRequest_tenantId
+var GetRoleCredentialsRequest_roleArn = &sGetRoleCredentialsRequest_roleArn
+var GetRoleCredentialsRequest_accessType = &sGetRoleCredentialsRequest_accessType
+var GetRoleCredentialsRequest_sessionName = &sGetRoleCredentialsRequest_sessionName
+var GetRoleCredentialsRequest_sessionDuration = &sGetRoleCredentialsRequest_sessionDuration
 
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
+var GetRoleCredentialsResponse = &sGetRoleCredentialsResponse
+var GetRoleCredentialsResponse_credentialsDetails = &sGetRoleCredentialsResponse_credentialsDetails
 
-var GetRoleCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "GetRoleCredentialsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetRoleCredentialsRequest_tenantId *smithy.Schema
+var ListRolesRequest = &sListRolesRequest
+var ListRolesRequest_tenantId = &sListRolesRequest_tenantId
+var ListRolesRequest_maxResults = &sListRolesRequest_maxResults
+var ListRolesRequest_nextToken = &sListRolesRequest_nextToken
 
-var GetRoleCredentialsRequest_roleArn *smithy.Schema
+var ListRolesResponse = &sListRolesResponse
+var ListRolesResponse_roles = &sListRolesResponse_roles
+var ListRolesResponse_nextToken = &sListRolesResponse_nextToken
 
-var GetRoleCredentialsRequest_accessType *smithy.Schema
-
-var GetRoleCredentialsRequest_sessionName *smithy.Schema
-
-var GetRoleCredentialsRequest_sessionDuration *smithy.Schema
-
-var GetRoleCredentialsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "GetRoleCredentialsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRoleCredentialsResponse_credentialsDetails *smithy.Schema
-
-var ListRolesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "ListRolesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRolesRequest_tenantId *smithy.Schema
-
-var ListRolesRequest_maxResults *smithy.Schema
-
-var ListRolesRequest_nextToken *smithy.Schema
-
-var ListRolesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.accountaccessruntime",
-	Name:      "ListRolesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRolesResponse_roles *smithy.Schema
-
-var ListRolesResponse_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AccessDetails_accountId = AccessDetails.AddMember("accountId", _Account)
-
-	AccessDetails_accountName = AccessDetails.AddMember("accountName", smithyprelude.String)
-
-	AccessDetails_roleArn = AccessDetails.AddMember("roleArn", smithyprelude.String)
-
-	_AccessDetailsList_member = _AccessDetailsList.AddMember("member", AccessDetails)
-
-	AccessType_PROGRAMMATIC_ACCESS = AccessType.AddMember("PROGRAMMATIC_ACCESS", smithyprelude.Unit)
-
-	ProgrammaticAccessDetails_accessKeyId = ProgrammaticAccessDetails.AddMember("accessKeyId", smithyprelude.String)
-
-	ProgrammaticAccessDetails_secretAccessKey = ProgrammaticAccessDetails.AddMember("secretAccessKey", smithyprelude.String)
-
-	ProgrammaticAccessDetails_sessionToken = ProgrammaticAccessDetails.AddMember("sessionToken", smithyprelude.String)
-
-	ProgrammaticAccessDetails_expiresAt = ProgrammaticAccessDetails.AddMember("expiresAt", smithyprelude.Timestamp)
-
-	CredentialsDetails_programmaticAccess = CredentialsDetails.AddMember("programmaticAccess", ProgrammaticAccessDetails)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	GetRoleCredentialsRequest_tenantId = GetRoleCredentialsRequest.AddMember("tenantId", _TenantId, &smithytraits.HTTPQuery{Name: "tenantId"})
-
-	GetRoleCredentialsRequest_roleArn = GetRoleCredentialsRequest.AddMember("roleArn", smithyprelude.String, &smithytraits.HTTPQuery{Name: "roleArn"})
-
-	GetRoleCredentialsRequest_accessType = GetRoleCredentialsRequest.AddMember("accessType", AccessType, &smithytraits.HTTPQuery{Name: "accessType"})
-
-	GetRoleCredentialsRequest_sessionName = GetRoleCredentialsRequest.AddMember("sessionName", _SessionName, &smithytraits.HTTPQuery{Name: "sessionName"})
-
-	GetRoleCredentialsRequest_sessionDuration = GetRoleCredentialsRequest.AddMember("sessionDuration", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "sessionDuration"})
-
-	GetRoleCredentialsResponse_credentialsDetails = GetRoleCredentialsResponse.AddMember("credentialsDetails", CredentialsDetails)
-
-	ListRolesRequest_tenantId = ListRolesRequest.AddMember("tenantId", _TenantId, &smithytraits.HTTPQuery{Name: "tenantId"})
-
-	ListRolesRequest_maxResults = ListRolesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRolesRequest_nextToken = ListRolesRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRolesResponse_roles = ListRolesResponse.AddMember("roles", _AccessDetailsList)
-
-	ListRolesResponse_nextToken = ListRolesResponse.AddMember("nextToken", smithyprelude.String)
-
-}
+var AWSAccountAccessRuntime = &smithy.ServiceSchema{Schema: &s_AWSAccountAccessRuntime, Version: "2018-05-10"}

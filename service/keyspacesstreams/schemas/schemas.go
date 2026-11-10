@@ -4,758 +4,735 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetRecords",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetShardIterator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetShardIterator",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ListStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var _KeyspacesStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesStreams",
-}, smithy.ShapeTypeService, 0)
-
-var KeyspacesStreams = smithy.NewServiceSchema(_KeyspacesStreams, "2024-09-09")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
-		StatusCode: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
-		StatusCode: 500})
-var InternalServerException_message *smithy.Schema
-
-var IteratorDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "IteratorDescription",
-}, smithy.ShapeTypeStructure, 1)
-var IteratorDescription_iteratorPosition *smithy.Schema
-
-var IteratorPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "IteratorPosition",
-}, smithy.ShapeTypeEnum, 2)
-var IteratorPosition_AT_TIP *smithy.Schema
-
-var IteratorPosition_BEHIND_TIP *smithy.Schema
-
-var _KeyspaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspaceName",
-}, smithy.ShapeTypeString, 0)
-
-var KeyspacesCell = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesCell",
-}, smithy.ShapeTypeStructure, 2)
-var KeyspacesCell_value *smithy.Schema
-
-var KeyspacesCell_metadata *smithy.Schema
-
-var _KeyspacesCellList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesCellList",
-}, smithy.ShapeTypeList, 1)
-var _KeyspacesCellList_member *smithy.Schema
-
-var _KeyspacesCellMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesCellMap",
-}, smithy.ShapeTypeList, 1)
-var _KeyspacesCellMap_member *smithy.Schema
-
-var KeyspacesCellMapDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesCellMapDefinition",
-}, smithy.ShapeTypeStructure, 3)
-var KeyspacesCellMapDefinition_key *smithy.Schema
-
-var KeyspacesCellMapDefinition_value *smithy.Schema
-
-var KeyspacesCellMapDefinition_metadata *smithy.Schema
-
-var _KeyspacesCells = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesCells",
-}, smithy.ShapeTypeMap, 2)
-var _KeyspacesCells_key *smithy.Schema
-
-var _KeyspacesCells_value *smithy.Schema
-
-var KeyspacesCellValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesCellValue",
-}, smithy.ShapeTypeUnion, 26)
-var KeyspacesCellValue_asciiT *smithy.Schema
-
-var KeyspacesCellValue_bigintT *smithy.Schema
-
-var KeyspacesCellValue_blobT *smithy.Schema
-
-var KeyspacesCellValue_boolT *smithy.Schema
-
-var KeyspacesCellValue_counterT *smithy.Schema
-
-var KeyspacesCellValue_dateT *smithy.Schema
-
-var KeyspacesCellValue_decimalT *smithy.Schema
-
-var KeyspacesCellValue_doubleT *smithy.Schema
-
-var KeyspacesCellValue_durationT *smithy.Schema
-
-var KeyspacesCellValue_floatT *smithy.Schema
-
-var KeyspacesCellValue_inetT *smithy.Schema
-
-var KeyspacesCellValue_intT *smithy.Schema
-
-var KeyspacesCellValue_listT *smithy.Schema
-
-var KeyspacesCellValue_mapT *smithy.Schema
-
-var KeyspacesCellValue_setT *smithy.Schema
-
-var KeyspacesCellValue_smallintT *smithy.Schema
-
-var KeyspacesCellValue_textT *smithy.Schema
-
-var KeyspacesCellValue_timeT *smithy.Schema
-
-var KeyspacesCellValue_timestampT *smithy.Schema
-
-var KeyspacesCellValue_timeuuidT *smithy.Schema
-
-var KeyspacesCellValue_tinyintT *smithy.Schema
-
-var KeyspacesCellValue_tupleT *smithy.Schema
-
-var KeyspacesCellValue_uuidT *smithy.Schema
-
-var KeyspacesCellValue_varcharT *smithy.Schema
-
-var KeyspacesCellValue_varintT *smithy.Schema
-
-var KeyspacesCellValue_udtT *smithy.Schema
-
-var _KeyspacesKeysMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesKeysMap",
-}, smithy.ShapeTypeMap, 2)
-var _KeyspacesKeysMap_key *smithy.Schema
-
-var _KeyspacesKeysMap_value *smithy.Schema
-
-var KeyspacesMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var KeyspacesMetadata_expirationTime *smithy.Schema
-
-var KeyspacesMetadata_writeTime *smithy.Schema
-
-var KeyspacesRow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesRow",
-}, smithy.ShapeTypeStructure, 3)
-var KeyspacesRow_valueCells *smithy.Schema
-
-var KeyspacesRow_staticCells *smithy.Schema
-
-var KeyspacesRow_rowMetadata *smithy.Schema
-
-var _KeyspacesUdtMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "KeyspacesUdtMap",
-}, smithy.ShapeTypeMap, 2)
-var _KeyspacesUdtMap_key *smithy.Schema
-
-var _KeyspacesUdtMap_value *smithy.Schema
-
-var OriginType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "OriginType",
-}, smithy.ShapeTypeEnum, 3)
-var OriginType_USER *smithy.Schema
-
-var OriginType_REPLICATION *smithy.Schema
-
-var OriginType_TTL *smithy.Schema
-
-var Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "Record",
-}, smithy.ShapeTypeStructure, 8)
-var Record_eventVersion *smithy.Schema
-
-var Record_createdAt *smithy.Schema
-
-var Record_origin *smithy.Schema
-
-var Record_partitionKeys *smithy.Schema
-
-var Record_clusteringKeys *smithy.Schema
-
-var Record_newImage *smithy.Schema
-
-var Record_oldImage *smithy.Schema
-
-var Record_sequenceNumber *smithy.Schema
-
-var _RecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "RecordList",
-}, smithy.ShapeTypeList, 1)
-var _RecordList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _SequenceNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "SequenceNumber",
-}, smithy.ShapeTypeString, 0)
-
-var SequenceNumberRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "SequenceNumberRange",
-}, smithy.ShapeTypeStructure, 2)
-var SequenceNumberRange_startingSequenceNumber *smithy.Schema
-
-var SequenceNumberRange_endingSequenceNumber *smithy.Schema
-
-var Shard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "Shard",
-}, smithy.ShapeTypeStructure, 3)
-var Shard_shardId *smithy.Schema
-
-var Shard_sequenceNumberRange *smithy.Schema
-
-var Shard_parentShardIds *smithy.Schema
-
-var _ShardDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _ShardDescriptionList_member *smithy.Schema
-
-var ShardFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ShardFilter_type *smithy.Schema
-
-var ShardFilter_shardId *smithy.Schema
-
-var ShardFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardFilterType",
-}, smithy.ShapeTypeEnum, 1)
-var ShardFilterType_CHILD_SHARDS *smithy.Schema
-
-var _ShardId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardId",
-}, smithy.ShapeTypeString, 0)
-
-var _ShardIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardIdList",
-}, smithy.ShapeTypeList, 1)
-var _ShardIdList_member *smithy.Schema
-
-var _ShardIdToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardIdToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ShardIterator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardIterator",
-}, smithy.ShapeTypeString, 0)
-
-var ShardIteratorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ShardIteratorType",
-}, smithy.ShapeTypeEnum, 4)
-var ShardIteratorType_TRIM_HORIZON *smithy.Schema
-
-var ShardIteratorType_LATEST *smithy.Schema
-
-var ShardIteratorType_AT_SEQUENCE_NUMBER *smithy.Schema
-
-var ShardIteratorType_AFTER_SEQUENCE_NUMBER *smithy.Schema
-
-var Stream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "Stream",
-}, smithy.ShapeTypeStructure, 4)
-var Stream_streamArn *smithy.Schema
-
-var Stream_keyspaceName *smithy.Schema
-
-var Stream_tableName *smithy.Schema
-
-var Stream_streamLabel *smithy.Schema
-
-var _StreamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "StreamArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StreamArnToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "StreamArnToken",
-}, smithy.ShapeTypeString, 0)
-
-var _StreamList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "StreamList",
-}, smithy.ShapeTypeList, 1)
-var _StreamList_member *smithy.Schema
-
-var StreamStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "StreamStatus",
-}, smithy.ShapeTypeEnum, 4)
-var StreamStatus_ENABLING *smithy.Schema
-
-var StreamStatus_ENABLED *smithy.Schema
-
-var StreamStatus_DISABLING *smithy.Schema
-
-var StreamStatus_DISABLED *smithy.Schema
-
-var StreamViewType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "StreamViewType",
-}, smithy.ShapeTypeEnum, 4)
-var StreamViewType_NEW_IMAGE *smithy.Schema
-
-var StreamViewType_OLD_IMAGE *smithy.Schema
-
-var StreamViewType_NEW_AND_OLD_IMAGES *smithy.Schema
-
-var StreamViewType_KEYS_ONLY *smithy.Schema
-
-var _TableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "TableName",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
-		StatusCode: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_errorCode *smithy.Schema
-
-var ValidationExceptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ValidationExceptionType",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionType_InvalidFormat *smithy.Schema
-
-var ValidationExceptionType_TrimmedDataAccess *smithy.Schema
-
-var ValidationExceptionType_ExpiredIterator *smithy.Schema
-
-var ValidationExceptionType_ExpiredNextToken *smithy.Schema
-
-var GetRecordsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetRecordsInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecordsInput_shardIterator *smithy.Schema
-
-var GetRecordsInput_maxResults *smithy.Schema
-
-var GetRecordsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetRecordsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetRecordsOutput_changeRecords *smithy.Schema
-
-var GetRecordsOutput_nextShardIterator *smithy.Schema
-
-var GetRecordsOutput_iteratorDescription *smithy.Schema
-
-var GetShardIteratorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetShardIteratorInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetShardIteratorInput_streamArn *smithy.Schema
-
-var GetShardIteratorInput_shardId *smithy.Schema
-
-var GetShardIteratorInput_shardIteratorType *smithy.Schema
-
-var GetShardIteratorInput_sequenceNumber *smithy.Schema
-
-var GetShardIteratorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetShardIteratorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetShardIteratorOutput_shardIterator *smithy.Schema
-
-var GetStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetStreamInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetStreamInput_streamArn *smithy.Schema
-
-var GetStreamInput_maxResults *smithy.Schema
-
-var GetStreamInput_shardFilter *smithy.Schema
-
-var GetStreamInput_nextToken *smithy.Schema
-
-var GetStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "GetStreamOutput",
-}, smithy.ShapeTypeStructure, 9)
-var GetStreamOutput_streamArn *smithy.Schema
-
-var GetStreamOutput_streamLabel *smithy.Schema
-
-var GetStreamOutput_streamStatus *smithy.Schema
-
-var GetStreamOutput_streamViewType *smithy.Schema
-
-var GetStreamOutput_creationRequestDateTime *smithy.Schema
-
-var GetStreamOutput_keyspaceName *smithy.Schema
-
-var GetStreamOutput_tableName *smithy.Schema
-
-var GetStreamOutput_shards *smithy.Schema
-
-var GetStreamOutput_nextToken *smithy.Schema
-
-var ListStreamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ListStreamsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListStreamsInput_keyspaceName *smithy.Schema
-
-var ListStreamsInput_tableName *smithy.Schema
-
-var ListStreamsInput_maxResults *smithy.Schema
-
-var ListStreamsInput_nextToken *smithy.Schema
-
-var ListStreamsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspacesstreams",
-	Name:      "ListStreamsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamsOutput_streams *smithy.Schema
-
-var ListStreamsOutput_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	eGetRecords                                 smithy.SchemaExtensions
+	eGetShardIterator                           smithy.SchemaExtensions
+	eGetStream                                  smithy.SchemaExtensions
+	eListStreams                                smithy.SchemaExtensions
+	e_KeyspacesStreams                          smithy.SchemaExtensions
+	eAccessDeniedException                      smithy.SchemaExtensions
+	eAccessDeniedException_message              smithy.SchemaExtensions
+	e_Date                                      smithy.SchemaExtensions
+	eInternalServerException                    smithy.SchemaExtensions
+	eInternalServerException_message            smithy.SchemaExtensions
+	eIteratorDescription                        smithy.SchemaExtensions
+	eIteratorDescription_iteratorPosition       smithy.SchemaExtensions
+	eIteratorPosition                           smithy.SchemaExtensions
+	eIteratorPosition_AT_TIP                    smithy.SchemaExtensions
+	eIteratorPosition_BEHIND_TIP                smithy.SchemaExtensions
+	e_KeyspaceName                              smithy.SchemaExtensions
+	eKeyspacesCell                              smithy.SchemaExtensions
+	eKeyspacesCell_value                        smithy.SchemaExtensions
+	eKeyspacesCell_metadata                     smithy.SchemaExtensions
+	e_KeyspacesCellList                         smithy.SchemaExtensions
+	e_KeyspacesCellList_member                  smithy.SchemaExtensions
+	e_KeyspacesCellMap                          smithy.SchemaExtensions
+	e_KeyspacesCellMap_member                   smithy.SchemaExtensions
+	eKeyspacesCellMapDefinition                 smithy.SchemaExtensions
+	eKeyspacesCellMapDefinition_key             smithy.SchemaExtensions
+	eKeyspacesCellMapDefinition_value           smithy.SchemaExtensions
+	eKeyspacesCellMapDefinition_metadata        smithy.SchemaExtensions
+	e_KeyspacesCells                            smithy.SchemaExtensions
+	e_KeyspacesCells_key                        smithy.SchemaExtensions
+	e_KeyspacesCells_value                      smithy.SchemaExtensions
+	eKeyspacesCellValue                         smithy.SchemaExtensions
+	eKeyspacesCellValue_asciiT                  smithy.SchemaExtensions
+	eKeyspacesCellValue_bigintT                 smithy.SchemaExtensions
+	eKeyspacesCellValue_blobT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_boolT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_counterT                smithy.SchemaExtensions
+	eKeyspacesCellValue_dateT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_decimalT                smithy.SchemaExtensions
+	eKeyspacesCellValue_doubleT                 smithy.SchemaExtensions
+	eKeyspacesCellValue_durationT               smithy.SchemaExtensions
+	eKeyspacesCellValue_floatT                  smithy.SchemaExtensions
+	eKeyspacesCellValue_inetT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_intT                    smithy.SchemaExtensions
+	eKeyspacesCellValue_listT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_mapT                    smithy.SchemaExtensions
+	eKeyspacesCellValue_setT                    smithy.SchemaExtensions
+	eKeyspacesCellValue_smallintT               smithy.SchemaExtensions
+	eKeyspacesCellValue_textT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_timeT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_timestampT              smithy.SchemaExtensions
+	eKeyspacesCellValue_timeuuidT               smithy.SchemaExtensions
+	eKeyspacesCellValue_tinyintT                smithy.SchemaExtensions
+	eKeyspacesCellValue_tupleT                  smithy.SchemaExtensions
+	eKeyspacesCellValue_uuidT                   smithy.SchemaExtensions
+	eKeyspacesCellValue_varcharT                smithy.SchemaExtensions
+	eKeyspacesCellValue_varintT                 smithy.SchemaExtensions
+	eKeyspacesCellValue_udtT                    smithy.SchemaExtensions
+	e_KeyspacesKeysMap                          smithy.SchemaExtensions
+	e_KeyspacesKeysMap_key                      smithy.SchemaExtensions
+	e_KeyspacesKeysMap_value                    smithy.SchemaExtensions
+	eKeyspacesMetadata                          smithy.SchemaExtensions
+	eKeyspacesMetadata_expirationTime           smithy.SchemaExtensions
+	eKeyspacesMetadata_writeTime                smithy.SchemaExtensions
+	eKeyspacesRow                               smithy.SchemaExtensions
+	eKeyspacesRow_valueCells                    smithy.SchemaExtensions
+	eKeyspacesRow_staticCells                   smithy.SchemaExtensions
+	eKeyspacesRow_rowMetadata                   smithy.SchemaExtensions
+	e_KeyspacesUdtMap                           smithy.SchemaExtensions
+	e_KeyspacesUdtMap_key                       smithy.SchemaExtensions
+	e_KeyspacesUdtMap_value                     smithy.SchemaExtensions
+	eOriginType                                 smithy.SchemaExtensions
+	eOriginType_USER                            smithy.SchemaExtensions
+	eOriginType_REPLICATION                     smithy.SchemaExtensions
+	eOriginType_TTL                             smithy.SchemaExtensions
+	eRecord                                     smithy.SchemaExtensions
+	eRecord_eventVersion                        smithy.SchemaExtensions
+	eRecord_createdAt                           smithy.SchemaExtensions
+	eRecord_origin                              smithy.SchemaExtensions
+	eRecord_partitionKeys                       smithy.SchemaExtensions
+	eRecord_clusteringKeys                      smithy.SchemaExtensions
+	eRecord_newImage                            smithy.SchemaExtensions
+	eRecord_oldImage                            smithy.SchemaExtensions
+	eRecord_sequenceNumber                      smithy.SchemaExtensions
+	e_RecordList                                smithy.SchemaExtensions
+	e_RecordList_member                         smithy.SchemaExtensions
+	eResourceNotFoundException                  smithy.SchemaExtensions
+	eResourceNotFoundException_message          smithy.SchemaExtensions
+	e_SequenceNumber                            smithy.SchemaExtensions
+	eSequenceNumberRange                        smithy.SchemaExtensions
+	eSequenceNumberRange_startingSequenceNumber smithy.SchemaExtensions
+	eSequenceNumberRange_endingSequenceNumber   smithy.SchemaExtensions
+	eShard                                      smithy.SchemaExtensions
+	eShard_shardId                              smithy.SchemaExtensions
+	eShard_sequenceNumberRange                  smithy.SchemaExtensions
+	eShard_parentShardIds                       smithy.SchemaExtensions
+	e_ShardDescriptionList                      smithy.SchemaExtensions
+	e_ShardDescriptionList_member               smithy.SchemaExtensions
+	eShardFilter                                smithy.SchemaExtensions
+	eShardFilter_type                           smithy.SchemaExtensions
+	eShardFilter_shardId                        smithy.SchemaExtensions
+	eShardFilterType                            smithy.SchemaExtensions
+	eShardFilterType_CHILD_SHARDS               smithy.SchemaExtensions
+	e_ShardId                                   smithy.SchemaExtensions
+	e_ShardIdList                               smithy.SchemaExtensions
+	e_ShardIdList_member                        smithy.SchemaExtensions
+	e_ShardIdToken                              smithy.SchemaExtensions
+	e_ShardIterator                             smithy.SchemaExtensions
+	eShardIteratorType                          smithy.SchemaExtensions
+	eShardIteratorType_TRIM_HORIZON             smithy.SchemaExtensions
+	eShardIteratorType_LATEST                   smithy.SchemaExtensions
+	eShardIteratorType_AT_SEQUENCE_NUMBER       smithy.SchemaExtensions
+	eShardIteratorType_AFTER_SEQUENCE_NUMBER    smithy.SchemaExtensions
+	eStream                                     smithy.SchemaExtensions
+	eStream_streamArn                           smithy.SchemaExtensions
+	eStream_keyspaceName                        smithy.SchemaExtensions
+	eStream_tableName                           smithy.SchemaExtensions
+	eStream_streamLabel                         smithy.SchemaExtensions
+	e_StreamArn                                 smithy.SchemaExtensions
+	e_StreamArnToken                            smithy.SchemaExtensions
+	e_StreamList                                smithy.SchemaExtensions
+	e_StreamList_member                         smithy.SchemaExtensions
+	eStreamStatus                               smithy.SchemaExtensions
+	eStreamStatus_ENABLING                      smithy.SchemaExtensions
+	eStreamStatus_ENABLED                       smithy.SchemaExtensions
+	eStreamStatus_DISABLING                     smithy.SchemaExtensions
+	eStreamStatus_DISABLED                      smithy.SchemaExtensions
+	eStreamViewType                             smithy.SchemaExtensions
+	eStreamViewType_NEW_IMAGE                   smithy.SchemaExtensions
+	eStreamViewType_OLD_IMAGE                   smithy.SchemaExtensions
+	eStreamViewType_NEW_AND_OLD_IMAGES          smithy.SchemaExtensions
+	eStreamViewType_KEYS_ONLY                   smithy.SchemaExtensions
+	e_TableName                                 smithy.SchemaExtensions
+	eThrottlingException                        smithy.SchemaExtensions
+	eThrottlingException_message                smithy.SchemaExtensions
+	eValidationException                        smithy.SchemaExtensions
+	eValidationException_message                smithy.SchemaExtensions
+	eValidationException_errorCode              smithy.SchemaExtensions
+	eValidationExceptionType                    smithy.SchemaExtensions
+	eValidationExceptionType_InvalidFormat      smithy.SchemaExtensions
+	eValidationExceptionType_TrimmedDataAccess  smithy.SchemaExtensions
+	eValidationExceptionType_ExpiredIterator    smithy.SchemaExtensions
+	eValidationExceptionType_ExpiredNextToken   smithy.SchemaExtensions
+	eGetRecordsInput                            smithy.SchemaExtensions
+	eGetRecordsInput_shardIterator              smithy.SchemaExtensions
+	eGetRecordsInput_maxResults                 smithy.SchemaExtensions
+	eGetRecordsOutput                           smithy.SchemaExtensions
+	eGetRecordsOutput_changeRecords             smithy.SchemaExtensions
+	eGetRecordsOutput_nextShardIterator         smithy.SchemaExtensions
+	eGetRecordsOutput_iteratorDescription       smithy.SchemaExtensions
+	eGetShardIteratorInput                      smithy.SchemaExtensions
+	eGetShardIteratorInput_streamArn            smithy.SchemaExtensions
+	eGetShardIteratorInput_shardId              smithy.SchemaExtensions
+	eGetShardIteratorInput_shardIteratorType    smithy.SchemaExtensions
+	eGetShardIteratorInput_sequenceNumber       smithy.SchemaExtensions
+	eGetShardIteratorOutput                     smithy.SchemaExtensions
+	eGetShardIteratorOutput_shardIterator       smithy.SchemaExtensions
+	eGetStreamInput                             smithy.SchemaExtensions
+	eGetStreamInput_streamArn                   smithy.SchemaExtensions
+	eGetStreamInput_maxResults                  smithy.SchemaExtensions
+	eGetStreamInput_shardFilter                 smithy.SchemaExtensions
+	eGetStreamInput_nextToken                   smithy.SchemaExtensions
+	eGetStreamOutput                            smithy.SchemaExtensions
+	eGetStreamOutput_streamArn                  smithy.SchemaExtensions
+	eGetStreamOutput_streamLabel                smithy.SchemaExtensions
+	eGetStreamOutput_streamStatus               smithy.SchemaExtensions
+	eGetStreamOutput_streamViewType             smithy.SchemaExtensions
+	eGetStreamOutput_creationRequestDateTime    smithy.SchemaExtensions
+	eGetStreamOutput_keyspaceName               smithy.SchemaExtensions
+	eGetStreamOutput_tableName                  smithy.SchemaExtensions
+	eGetStreamOutput_shards                     smithy.SchemaExtensions
+	eGetStreamOutput_nextToken                  smithy.SchemaExtensions
+	eListStreamsInput                           smithy.SchemaExtensions
+	eListStreamsInput_keyspaceName              smithy.SchemaExtensions
+	eListStreamsInput_tableName                 smithy.SchemaExtensions
+	eListStreamsInput_maxResults                smithy.SchemaExtensions
+	eListStreamsInput_nextToken                 smithy.SchemaExtensions
+	eListStreamsOutput                          smithy.SchemaExtensions
+	eListStreamsOutput_streams                  smithy.SchemaExtensions
+	eListStreamsOutput_nextToken                smithy.SchemaExtensions
+)
+
+var (
+	iGetRecords                 = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetRecords"}
+	iGetShardIterator           = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetShardIterator"}
+	iGetStream                  = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetStream"}
+	iListStreams                = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ListStreams"}
+	i_KeyspacesStreams          = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesStreams"}
+	iAccessDeniedException      = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "AccessDeniedException"}
+	i_Date                      = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "Date"}
+	iInternalServerException    = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "InternalServerException"}
+	iIteratorDescription        = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "IteratorDescription"}
+	iIteratorPosition           = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "IteratorPosition"}
+	i_KeyspaceName              = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspaceName"}
+	iKeyspacesCell              = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesCell"}
+	i_KeyspacesCellList         = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesCellList"}
+	i_KeyspacesCellMap          = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesCellMap"}
+	iKeyspacesCellMapDefinition = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesCellMapDefinition"}
+	i_KeyspacesCells            = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesCells"}
+	iKeyspacesCellValue         = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesCellValue"}
+	i_KeyspacesKeysMap          = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesKeysMap"}
+	iKeyspacesMetadata          = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesMetadata"}
+	iKeyspacesRow               = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesRow"}
+	i_KeyspacesUdtMap           = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "KeyspacesUdtMap"}
+	iOriginType                 = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "OriginType"}
+	iRecord                     = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "Record"}
+	i_RecordList                = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "RecordList"}
+	iResourceNotFoundException  = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ResourceNotFoundException"}
+	i_SequenceNumber            = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "SequenceNumber"}
+	iSequenceNumberRange        = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "SequenceNumberRange"}
+	iShard                      = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "Shard"}
+	i_ShardDescriptionList      = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardDescriptionList"}
+	iShardFilter                = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardFilter"}
+	iShardFilterType            = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardFilterType"}
+	i_ShardId                   = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardId"}
+	i_ShardIdList               = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardIdList"}
+	i_ShardIdToken              = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardIdToken"}
+	i_ShardIterator             = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardIterator"}
+	iShardIteratorType          = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ShardIteratorType"}
+	iStream                     = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "Stream"}
+	i_StreamArn                 = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "StreamArn"}
+	i_StreamArnToken            = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "StreamArnToken"}
+	i_StreamList                = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "StreamList"}
+	iStreamStatus               = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "StreamStatus"}
+	iStreamViewType             = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "StreamViewType"}
+	i_TableName                 = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "TableName"}
+	iThrottlingException        = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ThrottlingException"}
+	iValidationException        = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ValidationException"}
+	iValidationExceptionType    = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ValidationExceptionType"}
+	iGetRecordsInput            = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetRecordsInput"}
+	iGetRecordsOutput           = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetRecordsOutput"}
+	iGetShardIteratorInput      = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetShardIteratorInput"}
+	iGetShardIteratorOutput     = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetShardIteratorOutput"}
+	iGetStreamInput             = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetStreamInput"}
+	iGetStreamOutput            = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "GetStreamOutput"}
+	iListStreamsInput           = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ListStreamsInput"}
+	iListStreamsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.keyspacesstreams", Name: "ListStreamsOutput"}
+	pString                     = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBlob                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Blob"}
+	pBoolean                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mIteratorDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sIteratorDescription_iteratorPosition}}
+var mIteratorPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sIteratorPosition_AT_TIP, &sIteratorPosition_BEHIND_TIP}}
+var mKeyspacesCell = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyspacesCell_value, &sKeyspacesCell_metadata}}
+var m_KeyspacesCellList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyspacesCellList_member}}
+var m_KeyspacesCellMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyspacesCellMap_member}}
+var mKeyspacesCellMapDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyspacesCellMapDefinition_key, &sKeyspacesCellMapDefinition_value, &sKeyspacesCellMapDefinition_metadata}}
+var m_KeyspacesCells = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyspacesCells_key, &s_KeyspacesCells_value}}
+var mKeyspacesCellValue = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyspacesCellValue_asciiT, &sKeyspacesCellValue_bigintT, &sKeyspacesCellValue_blobT, &sKeyspacesCellValue_boolT, &sKeyspacesCellValue_counterT, &sKeyspacesCellValue_dateT, &sKeyspacesCellValue_decimalT, &sKeyspacesCellValue_doubleT, &sKeyspacesCellValue_durationT, &sKeyspacesCellValue_floatT, &sKeyspacesCellValue_inetT, &sKeyspacesCellValue_intT, &sKeyspacesCellValue_listT, &sKeyspacesCellValue_mapT, &sKeyspacesCellValue_setT, &sKeyspacesCellValue_smallintT, &sKeyspacesCellValue_textT, &sKeyspacesCellValue_timeT, &sKeyspacesCellValue_timestampT, &sKeyspacesCellValue_timeuuidT, &sKeyspacesCellValue_tinyintT, &sKeyspacesCellValue_tupleT, &sKeyspacesCellValue_uuidT, &sKeyspacesCellValue_varcharT, &sKeyspacesCellValue_varintT, &sKeyspacesCellValue_udtT}, Hash: &hKeyspacesCellValue}
+var m_KeyspacesKeysMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyspacesKeysMap_key, &s_KeyspacesKeysMap_value}}
+var mKeyspacesMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyspacesMetadata_expirationTime, &sKeyspacesMetadata_writeTime}}
+var mKeyspacesRow = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyspacesRow_valueCells, &sKeyspacesRow_staticCells, &sKeyspacesRow_rowMetadata}}
+var m_KeyspacesUdtMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyspacesUdtMap_key, &s_KeyspacesUdtMap_value}}
+var mOriginType = smithy.SchemaMembers{List: []*smithy.Schema{&sOriginType_USER, &sOriginType_REPLICATION, &sOriginType_TTL}}
+var mRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRecord_eventVersion, &sRecord_createdAt, &sRecord_origin, &sRecord_partitionKeys, &sRecord_clusteringKeys, &sRecord_newImage, &sRecord_oldImage, &sRecord_sequenceNumber}}
+var m_RecordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecordList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mSequenceNumberRange = smithy.SchemaMembers{List: []*smithy.Schema{&sSequenceNumberRange_startingSequenceNumber, &sSequenceNumberRange_endingSequenceNumber}}
+var mShard = smithy.SchemaMembers{List: []*smithy.Schema{&sShard_shardId, &sShard_sequenceNumberRange, &sShard_parentShardIds}}
+var m_ShardDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShardDescriptionList_member}}
+var mShardFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sShardFilter_type, &sShardFilter_shardId}}
+var mShardFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sShardFilterType_CHILD_SHARDS}}
+var m_ShardIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShardIdList_member}}
+var mShardIteratorType = smithy.SchemaMembers{List: []*smithy.Schema{&sShardIteratorType_TRIM_HORIZON, &sShardIteratorType_LATEST, &sShardIteratorType_AT_SEQUENCE_NUMBER, &sShardIteratorType_AFTER_SEQUENCE_NUMBER}}
+var mStream = smithy.SchemaMembers{List: []*smithy.Schema{&sStream_streamArn, &sStream_keyspaceName, &sStream_tableName, &sStream_streamLabel}}
+var m_StreamList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamList_member}}
+var mStreamStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamStatus_ENABLING, &sStreamStatus_ENABLED, &sStreamStatus_DISABLING, &sStreamStatus_DISABLED}}
+var mStreamViewType = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamViewType_NEW_IMAGE, &sStreamViewType_OLD_IMAGE, &sStreamViewType_NEW_AND_OLD_IMAGES, &sStreamViewType_KEYS_ONLY}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_errorCode}}
+var mValidationExceptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionType_InvalidFormat, &sValidationExceptionType_TrimmedDataAccess, &sValidationExceptionType_ExpiredIterator, &sValidationExceptionType_ExpiredNextToken}}
+var mGetRecordsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordsInput_shardIterator, &sGetRecordsInput_maxResults}}
+var mGetRecordsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordsOutput_changeRecords, &sGetRecordsOutput_nextShardIterator, &sGetRecordsOutput_iteratorDescription}}
+var mGetShardIteratorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetShardIteratorInput_streamArn, &sGetShardIteratorInput_shardId, &sGetShardIteratorInput_shardIteratorType, &sGetShardIteratorInput_sequenceNumber}}
+var mGetShardIteratorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetShardIteratorOutput_shardIterator}}
+var mGetStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamInput_streamArn, &sGetStreamInput_maxResults, &sGetStreamInput_shardFilter, &sGetStreamInput_nextToken}}
+var mGetStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamOutput_streamArn, &sGetStreamOutput_streamLabel, &sGetStreamOutput_streamStatus, &sGetStreamOutput_streamViewType, &sGetStreamOutput_creationRequestDateTime, &sGetStreamOutput_keyspaceName, &sGetStreamOutput_tableName, &sGetStreamOutput_shards, &sGetStreamOutput_nextToken}, Hash: &hGetStreamOutput}
+var mListStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsInput_keyspaceName, &sListStreamsInput_tableName, &sListStreamsInput_maxResults, &sListStreamsInput_nextToken}}
+var mListStreamsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsOutput_streams, &sListStreamsOutput_nextToken}}
+
+var hKeyspacesCellValue = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	11, 0, 12, 21, 4, 26, 0, 23, 0, 0, 0, 20, 0, 5, 0, 0, 19, 8, 0, 0, 0, 0, 3, 7,
+	13, 0, 1, 0, 0, 0, 0, 25, 0, 0, 0, 18, 16, 0, 0, 0, 0, 0, 0, 6, 0, 9, 0, 0,
+	0, 0, 10, 2, 22, 17, 0, 24, 0, 0, 0, 14, 0, 15, 0, 0,
+}}
+var hGetStreamOutput = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 1, 0, 0, 4, 0, 0, 6, 2, 0, 0, 3, 5, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 7,
+	0, 9, 0, 0, 0, 0, 0, 0,
+}}
+
+var sGetRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecords, Type: smithy.ShapeTypeOperation, Ext: &eGetRecords})
+var sGetShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIterator, Type: smithy.ShapeTypeOperation, Ext: &eGetShardIterator})
+var sGetStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStream, Type: smithy.ShapeTypeOperation, Ext: &eGetStream})
+var sListStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreams, Type: smithy.ShapeTypeOperation, Ext: &eListStreams})
+var s_KeyspacesStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspacesStreams, Type: smithy.ShapeTypeService, Ext: &e_KeyspacesStreams})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sIteratorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIteratorDescription, Members: &mIteratorDescription, Type: smithy.ShapeTypeStructure, Ext: &eIteratorDescription})
+var sIteratorDescription_iteratorPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iteratorPosition", ID: &iIteratorPosition, Members: &mIteratorPosition, Type: smithy.ShapeTypeEnum, Ext: &eIteratorDescription_iteratorPosition})
+var sIteratorPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIteratorPosition, Members: &mIteratorPosition, Type: smithy.ShapeTypeEnum, Ext: &eIteratorPosition})
+var sIteratorPosition_AT_TIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_TIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIteratorPosition_AT_TIP})
+var sIteratorPosition_BEHIND_TIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEHIND_TIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIteratorPosition_BEHIND_TIP})
+var s_KeyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspaceName, Type: smithy.ShapeTypeString, Ext: &e_KeyspaceName})
+var sKeyspacesCell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyspacesCell, Members: &mKeyspacesCell, Type: smithy.ShapeTypeStructure, Ext: &eKeyspacesCell})
+var sKeyspacesCell_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iKeyspacesCellValue, Members: &mKeyspacesCellValue, Type: smithy.ShapeTypeUnion, Ext: &eKeyspacesCell_value})
+var sKeyspacesCell_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iKeyspacesMetadata, Members: &mKeyspacesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eKeyspacesCell_metadata})
+var s_KeyspacesCellList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspacesCellList, Members: &m_KeyspacesCellList, Type: smithy.ShapeTypeList, Ext: &e_KeyspacesCellList})
+var s_KeyspacesCellList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyspacesCell, Type: smithy.ShapeTypeStructure, Ext: &e_KeyspacesCellList_member})
+var s_KeyspacesCellMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspacesCellMap, Members: &m_KeyspacesCellMap, Type: smithy.ShapeTypeList, Ext: &e_KeyspacesCellMap})
+var s_KeyspacesCellMap_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyspacesCellMapDefinition, Members: &mKeyspacesCellMapDefinition, Type: smithy.ShapeTypeStructure, Ext: &e_KeyspacesCellMap_member})
+var sKeyspacesCellMapDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyspacesCellMapDefinition, Members: &mKeyspacesCellMapDefinition, Type: smithy.ShapeTypeStructure, Ext: &eKeyspacesCellMapDefinition})
+var sKeyspacesCellMapDefinition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iKeyspacesCellValue, Type: smithy.ShapeTypeUnion, Ext: &eKeyspacesCellMapDefinition_key})
+var sKeyspacesCellMapDefinition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iKeyspacesCellValue, Type: smithy.ShapeTypeUnion, Ext: &eKeyspacesCellMapDefinition_value})
+var sKeyspacesCellMapDefinition_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iKeyspacesMetadata, Members: &mKeyspacesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eKeyspacesCellMapDefinition_metadata})
+var s_KeyspacesCells = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspacesCells, Members: &m_KeyspacesCells, Type: smithy.ShapeTypeMap, Ext: &e_KeyspacesCells})
+var s_KeyspacesCells_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_KeyspacesCells_key})
+var s_KeyspacesCells_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iKeyspacesCell, Members: &mKeyspacesCell, Type: smithy.ShapeTypeStructure, Ext: &e_KeyspacesCells_value})
+var sKeyspacesCellValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyspacesCellValue, Members: &mKeyspacesCellValue, Type: smithy.ShapeTypeUnion, Ext: &eKeyspacesCellValue})
+var sKeyspacesCellValue_asciiT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asciiT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_asciiT})
+var sKeyspacesCellValue_bigintT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bigintT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_bigintT})
+var sKeyspacesCellValue_blobT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobT", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eKeyspacesCellValue_blobT})
+var sKeyspacesCellValue_boolT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "boolT", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eKeyspacesCellValue_boolT})
+var sKeyspacesCellValue_counterT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "counterT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_counterT})
+var sKeyspacesCellValue_dateT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dateT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_dateT})
+var sKeyspacesCellValue_decimalT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decimalT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_decimalT})
+var sKeyspacesCellValue_doubleT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_doubleT})
+var sKeyspacesCellValue_durationT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_durationT})
+var sKeyspacesCellValue_floatT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_floatT})
+var sKeyspacesCellValue_inetT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inetT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_inetT})
+var sKeyspacesCellValue_intT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_intT})
+var sKeyspacesCellValue_listT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listT", ID: &i_KeyspacesCellList, Members: &m_KeyspacesCellList, Type: smithy.ShapeTypeList, Ext: &eKeyspacesCellValue_listT})
+var sKeyspacesCellValue_mapT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mapT", ID: &i_KeyspacesCellMap, Members: &m_KeyspacesCellMap, Type: smithy.ShapeTypeList, Ext: &eKeyspacesCellValue_mapT})
+var sKeyspacesCellValue_setT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "setT", ID: &i_KeyspacesCellList, Members: &m_KeyspacesCellList, Type: smithy.ShapeTypeList, Ext: &eKeyspacesCellValue_setT})
+var sKeyspacesCellValue_smallintT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "smallintT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_smallintT})
+var sKeyspacesCellValue_textT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_textT})
+var sKeyspacesCellValue_timeT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_timeT})
+var sKeyspacesCellValue_timestampT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_timestampT})
+var sKeyspacesCellValue_timeuuidT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeuuidT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_timeuuidT})
+var sKeyspacesCellValue_tinyintT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tinyintT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_tinyintT})
+var sKeyspacesCellValue_tupleT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tupleT", ID: &i_KeyspacesCellList, Members: &m_KeyspacesCellList, Type: smithy.ShapeTypeList, Ext: &eKeyspacesCellValue_tupleT})
+var sKeyspacesCellValue_uuidT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uuidT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_uuidT})
+var sKeyspacesCellValue_varcharT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "varcharT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_varcharT})
+var sKeyspacesCellValue_varintT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "varintT", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesCellValue_varintT})
+var sKeyspacesCellValue_udtT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "udtT", ID: &i_KeyspacesUdtMap, Members: &m_KeyspacesUdtMap, Type: smithy.ShapeTypeMap, Ext: &eKeyspacesCellValue_udtT})
+var s_KeyspacesKeysMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspacesKeysMap, Members: &m_KeyspacesKeysMap, Type: smithy.ShapeTypeMap, Ext: &e_KeyspacesKeysMap})
+var s_KeyspacesKeysMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_KeyspacesKeysMap_key})
+var s_KeyspacesKeysMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iKeyspacesCellValue, Members: &mKeyspacesCellValue, Type: smithy.ShapeTypeUnion, Ext: &e_KeyspacesKeysMap_value})
+var sKeyspacesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyspacesMetadata, Members: &mKeyspacesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eKeyspacesMetadata})
+var sKeyspacesMetadata_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesMetadata_expirationTime})
+var sKeyspacesMetadata_writeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeTime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKeyspacesMetadata_writeTime})
+var sKeyspacesRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyspacesRow, Members: &mKeyspacesRow, Type: smithy.ShapeTypeStructure, Ext: &eKeyspacesRow})
+var sKeyspacesRow_valueCells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueCells", ID: &i_KeyspacesCells, Members: &m_KeyspacesCells, Type: smithy.ShapeTypeMap, Ext: &eKeyspacesRow_valueCells})
+var sKeyspacesRow_staticCells = smithy.NewStaticSchema(smithy.StaticSchema{Member: "staticCells", ID: &i_KeyspacesCells, Members: &m_KeyspacesCells, Type: smithy.ShapeTypeMap, Ext: &eKeyspacesRow_staticCells})
+var sKeyspacesRow_rowMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rowMetadata", ID: &iKeyspacesMetadata, Members: &mKeyspacesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eKeyspacesRow_rowMetadata})
+var s_KeyspacesUdtMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspacesUdtMap, Members: &m_KeyspacesUdtMap, Type: smithy.ShapeTypeMap, Ext: &e_KeyspacesUdtMap})
+var s_KeyspacesUdtMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_KeyspacesUdtMap_key})
+var s_KeyspacesUdtMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iKeyspacesCell, Type: smithy.ShapeTypeStructure, Ext: &e_KeyspacesUdtMap_value})
+var sOriginType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &eOriginType})
+var sOriginType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginType_USER})
+var sOriginType_REPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginType_REPLICATION})
+var sOriginType_TTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginType_TTL})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &eRecord})
+var sRecord_eventVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecord_eventVersion})
+var sRecord_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eRecord_createdAt})
+var sRecord_origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "origin", ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &eRecord_origin})
+var sRecord_partitionKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partitionKeys", ID: &i_KeyspacesKeysMap, Members: &m_KeyspacesKeysMap, Type: smithy.ShapeTypeMap, Ext: &eRecord_partitionKeys})
+var sRecord_clusteringKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusteringKeys", ID: &i_KeyspacesKeysMap, Members: &m_KeyspacesKeysMap, Type: smithy.ShapeTypeMap, Ext: &eRecord_clusteringKeys})
+var sRecord_newImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newImage", ID: &iKeyspacesRow, Members: &mKeyspacesRow, Type: smithy.ShapeTypeStructure, Ext: &eRecord_newImage})
+var sRecord_oldImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oldImage", ID: &iKeyspacesRow, Members: &mKeyspacesRow, Type: smithy.ShapeTypeStructure, Ext: &eRecord_oldImage})
+var sRecord_sequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eRecord_sequenceNumber})
+var s_RecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &e_RecordList})
+var s_RecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &e_RecordList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &e_SequenceNumber})
+var sSequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure, Ext: &eSequenceNumberRange})
+var sSequenceNumberRange_startingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eSequenceNumberRange_startingSequenceNumber})
+var sSequenceNumberRange_endingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eSequenceNumberRange_endingSequenceNumber})
+var sShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure, Ext: &eShard})
+var sShard_shardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eShard_shardId})
+var sShard_sequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sequenceNumberRange", ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure, Ext: &eShard_sequenceNumberRange})
+var sShard_parentShardIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentShardIds", ID: &i_ShardIdList, Members: &m_ShardIdList, Type: smithy.ShapeTypeList, Ext: &eShard_parentShardIds})
+var s_ShardDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_ShardDescriptionList})
+var s_ShardDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure, Ext: &e_ShardDescriptionList_member})
+var sShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure, Ext: &eShardFilter})
+var sShardFilter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum, Ext: &eShardFilter_type})
+var sShardFilter_shardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eShardFilter_shardId})
+var sShardFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum, Ext: &eShardFilterType})
+var sShardFilterType_CHILD_SHARDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD_SHARDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardFilterType_CHILD_SHARDS})
+var s_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &e_ShardId})
+var s_ShardIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIdList, Members: &m_ShardIdList, Type: smithy.ShapeTypeList, Ext: &e_ShardIdList})
+var s_ShardIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &e_ShardIdList_member})
+var s_ShardIdToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIdToken, Type: smithy.ShapeTypeString, Ext: &e_ShardIdToken})
+var s_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &e_ShardIterator})
+var sShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum, Ext: &eShardIteratorType})
+var sShardIteratorType_TRIM_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRIM_HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_TRIM_HORIZON})
+var sShardIteratorType_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_LATEST})
+var sShardIteratorType_AT_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_AT_SEQUENCE_NUMBER})
+var sShardIteratorType_AFTER_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_AFTER_SEQUENCE_NUMBER})
+var sStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &eStream})
+var sStream_streamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eStream_streamArn})
+var sStream_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString, Ext: &eStream_keyspaceName})
+var sStream_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eStream_tableName})
+var sStream_streamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamLabel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStream_streamLabel})
+var s_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &e_StreamArn})
+var s_StreamArnToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamArnToken, Type: smithy.ShapeTypeString, Ext: &e_StreamArnToken})
+var s_StreamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &e_StreamList})
+var s_StreamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &e_StreamList_member})
+var sStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamStatus})
+var sStreamStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_ENABLING})
+var sStreamStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_ENABLED})
+var sStreamStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_DISABLING})
+var sStreamStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_DISABLED})
+var sStreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &eStreamViewType})
+var sStreamViewType_NEW_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_NEW_IMAGE})
+var sStreamViewType_OLD_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OLD_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_OLD_IMAGE})
+var sStreamViewType_NEW_AND_OLD_IMAGES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_AND_OLD_IMAGES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_NEW_AND_OLD_IMAGES})
+var sStreamViewType_KEYS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEYS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_KEYS_ONLY})
+var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &e_TableName})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iValidationExceptionType, Members: &mValidationExceptionType, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_errorCode})
+var sValidationExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionType, Members: &mValidationExceptionType, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionType})
+var sValidationExceptionType_InvalidFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidFormat", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionType_InvalidFormat})
+var sValidationExceptionType_TrimmedDataAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrimmedDataAccess", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionType_TrimmedDataAccess})
+var sValidationExceptionType_ExpiredIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiredIterator", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionType_ExpiredIterator})
+var sValidationExceptionType_ExpiredNextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiredNextToken", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionType_ExpiredNextToken})
+var sGetRecordsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsInput, Members: &mGetRecordsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordsInput})
+var sGetRecordsInput_shardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &eGetRecordsInput_shardIterator})
+var sGetRecordsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetRecordsInput_maxResults})
+var sGetRecordsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsOutput, Members: &mGetRecordsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordsOutput})
+var sGetRecordsOutput_changeRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeRecords", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &eGetRecordsOutput_changeRecords})
+var sGetRecordsOutput_nextShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &eGetRecordsOutput_nextShardIterator})
+var sGetRecordsOutput_iteratorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iteratorDescription", ID: &iIteratorDescription, Members: &mIteratorDescription, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordsOutput_iteratorDescription})
+var sGetShardIteratorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorInput, Members: &mGetShardIteratorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetShardIteratorInput})
+var sGetShardIteratorInput_streamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorInput_streamArn})
+var sGetShardIteratorInput_shardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorInput_shardId})
+var sGetShardIteratorInput_shardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardIteratorType", ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum, Ext: &eGetShardIteratorInput_shardIteratorType})
+var sGetShardIteratorInput_sequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorInput_sequenceNumber})
+var sGetShardIteratorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorOutput, Members: &mGetShardIteratorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetShardIteratorOutput})
+var sGetShardIteratorOutput_shardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorOutput_shardIterator})
+var sGetStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamInput, Members: &mGetStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamInput})
+var sGetStreamInput_streamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eGetStreamInput_streamArn})
+var sGetStreamInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetStreamInput_maxResults})
+var sGetStreamInput_shardFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardFilter", ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamInput_shardFilter})
+var sGetStreamInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ShardIdToken, Type: smithy.ShapeTypeString, Ext: &eGetStreamInput_nextToken})
+var sGetStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamOutput, Members: &mGetStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamOutput})
+var sGetStreamOutput_streamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eGetStreamOutput_streamArn})
+var sGetStreamOutput_streamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamLabel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetStreamOutput_streamLabel})
+var sGetStreamOutput_streamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamStatus", ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamOutput_streamStatus})
+var sGetStreamOutput_streamViewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamViewType", ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamOutput_streamViewType})
+var sGetStreamOutput_creationRequestDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationRequestDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamOutput_creationRequestDateTime})
+var sGetStreamOutput_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString, Ext: &eGetStreamOutput_keyspaceName})
+var sGetStreamOutput_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eGetStreamOutput_tableName})
+var sGetStreamOutput_shards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shards", ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList, Ext: &eGetStreamOutput_shards})
+var sGetStreamOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ShardIdToken, Type: smithy.ShapeTypeString, Ext: &eGetStreamOutput_nextToken})
+var sListStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsInput, Members: &mListStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamsInput})
+var sListStreamsInput_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString, Ext: &eListStreamsInput_keyspaceName})
+var sListStreamsInput_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eListStreamsInput_tableName})
+var sListStreamsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListStreamsInput_maxResults})
+var sListStreamsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_StreamArnToken, Type: smithy.ShapeTypeString, Ext: &eListStreamsInput_nextToken})
+var sListStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsOutput, Members: &mListStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamsOutput})
+var sListStreamsOutput_streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streams", ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &eListStreamsOutput_streams})
+var sListStreamsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_StreamArnToken, Type: smithy.ShapeTypeString, Ext: &eListStreamsOutput_nextToken})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	IteratorPosition_AT_TIP = IteratorPosition.AddMember("AT_TIP", smithyprelude.Unit)
-
-	IteratorPosition_BEHIND_TIP = IteratorPosition.AddMember("BEHIND_TIP", smithyprelude.Unit)
-
-	IteratorDescription_iteratorPosition = IteratorDescription.AddMember("iteratorPosition", IteratorPosition)
-
-	_KeyspacesCellList_member = _KeyspacesCellList.AddMember("member", KeyspacesCell)
-
-	KeyspacesMetadata_expirationTime = KeyspacesMetadata.AddMember("expirationTime", smithyprelude.String)
-
-	KeyspacesMetadata_writeTime = KeyspacesMetadata.AddMember("writeTime", smithyprelude.String)
-
-	KeyspacesCellMapDefinition_key = KeyspacesCellMapDefinition.AddMember("key", KeyspacesCellValue)
-
-	KeyspacesCellMapDefinition_value = KeyspacesCellMapDefinition.AddMember("value", KeyspacesCellValue)
-
-	KeyspacesCellMapDefinition_metadata = KeyspacesCellMapDefinition.AddMember("metadata", KeyspacesMetadata)
-
-	_KeyspacesCellMap_member = _KeyspacesCellMap.AddMember("member", KeyspacesCellMapDefinition)
-
-	_KeyspacesUdtMap_key = _KeyspacesUdtMap.AddMember("key", smithyprelude.String)
-
-	_KeyspacesUdtMap_value = _KeyspacesUdtMap.AddMember("value", KeyspacesCell)
-
-	KeyspacesCellValue_asciiT = KeyspacesCellValue.AddMember("asciiT", smithyprelude.String)
-
-	KeyspacesCellValue_bigintT = KeyspacesCellValue.AddMember("bigintT", smithyprelude.String)
-
-	KeyspacesCellValue_blobT = KeyspacesCellValue.AddMember("blobT", smithyprelude.Blob)
-
-	KeyspacesCellValue_boolT = KeyspacesCellValue.AddMember("boolT", smithyprelude.Boolean)
-
-	KeyspacesCellValue_counterT = KeyspacesCellValue.AddMember("counterT", smithyprelude.String)
-
-	KeyspacesCellValue_dateT = KeyspacesCellValue.AddMember("dateT", smithyprelude.String)
-
-	KeyspacesCellValue_decimalT = KeyspacesCellValue.AddMember("decimalT", smithyprelude.String)
-
-	KeyspacesCellValue_doubleT = KeyspacesCellValue.AddMember("doubleT", smithyprelude.String)
-
-	KeyspacesCellValue_durationT = KeyspacesCellValue.AddMember("durationT", smithyprelude.String)
-
-	KeyspacesCellValue_floatT = KeyspacesCellValue.AddMember("floatT", smithyprelude.String)
-
-	KeyspacesCellValue_inetT = KeyspacesCellValue.AddMember("inetT", smithyprelude.String)
-
-	KeyspacesCellValue_intT = KeyspacesCellValue.AddMember("intT", smithyprelude.String)
-
-	KeyspacesCellValue_listT = KeyspacesCellValue.AddMember("listT", _KeyspacesCellList)
-
-	KeyspacesCellValue_mapT = KeyspacesCellValue.AddMember("mapT", _KeyspacesCellMap)
-
-	KeyspacesCellValue_setT = KeyspacesCellValue.AddMember("setT", _KeyspacesCellList)
-
-	KeyspacesCellValue_smallintT = KeyspacesCellValue.AddMember("smallintT", smithyprelude.String)
-
-	KeyspacesCellValue_textT = KeyspacesCellValue.AddMember("textT", smithyprelude.String)
-
-	KeyspacesCellValue_timeT = KeyspacesCellValue.AddMember("timeT", smithyprelude.String)
-
-	KeyspacesCellValue_timestampT = KeyspacesCellValue.AddMember("timestampT", smithyprelude.String)
-
-	KeyspacesCellValue_timeuuidT = KeyspacesCellValue.AddMember("timeuuidT", smithyprelude.String)
-
-	KeyspacesCellValue_tinyintT = KeyspacesCellValue.AddMember("tinyintT", smithyprelude.String)
-
-	KeyspacesCellValue_tupleT = KeyspacesCellValue.AddMember("tupleT", _KeyspacesCellList)
-
-	KeyspacesCellValue_uuidT = KeyspacesCellValue.AddMember("uuidT", smithyprelude.String)
-
-	KeyspacesCellValue_varcharT = KeyspacesCellValue.AddMember("varcharT", smithyprelude.String)
-
-	KeyspacesCellValue_varintT = KeyspacesCellValue.AddMember("varintT", smithyprelude.String)
-
-	KeyspacesCellValue_udtT = KeyspacesCellValue.AddMember("udtT", _KeyspacesUdtMap)
-
-	KeyspacesCell_value = KeyspacesCell.AddMember("value", KeyspacesCellValue)
-
-	KeyspacesCell_metadata = KeyspacesCell.AddMember("metadata", KeyspacesMetadata)
-
-	_KeyspacesCells_key = _KeyspacesCells.AddMember("key", smithyprelude.String)
-
-	_KeyspacesCells_value = _KeyspacesCells.AddMember("value", KeyspacesCell)
-
-	_KeyspacesKeysMap_key = _KeyspacesKeysMap.AddMember("key", smithyprelude.String)
-
-	_KeyspacesKeysMap_value = _KeyspacesKeysMap.AddMember("value", KeyspacesCellValue)
-
-	KeyspacesRow_valueCells = KeyspacesRow.AddMember("valueCells", _KeyspacesCells)
-
-	KeyspacesRow_staticCells = KeyspacesRow.AddMember("staticCells", _KeyspacesCells)
-
-	KeyspacesRow_rowMetadata = KeyspacesRow.AddMember("rowMetadata", KeyspacesMetadata)
-
-	OriginType_USER = OriginType.AddMember("USER", smithyprelude.Unit)
-
-	OriginType_REPLICATION = OriginType.AddMember("REPLICATION", smithyprelude.Unit)
-
-	OriginType_TTL = OriginType.AddMember("TTL", smithyprelude.Unit)
-
-	Record_eventVersion = Record.AddMember("eventVersion", smithyprelude.String)
-
-	Record_createdAt = Record.AddMember("createdAt", _Date)
-
-	Record_origin = Record.AddMember("origin", OriginType)
-
-	Record_partitionKeys = Record.AddMember("partitionKeys", _KeyspacesKeysMap)
-
-	Record_clusteringKeys = Record.AddMember("clusteringKeys", _KeyspacesKeysMap)
-
-	Record_newImage = Record.AddMember("newImage", KeyspacesRow)
-
-	Record_oldImage = Record.AddMember("oldImage", KeyspacesRow)
-
-	Record_sequenceNumber = Record.AddMember("sequenceNumber", _SequenceNumber)
-
-	_RecordList_member = _RecordList.AddMember("member", Record)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	SequenceNumberRange_startingSequenceNumber = SequenceNumberRange.AddMember("startingSequenceNumber", _SequenceNumber)
-
-	SequenceNumberRange_endingSequenceNumber = SequenceNumberRange.AddMember("endingSequenceNumber", _SequenceNumber)
-
-	_ShardIdList_member = _ShardIdList.AddMember("member", _ShardId)
-
-	Shard_shardId = Shard.AddMember("shardId", _ShardId)
-
-	Shard_sequenceNumberRange = Shard.AddMember("sequenceNumberRange", SequenceNumberRange)
-
-	Shard_parentShardIds = Shard.AddMember("parentShardIds", _ShardIdList)
-
-	_ShardDescriptionList_member = _ShardDescriptionList.AddMember("member", Shard)
-
-	ShardFilterType_CHILD_SHARDS = ShardFilterType.AddMember("CHILD_SHARDS", smithyprelude.Unit)
-
-	ShardFilter_type = ShardFilter.AddMember("type", ShardFilterType)
-
-	ShardFilter_shardId = ShardFilter.AddMember("shardId", _ShardId)
-
-	ShardIteratorType_TRIM_HORIZON = ShardIteratorType.AddMember("TRIM_HORIZON", smithyprelude.Unit)
-
-	ShardIteratorType_LATEST = ShardIteratorType.AddMember("LATEST", smithyprelude.Unit)
-
-	ShardIteratorType_AT_SEQUENCE_NUMBER = ShardIteratorType.AddMember("AT_SEQUENCE_NUMBER", smithyprelude.Unit)
-
-	ShardIteratorType_AFTER_SEQUENCE_NUMBER = ShardIteratorType.AddMember("AFTER_SEQUENCE_NUMBER", smithyprelude.Unit)
-
-	Stream_streamArn = Stream.AddMember("streamArn", _StreamArn)
-
-	Stream_keyspaceName = Stream.AddMember("keyspaceName", _KeyspaceName)
-
-	Stream_tableName = Stream.AddMember("tableName", _TableName)
-
-	Stream_streamLabel = Stream.AddMember("streamLabel", smithyprelude.String)
-
-	_StreamList_member = _StreamList.AddMember("member", Stream)
-
-	StreamStatus_ENABLING = StreamStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	StreamStatus_ENABLED = StreamStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	StreamStatus_DISABLING = StreamStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	StreamStatus_DISABLED = StreamStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	StreamViewType_NEW_IMAGE = StreamViewType.AddMember("NEW_IMAGE", smithyprelude.Unit)
-
-	StreamViewType_OLD_IMAGE = StreamViewType.AddMember("OLD_IMAGE", smithyprelude.Unit)
-
-	StreamViewType_NEW_AND_OLD_IMAGES = StreamViewType.AddMember("NEW_AND_OLD_IMAGES", smithyprelude.Unit)
-
-	StreamViewType_KEYS_ONLY = StreamViewType.AddMember("KEYS_ONLY", smithyprelude.Unit)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationExceptionType_InvalidFormat = ValidationExceptionType.AddMember("InvalidFormat", smithyprelude.Unit)
-
-	ValidationExceptionType_TrimmedDataAccess = ValidationExceptionType.AddMember("TrimmedDataAccess", smithyprelude.Unit)
-
-	ValidationExceptionType_ExpiredIterator = ValidationExceptionType.AddMember("ExpiredIterator", smithyprelude.Unit)
-
-	ValidationExceptionType_ExpiredNextToken = ValidationExceptionType.AddMember("ExpiredNextToken", smithyprelude.Unit)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_errorCode = ValidationException.AddMember("errorCode", ValidationExceptionType)
-
-	GetRecordsInput_shardIterator = GetRecordsInput.AddMember("shardIterator", _ShardIterator)
-
-	GetRecordsInput_maxResults = GetRecordsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	GetRecordsOutput_changeRecords = GetRecordsOutput.AddMember("changeRecords", _RecordList)
-
-	GetRecordsOutput_nextShardIterator = GetRecordsOutput.AddMember("nextShardIterator", _ShardIterator)
-
-	GetRecordsOutput_iteratorDescription = GetRecordsOutput.AddMember("iteratorDescription", IteratorDescription)
-
-	GetShardIteratorInput_streamArn = GetShardIteratorInput.AddMember("streamArn", _StreamArn)
-
-	GetShardIteratorInput_shardId = GetShardIteratorInput.AddMember("shardId", _ShardId)
-
-	GetShardIteratorInput_shardIteratorType = GetShardIteratorInput.AddMember("shardIteratorType", ShardIteratorType)
-
-	GetShardIteratorInput_sequenceNumber = GetShardIteratorInput.AddMember("sequenceNumber", _SequenceNumber)
-
-	GetShardIteratorOutput_shardIterator = GetShardIteratorOutput.AddMember("shardIterator", _ShardIterator)
-
-	GetStreamInput_streamArn = GetStreamInput.AddMember("streamArn", _StreamArn)
-
-	GetStreamInput_maxResults = GetStreamInput.AddMember("maxResults", smithyprelude.Integer)
-
-	GetStreamInput_shardFilter = GetStreamInput.AddMember("shardFilter", ShardFilter)
-
-	GetStreamInput_nextToken = GetStreamInput.AddMember("nextToken", _ShardIdToken)
-
-	GetStreamOutput_streamArn = GetStreamOutput.AddMember("streamArn", _StreamArn)
-
-	GetStreamOutput_streamLabel = GetStreamOutput.AddMember("streamLabel", smithyprelude.String)
-
-	GetStreamOutput_streamStatus = GetStreamOutput.AddMember("streamStatus", StreamStatus)
-
-	GetStreamOutput_streamViewType = GetStreamOutput.AddMember("streamViewType", StreamViewType)
-
-	GetStreamOutput_creationRequestDateTime = GetStreamOutput.AddMember("creationRequestDateTime", _Date)
-
-	GetStreamOutput_keyspaceName = GetStreamOutput.AddMember("keyspaceName", _KeyspaceName)
-
-	GetStreamOutput_tableName = GetStreamOutput.AddMember("tableName", _TableName)
-
-	GetStreamOutput_shards = GetStreamOutput.AddMember("shards", _ShardDescriptionList)
-
-	GetStreamOutput_nextToken = GetStreamOutput.AddMember("nextToken", _ShardIdToken)
-
-	ListStreamsInput_keyspaceName = ListStreamsInput.AddMember("keyspaceName", _KeyspaceName)
-
-	ListStreamsInput_tableName = ListStreamsInput.AddMember("tableName", _TableName)
-
-	ListStreamsInput_maxResults = ListStreamsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListStreamsInput_nextToken = ListStreamsInput.AddMember("nextToken", _StreamArnToken)
-
-	ListStreamsOutput_streams = ListStreamsOutput.AddMember("streams", _StreamList)
-
-	ListStreamsOutput_nextToken = ListStreamsOutput.AddMember("nextToken", _StreamArnToken)
-
+	s_KeyspacesCellList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyspacesCell, Members: &mKeyspacesCell, Type: smithy.ShapeTypeStructure, Ext: &e_KeyspacesCellList_member})
+	sKeyspacesCellMapDefinition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iKeyspacesCellValue, Members: &mKeyspacesCellValue, Type: smithy.ShapeTypeUnion, Ext: &eKeyspacesCellMapDefinition_key})
+	sKeyspacesCellMapDefinition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iKeyspacesCellValue, Members: &mKeyspacesCellValue, Type: smithy.ShapeTypeUnion, Ext: &eKeyspacesCellMapDefinition_value})
+	s_KeyspacesUdtMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iKeyspacesCell, Members: &mKeyspacesCell, Type: smithy.ShapeTypeStructure, Ext: &e_KeyspacesUdtMap_value})
 }
+
+var GetRecords = &sGetRecords
+
+var GetShardIterator = &sGetShardIterator
+
+var GetStream = &sGetStream
+
+var ListStreams = &sListStreams
+
+var _KeyspacesStreams = &s_KeyspacesStreams
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _Date = &s_Date
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var IteratorDescription = &sIteratorDescription
+var IteratorDescription_iteratorPosition = &sIteratorDescription_iteratorPosition
+
+var IteratorPosition = &sIteratorPosition
+var IteratorPosition_AT_TIP = &sIteratorPosition_AT_TIP
+var IteratorPosition_BEHIND_TIP = &sIteratorPosition_BEHIND_TIP
+
+var _KeyspaceName = &s_KeyspaceName
+
+var KeyspacesCell = &sKeyspacesCell
+var KeyspacesCell_value = &sKeyspacesCell_value
+var KeyspacesCell_metadata = &sKeyspacesCell_metadata
+
+var _KeyspacesCellList = &s_KeyspacesCellList
+var _KeyspacesCellList_member = &s_KeyspacesCellList_member
+
+var _KeyspacesCellMap = &s_KeyspacesCellMap
+var _KeyspacesCellMap_member = &s_KeyspacesCellMap_member
+
+var KeyspacesCellMapDefinition = &sKeyspacesCellMapDefinition
+var KeyspacesCellMapDefinition_key = &sKeyspacesCellMapDefinition_key
+var KeyspacesCellMapDefinition_value = &sKeyspacesCellMapDefinition_value
+var KeyspacesCellMapDefinition_metadata = &sKeyspacesCellMapDefinition_metadata
+
+var _KeyspacesCells = &s_KeyspacesCells
+var _KeyspacesCells_key = &s_KeyspacesCells_key
+var _KeyspacesCells_value = &s_KeyspacesCells_value
+
+var KeyspacesCellValue = &sKeyspacesCellValue
+var KeyspacesCellValue_asciiT = &sKeyspacesCellValue_asciiT
+var KeyspacesCellValue_bigintT = &sKeyspacesCellValue_bigintT
+var KeyspacesCellValue_blobT = &sKeyspacesCellValue_blobT
+var KeyspacesCellValue_boolT = &sKeyspacesCellValue_boolT
+var KeyspacesCellValue_counterT = &sKeyspacesCellValue_counterT
+var KeyspacesCellValue_dateT = &sKeyspacesCellValue_dateT
+var KeyspacesCellValue_decimalT = &sKeyspacesCellValue_decimalT
+var KeyspacesCellValue_doubleT = &sKeyspacesCellValue_doubleT
+var KeyspacesCellValue_durationT = &sKeyspacesCellValue_durationT
+var KeyspacesCellValue_floatT = &sKeyspacesCellValue_floatT
+var KeyspacesCellValue_inetT = &sKeyspacesCellValue_inetT
+var KeyspacesCellValue_intT = &sKeyspacesCellValue_intT
+var KeyspacesCellValue_listT = &sKeyspacesCellValue_listT
+var KeyspacesCellValue_mapT = &sKeyspacesCellValue_mapT
+var KeyspacesCellValue_setT = &sKeyspacesCellValue_setT
+var KeyspacesCellValue_smallintT = &sKeyspacesCellValue_smallintT
+var KeyspacesCellValue_textT = &sKeyspacesCellValue_textT
+var KeyspacesCellValue_timeT = &sKeyspacesCellValue_timeT
+var KeyspacesCellValue_timestampT = &sKeyspacesCellValue_timestampT
+var KeyspacesCellValue_timeuuidT = &sKeyspacesCellValue_timeuuidT
+var KeyspacesCellValue_tinyintT = &sKeyspacesCellValue_tinyintT
+var KeyspacesCellValue_tupleT = &sKeyspacesCellValue_tupleT
+var KeyspacesCellValue_uuidT = &sKeyspacesCellValue_uuidT
+var KeyspacesCellValue_varcharT = &sKeyspacesCellValue_varcharT
+var KeyspacesCellValue_varintT = &sKeyspacesCellValue_varintT
+var KeyspacesCellValue_udtT = &sKeyspacesCellValue_udtT
+
+var _KeyspacesKeysMap = &s_KeyspacesKeysMap
+var _KeyspacesKeysMap_key = &s_KeyspacesKeysMap_key
+var _KeyspacesKeysMap_value = &s_KeyspacesKeysMap_value
+
+var KeyspacesMetadata = &sKeyspacesMetadata
+var KeyspacesMetadata_expirationTime = &sKeyspacesMetadata_expirationTime
+var KeyspacesMetadata_writeTime = &sKeyspacesMetadata_writeTime
+
+var KeyspacesRow = &sKeyspacesRow
+var KeyspacesRow_valueCells = &sKeyspacesRow_valueCells
+var KeyspacesRow_staticCells = &sKeyspacesRow_staticCells
+var KeyspacesRow_rowMetadata = &sKeyspacesRow_rowMetadata
+
+var _KeyspacesUdtMap = &s_KeyspacesUdtMap
+var _KeyspacesUdtMap_key = &s_KeyspacesUdtMap_key
+var _KeyspacesUdtMap_value = &s_KeyspacesUdtMap_value
+
+var OriginType = &sOriginType
+var OriginType_USER = &sOriginType_USER
+var OriginType_REPLICATION = &sOriginType_REPLICATION
+var OriginType_TTL = &sOriginType_TTL
+
+var Record = &sRecord
+var Record_eventVersion = &sRecord_eventVersion
+var Record_createdAt = &sRecord_createdAt
+var Record_origin = &sRecord_origin
+var Record_partitionKeys = &sRecord_partitionKeys
+var Record_clusteringKeys = &sRecord_clusteringKeys
+var Record_newImage = &sRecord_newImage
+var Record_oldImage = &sRecord_oldImage
+var Record_sequenceNumber = &sRecord_sequenceNumber
+
+var _RecordList = &s_RecordList
+var _RecordList_member = &s_RecordList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _SequenceNumber = &s_SequenceNumber
+
+var SequenceNumberRange = &sSequenceNumberRange
+var SequenceNumberRange_startingSequenceNumber = &sSequenceNumberRange_startingSequenceNumber
+var SequenceNumberRange_endingSequenceNumber = &sSequenceNumberRange_endingSequenceNumber
+
+var Shard = &sShard
+var Shard_shardId = &sShard_shardId
+var Shard_sequenceNumberRange = &sShard_sequenceNumberRange
+var Shard_parentShardIds = &sShard_parentShardIds
+
+var _ShardDescriptionList = &s_ShardDescriptionList
+var _ShardDescriptionList_member = &s_ShardDescriptionList_member
+
+var ShardFilter = &sShardFilter
+var ShardFilter_type = &sShardFilter_type
+var ShardFilter_shardId = &sShardFilter_shardId
+
+var ShardFilterType = &sShardFilterType
+var ShardFilterType_CHILD_SHARDS = &sShardFilterType_CHILD_SHARDS
+
+var _ShardId = &s_ShardId
+
+var _ShardIdList = &s_ShardIdList
+var _ShardIdList_member = &s_ShardIdList_member
+
+var _ShardIdToken = &s_ShardIdToken
+
+var _ShardIterator = &s_ShardIterator
+
+var ShardIteratorType = &sShardIteratorType
+var ShardIteratorType_TRIM_HORIZON = &sShardIteratorType_TRIM_HORIZON
+var ShardIteratorType_LATEST = &sShardIteratorType_LATEST
+var ShardIteratorType_AT_SEQUENCE_NUMBER = &sShardIteratorType_AT_SEQUENCE_NUMBER
+var ShardIteratorType_AFTER_SEQUENCE_NUMBER = &sShardIteratorType_AFTER_SEQUENCE_NUMBER
+
+var Stream = &sStream
+var Stream_streamArn = &sStream_streamArn
+var Stream_keyspaceName = &sStream_keyspaceName
+var Stream_tableName = &sStream_tableName
+var Stream_streamLabel = &sStream_streamLabel
+
+var _StreamArn = &s_StreamArn
+
+var _StreamArnToken = &s_StreamArnToken
+
+var _StreamList = &s_StreamList
+var _StreamList_member = &s_StreamList_member
+
+var StreamStatus = &sStreamStatus
+var StreamStatus_ENABLING = &sStreamStatus_ENABLING
+var StreamStatus_ENABLED = &sStreamStatus_ENABLED
+var StreamStatus_DISABLING = &sStreamStatus_DISABLING
+var StreamStatus_DISABLED = &sStreamStatus_DISABLED
+
+var StreamViewType = &sStreamViewType
+var StreamViewType_NEW_IMAGE = &sStreamViewType_NEW_IMAGE
+var StreamViewType_OLD_IMAGE = &sStreamViewType_OLD_IMAGE
+var StreamViewType_NEW_AND_OLD_IMAGES = &sStreamViewType_NEW_AND_OLD_IMAGES
+var StreamViewType_KEYS_ONLY = &sStreamViewType_KEYS_ONLY
+
+var _TableName = &s_TableName
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_errorCode = &sValidationException_errorCode
+
+var ValidationExceptionType = &sValidationExceptionType
+var ValidationExceptionType_InvalidFormat = &sValidationExceptionType_InvalidFormat
+var ValidationExceptionType_TrimmedDataAccess = &sValidationExceptionType_TrimmedDataAccess
+var ValidationExceptionType_ExpiredIterator = &sValidationExceptionType_ExpiredIterator
+var ValidationExceptionType_ExpiredNextToken = &sValidationExceptionType_ExpiredNextToken
+
+var GetRecordsInput = &sGetRecordsInput
+var GetRecordsInput_shardIterator = &sGetRecordsInput_shardIterator
+var GetRecordsInput_maxResults = &sGetRecordsInput_maxResults
+
+var GetRecordsOutput = &sGetRecordsOutput
+var GetRecordsOutput_changeRecords = &sGetRecordsOutput_changeRecords
+var GetRecordsOutput_nextShardIterator = &sGetRecordsOutput_nextShardIterator
+var GetRecordsOutput_iteratorDescription = &sGetRecordsOutput_iteratorDescription
+
+var GetShardIteratorInput = &sGetShardIteratorInput
+var GetShardIteratorInput_streamArn = &sGetShardIteratorInput_streamArn
+var GetShardIteratorInput_shardId = &sGetShardIteratorInput_shardId
+var GetShardIteratorInput_shardIteratorType = &sGetShardIteratorInput_shardIteratorType
+var GetShardIteratorInput_sequenceNumber = &sGetShardIteratorInput_sequenceNumber
+
+var GetShardIteratorOutput = &sGetShardIteratorOutput
+var GetShardIteratorOutput_shardIterator = &sGetShardIteratorOutput_shardIterator
+
+var GetStreamInput = &sGetStreamInput
+var GetStreamInput_streamArn = &sGetStreamInput_streamArn
+var GetStreamInput_maxResults = &sGetStreamInput_maxResults
+var GetStreamInput_shardFilter = &sGetStreamInput_shardFilter
+var GetStreamInput_nextToken = &sGetStreamInput_nextToken
+
+var GetStreamOutput = &sGetStreamOutput
+var GetStreamOutput_streamArn = &sGetStreamOutput_streamArn
+var GetStreamOutput_streamLabel = &sGetStreamOutput_streamLabel
+var GetStreamOutput_streamStatus = &sGetStreamOutput_streamStatus
+var GetStreamOutput_streamViewType = &sGetStreamOutput_streamViewType
+var GetStreamOutput_creationRequestDateTime = &sGetStreamOutput_creationRequestDateTime
+var GetStreamOutput_keyspaceName = &sGetStreamOutput_keyspaceName
+var GetStreamOutput_tableName = &sGetStreamOutput_tableName
+var GetStreamOutput_shards = &sGetStreamOutput_shards
+var GetStreamOutput_nextToken = &sGetStreamOutput_nextToken
+
+var ListStreamsInput = &sListStreamsInput
+var ListStreamsInput_keyspaceName = &sListStreamsInput_keyspaceName
+var ListStreamsInput_tableName = &sListStreamsInput_tableName
+var ListStreamsInput_maxResults = &sListStreamsInput_maxResults
+var ListStreamsInput_nextToken = &sListStreamsInput_nextToken
+
+var ListStreamsOutput = &sListStreamsOutput
+var ListStreamsOutput_streams = &sListStreamsOutput_streams
+var ListStreamsOutput_nextToken = &sListStreamsOutput_nextToken
+
+var KeyspacesStreams = &smithy.ServiceSchema{Schema: &s_KeyspacesStreams, Version: "2024-09-09"}

@@ -4,2247 +4,2215 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateHttpNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreateHttpNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePrivateDnsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreatePrivateDnsNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePublicDnsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreatePublicDnsNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreateService",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteService",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteServiceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteServiceAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeregisterInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var DiscoverInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DiscoverInstances",
-}, smithy.ShapeTypeOperation, 0)
-
-var DiscoverInstancesRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DiscoverInstancesRevision",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetInstancesHealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetInstancesHealthStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetOperation",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetService",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetServiceAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListInstances",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListNamespaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListNamespaces",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListOperations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListServices",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "RegisterInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateHttpNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateHttpNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateInstanceCustomHealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateInstanceCustomHealthStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePrivateDnsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdatePrivateDnsNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePublicDnsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdatePublicDnsNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateService",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServiceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateServiceAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var _Route53AutoNaming_v20170314 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Route53AutoNaming_v20170314",
-}, smithy.ShapeTypeService, 0)
-
-var Route53AutoNaming_v20170314 = smithy.NewServiceSchema(_Route53AutoNaming_v20170314, "2017-03-14")
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Attributes",
-}, smithy.ShapeTypeMap, 2)
-var _Attributes_key *smithy.Schema
-
-var _Attributes_value *smithy.Schema
-
-var _AttrKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "AttrKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AttrValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "AttrValue",
-}, smithy.ShapeTypeString, 0)
-
-var _AWSAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "AWSAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Code = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Code",
-}, smithy.ShapeTypeString, 0)
-
-var CustomHealthNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CustomHealthNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var CustomHealthNotFound_Message *smithy.Schema
-
-var CustomHealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CustomHealthStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CustomHealthStatus_HEALTHY *smithy.Schema
-
-var CustomHealthStatus_UNHEALTHY *smithy.Schema
-
-var _DiscoverMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DiscoverMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var DnsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DnsConfig",
-}, smithy.ShapeTypeStructure, 3)
-var DnsConfig_NamespaceId *smithy.Schema
-
-var DnsConfig_RoutingPolicy *smithy.Schema
-
-var DnsConfig_DnsRecords *smithy.Schema
-
-var DnsConfigChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DnsConfigChange",
-}, smithy.ShapeTypeStructure, 1)
-var DnsConfigChange_DnsRecords *smithy.Schema
-
-var DnsProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DnsProperties",
-}, smithy.ShapeTypeStructure, 2)
-var DnsProperties_HostedZoneId *smithy.Schema
-
-var DnsProperties_SOA *smithy.Schema
-
-var DnsRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DnsRecord",
-}, smithy.ShapeTypeStructure, 2)
-var DnsRecord_Type *smithy.Schema
-
-var DnsRecord_TTL *smithy.Schema
-
-var _DnsRecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DnsRecordList",
-}, smithy.ShapeTypeList, 1)
-var _DnsRecordList_member *smithy.Schema
-
-var DuplicateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DuplicateRequest",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var DuplicateRequest_Message *smithy.Schema
-
-var DuplicateRequest_DuplicateOperationId *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "FailureThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var FilterCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "FilterCondition",
-}, smithy.ShapeTypeEnum, 4)
-var FilterCondition_EQ *smithy.Schema
-
-var FilterCondition_IN *smithy.Schema
-
-var FilterCondition_BETWEEN *smithy.Schema
-
-var FilterCondition_BEGINS_WITH *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var HealthCheckConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HealthCheckConfig",
-}, smithy.ShapeTypeStructure, 3)
-var HealthCheckConfig_Type *smithy.Schema
-
-var HealthCheckConfig_ResourcePath *smithy.Schema
-
-var HealthCheckConfig_FailureThreshold *smithy.Schema
-
-var HealthCheckCustomConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HealthCheckCustomConfig",
-}, smithy.ShapeTypeStructure, 1)
-var HealthCheckCustomConfig_FailureThreshold *smithy.Schema
-
-var HealthCheckType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HealthCheckType",
-}, smithy.ShapeTypeEnum, 3)
-var HealthCheckType_HTTP *smithy.Schema
-
-var HealthCheckType_HTTPS *smithy.Schema
-
-var HealthCheckType_TCP *smithy.Schema
-
-var HealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HealthStatus",
-}, smithy.ShapeTypeEnum, 3)
-var HealthStatus_HEALTHY *smithy.Schema
-
-var HealthStatus_UNHEALTHY *smithy.Schema
-
-var HealthStatus_UNKNOWN *smithy.Schema
-
-var HealthStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HealthStatusFilter",
-}, smithy.ShapeTypeEnum, 4)
-var HealthStatusFilter_HEALTHY *smithy.Schema
-
-var HealthStatusFilter_UNHEALTHY *smithy.Schema
-
-var HealthStatusFilter_ALL *smithy.Schema
-
-var HealthStatusFilter_HEALTHY_OR_ELSE_ALL *smithy.Schema
-
-var HttpInstanceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HttpInstanceSummary",
-}, smithy.ShapeTypeStructure, 5)
-var HttpInstanceSummary_InstanceId *smithy.Schema
-
-var HttpInstanceSummary_NamespaceName *smithy.Schema
-
-var HttpInstanceSummary_ServiceName *smithy.Schema
-
-var HttpInstanceSummary_HealthStatus *smithy.Schema
-
-var HttpInstanceSummary_Attributes *smithy.Schema
-
-var _HttpInstanceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HttpInstanceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _HttpInstanceSummaryList_member *smithy.Schema
-
-var HttpNamespaceChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HttpNamespaceChange",
-}, smithy.ShapeTypeStructure, 1)
-var HttpNamespaceChange_Description *smithy.Schema
-
-var HttpProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "HttpProperties",
-}, smithy.ShapeTypeStructure, 1)
-var HttpProperties_HttpName *smithy.Schema
-
-var Instance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Instance",
-}, smithy.ShapeTypeStructure, 4)
-var Instance_Id *smithy.Schema
-
-var Instance_CreatorRequestId *smithy.Schema
-
-var Instance_Attributes *smithy.Schema
-
-var Instance_CreatedByAccount *smithy.Schema
-
-var _InstanceHealthStatusMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "InstanceHealthStatusMap",
-}, smithy.ShapeTypeMap, 2)
-var _InstanceHealthStatusMap_key *smithy.Schema
-
-var _InstanceHealthStatusMap_value *smithy.Schema
-
-var _InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _InstanceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "InstanceIdList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceIdList_member *smithy.Schema
-
-var InstanceNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "InstanceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var InstanceNotFound_Message *smithy.Schema
-
-var InstanceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "InstanceSummary",
-}, smithy.ShapeTypeStructure, 3)
-var InstanceSummary_Id *smithy.Schema
-
-var InstanceSummary_Attributes *smithy.Schema
-
-var InstanceSummary_CreatedByAccount *smithy.Schema
-
-var _InstanceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "InstanceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceSummaryList_member *smithy.Schema
-
-var InvalidInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "InvalidInput",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInput_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Namespace",
-}, smithy.ShapeTypeStructure, 10)
-var Namespace_Id *smithy.Schema
-
-var Namespace_Arn *smithy.Schema
-
-var Namespace_ResourceOwner *smithy.Schema
-
-var Namespace_Name *smithy.Schema
-
-var Namespace_Type *smithy.Schema
-
-var Namespace_Description *smithy.Schema
-
-var Namespace_ServiceCount *smithy.Schema
-
-var Namespace_Properties *smithy.Schema
-
-var Namespace_CreateDate *smithy.Schema
-
-var Namespace_CreatorRequestId *smithy.Schema
-
-var NamespaceAlreadyExists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceAlreadyExists",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NamespaceAlreadyExists_Message *smithy.Schema
-
-var NamespaceAlreadyExists_CreatorRequestId *smithy.Schema
-
-var NamespaceAlreadyExists_NamespaceId *smithy.Schema
-
-var NamespaceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceFilter",
-}, smithy.ShapeTypeStructure, 3)
-var NamespaceFilter_Name *smithy.Schema
-
-var NamespaceFilter_Values *smithy.Schema
-
-var NamespaceFilter_Condition *smithy.Schema
-
-var NamespaceFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceFilterName",
-}, smithy.ShapeTypeEnum, 4)
-var NamespaceFilterName_TYPE *smithy.Schema
-
-var NamespaceFilterName_NAME *smithy.Schema
-
-var NamespaceFilterName_HTTP_NAME *smithy.Schema
-
-var NamespaceFilterName_RESOURCE_OWNER *smithy.Schema
-
-var _NamespaceFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceFilters",
-}, smithy.ShapeTypeList, 1)
-var _NamespaceFilters_member *smithy.Schema
-
-var _NamespaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceName",
-}, smithy.ShapeTypeString, 0)
-
-var _NamespaceNameHttp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceNameHttp",
-}, smithy.ShapeTypeString, 0)
-
-var _NamespaceNamePrivate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceNamePrivate",
-}, smithy.ShapeTypeString, 0)
-
-var _NamespaceNamePublic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceNamePublic",
-}, smithy.ShapeTypeString, 0)
-
-var NamespaceNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NamespaceNotFound_Message *smithy.Schema
-
-var NamespaceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceProperties",
-}, smithy.ShapeTypeStructure, 2)
-var NamespaceProperties_DnsProperties *smithy.Schema
-
-var NamespaceProperties_HttpProperties *smithy.Schema
-
-var _NamespaceSummariesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceSummariesList",
-}, smithy.ShapeTypeList, 1)
-var _NamespaceSummariesList_member *smithy.Schema
-
-var NamespaceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceSummary",
-}, smithy.ShapeTypeStructure, 9)
-var NamespaceSummary_Id *smithy.Schema
-
-var NamespaceSummary_Arn *smithy.Schema
-
-var NamespaceSummary_ResourceOwner *smithy.Schema
-
-var NamespaceSummary_Name *smithy.Schema
-
-var NamespaceSummary_Type *smithy.Schema
-
-var NamespaceSummary_Description *smithy.Schema
-
-var NamespaceSummary_ServiceCount *smithy.Schema
-
-var NamespaceSummary_Properties *smithy.Schema
-
-var NamespaceSummary_CreateDate *smithy.Schema
-
-var NamespaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NamespaceType",
-}, smithy.ShapeTypeEnum, 3)
-var NamespaceType_DNS_PUBLIC *smithy.Schema
-
-var NamespaceType_DNS_PRIVATE *smithy.Schema
-
-var NamespaceType_HTTP *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var Operation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Operation",
-}, smithy.ShapeTypeStructure, 9)
-var Operation_Id *smithy.Schema
-
-var Operation_OwnerAccount *smithy.Schema
-
-var Operation_Type *smithy.Schema
-
-var Operation_Status *smithy.Schema
-
-var Operation_ErrorMessage *smithy.Schema
-
-var Operation_ErrorCode *smithy.Schema
-
-var Operation_CreateDate *smithy.Schema
-
-var Operation_UpdateDate *smithy.Schema
-
-var Operation_Targets *smithy.Schema
-
-var OperationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationFilter",
-}, smithy.ShapeTypeStructure, 3)
-var OperationFilter_Name *smithy.Schema
-
-var OperationFilter_Values *smithy.Schema
-
-var OperationFilter_Condition *smithy.Schema
-
-var OperationFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationFilterName",
-}, smithy.ShapeTypeEnum, 5)
-var OperationFilterName_NAMESPACE_ID *smithy.Schema
-
-var OperationFilterName_SERVICE_ID *smithy.Schema
-
-var OperationFilterName_STATUS *smithy.Schema
-
-var OperationFilterName_TYPE *smithy.Schema
-
-var OperationFilterName_UPDATE_DATE *smithy.Schema
-
-var _OperationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationFilters",
-}, smithy.ShapeTypeList, 1)
-var _OperationFilters_member *smithy.Schema
-
-var _OperationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationId",
-}, smithy.ShapeTypeString, 0)
-
-var OperationNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var OperationNotFound_Message *smithy.Schema
-
-var OperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var OperationStatus_SUBMITTED *smithy.Schema
-
-var OperationStatus_PENDING *smithy.Schema
-
-var OperationStatus_SUCCESS *smithy.Schema
-
-var OperationStatus_FAIL *smithy.Schema
-
-var OperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationSummary",
-}, smithy.ShapeTypeStructure, 2)
-var OperationSummary_Id *smithy.Schema
-
-var OperationSummary_Status *smithy.Schema
-
-var _OperationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _OperationSummaryList_member *smithy.Schema
-
-var _OperationTargetsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationTargetsMap",
-}, smithy.ShapeTypeMap, 2)
-var _OperationTargetsMap_key *smithy.Schema
-
-var _OperationTargetsMap_value *smithy.Schema
-
-var OperationTargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationTargetType",
-}, smithy.ShapeTypeEnum, 3)
-var OperationTargetType_NAMESPACE *smithy.Schema
-
-var OperationTargetType_SERVICE *smithy.Schema
-
-var OperationTargetType_INSTANCE *smithy.Schema
-
-var OperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "OperationType",
-}, smithy.ShapeTypeEnum, 6)
-var OperationType_CREATE_NAMESPACE *smithy.Schema
-
-var OperationType_DELETE_NAMESPACE *smithy.Schema
-
-var OperationType_UPDATE_NAMESPACE *smithy.Schema
-
-var OperationType_UPDATE_SERVICE *smithy.Schema
-
-var OperationType_REGISTER_INSTANCE *smithy.Schema
-
-var OperationType_DEREGISTER_INSTANCE *smithy.Schema
-
-var PrivateDnsNamespaceChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PrivateDnsNamespaceChange",
-}, smithy.ShapeTypeStructure, 2)
-var PrivateDnsNamespaceChange_Description *smithy.Schema
-
-var PrivateDnsNamespaceChange_Properties *smithy.Schema
-
-var PrivateDnsNamespaceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PrivateDnsNamespaceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var PrivateDnsNamespaceProperties_DnsProperties *smithy.Schema
-
-var PrivateDnsNamespacePropertiesChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PrivateDnsNamespacePropertiesChange",
-}, smithy.ShapeTypeStructure, 1)
-var PrivateDnsNamespacePropertiesChange_DnsProperties *smithy.Schema
-
-var PrivateDnsPropertiesMutable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PrivateDnsPropertiesMutable",
-}, smithy.ShapeTypeStructure, 1)
-var PrivateDnsPropertiesMutable_SOA *smithy.Schema
-
-var PrivateDnsPropertiesMutableChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PrivateDnsPropertiesMutableChange",
-}, smithy.ShapeTypeStructure, 1)
-var PrivateDnsPropertiesMutableChange_SOA *smithy.Schema
-
-var PublicDnsNamespaceChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PublicDnsNamespaceChange",
-}, smithy.ShapeTypeStructure, 2)
-var PublicDnsNamespaceChange_Description *smithy.Schema
-
-var PublicDnsNamespaceChange_Properties *smithy.Schema
-
-var PublicDnsNamespaceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PublicDnsNamespaceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var PublicDnsNamespaceProperties_DnsProperties *smithy.Schema
-
-var PublicDnsNamespacePropertiesChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PublicDnsNamespacePropertiesChange",
-}, smithy.ShapeTypeStructure, 1)
-var PublicDnsNamespacePropertiesChange_DnsProperties *smithy.Schema
-
-var PublicDnsPropertiesMutable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PublicDnsPropertiesMutable",
-}, smithy.ShapeTypeStructure, 1)
-var PublicDnsPropertiesMutable_SOA *smithy.Schema
-
-var PublicDnsPropertiesMutableChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "PublicDnsPropertiesMutableChange",
-}, smithy.ShapeTypeStructure, 1)
-var PublicDnsPropertiesMutableChange_SOA *smithy.Schema
-
-var _RecordTTL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "RecordTTL",
-}, smithy.ShapeTypeLong, 0)
-
-var RecordType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "RecordType",
-}, smithy.ShapeTypeEnum, 4)
-var RecordType_SRV *smithy.Schema
-
-var RecordType_A *smithy.Schema
-
-var RecordType_AAAA *smithy.Schema
-
-var RecordType_CNAME *smithy.Schema
-
-var RequestLimitExceeded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "RequestLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var RequestLimitExceeded_Message *smithy.Schema
-
-var _ResourceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ResourceCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ResourceInUse",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUse_Message *smithy.Schema
-
-var ResourceLimitExceeded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ResourceLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceLimitExceeded_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourcePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ResourcePath",
-}, smithy.ShapeTypeString, 0)
-
-var _Revision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Revision",
-}, smithy.ShapeTypeLong, 0)
-
-var RoutingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "RoutingPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var RoutingPolicy_MULTIVALUE *smithy.Schema
-
-var RoutingPolicy_WEIGHTED *smithy.Schema
-
-var Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Service",
-}, smithy.ShapeTypeStructure, 14)
-var Service_Id *smithy.Schema
-
-var Service_Arn *smithy.Schema
-
-var Service_ResourceOwner *smithy.Schema
-
-var Service_Name *smithy.Schema
-
-var Service_NamespaceId *smithy.Schema
-
-var Service_Description *smithy.Schema
-
-var Service_InstanceCount *smithy.Schema
-
-var Service_DnsConfig *smithy.Schema
-
-var Service_Type *smithy.Schema
-
-var Service_HealthCheckConfig *smithy.Schema
-
-var Service_HealthCheckCustomConfig *smithy.Schema
-
-var Service_CreateDate *smithy.Schema
-
-var Service_CreatorRequestId *smithy.Schema
-
-var Service_CreatedByAccount *smithy.Schema
-
-var ServiceAlreadyExists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceAlreadyExists",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ServiceAlreadyExists_Message *smithy.Schema
-
-var ServiceAlreadyExists_CreatorRequestId *smithy.Schema
-
-var ServiceAlreadyExists_ServiceId *smithy.Schema
-
-var ServiceAlreadyExists_ServiceArn *smithy.Schema
-
-var _ServiceAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceAttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceAttributeKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceAttributeKeyList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceAttributeKeyList_member *smithy.Schema
-
-var ServiceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceAttributes_ServiceArn *smithy.Schema
-
-var ServiceAttributes_ResourceOwner *smithy.Schema
-
-var ServiceAttributes_Attributes *smithy.Schema
-
-var ServiceAttributesLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceAttributesLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ServiceAttributesLimitExceededException_Message *smithy.Schema
-
-var _ServiceAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _ServiceAttributesMap_key *smithy.Schema
-
-var _ServiceAttributesMap_value *smithy.Schema
-
-var _ServiceAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceChange",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceChange_Description *smithy.Schema
-
-var ServiceChange_DnsConfig *smithy.Schema
-
-var ServiceChange_HealthCheckConfig *smithy.Schema
-
-var ServiceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceFilter",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceFilter_Name *smithy.Schema
-
-var ServiceFilter_Values *smithy.Schema
-
-var ServiceFilter_Condition *smithy.Schema
-
-var ServiceFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var ServiceFilterName_NAMESPACE_ID *smithy.Schema
-
-var ServiceFilterName_RESOURCE_OWNER *smithy.Schema
-
-var _ServiceFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceFilters",
-}, smithy.ShapeTypeList, 1)
-var _ServiceFilters_member *smithy.Schema
-
-var _ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ServiceNotFound_Message *smithy.Schema
-
-var _ServiceSummariesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceSummariesList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceSummariesList_member *smithy.Schema
-
-var ServiceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceSummary",
-}, smithy.ShapeTypeStructure, 12)
-var ServiceSummary_Id *smithy.Schema
-
-var ServiceSummary_Arn *smithy.Schema
-
-var ServiceSummary_ResourceOwner *smithy.Schema
-
-var ServiceSummary_Name *smithy.Schema
-
-var ServiceSummary_Type *smithy.Schema
-
-var ServiceSummary_Description *smithy.Schema
-
-var ServiceSummary_InstanceCount *smithy.Schema
-
-var ServiceSummary_DnsConfig *smithy.Schema
-
-var ServiceSummary_HealthCheckConfig *smithy.Schema
-
-var ServiceSummary_HealthCheckCustomConfig *smithy.Schema
-
-var ServiceSummary_CreateDate *smithy.Schema
-
-var ServiceSummary_CreatedByAccount *smithy.Schema
-
-var ServiceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceType",
-}, smithy.ShapeTypeEnum, 3)
-var ServiceType_HTTP *smithy.Schema
-
-var ServiceType_DNS_HTTP *smithy.Schema
-
-var ServiceType_DNS *smithy.Schema
-
-var ServiceTypeOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ServiceTypeOption",
-}, smithy.ShapeTypeEnum, 1)
-var ServiceTypeOption_HTTP *smithy.Schema
-
-var SOA = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "SOA",
-}, smithy.ShapeTypeStructure, 1)
-var SOA_TTL *smithy.Schema
-
-var SOAChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "SOAChange",
-}, smithy.ShapeTypeStructure, 1)
-var SOAChange_TTL *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var TooManyTagsException_ResourceName *smithy.Schema
-
-var CreateHttpNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreateHttpNamespaceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateHttpNamespaceRequest_Name *smithy.Schema
-
-var CreateHttpNamespaceRequest_CreatorRequestId *smithy.Schema
-
-var CreateHttpNamespaceRequest_Description *smithy.Schema
-
-var CreateHttpNamespaceRequest_Tags *smithy.Schema
-
-var CreateHttpNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreateHttpNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateHttpNamespaceResponse_OperationId *smithy.Schema
-
-var CreatePrivateDnsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreatePrivateDnsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreatePrivateDnsNamespaceRequest_Name *smithy.Schema
-
-var CreatePrivateDnsNamespaceRequest_CreatorRequestId *smithy.Schema
-
-var CreatePrivateDnsNamespaceRequest_Description *smithy.Schema
-
-var CreatePrivateDnsNamespaceRequest_Vpc *smithy.Schema
-
-var CreatePrivateDnsNamespaceRequest_Tags *smithy.Schema
-
-var CreatePrivateDnsNamespaceRequest_Properties *smithy.Schema
-
-var CreatePrivateDnsNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreatePrivateDnsNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePrivateDnsNamespaceResponse_OperationId *smithy.Schema
-
-var CreatePublicDnsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreatePublicDnsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreatePublicDnsNamespaceRequest_Name *smithy.Schema
-
-var CreatePublicDnsNamespaceRequest_CreatorRequestId *smithy.Schema
-
-var CreatePublicDnsNamespaceRequest_Description *smithy.Schema
-
-var CreatePublicDnsNamespaceRequest_Tags *smithy.Schema
-
-var CreatePublicDnsNamespaceRequest_Properties *smithy.Schema
-
-var CreatePublicDnsNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreatePublicDnsNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePublicDnsNamespaceResponse_OperationId *smithy.Schema
-
-var CreateServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreateServiceRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateServiceRequest_Name *smithy.Schema
-
-var CreateServiceRequest_NamespaceId *smithy.Schema
-
-var CreateServiceRequest_CreatorRequestId *smithy.Schema
-
-var CreateServiceRequest_Description *smithy.Schema
-
-var CreateServiceRequest_DnsConfig *smithy.Schema
-
-var CreateServiceRequest_HealthCheckConfig *smithy.Schema
-
-var CreateServiceRequest_HealthCheckCustomConfig *smithy.Schema
-
-var CreateServiceRequest_Tags *smithy.Schema
-
-var CreateServiceRequest_Type *smithy.Schema
-
-var CreateServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "CreateServiceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServiceResponse_Service *smithy.Schema
-
-var DeleteNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteNamespaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNamespaceRequest_Id *smithy.Schema
-
-var DeleteNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNamespaceResponse_OperationId *smithy.Schema
-
-var DeleteServiceAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteServiceAttributesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteServiceAttributesRequest_ServiceId *smithy.Schema
-
-var DeleteServiceAttributesRequest_Attributes *smithy.Schema
-
-var DeleteServiceAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteServiceAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteServiceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceRequest_Id *smithy.Schema
-
-var DeleteServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeleteServiceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeregisterInstanceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterInstanceRequest_ServiceId *smithy.Schema
-
-var DeregisterInstanceRequest_InstanceId *smithy.Schema
-
-var DeregisterInstanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DeregisterInstanceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterInstanceResponse_OperationId *smithy.Schema
-
-var DiscoverInstancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DiscoverInstancesRequest",
-}, smithy.ShapeTypeStructure, 7)
-var DiscoverInstancesRequest_NamespaceName *smithy.Schema
-
-var DiscoverInstancesRequest_ServiceName *smithy.Schema
-
-var DiscoverInstancesRequest_MaxResults *smithy.Schema
-
-var DiscoverInstancesRequest_QueryParameters *smithy.Schema
-
-var DiscoverInstancesRequest_OptionalParameters *smithy.Schema
-
-var DiscoverInstancesRequest_HealthStatus *smithy.Schema
-
-var DiscoverInstancesRequest_OwnerAccount *smithy.Schema
-
-var DiscoverInstancesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DiscoverInstancesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DiscoverInstancesResponse_Instances *smithy.Schema
-
-var DiscoverInstancesResponse_InstancesRevision *smithy.Schema
-
-var DiscoverInstancesRevisionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DiscoverInstancesRevisionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DiscoverInstancesRevisionRequest_NamespaceName *smithy.Schema
-
-var DiscoverInstancesRevisionRequest_ServiceName *smithy.Schema
-
-var DiscoverInstancesRevisionRequest_OwnerAccount *smithy.Schema
-
-var DiscoverInstancesRevisionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "DiscoverInstancesRevisionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DiscoverInstancesRevisionResponse_InstancesRevision *smithy.Schema
-
-var GetInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetInstanceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetInstanceRequest_ServiceId *smithy.Schema
-
-var GetInstanceRequest_InstanceId *smithy.Schema
-
-var GetInstanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetInstanceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetInstanceResponse_ResourceOwner *smithy.Schema
-
-var GetInstanceResponse_Instance *smithy.Schema
-
-var GetInstancesHealthStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetInstancesHealthStatusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetInstancesHealthStatusRequest_ServiceId *smithy.Schema
-
-var GetInstancesHealthStatusRequest_Instances *smithy.Schema
-
-var GetInstancesHealthStatusRequest_MaxResults *smithy.Schema
-
-var GetInstancesHealthStatusRequest_NextToken *smithy.Schema
-
-var GetInstancesHealthStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetInstancesHealthStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetInstancesHealthStatusResponse_Status *smithy.Schema
-
-var GetInstancesHealthStatusResponse_NextToken *smithy.Schema
-
-var GetNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetNamespaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetNamespaceRequest_Id *smithy.Schema
-
-var GetNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetNamespaceResponse_Namespace *smithy.Schema
-
-var GetOperationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetOperationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetOperationRequest_OperationId *smithy.Schema
-
-var GetOperationRequest_OwnerAccount *smithy.Schema
-
-var GetOperationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetOperationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetOperationResponse_Operation *smithy.Schema
-
-var GetServiceAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetServiceAttributesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceAttributesRequest_ServiceId *smithy.Schema
-
-var GetServiceAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetServiceAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceAttributesResponse_ServiceAttributes *smithy.Schema
-
-var GetServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetServiceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceRequest_Id *smithy.Schema
-
-var GetServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "GetServiceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceResponse_Service *smithy.Schema
-
-var ListInstancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListInstancesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListInstancesRequest_ServiceId *smithy.Schema
-
-var ListInstancesRequest_NextToken *smithy.Schema
-
-var ListInstancesRequest_MaxResults *smithy.Schema
-
-var ListInstancesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListInstancesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListInstancesResponse_ResourceOwner *smithy.Schema
-
-var ListInstancesResponse_Instances *smithy.Schema
-
-var ListInstancesResponse_NextToken *smithy.Schema
-
-var ListNamespacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListNamespacesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNamespacesRequest_NextToken *smithy.Schema
-
-var ListNamespacesRequest_MaxResults *smithy.Schema
-
-var ListNamespacesRequest_Filters *smithy.Schema
-
-var ListNamespacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListNamespacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNamespacesResponse_Namespaces *smithy.Schema
-
-var ListNamespacesResponse_NextToken *smithy.Schema
-
-var ListOperationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListOperationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListOperationsRequest_NextToken *smithy.Schema
-
-var ListOperationsRequest_MaxResults *smithy.Schema
-
-var ListOperationsRequest_Filters *smithy.Schema
-
-var ListOperationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListOperationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOperationsResponse_Operations *smithy.Schema
-
-var ListOperationsResponse_NextToken *smithy.Schema
-
-var ListServicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListServicesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListServicesRequest_NextToken *smithy.Schema
-
-var ListServicesRequest_MaxResults *smithy.Schema
-
-var ListServicesRequest_Filters *smithy.Schema
-
-var ListServicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListServicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesResponse_Services *smithy.Schema
-
-var ListServicesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var RegisterInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "RegisterInstanceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RegisterInstanceRequest_ServiceId *smithy.Schema
-
-var RegisterInstanceRequest_InstanceId *smithy.Schema
-
-var RegisterInstanceRequest_CreatorRequestId *smithy.Schema
-
-var RegisterInstanceRequest_Attributes *smithy.Schema
-
-var RegisterInstanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "RegisterInstanceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterInstanceResponse_OperationId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateHttpNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateHttpNamespaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateHttpNamespaceRequest_Id *smithy.Schema
-
-var UpdateHttpNamespaceRequest_UpdaterRequestId *smithy.Schema
-
-var UpdateHttpNamespaceRequest_Namespace *smithy.Schema
-
-var UpdateHttpNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateHttpNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateHttpNamespaceResponse_OperationId *smithy.Schema
-
-var UpdateInstanceCustomHealthStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateInstanceCustomHealthStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateInstanceCustomHealthStatusRequest_ServiceId *smithy.Schema
-
-var UpdateInstanceCustomHealthStatusRequest_InstanceId *smithy.Schema
-
-var UpdateInstanceCustomHealthStatusRequest_Status *smithy.Schema
-
-var UpdatePrivateDnsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdatePrivateDnsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePrivateDnsNamespaceRequest_Id *smithy.Schema
-
-var UpdatePrivateDnsNamespaceRequest_UpdaterRequestId *smithy.Schema
-
-var UpdatePrivateDnsNamespaceRequest_Namespace *smithy.Schema
-
-var UpdatePrivateDnsNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdatePrivateDnsNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePrivateDnsNamespaceResponse_OperationId *smithy.Schema
-
-var UpdatePublicDnsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdatePublicDnsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePublicDnsNamespaceRequest_Id *smithy.Schema
-
-var UpdatePublicDnsNamespaceRequest_UpdaterRequestId *smithy.Schema
-
-var UpdatePublicDnsNamespaceRequest_Namespace *smithy.Schema
-
-var UpdatePublicDnsNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdatePublicDnsNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePublicDnsNamespaceResponse_OperationId *smithy.Schema
-
-var UpdateServiceAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateServiceAttributesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServiceAttributesRequest_ServiceId *smithy.Schema
-
-var UpdateServiceAttributesRequest_Attributes *smithy.Schema
-
-var UpdateServiceAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateServiceAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateServiceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServiceRequest_Id *smithy.Schema
-
-var UpdateServiceRequest_Service *smithy.Schema
-
-var UpdateServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicediscovery",
-	Name:      "UpdateServiceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceResponse_OperationId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_Attributes_key = _Attributes.AddMember("key", _AttrKey)
-
-	_Attributes_value = _Attributes.AddMember("value", _AttrValue)
-
-	CustomHealthNotFound_Message = CustomHealthNotFound.AddMember("Message", _ErrorMessage)
-
-	CustomHealthStatus_HEALTHY = CustomHealthStatus.AddMember("HEALTHY", smithyprelude.Unit)
-
-	CustomHealthStatus_UNHEALTHY = CustomHealthStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	RoutingPolicy_MULTIVALUE = RoutingPolicy.AddMember("MULTIVALUE", smithyprelude.Unit)
-
-	RoutingPolicy_WEIGHTED = RoutingPolicy.AddMember("WEIGHTED", smithyprelude.Unit)
-
-	RecordType_SRV = RecordType.AddMember("SRV", smithyprelude.Unit)
-
-	RecordType_A = RecordType.AddMember("A", smithyprelude.Unit)
-
-	RecordType_AAAA = RecordType.AddMember("AAAA", smithyprelude.Unit)
-
-	RecordType_CNAME = RecordType.AddMember("CNAME", smithyprelude.Unit)
-
-	DnsRecord_Type = DnsRecord.AddMember("Type", RecordType)
-
-	DnsRecord_TTL = DnsRecord.AddMember("TTL", _RecordTTL)
-
-	_DnsRecordList_member = _DnsRecordList.AddMember("member", DnsRecord)
-
-	DnsConfig_NamespaceId = DnsConfig.AddMember("NamespaceId", _ResourceId)
-
-	DnsConfig_RoutingPolicy = DnsConfig.AddMember("RoutingPolicy", RoutingPolicy)
-
-	DnsConfig_DnsRecords = DnsConfig.AddMember("DnsRecords", _DnsRecordList)
-
-	DnsConfigChange_DnsRecords = DnsConfigChange.AddMember("DnsRecords", _DnsRecordList)
-
-	SOA_TTL = SOA.AddMember("TTL", _RecordTTL)
-
-	DnsProperties_HostedZoneId = DnsProperties.AddMember("HostedZoneId", _ResourceId)
-
-	DnsProperties_SOA = DnsProperties.AddMember("SOA", SOA)
-
-	DuplicateRequest_Message = DuplicateRequest.AddMember("Message", _ErrorMessage)
-
-	DuplicateRequest_DuplicateOperationId = DuplicateRequest.AddMember("DuplicateOperationId", _OperationId)
-
-	FilterCondition_EQ = FilterCondition.AddMember("EQ", smithyprelude.Unit)
-
-	FilterCondition_IN = FilterCondition.AddMember("IN", smithyprelude.Unit)
-
-	FilterCondition_BETWEEN = FilterCondition.AddMember("BETWEEN", smithyprelude.Unit)
-
-	FilterCondition_BEGINS_WITH = FilterCondition.AddMember("BEGINS_WITH", smithyprelude.Unit)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue, &smithytraits.XMLName{Name: "item"})
-
-	HealthCheckType_HTTP = HealthCheckType.AddMember("HTTP", smithyprelude.Unit)
-
-	HealthCheckType_HTTPS = HealthCheckType.AddMember("HTTPS", smithyprelude.Unit)
-
-	HealthCheckType_TCP = HealthCheckType.AddMember("TCP", smithyprelude.Unit)
-
-	HealthCheckConfig_Type = HealthCheckConfig.AddMember("Type", HealthCheckType)
-
-	HealthCheckConfig_ResourcePath = HealthCheckConfig.AddMember("ResourcePath", _ResourcePath)
-
-	HealthCheckConfig_FailureThreshold = HealthCheckConfig.AddMember("FailureThreshold", _FailureThreshold)
-
-	HealthCheckCustomConfig_FailureThreshold = HealthCheckCustomConfig.AddMember("FailureThreshold", _FailureThreshold)
-
-	HealthStatus_HEALTHY = HealthStatus.AddMember("HEALTHY", smithyprelude.Unit)
-
-	HealthStatus_UNHEALTHY = HealthStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	HealthStatus_UNKNOWN = HealthStatus.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	HealthStatusFilter_HEALTHY = HealthStatusFilter.AddMember("HEALTHY", smithyprelude.Unit)
-
-	HealthStatusFilter_UNHEALTHY = HealthStatusFilter.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	HealthStatusFilter_ALL = HealthStatusFilter.AddMember("ALL", smithyprelude.Unit)
-
-	HealthStatusFilter_HEALTHY_OR_ELSE_ALL = HealthStatusFilter.AddMember("HEALTHY_OR_ELSE_ALL", smithyprelude.Unit)
-
-	HttpInstanceSummary_InstanceId = HttpInstanceSummary.AddMember("InstanceId", _ResourceId)
-
-	HttpInstanceSummary_NamespaceName = HttpInstanceSummary.AddMember("NamespaceName", _NamespaceNameHttp)
-
-	HttpInstanceSummary_ServiceName = HttpInstanceSummary.AddMember("ServiceName", _ServiceName)
-
-	HttpInstanceSummary_HealthStatus = HttpInstanceSummary.AddMember("HealthStatus", HealthStatus)
-
-	HttpInstanceSummary_Attributes = HttpInstanceSummary.AddMember("Attributes", _Attributes)
-
-	_HttpInstanceSummaryList_member = _HttpInstanceSummaryList.AddMember("member", HttpInstanceSummary)
-
-	HttpNamespaceChange_Description = HttpNamespaceChange.AddMember("Description", _ResourceDescription)
-
-	HttpProperties_HttpName = HttpProperties.AddMember("HttpName", _NamespaceName)
-
-	Instance_Id = Instance.AddMember("Id", _ResourceId)
-
-	Instance_CreatorRequestId = Instance.AddMember("CreatorRequestId", _ResourceId)
-
-	Instance_Attributes = Instance.AddMember("Attributes", _Attributes)
-
-	Instance_CreatedByAccount = Instance.AddMember("CreatedByAccount", _AWSAccountId)
-
-	_InstanceHealthStatusMap_key = _InstanceHealthStatusMap.AddMember("key", _ResourceId)
-
-	_InstanceHealthStatusMap_value = _InstanceHealthStatusMap.AddMember("value", HealthStatus)
-
-	_InstanceIdList_member = _InstanceIdList.AddMember("member", _ResourceId, &smithytraits.XMLName{Name: "InstanceId"})
-
-	InstanceNotFound_Message = InstanceNotFound.AddMember("Message", _ErrorMessage)
-
-	InstanceSummary_Id = InstanceSummary.AddMember("Id", _ResourceId)
-
-	InstanceSummary_Attributes = InstanceSummary.AddMember("Attributes", _Attributes)
-
-	InstanceSummary_CreatedByAccount = InstanceSummary.AddMember("CreatedByAccount", _AWSAccountId)
-
-	_InstanceSummaryList_member = _InstanceSummaryList.AddMember("member", InstanceSummary, &smithytraits.XMLName{Name: "InstanceSummary"})
-
-	InvalidInput_Message = InvalidInput.AddMember("Message", _ErrorMessage)
-
-	NamespaceType_DNS_PUBLIC = NamespaceType.AddMember("DNS_PUBLIC", smithyprelude.Unit)
-
-	NamespaceType_DNS_PRIVATE = NamespaceType.AddMember("DNS_PRIVATE", smithyprelude.Unit)
-
-	NamespaceType_HTTP = NamespaceType.AddMember("HTTP", smithyprelude.Unit)
-
-	NamespaceProperties_DnsProperties = NamespaceProperties.AddMember("DnsProperties", DnsProperties)
-
-	NamespaceProperties_HttpProperties = NamespaceProperties.AddMember("HttpProperties", HttpProperties)
-
-	Namespace_Id = Namespace.AddMember("Id", _ResourceId)
-
-	Namespace_Arn = Namespace.AddMember("Arn", _Arn)
-
-	Namespace_ResourceOwner = Namespace.AddMember("ResourceOwner", _AWSAccountId)
-
-	Namespace_Name = Namespace.AddMember("Name", _NamespaceName)
-
-	Namespace_Type = Namespace.AddMember("Type", NamespaceType)
-
-	Namespace_Description = Namespace.AddMember("Description", _ResourceDescription)
-
-	Namespace_ServiceCount = Namespace.AddMember("ServiceCount", _ResourceCount)
-
-	Namespace_Properties = Namespace.AddMember("Properties", NamespaceProperties)
-
-	Namespace_CreateDate = Namespace.AddMember("CreateDate", _Timestamp)
-
-	Namespace_CreatorRequestId = Namespace.AddMember("CreatorRequestId", _ResourceId)
-
-	NamespaceAlreadyExists_Message = NamespaceAlreadyExists.AddMember("Message", _ErrorMessage)
-
-	NamespaceAlreadyExists_CreatorRequestId = NamespaceAlreadyExists.AddMember("CreatorRequestId", _ResourceId)
-
-	NamespaceAlreadyExists_NamespaceId = NamespaceAlreadyExists.AddMember("NamespaceId", _ResourceId)
-
-	NamespaceFilterName_TYPE = NamespaceFilterName.AddMember("TYPE", smithyprelude.Unit)
-
-	NamespaceFilterName_NAME = NamespaceFilterName.AddMember("NAME", smithyprelude.Unit)
-
-	NamespaceFilterName_HTTP_NAME = NamespaceFilterName.AddMember("HTTP_NAME", smithyprelude.Unit)
-
-	NamespaceFilterName_RESOURCE_OWNER = NamespaceFilterName.AddMember("RESOURCE_OWNER", smithyprelude.Unit)
-
-	NamespaceFilter_Name = NamespaceFilter.AddMember("Name", NamespaceFilterName)
-
-	NamespaceFilter_Values = NamespaceFilter.AddMember("Values", _FilterValues)
-
-	NamespaceFilter_Condition = NamespaceFilter.AddMember("Condition", FilterCondition)
-
-	_NamespaceFilters_member = _NamespaceFilters.AddMember("member", NamespaceFilter, &smithytraits.XMLName{Name: "item"})
-
-	NamespaceNotFound_Message = NamespaceNotFound.AddMember("Message", _ErrorMessage)
-
-	NamespaceSummary_Id = NamespaceSummary.AddMember("Id", _ResourceId)
-
-	NamespaceSummary_Arn = NamespaceSummary.AddMember("Arn", _Arn)
-
-	NamespaceSummary_ResourceOwner = NamespaceSummary.AddMember("ResourceOwner", _AWSAccountId)
-
-	NamespaceSummary_Name = NamespaceSummary.AddMember("Name", _NamespaceName)
-
-	NamespaceSummary_Type = NamespaceSummary.AddMember("Type", NamespaceType)
-
-	NamespaceSummary_Description = NamespaceSummary.AddMember("Description", _ResourceDescription)
-
-	NamespaceSummary_ServiceCount = NamespaceSummary.AddMember("ServiceCount", _ResourceCount)
-
-	NamespaceSummary_Properties = NamespaceSummary.AddMember("Properties", NamespaceProperties)
-
-	NamespaceSummary_CreateDate = NamespaceSummary.AddMember("CreateDate", _Timestamp)
-
-	_NamespaceSummariesList_member = _NamespaceSummariesList.AddMember("member", NamespaceSummary)
-
-	OperationType_CREATE_NAMESPACE = OperationType.AddMember("CREATE_NAMESPACE", smithyprelude.Unit)
-
-	OperationType_DELETE_NAMESPACE = OperationType.AddMember("DELETE_NAMESPACE", smithyprelude.Unit)
-
-	OperationType_UPDATE_NAMESPACE = OperationType.AddMember("UPDATE_NAMESPACE", smithyprelude.Unit)
-
-	OperationType_UPDATE_SERVICE = OperationType.AddMember("UPDATE_SERVICE", smithyprelude.Unit)
-
-	OperationType_REGISTER_INSTANCE = OperationType.AddMember("REGISTER_INSTANCE", smithyprelude.Unit)
-
-	OperationType_DEREGISTER_INSTANCE = OperationType.AddMember("DEREGISTER_INSTANCE", smithyprelude.Unit)
-
-	OperationStatus_SUBMITTED = OperationStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	OperationStatus_PENDING = OperationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	OperationStatus_SUCCESS = OperationStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	OperationStatus_FAIL = OperationStatus.AddMember("FAIL", smithyprelude.Unit)
-
-	OperationTargetType_NAMESPACE = OperationTargetType.AddMember("NAMESPACE", smithyprelude.Unit)
-
-	OperationTargetType_SERVICE = OperationTargetType.AddMember("SERVICE", smithyprelude.Unit)
-
-	OperationTargetType_INSTANCE = OperationTargetType.AddMember("INSTANCE", smithyprelude.Unit)
-
-	_OperationTargetsMap_key = _OperationTargetsMap.AddMember("key", OperationTargetType)
-
-	_OperationTargetsMap_value = _OperationTargetsMap.AddMember("value", _ResourceId)
-
-	Operation_Id = Operation.AddMember("Id", _OperationId)
-
-	Operation_OwnerAccount = Operation.AddMember("OwnerAccount", _AWSAccountId)
-
-	Operation_Type = Operation.AddMember("Type", OperationType)
-
-	Operation_Status = Operation.AddMember("Status", OperationStatus)
-
-	Operation_ErrorMessage = Operation.AddMember("ErrorMessage", _Message)
-
-	Operation_ErrorCode = Operation.AddMember("ErrorCode", _Code)
-
-	Operation_CreateDate = Operation.AddMember("CreateDate", _Timestamp)
-
-	Operation_UpdateDate = Operation.AddMember("UpdateDate", _Timestamp)
-
-	Operation_Targets = Operation.AddMember("Targets", _OperationTargetsMap)
-
-	OperationFilterName_NAMESPACE_ID = OperationFilterName.AddMember("NAMESPACE_ID", smithyprelude.Unit)
-
-	OperationFilterName_SERVICE_ID = OperationFilterName.AddMember("SERVICE_ID", smithyprelude.Unit)
-
-	OperationFilterName_STATUS = OperationFilterName.AddMember("STATUS", smithyprelude.Unit)
-
-	OperationFilterName_TYPE = OperationFilterName.AddMember("TYPE", smithyprelude.Unit)
-
-	OperationFilterName_UPDATE_DATE = OperationFilterName.AddMember("UPDATE_DATE", smithyprelude.Unit)
-
-	OperationFilter_Name = OperationFilter.AddMember("Name", OperationFilterName)
-
-	OperationFilter_Values = OperationFilter.AddMember("Values", _FilterValues)
-
-	OperationFilter_Condition = OperationFilter.AddMember("Condition", FilterCondition)
-
-	_OperationFilters_member = _OperationFilters.AddMember("member", OperationFilter, &smithytraits.XMLName{Name: "item"})
-
-	OperationNotFound_Message = OperationNotFound.AddMember("Message", _ErrorMessage)
-
-	OperationSummary_Id = OperationSummary.AddMember("Id", _OperationId)
-
-	OperationSummary_Status = OperationSummary.AddMember("Status", OperationStatus)
-
-	_OperationSummaryList_member = _OperationSummaryList.AddMember("member", OperationSummary, &smithytraits.XMLName{Name: "OperationSummary"})
-
-	SOAChange_TTL = SOAChange.AddMember("TTL", _RecordTTL)
-
-	PrivateDnsPropertiesMutableChange_SOA = PrivateDnsPropertiesMutableChange.AddMember("SOA", SOAChange)
-
-	PrivateDnsNamespacePropertiesChange_DnsProperties = PrivateDnsNamespacePropertiesChange.AddMember("DnsProperties", PrivateDnsPropertiesMutableChange)
-
-	PrivateDnsNamespaceChange_Description = PrivateDnsNamespaceChange.AddMember("Description", _ResourceDescription)
-
-	PrivateDnsNamespaceChange_Properties = PrivateDnsNamespaceChange.AddMember("Properties", PrivateDnsNamespacePropertiesChange)
-
-	PrivateDnsPropertiesMutable_SOA = PrivateDnsPropertiesMutable.AddMember("SOA", SOA)
-
-	PrivateDnsNamespaceProperties_DnsProperties = PrivateDnsNamespaceProperties.AddMember("DnsProperties", PrivateDnsPropertiesMutable)
-
-	PublicDnsPropertiesMutableChange_SOA = PublicDnsPropertiesMutableChange.AddMember("SOA", SOAChange)
-
-	PublicDnsNamespacePropertiesChange_DnsProperties = PublicDnsNamespacePropertiesChange.AddMember("DnsProperties", PublicDnsPropertiesMutableChange)
-
-	PublicDnsNamespaceChange_Description = PublicDnsNamespaceChange.AddMember("Description", _ResourceDescription)
-
-	PublicDnsNamespaceChange_Properties = PublicDnsNamespaceChange.AddMember("Properties", PublicDnsNamespacePropertiesChange)
-
-	PublicDnsPropertiesMutable_SOA = PublicDnsPropertiesMutable.AddMember("SOA", SOA)
-
-	PublicDnsNamespaceProperties_DnsProperties = PublicDnsNamespaceProperties.AddMember("DnsProperties", PublicDnsPropertiesMutable)
-
-	RequestLimitExceeded_Message = RequestLimitExceeded.AddMember("Message", _ErrorMessage)
-
-	ResourceInUse_Message = ResourceInUse.AddMember("Message", _ErrorMessage)
-
-	ResourceLimitExceeded_Message = ResourceLimitExceeded.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ServiceType_HTTP = ServiceType.AddMember("HTTP", smithyprelude.Unit)
-
-	ServiceType_DNS_HTTP = ServiceType.AddMember("DNS_HTTP", smithyprelude.Unit)
-
-	ServiceType_DNS = ServiceType.AddMember("DNS", smithyprelude.Unit)
-
-	Service_Id = Service.AddMember("Id", _ResourceId)
-
-	Service_Arn = Service.AddMember("Arn", _Arn)
-
-	Service_ResourceOwner = Service.AddMember("ResourceOwner", _AWSAccountId)
-
-	Service_Name = Service.AddMember("Name", _ServiceName)
-
-	Service_NamespaceId = Service.AddMember("NamespaceId", _ResourceId)
-
-	Service_Description = Service.AddMember("Description", _ResourceDescription)
-
-	Service_InstanceCount = Service.AddMember("InstanceCount", _ResourceCount)
-
-	Service_DnsConfig = Service.AddMember("DnsConfig", DnsConfig)
-
-	Service_Type = Service.AddMember("Type", ServiceType)
-
-	Service_HealthCheckConfig = Service.AddMember("HealthCheckConfig", HealthCheckConfig)
-
-	Service_HealthCheckCustomConfig = Service.AddMember("HealthCheckCustomConfig", HealthCheckCustomConfig)
-
-	Service_CreateDate = Service.AddMember("CreateDate", _Timestamp)
-
-	Service_CreatorRequestId = Service.AddMember("CreatorRequestId", _ResourceId)
-
-	Service_CreatedByAccount = Service.AddMember("CreatedByAccount", _AWSAccountId)
-
-	ServiceAlreadyExists_Message = ServiceAlreadyExists.AddMember("Message", _ErrorMessage)
-
-	ServiceAlreadyExists_CreatorRequestId = ServiceAlreadyExists.AddMember("CreatorRequestId", _ResourceId)
-
-	ServiceAlreadyExists_ServiceId = ServiceAlreadyExists.AddMember("ServiceId", _ResourceId)
-
-	ServiceAlreadyExists_ServiceArn = ServiceAlreadyExists.AddMember("ServiceArn", _Arn)
-
-	_ServiceAttributeKeyList_member = _ServiceAttributeKeyList.AddMember("member", _ServiceAttributeKey)
-
-	_ServiceAttributesMap_key = _ServiceAttributesMap.AddMember("key", _ServiceAttributeKey)
-
-	_ServiceAttributesMap_value = _ServiceAttributesMap.AddMember("value", _ServiceAttributeValue)
-
-	ServiceAttributes_ServiceArn = ServiceAttributes.AddMember("ServiceArn", _Arn)
-
-	ServiceAttributes_ResourceOwner = ServiceAttributes.AddMember("ResourceOwner", _AWSAccountId)
-
-	ServiceAttributes_Attributes = ServiceAttributes.AddMember("Attributes", _ServiceAttributesMap)
-
-	ServiceAttributesLimitExceededException_Message = ServiceAttributesLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ServiceChange_Description = ServiceChange.AddMember("Description", _ResourceDescription)
-
-	ServiceChange_DnsConfig = ServiceChange.AddMember("DnsConfig", DnsConfigChange)
-
-	ServiceChange_HealthCheckConfig = ServiceChange.AddMember("HealthCheckConfig", HealthCheckConfig)
-
-	ServiceFilterName_NAMESPACE_ID = ServiceFilterName.AddMember("NAMESPACE_ID", smithyprelude.Unit)
-
-	ServiceFilterName_RESOURCE_OWNER = ServiceFilterName.AddMember("RESOURCE_OWNER", smithyprelude.Unit)
-
-	ServiceFilter_Name = ServiceFilter.AddMember("Name", ServiceFilterName)
-
-	ServiceFilter_Values = ServiceFilter.AddMember("Values", _FilterValues)
-
-	ServiceFilter_Condition = ServiceFilter.AddMember("Condition", FilterCondition)
-
-	_ServiceFilters_member = _ServiceFilters.AddMember("member", ServiceFilter, &smithytraits.XMLName{Name: "item"})
-
-	ServiceNotFound_Message = ServiceNotFound.AddMember("Message", _ErrorMessage)
-
-	ServiceSummary_Id = ServiceSummary.AddMember("Id", _ResourceId)
-
-	ServiceSummary_Arn = ServiceSummary.AddMember("Arn", _Arn)
-
-	ServiceSummary_ResourceOwner = ServiceSummary.AddMember("ResourceOwner", _AWSAccountId)
-
-	ServiceSummary_Name = ServiceSummary.AddMember("Name", _ServiceName)
-
-	ServiceSummary_Type = ServiceSummary.AddMember("Type", ServiceType)
-
-	ServiceSummary_Description = ServiceSummary.AddMember("Description", _ResourceDescription)
-
-	ServiceSummary_InstanceCount = ServiceSummary.AddMember("InstanceCount", _ResourceCount)
-
-	ServiceSummary_DnsConfig = ServiceSummary.AddMember("DnsConfig", DnsConfig)
-
-	ServiceSummary_HealthCheckConfig = ServiceSummary.AddMember("HealthCheckConfig", HealthCheckConfig)
-
-	ServiceSummary_HealthCheckCustomConfig = ServiceSummary.AddMember("HealthCheckCustomConfig", HealthCheckCustomConfig)
-
-	ServiceSummary_CreateDate = ServiceSummary.AddMember("CreateDate", _Timestamp)
-
-	ServiceSummary_CreatedByAccount = ServiceSummary.AddMember("CreatedByAccount", _AWSAccountId)
-
-	_ServiceSummariesList_member = _ServiceSummariesList.AddMember("member", ServiceSummary)
-
-	ServiceTypeOption_HTTP = ServiceTypeOption.AddMember("HTTP", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _ErrorMessage)
-
-	TooManyTagsException_ResourceName = TooManyTagsException.AddMember("ResourceName", _AmazonResourceName)
-
-	CreateHttpNamespaceRequest_Name = CreateHttpNamespaceRequest.AddMember("Name", _NamespaceNameHttp)
-
-	CreateHttpNamespaceRequest_CreatorRequestId = CreateHttpNamespaceRequest.AddMember("CreatorRequestId", _ResourceId)
-
-	CreateHttpNamespaceRequest_Description = CreateHttpNamespaceRequest.AddMember("Description", _ResourceDescription)
-
-	CreateHttpNamespaceRequest_Tags = CreateHttpNamespaceRequest.AddMember("Tags", _TagList)
-
-	CreateHttpNamespaceResponse_OperationId = CreateHttpNamespaceResponse.AddMember("OperationId", _OperationId)
-
-	CreatePrivateDnsNamespaceRequest_Name = CreatePrivateDnsNamespaceRequest.AddMember("Name", _NamespaceNamePrivate)
-
-	CreatePrivateDnsNamespaceRequest_CreatorRequestId = CreatePrivateDnsNamespaceRequest.AddMember("CreatorRequestId", _ResourceId)
-
-	CreatePrivateDnsNamespaceRequest_Description = CreatePrivateDnsNamespaceRequest.AddMember("Description", _ResourceDescription)
-
-	CreatePrivateDnsNamespaceRequest_Vpc = CreatePrivateDnsNamespaceRequest.AddMember("Vpc", _ResourceId)
-
-	CreatePrivateDnsNamespaceRequest_Tags = CreatePrivateDnsNamespaceRequest.AddMember("Tags", _TagList)
-
-	CreatePrivateDnsNamespaceRequest_Properties = CreatePrivateDnsNamespaceRequest.AddMember("Properties", PrivateDnsNamespaceProperties)
-
-	CreatePrivateDnsNamespaceResponse_OperationId = CreatePrivateDnsNamespaceResponse.AddMember("OperationId", _OperationId)
-
-	CreatePublicDnsNamespaceRequest_Name = CreatePublicDnsNamespaceRequest.AddMember("Name", _NamespaceNamePublic)
-
-	CreatePublicDnsNamespaceRequest_CreatorRequestId = CreatePublicDnsNamespaceRequest.AddMember("CreatorRequestId", _ResourceId)
-
-	CreatePublicDnsNamespaceRequest_Description = CreatePublicDnsNamespaceRequest.AddMember("Description", _ResourceDescription)
-
-	CreatePublicDnsNamespaceRequest_Tags = CreatePublicDnsNamespaceRequest.AddMember("Tags", _TagList)
-
-	CreatePublicDnsNamespaceRequest_Properties = CreatePublicDnsNamespaceRequest.AddMember("Properties", PublicDnsNamespaceProperties)
-
-	CreatePublicDnsNamespaceResponse_OperationId = CreatePublicDnsNamespaceResponse.AddMember("OperationId", _OperationId)
-
-	CreateServiceRequest_Name = CreateServiceRequest.AddMember("Name", _ServiceName)
-
-	CreateServiceRequest_NamespaceId = CreateServiceRequest.AddMember("NamespaceId", _Arn)
-
-	CreateServiceRequest_CreatorRequestId = CreateServiceRequest.AddMember("CreatorRequestId", _ResourceId)
-
-	CreateServiceRequest_Description = CreateServiceRequest.AddMember("Description", _ResourceDescription)
-
-	CreateServiceRequest_DnsConfig = CreateServiceRequest.AddMember("DnsConfig", DnsConfig)
-
-	CreateServiceRequest_HealthCheckConfig = CreateServiceRequest.AddMember("HealthCheckConfig", HealthCheckConfig)
-
-	CreateServiceRequest_HealthCheckCustomConfig = CreateServiceRequest.AddMember("HealthCheckCustomConfig", HealthCheckCustomConfig)
-
-	CreateServiceRequest_Tags = CreateServiceRequest.AddMember("Tags", _TagList)
-
-	CreateServiceRequest_Type = CreateServiceRequest.AddMember("Type", ServiceTypeOption)
-
-	CreateServiceResponse_Service = CreateServiceResponse.AddMember("Service", Service)
-
-	DeleteNamespaceRequest_Id = DeleteNamespaceRequest.AddMember("Id", _Arn)
-
-	DeleteNamespaceResponse_OperationId = DeleteNamespaceResponse.AddMember("OperationId", _OperationId)
-
-	DeleteServiceAttributesRequest_ServiceId = DeleteServiceAttributesRequest.AddMember("ServiceId", _Arn)
-
-	DeleteServiceAttributesRequest_Attributes = DeleteServiceAttributesRequest.AddMember("Attributes", _ServiceAttributeKeyList)
-
-	DeleteServiceRequest_Id = DeleteServiceRequest.AddMember("Id", _Arn)
-
-	DeregisterInstanceRequest_ServiceId = DeregisterInstanceRequest.AddMember("ServiceId", _Arn)
-
-	DeregisterInstanceRequest_InstanceId = DeregisterInstanceRequest.AddMember("InstanceId", _ResourceId)
-
-	DeregisterInstanceResponse_OperationId = DeregisterInstanceResponse.AddMember("OperationId", _OperationId)
-
-	DiscoverInstancesRequest_NamespaceName = DiscoverInstancesRequest.AddMember("NamespaceName", _NamespaceName)
-
-	DiscoverInstancesRequest_ServiceName = DiscoverInstancesRequest.AddMember("ServiceName", _ServiceName)
-
-	DiscoverInstancesRequest_MaxResults = DiscoverInstancesRequest.AddMember("MaxResults", _DiscoverMaxResults)
-
-	DiscoverInstancesRequest_QueryParameters = DiscoverInstancesRequest.AddMember("QueryParameters", _Attributes)
-
-	DiscoverInstancesRequest_OptionalParameters = DiscoverInstancesRequest.AddMember("OptionalParameters", _Attributes)
-
-	DiscoverInstancesRequest_HealthStatus = DiscoverInstancesRequest.AddMember("HealthStatus", HealthStatusFilter)
-
-	DiscoverInstancesRequest_OwnerAccount = DiscoverInstancesRequest.AddMember("OwnerAccount", _AWSAccountId)
-
-	DiscoverInstancesResponse_Instances = DiscoverInstancesResponse.AddMember("Instances", _HttpInstanceSummaryList)
-
-	DiscoverInstancesResponse_InstancesRevision = DiscoverInstancesResponse.AddMember("InstancesRevision", _Revision)
-
-	DiscoverInstancesRevisionRequest_NamespaceName = DiscoverInstancesRevisionRequest.AddMember("NamespaceName", _NamespaceName)
-
-	DiscoverInstancesRevisionRequest_ServiceName = DiscoverInstancesRevisionRequest.AddMember("ServiceName", _ServiceName)
-
-	DiscoverInstancesRevisionRequest_OwnerAccount = DiscoverInstancesRevisionRequest.AddMember("OwnerAccount", _AWSAccountId)
-
-	DiscoverInstancesRevisionResponse_InstancesRevision = DiscoverInstancesRevisionResponse.AddMember("InstancesRevision", _Revision)
-
-	GetInstanceRequest_ServiceId = GetInstanceRequest.AddMember("ServiceId", _Arn)
-
-	GetInstanceRequest_InstanceId = GetInstanceRequest.AddMember("InstanceId", _ResourceId)
-
-	GetInstanceResponse_ResourceOwner = GetInstanceResponse.AddMember("ResourceOwner", _AWSAccountId)
-
-	GetInstanceResponse_Instance = GetInstanceResponse.AddMember("Instance", Instance)
-
-	GetInstancesHealthStatusRequest_ServiceId = GetInstancesHealthStatusRequest.AddMember("ServiceId", _Arn)
-
-	GetInstancesHealthStatusRequest_Instances = GetInstancesHealthStatusRequest.AddMember("Instances", _InstanceIdList)
-
-	GetInstancesHealthStatusRequest_MaxResults = GetInstancesHealthStatusRequest.AddMember("MaxResults", _MaxResults)
-
-	GetInstancesHealthStatusRequest_NextToken = GetInstancesHealthStatusRequest.AddMember("NextToken", _NextToken)
-
-	GetInstancesHealthStatusResponse_Status = GetInstancesHealthStatusResponse.AddMember("Status", _InstanceHealthStatusMap)
-
-	GetInstancesHealthStatusResponse_NextToken = GetInstancesHealthStatusResponse.AddMember("NextToken", _NextToken)
-
-	GetNamespaceRequest_Id = GetNamespaceRequest.AddMember("Id", _Arn)
-
-	GetNamespaceResponse_Namespace = GetNamespaceResponse.AddMember("Namespace", Namespace)
-
-	GetOperationRequest_OperationId = GetOperationRequest.AddMember("OperationId", _OperationId)
-
-	GetOperationRequest_OwnerAccount = GetOperationRequest.AddMember("OwnerAccount", _AWSAccountId)
-
-	GetOperationResponse_Operation = GetOperationResponse.AddMember("Operation", Operation)
-
-	GetServiceAttributesRequest_ServiceId = GetServiceAttributesRequest.AddMember("ServiceId", _Arn)
-
-	GetServiceAttributesResponse_ServiceAttributes = GetServiceAttributesResponse.AddMember("ServiceAttributes", ServiceAttributes)
-
-	GetServiceRequest_Id = GetServiceRequest.AddMember("Id", _Arn)
-
-	GetServiceResponse_Service = GetServiceResponse.AddMember("Service", Service)
-
-	ListInstancesRequest_ServiceId = ListInstancesRequest.AddMember("ServiceId", _Arn)
-
-	ListInstancesRequest_NextToken = ListInstancesRequest.AddMember("NextToken", _NextToken)
-
-	ListInstancesRequest_MaxResults = ListInstancesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListInstancesResponse_ResourceOwner = ListInstancesResponse.AddMember("ResourceOwner", _AWSAccountId)
-
-	ListInstancesResponse_Instances = ListInstancesResponse.AddMember("Instances", _InstanceSummaryList)
-
-	ListInstancesResponse_NextToken = ListInstancesResponse.AddMember("NextToken", _NextToken)
-
-	ListNamespacesRequest_NextToken = ListNamespacesRequest.AddMember("NextToken", _NextToken)
-
-	ListNamespacesRequest_MaxResults = ListNamespacesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListNamespacesRequest_Filters = ListNamespacesRequest.AddMember("Filters", _NamespaceFilters)
-
-	ListNamespacesResponse_Namespaces = ListNamespacesResponse.AddMember("Namespaces", _NamespaceSummariesList)
-
-	ListNamespacesResponse_NextToken = ListNamespacesResponse.AddMember("NextToken", _NextToken)
-
-	ListOperationsRequest_NextToken = ListOperationsRequest.AddMember("NextToken", _NextToken)
-
-	ListOperationsRequest_MaxResults = ListOperationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListOperationsRequest_Filters = ListOperationsRequest.AddMember("Filters", _OperationFilters)
-
-	ListOperationsResponse_Operations = ListOperationsResponse.AddMember("Operations", _OperationSummaryList)
-
-	ListOperationsResponse_NextToken = ListOperationsResponse.AddMember("NextToken", _NextToken)
-
-	ListServicesRequest_NextToken = ListServicesRequest.AddMember("NextToken", _NextToken)
-
-	ListServicesRequest_MaxResults = ListServicesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListServicesRequest_Filters = ListServicesRequest.AddMember("Filters", _ServiceFilters)
-
-	ListServicesResponse_Services = ListServicesResponse.AddMember("Services", _ServiceSummariesList)
-
-	ListServicesResponse_NextToken = ListServicesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	RegisterInstanceRequest_ServiceId = RegisterInstanceRequest.AddMember("ServiceId", _Arn)
-
-	RegisterInstanceRequest_InstanceId = RegisterInstanceRequest.AddMember("InstanceId", _InstanceId)
-
-	RegisterInstanceRequest_CreatorRequestId = RegisterInstanceRequest.AddMember("CreatorRequestId", _ResourceId)
-
-	RegisterInstanceRequest_Attributes = RegisterInstanceRequest.AddMember("Attributes", _Attributes)
-
-	RegisterInstanceResponse_OperationId = RegisterInstanceResponse.AddMember("OperationId", _OperationId)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateHttpNamespaceRequest_Id = UpdateHttpNamespaceRequest.AddMember("Id", _Arn)
-
-	UpdateHttpNamespaceRequest_UpdaterRequestId = UpdateHttpNamespaceRequest.AddMember("UpdaterRequestId", _ResourceId)
-
-	UpdateHttpNamespaceRequest_Namespace = UpdateHttpNamespaceRequest.AddMember("Namespace", HttpNamespaceChange)
-
-	UpdateHttpNamespaceResponse_OperationId = UpdateHttpNamespaceResponse.AddMember("OperationId", _OperationId)
-
-	UpdateInstanceCustomHealthStatusRequest_ServiceId = UpdateInstanceCustomHealthStatusRequest.AddMember("ServiceId", _Arn)
-
-	UpdateInstanceCustomHealthStatusRequest_InstanceId = UpdateInstanceCustomHealthStatusRequest.AddMember("InstanceId", _ResourceId)
-
-	UpdateInstanceCustomHealthStatusRequest_Status = UpdateInstanceCustomHealthStatusRequest.AddMember("Status", CustomHealthStatus)
-
-	UpdatePrivateDnsNamespaceRequest_Id = UpdatePrivateDnsNamespaceRequest.AddMember("Id", _Arn)
-
-	UpdatePrivateDnsNamespaceRequest_UpdaterRequestId = UpdatePrivateDnsNamespaceRequest.AddMember("UpdaterRequestId", _ResourceId)
-
-	UpdatePrivateDnsNamespaceRequest_Namespace = UpdatePrivateDnsNamespaceRequest.AddMember("Namespace", PrivateDnsNamespaceChange)
-
-	UpdatePrivateDnsNamespaceResponse_OperationId = UpdatePrivateDnsNamespaceResponse.AddMember("OperationId", _OperationId)
-
-	UpdatePublicDnsNamespaceRequest_Id = UpdatePublicDnsNamespaceRequest.AddMember("Id", _Arn)
-
-	UpdatePublicDnsNamespaceRequest_UpdaterRequestId = UpdatePublicDnsNamespaceRequest.AddMember("UpdaterRequestId", _ResourceId)
-
-	UpdatePublicDnsNamespaceRequest_Namespace = UpdatePublicDnsNamespaceRequest.AddMember("Namespace", PublicDnsNamespaceChange)
-
-	UpdatePublicDnsNamespaceResponse_OperationId = UpdatePublicDnsNamespaceResponse.AddMember("OperationId", _OperationId)
-
-	UpdateServiceAttributesRequest_ServiceId = UpdateServiceAttributesRequest.AddMember("ServiceId", _Arn)
-
-	UpdateServiceAttributesRequest_Attributes = UpdateServiceAttributesRequest.AddMember("Attributes", _ServiceAttributesMap)
-
-	UpdateServiceRequest_Id = UpdateServiceRequest.AddMember("Id", _Arn)
-
-	UpdateServiceRequest_Service = UpdateServiceRequest.AddMember("Service", ServiceChange)
-
-	UpdateServiceResponse_OperationId = UpdateServiceResponse.AddMember("OperationId", _OperationId)
-
-}
+var (
+	eCreateHttpNamespace                                 smithy.SchemaExtensions
+	eCreatePrivateDnsNamespace                           smithy.SchemaExtensions
+	eCreatePublicDnsNamespace                            smithy.SchemaExtensions
+	eCreateService                                       smithy.SchemaExtensions
+	eDeleteNamespace                                     smithy.SchemaExtensions
+	eDeleteService                                       smithy.SchemaExtensions
+	eDeleteServiceAttributes                             smithy.SchemaExtensions
+	eDeregisterInstance                                  smithy.SchemaExtensions
+	eDiscoverInstances                                   smithy.SchemaExtensions
+	eDiscoverInstancesRevision                           smithy.SchemaExtensions
+	eGetInstance                                         smithy.SchemaExtensions
+	eGetInstancesHealthStatus                            smithy.SchemaExtensions
+	eGetNamespace                                        smithy.SchemaExtensions
+	eGetOperation                                        smithy.SchemaExtensions
+	eGetService                                          smithy.SchemaExtensions
+	eGetServiceAttributes                                smithy.SchemaExtensions
+	eListInstances                                       smithy.SchemaExtensions
+	eListNamespaces                                      smithy.SchemaExtensions
+	eListOperations                                      smithy.SchemaExtensions
+	eListServices                                        smithy.SchemaExtensions
+	eListTagsForResource                                 smithy.SchemaExtensions
+	eRegisterInstance                                    smithy.SchemaExtensions
+	eTagResource                                         smithy.SchemaExtensions
+	eUntagResource                                       smithy.SchemaExtensions
+	eUpdateHttpNamespace                                 smithy.SchemaExtensions
+	eUpdateInstanceCustomHealthStatus                    smithy.SchemaExtensions
+	eUpdatePrivateDnsNamespace                           smithy.SchemaExtensions
+	eUpdatePublicDnsNamespace                            smithy.SchemaExtensions
+	eUpdateService                                       smithy.SchemaExtensions
+	eUpdateServiceAttributes                             smithy.SchemaExtensions
+	e_Route53AutoNaming_v20170314                        smithy.SchemaExtensions
+	e_AmazonResourceName                                 smithy.SchemaExtensions
+	e_Arn                                                smithy.SchemaExtensions
+	e_Attributes                                         smithy.SchemaExtensions
+	e_Attributes_key                                     smithy.SchemaExtensions
+	e_Attributes_value                                   smithy.SchemaExtensions
+	e_AttrKey                                            smithy.SchemaExtensions
+	e_AttrValue                                          smithy.SchemaExtensions
+	e_AWSAccountId                                       smithy.SchemaExtensions
+	e_Code                                               smithy.SchemaExtensions
+	eCustomHealthNotFound                                smithy.SchemaExtensions
+	eCustomHealthNotFound_Message                        smithy.SchemaExtensions
+	eCustomHealthStatus                                  smithy.SchemaExtensions
+	eCustomHealthStatus_HEALTHY                          smithy.SchemaExtensions
+	eCustomHealthStatus_UNHEALTHY                        smithy.SchemaExtensions
+	e_DiscoverMaxResults                                 smithy.SchemaExtensions
+	eDnsConfig                                           smithy.SchemaExtensions
+	eDnsConfig_NamespaceId                               smithy.SchemaExtensions
+	eDnsConfig_RoutingPolicy                             smithy.SchemaExtensions
+	eDnsConfig_DnsRecords                                smithy.SchemaExtensions
+	eDnsConfigChange                                     smithy.SchemaExtensions
+	eDnsConfigChange_DnsRecords                          smithy.SchemaExtensions
+	eDnsProperties                                       smithy.SchemaExtensions
+	eDnsProperties_HostedZoneId                          smithy.SchemaExtensions
+	eDnsProperties_SOA                                   smithy.SchemaExtensions
+	eDnsRecord                                           smithy.SchemaExtensions
+	eDnsRecord_Type                                      smithy.SchemaExtensions
+	eDnsRecord_TTL                                       smithy.SchemaExtensions
+	e_DnsRecordList                                      smithy.SchemaExtensions
+	e_DnsRecordList_member                               smithy.SchemaExtensions
+	eDuplicateRequest                                    smithy.SchemaExtensions
+	eDuplicateRequest_Message                            smithy.SchemaExtensions
+	eDuplicateRequest_DuplicateOperationId               smithy.SchemaExtensions
+	e_ErrorMessage                                       smithy.SchemaExtensions
+	e_FailureThreshold                                   smithy.SchemaExtensions
+	eFilterCondition                                     smithy.SchemaExtensions
+	eFilterCondition_EQ                                  smithy.SchemaExtensions
+	eFilterCondition_IN                                  smithy.SchemaExtensions
+	eFilterCondition_BETWEEN                             smithy.SchemaExtensions
+	eFilterCondition_BEGINS_WITH                         smithy.SchemaExtensions
+	e_FilterValue                                        smithy.SchemaExtensions
+	e_FilterValues                                       smithy.SchemaExtensions
+	e_FilterValues_member                                smithy.SchemaExtensions
+	eHealthCheckConfig                                   smithy.SchemaExtensions
+	eHealthCheckConfig_Type                              smithy.SchemaExtensions
+	eHealthCheckConfig_ResourcePath                      smithy.SchemaExtensions
+	eHealthCheckConfig_FailureThreshold                  smithy.SchemaExtensions
+	eHealthCheckCustomConfig                             smithy.SchemaExtensions
+	eHealthCheckCustomConfig_FailureThreshold            smithy.SchemaExtensions
+	eHealthCheckType                                     smithy.SchemaExtensions
+	eHealthCheckType_HTTP                                smithy.SchemaExtensions
+	eHealthCheckType_HTTPS                               smithy.SchemaExtensions
+	eHealthCheckType_TCP                                 smithy.SchemaExtensions
+	eHealthStatus                                        smithy.SchemaExtensions
+	eHealthStatus_HEALTHY                                smithy.SchemaExtensions
+	eHealthStatus_UNHEALTHY                              smithy.SchemaExtensions
+	eHealthStatus_UNKNOWN                                smithy.SchemaExtensions
+	eHealthStatusFilter                                  smithy.SchemaExtensions
+	eHealthStatusFilter_HEALTHY                          smithy.SchemaExtensions
+	eHealthStatusFilter_UNHEALTHY                        smithy.SchemaExtensions
+	eHealthStatusFilter_ALL                              smithy.SchemaExtensions
+	eHealthStatusFilter_HEALTHY_OR_ELSE_ALL              smithy.SchemaExtensions
+	eHttpInstanceSummary                                 smithy.SchemaExtensions
+	eHttpInstanceSummary_InstanceId                      smithy.SchemaExtensions
+	eHttpInstanceSummary_NamespaceName                   smithy.SchemaExtensions
+	eHttpInstanceSummary_ServiceName                     smithy.SchemaExtensions
+	eHttpInstanceSummary_HealthStatus                    smithy.SchemaExtensions
+	eHttpInstanceSummary_Attributes                      smithy.SchemaExtensions
+	e_HttpInstanceSummaryList                            smithy.SchemaExtensions
+	e_HttpInstanceSummaryList_member                     smithy.SchemaExtensions
+	eHttpNamespaceChange                                 smithy.SchemaExtensions
+	eHttpNamespaceChange_Description                     smithy.SchemaExtensions
+	eHttpProperties                                      smithy.SchemaExtensions
+	eHttpProperties_HttpName                             smithy.SchemaExtensions
+	eInstance                                            smithy.SchemaExtensions
+	eInstance_Id                                         smithy.SchemaExtensions
+	eInstance_CreatorRequestId                           smithy.SchemaExtensions
+	eInstance_Attributes                                 smithy.SchemaExtensions
+	eInstance_CreatedByAccount                           smithy.SchemaExtensions
+	e_InstanceHealthStatusMap                            smithy.SchemaExtensions
+	e_InstanceHealthStatusMap_key                        smithy.SchemaExtensions
+	e_InstanceHealthStatusMap_value                      smithy.SchemaExtensions
+	e_InstanceId                                         smithy.SchemaExtensions
+	e_InstanceIdList                                     smithy.SchemaExtensions
+	e_InstanceIdList_member                              smithy.SchemaExtensions
+	eInstanceNotFound                                    smithy.SchemaExtensions
+	eInstanceNotFound_Message                            smithy.SchemaExtensions
+	eInstanceSummary                                     smithy.SchemaExtensions
+	eInstanceSummary_Id                                  smithy.SchemaExtensions
+	eInstanceSummary_Attributes                          smithy.SchemaExtensions
+	eInstanceSummary_CreatedByAccount                    smithy.SchemaExtensions
+	e_InstanceSummaryList                                smithy.SchemaExtensions
+	e_InstanceSummaryList_member                         smithy.SchemaExtensions
+	eInvalidInput                                        smithy.SchemaExtensions
+	eInvalidInput_Message                                smithy.SchemaExtensions
+	e_MaxResults                                         smithy.SchemaExtensions
+	e_Message                                            smithy.SchemaExtensions
+	eNamespace                                           smithy.SchemaExtensions
+	eNamespace_Id                                        smithy.SchemaExtensions
+	eNamespace_Arn                                       smithy.SchemaExtensions
+	eNamespace_ResourceOwner                             smithy.SchemaExtensions
+	eNamespace_Name                                      smithy.SchemaExtensions
+	eNamespace_Type                                      smithy.SchemaExtensions
+	eNamespace_Description                               smithy.SchemaExtensions
+	eNamespace_ServiceCount                              smithy.SchemaExtensions
+	eNamespace_Properties                                smithy.SchemaExtensions
+	eNamespace_CreateDate                                smithy.SchemaExtensions
+	eNamespace_CreatorRequestId                          smithy.SchemaExtensions
+	eNamespaceAlreadyExists                              smithy.SchemaExtensions
+	eNamespaceAlreadyExists_Message                      smithy.SchemaExtensions
+	eNamespaceAlreadyExists_CreatorRequestId             smithy.SchemaExtensions
+	eNamespaceAlreadyExists_NamespaceId                  smithy.SchemaExtensions
+	eNamespaceFilter                                     smithy.SchemaExtensions
+	eNamespaceFilter_Name                                smithy.SchemaExtensions
+	eNamespaceFilter_Values                              smithy.SchemaExtensions
+	eNamespaceFilter_Condition                           smithy.SchemaExtensions
+	eNamespaceFilterName                                 smithy.SchemaExtensions
+	eNamespaceFilterName_TYPE                            smithy.SchemaExtensions
+	eNamespaceFilterName_NAME                            smithy.SchemaExtensions
+	eNamespaceFilterName_HTTP_NAME                       smithy.SchemaExtensions
+	eNamespaceFilterName_RESOURCE_OWNER                  smithy.SchemaExtensions
+	e_NamespaceFilters                                   smithy.SchemaExtensions
+	e_NamespaceFilters_member                            smithy.SchemaExtensions
+	e_NamespaceName                                      smithy.SchemaExtensions
+	e_NamespaceNameHttp                                  smithy.SchemaExtensions
+	e_NamespaceNamePrivate                               smithy.SchemaExtensions
+	e_NamespaceNamePublic                                smithy.SchemaExtensions
+	eNamespaceNotFound                                   smithy.SchemaExtensions
+	eNamespaceNotFound_Message                           smithy.SchemaExtensions
+	eNamespaceProperties                                 smithy.SchemaExtensions
+	eNamespaceProperties_DnsProperties                   smithy.SchemaExtensions
+	eNamespaceProperties_HttpProperties                  smithy.SchemaExtensions
+	e_NamespaceSummariesList                             smithy.SchemaExtensions
+	e_NamespaceSummariesList_member                      smithy.SchemaExtensions
+	eNamespaceSummary                                    smithy.SchemaExtensions
+	eNamespaceSummary_Id                                 smithy.SchemaExtensions
+	eNamespaceSummary_Arn                                smithy.SchemaExtensions
+	eNamespaceSummary_ResourceOwner                      smithy.SchemaExtensions
+	eNamespaceSummary_Name                               smithy.SchemaExtensions
+	eNamespaceSummary_Type                               smithy.SchemaExtensions
+	eNamespaceSummary_Description                        smithy.SchemaExtensions
+	eNamespaceSummary_ServiceCount                       smithy.SchemaExtensions
+	eNamespaceSummary_Properties                         smithy.SchemaExtensions
+	eNamespaceSummary_CreateDate                         smithy.SchemaExtensions
+	eNamespaceType                                       smithy.SchemaExtensions
+	eNamespaceType_DNS_PUBLIC                            smithy.SchemaExtensions
+	eNamespaceType_DNS_PRIVATE                           smithy.SchemaExtensions
+	eNamespaceType_HTTP                                  smithy.SchemaExtensions
+	e_NextToken                                          smithy.SchemaExtensions
+	eOperation                                           smithy.SchemaExtensions
+	eOperation_Id                                        smithy.SchemaExtensions
+	eOperation_OwnerAccount                              smithy.SchemaExtensions
+	eOperation_Type                                      smithy.SchemaExtensions
+	eOperation_Status                                    smithy.SchemaExtensions
+	eOperation_ErrorMessage                              smithy.SchemaExtensions
+	eOperation_ErrorCode                                 smithy.SchemaExtensions
+	eOperation_CreateDate                                smithy.SchemaExtensions
+	eOperation_UpdateDate                                smithy.SchemaExtensions
+	eOperation_Targets                                   smithy.SchemaExtensions
+	eOperationFilter                                     smithy.SchemaExtensions
+	eOperationFilter_Name                                smithy.SchemaExtensions
+	eOperationFilter_Values                              smithy.SchemaExtensions
+	eOperationFilter_Condition                           smithy.SchemaExtensions
+	eOperationFilterName                                 smithy.SchemaExtensions
+	eOperationFilterName_NAMESPACE_ID                    smithy.SchemaExtensions
+	eOperationFilterName_SERVICE_ID                      smithy.SchemaExtensions
+	eOperationFilterName_STATUS                          smithy.SchemaExtensions
+	eOperationFilterName_TYPE                            smithy.SchemaExtensions
+	eOperationFilterName_UPDATE_DATE                     smithy.SchemaExtensions
+	e_OperationFilters                                   smithy.SchemaExtensions
+	e_OperationFilters_member                            smithy.SchemaExtensions
+	e_OperationId                                        smithy.SchemaExtensions
+	eOperationNotFound                                   smithy.SchemaExtensions
+	eOperationNotFound_Message                           smithy.SchemaExtensions
+	eOperationStatus                                     smithy.SchemaExtensions
+	eOperationStatus_SUBMITTED                           smithy.SchemaExtensions
+	eOperationStatus_PENDING                             smithy.SchemaExtensions
+	eOperationStatus_SUCCESS                             smithy.SchemaExtensions
+	eOperationStatus_FAIL                                smithy.SchemaExtensions
+	eOperationSummary                                    smithy.SchemaExtensions
+	eOperationSummary_Id                                 smithy.SchemaExtensions
+	eOperationSummary_Status                             smithy.SchemaExtensions
+	e_OperationSummaryList                               smithy.SchemaExtensions
+	e_OperationSummaryList_member                        smithy.SchemaExtensions
+	e_OperationTargetsMap                                smithy.SchemaExtensions
+	e_OperationTargetsMap_key                            smithy.SchemaExtensions
+	e_OperationTargetsMap_value                          smithy.SchemaExtensions
+	eOperationTargetType                                 smithy.SchemaExtensions
+	eOperationTargetType_NAMESPACE                       smithy.SchemaExtensions
+	eOperationTargetType_SERVICE                         smithy.SchemaExtensions
+	eOperationTargetType_INSTANCE                        smithy.SchemaExtensions
+	eOperationType                                       smithy.SchemaExtensions
+	eOperationType_CREATE_NAMESPACE                      smithy.SchemaExtensions
+	eOperationType_DELETE_NAMESPACE                      smithy.SchemaExtensions
+	eOperationType_UPDATE_NAMESPACE                      smithy.SchemaExtensions
+	eOperationType_UPDATE_SERVICE                        smithy.SchemaExtensions
+	eOperationType_REGISTER_INSTANCE                     smithy.SchemaExtensions
+	eOperationType_DEREGISTER_INSTANCE                   smithy.SchemaExtensions
+	ePrivateDnsNamespaceChange                           smithy.SchemaExtensions
+	ePrivateDnsNamespaceChange_Description               smithy.SchemaExtensions
+	ePrivateDnsNamespaceChange_Properties                smithy.SchemaExtensions
+	ePrivateDnsNamespaceProperties                       smithy.SchemaExtensions
+	ePrivateDnsNamespaceProperties_DnsProperties         smithy.SchemaExtensions
+	ePrivateDnsNamespacePropertiesChange                 smithy.SchemaExtensions
+	ePrivateDnsNamespacePropertiesChange_DnsProperties   smithy.SchemaExtensions
+	ePrivateDnsPropertiesMutable                         smithy.SchemaExtensions
+	ePrivateDnsPropertiesMutable_SOA                     smithy.SchemaExtensions
+	ePrivateDnsPropertiesMutableChange                   smithy.SchemaExtensions
+	ePrivateDnsPropertiesMutableChange_SOA               smithy.SchemaExtensions
+	ePublicDnsNamespaceChange                            smithy.SchemaExtensions
+	ePublicDnsNamespaceChange_Description                smithy.SchemaExtensions
+	ePublicDnsNamespaceChange_Properties                 smithy.SchemaExtensions
+	ePublicDnsNamespaceProperties                        smithy.SchemaExtensions
+	ePublicDnsNamespaceProperties_DnsProperties          smithy.SchemaExtensions
+	ePublicDnsNamespacePropertiesChange                  smithy.SchemaExtensions
+	ePublicDnsNamespacePropertiesChange_DnsProperties    smithy.SchemaExtensions
+	ePublicDnsPropertiesMutable                          smithy.SchemaExtensions
+	ePublicDnsPropertiesMutable_SOA                      smithy.SchemaExtensions
+	ePublicDnsPropertiesMutableChange                    smithy.SchemaExtensions
+	ePublicDnsPropertiesMutableChange_SOA                smithy.SchemaExtensions
+	e_RecordTTL                                          smithy.SchemaExtensions
+	eRecordType                                          smithy.SchemaExtensions
+	eRecordType_SRV                                      smithy.SchemaExtensions
+	eRecordType_A                                        smithy.SchemaExtensions
+	eRecordType_AAAA                                     smithy.SchemaExtensions
+	eRecordType_CNAME                                    smithy.SchemaExtensions
+	eRequestLimitExceeded                                smithy.SchemaExtensions
+	eRequestLimitExceeded_Message                        smithy.SchemaExtensions
+	e_ResourceCount                                      smithy.SchemaExtensions
+	e_ResourceDescription                                smithy.SchemaExtensions
+	e_ResourceId                                         smithy.SchemaExtensions
+	eResourceInUse                                       smithy.SchemaExtensions
+	eResourceInUse_Message                               smithy.SchemaExtensions
+	eResourceLimitExceeded                               smithy.SchemaExtensions
+	eResourceLimitExceeded_Message                       smithy.SchemaExtensions
+	eResourceNotFoundException                           smithy.SchemaExtensions
+	eResourceNotFoundException_Message                   smithy.SchemaExtensions
+	e_ResourcePath                                       smithy.SchemaExtensions
+	e_Revision                                           smithy.SchemaExtensions
+	eRoutingPolicy                                       smithy.SchemaExtensions
+	eRoutingPolicy_MULTIVALUE                            smithy.SchemaExtensions
+	eRoutingPolicy_WEIGHTED                              smithy.SchemaExtensions
+	eService                                             smithy.SchemaExtensions
+	eService_Id                                          smithy.SchemaExtensions
+	eService_Arn                                         smithy.SchemaExtensions
+	eService_ResourceOwner                               smithy.SchemaExtensions
+	eService_Name                                        smithy.SchemaExtensions
+	eService_NamespaceId                                 smithy.SchemaExtensions
+	eService_Description                                 smithy.SchemaExtensions
+	eService_InstanceCount                               smithy.SchemaExtensions
+	eService_DnsConfig                                   smithy.SchemaExtensions
+	eService_Type                                        smithy.SchemaExtensions
+	eService_HealthCheckConfig                           smithy.SchemaExtensions
+	eService_HealthCheckCustomConfig                     smithy.SchemaExtensions
+	eService_CreateDate                                  smithy.SchemaExtensions
+	eService_CreatorRequestId                            smithy.SchemaExtensions
+	eService_CreatedByAccount                            smithy.SchemaExtensions
+	eServiceAlreadyExists                                smithy.SchemaExtensions
+	eServiceAlreadyExists_Message                        smithy.SchemaExtensions
+	eServiceAlreadyExists_CreatorRequestId               smithy.SchemaExtensions
+	eServiceAlreadyExists_ServiceId                      smithy.SchemaExtensions
+	eServiceAlreadyExists_ServiceArn                     smithy.SchemaExtensions
+	e_ServiceAttributeKey                                smithy.SchemaExtensions
+	e_ServiceAttributeKeyList                            smithy.SchemaExtensions
+	e_ServiceAttributeKeyList_member                     smithy.SchemaExtensions
+	eServiceAttributes                                   smithy.SchemaExtensions
+	eServiceAttributes_ServiceArn                        smithy.SchemaExtensions
+	eServiceAttributes_ResourceOwner                     smithy.SchemaExtensions
+	eServiceAttributes_Attributes                        smithy.SchemaExtensions
+	eServiceAttributesLimitExceededException             smithy.SchemaExtensions
+	eServiceAttributesLimitExceededException_Message     smithy.SchemaExtensions
+	e_ServiceAttributesMap                               smithy.SchemaExtensions
+	e_ServiceAttributesMap_key                           smithy.SchemaExtensions
+	e_ServiceAttributesMap_value                         smithy.SchemaExtensions
+	e_ServiceAttributeValue                              smithy.SchemaExtensions
+	eServiceChange                                       smithy.SchemaExtensions
+	eServiceChange_Description                           smithy.SchemaExtensions
+	eServiceChange_DnsConfig                             smithy.SchemaExtensions
+	eServiceChange_HealthCheckConfig                     smithy.SchemaExtensions
+	eServiceFilter                                       smithy.SchemaExtensions
+	eServiceFilter_Name                                  smithy.SchemaExtensions
+	eServiceFilter_Values                                smithy.SchemaExtensions
+	eServiceFilter_Condition                             smithy.SchemaExtensions
+	eServiceFilterName                                   smithy.SchemaExtensions
+	eServiceFilterName_NAMESPACE_ID                      smithy.SchemaExtensions
+	eServiceFilterName_RESOURCE_OWNER                    smithy.SchemaExtensions
+	e_ServiceFilters                                     smithy.SchemaExtensions
+	e_ServiceFilters_member                              smithy.SchemaExtensions
+	e_ServiceName                                        smithy.SchemaExtensions
+	eServiceNotFound                                     smithy.SchemaExtensions
+	eServiceNotFound_Message                             smithy.SchemaExtensions
+	e_ServiceSummariesList                               smithy.SchemaExtensions
+	e_ServiceSummariesList_member                        smithy.SchemaExtensions
+	eServiceSummary                                      smithy.SchemaExtensions
+	eServiceSummary_Id                                   smithy.SchemaExtensions
+	eServiceSummary_Arn                                  smithy.SchemaExtensions
+	eServiceSummary_ResourceOwner                        smithy.SchemaExtensions
+	eServiceSummary_Name                                 smithy.SchemaExtensions
+	eServiceSummary_Type                                 smithy.SchemaExtensions
+	eServiceSummary_Description                          smithy.SchemaExtensions
+	eServiceSummary_InstanceCount                        smithy.SchemaExtensions
+	eServiceSummary_DnsConfig                            smithy.SchemaExtensions
+	eServiceSummary_HealthCheckConfig                    smithy.SchemaExtensions
+	eServiceSummary_HealthCheckCustomConfig              smithy.SchemaExtensions
+	eServiceSummary_CreateDate                           smithy.SchemaExtensions
+	eServiceSummary_CreatedByAccount                     smithy.SchemaExtensions
+	eServiceType                                         smithy.SchemaExtensions
+	eServiceType_HTTP                                    smithy.SchemaExtensions
+	eServiceType_DNS_HTTP                                smithy.SchemaExtensions
+	eServiceType_DNS                                     smithy.SchemaExtensions
+	eServiceTypeOption                                   smithy.SchemaExtensions
+	eServiceTypeOption_HTTP                              smithy.SchemaExtensions
+	eSOA                                                 smithy.SchemaExtensions
+	eSOA_TTL                                             smithy.SchemaExtensions
+	eSOAChange                                           smithy.SchemaExtensions
+	eSOAChange_TTL                                       smithy.SchemaExtensions
+	eTag                                                 smithy.SchemaExtensions
+	eTag_Key                                             smithy.SchemaExtensions
+	eTag_Value                                           smithy.SchemaExtensions
+	e_TagKey                                             smithy.SchemaExtensions
+	e_TagKeyList                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                  smithy.SchemaExtensions
+	e_TagList                                            smithy.SchemaExtensions
+	e_TagList_member                                     smithy.SchemaExtensions
+	e_TagValue                                           smithy.SchemaExtensions
+	e_Timestamp                                          smithy.SchemaExtensions
+	eTooManyTagsException                                smithy.SchemaExtensions
+	eTooManyTagsException_Message                        smithy.SchemaExtensions
+	eTooManyTagsException_ResourceName                   smithy.SchemaExtensions
+	eCreateHttpNamespaceRequest                          smithy.SchemaExtensions
+	eCreateHttpNamespaceRequest_Name                     smithy.SchemaExtensions
+	eCreateHttpNamespaceRequest_CreatorRequestId         smithy.SchemaExtensions
+	eCreateHttpNamespaceRequest_Description              smithy.SchemaExtensions
+	eCreateHttpNamespaceRequest_Tags                     smithy.SchemaExtensions
+	eCreateHttpNamespaceResponse                         smithy.SchemaExtensions
+	eCreateHttpNamespaceResponse_OperationId             smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceRequest                    smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceRequest_Name               smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceRequest_CreatorRequestId   smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceRequest_Description        smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceRequest_Vpc                smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceRequest_Tags               smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceRequest_Properties         smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceResponse                   smithy.SchemaExtensions
+	eCreatePrivateDnsNamespaceResponse_OperationId       smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceRequest                     smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceRequest_Name                smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceRequest_CreatorRequestId    smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceRequest_Description         smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceRequest_Tags                smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceRequest_Properties          smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceResponse                    smithy.SchemaExtensions
+	eCreatePublicDnsNamespaceResponse_OperationId        smithy.SchemaExtensions
+	eCreateServiceRequest                                smithy.SchemaExtensions
+	eCreateServiceRequest_Name                           smithy.SchemaExtensions
+	eCreateServiceRequest_NamespaceId                    smithy.SchemaExtensions
+	eCreateServiceRequest_CreatorRequestId               smithy.SchemaExtensions
+	eCreateServiceRequest_Description                    smithy.SchemaExtensions
+	eCreateServiceRequest_DnsConfig                      smithy.SchemaExtensions
+	eCreateServiceRequest_HealthCheckConfig              smithy.SchemaExtensions
+	eCreateServiceRequest_HealthCheckCustomConfig        smithy.SchemaExtensions
+	eCreateServiceRequest_Tags                           smithy.SchemaExtensions
+	eCreateServiceRequest_Type                           smithy.SchemaExtensions
+	eCreateServiceResponse                               smithy.SchemaExtensions
+	eCreateServiceResponse_Service                       smithy.SchemaExtensions
+	eDeleteNamespaceRequest                              smithy.SchemaExtensions
+	eDeleteNamespaceRequest_Id                           smithy.SchemaExtensions
+	eDeleteNamespaceResponse                             smithy.SchemaExtensions
+	eDeleteNamespaceResponse_OperationId                 smithy.SchemaExtensions
+	eDeleteServiceAttributesRequest                      smithy.SchemaExtensions
+	eDeleteServiceAttributesRequest_ServiceId            smithy.SchemaExtensions
+	eDeleteServiceAttributesRequest_Attributes           smithy.SchemaExtensions
+	eDeleteServiceAttributesResponse                     smithy.SchemaExtensions
+	eDeleteServiceRequest                                smithy.SchemaExtensions
+	eDeleteServiceRequest_Id                             smithy.SchemaExtensions
+	eDeleteServiceResponse                               smithy.SchemaExtensions
+	eDeregisterInstanceRequest                           smithy.SchemaExtensions
+	eDeregisterInstanceRequest_ServiceId                 smithy.SchemaExtensions
+	eDeregisterInstanceRequest_InstanceId                smithy.SchemaExtensions
+	eDeregisterInstanceResponse                          smithy.SchemaExtensions
+	eDeregisterInstanceResponse_OperationId              smithy.SchemaExtensions
+	eDiscoverInstancesRequest                            smithy.SchemaExtensions
+	eDiscoverInstancesRequest_NamespaceName              smithy.SchemaExtensions
+	eDiscoverInstancesRequest_ServiceName                smithy.SchemaExtensions
+	eDiscoverInstancesRequest_MaxResults                 smithy.SchemaExtensions
+	eDiscoverInstancesRequest_QueryParameters            smithy.SchemaExtensions
+	eDiscoverInstancesRequest_OptionalParameters         smithy.SchemaExtensions
+	eDiscoverInstancesRequest_HealthStatus               smithy.SchemaExtensions
+	eDiscoverInstancesRequest_OwnerAccount               smithy.SchemaExtensions
+	eDiscoverInstancesResponse                           smithy.SchemaExtensions
+	eDiscoverInstancesResponse_Instances                 smithy.SchemaExtensions
+	eDiscoverInstancesResponse_InstancesRevision         smithy.SchemaExtensions
+	eDiscoverInstancesRevisionRequest                    smithy.SchemaExtensions
+	eDiscoverInstancesRevisionRequest_NamespaceName      smithy.SchemaExtensions
+	eDiscoverInstancesRevisionRequest_ServiceName        smithy.SchemaExtensions
+	eDiscoverInstancesRevisionRequest_OwnerAccount       smithy.SchemaExtensions
+	eDiscoverInstancesRevisionResponse                   smithy.SchemaExtensions
+	eDiscoverInstancesRevisionResponse_InstancesRevision smithy.SchemaExtensions
+	eGetInstanceRequest                                  smithy.SchemaExtensions
+	eGetInstanceRequest_ServiceId                        smithy.SchemaExtensions
+	eGetInstanceRequest_InstanceId                       smithy.SchemaExtensions
+	eGetInstanceResponse                                 smithy.SchemaExtensions
+	eGetInstanceResponse_ResourceOwner                   smithy.SchemaExtensions
+	eGetInstanceResponse_Instance                        smithy.SchemaExtensions
+	eGetInstancesHealthStatusRequest                     smithy.SchemaExtensions
+	eGetInstancesHealthStatusRequest_ServiceId           smithy.SchemaExtensions
+	eGetInstancesHealthStatusRequest_Instances           smithy.SchemaExtensions
+	eGetInstancesHealthStatusRequest_MaxResults          smithy.SchemaExtensions
+	eGetInstancesHealthStatusRequest_NextToken           smithy.SchemaExtensions
+	eGetInstancesHealthStatusResponse                    smithy.SchemaExtensions
+	eGetInstancesHealthStatusResponse_Status             smithy.SchemaExtensions
+	eGetInstancesHealthStatusResponse_NextToken          smithy.SchemaExtensions
+	eGetNamespaceRequest                                 smithy.SchemaExtensions
+	eGetNamespaceRequest_Id                              smithy.SchemaExtensions
+	eGetNamespaceResponse                                smithy.SchemaExtensions
+	eGetNamespaceResponse_Namespace                      smithy.SchemaExtensions
+	eGetOperationRequest                                 smithy.SchemaExtensions
+	eGetOperationRequest_OperationId                     smithy.SchemaExtensions
+	eGetOperationRequest_OwnerAccount                    smithy.SchemaExtensions
+	eGetOperationResponse                                smithy.SchemaExtensions
+	eGetOperationResponse_Operation                      smithy.SchemaExtensions
+	eGetServiceAttributesRequest                         smithy.SchemaExtensions
+	eGetServiceAttributesRequest_ServiceId               smithy.SchemaExtensions
+	eGetServiceAttributesResponse                        smithy.SchemaExtensions
+	eGetServiceAttributesResponse_ServiceAttributes      smithy.SchemaExtensions
+	eGetServiceRequest                                   smithy.SchemaExtensions
+	eGetServiceRequest_Id                                smithy.SchemaExtensions
+	eGetServiceResponse                                  smithy.SchemaExtensions
+	eGetServiceResponse_Service                          smithy.SchemaExtensions
+	eListInstancesRequest                                smithy.SchemaExtensions
+	eListInstancesRequest_ServiceId                      smithy.SchemaExtensions
+	eListInstancesRequest_NextToken                      smithy.SchemaExtensions
+	eListInstancesRequest_MaxResults                     smithy.SchemaExtensions
+	eListInstancesResponse                               smithy.SchemaExtensions
+	eListInstancesResponse_ResourceOwner                 smithy.SchemaExtensions
+	eListInstancesResponse_Instances                     smithy.SchemaExtensions
+	eListInstancesResponse_NextToken                     smithy.SchemaExtensions
+	eListNamespacesRequest                               smithy.SchemaExtensions
+	eListNamespacesRequest_NextToken                     smithy.SchemaExtensions
+	eListNamespacesRequest_MaxResults                    smithy.SchemaExtensions
+	eListNamespacesRequest_Filters                       smithy.SchemaExtensions
+	eListNamespacesResponse                              smithy.SchemaExtensions
+	eListNamespacesResponse_Namespaces                   smithy.SchemaExtensions
+	eListNamespacesResponse_NextToken                    smithy.SchemaExtensions
+	eListOperationsRequest                               smithy.SchemaExtensions
+	eListOperationsRequest_NextToken                     smithy.SchemaExtensions
+	eListOperationsRequest_MaxResults                    smithy.SchemaExtensions
+	eListOperationsRequest_Filters                       smithy.SchemaExtensions
+	eListOperationsResponse                              smithy.SchemaExtensions
+	eListOperationsResponse_Operations                   smithy.SchemaExtensions
+	eListOperationsResponse_NextToken                    smithy.SchemaExtensions
+	eListServicesRequest                                 smithy.SchemaExtensions
+	eListServicesRequest_NextToken                       smithy.SchemaExtensions
+	eListServicesRequest_MaxResults                      smithy.SchemaExtensions
+	eListServicesRequest_Filters                         smithy.SchemaExtensions
+	eListServicesResponse                                smithy.SchemaExtensions
+	eListServicesResponse_Services                       smithy.SchemaExtensions
+	eListServicesResponse_NextToken                      smithy.SchemaExtensions
+	eListTagsForResourceRequest                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN              smithy.SchemaExtensions
+	eListTagsForResourceResponse                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                    smithy.SchemaExtensions
+	eRegisterInstanceRequest                             smithy.SchemaExtensions
+	eRegisterInstanceRequest_ServiceId                   smithy.SchemaExtensions
+	eRegisterInstanceRequest_InstanceId                  smithy.SchemaExtensions
+	eRegisterInstanceRequest_CreatorRequestId            smithy.SchemaExtensions
+	eRegisterInstanceRequest_Attributes                  smithy.SchemaExtensions
+	eRegisterInstanceResponse                            smithy.SchemaExtensions
+	eRegisterInstanceResponse_OperationId                smithy.SchemaExtensions
+	eTagResourceRequest                                  smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                      smithy.SchemaExtensions
+	eTagResourceRequest_Tags                             smithy.SchemaExtensions
+	eTagResourceResponse                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                    smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                        smithy.SchemaExtensions
+	eUntagResourceResponse                               smithy.SchemaExtensions
+	eUpdateHttpNamespaceRequest                          smithy.SchemaExtensions
+	eUpdateHttpNamespaceRequest_Id                       smithy.SchemaExtensions
+	eUpdateHttpNamespaceRequest_UpdaterRequestId         smithy.SchemaExtensions
+	eUpdateHttpNamespaceRequest_Namespace                smithy.SchemaExtensions
+	eUpdateHttpNamespaceResponse                         smithy.SchemaExtensions
+	eUpdateHttpNamespaceResponse_OperationId             smithy.SchemaExtensions
+	eUpdateInstanceCustomHealthStatusRequest             smithy.SchemaExtensions
+	eUpdateInstanceCustomHealthStatusRequest_ServiceId   smithy.SchemaExtensions
+	eUpdateInstanceCustomHealthStatusRequest_InstanceId  smithy.SchemaExtensions
+	eUpdateInstanceCustomHealthStatusRequest_Status      smithy.SchemaExtensions
+	eUpdatePrivateDnsNamespaceRequest                    smithy.SchemaExtensions
+	eUpdatePrivateDnsNamespaceRequest_Id                 smithy.SchemaExtensions
+	eUpdatePrivateDnsNamespaceRequest_UpdaterRequestId   smithy.SchemaExtensions
+	eUpdatePrivateDnsNamespaceRequest_Namespace          smithy.SchemaExtensions
+	eUpdatePrivateDnsNamespaceResponse                   smithy.SchemaExtensions
+	eUpdatePrivateDnsNamespaceResponse_OperationId       smithy.SchemaExtensions
+	eUpdatePublicDnsNamespaceRequest                     smithy.SchemaExtensions
+	eUpdatePublicDnsNamespaceRequest_Id                  smithy.SchemaExtensions
+	eUpdatePublicDnsNamespaceRequest_UpdaterRequestId    smithy.SchemaExtensions
+	eUpdatePublicDnsNamespaceRequest_Namespace           smithy.SchemaExtensions
+	eUpdatePublicDnsNamespaceResponse                    smithy.SchemaExtensions
+	eUpdatePublicDnsNamespaceResponse_OperationId        smithy.SchemaExtensions
+	eUpdateServiceAttributesRequest                      smithy.SchemaExtensions
+	eUpdateServiceAttributesRequest_ServiceId            smithy.SchemaExtensions
+	eUpdateServiceAttributesRequest_Attributes           smithy.SchemaExtensions
+	eUpdateServiceAttributesResponse                     smithy.SchemaExtensions
+	eUpdateServiceRequest                                smithy.SchemaExtensions
+	eUpdateServiceRequest_Id                             smithy.SchemaExtensions
+	eUpdateServiceRequest_Service                        smithy.SchemaExtensions
+	eUpdateServiceResponse                               smithy.SchemaExtensions
+	eUpdateServiceResponse_OperationId                   smithy.SchemaExtensions
+)
+
+var (
+	iCreateHttpNamespace                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreateHttpNamespace"}
+	iCreatePrivateDnsNamespace               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreatePrivateDnsNamespace"}
+	iCreatePublicDnsNamespace                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreatePublicDnsNamespace"}
+	iCreateService                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreateService"}
+	iDeleteNamespace                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteNamespace"}
+	iDeleteService                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteService"}
+	iDeleteServiceAttributes                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteServiceAttributes"}
+	iDeregisterInstance                      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeregisterInstance"}
+	iDiscoverInstances                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DiscoverInstances"}
+	iDiscoverInstancesRevision               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DiscoverInstancesRevision"}
+	iGetInstance                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetInstance"}
+	iGetInstancesHealthStatus                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetInstancesHealthStatus"}
+	iGetNamespace                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetNamespace"}
+	iGetOperation                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetOperation"}
+	iGetService                              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetService"}
+	iGetServiceAttributes                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetServiceAttributes"}
+	iListInstances                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListInstances"}
+	iListNamespaces                          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListNamespaces"}
+	iListOperations                          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListOperations"}
+	iListServices                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListServices"}
+	iListTagsForResource                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListTagsForResource"}
+	iRegisterInstance                        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "RegisterInstance"}
+	iTagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UntagResource"}
+	iUpdateHttpNamespace                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateHttpNamespace"}
+	iUpdateInstanceCustomHealthStatus        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateInstanceCustomHealthStatus"}
+	iUpdatePrivateDnsNamespace               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdatePrivateDnsNamespace"}
+	iUpdatePublicDnsNamespace                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdatePublicDnsNamespace"}
+	iUpdateService                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateService"}
+	iUpdateServiceAttributes                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateServiceAttributes"}
+	i_Route53AutoNaming_v20170314            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Route53AutoNaming_v20170314"}
+	i_AmazonResourceName                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "AmazonResourceName"}
+	i_Arn                                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Arn"}
+	i_Attributes                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Attributes"}
+	i_AttrKey                                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "AttrKey"}
+	i_AttrValue                              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "AttrValue"}
+	i_AWSAccountId                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "AWSAccountId"}
+	i_Code                                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Code"}
+	iCustomHealthNotFound                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CustomHealthNotFound"}
+	iCustomHealthStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CustomHealthStatus"}
+	i_DiscoverMaxResults                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DiscoverMaxResults"}
+	iDnsConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DnsConfig"}
+	iDnsConfigChange                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DnsConfigChange"}
+	iDnsProperties                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DnsProperties"}
+	iDnsRecord                               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DnsRecord"}
+	i_DnsRecordList                          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DnsRecordList"}
+	iDuplicateRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DuplicateRequest"}
+	i_ErrorMessage                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ErrorMessage"}
+	i_FailureThreshold                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "FailureThreshold"}
+	iFilterCondition                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "FilterCondition"}
+	i_FilterValue                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "FilterValue"}
+	i_FilterValues                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "FilterValues"}
+	iHealthCheckConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HealthCheckConfig"}
+	iHealthCheckCustomConfig                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HealthCheckCustomConfig"}
+	iHealthCheckType                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HealthCheckType"}
+	iHealthStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HealthStatus"}
+	iHealthStatusFilter                      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HealthStatusFilter"}
+	iHttpInstanceSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HttpInstanceSummary"}
+	i_HttpInstanceSummaryList                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HttpInstanceSummaryList"}
+	iHttpNamespaceChange                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HttpNamespaceChange"}
+	iHttpProperties                          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "HttpProperties"}
+	iInstance                                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Instance"}
+	i_InstanceHealthStatusMap                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "InstanceHealthStatusMap"}
+	i_InstanceId                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "InstanceId"}
+	i_InstanceIdList                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "InstanceIdList"}
+	iInstanceNotFound                        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "InstanceNotFound"}
+	iInstanceSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "InstanceSummary"}
+	i_InstanceSummaryList                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "InstanceSummaryList"}
+	iInvalidInput                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "InvalidInput"}
+	i_MaxResults                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "MaxResults"}
+	i_Message                                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Message"}
+	iNamespace                               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Namespace"}
+	iNamespaceAlreadyExists                  = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceAlreadyExists"}
+	iNamespaceFilter                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceFilter"}
+	iNamespaceFilterName                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceFilterName"}
+	i_NamespaceFilters                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceFilters"}
+	i_NamespaceName                          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceName"}
+	i_NamespaceNameHttp                      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceNameHttp"}
+	i_NamespaceNamePrivate                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceNamePrivate"}
+	i_NamespaceNamePublic                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceNamePublic"}
+	iNamespaceNotFound                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceNotFound"}
+	iNamespaceProperties                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceProperties"}
+	i_NamespaceSummariesList                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceSummariesList"}
+	iNamespaceSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceSummary"}
+	iNamespaceType                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NamespaceType"}
+	i_NextToken                              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "NextToken"}
+	iOperation                               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Operation"}
+	iOperationFilter                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationFilter"}
+	iOperationFilterName                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationFilterName"}
+	i_OperationFilters                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationFilters"}
+	i_OperationId                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationId"}
+	iOperationNotFound                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationNotFound"}
+	iOperationStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationStatus"}
+	iOperationSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationSummary"}
+	i_OperationSummaryList                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationSummaryList"}
+	i_OperationTargetsMap                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationTargetsMap"}
+	iOperationTargetType                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationTargetType"}
+	iOperationType                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "OperationType"}
+	iPrivateDnsNamespaceChange               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PrivateDnsNamespaceChange"}
+	iPrivateDnsNamespaceProperties           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PrivateDnsNamespaceProperties"}
+	iPrivateDnsNamespacePropertiesChange     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PrivateDnsNamespacePropertiesChange"}
+	iPrivateDnsPropertiesMutable             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PrivateDnsPropertiesMutable"}
+	iPrivateDnsPropertiesMutableChange       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PrivateDnsPropertiesMutableChange"}
+	iPublicDnsNamespaceChange                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PublicDnsNamespaceChange"}
+	iPublicDnsNamespaceProperties            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PublicDnsNamespaceProperties"}
+	iPublicDnsNamespacePropertiesChange      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PublicDnsNamespacePropertiesChange"}
+	iPublicDnsPropertiesMutable              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PublicDnsPropertiesMutable"}
+	iPublicDnsPropertiesMutableChange        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "PublicDnsPropertiesMutableChange"}
+	i_RecordTTL                              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "RecordTTL"}
+	iRecordType                              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "RecordType"}
+	iRequestLimitExceeded                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "RequestLimitExceeded"}
+	i_ResourceCount                          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ResourceCount"}
+	i_ResourceDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ResourceDescription"}
+	i_ResourceId                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ResourceId"}
+	iResourceInUse                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ResourceInUse"}
+	iResourceLimitExceeded                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ResourceLimitExceeded"}
+	iResourceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ResourceNotFoundException"}
+	i_ResourcePath                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ResourcePath"}
+	i_Revision                               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Revision"}
+	iRoutingPolicy                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "RoutingPolicy"}
+	iService                                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Service"}
+	iServiceAlreadyExists                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceAlreadyExists"}
+	i_ServiceAttributeKey                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceAttributeKey"}
+	i_ServiceAttributeKeyList                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceAttributeKeyList"}
+	iServiceAttributes                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceAttributes"}
+	iServiceAttributesLimitExceededException = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceAttributesLimitExceededException"}
+	i_ServiceAttributesMap                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceAttributesMap"}
+	i_ServiceAttributeValue                  = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceAttributeValue"}
+	iServiceChange                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceChange"}
+	iServiceFilter                           = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceFilter"}
+	iServiceFilterName                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceFilterName"}
+	i_ServiceFilters                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceFilters"}
+	i_ServiceName                            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceName"}
+	iServiceNotFound                         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceNotFound"}
+	i_ServiceSummariesList                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceSummariesList"}
+	iServiceSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceSummary"}
+	iServiceType                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceType"}
+	iServiceTypeOption                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ServiceTypeOption"}
+	iSOA                                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "SOA"}
+	iSOAChange                               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "SOAChange"}
+	iTag                                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Tag"}
+	i_TagKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TagKey"}
+	i_TagKeyList                             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TagKeyList"}
+	i_TagList                                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TagList"}
+	i_TagValue                               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TagValue"}
+	i_Timestamp                              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "Timestamp"}
+	iTooManyTagsException                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TooManyTagsException"}
+	iCreateHttpNamespaceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreateHttpNamespaceRequest"}
+	iCreateHttpNamespaceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreateHttpNamespaceResponse"}
+	iCreatePrivateDnsNamespaceRequest        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreatePrivateDnsNamespaceRequest"}
+	iCreatePrivateDnsNamespaceResponse       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreatePrivateDnsNamespaceResponse"}
+	iCreatePublicDnsNamespaceRequest         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreatePublicDnsNamespaceRequest"}
+	iCreatePublicDnsNamespaceResponse        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreatePublicDnsNamespaceResponse"}
+	iCreateServiceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreateServiceRequest"}
+	iCreateServiceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "CreateServiceResponse"}
+	iDeleteNamespaceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteNamespaceRequest"}
+	iDeleteNamespaceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteNamespaceResponse"}
+	iDeleteServiceAttributesRequest          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteServiceAttributesRequest"}
+	iDeleteServiceAttributesResponse         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteServiceAttributesResponse"}
+	iDeleteServiceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteServiceRequest"}
+	iDeleteServiceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeleteServiceResponse"}
+	iDeregisterInstanceRequest               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeregisterInstanceRequest"}
+	iDeregisterInstanceResponse              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DeregisterInstanceResponse"}
+	iDiscoverInstancesRequest                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DiscoverInstancesRequest"}
+	iDiscoverInstancesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DiscoverInstancesResponse"}
+	iDiscoverInstancesRevisionRequest        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DiscoverInstancesRevisionRequest"}
+	iDiscoverInstancesRevisionResponse       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "DiscoverInstancesRevisionResponse"}
+	iGetInstanceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetInstanceRequest"}
+	iGetInstanceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetInstanceResponse"}
+	iGetInstancesHealthStatusRequest         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetInstancesHealthStatusRequest"}
+	iGetInstancesHealthStatusResponse        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetInstancesHealthStatusResponse"}
+	iGetNamespaceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetNamespaceRequest"}
+	iGetNamespaceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetNamespaceResponse"}
+	iGetOperationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetOperationRequest"}
+	iGetOperationResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetOperationResponse"}
+	iGetServiceAttributesRequest             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetServiceAttributesRequest"}
+	iGetServiceAttributesResponse            = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetServiceAttributesResponse"}
+	iGetServiceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetServiceRequest"}
+	iGetServiceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "GetServiceResponse"}
+	iListInstancesRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListInstancesRequest"}
+	iListInstancesResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListInstancesResponse"}
+	iListNamespacesRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListNamespacesRequest"}
+	iListNamespacesResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListNamespacesResponse"}
+	iListOperationsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListOperationsRequest"}
+	iListOperationsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListOperationsResponse"}
+	iListServicesRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListServicesRequest"}
+	iListServicesResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListServicesResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "ListTagsForResourceResponse"}
+	iRegisterInstanceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "RegisterInstanceRequest"}
+	iRegisterInstanceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "RegisterInstanceResponse"}
+	iTagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TagResourceRequest"}
+	iTagResourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "TagResourceResponse"}
+	iUntagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UntagResourceResponse"}
+	iUpdateHttpNamespaceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateHttpNamespaceRequest"}
+	iUpdateHttpNamespaceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateHttpNamespaceResponse"}
+	iUpdateInstanceCustomHealthStatusRequest = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateInstanceCustomHealthStatusRequest"}
+	iUpdatePrivateDnsNamespaceRequest        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdatePrivateDnsNamespaceRequest"}
+	iUpdatePrivateDnsNamespaceResponse       = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdatePrivateDnsNamespaceResponse"}
+	iUpdatePublicDnsNamespaceRequest         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdatePublicDnsNamespaceRequest"}
+	iUpdatePublicDnsNamespaceResponse        = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdatePublicDnsNamespaceResponse"}
+	iUpdateServiceAttributesRequest          = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateServiceAttributesRequest"}
+	iUpdateServiceAttributesResponse         = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateServiceAttributesResponse"}
+	iUpdateServiceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateServiceRequest"}
+	iUpdateServiceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.servicediscovery", Name: "UpdateServiceResponse"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "item"}}, DirectMask: 0x8}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "InstanceId"}}, DirectMask: 0x8}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "InstanceSummary"}}, DirectMask: 0x8}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "OperationSummary"}}, DirectMask: 0x8}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var m_Attributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Attributes_key, &s_Attributes_value}}
+var mCustomHealthNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomHealthNotFound_Message}}
+var mCustomHealthStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomHealthStatus_HEALTHY, &sCustomHealthStatus_UNHEALTHY}}
+var mDnsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsConfig_NamespaceId, &sDnsConfig_RoutingPolicy, &sDnsConfig_DnsRecords}}
+var mDnsConfigChange = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsConfigChange_DnsRecords}}
+var mDnsProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsProperties_HostedZoneId, &sDnsProperties_SOA}}
+var mDnsRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsRecord_Type, &sDnsRecord_TTL}}
+var m_DnsRecordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsRecordList_member}}
+var mDuplicateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateRequest_Message, &sDuplicateRequest_DuplicateOperationId}}
+var mFilterCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterCondition_EQ, &sFilterCondition_IN, &sFilterCondition_BETWEEN, &sFilterCondition_BEGINS_WITH}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mHealthCheckConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheckConfig_Type, &sHealthCheckConfig_ResourcePath, &sHealthCheckConfig_FailureThreshold}}
+var mHealthCheckCustomConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheckCustomConfig_FailureThreshold}}
+var mHealthCheckType = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheckType_HTTP, &sHealthCheckType_HTTPS, &sHealthCheckType_TCP}}
+var mHealthStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthStatus_HEALTHY, &sHealthStatus_UNHEALTHY, &sHealthStatus_UNKNOWN}}
+var mHealthStatusFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthStatusFilter_HEALTHY, &sHealthStatusFilter_UNHEALTHY, &sHealthStatusFilter_ALL, &sHealthStatusFilter_HEALTHY_OR_ELSE_ALL}}
+var mHttpInstanceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpInstanceSummary_InstanceId, &sHttpInstanceSummary_NamespaceName, &sHttpInstanceSummary_ServiceName, &sHttpInstanceSummary_HealthStatus, &sHttpInstanceSummary_Attributes}}
+var m_HttpInstanceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HttpInstanceSummaryList_member}}
+var mHttpNamespaceChange = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpNamespaceChange_Description}}
+var mHttpProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpProperties_HttpName}}
+var mInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sInstance_Id, &sInstance_CreatorRequestId, &sInstance_Attributes, &sInstance_CreatedByAccount}}
+var m_InstanceHealthStatusMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceHealthStatusMap_key, &s_InstanceHealthStatusMap_value}}
+var m_InstanceIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceIdList_member}}
+var mInstanceNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceNotFound_Message}}
+var mInstanceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceSummary_Id, &sInstanceSummary_Attributes, &sInstanceSummary_CreatedByAccount}}
+var m_InstanceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceSummaryList_member}}
+var mInvalidInput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInput_Message}}
+var mNamespace = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespace_Id, &sNamespace_Arn, &sNamespace_ResourceOwner, &sNamespace_Name, &sNamespace_Type, &sNamespace_Description, &sNamespace_ServiceCount, &sNamespace_Properties, &sNamespace_CreateDate, &sNamespace_CreatorRequestId}, Hash: &hNamespace}
+var mNamespaceAlreadyExists = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceAlreadyExists_Message, &sNamespaceAlreadyExists_CreatorRequestId, &sNamespaceAlreadyExists_NamespaceId}}
+var mNamespaceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceFilter_Name, &sNamespaceFilter_Values, &sNamespaceFilter_Condition}}
+var mNamespaceFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceFilterName_TYPE, &sNamespaceFilterName_NAME, &sNamespaceFilterName_HTTP_NAME, &sNamespaceFilterName_RESOURCE_OWNER}}
+var m_NamespaceFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamespaceFilters_member}}
+var mNamespaceNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceNotFound_Message}}
+var mNamespaceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceProperties_DnsProperties, &sNamespaceProperties_HttpProperties}}
+var m_NamespaceSummariesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamespaceSummariesList_member}}
+var mNamespaceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceSummary_Id, &sNamespaceSummary_Arn, &sNamespaceSummary_ResourceOwner, &sNamespaceSummary_Name, &sNamespaceSummary_Type, &sNamespaceSummary_Description, &sNamespaceSummary_ServiceCount, &sNamespaceSummary_Properties, &sNamespaceSummary_CreateDate}, Hash: &hNamespaceSummary}
+var mNamespaceType = smithy.SchemaMembers{List: []*smithy.Schema{&sNamespaceType_DNS_PUBLIC, &sNamespaceType_DNS_PRIVATE, &sNamespaceType_HTTP}}
+var mOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sOperation_Id, &sOperation_OwnerAccount, &sOperation_Type, &sOperation_Status, &sOperation_ErrorMessage, &sOperation_ErrorCode, &sOperation_CreateDate, &sOperation_UpdateDate, &sOperation_Targets}, Hash: &hOperation}
+var mOperationFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationFilter_Name, &sOperationFilter_Values, &sOperationFilter_Condition}}
+var mOperationFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationFilterName_NAMESPACE_ID, &sOperationFilterName_SERVICE_ID, &sOperationFilterName_STATUS, &sOperationFilterName_TYPE, &sOperationFilterName_UPDATE_DATE}}
+var m_OperationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_OperationFilters_member}}
+var mOperationNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationNotFound_Message}}
+var mOperationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationStatus_SUBMITTED, &sOperationStatus_PENDING, &sOperationStatus_SUCCESS, &sOperationStatus_FAIL}}
+var mOperationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationSummary_Id, &sOperationSummary_Status}}
+var m_OperationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OperationSummaryList_member}}
+var m_OperationTargetsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_OperationTargetsMap_key, &s_OperationTargetsMap_value}}
+var mOperationTargetType = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationTargetType_NAMESPACE, &sOperationTargetType_SERVICE, &sOperationTargetType_INSTANCE}}
+var mOperationType = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationType_CREATE_NAMESPACE, &sOperationType_DELETE_NAMESPACE, &sOperationType_UPDATE_NAMESPACE, &sOperationType_UPDATE_SERVICE, &sOperationType_REGISTER_INSTANCE, &sOperationType_DEREGISTER_INSTANCE}}
+var mPrivateDnsNamespaceChange = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateDnsNamespaceChange_Description, &sPrivateDnsNamespaceChange_Properties}}
+var mPrivateDnsNamespaceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateDnsNamespaceProperties_DnsProperties}}
+var mPrivateDnsNamespacePropertiesChange = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateDnsNamespacePropertiesChange_DnsProperties}}
+var mPrivateDnsPropertiesMutable = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateDnsPropertiesMutable_SOA}}
+var mPrivateDnsPropertiesMutableChange = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateDnsPropertiesMutableChange_SOA}}
+var mPublicDnsNamespaceChange = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicDnsNamespaceChange_Description, &sPublicDnsNamespaceChange_Properties}}
+var mPublicDnsNamespaceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicDnsNamespaceProperties_DnsProperties}}
+var mPublicDnsNamespacePropertiesChange = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicDnsNamespacePropertiesChange_DnsProperties}}
+var mPublicDnsPropertiesMutable = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicDnsPropertiesMutable_SOA}}
+var mPublicDnsPropertiesMutableChange = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicDnsPropertiesMutableChange_SOA}}
+var mRecordType = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordType_SRV, &sRecordType_A, &sRecordType_AAAA, &sRecordType_CNAME}}
+var mRequestLimitExceeded = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestLimitExceeded_Message}}
+var mResourceInUse = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUse_Message}}
+var mResourceLimitExceeded = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceLimitExceeded_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRoutingPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingPolicy_MULTIVALUE, &sRoutingPolicy_WEIGHTED}}
+var mService = smithy.SchemaMembers{List: []*smithy.Schema{&sService_Id, &sService_Arn, &sService_ResourceOwner, &sService_Name, &sService_NamespaceId, &sService_Description, &sService_InstanceCount, &sService_DnsConfig, &sService_Type, &sService_HealthCheckConfig, &sService_HealthCheckCustomConfig, &sService_CreateDate, &sService_CreatorRequestId, &sService_CreatedByAccount}, Hash: &hService}
+var mServiceAlreadyExists = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceAlreadyExists_Message, &sServiceAlreadyExists_CreatorRequestId, &sServiceAlreadyExists_ServiceId, &sServiceAlreadyExists_ServiceArn}}
+var m_ServiceAttributeKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceAttributeKeyList_member}}
+var mServiceAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceAttributes_ServiceArn, &sServiceAttributes_ResourceOwner, &sServiceAttributes_Attributes}}
+var mServiceAttributesLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceAttributesLimitExceededException_Message}}
+var m_ServiceAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceAttributesMap_key, &s_ServiceAttributesMap_value}}
+var mServiceChange = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceChange_Description, &sServiceChange_DnsConfig, &sServiceChange_HealthCheckConfig}}
+var mServiceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceFilter_Name, &sServiceFilter_Values, &sServiceFilter_Condition}}
+var mServiceFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceFilterName_NAMESPACE_ID, &sServiceFilterName_RESOURCE_OWNER}}
+var m_ServiceFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceFilters_member}}
+var mServiceNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceNotFound_Message}}
+var m_ServiceSummariesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceSummariesList_member}}
+var mServiceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSummary_Id, &sServiceSummary_Arn, &sServiceSummary_ResourceOwner, &sServiceSummary_Name, &sServiceSummary_Type, &sServiceSummary_Description, &sServiceSummary_InstanceCount, &sServiceSummary_DnsConfig, &sServiceSummary_HealthCheckConfig, &sServiceSummary_HealthCheckCustomConfig, &sServiceSummary_CreateDate, &sServiceSummary_CreatedByAccount}, Hash: &hServiceSummary}
+var mServiceType = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceType_HTTP, &sServiceType_DNS_HTTP, &sServiceType_DNS}}
+var mServiceTypeOption = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceTypeOption_HTTP}}
+var mSOA = smithy.SchemaMembers{List: []*smithy.Schema{&sSOA_TTL}}
+var mSOAChange = smithy.SchemaMembers{List: []*smithy.Schema{&sSOAChange_TTL}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message, &sTooManyTagsException_ResourceName}}
+var mCreateHttpNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHttpNamespaceRequest_Name, &sCreateHttpNamespaceRequest_CreatorRequestId, &sCreateHttpNamespaceRequest_Description, &sCreateHttpNamespaceRequest_Tags}}
+var mCreateHttpNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHttpNamespaceResponse_OperationId}}
+var mCreatePrivateDnsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePrivateDnsNamespaceRequest_Name, &sCreatePrivateDnsNamespaceRequest_CreatorRequestId, &sCreatePrivateDnsNamespaceRequest_Description, &sCreatePrivateDnsNamespaceRequest_Vpc, &sCreatePrivateDnsNamespaceRequest_Tags, &sCreatePrivateDnsNamespaceRequest_Properties}}
+var mCreatePrivateDnsNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePrivateDnsNamespaceResponse_OperationId}}
+var mCreatePublicDnsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePublicDnsNamespaceRequest_Name, &sCreatePublicDnsNamespaceRequest_CreatorRequestId, &sCreatePublicDnsNamespaceRequest_Description, &sCreatePublicDnsNamespaceRequest_Tags, &sCreatePublicDnsNamespaceRequest_Properties}}
+var mCreatePublicDnsNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePublicDnsNamespaceResponse_OperationId}}
+var mCreateServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceRequest_Name, &sCreateServiceRequest_NamespaceId, &sCreateServiceRequest_CreatorRequestId, &sCreateServiceRequest_Description, &sCreateServiceRequest_DnsConfig, &sCreateServiceRequest_HealthCheckConfig, &sCreateServiceRequest_HealthCheckCustomConfig, &sCreateServiceRequest_Tags, &sCreateServiceRequest_Type}, Hash: &hCreateServiceRequest}
+var mCreateServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceResponse_Service}}
+var mDeleteNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNamespaceRequest_Id}}
+var mDeleteNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNamespaceResponse_OperationId}}
+var mDeleteServiceAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceAttributesRequest_ServiceId, &sDeleteServiceAttributesRequest_Attributes}}
+var mDeleteServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceRequest_Id}}
+var mDeregisterInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterInstanceRequest_ServiceId, &sDeregisterInstanceRequest_InstanceId}}
+var mDeregisterInstanceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterInstanceResponse_OperationId}}
+var mDiscoverInstancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoverInstancesRequest_NamespaceName, &sDiscoverInstancesRequest_ServiceName, &sDiscoverInstancesRequest_MaxResults, &sDiscoverInstancesRequest_QueryParameters, &sDiscoverInstancesRequest_OptionalParameters, &sDiscoverInstancesRequest_HealthStatus, &sDiscoverInstancesRequest_OwnerAccount}}
+var mDiscoverInstancesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoverInstancesResponse_Instances, &sDiscoverInstancesResponse_InstancesRevision}}
+var mDiscoverInstancesRevisionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoverInstancesRevisionRequest_NamespaceName, &sDiscoverInstancesRevisionRequest_ServiceName, &sDiscoverInstancesRevisionRequest_OwnerAccount}}
+var mDiscoverInstancesRevisionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoverInstancesRevisionResponse_InstancesRevision}}
+var mGetInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstanceRequest_ServiceId, &sGetInstanceRequest_InstanceId}}
+var mGetInstanceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstanceResponse_ResourceOwner, &sGetInstanceResponse_Instance}}
+var mGetInstancesHealthStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstancesHealthStatusRequest_ServiceId, &sGetInstancesHealthStatusRequest_Instances, &sGetInstancesHealthStatusRequest_MaxResults, &sGetInstancesHealthStatusRequest_NextToken}}
+var mGetInstancesHealthStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstancesHealthStatusResponse_Status, &sGetInstancesHealthStatusResponse_NextToken}}
+var mGetNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNamespaceRequest_Id}}
+var mGetNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNamespaceResponse_Namespace}}
+var mGetOperationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOperationRequest_OperationId, &sGetOperationRequest_OwnerAccount}}
+var mGetOperationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOperationResponse_Operation}}
+var mGetServiceAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceAttributesRequest_ServiceId}}
+var mGetServiceAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceAttributesResponse_ServiceAttributes}}
+var mGetServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceRequest_Id}}
+var mGetServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceResponse_Service}}
+var mListInstancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInstancesRequest_ServiceId, &sListInstancesRequest_NextToken, &sListInstancesRequest_MaxResults}}
+var mListInstancesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInstancesResponse_ResourceOwner, &sListInstancesResponse_Instances, &sListInstancesResponse_NextToken}}
+var mListNamespacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamespacesRequest_NextToken, &sListNamespacesRequest_MaxResults, &sListNamespacesRequest_Filters}}
+var mListNamespacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamespacesResponse_Namespaces, &sListNamespacesResponse_NextToken}}
+var mListOperationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOperationsRequest_NextToken, &sListOperationsRequest_MaxResults, &sListOperationsRequest_Filters}}
+var mListOperationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOperationsResponse_Operations, &sListOperationsResponse_NextToken}}
+var mListServicesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesRequest_NextToken, &sListServicesRequest_MaxResults, &sListServicesRequest_Filters}}
+var mListServicesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesResponse_Services, &sListServicesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mRegisterInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterInstanceRequest_ServiceId, &sRegisterInstanceRequest_InstanceId, &sRegisterInstanceRequest_CreatorRequestId, &sRegisterInstanceRequest_Attributes}}
+var mRegisterInstanceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterInstanceResponse_OperationId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateHttpNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHttpNamespaceRequest_Id, &sUpdateHttpNamespaceRequest_UpdaterRequestId, &sUpdateHttpNamespaceRequest_Namespace}}
+var mUpdateHttpNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHttpNamespaceResponse_OperationId}}
+var mUpdateInstanceCustomHealthStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateInstanceCustomHealthStatusRequest_ServiceId, &sUpdateInstanceCustomHealthStatusRequest_InstanceId, &sUpdateInstanceCustomHealthStatusRequest_Status}}
+var mUpdatePrivateDnsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePrivateDnsNamespaceRequest_Id, &sUpdatePrivateDnsNamespaceRequest_UpdaterRequestId, &sUpdatePrivateDnsNamespaceRequest_Namespace}}
+var mUpdatePrivateDnsNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePrivateDnsNamespaceResponse_OperationId}}
+var mUpdatePublicDnsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePublicDnsNamespaceRequest_Id, &sUpdatePublicDnsNamespaceRequest_UpdaterRequestId, &sUpdatePublicDnsNamespaceRequest_Namespace}}
+var mUpdatePublicDnsNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePublicDnsNamespaceResponse_OperationId}}
+var mUpdateServiceAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceAttributesRequest_ServiceId, &sUpdateServiceAttributesRequest_Attributes}}
+var mUpdateServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceRequest_Id, &sUpdateServiceRequest_Service}}
+var mUpdateServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceResponse_OperationId}}
+
+var hNamespace = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 4, 0, 10, 8, 5, 0, 0, 0, 0, 0, 0, 1, 9, 0, 0, 7, 0, 6, 2, 3, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hNamespaceSummary = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 4, 0, 0, 8, 5, 0, 0, 0, 0, 0, 0, 1, 9, 0, 0, 7, 0, 6, 2, 3, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hOperation = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 5, 0, 0, 0, 0, 0, 0, 6, 0, 0,
+	4, 8, 7, 0, 0, 0, 2, 0,
+}}
+var hService = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	12, 0, 0, 1, 4, 0, 14, 0, 0, 5, 0, 0, 8, 11, 0, 0, 0, 2, 9, 0, 0, 0, 0, 10,
+	0, 7, 0, 3, 0, 0, 13, 6,
+}}
+var hServiceSummary = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	11, 0, 0, 1, 4, 0, 12, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0, 2, 5, 0, 0, 0, 0, 9,
+	0, 7, 0, 3, 0, 0, 0, 6,
+}}
+var hCreateServiceRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 8, 0, 1, 0, 3, 0, 9, 0, 0, 0, 5, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 7, 0,
+	0, 6, 0, 0, 0, 0, 0, 0,
+}}
+
+var sCreateHttpNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHttpNamespace, Type: smithy.ShapeTypeOperation, Ext: &eCreateHttpNamespace})
+var sCreatePrivateDnsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrivateDnsNamespace, Type: smithy.ShapeTypeOperation, Ext: &eCreatePrivateDnsNamespace})
+var sCreatePublicDnsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePublicDnsNamespace, Type: smithy.ShapeTypeOperation, Ext: &eCreatePublicDnsNamespace})
+var sCreateService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateService, Type: smithy.ShapeTypeOperation, Ext: &eCreateService})
+var sDeleteNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamespace, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNamespace})
+var sDeleteService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteService, Type: smithy.ShapeTypeOperation, Ext: &eDeleteService})
+var sDeleteServiceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceAttributes, Type: smithy.ShapeTypeOperation, Ext: &eDeleteServiceAttributes})
+var sDeregisterInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterInstance, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterInstance})
+var sDiscoverInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverInstances, Type: smithy.ShapeTypeOperation, Ext: &eDiscoverInstances})
+var sDiscoverInstancesRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverInstancesRevision, Type: smithy.ShapeTypeOperation, Ext: &eDiscoverInstancesRevision})
+var sGetInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstance, Type: smithy.ShapeTypeOperation, Ext: &eGetInstance})
+var sGetInstancesHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstancesHealthStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetInstancesHealthStatus})
+var sGetNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamespace, Type: smithy.ShapeTypeOperation, Ext: &eGetNamespace})
+var sGetOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperation, Type: smithy.ShapeTypeOperation, Ext: &eGetOperation})
+var sGetService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetService, Type: smithy.ShapeTypeOperation, Ext: &eGetService})
+var sGetServiceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceAttributes, Type: smithy.ShapeTypeOperation, Ext: &eGetServiceAttributes})
+var sListInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstances, Type: smithy.ShapeTypeOperation, Ext: &eListInstances})
+var sListNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamespaces, Type: smithy.ShapeTypeOperation, Ext: &eListNamespaces})
+var sListOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperations, Type: smithy.ShapeTypeOperation, Ext: &eListOperations})
+var sListServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServices, Type: smithy.ShapeTypeOperation, Ext: &eListServices})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRegisterInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterInstance, Type: smithy.ShapeTypeOperation, Ext: &eRegisterInstance})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateHttpNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHttpNamespace, Type: smithy.ShapeTypeOperation, Ext: &eUpdateHttpNamespace})
+var sUpdateInstanceCustomHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInstanceCustomHealthStatus, Type: smithy.ShapeTypeOperation, Ext: &eUpdateInstanceCustomHealthStatus})
+var sUpdatePrivateDnsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrivateDnsNamespace, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePrivateDnsNamespace})
+var sUpdatePublicDnsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePublicDnsNamespace, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePublicDnsNamespace})
+var sUpdateService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateService, Type: smithy.ShapeTypeOperation, Ext: &eUpdateService})
+var sUpdateServiceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceAttributes, Type: smithy.ShapeTypeOperation, Ext: &eUpdateServiceAttributes})
+var s_Route53AutoNaming_v20170314 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53AutoNaming_v20170314, Type: smithy.ShapeTypeService, Ext: &e_Route53AutoNaming_v20170314})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &e_Attributes})
+var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttrKey, Type: smithy.ShapeTypeString, Ext: &e_Attributes_key})
+var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttrValue, Type: smithy.ShapeTypeString, Ext: &e_Attributes_value})
+var s_AttrKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttrKey, Type: smithy.ShapeTypeString, Ext: &e_AttrKey})
+var s_AttrValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttrValue, Type: smithy.ShapeTypeString, Ext: &e_AttrValue})
+var s_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &e_AWSAccountId})
+var s_Code = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &e_Code})
+var sCustomHealthNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomHealthNotFound, Members: &mCustomHealthNotFound, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eCustomHealthNotFound})
+var sCustomHealthNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eCustomHealthNotFound_Message})
+var sCustomHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomHealthStatus, Members: &mCustomHealthStatus, Type: smithy.ShapeTypeEnum, Ext: &eCustomHealthStatus})
+var sCustomHealthStatus_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomHealthStatus_HEALTHY})
+var sCustomHealthStatus_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomHealthStatus_UNHEALTHY})
+var s_DiscoverMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoverMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_DiscoverMaxResults})
+var sDnsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsConfig, Members: &mDnsConfig, Type: smithy.ShapeTypeStructure, Ext: &eDnsConfig})
+var sDnsConfig_NamespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamespaceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDnsConfig_NamespaceId})
+var sDnsConfig_RoutingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicy", ID: &iRoutingPolicy, Members: &mRoutingPolicy, Type: smithy.ShapeTypeEnum, Ext: &eDnsConfig_RoutingPolicy})
+var sDnsConfig_DnsRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsRecords", ID: &i_DnsRecordList, Members: &m_DnsRecordList, Type: smithy.ShapeTypeList, Ext: &eDnsConfig_DnsRecords})
+var sDnsConfigChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsConfigChange, Members: &mDnsConfigChange, Type: smithy.ShapeTypeStructure, Ext: &eDnsConfigChange})
+var sDnsConfigChange_DnsRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsRecords", ID: &i_DnsRecordList, Members: &m_DnsRecordList, Type: smithy.ShapeTypeList, Ext: &eDnsConfigChange_DnsRecords})
+var sDnsProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsProperties, Members: &mDnsProperties, Type: smithy.ShapeTypeStructure, Ext: &eDnsProperties})
+var sDnsProperties_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDnsProperties_HostedZoneId})
+var sDnsProperties_SOA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOA", ID: &iSOA, Members: &mSOA, Type: smithy.ShapeTypeStructure, Ext: &eDnsProperties_SOA})
+var sDnsRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsRecord, Members: &mDnsRecord, Type: smithy.ShapeTypeStructure, Ext: &eDnsRecord})
+var sDnsRecord_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &eDnsRecord_Type})
+var sDnsRecord_TTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTL", ID: &i_RecordTTL, Type: smithy.ShapeTypeLong, Ext: &eDnsRecord_TTL})
+var s_DnsRecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsRecordList, Members: &m_DnsRecordList, Type: smithy.ShapeTypeList, Ext: &e_DnsRecordList})
+var s_DnsRecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDnsRecord, Members: &mDnsRecord, Type: smithy.ShapeTypeStructure, Ext: &e_DnsRecordList_member})
+var sDuplicateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRequest, Members: &mDuplicateRequest, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateRequest})
+var sDuplicateRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDuplicateRequest_Message})
+var sDuplicateRequest_DuplicateOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DuplicateOperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eDuplicateRequest_DuplicateOperationId})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_FailureThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureThreshold, Type: smithy.ShapeTypeInteger, Ext: &e_FailureThreshold})
+var sFilterCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeEnum, Ext: &eFilterCondition})
+var sFilterCondition_EQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterCondition_EQ})
+var sFilterCondition_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterCondition_IN})
+var sFilterCondition_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterCondition_BETWEEN})
+var sFilterCondition_BEGINS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEGINS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterCondition_BEGINS_WITH})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &e_FilterValues})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_FilterValues_member})
+var sHealthCheckConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheckConfig, Members: &mHealthCheckConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthCheckConfig})
+var sHealthCheckConfig_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iHealthCheckType, Members: &mHealthCheckType, Type: smithy.ShapeTypeEnum, Ext: &eHealthCheckConfig_Type})
+var sHealthCheckConfig_ResourcePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePath", ID: &i_ResourcePath, Type: smithy.ShapeTypeString, Ext: &eHealthCheckConfig_ResourcePath})
+var sHealthCheckConfig_FailureThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureThreshold", ID: &i_FailureThreshold, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheckConfig_FailureThreshold})
+var sHealthCheckCustomConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheckCustomConfig, Members: &mHealthCheckCustomConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthCheckCustomConfig})
+var sHealthCheckCustomConfig_FailureThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureThreshold", ID: &i_FailureThreshold, Type: smithy.ShapeTypeInteger, Ext: &eHealthCheckCustomConfig_FailureThreshold})
+var sHealthCheckType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheckType, Members: &mHealthCheckType, Type: smithy.ShapeTypeEnum, Ext: &eHealthCheckType})
+var sHealthCheckType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthCheckType_HTTP})
+var sHealthCheckType_HTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthCheckType_HTTPS})
+var sHealthCheckType_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthCheckType_TCP})
+var sHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeEnum, Ext: &eHealthStatus})
+var sHealthStatus_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatus_HEALTHY})
+var sHealthStatus_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatus_UNHEALTHY})
+var sHealthStatus_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatus_UNKNOWN})
+var sHealthStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatusFilter, Members: &mHealthStatusFilter, Type: smithy.ShapeTypeEnum, Ext: &eHealthStatusFilter})
+var sHealthStatusFilter_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusFilter_HEALTHY})
+var sHealthStatusFilter_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusFilter_UNHEALTHY})
+var sHealthStatusFilter_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusFilter_ALL})
+var sHealthStatusFilter_HEALTHY_OR_ELSE_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY_OR_ELSE_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusFilter_HEALTHY_OR_ELSE_ALL})
+var sHttpInstanceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpInstanceSummary, Members: &mHttpInstanceSummary, Type: smithy.ShapeTypeStructure, Ext: &eHttpInstanceSummary})
+var sHttpInstanceSummary_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eHttpInstanceSummary_InstanceId})
+var sHttpInstanceSummary_NamespaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamespaceName", ID: &i_NamespaceNameHttp, Type: smithy.ShapeTypeString, Ext: &eHttpInstanceSummary_NamespaceName})
+var sHttpInstanceSummary_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eHttpInstanceSummary_ServiceName})
+var sHttpInstanceSummary_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeEnum, Ext: &eHttpInstanceSummary_HealthStatus})
+var sHttpInstanceSummary_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eHttpInstanceSummary_Attributes})
+var s_HttpInstanceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpInstanceSummaryList, Members: &m_HttpInstanceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_HttpInstanceSummaryList})
+var s_HttpInstanceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHttpInstanceSummary, Members: &mHttpInstanceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_HttpInstanceSummaryList_member})
+var sHttpNamespaceChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpNamespaceChange, Members: &mHttpNamespaceChange, Type: smithy.ShapeTypeStructure, Ext: &eHttpNamespaceChange})
+var sHttpNamespaceChange_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eHttpNamespaceChange_Description})
+var sHttpProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpProperties, Members: &mHttpProperties, Type: smithy.ShapeTypeStructure, Ext: &eHttpProperties})
+var sHttpProperties_HttpName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpName", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eHttpProperties_HttpName})
+var sInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &eInstance})
+var sInstance_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eInstance_Id})
+var sInstance_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eInstance_CreatorRequestId})
+var sInstance_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eInstance_Attributes})
+var sInstance_CreatedByAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eInstance_CreatedByAccount})
+var s_InstanceHealthStatusMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceHealthStatusMap, Members: &m_InstanceHealthStatusMap, Type: smithy.ShapeTypeMap, Ext: &e_InstanceHealthStatusMap})
+var s_InstanceHealthStatusMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceHealthStatusMap_key})
+var s_InstanceHealthStatusMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeEnum, Ext: &e_InstanceHealthStatusMap_value})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var s_InstanceIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceIdList, Members: &m_InstanceIdList, Type: smithy.ShapeTypeList, Ext: &e_InstanceIdList})
+var s_InstanceIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_InstanceIdList_member})
+var sInstanceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceNotFound, Members: &mInstanceNotFound, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInstanceNotFound})
+var sInstanceNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInstanceNotFound_Message})
+var sInstanceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceSummary, Members: &mInstanceSummary, Type: smithy.ShapeTypeStructure, Ext: &eInstanceSummary})
+var sInstanceSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eInstanceSummary_Id})
+var sInstanceSummary_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eInstanceSummary_Attributes})
+var sInstanceSummary_CreatedByAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eInstanceSummary_CreatedByAccount})
+var s_InstanceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceSummaryList, Members: &m_InstanceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_InstanceSummaryList})
+var s_InstanceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstanceSummary, Members: &mInstanceSummary, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceSummaryList_member})
+var sInvalidInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInput, Members: &mInvalidInput, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInvalidInput})
+var sInvalidInput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidInput_Message})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var sNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespace, Members: &mNamespace, Type: smithy.ShapeTypeStructure, Ext: &eNamespace})
+var sNamespace_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eNamespace_Id})
+var sNamespace_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eNamespace_Arn})
+var sNamespace_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eNamespace_ResourceOwner})
+var sNamespace_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eNamespace_Name})
+var sNamespace_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iNamespaceType, Members: &mNamespaceType, Type: smithy.ShapeTypeEnum, Ext: &eNamespace_Type})
+var sNamespace_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eNamespace_Description})
+var sNamespace_ServiceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCount", ID: &i_ResourceCount, Type: smithy.ShapeTypeInteger, Ext: &eNamespace_ServiceCount})
+var sNamespace_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iNamespaceProperties, Members: &mNamespaceProperties, Type: smithy.ShapeTypeStructure, Ext: &eNamespace_Properties})
+var sNamespace_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eNamespace_CreateDate})
+var sNamespace_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eNamespace_CreatorRequestId})
+var sNamespaceAlreadyExists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceAlreadyExists, Members: &mNamespaceAlreadyExists, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceAlreadyExists})
+var sNamespaceAlreadyExists_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNamespaceAlreadyExists_Message})
+var sNamespaceAlreadyExists_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eNamespaceAlreadyExists_CreatorRequestId})
+var sNamespaceAlreadyExists_NamespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamespaceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eNamespaceAlreadyExists_NamespaceId})
+var sNamespaceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceFilter, Members: &mNamespaceFilter, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceFilter})
+var sNamespaceFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iNamespaceFilterName, Members: &mNamespaceFilterName, Type: smithy.ShapeTypeEnum, Ext: &eNamespaceFilter_Name})
+var sNamespaceFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &eNamespaceFilter_Values})
+var sNamespaceFilter_Condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Condition", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeEnum, Ext: &eNamespaceFilter_Condition})
+var sNamespaceFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceFilterName, Members: &mNamespaceFilterName, Type: smithy.ShapeTypeEnum, Ext: &eNamespaceFilterName})
+var sNamespaceFilterName_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceFilterName_TYPE})
+var sNamespaceFilterName_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceFilterName_NAME})
+var sNamespaceFilterName_HTTP_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceFilterName_HTTP_NAME})
+var sNamespaceFilterName_RESOURCE_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceFilterName_RESOURCE_OWNER})
+var s_NamespaceFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceFilters, Members: &m_NamespaceFilters, Type: smithy.ShapeTypeList, Ext: &e_NamespaceFilters})
+var s_NamespaceFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNamespaceFilter, Members: &mNamespaceFilter, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &e_NamespaceFilters_member})
+var s_NamespaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &e_NamespaceName})
+var s_NamespaceNameHttp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceNameHttp, Type: smithy.ShapeTypeString, Ext: &e_NamespaceNameHttp})
+var s_NamespaceNamePrivate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceNamePrivate, Type: smithy.ShapeTypeString, Ext: &e_NamespaceNamePrivate})
+var s_NamespaceNamePublic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceNamePublic, Type: smithy.ShapeTypeString, Ext: &e_NamespaceNamePublic})
+var sNamespaceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceNotFound, Members: &mNamespaceNotFound, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceNotFound})
+var sNamespaceNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNamespaceNotFound_Message})
+var sNamespaceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceProperties, Members: &mNamespaceProperties, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceProperties})
+var sNamespaceProperties_DnsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsProperties", ID: &iDnsProperties, Members: &mDnsProperties, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceProperties_DnsProperties})
+var sNamespaceProperties_HttpProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpProperties", ID: &iHttpProperties, Members: &mHttpProperties, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceProperties_HttpProperties})
+var s_NamespaceSummariesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceSummariesList, Members: &m_NamespaceSummariesList, Type: smithy.ShapeTypeList, Ext: &e_NamespaceSummariesList})
+var s_NamespaceSummariesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNamespaceSummary, Members: &mNamespaceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_NamespaceSummariesList_member})
+var sNamespaceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceSummary, Members: &mNamespaceSummary, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceSummary})
+var sNamespaceSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_Id})
+var sNamespaceSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_Arn})
+var sNamespaceSummary_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_ResourceOwner})
+var sNamespaceSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_Name})
+var sNamespaceSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iNamespaceType, Members: &mNamespaceType, Type: smithy.ShapeTypeEnum, Ext: &eNamespaceSummary_Type})
+var sNamespaceSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eNamespaceSummary_Description})
+var sNamespaceSummary_ServiceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCount", ID: &i_ResourceCount, Type: smithy.ShapeTypeInteger, Ext: &eNamespaceSummary_ServiceCount})
+var sNamespaceSummary_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iNamespaceProperties, Members: &mNamespaceProperties, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceSummary_Properties})
+var sNamespaceSummary_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eNamespaceSummary_CreateDate})
+var sNamespaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamespaceType, Members: &mNamespaceType, Type: smithy.ShapeTypeEnum, Ext: &eNamespaceType})
+var sNamespaceType_DNS_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceType_DNS_PUBLIC})
+var sNamespaceType_DNS_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceType_DNS_PRIVATE})
+var sNamespaceType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNamespaceType_HTTP})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeStructure, Ext: &eOperation})
+var sOperation_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eOperation_Id})
+var sOperation_OwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eOperation_OwnerAccount})
+var sOperation_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eOperation_Type})
+var sOperation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eOperation_Status})
+var sOperation_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eOperation_ErrorMessage})
+var sOperation_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eOperation_ErrorCode})
+var sOperation_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOperation_CreateDate})
+var sOperation_UpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOperation_UpdateDate})
+var sOperation_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_OperationTargetsMap, Members: &m_OperationTargetsMap, Type: smithy.ShapeTypeMap, Ext: &eOperation_Targets})
+var sOperationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationFilter, Members: &mOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &eOperationFilter})
+var sOperationFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iOperationFilterName, Members: &mOperationFilterName, Type: smithy.ShapeTypeEnum, Ext: &eOperationFilter_Name})
+var sOperationFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &eOperationFilter_Values})
+var sOperationFilter_Condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Condition", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeEnum, Ext: &eOperationFilter_Condition})
+var sOperationFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationFilterName, Members: &mOperationFilterName, Type: smithy.ShapeTypeEnum, Ext: &eOperationFilterName})
+var sOperationFilterName_NAMESPACE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAMESPACE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationFilterName_NAMESPACE_ID})
+var sOperationFilterName_SERVICE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationFilterName_SERVICE_ID})
+var sOperationFilterName_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationFilterName_STATUS})
+var sOperationFilterName_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationFilterName_TYPE})
+var sOperationFilterName_UPDATE_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationFilterName_UPDATE_DATE})
+var s_OperationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationFilters, Members: &m_OperationFilters, Type: smithy.ShapeTypeList, Ext: &e_OperationFilters})
+var s_OperationFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationFilter, Members: &mOperationFilter, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &e_OperationFilters_member})
+var s_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &e_OperationId})
+var sOperationNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotFound, Members: &mOperationNotFound, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eOperationNotFound})
+var sOperationNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eOperationNotFound_Message})
+var sOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eOperationStatus})
+var sOperationStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_SUBMITTED})
+var sOperationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_PENDING})
+var sOperationStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_SUCCESS})
+var sOperationStatus_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_FAIL})
+var sOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationSummary, Members: &mOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &eOperationSummary})
+var sOperationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eOperationSummary_Id})
+var sOperationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eOperationSummary_Status})
+var s_OperationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_OperationSummaryList})
+var s_OperationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationSummary, Members: &mOperationSummary, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &e_OperationSummaryList_member})
+var s_OperationTargetsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationTargetsMap, Members: &m_OperationTargetsMap, Type: smithy.ShapeTypeMap, Ext: &e_OperationTargetsMap})
+var s_OperationTargetsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iOperationTargetType, Members: &mOperationTargetType, Type: smithy.ShapeTypeEnum, Ext: &e_OperationTargetsMap_key})
+var s_OperationTargetsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_OperationTargetsMap_value})
+var sOperationTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationTargetType, Members: &mOperationTargetType, Type: smithy.ShapeTypeEnum, Ext: &eOperationTargetType})
+var sOperationTargetType_NAMESPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAMESPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationTargetType_NAMESPACE})
+var sOperationTargetType_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationTargetType_SERVICE})
+var sOperationTargetType_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationTargetType_INSTANCE})
+var sOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eOperationType})
+var sOperationType_CREATE_NAMESPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_NAMESPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_CREATE_NAMESPACE})
+var sOperationType_DELETE_NAMESPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_NAMESPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_DELETE_NAMESPACE})
+var sOperationType_UPDATE_NAMESPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_NAMESPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_UPDATE_NAMESPACE})
+var sOperationType_UPDATE_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_UPDATE_SERVICE})
+var sOperationType_REGISTER_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTER_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_REGISTER_INSTANCE})
+var sOperationType_DEREGISTER_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEREGISTER_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_DEREGISTER_INSTANCE})
+var sPrivateDnsNamespaceChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateDnsNamespaceChange, Members: &mPrivateDnsNamespaceChange, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsNamespaceChange})
+var sPrivateDnsNamespaceChange_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &ePrivateDnsNamespaceChange_Description})
+var sPrivateDnsNamespaceChange_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iPrivateDnsNamespacePropertiesChange, Members: &mPrivateDnsNamespacePropertiesChange, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsNamespaceChange_Properties})
+var sPrivateDnsNamespaceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateDnsNamespaceProperties, Members: &mPrivateDnsNamespaceProperties, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsNamespaceProperties})
+var sPrivateDnsNamespaceProperties_DnsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsProperties", ID: &iPrivateDnsPropertiesMutable, Members: &mPrivateDnsPropertiesMutable, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsNamespaceProperties_DnsProperties})
+var sPrivateDnsNamespacePropertiesChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateDnsNamespacePropertiesChange, Members: &mPrivateDnsNamespacePropertiesChange, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsNamespacePropertiesChange})
+var sPrivateDnsNamespacePropertiesChange_DnsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsProperties", ID: &iPrivateDnsPropertiesMutableChange, Members: &mPrivateDnsPropertiesMutableChange, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsNamespacePropertiesChange_DnsProperties})
+var sPrivateDnsPropertiesMutable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateDnsPropertiesMutable, Members: &mPrivateDnsPropertiesMutable, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsPropertiesMutable})
+var sPrivateDnsPropertiesMutable_SOA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOA", ID: &iSOA, Members: &mSOA, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsPropertiesMutable_SOA})
+var sPrivateDnsPropertiesMutableChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateDnsPropertiesMutableChange, Members: &mPrivateDnsPropertiesMutableChange, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsPropertiesMutableChange})
+var sPrivateDnsPropertiesMutableChange_SOA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOA", ID: &iSOAChange, Members: &mSOAChange, Type: smithy.ShapeTypeStructure, Ext: &ePrivateDnsPropertiesMutableChange_SOA})
+var sPublicDnsNamespaceChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicDnsNamespaceChange, Members: &mPublicDnsNamespaceChange, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsNamespaceChange})
+var sPublicDnsNamespaceChange_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &ePublicDnsNamespaceChange_Description})
+var sPublicDnsNamespaceChange_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iPublicDnsNamespacePropertiesChange, Members: &mPublicDnsNamespacePropertiesChange, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsNamespaceChange_Properties})
+var sPublicDnsNamespaceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicDnsNamespaceProperties, Members: &mPublicDnsNamespaceProperties, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsNamespaceProperties})
+var sPublicDnsNamespaceProperties_DnsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsProperties", ID: &iPublicDnsPropertiesMutable, Members: &mPublicDnsPropertiesMutable, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsNamespaceProperties_DnsProperties})
+var sPublicDnsNamespacePropertiesChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicDnsNamespacePropertiesChange, Members: &mPublicDnsNamespacePropertiesChange, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsNamespacePropertiesChange})
+var sPublicDnsNamespacePropertiesChange_DnsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsProperties", ID: &iPublicDnsPropertiesMutableChange, Members: &mPublicDnsPropertiesMutableChange, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsNamespacePropertiesChange_DnsProperties})
+var sPublicDnsPropertiesMutable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicDnsPropertiesMutable, Members: &mPublicDnsPropertiesMutable, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsPropertiesMutable})
+var sPublicDnsPropertiesMutable_SOA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOA", ID: &iSOA, Members: &mSOA, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsPropertiesMutable_SOA})
+var sPublicDnsPropertiesMutableChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicDnsPropertiesMutableChange, Members: &mPublicDnsPropertiesMutableChange, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsPropertiesMutableChange})
+var sPublicDnsPropertiesMutableChange_SOA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOA", ID: &iSOAChange, Members: &mSOAChange, Type: smithy.ShapeTypeStructure, Ext: &ePublicDnsPropertiesMutableChange_SOA})
+var s_RecordTTL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordTTL, Type: smithy.ShapeTypeLong, Ext: &e_RecordTTL})
+var sRecordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &eRecordType})
+var sRecordType_SRV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SRV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_SRV})
+var sRecordType_A = smithy.NewStaticSchema(smithy.StaticSchema{Member: "A", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_A})
+var sRecordType_AAAA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AAAA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_AAAA})
+var sRecordType_CNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_CNAME})
+var sRequestLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestLimitExceeded, Members: &mRequestLimitExceeded, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eRequestLimitExceeded})
+var sRequestLimitExceeded_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRequestLimitExceeded_Message})
+var s_ResourceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceCount, Type: smithy.ShapeTypeInteger, Ext: &e_ResourceCount})
+var s_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &e_ResourceDescription})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceInUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUse, Members: &mResourceInUse, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUse})
+var sResourceInUse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceInUse_Message})
+var sResourceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceeded, Members: &mResourceLimitExceeded, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eResourceLimitExceeded})
+var sResourceLimitExceeded_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceLimitExceeded_Message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_ResourcePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePath, Type: smithy.ShapeTypeString, Ext: &e_ResourcePath})
+var s_Revision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Revision, Type: smithy.ShapeTypeLong, Ext: &e_Revision})
+var sRoutingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingPolicy, Members: &mRoutingPolicy, Type: smithy.ShapeTypeEnum, Ext: &eRoutingPolicy})
+var sRoutingPolicy_MULTIVALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoutingPolicy_MULTIVALUE})
+var sRoutingPolicy_WEIGHTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEIGHTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoutingPolicy_WEIGHTED})
+var sService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &eService})
+var sService_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eService_Id})
+var sService_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eService_Arn})
+var sService_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eService_ResourceOwner})
+var sService_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eService_Name})
+var sService_NamespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamespaceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eService_NamespaceId})
+var sService_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eService_Description})
+var sService_InstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceCount", ID: &i_ResourceCount, Type: smithy.ShapeTypeInteger, Ext: &eService_InstanceCount})
+var sService_DnsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsConfig", ID: &iDnsConfig, Members: &mDnsConfig, Type: smithy.ShapeTypeStructure, Ext: &eService_DnsConfig})
+var sService_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iServiceType, Members: &mServiceType, Type: smithy.ShapeTypeEnum, Ext: &eService_Type})
+var sService_HealthCheckConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckConfig", ID: &iHealthCheckConfig, Members: &mHealthCheckConfig, Type: smithy.ShapeTypeStructure, Ext: &eService_HealthCheckConfig})
+var sService_HealthCheckCustomConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckCustomConfig", ID: &iHealthCheckCustomConfig, Members: &mHealthCheckCustomConfig, Type: smithy.ShapeTypeStructure, Ext: &eService_HealthCheckCustomConfig})
+var sService_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eService_CreateDate})
+var sService_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eService_CreatorRequestId})
+var sService_CreatedByAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eService_CreatedByAccount})
+var sServiceAlreadyExists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceAlreadyExists, Members: &mServiceAlreadyExists, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eServiceAlreadyExists})
+var sServiceAlreadyExists_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceAlreadyExists_Message})
+var sServiceAlreadyExists_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eServiceAlreadyExists_CreatorRequestId})
+var sServiceAlreadyExists_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eServiceAlreadyExists_ServiceId})
+var sServiceAlreadyExists_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eServiceAlreadyExists_ServiceArn})
+var s_ServiceAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_ServiceAttributeKey})
+var s_ServiceAttributeKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceAttributeKeyList, Members: &m_ServiceAttributeKeyList, Type: smithy.ShapeTypeList, Ext: &e_ServiceAttributeKeyList})
+var s_ServiceAttributeKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServiceAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_ServiceAttributeKeyList_member})
+var sServiceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceAttributes, Members: &mServiceAttributes, Type: smithy.ShapeTypeStructure, Ext: &eServiceAttributes})
+var sServiceAttributes_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eServiceAttributes_ServiceArn})
+var sServiceAttributes_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eServiceAttributes_ResourceOwner})
+var sServiceAttributes_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_ServiceAttributesMap, Members: &m_ServiceAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eServiceAttributes_Attributes})
+var sServiceAttributesLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceAttributesLimitExceededException, Members: &mServiceAttributesLimitExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eServiceAttributesLimitExceededException})
+var sServiceAttributesLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceAttributesLimitExceededException_Message})
+var s_ServiceAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceAttributesMap, Members: &m_ServiceAttributesMap, Type: smithy.ShapeTypeMap, Ext: &e_ServiceAttributesMap})
+var s_ServiceAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ServiceAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_ServiceAttributesMap_key})
+var s_ServiceAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ServiceAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_ServiceAttributesMap_value})
+var s_ServiceAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_ServiceAttributeValue})
+var sServiceChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceChange, Members: &mServiceChange, Type: smithy.ShapeTypeStructure, Ext: &eServiceChange})
+var sServiceChange_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eServiceChange_Description})
+var sServiceChange_DnsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsConfig", ID: &iDnsConfigChange, Members: &mDnsConfigChange, Type: smithy.ShapeTypeStructure, Ext: &eServiceChange_DnsConfig})
+var sServiceChange_HealthCheckConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckConfig", ID: &iHealthCheckConfig, Members: &mHealthCheckConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceChange_HealthCheckConfig})
+var sServiceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFilter, Members: &mServiceFilter, Type: smithy.ShapeTypeStructure, Ext: &eServiceFilter})
+var sServiceFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iServiceFilterName, Members: &mServiceFilterName, Type: smithy.ShapeTypeEnum, Ext: &eServiceFilter_Name})
+var sServiceFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &eServiceFilter_Values})
+var sServiceFilter_Condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Condition", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeEnum, Ext: &eServiceFilter_Condition})
+var sServiceFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFilterName, Members: &mServiceFilterName, Type: smithy.ShapeTypeEnum, Ext: &eServiceFilterName})
+var sServiceFilterName_NAMESPACE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAMESPACE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceFilterName_NAMESPACE_ID})
+var sServiceFilterName_RESOURCE_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceFilterName_RESOURCE_OWNER})
+var s_ServiceFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceFilters, Members: &m_ServiceFilters, Type: smithy.ShapeTypeList, Ext: &e_ServiceFilters})
+var s_ServiceFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceFilter, Members: &mServiceFilter, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceFilters_member})
+var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &e_ServiceName})
+var sServiceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNotFound, Members: &mServiceNotFound, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eServiceNotFound})
+var sServiceNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceNotFound_Message})
+var s_ServiceSummariesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceSummariesList, Members: &m_ServiceSummariesList, Type: smithy.ShapeTypeList, Ext: &e_ServiceSummariesList})
+var s_ServiceSummariesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceSummariesList_member})
+var sServiceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure, Ext: &eServiceSummary})
+var sServiceSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eServiceSummary_Id})
+var sServiceSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eServiceSummary_Arn})
+var sServiceSummary_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eServiceSummary_ResourceOwner})
+var sServiceSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eServiceSummary_Name})
+var sServiceSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iServiceType, Members: &mServiceType, Type: smithy.ShapeTypeEnum, Ext: &eServiceSummary_Type})
+var sServiceSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eServiceSummary_Description})
+var sServiceSummary_InstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceCount", ID: &i_ResourceCount, Type: smithy.ShapeTypeInteger, Ext: &eServiceSummary_InstanceCount})
+var sServiceSummary_DnsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsConfig", ID: &iDnsConfig, Members: &mDnsConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceSummary_DnsConfig})
+var sServiceSummary_HealthCheckConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckConfig", ID: &iHealthCheckConfig, Members: &mHealthCheckConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceSummary_HealthCheckConfig})
+var sServiceSummary_HealthCheckCustomConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckCustomConfig", ID: &iHealthCheckCustomConfig, Members: &mHealthCheckCustomConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceSummary_HealthCheckCustomConfig})
+var sServiceSummary_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eServiceSummary_CreateDate})
+var sServiceSummary_CreatedByAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eServiceSummary_CreatedByAccount})
+var sServiceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceType, Members: &mServiceType, Type: smithy.ShapeTypeEnum, Ext: &eServiceType})
+var sServiceType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceType_HTTP})
+var sServiceType_DNS_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceType_DNS_HTTP})
+var sServiceType_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceType_DNS})
+var sServiceTypeOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceTypeOption, Members: &mServiceTypeOption, Type: smithy.ShapeTypeEnum, Ext: &eServiceTypeOption})
+var sServiceTypeOption_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceTypeOption_HTTP})
+var sSOA = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSOA, Members: &mSOA, Type: smithy.ShapeTypeStructure, Ext: &eSOA})
+var sSOA_TTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTL", ID: &i_RecordTTL, Type: smithy.ShapeTypeLong, Ext: &eSOA_TTL})
+var sSOAChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSOAChange, Members: &mSOAChange, Type: smithy.ShapeTypeStructure, Ext: &eSOAChange})
+var sSOAChange_TTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTL", ID: &i_RecordTTL, Type: smithy.ShapeTypeLong, Ext: &eSOAChange_TTL})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_Message})
+var sTooManyTagsException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_ResourceName})
+var sCreateHttpNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHttpNamespaceRequest, Members: &mCreateHttpNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateHttpNamespaceRequest})
+var sCreateHttpNamespaceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NamespaceNameHttp, Type: smithy.ShapeTypeString, Ext: &eCreateHttpNamespaceRequest_Name})
+var sCreateHttpNamespaceRequest_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateHttpNamespaceRequest_CreatorRequestId})
+var sCreateHttpNamespaceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreateHttpNamespaceRequest_Description})
+var sCreateHttpNamespaceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateHttpNamespaceRequest_Tags})
+var sCreateHttpNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHttpNamespaceResponse, Members: &mCreateHttpNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateHttpNamespaceResponse})
+var sCreateHttpNamespaceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eCreateHttpNamespaceResponse_OperationId})
+var sCreatePrivateDnsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrivateDnsNamespaceRequest, Members: &mCreatePrivateDnsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrivateDnsNamespaceRequest})
+var sCreatePrivateDnsNamespaceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NamespaceNamePrivate, Type: smithy.ShapeTypeString, Ext: &eCreatePrivateDnsNamespaceRequest_Name})
+var sCreatePrivateDnsNamespaceRequest_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreatePrivateDnsNamespaceRequest_CreatorRequestId})
+var sCreatePrivateDnsNamespaceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreatePrivateDnsNamespaceRequest_Description})
+var sCreatePrivateDnsNamespaceRequest_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreatePrivateDnsNamespaceRequest_Vpc})
+var sCreatePrivateDnsNamespaceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreatePrivateDnsNamespaceRequest_Tags})
+var sCreatePrivateDnsNamespaceRequest_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iPrivateDnsNamespaceProperties, Members: &mPrivateDnsNamespaceProperties, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrivateDnsNamespaceRequest_Properties})
+var sCreatePrivateDnsNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrivateDnsNamespaceResponse, Members: &mCreatePrivateDnsNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePrivateDnsNamespaceResponse})
+var sCreatePrivateDnsNamespaceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eCreatePrivateDnsNamespaceResponse_OperationId})
+var sCreatePublicDnsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePublicDnsNamespaceRequest, Members: &mCreatePublicDnsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePublicDnsNamespaceRequest})
+var sCreatePublicDnsNamespaceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NamespaceNamePublic, Type: smithy.ShapeTypeString, Ext: &eCreatePublicDnsNamespaceRequest_Name})
+var sCreatePublicDnsNamespaceRequest_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreatePublicDnsNamespaceRequest_CreatorRequestId})
+var sCreatePublicDnsNamespaceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreatePublicDnsNamespaceRequest_Description})
+var sCreatePublicDnsNamespaceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreatePublicDnsNamespaceRequest_Tags})
+var sCreatePublicDnsNamespaceRequest_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iPublicDnsNamespaceProperties, Members: &mPublicDnsNamespaceProperties, Type: smithy.ShapeTypeStructure, Ext: &eCreatePublicDnsNamespaceRequest_Properties})
+var sCreatePublicDnsNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePublicDnsNamespaceResponse, Members: &mCreatePublicDnsNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePublicDnsNamespaceResponse})
+var sCreatePublicDnsNamespaceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eCreatePublicDnsNamespaceResponse_OperationId})
+var sCreateServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceRequest, Members: &mCreateServiceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceRequest})
+var sCreateServiceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eCreateServiceRequest_Name})
+var sCreateServiceRequest_NamespaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamespaceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateServiceRequest_NamespaceId})
+var sCreateServiceRequest_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateServiceRequest_CreatorRequestId})
+var sCreateServiceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreateServiceRequest_Description})
+var sCreateServiceRequest_DnsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsConfig", ID: &iDnsConfig, Members: &mDnsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceRequest_DnsConfig})
+var sCreateServiceRequest_HealthCheckConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckConfig", ID: &iHealthCheckConfig, Members: &mHealthCheckConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceRequest_HealthCheckConfig})
+var sCreateServiceRequest_HealthCheckCustomConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckCustomConfig", ID: &iHealthCheckCustomConfig, Members: &mHealthCheckCustomConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceRequest_HealthCheckCustomConfig})
+var sCreateServiceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateServiceRequest_Tags})
+var sCreateServiceRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iServiceTypeOption, Members: &mServiceTypeOption, Type: smithy.ShapeTypeEnum, Ext: &eCreateServiceRequest_Type})
+var sCreateServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceResponse, Members: &mCreateServiceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceResponse})
+var sCreateServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceResponse_Service})
+var sDeleteNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamespaceRequest, Members: &mDeleteNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNamespaceRequest})
+var sDeleteNamespaceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteNamespaceRequest_Id})
+var sDeleteNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamespaceResponse, Members: &mDeleteNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNamespaceResponse})
+var sDeleteNamespaceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eDeleteNamespaceResponse_OperationId})
+var sDeleteServiceAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceAttributesRequest, Members: &mDeleteServiceAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceAttributesRequest})
+var sDeleteServiceAttributesRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteServiceAttributesRequest_ServiceId})
+var sDeleteServiceAttributesRequest_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_ServiceAttributeKeyList, Members: &m_ServiceAttributeKeyList, Type: smithy.ShapeTypeList, Ext: &eDeleteServiceAttributesRequest_Attributes})
+var sDeleteServiceAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceAttributesResponse})
+var sDeleteServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceRequest, Members: &mDeleteServiceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceRequest})
+var sDeleteServiceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteServiceRequest_Id})
+var sDeleteServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceResponse})
+var sDeregisterInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterInstanceRequest, Members: &mDeregisterInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterInstanceRequest})
+var sDeregisterInstanceRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeregisterInstanceRequest_ServiceId})
+var sDeregisterInstanceRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeregisterInstanceRequest_InstanceId})
+var sDeregisterInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterInstanceResponse, Members: &mDeregisterInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterInstanceResponse})
+var sDeregisterInstanceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eDeregisterInstanceResponse_OperationId})
+var sDiscoverInstancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverInstancesRequest, Members: &mDiscoverInstancesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDiscoverInstancesRequest})
+var sDiscoverInstancesRequest_NamespaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamespaceName", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eDiscoverInstancesRequest_NamespaceName})
+var sDiscoverInstancesRequest_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eDiscoverInstancesRequest_ServiceName})
+var sDiscoverInstancesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_DiscoverMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDiscoverInstancesRequest_MaxResults})
+var sDiscoverInstancesRequest_QueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryParameters", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eDiscoverInstancesRequest_QueryParameters})
+var sDiscoverInstancesRequest_OptionalParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionalParameters", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eDiscoverInstancesRequest_OptionalParameters})
+var sDiscoverInstancesRequest_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &iHealthStatusFilter, Members: &mHealthStatusFilter, Type: smithy.ShapeTypeEnum, Ext: &eDiscoverInstancesRequest_HealthStatus})
+var sDiscoverInstancesRequest_OwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eDiscoverInstancesRequest_OwnerAccount})
+var sDiscoverInstancesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverInstancesResponse, Members: &mDiscoverInstancesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDiscoverInstancesResponse})
+var sDiscoverInstancesResponse_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_HttpInstanceSummaryList, Members: &m_HttpInstanceSummaryList, Type: smithy.ShapeTypeList, Ext: &eDiscoverInstancesResponse_Instances})
+var sDiscoverInstancesResponse_InstancesRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstancesRevision", ID: &i_Revision, Type: smithy.ShapeTypeLong, Ext: &eDiscoverInstancesResponse_InstancesRevision})
+var sDiscoverInstancesRevisionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverInstancesRevisionRequest, Members: &mDiscoverInstancesRevisionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDiscoverInstancesRevisionRequest})
+var sDiscoverInstancesRevisionRequest_NamespaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamespaceName", ID: &i_NamespaceName, Type: smithy.ShapeTypeString, Ext: &eDiscoverInstancesRevisionRequest_NamespaceName})
+var sDiscoverInstancesRevisionRequest_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eDiscoverInstancesRevisionRequest_ServiceName})
+var sDiscoverInstancesRevisionRequest_OwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eDiscoverInstancesRevisionRequest_OwnerAccount})
+var sDiscoverInstancesRevisionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverInstancesRevisionResponse, Members: &mDiscoverInstancesRevisionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDiscoverInstancesRevisionResponse})
+var sDiscoverInstancesRevisionResponse_InstancesRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstancesRevision", ID: &i_Revision, Type: smithy.ShapeTypeLong, Ext: &eDiscoverInstancesRevisionResponse_InstancesRevision})
+var sGetInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceRequest, Members: &mGetInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInstanceRequest})
+var sGetInstanceRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetInstanceRequest_ServiceId})
+var sGetInstanceRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetInstanceRequest_InstanceId})
+var sGetInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceResponse, Members: &mGetInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInstanceResponse})
+var sGetInstanceResponse_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eGetInstanceResponse_ResourceOwner})
+var sGetInstanceResponse_Instance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instance", ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &eGetInstanceResponse_Instance})
+var sGetInstancesHealthStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstancesHealthStatusRequest, Members: &mGetInstancesHealthStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInstancesHealthStatusRequest})
+var sGetInstancesHealthStatusRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetInstancesHealthStatusRequest_ServiceId})
+var sGetInstancesHealthStatusRequest_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_InstanceIdList, Members: &m_InstanceIdList, Type: smithy.ShapeTypeList, Ext: &eGetInstancesHealthStatusRequest_Instances})
+var sGetInstancesHealthStatusRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetInstancesHealthStatusRequest_MaxResults})
+var sGetInstancesHealthStatusRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetInstancesHealthStatusRequest_NextToken})
+var sGetInstancesHealthStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstancesHealthStatusResponse, Members: &mGetInstancesHealthStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInstancesHealthStatusResponse})
+var sGetInstancesHealthStatusResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_InstanceHealthStatusMap, Members: &m_InstanceHealthStatusMap, Type: smithy.ShapeTypeMap, Ext: &eGetInstancesHealthStatusResponse_Status})
+var sGetInstancesHealthStatusResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetInstancesHealthStatusResponse_NextToken})
+var sGetNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamespaceRequest, Members: &mGetNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetNamespaceRequest})
+var sGetNamespaceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetNamespaceRequest_Id})
+var sGetNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamespaceResponse, Members: &mGetNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetNamespaceResponse})
+var sGetNamespaceResponse_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &iNamespace, Members: &mNamespace, Type: smithy.ShapeTypeStructure, Ext: &eGetNamespaceResponse_Namespace})
+var sGetOperationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationRequest, Members: &mGetOperationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetOperationRequest})
+var sGetOperationRequest_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eGetOperationRequest_OperationId})
+var sGetOperationRequest_OwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eGetOperationRequest_OwnerAccount})
+var sGetOperationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationResponse, Members: &mGetOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetOperationResponse})
+var sGetOperationResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeStructure, Ext: &eGetOperationResponse_Operation})
+var sGetServiceAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceAttributesRequest, Members: &mGetServiceAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceAttributesRequest})
+var sGetServiceAttributesRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetServiceAttributesRequest_ServiceId})
+var sGetServiceAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceAttributesResponse, Members: &mGetServiceAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceAttributesResponse})
+var sGetServiceAttributesResponse_ServiceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceAttributes", ID: &iServiceAttributes, Members: &mServiceAttributes, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceAttributesResponse_ServiceAttributes})
+var sGetServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceRequest, Members: &mGetServiceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceRequest})
+var sGetServiceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetServiceRequest_Id})
+var sGetServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceResponse, Members: &mGetServiceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceResponse})
+var sGetServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceResponse_Service})
+var sListInstancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstancesRequest, Members: &mListInstancesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListInstancesRequest})
+var sListInstancesRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListInstancesRequest_ServiceId})
+var sListInstancesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListInstancesRequest_NextToken})
+var sListInstancesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListInstancesRequest_MaxResults})
+var sListInstancesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstancesResponse, Members: &mListInstancesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListInstancesResponse})
+var sListInstancesResponse_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eListInstancesResponse_ResourceOwner})
+var sListInstancesResponse_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_InstanceSummaryList, Members: &m_InstanceSummaryList, Type: smithy.ShapeTypeList, Ext: &eListInstancesResponse_Instances})
+var sListInstancesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListInstancesResponse_NextToken})
+var sListNamespacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamespacesRequest, Members: &mListNamespacesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNamespacesRequest})
+var sListNamespacesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNamespacesRequest_NextToken})
+var sListNamespacesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListNamespacesRequest_MaxResults})
+var sListNamespacesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_NamespaceFilters, Members: &m_NamespaceFilters, Type: smithy.ShapeTypeList, Ext: &eListNamespacesRequest_Filters})
+var sListNamespacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamespacesResponse, Members: &mListNamespacesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNamespacesResponse})
+var sListNamespacesResponse_Namespaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespaces", ID: &i_NamespaceSummariesList, Members: &m_NamespaceSummariesList, Type: smithy.ShapeTypeList, Ext: &eListNamespacesResponse_Namespaces})
+var sListNamespacesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNamespacesResponse_NextToken})
+var sListOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsRequest, Members: &mListOperationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListOperationsRequest})
+var sListOperationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListOperationsRequest_NextToken})
+var sListOperationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListOperationsRequest_MaxResults})
+var sListOperationsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_OperationFilters, Members: &m_OperationFilters, Type: smithy.ShapeTypeList, Ext: &eListOperationsRequest_Filters})
+var sListOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsResponse, Members: &mListOperationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListOperationsResponse})
+var sListOperationsResponse_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListOperationsResponse_Operations})
+var sListOperationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListOperationsResponse_NextToken})
+var sListServicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesRequest, Members: &mListServicesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListServicesRequest})
+var sListServicesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServicesRequest_NextToken})
+var sListServicesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListServicesRequest_MaxResults})
+var sListServicesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_ServiceFilters, Members: &m_ServiceFilters, Type: smithy.ShapeTypeList, Ext: &eListServicesRequest_Filters})
+var sListServicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesResponse, Members: &mListServicesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListServicesResponse})
+var sListServicesResponse_Services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Services", ID: &i_ServiceSummariesList, Members: &m_ServiceSummariesList, Type: smithy.ShapeTypeList, Ext: &eListServicesResponse_Services})
+var sListServicesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServicesResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sRegisterInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterInstanceRequest, Members: &mRegisterInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterInstanceRequest})
+var sRegisterInstanceRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRegisterInstanceRequest_ServiceId})
+var sRegisterInstanceRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eRegisterInstanceRequest_InstanceId})
+var sRegisterInstanceRequest_CreatorRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRegisterInstanceRequest_CreatorRequestId})
+var sRegisterInstanceRequest_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eRegisterInstanceRequest_Attributes})
+var sRegisterInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterInstanceResponse, Members: &mRegisterInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterInstanceResponse})
+var sRegisterInstanceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eRegisterInstanceResponse_OperationId})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateHttpNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHttpNamespaceRequest, Members: &mUpdateHttpNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHttpNamespaceRequest})
+var sUpdateHttpNamespaceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateHttpNamespaceRequest_Id})
+var sUpdateHttpNamespaceRequest_UpdaterRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdaterRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateHttpNamespaceRequest_UpdaterRequestId})
+var sUpdateHttpNamespaceRequest_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &iHttpNamespaceChange, Members: &mHttpNamespaceChange, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHttpNamespaceRequest_Namespace})
+var sUpdateHttpNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHttpNamespaceResponse, Members: &mUpdateHttpNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHttpNamespaceResponse})
+var sUpdateHttpNamespaceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eUpdateHttpNamespaceResponse_OperationId})
+var sUpdateInstanceCustomHealthStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInstanceCustomHealthStatusRequest, Members: &mUpdateInstanceCustomHealthStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateInstanceCustomHealthStatusRequest})
+var sUpdateInstanceCustomHealthStatusRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateInstanceCustomHealthStatusRequest_ServiceId})
+var sUpdateInstanceCustomHealthStatusRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateInstanceCustomHealthStatusRequest_InstanceId})
+var sUpdateInstanceCustomHealthStatusRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCustomHealthStatus, Members: &mCustomHealthStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateInstanceCustomHealthStatusRequest_Status})
+var sUpdatePrivateDnsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrivateDnsNamespaceRequest, Members: &mUpdatePrivateDnsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePrivateDnsNamespaceRequest})
+var sUpdatePrivateDnsNamespaceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdatePrivateDnsNamespaceRequest_Id})
+var sUpdatePrivateDnsNamespaceRequest_UpdaterRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdaterRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdatePrivateDnsNamespaceRequest_UpdaterRequestId})
+var sUpdatePrivateDnsNamespaceRequest_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &iPrivateDnsNamespaceChange, Members: &mPrivateDnsNamespaceChange, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePrivateDnsNamespaceRequest_Namespace})
+var sUpdatePrivateDnsNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrivateDnsNamespaceResponse, Members: &mUpdatePrivateDnsNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePrivateDnsNamespaceResponse})
+var sUpdatePrivateDnsNamespaceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eUpdatePrivateDnsNamespaceResponse_OperationId})
+var sUpdatePublicDnsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePublicDnsNamespaceRequest, Members: &mUpdatePublicDnsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePublicDnsNamespaceRequest})
+var sUpdatePublicDnsNamespaceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdatePublicDnsNamespaceRequest_Id})
+var sUpdatePublicDnsNamespaceRequest_UpdaterRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdaterRequestId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdatePublicDnsNamespaceRequest_UpdaterRequestId})
+var sUpdatePublicDnsNamespaceRequest_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &iPublicDnsNamespaceChange, Members: &mPublicDnsNamespaceChange, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePublicDnsNamespaceRequest_Namespace})
+var sUpdatePublicDnsNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePublicDnsNamespaceResponse, Members: &mUpdatePublicDnsNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePublicDnsNamespaceResponse})
+var sUpdatePublicDnsNamespaceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eUpdatePublicDnsNamespaceResponse_OperationId})
+var sUpdateServiceAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceAttributesRequest, Members: &mUpdateServiceAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceAttributesRequest})
+var sUpdateServiceAttributesRequest_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateServiceAttributesRequest_ServiceId})
+var sUpdateServiceAttributesRequest_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_ServiceAttributesMap, Members: &m_ServiceAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateServiceAttributesRequest_Attributes})
+var sUpdateServiceAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceAttributesResponse})
+var sUpdateServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceRequest, Members: &mUpdateServiceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceRequest})
+var sUpdateServiceRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateServiceRequest_Id})
+var sUpdateServiceRequest_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iServiceChange, Members: &mServiceChange, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceRequest_Service})
+var sUpdateServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceResponse, Members: &mUpdateServiceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceResponse})
+var sUpdateServiceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eUpdateServiceResponse_OperationId})
+
+var CreateHttpNamespace = &sCreateHttpNamespace
+
+var CreatePrivateDnsNamespace = &sCreatePrivateDnsNamespace
+
+var CreatePublicDnsNamespace = &sCreatePublicDnsNamespace
+
+var CreateService = &sCreateService
+
+var DeleteNamespace = &sDeleteNamespace
+
+var DeleteService = &sDeleteService
+
+var DeleteServiceAttributes = &sDeleteServiceAttributes
+
+var DeregisterInstance = &sDeregisterInstance
+
+var DiscoverInstances = &sDiscoverInstances
+
+var DiscoverInstancesRevision = &sDiscoverInstancesRevision
+
+var GetInstance = &sGetInstance
+
+var GetInstancesHealthStatus = &sGetInstancesHealthStatus
+
+var GetNamespace = &sGetNamespace
+
+var GetOperation = &sGetOperation
+
+var GetService = &sGetService
+
+var GetServiceAttributes = &sGetServiceAttributes
+
+var ListInstances = &sListInstances
+
+var ListNamespaces = &sListNamespaces
+
+var ListOperations = &sListOperations
+
+var ListServices = &sListServices
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterInstance = &sRegisterInstance
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateHttpNamespace = &sUpdateHttpNamespace
+
+var UpdateInstanceCustomHealthStatus = &sUpdateInstanceCustomHealthStatus
+
+var UpdatePrivateDnsNamespace = &sUpdatePrivateDnsNamespace
+
+var UpdatePublicDnsNamespace = &sUpdatePublicDnsNamespace
+
+var UpdateService = &sUpdateService
+
+var UpdateServiceAttributes = &sUpdateServiceAttributes
+
+var _Route53AutoNaming_v20170314 = &s_Route53AutoNaming_v20170314
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _Arn = &s_Arn
+
+var _Attributes = &s_Attributes
+var _Attributes_key = &s_Attributes_key
+var _Attributes_value = &s_Attributes_value
+
+var _AttrKey = &s_AttrKey
+
+var _AttrValue = &s_AttrValue
+
+var _AWSAccountId = &s_AWSAccountId
+
+var _Code = &s_Code
+
+var CustomHealthNotFound = &sCustomHealthNotFound
+var CustomHealthNotFound_Message = &sCustomHealthNotFound_Message
+
+var CustomHealthStatus = &sCustomHealthStatus
+var CustomHealthStatus_HEALTHY = &sCustomHealthStatus_HEALTHY
+var CustomHealthStatus_UNHEALTHY = &sCustomHealthStatus_UNHEALTHY
+
+var _DiscoverMaxResults = &s_DiscoverMaxResults
+
+var DnsConfig = &sDnsConfig
+var DnsConfig_NamespaceId = &sDnsConfig_NamespaceId
+var DnsConfig_RoutingPolicy = &sDnsConfig_RoutingPolicy
+var DnsConfig_DnsRecords = &sDnsConfig_DnsRecords
+
+var DnsConfigChange = &sDnsConfigChange
+var DnsConfigChange_DnsRecords = &sDnsConfigChange_DnsRecords
+
+var DnsProperties = &sDnsProperties
+var DnsProperties_HostedZoneId = &sDnsProperties_HostedZoneId
+var DnsProperties_SOA = &sDnsProperties_SOA
+
+var DnsRecord = &sDnsRecord
+var DnsRecord_Type = &sDnsRecord_Type
+var DnsRecord_TTL = &sDnsRecord_TTL
+
+var _DnsRecordList = &s_DnsRecordList
+var _DnsRecordList_member = &s_DnsRecordList_member
+
+var DuplicateRequest = &sDuplicateRequest
+var DuplicateRequest_Message = &sDuplicateRequest_Message
+var DuplicateRequest_DuplicateOperationId = &sDuplicateRequest_DuplicateOperationId
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _FailureThreshold = &s_FailureThreshold
+
+var FilterCondition = &sFilterCondition
+var FilterCondition_EQ = &sFilterCondition_EQ
+var FilterCondition_IN = &sFilterCondition_IN
+var FilterCondition_BETWEEN = &sFilterCondition_BETWEEN
+var FilterCondition_BEGINS_WITH = &sFilterCondition_BEGINS_WITH
+
+var _FilterValue = &s_FilterValue
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var HealthCheckConfig = &sHealthCheckConfig
+var HealthCheckConfig_Type = &sHealthCheckConfig_Type
+var HealthCheckConfig_ResourcePath = &sHealthCheckConfig_ResourcePath
+var HealthCheckConfig_FailureThreshold = &sHealthCheckConfig_FailureThreshold
+
+var HealthCheckCustomConfig = &sHealthCheckCustomConfig
+var HealthCheckCustomConfig_FailureThreshold = &sHealthCheckCustomConfig_FailureThreshold
+
+var HealthCheckType = &sHealthCheckType
+var HealthCheckType_HTTP = &sHealthCheckType_HTTP
+var HealthCheckType_HTTPS = &sHealthCheckType_HTTPS
+var HealthCheckType_TCP = &sHealthCheckType_TCP
+
+var HealthStatus = &sHealthStatus
+var HealthStatus_HEALTHY = &sHealthStatus_HEALTHY
+var HealthStatus_UNHEALTHY = &sHealthStatus_UNHEALTHY
+var HealthStatus_UNKNOWN = &sHealthStatus_UNKNOWN
+
+var HealthStatusFilter = &sHealthStatusFilter
+var HealthStatusFilter_HEALTHY = &sHealthStatusFilter_HEALTHY
+var HealthStatusFilter_UNHEALTHY = &sHealthStatusFilter_UNHEALTHY
+var HealthStatusFilter_ALL = &sHealthStatusFilter_ALL
+var HealthStatusFilter_HEALTHY_OR_ELSE_ALL = &sHealthStatusFilter_HEALTHY_OR_ELSE_ALL
+
+var HttpInstanceSummary = &sHttpInstanceSummary
+var HttpInstanceSummary_InstanceId = &sHttpInstanceSummary_InstanceId
+var HttpInstanceSummary_NamespaceName = &sHttpInstanceSummary_NamespaceName
+var HttpInstanceSummary_ServiceName = &sHttpInstanceSummary_ServiceName
+var HttpInstanceSummary_HealthStatus = &sHttpInstanceSummary_HealthStatus
+var HttpInstanceSummary_Attributes = &sHttpInstanceSummary_Attributes
+
+var _HttpInstanceSummaryList = &s_HttpInstanceSummaryList
+var _HttpInstanceSummaryList_member = &s_HttpInstanceSummaryList_member
+
+var HttpNamespaceChange = &sHttpNamespaceChange
+var HttpNamespaceChange_Description = &sHttpNamespaceChange_Description
+
+var HttpProperties = &sHttpProperties
+var HttpProperties_HttpName = &sHttpProperties_HttpName
+
+var Instance = &sInstance
+var Instance_Id = &sInstance_Id
+var Instance_CreatorRequestId = &sInstance_CreatorRequestId
+var Instance_Attributes = &sInstance_Attributes
+var Instance_CreatedByAccount = &sInstance_CreatedByAccount
+
+var _InstanceHealthStatusMap = &s_InstanceHealthStatusMap
+var _InstanceHealthStatusMap_key = &s_InstanceHealthStatusMap_key
+var _InstanceHealthStatusMap_value = &s_InstanceHealthStatusMap_value
+
+var _InstanceId = &s_InstanceId
+
+var _InstanceIdList = &s_InstanceIdList
+var _InstanceIdList_member = &s_InstanceIdList_member
+
+var InstanceNotFound = &sInstanceNotFound
+var InstanceNotFound_Message = &sInstanceNotFound_Message
+
+var InstanceSummary = &sInstanceSummary
+var InstanceSummary_Id = &sInstanceSummary_Id
+var InstanceSummary_Attributes = &sInstanceSummary_Attributes
+var InstanceSummary_CreatedByAccount = &sInstanceSummary_CreatedByAccount
+
+var _InstanceSummaryList = &s_InstanceSummaryList
+var _InstanceSummaryList_member = &s_InstanceSummaryList_member
+
+var InvalidInput = &sInvalidInput
+var InvalidInput_Message = &sInvalidInput_Message
+
+var _MaxResults = &s_MaxResults
+
+var _Message = &s_Message
+
+var Namespace = &sNamespace
+var Namespace_Id = &sNamespace_Id
+var Namespace_Arn = &sNamespace_Arn
+var Namespace_ResourceOwner = &sNamespace_ResourceOwner
+var Namespace_Name = &sNamespace_Name
+var Namespace_Type = &sNamespace_Type
+var Namespace_Description = &sNamespace_Description
+var Namespace_ServiceCount = &sNamespace_ServiceCount
+var Namespace_Properties = &sNamespace_Properties
+var Namespace_CreateDate = &sNamespace_CreateDate
+var Namespace_CreatorRequestId = &sNamespace_CreatorRequestId
+
+var NamespaceAlreadyExists = &sNamespaceAlreadyExists
+var NamespaceAlreadyExists_Message = &sNamespaceAlreadyExists_Message
+var NamespaceAlreadyExists_CreatorRequestId = &sNamespaceAlreadyExists_CreatorRequestId
+var NamespaceAlreadyExists_NamespaceId = &sNamespaceAlreadyExists_NamespaceId
+
+var NamespaceFilter = &sNamespaceFilter
+var NamespaceFilter_Name = &sNamespaceFilter_Name
+var NamespaceFilter_Values = &sNamespaceFilter_Values
+var NamespaceFilter_Condition = &sNamespaceFilter_Condition
+
+var NamespaceFilterName = &sNamespaceFilterName
+var NamespaceFilterName_TYPE = &sNamespaceFilterName_TYPE
+var NamespaceFilterName_NAME = &sNamespaceFilterName_NAME
+var NamespaceFilterName_HTTP_NAME = &sNamespaceFilterName_HTTP_NAME
+var NamespaceFilterName_RESOURCE_OWNER = &sNamespaceFilterName_RESOURCE_OWNER
+
+var _NamespaceFilters = &s_NamespaceFilters
+var _NamespaceFilters_member = &s_NamespaceFilters_member
+
+var _NamespaceName = &s_NamespaceName
+
+var _NamespaceNameHttp = &s_NamespaceNameHttp
+
+var _NamespaceNamePrivate = &s_NamespaceNamePrivate
+
+var _NamespaceNamePublic = &s_NamespaceNamePublic
+
+var NamespaceNotFound = &sNamespaceNotFound
+var NamespaceNotFound_Message = &sNamespaceNotFound_Message
+
+var NamespaceProperties = &sNamespaceProperties
+var NamespaceProperties_DnsProperties = &sNamespaceProperties_DnsProperties
+var NamespaceProperties_HttpProperties = &sNamespaceProperties_HttpProperties
+
+var _NamespaceSummariesList = &s_NamespaceSummariesList
+var _NamespaceSummariesList_member = &s_NamespaceSummariesList_member
+
+var NamespaceSummary = &sNamespaceSummary
+var NamespaceSummary_Id = &sNamespaceSummary_Id
+var NamespaceSummary_Arn = &sNamespaceSummary_Arn
+var NamespaceSummary_ResourceOwner = &sNamespaceSummary_ResourceOwner
+var NamespaceSummary_Name = &sNamespaceSummary_Name
+var NamespaceSummary_Type = &sNamespaceSummary_Type
+var NamespaceSummary_Description = &sNamespaceSummary_Description
+var NamespaceSummary_ServiceCount = &sNamespaceSummary_ServiceCount
+var NamespaceSummary_Properties = &sNamespaceSummary_Properties
+var NamespaceSummary_CreateDate = &sNamespaceSummary_CreateDate
+
+var NamespaceType = &sNamespaceType
+var NamespaceType_DNS_PUBLIC = &sNamespaceType_DNS_PUBLIC
+var NamespaceType_DNS_PRIVATE = &sNamespaceType_DNS_PRIVATE
+var NamespaceType_HTTP = &sNamespaceType_HTTP
+
+var _NextToken = &s_NextToken
+
+var Operation = &sOperation
+var Operation_Id = &sOperation_Id
+var Operation_OwnerAccount = &sOperation_OwnerAccount
+var Operation_Type = &sOperation_Type
+var Operation_Status = &sOperation_Status
+var Operation_ErrorMessage = &sOperation_ErrorMessage
+var Operation_ErrorCode = &sOperation_ErrorCode
+var Operation_CreateDate = &sOperation_CreateDate
+var Operation_UpdateDate = &sOperation_UpdateDate
+var Operation_Targets = &sOperation_Targets
+
+var OperationFilter = &sOperationFilter
+var OperationFilter_Name = &sOperationFilter_Name
+var OperationFilter_Values = &sOperationFilter_Values
+var OperationFilter_Condition = &sOperationFilter_Condition
+
+var OperationFilterName = &sOperationFilterName
+var OperationFilterName_NAMESPACE_ID = &sOperationFilterName_NAMESPACE_ID
+var OperationFilterName_SERVICE_ID = &sOperationFilterName_SERVICE_ID
+var OperationFilterName_STATUS = &sOperationFilterName_STATUS
+var OperationFilterName_TYPE = &sOperationFilterName_TYPE
+var OperationFilterName_UPDATE_DATE = &sOperationFilterName_UPDATE_DATE
+
+var _OperationFilters = &s_OperationFilters
+var _OperationFilters_member = &s_OperationFilters_member
+
+var _OperationId = &s_OperationId
+
+var OperationNotFound = &sOperationNotFound
+var OperationNotFound_Message = &sOperationNotFound_Message
+
+var OperationStatus = &sOperationStatus
+var OperationStatus_SUBMITTED = &sOperationStatus_SUBMITTED
+var OperationStatus_PENDING = &sOperationStatus_PENDING
+var OperationStatus_SUCCESS = &sOperationStatus_SUCCESS
+var OperationStatus_FAIL = &sOperationStatus_FAIL
+
+var OperationSummary = &sOperationSummary
+var OperationSummary_Id = &sOperationSummary_Id
+var OperationSummary_Status = &sOperationSummary_Status
+
+var _OperationSummaryList = &s_OperationSummaryList
+var _OperationSummaryList_member = &s_OperationSummaryList_member
+
+var _OperationTargetsMap = &s_OperationTargetsMap
+var _OperationTargetsMap_key = &s_OperationTargetsMap_key
+var _OperationTargetsMap_value = &s_OperationTargetsMap_value
+
+var OperationTargetType = &sOperationTargetType
+var OperationTargetType_NAMESPACE = &sOperationTargetType_NAMESPACE
+var OperationTargetType_SERVICE = &sOperationTargetType_SERVICE
+var OperationTargetType_INSTANCE = &sOperationTargetType_INSTANCE
+
+var OperationType = &sOperationType
+var OperationType_CREATE_NAMESPACE = &sOperationType_CREATE_NAMESPACE
+var OperationType_DELETE_NAMESPACE = &sOperationType_DELETE_NAMESPACE
+var OperationType_UPDATE_NAMESPACE = &sOperationType_UPDATE_NAMESPACE
+var OperationType_UPDATE_SERVICE = &sOperationType_UPDATE_SERVICE
+var OperationType_REGISTER_INSTANCE = &sOperationType_REGISTER_INSTANCE
+var OperationType_DEREGISTER_INSTANCE = &sOperationType_DEREGISTER_INSTANCE
+
+var PrivateDnsNamespaceChange = &sPrivateDnsNamespaceChange
+var PrivateDnsNamespaceChange_Description = &sPrivateDnsNamespaceChange_Description
+var PrivateDnsNamespaceChange_Properties = &sPrivateDnsNamespaceChange_Properties
+
+var PrivateDnsNamespaceProperties = &sPrivateDnsNamespaceProperties
+var PrivateDnsNamespaceProperties_DnsProperties = &sPrivateDnsNamespaceProperties_DnsProperties
+
+var PrivateDnsNamespacePropertiesChange = &sPrivateDnsNamespacePropertiesChange
+var PrivateDnsNamespacePropertiesChange_DnsProperties = &sPrivateDnsNamespacePropertiesChange_DnsProperties
+
+var PrivateDnsPropertiesMutable = &sPrivateDnsPropertiesMutable
+var PrivateDnsPropertiesMutable_SOA = &sPrivateDnsPropertiesMutable_SOA
+
+var PrivateDnsPropertiesMutableChange = &sPrivateDnsPropertiesMutableChange
+var PrivateDnsPropertiesMutableChange_SOA = &sPrivateDnsPropertiesMutableChange_SOA
+
+var PublicDnsNamespaceChange = &sPublicDnsNamespaceChange
+var PublicDnsNamespaceChange_Description = &sPublicDnsNamespaceChange_Description
+var PublicDnsNamespaceChange_Properties = &sPublicDnsNamespaceChange_Properties
+
+var PublicDnsNamespaceProperties = &sPublicDnsNamespaceProperties
+var PublicDnsNamespaceProperties_DnsProperties = &sPublicDnsNamespaceProperties_DnsProperties
+
+var PublicDnsNamespacePropertiesChange = &sPublicDnsNamespacePropertiesChange
+var PublicDnsNamespacePropertiesChange_DnsProperties = &sPublicDnsNamespacePropertiesChange_DnsProperties
+
+var PublicDnsPropertiesMutable = &sPublicDnsPropertiesMutable
+var PublicDnsPropertiesMutable_SOA = &sPublicDnsPropertiesMutable_SOA
+
+var PublicDnsPropertiesMutableChange = &sPublicDnsPropertiesMutableChange
+var PublicDnsPropertiesMutableChange_SOA = &sPublicDnsPropertiesMutableChange_SOA
+
+var _RecordTTL = &s_RecordTTL
+
+var RecordType = &sRecordType
+var RecordType_SRV = &sRecordType_SRV
+var RecordType_A = &sRecordType_A
+var RecordType_AAAA = &sRecordType_AAAA
+var RecordType_CNAME = &sRecordType_CNAME
+
+var RequestLimitExceeded = &sRequestLimitExceeded
+var RequestLimitExceeded_Message = &sRequestLimitExceeded_Message
+
+var _ResourceCount = &s_ResourceCount
+
+var _ResourceDescription = &s_ResourceDescription
+
+var _ResourceId = &s_ResourceId
+
+var ResourceInUse = &sResourceInUse
+var ResourceInUse_Message = &sResourceInUse_Message
+
+var ResourceLimitExceeded = &sResourceLimitExceeded
+var ResourceLimitExceeded_Message = &sResourceLimitExceeded_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourcePath = &s_ResourcePath
+
+var _Revision = &s_Revision
+
+var RoutingPolicy = &sRoutingPolicy
+var RoutingPolicy_MULTIVALUE = &sRoutingPolicy_MULTIVALUE
+var RoutingPolicy_WEIGHTED = &sRoutingPolicy_WEIGHTED
+
+var Service = &sService
+var Service_Id = &sService_Id
+var Service_Arn = &sService_Arn
+var Service_ResourceOwner = &sService_ResourceOwner
+var Service_Name = &sService_Name
+var Service_NamespaceId = &sService_NamespaceId
+var Service_Description = &sService_Description
+var Service_InstanceCount = &sService_InstanceCount
+var Service_DnsConfig = &sService_DnsConfig
+var Service_Type = &sService_Type
+var Service_HealthCheckConfig = &sService_HealthCheckConfig
+var Service_HealthCheckCustomConfig = &sService_HealthCheckCustomConfig
+var Service_CreateDate = &sService_CreateDate
+var Service_CreatorRequestId = &sService_CreatorRequestId
+var Service_CreatedByAccount = &sService_CreatedByAccount
+
+var ServiceAlreadyExists = &sServiceAlreadyExists
+var ServiceAlreadyExists_Message = &sServiceAlreadyExists_Message
+var ServiceAlreadyExists_CreatorRequestId = &sServiceAlreadyExists_CreatorRequestId
+var ServiceAlreadyExists_ServiceId = &sServiceAlreadyExists_ServiceId
+var ServiceAlreadyExists_ServiceArn = &sServiceAlreadyExists_ServiceArn
+
+var _ServiceAttributeKey = &s_ServiceAttributeKey
+
+var _ServiceAttributeKeyList = &s_ServiceAttributeKeyList
+var _ServiceAttributeKeyList_member = &s_ServiceAttributeKeyList_member
+
+var ServiceAttributes = &sServiceAttributes
+var ServiceAttributes_ServiceArn = &sServiceAttributes_ServiceArn
+var ServiceAttributes_ResourceOwner = &sServiceAttributes_ResourceOwner
+var ServiceAttributes_Attributes = &sServiceAttributes_Attributes
+
+var ServiceAttributesLimitExceededException = &sServiceAttributesLimitExceededException
+var ServiceAttributesLimitExceededException_Message = &sServiceAttributesLimitExceededException_Message
+
+var _ServiceAttributesMap = &s_ServiceAttributesMap
+var _ServiceAttributesMap_key = &s_ServiceAttributesMap_key
+var _ServiceAttributesMap_value = &s_ServiceAttributesMap_value
+
+var _ServiceAttributeValue = &s_ServiceAttributeValue
+
+var ServiceChange = &sServiceChange
+var ServiceChange_Description = &sServiceChange_Description
+var ServiceChange_DnsConfig = &sServiceChange_DnsConfig
+var ServiceChange_HealthCheckConfig = &sServiceChange_HealthCheckConfig
+
+var ServiceFilter = &sServiceFilter
+var ServiceFilter_Name = &sServiceFilter_Name
+var ServiceFilter_Values = &sServiceFilter_Values
+var ServiceFilter_Condition = &sServiceFilter_Condition
+
+var ServiceFilterName = &sServiceFilterName
+var ServiceFilterName_NAMESPACE_ID = &sServiceFilterName_NAMESPACE_ID
+var ServiceFilterName_RESOURCE_OWNER = &sServiceFilterName_RESOURCE_OWNER
+
+var _ServiceFilters = &s_ServiceFilters
+var _ServiceFilters_member = &s_ServiceFilters_member
+
+var _ServiceName = &s_ServiceName
+
+var ServiceNotFound = &sServiceNotFound
+var ServiceNotFound_Message = &sServiceNotFound_Message
+
+var _ServiceSummariesList = &s_ServiceSummariesList
+var _ServiceSummariesList_member = &s_ServiceSummariesList_member
+
+var ServiceSummary = &sServiceSummary
+var ServiceSummary_Id = &sServiceSummary_Id
+var ServiceSummary_Arn = &sServiceSummary_Arn
+var ServiceSummary_ResourceOwner = &sServiceSummary_ResourceOwner
+var ServiceSummary_Name = &sServiceSummary_Name
+var ServiceSummary_Type = &sServiceSummary_Type
+var ServiceSummary_Description = &sServiceSummary_Description
+var ServiceSummary_InstanceCount = &sServiceSummary_InstanceCount
+var ServiceSummary_DnsConfig = &sServiceSummary_DnsConfig
+var ServiceSummary_HealthCheckConfig = &sServiceSummary_HealthCheckConfig
+var ServiceSummary_HealthCheckCustomConfig = &sServiceSummary_HealthCheckCustomConfig
+var ServiceSummary_CreateDate = &sServiceSummary_CreateDate
+var ServiceSummary_CreatedByAccount = &sServiceSummary_CreatedByAccount
+
+var ServiceType = &sServiceType
+var ServiceType_HTTP = &sServiceType_HTTP
+var ServiceType_DNS_HTTP = &sServiceType_DNS_HTTP
+var ServiceType_DNS = &sServiceType_DNS
+
+var ServiceTypeOption = &sServiceTypeOption
+var ServiceTypeOption_HTTP = &sServiceTypeOption_HTTP
+
+var SOA = &sSOA
+var SOA_TTL = &sSOA_TTL
+
+var SOAChange = &sSOAChange
+var SOAChange_TTL = &sSOAChange_TTL
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _Timestamp = &s_Timestamp
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+var TooManyTagsException_ResourceName = &sTooManyTagsException_ResourceName
+
+var CreateHttpNamespaceRequest = &sCreateHttpNamespaceRequest
+var CreateHttpNamespaceRequest_Name = &sCreateHttpNamespaceRequest_Name
+var CreateHttpNamespaceRequest_CreatorRequestId = &sCreateHttpNamespaceRequest_CreatorRequestId
+var CreateHttpNamespaceRequest_Description = &sCreateHttpNamespaceRequest_Description
+var CreateHttpNamespaceRequest_Tags = &sCreateHttpNamespaceRequest_Tags
+
+var CreateHttpNamespaceResponse = &sCreateHttpNamespaceResponse
+var CreateHttpNamespaceResponse_OperationId = &sCreateHttpNamespaceResponse_OperationId
+
+var CreatePrivateDnsNamespaceRequest = &sCreatePrivateDnsNamespaceRequest
+var CreatePrivateDnsNamespaceRequest_Name = &sCreatePrivateDnsNamespaceRequest_Name
+var CreatePrivateDnsNamespaceRequest_CreatorRequestId = &sCreatePrivateDnsNamespaceRequest_CreatorRequestId
+var CreatePrivateDnsNamespaceRequest_Description = &sCreatePrivateDnsNamespaceRequest_Description
+var CreatePrivateDnsNamespaceRequest_Vpc = &sCreatePrivateDnsNamespaceRequest_Vpc
+var CreatePrivateDnsNamespaceRequest_Tags = &sCreatePrivateDnsNamespaceRequest_Tags
+var CreatePrivateDnsNamespaceRequest_Properties = &sCreatePrivateDnsNamespaceRequest_Properties
+
+var CreatePrivateDnsNamespaceResponse = &sCreatePrivateDnsNamespaceResponse
+var CreatePrivateDnsNamespaceResponse_OperationId = &sCreatePrivateDnsNamespaceResponse_OperationId
+
+var CreatePublicDnsNamespaceRequest = &sCreatePublicDnsNamespaceRequest
+var CreatePublicDnsNamespaceRequest_Name = &sCreatePublicDnsNamespaceRequest_Name
+var CreatePublicDnsNamespaceRequest_CreatorRequestId = &sCreatePublicDnsNamespaceRequest_CreatorRequestId
+var CreatePublicDnsNamespaceRequest_Description = &sCreatePublicDnsNamespaceRequest_Description
+var CreatePublicDnsNamespaceRequest_Tags = &sCreatePublicDnsNamespaceRequest_Tags
+var CreatePublicDnsNamespaceRequest_Properties = &sCreatePublicDnsNamespaceRequest_Properties
+
+var CreatePublicDnsNamespaceResponse = &sCreatePublicDnsNamespaceResponse
+var CreatePublicDnsNamespaceResponse_OperationId = &sCreatePublicDnsNamespaceResponse_OperationId
+
+var CreateServiceRequest = &sCreateServiceRequest
+var CreateServiceRequest_Name = &sCreateServiceRequest_Name
+var CreateServiceRequest_NamespaceId = &sCreateServiceRequest_NamespaceId
+var CreateServiceRequest_CreatorRequestId = &sCreateServiceRequest_CreatorRequestId
+var CreateServiceRequest_Description = &sCreateServiceRequest_Description
+var CreateServiceRequest_DnsConfig = &sCreateServiceRequest_DnsConfig
+var CreateServiceRequest_HealthCheckConfig = &sCreateServiceRequest_HealthCheckConfig
+var CreateServiceRequest_HealthCheckCustomConfig = &sCreateServiceRequest_HealthCheckCustomConfig
+var CreateServiceRequest_Tags = &sCreateServiceRequest_Tags
+var CreateServiceRequest_Type = &sCreateServiceRequest_Type
+
+var CreateServiceResponse = &sCreateServiceResponse
+var CreateServiceResponse_Service = &sCreateServiceResponse_Service
+
+var DeleteNamespaceRequest = &sDeleteNamespaceRequest
+var DeleteNamespaceRequest_Id = &sDeleteNamespaceRequest_Id
+
+var DeleteNamespaceResponse = &sDeleteNamespaceResponse
+var DeleteNamespaceResponse_OperationId = &sDeleteNamespaceResponse_OperationId
+
+var DeleteServiceAttributesRequest = &sDeleteServiceAttributesRequest
+var DeleteServiceAttributesRequest_ServiceId = &sDeleteServiceAttributesRequest_ServiceId
+var DeleteServiceAttributesRequest_Attributes = &sDeleteServiceAttributesRequest_Attributes
+
+var DeleteServiceAttributesResponse = &sDeleteServiceAttributesResponse
+
+var DeleteServiceRequest = &sDeleteServiceRequest
+var DeleteServiceRequest_Id = &sDeleteServiceRequest_Id
+
+var DeleteServiceResponse = &sDeleteServiceResponse
+
+var DeregisterInstanceRequest = &sDeregisterInstanceRequest
+var DeregisterInstanceRequest_ServiceId = &sDeregisterInstanceRequest_ServiceId
+var DeregisterInstanceRequest_InstanceId = &sDeregisterInstanceRequest_InstanceId
+
+var DeregisterInstanceResponse = &sDeregisterInstanceResponse
+var DeregisterInstanceResponse_OperationId = &sDeregisterInstanceResponse_OperationId
+
+var DiscoverInstancesRequest = &sDiscoverInstancesRequest
+var DiscoverInstancesRequest_NamespaceName = &sDiscoverInstancesRequest_NamespaceName
+var DiscoverInstancesRequest_ServiceName = &sDiscoverInstancesRequest_ServiceName
+var DiscoverInstancesRequest_MaxResults = &sDiscoverInstancesRequest_MaxResults
+var DiscoverInstancesRequest_QueryParameters = &sDiscoverInstancesRequest_QueryParameters
+var DiscoverInstancesRequest_OptionalParameters = &sDiscoverInstancesRequest_OptionalParameters
+var DiscoverInstancesRequest_HealthStatus = &sDiscoverInstancesRequest_HealthStatus
+var DiscoverInstancesRequest_OwnerAccount = &sDiscoverInstancesRequest_OwnerAccount
+
+var DiscoverInstancesResponse = &sDiscoverInstancesResponse
+var DiscoverInstancesResponse_Instances = &sDiscoverInstancesResponse_Instances
+var DiscoverInstancesResponse_InstancesRevision = &sDiscoverInstancesResponse_InstancesRevision
+
+var DiscoverInstancesRevisionRequest = &sDiscoverInstancesRevisionRequest
+var DiscoverInstancesRevisionRequest_NamespaceName = &sDiscoverInstancesRevisionRequest_NamespaceName
+var DiscoverInstancesRevisionRequest_ServiceName = &sDiscoverInstancesRevisionRequest_ServiceName
+var DiscoverInstancesRevisionRequest_OwnerAccount = &sDiscoverInstancesRevisionRequest_OwnerAccount
+
+var DiscoverInstancesRevisionResponse = &sDiscoverInstancesRevisionResponse
+var DiscoverInstancesRevisionResponse_InstancesRevision = &sDiscoverInstancesRevisionResponse_InstancesRevision
+
+var GetInstanceRequest = &sGetInstanceRequest
+var GetInstanceRequest_ServiceId = &sGetInstanceRequest_ServiceId
+var GetInstanceRequest_InstanceId = &sGetInstanceRequest_InstanceId
+
+var GetInstanceResponse = &sGetInstanceResponse
+var GetInstanceResponse_ResourceOwner = &sGetInstanceResponse_ResourceOwner
+var GetInstanceResponse_Instance = &sGetInstanceResponse_Instance
+
+var GetInstancesHealthStatusRequest = &sGetInstancesHealthStatusRequest
+var GetInstancesHealthStatusRequest_ServiceId = &sGetInstancesHealthStatusRequest_ServiceId
+var GetInstancesHealthStatusRequest_Instances = &sGetInstancesHealthStatusRequest_Instances
+var GetInstancesHealthStatusRequest_MaxResults = &sGetInstancesHealthStatusRequest_MaxResults
+var GetInstancesHealthStatusRequest_NextToken = &sGetInstancesHealthStatusRequest_NextToken
+
+var GetInstancesHealthStatusResponse = &sGetInstancesHealthStatusResponse
+var GetInstancesHealthStatusResponse_Status = &sGetInstancesHealthStatusResponse_Status
+var GetInstancesHealthStatusResponse_NextToken = &sGetInstancesHealthStatusResponse_NextToken
+
+var GetNamespaceRequest = &sGetNamespaceRequest
+var GetNamespaceRequest_Id = &sGetNamespaceRequest_Id
+
+var GetNamespaceResponse = &sGetNamespaceResponse
+var GetNamespaceResponse_Namespace = &sGetNamespaceResponse_Namespace
+
+var GetOperationRequest = &sGetOperationRequest
+var GetOperationRequest_OperationId = &sGetOperationRequest_OperationId
+var GetOperationRequest_OwnerAccount = &sGetOperationRequest_OwnerAccount
+
+var GetOperationResponse = &sGetOperationResponse
+var GetOperationResponse_Operation = &sGetOperationResponse_Operation
+
+var GetServiceAttributesRequest = &sGetServiceAttributesRequest
+var GetServiceAttributesRequest_ServiceId = &sGetServiceAttributesRequest_ServiceId
+
+var GetServiceAttributesResponse = &sGetServiceAttributesResponse
+var GetServiceAttributesResponse_ServiceAttributes = &sGetServiceAttributesResponse_ServiceAttributes
+
+var GetServiceRequest = &sGetServiceRequest
+var GetServiceRequest_Id = &sGetServiceRequest_Id
+
+var GetServiceResponse = &sGetServiceResponse
+var GetServiceResponse_Service = &sGetServiceResponse_Service
+
+var ListInstancesRequest = &sListInstancesRequest
+var ListInstancesRequest_ServiceId = &sListInstancesRequest_ServiceId
+var ListInstancesRequest_NextToken = &sListInstancesRequest_NextToken
+var ListInstancesRequest_MaxResults = &sListInstancesRequest_MaxResults
+
+var ListInstancesResponse = &sListInstancesResponse
+var ListInstancesResponse_ResourceOwner = &sListInstancesResponse_ResourceOwner
+var ListInstancesResponse_Instances = &sListInstancesResponse_Instances
+var ListInstancesResponse_NextToken = &sListInstancesResponse_NextToken
+
+var ListNamespacesRequest = &sListNamespacesRequest
+var ListNamespacesRequest_NextToken = &sListNamespacesRequest_NextToken
+var ListNamespacesRequest_MaxResults = &sListNamespacesRequest_MaxResults
+var ListNamespacesRequest_Filters = &sListNamespacesRequest_Filters
+
+var ListNamespacesResponse = &sListNamespacesResponse
+var ListNamespacesResponse_Namespaces = &sListNamespacesResponse_Namespaces
+var ListNamespacesResponse_NextToken = &sListNamespacesResponse_NextToken
+
+var ListOperationsRequest = &sListOperationsRequest
+var ListOperationsRequest_NextToken = &sListOperationsRequest_NextToken
+var ListOperationsRequest_MaxResults = &sListOperationsRequest_MaxResults
+var ListOperationsRequest_Filters = &sListOperationsRequest_Filters
+
+var ListOperationsResponse = &sListOperationsResponse
+var ListOperationsResponse_Operations = &sListOperationsResponse_Operations
+var ListOperationsResponse_NextToken = &sListOperationsResponse_NextToken
+
+var ListServicesRequest = &sListServicesRequest
+var ListServicesRequest_NextToken = &sListServicesRequest_NextToken
+var ListServicesRequest_MaxResults = &sListServicesRequest_MaxResults
+var ListServicesRequest_Filters = &sListServicesRequest_Filters
+
+var ListServicesResponse = &sListServicesResponse
+var ListServicesResponse_Services = &sListServicesResponse_Services
+var ListServicesResponse_NextToken = &sListServicesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var RegisterInstanceRequest = &sRegisterInstanceRequest
+var RegisterInstanceRequest_ServiceId = &sRegisterInstanceRequest_ServiceId
+var RegisterInstanceRequest_InstanceId = &sRegisterInstanceRequest_InstanceId
+var RegisterInstanceRequest_CreatorRequestId = &sRegisterInstanceRequest_CreatorRequestId
+var RegisterInstanceRequest_Attributes = &sRegisterInstanceRequest_Attributes
+
+var RegisterInstanceResponse = &sRegisterInstanceResponse
+var RegisterInstanceResponse_OperationId = &sRegisterInstanceResponse_OperationId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateHttpNamespaceRequest = &sUpdateHttpNamespaceRequest
+var UpdateHttpNamespaceRequest_Id = &sUpdateHttpNamespaceRequest_Id
+var UpdateHttpNamespaceRequest_UpdaterRequestId = &sUpdateHttpNamespaceRequest_UpdaterRequestId
+var UpdateHttpNamespaceRequest_Namespace = &sUpdateHttpNamespaceRequest_Namespace
+
+var UpdateHttpNamespaceResponse = &sUpdateHttpNamespaceResponse
+var UpdateHttpNamespaceResponse_OperationId = &sUpdateHttpNamespaceResponse_OperationId
+
+var UpdateInstanceCustomHealthStatusRequest = &sUpdateInstanceCustomHealthStatusRequest
+var UpdateInstanceCustomHealthStatusRequest_ServiceId = &sUpdateInstanceCustomHealthStatusRequest_ServiceId
+var UpdateInstanceCustomHealthStatusRequest_InstanceId = &sUpdateInstanceCustomHealthStatusRequest_InstanceId
+var UpdateInstanceCustomHealthStatusRequest_Status = &sUpdateInstanceCustomHealthStatusRequest_Status
+
+var UpdatePrivateDnsNamespaceRequest = &sUpdatePrivateDnsNamespaceRequest
+var UpdatePrivateDnsNamespaceRequest_Id = &sUpdatePrivateDnsNamespaceRequest_Id
+var UpdatePrivateDnsNamespaceRequest_UpdaterRequestId = &sUpdatePrivateDnsNamespaceRequest_UpdaterRequestId
+var UpdatePrivateDnsNamespaceRequest_Namespace = &sUpdatePrivateDnsNamespaceRequest_Namespace
+
+var UpdatePrivateDnsNamespaceResponse = &sUpdatePrivateDnsNamespaceResponse
+var UpdatePrivateDnsNamespaceResponse_OperationId = &sUpdatePrivateDnsNamespaceResponse_OperationId
+
+var UpdatePublicDnsNamespaceRequest = &sUpdatePublicDnsNamespaceRequest
+var UpdatePublicDnsNamespaceRequest_Id = &sUpdatePublicDnsNamespaceRequest_Id
+var UpdatePublicDnsNamespaceRequest_UpdaterRequestId = &sUpdatePublicDnsNamespaceRequest_UpdaterRequestId
+var UpdatePublicDnsNamespaceRequest_Namespace = &sUpdatePublicDnsNamespaceRequest_Namespace
+
+var UpdatePublicDnsNamespaceResponse = &sUpdatePublicDnsNamespaceResponse
+var UpdatePublicDnsNamespaceResponse_OperationId = &sUpdatePublicDnsNamespaceResponse_OperationId
+
+var UpdateServiceAttributesRequest = &sUpdateServiceAttributesRequest
+var UpdateServiceAttributesRequest_ServiceId = &sUpdateServiceAttributesRequest_ServiceId
+var UpdateServiceAttributesRequest_Attributes = &sUpdateServiceAttributesRequest_Attributes
+
+var UpdateServiceAttributesResponse = &sUpdateServiceAttributesResponse
+
+var UpdateServiceRequest = &sUpdateServiceRequest
+var UpdateServiceRequest_Id = &sUpdateServiceRequest_Id
+var UpdateServiceRequest_Service = &sUpdateServiceRequest_Service
+
+var UpdateServiceResponse = &sUpdateServiceResponse
+var UpdateServiceResponse_OperationId = &sUpdateServiceResponse_OperationId
+
+var Route53AutoNaming_v20170314 = &smithy.ServiceSchema{Schema: &s_Route53AutoNaming_v20170314, Version: "2017-03-14"}

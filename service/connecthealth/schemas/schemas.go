@@ -4,1715 +4,1710 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ActivateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ActivateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eActivateSubscription                                                         smithy.SchemaExtensions
+	eCreateDomain                                                                 smithy.SchemaExtensions
+	eCreateSubscription                                                           smithy.SchemaExtensions
+	eDeactivateSubscription                                                       smithy.SchemaExtensions
+	eDeleteDomain                                                                 smithy.SchemaExtensions
+	eGetDomain                                                                    smithy.SchemaExtensions
+	eGetMedicalScribeListeningSession                                             smithy.SchemaExtensions
+	eGetPatientInsightsJob                                                        smithy.SchemaExtensions
+	eGetSubscription                                                              smithy.SchemaExtensions
+	eListDomains                                                                  smithy.SchemaExtensions
+	eListSubscriptions                                                            smithy.SchemaExtensions
+	eListTagsForResource                                                          smithy.SchemaExtensions
+	eStartMedicalScribeListeningSession                                           smithy.SchemaExtensions
+	eStartPatientInsightsJob                                                      smithy.SchemaExtensions
+	eTagResource                                                                  smithy.SchemaExtensions
+	eUntagResource                                                                smithy.SchemaExtensions
+	e_ConnectHealth                                                               smithy.SchemaExtensions
+	eAccessDeniedException                                                        smithy.SchemaExtensions
+	eAccessDeniedException_message                                                smithy.SchemaExtensions
+	eArtifactDetails                                                              smithy.SchemaExtensions
+	eArtifactDetails_outputLocation                                               smithy.SchemaExtensions
+	eArtifactDetails_status                                                       smithy.SchemaExtensions
+	eArtifactDetails_failureReason                                                smithy.SchemaExtensions
+	e_AudioChunk                                                                  smithy.SchemaExtensions
+	e_AudioOffset                                                                 smithy.SchemaExtensions
+	eClinicalNoteGenerationResult                                                 smithy.SchemaExtensions
+	eClinicalNoteGenerationResult_noteResult                                      smithy.SchemaExtensions
+	eClinicalNoteGenerationResult_transcriptResult                                smithy.SchemaExtensions
+	eClinicalNoteGenerationResult_afterVisitSummaryResult                         smithy.SchemaExtensions
+	eClinicalNoteGenerationSettings                                               smithy.SchemaExtensions
+	eClinicalNoteGenerationSettings_noteTemplateSettings                          smithy.SchemaExtensions
+	eClinicalNoteGenerationSettingsResponse                                       smithy.SchemaExtensions
+	eClinicalNoteGenerationSettingsResponse_noteTemplateSettings                  smithy.SchemaExtensions
+	eConflictException                                                            smithy.SchemaExtensions
+	eConflictException_message                                                    smithy.SchemaExtensions
+	eCreateWebAppConfiguration                                                    smithy.SchemaExtensions
+	eCreateWebAppConfiguration_ehrRole                                            smithy.SchemaExtensions
+	eCreateWebAppConfiguration_idcInstanceId                                      smithy.SchemaExtensions
+	eCreateWebAppConfiguration_idcRegion                                          smithy.SchemaExtensions
+	eCustomTemplate                                                               smithy.SchemaExtensions
+	eCustomTemplate_templateType                                                  smithy.SchemaExtensions
+	eCustomTemplate_templateInstructions                                          smithy.SchemaExtensions
+	eCustomTemplateBase                                                           smithy.SchemaExtensions
+	eCustomTemplateBase_HISTORY_AND_PHYSICAL                                      smithy.SchemaExtensions
+	eCustomTemplateBase_GIRPP                                                     smithy.SchemaExtensions
+	eCustomTemplateBase_DAP                                                       smithy.SchemaExtensions
+	eCustomTemplateBase_SIRP                                                      smithy.SchemaExtensions
+	eCustomTemplateBase_BIRP                                                      smithy.SchemaExtensions
+	eCustomTemplateBase_BEHAVIORAL_SOAP                                           smithy.SchemaExtensions
+	eCustomTemplateResponse                                                       smithy.SchemaExtensions
+	eCustomTemplateResponse_templateType                                          smithy.SchemaExtensions
+	e_DomainArn                                                                   smithy.SchemaExtensions
+	e_DomainId                                                                    smithy.SchemaExtensions
+	e_DomainName                                                                  smithy.SchemaExtensions
+	eDomainStatus                                                                 smithy.SchemaExtensions
+	eDomainStatus_ACTIVE                                                          smithy.SchemaExtensions
+	eDomainStatus_DELETING                                                        smithy.SchemaExtensions
+	eDomainStatus_DELETED                                                         smithy.SchemaExtensions
+	eDomainSummary                                                                smithy.SchemaExtensions
+	eDomainSummary_domainId                                                       smithy.SchemaExtensions
+	eDomainSummary_arn                                                            smithy.SchemaExtensions
+	eDomainSummary_name                                                           smithy.SchemaExtensions
+	eDomainSummary_status                                                         smithy.SchemaExtensions
+	eDomainSummary_createdAt                                                      smithy.SchemaExtensions
+	e_DomainSummaryList                                                           smithy.SchemaExtensions
+	e_DomainSummaryList_member                                                    smithy.SchemaExtensions
+	eEncounterContext                                                             smithy.SchemaExtensions
+	eEncounterContext_unstructuredContext                                         smithy.SchemaExtensions
+	eEncryptionContext                                                            smithy.SchemaExtensions
+	eEncryptionContext_encryptionType                                             smithy.SchemaExtensions
+	eEncryptionContext_kmsKeyArn                                                  smithy.SchemaExtensions
+	eEncryptionType                                                               smithy.SchemaExtensions
+	eEncryptionType_AWS_OWNED_KEY                                                 smithy.SchemaExtensions
+	eEncryptionType_CUSTOMER_MANAGED_KEY                                          smithy.SchemaExtensions
+	e_ErrorMessage                                                                smithy.SchemaExtensions
+	eFHIRServer                                                                   smithy.SchemaExtensions
+	eFHIRServer_fhirEndpoint                                                      smithy.SchemaExtensions
+	eFHIRServer_oauthToken                                                        smithy.SchemaExtensions
+	eInputDataConfig                                                              smithy.SchemaExtensions
+	eInputDataConfig_fhirServer                                                   smithy.SchemaExtensions
+	eInputDataConfig_s3Sources                                                    smithy.SchemaExtensions
+	eInsightsContext                                                              smithy.SchemaExtensions
+	eInsightsContext_insightsType                                                 smithy.SchemaExtensions
+	eInsightsOutput                                                               smithy.SchemaExtensions
+	eInsightsOutput_uri                                                           smithy.SchemaExtensions
+	eInsightsType                                                                 smithy.SchemaExtensions
+	eInsightsType_PRE_VISIT                                                       smithy.SchemaExtensions
+	eInternalServerException                                                      smithy.SchemaExtensions
+	eInternalServerException_message                                              smithy.SchemaExtensions
+	e_JobArn                                                                      smithy.SchemaExtensions
+	e_JobId                                                                       smithy.SchemaExtensions
+	eJobStatus                                                                    smithy.SchemaExtensions
+	eJobStatus_SUBMITTED                                                          smithy.SchemaExtensions
+	eJobStatus_IN_PROGRESS                                                        smithy.SchemaExtensions
+	eJobStatus_FAILED                                                             smithy.SchemaExtensions
+	eJobStatus_SUCCEEDED                                                          smithy.SchemaExtensions
+	e_KmsKeyArn                                                                   smithy.SchemaExtensions
+	eManagedNoteTemplate                                                          smithy.SchemaExtensions
+	eManagedNoteTemplate_HISTORY_AND_PHYSICAL                                     smithy.SchemaExtensions
+	eManagedNoteTemplate_GIRPP                                                    smithy.SchemaExtensions
+	eManagedNoteTemplate_DAP                                                      smithy.SchemaExtensions
+	eManagedNoteTemplate_SIRP                                                     smithy.SchemaExtensions
+	eManagedNoteTemplate_BIRP                                                     smithy.SchemaExtensions
+	eManagedNoteTemplate_BEHAVIORAL_SOAP                                          smithy.SchemaExtensions
+	eManagedNoteTemplate_PHYSICAL_SOAP                                            smithy.SchemaExtensions
+	eManagedTemplate                                                              smithy.SchemaExtensions
+	eManagedTemplate_templateType                                                 smithy.SchemaExtensions
+	eManagedTemplateResponse                                                      smithy.SchemaExtensions
+	eManagedTemplateResponse_templateType                                         smithy.SchemaExtensions
+	eMedicalScribeAudioEvent                                                      smithy.SchemaExtensions
+	eMedicalScribeAudioEvent_audioChunk                                           smithy.SchemaExtensions
+	eMedicalScribeBinaryAudioEvent                                                smithy.SchemaExtensions
+	eMedicalScribeBinaryAudioEvent_audioChunk                                     smithy.SchemaExtensions
+	eMedicalScribeChannelDefinition                                               smithy.SchemaExtensions
+	eMedicalScribeChannelDefinition_channelId                                     smithy.SchemaExtensions
+	eMedicalScribeChannelDefinition_participantRole                               smithy.SchemaExtensions
+	e_MedicalScribeChannelDefinitions                                             smithy.SchemaExtensions
+	e_MedicalScribeChannelDefinitions_member                                      smithy.SchemaExtensions
+	e_MedicalScribeChannelId                                                      smithy.SchemaExtensions
+	eMedicalScribeConfigurationEvent                                              smithy.SchemaExtensions
+	eMedicalScribeConfigurationEvent_postStreamActionSettings                     smithy.SchemaExtensions
+	eMedicalScribeConfigurationEvent_channelDefinitions                           smithy.SchemaExtensions
+	eMedicalScribeConfigurationEvent_encounterContext                             smithy.SchemaExtensions
+	eMedicalScribeInputStream                                                     smithy.SchemaExtensions
+	eMedicalScribeInputStream_audioEvent                                          smithy.SchemaExtensions
+	eMedicalScribeInputStream_binaryAudioEvent                                    smithy.SchemaExtensions
+	eMedicalScribeInputStream_sessionControlEvent                                 smithy.SchemaExtensions
+	eMedicalScribeInputStream_configurationEvent                                  smithy.SchemaExtensions
+	eMedicalScribeLanguageCode                                                    smithy.SchemaExtensions
+	eMedicalScribeLanguageCode_EN_US                                              smithy.SchemaExtensions
+	eMedicalScribeLanguageCode_MULTI                                              smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails                                         smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_sessionId                               smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_domainId                                smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_subscriptionId                          smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_languageCode                            smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_mediaSampleRateHertz                    smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_mediaEncoding                           smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_channelDefinitions                      smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_postStreamActionSettings                smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_postStreamActionResult                  smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_encounterContextProvided                smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_streamStatus                            smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_streamCreationTime                      smithy.SchemaExtensions
+	eMedicalScribeListeningSessionDetails_streamEndTime                           smithy.SchemaExtensions
+	eMedicalScribeMediaEncoding                                                   smithy.SchemaExtensions
+	eMedicalScribeMediaEncoding_PCM                                               smithy.SchemaExtensions
+	eMedicalScribeMediaEncoding_FLAC                                              smithy.SchemaExtensions
+	e_MedicalScribeMediaSampleRateHertz                                           smithy.SchemaExtensions
+	eMedicalScribeOutputStream                                                    smithy.SchemaExtensions
+	eMedicalScribeOutputStream_transcriptEvent                                    smithy.SchemaExtensions
+	eMedicalScribeOutputStream_internalFailureException                           smithy.SchemaExtensions
+	eMedicalScribeOutputStream_validationException                                smithy.SchemaExtensions
+	eMedicalScribeParticipantRole                                                 smithy.SchemaExtensions
+	eMedicalScribeParticipantRole_PATIENT                                         smithy.SchemaExtensions
+	eMedicalScribeParticipantRole_CLINICIAN                                       smithy.SchemaExtensions
+	eMedicalScribePostStreamActionSettings                                        smithy.SchemaExtensions
+	eMedicalScribePostStreamActionSettings_outputS3Uri                            smithy.SchemaExtensions
+	eMedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings         smithy.SchemaExtensions
+	eMedicalScribePostStreamActionSettingsResponse                                smithy.SchemaExtensions
+	eMedicalScribePostStreamActionSettingsResponse_outputS3Uri                    smithy.SchemaExtensions
+	eMedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings smithy.SchemaExtensions
+	eMedicalScribePostStreamActionsResult                                         smithy.SchemaExtensions
+	eMedicalScribePostStreamActionsResult_clinicalNoteGenerationResult            smithy.SchemaExtensions
+	eMedicalScribeSessionControlEvent                                             smithy.SchemaExtensions
+	eMedicalScribeSessionControlEvent_type                                        smithy.SchemaExtensions
+	eMedicalScribeSessionControlEventType                                         smithy.SchemaExtensions
+	eMedicalScribeSessionControlEventType_END_OF_SESSION                          smithy.SchemaExtensions
+	eMedicalScribeStreamStatus                                                    smithy.SchemaExtensions
+	eMedicalScribeStreamStatus_IN_PROGRESS                                        smithy.SchemaExtensions
+	eMedicalScribeStreamStatus_PAUSED                                             smithy.SchemaExtensions
+	eMedicalScribeStreamStatus_FAILED                                             smithy.SchemaExtensions
+	eMedicalScribeStreamStatus_COMPLETED                                          smithy.SchemaExtensions
+	eMedicalScribeTranscriptEvent                                                 smithy.SchemaExtensions
+	eMedicalScribeTranscriptEvent_transcriptSegment                               smithy.SchemaExtensions
+	eMedicalScribeTranscriptSegment                                               smithy.SchemaExtensions
+	eMedicalScribeTranscriptSegment_segmentId                                     smithy.SchemaExtensions
+	eMedicalScribeTranscriptSegment_audioBeginOffset                              smithy.SchemaExtensions
+	eMedicalScribeTranscriptSegment_audioEndOffset                                smithy.SchemaExtensions
+	eMedicalScribeTranscriptSegment_isPartial                                     smithy.SchemaExtensions
+	eMedicalScribeTranscriptSegment_channelId                                     smithy.SchemaExtensions
+	eMedicalScribeTranscriptSegment_content                                       smithy.SchemaExtensions
+	e_NonEmptyString                                                              smithy.SchemaExtensions
+	e_NonNullBoolean                                                              smithy.SchemaExtensions
+	eNoteTemplateSettings                                                         smithy.SchemaExtensions
+	eNoteTemplateSettings_managedTemplate                                         smithy.SchemaExtensions
+	eNoteTemplateSettings_customTemplate                                          smithy.SchemaExtensions
+	eNoteTemplateSettingsResponse                                                 smithy.SchemaExtensions
+	eNoteTemplateSettingsResponse_managedTemplate                                 smithy.SchemaExtensions
+	eNoteTemplateSettingsResponse_customTemplate                                  smithy.SchemaExtensions
+	eOutputDataConfig                                                             smithy.SchemaExtensions
+	eOutputDataConfig_s3OutputPath                                                smithy.SchemaExtensions
+	ePatientInsightsEncounterContext                                              smithy.SchemaExtensions
+	ePatientInsightsEncounterContext_encounterReason                              smithy.SchemaExtensions
+	ePatientInsightsPatientContext                                                smithy.SchemaExtensions
+	ePatientInsightsPatientContext_patientId                                      smithy.SchemaExtensions
+	ePatientInsightsPatientContext_dateOfBirth                                    smithy.SchemaExtensions
+	ePatientInsightsPatientContext_pronouns                                       smithy.SchemaExtensions
+	ePostStreamArtifactGenerationStatus                                           smithy.SchemaExtensions
+	ePostStreamArtifactGenerationStatus_IN_PROGRESS                               smithy.SchemaExtensions
+	ePostStreamArtifactGenerationStatus_FAILED                                    smithy.SchemaExtensions
+	ePostStreamArtifactGenerationStatus_COMPLETED                                 smithy.SchemaExtensions
+	ePronouns                                                                     smithy.SchemaExtensions
+	ePronouns_HE_HIM                                                              smithy.SchemaExtensions
+	ePronouns_SHE_HER                                                             smithy.SchemaExtensions
+	ePronouns_THEY_THEM                                                           smithy.SchemaExtensions
+	eProviderRole                                                                 smithy.SchemaExtensions
+	eProviderRole_CLINICIAN                                                       smithy.SchemaExtensions
+	e_RequestId                                                                   smithy.SchemaExtensions
+	eResourceNotFoundException                                                    smithy.SchemaExtensions
+	eResourceNotFoundException_message                                            smithy.SchemaExtensions
+	eS3Source                                                                     smithy.SchemaExtensions
+	eS3Source_uri                                                                 smithy.SchemaExtensions
+	e_S3Sources                                                                   smithy.SchemaExtensions
+	e_S3Sources_member                                                            smithy.SchemaExtensions
+	e_S3Uri                                                                       smithy.SchemaExtensions
+	e_ScribeSessionId                                                             smithy.SchemaExtensions
+	e_SensitiveIsoDateString                                                      smithy.SchemaExtensions
+	e_SensitiveMarkdownString                                                     smithy.SchemaExtensions
+	e_SensitiveNonEmptyString                                                     smithy.SchemaExtensions
+	e_SensitiveSectionHeaderString                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                        smithy.SchemaExtensions
+	eSpecialty                                                                    smithy.SchemaExtensions
+	eSpecialty_PRIMARY_CARE                                                       smithy.SchemaExtensions
+	e_SubscriptionArn                                                             smithy.SchemaExtensions
+	eSubscriptionDescription                                                      smithy.SchemaExtensions
+	eSubscriptionDescription_domainId                                             smithy.SchemaExtensions
+	eSubscriptionDescription_subscriptionId                                       smithy.SchemaExtensions
+	eSubscriptionDescription_arn                                                  smithy.SchemaExtensions
+	eSubscriptionDescription_status                                               smithy.SchemaExtensions
+	eSubscriptionDescription_createdAt                                            smithy.SchemaExtensions
+	eSubscriptionDescription_lastUpdatedAt                                        smithy.SchemaExtensions
+	eSubscriptionDescription_activatedAt                                          smithy.SchemaExtensions
+	eSubscriptionDescription_deactivatedAt                                        smithy.SchemaExtensions
+	e_SubscriptionId                                                              smithy.SchemaExtensions
+	e_SubscriptionList                                                            smithy.SchemaExtensions
+	e_SubscriptionList_member                                                     smithy.SchemaExtensions
+	eSubscriptionStatus                                                           smithy.SchemaExtensions
+	eSubscriptionStatus_ACTIVE                                                    smithy.SchemaExtensions
+	eSubscriptionStatus_INACTIVE                                                  smithy.SchemaExtensions
+	eSubscriptionStatus_DELETED                                                   smithy.SchemaExtensions
+	e_TagKey                                                                      smithy.SchemaExtensions
+	e_TagKeyList                                                                  smithy.SchemaExtensions
+	e_TagKeyList_member                                                           smithy.SchemaExtensions
+	e_TagMap                                                                      smithy.SchemaExtensions
+	e_TagMap_key                                                                  smithy.SchemaExtensions
+	e_TagMap_value                                                                smithy.SchemaExtensions
+	e_TagValue                                                                    smithy.SchemaExtensions
+	e_TemplateInstructions                                                        smithy.SchemaExtensions
+	e_TemplateInstructions_member                                                 smithy.SchemaExtensions
+	eTemplateSectionInstruction                                                   smithy.SchemaExtensions
+	eTemplateSectionInstruction_sectionHeader                                     smithy.SchemaExtensions
+	eTemplateSectionInstruction_sectionInstruction                                smithy.SchemaExtensions
+	eThrottlingException                                                          smithy.SchemaExtensions
+	eThrottlingException_message                                                  smithy.SchemaExtensions
+	e_Uri                                                                         smithy.SchemaExtensions
+	eUserContext                                                                  smithy.SchemaExtensions
+	eUserContext_role                                                             smithy.SchemaExtensions
+	eUserContext_userId                                                           smithy.SchemaExtensions
+	eUserContext_specialty                                                        smithy.SchemaExtensions
+	eValidationException                                                          smithy.SchemaExtensions
+	eValidationException_message                                                  smithy.SchemaExtensions
+	eWebAppConfiguration                                                          smithy.SchemaExtensions
+	eWebAppConfiguration_ehrRole                                                  smithy.SchemaExtensions
+	eWebAppConfiguration_idcApplicationId                                         smithy.SchemaExtensions
+	eWebAppConfiguration_idcRegion                                                smithy.SchemaExtensions
+	e_WebAppUrl                                                                   smithy.SchemaExtensions
+	eActivateSubscriptionInput                                                    smithy.SchemaExtensions
+	eActivateSubscriptionInput_domainId                                           smithy.SchemaExtensions
+	eActivateSubscriptionInput_subscriptionId                                     smithy.SchemaExtensions
+	eActivateSubscriptionOutput                                                   smithy.SchemaExtensions
+	eActivateSubscriptionOutput_subscription                                      smithy.SchemaExtensions
+	eCreateDomainInput                                                            smithy.SchemaExtensions
+	eCreateDomainInput_name                                                       smithy.SchemaExtensions
+	eCreateDomainInput_kmsKeyArn                                                  smithy.SchemaExtensions
+	eCreateDomainInput_webAppSetupConfiguration                                   smithy.SchemaExtensions
+	eCreateDomainInput_tags                                                       smithy.SchemaExtensions
+	eCreateDomainOutput                                                           smithy.SchemaExtensions
+	eCreateDomainOutput_domainId                                                  smithy.SchemaExtensions
+	eCreateDomainOutput_arn                                                       smithy.SchemaExtensions
+	eCreateDomainOutput_name                                                      smithy.SchemaExtensions
+	eCreateDomainOutput_kmsKeyArn                                                 smithy.SchemaExtensions
+	eCreateDomainOutput_encryptionContext                                         smithy.SchemaExtensions
+	eCreateDomainOutput_status                                                    smithy.SchemaExtensions
+	eCreateDomainOutput_webAppUrl                                                 smithy.SchemaExtensions
+	eCreateDomainOutput_webAppConfiguration                                       smithy.SchemaExtensions
+	eCreateDomainOutput_createdAt                                                 smithy.SchemaExtensions
+	eCreateSubscriptionInput                                                      smithy.SchemaExtensions
+	eCreateSubscriptionInput_domainId                                             smithy.SchemaExtensions
+	eCreateSubscriptionOutput                                                     smithy.SchemaExtensions
+	eCreateSubscriptionOutput_domainId                                            smithy.SchemaExtensions
+	eCreateSubscriptionOutput_subscriptionId                                      smithy.SchemaExtensions
+	eCreateSubscriptionOutput_arn                                                 smithy.SchemaExtensions
+	eCreateSubscriptionOutput_status                                              smithy.SchemaExtensions
+	eCreateSubscriptionOutput_createdAt                                           smithy.SchemaExtensions
+	eCreateSubscriptionOutput_lastUpdatedAt                                       smithy.SchemaExtensions
+	eCreateSubscriptionOutput_activatedAt                                         smithy.SchemaExtensions
+	eCreateSubscriptionOutput_deactivatedAt                                       smithy.SchemaExtensions
+	eDeactivateSubscriptionInput                                                  smithy.SchemaExtensions
+	eDeactivateSubscriptionInput_domainId                                         smithy.SchemaExtensions
+	eDeactivateSubscriptionInput_subscriptionId                                   smithy.SchemaExtensions
+	eDeactivateSubscriptionOutput                                                 smithy.SchemaExtensions
+	eDeactivateSubscriptionOutput_subscription                                    smithy.SchemaExtensions
+	eDeleteDomainInput                                                            smithy.SchemaExtensions
+	eDeleteDomainInput_domainId                                                   smithy.SchemaExtensions
+	eDeleteDomainOutput                                                           smithy.SchemaExtensions
+	eDeleteDomainOutput_domainId                                                  smithy.SchemaExtensions
+	eDeleteDomainOutput_arn                                                       smithy.SchemaExtensions
+	eDeleteDomainOutput_status                                                    smithy.SchemaExtensions
+	eGetDomainInput                                                               smithy.SchemaExtensions
+	eGetDomainInput_domainId                                                      smithy.SchemaExtensions
+	eGetDomainOutput                                                              smithy.SchemaExtensions
+	eGetDomainOutput_domainId                                                     smithy.SchemaExtensions
+	eGetDomainOutput_arn                                                          smithy.SchemaExtensions
+	eGetDomainOutput_name                                                         smithy.SchemaExtensions
+	eGetDomainOutput_kmsKeyArn                                                    smithy.SchemaExtensions
+	eGetDomainOutput_encryptionContext                                            smithy.SchemaExtensions
+	eGetDomainOutput_status                                                       smithy.SchemaExtensions
+	eGetDomainOutput_webAppUrl                                                    smithy.SchemaExtensions
+	eGetDomainOutput_webAppConfiguration                                          smithy.SchemaExtensions
+	eGetDomainOutput_createdAt                                                    smithy.SchemaExtensions
+	eGetDomainOutput_tags                                                         smithy.SchemaExtensions
+	eGetMedicalScribeListeningSessionInput                                        smithy.SchemaExtensions
+	eGetMedicalScribeListeningSessionInput_sessionId                              smithy.SchemaExtensions
+	eGetMedicalScribeListeningSessionInput_domainId                               smithy.SchemaExtensions
+	eGetMedicalScribeListeningSessionInput_subscriptionId                         smithy.SchemaExtensions
+	eGetMedicalScribeListeningSessionOutput                                       smithy.SchemaExtensions
+	eGetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails  smithy.SchemaExtensions
+	eGetPatientInsightsJobRequest                                                 smithy.SchemaExtensions
+	eGetPatientInsightsJobRequest_domainId                                        smithy.SchemaExtensions
+	eGetPatientInsightsJobRequest_jobId                                           smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse                                                smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_jobId                                          smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_jobArn                                         smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_jobStatus                                      smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_creationTime                                   smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_updatedTime                                    smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_insightsOutput                                 smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_statusDetails                                  smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_patientContext                                 smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_insightsContext                                smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_encounterContext                               smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_userContext                                    smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_inputDataConfig                                smithy.SchemaExtensions
+	eGetPatientInsightsJobResponse_outputDataConfig                               smithy.SchemaExtensions
+	eGetSubscriptionInput                                                         smithy.SchemaExtensions
+	eGetSubscriptionInput_domainId                                                smithy.SchemaExtensions
+	eGetSubscriptionInput_subscriptionId                                          smithy.SchemaExtensions
+	eGetSubscriptionOutput                                                        smithy.SchemaExtensions
+	eGetSubscriptionOutput_subscription                                           smithy.SchemaExtensions
+	eListDomainsInput                                                             smithy.SchemaExtensions
+	eListDomainsInput_status                                                      smithy.SchemaExtensions
+	eListDomainsInput_maxResults                                                  smithy.SchemaExtensions
+	eListDomainsInput_nextToken                                                   smithy.SchemaExtensions
+	eListDomainsOutput                                                            smithy.SchemaExtensions
+	eListDomainsOutput_domains                                                    smithy.SchemaExtensions
+	eListDomainsOutput_nextToken                                                  smithy.SchemaExtensions
+	eListSubscriptionsInput                                                       smithy.SchemaExtensions
+	eListSubscriptionsInput_domainId                                              smithy.SchemaExtensions
+	eListSubscriptionsInput_maxResults                                            smithy.SchemaExtensions
+	eListSubscriptionsInput_nextToken                                             smithy.SchemaExtensions
+	eListSubscriptionsOutput                                                      smithy.SchemaExtensions
+	eListSubscriptionsOutput_subscriptions                                        smithy.SchemaExtensions
+	eListSubscriptionsOutput_nextToken                                            smithy.SchemaExtensions
+	eListTagsForResourceInput                                                     smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                                         smithy.SchemaExtensions
+	eListTagsForResourceOutput                                                    smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                               smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput                                      smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput_sessionId                            smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput_domainId                             smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput_subscriptionId                       smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput_languageCode                         smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput_mediaSampleRateHertz                 smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput_mediaEncoding                        smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionInput_inputStream                          smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput                                     smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_sessionId                           smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_domainId                            smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_subscriptionId                      smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_requestId                           smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_languageCode                        smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_mediaSampleRateHertz                smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_mediaEncoding                       smithy.SchemaExtensions
+	eStartMedicalScribeListeningSessionOutput_responseStream                      smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest                                               smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_domainId                                      smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_patientContext                                smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_insightsContext                               smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_encounterContext                              smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_userContext                                   smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_inputDataConfig                               smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_outputDataConfig                              smithy.SchemaExtensions
+	eStartPatientInsightsJobRequest_clientToken                                   smithy.SchemaExtensions
+	eStartPatientInsightsJobResponse                                              smithy.SchemaExtensions
+	eStartPatientInsightsJobResponse_jobArn                                       smithy.SchemaExtensions
+	eStartPatientInsightsJobResponse_jobId                                        smithy.SchemaExtensions
+	eStartPatientInsightsJobResponse_creationTime                                 smithy.SchemaExtensions
+	eTagResourceInput                                                             smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                                 smithy.SchemaExtensions
+	eTagResourceInput_tags                                                        smithy.SchemaExtensions
+	eUntagResourceInput                                                           smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                               smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                                   smithy.SchemaExtensions
+)
+
+var (
+	iActivateSubscription                          = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ActivateSubscription"}
+	iCreateDomain                                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CreateDomain"}
+	iCreateSubscription                            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CreateSubscription"}
+	iDeactivateSubscription                        = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DeactivateSubscription"}
+	iDeleteDomain                                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DeleteDomain"}
+	iGetDomain                                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetDomain"}
+	iGetMedicalScribeListeningSession              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetMedicalScribeListeningSession"}
+	iGetPatientInsightsJob                         = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetPatientInsightsJob"}
+	iGetSubscription                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetSubscription"}
+	iListDomains                                   = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListDomains"}
+	iListSubscriptions                             = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListSubscriptions"}
+	iListTagsForResource                           = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListTagsForResource"}
+	iStartMedicalScribeListeningSession            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "StartMedicalScribeListeningSession"}
+	iStartPatientInsightsJob                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "StartPatientInsightsJob"}
+	iTagResource                                   = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TagResource"}
+	iUntagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "UntagResource"}
+	i_ConnectHealth                                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ConnectHealth"}
+	iAccessDeniedException                         = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "AccessDeniedException"}
+	iArtifactDetails                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ArtifactDetails"}
+	i_AudioChunk                                   = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "AudioChunk"}
+	i_AudioOffset                                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "AudioOffset"}
+	iClinicalNoteGenerationResult                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ClinicalNoteGenerationResult"}
+	iClinicalNoteGenerationSettings                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ClinicalNoteGenerationSettings"}
+	iClinicalNoteGenerationSettingsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ClinicalNoteGenerationSettingsResponse"}
+	iConflictException                             = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ConflictException"}
+	iCreateWebAppConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CreateWebAppConfiguration"}
+	iCustomTemplate                                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CustomTemplate"}
+	iCustomTemplateBase                            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CustomTemplateBase"}
+	iCustomTemplateResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CustomTemplateResponse"}
+	i_DomainArn                                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DomainArn"}
+	i_DomainId                                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DomainId"}
+	i_DomainName                                   = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DomainName"}
+	iDomainStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DomainStatus"}
+	iDomainSummary                                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DomainSummary"}
+	i_DomainSummaryList                            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DomainSummaryList"}
+	iEncounterContext                              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "EncounterContext"}
+	iEncryptionContext                             = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "EncryptionContext"}
+	iEncryptionType                                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "EncryptionType"}
+	i_ErrorMessage                                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ErrorMessage"}
+	iFHIRServer                                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "FHIRServer"}
+	iInputDataConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "InputDataConfig"}
+	iInsightsContext                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "InsightsContext"}
+	iInsightsOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "InsightsOutput"}
+	iInsightsType                                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "InsightsType"}
+	iInternalServerException                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "InternalServerException"}
+	i_JobArn                                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "JobArn"}
+	i_JobId                                        = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "JobId"}
+	iJobStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "JobStatus"}
+	i_KmsKeyArn                                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "KmsKeyArn"}
+	iManagedNoteTemplate                           = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ManagedNoteTemplate"}
+	iManagedTemplate                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ManagedTemplate"}
+	iManagedTemplateResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ManagedTemplateResponse"}
+	iMedicalScribeAudioEvent                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeAudioEvent"}
+	iMedicalScribeBinaryAudioEvent                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeBinaryAudioEvent"}
+	iMedicalScribeChannelDefinition                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeChannelDefinition"}
+	i_MedicalScribeChannelDefinitions              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeChannelDefinitions"}
+	i_MedicalScribeChannelId                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeChannelId"}
+	iMedicalScribeConfigurationEvent               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeConfigurationEvent"}
+	iMedicalScribeInputStream                      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeInputStream"}
+	iMedicalScribeLanguageCode                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeLanguageCode"}
+	iMedicalScribeListeningSessionDetails          = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeListeningSessionDetails"}
+	iMedicalScribeMediaEncoding                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeMediaEncoding"}
+	i_MedicalScribeMediaSampleRateHertz            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeMediaSampleRateHertz"}
+	iMedicalScribeOutputStream                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeOutputStream"}
+	iMedicalScribeParticipantRole                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeParticipantRole"}
+	iMedicalScribePostStreamActionSettings         = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribePostStreamActionSettings"}
+	iMedicalScribePostStreamActionSettingsResponse = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribePostStreamActionSettingsResponse"}
+	iMedicalScribePostStreamActionsResult          = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribePostStreamActionsResult"}
+	iMedicalScribeSessionControlEvent              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeSessionControlEvent"}
+	iMedicalScribeSessionControlEventType          = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeSessionControlEventType"}
+	iMedicalScribeStreamStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeStreamStatus"}
+	iMedicalScribeTranscriptEvent                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeTranscriptEvent"}
+	iMedicalScribeTranscriptSegment                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "MedicalScribeTranscriptSegment"}
+	i_NonEmptyString                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "NonEmptyString"}
+	i_NonNullBoolean                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "NonNullBoolean"}
+	iNoteTemplateSettings                          = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "NoteTemplateSettings"}
+	iNoteTemplateSettingsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "NoteTemplateSettingsResponse"}
+	iOutputDataConfig                              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "OutputDataConfig"}
+	iPatientInsightsEncounterContext               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "PatientInsightsEncounterContext"}
+	iPatientInsightsPatientContext                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "PatientInsightsPatientContext"}
+	iPostStreamArtifactGenerationStatus            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "PostStreamArtifactGenerationStatus"}
+	iPronouns                                      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "Pronouns"}
+	iProviderRole                                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ProviderRole"}
+	i_RequestId                                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "RequestId"}
+	iResourceNotFoundException                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ResourceNotFoundException"}
+	iS3Source                                      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "S3Source"}
+	i_S3Sources                                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "S3Sources"}
+	i_S3Uri                                        = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "S3Uri"}
+	i_ScribeSessionId                              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ScribeSessionId"}
+	i_SensitiveIsoDateString                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SensitiveIsoDateString"}
+	i_SensitiveMarkdownString                      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SensitiveMarkdownString"}
+	i_SensitiveNonEmptyString                      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SensitiveNonEmptyString"}
+	i_SensitiveSectionHeaderString                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SensitiveSectionHeaderString"}
+	iServiceQuotaExceededException                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ServiceQuotaExceededException"}
+	iSpecialty                                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "Specialty"}
+	i_SubscriptionArn                              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SubscriptionArn"}
+	iSubscriptionDescription                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SubscriptionDescription"}
+	i_SubscriptionId                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SubscriptionId"}
+	i_SubscriptionList                             = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SubscriptionList"}
+	iSubscriptionStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "SubscriptionStatus"}
+	i_TagKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TagKey"}
+	i_TagKeyList                                   = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TagKeyList"}
+	i_TagMap                                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TagMap"}
+	i_TagValue                                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TagValue"}
+	i_TemplateInstructions                         = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TemplateInstructions"}
+	iTemplateSectionInstruction                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TemplateSectionInstruction"}
+	iThrottlingException                           = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ThrottlingException"}
+	i_Uri                                          = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "Uri"}
+	iUserContext                                   = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "UserContext"}
+	iValidationException                           = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ValidationException"}
+	iWebAppConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "WebAppConfiguration"}
+	i_WebAppUrl                                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "WebAppUrl"}
+	iActivateSubscriptionInput                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ActivateSubscriptionInput"}
+	iActivateSubscriptionOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ActivateSubscriptionOutput"}
+	iCreateDomainInput                             = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CreateDomainInput"}
+	iCreateDomainOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CreateDomainOutput"}
+	iCreateSubscriptionInput                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CreateSubscriptionInput"}
+	iCreateSubscriptionOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "CreateSubscriptionOutput"}
+	iDeactivateSubscriptionInput                   = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DeactivateSubscriptionInput"}
+	iDeactivateSubscriptionOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DeactivateSubscriptionOutput"}
+	iDeleteDomainInput                             = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DeleteDomainInput"}
+	iDeleteDomainOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "DeleteDomainOutput"}
+	iGetDomainInput                                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetDomainInput"}
+	iGetDomainOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetDomainOutput"}
+	iGetMedicalScribeListeningSessionInput         = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetMedicalScribeListeningSessionInput"}
+	iGetMedicalScribeListeningSessionOutput        = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetMedicalScribeListeningSessionOutput"}
+	iGetPatientInsightsJobRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetPatientInsightsJobRequest"}
+	iGetPatientInsightsJobResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetPatientInsightsJobResponse"}
+	iGetSubscriptionInput                          = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetSubscriptionInput"}
+	iGetSubscriptionOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "GetSubscriptionOutput"}
+	iListDomainsInput                              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListDomainsInput"}
+	iListDomainsOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListDomainsOutput"}
+	iListSubscriptionsInput                        = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListSubscriptionsInput"}
+	iListSubscriptionsOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListSubscriptionsOutput"}
+	iListTagsForResourceInput                      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "ListTagsForResourceOutput"}
+	iStartMedicalScribeListeningSessionInput       = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "StartMedicalScribeListeningSessionInput"}
+	iStartMedicalScribeListeningSessionOutput      = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "StartMedicalScribeListeningSessionOutput"}
+	iStartPatientInsightsJobRequest                = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "StartPatientInsightsJobRequest"}
+	iStartPatientInsightsJobResponse               = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "StartPatientInsightsJobResponse"}
+	iTagResourceInput                              = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "TagResourceInput"}
+	iUntagResourceInput                            = smithy.ShapeName{Namespace: "com.amazonaws.connecthealth", Name: "UntagResourceInput"}
+	pString                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/activate",
-	Code: 200})
-
-var CreateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domain",
-	Code: 201})
-
-var CreateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/subscriptions",
-	Code: 201})
-
-var DeactivateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeactivateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/deactivate",
-	Code: 200})
-
-var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeleteDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domain/{domainId}",
-	Code: 200})
-
-var GetDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/domain/{domainId}",
-	Code: 200})
-
-var GetMedicalScribeListeningSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetMedicalScribeListeningSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/medical-scribe-stream/domain/{domainId}/subscription/{subscriptionId}/session/{sessionId}",
-	Code: 200})
-
-var GetPatientInsightsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetPatientInsightsJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/domain/{domainId}/patient-insights-job/{jobId}",
-	Code: 200})
-
-var GetSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}",
-	Code: 200})
-
-var ListDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/domain",
-	Code: 200})
-
-var ListSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListSubscriptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/domains/{domainId}/subscriptions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var StartMedicalScribeListeningSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartMedicalScribeListeningSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/medical-scribe-stream/",
-	Code: 200})
-
-var StartPatientInsightsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartPatientInsightsJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domain/{domainId}/patient-insights-job",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var _ConnectHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ConnectHealth",
-}, smithy.ShapeTypeService, 0)
-
-var ConnectHealth = smithy.NewServiceSchema(_ConnectHealth, "2025-01-29")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var AccessDeniedException_message *smithy.Schema
-
-var ArtifactDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ArtifactDetails",
-}, smithy.ShapeTypeStructure, 3)
-var ArtifactDetails_outputLocation *smithy.Schema
-
-var ArtifactDetails_status *smithy.Schema
-
-var ArtifactDetails_failureReason *smithy.Schema
-
-var _AudioChunk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "AudioChunk",
-}, smithy.ShapeTypeBlob, 0)
-
-var _AudioOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "AudioOffset",
-}, smithy.ShapeTypeDouble, 0)
-
-var ClinicalNoteGenerationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ClinicalNoteGenerationResult",
-}, smithy.ShapeTypeStructure, 3)
-var ClinicalNoteGenerationResult_noteResult *smithy.Schema
-
-var ClinicalNoteGenerationResult_transcriptResult *smithy.Schema
-
-var ClinicalNoteGenerationResult_afterVisitSummaryResult *smithy.Schema
-
-var ClinicalNoteGenerationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ClinicalNoteGenerationSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ClinicalNoteGenerationSettings_noteTemplateSettings *smithy.Schema
-
-var ClinicalNoteGenerationSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ClinicalNoteGenerationSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ClinicalNoteGenerationSettingsResponse_noteTemplateSettings *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CreateWebAppConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateWebAppConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CreateWebAppConfiguration_ehrRole *smithy.Schema
-
-var CreateWebAppConfiguration_idcInstanceId *smithy.Schema
-
-var CreateWebAppConfiguration_idcRegion *smithy.Schema
-
-var CustomTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CustomTemplate",
-}, smithy.ShapeTypeStructure, 2)
-var CustomTemplate_templateType *smithy.Schema
-
-var CustomTemplate_templateInstructions *smithy.Schema
-
-var CustomTemplateBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CustomTemplateBase",
-}, smithy.ShapeTypeEnum, 6)
-var CustomTemplateBase_HISTORY_AND_PHYSICAL *smithy.Schema
-
-var CustomTemplateBase_GIRPP *smithy.Schema
-
-var CustomTemplateBase_DAP *smithy.Schema
-
-var CustomTemplateBase_SIRP *smithy.Schema
-
-var CustomTemplateBase_BIRP *smithy.Schema
-
-var CustomTemplateBase_BEHAVIORAL_SOAP *smithy.Schema
-
-var CustomTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CustomTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CustomTemplateResponse_templateType *smithy.Schema
-
-var _DomainArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainId",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var DomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DomainStatus_ACTIVE *smithy.Schema
-
-var DomainStatus_DELETING *smithy.Schema
-
-var DomainStatus_DELETED *smithy.Schema
-
-var DomainSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainSummary",
-}, smithy.ShapeTypeStructure, 5)
-var DomainSummary_domainId *smithy.Schema
-
-var DomainSummary_arn *smithy.Schema
-
-var DomainSummary_name *smithy.Schema
-
-var DomainSummary_status *smithy.Schema
-
-var DomainSummary_createdAt *smithy.Schema
-
-var _DomainSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DomainSummaryList_member *smithy.Schema
-
-var EncounterContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "EncounterContext",
-}, smithy.ShapeTypeStructure, 1)
-var EncounterContext_unstructuredContext *smithy.Schema
-
-var EncryptionContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "EncryptionContext",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionContext_encryptionType *smithy.Schema
-
-var EncryptionContext_kmsKeyArn *smithy.Schema
-
-var EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionType_AWS_OWNED_KEY *smithy.Schema
-
-var EncryptionType_CUSTOMER_MANAGED_KEY *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FHIRServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "FHIRServer",
-}, smithy.ShapeTypeStructure, 2)
-var FHIRServer_fhirEndpoint *smithy.Schema
-
-var FHIRServer_oauthToken *smithy.Schema
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InputDataConfig_fhirServer *smithy.Schema
-
-var InputDataConfig_s3Sources *smithy.Schema
-
-var InsightsContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InsightsContext",
-}, smithy.ShapeTypeStructure, 1)
-var InsightsContext_insightsType *smithy.Schema
-
-var InsightsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InsightsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var InsightsOutput_uri *smithy.Schema
-
-var InsightsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InsightsType",
-}, smithy.ShapeTypeEnum, 1)
-var InsightsType_PRE_VISIT *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _JobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "JobArn",
-}, smithy.ShapeTypeString, 0)
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_SUCCEEDED *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var ManagedNoteTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ManagedNoteTemplate",
-}, smithy.ShapeTypeEnum, 7)
-var ManagedNoteTemplate_HISTORY_AND_PHYSICAL *smithy.Schema
-
-var ManagedNoteTemplate_GIRPP *smithy.Schema
-
-var ManagedNoteTemplate_DAP *smithy.Schema
-
-var ManagedNoteTemplate_SIRP *smithy.Schema
-
-var ManagedNoteTemplate_BIRP *smithy.Schema
-
-var ManagedNoteTemplate_BEHAVIORAL_SOAP *smithy.Schema
-
-var ManagedNoteTemplate_PHYSICAL_SOAP *smithy.Schema
-
-var ManagedTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ManagedTemplate",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedTemplate_templateType *smithy.Schema
-
-var ManagedTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ManagedTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedTemplateResponse_templateType *smithy.Schema
-
-var MedicalScribeAudioEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeAudioEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeAudioEvent_audioChunk *smithy.Schema
-
-var MedicalScribeBinaryAudioEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeBinaryAudioEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeBinaryAudioEvent_audioChunk *smithy.Schema
-
-var MedicalScribeChannelDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeChannelDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribeChannelDefinition_channelId *smithy.Schema
-
-var MedicalScribeChannelDefinition_participantRole *smithy.Schema
-
-var _MedicalScribeChannelDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeChannelDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _MedicalScribeChannelDefinitions_member *smithy.Schema
-
-var _MedicalScribeChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeChannelId",
-}, smithy.ShapeTypeInteger, 0)
-
-var MedicalScribeConfigurationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeConfigurationEvent",
-}, smithy.ShapeTypeStructure, 3)
-var MedicalScribeConfigurationEvent_postStreamActionSettings *smithy.Schema
-
-var MedicalScribeConfigurationEvent_channelDefinitions *smithy.Schema
-
-var MedicalScribeConfigurationEvent_encounterContext *smithy.Schema
-
-var MedicalScribeInputStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeInputStream",
-}, smithy.ShapeTypeUnion, 4, &smithytraits.Streaming{})
-var MedicalScribeInputStream_audioEvent *smithy.Schema
-
-var MedicalScribeInputStream_binaryAudioEvent *smithy.Schema
-
-var MedicalScribeInputStream_sessionControlEvent *smithy.Schema
-
-var MedicalScribeInputStream_configurationEvent *smithy.Schema
-
-var MedicalScribeLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeLanguageCode",
-}, smithy.ShapeTypeEnum, 2)
-var MedicalScribeLanguageCode_EN_US *smithy.Schema
-
-var MedicalScribeLanguageCode_MULTI *smithy.Schema
-
-var MedicalScribeListeningSessionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeListeningSessionDetails",
-}, smithy.ShapeTypeStructure, 13)
-var MedicalScribeListeningSessionDetails_sessionId *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_domainId *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_subscriptionId *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_languageCode *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_mediaSampleRateHertz *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_mediaEncoding *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_channelDefinitions *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_postStreamActionSettings *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_postStreamActionResult *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_encounterContextProvided *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_streamStatus *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_streamCreationTime *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_streamEndTime *smithy.Schema
-
-var MedicalScribeMediaEncoding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeMediaEncoding",
-}, smithy.ShapeTypeEnum, 2)
-var MedicalScribeMediaEncoding_PCM *smithy.Schema
-
-var MedicalScribeMediaEncoding_FLAC *smithy.Schema
-
-var _MedicalScribeMediaSampleRateHertz = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeMediaSampleRateHertz",
-}, smithy.ShapeTypeInteger, 0)
-
-var MedicalScribeOutputStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeOutputStream",
-}, smithy.ShapeTypeUnion, 3, &smithytraits.Streaming{})
-var MedicalScribeOutputStream_transcriptEvent *smithy.Schema
-
-var MedicalScribeOutputStream_internalFailureException *smithy.Schema
-
-var MedicalScribeOutputStream_validationException *smithy.Schema
-
-var MedicalScribeParticipantRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeParticipantRole",
-}, smithy.ShapeTypeEnum, 2)
-var MedicalScribeParticipantRole_PATIENT *smithy.Schema
-
-var MedicalScribeParticipantRole_CLINICIAN *smithy.Schema
-
-var MedicalScribePostStreamActionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribePostStreamActionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribePostStreamActionSettings_outputS3Uri *smithy.Schema
-
-var MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings *smithy.Schema
-
-var MedicalScribePostStreamActionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribePostStreamActionSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribePostStreamActionSettingsResponse_outputS3Uri *smithy.Schema
-
-var MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings *smithy.Schema
-
-var MedicalScribePostStreamActionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribePostStreamActionsResult",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult *smithy.Schema
-
-var MedicalScribeSessionControlEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeSessionControlEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeSessionControlEvent_type *smithy.Schema
-
-var MedicalScribeSessionControlEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeSessionControlEventType",
-}, smithy.ShapeTypeEnum, 1)
-var MedicalScribeSessionControlEventType_END_OF_SESSION *smithy.Schema
-
-var MedicalScribeStreamStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeStreamStatus",
-}, smithy.ShapeTypeEnum, 4)
-var MedicalScribeStreamStatus_IN_PROGRESS *smithy.Schema
-
-var MedicalScribeStreamStatus_PAUSED *smithy.Schema
-
-var MedicalScribeStreamStatus_FAILED *smithy.Schema
-
-var MedicalScribeStreamStatus_COMPLETED *smithy.Schema
-
-var MedicalScribeTranscriptEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeTranscriptEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeTranscriptEvent_transcriptSegment *smithy.Schema
-
-var MedicalScribeTranscriptSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeTranscriptSegment",
-}, smithy.ShapeTypeStructure, 6)
-var MedicalScribeTranscriptSegment_segmentId *smithy.Schema
-
-var MedicalScribeTranscriptSegment_audioBeginOffset *smithy.Schema
-
-var MedicalScribeTranscriptSegment_audioEndOffset *smithy.Schema
-
-var MedicalScribeTranscriptSegment_isPartial *smithy.Schema
-
-var MedicalScribeTranscriptSegment_channelId *smithy.Schema
-
-var MedicalScribeTranscriptSegment_content *smithy.Schema
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonNullBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NonNullBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var NoteTemplateSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NoteTemplateSettings",
-}, smithy.ShapeTypeUnion, 2)
-var NoteTemplateSettings_managedTemplate *smithy.Schema
-
-var NoteTemplateSettings_customTemplate *smithy.Schema
-
-var NoteTemplateSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NoteTemplateSettingsResponse",
-}, smithy.ShapeTypeUnion, 2)
-var NoteTemplateSettingsResponse_managedTemplate *smithy.Schema
-
-var NoteTemplateSettingsResponse_customTemplate *smithy.Schema
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeStructure, 1)
-var OutputDataConfig_s3OutputPath *smithy.Schema
-
-var PatientInsightsEncounterContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "PatientInsightsEncounterContext",
-}, smithy.ShapeTypeStructure, 1)
-var PatientInsightsEncounterContext_encounterReason *smithy.Schema
-
-var PatientInsightsPatientContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "PatientInsightsPatientContext",
-}, smithy.ShapeTypeStructure, 3)
-var PatientInsightsPatientContext_patientId *smithy.Schema
-
-var PatientInsightsPatientContext_dateOfBirth *smithy.Schema
-
-var PatientInsightsPatientContext_pronouns *smithy.Schema
-
-var PostStreamArtifactGenerationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "PostStreamArtifactGenerationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var PostStreamArtifactGenerationStatus_IN_PROGRESS *smithy.Schema
-
-var PostStreamArtifactGenerationStatus_FAILED *smithy.Schema
-
-var PostStreamArtifactGenerationStatus_COMPLETED *smithy.Schema
-
-var Pronouns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "Pronouns",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var Pronouns_HE_HIM *smithy.Schema
-
-var Pronouns_SHE_HER *smithy.Schema
-
-var Pronouns_THEY_THEM *smithy.Schema
-
-var ProviderRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ProviderRole",
-}, smithy.ShapeTypeEnum, 1)
-var ProviderRole_CLINICIAN *smithy.Schema
-
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var S3Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "S3Source",
-}, smithy.ShapeTypeStructure, 1)
-var S3Source_uri *smithy.Schema
-
-var _S3Sources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "S3Sources",
-}, smithy.ShapeTypeList, 1)
-var _S3Sources_member *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _ScribeSessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ScribeSessionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveIsoDateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveIsoDateString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveMarkdownString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveMarkdownString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveNonEmptyString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveSectionHeaderString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveSectionHeaderString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var Specialty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "Specialty",
-}, smithy.ShapeTypeEnum, 1)
-var Specialty_PRIMARY_CARE *smithy.Schema
-
-var _SubscriptionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionArn",
-}, smithy.ShapeTypeString, 0)
-
-var SubscriptionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionDescription",
-}, smithy.ShapeTypeStructure, 8)
-var SubscriptionDescription_domainId *smithy.Schema
-
-var SubscriptionDescription_subscriptionId *smithy.Schema
-
-var SubscriptionDescription_arn *smithy.Schema
-
-var SubscriptionDescription_status *smithy.Schema
-
-var SubscriptionDescription_createdAt *smithy.Schema
-
-var SubscriptionDescription_lastUpdatedAt *smithy.Schema
-
-var SubscriptionDescription_activatedAt *smithy.Schema
-
-var SubscriptionDescription_deactivatedAt *smithy.Schema
-
-var _SubscriptionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubscriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionList_member *smithy.Schema
-
-var SubscriptionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SubscriptionStatus_ACTIVE *smithy.Schema
-
-var SubscriptionStatus_INACTIVE *smithy.Schema
-
-var SubscriptionStatus_DELETED *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateInstructions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TemplateInstructions",
-}, smithy.ShapeTypeList, 1)
-var _TemplateInstructions_member *smithy.Schema
-
-var TemplateSectionInstruction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TemplateSectionInstruction",
-}, smithy.ShapeTypeStructure, 2)
-var TemplateSectionInstruction_sectionHeader *smithy.Schema
-
-var TemplateSectionInstruction_sectionInstruction *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "Uri",
-}, smithy.ShapeTypeString, 0)
-
-var UserContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "UserContext",
-}, smithy.ShapeTypeStructure, 3)
-var UserContext_role *smithy.Schema
-
-var UserContext_userId *smithy.Schema
-
-var UserContext_specialty *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var WebAppConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "WebAppConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var WebAppConfiguration_ehrRole *smithy.Schema
-
-var WebAppConfiguration_idcApplicationId *smithy.Schema
-
-var WebAppConfiguration_idcRegion *smithy.Schema
-
-var _WebAppUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "WebAppUrl",
-}, smithy.ShapeTypeString, 0)
-
-var ActivateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ActivateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 2)
-var ActivateSubscriptionInput_domainId *smithy.Schema
-
-var ActivateSubscriptionInput_subscriptionId *smithy.Schema
-
-var ActivateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ActivateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ActivateSubscriptionOutput_subscription *smithy.Schema
-
-var CreateDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateDomainInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDomainInput_name *smithy.Schema
-
-var CreateDomainInput_kmsKeyArn *smithy.Schema
-
-var CreateDomainInput_webAppSetupConfiguration *smithy.Schema
-
-var CreateDomainInput_tags *smithy.Schema
-
-var CreateDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateDomainOutput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateDomainOutput_domainId *smithy.Schema
-
-var CreateDomainOutput_arn *smithy.Schema
-
-var CreateDomainOutput_name *smithy.Schema
-
-var CreateDomainOutput_kmsKeyArn *smithy.Schema
-
-var CreateDomainOutput_encryptionContext *smithy.Schema
-
-var CreateDomainOutput_status *smithy.Schema
-
-var CreateDomainOutput_webAppUrl *smithy.Schema
-
-var CreateDomainOutput_webAppConfiguration *smithy.Schema
-
-var CreateDomainOutput_createdAt *smithy.Schema
-
-var CreateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSubscriptionInput_domainId *smithy.Schema
-
-var CreateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSubscriptionOutput_domainId *smithy.Schema
-
-var CreateSubscriptionOutput_subscriptionId *smithy.Schema
-
-var CreateSubscriptionOutput_arn *smithy.Schema
-
-var CreateSubscriptionOutput_status *smithy.Schema
-
-var CreateSubscriptionOutput_createdAt *smithy.Schema
-
-var CreateSubscriptionOutput_lastUpdatedAt *smithy.Schema
-
-var CreateSubscriptionOutput_activatedAt *smithy.Schema
-
-var CreateSubscriptionOutput_deactivatedAt *smithy.Schema
-
-var DeactivateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeactivateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeactivateSubscriptionInput_domainId *smithy.Schema
-
-var DeactivateSubscriptionInput_subscriptionId *smithy.Schema
-
-var DeactivateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeactivateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeactivateSubscriptionOutput_subscription *smithy.Schema
-
-var DeleteDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeleteDomainInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainInput_domainId *smithy.Schema
-
-var DeleteDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeleteDomainOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDomainOutput_domainId *smithy.Schema
-
-var DeleteDomainOutput_arn *smithy.Schema
-
-var DeleteDomainOutput_status *smithy.Schema
-
-var GetDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetDomainInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainInput_domainId *smithy.Schema
-
-var GetDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetDomainOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetDomainOutput_domainId *smithy.Schema
-
-var GetDomainOutput_arn *smithy.Schema
-
-var GetDomainOutput_name *smithy.Schema
-
-var GetDomainOutput_kmsKeyArn *smithy.Schema
-
-var GetDomainOutput_encryptionContext *smithy.Schema
-
-var GetDomainOutput_status *smithy.Schema
-
-var GetDomainOutput_webAppUrl *smithy.Schema
-
-var GetDomainOutput_webAppConfiguration *smithy.Schema
-
-var GetDomainOutput_createdAt *smithy.Schema
-
-var GetDomainOutput_tags *smithy.Schema
-
-var GetMedicalScribeListeningSessionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetMedicalScribeListeningSessionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMedicalScribeListeningSessionInput_sessionId *smithy.Schema
-
-var GetMedicalScribeListeningSessionInput_domainId *smithy.Schema
-
-var GetMedicalScribeListeningSessionInput_subscriptionId *smithy.Schema
-
-var GetMedicalScribeListeningSessionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetMedicalScribeListeningSessionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails *smithy.Schema
-
-var GetPatientInsightsJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetPatientInsightsJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetPatientInsightsJobRequest_domainId *smithy.Schema
-
-var GetPatientInsightsJobRequest_jobId *smithy.Schema
-
-var GetPatientInsightsJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetPatientInsightsJobResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetPatientInsightsJobResponse_jobId *smithy.Schema
-
-var GetPatientInsightsJobResponse_jobArn *smithy.Schema
-
-var GetPatientInsightsJobResponse_jobStatus *smithy.Schema
-
-var GetPatientInsightsJobResponse_creationTime *smithy.Schema
-
-var GetPatientInsightsJobResponse_updatedTime *smithy.Schema
-
-var GetPatientInsightsJobResponse_insightsOutput *smithy.Schema
-
-var GetPatientInsightsJobResponse_statusDetails *smithy.Schema
-
-var GetPatientInsightsJobResponse_patientContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_insightsContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_encounterContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_userContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_inputDataConfig *smithy.Schema
-
-var GetPatientInsightsJobResponse_outputDataConfig *smithy.Schema
-
-var GetSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetSubscriptionInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetSubscriptionInput_domainId *smithy.Schema
-
-var GetSubscriptionInput_subscriptionId *smithy.Schema
-
-var GetSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriptionOutput_subscription *smithy.Schema
-
-var ListDomainsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListDomainsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDomainsInput_status *smithy.Schema
-
-var ListDomainsInput_maxResults *smithy.Schema
-
-var ListDomainsInput_nextToken *smithy.Schema
-
-var ListDomainsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListDomainsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsOutput_domains *smithy.Schema
-
-var ListDomainsOutput_nextToken *smithy.Schema
-
-var ListSubscriptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListSubscriptionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSubscriptionsInput_domainId *smithy.Schema
-
-var ListSubscriptionsInput_maxResults *smithy.Schema
-
-var ListSubscriptionsInput_nextToken *smithy.Schema
-
-var ListSubscriptionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListSubscriptionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsOutput_subscriptions *smithy.Schema
-
-var ListSubscriptionsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartMedicalScribeListeningSessionInput",
-}, smithy.ShapeTypeStructure, 7)
-var StartMedicalScribeListeningSessionInput_sessionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_domainId *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_subscriptionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_languageCode *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_mediaSampleRateHertz *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_mediaEncoding *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_inputStream *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartMedicalScribeListeningSessionOutput",
-}, smithy.ShapeTypeStructure, 8)
-var StartMedicalScribeListeningSessionOutput_sessionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_domainId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_subscriptionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_requestId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_languageCode *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_mediaEncoding *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_responseStream *smithy.Schema
-
-var StartPatientInsightsJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartPatientInsightsJobRequest",
-}, smithy.ShapeTypeStructure, 8)
-var StartPatientInsightsJobRequest_domainId *smithy.Schema
-
-var StartPatientInsightsJobRequest_patientContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_insightsContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_encounterContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_userContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_inputDataConfig *smithy.Schema
-
-var StartPatientInsightsJobRequest_outputDataConfig *smithy.Schema
-
-var StartPatientInsightsJobRequest_clientToken *smithy.Schema
-
-var StartPatientInsightsJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartPatientInsightsJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartPatientInsightsJobResponse_jobArn *smithy.Schema
-
-var StartPatientInsightsJobResponse_jobId *smithy.Schema
-
-var StartPatientInsightsJobResponse_creationTime *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	PostStreamArtifactGenerationStatus_IN_PROGRESS = PostStreamArtifactGenerationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	PostStreamArtifactGenerationStatus_FAILED = PostStreamArtifactGenerationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	PostStreamArtifactGenerationStatus_COMPLETED = PostStreamArtifactGenerationStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ArtifactDetails_outputLocation = ArtifactDetails.AddMember("outputLocation", _Uri)
-
-	ArtifactDetails_status = ArtifactDetails.AddMember("status", PostStreamArtifactGenerationStatus)
-
-	ArtifactDetails_failureReason = ArtifactDetails.AddMember("failureReason", _ErrorMessage)
-
-	ClinicalNoteGenerationResult_noteResult = ClinicalNoteGenerationResult.AddMember("noteResult", ArtifactDetails)
-
-	ClinicalNoteGenerationResult_transcriptResult = ClinicalNoteGenerationResult.AddMember("transcriptResult", ArtifactDetails)
-
-	ClinicalNoteGenerationResult_afterVisitSummaryResult = ClinicalNoteGenerationResult.AddMember("afterVisitSummaryResult", ArtifactDetails)
-
-	ManagedNoteTemplate_HISTORY_AND_PHYSICAL = ManagedNoteTemplate.AddMember("HISTORY_AND_PHYSICAL", smithyprelude.Unit)
-
-	ManagedNoteTemplate_GIRPP = ManagedNoteTemplate.AddMember("GIRPP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_DAP = ManagedNoteTemplate.AddMember("DAP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_SIRP = ManagedNoteTemplate.AddMember("SIRP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_BIRP = ManagedNoteTemplate.AddMember("BIRP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_BEHAVIORAL_SOAP = ManagedNoteTemplate.AddMember("BEHAVIORAL_SOAP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_PHYSICAL_SOAP = ManagedNoteTemplate.AddMember("PHYSICAL_SOAP", smithyprelude.Unit)
-
-	ManagedTemplate_templateType = ManagedTemplate.AddMember("templateType", ManagedNoteTemplate)
-
-	CustomTemplateBase_HISTORY_AND_PHYSICAL = CustomTemplateBase.AddMember("HISTORY_AND_PHYSICAL", smithyprelude.Unit)
-
-	CustomTemplateBase_GIRPP = CustomTemplateBase.AddMember("GIRPP", smithyprelude.Unit)
-
-	CustomTemplateBase_DAP = CustomTemplateBase.AddMember("DAP", smithyprelude.Unit)
-
-	CustomTemplateBase_SIRP = CustomTemplateBase.AddMember("SIRP", smithyprelude.Unit)
-
-	CustomTemplateBase_BIRP = CustomTemplateBase.AddMember("BIRP", smithyprelude.Unit)
-
-	CustomTemplateBase_BEHAVIORAL_SOAP = CustomTemplateBase.AddMember("BEHAVIORAL_SOAP", smithyprelude.Unit)
-
-	TemplateSectionInstruction_sectionHeader = TemplateSectionInstruction.AddMember("sectionHeader", _SensitiveSectionHeaderString)
-
-	TemplateSectionInstruction_sectionInstruction = TemplateSectionInstruction.AddMember("sectionInstruction", _SensitiveMarkdownString)
-
-	_TemplateInstructions_member = _TemplateInstructions.AddMember("member", TemplateSectionInstruction)
-
-	CustomTemplate_templateType = CustomTemplate.AddMember("templateType", CustomTemplateBase)
-
-	CustomTemplate_templateInstructions = CustomTemplate.AddMember("templateInstructions", _TemplateInstructions)
-
-	NoteTemplateSettings_managedTemplate = NoteTemplateSettings.AddMember("managedTemplate", ManagedTemplate)
-
-	NoteTemplateSettings_customTemplate = NoteTemplateSettings.AddMember("customTemplate", CustomTemplate)
-
-	ClinicalNoteGenerationSettings_noteTemplateSettings = ClinicalNoteGenerationSettings.AddMember("noteTemplateSettings", NoteTemplateSettings)
-
-	ManagedTemplateResponse_templateType = ManagedTemplateResponse.AddMember("templateType", ManagedNoteTemplate)
-
-	CustomTemplateResponse_templateType = CustomTemplateResponse.AddMember("templateType", CustomTemplateBase)
-
-	NoteTemplateSettingsResponse_managedTemplate = NoteTemplateSettingsResponse.AddMember("managedTemplate", ManagedTemplateResponse)
-
-	NoteTemplateSettingsResponse_customTemplate = NoteTemplateSettingsResponse.AddMember("customTemplate", CustomTemplateResponse)
-
-	ClinicalNoteGenerationSettingsResponse_noteTemplateSettings = ClinicalNoteGenerationSettingsResponse.AddMember("noteTemplateSettings", NoteTemplateSettingsResponse)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	CreateWebAppConfiguration_ehrRole = CreateWebAppConfiguration.AddMember("ehrRole", smithyprelude.String)
-
-	CreateWebAppConfiguration_idcInstanceId = CreateWebAppConfiguration.AddMember("idcInstanceId", smithyprelude.String)
-
-	CreateWebAppConfiguration_idcRegion = CreateWebAppConfiguration.AddMember("idcRegion", smithyprelude.String)
-
-	DomainStatus_ACTIVE = DomainStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DomainStatus_DELETING = DomainStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	DomainStatus_DELETED = DomainStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	DomainSummary_domainId = DomainSummary.AddMember("domainId", _DomainId)
-
-	DomainSummary_arn = DomainSummary.AddMember("arn", _DomainArn)
-
-	DomainSummary_name = DomainSummary.AddMember("name", _DomainName)
-
-	DomainSummary_status = DomainSummary.AddMember("status", DomainStatus)
-
-	DomainSummary_createdAt = DomainSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	_DomainSummaryList_member = _DomainSummaryList.AddMember("member", DomainSummary)
-
-	EncounterContext_unstructuredContext = EncounterContext.AddMember("unstructuredContext", _SensitiveMarkdownString)
-
-	EncryptionType_AWS_OWNED_KEY = EncryptionType.AddMember("AWS_OWNED_KEY", smithyprelude.Unit)
-
-	EncryptionType_CUSTOMER_MANAGED_KEY = EncryptionType.AddMember("CUSTOMER_MANAGED_KEY", smithyprelude.Unit)
-
-	EncryptionContext_encryptionType = EncryptionContext.AddMember("encryptionType", EncryptionType)
-
-	EncryptionContext_kmsKeyArn = EncryptionContext.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	FHIRServer_fhirEndpoint = FHIRServer.AddMember("fhirEndpoint", _NonEmptyString)
-
-	FHIRServer_oauthToken = FHIRServer.AddMember("oauthToken", _SensitiveNonEmptyString)
-
-	S3Source_uri = S3Source.AddMember("uri", _S3Uri)
-
-	_S3Sources_member = _S3Sources.AddMember("member", S3Source)
-
-	InputDataConfig_fhirServer = InputDataConfig.AddMember("fhirServer", FHIRServer)
-
-	InputDataConfig_s3Sources = InputDataConfig.AddMember("s3Sources", _S3Sources)
-
-	InsightsType_PRE_VISIT = InsightsType.AddMember("PRE_VISIT", smithyprelude.Unit)
-
-	InsightsContext_insightsType = InsightsContext.AddMember("insightsType", InsightsType)
-
-	InsightsOutput_uri = InsightsOutput.AddMember("uri", _S3Uri)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_SUCCEEDED = JobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	MedicalScribeAudioEvent_audioChunk = MedicalScribeAudioEvent.AddMember("audioChunk", _AudioChunk)
-
-	MedicalScribeBinaryAudioEvent_audioChunk = MedicalScribeBinaryAudioEvent.AddMember("audioChunk", _AudioChunk, &smithytraits.EventPayload{})
-
-	MedicalScribeParticipantRole_PATIENT = MedicalScribeParticipantRole.AddMember("PATIENT", smithyprelude.Unit)
-
-	MedicalScribeParticipantRole_CLINICIAN = MedicalScribeParticipantRole.AddMember("CLINICIAN", smithyprelude.Unit)
-
-	MedicalScribeChannelDefinition_channelId = MedicalScribeChannelDefinition.AddMember("channelId", _MedicalScribeChannelId)
-
-	MedicalScribeChannelDefinition_participantRole = MedicalScribeChannelDefinition.AddMember("participantRole", MedicalScribeParticipantRole)
-
-	_MedicalScribeChannelDefinitions_member = _MedicalScribeChannelDefinitions.AddMember("member", MedicalScribeChannelDefinition)
-
-	MedicalScribePostStreamActionSettings_outputS3Uri = MedicalScribePostStreamActionSettings.AddMember("outputS3Uri", _S3Uri)
-
-	MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings = MedicalScribePostStreamActionSettings.AddMember("clinicalNoteGenerationSettings", ClinicalNoteGenerationSettings)
-
-	MedicalScribeConfigurationEvent_postStreamActionSettings = MedicalScribeConfigurationEvent.AddMember("postStreamActionSettings", MedicalScribePostStreamActionSettings)
-
-	MedicalScribeConfigurationEvent_channelDefinitions = MedicalScribeConfigurationEvent.AddMember("channelDefinitions", _MedicalScribeChannelDefinitions)
-
-	MedicalScribeConfigurationEvent_encounterContext = MedicalScribeConfigurationEvent.AddMember("encounterContext", EncounterContext)
-
-	MedicalScribeSessionControlEventType_END_OF_SESSION = MedicalScribeSessionControlEventType.AddMember("END_OF_SESSION", smithyprelude.Unit)
-
-	MedicalScribeSessionControlEvent_type = MedicalScribeSessionControlEvent.AddMember("type", MedicalScribeSessionControlEventType)
-
-	MedicalScribeInputStream_audioEvent = MedicalScribeInputStream.AddMember("audioEvent", MedicalScribeAudioEvent)
-
-	MedicalScribeInputStream_binaryAudioEvent = MedicalScribeInputStream.AddMember("binaryAudioEvent", MedicalScribeBinaryAudioEvent)
-
-	MedicalScribeInputStream_sessionControlEvent = MedicalScribeInputStream.AddMember("sessionControlEvent", MedicalScribeSessionControlEvent)
-
-	MedicalScribeInputStream_configurationEvent = MedicalScribeInputStream.AddMember("configurationEvent", MedicalScribeConfigurationEvent)
-
-	MedicalScribeLanguageCode_EN_US = MedicalScribeLanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	MedicalScribeLanguageCode_MULTI = MedicalScribeLanguageCode.AddMember("MULTI", smithyprelude.Unit)
-
-	MedicalScribeMediaEncoding_PCM = MedicalScribeMediaEncoding.AddMember("PCM", smithyprelude.Unit)
-
-	MedicalScribeMediaEncoding_FLAC = MedicalScribeMediaEncoding.AddMember("FLAC", smithyprelude.Unit)
-
-	MedicalScribePostStreamActionSettingsResponse_outputS3Uri = MedicalScribePostStreamActionSettingsResponse.AddMember("outputS3Uri", _S3Uri)
-
-	MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings = MedicalScribePostStreamActionSettingsResponse.AddMember("clinicalNoteGenerationSettings", ClinicalNoteGenerationSettingsResponse)
-
-	MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult = MedicalScribePostStreamActionsResult.AddMember("clinicalNoteGenerationResult", ClinicalNoteGenerationResult)
-
-	MedicalScribeStreamStatus_IN_PROGRESS = MedicalScribeStreamStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	MedicalScribeStreamStatus_PAUSED = MedicalScribeStreamStatus.AddMember("PAUSED", smithyprelude.Unit)
-
-	MedicalScribeStreamStatus_FAILED = MedicalScribeStreamStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	MedicalScribeStreamStatus_COMPLETED = MedicalScribeStreamStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	MedicalScribeListeningSessionDetails_sessionId = MedicalScribeListeningSessionDetails.AddMember("sessionId", _ScribeSessionId)
-
-	MedicalScribeListeningSessionDetails_domainId = MedicalScribeListeningSessionDetails.AddMember("domainId", _DomainId)
-
-	MedicalScribeListeningSessionDetails_subscriptionId = MedicalScribeListeningSessionDetails.AddMember("subscriptionId", _SubscriptionId)
-
-	MedicalScribeListeningSessionDetails_languageCode = MedicalScribeListeningSessionDetails.AddMember("languageCode", MedicalScribeLanguageCode)
-
-	MedicalScribeListeningSessionDetails_mediaSampleRateHertz = MedicalScribeListeningSessionDetails.AddMember("mediaSampleRateHertz", _MedicalScribeMediaSampleRateHertz)
-
-	MedicalScribeListeningSessionDetails_mediaEncoding = MedicalScribeListeningSessionDetails.AddMember("mediaEncoding", MedicalScribeMediaEncoding)
-
-	MedicalScribeListeningSessionDetails_channelDefinitions = MedicalScribeListeningSessionDetails.AddMember("channelDefinitions", _MedicalScribeChannelDefinitions)
-
-	MedicalScribeListeningSessionDetails_postStreamActionSettings = MedicalScribeListeningSessionDetails.AddMember("postStreamActionSettings", MedicalScribePostStreamActionSettingsResponse)
-
-	MedicalScribeListeningSessionDetails_postStreamActionResult = MedicalScribeListeningSessionDetails.AddMember("postStreamActionResult", MedicalScribePostStreamActionsResult)
-
-	MedicalScribeListeningSessionDetails_encounterContextProvided = MedicalScribeListeningSessionDetails.AddMember("encounterContextProvided", _NonNullBoolean)
-
-	MedicalScribeListeningSessionDetails_streamStatus = MedicalScribeListeningSessionDetails.AddMember("streamStatus", MedicalScribeStreamStatus)
-
-	MedicalScribeListeningSessionDetails_streamCreationTime = MedicalScribeListeningSessionDetails.AddMember("streamCreationTime", smithyprelude.Timestamp)
-
-	MedicalScribeListeningSessionDetails_streamEndTime = MedicalScribeListeningSessionDetails.AddMember("streamEndTime", smithyprelude.Timestamp)
-
-	MedicalScribeTranscriptSegment_segmentId = MedicalScribeTranscriptSegment.AddMember("segmentId", smithyprelude.String)
-
-	MedicalScribeTranscriptSegment_audioBeginOffset = MedicalScribeTranscriptSegment.AddMember("audioBeginOffset", _AudioOffset)
-
-	MedicalScribeTranscriptSegment_audioEndOffset = MedicalScribeTranscriptSegment.AddMember("audioEndOffset", _AudioOffset)
-
-	MedicalScribeTranscriptSegment_isPartial = MedicalScribeTranscriptSegment.AddMember("isPartial", _NonNullBoolean)
-
-	MedicalScribeTranscriptSegment_channelId = MedicalScribeTranscriptSegment.AddMember("channelId", smithyprelude.String)
-
-	MedicalScribeTranscriptSegment_content = MedicalScribeTranscriptSegment.AddMember("content", smithyprelude.String)
-
-	MedicalScribeTranscriptEvent_transcriptSegment = MedicalScribeTranscriptEvent.AddMember("transcriptSegment", MedicalScribeTranscriptSegment)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	MedicalScribeOutputStream_transcriptEvent = MedicalScribeOutputStream.AddMember("transcriptEvent", MedicalScribeTranscriptEvent)
-
-	MedicalScribeOutputStream_internalFailureException = MedicalScribeOutputStream.AddMember("internalFailureException", InternalServerException)
-
-	MedicalScribeOutputStream_validationException = MedicalScribeOutputStream.AddMember("validationException", ValidationException)
-
-	OutputDataConfig_s3OutputPath = OutputDataConfig.AddMember("s3OutputPath", _S3Uri)
-
-	PatientInsightsEncounterContext_encounterReason = PatientInsightsEncounterContext.AddMember("encounterReason", _SensitiveNonEmptyString)
-
-	Pronouns_HE_HIM = Pronouns.AddMember("HE_HIM", smithyprelude.Unit)
-
-	Pronouns_SHE_HER = Pronouns.AddMember("SHE_HER", smithyprelude.Unit)
-
-	Pronouns_THEY_THEM = Pronouns.AddMember("THEY_THEM", smithyprelude.Unit)
-
-	PatientInsightsPatientContext_patientId = PatientInsightsPatientContext.AddMember("patientId", _SensitiveNonEmptyString)
-
-	PatientInsightsPatientContext_dateOfBirth = PatientInsightsPatientContext.AddMember("dateOfBirth", _SensitiveIsoDateString)
-
-	PatientInsightsPatientContext_pronouns = PatientInsightsPatientContext.AddMember("pronouns", Pronouns)
-
-	ProviderRole_CLINICIAN = ProviderRole.AddMember("CLINICIAN", smithyprelude.Unit)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	Specialty_PRIMARY_CARE = Specialty.AddMember("PRIMARY_CARE", smithyprelude.Unit)
-
-	SubscriptionStatus_ACTIVE = SubscriptionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SubscriptionStatus_INACTIVE = SubscriptionStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	SubscriptionStatus_DELETED = SubscriptionStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	SubscriptionDescription_domainId = SubscriptionDescription.AddMember("domainId", _DomainId)
-
-	SubscriptionDescription_subscriptionId = SubscriptionDescription.AddMember("subscriptionId", _SubscriptionId)
-
-	SubscriptionDescription_arn = SubscriptionDescription.AddMember("arn", _SubscriptionArn)
-
-	SubscriptionDescription_status = SubscriptionDescription.AddMember("status", SubscriptionStatus)
-
-	SubscriptionDescription_createdAt = SubscriptionDescription.AddMember("createdAt", smithyprelude.Timestamp)
-
-	SubscriptionDescription_lastUpdatedAt = SubscriptionDescription.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	SubscriptionDescription_activatedAt = SubscriptionDescription.AddMember("activatedAt", smithyprelude.Timestamp)
-
-	SubscriptionDescription_deactivatedAt = SubscriptionDescription.AddMember("deactivatedAt", smithyprelude.Timestamp)
-
-	_SubscriptionList_member = _SubscriptionList.AddMember("member", SubscriptionDescription)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	UserContext_role = UserContext.AddMember("role", ProviderRole)
-
-	UserContext_userId = UserContext.AddMember("userId", _SensitiveNonEmptyString)
-
-	UserContext_specialty = UserContext.AddMember("specialty", Specialty)
-
-	WebAppConfiguration_ehrRole = WebAppConfiguration.AddMember("ehrRole", smithyprelude.String)
-
-	WebAppConfiguration_idcApplicationId = WebAppConfiguration.AddMember("idcApplicationId", smithyprelude.String)
-
-	WebAppConfiguration_idcRegion = WebAppConfiguration.AddMember("idcRegion", smithyprelude.String)
-
-	ActivateSubscriptionInput_domainId = ActivateSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ActivateSubscriptionInput_subscriptionId = ActivateSubscriptionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	ActivateSubscriptionOutput_subscription = ActivateSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
-
-	CreateDomainInput_name = CreateDomainInput.AddMember("name", _DomainName)
-
-	CreateDomainInput_kmsKeyArn = CreateDomainInput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateDomainInput_webAppSetupConfiguration = CreateDomainInput.AddMember("webAppSetupConfiguration", CreateWebAppConfiguration)
-
-	CreateDomainInput_tags = CreateDomainInput.AddMember("tags", _TagMap)
-
-	CreateDomainOutput_domainId = CreateDomainOutput.AddMember("domainId", _DomainId)
-
-	CreateDomainOutput_arn = CreateDomainOutput.AddMember("arn", _DomainArn)
-
-	CreateDomainOutput_name = CreateDomainOutput.AddMember("name", _DomainName)
-
-	CreateDomainOutput_kmsKeyArn = CreateDomainOutput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateDomainOutput_encryptionContext = CreateDomainOutput.AddMember("encryptionContext", EncryptionContext)
-
-	CreateDomainOutput_status = CreateDomainOutput.AddMember("status", DomainStatus)
-
-	CreateDomainOutput_webAppUrl = CreateDomainOutput.AddMember("webAppUrl", _WebAppUrl)
-
-	CreateDomainOutput_webAppConfiguration = CreateDomainOutput.AddMember("webAppConfiguration", WebAppConfiguration)
-
-	CreateDomainOutput_createdAt = CreateDomainOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionInput_domainId = CreateSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateSubscriptionOutput_domainId = CreateSubscriptionOutput.AddMember("domainId", _DomainId)
-
-	CreateSubscriptionOutput_subscriptionId = CreateSubscriptionOutput.AddMember("subscriptionId", _SubscriptionId)
-
-	CreateSubscriptionOutput_arn = CreateSubscriptionOutput.AddMember("arn", _SubscriptionArn)
-
-	CreateSubscriptionOutput_status = CreateSubscriptionOutput.AddMember("status", SubscriptionStatus)
-
-	CreateSubscriptionOutput_createdAt = CreateSubscriptionOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionOutput_lastUpdatedAt = CreateSubscriptionOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionOutput_activatedAt = CreateSubscriptionOutput.AddMember("activatedAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionOutput_deactivatedAt = CreateSubscriptionOutput.AddMember("deactivatedAt", smithyprelude.Timestamp)
-
-	DeactivateSubscriptionInput_domainId = DeactivateSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeactivateSubscriptionInput_subscriptionId = DeactivateSubscriptionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	DeactivateSubscriptionOutput_subscription = DeactivateSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
-
-	DeleteDomainInput_domainId = DeleteDomainInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteDomainOutput_domainId = DeleteDomainOutput.AddMember("domainId", _DomainId)
-
-	DeleteDomainOutput_arn = DeleteDomainOutput.AddMember("arn", _DomainArn)
-
-	DeleteDomainOutput_status = DeleteDomainOutput.AddMember("status", DomainStatus)
-
-	GetDomainInput_domainId = GetDomainInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetDomainOutput_domainId = GetDomainOutput.AddMember("domainId", _DomainId)
-
-	GetDomainOutput_arn = GetDomainOutput.AddMember("arn", _DomainArn)
-
-	GetDomainOutput_name = GetDomainOutput.AddMember("name", _DomainName)
-
-	GetDomainOutput_kmsKeyArn = GetDomainOutput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetDomainOutput_encryptionContext = GetDomainOutput.AddMember("encryptionContext", EncryptionContext)
-
-	GetDomainOutput_status = GetDomainOutput.AddMember("status", DomainStatus)
-
-	GetDomainOutput_webAppUrl = GetDomainOutput.AddMember("webAppUrl", _WebAppUrl)
-
-	GetDomainOutput_webAppConfiguration = GetDomainOutput.AddMember("webAppConfiguration", WebAppConfiguration)
-
-	GetDomainOutput_createdAt = GetDomainOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetDomainOutput_tags = GetDomainOutput.AddMember("tags", _TagMap)
-
-	GetMedicalScribeListeningSessionInput_sessionId = GetMedicalScribeListeningSessionInput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPLabel{})
-
-	GetMedicalScribeListeningSessionInput_domainId = GetMedicalScribeListeningSessionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetMedicalScribeListeningSessionInput_subscriptionId = GetMedicalScribeListeningSessionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails = GetMedicalScribeListeningSessionOutput.AddMember("medicalScribeListeningSessionDetails", MedicalScribeListeningSessionDetails)
-
-	GetPatientInsightsJobRequest_domainId = GetPatientInsightsJobRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetPatientInsightsJobRequest_jobId = GetPatientInsightsJobRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	GetPatientInsightsJobResponse_jobId = GetPatientInsightsJobResponse.AddMember("jobId", _JobId)
-
-	GetPatientInsightsJobResponse_jobArn = GetPatientInsightsJobResponse.AddMember("jobArn", _JobArn)
-
-	GetPatientInsightsJobResponse_jobStatus = GetPatientInsightsJobResponse.AddMember("jobStatus", JobStatus)
-
-	GetPatientInsightsJobResponse_creationTime = GetPatientInsightsJobResponse.AddMember("creationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetPatientInsightsJobResponse_updatedTime = GetPatientInsightsJobResponse.AddMember("updatedTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetPatientInsightsJobResponse_insightsOutput = GetPatientInsightsJobResponse.AddMember("insightsOutput", InsightsOutput)
-
-	GetPatientInsightsJobResponse_statusDetails = GetPatientInsightsJobResponse.AddMember("statusDetails", _NonEmptyString)
-
-	GetPatientInsightsJobResponse_patientContext = GetPatientInsightsJobResponse.AddMember("patientContext", PatientInsightsPatientContext)
-
-	GetPatientInsightsJobResponse_insightsContext = GetPatientInsightsJobResponse.AddMember("insightsContext", InsightsContext)
-
-	GetPatientInsightsJobResponse_encounterContext = GetPatientInsightsJobResponse.AddMember("encounterContext", PatientInsightsEncounterContext)
-
-	GetPatientInsightsJobResponse_userContext = GetPatientInsightsJobResponse.AddMember("userContext", UserContext)
-
-	GetPatientInsightsJobResponse_inputDataConfig = GetPatientInsightsJobResponse.AddMember("inputDataConfig", InputDataConfig)
-
-	GetPatientInsightsJobResponse_outputDataConfig = GetPatientInsightsJobResponse.AddMember("outputDataConfig", OutputDataConfig)
-
-	GetSubscriptionInput_domainId = GetSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetSubscriptionInput_subscriptionId = GetSubscriptionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	GetSubscriptionOutput_subscription = GetSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
-
-	ListDomainsInput_status = ListDomainsInput.AddMember("status", DomainStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListDomainsInput_maxResults = ListDomainsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDomainsInput_nextToken = ListDomainsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDomainsOutput_domains = ListDomainsOutput.AddMember("domains", _DomainSummaryList)
-
-	ListDomainsOutput_nextToken = ListDomainsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListSubscriptionsInput_domainId = ListSubscriptionsInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListSubscriptionsInput_maxResults = ListSubscriptionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSubscriptionsInput_nextToken = ListSubscriptionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSubscriptionsOutput_subscriptions = ListSubscriptionsOutput.AddMember("subscriptions", _SubscriptionList)
-
-	ListSubscriptionsOutput_nextToken = ListSubscriptionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagMap)
-
-	StartMedicalScribeListeningSessionInput_sessionId = StartMedicalScribeListeningSessionInput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-session-id"})
-
-	StartMedicalScribeListeningSessionInput_domainId = StartMedicalScribeListeningSessionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-domain-id"})
-
-	StartMedicalScribeListeningSessionInput_subscriptionId = StartMedicalScribeListeningSessionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-subscription-id"})
-
-	StartMedicalScribeListeningSessionInput_languageCode = StartMedicalScribeListeningSessionInput.AddMember("languageCode", MedicalScribeLanguageCode, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-language-code"})
-
-	StartMedicalScribeListeningSessionInput_mediaSampleRateHertz = StartMedicalScribeListeningSessionInput.AddMember("mediaSampleRateHertz", _MedicalScribeMediaSampleRateHertz, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-sample-rate"})
-
-	StartMedicalScribeListeningSessionInput_mediaEncoding = StartMedicalScribeListeningSessionInput.AddMember("mediaEncoding", MedicalScribeMediaEncoding, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-media-encoding"})
-
-	StartMedicalScribeListeningSessionInput_inputStream = StartMedicalScribeListeningSessionInput.AddMember("inputStream", MedicalScribeInputStream, &smithytraits.HTTPPayload{})
-
-	StartMedicalScribeListeningSessionOutput_sessionId = StartMedicalScribeListeningSessionOutput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-session-id"})
-
-	StartMedicalScribeListeningSessionOutput_domainId = StartMedicalScribeListeningSessionOutput.AddMember("domainId", _DomainId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-domain-id"})
-
-	StartMedicalScribeListeningSessionOutput_subscriptionId = StartMedicalScribeListeningSessionOutput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-subscription-id"})
-
-	StartMedicalScribeListeningSessionOutput_requestId = StartMedicalScribeListeningSessionOutput.AddMember("requestId", _RequestId, &smithytraits.HTTPHeader{Name: "x-amzn-request-id"})
-
-	StartMedicalScribeListeningSessionOutput_languageCode = StartMedicalScribeListeningSessionOutput.AddMember("languageCode", MedicalScribeLanguageCode, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-language-code"})
-
-	StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz = StartMedicalScribeListeningSessionOutput.AddMember("mediaSampleRateHertz", _MedicalScribeMediaSampleRateHertz, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-sample-rate"})
-
-	StartMedicalScribeListeningSessionOutput_mediaEncoding = StartMedicalScribeListeningSessionOutput.AddMember("mediaEncoding", MedicalScribeMediaEncoding, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-media-encoding"})
-
-	StartMedicalScribeListeningSessionOutput_responseStream = StartMedicalScribeListeningSessionOutput.AddMember("responseStream", MedicalScribeOutputStream, &smithytraits.HTTPPayload{})
-
-	StartPatientInsightsJobRequest_domainId = StartPatientInsightsJobRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	StartPatientInsightsJobRequest_patientContext = StartPatientInsightsJobRequest.AddMember("patientContext", PatientInsightsPatientContext)
-
-	StartPatientInsightsJobRequest_insightsContext = StartPatientInsightsJobRequest.AddMember("insightsContext", InsightsContext)
-
-	StartPatientInsightsJobRequest_encounterContext = StartPatientInsightsJobRequest.AddMember("encounterContext", PatientInsightsEncounterContext)
-
-	StartPatientInsightsJobRequest_userContext = StartPatientInsightsJobRequest.AddMember("userContext", UserContext)
-
-	StartPatientInsightsJobRequest_inputDataConfig = StartPatientInsightsJobRequest.AddMember("inputDataConfig", InputDataConfig)
-
-	StartPatientInsightsJobRequest_outputDataConfig = StartPatientInsightsJobRequest.AddMember("outputDataConfig", OutputDataConfig)
-
-	StartPatientInsightsJobRequest_clientToken = StartPatientInsightsJobRequest.AddMember("clientToken", _NonEmptyString)
-
-	StartPatientInsightsJobResponse_jobArn = StartPatientInsightsJobResponse.AddMember("jobArn", _JobArn)
-
-	StartPatientInsightsJobResponse_jobId = StartPatientInsightsJobResponse.AddMember("jobId", _JobId)
-
-	StartPatientInsightsJobResponse_creationTime = StartPatientInsightsJobResponse.AddMember("creationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagMap)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-}
+	Code: 204}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.EventPayload{}}, DirectMask: 0x100000}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-session-id"}}, DirectMask: 0x80}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-domain-id"}}, DirectMask: 0x80}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-subscription-id"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-language-code"}}, DirectMask: 0x80}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-sample-rate"}}, DirectMask: 0x80}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-media-encoding"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-request-id"}}, DirectMask: 0x80}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mArtifactDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactDetails_outputLocation, &sArtifactDetails_status, &sArtifactDetails_failureReason}}
+var mClinicalNoteGenerationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sClinicalNoteGenerationResult_noteResult, &sClinicalNoteGenerationResult_transcriptResult, &sClinicalNoteGenerationResult_afterVisitSummaryResult}}
+var mClinicalNoteGenerationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sClinicalNoteGenerationSettings_noteTemplateSettings}}
+var mClinicalNoteGenerationSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sClinicalNoteGenerationSettingsResponse_noteTemplateSettings}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCreateWebAppConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebAppConfiguration_ehrRole, &sCreateWebAppConfiguration_idcInstanceId, &sCreateWebAppConfiguration_idcRegion}}
+var mCustomTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomTemplate_templateType, &sCustomTemplate_templateInstructions}}
+var mCustomTemplateBase = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomTemplateBase_HISTORY_AND_PHYSICAL, &sCustomTemplateBase_GIRPP, &sCustomTemplateBase_DAP, &sCustomTemplateBase_SIRP, &sCustomTemplateBase_BIRP, &sCustomTemplateBase_BEHAVIORAL_SOAP}}
+var mCustomTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomTemplateResponse_templateType}}
+var mDomainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainStatus_ACTIVE, &sDomainStatus_DELETING, &sDomainStatus_DELETED}}
+var mDomainSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainSummary_domainId, &sDomainSummary_arn, &sDomainSummary_name, &sDomainSummary_status, &sDomainSummary_createdAt}}
+var m_DomainSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainSummaryList_member}}
+var mEncounterContext = smithy.SchemaMembers{List: []*smithy.Schema{&sEncounterContext_unstructuredContext}}
+var mEncryptionContext = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionContext_encryptionType, &sEncryptionContext_kmsKeyArn}}
+var mEncryptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionType_AWS_OWNED_KEY, &sEncryptionType_CUSTOMER_MANAGED_KEY}}
+var mFHIRServer = smithy.SchemaMembers{List: []*smithy.Schema{&sFHIRServer_fhirEndpoint, &sFHIRServer_oauthToken}}
+var mInputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInputDataConfig_fhirServer, &sInputDataConfig_s3Sources}}
+var mInsightsContext = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightsContext_insightsType}}
+var mInsightsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightsOutput_uri}}
+var mInsightsType = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightsType_PRE_VISIT}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_SUBMITTED, &sJobStatus_IN_PROGRESS, &sJobStatus_FAILED, &sJobStatus_SUCCEEDED}}
+var mManagedNoteTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNoteTemplate_HISTORY_AND_PHYSICAL, &sManagedNoteTemplate_GIRPP, &sManagedNoteTemplate_DAP, &sManagedNoteTemplate_SIRP, &sManagedNoteTemplate_BIRP, &sManagedNoteTemplate_BEHAVIORAL_SOAP, &sManagedNoteTemplate_PHYSICAL_SOAP}}
+var mManagedTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedTemplate_templateType}}
+var mManagedTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedTemplateResponse_templateType}}
+var mMedicalScribeAudioEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeAudioEvent_audioChunk}}
+var mMedicalScribeBinaryAudioEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeBinaryAudioEvent_audioChunk}}
+var mMedicalScribeChannelDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeChannelDefinition_channelId, &sMedicalScribeChannelDefinition_participantRole}}
+var m_MedicalScribeChannelDefinitions = smithy.SchemaMembers{List: []*smithy.Schema{&s_MedicalScribeChannelDefinitions_member}}
+var mMedicalScribeConfigurationEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeConfigurationEvent_postStreamActionSettings, &sMedicalScribeConfigurationEvent_channelDefinitions, &sMedicalScribeConfigurationEvent_encounterContext}}
+var mMedicalScribeInputStream = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeInputStream_audioEvent, &sMedicalScribeInputStream_binaryAudioEvent, &sMedicalScribeInputStream_sessionControlEvent, &sMedicalScribeInputStream_configurationEvent}}
+var mMedicalScribeLanguageCode = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeLanguageCode_EN_US, &sMedicalScribeLanguageCode_MULTI}}
+var mMedicalScribeListeningSessionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeListeningSessionDetails_sessionId, &sMedicalScribeListeningSessionDetails_domainId, &sMedicalScribeListeningSessionDetails_subscriptionId, &sMedicalScribeListeningSessionDetails_languageCode, &sMedicalScribeListeningSessionDetails_mediaSampleRateHertz, &sMedicalScribeListeningSessionDetails_mediaEncoding, &sMedicalScribeListeningSessionDetails_channelDefinitions, &sMedicalScribeListeningSessionDetails_postStreamActionSettings, &sMedicalScribeListeningSessionDetails_postStreamActionResult, &sMedicalScribeListeningSessionDetails_encounterContextProvided, &sMedicalScribeListeningSessionDetails_streamStatus, &sMedicalScribeListeningSessionDetails_streamCreationTime, &sMedicalScribeListeningSessionDetails_streamEndTime}, Hash: &hMedicalScribeListeningSessionDetails}
+var mMedicalScribeMediaEncoding = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeMediaEncoding_PCM, &sMedicalScribeMediaEncoding_FLAC}}
+var mMedicalScribeOutputStream = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeOutputStream_transcriptEvent, &sMedicalScribeOutputStream_internalFailureException, &sMedicalScribeOutputStream_validationException}}
+var mMedicalScribeParticipantRole = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeParticipantRole_PATIENT, &sMedicalScribeParticipantRole_CLINICIAN}}
+var mMedicalScribePostStreamActionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribePostStreamActionSettings_outputS3Uri, &sMedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings}}
+var mMedicalScribePostStreamActionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribePostStreamActionSettingsResponse_outputS3Uri, &sMedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings}}
+var mMedicalScribePostStreamActionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribePostStreamActionsResult_clinicalNoteGenerationResult}}
+var mMedicalScribeSessionControlEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeSessionControlEvent_type}}
+var mMedicalScribeSessionControlEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeSessionControlEventType_END_OF_SESSION}}
+var mMedicalScribeStreamStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeStreamStatus_IN_PROGRESS, &sMedicalScribeStreamStatus_PAUSED, &sMedicalScribeStreamStatus_FAILED, &sMedicalScribeStreamStatus_COMPLETED}}
+var mMedicalScribeTranscriptEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeTranscriptEvent_transcriptSegment}}
+var mMedicalScribeTranscriptSegment = smithy.SchemaMembers{List: []*smithy.Schema{&sMedicalScribeTranscriptSegment_segmentId, &sMedicalScribeTranscriptSegment_audioBeginOffset, &sMedicalScribeTranscriptSegment_audioEndOffset, &sMedicalScribeTranscriptSegment_isPartial, &sMedicalScribeTranscriptSegment_channelId, &sMedicalScribeTranscriptSegment_content}}
+var mNoteTemplateSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sNoteTemplateSettings_managedTemplate, &sNoteTemplateSettings_customTemplate}}
+var mNoteTemplateSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sNoteTemplateSettingsResponse_managedTemplate, &sNoteTemplateSettingsResponse_customTemplate}}
+var mOutputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputDataConfig_s3OutputPath}}
+var mPatientInsightsEncounterContext = smithy.SchemaMembers{List: []*smithy.Schema{&sPatientInsightsEncounterContext_encounterReason}}
+var mPatientInsightsPatientContext = smithy.SchemaMembers{List: []*smithy.Schema{&sPatientInsightsPatientContext_patientId, &sPatientInsightsPatientContext_dateOfBirth, &sPatientInsightsPatientContext_pronouns}}
+var mPostStreamArtifactGenerationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPostStreamArtifactGenerationStatus_IN_PROGRESS, &sPostStreamArtifactGenerationStatus_FAILED, &sPostStreamArtifactGenerationStatus_COMPLETED}}
+var mPronouns = smithy.SchemaMembers{List: []*smithy.Schema{&sPronouns_HE_HIM, &sPronouns_SHE_HER, &sPronouns_THEY_THEM}}
+var mProviderRole = smithy.SchemaMembers{List: []*smithy.Schema{&sProviderRole_CLINICIAN}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3Source = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Source_uri}}
+var m_S3Sources = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3Sources_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSpecialty = smithy.SchemaMembers{List: []*smithy.Schema{&sSpecialty_PRIMARY_CARE}}
+var mSubscriptionDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionDescription_domainId, &sSubscriptionDescription_subscriptionId, &sSubscriptionDescription_arn, &sSubscriptionDescription_status, &sSubscriptionDescription_createdAt, &sSubscriptionDescription_lastUpdatedAt, &sSubscriptionDescription_activatedAt, &sSubscriptionDescription_deactivatedAt}}
+var m_SubscriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriptionList_member}}
+var mSubscriptionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionStatus_ACTIVE, &sSubscriptionStatus_INACTIVE, &sSubscriptionStatus_DELETED}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_TemplateInstructions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateInstructions_member}}
+var mTemplateSectionInstruction = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateSectionInstruction_sectionHeader, &sTemplateSectionInstruction_sectionInstruction}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUserContext = smithy.SchemaMembers{List: []*smithy.Schema{&sUserContext_role, &sUserContext_userId, &sUserContext_specialty}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWebAppConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppConfiguration_ehrRole, &sWebAppConfiguration_idcApplicationId, &sWebAppConfiguration_idcRegion}}
+var mActivateSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sActivateSubscriptionInput_domainId, &sActivateSubscriptionInput_subscriptionId}}
+var mActivateSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sActivateSubscriptionOutput_subscription}}
+var mCreateDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainInput_name, &sCreateDomainInput_kmsKeyArn, &sCreateDomainInput_webAppSetupConfiguration, &sCreateDomainInput_tags}}
+var mCreateDomainOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainOutput_domainId, &sCreateDomainOutput_arn, &sCreateDomainOutput_name, &sCreateDomainOutput_kmsKeyArn, &sCreateDomainOutput_encryptionContext, &sCreateDomainOutput_status, &sCreateDomainOutput_webAppUrl, &sCreateDomainOutput_webAppConfiguration, &sCreateDomainOutput_createdAt}, Hash: &hCreateDomainOutput}
+var mCreateSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriptionInput_domainId}}
+var mCreateSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriptionOutput_domainId, &sCreateSubscriptionOutput_subscriptionId, &sCreateSubscriptionOutput_arn, &sCreateSubscriptionOutput_status, &sCreateSubscriptionOutput_createdAt, &sCreateSubscriptionOutput_lastUpdatedAt, &sCreateSubscriptionOutput_activatedAt, &sCreateSubscriptionOutput_deactivatedAt}}
+var mDeactivateSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeactivateSubscriptionInput_domainId, &sDeactivateSubscriptionInput_subscriptionId}}
+var mDeactivateSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeactivateSubscriptionOutput_subscription}}
+var mDeleteDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainInput_domainId}}
+var mDeleteDomainOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainOutput_domainId, &sDeleteDomainOutput_arn, &sDeleteDomainOutput_status}}
+var mGetDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainInput_domainId}}
+var mGetDomainOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainOutput_domainId, &sGetDomainOutput_arn, &sGetDomainOutput_name, &sGetDomainOutput_kmsKeyArn, &sGetDomainOutput_encryptionContext, &sGetDomainOutput_status, &sGetDomainOutput_webAppUrl, &sGetDomainOutput_webAppConfiguration, &sGetDomainOutput_createdAt, &sGetDomainOutput_tags}, Hash: &hGetDomainOutput}
+var mGetMedicalScribeListeningSessionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMedicalScribeListeningSessionInput_sessionId, &sGetMedicalScribeListeningSessionInput_domainId, &sGetMedicalScribeListeningSessionInput_subscriptionId}}
+var mGetMedicalScribeListeningSessionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails}}
+var mGetPatientInsightsJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPatientInsightsJobRequest_domainId, &sGetPatientInsightsJobRequest_jobId}}
+var mGetPatientInsightsJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPatientInsightsJobResponse_jobId, &sGetPatientInsightsJobResponse_jobArn, &sGetPatientInsightsJobResponse_jobStatus, &sGetPatientInsightsJobResponse_creationTime, &sGetPatientInsightsJobResponse_updatedTime, &sGetPatientInsightsJobResponse_insightsOutput, &sGetPatientInsightsJobResponse_statusDetails, &sGetPatientInsightsJobResponse_patientContext, &sGetPatientInsightsJobResponse_insightsContext, &sGetPatientInsightsJobResponse_encounterContext, &sGetPatientInsightsJobResponse_userContext, &sGetPatientInsightsJobResponse_inputDataConfig, &sGetPatientInsightsJobResponse_outputDataConfig}, Hash: &hGetPatientInsightsJobResponse}
+var mGetSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionInput_domainId, &sGetSubscriptionInput_subscriptionId}}
+var mGetSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionOutput_subscription}}
+var mListDomainsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsInput_status, &sListDomainsInput_maxResults, &sListDomainsInput_nextToken}}
+var mListDomainsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsOutput_domains, &sListDomainsOutput_nextToken}}
+var mListSubscriptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsInput_domainId, &sListSubscriptionsInput_maxResults, &sListSubscriptionsInput_nextToken}}
+var mListSubscriptionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsOutput_subscriptions, &sListSubscriptionsOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mStartMedicalScribeListeningSessionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMedicalScribeListeningSessionInput_sessionId, &sStartMedicalScribeListeningSessionInput_domainId, &sStartMedicalScribeListeningSessionInput_subscriptionId, &sStartMedicalScribeListeningSessionInput_languageCode, &sStartMedicalScribeListeningSessionInput_mediaSampleRateHertz, &sStartMedicalScribeListeningSessionInput_mediaEncoding, &sStartMedicalScribeListeningSessionInput_inputStream}}
+var mStartMedicalScribeListeningSessionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMedicalScribeListeningSessionOutput_sessionId, &sStartMedicalScribeListeningSessionOutput_domainId, &sStartMedicalScribeListeningSessionOutput_subscriptionId, &sStartMedicalScribeListeningSessionOutput_requestId, &sStartMedicalScribeListeningSessionOutput_languageCode, &sStartMedicalScribeListeningSessionOutput_mediaSampleRateHertz, &sStartMedicalScribeListeningSessionOutput_mediaEncoding, &sStartMedicalScribeListeningSessionOutput_responseStream}}
+var mStartPatientInsightsJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartPatientInsightsJobRequest_domainId, &sStartPatientInsightsJobRequest_patientContext, &sStartPatientInsightsJobRequest_insightsContext, &sStartPatientInsightsJobRequest_encounterContext, &sStartPatientInsightsJobRequest_userContext, &sStartPatientInsightsJobRequest_inputDataConfig, &sStartPatientInsightsJobRequest_outputDataConfig, &sStartPatientInsightsJobRequest_clientToken}}
+var mStartPatientInsightsJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartPatientInsightsJobResponse_jobArn, &sStartPatientInsightsJobResponse_jobId, &sStartPatientInsightsJobResponse_creationTime}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+
+var hMedicalScribeListeningSessionDetails = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	13, 3, 0, 8, 10, 7, 0, 0, 0, 11, 0, 0, 9, 0, 12, 0, 0, 0, 0, 0, 2, 0, 0, 5,
+	1, 0, 6, 0, 0, 4, 0, 0,
+}}
+var hCreateDomainOutput = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 0, 8, 1, 0, 5, 0, 7, 0, 4, 0, 3, 9, 0, 0, 2, 0, 6, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hGetDomainOutput = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 0, 8, 1, 0, 5, 0, 7, 0, 4, 0, 3, 9, 0, 0, 2, 0, 6, 0, 0, 0, 0, 0, 10,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hGetPatientInsightsJobResponse = smithy.MemberHash{Seed: 65, Slots: []uint16{
+	6, 0, 0, 13, 0, 0, 5, 0, 3, 0, 0, 0, 12, 0, 0, 9, 0, 0, 0, 8, 1, 0, 0, 0,
+	4, 11, 10, 0, 2, 0, 7, 0,
+}}
+
+var sActivateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateSubscription, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eActivateSubscription})
+var sCreateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomain, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateDomain})
+var sCreateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscription, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateSubscription})
+var sDeactivateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateSubscription, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeactivateSubscription})
+var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDomain})
+var sGetDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomain, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetDomain})
+var sGetMedicalScribeListeningSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMedicalScribeListeningSession, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetMedicalScribeListeningSession})
+var sGetPatientInsightsJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPatientInsightsJob, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetPatientInsightsJob})
+var sGetSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscription, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetSubscription})
+var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListDomains})
+var sListSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptions, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListSubscriptions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartMedicalScribeListeningSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMedicalScribeListeningSession, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eStartMedicalScribeListeningSession})
+var sStartPatientInsightsJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPatientInsightsJob, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eStartPatientInsightsJob})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_ConnectHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectHealth, Type: smithy.ShapeTypeService, Ext: &e_ConnectHealth})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eArtifactDetails})
+var sArtifactDetails_outputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputLocation", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eArtifactDetails_outputLocation})
+var sArtifactDetails_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPostStreamArtifactGenerationStatus, Members: &mPostStreamArtifactGenerationStatus, Type: smithy.ShapeTypeEnum, Ext: &eArtifactDetails_status})
+var sArtifactDetails_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eArtifactDetails_failureReason})
+var s_AudioChunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudioChunk, Type: smithy.ShapeTypeBlob, Ext: &e_AudioChunk})
+var s_AudioOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudioOffset, Type: smithy.ShapeTypeDouble, Ext: &e_AudioOffset})
+var sClinicalNoteGenerationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClinicalNoteGenerationResult, Members: &mClinicalNoteGenerationResult, Type: smithy.ShapeTypeStructure, Ext: &eClinicalNoteGenerationResult})
+var sClinicalNoteGenerationResult_noteResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noteResult", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eClinicalNoteGenerationResult_noteResult})
+var sClinicalNoteGenerationResult_transcriptResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transcriptResult", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eClinicalNoteGenerationResult_transcriptResult})
+var sClinicalNoteGenerationResult_afterVisitSummaryResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterVisitSummaryResult", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eClinicalNoteGenerationResult_afterVisitSummaryResult})
+var sClinicalNoteGenerationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClinicalNoteGenerationSettings, Members: &mClinicalNoteGenerationSettings, Type: smithy.ShapeTypeStructure, Ext: &eClinicalNoteGenerationSettings})
+var sClinicalNoteGenerationSettings_noteTemplateSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noteTemplateSettings", ID: &iNoteTemplateSettings, Members: &mNoteTemplateSettings, Type: smithy.ShapeTypeUnion, Ext: &eClinicalNoteGenerationSettings_noteTemplateSettings})
+var sClinicalNoteGenerationSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClinicalNoteGenerationSettingsResponse, Members: &mClinicalNoteGenerationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eClinicalNoteGenerationSettingsResponse})
+var sClinicalNoteGenerationSettingsResponse_noteTemplateSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noteTemplateSettings", ID: &iNoteTemplateSettingsResponse, Members: &mNoteTemplateSettingsResponse, Type: smithy.ShapeTypeUnion, Ext: &eClinicalNoteGenerationSettingsResponse_noteTemplateSettings})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sCreateWebAppConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebAppConfiguration, Members: &mCreateWebAppConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebAppConfiguration})
+var sCreateWebAppConfiguration_ehrRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ehrRole", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWebAppConfiguration_ehrRole})
+var sCreateWebAppConfiguration_idcInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idcInstanceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWebAppConfiguration_idcInstanceId})
+var sCreateWebAppConfiguration_idcRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idcRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWebAppConfiguration_idcRegion})
+var sCustomTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomTemplate, Members: &mCustomTemplate, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplate})
+var sCustomTemplate_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &iCustomTemplateBase, Members: &mCustomTemplateBase, Type: smithy.ShapeTypeEnum, Ext: &eCustomTemplate_templateType})
+var sCustomTemplate_templateInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateInstructions", ID: &i_TemplateInstructions, Members: &m_TemplateInstructions, Type: smithy.ShapeTypeList, Ext: &eCustomTemplate_templateInstructions})
+var sCustomTemplateBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomTemplateBase, Members: &mCustomTemplateBase, Type: smithy.ShapeTypeEnum, Ext: &eCustomTemplateBase})
+var sCustomTemplateBase_HISTORY_AND_PHYSICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HISTORY_AND_PHYSICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplateBase_HISTORY_AND_PHYSICAL})
+var sCustomTemplateBase_GIRPP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIRPP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplateBase_GIRPP})
+var sCustomTemplateBase_DAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplateBase_DAP})
+var sCustomTemplateBase_SIRP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIRP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplateBase_SIRP})
+var sCustomTemplateBase_BIRP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplateBase_BIRP})
+var sCustomTemplateBase_BEHAVIORAL_SOAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEHAVIORAL_SOAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplateBase_BEHAVIORAL_SOAP})
+var sCustomTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomTemplateResponse, Members: &mCustomTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eCustomTemplateResponse})
+var sCustomTemplateResponse_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &iCustomTemplateBase, Members: &mCustomTemplateBase, Type: smithy.ShapeTypeEnum, Ext: &eCustomTemplateResponse_templateType})
+var s_DomainArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &e_DomainArn})
+var s_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &e_DomainId})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var sDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eDomainStatus})
+var sDomainStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_ACTIVE})
+var sDomainStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_DELETING})
+var sDomainStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_DELETED})
+var sDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &eDomainSummary})
+var sDomainSummary_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_domainId})
+var sDomainSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_arn})
+var sDomainSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_name})
+var sDomainSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eDomainSummary_status})
+var sDomainSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainSummary_createdAt})
+var s_DomainSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DomainSummaryList})
+var s_DomainSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DomainSummaryList_member})
+var sEncounterContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncounterContext, Members: &mEncounterContext, Type: smithy.ShapeTypeStructure, Ext: &eEncounterContext})
+var sEncounterContext_unstructuredContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unstructuredContext", ID: &i_SensitiveMarkdownString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eEncounterContext_unstructuredContext})
+var sEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionContext, Members: &mEncryptionContext, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionContext})
+var sEncryptionContext_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionContext_encryptionType})
+var sEncryptionContext_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eEncryptionContext_kmsKeyArn})
+var sEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionType})
+var sEncryptionType_AWS_OWNED_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_OWNED_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionType_AWS_OWNED_KEY})
+var sEncryptionType_CUSTOMER_MANAGED_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_MANAGED_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionType_CUSTOMER_MANAGED_KEY})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sFHIRServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFHIRServer, Members: &mFHIRServer, Type: smithy.ShapeTypeStructure, Ext: &eFHIRServer})
+var sFHIRServer_fhirEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fhirEndpoint", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFHIRServer_fhirEndpoint})
+var sFHIRServer_oauthToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oauthToken", ID: &i_SensitiveNonEmptyString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eFHIRServer_oauthToken})
+var sInputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eInputDataConfig})
+var sInputDataConfig_fhirServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fhirServer", ID: &iFHIRServer, Members: &mFHIRServer, Type: smithy.ShapeTypeStructure, Ext: &eInputDataConfig_fhirServer})
+var sInputDataConfig_s3Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Sources", ID: &i_S3Sources, Members: &m_S3Sources, Type: smithy.ShapeTypeList, Ext: &eInputDataConfig_s3Sources})
+var sInsightsContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightsContext, Members: &mInsightsContext, Type: smithy.ShapeTypeStructure, Ext: &eInsightsContext})
+var sInsightsContext_insightsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insightsType", ID: &iInsightsType, Members: &mInsightsType, Type: smithy.ShapeTypeEnum, Ext: &eInsightsContext_insightsType})
+var sInsightsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightsOutput, Members: &mInsightsOutput, Type: smithy.ShapeTypeStructure, Ext: &eInsightsOutput})
+var sInsightsOutput_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eInsightsOutput_uri})
+var sInsightsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightsType, Members: &mInsightsType, Type: smithy.ShapeTypeEnum, Ext: &eInsightsType})
+var sInsightsType_PRE_VISIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_VISIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInsightsType_PRE_VISIT})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_JobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &e_JobArn})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobStatus})
+var sJobStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_SUBMITTED})
+var sJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_IN_PROGRESS})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_FAILED})
+var sJobStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_SUCCEEDED})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var sManagedNoteTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNoteTemplate, Members: &mManagedNoteTemplate, Type: smithy.ShapeTypeEnum, Ext: &eManagedNoteTemplate})
+var sManagedNoteTemplate_HISTORY_AND_PHYSICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HISTORY_AND_PHYSICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedNoteTemplate_HISTORY_AND_PHYSICAL})
+var sManagedNoteTemplate_GIRPP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIRPP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedNoteTemplate_GIRPP})
+var sManagedNoteTemplate_DAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedNoteTemplate_DAP})
+var sManagedNoteTemplate_SIRP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIRP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedNoteTemplate_SIRP})
+var sManagedNoteTemplate_BIRP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedNoteTemplate_BIRP})
+var sManagedNoteTemplate_BEHAVIORAL_SOAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEHAVIORAL_SOAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedNoteTemplate_BEHAVIORAL_SOAP})
+var sManagedNoteTemplate_PHYSICAL_SOAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHYSICAL_SOAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedNoteTemplate_PHYSICAL_SOAP})
+var sManagedTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedTemplate, Members: &mManagedTemplate, Type: smithy.ShapeTypeStructure, Ext: &eManagedTemplate})
+var sManagedTemplate_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &iManagedNoteTemplate, Members: &mManagedNoteTemplate, Type: smithy.ShapeTypeEnum, Ext: &eManagedTemplate_templateType})
+var sManagedTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedTemplateResponse, Members: &mManagedTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eManagedTemplateResponse})
+var sManagedTemplateResponse_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &iManagedNoteTemplate, Members: &mManagedNoteTemplate, Type: smithy.ShapeTypeEnum, Ext: &eManagedTemplateResponse_templateType})
+var sMedicalScribeAudioEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeAudioEvent, Members: &mMedicalScribeAudioEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeAudioEvent})
+var sMedicalScribeAudioEvent_audioChunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioChunk", ID: &i_AudioChunk, Type: smithy.ShapeTypeBlob, Ext: &eMedicalScribeAudioEvent_audioChunk})
+var sMedicalScribeBinaryAudioEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeBinaryAudioEvent, Members: &mMedicalScribeBinaryAudioEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeBinaryAudioEvent})
+var sMedicalScribeBinaryAudioEvent_audioChunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioChunk", ID: &i_AudioChunk, Traits: &t20, Type: smithy.ShapeTypeBlob, Ext: &eMedicalScribeBinaryAudioEvent_audioChunk})
+var sMedicalScribeChannelDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeChannelDefinition, Members: &mMedicalScribeChannelDefinition, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeChannelDefinition})
+var sMedicalScribeChannelDefinition_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_MedicalScribeChannelId, Type: smithy.ShapeTypeInteger, Ext: &eMedicalScribeChannelDefinition_channelId})
+var sMedicalScribeChannelDefinition_participantRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "participantRole", ID: &iMedicalScribeParticipantRole, Members: &mMedicalScribeParticipantRole, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeChannelDefinition_participantRole})
+var s_MedicalScribeChannelDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MedicalScribeChannelDefinitions, Members: &m_MedicalScribeChannelDefinitions, Type: smithy.ShapeTypeList, Ext: &e_MedicalScribeChannelDefinitions})
+var s_MedicalScribeChannelDefinitions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMedicalScribeChannelDefinition, Members: &mMedicalScribeChannelDefinition, Type: smithy.ShapeTypeStructure, Ext: &e_MedicalScribeChannelDefinitions_member})
+var s_MedicalScribeChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MedicalScribeChannelId, Type: smithy.ShapeTypeInteger, Ext: &e_MedicalScribeChannelId})
+var sMedicalScribeConfigurationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeConfigurationEvent, Members: &mMedicalScribeConfigurationEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeConfigurationEvent})
+var sMedicalScribeConfigurationEvent_postStreamActionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postStreamActionSettings", ID: &iMedicalScribePostStreamActionSettings, Members: &mMedicalScribePostStreamActionSettings, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeConfigurationEvent_postStreamActionSettings})
+var sMedicalScribeConfigurationEvent_channelDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelDefinitions", ID: &i_MedicalScribeChannelDefinitions, Members: &m_MedicalScribeChannelDefinitions, Type: smithy.ShapeTypeList, Ext: &eMedicalScribeConfigurationEvent_channelDefinitions})
+var sMedicalScribeConfigurationEvent_encounterContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encounterContext", ID: &iEncounterContext, Members: &mEncounterContext, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeConfigurationEvent_encounterContext})
+var sMedicalScribeInputStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeInputStream, Members: &mMedicalScribeInputStream, Traits: &t21, Type: smithy.ShapeTypeUnion, Ext: &eMedicalScribeInputStream})
+var sMedicalScribeInputStream_audioEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioEvent", ID: &iMedicalScribeAudioEvent, Members: &mMedicalScribeAudioEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeInputStream_audioEvent})
+var sMedicalScribeInputStream_binaryAudioEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "binaryAudioEvent", ID: &iMedicalScribeBinaryAudioEvent, Members: &mMedicalScribeBinaryAudioEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeInputStream_binaryAudioEvent})
+var sMedicalScribeInputStream_sessionControlEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionControlEvent", ID: &iMedicalScribeSessionControlEvent, Members: &mMedicalScribeSessionControlEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeInputStream_sessionControlEvent})
+var sMedicalScribeInputStream_configurationEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationEvent", ID: &iMedicalScribeConfigurationEvent, Members: &mMedicalScribeConfigurationEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeInputStream_configurationEvent})
+var sMedicalScribeLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeLanguageCode, Members: &mMedicalScribeLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeLanguageCode})
+var sMedicalScribeLanguageCode_EN_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeLanguageCode_EN_US})
+var sMedicalScribeLanguageCode_MULTI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeLanguageCode_MULTI})
+var sMedicalScribeListeningSessionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeListeningSessionDetails, Members: &mMedicalScribeListeningSessionDetails, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeListeningSessionDetails})
+var sMedicalScribeListeningSessionDetails_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_ScribeSessionId, Type: smithy.ShapeTypeString, Ext: &eMedicalScribeListeningSessionDetails_sessionId})
+var sMedicalScribeListeningSessionDetails_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eMedicalScribeListeningSessionDetails_domainId})
+var sMedicalScribeListeningSessionDetails_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Type: smithy.ShapeTypeString, Ext: &eMedicalScribeListeningSessionDetails_subscriptionId})
+var sMedicalScribeListeningSessionDetails_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &iMedicalScribeLanguageCode, Members: &mMedicalScribeLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeListeningSessionDetails_languageCode})
+var sMedicalScribeListeningSessionDetails_mediaSampleRateHertz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaSampleRateHertz", ID: &i_MedicalScribeMediaSampleRateHertz, Type: smithy.ShapeTypeInteger, Ext: &eMedicalScribeListeningSessionDetails_mediaSampleRateHertz})
+var sMedicalScribeListeningSessionDetails_mediaEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaEncoding", ID: &iMedicalScribeMediaEncoding, Members: &mMedicalScribeMediaEncoding, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeListeningSessionDetails_mediaEncoding})
+var sMedicalScribeListeningSessionDetails_channelDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelDefinitions", ID: &i_MedicalScribeChannelDefinitions, Members: &m_MedicalScribeChannelDefinitions, Type: smithy.ShapeTypeList, Ext: &eMedicalScribeListeningSessionDetails_channelDefinitions})
+var sMedicalScribeListeningSessionDetails_postStreamActionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postStreamActionSettings", ID: &iMedicalScribePostStreamActionSettingsResponse, Members: &mMedicalScribePostStreamActionSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeListeningSessionDetails_postStreamActionSettings})
+var sMedicalScribeListeningSessionDetails_postStreamActionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postStreamActionResult", ID: &iMedicalScribePostStreamActionsResult, Members: &mMedicalScribePostStreamActionsResult, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeListeningSessionDetails_postStreamActionResult})
+var sMedicalScribeListeningSessionDetails_encounterContextProvided = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encounterContextProvided", ID: &i_NonNullBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMedicalScribeListeningSessionDetails_encounterContextProvided})
+var sMedicalScribeListeningSessionDetails_streamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamStatus", ID: &iMedicalScribeStreamStatus, Members: &mMedicalScribeStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeListeningSessionDetails_streamStatus})
+var sMedicalScribeListeningSessionDetails_streamCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamCreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMedicalScribeListeningSessionDetails_streamCreationTime})
+var sMedicalScribeListeningSessionDetails_streamEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamEndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMedicalScribeListeningSessionDetails_streamEndTime})
+var sMedicalScribeMediaEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeMediaEncoding, Members: &mMedicalScribeMediaEncoding, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeMediaEncoding})
+var sMedicalScribeMediaEncoding_PCM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeMediaEncoding_PCM})
+var sMedicalScribeMediaEncoding_FLAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeMediaEncoding_FLAC})
+var s_MedicalScribeMediaSampleRateHertz = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MedicalScribeMediaSampleRateHertz, Type: smithy.ShapeTypeInteger, Ext: &e_MedicalScribeMediaSampleRateHertz})
+var sMedicalScribeOutputStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeOutputStream, Members: &mMedicalScribeOutputStream, Traits: &t21, Type: smithy.ShapeTypeUnion, Ext: &eMedicalScribeOutputStream})
+var sMedicalScribeOutputStream_transcriptEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transcriptEvent", ID: &iMedicalScribeTranscriptEvent, Members: &mMedicalScribeTranscriptEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeOutputStream_transcriptEvent})
+var sMedicalScribeOutputStream_internalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internalFailureException", ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeOutputStream_internalFailureException})
+var sMedicalScribeOutputStream_validationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationException", ID: &iValidationException, Members: &mValidationException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeOutputStream_validationException})
+var sMedicalScribeParticipantRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeParticipantRole, Members: &mMedicalScribeParticipantRole, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeParticipantRole})
+var sMedicalScribeParticipantRole_PATIENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATIENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeParticipantRole_PATIENT})
+var sMedicalScribeParticipantRole_CLINICIAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLINICIAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeParticipantRole_CLINICIAN})
+var sMedicalScribePostStreamActionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribePostStreamActionSettings, Members: &mMedicalScribePostStreamActionSettings, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribePostStreamActionSettings})
+var sMedicalScribePostStreamActionSettings_outputS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eMedicalScribePostStreamActionSettings_outputS3Uri})
+var sMedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clinicalNoteGenerationSettings", ID: &iClinicalNoteGenerationSettings, Members: &mClinicalNoteGenerationSettings, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings})
+var sMedicalScribePostStreamActionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribePostStreamActionSettingsResponse, Members: &mMedicalScribePostStreamActionSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribePostStreamActionSettingsResponse})
+var sMedicalScribePostStreamActionSettingsResponse_outputS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eMedicalScribePostStreamActionSettingsResponse_outputS3Uri})
+var sMedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clinicalNoteGenerationSettings", ID: &iClinicalNoteGenerationSettingsResponse, Members: &mClinicalNoteGenerationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings})
+var sMedicalScribePostStreamActionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribePostStreamActionsResult, Members: &mMedicalScribePostStreamActionsResult, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribePostStreamActionsResult})
+var sMedicalScribePostStreamActionsResult_clinicalNoteGenerationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clinicalNoteGenerationResult", ID: &iClinicalNoteGenerationResult, Members: &mClinicalNoteGenerationResult, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribePostStreamActionsResult_clinicalNoteGenerationResult})
+var sMedicalScribeSessionControlEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeSessionControlEvent, Members: &mMedicalScribeSessionControlEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeSessionControlEvent})
+var sMedicalScribeSessionControlEvent_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMedicalScribeSessionControlEventType, Members: &mMedicalScribeSessionControlEventType, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeSessionControlEvent_type})
+var sMedicalScribeSessionControlEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeSessionControlEventType, Members: &mMedicalScribeSessionControlEventType, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeSessionControlEventType})
+var sMedicalScribeSessionControlEventType_END_OF_SESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_OF_SESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeSessionControlEventType_END_OF_SESSION})
+var sMedicalScribeStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeStreamStatus, Members: &mMedicalScribeStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eMedicalScribeStreamStatus})
+var sMedicalScribeStreamStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeStreamStatus_IN_PROGRESS})
+var sMedicalScribeStreamStatus_PAUSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAUSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeStreamStatus_PAUSED})
+var sMedicalScribeStreamStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeStreamStatus_FAILED})
+var sMedicalScribeStreamStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeStreamStatus_COMPLETED})
+var sMedicalScribeTranscriptEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeTranscriptEvent, Members: &mMedicalScribeTranscriptEvent, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeTranscriptEvent})
+var sMedicalScribeTranscriptEvent_transcriptSegment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transcriptSegment", ID: &iMedicalScribeTranscriptSegment, Members: &mMedicalScribeTranscriptSegment, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeTranscriptEvent_transcriptSegment})
+var sMedicalScribeTranscriptSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMedicalScribeTranscriptSegment, Members: &mMedicalScribeTranscriptSegment, Type: smithy.ShapeTypeStructure, Ext: &eMedicalScribeTranscriptSegment})
+var sMedicalScribeTranscriptSegment_segmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "segmentId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMedicalScribeTranscriptSegment_segmentId})
+var sMedicalScribeTranscriptSegment_audioBeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioBeginOffset", ID: &i_AudioOffset, Type: smithy.ShapeTypeDouble, Ext: &eMedicalScribeTranscriptSegment_audioBeginOffset})
+var sMedicalScribeTranscriptSegment_audioEndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioEndOffset", ID: &i_AudioOffset, Type: smithy.ShapeTypeDouble, Ext: &eMedicalScribeTranscriptSegment_audioEndOffset})
+var sMedicalScribeTranscriptSegment_isPartial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPartial", ID: &i_NonNullBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMedicalScribeTranscriptSegment_isPartial})
+var sMedicalScribeTranscriptSegment_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMedicalScribeTranscriptSegment_channelId})
+var sMedicalScribeTranscriptSegment_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMedicalScribeTranscriptSegment_content})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_NonNullBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNullBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_NonNullBoolean})
+var sNoteTemplateSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoteTemplateSettings, Members: &mNoteTemplateSettings, Type: smithy.ShapeTypeUnion, Ext: &eNoteTemplateSettings})
+var sNoteTemplateSettings_managedTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedTemplate", ID: &iManagedTemplate, Members: &mManagedTemplate, Type: smithy.ShapeTypeStructure, Ext: &eNoteTemplateSettings_managedTemplate})
+var sNoteTemplateSettings_customTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customTemplate", ID: &iCustomTemplate, Members: &mCustomTemplate, Type: smithy.ShapeTypeStructure, Ext: &eNoteTemplateSettings_customTemplate})
+var sNoteTemplateSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoteTemplateSettingsResponse, Members: &mNoteTemplateSettingsResponse, Type: smithy.ShapeTypeUnion, Ext: &eNoteTemplateSettingsResponse})
+var sNoteTemplateSettingsResponse_managedTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedTemplate", ID: &iManagedTemplateResponse, Members: &mManagedTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eNoteTemplateSettingsResponse_managedTemplate})
+var sNoteTemplateSettingsResponse_customTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customTemplate", ID: &iCustomTemplateResponse, Members: &mCustomTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eNoteTemplateSettingsResponse_customTemplate})
+var sOutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eOutputDataConfig})
+var sOutputDataConfig_s3OutputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3OutputPath", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eOutputDataConfig_s3OutputPath})
+var sPatientInsightsEncounterContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPatientInsightsEncounterContext, Members: &mPatientInsightsEncounterContext, Type: smithy.ShapeTypeStructure, Ext: &ePatientInsightsEncounterContext})
+var sPatientInsightsEncounterContext_encounterReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encounterReason", ID: &i_SensitiveNonEmptyString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ePatientInsightsEncounterContext_encounterReason})
+var sPatientInsightsPatientContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPatientInsightsPatientContext, Members: &mPatientInsightsPatientContext, Type: smithy.ShapeTypeStructure, Ext: &ePatientInsightsPatientContext})
+var sPatientInsightsPatientContext_patientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patientId", ID: &i_SensitiveNonEmptyString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ePatientInsightsPatientContext_patientId})
+var sPatientInsightsPatientContext_dateOfBirth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dateOfBirth", ID: &i_SensitiveIsoDateString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ePatientInsightsPatientContext_dateOfBirth})
+var sPatientInsightsPatientContext_pronouns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pronouns", ID: &iPronouns, Members: &mPronouns, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &ePatientInsightsPatientContext_pronouns})
+var sPostStreamArtifactGenerationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostStreamArtifactGenerationStatus, Members: &mPostStreamArtifactGenerationStatus, Type: smithy.ShapeTypeEnum, Ext: &ePostStreamArtifactGenerationStatus})
+var sPostStreamArtifactGenerationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostStreamArtifactGenerationStatus_IN_PROGRESS})
+var sPostStreamArtifactGenerationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostStreamArtifactGenerationStatus_FAILED})
+var sPostStreamArtifactGenerationStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostStreamArtifactGenerationStatus_COMPLETED})
+var sPronouns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPronouns, Members: &mPronouns, Traits: &t24, Type: smithy.ShapeTypeEnum, Ext: &ePronouns})
+var sPronouns_HE_HIM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HE_HIM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePronouns_HE_HIM})
+var sPronouns_SHE_HER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHE_HER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePronouns_SHE_HER})
+var sPronouns_THEY_THEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THEY_THEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePronouns_THEY_THEM})
+var sProviderRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProviderRole, Members: &mProviderRole, Type: smithy.ShapeTypeEnum, Ext: &eProviderRole})
+var sProviderRole_CLINICIAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLINICIAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProviderRole_CLINICIAN})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &e_RequestId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sS3Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Source, Members: &mS3Source, Type: smithy.ShapeTypeStructure, Ext: &eS3Source})
+var sS3Source_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eS3Source_uri})
+var s_S3Sources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Sources, Members: &m_S3Sources, Type: smithy.ShapeTypeList, Ext: &e_S3Sources})
+var s_S3Sources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3Source, Members: &mS3Source, Type: smithy.ShapeTypeStructure, Ext: &e_S3Sources_member})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &e_S3Uri})
+var s_ScribeSessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScribeSessionId, Type: smithy.ShapeTypeString, Ext: &e_ScribeSessionId})
+var s_SensitiveIsoDateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveIsoDateString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &e_SensitiveIsoDateString})
+var s_SensitiveMarkdownString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveMarkdownString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &e_SensitiveMarkdownString})
+var s_SensitiveNonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveNonEmptyString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &e_SensitiveNonEmptyString})
+var s_SensitiveSectionHeaderString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveSectionHeaderString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &e_SensitiveSectionHeaderString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSpecialty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpecialty, Members: &mSpecialty, Type: smithy.ShapeTypeEnum, Ext: &eSpecialty})
+var sSpecialty_PRIMARY_CARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_CARE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpecialty_PRIMARY_CARE})
+var s_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &e_SubscriptionArn})
+var sSubscriptionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionDescription, Members: &mSubscriptionDescription, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionDescription})
+var sSubscriptionDescription_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eSubscriptionDescription_domainId})
+var sSubscriptionDescription_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Type: smithy.ShapeTypeString, Ext: &eSubscriptionDescription_subscriptionId})
+var sSubscriptionDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eSubscriptionDescription_arn})
+var sSubscriptionDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSubscriptionStatus, Members: &mSubscriptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eSubscriptionDescription_status})
+var sSubscriptionDescription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriptionDescription_createdAt})
+var sSubscriptionDescription_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriptionDescription_lastUpdatedAt})
+var sSubscriptionDescription_activatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriptionDescription_activatedAt})
+var sSubscriptionDescription_deactivatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deactivatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriptionDescription_deactivatedAt})
+var s_SubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionId, Type: smithy.ShapeTypeString, Ext: &e_SubscriptionId})
+var s_SubscriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionList, Members: &m_SubscriptionList, Type: smithy.ShapeTypeList, Ext: &e_SubscriptionList})
+var s_SubscriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriptionDescription, Members: &mSubscriptionDescription, Type: smithy.ShapeTypeStructure, Ext: &e_SubscriptionList_member})
+var sSubscriptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionStatus, Members: &mSubscriptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eSubscriptionStatus})
+var sSubscriptionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionStatus_ACTIVE})
+var sSubscriptionStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionStatus_INACTIVE})
+var sSubscriptionStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionStatus_DELETED})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TemplateInstructions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateInstructions, Members: &m_TemplateInstructions, Type: smithy.ShapeTypeList, Ext: &e_TemplateInstructions})
+var s_TemplateInstructions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateSectionInstruction, Members: &mTemplateSectionInstruction, Type: smithy.ShapeTypeStructure, Ext: &e_TemplateInstructions_member})
+var sTemplateSectionInstruction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSectionInstruction, Members: &mTemplateSectionInstruction, Type: smithy.ShapeTypeStructure, Ext: &eTemplateSectionInstruction})
+var sTemplateSectionInstruction_sectionHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sectionHeader", ID: &i_SensitiveSectionHeaderString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eTemplateSectionInstruction_sectionHeader})
+var sTemplateSectionInstruction_sectionInstruction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sectionInstruction", ID: &i_SensitiveMarkdownString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eTemplateSectionInstruction_sectionInstruction})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &e_Uri})
+var sUserContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserContext, Members: &mUserContext, Type: smithy.ShapeTypeStructure, Ext: &eUserContext})
+var sUserContext_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &iProviderRole, Members: &mProviderRole, Type: smithy.ShapeTypeEnum, Ext: &eUserContext_role})
+var sUserContext_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_SensitiveNonEmptyString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eUserContext_userId})
+var sUserContext_specialty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specialty", ID: &iSpecialty, Members: &mSpecialty, Type: smithy.ShapeTypeEnum, Ext: &eUserContext_specialty})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sWebAppConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppConfiguration, Members: &mWebAppConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWebAppConfiguration})
+var sWebAppConfiguration_ehrRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ehrRole", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWebAppConfiguration_ehrRole})
+var sWebAppConfiguration_idcApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idcApplicationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWebAppConfiguration_idcApplicationId})
+var sWebAppConfiguration_idcRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idcRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWebAppConfiguration_idcRegion})
+var s_WebAppUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppUrl, Type: smithy.ShapeTypeString, Ext: &e_WebAppUrl})
+var sActivateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateSubscriptionInput, Members: &mActivateSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eActivateSubscriptionInput})
+var sActivateSubscriptionInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eActivateSubscriptionInput_domainId})
+var sActivateSubscriptionInput_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eActivateSubscriptionInput_subscriptionId})
+var sActivateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateSubscriptionOutput, Members: &mActivateSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eActivateSubscriptionOutput})
+var sActivateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscriptionDescription, Members: &mSubscriptionDescription, Type: smithy.ShapeTypeStructure, Ext: &eActivateSubscriptionOutput_subscription})
+var sCreateDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainInput, Members: &mCreateDomainInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainInput})
+var sCreateDomainInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCreateDomainInput_name})
+var sCreateDomainInput_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateDomainInput_kmsKeyArn})
+var sCreateDomainInput_webAppSetupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAppSetupConfiguration", ID: &iCreateWebAppConfiguration, Members: &mCreateWebAppConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainInput_webAppSetupConfiguration})
+var sCreateDomainInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateDomainInput_tags})
+var sCreateDomainOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainOutput, Members: &mCreateDomainOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainOutput})
+var sCreateDomainOutput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eCreateDomainOutput_domainId})
+var sCreateDomainOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &eCreateDomainOutput_arn})
+var sCreateDomainOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCreateDomainOutput_name})
+var sCreateDomainOutput_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateDomainOutput_kmsKeyArn})
+var sCreateDomainOutput_encryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionContext", ID: &iEncryptionContext, Members: &mEncryptionContext, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainOutput_encryptionContext})
+var sCreateDomainOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateDomainOutput_status})
+var sCreateDomainOutput_webAppUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAppUrl", ID: &i_WebAppUrl, Type: smithy.ShapeTypeString, Ext: &eCreateDomainOutput_webAppUrl})
+var sCreateDomainOutput_webAppConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAppConfiguration", ID: &iWebAppConfiguration, Members: &mWebAppConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainOutput_webAppConfiguration})
+var sCreateDomainOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateDomainOutput_createdAt})
+var sCreateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionInput, Members: &mCreateSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriptionInput})
+var sCreateSubscriptionInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionInput_domainId})
+var sCreateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionOutput, Members: &mCreateSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriptionOutput})
+var sCreateSubscriptionOutput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionOutput_domainId})
+var sCreateSubscriptionOutput_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionOutput_subscriptionId})
+var sCreateSubscriptionOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionOutput_arn})
+var sCreateSubscriptionOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSubscriptionStatus, Members: &mSubscriptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateSubscriptionOutput_status})
+var sCreateSubscriptionOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSubscriptionOutput_createdAt})
+var sCreateSubscriptionOutput_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSubscriptionOutput_lastUpdatedAt})
+var sCreateSubscriptionOutput_activatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSubscriptionOutput_activatedAt})
+var sCreateSubscriptionOutput_deactivatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deactivatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSubscriptionOutput_deactivatedAt})
+var sDeactivateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateSubscriptionInput, Members: &mDeactivateSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eDeactivateSubscriptionInput})
+var sDeactivateSubscriptionInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeactivateSubscriptionInput_domainId})
+var sDeactivateSubscriptionInput_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeactivateSubscriptionInput_subscriptionId})
+var sDeactivateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateSubscriptionOutput, Members: &mDeactivateSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeactivateSubscriptionOutput})
+var sDeactivateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscriptionDescription, Members: &mSubscriptionDescription, Type: smithy.ShapeTypeStructure, Ext: &eDeactivateSubscriptionOutput_subscription})
+var sDeleteDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainInput, Members: &mDeleteDomainInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainInput})
+var sDeleteDomainInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainInput_domainId})
+var sDeleteDomainOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainOutput, Members: &mDeleteDomainOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainOutput})
+var sDeleteDomainOutput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainOutput_domainId})
+var sDeleteDomainOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainOutput_arn})
+var sDeleteDomainOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteDomainOutput_status})
+var sGetDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainInput, Members: &mGetDomainInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainInput})
+var sGetDomainInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetDomainInput_domainId})
+var sGetDomainOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainOutput, Members: &mGetDomainOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainOutput})
+var sGetDomainOutput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eGetDomainOutput_domainId})
+var sGetDomainOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DomainArn, Type: smithy.ShapeTypeString, Ext: &eGetDomainOutput_arn})
+var sGetDomainOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetDomainOutput_name})
+var sGetDomainOutput_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eGetDomainOutput_kmsKeyArn})
+var sGetDomainOutput_encryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionContext", ID: &iEncryptionContext, Members: &mEncryptionContext, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainOutput_encryptionContext})
+var sGetDomainOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDomainOutput_status})
+var sGetDomainOutput_webAppUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAppUrl", ID: &i_WebAppUrl, Type: smithy.ShapeTypeString, Ext: &eGetDomainOutput_webAppUrl})
+var sGetDomainOutput_webAppConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAppConfiguration", ID: &iWebAppConfiguration, Members: &mWebAppConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainOutput_webAppConfiguration})
+var sGetDomainOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDomainOutput_createdAt})
+var sGetDomainOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetDomainOutput_tags})
+var sGetMedicalScribeListeningSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMedicalScribeListeningSessionInput, Members: &mGetMedicalScribeListeningSessionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMedicalScribeListeningSessionInput})
+var sGetMedicalScribeListeningSessionInput_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_ScribeSessionId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetMedicalScribeListeningSessionInput_sessionId})
+var sGetMedicalScribeListeningSessionInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetMedicalScribeListeningSessionInput_domainId})
+var sGetMedicalScribeListeningSessionInput_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetMedicalScribeListeningSessionInput_subscriptionId})
+var sGetMedicalScribeListeningSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMedicalScribeListeningSessionOutput, Members: &mGetMedicalScribeListeningSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMedicalScribeListeningSessionOutput})
+var sGetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "medicalScribeListeningSessionDetails", ID: &iMedicalScribeListeningSessionDetails, Members: &mMedicalScribeListeningSessionDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails})
+var sGetPatientInsightsJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPatientInsightsJobRequest, Members: &mGetPatientInsightsJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobRequest})
+var sGetPatientInsightsJobRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetPatientInsightsJobRequest_domainId})
+var sGetPatientInsightsJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetPatientInsightsJobRequest_jobId})
+var sGetPatientInsightsJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPatientInsightsJobResponse, Members: &mGetPatientInsightsJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse})
+var sGetPatientInsightsJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eGetPatientInsightsJobResponse_jobId})
+var sGetPatientInsightsJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &eGetPatientInsightsJobResponse_jobArn})
+var sGetPatientInsightsJobResponse_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetPatientInsightsJobResponse_jobStatus})
+var sGetPatientInsightsJobResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Traits: &t30, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPatientInsightsJobResponse_creationTime})
+var sGetPatientInsightsJobResponse_updatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedTime", ID: &pTimestamp, Traits: &t30, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPatientInsightsJobResponse_updatedTime})
+var sGetPatientInsightsJobResponse_insightsOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insightsOutput", ID: &iInsightsOutput, Members: &mInsightsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse_insightsOutput})
+var sGetPatientInsightsJobResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetPatientInsightsJobResponse_statusDetails})
+var sGetPatientInsightsJobResponse_patientContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patientContext", ID: &iPatientInsightsPatientContext, Members: &mPatientInsightsPatientContext, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse_patientContext})
+var sGetPatientInsightsJobResponse_insightsContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insightsContext", ID: &iInsightsContext, Members: &mInsightsContext, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse_insightsContext})
+var sGetPatientInsightsJobResponse_encounterContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encounterContext", ID: &iPatientInsightsEncounterContext, Members: &mPatientInsightsEncounterContext, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse_encounterContext})
+var sGetPatientInsightsJobResponse_userContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userContext", ID: &iUserContext, Members: &mUserContext, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse_userContext})
+var sGetPatientInsightsJobResponse_inputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse_inputDataConfig})
+var sGetPatientInsightsJobResponse_outputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetPatientInsightsJobResponse_outputDataConfig})
+var sGetSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionInput, Members: &mGetSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionInput})
+var sGetSubscriptionInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionInput_domainId})
+var sGetSubscriptionInput_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionInput_subscriptionId})
+var sGetSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionOutput, Members: &mGetSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionOutput})
+var sGetSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscriptionDescription, Members: &mSubscriptionDescription, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionOutput_subscription})
+var sListDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsInput, Members: &mListDomainsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsInput})
+var sListDomainsInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDomainStatus, Members: &mDomainStatus, Traits: &t31, Type: smithy.ShapeTypeEnum, Ext: &eListDomainsInput_status})
+var sListDomainsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t32, Type: smithy.ShapeTypeInteger, Ext: &eListDomainsInput_maxResults})
+var sListDomainsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListDomainsInput_nextToken})
+var sListDomainsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsOutput, Members: &mListDomainsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsOutput})
+var sListDomainsOutput_domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domains", ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDomainsOutput_domains})
+var sListDomainsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDomainsOutput_nextToken})
+var sListSubscriptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsInput, Members: &mListSubscriptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsInput})
+var sListSubscriptionsInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsInput_domainId})
+var sListSubscriptionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t32, Type: smithy.ShapeTypeInteger, Ext: &eListSubscriptionsInput_maxResults})
+var sListSubscriptionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsInput_nextToken})
+var sListSubscriptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsOutput, Members: &mListSubscriptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsOutput})
+var sListSubscriptionsOutput_subscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptions", ID: &i_SubscriptionList, Members: &m_SubscriptionList, Type: smithy.ShapeTypeList, Ext: &eListSubscriptionsOutput_subscriptions})
+var sListSubscriptionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsOutput_nextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sStartMedicalScribeListeningSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMedicalScribeListeningSessionInput, Members: &mStartMedicalScribeListeningSessionInput, Type: smithy.ShapeTypeStructure, Ext: &eStartMedicalScribeListeningSessionInput})
+var sStartMedicalScribeListeningSessionInput_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_ScribeSessionId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eStartMedicalScribeListeningSessionInput_sessionId})
+var sStartMedicalScribeListeningSessionInput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eStartMedicalScribeListeningSessionInput_domainId})
+var sStartMedicalScribeListeningSessionInput_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStartMedicalScribeListeningSessionInput_subscriptionId})
+var sStartMedicalScribeListeningSessionInput_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &iMedicalScribeLanguageCode, Members: &mMedicalScribeLanguageCode, Traits: &t37, Type: smithy.ShapeTypeEnum, Ext: &eStartMedicalScribeListeningSessionInput_languageCode})
+var sStartMedicalScribeListeningSessionInput_mediaSampleRateHertz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaSampleRateHertz", ID: &i_MedicalScribeMediaSampleRateHertz, Traits: &t38, Type: smithy.ShapeTypeInteger, Ext: &eStartMedicalScribeListeningSessionInput_mediaSampleRateHertz})
+var sStartMedicalScribeListeningSessionInput_mediaEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaEncoding", ID: &iMedicalScribeMediaEncoding, Members: &mMedicalScribeMediaEncoding, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eStartMedicalScribeListeningSessionInput_mediaEncoding})
+var sStartMedicalScribeListeningSessionInput_inputStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputStream", ID: &iMedicalScribeInputStream, Members: &mMedicalScribeInputStream, Traits: &t40, Type: smithy.ShapeTypeUnion, Ext: &eStartMedicalScribeListeningSessionInput_inputStream})
+var sStartMedicalScribeListeningSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMedicalScribeListeningSessionOutput, Members: &mStartMedicalScribeListeningSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartMedicalScribeListeningSessionOutput})
+var sStartMedicalScribeListeningSessionOutput_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_ScribeSessionId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eStartMedicalScribeListeningSessionOutput_sessionId})
+var sStartMedicalScribeListeningSessionOutput_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eStartMedicalScribeListeningSessionOutput_domainId})
+var sStartMedicalScribeListeningSessionOutput_subscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionId", ID: &i_SubscriptionId, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStartMedicalScribeListeningSessionOutput_subscriptionId})
+var sStartMedicalScribeListeningSessionOutput_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &i_RequestId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eStartMedicalScribeListeningSessionOutput_requestId})
+var sStartMedicalScribeListeningSessionOutput_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &iMedicalScribeLanguageCode, Members: &mMedicalScribeLanguageCode, Traits: &t37, Type: smithy.ShapeTypeEnum, Ext: &eStartMedicalScribeListeningSessionOutput_languageCode})
+var sStartMedicalScribeListeningSessionOutput_mediaSampleRateHertz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaSampleRateHertz", ID: &i_MedicalScribeMediaSampleRateHertz, Traits: &t38, Type: smithy.ShapeTypeInteger, Ext: &eStartMedicalScribeListeningSessionOutput_mediaSampleRateHertz})
+var sStartMedicalScribeListeningSessionOutput_mediaEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaEncoding", ID: &iMedicalScribeMediaEncoding, Members: &mMedicalScribeMediaEncoding, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eStartMedicalScribeListeningSessionOutput_mediaEncoding})
+var sStartMedicalScribeListeningSessionOutput_responseStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseStream", ID: &iMedicalScribeOutputStream, Members: &mMedicalScribeOutputStream, Traits: &t40, Type: smithy.ShapeTypeUnion, Ext: &eStartMedicalScribeListeningSessionOutput_responseStream})
+var sStartPatientInsightsJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPatientInsightsJobRequest, Members: &mStartPatientInsightsJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobRequest})
+var sStartPatientInsightsJobRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eStartPatientInsightsJobRequest_domainId})
+var sStartPatientInsightsJobRequest_patientContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patientContext", ID: &iPatientInsightsPatientContext, Members: &mPatientInsightsPatientContext, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobRequest_patientContext})
+var sStartPatientInsightsJobRequest_insightsContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insightsContext", ID: &iInsightsContext, Members: &mInsightsContext, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobRequest_insightsContext})
+var sStartPatientInsightsJobRequest_encounterContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encounterContext", ID: &iPatientInsightsEncounterContext, Members: &mPatientInsightsEncounterContext, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobRequest_encounterContext})
+var sStartPatientInsightsJobRequest_userContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userContext", ID: &iUserContext, Members: &mUserContext, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobRequest_userContext})
+var sStartPatientInsightsJobRequest_inputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobRequest_inputDataConfig})
+var sStartPatientInsightsJobRequest_outputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobRequest_outputDataConfig})
+var sStartPatientInsightsJobRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eStartPatientInsightsJobRequest_clientToken})
+var sStartPatientInsightsJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPatientInsightsJobResponse, Members: &mStartPatientInsightsJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartPatientInsightsJobResponse})
+var sStartPatientInsightsJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &eStartPatientInsightsJobResponse_jobArn})
+var sStartPatientInsightsJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eStartPatientInsightsJobResponse_jobId})
+var sStartPatientInsightsJobResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Traits: &t30, Type: smithy.ShapeTypeTimestamp, Ext: &eStartPatientInsightsJobResponse_creationTime})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t42, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+
+var ActivateSubscription = &sActivateSubscription
+
+var CreateDomain = &sCreateDomain
+
+var CreateSubscription = &sCreateSubscription
+
+var DeactivateSubscription = &sDeactivateSubscription
+
+var DeleteDomain = &sDeleteDomain
+
+var GetDomain = &sGetDomain
+
+var GetMedicalScribeListeningSession = &sGetMedicalScribeListeningSession
+
+var GetPatientInsightsJob = &sGetPatientInsightsJob
+
+var GetSubscription = &sGetSubscription
+
+var ListDomains = &sListDomains
+
+var ListSubscriptions = &sListSubscriptions
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartMedicalScribeListeningSession = &sStartMedicalScribeListeningSession
+
+var StartPatientInsightsJob = &sStartPatientInsightsJob
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _ConnectHealth = &s_ConnectHealth
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var ArtifactDetails = &sArtifactDetails
+var ArtifactDetails_outputLocation = &sArtifactDetails_outputLocation
+var ArtifactDetails_status = &sArtifactDetails_status
+var ArtifactDetails_failureReason = &sArtifactDetails_failureReason
+
+var _AudioChunk = &s_AudioChunk
+
+var _AudioOffset = &s_AudioOffset
+
+var ClinicalNoteGenerationResult = &sClinicalNoteGenerationResult
+var ClinicalNoteGenerationResult_noteResult = &sClinicalNoteGenerationResult_noteResult
+var ClinicalNoteGenerationResult_transcriptResult = &sClinicalNoteGenerationResult_transcriptResult
+var ClinicalNoteGenerationResult_afterVisitSummaryResult = &sClinicalNoteGenerationResult_afterVisitSummaryResult
+
+var ClinicalNoteGenerationSettings = &sClinicalNoteGenerationSettings
+var ClinicalNoteGenerationSettings_noteTemplateSettings = &sClinicalNoteGenerationSettings_noteTemplateSettings
+
+var ClinicalNoteGenerationSettingsResponse = &sClinicalNoteGenerationSettingsResponse
+var ClinicalNoteGenerationSettingsResponse_noteTemplateSettings = &sClinicalNoteGenerationSettingsResponse_noteTemplateSettings
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CreateWebAppConfiguration = &sCreateWebAppConfiguration
+var CreateWebAppConfiguration_ehrRole = &sCreateWebAppConfiguration_ehrRole
+var CreateWebAppConfiguration_idcInstanceId = &sCreateWebAppConfiguration_idcInstanceId
+var CreateWebAppConfiguration_idcRegion = &sCreateWebAppConfiguration_idcRegion
+
+var CustomTemplate = &sCustomTemplate
+var CustomTemplate_templateType = &sCustomTemplate_templateType
+var CustomTemplate_templateInstructions = &sCustomTemplate_templateInstructions
+
+var CustomTemplateBase = &sCustomTemplateBase
+var CustomTemplateBase_HISTORY_AND_PHYSICAL = &sCustomTemplateBase_HISTORY_AND_PHYSICAL
+var CustomTemplateBase_GIRPP = &sCustomTemplateBase_GIRPP
+var CustomTemplateBase_DAP = &sCustomTemplateBase_DAP
+var CustomTemplateBase_SIRP = &sCustomTemplateBase_SIRP
+var CustomTemplateBase_BIRP = &sCustomTemplateBase_BIRP
+var CustomTemplateBase_BEHAVIORAL_SOAP = &sCustomTemplateBase_BEHAVIORAL_SOAP
+
+var CustomTemplateResponse = &sCustomTemplateResponse
+var CustomTemplateResponse_templateType = &sCustomTemplateResponse_templateType
+
+var _DomainArn = &s_DomainArn
+
+var _DomainId = &s_DomainId
+
+var _DomainName = &s_DomainName
+
+var DomainStatus = &sDomainStatus
+var DomainStatus_ACTIVE = &sDomainStatus_ACTIVE
+var DomainStatus_DELETING = &sDomainStatus_DELETING
+var DomainStatus_DELETED = &sDomainStatus_DELETED
+
+var DomainSummary = &sDomainSummary
+var DomainSummary_domainId = &sDomainSummary_domainId
+var DomainSummary_arn = &sDomainSummary_arn
+var DomainSummary_name = &sDomainSummary_name
+var DomainSummary_status = &sDomainSummary_status
+var DomainSummary_createdAt = &sDomainSummary_createdAt
+
+var _DomainSummaryList = &s_DomainSummaryList
+var _DomainSummaryList_member = &s_DomainSummaryList_member
+
+var EncounterContext = &sEncounterContext
+var EncounterContext_unstructuredContext = &sEncounterContext_unstructuredContext
+
+var EncryptionContext = &sEncryptionContext
+var EncryptionContext_encryptionType = &sEncryptionContext_encryptionType
+var EncryptionContext_kmsKeyArn = &sEncryptionContext_kmsKeyArn
+
+var EncryptionType = &sEncryptionType
+var EncryptionType_AWS_OWNED_KEY = &sEncryptionType_AWS_OWNED_KEY
+var EncryptionType_CUSTOMER_MANAGED_KEY = &sEncryptionType_CUSTOMER_MANAGED_KEY
+
+var _ErrorMessage = &s_ErrorMessage
+
+var FHIRServer = &sFHIRServer
+var FHIRServer_fhirEndpoint = &sFHIRServer_fhirEndpoint
+var FHIRServer_oauthToken = &sFHIRServer_oauthToken
+
+var InputDataConfig = &sInputDataConfig
+var InputDataConfig_fhirServer = &sInputDataConfig_fhirServer
+var InputDataConfig_s3Sources = &sInputDataConfig_s3Sources
+
+var InsightsContext = &sInsightsContext
+var InsightsContext_insightsType = &sInsightsContext_insightsType
+
+var InsightsOutput = &sInsightsOutput
+var InsightsOutput_uri = &sInsightsOutput_uri
+
+var InsightsType = &sInsightsType
+var InsightsType_PRE_VISIT = &sInsightsType_PRE_VISIT
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _JobArn = &s_JobArn
+
+var _JobId = &s_JobId
+
+var JobStatus = &sJobStatus
+var JobStatus_SUBMITTED = &sJobStatus_SUBMITTED
+var JobStatus_IN_PROGRESS = &sJobStatus_IN_PROGRESS
+var JobStatus_FAILED = &sJobStatus_FAILED
+var JobStatus_SUCCEEDED = &sJobStatus_SUCCEEDED
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var ManagedNoteTemplate = &sManagedNoteTemplate
+var ManagedNoteTemplate_HISTORY_AND_PHYSICAL = &sManagedNoteTemplate_HISTORY_AND_PHYSICAL
+var ManagedNoteTemplate_GIRPP = &sManagedNoteTemplate_GIRPP
+var ManagedNoteTemplate_DAP = &sManagedNoteTemplate_DAP
+var ManagedNoteTemplate_SIRP = &sManagedNoteTemplate_SIRP
+var ManagedNoteTemplate_BIRP = &sManagedNoteTemplate_BIRP
+var ManagedNoteTemplate_BEHAVIORAL_SOAP = &sManagedNoteTemplate_BEHAVIORAL_SOAP
+var ManagedNoteTemplate_PHYSICAL_SOAP = &sManagedNoteTemplate_PHYSICAL_SOAP
+
+var ManagedTemplate = &sManagedTemplate
+var ManagedTemplate_templateType = &sManagedTemplate_templateType
+
+var ManagedTemplateResponse = &sManagedTemplateResponse
+var ManagedTemplateResponse_templateType = &sManagedTemplateResponse_templateType
+
+var MedicalScribeAudioEvent = &sMedicalScribeAudioEvent
+var MedicalScribeAudioEvent_audioChunk = &sMedicalScribeAudioEvent_audioChunk
+
+var MedicalScribeBinaryAudioEvent = &sMedicalScribeBinaryAudioEvent
+var MedicalScribeBinaryAudioEvent_audioChunk = &sMedicalScribeBinaryAudioEvent_audioChunk
+
+var MedicalScribeChannelDefinition = &sMedicalScribeChannelDefinition
+var MedicalScribeChannelDefinition_channelId = &sMedicalScribeChannelDefinition_channelId
+var MedicalScribeChannelDefinition_participantRole = &sMedicalScribeChannelDefinition_participantRole
+
+var _MedicalScribeChannelDefinitions = &s_MedicalScribeChannelDefinitions
+var _MedicalScribeChannelDefinitions_member = &s_MedicalScribeChannelDefinitions_member
+
+var _MedicalScribeChannelId = &s_MedicalScribeChannelId
+
+var MedicalScribeConfigurationEvent = &sMedicalScribeConfigurationEvent
+var MedicalScribeConfigurationEvent_postStreamActionSettings = &sMedicalScribeConfigurationEvent_postStreamActionSettings
+var MedicalScribeConfigurationEvent_channelDefinitions = &sMedicalScribeConfigurationEvent_channelDefinitions
+var MedicalScribeConfigurationEvent_encounterContext = &sMedicalScribeConfigurationEvent_encounterContext
+
+var MedicalScribeInputStream = &sMedicalScribeInputStream
+var MedicalScribeInputStream_audioEvent = &sMedicalScribeInputStream_audioEvent
+var MedicalScribeInputStream_binaryAudioEvent = &sMedicalScribeInputStream_binaryAudioEvent
+var MedicalScribeInputStream_sessionControlEvent = &sMedicalScribeInputStream_sessionControlEvent
+var MedicalScribeInputStream_configurationEvent = &sMedicalScribeInputStream_configurationEvent
+
+var MedicalScribeLanguageCode = &sMedicalScribeLanguageCode
+var MedicalScribeLanguageCode_EN_US = &sMedicalScribeLanguageCode_EN_US
+var MedicalScribeLanguageCode_MULTI = &sMedicalScribeLanguageCode_MULTI
+
+var MedicalScribeListeningSessionDetails = &sMedicalScribeListeningSessionDetails
+var MedicalScribeListeningSessionDetails_sessionId = &sMedicalScribeListeningSessionDetails_sessionId
+var MedicalScribeListeningSessionDetails_domainId = &sMedicalScribeListeningSessionDetails_domainId
+var MedicalScribeListeningSessionDetails_subscriptionId = &sMedicalScribeListeningSessionDetails_subscriptionId
+var MedicalScribeListeningSessionDetails_languageCode = &sMedicalScribeListeningSessionDetails_languageCode
+var MedicalScribeListeningSessionDetails_mediaSampleRateHertz = &sMedicalScribeListeningSessionDetails_mediaSampleRateHertz
+var MedicalScribeListeningSessionDetails_mediaEncoding = &sMedicalScribeListeningSessionDetails_mediaEncoding
+var MedicalScribeListeningSessionDetails_channelDefinitions = &sMedicalScribeListeningSessionDetails_channelDefinitions
+var MedicalScribeListeningSessionDetails_postStreamActionSettings = &sMedicalScribeListeningSessionDetails_postStreamActionSettings
+var MedicalScribeListeningSessionDetails_postStreamActionResult = &sMedicalScribeListeningSessionDetails_postStreamActionResult
+var MedicalScribeListeningSessionDetails_encounterContextProvided = &sMedicalScribeListeningSessionDetails_encounterContextProvided
+var MedicalScribeListeningSessionDetails_streamStatus = &sMedicalScribeListeningSessionDetails_streamStatus
+var MedicalScribeListeningSessionDetails_streamCreationTime = &sMedicalScribeListeningSessionDetails_streamCreationTime
+var MedicalScribeListeningSessionDetails_streamEndTime = &sMedicalScribeListeningSessionDetails_streamEndTime
+
+var MedicalScribeMediaEncoding = &sMedicalScribeMediaEncoding
+var MedicalScribeMediaEncoding_PCM = &sMedicalScribeMediaEncoding_PCM
+var MedicalScribeMediaEncoding_FLAC = &sMedicalScribeMediaEncoding_FLAC
+
+var _MedicalScribeMediaSampleRateHertz = &s_MedicalScribeMediaSampleRateHertz
+
+var MedicalScribeOutputStream = &sMedicalScribeOutputStream
+var MedicalScribeOutputStream_transcriptEvent = &sMedicalScribeOutputStream_transcriptEvent
+var MedicalScribeOutputStream_internalFailureException = &sMedicalScribeOutputStream_internalFailureException
+var MedicalScribeOutputStream_validationException = &sMedicalScribeOutputStream_validationException
+
+var MedicalScribeParticipantRole = &sMedicalScribeParticipantRole
+var MedicalScribeParticipantRole_PATIENT = &sMedicalScribeParticipantRole_PATIENT
+var MedicalScribeParticipantRole_CLINICIAN = &sMedicalScribeParticipantRole_CLINICIAN
+
+var MedicalScribePostStreamActionSettings = &sMedicalScribePostStreamActionSettings
+var MedicalScribePostStreamActionSettings_outputS3Uri = &sMedicalScribePostStreamActionSettings_outputS3Uri
+var MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings = &sMedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings
+
+var MedicalScribePostStreamActionSettingsResponse = &sMedicalScribePostStreamActionSettingsResponse
+var MedicalScribePostStreamActionSettingsResponse_outputS3Uri = &sMedicalScribePostStreamActionSettingsResponse_outputS3Uri
+var MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings = &sMedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings
+
+var MedicalScribePostStreamActionsResult = &sMedicalScribePostStreamActionsResult
+var MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult = &sMedicalScribePostStreamActionsResult_clinicalNoteGenerationResult
+
+var MedicalScribeSessionControlEvent = &sMedicalScribeSessionControlEvent
+var MedicalScribeSessionControlEvent_type = &sMedicalScribeSessionControlEvent_type
+
+var MedicalScribeSessionControlEventType = &sMedicalScribeSessionControlEventType
+var MedicalScribeSessionControlEventType_END_OF_SESSION = &sMedicalScribeSessionControlEventType_END_OF_SESSION
+
+var MedicalScribeStreamStatus = &sMedicalScribeStreamStatus
+var MedicalScribeStreamStatus_IN_PROGRESS = &sMedicalScribeStreamStatus_IN_PROGRESS
+var MedicalScribeStreamStatus_PAUSED = &sMedicalScribeStreamStatus_PAUSED
+var MedicalScribeStreamStatus_FAILED = &sMedicalScribeStreamStatus_FAILED
+var MedicalScribeStreamStatus_COMPLETED = &sMedicalScribeStreamStatus_COMPLETED
+
+var MedicalScribeTranscriptEvent = &sMedicalScribeTranscriptEvent
+var MedicalScribeTranscriptEvent_transcriptSegment = &sMedicalScribeTranscriptEvent_transcriptSegment
+
+var MedicalScribeTranscriptSegment = &sMedicalScribeTranscriptSegment
+var MedicalScribeTranscriptSegment_segmentId = &sMedicalScribeTranscriptSegment_segmentId
+var MedicalScribeTranscriptSegment_audioBeginOffset = &sMedicalScribeTranscriptSegment_audioBeginOffset
+var MedicalScribeTranscriptSegment_audioEndOffset = &sMedicalScribeTranscriptSegment_audioEndOffset
+var MedicalScribeTranscriptSegment_isPartial = &sMedicalScribeTranscriptSegment_isPartial
+var MedicalScribeTranscriptSegment_channelId = &sMedicalScribeTranscriptSegment_channelId
+var MedicalScribeTranscriptSegment_content = &sMedicalScribeTranscriptSegment_content
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _NonNullBoolean = &s_NonNullBoolean
+
+var NoteTemplateSettings = &sNoteTemplateSettings
+var NoteTemplateSettings_managedTemplate = &sNoteTemplateSettings_managedTemplate
+var NoteTemplateSettings_customTemplate = &sNoteTemplateSettings_customTemplate
+
+var NoteTemplateSettingsResponse = &sNoteTemplateSettingsResponse
+var NoteTemplateSettingsResponse_managedTemplate = &sNoteTemplateSettingsResponse_managedTemplate
+var NoteTemplateSettingsResponse_customTemplate = &sNoteTemplateSettingsResponse_customTemplate
+
+var OutputDataConfig = &sOutputDataConfig
+var OutputDataConfig_s3OutputPath = &sOutputDataConfig_s3OutputPath
+
+var PatientInsightsEncounterContext = &sPatientInsightsEncounterContext
+var PatientInsightsEncounterContext_encounterReason = &sPatientInsightsEncounterContext_encounterReason
+
+var PatientInsightsPatientContext = &sPatientInsightsPatientContext
+var PatientInsightsPatientContext_patientId = &sPatientInsightsPatientContext_patientId
+var PatientInsightsPatientContext_dateOfBirth = &sPatientInsightsPatientContext_dateOfBirth
+var PatientInsightsPatientContext_pronouns = &sPatientInsightsPatientContext_pronouns
+
+var PostStreamArtifactGenerationStatus = &sPostStreamArtifactGenerationStatus
+var PostStreamArtifactGenerationStatus_IN_PROGRESS = &sPostStreamArtifactGenerationStatus_IN_PROGRESS
+var PostStreamArtifactGenerationStatus_FAILED = &sPostStreamArtifactGenerationStatus_FAILED
+var PostStreamArtifactGenerationStatus_COMPLETED = &sPostStreamArtifactGenerationStatus_COMPLETED
+
+var Pronouns = &sPronouns
+var Pronouns_HE_HIM = &sPronouns_HE_HIM
+var Pronouns_SHE_HER = &sPronouns_SHE_HER
+var Pronouns_THEY_THEM = &sPronouns_THEY_THEM
+
+var ProviderRole = &sProviderRole
+var ProviderRole_CLINICIAN = &sProviderRole_CLINICIAN
+
+var _RequestId = &s_RequestId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var S3Source = &sS3Source
+var S3Source_uri = &sS3Source_uri
+
+var _S3Sources = &s_S3Sources
+var _S3Sources_member = &s_S3Sources_member
+
+var _S3Uri = &s_S3Uri
+
+var _ScribeSessionId = &s_ScribeSessionId
+
+var _SensitiveIsoDateString = &s_SensitiveIsoDateString
+
+var _SensitiveMarkdownString = &s_SensitiveMarkdownString
+
+var _SensitiveNonEmptyString = &s_SensitiveNonEmptyString
+
+var _SensitiveSectionHeaderString = &s_SensitiveSectionHeaderString
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var Specialty = &sSpecialty
+var Specialty_PRIMARY_CARE = &sSpecialty_PRIMARY_CARE
+
+var _SubscriptionArn = &s_SubscriptionArn
+
+var SubscriptionDescription = &sSubscriptionDescription
+var SubscriptionDescription_domainId = &sSubscriptionDescription_domainId
+var SubscriptionDescription_subscriptionId = &sSubscriptionDescription_subscriptionId
+var SubscriptionDescription_arn = &sSubscriptionDescription_arn
+var SubscriptionDescription_status = &sSubscriptionDescription_status
+var SubscriptionDescription_createdAt = &sSubscriptionDescription_createdAt
+var SubscriptionDescription_lastUpdatedAt = &sSubscriptionDescription_lastUpdatedAt
+var SubscriptionDescription_activatedAt = &sSubscriptionDescription_activatedAt
+var SubscriptionDescription_deactivatedAt = &sSubscriptionDescription_deactivatedAt
+
+var _SubscriptionId = &s_SubscriptionId
+
+var _SubscriptionList = &s_SubscriptionList
+var _SubscriptionList_member = &s_SubscriptionList_member
+
+var SubscriptionStatus = &sSubscriptionStatus
+var SubscriptionStatus_ACTIVE = &sSubscriptionStatus_ACTIVE
+var SubscriptionStatus_INACTIVE = &sSubscriptionStatus_INACTIVE
+var SubscriptionStatus_DELETED = &sSubscriptionStatus_DELETED
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TemplateInstructions = &s_TemplateInstructions
+var _TemplateInstructions_member = &s_TemplateInstructions_member
+
+var TemplateSectionInstruction = &sTemplateSectionInstruction
+var TemplateSectionInstruction_sectionHeader = &sTemplateSectionInstruction_sectionHeader
+var TemplateSectionInstruction_sectionInstruction = &sTemplateSectionInstruction_sectionInstruction
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Uri = &s_Uri
+
+var UserContext = &sUserContext
+var UserContext_role = &sUserContext_role
+var UserContext_userId = &sUserContext_userId
+var UserContext_specialty = &sUserContext_specialty
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var WebAppConfiguration = &sWebAppConfiguration
+var WebAppConfiguration_ehrRole = &sWebAppConfiguration_ehrRole
+var WebAppConfiguration_idcApplicationId = &sWebAppConfiguration_idcApplicationId
+var WebAppConfiguration_idcRegion = &sWebAppConfiguration_idcRegion
+
+var _WebAppUrl = &s_WebAppUrl
+
+var ActivateSubscriptionInput = &sActivateSubscriptionInput
+var ActivateSubscriptionInput_domainId = &sActivateSubscriptionInput_domainId
+var ActivateSubscriptionInput_subscriptionId = &sActivateSubscriptionInput_subscriptionId
+
+var ActivateSubscriptionOutput = &sActivateSubscriptionOutput
+var ActivateSubscriptionOutput_subscription = &sActivateSubscriptionOutput_subscription
+
+var CreateDomainInput = &sCreateDomainInput
+var CreateDomainInput_name = &sCreateDomainInput_name
+var CreateDomainInput_kmsKeyArn = &sCreateDomainInput_kmsKeyArn
+var CreateDomainInput_webAppSetupConfiguration = &sCreateDomainInput_webAppSetupConfiguration
+var CreateDomainInput_tags = &sCreateDomainInput_tags
+
+var CreateDomainOutput = &sCreateDomainOutput
+var CreateDomainOutput_domainId = &sCreateDomainOutput_domainId
+var CreateDomainOutput_arn = &sCreateDomainOutput_arn
+var CreateDomainOutput_name = &sCreateDomainOutput_name
+var CreateDomainOutput_kmsKeyArn = &sCreateDomainOutput_kmsKeyArn
+var CreateDomainOutput_encryptionContext = &sCreateDomainOutput_encryptionContext
+var CreateDomainOutput_status = &sCreateDomainOutput_status
+var CreateDomainOutput_webAppUrl = &sCreateDomainOutput_webAppUrl
+var CreateDomainOutput_webAppConfiguration = &sCreateDomainOutput_webAppConfiguration
+var CreateDomainOutput_createdAt = &sCreateDomainOutput_createdAt
+
+var CreateSubscriptionInput = &sCreateSubscriptionInput
+var CreateSubscriptionInput_domainId = &sCreateSubscriptionInput_domainId
+
+var CreateSubscriptionOutput = &sCreateSubscriptionOutput
+var CreateSubscriptionOutput_domainId = &sCreateSubscriptionOutput_domainId
+var CreateSubscriptionOutput_subscriptionId = &sCreateSubscriptionOutput_subscriptionId
+var CreateSubscriptionOutput_arn = &sCreateSubscriptionOutput_arn
+var CreateSubscriptionOutput_status = &sCreateSubscriptionOutput_status
+var CreateSubscriptionOutput_createdAt = &sCreateSubscriptionOutput_createdAt
+var CreateSubscriptionOutput_lastUpdatedAt = &sCreateSubscriptionOutput_lastUpdatedAt
+var CreateSubscriptionOutput_activatedAt = &sCreateSubscriptionOutput_activatedAt
+var CreateSubscriptionOutput_deactivatedAt = &sCreateSubscriptionOutput_deactivatedAt
+
+var DeactivateSubscriptionInput = &sDeactivateSubscriptionInput
+var DeactivateSubscriptionInput_domainId = &sDeactivateSubscriptionInput_domainId
+var DeactivateSubscriptionInput_subscriptionId = &sDeactivateSubscriptionInput_subscriptionId
+
+var DeactivateSubscriptionOutput = &sDeactivateSubscriptionOutput
+var DeactivateSubscriptionOutput_subscription = &sDeactivateSubscriptionOutput_subscription
+
+var DeleteDomainInput = &sDeleteDomainInput
+var DeleteDomainInput_domainId = &sDeleteDomainInput_domainId
+
+var DeleteDomainOutput = &sDeleteDomainOutput
+var DeleteDomainOutput_domainId = &sDeleteDomainOutput_domainId
+var DeleteDomainOutput_arn = &sDeleteDomainOutput_arn
+var DeleteDomainOutput_status = &sDeleteDomainOutput_status
+
+var GetDomainInput = &sGetDomainInput
+var GetDomainInput_domainId = &sGetDomainInput_domainId
+
+var GetDomainOutput = &sGetDomainOutput
+var GetDomainOutput_domainId = &sGetDomainOutput_domainId
+var GetDomainOutput_arn = &sGetDomainOutput_arn
+var GetDomainOutput_name = &sGetDomainOutput_name
+var GetDomainOutput_kmsKeyArn = &sGetDomainOutput_kmsKeyArn
+var GetDomainOutput_encryptionContext = &sGetDomainOutput_encryptionContext
+var GetDomainOutput_status = &sGetDomainOutput_status
+var GetDomainOutput_webAppUrl = &sGetDomainOutput_webAppUrl
+var GetDomainOutput_webAppConfiguration = &sGetDomainOutput_webAppConfiguration
+var GetDomainOutput_createdAt = &sGetDomainOutput_createdAt
+var GetDomainOutput_tags = &sGetDomainOutput_tags
+
+var GetMedicalScribeListeningSessionInput = &sGetMedicalScribeListeningSessionInput
+var GetMedicalScribeListeningSessionInput_sessionId = &sGetMedicalScribeListeningSessionInput_sessionId
+var GetMedicalScribeListeningSessionInput_domainId = &sGetMedicalScribeListeningSessionInput_domainId
+var GetMedicalScribeListeningSessionInput_subscriptionId = &sGetMedicalScribeListeningSessionInput_subscriptionId
+
+var GetMedicalScribeListeningSessionOutput = &sGetMedicalScribeListeningSessionOutput
+var GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails = &sGetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails
+
+var GetPatientInsightsJobRequest = &sGetPatientInsightsJobRequest
+var GetPatientInsightsJobRequest_domainId = &sGetPatientInsightsJobRequest_domainId
+var GetPatientInsightsJobRequest_jobId = &sGetPatientInsightsJobRequest_jobId
+
+var GetPatientInsightsJobResponse = &sGetPatientInsightsJobResponse
+var GetPatientInsightsJobResponse_jobId = &sGetPatientInsightsJobResponse_jobId
+var GetPatientInsightsJobResponse_jobArn = &sGetPatientInsightsJobResponse_jobArn
+var GetPatientInsightsJobResponse_jobStatus = &sGetPatientInsightsJobResponse_jobStatus
+var GetPatientInsightsJobResponse_creationTime = &sGetPatientInsightsJobResponse_creationTime
+var GetPatientInsightsJobResponse_updatedTime = &sGetPatientInsightsJobResponse_updatedTime
+var GetPatientInsightsJobResponse_insightsOutput = &sGetPatientInsightsJobResponse_insightsOutput
+var GetPatientInsightsJobResponse_statusDetails = &sGetPatientInsightsJobResponse_statusDetails
+var GetPatientInsightsJobResponse_patientContext = &sGetPatientInsightsJobResponse_patientContext
+var GetPatientInsightsJobResponse_insightsContext = &sGetPatientInsightsJobResponse_insightsContext
+var GetPatientInsightsJobResponse_encounterContext = &sGetPatientInsightsJobResponse_encounterContext
+var GetPatientInsightsJobResponse_userContext = &sGetPatientInsightsJobResponse_userContext
+var GetPatientInsightsJobResponse_inputDataConfig = &sGetPatientInsightsJobResponse_inputDataConfig
+var GetPatientInsightsJobResponse_outputDataConfig = &sGetPatientInsightsJobResponse_outputDataConfig
+
+var GetSubscriptionInput = &sGetSubscriptionInput
+var GetSubscriptionInput_domainId = &sGetSubscriptionInput_domainId
+var GetSubscriptionInput_subscriptionId = &sGetSubscriptionInput_subscriptionId
+
+var GetSubscriptionOutput = &sGetSubscriptionOutput
+var GetSubscriptionOutput_subscription = &sGetSubscriptionOutput_subscription
+
+var ListDomainsInput = &sListDomainsInput
+var ListDomainsInput_status = &sListDomainsInput_status
+var ListDomainsInput_maxResults = &sListDomainsInput_maxResults
+var ListDomainsInput_nextToken = &sListDomainsInput_nextToken
+
+var ListDomainsOutput = &sListDomainsOutput
+var ListDomainsOutput_domains = &sListDomainsOutput_domains
+var ListDomainsOutput_nextToken = &sListDomainsOutput_nextToken
+
+var ListSubscriptionsInput = &sListSubscriptionsInput
+var ListSubscriptionsInput_domainId = &sListSubscriptionsInput_domainId
+var ListSubscriptionsInput_maxResults = &sListSubscriptionsInput_maxResults
+var ListSubscriptionsInput_nextToken = &sListSubscriptionsInput_nextToken
+
+var ListSubscriptionsOutput = &sListSubscriptionsOutput
+var ListSubscriptionsOutput_subscriptions = &sListSubscriptionsOutput_subscriptions
+var ListSubscriptionsOutput_nextToken = &sListSubscriptionsOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var StartMedicalScribeListeningSessionInput = &sStartMedicalScribeListeningSessionInput
+var StartMedicalScribeListeningSessionInput_sessionId = &sStartMedicalScribeListeningSessionInput_sessionId
+var StartMedicalScribeListeningSessionInput_domainId = &sStartMedicalScribeListeningSessionInput_domainId
+var StartMedicalScribeListeningSessionInput_subscriptionId = &sStartMedicalScribeListeningSessionInput_subscriptionId
+var StartMedicalScribeListeningSessionInput_languageCode = &sStartMedicalScribeListeningSessionInput_languageCode
+var StartMedicalScribeListeningSessionInput_mediaSampleRateHertz = &sStartMedicalScribeListeningSessionInput_mediaSampleRateHertz
+var StartMedicalScribeListeningSessionInput_mediaEncoding = &sStartMedicalScribeListeningSessionInput_mediaEncoding
+var StartMedicalScribeListeningSessionInput_inputStream = &sStartMedicalScribeListeningSessionInput_inputStream
+
+var StartMedicalScribeListeningSessionOutput = &sStartMedicalScribeListeningSessionOutput
+var StartMedicalScribeListeningSessionOutput_sessionId = &sStartMedicalScribeListeningSessionOutput_sessionId
+var StartMedicalScribeListeningSessionOutput_domainId = &sStartMedicalScribeListeningSessionOutput_domainId
+var StartMedicalScribeListeningSessionOutput_subscriptionId = &sStartMedicalScribeListeningSessionOutput_subscriptionId
+var StartMedicalScribeListeningSessionOutput_requestId = &sStartMedicalScribeListeningSessionOutput_requestId
+var StartMedicalScribeListeningSessionOutput_languageCode = &sStartMedicalScribeListeningSessionOutput_languageCode
+var StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz = &sStartMedicalScribeListeningSessionOutput_mediaSampleRateHertz
+var StartMedicalScribeListeningSessionOutput_mediaEncoding = &sStartMedicalScribeListeningSessionOutput_mediaEncoding
+var StartMedicalScribeListeningSessionOutput_responseStream = &sStartMedicalScribeListeningSessionOutput_responseStream
+
+var StartPatientInsightsJobRequest = &sStartPatientInsightsJobRequest
+var StartPatientInsightsJobRequest_domainId = &sStartPatientInsightsJobRequest_domainId
+var StartPatientInsightsJobRequest_patientContext = &sStartPatientInsightsJobRequest_patientContext
+var StartPatientInsightsJobRequest_insightsContext = &sStartPatientInsightsJobRequest_insightsContext
+var StartPatientInsightsJobRequest_encounterContext = &sStartPatientInsightsJobRequest_encounterContext
+var StartPatientInsightsJobRequest_userContext = &sStartPatientInsightsJobRequest_userContext
+var StartPatientInsightsJobRequest_inputDataConfig = &sStartPatientInsightsJobRequest_inputDataConfig
+var StartPatientInsightsJobRequest_outputDataConfig = &sStartPatientInsightsJobRequest_outputDataConfig
+var StartPatientInsightsJobRequest_clientToken = &sStartPatientInsightsJobRequest_clientToken
+
+var StartPatientInsightsJobResponse = &sStartPatientInsightsJobResponse
+var StartPatientInsightsJobResponse_jobArn = &sStartPatientInsightsJobResponse_jobArn
+var StartPatientInsightsJobResponse_jobId = &sStartPatientInsightsJobResponse_jobId
+var StartPatientInsightsJobResponse_creationTime = &sStartPatientInsightsJobResponse_creationTime
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var ConnectHealth = &smithy.ServiceSchema{Schema: &s_ConnectHealth, Version: "2025-01-29"}

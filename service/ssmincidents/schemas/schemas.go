@@ -4,2292 +4,2276 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetIncidentFindings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "BatchGetIncidentFindings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eBatchGetIncidentFindings                                    smithy.SchemaExtensions
+	eCreateReplicationSet                                        smithy.SchemaExtensions
+	eCreateResponsePlan                                          smithy.SchemaExtensions
+	eCreateTimelineEvent                                         smithy.SchemaExtensions
+	eDeleteIncidentRecord                                        smithy.SchemaExtensions
+	eDeleteReplicationSet                                        smithy.SchemaExtensions
+	eDeleteResourcePolicy                                        smithy.SchemaExtensions
+	eDeleteResponsePlan                                          smithy.SchemaExtensions
+	eDeleteTimelineEvent                                         smithy.SchemaExtensions
+	eGetIncidentRecord                                           smithy.SchemaExtensions
+	eGetReplicationSet                                           smithy.SchemaExtensions
+	eGetResourcePolicies                                         smithy.SchemaExtensions
+	eGetResponsePlan                                             smithy.SchemaExtensions
+	eGetTimelineEvent                                            smithy.SchemaExtensions
+	eListIncidentFindings                                        smithy.SchemaExtensions
+	eListIncidentRecords                                         smithy.SchemaExtensions
+	eListRelatedItems                                            smithy.SchemaExtensions
+	eListReplicationSets                                         smithy.SchemaExtensions
+	eListResponsePlans                                           smithy.SchemaExtensions
+	eListTagsForResource                                         smithy.SchemaExtensions
+	eListTimelineEvents                                          smithy.SchemaExtensions
+	ePutResourcePolicy                                           smithy.SchemaExtensions
+	eStartIncident                                               smithy.SchemaExtensions
+	eTagResource                                                 smithy.SchemaExtensions
+	eUntagResource                                               smithy.SchemaExtensions
+	eUpdateDeletionProtection                                    smithy.SchemaExtensions
+	eUpdateIncidentRecord                                        smithy.SchemaExtensions
+	eUpdateRelatedItems                                          smithy.SchemaExtensions
+	eUpdateReplicationSet                                        smithy.SchemaExtensions
+	eUpdateResponsePlan                                          smithy.SchemaExtensions
+	eUpdateTimelineEvent                                         smithy.SchemaExtensions
+	e_SSMIncidents                                               smithy.SchemaExtensions
+	eAccessDeniedException                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                               smithy.SchemaExtensions
+	eAction                                                      smithy.SchemaExtensions
+	eAction_ssmAutomation                                        smithy.SchemaExtensions
+	e_ActionsList                                                smithy.SchemaExtensions
+	e_ActionsList_member                                         smithy.SchemaExtensions
+	eAddRegionAction                                             smithy.SchemaExtensions
+	eAddRegionAction_regionName                                  smithy.SchemaExtensions
+	eAddRegionAction_sseKmsKeyId                                 smithy.SchemaExtensions
+	e_Arn                                                        smithy.SchemaExtensions
+	eAttributeValueList                                          smithy.SchemaExtensions
+	eAttributeValueList_stringValues                             smithy.SchemaExtensions
+	eAttributeValueList_integerValues                            smithy.SchemaExtensions
+	eAutomationExecution                                         smithy.SchemaExtensions
+	eAutomationExecution_ssmExecutionArn                         smithy.SchemaExtensions
+	e_AutomationExecutionSet                                     smithy.SchemaExtensions
+	e_AutomationExecutionSet_member                              smithy.SchemaExtensions
+	eBatchGetIncidentFindingsError                               smithy.SchemaExtensions
+	eBatchGetIncidentFindingsError_findingId                     smithy.SchemaExtensions
+	eBatchGetIncidentFindingsError_code                          smithy.SchemaExtensions
+	eBatchGetIncidentFindingsError_message                       smithy.SchemaExtensions
+	e_BatchGetIncidentFindingsErrorList                          smithy.SchemaExtensions
+	e_BatchGetIncidentFindingsErrorList_member                   smithy.SchemaExtensions
+	e_ChatbotSnsConfigurationSet                                 smithy.SchemaExtensions
+	e_ChatbotSnsConfigurationSet_member                          smithy.SchemaExtensions
+	eChatChannel                                                 smithy.SchemaExtensions
+	eChatChannel_empty                                           smithy.SchemaExtensions
+	eChatChannel_chatbotSns                                      smithy.SchemaExtensions
+	e_ClientToken                                                smithy.SchemaExtensions
+	eCloudFormationStackUpdate                                   smithy.SchemaExtensions
+	eCloudFormationStackUpdate_startTime                         smithy.SchemaExtensions
+	eCloudFormationStackUpdate_endTime                           smithy.SchemaExtensions
+	eCloudFormationStackUpdate_stackArn                          smithy.SchemaExtensions
+	eCodeDeployDeployment                                        smithy.SchemaExtensions
+	eCodeDeployDeployment_startTime                              smithy.SchemaExtensions
+	eCodeDeployDeployment_endTime                                smithy.SchemaExtensions
+	eCodeDeployDeployment_deploymentGroupArn                     smithy.SchemaExtensions
+	eCodeDeployDeployment_deploymentId                           smithy.SchemaExtensions
+	eCondition                                                   smithy.SchemaExtensions
+	eCondition_before                                            smithy.SchemaExtensions
+	eCondition_after                                             smithy.SchemaExtensions
+	eCondition_equals                                            smithy.SchemaExtensions
+	eConflictException                                           smithy.SchemaExtensions
+	eConflictException_message                                   smithy.SchemaExtensions
+	eConflictException_resourceIdentifier                        smithy.SchemaExtensions
+	eConflictException_resourceType                              smithy.SchemaExtensions
+	eConflictException_retryAfter                                smithy.SchemaExtensions
+	e_DedupeString                                               smithy.SchemaExtensions
+	eDeleteRegionAction                                          smithy.SchemaExtensions
+	eDeleteRegionAction_regionName                               smithy.SchemaExtensions
+	e_DynamicSsmParameters                                       smithy.SchemaExtensions
+	e_DynamicSsmParameters_key                                   smithy.SchemaExtensions
+	e_DynamicSsmParameters_value                                 smithy.SchemaExtensions
+	eDynamicSsmParameterValue                                    smithy.SchemaExtensions
+	eDynamicSsmParameterValue_variable                           smithy.SchemaExtensions
+	eEmptyChatChannel                                            smithy.SchemaExtensions
+	e_EngagementSet                                              smithy.SchemaExtensions
+	e_EngagementSet_member                                       smithy.SchemaExtensions
+	e_EventData                                                  smithy.SchemaExtensions
+	eEventReference                                              smithy.SchemaExtensions
+	eEventReference_resource                                     smithy.SchemaExtensions
+	eEventReference_relatedItemId                                smithy.SchemaExtensions
+	e_EventReferenceList                                         smithy.SchemaExtensions
+	e_EventReferenceList_member                                  smithy.SchemaExtensions
+	eEventSummary                                                smithy.SchemaExtensions
+	eEventSummary_incidentRecordArn                              smithy.SchemaExtensions
+	eEventSummary_eventId                                        smithy.SchemaExtensions
+	eEventSummary_eventTime                                      smithy.SchemaExtensions
+	eEventSummary_eventUpdatedTime                               smithy.SchemaExtensions
+	eEventSummary_eventType                                      smithy.SchemaExtensions
+	eEventSummary_eventReferences                                smithy.SchemaExtensions
+	e_EventSummaryList                                           smithy.SchemaExtensions
+	e_EventSummaryList_member                                    smithy.SchemaExtensions
+	e_ExceptionMessage                                           smithy.SchemaExtensions
+	eFilter                                                      smithy.SchemaExtensions
+	eFilter_key                                                  smithy.SchemaExtensions
+	eFilter_condition                                            smithy.SchemaExtensions
+	e_FilterList                                                 smithy.SchemaExtensions
+	e_FilterList_member                                          smithy.SchemaExtensions
+	eFinding                                                     smithy.SchemaExtensions
+	eFinding_id                                                  smithy.SchemaExtensions
+	eFinding_creationTime                                        smithy.SchemaExtensions
+	eFinding_lastModifiedTime                                    smithy.SchemaExtensions
+	eFinding_details                                             smithy.SchemaExtensions
+	eFindingDetails                                              smithy.SchemaExtensions
+	eFindingDetails_codeDeployDeployment                         smithy.SchemaExtensions
+	eFindingDetails_cloudFormationStackUpdate                    smithy.SchemaExtensions
+	e_FindingId                                                  smithy.SchemaExtensions
+	e_FindingIdList                                              smithy.SchemaExtensions
+	e_FindingIdList_member                                       smithy.SchemaExtensions
+	e_FindingList                                                smithy.SchemaExtensions
+	e_FindingList_member                                         smithy.SchemaExtensions
+	eFindingSummary                                              smithy.SchemaExtensions
+	eFindingSummary_id                                           smithy.SchemaExtensions
+	eFindingSummary_lastModifiedTime                             smithy.SchemaExtensions
+	e_FindingSummaryList                                         smithy.SchemaExtensions
+	e_FindingSummaryList_member                                  smithy.SchemaExtensions
+	e_GeneratedId                                                smithy.SchemaExtensions
+	e_Impact                                                     smithy.SchemaExtensions
+	eIncidentRecord                                              smithy.SchemaExtensions
+	eIncidentRecord_arn                                          smithy.SchemaExtensions
+	eIncidentRecord_title                                        smithy.SchemaExtensions
+	eIncidentRecord_summary                                      smithy.SchemaExtensions
+	eIncidentRecord_status                                       smithy.SchemaExtensions
+	eIncidentRecord_impact                                       smithy.SchemaExtensions
+	eIncidentRecord_creationTime                                 smithy.SchemaExtensions
+	eIncidentRecord_resolvedTime                                 smithy.SchemaExtensions
+	eIncidentRecord_lastModifiedTime                             smithy.SchemaExtensions
+	eIncidentRecord_lastModifiedBy                               smithy.SchemaExtensions
+	eIncidentRecord_automationExecutions                         smithy.SchemaExtensions
+	eIncidentRecord_incidentRecordSource                         smithy.SchemaExtensions
+	eIncidentRecord_dedupeString                                 smithy.SchemaExtensions
+	eIncidentRecord_chatChannel                                  smithy.SchemaExtensions
+	eIncidentRecord_notificationTargets                          smithy.SchemaExtensions
+	eIncidentRecordSource                                        smithy.SchemaExtensions
+	eIncidentRecordSource_createdBy                              smithy.SchemaExtensions
+	eIncidentRecordSource_invokedBy                              smithy.SchemaExtensions
+	eIncidentRecordSource_resourceArn                            smithy.SchemaExtensions
+	eIncidentRecordSource_source                                 smithy.SchemaExtensions
+	e_IncidentRecordStatus                                       smithy.SchemaExtensions
+	eIncidentRecordSummary                                       smithy.SchemaExtensions
+	eIncidentRecordSummary_arn                                   smithy.SchemaExtensions
+	eIncidentRecordSummary_title                                 smithy.SchemaExtensions
+	eIncidentRecordSummary_status                                smithy.SchemaExtensions
+	eIncidentRecordSummary_impact                                smithy.SchemaExtensions
+	eIncidentRecordSummary_creationTime                          smithy.SchemaExtensions
+	eIncidentRecordSummary_resolvedTime                          smithy.SchemaExtensions
+	eIncidentRecordSummary_incidentRecordSource                  smithy.SchemaExtensions
+	e_IncidentRecordSummaryList                                  smithy.SchemaExtensions
+	e_IncidentRecordSummaryList_member                           smithy.SchemaExtensions
+	e_IncidentSource                                             smithy.SchemaExtensions
+	e_IncidentSummary                                            smithy.SchemaExtensions
+	eIncidentTemplate                                            smithy.SchemaExtensions
+	eIncidentTemplate_title                                      smithy.SchemaExtensions
+	eIncidentTemplate_impact                                     smithy.SchemaExtensions
+	eIncidentTemplate_summary                                    smithy.SchemaExtensions
+	eIncidentTemplate_dedupeString                               smithy.SchemaExtensions
+	eIncidentTemplate_notificationTargets                        smithy.SchemaExtensions
+	eIncidentTemplate_incidentTags                               smithy.SchemaExtensions
+	e_IncidentTitle                                              smithy.SchemaExtensions
+	e_IntegerList                                                smithy.SchemaExtensions
+	e_IntegerList_member                                         smithy.SchemaExtensions
+	eIntegration                                                 smithy.SchemaExtensions
+	eIntegration_pagerDutyConfiguration                          smithy.SchemaExtensions
+	e_Integrations                                               smithy.SchemaExtensions
+	e_Integrations_member                                        smithy.SchemaExtensions
+	eInternalServerException                                     smithy.SchemaExtensions
+	eInternalServerException_message                             smithy.SchemaExtensions
+	eItemIdentifier                                              smithy.SchemaExtensions
+	eItemIdentifier_value                                        smithy.SchemaExtensions
+	eItemIdentifier_type                                         smithy.SchemaExtensions
+	e_ItemType                                                   smithy.SchemaExtensions
+	eItemValue                                                   smithy.SchemaExtensions
+	eItemValue_arn                                               smithy.SchemaExtensions
+	eItemValue_url                                               smithy.SchemaExtensions
+	eItemValue_metricDefinition                                  smithy.SchemaExtensions
+	eItemValue_pagerDutyIncidentDetail                           smithy.SchemaExtensions
+	e_MaxResults                                                 smithy.SchemaExtensions
+	e_MetricDefinition                                           smithy.SchemaExtensions
+	e_NextToken                                                  smithy.SchemaExtensions
+	eNotificationTargetItem                                      smithy.SchemaExtensions
+	eNotificationTargetItem_snsTopicArn                          smithy.SchemaExtensions
+	e_NotificationTargetSet                                      smithy.SchemaExtensions
+	e_NotificationTargetSet_member                               smithy.SchemaExtensions
+	ePagerDutyConfiguration                                      smithy.SchemaExtensions
+	ePagerDutyConfiguration_name                                 smithy.SchemaExtensions
+	ePagerDutyConfiguration_secretId                             smithy.SchemaExtensions
+	ePagerDutyConfiguration_pagerDutyIncidentConfiguration       smithy.SchemaExtensions
+	ePagerDutyIncidentConfiguration                              smithy.SchemaExtensions
+	ePagerDutyIncidentConfiguration_serviceId                    smithy.SchemaExtensions
+	ePagerDutyIncidentDetail                                     smithy.SchemaExtensions
+	ePagerDutyIncidentDetail_id                                  smithy.SchemaExtensions
+	ePagerDutyIncidentDetail_autoResolve                         smithy.SchemaExtensions
+	ePagerDutyIncidentDetail_secretId                            smithy.SchemaExtensions
+	e_Policy                                                     smithy.SchemaExtensions
+	e_PolicyId                                                   smithy.SchemaExtensions
+	e_RawData                                                    smithy.SchemaExtensions
+	eRegionInfo                                                  smithy.SchemaExtensions
+	eRegionInfo_sseKmsKeyId                                      smithy.SchemaExtensions
+	eRegionInfo_status                                           smithy.SchemaExtensions
+	eRegionInfo_statusMessage                                    smithy.SchemaExtensions
+	eRegionInfo_statusUpdateDateTime                             smithy.SchemaExtensions
+	e_RegionInfoMap                                              smithy.SchemaExtensions
+	e_RegionInfoMap_key                                          smithy.SchemaExtensions
+	e_RegionInfoMap_value                                        smithy.SchemaExtensions
+	e_RegionMapInput                                             smithy.SchemaExtensions
+	e_RegionMapInput_key                                         smithy.SchemaExtensions
+	e_RegionMapInput_value                                       smithy.SchemaExtensions
+	eRegionMapInputValue                                         smithy.SchemaExtensions
+	eRegionMapInputValue_sseKmsKeyId                             smithy.SchemaExtensions
+	e_RegionName                                                 smithy.SchemaExtensions
+	e_RegionStatus                                               smithy.SchemaExtensions
+	eRelatedItem                                                 smithy.SchemaExtensions
+	eRelatedItem_identifier                                      smithy.SchemaExtensions
+	eRelatedItem_title                                           smithy.SchemaExtensions
+	eRelatedItem_generatedId                                     smithy.SchemaExtensions
+	e_RelatedItemList                                            smithy.SchemaExtensions
+	e_RelatedItemList_member                                     smithy.SchemaExtensions
+	eRelatedItemsUpdate                                          smithy.SchemaExtensions
+	eRelatedItemsUpdate_itemToAdd                                smithy.SchemaExtensions
+	eRelatedItemsUpdate_itemToRemove                             smithy.SchemaExtensions
+	eReplicationSet                                              smithy.SchemaExtensions
+	eReplicationSet_arn                                          smithy.SchemaExtensions
+	eReplicationSet_regionMap                                    smithy.SchemaExtensions
+	eReplicationSet_status                                       smithy.SchemaExtensions
+	eReplicationSet_deletionProtected                            smithy.SchemaExtensions
+	eReplicationSet_createdTime                                  smithy.SchemaExtensions
+	eReplicationSet_createdBy                                    smithy.SchemaExtensions
+	eReplicationSet_lastModifiedTime                             smithy.SchemaExtensions
+	eReplicationSet_lastModifiedBy                               smithy.SchemaExtensions
+	e_ReplicationSetArnList                                      smithy.SchemaExtensions
+	e_ReplicationSetArnList_member                               smithy.SchemaExtensions
+	e_ReplicationSetStatus                                       smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                           smithy.SchemaExtensions
+	eResourceNotFoundException_resourceIdentifier                smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                      smithy.SchemaExtensions
+	eResourcePolicy                                              smithy.SchemaExtensions
+	eResourcePolicy_policyDocument                               smithy.SchemaExtensions
+	eResourcePolicy_policyId                                     smithy.SchemaExtensions
+	eResourcePolicy_ramResourceShareRegion                       smithy.SchemaExtensions
+	e_ResourcePolicyList                                         smithy.SchemaExtensions
+	e_ResourcePolicyList_member                                  smithy.SchemaExtensions
+	e_ResourceType                                               smithy.SchemaExtensions
+	e_ResponsePlanDisplayName                                    smithy.SchemaExtensions
+	e_ResponsePlanName                                           smithy.SchemaExtensions
+	eResponsePlanSummary                                         smithy.SchemaExtensions
+	eResponsePlanSummary_arn                                     smithy.SchemaExtensions
+	eResponsePlanSummary_name                                    smithy.SchemaExtensions
+	eResponsePlanSummary_displayName                             smithy.SchemaExtensions
+	e_ResponsePlanSummaryList                                    smithy.SchemaExtensions
+	e_ResponsePlanSummaryList_member                             smithy.SchemaExtensions
+	e_RoleArn                                                    smithy.SchemaExtensions
+	e_ServiceCode                                                smithy.SchemaExtensions
+	e_ServicePrincipal                                           smithy.SchemaExtensions
+	eServiceQuotaExceededException                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceIdentifier            smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                     smithy.SchemaExtensions
+	e_SnsArn                                                     smithy.SchemaExtensions
+	e_SortOrder                                                  smithy.SchemaExtensions
+	e_SseKmsKey                                                  smithy.SchemaExtensions
+	eSsmAutomation                                               smithy.SchemaExtensions
+	eSsmAutomation_roleArn                                       smithy.SchemaExtensions
+	eSsmAutomation_documentName                                  smithy.SchemaExtensions
+	eSsmAutomation_documentVersion                               smithy.SchemaExtensions
+	eSsmAutomation_targetAccount                                 smithy.SchemaExtensions
+	eSsmAutomation_parameters                                    smithy.SchemaExtensions
+	eSsmAutomation_dynamicParameters                             smithy.SchemaExtensions
+	e_SsmContactsArn                                             smithy.SchemaExtensions
+	e_SsmParameters                                              smithy.SchemaExtensions
+	e_SsmParameters_key                                          smithy.SchemaExtensions
+	e_SsmParameters_value                                        smithy.SchemaExtensions
+	e_SsmParameterValues                                         smithy.SchemaExtensions
+	e_SsmParameterValues_member                                  smithy.SchemaExtensions
+	e_SsmTargetAccount                                           smithy.SchemaExtensions
+	e_StringList                                                 smithy.SchemaExtensions
+	e_StringList_member                                          smithy.SchemaExtensions
+	e_TagKey                                                     smithy.SchemaExtensions
+	e_TagKeyList                                                 smithy.SchemaExtensions
+	e_TagKeyList_member                                          smithy.SchemaExtensions
+	e_TagMap                                                     smithy.SchemaExtensions
+	e_TagMap_key                                                 smithy.SchemaExtensions
+	e_TagMap_value                                               smithy.SchemaExtensions
+	e_TagMapUpdate                                               smithy.SchemaExtensions
+	e_TagMapUpdate_key                                           smithy.SchemaExtensions
+	e_TagMapUpdate_value                                         smithy.SchemaExtensions
+	e_TagValue                                                   smithy.SchemaExtensions
+	eThrottlingException                                         smithy.SchemaExtensions
+	eThrottlingException_message                                 smithy.SchemaExtensions
+	eThrottlingException_serviceCode                             smithy.SchemaExtensions
+	eThrottlingException_quotaCode                               smithy.SchemaExtensions
+	eTimelineEvent                                               smithy.SchemaExtensions
+	eTimelineEvent_incidentRecordArn                             smithy.SchemaExtensions
+	eTimelineEvent_eventId                                       smithy.SchemaExtensions
+	eTimelineEvent_eventTime                                     smithy.SchemaExtensions
+	eTimelineEvent_eventUpdatedTime                              smithy.SchemaExtensions
+	eTimelineEvent_eventType                                     smithy.SchemaExtensions
+	eTimelineEvent_eventData                                     smithy.SchemaExtensions
+	eTimelineEvent_eventReferences                               smithy.SchemaExtensions
+	e_TimelineEventSort                                          smithy.SchemaExtensions
+	e_TimelineEventType                                          smithy.SchemaExtensions
+	eTriggerDetails                                              smithy.SchemaExtensions
+	eTriggerDetails_source                                       smithy.SchemaExtensions
+	eTriggerDetails_triggerArn                                   smithy.SchemaExtensions
+	eTriggerDetails_timestamp                                    smithy.SchemaExtensions
+	eTriggerDetails_rawData                                      smithy.SchemaExtensions
+	e_UpdateActionList                                           smithy.SchemaExtensions
+	e_UpdateActionList_member                                    smithy.SchemaExtensions
+	eUpdateReplicationSetAction                                  smithy.SchemaExtensions
+	eUpdateReplicationSetAction_addRegionAction                  smithy.SchemaExtensions
+	eUpdateReplicationSetAction_deleteRegionAction               smithy.SchemaExtensions
+	e_Url                                                        smithy.SchemaExtensions
+	e_UUID                                                       smithy.SchemaExtensions
+	eValidationException                                         smithy.SchemaExtensions
+	eValidationException_message                                 smithy.SchemaExtensions
+	e_VariableType                                               smithy.SchemaExtensions
+	eBatchGetIncidentFindingsInput                               smithy.SchemaExtensions
+	eBatchGetIncidentFindingsInput_incidentRecordArn             smithy.SchemaExtensions
+	eBatchGetIncidentFindingsInput_findingIds                    smithy.SchemaExtensions
+	eBatchGetIncidentFindingsOutput                              smithy.SchemaExtensions
+	eBatchGetIncidentFindingsOutput_findings                     smithy.SchemaExtensions
+	eBatchGetIncidentFindingsOutput_errors                       smithy.SchemaExtensions
+	eCreateReplicationSetInput                                   smithy.SchemaExtensions
+	eCreateReplicationSetInput_regions                           smithy.SchemaExtensions
+	eCreateReplicationSetInput_clientToken                       smithy.SchemaExtensions
+	eCreateReplicationSetInput_tags                              smithy.SchemaExtensions
+	eCreateReplicationSetOutput                                  smithy.SchemaExtensions
+	eCreateReplicationSetOutput_arn                              smithy.SchemaExtensions
+	eCreateResponsePlanInput                                     smithy.SchemaExtensions
+	eCreateResponsePlanInput_clientToken                         smithy.SchemaExtensions
+	eCreateResponsePlanInput_name                                smithy.SchemaExtensions
+	eCreateResponsePlanInput_displayName                         smithy.SchemaExtensions
+	eCreateResponsePlanInput_incidentTemplate                    smithy.SchemaExtensions
+	eCreateResponsePlanInput_chatChannel                         smithy.SchemaExtensions
+	eCreateResponsePlanInput_engagements                         smithy.SchemaExtensions
+	eCreateResponsePlanInput_actions                             smithy.SchemaExtensions
+	eCreateResponsePlanInput_tags                                smithy.SchemaExtensions
+	eCreateResponsePlanInput_integrations                        smithy.SchemaExtensions
+	eCreateResponsePlanOutput                                    smithy.SchemaExtensions
+	eCreateResponsePlanOutput_arn                                smithy.SchemaExtensions
+	eCreateTimelineEventInput                                    smithy.SchemaExtensions
+	eCreateTimelineEventInput_clientToken                        smithy.SchemaExtensions
+	eCreateTimelineEventInput_incidentRecordArn                  smithy.SchemaExtensions
+	eCreateTimelineEventInput_eventTime                          smithy.SchemaExtensions
+	eCreateTimelineEventInput_eventType                          smithy.SchemaExtensions
+	eCreateTimelineEventInput_eventData                          smithy.SchemaExtensions
+	eCreateTimelineEventInput_eventReferences                    smithy.SchemaExtensions
+	eCreateTimelineEventOutput                                   smithy.SchemaExtensions
+	eCreateTimelineEventOutput_incidentRecordArn                 smithy.SchemaExtensions
+	eCreateTimelineEventOutput_eventId                           smithy.SchemaExtensions
+	eDeleteIncidentRecordInput                                   smithy.SchemaExtensions
+	eDeleteIncidentRecordInput_arn                               smithy.SchemaExtensions
+	eDeleteIncidentRecordOutput                                  smithy.SchemaExtensions
+	eDeleteReplicationSetInput                                   smithy.SchemaExtensions
+	eDeleteReplicationSetInput_arn                               smithy.SchemaExtensions
+	eDeleteReplicationSetOutput                                  smithy.SchemaExtensions
+	eDeleteResourcePolicyInput                                   smithy.SchemaExtensions
+	eDeleteResourcePolicyInput_resourceArn                       smithy.SchemaExtensions
+	eDeleteResourcePolicyInput_policyId                          smithy.SchemaExtensions
+	eDeleteResourcePolicyOutput                                  smithy.SchemaExtensions
+	eDeleteResponsePlanInput                                     smithy.SchemaExtensions
+	eDeleteResponsePlanInput_arn                                 smithy.SchemaExtensions
+	eDeleteResponsePlanOutput                                    smithy.SchemaExtensions
+	eDeleteTimelineEventInput                                    smithy.SchemaExtensions
+	eDeleteTimelineEventInput_incidentRecordArn                  smithy.SchemaExtensions
+	eDeleteTimelineEventInput_eventId                            smithy.SchemaExtensions
+	eDeleteTimelineEventOutput                                   smithy.SchemaExtensions
+	eGetIncidentRecordInput                                      smithy.SchemaExtensions
+	eGetIncidentRecordInput_arn                                  smithy.SchemaExtensions
+	eGetIncidentRecordOutput                                     smithy.SchemaExtensions
+	eGetIncidentRecordOutput_incidentRecord                      smithy.SchemaExtensions
+	eGetReplicationSetInput                                      smithy.SchemaExtensions
+	eGetReplicationSetInput_arn                                  smithy.SchemaExtensions
+	eGetReplicationSetOutput                                     smithy.SchemaExtensions
+	eGetReplicationSetOutput_replicationSet                      smithy.SchemaExtensions
+	eGetResourcePoliciesInput                                    smithy.SchemaExtensions
+	eGetResourcePoliciesInput_resourceArn                        smithy.SchemaExtensions
+	eGetResourcePoliciesInput_maxResults                         smithy.SchemaExtensions
+	eGetResourcePoliciesInput_nextToken                          smithy.SchemaExtensions
+	eGetResourcePoliciesOutput                                   smithy.SchemaExtensions
+	eGetResourcePoliciesOutput_resourcePolicies                  smithy.SchemaExtensions
+	eGetResourcePoliciesOutput_nextToken                         smithy.SchemaExtensions
+	eGetResponsePlanInput                                        smithy.SchemaExtensions
+	eGetResponsePlanInput_arn                                    smithy.SchemaExtensions
+	eGetResponsePlanOutput                                       smithy.SchemaExtensions
+	eGetResponsePlanOutput_arn                                   smithy.SchemaExtensions
+	eGetResponsePlanOutput_name                                  smithy.SchemaExtensions
+	eGetResponsePlanOutput_displayName                           smithy.SchemaExtensions
+	eGetResponsePlanOutput_incidentTemplate                      smithy.SchemaExtensions
+	eGetResponsePlanOutput_chatChannel                           smithy.SchemaExtensions
+	eGetResponsePlanOutput_engagements                           smithy.SchemaExtensions
+	eGetResponsePlanOutput_actions                               smithy.SchemaExtensions
+	eGetResponsePlanOutput_integrations                          smithy.SchemaExtensions
+	eGetTimelineEventInput                                       smithy.SchemaExtensions
+	eGetTimelineEventInput_incidentRecordArn                     smithy.SchemaExtensions
+	eGetTimelineEventInput_eventId                               smithy.SchemaExtensions
+	eGetTimelineEventOutput                                      smithy.SchemaExtensions
+	eGetTimelineEventOutput_event                                smithy.SchemaExtensions
+	eListIncidentFindingsInput                                   smithy.SchemaExtensions
+	eListIncidentFindingsInput_incidentRecordArn                 smithy.SchemaExtensions
+	eListIncidentFindingsInput_maxResults                        smithy.SchemaExtensions
+	eListIncidentFindingsInput_nextToken                         smithy.SchemaExtensions
+	eListIncidentFindingsOutput                                  smithy.SchemaExtensions
+	eListIncidentFindingsOutput_findings                         smithy.SchemaExtensions
+	eListIncidentFindingsOutput_nextToken                        smithy.SchemaExtensions
+	eListIncidentRecordsInput                                    smithy.SchemaExtensions
+	eListIncidentRecordsInput_filters                            smithy.SchemaExtensions
+	eListIncidentRecordsInput_maxResults                         smithy.SchemaExtensions
+	eListIncidentRecordsInput_nextToken                          smithy.SchemaExtensions
+	eListIncidentRecordsOutput                                   smithy.SchemaExtensions
+	eListIncidentRecordsOutput_incidentRecordSummaries           smithy.SchemaExtensions
+	eListIncidentRecordsOutput_nextToken                         smithy.SchemaExtensions
+	eListRelatedItemsInput                                       smithy.SchemaExtensions
+	eListRelatedItemsInput_incidentRecordArn                     smithy.SchemaExtensions
+	eListRelatedItemsInput_maxResults                            smithy.SchemaExtensions
+	eListRelatedItemsInput_nextToken                             smithy.SchemaExtensions
+	eListRelatedItemsOutput                                      smithy.SchemaExtensions
+	eListRelatedItemsOutput_relatedItems                         smithy.SchemaExtensions
+	eListRelatedItemsOutput_nextToken                            smithy.SchemaExtensions
+	eListReplicationSetsInput                                    smithy.SchemaExtensions
+	eListReplicationSetsInput_maxResults                         smithy.SchemaExtensions
+	eListReplicationSetsInput_nextToken                          smithy.SchemaExtensions
+	eListReplicationSetsOutput                                   smithy.SchemaExtensions
+	eListReplicationSetsOutput_replicationSetArns                smithy.SchemaExtensions
+	eListReplicationSetsOutput_nextToken                         smithy.SchemaExtensions
+	eListResponsePlansInput                                      smithy.SchemaExtensions
+	eListResponsePlansInput_maxResults                           smithy.SchemaExtensions
+	eListResponsePlansInput_nextToken                            smithy.SchemaExtensions
+	eListResponsePlansOutput                                     smithy.SchemaExtensions
+	eListResponsePlansOutput_responsePlanSummaries               smithy.SchemaExtensions
+	eListResponsePlansOutput_nextToken                           smithy.SchemaExtensions
+	eListTagsForResourceRequest                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                            smithy.SchemaExtensions
+	eListTimelineEventsInput                                     smithy.SchemaExtensions
+	eListTimelineEventsInput_incidentRecordArn                   smithy.SchemaExtensions
+	eListTimelineEventsInput_filters                             smithy.SchemaExtensions
+	eListTimelineEventsInput_sortBy                              smithy.SchemaExtensions
+	eListTimelineEventsInput_sortOrder                           smithy.SchemaExtensions
+	eListTimelineEventsInput_maxResults                          smithy.SchemaExtensions
+	eListTimelineEventsInput_nextToken                           smithy.SchemaExtensions
+	eListTimelineEventsOutput                                    smithy.SchemaExtensions
+	eListTimelineEventsOutput_eventSummaries                     smithy.SchemaExtensions
+	eListTimelineEventsOutput_nextToken                          smithy.SchemaExtensions
+	ePutResourcePolicyInput                                      smithy.SchemaExtensions
+	ePutResourcePolicyInput_resourceArn                          smithy.SchemaExtensions
+	ePutResourcePolicyInput_policy                               smithy.SchemaExtensions
+	ePutResourcePolicyOutput                                     smithy.SchemaExtensions
+	ePutResourcePolicyOutput_policyId                            smithy.SchemaExtensions
+	eStartIncidentInput                                          smithy.SchemaExtensions
+	eStartIncidentInput_clientToken                              smithy.SchemaExtensions
+	eStartIncidentInput_responsePlanArn                          smithy.SchemaExtensions
+	eStartIncidentInput_title                                    smithy.SchemaExtensions
+	eStartIncidentInput_impact                                   smithy.SchemaExtensions
+	eStartIncidentInput_triggerDetails                           smithy.SchemaExtensions
+	eStartIncidentInput_relatedItems                             smithy.SchemaExtensions
+	eStartIncidentOutput                                         smithy.SchemaExtensions
+	eStartIncidentOutput_incidentRecordArn                       smithy.SchemaExtensions
+	eTagResourceRequest                                          smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                              smithy.SchemaExtensions
+	eTagResourceRequest_tags                                     smithy.SchemaExtensions
+	eTagResourceResponse                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                        smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                            smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                smithy.SchemaExtensions
+	eUntagResourceResponse                                       smithy.SchemaExtensions
+	eUpdateDeletionProtectionInput                               smithy.SchemaExtensions
+	eUpdateDeletionProtectionInput_arn                           smithy.SchemaExtensions
+	eUpdateDeletionProtectionInput_deletionProtected             smithy.SchemaExtensions
+	eUpdateDeletionProtectionInput_clientToken                   smithy.SchemaExtensions
+	eUpdateDeletionProtectionOutput                              smithy.SchemaExtensions
+	eUpdateIncidentRecordInput                                   smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_clientToken                       smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_arn                               smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_title                             smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_summary                           smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_impact                            smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_status                            smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_chatChannel                       smithy.SchemaExtensions
+	eUpdateIncidentRecordInput_notificationTargets               smithy.SchemaExtensions
+	eUpdateIncidentRecordOutput                                  smithy.SchemaExtensions
+	eUpdateRelatedItemsInput                                     smithy.SchemaExtensions
+	eUpdateRelatedItemsInput_clientToken                         smithy.SchemaExtensions
+	eUpdateRelatedItemsInput_incidentRecordArn                   smithy.SchemaExtensions
+	eUpdateRelatedItemsInput_relatedItemsUpdate                  smithy.SchemaExtensions
+	eUpdateRelatedItemsOutput                                    smithy.SchemaExtensions
+	eUpdateReplicationSetInput                                   smithy.SchemaExtensions
+	eUpdateReplicationSetInput_arn                               smithy.SchemaExtensions
+	eUpdateReplicationSetInput_actions                           smithy.SchemaExtensions
+	eUpdateReplicationSetInput_clientToken                       smithy.SchemaExtensions
+	eUpdateReplicationSetOutput                                  smithy.SchemaExtensions
+	eUpdateResponsePlanInput                                     smithy.SchemaExtensions
+	eUpdateResponsePlanInput_clientToken                         smithy.SchemaExtensions
+	eUpdateResponsePlanInput_arn                                 smithy.SchemaExtensions
+	eUpdateResponsePlanInput_displayName                         smithy.SchemaExtensions
+	eUpdateResponsePlanInput_incidentTemplateTitle               smithy.SchemaExtensions
+	eUpdateResponsePlanInput_incidentTemplateImpact              smithy.SchemaExtensions
+	eUpdateResponsePlanInput_incidentTemplateSummary             smithy.SchemaExtensions
+	eUpdateResponsePlanInput_incidentTemplateDedupeString        smithy.SchemaExtensions
+	eUpdateResponsePlanInput_incidentTemplateNotificationTargets smithy.SchemaExtensions
+	eUpdateResponsePlanInput_chatChannel                         smithy.SchemaExtensions
+	eUpdateResponsePlanInput_engagements                         smithy.SchemaExtensions
+	eUpdateResponsePlanInput_actions                             smithy.SchemaExtensions
+	eUpdateResponsePlanInput_incidentTemplateTags                smithy.SchemaExtensions
+	eUpdateResponsePlanInput_integrations                        smithy.SchemaExtensions
+	eUpdateResponsePlanOutput                                    smithy.SchemaExtensions
+	eUpdateTimelineEventInput                                    smithy.SchemaExtensions
+	eUpdateTimelineEventInput_clientToken                        smithy.SchemaExtensions
+	eUpdateTimelineEventInput_incidentRecordArn                  smithy.SchemaExtensions
+	eUpdateTimelineEventInput_eventId                            smithy.SchemaExtensions
+	eUpdateTimelineEventInput_eventTime                          smithy.SchemaExtensions
+	eUpdateTimelineEventInput_eventType                          smithy.SchemaExtensions
+	eUpdateTimelineEventInput_eventData                          smithy.SchemaExtensions
+	eUpdateTimelineEventInput_eventReferences                    smithy.SchemaExtensions
+	eUpdateTimelineEventOutput                                   smithy.SchemaExtensions
+)
+
+var (
+	iBatchGetIncidentFindings           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "BatchGetIncidentFindings"}
+	iCreateReplicationSet               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateReplicationSet"}
+	iCreateResponsePlan                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateResponsePlan"}
+	iCreateTimelineEvent                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateTimelineEvent"}
+	iDeleteIncidentRecord               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteIncidentRecord"}
+	iDeleteReplicationSet               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteReplicationSet"}
+	iDeleteResourcePolicy               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteResourcePolicy"}
+	iDeleteResponsePlan                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteResponsePlan"}
+	iDeleteTimelineEvent                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteTimelineEvent"}
+	iGetIncidentRecord                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetIncidentRecord"}
+	iGetReplicationSet                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetReplicationSet"}
+	iGetResourcePolicies                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetResourcePolicies"}
+	iGetResponsePlan                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetResponsePlan"}
+	iGetTimelineEvent                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetTimelineEvent"}
+	iListIncidentFindings               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListIncidentFindings"}
+	iListIncidentRecords                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListIncidentRecords"}
+	iListRelatedItems                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListRelatedItems"}
+	iListReplicationSets                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListReplicationSets"}
+	iListResponsePlans                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListResponsePlans"}
+	iListTagsForResource                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListTagsForResource"}
+	iListTimelineEvents                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListTimelineEvents"}
+	iPutResourcePolicy                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "PutResourcePolicy"}
+	iStartIncident                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "StartIncident"}
+	iTagResource                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagResource"}
+	iUntagResource                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UntagResource"}
+	iUpdateDeletionProtection           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateDeletionProtection"}
+	iUpdateIncidentRecord               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateIncidentRecord"}
+	iUpdateRelatedItems                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateRelatedItems"}
+	iUpdateReplicationSet               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateReplicationSet"}
+	iUpdateResponsePlan                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateResponsePlan"}
+	iUpdateTimelineEvent                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateTimelineEvent"}
+	i_SSMIncidents                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SSMIncidents"}
+	iAccessDeniedException              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "AccessDeniedException"}
+	iAction                             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Action"}
+	i_ActionsList                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ActionsList"}
+	iAddRegionAction                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "AddRegionAction"}
+	i_Arn                               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Arn"}
+	iAttributeValueList                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "AttributeValueList"}
+	iAutomationExecution                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "AutomationExecution"}
+	i_AutomationExecutionSet            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "AutomationExecutionSet"}
+	iBatchGetIncidentFindingsError      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "BatchGetIncidentFindingsError"}
+	i_BatchGetIncidentFindingsErrorList = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "BatchGetIncidentFindingsErrorList"}
+	i_ChatbotSnsConfigurationSet        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ChatbotSnsConfigurationSet"}
+	iChatChannel                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ChatChannel"}
+	i_ClientToken                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ClientToken"}
+	iCloudFormationStackUpdate          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CloudFormationStackUpdate"}
+	iCodeDeployDeployment               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CodeDeployDeployment"}
+	iCondition                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Condition"}
+	iConflictException                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ConflictException"}
+	i_DedupeString                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DedupeString"}
+	iDeleteRegionAction                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteRegionAction"}
+	i_DynamicSsmParameters              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DynamicSsmParameters"}
+	iDynamicSsmParameterValue           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DynamicSsmParameterValue"}
+	iEmptyChatChannel                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "EmptyChatChannel"}
+	i_EngagementSet                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "EngagementSet"}
+	i_EventData                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "EventData"}
+	iEventReference                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "EventReference"}
+	i_EventReferenceList                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "EventReferenceList"}
+	iEventSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "EventSummary"}
+	i_EventSummaryList                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "EventSummaryList"}
+	i_ExceptionMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ExceptionMessage"}
+	iFilter                             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Filter"}
+	i_FilterList                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "FilterList"}
+	iFinding                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Finding"}
+	iFindingDetails                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "FindingDetails"}
+	i_FindingId                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "FindingId"}
+	i_FindingIdList                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "FindingIdList"}
+	i_FindingList                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "FindingList"}
+	iFindingSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "FindingSummary"}
+	i_FindingSummaryList                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "FindingSummaryList"}
+	i_GeneratedId                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GeneratedId"}
+	i_Impact                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Impact"}
+	iIncidentRecord                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentRecord"}
+	iIncidentRecordSource               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentRecordSource"}
+	i_IncidentRecordStatus              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentRecordStatus"}
+	iIncidentRecordSummary              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentRecordSummary"}
+	i_IncidentRecordSummaryList         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentRecordSummaryList"}
+	i_IncidentSource                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentSource"}
+	i_IncidentSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentSummary"}
+	iIncidentTemplate                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentTemplate"}
+	i_IncidentTitle                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IncidentTitle"}
+	i_IntegerList                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "IntegerList"}
+	iIntegration                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Integration"}
+	i_Integrations                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Integrations"}
+	iInternalServerException            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "InternalServerException"}
+	iItemIdentifier                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ItemIdentifier"}
+	i_ItemType                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ItemType"}
+	iItemValue                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ItemValue"}
+	i_MaxResults                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "MaxResults"}
+	i_MetricDefinition                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "MetricDefinition"}
+	i_NextToken                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "NextToken"}
+	iNotificationTargetItem             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "NotificationTargetItem"}
+	i_NotificationTargetSet             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "NotificationTargetSet"}
+	iPagerDutyConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "PagerDutyConfiguration"}
+	iPagerDutyIncidentConfiguration     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "PagerDutyIncidentConfiguration"}
+	iPagerDutyIncidentDetail            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "PagerDutyIncidentDetail"}
+	i_Policy                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Policy"}
+	i_PolicyId                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "PolicyId"}
+	i_RawData                           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RawData"}
+	iRegionInfo                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RegionInfo"}
+	i_RegionInfoMap                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RegionInfoMap"}
+	i_RegionMapInput                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RegionMapInput"}
+	iRegionMapInputValue                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RegionMapInputValue"}
+	i_RegionName                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RegionName"}
+	i_RegionStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RegionStatus"}
+	iRelatedItem                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RelatedItem"}
+	i_RelatedItemList                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RelatedItemList"}
+	iRelatedItemsUpdate                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RelatedItemsUpdate"}
+	iReplicationSet                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ReplicationSet"}
+	i_ReplicationSetArnList             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ReplicationSetArnList"}
+	i_ReplicationSetStatus              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ReplicationSetStatus"}
+	iResourceNotFoundException          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResourceNotFoundException"}
+	iResourcePolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResourcePolicy"}
+	i_ResourcePolicyList                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResourcePolicyList"}
+	i_ResourceType                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResourceType"}
+	i_ResponsePlanDisplayName           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResponsePlanDisplayName"}
+	i_ResponsePlanName                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResponsePlanName"}
+	iResponsePlanSummary                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResponsePlanSummary"}
+	i_ResponsePlanSummaryList           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ResponsePlanSummaryList"}
+	i_RoleArn                           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "RoleArn"}
+	i_ServiceCode                       = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ServiceCode"}
+	i_ServicePrincipal                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ServicePrincipal"}
+	iServiceQuotaExceededException      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ServiceQuotaExceededException"}
+	i_SnsArn                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SnsArn"}
+	i_SortOrder                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SortOrder"}
+	i_SseKmsKey                         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SseKmsKey"}
+	iSsmAutomation                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SsmAutomation"}
+	i_SsmContactsArn                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SsmContactsArn"}
+	i_SsmParameters                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SsmParameters"}
+	i_SsmParameterValues                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SsmParameterValues"}
+	i_SsmTargetAccount                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "SsmTargetAccount"}
+	i_StringList                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "StringList"}
+	i_TagKey                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagKey"}
+	i_TagKeyList                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagKeyList"}
+	i_TagMap                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagMap"}
+	i_TagMapUpdate                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagMapUpdate"}
+	i_TagValue                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagValue"}
+	iThrottlingException                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ThrottlingException"}
+	iTimelineEvent                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TimelineEvent"}
+	i_TimelineEventSort                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TimelineEventSort"}
+	i_TimelineEventType                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TimelineEventType"}
+	iTriggerDetails                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TriggerDetails"}
+	i_UpdateActionList                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateActionList"}
+	iUpdateReplicationSetAction         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateReplicationSetAction"}
+	i_Url                               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "Url"}
+	i_UUID                              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UUID"}
+	iValidationException                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ValidationException"}
+	i_VariableType                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "VariableType"}
+	iBatchGetIncidentFindingsInput      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "BatchGetIncidentFindingsInput"}
+	iBatchGetIncidentFindingsOutput     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "BatchGetIncidentFindingsOutput"}
+	iCreateReplicationSetInput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateReplicationSetInput"}
+	iCreateReplicationSetOutput         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateReplicationSetOutput"}
+	iCreateResponsePlanInput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateResponsePlanInput"}
+	iCreateResponsePlanOutput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateResponsePlanOutput"}
+	iCreateTimelineEventInput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateTimelineEventInput"}
+	iCreateTimelineEventOutput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "CreateTimelineEventOutput"}
+	iDeleteIncidentRecordInput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteIncidentRecordInput"}
+	iDeleteIncidentRecordOutput         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteIncidentRecordOutput"}
+	iDeleteReplicationSetInput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteReplicationSetInput"}
+	iDeleteReplicationSetOutput         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteReplicationSetOutput"}
+	iDeleteResourcePolicyInput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteResourcePolicyInput"}
+	iDeleteResourcePolicyOutput         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteResourcePolicyOutput"}
+	iDeleteResponsePlanInput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteResponsePlanInput"}
+	iDeleteResponsePlanOutput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteResponsePlanOutput"}
+	iDeleteTimelineEventInput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteTimelineEventInput"}
+	iDeleteTimelineEventOutput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "DeleteTimelineEventOutput"}
+	iGetIncidentRecordInput             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetIncidentRecordInput"}
+	iGetIncidentRecordOutput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetIncidentRecordOutput"}
+	iGetReplicationSetInput             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetReplicationSetInput"}
+	iGetReplicationSetOutput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetReplicationSetOutput"}
+	iGetResourcePoliciesInput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetResourcePoliciesInput"}
+	iGetResourcePoliciesOutput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetResourcePoliciesOutput"}
+	iGetResponsePlanInput               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetResponsePlanInput"}
+	iGetResponsePlanOutput              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetResponsePlanOutput"}
+	iGetTimelineEventInput              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetTimelineEventInput"}
+	iGetTimelineEventOutput             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "GetTimelineEventOutput"}
+	iListIncidentFindingsInput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListIncidentFindingsInput"}
+	iListIncidentFindingsOutput         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListIncidentFindingsOutput"}
+	iListIncidentRecordsInput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListIncidentRecordsInput"}
+	iListIncidentRecordsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListIncidentRecordsOutput"}
+	iListRelatedItemsInput              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListRelatedItemsInput"}
+	iListRelatedItemsOutput             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListRelatedItemsOutput"}
+	iListReplicationSetsInput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListReplicationSetsInput"}
+	iListReplicationSetsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListReplicationSetsOutput"}
+	iListResponsePlansInput             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListResponsePlansInput"}
+	iListResponsePlansOutput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListResponsePlansOutput"}
+	iListTagsForResourceRequest         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse        = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListTagsForResourceResponse"}
+	iListTimelineEventsInput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListTimelineEventsInput"}
+	iListTimelineEventsOutput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "ListTimelineEventsOutput"}
+	iPutResourcePolicyInput             = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "PutResourcePolicyInput"}
+	iPutResourcePolicyOutput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "PutResourcePolicyOutput"}
+	iStartIncidentInput                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "StartIncidentInput"}
+	iStartIncidentOutput                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "StartIncidentOutput"}
+	iTagResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagResourceRequest"}
+	iTagResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "TagResourceResponse"}
+	iUntagResourceRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UntagResourceRequest"}
+	iUntagResourceResponse              = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UntagResourceResponse"}
+	iUpdateDeletionProtectionInput      = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateDeletionProtectionInput"}
+	iUpdateDeletionProtectionOutput     = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateDeletionProtectionOutput"}
+	iUpdateIncidentRecordInput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateIncidentRecordInput"}
+	iUpdateIncidentRecordOutput         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateIncidentRecordOutput"}
+	iUpdateRelatedItemsInput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateRelatedItemsInput"}
+	iUpdateRelatedItemsOutput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateRelatedItemsOutput"}
+	iUpdateReplicationSetInput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateReplicationSetInput"}
+	iUpdateReplicationSetOutput         = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateReplicationSetOutput"}
+	iUpdateResponsePlanInput            = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateResponsePlanInput"}
+	iUpdateResponsePlanOutput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateResponsePlanOutput"}
+	iUpdateTimelineEventInput           = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateTimelineEventInput"}
+	iUpdateTimelineEventOutput          = smithy.ShapeName{Namespace: "com.amazonaws.ssmincidents", Name: "UpdateTimelineEventOutput"}
+	pString                             = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/batchGetIncidentFindings",
-	Code: 200})
-
-var CreateReplicationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateReplicationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createReplicationSet",
-	Code: 201})
-
-var CreateResponsePlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateResponsePlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createResponsePlan",
-	Code: 201})
-
-var CreateTimelineEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateTimelineEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createTimelineEvent",
-	Code: 201})
-
-var DeleteIncidentRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteIncidentRecord",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteIncidentRecord",
-	Code: 204})
-
-var DeleteReplicationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteReplicationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteReplicationSet",
-	Code: 204})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteResourcePolicy",
-	Code: 200})
-
-var DeleteResponsePlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteResponsePlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteResponsePlan",
-	Code: 204})
-
-var DeleteTimelineEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteTimelineEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteTimelineEvent",
-	Code: 204})
-
-var GetIncidentRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetIncidentRecord",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/getIncidentRecord",
-	Code: 200})
-
-var GetReplicationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetReplicationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/getReplicationSet",
-	Code: 200})
-
-var GetResourcePolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetResourcePolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getResourcePolicies",
-	Code: 200})
-
-var GetResponsePlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetResponsePlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/getResponsePlan",
-	Code: 200})
-
-var GetTimelineEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetTimelineEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/getTimelineEvent",
-	Code: 200})
-
-var ListIncidentFindings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListIncidentFindings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listIncidentFindings",
-	Code: 200})
-
-var ListIncidentRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListIncidentRecords",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listIncidentRecords",
-	Code: 200})
-
-var ListRelatedItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListRelatedItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listRelatedItems",
-	Code: 200})
-
-var ListReplicationSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListReplicationSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listReplicationSets",
-	Code: 200})
-
-var ListResponsePlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListResponsePlans",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listResponsePlans",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListTimelineEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListTimelineEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listTimelineEvents",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/putResourcePolicy",
-	Code: 200})
-
-var StartIncident = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "StartIncident",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/startIncident",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UpdateDeletionProtection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateDeletionProtection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateDeletionProtection",
-	Code: 204})
-
-var UpdateIncidentRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateIncidentRecord",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateIncidentRecord",
-	Code: 204})
-
-var UpdateRelatedItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateRelatedItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateRelatedItems",
-	Code: 204})
-
-var UpdateReplicationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateReplicationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateReplicationSet",
-	Code: 204})
-
-var UpdateResponsePlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateResponsePlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateResponsePlan",
-	Code: 204})
-
-var UpdateTimelineEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateTimelineEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateTimelineEvent",
-	Code: 204})
-
-var _SSMIncidents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SSMIncidents",
-}, smithy.ShapeTypeService, 0)
-
-var SSMIncidents = smithy.NewServiceSchema(_SSMIncidents, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Action",
-}, smithy.ShapeTypeUnion, 1)
-var Action_ssmAutomation *smithy.Schema
-
-var _ActionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ActionsList",
-}, smithy.ShapeTypeList, 1)
-var _ActionsList_member *smithy.Schema
-
-var AddRegionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "AddRegionAction",
-}, smithy.ShapeTypeStructure, 2)
-var AddRegionAction_regionName *smithy.Schema
-
-var AddRegionAction_sseKmsKeyId *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var AttributeValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "AttributeValueList",
-}, smithy.ShapeTypeUnion, 2)
-var AttributeValueList_stringValues *smithy.Schema
-
-var AttributeValueList_integerValues *smithy.Schema
-
-var AutomationExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "AutomationExecution",
-}, smithy.ShapeTypeUnion, 1)
-var AutomationExecution_ssmExecutionArn *smithy.Schema
-
-var _AutomationExecutionSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "AutomationExecutionSet",
-}, smithy.ShapeTypeList, 1)
-var _AutomationExecutionSet_member *smithy.Schema
-
-var BatchGetIncidentFindingsError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "BatchGetIncidentFindingsError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchGetIncidentFindingsError_findingId *smithy.Schema
-
-var BatchGetIncidentFindingsError_code *smithy.Schema
-
-var BatchGetIncidentFindingsError_message *smithy.Schema
-
-var _BatchGetIncidentFindingsErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "BatchGetIncidentFindingsErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetIncidentFindingsErrorList_member *smithy.Schema
-
-var _ChatbotSnsConfigurationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ChatbotSnsConfigurationSet",
-}, smithy.ShapeTypeList, 1)
-var _ChatbotSnsConfigurationSet_member *smithy.Schema
-
-var ChatChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ChatChannel",
-}, smithy.ShapeTypeUnion, 2)
-var ChatChannel_empty *smithy.Schema
-
-var ChatChannel_chatbotSns *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var CloudFormationStackUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CloudFormationStackUpdate",
-}, smithy.ShapeTypeStructure, 3)
-var CloudFormationStackUpdate_startTime *smithy.Schema
-
-var CloudFormationStackUpdate_endTime *smithy.Schema
-
-var CloudFormationStackUpdate_stackArn *smithy.Schema
-
-var CodeDeployDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CodeDeployDeployment",
-}, smithy.ShapeTypeStructure, 4)
-var CodeDeployDeployment_startTime *smithy.Schema
-
-var CodeDeployDeployment_endTime *smithy.Schema
-
-var CodeDeployDeployment_deploymentGroupArn *smithy.Schema
-
-var CodeDeployDeployment_deploymentId *smithy.Schema
-
-var Condition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Condition",
-}, smithy.ShapeTypeUnion, 3)
-var Condition_before *smithy.Schema
-
-var Condition_after *smithy.Schema
-
-var Condition_equals *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceIdentifier *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var ConflictException_retryAfter *smithy.Schema
-
-var _DedupeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DedupeString",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteRegionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteRegionAction",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRegionAction_regionName *smithy.Schema
-
-var _DynamicSsmParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DynamicSsmParameters",
-}, smithy.ShapeTypeMap, 2)
-var _DynamicSsmParameters_key *smithy.Schema
-
-var _DynamicSsmParameters_value *smithy.Schema
-
-var DynamicSsmParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DynamicSsmParameterValue",
-}, smithy.ShapeTypeUnion, 1)
-var DynamicSsmParameterValue_variable *smithy.Schema
-
-var EmptyChatChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "EmptyChatChannel",
-}, smithy.ShapeTypeStructure, 0)
-
-var _EngagementSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "EngagementSet",
-}, smithy.ShapeTypeList, 1)
-var _EngagementSet_member *smithy.Schema
-
-var _EventData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "EventData",
-}, smithy.ShapeTypeString, 0)
-
-var EventReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "EventReference",
-}, smithy.ShapeTypeUnion, 2)
-var EventReference_resource *smithy.Schema
-
-var EventReference_relatedItemId *smithy.Schema
-
-var _EventReferenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "EventReferenceList",
-}, smithy.ShapeTypeList, 1)
-var _EventReferenceList_member *smithy.Schema
-
-var EventSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "EventSummary",
-}, smithy.ShapeTypeStructure, 6)
-var EventSummary_incidentRecordArn *smithy.Schema
-
-var EventSummary_eventId *smithy.Schema
-
-var EventSummary_eventTime *smithy.Schema
-
-var EventSummary_eventUpdatedTime *smithy.Schema
-
-var EventSummary_eventType *smithy.Schema
-
-var EventSummary_eventReferences *smithy.Schema
-
-var _EventSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "EventSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EventSummaryList_member *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_key *smithy.Schema
-
-var Filter_condition *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var Finding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Finding",
-}, smithy.ShapeTypeStructure, 4)
-var Finding_id *smithy.Schema
-
-var Finding_creationTime *smithy.Schema
-
-var Finding_lastModifiedTime *smithy.Schema
-
-var Finding_details *smithy.Schema
-
-var FindingDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "FindingDetails",
-}, smithy.ShapeTypeUnion, 2)
-var FindingDetails_codeDeployDeployment *smithy.Schema
-
-var FindingDetails_cloudFormationStackUpdate *smithy.Schema
-
-var _FindingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "FindingId",
-}, smithy.ShapeTypeString, 0)
-
-var _FindingIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "FindingIdList",
-}, smithy.ShapeTypeList, 1)
-var _FindingIdList_member *smithy.Schema
-
-var _FindingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "FindingList",
-}, smithy.ShapeTypeList, 1)
-var _FindingList_member *smithy.Schema
-
-var FindingSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "FindingSummary",
-}, smithy.ShapeTypeStructure, 2)
-var FindingSummary_id *smithy.Schema
-
-var FindingSummary_lastModifiedTime *smithy.Schema
-
-var _FindingSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "FindingSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FindingSummaryList_member *smithy.Schema
-
-var _GeneratedId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GeneratedId",
-}, smithy.ShapeTypeString, 0)
-
-var _Impact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Impact",
-}, smithy.ShapeTypeInteger, 0)
-
-var IncidentRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentRecord",
-}, smithy.ShapeTypeStructure, 14)
-var IncidentRecord_arn *smithy.Schema
-
-var IncidentRecord_title *smithy.Schema
-
-var IncidentRecord_summary *smithy.Schema
-
-var IncidentRecord_status *smithy.Schema
-
-var IncidentRecord_impact *smithy.Schema
-
-var IncidentRecord_creationTime *smithy.Schema
-
-var IncidentRecord_resolvedTime *smithy.Schema
-
-var IncidentRecord_lastModifiedTime *smithy.Schema
-
-var IncidentRecord_lastModifiedBy *smithy.Schema
-
-var IncidentRecord_automationExecutions *smithy.Schema
-
-var IncidentRecord_incidentRecordSource *smithy.Schema
-
-var IncidentRecord_dedupeString *smithy.Schema
-
-var IncidentRecord_chatChannel *smithy.Schema
-
-var IncidentRecord_notificationTargets *smithy.Schema
-
-var IncidentRecordSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentRecordSource",
-}, smithy.ShapeTypeStructure, 4)
-var IncidentRecordSource_createdBy *smithy.Schema
-
-var IncidentRecordSource_invokedBy *smithy.Schema
-
-var IncidentRecordSource_resourceArn *smithy.Schema
-
-var IncidentRecordSource_source *smithy.Schema
-
-var _IncidentRecordStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentRecordStatus",
-}, smithy.ShapeTypeString, 0)
-
-var IncidentRecordSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentRecordSummary",
-}, smithy.ShapeTypeStructure, 7)
-var IncidentRecordSummary_arn *smithy.Schema
-
-var IncidentRecordSummary_title *smithy.Schema
-
-var IncidentRecordSummary_status *smithy.Schema
-
-var IncidentRecordSummary_impact *smithy.Schema
-
-var IncidentRecordSummary_creationTime *smithy.Schema
-
-var IncidentRecordSummary_resolvedTime *smithy.Schema
-
-var IncidentRecordSummary_incidentRecordSource *smithy.Schema
-
-var _IncidentRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentRecordSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _IncidentRecordSummaryList_member *smithy.Schema
-
-var _IncidentSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentSource",
-}, smithy.ShapeTypeString, 0)
-
-var _IncidentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentSummary",
-}, smithy.ShapeTypeString, 0)
-
-var IncidentTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentTemplate",
-}, smithy.ShapeTypeStructure, 6)
-var IncidentTemplate_title *smithy.Schema
-
-var IncidentTemplate_impact *smithy.Schema
-
-var IncidentTemplate_summary *smithy.Schema
-
-var IncidentTemplate_dedupeString *smithy.Schema
-
-var IncidentTemplate_notificationTargets *smithy.Schema
-
-var IncidentTemplate_incidentTags *smithy.Schema
-
-var _IncidentTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IncidentTitle",
-}, smithy.ShapeTypeString, 0)
-
-var _IntegerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "IntegerList",
-}, smithy.ShapeTypeList, 1)
-var _IntegerList_member *smithy.Schema
-
-var Integration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Integration",
-}, smithy.ShapeTypeUnion, 1)
-var Integration_pagerDutyConfiguration *smithy.Schema
-
-var _Integrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Integrations",
-}, smithy.ShapeTypeList, 1)
-var _Integrations_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var ItemIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ItemIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var ItemIdentifier_value *smithy.Schema
-
-var ItemIdentifier_type *smithy.Schema
-
-var _ItemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ItemType",
-}, smithy.ShapeTypeString, 0)
-
-var ItemValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ItemValue",
-}, smithy.ShapeTypeUnion, 4)
-var ItemValue_arn *smithy.Schema
-
-var ItemValue_url *smithy.Schema
-
-var ItemValue_metricDefinition *smithy.Schema
-
-var ItemValue_pagerDutyIncidentDetail *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetricDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "MetricDefinition",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationTargetItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "NotificationTargetItem",
-}, smithy.ShapeTypeUnion, 1)
-var NotificationTargetItem_snsTopicArn *smithy.Schema
-
-var _NotificationTargetSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "NotificationTargetSet",
-}, smithy.ShapeTypeList, 1)
-var _NotificationTargetSet_member *smithy.Schema
-
-var PagerDutyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "PagerDutyConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var PagerDutyConfiguration_name *smithy.Schema
-
-var PagerDutyConfiguration_secretId *smithy.Schema
-
-var PagerDutyConfiguration_pagerDutyIncidentConfiguration *smithy.Schema
-
-var PagerDutyIncidentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "PagerDutyIncidentConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PagerDutyIncidentConfiguration_serviceId *smithy.Schema
-
-var PagerDutyIncidentDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "PagerDutyIncidentDetail",
-}, smithy.ShapeTypeStructure, 3)
-var PagerDutyIncidentDetail_id *smithy.Schema
-
-var PagerDutyIncidentDetail_autoResolve *smithy.Schema
-
-var PagerDutyIncidentDetail_secretId *smithy.Schema
-
-var _Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Policy",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "PolicyId",
-}, smithy.ShapeTypeString, 0)
-
-var _RawData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RawData",
-}, smithy.ShapeTypeString, 0)
-
-var RegionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RegionInfo",
-}, smithy.ShapeTypeStructure, 4)
-var RegionInfo_sseKmsKeyId *smithy.Schema
-
-var RegionInfo_status *smithy.Schema
-
-var RegionInfo_statusMessage *smithy.Schema
-
-var RegionInfo_statusUpdateDateTime *smithy.Schema
-
-var _RegionInfoMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RegionInfoMap",
-}, smithy.ShapeTypeMap, 2)
-var _RegionInfoMap_key *smithy.Schema
-
-var _RegionInfoMap_value *smithy.Schema
-
-var _RegionMapInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RegionMapInput",
-}, smithy.ShapeTypeMap, 2)
-var _RegionMapInput_key *smithy.Schema
-
-var _RegionMapInput_value *smithy.Schema
-
-var RegionMapInputValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RegionMapInputValue",
-}, smithy.ShapeTypeStructure, 1)
-var RegionMapInputValue_sseKmsKeyId *smithy.Schema
-
-var _RegionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RegionName",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RegionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var RelatedItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RelatedItem",
-}, smithy.ShapeTypeStructure, 3)
-var RelatedItem_identifier *smithy.Schema
-
-var RelatedItem_title *smithy.Schema
-
-var RelatedItem_generatedId *smithy.Schema
-
-var _RelatedItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RelatedItemList",
-}, smithy.ShapeTypeList, 1)
-var _RelatedItemList_member *smithy.Schema
-
-var RelatedItemsUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RelatedItemsUpdate",
-}, smithy.ShapeTypeUnion, 2)
-var RelatedItemsUpdate_itemToAdd *smithy.Schema
-
-var RelatedItemsUpdate_itemToRemove *smithy.Schema
-
-var ReplicationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ReplicationSet",
-}, smithy.ShapeTypeStructure, 8)
-var ReplicationSet_arn *smithy.Schema
-
-var ReplicationSet_regionMap *smithy.Schema
-
-var ReplicationSet_status *smithy.Schema
-
-var ReplicationSet_deletionProtected *smithy.Schema
-
-var ReplicationSet_createdTime *smithy.Schema
-
-var ReplicationSet_createdBy *smithy.Schema
-
-var ReplicationSet_lastModifiedTime *smithy.Schema
-
-var ReplicationSet_lastModifiedBy *smithy.Schema
-
-var _ReplicationSetArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ReplicationSetArnList",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationSetArnList_member *smithy.Schema
-
-var _ReplicationSetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ReplicationSetStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceIdentifier *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeStructure, 3)
-var ResourcePolicy_policyDocument *smithy.Schema
-
-var ResourcePolicy_policyId *smithy.Schema
-
-var ResourcePolicy_ramResourceShareRegion *smithy.Schema
-
-var _ResourcePolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResourcePolicyList",
-}, smithy.ShapeTypeList, 1)
-var _ResourcePolicyList_member *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ResponsePlanDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResponsePlanDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _ResponsePlanName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResponsePlanName",
-}, smithy.ShapeTypeString, 0)
-
-var ResponsePlanSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResponsePlanSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ResponsePlanSummary_arn *smithy.Schema
-
-var ResponsePlanSummary_name *smithy.Schema
-
-var ResponsePlanSummary_displayName *smithy.Schema
-
-var _ResponsePlanSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ResponsePlanSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ResponsePlanSummaryList_member *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ServicePrincipal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ServicePrincipal",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceIdentifier *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SnsArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SnsArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeString, 0)
-
-var _SseKmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SseKmsKey",
-}, smithy.ShapeTypeString, 0)
-
-var SsmAutomation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SsmAutomation",
-}, smithy.ShapeTypeStructure, 6)
-var SsmAutomation_roleArn *smithy.Schema
-
-var SsmAutomation_documentName *smithy.Schema
-
-var SsmAutomation_documentVersion *smithy.Schema
-
-var SsmAutomation_targetAccount *smithy.Schema
-
-var SsmAutomation_parameters *smithy.Schema
-
-var SsmAutomation_dynamicParameters *smithy.Schema
-
-var _SsmContactsArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SsmContactsArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SsmParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SsmParameters",
-}, smithy.ShapeTypeMap, 2)
-var _SsmParameters_key *smithy.Schema
-
-var _SsmParameters_value *smithy.Schema
-
-var _SsmParameterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SsmParameterValues",
-}, smithy.ShapeTypeList, 1)
-var _SsmParameterValues_member *smithy.Schema
-
-var _SsmTargetAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "SsmTargetAccount",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagMapUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagMapUpdate",
-}, smithy.ShapeTypeMap, 2)
-var _TagMapUpdate_key *smithy.Schema
-
-var _TagMapUpdate_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var TimelineEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TimelineEvent",
-}, smithy.ShapeTypeStructure, 7)
-var TimelineEvent_incidentRecordArn *smithy.Schema
-
-var TimelineEvent_eventId *smithy.Schema
-
-var TimelineEvent_eventTime *smithy.Schema
-
-var TimelineEvent_eventUpdatedTime *smithy.Schema
-
-var TimelineEvent_eventType *smithy.Schema
-
-var TimelineEvent_eventData *smithy.Schema
-
-var TimelineEvent_eventReferences *smithy.Schema
-
-var _TimelineEventSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TimelineEventSort",
-}, smithy.ShapeTypeString, 0)
-
-var _TimelineEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TimelineEventType",
-}, smithy.ShapeTypeString, 0)
-
-var TriggerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TriggerDetails",
-}, smithy.ShapeTypeStructure, 4)
-var TriggerDetails_source *smithy.Schema
-
-var TriggerDetails_triggerArn *smithy.Schema
-
-var TriggerDetails_timestamp *smithy.Schema
-
-var TriggerDetails_rawData *smithy.Schema
-
-var _UpdateActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateActionList",
-}, smithy.ShapeTypeList, 1)
-var _UpdateActionList_member *smithy.Schema
-
-var UpdateReplicationSetAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateReplicationSetAction",
-}, smithy.ShapeTypeUnion, 2)
-var UpdateReplicationSetAction_addRegionAction *smithy.Schema
-
-var UpdateReplicationSetAction_deleteRegionAction *smithy.Schema
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _VariableType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "VariableType",
-}, smithy.ShapeTypeString, 0)
-
-var BatchGetIncidentFindingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "BatchGetIncidentFindingsInput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetIncidentFindingsInput_incidentRecordArn *smithy.Schema
-
-var BatchGetIncidentFindingsInput_findingIds *smithy.Schema
-
-var BatchGetIncidentFindingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "BatchGetIncidentFindingsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetIncidentFindingsOutput_findings *smithy.Schema
-
-var BatchGetIncidentFindingsOutput_errors *smithy.Schema
-
-var CreateReplicationSetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateReplicationSetInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateReplicationSetInput_regions *smithy.Schema
-
-var CreateReplicationSetInput_clientToken *smithy.Schema
-
-var CreateReplicationSetInput_tags *smithy.Schema
-
-var CreateReplicationSetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateReplicationSetOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateReplicationSetOutput_arn *smithy.Schema
-
-var CreateResponsePlanInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateResponsePlanInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateResponsePlanInput_clientToken *smithy.Schema
-
-var CreateResponsePlanInput_name *smithy.Schema
-
-var CreateResponsePlanInput_displayName *smithy.Schema
-
-var CreateResponsePlanInput_incidentTemplate *smithy.Schema
-
-var CreateResponsePlanInput_chatChannel *smithy.Schema
-
-var CreateResponsePlanInput_engagements *smithy.Schema
-
-var CreateResponsePlanInput_actions *smithy.Schema
-
-var CreateResponsePlanInput_tags *smithy.Schema
-
-var CreateResponsePlanInput_integrations *smithy.Schema
-
-var CreateResponsePlanOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateResponsePlanOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResponsePlanOutput_arn *smithy.Schema
-
-var CreateTimelineEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateTimelineEventInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateTimelineEventInput_clientToken *smithy.Schema
-
-var CreateTimelineEventInput_incidentRecordArn *smithy.Schema
-
-var CreateTimelineEventInput_eventTime *smithy.Schema
-
-var CreateTimelineEventInput_eventType *smithy.Schema
-
-var CreateTimelineEventInput_eventData *smithy.Schema
-
-var CreateTimelineEventInput_eventReferences *smithy.Schema
-
-var CreateTimelineEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "CreateTimelineEventOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTimelineEventOutput_incidentRecordArn *smithy.Schema
-
-var CreateTimelineEventOutput_eventId *smithy.Schema
-
-var DeleteIncidentRecordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteIncidentRecordInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIncidentRecordInput_arn *smithy.Schema
-
-var DeleteIncidentRecordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteIncidentRecordOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteReplicationSetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteReplicationSetInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReplicationSetInput_arn *smithy.Schema
-
-var DeleteReplicationSetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteReplicationSetOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourcePolicyInput_resourceArn *smithy.Schema
-
-var DeleteResourcePolicyInput_policyId *smithy.Schema
-
-var DeleteResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResponsePlanInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteResponsePlanInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResponsePlanInput_arn *smithy.Schema
-
-var DeleteResponsePlanOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteResponsePlanOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTimelineEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteTimelineEventInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTimelineEventInput_incidentRecordArn *smithy.Schema
-
-var DeleteTimelineEventInput_eventId *smithy.Schema
-
-var DeleteTimelineEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "DeleteTimelineEventOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetIncidentRecordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetIncidentRecordInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetIncidentRecordInput_arn *smithy.Schema
-
-var GetIncidentRecordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetIncidentRecordOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetIncidentRecordOutput_incidentRecord *smithy.Schema
-
-var GetReplicationSetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetReplicationSetInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetReplicationSetInput_arn *smithy.Schema
-
-var GetReplicationSetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetReplicationSetOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetReplicationSetOutput_replicationSet *smithy.Schema
-
-var GetResourcePoliciesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetResourcePoliciesInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetResourcePoliciesInput_resourceArn *smithy.Schema
-
-var GetResourcePoliciesInput_maxResults *smithy.Schema
-
-var GetResourcePoliciesInput_nextToken *smithy.Schema
-
-var GetResourcePoliciesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetResourcePoliciesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePoliciesOutput_resourcePolicies *smithy.Schema
-
-var GetResourcePoliciesOutput_nextToken *smithy.Schema
-
-var GetResponsePlanInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetResponsePlanInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResponsePlanInput_arn *smithy.Schema
-
-var GetResponsePlanOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetResponsePlanOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetResponsePlanOutput_arn *smithy.Schema
-
-var GetResponsePlanOutput_name *smithy.Schema
-
-var GetResponsePlanOutput_displayName *smithy.Schema
-
-var GetResponsePlanOutput_incidentTemplate *smithy.Schema
-
-var GetResponsePlanOutput_chatChannel *smithy.Schema
-
-var GetResponsePlanOutput_engagements *smithy.Schema
-
-var GetResponsePlanOutput_actions *smithy.Schema
-
-var GetResponsePlanOutput_integrations *smithy.Schema
-
-var GetTimelineEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetTimelineEventInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetTimelineEventInput_incidentRecordArn *smithy.Schema
-
-var GetTimelineEventInput_eventId *smithy.Schema
-
-var GetTimelineEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "GetTimelineEventOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTimelineEventOutput_event *smithy.Schema
-
-var ListIncidentFindingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListIncidentFindingsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListIncidentFindingsInput_incidentRecordArn *smithy.Schema
-
-var ListIncidentFindingsInput_maxResults *smithy.Schema
-
-var ListIncidentFindingsInput_nextToken *smithy.Schema
-
-var ListIncidentFindingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListIncidentFindingsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListIncidentFindingsOutput_findings *smithy.Schema
-
-var ListIncidentFindingsOutput_nextToken *smithy.Schema
-
-var ListIncidentRecordsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListIncidentRecordsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListIncidentRecordsInput_filters *smithy.Schema
-
-var ListIncidentRecordsInput_maxResults *smithy.Schema
-
-var ListIncidentRecordsInput_nextToken *smithy.Schema
-
-var ListIncidentRecordsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListIncidentRecordsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListIncidentRecordsOutput_incidentRecordSummaries *smithy.Schema
-
-var ListIncidentRecordsOutput_nextToken *smithy.Schema
-
-var ListRelatedItemsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListRelatedItemsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListRelatedItemsInput_incidentRecordArn *smithy.Schema
-
-var ListRelatedItemsInput_maxResults *smithy.Schema
-
-var ListRelatedItemsInput_nextToken *smithy.Schema
-
-var ListRelatedItemsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListRelatedItemsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRelatedItemsOutput_relatedItems *smithy.Schema
-
-var ListRelatedItemsOutput_nextToken *smithy.Schema
-
-var ListReplicationSetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListReplicationSetsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListReplicationSetsInput_maxResults *smithy.Schema
-
-var ListReplicationSetsInput_nextToken *smithy.Schema
-
-var ListReplicationSetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListReplicationSetsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListReplicationSetsOutput_replicationSetArns *smithy.Schema
-
-var ListReplicationSetsOutput_nextToken *smithy.Schema
-
-var ListResponsePlansInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListResponsePlansInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListResponsePlansInput_maxResults *smithy.Schema
-
-var ListResponsePlansInput_nextToken *smithy.Schema
-
-var ListResponsePlansOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListResponsePlansOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListResponsePlansOutput_responsePlanSummaries *smithy.Schema
-
-var ListResponsePlansOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTimelineEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListTimelineEventsInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListTimelineEventsInput_incidentRecordArn *smithy.Schema
-
-var ListTimelineEventsInput_filters *smithy.Schema
-
-var ListTimelineEventsInput_sortBy *smithy.Schema
-
-var ListTimelineEventsInput_sortOrder *smithy.Schema
-
-var ListTimelineEventsInput_maxResults *smithy.Schema
-
-var ListTimelineEventsInput_nextToken *smithy.Schema
-
-var ListTimelineEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "ListTimelineEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTimelineEventsOutput_eventSummaries *smithy.Schema
-
-var ListTimelineEventsOutput_nextToken *smithy.Schema
-
-var PutResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "PutResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyInput_resourceArn *smithy.Schema
-
-var PutResourcePolicyInput_policy *smithy.Schema
-
-var PutResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "PutResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutResourcePolicyOutput_policyId *smithy.Schema
-
-var StartIncidentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "StartIncidentInput",
-}, smithy.ShapeTypeStructure, 6)
-var StartIncidentInput_clientToken *smithy.Schema
-
-var StartIncidentInput_responsePlanArn *smithy.Schema
-
-var StartIncidentInput_title *smithy.Schema
-
-var StartIncidentInput_impact *smithy.Schema
-
-var StartIncidentInput_triggerDetails *smithy.Schema
-
-var StartIncidentInput_relatedItems *smithy.Schema
-
-var StartIncidentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "StartIncidentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartIncidentOutput_incidentRecordArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDeletionProtectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateDeletionProtectionInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDeletionProtectionInput_arn *smithy.Schema
-
-var UpdateDeletionProtectionInput_deletionProtected *smithy.Schema
-
-var UpdateDeletionProtectionInput_clientToken *smithy.Schema
-
-var UpdateDeletionProtectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateDeletionProtectionOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateIncidentRecordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateIncidentRecordInput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateIncidentRecordInput_clientToken *smithy.Schema
-
-var UpdateIncidentRecordInput_arn *smithy.Schema
-
-var UpdateIncidentRecordInput_title *smithy.Schema
-
-var UpdateIncidentRecordInput_summary *smithy.Schema
-
-var UpdateIncidentRecordInput_impact *smithy.Schema
-
-var UpdateIncidentRecordInput_status *smithy.Schema
-
-var UpdateIncidentRecordInput_chatChannel *smithy.Schema
-
-var UpdateIncidentRecordInput_notificationTargets *smithy.Schema
-
-var UpdateIncidentRecordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateIncidentRecordOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRelatedItemsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateRelatedItemsInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRelatedItemsInput_clientToken *smithy.Schema
-
-var UpdateRelatedItemsInput_incidentRecordArn *smithy.Schema
-
-var UpdateRelatedItemsInput_relatedItemsUpdate *smithy.Schema
-
-var UpdateRelatedItemsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateRelatedItemsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateReplicationSetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateReplicationSetInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateReplicationSetInput_arn *smithy.Schema
-
-var UpdateReplicationSetInput_actions *smithy.Schema
-
-var UpdateReplicationSetInput_clientToken *smithy.Schema
-
-var UpdateReplicationSetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateReplicationSetOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateResponsePlanInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateResponsePlanInput",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateResponsePlanInput_clientToken *smithy.Schema
-
-var UpdateResponsePlanInput_arn *smithy.Schema
-
-var UpdateResponsePlanInput_displayName *smithy.Schema
-
-var UpdateResponsePlanInput_incidentTemplateTitle *smithy.Schema
-
-var UpdateResponsePlanInput_incidentTemplateImpact *smithy.Schema
-
-var UpdateResponsePlanInput_incidentTemplateSummary *smithy.Schema
-
-var UpdateResponsePlanInput_incidentTemplateDedupeString *smithy.Schema
-
-var UpdateResponsePlanInput_incidentTemplateNotificationTargets *smithy.Schema
-
-var UpdateResponsePlanInput_chatChannel *smithy.Schema
-
-var UpdateResponsePlanInput_engagements *smithy.Schema
-
-var UpdateResponsePlanInput_actions *smithy.Schema
-
-var UpdateResponsePlanInput_incidentTemplateTags *smithy.Schema
-
-var UpdateResponsePlanInput_integrations *smithy.Schema
-
-var UpdateResponsePlanOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateResponsePlanOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateTimelineEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateTimelineEventInput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateTimelineEventInput_clientToken *smithy.Schema
-
-var UpdateTimelineEventInput_incidentRecordArn *smithy.Schema
-
-var UpdateTimelineEventInput_eventId *smithy.Schema
-
-var UpdateTimelineEventInput_eventTime *smithy.Schema
-
-var UpdateTimelineEventInput_eventType *smithy.Schema
-
-var UpdateTimelineEventInput_eventData *smithy.Schema
-
-var UpdateTimelineEventInput_eventReferences *smithy.Schema
-
-var UpdateTimelineEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmincidents",
-	Name:      "UpdateTimelineEventOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ExceptionMessage)
-
-	_SsmParameterValues_member = _SsmParameterValues.AddMember("member", smithyprelude.String)
-
-	_SsmParameters_key = _SsmParameters.AddMember("key", smithyprelude.String)
-
-	_SsmParameters_value = _SsmParameters.AddMember("value", _SsmParameterValues)
-
-	DynamicSsmParameterValue_variable = DynamicSsmParameterValue.AddMember("variable", _VariableType)
-
-	_DynamicSsmParameters_key = _DynamicSsmParameters.AddMember("key", smithyprelude.String)
-
-	_DynamicSsmParameters_value = _DynamicSsmParameters.AddMember("value", DynamicSsmParameterValue)
-
-	SsmAutomation_roleArn = SsmAutomation.AddMember("roleArn", _RoleArn)
-
-	SsmAutomation_documentName = SsmAutomation.AddMember("documentName", smithyprelude.String)
-
-	SsmAutomation_documentVersion = SsmAutomation.AddMember("documentVersion", smithyprelude.String)
-
-	SsmAutomation_targetAccount = SsmAutomation.AddMember("targetAccount", _SsmTargetAccount)
-
-	SsmAutomation_parameters = SsmAutomation.AddMember("parameters", _SsmParameters)
-
-	SsmAutomation_dynamicParameters = SsmAutomation.AddMember("dynamicParameters", _DynamicSsmParameters)
-
-	Action_ssmAutomation = Action.AddMember("ssmAutomation", SsmAutomation)
-
-	_ActionsList_member = _ActionsList.AddMember("member", Action)
-
-	AddRegionAction_regionName = AddRegionAction.AddMember("regionName", _RegionName)
-
-	AddRegionAction_sseKmsKeyId = AddRegionAction.AddMember("sseKmsKeyId", _SseKmsKey)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	_IntegerList_member = _IntegerList.AddMember("member", smithyprelude.Integer)
-
-	AttributeValueList_stringValues = AttributeValueList.AddMember("stringValues", _StringList)
-
-	AttributeValueList_integerValues = AttributeValueList.AddMember("integerValues", _IntegerList)
-
-	AutomationExecution_ssmExecutionArn = AutomationExecution.AddMember("ssmExecutionArn", _Arn)
-
-	_AutomationExecutionSet_member = _AutomationExecutionSet.AddMember("member", AutomationExecution)
-
-	BatchGetIncidentFindingsError_findingId = BatchGetIncidentFindingsError.AddMember("findingId", _FindingId)
-
-	BatchGetIncidentFindingsError_code = BatchGetIncidentFindingsError.AddMember("code", smithyprelude.String)
-
-	BatchGetIncidentFindingsError_message = BatchGetIncidentFindingsError.AddMember("message", smithyprelude.String)
-
-	_BatchGetIncidentFindingsErrorList_member = _BatchGetIncidentFindingsErrorList.AddMember("member", BatchGetIncidentFindingsError)
-
-	_ChatbotSnsConfigurationSet_member = _ChatbotSnsConfigurationSet.AddMember("member", _SnsArn)
-
-	ChatChannel_empty = ChatChannel.AddMember("empty", EmptyChatChannel)
-
-	ChatChannel_chatbotSns = ChatChannel.AddMember("chatbotSns", _ChatbotSnsConfigurationSet)
-
-	CloudFormationStackUpdate_startTime = CloudFormationStackUpdate.AddMember("startTime", smithyprelude.Timestamp)
-
-	CloudFormationStackUpdate_endTime = CloudFormationStackUpdate.AddMember("endTime", smithyprelude.Timestamp)
-
-	CloudFormationStackUpdate_stackArn = CloudFormationStackUpdate.AddMember("stackArn", _Arn)
-
-	CodeDeployDeployment_startTime = CodeDeployDeployment.AddMember("startTime", smithyprelude.Timestamp)
-
-	CodeDeployDeployment_endTime = CodeDeployDeployment.AddMember("endTime", smithyprelude.Timestamp)
-
-	CodeDeployDeployment_deploymentGroupArn = CodeDeployDeployment.AddMember("deploymentGroupArn", _Arn)
-
-	CodeDeployDeployment_deploymentId = CodeDeployDeployment.AddMember("deploymentId", smithyprelude.String)
-
-	Condition_before = Condition.AddMember("before", smithyprelude.Timestamp)
-
-	Condition_after = Condition.AddMember("after", smithyprelude.Timestamp)
-
-	Condition_equals = Condition.AddMember("equals", AttributeValueList)
-
-	ConflictException_message = ConflictException.AddMember("message", _ExceptionMessage)
-
-	ConflictException_resourceIdentifier = ConflictException.AddMember("resourceIdentifier", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _ResourceType)
-
-	ConflictException_retryAfter = ConflictException.AddMember("retryAfter", smithyprelude.Timestamp)
-
-	DeleteRegionAction_regionName = DeleteRegionAction.AddMember("regionName", _RegionName)
-
-	_EngagementSet_member = _EngagementSet.AddMember("member", _SsmContactsArn)
-
-	EventReference_resource = EventReference.AddMember("resource", _Arn)
-
-	EventReference_relatedItemId = EventReference.AddMember("relatedItemId", _GeneratedId)
-
-	_EventReferenceList_member = _EventReferenceList.AddMember("member", EventReference)
-
-	EventSummary_incidentRecordArn = EventSummary.AddMember("incidentRecordArn", _Arn)
-
-	EventSummary_eventId = EventSummary.AddMember("eventId", _UUID)
-
-	EventSummary_eventTime = EventSummary.AddMember("eventTime", smithyprelude.Timestamp)
-
-	EventSummary_eventUpdatedTime = EventSummary.AddMember("eventUpdatedTime", smithyprelude.Timestamp)
-
-	EventSummary_eventType = EventSummary.AddMember("eventType", _TimelineEventType)
-
-	EventSummary_eventReferences = EventSummary.AddMember("eventReferences", _EventReferenceList)
-
-	_EventSummaryList_member = _EventSummaryList.AddMember("member", EventSummary)
-
-	Filter_key = Filter.AddMember("key", smithyprelude.String)
-
-	Filter_condition = Filter.AddMember("condition", Condition)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	FindingDetails_codeDeployDeployment = FindingDetails.AddMember("codeDeployDeployment", CodeDeployDeployment)
-
-	FindingDetails_cloudFormationStackUpdate = FindingDetails.AddMember("cloudFormationStackUpdate", CloudFormationStackUpdate)
-
-	Finding_id = Finding.AddMember("id", _FindingId)
-
-	Finding_creationTime = Finding.AddMember("creationTime", smithyprelude.Timestamp)
-
-	Finding_lastModifiedTime = Finding.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	Finding_details = Finding.AddMember("details", FindingDetails)
-
-	_FindingIdList_member = _FindingIdList.AddMember("member", _FindingId)
-
-	_FindingList_member = _FindingList.AddMember("member", Finding)
-
-	FindingSummary_id = FindingSummary.AddMember("id", _FindingId)
-
-	FindingSummary_lastModifiedTime = FindingSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	_FindingSummaryList_member = _FindingSummaryList.AddMember("member", FindingSummary)
-
-	IncidentRecordSource_createdBy = IncidentRecordSource.AddMember("createdBy", _Arn)
-
-	IncidentRecordSource_invokedBy = IncidentRecordSource.AddMember("invokedBy", _ServicePrincipal)
-
-	IncidentRecordSource_resourceArn = IncidentRecordSource.AddMember("resourceArn", _Arn)
-
-	IncidentRecordSource_source = IncidentRecordSource.AddMember("source", _IncidentSource)
-
-	NotificationTargetItem_snsTopicArn = NotificationTargetItem.AddMember("snsTopicArn", _Arn)
-
-	_NotificationTargetSet_member = _NotificationTargetSet.AddMember("member", NotificationTargetItem)
-
-	IncidentRecord_arn = IncidentRecord.AddMember("arn", _Arn)
-
-	IncidentRecord_title = IncidentRecord.AddMember("title", _IncidentTitle)
-
-	IncidentRecord_summary = IncidentRecord.AddMember("summary", _IncidentSummary)
-
-	IncidentRecord_status = IncidentRecord.AddMember("status", _IncidentRecordStatus)
-
-	IncidentRecord_impact = IncidentRecord.AddMember("impact", _Impact)
-
-	IncidentRecord_creationTime = IncidentRecord.AddMember("creationTime", smithyprelude.Timestamp)
-
-	IncidentRecord_resolvedTime = IncidentRecord.AddMember("resolvedTime", smithyprelude.Timestamp)
-
-	IncidentRecord_lastModifiedTime = IncidentRecord.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	IncidentRecord_lastModifiedBy = IncidentRecord.AddMember("lastModifiedBy", _Arn)
-
-	IncidentRecord_automationExecutions = IncidentRecord.AddMember("automationExecutions", _AutomationExecutionSet)
-
-	IncidentRecord_incidentRecordSource = IncidentRecord.AddMember("incidentRecordSource", IncidentRecordSource)
-
-	IncidentRecord_dedupeString = IncidentRecord.AddMember("dedupeString", _DedupeString)
-
-	IncidentRecord_chatChannel = IncidentRecord.AddMember("chatChannel", ChatChannel)
-
-	IncidentRecord_notificationTargets = IncidentRecord.AddMember("notificationTargets", _NotificationTargetSet)
-
-	IncidentRecordSummary_arn = IncidentRecordSummary.AddMember("arn", _Arn)
-
-	IncidentRecordSummary_title = IncidentRecordSummary.AddMember("title", _IncidentTitle)
-
-	IncidentRecordSummary_status = IncidentRecordSummary.AddMember("status", _IncidentRecordStatus)
-
-	IncidentRecordSummary_impact = IncidentRecordSummary.AddMember("impact", _Impact)
-
-	IncidentRecordSummary_creationTime = IncidentRecordSummary.AddMember("creationTime", smithyprelude.Timestamp)
-
-	IncidentRecordSummary_resolvedTime = IncidentRecordSummary.AddMember("resolvedTime", smithyprelude.Timestamp)
-
-	IncidentRecordSummary_incidentRecordSource = IncidentRecordSummary.AddMember("incidentRecordSource", IncidentRecordSource)
-
-	_IncidentRecordSummaryList_member = _IncidentRecordSummaryList.AddMember("member", IncidentRecordSummary)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	IncidentTemplate_title = IncidentTemplate.AddMember("title", _IncidentTitle)
-
-	IncidentTemplate_impact = IncidentTemplate.AddMember("impact", _Impact)
-
-	IncidentTemplate_summary = IncidentTemplate.AddMember("summary", _IncidentSummary)
-
-	IncidentTemplate_dedupeString = IncidentTemplate.AddMember("dedupeString", _DedupeString)
-
-	IncidentTemplate_notificationTargets = IncidentTemplate.AddMember("notificationTargets", _NotificationTargetSet)
-
-	IncidentTemplate_incidentTags = IncidentTemplate.AddMember("incidentTags", _TagMap)
-
-	PagerDutyIncidentConfiguration_serviceId = PagerDutyIncidentConfiguration.AddMember("serviceId", smithyprelude.String)
-
-	PagerDutyConfiguration_name = PagerDutyConfiguration.AddMember("name", smithyprelude.String)
-
-	PagerDutyConfiguration_secretId = PagerDutyConfiguration.AddMember("secretId", smithyprelude.String)
-
-	PagerDutyConfiguration_pagerDutyIncidentConfiguration = PagerDutyConfiguration.AddMember("pagerDutyIncidentConfiguration", PagerDutyIncidentConfiguration)
-
-	Integration_pagerDutyConfiguration = Integration.AddMember("pagerDutyConfiguration", PagerDutyConfiguration)
-
-	_Integrations_member = _Integrations.AddMember("member", Integration)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
-
-	PagerDutyIncidentDetail_id = PagerDutyIncidentDetail.AddMember("id", smithyprelude.String)
-
-	PagerDutyIncidentDetail_autoResolve = PagerDutyIncidentDetail.AddMember("autoResolve", smithyprelude.Boolean)
-
-	PagerDutyIncidentDetail_secretId = PagerDutyIncidentDetail.AddMember("secretId", smithyprelude.String)
-
-	ItemValue_arn = ItemValue.AddMember("arn", _Arn)
-
-	ItemValue_url = ItemValue.AddMember("url", _Url)
-
-	ItemValue_metricDefinition = ItemValue.AddMember("metricDefinition", _MetricDefinition)
-
-	ItemValue_pagerDutyIncidentDetail = ItemValue.AddMember("pagerDutyIncidentDetail", PagerDutyIncidentDetail)
-
-	ItemIdentifier_value = ItemIdentifier.AddMember("value", ItemValue)
-
-	ItemIdentifier_type = ItemIdentifier.AddMember("type", _ItemType)
-
-	RegionInfo_sseKmsKeyId = RegionInfo.AddMember("sseKmsKeyId", _SseKmsKey)
-
-	RegionInfo_status = RegionInfo.AddMember("status", _RegionStatus)
-
-	RegionInfo_statusMessage = RegionInfo.AddMember("statusMessage", smithyprelude.String)
-
-	RegionInfo_statusUpdateDateTime = RegionInfo.AddMember("statusUpdateDateTime", smithyprelude.Timestamp)
-
-	_RegionInfoMap_key = _RegionInfoMap.AddMember("key", _RegionName)
-
-	_RegionInfoMap_value = _RegionInfoMap.AddMember("value", RegionInfo)
-
-	RegionMapInputValue_sseKmsKeyId = RegionMapInputValue.AddMember("sseKmsKeyId", _SseKmsKey)
-
-	_RegionMapInput_key = _RegionMapInput.AddMember("key", _RegionName)
-
-	_RegionMapInput_value = _RegionMapInput.AddMember("value", RegionMapInputValue)
-
-	RelatedItem_identifier = RelatedItem.AddMember("identifier", ItemIdentifier)
-
-	RelatedItem_title = RelatedItem.AddMember("title", smithyprelude.String)
-
-	RelatedItem_generatedId = RelatedItem.AddMember("generatedId", _GeneratedId)
-
-	_RelatedItemList_member = _RelatedItemList.AddMember("member", RelatedItem)
-
-	RelatedItemsUpdate_itemToAdd = RelatedItemsUpdate.AddMember("itemToAdd", RelatedItem)
-
-	RelatedItemsUpdate_itemToRemove = RelatedItemsUpdate.AddMember("itemToRemove", ItemIdentifier)
-
-	ReplicationSet_arn = ReplicationSet.AddMember("arn", _Arn)
-
-	ReplicationSet_regionMap = ReplicationSet.AddMember("regionMap", _RegionInfoMap)
-
-	ReplicationSet_status = ReplicationSet.AddMember("status", _ReplicationSetStatus)
-
-	ReplicationSet_deletionProtected = ReplicationSet.AddMember("deletionProtected", smithyprelude.Boolean)
-
-	ReplicationSet_createdTime = ReplicationSet.AddMember("createdTime", smithyprelude.Timestamp)
-
-	ReplicationSet_createdBy = ReplicationSet.AddMember("createdBy", _Arn)
-
-	ReplicationSet_lastModifiedTime = ReplicationSet.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	ReplicationSet_lastModifiedBy = ReplicationSet.AddMember("lastModifiedBy", _Arn)
-
-	_ReplicationSetArnList_member = _ReplicationSetArnList.AddMember("member", _Arn)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ExceptionMessage)
-
-	ResourceNotFoundException_resourceIdentifier = ResourceNotFoundException.AddMember("resourceIdentifier", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _ResourceType)
-
-	ResourcePolicy_policyDocument = ResourcePolicy.AddMember("policyDocument", _Policy)
-
-	ResourcePolicy_policyId = ResourcePolicy.AddMember("policyId", _PolicyId)
-
-	ResourcePolicy_ramResourceShareRegion = ResourcePolicy.AddMember("ramResourceShareRegion", smithyprelude.String)
-
-	_ResourcePolicyList_member = _ResourcePolicyList.AddMember("member", ResourcePolicy)
-
-	ResponsePlanSummary_arn = ResponsePlanSummary.AddMember("arn", _Arn)
-
-	ResponsePlanSummary_name = ResponsePlanSummary.AddMember("name", _ResponsePlanName)
-
-	ResponsePlanSummary_displayName = ResponsePlanSummary.AddMember("displayName", _ResponsePlanDisplayName)
-
-	_ResponsePlanSummaryList_member = _ResponsePlanSummaryList.AddMember("member", ResponsePlanSummary)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ExceptionMessage)
-
-	ServiceQuotaExceededException_resourceIdentifier = ServiceQuotaExceededException.AddMember("resourceIdentifier", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _ServiceCode)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMapUpdate_key = _TagMapUpdate.AddMember("key", _TagKey)
-
-	_TagMapUpdate_value = _TagMapUpdate.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ExceptionMessage)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _ServiceCode)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	TimelineEvent_incidentRecordArn = TimelineEvent.AddMember("incidentRecordArn", _Arn)
-
-	TimelineEvent_eventId = TimelineEvent.AddMember("eventId", _UUID)
-
-	TimelineEvent_eventTime = TimelineEvent.AddMember("eventTime", smithyprelude.Timestamp)
-
-	TimelineEvent_eventUpdatedTime = TimelineEvent.AddMember("eventUpdatedTime", smithyprelude.Timestamp)
-
-	TimelineEvent_eventType = TimelineEvent.AddMember("eventType", _TimelineEventType)
-
-	TimelineEvent_eventData = TimelineEvent.AddMember("eventData", _EventData)
-
-	TimelineEvent_eventReferences = TimelineEvent.AddMember("eventReferences", _EventReferenceList)
-
-	TriggerDetails_source = TriggerDetails.AddMember("source", _IncidentSource)
-
-	TriggerDetails_triggerArn = TriggerDetails.AddMember("triggerArn", _Arn)
-
-	TriggerDetails_timestamp = TriggerDetails.AddMember("timestamp", smithyprelude.Timestamp)
-
-	TriggerDetails_rawData = TriggerDetails.AddMember("rawData", _RawData)
-
-	UpdateReplicationSetAction_addRegionAction = UpdateReplicationSetAction.AddMember("addRegionAction", AddRegionAction)
-
-	UpdateReplicationSetAction_deleteRegionAction = UpdateReplicationSetAction.AddMember("deleteRegionAction", DeleteRegionAction)
-
-	_UpdateActionList_member = _UpdateActionList.AddMember("member", UpdateReplicationSetAction)
-
-	ValidationException_message = ValidationException.AddMember("message", _ExceptionMessage)
-
-	BatchGetIncidentFindingsInput_incidentRecordArn = BatchGetIncidentFindingsInput.AddMember("incidentRecordArn", _Arn)
-
-	BatchGetIncidentFindingsInput_findingIds = BatchGetIncidentFindingsInput.AddMember("findingIds", _FindingIdList)
-
-	BatchGetIncidentFindingsOutput_findings = BatchGetIncidentFindingsOutput.AddMember("findings", _FindingList)
-
-	BatchGetIncidentFindingsOutput_errors = BatchGetIncidentFindingsOutput.AddMember("errors", _BatchGetIncidentFindingsErrorList)
-
-	CreateReplicationSetInput_regions = CreateReplicationSetInput.AddMember("regions", _RegionMapInput)
-
-	CreateReplicationSetInput_clientToken = CreateReplicationSetInput.AddMember("clientToken", _ClientToken)
-
-	CreateReplicationSetInput_tags = CreateReplicationSetInput.AddMember("tags", _TagMap)
-
-	CreateReplicationSetOutput_arn = CreateReplicationSetOutput.AddMember("arn", _Arn)
-
-	CreateResponsePlanInput_clientToken = CreateResponsePlanInput.AddMember("clientToken", _ClientToken)
-
-	CreateResponsePlanInput_name = CreateResponsePlanInput.AddMember("name", _ResponsePlanName)
-
-	CreateResponsePlanInput_displayName = CreateResponsePlanInput.AddMember("displayName", _ResponsePlanDisplayName)
-
-	CreateResponsePlanInput_incidentTemplate = CreateResponsePlanInput.AddMember("incidentTemplate", IncidentTemplate)
-
-	CreateResponsePlanInput_chatChannel = CreateResponsePlanInput.AddMember("chatChannel", ChatChannel)
-
-	CreateResponsePlanInput_engagements = CreateResponsePlanInput.AddMember("engagements", _EngagementSet)
-
-	CreateResponsePlanInput_actions = CreateResponsePlanInput.AddMember("actions", _ActionsList)
-
-	CreateResponsePlanInput_tags = CreateResponsePlanInput.AddMember("tags", _TagMap)
-
-	CreateResponsePlanInput_integrations = CreateResponsePlanInput.AddMember("integrations", _Integrations)
-
-	CreateResponsePlanOutput_arn = CreateResponsePlanOutput.AddMember("arn", _Arn)
-
-	CreateTimelineEventInput_clientToken = CreateTimelineEventInput.AddMember("clientToken", _ClientToken)
-
-	CreateTimelineEventInput_incidentRecordArn = CreateTimelineEventInput.AddMember("incidentRecordArn", _Arn)
-
-	CreateTimelineEventInput_eventTime = CreateTimelineEventInput.AddMember("eventTime", smithyprelude.Timestamp)
-
-	CreateTimelineEventInput_eventType = CreateTimelineEventInput.AddMember("eventType", _TimelineEventType)
-
-	CreateTimelineEventInput_eventData = CreateTimelineEventInput.AddMember("eventData", _EventData)
-
-	CreateTimelineEventInput_eventReferences = CreateTimelineEventInput.AddMember("eventReferences", _EventReferenceList)
-
-	CreateTimelineEventOutput_incidentRecordArn = CreateTimelineEventOutput.AddMember("incidentRecordArn", _Arn)
-
-	CreateTimelineEventOutput_eventId = CreateTimelineEventOutput.AddMember("eventId", _UUID)
-
-	DeleteIncidentRecordInput_arn = DeleteIncidentRecordInput.AddMember("arn", _Arn)
-
-	DeleteReplicationSetInput_arn = DeleteReplicationSetInput.AddMember("arn", _Arn, &smithytraits.HTTPQuery{Name: "arn"})
-
-	DeleteResourcePolicyInput_resourceArn = DeleteResourcePolicyInput.AddMember("resourceArn", _Arn)
-
-	DeleteResourcePolicyInput_policyId = DeleteResourcePolicyInput.AddMember("policyId", _PolicyId)
-
-	DeleteResponsePlanInput_arn = DeleteResponsePlanInput.AddMember("arn", _Arn)
-
-	DeleteTimelineEventInput_incidentRecordArn = DeleteTimelineEventInput.AddMember("incidentRecordArn", _Arn)
-
-	DeleteTimelineEventInput_eventId = DeleteTimelineEventInput.AddMember("eventId", _UUID)
-
-	GetIncidentRecordInput_arn = GetIncidentRecordInput.AddMember("arn", _Arn, &smithytraits.HTTPQuery{Name: "arn"})
-
-	GetIncidentRecordOutput_incidentRecord = GetIncidentRecordOutput.AddMember("incidentRecord", IncidentRecord)
-
-	GetReplicationSetInput_arn = GetReplicationSetInput.AddMember("arn", _Arn, &smithytraits.HTTPQuery{Name: "arn"})
-
-	GetReplicationSetOutput_replicationSet = GetReplicationSetOutput.AddMember("replicationSet", ReplicationSet)
-
-	GetResourcePoliciesInput_resourceArn = GetResourcePoliciesInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	GetResourcePoliciesInput_maxResults = GetResourcePoliciesInput.AddMember("maxResults", _MaxResults)
-
-	GetResourcePoliciesInput_nextToken = GetResourcePoliciesInput.AddMember("nextToken", _NextToken)
-
-	GetResourcePoliciesOutput_resourcePolicies = GetResourcePoliciesOutput.AddMember("resourcePolicies", _ResourcePolicyList)
-
-	GetResourcePoliciesOutput_nextToken = GetResourcePoliciesOutput.AddMember("nextToken", _NextToken)
-
-	GetResponsePlanInput_arn = GetResponsePlanInput.AddMember("arn", _Arn, &smithytraits.HTTPQuery{Name: "arn"})
-
-	GetResponsePlanOutput_arn = GetResponsePlanOutput.AddMember("arn", _Arn)
-
-	GetResponsePlanOutput_name = GetResponsePlanOutput.AddMember("name", _ResponsePlanName)
-
-	GetResponsePlanOutput_displayName = GetResponsePlanOutput.AddMember("displayName", _ResponsePlanDisplayName)
-
-	GetResponsePlanOutput_incidentTemplate = GetResponsePlanOutput.AddMember("incidentTemplate", IncidentTemplate)
-
-	GetResponsePlanOutput_chatChannel = GetResponsePlanOutput.AddMember("chatChannel", ChatChannel)
-
-	GetResponsePlanOutput_engagements = GetResponsePlanOutput.AddMember("engagements", _EngagementSet)
-
-	GetResponsePlanOutput_actions = GetResponsePlanOutput.AddMember("actions", _ActionsList)
-
-	GetResponsePlanOutput_integrations = GetResponsePlanOutput.AddMember("integrations", _Integrations)
-
-	GetTimelineEventInput_incidentRecordArn = GetTimelineEventInput.AddMember("incidentRecordArn", _Arn, &smithytraits.HTTPQuery{Name: "incidentRecordArn"})
-
-	GetTimelineEventInput_eventId = GetTimelineEventInput.AddMember("eventId", _UUID, &smithytraits.HTTPQuery{Name: "eventId"})
-
-	GetTimelineEventOutput_event = GetTimelineEventOutput.AddMember("event", TimelineEvent)
-
-	ListIncidentFindingsInput_incidentRecordArn = ListIncidentFindingsInput.AddMember("incidentRecordArn", _Arn)
-
-	ListIncidentFindingsInput_maxResults = ListIncidentFindingsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListIncidentFindingsInput_nextToken = ListIncidentFindingsInput.AddMember("nextToken", _NextToken)
-
-	ListIncidentFindingsOutput_findings = ListIncidentFindingsOutput.AddMember("findings", _FindingSummaryList)
-
-	ListIncidentFindingsOutput_nextToken = ListIncidentFindingsOutput.AddMember("nextToken", _NextToken)
-
-	ListIncidentRecordsInput_filters = ListIncidentRecordsInput.AddMember("filters", _FilterList)
-
-	ListIncidentRecordsInput_maxResults = ListIncidentRecordsInput.AddMember("maxResults", _MaxResults)
-
-	ListIncidentRecordsInput_nextToken = ListIncidentRecordsInput.AddMember("nextToken", _NextToken)
-
-	ListIncidentRecordsOutput_incidentRecordSummaries = ListIncidentRecordsOutput.AddMember("incidentRecordSummaries", _IncidentRecordSummaryList)
-
-	ListIncidentRecordsOutput_nextToken = ListIncidentRecordsOutput.AddMember("nextToken", _NextToken)
-
-	ListRelatedItemsInput_incidentRecordArn = ListRelatedItemsInput.AddMember("incidentRecordArn", _Arn)
-
-	ListRelatedItemsInput_maxResults = ListRelatedItemsInput.AddMember("maxResults", _MaxResults)
-
-	ListRelatedItemsInput_nextToken = ListRelatedItemsInput.AddMember("nextToken", _NextToken)
-
-	ListRelatedItemsOutput_relatedItems = ListRelatedItemsOutput.AddMember("relatedItems", _RelatedItemList)
-
-	ListRelatedItemsOutput_nextToken = ListRelatedItemsOutput.AddMember("nextToken", _NextToken)
-
-	ListReplicationSetsInput_maxResults = ListReplicationSetsInput.AddMember("maxResults", _MaxResults)
-
-	ListReplicationSetsInput_nextToken = ListReplicationSetsInput.AddMember("nextToken", _NextToken)
-
-	ListReplicationSetsOutput_replicationSetArns = ListReplicationSetsOutput.AddMember("replicationSetArns", _ReplicationSetArnList)
-
-	ListReplicationSetsOutput_nextToken = ListReplicationSetsOutput.AddMember("nextToken", _NextToken)
-
-	ListResponsePlansInput_maxResults = ListResponsePlansInput.AddMember("maxResults", _MaxResults)
-
-	ListResponsePlansInput_nextToken = ListResponsePlansInput.AddMember("nextToken", _NextToken)
-
-	ListResponsePlansOutput_responsePlanSummaries = ListResponsePlansOutput.AddMember("responsePlanSummaries", _ResponsePlanSummaryList)
-
-	ListResponsePlansOutput_nextToken = ListResponsePlansOutput.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ListTimelineEventsInput_incidentRecordArn = ListTimelineEventsInput.AddMember("incidentRecordArn", _Arn)
-
-	ListTimelineEventsInput_filters = ListTimelineEventsInput.AddMember("filters", _FilterList)
-
-	ListTimelineEventsInput_sortBy = ListTimelineEventsInput.AddMember("sortBy", _TimelineEventSort)
-
-	ListTimelineEventsInput_sortOrder = ListTimelineEventsInput.AddMember("sortOrder", _SortOrder)
-
-	ListTimelineEventsInput_maxResults = ListTimelineEventsInput.AddMember("maxResults", _MaxResults)
-
-	ListTimelineEventsInput_nextToken = ListTimelineEventsInput.AddMember("nextToken", _NextToken)
-
-	ListTimelineEventsOutput_eventSummaries = ListTimelineEventsOutput.AddMember("eventSummaries", _EventSummaryList)
-
-	ListTimelineEventsOutput_nextToken = ListTimelineEventsOutput.AddMember("nextToken", _NextToken)
-
-	PutResourcePolicyInput_resourceArn = PutResourcePolicyInput.AddMember("resourceArn", _Arn)
-
-	PutResourcePolicyInput_policy = PutResourcePolicyInput.AddMember("policy", _Policy)
-
-	PutResourcePolicyOutput_policyId = PutResourcePolicyOutput.AddMember("policyId", _PolicyId)
-
-	StartIncidentInput_clientToken = StartIncidentInput.AddMember("clientToken", _ClientToken)
-
-	StartIncidentInput_responsePlanArn = StartIncidentInput.AddMember("responsePlanArn", _Arn)
-
-	StartIncidentInput_title = StartIncidentInput.AddMember("title", _IncidentTitle)
-
-	StartIncidentInput_impact = StartIncidentInput.AddMember("impact", _Impact)
-
-	StartIncidentInput_triggerDetails = StartIncidentInput.AddMember("triggerDetails", TriggerDetails)
-
-	StartIncidentInput_relatedItems = StartIncidentInput.AddMember("relatedItems", _RelatedItemList)
-
-	StartIncidentOutput_incidentRecordArn = StartIncidentOutput.AddMember("incidentRecordArn", _Arn)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateDeletionProtectionInput_arn = UpdateDeletionProtectionInput.AddMember("arn", _Arn)
-
-	UpdateDeletionProtectionInput_deletionProtected = UpdateDeletionProtectionInput.AddMember("deletionProtected", smithyprelude.Boolean)
-
-	UpdateDeletionProtectionInput_clientToken = UpdateDeletionProtectionInput.AddMember("clientToken", _ClientToken)
-
-	UpdateIncidentRecordInput_clientToken = UpdateIncidentRecordInput.AddMember("clientToken", _ClientToken)
-
-	UpdateIncidentRecordInput_arn = UpdateIncidentRecordInput.AddMember("arn", _Arn)
-
-	UpdateIncidentRecordInput_title = UpdateIncidentRecordInput.AddMember("title", _IncidentTitle)
-
-	UpdateIncidentRecordInput_summary = UpdateIncidentRecordInput.AddMember("summary", _IncidentSummary)
-
-	UpdateIncidentRecordInput_impact = UpdateIncidentRecordInput.AddMember("impact", _Impact)
-
-	UpdateIncidentRecordInput_status = UpdateIncidentRecordInput.AddMember("status", _IncidentRecordStatus)
-
-	UpdateIncidentRecordInput_chatChannel = UpdateIncidentRecordInput.AddMember("chatChannel", ChatChannel)
-
-	UpdateIncidentRecordInput_notificationTargets = UpdateIncidentRecordInput.AddMember("notificationTargets", _NotificationTargetSet)
-
-	UpdateRelatedItemsInput_clientToken = UpdateRelatedItemsInput.AddMember("clientToken", _ClientToken)
-
-	UpdateRelatedItemsInput_incidentRecordArn = UpdateRelatedItemsInput.AddMember("incidentRecordArn", _Arn)
-
-	UpdateRelatedItemsInput_relatedItemsUpdate = UpdateRelatedItemsInput.AddMember("relatedItemsUpdate", RelatedItemsUpdate)
-
-	UpdateReplicationSetInput_arn = UpdateReplicationSetInput.AddMember("arn", _Arn)
-
-	UpdateReplicationSetInput_actions = UpdateReplicationSetInput.AddMember("actions", _UpdateActionList)
-
-	UpdateReplicationSetInput_clientToken = UpdateReplicationSetInput.AddMember("clientToken", _ClientToken)
-
-	UpdateResponsePlanInput_clientToken = UpdateResponsePlanInput.AddMember("clientToken", _ClientToken)
-
-	UpdateResponsePlanInput_arn = UpdateResponsePlanInput.AddMember("arn", _Arn)
-
-	UpdateResponsePlanInput_displayName = UpdateResponsePlanInput.AddMember("displayName", _ResponsePlanDisplayName)
-
-	UpdateResponsePlanInput_incidentTemplateTitle = UpdateResponsePlanInput.AddMember("incidentTemplateTitle", _IncidentTitle)
-
-	UpdateResponsePlanInput_incidentTemplateImpact = UpdateResponsePlanInput.AddMember("incidentTemplateImpact", _Impact)
-
-	UpdateResponsePlanInput_incidentTemplateSummary = UpdateResponsePlanInput.AddMember("incidentTemplateSummary", _IncidentSummary)
-
-	UpdateResponsePlanInput_incidentTemplateDedupeString = UpdateResponsePlanInput.AddMember("incidentTemplateDedupeString", _DedupeString)
-
-	UpdateResponsePlanInput_incidentTemplateNotificationTargets = UpdateResponsePlanInput.AddMember("incidentTemplateNotificationTargets", _NotificationTargetSet)
-
-	UpdateResponsePlanInput_chatChannel = UpdateResponsePlanInput.AddMember("chatChannel", ChatChannel)
-
-	UpdateResponsePlanInput_engagements = UpdateResponsePlanInput.AddMember("engagements", _EngagementSet)
-
-	UpdateResponsePlanInput_actions = UpdateResponsePlanInput.AddMember("actions", _ActionsList)
-
-	UpdateResponsePlanInput_incidentTemplateTags = UpdateResponsePlanInput.AddMember("incidentTemplateTags", _TagMapUpdate)
-
-	UpdateResponsePlanInput_integrations = UpdateResponsePlanInput.AddMember("integrations", _Integrations)
-
-	UpdateTimelineEventInput_clientToken = UpdateTimelineEventInput.AddMember("clientToken", _ClientToken)
-
-	UpdateTimelineEventInput_incidentRecordArn = UpdateTimelineEventInput.AddMember("incidentRecordArn", _Arn)
-
-	UpdateTimelineEventInput_eventId = UpdateTimelineEventInput.AddMember("eventId", _UUID)
-
-	UpdateTimelineEventInput_eventTime = UpdateTimelineEventInput.AddMember("eventTime", smithyprelude.Timestamp)
-
-	UpdateTimelineEventInput_eventType = UpdateTimelineEventInput.AddMember("eventType", _TimelineEventType)
-
-	UpdateTimelineEventInput_eventData = UpdateTimelineEventInput.AddMember("eventData", _EventData)
-
-	UpdateTimelineEventInput_eventReferences = UpdateTimelineEventInput.AddMember("eventReferences", _EventReferenceList)
-
-}
+	Code: 204}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "arn"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "incidentRecordArn"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "eventId"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAction_ssmAutomation}}
+var m_ActionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionsList_member}}
+var mAddRegionAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAddRegionAction_regionName, &sAddRegionAction_sseKmsKeyId}}
+var mAttributeValueList = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeValueList_stringValues, &sAttributeValueList_integerValues}}
+var mAutomationExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomationExecution_ssmExecutionArn}}
+var m_AutomationExecutionSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomationExecutionSet_member}}
+var mBatchGetIncidentFindingsError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetIncidentFindingsError_findingId, &sBatchGetIncidentFindingsError_code, &sBatchGetIncidentFindingsError_message}}
+var m_BatchGetIncidentFindingsErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetIncidentFindingsErrorList_member}}
+var m_ChatbotSnsConfigurationSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChatbotSnsConfigurationSet_member}}
+var mChatChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sChatChannel_empty, &sChatChannel_chatbotSns}}
+var mCloudFormationStackUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudFormationStackUpdate_startTime, &sCloudFormationStackUpdate_endTime, &sCloudFormationStackUpdate_stackArn}}
+var mCodeDeployDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeDeployDeployment_startTime, &sCodeDeployDeployment_endTime, &sCodeDeployDeployment_deploymentGroupArn, &sCodeDeployDeployment_deploymentId}}
+var mCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sCondition_before, &sCondition_after, &sCondition_equals}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceIdentifier, &sConflictException_resourceType, &sConflictException_retryAfter}}
+var mDeleteRegionAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRegionAction_regionName}}
+var m_DynamicSsmParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_DynamicSsmParameters_key, &s_DynamicSsmParameters_value}}
+var mDynamicSsmParameterValue = smithy.SchemaMembers{List: []*smithy.Schema{&sDynamicSsmParameterValue_variable}}
+var m_EngagementSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementSet_member}}
+var mEventReference = smithy.SchemaMembers{List: []*smithy.Schema{&sEventReference_resource, &sEventReference_relatedItemId}}
+var m_EventReferenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventReferenceList_member}}
+var mEventSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSummary_incidentRecordArn, &sEventSummary_eventId, &sEventSummary_eventTime, &sEventSummary_eventUpdatedTime, &sEventSummary_eventType, &sEventSummary_eventReferences}}
+var m_EventSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventSummaryList_member}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_key, &sFilter_condition}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sFinding_id, &sFinding_creationTime, &sFinding_lastModifiedTime, &sFinding_details}}
+var mFindingDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingDetails_codeDeployDeployment, &sFindingDetails_cloudFormationStackUpdate}}
+var m_FindingIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingIdList_member}}
+var m_FindingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingList_member}}
+var mFindingSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingSummary_id, &sFindingSummary_lastModifiedTime}}
+var m_FindingSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingSummaryList_member}}
+var mIncidentRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sIncidentRecord_arn, &sIncidentRecord_title, &sIncidentRecord_summary, &sIncidentRecord_status, &sIncidentRecord_impact, &sIncidentRecord_creationTime, &sIncidentRecord_resolvedTime, &sIncidentRecord_lastModifiedTime, &sIncidentRecord_lastModifiedBy, &sIncidentRecord_automationExecutions, &sIncidentRecord_incidentRecordSource, &sIncidentRecord_dedupeString, &sIncidentRecord_chatChannel, &sIncidentRecord_notificationTargets}, Hash: &hIncidentRecord}
+var mIncidentRecordSource = smithy.SchemaMembers{List: []*smithy.Schema{&sIncidentRecordSource_createdBy, &sIncidentRecordSource_invokedBy, &sIncidentRecordSource_resourceArn, &sIncidentRecordSource_source}}
+var mIncidentRecordSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIncidentRecordSummary_arn, &sIncidentRecordSummary_title, &sIncidentRecordSummary_status, &sIncidentRecordSummary_impact, &sIncidentRecordSummary_creationTime, &sIncidentRecordSummary_resolvedTime, &sIncidentRecordSummary_incidentRecordSource}}
+var m_IncidentRecordSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IncidentRecordSummaryList_member}}
+var mIncidentTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sIncidentTemplate_title, &sIncidentTemplate_impact, &sIncidentTemplate_summary, &sIncidentTemplate_dedupeString, &sIncidentTemplate_notificationTargets, &sIncidentTemplate_incidentTags}}
+var m_IntegerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegerList_member}}
+var mIntegration = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegration_pagerDutyConfiguration}}
+var m_Integrations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Integrations_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mItemIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sItemIdentifier_value, &sItemIdentifier_type}}
+var mItemValue = smithy.SchemaMembers{List: []*smithy.Schema{&sItemValue_arn, &sItemValue_url, &sItemValue_metricDefinition, &sItemValue_pagerDutyIncidentDetail}}
+var mNotificationTargetItem = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationTargetItem_snsTopicArn}}
+var m_NotificationTargetSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationTargetSet_member}}
+var mPagerDutyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPagerDutyConfiguration_name, &sPagerDutyConfiguration_secretId, &sPagerDutyConfiguration_pagerDutyIncidentConfiguration}}
+var mPagerDutyIncidentConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPagerDutyIncidentConfiguration_serviceId}}
+var mPagerDutyIncidentDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sPagerDutyIncidentDetail_id, &sPagerDutyIncidentDetail_autoResolve, &sPagerDutyIncidentDetail_secretId}}
+var mRegionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionInfo_sseKmsKeyId, &sRegionInfo_status, &sRegionInfo_statusMessage, &sRegionInfo_statusUpdateDateTime}}
+var m_RegionInfoMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionInfoMap_key, &s_RegionInfoMap_value}}
+var m_RegionMapInput = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionMapInput_key, &s_RegionMapInput_value}}
+var mRegionMapInputValue = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionMapInputValue_sseKmsKeyId}}
+var mRelatedItem = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedItem_identifier, &sRelatedItem_title, &sRelatedItem_generatedId}}
+var m_RelatedItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RelatedItemList_member}}
+var mRelatedItemsUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedItemsUpdate_itemToAdd, &sRelatedItemsUpdate_itemToRemove}}
+var mReplicationSet = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationSet_arn, &sReplicationSet_regionMap, &sReplicationSet_status, &sReplicationSet_deletionProtected, &sReplicationSet_createdTime, &sReplicationSet_createdBy, &sReplicationSet_lastModifiedTime, &sReplicationSet_lastModifiedBy}}
+var m_ReplicationSetArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationSetArnList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceIdentifier, &sResourceNotFoundException_resourceType}}
+var mResourcePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcePolicy_policyDocument, &sResourcePolicy_policyId, &sResourcePolicy_ramResourceShareRegion}}
+var m_ResourcePolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourcePolicyList_member}}
+var mResponsePlanSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResponsePlanSummary_arn, &sResponsePlanSummary_name, &sResponsePlanSummary_displayName}}
+var m_ResponsePlanSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResponsePlanSummaryList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceIdentifier, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSsmAutomation = smithy.SchemaMembers{List: []*smithy.Schema{&sSsmAutomation_roleArn, &sSsmAutomation_documentName, &sSsmAutomation_documentVersion, &sSsmAutomation_targetAccount, &sSsmAutomation_parameters, &sSsmAutomation_dynamicParameters}}
+var m_SsmParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_SsmParameters_key, &s_SsmParameters_value}}
+var m_SsmParameterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_SsmParameterValues_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_TagMapUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMapUpdate_key, &s_TagMapUpdate_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode}}
+var mTimelineEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sTimelineEvent_incidentRecordArn, &sTimelineEvent_eventId, &sTimelineEvent_eventTime, &sTimelineEvent_eventUpdatedTime, &sTimelineEvent_eventType, &sTimelineEvent_eventData, &sTimelineEvent_eventReferences}}
+var mTriggerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sTriggerDetails_source, &sTriggerDetails_triggerArn, &sTriggerDetails_timestamp, &sTriggerDetails_rawData}}
+var m_UpdateActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateActionList_member}}
+var mUpdateReplicationSetAction = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReplicationSetAction_addRegionAction, &sUpdateReplicationSetAction_deleteRegionAction}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mBatchGetIncidentFindingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetIncidentFindingsInput_incidentRecordArn, &sBatchGetIncidentFindingsInput_findingIds}}
+var mBatchGetIncidentFindingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetIncidentFindingsOutput_findings, &sBatchGetIncidentFindingsOutput_errors}}
+var mCreateReplicationSetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReplicationSetInput_regions, &sCreateReplicationSetInput_clientToken, &sCreateReplicationSetInput_tags}}
+var mCreateReplicationSetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReplicationSetOutput_arn}}
+var mCreateResponsePlanInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResponsePlanInput_clientToken, &sCreateResponsePlanInput_name, &sCreateResponsePlanInput_displayName, &sCreateResponsePlanInput_incidentTemplate, &sCreateResponsePlanInput_chatChannel, &sCreateResponsePlanInput_engagements, &sCreateResponsePlanInput_actions, &sCreateResponsePlanInput_tags, &sCreateResponsePlanInput_integrations}, Hash: &hCreateResponsePlanInput}
+var mCreateResponsePlanOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResponsePlanOutput_arn}}
+var mCreateTimelineEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTimelineEventInput_clientToken, &sCreateTimelineEventInput_incidentRecordArn, &sCreateTimelineEventInput_eventTime, &sCreateTimelineEventInput_eventType, &sCreateTimelineEventInput_eventData, &sCreateTimelineEventInput_eventReferences}}
+var mCreateTimelineEventOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTimelineEventOutput_incidentRecordArn, &sCreateTimelineEventOutput_eventId}}
+var mDeleteIncidentRecordInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIncidentRecordInput_arn}}
+var mDeleteReplicationSetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReplicationSetInput_arn}}
+var mDeleteResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyInput_resourceArn, &sDeleteResourcePolicyInput_policyId}}
+var mDeleteResponsePlanInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResponsePlanInput_arn}}
+var mDeleteTimelineEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTimelineEventInput_incidentRecordArn, &sDeleteTimelineEventInput_eventId}}
+var mGetIncidentRecordInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIncidentRecordInput_arn}}
+var mGetIncidentRecordOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIncidentRecordOutput_incidentRecord}}
+var mGetReplicationSetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReplicationSetInput_arn}}
+var mGetReplicationSetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReplicationSetOutput_replicationSet}}
+var mGetResourcePoliciesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePoliciesInput_resourceArn, &sGetResourcePoliciesInput_maxResults, &sGetResourcePoliciesInput_nextToken}}
+var mGetResourcePoliciesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePoliciesOutput_resourcePolicies, &sGetResourcePoliciesOutput_nextToken}}
+var mGetResponsePlanInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResponsePlanInput_arn}}
+var mGetResponsePlanOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResponsePlanOutput_arn, &sGetResponsePlanOutput_name, &sGetResponsePlanOutput_displayName, &sGetResponsePlanOutput_incidentTemplate, &sGetResponsePlanOutput_chatChannel, &sGetResponsePlanOutput_engagements, &sGetResponsePlanOutput_actions, &sGetResponsePlanOutput_integrations}}
+var mGetTimelineEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTimelineEventInput_incidentRecordArn, &sGetTimelineEventInput_eventId}}
+var mGetTimelineEventOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTimelineEventOutput_event}}
+var mListIncidentFindingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIncidentFindingsInput_incidentRecordArn, &sListIncidentFindingsInput_maxResults, &sListIncidentFindingsInput_nextToken}}
+var mListIncidentFindingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIncidentFindingsOutput_findings, &sListIncidentFindingsOutput_nextToken}}
+var mListIncidentRecordsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIncidentRecordsInput_filters, &sListIncidentRecordsInput_maxResults, &sListIncidentRecordsInput_nextToken}}
+var mListIncidentRecordsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIncidentRecordsOutput_incidentRecordSummaries, &sListIncidentRecordsOutput_nextToken}}
+var mListRelatedItemsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRelatedItemsInput_incidentRecordArn, &sListRelatedItemsInput_maxResults, &sListRelatedItemsInput_nextToken}}
+var mListRelatedItemsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRelatedItemsOutput_relatedItems, &sListRelatedItemsOutput_nextToken}}
+var mListReplicationSetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplicationSetsInput_maxResults, &sListReplicationSetsInput_nextToken}}
+var mListReplicationSetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplicationSetsOutput_replicationSetArns, &sListReplicationSetsOutput_nextToken}}
+var mListResponsePlansInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResponsePlansInput_maxResults, &sListResponsePlansInput_nextToken}}
+var mListResponsePlansOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResponsePlansOutput_responsePlanSummaries, &sListResponsePlansOutput_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListTimelineEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTimelineEventsInput_incidentRecordArn, &sListTimelineEventsInput_filters, &sListTimelineEventsInput_sortBy, &sListTimelineEventsInput_sortOrder, &sListTimelineEventsInput_maxResults, &sListTimelineEventsInput_nextToken}}
+var mListTimelineEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTimelineEventsOutput_eventSummaries, &sListTimelineEventsOutput_nextToken}}
+var mPutResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyInput_resourceArn, &sPutResourcePolicyInput_policy}}
+var mPutResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyOutput_policyId}}
+var mStartIncidentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartIncidentInput_clientToken, &sStartIncidentInput_responsePlanArn, &sStartIncidentInput_title, &sStartIncidentInput_impact, &sStartIncidentInput_triggerDetails, &sStartIncidentInput_relatedItems}}
+var mStartIncidentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartIncidentOutput_incidentRecordArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateDeletionProtectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeletionProtectionInput_arn, &sUpdateDeletionProtectionInput_deletionProtected, &sUpdateDeletionProtectionInput_clientToken}}
+var mUpdateIncidentRecordInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIncidentRecordInput_clientToken, &sUpdateIncidentRecordInput_arn, &sUpdateIncidentRecordInput_title, &sUpdateIncidentRecordInput_summary, &sUpdateIncidentRecordInput_impact, &sUpdateIncidentRecordInput_status, &sUpdateIncidentRecordInput_chatChannel, &sUpdateIncidentRecordInput_notificationTargets}}
+var mUpdateRelatedItemsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRelatedItemsInput_clientToken, &sUpdateRelatedItemsInput_incidentRecordArn, &sUpdateRelatedItemsInput_relatedItemsUpdate}}
+var mUpdateReplicationSetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReplicationSetInput_arn, &sUpdateReplicationSetInput_actions, &sUpdateReplicationSetInput_clientToken}}
+var mUpdateResponsePlanInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResponsePlanInput_clientToken, &sUpdateResponsePlanInput_arn, &sUpdateResponsePlanInput_displayName, &sUpdateResponsePlanInput_incidentTemplateTitle, &sUpdateResponsePlanInput_incidentTemplateImpact, &sUpdateResponsePlanInput_incidentTemplateSummary, &sUpdateResponsePlanInput_incidentTemplateDedupeString, &sUpdateResponsePlanInput_incidentTemplateNotificationTargets, &sUpdateResponsePlanInput_chatChannel, &sUpdateResponsePlanInput_engagements, &sUpdateResponsePlanInput_actions, &sUpdateResponsePlanInput_incidentTemplateTags, &sUpdateResponsePlanInput_integrations}, Hash: &hUpdateResponsePlanInput}
+var mUpdateTimelineEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTimelineEventInput_clientToken, &sUpdateTimelineEventInput_incidentRecordArn, &sUpdateTimelineEventInput_eventId, &sUpdateTimelineEventInput_eventTime, &sUpdateTimelineEventInput_eventType, &sUpdateTimelineEventInput_eventData, &sUpdateTimelineEventInput_eventReferences}}
+
+var hIncidentRecord = smithy.MemberHash{Seed: 18, Slots: []uint16{
+	0, 11, 0, 8, 0, 0, 0, 0, 0, 5, 0, 2, 13, 0, 0, 0, 0, 12, 10, 0, 0, 0, 6, 0,
+	4, 14, 0, 9, 3, 7, 1, 0,
+}}
+var hCreateResponsePlanInput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 0, 7, 0, 8, 0, 2, 0, 0, 0, 0, 0, 0, 6, 0, 4, 0, 0, 0, 3, 0, 0, 5, 9,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hUpdateResponsePlanInput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 2, 0, 12, 0, 7, 0, 0, 4, 11, 0, 6, 0, 0, 8, 0, 5, 0, 0, 1, 0, 0, 10, 0,
+	0, 9, 13, 3, 0, 0, 0, 0,
+}}
+
+var sBatchGetIncidentFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetIncidentFindings, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetIncidentFindings})
+var sCreateReplicationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicationSet, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateReplicationSet})
+var sCreateResponsePlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResponsePlan, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateResponsePlan})
+var sCreateTimelineEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTimelineEvent, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateTimelineEvent})
+var sDeleteIncidentRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIncidentRecord, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIncidentRecord})
+var sDeleteReplicationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicationSet, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReplicationSet})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePolicy})
+var sDeleteResponsePlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResponsePlan, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResponsePlan})
+var sDeleteTimelineEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTimelineEvent, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTimelineEvent})
+var sGetIncidentRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIncidentRecord, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetIncidentRecord})
+var sGetReplicationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReplicationSet, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetReplicationSet})
+var sGetResourcePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicies, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicies})
+var sGetResponsePlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResponsePlan, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetResponsePlan})
+var sGetTimelineEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTimelineEvent, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetTimelineEvent})
+var sListIncidentFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncidentFindings, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListIncidentFindings})
+var sListIncidentRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncidentRecords, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListIncidentRecords})
+var sListRelatedItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelatedItems, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListRelatedItems})
+var sListReplicationSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplicationSets, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListReplicationSets})
+var sListResponsePlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResponsePlans, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListResponsePlans})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTimelineEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTimelineEvents, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListTimelineEvents})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePolicy})
+var sStartIncident = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIncident, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eStartIncident})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateDeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeletionProtection, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDeletionProtection})
+var sUpdateIncidentRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIncidentRecord, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eUpdateIncidentRecord})
+var sUpdateRelatedItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelatedItems, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRelatedItems})
+var sUpdateReplicationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationSet, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUpdateReplicationSet})
+var sUpdateResponsePlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResponsePlan, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateResponsePlan})
+var sUpdateTimelineEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTimelineEvent, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTimelineEvent})
+var s_SSMIncidents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SSMIncidents, Type: smithy.ShapeTypeService, Ext: &e_SSMIncidents})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeUnion, Ext: &eAction})
+var sAction_ssmAutomation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssmAutomation", ID: &iSsmAutomation, Members: &mSsmAutomation, Type: smithy.ShapeTypeStructure, Ext: &eAction_ssmAutomation})
+var s_ActionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList, Ext: &e_ActionsList})
+var s_ActionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeUnion, Ext: &e_ActionsList_member})
+var sAddRegionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddRegionAction, Members: &mAddRegionAction, Type: smithy.ShapeTypeStructure, Ext: &eAddRegionAction})
+var sAddRegionAction_regionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eAddRegionAction_regionName})
+var sAddRegionAction_sseKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sseKmsKeyId", ID: &i_SseKmsKey, Type: smithy.ShapeTypeString, Ext: &eAddRegionAction_sseKmsKeyId})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAttributeValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValueList, Members: &mAttributeValueList, Type: smithy.ShapeTypeUnion, Ext: &eAttributeValueList})
+var sAttributeValueList_stringValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValues", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eAttributeValueList_stringValues})
+var sAttributeValueList_integerValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValues", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &eAttributeValueList_integerValues})
+var sAutomationExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationExecution, Members: &mAutomationExecution, Type: smithy.ShapeTypeUnion, Ext: &eAutomationExecution})
+var sAutomationExecution_ssmExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssmExecutionArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAutomationExecution_ssmExecutionArn})
+var s_AutomationExecutionSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationExecutionSet, Members: &m_AutomationExecutionSet, Type: smithy.ShapeTypeList, Ext: &e_AutomationExecutionSet})
+var s_AutomationExecutionSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomationExecution, Members: &mAutomationExecution, Type: smithy.ShapeTypeUnion, Ext: &e_AutomationExecutionSet_member})
+var sBatchGetIncidentFindingsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetIncidentFindingsError, Members: &mBatchGetIncidentFindingsError, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetIncidentFindingsError})
+var sBatchGetIncidentFindingsError_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &i_FindingId, Type: smithy.ShapeTypeString, Ext: &eBatchGetIncidentFindingsError_findingId})
+var sBatchGetIncidentFindingsError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetIncidentFindingsError_code})
+var sBatchGetIncidentFindingsError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetIncidentFindingsError_message})
+var s_BatchGetIncidentFindingsErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetIncidentFindingsErrorList, Members: &m_BatchGetIncidentFindingsErrorList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetIncidentFindingsErrorList})
+var s_BatchGetIncidentFindingsErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetIncidentFindingsError, Members: &mBatchGetIncidentFindingsError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetIncidentFindingsErrorList_member})
+var s_ChatbotSnsConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatbotSnsConfigurationSet, Members: &m_ChatbotSnsConfigurationSet, Type: smithy.ShapeTypeList, Ext: &e_ChatbotSnsConfigurationSet})
+var s_ChatbotSnsConfigurationSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SnsArn, Type: smithy.ShapeTypeString, Ext: &e_ChatbotSnsConfigurationSet_member})
+var sChatChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChatChannel, Members: &mChatChannel, Type: smithy.ShapeTypeUnion, Ext: &eChatChannel})
+var sChatChannel_empty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "empty", ID: &iEmptyChatChannel, Type: smithy.ShapeTypeStructure, Ext: &eChatChannel_empty})
+var sChatChannel_chatbotSns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatbotSns", ID: &i_ChatbotSnsConfigurationSet, Members: &m_ChatbotSnsConfigurationSet, Type: smithy.ShapeTypeList, Ext: &eChatChannel_chatbotSns})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sCloudFormationStackUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudFormationStackUpdate, Members: &mCloudFormationStackUpdate, Type: smithy.ShapeTypeStructure, Ext: &eCloudFormationStackUpdate})
+var sCloudFormationStackUpdate_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCloudFormationStackUpdate_startTime})
+var sCloudFormationStackUpdate_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCloudFormationStackUpdate_endTime})
+var sCloudFormationStackUpdate_stackArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stackArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCloudFormationStackUpdate_stackArn})
+var sCodeDeployDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeDeployDeployment, Members: &mCodeDeployDeployment, Type: smithy.ShapeTypeStructure, Ext: &eCodeDeployDeployment})
+var sCodeDeployDeployment_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCodeDeployDeployment_startTime})
+var sCodeDeployDeployment_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCodeDeployDeployment_endTime})
+var sCodeDeployDeployment_deploymentGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCodeDeployDeployment_deploymentGroupArn})
+var sCodeDeployDeployment_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodeDeployDeployment_deploymentId})
+var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeUnion, Ext: &eCondition})
+var sCondition_before = smithy.NewStaticSchema(smithy.StaticSchema{Member: "before", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCondition_before})
+var sCondition_after = smithy.NewStaticSchema(smithy.StaticSchema{Member: "after", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCondition_after})
+var sCondition_equals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "equals", ID: &iAttributeValueList, Members: &mAttributeValueList, Type: smithy.ShapeTypeUnion, Ext: &eCondition_equals})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceIdentifier})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sConflictException_retryAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eConflictException_retryAfter})
+var s_DedupeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DedupeString, Type: smithy.ShapeTypeString, Ext: &e_DedupeString})
+var sDeleteRegionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegionAction, Members: &mDeleteRegionAction, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRegionAction})
+var sDeleteRegionAction_regionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eDeleteRegionAction_regionName})
+var s_DynamicSsmParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamicSsmParameters, Members: &m_DynamicSsmParameters, Type: smithy.ShapeTypeMap, Ext: &e_DynamicSsmParameters})
+var s_DynamicSsmParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DynamicSsmParameters_key})
+var s_DynamicSsmParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDynamicSsmParameterValue, Members: &mDynamicSsmParameterValue, Type: smithy.ShapeTypeUnion, Ext: &e_DynamicSsmParameters_value})
+var sDynamicSsmParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynamicSsmParameterValue, Members: &mDynamicSsmParameterValue, Type: smithy.ShapeTypeUnion, Ext: &eDynamicSsmParameterValue})
+var sDynamicSsmParameterValue_variable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variable", ID: &i_VariableType, Type: smithy.ShapeTypeString, Ext: &eDynamicSsmParameterValue_variable})
+var sEmptyChatChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyChatChannel, Type: smithy.ShapeTypeStructure, Ext: &eEmptyChatChannel})
+var s_EngagementSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementSet, Members: &m_EngagementSet, Type: smithy.ShapeTypeList, Ext: &e_EngagementSet})
+var s_EngagementSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &e_EngagementSet_member})
+var s_EventData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventData, Type: smithy.ShapeTypeString, Ext: &e_EventData})
+var sEventReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventReference, Members: &mEventReference, Type: smithy.ShapeTypeUnion, Ext: &eEventReference})
+var sEventReference_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEventReference_resource})
+var sEventReference_relatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemId", ID: &i_GeneratedId, Type: smithy.ShapeTypeString, Ext: &eEventReference_relatedItemId})
+var s_EventReferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventReferenceList, Members: &m_EventReferenceList, Type: smithy.ShapeTypeList, Ext: &e_EventReferenceList})
+var s_EventReferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventReference, Members: &mEventReference, Type: smithy.ShapeTypeUnion, Ext: &e_EventReferenceList_member})
+var sEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSummary, Members: &mEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eEventSummary})
+var sEventSummary_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEventSummary_incidentRecordArn})
+var sEventSummary_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eEventSummary_eventId})
+var sEventSummary_eventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEventSummary_eventTime})
+var sEventSummary_eventUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventUpdatedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEventSummary_eventUpdatedTime})
+var sEventSummary_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_TimelineEventType, Type: smithy.ShapeTypeString, Ext: &eEventSummary_eventType})
+var sEventSummary_eventReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventReferences", ID: &i_EventReferenceList, Members: &m_EventReferenceList, Type: smithy.ShapeTypeList, Ext: &eEventSummary_eventReferences})
+var s_EventSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSummaryList, Members: &m_EventSummaryList, Type: smithy.ShapeTypeList, Ext: &e_EventSummaryList})
+var s_EventSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventSummary, Members: &mEventSummary, Type: smithy.ShapeTypeStructure, Ext: &e_EventSummaryList_member})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilter_key})
+var sFilter_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeUnion, Ext: &eFilter_condition})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterList_member})
+var sFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFinding, Members: &mFinding, Type: smithy.ShapeTypeStructure, Ext: &eFinding})
+var sFinding_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FindingId, Type: smithy.ShapeTypeString, Ext: &eFinding_id})
+var sFinding_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFinding_creationTime})
+var sFinding_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFinding_lastModifiedTime})
+var sFinding_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &iFindingDetails, Members: &mFindingDetails, Type: smithy.ShapeTypeUnion, Ext: &eFinding_details})
+var sFindingDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingDetails, Members: &mFindingDetails, Type: smithy.ShapeTypeUnion, Ext: &eFindingDetails})
+var sFindingDetails_codeDeployDeployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeDeployDeployment", ID: &iCodeDeployDeployment, Members: &mCodeDeployDeployment, Type: smithy.ShapeTypeStructure, Ext: &eFindingDetails_codeDeployDeployment})
+var sFindingDetails_cloudFormationStackUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudFormationStackUpdate", ID: &iCloudFormationStackUpdate, Members: &mCloudFormationStackUpdate, Type: smithy.ShapeTypeStructure, Ext: &eFindingDetails_cloudFormationStackUpdate})
+var s_FindingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingId, Type: smithy.ShapeTypeString, Ext: &e_FindingId})
+var s_FindingIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingIdList, Members: &m_FindingIdList, Type: smithy.ShapeTypeList, Ext: &e_FindingIdList})
+var s_FindingIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FindingId, Type: smithy.ShapeTypeString, Ext: &e_FindingIdList_member})
+var s_FindingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingList, Members: &m_FindingList, Type: smithy.ShapeTypeList, Ext: &e_FindingList})
+var s_FindingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFinding, Members: &mFinding, Type: smithy.ShapeTypeStructure, Ext: &e_FindingList_member})
+var sFindingSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingSummary, Members: &mFindingSummary, Type: smithy.ShapeTypeStructure, Ext: &eFindingSummary})
+var sFindingSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FindingId, Type: smithy.ShapeTypeString, Ext: &eFindingSummary_id})
+var sFindingSummary_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFindingSummary_lastModifiedTime})
+var s_FindingSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingSummaryList, Members: &m_FindingSummaryList, Type: smithy.ShapeTypeList, Ext: &e_FindingSummaryList})
+var s_FindingSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingSummary, Members: &mFindingSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FindingSummaryList_member})
+var s_GeneratedId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneratedId, Type: smithy.ShapeTypeString, Ext: &e_GeneratedId})
+var s_Impact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Impact, Type: smithy.ShapeTypeInteger, Ext: &e_Impact})
+var sIncidentRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncidentRecord, Members: &mIncidentRecord, Type: smithy.ShapeTypeStructure, Ext: &eIncidentRecord})
+var sIncidentRecord_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIncidentRecord_arn})
+var sIncidentRecord_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_IncidentTitle, Type: smithy.ShapeTypeString, Ext: &eIncidentRecord_title})
+var sIncidentRecord_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_IncidentSummary, Type: smithy.ShapeTypeString, Ext: &eIncidentRecord_summary})
+var sIncidentRecord_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IncidentRecordStatus, Type: smithy.ShapeTypeString, Ext: &eIncidentRecord_status})
+var sIncidentRecord_impact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impact", ID: &i_Impact, Type: smithy.ShapeTypeInteger, Ext: &eIncidentRecord_impact})
+var sIncidentRecord_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIncidentRecord_creationTime})
+var sIncidentRecord_resolvedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIncidentRecord_resolvedTime})
+var sIncidentRecord_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIncidentRecord_lastModifiedTime})
+var sIncidentRecord_lastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedBy", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIncidentRecord_lastModifiedBy})
+var sIncidentRecord_automationExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automationExecutions", ID: &i_AutomationExecutionSet, Members: &m_AutomationExecutionSet, Type: smithy.ShapeTypeList, Ext: &eIncidentRecord_automationExecutions})
+var sIncidentRecord_incidentRecordSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordSource", ID: &iIncidentRecordSource, Members: &mIncidentRecordSource, Type: smithy.ShapeTypeStructure, Ext: &eIncidentRecord_incidentRecordSource})
+var sIncidentRecord_dedupeString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dedupeString", ID: &i_DedupeString, Type: smithy.ShapeTypeString, Ext: &eIncidentRecord_dedupeString})
+var sIncidentRecord_chatChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatChannel", ID: &iChatChannel, Members: &mChatChannel, Type: smithy.ShapeTypeUnion, Ext: &eIncidentRecord_chatChannel})
+var sIncidentRecord_notificationTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationTargets", ID: &i_NotificationTargetSet, Members: &m_NotificationTargetSet, Type: smithy.ShapeTypeList, Ext: &eIncidentRecord_notificationTargets})
+var sIncidentRecordSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncidentRecordSource, Members: &mIncidentRecordSource, Type: smithy.ShapeTypeStructure, Ext: &eIncidentRecordSource})
+var sIncidentRecordSource_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIncidentRecordSource_createdBy})
+var sIncidentRecordSource_invokedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invokedBy", ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString, Ext: &eIncidentRecordSource_invokedBy})
+var sIncidentRecordSource_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIncidentRecordSource_resourceArn})
+var sIncidentRecordSource_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_IncidentSource, Type: smithy.ShapeTypeString, Ext: &eIncidentRecordSource_source})
+var s_IncidentRecordStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncidentRecordStatus, Type: smithy.ShapeTypeString, Ext: &e_IncidentRecordStatus})
+var sIncidentRecordSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncidentRecordSummary, Members: &mIncidentRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &eIncidentRecordSummary})
+var sIncidentRecordSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIncidentRecordSummary_arn})
+var sIncidentRecordSummary_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_IncidentTitle, Type: smithy.ShapeTypeString, Ext: &eIncidentRecordSummary_title})
+var sIncidentRecordSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IncidentRecordStatus, Type: smithy.ShapeTypeString, Ext: &eIncidentRecordSummary_status})
+var sIncidentRecordSummary_impact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impact", ID: &i_Impact, Type: smithy.ShapeTypeInteger, Ext: &eIncidentRecordSummary_impact})
+var sIncidentRecordSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIncidentRecordSummary_creationTime})
+var sIncidentRecordSummary_resolvedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIncidentRecordSummary_resolvedTime})
+var sIncidentRecordSummary_incidentRecordSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordSource", ID: &iIncidentRecordSource, Members: &mIncidentRecordSource, Type: smithy.ShapeTypeStructure, Ext: &eIncidentRecordSummary_incidentRecordSource})
+var s_IncidentRecordSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncidentRecordSummaryList, Members: &m_IncidentRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &e_IncidentRecordSummaryList})
+var s_IncidentRecordSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIncidentRecordSummary, Members: &mIncidentRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &e_IncidentRecordSummaryList_member})
+var s_IncidentSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncidentSource, Type: smithy.ShapeTypeString, Ext: &e_IncidentSource})
+var s_IncidentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncidentSummary, Type: smithy.ShapeTypeString, Ext: &e_IncidentSummary})
+var sIncidentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncidentTemplate, Members: &mIncidentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eIncidentTemplate})
+var sIncidentTemplate_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_IncidentTitle, Type: smithy.ShapeTypeString, Ext: &eIncidentTemplate_title})
+var sIncidentTemplate_impact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impact", ID: &i_Impact, Type: smithy.ShapeTypeInteger, Ext: &eIncidentTemplate_impact})
+var sIncidentTemplate_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_IncidentSummary, Type: smithy.ShapeTypeString, Ext: &eIncidentTemplate_summary})
+var sIncidentTemplate_dedupeString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dedupeString", ID: &i_DedupeString, Type: smithy.ShapeTypeString, Ext: &eIncidentTemplate_dedupeString})
+var sIncidentTemplate_notificationTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationTargets", ID: &i_NotificationTargetSet, Members: &m_NotificationTargetSet, Type: smithy.ShapeTypeList, Ext: &eIncidentTemplate_notificationTargets})
+var sIncidentTemplate_incidentTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eIncidentTemplate_incidentTags})
+var s_IncidentTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncidentTitle, Type: smithy.ShapeTypeString, Ext: &e_IncidentTitle})
+var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &e_IntegerList})
+var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerList_member})
+var sIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegration, Members: &mIntegration, Type: smithy.ShapeTypeUnion, Ext: &eIntegration})
+var sIntegration_pagerDutyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pagerDutyConfiguration", ID: &iPagerDutyConfiguration, Members: &mPagerDutyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIntegration_pagerDutyConfiguration})
+var s_Integrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integrations, Members: &m_Integrations, Type: smithy.ShapeTypeList, Ext: &e_Integrations})
+var s_Integrations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntegration, Members: &mIntegration, Type: smithy.ShapeTypeUnion, Ext: &e_Integrations_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sItemIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemIdentifier, Members: &mItemIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eItemIdentifier})
+var sItemIdentifier_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iItemValue, Members: &mItemValue, Type: smithy.ShapeTypeUnion, Ext: &eItemIdentifier_value})
+var sItemIdentifier_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ItemType, Type: smithy.ShapeTypeString, Ext: &eItemIdentifier_type})
+var s_ItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemType, Type: smithy.ShapeTypeString, Ext: &e_ItemType})
+var sItemValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemValue, Members: &mItemValue, Type: smithy.ShapeTypeUnion, Ext: &eItemValue})
+var sItemValue_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eItemValue_arn})
+var sItemValue_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eItemValue_url})
+var sItemValue_metricDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricDefinition", ID: &i_MetricDefinition, Type: smithy.ShapeTypeString, Ext: &eItemValue_metricDefinition})
+var sItemValue_pagerDutyIncidentDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pagerDutyIncidentDetail", ID: &iPagerDutyIncidentDetail, Members: &mPagerDutyIncidentDetail, Type: smithy.ShapeTypeStructure, Ext: &eItemValue_pagerDutyIncidentDetail})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MetricDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDefinition, Type: smithy.ShapeTypeString, Ext: &e_MetricDefinition})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotificationTargetItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationTargetItem, Members: &mNotificationTargetItem, Type: smithy.ShapeTypeUnion, Ext: &eNotificationTargetItem})
+var sNotificationTargetItem_snsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snsTopicArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eNotificationTargetItem_snsTopicArn})
+var s_NotificationTargetSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationTargetSet, Members: &m_NotificationTargetSet, Type: smithy.ShapeTypeList, Ext: &e_NotificationTargetSet})
+var s_NotificationTargetSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationTargetItem, Members: &mNotificationTargetItem, Type: smithy.ShapeTypeUnion, Ext: &e_NotificationTargetSet_member})
+var sPagerDutyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPagerDutyConfiguration, Members: &mPagerDutyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePagerDutyConfiguration})
+var sPagerDutyConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePagerDutyConfiguration_name})
+var sPagerDutyConfiguration_secretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePagerDutyConfiguration_secretId})
+var sPagerDutyConfiguration_pagerDutyIncidentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pagerDutyIncidentConfiguration", ID: &iPagerDutyIncidentConfiguration, Members: &mPagerDutyIncidentConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePagerDutyConfiguration_pagerDutyIncidentConfiguration})
+var sPagerDutyIncidentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPagerDutyIncidentConfiguration, Members: &mPagerDutyIncidentConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePagerDutyIncidentConfiguration})
+var sPagerDutyIncidentConfiguration_serviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePagerDutyIncidentConfiguration_serviceId})
+var sPagerDutyIncidentDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPagerDutyIncidentDetail, Members: &mPagerDutyIncidentDetail, Type: smithy.ShapeTypeStructure, Ext: &ePagerDutyIncidentDetail})
+var sPagerDutyIncidentDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePagerDutyIncidentDetail_id})
+var sPagerDutyIncidentDetail_autoResolve = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoResolve", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePagerDutyIncidentDetail_autoResolve})
+var sPagerDutyIncidentDetail_secretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePagerDutyIncidentDetail_secretId})
+var s_Policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &e_Policy})
+var s_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &e_PolicyId})
+var s_RawData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RawData, Type: smithy.ShapeTypeString, Ext: &e_RawData})
+var sRegionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionInfo, Members: &mRegionInfo, Type: smithy.ShapeTypeStructure, Ext: &eRegionInfo})
+var sRegionInfo_sseKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sseKmsKeyId", ID: &i_SseKmsKey, Type: smithy.ShapeTypeString, Ext: &eRegionInfo_sseKmsKeyId})
+var sRegionInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RegionStatus, Type: smithy.ShapeTypeString, Ext: &eRegionInfo_status})
+var sRegionInfo_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegionInfo_statusMessage})
+var sRegionInfo_statusUpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusUpdateDateTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRegionInfo_statusUpdateDateTime})
+var s_RegionInfoMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionInfoMap, Members: &m_RegionInfoMap, Type: smithy.ShapeTypeMap, Ext: &e_RegionInfoMap})
+var s_RegionInfoMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &e_RegionInfoMap_key})
+var s_RegionInfoMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iRegionInfo, Members: &mRegionInfo, Type: smithy.ShapeTypeStructure, Ext: &e_RegionInfoMap_value})
+var s_RegionMapInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionMapInput, Members: &m_RegionMapInput, Type: smithy.ShapeTypeMap, Ext: &e_RegionMapInput})
+var s_RegionMapInput_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &e_RegionMapInput_key})
+var s_RegionMapInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iRegionMapInputValue, Members: &mRegionMapInputValue, Type: smithy.ShapeTypeStructure, Ext: &e_RegionMapInput_value})
+var sRegionMapInputValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionMapInputValue, Members: &mRegionMapInputValue, Type: smithy.ShapeTypeStructure, Ext: &eRegionMapInputValue})
+var sRegionMapInputValue_sseKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sseKmsKeyId", ID: &i_SseKmsKey, Type: smithy.ShapeTypeString, Ext: &eRegionMapInputValue_sseKmsKeyId})
+var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &e_RegionName})
+var s_RegionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionStatus, Type: smithy.ShapeTypeString, Ext: &e_RegionStatus})
+var sRelatedItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedItem, Members: &mRelatedItem, Type: smithy.ShapeTypeStructure, Ext: &eRelatedItem})
+var sRelatedItem_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &iItemIdentifier, Members: &mItemIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eRelatedItem_identifier})
+var sRelatedItem_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRelatedItem_title})
+var sRelatedItem_generatedId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generatedId", ID: &i_GeneratedId, Type: smithy.ShapeTypeString, Ext: &eRelatedItem_generatedId})
+var s_RelatedItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedItemList, Members: &m_RelatedItemList, Type: smithy.ShapeTypeList, Ext: &e_RelatedItemList})
+var s_RelatedItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelatedItem, Members: &mRelatedItem, Type: smithy.ShapeTypeStructure, Ext: &e_RelatedItemList_member})
+var sRelatedItemsUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedItemsUpdate, Members: &mRelatedItemsUpdate, Type: smithy.ShapeTypeUnion, Ext: &eRelatedItemsUpdate})
+var sRelatedItemsUpdate_itemToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemToAdd", ID: &iRelatedItem, Members: &mRelatedItem, Type: smithy.ShapeTypeStructure, Ext: &eRelatedItemsUpdate_itemToAdd})
+var sRelatedItemsUpdate_itemToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemToRemove", ID: &iItemIdentifier, Members: &mItemIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eRelatedItemsUpdate_itemToRemove})
+var sReplicationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationSet, Members: &mReplicationSet, Type: smithy.ShapeTypeStructure, Ext: &eReplicationSet})
+var sReplicationSet_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eReplicationSet_arn})
+var sReplicationSet_regionMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionMap", ID: &i_RegionInfoMap, Members: &m_RegionInfoMap, Type: smithy.ShapeTypeMap, Ext: &eReplicationSet_regionMap})
+var sReplicationSet_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ReplicationSetStatus, Type: smithy.ShapeTypeString, Ext: &eReplicationSet_status})
+var sReplicationSet_deletionProtected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationSet_deletionProtected})
+var sReplicationSet_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReplicationSet_createdTime})
+var sReplicationSet_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eReplicationSet_createdBy})
+var sReplicationSet_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReplicationSet_lastModifiedTime})
+var sReplicationSet_lastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedBy", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eReplicationSet_lastModifiedBy})
+var s_ReplicationSetArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationSetArnList, Members: &m_ReplicationSetArnList, Type: smithy.ShapeTypeList, Ext: &e_ReplicationSetArnList})
+var s_ReplicationSetArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_ReplicationSetArnList_member})
+var s_ReplicationSetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationSetStatus, Type: smithy.ShapeTypeString, Ext: &e_ReplicationSetStatus})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceIdentifier})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure, Ext: &eResourcePolicy})
+var sResourcePolicy_policyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyDocument", ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &eResourcePolicy_policyDocument})
+var sResourcePolicy_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eResourcePolicy_policyId})
+var sResourcePolicy_ramResourceShareRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ramResourceShareRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourcePolicy_ramResourceShareRegion})
+var s_ResourcePolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicyList, Members: &m_ResourcePolicyList, Type: smithy.ShapeTypeList, Ext: &e_ResourcePolicyList})
+var s_ResourcePolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure, Ext: &e_ResourcePolicyList_member})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_ResponsePlanDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponsePlanDisplayName, Type: smithy.ShapeTypeString, Ext: &e_ResponsePlanDisplayName})
+var s_ResponsePlanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponsePlanName, Type: smithy.ShapeTypeString, Ext: &e_ResponsePlanName})
+var sResponsePlanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponsePlanSummary, Members: &mResponsePlanSummary, Type: smithy.ShapeTypeStructure, Ext: &eResponsePlanSummary})
+var sResponsePlanSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eResponsePlanSummary_arn})
+var sResponsePlanSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResponsePlanName, Type: smithy.ShapeTypeString, Ext: &eResponsePlanSummary_name})
+var sResponsePlanSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ResponsePlanDisplayName, Type: smithy.ShapeTypeString, Ext: &eResponsePlanSummary_displayName})
+var s_ResponsePlanSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponsePlanSummaryList, Members: &m_ResponsePlanSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ResponsePlanSummaryList})
+var s_ResponsePlanSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResponsePlanSummary, Members: &mResponsePlanSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ResponsePlanSummaryList_member})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &e_ServiceCode})
+var s_ServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString, Ext: &e_ServicePrincipal})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceIdentifier})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_SnsArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsArn, Type: smithy.ShapeTypeString, Ext: &e_SnsArn})
+var s_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &e_SortOrder})
+var s_SseKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SseKmsKey, Type: smithy.ShapeTypeString, Ext: &e_SseKmsKey})
+var sSsmAutomation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSsmAutomation, Members: &mSsmAutomation, Type: smithy.ShapeTypeStructure, Ext: &eSsmAutomation})
+var sSsmAutomation_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eSsmAutomation_roleArn})
+var sSsmAutomation_documentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSsmAutomation_documentName})
+var sSsmAutomation_documentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSsmAutomation_documentVersion})
+var sSsmAutomation_targetAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccount", ID: &i_SsmTargetAccount, Type: smithy.ShapeTypeString, Ext: &eSsmAutomation_targetAccount})
+var sSsmAutomation_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_SsmParameters, Members: &m_SsmParameters, Type: smithy.ShapeTypeMap, Ext: &eSsmAutomation_parameters})
+var sSsmAutomation_dynamicParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dynamicParameters", ID: &i_DynamicSsmParameters, Members: &m_DynamicSsmParameters, Type: smithy.ShapeTypeMap, Ext: &eSsmAutomation_dynamicParameters})
+var s_SsmContactsArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsmContactsArn, Type: smithy.ShapeTypeString, Ext: &e_SsmContactsArn})
+var s_SsmParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsmParameters, Members: &m_SsmParameters, Type: smithy.ShapeTypeMap, Ext: &e_SsmParameters})
+var s_SsmParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SsmParameters_key})
+var s_SsmParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SsmParameterValues, Members: &m_SsmParameterValues, Type: smithy.ShapeTypeList, Ext: &e_SsmParameters_value})
+var s_SsmParameterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsmParameterValues, Members: &m_SsmParameterValues, Type: smithy.ShapeTypeList, Ext: &e_SsmParameterValues})
+var s_SsmParameterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SsmParameterValues_member})
+var s_SsmTargetAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsmTargetAccount, Type: smithy.ShapeTypeString, Ext: &e_SsmTargetAccount})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagMapUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMapUpdate, Members: &m_TagMapUpdate, Type: smithy.ShapeTypeMap, Ext: &e_TagMapUpdate})
+var s_TagMapUpdate_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMapUpdate_key})
+var s_TagMapUpdate_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMapUpdate_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sTimelineEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimelineEvent, Members: &mTimelineEvent, Type: smithy.ShapeTypeStructure, Ext: &eTimelineEvent})
+var sTimelineEvent_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTimelineEvent_incidentRecordArn})
+var sTimelineEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eTimelineEvent_eventId})
+var sTimelineEvent_eventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimelineEvent_eventTime})
+var sTimelineEvent_eventUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventUpdatedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimelineEvent_eventUpdatedTime})
+var sTimelineEvent_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_TimelineEventType, Type: smithy.ShapeTypeString, Ext: &eTimelineEvent_eventType})
+var sTimelineEvent_eventData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventData", ID: &i_EventData, Type: smithy.ShapeTypeString, Ext: &eTimelineEvent_eventData})
+var sTimelineEvent_eventReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventReferences", ID: &i_EventReferenceList, Members: &m_EventReferenceList, Type: smithy.ShapeTypeList, Ext: &eTimelineEvent_eventReferences})
+var s_TimelineEventSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimelineEventSort, Type: smithy.ShapeTypeString, Ext: &e_TimelineEventSort})
+var s_TimelineEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimelineEventType, Type: smithy.ShapeTypeString, Ext: &e_TimelineEventType})
+var sTriggerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerDetails, Members: &mTriggerDetails, Type: smithy.ShapeTypeStructure, Ext: &eTriggerDetails})
+var sTriggerDetails_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_IncidentSource, Type: smithy.ShapeTypeString, Ext: &eTriggerDetails_source})
+var sTriggerDetails_triggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTriggerDetails_triggerArn})
+var sTriggerDetails_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTriggerDetails_timestamp})
+var sTriggerDetails_rawData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rawData", ID: &i_RawData, Type: smithy.ShapeTypeString, Ext: &eTriggerDetails_rawData})
+var s_UpdateActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateActionList, Members: &m_UpdateActionList, Type: smithy.ShapeTypeList, Ext: &e_UpdateActionList})
+var s_UpdateActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateReplicationSetAction, Members: &mUpdateReplicationSetAction, Type: smithy.ShapeTypeUnion, Ext: &e_UpdateActionList_member})
+var sUpdateReplicationSetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationSetAction, Members: &mUpdateReplicationSetAction, Type: smithy.ShapeTypeUnion, Ext: &eUpdateReplicationSetAction})
+var sUpdateReplicationSetAction_addRegionAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addRegionAction", ID: &iAddRegionAction, Members: &mAddRegionAction, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationSetAction_addRegionAction})
+var sUpdateReplicationSetAction_deleteRegionAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteRegionAction", ID: &iDeleteRegionAction, Members: &mDeleteRegionAction, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationSetAction_deleteRegionAction})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &e_Url})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_UUID})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_VariableType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableType, Type: smithy.ShapeTypeString, Ext: &e_VariableType})
+var sBatchGetIncidentFindingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetIncidentFindingsInput, Members: &mBatchGetIncidentFindingsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetIncidentFindingsInput})
+var sBatchGetIncidentFindingsInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eBatchGetIncidentFindingsInput_incidentRecordArn})
+var sBatchGetIncidentFindingsInput_findingIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingIds", ID: &i_FindingIdList, Members: &m_FindingIdList, Type: smithy.ShapeTypeList, Ext: &eBatchGetIncidentFindingsInput_findingIds})
+var sBatchGetIncidentFindingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetIncidentFindingsOutput, Members: &mBatchGetIncidentFindingsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetIncidentFindingsOutput})
+var sBatchGetIncidentFindingsOutput_findings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findings", ID: &i_FindingList, Members: &m_FindingList, Type: smithy.ShapeTypeList, Ext: &eBatchGetIncidentFindingsOutput_findings})
+var sBatchGetIncidentFindingsOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetIncidentFindingsErrorList, Members: &m_BatchGetIncidentFindingsErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchGetIncidentFindingsOutput_errors})
+var sCreateReplicationSetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicationSetInput, Members: &mCreateReplicationSetInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateReplicationSetInput})
+var sCreateReplicationSetInput_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionMapInput, Members: &m_RegionMapInput, Type: smithy.ShapeTypeMap, Ext: &eCreateReplicationSetInput_regions})
+var sCreateReplicationSetInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationSetInput_clientToken})
+var sCreateReplicationSetInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateReplicationSetInput_tags})
+var sCreateReplicationSetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicationSetOutput, Members: &mCreateReplicationSetOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateReplicationSetOutput})
+var sCreateReplicationSetOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationSetOutput_arn})
+var sCreateResponsePlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResponsePlanInput, Members: &mCreateResponsePlanInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateResponsePlanInput})
+var sCreateResponsePlanInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateResponsePlanInput_clientToken})
+var sCreateResponsePlanInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResponsePlanName, Type: smithy.ShapeTypeString, Ext: &eCreateResponsePlanInput_name})
+var sCreateResponsePlanInput_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ResponsePlanDisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateResponsePlanInput_displayName})
+var sCreateResponsePlanInput_incidentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplate", ID: &iIncidentTemplate, Members: &mIncidentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eCreateResponsePlanInput_incidentTemplate})
+var sCreateResponsePlanInput_chatChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatChannel", ID: &iChatChannel, Members: &mChatChannel, Type: smithy.ShapeTypeUnion, Ext: &eCreateResponsePlanInput_chatChannel})
+var sCreateResponsePlanInput_engagements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "engagements", ID: &i_EngagementSet, Members: &m_EngagementSet, Type: smithy.ShapeTypeList, Ext: &eCreateResponsePlanInput_engagements})
+var sCreateResponsePlanInput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList, Ext: &eCreateResponsePlanInput_actions})
+var sCreateResponsePlanInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateResponsePlanInput_tags})
+var sCreateResponsePlanInput_integrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrations", ID: &i_Integrations, Members: &m_Integrations, Type: smithy.ShapeTypeList, Ext: &eCreateResponsePlanInput_integrations})
+var sCreateResponsePlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResponsePlanOutput, Members: &mCreateResponsePlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateResponsePlanOutput})
+var sCreateResponsePlanOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateResponsePlanOutput_arn})
+var sCreateTimelineEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTimelineEventInput, Members: &mCreateTimelineEventInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTimelineEventInput})
+var sCreateTimelineEventInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateTimelineEventInput_clientToken})
+var sCreateTimelineEventInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateTimelineEventInput_incidentRecordArn})
+var sCreateTimelineEventInput_eventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateTimelineEventInput_eventTime})
+var sCreateTimelineEventInput_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_TimelineEventType, Type: smithy.ShapeTypeString, Ext: &eCreateTimelineEventInput_eventType})
+var sCreateTimelineEventInput_eventData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventData", ID: &i_EventData, Type: smithy.ShapeTypeString, Ext: &eCreateTimelineEventInput_eventData})
+var sCreateTimelineEventInput_eventReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventReferences", ID: &i_EventReferenceList, Members: &m_EventReferenceList, Type: smithy.ShapeTypeList, Ext: &eCreateTimelineEventInput_eventReferences})
+var sCreateTimelineEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTimelineEventOutput, Members: &mCreateTimelineEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTimelineEventOutput})
+var sCreateTimelineEventOutput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateTimelineEventOutput_incidentRecordArn})
+var sCreateTimelineEventOutput_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCreateTimelineEventOutput_eventId})
+var sDeleteIncidentRecordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIncidentRecordInput, Members: &mDeleteIncidentRecordInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIncidentRecordInput})
+var sDeleteIncidentRecordInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteIncidentRecordInput_arn})
+var sDeleteIncidentRecordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIncidentRecordOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIncidentRecordOutput})
+var sDeleteReplicationSetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicationSetInput, Members: &mDeleteReplicationSetInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReplicationSetInput})
+var sDeleteReplicationSetInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteReplicationSetInput_arn})
+var sDeleteReplicationSetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicationSetOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReplicationSetOutput})
+var sDeleteResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyInput, Members: &mDeleteResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyInput})
+var sDeleteResourcePolicyInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyInput_resourceArn})
+var sDeleteResourcePolicyInput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyInput_policyId})
+var sDeleteResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyOutput})
+var sDeleteResponsePlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResponsePlanInput, Members: &mDeleteResponsePlanInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResponsePlanInput})
+var sDeleteResponsePlanInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteResponsePlanInput_arn})
+var sDeleteResponsePlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResponsePlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResponsePlanOutput})
+var sDeleteTimelineEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTimelineEventInput, Members: &mDeleteTimelineEventInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTimelineEventInput})
+var sDeleteTimelineEventInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteTimelineEventInput_incidentRecordArn})
+var sDeleteTimelineEventInput_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eDeleteTimelineEventInput_eventId})
+var sDeleteTimelineEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTimelineEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTimelineEventOutput})
+var sGetIncidentRecordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIncidentRecordInput, Members: &mGetIncidentRecordInput, Type: smithy.ShapeTypeStructure, Ext: &eGetIncidentRecordInput})
+var sGetIncidentRecordInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetIncidentRecordInput_arn})
+var sGetIncidentRecordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIncidentRecordOutput, Members: &mGetIncidentRecordOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetIncidentRecordOutput})
+var sGetIncidentRecordOutput_incidentRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecord", ID: &iIncidentRecord, Members: &mIncidentRecord, Type: smithy.ShapeTypeStructure, Ext: &eGetIncidentRecordOutput_incidentRecord})
+var sGetReplicationSetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReplicationSetInput, Members: &mGetReplicationSetInput, Type: smithy.ShapeTypeStructure, Ext: &eGetReplicationSetInput})
+var sGetReplicationSetInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetReplicationSetInput_arn})
+var sGetReplicationSetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReplicationSetOutput, Members: &mGetReplicationSetOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetReplicationSetOutput})
+var sGetReplicationSetOutput_replicationSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationSet", ID: &iReplicationSet, Members: &mReplicationSet, Type: smithy.ShapeTypeStructure, Ext: &eGetReplicationSetOutput_replicationSet})
+var sGetResourcePoliciesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePoliciesInput, Members: &mGetResourcePoliciesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePoliciesInput})
+var sGetResourcePoliciesInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetResourcePoliciesInput_resourceArn})
+var sGetResourcePoliciesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetResourcePoliciesInput_maxResults})
+var sGetResourcePoliciesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetResourcePoliciesInput_nextToken})
+var sGetResourcePoliciesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePoliciesOutput, Members: &mGetResourcePoliciesOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePoliciesOutput})
+var sGetResourcePoliciesOutput_resourcePolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePolicies", ID: &i_ResourcePolicyList, Members: &m_ResourcePolicyList, Type: smithy.ShapeTypeList, Ext: &eGetResourcePoliciesOutput_resourcePolicies})
+var sGetResourcePoliciesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetResourcePoliciesOutput_nextToken})
+var sGetResponsePlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResponsePlanInput, Members: &mGetResponsePlanInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResponsePlanInput})
+var sGetResponsePlanInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetResponsePlanInput_arn})
+var sGetResponsePlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResponsePlanOutput, Members: &mGetResponsePlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResponsePlanOutput})
+var sGetResponsePlanOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetResponsePlanOutput_arn})
+var sGetResponsePlanOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResponsePlanName, Type: smithy.ShapeTypeString, Ext: &eGetResponsePlanOutput_name})
+var sGetResponsePlanOutput_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ResponsePlanDisplayName, Type: smithy.ShapeTypeString, Ext: &eGetResponsePlanOutput_displayName})
+var sGetResponsePlanOutput_incidentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplate", ID: &iIncidentTemplate, Members: &mIncidentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eGetResponsePlanOutput_incidentTemplate})
+var sGetResponsePlanOutput_chatChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatChannel", ID: &iChatChannel, Members: &mChatChannel, Type: smithy.ShapeTypeUnion, Ext: &eGetResponsePlanOutput_chatChannel})
+var sGetResponsePlanOutput_engagements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "engagements", ID: &i_EngagementSet, Members: &m_EngagementSet, Type: smithy.ShapeTypeList, Ext: &eGetResponsePlanOutput_engagements})
+var sGetResponsePlanOutput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList, Ext: &eGetResponsePlanOutput_actions})
+var sGetResponsePlanOutput_integrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrations", ID: &i_Integrations, Members: &m_Integrations, Type: smithy.ShapeTypeList, Ext: &eGetResponsePlanOutput_integrations})
+var sGetTimelineEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTimelineEventInput, Members: &mGetTimelineEventInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTimelineEventInput})
+var sGetTimelineEventInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eGetTimelineEventInput_incidentRecordArn})
+var sGetTimelineEventInput_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_UUID, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eGetTimelineEventInput_eventId})
+var sGetTimelineEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTimelineEventOutput, Members: &mGetTimelineEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTimelineEventOutput})
+var sGetTimelineEventOutput_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iTimelineEvent, Members: &mTimelineEvent, Type: smithy.ShapeTypeStructure, Ext: &eGetTimelineEventOutput_event})
+var sListIncidentFindingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncidentFindingsInput, Members: &mListIncidentFindingsInput, Type: smithy.ShapeTypeStructure, Ext: &eListIncidentFindingsInput})
+var sListIncidentFindingsInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListIncidentFindingsInput_incidentRecordArn})
+var sListIncidentFindingsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListIncidentFindingsInput_maxResults})
+var sListIncidentFindingsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIncidentFindingsInput_nextToken})
+var sListIncidentFindingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncidentFindingsOutput, Members: &mListIncidentFindingsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListIncidentFindingsOutput})
+var sListIncidentFindingsOutput_findings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findings", ID: &i_FindingSummaryList, Members: &m_FindingSummaryList, Type: smithy.ShapeTypeList, Ext: &eListIncidentFindingsOutput_findings})
+var sListIncidentFindingsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIncidentFindingsOutput_nextToken})
+var sListIncidentRecordsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncidentRecordsInput, Members: &mListIncidentRecordsInput, Type: smithy.ShapeTypeStructure, Ext: &eListIncidentRecordsInput})
+var sListIncidentRecordsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eListIncidentRecordsInput_filters})
+var sListIncidentRecordsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListIncidentRecordsInput_maxResults})
+var sListIncidentRecordsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIncidentRecordsInput_nextToken})
+var sListIncidentRecordsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncidentRecordsOutput, Members: &mListIncidentRecordsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListIncidentRecordsOutput})
+var sListIncidentRecordsOutput_incidentRecordSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordSummaries", ID: &i_IncidentRecordSummaryList, Members: &m_IncidentRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &eListIncidentRecordsOutput_incidentRecordSummaries})
+var sListIncidentRecordsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIncidentRecordsOutput_nextToken})
+var sListRelatedItemsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelatedItemsInput, Members: &mListRelatedItemsInput, Type: smithy.ShapeTypeStructure, Ext: &eListRelatedItemsInput})
+var sListRelatedItemsInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListRelatedItemsInput_incidentRecordArn})
+var sListRelatedItemsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRelatedItemsInput_maxResults})
+var sListRelatedItemsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRelatedItemsInput_nextToken})
+var sListRelatedItemsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelatedItemsOutput, Members: &mListRelatedItemsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRelatedItemsOutput})
+var sListRelatedItemsOutput_relatedItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItems", ID: &i_RelatedItemList, Members: &m_RelatedItemList, Type: smithy.ShapeTypeList, Ext: &eListRelatedItemsOutput_relatedItems})
+var sListRelatedItemsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRelatedItemsOutput_nextToken})
+var sListReplicationSetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplicationSetsInput, Members: &mListReplicationSetsInput, Type: smithy.ShapeTypeStructure, Ext: &eListReplicationSetsInput})
+var sListReplicationSetsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListReplicationSetsInput_maxResults})
+var sListReplicationSetsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListReplicationSetsInput_nextToken})
+var sListReplicationSetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplicationSetsOutput, Members: &mListReplicationSetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListReplicationSetsOutput})
+var sListReplicationSetsOutput_replicationSetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationSetArns", ID: &i_ReplicationSetArnList, Members: &m_ReplicationSetArnList, Type: smithy.ShapeTypeList, Ext: &eListReplicationSetsOutput_replicationSetArns})
+var sListReplicationSetsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListReplicationSetsOutput_nextToken})
+var sListResponsePlansInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResponsePlansInput, Members: &mListResponsePlansInput, Type: smithy.ShapeTypeStructure, Ext: &eListResponsePlansInput})
+var sListResponsePlansInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListResponsePlansInput_maxResults})
+var sListResponsePlansInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListResponsePlansInput_nextToken})
+var sListResponsePlansOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResponsePlansOutput, Members: &mListResponsePlansOutput, Type: smithy.ShapeTypeStructure, Ext: &eListResponsePlansOutput})
+var sListResponsePlansOutput_responsePlanSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responsePlanSummaries", ID: &i_ResponsePlanSummaryList, Members: &m_ResponsePlanSummaryList, Type: smithy.ShapeTypeList, Ext: &eListResponsePlansOutput_responsePlanSummaries})
+var sListResponsePlansOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListResponsePlansOutput_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sListTimelineEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTimelineEventsInput, Members: &mListTimelineEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListTimelineEventsInput})
+var sListTimelineEventsInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTimelineEventsInput_incidentRecordArn})
+var sListTimelineEventsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eListTimelineEventsInput_filters})
+var sListTimelineEventsInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &i_TimelineEventSort, Type: smithy.ShapeTypeString, Ext: &eListTimelineEventsInput_sortBy})
+var sListTimelineEventsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &eListTimelineEventsInput_sortOrder})
+var sListTimelineEventsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTimelineEventsInput_maxResults})
+var sListTimelineEventsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTimelineEventsInput_nextToken})
+var sListTimelineEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTimelineEventsOutput, Members: &mListTimelineEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTimelineEventsOutput})
+var sListTimelineEventsOutput_eventSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventSummaries", ID: &i_EventSummaryList, Members: &m_EventSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTimelineEventsOutput_eventSummaries})
+var sListTimelineEventsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTimelineEventsOutput_nextToken})
+var sPutResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyInput, Members: &mPutResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyInput})
+var sPutResourcePolicyInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyInput_resourceArn})
+var sPutResourcePolicyInput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyInput_policy})
+var sPutResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyOutput, Members: &mPutResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyOutput})
+var sPutResourcePolicyOutput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyOutput_policyId})
+var sStartIncidentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIncidentInput, Members: &mStartIncidentInput, Type: smithy.ShapeTypeStructure, Ext: &eStartIncidentInput})
+var sStartIncidentInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eStartIncidentInput_clientToken})
+var sStartIncidentInput_responsePlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responsePlanArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStartIncidentInput_responsePlanArn})
+var sStartIncidentInput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_IncidentTitle, Type: smithy.ShapeTypeString, Ext: &eStartIncidentInput_title})
+var sStartIncidentInput_impact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impact", ID: &i_Impact, Type: smithy.ShapeTypeInteger, Ext: &eStartIncidentInput_impact})
+var sStartIncidentInput_triggerDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerDetails", ID: &iTriggerDetails, Members: &mTriggerDetails, Type: smithy.ShapeTypeStructure, Ext: &eStartIncidentInput_triggerDetails})
+var sStartIncidentInput_relatedItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItems", ID: &i_RelatedItemList, Members: &m_RelatedItemList, Type: smithy.ShapeTypeList, Ext: &eStartIncidentInput_relatedItems})
+var sStartIncidentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIncidentOutput, Members: &mStartIncidentOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartIncidentOutput})
+var sStartIncidentOutput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStartIncidentOutput_incidentRecordArn})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t43, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateDeletionProtectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeletionProtectionInput, Members: &mUpdateDeletionProtectionInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDeletionProtectionInput})
+var sUpdateDeletionProtectionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateDeletionProtectionInput_arn})
+var sUpdateDeletionProtectionInput_deletionProtected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtected", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateDeletionProtectionInput_deletionProtected})
+var sUpdateDeletionProtectionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateDeletionProtectionInput_clientToken})
+var sUpdateDeletionProtectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeletionProtectionOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDeletionProtectionOutput})
+var sUpdateIncidentRecordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIncidentRecordInput, Members: &mUpdateIncidentRecordInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIncidentRecordInput})
+var sUpdateIncidentRecordInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateIncidentRecordInput_clientToken})
+var sUpdateIncidentRecordInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateIncidentRecordInput_arn})
+var sUpdateIncidentRecordInput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_IncidentTitle, Type: smithy.ShapeTypeString, Ext: &eUpdateIncidentRecordInput_title})
+var sUpdateIncidentRecordInput_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_IncidentSummary, Type: smithy.ShapeTypeString, Ext: &eUpdateIncidentRecordInput_summary})
+var sUpdateIncidentRecordInput_impact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impact", ID: &i_Impact, Type: smithy.ShapeTypeInteger, Ext: &eUpdateIncidentRecordInput_impact})
+var sUpdateIncidentRecordInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IncidentRecordStatus, Type: smithy.ShapeTypeString, Ext: &eUpdateIncidentRecordInput_status})
+var sUpdateIncidentRecordInput_chatChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatChannel", ID: &iChatChannel, Members: &mChatChannel, Type: smithy.ShapeTypeUnion, Ext: &eUpdateIncidentRecordInput_chatChannel})
+var sUpdateIncidentRecordInput_notificationTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationTargets", ID: &i_NotificationTargetSet, Members: &m_NotificationTargetSet, Type: smithy.ShapeTypeList, Ext: &eUpdateIncidentRecordInput_notificationTargets})
+var sUpdateIncidentRecordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIncidentRecordOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIncidentRecordOutput})
+var sUpdateRelatedItemsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelatedItemsInput, Members: &mUpdateRelatedItemsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelatedItemsInput})
+var sUpdateRelatedItemsInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRelatedItemsInput_clientToken})
+var sUpdateRelatedItemsInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateRelatedItemsInput_incidentRecordArn})
+var sUpdateRelatedItemsInput_relatedItemsUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemsUpdate", ID: &iRelatedItemsUpdate, Members: &mRelatedItemsUpdate, Type: smithy.ShapeTypeUnion, Ext: &eUpdateRelatedItemsInput_relatedItemsUpdate})
+var sUpdateRelatedItemsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelatedItemsOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelatedItemsOutput})
+var sUpdateReplicationSetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationSetInput, Members: &mUpdateReplicationSetInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationSetInput})
+var sUpdateReplicationSetInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationSetInput_arn})
+var sUpdateReplicationSetInput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_UpdateActionList, Members: &m_UpdateActionList, Type: smithy.ShapeTypeList, Ext: &eUpdateReplicationSetInput_actions})
+var sUpdateReplicationSetInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationSetInput_clientToken})
+var sUpdateReplicationSetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationSetOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationSetOutput})
+var sUpdateResponsePlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResponsePlanInput, Members: &mUpdateResponsePlanInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResponsePlanInput})
+var sUpdateResponsePlanInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateResponsePlanInput_clientToken})
+var sUpdateResponsePlanInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateResponsePlanInput_arn})
+var sUpdateResponsePlanInput_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ResponsePlanDisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateResponsePlanInput_displayName})
+var sUpdateResponsePlanInput_incidentTemplateTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplateTitle", ID: &i_IncidentTitle, Type: smithy.ShapeTypeString, Ext: &eUpdateResponsePlanInput_incidentTemplateTitle})
+var sUpdateResponsePlanInput_incidentTemplateImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplateImpact", ID: &i_Impact, Type: smithy.ShapeTypeInteger, Ext: &eUpdateResponsePlanInput_incidentTemplateImpact})
+var sUpdateResponsePlanInput_incidentTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplateSummary", ID: &i_IncidentSummary, Type: smithy.ShapeTypeString, Ext: &eUpdateResponsePlanInput_incidentTemplateSummary})
+var sUpdateResponsePlanInput_incidentTemplateDedupeString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplateDedupeString", ID: &i_DedupeString, Type: smithy.ShapeTypeString, Ext: &eUpdateResponsePlanInput_incidentTemplateDedupeString})
+var sUpdateResponsePlanInput_incidentTemplateNotificationTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplateNotificationTargets", ID: &i_NotificationTargetSet, Members: &m_NotificationTargetSet, Type: smithy.ShapeTypeList, Ext: &eUpdateResponsePlanInput_incidentTemplateNotificationTargets})
+var sUpdateResponsePlanInput_chatChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chatChannel", ID: &iChatChannel, Members: &mChatChannel, Type: smithy.ShapeTypeUnion, Ext: &eUpdateResponsePlanInput_chatChannel})
+var sUpdateResponsePlanInput_engagements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "engagements", ID: &i_EngagementSet, Members: &m_EngagementSet, Type: smithy.ShapeTypeList, Ext: &eUpdateResponsePlanInput_engagements})
+var sUpdateResponsePlanInput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList, Ext: &eUpdateResponsePlanInput_actions})
+var sUpdateResponsePlanInput_incidentTemplateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentTemplateTags", ID: &i_TagMapUpdate, Members: &m_TagMapUpdate, Type: smithy.ShapeTypeMap, Ext: &eUpdateResponsePlanInput_incidentTemplateTags})
+var sUpdateResponsePlanInput_integrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrations", ID: &i_Integrations, Members: &m_Integrations, Type: smithy.ShapeTypeList, Ext: &eUpdateResponsePlanInput_integrations})
+var sUpdateResponsePlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResponsePlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResponsePlanOutput})
+var sUpdateTimelineEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTimelineEventInput, Members: &mUpdateTimelineEventInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTimelineEventInput})
+var sUpdateTimelineEventInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateTimelineEventInput_clientToken})
+var sUpdateTimelineEventInput_incidentRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incidentRecordArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateTimelineEventInput_incidentRecordArn})
+var sUpdateTimelineEventInput_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eUpdateTimelineEventInput_eventId})
+var sUpdateTimelineEventInput_eventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateTimelineEventInput_eventTime})
+var sUpdateTimelineEventInput_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_TimelineEventType, Type: smithy.ShapeTypeString, Ext: &eUpdateTimelineEventInput_eventType})
+var sUpdateTimelineEventInput_eventData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventData", ID: &i_EventData, Type: smithy.ShapeTypeString, Ext: &eUpdateTimelineEventInput_eventData})
+var sUpdateTimelineEventInput_eventReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventReferences", ID: &i_EventReferenceList, Members: &m_EventReferenceList, Type: smithy.ShapeTypeList, Ext: &eUpdateTimelineEventInput_eventReferences})
+var sUpdateTimelineEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTimelineEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTimelineEventOutput})
+
+var BatchGetIncidentFindings = &sBatchGetIncidentFindings
+
+var CreateReplicationSet = &sCreateReplicationSet
+
+var CreateResponsePlan = &sCreateResponsePlan
+
+var CreateTimelineEvent = &sCreateTimelineEvent
+
+var DeleteIncidentRecord = &sDeleteIncidentRecord
+
+var DeleteReplicationSet = &sDeleteReplicationSet
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteResponsePlan = &sDeleteResponsePlan
+
+var DeleteTimelineEvent = &sDeleteTimelineEvent
+
+var GetIncidentRecord = &sGetIncidentRecord
+
+var GetReplicationSet = &sGetReplicationSet
+
+var GetResourcePolicies = &sGetResourcePolicies
+
+var GetResponsePlan = &sGetResponsePlan
+
+var GetTimelineEvent = &sGetTimelineEvent
+
+var ListIncidentFindings = &sListIncidentFindings
+
+var ListIncidentRecords = &sListIncidentRecords
+
+var ListRelatedItems = &sListRelatedItems
+
+var ListReplicationSets = &sListReplicationSets
+
+var ListResponsePlans = &sListResponsePlans
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTimelineEvents = &sListTimelineEvents
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var StartIncident = &sStartIncident
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDeletionProtection = &sUpdateDeletionProtection
+
+var UpdateIncidentRecord = &sUpdateIncidentRecord
+
+var UpdateRelatedItems = &sUpdateRelatedItems
+
+var UpdateReplicationSet = &sUpdateReplicationSet
+
+var UpdateResponsePlan = &sUpdateResponsePlan
+
+var UpdateTimelineEvent = &sUpdateTimelineEvent
+
+var _SSMIncidents = &s_SSMIncidents
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var Action = &sAction
+var Action_ssmAutomation = &sAction_ssmAutomation
+
+var _ActionsList = &s_ActionsList
+var _ActionsList_member = &s_ActionsList_member
+
+var AddRegionAction = &sAddRegionAction
+var AddRegionAction_regionName = &sAddRegionAction_regionName
+var AddRegionAction_sseKmsKeyId = &sAddRegionAction_sseKmsKeyId
+
+var _Arn = &s_Arn
+
+var AttributeValueList = &sAttributeValueList
+var AttributeValueList_stringValues = &sAttributeValueList_stringValues
+var AttributeValueList_integerValues = &sAttributeValueList_integerValues
+
+var AutomationExecution = &sAutomationExecution
+var AutomationExecution_ssmExecutionArn = &sAutomationExecution_ssmExecutionArn
+
+var _AutomationExecutionSet = &s_AutomationExecutionSet
+var _AutomationExecutionSet_member = &s_AutomationExecutionSet_member
+
+var BatchGetIncidentFindingsError = &sBatchGetIncidentFindingsError
+var BatchGetIncidentFindingsError_findingId = &sBatchGetIncidentFindingsError_findingId
+var BatchGetIncidentFindingsError_code = &sBatchGetIncidentFindingsError_code
+var BatchGetIncidentFindingsError_message = &sBatchGetIncidentFindingsError_message
+
+var _BatchGetIncidentFindingsErrorList = &s_BatchGetIncidentFindingsErrorList
+var _BatchGetIncidentFindingsErrorList_member = &s_BatchGetIncidentFindingsErrorList_member
+
+var _ChatbotSnsConfigurationSet = &s_ChatbotSnsConfigurationSet
+var _ChatbotSnsConfigurationSet_member = &s_ChatbotSnsConfigurationSet_member
+
+var ChatChannel = &sChatChannel
+var ChatChannel_empty = &sChatChannel_empty
+var ChatChannel_chatbotSns = &sChatChannel_chatbotSns
+
+var _ClientToken = &s_ClientToken
+
+var CloudFormationStackUpdate = &sCloudFormationStackUpdate
+var CloudFormationStackUpdate_startTime = &sCloudFormationStackUpdate_startTime
+var CloudFormationStackUpdate_endTime = &sCloudFormationStackUpdate_endTime
+var CloudFormationStackUpdate_stackArn = &sCloudFormationStackUpdate_stackArn
+
+var CodeDeployDeployment = &sCodeDeployDeployment
+var CodeDeployDeployment_startTime = &sCodeDeployDeployment_startTime
+var CodeDeployDeployment_endTime = &sCodeDeployDeployment_endTime
+var CodeDeployDeployment_deploymentGroupArn = &sCodeDeployDeployment_deploymentGroupArn
+var CodeDeployDeployment_deploymentId = &sCodeDeployDeployment_deploymentId
+
+var Condition = &sCondition
+var Condition_before = &sCondition_before
+var Condition_after = &sCondition_after
+var Condition_equals = &sCondition_equals
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceIdentifier = &sConflictException_resourceIdentifier
+var ConflictException_resourceType = &sConflictException_resourceType
+var ConflictException_retryAfter = &sConflictException_retryAfter
+
+var _DedupeString = &s_DedupeString
+
+var DeleteRegionAction = &sDeleteRegionAction
+var DeleteRegionAction_regionName = &sDeleteRegionAction_regionName
+
+var _DynamicSsmParameters = &s_DynamicSsmParameters
+var _DynamicSsmParameters_key = &s_DynamicSsmParameters_key
+var _DynamicSsmParameters_value = &s_DynamicSsmParameters_value
+
+var DynamicSsmParameterValue = &sDynamicSsmParameterValue
+var DynamicSsmParameterValue_variable = &sDynamicSsmParameterValue_variable
+
+var EmptyChatChannel = &sEmptyChatChannel
+
+var _EngagementSet = &s_EngagementSet
+var _EngagementSet_member = &s_EngagementSet_member
+
+var _EventData = &s_EventData
+
+var EventReference = &sEventReference
+var EventReference_resource = &sEventReference_resource
+var EventReference_relatedItemId = &sEventReference_relatedItemId
+
+var _EventReferenceList = &s_EventReferenceList
+var _EventReferenceList_member = &s_EventReferenceList_member
+
+var EventSummary = &sEventSummary
+var EventSummary_incidentRecordArn = &sEventSummary_incidentRecordArn
+var EventSummary_eventId = &sEventSummary_eventId
+var EventSummary_eventTime = &sEventSummary_eventTime
+var EventSummary_eventUpdatedTime = &sEventSummary_eventUpdatedTime
+var EventSummary_eventType = &sEventSummary_eventType
+var EventSummary_eventReferences = &sEventSummary_eventReferences
+
+var _EventSummaryList = &s_EventSummaryList
+var _EventSummaryList_member = &s_EventSummaryList_member
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var Filter = &sFilter
+var Filter_key = &sFilter_key
+var Filter_condition = &sFilter_condition
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var Finding = &sFinding
+var Finding_id = &sFinding_id
+var Finding_creationTime = &sFinding_creationTime
+var Finding_lastModifiedTime = &sFinding_lastModifiedTime
+var Finding_details = &sFinding_details
+
+var FindingDetails = &sFindingDetails
+var FindingDetails_codeDeployDeployment = &sFindingDetails_codeDeployDeployment
+var FindingDetails_cloudFormationStackUpdate = &sFindingDetails_cloudFormationStackUpdate
+
+var _FindingId = &s_FindingId
+
+var _FindingIdList = &s_FindingIdList
+var _FindingIdList_member = &s_FindingIdList_member
+
+var _FindingList = &s_FindingList
+var _FindingList_member = &s_FindingList_member
+
+var FindingSummary = &sFindingSummary
+var FindingSummary_id = &sFindingSummary_id
+var FindingSummary_lastModifiedTime = &sFindingSummary_lastModifiedTime
+
+var _FindingSummaryList = &s_FindingSummaryList
+var _FindingSummaryList_member = &s_FindingSummaryList_member
+
+var _GeneratedId = &s_GeneratedId
+
+var _Impact = &s_Impact
+
+var IncidentRecord = &sIncidentRecord
+var IncidentRecord_arn = &sIncidentRecord_arn
+var IncidentRecord_title = &sIncidentRecord_title
+var IncidentRecord_summary = &sIncidentRecord_summary
+var IncidentRecord_status = &sIncidentRecord_status
+var IncidentRecord_impact = &sIncidentRecord_impact
+var IncidentRecord_creationTime = &sIncidentRecord_creationTime
+var IncidentRecord_resolvedTime = &sIncidentRecord_resolvedTime
+var IncidentRecord_lastModifiedTime = &sIncidentRecord_lastModifiedTime
+var IncidentRecord_lastModifiedBy = &sIncidentRecord_lastModifiedBy
+var IncidentRecord_automationExecutions = &sIncidentRecord_automationExecutions
+var IncidentRecord_incidentRecordSource = &sIncidentRecord_incidentRecordSource
+var IncidentRecord_dedupeString = &sIncidentRecord_dedupeString
+var IncidentRecord_chatChannel = &sIncidentRecord_chatChannel
+var IncidentRecord_notificationTargets = &sIncidentRecord_notificationTargets
+
+var IncidentRecordSource = &sIncidentRecordSource
+var IncidentRecordSource_createdBy = &sIncidentRecordSource_createdBy
+var IncidentRecordSource_invokedBy = &sIncidentRecordSource_invokedBy
+var IncidentRecordSource_resourceArn = &sIncidentRecordSource_resourceArn
+var IncidentRecordSource_source = &sIncidentRecordSource_source
+
+var _IncidentRecordStatus = &s_IncidentRecordStatus
+
+var IncidentRecordSummary = &sIncidentRecordSummary
+var IncidentRecordSummary_arn = &sIncidentRecordSummary_arn
+var IncidentRecordSummary_title = &sIncidentRecordSummary_title
+var IncidentRecordSummary_status = &sIncidentRecordSummary_status
+var IncidentRecordSummary_impact = &sIncidentRecordSummary_impact
+var IncidentRecordSummary_creationTime = &sIncidentRecordSummary_creationTime
+var IncidentRecordSummary_resolvedTime = &sIncidentRecordSummary_resolvedTime
+var IncidentRecordSummary_incidentRecordSource = &sIncidentRecordSummary_incidentRecordSource
+
+var _IncidentRecordSummaryList = &s_IncidentRecordSummaryList
+var _IncidentRecordSummaryList_member = &s_IncidentRecordSummaryList_member
+
+var _IncidentSource = &s_IncidentSource
+
+var _IncidentSummary = &s_IncidentSummary
+
+var IncidentTemplate = &sIncidentTemplate
+var IncidentTemplate_title = &sIncidentTemplate_title
+var IncidentTemplate_impact = &sIncidentTemplate_impact
+var IncidentTemplate_summary = &sIncidentTemplate_summary
+var IncidentTemplate_dedupeString = &sIncidentTemplate_dedupeString
+var IncidentTemplate_notificationTargets = &sIncidentTemplate_notificationTargets
+var IncidentTemplate_incidentTags = &sIncidentTemplate_incidentTags
+
+var _IncidentTitle = &s_IncidentTitle
+
+var _IntegerList = &s_IntegerList
+var _IntegerList_member = &s_IntegerList_member
+
+var Integration = &sIntegration
+var Integration_pagerDutyConfiguration = &sIntegration_pagerDutyConfiguration
+
+var _Integrations = &s_Integrations
+var _Integrations_member = &s_Integrations_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var ItemIdentifier = &sItemIdentifier
+var ItemIdentifier_value = &sItemIdentifier_value
+var ItemIdentifier_type = &sItemIdentifier_type
+
+var _ItemType = &s_ItemType
+
+var ItemValue = &sItemValue
+var ItemValue_arn = &sItemValue_arn
+var ItemValue_url = &sItemValue_url
+var ItemValue_metricDefinition = &sItemValue_metricDefinition
+var ItemValue_pagerDutyIncidentDetail = &sItemValue_pagerDutyIncidentDetail
+
+var _MaxResults = &s_MaxResults
+
+var _MetricDefinition = &s_MetricDefinition
+
+var _NextToken = &s_NextToken
+
+var NotificationTargetItem = &sNotificationTargetItem
+var NotificationTargetItem_snsTopicArn = &sNotificationTargetItem_snsTopicArn
+
+var _NotificationTargetSet = &s_NotificationTargetSet
+var _NotificationTargetSet_member = &s_NotificationTargetSet_member
+
+var PagerDutyConfiguration = &sPagerDutyConfiguration
+var PagerDutyConfiguration_name = &sPagerDutyConfiguration_name
+var PagerDutyConfiguration_secretId = &sPagerDutyConfiguration_secretId
+var PagerDutyConfiguration_pagerDutyIncidentConfiguration = &sPagerDutyConfiguration_pagerDutyIncidentConfiguration
+
+var PagerDutyIncidentConfiguration = &sPagerDutyIncidentConfiguration
+var PagerDutyIncidentConfiguration_serviceId = &sPagerDutyIncidentConfiguration_serviceId
+
+var PagerDutyIncidentDetail = &sPagerDutyIncidentDetail
+var PagerDutyIncidentDetail_id = &sPagerDutyIncidentDetail_id
+var PagerDutyIncidentDetail_autoResolve = &sPagerDutyIncidentDetail_autoResolve
+var PagerDutyIncidentDetail_secretId = &sPagerDutyIncidentDetail_secretId
+
+var _Policy = &s_Policy
+
+var _PolicyId = &s_PolicyId
+
+var _RawData = &s_RawData
+
+var RegionInfo = &sRegionInfo
+var RegionInfo_sseKmsKeyId = &sRegionInfo_sseKmsKeyId
+var RegionInfo_status = &sRegionInfo_status
+var RegionInfo_statusMessage = &sRegionInfo_statusMessage
+var RegionInfo_statusUpdateDateTime = &sRegionInfo_statusUpdateDateTime
+
+var _RegionInfoMap = &s_RegionInfoMap
+var _RegionInfoMap_key = &s_RegionInfoMap_key
+var _RegionInfoMap_value = &s_RegionInfoMap_value
+
+var _RegionMapInput = &s_RegionMapInput
+var _RegionMapInput_key = &s_RegionMapInput_key
+var _RegionMapInput_value = &s_RegionMapInput_value
+
+var RegionMapInputValue = &sRegionMapInputValue
+var RegionMapInputValue_sseKmsKeyId = &sRegionMapInputValue_sseKmsKeyId
+
+var _RegionName = &s_RegionName
+
+var _RegionStatus = &s_RegionStatus
+
+var RelatedItem = &sRelatedItem
+var RelatedItem_identifier = &sRelatedItem_identifier
+var RelatedItem_title = &sRelatedItem_title
+var RelatedItem_generatedId = &sRelatedItem_generatedId
+
+var _RelatedItemList = &s_RelatedItemList
+var _RelatedItemList_member = &s_RelatedItemList_member
+
+var RelatedItemsUpdate = &sRelatedItemsUpdate
+var RelatedItemsUpdate_itemToAdd = &sRelatedItemsUpdate_itemToAdd
+var RelatedItemsUpdate_itemToRemove = &sRelatedItemsUpdate_itemToRemove
+
+var ReplicationSet = &sReplicationSet
+var ReplicationSet_arn = &sReplicationSet_arn
+var ReplicationSet_regionMap = &sReplicationSet_regionMap
+var ReplicationSet_status = &sReplicationSet_status
+var ReplicationSet_deletionProtected = &sReplicationSet_deletionProtected
+var ReplicationSet_createdTime = &sReplicationSet_createdTime
+var ReplicationSet_createdBy = &sReplicationSet_createdBy
+var ReplicationSet_lastModifiedTime = &sReplicationSet_lastModifiedTime
+var ReplicationSet_lastModifiedBy = &sReplicationSet_lastModifiedBy
+
+var _ReplicationSetArnList = &s_ReplicationSetArnList
+var _ReplicationSetArnList_member = &s_ReplicationSetArnList_member
+
+var _ReplicationSetStatus = &s_ReplicationSetStatus
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceIdentifier = &sResourceNotFoundException_resourceIdentifier
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ResourcePolicy = &sResourcePolicy
+var ResourcePolicy_policyDocument = &sResourcePolicy_policyDocument
+var ResourcePolicy_policyId = &sResourcePolicy_policyId
+var ResourcePolicy_ramResourceShareRegion = &sResourcePolicy_ramResourceShareRegion
+
+var _ResourcePolicyList = &s_ResourcePolicyList
+var _ResourcePolicyList_member = &s_ResourcePolicyList_member
+
+var _ResourceType = &s_ResourceType
+
+var _ResponsePlanDisplayName = &s_ResponsePlanDisplayName
+
+var _ResponsePlanName = &s_ResponsePlanName
+
+var ResponsePlanSummary = &sResponsePlanSummary
+var ResponsePlanSummary_arn = &sResponsePlanSummary_arn
+var ResponsePlanSummary_name = &sResponsePlanSummary_name
+var ResponsePlanSummary_displayName = &sResponsePlanSummary_displayName
+
+var _ResponsePlanSummaryList = &s_ResponsePlanSummaryList
+var _ResponsePlanSummaryList_member = &s_ResponsePlanSummaryList_member
+
+var _RoleArn = &s_RoleArn
+
+var _ServiceCode = &s_ServiceCode
+
+var _ServicePrincipal = &s_ServicePrincipal
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceIdentifier = &sServiceQuotaExceededException_resourceIdentifier
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _SnsArn = &s_SnsArn
+
+var _SortOrder = &s_SortOrder
+
+var _SseKmsKey = &s_SseKmsKey
+
+var SsmAutomation = &sSsmAutomation
+var SsmAutomation_roleArn = &sSsmAutomation_roleArn
+var SsmAutomation_documentName = &sSsmAutomation_documentName
+var SsmAutomation_documentVersion = &sSsmAutomation_documentVersion
+var SsmAutomation_targetAccount = &sSsmAutomation_targetAccount
+var SsmAutomation_parameters = &sSsmAutomation_parameters
+var SsmAutomation_dynamicParameters = &sSsmAutomation_dynamicParameters
+
+var _SsmContactsArn = &s_SsmContactsArn
+
+var _SsmParameters = &s_SsmParameters
+var _SsmParameters_key = &s_SsmParameters_key
+var _SsmParameters_value = &s_SsmParameters_value
+
+var _SsmParameterValues = &s_SsmParameterValues
+var _SsmParameterValues_member = &s_SsmParameterValues_member
+
+var _SsmTargetAccount = &s_SsmTargetAccount
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagMapUpdate = &s_TagMapUpdate
+var _TagMapUpdate_key = &s_TagMapUpdate_key
+var _TagMapUpdate_value = &s_TagMapUpdate_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+
+var TimelineEvent = &sTimelineEvent
+var TimelineEvent_incidentRecordArn = &sTimelineEvent_incidentRecordArn
+var TimelineEvent_eventId = &sTimelineEvent_eventId
+var TimelineEvent_eventTime = &sTimelineEvent_eventTime
+var TimelineEvent_eventUpdatedTime = &sTimelineEvent_eventUpdatedTime
+var TimelineEvent_eventType = &sTimelineEvent_eventType
+var TimelineEvent_eventData = &sTimelineEvent_eventData
+var TimelineEvent_eventReferences = &sTimelineEvent_eventReferences
+
+var _TimelineEventSort = &s_TimelineEventSort
+
+var _TimelineEventType = &s_TimelineEventType
+
+var TriggerDetails = &sTriggerDetails
+var TriggerDetails_source = &sTriggerDetails_source
+var TriggerDetails_triggerArn = &sTriggerDetails_triggerArn
+var TriggerDetails_timestamp = &sTriggerDetails_timestamp
+var TriggerDetails_rawData = &sTriggerDetails_rawData
+
+var _UpdateActionList = &s_UpdateActionList
+var _UpdateActionList_member = &s_UpdateActionList_member
+
+var UpdateReplicationSetAction = &sUpdateReplicationSetAction
+var UpdateReplicationSetAction_addRegionAction = &sUpdateReplicationSetAction_addRegionAction
+var UpdateReplicationSetAction_deleteRegionAction = &sUpdateReplicationSetAction_deleteRegionAction
+
+var _Url = &s_Url
+
+var _UUID = &s_UUID
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _VariableType = &s_VariableType
+
+var BatchGetIncidentFindingsInput = &sBatchGetIncidentFindingsInput
+var BatchGetIncidentFindingsInput_incidentRecordArn = &sBatchGetIncidentFindingsInput_incidentRecordArn
+var BatchGetIncidentFindingsInput_findingIds = &sBatchGetIncidentFindingsInput_findingIds
+
+var BatchGetIncidentFindingsOutput = &sBatchGetIncidentFindingsOutput
+var BatchGetIncidentFindingsOutput_findings = &sBatchGetIncidentFindingsOutput_findings
+var BatchGetIncidentFindingsOutput_errors = &sBatchGetIncidentFindingsOutput_errors
+
+var CreateReplicationSetInput = &sCreateReplicationSetInput
+var CreateReplicationSetInput_regions = &sCreateReplicationSetInput_regions
+var CreateReplicationSetInput_clientToken = &sCreateReplicationSetInput_clientToken
+var CreateReplicationSetInput_tags = &sCreateReplicationSetInput_tags
+
+var CreateReplicationSetOutput = &sCreateReplicationSetOutput
+var CreateReplicationSetOutput_arn = &sCreateReplicationSetOutput_arn
+
+var CreateResponsePlanInput = &sCreateResponsePlanInput
+var CreateResponsePlanInput_clientToken = &sCreateResponsePlanInput_clientToken
+var CreateResponsePlanInput_name = &sCreateResponsePlanInput_name
+var CreateResponsePlanInput_displayName = &sCreateResponsePlanInput_displayName
+var CreateResponsePlanInput_incidentTemplate = &sCreateResponsePlanInput_incidentTemplate
+var CreateResponsePlanInput_chatChannel = &sCreateResponsePlanInput_chatChannel
+var CreateResponsePlanInput_engagements = &sCreateResponsePlanInput_engagements
+var CreateResponsePlanInput_actions = &sCreateResponsePlanInput_actions
+var CreateResponsePlanInput_tags = &sCreateResponsePlanInput_tags
+var CreateResponsePlanInput_integrations = &sCreateResponsePlanInput_integrations
+
+var CreateResponsePlanOutput = &sCreateResponsePlanOutput
+var CreateResponsePlanOutput_arn = &sCreateResponsePlanOutput_arn
+
+var CreateTimelineEventInput = &sCreateTimelineEventInput
+var CreateTimelineEventInput_clientToken = &sCreateTimelineEventInput_clientToken
+var CreateTimelineEventInput_incidentRecordArn = &sCreateTimelineEventInput_incidentRecordArn
+var CreateTimelineEventInput_eventTime = &sCreateTimelineEventInput_eventTime
+var CreateTimelineEventInput_eventType = &sCreateTimelineEventInput_eventType
+var CreateTimelineEventInput_eventData = &sCreateTimelineEventInput_eventData
+var CreateTimelineEventInput_eventReferences = &sCreateTimelineEventInput_eventReferences
+
+var CreateTimelineEventOutput = &sCreateTimelineEventOutput
+var CreateTimelineEventOutput_incidentRecordArn = &sCreateTimelineEventOutput_incidentRecordArn
+var CreateTimelineEventOutput_eventId = &sCreateTimelineEventOutput_eventId
+
+var DeleteIncidentRecordInput = &sDeleteIncidentRecordInput
+var DeleteIncidentRecordInput_arn = &sDeleteIncidentRecordInput_arn
+
+var DeleteIncidentRecordOutput = &sDeleteIncidentRecordOutput
+
+var DeleteReplicationSetInput = &sDeleteReplicationSetInput
+var DeleteReplicationSetInput_arn = &sDeleteReplicationSetInput_arn
+
+var DeleteReplicationSetOutput = &sDeleteReplicationSetOutput
+
+var DeleteResourcePolicyInput = &sDeleteResourcePolicyInput
+var DeleteResourcePolicyInput_resourceArn = &sDeleteResourcePolicyInput_resourceArn
+var DeleteResourcePolicyInput_policyId = &sDeleteResourcePolicyInput_policyId
+
+var DeleteResourcePolicyOutput = &sDeleteResourcePolicyOutput
+
+var DeleteResponsePlanInput = &sDeleteResponsePlanInput
+var DeleteResponsePlanInput_arn = &sDeleteResponsePlanInput_arn
+
+var DeleteResponsePlanOutput = &sDeleteResponsePlanOutput
+
+var DeleteTimelineEventInput = &sDeleteTimelineEventInput
+var DeleteTimelineEventInput_incidentRecordArn = &sDeleteTimelineEventInput_incidentRecordArn
+var DeleteTimelineEventInput_eventId = &sDeleteTimelineEventInput_eventId
+
+var DeleteTimelineEventOutput = &sDeleteTimelineEventOutput
+
+var GetIncidentRecordInput = &sGetIncidentRecordInput
+var GetIncidentRecordInput_arn = &sGetIncidentRecordInput_arn
+
+var GetIncidentRecordOutput = &sGetIncidentRecordOutput
+var GetIncidentRecordOutput_incidentRecord = &sGetIncidentRecordOutput_incidentRecord
+
+var GetReplicationSetInput = &sGetReplicationSetInput
+var GetReplicationSetInput_arn = &sGetReplicationSetInput_arn
+
+var GetReplicationSetOutput = &sGetReplicationSetOutput
+var GetReplicationSetOutput_replicationSet = &sGetReplicationSetOutput_replicationSet
+
+var GetResourcePoliciesInput = &sGetResourcePoliciesInput
+var GetResourcePoliciesInput_resourceArn = &sGetResourcePoliciesInput_resourceArn
+var GetResourcePoliciesInput_maxResults = &sGetResourcePoliciesInput_maxResults
+var GetResourcePoliciesInput_nextToken = &sGetResourcePoliciesInput_nextToken
+
+var GetResourcePoliciesOutput = &sGetResourcePoliciesOutput
+var GetResourcePoliciesOutput_resourcePolicies = &sGetResourcePoliciesOutput_resourcePolicies
+var GetResourcePoliciesOutput_nextToken = &sGetResourcePoliciesOutput_nextToken
+
+var GetResponsePlanInput = &sGetResponsePlanInput
+var GetResponsePlanInput_arn = &sGetResponsePlanInput_arn
+
+var GetResponsePlanOutput = &sGetResponsePlanOutput
+var GetResponsePlanOutput_arn = &sGetResponsePlanOutput_arn
+var GetResponsePlanOutput_name = &sGetResponsePlanOutput_name
+var GetResponsePlanOutput_displayName = &sGetResponsePlanOutput_displayName
+var GetResponsePlanOutput_incidentTemplate = &sGetResponsePlanOutput_incidentTemplate
+var GetResponsePlanOutput_chatChannel = &sGetResponsePlanOutput_chatChannel
+var GetResponsePlanOutput_engagements = &sGetResponsePlanOutput_engagements
+var GetResponsePlanOutput_actions = &sGetResponsePlanOutput_actions
+var GetResponsePlanOutput_integrations = &sGetResponsePlanOutput_integrations
+
+var GetTimelineEventInput = &sGetTimelineEventInput
+var GetTimelineEventInput_incidentRecordArn = &sGetTimelineEventInput_incidentRecordArn
+var GetTimelineEventInput_eventId = &sGetTimelineEventInput_eventId
+
+var GetTimelineEventOutput = &sGetTimelineEventOutput
+var GetTimelineEventOutput_event = &sGetTimelineEventOutput_event
+
+var ListIncidentFindingsInput = &sListIncidentFindingsInput
+var ListIncidentFindingsInput_incidentRecordArn = &sListIncidentFindingsInput_incidentRecordArn
+var ListIncidentFindingsInput_maxResults = &sListIncidentFindingsInput_maxResults
+var ListIncidentFindingsInput_nextToken = &sListIncidentFindingsInput_nextToken
+
+var ListIncidentFindingsOutput = &sListIncidentFindingsOutput
+var ListIncidentFindingsOutput_findings = &sListIncidentFindingsOutput_findings
+var ListIncidentFindingsOutput_nextToken = &sListIncidentFindingsOutput_nextToken
+
+var ListIncidentRecordsInput = &sListIncidentRecordsInput
+var ListIncidentRecordsInput_filters = &sListIncidentRecordsInput_filters
+var ListIncidentRecordsInput_maxResults = &sListIncidentRecordsInput_maxResults
+var ListIncidentRecordsInput_nextToken = &sListIncidentRecordsInput_nextToken
+
+var ListIncidentRecordsOutput = &sListIncidentRecordsOutput
+var ListIncidentRecordsOutput_incidentRecordSummaries = &sListIncidentRecordsOutput_incidentRecordSummaries
+var ListIncidentRecordsOutput_nextToken = &sListIncidentRecordsOutput_nextToken
+
+var ListRelatedItemsInput = &sListRelatedItemsInput
+var ListRelatedItemsInput_incidentRecordArn = &sListRelatedItemsInput_incidentRecordArn
+var ListRelatedItemsInput_maxResults = &sListRelatedItemsInput_maxResults
+var ListRelatedItemsInput_nextToken = &sListRelatedItemsInput_nextToken
+
+var ListRelatedItemsOutput = &sListRelatedItemsOutput
+var ListRelatedItemsOutput_relatedItems = &sListRelatedItemsOutput_relatedItems
+var ListRelatedItemsOutput_nextToken = &sListRelatedItemsOutput_nextToken
+
+var ListReplicationSetsInput = &sListReplicationSetsInput
+var ListReplicationSetsInput_maxResults = &sListReplicationSetsInput_maxResults
+var ListReplicationSetsInput_nextToken = &sListReplicationSetsInput_nextToken
+
+var ListReplicationSetsOutput = &sListReplicationSetsOutput
+var ListReplicationSetsOutput_replicationSetArns = &sListReplicationSetsOutput_replicationSetArns
+var ListReplicationSetsOutput_nextToken = &sListReplicationSetsOutput_nextToken
+
+var ListResponsePlansInput = &sListResponsePlansInput
+var ListResponsePlansInput_maxResults = &sListResponsePlansInput_maxResults
+var ListResponsePlansInput_nextToken = &sListResponsePlansInput_nextToken
+
+var ListResponsePlansOutput = &sListResponsePlansOutput
+var ListResponsePlansOutput_responsePlanSummaries = &sListResponsePlansOutput_responsePlanSummaries
+var ListResponsePlansOutput_nextToken = &sListResponsePlansOutput_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListTimelineEventsInput = &sListTimelineEventsInput
+var ListTimelineEventsInput_incidentRecordArn = &sListTimelineEventsInput_incidentRecordArn
+var ListTimelineEventsInput_filters = &sListTimelineEventsInput_filters
+var ListTimelineEventsInput_sortBy = &sListTimelineEventsInput_sortBy
+var ListTimelineEventsInput_sortOrder = &sListTimelineEventsInput_sortOrder
+var ListTimelineEventsInput_maxResults = &sListTimelineEventsInput_maxResults
+var ListTimelineEventsInput_nextToken = &sListTimelineEventsInput_nextToken
+
+var ListTimelineEventsOutput = &sListTimelineEventsOutput
+var ListTimelineEventsOutput_eventSummaries = &sListTimelineEventsOutput_eventSummaries
+var ListTimelineEventsOutput_nextToken = &sListTimelineEventsOutput_nextToken
+
+var PutResourcePolicyInput = &sPutResourcePolicyInput
+var PutResourcePolicyInput_resourceArn = &sPutResourcePolicyInput_resourceArn
+var PutResourcePolicyInput_policy = &sPutResourcePolicyInput_policy
+
+var PutResourcePolicyOutput = &sPutResourcePolicyOutput
+var PutResourcePolicyOutput_policyId = &sPutResourcePolicyOutput_policyId
+
+var StartIncidentInput = &sStartIncidentInput
+var StartIncidentInput_clientToken = &sStartIncidentInput_clientToken
+var StartIncidentInput_responsePlanArn = &sStartIncidentInput_responsePlanArn
+var StartIncidentInput_title = &sStartIncidentInput_title
+var StartIncidentInput_impact = &sStartIncidentInput_impact
+var StartIncidentInput_triggerDetails = &sStartIncidentInput_triggerDetails
+var StartIncidentInput_relatedItems = &sStartIncidentInput_relatedItems
+
+var StartIncidentOutput = &sStartIncidentOutput
+var StartIncidentOutput_incidentRecordArn = &sStartIncidentOutput_incidentRecordArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDeletionProtectionInput = &sUpdateDeletionProtectionInput
+var UpdateDeletionProtectionInput_arn = &sUpdateDeletionProtectionInput_arn
+var UpdateDeletionProtectionInput_deletionProtected = &sUpdateDeletionProtectionInput_deletionProtected
+var UpdateDeletionProtectionInput_clientToken = &sUpdateDeletionProtectionInput_clientToken
+
+var UpdateDeletionProtectionOutput = &sUpdateDeletionProtectionOutput
+
+var UpdateIncidentRecordInput = &sUpdateIncidentRecordInput
+var UpdateIncidentRecordInput_clientToken = &sUpdateIncidentRecordInput_clientToken
+var UpdateIncidentRecordInput_arn = &sUpdateIncidentRecordInput_arn
+var UpdateIncidentRecordInput_title = &sUpdateIncidentRecordInput_title
+var UpdateIncidentRecordInput_summary = &sUpdateIncidentRecordInput_summary
+var UpdateIncidentRecordInput_impact = &sUpdateIncidentRecordInput_impact
+var UpdateIncidentRecordInput_status = &sUpdateIncidentRecordInput_status
+var UpdateIncidentRecordInput_chatChannel = &sUpdateIncidentRecordInput_chatChannel
+var UpdateIncidentRecordInput_notificationTargets = &sUpdateIncidentRecordInput_notificationTargets
+
+var UpdateIncidentRecordOutput = &sUpdateIncidentRecordOutput
+
+var UpdateRelatedItemsInput = &sUpdateRelatedItemsInput
+var UpdateRelatedItemsInput_clientToken = &sUpdateRelatedItemsInput_clientToken
+var UpdateRelatedItemsInput_incidentRecordArn = &sUpdateRelatedItemsInput_incidentRecordArn
+var UpdateRelatedItemsInput_relatedItemsUpdate = &sUpdateRelatedItemsInput_relatedItemsUpdate
+
+var UpdateRelatedItemsOutput = &sUpdateRelatedItemsOutput
+
+var UpdateReplicationSetInput = &sUpdateReplicationSetInput
+var UpdateReplicationSetInput_arn = &sUpdateReplicationSetInput_arn
+var UpdateReplicationSetInput_actions = &sUpdateReplicationSetInput_actions
+var UpdateReplicationSetInput_clientToken = &sUpdateReplicationSetInput_clientToken
+
+var UpdateReplicationSetOutput = &sUpdateReplicationSetOutput
+
+var UpdateResponsePlanInput = &sUpdateResponsePlanInput
+var UpdateResponsePlanInput_clientToken = &sUpdateResponsePlanInput_clientToken
+var UpdateResponsePlanInput_arn = &sUpdateResponsePlanInput_arn
+var UpdateResponsePlanInput_displayName = &sUpdateResponsePlanInput_displayName
+var UpdateResponsePlanInput_incidentTemplateTitle = &sUpdateResponsePlanInput_incidentTemplateTitle
+var UpdateResponsePlanInput_incidentTemplateImpact = &sUpdateResponsePlanInput_incidentTemplateImpact
+var UpdateResponsePlanInput_incidentTemplateSummary = &sUpdateResponsePlanInput_incidentTemplateSummary
+var UpdateResponsePlanInput_incidentTemplateDedupeString = &sUpdateResponsePlanInput_incidentTemplateDedupeString
+var UpdateResponsePlanInput_incidentTemplateNotificationTargets = &sUpdateResponsePlanInput_incidentTemplateNotificationTargets
+var UpdateResponsePlanInput_chatChannel = &sUpdateResponsePlanInput_chatChannel
+var UpdateResponsePlanInput_engagements = &sUpdateResponsePlanInput_engagements
+var UpdateResponsePlanInput_actions = &sUpdateResponsePlanInput_actions
+var UpdateResponsePlanInput_incidentTemplateTags = &sUpdateResponsePlanInput_incidentTemplateTags
+var UpdateResponsePlanInput_integrations = &sUpdateResponsePlanInput_integrations
+
+var UpdateResponsePlanOutput = &sUpdateResponsePlanOutput
+
+var UpdateTimelineEventInput = &sUpdateTimelineEventInput
+var UpdateTimelineEventInput_clientToken = &sUpdateTimelineEventInput_clientToken
+var UpdateTimelineEventInput_incidentRecordArn = &sUpdateTimelineEventInput_incidentRecordArn
+var UpdateTimelineEventInput_eventId = &sUpdateTimelineEventInput_eventId
+var UpdateTimelineEventInput_eventTime = &sUpdateTimelineEventInput_eventTime
+var UpdateTimelineEventInput_eventType = &sUpdateTimelineEventInput_eventType
+var UpdateTimelineEventInput_eventData = &sUpdateTimelineEventInput_eventData
+var UpdateTimelineEventInput_eventReferences = &sUpdateTimelineEventInput_eventReferences
+
+var UpdateTimelineEventOutput = &sUpdateTimelineEventOutput
+
+var SSMIncidents = &smithy.ServiceSchema{Schema: &s_SSMIncidents, Version: "2018-05-10"}

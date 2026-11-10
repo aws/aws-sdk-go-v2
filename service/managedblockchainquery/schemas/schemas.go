@@ -4,1128 +4,1093 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetTokenBalance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eBatchGetTokenBalance                                        smithy.SchemaExtensions
+	eGetAssetContract                                            smithy.SchemaExtensions
+	eGetTokenBalance                                             smithy.SchemaExtensions
+	eGetTransaction                                              smithy.SchemaExtensions
+	eListAssetContracts                                          smithy.SchemaExtensions
+	eListFilteredTransactionEvents                               smithy.SchemaExtensions
+	eListTokenBalances                                           smithy.SchemaExtensions
+	eListTransactionEvents                                       smithy.SchemaExtensions
+	eListTransactions                                            smithy.SchemaExtensions
+	e_TietonChainQueryService                                    smithy.SchemaExtensions
+	eAccessDeniedException                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                               smithy.SchemaExtensions
+	eAddressIdentifierFilter                                     smithy.SchemaExtensions
+	eAddressIdentifierFilter_transactionEventToAddress           smithy.SchemaExtensions
+	eAssetContract                                               smithy.SchemaExtensions
+	eAssetContract_contractIdentifier                            smithy.SchemaExtensions
+	eAssetContract_tokenStandard                                 smithy.SchemaExtensions
+	eAssetContract_deployerAddress                               smithy.SchemaExtensions
+	e_AssetContractList                                          smithy.SchemaExtensions
+	e_AssetContractList_member                                   smithy.SchemaExtensions
+	eBatchGetTokenBalanceErrorItem                               smithy.SchemaExtensions
+	eBatchGetTokenBalanceErrorItem_tokenIdentifier               smithy.SchemaExtensions
+	eBatchGetTokenBalanceErrorItem_ownerIdentifier               smithy.SchemaExtensions
+	eBatchGetTokenBalanceErrorItem_atBlockchainInstant           smithy.SchemaExtensions
+	eBatchGetTokenBalanceErrorItem_errorCode                     smithy.SchemaExtensions
+	eBatchGetTokenBalanceErrorItem_errorMessage                  smithy.SchemaExtensions
+	eBatchGetTokenBalanceErrorItem_errorType                     smithy.SchemaExtensions
+	e_BatchGetTokenBalanceErrors                                 smithy.SchemaExtensions
+	e_BatchGetTokenBalanceErrors_member                          smithy.SchemaExtensions
+	eBatchGetTokenBalanceInputItem                               smithy.SchemaExtensions
+	eBatchGetTokenBalanceInputItem_tokenIdentifier               smithy.SchemaExtensions
+	eBatchGetTokenBalanceInputItem_ownerIdentifier               smithy.SchemaExtensions
+	eBatchGetTokenBalanceInputItem_atBlockchainInstant           smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutputItem                              smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutputItem_ownerIdentifier              smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutputItem_tokenIdentifier              smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutputItem_balance                      smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutputItem_atBlockchainInstant          smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutputItem_lastUpdatedTime              smithy.SchemaExtensions
+	e_BatchGetTokenBalanceOutputList                             smithy.SchemaExtensions
+	e_BatchGetTokenBalanceOutputList_member                      smithy.SchemaExtensions
+	eBlockchainInstant                                           smithy.SchemaExtensions
+	eBlockchainInstant_time                                      smithy.SchemaExtensions
+	e_BlockHash                                                  smithy.SchemaExtensions
+	e_ChainAddress                                               smithy.SchemaExtensions
+	e_ChainAddresses                                             smithy.SchemaExtensions
+	e_ChainAddresses_member                                      smithy.SchemaExtensions
+	e_ConfirmationStatus                                         smithy.SchemaExtensions
+	eConfirmationStatusFilter                                    smithy.SchemaExtensions
+	eConfirmationStatusFilter_include                            smithy.SchemaExtensions
+	e_ConfirmationStatusIncludeList                              smithy.SchemaExtensions
+	e_ConfirmationStatusIncludeList_member                       smithy.SchemaExtensions
+	eContractFilter                                              smithy.SchemaExtensions
+	eContractFilter_network                                      smithy.SchemaExtensions
+	eContractFilter_tokenStandard                                smithy.SchemaExtensions
+	eContractFilter_deployerAddress                              smithy.SchemaExtensions
+	eContractIdentifier                                          smithy.SchemaExtensions
+	eContractIdentifier_network                                  smithy.SchemaExtensions
+	eContractIdentifier_contractAddress                          smithy.SchemaExtensions
+	eContractMetadata                                            smithy.SchemaExtensions
+	eContractMetadata_name                                       smithy.SchemaExtensions
+	eContractMetadata_symbol                                     smithy.SchemaExtensions
+	eContractMetadata_decimals                                   smithy.SchemaExtensions
+	e_ErrorType                                                  smithy.SchemaExtensions
+	e_ExceptionMessage                                           smithy.SchemaExtensions
+	e_ExecutionStatus                                            smithy.SchemaExtensions
+	e_GetTokenBalanceInputList                                   smithy.SchemaExtensions
+	e_GetTokenBalanceInputList_member                            smithy.SchemaExtensions
+	eInternalServerException                                     smithy.SchemaExtensions
+	eInternalServerException_message                             smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                   smithy.SchemaExtensions
+	eListFilteredTransactionEventsSort                           smithy.SchemaExtensions
+	eListFilteredTransactionEventsSort_sortBy                    smithy.SchemaExtensions
+	eListFilteredTransactionEventsSort_sortOrder                 smithy.SchemaExtensions
+	e_ListFilteredTransactionEventsSortBy                        smithy.SchemaExtensions
+	eListTransactionsSort                                        smithy.SchemaExtensions
+	eListTransactionsSort_sortBy                                 smithy.SchemaExtensions
+	eListTransactionsSort_sortOrder                              smithy.SchemaExtensions
+	e_ListTransactionsSortBy                                     smithy.SchemaExtensions
+	e_NextToken                                                  smithy.SchemaExtensions
+	eOwnerFilter                                                 smithy.SchemaExtensions
+	eOwnerFilter_address                                         smithy.SchemaExtensions
+	eOwnerIdentifier                                             smithy.SchemaExtensions
+	eOwnerIdentifier_address                                     smithy.SchemaExtensions
+	e_QueryNetwork                                               smithy.SchemaExtensions
+	e_QueryTokenId                                               smithy.SchemaExtensions
+	e_QueryTokenStandard                                         smithy.SchemaExtensions
+	e_QueryTransactionEventType                                  smithy.SchemaExtensions
+	e_QueryTransactionHash                                       smithy.SchemaExtensions
+	e_QueryTransactionId                                         smithy.SchemaExtensions
+	e_QuotaCode                                                  smithy.SchemaExtensions
+	e_ResourceId                                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                           smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                        smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                      smithy.SchemaExtensions
+	e_ResourceType                                               smithy.SchemaExtensions
+	e_ServiceCode                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                     smithy.SchemaExtensions
+	e_SortOrder                                                  smithy.SchemaExtensions
+	eThrottlingException                                         smithy.SchemaExtensions
+	eThrottlingException_message                                 smithy.SchemaExtensions
+	eThrottlingException_serviceCode                             smithy.SchemaExtensions
+	eThrottlingException_quotaCode                               smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                       smithy.SchemaExtensions
+	eTimeFilter                                                  smithy.SchemaExtensions
+	eTimeFilter_from                                             smithy.SchemaExtensions
+	eTimeFilter_to                                               smithy.SchemaExtensions
+	eTokenBalance                                                smithy.SchemaExtensions
+	eTokenBalance_ownerIdentifier                                smithy.SchemaExtensions
+	eTokenBalance_tokenIdentifier                                smithy.SchemaExtensions
+	eTokenBalance_balance                                        smithy.SchemaExtensions
+	eTokenBalance_atBlockchainInstant                            smithy.SchemaExtensions
+	eTokenBalance_lastUpdatedTime                                smithy.SchemaExtensions
+	e_TokenBalanceList                                           smithy.SchemaExtensions
+	e_TokenBalanceList_member                                    smithy.SchemaExtensions
+	eTokenFilter                                                 smithy.SchemaExtensions
+	eTokenFilter_network                                         smithy.SchemaExtensions
+	eTokenFilter_contractAddress                                 smithy.SchemaExtensions
+	eTokenFilter_tokenId                                         smithy.SchemaExtensions
+	eTokenIdentifier                                             smithy.SchemaExtensions
+	eTokenIdentifier_network                                     smithy.SchemaExtensions
+	eTokenIdentifier_contractAddress                             smithy.SchemaExtensions
+	eTokenIdentifier_tokenId                                     smithy.SchemaExtensions
+	eTransaction                                                 smithy.SchemaExtensions
+	eTransaction_network                                         smithy.SchemaExtensions
+	eTransaction_blockHash                                       smithy.SchemaExtensions
+	eTransaction_transactionHash                                 smithy.SchemaExtensions
+	eTransaction_blockNumber                                     smithy.SchemaExtensions
+	eTransaction_transactionTimestamp                            smithy.SchemaExtensions
+	eTransaction_transactionIndex                                smithy.SchemaExtensions
+	eTransaction_numberOfTransactions                            smithy.SchemaExtensions
+	eTransaction_to                                              smithy.SchemaExtensions
+	eTransaction_from                                            smithy.SchemaExtensions
+	eTransaction_contractAddress                                 smithy.SchemaExtensions
+	eTransaction_gasUsed                                         smithy.SchemaExtensions
+	eTransaction_cumulativeGasUsed                               smithy.SchemaExtensions
+	eTransaction_effectiveGasPrice                               smithy.SchemaExtensions
+	eTransaction_signatureV                                      smithy.SchemaExtensions
+	eTransaction_signatureR                                      smithy.SchemaExtensions
+	eTransaction_signatureS                                      smithy.SchemaExtensions
+	eTransaction_transactionFee                                  smithy.SchemaExtensions
+	eTransaction_transactionId                                   smithy.SchemaExtensions
+	eTransaction_confirmationStatus                              smithy.SchemaExtensions
+	eTransaction_executionStatus                                 smithy.SchemaExtensions
+	eTransactionEvent                                            smithy.SchemaExtensions
+	eTransactionEvent_network                                    smithy.SchemaExtensions
+	eTransactionEvent_transactionHash                            smithy.SchemaExtensions
+	eTransactionEvent_eventType                                  smithy.SchemaExtensions
+	eTransactionEvent_from                                       smithy.SchemaExtensions
+	eTransactionEvent_to                                         smithy.SchemaExtensions
+	eTransactionEvent_value                                      smithy.SchemaExtensions
+	eTransactionEvent_contractAddress                            smithy.SchemaExtensions
+	eTransactionEvent_tokenId                                    smithy.SchemaExtensions
+	eTransactionEvent_transactionId                              smithy.SchemaExtensions
+	eTransactionEvent_voutIndex                                  smithy.SchemaExtensions
+	eTransactionEvent_voutSpent                                  smithy.SchemaExtensions
+	eTransactionEvent_spentVoutTransactionId                     smithy.SchemaExtensions
+	eTransactionEvent_spentVoutTransactionHash                   smithy.SchemaExtensions
+	eTransactionEvent_spentVoutIndex                             smithy.SchemaExtensions
+	eTransactionEvent_blockchainInstant                          smithy.SchemaExtensions
+	eTransactionEvent_confirmationStatus                         smithy.SchemaExtensions
+	e_TransactionEventList                                       smithy.SchemaExtensions
+	e_TransactionEventList_member                                smithy.SchemaExtensions
+	eTransactionOutputItem                                       smithy.SchemaExtensions
+	eTransactionOutputItem_transactionHash                       smithy.SchemaExtensions
+	eTransactionOutputItem_transactionId                         smithy.SchemaExtensions
+	eTransactionOutputItem_network                               smithy.SchemaExtensions
+	eTransactionOutputItem_transactionTimestamp                  smithy.SchemaExtensions
+	eTransactionOutputItem_confirmationStatus                    smithy.SchemaExtensions
+	e_TransactionOutputList                                      smithy.SchemaExtensions
+	e_TransactionOutputList_member                               smithy.SchemaExtensions
+	eValidationException                                         smithy.SchemaExtensions
+	eValidationException_message                                 smithy.SchemaExtensions
+	eValidationException_reason                                  smithy.SchemaExtensions
+	eValidationException_fieldList                               smithy.SchemaExtensions
+	eValidationExceptionField                                    smithy.SchemaExtensions
+	eValidationExceptionField_name                               smithy.SchemaExtensions
+	eValidationExceptionField_message                            smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                               smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                        smithy.SchemaExtensions
+	e_ValidationExceptionReason                                  smithy.SchemaExtensions
+	eVoutFilter                                                  smithy.SchemaExtensions
+	eVoutFilter_voutSpent                                        smithy.SchemaExtensions
+	eBatchGetTokenBalanceInput                                   smithy.SchemaExtensions
+	eBatchGetTokenBalanceInput_getTokenBalanceInputs             smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutput                                  smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutput_tokenBalances                    smithy.SchemaExtensions
+	eBatchGetTokenBalanceOutput_errors                           smithy.SchemaExtensions
+	eGetAssetContractInput                                       smithy.SchemaExtensions
+	eGetAssetContractInput_contractIdentifier                    smithy.SchemaExtensions
+	eGetAssetContractOutput                                      smithy.SchemaExtensions
+	eGetAssetContractOutput_contractIdentifier                   smithy.SchemaExtensions
+	eGetAssetContractOutput_tokenStandard                        smithy.SchemaExtensions
+	eGetAssetContractOutput_deployerAddress                      smithy.SchemaExtensions
+	eGetAssetContractOutput_metadata                             smithy.SchemaExtensions
+	eGetTokenBalanceInput                                        smithy.SchemaExtensions
+	eGetTokenBalanceInput_tokenIdentifier                        smithy.SchemaExtensions
+	eGetTokenBalanceInput_ownerIdentifier                        smithy.SchemaExtensions
+	eGetTokenBalanceInput_atBlockchainInstant                    smithy.SchemaExtensions
+	eGetTokenBalanceOutput                                       smithy.SchemaExtensions
+	eGetTokenBalanceOutput_ownerIdentifier                       smithy.SchemaExtensions
+	eGetTokenBalanceOutput_tokenIdentifier                       smithy.SchemaExtensions
+	eGetTokenBalanceOutput_balance                               smithy.SchemaExtensions
+	eGetTokenBalanceOutput_atBlockchainInstant                   smithy.SchemaExtensions
+	eGetTokenBalanceOutput_lastUpdatedTime                       smithy.SchemaExtensions
+	eGetTransactionInput                                         smithy.SchemaExtensions
+	eGetTransactionInput_transactionHash                         smithy.SchemaExtensions
+	eGetTransactionInput_transactionId                           smithy.SchemaExtensions
+	eGetTransactionInput_network                                 smithy.SchemaExtensions
+	eGetTransactionOutput                                        smithy.SchemaExtensions
+	eGetTransactionOutput_transaction                            smithy.SchemaExtensions
+	eListAssetContractsInput                                     smithy.SchemaExtensions
+	eListAssetContractsInput_contractFilter                      smithy.SchemaExtensions
+	eListAssetContractsInput_nextToken                           smithy.SchemaExtensions
+	eListAssetContractsInput_maxResults                          smithy.SchemaExtensions
+	eListAssetContractsOutput                                    smithy.SchemaExtensions
+	eListAssetContractsOutput_contracts                          smithy.SchemaExtensions
+	eListAssetContractsOutput_nextToken                          smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput                          smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_network                  smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_addressIdentifierFilter  smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_timeFilter               smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_voutFilter               smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_confirmationStatusFilter smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_sort                     smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_nextToken                smithy.SchemaExtensions
+	eListFilteredTransactionEventsInput_maxResults               smithy.SchemaExtensions
+	eListFilteredTransactionEventsOutput                         smithy.SchemaExtensions
+	eListFilteredTransactionEventsOutput_events                  smithy.SchemaExtensions
+	eListFilteredTransactionEventsOutput_nextToken               smithy.SchemaExtensions
+	eListTokenBalancesInput                                      smithy.SchemaExtensions
+	eListTokenBalancesInput_ownerFilter                          smithy.SchemaExtensions
+	eListTokenBalancesInput_tokenFilter                          smithy.SchemaExtensions
+	eListTokenBalancesInput_nextToken                            smithy.SchemaExtensions
+	eListTokenBalancesInput_maxResults                           smithy.SchemaExtensions
+	eListTokenBalancesOutput                                     smithy.SchemaExtensions
+	eListTokenBalancesOutput_tokenBalances                       smithy.SchemaExtensions
+	eListTokenBalancesOutput_nextToken                           smithy.SchemaExtensions
+	eListTransactionEventsInput                                  smithy.SchemaExtensions
+	eListTransactionEventsInput_transactionHash                  smithy.SchemaExtensions
+	eListTransactionEventsInput_transactionId                    smithy.SchemaExtensions
+	eListTransactionEventsInput_network                          smithy.SchemaExtensions
+	eListTransactionEventsInput_nextToken                        smithy.SchemaExtensions
+	eListTransactionEventsInput_maxResults                       smithy.SchemaExtensions
+	eListTransactionEventsOutput                                 smithy.SchemaExtensions
+	eListTransactionEventsOutput_events                          smithy.SchemaExtensions
+	eListTransactionEventsOutput_nextToken                       smithy.SchemaExtensions
+	eListTransactionsInput                                       smithy.SchemaExtensions
+	eListTransactionsInput_address                               smithy.SchemaExtensions
+	eListTransactionsInput_network                               smithy.SchemaExtensions
+	eListTransactionsInput_fromBlockchainInstant                 smithy.SchemaExtensions
+	eListTransactionsInput_toBlockchainInstant                   smithy.SchemaExtensions
+	eListTransactionsInput_sort                                  smithy.SchemaExtensions
+	eListTransactionsInput_nextToken                             smithy.SchemaExtensions
+	eListTransactionsInput_maxResults                            smithy.SchemaExtensions
+	eListTransactionsInput_confirmationStatusFilter              smithy.SchemaExtensions
+	eListTransactionsOutput                                      smithy.SchemaExtensions
+	eListTransactionsOutput_transactions                         smithy.SchemaExtensions
+	eListTransactionsOutput_nextToken                            smithy.SchemaExtensions
+)
+
+var (
+	iBatchGetTokenBalance                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalance"}
+	iGetAssetContract                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetAssetContract"}
+	iGetTokenBalance                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetTokenBalance"}
+	iGetTransaction                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetTransaction"}
+	iListAssetContracts                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListAssetContracts"}
+	iListFilteredTransactionEvents        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListFilteredTransactionEvents"}
+	iListTokenBalances                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTokenBalances"}
+	iListTransactionEvents                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactionEvents"}
+	iListTransactions                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactions"}
+	i_TietonChainQueryService             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TietonChainQueryService"}
+	iAccessDeniedException                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "AccessDeniedException"}
+	iAddressIdentifierFilter              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "AddressIdentifierFilter"}
+	iAssetContract                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "AssetContract"}
+	i_AssetContractList                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "AssetContractList"}
+	iBatchGetTokenBalanceErrorItem        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalanceErrorItem"}
+	i_BatchGetTokenBalanceErrors          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalanceErrors"}
+	iBatchGetTokenBalanceInputItem        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalanceInputItem"}
+	iBatchGetTokenBalanceOutputItem       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalanceOutputItem"}
+	i_BatchGetTokenBalanceOutputList      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalanceOutputList"}
+	iBlockchainInstant                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BlockchainInstant"}
+	i_BlockHash                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BlockHash"}
+	i_ChainAddress                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ChainAddress"}
+	i_ChainAddresses                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ChainAddresses"}
+	i_ConfirmationStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ConfirmationStatus"}
+	iConfirmationStatusFilter             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ConfirmationStatusFilter"}
+	i_ConfirmationStatusIncludeList       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ConfirmationStatusIncludeList"}
+	iContractFilter                       = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ContractFilter"}
+	iContractIdentifier                   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ContractIdentifier"}
+	iContractMetadata                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ContractMetadata"}
+	i_ErrorType                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ErrorType"}
+	i_ExceptionMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ExceptionMessage"}
+	i_ExecutionStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ExecutionStatus"}
+	i_GetTokenBalanceInputList            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetTokenBalanceInputList"}
+	iInternalServerException              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "InternalServerException"}
+	iListFilteredTransactionEventsSort    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListFilteredTransactionEventsSort"}
+	i_ListFilteredTransactionEventsSortBy = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListFilteredTransactionEventsSortBy"}
+	iListTransactionsSort                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactionsSort"}
+	i_ListTransactionsSortBy              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactionsSortBy"}
+	i_NextToken                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "NextToken"}
+	iOwnerFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "OwnerFilter"}
+	iOwnerIdentifier                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "OwnerIdentifier"}
+	i_QueryNetwork                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "QueryNetwork"}
+	i_QueryTokenId                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "QueryTokenId"}
+	i_QueryTokenStandard                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "QueryTokenStandard"}
+	i_QueryTransactionEventType           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "QueryTransactionEventType"}
+	i_QueryTransactionHash                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "QueryTransactionHash"}
+	i_QueryTransactionId                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "QueryTransactionId"}
+	i_QuotaCode                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "QuotaCode"}
+	i_ResourceId                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ResourceId"}
+	iResourceNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ResourceNotFoundException"}
+	i_ResourceType                        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ResourceType"}
+	i_ServiceCode                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ServiceCode"}
+	iServiceQuotaExceededException        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ServiceQuotaExceededException"}
+	i_SortOrder                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "SortOrder"}
+	iThrottlingException                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ThrottlingException"}
+	iTimeFilter                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TimeFilter"}
+	iTokenBalance                         = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TokenBalance"}
+	i_TokenBalanceList                    = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TokenBalanceList"}
+	iTokenFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TokenFilter"}
+	iTokenIdentifier                      = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TokenIdentifier"}
+	iTransaction                          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "Transaction"}
+	iTransactionEvent                     = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TransactionEvent"}
+	i_TransactionEventList                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TransactionEventList"}
+	iTransactionOutputItem                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TransactionOutputItem"}
+	i_TransactionOutputList               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "TransactionOutputList"}
+	iValidationException                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ValidationException"}
+	iValidationExceptionField             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList        = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ValidationExceptionFieldList"}
+	i_ValidationExceptionReason           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ValidationExceptionReason"}
+	iVoutFilter                           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "VoutFilter"}
+	iBatchGetTokenBalanceInput            = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalanceInput"}
+	iBatchGetTokenBalanceOutput           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "BatchGetTokenBalanceOutput"}
+	iGetAssetContractInput                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetAssetContractInput"}
+	iGetAssetContractOutput               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetAssetContractOutput"}
+	iGetTokenBalanceInput                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetTokenBalanceInput"}
+	iGetTokenBalanceOutput                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetTokenBalanceOutput"}
+	iGetTransactionInput                  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetTransactionInput"}
+	iGetTransactionOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "GetTransactionOutput"}
+	iListAssetContractsInput              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListAssetContractsInput"}
+	iListAssetContractsOutput             = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListAssetContractsOutput"}
+	iListFilteredTransactionEventsInput   = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListFilteredTransactionEventsInput"}
+	iListFilteredTransactionEventsOutput  = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListFilteredTransactionEventsOutput"}
+	iListTokenBalancesInput               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTokenBalancesInput"}
+	iListTokenBalancesOutput              = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTokenBalancesOutput"}
+	iListTransactionEventsInput           = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactionEventsInput"}
+	iListTransactionEventsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactionEventsOutput"}
+	iListTransactionsInput                = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactionsInput"}
+	iListTransactionsOutput               = smithy.ShapeName{Namespace: "com.amazonaws.managedblockchainquery", Name: "ListTransactionsOutput"}
+	pString                               = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pBoolean                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/batch-get-token-balance",
-	Code: 200})
-
-var GetAssetContract = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetAssetContract",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-asset-contract",
-	Code: 200})
-
-var GetTokenBalance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-token-balance",
-	Code: 200})
-
-var GetTransaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTransaction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-transaction",
-	Code: 200})
-
-var ListAssetContracts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListAssetContracts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-asset-contracts",
-	Code: 200})
-
-var ListFilteredTransactionEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-filtered-transaction-events",
-	Code: 200})
-
-var ListTokenBalances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTokenBalances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-token-balances",
-	Code: 200})
-
-var ListTransactionEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-transaction-events",
-	Code: 200})
-
-var ListTransactions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-transactions",
-	Code: 200})
-
-var _TietonChainQueryService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TietonChainQueryService",
-}, smithy.ShapeTypeService, 0)
-
-var TietonChainQueryService = smithy.NewServiceSchema(_TietonChainQueryService, "2023-05-04")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AddressIdentifierFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AddressIdentifierFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AddressIdentifierFilter_transactionEventToAddress *smithy.Schema
-
-var AssetContract = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AssetContract",
-}, smithy.ShapeTypeStructure, 3)
-var AssetContract_contractIdentifier *smithy.Schema
-
-var AssetContract_tokenStandard *smithy.Schema
-
-var AssetContract_deployerAddress *smithy.Schema
-
-var _AssetContractList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AssetContractList",
-}, smithy.ShapeTypeList, 1)
-var _AssetContractList_member *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceErrorItem",
-}, smithy.ShapeTypeStructure, 6)
-var BatchGetTokenBalanceErrorItem_tokenIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_ownerIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_atBlockchainInstant *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_errorCode *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_errorMessage *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_errorType *smithy.Schema
-
-var _BatchGetTokenBalanceErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetTokenBalanceErrors_member *smithy.Schema
-
-var BatchGetTokenBalanceInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceInputItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchGetTokenBalanceInputItem_tokenIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceInputItem_ownerIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceInputItem_atBlockchainInstant *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceOutputItem",
-}, smithy.ShapeTypeStructure, 5)
-var BatchGetTokenBalanceOutputItem_ownerIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_tokenIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_balance *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_atBlockchainInstant *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_lastUpdatedTime *smithy.Schema
-
-var _BatchGetTokenBalanceOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceOutputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetTokenBalanceOutputList_member *smithy.Schema
-
-var BlockchainInstant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BlockchainInstant",
-}, smithy.ShapeTypeStructure, 1)
-var BlockchainInstant_time *smithy.Schema
-
-var _BlockHash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BlockHash",
-}, smithy.ShapeTypeString, 0)
-
-var _ChainAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ChainAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _ChainAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ChainAddresses",
-}, smithy.ShapeTypeList, 1)
-var _ChainAddresses_member *smithy.Schema
-
-var _ConfirmationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ConfirmationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ConfirmationStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ConfirmationStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmationStatusFilter_include *smithy.Schema
-
-var _ConfirmationStatusIncludeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ConfirmationStatusIncludeList",
-}, smithy.ShapeTypeList, 1)
-var _ConfirmationStatusIncludeList_member *smithy.Schema
-
-var ContractFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ContractFilter",
-}, smithy.ShapeTypeStructure, 3)
-var ContractFilter_network *smithy.Schema
-
-var ContractFilter_tokenStandard *smithy.Schema
-
-var ContractFilter_deployerAddress *smithy.Schema
-
-var ContractIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ContractIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var ContractIdentifier_network *smithy.Schema
-
-var ContractIdentifier_contractAddress *smithy.Schema
-
-var ContractMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ContractMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var ContractMetadata_name *smithy.Schema
-
-var ContractMetadata_symbol *smithy.Schema
-
-var ContractMetadata_decimals *smithy.Schema
-
-var _ErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ExecutionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _GetTokenBalanceInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalanceInputList",
-}, smithy.ShapeTypeList, 1)
-var _GetTokenBalanceInputList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var ListFilteredTransactionEventsSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsSort",
-}, smithy.ShapeTypeStructure, 2)
-var ListFilteredTransactionEventsSort_sortBy *smithy.Schema
-
-var ListFilteredTransactionEventsSort_sortOrder *smithy.Schema
-
-var _ListFilteredTransactionEventsSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsSortBy",
-}, smithy.ShapeTypeString, 0)
-
-var ListTransactionsSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsSort",
-}, smithy.ShapeTypeStructure, 2)
-var ListTransactionsSort_sortBy *smithy.Schema
-
-var ListTransactionsSort_sortOrder *smithy.Schema
-
-var _ListTransactionsSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsSortBy",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OwnerFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "OwnerFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OwnerFilter_address *smithy.Schema
-
-var OwnerIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "OwnerIdentifier",
-}, smithy.ShapeTypeStructure, 1)
-var OwnerIdentifier_address *smithy.Schema
-
-var _QueryNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryNetwork",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTokenStandard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTokenStandard",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTransactionEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTransactionEventType",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTransactionHash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTransactionHash",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTransactionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTransactionId",
-}, smithy.ShapeTypeString, 0)
-
-var _QuotaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QuotaCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TimeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TimeFilter",
-}, smithy.ShapeTypeStructure, 2)
-var TimeFilter_from *smithy.Schema
-
-var TimeFilter_to *smithy.Schema
-
-var TokenBalance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenBalance",
-}, smithy.ShapeTypeStructure, 5)
-var TokenBalance_ownerIdentifier *smithy.Schema
-
-var TokenBalance_tokenIdentifier *smithy.Schema
-
-var TokenBalance_balance *smithy.Schema
-
-var TokenBalance_atBlockchainInstant *smithy.Schema
-
-var TokenBalance_lastUpdatedTime *smithy.Schema
-
-var _TokenBalanceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenBalanceList",
-}, smithy.ShapeTypeList, 1)
-var _TokenBalanceList_member *smithy.Schema
-
-var TokenFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenFilter",
-}, smithy.ShapeTypeStructure, 3)
-var TokenFilter_network *smithy.Schema
-
-var TokenFilter_contractAddress *smithy.Schema
-
-var TokenFilter_tokenId *smithy.Schema
-
-var TokenIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenIdentifier",
-}, smithy.ShapeTypeStructure, 3)
-var TokenIdentifier_network *smithy.Schema
-
-var TokenIdentifier_contractAddress *smithy.Schema
-
-var TokenIdentifier_tokenId *smithy.Schema
-
-var Transaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "Transaction",
-}, smithy.ShapeTypeStructure, 20)
-var Transaction_network *smithy.Schema
-
-var Transaction_blockHash *smithy.Schema
-
-var Transaction_transactionHash *smithy.Schema
-
-var Transaction_blockNumber *smithy.Schema
-
-var Transaction_transactionTimestamp *smithy.Schema
-
-var Transaction_transactionIndex *smithy.Schema
-
-var Transaction_numberOfTransactions *smithy.Schema
-
-var Transaction_to *smithy.Schema
-
-var Transaction_from *smithy.Schema
-
-var Transaction_contractAddress *smithy.Schema
-
-var Transaction_gasUsed *smithy.Schema
-
-var Transaction_cumulativeGasUsed *smithy.Schema
-
-var Transaction_effectiveGasPrice *smithy.Schema
-
-var Transaction_signatureV *smithy.Schema
-
-var Transaction_signatureR *smithy.Schema
-
-var Transaction_signatureS *smithy.Schema
-
-var Transaction_transactionFee *smithy.Schema
-
-var Transaction_transactionId *smithy.Schema
-
-var Transaction_confirmationStatus *smithy.Schema
-
-var Transaction_executionStatus *smithy.Schema
-
-var TransactionEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionEvent",
-}, smithy.ShapeTypeStructure, 16)
-var TransactionEvent_network *smithy.Schema
-
-var TransactionEvent_transactionHash *smithy.Schema
-
-var TransactionEvent_eventType *smithy.Schema
-
-var TransactionEvent_from *smithy.Schema
-
-var TransactionEvent_to *smithy.Schema
-
-var TransactionEvent_value *smithy.Schema
-
-var TransactionEvent_contractAddress *smithy.Schema
-
-var TransactionEvent_tokenId *smithy.Schema
-
-var TransactionEvent_transactionId *smithy.Schema
-
-var TransactionEvent_voutIndex *smithy.Schema
-
-var TransactionEvent_voutSpent *smithy.Schema
-
-var TransactionEvent_spentVoutTransactionId *smithy.Schema
-
-var TransactionEvent_spentVoutTransactionHash *smithy.Schema
-
-var TransactionEvent_spentVoutIndex *smithy.Schema
-
-var TransactionEvent_blockchainInstant *smithy.Schema
-
-var TransactionEvent_confirmationStatus *smithy.Schema
-
-var _TransactionEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionEventList",
-}, smithy.ShapeTypeList, 1)
-var _TransactionEventList_member *smithy.Schema
-
-var TransactionOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionOutputItem",
-}, smithy.ShapeTypeStructure, 5)
-var TransactionOutputItem_transactionHash *smithy.Schema
-
-var TransactionOutputItem_transactionId *smithy.Schema
-
-var TransactionOutputItem_network *smithy.Schema
-
-var TransactionOutputItem_transactionTimestamp *smithy.Schema
-
-var TransactionOutputItem_confirmationStatus *smithy.Schema
-
-var _TransactionOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionOutputList",
-}, smithy.ShapeTypeList, 1)
-var _TransactionOutputList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var VoutFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "VoutFilter",
-}, smithy.ShapeTypeStructure, 1)
-var VoutFilter_voutSpent *smithy.Schema
-
-var BatchGetTokenBalanceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetTokenBalanceInput_getTokenBalanceInputs *smithy.Schema
-
-var BatchGetTokenBalanceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetTokenBalanceOutput_tokenBalances *smithy.Schema
-
-var BatchGetTokenBalanceOutput_errors *smithy.Schema
-
-var GetAssetContractInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetAssetContractInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssetContractInput_contractIdentifier *smithy.Schema
-
-var GetAssetContractOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetAssetContractOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetAssetContractOutput_contractIdentifier *smithy.Schema
-
-var GetAssetContractOutput_tokenStandard *smithy.Schema
-
-var GetAssetContractOutput_deployerAddress *smithy.Schema
-
-var GetAssetContractOutput_metadata *smithy.Schema
-
-var GetTokenBalanceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalanceInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetTokenBalanceInput_tokenIdentifier *smithy.Schema
-
-var GetTokenBalanceInput_ownerIdentifier *smithy.Schema
-
-var GetTokenBalanceInput_atBlockchainInstant *smithy.Schema
-
-var GetTokenBalanceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalanceOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetTokenBalanceOutput_ownerIdentifier *smithy.Schema
-
-var GetTokenBalanceOutput_tokenIdentifier *smithy.Schema
-
-var GetTokenBalanceOutput_balance *smithy.Schema
-
-var GetTokenBalanceOutput_atBlockchainInstant *smithy.Schema
-
-var GetTokenBalanceOutput_lastUpdatedTime *smithy.Schema
-
-var GetTransactionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTransactionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetTransactionInput_transactionHash *smithy.Schema
-
-var GetTransactionInput_transactionId *smithy.Schema
-
-var GetTransactionInput_network *smithy.Schema
-
-var GetTransactionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTransactionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTransactionOutput_transaction *smithy.Schema
-
-var ListAssetContractsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListAssetContractsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssetContractsInput_contractFilter *smithy.Schema
-
-var ListAssetContractsInput_nextToken *smithy.Schema
-
-var ListAssetContractsInput_maxResults *smithy.Schema
-
-var ListAssetContractsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListAssetContractsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssetContractsOutput_contracts *smithy.Schema
-
-var ListAssetContractsOutput_nextToken *smithy.Schema
-
-var ListFilteredTransactionEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsInput",
-}, smithy.ShapeTypeStructure, 8)
-var ListFilteredTransactionEventsInput_network *smithy.Schema
-
-var ListFilteredTransactionEventsInput_addressIdentifierFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_timeFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_voutFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_confirmationStatusFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_sort *smithy.Schema
-
-var ListFilteredTransactionEventsInput_nextToken *smithy.Schema
-
-var ListFilteredTransactionEventsInput_maxResults *smithy.Schema
-
-var ListFilteredTransactionEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFilteredTransactionEventsOutput_events *smithy.Schema
-
-var ListFilteredTransactionEventsOutput_nextToken *smithy.Schema
-
-var ListTokenBalancesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTokenBalancesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListTokenBalancesInput_ownerFilter *smithy.Schema
-
-var ListTokenBalancesInput_tokenFilter *smithy.Schema
-
-var ListTokenBalancesInput_nextToken *smithy.Schema
-
-var ListTokenBalancesInput_maxResults *smithy.Schema
-
-var ListTokenBalancesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTokenBalancesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTokenBalancesOutput_tokenBalances *smithy.Schema
-
-var ListTokenBalancesOutput_nextToken *smithy.Schema
-
-var ListTransactionEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionEventsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListTransactionEventsInput_transactionHash *smithy.Schema
-
-var ListTransactionEventsInput_transactionId *smithy.Schema
-
-var ListTransactionEventsInput_network *smithy.Schema
-
-var ListTransactionEventsInput_nextToken *smithy.Schema
-
-var ListTransactionEventsInput_maxResults *smithy.Schema
-
-var ListTransactionEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTransactionEventsOutput_events *smithy.Schema
-
-var ListTransactionEventsOutput_nextToken *smithy.Schema
-
-var ListTransactionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsInput",
-}, smithy.ShapeTypeStructure, 8)
-var ListTransactionsInput_address *smithy.Schema
-
-var ListTransactionsInput_network *smithy.Schema
-
-var ListTransactionsInput_fromBlockchainInstant *smithy.Schema
-
-var ListTransactionsInput_toBlockchainInstant *smithy.Schema
-
-var ListTransactionsInput_sort *smithy.Schema
-
-var ListTransactionsInput_nextToken *smithy.Schema
-
-var ListTransactionsInput_maxResults *smithy.Schema
-
-var ListTransactionsInput_confirmationStatusFilter *smithy.Schema
-
-var ListTransactionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTransactionsOutput_transactions *smithy.Schema
-
-var ListTransactionsOutput_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ExceptionMessage)
-
-	_ChainAddresses_member = _ChainAddresses.AddMember("member", _ChainAddress)
-
-	AddressIdentifierFilter_transactionEventToAddress = AddressIdentifierFilter.AddMember("transactionEventToAddress", _ChainAddresses)
-
-	ContractIdentifier_network = ContractIdentifier.AddMember("network", _QueryNetwork)
-
-	ContractIdentifier_contractAddress = ContractIdentifier.AddMember("contractAddress", _ChainAddress)
-
-	AssetContract_contractIdentifier = AssetContract.AddMember("contractIdentifier", ContractIdentifier)
-
-	AssetContract_tokenStandard = AssetContract.AddMember("tokenStandard", _QueryTokenStandard)
-
-	AssetContract_deployerAddress = AssetContract.AddMember("deployerAddress", _ChainAddress)
-
-	_AssetContractList_member = _AssetContractList.AddMember("member", AssetContract)
-
-	TokenIdentifier_network = TokenIdentifier.AddMember("network", _QueryNetwork)
-
-	TokenIdentifier_contractAddress = TokenIdentifier.AddMember("contractAddress", _ChainAddress)
-
-	TokenIdentifier_tokenId = TokenIdentifier.AddMember("tokenId", _QueryTokenId)
-
-	OwnerIdentifier_address = OwnerIdentifier.AddMember("address", _ChainAddress)
-
-	BlockchainInstant_time = BlockchainInstant.AddMember("time", smithyprelude.Timestamp)
-
-	BatchGetTokenBalanceErrorItem_tokenIdentifier = BatchGetTokenBalanceErrorItem.AddMember("tokenIdentifier", TokenIdentifier)
-
-	BatchGetTokenBalanceErrorItem_ownerIdentifier = BatchGetTokenBalanceErrorItem.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	BatchGetTokenBalanceErrorItem_atBlockchainInstant = BatchGetTokenBalanceErrorItem.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	BatchGetTokenBalanceErrorItem_errorCode = BatchGetTokenBalanceErrorItem.AddMember("errorCode", smithyprelude.String)
-
-	BatchGetTokenBalanceErrorItem_errorMessage = BatchGetTokenBalanceErrorItem.AddMember("errorMessage", smithyprelude.String)
-
-	BatchGetTokenBalanceErrorItem_errorType = BatchGetTokenBalanceErrorItem.AddMember("errorType", _ErrorType)
-
-	_BatchGetTokenBalanceErrors_member = _BatchGetTokenBalanceErrors.AddMember("member", BatchGetTokenBalanceErrorItem)
-
-	BatchGetTokenBalanceInputItem_tokenIdentifier = BatchGetTokenBalanceInputItem.AddMember("tokenIdentifier", TokenIdentifier)
-
-	BatchGetTokenBalanceInputItem_ownerIdentifier = BatchGetTokenBalanceInputItem.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	BatchGetTokenBalanceInputItem_atBlockchainInstant = BatchGetTokenBalanceInputItem.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	BatchGetTokenBalanceOutputItem_ownerIdentifier = BatchGetTokenBalanceOutputItem.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	BatchGetTokenBalanceOutputItem_tokenIdentifier = BatchGetTokenBalanceOutputItem.AddMember("tokenIdentifier", TokenIdentifier)
-
-	BatchGetTokenBalanceOutputItem_balance = BatchGetTokenBalanceOutputItem.AddMember("balance", smithyprelude.String)
-
-	BatchGetTokenBalanceOutputItem_atBlockchainInstant = BatchGetTokenBalanceOutputItem.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	BatchGetTokenBalanceOutputItem_lastUpdatedTime = BatchGetTokenBalanceOutputItem.AddMember("lastUpdatedTime", BlockchainInstant)
-
-	_BatchGetTokenBalanceOutputList_member = _BatchGetTokenBalanceOutputList.AddMember("member", BatchGetTokenBalanceOutputItem)
-
-	_ConfirmationStatusIncludeList_member = _ConfirmationStatusIncludeList.AddMember("member", _ConfirmationStatus)
-
-	ConfirmationStatusFilter_include = ConfirmationStatusFilter.AddMember("include", _ConfirmationStatusIncludeList)
-
-	ContractFilter_network = ContractFilter.AddMember("network", _QueryNetwork)
-
-	ContractFilter_tokenStandard = ContractFilter.AddMember("tokenStandard", _QueryTokenStandard)
-
-	ContractFilter_deployerAddress = ContractFilter.AddMember("deployerAddress", _ChainAddress)
-
-	ContractMetadata_name = ContractMetadata.AddMember("name", smithyprelude.String)
-
-	ContractMetadata_symbol = ContractMetadata.AddMember("symbol", smithyprelude.String)
-
-	ContractMetadata_decimals = ContractMetadata.AddMember("decimals", smithyprelude.Integer)
-
-	_GetTokenBalanceInputList_member = _GetTokenBalanceInputList.AddMember("member", BatchGetTokenBalanceInputItem)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ListFilteredTransactionEventsSort_sortBy = ListFilteredTransactionEventsSort.AddMember("sortBy", _ListFilteredTransactionEventsSortBy)
-
-	ListFilteredTransactionEventsSort_sortOrder = ListFilteredTransactionEventsSort.AddMember("sortOrder", _SortOrder)
-
-	ListTransactionsSort_sortBy = ListTransactionsSort.AddMember("sortBy", _ListTransactionsSortBy)
-
-	ListTransactionsSort_sortOrder = ListTransactionsSort.AddMember("sortOrder", _SortOrder)
-
-	OwnerFilter_address = OwnerFilter.AddMember("address", _ChainAddress)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ExceptionMessage)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ExceptionMessage)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _ResourceId)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _ServiceCode)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _QuotaCode)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ExceptionMessage)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _ServiceCode)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _QuotaCode)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TimeFilter_from = TimeFilter.AddMember("from", BlockchainInstant)
-
-	TimeFilter_to = TimeFilter.AddMember("to", BlockchainInstant)
-
-	TokenBalance_ownerIdentifier = TokenBalance.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	TokenBalance_tokenIdentifier = TokenBalance.AddMember("tokenIdentifier", TokenIdentifier)
-
-	TokenBalance_balance = TokenBalance.AddMember("balance", smithyprelude.String)
-
-	TokenBalance_atBlockchainInstant = TokenBalance.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	TokenBalance_lastUpdatedTime = TokenBalance.AddMember("lastUpdatedTime", BlockchainInstant)
-
-	_TokenBalanceList_member = _TokenBalanceList.AddMember("member", TokenBalance)
-
-	TokenFilter_network = TokenFilter.AddMember("network", _QueryNetwork)
-
-	TokenFilter_contractAddress = TokenFilter.AddMember("contractAddress", _ChainAddress)
-
-	TokenFilter_tokenId = TokenFilter.AddMember("tokenId", _QueryTokenId)
-
-	Transaction_network = Transaction.AddMember("network", _QueryNetwork)
-
-	Transaction_blockHash = Transaction.AddMember("blockHash", _BlockHash)
-
-	Transaction_transactionHash = Transaction.AddMember("transactionHash", _QueryTransactionHash)
-
-	Transaction_blockNumber = Transaction.AddMember("blockNumber", smithyprelude.String)
-
-	Transaction_transactionTimestamp = Transaction.AddMember("transactionTimestamp", smithyprelude.Timestamp)
-
-	Transaction_transactionIndex = Transaction.AddMember("transactionIndex", smithyprelude.Long)
-
-	Transaction_numberOfTransactions = Transaction.AddMember("numberOfTransactions", smithyprelude.Long)
-
-	Transaction_to = Transaction.AddMember("to", _ChainAddress)
-
-	Transaction_from = Transaction.AddMember("from", _ChainAddress)
-
-	Transaction_contractAddress = Transaction.AddMember("contractAddress", _ChainAddress)
-
-	Transaction_gasUsed = Transaction.AddMember("gasUsed", smithyprelude.String)
-
-	Transaction_cumulativeGasUsed = Transaction.AddMember("cumulativeGasUsed", smithyprelude.String)
-
-	Transaction_effectiveGasPrice = Transaction.AddMember("effectiveGasPrice", smithyprelude.String)
-
-	Transaction_signatureV = Transaction.AddMember("signatureV", smithyprelude.Integer)
-
-	Transaction_signatureR = Transaction.AddMember("signatureR", smithyprelude.String)
-
-	Transaction_signatureS = Transaction.AddMember("signatureS", smithyprelude.String)
-
-	Transaction_transactionFee = Transaction.AddMember("transactionFee", smithyprelude.String)
-
-	Transaction_transactionId = Transaction.AddMember("transactionId", smithyprelude.String)
-
-	Transaction_confirmationStatus = Transaction.AddMember("confirmationStatus", _ConfirmationStatus)
-
-	Transaction_executionStatus = Transaction.AddMember("executionStatus", _ExecutionStatus)
-
-	TransactionEvent_network = TransactionEvent.AddMember("network", _QueryNetwork)
-
-	TransactionEvent_transactionHash = TransactionEvent.AddMember("transactionHash", _QueryTransactionHash)
-
-	TransactionEvent_eventType = TransactionEvent.AddMember("eventType", _QueryTransactionEventType)
-
-	TransactionEvent_from = TransactionEvent.AddMember("from", _ChainAddress)
-
-	TransactionEvent_to = TransactionEvent.AddMember("to", _ChainAddress)
-
-	TransactionEvent_value = TransactionEvent.AddMember("value", smithyprelude.String)
-
-	TransactionEvent_contractAddress = TransactionEvent.AddMember("contractAddress", _ChainAddress)
-
-	TransactionEvent_tokenId = TransactionEvent.AddMember("tokenId", _QueryTokenId)
-
-	TransactionEvent_transactionId = TransactionEvent.AddMember("transactionId", smithyprelude.String)
-
-	TransactionEvent_voutIndex = TransactionEvent.AddMember("voutIndex", smithyprelude.Integer)
-
-	TransactionEvent_voutSpent = TransactionEvent.AddMember("voutSpent", smithyprelude.Boolean)
-
-	TransactionEvent_spentVoutTransactionId = TransactionEvent.AddMember("spentVoutTransactionId", smithyprelude.String)
-
-	TransactionEvent_spentVoutTransactionHash = TransactionEvent.AddMember("spentVoutTransactionHash", smithyprelude.String)
-
-	TransactionEvent_spentVoutIndex = TransactionEvent.AddMember("spentVoutIndex", smithyprelude.Integer)
-
-	TransactionEvent_blockchainInstant = TransactionEvent.AddMember("blockchainInstant", BlockchainInstant)
-
-	TransactionEvent_confirmationStatus = TransactionEvent.AddMember("confirmationStatus", _ConfirmationStatus)
-
-	_TransactionEventList_member = _TransactionEventList.AddMember("member", TransactionEvent)
-
-	TransactionOutputItem_transactionHash = TransactionOutputItem.AddMember("transactionHash", _QueryTransactionHash)
-
-	TransactionOutputItem_transactionId = TransactionOutputItem.AddMember("transactionId", _QueryTransactionId)
-
-	TransactionOutputItem_network = TransactionOutputItem.AddMember("network", _QueryNetwork)
-
-	TransactionOutputItem_transactionTimestamp = TransactionOutputItem.AddMember("transactionTimestamp", smithyprelude.Timestamp)
-
-	TransactionOutputItem_confirmationStatus = TransactionOutputItem.AddMember("confirmationStatus", _ConfirmationStatus)
-
-	_TransactionOutputList_member = _TransactionOutputList.AddMember("member", TransactionOutputItem)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ExceptionMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	VoutFilter_voutSpent = VoutFilter.AddMember("voutSpent", smithyprelude.Boolean)
-
-	BatchGetTokenBalanceInput_getTokenBalanceInputs = BatchGetTokenBalanceInput.AddMember("getTokenBalanceInputs", _GetTokenBalanceInputList)
-
-	BatchGetTokenBalanceOutput_tokenBalances = BatchGetTokenBalanceOutput.AddMember("tokenBalances", _BatchGetTokenBalanceOutputList)
-
-	BatchGetTokenBalanceOutput_errors = BatchGetTokenBalanceOutput.AddMember("errors", _BatchGetTokenBalanceErrors)
-
-	GetAssetContractInput_contractIdentifier = GetAssetContractInput.AddMember("contractIdentifier", ContractIdentifier)
-
-	GetAssetContractOutput_contractIdentifier = GetAssetContractOutput.AddMember("contractIdentifier", ContractIdentifier)
-
-	GetAssetContractOutput_tokenStandard = GetAssetContractOutput.AddMember("tokenStandard", _QueryTokenStandard)
-
-	GetAssetContractOutput_deployerAddress = GetAssetContractOutput.AddMember("deployerAddress", _ChainAddress)
-
-	GetAssetContractOutput_metadata = GetAssetContractOutput.AddMember("metadata", ContractMetadata)
-
-	GetTokenBalanceInput_tokenIdentifier = GetTokenBalanceInput.AddMember("tokenIdentifier", TokenIdentifier)
-
-	GetTokenBalanceInput_ownerIdentifier = GetTokenBalanceInput.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	GetTokenBalanceInput_atBlockchainInstant = GetTokenBalanceInput.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	GetTokenBalanceOutput_ownerIdentifier = GetTokenBalanceOutput.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	GetTokenBalanceOutput_tokenIdentifier = GetTokenBalanceOutput.AddMember("tokenIdentifier", TokenIdentifier)
-
-	GetTokenBalanceOutput_balance = GetTokenBalanceOutput.AddMember("balance", smithyprelude.String)
-
-	GetTokenBalanceOutput_atBlockchainInstant = GetTokenBalanceOutput.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	GetTokenBalanceOutput_lastUpdatedTime = GetTokenBalanceOutput.AddMember("lastUpdatedTime", BlockchainInstant)
-
-	GetTransactionInput_transactionHash = GetTransactionInput.AddMember("transactionHash", _QueryTransactionHash)
-
-	GetTransactionInput_transactionId = GetTransactionInput.AddMember("transactionId", _QueryTransactionId)
-
-	GetTransactionInput_network = GetTransactionInput.AddMember("network", _QueryNetwork)
-
-	GetTransactionOutput_transaction = GetTransactionOutput.AddMember("transaction", Transaction)
-
-	ListAssetContractsInput_contractFilter = ListAssetContractsInput.AddMember("contractFilter", ContractFilter)
-
-	ListAssetContractsInput_nextToken = ListAssetContractsInput.AddMember("nextToken", _NextToken)
-
-	ListAssetContractsInput_maxResults = ListAssetContractsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAssetContractsOutput_contracts = ListAssetContractsOutput.AddMember("contracts", _AssetContractList)
-
-	ListAssetContractsOutput_nextToken = ListAssetContractsOutput.AddMember("nextToken", _NextToken)
-
-	ListFilteredTransactionEventsInput_network = ListFilteredTransactionEventsInput.AddMember("network", smithyprelude.String)
-
-	ListFilteredTransactionEventsInput_addressIdentifierFilter = ListFilteredTransactionEventsInput.AddMember("addressIdentifierFilter", AddressIdentifierFilter)
-
-	ListFilteredTransactionEventsInput_timeFilter = ListFilteredTransactionEventsInput.AddMember("timeFilter", TimeFilter)
-
-	ListFilteredTransactionEventsInput_voutFilter = ListFilteredTransactionEventsInput.AddMember("voutFilter", VoutFilter)
-
-	ListFilteredTransactionEventsInput_confirmationStatusFilter = ListFilteredTransactionEventsInput.AddMember("confirmationStatusFilter", ConfirmationStatusFilter)
-
-	ListFilteredTransactionEventsInput_sort = ListFilteredTransactionEventsInput.AddMember("sort", ListFilteredTransactionEventsSort)
-
-	ListFilteredTransactionEventsInput_nextToken = ListFilteredTransactionEventsInput.AddMember("nextToken", _NextToken)
-
-	ListFilteredTransactionEventsInput_maxResults = ListFilteredTransactionEventsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListFilteredTransactionEventsOutput_events = ListFilteredTransactionEventsOutput.AddMember("events", _TransactionEventList)
-
-	ListFilteredTransactionEventsOutput_nextToken = ListFilteredTransactionEventsOutput.AddMember("nextToken", _NextToken)
-
-	ListTokenBalancesInput_ownerFilter = ListTokenBalancesInput.AddMember("ownerFilter", OwnerFilter)
-
-	ListTokenBalancesInput_tokenFilter = ListTokenBalancesInput.AddMember("tokenFilter", TokenFilter)
-
-	ListTokenBalancesInput_nextToken = ListTokenBalancesInput.AddMember("nextToken", _NextToken)
-
-	ListTokenBalancesInput_maxResults = ListTokenBalancesInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListTokenBalancesOutput_tokenBalances = ListTokenBalancesOutput.AddMember("tokenBalances", _TokenBalanceList)
-
-	ListTokenBalancesOutput_nextToken = ListTokenBalancesOutput.AddMember("nextToken", _NextToken)
-
-	ListTransactionEventsInput_transactionHash = ListTransactionEventsInput.AddMember("transactionHash", _QueryTransactionHash)
-
-	ListTransactionEventsInput_transactionId = ListTransactionEventsInput.AddMember("transactionId", _QueryTransactionId)
-
-	ListTransactionEventsInput_network = ListTransactionEventsInput.AddMember("network", _QueryNetwork)
-
-	ListTransactionEventsInput_nextToken = ListTransactionEventsInput.AddMember("nextToken", _NextToken)
-
-	ListTransactionEventsInput_maxResults = ListTransactionEventsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListTransactionEventsOutput_events = ListTransactionEventsOutput.AddMember("events", _TransactionEventList)
-
-	ListTransactionEventsOutput_nextToken = ListTransactionEventsOutput.AddMember("nextToken", _NextToken)
-
-	ListTransactionsInput_address = ListTransactionsInput.AddMember("address", _ChainAddress)
-
-	ListTransactionsInput_network = ListTransactionsInput.AddMember("network", _QueryNetwork)
-
-	ListTransactionsInput_fromBlockchainInstant = ListTransactionsInput.AddMember("fromBlockchainInstant", BlockchainInstant)
-
-	ListTransactionsInput_toBlockchainInstant = ListTransactionsInput.AddMember("toBlockchainInstant", BlockchainInstant)
-
-	ListTransactionsInput_sort = ListTransactionsInput.AddMember("sort", ListTransactionsSort)
-
-	ListTransactionsInput_nextToken = ListTransactionsInput.AddMember("nextToken", _NextToken)
-
-	ListTransactionsInput_maxResults = ListTransactionsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListTransactionsInput_confirmationStatusFilter = ListTransactionsInput.AddMember("confirmationStatusFilter", ConfirmationStatusFilter)
-
-	ListTransactionsOutput_transactions = ListTransactionsOutput.AddMember("transactions", _TransactionOutputList)
-
-	ListTransactionsOutput_nextToken = ListTransactionsOutput.AddMember("nextToken", _NextToken)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAddressIdentifierFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressIdentifierFilter_transactionEventToAddress}}
+var mAssetContract = smithy.SchemaMembers{List: []*smithy.Schema{&sAssetContract_contractIdentifier, &sAssetContract_tokenStandard, &sAssetContract_deployerAddress}}
+var m_AssetContractList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssetContractList_member}}
+var mBatchGetTokenBalanceErrorItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetTokenBalanceErrorItem_tokenIdentifier, &sBatchGetTokenBalanceErrorItem_ownerIdentifier, &sBatchGetTokenBalanceErrorItem_atBlockchainInstant, &sBatchGetTokenBalanceErrorItem_errorCode, &sBatchGetTokenBalanceErrorItem_errorMessage, &sBatchGetTokenBalanceErrorItem_errorType}}
+var m_BatchGetTokenBalanceErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetTokenBalanceErrors_member}}
+var mBatchGetTokenBalanceInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetTokenBalanceInputItem_tokenIdentifier, &sBatchGetTokenBalanceInputItem_ownerIdentifier, &sBatchGetTokenBalanceInputItem_atBlockchainInstant}}
+var mBatchGetTokenBalanceOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetTokenBalanceOutputItem_ownerIdentifier, &sBatchGetTokenBalanceOutputItem_tokenIdentifier, &sBatchGetTokenBalanceOutputItem_balance, &sBatchGetTokenBalanceOutputItem_atBlockchainInstant, &sBatchGetTokenBalanceOutputItem_lastUpdatedTime}}
+var m_BatchGetTokenBalanceOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetTokenBalanceOutputList_member}}
+var mBlockchainInstant = smithy.SchemaMembers{List: []*smithy.Schema{&sBlockchainInstant_time}}
+var m_ChainAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChainAddresses_member}}
+var mConfirmationStatusFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmationStatusFilter_include}}
+var m_ConfirmationStatusIncludeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfirmationStatusIncludeList_member}}
+var mContractFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sContractFilter_network, &sContractFilter_tokenStandard, &sContractFilter_deployerAddress}}
+var mContractIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sContractIdentifier_network, &sContractIdentifier_contractAddress}}
+var mContractMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sContractMetadata_name, &sContractMetadata_symbol, &sContractMetadata_decimals}}
+var m_GetTokenBalanceInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetTokenBalanceInputList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mListFilteredTransactionEventsSort = smithy.SchemaMembers{List: []*smithy.Schema{&sListFilteredTransactionEventsSort_sortBy, &sListFilteredTransactionEventsSort_sortOrder}}
+var mListTransactionsSort = smithy.SchemaMembers{List: []*smithy.Schema{&sListTransactionsSort_sortBy, &sListTransactionsSort_sortOrder}}
+var mOwnerFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOwnerFilter_address}}
+var mOwnerIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sOwnerIdentifier_address}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mTimeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeFilter_from, &sTimeFilter_to}}
+var mTokenBalance = smithy.SchemaMembers{List: []*smithy.Schema{&sTokenBalance_ownerIdentifier, &sTokenBalance_tokenIdentifier, &sTokenBalance_balance, &sTokenBalance_atBlockchainInstant, &sTokenBalance_lastUpdatedTime}}
+var m_TokenBalanceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TokenBalanceList_member}}
+var mTokenFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTokenFilter_network, &sTokenFilter_contractAddress, &sTokenFilter_tokenId}}
+var mTokenIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sTokenIdentifier_network, &sTokenIdentifier_contractAddress, &sTokenIdentifier_tokenId}}
+var mTransaction = smithy.SchemaMembers{List: []*smithy.Schema{&sTransaction_network, &sTransaction_blockHash, &sTransaction_transactionHash, &sTransaction_blockNumber, &sTransaction_transactionTimestamp, &sTransaction_transactionIndex, &sTransaction_numberOfTransactions, &sTransaction_to, &sTransaction_from, &sTransaction_contractAddress, &sTransaction_gasUsed, &sTransaction_cumulativeGasUsed, &sTransaction_effectiveGasPrice, &sTransaction_signatureV, &sTransaction_signatureR, &sTransaction_signatureS, &sTransaction_transactionFee, &sTransaction_transactionId, &sTransaction_confirmationStatus, &sTransaction_executionStatus}, Hash: &hTransaction}
+var mTransactionEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sTransactionEvent_network, &sTransactionEvent_transactionHash, &sTransactionEvent_eventType, &sTransactionEvent_from, &sTransactionEvent_to, &sTransactionEvent_value, &sTransactionEvent_contractAddress, &sTransactionEvent_tokenId, &sTransactionEvent_transactionId, &sTransactionEvent_voutIndex, &sTransactionEvent_voutSpent, &sTransactionEvent_spentVoutTransactionId, &sTransactionEvent_spentVoutTransactionHash, &sTransactionEvent_spentVoutIndex, &sTransactionEvent_blockchainInstant, &sTransactionEvent_confirmationStatus}, Hash: &hTransactionEvent}
+var m_TransactionEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TransactionEventList_member}}
+var mTransactionOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sTransactionOutputItem_transactionHash, &sTransactionOutputItem_transactionId, &sTransactionOutputItem_network, &sTransactionOutputItem_transactionTimestamp, &sTransactionOutputItem_confirmationStatus}}
+var m_TransactionOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TransactionOutputList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mVoutFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sVoutFilter_voutSpent}}
+var mBatchGetTokenBalanceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetTokenBalanceInput_getTokenBalanceInputs}}
+var mBatchGetTokenBalanceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetTokenBalanceOutput_tokenBalances, &sBatchGetTokenBalanceOutput_errors}}
+var mGetAssetContractInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssetContractInput_contractIdentifier}}
+var mGetAssetContractOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssetContractOutput_contractIdentifier, &sGetAssetContractOutput_tokenStandard, &sGetAssetContractOutput_deployerAddress, &sGetAssetContractOutput_metadata}}
+var mGetTokenBalanceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTokenBalanceInput_tokenIdentifier, &sGetTokenBalanceInput_ownerIdentifier, &sGetTokenBalanceInput_atBlockchainInstant}}
+var mGetTokenBalanceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTokenBalanceOutput_ownerIdentifier, &sGetTokenBalanceOutput_tokenIdentifier, &sGetTokenBalanceOutput_balance, &sGetTokenBalanceOutput_atBlockchainInstant, &sGetTokenBalanceOutput_lastUpdatedTime}}
+var mGetTransactionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransactionInput_transactionHash, &sGetTransactionInput_transactionId, &sGetTransactionInput_network}}
+var mGetTransactionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransactionOutput_transaction}}
+var mListAssetContractsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssetContractsInput_contractFilter, &sListAssetContractsInput_nextToken, &sListAssetContractsInput_maxResults}}
+var mListAssetContractsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssetContractsOutput_contracts, &sListAssetContractsOutput_nextToken}}
+var mListFilteredTransactionEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFilteredTransactionEventsInput_network, &sListFilteredTransactionEventsInput_addressIdentifierFilter, &sListFilteredTransactionEventsInput_timeFilter, &sListFilteredTransactionEventsInput_voutFilter, &sListFilteredTransactionEventsInput_confirmationStatusFilter, &sListFilteredTransactionEventsInput_sort, &sListFilteredTransactionEventsInput_nextToken, &sListFilteredTransactionEventsInput_maxResults}}
+var mListFilteredTransactionEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFilteredTransactionEventsOutput_events, &sListFilteredTransactionEventsOutput_nextToken}}
+var mListTokenBalancesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTokenBalancesInput_ownerFilter, &sListTokenBalancesInput_tokenFilter, &sListTokenBalancesInput_nextToken, &sListTokenBalancesInput_maxResults}}
+var mListTokenBalancesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTokenBalancesOutput_tokenBalances, &sListTokenBalancesOutput_nextToken}}
+var mListTransactionEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTransactionEventsInput_transactionHash, &sListTransactionEventsInput_transactionId, &sListTransactionEventsInput_network, &sListTransactionEventsInput_nextToken, &sListTransactionEventsInput_maxResults}}
+var mListTransactionEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTransactionEventsOutput_events, &sListTransactionEventsOutput_nextToken}}
+var mListTransactionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTransactionsInput_address, &sListTransactionsInput_network, &sListTransactionsInput_fromBlockchainInstant, &sListTransactionsInput_toBlockchainInstant, &sListTransactionsInput_sort, &sListTransactionsInput_nextToken, &sListTransactionsInput_maxResults, &sListTransactionsInput_confirmationStatusFilter}}
+var mListTransactionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTransactionsOutput_transactions, &sListTransactionsOutput_nextToken}}
+
+var hTransaction = smithy.MemberHash{Seed: 16, Slots: []uint16{
+	4, 0, 19, 12, 0, 0, 0, 0, 18, 0, 3, 0, 0, 0, 0, 0, 0, 14, 6, 16, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 17, 15, 0, 0, 0, 0, 0, 7, 9, 0, 0, 11, 0, 0, 13, 1, 0, 0, 0,
+	0, 0, 20, 8, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 2, 10,
+}}
+var hTransactionEvent = smithy.MemberHash{Seed: 24, Slots: []uint16{
+	12, 1, 6, 3, 2, 0, 4, 0, 0, 0, 8, 0, 13, 0, 5, 0, 7, 0, 14, 0, 0, 0, 9, 16,
+	0, 0, 0, 11, 0, 0, 10, 15,
+}}
+
+var sBatchGetTokenBalance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTokenBalance, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetTokenBalance})
+var sGetAssetContract = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssetContract, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetAssetContract})
+var sGetTokenBalance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTokenBalance, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetTokenBalance})
+var sGetTransaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransaction, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetTransaction})
+var sListAssetContracts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssetContracts, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListAssetContracts})
+var sListFilteredTransactionEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFilteredTransactionEvents, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListFilteredTransactionEvents})
+var sListTokenBalances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTokenBalances, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListTokenBalances})
+var sListTransactionEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTransactionEvents, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListTransactionEvents})
+var sListTransactions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTransactions, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListTransactions})
+var s_TietonChainQueryService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TietonChainQueryService, Type: smithy.ShapeTypeService, Ext: &e_TietonChainQueryService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAddressIdentifierFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressIdentifierFilter, Members: &mAddressIdentifierFilter, Type: smithy.ShapeTypeStructure, Ext: &eAddressIdentifierFilter})
+var sAddressIdentifierFilter_transactionEventToAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionEventToAddress", ID: &i_ChainAddresses, Members: &m_ChainAddresses, Type: smithy.ShapeTypeList, Ext: &eAddressIdentifierFilter_transactionEventToAddress})
+var sAssetContract = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssetContract, Members: &mAssetContract, Type: smithy.ShapeTypeStructure, Ext: &eAssetContract})
+var sAssetContract_contractIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractIdentifier", ID: &iContractIdentifier, Members: &mContractIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eAssetContract_contractIdentifier})
+var sAssetContract_tokenStandard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenStandard", ID: &i_QueryTokenStandard, Type: smithy.ShapeTypeString, Ext: &eAssetContract_tokenStandard})
+var sAssetContract_deployerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployerAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eAssetContract_deployerAddress})
+var s_AssetContractList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssetContractList, Members: &m_AssetContractList, Type: smithy.ShapeTypeList, Ext: &e_AssetContractList})
+var s_AssetContractList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssetContract, Members: &mAssetContract, Type: smithy.ShapeTypeStructure, Ext: &e_AssetContractList_member})
+var sBatchGetTokenBalanceErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTokenBalanceErrorItem, Members: &mBatchGetTokenBalanceErrorItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceErrorItem})
+var sBatchGetTokenBalanceErrorItem_tokenIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenIdentifier", ID: &iTokenIdentifier, Members: &mTokenIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceErrorItem_tokenIdentifier})
+var sBatchGetTokenBalanceErrorItem_ownerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerIdentifier", ID: &iOwnerIdentifier, Members: &mOwnerIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceErrorItem_ownerIdentifier})
+var sBatchGetTokenBalanceErrorItem_atBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceErrorItem_atBlockchainInstant})
+var sBatchGetTokenBalanceErrorItem_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetTokenBalanceErrorItem_errorCode})
+var sBatchGetTokenBalanceErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetTokenBalanceErrorItem_errorMessage})
+var sBatchGetTokenBalanceErrorItem_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &i_ErrorType, Type: smithy.ShapeTypeString, Ext: &eBatchGetTokenBalanceErrorItem_errorType})
+var s_BatchGetTokenBalanceErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetTokenBalanceErrors, Members: &m_BatchGetTokenBalanceErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchGetTokenBalanceErrors})
+var s_BatchGetTokenBalanceErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetTokenBalanceErrorItem, Members: &mBatchGetTokenBalanceErrorItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetTokenBalanceErrors_member})
+var sBatchGetTokenBalanceInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTokenBalanceInputItem, Members: &mBatchGetTokenBalanceInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceInputItem})
+var sBatchGetTokenBalanceInputItem_tokenIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenIdentifier", ID: &iTokenIdentifier, Members: &mTokenIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceInputItem_tokenIdentifier})
+var sBatchGetTokenBalanceInputItem_ownerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerIdentifier", ID: &iOwnerIdentifier, Members: &mOwnerIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceInputItem_ownerIdentifier})
+var sBatchGetTokenBalanceInputItem_atBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceInputItem_atBlockchainInstant})
+var sBatchGetTokenBalanceOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTokenBalanceOutputItem, Members: &mBatchGetTokenBalanceOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceOutputItem})
+var sBatchGetTokenBalanceOutputItem_ownerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerIdentifier", ID: &iOwnerIdentifier, Members: &mOwnerIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceOutputItem_ownerIdentifier})
+var sBatchGetTokenBalanceOutputItem_tokenIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenIdentifier", ID: &iTokenIdentifier, Members: &mTokenIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceOutputItem_tokenIdentifier})
+var sBatchGetTokenBalanceOutputItem_balance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "balance", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetTokenBalanceOutputItem_balance})
+var sBatchGetTokenBalanceOutputItem_atBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceOutputItem_atBlockchainInstant})
+var sBatchGetTokenBalanceOutputItem_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceOutputItem_lastUpdatedTime})
+var s_BatchGetTokenBalanceOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetTokenBalanceOutputList, Members: &m_BatchGetTokenBalanceOutputList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetTokenBalanceOutputList})
+var s_BatchGetTokenBalanceOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetTokenBalanceOutputItem, Members: &mBatchGetTokenBalanceOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetTokenBalanceOutputList_member})
+var sBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eBlockchainInstant})
+var sBlockchainInstant_time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "time", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBlockchainInstant_time})
+var s_BlockHash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockHash, Type: smithy.ShapeTypeString, Ext: &e_BlockHash})
+var s_ChainAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &e_ChainAddress})
+var s_ChainAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChainAddresses, Members: &m_ChainAddresses, Type: smithy.ShapeTypeList, Ext: &e_ChainAddresses})
+var s_ChainAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &e_ChainAddresses_member})
+var s_ConfirmationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfirmationStatus, Type: smithy.ShapeTypeString, Ext: &e_ConfirmationStatus})
+var sConfirmationStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmationStatusFilter, Members: &mConfirmationStatusFilter, Type: smithy.ShapeTypeStructure, Ext: &eConfirmationStatusFilter})
+var sConfirmationStatusFilter_include = smithy.NewStaticSchema(smithy.StaticSchema{Member: "include", ID: &i_ConfirmationStatusIncludeList, Members: &m_ConfirmationStatusIncludeList, Type: smithy.ShapeTypeList, Ext: &eConfirmationStatusFilter_include})
+var s_ConfirmationStatusIncludeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfirmationStatusIncludeList, Members: &m_ConfirmationStatusIncludeList, Type: smithy.ShapeTypeList, Ext: &e_ConfirmationStatusIncludeList})
+var s_ConfirmationStatusIncludeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfirmationStatus, Type: smithy.ShapeTypeString, Ext: &e_ConfirmationStatusIncludeList_member})
+var sContractFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContractFilter, Members: &mContractFilter, Type: smithy.ShapeTypeStructure, Ext: &eContractFilter})
+var sContractFilter_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eContractFilter_network})
+var sContractFilter_tokenStandard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenStandard", ID: &i_QueryTokenStandard, Type: smithy.ShapeTypeString, Ext: &eContractFilter_tokenStandard})
+var sContractFilter_deployerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployerAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eContractFilter_deployerAddress})
+var sContractIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContractIdentifier, Members: &mContractIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eContractIdentifier})
+var sContractIdentifier_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eContractIdentifier_network})
+var sContractIdentifier_contractAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eContractIdentifier_contractAddress})
+var sContractMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContractMetadata, Members: &mContractMetadata, Type: smithy.ShapeTypeStructure, Ext: &eContractMetadata})
+var sContractMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContractMetadata_name})
+var sContractMetadata_symbol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "symbol", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContractMetadata_symbol})
+var sContractMetadata_decimals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decimals", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eContractMetadata_decimals})
+var s_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorType, Type: smithy.ShapeTypeString, Ext: &e_ErrorType})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_ExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionStatus, Type: smithy.ShapeTypeString, Ext: &e_ExecutionStatus})
+var s_GetTokenBalanceInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetTokenBalanceInputList, Members: &m_GetTokenBalanceInputList, Type: smithy.ShapeTypeList, Ext: &e_GetTokenBalanceInputList})
+var s_GetTokenBalanceInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetTokenBalanceInputItem, Members: &mBatchGetTokenBalanceInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_GetTokenBalanceInputList_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t11, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sListFilteredTransactionEventsSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFilteredTransactionEventsSort, Members: &mListFilteredTransactionEventsSort, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsSort})
+var sListFilteredTransactionEventsSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &i_ListFilteredTransactionEventsSortBy, Type: smithy.ShapeTypeString, Ext: &eListFilteredTransactionEventsSort_sortBy})
+var sListFilteredTransactionEventsSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &eListFilteredTransactionEventsSort_sortOrder})
+var s_ListFilteredTransactionEventsSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListFilteredTransactionEventsSortBy, Type: smithy.ShapeTypeString, Ext: &e_ListFilteredTransactionEventsSortBy})
+var sListTransactionsSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTransactionsSort, Members: &mListTransactionsSort, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionsSort})
+var sListTransactionsSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &i_ListTransactionsSortBy, Type: smithy.ShapeTypeString, Ext: &eListTransactionsSort_sortBy})
+var sListTransactionsSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &eListTransactionsSort_sortOrder})
+var s_ListTransactionsSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTransactionsSortBy, Type: smithy.ShapeTypeString, Ext: &e_ListTransactionsSortBy})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOwnerFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOwnerFilter, Members: &mOwnerFilter, Type: smithy.ShapeTypeStructure, Ext: &eOwnerFilter})
+var sOwnerFilter_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eOwnerFilter_address})
+var sOwnerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOwnerIdentifier, Members: &mOwnerIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eOwnerIdentifier})
+var sOwnerIdentifier_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eOwnerIdentifier_address})
+var s_QueryNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &e_QueryNetwork})
+var s_QueryTokenId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryTokenId, Type: smithy.ShapeTypeString, Ext: &e_QueryTokenId})
+var s_QueryTokenStandard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryTokenStandard, Type: smithy.ShapeTypeString, Ext: &e_QueryTokenStandard})
+var s_QueryTransactionEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryTransactionEventType, Type: smithy.ShapeTypeString, Ext: &e_QueryTransactionEventType})
+var s_QueryTransactionHash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryTransactionHash, Type: smithy.ShapeTypeString, Ext: &e_QueryTransactionHash})
+var s_QueryTransactionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryTransactionId, Type: smithy.ShapeTypeString, Ext: &e_QueryTransactionId})
+var s_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &e_QuotaCode})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &e_ServiceCode})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &e_SortOrder})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t11, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeFilter, Members: &mTimeFilter, Type: smithy.ShapeTypeStructure, Ext: &eTimeFilter})
+var sTimeFilter_from = smithy.NewStaticSchema(smithy.StaticSchema{Member: "from", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eTimeFilter_from})
+var sTimeFilter_to = smithy.NewStaticSchema(smithy.StaticSchema{Member: "to", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eTimeFilter_to})
+var sTokenBalance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenBalance, Members: &mTokenBalance, Type: smithy.ShapeTypeStructure, Ext: &eTokenBalance})
+var sTokenBalance_ownerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerIdentifier", ID: &iOwnerIdentifier, Members: &mOwnerIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTokenBalance_ownerIdentifier})
+var sTokenBalance_tokenIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenIdentifier", ID: &iTokenIdentifier, Members: &mTokenIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTokenBalance_tokenIdentifier})
+var sTokenBalance_balance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "balance", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTokenBalance_balance})
+var sTokenBalance_atBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eTokenBalance_atBlockchainInstant})
+var sTokenBalance_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eTokenBalance_lastUpdatedTime})
+var s_TokenBalanceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenBalanceList, Members: &m_TokenBalanceList, Type: smithy.ShapeTypeList, Ext: &e_TokenBalanceList})
+var s_TokenBalanceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTokenBalance, Members: &mTokenBalance, Type: smithy.ShapeTypeStructure, Ext: &e_TokenBalanceList_member})
+var sTokenFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenFilter, Members: &mTokenFilter, Type: smithy.ShapeTypeStructure, Ext: &eTokenFilter})
+var sTokenFilter_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eTokenFilter_network})
+var sTokenFilter_contractAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTokenFilter_contractAddress})
+var sTokenFilter_tokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenId", ID: &i_QueryTokenId, Type: smithy.ShapeTypeString, Ext: &eTokenFilter_tokenId})
+var sTokenIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenIdentifier, Members: &mTokenIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTokenIdentifier})
+var sTokenIdentifier_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eTokenIdentifier_network})
+var sTokenIdentifier_contractAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTokenIdentifier_contractAddress})
+var sTokenIdentifier_tokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenId", ID: &i_QueryTokenId, Type: smithy.ShapeTypeString, Ext: &eTokenIdentifier_tokenId})
+var sTransaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransaction, Members: &mTransaction, Type: smithy.ShapeTypeStructure, Ext: &eTransaction})
+var sTransaction_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eTransaction_network})
+var sTransaction_blockHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockHash", ID: &i_BlockHash, Type: smithy.ShapeTypeString, Ext: &eTransaction_blockHash})
+var sTransaction_transactionHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionHash", ID: &i_QueryTransactionHash, Type: smithy.ShapeTypeString, Ext: &eTransaction_transactionHash})
+var sTransaction_blockNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockNumber", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_blockNumber})
+var sTransaction_transactionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTransaction_transactionTimestamp})
+var sTransaction_transactionIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionIndex", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eTransaction_transactionIndex})
+var sTransaction_numberOfTransactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfTransactions", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eTransaction_numberOfTransactions})
+var sTransaction_to = smithy.NewStaticSchema(smithy.StaticSchema{Member: "to", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTransaction_to})
+var sTransaction_from = smithy.NewStaticSchema(smithy.StaticSchema{Member: "from", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTransaction_from})
+var sTransaction_contractAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTransaction_contractAddress})
+var sTransaction_gasUsed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gasUsed", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_gasUsed})
+var sTransaction_cumulativeGasUsed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cumulativeGasUsed", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_cumulativeGasUsed})
+var sTransaction_effectiveGasPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveGasPrice", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_effectiveGasPrice})
+var sTransaction_signatureV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureV", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTransaction_signatureV})
+var sTransaction_signatureR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureR", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_signatureR})
+var sTransaction_signatureS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureS", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_signatureS})
+var sTransaction_transactionFee = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionFee", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_transactionFee})
+var sTransaction_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransaction_transactionId})
+var sTransaction_confirmationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationStatus", ID: &i_ConfirmationStatus, Type: smithy.ShapeTypeString, Ext: &eTransaction_confirmationStatus})
+var sTransaction_executionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStatus", ID: &i_ExecutionStatus, Type: smithy.ShapeTypeString, Ext: &eTransaction_executionStatus})
+var sTransactionEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransactionEvent, Members: &mTransactionEvent, Type: smithy.ShapeTypeStructure, Ext: &eTransactionEvent})
+var sTransactionEvent_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_network})
+var sTransactionEvent_transactionHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionHash", ID: &i_QueryTransactionHash, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_transactionHash})
+var sTransactionEvent_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_QueryTransactionEventType, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_eventType})
+var sTransactionEvent_from = smithy.NewStaticSchema(smithy.StaticSchema{Member: "from", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_from})
+var sTransactionEvent_to = smithy.NewStaticSchema(smithy.StaticSchema{Member: "to", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_to})
+var sTransactionEvent_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_value})
+var sTransactionEvent_contractAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_contractAddress})
+var sTransactionEvent_tokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenId", ID: &i_QueryTokenId, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_tokenId})
+var sTransactionEvent_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_transactionId})
+var sTransactionEvent_voutIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voutIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTransactionEvent_voutIndex})
+var sTransactionEvent_voutSpent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voutSpent", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eTransactionEvent_voutSpent})
+var sTransactionEvent_spentVoutTransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spentVoutTransactionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_spentVoutTransactionId})
+var sTransactionEvent_spentVoutTransactionHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spentVoutTransactionHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_spentVoutTransactionHash})
+var sTransactionEvent_spentVoutIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spentVoutIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTransactionEvent_spentVoutIndex})
+var sTransactionEvent_blockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eTransactionEvent_blockchainInstant})
+var sTransactionEvent_confirmationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationStatus", ID: &i_ConfirmationStatus, Type: smithy.ShapeTypeString, Ext: &eTransactionEvent_confirmationStatus})
+var s_TransactionEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransactionEventList, Members: &m_TransactionEventList, Type: smithy.ShapeTypeList, Ext: &e_TransactionEventList})
+var s_TransactionEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTransactionEvent, Members: &mTransactionEvent, Type: smithy.ShapeTypeStructure, Ext: &e_TransactionEventList_member})
+var sTransactionOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransactionOutputItem, Members: &mTransactionOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eTransactionOutputItem})
+var sTransactionOutputItem_transactionHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionHash", ID: &i_QueryTransactionHash, Type: smithy.ShapeTypeString, Ext: &eTransactionOutputItem_transactionHash})
+var sTransactionOutputItem_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_QueryTransactionId, Type: smithy.ShapeTypeString, Ext: &eTransactionOutputItem_transactionId})
+var sTransactionOutputItem_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eTransactionOutputItem_network})
+var sTransactionOutputItem_transactionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTransactionOutputItem_transactionTimestamp})
+var sTransactionOutputItem_confirmationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationStatus", ID: &i_ConfirmationStatus, Type: smithy.ShapeTypeString, Ext: &eTransactionOutputItem_confirmationStatus})
+var s_TransactionOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransactionOutputList, Members: &m_TransactionOutputList, Type: smithy.ShapeTypeList, Ext: &e_TransactionOutputList})
+var s_TransactionOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTransactionOutputItem, Members: &mTransactionOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_TransactionOutputList_member})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionReason})
+var sVoutFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoutFilter, Members: &mVoutFilter, Type: smithy.ShapeTypeStructure, Ext: &eVoutFilter})
+var sVoutFilter_voutSpent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voutSpent", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eVoutFilter_voutSpent})
+var sBatchGetTokenBalanceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTokenBalanceInput, Members: &mBatchGetTokenBalanceInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceInput})
+var sBatchGetTokenBalanceInput_getTokenBalanceInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "getTokenBalanceInputs", ID: &i_GetTokenBalanceInputList, Members: &m_GetTokenBalanceInputList, Type: smithy.ShapeTypeList, Ext: &eBatchGetTokenBalanceInput_getTokenBalanceInputs})
+var sBatchGetTokenBalanceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTokenBalanceOutput, Members: &mBatchGetTokenBalanceOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTokenBalanceOutput})
+var sBatchGetTokenBalanceOutput_tokenBalances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenBalances", ID: &i_BatchGetTokenBalanceOutputList, Members: &m_BatchGetTokenBalanceOutputList, Type: smithy.ShapeTypeList, Ext: &eBatchGetTokenBalanceOutput_tokenBalances})
+var sBatchGetTokenBalanceOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetTokenBalanceErrors, Members: &m_BatchGetTokenBalanceErrors, Type: smithy.ShapeTypeList, Ext: &eBatchGetTokenBalanceOutput_errors})
+var sGetAssetContractInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssetContractInput, Members: &mGetAssetContractInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAssetContractInput})
+var sGetAssetContractInput_contractIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractIdentifier", ID: &iContractIdentifier, Members: &mContractIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetAssetContractInput_contractIdentifier})
+var sGetAssetContractOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssetContractOutput, Members: &mGetAssetContractOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAssetContractOutput})
+var sGetAssetContractOutput_contractIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractIdentifier", ID: &iContractIdentifier, Members: &mContractIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetAssetContractOutput_contractIdentifier})
+var sGetAssetContractOutput_tokenStandard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenStandard", ID: &i_QueryTokenStandard, Type: smithy.ShapeTypeString, Ext: &eGetAssetContractOutput_tokenStandard})
+var sGetAssetContractOutput_deployerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployerAddress", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eGetAssetContractOutput_deployerAddress})
+var sGetAssetContractOutput_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iContractMetadata, Members: &mContractMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetAssetContractOutput_metadata})
+var sGetTokenBalanceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTokenBalanceInput, Members: &mGetTokenBalanceInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceInput})
+var sGetTokenBalanceInput_tokenIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenIdentifier", ID: &iTokenIdentifier, Members: &mTokenIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceInput_tokenIdentifier})
+var sGetTokenBalanceInput_ownerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerIdentifier", ID: &iOwnerIdentifier, Members: &mOwnerIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceInput_ownerIdentifier})
+var sGetTokenBalanceInput_atBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceInput_atBlockchainInstant})
+var sGetTokenBalanceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTokenBalanceOutput, Members: &mGetTokenBalanceOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceOutput})
+var sGetTokenBalanceOutput_ownerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerIdentifier", ID: &iOwnerIdentifier, Members: &mOwnerIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceOutput_ownerIdentifier})
+var sGetTokenBalanceOutput_tokenIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenIdentifier", ID: &iTokenIdentifier, Members: &mTokenIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceOutput_tokenIdentifier})
+var sGetTokenBalanceOutput_balance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "balance", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTokenBalanceOutput_balance})
+var sGetTokenBalanceOutput_atBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceOutput_atBlockchainInstant})
+var sGetTokenBalanceOutput_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenBalanceOutput_lastUpdatedTime})
+var sGetTransactionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransactionInput, Members: &mGetTransactionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTransactionInput})
+var sGetTransactionInput_transactionHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionHash", ID: &i_QueryTransactionHash, Type: smithy.ShapeTypeString, Ext: &eGetTransactionInput_transactionHash})
+var sGetTransactionInput_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_QueryTransactionId, Type: smithy.ShapeTypeString, Ext: &eGetTransactionInput_transactionId})
+var sGetTransactionInput_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eGetTransactionInput_network})
+var sGetTransactionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransactionOutput, Members: &mGetTransactionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTransactionOutput})
+var sGetTransactionOutput_transaction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transaction", ID: &iTransaction, Members: &mTransaction, Type: smithy.ShapeTypeStructure, Ext: &eGetTransactionOutput_transaction})
+var sListAssetContractsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssetContractsInput, Members: &mListAssetContractsInput, Type: smithy.ShapeTypeStructure, Ext: &eListAssetContractsInput})
+var sListAssetContractsInput_contractFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractFilter", ID: &iContractFilter, Members: &mContractFilter, Type: smithy.ShapeTypeStructure, Ext: &eListAssetContractsInput_contractFilter})
+var sListAssetContractsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAssetContractsInput_nextToken})
+var sListAssetContractsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListAssetContractsInput_maxResults})
+var sListAssetContractsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssetContractsOutput, Members: &mListAssetContractsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAssetContractsOutput})
+var sListAssetContractsOutput_contracts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contracts", ID: &i_AssetContractList, Members: &m_AssetContractList, Type: smithy.ShapeTypeList, Ext: &eListAssetContractsOutput_contracts})
+var sListAssetContractsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAssetContractsOutput_nextToken})
+var sListFilteredTransactionEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFilteredTransactionEventsInput, Members: &mListFilteredTransactionEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsInput})
+var sListFilteredTransactionEventsInput_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListFilteredTransactionEventsInput_network})
+var sListFilteredTransactionEventsInput_addressIdentifierFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressIdentifierFilter", ID: &iAddressIdentifierFilter, Members: &mAddressIdentifierFilter, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsInput_addressIdentifierFilter})
+var sListFilteredTransactionEventsInput_timeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeFilter", ID: &iTimeFilter, Members: &mTimeFilter, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsInput_timeFilter})
+var sListFilteredTransactionEventsInput_voutFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voutFilter", ID: &iVoutFilter, Members: &mVoutFilter, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsInput_voutFilter})
+var sListFilteredTransactionEventsInput_confirmationStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationStatusFilter", ID: &iConfirmationStatusFilter, Members: &mConfirmationStatusFilter, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsInput_confirmationStatusFilter})
+var sListFilteredTransactionEventsInput_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iListFilteredTransactionEventsSort, Members: &mListFilteredTransactionEventsSort, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsInput_sort})
+var sListFilteredTransactionEventsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFilteredTransactionEventsInput_nextToken})
+var sListFilteredTransactionEventsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListFilteredTransactionEventsInput_maxResults})
+var sListFilteredTransactionEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFilteredTransactionEventsOutput, Members: &mListFilteredTransactionEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFilteredTransactionEventsOutput})
+var sListFilteredTransactionEventsOutput_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_TransactionEventList, Members: &m_TransactionEventList, Type: smithy.ShapeTypeList, Ext: &eListFilteredTransactionEventsOutput_events})
+var sListFilteredTransactionEventsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFilteredTransactionEventsOutput_nextToken})
+var sListTokenBalancesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTokenBalancesInput, Members: &mListTokenBalancesInput, Type: smithy.ShapeTypeStructure, Ext: &eListTokenBalancesInput})
+var sListTokenBalancesInput_ownerFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerFilter", ID: &iOwnerFilter, Members: &mOwnerFilter, Type: smithy.ShapeTypeStructure, Ext: &eListTokenBalancesInput_ownerFilter})
+var sListTokenBalancesInput_tokenFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenFilter", ID: &iTokenFilter, Members: &mTokenFilter, Type: smithy.ShapeTypeStructure, Ext: &eListTokenBalancesInput_tokenFilter})
+var sListTokenBalancesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTokenBalancesInput_nextToken})
+var sListTokenBalancesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListTokenBalancesInput_maxResults})
+var sListTokenBalancesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTokenBalancesOutput, Members: &mListTokenBalancesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTokenBalancesOutput})
+var sListTokenBalancesOutput_tokenBalances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenBalances", ID: &i_TokenBalanceList, Members: &m_TokenBalanceList, Type: smithy.ShapeTypeList, Ext: &eListTokenBalancesOutput_tokenBalances})
+var sListTokenBalancesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTokenBalancesOutput_nextToken})
+var sListTransactionEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTransactionEventsInput, Members: &mListTransactionEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionEventsInput})
+var sListTransactionEventsInput_transactionHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionHash", ID: &i_QueryTransactionHash, Type: smithy.ShapeTypeString, Ext: &eListTransactionEventsInput_transactionHash})
+var sListTransactionEventsInput_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_QueryTransactionId, Type: smithy.ShapeTypeString, Ext: &eListTransactionEventsInput_transactionId})
+var sListTransactionEventsInput_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eListTransactionEventsInput_network})
+var sListTransactionEventsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTransactionEventsInput_nextToken})
+var sListTransactionEventsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListTransactionEventsInput_maxResults})
+var sListTransactionEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTransactionEventsOutput, Members: &mListTransactionEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionEventsOutput})
+var sListTransactionEventsOutput_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_TransactionEventList, Members: &m_TransactionEventList, Type: smithy.ShapeTypeList, Ext: &eListTransactionEventsOutput_events})
+var sListTransactionEventsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTransactionEventsOutput_nextToken})
+var sListTransactionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTransactionsInput, Members: &mListTransactionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionsInput})
+var sListTransactionsInput_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &i_ChainAddress, Type: smithy.ShapeTypeString, Ext: &eListTransactionsInput_address})
+var sListTransactionsInput_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &i_QueryNetwork, Type: smithy.ShapeTypeString, Ext: &eListTransactionsInput_network})
+var sListTransactionsInput_fromBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionsInput_fromBlockchainInstant})
+var sListTransactionsInput_toBlockchainInstant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toBlockchainInstant", ID: &iBlockchainInstant, Members: &mBlockchainInstant, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionsInput_toBlockchainInstant})
+var sListTransactionsInput_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iListTransactionsSort, Members: &mListTransactionsSort, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionsInput_sort})
+var sListTransactionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTransactionsInput_nextToken})
+var sListTransactionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListTransactionsInput_maxResults})
+var sListTransactionsInput_confirmationStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationStatusFilter", ID: &iConfirmationStatusFilter, Members: &mConfirmationStatusFilter, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionsInput_confirmationStatusFilter})
+var sListTransactionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTransactionsOutput, Members: &mListTransactionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTransactionsOutput})
+var sListTransactionsOutput_transactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactions", ID: &i_TransactionOutputList, Members: &m_TransactionOutputList, Type: smithy.ShapeTypeList, Ext: &eListTransactionsOutput_transactions})
+var sListTransactionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTransactionsOutput_nextToken})
+
+var BatchGetTokenBalance = &sBatchGetTokenBalance
+
+var GetAssetContract = &sGetAssetContract
+
+var GetTokenBalance = &sGetTokenBalance
+
+var GetTransaction = &sGetTransaction
+
+var ListAssetContracts = &sListAssetContracts
+
+var ListFilteredTransactionEvents = &sListFilteredTransactionEvents
+
+var ListTokenBalances = &sListTokenBalances
+
+var ListTransactionEvents = &sListTransactionEvents
+
+var ListTransactions = &sListTransactions
+
+var _TietonChainQueryService = &s_TietonChainQueryService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AddressIdentifierFilter = &sAddressIdentifierFilter
+var AddressIdentifierFilter_transactionEventToAddress = &sAddressIdentifierFilter_transactionEventToAddress
+
+var AssetContract = &sAssetContract
+var AssetContract_contractIdentifier = &sAssetContract_contractIdentifier
+var AssetContract_tokenStandard = &sAssetContract_tokenStandard
+var AssetContract_deployerAddress = &sAssetContract_deployerAddress
+
+var _AssetContractList = &s_AssetContractList
+var _AssetContractList_member = &s_AssetContractList_member
+
+var BatchGetTokenBalanceErrorItem = &sBatchGetTokenBalanceErrorItem
+var BatchGetTokenBalanceErrorItem_tokenIdentifier = &sBatchGetTokenBalanceErrorItem_tokenIdentifier
+var BatchGetTokenBalanceErrorItem_ownerIdentifier = &sBatchGetTokenBalanceErrorItem_ownerIdentifier
+var BatchGetTokenBalanceErrorItem_atBlockchainInstant = &sBatchGetTokenBalanceErrorItem_atBlockchainInstant
+var BatchGetTokenBalanceErrorItem_errorCode = &sBatchGetTokenBalanceErrorItem_errorCode
+var BatchGetTokenBalanceErrorItem_errorMessage = &sBatchGetTokenBalanceErrorItem_errorMessage
+var BatchGetTokenBalanceErrorItem_errorType = &sBatchGetTokenBalanceErrorItem_errorType
+
+var _BatchGetTokenBalanceErrors = &s_BatchGetTokenBalanceErrors
+var _BatchGetTokenBalanceErrors_member = &s_BatchGetTokenBalanceErrors_member
+
+var BatchGetTokenBalanceInputItem = &sBatchGetTokenBalanceInputItem
+var BatchGetTokenBalanceInputItem_tokenIdentifier = &sBatchGetTokenBalanceInputItem_tokenIdentifier
+var BatchGetTokenBalanceInputItem_ownerIdentifier = &sBatchGetTokenBalanceInputItem_ownerIdentifier
+var BatchGetTokenBalanceInputItem_atBlockchainInstant = &sBatchGetTokenBalanceInputItem_atBlockchainInstant
+
+var BatchGetTokenBalanceOutputItem = &sBatchGetTokenBalanceOutputItem
+var BatchGetTokenBalanceOutputItem_ownerIdentifier = &sBatchGetTokenBalanceOutputItem_ownerIdentifier
+var BatchGetTokenBalanceOutputItem_tokenIdentifier = &sBatchGetTokenBalanceOutputItem_tokenIdentifier
+var BatchGetTokenBalanceOutputItem_balance = &sBatchGetTokenBalanceOutputItem_balance
+var BatchGetTokenBalanceOutputItem_atBlockchainInstant = &sBatchGetTokenBalanceOutputItem_atBlockchainInstant
+var BatchGetTokenBalanceOutputItem_lastUpdatedTime = &sBatchGetTokenBalanceOutputItem_lastUpdatedTime
+
+var _BatchGetTokenBalanceOutputList = &s_BatchGetTokenBalanceOutputList
+var _BatchGetTokenBalanceOutputList_member = &s_BatchGetTokenBalanceOutputList_member
+
+var BlockchainInstant = &sBlockchainInstant
+var BlockchainInstant_time = &sBlockchainInstant_time
+
+var _BlockHash = &s_BlockHash
+
+var _ChainAddress = &s_ChainAddress
+
+var _ChainAddresses = &s_ChainAddresses
+var _ChainAddresses_member = &s_ChainAddresses_member
+
+var _ConfirmationStatus = &s_ConfirmationStatus
+
+var ConfirmationStatusFilter = &sConfirmationStatusFilter
+var ConfirmationStatusFilter_include = &sConfirmationStatusFilter_include
+
+var _ConfirmationStatusIncludeList = &s_ConfirmationStatusIncludeList
+var _ConfirmationStatusIncludeList_member = &s_ConfirmationStatusIncludeList_member
+
+var ContractFilter = &sContractFilter
+var ContractFilter_network = &sContractFilter_network
+var ContractFilter_tokenStandard = &sContractFilter_tokenStandard
+var ContractFilter_deployerAddress = &sContractFilter_deployerAddress
+
+var ContractIdentifier = &sContractIdentifier
+var ContractIdentifier_network = &sContractIdentifier_network
+var ContractIdentifier_contractAddress = &sContractIdentifier_contractAddress
+
+var ContractMetadata = &sContractMetadata
+var ContractMetadata_name = &sContractMetadata_name
+var ContractMetadata_symbol = &sContractMetadata_symbol
+var ContractMetadata_decimals = &sContractMetadata_decimals
+
+var _ErrorType = &s_ErrorType
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _ExecutionStatus = &s_ExecutionStatus
+
+var _GetTokenBalanceInputList = &s_GetTokenBalanceInputList
+var _GetTokenBalanceInputList_member = &s_GetTokenBalanceInputList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var ListFilteredTransactionEventsSort = &sListFilteredTransactionEventsSort
+var ListFilteredTransactionEventsSort_sortBy = &sListFilteredTransactionEventsSort_sortBy
+var ListFilteredTransactionEventsSort_sortOrder = &sListFilteredTransactionEventsSort_sortOrder
+
+var _ListFilteredTransactionEventsSortBy = &s_ListFilteredTransactionEventsSortBy
+
+var ListTransactionsSort = &sListTransactionsSort
+var ListTransactionsSort_sortBy = &sListTransactionsSort_sortBy
+var ListTransactionsSort_sortOrder = &sListTransactionsSort_sortOrder
+
+var _ListTransactionsSortBy = &s_ListTransactionsSortBy
+
+var _NextToken = &s_NextToken
+
+var OwnerFilter = &sOwnerFilter
+var OwnerFilter_address = &sOwnerFilter_address
+
+var OwnerIdentifier = &sOwnerIdentifier
+var OwnerIdentifier_address = &sOwnerIdentifier_address
+
+var _QueryNetwork = &s_QueryNetwork
+
+var _QueryTokenId = &s_QueryTokenId
+
+var _QueryTokenStandard = &s_QueryTokenStandard
+
+var _QueryTransactionEventType = &s_QueryTransactionEventType
+
+var _QueryTransactionHash = &s_QueryTransactionHash
+
+var _QueryTransactionId = &s_QueryTransactionId
+
+var _QuotaCode = &s_QuotaCode
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _ResourceType = &s_ResourceType
+
+var _ServiceCode = &s_ServiceCode
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _SortOrder = &s_SortOrder
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var TimeFilter = &sTimeFilter
+var TimeFilter_from = &sTimeFilter_from
+var TimeFilter_to = &sTimeFilter_to
+
+var TokenBalance = &sTokenBalance
+var TokenBalance_ownerIdentifier = &sTokenBalance_ownerIdentifier
+var TokenBalance_tokenIdentifier = &sTokenBalance_tokenIdentifier
+var TokenBalance_balance = &sTokenBalance_balance
+var TokenBalance_atBlockchainInstant = &sTokenBalance_atBlockchainInstant
+var TokenBalance_lastUpdatedTime = &sTokenBalance_lastUpdatedTime
+
+var _TokenBalanceList = &s_TokenBalanceList
+var _TokenBalanceList_member = &s_TokenBalanceList_member
+
+var TokenFilter = &sTokenFilter
+var TokenFilter_network = &sTokenFilter_network
+var TokenFilter_contractAddress = &sTokenFilter_contractAddress
+var TokenFilter_tokenId = &sTokenFilter_tokenId
+
+var TokenIdentifier = &sTokenIdentifier
+var TokenIdentifier_network = &sTokenIdentifier_network
+var TokenIdentifier_contractAddress = &sTokenIdentifier_contractAddress
+var TokenIdentifier_tokenId = &sTokenIdentifier_tokenId
+
+var Transaction = &sTransaction
+var Transaction_network = &sTransaction_network
+var Transaction_blockHash = &sTransaction_blockHash
+var Transaction_transactionHash = &sTransaction_transactionHash
+var Transaction_blockNumber = &sTransaction_blockNumber
+var Transaction_transactionTimestamp = &sTransaction_transactionTimestamp
+var Transaction_transactionIndex = &sTransaction_transactionIndex
+var Transaction_numberOfTransactions = &sTransaction_numberOfTransactions
+var Transaction_to = &sTransaction_to
+var Transaction_from = &sTransaction_from
+var Transaction_contractAddress = &sTransaction_contractAddress
+var Transaction_gasUsed = &sTransaction_gasUsed
+var Transaction_cumulativeGasUsed = &sTransaction_cumulativeGasUsed
+var Transaction_effectiveGasPrice = &sTransaction_effectiveGasPrice
+var Transaction_signatureV = &sTransaction_signatureV
+var Transaction_signatureR = &sTransaction_signatureR
+var Transaction_signatureS = &sTransaction_signatureS
+var Transaction_transactionFee = &sTransaction_transactionFee
+var Transaction_transactionId = &sTransaction_transactionId
+var Transaction_confirmationStatus = &sTransaction_confirmationStatus
+var Transaction_executionStatus = &sTransaction_executionStatus
+
+var TransactionEvent = &sTransactionEvent
+var TransactionEvent_network = &sTransactionEvent_network
+var TransactionEvent_transactionHash = &sTransactionEvent_transactionHash
+var TransactionEvent_eventType = &sTransactionEvent_eventType
+var TransactionEvent_from = &sTransactionEvent_from
+var TransactionEvent_to = &sTransactionEvent_to
+var TransactionEvent_value = &sTransactionEvent_value
+var TransactionEvent_contractAddress = &sTransactionEvent_contractAddress
+var TransactionEvent_tokenId = &sTransactionEvent_tokenId
+var TransactionEvent_transactionId = &sTransactionEvent_transactionId
+var TransactionEvent_voutIndex = &sTransactionEvent_voutIndex
+var TransactionEvent_voutSpent = &sTransactionEvent_voutSpent
+var TransactionEvent_spentVoutTransactionId = &sTransactionEvent_spentVoutTransactionId
+var TransactionEvent_spentVoutTransactionHash = &sTransactionEvent_spentVoutTransactionHash
+var TransactionEvent_spentVoutIndex = &sTransactionEvent_spentVoutIndex
+var TransactionEvent_blockchainInstant = &sTransactionEvent_blockchainInstant
+var TransactionEvent_confirmationStatus = &sTransactionEvent_confirmationStatus
+
+var _TransactionEventList = &s_TransactionEventList
+var _TransactionEventList_member = &s_TransactionEventList_member
+
+var TransactionOutputItem = &sTransactionOutputItem
+var TransactionOutputItem_transactionHash = &sTransactionOutputItem_transactionHash
+var TransactionOutputItem_transactionId = &sTransactionOutputItem_transactionId
+var TransactionOutputItem_network = &sTransactionOutputItem_network
+var TransactionOutputItem_transactionTimestamp = &sTransactionOutputItem_transactionTimestamp
+var TransactionOutputItem_confirmationStatus = &sTransactionOutputItem_confirmationStatus
+
+var _TransactionOutputList = &s_TransactionOutputList
+var _TransactionOutputList_member = &s_TransactionOutputList_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidationExceptionReason = &s_ValidationExceptionReason
+
+var VoutFilter = &sVoutFilter
+var VoutFilter_voutSpent = &sVoutFilter_voutSpent
+
+var BatchGetTokenBalanceInput = &sBatchGetTokenBalanceInput
+var BatchGetTokenBalanceInput_getTokenBalanceInputs = &sBatchGetTokenBalanceInput_getTokenBalanceInputs
+
+var BatchGetTokenBalanceOutput = &sBatchGetTokenBalanceOutput
+var BatchGetTokenBalanceOutput_tokenBalances = &sBatchGetTokenBalanceOutput_tokenBalances
+var BatchGetTokenBalanceOutput_errors = &sBatchGetTokenBalanceOutput_errors
+
+var GetAssetContractInput = &sGetAssetContractInput
+var GetAssetContractInput_contractIdentifier = &sGetAssetContractInput_contractIdentifier
+
+var GetAssetContractOutput = &sGetAssetContractOutput
+var GetAssetContractOutput_contractIdentifier = &sGetAssetContractOutput_contractIdentifier
+var GetAssetContractOutput_tokenStandard = &sGetAssetContractOutput_tokenStandard
+var GetAssetContractOutput_deployerAddress = &sGetAssetContractOutput_deployerAddress
+var GetAssetContractOutput_metadata = &sGetAssetContractOutput_metadata
+
+var GetTokenBalanceInput = &sGetTokenBalanceInput
+var GetTokenBalanceInput_tokenIdentifier = &sGetTokenBalanceInput_tokenIdentifier
+var GetTokenBalanceInput_ownerIdentifier = &sGetTokenBalanceInput_ownerIdentifier
+var GetTokenBalanceInput_atBlockchainInstant = &sGetTokenBalanceInput_atBlockchainInstant
+
+var GetTokenBalanceOutput = &sGetTokenBalanceOutput
+var GetTokenBalanceOutput_ownerIdentifier = &sGetTokenBalanceOutput_ownerIdentifier
+var GetTokenBalanceOutput_tokenIdentifier = &sGetTokenBalanceOutput_tokenIdentifier
+var GetTokenBalanceOutput_balance = &sGetTokenBalanceOutput_balance
+var GetTokenBalanceOutput_atBlockchainInstant = &sGetTokenBalanceOutput_atBlockchainInstant
+var GetTokenBalanceOutput_lastUpdatedTime = &sGetTokenBalanceOutput_lastUpdatedTime
+
+var GetTransactionInput = &sGetTransactionInput
+var GetTransactionInput_transactionHash = &sGetTransactionInput_transactionHash
+var GetTransactionInput_transactionId = &sGetTransactionInput_transactionId
+var GetTransactionInput_network = &sGetTransactionInput_network
+
+var GetTransactionOutput = &sGetTransactionOutput
+var GetTransactionOutput_transaction = &sGetTransactionOutput_transaction
+
+var ListAssetContractsInput = &sListAssetContractsInput
+var ListAssetContractsInput_contractFilter = &sListAssetContractsInput_contractFilter
+var ListAssetContractsInput_nextToken = &sListAssetContractsInput_nextToken
+var ListAssetContractsInput_maxResults = &sListAssetContractsInput_maxResults
+
+var ListAssetContractsOutput = &sListAssetContractsOutput
+var ListAssetContractsOutput_contracts = &sListAssetContractsOutput_contracts
+var ListAssetContractsOutput_nextToken = &sListAssetContractsOutput_nextToken
+
+var ListFilteredTransactionEventsInput = &sListFilteredTransactionEventsInput
+var ListFilteredTransactionEventsInput_network = &sListFilteredTransactionEventsInput_network
+var ListFilteredTransactionEventsInput_addressIdentifierFilter = &sListFilteredTransactionEventsInput_addressIdentifierFilter
+var ListFilteredTransactionEventsInput_timeFilter = &sListFilteredTransactionEventsInput_timeFilter
+var ListFilteredTransactionEventsInput_voutFilter = &sListFilteredTransactionEventsInput_voutFilter
+var ListFilteredTransactionEventsInput_confirmationStatusFilter = &sListFilteredTransactionEventsInput_confirmationStatusFilter
+var ListFilteredTransactionEventsInput_sort = &sListFilteredTransactionEventsInput_sort
+var ListFilteredTransactionEventsInput_nextToken = &sListFilteredTransactionEventsInput_nextToken
+var ListFilteredTransactionEventsInput_maxResults = &sListFilteredTransactionEventsInput_maxResults
+
+var ListFilteredTransactionEventsOutput = &sListFilteredTransactionEventsOutput
+var ListFilteredTransactionEventsOutput_events = &sListFilteredTransactionEventsOutput_events
+var ListFilteredTransactionEventsOutput_nextToken = &sListFilteredTransactionEventsOutput_nextToken
+
+var ListTokenBalancesInput = &sListTokenBalancesInput
+var ListTokenBalancesInput_ownerFilter = &sListTokenBalancesInput_ownerFilter
+var ListTokenBalancesInput_tokenFilter = &sListTokenBalancesInput_tokenFilter
+var ListTokenBalancesInput_nextToken = &sListTokenBalancesInput_nextToken
+var ListTokenBalancesInput_maxResults = &sListTokenBalancesInput_maxResults
+
+var ListTokenBalancesOutput = &sListTokenBalancesOutput
+var ListTokenBalancesOutput_tokenBalances = &sListTokenBalancesOutput_tokenBalances
+var ListTokenBalancesOutput_nextToken = &sListTokenBalancesOutput_nextToken
+
+var ListTransactionEventsInput = &sListTransactionEventsInput
+var ListTransactionEventsInput_transactionHash = &sListTransactionEventsInput_transactionHash
+var ListTransactionEventsInput_transactionId = &sListTransactionEventsInput_transactionId
+var ListTransactionEventsInput_network = &sListTransactionEventsInput_network
+var ListTransactionEventsInput_nextToken = &sListTransactionEventsInput_nextToken
+var ListTransactionEventsInput_maxResults = &sListTransactionEventsInput_maxResults
+
+var ListTransactionEventsOutput = &sListTransactionEventsOutput
+var ListTransactionEventsOutput_events = &sListTransactionEventsOutput_events
+var ListTransactionEventsOutput_nextToken = &sListTransactionEventsOutput_nextToken
+
+var ListTransactionsInput = &sListTransactionsInput
+var ListTransactionsInput_address = &sListTransactionsInput_address
+var ListTransactionsInput_network = &sListTransactionsInput_network
+var ListTransactionsInput_fromBlockchainInstant = &sListTransactionsInput_fromBlockchainInstant
+var ListTransactionsInput_toBlockchainInstant = &sListTransactionsInput_toBlockchainInstant
+var ListTransactionsInput_sort = &sListTransactionsInput_sort
+var ListTransactionsInput_nextToken = &sListTransactionsInput_nextToken
+var ListTransactionsInput_maxResults = &sListTransactionsInput_maxResults
+var ListTransactionsInput_confirmationStatusFilter = &sListTransactionsInput_confirmationStatusFilter
+
+var ListTransactionsOutput = &sListTransactionsOutput
+var ListTransactionsOutput_transactions = &sListTransactionsOutput_transactions
+var ListTransactionsOutput_nextToken = &sListTransactionsOutput_nextToken
+
+var TietonChainQueryService = &smithy.ServiceSchema{Schema: &s_TietonChainQueryService, Version: "2023-05-04"}

@@ -4,1638 +4,1590 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "CreateParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteTerminology",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTextTranslationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DescribeTextTranslationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetTerminology",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ImportTerminology",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLanguages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListLanguages",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTerminologies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTerminologies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTextTranslationJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTextTranslationJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartTextTranslationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StartTextTranslationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopTextTranslationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StopTextTranslationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TranslateDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateDocument",
-}, smithy.ShapeTypeOperation, 0)
-
-var TranslateText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateText",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UpdateParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSShineFrontendService_20170701 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "AWSShineFrontendService_20170701",
-}, smithy.ShapeTypeService, 0)
-
-var AWSShineFrontendService_20170701 = smithy.NewServiceSchema(_AWSShineFrontendService_20170701, "2017-07-01")
-
-var AppliedTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "AppliedTerminology",
-}, smithy.ShapeTypeStructure, 2)
-var AppliedTerminology_Name *smithy.Schema
-
-var AppliedTerminology_Terms *smithy.Schema
-
-var _AppliedTerminologyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "AppliedTerminologyList",
-}, smithy.ShapeTypeList, 1)
-var _AppliedTerminologyList_member *smithy.Schema
-
-var _BoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "BoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var Brevity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Brevity",
-}, smithy.ShapeTypeEnum, 1)
-var Brevity_ON *smithy.Schema
-
-var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ClientTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DetectedLanguageLowConfidenceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DetectedLanguageLowConfidenceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DetectedLanguageLowConfidenceException_Message *smithy.Schema
-
-var DetectedLanguageLowConfidenceException_DetectedLanguageCode *smithy.Schema
-
-var Directionality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Directionality",
-}, smithy.ShapeTypeEnum, 2)
-var Directionality_UNI *smithy.Schema
-
-var Directionality_MULTI *smithy.Schema
-
-var DisplayLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DisplayLanguageCode",
-}, smithy.ShapeTypeEnum, 10)
-var DisplayLanguageCode_DE *smithy.Schema
-
-var DisplayLanguageCode_EN *smithy.Schema
-
-var DisplayLanguageCode_ES *smithy.Schema
-
-var DisplayLanguageCode_FR *smithy.Schema
-
-var DisplayLanguageCode_IT *smithy.Schema
-
-var DisplayLanguageCode_JA *smithy.Schema
-
-var DisplayLanguageCode_KO *smithy.Schema
-
-var DisplayLanguageCode_PT *smithy.Schema
-
-var DisplayLanguageCode_ZH *smithy.Schema
-
-var DisplayLanguageCode_ZH_TW *smithy.Schema
-
-var Document = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Document",
-}, smithy.ShapeTypeStructure, 2)
-var Document_Content *smithy.Schema
-
-var Document_ContentType *smithy.Schema
-
-var _DocumentContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DocumentContent",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var EncryptionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "EncryptionKey",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionKey_Type *smithy.Schema
-
-var EncryptionKey_Id *smithy.Schema
-
-var _EncryptionKeyID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "EncryptionKeyID",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "EncryptionKeyType",
-}, smithy.ShapeTypeEnum, 1)
-var EncryptionKeyType_KMS *smithy.Schema
-
-var Formality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Formality",
-}, smithy.ShapeTypeEnum, 2)
-var Formality_FORMAL *smithy.Schema
-
-var Formality_INFORMAL *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InputDataConfig_S3Uri *smithy.Schema
-
-var InputDataConfig_ContentType *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidFilterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InvalidFilterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidFilterException_Message *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterValueException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var JobDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobDetails",
-}, smithy.ShapeTypeStructure, 3)
-var JobDetails_TranslatedDocumentsCount *smithy.Schema
-
-var JobDetails_DocumentsWithErrorsCount *smithy.Schema
-
-var JobDetails_InputDocumentsCount *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 7)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_COMPLETED *smithy.Schema
-
-var JobStatus_COMPLETED_WITH_ERROR *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_STOP_REQUESTED *smithy.Schema
-
-var JobStatus_STOPPED *smithy.Schema
-
-var Language = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Language",
-}, smithy.ShapeTypeStructure, 2)
-var Language_LanguageName *smithy.Schema
-
-var Language_LanguageCode *smithy.Schema
-
-var _LanguageCodeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LanguageCodeString",
-}, smithy.ShapeTypeString, 0)
-
-var _LanguageCodeStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LanguageCodeStringList",
-}, smithy.ShapeTypeList, 1)
-var _LanguageCodeStringList_member *smithy.Schema
-
-var _LanguagesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LanguagesList",
-}, smithy.ShapeTypeList, 1)
-var _LanguagesList_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var _LocalizedNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LocalizedNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var MergeStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "MergeStrategy",
-}, smithy.ShapeTypeEnum, 1)
-var MergeStrategy_OVERWRITE *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OutputDataConfig_S3Uri *smithy.Schema
-
-var OutputDataConfig_EncryptionKey *smithy.Schema
-
-var _ParallelDataArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataArn",
-}, smithy.ShapeTypeString, 0)
-
-var ParallelDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ParallelDataConfig_S3Uri *smithy.Schema
-
-var ParallelDataConfig_Format *smithy.Schema
-
-var ParallelDataDataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataDataLocation",
-}, smithy.ShapeTypeStructure, 2)
-var ParallelDataDataLocation_RepositoryType *smithy.Schema
-
-var ParallelDataDataLocation_Location *smithy.Schema
-
-var ParallelDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataFormat",
-}, smithy.ShapeTypeEnum, 3)
-var ParallelDataFormat_TSV *smithy.Schema
-
-var ParallelDataFormat_CSV *smithy.Schema
-
-var ParallelDataFormat_TMX *smithy.Schema
-
-var ParallelDataProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataProperties",
-}, smithy.ShapeTypeStructure, 17)
-var ParallelDataProperties_Name *smithy.Schema
-
-var ParallelDataProperties_Arn *smithy.Schema
-
-var ParallelDataProperties_Description *smithy.Schema
-
-var ParallelDataProperties_Status *smithy.Schema
-
-var ParallelDataProperties_SourceLanguageCode *smithy.Schema
-
-var ParallelDataProperties_TargetLanguageCodes *smithy.Schema
-
-var ParallelDataProperties_ParallelDataConfig *smithy.Schema
-
-var ParallelDataProperties_Message *smithy.Schema
-
-var ParallelDataProperties_ImportedDataSize *smithy.Schema
-
-var ParallelDataProperties_ImportedRecordCount *smithy.Schema
-
-var ParallelDataProperties_FailedRecordCount *smithy.Schema
-
-var ParallelDataProperties_SkippedRecordCount *smithy.Schema
-
-var ParallelDataProperties_EncryptionKey *smithy.Schema
-
-var ParallelDataProperties_CreatedAt *smithy.Schema
-
-var ParallelDataProperties_LastUpdatedAt *smithy.Schema
-
-var ParallelDataProperties_LatestUpdateAttemptStatus *smithy.Schema
-
-var ParallelDataProperties_LatestUpdateAttemptAt *smithy.Schema
-
-var _ParallelDataPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ParallelDataPropertiesList_member *smithy.Schema
-
-var ParallelDataStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ParallelDataStatus_CREATING *smithy.Schema
-
-var ParallelDataStatus_UPDATING *smithy.Schema
-
-var ParallelDataStatus_ACTIVE *smithy.Schema
-
-var ParallelDataStatus_DELETING *smithy.Schema
-
-var ParallelDataStatus_FAILED *smithy.Schema
-
-var Profanity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Profanity",
-}, smithy.ShapeTypeEnum, 1)
-var Profanity_MASK *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceNameList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceNameList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetLanguageCodeStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TargetLanguageCodeStringList",
-}, smithy.ShapeTypeList, 1)
-var _TargetLanguageCodeStringList_member *smithy.Schema
-
-var Term = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Term",
-}, smithy.ShapeTypeStructure, 2)
-var Term_SourceText *smithy.Schema
-
-var Term_TargetText *smithy.Schema
-
-var _TerminologyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyArn",
-}, smithy.ShapeTypeString, 0)
-
-var TerminologyData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyData",
-}, smithy.ShapeTypeStructure, 3)
-var TerminologyData_File *smithy.Schema
-
-var TerminologyData_Format *smithy.Schema
-
-var TerminologyData_Directionality *smithy.Schema
-
-var TerminologyDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyDataFormat",
-}, smithy.ShapeTypeEnum, 3)
-var TerminologyDataFormat_CSV *smithy.Schema
-
-var TerminologyDataFormat_TMX *smithy.Schema
-
-var TerminologyDataFormat_TSV *smithy.Schema
-
-var TerminologyDataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyDataLocation",
-}, smithy.ShapeTypeStructure, 2)
-var TerminologyDataLocation_RepositoryType *smithy.Schema
-
-var TerminologyDataLocation_Location *smithy.Schema
-
-var _TerminologyFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyFile",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var TerminologyProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyProperties",
-}, smithy.ShapeTypeStructure, 14)
-var TerminologyProperties_Name *smithy.Schema
-
-var TerminologyProperties_Description *smithy.Schema
-
-var TerminologyProperties_Arn *smithy.Schema
-
-var TerminologyProperties_SourceLanguageCode *smithy.Schema
-
-var TerminologyProperties_TargetLanguageCodes *smithy.Schema
-
-var TerminologyProperties_EncryptionKey *smithy.Schema
-
-var TerminologyProperties_SizeBytes *smithy.Schema
-
-var TerminologyProperties_TermCount *smithy.Schema
-
-var TerminologyProperties_CreatedAt *smithy.Schema
-
-var TerminologyProperties_LastUpdatedAt *smithy.Schema
-
-var TerminologyProperties_Directionality *smithy.Schema
-
-var TerminologyProperties_Message *smithy.Schema
-
-var TerminologyProperties_SkippedTermCount *smithy.Schema
-
-var TerminologyProperties_Format *smithy.Schema
-
-var _TerminologyPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _TerminologyPropertiesList_member *smithy.Schema
-
-var _TermList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TermList",
-}, smithy.ShapeTypeList, 1)
-var _TermList_member *smithy.Schema
-
-var TextSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TextSizeLimitExceededException_Message *smithy.Schema
-
-var TextTranslationJobFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextTranslationJobFilter",
-}, smithy.ShapeTypeStructure, 4)
-var TextTranslationJobFilter_JobName *smithy.Schema
-
-var TextTranslationJobFilter_JobStatus *smithy.Schema
-
-var TextTranslationJobFilter_SubmittedBeforeTime *smithy.Schema
-
-var TextTranslationJobFilter_SubmittedAfterTime *smithy.Schema
-
-var TextTranslationJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextTranslationJobProperties",
-}, smithy.ShapeTypeStructure, 15)
-var TextTranslationJobProperties_JobId *smithy.Schema
-
-var TextTranslationJobProperties_JobName *smithy.Schema
-
-var TextTranslationJobProperties_JobStatus *smithy.Schema
-
-var TextTranslationJobProperties_JobDetails *smithy.Schema
-
-var TextTranslationJobProperties_SourceLanguageCode *smithy.Schema
-
-var TextTranslationJobProperties_TargetLanguageCodes *smithy.Schema
-
-var TextTranslationJobProperties_TerminologyNames *smithy.Schema
-
-var TextTranslationJobProperties_ParallelDataNames *smithy.Schema
-
-var TextTranslationJobProperties_Message *smithy.Schema
-
-var TextTranslationJobProperties_SubmittedTime *smithy.Schema
-
-var TextTranslationJobProperties_EndTime *smithy.Schema
-
-var TextTranslationJobProperties_InputDataConfig *smithy.Schema
-
-var TextTranslationJobProperties_OutputDataConfig *smithy.Schema
-
-var TextTranslationJobProperties_DataAccessRoleArn *smithy.Schema
-
-var TextTranslationJobProperties_Settings *smithy.Schema
-
-var _TextTranslationJobPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextTranslationJobPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _TextTranslationJobPropertiesList_member *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var TooManyTagsException_ResourceArn *smithy.Schema
-
-var TranslatedDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslatedDocument",
-}, smithy.ShapeTypeStructure, 1)
-var TranslatedDocument_Content *smithy.Schema
-
-var _TranslatedDocumentContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslatedDocumentContent",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _TranslatedTextString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslatedTextString",
-}, smithy.ShapeTypeString, 0)
-
-var TranslationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslationSettings",
-}, smithy.ShapeTypeStructure, 3)
-var TranslationSettings_Formality *smithy.Schema
-
-var TranslationSettings_Profanity *smithy.Schema
-
-var TranslationSettings_Brevity *smithy.Schema
-
-var _UnboundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UnboundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var UnsupportedDisplayLanguageCodeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UnsupportedDisplayLanguageCodeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedDisplayLanguageCodeException_Message *smithy.Schema
-
-var UnsupportedDisplayLanguageCodeException_DisplayLanguageCode *smithy.Schema
-
-var UnsupportedLanguagePairException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UnsupportedLanguagePairException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedLanguagePairException_Message *smithy.Schema
-
-var UnsupportedLanguagePairException_SourceLanguageCode *smithy.Schema
-
-var UnsupportedLanguagePairException_TargetLanguageCode *smithy.Schema
-
-var CreateParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "CreateParallelDataRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateParallelDataRequest_Name *smithy.Schema
-
-var CreateParallelDataRequest_Description *smithy.Schema
-
-var CreateParallelDataRequest_ParallelDataConfig *smithy.Schema
-
-var CreateParallelDataRequest_EncryptionKey *smithy.Schema
-
-var CreateParallelDataRequest_ClientToken *smithy.Schema
-
-var CreateParallelDataRequest_Tags *smithy.Schema
-
-var CreateParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "CreateParallelDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateParallelDataResponse_Name *smithy.Schema
-
-var CreateParallelDataResponse_Status *smithy.Schema
-
-var DeleteParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteParallelDataRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteParallelDataRequest_Name *smithy.Schema
-
-var DeleteParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteParallelDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteParallelDataResponse_Name *smithy.Schema
-
-var DeleteParallelDataResponse_Status *smithy.Schema
-
-var DeleteTerminologyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteTerminologyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTerminologyRequest_Name *smithy.Schema
-
-var DescribeTextTranslationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DescribeTextTranslationJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTextTranslationJobRequest_JobId *smithy.Schema
-
-var DescribeTextTranslationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DescribeTextTranslationJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTextTranslationJobResponse_TextTranslationJobProperties *smithy.Schema
-
-var GetParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetParallelDataRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetParallelDataRequest_Name *smithy.Schema
-
-var GetParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetParallelDataResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetParallelDataResponse_ParallelDataProperties *smithy.Schema
-
-var GetParallelDataResponse_DataLocation *smithy.Schema
-
-var GetParallelDataResponse_AuxiliaryDataLocation *smithy.Schema
-
-var GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation *smithy.Schema
-
-var GetTerminologyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetTerminologyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTerminologyRequest_Name *smithy.Schema
-
-var GetTerminologyRequest_TerminologyDataFormat *smithy.Schema
-
-var GetTerminologyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetTerminologyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetTerminologyResponse_TerminologyProperties *smithy.Schema
-
-var GetTerminologyResponse_TerminologyDataLocation *smithy.Schema
-
-var GetTerminologyResponse_AuxiliaryDataLocation *smithy.Schema
-
-var ImportTerminologyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ImportTerminologyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ImportTerminologyRequest_Name *smithy.Schema
-
-var ImportTerminologyRequest_MergeStrategy *smithy.Schema
-
-var ImportTerminologyRequest_Description *smithy.Schema
-
-var ImportTerminologyRequest_TerminologyData *smithy.Schema
-
-var ImportTerminologyRequest_EncryptionKey *smithy.Schema
-
-var ImportTerminologyRequest_Tags *smithy.Schema
-
-var ImportTerminologyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ImportTerminologyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ImportTerminologyResponse_TerminologyProperties *smithy.Schema
-
-var ImportTerminologyResponse_AuxiliaryDataLocation *smithy.Schema
-
-var ListLanguagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListLanguagesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLanguagesRequest_DisplayLanguageCode *smithy.Schema
-
-var ListLanguagesRequest_NextToken *smithy.Schema
-
-var ListLanguagesRequest_MaxResults *smithy.Schema
-
-var ListLanguagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListLanguagesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListLanguagesResponse_Languages *smithy.Schema
-
-var ListLanguagesResponse_DisplayLanguageCode *smithy.Schema
-
-var ListLanguagesResponse_NextToken *smithy.Schema
-
-var ListParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListParallelDataRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListParallelDataRequest_NextToken *smithy.Schema
-
-var ListParallelDataRequest_MaxResults *smithy.Schema
-
-var ListParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListParallelDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListParallelDataResponse_ParallelDataPropertiesList *smithy.Schema
-
-var ListParallelDataResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTerminologiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTerminologiesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTerminologiesRequest_NextToken *smithy.Schema
-
-var ListTerminologiesRequest_MaxResults *smithy.Schema
-
-var ListTerminologiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTerminologiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTerminologiesResponse_TerminologyPropertiesList *smithy.Schema
-
-var ListTerminologiesResponse_NextToken *smithy.Schema
-
-var ListTextTranslationJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTextTranslationJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTextTranslationJobsRequest_Filter *smithy.Schema
-
-var ListTextTranslationJobsRequest_NextToken *smithy.Schema
-
-var ListTextTranslationJobsRequest_MaxResults *smithy.Schema
-
-var ListTextTranslationJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTextTranslationJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTextTranslationJobsResponse_TextTranslationJobPropertiesList *smithy.Schema
-
-var ListTextTranslationJobsResponse_NextToken *smithy.Schema
-
-var StartTextTranslationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StartTextTranslationJobRequest",
-}, smithy.ShapeTypeStructure, 10)
-var StartTextTranslationJobRequest_JobName *smithy.Schema
-
-var StartTextTranslationJobRequest_InputDataConfig *smithy.Schema
-
-var StartTextTranslationJobRequest_OutputDataConfig *smithy.Schema
-
-var StartTextTranslationJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartTextTranslationJobRequest_SourceLanguageCode *smithy.Schema
-
-var StartTextTranslationJobRequest_TargetLanguageCodes *smithy.Schema
-
-var StartTextTranslationJobRequest_TerminologyNames *smithy.Schema
-
-var StartTextTranslationJobRequest_ParallelDataNames *smithy.Schema
-
-var StartTextTranslationJobRequest_ClientToken *smithy.Schema
-
-var StartTextTranslationJobRequest_Settings *smithy.Schema
-
-var StartTextTranslationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StartTextTranslationJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartTextTranslationJobResponse_JobId *smithy.Schema
-
-var StartTextTranslationJobResponse_JobStatus *smithy.Schema
-
-var StopTextTranslationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StopTextTranslationJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopTextTranslationJobRequest_JobId *smithy.Schema
-
-var StopTextTranslationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StopTextTranslationJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StopTextTranslationJobResponse_JobId *smithy.Schema
-
-var StopTextTranslationJobResponse_JobStatus *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TranslateDocumentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateDocumentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateDocumentRequest_Document *smithy.Schema
-
-var TranslateDocumentRequest_TerminologyNames *smithy.Schema
-
-var TranslateDocumentRequest_SourceLanguageCode *smithy.Schema
-
-var TranslateDocumentRequest_TargetLanguageCode *smithy.Schema
-
-var TranslateDocumentRequest_Settings *smithy.Schema
-
-var TranslateDocumentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateDocumentResponse",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateDocumentResponse_TranslatedDocument *smithy.Schema
-
-var TranslateDocumentResponse_SourceLanguageCode *smithy.Schema
-
-var TranslateDocumentResponse_TargetLanguageCode *smithy.Schema
-
-var TranslateDocumentResponse_AppliedTerminologies *smithy.Schema
-
-var TranslateDocumentResponse_AppliedSettings *smithy.Schema
-
-var TranslateTextRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateTextRequest",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateTextRequest_Text *smithy.Schema
-
-var TranslateTextRequest_TerminologyNames *smithy.Schema
-
-var TranslateTextRequest_SourceLanguageCode *smithy.Schema
-
-var TranslateTextRequest_TargetLanguageCode *smithy.Schema
-
-var TranslateTextRequest_Settings *smithy.Schema
-
-var TranslateTextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateTextResponse",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateTextResponse_TranslatedText *smithy.Schema
-
-var TranslateTextResponse_SourceLanguageCode *smithy.Schema
-
-var TranslateTextResponse_TargetLanguageCode *smithy.Schema
-
-var TranslateTextResponse_AppliedTerminologies *smithy.Schema
-
-var TranslateTextResponse_AppliedSettings *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UpdateParallelDataRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateParallelDataRequest_Name *smithy.Schema
-
-var UpdateParallelDataRequest_Description *smithy.Schema
-
-var UpdateParallelDataRequest_ParallelDataConfig *smithy.Schema
-
-var UpdateParallelDataRequest_ClientToken *smithy.Schema
-
-var UpdateParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UpdateParallelDataResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateParallelDataResponse_Name *smithy.Schema
-
-var UpdateParallelDataResponse_Status *smithy.Schema
-
-var UpdateParallelDataResponse_LatestUpdateAttemptStatus *smithy.Schema
-
-var UpdateParallelDataResponse_LatestUpdateAttemptAt *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Term_SourceText = Term.AddMember("SourceText", _String)
-
-	Term_TargetText = Term.AddMember("TargetText", _String)
-
-	_TermList_member = _TermList.AddMember("member", Term)
-
-	AppliedTerminology_Name = AppliedTerminology.AddMember("Name", _ResourceName)
-
-	AppliedTerminology_Terms = AppliedTerminology.AddMember("Terms", _TermList)
-
-	_AppliedTerminologyList_member = _AppliedTerminologyList.AddMember("member", AppliedTerminology)
-
-	Brevity_ON = Brevity.AddMember("ON", smithyprelude.Unit)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _String)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	DetectedLanguageLowConfidenceException_Message = DetectedLanguageLowConfidenceException.AddMember("Message", _String)
-
-	DetectedLanguageLowConfidenceException_DetectedLanguageCode = DetectedLanguageLowConfidenceException.AddMember("DetectedLanguageCode", _LanguageCodeString)
-
-	Directionality_UNI = Directionality.AddMember("UNI", smithyprelude.Unit)
-
-	Directionality_MULTI = Directionality.AddMember("MULTI", smithyprelude.Unit)
-
-	DisplayLanguageCode_DE = DisplayLanguageCode.AddMember("DE", smithyprelude.Unit)
-
-	DisplayLanguageCode_EN = DisplayLanguageCode.AddMember("EN", smithyprelude.Unit)
-
-	DisplayLanguageCode_ES = DisplayLanguageCode.AddMember("ES", smithyprelude.Unit)
-
-	DisplayLanguageCode_FR = DisplayLanguageCode.AddMember("FR", smithyprelude.Unit)
-
-	DisplayLanguageCode_IT = DisplayLanguageCode.AddMember("IT", smithyprelude.Unit)
-
-	DisplayLanguageCode_JA = DisplayLanguageCode.AddMember("JA", smithyprelude.Unit)
-
-	DisplayLanguageCode_KO = DisplayLanguageCode.AddMember("KO", smithyprelude.Unit)
-
-	DisplayLanguageCode_PT = DisplayLanguageCode.AddMember("PT", smithyprelude.Unit)
-
-	DisplayLanguageCode_ZH = DisplayLanguageCode.AddMember("ZH", smithyprelude.Unit)
-
-	DisplayLanguageCode_ZH_TW = DisplayLanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
-
-	Document_Content = Document.AddMember("Content", _DocumentContent)
-
-	Document_ContentType = Document.AddMember("ContentType", _ContentType)
-
-	EncryptionKeyType_KMS = EncryptionKeyType.AddMember("KMS", smithyprelude.Unit)
-
-	EncryptionKey_Type = EncryptionKey.AddMember("Type", EncryptionKeyType)
-
-	EncryptionKey_Id = EncryptionKey.AddMember("Id", _EncryptionKeyID)
-
-	Formality_FORMAL = Formality.AddMember("FORMAL", smithyprelude.Unit)
-
-	Formality_INFORMAL = Formality.AddMember("INFORMAL", smithyprelude.Unit)
-
-	InputDataConfig_S3Uri = InputDataConfig.AddMember("S3Uri", _S3Uri)
-
-	InputDataConfig_ContentType = InputDataConfig.AddMember("ContentType", _ContentType)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	InvalidFilterException_Message = InvalidFilterException.AddMember("Message", _String)
-
-	InvalidParameterValueException_Message = InvalidParameterValueException.AddMember("Message", _String)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _String)
-
-	JobDetails_TranslatedDocumentsCount = JobDetails.AddMember("TranslatedDocumentsCount", _Integer)
-
-	JobDetails_DocumentsWithErrorsCount = JobDetails.AddMember("DocumentsWithErrorsCount", _Integer)
-
-	JobDetails_InputDocumentsCount = JobDetails.AddMember("InputDocumentsCount", _Integer)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_COMPLETED = JobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	JobStatus_COMPLETED_WITH_ERROR = JobStatus.AddMember("COMPLETED_WITH_ERROR", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_STOP_REQUESTED = JobStatus.AddMember("STOP_REQUESTED", smithyprelude.Unit)
-
-	JobStatus_STOPPED = JobStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	Language_LanguageName = Language.AddMember("LanguageName", _LocalizedNameString)
-
-	Language_LanguageCode = Language.AddMember("LanguageCode", _LanguageCodeString)
-
-	_LanguageCodeStringList_member = _LanguageCodeStringList.AddMember("member", _LanguageCodeString)
-
-	_LanguagesList_member = _LanguagesList.AddMember("member", Language)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
-
-	MergeStrategy_OVERWRITE = MergeStrategy.AddMember("OVERWRITE", smithyprelude.Unit)
-
-	OutputDataConfig_S3Uri = OutputDataConfig.AddMember("S3Uri", _S3Uri)
-
-	OutputDataConfig_EncryptionKey = OutputDataConfig.AddMember("EncryptionKey", EncryptionKey)
-
-	ParallelDataFormat_TSV = ParallelDataFormat.AddMember("TSV", smithyprelude.Unit)
-
-	ParallelDataFormat_CSV = ParallelDataFormat.AddMember("CSV", smithyprelude.Unit)
-
-	ParallelDataFormat_TMX = ParallelDataFormat.AddMember("TMX", smithyprelude.Unit)
-
-	ParallelDataConfig_S3Uri = ParallelDataConfig.AddMember("S3Uri", _S3Uri)
-
-	ParallelDataConfig_Format = ParallelDataConfig.AddMember("Format", ParallelDataFormat)
-
-	ParallelDataDataLocation_RepositoryType = ParallelDataDataLocation.AddMember("RepositoryType", _String)
-
-	ParallelDataDataLocation_Location = ParallelDataDataLocation.AddMember("Location", _String)
-
-	ParallelDataStatus_CREATING = ParallelDataStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ParallelDataStatus_UPDATING = ParallelDataStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ParallelDataStatus_ACTIVE = ParallelDataStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ParallelDataStatus_DELETING = ParallelDataStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ParallelDataStatus_FAILED = ParallelDataStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ParallelDataProperties_Name = ParallelDataProperties.AddMember("Name", _ResourceName)
-
-	ParallelDataProperties_Arn = ParallelDataProperties.AddMember("Arn", _ParallelDataArn)
-
-	ParallelDataProperties_Description = ParallelDataProperties.AddMember("Description", _Description)
-
-	ParallelDataProperties_Status = ParallelDataProperties.AddMember("Status", ParallelDataStatus)
-
-	ParallelDataProperties_SourceLanguageCode = ParallelDataProperties.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	ParallelDataProperties_TargetLanguageCodes = ParallelDataProperties.AddMember("TargetLanguageCodes", _LanguageCodeStringList)
-
-	ParallelDataProperties_ParallelDataConfig = ParallelDataProperties.AddMember("ParallelDataConfig", ParallelDataConfig)
-
-	ParallelDataProperties_Message = ParallelDataProperties.AddMember("Message", _UnboundedLengthString)
-
-	ParallelDataProperties_ImportedDataSize = ParallelDataProperties.AddMember("ImportedDataSize", _Long)
-
-	ParallelDataProperties_ImportedRecordCount = ParallelDataProperties.AddMember("ImportedRecordCount", _Long)
-
-	ParallelDataProperties_FailedRecordCount = ParallelDataProperties.AddMember("FailedRecordCount", _Long)
-
-	ParallelDataProperties_SkippedRecordCount = ParallelDataProperties.AddMember("SkippedRecordCount", _Long)
-
-	ParallelDataProperties_EncryptionKey = ParallelDataProperties.AddMember("EncryptionKey", EncryptionKey)
-
-	ParallelDataProperties_CreatedAt = ParallelDataProperties.AddMember("CreatedAt", _Timestamp)
-
-	ParallelDataProperties_LastUpdatedAt = ParallelDataProperties.AddMember("LastUpdatedAt", _Timestamp)
-
-	ParallelDataProperties_LatestUpdateAttemptStatus = ParallelDataProperties.AddMember("LatestUpdateAttemptStatus", ParallelDataStatus)
-
-	ParallelDataProperties_LatestUpdateAttemptAt = ParallelDataProperties.AddMember("LatestUpdateAttemptAt", _Timestamp)
-
-	_ParallelDataPropertiesList_member = _ParallelDataPropertiesList.AddMember("member", ParallelDataProperties)
-
-	Profanity_MASK = Profanity.AddMember("MASK", smithyprelude.Unit)
-
-	_ResourceNameList_member = _ResourceNameList.AddMember("member", _ResourceName)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	_TargetLanguageCodeStringList_member = _TargetLanguageCodeStringList.AddMember("member", _LanguageCodeString)
-
-	TerminologyDataFormat_CSV = TerminologyDataFormat.AddMember("CSV", smithyprelude.Unit)
-
-	TerminologyDataFormat_TMX = TerminologyDataFormat.AddMember("TMX", smithyprelude.Unit)
-
-	TerminologyDataFormat_TSV = TerminologyDataFormat.AddMember("TSV", smithyprelude.Unit)
-
-	TerminologyData_File = TerminologyData.AddMember("File", _TerminologyFile)
-
-	TerminologyData_Format = TerminologyData.AddMember("Format", TerminologyDataFormat)
-
-	TerminologyData_Directionality = TerminologyData.AddMember("Directionality", Directionality)
-
-	TerminologyDataLocation_RepositoryType = TerminologyDataLocation.AddMember("RepositoryType", _String)
-
-	TerminologyDataLocation_Location = TerminologyDataLocation.AddMember("Location", _String)
-
-	TerminologyProperties_Name = TerminologyProperties.AddMember("Name", _ResourceName)
-
-	TerminologyProperties_Description = TerminologyProperties.AddMember("Description", _Description)
-
-	TerminologyProperties_Arn = TerminologyProperties.AddMember("Arn", _TerminologyArn)
-
-	TerminologyProperties_SourceLanguageCode = TerminologyProperties.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TerminologyProperties_TargetLanguageCodes = TerminologyProperties.AddMember("TargetLanguageCodes", _LanguageCodeStringList)
-
-	TerminologyProperties_EncryptionKey = TerminologyProperties.AddMember("EncryptionKey", EncryptionKey)
-
-	TerminologyProperties_SizeBytes = TerminologyProperties.AddMember("SizeBytes", _Integer)
-
-	TerminologyProperties_TermCount = TerminologyProperties.AddMember("TermCount", _Integer)
-
-	TerminologyProperties_CreatedAt = TerminologyProperties.AddMember("CreatedAt", _Timestamp)
-
-	TerminologyProperties_LastUpdatedAt = TerminologyProperties.AddMember("LastUpdatedAt", _Timestamp)
-
-	TerminologyProperties_Directionality = TerminologyProperties.AddMember("Directionality", Directionality)
-
-	TerminologyProperties_Message = TerminologyProperties.AddMember("Message", _UnboundedLengthString)
-
-	TerminologyProperties_SkippedTermCount = TerminologyProperties.AddMember("SkippedTermCount", _Integer)
-
-	TerminologyProperties_Format = TerminologyProperties.AddMember("Format", TerminologyDataFormat)
-
-	_TerminologyPropertiesList_member = _TerminologyPropertiesList.AddMember("member", TerminologyProperties)
-
-	TextSizeLimitExceededException_Message = TextSizeLimitExceededException.AddMember("Message", _String)
-
-	TextTranslationJobFilter_JobName = TextTranslationJobFilter.AddMember("JobName", _JobName)
-
-	TextTranslationJobFilter_JobStatus = TextTranslationJobFilter.AddMember("JobStatus", JobStatus)
-
-	TextTranslationJobFilter_SubmittedBeforeTime = TextTranslationJobFilter.AddMember("SubmittedBeforeTime", _Timestamp)
-
-	TextTranslationJobFilter_SubmittedAfterTime = TextTranslationJobFilter.AddMember("SubmittedAfterTime", _Timestamp)
-
-	TranslationSettings_Formality = TranslationSettings.AddMember("Formality", Formality)
-
-	TranslationSettings_Profanity = TranslationSettings.AddMember("Profanity", Profanity)
-
-	TranslationSettings_Brevity = TranslationSettings.AddMember("Brevity", Brevity)
-
-	TextTranslationJobProperties_JobId = TextTranslationJobProperties.AddMember("JobId", _JobId)
-
-	TextTranslationJobProperties_JobName = TextTranslationJobProperties.AddMember("JobName", _JobName)
-
-	TextTranslationJobProperties_JobStatus = TextTranslationJobProperties.AddMember("JobStatus", JobStatus)
-
-	TextTranslationJobProperties_JobDetails = TextTranslationJobProperties.AddMember("JobDetails", JobDetails)
-
-	TextTranslationJobProperties_SourceLanguageCode = TextTranslationJobProperties.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TextTranslationJobProperties_TargetLanguageCodes = TextTranslationJobProperties.AddMember("TargetLanguageCodes", _TargetLanguageCodeStringList)
-
-	TextTranslationJobProperties_TerminologyNames = TextTranslationJobProperties.AddMember("TerminologyNames", _ResourceNameList)
-
-	TextTranslationJobProperties_ParallelDataNames = TextTranslationJobProperties.AddMember("ParallelDataNames", _ResourceNameList)
-
-	TextTranslationJobProperties_Message = TextTranslationJobProperties.AddMember("Message", _UnboundedLengthString)
-
-	TextTranslationJobProperties_SubmittedTime = TextTranslationJobProperties.AddMember("SubmittedTime", _Timestamp)
-
-	TextTranslationJobProperties_EndTime = TextTranslationJobProperties.AddMember("EndTime", _Timestamp)
-
-	TextTranslationJobProperties_InputDataConfig = TextTranslationJobProperties.AddMember("InputDataConfig", InputDataConfig)
-
-	TextTranslationJobProperties_OutputDataConfig = TextTranslationJobProperties.AddMember("OutputDataConfig", OutputDataConfig)
-
-	TextTranslationJobProperties_DataAccessRoleArn = TextTranslationJobProperties.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	TextTranslationJobProperties_Settings = TextTranslationJobProperties.AddMember("Settings", TranslationSettings)
-
-	_TextTranslationJobPropertiesList_member = _TextTranslationJobPropertiesList.AddMember("member", TextTranslationJobProperties)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _String)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _String)
-
-	TooManyTagsException_ResourceArn = TooManyTagsException.AddMember("ResourceArn", _ResourceArn)
-
-	TranslatedDocument_Content = TranslatedDocument.AddMember("Content", _TranslatedDocumentContent)
-
-	UnsupportedDisplayLanguageCodeException_Message = UnsupportedDisplayLanguageCodeException.AddMember("Message", _String)
-
-	UnsupportedDisplayLanguageCodeException_DisplayLanguageCode = UnsupportedDisplayLanguageCodeException.AddMember("DisplayLanguageCode", _LanguageCodeString)
-
-	UnsupportedLanguagePairException_Message = UnsupportedLanguagePairException.AddMember("Message", _String)
-
-	UnsupportedLanguagePairException_SourceLanguageCode = UnsupportedLanguagePairException.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	UnsupportedLanguagePairException_TargetLanguageCode = UnsupportedLanguagePairException.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	CreateParallelDataRequest_Name = CreateParallelDataRequest.AddMember("Name", _ResourceName)
-
-	CreateParallelDataRequest_Description = CreateParallelDataRequest.AddMember("Description", _Description)
-
-	CreateParallelDataRequest_ParallelDataConfig = CreateParallelDataRequest.AddMember("ParallelDataConfig", ParallelDataConfig)
-
-	CreateParallelDataRequest_EncryptionKey = CreateParallelDataRequest.AddMember("EncryptionKey", EncryptionKey)
-
-	CreateParallelDataRequest_ClientToken = CreateParallelDataRequest.AddMember("ClientToken", _ClientTokenString)
-
-	CreateParallelDataRequest_Tags = CreateParallelDataRequest.AddMember("Tags", _TagList)
-
-	CreateParallelDataResponse_Name = CreateParallelDataResponse.AddMember("Name", _ResourceName)
-
-	CreateParallelDataResponse_Status = CreateParallelDataResponse.AddMember("Status", ParallelDataStatus)
-
-	DeleteParallelDataRequest_Name = DeleteParallelDataRequest.AddMember("Name", _ResourceName)
-
-	DeleteParallelDataResponse_Name = DeleteParallelDataResponse.AddMember("Name", _ResourceName)
-
-	DeleteParallelDataResponse_Status = DeleteParallelDataResponse.AddMember("Status", ParallelDataStatus)
-
-	DeleteTerminologyRequest_Name = DeleteTerminologyRequest.AddMember("Name", _ResourceName)
-
-	DescribeTextTranslationJobRequest_JobId = DescribeTextTranslationJobRequest.AddMember("JobId", _JobId)
-
-	DescribeTextTranslationJobResponse_TextTranslationJobProperties = DescribeTextTranslationJobResponse.AddMember("TextTranslationJobProperties", TextTranslationJobProperties)
-
-	GetParallelDataRequest_Name = GetParallelDataRequest.AddMember("Name", _ResourceName)
-
-	GetParallelDataResponse_ParallelDataProperties = GetParallelDataResponse.AddMember("ParallelDataProperties", ParallelDataProperties)
-
-	GetParallelDataResponse_DataLocation = GetParallelDataResponse.AddMember("DataLocation", ParallelDataDataLocation)
-
-	GetParallelDataResponse_AuxiliaryDataLocation = GetParallelDataResponse.AddMember("AuxiliaryDataLocation", ParallelDataDataLocation)
-
-	GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation = GetParallelDataResponse.AddMember("LatestUpdateAttemptAuxiliaryDataLocation", ParallelDataDataLocation)
-
-	GetTerminologyRequest_Name = GetTerminologyRequest.AddMember("Name", _ResourceName)
-
-	GetTerminologyRequest_TerminologyDataFormat = GetTerminologyRequest.AddMember("TerminologyDataFormat", TerminologyDataFormat)
-
-	GetTerminologyResponse_TerminologyProperties = GetTerminologyResponse.AddMember("TerminologyProperties", TerminologyProperties)
-
-	GetTerminologyResponse_TerminologyDataLocation = GetTerminologyResponse.AddMember("TerminologyDataLocation", TerminologyDataLocation)
-
-	GetTerminologyResponse_AuxiliaryDataLocation = GetTerminologyResponse.AddMember("AuxiliaryDataLocation", TerminologyDataLocation)
-
-	ImportTerminologyRequest_Name = ImportTerminologyRequest.AddMember("Name", _ResourceName)
-
-	ImportTerminologyRequest_MergeStrategy = ImportTerminologyRequest.AddMember("MergeStrategy", MergeStrategy)
-
-	ImportTerminologyRequest_Description = ImportTerminologyRequest.AddMember("Description", _Description)
-
-	ImportTerminologyRequest_TerminologyData = ImportTerminologyRequest.AddMember("TerminologyData", TerminologyData)
-
-	ImportTerminologyRequest_EncryptionKey = ImportTerminologyRequest.AddMember("EncryptionKey", EncryptionKey)
-
-	ImportTerminologyRequest_Tags = ImportTerminologyRequest.AddMember("Tags", _TagList)
-
-	ImportTerminologyResponse_TerminologyProperties = ImportTerminologyResponse.AddMember("TerminologyProperties", TerminologyProperties)
-
-	ImportTerminologyResponse_AuxiliaryDataLocation = ImportTerminologyResponse.AddMember("AuxiliaryDataLocation", TerminologyDataLocation)
-
-	ListLanguagesRequest_DisplayLanguageCode = ListLanguagesRequest.AddMember("DisplayLanguageCode", DisplayLanguageCode)
-
-	ListLanguagesRequest_NextToken = ListLanguagesRequest.AddMember("NextToken", _NextToken)
-
-	ListLanguagesRequest_MaxResults = ListLanguagesRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListLanguagesResponse_Languages = ListLanguagesResponse.AddMember("Languages", _LanguagesList)
-
-	ListLanguagesResponse_DisplayLanguageCode = ListLanguagesResponse.AddMember("DisplayLanguageCode", DisplayLanguageCode)
-
-	ListLanguagesResponse_NextToken = ListLanguagesResponse.AddMember("NextToken", _NextToken)
-
-	ListParallelDataRequest_NextToken = ListParallelDataRequest.AddMember("NextToken", _NextToken)
-
-	ListParallelDataRequest_MaxResults = ListParallelDataRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListParallelDataResponse_ParallelDataPropertiesList = ListParallelDataResponse.AddMember("ParallelDataPropertiesList", _ParallelDataPropertiesList)
-
-	ListParallelDataResponse_NextToken = ListParallelDataResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListTerminologiesRequest_NextToken = ListTerminologiesRequest.AddMember("NextToken", _NextToken)
-
-	ListTerminologiesRequest_MaxResults = ListTerminologiesRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListTerminologiesResponse_TerminologyPropertiesList = ListTerminologiesResponse.AddMember("TerminologyPropertiesList", _TerminologyPropertiesList)
-
-	ListTerminologiesResponse_NextToken = ListTerminologiesResponse.AddMember("NextToken", _NextToken)
-
-	ListTextTranslationJobsRequest_Filter = ListTextTranslationJobsRequest.AddMember("Filter", TextTranslationJobFilter)
-
-	ListTextTranslationJobsRequest_NextToken = ListTextTranslationJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListTextTranslationJobsRequest_MaxResults = ListTextTranslationJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListTextTranslationJobsResponse_TextTranslationJobPropertiesList = ListTextTranslationJobsResponse.AddMember("TextTranslationJobPropertiesList", _TextTranslationJobPropertiesList)
-
-	ListTextTranslationJobsResponse_NextToken = ListTextTranslationJobsResponse.AddMember("NextToken", _NextToken)
-
-	StartTextTranslationJobRequest_JobName = StartTextTranslationJobRequest.AddMember("JobName", _JobName)
-
-	StartTextTranslationJobRequest_InputDataConfig = StartTextTranslationJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartTextTranslationJobRequest_OutputDataConfig = StartTextTranslationJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartTextTranslationJobRequest_DataAccessRoleArn = StartTextTranslationJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartTextTranslationJobRequest_SourceLanguageCode = StartTextTranslationJobRequest.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	StartTextTranslationJobRequest_TargetLanguageCodes = StartTextTranslationJobRequest.AddMember("TargetLanguageCodes", _TargetLanguageCodeStringList)
-
-	StartTextTranslationJobRequest_TerminologyNames = StartTextTranslationJobRequest.AddMember("TerminologyNames", _ResourceNameList)
-
-	StartTextTranslationJobRequest_ParallelDataNames = StartTextTranslationJobRequest.AddMember("ParallelDataNames", _ResourceNameList)
-
-	StartTextTranslationJobRequest_ClientToken = StartTextTranslationJobRequest.AddMember("ClientToken", _ClientTokenString)
-
-	StartTextTranslationJobRequest_Settings = StartTextTranslationJobRequest.AddMember("Settings", TranslationSettings)
-
-	StartTextTranslationJobResponse_JobId = StartTextTranslationJobResponse.AddMember("JobId", _JobId)
-
-	StartTextTranslationJobResponse_JobStatus = StartTextTranslationJobResponse.AddMember("JobStatus", JobStatus)
-
-	StopTextTranslationJobRequest_JobId = StopTextTranslationJobRequest.AddMember("JobId", _JobId)
-
-	StopTextTranslationJobResponse_JobId = StopTextTranslationJobResponse.AddMember("JobId", _JobId)
-
-	StopTextTranslationJobResponse_JobStatus = StopTextTranslationJobResponse.AddMember("JobStatus", JobStatus)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	TranslateDocumentRequest_Document = TranslateDocumentRequest.AddMember("Document", Document)
-
-	TranslateDocumentRequest_TerminologyNames = TranslateDocumentRequest.AddMember("TerminologyNames", _ResourceNameList)
-
-	TranslateDocumentRequest_SourceLanguageCode = TranslateDocumentRequest.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentRequest_TargetLanguageCode = TranslateDocumentRequest.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentRequest_Settings = TranslateDocumentRequest.AddMember("Settings", TranslationSettings)
-
-	TranslateDocumentResponse_TranslatedDocument = TranslateDocumentResponse.AddMember("TranslatedDocument", TranslatedDocument)
-
-	TranslateDocumentResponse_SourceLanguageCode = TranslateDocumentResponse.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentResponse_TargetLanguageCode = TranslateDocumentResponse.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentResponse_AppliedTerminologies = TranslateDocumentResponse.AddMember("AppliedTerminologies", _AppliedTerminologyList)
-
-	TranslateDocumentResponse_AppliedSettings = TranslateDocumentResponse.AddMember("AppliedSettings", TranslationSettings)
-
-	TranslateTextRequest_Text = TranslateTextRequest.AddMember("Text", _BoundedLengthString)
-
-	TranslateTextRequest_TerminologyNames = TranslateTextRequest.AddMember("TerminologyNames", _ResourceNameList)
-
-	TranslateTextRequest_SourceLanguageCode = TranslateTextRequest.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateTextRequest_TargetLanguageCode = TranslateTextRequest.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateTextRequest_Settings = TranslateTextRequest.AddMember("Settings", TranslationSettings)
-
-	TranslateTextResponse_TranslatedText = TranslateTextResponse.AddMember("TranslatedText", _TranslatedTextString)
-
-	TranslateTextResponse_SourceLanguageCode = TranslateTextResponse.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateTextResponse_TargetLanguageCode = TranslateTextResponse.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateTextResponse_AppliedTerminologies = TranslateTextResponse.AddMember("AppliedTerminologies", _AppliedTerminologyList)
-
-	TranslateTextResponse_AppliedSettings = TranslateTextResponse.AddMember("AppliedSettings", TranslationSettings)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateParallelDataRequest_Name = UpdateParallelDataRequest.AddMember("Name", _ResourceName)
-
-	UpdateParallelDataRequest_Description = UpdateParallelDataRequest.AddMember("Description", _Description)
-
-	UpdateParallelDataRequest_ParallelDataConfig = UpdateParallelDataRequest.AddMember("ParallelDataConfig", ParallelDataConfig)
-
-	UpdateParallelDataRequest_ClientToken = UpdateParallelDataRequest.AddMember("ClientToken", _ClientTokenString)
-
-	UpdateParallelDataResponse_Name = UpdateParallelDataResponse.AddMember("Name", _ResourceName)
-
-	UpdateParallelDataResponse_Status = UpdateParallelDataResponse.AddMember("Status", ParallelDataStatus)
-
-	UpdateParallelDataResponse_LatestUpdateAttemptStatus = UpdateParallelDataResponse.AddMember("LatestUpdateAttemptStatus", ParallelDataStatus)
-
-	UpdateParallelDataResponse_LatestUpdateAttemptAt = UpdateParallelDataResponse.AddMember("LatestUpdateAttemptAt", _Timestamp)
-
-}
+var (
+	eCreateParallelData                                               smithy.SchemaExtensions
+	eDeleteParallelData                                               smithy.SchemaExtensions
+	eDeleteTerminology                                                smithy.SchemaExtensions
+	eDescribeTextTranslationJob                                       smithy.SchemaExtensions
+	eGetParallelData                                                  smithy.SchemaExtensions
+	eGetTerminology                                                   smithy.SchemaExtensions
+	eImportTerminology                                                smithy.SchemaExtensions
+	eListLanguages                                                    smithy.SchemaExtensions
+	eListParallelData                                                 smithy.SchemaExtensions
+	eListTagsForResource                                              smithy.SchemaExtensions
+	eListTerminologies                                                smithy.SchemaExtensions
+	eListTextTranslationJobs                                          smithy.SchemaExtensions
+	eStartTextTranslationJob                                          smithy.SchemaExtensions
+	eStopTextTranslationJob                                           smithy.SchemaExtensions
+	eTagResource                                                      smithy.SchemaExtensions
+	eTranslateDocument                                                smithy.SchemaExtensions
+	eTranslateText                                                    smithy.SchemaExtensions
+	eUntagResource                                                    smithy.SchemaExtensions
+	eUpdateParallelData                                               smithy.SchemaExtensions
+	e_AWSShineFrontendService_20170701                                smithy.SchemaExtensions
+	eAppliedTerminology                                               smithy.SchemaExtensions
+	eAppliedTerminology_Name                                          smithy.SchemaExtensions
+	eAppliedTerminology_Terms                                         smithy.SchemaExtensions
+	e_AppliedTerminologyList                                          smithy.SchemaExtensions
+	e_AppliedTerminologyList_member                                   smithy.SchemaExtensions
+	e_BoundedLengthString                                             smithy.SchemaExtensions
+	eBrevity                                                          smithy.SchemaExtensions
+	eBrevity_ON                                                       smithy.SchemaExtensions
+	e_ClientTokenString                                               smithy.SchemaExtensions
+	eConcurrentModificationException                                  smithy.SchemaExtensions
+	eConcurrentModificationException_Message                          smithy.SchemaExtensions
+	eConflictException                                                smithy.SchemaExtensions
+	eConflictException_Message                                        smithy.SchemaExtensions
+	e_ContentType                                                     smithy.SchemaExtensions
+	e_Description                                                     smithy.SchemaExtensions
+	eDetectedLanguageLowConfidenceException                           smithy.SchemaExtensions
+	eDetectedLanguageLowConfidenceException_Message                   smithy.SchemaExtensions
+	eDetectedLanguageLowConfidenceException_DetectedLanguageCode      smithy.SchemaExtensions
+	eDirectionality                                                   smithy.SchemaExtensions
+	eDirectionality_UNI                                               smithy.SchemaExtensions
+	eDirectionality_MULTI                                             smithy.SchemaExtensions
+	eDisplayLanguageCode                                              smithy.SchemaExtensions
+	eDisplayLanguageCode_DE                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_EN                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_ES                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_FR                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_IT                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_JA                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_KO                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_PT                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_ZH                                           smithy.SchemaExtensions
+	eDisplayLanguageCode_ZH_TW                                        smithy.SchemaExtensions
+	eDocument                                                         smithy.SchemaExtensions
+	eDocument_Content                                                 smithy.SchemaExtensions
+	eDocument_ContentType                                             smithy.SchemaExtensions
+	e_DocumentContent                                                 smithy.SchemaExtensions
+	eEncryptionKey                                                    smithy.SchemaExtensions
+	eEncryptionKey_Type                                               smithy.SchemaExtensions
+	eEncryptionKey_Id                                                 smithy.SchemaExtensions
+	e_EncryptionKeyID                                                 smithy.SchemaExtensions
+	eEncryptionKeyType                                                smithy.SchemaExtensions
+	eEncryptionKeyType_KMS                                            smithy.SchemaExtensions
+	eFormality                                                        smithy.SchemaExtensions
+	eFormality_FORMAL                                                 smithy.SchemaExtensions
+	eFormality_INFORMAL                                               smithy.SchemaExtensions
+	e_IamRoleArn                                                      smithy.SchemaExtensions
+	eInputDataConfig                                                  smithy.SchemaExtensions
+	eInputDataConfig_S3Uri                                            smithy.SchemaExtensions
+	eInputDataConfig_ContentType                                      smithy.SchemaExtensions
+	e_Integer                                                         smithy.SchemaExtensions
+	eInternalServerException                                          smithy.SchemaExtensions
+	eInternalServerException_Message                                  smithy.SchemaExtensions
+	eInvalidFilterException                                           smithy.SchemaExtensions
+	eInvalidFilterException_Message                                   smithy.SchemaExtensions
+	eInvalidParameterValueException                                   smithy.SchemaExtensions
+	eInvalidParameterValueException_Message                           smithy.SchemaExtensions
+	eInvalidRequestException                                          smithy.SchemaExtensions
+	eInvalidRequestException_Message                                  smithy.SchemaExtensions
+	eJobDetails                                                       smithy.SchemaExtensions
+	eJobDetails_TranslatedDocumentsCount                              smithy.SchemaExtensions
+	eJobDetails_DocumentsWithErrorsCount                              smithy.SchemaExtensions
+	eJobDetails_InputDocumentsCount                                   smithy.SchemaExtensions
+	e_JobId                                                           smithy.SchemaExtensions
+	e_JobName                                                         smithy.SchemaExtensions
+	eJobStatus                                                        smithy.SchemaExtensions
+	eJobStatus_SUBMITTED                                              smithy.SchemaExtensions
+	eJobStatus_IN_PROGRESS                                            smithy.SchemaExtensions
+	eJobStatus_COMPLETED                                              smithy.SchemaExtensions
+	eJobStatus_COMPLETED_WITH_ERROR                                   smithy.SchemaExtensions
+	eJobStatus_FAILED                                                 smithy.SchemaExtensions
+	eJobStatus_STOP_REQUESTED                                         smithy.SchemaExtensions
+	eJobStatus_STOPPED                                                smithy.SchemaExtensions
+	eLanguage                                                         smithy.SchemaExtensions
+	eLanguage_LanguageName                                            smithy.SchemaExtensions
+	eLanguage_LanguageCode                                            smithy.SchemaExtensions
+	e_LanguageCodeString                                              smithy.SchemaExtensions
+	e_LanguageCodeStringList                                          smithy.SchemaExtensions
+	e_LanguageCodeStringList_member                                   smithy.SchemaExtensions
+	e_LanguagesList                                                   smithy.SchemaExtensions
+	e_LanguagesList_member                                            smithy.SchemaExtensions
+	eLimitExceededException                                           smithy.SchemaExtensions
+	eLimitExceededException_Message                                   smithy.SchemaExtensions
+	e_LocalizedNameString                                             smithy.SchemaExtensions
+	e_Long                                                            smithy.SchemaExtensions
+	e_MaxResultsInteger                                               smithy.SchemaExtensions
+	eMergeStrategy                                                    smithy.SchemaExtensions
+	eMergeStrategy_OVERWRITE                                          smithy.SchemaExtensions
+	e_NextToken                                                       smithy.SchemaExtensions
+	eOutputDataConfig                                                 smithy.SchemaExtensions
+	eOutputDataConfig_S3Uri                                           smithy.SchemaExtensions
+	eOutputDataConfig_EncryptionKey                                   smithy.SchemaExtensions
+	e_ParallelDataArn                                                 smithy.SchemaExtensions
+	eParallelDataConfig                                               smithy.SchemaExtensions
+	eParallelDataConfig_S3Uri                                         smithy.SchemaExtensions
+	eParallelDataConfig_Format                                        smithy.SchemaExtensions
+	eParallelDataDataLocation                                         smithy.SchemaExtensions
+	eParallelDataDataLocation_RepositoryType                          smithy.SchemaExtensions
+	eParallelDataDataLocation_Location                                smithy.SchemaExtensions
+	eParallelDataFormat                                               smithy.SchemaExtensions
+	eParallelDataFormat_TSV                                           smithy.SchemaExtensions
+	eParallelDataFormat_CSV                                           smithy.SchemaExtensions
+	eParallelDataFormat_TMX                                           smithy.SchemaExtensions
+	eParallelDataProperties                                           smithy.SchemaExtensions
+	eParallelDataProperties_Name                                      smithy.SchemaExtensions
+	eParallelDataProperties_Arn                                       smithy.SchemaExtensions
+	eParallelDataProperties_Description                               smithy.SchemaExtensions
+	eParallelDataProperties_Status                                    smithy.SchemaExtensions
+	eParallelDataProperties_SourceLanguageCode                        smithy.SchemaExtensions
+	eParallelDataProperties_TargetLanguageCodes                       smithy.SchemaExtensions
+	eParallelDataProperties_ParallelDataConfig                        smithy.SchemaExtensions
+	eParallelDataProperties_Message                                   smithy.SchemaExtensions
+	eParallelDataProperties_ImportedDataSize                          smithy.SchemaExtensions
+	eParallelDataProperties_ImportedRecordCount                       smithy.SchemaExtensions
+	eParallelDataProperties_FailedRecordCount                         smithy.SchemaExtensions
+	eParallelDataProperties_SkippedRecordCount                        smithy.SchemaExtensions
+	eParallelDataProperties_EncryptionKey                             smithy.SchemaExtensions
+	eParallelDataProperties_CreatedAt                                 smithy.SchemaExtensions
+	eParallelDataProperties_LastUpdatedAt                             smithy.SchemaExtensions
+	eParallelDataProperties_LatestUpdateAttemptStatus                 smithy.SchemaExtensions
+	eParallelDataProperties_LatestUpdateAttemptAt                     smithy.SchemaExtensions
+	e_ParallelDataPropertiesList                                      smithy.SchemaExtensions
+	e_ParallelDataPropertiesList_member                               smithy.SchemaExtensions
+	eParallelDataStatus                                               smithy.SchemaExtensions
+	eParallelDataStatus_CREATING                                      smithy.SchemaExtensions
+	eParallelDataStatus_UPDATING                                      smithy.SchemaExtensions
+	eParallelDataStatus_ACTIVE                                        smithy.SchemaExtensions
+	eParallelDataStatus_DELETING                                      smithy.SchemaExtensions
+	eParallelDataStatus_FAILED                                        smithy.SchemaExtensions
+	eProfanity                                                        smithy.SchemaExtensions
+	eProfanity_MASK                                                   smithy.SchemaExtensions
+	e_ResourceArn                                                     smithy.SchemaExtensions
+	e_ResourceName                                                    smithy.SchemaExtensions
+	e_ResourceNameList                                                smithy.SchemaExtensions
+	e_ResourceNameList_member                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                        smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                smithy.SchemaExtensions
+	e_S3Uri                                                           smithy.SchemaExtensions
+	eServiceUnavailableException                                      smithy.SchemaExtensions
+	eServiceUnavailableException_Message                              smithy.SchemaExtensions
+	e_String                                                          smithy.SchemaExtensions
+	eTag                                                              smithy.SchemaExtensions
+	eTag_Key                                                          smithy.SchemaExtensions
+	eTag_Value                                                        smithy.SchemaExtensions
+	e_TagKey                                                          smithy.SchemaExtensions
+	e_TagKeyList                                                      smithy.SchemaExtensions
+	e_TagKeyList_member                                               smithy.SchemaExtensions
+	e_TagList                                                         smithy.SchemaExtensions
+	e_TagList_member                                                  smithy.SchemaExtensions
+	e_TagValue                                                        smithy.SchemaExtensions
+	e_TargetLanguageCodeStringList                                    smithy.SchemaExtensions
+	e_TargetLanguageCodeStringList_member                             smithy.SchemaExtensions
+	eTerm                                                             smithy.SchemaExtensions
+	eTerm_SourceText                                                  smithy.SchemaExtensions
+	eTerm_TargetText                                                  smithy.SchemaExtensions
+	e_TerminologyArn                                                  smithy.SchemaExtensions
+	eTerminologyData                                                  smithy.SchemaExtensions
+	eTerminologyData_File                                             smithy.SchemaExtensions
+	eTerminologyData_Format                                           smithy.SchemaExtensions
+	eTerminologyData_Directionality                                   smithy.SchemaExtensions
+	eTerminologyDataFormat                                            smithy.SchemaExtensions
+	eTerminologyDataFormat_CSV                                        smithy.SchemaExtensions
+	eTerminologyDataFormat_TMX                                        smithy.SchemaExtensions
+	eTerminologyDataFormat_TSV                                        smithy.SchemaExtensions
+	eTerminologyDataLocation                                          smithy.SchemaExtensions
+	eTerminologyDataLocation_RepositoryType                           smithy.SchemaExtensions
+	eTerminologyDataLocation_Location                                 smithy.SchemaExtensions
+	e_TerminologyFile                                                 smithy.SchemaExtensions
+	eTerminologyProperties                                            smithy.SchemaExtensions
+	eTerminologyProperties_Name                                       smithy.SchemaExtensions
+	eTerminologyProperties_Description                                smithy.SchemaExtensions
+	eTerminologyProperties_Arn                                        smithy.SchemaExtensions
+	eTerminologyProperties_SourceLanguageCode                         smithy.SchemaExtensions
+	eTerminologyProperties_TargetLanguageCodes                        smithy.SchemaExtensions
+	eTerminologyProperties_EncryptionKey                              smithy.SchemaExtensions
+	eTerminologyProperties_SizeBytes                                  smithy.SchemaExtensions
+	eTerminologyProperties_TermCount                                  smithy.SchemaExtensions
+	eTerminologyProperties_CreatedAt                                  smithy.SchemaExtensions
+	eTerminologyProperties_LastUpdatedAt                              smithy.SchemaExtensions
+	eTerminologyProperties_Directionality                             smithy.SchemaExtensions
+	eTerminologyProperties_Message                                    smithy.SchemaExtensions
+	eTerminologyProperties_SkippedTermCount                           smithy.SchemaExtensions
+	eTerminologyProperties_Format                                     smithy.SchemaExtensions
+	e_TerminologyPropertiesList                                       smithy.SchemaExtensions
+	e_TerminologyPropertiesList_member                                smithy.SchemaExtensions
+	e_TermList                                                        smithy.SchemaExtensions
+	e_TermList_member                                                 smithy.SchemaExtensions
+	eTextSizeLimitExceededException                                   smithy.SchemaExtensions
+	eTextSizeLimitExceededException_Message                           smithy.SchemaExtensions
+	eTextTranslationJobFilter                                         smithy.SchemaExtensions
+	eTextTranslationJobFilter_JobName                                 smithy.SchemaExtensions
+	eTextTranslationJobFilter_JobStatus                               smithy.SchemaExtensions
+	eTextTranslationJobFilter_SubmittedBeforeTime                     smithy.SchemaExtensions
+	eTextTranslationJobFilter_SubmittedAfterTime                      smithy.SchemaExtensions
+	eTextTranslationJobProperties                                     smithy.SchemaExtensions
+	eTextTranslationJobProperties_JobId                               smithy.SchemaExtensions
+	eTextTranslationJobProperties_JobName                             smithy.SchemaExtensions
+	eTextTranslationJobProperties_JobStatus                           smithy.SchemaExtensions
+	eTextTranslationJobProperties_JobDetails                          smithy.SchemaExtensions
+	eTextTranslationJobProperties_SourceLanguageCode                  smithy.SchemaExtensions
+	eTextTranslationJobProperties_TargetLanguageCodes                 smithy.SchemaExtensions
+	eTextTranslationJobProperties_TerminologyNames                    smithy.SchemaExtensions
+	eTextTranslationJobProperties_ParallelDataNames                   smithy.SchemaExtensions
+	eTextTranslationJobProperties_Message                             smithy.SchemaExtensions
+	eTextTranslationJobProperties_SubmittedTime                       smithy.SchemaExtensions
+	eTextTranslationJobProperties_EndTime                             smithy.SchemaExtensions
+	eTextTranslationJobProperties_InputDataConfig                     smithy.SchemaExtensions
+	eTextTranslationJobProperties_OutputDataConfig                    smithy.SchemaExtensions
+	eTextTranslationJobProperties_DataAccessRoleArn                   smithy.SchemaExtensions
+	eTextTranslationJobProperties_Settings                            smithy.SchemaExtensions
+	e_TextTranslationJobPropertiesList                                smithy.SchemaExtensions
+	e_TextTranslationJobPropertiesList_member                         smithy.SchemaExtensions
+	e_Timestamp                                                       smithy.SchemaExtensions
+	eTooManyRequestsException                                         smithy.SchemaExtensions
+	eTooManyRequestsException_Message                                 smithy.SchemaExtensions
+	eTooManyTagsException                                             smithy.SchemaExtensions
+	eTooManyTagsException_message                                     smithy.SchemaExtensions
+	eTooManyTagsException_ResourceArn                                 smithy.SchemaExtensions
+	eTranslatedDocument                                               smithy.SchemaExtensions
+	eTranslatedDocument_Content                                       smithy.SchemaExtensions
+	e_TranslatedDocumentContent                                       smithy.SchemaExtensions
+	e_TranslatedTextString                                            smithy.SchemaExtensions
+	eTranslationSettings                                              smithy.SchemaExtensions
+	eTranslationSettings_Formality                                    smithy.SchemaExtensions
+	eTranslationSettings_Profanity                                    smithy.SchemaExtensions
+	eTranslationSettings_Brevity                                      smithy.SchemaExtensions
+	e_UnboundedLengthString                                           smithy.SchemaExtensions
+	eUnsupportedDisplayLanguageCodeException                          smithy.SchemaExtensions
+	eUnsupportedDisplayLanguageCodeException_Message                  smithy.SchemaExtensions
+	eUnsupportedDisplayLanguageCodeException_DisplayLanguageCode      smithy.SchemaExtensions
+	eUnsupportedLanguagePairException                                 smithy.SchemaExtensions
+	eUnsupportedLanguagePairException_Message                         smithy.SchemaExtensions
+	eUnsupportedLanguagePairException_SourceLanguageCode              smithy.SchemaExtensions
+	eUnsupportedLanguagePairException_TargetLanguageCode              smithy.SchemaExtensions
+	eCreateParallelDataRequest                                        smithy.SchemaExtensions
+	eCreateParallelDataRequest_Name                                   smithy.SchemaExtensions
+	eCreateParallelDataRequest_Description                            smithy.SchemaExtensions
+	eCreateParallelDataRequest_ParallelDataConfig                     smithy.SchemaExtensions
+	eCreateParallelDataRequest_EncryptionKey                          smithy.SchemaExtensions
+	eCreateParallelDataRequest_ClientToken                            smithy.SchemaExtensions
+	eCreateParallelDataRequest_Tags                                   smithy.SchemaExtensions
+	eCreateParallelDataResponse                                       smithy.SchemaExtensions
+	eCreateParallelDataResponse_Name                                  smithy.SchemaExtensions
+	eCreateParallelDataResponse_Status                                smithy.SchemaExtensions
+	eDeleteParallelDataRequest                                        smithy.SchemaExtensions
+	eDeleteParallelDataRequest_Name                                   smithy.SchemaExtensions
+	eDeleteParallelDataResponse                                       smithy.SchemaExtensions
+	eDeleteParallelDataResponse_Name                                  smithy.SchemaExtensions
+	eDeleteParallelDataResponse_Status                                smithy.SchemaExtensions
+	eDeleteTerminologyRequest                                         smithy.SchemaExtensions
+	eDeleteTerminologyRequest_Name                                    smithy.SchemaExtensions
+	eDescribeTextTranslationJobRequest                                smithy.SchemaExtensions
+	eDescribeTextTranslationJobRequest_JobId                          smithy.SchemaExtensions
+	eDescribeTextTranslationJobResponse                               smithy.SchemaExtensions
+	eDescribeTextTranslationJobResponse_TextTranslationJobProperties  smithy.SchemaExtensions
+	eGetParallelDataRequest                                           smithy.SchemaExtensions
+	eGetParallelDataRequest_Name                                      smithy.SchemaExtensions
+	eGetParallelDataResponse                                          smithy.SchemaExtensions
+	eGetParallelDataResponse_ParallelDataProperties                   smithy.SchemaExtensions
+	eGetParallelDataResponse_DataLocation                             smithy.SchemaExtensions
+	eGetParallelDataResponse_AuxiliaryDataLocation                    smithy.SchemaExtensions
+	eGetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation smithy.SchemaExtensions
+	eGetTerminologyRequest                                            smithy.SchemaExtensions
+	eGetTerminologyRequest_Name                                       smithy.SchemaExtensions
+	eGetTerminologyRequest_TerminologyDataFormat                      smithy.SchemaExtensions
+	eGetTerminologyResponse                                           smithy.SchemaExtensions
+	eGetTerminologyResponse_TerminologyProperties                     smithy.SchemaExtensions
+	eGetTerminologyResponse_TerminologyDataLocation                   smithy.SchemaExtensions
+	eGetTerminologyResponse_AuxiliaryDataLocation                     smithy.SchemaExtensions
+	eImportTerminologyRequest                                         smithy.SchemaExtensions
+	eImportTerminologyRequest_Name                                    smithy.SchemaExtensions
+	eImportTerminologyRequest_MergeStrategy                           smithy.SchemaExtensions
+	eImportTerminologyRequest_Description                             smithy.SchemaExtensions
+	eImportTerminologyRequest_TerminologyData                         smithy.SchemaExtensions
+	eImportTerminologyRequest_EncryptionKey                           smithy.SchemaExtensions
+	eImportTerminologyRequest_Tags                                    smithy.SchemaExtensions
+	eImportTerminologyResponse                                        smithy.SchemaExtensions
+	eImportTerminologyResponse_TerminologyProperties                  smithy.SchemaExtensions
+	eImportTerminologyResponse_AuxiliaryDataLocation                  smithy.SchemaExtensions
+	eListLanguagesRequest                                             smithy.SchemaExtensions
+	eListLanguagesRequest_DisplayLanguageCode                         smithy.SchemaExtensions
+	eListLanguagesRequest_NextToken                                   smithy.SchemaExtensions
+	eListLanguagesRequest_MaxResults                                  smithy.SchemaExtensions
+	eListLanguagesResponse                                            smithy.SchemaExtensions
+	eListLanguagesResponse_Languages                                  smithy.SchemaExtensions
+	eListLanguagesResponse_DisplayLanguageCode                        smithy.SchemaExtensions
+	eListLanguagesResponse_NextToken                                  smithy.SchemaExtensions
+	eListParallelDataRequest                                          smithy.SchemaExtensions
+	eListParallelDataRequest_NextToken                                smithy.SchemaExtensions
+	eListParallelDataRequest_MaxResults                               smithy.SchemaExtensions
+	eListParallelDataResponse                                         smithy.SchemaExtensions
+	eListParallelDataResponse_ParallelDataPropertiesList              smithy.SchemaExtensions
+	eListParallelDataResponse_NextToken                               smithy.SchemaExtensions
+	eListTagsForResourceRequest                                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                           smithy.SchemaExtensions
+	eListTagsForResourceResponse                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                 smithy.SchemaExtensions
+	eListTerminologiesRequest                                         smithy.SchemaExtensions
+	eListTerminologiesRequest_NextToken                               smithy.SchemaExtensions
+	eListTerminologiesRequest_MaxResults                              smithy.SchemaExtensions
+	eListTerminologiesResponse                                        smithy.SchemaExtensions
+	eListTerminologiesResponse_TerminologyPropertiesList              smithy.SchemaExtensions
+	eListTerminologiesResponse_NextToken                              smithy.SchemaExtensions
+	eListTextTranslationJobsRequest                                   smithy.SchemaExtensions
+	eListTextTranslationJobsRequest_Filter                            smithy.SchemaExtensions
+	eListTextTranslationJobsRequest_NextToken                         smithy.SchemaExtensions
+	eListTextTranslationJobsRequest_MaxResults                        smithy.SchemaExtensions
+	eListTextTranslationJobsResponse                                  smithy.SchemaExtensions
+	eListTextTranslationJobsResponse_TextTranslationJobPropertiesList smithy.SchemaExtensions
+	eListTextTranslationJobsResponse_NextToken                        smithy.SchemaExtensions
+	eStartTextTranslationJobRequest                                   smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_JobName                           smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_InputDataConfig                   smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_OutputDataConfig                  smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_DataAccessRoleArn                 smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_SourceLanguageCode                smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_TargetLanguageCodes               smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_TerminologyNames                  smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_ParallelDataNames                 smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_ClientToken                       smithy.SchemaExtensions
+	eStartTextTranslationJobRequest_Settings                          smithy.SchemaExtensions
+	eStartTextTranslationJobResponse                                  smithy.SchemaExtensions
+	eStartTextTranslationJobResponse_JobId                            smithy.SchemaExtensions
+	eStartTextTranslationJobResponse_JobStatus                        smithy.SchemaExtensions
+	eStopTextTranslationJobRequest                                    smithy.SchemaExtensions
+	eStopTextTranslationJobRequest_JobId                              smithy.SchemaExtensions
+	eStopTextTranslationJobResponse                                   smithy.SchemaExtensions
+	eStopTextTranslationJobResponse_JobId                             smithy.SchemaExtensions
+	eStopTextTranslationJobResponse_JobStatus                         smithy.SchemaExtensions
+	eTagResourceRequest                                               smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                   smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                          smithy.SchemaExtensions
+	eTagResourceResponse                                              smithy.SchemaExtensions
+	eTranslateDocumentRequest                                         smithy.SchemaExtensions
+	eTranslateDocumentRequest_Document                                smithy.SchemaExtensions
+	eTranslateDocumentRequest_TerminologyNames                        smithy.SchemaExtensions
+	eTranslateDocumentRequest_SourceLanguageCode                      smithy.SchemaExtensions
+	eTranslateDocumentRequest_TargetLanguageCode                      smithy.SchemaExtensions
+	eTranslateDocumentRequest_Settings                                smithy.SchemaExtensions
+	eTranslateDocumentResponse                                        smithy.SchemaExtensions
+	eTranslateDocumentResponse_TranslatedDocument                     smithy.SchemaExtensions
+	eTranslateDocumentResponse_SourceLanguageCode                     smithy.SchemaExtensions
+	eTranslateDocumentResponse_TargetLanguageCode                     smithy.SchemaExtensions
+	eTranslateDocumentResponse_AppliedTerminologies                   smithy.SchemaExtensions
+	eTranslateDocumentResponse_AppliedSettings                        smithy.SchemaExtensions
+	eTranslateTextRequest                                             smithy.SchemaExtensions
+	eTranslateTextRequest_Text                                        smithy.SchemaExtensions
+	eTranslateTextRequest_TerminologyNames                            smithy.SchemaExtensions
+	eTranslateTextRequest_SourceLanguageCode                          smithy.SchemaExtensions
+	eTranslateTextRequest_TargetLanguageCode                          smithy.SchemaExtensions
+	eTranslateTextRequest_Settings                                    smithy.SchemaExtensions
+	eTranslateTextResponse                                            smithy.SchemaExtensions
+	eTranslateTextResponse_TranslatedText                             smithy.SchemaExtensions
+	eTranslateTextResponse_SourceLanguageCode                         smithy.SchemaExtensions
+	eTranslateTextResponse_TargetLanguageCode                         smithy.SchemaExtensions
+	eTranslateTextResponse_AppliedTerminologies                       smithy.SchemaExtensions
+	eTranslateTextResponse_AppliedSettings                            smithy.SchemaExtensions
+	eUntagResourceRequest                                             smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                 smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                     smithy.SchemaExtensions
+	eUntagResourceResponse                                            smithy.SchemaExtensions
+	eUpdateParallelDataRequest                                        smithy.SchemaExtensions
+	eUpdateParallelDataRequest_Name                                   smithy.SchemaExtensions
+	eUpdateParallelDataRequest_Description                            smithy.SchemaExtensions
+	eUpdateParallelDataRequest_ParallelDataConfig                     smithy.SchemaExtensions
+	eUpdateParallelDataRequest_ClientToken                            smithy.SchemaExtensions
+	eUpdateParallelDataResponse                                       smithy.SchemaExtensions
+	eUpdateParallelDataResponse_Name                                  smithy.SchemaExtensions
+	eUpdateParallelDataResponse_Status                                smithy.SchemaExtensions
+	eUpdateParallelDataResponse_LatestUpdateAttemptStatus             smithy.SchemaExtensions
+	eUpdateParallelDataResponse_LatestUpdateAttemptAt                 smithy.SchemaExtensions
+)
+
+var (
+	iCreateParallelData                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "CreateParallelData"}
+	iDeleteParallelData                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DeleteParallelData"}
+	iDeleteTerminology                       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DeleteTerminology"}
+	iDescribeTextTranslationJob              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DescribeTextTranslationJob"}
+	iGetParallelData                         = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "GetParallelData"}
+	iGetTerminology                          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "GetTerminology"}
+	iImportTerminology                       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ImportTerminology"}
+	iListLanguages                           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListLanguages"}
+	iListParallelData                        = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListParallelData"}
+	iListTagsForResource                     = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTagsForResource"}
+	iListTerminologies                       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTerminologies"}
+	iListTextTranslationJobs                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTextTranslationJobs"}
+	iStartTextTranslationJob                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "StartTextTranslationJob"}
+	iStopTextTranslationJob                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "StopTextTranslationJob"}
+	iTagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TagResource"}
+	iTranslateDocument                       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslateDocument"}
+	iTranslateText                           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslateText"}
+	iUntagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UntagResource"}
+	iUpdateParallelData                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UpdateParallelData"}
+	i_AWSShineFrontendService_20170701       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "AWSShineFrontendService_20170701"}
+	iAppliedTerminology                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "AppliedTerminology"}
+	i_AppliedTerminologyList                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "AppliedTerminologyList"}
+	i_BoundedLengthString                    = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "BoundedLengthString"}
+	iBrevity                                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Brevity"}
+	i_ClientTokenString                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ClientTokenString"}
+	iConcurrentModificationException         = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ConcurrentModificationException"}
+	iConflictException                       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ConflictException"}
+	i_ContentType                            = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ContentType"}
+	i_Description                            = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Description"}
+	iDetectedLanguageLowConfidenceException  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DetectedLanguageLowConfidenceException"}
+	iDirectionality                          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Directionality"}
+	iDisplayLanguageCode                     = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DisplayLanguageCode"}
+	iDocument                                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Document"}
+	i_DocumentContent                        = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DocumentContent"}
+	iEncryptionKey                           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "EncryptionKey"}
+	i_EncryptionKeyID                        = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "EncryptionKeyID"}
+	iEncryptionKeyType                       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "EncryptionKeyType"}
+	iFormality                               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Formality"}
+	i_IamRoleArn                             = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "IamRoleArn"}
+	iInputDataConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "InputDataConfig"}
+	i_Integer                                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Integer"}
+	iInternalServerException                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "InternalServerException"}
+	iInvalidFilterException                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "InvalidFilterException"}
+	iInvalidParameterValueException          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "InvalidParameterValueException"}
+	iInvalidRequestException                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "InvalidRequestException"}
+	iJobDetails                              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "JobDetails"}
+	i_JobId                                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "JobId"}
+	i_JobName                                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "JobName"}
+	iJobStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "JobStatus"}
+	iLanguage                                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Language"}
+	i_LanguageCodeString                     = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "LanguageCodeString"}
+	i_LanguageCodeStringList                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "LanguageCodeStringList"}
+	i_LanguagesList                          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "LanguagesList"}
+	iLimitExceededException                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "LimitExceededException"}
+	i_LocalizedNameString                    = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "LocalizedNameString"}
+	i_Long                                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Long"}
+	i_MaxResultsInteger                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "MaxResultsInteger"}
+	iMergeStrategy                           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "MergeStrategy"}
+	i_NextToken                              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "NextToken"}
+	iOutputDataConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "OutputDataConfig"}
+	i_ParallelDataArn                        = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ParallelDataArn"}
+	iParallelDataConfig                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ParallelDataConfig"}
+	iParallelDataDataLocation                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ParallelDataDataLocation"}
+	iParallelDataFormat                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ParallelDataFormat"}
+	iParallelDataProperties                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ParallelDataProperties"}
+	i_ParallelDataPropertiesList             = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ParallelDataPropertiesList"}
+	iParallelDataStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ParallelDataStatus"}
+	iProfanity                               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Profanity"}
+	i_ResourceArn                            = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ResourceArn"}
+	i_ResourceName                           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ResourceName"}
+	i_ResourceNameList                       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ResourceNameList"}
+	iResourceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ResourceNotFoundException"}
+	i_S3Uri                                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "S3Uri"}
+	iServiceUnavailableException             = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ServiceUnavailableException"}
+	i_String                                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "String"}
+	iTag                                     = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Tag"}
+	i_TagKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TagKey"}
+	i_TagKeyList                             = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TagKeyList"}
+	i_TagList                                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TagList"}
+	i_TagValue                               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TagValue"}
+	i_TargetLanguageCodeStringList           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TargetLanguageCodeStringList"}
+	iTerm                                    = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Term"}
+	i_TerminologyArn                         = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TerminologyArn"}
+	iTerminologyData                         = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TerminologyData"}
+	iTerminologyDataFormat                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TerminologyDataFormat"}
+	iTerminologyDataLocation                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TerminologyDataLocation"}
+	i_TerminologyFile                        = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TerminologyFile"}
+	iTerminologyProperties                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TerminologyProperties"}
+	i_TerminologyPropertiesList              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TerminologyPropertiesList"}
+	i_TermList                               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TermList"}
+	iTextSizeLimitExceededException          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TextSizeLimitExceededException"}
+	iTextTranslationJobFilter                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TextTranslationJobFilter"}
+	iTextTranslationJobProperties            = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TextTranslationJobProperties"}
+	i_TextTranslationJobPropertiesList       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TextTranslationJobPropertiesList"}
+	i_Timestamp                              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "Timestamp"}
+	iTooManyRequestsException                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TooManyRequestsException"}
+	iTooManyTagsException                    = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TooManyTagsException"}
+	iTranslatedDocument                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslatedDocument"}
+	i_TranslatedDocumentContent              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslatedDocumentContent"}
+	i_TranslatedTextString                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslatedTextString"}
+	iTranslationSettings                     = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslationSettings"}
+	i_UnboundedLengthString                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UnboundedLengthString"}
+	iUnsupportedDisplayLanguageCodeException = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UnsupportedDisplayLanguageCodeException"}
+	iUnsupportedLanguagePairException        = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UnsupportedLanguagePairException"}
+	iCreateParallelDataRequest               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "CreateParallelDataRequest"}
+	iCreateParallelDataResponse              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "CreateParallelDataResponse"}
+	iDeleteParallelDataRequest               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DeleteParallelDataRequest"}
+	iDeleteParallelDataResponse              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DeleteParallelDataResponse"}
+	iDeleteTerminologyRequest                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DeleteTerminologyRequest"}
+	iDescribeTextTranslationJobRequest       = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DescribeTextTranslationJobRequest"}
+	iDescribeTextTranslationJobResponse      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "DescribeTextTranslationJobResponse"}
+	iGetParallelDataRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "GetParallelDataRequest"}
+	iGetParallelDataResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "GetParallelDataResponse"}
+	iGetTerminologyRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "GetTerminologyRequest"}
+	iGetTerminologyResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "GetTerminologyResponse"}
+	iImportTerminologyRequest                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ImportTerminologyRequest"}
+	iImportTerminologyResponse               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ImportTerminologyResponse"}
+	iListLanguagesRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListLanguagesRequest"}
+	iListLanguagesResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListLanguagesResponse"}
+	iListParallelDataRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListParallelDataRequest"}
+	iListParallelDataResponse                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListParallelDataResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTagsForResourceResponse"}
+	iListTerminologiesRequest                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTerminologiesRequest"}
+	iListTerminologiesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTerminologiesResponse"}
+	iListTextTranslationJobsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTextTranslationJobsRequest"}
+	iListTextTranslationJobsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "ListTextTranslationJobsResponse"}
+	iStartTextTranslationJobRequest          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "StartTextTranslationJobRequest"}
+	iStartTextTranslationJobResponse         = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "StartTextTranslationJobResponse"}
+	iStopTextTranslationJobRequest           = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "StopTextTranslationJobRequest"}
+	iStopTextTranslationJobResponse          = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "StopTextTranslationJobResponse"}
+	iTagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TagResourceRequest"}
+	iTagResourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TagResourceResponse"}
+	iTranslateDocumentRequest                = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslateDocumentRequest"}
+	iTranslateDocumentResponse               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslateDocumentResponse"}
+	iTranslateTextRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslateTextRequest"}
+	iTranslateTextResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "TranslateTextResponse"}
+	iUntagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UntagResourceResponse"}
+	iUpdateParallelDataRequest               = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UpdateParallelDataRequest"}
+	iUpdateParallelDataResponse              = smithy.ShapeName{Namespace: "com.amazonaws.translate", Name: "UpdateParallelDataResponse"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAppliedTerminology = smithy.SchemaMembers{List: []*smithy.Schema{&sAppliedTerminology_Name, &sAppliedTerminology_Terms}}
+var m_AppliedTerminologyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppliedTerminologyList_member}}
+var mBrevity = smithy.SchemaMembers{List: []*smithy.Schema{&sBrevity_ON}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDetectedLanguageLowConfidenceException = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectedLanguageLowConfidenceException_Message, &sDetectedLanguageLowConfidenceException_DetectedLanguageCode}}
+var mDirectionality = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectionality_UNI, &sDirectionality_MULTI}}
+var mDisplayLanguageCode = smithy.SchemaMembers{List: []*smithy.Schema{&sDisplayLanguageCode_DE, &sDisplayLanguageCode_EN, &sDisplayLanguageCode_ES, &sDisplayLanguageCode_FR, &sDisplayLanguageCode_IT, &sDisplayLanguageCode_JA, &sDisplayLanguageCode_KO, &sDisplayLanguageCode_PT, &sDisplayLanguageCode_ZH, &sDisplayLanguageCode_ZH_TW}, Hash: &hDisplayLanguageCode}
+var mDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sDocument_Content, &sDocument_ContentType}}
+var mEncryptionKey = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionKey_Type, &sEncryptionKey_Id}}
+var mEncryptionKeyType = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionKeyType_KMS}}
+var mFormality = smithy.SchemaMembers{List: []*smithy.Schema{&sFormality_FORMAL, &sFormality_INFORMAL}}
+var mInputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInputDataConfig_S3Uri, &sInputDataConfig_ContentType}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidFilterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidFilterException_Message}}
+var mInvalidParameterValueException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterValueException_Message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_Message}}
+var mJobDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sJobDetails_TranslatedDocumentsCount, &sJobDetails_DocumentsWithErrorsCount, &sJobDetails_InputDocumentsCount}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_SUBMITTED, &sJobStatus_IN_PROGRESS, &sJobStatus_COMPLETED, &sJobStatus_COMPLETED_WITH_ERROR, &sJobStatus_FAILED, &sJobStatus_STOP_REQUESTED, &sJobStatus_STOPPED}}
+var mLanguage = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguage_LanguageName, &sLanguage_LanguageCode}}
+var m_LanguageCodeStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LanguageCodeStringList_member}}
+var m_LanguagesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LanguagesList_member}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mMergeStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sMergeStrategy_OVERWRITE}}
+var mOutputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputDataConfig_S3Uri, &sOutputDataConfig_EncryptionKey}}
+var mParallelDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sParallelDataConfig_S3Uri, &sParallelDataConfig_Format}}
+var mParallelDataDataLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sParallelDataDataLocation_RepositoryType, &sParallelDataDataLocation_Location}}
+var mParallelDataFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sParallelDataFormat_TSV, &sParallelDataFormat_CSV, &sParallelDataFormat_TMX}}
+var mParallelDataProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sParallelDataProperties_Name, &sParallelDataProperties_Arn, &sParallelDataProperties_Description, &sParallelDataProperties_Status, &sParallelDataProperties_SourceLanguageCode, &sParallelDataProperties_TargetLanguageCodes, &sParallelDataProperties_ParallelDataConfig, &sParallelDataProperties_Message, &sParallelDataProperties_ImportedDataSize, &sParallelDataProperties_ImportedRecordCount, &sParallelDataProperties_FailedRecordCount, &sParallelDataProperties_SkippedRecordCount, &sParallelDataProperties_EncryptionKey, &sParallelDataProperties_CreatedAt, &sParallelDataProperties_LastUpdatedAt, &sParallelDataProperties_LatestUpdateAttemptStatus, &sParallelDataProperties_LatestUpdateAttemptAt}, Hash: &hParallelDataProperties}
+var m_ParallelDataPropertiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParallelDataPropertiesList_member}}
+var mParallelDataStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sParallelDataStatus_CREATING, &sParallelDataStatus_UPDATING, &sParallelDataStatus_ACTIVE, &sParallelDataStatus_DELETING, &sParallelDataStatus_FAILED}}
+var mProfanity = smithy.SchemaMembers{List: []*smithy.Schema{&sProfanity_MASK}}
+var m_ResourceNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceNameList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Message}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TargetLanguageCodeStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetLanguageCodeStringList_member}}
+var mTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sTerm_SourceText, &sTerm_TargetText}}
+var mTerminologyData = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminologyData_File, &sTerminologyData_Format, &sTerminologyData_Directionality}}
+var mTerminologyDataFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminologyDataFormat_CSV, &sTerminologyDataFormat_TMX, &sTerminologyDataFormat_TSV}}
+var mTerminologyDataLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminologyDataLocation_RepositoryType, &sTerminologyDataLocation_Location}}
+var mTerminologyProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminologyProperties_Name, &sTerminologyProperties_Description, &sTerminologyProperties_Arn, &sTerminologyProperties_SourceLanguageCode, &sTerminologyProperties_TargetLanguageCodes, &sTerminologyProperties_EncryptionKey, &sTerminologyProperties_SizeBytes, &sTerminologyProperties_TermCount, &sTerminologyProperties_CreatedAt, &sTerminologyProperties_LastUpdatedAt, &sTerminologyProperties_Directionality, &sTerminologyProperties_Message, &sTerminologyProperties_SkippedTermCount, &sTerminologyProperties_Format}, Hash: &hTerminologyProperties}
+var m_TerminologyPropertiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TerminologyPropertiesList_member}}
+var m_TermList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TermList_member}}
+var mTextSizeLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTextSizeLimitExceededException_Message}}
+var mTextTranslationJobFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTextTranslationJobFilter_JobName, &sTextTranslationJobFilter_JobStatus, &sTextTranslationJobFilter_SubmittedBeforeTime, &sTextTranslationJobFilter_SubmittedAfterTime}}
+var mTextTranslationJobProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sTextTranslationJobProperties_JobId, &sTextTranslationJobProperties_JobName, &sTextTranslationJobProperties_JobStatus, &sTextTranslationJobProperties_JobDetails, &sTextTranslationJobProperties_SourceLanguageCode, &sTextTranslationJobProperties_TargetLanguageCodes, &sTextTranslationJobProperties_TerminologyNames, &sTextTranslationJobProperties_ParallelDataNames, &sTextTranslationJobProperties_Message, &sTextTranslationJobProperties_SubmittedTime, &sTextTranslationJobProperties_EndTime, &sTextTranslationJobProperties_InputDataConfig, &sTextTranslationJobProperties_OutputDataConfig, &sTextTranslationJobProperties_DataAccessRoleArn, &sTextTranslationJobProperties_Settings}, Hash: &hTextTranslationJobProperties}
+var m_TextTranslationJobPropertiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TextTranslationJobPropertiesList_member}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_Message}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message, &sTooManyTagsException_ResourceArn}}
+var mTranslatedDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sTranslatedDocument_Content}}
+var mTranslationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sTranslationSettings_Formality, &sTranslationSettings_Profanity, &sTranslationSettings_Brevity}}
+var mUnsupportedDisplayLanguageCodeException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedDisplayLanguageCodeException_Message, &sUnsupportedDisplayLanguageCodeException_DisplayLanguageCode}}
+var mUnsupportedLanguagePairException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedLanguagePairException_Message, &sUnsupportedLanguagePairException_SourceLanguageCode, &sUnsupportedLanguagePairException_TargetLanguageCode}}
+var mCreateParallelDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateParallelDataRequest_Name, &sCreateParallelDataRequest_Description, &sCreateParallelDataRequest_ParallelDataConfig, &sCreateParallelDataRequest_EncryptionKey, &sCreateParallelDataRequest_ClientToken, &sCreateParallelDataRequest_Tags}}
+var mCreateParallelDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateParallelDataResponse_Name, &sCreateParallelDataResponse_Status}}
+var mDeleteParallelDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteParallelDataRequest_Name}}
+var mDeleteParallelDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteParallelDataResponse_Name, &sDeleteParallelDataResponse_Status}}
+var mDeleteTerminologyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTerminologyRequest_Name}}
+var mDescribeTextTranslationJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTextTranslationJobRequest_JobId}}
+var mDescribeTextTranslationJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTextTranslationJobResponse_TextTranslationJobProperties}}
+var mGetParallelDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetParallelDataRequest_Name}}
+var mGetParallelDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetParallelDataResponse_ParallelDataProperties, &sGetParallelDataResponse_DataLocation, &sGetParallelDataResponse_AuxiliaryDataLocation, &sGetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation}}
+var mGetTerminologyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTerminologyRequest_Name, &sGetTerminologyRequest_TerminologyDataFormat}}
+var mGetTerminologyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTerminologyResponse_TerminologyProperties, &sGetTerminologyResponse_TerminologyDataLocation, &sGetTerminologyResponse_AuxiliaryDataLocation}}
+var mImportTerminologyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportTerminologyRequest_Name, &sImportTerminologyRequest_MergeStrategy, &sImportTerminologyRequest_Description, &sImportTerminologyRequest_TerminologyData, &sImportTerminologyRequest_EncryptionKey, &sImportTerminologyRequest_Tags}}
+var mImportTerminologyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportTerminologyResponse_TerminologyProperties, &sImportTerminologyResponse_AuxiliaryDataLocation}}
+var mListLanguagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLanguagesRequest_DisplayLanguageCode, &sListLanguagesRequest_NextToken, &sListLanguagesRequest_MaxResults}}
+var mListLanguagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLanguagesResponse_Languages, &sListLanguagesResponse_DisplayLanguageCode, &sListLanguagesResponse_NextToken}}
+var mListParallelDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListParallelDataRequest_NextToken, &sListParallelDataRequest_MaxResults}}
+var mListParallelDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListParallelDataResponse_ParallelDataPropertiesList, &sListParallelDataResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListTerminologiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTerminologiesRequest_NextToken, &sListTerminologiesRequest_MaxResults}}
+var mListTerminologiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTerminologiesResponse_TerminologyPropertiesList, &sListTerminologiesResponse_NextToken}}
+var mListTextTranslationJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTextTranslationJobsRequest_Filter, &sListTextTranslationJobsRequest_NextToken, &sListTextTranslationJobsRequest_MaxResults}}
+var mListTextTranslationJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTextTranslationJobsResponse_TextTranslationJobPropertiesList, &sListTextTranslationJobsResponse_NextToken}}
+var mStartTextTranslationJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTextTranslationJobRequest_JobName, &sStartTextTranslationJobRequest_InputDataConfig, &sStartTextTranslationJobRequest_OutputDataConfig, &sStartTextTranslationJobRequest_DataAccessRoleArn, &sStartTextTranslationJobRequest_SourceLanguageCode, &sStartTextTranslationJobRequest_TargetLanguageCodes, &sStartTextTranslationJobRequest_TerminologyNames, &sStartTextTranslationJobRequest_ParallelDataNames, &sStartTextTranslationJobRequest_ClientToken, &sStartTextTranslationJobRequest_Settings}, Hash: &hStartTextTranslationJobRequest}
+var mStartTextTranslationJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTextTranslationJobResponse_JobId, &sStartTextTranslationJobResponse_JobStatus}}
+var mStopTextTranslationJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopTextTranslationJobRequest_JobId}}
+var mStopTextTranslationJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopTextTranslationJobResponse_JobId, &sStopTextTranslationJobResponse_JobStatus}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mTranslateDocumentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTranslateDocumentRequest_Document, &sTranslateDocumentRequest_TerminologyNames, &sTranslateDocumentRequest_SourceLanguageCode, &sTranslateDocumentRequest_TargetLanguageCode, &sTranslateDocumentRequest_Settings}}
+var mTranslateDocumentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTranslateDocumentResponse_TranslatedDocument, &sTranslateDocumentResponse_SourceLanguageCode, &sTranslateDocumentResponse_TargetLanguageCode, &sTranslateDocumentResponse_AppliedTerminologies, &sTranslateDocumentResponse_AppliedSettings}}
+var mTranslateTextRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTranslateTextRequest_Text, &sTranslateTextRequest_TerminologyNames, &sTranslateTextRequest_SourceLanguageCode, &sTranslateTextRequest_TargetLanguageCode, &sTranslateTextRequest_Settings}}
+var mTranslateTextResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTranslateTextResponse_TranslatedText, &sTranslateTextResponse_SourceLanguageCode, &sTranslateTextResponse_TargetLanguageCode, &sTranslateTextResponse_AppliedTerminologies, &sTranslateTextResponse_AppliedSettings}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateParallelDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateParallelDataRequest_Name, &sUpdateParallelDataRequest_Description, &sUpdateParallelDataRequest_ParallelDataConfig, &sUpdateParallelDataRequest_ClientToken}}
+var mUpdateParallelDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateParallelDataResponse_Name, &sUpdateParallelDataResponse_Status, &sUpdateParallelDataResponse_LatestUpdateAttemptStatus, &sUpdateParallelDataResponse_LatestUpdateAttemptAt}}
+
+var hDisplayLanguageCode = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	7, 0, 0, 0, 0, 0, 0, 8, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 6, 9, 4, 0, 0, 10,
+	0, 0, 0, 0, 0, 1, 5, 0,
+}}
+var hParallelDataProperties = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 1, 0, 0, 0, 3, 0, 8, 0, 0, 0, 11, 16, 0, 0, 0, 17, 0, 0, 0, 0, 0, 4, 0,
+	0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 7, 0, 0, 0, 0, 0, 0, 13,
+	0, 9, 0, 6, 0, 5, 2, 0, 14, 0, 0, 10, 0, 0, 0, 0,
+}}
+var hTerminologyProperties = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	11, 1, 0, 10, 14, 4, 0, 13, 0, 0, 0, 0, 0, 0, 0, 12, 2, 0, 0, 3, 0, 8, 0, 0,
+	6, 0, 7, 0, 0, 0, 5, 9,
+}}
+var hTextTranslationJobProperties = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	0, 0, 1, 6, 0, 0, 7, 0, 0, 9, 0, 0, 13, 0, 0, 15, 0, 4, 0, 0, 14, 11, 5, 0,
+	10, 0, 0, 2, 8, 0, 12, 3,
+}}
+var hStartTextTranslationJobRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 3, 0, 2, 7, 0, 0, 0, 0, 0, 0, 0, 8, 0, 10, 0, 0, 1, 0, 6,
+	0, 0, 0, 9, 0, 0, 4, 5,
+}}
+
+var sCreateParallelData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateParallelData, Type: smithy.ShapeTypeOperation, Ext: &eCreateParallelData})
+var sDeleteParallelData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteParallelData, Type: smithy.ShapeTypeOperation, Ext: &eDeleteParallelData})
+var sDeleteTerminology = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTerminology, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTerminology})
+var sDescribeTextTranslationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTextTranslationJob, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTextTranslationJob})
+var sGetParallelData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParallelData, Type: smithy.ShapeTypeOperation, Ext: &eGetParallelData})
+var sGetTerminology = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTerminology, Type: smithy.ShapeTypeOperation, Ext: &eGetTerminology})
+var sImportTerminology = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportTerminology, Type: smithy.ShapeTypeOperation, Ext: &eImportTerminology})
+var sListLanguages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLanguages, Type: smithy.ShapeTypeOperation, Ext: &eListLanguages})
+var sListParallelData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListParallelData, Type: smithy.ShapeTypeOperation, Ext: &eListParallelData})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTerminologies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTerminologies, Type: smithy.ShapeTypeOperation, Ext: &eListTerminologies})
+var sListTextTranslationJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTextTranslationJobs, Type: smithy.ShapeTypeOperation, Ext: &eListTextTranslationJobs})
+var sStartTextTranslationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTextTranslationJob, Type: smithy.ShapeTypeOperation, Ext: &eStartTextTranslationJob})
+var sStopTextTranslationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopTextTranslationJob, Type: smithy.ShapeTypeOperation, Ext: &eStopTextTranslationJob})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sTranslateDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslateDocument, Type: smithy.ShapeTypeOperation, Ext: &eTranslateDocument})
+var sTranslateText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslateText, Type: smithy.ShapeTypeOperation, Ext: &eTranslateText})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateParallelData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateParallelData, Type: smithy.ShapeTypeOperation, Ext: &eUpdateParallelData})
+var s_AWSShineFrontendService_20170701 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSShineFrontendService_20170701, Type: smithy.ShapeTypeService, Ext: &e_AWSShineFrontendService_20170701})
+var sAppliedTerminology = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppliedTerminology, Members: &mAppliedTerminology, Type: smithy.ShapeTypeStructure, Ext: &eAppliedTerminology})
+var sAppliedTerminology_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAppliedTerminology_Name})
+var sAppliedTerminology_Terms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terms", ID: &i_TermList, Members: &m_TermList, Type: smithy.ShapeTypeList, Ext: &eAppliedTerminology_Terms})
+var s_AppliedTerminologyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppliedTerminologyList, Members: &m_AppliedTerminologyList, Type: smithy.ShapeTypeList, Ext: &e_AppliedTerminologyList})
+var s_AppliedTerminologyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppliedTerminology, Members: &mAppliedTerminology, Type: smithy.ShapeTypeStructure, Ext: &e_AppliedTerminologyList_member})
+var s_BoundedLengthString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString, Ext: &e_BoundedLengthString})
+var sBrevity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrevity, Members: &mBrevity, Type: smithy.ShapeTypeEnum, Ext: &eBrevity})
+var sBrevity_ON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrevity_ON})
+var s_ClientTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &e_ClientTokenString})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_Message})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &e_ContentType})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDetectedLanguageLowConfidenceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectedLanguageLowConfidenceException, Members: &mDetectedLanguageLowConfidenceException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eDetectedLanguageLowConfidenceException})
+var sDetectedLanguageLowConfidenceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDetectedLanguageLowConfidenceException_Message})
+var sDetectedLanguageLowConfidenceException_DetectedLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectedLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eDetectedLanguageLowConfidenceException_DetectedLanguageCode})
+var sDirectionality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectionality, Members: &mDirectionality, Type: smithy.ShapeTypeEnum, Ext: &eDirectionality})
+var sDirectionality_UNI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectionality_UNI})
+var sDirectionality_MULTI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectionality_MULTI})
+var sDisplayLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisplayLanguageCode, Members: &mDisplayLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eDisplayLanguageCode})
+var sDisplayLanguageCode_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_DE})
+var sDisplayLanguageCode_EN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_EN})
+var sDisplayLanguageCode_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_ES})
+var sDisplayLanguageCode_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_FR})
+var sDisplayLanguageCode_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_IT})
+var sDisplayLanguageCode_JA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_JA})
+var sDisplayLanguageCode_KO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_KO})
+var sDisplayLanguageCode_PT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_PT})
+var sDisplayLanguageCode_ZH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_ZH})
+var sDisplayLanguageCode_ZH_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZH_TW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDisplayLanguageCode_ZH_TW})
+var sDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure, Ext: &eDocument})
+var sDocument_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_DocumentContent, Traits: &t2, Type: smithy.ShapeTypeBlob, Ext: &eDocument_Content})
+var sDocument_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &eDocument_ContentType})
+var s_DocumentContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentContent, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_DocumentContent})
+var sEncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKey})
+var sEncryptionKey_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEncryptionKeyType, Members: &mEncryptionKeyType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionKey_Type})
+var sEncryptionKey_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EncryptionKeyID, Type: smithy.ShapeTypeString, Ext: &eEncryptionKey_Id})
+var s_EncryptionKeyID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionKeyID, Type: smithy.ShapeTypeString, Ext: &e_EncryptionKeyID})
+var sEncryptionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyType, Members: &mEncryptionKeyType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionKeyType})
+var sEncryptionKeyType_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyType_KMS})
+var sFormality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormality, Members: &mFormality, Type: smithy.ShapeTypeEnum, Ext: &eFormality})
+var sFormality_FORMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormality_FORMAL})
+var sFormality_INFORMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormality_INFORMAL})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var sInputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eInputDataConfig})
+var sInputDataConfig_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eInputDataConfig_S3Uri})
+var sInputDataConfig_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &eInputDataConfig_ContentType})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInvalidFilterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFilterException, Members: &mInvalidFilterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidFilterException})
+var sInvalidFilterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidFilterException_Message})
+var sInvalidParameterValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterValueException, Members: &mInvalidParameterValueException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterValueException})
+var sInvalidParameterValueException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterValueException_Message})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Message})
+var sJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobDetails, Members: &mJobDetails, Type: smithy.ShapeTypeStructure, Ext: &eJobDetails})
+var sJobDetails_TranslatedDocumentsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranslatedDocumentsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eJobDetails_TranslatedDocumentsCount})
+var sJobDetails_DocumentsWithErrorsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentsWithErrorsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eJobDetails_DocumentsWithErrorsCount})
+var sJobDetails_InputDocumentsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDocumentsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eJobDetails_InputDocumentsCount})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_JobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &e_JobName})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobStatus})
+var sJobStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_SUBMITTED})
+var sJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_IN_PROGRESS})
+var sJobStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_COMPLETED})
+var sJobStatus_COMPLETED_WITH_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED_WITH_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_COMPLETED_WITH_ERROR})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_FAILED})
+var sJobStatus_STOP_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_STOP_REQUESTED})
+var sJobStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_STOPPED})
+var sLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguage, Members: &mLanguage, Type: smithy.ShapeTypeStructure, Ext: &eLanguage})
+var sLanguage_LanguageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageName", ID: &i_LocalizedNameString, Type: smithy.ShapeTypeString, Ext: &eLanguage_LanguageName})
+var sLanguage_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eLanguage_LanguageCode})
+var s_LanguageCodeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &e_LanguageCodeString})
+var s_LanguageCodeStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageCodeStringList, Members: &m_LanguageCodeStringList, Type: smithy.ShapeTypeList, Ext: &e_LanguageCodeStringList})
+var s_LanguageCodeStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &e_LanguageCodeStringList_member})
+var s_LanguagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguagesList, Members: &m_LanguagesList, Type: smithy.ShapeTypeList, Ext: &e_LanguagesList})
+var s_LanguagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLanguage, Members: &mLanguage, Type: smithy.ShapeTypeStructure, Ext: &e_LanguagesList_member})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var s_LocalizedNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocalizedNameString, Type: smithy.ShapeTypeString, Ext: &e_LocalizedNameString})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_MaxResultsInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsInteger})
+var sMergeStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeStrategy, Members: &mMergeStrategy, Type: smithy.ShapeTypeEnum, Ext: &eMergeStrategy})
+var sMergeStrategy_OVERWRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERWRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeStrategy_OVERWRITE})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eOutputDataConfig})
+var sOutputDataConfig_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eOutputDataConfig_S3Uri})
+var sOutputDataConfig_EncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eOutputDataConfig_EncryptionKey})
+var s_ParallelDataArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParallelDataArn, Type: smithy.ShapeTypeString, Ext: &e_ParallelDataArn})
+var sParallelDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParallelDataConfig, Members: &mParallelDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataConfig})
+var sParallelDataConfig_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eParallelDataConfig_S3Uri})
+var sParallelDataConfig_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iParallelDataFormat, Members: &mParallelDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eParallelDataConfig_Format})
+var sParallelDataDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParallelDataDataLocation, Members: &mParallelDataDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataDataLocation})
+var sParallelDataDataLocation_RepositoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParallelDataDataLocation_RepositoryType})
+var sParallelDataDataLocation_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParallelDataDataLocation_Location})
+var sParallelDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParallelDataFormat, Members: &mParallelDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eParallelDataFormat})
+var sParallelDataFormat_TSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataFormat_TSV})
+var sParallelDataFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataFormat_CSV})
+var sParallelDataFormat_TMX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TMX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataFormat_TMX})
+var sParallelDataProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParallelDataProperties, Members: &mParallelDataProperties, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataProperties})
+var sParallelDataProperties_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eParallelDataProperties_Name})
+var sParallelDataProperties_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ParallelDataArn, Type: smithy.ShapeTypeString, Ext: &eParallelDataProperties_Arn})
+var sParallelDataProperties_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eParallelDataProperties_Description})
+var sParallelDataProperties_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iParallelDataStatus, Members: &mParallelDataStatus, Type: smithy.ShapeTypeEnum, Ext: &eParallelDataProperties_Status})
+var sParallelDataProperties_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eParallelDataProperties_SourceLanguageCode})
+var sParallelDataProperties_TargetLanguageCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCodes", ID: &i_LanguageCodeStringList, Members: &m_LanguageCodeStringList, Type: smithy.ShapeTypeList, Ext: &eParallelDataProperties_TargetLanguageCodes})
+var sParallelDataProperties_ParallelDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelDataConfig", ID: &iParallelDataConfig, Members: &mParallelDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataProperties_ParallelDataConfig})
+var sParallelDataProperties_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_UnboundedLengthString, Type: smithy.ShapeTypeString, Ext: &eParallelDataProperties_Message})
+var sParallelDataProperties_ImportedDataSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedDataSize", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eParallelDataProperties_ImportedDataSize})
+var sParallelDataProperties_ImportedRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedRecordCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eParallelDataProperties_ImportedRecordCount})
+var sParallelDataProperties_FailedRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedRecordCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eParallelDataProperties_FailedRecordCount})
+var sParallelDataProperties_SkippedRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkippedRecordCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eParallelDataProperties_SkippedRecordCount})
+var sParallelDataProperties_EncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataProperties_EncryptionKey})
+var sParallelDataProperties_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eParallelDataProperties_CreatedAt})
+var sParallelDataProperties_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eParallelDataProperties_LastUpdatedAt})
+var sParallelDataProperties_LatestUpdateAttemptStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestUpdateAttemptStatus", ID: &iParallelDataStatus, Members: &mParallelDataStatus, Type: smithy.ShapeTypeEnum, Ext: &eParallelDataProperties_LatestUpdateAttemptStatus})
+var sParallelDataProperties_LatestUpdateAttemptAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestUpdateAttemptAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eParallelDataProperties_LatestUpdateAttemptAt})
+var s_ParallelDataPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParallelDataPropertiesList, Members: &m_ParallelDataPropertiesList, Type: smithy.ShapeTypeList, Ext: &e_ParallelDataPropertiesList})
+var s_ParallelDataPropertiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParallelDataProperties, Members: &mParallelDataProperties, Type: smithy.ShapeTypeStructure, Ext: &e_ParallelDataPropertiesList_member})
+var sParallelDataStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParallelDataStatus, Members: &mParallelDataStatus, Type: smithy.ShapeTypeEnum, Ext: &eParallelDataStatus})
+var sParallelDataStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataStatus_CREATING})
+var sParallelDataStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataStatus_UPDATING})
+var sParallelDataStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataStatus_ACTIVE})
+var sParallelDataStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataStatus_DELETING})
+var sParallelDataStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParallelDataStatus_FAILED})
+var sProfanity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfanity, Members: &mProfanity, Type: smithy.ShapeTypeEnum, Ext: &eProfanity})
+var sProfanity_MASK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfanity_MASK})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var s_ResourceNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &e_ResourceNameList})
+var s_ResourceNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceNameList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &e_S3Uri})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_Message})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TargetLanguageCodeStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetLanguageCodeStringList, Members: &m_TargetLanguageCodeStringList, Type: smithy.ShapeTypeList, Ext: &e_TargetLanguageCodeStringList})
+var s_TargetLanguageCodeStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &e_TargetLanguageCodeStringList_member})
+var sTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerm, Members: &mTerm, Type: smithy.ShapeTypeStructure, Ext: &eTerm})
+var sTerm_SourceText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceText", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTerm_SourceText})
+var sTerm_TargetText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetText", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTerm_TargetText})
+var s_TerminologyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminologyArn, Type: smithy.ShapeTypeString, Ext: &e_TerminologyArn})
+var sTerminologyData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminologyData, Members: &mTerminologyData, Type: smithy.ShapeTypeStructure, Ext: &eTerminologyData})
+var sTerminologyData_File = smithy.NewStaticSchema(smithy.StaticSchema{Member: "File", ID: &i_TerminologyFile, Traits: &t2, Type: smithy.ShapeTypeBlob, Ext: &eTerminologyData_File})
+var sTerminologyData_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iTerminologyDataFormat, Members: &mTerminologyDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eTerminologyData_Format})
+var sTerminologyData_Directionality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Directionality", ID: &iDirectionality, Members: &mDirectionality, Type: smithy.ShapeTypeEnum, Ext: &eTerminologyData_Directionality})
+var sTerminologyDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminologyDataFormat, Members: &mTerminologyDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eTerminologyDataFormat})
+var sTerminologyDataFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTerminologyDataFormat_CSV})
+var sTerminologyDataFormat_TMX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TMX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTerminologyDataFormat_TMX})
+var sTerminologyDataFormat_TSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTerminologyDataFormat_TSV})
+var sTerminologyDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminologyDataLocation, Members: &mTerminologyDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eTerminologyDataLocation})
+var sTerminologyDataLocation_RepositoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTerminologyDataLocation_RepositoryType})
+var sTerminologyDataLocation_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTerminologyDataLocation_Location})
+var s_TerminologyFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminologyFile, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_TerminologyFile})
+var sTerminologyProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminologyProperties, Members: &mTerminologyProperties, Type: smithy.ShapeTypeStructure, Ext: &eTerminologyProperties})
+var sTerminologyProperties_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eTerminologyProperties_Name})
+var sTerminologyProperties_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eTerminologyProperties_Description})
+var sTerminologyProperties_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_TerminologyArn, Type: smithy.ShapeTypeString, Ext: &eTerminologyProperties_Arn})
+var sTerminologyProperties_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTerminologyProperties_SourceLanguageCode})
+var sTerminologyProperties_TargetLanguageCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCodes", ID: &i_LanguageCodeStringList, Members: &m_LanguageCodeStringList, Type: smithy.ShapeTypeList, Ext: &eTerminologyProperties_TargetLanguageCodes})
+var sTerminologyProperties_EncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eTerminologyProperties_EncryptionKey})
+var sTerminologyProperties_SizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeBytes", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eTerminologyProperties_SizeBytes})
+var sTerminologyProperties_TermCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TermCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eTerminologyProperties_TermCount})
+var sTerminologyProperties_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTerminologyProperties_CreatedAt})
+var sTerminologyProperties_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTerminologyProperties_LastUpdatedAt})
+var sTerminologyProperties_Directionality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Directionality", ID: &iDirectionality, Members: &mDirectionality, Type: smithy.ShapeTypeEnum, Ext: &eTerminologyProperties_Directionality})
+var sTerminologyProperties_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_UnboundedLengthString, Type: smithy.ShapeTypeString, Ext: &eTerminologyProperties_Message})
+var sTerminologyProperties_SkippedTermCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkippedTermCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eTerminologyProperties_SkippedTermCount})
+var sTerminologyProperties_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iTerminologyDataFormat, Members: &mTerminologyDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eTerminologyProperties_Format})
+var s_TerminologyPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminologyPropertiesList, Members: &m_TerminologyPropertiesList, Type: smithy.ShapeTypeList, Ext: &e_TerminologyPropertiesList})
+var s_TerminologyPropertiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTerminologyProperties, Members: &mTerminologyProperties, Type: smithy.ShapeTypeStructure, Ext: &e_TerminologyPropertiesList_member})
+var s_TermList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TermList, Members: &m_TermList, Type: smithy.ShapeTypeList, Ext: &e_TermList})
+var s_TermList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTerm, Members: &mTerm, Type: smithy.ShapeTypeStructure, Ext: &e_TermList_member})
+var sTextSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextSizeLimitExceededException, Members: &mTextSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTextSizeLimitExceededException})
+var sTextSizeLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTextSizeLimitExceededException_Message})
+var sTextTranslationJobFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextTranslationJobFilter, Members: &mTextTranslationJobFilter, Type: smithy.ShapeTypeStructure, Ext: &eTextTranslationJobFilter})
+var sTextTranslationJobFilter_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eTextTranslationJobFilter_JobName})
+var sTextTranslationJobFilter_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eTextTranslationJobFilter_JobStatus})
+var sTextTranslationJobFilter_SubmittedBeforeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedBeforeTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTextTranslationJobFilter_SubmittedBeforeTime})
+var sTextTranslationJobFilter_SubmittedAfterTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedAfterTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTextTranslationJobFilter_SubmittedAfterTime})
+var sTextTranslationJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextTranslationJobProperties, Members: &mTextTranslationJobProperties, Type: smithy.ShapeTypeStructure, Ext: &eTextTranslationJobProperties})
+var sTextTranslationJobProperties_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eTextTranslationJobProperties_JobId})
+var sTextTranslationJobProperties_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eTextTranslationJobProperties_JobName})
+var sTextTranslationJobProperties_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eTextTranslationJobProperties_JobStatus})
+var sTextTranslationJobProperties_JobDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobDetails", ID: &iJobDetails, Members: &mJobDetails, Type: smithy.ShapeTypeStructure, Ext: &eTextTranslationJobProperties_JobDetails})
+var sTextTranslationJobProperties_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTextTranslationJobProperties_SourceLanguageCode})
+var sTextTranslationJobProperties_TargetLanguageCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCodes", ID: &i_TargetLanguageCodeStringList, Members: &m_TargetLanguageCodeStringList, Type: smithy.ShapeTypeList, Ext: &eTextTranslationJobProperties_TargetLanguageCodes})
+var sTextTranslationJobProperties_TerminologyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eTextTranslationJobProperties_TerminologyNames})
+var sTextTranslationJobProperties_ParallelDataNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelDataNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eTextTranslationJobProperties_ParallelDataNames})
+var sTextTranslationJobProperties_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_UnboundedLengthString, Type: smithy.ShapeTypeString, Ext: &eTextTranslationJobProperties_Message})
+var sTextTranslationJobProperties_SubmittedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTextTranslationJobProperties_SubmittedTime})
+var sTextTranslationJobProperties_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTextTranslationJobProperties_EndTime})
+var sTextTranslationJobProperties_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eTextTranslationJobProperties_InputDataConfig})
+var sTextTranslationJobProperties_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eTextTranslationJobProperties_OutputDataConfig})
+var sTextTranslationJobProperties_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eTextTranslationJobProperties_DataAccessRoleArn})
+var sTextTranslationJobProperties_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &iTranslationSettings, Members: &mTranslationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTextTranslationJobProperties_Settings})
+var s_TextTranslationJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextTranslationJobPropertiesList, Members: &m_TextTranslationJobPropertiesList, Type: smithy.ShapeTypeList, Ext: &e_TextTranslationJobPropertiesList})
+var s_TextTranslationJobPropertiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTextTranslationJobProperties, Members: &mTextTranslationJobProperties, Type: smithy.ShapeTypeStructure, Ext: &e_TextTranslationJobPropertiesList_member})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_Message})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var sTooManyTagsException_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_ResourceArn})
+var sTranslatedDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslatedDocument, Members: &mTranslatedDocument, Type: smithy.ShapeTypeStructure, Ext: &eTranslatedDocument})
+var sTranslatedDocument_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_TranslatedDocumentContent, Traits: &t2, Type: smithy.ShapeTypeBlob, Ext: &eTranslatedDocument_Content})
+var s_TranslatedDocumentContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranslatedDocumentContent, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_TranslatedDocumentContent})
+var s_TranslatedTextString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranslatedTextString, Type: smithy.ShapeTypeString, Ext: &e_TranslatedTextString})
+var sTranslationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslationSettings, Members: &mTranslationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTranslationSettings})
+var sTranslationSettings_Formality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Formality", ID: &iFormality, Members: &mFormality, Type: smithy.ShapeTypeEnum, Ext: &eTranslationSettings_Formality})
+var sTranslationSettings_Profanity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profanity", ID: &iProfanity, Members: &mProfanity, Type: smithy.ShapeTypeEnum, Ext: &eTranslationSettings_Profanity})
+var sTranslationSettings_Brevity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Brevity", ID: &iBrevity, Members: &mBrevity, Type: smithy.ShapeTypeEnum, Ext: &eTranslationSettings_Brevity})
+var s_UnboundedLengthString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnboundedLengthString, Type: smithy.ShapeTypeString, Ext: &e_UnboundedLengthString})
+var sUnsupportedDisplayLanguageCodeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedDisplayLanguageCodeException, Members: &mUnsupportedDisplayLanguageCodeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedDisplayLanguageCodeException})
+var sUnsupportedDisplayLanguageCodeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnsupportedDisplayLanguageCodeException_Message})
+var sUnsupportedDisplayLanguageCodeException_DisplayLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eUnsupportedDisplayLanguageCodeException_DisplayLanguageCode})
+var sUnsupportedLanguagePairException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedLanguagePairException, Members: &mUnsupportedLanguagePairException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedLanguagePairException})
+var sUnsupportedLanguagePairException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnsupportedLanguagePairException_Message})
+var sUnsupportedLanguagePairException_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eUnsupportedLanguagePairException_SourceLanguageCode})
+var sUnsupportedLanguagePairException_TargetLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eUnsupportedLanguagePairException_TargetLanguageCode})
+var sCreateParallelDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateParallelDataRequest, Members: &mCreateParallelDataRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateParallelDataRequest})
+var sCreateParallelDataRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateParallelDataRequest_Name})
+var sCreateParallelDataRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateParallelDataRequest_Description})
+var sCreateParallelDataRequest_ParallelDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelDataConfig", ID: &iParallelDataConfig, Members: &mParallelDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateParallelDataRequest_ParallelDataConfig})
+var sCreateParallelDataRequest_EncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eCreateParallelDataRequest_EncryptionKey})
+var sCreateParallelDataRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateParallelDataRequest_ClientToken})
+var sCreateParallelDataRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateParallelDataRequest_Tags})
+var sCreateParallelDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateParallelDataResponse, Members: &mCreateParallelDataResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateParallelDataResponse})
+var sCreateParallelDataResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateParallelDataResponse_Name})
+var sCreateParallelDataResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iParallelDataStatus, Members: &mParallelDataStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateParallelDataResponse_Status})
+var sDeleteParallelDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteParallelDataRequest, Members: &mDeleteParallelDataRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteParallelDataRequest})
+var sDeleteParallelDataRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteParallelDataRequest_Name})
+var sDeleteParallelDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteParallelDataResponse, Members: &mDeleteParallelDataResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteParallelDataResponse})
+var sDeleteParallelDataResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteParallelDataResponse_Name})
+var sDeleteParallelDataResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iParallelDataStatus, Members: &mParallelDataStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteParallelDataResponse_Status})
+var sDeleteTerminologyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTerminologyRequest, Members: &mDeleteTerminologyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTerminologyRequest})
+var sDeleteTerminologyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteTerminologyRequest_Name})
+var sDescribeTextTranslationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTextTranslationJobRequest, Members: &mDescribeTextTranslationJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTextTranslationJobRequest})
+var sDescribeTextTranslationJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eDescribeTextTranslationJobRequest_JobId})
+var sDescribeTextTranslationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTextTranslationJobResponse, Members: &mDescribeTextTranslationJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTextTranslationJobResponse})
+var sDescribeTextTranslationJobResponse_TextTranslationJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextTranslationJobProperties", ID: &iTextTranslationJobProperties, Members: &mTextTranslationJobProperties, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTextTranslationJobResponse_TextTranslationJobProperties})
+var sGetParallelDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParallelDataRequest, Members: &mGetParallelDataRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetParallelDataRequest})
+var sGetParallelDataRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetParallelDataRequest_Name})
+var sGetParallelDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParallelDataResponse, Members: &mGetParallelDataResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetParallelDataResponse})
+var sGetParallelDataResponse_ParallelDataProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelDataProperties", ID: &iParallelDataProperties, Members: &mParallelDataProperties, Type: smithy.ShapeTypeStructure, Ext: &eGetParallelDataResponse_ParallelDataProperties})
+var sGetParallelDataResponse_DataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLocation", ID: &iParallelDataDataLocation, Members: &mParallelDataDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eGetParallelDataResponse_DataLocation})
+var sGetParallelDataResponse_AuxiliaryDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuxiliaryDataLocation", ID: &iParallelDataDataLocation, Members: &mParallelDataDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eGetParallelDataResponse_AuxiliaryDataLocation})
+var sGetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestUpdateAttemptAuxiliaryDataLocation", ID: &iParallelDataDataLocation, Members: &mParallelDataDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eGetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation})
+var sGetTerminologyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTerminologyRequest, Members: &mGetTerminologyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTerminologyRequest})
+var sGetTerminologyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetTerminologyRequest_Name})
+var sGetTerminologyRequest_TerminologyDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyDataFormat", ID: &iTerminologyDataFormat, Members: &mTerminologyDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eGetTerminologyRequest_TerminologyDataFormat})
+var sGetTerminologyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTerminologyResponse, Members: &mGetTerminologyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTerminologyResponse})
+var sGetTerminologyResponse_TerminologyProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyProperties", ID: &iTerminologyProperties, Members: &mTerminologyProperties, Type: smithy.ShapeTypeStructure, Ext: &eGetTerminologyResponse_TerminologyProperties})
+var sGetTerminologyResponse_TerminologyDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyDataLocation", ID: &iTerminologyDataLocation, Members: &mTerminologyDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eGetTerminologyResponse_TerminologyDataLocation})
+var sGetTerminologyResponse_AuxiliaryDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuxiliaryDataLocation", ID: &iTerminologyDataLocation, Members: &mTerminologyDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eGetTerminologyResponse_AuxiliaryDataLocation})
+var sImportTerminologyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportTerminologyRequest, Members: &mImportTerminologyRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportTerminologyRequest})
+var sImportTerminologyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eImportTerminologyRequest_Name})
+var sImportTerminologyRequest_MergeStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MergeStrategy", ID: &iMergeStrategy, Members: &mMergeStrategy, Type: smithy.ShapeTypeEnum, Ext: &eImportTerminologyRequest_MergeStrategy})
+var sImportTerminologyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eImportTerminologyRequest_Description})
+var sImportTerminologyRequest_TerminologyData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyData", ID: &iTerminologyData, Members: &mTerminologyData, Type: smithy.ShapeTypeStructure, Ext: &eImportTerminologyRequest_TerminologyData})
+var sImportTerminologyRequest_EncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eImportTerminologyRequest_EncryptionKey})
+var sImportTerminologyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eImportTerminologyRequest_Tags})
+var sImportTerminologyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportTerminologyResponse, Members: &mImportTerminologyResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportTerminologyResponse})
+var sImportTerminologyResponse_TerminologyProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyProperties", ID: &iTerminologyProperties, Members: &mTerminologyProperties, Type: smithy.ShapeTypeStructure, Ext: &eImportTerminologyResponse_TerminologyProperties})
+var sImportTerminologyResponse_AuxiliaryDataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuxiliaryDataLocation", ID: &iTerminologyDataLocation, Members: &mTerminologyDataLocation, Type: smithy.ShapeTypeStructure, Ext: &eImportTerminologyResponse_AuxiliaryDataLocation})
+var sListLanguagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLanguagesRequest, Members: &mListLanguagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLanguagesRequest})
+var sListLanguagesRequest_DisplayLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayLanguageCode", ID: &iDisplayLanguageCode, Members: &mDisplayLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eListLanguagesRequest_DisplayLanguageCode})
+var sListLanguagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListLanguagesRequest_NextToken})
+var sListLanguagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &eListLanguagesRequest_MaxResults})
+var sListLanguagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLanguagesResponse, Members: &mListLanguagesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLanguagesResponse})
+var sListLanguagesResponse_Languages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Languages", ID: &i_LanguagesList, Members: &m_LanguagesList, Type: smithy.ShapeTypeList, Ext: &eListLanguagesResponse_Languages})
+var sListLanguagesResponse_DisplayLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayLanguageCode", ID: &iDisplayLanguageCode, Members: &mDisplayLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eListLanguagesResponse_DisplayLanguageCode})
+var sListLanguagesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListLanguagesResponse_NextToken})
+var sListParallelDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListParallelDataRequest, Members: &mListParallelDataRequest, Type: smithy.ShapeTypeStructure, Ext: &eListParallelDataRequest})
+var sListParallelDataRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListParallelDataRequest_NextToken})
+var sListParallelDataRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &eListParallelDataRequest_MaxResults})
+var sListParallelDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListParallelDataResponse, Members: &mListParallelDataResponse, Type: smithy.ShapeTypeStructure, Ext: &eListParallelDataResponse})
+var sListParallelDataResponse_ParallelDataPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelDataPropertiesList", ID: &i_ParallelDataPropertiesList, Members: &m_ParallelDataPropertiesList, Type: smithy.ShapeTypeList, Ext: &eListParallelDataResponse_ParallelDataPropertiesList})
+var sListParallelDataResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListParallelDataResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListTerminologiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTerminologiesRequest, Members: &mListTerminologiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTerminologiesRequest})
+var sListTerminologiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTerminologiesRequest_NextToken})
+var sListTerminologiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &eListTerminologiesRequest_MaxResults})
+var sListTerminologiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTerminologiesResponse, Members: &mListTerminologiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTerminologiesResponse})
+var sListTerminologiesResponse_TerminologyPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyPropertiesList", ID: &i_TerminologyPropertiesList, Members: &m_TerminologyPropertiesList, Type: smithy.ShapeTypeList, Ext: &eListTerminologiesResponse_TerminologyPropertiesList})
+var sListTerminologiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTerminologiesResponse_NextToken})
+var sListTextTranslationJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTextTranslationJobsRequest, Members: &mListTextTranslationJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTextTranslationJobsRequest})
+var sListTextTranslationJobsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iTextTranslationJobFilter, Members: &mTextTranslationJobFilter, Type: smithy.ShapeTypeStructure, Ext: &eListTextTranslationJobsRequest_Filter})
+var sListTextTranslationJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTextTranslationJobsRequest_NextToken})
+var sListTextTranslationJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &eListTextTranslationJobsRequest_MaxResults})
+var sListTextTranslationJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTextTranslationJobsResponse, Members: &mListTextTranslationJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTextTranslationJobsResponse})
+var sListTextTranslationJobsResponse_TextTranslationJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextTranslationJobPropertiesList", ID: &i_TextTranslationJobPropertiesList, Members: &m_TextTranslationJobPropertiesList, Type: smithy.ShapeTypeList, Ext: &eListTextTranslationJobsResponse_TextTranslationJobPropertiesList})
+var sListTextTranslationJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTextTranslationJobsResponse_NextToken})
+var sStartTextTranslationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTextTranslationJobRequest, Members: &mStartTextTranslationJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartTextTranslationJobRequest})
+var sStartTextTranslationJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eStartTextTranslationJobRequest_JobName})
+var sStartTextTranslationJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartTextTranslationJobRequest_InputDataConfig})
+var sStartTextTranslationJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartTextTranslationJobRequest_OutputDataConfig})
+var sStartTextTranslationJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartTextTranslationJobRequest_DataAccessRoleArn})
+var sStartTextTranslationJobRequest_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eStartTextTranslationJobRequest_SourceLanguageCode})
+var sStartTextTranslationJobRequest_TargetLanguageCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCodes", ID: &i_TargetLanguageCodeStringList, Members: &m_TargetLanguageCodeStringList, Type: smithy.ShapeTypeList, Ext: &eStartTextTranslationJobRequest_TargetLanguageCodes})
+var sStartTextTranslationJobRequest_TerminologyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eStartTextTranslationJobRequest_TerminologyNames})
+var sStartTextTranslationJobRequest_ParallelDataNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelDataNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eStartTextTranslationJobRequest_ParallelDataNames})
+var sStartTextTranslationJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &eStartTextTranslationJobRequest_ClientToken})
+var sStartTextTranslationJobRequest_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &iTranslationSettings, Members: &mTranslationSettings, Type: smithy.ShapeTypeStructure, Ext: &eStartTextTranslationJobRequest_Settings})
+var sStartTextTranslationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTextTranslationJobResponse, Members: &mStartTextTranslationJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartTextTranslationJobResponse})
+var sStartTextTranslationJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eStartTextTranslationJobResponse_JobId})
+var sStartTextTranslationJobResponse_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartTextTranslationJobResponse_JobStatus})
+var sStopTextTranslationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopTextTranslationJobRequest, Members: &mStopTextTranslationJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopTextTranslationJobRequest})
+var sStopTextTranslationJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eStopTextTranslationJobRequest_JobId})
+var sStopTextTranslationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopTextTranslationJobResponse, Members: &mStopTextTranslationJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopTextTranslationJobResponse})
+var sStopTextTranslationJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eStopTextTranslationJobResponse_JobId})
+var sStopTextTranslationJobResponse_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eStopTextTranslationJobResponse_JobStatus})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sTranslateDocumentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslateDocumentRequest, Members: &mTranslateDocumentRequest, Type: smithy.ShapeTypeStructure, Ext: &eTranslateDocumentRequest})
+var sTranslateDocumentRequest_Document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Document", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure, Ext: &eTranslateDocumentRequest_Document})
+var sTranslateDocumentRequest_TerminologyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eTranslateDocumentRequest_TerminologyNames})
+var sTranslateDocumentRequest_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateDocumentRequest_SourceLanguageCode})
+var sTranslateDocumentRequest_TargetLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateDocumentRequest_TargetLanguageCode})
+var sTranslateDocumentRequest_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &iTranslationSettings, Members: &mTranslationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTranslateDocumentRequest_Settings})
+var sTranslateDocumentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslateDocumentResponse, Members: &mTranslateDocumentResponse, Type: smithy.ShapeTypeStructure, Ext: &eTranslateDocumentResponse})
+var sTranslateDocumentResponse_TranslatedDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranslatedDocument", ID: &iTranslatedDocument, Members: &mTranslatedDocument, Type: smithy.ShapeTypeStructure, Ext: &eTranslateDocumentResponse_TranslatedDocument})
+var sTranslateDocumentResponse_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateDocumentResponse_SourceLanguageCode})
+var sTranslateDocumentResponse_TargetLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateDocumentResponse_TargetLanguageCode})
+var sTranslateDocumentResponse_AppliedTerminologies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedTerminologies", ID: &i_AppliedTerminologyList, Members: &m_AppliedTerminologyList, Type: smithy.ShapeTypeList, Ext: &eTranslateDocumentResponse_AppliedTerminologies})
+var sTranslateDocumentResponse_AppliedSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedSettings", ID: &iTranslationSettings, Members: &mTranslationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTranslateDocumentResponse_AppliedSettings})
+var sTranslateTextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslateTextRequest, Members: &mTranslateTextRequest, Type: smithy.ShapeTypeStructure, Ext: &eTranslateTextRequest})
+var sTranslateTextRequest_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString, Ext: &eTranslateTextRequest_Text})
+var sTranslateTextRequest_TerminologyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminologyNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eTranslateTextRequest_TerminologyNames})
+var sTranslateTextRequest_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateTextRequest_SourceLanguageCode})
+var sTranslateTextRequest_TargetLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateTextRequest_TargetLanguageCode})
+var sTranslateTextRequest_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &iTranslationSettings, Members: &mTranslationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTranslateTextRequest_Settings})
+var sTranslateTextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslateTextResponse, Members: &mTranslateTextResponse, Type: smithy.ShapeTypeStructure, Ext: &eTranslateTextResponse})
+var sTranslateTextResponse_TranslatedText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranslatedText", ID: &i_TranslatedTextString, Type: smithy.ShapeTypeString, Ext: &eTranslateTextResponse_TranslatedText})
+var sTranslateTextResponse_SourceLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateTextResponse_SourceLanguageCode})
+var sTranslateTextResponse_TargetLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetLanguageCode", ID: &i_LanguageCodeString, Type: smithy.ShapeTypeString, Ext: &eTranslateTextResponse_TargetLanguageCode})
+var sTranslateTextResponse_AppliedTerminologies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedTerminologies", ID: &i_AppliedTerminologyList, Members: &m_AppliedTerminologyList, Type: smithy.ShapeTypeList, Ext: &eTranslateTextResponse_AppliedTerminologies})
+var sTranslateTextResponse_AppliedSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedSettings", ID: &iTranslationSettings, Members: &mTranslationSettings, Type: smithy.ShapeTypeStructure, Ext: &eTranslateTextResponse_AppliedSettings})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateParallelDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateParallelDataRequest, Members: &mUpdateParallelDataRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateParallelDataRequest})
+var sUpdateParallelDataRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateParallelDataRequest_Name})
+var sUpdateParallelDataRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateParallelDataRequest_Description})
+var sUpdateParallelDataRequest_ParallelDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelDataConfig", ID: &iParallelDataConfig, Members: &mParallelDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateParallelDataRequest_ParallelDataConfig})
+var sUpdateParallelDataRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &eUpdateParallelDataRequest_ClientToken})
+var sUpdateParallelDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateParallelDataResponse, Members: &mUpdateParallelDataResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateParallelDataResponse})
+var sUpdateParallelDataResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateParallelDataResponse_Name})
+var sUpdateParallelDataResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iParallelDataStatus, Members: &mParallelDataStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateParallelDataResponse_Status})
+var sUpdateParallelDataResponse_LatestUpdateAttemptStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestUpdateAttemptStatus", ID: &iParallelDataStatus, Members: &mParallelDataStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateParallelDataResponse_LatestUpdateAttemptStatus})
+var sUpdateParallelDataResponse_LatestUpdateAttemptAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestUpdateAttemptAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateParallelDataResponse_LatestUpdateAttemptAt})
+
+var CreateParallelData = &sCreateParallelData
+
+var DeleteParallelData = &sDeleteParallelData
+
+var DeleteTerminology = &sDeleteTerminology
+
+var DescribeTextTranslationJob = &sDescribeTextTranslationJob
+
+var GetParallelData = &sGetParallelData
+
+var GetTerminology = &sGetTerminology
+
+var ImportTerminology = &sImportTerminology
+
+var ListLanguages = &sListLanguages
+
+var ListParallelData = &sListParallelData
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTerminologies = &sListTerminologies
+
+var ListTextTranslationJobs = &sListTextTranslationJobs
+
+var StartTextTranslationJob = &sStartTextTranslationJob
+
+var StopTextTranslationJob = &sStopTextTranslationJob
+
+var TagResource = &sTagResource
+
+var TranslateDocument = &sTranslateDocument
+
+var TranslateText = &sTranslateText
+
+var UntagResource = &sUntagResource
+
+var UpdateParallelData = &sUpdateParallelData
+
+var _AWSShineFrontendService_20170701 = &s_AWSShineFrontendService_20170701
+
+var AppliedTerminology = &sAppliedTerminology
+var AppliedTerminology_Name = &sAppliedTerminology_Name
+var AppliedTerminology_Terms = &sAppliedTerminology_Terms
+
+var _AppliedTerminologyList = &s_AppliedTerminologyList
+var _AppliedTerminologyList_member = &s_AppliedTerminologyList_member
+
+var _BoundedLengthString = &s_BoundedLengthString
+
+var Brevity = &sBrevity
+var Brevity_ON = &sBrevity_ON
+
+var _ClientTokenString = &s_ClientTokenString
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _ContentType = &s_ContentType
+
+var _Description = &s_Description
+
+var DetectedLanguageLowConfidenceException = &sDetectedLanguageLowConfidenceException
+var DetectedLanguageLowConfidenceException_Message = &sDetectedLanguageLowConfidenceException_Message
+var DetectedLanguageLowConfidenceException_DetectedLanguageCode = &sDetectedLanguageLowConfidenceException_DetectedLanguageCode
+
+var Directionality = &sDirectionality
+var Directionality_UNI = &sDirectionality_UNI
+var Directionality_MULTI = &sDirectionality_MULTI
+
+var DisplayLanguageCode = &sDisplayLanguageCode
+var DisplayLanguageCode_DE = &sDisplayLanguageCode_DE
+var DisplayLanguageCode_EN = &sDisplayLanguageCode_EN
+var DisplayLanguageCode_ES = &sDisplayLanguageCode_ES
+var DisplayLanguageCode_FR = &sDisplayLanguageCode_FR
+var DisplayLanguageCode_IT = &sDisplayLanguageCode_IT
+var DisplayLanguageCode_JA = &sDisplayLanguageCode_JA
+var DisplayLanguageCode_KO = &sDisplayLanguageCode_KO
+var DisplayLanguageCode_PT = &sDisplayLanguageCode_PT
+var DisplayLanguageCode_ZH = &sDisplayLanguageCode_ZH
+var DisplayLanguageCode_ZH_TW = &sDisplayLanguageCode_ZH_TW
+
+var Document = &sDocument
+var Document_Content = &sDocument_Content
+var Document_ContentType = &sDocument_ContentType
+
+var _DocumentContent = &s_DocumentContent
+
+var EncryptionKey = &sEncryptionKey
+var EncryptionKey_Type = &sEncryptionKey_Type
+var EncryptionKey_Id = &sEncryptionKey_Id
+
+var _EncryptionKeyID = &s_EncryptionKeyID
+
+var EncryptionKeyType = &sEncryptionKeyType
+var EncryptionKeyType_KMS = &sEncryptionKeyType_KMS
+
+var Formality = &sFormality
+var Formality_FORMAL = &sFormality_FORMAL
+var Formality_INFORMAL = &sFormality_INFORMAL
+
+var _IamRoleArn = &s_IamRoleArn
+
+var InputDataConfig = &sInputDataConfig
+var InputDataConfig_S3Uri = &sInputDataConfig_S3Uri
+var InputDataConfig_ContentType = &sInputDataConfig_ContentType
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidFilterException = &sInvalidFilterException
+var InvalidFilterException_Message = &sInvalidFilterException_Message
+
+var InvalidParameterValueException = &sInvalidParameterValueException
+var InvalidParameterValueException_Message = &sInvalidParameterValueException_Message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_Message = &sInvalidRequestException_Message
+
+var JobDetails = &sJobDetails
+var JobDetails_TranslatedDocumentsCount = &sJobDetails_TranslatedDocumentsCount
+var JobDetails_DocumentsWithErrorsCount = &sJobDetails_DocumentsWithErrorsCount
+var JobDetails_InputDocumentsCount = &sJobDetails_InputDocumentsCount
+
+var _JobId = &s_JobId
+
+var _JobName = &s_JobName
+
+var JobStatus = &sJobStatus
+var JobStatus_SUBMITTED = &sJobStatus_SUBMITTED
+var JobStatus_IN_PROGRESS = &sJobStatus_IN_PROGRESS
+var JobStatus_COMPLETED = &sJobStatus_COMPLETED
+var JobStatus_COMPLETED_WITH_ERROR = &sJobStatus_COMPLETED_WITH_ERROR
+var JobStatus_FAILED = &sJobStatus_FAILED
+var JobStatus_STOP_REQUESTED = &sJobStatus_STOP_REQUESTED
+var JobStatus_STOPPED = &sJobStatus_STOPPED
+
+var Language = &sLanguage
+var Language_LanguageName = &sLanguage_LanguageName
+var Language_LanguageCode = &sLanguage_LanguageCode
+
+var _LanguageCodeString = &s_LanguageCodeString
+
+var _LanguageCodeStringList = &s_LanguageCodeStringList
+var _LanguageCodeStringList_member = &s_LanguageCodeStringList_member
+
+var _LanguagesList = &s_LanguagesList
+var _LanguagesList_member = &s_LanguagesList_member
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var _LocalizedNameString = &s_LocalizedNameString
+
+var _Long = &s_Long
+
+var _MaxResultsInteger = &s_MaxResultsInteger
+
+var MergeStrategy = &sMergeStrategy
+var MergeStrategy_OVERWRITE = &sMergeStrategy_OVERWRITE
+
+var _NextToken = &s_NextToken
+
+var OutputDataConfig = &sOutputDataConfig
+var OutputDataConfig_S3Uri = &sOutputDataConfig_S3Uri
+var OutputDataConfig_EncryptionKey = &sOutputDataConfig_EncryptionKey
+
+var _ParallelDataArn = &s_ParallelDataArn
+
+var ParallelDataConfig = &sParallelDataConfig
+var ParallelDataConfig_S3Uri = &sParallelDataConfig_S3Uri
+var ParallelDataConfig_Format = &sParallelDataConfig_Format
+
+var ParallelDataDataLocation = &sParallelDataDataLocation
+var ParallelDataDataLocation_RepositoryType = &sParallelDataDataLocation_RepositoryType
+var ParallelDataDataLocation_Location = &sParallelDataDataLocation_Location
+
+var ParallelDataFormat = &sParallelDataFormat
+var ParallelDataFormat_TSV = &sParallelDataFormat_TSV
+var ParallelDataFormat_CSV = &sParallelDataFormat_CSV
+var ParallelDataFormat_TMX = &sParallelDataFormat_TMX
+
+var ParallelDataProperties = &sParallelDataProperties
+var ParallelDataProperties_Name = &sParallelDataProperties_Name
+var ParallelDataProperties_Arn = &sParallelDataProperties_Arn
+var ParallelDataProperties_Description = &sParallelDataProperties_Description
+var ParallelDataProperties_Status = &sParallelDataProperties_Status
+var ParallelDataProperties_SourceLanguageCode = &sParallelDataProperties_SourceLanguageCode
+var ParallelDataProperties_TargetLanguageCodes = &sParallelDataProperties_TargetLanguageCodes
+var ParallelDataProperties_ParallelDataConfig = &sParallelDataProperties_ParallelDataConfig
+var ParallelDataProperties_Message = &sParallelDataProperties_Message
+var ParallelDataProperties_ImportedDataSize = &sParallelDataProperties_ImportedDataSize
+var ParallelDataProperties_ImportedRecordCount = &sParallelDataProperties_ImportedRecordCount
+var ParallelDataProperties_FailedRecordCount = &sParallelDataProperties_FailedRecordCount
+var ParallelDataProperties_SkippedRecordCount = &sParallelDataProperties_SkippedRecordCount
+var ParallelDataProperties_EncryptionKey = &sParallelDataProperties_EncryptionKey
+var ParallelDataProperties_CreatedAt = &sParallelDataProperties_CreatedAt
+var ParallelDataProperties_LastUpdatedAt = &sParallelDataProperties_LastUpdatedAt
+var ParallelDataProperties_LatestUpdateAttemptStatus = &sParallelDataProperties_LatestUpdateAttemptStatus
+var ParallelDataProperties_LatestUpdateAttemptAt = &sParallelDataProperties_LatestUpdateAttemptAt
+
+var _ParallelDataPropertiesList = &s_ParallelDataPropertiesList
+var _ParallelDataPropertiesList_member = &s_ParallelDataPropertiesList_member
+
+var ParallelDataStatus = &sParallelDataStatus
+var ParallelDataStatus_CREATING = &sParallelDataStatus_CREATING
+var ParallelDataStatus_UPDATING = &sParallelDataStatus_UPDATING
+var ParallelDataStatus_ACTIVE = &sParallelDataStatus_ACTIVE
+var ParallelDataStatus_DELETING = &sParallelDataStatus_DELETING
+var ParallelDataStatus_FAILED = &sParallelDataStatus_FAILED
+
+var Profanity = &sProfanity
+var Profanity_MASK = &sProfanity_MASK
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceName = &s_ResourceName
+
+var _ResourceNameList = &s_ResourceNameList
+var _ResourceNameList_member = &s_ResourceNameList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _S3Uri = &s_S3Uri
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var _String = &s_String
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TargetLanguageCodeStringList = &s_TargetLanguageCodeStringList
+var _TargetLanguageCodeStringList_member = &s_TargetLanguageCodeStringList_member
+
+var Term = &sTerm
+var Term_SourceText = &sTerm_SourceText
+var Term_TargetText = &sTerm_TargetText
+
+var _TerminologyArn = &s_TerminologyArn
+
+var TerminologyData = &sTerminologyData
+var TerminologyData_File = &sTerminologyData_File
+var TerminologyData_Format = &sTerminologyData_Format
+var TerminologyData_Directionality = &sTerminologyData_Directionality
+
+var TerminologyDataFormat = &sTerminologyDataFormat
+var TerminologyDataFormat_CSV = &sTerminologyDataFormat_CSV
+var TerminologyDataFormat_TMX = &sTerminologyDataFormat_TMX
+var TerminologyDataFormat_TSV = &sTerminologyDataFormat_TSV
+
+var TerminologyDataLocation = &sTerminologyDataLocation
+var TerminologyDataLocation_RepositoryType = &sTerminologyDataLocation_RepositoryType
+var TerminologyDataLocation_Location = &sTerminologyDataLocation_Location
+
+var _TerminologyFile = &s_TerminologyFile
+
+var TerminologyProperties = &sTerminologyProperties
+var TerminologyProperties_Name = &sTerminologyProperties_Name
+var TerminologyProperties_Description = &sTerminologyProperties_Description
+var TerminologyProperties_Arn = &sTerminologyProperties_Arn
+var TerminologyProperties_SourceLanguageCode = &sTerminologyProperties_SourceLanguageCode
+var TerminologyProperties_TargetLanguageCodes = &sTerminologyProperties_TargetLanguageCodes
+var TerminologyProperties_EncryptionKey = &sTerminologyProperties_EncryptionKey
+var TerminologyProperties_SizeBytes = &sTerminologyProperties_SizeBytes
+var TerminologyProperties_TermCount = &sTerminologyProperties_TermCount
+var TerminologyProperties_CreatedAt = &sTerminologyProperties_CreatedAt
+var TerminologyProperties_LastUpdatedAt = &sTerminologyProperties_LastUpdatedAt
+var TerminologyProperties_Directionality = &sTerminologyProperties_Directionality
+var TerminologyProperties_Message = &sTerminologyProperties_Message
+var TerminologyProperties_SkippedTermCount = &sTerminologyProperties_SkippedTermCount
+var TerminologyProperties_Format = &sTerminologyProperties_Format
+
+var _TerminologyPropertiesList = &s_TerminologyPropertiesList
+var _TerminologyPropertiesList_member = &s_TerminologyPropertiesList_member
+
+var _TermList = &s_TermList
+var _TermList_member = &s_TermList_member
+
+var TextSizeLimitExceededException = &sTextSizeLimitExceededException
+var TextSizeLimitExceededException_Message = &sTextSizeLimitExceededException_Message
+
+var TextTranslationJobFilter = &sTextTranslationJobFilter
+var TextTranslationJobFilter_JobName = &sTextTranslationJobFilter_JobName
+var TextTranslationJobFilter_JobStatus = &sTextTranslationJobFilter_JobStatus
+var TextTranslationJobFilter_SubmittedBeforeTime = &sTextTranslationJobFilter_SubmittedBeforeTime
+var TextTranslationJobFilter_SubmittedAfterTime = &sTextTranslationJobFilter_SubmittedAfterTime
+
+var TextTranslationJobProperties = &sTextTranslationJobProperties
+var TextTranslationJobProperties_JobId = &sTextTranslationJobProperties_JobId
+var TextTranslationJobProperties_JobName = &sTextTranslationJobProperties_JobName
+var TextTranslationJobProperties_JobStatus = &sTextTranslationJobProperties_JobStatus
+var TextTranslationJobProperties_JobDetails = &sTextTranslationJobProperties_JobDetails
+var TextTranslationJobProperties_SourceLanguageCode = &sTextTranslationJobProperties_SourceLanguageCode
+var TextTranslationJobProperties_TargetLanguageCodes = &sTextTranslationJobProperties_TargetLanguageCodes
+var TextTranslationJobProperties_TerminologyNames = &sTextTranslationJobProperties_TerminologyNames
+var TextTranslationJobProperties_ParallelDataNames = &sTextTranslationJobProperties_ParallelDataNames
+var TextTranslationJobProperties_Message = &sTextTranslationJobProperties_Message
+var TextTranslationJobProperties_SubmittedTime = &sTextTranslationJobProperties_SubmittedTime
+var TextTranslationJobProperties_EndTime = &sTextTranslationJobProperties_EndTime
+var TextTranslationJobProperties_InputDataConfig = &sTextTranslationJobProperties_InputDataConfig
+var TextTranslationJobProperties_OutputDataConfig = &sTextTranslationJobProperties_OutputDataConfig
+var TextTranslationJobProperties_DataAccessRoleArn = &sTextTranslationJobProperties_DataAccessRoleArn
+var TextTranslationJobProperties_Settings = &sTextTranslationJobProperties_Settings
+
+var _TextTranslationJobPropertiesList = &s_TextTranslationJobPropertiesList
+var _TextTranslationJobPropertiesList_member = &s_TextTranslationJobPropertiesList_member
+
+var _Timestamp = &s_Timestamp
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+var TooManyTagsException_ResourceArn = &sTooManyTagsException_ResourceArn
+
+var TranslatedDocument = &sTranslatedDocument
+var TranslatedDocument_Content = &sTranslatedDocument_Content
+
+var _TranslatedDocumentContent = &s_TranslatedDocumentContent
+
+var _TranslatedTextString = &s_TranslatedTextString
+
+var TranslationSettings = &sTranslationSettings
+var TranslationSettings_Formality = &sTranslationSettings_Formality
+var TranslationSettings_Profanity = &sTranslationSettings_Profanity
+var TranslationSettings_Brevity = &sTranslationSettings_Brevity
+
+var _UnboundedLengthString = &s_UnboundedLengthString
+
+var UnsupportedDisplayLanguageCodeException = &sUnsupportedDisplayLanguageCodeException
+var UnsupportedDisplayLanguageCodeException_Message = &sUnsupportedDisplayLanguageCodeException_Message
+var UnsupportedDisplayLanguageCodeException_DisplayLanguageCode = &sUnsupportedDisplayLanguageCodeException_DisplayLanguageCode
+
+var UnsupportedLanguagePairException = &sUnsupportedLanguagePairException
+var UnsupportedLanguagePairException_Message = &sUnsupportedLanguagePairException_Message
+var UnsupportedLanguagePairException_SourceLanguageCode = &sUnsupportedLanguagePairException_SourceLanguageCode
+var UnsupportedLanguagePairException_TargetLanguageCode = &sUnsupportedLanguagePairException_TargetLanguageCode
+
+var CreateParallelDataRequest = &sCreateParallelDataRequest
+var CreateParallelDataRequest_Name = &sCreateParallelDataRequest_Name
+var CreateParallelDataRequest_Description = &sCreateParallelDataRequest_Description
+var CreateParallelDataRequest_ParallelDataConfig = &sCreateParallelDataRequest_ParallelDataConfig
+var CreateParallelDataRequest_EncryptionKey = &sCreateParallelDataRequest_EncryptionKey
+var CreateParallelDataRequest_ClientToken = &sCreateParallelDataRequest_ClientToken
+var CreateParallelDataRequest_Tags = &sCreateParallelDataRequest_Tags
+
+var CreateParallelDataResponse = &sCreateParallelDataResponse
+var CreateParallelDataResponse_Name = &sCreateParallelDataResponse_Name
+var CreateParallelDataResponse_Status = &sCreateParallelDataResponse_Status
+
+var DeleteParallelDataRequest = &sDeleteParallelDataRequest
+var DeleteParallelDataRequest_Name = &sDeleteParallelDataRequest_Name
+
+var DeleteParallelDataResponse = &sDeleteParallelDataResponse
+var DeleteParallelDataResponse_Name = &sDeleteParallelDataResponse_Name
+var DeleteParallelDataResponse_Status = &sDeleteParallelDataResponse_Status
+
+var DeleteTerminologyRequest = &sDeleteTerminologyRequest
+var DeleteTerminologyRequest_Name = &sDeleteTerminologyRequest_Name
+
+var DescribeTextTranslationJobRequest = &sDescribeTextTranslationJobRequest
+var DescribeTextTranslationJobRequest_JobId = &sDescribeTextTranslationJobRequest_JobId
+
+var DescribeTextTranslationJobResponse = &sDescribeTextTranslationJobResponse
+var DescribeTextTranslationJobResponse_TextTranslationJobProperties = &sDescribeTextTranslationJobResponse_TextTranslationJobProperties
+
+var GetParallelDataRequest = &sGetParallelDataRequest
+var GetParallelDataRequest_Name = &sGetParallelDataRequest_Name
+
+var GetParallelDataResponse = &sGetParallelDataResponse
+var GetParallelDataResponse_ParallelDataProperties = &sGetParallelDataResponse_ParallelDataProperties
+var GetParallelDataResponse_DataLocation = &sGetParallelDataResponse_DataLocation
+var GetParallelDataResponse_AuxiliaryDataLocation = &sGetParallelDataResponse_AuxiliaryDataLocation
+var GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation = &sGetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation
+
+var GetTerminologyRequest = &sGetTerminologyRequest
+var GetTerminologyRequest_Name = &sGetTerminologyRequest_Name
+var GetTerminologyRequest_TerminologyDataFormat = &sGetTerminologyRequest_TerminologyDataFormat
+
+var GetTerminologyResponse = &sGetTerminologyResponse
+var GetTerminologyResponse_TerminologyProperties = &sGetTerminologyResponse_TerminologyProperties
+var GetTerminologyResponse_TerminologyDataLocation = &sGetTerminologyResponse_TerminologyDataLocation
+var GetTerminologyResponse_AuxiliaryDataLocation = &sGetTerminologyResponse_AuxiliaryDataLocation
+
+var ImportTerminologyRequest = &sImportTerminologyRequest
+var ImportTerminologyRequest_Name = &sImportTerminologyRequest_Name
+var ImportTerminologyRequest_MergeStrategy = &sImportTerminologyRequest_MergeStrategy
+var ImportTerminologyRequest_Description = &sImportTerminologyRequest_Description
+var ImportTerminologyRequest_TerminologyData = &sImportTerminologyRequest_TerminologyData
+var ImportTerminologyRequest_EncryptionKey = &sImportTerminologyRequest_EncryptionKey
+var ImportTerminologyRequest_Tags = &sImportTerminologyRequest_Tags
+
+var ImportTerminologyResponse = &sImportTerminologyResponse
+var ImportTerminologyResponse_TerminologyProperties = &sImportTerminologyResponse_TerminologyProperties
+var ImportTerminologyResponse_AuxiliaryDataLocation = &sImportTerminologyResponse_AuxiliaryDataLocation
+
+var ListLanguagesRequest = &sListLanguagesRequest
+var ListLanguagesRequest_DisplayLanguageCode = &sListLanguagesRequest_DisplayLanguageCode
+var ListLanguagesRequest_NextToken = &sListLanguagesRequest_NextToken
+var ListLanguagesRequest_MaxResults = &sListLanguagesRequest_MaxResults
+
+var ListLanguagesResponse = &sListLanguagesResponse
+var ListLanguagesResponse_Languages = &sListLanguagesResponse_Languages
+var ListLanguagesResponse_DisplayLanguageCode = &sListLanguagesResponse_DisplayLanguageCode
+var ListLanguagesResponse_NextToken = &sListLanguagesResponse_NextToken
+
+var ListParallelDataRequest = &sListParallelDataRequest
+var ListParallelDataRequest_NextToken = &sListParallelDataRequest_NextToken
+var ListParallelDataRequest_MaxResults = &sListParallelDataRequest_MaxResults
+
+var ListParallelDataResponse = &sListParallelDataResponse
+var ListParallelDataResponse_ParallelDataPropertiesList = &sListParallelDataResponse_ParallelDataPropertiesList
+var ListParallelDataResponse_NextToken = &sListParallelDataResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListTerminologiesRequest = &sListTerminologiesRequest
+var ListTerminologiesRequest_NextToken = &sListTerminologiesRequest_NextToken
+var ListTerminologiesRequest_MaxResults = &sListTerminologiesRequest_MaxResults
+
+var ListTerminologiesResponse = &sListTerminologiesResponse
+var ListTerminologiesResponse_TerminologyPropertiesList = &sListTerminologiesResponse_TerminologyPropertiesList
+var ListTerminologiesResponse_NextToken = &sListTerminologiesResponse_NextToken
+
+var ListTextTranslationJobsRequest = &sListTextTranslationJobsRequest
+var ListTextTranslationJobsRequest_Filter = &sListTextTranslationJobsRequest_Filter
+var ListTextTranslationJobsRequest_NextToken = &sListTextTranslationJobsRequest_NextToken
+var ListTextTranslationJobsRequest_MaxResults = &sListTextTranslationJobsRequest_MaxResults
+
+var ListTextTranslationJobsResponse = &sListTextTranslationJobsResponse
+var ListTextTranslationJobsResponse_TextTranslationJobPropertiesList = &sListTextTranslationJobsResponse_TextTranslationJobPropertiesList
+var ListTextTranslationJobsResponse_NextToken = &sListTextTranslationJobsResponse_NextToken
+
+var StartTextTranslationJobRequest = &sStartTextTranslationJobRequest
+var StartTextTranslationJobRequest_JobName = &sStartTextTranslationJobRequest_JobName
+var StartTextTranslationJobRequest_InputDataConfig = &sStartTextTranslationJobRequest_InputDataConfig
+var StartTextTranslationJobRequest_OutputDataConfig = &sStartTextTranslationJobRequest_OutputDataConfig
+var StartTextTranslationJobRequest_DataAccessRoleArn = &sStartTextTranslationJobRequest_DataAccessRoleArn
+var StartTextTranslationJobRequest_SourceLanguageCode = &sStartTextTranslationJobRequest_SourceLanguageCode
+var StartTextTranslationJobRequest_TargetLanguageCodes = &sStartTextTranslationJobRequest_TargetLanguageCodes
+var StartTextTranslationJobRequest_TerminologyNames = &sStartTextTranslationJobRequest_TerminologyNames
+var StartTextTranslationJobRequest_ParallelDataNames = &sStartTextTranslationJobRequest_ParallelDataNames
+var StartTextTranslationJobRequest_ClientToken = &sStartTextTranslationJobRequest_ClientToken
+var StartTextTranslationJobRequest_Settings = &sStartTextTranslationJobRequest_Settings
+
+var StartTextTranslationJobResponse = &sStartTextTranslationJobResponse
+var StartTextTranslationJobResponse_JobId = &sStartTextTranslationJobResponse_JobId
+var StartTextTranslationJobResponse_JobStatus = &sStartTextTranslationJobResponse_JobStatus
+
+var StopTextTranslationJobRequest = &sStopTextTranslationJobRequest
+var StopTextTranslationJobRequest_JobId = &sStopTextTranslationJobRequest_JobId
+
+var StopTextTranslationJobResponse = &sStopTextTranslationJobResponse
+var StopTextTranslationJobResponse_JobId = &sStopTextTranslationJobResponse_JobId
+var StopTextTranslationJobResponse_JobStatus = &sStopTextTranslationJobResponse_JobStatus
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var TranslateDocumentRequest = &sTranslateDocumentRequest
+var TranslateDocumentRequest_Document = &sTranslateDocumentRequest_Document
+var TranslateDocumentRequest_TerminologyNames = &sTranslateDocumentRequest_TerminologyNames
+var TranslateDocumentRequest_SourceLanguageCode = &sTranslateDocumentRequest_SourceLanguageCode
+var TranslateDocumentRequest_TargetLanguageCode = &sTranslateDocumentRequest_TargetLanguageCode
+var TranslateDocumentRequest_Settings = &sTranslateDocumentRequest_Settings
+
+var TranslateDocumentResponse = &sTranslateDocumentResponse
+var TranslateDocumentResponse_TranslatedDocument = &sTranslateDocumentResponse_TranslatedDocument
+var TranslateDocumentResponse_SourceLanguageCode = &sTranslateDocumentResponse_SourceLanguageCode
+var TranslateDocumentResponse_TargetLanguageCode = &sTranslateDocumentResponse_TargetLanguageCode
+var TranslateDocumentResponse_AppliedTerminologies = &sTranslateDocumentResponse_AppliedTerminologies
+var TranslateDocumentResponse_AppliedSettings = &sTranslateDocumentResponse_AppliedSettings
+
+var TranslateTextRequest = &sTranslateTextRequest
+var TranslateTextRequest_Text = &sTranslateTextRequest_Text
+var TranslateTextRequest_TerminologyNames = &sTranslateTextRequest_TerminologyNames
+var TranslateTextRequest_SourceLanguageCode = &sTranslateTextRequest_SourceLanguageCode
+var TranslateTextRequest_TargetLanguageCode = &sTranslateTextRequest_TargetLanguageCode
+var TranslateTextRequest_Settings = &sTranslateTextRequest_Settings
+
+var TranslateTextResponse = &sTranslateTextResponse
+var TranslateTextResponse_TranslatedText = &sTranslateTextResponse_TranslatedText
+var TranslateTextResponse_SourceLanguageCode = &sTranslateTextResponse_SourceLanguageCode
+var TranslateTextResponse_TargetLanguageCode = &sTranslateTextResponse_TargetLanguageCode
+var TranslateTextResponse_AppliedTerminologies = &sTranslateTextResponse_AppliedTerminologies
+var TranslateTextResponse_AppliedSettings = &sTranslateTextResponse_AppliedSettings
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateParallelDataRequest = &sUpdateParallelDataRequest
+var UpdateParallelDataRequest_Name = &sUpdateParallelDataRequest_Name
+var UpdateParallelDataRequest_Description = &sUpdateParallelDataRequest_Description
+var UpdateParallelDataRequest_ParallelDataConfig = &sUpdateParallelDataRequest_ParallelDataConfig
+var UpdateParallelDataRequest_ClientToken = &sUpdateParallelDataRequest_ClientToken
+
+var UpdateParallelDataResponse = &sUpdateParallelDataResponse
+var UpdateParallelDataResponse_Name = &sUpdateParallelDataResponse_Name
+var UpdateParallelDataResponse_Status = &sUpdateParallelDataResponse_Status
+var UpdateParallelDataResponse_LatestUpdateAttemptStatus = &sUpdateParallelDataResponse_LatestUpdateAttemptStatus
+var UpdateParallelDataResponse_LatestUpdateAttemptAt = &sUpdateParallelDataResponse_LatestUpdateAttemptAt
+
+var AWSShineFrontendService_20170701 = &smithy.ServiceSchema{Schema: &s_AWSShineFrontendService_20170701, Version: "2017-07-01"}

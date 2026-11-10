@@ -4,3222 +4,3182 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "AssociateChannelFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eAssociateChannelFlow                                                        smithy.SchemaExtensions
+	eBatchCreateChannelMembership                                                smithy.SchemaExtensions
+	eChannelFlowCallback                                                         smithy.SchemaExtensions
+	eCreateChannel                                                               smithy.SchemaExtensions
+	eCreateChannelBan                                                            smithy.SchemaExtensions
+	eCreateChannelFlow                                                           smithy.SchemaExtensions
+	eCreateChannelMembership                                                     smithy.SchemaExtensions
+	eCreateChannelModerator                                                      smithy.SchemaExtensions
+	eDeleteChannel                                                               smithy.SchemaExtensions
+	eDeleteChannelBan                                                            smithy.SchemaExtensions
+	eDeleteChannelFlow                                                           smithy.SchemaExtensions
+	eDeleteChannelMembership                                                     smithy.SchemaExtensions
+	eDeleteChannelMessage                                                        smithy.SchemaExtensions
+	eDeleteChannelModerator                                                      smithy.SchemaExtensions
+	eDeleteMessagingStreamingConfigurations                                      smithy.SchemaExtensions
+	eDescribeChannel                                                             smithy.SchemaExtensions
+	eDescribeChannelBan                                                          smithy.SchemaExtensions
+	eDescribeChannelFlow                                                         smithy.SchemaExtensions
+	eDescribeChannelMembership                                                   smithy.SchemaExtensions
+	eDescribeChannelMembershipForAppInstanceUser                                 smithy.SchemaExtensions
+	eDescribeChannelModeratedByAppInstanceUser                                   smithy.SchemaExtensions
+	eDescribeChannelModerator                                                    smithy.SchemaExtensions
+	eDisassociateChannelFlow                                                     smithy.SchemaExtensions
+	eGetChannelMembershipPreferences                                             smithy.SchemaExtensions
+	eGetChannelMessage                                                           smithy.SchemaExtensions
+	eGetChannelMessageStatus                                                     smithy.SchemaExtensions
+	eGetMessagingSessionEndpoint                                                 smithy.SchemaExtensions
+	eGetMessagingStreamingConfigurations                                         smithy.SchemaExtensions
+	eListChannelBans                                                             smithy.SchemaExtensions
+	eListChannelFlows                                                            smithy.SchemaExtensions
+	eListChannelMemberships                                                      smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUser                                    smithy.SchemaExtensions
+	eListChannelMessages                                                         smithy.SchemaExtensions
+	eListChannelModerators                                                       smithy.SchemaExtensions
+	eListChannels                                                                smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlow                                       smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUser                                      smithy.SchemaExtensions
+	eListSubChannels                                                             smithy.SchemaExtensions
+	eListTagsForResource                                                         smithy.SchemaExtensions
+	ePutChannelExpirationSettings                                                smithy.SchemaExtensions
+	ePutChannelMembershipPreferences                                             smithy.SchemaExtensions
+	ePutMessagingStreamingConfigurations                                         smithy.SchemaExtensions
+	eRedactChannelMessage                                                        smithy.SchemaExtensions
+	eSearchChannels                                                              smithy.SchemaExtensions
+	eSendChannelMessage                                                          smithy.SchemaExtensions
+	eTagResource                                                                 smithy.SchemaExtensions
+	eUntagResource                                                               smithy.SchemaExtensions
+	eUpdateChannel                                                               smithy.SchemaExtensions
+	eUpdateChannelFlow                                                           smithy.SchemaExtensions
+	eUpdateChannelMessage                                                        smithy.SchemaExtensions
+	eUpdateChannelReadMarker                                                     smithy.SchemaExtensions
+	e_ChimeMessagingService                                                      smithy.SchemaExtensions
+	eAllowNotifications                                                          smithy.SchemaExtensions
+	eAllowNotifications_ALL                                                      smithy.SchemaExtensions
+	eAllowNotifications_NONE                                                     smithy.SchemaExtensions
+	eAllowNotifications_FILTERED                                                 smithy.SchemaExtensions
+	eAppInstanceUserMembershipSummary                                            smithy.SchemaExtensions
+	eAppInstanceUserMembershipSummary_Type                                       smithy.SchemaExtensions
+	eAppInstanceUserMembershipSummary_ReadMarkerTimestamp                        smithy.SchemaExtensions
+	eAppInstanceUserMembershipSummary_SubChannelId                               smithy.SchemaExtensions
+	eBadRequestException                                                         smithy.SchemaExtensions
+	eBadRequestException_Code                                                    smithy.SchemaExtensions
+	eBadRequestException_Message                                                 smithy.SchemaExtensions
+	eBatchChannelMemberships                                                     smithy.SchemaExtensions
+	eBatchChannelMemberships_InvitedBy                                           smithy.SchemaExtensions
+	eBatchChannelMemberships_Type                                                smithy.SchemaExtensions
+	eBatchChannelMemberships_Members                                             smithy.SchemaExtensions
+	eBatchChannelMemberships_ChannelArn                                          smithy.SchemaExtensions
+	eBatchChannelMemberships_SubChannelId                                        smithy.SchemaExtensions
+	eBatchCreateChannelMembershipError                                           smithy.SchemaExtensions
+	eBatchCreateChannelMembershipError_MemberArn                                 smithy.SchemaExtensions
+	eBatchCreateChannelMembershipError_ErrorCode                                 smithy.SchemaExtensions
+	eBatchCreateChannelMembershipError_ErrorMessage                              smithy.SchemaExtensions
+	e_BatchCreateChannelMembershipErrors                                         smithy.SchemaExtensions
+	e_BatchCreateChannelMembershipErrors_member                                  smithy.SchemaExtensions
+	e_CallbackIdType                                                             smithy.SchemaExtensions
+	eChannel                                                                     smithy.SchemaExtensions
+	eChannel_Name                                                                smithy.SchemaExtensions
+	eChannel_ChannelArn                                                          smithy.SchemaExtensions
+	eChannel_Mode                                                                smithy.SchemaExtensions
+	eChannel_Privacy                                                             smithy.SchemaExtensions
+	eChannel_Metadata                                                            smithy.SchemaExtensions
+	eChannel_CreatedBy                                                           smithy.SchemaExtensions
+	eChannel_CreatedTimestamp                                                    smithy.SchemaExtensions
+	eChannel_LastMessageTimestamp                                                smithy.SchemaExtensions
+	eChannel_LastUpdatedTimestamp                                                smithy.SchemaExtensions
+	eChannel_ChannelFlowArn                                                      smithy.SchemaExtensions
+	eChannel_ElasticChannelConfiguration                                         smithy.SchemaExtensions
+	eChannel_ExpirationSettings                                                  smithy.SchemaExtensions
+	eChannelAssociatedWithFlowSummary                                            smithy.SchemaExtensions
+	eChannelAssociatedWithFlowSummary_Name                                       smithy.SchemaExtensions
+	eChannelAssociatedWithFlowSummary_ChannelArn                                 smithy.SchemaExtensions
+	eChannelAssociatedWithFlowSummary_Mode                                       smithy.SchemaExtensions
+	eChannelAssociatedWithFlowSummary_Privacy                                    smithy.SchemaExtensions
+	eChannelAssociatedWithFlowSummary_Metadata                                   smithy.SchemaExtensions
+	e_ChannelAssociatedWithFlowSummaryList                                       smithy.SchemaExtensions
+	e_ChannelAssociatedWithFlowSummaryList_member                                smithy.SchemaExtensions
+	eChannelBan                                                                  smithy.SchemaExtensions
+	eChannelBan_Member                                                           smithy.SchemaExtensions
+	eChannelBan_ChannelArn                                                       smithy.SchemaExtensions
+	eChannelBan_CreatedTimestamp                                                 smithy.SchemaExtensions
+	eChannelBan_CreatedBy                                                        smithy.SchemaExtensions
+	eChannelBanSummary                                                           smithy.SchemaExtensions
+	eChannelBanSummary_Member                                                    smithy.SchemaExtensions
+	e_ChannelBanSummaryList                                                      smithy.SchemaExtensions
+	e_ChannelBanSummaryList_member                                               smithy.SchemaExtensions
+	eChannelFlow                                                                 smithy.SchemaExtensions
+	eChannelFlow_ChannelFlowArn                                                  smithy.SchemaExtensions
+	eChannelFlow_Processors                                                      smithy.SchemaExtensions
+	eChannelFlow_Name                                                            smithy.SchemaExtensions
+	eChannelFlow_CreatedTimestamp                                                smithy.SchemaExtensions
+	eChannelFlow_LastUpdatedTimestamp                                            smithy.SchemaExtensions
+	e_ChannelFlowExecutionOrder                                                  smithy.SchemaExtensions
+	eChannelFlowSummary                                                          smithy.SchemaExtensions
+	eChannelFlowSummary_ChannelFlowArn                                           smithy.SchemaExtensions
+	eChannelFlowSummary_Name                                                     smithy.SchemaExtensions
+	eChannelFlowSummary_Processors                                               smithy.SchemaExtensions
+	e_ChannelFlowSummaryList                                                     smithy.SchemaExtensions
+	e_ChannelFlowSummaryList_member                                              smithy.SchemaExtensions
+	e_ChannelId                                                                  smithy.SchemaExtensions
+	e_ChannelMemberArns                                                          smithy.SchemaExtensions
+	e_ChannelMemberArns_member                                                   smithy.SchemaExtensions
+	eChannelMembership                                                           smithy.SchemaExtensions
+	eChannelMembership_InvitedBy                                                 smithy.SchemaExtensions
+	eChannelMembership_Type                                                      smithy.SchemaExtensions
+	eChannelMembership_Member                                                    smithy.SchemaExtensions
+	eChannelMembership_ChannelArn                                                smithy.SchemaExtensions
+	eChannelMembership_CreatedTimestamp                                          smithy.SchemaExtensions
+	eChannelMembership_LastUpdatedTimestamp                                      smithy.SchemaExtensions
+	eChannelMembership_SubChannelId                                              smithy.SchemaExtensions
+	eChannelMembershipForAppInstanceUserSummary                                  smithy.SchemaExtensions
+	eChannelMembershipForAppInstanceUserSummary_ChannelSummary                   smithy.SchemaExtensions
+	eChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary smithy.SchemaExtensions
+	e_ChannelMembershipForAppInstanceUserSummaryList                             smithy.SchemaExtensions
+	e_ChannelMembershipForAppInstanceUserSummaryList_member                      smithy.SchemaExtensions
+	eChannelMembershipPreferences                                                smithy.SchemaExtensions
+	eChannelMembershipPreferences_PushNotifications                              smithy.SchemaExtensions
+	eChannelMembershipSummary                                                    smithy.SchemaExtensions
+	eChannelMembershipSummary_Member                                             smithy.SchemaExtensions
+	e_ChannelMembershipSummaryList                                               smithy.SchemaExtensions
+	e_ChannelMembershipSummaryList_member                                        smithy.SchemaExtensions
+	eChannelMembershipType                                                       smithy.SchemaExtensions
+	eChannelMembershipType_DEFAULT                                               smithy.SchemaExtensions
+	eChannelMembershipType_HIDDEN                                                smithy.SchemaExtensions
+	eChannelMessage                                                              smithy.SchemaExtensions
+	eChannelMessage_ChannelArn                                                   smithy.SchemaExtensions
+	eChannelMessage_MessageId                                                    smithy.SchemaExtensions
+	eChannelMessage_Content                                                      smithy.SchemaExtensions
+	eChannelMessage_Metadata                                                     smithy.SchemaExtensions
+	eChannelMessage_Type                                                         smithy.SchemaExtensions
+	eChannelMessage_CreatedTimestamp                                             smithy.SchemaExtensions
+	eChannelMessage_LastEditedTimestamp                                          smithy.SchemaExtensions
+	eChannelMessage_LastUpdatedTimestamp                                         smithy.SchemaExtensions
+	eChannelMessage_Sender                                                       smithy.SchemaExtensions
+	eChannelMessage_Redacted                                                     smithy.SchemaExtensions
+	eChannelMessage_Persistence                                                  smithy.SchemaExtensions
+	eChannelMessage_Status                                                       smithy.SchemaExtensions
+	eChannelMessage_MessageAttributes                                            smithy.SchemaExtensions
+	eChannelMessage_SubChannelId                                                 smithy.SchemaExtensions
+	eChannelMessage_ContentType                                                  smithy.SchemaExtensions
+	eChannelMessage_Target                                                       smithy.SchemaExtensions
+	eChannelMessageCallback                                                      smithy.SchemaExtensions
+	eChannelMessageCallback_MessageId                                            smithy.SchemaExtensions
+	eChannelMessageCallback_Content                                              smithy.SchemaExtensions
+	eChannelMessageCallback_Metadata                                             smithy.SchemaExtensions
+	eChannelMessageCallback_PushNotification                                     smithy.SchemaExtensions
+	eChannelMessageCallback_MessageAttributes                                    smithy.SchemaExtensions
+	eChannelMessageCallback_SubChannelId                                         smithy.SchemaExtensions
+	eChannelMessageCallback_ContentType                                          smithy.SchemaExtensions
+	eChannelMessagePersistenceType                                               smithy.SchemaExtensions
+	eChannelMessagePersistenceType_PERSISTENT                                    smithy.SchemaExtensions
+	eChannelMessagePersistenceType_NON_PERSISTENT                                smithy.SchemaExtensions
+	eChannelMessageStatus                                                        smithy.SchemaExtensions
+	eChannelMessageStatus_SENT                                                   smithy.SchemaExtensions
+	eChannelMessageStatus_PENDING                                                smithy.SchemaExtensions
+	eChannelMessageStatus_FAILED                                                 smithy.SchemaExtensions
+	eChannelMessageStatus_DENIED                                                 smithy.SchemaExtensions
+	eChannelMessageStatusStructure                                               smithy.SchemaExtensions
+	eChannelMessageStatusStructure_Value                                         smithy.SchemaExtensions
+	eChannelMessageStatusStructure_Detail                                        smithy.SchemaExtensions
+	eChannelMessageSummary                                                       smithy.SchemaExtensions
+	eChannelMessageSummary_MessageId                                             smithy.SchemaExtensions
+	eChannelMessageSummary_Content                                               smithy.SchemaExtensions
+	eChannelMessageSummary_Metadata                                              smithy.SchemaExtensions
+	eChannelMessageSummary_Type                                                  smithy.SchemaExtensions
+	eChannelMessageSummary_CreatedTimestamp                                      smithy.SchemaExtensions
+	eChannelMessageSummary_LastUpdatedTimestamp                                  smithy.SchemaExtensions
+	eChannelMessageSummary_LastEditedTimestamp                                   smithy.SchemaExtensions
+	eChannelMessageSummary_Sender                                                smithy.SchemaExtensions
+	eChannelMessageSummary_Redacted                                              smithy.SchemaExtensions
+	eChannelMessageSummary_Status                                                smithy.SchemaExtensions
+	eChannelMessageSummary_MessageAttributes                                     smithy.SchemaExtensions
+	eChannelMessageSummary_ContentType                                           smithy.SchemaExtensions
+	eChannelMessageSummary_Target                                                smithy.SchemaExtensions
+	e_ChannelMessageSummaryList                                                  smithy.SchemaExtensions
+	e_ChannelMessageSummaryList_member                                           smithy.SchemaExtensions
+	eChannelMessageType                                                          smithy.SchemaExtensions
+	eChannelMessageType_STANDARD                                                 smithy.SchemaExtensions
+	eChannelMessageType_CONTROL                                                  smithy.SchemaExtensions
+	eChannelMode                                                                 smithy.SchemaExtensions
+	eChannelMode_UNRESTRICTED                                                    smithy.SchemaExtensions
+	eChannelMode_RESTRICTED                                                      smithy.SchemaExtensions
+	eChannelModeratedByAppInstanceUserSummary                                    smithy.SchemaExtensions
+	eChannelModeratedByAppInstanceUserSummary_ChannelSummary                     smithy.SchemaExtensions
+	e_ChannelModeratedByAppInstanceUserSummaryList                               smithy.SchemaExtensions
+	e_ChannelModeratedByAppInstanceUserSummaryList_member                        smithy.SchemaExtensions
+	eChannelModerator                                                            smithy.SchemaExtensions
+	eChannelModerator_Moderator                                                  smithy.SchemaExtensions
+	eChannelModerator_ChannelArn                                                 smithy.SchemaExtensions
+	eChannelModerator_CreatedTimestamp                                           smithy.SchemaExtensions
+	eChannelModerator_CreatedBy                                                  smithy.SchemaExtensions
+	e_ChannelModeratorArns                                                       smithy.SchemaExtensions
+	e_ChannelModeratorArns_member                                                smithy.SchemaExtensions
+	eChannelModeratorSummary                                                     smithy.SchemaExtensions
+	eChannelModeratorSummary_Moderator                                           smithy.SchemaExtensions
+	e_ChannelModeratorSummaryList                                                smithy.SchemaExtensions
+	e_ChannelModeratorSummaryList_member                                         smithy.SchemaExtensions
+	eChannelPrivacy                                                              smithy.SchemaExtensions
+	eChannelPrivacy_PUBLIC                                                       smithy.SchemaExtensions
+	eChannelPrivacy_PRIVATE                                                      smithy.SchemaExtensions
+	eChannelSummary                                                              smithy.SchemaExtensions
+	eChannelSummary_Name                                                         smithy.SchemaExtensions
+	eChannelSummary_ChannelArn                                                   smithy.SchemaExtensions
+	eChannelSummary_Mode                                                         smithy.SchemaExtensions
+	eChannelSummary_Privacy                                                      smithy.SchemaExtensions
+	eChannelSummary_Metadata                                                     smithy.SchemaExtensions
+	eChannelSummary_LastMessageTimestamp                                         smithy.SchemaExtensions
+	e_ChannelSummaryList                                                         smithy.SchemaExtensions
+	e_ChannelSummaryList_member                                                  smithy.SchemaExtensions
+	e_ChimeArn                                                                   smithy.SchemaExtensions
+	e_ClientRequestToken                                                         smithy.SchemaExtensions
+	eConflictException                                                           smithy.SchemaExtensions
+	eConflictException_Code                                                      smithy.SchemaExtensions
+	eConflictException_Message                                                   smithy.SchemaExtensions
+	e_Content                                                                    smithy.SchemaExtensions
+	e_ContentType                                                                smithy.SchemaExtensions
+	eElasticChannelConfiguration                                                 smithy.SchemaExtensions
+	eElasticChannelConfiguration_MaximumSubChannels                              smithy.SchemaExtensions
+	eElasticChannelConfiguration_TargetMembershipsPerSubChannel                  smithy.SchemaExtensions
+	eElasticChannelConfiguration_MinimumMembershipPercentage                     smithy.SchemaExtensions
+	eErrorCode                                                                   smithy.SchemaExtensions
+	eErrorCode_BadRequest                                                        smithy.SchemaExtensions
+	eErrorCode_Conflict                                                          smithy.SchemaExtensions
+	eErrorCode_Forbidden                                                         smithy.SchemaExtensions
+	eErrorCode_NotFound                                                          smithy.SchemaExtensions
+	eErrorCode_PreconditionFailed                                                smithy.SchemaExtensions
+	eErrorCode_ResourceLimitExceeded                                             smithy.SchemaExtensions
+	eErrorCode_ServiceFailure                                                    smithy.SchemaExtensions
+	eErrorCode_AccessDenied                                                      smithy.SchemaExtensions
+	eErrorCode_ServiceUnavailable                                                smithy.SchemaExtensions
+	eErrorCode_Throttled                                                         smithy.SchemaExtensions
+	eErrorCode_Throttling                                                        smithy.SchemaExtensions
+	eErrorCode_Unauthorized                                                      smithy.SchemaExtensions
+	eErrorCode_Unprocessable                                                     smithy.SchemaExtensions
+	eErrorCode_VoiceConnectorGroupAssociationsExist                              smithy.SchemaExtensions
+	eErrorCode_PhoneNumberAssociationsExist                                      smithy.SchemaExtensions
+	eExpirationCriterion                                                         smithy.SchemaExtensions
+	eExpirationCriterion_CREATED_TIMESTAMP                                       smithy.SchemaExtensions
+	eExpirationCriterion_LAST_MESSAGE_TIMESTAMP                                  smithy.SchemaExtensions
+	e_ExpirationDays                                                             smithy.SchemaExtensions
+	eExpirationSettings                                                          smithy.SchemaExtensions
+	eExpirationSettings_ExpirationDays                                           smithy.SchemaExtensions
+	eExpirationSettings_ExpirationCriterion                                      smithy.SchemaExtensions
+	eFallbackAction                                                              smithy.SchemaExtensions
+	eFallbackAction_CONTINUE                                                     smithy.SchemaExtensions
+	eFallbackAction_ABORT                                                        smithy.SchemaExtensions
+	e_FilterRule                                                                 smithy.SchemaExtensions
+	eForbiddenException                                                          smithy.SchemaExtensions
+	eForbiddenException_Code                                                     smithy.SchemaExtensions
+	eForbiddenException_Message                                                  smithy.SchemaExtensions
+	eIdentity                                                                    smithy.SchemaExtensions
+	eIdentity_Arn                                                                smithy.SchemaExtensions
+	eIdentity_Name                                                               smithy.SchemaExtensions
+	eInvocationType                                                              smithy.SchemaExtensions
+	eInvocationType_ASYNC                                                        smithy.SchemaExtensions
+	eLambdaConfiguration                                                         smithy.SchemaExtensions
+	eLambdaConfiguration_ResourceArn                                             smithy.SchemaExtensions
+	eLambdaConfiguration_InvocationType                                          smithy.SchemaExtensions
+	e_LambdaFunctionArn                                                          smithy.SchemaExtensions
+	e_MaximumSubChannels                                                         smithy.SchemaExtensions
+	e_MaxResults                                                                 smithy.SchemaExtensions
+	e_MemberArns                                                                 smithy.SchemaExtensions
+	e_MemberArns_member                                                          smithy.SchemaExtensions
+	e_Members                                                                    smithy.SchemaExtensions
+	e_Members_member                                                             smithy.SchemaExtensions
+	e_MembershipCount                                                            smithy.SchemaExtensions
+	e_MessageAttributeMap                                                        smithy.SchemaExtensions
+	e_MessageAttributeMap_key                                                    smithy.SchemaExtensions
+	e_MessageAttributeMap_value                                                  smithy.SchemaExtensions
+	e_MessageAttributeName                                                       smithy.SchemaExtensions
+	e_MessageAttributeStringValue                                                smithy.SchemaExtensions
+	e_MessageAttributeStringValues                                               smithy.SchemaExtensions
+	e_MessageAttributeStringValues_member                                        smithy.SchemaExtensions
+	eMessageAttributeValue                                                       smithy.SchemaExtensions
+	eMessageAttributeValue_StringValues                                          smithy.SchemaExtensions
+	e_MessageId                                                                  smithy.SchemaExtensions
+	eMessagingDataType                                                           smithy.SchemaExtensions
+	eMessagingDataType_Channel                                                   smithy.SchemaExtensions
+	eMessagingDataType_ChannelMessage                                            smithy.SchemaExtensions
+	eMessagingSessionEndpoint                                                    smithy.SchemaExtensions
+	eMessagingSessionEndpoint_Url                                                smithy.SchemaExtensions
+	e_Metadata                                                                   smithy.SchemaExtensions
+	e_MinimumMembershipPercentage                                                smithy.SchemaExtensions
+	eNetworkType                                                                 smithy.SchemaExtensions
+	eNetworkType_IPV4_ONLY                                                       smithy.SchemaExtensions
+	eNetworkType_DUAL_STACK                                                      smithy.SchemaExtensions
+	e_NextToken                                                                  smithy.SchemaExtensions
+	e_NonEmptyContent                                                            smithy.SchemaExtensions
+	e_NonEmptyResourceName                                                       smithy.SchemaExtensions
+	e_NonNullableBoolean                                                         smithy.SchemaExtensions
+	eNotFoundException                                                           smithy.SchemaExtensions
+	eNotFoundException_Code                                                      smithy.SchemaExtensions
+	eNotFoundException_Message                                                   smithy.SchemaExtensions
+	eProcessor                                                                   smithy.SchemaExtensions
+	eProcessor_Name                                                              smithy.SchemaExtensions
+	eProcessor_Configuration                                                     smithy.SchemaExtensions
+	eProcessor_ExecutionOrder                                                    smithy.SchemaExtensions
+	eProcessor_FallbackAction                                                    smithy.SchemaExtensions
+	eProcessorConfiguration                                                      smithy.SchemaExtensions
+	eProcessorConfiguration_Lambda                                               smithy.SchemaExtensions
+	e_ProcessorList                                                              smithy.SchemaExtensions
+	e_ProcessorList_member                                                       smithy.SchemaExtensions
+	e_PushNotificationBody                                                       smithy.SchemaExtensions
+	ePushNotificationConfiguration                                               smithy.SchemaExtensions
+	ePushNotificationConfiguration_Title                                         smithy.SchemaExtensions
+	ePushNotificationConfiguration_Body                                          smithy.SchemaExtensions
+	ePushNotificationConfiguration_Type                                          smithy.SchemaExtensions
+	ePushNotificationPreferences                                                 smithy.SchemaExtensions
+	ePushNotificationPreferences_AllowNotifications                              smithy.SchemaExtensions
+	ePushNotificationPreferences_FilterRule                                      smithy.SchemaExtensions
+	e_PushNotificationTitle                                                      smithy.SchemaExtensions
+	ePushNotificationType                                                        smithy.SchemaExtensions
+	ePushNotificationType_DEFAULT                                                smithy.SchemaExtensions
+	ePushNotificationType_VOIP                                                   smithy.SchemaExtensions
+	eResourceLimitExceededException                                              smithy.SchemaExtensions
+	eResourceLimitExceededException_Code                                         smithy.SchemaExtensions
+	eResourceLimitExceededException_Message                                      smithy.SchemaExtensions
+	e_ResourceName                                                               smithy.SchemaExtensions
+	eSearchField                                                                 smithy.SchemaExtensions
+	eSearchField_Key                                                             smithy.SchemaExtensions
+	eSearchField_Values                                                          smithy.SchemaExtensions
+	eSearchField_Operator                                                        smithy.SchemaExtensions
+	eSearchFieldKey                                                              smithy.SchemaExtensions
+	eSearchFieldKey_MEMBERS                                                      smithy.SchemaExtensions
+	eSearchFieldOperator                                                         smithy.SchemaExtensions
+	eSearchFieldOperator_EQUALS                                                  smithy.SchemaExtensions
+	eSearchFieldOperator_INCLUDES                                                smithy.SchemaExtensions
+	e_SearchFields                                                               smithy.SchemaExtensions
+	e_SearchFields_member                                                        smithy.SchemaExtensions
+	e_SearchFieldValue                                                           smithy.SchemaExtensions
+	e_SearchFieldValues                                                          smithy.SchemaExtensions
+	e_SearchFieldValues_member                                                   smithy.SchemaExtensions
+	eServiceFailureException                                                     smithy.SchemaExtensions
+	eServiceFailureException_Code                                                smithy.SchemaExtensions
+	eServiceFailureException_Message                                             smithy.SchemaExtensions
+	eServiceUnavailableException                                                 smithy.SchemaExtensions
+	eServiceUnavailableException_Code                                            smithy.SchemaExtensions
+	eServiceUnavailableException_Message                                         smithy.SchemaExtensions
+	eSortOrder                                                                   smithy.SchemaExtensions
+	eSortOrder_ASCENDING                                                         smithy.SchemaExtensions
+	eSortOrder_DESCENDING                                                        smithy.SchemaExtensions
+	e_StatusDetail                                                               smithy.SchemaExtensions
+	eStreamingConfiguration                                                      smithy.SchemaExtensions
+	eStreamingConfiguration_DataType                                             smithy.SchemaExtensions
+	eStreamingConfiguration_ResourceArn                                          smithy.SchemaExtensions
+	e_StreamingConfigurationList                                                 smithy.SchemaExtensions
+	e_StreamingConfigurationList_member                                          smithy.SchemaExtensions
+	e_String                                                                     smithy.SchemaExtensions
+	e_SubChannelId                                                               smithy.SchemaExtensions
+	eSubChannelSummary                                                           smithy.SchemaExtensions
+	eSubChannelSummary_SubChannelId                                              smithy.SchemaExtensions
+	eSubChannelSummary_MembershipCount                                           smithy.SchemaExtensions
+	e_SubChannelSummaryList                                                      smithy.SchemaExtensions
+	e_SubChannelSummaryList_member                                               smithy.SchemaExtensions
+	eTag                                                                         smithy.SchemaExtensions
+	eTag_Key                                                                     smithy.SchemaExtensions
+	eTag_Value                                                                   smithy.SchemaExtensions
+	e_TagKey                                                                     smithy.SchemaExtensions
+	e_TagKeyList                                                                 smithy.SchemaExtensions
+	e_TagKeyList_member                                                          smithy.SchemaExtensions
+	e_TagList                                                                    smithy.SchemaExtensions
+	e_TagList_member                                                             smithy.SchemaExtensions
+	e_TagValue                                                                   smithy.SchemaExtensions
+	eTarget                                                                      smithy.SchemaExtensions
+	eTarget_MemberArn                                                            smithy.SchemaExtensions
+	e_TargetList                                                                 smithy.SchemaExtensions
+	e_TargetList_member                                                          smithy.SchemaExtensions
+	e_TargetMembershipsPerSubChannel                                             smithy.SchemaExtensions
+	eThrottledClientException                                                    smithy.SchemaExtensions
+	eThrottledClientException_Code                                               smithy.SchemaExtensions
+	eThrottledClientException_Message                                            smithy.SchemaExtensions
+	e_Timestamp                                                                  smithy.SchemaExtensions
+	eUnauthorizedClientException                                                 smithy.SchemaExtensions
+	eUnauthorizedClientException_Code                                            smithy.SchemaExtensions
+	eUnauthorizedClientException_Message                                         smithy.SchemaExtensions
+	e_UrlType                                                                    smithy.SchemaExtensions
+	eAssociateChannelFlowRequest                                                 smithy.SchemaExtensions
+	eAssociateChannelFlowRequest_ChannelArn                                      smithy.SchemaExtensions
+	eAssociateChannelFlowRequest_ChannelFlowArn                                  smithy.SchemaExtensions
+	eAssociateChannelFlowRequest_ChimeBearer                                     smithy.SchemaExtensions
+	eBatchCreateChannelMembershipRequest                                         smithy.SchemaExtensions
+	eBatchCreateChannelMembershipRequest_ChannelArn                              smithy.SchemaExtensions
+	eBatchCreateChannelMembershipRequest_Type                                    smithy.SchemaExtensions
+	eBatchCreateChannelMembershipRequest_MemberArns                              smithy.SchemaExtensions
+	eBatchCreateChannelMembershipRequest_ChimeBearer                             smithy.SchemaExtensions
+	eBatchCreateChannelMembershipRequest_SubChannelId                            smithy.SchemaExtensions
+	eBatchCreateChannelMembershipResponse                                        smithy.SchemaExtensions
+	eBatchCreateChannelMembershipResponse_BatchChannelMemberships                smithy.SchemaExtensions
+	eBatchCreateChannelMembershipResponse_Errors                                 smithy.SchemaExtensions
+	eChannelFlowCallbackRequest                                                  smithy.SchemaExtensions
+	eChannelFlowCallbackRequest_CallbackId                                       smithy.SchemaExtensions
+	eChannelFlowCallbackRequest_ChannelArn                                       smithy.SchemaExtensions
+	eChannelFlowCallbackRequest_DeleteResource                                   smithy.SchemaExtensions
+	eChannelFlowCallbackRequest_ChannelMessage                                   smithy.SchemaExtensions
+	eChannelFlowCallbackResponse                                                 smithy.SchemaExtensions
+	eChannelFlowCallbackResponse_ChannelArn                                      smithy.SchemaExtensions
+	eChannelFlowCallbackResponse_CallbackId                                      smithy.SchemaExtensions
+	eCreateChannelBanRequest                                                     smithy.SchemaExtensions
+	eCreateChannelBanRequest_ChannelArn                                          smithy.SchemaExtensions
+	eCreateChannelBanRequest_MemberArn                                           smithy.SchemaExtensions
+	eCreateChannelBanRequest_ChimeBearer                                         smithy.SchemaExtensions
+	eCreateChannelBanResponse                                                    smithy.SchemaExtensions
+	eCreateChannelBanResponse_ChannelArn                                         smithy.SchemaExtensions
+	eCreateChannelBanResponse_Member                                             smithy.SchemaExtensions
+	eCreateChannelFlowRequest                                                    smithy.SchemaExtensions
+	eCreateChannelFlowRequest_AppInstanceArn                                     smithy.SchemaExtensions
+	eCreateChannelFlowRequest_Processors                                         smithy.SchemaExtensions
+	eCreateChannelFlowRequest_Name                                               smithy.SchemaExtensions
+	eCreateChannelFlowRequest_Tags                                               smithy.SchemaExtensions
+	eCreateChannelFlowRequest_ClientRequestToken                                 smithy.SchemaExtensions
+	eCreateChannelFlowResponse                                                   smithy.SchemaExtensions
+	eCreateChannelFlowResponse_ChannelFlowArn                                    smithy.SchemaExtensions
+	eCreateChannelRequest                                                        smithy.SchemaExtensions
+	eCreateChannelRequest_AppInstanceArn                                         smithy.SchemaExtensions
+	eCreateChannelRequest_Name                                                   smithy.SchemaExtensions
+	eCreateChannelRequest_Mode                                                   smithy.SchemaExtensions
+	eCreateChannelRequest_Privacy                                                smithy.SchemaExtensions
+	eCreateChannelRequest_Metadata                                               smithy.SchemaExtensions
+	eCreateChannelRequest_ClientRequestToken                                     smithy.SchemaExtensions
+	eCreateChannelRequest_Tags                                                   smithy.SchemaExtensions
+	eCreateChannelRequest_ChimeBearer                                            smithy.SchemaExtensions
+	eCreateChannelRequest_ChannelId                                              smithy.SchemaExtensions
+	eCreateChannelRequest_MemberArns                                             smithy.SchemaExtensions
+	eCreateChannelRequest_ModeratorArns                                          smithy.SchemaExtensions
+	eCreateChannelRequest_ElasticChannelConfiguration                            smithy.SchemaExtensions
+	eCreateChannelRequest_ExpirationSettings                                     smithy.SchemaExtensions
+	eCreateChannelMembershipRequest                                              smithy.SchemaExtensions
+	eCreateChannelMembershipRequest_ChannelArn                                   smithy.SchemaExtensions
+	eCreateChannelMembershipRequest_MemberArn                                    smithy.SchemaExtensions
+	eCreateChannelMembershipRequest_Type                                         smithy.SchemaExtensions
+	eCreateChannelMembershipRequest_ChimeBearer                                  smithy.SchemaExtensions
+	eCreateChannelMembershipRequest_SubChannelId                                 smithy.SchemaExtensions
+	eCreateChannelMembershipResponse                                             smithy.SchemaExtensions
+	eCreateChannelMembershipResponse_ChannelArn                                  smithy.SchemaExtensions
+	eCreateChannelMembershipResponse_Member                                      smithy.SchemaExtensions
+	eCreateChannelMembershipResponse_SubChannelId                                smithy.SchemaExtensions
+	eCreateChannelModeratorRequest                                               smithy.SchemaExtensions
+	eCreateChannelModeratorRequest_ChannelArn                                    smithy.SchemaExtensions
+	eCreateChannelModeratorRequest_ChannelModeratorArn                           smithy.SchemaExtensions
+	eCreateChannelModeratorRequest_ChimeBearer                                   smithy.SchemaExtensions
+	eCreateChannelModeratorResponse                                              smithy.SchemaExtensions
+	eCreateChannelModeratorResponse_ChannelArn                                   smithy.SchemaExtensions
+	eCreateChannelModeratorResponse_ChannelModerator                             smithy.SchemaExtensions
+	eCreateChannelResponse                                                       smithy.SchemaExtensions
+	eCreateChannelResponse_ChannelArn                                            smithy.SchemaExtensions
+	eDeleteChannelBanRequest                                                     smithy.SchemaExtensions
+	eDeleteChannelBanRequest_ChannelArn                                          smithy.SchemaExtensions
+	eDeleteChannelBanRequest_MemberArn                                           smithy.SchemaExtensions
+	eDeleteChannelBanRequest_ChimeBearer                                         smithy.SchemaExtensions
+	eDeleteChannelFlowRequest                                                    smithy.SchemaExtensions
+	eDeleteChannelFlowRequest_ChannelFlowArn                                     smithy.SchemaExtensions
+	eDeleteChannelRequest                                                        smithy.SchemaExtensions
+	eDeleteChannelRequest_ChannelArn                                             smithy.SchemaExtensions
+	eDeleteChannelRequest_ChimeBearer                                            smithy.SchemaExtensions
+	eDeleteChannelMembershipRequest                                              smithy.SchemaExtensions
+	eDeleteChannelMembershipRequest_ChannelArn                                   smithy.SchemaExtensions
+	eDeleteChannelMembershipRequest_MemberArn                                    smithy.SchemaExtensions
+	eDeleteChannelMembershipRequest_ChimeBearer                                  smithy.SchemaExtensions
+	eDeleteChannelMembershipRequest_SubChannelId                                 smithy.SchemaExtensions
+	eDeleteChannelMessageRequest                                                 smithy.SchemaExtensions
+	eDeleteChannelMessageRequest_ChannelArn                                      smithy.SchemaExtensions
+	eDeleteChannelMessageRequest_MessageId                                       smithy.SchemaExtensions
+	eDeleteChannelMessageRequest_ChimeBearer                                     smithy.SchemaExtensions
+	eDeleteChannelMessageRequest_SubChannelId                                    smithy.SchemaExtensions
+	eDeleteChannelModeratorRequest                                               smithy.SchemaExtensions
+	eDeleteChannelModeratorRequest_ChannelArn                                    smithy.SchemaExtensions
+	eDeleteChannelModeratorRequest_ChannelModeratorArn                           smithy.SchemaExtensions
+	eDeleteChannelModeratorRequest_ChimeBearer                                   smithy.SchemaExtensions
+	eDeleteMessagingStreamingConfigurationsRequest                               smithy.SchemaExtensions
+	eDeleteMessagingStreamingConfigurationsRequest_AppInstanceArn                smithy.SchemaExtensions
+	eDescribeChannelBanRequest                                                   smithy.SchemaExtensions
+	eDescribeChannelBanRequest_ChannelArn                                        smithy.SchemaExtensions
+	eDescribeChannelBanRequest_MemberArn                                         smithy.SchemaExtensions
+	eDescribeChannelBanRequest_ChimeBearer                                       smithy.SchemaExtensions
+	eDescribeChannelBanResponse                                                  smithy.SchemaExtensions
+	eDescribeChannelBanResponse_ChannelBan                                       smithy.SchemaExtensions
+	eDescribeChannelFlowRequest                                                  smithy.SchemaExtensions
+	eDescribeChannelFlowRequest_ChannelFlowArn                                   smithy.SchemaExtensions
+	eDescribeChannelFlowResponse                                                 smithy.SchemaExtensions
+	eDescribeChannelFlowResponse_ChannelFlow                                     smithy.SchemaExtensions
+	eDescribeChannelRequest                                                      smithy.SchemaExtensions
+	eDescribeChannelRequest_ChannelArn                                           smithy.SchemaExtensions
+	eDescribeChannelRequest_ChimeBearer                                          smithy.SchemaExtensions
+	eDescribeChannelMembershipForAppInstanceUserRequest                          smithy.SchemaExtensions
+	eDescribeChannelMembershipForAppInstanceUserRequest_ChannelArn               smithy.SchemaExtensions
+	eDescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn       smithy.SchemaExtensions
+	eDescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer              smithy.SchemaExtensions
+	eDescribeChannelMembershipForAppInstanceUserResponse                         smithy.SchemaExtensions
+	eDescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership       smithy.SchemaExtensions
+	eDescribeChannelMembershipRequest                                            smithy.SchemaExtensions
+	eDescribeChannelMembershipRequest_ChannelArn                                 smithy.SchemaExtensions
+	eDescribeChannelMembershipRequest_MemberArn                                  smithy.SchemaExtensions
+	eDescribeChannelMembershipRequest_ChimeBearer                                smithy.SchemaExtensions
+	eDescribeChannelMembershipRequest_SubChannelId                               smithy.SchemaExtensions
+	eDescribeChannelMembershipResponse                                           smithy.SchemaExtensions
+	eDescribeChannelMembershipResponse_ChannelMembership                         smithy.SchemaExtensions
+	eDescribeChannelModeratedByAppInstanceUserRequest                            smithy.SchemaExtensions
+	eDescribeChannelModeratedByAppInstanceUserRequest_ChannelArn                 smithy.SchemaExtensions
+	eDescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn         smithy.SchemaExtensions
+	eDescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer                smithy.SchemaExtensions
+	eDescribeChannelModeratedByAppInstanceUserResponse                           smithy.SchemaExtensions
+	eDescribeChannelModeratedByAppInstanceUserResponse_Channel                   smithy.SchemaExtensions
+	eDescribeChannelModeratorRequest                                             smithy.SchemaExtensions
+	eDescribeChannelModeratorRequest_ChannelArn                                  smithy.SchemaExtensions
+	eDescribeChannelModeratorRequest_ChannelModeratorArn                         smithy.SchemaExtensions
+	eDescribeChannelModeratorRequest_ChimeBearer                                 smithy.SchemaExtensions
+	eDescribeChannelModeratorResponse                                            smithy.SchemaExtensions
+	eDescribeChannelModeratorResponse_ChannelModerator                           smithy.SchemaExtensions
+	eDescribeChannelResponse                                                     smithy.SchemaExtensions
+	eDescribeChannelResponse_Channel                                             smithy.SchemaExtensions
+	eDisassociateChannelFlowRequest                                              smithy.SchemaExtensions
+	eDisassociateChannelFlowRequest_ChannelArn                                   smithy.SchemaExtensions
+	eDisassociateChannelFlowRequest_ChannelFlowArn                               smithy.SchemaExtensions
+	eDisassociateChannelFlowRequest_ChimeBearer                                  smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesRequest                                      smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesRequest_ChannelArn                           smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesRequest_MemberArn                            smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesRequest_ChimeBearer                          smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesResponse                                     smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesResponse_ChannelArn                          smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesResponse_Member                              smithy.SchemaExtensions
+	eGetChannelMembershipPreferencesResponse_Preferences                         smithy.SchemaExtensions
+	eGetChannelMessageRequest                                                    smithy.SchemaExtensions
+	eGetChannelMessageRequest_ChannelArn                                         smithy.SchemaExtensions
+	eGetChannelMessageRequest_MessageId                                          smithy.SchemaExtensions
+	eGetChannelMessageRequest_ChimeBearer                                        smithy.SchemaExtensions
+	eGetChannelMessageRequest_SubChannelId                                       smithy.SchemaExtensions
+	eGetChannelMessageResponse                                                   smithy.SchemaExtensions
+	eGetChannelMessageResponse_ChannelMessage                                    smithy.SchemaExtensions
+	eGetChannelMessageStatusRequest                                              smithy.SchemaExtensions
+	eGetChannelMessageStatusRequest_ChannelArn                                   smithy.SchemaExtensions
+	eGetChannelMessageStatusRequest_MessageId                                    smithy.SchemaExtensions
+	eGetChannelMessageStatusRequest_ChimeBearer                                  smithy.SchemaExtensions
+	eGetChannelMessageStatusRequest_SubChannelId                                 smithy.SchemaExtensions
+	eGetChannelMessageStatusResponse                                             smithy.SchemaExtensions
+	eGetChannelMessageStatusResponse_Status                                      smithy.SchemaExtensions
+	eGetMessagingSessionEndpointRequest                                          smithy.SchemaExtensions
+	eGetMessagingSessionEndpointRequest_NetworkType                              smithy.SchemaExtensions
+	eGetMessagingSessionEndpointResponse                                         smithy.SchemaExtensions
+	eGetMessagingSessionEndpointResponse_Endpoint                                smithy.SchemaExtensions
+	eGetMessagingStreamingConfigurationsRequest                                  smithy.SchemaExtensions
+	eGetMessagingStreamingConfigurationsRequest_AppInstanceArn                   smithy.SchemaExtensions
+	eGetMessagingStreamingConfigurationsResponse                                 smithy.SchemaExtensions
+	eGetMessagingStreamingConfigurationsResponse_StreamingConfigurations         smithy.SchemaExtensions
+	eListChannelBansRequest                                                      smithy.SchemaExtensions
+	eListChannelBansRequest_ChannelArn                                           smithy.SchemaExtensions
+	eListChannelBansRequest_MaxResults                                           smithy.SchemaExtensions
+	eListChannelBansRequest_NextToken                                            smithy.SchemaExtensions
+	eListChannelBansRequest_ChimeBearer                                          smithy.SchemaExtensions
+	eListChannelBansResponse                                                     smithy.SchemaExtensions
+	eListChannelBansResponse_ChannelArn                                          smithy.SchemaExtensions
+	eListChannelBansResponse_NextToken                                           smithy.SchemaExtensions
+	eListChannelBansResponse_ChannelBans                                         smithy.SchemaExtensions
+	eListChannelFlowsRequest                                                     smithy.SchemaExtensions
+	eListChannelFlowsRequest_AppInstanceArn                                      smithy.SchemaExtensions
+	eListChannelFlowsRequest_MaxResults                                          smithy.SchemaExtensions
+	eListChannelFlowsRequest_NextToken                                           smithy.SchemaExtensions
+	eListChannelFlowsResponse                                                    smithy.SchemaExtensions
+	eListChannelFlowsResponse_ChannelFlows                                       smithy.SchemaExtensions
+	eListChannelFlowsResponse_NextToken                                          smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserRequest                             smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn          smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserRequest_MaxResults                  smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserRequest_NextToken                   smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserRequest_ChimeBearer                 smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserResponse                            smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships         smithy.SchemaExtensions
+	eListChannelMembershipsForAppInstanceUserResponse_NextToken                  smithy.SchemaExtensions
+	eListChannelMembershipsRequest                                               smithy.SchemaExtensions
+	eListChannelMembershipsRequest_ChannelArn                                    smithy.SchemaExtensions
+	eListChannelMembershipsRequest_Type                                          smithy.SchemaExtensions
+	eListChannelMembershipsRequest_MaxResults                                    smithy.SchemaExtensions
+	eListChannelMembershipsRequest_NextToken                                     smithy.SchemaExtensions
+	eListChannelMembershipsRequest_ChimeBearer                                   smithy.SchemaExtensions
+	eListChannelMembershipsRequest_SubChannelId                                  smithy.SchemaExtensions
+	eListChannelMembershipsResponse                                              smithy.SchemaExtensions
+	eListChannelMembershipsResponse_ChannelArn                                   smithy.SchemaExtensions
+	eListChannelMembershipsResponse_ChannelMemberships                           smithy.SchemaExtensions
+	eListChannelMembershipsResponse_NextToken                                    smithy.SchemaExtensions
+	eListChannelMessagesRequest                                                  smithy.SchemaExtensions
+	eListChannelMessagesRequest_ChannelArn                                       smithy.SchemaExtensions
+	eListChannelMessagesRequest_SortOrder                                        smithy.SchemaExtensions
+	eListChannelMessagesRequest_NotBefore                                        smithy.SchemaExtensions
+	eListChannelMessagesRequest_NotAfter                                         smithy.SchemaExtensions
+	eListChannelMessagesRequest_MaxResults                                       smithy.SchemaExtensions
+	eListChannelMessagesRequest_NextToken                                        smithy.SchemaExtensions
+	eListChannelMessagesRequest_ChimeBearer                                      smithy.SchemaExtensions
+	eListChannelMessagesRequest_SubChannelId                                     smithy.SchemaExtensions
+	eListChannelMessagesResponse                                                 smithy.SchemaExtensions
+	eListChannelMessagesResponse_ChannelArn                                      smithy.SchemaExtensions
+	eListChannelMessagesResponse_NextToken                                       smithy.SchemaExtensions
+	eListChannelMessagesResponse_ChannelMessages                                 smithy.SchemaExtensions
+	eListChannelMessagesResponse_SubChannelId                                    smithy.SchemaExtensions
+	eListChannelModeratorsRequest                                                smithy.SchemaExtensions
+	eListChannelModeratorsRequest_ChannelArn                                     smithy.SchemaExtensions
+	eListChannelModeratorsRequest_MaxResults                                     smithy.SchemaExtensions
+	eListChannelModeratorsRequest_NextToken                                      smithy.SchemaExtensions
+	eListChannelModeratorsRequest_ChimeBearer                                    smithy.SchemaExtensions
+	eListChannelModeratorsResponse                                               smithy.SchemaExtensions
+	eListChannelModeratorsResponse_ChannelArn                                    smithy.SchemaExtensions
+	eListChannelModeratorsResponse_NextToken                                     smithy.SchemaExtensions
+	eListChannelModeratorsResponse_ChannelModerators                             smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlowRequest                                smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn                 smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlowRequest_MaxResults                     smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlowRequest_NextToken                      smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlowResponse                               smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlowResponse_Channels                      smithy.SchemaExtensions
+	eListChannelsAssociatedWithChannelFlowResponse_NextToken                     smithy.SchemaExtensions
+	eListChannelsRequest                                                         smithy.SchemaExtensions
+	eListChannelsRequest_AppInstanceArn                                          smithy.SchemaExtensions
+	eListChannelsRequest_Privacy                                                 smithy.SchemaExtensions
+	eListChannelsRequest_MaxResults                                              smithy.SchemaExtensions
+	eListChannelsRequest_NextToken                                               smithy.SchemaExtensions
+	eListChannelsRequest_ChimeBearer                                             smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserRequest                               smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn            smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserRequest_MaxResults                    smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserRequest_NextToken                     smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserRequest_ChimeBearer                   smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserResponse                              smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserResponse_Channels                     smithy.SchemaExtensions
+	eListChannelsModeratedByAppInstanceUserResponse_NextToken                    smithy.SchemaExtensions
+	eListChannelsResponse                                                        smithy.SchemaExtensions
+	eListChannelsResponse_Channels                                               smithy.SchemaExtensions
+	eListChannelsResponse_NextToken                                              smithy.SchemaExtensions
+	eListSubChannelsRequest                                                      smithy.SchemaExtensions
+	eListSubChannelsRequest_ChannelArn                                           smithy.SchemaExtensions
+	eListSubChannelsRequest_ChimeBearer                                          smithy.SchemaExtensions
+	eListSubChannelsRequest_MaxResults                                           smithy.SchemaExtensions
+	eListSubChannelsRequest_NextToken                                            smithy.SchemaExtensions
+	eListSubChannelsResponse                                                     smithy.SchemaExtensions
+	eListSubChannelsResponse_ChannelArn                                          smithy.SchemaExtensions
+	eListSubChannelsResponse_SubChannels                                         smithy.SchemaExtensions
+	eListSubChannelsResponse_NextToken                                           smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                            smithy.SchemaExtensions
+	ePutChannelExpirationSettingsRequest                                         smithy.SchemaExtensions
+	ePutChannelExpirationSettingsRequest_ChannelArn                              smithy.SchemaExtensions
+	ePutChannelExpirationSettingsRequest_ChimeBearer                             smithy.SchemaExtensions
+	ePutChannelExpirationSettingsRequest_ExpirationSettings                      smithy.SchemaExtensions
+	ePutChannelExpirationSettingsResponse                                        smithy.SchemaExtensions
+	ePutChannelExpirationSettingsResponse_ChannelArn                             smithy.SchemaExtensions
+	ePutChannelExpirationSettingsResponse_ExpirationSettings                     smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesRequest                                      smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesRequest_ChannelArn                           smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesRequest_MemberArn                            smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesRequest_ChimeBearer                          smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesRequest_Preferences                          smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesResponse                                     smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesResponse_ChannelArn                          smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesResponse_Member                              smithy.SchemaExtensions
+	ePutChannelMembershipPreferencesResponse_Preferences                         smithy.SchemaExtensions
+	ePutMessagingStreamingConfigurationsRequest                                  smithy.SchemaExtensions
+	ePutMessagingStreamingConfigurationsRequest_AppInstanceArn                   smithy.SchemaExtensions
+	ePutMessagingStreamingConfigurationsRequest_StreamingConfigurations          smithy.SchemaExtensions
+	ePutMessagingStreamingConfigurationsResponse                                 smithy.SchemaExtensions
+	ePutMessagingStreamingConfigurationsResponse_StreamingConfigurations         smithy.SchemaExtensions
+	eRedactChannelMessageRequest                                                 smithy.SchemaExtensions
+	eRedactChannelMessageRequest_ChannelArn                                      smithy.SchemaExtensions
+	eRedactChannelMessageRequest_MessageId                                       smithy.SchemaExtensions
+	eRedactChannelMessageRequest_ChimeBearer                                     smithy.SchemaExtensions
+	eRedactChannelMessageRequest_SubChannelId                                    smithy.SchemaExtensions
+	eRedactChannelMessageResponse                                                smithy.SchemaExtensions
+	eRedactChannelMessageResponse_ChannelArn                                     smithy.SchemaExtensions
+	eRedactChannelMessageResponse_MessageId                                      smithy.SchemaExtensions
+	eRedactChannelMessageResponse_SubChannelId                                   smithy.SchemaExtensions
+	eSearchChannelsRequest                                                       smithy.SchemaExtensions
+	eSearchChannelsRequest_ChimeBearer                                           smithy.SchemaExtensions
+	eSearchChannelsRequest_Fields                                                smithy.SchemaExtensions
+	eSearchChannelsRequest_MaxResults                                            smithy.SchemaExtensions
+	eSearchChannelsRequest_NextToken                                             smithy.SchemaExtensions
+	eSearchChannelsResponse                                                      smithy.SchemaExtensions
+	eSearchChannelsResponse_Channels                                             smithy.SchemaExtensions
+	eSearchChannelsResponse_NextToken                                            smithy.SchemaExtensions
+	eSendChannelMessageRequest                                                   smithy.SchemaExtensions
+	eSendChannelMessageRequest_ChannelArn                                        smithy.SchemaExtensions
+	eSendChannelMessageRequest_Content                                           smithy.SchemaExtensions
+	eSendChannelMessageRequest_Type                                              smithy.SchemaExtensions
+	eSendChannelMessageRequest_Persistence                                       smithy.SchemaExtensions
+	eSendChannelMessageRequest_Metadata                                          smithy.SchemaExtensions
+	eSendChannelMessageRequest_ClientRequestToken                                smithy.SchemaExtensions
+	eSendChannelMessageRequest_ChimeBearer                                       smithy.SchemaExtensions
+	eSendChannelMessageRequest_PushNotification                                  smithy.SchemaExtensions
+	eSendChannelMessageRequest_MessageAttributes                                 smithy.SchemaExtensions
+	eSendChannelMessageRequest_SubChannelId                                      smithy.SchemaExtensions
+	eSendChannelMessageRequest_ContentType                                       smithy.SchemaExtensions
+	eSendChannelMessageRequest_Target                                            smithy.SchemaExtensions
+	eSendChannelMessageResponse                                                  smithy.SchemaExtensions
+	eSendChannelMessageResponse_ChannelArn                                       smithy.SchemaExtensions
+	eSendChannelMessageResponse_MessageId                                        smithy.SchemaExtensions
+	eSendChannelMessageResponse_Status                                           smithy.SchemaExtensions
+	eSendChannelMessageResponse_SubChannelId                                     smithy.SchemaExtensions
+	eTagResourceRequest                                                          smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                                              smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                     smithy.SchemaExtensions
+	eUntagResourceRequest                                                        smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                                            smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                smithy.SchemaExtensions
+	eUpdateChannelFlowRequest                                                    smithy.SchemaExtensions
+	eUpdateChannelFlowRequest_ChannelFlowArn                                     smithy.SchemaExtensions
+	eUpdateChannelFlowRequest_Processors                                         smithy.SchemaExtensions
+	eUpdateChannelFlowRequest_Name                                               smithy.SchemaExtensions
+	eUpdateChannelFlowResponse                                                   smithy.SchemaExtensions
+	eUpdateChannelFlowResponse_ChannelFlowArn                                    smithy.SchemaExtensions
+	eUpdateChannelRequest                                                        smithy.SchemaExtensions
+	eUpdateChannelRequest_ChannelArn                                             smithy.SchemaExtensions
+	eUpdateChannelRequest_Name                                                   smithy.SchemaExtensions
+	eUpdateChannelRequest_Mode                                                   smithy.SchemaExtensions
+	eUpdateChannelRequest_Metadata                                               smithy.SchemaExtensions
+	eUpdateChannelRequest_ChimeBearer                                            smithy.SchemaExtensions
+	eUpdateChannelMessageRequest                                                 smithy.SchemaExtensions
+	eUpdateChannelMessageRequest_ChannelArn                                      smithy.SchemaExtensions
+	eUpdateChannelMessageRequest_MessageId                                       smithy.SchemaExtensions
+	eUpdateChannelMessageRequest_Content                                         smithy.SchemaExtensions
+	eUpdateChannelMessageRequest_Metadata                                        smithy.SchemaExtensions
+	eUpdateChannelMessageRequest_ChimeBearer                                     smithy.SchemaExtensions
+	eUpdateChannelMessageRequest_SubChannelId                                    smithy.SchemaExtensions
+	eUpdateChannelMessageRequest_ContentType                                     smithy.SchemaExtensions
+	eUpdateChannelMessageResponse                                                smithy.SchemaExtensions
+	eUpdateChannelMessageResponse_ChannelArn                                     smithy.SchemaExtensions
+	eUpdateChannelMessageResponse_MessageId                                      smithy.SchemaExtensions
+	eUpdateChannelMessageResponse_Status                                         smithy.SchemaExtensions
+	eUpdateChannelMessageResponse_SubChannelId                                   smithy.SchemaExtensions
+	eUpdateChannelResponse                                                       smithy.SchemaExtensions
+	eUpdateChannelResponse_ChannelArn                                            smithy.SchemaExtensions
+	eUpdateChannelReadMarkerRequest                                              smithy.SchemaExtensions
+	eUpdateChannelReadMarkerRequest_ChannelArn                                   smithy.SchemaExtensions
+	eUpdateChannelReadMarkerRequest_ChimeBearer                                  smithy.SchemaExtensions
+	eUpdateChannelReadMarkerResponse                                             smithy.SchemaExtensions
+	eUpdateChannelReadMarkerResponse_ChannelArn                                  smithy.SchemaExtensions
+)
+
+var (
+	iAssociateChannelFlow                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "AssociateChannelFlow"}
+	iBatchCreateChannelMembership                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "BatchCreateChannelMembership"}
+	iChannelFlowCallback                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelFlowCallback"}
+	iCreateChannel                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannel"}
+	iCreateChannelBan                                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelBan"}
+	iCreateChannelFlow                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelFlow"}
+	iCreateChannelMembership                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelMembership"}
+	iCreateChannelModerator                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelModerator"}
+	iDeleteChannel                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannel"}
+	iDeleteChannelBan                                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelBan"}
+	iDeleteChannelFlow                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelFlow"}
+	iDeleteChannelMembership                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelMembership"}
+	iDeleteChannelMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelMessage"}
+	iDeleteChannelModerator                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelModerator"}
+	iDeleteMessagingStreamingConfigurations              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteMessagingStreamingConfigurations"}
+	iDescribeChannel                                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannel"}
+	iDescribeChannelBan                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelBan"}
+	iDescribeChannelFlow                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelFlow"}
+	iDescribeChannelMembership                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelMembership"}
+	iDescribeChannelMembershipForAppInstanceUser         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelMembershipForAppInstanceUser"}
+	iDescribeChannelModeratedByAppInstanceUser           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelModeratedByAppInstanceUser"}
+	iDescribeChannelModerator                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelModerator"}
+	iDisassociateChannelFlow                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DisassociateChannelFlow"}
+	iGetChannelMembershipPreferences                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMembershipPreferences"}
+	iGetChannelMessage                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMessage"}
+	iGetChannelMessageStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMessageStatus"}
+	iGetMessagingSessionEndpoint                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetMessagingSessionEndpoint"}
+	iGetMessagingStreamingConfigurations                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetMessagingStreamingConfigurations"}
+	iListChannelBans                                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelBans"}
+	iListChannelFlows                                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelFlows"}
+	iListChannelMemberships                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMemberships"}
+	iListChannelMembershipsForAppInstanceUser            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMembershipsForAppInstanceUser"}
+	iListChannelMessages                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMessages"}
+	iListChannelModerators                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelModerators"}
+	iListChannels                                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannels"}
+	iListChannelsAssociatedWithChannelFlow               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsAssociatedWithChannelFlow"}
+	iListChannelsModeratedByAppInstanceUser              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsModeratedByAppInstanceUser"}
+	iListSubChannels                                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListSubChannels"}
+	iListTagsForResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListTagsForResource"}
+	iPutChannelExpirationSettings                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutChannelExpirationSettings"}
+	iPutChannelMembershipPreferences                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutChannelMembershipPreferences"}
+	iPutMessagingStreamingConfigurations                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutMessagingStreamingConfigurations"}
+	iRedactChannelMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "RedactChannelMessage"}
+	iSearchChannels                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchChannels"}
+	iSendChannelMessage                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SendChannelMessage"}
+	iTagResource                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TagResource"}
+	iUntagResource                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UntagResource"}
+	iUpdateChannel                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannel"}
+	iUpdateChannelFlow                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelFlow"}
+	iUpdateChannelMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelMessage"}
+	iUpdateChannelReadMarker                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelReadMarker"}
+	i_ChimeMessagingService                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChimeMessagingService"}
+	iAllowNotifications                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "AllowNotifications"}
+	iAppInstanceUserMembershipSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "AppInstanceUserMembershipSummary"}
+	iBadRequestException                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "BadRequestException"}
+	iBatchChannelMemberships                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "BatchChannelMemberships"}
+	iBatchCreateChannelMembershipError                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "BatchCreateChannelMembershipError"}
+	i_BatchCreateChannelMembershipErrors                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "BatchCreateChannelMembershipErrors"}
+	i_CallbackIdType                                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CallbackIdType"}
+	iChannel                                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Channel"}
+	iChannelAssociatedWithFlowSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelAssociatedWithFlowSummary"}
+	i_ChannelAssociatedWithFlowSummaryList               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelAssociatedWithFlowSummaryList"}
+	iChannelBan                                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelBan"}
+	iChannelBanSummary                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelBanSummary"}
+	i_ChannelBanSummaryList                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelBanSummaryList"}
+	iChannelFlow                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelFlow"}
+	i_ChannelFlowExecutionOrder                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelFlowExecutionOrder"}
+	iChannelFlowSummary                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelFlowSummary"}
+	i_ChannelFlowSummaryList                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelFlowSummaryList"}
+	i_ChannelId                                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelId"}
+	i_ChannelMemberArns                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMemberArns"}
+	iChannelMembership                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMembership"}
+	iChannelMembershipForAppInstanceUserSummary          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMembershipForAppInstanceUserSummary"}
+	i_ChannelMembershipForAppInstanceUserSummaryList     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMembershipForAppInstanceUserSummaryList"}
+	iChannelMembershipPreferences                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMembershipPreferences"}
+	iChannelMembershipSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMembershipSummary"}
+	i_ChannelMembershipSummaryList                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMembershipSummaryList"}
+	iChannelMembershipType                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMembershipType"}
+	iChannelMessage                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessage"}
+	iChannelMessageCallback                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessageCallback"}
+	iChannelMessagePersistenceType                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessagePersistenceType"}
+	iChannelMessageStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessageStatus"}
+	iChannelMessageStatusStructure                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessageStatusStructure"}
+	iChannelMessageSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessageSummary"}
+	i_ChannelMessageSummaryList                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessageSummaryList"}
+	iChannelMessageType                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMessageType"}
+	iChannelMode                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelMode"}
+	iChannelModeratedByAppInstanceUserSummary            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelModeratedByAppInstanceUserSummary"}
+	i_ChannelModeratedByAppInstanceUserSummaryList       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelModeratedByAppInstanceUserSummaryList"}
+	iChannelModerator                                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelModerator"}
+	i_ChannelModeratorArns                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelModeratorArns"}
+	iChannelModeratorSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelModeratorSummary"}
+	i_ChannelModeratorSummaryList                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelModeratorSummaryList"}
+	iChannelPrivacy                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelPrivacy"}
+	iChannelSummary                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelSummary"}
+	i_ChannelSummaryList                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelSummaryList"}
+	i_ChimeArn                                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChimeArn"}
+	i_ClientRequestToken                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ClientRequestToken"}
+	iConflictException                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ConflictException"}
+	i_Content                                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Content"}
+	i_ContentType                                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ContentType"}
+	iElasticChannelConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ElasticChannelConfiguration"}
+	iErrorCode                                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ErrorCode"}
+	iExpirationCriterion                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ExpirationCriterion"}
+	i_ExpirationDays                                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ExpirationDays"}
+	iExpirationSettings                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ExpirationSettings"}
+	iFallbackAction                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "FallbackAction"}
+	i_FilterRule                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "FilterRule"}
+	iForbiddenException                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ForbiddenException"}
+	iIdentity                                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Identity"}
+	iInvocationType                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "InvocationType"}
+	iLambdaConfiguration                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "LambdaConfiguration"}
+	i_LambdaFunctionArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "LambdaFunctionArn"}
+	i_MaximumSubChannels                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MaximumSubChannels"}
+	i_MaxResults                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MaxResults"}
+	i_MemberArns                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MemberArns"}
+	i_Members                                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Members"}
+	i_MembershipCount                                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MembershipCount"}
+	i_MessageAttributeMap                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessageAttributeMap"}
+	i_MessageAttributeName                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessageAttributeName"}
+	i_MessageAttributeStringValue                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessageAttributeStringValue"}
+	i_MessageAttributeStringValues                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessageAttributeStringValues"}
+	iMessageAttributeValue                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessageAttributeValue"}
+	i_MessageId                                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessageId"}
+	iMessagingDataType                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessagingDataType"}
+	iMessagingSessionEndpoint                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MessagingSessionEndpoint"}
+	i_Metadata                                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Metadata"}
+	i_MinimumMembershipPercentage                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "MinimumMembershipPercentage"}
+	iNetworkType                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "NetworkType"}
+	i_NextToken                                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "NextToken"}
+	i_NonEmptyContent                                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "NonEmptyContent"}
+	i_NonEmptyResourceName                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "NonEmptyResourceName"}
+	i_NonNullableBoolean                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "NonNullableBoolean"}
+	iNotFoundException                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "NotFoundException"}
+	iProcessor                                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Processor"}
+	iProcessorConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ProcessorConfiguration"}
+	i_ProcessorList                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ProcessorList"}
+	i_PushNotificationBody                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PushNotificationBody"}
+	iPushNotificationConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PushNotificationConfiguration"}
+	iPushNotificationPreferences                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PushNotificationPreferences"}
+	i_PushNotificationTitle                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PushNotificationTitle"}
+	iPushNotificationType                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PushNotificationType"}
+	iResourceLimitExceededException                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ResourceLimitExceededException"}
+	i_ResourceName                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ResourceName"}
+	iSearchField                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchField"}
+	iSearchFieldKey                                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchFieldKey"}
+	iSearchFieldOperator                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchFieldOperator"}
+	i_SearchFields                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchFields"}
+	i_SearchFieldValue                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchFieldValue"}
+	i_SearchFieldValues                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchFieldValues"}
+	iServiceFailureException                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ServiceFailureException"}
+	iServiceUnavailableException                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ServiceUnavailableException"}
+	iSortOrder                                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SortOrder"}
+	i_StatusDetail                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "StatusDetail"}
+	iStreamingConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "StreamingConfiguration"}
+	i_StreamingConfigurationList                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "StreamingConfigurationList"}
+	i_String                                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "String"}
+	i_SubChannelId                                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SubChannelId"}
+	iSubChannelSummary                                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SubChannelSummary"}
+	i_SubChannelSummaryList                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SubChannelSummaryList"}
+	iTag                                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Tag"}
+	i_TagKey                                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TagKey"}
+	i_TagKeyList                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TagKeyList"}
+	i_TagList                                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TagList"}
+	i_TagValue                                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TagValue"}
+	iTarget                                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Target"}
+	i_TargetList                                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TargetList"}
+	i_TargetMembershipsPerSubChannel                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TargetMembershipsPerSubChannel"}
+	iThrottledClientException                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ThrottledClientException"}
+	i_Timestamp                                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "Timestamp"}
+	iUnauthorizedClientException                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UnauthorizedClientException"}
+	i_UrlType                                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UrlType"}
+	iAssociateChannelFlowRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "AssociateChannelFlowRequest"}
+	iBatchCreateChannelMembershipRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "BatchCreateChannelMembershipRequest"}
+	iBatchCreateChannelMembershipResponse                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "BatchCreateChannelMembershipResponse"}
+	iChannelFlowCallbackRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelFlowCallbackRequest"}
+	iChannelFlowCallbackResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ChannelFlowCallbackResponse"}
+	iCreateChannelBanRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelBanRequest"}
+	iCreateChannelBanResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelBanResponse"}
+	iCreateChannelFlowRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelFlowRequest"}
+	iCreateChannelFlowResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelFlowResponse"}
+	iCreateChannelRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelRequest"}
+	iCreateChannelMembershipRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelMembershipRequest"}
+	iCreateChannelMembershipResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelMembershipResponse"}
+	iCreateChannelModeratorRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelModeratorRequest"}
+	iCreateChannelModeratorResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelModeratorResponse"}
+	iCreateChannelResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "CreateChannelResponse"}
+	iDeleteChannelBanRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelBanRequest"}
+	iDeleteChannelFlowRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelFlowRequest"}
+	iDeleteChannelRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelRequest"}
+	iDeleteChannelMembershipRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelMembershipRequest"}
+	iDeleteChannelMessageRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelMessageRequest"}
+	iDeleteChannelModeratorRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteChannelModeratorRequest"}
+	iDeleteMessagingStreamingConfigurationsRequest       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DeleteMessagingStreamingConfigurationsRequest"}
+	iDescribeChannelBanRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelBanRequest"}
+	iDescribeChannelBanResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelBanResponse"}
+	iDescribeChannelFlowRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelFlowRequest"}
+	iDescribeChannelFlowResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelFlowResponse"}
+	iDescribeChannelRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelRequest"}
+	iDescribeChannelMembershipForAppInstanceUserRequest  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelMembershipForAppInstanceUserRequest"}
+	iDescribeChannelMembershipForAppInstanceUserResponse = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelMembershipForAppInstanceUserResponse"}
+	iDescribeChannelMembershipRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelMembershipRequest"}
+	iDescribeChannelMembershipResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelMembershipResponse"}
+	iDescribeChannelModeratedByAppInstanceUserRequest    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelModeratedByAppInstanceUserRequest"}
+	iDescribeChannelModeratedByAppInstanceUserResponse   = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelModeratedByAppInstanceUserResponse"}
+	iDescribeChannelModeratorRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelModeratorRequest"}
+	iDescribeChannelModeratorResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelModeratorResponse"}
+	iDescribeChannelResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DescribeChannelResponse"}
+	iDisassociateChannelFlowRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "DisassociateChannelFlowRequest"}
+	iGetChannelMembershipPreferencesRequest              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMembershipPreferencesRequest"}
+	iGetChannelMembershipPreferencesResponse             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMembershipPreferencesResponse"}
+	iGetChannelMessageRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMessageRequest"}
+	iGetChannelMessageResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMessageResponse"}
+	iGetChannelMessageStatusRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMessageStatusRequest"}
+	iGetChannelMessageStatusResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetChannelMessageStatusResponse"}
+	iGetMessagingSessionEndpointRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetMessagingSessionEndpointRequest"}
+	iGetMessagingSessionEndpointResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetMessagingSessionEndpointResponse"}
+	iGetMessagingStreamingConfigurationsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetMessagingStreamingConfigurationsRequest"}
+	iGetMessagingStreamingConfigurationsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "GetMessagingStreamingConfigurationsResponse"}
+	iListChannelBansRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelBansRequest"}
+	iListChannelBansResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelBansResponse"}
+	iListChannelFlowsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelFlowsRequest"}
+	iListChannelFlowsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelFlowsResponse"}
+	iListChannelMembershipsForAppInstanceUserRequest     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMembershipsForAppInstanceUserRequest"}
+	iListChannelMembershipsForAppInstanceUserResponse    = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMembershipsForAppInstanceUserResponse"}
+	iListChannelMembershipsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMembershipsRequest"}
+	iListChannelMembershipsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMembershipsResponse"}
+	iListChannelMessagesRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMessagesRequest"}
+	iListChannelMessagesResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelMessagesResponse"}
+	iListChannelModeratorsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelModeratorsRequest"}
+	iListChannelModeratorsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelModeratorsResponse"}
+	iListChannelsAssociatedWithChannelFlowRequest        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsAssociatedWithChannelFlowRequest"}
+	iListChannelsAssociatedWithChannelFlowResponse       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsAssociatedWithChannelFlowResponse"}
+	iListChannelsRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsRequest"}
+	iListChannelsModeratedByAppInstanceUserRequest       = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsModeratedByAppInstanceUserRequest"}
+	iListChannelsModeratedByAppInstanceUserResponse      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsModeratedByAppInstanceUserResponse"}
+	iListChannelsResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListChannelsResponse"}
+	iListSubChannelsRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListSubChannelsRequest"}
+	iListSubChannelsResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListSubChannelsResponse"}
+	iListTagsForResourceRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "ListTagsForResourceResponse"}
+	iPutChannelExpirationSettingsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutChannelExpirationSettingsRequest"}
+	iPutChannelExpirationSettingsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutChannelExpirationSettingsResponse"}
+	iPutChannelMembershipPreferencesRequest              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutChannelMembershipPreferencesRequest"}
+	iPutChannelMembershipPreferencesResponse             = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutChannelMembershipPreferencesResponse"}
+	iPutMessagingStreamingConfigurationsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutMessagingStreamingConfigurationsRequest"}
+	iPutMessagingStreamingConfigurationsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "PutMessagingStreamingConfigurationsResponse"}
+	iRedactChannelMessageRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "RedactChannelMessageRequest"}
+	iRedactChannelMessageResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "RedactChannelMessageResponse"}
+	iSearchChannelsRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchChannelsRequest"}
+	iSearchChannelsResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SearchChannelsResponse"}
+	iSendChannelMessageRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SendChannelMessageRequest"}
+	iSendChannelMessageResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "SendChannelMessageResponse"}
+	iTagResourceRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "TagResourceRequest"}
+	iUntagResourceRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UntagResourceRequest"}
+	iUpdateChannelFlowRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelFlowRequest"}
+	iUpdateChannelFlowResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelFlowResponse"}
+	iUpdateChannelRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelRequest"}
+	iUpdateChannelMessageRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelMessageRequest"}
+	iUpdateChannelMessageResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelMessageResponse"}
+	iUpdateChannelResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelResponse"}
+	iUpdateChannelReadMarkerRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelReadMarkerRequest"}
+	iUpdateChannelReadMarkerResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.chimesdkmessaging", Name: "UpdateChannelReadMarkerResponse"}
+	pUnit                                                = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/{ChannelArn}/channel-flow",
-	Code: 200})
-
-var BatchCreateChannelMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "BatchCreateChannelMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/{ChannelArn}/memberships?operation=batch-create",
-	Code: 200})
-
-var ChannelFlowCallback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelFlowCallback",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/{ChannelArn}?operation=channel-flow-callback",
-	Code: 200})
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels",
-	Code: 201})
-
-var CreateChannelBan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelBan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/{ChannelArn}/bans",
-	Code: 201})
-
-var CreateChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channel-flows",
-	Code: 201})
-
-var CreateChannelMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/{ChannelArn}/memberships",
-	Code: 201})
-
-var CreateChannelModerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelModerator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/{ChannelArn}/moderators",
-	Code: 201})
-
-var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channels/{ChannelArn}",
-	Code: 204})
-
-var DeleteChannelBan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelBan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channels/{ChannelArn}/bans/{MemberArn}",
-	Code: 204})
-
-var DeleteChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channel-flows/{ChannelFlowArn}",
-	Code: 204})
-
-var DeleteChannelMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channels/{ChannelArn}/memberships/{MemberArn}",
-	Code: 204})
-
-var DeleteChannelMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channels/{ChannelArn}/messages/{MessageId}",
-	Code: 204})
-
-var DeleteChannelModerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelModerator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channels/{ChannelArn}/moderators/{ChannelModeratorArn}",
-	Code: 204})
-
-var DeleteMessagingStreamingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteMessagingStreamingConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/app-instances/{AppInstanceArn}/streaming-configurations",
-	Code: 204})
-
-var DescribeChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}",
-	Code: 200})
-
-var DescribeChannelBan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelBan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/bans/{MemberArn}",
-	Code: 200})
-
-var DescribeChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channel-flows/{ChannelFlowArn}",
-	Code: 200})
-
-var DescribeChannelMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/memberships/{MemberArn}",
-	Code: 200})
-
-var DescribeChannelMembershipForAppInstanceUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelMembershipForAppInstanceUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}?scope=app-instance-user-membership",
-	Code: 200})
-
-var DescribeChannelModeratedByAppInstanceUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelModeratedByAppInstanceUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}?scope=app-instance-user-moderated-channel",
-	Code: 200})
-
-var DescribeChannelModerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelModerator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/moderators/{ChannelModeratorArn}",
-	Code: 200})
-
-var DisassociateChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DisassociateChannelFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channels/{ChannelArn}/channel-flow/{ChannelFlowArn}",
-	Code: 204})
-
-var GetChannelMembershipPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMembershipPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/memberships/{MemberArn}/preferences",
-	Code: 200})
-
-var GetChannelMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/messages/{MessageId}",
-	Code: 200})
-
-var GetChannelMessageStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMessageStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/messages/{MessageId}?scope=message-status",
-	Code: 200})
-
-var GetMessagingSessionEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetMessagingSessionEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/endpoints/messaging-session",
-	Code: 200})
-
-var GetMessagingStreamingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetMessagingStreamingConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app-instances/{AppInstanceArn}/streaming-configurations",
-	Code: 200})
-
-var ListChannelBans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelBans",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/bans",
-	Code: 200})
-
-var ListChannelFlows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelFlows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channel-flows",
-	Code: 200})
-
-var ListChannelMemberships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMemberships",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/memberships",
-	Code: 200})
-
-var ListChannelMembershipsForAppInstanceUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMembershipsForAppInstanceUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels?scope=app-instance-user-memberships",
-	Code: 200})
-
-var ListChannelMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMessages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/messages",
-	Code: 200})
-
-var ListChannelModerators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelModerators",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/moderators",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels",
-	Code: 200})
-
-var ListChannelsAssociatedWithChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsAssociatedWithChannelFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels?scope=channel-flow-associations",
-	Code: 200})
-
-var ListChannelsModeratedByAppInstanceUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsModeratedByAppInstanceUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels?scope=app-instance-user-moderated-channels",
-	Code: 200})
-
-var ListSubChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListSubChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/{ChannelArn}/subchannels",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags",
-	Code: 200})
-
-var PutChannelExpirationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutChannelExpirationSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/{ChannelArn}/expiration-settings",
-	Code: 200})
-
-var PutChannelMembershipPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutChannelMembershipPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/{ChannelArn}/memberships/{MemberArn}/preferences",
-	Code: 200})
-
-var PutMessagingStreamingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutMessagingStreamingConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/app-instances/{AppInstanceArn}/streaming-configurations",
-	Code: 200})
-
-var RedactChannelMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "RedactChannelMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/{ChannelArn}/messages/{MessageId}?operation=redact",
-	Code: 200})
-
-var SearchChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels?operation=search",
-	Code: 200})
-
-var SendChannelMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SendChannelMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/{ChannelArn}/messages",
-	Code: 201})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags?operation=tag-resource",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags?operation=untag-resource",
-	Code: 204})
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/{ChannelArn}",
-	Code: 200})
-
-var UpdateChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channel-flows/{ChannelFlowArn}",
-	Code: 200})
-
-var UpdateChannelMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/{ChannelArn}/messages/{MessageId}",
-	Code: 200})
-
-var UpdateChannelReadMarker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelReadMarker",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/{ChannelArn}/readMarker",
-	Code: 200})
-
-var _ChimeMessagingService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChimeMessagingService",
-}, smithy.ShapeTypeService, 0)
-
-var ChimeMessagingService = smithy.NewServiceSchema(_ChimeMessagingService, "2021-05-15")
-
-var AllowNotifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "AllowNotifications",
-}, smithy.ShapeTypeEnum, 3)
-var AllowNotifications_ALL *smithy.Schema
-
-var AllowNotifications_NONE *smithy.Schema
-
-var AllowNotifications_FILTERED *smithy.Schema
-
-var AppInstanceUserMembershipSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "AppInstanceUserMembershipSummary",
-}, smithy.ShapeTypeStructure, 3)
-var AppInstanceUserMembershipSummary_Type *smithy.Schema
-
-var AppInstanceUserMembershipSummary_ReadMarkerTimestamp *smithy.Schema
-
-var AppInstanceUserMembershipSummary_SubChannelId *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Code *smithy.Schema
-
-var BadRequestException_Message *smithy.Schema
-
-var BatchChannelMemberships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "BatchChannelMemberships",
-}, smithy.ShapeTypeStructure, 5)
-var BatchChannelMemberships_InvitedBy *smithy.Schema
-
-var BatchChannelMemberships_Type *smithy.Schema
-
-var BatchChannelMemberships_Members *smithy.Schema
-
-var BatchChannelMemberships_ChannelArn *smithy.Schema
-
-var BatchChannelMemberships_SubChannelId *smithy.Schema
-
-var BatchCreateChannelMembershipError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "BatchCreateChannelMembershipError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateChannelMembershipError_MemberArn *smithy.Schema
-
-var BatchCreateChannelMembershipError_ErrorCode *smithy.Schema
-
-var BatchCreateChannelMembershipError_ErrorMessage *smithy.Schema
-
-var _BatchCreateChannelMembershipErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "BatchCreateChannelMembershipErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchCreateChannelMembershipErrors_member *smithy.Schema
-
-var _CallbackIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CallbackIdType",
-}, smithy.ShapeTypeString, 0)
-
-var Channel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Channel",
-}, smithy.ShapeTypeStructure, 12)
-var Channel_Name *smithy.Schema
-
-var Channel_ChannelArn *smithy.Schema
-
-var Channel_Mode *smithy.Schema
-
-var Channel_Privacy *smithy.Schema
-
-var Channel_Metadata *smithy.Schema
-
-var Channel_CreatedBy *smithy.Schema
-
-var Channel_CreatedTimestamp *smithy.Schema
-
-var Channel_LastMessageTimestamp *smithy.Schema
-
-var Channel_LastUpdatedTimestamp *smithy.Schema
-
-var Channel_ChannelFlowArn *smithy.Schema
-
-var Channel_ElasticChannelConfiguration *smithy.Schema
-
-var Channel_ExpirationSettings *smithy.Schema
-
-var ChannelAssociatedWithFlowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelAssociatedWithFlowSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ChannelAssociatedWithFlowSummary_Name *smithy.Schema
-
-var ChannelAssociatedWithFlowSummary_ChannelArn *smithy.Schema
-
-var ChannelAssociatedWithFlowSummary_Mode *smithy.Schema
-
-var ChannelAssociatedWithFlowSummary_Privacy *smithy.Schema
-
-var ChannelAssociatedWithFlowSummary_Metadata *smithy.Schema
-
-var _ChannelAssociatedWithFlowSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelAssociatedWithFlowSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelAssociatedWithFlowSummaryList_member *smithy.Schema
-
-var ChannelBan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelBan",
-}, smithy.ShapeTypeStructure, 4)
-var ChannelBan_Member *smithy.Schema
-
-var ChannelBan_ChannelArn *smithy.Schema
-
-var ChannelBan_CreatedTimestamp *smithy.Schema
-
-var ChannelBan_CreatedBy *smithy.Schema
-
-var ChannelBanSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelBanSummary",
-}, smithy.ShapeTypeStructure, 1)
-var ChannelBanSummary_Member *smithy.Schema
-
-var _ChannelBanSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelBanSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelBanSummaryList_member *smithy.Schema
-
-var ChannelFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelFlow",
-}, smithy.ShapeTypeStructure, 5)
-var ChannelFlow_ChannelFlowArn *smithy.Schema
-
-var ChannelFlow_Processors *smithy.Schema
-
-var ChannelFlow_Name *smithy.Schema
-
-var ChannelFlow_CreatedTimestamp *smithy.Schema
-
-var ChannelFlow_LastUpdatedTimestamp *smithy.Schema
-
-var _ChannelFlowExecutionOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelFlowExecutionOrder",
-}, smithy.ShapeTypeInteger, 0)
-
-var ChannelFlowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelFlowSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ChannelFlowSummary_ChannelFlowArn *smithy.Schema
-
-var ChannelFlowSummary_Name *smithy.Schema
-
-var ChannelFlowSummary_Processors *smithy.Schema
-
-var _ChannelFlowSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelFlowSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelFlowSummaryList_member *smithy.Schema
-
-var _ChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ChannelMemberArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMemberArns",
-}, smithy.ShapeTypeList, 1)
-var _ChannelMemberArns_member *smithy.Schema
-
-var ChannelMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMembership",
-}, smithy.ShapeTypeStructure, 7)
-var ChannelMembership_InvitedBy *smithy.Schema
-
-var ChannelMembership_Type *smithy.Schema
-
-var ChannelMembership_Member *smithy.Schema
-
-var ChannelMembership_ChannelArn *smithy.Schema
-
-var ChannelMembership_CreatedTimestamp *smithy.Schema
-
-var ChannelMembership_LastUpdatedTimestamp *smithy.Schema
-
-var ChannelMembership_SubChannelId *smithy.Schema
-
-var ChannelMembershipForAppInstanceUserSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMembershipForAppInstanceUserSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelMembershipForAppInstanceUserSummary_ChannelSummary *smithy.Schema
-
-var ChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary *smithy.Schema
-
-var _ChannelMembershipForAppInstanceUserSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMembershipForAppInstanceUserSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelMembershipForAppInstanceUserSummaryList_member *smithy.Schema
-
-var ChannelMembershipPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMembershipPreferences",
-}, smithy.ShapeTypeStructure, 1)
-var ChannelMembershipPreferences_PushNotifications *smithy.Schema
-
-var ChannelMembershipSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMembershipSummary",
-}, smithy.ShapeTypeStructure, 1)
-var ChannelMembershipSummary_Member *smithy.Schema
-
-var _ChannelMembershipSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMembershipSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelMembershipSummaryList_member *smithy.Schema
-
-var ChannelMembershipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMembershipType",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelMembershipType_DEFAULT *smithy.Schema
-
-var ChannelMembershipType_HIDDEN *smithy.Schema
-
-var ChannelMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessage",
-}, smithy.ShapeTypeStructure, 16)
-var ChannelMessage_ChannelArn *smithy.Schema
-
-var ChannelMessage_MessageId *smithy.Schema
-
-var ChannelMessage_Content *smithy.Schema
-
-var ChannelMessage_Metadata *smithy.Schema
-
-var ChannelMessage_Type *smithy.Schema
-
-var ChannelMessage_CreatedTimestamp *smithy.Schema
-
-var ChannelMessage_LastEditedTimestamp *smithy.Schema
-
-var ChannelMessage_LastUpdatedTimestamp *smithy.Schema
-
-var ChannelMessage_Sender *smithy.Schema
-
-var ChannelMessage_Redacted *smithy.Schema
-
-var ChannelMessage_Persistence *smithy.Schema
-
-var ChannelMessage_Status *smithy.Schema
-
-var ChannelMessage_MessageAttributes *smithy.Schema
-
-var ChannelMessage_SubChannelId *smithy.Schema
-
-var ChannelMessage_ContentType *smithy.Schema
-
-var ChannelMessage_Target *smithy.Schema
-
-var ChannelMessageCallback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessageCallback",
-}, smithy.ShapeTypeStructure, 7)
-var ChannelMessageCallback_MessageId *smithy.Schema
-
-var ChannelMessageCallback_Content *smithy.Schema
-
-var ChannelMessageCallback_Metadata *smithy.Schema
-
-var ChannelMessageCallback_PushNotification *smithy.Schema
-
-var ChannelMessageCallback_MessageAttributes *smithy.Schema
-
-var ChannelMessageCallback_SubChannelId *smithy.Schema
-
-var ChannelMessageCallback_ContentType *smithy.Schema
-
-var ChannelMessagePersistenceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessagePersistenceType",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelMessagePersistenceType_PERSISTENT *smithy.Schema
-
-var ChannelMessagePersistenceType_NON_PERSISTENT *smithy.Schema
-
-var ChannelMessageStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessageStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ChannelMessageStatus_SENT *smithy.Schema
-
-var ChannelMessageStatus_PENDING *smithy.Schema
-
-var ChannelMessageStatus_FAILED *smithy.Schema
-
-var ChannelMessageStatus_DENIED *smithy.Schema
-
-var ChannelMessageStatusStructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessageStatusStructure",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelMessageStatusStructure_Value *smithy.Schema
-
-var ChannelMessageStatusStructure_Detail *smithy.Schema
-
-var ChannelMessageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessageSummary",
-}, smithy.ShapeTypeStructure, 13)
-var ChannelMessageSummary_MessageId *smithy.Schema
-
-var ChannelMessageSummary_Content *smithy.Schema
-
-var ChannelMessageSummary_Metadata *smithy.Schema
-
-var ChannelMessageSummary_Type *smithy.Schema
-
-var ChannelMessageSummary_CreatedTimestamp *smithy.Schema
-
-var ChannelMessageSummary_LastUpdatedTimestamp *smithy.Schema
-
-var ChannelMessageSummary_LastEditedTimestamp *smithy.Schema
-
-var ChannelMessageSummary_Sender *smithy.Schema
-
-var ChannelMessageSummary_Redacted *smithy.Schema
-
-var ChannelMessageSummary_Status *smithy.Schema
-
-var ChannelMessageSummary_MessageAttributes *smithy.Schema
-
-var ChannelMessageSummary_ContentType *smithy.Schema
-
-var ChannelMessageSummary_Target *smithy.Schema
-
-var _ChannelMessageSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessageSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelMessageSummaryList_member *smithy.Schema
-
-var ChannelMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMessageType",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelMessageType_STANDARD *smithy.Schema
-
-var ChannelMessageType_CONTROL *smithy.Schema
-
-var ChannelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelMode",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelMode_UNRESTRICTED *smithy.Schema
-
-var ChannelMode_RESTRICTED *smithy.Schema
-
-var ChannelModeratedByAppInstanceUserSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelModeratedByAppInstanceUserSummary",
-}, smithy.ShapeTypeStructure, 1)
-var ChannelModeratedByAppInstanceUserSummary_ChannelSummary *smithy.Schema
-
-var _ChannelModeratedByAppInstanceUserSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelModeratedByAppInstanceUserSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelModeratedByAppInstanceUserSummaryList_member *smithy.Schema
-
-var ChannelModerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelModerator",
-}, smithy.ShapeTypeStructure, 4)
-var ChannelModerator_Moderator *smithy.Schema
-
-var ChannelModerator_ChannelArn *smithy.Schema
-
-var ChannelModerator_CreatedTimestamp *smithy.Schema
-
-var ChannelModerator_CreatedBy *smithy.Schema
-
-var _ChannelModeratorArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelModeratorArns",
-}, smithy.ShapeTypeList, 1)
-var _ChannelModeratorArns_member *smithy.Schema
-
-var ChannelModeratorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelModeratorSummary",
-}, smithy.ShapeTypeStructure, 1)
-var ChannelModeratorSummary_Moderator *smithy.Schema
-
-var _ChannelModeratorSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelModeratorSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelModeratorSummaryList_member *smithy.Schema
-
-var ChannelPrivacy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelPrivacy",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelPrivacy_PUBLIC *smithy.Schema
-
-var ChannelPrivacy_PRIVATE *smithy.Schema
-
-var ChannelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ChannelSummary_Name *smithy.Schema
-
-var ChannelSummary_ChannelArn *smithy.Schema
-
-var ChannelSummary_Mode *smithy.Schema
-
-var ChannelSummary_Privacy *smithy.Schema
-
-var ChannelSummary_Metadata *smithy.Schema
-
-var ChannelSummary_LastMessageTimestamp *smithy.Schema
-
-var _ChannelSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelSummaryList_member *smithy.Schema
-
-var _ChimeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChimeArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Code *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var _Content = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Content",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ElasticChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ElasticChannelConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ElasticChannelConfiguration_MaximumSubChannels *smithy.Schema
-
-var ElasticChannelConfiguration_TargetMembershipsPerSubChannel *smithy.Schema
-
-var ElasticChannelConfiguration_MinimumMembershipPercentage *smithy.Schema
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 15)
-var ErrorCode_BadRequest *smithy.Schema
-
-var ErrorCode_Conflict *smithy.Schema
-
-var ErrorCode_Forbidden *smithy.Schema
-
-var ErrorCode_NotFound *smithy.Schema
-
-var ErrorCode_PreconditionFailed *smithy.Schema
-
-var ErrorCode_ResourceLimitExceeded *smithy.Schema
-
-var ErrorCode_ServiceFailure *smithy.Schema
-
-var ErrorCode_AccessDenied *smithy.Schema
-
-var ErrorCode_ServiceUnavailable *smithy.Schema
-
-var ErrorCode_Throttled *smithy.Schema
-
-var ErrorCode_Throttling *smithy.Schema
-
-var ErrorCode_Unauthorized *smithy.Schema
-
-var ErrorCode_Unprocessable *smithy.Schema
-
-var ErrorCode_VoiceConnectorGroupAssociationsExist *smithy.Schema
-
-var ErrorCode_PhoneNumberAssociationsExist *smithy.Schema
-
-var ExpirationCriterion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ExpirationCriterion",
-}, smithy.ShapeTypeEnum, 2)
-var ExpirationCriterion_CREATED_TIMESTAMP *smithy.Schema
-
-var ExpirationCriterion_LAST_MESSAGE_TIMESTAMP *smithy.Schema
-
-var _ExpirationDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ExpirationDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var ExpirationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ExpirationSettings",
-}, smithy.ShapeTypeStructure, 2)
-var ExpirationSettings_ExpirationDays *smithy.Schema
-
-var ExpirationSettings_ExpirationCriterion *smithy.Schema
-
-var FallbackAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "FallbackAction",
-}, smithy.ShapeTypeEnum, 2)
-var FallbackAction_CONTINUE *smithy.Schema
-
-var FallbackAction_ABORT *smithy.Schema
-
-var _FilterRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "FilterRule",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_Code *smithy.Schema
-
-var ForbiddenException_Message *smithy.Schema
-
-var Identity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Identity",
-}, smithy.ShapeTypeStructure, 2)
-var Identity_Arn *smithy.Schema
-
-var Identity_Name *smithy.Schema
-
-var InvocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "InvocationType",
-}, smithy.ShapeTypeEnum, 1)
-var InvocationType_ASYNC *smithy.Schema
-
-var LambdaConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "LambdaConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaConfiguration_ResourceArn *smithy.Schema
-
-var LambdaConfiguration_InvocationType *smithy.Schema
-
-var _LambdaFunctionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "LambdaFunctionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MaximumSubChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MaximumSubChannels",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MemberArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MemberArns",
-}, smithy.ShapeTypeList, 1)
-var _MemberArns_member *smithy.Schema
-
-var _Members = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Members",
-}, smithy.ShapeTypeList, 1)
-var _Members_member *smithy.Schema
-
-var _MembershipCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MembershipCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MessageAttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessageAttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _MessageAttributeMap_key *smithy.Schema
-
-var _MessageAttributeMap_value *smithy.Schema
-
-var _MessageAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessageAttributeName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MessageAttributeStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessageAttributeStringValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MessageAttributeStringValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessageAttributeStringValues",
-}, smithy.ShapeTypeList, 1)
-var _MessageAttributeStringValues_member *smithy.Schema
-
-var MessageAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessageAttributeValue",
-}, smithy.ShapeTypeStructure, 1)
-var MessageAttributeValue_StringValues *smithy.Schema
-
-var _MessageId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessageId",
-}, smithy.ShapeTypeString, 0)
-
-var MessagingDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessagingDataType",
-}, smithy.ShapeTypeEnum, 2)
-var MessagingDataType_Channel *smithy.Schema
-
-var MessagingDataType_ChannelMessage *smithy.Schema
-
-var MessagingSessionEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MessagingSessionEndpoint",
-}, smithy.ShapeTypeStructure, 1)
-var MessagingSessionEndpoint_Url *smithy.Schema
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Metadata",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MinimumMembershipPercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "MinimumMembershipPercentage",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeEnum, 2)
-var NetworkType_IPV4_ONLY *smithy.Schema
-
-var NetworkType_DUAL_STACK *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NonEmptyContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "NonEmptyContent",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NonEmptyResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "NonEmptyResourceName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NonNullableBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "NonNullableBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Code *smithy.Schema
-
-var NotFoundException_Message *smithy.Schema
-
-var Processor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Processor",
-}, smithy.ShapeTypeStructure, 4)
-var Processor_Name *smithy.Schema
-
-var Processor_Configuration *smithy.Schema
-
-var Processor_ExecutionOrder *smithy.Schema
-
-var Processor_FallbackAction *smithy.Schema
-
-var ProcessorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ProcessorConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ProcessorConfiguration_Lambda *smithy.Schema
-
-var _ProcessorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ProcessorList",
-}, smithy.ShapeTypeList, 1)
-var _ProcessorList_member *smithy.Schema
-
-var _PushNotificationBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PushNotificationBody",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PushNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PushNotificationConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var PushNotificationConfiguration_Title *smithy.Schema
-
-var PushNotificationConfiguration_Body *smithy.Schema
-
-var PushNotificationConfiguration_Type *smithy.Schema
-
-var PushNotificationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PushNotificationPreferences",
-}, smithy.ShapeTypeStructure, 2)
-var PushNotificationPreferences_AllowNotifications *smithy.Schema
-
-var PushNotificationPreferences_FilterRule *smithy.Schema
-
-var _PushNotificationTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PushNotificationTitle",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PushNotificationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PushNotificationType",
-}, smithy.ShapeTypeEnum, 2)
-var PushNotificationType_DEFAULT *smithy.Schema
-
-var PushNotificationType_VOIP *smithy.Schema
-
-var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceLimitExceededException_Code *smithy.Schema
-
-var ResourceLimitExceededException_Message *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SearchField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchField",
-}, smithy.ShapeTypeStructure, 3)
-var SearchField_Key *smithy.Schema
-
-var SearchField_Values *smithy.Schema
-
-var SearchField_Operator *smithy.Schema
-
-var SearchFieldKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchFieldKey",
-}, smithy.ShapeTypeEnum, 1)
-var SearchFieldKey_MEMBERS *smithy.Schema
-
-var SearchFieldOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchFieldOperator",
-}, smithy.ShapeTypeEnum, 2)
-var SearchFieldOperator_EQUALS *smithy.Schema
-
-var SearchFieldOperator_INCLUDES *smithy.Schema
-
-var _SearchFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchFields",
-}, smithy.ShapeTypeList, 1)
-var _SearchFields_member *smithy.Schema
-
-var _SearchFieldValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchFieldValue",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchFieldValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchFieldValues",
-}, smithy.ShapeTypeList, 1)
-var _SearchFieldValues_member *smithy.Schema
-
-var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceFailureException_Code *smithy.Schema
-
-var ServiceFailureException_Message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Code *smithy.Schema
-
-var ServiceUnavailableException_Message *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var _StatusDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "StatusDetail",
-}, smithy.ShapeTypeString, 0)
-
-var StreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "StreamingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var StreamingConfiguration_DataType *smithy.Schema
-
-var StreamingConfiguration_ResourceArn *smithy.Schema
-
-var _StreamingConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "StreamingConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _StreamingConfigurationList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SubChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SubChannelId",
-}, smithy.ShapeTypeString, 0)
-
-var SubChannelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SubChannelSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SubChannelSummary_SubChannelId *smithy.Schema
-
-var SubChannelSummary_MembershipCount *smithy.Schema
-
-var _SubChannelSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SubChannelSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SubChannelSummaryList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Target",
-}, smithy.ShapeTypeStructure, 1)
-var Target_MemberArn *smithy.Schema
-
-var _TargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TargetList",
-}, smithy.ShapeTypeList, 1)
-var _TargetList_member *smithy.Schema
-
-var _TargetMembershipsPerSubChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TargetMembershipsPerSubChannel",
-}, smithy.ShapeTypeInteger, 0)
-
-var ThrottledClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ThrottledClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottledClientException_Code *smithy.Schema
-
-var ThrottledClientException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UnauthorizedClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UnauthorizedClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedClientException_Code *smithy.Schema
-
-var UnauthorizedClientException_Message *smithy.Schema
-
-var _UrlType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UrlType",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateChannelFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "AssociateChannelFlowRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateChannelFlowRequest_ChannelArn *smithy.Schema
-
-var AssociateChannelFlowRequest_ChannelFlowArn *smithy.Schema
-
-var AssociateChannelFlowRequest_ChimeBearer *smithy.Schema
-
-var BatchCreateChannelMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "BatchCreateChannelMembershipRequest",
-}, smithy.ShapeTypeStructure, 5)
-var BatchCreateChannelMembershipRequest_ChannelArn *smithy.Schema
-
-var BatchCreateChannelMembershipRequest_Type *smithy.Schema
-
-var BatchCreateChannelMembershipRequest_MemberArns *smithy.Schema
-
-var BatchCreateChannelMembershipRequest_ChimeBearer *smithy.Schema
-
-var BatchCreateChannelMembershipRequest_SubChannelId *smithy.Schema
-
-var BatchCreateChannelMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "BatchCreateChannelMembershipResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateChannelMembershipResponse_BatchChannelMemberships *smithy.Schema
-
-var BatchCreateChannelMembershipResponse_Errors *smithy.Schema
-
-var ChannelFlowCallbackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelFlowCallbackRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ChannelFlowCallbackRequest_CallbackId *smithy.Schema
-
-var ChannelFlowCallbackRequest_ChannelArn *smithy.Schema
-
-var ChannelFlowCallbackRequest_DeleteResource *smithy.Schema
-
-var ChannelFlowCallbackRequest_ChannelMessage *smithy.Schema
-
-var ChannelFlowCallbackResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ChannelFlowCallbackResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelFlowCallbackResponse_ChannelArn *smithy.Schema
-
-var ChannelFlowCallbackResponse_CallbackId *smithy.Schema
-
-var CreateChannelBanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelBanRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateChannelBanRequest_ChannelArn *smithy.Schema
-
-var CreateChannelBanRequest_MemberArn *smithy.Schema
-
-var CreateChannelBanRequest_ChimeBearer *smithy.Schema
-
-var CreateChannelBanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelBanResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateChannelBanResponse_ChannelArn *smithy.Schema
-
-var CreateChannelBanResponse_Member *smithy.Schema
-
-var CreateChannelFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelFlowRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateChannelFlowRequest_AppInstanceArn *smithy.Schema
-
-var CreateChannelFlowRequest_Processors *smithy.Schema
-
-var CreateChannelFlowRequest_Name *smithy.Schema
-
-var CreateChannelFlowRequest_Tags *smithy.Schema
-
-var CreateChannelFlowRequest_ClientRequestToken *smithy.Schema
-
-var CreateChannelFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelFlowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChannelFlowResponse_ChannelFlowArn *smithy.Schema
-
-var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateChannelRequest_AppInstanceArn *smithy.Schema
-
-var CreateChannelRequest_Name *smithy.Schema
-
-var CreateChannelRequest_Mode *smithy.Schema
-
-var CreateChannelRequest_Privacy *smithy.Schema
-
-var CreateChannelRequest_Metadata *smithy.Schema
-
-var CreateChannelRequest_ClientRequestToken *smithy.Schema
-
-var CreateChannelRequest_Tags *smithy.Schema
-
-var CreateChannelRequest_ChimeBearer *smithy.Schema
-
-var CreateChannelRequest_ChannelId *smithy.Schema
-
-var CreateChannelRequest_MemberArns *smithy.Schema
-
-var CreateChannelRequest_ModeratorArns *smithy.Schema
-
-var CreateChannelRequest_ElasticChannelConfiguration *smithy.Schema
-
-var CreateChannelRequest_ExpirationSettings *smithy.Schema
-
-var CreateChannelMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelMembershipRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateChannelMembershipRequest_ChannelArn *smithy.Schema
-
-var CreateChannelMembershipRequest_MemberArn *smithy.Schema
-
-var CreateChannelMembershipRequest_Type *smithy.Schema
-
-var CreateChannelMembershipRequest_ChimeBearer *smithy.Schema
-
-var CreateChannelMembershipRequest_SubChannelId *smithy.Schema
-
-var CreateChannelMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelMembershipResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateChannelMembershipResponse_ChannelArn *smithy.Schema
-
-var CreateChannelMembershipResponse_Member *smithy.Schema
-
-var CreateChannelMembershipResponse_SubChannelId *smithy.Schema
-
-var CreateChannelModeratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelModeratorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateChannelModeratorRequest_ChannelArn *smithy.Schema
-
-var CreateChannelModeratorRequest_ChannelModeratorArn *smithy.Schema
-
-var CreateChannelModeratorRequest_ChimeBearer *smithy.Schema
-
-var CreateChannelModeratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelModeratorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateChannelModeratorResponse_ChannelArn *smithy.Schema
-
-var CreateChannelModeratorResponse_ChannelModerator *smithy.Schema
-
-var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "CreateChannelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChannelResponse_ChannelArn *smithy.Schema
-
-var DeleteChannelBanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelBanRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteChannelBanRequest_ChannelArn *smithy.Schema
-
-var DeleteChannelBanRequest_MemberArn *smithy.Schema
-
-var DeleteChannelBanRequest_ChimeBearer *smithy.Schema
-
-var DeleteChannelFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelFlowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChannelFlowRequest_ChannelFlowArn *smithy.Schema
-
-var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChannelRequest_ChannelArn *smithy.Schema
-
-var DeleteChannelRequest_ChimeBearer *smithy.Schema
-
-var DeleteChannelMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelMembershipRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteChannelMembershipRequest_ChannelArn *smithy.Schema
-
-var DeleteChannelMembershipRequest_MemberArn *smithy.Schema
-
-var DeleteChannelMembershipRequest_ChimeBearer *smithy.Schema
-
-var DeleteChannelMembershipRequest_SubChannelId *smithy.Schema
-
-var DeleteChannelMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelMessageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteChannelMessageRequest_ChannelArn *smithy.Schema
-
-var DeleteChannelMessageRequest_MessageId *smithy.Schema
-
-var DeleteChannelMessageRequest_ChimeBearer *smithy.Schema
-
-var DeleteChannelMessageRequest_SubChannelId *smithy.Schema
-
-var DeleteChannelModeratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteChannelModeratorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteChannelModeratorRequest_ChannelArn *smithy.Schema
-
-var DeleteChannelModeratorRequest_ChannelModeratorArn *smithy.Schema
-
-var DeleteChannelModeratorRequest_ChimeBearer *smithy.Schema
-
-var DeleteMessagingStreamingConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DeleteMessagingStreamingConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMessagingStreamingConfigurationsRequest_AppInstanceArn *smithy.Schema
-
-var DescribeChannelBanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelBanRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeChannelBanRequest_ChannelArn *smithy.Schema
-
-var DescribeChannelBanRequest_MemberArn *smithy.Schema
-
-var DescribeChannelBanRequest_ChimeBearer *smithy.Schema
-
-var DescribeChannelBanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelBanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelBanResponse_ChannelBan *smithy.Schema
-
-var DescribeChannelFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelFlowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelFlowRequest_ChannelFlowArn *smithy.Schema
-
-var DescribeChannelFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelFlowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelFlowResponse_ChannelFlow *smithy.Schema
-
-var DescribeChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeChannelRequest_ChannelArn *smithy.Schema
-
-var DescribeChannelRequest_ChimeBearer *smithy.Schema
-
-var DescribeChannelMembershipForAppInstanceUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelMembershipForAppInstanceUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeChannelMembershipForAppInstanceUserRequest_ChannelArn *smithy.Schema
-
-var DescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn *smithy.Schema
-
-var DescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer *smithy.Schema
-
-var DescribeChannelMembershipForAppInstanceUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelMembershipForAppInstanceUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership *smithy.Schema
-
-var DescribeChannelMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelMembershipRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeChannelMembershipRequest_ChannelArn *smithy.Schema
-
-var DescribeChannelMembershipRequest_MemberArn *smithy.Schema
-
-var DescribeChannelMembershipRequest_ChimeBearer *smithy.Schema
-
-var DescribeChannelMembershipRequest_SubChannelId *smithy.Schema
-
-var DescribeChannelMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelMembershipResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelMembershipResponse_ChannelMembership *smithy.Schema
-
-var DescribeChannelModeratedByAppInstanceUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelModeratedByAppInstanceUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeChannelModeratedByAppInstanceUserRequest_ChannelArn *smithy.Schema
-
-var DescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn *smithy.Schema
-
-var DescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer *smithy.Schema
-
-var DescribeChannelModeratedByAppInstanceUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelModeratedByAppInstanceUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelModeratedByAppInstanceUserResponse_Channel *smithy.Schema
-
-var DescribeChannelModeratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelModeratorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeChannelModeratorRequest_ChannelArn *smithy.Schema
-
-var DescribeChannelModeratorRequest_ChannelModeratorArn *smithy.Schema
-
-var DescribeChannelModeratorRequest_ChimeBearer *smithy.Schema
-
-var DescribeChannelModeratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelModeratorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelModeratorResponse_ChannelModerator *smithy.Schema
-
-var DescribeChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DescribeChannelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelResponse_Channel *smithy.Schema
-
-var DisassociateChannelFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "DisassociateChannelFlowRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateChannelFlowRequest_ChannelArn *smithy.Schema
-
-var DisassociateChannelFlowRequest_ChannelFlowArn *smithy.Schema
-
-var DisassociateChannelFlowRequest_ChimeBearer *smithy.Schema
-
-var GetChannelMembershipPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMembershipPreferencesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetChannelMembershipPreferencesRequest_ChannelArn *smithy.Schema
-
-var GetChannelMembershipPreferencesRequest_MemberArn *smithy.Schema
-
-var GetChannelMembershipPreferencesRequest_ChimeBearer *smithy.Schema
-
-var GetChannelMembershipPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMembershipPreferencesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetChannelMembershipPreferencesResponse_ChannelArn *smithy.Schema
-
-var GetChannelMembershipPreferencesResponse_Member *smithy.Schema
-
-var GetChannelMembershipPreferencesResponse_Preferences *smithy.Schema
-
-var GetChannelMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMessageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetChannelMessageRequest_ChannelArn *smithy.Schema
-
-var GetChannelMessageRequest_MessageId *smithy.Schema
-
-var GetChannelMessageRequest_ChimeBearer *smithy.Schema
-
-var GetChannelMessageRequest_SubChannelId *smithy.Schema
-
-var GetChannelMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMessageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelMessageResponse_ChannelMessage *smithy.Schema
-
-var GetChannelMessageStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMessageStatusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetChannelMessageStatusRequest_ChannelArn *smithy.Schema
-
-var GetChannelMessageStatusRequest_MessageId *smithy.Schema
-
-var GetChannelMessageStatusRequest_ChimeBearer *smithy.Schema
-
-var GetChannelMessageStatusRequest_SubChannelId *smithy.Schema
-
-var GetChannelMessageStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetChannelMessageStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelMessageStatusResponse_Status *smithy.Schema
-
-var GetMessagingSessionEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetMessagingSessionEndpointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMessagingSessionEndpointRequest_NetworkType *smithy.Schema
-
-var GetMessagingSessionEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetMessagingSessionEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMessagingSessionEndpointResponse_Endpoint *smithy.Schema
-
-var GetMessagingStreamingConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetMessagingStreamingConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMessagingStreamingConfigurationsRequest_AppInstanceArn *smithy.Schema
-
-var GetMessagingStreamingConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "GetMessagingStreamingConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMessagingStreamingConfigurationsResponse_StreamingConfigurations *smithy.Schema
-
-var ListChannelBansRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelBansRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListChannelBansRequest_ChannelArn *smithy.Schema
-
-var ListChannelBansRequest_MaxResults *smithy.Schema
-
-var ListChannelBansRequest_NextToken *smithy.Schema
-
-var ListChannelBansRequest_ChimeBearer *smithy.Schema
-
-var ListChannelBansResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelBansResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelBansResponse_ChannelArn *smithy.Schema
-
-var ListChannelBansResponse_NextToken *smithy.Schema
-
-var ListChannelBansResponse_ChannelBans *smithy.Schema
-
-var ListChannelFlowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelFlowsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelFlowsRequest_AppInstanceArn *smithy.Schema
-
-var ListChannelFlowsRequest_MaxResults *smithy.Schema
-
-var ListChannelFlowsRequest_NextToken *smithy.Schema
-
-var ListChannelFlowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelFlowsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelFlowsResponse_ChannelFlows *smithy.Schema
-
-var ListChannelFlowsResponse_NextToken *smithy.Schema
-
-var ListChannelMembershipsForAppInstanceUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMembershipsForAppInstanceUserRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn *smithy.Schema
-
-var ListChannelMembershipsForAppInstanceUserRequest_MaxResults *smithy.Schema
-
-var ListChannelMembershipsForAppInstanceUserRequest_NextToken *smithy.Schema
-
-var ListChannelMembershipsForAppInstanceUserRequest_ChimeBearer *smithy.Schema
-
-var ListChannelMembershipsForAppInstanceUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMembershipsForAppInstanceUserResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships *smithy.Schema
-
-var ListChannelMembershipsForAppInstanceUserResponse_NextToken *smithy.Schema
-
-var ListChannelMembershipsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMembershipsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListChannelMembershipsRequest_ChannelArn *smithy.Schema
-
-var ListChannelMembershipsRequest_Type *smithy.Schema
-
-var ListChannelMembershipsRequest_MaxResults *smithy.Schema
-
-var ListChannelMembershipsRequest_NextToken *smithy.Schema
-
-var ListChannelMembershipsRequest_ChimeBearer *smithy.Schema
-
-var ListChannelMembershipsRequest_SubChannelId *smithy.Schema
-
-var ListChannelMembershipsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMembershipsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelMembershipsResponse_ChannelArn *smithy.Schema
-
-var ListChannelMembershipsResponse_ChannelMemberships *smithy.Schema
-
-var ListChannelMembershipsResponse_NextToken *smithy.Schema
-
-var ListChannelMessagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMessagesRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListChannelMessagesRequest_ChannelArn *smithy.Schema
-
-var ListChannelMessagesRequest_SortOrder *smithy.Schema
-
-var ListChannelMessagesRequest_NotBefore *smithy.Schema
-
-var ListChannelMessagesRequest_NotAfter *smithy.Schema
-
-var ListChannelMessagesRequest_MaxResults *smithy.Schema
-
-var ListChannelMessagesRequest_NextToken *smithy.Schema
-
-var ListChannelMessagesRequest_ChimeBearer *smithy.Schema
-
-var ListChannelMessagesRequest_SubChannelId *smithy.Schema
-
-var ListChannelMessagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelMessagesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListChannelMessagesResponse_ChannelArn *smithy.Schema
-
-var ListChannelMessagesResponse_NextToken *smithy.Schema
-
-var ListChannelMessagesResponse_ChannelMessages *smithy.Schema
-
-var ListChannelMessagesResponse_SubChannelId *smithy.Schema
-
-var ListChannelModeratorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelModeratorsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListChannelModeratorsRequest_ChannelArn *smithy.Schema
-
-var ListChannelModeratorsRequest_MaxResults *smithy.Schema
-
-var ListChannelModeratorsRequest_NextToken *smithy.Schema
-
-var ListChannelModeratorsRequest_ChimeBearer *smithy.Schema
-
-var ListChannelModeratorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelModeratorsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelModeratorsResponse_ChannelArn *smithy.Schema
-
-var ListChannelModeratorsResponse_NextToken *smithy.Schema
-
-var ListChannelModeratorsResponse_ChannelModerators *smithy.Schema
-
-var ListChannelsAssociatedWithChannelFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsAssociatedWithChannelFlowRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn *smithy.Schema
-
-var ListChannelsAssociatedWithChannelFlowRequest_MaxResults *smithy.Schema
-
-var ListChannelsAssociatedWithChannelFlowRequest_NextToken *smithy.Schema
-
-var ListChannelsAssociatedWithChannelFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsAssociatedWithChannelFlowResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsAssociatedWithChannelFlowResponse_Channels *smithy.Schema
-
-var ListChannelsAssociatedWithChannelFlowResponse_NextToken *smithy.Schema
-
-var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListChannelsRequest_AppInstanceArn *smithy.Schema
-
-var ListChannelsRequest_Privacy *smithy.Schema
-
-var ListChannelsRequest_MaxResults *smithy.Schema
-
-var ListChannelsRequest_NextToken *smithy.Schema
-
-var ListChannelsRequest_ChimeBearer *smithy.Schema
-
-var ListChannelsModeratedByAppInstanceUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsModeratedByAppInstanceUserRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn *smithy.Schema
-
-var ListChannelsModeratedByAppInstanceUserRequest_MaxResults *smithy.Schema
-
-var ListChannelsModeratedByAppInstanceUserRequest_NextToken *smithy.Schema
-
-var ListChannelsModeratedByAppInstanceUserRequest_ChimeBearer *smithy.Schema
-
-var ListChannelsModeratedByAppInstanceUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsModeratedByAppInstanceUserResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsModeratedByAppInstanceUserResponse_Channels *smithy.Schema
-
-var ListChannelsModeratedByAppInstanceUserResponse_NextToken *smithy.Schema
-
-var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsResponse_Channels *smithy.Schema
-
-var ListChannelsResponse_NextToken *smithy.Schema
-
-var ListSubChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListSubChannelsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSubChannelsRequest_ChannelArn *smithy.Schema
-
-var ListSubChannelsRequest_ChimeBearer *smithy.Schema
-
-var ListSubChannelsRequest_MaxResults *smithy.Schema
-
-var ListSubChannelsRequest_NextToken *smithy.Schema
-
-var ListSubChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListSubChannelsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListSubChannelsResponse_ChannelArn *smithy.Schema
-
-var ListSubChannelsResponse_SubChannels *smithy.Schema
-
-var ListSubChannelsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutChannelExpirationSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutChannelExpirationSettingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutChannelExpirationSettingsRequest_ChannelArn *smithy.Schema
-
-var PutChannelExpirationSettingsRequest_ChimeBearer *smithy.Schema
-
-var PutChannelExpirationSettingsRequest_ExpirationSettings *smithy.Schema
-
-var PutChannelExpirationSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutChannelExpirationSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutChannelExpirationSettingsResponse_ChannelArn *smithy.Schema
-
-var PutChannelExpirationSettingsResponse_ExpirationSettings *smithy.Schema
-
-var PutChannelMembershipPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutChannelMembershipPreferencesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutChannelMembershipPreferencesRequest_ChannelArn *smithy.Schema
-
-var PutChannelMembershipPreferencesRequest_MemberArn *smithy.Schema
-
-var PutChannelMembershipPreferencesRequest_ChimeBearer *smithy.Schema
-
-var PutChannelMembershipPreferencesRequest_Preferences *smithy.Schema
-
-var PutChannelMembershipPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutChannelMembershipPreferencesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutChannelMembershipPreferencesResponse_ChannelArn *smithy.Schema
-
-var PutChannelMembershipPreferencesResponse_Member *smithy.Schema
-
-var PutChannelMembershipPreferencesResponse_Preferences *smithy.Schema
-
-var PutMessagingStreamingConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutMessagingStreamingConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutMessagingStreamingConfigurationsRequest_AppInstanceArn *smithy.Schema
-
-var PutMessagingStreamingConfigurationsRequest_StreamingConfigurations *smithy.Schema
-
-var PutMessagingStreamingConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "PutMessagingStreamingConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutMessagingStreamingConfigurationsResponse_StreamingConfigurations *smithy.Schema
-
-var RedactChannelMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "RedactChannelMessageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RedactChannelMessageRequest_ChannelArn *smithy.Schema
-
-var RedactChannelMessageRequest_MessageId *smithy.Schema
-
-var RedactChannelMessageRequest_ChimeBearer *smithy.Schema
-
-var RedactChannelMessageRequest_SubChannelId *smithy.Schema
-
-var RedactChannelMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "RedactChannelMessageResponse",
-}, smithy.ShapeTypeStructure, 3)
-var RedactChannelMessageResponse_ChannelArn *smithy.Schema
-
-var RedactChannelMessageResponse_MessageId *smithy.Schema
-
-var RedactChannelMessageResponse_SubChannelId *smithy.Schema
-
-var SearchChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchChannelsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SearchChannelsRequest_ChimeBearer *smithy.Schema
-
-var SearchChannelsRequest_Fields *smithy.Schema
-
-var SearchChannelsRequest_MaxResults *smithy.Schema
-
-var SearchChannelsRequest_NextToken *smithy.Schema
-
-var SearchChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SearchChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchChannelsResponse_Channels *smithy.Schema
-
-var SearchChannelsResponse_NextToken *smithy.Schema
-
-var SendChannelMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SendChannelMessageRequest",
-}, smithy.ShapeTypeStructure, 12)
-var SendChannelMessageRequest_ChannelArn *smithy.Schema
-
-var SendChannelMessageRequest_Content *smithy.Schema
-
-var SendChannelMessageRequest_Type *smithy.Schema
-
-var SendChannelMessageRequest_Persistence *smithy.Schema
-
-var SendChannelMessageRequest_Metadata *smithy.Schema
-
-var SendChannelMessageRequest_ClientRequestToken *smithy.Schema
-
-var SendChannelMessageRequest_ChimeBearer *smithy.Schema
-
-var SendChannelMessageRequest_PushNotification *smithy.Schema
-
-var SendChannelMessageRequest_MessageAttributes *smithy.Schema
-
-var SendChannelMessageRequest_SubChannelId *smithy.Schema
-
-var SendChannelMessageRequest_ContentType *smithy.Schema
-
-var SendChannelMessageRequest_Target *smithy.Schema
-
-var SendChannelMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "SendChannelMessageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var SendChannelMessageResponse_ChannelArn *smithy.Schema
-
-var SendChannelMessageResponse_MessageId *smithy.Schema
-
-var SendChannelMessageResponse_Status *smithy.Schema
-
-var SendChannelMessageResponse_SubChannelId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateChannelFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelFlowRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateChannelFlowRequest_ChannelFlowArn *smithy.Schema
-
-var UpdateChannelFlowRequest_Processors *smithy.Schema
-
-var UpdateChannelFlowRequest_Name *smithy.Schema
-
-var UpdateChannelFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelFlowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateChannelFlowResponse_ChannelFlowArn *smithy.Schema
-
-var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateChannelRequest_ChannelArn *smithy.Schema
-
-var UpdateChannelRequest_Name *smithy.Schema
-
-var UpdateChannelRequest_Mode *smithy.Schema
-
-var UpdateChannelRequest_Metadata *smithy.Schema
-
-var UpdateChannelRequest_ChimeBearer *smithy.Schema
-
-var UpdateChannelMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelMessageRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateChannelMessageRequest_ChannelArn *smithy.Schema
-
-var UpdateChannelMessageRequest_MessageId *smithy.Schema
-
-var UpdateChannelMessageRequest_Content *smithy.Schema
-
-var UpdateChannelMessageRequest_Metadata *smithy.Schema
-
-var UpdateChannelMessageRequest_ChimeBearer *smithy.Schema
-
-var UpdateChannelMessageRequest_SubChannelId *smithy.Schema
-
-var UpdateChannelMessageRequest_ContentType *smithy.Schema
-
-var UpdateChannelMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelMessageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChannelMessageResponse_ChannelArn *smithy.Schema
-
-var UpdateChannelMessageResponse_MessageId *smithy.Schema
-
-var UpdateChannelMessageResponse_Status *smithy.Schema
-
-var UpdateChannelMessageResponse_SubChannelId *smithy.Schema
-
-var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateChannelResponse_ChannelArn *smithy.Schema
-
-var UpdateChannelReadMarkerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelReadMarkerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateChannelReadMarkerRequest_ChannelArn *smithy.Schema
-
-var UpdateChannelReadMarkerRequest_ChimeBearer *smithy.Schema
-
-var UpdateChannelReadMarkerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmessaging",
-	Name:      "UpdateChannelReadMarkerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateChannelReadMarkerResponse_ChannelArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AllowNotifications_ALL = AllowNotifications.AddMember("ALL", smithyprelude.Unit)
-
-	AllowNotifications_NONE = AllowNotifications.AddMember("NONE", smithyprelude.Unit)
-
-	AllowNotifications_FILTERED = AllowNotifications.AddMember("FILTERED", smithyprelude.Unit)
-
-	ChannelMembershipType_DEFAULT = ChannelMembershipType.AddMember("DEFAULT", smithyprelude.Unit)
-
-	ChannelMembershipType_HIDDEN = ChannelMembershipType.AddMember("HIDDEN", smithyprelude.Unit)
-
-	AppInstanceUserMembershipSummary_Type = AppInstanceUserMembershipSummary.AddMember("Type", ChannelMembershipType)
-
-	AppInstanceUserMembershipSummary_ReadMarkerTimestamp = AppInstanceUserMembershipSummary.AddMember("ReadMarkerTimestamp", _Timestamp)
-
-	AppInstanceUserMembershipSummary_SubChannelId = AppInstanceUserMembershipSummary.AddMember("SubChannelId", _SubChannelId)
-
-	ErrorCode_BadRequest = ErrorCode.AddMember("BadRequest", smithyprelude.Unit)
-
-	ErrorCode_Conflict = ErrorCode.AddMember("Conflict", smithyprelude.Unit)
-
-	ErrorCode_Forbidden = ErrorCode.AddMember("Forbidden", smithyprelude.Unit)
-
-	ErrorCode_NotFound = ErrorCode.AddMember("NotFound", smithyprelude.Unit)
-
-	ErrorCode_PreconditionFailed = ErrorCode.AddMember("PreconditionFailed", smithyprelude.Unit)
-
-	ErrorCode_ResourceLimitExceeded = ErrorCode.AddMember("ResourceLimitExceeded", smithyprelude.Unit)
-
-	ErrorCode_ServiceFailure = ErrorCode.AddMember("ServiceFailure", smithyprelude.Unit)
-
-	ErrorCode_AccessDenied = ErrorCode.AddMember("AccessDenied", smithyprelude.Unit)
-
-	ErrorCode_ServiceUnavailable = ErrorCode.AddMember("ServiceUnavailable", smithyprelude.Unit)
-
-	ErrorCode_Throttled = ErrorCode.AddMember("Throttled", smithyprelude.Unit)
-
-	ErrorCode_Throttling = ErrorCode.AddMember("Throttling", smithyprelude.Unit)
-
-	ErrorCode_Unauthorized = ErrorCode.AddMember("Unauthorized", smithyprelude.Unit)
-
-	ErrorCode_Unprocessable = ErrorCode.AddMember("Unprocessable", smithyprelude.Unit)
-
-	ErrorCode_VoiceConnectorGroupAssociationsExist = ErrorCode.AddMember("VoiceConnectorGroupAssociationsExist", smithyprelude.Unit)
-
-	ErrorCode_PhoneNumberAssociationsExist = ErrorCode.AddMember("PhoneNumberAssociationsExist", smithyprelude.Unit)
-
-	BadRequestException_Code = BadRequestException.AddMember("Code", ErrorCode)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
-
-	Identity_Arn = Identity.AddMember("Arn", _ChimeArn)
-
-	Identity_Name = Identity.AddMember("Name", _ResourceName)
-
-	_Members_member = _Members.AddMember("member", Identity)
-
-	BatchChannelMemberships_InvitedBy = BatchChannelMemberships.AddMember("InvitedBy", Identity)
-
-	BatchChannelMemberships_Type = BatchChannelMemberships.AddMember("Type", ChannelMembershipType)
-
-	BatchChannelMemberships_Members = BatchChannelMemberships.AddMember("Members", _Members)
-
-	BatchChannelMemberships_ChannelArn = BatchChannelMemberships.AddMember("ChannelArn", _ChimeArn)
-
-	BatchChannelMemberships_SubChannelId = BatchChannelMemberships.AddMember("SubChannelId", _SubChannelId)
-
-	BatchCreateChannelMembershipError_MemberArn = BatchCreateChannelMembershipError.AddMember("MemberArn", _ChimeArn)
-
-	BatchCreateChannelMembershipError_ErrorCode = BatchCreateChannelMembershipError.AddMember("ErrorCode", ErrorCode)
-
-	BatchCreateChannelMembershipError_ErrorMessage = BatchCreateChannelMembershipError.AddMember("ErrorMessage", _String)
-
-	_BatchCreateChannelMembershipErrors_member = _BatchCreateChannelMembershipErrors.AddMember("member", BatchCreateChannelMembershipError)
-
-	ChannelMode_UNRESTRICTED = ChannelMode.AddMember("UNRESTRICTED", smithyprelude.Unit)
-
-	ChannelMode_RESTRICTED = ChannelMode.AddMember("RESTRICTED", smithyprelude.Unit)
-
-	ChannelPrivacy_PUBLIC = ChannelPrivacy.AddMember("PUBLIC", smithyprelude.Unit)
-
-	ChannelPrivacy_PRIVATE = ChannelPrivacy.AddMember("PRIVATE", smithyprelude.Unit)
-
-	ElasticChannelConfiguration_MaximumSubChannels = ElasticChannelConfiguration.AddMember("MaximumSubChannels", _MaximumSubChannels)
-
-	ElasticChannelConfiguration_TargetMembershipsPerSubChannel = ElasticChannelConfiguration.AddMember("TargetMembershipsPerSubChannel", _TargetMembershipsPerSubChannel)
-
-	ElasticChannelConfiguration_MinimumMembershipPercentage = ElasticChannelConfiguration.AddMember("MinimumMembershipPercentage", _MinimumMembershipPercentage)
-
-	ExpirationCriterion_CREATED_TIMESTAMP = ExpirationCriterion.AddMember("CREATED_TIMESTAMP", smithyprelude.Unit)
-
-	ExpirationCriterion_LAST_MESSAGE_TIMESTAMP = ExpirationCriterion.AddMember("LAST_MESSAGE_TIMESTAMP", smithyprelude.Unit)
-
-	ExpirationSettings_ExpirationDays = ExpirationSettings.AddMember("ExpirationDays", _ExpirationDays)
-
-	ExpirationSettings_ExpirationCriterion = ExpirationSettings.AddMember("ExpirationCriterion", ExpirationCriterion)
-
-	Channel_Name = Channel.AddMember("Name", _NonEmptyResourceName)
-
-	Channel_ChannelArn = Channel.AddMember("ChannelArn", _ChimeArn)
-
-	Channel_Mode = Channel.AddMember("Mode", ChannelMode)
-
-	Channel_Privacy = Channel.AddMember("Privacy", ChannelPrivacy)
-
-	Channel_Metadata = Channel.AddMember("Metadata", _Metadata)
-
-	Channel_CreatedBy = Channel.AddMember("CreatedBy", Identity)
-
-	Channel_CreatedTimestamp = Channel.AddMember("CreatedTimestamp", _Timestamp)
-
-	Channel_LastMessageTimestamp = Channel.AddMember("LastMessageTimestamp", _Timestamp)
-
-	Channel_LastUpdatedTimestamp = Channel.AddMember("LastUpdatedTimestamp", _Timestamp)
-
-	Channel_ChannelFlowArn = Channel.AddMember("ChannelFlowArn", _ChimeArn)
-
-	Channel_ElasticChannelConfiguration = Channel.AddMember("ElasticChannelConfiguration", ElasticChannelConfiguration)
-
-	Channel_ExpirationSettings = Channel.AddMember("ExpirationSettings", ExpirationSettings)
-
-	ChannelAssociatedWithFlowSummary_Name = ChannelAssociatedWithFlowSummary.AddMember("Name", _NonEmptyResourceName)
-
-	ChannelAssociatedWithFlowSummary_ChannelArn = ChannelAssociatedWithFlowSummary.AddMember("ChannelArn", _ChimeArn)
-
-	ChannelAssociatedWithFlowSummary_Mode = ChannelAssociatedWithFlowSummary.AddMember("Mode", ChannelMode)
-
-	ChannelAssociatedWithFlowSummary_Privacy = ChannelAssociatedWithFlowSummary.AddMember("Privacy", ChannelPrivacy)
-
-	ChannelAssociatedWithFlowSummary_Metadata = ChannelAssociatedWithFlowSummary.AddMember("Metadata", _Metadata)
-
-	_ChannelAssociatedWithFlowSummaryList_member = _ChannelAssociatedWithFlowSummaryList.AddMember("member", ChannelAssociatedWithFlowSummary)
-
-	ChannelBan_Member = ChannelBan.AddMember("Member", Identity)
-
-	ChannelBan_ChannelArn = ChannelBan.AddMember("ChannelArn", _ChimeArn)
-
-	ChannelBan_CreatedTimestamp = ChannelBan.AddMember("CreatedTimestamp", _Timestamp)
-
-	ChannelBan_CreatedBy = ChannelBan.AddMember("CreatedBy", Identity)
-
-	ChannelBanSummary_Member = ChannelBanSummary.AddMember("Member", Identity)
-
-	_ChannelBanSummaryList_member = _ChannelBanSummaryList.AddMember("member", ChannelBanSummary)
-
-	InvocationType_ASYNC = InvocationType.AddMember("ASYNC", smithyprelude.Unit)
-
-	LambdaConfiguration_ResourceArn = LambdaConfiguration.AddMember("ResourceArn", _LambdaFunctionArn)
-
-	LambdaConfiguration_InvocationType = LambdaConfiguration.AddMember("InvocationType", InvocationType)
-
-	ProcessorConfiguration_Lambda = ProcessorConfiguration.AddMember("Lambda", LambdaConfiguration)
-
-	FallbackAction_CONTINUE = FallbackAction.AddMember("CONTINUE", smithyprelude.Unit)
-
-	FallbackAction_ABORT = FallbackAction.AddMember("ABORT", smithyprelude.Unit)
-
-	Processor_Name = Processor.AddMember("Name", _NonEmptyResourceName)
-
-	Processor_Configuration = Processor.AddMember("Configuration", ProcessorConfiguration)
-
-	Processor_ExecutionOrder = Processor.AddMember("ExecutionOrder", _ChannelFlowExecutionOrder)
-
-	Processor_FallbackAction = Processor.AddMember("FallbackAction", FallbackAction)
-
-	_ProcessorList_member = _ProcessorList.AddMember("member", Processor)
-
-	ChannelFlow_ChannelFlowArn = ChannelFlow.AddMember("ChannelFlowArn", _ChimeArn)
-
-	ChannelFlow_Processors = ChannelFlow.AddMember("Processors", _ProcessorList)
-
-	ChannelFlow_Name = ChannelFlow.AddMember("Name", _NonEmptyResourceName)
-
-	ChannelFlow_CreatedTimestamp = ChannelFlow.AddMember("CreatedTimestamp", _Timestamp)
-
-	ChannelFlow_LastUpdatedTimestamp = ChannelFlow.AddMember("LastUpdatedTimestamp", _Timestamp)
-
-	ChannelFlowSummary_ChannelFlowArn = ChannelFlowSummary.AddMember("ChannelFlowArn", _ChimeArn)
-
-	ChannelFlowSummary_Name = ChannelFlowSummary.AddMember("Name", _NonEmptyResourceName)
-
-	ChannelFlowSummary_Processors = ChannelFlowSummary.AddMember("Processors", _ProcessorList)
-
-	_ChannelFlowSummaryList_member = _ChannelFlowSummaryList.AddMember("member", ChannelFlowSummary)
-
-	_ChannelMemberArns_member = _ChannelMemberArns.AddMember("member", _ChimeArn)
-
-	ChannelMembership_InvitedBy = ChannelMembership.AddMember("InvitedBy", Identity)
-
-	ChannelMembership_Type = ChannelMembership.AddMember("Type", ChannelMembershipType)
-
-	ChannelMembership_Member = ChannelMembership.AddMember("Member", Identity)
-
-	ChannelMembership_ChannelArn = ChannelMembership.AddMember("ChannelArn", _ChimeArn)
-
-	ChannelMembership_CreatedTimestamp = ChannelMembership.AddMember("CreatedTimestamp", _Timestamp)
-
-	ChannelMembership_LastUpdatedTimestamp = ChannelMembership.AddMember("LastUpdatedTimestamp", _Timestamp)
-
-	ChannelMembership_SubChannelId = ChannelMembership.AddMember("SubChannelId", _SubChannelId)
-
-	ChannelSummary_Name = ChannelSummary.AddMember("Name", _NonEmptyResourceName)
-
-	ChannelSummary_ChannelArn = ChannelSummary.AddMember("ChannelArn", _ChimeArn)
-
-	ChannelSummary_Mode = ChannelSummary.AddMember("Mode", ChannelMode)
-
-	ChannelSummary_Privacy = ChannelSummary.AddMember("Privacy", ChannelPrivacy)
-
-	ChannelSummary_Metadata = ChannelSummary.AddMember("Metadata", _Metadata)
-
-	ChannelSummary_LastMessageTimestamp = ChannelSummary.AddMember("LastMessageTimestamp", _Timestamp)
-
-	ChannelMembershipForAppInstanceUserSummary_ChannelSummary = ChannelMembershipForAppInstanceUserSummary.AddMember("ChannelSummary", ChannelSummary)
-
-	ChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary = ChannelMembershipForAppInstanceUserSummary.AddMember("AppInstanceUserMembershipSummary", AppInstanceUserMembershipSummary)
-
-	_ChannelMembershipForAppInstanceUserSummaryList_member = _ChannelMembershipForAppInstanceUserSummaryList.AddMember("member", ChannelMembershipForAppInstanceUserSummary)
-
-	PushNotificationPreferences_AllowNotifications = PushNotificationPreferences.AddMember("AllowNotifications", AllowNotifications)
-
-	PushNotificationPreferences_FilterRule = PushNotificationPreferences.AddMember("FilterRule", _FilterRule)
-
-	ChannelMembershipPreferences_PushNotifications = ChannelMembershipPreferences.AddMember("PushNotifications", PushNotificationPreferences)
-
-	ChannelMembershipSummary_Member = ChannelMembershipSummary.AddMember("Member", Identity)
-
-	_ChannelMembershipSummaryList_member = _ChannelMembershipSummaryList.AddMember("member", ChannelMembershipSummary)
-
-	ChannelMessageType_STANDARD = ChannelMessageType.AddMember("STANDARD", smithyprelude.Unit)
-
-	ChannelMessageType_CONTROL = ChannelMessageType.AddMember("CONTROL", smithyprelude.Unit)
-
-	ChannelMessagePersistenceType_PERSISTENT = ChannelMessagePersistenceType.AddMember("PERSISTENT", smithyprelude.Unit)
-
-	ChannelMessagePersistenceType_NON_PERSISTENT = ChannelMessagePersistenceType.AddMember("NON_PERSISTENT", smithyprelude.Unit)
-
-	ChannelMessageStatus_SENT = ChannelMessageStatus.AddMember("SENT", smithyprelude.Unit)
-
-	ChannelMessageStatus_PENDING = ChannelMessageStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ChannelMessageStatus_FAILED = ChannelMessageStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ChannelMessageStatus_DENIED = ChannelMessageStatus.AddMember("DENIED", smithyprelude.Unit)
-
-	ChannelMessageStatusStructure_Value = ChannelMessageStatusStructure.AddMember("Value", ChannelMessageStatus)
-
-	ChannelMessageStatusStructure_Detail = ChannelMessageStatusStructure.AddMember("Detail", _StatusDetail)
-
-	_MessageAttributeStringValues_member = _MessageAttributeStringValues.AddMember("member", _MessageAttributeStringValue)
-
-	MessageAttributeValue_StringValues = MessageAttributeValue.AddMember("StringValues", _MessageAttributeStringValues)
-
-	_MessageAttributeMap_key = _MessageAttributeMap.AddMember("key", _MessageAttributeName)
-
-	_MessageAttributeMap_value = _MessageAttributeMap.AddMember("value", MessageAttributeValue)
-
-	Target_MemberArn = Target.AddMember("MemberArn", _ChimeArn)
-
-	_TargetList_member = _TargetList.AddMember("member", Target)
-
-	ChannelMessage_ChannelArn = ChannelMessage.AddMember("ChannelArn", _ChimeArn)
-
-	ChannelMessage_MessageId = ChannelMessage.AddMember("MessageId", _MessageId)
-
-	ChannelMessage_Content = ChannelMessage.AddMember("Content", _Content)
-
-	ChannelMessage_Metadata = ChannelMessage.AddMember("Metadata", _Metadata)
-
-	ChannelMessage_Type = ChannelMessage.AddMember("Type", ChannelMessageType)
-
-	ChannelMessage_CreatedTimestamp = ChannelMessage.AddMember("CreatedTimestamp", _Timestamp)
-
-	ChannelMessage_LastEditedTimestamp = ChannelMessage.AddMember("LastEditedTimestamp", _Timestamp)
-
-	ChannelMessage_LastUpdatedTimestamp = ChannelMessage.AddMember("LastUpdatedTimestamp", _Timestamp)
-
-	ChannelMessage_Sender = ChannelMessage.AddMember("Sender", Identity)
-
-	ChannelMessage_Redacted = ChannelMessage.AddMember("Redacted", _NonNullableBoolean)
-
-	ChannelMessage_Persistence = ChannelMessage.AddMember("Persistence", ChannelMessagePersistenceType)
-
-	ChannelMessage_Status = ChannelMessage.AddMember("Status", ChannelMessageStatusStructure)
-
-	ChannelMessage_MessageAttributes = ChannelMessage.AddMember("MessageAttributes", _MessageAttributeMap)
-
-	ChannelMessage_SubChannelId = ChannelMessage.AddMember("SubChannelId", _SubChannelId)
-
-	ChannelMessage_ContentType = ChannelMessage.AddMember("ContentType", _ContentType)
-
-	ChannelMessage_Target = ChannelMessage.AddMember("Target", _TargetList)
-
-	PushNotificationType_DEFAULT = PushNotificationType.AddMember("DEFAULT", smithyprelude.Unit)
-
-	PushNotificationType_VOIP = PushNotificationType.AddMember("VOIP", smithyprelude.Unit)
-
-	PushNotificationConfiguration_Title = PushNotificationConfiguration.AddMember("Title", _PushNotificationTitle)
-
-	PushNotificationConfiguration_Body = PushNotificationConfiguration.AddMember("Body", _PushNotificationBody)
-
-	PushNotificationConfiguration_Type = PushNotificationConfiguration.AddMember("Type", PushNotificationType)
-
-	ChannelMessageCallback_MessageId = ChannelMessageCallback.AddMember("MessageId", _MessageId)
-
-	ChannelMessageCallback_Content = ChannelMessageCallback.AddMember("Content", _NonEmptyContent)
-
-	ChannelMessageCallback_Metadata = ChannelMessageCallback.AddMember("Metadata", _Metadata)
-
-	ChannelMessageCallback_PushNotification = ChannelMessageCallback.AddMember("PushNotification", PushNotificationConfiguration)
-
-	ChannelMessageCallback_MessageAttributes = ChannelMessageCallback.AddMember("MessageAttributes", _MessageAttributeMap)
-
-	ChannelMessageCallback_SubChannelId = ChannelMessageCallback.AddMember("SubChannelId", _SubChannelId)
-
-	ChannelMessageCallback_ContentType = ChannelMessageCallback.AddMember("ContentType", _ContentType)
-
-	ChannelMessageSummary_MessageId = ChannelMessageSummary.AddMember("MessageId", _MessageId)
-
-	ChannelMessageSummary_Content = ChannelMessageSummary.AddMember("Content", _Content)
-
-	ChannelMessageSummary_Metadata = ChannelMessageSummary.AddMember("Metadata", _Metadata)
-
-	ChannelMessageSummary_Type = ChannelMessageSummary.AddMember("Type", ChannelMessageType)
-
-	ChannelMessageSummary_CreatedTimestamp = ChannelMessageSummary.AddMember("CreatedTimestamp", _Timestamp)
-
-	ChannelMessageSummary_LastUpdatedTimestamp = ChannelMessageSummary.AddMember("LastUpdatedTimestamp", _Timestamp)
-
-	ChannelMessageSummary_LastEditedTimestamp = ChannelMessageSummary.AddMember("LastEditedTimestamp", _Timestamp)
-
-	ChannelMessageSummary_Sender = ChannelMessageSummary.AddMember("Sender", Identity)
-
-	ChannelMessageSummary_Redacted = ChannelMessageSummary.AddMember("Redacted", _NonNullableBoolean)
-
-	ChannelMessageSummary_Status = ChannelMessageSummary.AddMember("Status", ChannelMessageStatusStructure)
-
-	ChannelMessageSummary_MessageAttributes = ChannelMessageSummary.AddMember("MessageAttributes", _MessageAttributeMap)
-
-	ChannelMessageSummary_ContentType = ChannelMessageSummary.AddMember("ContentType", _ContentType)
-
-	ChannelMessageSummary_Target = ChannelMessageSummary.AddMember("Target", _TargetList)
-
-	_ChannelMessageSummaryList_member = _ChannelMessageSummaryList.AddMember("member", ChannelMessageSummary)
-
-	ChannelModeratedByAppInstanceUserSummary_ChannelSummary = ChannelModeratedByAppInstanceUserSummary.AddMember("ChannelSummary", ChannelSummary)
-
-	_ChannelModeratedByAppInstanceUserSummaryList_member = _ChannelModeratedByAppInstanceUserSummaryList.AddMember("member", ChannelModeratedByAppInstanceUserSummary)
-
-	ChannelModerator_Moderator = ChannelModerator.AddMember("Moderator", Identity)
-
-	ChannelModerator_ChannelArn = ChannelModerator.AddMember("ChannelArn", _ChimeArn)
-
-	ChannelModerator_CreatedTimestamp = ChannelModerator.AddMember("CreatedTimestamp", _Timestamp)
-
-	ChannelModerator_CreatedBy = ChannelModerator.AddMember("CreatedBy", Identity)
-
-	_ChannelModeratorArns_member = _ChannelModeratorArns.AddMember("member", _ChimeArn)
-
-	ChannelModeratorSummary_Moderator = ChannelModeratorSummary.AddMember("Moderator", Identity)
-
-	_ChannelModeratorSummaryList_member = _ChannelModeratorSummaryList.AddMember("member", ChannelModeratorSummary)
-
-	_ChannelSummaryList_member = _ChannelSummaryList.AddMember("member", ChannelSummary)
-
-	ConflictException_Code = ConflictException.AddMember("Code", ErrorCode)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	ForbiddenException_Code = ForbiddenException.AddMember("Code", ErrorCode)
-
-	ForbiddenException_Message = ForbiddenException.AddMember("Message", _String)
-
-	_MemberArns_member = _MemberArns.AddMember("member", _ChimeArn)
-
-	MessagingDataType_Channel = MessagingDataType.AddMember("Channel", smithyprelude.Unit)
-
-	MessagingDataType_ChannelMessage = MessagingDataType.AddMember("ChannelMessage", smithyprelude.Unit)
-
-	MessagingSessionEndpoint_Url = MessagingSessionEndpoint.AddMember("Url", _UrlType)
-
-	NetworkType_IPV4_ONLY = NetworkType.AddMember("IPV4_ONLY", smithyprelude.Unit)
-
-	NetworkType_DUAL_STACK = NetworkType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	NotFoundException_Code = NotFoundException.AddMember("Code", ErrorCode)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _String)
-
-	ResourceLimitExceededException_Code = ResourceLimitExceededException.AddMember("Code", ErrorCode)
-
-	ResourceLimitExceededException_Message = ResourceLimitExceededException.AddMember("Message", _String)
-
-	SearchFieldKey_MEMBERS = SearchFieldKey.AddMember("MEMBERS", smithyprelude.Unit)
-
-	_SearchFieldValues_member = _SearchFieldValues.AddMember("member", _SearchFieldValue)
-
-	SearchFieldOperator_EQUALS = SearchFieldOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	SearchFieldOperator_INCLUDES = SearchFieldOperator.AddMember("INCLUDES", smithyprelude.Unit)
-
-	SearchField_Key = SearchField.AddMember("Key", SearchFieldKey)
-
-	SearchField_Values = SearchField.AddMember("Values", _SearchFieldValues)
-
-	SearchField_Operator = SearchField.AddMember("Operator", SearchFieldOperator)
-
-	_SearchFields_member = _SearchFields.AddMember("member", SearchField)
-
-	ServiceFailureException_Code = ServiceFailureException.AddMember("Code", ErrorCode)
-
-	ServiceFailureException_Message = ServiceFailureException.AddMember("Message", _String)
-
-	ServiceUnavailableException_Code = ServiceUnavailableException.AddMember("Code", ErrorCode)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	StreamingConfiguration_DataType = StreamingConfiguration.AddMember("DataType", MessagingDataType)
-
-	StreamingConfiguration_ResourceArn = StreamingConfiguration.AddMember("ResourceArn", _ChimeArn)
-
-	_StreamingConfigurationList_member = _StreamingConfigurationList.AddMember("member", StreamingConfiguration)
-
-	SubChannelSummary_SubChannelId = SubChannelSummary.AddMember("SubChannelId", _SubChannelId)
-
-	SubChannelSummary_MembershipCount = SubChannelSummary.AddMember("MembershipCount", _MembershipCount)
-
-	_SubChannelSummaryList_member = _SubChannelSummaryList.AddMember("member", SubChannelSummary)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottledClientException_Code = ThrottledClientException.AddMember("Code", ErrorCode)
-
-	ThrottledClientException_Message = ThrottledClientException.AddMember("Message", _String)
-
-	UnauthorizedClientException_Code = UnauthorizedClientException.AddMember("Code", ErrorCode)
-
-	UnauthorizedClientException_Message = UnauthorizedClientException.AddMember("Message", _String)
-
-	AssociateChannelFlowRequest_ChannelArn = AssociateChannelFlowRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	AssociateChannelFlowRequest_ChannelFlowArn = AssociateChannelFlowRequest.AddMember("ChannelFlowArn", _ChimeArn)
-
-	AssociateChannelFlowRequest_ChimeBearer = AssociateChannelFlowRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	BatchCreateChannelMembershipRequest_ChannelArn = BatchCreateChannelMembershipRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	BatchCreateChannelMembershipRequest_Type = BatchCreateChannelMembershipRequest.AddMember("Type", ChannelMembershipType)
-
-	BatchCreateChannelMembershipRequest_MemberArns = BatchCreateChannelMembershipRequest.AddMember("MemberArns", _MemberArns)
-
-	BatchCreateChannelMembershipRequest_ChimeBearer = BatchCreateChannelMembershipRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	BatchCreateChannelMembershipRequest_SubChannelId = BatchCreateChannelMembershipRequest.AddMember("SubChannelId", _SubChannelId)
-
-	BatchCreateChannelMembershipResponse_BatchChannelMemberships = BatchCreateChannelMembershipResponse.AddMember("BatchChannelMemberships", BatchChannelMemberships)
-
-	BatchCreateChannelMembershipResponse_Errors = BatchCreateChannelMembershipResponse.AddMember("Errors", _BatchCreateChannelMembershipErrors)
-
-	ChannelFlowCallbackRequest_CallbackId = ChannelFlowCallbackRequest.AddMember("CallbackId", _CallbackIdType)
-
-	ChannelFlowCallbackRequest_ChannelArn = ChannelFlowCallbackRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	ChannelFlowCallbackRequest_DeleteResource = ChannelFlowCallbackRequest.AddMember("DeleteResource", _NonNullableBoolean)
-
-	ChannelFlowCallbackRequest_ChannelMessage = ChannelFlowCallbackRequest.AddMember("ChannelMessage", ChannelMessageCallback)
-
-	ChannelFlowCallbackResponse_ChannelArn = ChannelFlowCallbackResponse.AddMember("ChannelArn", _ChimeArn)
-
-	ChannelFlowCallbackResponse_CallbackId = ChannelFlowCallbackResponse.AddMember("CallbackId", _CallbackIdType)
-
-	CreateChannelBanRequest_ChannelArn = CreateChannelBanRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	CreateChannelBanRequest_MemberArn = CreateChannelBanRequest.AddMember("MemberArn", _ChimeArn)
-
-	CreateChannelBanRequest_ChimeBearer = CreateChannelBanRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	CreateChannelBanResponse_ChannelArn = CreateChannelBanResponse.AddMember("ChannelArn", _ChimeArn)
-
-	CreateChannelBanResponse_Member = CreateChannelBanResponse.AddMember("Member", Identity)
-
-	CreateChannelFlowRequest_AppInstanceArn = CreateChannelFlowRequest.AddMember("AppInstanceArn", _ChimeArn)
-
-	CreateChannelFlowRequest_Processors = CreateChannelFlowRequest.AddMember("Processors", _ProcessorList)
-
-	CreateChannelFlowRequest_Name = CreateChannelFlowRequest.AddMember("Name", _NonEmptyResourceName)
-
-	CreateChannelFlowRequest_Tags = CreateChannelFlowRequest.AddMember("Tags", _TagList)
-
-	CreateChannelFlowRequest_ClientRequestToken = CreateChannelFlowRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateChannelFlowResponse_ChannelFlowArn = CreateChannelFlowResponse.AddMember("ChannelFlowArn", _ChimeArn)
-
-	CreateChannelRequest_AppInstanceArn = CreateChannelRequest.AddMember("AppInstanceArn", _ChimeArn)
-
-	CreateChannelRequest_Name = CreateChannelRequest.AddMember("Name", _NonEmptyResourceName)
-
-	CreateChannelRequest_Mode = CreateChannelRequest.AddMember("Mode", ChannelMode)
-
-	CreateChannelRequest_Privacy = CreateChannelRequest.AddMember("Privacy", ChannelPrivacy)
-
-	CreateChannelRequest_Metadata = CreateChannelRequest.AddMember("Metadata", _Metadata)
-
-	CreateChannelRequest_ClientRequestToken = CreateChannelRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateChannelRequest_Tags = CreateChannelRequest.AddMember("Tags", _TagList)
-
-	CreateChannelRequest_ChimeBearer = CreateChannelRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	CreateChannelRequest_ChannelId = CreateChannelRequest.AddMember("ChannelId", _ChannelId)
-
-	CreateChannelRequest_MemberArns = CreateChannelRequest.AddMember("MemberArns", _ChannelMemberArns)
-
-	CreateChannelRequest_ModeratorArns = CreateChannelRequest.AddMember("ModeratorArns", _ChannelModeratorArns)
-
-	CreateChannelRequest_ElasticChannelConfiguration = CreateChannelRequest.AddMember("ElasticChannelConfiguration", ElasticChannelConfiguration)
-
-	CreateChannelRequest_ExpirationSettings = CreateChannelRequest.AddMember("ExpirationSettings", ExpirationSettings)
-
-	CreateChannelMembershipRequest_ChannelArn = CreateChannelMembershipRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	CreateChannelMembershipRequest_MemberArn = CreateChannelMembershipRequest.AddMember("MemberArn", _ChimeArn)
-
-	CreateChannelMembershipRequest_Type = CreateChannelMembershipRequest.AddMember("Type", ChannelMembershipType)
-
-	CreateChannelMembershipRequest_ChimeBearer = CreateChannelMembershipRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	CreateChannelMembershipRequest_SubChannelId = CreateChannelMembershipRequest.AddMember("SubChannelId", _SubChannelId)
-
-	CreateChannelMembershipResponse_ChannelArn = CreateChannelMembershipResponse.AddMember("ChannelArn", _ChimeArn)
-
-	CreateChannelMembershipResponse_Member = CreateChannelMembershipResponse.AddMember("Member", Identity)
-
-	CreateChannelMembershipResponse_SubChannelId = CreateChannelMembershipResponse.AddMember("SubChannelId", _SubChannelId)
-
-	CreateChannelModeratorRequest_ChannelArn = CreateChannelModeratorRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	CreateChannelModeratorRequest_ChannelModeratorArn = CreateChannelModeratorRequest.AddMember("ChannelModeratorArn", _ChimeArn)
-
-	CreateChannelModeratorRequest_ChimeBearer = CreateChannelModeratorRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	CreateChannelModeratorResponse_ChannelArn = CreateChannelModeratorResponse.AddMember("ChannelArn", _ChimeArn)
-
-	CreateChannelModeratorResponse_ChannelModerator = CreateChannelModeratorResponse.AddMember("ChannelModerator", Identity)
-
-	CreateChannelResponse_ChannelArn = CreateChannelResponse.AddMember("ChannelArn", _ChimeArn)
-
-	DeleteChannelBanRequest_ChannelArn = DeleteChannelBanRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelBanRequest_MemberArn = DeleteChannelBanRequest.AddMember("MemberArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelBanRequest_ChimeBearer = DeleteChannelBanRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DeleteChannelFlowRequest_ChannelFlowArn = DeleteChannelFlowRequest.AddMember("ChannelFlowArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelRequest_ChannelArn = DeleteChannelRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelRequest_ChimeBearer = DeleteChannelRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DeleteChannelMembershipRequest_ChannelArn = DeleteChannelMembershipRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelMembershipRequest_MemberArn = DeleteChannelMembershipRequest.AddMember("MemberArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelMembershipRequest_ChimeBearer = DeleteChannelMembershipRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DeleteChannelMembershipRequest_SubChannelId = DeleteChannelMembershipRequest.AddMember("SubChannelId", _SubChannelId, &smithytraits.HTTPQuery{Name: "sub-channel-id"})
-
-	DeleteChannelMessageRequest_ChannelArn = DeleteChannelMessageRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelMessageRequest_MessageId = DeleteChannelMessageRequest.AddMember("MessageId", _MessageId, &smithytraits.HTTPLabel{})
-
-	DeleteChannelMessageRequest_ChimeBearer = DeleteChannelMessageRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DeleteChannelMessageRequest_SubChannelId = DeleteChannelMessageRequest.AddMember("SubChannelId", _SubChannelId, &smithytraits.HTTPQuery{Name: "sub-channel-id"})
-
-	DeleteChannelModeratorRequest_ChannelArn = DeleteChannelModeratorRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelModeratorRequest_ChannelModeratorArn = DeleteChannelModeratorRequest.AddMember("ChannelModeratorArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DeleteChannelModeratorRequest_ChimeBearer = DeleteChannelModeratorRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DeleteMessagingStreamingConfigurationsRequest_AppInstanceArn = DeleteMessagingStreamingConfigurationsRequest.AddMember("AppInstanceArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelBanRequest_ChannelArn = DescribeChannelBanRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelBanRequest_MemberArn = DescribeChannelBanRequest.AddMember("MemberArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelBanRequest_ChimeBearer = DescribeChannelBanRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DescribeChannelBanResponse_ChannelBan = DescribeChannelBanResponse.AddMember("ChannelBan", ChannelBan)
-
-	DescribeChannelFlowRequest_ChannelFlowArn = DescribeChannelFlowRequest.AddMember("ChannelFlowArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelFlowResponse_ChannelFlow = DescribeChannelFlowResponse.AddMember("ChannelFlow", ChannelFlow)
-
-	DescribeChannelRequest_ChannelArn = DescribeChannelRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelRequest_ChimeBearer = DescribeChannelRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DescribeChannelMembershipForAppInstanceUserRequest_ChannelArn = DescribeChannelMembershipForAppInstanceUserRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn = DescribeChannelMembershipForAppInstanceUserRequest.AddMember("AppInstanceUserArn", _ChimeArn, &smithytraits.HTTPQuery{Name: "app-instance-user-arn"})
-
-	DescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer = DescribeChannelMembershipForAppInstanceUserRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership = DescribeChannelMembershipForAppInstanceUserResponse.AddMember("ChannelMembership", ChannelMembershipForAppInstanceUserSummary)
-
-	DescribeChannelMembershipRequest_ChannelArn = DescribeChannelMembershipRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelMembershipRequest_MemberArn = DescribeChannelMembershipRequest.AddMember("MemberArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelMembershipRequest_ChimeBearer = DescribeChannelMembershipRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DescribeChannelMembershipRequest_SubChannelId = DescribeChannelMembershipRequest.AddMember("SubChannelId", _SubChannelId, &smithytraits.HTTPQuery{Name: "sub-channel-id"})
-
-	DescribeChannelMembershipResponse_ChannelMembership = DescribeChannelMembershipResponse.AddMember("ChannelMembership", ChannelMembership)
-
-	DescribeChannelModeratedByAppInstanceUserRequest_ChannelArn = DescribeChannelModeratedByAppInstanceUserRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn = DescribeChannelModeratedByAppInstanceUserRequest.AddMember("AppInstanceUserArn", _ChimeArn, &smithytraits.HTTPQuery{Name: "app-instance-user-arn"})
-
-	DescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer = DescribeChannelModeratedByAppInstanceUserRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DescribeChannelModeratedByAppInstanceUserResponse_Channel = DescribeChannelModeratedByAppInstanceUserResponse.AddMember("Channel", ChannelModeratedByAppInstanceUserSummary)
-
-	DescribeChannelModeratorRequest_ChannelArn = DescribeChannelModeratorRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelModeratorRequest_ChannelModeratorArn = DescribeChannelModeratorRequest.AddMember("ChannelModeratorArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DescribeChannelModeratorRequest_ChimeBearer = DescribeChannelModeratorRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	DescribeChannelModeratorResponse_ChannelModerator = DescribeChannelModeratorResponse.AddMember("ChannelModerator", ChannelModerator)
-
-	DescribeChannelResponse_Channel = DescribeChannelResponse.AddMember("Channel", Channel)
-
-	DisassociateChannelFlowRequest_ChannelArn = DisassociateChannelFlowRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DisassociateChannelFlowRequest_ChannelFlowArn = DisassociateChannelFlowRequest.AddMember("ChannelFlowArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	DisassociateChannelFlowRequest_ChimeBearer = DisassociateChannelFlowRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	GetChannelMembershipPreferencesRequest_ChannelArn = GetChannelMembershipPreferencesRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	GetChannelMembershipPreferencesRequest_MemberArn = GetChannelMembershipPreferencesRequest.AddMember("MemberArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	GetChannelMembershipPreferencesRequest_ChimeBearer = GetChannelMembershipPreferencesRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	GetChannelMembershipPreferencesResponse_ChannelArn = GetChannelMembershipPreferencesResponse.AddMember("ChannelArn", _ChimeArn)
-
-	GetChannelMembershipPreferencesResponse_Member = GetChannelMembershipPreferencesResponse.AddMember("Member", Identity)
-
-	GetChannelMembershipPreferencesResponse_Preferences = GetChannelMembershipPreferencesResponse.AddMember("Preferences", ChannelMembershipPreferences)
-
-	GetChannelMessageRequest_ChannelArn = GetChannelMessageRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	GetChannelMessageRequest_MessageId = GetChannelMessageRequest.AddMember("MessageId", _MessageId, &smithytraits.HTTPLabel{})
-
-	GetChannelMessageRequest_ChimeBearer = GetChannelMessageRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	GetChannelMessageRequest_SubChannelId = GetChannelMessageRequest.AddMember("SubChannelId", _SubChannelId, &smithytraits.HTTPQuery{Name: "sub-channel-id"})
-
-	GetChannelMessageResponse_ChannelMessage = GetChannelMessageResponse.AddMember("ChannelMessage", ChannelMessage)
-
-	GetChannelMessageStatusRequest_ChannelArn = GetChannelMessageStatusRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	GetChannelMessageStatusRequest_MessageId = GetChannelMessageStatusRequest.AddMember("MessageId", _MessageId, &smithytraits.HTTPLabel{})
-
-	GetChannelMessageStatusRequest_ChimeBearer = GetChannelMessageStatusRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	GetChannelMessageStatusRequest_SubChannelId = GetChannelMessageStatusRequest.AddMember("SubChannelId", _SubChannelId, &smithytraits.HTTPQuery{Name: "sub-channel-id"})
-
-	GetChannelMessageStatusResponse_Status = GetChannelMessageStatusResponse.AddMember("Status", ChannelMessageStatusStructure)
-
-	GetMessagingSessionEndpointRequest_NetworkType = GetMessagingSessionEndpointRequest.AddMember("NetworkType", NetworkType, &smithytraits.HTTPQuery{Name: "network-type"})
-
-	GetMessagingSessionEndpointResponse_Endpoint = GetMessagingSessionEndpointResponse.AddMember("Endpoint", MessagingSessionEndpoint)
-
-	GetMessagingStreamingConfigurationsRequest_AppInstanceArn = GetMessagingStreamingConfigurationsRequest.AddMember("AppInstanceArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	GetMessagingStreamingConfigurationsResponse_StreamingConfigurations = GetMessagingStreamingConfigurationsResponse.AddMember("StreamingConfigurations", _StreamingConfigurationList)
-
-	ListChannelBansRequest_ChannelArn = ListChannelBansRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	ListChannelBansRequest_MaxResults = ListChannelBansRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelBansRequest_NextToken = ListChannelBansRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelBansRequest_ChimeBearer = ListChannelBansRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListChannelBansResponse_ChannelArn = ListChannelBansResponse.AddMember("ChannelArn", _ChimeArn)
-
-	ListChannelBansResponse_NextToken = ListChannelBansResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelBansResponse_ChannelBans = ListChannelBansResponse.AddMember("ChannelBans", _ChannelBanSummaryList)
-
-	ListChannelFlowsRequest_AppInstanceArn = ListChannelFlowsRequest.AddMember("AppInstanceArn", _ChimeArn, &smithytraits.HTTPQuery{Name: "app-instance-arn"})
-
-	ListChannelFlowsRequest_MaxResults = ListChannelFlowsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelFlowsRequest_NextToken = ListChannelFlowsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelFlowsResponse_ChannelFlows = ListChannelFlowsResponse.AddMember("ChannelFlows", _ChannelFlowSummaryList)
-
-	ListChannelFlowsResponse_NextToken = ListChannelFlowsResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn = ListChannelMembershipsForAppInstanceUserRequest.AddMember("AppInstanceUserArn", _ChimeArn, &smithytraits.HTTPQuery{Name: "app-instance-user-arn"})
-
-	ListChannelMembershipsForAppInstanceUserRequest_MaxResults = ListChannelMembershipsForAppInstanceUserRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelMembershipsForAppInstanceUserRequest_NextToken = ListChannelMembershipsForAppInstanceUserRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelMembershipsForAppInstanceUserRequest_ChimeBearer = ListChannelMembershipsForAppInstanceUserRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships = ListChannelMembershipsForAppInstanceUserResponse.AddMember("ChannelMemberships", _ChannelMembershipForAppInstanceUserSummaryList)
-
-	ListChannelMembershipsForAppInstanceUserResponse_NextToken = ListChannelMembershipsForAppInstanceUserResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelMembershipsRequest_ChannelArn = ListChannelMembershipsRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	ListChannelMembershipsRequest_Type = ListChannelMembershipsRequest.AddMember("Type", ChannelMembershipType, &smithytraits.HTTPQuery{Name: "type"})
-
-	ListChannelMembershipsRequest_MaxResults = ListChannelMembershipsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelMembershipsRequest_NextToken = ListChannelMembershipsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelMembershipsRequest_ChimeBearer = ListChannelMembershipsRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListChannelMembershipsRequest_SubChannelId = ListChannelMembershipsRequest.AddMember("SubChannelId", _SubChannelId, &smithytraits.HTTPQuery{Name: "sub-channel-id"})
-
-	ListChannelMembershipsResponse_ChannelArn = ListChannelMembershipsResponse.AddMember("ChannelArn", _ChimeArn)
-
-	ListChannelMembershipsResponse_ChannelMemberships = ListChannelMembershipsResponse.AddMember("ChannelMemberships", _ChannelMembershipSummaryList)
-
-	ListChannelMembershipsResponse_NextToken = ListChannelMembershipsResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelMessagesRequest_ChannelArn = ListChannelMessagesRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	ListChannelMessagesRequest_SortOrder = ListChannelMessagesRequest.AddMember("SortOrder", SortOrder, &smithytraits.HTTPQuery{Name: "sort-order"})
-
-	ListChannelMessagesRequest_NotBefore = ListChannelMessagesRequest.AddMember("NotBefore", _Timestamp, &smithytraits.HTTPQuery{Name: "not-before"})
-
-	ListChannelMessagesRequest_NotAfter = ListChannelMessagesRequest.AddMember("NotAfter", _Timestamp, &smithytraits.HTTPQuery{Name: "not-after"})
-
-	ListChannelMessagesRequest_MaxResults = ListChannelMessagesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelMessagesRequest_NextToken = ListChannelMessagesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelMessagesRequest_ChimeBearer = ListChannelMessagesRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListChannelMessagesRequest_SubChannelId = ListChannelMessagesRequest.AddMember("SubChannelId", _SubChannelId, &smithytraits.HTTPQuery{Name: "sub-channel-id"})
-
-	ListChannelMessagesResponse_ChannelArn = ListChannelMessagesResponse.AddMember("ChannelArn", _ChimeArn)
-
-	ListChannelMessagesResponse_NextToken = ListChannelMessagesResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelMessagesResponse_ChannelMessages = ListChannelMessagesResponse.AddMember("ChannelMessages", _ChannelMessageSummaryList)
-
-	ListChannelMessagesResponse_SubChannelId = ListChannelMessagesResponse.AddMember("SubChannelId", _SubChannelId)
-
-	ListChannelModeratorsRequest_ChannelArn = ListChannelModeratorsRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	ListChannelModeratorsRequest_MaxResults = ListChannelModeratorsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelModeratorsRequest_NextToken = ListChannelModeratorsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelModeratorsRequest_ChimeBearer = ListChannelModeratorsRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListChannelModeratorsResponse_ChannelArn = ListChannelModeratorsResponse.AddMember("ChannelArn", _ChimeArn)
-
-	ListChannelModeratorsResponse_NextToken = ListChannelModeratorsResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelModeratorsResponse_ChannelModerators = ListChannelModeratorsResponse.AddMember("ChannelModerators", _ChannelModeratorSummaryList)
-
-	ListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn = ListChannelsAssociatedWithChannelFlowRequest.AddMember("ChannelFlowArn", _ChimeArn, &smithytraits.HTTPQuery{Name: "channel-flow-arn"})
-
-	ListChannelsAssociatedWithChannelFlowRequest_MaxResults = ListChannelsAssociatedWithChannelFlowRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelsAssociatedWithChannelFlowRequest_NextToken = ListChannelsAssociatedWithChannelFlowRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelsAssociatedWithChannelFlowResponse_Channels = ListChannelsAssociatedWithChannelFlowResponse.AddMember("Channels", _ChannelAssociatedWithFlowSummaryList)
-
-	ListChannelsAssociatedWithChannelFlowResponse_NextToken = ListChannelsAssociatedWithChannelFlowResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelsRequest_AppInstanceArn = ListChannelsRequest.AddMember("AppInstanceArn", _ChimeArn, &smithytraits.HTTPQuery{Name: "app-instance-arn"})
-
-	ListChannelsRequest_Privacy = ListChannelsRequest.AddMember("Privacy", ChannelPrivacy, &smithytraits.HTTPQuery{Name: "privacy"})
-
-	ListChannelsRequest_MaxResults = ListChannelsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelsRequest_NextToken = ListChannelsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelsRequest_ChimeBearer = ListChannelsRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn = ListChannelsModeratedByAppInstanceUserRequest.AddMember("AppInstanceUserArn", _ChimeArn, &smithytraits.HTTPQuery{Name: "app-instance-user-arn"})
-
-	ListChannelsModeratedByAppInstanceUserRequest_MaxResults = ListChannelsModeratedByAppInstanceUserRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListChannelsModeratedByAppInstanceUserRequest_NextToken = ListChannelsModeratedByAppInstanceUserRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListChannelsModeratedByAppInstanceUserRequest_ChimeBearer = ListChannelsModeratedByAppInstanceUserRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListChannelsModeratedByAppInstanceUserResponse_Channels = ListChannelsModeratedByAppInstanceUserResponse.AddMember("Channels", _ChannelModeratedByAppInstanceUserSummaryList)
-
-	ListChannelsModeratedByAppInstanceUserResponse_NextToken = ListChannelsModeratedByAppInstanceUserResponse.AddMember("NextToken", _NextToken)
-
-	ListChannelsResponse_Channels = ListChannelsResponse.AddMember("Channels", _ChannelSummaryList)
-
-	ListChannelsResponse_NextToken = ListChannelsResponse.AddMember("NextToken", _NextToken)
-
-	ListSubChannelsRequest_ChannelArn = ListSubChannelsRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	ListSubChannelsRequest_ChimeBearer = ListSubChannelsRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	ListSubChannelsRequest_MaxResults = ListSubChannelsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListSubChannelsRequest_NextToken = ListSubChannelsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListSubChannelsResponse_ChannelArn = ListSubChannelsResponse.AddMember("ChannelArn", _ChimeArn)
-
-	ListSubChannelsResponse_SubChannels = ListSubChannelsResponse.AddMember("SubChannels", _SubChannelSummaryList)
-
-	ListSubChannelsResponse_NextToken = ListSubChannelsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _ChimeArn, &smithytraits.HTTPQuery{Name: "arn"})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutChannelExpirationSettingsRequest_ChannelArn = PutChannelExpirationSettingsRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	PutChannelExpirationSettingsRequest_ChimeBearer = PutChannelExpirationSettingsRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	PutChannelExpirationSettingsRequest_ExpirationSettings = PutChannelExpirationSettingsRequest.AddMember("ExpirationSettings", ExpirationSettings)
-
-	PutChannelExpirationSettingsResponse_ChannelArn = PutChannelExpirationSettingsResponse.AddMember("ChannelArn", _ChimeArn)
-
-	PutChannelExpirationSettingsResponse_ExpirationSettings = PutChannelExpirationSettingsResponse.AddMember("ExpirationSettings", ExpirationSettings)
-
-	PutChannelMembershipPreferencesRequest_ChannelArn = PutChannelMembershipPreferencesRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	PutChannelMembershipPreferencesRequest_MemberArn = PutChannelMembershipPreferencesRequest.AddMember("MemberArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	PutChannelMembershipPreferencesRequest_ChimeBearer = PutChannelMembershipPreferencesRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	PutChannelMembershipPreferencesRequest_Preferences = PutChannelMembershipPreferencesRequest.AddMember("Preferences", ChannelMembershipPreferences)
-
-	PutChannelMembershipPreferencesResponse_ChannelArn = PutChannelMembershipPreferencesResponse.AddMember("ChannelArn", _ChimeArn)
-
-	PutChannelMembershipPreferencesResponse_Member = PutChannelMembershipPreferencesResponse.AddMember("Member", Identity)
-
-	PutChannelMembershipPreferencesResponse_Preferences = PutChannelMembershipPreferencesResponse.AddMember("Preferences", ChannelMembershipPreferences)
-
-	PutMessagingStreamingConfigurationsRequest_AppInstanceArn = PutMessagingStreamingConfigurationsRequest.AddMember("AppInstanceArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	PutMessagingStreamingConfigurationsRequest_StreamingConfigurations = PutMessagingStreamingConfigurationsRequest.AddMember("StreamingConfigurations", _StreamingConfigurationList)
-
-	PutMessagingStreamingConfigurationsResponse_StreamingConfigurations = PutMessagingStreamingConfigurationsResponse.AddMember("StreamingConfigurations", _StreamingConfigurationList)
-
-	RedactChannelMessageRequest_ChannelArn = RedactChannelMessageRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	RedactChannelMessageRequest_MessageId = RedactChannelMessageRequest.AddMember("MessageId", _MessageId, &smithytraits.HTTPLabel{})
-
-	RedactChannelMessageRequest_ChimeBearer = RedactChannelMessageRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	RedactChannelMessageRequest_SubChannelId = RedactChannelMessageRequest.AddMember("SubChannelId", _SubChannelId)
-
-	RedactChannelMessageResponse_ChannelArn = RedactChannelMessageResponse.AddMember("ChannelArn", _ChimeArn)
-
-	RedactChannelMessageResponse_MessageId = RedactChannelMessageResponse.AddMember("MessageId", _MessageId)
-
-	RedactChannelMessageResponse_SubChannelId = RedactChannelMessageResponse.AddMember("SubChannelId", _SubChannelId)
-
-	SearchChannelsRequest_ChimeBearer = SearchChannelsRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	SearchChannelsRequest_Fields = SearchChannelsRequest.AddMember("Fields", _SearchFields)
-
-	SearchChannelsRequest_MaxResults = SearchChannelsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	SearchChannelsRequest_NextToken = SearchChannelsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	SearchChannelsResponse_Channels = SearchChannelsResponse.AddMember("Channels", _ChannelSummaryList)
-
-	SearchChannelsResponse_NextToken = SearchChannelsResponse.AddMember("NextToken", _NextToken)
-
-	SendChannelMessageRequest_ChannelArn = SendChannelMessageRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	SendChannelMessageRequest_Content = SendChannelMessageRequest.AddMember("Content", _NonEmptyContent)
-
-	SendChannelMessageRequest_Type = SendChannelMessageRequest.AddMember("Type", ChannelMessageType)
-
-	SendChannelMessageRequest_Persistence = SendChannelMessageRequest.AddMember("Persistence", ChannelMessagePersistenceType)
-
-	SendChannelMessageRequest_Metadata = SendChannelMessageRequest.AddMember("Metadata", _Metadata)
-
-	SendChannelMessageRequest_ClientRequestToken = SendChannelMessageRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	SendChannelMessageRequest_ChimeBearer = SendChannelMessageRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	SendChannelMessageRequest_PushNotification = SendChannelMessageRequest.AddMember("PushNotification", PushNotificationConfiguration)
-
-	SendChannelMessageRequest_MessageAttributes = SendChannelMessageRequest.AddMember("MessageAttributes", _MessageAttributeMap)
-
-	SendChannelMessageRequest_SubChannelId = SendChannelMessageRequest.AddMember("SubChannelId", _SubChannelId)
-
-	SendChannelMessageRequest_ContentType = SendChannelMessageRequest.AddMember("ContentType", _ContentType)
-
-	SendChannelMessageRequest_Target = SendChannelMessageRequest.AddMember("Target", _TargetList)
-
-	SendChannelMessageResponse_ChannelArn = SendChannelMessageResponse.AddMember("ChannelArn", _ChimeArn)
-
-	SendChannelMessageResponse_MessageId = SendChannelMessageResponse.AddMember("MessageId", _MessageId)
-
-	SendChannelMessageResponse_Status = SendChannelMessageResponse.AddMember("Status", ChannelMessageStatusStructure)
-
-	SendChannelMessageResponse_SubChannelId = SendChannelMessageResponse.AddMember("SubChannelId", _SubChannelId)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _ChimeArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _ChimeArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateChannelFlowRequest_ChannelFlowArn = UpdateChannelFlowRequest.AddMember("ChannelFlowArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	UpdateChannelFlowRequest_Processors = UpdateChannelFlowRequest.AddMember("Processors", _ProcessorList)
-
-	UpdateChannelFlowRequest_Name = UpdateChannelFlowRequest.AddMember("Name", _NonEmptyResourceName)
-
-	UpdateChannelFlowResponse_ChannelFlowArn = UpdateChannelFlowResponse.AddMember("ChannelFlowArn", _ChimeArn)
-
-	UpdateChannelRequest_ChannelArn = UpdateChannelRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	UpdateChannelRequest_Name = UpdateChannelRequest.AddMember("Name", _NonEmptyResourceName)
-
-	UpdateChannelRequest_Mode = UpdateChannelRequest.AddMember("Mode", ChannelMode)
-
-	UpdateChannelRequest_Metadata = UpdateChannelRequest.AddMember("Metadata", _Metadata)
-
-	UpdateChannelRequest_ChimeBearer = UpdateChannelRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	UpdateChannelMessageRequest_ChannelArn = UpdateChannelMessageRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	UpdateChannelMessageRequest_MessageId = UpdateChannelMessageRequest.AddMember("MessageId", _MessageId, &smithytraits.HTTPLabel{})
-
-	UpdateChannelMessageRequest_Content = UpdateChannelMessageRequest.AddMember("Content", _NonEmptyContent)
-
-	UpdateChannelMessageRequest_Metadata = UpdateChannelMessageRequest.AddMember("Metadata", _Metadata)
-
-	UpdateChannelMessageRequest_ChimeBearer = UpdateChannelMessageRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	UpdateChannelMessageRequest_SubChannelId = UpdateChannelMessageRequest.AddMember("SubChannelId", _SubChannelId)
-
-	UpdateChannelMessageRequest_ContentType = UpdateChannelMessageRequest.AddMember("ContentType", _ContentType)
-
-	UpdateChannelMessageResponse_ChannelArn = UpdateChannelMessageResponse.AddMember("ChannelArn", _ChimeArn)
-
-	UpdateChannelMessageResponse_MessageId = UpdateChannelMessageResponse.AddMember("MessageId", _MessageId)
-
-	UpdateChannelMessageResponse_Status = UpdateChannelMessageResponse.AddMember("Status", ChannelMessageStatusStructure)
-
-	UpdateChannelMessageResponse_SubChannelId = UpdateChannelMessageResponse.AddMember("SubChannelId", _SubChannelId)
-
-	UpdateChannelResponse_ChannelArn = UpdateChannelResponse.AddMember("ChannelArn", _ChimeArn)
-
-	UpdateChannelReadMarkerRequest_ChannelArn = UpdateChannelReadMarkerRequest.AddMember("ChannelArn", _ChimeArn, &smithytraits.HTTPLabel{})
-
-	UpdateChannelReadMarkerRequest_ChimeBearer = UpdateChannelReadMarkerRequest.AddMember("ChimeBearer", _ChimeArn, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"})
-
-	UpdateChannelReadMarkerResponse_ChannelArn = UpdateChannelReadMarkerResponse.AddMember("ChannelArn", _ChimeArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-chime-bearer"}}, DirectMask: 0x80}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sub-channel-id"}}, DirectMask: 0x10}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "app-instance-user-arn"}}, DirectMask: 0x10}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "network-type"}}, DirectMask: 0x10}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max-results"}}, DirectMask: 0x10}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next-token"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "app-instance-arn"}}, DirectMask: 0x10}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "type"}}, DirectMask: 0x10}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sort-order"}}, DirectMask: 0x10}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "not-before"}}, DirectMask: 0x10}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "not-after"}}, DirectMask: 0x10}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "channel-flow-arn"}}, DirectMask: 0x10}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "privacy"}}, DirectMask: 0x10}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "arn"}}, DirectMask: 0x10}
+
+var mAllowNotifications = smithy.SchemaMembers{List: []*smithy.Schema{&sAllowNotifications_ALL, &sAllowNotifications_NONE, &sAllowNotifications_FILTERED}}
+var mAppInstanceUserMembershipSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAppInstanceUserMembershipSummary_Type, &sAppInstanceUserMembershipSummary_ReadMarkerTimestamp, &sAppInstanceUserMembershipSummary_SubChannelId}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Code, &sBadRequestException_Message}}
+var mBatchChannelMemberships = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchChannelMemberships_InvitedBy, &sBatchChannelMemberships_Type, &sBatchChannelMemberships_Members, &sBatchChannelMemberships_ChannelArn, &sBatchChannelMemberships_SubChannelId}}
+var mBatchCreateChannelMembershipError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateChannelMembershipError_MemberArn, &sBatchCreateChannelMembershipError_ErrorCode, &sBatchCreateChannelMembershipError_ErrorMessage}}
+var m_BatchCreateChannelMembershipErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchCreateChannelMembershipErrors_member}}
+var mChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sChannel_Name, &sChannel_ChannelArn, &sChannel_Mode, &sChannel_Privacy, &sChannel_Metadata, &sChannel_CreatedBy, &sChannel_CreatedTimestamp, &sChannel_LastMessageTimestamp, &sChannel_LastUpdatedTimestamp, &sChannel_ChannelFlowArn, &sChannel_ElasticChannelConfiguration, &sChannel_ExpirationSettings}, Hash: &hChannel}
+var mChannelAssociatedWithFlowSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelAssociatedWithFlowSummary_Name, &sChannelAssociatedWithFlowSummary_ChannelArn, &sChannelAssociatedWithFlowSummary_Mode, &sChannelAssociatedWithFlowSummary_Privacy, &sChannelAssociatedWithFlowSummary_Metadata}}
+var m_ChannelAssociatedWithFlowSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelAssociatedWithFlowSummaryList_member}}
+var mChannelBan = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelBan_Member, &sChannelBan_ChannelArn, &sChannelBan_CreatedTimestamp, &sChannelBan_CreatedBy}}
+var mChannelBanSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelBanSummary_Member}}
+var m_ChannelBanSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelBanSummaryList_member}}
+var mChannelFlow = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelFlow_ChannelFlowArn, &sChannelFlow_Processors, &sChannelFlow_Name, &sChannelFlow_CreatedTimestamp, &sChannelFlow_LastUpdatedTimestamp}}
+var mChannelFlowSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelFlowSummary_ChannelFlowArn, &sChannelFlowSummary_Name, &sChannelFlowSummary_Processors}}
+var m_ChannelFlowSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelFlowSummaryList_member}}
+var m_ChannelMemberArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelMemberArns_member}}
+var mChannelMembership = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMembership_InvitedBy, &sChannelMembership_Type, &sChannelMembership_Member, &sChannelMembership_ChannelArn, &sChannelMembership_CreatedTimestamp, &sChannelMembership_LastUpdatedTimestamp, &sChannelMembership_SubChannelId}}
+var mChannelMembershipForAppInstanceUserSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMembershipForAppInstanceUserSummary_ChannelSummary, &sChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary}}
+var m_ChannelMembershipForAppInstanceUserSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelMembershipForAppInstanceUserSummaryList_member}}
+var mChannelMembershipPreferences = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMembershipPreferences_PushNotifications}}
+var mChannelMembershipSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMembershipSummary_Member}}
+var m_ChannelMembershipSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelMembershipSummaryList_member}}
+var mChannelMembershipType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMembershipType_DEFAULT, &sChannelMembershipType_HIDDEN}}
+var mChannelMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMessage_ChannelArn, &sChannelMessage_MessageId, &sChannelMessage_Content, &sChannelMessage_Metadata, &sChannelMessage_Type, &sChannelMessage_CreatedTimestamp, &sChannelMessage_LastEditedTimestamp, &sChannelMessage_LastUpdatedTimestamp, &sChannelMessage_Sender, &sChannelMessage_Redacted, &sChannelMessage_Persistence, &sChannelMessage_Status, &sChannelMessage_MessageAttributes, &sChannelMessage_SubChannelId, &sChannelMessage_ContentType, &sChannelMessage_Target}, Hash: &hChannelMessage}
+var mChannelMessageCallback = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMessageCallback_MessageId, &sChannelMessageCallback_Content, &sChannelMessageCallback_Metadata, &sChannelMessageCallback_PushNotification, &sChannelMessageCallback_MessageAttributes, &sChannelMessageCallback_SubChannelId, &sChannelMessageCallback_ContentType}}
+var mChannelMessagePersistenceType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMessagePersistenceType_PERSISTENT, &sChannelMessagePersistenceType_NON_PERSISTENT}}
+var mChannelMessageStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMessageStatus_SENT, &sChannelMessageStatus_PENDING, &sChannelMessageStatus_FAILED, &sChannelMessageStatus_DENIED}}
+var mChannelMessageStatusStructure = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMessageStatusStructure_Value, &sChannelMessageStatusStructure_Detail}}
+var mChannelMessageSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMessageSummary_MessageId, &sChannelMessageSummary_Content, &sChannelMessageSummary_Metadata, &sChannelMessageSummary_Type, &sChannelMessageSummary_CreatedTimestamp, &sChannelMessageSummary_LastUpdatedTimestamp, &sChannelMessageSummary_LastEditedTimestamp, &sChannelMessageSummary_Sender, &sChannelMessageSummary_Redacted, &sChannelMessageSummary_Status, &sChannelMessageSummary_MessageAttributes, &sChannelMessageSummary_ContentType, &sChannelMessageSummary_Target}, Hash: &hChannelMessageSummary}
+var m_ChannelMessageSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelMessageSummaryList_member}}
+var mChannelMessageType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMessageType_STANDARD, &sChannelMessageType_CONTROL}}
+var mChannelMode = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMode_UNRESTRICTED, &sChannelMode_RESTRICTED}}
+var mChannelModeratedByAppInstanceUserSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelModeratedByAppInstanceUserSummary_ChannelSummary}}
+var m_ChannelModeratedByAppInstanceUserSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelModeratedByAppInstanceUserSummaryList_member}}
+var mChannelModerator = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelModerator_Moderator, &sChannelModerator_ChannelArn, &sChannelModerator_CreatedTimestamp, &sChannelModerator_CreatedBy}}
+var m_ChannelModeratorArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelModeratorArns_member}}
+var mChannelModeratorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelModeratorSummary_Moderator}}
+var m_ChannelModeratorSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelModeratorSummaryList_member}}
+var mChannelPrivacy = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelPrivacy_PUBLIC, &sChannelPrivacy_PRIVATE}}
+var mChannelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelSummary_Name, &sChannelSummary_ChannelArn, &sChannelSummary_Mode, &sChannelSummary_Privacy, &sChannelSummary_Metadata, &sChannelSummary_LastMessageTimestamp}}
+var m_ChannelSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelSummaryList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Code, &sConflictException_Message}}
+var mElasticChannelConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticChannelConfiguration_MaximumSubChannels, &sElasticChannelConfiguration_TargetMembershipsPerSubChannel, &sElasticChannelConfiguration_MinimumMembershipPercentage}}
+var mErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorCode_BadRequest, &sErrorCode_Conflict, &sErrorCode_Forbidden, &sErrorCode_NotFound, &sErrorCode_PreconditionFailed, &sErrorCode_ResourceLimitExceeded, &sErrorCode_ServiceFailure, &sErrorCode_AccessDenied, &sErrorCode_ServiceUnavailable, &sErrorCode_Throttled, &sErrorCode_Throttling, &sErrorCode_Unauthorized, &sErrorCode_Unprocessable, &sErrorCode_VoiceConnectorGroupAssociationsExist, &sErrorCode_PhoneNumberAssociationsExist}, Hash: &hErrorCode}
+var mExpirationCriterion = smithy.SchemaMembers{List: []*smithy.Schema{&sExpirationCriterion_CREATED_TIMESTAMP, &sExpirationCriterion_LAST_MESSAGE_TIMESTAMP}}
+var mExpirationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sExpirationSettings_ExpirationDays, &sExpirationSettings_ExpirationCriterion}}
+var mFallbackAction = smithy.SchemaMembers{List: []*smithy.Schema{&sFallbackAction_CONTINUE, &sFallbackAction_ABORT}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_Code, &sForbiddenException_Message}}
+var mIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentity_Arn, &sIdentity_Name}}
+var mInvocationType = smithy.SchemaMembers{List: []*smithy.Schema{&sInvocationType_ASYNC}}
+var mLambdaConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaConfiguration_ResourceArn, &sLambdaConfiguration_InvocationType}}
+var m_MemberArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_MemberArns_member}}
+var m_Members = smithy.SchemaMembers{List: []*smithy.Schema{&s_Members_member}}
+var m_MessageAttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_MessageAttributeMap_key, &s_MessageAttributeMap_value}}
+var m_MessageAttributeStringValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_MessageAttributeStringValues_member}}
+var mMessageAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageAttributeValue_StringValues}}
+var mMessagingDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sMessagingDataType_Channel, &sMessagingDataType_ChannelMessage}}
+var mMessagingSessionEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sMessagingSessionEndpoint_Url}}
+var mNetworkType = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkType_IPV4_ONLY, &sNetworkType_DUAL_STACK}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Code, &sNotFoundException_Message}}
+var mProcessor = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessor_Name, &sProcessor_Configuration, &sProcessor_ExecutionOrder, &sProcessor_FallbackAction}}
+var mProcessorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessorConfiguration_Lambda}}
+var m_ProcessorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProcessorList_member}}
+var mPushNotificationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPushNotificationConfiguration_Title, &sPushNotificationConfiguration_Body, &sPushNotificationConfiguration_Type}}
+var mPushNotificationPreferences = smithy.SchemaMembers{List: []*smithy.Schema{&sPushNotificationPreferences_AllowNotifications, &sPushNotificationPreferences_FilterRule}}
+var mPushNotificationType = smithy.SchemaMembers{List: []*smithy.Schema{&sPushNotificationType_DEFAULT, &sPushNotificationType_VOIP}}
+var mResourceLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceLimitExceededException_Code, &sResourceLimitExceededException_Message}}
+var mSearchField = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchField_Key, &sSearchField_Values, &sSearchField_Operator}}
+var mSearchFieldKey = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFieldKey_MEMBERS}}
+var mSearchFieldOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFieldOperator_EQUALS, &sSearchFieldOperator_INCLUDES}}
+var m_SearchFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchFields_member}}
+var m_SearchFieldValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchFieldValues_member}}
+var mServiceFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceFailureException_Code, &sServiceFailureException_Message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Code, &sServiceUnavailableException_Message}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASCENDING, &sSortOrder_DESCENDING}}
+var mStreamingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamingConfiguration_DataType, &sStreamingConfiguration_ResourceArn}}
+var m_StreamingConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamingConfigurationList_member}}
+var mSubChannelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSubChannelSummary_SubChannelId, &sSubChannelSummary_MembershipCount}}
+var m_SubChannelSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubChannelSummaryList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sTarget_MemberArn}}
+var m_TargetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetList_member}}
+var mThrottledClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottledClientException_Code, &sThrottledClientException_Message}}
+var mUnauthorizedClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedClientException_Code, &sUnauthorizedClientException_Message}}
+var mAssociateChannelFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateChannelFlowRequest_ChannelArn, &sAssociateChannelFlowRequest_ChannelFlowArn, &sAssociateChannelFlowRequest_ChimeBearer}}
+var mBatchCreateChannelMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateChannelMembershipRequest_ChannelArn, &sBatchCreateChannelMembershipRequest_Type, &sBatchCreateChannelMembershipRequest_MemberArns, &sBatchCreateChannelMembershipRequest_ChimeBearer, &sBatchCreateChannelMembershipRequest_SubChannelId}}
+var mBatchCreateChannelMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateChannelMembershipResponse_BatchChannelMemberships, &sBatchCreateChannelMembershipResponse_Errors}}
+var mChannelFlowCallbackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelFlowCallbackRequest_CallbackId, &sChannelFlowCallbackRequest_ChannelArn, &sChannelFlowCallbackRequest_DeleteResource, &sChannelFlowCallbackRequest_ChannelMessage}}
+var mChannelFlowCallbackResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelFlowCallbackResponse_ChannelArn, &sChannelFlowCallbackResponse_CallbackId}}
+var mCreateChannelBanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelBanRequest_ChannelArn, &sCreateChannelBanRequest_MemberArn, &sCreateChannelBanRequest_ChimeBearer}}
+var mCreateChannelBanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelBanResponse_ChannelArn, &sCreateChannelBanResponse_Member}}
+var mCreateChannelFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelFlowRequest_AppInstanceArn, &sCreateChannelFlowRequest_Processors, &sCreateChannelFlowRequest_Name, &sCreateChannelFlowRequest_Tags, &sCreateChannelFlowRequest_ClientRequestToken}}
+var mCreateChannelFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelFlowResponse_ChannelFlowArn}}
+var mCreateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelRequest_AppInstanceArn, &sCreateChannelRequest_Name, &sCreateChannelRequest_Mode, &sCreateChannelRequest_Privacy, &sCreateChannelRequest_Metadata, &sCreateChannelRequest_ClientRequestToken, &sCreateChannelRequest_Tags, &sCreateChannelRequest_ChimeBearer, &sCreateChannelRequest_ChannelId, &sCreateChannelRequest_MemberArns, &sCreateChannelRequest_ModeratorArns, &sCreateChannelRequest_ElasticChannelConfiguration, &sCreateChannelRequest_ExpirationSettings}, Hash: &hCreateChannelRequest}
+var mCreateChannelMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelMembershipRequest_ChannelArn, &sCreateChannelMembershipRequest_MemberArn, &sCreateChannelMembershipRequest_Type, &sCreateChannelMembershipRequest_ChimeBearer, &sCreateChannelMembershipRequest_SubChannelId}}
+var mCreateChannelMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelMembershipResponse_ChannelArn, &sCreateChannelMembershipResponse_Member, &sCreateChannelMembershipResponse_SubChannelId}}
+var mCreateChannelModeratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelModeratorRequest_ChannelArn, &sCreateChannelModeratorRequest_ChannelModeratorArn, &sCreateChannelModeratorRequest_ChimeBearer}}
+var mCreateChannelModeratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelModeratorResponse_ChannelArn, &sCreateChannelModeratorResponse_ChannelModerator}}
+var mCreateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelResponse_ChannelArn}}
+var mDeleteChannelBanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelBanRequest_ChannelArn, &sDeleteChannelBanRequest_MemberArn, &sDeleteChannelBanRequest_ChimeBearer}}
+var mDeleteChannelFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelFlowRequest_ChannelFlowArn}}
+var mDeleteChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelRequest_ChannelArn, &sDeleteChannelRequest_ChimeBearer}}
+var mDeleteChannelMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelMembershipRequest_ChannelArn, &sDeleteChannelMembershipRequest_MemberArn, &sDeleteChannelMembershipRequest_ChimeBearer, &sDeleteChannelMembershipRequest_SubChannelId}}
+var mDeleteChannelMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelMessageRequest_ChannelArn, &sDeleteChannelMessageRequest_MessageId, &sDeleteChannelMessageRequest_ChimeBearer, &sDeleteChannelMessageRequest_SubChannelId}}
+var mDeleteChannelModeratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelModeratorRequest_ChannelArn, &sDeleteChannelModeratorRequest_ChannelModeratorArn, &sDeleteChannelModeratorRequest_ChimeBearer}}
+var mDeleteMessagingStreamingConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMessagingStreamingConfigurationsRequest_AppInstanceArn}}
+var mDescribeChannelBanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelBanRequest_ChannelArn, &sDescribeChannelBanRequest_MemberArn, &sDescribeChannelBanRequest_ChimeBearer}}
+var mDescribeChannelBanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelBanResponse_ChannelBan}}
+var mDescribeChannelFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelFlowRequest_ChannelFlowArn}}
+var mDescribeChannelFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelFlowResponse_ChannelFlow}}
+var mDescribeChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelRequest_ChannelArn, &sDescribeChannelRequest_ChimeBearer}}
+var mDescribeChannelMembershipForAppInstanceUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelMembershipForAppInstanceUserRequest_ChannelArn, &sDescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn, &sDescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer}}
+var mDescribeChannelMembershipForAppInstanceUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership}}
+var mDescribeChannelMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelMembershipRequest_ChannelArn, &sDescribeChannelMembershipRequest_MemberArn, &sDescribeChannelMembershipRequest_ChimeBearer, &sDescribeChannelMembershipRequest_SubChannelId}}
+var mDescribeChannelMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelMembershipResponse_ChannelMembership}}
+var mDescribeChannelModeratedByAppInstanceUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelModeratedByAppInstanceUserRequest_ChannelArn, &sDescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn, &sDescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer}}
+var mDescribeChannelModeratedByAppInstanceUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelModeratedByAppInstanceUserResponse_Channel}}
+var mDescribeChannelModeratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelModeratorRequest_ChannelArn, &sDescribeChannelModeratorRequest_ChannelModeratorArn, &sDescribeChannelModeratorRequest_ChimeBearer}}
+var mDescribeChannelModeratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelModeratorResponse_ChannelModerator}}
+var mDescribeChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelResponse_Channel}}
+var mDisassociateChannelFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateChannelFlowRequest_ChannelArn, &sDisassociateChannelFlowRequest_ChannelFlowArn, &sDisassociateChannelFlowRequest_ChimeBearer}}
+var mGetChannelMembershipPreferencesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelMembershipPreferencesRequest_ChannelArn, &sGetChannelMembershipPreferencesRequest_MemberArn, &sGetChannelMembershipPreferencesRequest_ChimeBearer}}
+var mGetChannelMembershipPreferencesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelMembershipPreferencesResponse_ChannelArn, &sGetChannelMembershipPreferencesResponse_Member, &sGetChannelMembershipPreferencesResponse_Preferences}}
+var mGetChannelMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelMessageRequest_ChannelArn, &sGetChannelMessageRequest_MessageId, &sGetChannelMessageRequest_ChimeBearer, &sGetChannelMessageRequest_SubChannelId}}
+var mGetChannelMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelMessageResponse_ChannelMessage}}
+var mGetChannelMessageStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelMessageStatusRequest_ChannelArn, &sGetChannelMessageStatusRequest_MessageId, &sGetChannelMessageStatusRequest_ChimeBearer, &sGetChannelMessageStatusRequest_SubChannelId}}
+var mGetChannelMessageStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelMessageStatusResponse_Status}}
+var mGetMessagingSessionEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMessagingSessionEndpointRequest_NetworkType}}
+var mGetMessagingSessionEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMessagingSessionEndpointResponse_Endpoint}}
+var mGetMessagingStreamingConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMessagingStreamingConfigurationsRequest_AppInstanceArn}}
+var mGetMessagingStreamingConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMessagingStreamingConfigurationsResponse_StreamingConfigurations}}
+var mListChannelBansRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelBansRequest_ChannelArn, &sListChannelBansRequest_MaxResults, &sListChannelBansRequest_NextToken, &sListChannelBansRequest_ChimeBearer}}
+var mListChannelBansResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelBansResponse_ChannelArn, &sListChannelBansResponse_NextToken, &sListChannelBansResponse_ChannelBans}}
+var mListChannelFlowsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelFlowsRequest_AppInstanceArn, &sListChannelFlowsRequest_MaxResults, &sListChannelFlowsRequest_NextToken}}
+var mListChannelFlowsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelFlowsResponse_ChannelFlows, &sListChannelFlowsResponse_NextToken}}
+var mListChannelMembershipsForAppInstanceUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn, &sListChannelMembershipsForAppInstanceUserRequest_MaxResults, &sListChannelMembershipsForAppInstanceUserRequest_NextToken, &sListChannelMembershipsForAppInstanceUserRequest_ChimeBearer}}
+var mListChannelMembershipsForAppInstanceUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships, &sListChannelMembershipsForAppInstanceUserResponse_NextToken}}
+var mListChannelMembershipsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelMembershipsRequest_ChannelArn, &sListChannelMembershipsRequest_Type, &sListChannelMembershipsRequest_MaxResults, &sListChannelMembershipsRequest_NextToken, &sListChannelMembershipsRequest_ChimeBearer, &sListChannelMembershipsRequest_SubChannelId}}
+var mListChannelMembershipsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelMembershipsResponse_ChannelArn, &sListChannelMembershipsResponse_ChannelMemberships, &sListChannelMembershipsResponse_NextToken}}
+var mListChannelMessagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelMessagesRequest_ChannelArn, &sListChannelMessagesRequest_SortOrder, &sListChannelMessagesRequest_NotBefore, &sListChannelMessagesRequest_NotAfter, &sListChannelMessagesRequest_MaxResults, &sListChannelMessagesRequest_NextToken, &sListChannelMessagesRequest_ChimeBearer, &sListChannelMessagesRequest_SubChannelId}}
+var mListChannelMessagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelMessagesResponse_ChannelArn, &sListChannelMessagesResponse_NextToken, &sListChannelMessagesResponse_ChannelMessages, &sListChannelMessagesResponse_SubChannelId}}
+var mListChannelModeratorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelModeratorsRequest_ChannelArn, &sListChannelModeratorsRequest_MaxResults, &sListChannelModeratorsRequest_NextToken, &sListChannelModeratorsRequest_ChimeBearer}}
+var mListChannelModeratorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelModeratorsResponse_ChannelArn, &sListChannelModeratorsResponse_NextToken, &sListChannelModeratorsResponse_ChannelModerators}}
+var mListChannelsAssociatedWithChannelFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn, &sListChannelsAssociatedWithChannelFlowRequest_MaxResults, &sListChannelsAssociatedWithChannelFlowRequest_NextToken}}
+var mListChannelsAssociatedWithChannelFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsAssociatedWithChannelFlowResponse_Channels, &sListChannelsAssociatedWithChannelFlowResponse_NextToken}}
+var mListChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsRequest_AppInstanceArn, &sListChannelsRequest_Privacy, &sListChannelsRequest_MaxResults, &sListChannelsRequest_NextToken, &sListChannelsRequest_ChimeBearer}}
+var mListChannelsModeratedByAppInstanceUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn, &sListChannelsModeratedByAppInstanceUserRequest_MaxResults, &sListChannelsModeratedByAppInstanceUserRequest_NextToken, &sListChannelsModeratedByAppInstanceUserRequest_ChimeBearer}}
+var mListChannelsModeratedByAppInstanceUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsModeratedByAppInstanceUserResponse_Channels, &sListChannelsModeratedByAppInstanceUserResponse_NextToken}}
+var mListChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsResponse_Channels, &sListChannelsResponse_NextToken}}
+var mListSubChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubChannelsRequest_ChannelArn, &sListSubChannelsRequest_ChimeBearer, &sListSubChannelsRequest_MaxResults, &sListSubChannelsRequest_NextToken}}
+var mListSubChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubChannelsResponse_ChannelArn, &sListSubChannelsResponse_SubChannels, &sListSubChannelsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutChannelExpirationSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutChannelExpirationSettingsRequest_ChannelArn, &sPutChannelExpirationSettingsRequest_ChimeBearer, &sPutChannelExpirationSettingsRequest_ExpirationSettings}}
+var mPutChannelExpirationSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutChannelExpirationSettingsResponse_ChannelArn, &sPutChannelExpirationSettingsResponse_ExpirationSettings}}
+var mPutChannelMembershipPreferencesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutChannelMembershipPreferencesRequest_ChannelArn, &sPutChannelMembershipPreferencesRequest_MemberArn, &sPutChannelMembershipPreferencesRequest_ChimeBearer, &sPutChannelMembershipPreferencesRequest_Preferences}}
+var mPutChannelMembershipPreferencesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutChannelMembershipPreferencesResponse_ChannelArn, &sPutChannelMembershipPreferencesResponse_Member, &sPutChannelMembershipPreferencesResponse_Preferences}}
+var mPutMessagingStreamingConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMessagingStreamingConfigurationsRequest_AppInstanceArn, &sPutMessagingStreamingConfigurationsRequest_StreamingConfigurations}}
+var mPutMessagingStreamingConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMessagingStreamingConfigurationsResponse_StreamingConfigurations}}
+var mRedactChannelMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRedactChannelMessageRequest_ChannelArn, &sRedactChannelMessageRequest_MessageId, &sRedactChannelMessageRequest_ChimeBearer, &sRedactChannelMessageRequest_SubChannelId}}
+var mRedactChannelMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRedactChannelMessageResponse_ChannelArn, &sRedactChannelMessageResponse_MessageId, &sRedactChannelMessageResponse_SubChannelId}}
+var mSearchChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchChannelsRequest_ChimeBearer, &sSearchChannelsRequest_Fields, &sSearchChannelsRequest_MaxResults, &sSearchChannelsRequest_NextToken}}
+var mSearchChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchChannelsResponse_Channels, &sSearchChannelsResponse_NextToken}}
+var mSendChannelMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendChannelMessageRequest_ChannelArn, &sSendChannelMessageRequest_Content, &sSendChannelMessageRequest_Type, &sSendChannelMessageRequest_Persistence, &sSendChannelMessageRequest_Metadata, &sSendChannelMessageRequest_ClientRequestToken, &sSendChannelMessageRequest_ChimeBearer, &sSendChannelMessageRequest_PushNotification, &sSendChannelMessageRequest_MessageAttributes, &sSendChannelMessageRequest_SubChannelId, &sSendChannelMessageRequest_ContentType, &sSendChannelMessageRequest_Target}, Hash: &hSendChannelMessageRequest}
+var mSendChannelMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSendChannelMessageResponse_ChannelArn, &sSendChannelMessageResponse_MessageId, &sSendChannelMessageResponse_Status, &sSendChannelMessageResponse_SubChannelId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateChannelFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelFlowRequest_ChannelFlowArn, &sUpdateChannelFlowRequest_Processors, &sUpdateChannelFlowRequest_Name}}
+var mUpdateChannelFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelFlowResponse_ChannelFlowArn}}
+var mUpdateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelRequest_ChannelArn, &sUpdateChannelRequest_Name, &sUpdateChannelRequest_Mode, &sUpdateChannelRequest_Metadata, &sUpdateChannelRequest_ChimeBearer}}
+var mUpdateChannelMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelMessageRequest_ChannelArn, &sUpdateChannelMessageRequest_MessageId, &sUpdateChannelMessageRequest_Content, &sUpdateChannelMessageRequest_Metadata, &sUpdateChannelMessageRequest_ChimeBearer, &sUpdateChannelMessageRequest_SubChannelId, &sUpdateChannelMessageRequest_ContentType}}
+var mUpdateChannelMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelMessageResponse_ChannelArn, &sUpdateChannelMessageResponse_MessageId, &sUpdateChannelMessageResponse_Status, &sUpdateChannelMessageResponse_SubChannelId}}
+var mUpdateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelResponse_ChannelArn}}
+var mUpdateChannelReadMarkerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelReadMarkerRequest_ChannelArn, &sUpdateChannelReadMarkerRequest_ChimeBearer}}
+var mUpdateChannelReadMarkerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelReadMarkerResponse_ChannelArn}}
+
+var hChannel = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 6, 2, 0, 1, 9, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 3, 0, 10, 0, 8, 0, 12,
+	5, 0, 0, 0, 11, 0, 0, 4,
+}}
+var hChannelMessage = smithy.MemberHash{Seed: 205, Slots: []uint16{
+	0, 11, 0, 5, 0, 3, 0, 2, 0, 0, 7, 0, 8, 0, 15, 14, 0, 1, 0, 0, 13, 10, 0, 0,
+	0, 0, 6, 9, 16, 4, 12, 0,
+}}
+var hChannelMessageSummary = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	3, 13, 7, 0, 0, 9, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 12, 0, 0, 0, 10, 11, 2, 6,
+	8, 0, 5, 4, 0, 0, 0, 0,
+}}
+var hErrorCode = smithy.MemberHash{Seed: 35, Slots: []uint16{
+	6, 0, 7, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 14, 15, 3, 13, 8, 0, 9, 10, 0, 12,
+	0, 0, 11, 2, 0, 0, 4, 0,
+}}
+var hCreateChannelRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	11, 13, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2, 0, 5, 12, 9, 0, 0, 0, 8, 0,
+	4, 0, 10, 0, 3, 0, 1, 0,
+}}
+var hSendChannelMessageRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 8, 9, 0, 0, 0, 0, 1, 3, 10, 12, 2, 0, 0, 0, 0, 5, 0, 0, 0, 6,
+	0, 7, 0, 11, 0, 0, 0, 4,
+}}
+
+var sAssociateChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateChannelFlow, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateChannelFlow})
+var sBatchCreateChannelMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateChannelMembership, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchCreateChannelMembership})
+var sChannelFlowCallback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelFlowCallback, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eChannelFlowCallback})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannel})
+var sCreateChannelBan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelBan, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannelBan})
+var sCreateChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelFlow, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannelFlow})
+var sCreateChannelMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelMembership, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannelMembership})
+var sCreateChannelModerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelModerator, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannelModerator})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannel})
+var sDeleteChannelBan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelBan, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannelBan})
+var sDeleteChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelFlow, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannelFlow})
+var sDeleteChannelMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelMembership, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannelMembership})
+var sDeleteChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelMessage, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannelMessage})
+var sDeleteChannelModerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelModerator, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannelModerator})
+var sDeleteMessagingStreamingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessagingStreamingConfigurations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMessagingStreamingConfigurations})
+var sDescribeChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannel, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannel})
+var sDescribeChannelBan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelBan, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannelBan})
+var sDescribeChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelFlow, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannelFlow})
+var sDescribeChannelMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelMembership, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannelMembership})
+var sDescribeChannelMembershipForAppInstanceUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelMembershipForAppInstanceUser, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannelMembershipForAppInstanceUser})
+var sDescribeChannelModeratedByAppInstanceUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelModeratedByAppInstanceUser, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannelModeratedByAppInstanceUser})
+var sDescribeChannelModerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelModerator, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannelModerator})
+var sDisassociateChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateChannelFlow, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateChannelFlow})
+var sGetChannelMembershipPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMembershipPreferences, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetChannelMembershipPreferences})
+var sGetChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMessage, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetChannelMessage})
+var sGetChannelMessageStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMessageStatus, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetChannelMessageStatus})
+var sGetMessagingSessionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMessagingSessionEndpoint, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetMessagingSessionEndpoint})
+var sGetMessagingStreamingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMessagingStreamingConfigurations, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetMessagingStreamingConfigurations})
+var sListChannelBans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelBans, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListChannelBans})
+var sListChannelFlows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelFlows, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eListChannelFlows})
+var sListChannelMemberships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMemberships, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListChannelMemberships})
+var sListChannelMembershipsForAppInstanceUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMembershipsForAppInstanceUser, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListChannelMembershipsForAppInstanceUser})
+var sListChannelMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMessages, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eListChannelMessages})
+var sListChannelModerators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelModerators, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListChannelModerators})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListChannels})
+var sListChannelsAssociatedWithChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsAssociatedWithChannelFlow, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListChannelsAssociatedWithChannelFlow})
+var sListChannelsModeratedByAppInstanceUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsModeratedByAppInstanceUser, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListChannelsModeratedByAppInstanceUser})
+var sListSubChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubChannels, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListSubChannels})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutChannelExpirationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelExpirationSettings, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &ePutChannelExpirationSettings})
+var sPutChannelMembershipPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelMembershipPreferences, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &ePutChannelMembershipPreferences})
+var sPutMessagingStreamingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMessagingStreamingConfigurations, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &ePutMessagingStreamingConfigurations})
+var sRedactChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactChannelMessage, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eRedactChannelMessage})
+var sSearchChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchChannels, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eSearchChannels})
+var sSendChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendChannelMessage, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eSendChannelMessage})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannel})
+var sUpdateChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelFlow, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannelFlow})
+var sUpdateChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelMessage, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannelMessage})
+var sUpdateChannelReadMarker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelReadMarker, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannelReadMarker})
+var s_ChimeMessagingService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeMessagingService, Type: smithy.ShapeTypeService, Ext: &e_ChimeMessagingService})
+var sAllowNotifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllowNotifications, Members: &mAllowNotifications, Type: smithy.ShapeTypeEnum, Ext: &eAllowNotifications})
+var sAllowNotifications_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAllowNotifications_ALL})
+var sAllowNotifications_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAllowNotifications_NONE})
+var sAllowNotifications_FILTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAllowNotifications_FILTERED})
+var sAppInstanceUserMembershipSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppInstanceUserMembershipSummary, Members: &mAppInstanceUserMembershipSummary, Type: smithy.ShapeTypeStructure, Ext: &eAppInstanceUserMembershipSummary})
+var sAppInstanceUserMembershipSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMembershipType, Members: &mChannelMembershipType, Type: smithy.ShapeTypeEnum, Ext: &eAppInstanceUserMembershipSummary_Type})
+var sAppInstanceUserMembershipSummary_ReadMarkerTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadMarkerTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAppInstanceUserMembershipSummary_ReadMarkerTimestamp})
+var sAppInstanceUserMembershipSummary_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eAppInstanceUserMembershipSummary_SubChannelId})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBadRequestException_Code})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sBatchChannelMemberships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchChannelMemberships, Members: &mBatchChannelMemberships, Type: smithy.ShapeTypeStructure, Ext: &eBatchChannelMemberships})
+var sBatchChannelMemberships_InvitedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitedBy", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eBatchChannelMemberships_InvitedBy})
+var sBatchChannelMemberships_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMembershipType, Members: &mChannelMembershipType, Type: smithy.ShapeTypeEnum, Ext: &eBatchChannelMemberships_Type})
+var sBatchChannelMemberships_Members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Members", ID: &i_Members, Members: &m_Members, Type: smithy.ShapeTypeList, Ext: &eBatchChannelMemberships_Members})
+var sBatchChannelMemberships_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eBatchChannelMemberships_ChannelArn})
+var sBatchChannelMemberships_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eBatchChannelMemberships_SubChannelId})
+var sBatchCreateChannelMembershipError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateChannelMembershipError, Members: &mBatchCreateChannelMembershipError, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateChannelMembershipError})
+var sBatchCreateChannelMembershipError_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eBatchCreateChannelMembershipError_MemberArn})
+var sBatchCreateChannelMembershipError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchCreateChannelMembershipError_ErrorCode})
+var sBatchCreateChannelMembershipError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBatchCreateChannelMembershipError_ErrorMessage})
+var s_BatchCreateChannelMembershipErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateChannelMembershipErrors, Members: &m_BatchCreateChannelMembershipErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchCreateChannelMembershipErrors})
+var s_BatchCreateChannelMembershipErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchCreateChannelMembershipError, Members: &mBatchCreateChannelMembershipError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchCreateChannelMembershipErrors_member})
+var s_CallbackIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallbackIdType, Type: smithy.ShapeTypeString, Ext: &e_CallbackIdType})
+var sChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eChannel})
+var sChannel_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannel_Name})
+var sChannel_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannel_ChannelArn})
+var sChannel_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iChannelMode, Members: &mChannelMode, Type: smithy.ShapeTypeEnum, Ext: &eChannel_Mode})
+var sChannel_Privacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Privacy", ID: &iChannelPrivacy, Members: &mChannelPrivacy, Type: smithy.ShapeTypeEnum, Ext: &eChannel_Privacy})
+var sChannel_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannel_Metadata})
+var sChannel_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannel_CreatedBy})
+var sChannel_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannel_CreatedTimestamp})
+var sChannel_LastMessageTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastMessageTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannel_LastMessageTimestamp})
+var sChannel_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannel_LastUpdatedTimestamp})
+var sChannel_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannel_ChannelFlowArn})
+var sChannel_ElasticChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticChannelConfiguration", ID: &iElasticChannelConfiguration, Members: &mElasticChannelConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eChannel_ElasticChannelConfiguration})
+var sChannel_ExpirationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationSettings", ID: &iExpirationSettings, Members: &mExpirationSettings, Type: smithy.ShapeTypeStructure, Ext: &eChannel_ExpirationSettings})
+var sChannelAssociatedWithFlowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelAssociatedWithFlowSummary, Members: &mChannelAssociatedWithFlowSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelAssociatedWithFlowSummary})
+var sChannelAssociatedWithFlowSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelAssociatedWithFlowSummary_Name})
+var sChannelAssociatedWithFlowSummary_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelAssociatedWithFlowSummary_ChannelArn})
+var sChannelAssociatedWithFlowSummary_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iChannelMode, Members: &mChannelMode, Type: smithy.ShapeTypeEnum, Ext: &eChannelAssociatedWithFlowSummary_Mode})
+var sChannelAssociatedWithFlowSummary_Privacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Privacy", ID: &iChannelPrivacy, Members: &mChannelPrivacy, Type: smithy.ShapeTypeEnum, Ext: &eChannelAssociatedWithFlowSummary_Privacy})
+var sChannelAssociatedWithFlowSummary_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelAssociatedWithFlowSummary_Metadata})
+var s_ChannelAssociatedWithFlowSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelAssociatedWithFlowSummaryList, Members: &m_ChannelAssociatedWithFlowSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelAssociatedWithFlowSummaryList})
+var s_ChannelAssociatedWithFlowSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelAssociatedWithFlowSummary, Members: &mChannelAssociatedWithFlowSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelAssociatedWithFlowSummaryList_member})
+var sChannelBan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelBan, Members: &mChannelBan, Type: smithy.ShapeTypeStructure, Ext: &eChannelBan})
+var sChannelBan_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelBan_Member})
+var sChannelBan_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelBan_ChannelArn})
+var sChannelBan_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelBan_CreatedTimestamp})
+var sChannelBan_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelBan_CreatedBy})
+var sChannelBanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelBanSummary, Members: &mChannelBanSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelBanSummary})
+var sChannelBanSummary_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelBanSummary_Member})
+var s_ChannelBanSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelBanSummaryList, Members: &m_ChannelBanSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelBanSummaryList})
+var s_ChannelBanSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelBanSummary, Members: &mChannelBanSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelBanSummaryList_member})
+var sChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelFlow, Members: &mChannelFlow, Type: smithy.ShapeTypeStructure, Ext: &eChannelFlow})
+var sChannelFlow_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelFlow_ChannelFlowArn})
+var sChannelFlow_Processors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processors", ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &eChannelFlow_Processors})
+var sChannelFlow_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelFlow_Name})
+var sChannelFlow_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelFlow_CreatedTimestamp})
+var sChannelFlow_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelFlow_LastUpdatedTimestamp})
+var s_ChannelFlowExecutionOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelFlowExecutionOrder, Type: smithy.ShapeTypeInteger, Ext: &e_ChannelFlowExecutionOrder})
+var sChannelFlowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelFlowSummary, Members: &mChannelFlowSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelFlowSummary})
+var sChannelFlowSummary_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelFlowSummary_ChannelFlowArn})
+var sChannelFlowSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelFlowSummary_Name})
+var sChannelFlowSummary_Processors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processors", ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &eChannelFlowSummary_Processors})
+var s_ChannelFlowSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelFlowSummaryList, Members: &m_ChannelFlowSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelFlowSummaryList})
+var s_ChannelFlowSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelFlowSummary, Members: &mChannelFlowSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelFlowSummaryList_member})
+var s_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelId, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_ChannelId})
+var s_ChannelMemberArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelMemberArns, Members: &m_ChannelMemberArns, Type: smithy.ShapeTypeList, Ext: &e_ChannelMemberArns})
+var s_ChannelMemberArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelMemberArns_member})
+var sChannelMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMembership, Members: &mChannelMembership, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembership})
+var sChannelMembership_InvitedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitedBy", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembership_InvitedBy})
+var sChannelMembership_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMembershipType, Members: &mChannelMembershipType, Type: smithy.ShapeTypeEnum, Ext: &eChannelMembership_Type})
+var sChannelMembership_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembership_Member})
+var sChannelMembership_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelMembership_ChannelArn})
+var sChannelMembership_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMembership_CreatedTimestamp})
+var sChannelMembership_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMembership_LastUpdatedTimestamp})
+var sChannelMembership_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eChannelMembership_SubChannelId})
+var sChannelMembershipForAppInstanceUserSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMembershipForAppInstanceUserSummary, Members: &mChannelMembershipForAppInstanceUserSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipForAppInstanceUserSummary})
+var sChannelMembershipForAppInstanceUserSummary_ChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelSummary", ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipForAppInstanceUserSummary_ChannelSummary})
+var sChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceUserMembershipSummary", ID: &iAppInstanceUserMembershipSummary, Members: &mAppInstanceUserMembershipSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary})
+var s_ChannelMembershipForAppInstanceUserSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelMembershipForAppInstanceUserSummaryList, Members: &m_ChannelMembershipForAppInstanceUserSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelMembershipForAppInstanceUserSummaryList})
+var s_ChannelMembershipForAppInstanceUserSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelMembershipForAppInstanceUserSummary, Members: &mChannelMembershipForAppInstanceUserSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelMembershipForAppInstanceUserSummaryList_member})
+var sChannelMembershipPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMembershipPreferences, Members: &mChannelMembershipPreferences, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipPreferences})
+var sChannelMembershipPreferences_PushNotifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushNotifications", ID: &iPushNotificationPreferences, Members: &mPushNotificationPreferences, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipPreferences_PushNotifications})
+var sChannelMembershipSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMembershipSummary, Members: &mChannelMembershipSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipSummary})
+var sChannelMembershipSummary_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipSummary_Member})
+var s_ChannelMembershipSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelMembershipSummaryList, Members: &m_ChannelMembershipSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelMembershipSummaryList})
+var s_ChannelMembershipSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelMembershipSummary, Members: &mChannelMembershipSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelMembershipSummaryList_member})
+var sChannelMembershipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMembershipType, Members: &mChannelMembershipType, Type: smithy.ShapeTypeEnum, Ext: &eChannelMembershipType})
+var sChannelMembershipType_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipType_DEFAULT})
+var sChannelMembershipType_HIDDEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIDDEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMembershipType_HIDDEN})
+var sChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMessage, Members: &mChannelMessage, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessage})
+var sChannelMessage_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelMessage_ChannelArn})
+var sChannelMessage_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &eChannelMessage_MessageId})
+var sChannelMessage_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Content, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessage_Content})
+var sChannelMessage_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessage_Metadata})
+var sChannelMessage_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMessageType, Members: &mChannelMessageType, Type: smithy.ShapeTypeEnum, Ext: &eChannelMessage_Type})
+var sChannelMessage_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMessage_CreatedTimestamp})
+var sChannelMessage_LastEditedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEditedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMessage_LastEditedTimestamp})
+var sChannelMessage_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMessage_LastUpdatedTimestamp})
+var sChannelMessage_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessage_Sender})
+var sChannelMessage_Redacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Redacted", ID: &i_NonNullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eChannelMessage_Redacted})
+var sChannelMessage_Persistence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Persistence", ID: &iChannelMessagePersistenceType, Members: &mChannelMessagePersistenceType, Type: smithy.ShapeTypeEnum, Ext: &eChannelMessage_Persistence})
+var sChannelMessage_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChannelMessageStatusStructure, Members: &mChannelMessageStatusStructure, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessage_Status})
+var sChannelMessage_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &eChannelMessage_MessageAttributes})
+var sChannelMessage_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eChannelMessage_SubChannelId})
+var sChannelMessage_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessage_ContentType})
+var sChannelMessage_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &eChannelMessage_Target})
+var sChannelMessageCallback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMessageCallback, Members: &mChannelMessageCallback, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageCallback})
+var sChannelMessageCallback_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &eChannelMessageCallback_MessageId})
+var sChannelMessageCallback_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_NonEmptyContent, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessageCallback_Content})
+var sChannelMessageCallback_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessageCallback_Metadata})
+var sChannelMessageCallback_PushNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushNotification", ID: &iPushNotificationConfiguration, Members: &mPushNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageCallback_PushNotification})
+var sChannelMessageCallback_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &eChannelMessageCallback_MessageAttributes})
+var sChannelMessageCallback_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eChannelMessageCallback_SubChannelId})
+var sChannelMessageCallback_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessageCallback_ContentType})
+var sChannelMessagePersistenceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMessagePersistenceType, Members: &mChannelMessagePersistenceType, Type: smithy.ShapeTypeEnum, Ext: &eChannelMessagePersistenceType})
+var sChannelMessagePersistenceType_PERSISTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERSISTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessagePersistenceType_PERSISTENT})
+var sChannelMessagePersistenceType_NON_PERSISTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_PERSISTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessagePersistenceType_NON_PERSISTENT})
+var sChannelMessageStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMessageStatus, Members: &mChannelMessageStatus, Type: smithy.ShapeTypeEnum, Ext: &eChannelMessageStatus})
+var sChannelMessageStatus_SENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageStatus_SENT})
+var sChannelMessageStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageStatus_PENDING})
+var sChannelMessageStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageStatus_FAILED})
+var sChannelMessageStatus_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageStatus_DENIED})
+var sChannelMessageStatusStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMessageStatusStructure, Members: &mChannelMessageStatusStructure, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageStatusStructure})
+var sChannelMessageStatusStructure_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iChannelMessageStatus, Members: &mChannelMessageStatus, Type: smithy.ShapeTypeEnum, Ext: &eChannelMessageStatusStructure_Value})
+var sChannelMessageStatusStructure_Detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Detail", ID: &i_StatusDetail, Type: smithy.ShapeTypeString, Ext: &eChannelMessageStatusStructure_Detail})
+var sChannelMessageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMessageSummary, Members: &mChannelMessageSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageSummary})
+var sChannelMessageSummary_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &eChannelMessageSummary_MessageId})
+var sChannelMessageSummary_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_Content, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessageSummary_Content})
+var sChannelMessageSummary_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessageSummary_Metadata})
+var sChannelMessageSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMessageType, Members: &mChannelMessageType, Type: smithy.ShapeTypeEnum, Ext: &eChannelMessageSummary_Type})
+var sChannelMessageSummary_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMessageSummary_CreatedTimestamp})
+var sChannelMessageSummary_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMessageSummary_LastUpdatedTimestamp})
+var sChannelMessageSummary_LastEditedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEditedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelMessageSummary_LastEditedTimestamp})
+var sChannelMessageSummary_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageSummary_Sender})
+var sChannelMessageSummary_Redacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Redacted", ID: &i_NonNullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eChannelMessageSummary_Redacted})
+var sChannelMessageSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChannelMessageStatusStructure, Members: &mChannelMessageStatusStructure, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageSummary_Status})
+var sChannelMessageSummary_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &eChannelMessageSummary_MessageAttributes})
+var sChannelMessageSummary_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelMessageSummary_ContentType})
+var sChannelMessageSummary_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &eChannelMessageSummary_Target})
+var s_ChannelMessageSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelMessageSummaryList, Members: &m_ChannelMessageSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelMessageSummaryList})
+var s_ChannelMessageSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelMessageSummary, Members: &mChannelMessageSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelMessageSummaryList_member})
+var sChannelMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMessageType, Members: &mChannelMessageType, Type: smithy.ShapeTypeEnum, Ext: &eChannelMessageType})
+var sChannelMessageType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageType_STANDARD})
+var sChannelMessageType_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMessageType_CONTROL})
+var sChannelMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMode, Members: &mChannelMode, Type: smithy.ShapeTypeEnum, Ext: &eChannelMode})
+var sChannelMode_UNRESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNRESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMode_UNRESTRICTED})
+var sChannelMode_RESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelMode_RESTRICTED})
+var sChannelModeratedByAppInstanceUserSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelModeratedByAppInstanceUserSummary, Members: &mChannelModeratedByAppInstanceUserSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelModeratedByAppInstanceUserSummary})
+var sChannelModeratedByAppInstanceUserSummary_ChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelSummary", ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelModeratedByAppInstanceUserSummary_ChannelSummary})
+var s_ChannelModeratedByAppInstanceUserSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelModeratedByAppInstanceUserSummaryList, Members: &m_ChannelModeratedByAppInstanceUserSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelModeratedByAppInstanceUserSummaryList})
+var s_ChannelModeratedByAppInstanceUserSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelModeratedByAppInstanceUserSummary, Members: &mChannelModeratedByAppInstanceUserSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelModeratedByAppInstanceUserSummaryList_member})
+var sChannelModerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelModerator, Members: &mChannelModerator, Type: smithy.ShapeTypeStructure, Ext: &eChannelModerator})
+var sChannelModerator_Moderator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Moderator", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelModerator_Moderator})
+var sChannelModerator_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelModerator_ChannelArn})
+var sChannelModerator_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelModerator_CreatedTimestamp})
+var sChannelModerator_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelModerator_CreatedBy})
+var s_ChannelModeratorArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelModeratorArns, Members: &m_ChannelModeratorArns, Type: smithy.ShapeTypeList, Ext: &e_ChannelModeratorArns})
+var s_ChannelModeratorArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelModeratorArns_member})
+var sChannelModeratorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelModeratorSummary, Members: &mChannelModeratorSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelModeratorSummary})
+var sChannelModeratorSummary_Moderator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Moderator", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eChannelModeratorSummary_Moderator})
+var s_ChannelModeratorSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelModeratorSummaryList, Members: &m_ChannelModeratorSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelModeratorSummaryList})
+var s_ChannelModeratorSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelModeratorSummary, Members: &mChannelModeratorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelModeratorSummaryList_member})
+var sChannelPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelPrivacy, Members: &mChannelPrivacy, Type: smithy.ShapeTypeEnum, Ext: &eChannelPrivacy})
+var sChannelPrivacy_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelPrivacy_PUBLIC})
+var sChannelPrivacy_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelPrivacy_PRIVATE})
+var sChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelSummary})
+var sChannelSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_Name})
+var sChannelSummary_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_ChannelArn})
+var sChannelSummary_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iChannelMode, Members: &mChannelMode, Type: smithy.ShapeTypeEnum, Ext: &eChannelSummary_Mode})
+var sChannelSummary_Privacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Privacy", ID: &iChannelPrivacy, Members: &mChannelPrivacy, Type: smithy.ShapeTypeEnum, Ext: &eChannelSummary_Privacy})
+var sChannelSummary_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eChannelSummary_Metadata})
+var sChannelSummary_LastMessageTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastMessageTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelSummary_LastMessageTimestamp})
+var s_ChannelSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelSummaryList, Members: &m_ChannelSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ChannelSummaryList})
+var s_ChannelSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelSummaryList_member})
+var s_ChimeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &e_ChimeArn})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_Code})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_Content = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Content, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_Content})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_ContentType})
+var sElasticChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticChannelConfiguration, Members: &mElasticChannelConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eElasticChannelConfiguration})
+var sElasticChannelConfiguration_MaximumSubChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumSubChannels", ID: &i_MaximumSubChannels, Type: smithy.ShapeTypeInteger, Ext: &eElasticChannelConfiguration_MaximumSubChannels})
+var sElasticChannelConfiguration_TargetMembershipsPerSubChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetMembershipsPerSubChannel", ID: &i_TargetMembershipsPerSubChannel, Type: smithy.ShapeTypeInteger, Ext: &eElasticChannelConfiguration_TargetMembershipsPerSubChannel})
+var sElasticChannelConfiguration_MinimumMembershipPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumMembershipPercentage", ID: &i_MinimumMembershipPercentage, Type: smithy.ShapeTypeInteger, Ext: &eElasticChannelConfiguration_MinimumMembershipPercentage})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eErrorCode})
+var sErrorCode_BadRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BadRequest", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_BadRequest})
+var sErrorCode_Conflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conflict", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Conflict})
+var sErrorCode_Forbidden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forbidden", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Forbidden})
+var sErrorCode_NotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_NotFound})
+var sErrorCode_PreconditionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreconditionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_PreconditionFailed})
+var sErrorCode_ResourceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_ResourceLimitExceeded})
+var sErrorCode_ServiceFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_ServiceFailure})
+var sErrorCode_AccessDenied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDenied", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_AccessDenied})
+var sErrorCode_ServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_ServiceUnavailable})
+var sErrorCode_Throttled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Throttled})
+var sErrorCode_Throttling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttling", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Throttling})
+var sErrorCode_Unauthorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unauthorized", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Unauthorized})
+var sErrorCode_Unprocessable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unprocessable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Unprocessable})
+var sErrorCode_VoiceConnectorGroupAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_VoiceConnectorGroupAssociationsExist})
+var sErrorCode_PhoneNumberAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_PhoneNumberAssociationsExist})
+var sExpirationCriterion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpirationCriterion, Members: &mExpirationCriterion, Type: smithy.ShapeTypeEnum, Ext: &eExpirationCriterion})
+var sExpirationCriterion_CREATED_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExpirationCriterion_CREATED_TIMESTAMP})
+var sExpirationCriterion_LAST_MESSAGE_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MESSAGE_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExpirationCriterion_LAST_MESSAGE_TIMESTAMP})
+var s_ExpirationDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpirationDays, Type: smithy.ShapeTypeInteger, Ext: &e_ExpirationDays})
+var sExpirationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpirationSettings, Members: &mExpirationSettings, Type: smithy.ShapeTypeStructure, Ext: &eExpirationSettings})
+var sExpirationSettings_ExpirationDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDays", ID: &i_ExpirationDays, Type: smithy.ShapeTypeInteger, Ext: &eExpirationSettings_ExpirationDays})
+var sExpirationSettings_ExpirationCriterion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationCriterion", ID: &iExpirationCriterion, Members: &mExpirationCriterion, Type: smithy.ShapeTypeEnum, Ext: &eExpirationSettings_ExpirationCriterion})
+var sFallbackAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFallbackAction, Members: &mFallbackAction, Type: smithy.ShapeTypeEnum, Ext: &eFallbackAction})
+var sFallbackAction_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFallbackAction_CONTINUE})
+var sFallbackAction_ABORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFallbackAction_ABORT})
+var s_FilterRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterRule, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_FilterRule})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eForbiddenException_Code})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_Message})
+var sIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eIdentity})
+var sIdentity_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eIdentity_Arn})
+var sIdentity_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eIdentity_Name})
+var sInvocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvocationType, Members: &mInvocationType, Type: smithy.ShapeTypeEnum, Ext: &eInvocationType})
+var sInvocationType_ASYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvocationType_ASYNC})
+var sLambdaConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaConfiguration, Members: &mLambdaConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLambdaConfiguration})
+var sLambdaConfiguration_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &eLambdaConfiguration_ResourceArn})
+var sLambdaConfiguration_InvocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationType", ID: &iInvocationType, Members: &mInvocationType, Type: smithy.ShapeTypeEnum, Ext: &eLambdaConfiguration_InvocationType})
+var s_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &e_LambdaFunctionArn})
+var s_MaximumSubChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumSubChannels, Type: smithy.ShapeTypeInteger, Ext: &e_MaximumSubChannels})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MemberArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberArns, Members: &m_MemberArns, Type: smithy.ShapeTypeList, Ext: &e_MemberArns})
+var s_MemberArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &e_MemberArns_member})
+var s_Members = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Members, Members: &m_Members, Type: smithy.ShapeTypeList, Ext: &e_Members})
+var s_Members_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &e_Members_member})
+var s_MembershipCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MembershipCount, Type: smithy.ShapeTypeInteger, Ext: &e_MembershipCount})
+var s_MessageAttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &e_MessageAttributeMap})
+var s_MessageAttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_MessageAttributeName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &e_MessageAttributeMap_key})
+var s_MessageAttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iMessageAttributeValue, Members: &mMessageAttributeValue, Type: smithy.ShapeTypeStructure, Ext: &e_MessageAttributeMap_value})
+var s_MessageAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageAttributeName, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_MessageAttributeName})
+var s_MessageAttributeStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageAttributeStringValue, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_MessageAttributeStringValue})
+var s_MessageAttributeStringValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageAttributeStringValues, Members: &m_MessageAttributeStringValues, Type: smithy.ShapeTypeList, Ext: &e_MessageAttributeStringValues})
+var s_MessageAttributeStringValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MessageAttributeStringValue, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &e_MessageAttributeStringValues_member})
+var sMessageAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageAttributeValue, Members: &mMessageAttributeValue, Type: smithy.ShapeTypeStructure, Ext: &eMessageAttributeValue})
+var sMessageAttributeValue_StringValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValues", ID: &i_MessageAttributeStringValues, Members: &m_MessageAttributeStringValues, Type: smithy.ShapeTypeList, Ext: &eMessageAttributeValue_StringValues})
+var s_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &e_MessageId})
+var sMessagingDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessagingDataType, Members: &mMessagingDataType, Type: smithy.ShapeTypeEnum, Ext: &eMessagingDataType})
+var sMessagingDataType_Channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channel", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessagingDataType_Channel})
+var sMessagingDataType_ChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMessage", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessagingDataType_ChannelMessage})
+var sMessagingSessionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessagingSessionEndpoint, Members: &mMessagingSessionEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eMessagingSessionEndpoint})
+var sMessagingSessionEndpoint_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_UrlType, Type: smithy.ShapeTypeString, Ext: &eMessagingSessionEndpoint_Url})
+var s_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metadata, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_Metadata})
+var s_MinimumMembershipPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumMembershipPercentage, Type: smithy.ShapeTypeInteger, Ext: &e_MinimumMembershipPercentage})
+var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkType})
+var sNetworkType_IPV4_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_IPV4_ONLY})
+var sNetworkType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_DUAL_STACK})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NonEmptyContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyContent, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyContent})
+var s_NonEmptyResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyResourceName, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyResourceName})
+var s_NonNullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_NonNullableBoolean})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eNotFoundException_Code})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var sProcessor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessor, Members: &mProcessor, Type: smithy.ShapeTypeStructure, Ext: &eProcessor})
+var sProcessor_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eProcessor_Name})
+var sProcessor_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iProcessorConfiguration, Members: &mProcessorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProcessor_Configuration})
+var sProcessor_ExecutionOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionOrder", ID: &i_ChannelFlowExecutionOrder, Type: smithy.ShapeTypeInteger, Ext: &eProcessor_ExecutionOrder})
+var sProcessor_FallbackAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FallbackAction", ID: &iFallbackAction, Members: &mFallbackAction, Type: smithy.ShapeTypeEnum, Ext: &eProcessor_FallbackAction})
+var sProcessorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessorConfiguration, Members: &mProcessorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProcessorConfiguration})
+var sProcessorConfiguration_Lambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lambda", ID: &iLambdaConfiguration, Members: &mLambdaConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProcessorConfiguration_Lambda})
+var s_ProcessorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &e_ProcessorList})
+var s_ProcessorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcessor, Members: &mProcessor, Type: smithy.ShapeTypeStructure, Ext: &e_ProcessorList_member})
+var s_PushNotificationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PushNotificationBody, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_PushNotificationBody})
+var sPushNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushNotificationConfiguration, Members: &mPushNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePushNotificationConfiguration})
+var sPushNotificationConfiguration_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_PushNotificationTitle, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePushNotificationConfiguration_Title})
+var sPushNotificationConfiguration_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_PushNotificationBody, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePushNotificationConfiguration_Body})
+var sPushNotificationConfiguration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPushNotificationType, Members: &mPushNotificationType, Type: smithy.ShapeTypeEnum, Ext: &ePushNotificationConfiguration_Type})
+var sPushNotificationPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushNotificationPreferences, Members: &mPushNotificationPreferences, Type: smithy.ShapeTypeStructure, Ext: &ePushNotificationPreferences})
+var sPushNotificationPreferences_AllowNotifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowNotifications", ID: &iAllowNotifications, Members: &mAllowNotifications, Type: smithy.ShapeTypeEnum, Ext: &ePushNotificationPreferences_AllowNotifications})
+var sPushNotificationPreferences_FilterRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterRule", ID: &i_FilterRule, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePushNotificationPreferences_FilterRule})
+var s_PushNotificationTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PushNotificationTitle, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_PushNotificationTitle})
+var sPushNotificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushNotificationType, Members: &mPushNotificationType, Type: smithy.ShapeTypeEnum, Ext: &ePushNotificationType})
+var sPushNotificationType_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePushNotificationType_DEFAULT})
+var sPushNotificationType_VOIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePushNotificationType_VOIP})
+var sResourceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceededException, Members: &mResourceLimitExceededException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &eResourceLimitExceededException})
+var sResourceLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eResourceLimitExceededException_Code})
+var sResourceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceLimitExceededException_Message})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sSearchField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchField, Members: &mSearchField, Type: smithy.ShapeTypeStructure, Ext: &eSearchField})
+var sSearchField_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iSearchFieldKey, Members: &mSearchFieldKey, Type: smithy.ShapeTypeEnum, Ext: &eSearchField_Key})
+var sSearchField_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_SearchFieldValues, Members: &m_SearchFieldValues, Type: smithy.ShapeTypeList, Ext: &eSearchField_Values})
+var sSearchField_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iSearchFieldOperator, Members: &mSearchFieldOperator, Type: smithy.ShapeTypeEnum, Ext: &eSearchField_Operator})
+var sSearchFieldKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFieldKey, Members: &mSearchFieldKey, Type: smithy.ShapeTypeEnum, Ext: &eSearchFieldKey})
+var sSearchFieldKey_MEMBERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFieldKey_MEMBERS})
+var sSearchFieldOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFieldOperator, Members: &mSearchFieldOperator, Type: smithy.ShapeTypeEnum, Ext: &eSearchFieldOperator})
+var sSearchFieldOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFieldOperator_EQUALS})
+var sSearchFieldOperator_INCLUDES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCLUDES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFieldOperator_INCLUDES})
+var s_SearchFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFields, Members: &m_SearchFields, Type: smithy.ShapeTypeList, Ext: &e_SearchFields})
+var s_SearchFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchField, Members: &mSearchField, Type: smithy.ShapeTypeStructure, Ext: &e_SearchFields_member})
+var s_SearchFieldValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFieldValue, Type: smithy.ShapeTypeString, Ext: &e_SearchFieldValue})
+var s_SearchFieldValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFieldValues, Members: &m_SearchFieldValues, Type: smithy.ShapeTypeList, Ext: &e_SearchFieldValues})
+var s_SearchFieldValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SearchFieldValue, Type: smithy.ShapeTypeString, Ext: &e_SearchFieldValues_member})
+var sServiceFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFailureException, Members: &mServiceFailureException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eServiceFailureException})
+var sServiceFailureException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceFailureException_Code})
+var sServiceFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceFailureException_Message})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t58, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceUnavailableException_Code})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_Message})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASCENDING})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESCENDING})
+var s_StatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusDetail, Type: smithy.ShapeTypeString, Ext: &e_StatusDetail})
+var sStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStreamingConfiguration})
+var sStreamingConfiguration_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &iMessagingDataType, Members: &mMessagingDataType, Type: smithy.ShapeTypeEnum, Ext: &eStreamingConfiguration_DataType})
+var sStreamingConfiguration_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eStreamingConfiguration_ResourceArn})
+var s_StreamingConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingConfigurationList, Members: &m_StreamingConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_StreamingConfigurationList})
+var s_StreamingConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_StreamingConfigurationList_member})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &e_SubChannelId})
+var sSubChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubChannelSummary, Members: &mSubChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &eSubChannelSummary})
+var sSubChannelSummary_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eSubChannelSummary_SubChannelId})
+var sSubChannelSummary_MembershipCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipCount", ID: &i_MembershipCount, Type: smithy.ShapeTypeInteger, Ext: &eSubChannelSummary_MembershipCount})
+var s_SubChannelSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubChannelSummaryList, Members: &m_SubChannelSummaryList, Type: smithy.ShapeTypeList, Ext: &e_SubChannelSummaryList})
+var s_SubChannelSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubChannelSummary, Members: &mSubChannelSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SubChannelSummaryList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &eTarget})
+var sTarget_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eTarget_MemberArn})
+var s_TargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &e_TargetList})
+var s_TargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &e_TargetList_member})
+var s_TargetMembershipsPerSubChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetMembershipsPerSubChannel, Type: smithy.ShapeTypeInteger, Ext: &e_TargetMembershipsPerSubChannel})
+var sThrottledClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledClientException, Members: &mThrottledClientException, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eThrottledClientException})
+var sThrottledClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eThrottledClientException_Code})
+var sThrottledClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottledClientException_Message})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sUnauthorizedClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedClientException, Members: &mUnauthorizedClientException, Traits: &t60, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedClientException})
+var sUnauthorizedClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eUnauthorizedClientException_Code})
+var sUnauthorizedClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedClientException_Message})
+var s_UrlType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlType, Type: smithy.ShapeTypeString, Ext: &e_UrlType})
+var sAssociateChannelFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateChannelFlowRequest, Members: &mAssociateChannelFlowRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateChannelFlowRequest})
+var sAssociateChannelFlowRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eAssociateChannelFlowRequest_ChannelArn})
+var sAssociateChannelFlowRequest_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eAssociateChannelFlowRequest_ChannelFlowArn})
+var sAssociateChannelFlowRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eAssociateChannelFlowRequest_ChimeBearer})
+var sBatchCreateChannelMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateChannelMembershipRequest, Members: &mBatchCreateChannelMembershipRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateChannelMembershipRequest})
+var sBatchCreateChannelMembershipRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eBatchCreateChannelMembershipRequest_ChannelArn})
+var sBatchCreateChannelMembershipRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMembershipType, Members: &mChannelMembershipType, Type: smithy.ShapeTypeEnum, Ext: &eBatchCreateChannelMembershipRequest_Type})
+var sBatchCreateChannelMembershipRequest_MemberArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArns", ID: &i_MemberArns, Members: &m_MemberArns, Type: smithy.ShapeTypeList, Ext: &eBatchCreateChannelMembershipRequest_MemberArns})
+var sBatchCreateChannelMembershipRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eBatchCreateChannelMembershipRequest_ChimeBearer})
+var sBatchCreateChannelMembershipRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eBatchCreateChannelMembershipRequest_SubChannelId})
+var sBatchCreateChannelMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateChannelMembershipResponse, Members: &mBatchCreateChannelMembershipResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateChannelMembershipResponse})
+var sBatchCreateChannelMembershipResponse_BatchChannelMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchChannelMemberships", ID: &iBatchChannelMemberships, Members: &mBatchChannelMemberships, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateChannelMembershipResponse_BatchChannelMemberships})
+var sBatchCreateChannelMembershipResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchCreateChannelMembershipErrors, Members: &m_BatchCreateChannelMembershipErrors, Type: smithy.ShapeTypeList, Ext: &eBatchCreateChannelMembershipResponse_Errors})
+var sChannelFlowCallbackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelFlowCallbackRequest, Members: &mChannelFlowCallbackRequest, Type: smithy.ShapeTypeStructure, Ext: &eChannelFlowCallbackRequest})
+var sChannelFlowCallbackRequest_CallbackId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallbackId", ID: &i_CallbackIdType, Type: smithy.ShapeTypeString, Ext: &eChannelFlowCallbackRequest_CallbackId})
+var sChannelFlowCallbackRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eChannelFlowCallbackRequest_ChannelArn})
+var sChannelFlowCallbackRequest_DeleteResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteResource", ID: &i_NonNullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eChannelFlowCallbackRequest_DeleteResource})
+var sChannelFlowCallbackRequest_ChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMessage", ID: &iChannelMessageCallback, Members: &mChannelMessageCallback, Type: smithy.ShapeTypeStructure, Ext: &eChannelFlowCallbackRequest_ChannelMessage})
+var sChannelFlowCallbackResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelFlowCallbackResponse, Members: &mChannelFlowCallbackResponse, Type: smithy.ShapeTypeStructure, Ext: &eChannelFlowCallbackResponse})
+var sChannelFlowCallbackResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eChannelFlowCallbackResponse_ChannelArn})
+var sChannelFlowCallbackResponse_CallbackId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallbackId", ID: &i_CallbackIdType, Type: smithy.ShapeTypeString, Ext: &eChannelFlowCallbackResponse_CallbackId})
+var sCreateChannelBanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelBanRequest, Members: &mCreateChannelBanRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelBanRequest})
+var sCreateChannelBanRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eCreateChannelBanRequest_ChannelArn})
+var sCreateChannelBanRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelBanRequest_MemberArn})
+var sCreateChannelBanRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eCreateChannelBanRequest_ChimeBearer})
+var sCreateChannelBanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelBanResponse, Members: &mCreateChannelBanResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelBanResponse})
+var sCreateChannelBanResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelBanResponse_ChannelArn})
+var sCreateChannelBanResponse_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelBanResponse_Member})
+var sCreateChannelFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelFlowRequest, Members: &mCreateChannelFlowRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelFlowRequest})
+var sCreateChannelFlowRequest_AppInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelFlowRequest_AppInstanceArn})
+var sCreateChannelFlowRequest_Processors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processors", ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &eCreateChannelFlowRequest_Processors})
+var sCreateChannelFlowRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateChannelFlowRequest_Name})
+var sCreateChannelFlowRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateChannelFlowRequest_Tags})
+var sCreateChannelFlowRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateChannelFlowRequest_ClientRequestToken})
+var sCreateChannelFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelFlowResponse, Members: &mCreateChannelFlowResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelFlowResponse})
+var sCreateChannelFlowResponse_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelFlowResponse_ChannelFlowArn})
+var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest})
+var sCreateChannelRequest_AppInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_AppInstanceArn})
+var sCreateChannelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_Name})
+var sCreateChannelRequest_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iChannelMode, Members: &mChannelMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelRequest_Mode})
+var sCreateChannelRequest_Privacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Privacy", ID: &iChannelPrivacy, Members: &mChannelPrivacy, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelRequest_Privacy})
+var sCreateChannelRequest_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_Metadata})
+var sCreateChannelRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_ClientRequestToken})
+var sCreateChannelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateChannelRequest_Tags})
+var sCreateChannelRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_ChimeBearer})
+var sCreateChannelRequest_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_ChannelId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_ChannelId})
+var sCreateChannelRequest_MemberArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArns", ID: &i_ChannelMemberArns, Members: &m_ChannelMemberArns, Type: smithy.ShapeTypeList, Ext: &eCreateChannelRequest_MemberArns})
+var sCreateChannelRequest_ModeratorArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModeratorArns", ID: &i_ChannelModeratorArns, Members: &m_ChannelModeratorArns, Type: smithy.ShapeTypeList, Ext: &eCreateChannelRequest_ModeratorArns})
+var sCreateChannelRequest_ElasticChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElasticChannelConfiguration", ID: &iElasticChannelConfiguration, Members: &mElasticChannelConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_ElasticChannelConfiguration})
+var sCreateChannelRequest_ExpirationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationSettings", ID: &iExpirationSettings, Members: &mExpirationSettings, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_ExpirationSettings})
+var sCreateChannelMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelMembershipRequest, Members: &mCreateChannelMembershipRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelMembershipRequest})
+var sCreateChannelMembershipRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eCreateChannelMembershipRequest_ChannelArn})
+var sCreateChannelMembershipRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelMembershipRequest_MemberArn})
+var sCreateChannelMembershipRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMembershipType, Members: &mChannelMembershipType, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelMembershipRequest_Type})
+var sCreateChannelMembershipRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eCreateChannelMembershipRequest_ChimeBearer})
+var sCreateChannelMembershipRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eCreateChannelMembershipRequest_SubChannelId})
+var sCreateChannelMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelMembershipResponse, Members: &mCreateChannelMembershipResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelMembershipResponse})
+var sCreateChannelMembershipResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelMembershipResponse_ChannelArn})
+var sCreateChannelMembershipResponse_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelMembershipResponse_Member})
+var sCreateChannelMembershipResponse_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eCreateChannelMembershipResponse_SubChannelId})
+var sCreateChannelModeratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelModeratorRequest, Members: &mCreateChannelModeratorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelModeratorRequest})
+var sCreateChannelModeratorRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eCreateChannelModeratorRequest_ChannelArn})
+var sCreateChannelModeratorRequest_ChannelModeratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelModeratorArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelModeratorRequest_ChannelModeratorArn})
+var sCreateChannelModeratorRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eCreateChannelModeratorRequest_ChimeBearer})
+var sCreateChannelModeratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelModeratorResponse, Members: &mCreateChannelModeratorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelModeratorResponse})
+var sCreateChannelModeratorResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelModeratorResponse_ChannelArn})
+var sCreateChannelModeratorResponse_ChannelModerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelModerator", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelModeratorResponse_ChannelModerator})
+var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse})
+var sCreateChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_ChannelArn})
+var sDeleteChannelBanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelBanRequest, Members: &mDeleteChannelBanRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelBanRequest})
+var sDeleteChannelBanRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelBanRequest_ChannelArn})
+var sDeleteChannelBanRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelBanRequest_MemberArn})
+var sDeleteChannelBanRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelBanRequest_ChimeBearer})
+var sDeleteChannelFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelFlowRequest, Members: &mDeleteChannelFlowRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelFlowRequest})
+var sDeleteChannelFlowRequest_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelFlowRequest_ChannelFlowArn})
+var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelRequest})
+var sDeleteChannelRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelRequest_ChannelArn})
+var sDeleteChannelRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelRequest_ChimeBearer})
+var sDeleteChannelMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelMembershipRequest, Members: &mDeleteChannelMembershipRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelMembershipRequest})
+var sDeleteChannelMembershipRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMembershipRequest_ChannelArn})
+var sDeleteChannelMembershipRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMembershipRequest_MemberArn})
+var sDeleteChannelMembershipRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMembershipRequest_ChimeBearer})
+var sDeleteChannelMembershipRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMembershipRequest_SubChannelId})
+var sDeleteChannelMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelMessageRequest, Members: &mDeleteChannelMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelMessageRequest})
+var sDeleteChannelMessageRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMessageRequest_ChannelArn})
+var sDeleteChannelMessageRequest_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMessageRequest_MessageId})
+var sDeleteChannelMessageRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMessageRequest_ChimeBearer})
+var sDeleteChannelMessageRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelMessageRequest_SubChannelId})
+var sDeleteChannelModeratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelModeratorRequest, Members: &mDeleteChannelModeratorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelModeratorRequest})
+var sDeleteChannelModeratorRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelModeratorRequest_ChannelArn})
+var sDeleteChannelModeratorRequest_ChannelModeratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelModeratorArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelModeratorRequest_ChannelModeratorArn})
+var sDeleteChannelModeratorRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelModeratorRequest_ChimeBearer})
+var sDeleteMessagingStreamingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessagingStreamingConfigurationsRequest, Members: &mDeleteMessagingStreamingConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMessagingStreamingConfigurationsRequest})
+var sDeleteMessagingStreamingConfigurationsRequest_AppInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDeleteMessagingStreamingConfigurationsRequest_AppInstanceArn})
+var sDescribeChannelBanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelBanRequest, Members: &mDescribeChannelBanRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelBanRequest})
+var sDescribeChannelBanRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelBanRequest_ChannelArn})
+var sDescribeChannelBanRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelBanRequest_MemberArn})
+var sDescribeChannelBanRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelBanRequest_ChimeBearer})
+var sDescribeChannelBanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelBanResponse, Members: &mDescribeChannelBanResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelBanResponse})
+var sDescribeChannelBanResponse_ChannelBan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelBan", ID: &iChannelBan, Members: &mChannelBan, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelBanResponse_ChannelBan})
+var sDescribeChannelFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelFlowRequest, Members: &mDescribeChannelFlowRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelFlowRequest})
+var sDescribeChannelFlowRequest_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelFlowRequest_ChannelFlowArn})
+var sDescribeChannelFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelFlowResponse, Members: &mDescribeChannelFlowResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelFlowResponse})
+var sDescribeChannelFlowResponse_ChannelFlow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlow", ID: &iChannelFlow, Members: &mChannelFlow, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelFlowResponse_ChannelFlow})
+var sDescribeChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelRequest, Members: &mDescribeChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelRequest})
+var sDescribeChannelRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelRequest_ChannelArn})
+var sDescribeChannelRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelRequest_ChimeBearer})
+var sDescribeChannelMembershipForAppInstanceUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelMembershipForAppInstanceUserRequest, Members: &mDescribeChannelMembershipForAppInstanceUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelMembershipForAppInstanceUserRequest})
+var sDescribeChannelMembershipForAppInstanceUserRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelMembershipForAppInstanceUserRequest_ChannelArn})
+var sDescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceUserArn", ID: &i_ChimeArn, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn})
+var sDescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer})
+var sDescribeChannelMembershipForAppInstanceUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelMembershipForAppInstanceUserResponse, Members: &mDescribeChannelMembershipForAppInstanceUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelMembershipForAppInstanceUserResponse})
+var sDescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMembership", ID: &iChannelMembershipForAppInstanceUserSummary, Members: &mChannelMembershipForAppInstanceUserSummary, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership})
+var sDescribeChannelMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelMembershipRequest, Members: &mDescribeChannelMembershipRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelMembershipRequest})
+var sDescribeChannelMembershipRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelMembershipRequest_ChannelArn})
+var sDescribeChannelMembershipRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelMembershipRequest_MemberArn})
+var sDescribeChannelMembershipRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelMembershipRequest_ChimeBearer})
+var sDescribeChannelMembershipRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelMembershipRequest_SubChannelId})
+var sDescribeChannelMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelMembershipResponse, Members: &mDescribeChannelMembershipResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelMembershipResponse})
+var sDescribeChannelMembershipResponse_ChannelMembership = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMembership", ID: &iChannelMembership, Members: &mChannelMembership, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelMembershipResponse_ChannelMembership})
+var sDescribeChannelModeratedByAppInstanceUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelModeratedByAppInstanceUserRequest, Members: &mDescribeChannelModeratedByAppInstanceUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelModeratedByAppInstanceUserRequest})
+var sDescribeChannelModeratedByAppInstanceUserRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelModeratedByAppInstanceUserRequest_ChannelArn})
+var sDescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceUserArn", ID: &i_ChimeArn, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn})
+var sDescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer})
+var sDescribeChannelModeratedByAppInstanceUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelModeratedByAppInstanceUserResponse, Members: &mDescribeChannelModeratedByAppInstanceUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelModeratedByAppInstanceUserResponse})
+var sDescribeChannelModeratedByAppInstanceUserResponse_Channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channel", ID: &iChannelModeratedByAppInstanceUserSummary, Members: &mChannelModeratedByAppInstanceUserSummary, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelModeratedByAppInstanceUserResponse_Channel})
+var sDescribeChannelModeratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelModeratorRequest, Members: &mDescribeChannelModeratorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelModeratorRequest})
+var sDescribeChannelModeratorRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelModeratorRequest_ChannelArn})
+var sDescribeChannelModeratorRequest_ChannelModeratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelModeratorArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelModeratorRequest_ChannelModeratorArn})
+var sDescribeChannelModeratorRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelModeratorRequest_ChimeBearer})
+var sDescribeChannelModeratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelModeratorResponse, Members: &mDescribeChannelModeratorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelModeratorResponse})
+var sDescribeChannelModeratorResponse_ChannelModerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelModerator", ID: &iChannelModerator, Members: &mChannelModerator, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelModeratorResponse_ChannelModerator})
+var sDescribeChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelResponse, Members: &mDescribeChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse})
+var sDescribeChannelResponse_Channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channel", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_Channel})
+var sDisassociateChannelFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateChannelFlowRequest, Members: &mDisassociateChannelFlowRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateChannelFlowRequest})
+var sDisassociateChannelFlowRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDisassociateChannelFlowRequest_ChannelArn})
+var sDisassociateChannelFlowRequest_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eDisassociateChannelFlowRequest_ChannelFlowArn})
+var sDisassociateChannelFlowRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eDisassociateChannelFlowRequest_ChimeBearer})
+var sGetChannelMembershipPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMembershipPreferencesRequest, Members: &mGetChannelMembershipPreferencesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMembershipPreferencesRequest})
+var sGetChannelMembershipPreferencesRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetChannelMembershipPreferencesRequest_ChannelArn})
+var sGetChannelMembershipPreferencesRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetChannelMembershipPreferencesRequest_MemberArn})
+var sGetChannelMembershipPreferencesRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eGetChannelMembershipPreferencesRequest_ChimeBearer})
+var sGetChannelMembershipPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMembershipPreferencesResponse, Members: &mGetChannelMembershipPreferencesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMembershipPreferencesResponse})
+var sGetChannelMembershipPreferencesResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eGetChannelMembershipPreferencesResponse_ChannelArn})
+var sGetChannelMembershipPreferencesResponse_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMembershipPreferencesResponse_Member})
+var sGetChannelMembershipPreferencesResponse_Preferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preferences", ID: &iChannelMembershipPreferences, Members: &mChannelMembershipPreferences, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMembershipPreferencesResponse_Preferences})
+var sGetChannelMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMessageRequest, Members: &mGetChannelMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMessageRequest})
+var sGetChannelMessageRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageRequest_ChannelArn})
+var sGetChannelMessageRequest_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageRequest_MessageId})
+var sGetChannelMessageRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageRequest_ChimeBearer})
+var sGetChannelMessageRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageRequest_SubChannelId})
+var sGetChannelMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMessageResponse, Members: &mGetChannelMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMessageResponse})
+var sGetChannelMessageResponse_ChannelMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMessage", ID: &iChannelMessage, Members: &mChannelMessage, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMessageResponse_ChannelMessage})
+var sGetChannelMessageStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMessageStatusRequest, Members: &mGetChannelMessageStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMessageStatusRequest})
+var sGetChannelMessageStatusRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageStatusRequest_ChannelArn})
+var sGetChannelMessageStatusRequest_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageStatusRequest_MessageId})
+var sGetChannelMessageStatusRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageStatusRequest_ChimeBearer})
+var sGetChannelMessageStatusRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eGetChannelMessageStatusRequest_SubChannelId})
+var sGetChannelMessageStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelMessageStatusResponse, Members: &mGetChannelMessageStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMessageStatusResponse})
+var sGetChannelMessageStatusResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChannelMessageStatusStructure, Members: &mChannelMessageStatusStructure, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelMessageStatusResponse_Status})
+var sGetMessagingSessionEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMessagingSessionEndpointRequest, Members: &mGetMessagingSessionEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMessagingSessionEndpointRequest})
+var sGetMessagingSessionEndpointRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Traits: &t65, Type: smithy.ShapeTypeEnum, Ext: &eGetMessagingSessionEndpointRequest_NetworkType})
+var sGetMessagingSessionEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMessagingSessionEndpointResponse, Members: &mGetMessagingSessionEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMessagingSessionEndpointResponse})
+var sGetMessagingSessionEndpointResponse_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &iMessagingSessionEndpoint, Members: &mMessagingSessionEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eGetMessagingSessionEndpointResponse_Endpoint})
+var sGetMessagingStreamingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMessagingStreamingConfigurationsRequest, Members: &mGetMessagingStreamingConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMessagingStreamingConfigurationsRequest})
+var sGetMessagingStreamingConfigurationsRequest_AppInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetMessagingStreamingConfigurationsRequest_AppInstanceArn})
+var sGetMessagingStreamingConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMessagingStreamingConfigurationsResponse, Members: &mGetMessagingStreamingConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMessagingStreamingConfigurationsResponse})
+var sGetMessagingStreamingConfigurationsResponse_StreamingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfigurations", ID: &i_StreamingConfigurationList, Members: &m_StreamingConfigurationList, Type: smithy.ShapeTypeList, Ext: &eGetMessagingStreamingConfigurationsResponse_StreamingConfigurations})
+var sListChannelBansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelBansRequest, Members: &mListChannelBansRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelBansRequest})
+var sListChannelBansRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListChannelBansRequest_ChannelArn})
+var sListChannelBansRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelBansRequest_MaxResults})
+var sListChannelBansRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelBansRequest_NextToken})
+var sListChannelBansRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListChannelBansRequest_ChimeBearer})
+var sListChannelBansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelBansResponse, Members: &mListChannelBansResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelBansResponse})
+var sListChannelBansResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eListChannelBansResponse_ChannelArn})
+var sListChannelBansResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelBansResponse_NextToken})
+var sListChannelBansResponse_ChannelBans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelBans", ID: &i_ChannelBanSummaryList, Members: &m_ChannelBanSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelBansResponse_ChannelBans})
+var sListChannelFlowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelFlowsRequest, Members: &mListChannelFlowsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelFlowsRequest})
+var sListChannelFlowsRequest_AppInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceArn", ID: &i_ChimeArn, Traits: &t68, Type: smithy.ShapeTypeString, Ext: &eListChannelFlowsRequest_AppInstanceArn})
+var sListChannelFlowsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelFlowsRequest_MaxResults})
+var sListChannelFlowsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelFlowsRequest_NextToken})
+var sListChannelFlowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelFlowsResponse, Members: &mListChannelFlowsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelFlowsResponse})
+var sListChannelFlowsResponse_ChannelFlows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlows", ID: &i_ChannelFlowSummaryList, Members: &m_ChannelFlowSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelFlowsResponse_ChannelFlows})
+var sListChannelFlowsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelFlowsResponse_NextToken})
+var sListChannelMembershipsForAppInstanceUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMembershipsForAppInstanceUserRequest, Members: &mListChannelMembershipsForAppInstanceUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelMembershipsForAppInstanceUserRequest})
+var sListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceUserArn", ID: &i_ChimeArn, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn})
+var sListChannelMembershipsForAppInstanceUserRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelMembershipsForAppInstanceUserRequest_MaxResults})
+var sListChannelMembershipsForAppInstanceUserRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsForAppInstanceUserRequest_NextToken})
+var sListChannelMembershipsForAppInstanceUserRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsForAppInstanceUserRequest_ChimeBearer})
+var sListChannelMembershipsForAppInstanceUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMembershipsForAppInstanceUserResponse, Members: &mListChannelMembershipsForAppInstanceUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelMembershipsForAppInstanceUserResponse})
+var sListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMemberships", ID: &i_ChannelMembershipForAppInstanceUserSummaryList, Members: &m_ChannelMembershipForAppInstanceUserSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships})
+var sListChannelMembershipsForAppInstanceUserResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsForAppInstanceUserResponse_NextToken})
+var sListChannelMembershipsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMembershipsRequest, Members: &mListChannelMembershipsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelMembershipsRequest})
+var sListChannelMembershipsRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsRequest_ChannelArn})
+var sListChannelMembershipsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMembershipType, Members: &mChannelMembershipType, Traits: &t69, Type: smithy.ShapeTypeEnum, Ext: &eListChannelMembershipsRequest_Type})
+var sListChannelMembershipsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelMembershipsRequest_MaxResults})
+var sListChannelMembershipsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsRequest_NextToken})
+var sListChannelMembershipsRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsRequest_ChimeBearer})
+var sListChannelMembershipsRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsRequest_SubChannelId})
+var sListChannelMembershipsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMembershipsResponse, Members: &mListChannelMembershipsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelMembershipsResponse})
+var sListChannelMembershipsResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsResponse_ChannelArn})
+var sListChannelMembershipsResponse_ChannelMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMemberships", ID: &i_ChannelMembershipSummaryList, Members: &m_ChannelMembershipSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelMembershipsResponse_ChannelMemberships})
+var sListChannelMembershipsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelMembershipsResponse_NextToken})
+var sListChannelMessagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMessagesRequest, Members: &mListChannelMessagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelMessagesRequest})
+var sListChannelMessagesRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListChannelMessagesRequest_ChannelArn})
+var sListChannelMessagesRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eListChannelMessagesRequest_SortOrder})
+var sListChannelMessagesRequest_NotBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotBefore", ID: &i_Timestamp, Traits: &t71, Type: smithy.ShapeTypeTimestamp, Ext: &eListChannelMessagesRequest_NotBefore})
+var sListChannelMessagesRequest_NotAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotAfter", ID: &i_Timestamp, Traits: &t72, Type: smithy.ShapeTypeTimestamp, Ext: &eListChannelMessagesRequest_NotAfter})
+var sListChannelMessagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelMessagesRequest_MaxResults})
+var sListChannelMessagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelMessagesRequest_NextToken})
+var sListChannelMessagesRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListChannelMessagesRequest_ChimeBearer})
+var sListChannelMessagesRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eListChannelMessagesRequest_SubChannelId})
+var sListChannelMessagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelMessagesResponse, Members: &mListChannelMessagesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelMessagesResponse})
+var sListChannelMessagesResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eListChannelMessagesResponse_ChannelArn})
+var sListChannelMessagesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelMessagesResponse_NextToken})
+var sListChannelMessagesResponse_ChannelMessages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelMessages", ID: &i_ChannelMessageSummaryList, Members: &m_ChannelMessageSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelMessagesResponse_ChannelMessages})
+var sListChannelMessagesResponse_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eListChannelMessagesResponse_SubChannelId})
+var sListChannelModeratorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelModeratorsRequest, Members: &mListChannelModeratorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelModeratorsRequest})
+var sListChannelModeratorsRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListChannelModeratorsRequest_ChannelArn})
+var sListChannelModeratorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelModeratorsRequest_MaxResults})
+var sListChannelModeratorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelModeratorsRequest_NextToken})
+var sListChannelModeratorsRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListChannelModeratorsRequest_ChimeBearer})
+var sListChannelModeratorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelModeratorsResponse, Members: &mListChannelModeratorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelModeratorsResponse})
+var sListChannelModeratorsResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eListChannelModeratorsResponse_ChannelArn})
+var sListChannelModeratorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelModeratorsResponse_NextToken})
+var sListChannelModeratorsResponse_ChannelModerators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelModerators", ID: &i_ChannelModeratorSummaryList, Members: &m_ChannelModeratorSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelModeratorsResponse_ChannelModerators})
+var sListChannelsAssociatedWithChannelFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsAssociatedWithChannelFlowRequest, Members: &mListChannelsAssociatedWithChannelFlowRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsAssociatedWithChannelFlowRequest})
+var sListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn})
+var sListChannelsAssociatedWithChannelFlowRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsAssociatedWithChannelFlowRequest_MaxResults})
+var sListChannelsAssociatedWithChannelFlowRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelsAssociatedWithChannelFlowRequest_NextToken})
+var sListChannelsAssociatedWithChannelFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsAssociatedWithChannelFlowResponse, Members: &mListChannelsAssociatedWithChannelFlowResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsAssociatedWithChannelFlowResponse})
+var sListChannelsAssociatedWithChannelFlowResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i_ChannelAssociatedWithFlowSummaryList, Members: &m_ChannelAssociatedWithFlowSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelsAssociatedWithChannelFlowResponse_Channels})
+var sListChannelsAssociatedWithChannelFlowResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelsAssociatedWithChannelFlowResponse_NextToken})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsRequest})
+var sListChannelsRequest_AppInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceArn", ID: &i_ChimeArn, Traits: &t68, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_AppInstanceArn})
+var sListChannelsRequest_Privacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Privacy", ID: &iChannelPrivacy, Members: &mChannelPrivacy, Traits: &t74, Type: smithy.ShapeTypeEnum, Ext: &eListChannelsRequest_Privacy})
+var sListChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsRequest_MaxResults})
+var sListChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_NextToken})
+var sListChannelsRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_ChimeBearer})
+var sListChannelsModeratedByAppInstanceUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsModeratedByAppInstanceUserRequest, Members: &mListChannelsModeratedByAppInstanceUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsModeratedByAppInstanceUserRequest})
+var sListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceUserArn", ID: &i_ChimeArn, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn})
+var sListChannelsModeratedByAppInstanceUserRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsModeratedByAppInstanceUserRequest_MaxResults})
+var sListChannelsModeratedByAppInstanceUserRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListChannelsModeratedByAppInstanceUserRequest_NextToken})
+var sListChannelsModeratedByAppInstanceUserRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListChannelsModeratedByAppInstanceUserRequest_ChimeBearer})
+var sListChannelsModeratedByAppInstanceUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsModeratedByAppInstanceUserResponse, Members: &mListChannelsModeratedByAppInstanceUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsModeratedByAppInstanceUserResponse})
+var sListChannelsModeratedByAppInstanceUserResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i_ChannelModeratedByAppInstanceUserSummaryList, Members: &m_ChannelModeratedByAppInstanceUserSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelsModeratedByAppInstanceUserResponse_Channels})
+var sListChannelsModeratedByAppInstanceUserResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelsModeratedByAppInstanceUserResponse_NextToken})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsResponse})
+var sListChannelsResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i_ChannelSummaryList, Members: &m_ChannelSummaryList, Type: smithy.ShapeTypeList, Ext: &eListChannelsResponse_Channels})
+var sListChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListChannelsResponse_NextToken})
+var sListSubChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubChannelsRequest, Members: &mListSubChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSubChannelsRequest})
+var sListSubChannelsRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListSubChannelsRequest_ChannelArn})
+var sListSubChannelsRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListSubChannelsRequest_ChimeBearer})
+var sListSubChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eListSubChannelsRequest_MaxResults})
+var sListSubChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListSubChannelsRequest_NextToken})
+var sListSubChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubChannelsResponse, Members: &mListSubChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSubChannelsResponse})
+var sListSubChannelsResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eListSubChannelsResponse_ChannelArn})
+var sListSubChannelsResponse_SubChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannels", ID: &i_SubChannelSummaryList, Members: &m_SubChannelSummaryList, Type: smithy.ShapeTypeList, Ext: &eListSubChannelsResponse_SubChannels})
+var sListSubChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListSubChannelsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ChimeArn, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sPutChannelExpirationSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelExpirationSettingsRequest, Members: &mPutChannelExpirationSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelExpirationSettingsRequest})
+var sPutChannelExpirationSettingsRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &ePutChannelExpirationSettingsRequest_ChannelArn})
+var sPutChannelExpirationSettingsRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &ePutChannelExpirationSettingsRequest_ChimeBearer})
+var sPutChannelExpirationSettingsRequest_ExpirationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationSettings", ID: &iExpirationSettings, Members: &mExpirationSettings, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelExpirationSettingsRequest_ExpirationSettings})
+var sPutChannelExpirationSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelExpirationSettingsResponse, Members: &mPutChannelExpirationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelExpirationSettingsResponse})
+var sPutChannelExpirationSettingsResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &ePutChannelExpirationSettingsResponse_ChannelArn})
+var sPutChannelExpirationSettingsResponse_ExpirationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationSettings", ID: &iExpirationSettings, Members: &mExpirationSettings, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelExpirationSettingsResponse_ExpirationSettings})
+var sPutChannelMembershipPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelMembershipPreferencesRequest, Members: &mPutChannelMembershipPreferencesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelMembershipPreferencesRequest})
+var sPutChannelMembershipPreferencesRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &ePutChannelMembershipPreferencesRequest_ChannelArn})
+var sPutChannelMembershipPreferencesRequest_MemberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &ePutChannelMembershipPreferencesRequest_MemberArn})
+var sPutChannelMembershipPreferencesRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &ePutChannelMembershipPreferencesRequest_ChimeBearer})
+var sPutChannelMembershipPreferencesRequest_Preferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preferences", ID: &iChannelMembershipPreferences, Members: &mChannelMembershipPreferences, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelMembershipPreferencesRequest_Preferences})
+var sPutChannelMembershipPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelMembershipPreferencesResponse, Members: &mPutChannelMembershipPreferencesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelMembershipPreferencesResponse})
+var sPutChannelMembershipPreferencesResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &ePutChannelMembershipPreferencesResponse_ChannelArn})
+var sPutChannelMembershipPreferencesResponse_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelMembershipPreferencesResponse_Member})
+var sPutChannelMembershipPreferencesResponse_Preferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preferences", ID: &iChannelMembershipPreferences, Members: &mChannelMembershipPreferences, Type: smithy.ShapeTypeStructure, Ext: &ePutChannelMembershipPreferencesResponse_Preferences})
+var sPutMessagingStreamingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMessagingStreamingConfigurationsRequest, Members: &mPutMessagingStreamingConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutMessagingStreamingConfigurationsRequest})
+var sPutMessagingStreamingConfigurationsRequest_AppInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppInstanceArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &ePutMessagingStreamingConfigurationsRequest_AppInstanceArn})
+var sPutMessagingStreamingConfigurationsRequest_StreamingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfigurations", ID: &i_StreamingConfigurationList, Members: &m_StreamingConfigurationList, Type: smithy.ShapeTypeList, Ext: &ePutMessagingStreamingConfigurationsRequest_StreamingConfigurations})
+var sPutMessagingStreamingConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMessagingStreamingConfigurationsResponse, Members: &mPutMessagingStreamingConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutMessagingStreamingConfigurationsResponse})
+var sPutMessagingStreamingConfigurationsResponse_StreamingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfigurations", ID: &i_StreamingConfigurationList, Members: &m_StreamingConfigurationList, Type: smithy.ShapeTypeList, Ext: &ePutMessagingStreamingConfigurationsResponse_StreamingConfigurations})
+var sRedactChannelMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactChannelMessageRequest, Members: &mRedactChannelMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eRedactChannelMessageRequest})
+var sRedactChannelMessageRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eRedactChannelMessageRequest_ChannelArn})
+var sRedactChannelMessageRequest_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eRedactChannelMessageRequest_MessageId})
+var sRedactChannelMessageRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eRedactChannelMessageRequest_ChimeBearer})
+var sRedactChannelMessageRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eRedactChannelMessageRequest_SubChannelId})
+var sRedactChannelMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactChannelMessageResponse, Members: &mRedactChannelMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eRedactChannelMessageResponse})
+var sRedactChannelMessageResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eRedactChannelMessageResponse_ChannelArn})
+var sRedactChannelMessageResponse_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &eRedactChannelMessageResponse_MessageId})
+var sRedactChannelMessageResponse_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eRedactChannelMessageResponse_SubChannelId})
+var sSearchChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchChannelsRequest, Members: &mSearchChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchChannelsRequest})
+var sSearchChannelsRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eSearchChannelsRequest_ChimeBearer})
+var sSearchChannelsRequest_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_SearchFields, Members: &m_SearchFields, Type: smithy.ShapeTypeList, Ext: &eSearchChannelsRequest_Fields})
+var sSearchChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t66, Type: smithy.ShapeTypeInteger, Ext: &eSearchChannelsRequest_MaxResults})
+var sSearchChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eSearchChannelsRequest_NextToken})
+var sSearchChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchChannelsResponse, Members: &mSearchChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchChannelsResponse})
+var sSearchChannelsResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i_ChannelSummaryList, Members: &m_ChannelSummaryList, Type: smithy.ShapeTypeList, Ext: &eSearchChannelsResponse_Channels})
+var sSearchChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eSearchChannelsResponse_NextToken})
+var sSendChannelMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendChannelMessageRequest, Members: &mSendChannelMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendChannelMessageRequest})
+var sSendChannelMessageRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageRequest_ChannelArn})
+var sSendChannelMessageRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_NonEmptyContent, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageRequest_Content})
+var sSendChannelMessageRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChannelMessageType, Members: &mChannelMessageType, Type: smithy.ShapeTypeEnum, Ext: &eSendChannelMessageRequest_Type})
+var sSendChannelMessageRequest_Persistence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Persistence", ID: &iChannelMessagePersistenceType, Members: &mChannelMessagePersistenceType, Type: smithy.ShapeTypeEnum, Ext: &eSendChannelMessageRequest_Persistence})
+var sSendChannelMessageRequest_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageRequest_Metadata})
+var sSendChannelMessageRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageRequest_ClientRequestToken})
+var sSendChannelMessageRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageRequest_ChimeBearer})
+var sSendChannelMessageRequest_PushNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushNotification", ID: &iPushNotificationConfiguration, Members: &mPushNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSendChannelMessageRequest_PushNotification})
+var sSendChannelMessageRequest_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &eSendChannelMessageRequest_MessageAttributes})
+var sSendChannelMessageRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageRequest_SubChannelId})
+var sSendChannelMessageRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageRequest_ContentType})
+var sSendChannelMessageRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &eSendChannelMessageRequest_Target})
+var sSendChannelMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendChannelMessageResponse, Members: &mSendChannelMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendChannelMessageResponse})
+var sSendChannelMessageResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageResponse_ChannelArn})
+var sSendChannelMessageResponse_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageResponse_MessageId})
+var sSendChannelMessageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChannelMessageStatusStructure, Members: &mChannelMessageStatusStructure, Type: smithy.ShapeTypeStructure, Ext: &eSendChannelMessageResponse_Status})
+var sSendChannelMessageResponse_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eSendChannelMessageResponse_SubChannelId})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateChannelFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelFlowRequest, Members: &mUpdateChannelFlowRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelFlowRequest})
+var sUpdateChannelFlowRequest_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelFlowRequest_ChannelFlowArn})
+var sUpdateChannelFlowRequest_Processors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processors", ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &eUpdateChannelFlowRequest_Processors})
+var sUpdateChannelFlowRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelFlowRequest_Name})
+var sUpdateChannelFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelFlowResponse, Members: &mUpdateChannelFlowResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelFlowResponse})
+var sUpdateChannelFlowResponse_ChannelFlowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelFlowArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelFlowResponse_ChannelFlowArn})
+var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest})
+var sUpdateChannelRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_ChannelArn})
+var sUpdateChannelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NonEmptyResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_Name})
+var sUpdateChannelRequest_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iChannelMode, Members: &mChannelMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateChannelRequest_Mode})
+var sUpdateChannelRequest_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_Metadata})
+var sUpdateChannelRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_ChimeBearer})
+var sUpdateChannelMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelMessageRequest, Members: &mUpdateChannelMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelMessageRequest})
+var sUpdateChannelMessageRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageRequest_ChannelArn})
+var sUpdateChannelMessageRequest_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageRequest_MessageId})
+var sUpdateChannelMessageRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_NonEmptyContent, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageRequest_Content})
+var sUpdateChannelMessageRequest_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageRequest_Metadata})
+var sUpdateChannelMessageRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageRequest_ChimeBearer})
+var sUpdateChannelMessageRequest_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageRequest_SubChannelId})
+var sUpdateChannelMessageRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageRequest_ContentType})
+var sUpdateChannelMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelMessageResponse, Members: &mUpdateChannelMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelMessageResponse})
+var sUpdateChannelMessageResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageResponse_ChannelArn})
+var sUpdateChannelMessageResponse_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageResponse_MessageId})
+var sUpdateChannelMessageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChannelMessageStatusStructure, Members: &mChannelMessageStatusStructure, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelMessageResponse_Status})
+var sUpdateChannelMessageResponse_SubChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubChannelId", ID: &i_SubChannelId, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelMessageResponse_SubChannelId})
+var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse})
+var sUpdateChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_ChannelArn})
+var sUpdateChannelReadMarkerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelReadMarkerRequest, Members: &mUpdateChannelReadMarkerRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelReadMarkerRequest})
+var sUpdateChannelReadMarkerRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelReadMarkerRequest_ChannelArn})
+var sUpdateChannelReadMarkerRequest_ChimeBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeBearer", ID: &i_ChimeArn, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelReadMarkerRequest_ChimeBearer})
+var sUpdateChannelReadMarkerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelReadMarkerResponse, Members: &mUpdateChannelReadMarkerResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelReadMarkerResponse})
+var sUpdateChannelReadMarkerResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChimeArn, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelReadMarkerResponse_ChannelArn})
+
+var AssociateChannelFlow = &sAssociateChannelFlow
+
+var BatchCreateChannelMembership = &sBatchCreateChannelMembership
+
+var ChannelFlowCallback = &sChannelFlowCallback
+
+var CreateChannel = &sCreateChannel
+
+var CreateChannelBan = &sCreateChannelBan
+
+var CreateChannelFlow = &sCreateChannelFlow
+
+var CreateChannelMembership = &sCreateChannelMembership
+
+var CreateChannelModerator = &sCreateChannelModerator
+
+var DeleteChannel = &sDeleteChannel
+
+var DeleteChannelBan = &sDeleteChannelBan
+
+var DeleteChannelFlow = &sDeleteChannelFlow
+
+var DeleteChannelMembership = &sDeleteChannelMembership
+
+var DeleteChannelMessage = &sDeleteChannelMessage
+
+var DeleteChannelModerator = &sDeleteChannelModerator
+
+var DeleteMessagingStreamingConfigurations = &sDeleteMessagingStreamingConfigurations
+
+var DescribeChannel = &sDescribeChannel
+
+var DescribeChannelBan = &sDescribeChannelBan
+
+var DescribeChannelFlow = &sDescribeChannelFlow
+
+var DescribeChannelMembership = &sDescribeChannelMembership
+
+var DescribeChannelMembershipForAppInstanceUser = &sDescribeChannelMembershipForAppInstanceUser
+
+var DescribeChannelModeratedByAppInstanceUser = &sDescribeChannelModeratedByAppInstanceUser
+
+var DescribeChannelModerator = &sDescribeChannelModerator
+
+var DisassociateChannelFlow = &sDisassociateChannelFlow
+
+var GetChannelMembershipPreferences = &sGetChannelMembershipPreferences
+
+var GetChannelMessage = &sGetChannelMessage
+
+var GetChannelMessageStatus = &sGetChannelMessageStatus
+
+var GetMessagingSessionEndpoint = &sGetMessagingSessionEndpoint
+
+var GetMessagingStreamingConfigurations = &sGetMessagingStreamingConfigurations
+
+var ListChannelBans = &sListChannelBans
+
+var ListChannelFlows = &sListChannelFlows
+
+var ListChannelMemberships = &sListChannelMemberships
+
+var ListChannelMembershipsForAppInstanceUser = &sListChannelMembershipsForAppInstanceUser
+
+var ListChannelMessages = &sListChannelMessages
+
+var ListChannelModerators = &sListChannelModerators
+
+var ListChannels = &sListChannels
+
+var ListChannelsAssociatedWithChannelFlow = &sListChannelsAssociatedWithChannelFlow
+
+var ListChannelsModeratedByAppInstanceUser = &sListChannelsModeratedByAppInstanceUser
+
+var ListSubChannels = &sListSubChannels
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutChannelExpirationSettings = &sPutChannelExpirationSettings
+
+var PutChannelMembershipPreferences = &sPutChannelMembershipPreferences
+
+var PutMessagingStreamingConfigurations = &sPutMessagingStreamingConfigurations
+
+var RedactChannelMessage = &sRedactChannelMessage
+
+var SearchChannels = &sSearchChannels
+
+var SendChannelMessage = &sSendChannelMessage
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateChannelFlow = &sUpdateChannelFlow
+
+var UpdateChannelMessage = &sUpdateChannelMessage
+
+var UpdateChannelReadMarker = &sUpdateChannelReadMarker
+
+var _ChimeMessagingService = &s_ChimeMessagingService
+
+var AllowNotifications = &sAllowNotifications
+var AllowNotifications_ALL = &sAllowNotifications_ALL
+var AllowNotifications_NONE = &sAllowNotifications_NONE
+var AllowNotifications_FILTERED = &sAllowNotifications_FILTERED
+
+var AppInstanceUserMembershipSummary = &sAppInstanceUserMembershipSummary
+var AppInstanceUserMembershipSummary_Type = &sAppInstanceUserMembershipSummary_Type
+var AppInstanceUserMembershipSummary_ReadMarkerTimestamp = &sAppInstanceUserMembershipSummary_ReadMarkerTimestamp
+var AppInstanceUserMembershipSummary_SubChannelId = &sAppInstanceUserMembershipSummary_SubChannelId
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Code = &sBadRequestException_Code
+var BadRequestException_Message = &sBadRequestException_Message
+
+var BatchChannelMemberships = &sBatchChannelMemberships
+var BatchChannelMemberships_InvitedBy = &sBatchChannelMemberships_InvitedBy
+var BatchChannelMemberships_Type = &sBatchChannelMemberships_Type
+var BatchChannelMemberships_Members = &sBatchChannelMemberships_Members
+var BatchChannelMemberships_ChannelArn = &sBatchChannelMemberships_ChannelArn
+var BatchChannelMemberships_SubChannelId = &sBatchChannelMemberships_SubChannelId
+
+var BatchCreateChannelMembershipError = &sBatchCreateChannelMembershipError
+var BatchCreateChannelMembershipError_MemberArn = &sBatchCreateChannelMembershipError_MemberArn
+var BatchCreateChannelMembershipError_ErrorCode = &sBatchCreateChannelMembershipError_ErrorCode
+var BatchCreateChannelMembershipError_ErrorMessage = &sBatchCreateChannelMembershipError_ErrorMessage
+
+var _BatchCreateChannelMembershipErrors = &s_BatchCreateChannelMembershipErrors
+var _BatchCreateChannelMembershipErrors_member = &s_BatchCreateChannelMembershipErrors_member
+
+var _CallbackIdType = &s_CallbackIdType
+
+var Channel = &sChannel
+var Channel_Name = &sChannel_Name
+var Channel_ChannelArn = &sChannel_ChannelArn
+var Channel_Mode = &sChannel_Mode
+var Channel_Privacy = &sChannel_Privacy
+var Channel_Metadata = &sChannel_Metadata
+var Channel_CreatedBy = &sChannel_CreatedBy
+var Channel_CreatedTimestamp = &sChannel_CreatedTimestamp
+var Channel_LastMessageTimestamp = &sChannel_LastMessageTimestamp
+var Channel_LastUpdatedTimestamp = &sChannel_LastUpdatedTimestamp
+var Channel_ChannelFlowArn = &sChannel_ChannelFlowArn
+var Channel_ElasticChannelConfiguration = &sChannel_ElasticChannelConfiguration
+var Channel_ExpirationSettings = &sChannel_ExpirationSettings
+
+var ChannelAssociatedWithFlowSummary = &sChannelAssociatedWithFlowSummary
+var ChannelAssociatedWithFlowSummary_Name = &sChannelAssociatedWithFlowSummary_Name
+var ChannelAssociatedWithFlowSummary_ChannelArn = &sChannelAssociatedWithFlowSummary_ChannelArn
+var ChannelAssociatedWithFlowSummary_Mode = &sChannelAssociatedWithFlowSummary_Mode
+var ChannelAssociatedWithFlowSummary_Privacy = &sChannelAssociatedWithFlowSummary_Privacy
+var ChannelAssociatedWithFlowSummary_Metadata = &sChannelAssociatedWithFlowSummary_Metadata
+
+var _ChannelAssociatedWithFlowSummaryList = &s_ChannelAssociatedWithFlowSummaryList
+var _ChannelAssociatedWithFlowSummaryList_member = &s_ChannelAssociatedWithFlowSummaryList_member
+
+var ChannelBan = &sChannelBan
+var ChannelBan_Member = &sChannelBan_Member
+var ChannelBan_ChannelArn = &sChannelBan_ChannelArn
+var ChannelBan_CreatedTimestamp = &sChannelBan_CreatedTimestamp
+var ChannelBan_CreatedBy = &sChannelBan_CreatedBy
+
+var ChannelBanSummary = &sChannelBanSummary
+var ChannelBanSummary_Member = &sChannelBanSummary_Member
+
+var _ChannelBanSummaryList = &s_ChannelBanSummaryList
+var _ChannelBanSummaryList_member = &s_ChannelBanSummaryList_member
+
+var ChannelFlow = &sChannelFlow
+var ChannelFlow_ChannelFlowArn = &sChannelFlow_ChannelFlowArn
+var ChannelFlow_Processors = &sChannelFlow_Processors
+var ChannelFlow_Name = &sChannelFlow_Name
+var ChannelFlow_CreatedTimestamp = &sChannelFlow_CreatedTimestamp
+var ChannelFlow_LastUpdatedTimestamp = &sChannelFlow_LastUpdatedTimestamp
+
+var _ChannelFlowExecutionOrder = &s_ChannelFlowExecutionOrder
+
+var ChannelFlowSummary = &sChannelFlowSummary
+var ChannelFlowSummary_ChannelFlowArn = &sChannelFlowSummary_ChannelFlowArn
+var ChannelFlowSummary_Name = &sChannelFlowSummary_Name
+var ChannelFlowSummary_Processors = &sChannelFlowSummary_Processors
+
+var _ChannelFlowSummaryList = &s_ChannelFlowSummaryList
+var _ChannelFlowSummaryList_member = &s_ChannelFlowSummaryList_member
+
+var _ChannelId = &s_ChannelId
+
+var _ChannelMemberArns = &s_ChannelMemberArns
+var _ChannelMemberArns_member = &s_ChannelMemberArns_member
+
+var ChannelMembership = &sChannelMembership
+var ChannelMembership_InvitedBy = &sChannelMembership_InvitedBy
+var ChannelMembership_Type = &sChannelMembership_Type
+var ChannelMembership_Member = &sChannelMembership_Member
+var ChannelMembership_ChannelArn = &sChannelMembership_ChannelArn
+var ChannelMembership_CreatedTimestamp = &sChannelMembership_CreatedTimestamp
+var ChannelMembership_LastUpdatedTimestamp = &sChannelMembership_LastUpdatedTimestamp
+var ChannelMembership_SubChannelId = &sChannelMembership_SubChannelId
+
+var ChannelMembershipForAppInstanceUserSummary = &sChannelMembershipForAppInstanceUserSummary
+var ChannelMembershipForAppInstanceUserSummary_ChannelSummary = &sChannelMembershipForAppInstanceUserSummary_ChannelSummary
+var ChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary = &sChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary
+
+var _ChannelMembershipForAppInstanceUserSummaryList = &s_ChannelMembershipForAppInstanceUserSummaryList
+var _ChannelMembershipForAppInstanceUserSummaryList_member = &s_ChannelMembershipForAppInstanceUserSummaryList_member
+
+var ChannelMembershipPreferences = &sChannelMembershipPreferences
+var ChannelMembershipPreferences_PushNotifications = &sChannelMembershipPreferences_PushNotifications
+
+var ChannelMembershipSummary = &sChannelMembershipSummary
+var ChannelMembershipSummary_Member = &sChannelMembershipSummary_Member
+
+var _ChannelMembershipSummaryList = &s_ChannelMembershipSummaryList
+var _ChannelMembershipSummaryList_member = &s_ChannelMembershipSummaryList_member
+
+var ChannelMembershipType = &sChannelMembershipType
+var ChannelMembershipType_DEFAULT = &sChannelMembershipType_DEFAULT
+var ChannelMembershipType_HIDDEN = &sChannelMembershipType_HIDDEN
+
+var ChannelMessage = &sChannelMessage
+var ChannelMessage_ChannelArn = &sChannelMessage_ChannelArn
+var ChannelMessage_MessageId = &sChannelMessage_MessageId
+var ChannelMessage_Content = &sChannelMessage_Content
+var ChannelMessage_Metadata = &sChannelMessage_Metadata
+var ChannelMessage_Type = &sChannelMessage_Type
+var ChannelMessage_CreatedTimestamp = &sChannelMessage_CreatedTimestamp
+var ChannelMessage_LastEditedTimestamp = &sChannelMessage_LastEditedTimestamp
+var ChannelMessage_LastUpdatedTimestamp = &sChannelMessage_LastUpdatedTimestamp
+var ChannelMessage_Sender = &sChannelMessage_Sender
+var ChannelMessage_Redacted = &sChannelMessage_Redacted
+var ChannelMessage_Persistence = &sChannelMessage_Persistence
+var ChannelMessage_Status = &sChannelMessage_Status
+var ChannelMessage_MessageAttributes = &sChannelMessage_MessageAttributes
+var ChannelMessage_SubChannelId = &sChannelMessage_SubChannelId
+var ChannelMessage_ContentType = &sChannelMessage_ContentType
+var ChannelMessage_Target = &sChannelMessage_Target
+
+var ChannelMessageCallback = &sChannelMessageCallback
+var ChannelMessageCallback_MessageId = &sChannelMessageCallback_MessageId
+var ChannelMessageCallback_Content = &sChannelMessageCallback_Content
+var ChannelMessageCallback_Metadata = &sChannelMessageCallback_Metadata
+var ChannelMessageCallback_PushNotification = &sChannelMessageCallback_PushNotification
+var ChannelMessageCallback_MessageAttributes = &sChannelMessageCallback_MessageAttributes
+var ChannelMessageCallback_SubChannelId = &sChannelMessageCallback_SubChannelId
+var ChannelMessageCallback_ContentType = &sChannelMessageCallback_ContentType
+
+var ChannelMessagePersistenceType = &sChannelMessagePersistenceType
+var ChannelMessagePersistenceType_PERSISTENT = &sChannelMessagePersistenceType_PERSISTENT
+var ChannelMessagePersistenceType_NON_PERSISTENT = &sChannelMessagePersistenceType_NON_PERSISTENT
+
+var ChannelMessageStatus = &sChannelMessageStatus
+var ChannelMessageStatus_SENT = &sChannelMessageStatus_SENT
+var ChannelMessageStatus_PENDING = &sChannelMessageStatus_PENDING
+var ChannelMessageStatus_FAILED = &sChannelMessageStatus_FAILED
+var ChannelMessageStatus_DENIED = &sChannelMessageStatus_DENIED
+
+var ChannelMessageStatusStructure = &sChannelMessageStatusStructure
+var ChannelMessageStatusStructure_Value = &sChannelMessageStatusStructure_Value
+var ChannelMessageStatusStructure_Detail = &sChannelMessageStatusStructure_Detail
+
+var ChannelMessageSummary = &sChannelMessageSummary
+var ChannelMessageSummary_MessageId = &sChannelMessageSummary_MessageId
+var ChannelMessageSummary_Content = &sChannelMessageSummary_Content
+var ChannelMessageSummary_Metadata = &sChannelMessageSummary_Metadata
+var ChannelMessageSummary_Type = &sChannelMessageSummary_Type
+var ChannelMessageSummary_CreatedTimestamp = &sChannelMessageSummary_CreatedTimestamp
+var ChannelMessageSummary_LastUpdatedTimestamp = &sChannelMessageSummary_LastUpdatedTimestamp
+var ChannelMessageSummary_LastEditedTimestamp = &sChannelMessageSummary_LastEditedTimestamp
+var ChannelMessageSummary_Sender = &sChannelMessageSummary_Sender
+var ChannelMessageSummary_Redacted = &sChannelMessageSummary_Redacted
+var ChannelMessageSummary_Status = &sChannelMessageSummary_Status
+var ChannelMessageSummary_MessageAttributes = &sChannelMessageSummary_MessageAttributes
+var ChannelMessageSummary_ContentType = &sChannelMessageSummary_ContentType
+var ChannelMessageSummary_Target = &sChannelMessageSummary_Target
+
+var _ChannelMessageSummaryList = &s_ChannelMessageSummaryList
+var _ChannelMessageSummaryList_member = &s_ChannelMessageSummaryList_member
+
+var ChannelMessageType = &sChannelMessageType
+var ChannelMessageType_STANDARD = &sChannelMessageType_STANDARD
+var ChannelMessageType_CONTROL = &sChannelMessageType_CONTROL
+
+var ChannelMode = &sChannelMode
+var ChannelMode_UNRESTRICTED = &sChannelMode_UNRESTRICTED
+var ChannelMode_RESTRICTED = &sChannelMode_RESTRICTED
+
+var ChannelModeratedByAppInstanceUserSummary = &sChannelModeratedByAppInstanceUserSummary
+var ChannelModeratedByAppInstanceUserSummary_ChannelSummary = &sChannelModeratedByAppInstanceUserSummary_ChannelSummary
+
+var _ChannelModeratedByAppInstanceUserSummaryList = &s_ChannelModeratedByAppInstanceUserSummaryList
+var _ChannelModeratedByAppInstanceUserSummaryList_member = &s_ChannelModeratedByAppInstanceUserSummaryList_member
+
+var ChannelModerator = &sChannelModerator
+var ChannelModerator_Moderator = &sChannelModerator_Moderator
+var ChannelModerator_ChannelArn = &sChannelModerator_ChannelArn
+var ChannelModerator_CreatedTimestamp = &sChannelModerator_CreatedTimestamp
+var ChannelModerator_CreatedBy = &sChannelModerator_CreatedBy
+
+var _ChannelModeratorArns = &s_ChannelModeratorArns
+var _ChannelModeratorArns_member = &s_ChannelModeratorArns_member
+
+var ChannelModeratorSummary = &sChannelModeratorSummary
+var ChannelModeratorSummary_Moderator = &sChannelModeratorSummary_Moderator
+
+var _ChannelModeratorSummaryList = &s_ChannelModeratorSummaryList
+var _ChannelModeratorSummaryList_member = &s_ChannelModeratorSummaryList_member
+
+var ChannelPrivacy = &sChannelPrivacy
+var ChannelPrivacy_PUBLIC = &sChannelPrivacy_PUBLIC
+var ChannelPrivacy_PRIVATE = &sChannelPrivacy_PRIVATE
+
+var ChannelSummary = &sChannelSummary
+var ChannelSummary_Name = &sChannelSummary_Name
+var ChannelSummary_ChannelArn = &sChannelSummary_ChannelArn
+var ChannelSummary_Mode = &sChannelSummary_Mode
+var ChannelSummary_Privacy = &sChannelSummary_Privacy
+var ChannelSummary_Metadata = &sChannelSummary_Metadata
+var ChannelSummary_LastMessageTimestamp = &sChannelSummary_LastMessageTimestamp
+
+var _ChannelSummaryList = &s_ChannelSummaryList
+var _ChannelSummaryList_member = &s_ChannelSummaryList_member
+
+var _ChimeArn = &s_ChimeArn
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ConflictException = &sConflictException
+var ConflictException_Code = &sConflictException_Code
+var ConflictException_Message = &sConflictException_Message
+
+var _Content = &s_Content
+
+var _ContentType = &s_ContentType
+
+var ElasticChannelConfiguration = &sElasticChannelConfiguration
+var ElasticChannelConfiguration_MaximumSubChannels = &sElasticChannelConfiguration_MaximumSubChannels
+var ElasticChannelConfiguration_TargetMembershipsPerSubChannel = &sElasticChannelConfiguration_TargetMembershipsPerSubChannel
+var ElasticChannelConfiguration_MinimumMembershipPercentage = &sElasticChannelConfiguration_MinimumMembershipPercentage
+
+var ErrorCode = &sErrorCode
+var ErrorCode_BadRequest = &sErrorCode_BadRequest
+var ErrorCode_Conflict = &sErrorCode_Conflict
+var ErrorCode_Forbidden = &sErrorCode_Forbidden
+var ErrorCode_NotFound = &sErrorCode_NotFound
+var ErrorCode_PreconditionFailed = &sErrorCode_PreconditionFailed
+var ErrorCode_ResourceLimitExceeded = &sErrorCode_ResourceLimitExceeded
+var ErrorCode_ServiceFailure = &sErrorCode_ServiceFailure
+var ErrorCode_AccessDenied = &sErrorCode_AccessDenied
+var ErrorCode_ServiceUnavailable = &sErrorCode_ServiceUnavailable
+var ErrorCode_Throttled = &sErrorCode_Throttled
+var ErrorCode_Throttling = &sErrorCode_Throttling
+var ErrorCode_Unauthorized = &sErrorCode_Unauthorized
+var ErrorCode_Unprocessable = &sErrorCode_Unprocessable
+var ErrorCode_VoiceConnectorGroupAssociationsExist = &sErrorCode_VoiceConnectorGroupAssociationsExist
+var ErrorCode_PhoneNumberAssociationsExist = &sErrorCode_PhoneNumberAssociationsExist
+
+var ExpirationCriterion = &sExpirationCriterion
+var ExpirationCriterion_CREATED_TIMESTAMP = &sExpirationCriterion_CREATED_TIMESTAMP
+var ExpirationCriterion_LAST_MESSAGE_TIMESTAMP = &sExpirationCriterion_LAST_MESSAGE_TIMESTAMP
+
+var _ExpirationDays = &s_ExpirationDays
+
+var ExpirationSettings = &sExpirationSettings
+var ExpirationSettings_ExpirationDays = &sExpirationSettings_ExpirationDays
+var ExpirationSettings_ExpirationCriterion = &sExpirationSettings_ExpirationCriterion
+
+var FallbackAction = &sFallbackAction
+var FallbackAction_CONTINUE = &sFallbackAction_CONTINUE
+var FallbackAction_ABORT = &sFallbackAction_ABORT
+
+var _FilterRule = &s_FilterRule
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_Code = &sForbiddenException_Code
+var ForbiddenException_Message = &sForbiddenException_Message
+
+var Identity = &sIdentity
+var Identity_Arn = &sIdentity_Arn
+var Identity_Name = &sIdentity_Name
+
+var InvocationType = &sInvocationType
+var InvocationType_ASYNC = &sInvocationType_ASYNC
+
+var LambdaConfiguration = &sLambdaConfiguration
+var LambdaConfiguration_ResourceArn = &sLambdaConfiguration_ResourceArn
+var LambdaConfiguration_InvocationType = &sLambdaConfiguration_InvocationType
+
+var _LambdaFunctionArn = &s_LambdaFunctionArn
+
+var _MaximumSubChannels = &s_MaximumSubChannels
+
+var _MaxResults = &s_MaxResults
+
+var _MemberArns = &s_MemberArns
+var _MemberArns_member = &s_MemberArns_member
+
+var _Members = &s_Members
+var _Members_member = &s_Members_member
+
+var _MembershipCount = &s_MembershipCount
+
+var _MessageAttributeMap = &s_MessageAttributeMap
+var _MessageAttributeMap_key = &s_MessageAttributeMap_key
+var _MessageAttributeMap_value = &s_MessageAttributeMap_value
+
+var _MessageAttributeName = &s_MessageAttributeName
+
+var _MessageAttributeStringValue = &s_MessageAttributeStringValue
+
+var _MessageAttributeStringValues = &s_MessageAttributeStringValues
+var _MessageAttributeStringValues_member = &s_MessageAttributeStringValues_member
+
+var MessageAttributeValue = &sMessageAttributeValue
+var MessageAttributeValue_StringValues = &sMessageAttributeValue_StringValues
+
+var _MessageId = &s_MessageId
+
+var MessagingDataType = &sMessagingDataType
+var MessagingDataType_Channel = &sMessagingDataType_Channel
+var MessagingDataType_ChannelMessage = &sMessagingDataType_ChannelMessage
+
+var MessagingSessionEndpoint = &sMessagingSessionEndpoint
+var MessagingSessionEndpoint_Url = &sMessagingSessionEndpoint_Url
+
+var _Metadata = &s_Metadata
+
+var _MinimumMembershipPercentage = &s_MinimumMembershipPercentage
+
+var NetworkType = &sNetworkType
+var NetworkType_IPV4_ONLY = &sNetworkType_IPV4_ONLY
+var NetworkType_DUAL_STACK = &sNetworkType_DUAL_STACK
+
+var _NextToken = &s_NextToken
+
+var _NonEmptyContent = &s_NonEmptyContent
+
+var _NonEmptyResourceName = &s_NonEmptyResourceName
+
+var _NonNullableBoolean = &s_NonNullableBoolean
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Code = &sNotFoundException_Code
+var NotFoundException_Message = &sNotFoundException_Message
+
+var Processor = &sProcessor
+var Processor_Name = &sProcessor_Name
+var Processor_Configuration = &sProcessor_Configuration
+var Processor_ExecutionOrder = &sProcessor_ExecutionOrder
+var Processor_FallbackAction = &sProcessor_FallbackAction
+
+var ProcessorConfiguration = &sProcessorConfiguration
+var ProcessorConfiguration_Lambda = &sProcessorConfiguration_Lambda
+
+var _ProcessorList = &s_ProcessorList
+var _ProcessorList_member = &s_ProcessorList_member
+
+var _PushNotificationBody = &s_PushNotificationBody
+
+var PushNotificationConfiguration = &sPushNotificationConfiguration
+var PushNotificationConfiguration_Title = &sPushNotificationConfiguration_Title
+var PushNotificationConfiguration_Body = &sPushNotificationConfiguration_Body
+var PushNotificationConfiguration_Type = &sPushNotificationConfiguration_Type
+
+var PushNotificationPreferences = &sPushNotificationPreferences
+var PushNotificationPreferences_AllowNotifications = &sPushNotificationPreferences_AllowNotifications
+var PushNotificationPreferences_FilterRule = &sPushNotificationPreferences_FilterRule
+
+var _PushNotificationTitle = &s_PushNotificationTitle
+
+var PushNotificationType = &sPushNotificationType
+var PushNotificationType_DEFAULT = &sPushNotificationType_DEFAULT
+var PushNotificationType_VOIP = &sPushNotificationType_VOIP
+
+var ResourceLimitExceededException = &sResourceLimitExceededException
+var ResourceLimitExceededException_Code = &sResourceLimitExceededException_Code
+var ResourceLimitExceededException_Message = &sResourceLimitExceededException_Message
+
+var _ResourceName = &s_ResourceName
+
+var SearchField = &sSearchField
+var SearchField_Key = &sSearchField_Key
+var SearchField_Values = &sSearchField_Values
+var SearchField_Operator = &sSearchField_Operator
+
+var SearchFieldKey = &sSearchFieldKey
+var SearchFieldKey_MEMBERS = &sSearchFieldKey_MEMBERS
+
+var SearchFieldOperator = &sSearchFieldOperator
+var SearchFieldOperator_EQUALS = &sSearchFieldOperator_EQUALS
+var SearchFieldOperator_INCLUDES = &sSearchFieldOperator_INCLUDES
+
+var _SearchFields = &s_SearchFields
+var _SearchFields_member = &s_SearchFields_member
+
+var _SearchFieldValue = &s_SearchFieldValue
+
+var _SearchFieldValues = &s_SearchFieldValues
+var _SearchFieldValues_member = &s_SearchFieldValues_member
+
+var ServiceFailureException = &sServiceFailureException
+var ServiceFailureException_Code = &sServiceFailureException_Code
+var ServiceFailureException_Message = &sServiceFailureException_Message
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Code = &sServiceUnavailableException_Code
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var SortOrder = &sSortOrder
+var SortOrder_ASCENDING = &sSortOrder_ASCENDING
+var SortOrder_DESCENDING = &sSortOrder_DESCENDING
+
+var _StatusDetail = &s_StatusDetail
+
+var StreamingConfiguration = &sStreamingConfiguration
+var StreamingConfiguration_DataType = &sStreamingConfiguration_DataType
+var StreamingConfiguration_ResourceArn = &sStreamingConfiguration_ResourceArn
+
+var _StreamingConfigurationList = &s_StreamingConfigurationList
+var _StreamingConfigurationList_member = &s_StreamingConfigurationList_member
+
+var _String = &s_String
+
+var _SubChannelId = &s_SubChannelId
+
+var SubChannelSummary = &sSubChannelSummary
+var SubChannelSummary_SubChannelId = &sSubChannelSummary_SubChannelId
+var SubChannelSummary_MembershipCount = &sSubChannelSummary_MembershipCount
+
+var _SubChannelSummaryList = &s_SubChannelSummaryList
+var _SubChannelSummaryList_member = &s_SubChannelSummaryList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var Target = &sTarget
+var Target_MemberArn = &sTarget_MemberArn
+
+var _TargetList = &s_TargetList
+var _TargetList_member = &s_TargetList_member
+
+var _TargetMembershipsPerSubChannel = &s_TargetMembershipsPerSubChannel
+
+var ThrottledClientException = &sThrottledClientException
+var ThrottledClientException_Code = &sThrottledClientException_Code
+var ThrottledClientException_Message = &sThrottledClientException_Message
+
+var _Timestamp = &s_Timestamp
+
+var UnauthorizedClientException = &sUnauthorizedClientException
+var UnauthorizedClientException_Code = &sUnauthorizedClientException_Code
+var UnauthorizedClientException_Message = &sUnauthorizedClientException_Message
+
+var _UrlType = &s_UrlType
+
+var AssociateChannelFlowRequest = &sAssociateChannelFlowRequest
+var AssociateChannelFlowRequest_ChannelArn = &sAssociateChannelFlowRequest_ChannelArn
+var AssociateChannelFlowRequest_ChannelFlowArn = &sAssociateChannelFlowRequest_ChannelFlowArn
+var AssociateChannelFlowRequest_ChimeBearer = &sAssociateChannelFlowRequest_ChimeBearer
+
+var BatchCreateChannelMembershipRequest = &sBatchCreateChannelMembershipRequest
+var BatchCreateChannelMembershipRequest_ChannelArn = &sBatchCreateChannelMembershipRequest_ChannelArn
+var BatchCreateChannelMembershipRequest_Type = &sBatchCreateChannelMembershipRequest_Type
+var BatchCreateChannelMembershipRequest_MemberArns = &sBatchCreateChannelMembershipRequest_MemberArns
+var BatchCreateChannelMembershipRequest_ChimeBearer = &sBatchCreateChannelMembershipRequest_ChimeBearer
+var BatchCreateChannelMembershipRequest_SubChannelId = &sBatchCreateChannelMembershipRequest_SubChannelId
+
+var BatchCreateChannelMembershipResponse = &sBatchCreateChannelMembershipResponse
+var BatchCreateChannelMembershipResponse_BatchChannelMemberships = &sBatchCreateChannelMembershipResponse_BatchChannelMemberships
+var BatchCreateChannelMembershipResponse_Errors = &sBatchCreateChannelMembershipResponse_Errors
+
+var ChannelFlowCallbackRequest = &sChannelFlowCallbackRequest
+var ChannelFlowCallbackRequest_CallbackId = &sChannelFlowCallbackRequest_CallbackId
+var ChannelFlowCallbackRequest_ChannelArn = &sChannelFlowCallbackRequest_ChannelArn
+var ChannelFlowCallbackRequest_DeleteResource = &sChannelFlowCallbackRequest_DeleteResource
+var ChannelFlowCallbackRequest_ChannelMessage = &sChannelFlowCallbackRequest_ChannelMessage
+
+var ChannelFlowCallbackResponse = &sChannelFlowCallbackResponse
+var ChannelFlowCallbackResponse_ChannelArn = &sChannelFlowCallbackResponse_ChannelArn
+var ChannelFlowCallbackResponse_CallbackId = &sChannelFlowCallbackResponse_CallbackId
+
+var CreateChannelBanRequest = &sCreateChannelBanRequest
+var CreateChannelBanRequest_ChannelArn = &sCreateChannelBanRequest_ChannelArn
+var CreateChannelBanRequest_MemberArn = &sCreateChannelBanRequest_MemberArn
+var CreateChannelBanRequest_ChimeBearer = &sCreateChannelBanRequest_ChimeBearer
+
+var CreateChannelBanResponse = &sCreateChannelBanResponse
+var CreateChannelBanResponse_ChannelArn = &sCreateChannelBanResponse_ChannelArn
+var CreateChannelBanResponse_Member = &sCreateChannelBanResponse_Member
+
+var CreateChannelFlowRequest = &sCreateChannelFlowRequest
+var CreateChannelFlowRequest_AppInstanceArn = &sCreateChannelFlowRequest_AppInstanceArn
+var CreateChannelFlowRequest_Processors = &sCreateChannelFlowRequest_Processors
+var CreateChannelFlowRequest_Name = &sCreateChannelFlowRequest_Name
+var CreateChannelFlowRequest_Tags = &sCreateChannelFlowRequest_Tags
+var CreateChannelFlowRequest_ClientRequestToken = &sCreateChannelFlowRequest_ClientRequestToken
+
+var CreateChannelFlowResponse = &sCreateChannelFlowResponse
+var CreateChannelFlowResponse_ChannelFlowArn = &sCreateChannelFlowResponse_ChannelFlowArn
+
+var CreateChannelRequest = &sCreateChannelRequest
+var CreateChannelRequest_AppInstanceArn = &sCreateChannelRequest_AppInstanceArn
+var CreateChannelRequest_Name = &sCreateChannelRequest_Name
+var CreateChannelRequest_Mode = &sCreateChannelRequest_Mode
+var CreateChannelRequest_Privacy = &sCreateChannelRequest_Privacy
+var CreateChannelRequest_Metadata = &sCreateChannelRequest_Metadata
+var CreateChannelRequest_ClientRequestToken = &sCreateChannelRequest_ClientRequestToken
+var CreateChannelRequest_Tags = &sCreateChannelRequest_Tags
+var CreateChannelRequest_ChimeBearer = &sCreateChannelRequest_ChimeBearer
+var CreateChannelRequest_ChannelId = &sCreateChannelRequest_ChannelId
+var CreateChannelRequest_MemberArns = &sCreateChannelRequest_MemberArns
+var CreateChannelRequest_ModeratorArns = &sCreateChannelRequest_ModeratorArns
+var CreateChannelRequest_ElasticChannelConfiguration = &sCreateChannelRequest_ElasticChannelConfiguration
+var CreateChannelRequest_ExpirationSettings = &sCreateChannelRequest_ExpirationSettings
+
+var CreateChannelMembershipRequest = &sCreateChannelMembershipRequest
+var CreateChannelMembershipRequest_ChannelArn = &sCreateChannelMembershipRequest_ChannelArn
+var CreateChannelMembershipRequest_MemberArn = &sCreateChannelMembershipRequest_MemberArn
+var CreateChannelMembershipRequest_Type = &sCreateChannelMembershipRequest_Type
+var CreateChannelMembershipRequest_ChimeBearer = &sCreateChannelMembershipRequest_ChimeBearer
+var CreateChannelMembershipRequest_SubChannelId = &sCreateChannelMembershipRequest_SubChannelId
+
+var CreateChannelMembershipResponse = &sCreateChannelMembershipResponse
+var CreateChannelMembershipResponse_ChannelArn = &sCreateChannelMembershipResponse_ChannelArn
+var CreateChannelMembershipResponse_Member = &sCreateChannelMembershipResponse_Member
+var CreateChannelMembershipResponse_SubChannelId = &sCreateChannelMembershipResponse_SubChannelId
+
+var CreateChannelModeratorRequest = &sCreateChannelModeratorRequest
+var CreateChannelModeratorRequest_ChannelArn = &sCreateChannelModeratorRequest_ChannelArn
+var CreateChannelModeratorRequest_ChannelModeratorArn = &sCreateChannelModeratorRequest_ChannelModeratorArn
+var CreateChannelModeratorRequest_ChimeBearer = &sCreateChannelModeratorRequest_ChimeBearer
+
+var CreateChannelModeratorResponse = &sCreateChannelModeratorResponse
+var CreateChannelModeratorResponse_ChannelArn = &sCreateChannelModeratorResponse_ChannelArn
+var CreateChannelModeratorResponse_ChannelModerator = &sCreateChannelModeratorResponse_ChannelModerator
+
+var CreateChannelResponse = &sCreateChannelResponse
+var CreateChannelResponse_ChannelArn = &sCreateChannelResponse_ChannelArn
+
+var DeleteChannelBanRequest = &sDeleteChannelBanRequest
+var DeleteChannelBanRequest_ChannelArn = &sDeleteChannelBanRequest_ChannelArn
+var DeleteChannelBanRequest_MemberArn = &sDeleteChannelBanRequest_MemberArn
+var DeleteChannelBanRequest_ChimeBearer = &sDeleteChannelBanRequest_ChimeBearer
+
+var DeleteChannelFlowRequest = &sDeleteChannelFlowRequest
+var DeleteChannelFlowRequest_ChannelFlowArn = &sDeleteChannelFlowRequest_ChannelFlowArn
+
+var DeleteChannelRequest = &sDeleteChannelRequest
+var DeleteChannelRequest_ChannelArn = &sDeleteChannelRequest_ChannelArn
+var DeleteChannelRequest_ChimeBearer = &sDeleteChannelRequest_ChimeBearer
+
+var DeleteChannelMembershipRequest = &sDeleteChannelMembershipRequest
+var DeleteChannelMembershipRequest_ChannelArn = &sDeleteChannelMembershipRequest_ChannelArn
+var DeleteChannelMembershipRequest_MemberArn = &sDeleteChannelMembershipRequest_MemberArn
+var DeleteChannelMembershipRequest_ChimeBearer = &sDeleteChannelMembershipRequest_ChimeBearer
+var DeleteChannelMembershipRequest_SubChannelId = &sDeleteChannelMembershipRequest_SubChannelId
+
+var DeleteChannelMessageRequest = &sDeleteChannelMessageRequest
+var DeleteChannelMessageRequest_ChannelArn = &sDeleteChannelMessageRequest_ChannelArn
+var DeleteChannelMessageRequest_MessageId = &sDeleteChannelMessageRequest_MessageId
+var DeleteChannelMessageRequest_ChimeBearer = &sDeleteChannelMessageRequest_ChimeBearer
+var DeleteChannelMessageRequest_SubChannelId = &sDeleteChannelMessageRequest_SubChannelId
+
+var DeleteChannelModeratorRequest = &sDeleteChannelModeratorRequest
+var DeleteChannelModeratorRequest_ChannelArn = &sDeleteChannelModeratorRequest_ChannelArn
+var DeleteChannelModeratorRequest_ChannelModeratorArn = &sDeleteChannelModeratorRequest_ChannelModeratorArn
+var DeleteChannelModeratorRequest_ChimeBearer = &sDeleteChannelModeratorRequest_ChimeBearer
+
+var DeleteMessagingStreamingConfigurationsRequest = &sDeleteMessagingStreamingConfigurationsRequest
+var DeleteMessagingStreamingConfigurationsRequest_AppInstanceArn = &sDeleteMessagingStreamingConfigurationsRequest_AppInstanceArn
+
+var DescribeChannelBanRequest = &sDescribeChannelBanRequest
+var DescribeChannelBanRequest_ChannelArn = &sDescribeChannelBanRequest_ChannelArn
+var DescribeChannelBanRequest_MemberArn = &sDescribeChannelBanRequest_MemberArn
+var DescribeChannelBanRequest_ChimeBearer = &sDescribeChannelBanRequest_ChimeBearer
+
+var DescribeChannelBanResponse = &sDescribeChannelBanResponse
+var DescribeChannelBanResponse_ChannelBan = &sDescribeChannelBanResponse_ChannelBan
+
+var DescribeChannelFlowRequest = &sDescribeChannelFlowRequest
+var DescribeChannelFlowRequest_ChannelFlowArn = &sDescribeChannelFlowRequest_ChannelFlowArn
+
+var DescribeChannelFlowResponse = &sDescribeChannelFlowResponse
+var DescribeChannelFlowResponse_ChannelFlow = &sDescribeChannelFlowResponse_ChannelFlow
+
+var DescribeChannelRequest = &sDescribeChannelRequest
+var DescribeChannelRequest_ChannelArn = &sDescribeChannelRequest_ChannelArn
+var DescribeChannelRequest_ChimeBearer = &sDescribeChannelRequest_ChimeBearer
+
+var DescribeChannelMembershipForAppInstanceUserRequest = &sDescribeChannelMembershipForAppInstanceUserRequest
+var DescribeChannelMembershipForAppInstanceUserRequest_ChannelArn = &sDescribeChannelMembershipForAppInstanceUserRequest_ChannelArn
+var DescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn = &sDescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn
+var DescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer = &sDescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer
+
+var DescribeChannelMembershipForAppInstanceUserResponse = &sDescribeChannelMembershipForAppInstanceUserResponse
+var DescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership = &sDescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership
+
+var DescribeChannelMembershipRequest = &sDescribeChannelMembershipRequest
+var DescribeChannelMembershipRequest_ChannelArn = &sDescribeChannelMembershipRequest_ChannelArn
+var DescribeChannelMembershipRequest_MemberArn = &sDescribeChannelMembershipRequest_MemberArn
+var DescribeChannelMembershipRequest_ChimeBearer = &sDescribeChannelMembershipRequest_ChimeBearer
+var DescribeChannelMembershipRequest_SubChannelId = &sDescribeChannelMembershipRequest_SubChannelId
+
+var DescribeChannelMembershipResponse = &sDescribeChannelMembershipResponse
+var DescribeChannelMembershipResponse_ChannelMembership = &sDescribeChannelMembershipResponse_ChannelMembership
+
+var DescribeChannelModeratedByAppInstanceUserRequest = &sDescribeChannelModeratedByAppInstanceUserRequest
+var DescribeChannelModeratedByAppInstanceUserRequest_ChannelArn = &sDescribeChannelModeratedByAppInstanceUserRequest_ChannelArn
+var DescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn = &sDescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn
+var DescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer = &sDescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer
+
+var DescribeChannelModeratedByAppInstanceUserResponse = &sDescribeChannelModeratedByAppInstanceUserResponse
+var DescribeChannelModeratedByAppInstanceUserResponse_Channel = &sDescribeChannelModeratedByAppInstanceUserResponse_Channel
+
+var DescribeChannelModeratorRequest = &sDescribeChannelModeratorRequest
+var DescribeChannelModeratorRequest_ChannelArn = &sDescribeChannelModeratorRequest_ChannelArn
+var DescribeChannelModeratorRequest_ChannelModeratorArn = &sDescribeChannelModeratorRequest_ChannelModeratorArn
+var DescribeChannelModeratorRequest_ChimeBearer = &sDescribeChannelModeratorRequest_ChimeBearer
+
+var DescribeChannelModeratorResponse = &sDescribeChannelModeratorResponse
+var DescribeChannelModeratorResponse_ChannelModerator = &sDescribeChannelModeratorResponse_ChannelModerator
+
+var DescribeChannelResponse = &sDescribeChannelResponse
+var DescribeChannelResponse_Channel = &sDescribeChannelResponse_Channel
+
+var DisassociateChannelFlowRequest = &sDisassociateChannelFlowRequest
+var DisassociateChannelFlowRequest_ChannelArn = &sDisassociateChannelFlowRequest_ChannelArn
+var DisassociateChannelFlowRequest_ChannelFlowArn = &sDisassociateChannelFlowRequest_ChannelFlowArn
+var DisassociateChannelFlowRequest_ChimeBearer = &sDisassociateChannelFlowRequest_ChimeBearer
+
+var GetChannelMembershipPreferencesRequest = &sGetChannelMembershipPreferencesRequest
+var GetChannelMembershipPreferencesRequest_ChannelArn = &sGetChannelMembershipPreferencesRequest_ChannelArn
+var GetChannelMembershipPreferencesRequest_MemberArn = &sGetChannelMembershipPreferencesRequest_MemberArn
+var GetChannelMembershipPreferencesRequest_ChimeBearer = &sGetChannelMembershipPreferencesRequest_ChimeBearer
+
+var GetChannelMembershipPreferencesResponse = &sGetChannelMembershipPreferencesResponse
+var GetChannelMembershipPreferencesResponse_ChannelArn = &sGetChannelMembershipPreferencesResponse_ChannelArn
+var GetChannelMembershipPreferencesResponse_Member = &sGetChannelMembershipPreferencesResponse_Member
+var GetChannelMembershipPreferencesResponse_Preferences = &sGetChannelMembershipPreferencesResponse_Preferences
+
+var GetChannelMessageRequest = &sGetChannelMessageRequest
+var GetChannelMessageRequest_ChannelArn = &sGetChannelMessageRequest_ChannelArn
+var GetChannelMessageRequest_MessageId = &sGetChannelMessageRequest_MessageId
+var GetChannelMessageRequest_ChimeBearer = &sGetChannelMessageRequest_ChimeBearer
+var GetChannelMessageRequest_SubChannelId = &sGetChannelMessageRequest_SubChannelId
+
+var GetChannelMessageResponse = &sGetChannelMessageResponse
+var GetChannelMessageResponse_ChannelMessage = &sGetChannelMessageResponse_ChannelMessage
+
+var GetChannelMessageStatusRequest = &sGetChannelMessageStatusRequest
+var GetChannelMessageStatusRequest_ChannelArn = &sGetChannelMessageStatusRequest_ChannelArn
+var GetChannelMessageStatusRequest_MessageId = &sGetChannelMessageStatusRequest_MessageId
+var GetChannelMessageStatusRequest_ChimeBearer = &sGetChannelMessageStatusRequest_ChimeBearer
+var GetChannelMessageStatusRequest_SubChannelId = &sGetChannelMessageStatusRequest_SubChannelId
+
+var GetChannelMessageStatusResponse = &sGetChannelMessageStatusResponse
+var GetChannelMessageStatusResponse_Status = &sGetChannelMessageStatusResponse_Status
+
+var GetMessagingSessionEndpointRequest = &sGetMessagingSessionEndpointRequest
+var GetMessagingSessionEndpointRequest_NetworkType = &sGetMessagingSessionEndpointRequest_NetworkType
+
+var GetMessagingSessionEndpointResponse = &sGetMessagingSessionEndpointResponse
+var GetMessagingSessionEndpointResponse_Endpoint = &sGetMessagingSessionEndpointResponse_Endpoint
+
+var GetMessagingStreamingConfigurationsRequest = &sGetMessagingStreamingConfigurationsRequest
+var GetMessagingStreamingConfigurationsRequest_AppInstanceArn = &sGetMessagingStreamingConfigurationsRequest_AppInstanceArn
+
+var GetMessagingStreamingConfigurationsResponse = &sGetMessagingStreamingConfigurationsResponse
+var GetMessagingStreamingConfigurationsResponse_StreamingConfigurations = &sGetMessagingStreamingConfigurationsResponse_StreamingConfigurations
+
+var ListChannelBansRequest = &sListChannelBansRequest
+var ListChannelBansRequest_ChannelArn = &sListChannelBansRequest_ChannelArn
+var ListChannelBansRequest_MaxResults = &sListChannelBansRequest_MaxResults
+var ListChannelBansRequest_NextToken = &sListChannelBansRequest_NextToken
+var ListChannelBansRequest_ChimeBearer = &sListChannelBansRequest_ChimeBearer
+
+var ListChannelBansResponse = &sListChannelBansResponse
+var ListChannelBansResponse_ChannelArn = &sListChannelBansResponse_ChannelArn
+var ListChannelBansResponse_NextToken = &sListChannelBansResponse_NextToken
+var ListChannelBansResponse_ChannelBans = &sListChannelBansResponse_ChannelBans
+
+var ListChannelFlowsRequest = &sListChannelFlowsRequest
+var ListChannelFlowsRequest_AppInstanceArn = &sListChannelFlowsRequest_AppInstanceArn
+var ListChannelFlowsRequest_MaxResults = &sListChannelFlowsRequest_MaxResults
+var ListChannelFlowsRequest_NextToken = &sListChannelFlowsRequest_NextToken
+
+var ListChannelFlowsResponse = &sListChannelFlowsResponse
+var ListChannelFlowsResponse_ChannelFlows = &sListChannelFlowsResponse_ChannelFlows
+var ListChannelFlowsResponse_NextToken = &sListChannelFlowsResponse_NextToken
+
+var ListChannelMembershipsForAppInstanceUserRequest = &sListChannelMembershipsForAppInstanceUserRequest
+var ListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn = &sListChannelMembershipsForAppInstanceUserRequest_AppInstanceUserArn
+var ListChannelMembershipsForAppInstanceUserRequest_MaxResults = &sListChannelMembershipsForAppInstanceUserRequest_MaxResults
+var ListChannelMembershipsForAppInstanceUserRequest_NextToken = &sListChannelMembershipsForAppInstanceUserRequest_NextToken
+var ListChannelMembershipsForAppInstanceUserRequest_ChimeBearer = &sListChannelMembershipsForAppInstanceUserRequest_ChimeBearer
+
+var ListChannelMembershipsForAppInstanceUserResponse = &sListChannelMembershipsForAppInstanceUserResponse
+var ListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships = &sListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships
+var ListChannelMembershipsForAppInstanceUserResponse_NextToken = &sListChannelMembershipsForAppInstanceUserResponse_NextToken
+
+var ListChannelMembershipsRequest = &sListChannelMembershipsRequest
+var ListChannelMembershipsRequest_ChannelArn = &sListChannelMembershipsRequest_ChannelArn
+var ListChannelMembershipsRequest_Type = &sListChannelMembershipsRequest_Type
+var ListChannelMembershipsRequest_MaxResults = &sListChannelMembershipsRequest_MaxResults
+var ListChannelMembershipsRequest_NextToken = &sListChannelMembershipsRequest_NextToken
+var ListChannelMembershipsRequest_ChimeBearer = &sListChannelMembershipsRequest_ChimeBearer
+var ListChannelMembershipsRequest_SubChannelId = &sListChannelMembershipsRequest_SubChannelId
+
+var ListChannelMembershipsResponse = &sListChannelMembershipsResponse
+var ListChannelMembershipsResponse_ChannelArn = &sListChannelMembershipsResponse_ChannelArn
+var ListChannelMembershipsResponse_ChannelMemberships = &sListChannelMembershipsResponse_ChannelMemberships
+var ListChannelMembershipsResponse_NextToken = &sListChannelMembershipsResponse_NextToken
+
+var ListChannelMessagesRequest = &sListChannelMessagesRequest
+var ListChannelMessagesRequest_ChannelArn = &sListChannelMessagesRequest_ChannelArn
+var ListChannelMessagesRequest_SortOrder = &sListChannelMessagesRequest_SortOrder
+var ListChannelMessagesRequest_NotBefore = &sListChannelMessagesRequest_NotBefore
+var ListChannelMessagesRequest_NotAfter = &sListChannelMessagesRequest_NotAfter
+var ListChannelMessagesRequest_MaxResults = &sListChannelMessagesRequest_MaxResults
+var ListChannelMessagesRequest_NextToken = &sListChannelMessagesRequest_NextToken
+var ListChannelMessagesRequest_ChimeBearer = &sListChannelMessagesRequest_ChimeBearer
+var ListChannelMessagesRequest_SubChannelId = &sListChannelMessagesRequest_SubChannelId
+
+var ListChannelMessagesResponse = &sListChannelMessagesResponse
+var ListChannelMessagesResponse_ChannelArn = &sListChannelMessagesResponse_ChannelArn
+var ListChannelMessagesResponse_NextToken = &sListChannelMessagesResponse_NextToken
+var ListChannelMessagesResponse_ChannelMessages = &sListChannelMessagesResponse_ChannelMessages
+var ListChannelMessagesResponse_SubChannelId = &sListChannelMessagesResponse_SubChannelId
+
+var ListChannelModeratorsRequest = &sListChannelModeratorsRequest
+var ListChannelModeratorsRequest_ChannelArn = &sListChannelModeratorsRequest_ChannelArn
+var ListChannelModeratorsRequest_MaxResults = &sListChannelModeratorsRequest_MaxResults
+var ListChannelModeratorsRequest_NextToken = &sListChannelModeratorsRequest_NextToken
+var ListChannelModeratorsRequest_ChimeBearer = &sListChannelModeratorsRequest_ChimeBearer
+
+var ListChannelModeratorsResponse = &sListChannelModeratorsResponse
+var ListChannelModeratorsResponse_ChannelArn = &sListChannelModeratorsResponse_ChannelArn
+var ListChannelModeratorsResponse_NextToken = &sListChannelModeratorsResponse_NextToken
+var ListChannelModeratorsResponse_ChannelModerators = &sListChannelModeratorsResponse_ChannelModerators
+
+var ListChannelsAssociatedWithChannelFlowRequest = &sListChannelsAssociatedWithChannelFlowRequest
+var ListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn = &sListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn
+var ListChannelsAssociatedWithChannelFlowRequest_MaxResults = &sListChannelsAssociatedWithChannelFlowRequest_MaxResults
+var ListChannelsAssociatedWithChannelFlowRequest_NextToken = &sListChannelsAssociatedWithChannelFlowRequest_NextToken
+
+var ListChannelsAssociatedWithChannelFlowResponse = &sListChannelsAssociatedWithChannelFlowResponse
+var ListChannelsAssociatedWithChannelFlowResponse_Channels = &sListChannelsAssociatedWithChannelFlowResponse_Channels
+var ListChannelsAssociatedWithChannelFlowResponse_NextToken = &sListChannelsAssociatedWithChannelFlowResponse_NextToken
+
+var ListChannelsRequest = &sListChannelsRequest
+var ListChannelsRequest_AppInstanceArn = &sListChannelsRequest_AppInstanceArn
+var ListChannelsRequest_Privacy = &sListChannelsRequest_Privacy
+var ListChannelsRequest_MaxResults = &sListChannelsRequest_MaxResults
+var ListChannelsRequest_NextToken = &sListChannelsRequest_NextToken
+var ListChannelsRequest_ChimeBearer = &sListChannelsRequest_ChimeBearer
+
+var ListChannelsModeratedByAppInstanceUserRequest = &sListChannelsModeratedByAppInstanceUserRequest
+var ListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn = &sListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn
+var ListChannelsModeratedByAppInstanceUserRequest_MaxResults = &sListChannelsModeratedByAppInstanceUserRequest_MaxResults
+var ListChannelsModeratedByAppInstanceUserRequest_NextToken = &sListChannelsModeratedByAppInstanceUserRequest_NextToken
+var ListChannelsModeratedByAppInstanceUserRequest_ChimeBearer = &sListChannelsModeratedByAppInstanceUserRequest_ChimeBearer
+
+var ListChannelsModeratedByAppInstanceUserResponse = &sListChannelsModeratedByAppInstanceUserResponse
+var ListChannelsModeratedByAppInstanceUserResponse_Channels = &sListChannelsModeratedByAppInstanceUserResponse_Channels
+var ListChannelsModeratedByAppInstanceUserResponse_NextToken = &sListChannelsModeratedByAppInstanceUserResponse_NextToken
+
+var ListChannelsResponse = &sListChannelsResponse
+var ListChannelsResponse_Channels = &sListChannelsResponse_Channels
+var ListChannelsResponse_NextToken = &sListChannelsResponse_NextToken
+
+var ListSubChannelsRequest = &sListSubChannelsRequest
+var ListSubChannelsRequest_ChannelArn = &sListSubChannelsRequest_ChannelArn
+var ListSubChannelsRequest_ChimeBearer = &sListSubChannelsRequest_ChimeBearer
+var ListSubChannelsRequest_MaxResults = &sListSubChannelsRequest_MaxResults
+var ListSubChannelsRequest_NextToken = &sListSubChannelsRequest_NextToken
+
+var ListSubChannelsResponse = &sListSubChannelsResponse
+var ListSubChannelsResponse_ChannelArn = &sListSubChannelsResponse_ChannelArn
+var ListSubChannelsResponse_SubChannels = &sListSubChannelsResponse_SubChannels
+var ListSubChannelsResponse_NextToken = &sListSubChannelsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutChannelExpirationSettingsRequest = &sPutChannelExpirationSettingsRequest
+var PutChannelExpirationSettingsRequest_ChannelArn = &sPutChannelExpirationSettingsRequest_ChannelArn
+var PutChannelExpirationSettingsRequest_ChimeBearer = &sPutChannelExpirationSettingsRequest_ChimeBearer
+var PutChannelExpirationSettingsRequest_ExpirationSettings = &sPutChannelExpirationSettingsRequest_ExpirationSettings
+
+var PutChannelExpirationSettingsResponse = &sPutChannelExpirationSettingsResponse
+var PutChannelExpirationSettingsResponse_ChannelArn = &sPutChannelExpirationSettingsResponse_ChannelArn
+var PutChannelExpirationSettingsResponse_ExpirationSettings = &sPutChannelExpirationSettingsResponse_ExpirationSettings
+
+var PutChannelMembershipPreferencesRequest = &sPutChannelMembershipPreferencesRequest
+var PutChannelMembershipPreferencesRequest_ChannelArn = &sPutChannelMembershipPreferencesRequest_ChannelArn
+var PutChannelMembershipPreferencesRequest_MemberArn = &sPutChannelMembershipPreferencesRequest_MemberArn
+var PutChannelMembershipPreferencesRequest_ChimeBearer = &sPutChannelMembershipPreferencesRequest_ChimeBearer
+var PutChannelMembershipPreferencesRequest_Preferences = &sPutChannelMembershipPreferencesRequest_Preferences
+
+var PutChannelMembershipPreferencesResponse = &sPutChannelMembershipPreferencesResponse
+var PutChannelMembershipPreferencesResponse_ChannelArn = &sPutChannelMembershipPreferencesResponse_ChannelArn
+var PutChannelMembershipPreferencesResponse_Member = &sPutChannelMembershipPreferencesResponse_Member
+var PutChannelMembershipPreferencesResponse_Preferences = &sPutChannelMembershipPreferencesResponse_Preferences
+
+var PutMessagingStreamingConfigurationsRequest = &sPutMessagingStreamingConfigurationsRequest
+var PutMessagingStreamingConfigurationsRequest_AppInstanceArn = &sPutMessagingStreamingConfigurationsRequest_AppInstanceArn
+var PutMessagingStreamingConfigurationsRequest_StreamingConfigurations = &sPutMessagingStreamingConfigurationsRequest_StreamingConfigurations
+
+var PutMessagingStreamingConfigurationsResponse = &sPutMessagingStreamingConfigurationsResponse
+var PutMessagingStreamingConfigurationsResponse_StreamingConfigurations = &sPutMessagingStreamingConfigurationsResponse_StreamingConfigurations
+
+var RedactChannelMessageRequest = &sRedactChannelMessageRequest
+var RedactChannelMessageRequest_ChannelArn = &sRedactChannelMessageRequest_ChannelArn
+var RedactChannelMessageRequest_MessageId = &sRedactChannelMessageRequest_MessageId
+var RedactChannelMessageRequest_ChimeBearer = &sRedactChannelMessageRequest_ChimeBearer
+var RedactChannelMessageRequest_SubChannelId = &sRedactChannelMessageRequest_SubChannelId
+
+var RedactChannelMessageResponse = &sRedactChannelMessageResponse
+var RedactChannelMessageResponse_ChannelArn = &sRedactChannelMessageResponse_ChannelArn
+var RedactChannelMessageResponse_MessageId = &sRedactChannelMessageResponse_MessageId
+var RedactChannelMessageResponse_SubChannelId = &sRedactChannelMessageResponse_SubChannelId
+
+var SearchChannelsRequest = &sSearchChannelsRequest
+var SearchChannelsRequest_ChimeBearer = &sSearchChannelsRequest_ChimeBearer
+var SearchChannelsRequest_Fields = &sSearchChannelsRequest_Fields
+var SearchChannelsRequest_MaxResults = &sSearchChannelsRequest_MaxResults
+var SearchChannelsRequest_NextToken = &sSearchChannelsRequest_NextToken
+
+var SearchChannelsResponse = &sSearchChannelsResponse
+var SearchChannelsResponse_Channels = &sSearchChannelsResponse_Channels
+var SearchChannelsResponse_NextToken = &sSearchChannelsResponse_NextToken
+
+var SendChannelMessageRequest = &sSendChannelMessageRequest
+var SendChannelMessageRequest_ChannelArn = &sSendChannelMessageRequest_ChannelArn
+var SendChannelMessageRequest_Content = &sSendChannelMessageRequest_Content
+var SendChannelMessageRequest_Type = &sSendChannelMessageRequest_Type
+var SendChannelMessageRequest_Persistence = &sSendChannelMessageRequest_Persistence
+var SendChannelMessageRequest_Metadata = &sSendChannelMessageRequest_Metadata
+var SendChannelMessageRequest_ClientRequestToken = &sSendChannelMessageRequest_ClientRequestToken
+var SendChannelMessageRequest_ChimeBearer = &sSendChannelMessageRequest_ChimeBearer
+var SendChannelMessageRequest_PushNotification = &sSendChannelMessageRequest_PushNotification
+var SendChannelMessageRequest_MessageAttributes = &sSendChannelMessageRequest_MessageAttributes
+var SendChannelMessageRequest_SubChannelId = &sSendChannelMessageRequest_SubChannelId
+var SendChannelMessageRequest_ContentType = &sSendChannelMessageRequest_ContentType
+var SendChannelMessageRequest_Target = &sSendChannelMessageRequest_Target
+
+var SendChannelMessageResponse = &sSendChannelMessageResponse
+var SendChannelMessageResponse_ChannelArn = &sSendChannelMessageResponse_ChannelArn
+var SendChannelMessageResponse_MessageId = &sSendChannelMessageResponse_MessageId
+var SendChannelMessageResponse_Status = &sSendChannelMessageResponse_Status
+var SendChannelMessageResponse_SubChannelId = &sSendChannelMessageResponse_SubChannelId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateChannelFlowRequest = &sUpdateChannelFlowRequest
+var UpdateChannelFlowRequest_ChannelFlowArn = &sUpdateChannelFlowRequest_ChannelFlowArn
+var UpdateChannelFlowRequest_Processors = &sUpdateChannelFlowRequest_Processors
+var UpdateChannelFlowRequest_Name = &sUpdateChannelFlowRequest_Name
+
+var UpdateChannelFlowResponse = &sUpdateChannelFlowResponse
+var UpdateChannelFlowResponse_ChannelFlowArn = &sUpdateChannelFlowResponse_ChannelFlowArn
+
+var UpdateChannelRequest = &sUpdateChannelRequest
+var UpdateChannelRequest_ChannelArn = &sUpdateChannelRequest_ChannelArn
+var UpdateChannelRequest_Name = &sUpdateChannelRequest_Name
+var UpdateChannelRequest_Mode = &sUpdateChannelRequest_Mode
+var UpdateChannelRequest_Metadata = &sUpdateChannelRequest_Metadata
+var UpdateChannelRequest_ChimeBearer = &sUpdateChannelRequest_ChimeBearer
+
+var UpdateChannelMessageRequest = &sUpdateChannelMessageRequest
+var UpdateChannelMessageRequest_ChannelArn = &sUpdateChannelMessageRequest_ChannelArn
+var UpdateChannelMessageRequest_MessageId = &sUpdateChannelMessageRequest_MessageId
+var UpdateChannelMessageRequest_Content = &sUpdateChannelMessageRequest_Content
+var UpdateChannelMessageRequest_Metadata = &sUpdateChannelMessageRequest_Metadata
+var UpdateChannelMessageRequest_ChimeBearer = &sUpdateChannelMessageRequest_ChimeBearer
+var UpdateChannelMessageRequest_SubChannelId = &sUpdateChannelMessageRequest_SubChannelId
+var UpdateChannelMessageRequest_ContentType = &sUpdateChannelMessageRequest_ContentType
+
+var UpdateChannelMessageResponse = &sUpdateChannelMessageResponse
+var UpdateChannelMessageResponse_ChannelArn = &sUpdateChannelMessageResponse_ChannelArn
+var UpdateChannelMessageResponse_MessageId = &sUpdateChannelMessageResponse_MessageId
+var UpdateChannelMessageResponse_Status = &sUpdateChannelMessageResponse_Status
+var UpdateChannelMessageResponse_SubChannelId = &sUpdateChannelMessageResponse_SubChannelId
+
+var UpdateChannelResponse = &sUpdateChannelResponse
+var UpdateChannelResponse_ChannelArn = &sUpdateChannelResponse_ChannelArn
+
+var UpdateChannelReadMarkerRequest = &sUpdateChannelReadMarkerRequest
+var UpdateChannelReadMarkerRequest_ChannelArn = &sUpdateChannelReadMarkerRequest_ChannelArn
+var UpdateChannelReadMarkerRequest_ChimeBearer = &sUpdateChannelReadMarkerRequest_ChimeBearer
+
+var UpdateChannelReadMarkerResponse = &sUpdateChannelReadMarkerResponse
+var UpdateChannelReadMarkerResponse_ChannelArn = &sUpdateChannelReadMarkerResponse_ChannelArn
+
+var ChimeMessagingService = &smithy.ServiceSchema{Schema: &s_ChimeMessagingService, Version: "2021-05-15"}

@@ -4,401 +4,416 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "DeleteObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/{Path+}",
-	Code: 200})
+var (
+	eDeleteObject                                  smithy.SchemaExtensions
+	eDescribeObject                                smithy.SchemaExtensions
+	eGetObject                                     smithy.SchemaExtensions
+	eListItems                                     smithy.SchemaExtensions
+	ePutObject                                     smithy.SchemaExtensions
+	e_MediaStoreObject_20170901                    smithy.SchemaExtensions
+	eContainerNotFoundException                    smithy.SchemaExtensions
+	eContainerNotFoundException_Message            smithy.SchemaExtensions
+	e_ContentRangePattern                          smithy.SchemaExtensions
+	e_ContentType                                  smithy.SchemaExtensions
+	e_ErrorMessage                                 smithy.SchemaExtensions
+	e_ETag                                         smithy.SchemaExtensions
+	eInternalServerError                           smithy.SchemaExtensions
+	eInternalServerError_Message                   smithy.SchemaExtensions
+	eItem                                          smithy.SchemaExtensions
+	eItem_Name                                     smithy.SchemaExtensions
+	eItem_Type                                     smithy.SchemaExtensions
+	eItem_ETag                                     smithy.SchemaExtensions
+	eItem_LastModified                             smithy.SchemaExtensions
+	eItem_ContentType                              smithy.SchemaExtensions
+	eItem_ContentLength                            smithy.SchemaExtensions
+	e_ItemList                                     smithy.SchemaExtensions
+	e_ItemList_member                              smithy.SchemaExtensions
+	e_ItemName                                     smithy.SchemaExtensions
+	eItemType                                      smithy.SchemaExtensions
+	eItemType_OBJECT                               smithy.SchemaExtensions
+	eItemType_FOLDER                               smithy.SchemaExtensions
+	e_ListLimit                                    smithy.SchemaExtensions
+	e_ListPathNaming                               smithy.SchemaExtensions
+	e_NonNegativeLong                              smithy.SchemaExtensions
+	eObjectNotFoundException                       smithy.SchemaExtensions
+	eObjectNotFoundException_Message               smithy.SchemaExtensions
+	e_PaginationToken                              smithy.SchemaExtensions
+	e_PathNaming                                   smithy.SchemaExtensions
+	e_PayloadBlob                                  smithy.SchemaExtensions
+	e_RangePattern                                 smithy.SchemaExtensions
+	eRequestedRangeNotSatisfiableException         smithy.SchemaExtensions
+	eRequestedRangeNotSatisfiableException_Message smithy.SchemaExtensions
+	e_SHA256Hash                                   smithy.SchemaExtensions
+	e_statusCode                                   smithy.SchemaExtensions
+	eStorageClass                                  smithy.SchemaExtensions
+	eStorageClass_TEMPORAL                         smithy.SchemaExtensions
+	e_StringPrimitive                              smithy.SchemaExtensions
+	e_TimeStamp                                    smithy.SchemaExtensions
+	eUploadAvailability                            smithy.SchemaExtensions
+	eUploadAvailability_STANDARD                   smithy.SchemaExtensions
+	eUploadAvailability_STREAMING                  smithy.SchemaExtensions
+	eDeleteObjectRequest                           smithy.SchemaExtensions
+	eDeleteObjectRequest_Path                      smithy.SchemaExtensions
+	eDeleteObjectResponse                          smithy.SchemaExtensions
+	eDescribeObjectRequest                         smithy.SchemaExtensions
+	eDescribeObjectRequest_Path                    smithy.SchemaExtensions
+	eDescribeObjectResponse                        smithy.SchemaExtensions
+	eDescribeObjectResponse_ETag                   smithy.SchemaExtensions
+	eDescribeObjectResponse_ContentType            smithy.SchemaExtensions
+	eDescribeObjectResponse_ContentLength          smithy.SchemaExtensions
+	eDescribeObjectResponse_CacheControl           smithy.SchemaExtensions
+	eDescribeObjectResponse_LastModified           smithy.SchemaExtensions
+	eGetObjectRequest                              smithy.SchemaExtensions
+	eGetObjectRequest_Path                         smithy.SchemaExtensions
+	eGetObjectRequest_Range                        smithy.SchemaExtensions
+	eGetObjectResponse                             smithy.SchemaExtensions
+	eGetObjectResponse_Body                        smithy.SchemaExtensions
+	eGetObjectResponse_CacheControl                smithy.SchemaExtensions
+	eGetObjectResponse_ContentRange                smithy.SchemaExtensions
+	eGetObjectResponse_ContentLength               smithy.SchemaExtensions
+	eGetObjectResponse_ContentType                 smithy.SchemaExtensions
+	eGetObjectResponse_ETag                        smithy.SchemaExtensions
+	eGetObjectResponse_LastModified                smithy.SchemaExtensions
+	eGetObjectResponse_StatusCode                  smithy.SchemaExtensions
+	eListItemsRequest                              smithy.SchemaExtensions
+	eListItemsRequest_Path                         smithy.SchemaExtensions
+	eListItemsRequest_MaxResults                   smithy.SchemaExtensions
+	eListItemsRequest_NextToken                    smithy.SchemaExtensions
+	eListItemsResponse                             smithy.SchemaExtensions
+	eListItemsResponse_Items                       smithy.SchemaExtensions
+	eListItemsResponse_NextToken                   smithy.SchemaExtensions
+	ePutObjectRequest                              smithy.SchemaExtensions
+	ePutObjectRequest_Body                         smithy.SchemaExtensions
+	ePutObjectRequest_Path                         smithy.SchemaExtensions
+	ePutObjectRequest_ContentType                  smithy.SchemaExtensions
+	ePutObjectRequest_CacheControl                 smithy.SchemaExtensions
+	ePutObjectRequest_StorageClass                 smithy.SchemaExtensions
+	ePutObjectRequest_UploadAvailability           smithy.SchemaExtensions
+	ePutObjectResponse                             smithy.SchemaExtensions
+	ePutObjectResponse_ContentSHA256               smithy.SchemaExtensions
+	ePutObjectResponse_ETag                        smithy.SchemaExtensions
+	ePutObjectResponse_StorageClass                smithy.SchemaExtensions
+)
 
-var DescribeObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "DescribeObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "HEAD",
-	URI:  "/{Path+}",
-	Code: 200})
+var (
+	iDeleteObject                          = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "DeleteObject"}
+	iDescribeObject                        = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "DescribeObject"}
+	iGetObject                             = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "GetObject"}
+	iListItems                             = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ListItems"}
+	iPutObject                             = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "PutObject"}
+	i_MediaStoreObject_20170901            = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "MediaStoreObject_20170901"}
+	iContainerNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ContainerNotFoundException"}
+	i_ContentRangePattern                  = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ContentRangePattern"}
+	i_ContentType                          = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ContentType"}
+	i_ErrorMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ErrorMessage"}
+	i_ETag                                 = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ETag"}
+	iInternalServerError                   = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "InternalServerError"}
+	iItem                                  = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "Item"}
+	i_ItemList                             = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ItemList"}
+	i_ItemName                             = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ItemName"}
+	iItemType                              = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ItemType"}
+	i_ListLimit                            = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ListLimit"}
+	i_ListPathNaming                       = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ListPathNaming"}
+	i_NonNegativeLong                      = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "NonNegativeLong"}
+	iObjectNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ObjectNotFoundException"}
+	i_PaginationToken                      = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "PaginationToken"}
+	i_PathNaming                           = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "PathNaming"}
+	i_PayloadBlob                          = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "PayloadBlob"}
+	i_RangePattern                         = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "RangePattern"}
+	iRequestedRangeNotSatisfiableException = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "RequestedRangeNotSatisfiableException"}
+	i_SHA256Hash                           = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "SHA256Hash"}
+	i_statusCode                           = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "statusCode"}
+	iStorageClass                          = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "StorageClass"}
+	i_StringPrimitive                      = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "StringPrimitive"}
+	i_TimeStamp                            = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "TimeStamp"}
+	iUploadAvailability                    = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "UploadAvailability"}
+	iDeleteObjectRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "DeleteObjectRequest"}
+	iDeleteObjectResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "DeleteObjectResponse"}
+	iDescribeObjectRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "DescribeObjectRequest"}
+	iDescribeObjectResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "DescribeObjectResponse"}
+	iGetObjectRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "GetObjectRequest"}
+	iGetObjectResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "GetObjectResponse"}
+	iListItemsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ListItemsRequest"}
+	iListItemsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "ListItemsResponse"}
+	iPutObjectRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "PutObjectRequest"}
+	iPutObjectResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mediastoredata", Name: "PutObjectResponse"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var GetObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "GetObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/{Path+}",
-	Code: 200})
-
-var ListItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ListItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "HEAD",
+	URI:  "/{Path+}",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+	URI:  "/{Path+}",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/",
-	Code: 200})
-
-var PutObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "PutObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/{Path+}",
-	Code: 200})
-
-var _MediaStoreObject_20170901 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "MediaStoreObject_20170901",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "https://object.mediastore.amazonaws.com/doc/2017-09-01"})
-
-var MediaStoreObject_20170901 = smithy.NewServiceSchema(_MediaStoreObject_20170901, "2017-09-01")
-
-var ContainerNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ContainerNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ContainerNotFoundException_Message *smithy.Schema
-
-var _ContentRangePattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ContentRangePattern",
-}, smithy.ShapeTypeString, 0)
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ETag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ETag",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerError_Message *smithy.Schema
-
-var Item = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "Item",
-}, smithy.ShapeTypeStructure, 6)
-var Item_Name *smithy.Schema
-
-var Item_Type *smithy.Schema
-
-var Item_ETag *smithy.Schema
-
-var Item_LastModified *smithy.Schema
-
-var Item_ContentType *smithy.Schema
-
-var Item_ContentLength *smithy.Schema
-
-var _ItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ItemList",
-}, smithy.ShapeTypeList, 1)
-var _ItemList_member *smithy.Schema
-
-var _ItemName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ItemName",
-}, smithy.ShapeTypeString, 0)
-
-var ItemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ItemType",
-}, smithy.ShapeTypeEnum, 2)
-var ItemType_OBJECT *smithy.Schema
-
-var ItemType_FOLDER *smithy.Schema
-
-var _ListLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ListLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListPathNaming = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ListPathNaming",
-}, smithy.ShapeTypeString, 0)
-
-var _NonNegativeLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "NonNegativeLong",
-}, smithy.ShapeTypeLong, 0)
-
-var ObjectNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ObjectNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ObjectNotFoundException_Message *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PathNaming = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "PathNaming",
-}, smithy.ShapeTypeString, 0)
-
-var _PayloadBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "PayloadBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _RangePattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "RangePattern",
-}, smithy.ShapeTypeString, 0)
-
-var RequestedRangeNotSatisfiableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "RequestedRangeNotSatisfiableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 416})
-var RequestedRangeNotSatisfiableException_Message *smithy.Schema
-
-var _SHA256Hash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "SHA256Hash",
-}, smithy.ShapeTypeString, 0)
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://object.mediastore.amazonaws.com/doc/2017-09-01"}}, DirectMask: 0x8000}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 416}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "ETag"}}, DirectMask: 0x80}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Length"}}, DirectMask: 0x80}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Cache-Control"}}, DirectMask: 0x80}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Last-Modified"}}, DirectMask: 0x80}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Range"}}, DirectMask: 0x80}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Range"}}, DirectMask: 0x80}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPResponseCode{}}, DirectMask: 0x2000}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Path"}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"}}, DirectMask: 0x80}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-upload-availability"}}, DirectMask: 0x80}
+
+var mContainerNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerNotFoundException_Message}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_Message}}
+var mItem = smithy.SchemaMembers{List: []*smithy.Schema{&sItem_Name, &sItem_Type, &sItem_ETag, &sItem_LastModified, &sItem_ContentType, &sItem_ContentLength}}
+var m_ItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ItemList_member}}
+var mItemType = smithy.SchemaMembers{List: []*smithy.Schema{&sItemType_OBJECT, &sItemType_FOLDER}}
+var mObjectNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectNotFoundException_Message}}
+var mRequestedRangeNotSatisfiableException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestedRangeNotSatisfiableException_Message}}
+var mStorageClass = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageClass_TEMPORAL}}
+var mUploadAvailability = smithy.SchemaMembers{List: []*smithy.Schema{&sUploadAvailability_STANDARD, &sUploadAvailability_STREAMING}}
+var mDeleteObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteObjectRequest_Path}}
+var mDescribeObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObjectRequest_Path}}
+var mDescribeObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObjectResponse_ETag, &sDescribeObjectResponse_ContentType, &sDescribeObjectResponse_ContentLength, &sDescribeObjectResponse_CacheControl, &sDescribeObjectResponse_LastModified}}
+var mGetObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectRequest_Path, &sGetObjectRequest_Range}}
+var mGetObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectResponse_Body, &sGetObjectResponse_CacheControl, &sGetObjectResponse_ContentRange, &sGetObjectResponse_ContentLength, &sGetObjectResponse_ContentType, &sGetObjectResponse_ETag, &sGetObjectResponse_LastModified, &sGetObjectResponse_StatusCode}}
+var mListItemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListItemsRequest_Path, &sListItemsRequest_MaxResults, &sListItemsRequest_NextToken}}
+var mListItemsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListItemsResponse_Items, &sListItemsResponse_NextToken}}
+var mPutObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutObjectRequest_Body, &sPutObjectRequest_Path, &sPutObjectRequest_ContentType, &sPutObjectRequest_CacheControl, &sPutObjectRequest_StorageClass, &sPutObjectRequest_UploadAvailability}}
+var mPutObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutObjectResponse_ContentSHA256, &sPutObjectResponse_ETag, &sPutObjectResponse_StorageClass}}
+
+var sDeleteObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObject, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteObject})
+var sDescribeObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObject, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDescribeObject})
+var sGetObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObject, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetObject})
+var sListItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListItems, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListItems})
+var sPutObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutObject, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ePutObject})
+var s_MediaStoreObject_20170901 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaStoreObject_20170901, Traits: &t5, Type: smithy.ShapeTypeService, Ext: &e_MediaStoreObject_20170901})
+var sContainerNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerNotFoundException, Members: &mContainerNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eContainerNotFoundException})
+var sContainerNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eContainerNotFoundException_Message})
+var s_ContentRangePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentRangePattern, Type: smithy.ShapeTypeString, Ext: &e_ContentRangePattern})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &e_ContentType})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ETag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ETag, Type: smithy.ShapeTypeString, Ext: &e_ETag})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerError})
+var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerError_Message})
+var sItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItem, Members: &mItem, Type: smithy.ShapeTypeStructure, Ext: &eItem})
+var sItem_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ItemName, Type: smithy.ShapeTypeString, Ext: &eItem_Name})
+var sItem_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iItemType, Members: &mItemType, Type: smithy.ShapeTypeEnum, Ext: &eItem_Type})
+var sItem_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_ETag, Type: smithy.ShapeTypeString, Ext: &eItem_ETag})
+var sItem_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eItem_LastModified})
+var sItem_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &eItem_ContentType})
+var sItem_ContentLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLength", ID: &i_NonNegativeLong, Type: smithy.ShapeTypeLong, Ext: &eItem_ContentLength})
+var s_ItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemList, Members: &m_ItemList, Type: smithy.ShapeTypeList, Ext: &e_ItemList})
+var s_ItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iItem, Members: &mItem, Type: smithy.ShapeTypeStructure, Ext: &e_ItemList_member})
+var s_ItemName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemName, Type: smithy.ShapeTypeString, Ext: &e_ItemName})
+var sItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemType, Members: &mItemType, Type: smithy.ShapeTypeEnum, Ext: &eItemType})
+var sItemType_OBJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eItemType_OBJECT})
+var sItemType_FOLDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOLDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eItemType_FOLDER})
+var s_ListLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListLimit})
+var s_ListPathNaming = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListPathNaming, Type: smithy.ShapeTypeString, Ext: &e_ListPathNaming})
+var s_NonNegativeLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNegativeLong, Type: smithy.ShapeTypeLong, Ext: &e_NonNegativeLong})
+var sObjectNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectNotFoundException, Members: &mObjectNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eObjectNotFoundException})
+var sObjectNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eObjectNotFoundException_Message})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var s_PathNaming = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathNaming, Type: smithy.ShapeTypeString, Ext: &e_PathNaming})
+var s_PayloadBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PayloadBlob, Traits: &t8, Type: smithy.ShapeTypeBlob, Ext: &e_PayloadBlob})
+var s_RangePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RangePattern, Type: smithy.ShapeTypeString, Ext: &e_RangePattern})
+var sRequestedRangeNotSatisfiableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestedRangeNotSatisfiableException, Members: &mRequestedRangeNotSatisfiableException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eRequestedRangeNotSatisfiableException})
+var sRequestedRangeNotSatisfiableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRequestedRangeNotSatisfiableException_Message})
+var s_SHA256Hash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SHA256Hash, Type: smithy.ShapeTypeString, Ext: &e_SHA256Hash})
+var s_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_statusCode, Type: smithy.ShapeTypeInteger, Ext: &e_statusCode})
+var sStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageClass, Members: &mStorageClass, Type: smithy.ShapeTypeEnum, Ext: &eStorageClass})
+var sStorageClass_TEMPORAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPORAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageClass_TEMPORAL})
+var s_StringPrimitive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringPrimitive, Type: smithy.ShapeTypeString, Ext: &e_StringPrimitive})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeStamp})
+var sUploadAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadAvailability, Members: &mUploadAvailability, Type: smithy.ShapeTypeEnum, Ext: &eUploadAvailability})
+var sUploadAvailability_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUploadAvailability_STANDARD})
+var sUploadAvailability_STREAMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREAMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUploadAvailability_STREAMING})
+var sDeleteObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObjectRequest, Members: &mDeleteObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteObjectRequest})
+var sDeleteObjectRequest_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_PathNaming, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eDeleteObjectRequest_Path})
+var sDeleteObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteObjectResponse})
+var sDescribeObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObjectRequest, Members: &mDescribeObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeObjectRequest})
+var sDescribeObjectRequest_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_PathNaming, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eDescribeObjectRequest_Path})
+var sDescribeObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObjectResponse, Members: &mDescribeObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeObjectResponse})
+var sDescribeObjectResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_ETag, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eDescribeObjectResponse_ETag})
+var sDescribeObjectResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eDescribeObjectResponse_ContentType})
+var sDescribeObjectResponse_ContentLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLength", ID: &i_NonNegativeLong, Traits: &t13, Type: smithy.ShapeTypeLong, Ext: &eDescribeObjectResponse_ContentLength})
+var sDescribeObjectResponse_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &i_StringPrimitive, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eDescribeObjectResponse_CacheControl})
+var sDescribeObjectResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_TimeStamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeObjectResponse_LastModified})
+var sGetObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectRequest, Members: &mGetObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectRequest})
+var sGetObjectRequest_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_PathNaming, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_Path})
+var sGetObjectRequest_Range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Range", ID: &i_RangePattern, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_Range})
+var sGetObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectResponse, Members: &mGetObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectResponse})
+var sGetObjectResponse_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_PayloadBlob, Traits: &t17, Type: smithy.ShapeTypeBlob, Ext: &eGetObjectResponse_Body})
+var sGetObjectResponse_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &i_StringPrimitive, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetObjectResponse_CacheControl})
+var sGetObjectResponse_ContentRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRange", ID: &i_ContentRangePattern, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eGetObjectResponse_ContentRange})
+var sGetObjectResponse_ContentLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLength", ID: &i_NonNegativeLong, Traits: &t13, Type: smithy.ShapeTypeLong, Ext: &eGetObjectResponse_ContentLength})
+var sGetObjectResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eGetObjectResponse_ContentType})
+var sGetObjectResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_ETag, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eGetObjectResponse_ETag})
+var sGetObjectResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_TimeStamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp, Ext: &eGetObjectResponse_LastModified})
+var sGetObjectResponse_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_statusCode, Traits: &t19, Type: smithy.ShapeTypeInteger, Ext: &eGetObjectResponse_StatusCode})
+var sListItemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListItemsRequest, Members: &mListItemsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListItemsRequest})
+var sListItemsRequest_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_ListPathNaming, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListItemsRequest_Path})
+var sListItemsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListItemsRequest_MaxResults})
+var sListItemsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListItemsRequest_NextToken})
+var sListItemsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListItemsResponse, Members: &mListItemsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListItemsResponse})
+var sListItemsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ItemList, Members: &m_ItemList, Type: smithy.ShapeTypeList, Ext: &eListItemsResponse_Items})
+var sListItemsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListItemsResponse_NextToken})
+var sPutObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutObjectRequest, Members: &mPutObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutObjectRequest})
+var sPutObjectRequest_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_PayloadBlob, Traits: &t17, Type: smithy.ShapeTypeBlob, Ext: &ePutObjectRequest_Body})
+var sPutObjectRequest_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_PathNaming, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_Path})
+var sPutObjectRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ContentType})
+var sPutObjectRequest_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &i_StringPrimitive, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_CacheControl})
+var sPutObjectRequest_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &iStorageClass, Members: &mStorageClass, Traits: &t23, Type: smithy.ShapeTypeEnum, Ext: &ePutObjectRequest_StorageClass})
+var sPutObjectRequest_UploadAvailability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploadAvailability", ID: &iUploadAvailability, Members: &mUploadAvailability, Traits: &t24, Type: smithy.ShapeTypeEnum, Ext: &ePutObjectRequest_UploadAvailability})
+var sPutObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutObjectResponse, Members: &mPutObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutObjectResponse})
+var sPutObjectResponse_ContentSHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentSHA256", ID: &i_SHA256Hash, Type: smithy.ShapeTypeString, Ext: &ePutObjectResponse_ContentSHA256})
+var sPutObjectResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_ETag, Type: smithy.ShapeTypeString, Ext: &ePutObjectResponse_ETag})
+var sPutObjectResponse_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &iStorageClass, Members: &mStorageClass, Type: smithy.ShapeTypeEnum, Ext: &ePutObjectResponse_StorageClass})
 
-var _statusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "statusCode",
-}, smithy.ShapeTypeInteger, 0)
+var DeleteObject = &sDeleteObject
 
-var StorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "StorageClass",
-}, smithy.ShapeTypeEnum, 1)
-var StorageClass_TEMPORAL *smithy.Schema
-
-var _StringPrimitive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "StringPrimitive",
-}, smithy.ShapeTypeString, 0)
+var DescribeObject = &sDescribeObject
 
-var _TimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "TimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
+var GetObject = &sGetObject
 
-var UploadAvailability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "UploadAvailability",
-}, smithy.ShapeTypeEnum, 2)
-var UploadAvailability_STANDARD *smithy.Schema
+var ListItems = &sListItems
 
-var UploadAvailability_STREAMING *smithy.Schema
+var PutObject = &sPutObject
 
-var DeleteObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "DeleteObjectRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteObjectRequest_Path *smithy.Schema
+var _MediaStoreObject_20170901 = &s_MediaStoreObject_20170901
 
-var DeleteObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "DeleteObjectResponse",
-}, smithy.ShapeTypeStructure, 0)
+var ContainerNotFoundException = &sContainerNotFoundException
+var ContainerNotFoundException_Message = &sContainerNotFoundException_Message
 
-var DescribeObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "DescribeObjectRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeObjectRequest_Path *smithy.Schema
+var _ContentRangePattern = &s_ContentRangePattern
 
-var DescribeObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "DescribeObjectResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeObjectResponse_ETag *smithy.Schema
+var _ContentType = &s_ContentType
 
-var DescribeObjectResponse_ContentType *smithy.Schema
+var _ErrorMessage = &s_ErrorMessage
 
-var DescribeObjectResponse_ContentLength *smithy.Schema
+var _ETag = &s_ETag
 
-var DescribeObjectResponse_CacheControl *smithy.Schema
+var InternalServerError = &sInternalServerError
+var InternalServerError_Message = &sInternalServerError_Message
 
-var DescribeObjectResponse_LastModified *smithy.Schema
+var Item = &sItem
+var Item_Name = &sItem_Name
+var Item_Type = &sItem_Type
+var Item_ETag = &sItem_ETag
+var Item_LastModified = &sItem_LastModified
+var Item_ContentType = &sItem_ContentType
+var Item_ContentLength = &sItem_ContentLength
 
-var GetObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "GetObjectRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetObjectRequest_Path *smithy.Schema
+var _ItemList = &s_ItemList
+var _ItemList_member = &s_ItemList_member
 
-var GetObjectRequest_Range *smithy.Schema
+var _ItemName = &s_ItemName
 
-var GetObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "GetObjectResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetObjectResponse_Body *smithy.Schema
+var ItemType = &sItemType
+var ItemType_OBJECT = &sItemType_OBJECT
+var ItemType_FOLDER = &sItemType_FOLDER
 
-var GetObjectResponse_CacheControl *smithy.Schema
+var _ListLimit = &s_ListLimit
 
-var GetObjectResponse_ContentRange *smithy.Schema
+var _ListPathNaming = &s_ListPathNaming
 
-var GetObjectResponse_ContentLength *smithy.Schema
+var _NonNegativeLong = &s_NonNegativeLong
 
-var GetObjectResponse_ContentType *smithy.Schema
+var ObjectNotFoundException = &sObjectNotFoundException
+var ObjectNotFoundException_Message = &sObjectNotFoundException_Message
 
-var GetObjectResponse_ETag *smithy.Schema
+var _PaginationToken = &s_PaginationToken
 
-var GetObjectResponse_LastModified *smithy.Schema
+var _PathNaming = &s_PathNaming
 
-var GetObjectResponse_StatusCode *smithy.Schema
+var _PayloadBlob = &s_PayloadBlob
 
-var ListItemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ListItemsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListItemsRequest_Path *smithy.Schema
+var _RangePattern = &s_RangePattern
 
-var ListItemsRequest_MaxResults *smithy.Schema
+var RequestedRangeNotSatisfiableException = &sRequestedRangeNotSatisfiableException
+var RequestedRangeNotSatisfiableException_Message = &sRequestedRangeNotSatisfiableException_Message
 
-var ListItemsRequest_NextToken *smithy.Schema
+var _SHA256Hash = &s_SHA256Hash
 
-var ListItemsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "ListItemsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListItemsResponse_Items *smithy.Schema
+var _statusCode = &s_statusCode
 
-var ListItemsResponse_NextToken *smithy.Schema
+var StorageClass = &sStorageClass
+var StorageClass_TEMPORAL = &sStorageClass_TEMPORAL
 
-var PutObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "PutObjectRequest",
-}, smithy.ShapeTypeStructure, 6)
-var PutObjectRequest_Body *smithy.Schema
+var _StringPrimitive = &s_StringPrimitive
 
-var PutObjectRequest_Path *smithy.Schema
+var _TimeStamp = &s_TimeStamp
 
-var PutObjectRequest_ContentType *smithy.Schema
+var UploadAvailability = &sUploadAvailability
+var UploadAvailability_STANDARD = &sUploadAvailability_STANDARD
+var UploadAvailability_STREAMING = &sUploadAvailability_STREAMING
 
-var PutObjectRequest_CacheControl *smithy.Schema
+var DeleteObjectRequest = &sDeleteObjectRequest
+var DeleteObjectRequest_Path = &sDeleteObjectRequest_Path
 
-var PutObjectRequest_StorageClass *smithy.Schema
+var DeleteObjectResponse = &sDeleteObjectResponse
 
-var PutObjectRequest_UploadAvailability *smithy.Schema
+var DescribeObjectRequest = &sDescribeObjectRequest
+var DescribeObjectRequest_Path = &sDescribeObjectRequest_Path
 
-var PutObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediastoredata",
-	Name:      "PutObjectResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutObjectResponse_ContentSHA256 *smithy.Schema
+var DescribeObjectResponse = &sDescribeObjectResponse
+var DescribeObjectResponse_ETag = &sDescribeObjectResponse_ETag
+var DescribeObjectResponse_ContentType = &sDescribeObjectResponse_ContentType
+var DescribeObjectResponse_ContentLength = &sDescribeObjectResponse_ContentLength
+var DescribeObjectResponse_CacheControl = &sDescribeObjectResponse_CacheControl
+var DescribeObjectResponse_LastModified = &sDescribeObjectResponse_LastModified
 
-var PutObjectResponse_ETag *smithy.Schema
+var GetObjectRequest = &sGetObjectRequest
+var GetObjectRequest_Path = &sGetObjectRequest_Path
+var GetObjectRequest_Range = &sGetObjectRequest_Range
 
-var PutObjectResponse_StorageClass *smithy.Schema
+var GetObjectResponse = &sGetObjectResponse
+var GetObjectResponse_Body = &sGetObjectResponse_Body
+var GetObjectResponse_CacheControl = &sGetObjectResponse_CacheControl
+var GetObjectResponse_ContentRange = &sGetObjectResponse_ContentRange
+var GetObjectResponse_ContentLength = &sGetObjectResponse_ContentLength
+var GetObjectResponse_ContentType = &sGetObjectResponse_ContentType
+var GetObjectResponse_ETag = &sGetObjectResponse_ETag
+var GetObjectResponse_LastModified = &sGetObjectResponse_LastModified
+var GetObjectResponse_StatusCode = &sGetObjectResponse_StatusCode
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ContainerNotFoundException_Message = ContainerNotFoundException.AddMember("Message", _ErrorMessage)
+var ListItemsRequest = &sListItemsRequest
+var ListItemsRequest_Path = &sListItemsRequest_Path
+var ListItemsRequest_MaxResults = &sListItemsRequest_MaxResults
+var ListItemsRequest_NextToken = &sListItemsRequest_NextToken
 
-	InternalServerError_Message = InternalServerError.AddMember("Message", _ErrorMessage)
+var ListItemsResponse = &sListItemsResponse
+var ListItemsResponse_Items = &sListItemsResponse_Items
+var ListItemsResponse_NextToken = &sListItemsResponse_NextToken
 
-	ItemType_OBJECT = ItemType.AddMember("OBJECT", smithyprelude.Unit)
+var PutObjectRequest = &sPutObjectRequest
+var PutObjectRequest_Body = &sPutObjectRequest_Body
+var PutObjectRequest_Path = &sPutObjectRequest_Path
+var PutObjectRequest_ContentType = &sPutObjectRequest_ContentType
+var PutObjectRequest_CacheControl = &sPutObjectRequest_CacheControl
+var PutObjectRequest_StorageClass = &sPutObjectRequest_StorageClass
+var PutObjectRequest_UploadAvailability = &sPutObjectRequest_UploadAvailability
 
-	ItemType_FOLDER = ItemType.AddMember("FOLDER", smithyprelude.Unit)
+var PutObjectResponse = &sPutObjectResponse
+var PutObjectResponse_ContentSHA256 = &sPutObjectResponse_ContentSHA256
+var PutObjectResponse_ETag = &sPutObjectResponse_ETag
+var PutObjectResponse_StorageClass = &sPutObjectResponse_StorageClass
 
-	Item_Name = Item.AddMember("Name", _ItemName)
-
-	Item_Type = Item.AddMember("Type", ItemType)
-
-	Item_ETag = Item.AddMember("ETag", _ETag)
-
-	Item_LastModified = Item.AddMember("LastModified", _TimeStamp)
-
-	Item_ContentType = Item.AddMember("ContentType", _ContentType)
-
-	Item_ContentLength = Item.AddMember("ContentLength", _NonNegativeLong)
-
-	_ItemList_member = _ItemList.AddMember("member", Item)
-
-	ObjectNotFoundException_Message = ObjectNotFoundException.AddMember("Message", _ErrorMessage)
-
-	RequestedRangeNotSatisfiableException_Message = RequestedRangeNotSatisfiableException.AddMember("Message", _ErrorMessage)
-
-	StorageClass_TEMPORAL = StorageClass.AddMember("TEMPORAL", smithyprelude.Unit)
-
-	UploadAvailability_STANDARD = UploadAvailability.AddMember("STANDARD", smithyprelude.Unit)
-
-	UploadAvailability_STREAMING = UploadAvailability.AddMember("STREAMING", smithyprelude.Unit)
-
-	DeleteObjectRequest_Path = DeleteObjectRequest.AddMember("Path", _PathNaming, &smithytraits.HTTPLabel{})
-
-	DescribeObjectRequest_Path = DescribeObjectRequest.AddMember("Path", _PathNaming, &smithytraits.HTTPLabel{})
-
-	DescribeObjectResponse_ETag = DescribeObjectResponse.AddMember("ETag", _ETag, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	DescribeObjectResponse_ContentType = DescribeObjectResponse.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	DescribeObjectResponse_ContentLength = DescribeObjectResponse.AddMember("ContentLength", _NonNegativeLong, &smithytraits.HTTPHeader{Name: "Content-Length"})
-
-	DescribeObjectResponse_CacheControl = DescribeObjectResponse.AddMember("CacheControl", _StringPrimitive, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	DescribeObjectResponse_LastModified = DescribeObjectResponse.AddMember("LastModified", _TimeStamp, &smithytraits.HTTPHeader{Name: "Last-Modified"})
-
-	GetObjectRequest_Path = GetObjectRequest.AddMember("Path", _PathNaming, &smithytraits.HTTPLabel{})
-
-	GetObjectRequest_Range = GetObjectRequest.AddMember("Range", _RangePattern, &smithytraits.HTTPHeader{Name: "Range"})
-
-	GetObjectResponse_Body = GetObjectResponse.AddMember("Body", _PayloadBlob, &smithytraits.HTTPPayload{})
-
-	GetObjectResponse_CacheControl = GetObjectResponse.AddMember("CacheControl", _StringPrimitive, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetObjectResponse_ContentRange = GetObjectResponse.AddMember("ContentRange", _ContentRangePattern, &smithytraits.HTTPHeader{Name: "Content-Range"})
-
-	GetObjectResponse_ContentLength = GetObjectResponse.AddMember("ContentLength", _NonNegativeLong, &smithytraits.HTTPHeader{Name: "Content-Length"})
-
-	GetObjectResponse_ContentType = GetObjectResponse.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetObjectResponse_ETag = GetObjectResponse.AddMember("ETag", _ETag, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetObjectResponse_LastModified = GetObjectResponse.AddMember("LastModified", _TimeStamp, &smithytraits.HTTPHeader{Name: "Last-Modified"})
-
-	GetObjectResponse_StatusCode = GetObjectResponse.AddMember("StatusCode", _statusCode, &smithytraits.HTTPResponseCode{})
-
-	ListItemsRequest_Path = ListItemsRequest.AddMember("Path", _ListPathNaming, &smithytraits.HTTPQuery{Name: "Path"})
-
-	ListItemsRequest_MaxResults = ListItemsRequest.AddMember("MaxResults", _ListLimit, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListItemsRequest_NextToken = ListItemsRequest.AddMember("NextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListItemsResponse_Items = ListItemsResponse.AddMember("Items", _ItemList)
-
-	ListItemsResponse_NextToken = ListItemsResponse.AddMember("NextToken", _PaginationToken)
-
-	PutObjectRequest_Body = PutObjectRequest.AddMember("Body", _PayloadBlob, &smithytraits.HTTPPayload{})
-
-	PutObjectRequest_Path = PutObjectRequest.AddMember("Path", _PathNaming, &smithytraits.HTTPLabel{})
-
-	PutObjectRequest_ContentType = PutObjectRequest.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	PutObjectRequest_CacheControl = PutObjectRequest.AddMember("CacheControl", _StringPrimitive, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	PutObjectRequest_StorageClass = PutObjectRequest.AddMember("StorageClass", StorageClass, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"})
-
-	PutObjectRequest_UploadAvailability = PutObjectRequest.AddMember("UploadAvailability", UploadAvailability, &smithytraits.HTTPHeader{Name: "x-amz-upload-availability"})
-
-	PutObjectResponse_ContentSHA256 = PutObjectResponse.AddMember("ContentSHA256", _SHA256Hash)
-
-	PutObjectResponse_ETag = PutObjectResponse.AddMember("ETag", _ETag)
-
-	PutObjectResponse_StorageClass = PutObjectResponse.AddMember("StorageClass", StorageClass)
-
-}
+var MediaStoreObject_20170901 = &smithy.ServiceSchema{Schema: &s_MediaStoreObject_20170901, Version: "2017-09-01"}

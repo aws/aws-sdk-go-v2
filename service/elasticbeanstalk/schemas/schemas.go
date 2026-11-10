@@ -4,4371 +4,4208 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AbortEnvironmentUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AbortEnvironmentUpdate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ApplyEnvironmentManagedAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplyEnvironmentManagedAction",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateEnvironmentOperationsRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AssociateEnvironmentOperationsRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var CheckDNSAvailability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CheckDNSAvailability",
-}, smithy.ShapeTypeOperation, 0)
-
-var ComposeEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ComposeEnvironments",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateApplicationVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateApplicationVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePlatformVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreatePlatformVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateStorageLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateStorageLocation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteApplicationVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteApplicationVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEnvironmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteEnvironmentConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePlatformVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeletePlatformVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAccountAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeAccountAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeApplications",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeApplicationVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeApplicationVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConfigurationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeConfigurationOptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConfigurationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeConfigurationSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEnvironmentHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentHealth",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEnvironmentManagedActionHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentManagedActionHistory",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEnvironmentManagedActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentManagedActions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEnvironmentResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironments",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeInstancesHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeInstancesHealth",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePlatformVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribePlatformVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateEnvironmentOperationsRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DisassociateEnvironmentOperationsRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAvailableSolutionStacks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListAvailableSolutionStacks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPlatformBranches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListPlatformBranches",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPlatformVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListPlatformVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var RebuildEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RebuildEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var RequestEnvironmentInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RequestEnvironmentInfo",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestartAppServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RestartAppServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var RetrieveEnvironmentInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RetrieveEnvironmentInfo",
-}, smithy.ShapeTypeOperation, 0)
-
-var SwapEnvironmentCNAMEs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SwapEnvironmentCNAMEs",
-}, smithy.ShapeTypeOperation, 0)
-
-var TerminateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TerminateEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateApplicationResourceLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateApplicationResourceLifecycle",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateApplicationVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateApplicationVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ValidateConfigurationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ValidateConfigurationSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSElasticBeanstalkService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AWSElasticBeanstalkService",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"})
-
-var AWSElasticBeanstalkService = smithy.NewServiceSchema(_AWSElasticBeanstalkService, "2010-12-01")
-
-var _AbortableOperationInProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AbortableOperationInProgress",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ActionHistoryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ActionHistoryStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ActionHistoryStatus_Completed *smithy.Schema
-
-var ActionHistoryStatus_Failed *smithy.Schema
-
-var ActionHistoryStatus_Unknown *smithy.Schema
-
-var ActionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ActionStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ActionStatus_Scheduled *smithy.Schema
-
-var ActionStatus_Pending *smithy.Schema
-
-var ActionStatus_Running *smithy.Schema
-
-var ActionStatus_Unknown *smithy.Schema
-
-var ActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ActionType",
-}, smithy.ShapeTypeEnum, 3)
-var ActionType_InstanceRefresh *smithy.Schema
-
-var ActionType_PlatformUpdate *smithy.Schema
-
-var ActionType_Unknown *smithy.Schema
-
-var AmiArchitecture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AmiArchitecture",
-}, smithy.ShapeTypeEnum, 2)
-var AmiArchitecture_X86_64 *smithy.Schema
-
-var AmiArchitecture_ARM64 *smithy.Schema
-
-var _ApplicationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationArn",
-}, smithy.ShapeTypeString, 0)
-
-var ApplicationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationDescription",
-}, smithy.ShapeTypeStructure, 8)
-var ApplicationDescription_ApplicationArn *smithy.Schema
-
-var ApplicationDescription_ApplicationName *smithy.Schema
-
-var ApplicationDescription_Description *smithy.Schema
-
-var ApplicationDescription_DateCreated *smithy.Schema
-
-var ApplicationDescription_DateUpdated *smithy.Schema
-
-var ApplicationDescription_Versions *smithy.Schema
-
-var ApplicationDescription_ConfigurationTemplates *smithy.Schema
-
-var ApplicationDescription_ResourceLifecycleConfig *smithy.Schema
-
-var _ApplicationDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationDescriptionList_member *smithy.Schema
-
-var ApplicationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationMetrics",
-}, smithy.ShapeTypeStructure, 4)
-var ApplicationMetrics_Duration *smithy.Schema
-
-var ApplicationMetrics_RequestCount *smithy.Schema
-
-var ApplicationMetrics_StatusCodes *smithy.Schema
-
-var ApplicationMetrics_Latency *smithy.Schema
-
-var _ApplicationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationName",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationNamesList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationNamesList_member *smithy.Schema
-
-var ApplicationResourceLifecycleConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationResourceLifecycleConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationResourceLifecycleConfig_ServiceRole *smithy.Schema
-
-var ApplicationResourceLifecycleConfig_VersionLifecycleConfig *smithy.Schema
-
-var _ApplicationVersionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionArn",
-}, smithy.ShapeTypeString, 0)
-
-var ApplicationVersionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionDescription",
-}, smithy.ShapeTypeStructure, 13)
-var ApplicationVersionDescription_ApplicationVersionArn *smithy.Schema
-
-var ApplicationVersionDescription_ApplicationName *smithy.Schema
-
-var ApplicationVersionDescription_Description *smithy.Schema
-
-var ApplicationVersionDescription_VersionLabel *smithy.Schema
-
-var ApplicationVersionDescription_SourceBuildInformation *smithy.Schema
-
-var ApplicationVersionDescription_BuildArn *smithy.Schema
-
-var ApplicationVersionDescription_SourceBundle *smithy.Schema
-
-var ApplicationVersionDescription_ImageSource *smithy.Schema
-
-var ApplicationVersionDescription_ImageBuildConfiguration *smithy.Schema
-
-var ApplicationVersionDescription_Process *smithy.Schema
-
-var ApplicationVersionDescription_DateCreated *smithy.Schema
-
-var ApplicationVersionDescription_DateUpdated *smithy.Schema
-
-var ApplicationVersionDescription_Status *smithy.Schema
-
-var _ApplicationVersionDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationVersionDescriptionList_member *smithy.Schema
-
-var ApplicationVersionLifecycleConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionLifecycleConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationVersionLifecycleConfig_MaxCountRule *smithy.Schema
-
-var ApplicationVersionLifecycleConfig_MaxAgeRule *smithy.Schema
-
-var _ApplicationVersionProccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionProccess",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ApplicationVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ApplicationVersionStatus_Processed *smithy.Schema
-
-var ApplicationVersionStatus_Unprocessed *smithy.Schema
-
-var ApplicationVersionStatus_Failed *smithy.Schema
-
-var ApplicationVersionStatus_Processing *smithy.Schema
-
-var ApplicationVersionStatus_Building *smithy.Schema
-
-var ArchitectureType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ArchitectureType",
-}, smithy.ShapeTypeEnum, 2)
-var ArchitectureType_amd64 *smithy.Schema
-
-var ArchitectureType_arm64 *smithy.Schema
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _AutoCreateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AutoCreateApplication",
-}, smithy.ShapeTypeBoolean, 0)
-
-var AutoScalingGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AutoScalingGroup",
-}, smithy.ShapeTypeStructure, 1)
-var AutoScalingGroup_Name *smithy.Schema
-
-var _AutoScalingGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AutoScalingGroupList",
-}, smithy.ShapeTypeList, 1)
-var _AutoScalingGroupList_member *smithy.Schema
-
-var _AvailableSolutionStackDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AvailableSolutionStackDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _AvailableSolutionStackDetailsList_member *smithy.Schema
-
-var _AvailableSolutionStackNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AvailableSolutionStackNamesList",
-}, smithy.ShapeTypeList, 1)
-var _AvailableSolutionStackNamesList_member *smithy.Schema
-
-var _BoxedBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "BoxedBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BoxedInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "BoxedInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var _BranchName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "BranchName",
-}, smithy.ShapeTypeString, 0)
-
-var _BranchOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "BranchOrder",
-}, smithy.ShapeTypeInteger, 0)
-
-var BuildConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "BuildConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var BuildConfiguration_ArtifactName *smithy.Schema
-
-var BuildConfiguration_CodeBuildServiceRole *smithy.Schema
-
-var BuildConfiguration_ComputeType *smithy.Schema
-
-var BuildConfiguration_Image *smithy.Schema
-
-var BuildConfiguration_TimeoutInMinutes *smithy.Schema
-
-var Builder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Builder",
-}, smithy.ShapeTypeStructure, 1)
-var Builder_ARN *smithy.Schema
-
-var _Cause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Cause",
-}, smithy.ShapeTypeString, 0)
-
-var _Causes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Causes",
-}, smithy.ShapeTypeList, 1)
-var _Causes_member *smithy.Schema
-
-var Cluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Cluster",
-}, smithy.ShapeTypeStructure, 1)
-var Cluster_ClusterArn *smithy.Schema
-
-var _CnameAvailability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CnameAvailability",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CodeBuildNotInServiceRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CodeBuildNotInServiceRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CodeBuildNotInServiceRegionException",
-		StatusCode: 400})
-var CodeBuildNotInServiceRegionException_message *smithy.Schema
-
-var ComputeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ComputeType",
-}, smithy.ShapeTypeEnum, 3)
-var ComputeType_BUILD_GENERAL1_SMALL *smithy.Schema
-
-var ComputeType_BUILD_GENERAL1_MEDIUM *smithy.Schema
-
-var ComputeType_BUILD_GENERAL1_LARGE *smithy.Schema
-
-var ConfigurationDeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationDeploymentStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ConfigurationDeploymentStatus_deployed *smithy.Schema
-
-var ConfigurationDeploymentStatus_pending *smithy.Schema
-
-var ConfigurationDeploymentStatus_failed *smithy.Schema
-
-var _ConfigurationOptionDefaultValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionDefaultValue",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigurationOptionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionDescription",
-}, smithy.ShapeTypeStructure, 11)
-var ConfigurationOptionDescription_Namespace *smithy.Schema
-
-var ConfigurationOptionDescription_Name *smithy.Schema
-
-var ConfigurationOptionDescription_DefaultValue *smithy.Schema
-
-var ConfigurationOptionDescription_ChangeSeverity *smithy.Schema
-
-var ConfigurationOptionDescription_UserDefined *smithy.Schema
-
-var ConfigurationOptionDescription_ValueType *smithy.Schema
-
-var ConfigurationOptionDescription_ValueOptions *smithy.Schema
-
-var ConfigurationOptionDescription_MinValue *smithy.Schema
-
-var ConfigurationOptionDescription_MaxValue *smithy.Schema
-
-var ConfigurationOptionDescription_MaxLength *smithy.Schema
-
-var ConfigurationOptionDescription_Regex *smithy.Schema
-
-var _ConfigurationOptionDescriptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionDescriptionsList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationOptionDescriptionsList_member *smithy.Schema
-
-var _ConfigurationOptionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionName",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationOptionPossibleValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionPossibleValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationOptionPossibleValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionPossibleValues",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationOptionPossibleValues_member *smithy.Schema
-
-var ConfigurationOptionSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionSetting",
-}, smithy.ShapeTypeStructure, 4)
-var ConfigurationOptionSetting_ResourceName *smithy.Schema
-
-var ConfigurationOptionSetting_Namespace *smithy.Schema
-
-var ConfigurationOptionSetting_OptionName *smithy.Schema
-
-var ConfigurationOptionSetting_Value *smithy.Schema
-
-var _ConfigurationOptionSettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionSettingsList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationOptionSettingsList_member *smithy.Schema
-
-var _ConfigurationOptionSeverity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionSeverity",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationOptionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionValue",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigurationOptionValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionValueType",
-}, smithy.ShapeTypeEnum, 2)
-var ConfigurationOptionValueType_Scalar *smithy.Schema
-
-var ConfigurationOptionValueType_List *smithy.Schema
-
-var ConfigurationSettingsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationSettingsDescription",
-}, smithy.ShapeTypeStructure, 10)
-var ConfigurationSettingsDescription_SolutionStackName *smithy.Schema
-
-var ConfigurationSettingsDescription_PlatformArn *smithy.Schema
-
-var ConfigurationSettingsDescription_ApplicationName *smithy.Schema
-
-var ConfigurationSettingsDescription_TemplateName *smithy.Schema
-
-var ConfigurationSettingsDescription_Description *smithy.Schema
-
-var ConfigurationSettingsDescription_EnvironmentName *smithy.Schema
-
-var ConfigurationSettingsDescription_DeploymentStatus *smithy.Schema
-
-var ConfigurationSettingsDescription_DateCreated *smithy.Schema
-
-var ConfigurationSettingsDescription_DateUpdated *smithy.Schema
-
-var ConfigurationSettingsDescription_OptionSettings *smithy.Schema
-
-var _ConfigurationSettingsDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationSettingsDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationSettingsDescriptionList_member *smithy.Schema
-
-var _ConfigurationTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationTemplateNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationTemplateNamesList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationTemplateNamesList_member *smithy.Schema
-
-var CPUUtilization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CPUUtilization",
-}, smithy.ShapeTypeStructure, 8)
-var CPUUtilization_User *smithy.Schema
-
-var CPUUtilization_Nice *smithy.Schema
-
-var CPUUtilization_System *smithy.Schema
-
-var CPUUtilization_Idle *smithy.Schema
-
-var CPUUtilization_IOWait *smithy.Schema
-
-var CPUUtilization_IRQ *smithy.Schema
-
-var CPUUtilization_SoftIRQ *smithy.Schema
-
-var CPUUtilization_Privileged *smithy.Schema
-
-var _CreationDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreationDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var CustomAmi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CustomAmi",
-}, smithy.ShapeTypeStructure, 2)
-var CustomAmi_VirtualizationType *smithy.Schema
-
-var CustomAmi_ImageId *smithy.Schema
-
-var _CustomAmiList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CustomAmiList",
-}, smithy.ShapeTypeList, 1)
-var _CustomAmiList_member *smithy.Schema
-
-var DefaultAmi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DefaultAmi",
-}, smithy.ShapeTypeStructure, 2)
-var DefaultAmi_Architecture *smithy.Schema
-
-var DefaultAmi_ImageId *smithy.Schema
-
-var _DefaultAmiList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DefaultAmiList",
-}, smithy.ShapeTypeList, 1)
-var _DefaultAmiList_member *smithy.Schema
-
-var _DeleteSourceBundle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteSourceBundle",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Deployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Deployment",
-}, smithy.ShapeTypeStructure, 4)
-var Deployment_VersionLabel *smithy.Schema
-
-var Deployment_DeploymentId *smithy.Schema
-
-var Deployment_Status *smithy.Schema
-
-var Deployment_DeploymentTime *smithy.Schema
-
-var _DeploymentTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeploymentTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DNSCname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DNSCname",
-}, smithy.ShapeTypeString, 0)
-
-var _DNSCnamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DNSCnamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _Ec2InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Ec2InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var ElasticBeanstalkServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ElasticBeanstalkServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ElasticBeanstalkServiceException_message *smithy.Schema
-
-var _EndpointURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EndpointURL",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentArn",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentDescription",
-}, smithy.ShapeTypeStructure, 21)
-var EnvironmentDescription_EnvironmentName *smithy.Schema
-
-var EnvironmentDescription_EnvironmentId *smithy.Schema
-
-var EnvironmentDescription_ApplicationName *smithy.Schema
-
-var EnvironmentDescription_VersionLabel *smithy.Schema
-
-var EnvironmentDescription_SolutionStackName *smithy.Schema
-
-var EnvironmentDescription_PlatformArn *smithy.Schema
-
-var EnvironmentDescription_TemplateName *smithy.Schema
-
-var EnvironmentDescription_Description *smithy.Schema
-
-var EnvironmentDescription_EndpointURL *smithy.Schema
-
-var EnvironmentDescription_CNAME *smithy.Schema
-
-var EnvironmentDescription_DateCreated *smithy.Schema
-
-var EnvironmentDescription_DateUpdated *smithy.Schema
-
-var EnvironmentDescription_Status *smithy.Schema
-
-var EnvironmentDescription_AbortableOperationInProgress *smithy.Schema
-
-var EnvironmentDescription_Health *smithy.Schema
-
-var EnvironmentDescription_HealthStatus *smithy.Schema
-
-var EnvironmentDescription_Resources *smithy.Schema
-
-var EnvironmentDescription_Tier *smithy.Schema
-
-var EnvironmentDescription_EnvironmentLinks *smithy.Schema
-
-var EnvironmentDescription_EnvironmentArn *smithy.Schema
-
-var EnvironmentDescription_OperationsRole *smithy.Schema
-
-var _EnvironmentDescriptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentDescriptionsList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentDescriptionsList_member *smithy.Schema
-
-var EnvironmentHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentHealth",
-}, smithy.ShapeTypeEnum, 4)
-var EnvironmentHealth_Green *smithy.Schema
-
-var EnvironmentHealth_Yellow *smithy.Schema
-
-var EnvironmentHealth_Red *smithy.Schema
-
-var EnvironmentHealth_Grey *smithy.Schema
-
-var EnvironmentHealthAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentHealthAttribute",
-}, smithy.ShapeTypeEnum, 8)
-var EnvironmentHealthAttribute_Status *smithy.Schema
-
-var EnvironmentHealthAttribute_Color *smithy.Schema
-
-var EnvironmentHealthAttribute_Causes *smithy.Schema
-
-var EnvironmentHealthAttribute_ApplicationMetrics *smithy.Schema
-
-var EnvironmentHealthAttribute_InstancesHealth *smithy.Schema
-
-var EnvironmentHealthAttribute_All *smithy.Schema
-
-var EnvironmentHealthAttribute_HealthStatus *smithy.Schema
-
-var EnvironmentHealthAttribute_RefreshedAt *smithy.Schema
-
-var _EnvironmentHealthAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentHealthAttributes",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentHealthAttributes_member *smithy.Schema
-
-var EnvironmentHealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentHealthStatus",
-}, smithy.ShapeTypeEnum, 9)
-var EnvironmentHealthStatus_NoData *smithy.Schema
-
-var EnvironmentHealthStatus_Unknown *smithy.Schema
-
-var EnvironmentHealthStatus_Pending *smithy.Schema
-
-var EnvironmentHealthStatus_Ok *smithy.Schema
-
-var EnvironmentHealthStatus_Info *smithy.Schema
-
-var EnvironmentHealthStatus_Warning *smithy.Schema
-
-var EnvironmentHealthStatus_Degraded *smithy.Schema
-
-var EnvironmentHealthStatus_Severe *smithy.Schema
-
-var EnvironmentHealthStatus_Suspended *smithy.Schema
-
-var _EnvironmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentIdList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentIdList_member *smithy.Schema
-
-var EnvironmentInfoDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentInfoDescription",
-}, smithy.ShapeTypeStructure, 4)
-var EnvironmentInfoDescription_InfoType *smithy.Schema
-
-var EnvironmentInfoDescription_Ec2InstanceId *smithy.Schema
-
-var EnvironmentInfoDescription_SampleTimestamp *smithy.Schema
-
-var EnvironmentInfoDescription_Message *smithy.Schema
-
-var _EnvironmentInfoDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentInfoDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentInfoDescriptionList_member *smithy.Schema
-
-var EnvironmentInfoType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentInfoType",
-}, smithy.ShapeTypeEnum, 3)
-var EnvironmentInfoType_tail *smithy.Schema
-
-var EnvironmentInfoType_bundle *smithy.Schema
-
-var EnvironmentInfoType_analyze *smithy.Schema
-
-var EnvironmentLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentLink",
-}, smithy.ShapeTypeStructure, 2)
-var EnvironmentLink_LinkName *smithy.Schema
-
-var EnvironmentLink_EnvironmentName *smithy.Schema
-
-var _EnvironmentLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentLinks",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentLinks_member *smithy.Schema
-
-var _EnvironmentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentName",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentNamesList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentNamesList_member *smithy.Schema
-
-var EnvironmentResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentResourceDescription",
-}, smithy.ShapeTypeStructure, 9)
-var EnvironmentResourceDescription_EnvironmentName *smithy.Schema
-
-var EnvironmentResourceDescription_AutoScalingGroups *smithy.Schema
-
-var EnvironmentResourceDescription_Cluster *smithy.Schema
-
-var EnvironmentResourceDescription_Instances *smithy.Schema
-
-var EnvironmentResourceDescription_LaunchConfigurations *smithy.Schema
-
-var EnvironmentResourceDescription_LaunchTemplates *smithy.Schema
-
-var EnvironmentResourceDescription_LoadBalancers *smithy.Schema
-
-var EnvironmentResourceDescription_Triggers *smithy.Schema
-
-var EnvironmentResourceDescription_Queues *smithy.Schema
-
-var EnvironmentResourcesDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentResourcesDescription",
-}, smithy.ShapeTypeStructure, 1)
-var EnvironmentResourcesDescription_LoadBalancer *smithy.Schema
-
-var EnvironmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentStatus",
-}, smithy.ShapeTypeEnum, 8)
-var EnvironmentStatus_Aborting *smithy.Schema
-
-var EnvironmentStatus_Launching *smithy.Schema
-
-var EnvironmentStatus_Updating *smithy.Schema
-
-var EnvironmentStatus_LinkingFrom *smithy.Schema
-
-var EnvironmentStatus_LinkingTo *smithy.Schema
-
-var EnvironmentStatus_Ready *smithy.Schema
-
-var EnvironmentStatus_Terminating *smithy.Schema
-
-var EnvironmentStatus_Terminated *smithy.Schema
-
-var EnvironmentTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentTier",
-}, smithy.ShapeTypeStructure, 3)
-var EnvironmentTier_Name *smithy.Schema
-
-var EnvironmentTier_Type *smithy.Schema
-
-var EnvironmentTier_Version *smithy.Schema
-
-var _EventDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EventDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var EventDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EventDescription",
-}, smithy.ShapeTypeStructure, 9)
-var EventDescription_EventDate *smithy.Schema
-
-var EventDescription_Message *smithy.Schema
-
-var EventDescription_ApplicationName *smithy.Schema
-
-var EventDescription_VersionLabel *smithy.Schema
-
-var EventDescription_TemplateName *smithy.Schema
-
-var EventDescription_EnvironmentName *smithy.Schema
-
-var EventDescription_PlatformArn *smithy.Schema
-
-var EventDescription_RequestId *smithy.Schema
-
-var EventDescription_Severity *smithy.Schema
-
-var _EventDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EventDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _EventDescriptionList_member *smithy.Schema
-
-var _EventMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EventMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EventSeverity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EventSeverity",
-}, smithy.ShapeTypeEnum, 6)
-var EventSeverity_TRACE *smithy.Schema
-
-var EventSeverity_DEBUG *smithy.Schema
-
-var EventSeverity_INFO *smithy.Schema
-
-var EventSeverity_WARN *smithy.Schema
-
-var EventSeverity_ERROR *smithy.Schema
-
-var EventSeverity_FATAL *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FailureType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "FailureType",
-}, smithy.ShapeTypeEnum, 7)
-var FailureType_UpdateCancelled *smithy.Schema
-
-var FailureType_CancellationFailed *smithy.Schema
-
-var FailureType_RollbackFailed *smithy.Schema
-
-var FailureType_RollbackSuccessful *smithy.Schema
-
-var FailureType_InternalFailure *smithy.Schema
-
-var FailureType_InvalidEnvironmentState *smithy.Schema
-
-var FailureType_PermissionsError *smithy.Schema
-
-var _FileTypeExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "FileTypeExtension",
-}, smithy.ShapeTypeString, 0)
-
-var _ForceTerminate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ForceTerminate",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _GroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "GroupName",
-}, smithy.ShapeTypeString, 0)
-
-var ImageBuildConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ImageBuildConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var ImageBuildConfiguration_Type *smithy.Schema
-
-var ImageBuildConfiguration_DockerfileLocation *smithy.Schema
-
-var ImageBuildConfiguration_Buildpack *smithy.Schema
-
-var ImageBuildConfiguration_Architecture *smithy.Schema
-
-var ImageBuildConfiguration_CodeBuildServiceRole *smithy.Schema
-
-var ImageBuildConfiguration_ComputeType *smithy.Schema
-
-var ImageBuildConfiguration_TimeoutInMinutes *smithy.Schema
-
-var ImageBuildType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ImageBuildType",
-}, smithy.ShapeTypeEnum, 2)
-var ImageBuildType_docker *smithy.Schema
-
-var ImageBuildType_buildpack *smithy.Schema
-
-var ImageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ImageConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ImageConfiguration_Source *smithy.Schema
-
-var ImageConfiguration_Build *smithy.Schema
-
-var _ImageId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ImageId",
-}, smithy.ShapeTypeString, 0)
-
-var ImageSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ImageSource",
-}, smithy.ShapeTypeStructure, 1)
-var ImageSource_Uri *smithy.Schema
-
-var _IncludeDeleted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "IncludeDeleted",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _IncludeDeletedBackTo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "IncludeDeletedBackTo",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Instance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Instance",
-}, smithy.ShapeTypeStructure, 1)
-var Instance_Id *smithy.Schema
-
-var _InstanceHealthList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InstanceHealthList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceHealthList_member *smithy.Schema
-
-var InstanceHealthSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InstanceHealthSummary",
-}, smithy.ShapeTypeStructure, 8)
-var InstanceHealthSummary_NoData *smithy.Schema
-
-var InstanceHealthSummary_Unknown *smithy.Schema
-
-var InstanceHealthSummary_Pending *smithy.Schema
-
-var InstanceHealthSummary_Ok *smithy.Schema
-
-var InstanceHealthSummary_Info *smithy.Schema
-
-var InstanceHealthSummary_Warning *smithy.Schema
-
-var InstanceHealthSummary_Degraded *smithy.Schema
-
-var InstanceHealthSummary_Severe *smithy.Schema
-
-var _InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _InstanceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InstanceList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceList_member *smithy.Schema
-
-var InstancesHealthAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InstancesHealthAttribute",
-}, smithy.ShapeTypeEnum, 11)
-var InstancesHealthAttribute_HealthStatus *smithy.Schema
-
-var InstancesHealthAttribute_Color *smithy.Schema
-
-var InstancesHealthAttribute_Causes *smithy.Schema
-
-var InstancesHealthAttribute_ApplicationMetrics *smithy.Schema
-
-var InstancesHealthAttribute_RefreshedAt *smithy.Schema
-
-var InstancesHealthAttribute_LaunchedAt *smithy.Schema
-
-var InstancesHealthAttribute_System *smithy.Schema
-
-var InstancesHealthAttribute_Deployment *smithy.Schema
-
-var InstancesHealthAttribute_AvailabilityZone *smithy.Schema
-
-var InstancesHealthAttribute_InstanceType *smithy.Schema
-
-var InstancesHealthAttribute_All *smithy.Schema
-
-var _InstancesHealthAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InstancesHealthAttributes",
-}, smithy.ShapeTypeList, 1)
-var _InstancesHealthAttributes_member *smithy.Schema
-
-var InsufficientPrivilegesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InsufficientPrivilegesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientPrivilegesException",
-		StatusCode: 403})
-var InsufficientPrivilegesException_message *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidRequestException",
-		StatusCode: 400})
-var InvalidRequestException_message *smithy.Schema
-
-var Latency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Latency",
-}, smithy.ShapeTypeStructure, 8)
-var Latency_P999 *smithy.Schema
-
-var Latency_P99 *smithy.Schema
-
-var Latency_P95 *smithy.Schema
-
-var Latency_P90 *smithy.Schema
-
-var Latency_P85 *smithy.Schema
-
-var Latency_P75 *smithy.Schema
-
-var Latency_P50 *smithy.Schema
-
-var Latency_P10 *smithy.Schema
-
-var LaunchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LaunchConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LaunchConfiguration_Name *smithy.Schema
-
-var _LaunchConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LaunchConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _LaunchConfigurationList_member *smithy.Schema
-
-var _LaunchedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LaunchedAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LaunchTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LaunchTemplate",
-}, smithy.ShapeTypeStructure, 1)
-var LaunchTemplate_Id *smithy.Schema
-
-var _LaunchTemplateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LaunchTemplateList",
-}, smithy.ShapeTypeList, 1)
-var _LaunchTemplateList_member *smithy.Schema
-
-var Listener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Listener",
-}, smithy.ShapeTypeStructure, 2)
-var Listener_Protocol *smithy.Schema
-
-var Listener_Port *smithy.Schema
-
-var _LoadAverage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LoadAverage",
-}, smithy.ShapeTypeList, 1)
-var _LoadAverage_member *smithy.Schema
-
-var _LoadAverageValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LoadAverageValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var LoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LoadBalancer",
-}, smithy.ShapeTypeStructure, 1)
-var LoadBalancer_Name *smithy.Schema
-
-var LoadBalancerDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LoadBalancerDescription",
-}, smithy.ShapeTypeStructure, 3)
-var LoadBalancerDescription_LoadBalancerName *smithy.Schema
-
-var LoadBalancerDescription_Domain *smithy.Schema
-
-var LoadBalancerDescription_Listeners *smithy.Schema
-
-var _LoadBalancerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LoadBalancerList",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerList_member *smithy.Schema
-
-var _LoadBalancerListenersDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "LoadBalancerListenersDescription",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerListenersDescription_member *smithy.Schema
-
-var _Maintainer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Maintainer",
-}, smithy.ShapeTypeString, 0)
-
-var ManagedAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ManagedAction",
-}, smithy.ShapeTypeStructure, 5)
-var ManagedAction_ActionId *smithy.Schema
-
-var ManagedAction_ActionDescription *smithy.Schema
-
-var ManagedAction_ActionType *smithy.Schema
-
-var ManagedAction_Status *smithy.Schema
-
-var ManagedAction_WindowStartTime *smithy.Schema
-
-var ManagedActionHistoryItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ManagedActionHistoryItem",
-}, smithy.ShapeTypeStructure, 8)
-var ManagedActionHistoryItem_ActionId *smithy.Schema
-
-var ManagedActionHistoryItem_ActionType *smithy.Schema
-
-var ManagedActionHistoryItem_ActionDescription *smithy.Schema
-
-var ManagedActionHistoryItem_FailureType *smithy.Schema
-
-var ManagedActionHistoryItem_Status *smithy.Schema
-
-var ManagedActionHistoryItem_FailureDescription *smithy.Schema
-
-var ManagedActionHistoryItem_ExecutedTime *smithy.Schema
-
-var ManagedActionHistoryItem_FinishedTime *smithy.Schema
-
-var _ManagedActionHistoryItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ManagedActionHistoryItems",
-}, smithy.ShapeTypeList, 1)
-var _ManagedActionHistoryItems_member *smithy.Schema
-
-var _ManagedActionHistoryMaxItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ManagedActionHistoryMaxItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var ManagedActionInvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ManagedActionInvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ManagedActionInvalidStateException",
-		StatusCode: 400})
-var ManagedActionInvalidStateException_message *smithy.Schema
-
-var _ManagedActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ManagedActions",
-}, smithy.ShapeTypeList, 1)
-var _ManagedActions_member *smithy.Schema
-
-var MaxAgeRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "MaxAgeRule",
-}, smithy.ShapeTypeStructure, 3)
-var MaxAgeRule_Enabled *smithy.Schema
-
-var MaxAgeRule_MaxAgeInDays *smithy.Schema
-
-var MaxAgeRule_DeleteSourceFromS3 *smithy.Schema
-
-var MaxCountRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "MaxCountRule",
-}, smithy.ShapeTypeStructure, 3)
-var MaxCountRule_Enabled *smithy.Schema
-
-var MaxCountRule_MaxCount *smithy.Schema
-
-var MaxCountRule_DeleteSourceFromS3 *smithy.Schema
-
-var _MaxRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "MaxRecords",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "NullableDouble",
-}, smithy.ShapeTypeDouble, 0)
-
-var _NullableInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "NullableInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NullableLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "NullableLong",
-}, smithy.ShapeTypeLong, 0)
-
-var _OperatingSystemName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OperatingSystemName",
-}, smithy.ShapeTypeString, 0)
-
-var _OperatingSystemVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OperatingSystemVersion",
-}, smithy.ShapeTypeString, 0)
-
-var OperationInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OperationInProgressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "OperationInProgressFailure",
-		StatusCode: 400})
-var OperationInProgressException_message *smithy.Schema
-
-var _OperationsRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OperationsRole",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OptionNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionRestrictionMaxLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OptionRestrictionMaxLength",
-}, smithy.ShapeTypeInteger, 0)
-
-var _OptionRestrictionMaxValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OptionRestrictionMaxValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _OptionRestrictionMinValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OptionRestrictionMinValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var OptionRestrictionRegex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OptionRestrictionRegex",
-}, smithy.ShapeTypeStructure, 2)
-var OptionRestrictionRegex_Pattern *smithy.Schema
-
-var OptionRestrictionRegex_Label *smithy.Schema
-
-var OptionSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OptionSpecification",
-}, smithy.ShapeTypeStructure, 3)
-var OptionSpecification_ResourceName *smithy.Schema
-
-var OptionSpecification_Namespace *smithy.Schema
-
-var OptionSpecification_OptionName *smithy.Schema
-
-var _OptionsSpecifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "OptionsSpecifierList",
-}, smithy.ShapeTypeList, 1)
-var _OptionsSpecifierList_member *smithy.Schema
-
-var _PlatformArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformBranchLifecycleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformBranchLifecycleState",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformBranchMaxRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformBranchMaxRecords",
-}, smithy.ShapeTypeInteger, 0)
-
-var PlatformBranchSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformBranchSummary",
-}, smithy.ShapeTypeStructure, 5)
-var PlatformBranchSummary_PlatformName *smithy.Schema
-
-var PlatformBranchSummary_BranchName *smithy.Schema
-
-var PlatformBranchSummary_LifecycleState *smithy.Schema
-
-var PlatformBranchSummary_BranchOrder *smithy.Schema
-
-var PlatformBranchSummary_SupportedTierList *smithy.Schema
-
-var _PlatformBranchSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformBranchSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PlatformBranchSummaryList_member *smithy.Schema
-
-var _PlatformCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformCategory",
-}, smithy.ShapeTypeString, 0)
-
-var PlatformDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformDescription",
-}, smithy.ShapeTypeStructure, 22)
-var PlatformDescription_PlatformArn *smithy.Schema
-
-var PlatformDescription_PlatformOwner *smithy.Schema
-
-var PlatformDescription_PlatformName *smithy.Schema
-
-var PlatformDescription_PlatformVersion *smithy.Schema
-
-var PlatformDescription_SolutionStackName *smithy.Schema
-
-var PlatformDescription_PlatformStatus *smithy.Schema
-
-var PlatformDescription_DateCreated *smithy.Schema
-
-var PlatformDescription_DateUpdated *smithy.Schema
-
-var PlatformDescription_PlatformCategory *smithy.Schema
-
-var PlatformDescription_Description *smithy.Schema
-
-var PlatformDescription_Maintainer *smithy.Schema
-
-var PlatformDescription_OperatingSystemName *smithy.Schema
-
-var PlatformDescription_OperatingSystemVersion *smithy.Schema
-
-var PlatformDescription_ProgrammingLanguages *smithy.Schema
-
-var PlatformDescription_Frameworks *smithy.Schema
-
-var PlatformDescription_CustomAmiList *smithy.Schema
-
-var PlatformDescription_DefaultAmiList *smithy.Schema
-
-var PlatformDescription_SupportedTierList *smithy.Schema
-
-var PlatformDescription_SupportedAddonList *smithy.Schema
-
-var PlatformDescription_PlatformLifecycleState *smithy.Schema
-
-var PlatformDescription_PlatformBranchName *smithy.Schema
-
-var PlatformDescription_PlatformBranchLifecycleState *smithy.Schema
-
-var PlatformFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFilter",
-}, smithy.ShapeTypeStructure, 3)
-var PlatformFilter_Type *smithy.Schema
-
-var PlatformFilter_Operator *smithy.Schema
-
-var PlatformFilter_Values *smithy.Schema
-
-var _PlatformFilterOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFilterOperator",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFilters",
-}, smithy.ShapeTypeList, 1)
-var _PlatformFilters_member *smithy.Schema
-
-var _PlatformFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFilterType",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _PlatformFilterValueList_member *smithy.Schema
-
-var PlatformFramework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFramework",
-}, smithy.ShapeTypeStructure, 2)
-var PlatformFramework_Name *smithy.Schema
-
-var PlatformFramework_Version *smithy.Schema
-
-var _PlatformFrameworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformFrameworks",
-}, smithy.ShapeTypeList, 1)
-var _PlatformFrameworks_member *smithy.Schema
-
-var _PlatformLifecycleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformLifecycleState",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformMaxRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformMaxRecords",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PlatformName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformName",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformOwner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformOwner",
-}, smithy.ShapeTypeString, 0)
-
-var PlatformProgrammingLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformProgrammingLanguage",
-}, smithy.ShapeTypeStructure, 2)
-var PlatformProgrammingLanguage_Name *smithy.Schema
-
-var PlatformProgrammingLanguage_Version *smithy.Schema
-
-var _PlatformProgrammingLanguages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformProgrammingLanguages",
-}, smithy.ShapeTypeList, 1)
-var _PlatformProgrammingLanguages_member *smithy.Schema
-
-var PlatformStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformStatus",
-}, smithy.ShapeTypeEnum, 5)
-var PlatformStatus_Creating *smithy.Schema
-
-var PlatformStatus_Failed *smithy.Schema
-
-var PlatformStatus_Ready *smithy.Schema
-
-var PlatformStatus_Deleting *smithy.Schema
-
-var PlatformStatus_Deleted *smithy.Schema
-
-var PlatformSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformSummary",
-}, smithy.ShapeTypeStructure, 12)
-var PlatformSummary_PlatformArn *smithy.Schema
-
-var PlatformSummary_PlatformOwner *smithy.Schema
-
-var PlatformSummary_PlatformStatus *smithy.Schema
-
-var PlatformSummary_PlatformCategory *smithy.Schema
-
-var PlatformSummary_OperatingSystemName *smithy.Schema
-
-var PlatformSummary_OperatingSystemVersion *smithy.Schema
-
-var PlatformSummary_SupportedTierList *smithy.Schema
-
-var PlatformSummary_SupportedAddonList *smithy.Schema
-
-var PlatformSummary_PlatformLifecycleState *smithy.Schema
-
-var PlatformSummary_PlatformVersion *smithy.Schema
-
-var PlatformSummary_PlatformBranchName *smithy.Schema
-
-var PlatformSummary_PlatformBranchLifecycleState *smithy.Schema
-
-var _PlatformSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PlatformSummaryList_member *smithy.Schema
-
-var _PlatformVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformVersion",
-}, smithy.ShapeTypeString, 0)
-
-var PlatformVersionStillReferencedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "PlatformVersionStillReferencedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PlatformVersionStillReferencedException",
-		StatusCode: 400})
-var PlatformVersionStillReferencedException_message *smithy.Schema
-
-var Queue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Queue",
-}, smithy.ShapeTypeStructure, 2)
-var Queue_Name *smithy.Schema
-
-var Queue_URL *smithy.Schema
-
-var _QueueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "QueueList",
-}, smithy.ShapeTypeList, 1)
-var _QueueList_member *smithy.Schema
-
-var _RefreshedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RefreshedAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _RegexLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RegexLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _RegexPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RegexPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _RequestCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RequestCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 400})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceQuota",
-}, smithy.ShapeTypeStructure, 1)
-var ResourceQuota_Maximum *smithy.Schema
-
-var ResourceQuotas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceQuotas",
-}, smithy.ShapeTypeStructure, 5)
-var ResourceQuotas_ApplicationQuota *smithy.Schema
-
-var ResourceQuotas_ApplicationVersionQuota *smithy.Schema
-
-var ResourceQuotas_EnvironmentQuota *smithy.Schema
-
-var ResourceQuotas_ConfigurationTemplateQuota *smithy.Schema
-
-var ResourceQuotas_CustomPlatformQuota *smithy.Schema
-
-var ResourceTypeNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceTypeNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceTypeNotSupportedException",
-		StatusCode: 400})
-var ResourceTypeNotSupportedException_message *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "S3Location",
-}, smithy.ShapeTypeStructure, 2)
-var S3Location_S3Bucket *smithy.Schema
-
-var S3Location_S3Key *smithy.Schema
-
-var S3LocationNotInServiceRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "S3LocationNotInServiceRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "S3LocationNotInServiceRegionException",
-		StatusCode: 400})
-var S3LocationNotInServiceRegionException_message *smithy.Schema
-
-var S3SubscriptionRequiredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "S3SubscriptionRequiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "S3SubscriptionRequiredException",
-		StatusCode: 400})
-var S3SubscriptionRequiredException_message *smithy.Schema
-
-var _SampleTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SampleTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var SearchFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SearchFilter",
-}, smithy.ShapeTypeStructure, 3)
-var SearchFilter_Attribute *smithy.Schema
-
-var SearchFilter_Operator *smithy.Schema
-
-var SearchFilter_Values *smithy.Schema
-
-var _SearchFilterAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SearchFilterAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchFilterOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SearchFilterOperator",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SearchFilters",
-}, smithy.ShapeTypeList, 1)
-var _SearchFilters_member *smithy.Schema
-
-var _SearchFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SearchFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SearchFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _SearchFilterValues_member *smithy.Schema
-
-var SingleInstanceHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SingleInstanceHealth",
-}, smithy.ShapeTypeStructure, 10)
-var SingleInstanceHealth_InstanceId *smithy.Schema
-
-var SingleInstanceHealth_HealthStatus *smithy.Schema
-
-var SingleInstanceHealth_Color *smithy.Schema
-
-var SingleInstanceHealth_Causes *smithy.Schema
-
-var SingleInstanceHealth_LaunchedAt *smithy.Schema
-
-var SingleInstanceHealth_ApplicationMetrics *smithy.Schema
-
-var SingleInstanceHealth_System *smithy.Schema
-
-var SingleInstanceHealth_Deployment *smithy.Schema
-
-var SingleInstanceHealth_AvailabilityZone *smithy.Schema
-
-var SingleInstanceHealth_InstanceType *smithy.Schema
-
-var SolutionStackDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SolutionStackDescription",
-}, smithy.ShapeTypeStructure, 2)
-var SolutionStackDescription_SolutionStackName *smithy.Schema
-
-var SolutionStackDescription_PermittedFileTypes *smithy.Schema
-
-var _SolutionStackFileTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SolutionStackFileTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SolutionStackFileTypeList_member *smithy.Schema
-
-var _SolutionStackName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SolutionStackName",
-}, smithy.ShapeTypeString, 0)
-
-var SourceBuildInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SourceBuildInformation",
-}, smithy.ShapeTypeStructure, 3)
-var SourceBuildInformation_SourceType *smithy.Schema
-
-var SourceBuildInformation_SourceRepository *smithy.Schema
-
-var SourceBuildInformation_SourceLocation *smithy.Schema
-
-var SourceBundleDeletionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SourceBundleDeletionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SourceBundleDeletionFailure",
-		StatusCode: 400})
-var SourceBundleDeletionException_message *smithy.Schema
-
-var SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SourceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SourceConfiguration_ApplicationName *smithy.Schema
-
-var SourceConfiguration_TemplateName *smithy.Schema
-
-var _SourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SourceLocation",
-}, smithy.ShapeTypeString, 0)
-
-var SourceRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SourceRepository",
-}, smithy.ShapeTypeEnum, 2)
-var SourceRepository_CodeCommit *smithy.Schema
-
-var SourceRepository_S3 *smithy.Schema
-
-var SourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SourceType",
-}, smithy.ShapeTypeEnum, 2)
-var SourceType_Git *smithy.Schema
-
-var SourceType_Zip *smithy.Schema
-
-var StatusCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "StatusCodes",
-}, smithy.ShapeTypeStructure, 4)
-var StatusCodes_Status2xx *smithy.Schema
-
-var StatusCodes_Status3xx *smithy.Schema
-
-var StatusCodes_Status4xx *smithy.Schema
-
-var StatusCodes_Status5xx *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportedAddon = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SupportedAddon",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportedAddonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SupportedAddonList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedAddonList_member *smithy.Schema
-
-var _SupportedTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SupportedTier",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportedTierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SupportedTierList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedTierList_member *smithy.Schema
-
-var SystemStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SystemStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SystemStatus_CPUUtilization *smithy.Schema
-
-var SystemStatus_LoadAverage *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TerminateEnvForce = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TerminateEnvForce",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _TerminateEnvironmentResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TerminateEnvironmentResources",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _TimeFilterEnd = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TimeFilterEnd",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TimeFilterStart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TimeFilterStart",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyApplicationsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TooManyApplicationsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyApplicationsException",
-		StatusCode: 400})
-var TooManyApplicationsException_message *smithy.Schema
-
-var TooManyApplicationVersionsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TooManyApplicationVersionsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TooManyApplicationVersionsException_message *smithy.Schema
-
-var TooManyBucketsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TooManyBucketsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyBucketsException",
-		StatusCode: 400})
-var TooManyBucketsException_message *smithy.Schema
-
-var TooManyConfigurationTemplatesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TooManyConfigurationTemplatesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyConfigurationTemplatesException",
-		StatusCode: 400})
-var TooManyConfigurationTemplatesException_message *smithy.Schema
-
-var TooManyEnvironmentsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TooManyEnvironmentsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyEnvironmentsException",
-		StatusCode: 400})
-var TooManyEnvironmentsException_message *smithy.Schema
-
-var TooManyPlatformsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TooManyPlatformsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyPlatformsException",
-		StatusCode: 400})
-var TooManyPlatformsException_message *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyTagsException",
-		StatusCode: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var Trigger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "Trigger",
-}, smithy.ShapeTypeStructure, 1)
-var Trigger_Name *smithy.Schema
-
-var _TriggerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TriggerList",
-}, smithy.ShapeTypeList, 1)
-var _TriggerList_member *smithy.Schema
-
-var _UpdateDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _UserDefinedOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UserDefinedOption",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ValidationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ValidationMessage",
-}, smithy.ShapeTypeStructure, 4)
-var ValidationMessage_Message *smithy.Schema
-
-var ValidationMessage_Severity *smithy.Schema
-
-var ValidationMessage_Namespace *smithy.Schema
-
-var ValidationMessage_OptionName *smithy.Schema
-
-var _ValidationMessagesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ValidationMessagesList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationMessagesList_member *smithy.Schema
-
-var _ValidationMessageString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ValidationMessageString",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationSeverity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ValidationSeverity",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationSeverity_error *smithy.Schema
-
-var ValidationSeverity_warning *smithy.Schema
-
-var _VersionLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "VersionLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _VersionLabels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "VersionLabels",
-}, smithy.ShapeTypeList, 1)
-var _VersionLabels_member *smithy.Schema
-
-var _VersionLabelsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "VersionLabelsList",
-}, smithy.ShapeTypeList, 1)
-var _VersionLabelsList_member *smithy.Schema
-
-var _VirtualizationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "VirtualizationType",
-}, smithy.ShapeTypeString, 0)
-
-var AbortEnvironmentUpdateMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AbortEnvironmentUpdateMessage",
-}, smithy.ShapeTypeStructure, 2)
-var AbortEnvironmentUpdateMessage_EnvironmentId *smithy.Schema
-
-var AbortEnvironmentUpdateMessage_EnvironmentName *smithy.Schema
-
-var ApplyEnvironmentManagedActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplyEnvironmentManagedActionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ApplyEnvironmentManagedActionRequest_EnvironmentName *smithy.Schema
-
-var ApplyEnvironmentManagedActionRequest_EnvironmentId *smithy.Schema
-
-var ApplyEnvironmentManagedActionRequest_ActionId *smithy.Schema
-
-var ApplyEnvironmentManagedActionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplyEnvironmentManagedActionResult",
-}, smithy.ShapeTypeStructure, 4)
-var ApplyEnvironmentManagedActionResult_ActionId *smithy.Schema
-
-var ApplyEnvironmentManagedActionResult_ActionDescription *smithy.Schema
-
-var ApplyEnvironmentManagedActionResult_ActionType *smithy.Schema
-
-var ApplyEnvironmentManagedActionResult_Status *smithy.Schema
-
-var AssociateEnvironmentOperationsRoleMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "AssociateEnvironmentOperationsRoleMessage",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateEnvironmentOperationsRoleMessage_EnvironmentName *smithy.Schema
-
-var AssociateEnvironmentOperationsRoleMessage_OperationsRole *smithy.Schema
-
-var CheckDNSAvailabilityMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CheckDNSAvailabilityMessage",
-}, smithy.ShapeTypeStructure, 1)
-var CheckDNSAvailabilityMessage_CNAMEPrefix *smithy.Schema
-
-var CheckDNSAvailabilityResultMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CheckDNSAvailabilityResultMessage",
-}, smithy.ShapeTypeStructure, 2)
-var CheckDNSAvailabilityResultMessage_Available *smithy.Schema
-
-var CheckDNSAvailabilityResultMessage_FullyQualifiedCNAME *smithy.Schema
-
-var ComposeEnvironmentsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ComposeEnvironmentsMessage",
-}, smithy.ShapeTypeStructure, 3)
-var ComposeEnvironmentsMessage_ApplicationName *smithy.Schema
-
-var ComposeEnvironmentsMessage_GroupName *smithy.Schema
-
-var ComposeEnvironmentsMessage_VersionLabels *smithy.Schema
-
-var EnvironmentDescriptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentDescriptionsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var EnvironmentDescriptionsMessage_Environments *smithy.Schema
-
-var EnvironmentDescriptionsMessage_NextToken *smithy.Schema
-
-var CreateApplicationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateApplicationMessage",
-}, smithy.ShapeTypeStructure, 4)
-var CreateApplicationMessage_ApplicationName *smithy.Schema
-
-var CreateApplicationMessage_Description *smithy.Schema
-
-var CreateApplicationMessage_ResourceLifecycleConfig *smithy.Schema
-
-var CreateApplicationMessage_Tags *smithy.Schema
-
-var ApplicationDescriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationDescriptionMessage",
-}, smithy.ShapeTypeStructure, 1)
-var ApplicationDescriptionMessage_Application *smithy.Schema
-
-var CreateApplicationVersionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateApplicationVersionMessage",
-}, smithy.ShapeTypeStructure, 10)
-var CreateApplicationVersionMessage_ApplicationName *smithy.Schema
-
-var CreateApplicationVersionMessage_VersionLabel *smithy.Schema
-
-var CreateApplicationVersionMessage_Description *smithy.Schema
-
-var CreateApplicationVersionMessage_SourceBuildInformation *smithy.Schema
-
-var CreateApplicationVersionMessage_SourceBundle *smithy.Schema
-
-var CreateApplicationVersionMessage_BuildConfiguration *smithy.Schema
-
-var CreateApplicationVersionMessage_AutoCreateApplication *smithy.Schema
-
-var CreateApplicationVersionMessage_Process *smithy.Schema
-
-var CreateApplicationVersionMessage_Tags *smithy.Schema
-
-var CreateApplicationVersionMessage_ImageConfiguration *smithy.Schema
-
-var ApplicationVersionDescriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionDescriptionMessage",
-}, smithy.ShapeTypeStructure, 1)
-var ApplicationVersionDescriptionMessage_ApplicationVersion *smithy.Schema
-
-var CreateConfigurationTemplateMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateConfigurationTemplateMessage",
-}, smithy.ShapeTypeStructure, 9)
-var CreateConfigurationTemplateMessage_ApplicationName *smithy.Schema
-
-var CreateConfigurationTemplateMessage_TemplateName *smithy.Schema
-
-var CreateConfigurationTemplateMessage_SolutionStackName *smithy.Schema
-
-var CreateConfigurationTemplateMessage_PlatformArn *smithy.Schema
-
-var CreateConfigurationTemplateMessage_SourceConfiguration *smithy.Schema
-
-var CreateConfigurationTemplateMessage_EnvironmentId *smithy.Schema
-
-var CreateConfigurationTemplateMessage_Description *smithy.Schema
-
-var CreateConfigurationTemplateMessage_OptionSettings *smithy.Schema
-
-var CreateConfigurationTemplateMessage_Tags *smithy.Schema
-
-var CreateEnvironmentMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateEnvironmentMessage",
-}, smithy.ShapeTypeStructure, 14)
-var CreateEnvironmentMessage_ApplicationName *smithy.Schema
-
-var CreateEnvironmentMessage_EnvironmentName *smithy.Schema
-
-var CreateEnvironmentMessage_GroupName *smithy.Schema
-
-var CreateEnvironmentMessage_Description *smithy.Schema
-
-var CreateEnvironmentMessage_CNAMEPrefix *smithy.Schema
-
-var CreateEnvironmentMessage_Tier *smithy.Schema
-
-var CreateEnvironmentMessage_Tags *smithy.Schema
-
-var CreateEnvironmentMessage_VersionLabel *smithy.Schema
-
-var CreateEnvironmentMessage_TemplateName *smithy.Schema
-
-var CreateEnvironmentMessage_SolutionStackName *smithy.Schema
-
-var CreateEnvironmentMessage_PlatformArn *smithy.Schema
-
-var CreateEnvironmentMessage_OptionSettings *smithy.Schema
-
-var CreateEnvironmentMessage_OptionsToRemove *smithy.Schema
-
-var CreateEnvironmentMessage_OperationsRole *smithy.Schema
-
-var CreatePlatformVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreatePlatformVersionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreatePlatformVersionRequest_PlatformName *smithy.Schema
-
-var CreatePlatformVersionRequest_PlatformVersion *smithy.Schema
-
-var CreatePlatformVersionRequest_PlatformDefinitionBundle *smithy.Schema
-
-var CreatePlatformVersionRequest_EnvironmentName *smithy.Schema
-
-var CreatePlatformVersionRequest_OptionSettings *smithy.Schema
-
-var CreatePlatformVersionRequest_Tags *smithy.Schema
-
-var CreatePlatformVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreatePlatformVersionResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePlatformVersionResult_PlatformSummary *smithy.Schema
-
-var CreatePlatformVersionResult_Builder *smithy.Schema
-
-var CreateStorageLocationResultMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "CreateStorageLocationResultMessage",
-}, smithy.ShapeTypeStructure, 1)
-var CreateStorageLocationResultMessage_S3Bucket *smithy.Schema
-
-var DeleteApplicationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteApplicationMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteApplicationMessage_ApplicationName *smithy.Schema
-
-var DeleteApplicationMessage_TerminateEnvByForce *smithy.Schema
-
-var DeleteApplicationVersionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteApplicationVersionMessage",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteApplicationVersionMessage_ApplicationName *smithy.Schema
-
-var DeleteApplicationVersionMessage_VersionLabel *smithy.Schema
-
-var DeleteApplicationVersionMessage_DeleteSourceBundle *smithy.Schema
-
-var DeleteConfigurationTemplateMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteConfigurationTemplateMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConfigurationTemplateMessage_ApplicationName *smithy.Schema
-
-var DeleteConfigurationTemplateMessage_TemplateName *smithy.Schema
-
-var DeleteEnvironmentConfigurationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeleteEnvironmentConfigurationMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteEnvironmentConfigurationMessage_ApplicationName *smithy.Schema
-
-var DeleteEnvironmentConfigurationMessage_EnvironmentName *smithy.Schema
-
-var DeletePlatformVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeletePlatformVersionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePlatformVersionRequest_PlatformArn *smithy.Schema
-
-var DeletePlatformVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DeletePlatformVersionResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePlatformVersionResult_PlatformSummary *smithy.Schema
-
-var DescribeAccountAttributesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeAccountAttributesResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAccountAttributesResult_ResourceQuotas *smithy.Schema
-
-var DescribeApplicationsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeApplicationsMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeApplicationsMessage_ApplicationNames *smithy.Schema
-
-var ApplicationDescriptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationDescriptionsMessage",
-}, smithy.ShapeTypeStructure, 1)
-var ApplicationDescriptionsMessage_Applications *smithy.Schema
-
-var DescribeApplicationVersionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeApplicationVersionsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeApplicationVersionsMessage_ApplicationName *smithy.Schema
-
-var DescribeApplicationVersionsMessage_VersionLabels *smithy.Schema
-
-var DescribeApplicationVersionsMessage_MaxRecords *smithy.Schema
-
-var DescribeApplicationVersionsMessage_NextToken *smithy.Schema
-
-var ApplicationVersionDescriptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationVersionDescriptionsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationVersionDescriptionsMessage_ApplicationVersions *smithy.Schema
-
-var ApplicationVersionDescriptionsMessage_NextToken *smithy.Schema
-
-var DescribeConfigurationOptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeConfigurationOptionsMessage",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeConfigurationOptionsMessage_ApplicationName *smithy.Schema
-
-var DescribeConfigurationOptionsMessage_TemplateName *smithy.Schema
-
-var DescribeConfigurationOptionsMessage_EnvironmentName *smithy.Schema
-
-var DescribeConfigurationOptionsMessage_SolutionStackName *smithy.Schema
-
-var DescribeConfigurationOptionsMessage_PlatformArn *smithy.Schema
-
-var DescribeConfigurationOptionsMessage_Options *smithy.Schema
-
-var ConfigurationOptionsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationOptionsDescription",
-}, smithy.ShapeTypeStructure, 3)
-var ConfigurationOptionsDescription_SolutionStackName *smithy.Schema
-
-var ConfigurationOptionsDescription_PlatformArn *smithy.Schema
-
-var ConfigurationOptionsDescription_Options *smithy.Schema
-
-var DescribeConfigurationSettingsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeConfigurationSettingsMessage",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeConfigurationSettingsMessage_ApplicationName *smithy.Schema
-
-var DescribeConfigurationSettingsMessage_TemplateName *smithy.Schema
-
-var DescribeConfigurationSettingsMessage_EnvironmentName *smithy.Schema
-
-var ConfigurationSettingsDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationSettingsDescriptions",
-}, smithy.ShapeTypeStructure, 1)
-var ConfigurationSettingsDescriptions_ConfigurationSettings *smithy.Schema
-
-var DescribeEnvironmentHealthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentHealthRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeEnvironmentHealthRequest_EnvironmentName *smithy.Schema
-
-var DescribeEnvironmentHealthRequest_EnvironmentId *smithy.Schema
-
-var DescribeEnvironmentHealthRequest_AttributeNames *smithy.Schema
-
-var DescribeEnvironmentHealthResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentHealthResult",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeEnvironmentHealthResult_EnvironmentName *smithy.Schema
-
-var DescribeEnvironmentHealthResult_HealthStatus *smithy.Schema
-
-var DescribeEnvironmentHealthResult_Status *smithy.Schema
-
-var DescribeEnvironmentHealthResult_Color *smithy.Schema
-
-var DescribeEnvironmentHealthResult_Causes *smithy.Schema
-
-var DescribeEnvironmentHealthResult_ApplicationMetrics *smithy.Schema
-
-var DescribeEnvironmentHealthResult_InstancesHealth *smithy.Schema
-
-var DescribeEnvironmentHealthResult_RefreshedAt *smithy.Schema
-
-var DescribeEnvironmentManagedActionHistoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentManagedActionHistoryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEnvironmentManagedActionHistoryRequest_EnvironmentId *smithy.Schema
-
-var DescribeEnvironmentManagedActionHistoryRequest_EnvironmentName *smithy.Schema
-
-var DescribeEnvironmentManagedActionHistoryRequest_NextToken *smithy.Schema
-
-var DescribeEnvironmentManagedActionHistoryRequest_MaxItems *smithy.Schema
-
-var DescribeEnvironmentManagedActionHistoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentManagedActionHistoryResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems *smithy.Schema
-
-var DescribeEnvironmentManagedActionHistoryResult_NextToken *smithy.Schema
-
-var DescribeEnvironmentManagedActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentManagedActionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeEnvironmentManagedActionsRequest_EnvironmentName *smithy.Schema
-
-var DescribeEnvironmentManagedActionsRequest_EnvironmentId *smithy.Schema
-
-var DescribeEnvironmentManagedActionsRequest_Status *smithy.Schema
-
-var DescribeEnvironmentManagedActionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentManagedActionsResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEnvironmentManagedActionsResult_ManagedActions *smithy.Schema
-
-var DescribeEnvironmentResourcesMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentResourcesMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEnvironmentResourcesMessage_EnvironmentId *smithy.Schema
-
-var DescribeEnvironmentResourcesMessage_EnvironmentName *smithy.Schema
-
-var EnvironmentResourceDescriptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EnvironmentResourceDescriptionsMessage",
-}, smithy.ShapeTypeStructure, 1)
-var EnvironmentResourceDescriptionsMessage_EnvironmentResources *smithy.Schema
-
-var DescribeEnvironmentsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEnvironmentsMessage",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeEnvironmentsMessage_ApplicationName *smithy.Schema
-
-var DescribeEnvironmentsMessage_VersionLabel *smithy.Schema
-
-var DescribeEnvironmentsMessage_EnvironmentIds *smithy.Schema
-
-var DescribeEnvironmentsMessage_EnvironmentNames *smithy.Schema
-
-var DescribeEnvironmentsMessage_IncludeDeleted *smithy.Schema
-
-var DescribeEnvironmentsMessage_IncludedDeletedBackTo *smithy.Schema
-
-var DescribeEnvironmentsMessage_MaxRecords *smithy.Schema
-
-var DescribeEnvironmentsMessage_NextToken *smithy.Schema
-
-var DescribeEventsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeEventsMessage",
-}, smithy.ShapeTypeStructure, 12)
-var DescribeEventsMessage_ApplicationName *smithy.Schema
-
-var DescribeEventsMessage_VersionLabel *smithy.Schema
-
-var DescribeEventsMessage_TemplateName *smithy.Schema
-
-var DescribeEventsMessage_EnvironmentId *smithy.Schema
-
-var DescribeEventsMessage_EnvironmentName *smithy.Schema
-
-var DescribeEventsMessage_PlatformArn *smithy.Schema
-
-var DescribeEventsMessage_RequestId *smithy.Schema
-
-var DescribeEventsMessage_Severity *smithy.Schema
-
-var DescribeEventsMessage_StartTime *smithy.Schema
-
-var DescribeEventsMessage_EndTime *smithy.Schema
-
-var DescribeEventsMessage_MaxRecords *smithy.Schema
-
-var DescribeEventsMessage_NextToken *smithy.Schema
-
-var EventDescriptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "EventDescriptionsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var EventDescriptionsMessage_Events *smithy.Schema
-
-var EventDescriptionsMessage_NextToken *smithy.Schema
-
-var DescribeInstancesHealthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeInstancesHealthRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeInstancesHealthRequest_EnvironmentName *smithy.Schema
-
-var DescribeInstancesHealthRequest_EnvironmentId *smithy.Schema
-
-var DescribeInstancesHealthRequest_AttributeNames *smithy.Schema
-
-var DescribeInstancesHealthRequest_NextToken *smithy.Schema
-
-var DescribeInstancesHealthResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribeInstancesHealthResult",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeInstancesHealthResult_InstanceHealthList *smithy.Schema
-
-var DescribeInstancesHealthResult_RefreshedAt *smithy.Schema
-
-var DescribeInstancesHealthResult_NextToken *smithy.Schema
-
-var DescribePlatformVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribePlatformVersionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePlatformVersionRequest_PlatformArn *smithy.Schema
-
-var DescribePlatformVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DescribePlatformVersionResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePlatformVersionResult_PlatformDescription *smithy.Schema
-
-var DisassociateEnvironmentOperationsRoleMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "DisassociateEnvironmentOperationsRoleMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateEnvironmentOperationsRoleMessage_EnvironmentName *smithy.Schema
-
-var ListAvailableSolutionStacksResultMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListAvailableSolutionStacksResultMessage",
-}, smithy.ShapeTypeStructure, 2)
-var ListAvailableSolutionStacksResultMessage_SolutionStacks *smithy.Schema
-
-var ListAvailableSolutionStacksResultMessage_SolutionStackDetails *smithy.Schema
-
-var ListPlatformBranchesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListPlatformBranchesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPlatformBranchesRequest_Filters *smithy.Schema
-
-var ListPlatformBranchesRequest_MaxRecords *smithy.Schema
-
-var ListPlatformBranchesRequest_NextToken *smithy.Schema
-
-var ListPlatformBranchesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListPlatformBranchesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlatformBranchesResult_PlatformBranchSummaryList *smithy.Schema
-
-var ListPlatformBranchesResult_NextToken *smithy.Schema
-
-var ListPlatformVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListPlatformVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPlatformVersionsRequest_Filters *smithy.Schema
-
-var ListPlatformVersionsRequest_MaxRecords *smithy.Schema
-
-var ListPlatformVersionsRequest_NextToken *smithy.Schema
-
-var ListPlatformVersionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListPlatformVersionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlatformVersionsResult_PlatformSummaryList *smithy.Schema
-
-var ListPlatformVersionsResult_NextToken *smithy.Schema
-
-var ListTagsForResourceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ListTagsForResourceMessage",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceMessage_ResourceArn *smithy.Schema
-
-var ResourceTagsDescriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ResourceTagsDescriptionMessage",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTagsDescriptionMessage_ResourceArn *smithy.Schema
-
-var ResourceTagsDescriptionMessage_ResourceTags *smithy.Schema
-
-var RebuildEnvironmentMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RebuildEnvironmentMessage",
-}, smithy.ShapeTypeStructure, 2)
-var RebuildEnvironmentMessage_EnvironmentId *smithy.Schema
-
-var RebuildEnvironmentMessage_EnvironmentName *smithy.Schema
-
-var RequestEnvironmentInfoMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RequestEnvironmentInfoMessage",
-}, smithy.ShapeTypeStructure, 3)
-var RequestEnvironmentInfoMessage_EnvironmentId *smithy.Schema
-
-var RequestEnvironmentInfoMessage_EnvironmentName *smithy.Schema
-
-var RequestEnvironmentInfoMessage_InfoType *smithy.Schema
-
-var RestartAppServerMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RestartAppServerMessage",
-}, smithy.ShapeTypeStructure, 2)
-var RestartAppServerMessage_EnvironmentId *smithy.Schema
-
-var RestartAppServerMessage_EnvironmentName *smithy.Schema
-
-var RetrieveEnvironmentInfoMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RetrieveEnvironmentInfoMessage",
-}, smithy.ShapeTypeStructure, 3)
-var RetrieveEnvironmentInfoMessage_EnvironmentId *smithy.Schema
-
-var RetrieveEnvironmentInfoMessage_EnvironmentName *smithy.Schema
-
-var RetrieveEnvironmentInfoMessage_InfoType *smithy.Schema
-
-var RetrieveEnvironmentInfoResultMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "RetrieveEnvironmentInfoResultMessage",
-}, smithy.ShapeTypeStructure, 1)
-var RetrieveEnvironmentInfoResultMessage_EnvironmentInfo *smithy.Schema
-
-var SwapEnvironmentCNAMEsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "SwapEnvironmentCNAMEsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var SwapEnvironmentCNAMEsMessage_SourceEnvironmentId *smithy.Schema
-
-var SwapEnvironmentCNAMEsMessage_SourceEnvironmentName *smithy.Schema
-
-var SwapEnvironmentCNAMEsMessage_DestinationEnvironmentId *smithy.Schema
-
-var SwapEnvironmentCNAMEsMessage_DestinationEnvironmentName *smithy.Schema
-
-var TerminateEnvironmentMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "TerminateEnvironmentMessage",
-}, smithy.ShapeTypeStructure, 4)
-var TerminateEnvironmentMessage_EnvironmentId *smithy.Schema
-
-var TerminateEnvironmentMessage_EnvironmentName *smithy.Schema
-
-var TerminateEnvironmentMessage_TerminateResources *smithy.Schema
-
-var TerminateEnvironmentMessage_ForceTerminate *smithy.Schema
-
-var UpdateApplicationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateApplicationMessage",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateApplicationMessage_ApplicationName *smithy.Schema
-
-var UpdateApplicationMessage_Description *smithy.Schema
-
-var UpdateApplicationResourceLifecycleMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateApplicationResourceLifecycleMessage",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateApplicationResourceLifecycleMessage_ApplicationName *smithy.Schema
-
-var UpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig *smithy.Schema
-
-var ApplicationResourceLifecycleDescriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ApplicationResourceLifecycleDescriptionMessage",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationResourceLifecycleDescriptionMessage_ApplicationName *smithy.Schema
-
-var ApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig *smithy.Schema
-
-var UpdateApplicationVersionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateApplicationVersionMessage",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateApplicationVersionMessage_ApplicationName *smithy.Schema
-
-var UpdateApplicationVersionMessage_VersionLabel *smithy.Schema
-
-var UpdateApplicationVersionMessage_Description *smithy.Schema
-
-var UpdateConfigurationTemplateMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateConfigurationTemplateMessage",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateConfigurationTemplateMessage_ApplicationName *smithy.Schema
-
-var UpdateConfigurationTemplateMessage_TemplateName *smithy.Schema
-
-var UpdateConfigurationTemplateMessage_Description *smithy.Schema
-
-var UpdateConfigurationTemplateMessage_OptionSettings *smithy.Schema
-
-var UpdateConfigurationTemplateMessage_OptionsToRemove *smithy.Schema
-
-var UpdateEnvironmentMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateEnvironmentMessage",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateEnvironmentMessage_ApplicationName *smithy.Schema
-
-var UpdateEnvironmentMessage_EnvironmentId *smithy.Schema
-
-var UpdateEnvironmentMessage_EnvironmentName *smithy.Schema
-
-var UpdateEnvironmentMessage_GroupName *smithy.Schema
-
-var UpdateEnvironmentMessage_Description *smithy.Schema
-
-var UpdateEnvironmentMessage_Tier *smithy.Schema
-
-var UpdateEnvironmentMessage_VersionLabel *smithy.Schema
-
-var UpdateEnvironmentMessage_TemplateName *smithy.Schema
-
-var UpdateEnvironmentMessage_SolutionStackName *smithy.Schema
-
-var UpdateEnvironmentMessage_PlatformArn *smithy.Schema
-
-var UpdateEnvironmentMessage_OptionSettings *smithy.Schema
-
-var UpdateEnvironmentMessage_OptionsToRemove *smithy.Schema
-
-var UpdateTagsForResourceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "UpdateTagsForResourceMessage",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateTagsForResourceMessage_ResourceArn *smithy.Schema
-
-var UpdateTagsForResourceMessage_TagsToAdd *smithy.Schema
-
-var UpdateTagsForResourceMessage_TagsToRemove *smithy.Schema
-
-var ValidateConfigurationSettingsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ValidateConfigurationSettingsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var ValidateConfigurationSettingsMessage_ApplicationName *smithy.Schema
-
-var ValidateConfigurationSettingsMessage_TemplateName *smithy.Schema
-
-var ValidateConfigurationSettingsMessage_EnvironmentName *smithy.Schema
-
-var ValidateConfigurationSettingsMessage_OptionSettings *smithy.Schema
-
-var ConfigurationSettingsValidationMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticbeanstalk",
-	Name:      "ConfigurationSettingsValidationMessages",
-}, smithy.ShapeTypeStructure, 1)
-var ConfigurationSettingsValidationMessages_Messages *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ActionHistoryStatus_Completed = ActionHistoryStatus.AddMember("Completed", smithyprelude.Unit)
-
-	ActionHistoryStatus_Failed = ActionHistoryStatus.AddMember("Failed", smithyprelude.Unit)
-
-	ActionHistoryStatus_Unknown = ActionHistoryStatus.AddMember("Unknown", smithyprelude.Unit)
-
-	ActionStatus_Scheduled = ActionStatus.AddMember("Scheduled", smithyprelude.Unit)
-
-	ActionStatus_Pending = ActionStatus.AddMember("Pending", smithyprelude.Unit)
-
-	ActionStatus_Running = ActionStatus.AddMember("Running", smithyprelude.Unit)
-
-	ActionStatus_Unknown = ActionStatus.AddMember("Unknown", smithyprelude.Unit)
-
-	ActionType_InstanceRefresh = ActionType.AddMember("InstanceRefresh", smithyprelude.Unit)
-
-	ActionType_PlatformUpdate = ActionType.AddMember("PlatformUpdate", smithyprelude.Unit)
-
-	ActionType_Unknown = ActionType.AddMember("Unknown", smithyprelude.Unit)
-
-	AmiArchitecture_X86_64 = AmiArchitecture.AddMember("X86_64", smithyprelude.Unit)
-
-	AmiArchitecture_ARM64 = AmiArchitecture.AddMember("ARM64", smithyprelude.Unit)
-
-	_VersionLabelsList_member = _VersionLabelsList.AddMember("member", _VersionLabel)
-
-	_ConfigurationTemplateNamesList_member = _ConfigurationTemplateNamesList.AddMember("member", _ConfigurationTemplateName)
-
-	MaxCountRule_Enabled = MaxCountRule.AddMember("Enabled", _BoxedBoolean)
-
-	MaxCountRule_MaxCount = MaxCountRule.AddMember("MaxCount", _BoxedInt)
-
-	MaxCountRule_DeleteSourceFromS3 = MaxCountRule.AddMember("DeleteSourceFromS3", _BoxedBoolean)
-
-	MaxAgeRule_Enabled = MaxAgeRule.AddMember("Enabled", _BoxedBoolean)
-
-	MaxAgeRule_MaxAgeInDays = MaxAgeRule.AddMember("MaxAgeInDays", _BoxedInt)
-
-	MaxAgeRule_DeleteSourceFromS3 = MaxAgeRule.AddMember("DeleteSourceFromS3", _BoxedBoolean)
-
-	ApplicationVersionLifecycleConfig_MaxCountRule = ApplicationVersionLifecycleConfig.AddMember("MaxCountRule", MaxCountRule)
-
-	ApplicationVersionLifecycleConfig_MaxAgeRule = ApplicationVersionLifecycleConfig.AddMember("MaxAgeRule", MaxAgeRule)
-
-	ApplicationResourceLifecycleConfig_ServiceRole = ApplicationResourceLifecycleConfig.AddMember("ServiceRole", _String)
-
-	ApplicationResourceLifecycleConfig_VersionLifecycleConfig = ApplicationResourceLifecycleConfig.AddMember("VersionLifecycleConfig", ApplicationVersionLifecycleConfig)
-
-	ApplicationDescription_ApplicationArn = ApplicationDescription.AddMember("ApplicationArn", _ApplicationArn)
-
-	ApplicationDescription_ApplicationName = ApplicationDescription.AddMember("ApplicationName", _ApplicationName)
-
-	ApplicationDescription_Description = ApplicationDescription.AddMember("Description", _Description)
-
-	ApplicationDescription_DateCreated = ApplicationDescription.AddMember("DateCreated", _CreationDate)
-
-	ApplicationDescription_DateUpdated = ApplicationDescription.AddMember("DateUpdated", _UpdateDate)
-
-	ApplicationDescription_Versions = ApplicationDescription.AddMember("Versions", _VersionLabelsList)
-
-	ApplicationDescription_ConfigurationTemplates = ApplicationDescription.AddMember("ConfigurationTemplates", _ConfigurationTemplateNamesList)
-
-	ApplicationDescription_ResourceLifecycleConfig = ApplicationDescription.AddMember("ResourceLifecycleConfig", ApplicationResourceLifecycleConfig)
-
-	_ApplicationDescriptionList_member = _ApplicationDescriptionList.AddMember("member", ApplicationDescription)
-
-	StatusCodes_Status2xx = StatusCodes.AddMember("Status2xx", _NullableInteger)
-
-	StatusCodes_Status3xx = StatusCodes.AddMember("Status3xx", _NullableInteger)
-
-	StatusCodes_Status4xx = StatusCodes.AddMember("Status4xx", _NullableInteger)
-
-	StatusCodes_Status5xx = StatusCodes.AddMember("Status5xx", _NullableInteger)
-
-	Latency_P999 = Latency.AddMember("P999", _NullableDouble)
-
-	Latency_P99 = Latency.AddMember("P99", _NullableDouble)
-
-	Latency_P95 = Latency.AddMember("P95", _NullableDouble)
-
-	Latency_P90 = Latency.AddMember("P90", _NullableDouble)
-
-	Latency_P85 = Latency.AddMember("P85", _NullableDouble)
-
-	Latency_P75 = Latency.AddMember("P75", _NullableDouble)
-
-	Latency_P50 = Latency.AddMember("P50", _NullableDouble)
-
-	Latency_P10 = Latency.AddMember("P10", _NullableDouble)
-
-	ApplicationMetrics_Duration = ApplicationMetrics.AddMember("Duration", _NullableInteger)
-
-	ApplicationMetrics_RequestCount = ApplicationMetrics.AddMember("RequestCount", _RequestCount)
-
-	ApplicationMetrics_StatusCodes = ApplicationMetrics.AddMember("StatusCodes", StatusCodes)
-
-	ApplicationMetrics_Latency = ApplicationMetrics.AddMember("Latency", Latency)
-
-	_ApplicationNamesList_member = _ApplicationNamesList.AddMember("member", _ApplicationName)
-
-	SourceType_Git = SourceType.AddMember("Git", smithyprelude.Unit)
-
-	SourceType_Zip = SourceType.AddMember("Zip", smithyprelude.Unit)
-
-	SourceRepository_CodeCommit = SourceRepository.AddMember("CodeCommit", smithyprelude.Unit)
-
-	SourceRepository_S3 = SourceRepository.AddMember("S3", smithyprelude.Unit)
-
-	SourceBuildInformation_SourceType = SourceBuildInformation.AddMember("SourceType", SourceType)
-
-	SourceBuildInformation_SourceRepository = SourceBuildInformation.AddMember("SourceRepository", SourceRepository)
-
-	SourceBuildInformation_SourceLocation = SourceBuildInformation.AddMember("SourceLocation", _SourceLocation)
-
-	S3Location_S3Bucket = S3Location.AddMember("S3Bucket", _S3Bucket)
-
-	S3Location_S3Key = S3Location.AddMember("S3Key", _S3Key)
-
-	ImageSource_Uri = ImageSource.AddMember("Uri", _String)
-
-	ImageBuildType_docker = ImageBuildType.AddMember("docker", smithyprelude.Unit)
-
-	ImageBuildType_buildpack = ImageBuildType.AddMember("buildpack", smithyprelude.Unit)
-
-	ArchitectureType_amd64 = ArchitectureType.AddMember("amd64", smithyprelude.Unit)
-
-	ArchitectureType_arm64 = ArchitectureType.AddMember("arm64", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_SMALL = ComputeType.AddMember("BUILD_GENERAL1_SMALL", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_MEDIUM = ComputeType.AddMember("BUILD_GENERAL1_MEDIUM", smithyprelude.Unit)
-
-	ComputeType_BUILD_GENERAL1_LARGE = ComputeType.AddMember("BUILD_GENERAL1_LARGE", smithyprelude.Unit)
-
-	ImageBuildConfiguration_Type = ImageBuildConfiguration.AddMember("Type", ImageBuildType)
-
-	ImageBuildConfiguration_DockerfileLocation = ImageBuildConfiguration.AddMember("DockerfileLocation", _String)
-
-	ImageBuildConfiguration_Buildpack = ImageBuildConfiguration.AddMember("Buildpack", _String)
-
-	ImageBuildConfiguration_Architecture = ImageBuildConfiguration.AddMember("Architecture", ArchitectureType)
-
-	ImageBuildConfiguration_CodeBuildServiceRole = ImageBuildConfiguration.AddMember("CodeBuildServiceRole", _NonEmptyString)
-
-	ImageBuildConfiguration_ComputeType = ImageBuildConfiguration.AddMember("ComputeType", ComputeType)
-
-	ImageBuildConfiguration_TimeoutInMinutes = ImageBuildConfiguration.AddMember("TimeoutInMinutes", _BoxedInt)
-
-	ApplicationVersionStatus_Processed = ApplicationVersionStatus.AddMember("Processed", smithyprelude.Unit)
-
-	ApplicationVersionStatus_Unprocessed = ApplicationVersionStatus.AddMember("Unprocessed", smithyprelude.Unit)
-
-	ApplicationVersionStatus_Failed = ApplicationVersionStatus.AddMember("Failed", smithyprelude.Unit)
-
-	ApplicationVersionStatus_Processing = ApplicationVersionStatus.AddMember("Processing", smithyprelude.Unit)
-
-	ApplicationVersionStatus_Building = ApplicationVersionStatus.AddMember("Building", smithyprelude.Unit)
-
-	ApplicationVersionDescription_ApplicationVersionArn = ApplicationVersionDescription.AddMember("ApplicationVersionArn", _ApplicationVersionArn)
-
-	ApplicationVersionDescription_ApplicationName = ApplicationVersionDescription.AddMember("ApplicationName", _ApplicationName)
-
-	ApplicationVersionDescription_Description = ApplicationVersionDescription.AddMember("Description", _Description)
-
-	ApplicationVersionDescription_VersionLabel = ApplicationVersionDescription.AddMember("VersionLabel", _VersionLabel)
-
-	ApplicationVersionDescription_SourceBuildInformation = ApplicationVersionDescription.AddMember("SourceBuildInformation", SourceBuildInformation)
-
-	ApplicationVersionDescription_BuildArn = ApplicationVersionDescription.AddMember("BuildArn", _String)
-
-	ApplicationVersionDescription_SourceBundle = ApplicationVersionDescription.AddMember("SourceBundle", S3Location)
-
-	ApplicationVersionDescription_ImageSource = ApplicationVersionDescription.AddMember("ImageSource", ImageSource)
-
-	ApplicationVersionDescription_ImageBuildConfiguration = ApplicationVersionDescription.AddMember("ImageBuildConfiguration", ImageBuildConfiguration)
-
-	ApplicationVersionDescription_Process = ApplicationVersionDescription.AddMember("Process", _ApplicationVersionProccess)
-
-	ApplicationVersionDescription_DateCreated = ApplicationVersionDescription.AddMember("DateCreated", _CreationDate)
-
-	ApplicationVersionDescription_DateUpdated = ApplicationVersionDescription.AddMember("DateUpdated", _UpdateDate)
-
-	ApplicationVersionDescription_Status = ApplicationVersionDescription.AddMember("Status", ApplicationVersionStatus)
-
-	_ApplicationVersionDescriptionList_member = _ApplicationVersionDescriptionList.AddMember("member", ApplicationVersionDescription)
-
-	AutoScalingGroup_Name = AutoScalingGroup.AddMember("Name", _ResourceId)
-
-	_AutoScalingGroupList_member = _AutoScalingGroupList.AddMember("member", AutoScalingGroup)
-
-	_SolutionStackFileTypeList_member = _SolutionStackFileTypeList.AddMember("member", _FileTypeExtension)
-
-	SolutionStackDescription_SolutionStackName = SolutionStackDescription.AddMember("SolutionStackName", _SolutionStackName)
-
-	SolutionStackDescription_PermittedFileTypes = SolutionStackDescription.AddMember("PermittedFileTypes", _SolutionStackFileTypeList)
-
-	_AvailableSolutionStackDetailsList_member = _AvailableSolutionStackDetailsList.AddMember("member", SolutionStackDescription)
-
-	_AvailableSolutionStackNamesList_member = _AvailableSolutionStackNamesList.AddMember("member", _SolutionStackName)
-
-	BuildConfiguration_ArtifactName = BuildConfiguration.AddMember("ArtifactName", _String)
-
-	BuildConfiguration_CodeBuildServiceRole = BuildConfiguration.AddMember("CodeBuildServiceRole", _NonEmptyString)
-
-	BuildConfiguration_ComputeType = BuildConfiguration.AddMember("ComputeType", ComputeType)
-
-	BuildConfiguration_Image = BuildConfiguration.AddMember("Image", _NonEmptyString)
-
-	BuildConfiguration_TimeoutInMinutes = BuildConfiguration.AddMember("TimeoutInMinutes", _BoxedInt)
-
-	Builder_ARN = Builder.AddMember("ARN", _ARN)
-
-	_Causes_member = _Causes.AddMember("member", _Cause)
-
-	Cluster_ClusterArn = Cluster.AddMember("ClusterArn", _ResourceId)
-
-	CodeBuildNotInServiceRegionException_message = CodeBuildNotInServiceRegionException.AddMember("message", _ExceptionMessage)
-
-	ConfigurationDeploymentStatus_deployed = ConfigurationDeploymentStatus.AddMember("deployed", smithyprelude.Unit)
-
-	ConfigurationDeploymentStatus_pending = ConfigurationDeploymentStatus.AddMember("pending", smithyprelude.Unit)
-
-	ConfigurationDeploymentStatus_failed = ConfigurationDeploymentStatus.AddMember("failed", smithyprelude.Unit)
-
-	ConfigurationOptionValueType_Scalar = ConfigurationOptionValueType.AddMember("Scalar", smithyprelude.Unit)
-
-	ConfigurationOptionValueType_List = ConfigurationOptionValueType.AddMember("List", smithyprelude.Unit)
-
-	_ConfigurationOptionPossibleValues_member = _ConfigurationOptionPossibleValues.AddMember("member", _ConfigurationOptionPossibleValue)
-
-	OptionRestrictionRegex_Pattern = OptionRestrictionRegex.AddMember("Pattern", _RegexPattern)
-
-	OptionRestrictionRegex_Label = OptionRestrictionRegex.AddMember("Label", _RegexLabel)
-
-	ConfigurationOptionDescription_Namespace = ConfigurationOptionDescription.AddMember("Namespace", _OptionNamespace)
-
-	ConfigurationOptionDescription_Name = ConfigurationOptionDescription.AddMember("Name", _ConfigurationOptionName)
-
-	ConfigurationOptionDescription_DefaultValue = ConfigurationOptionDescription.AddMember("DefaultValue", _ConfigurationOptionDefaultValue)
-
-	ConfigurationOptionDescription_ChangeSeverity = ConfigurationOptionDescription.AddMember("ChangeSeverity", _ConfigurationOptionSeverity)
-
-	ConfigurationOptionDescription_UserDefined = ConfigurationOptionDescription.AddMember("UserDefined", _UserDefinedOption)
-
-	ConfigurationOptionDescription_ValueType = ConfigurationOptionDescription.AddMember("ValueType", ConfigurationOptionValueType)
-
-	ConfigurationOptionDescription_ValueOptions = ConfigurationOptionDescription.AddMember("ValueOptions", _ConfigurationOptionPossibleValues)
-
-	ConfigurationOptionDescription_MinValue = ConfigurationOptionDescription.AddMember("MinValue", _OptionRestrictionMinValue)
-
-	ConfigurationOptionDescription_MaxValue = ConfigurationOptionDescription.AddMember("MaxValue", _OptionRestrictionMaxValue)
-
-	ConfigurationOptionDescription_MaxLength = ConfigurationOptionDescription.AddMember("MaxLength", _OptionRestrictionMaxLength)
-
-	ConfigurationOptionDescription_Regex = ConfigurationOptionDescription.AddMember("Regex", OptionRestrictionRegex)
-
-	_ConfigurationOptionDescriptionsList_member = _ConfigurationOptionDescriptionsList.AddMember("member", ConfigurationOptionDescription)
-
-	ConfigurationOptionSetting_ResourceName = ConfigurationOptionSetting.AddMember("ResourceName", _ResourceName)
-
-	ConfigurationOptionSetting_Namespace = ConfigurationOptionSetting.AddMember("Namespace", _OptionNamespace)
-
-	ConfigurationOptionSetting_OptionName = ConfigurationOptionSetting.AddMember("OptionName", _ConfigurationOptionName)
-
-	ConfigurationOptionSetting_Value = ConfigurationOptionSetting.AddMember("Value", _ConfigurationOptionValue)
-
-	_ConfigurationOptionSettingsList_member = _ConfigurationOptionSettingsList.AddMember("member", ConfigurationOptionSetting)
-
-	ConfigurationSettingsDescription_SolutionStackName = ConfigurationSettingsDescription.AddMember("SolutionStackName", _SolutionStackName)
-
-	ConfigurationSettingsDescription_PlatformArn = ConfigurationSettingsDescription.AddMember("PlatformArn", _PlatformArn)
-
-	ConfigurationSettingsDescription_ApplicationName = ConfigurationSettingsDescription.AddMember("ApplicationName", _ApplicationName)
-
-	ConfigurationSettingsDescription_TemplateName = ConfigurationSettingsDescription.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	ConfigurationSettingsDescription_Description = ConfigurationSettingsDescription.AddMember("Description", _Description)
-
-	ConfigurationSettingsDescription_EnvironmentName = ConfigurationSettingsDescription.AddMember("EnvironmentName", _EnvironmentName)
-
-	ConfigurationSettingsDescription_DeploymentStatus = ConfigurationSettingsDescription.AddMember("DeploymentStatus", ConfigurationDeploymentStatus)
-
-	ConfigurationSettingsDescription_DateCreated = ConfigurationSettingsDescription.AddMember("DateCreated", _CreationDate)
-
-	ConfigurationSettingsDescription_DateUpdated = ConfigurationSettingsDescription.AddMember("DateUpdated", _UpdateDate)
-
-	ConfigurationSettingsDescription_OptionSettings = ConfigurationSettingsDescription.AddMember("OptionSettings", _ConfigurationOptionSettingsList)
-
-	_ConfigurationSettingsDescriptionList_member = _ConfigurationSettingsDescriptionList.AddMember("member", ConfigurationSettingsDescription)
-
-	CPUUtilization_User = CPUUtilization.AddMember("User", _NullableDouble)
-
-	CPUUtilization_Nice = CPUUtilization.AddMember("Nice", _NullableDouble)
-
-	CPUUtilization_System = CPUUtilization.AddMember("System", _NullableDouble)
-
-	CPUUtilization_Idle = CPUUtilization.AddMember("Idle", _NullableDouble)
-
-	CPUUtilization_IOWait = CPUUtilization.AddMember("IOWait", _NullableDouble)
-
-	CPUUtilization_IRQ = CPUUtilization.AddMember("IRQ", _NullableDouble)
-
-	CPUUtilization_SoftIRQ = CPUUtilization.AddMember("SoftIRQ", _NullableDouble)
-
-	CPUUtilization_Privileged = CPUUtilization.AddMember("Privileged", _NullableDouble)
-
-	CustomAmi_VirtualizationType = CustomAmi.AddMember("VirtualizationType", _VirtualizationType)
-
-	CustomAmi_ImageId = CustomAmi.AddMember("ImageId", _ImageId)
-
-	_CustomAmiList_member = _CustomAmiList.AddMember("member", CustomAmi)
-
-	DefaultAmi_Architecture = DefaultAmi.AddMember("Architecture", AmiArchitecture)
-
-	DefaultAmi_ImageId = DefaultAmi.AddMember("ImageId", _ImageId)
-
-	_DefaultAmiList_member = _DefaultAmiList.AddMember("member", DefaultAmi)
-
-	Deployment_VersionLabel = Deployment.AddMember("VersionLabel", _String)
-
-	Deployment_DeploymentId = Deployment.AddMember("DeploymentId", _NullableLong)
-
-	Deployment_Status = Deployment.AddMember("Status", _String)
-
-	Deployment_DeploymentTime = Deployment.AddMember("DeploymentTime", _DeploymentTimestamp)
-
-	ElasticBeanstalkServiceException_message = ElasticBeanstalkServiceException.AddMember("message", _ExceptionMessage)
-
-	EnvironmentStatus_Aborting = EnvironmentStatus.AddMember("Aborting", smithyprelude.Unit)
-
-	EnvironmentStatus_Launching = EnvironmentStatus.AddMember("Launching", smithyprelude.Unit)
-
-	EnvironmentStatus_Updating = EnvironmentStatus.AddMember("Updating", smithyprelude.Unit)
-
-	EnvironmentStatus_LinkingFrom = EnvironmentStatus.AddMember("LinkingFrom", smithyprelude.Unit)
-
-	EnvironmentStatus_LinkingTo = EnvironmentStatus.AddMember("LinkingTo", smithyprelude.Unit)
-
-	EnvironmentStatus_Ready = EnvironmentStatus.AddMember("Ready", smithyprelude.Unit)
-
-	EnvironmentStatus_Terminating = EnvironmentStatus.AddMember("Terminating", smithyprelude.Unit)
-
-	EnvironmentStatus_Terminated = EnvironmentStatus.AddMember("Terminated", smithyprelude.Unit)
-
-	EnvironmentHealth_Green = EnvironmentHealth.AddMember("Green", smithyprelude.Unit)
-
-	EnvironmentHealth_Yellow = EnvironmentHealth.AddMember("Yellow", smithyprelude.Unit)
-
-	EnvironmentHealth_Red = EnvironmentHealth.AddMember("Red", smithyprelude.Unit)
-
-	EnvironmentHealth_Grey = EnvironmentHealth.AddMember("Grey", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_NoData = EnvironmentHealthStatus.AddMember("NoData", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Unknown = EnvironmentHealthStatus.AddMember("Unknown", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Pending = EnvironmentHealthStatus.AddMember("Pending", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Ok = EnvironmentHealthStatus.AddMember("Ok", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Info = EnvironmentHealthStatus.AddMember("Info", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Warning = EnvironmentHealthStatus.AddMember("Warning", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Degraded = EnvironmentHealthStatus.AddMember("Degraded", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Severe = EnvironmentHealthStatus.AddMember("Severe", smithyprelude.Unit)
-
-	EnvironmentHealthStatus_Suspended = EnvironmentHealthStatus.AddMember("Suspended", smithyprelude.Unit)
-
-	Listener_Protocol = Listener.AddMember("Protocol", _String)
-
-	Listener_Port = Listener.AddMember("Port", _Integer)
-
-	_LoadBalancerListenersDescription_member = _LoadBalancerListenersDescription.AddMember("member", Listener)
-
-	LoadBalancerDescription_LoadBalancerName = LoadBalancerDescription.AddMember("LoadBalancerName", _String)
-
-	LoadBalancerDescription_Domain = LoadBalancerDescription.AddMember("Domain", _String)
-
-	LoadBalancerDescription_Listeners = LoadBalancerDescription.AddMember("Listeners", _LoadBalancerListenersDescription)
-
-	EnvironmentResourcesDescription_LoadBalancer = EnvironmentResourcesDescription.AddMember("LoadBalancer", LoadBalancerDescription)
-
-	EnvironmentTier_Name = EnvironmentTier.AddMember("Name", _String)
-
-	EnvironmentTier_Type = EnvironmentTier.AddMember("Type", _String)
-
-	EnvironmentTier_Version = EnvironmentTier.AddMember("Version", _String)
-
-	EnvironmentLink_LinkName = EnvironmentLink.AddMember("LinkName", _String)
-
-	EnvironmentLink_EnvironmentName = EnvironmentLink.AddMember("EnvironmentName", _String)
-
-	_EnvironmentLinks_member = _EnvironmentLinks.AddMember("member", EnvironmentLink)
-
-	EnvironmentDescription_EnvironmentName = EnvironmentDescription.AddMember("EnvironmentName", _EnvironmentName)
-
-	EnvironmentDescription_EnvironmentId = EnvironmentDescription.AddMember("EnvironmentId", _EnvironmentId)
-
-	EnvironmentDescription_ApplicationName = EnvironmentDescription.AddMember("ApplicationName", _ApplicationName)
-
-	EnvironmentDescription_VersionLabel = EnvironmentDescription.AddMember("VersionLabel", _VersionLabel)
-
-	EnvironmentDescription_SolutionStackName = EnvironmentDescription.AddMember("SolutionStackName", _SolutionStackName)
-
-	EnvironmentDescription_PlatformArn = EnvironmentDescription.AddMember("PlatformArn", _PlatformArn)
-
-	EnvironmentDescription_TemplateName = EnvironmentDescription.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	EnvironmentDescription_Description = EnvironmentDescription.AddMember("Description", _Description)
-
-	EnvironmentDescription_EndpointURL = EnvironmentDescription.AddMember("EndpointURL", _EndpointURL)
-
-	EnvironmentDescription_CNAME = EnvironmentDescription.AddMember("CNAME", _DNSCname)
-
-	EnvironmentDescription_DateCreated = EnvironmentDescription.AddMember("DateCreated", _CreationDate)
-
-	EnvironmentDescription_DateUpdated = EnvironmentDescription.AddMember("DateUpdated", _UpdateDate)
-
-	EnvironmentDescription_Status = EnvironmentDescription.AddMember("Status", EnvironmentStatus)
-
-	EnvironmentDescription_AbortableOperationInProgress = EnvironmentDescription.AddMember("AbortableOperationInProgress", _AbortableOperationInProgress)
-
-	EnvironmentDescription_Health = EnvironmentDescription.AddMember("Health", EnvironmentHealth)
-
-	EnvironmentDescription_HealthStatus = EnvironmentDescription.AddMember("HealthStatus", EnvironmentHealthStatus)
-
-	EnvironmentDescription_Resources = EnvironmentDescription.AddMember("Resources", EnvironmentResourcesDescription)
-
-	EnvironmentDescription_Tier = EnvironmentDescription.AddMember("Tier", EnvironmentTier)
-
-	EnvironmentDescription_EnvironmentLinks = EnvironmentDescription.AddMember("EnvironmentLinks", _EnvironmentLinks)
-
-	EnvironmentDescription_EnvironmentArn = EnvironmentDescription.AddMember("EnvironmentArn", _EnvironmentArn)
-
-	EnvironmentDescription_OperationsRole = EnvironmentDescription.AddMember("OperationsRole", _OperationsRole)
-
-	_EnvironmentDescriptionsList_member = _EnvironmentDescriptionsList.AddMember("member", EnvironmentDescription)
-
-	EnvironmentHealthAttribute_Status = EnvironmentHealthAttribute.AddMember("Status", smithyprelude.Unit)
-
-	EnvironmentHealthAttribute_Color = EnvironmentHealthAttribute.AddMember("Color", smithyprelude.Unit)
-
-	EnvironmentHealthAttribute_Causes = EnvironmentHealthAttribute.AddMember("Causes", smithyprelude.Unit)
-
-	EnvironmentHealthAttribute_ApplicationMetrics = EnvironmentHealthAttribute.AddMember("ApplicationMetrics", smithyprelude.Unit)
-
-	EnvironmentHealthAttribute_InstancesHealth = EnvironmentHealthAttribute.AddMember("InstancesHealth", smithyprelude.Unit)
-
-	EnvironmentHealthAttribute_All = EnvironmentHealthAttribute.AddMember("All", smithyprelude.Unit)
-
-	EnvironmentHealthAttribute_HealthStatus = EnvironmentHealthAttribute.AddMember("HealthStatus", smithyprelude.Unit)
-
-	EnvironmentHealthAttribute_RefreshedAt = EnvironmentHealthAttribute.AddMember("RefreshedAt", smithyprelude.Unit)
-
-	_EnvironmentHealthAttributes_member = _EnvironmentHealthAttributes.AddMember("member", EnvironmentHealthAttribute)
-
-	_EnvironmentIdList_member = _EnvironmentIdList.AddMember("member", _EnvironmentId)
-
-	EnvironmentInfoType_tail = EnvironmentInfoType.AddMember("tail", smithyprelude.Unit)
-
-	EnvironmentInfoType_bundle = EnvironmentInfoType.AddMember("bundle", smithyprelude.Unit)
-
-	EnvironmentInfoType_analyze = EnvironmentInfoType.AddMember("analyze", smithyprelude.Unit)
-
-	EnvironmentInfoDescription_InfoType = EnvironmentInfoDescription.AddMember("InfoType", EnvironmentInfoType)
-
-	EnvironmentInfoDescription_Ec2InstanceId = EnvironmentInfoDescription.AddMember("Ec2InstanceId", _Ec2InstanceId)
-
-	EnvironmentInfoDescription_SampleTimestamp = EnvironmentInfoDescription.AddMember("SampleTimestamp", _SampleTimestamp)
-
-	EnvironmentInfoDescription_Message = EnvironmentInfoDescription.AddMember("Message", _Message)
-
-	_EnvironmentInfoDescriptionList_member = _EnvironmentInfoDescriptionList.AddMember("member", EnvironmentInfoDescription)
-
-	_EnvironmentNamesList_member = _EnvironmentNamesList.AddMember("member", _EnvironmentName)
-
-	Instance_Id = Instance.AddMember("Id", _ResourceId)
-
-	_InstanceList_member = _InstanceList.AddMember("member", Instance)
-
-	LaunchConfiguration_Name = LaunchConfiguration.AddMember("Name", _ResourceId)
-
-	_LaunchConfigurationList_member = _LaunchConfigurationList.AddMember("member", LaunchConfiguration)
-
-	LaunchTemplate_Id = LaunchTemplate.AddMember("Id", _ResourceId)
-
-	_LaunchTemplateList_member = _LaunchTemplateList.AddMember("member", LaunchTemplate)
-
-	LoadBalancer_Name = LoadBalancer.AddMember("Name", _ResourceId)
-
-	_LoadBalancerList_member = _LoadBalancerList.AddMember("member", LoadBalancer)
-
-	Trigger_Name = Trigger.AddMember("Name", _ResourceId)
-
-	_TriggerList_member = _TriggerList.AddMember("member", Trigger)
-
-	Queue_Name = Queue.AddMember("Name", _String)
-
-	Queue_URL = Queue.AddMember("URL", _String)
-
-	_QueueList_member = _QueueList.AddMember("member", Queue)
-
-	EnvironmentResourceDescription_EnvironmentName = EnvironmentResourceDescription.AddMember("EnvironmentName", _EnvironmentName)
-
-	EnvironmentResourceDescription_AutoScalingGroups = EnvironmentResourceDescription.AddMember("AutoScalingGroups", _AutoScalingGroupList)
-
-	EnvironmentResourceDescription_Cluster = EnvironmentResourceDescription.AddMember("Cluster", Cluster)
-
-	EnvironmentResourceDescription_Instances = EnvironmentResourceDescription.AddMember("Instances", _InstanceList)
-
-	EnvironmentResourceDescription_LaunchConfigurations = EnvironmentResourceDescription.AddMember("LaunchConfigurations", _LaunchConfigurationList)
-
-	EnvironmentResourceDescription_LaunchTemplates = EnvironmentResourceDescription.AddMember("LaunchTemplates", _LaunchTemplateList)
-
-	EnvironmentResourceDescription_LoadBalancers = EnvironmentResourceDescription.AddMember("LoadBalancers", _LoadBalancerList)
-
-	EnvironmentResourceDescription_Triggers = EnvironmentResourceDescription.AddMember("Triggers", _TriggerList)
-
-	EnvironmentResourceDescription_Queues = EnvironmentResourceDescription.AddMember("Queues", _QueueList)
-
-	EventSeverity_TRACE = EventSeverity.AddMember("TRACE", smithyprelude.Unit)
-
-	EventSeverity_DEBUG = EventSeverity.AddMember("DEBUG", smithyprelude.Unit)
-
-	EventSeverity_INFO = EventSeverity.AddMember("INFO", smithyprelude.Unit)
-
-	EventSeverity_WARN = EventSeverity.AddMember("WARN", smithyprelude.Unit)
-
-	EventSeverity_ERROR = EventSeverity.AddMember("ERROR", smithyprelude.Unit)
-
-	EventSeverity_FATAL = EventSeverity.AddMember("FATAL", smithyprelude.Unit)
-
-	EventDescription_EventDate = EventDescription.AddMember("EventDate", _EventDate)
-
-	EventDescription_Message = EventDescription.AddMember("Message", _EventMessage)
-
-	EventDescription_ApplicationName = EventDescription.AddMember("ApplicationName", _ApplicationName)
-
-	EventDescription_VersionLabel = EventDescription.AddMember("VersionLabel", _VersionLabel)
-
-	EventDescription_TemplateName = EventDescription.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	EventDescription_EnvironmentName = EventDescription.AddMember("EnvironmentName", _EnvironmentName)
-
-	EventDescription_PlatformArn = EventDescription.AddMember("PlatformArn", _PlatformArn)
-
-	EventDescription_RequestId = EventDescription.AddMember("RequestId", _RequestId)
-
-	EventDescription_Severity = EventDescription.AddMember("Severity", EventSeverity)
-
-	_EventDescriptionList_member = _EventDescriptionList.AddMember("member", EventDescription)
-
-	FailureType_UpdateCancelled = FailureType.AddMember("UpdateCancelled", smithyprelude.Unit)
-
-	FailureType_CancellationFailed = FailureType.AddMember("CancellationFailed", smithyprelude.Unit)
-
-	FailureType_RollbackFailed = FailureType.AddMember("RollbackFailed", smithyprelude.Unit)
-
-	FailureType_RollbackSuccessful = FailureType.AddMember("RollbackSuccessful", smithyprelude.Unit)
-
-	FailureType_InternalFailure = FailureType.AddMember("InternalFailure", smithyprelude.Unit)
-
-	FailureType_InvalidEnvironmentState = FailureType.AddMember("InvalidEnvironmentState", smithyprelude.Unit)
-
-	FailureType_PermissionsError = FailureType.AddMember("PermissionsError", smithyprelude.Unit)
-
-	ImageConfiguration_Source = ImageConfiguration.AddMember("Source", ImageSource)
-
-	ImageConfiguration_Build = ImageConfiguration.AddMember("Build", ImageBuildConfiguration)
-
-	_LoadAverage_member = _LoadAverage.AddMember("member", _LoadAverageValue)
-
-	SystemStatus_CPUUtilization = SystemStatus.AddMember("CPUUtilization", CPUUtilization)
-
-	SystemStatus_LoadAverage = SystemStatus.AddMember("LoadAverage", _LoadAverage)
-
-	SingleInstanceHealth_InstanceId = SingleInstanceHealth.AddMember("InstanceId", _InstanceId)
-
-	SingleInstanceHealth_HealthStatus = SingleInstanceHealth.AddMember("HealthStatus", _String)
-
-	SingleInstanceHealth_Color = SingleInstanceHealth.AddMember("Color", _String)
-
-	SingleInstanceHealth_Causes = SingleInstanceHealth.AddMember("Causes", _Causes)
-
-	SingleInstanceHealth_LaunchedAt = SingleInstanceHealth.AddMember("LaunchedAt", _LaunchedAt)
-
-	SingleInstanceHealth_ApplicationMetrics = SingleInstanceHealth.AddMember("ApplicationMetrics", ApplicationMetrics)
-
-	SingleInstanceHealth_System = SingleInstanceHealth.AddMember("System", SystemStatus)
-
-	SingleInstanceHealth_Deployment = SingleInstanceHealth.AddMember("Deployment", Deployment)
-
-	SingleInstanceHealth_AvailabilityZone = SingleInstanceHealth.AddMember("AvailabilityZone", _String)
-
-	SingleInstanceHealth_InstanceType = SingleInstanceHealth.AddMember("InstanceType", _String)
-
-	_InstanceHealthList_member = _InstanceHealthList.AddMember("member", SingleInstanceHealth)
-
-	InstanceHealthSummary_NoData = InstanceHealthSummary.AddMember("NoData", _NullableInteger)
-
-	InstanceHealthSummary_Unknown = InstanceHealthSummary.AddMember("Unknown", _NullableInteger)
-
-	InstanceHealthSummary_Pending = InstanceHealthSummary.AddMember("Pending", _NullableInteger)
-
-	InstanceHealthSummary_Ok = InstanceHealthSummary.AddMember("Ok", _NullableInteger)
-
-	InstanceHealthSummary_Info = InstanceHealthSummary.AddMember("Info", _NullableInteger)
-
-	InstanceHealthSummary_Warning = InstanceHealthSummary.AddMember("Warning", _NullableInteger)
-
-	InstanceHealthSummary_Degraded = InstanceHealthSummary.AddMember("Degraded", _NullableInteger)
-
-	InstanceHealthSummary_Severe = InstanceHealthSummary.AddMember("Severe", _NullableInteger)
-
-	InstancesHealthAttribute_HealthStatus = InstancesHealthAttribute.AddMember("HealthStatus", smithyprelude.Unit)
-
-	InstancesHealthAttribute_Color = InstancesHealthAttribute.AddMember("Color", smithyprelude.Unit)
-
-	InstancesHealthAttribute_Causes = InstancesHealthAttribute.AddMember("Causes", smithyprelude.Unit)
-
-	InstancesHealthAttribute_ApplicationMetrics = InstancesHealthAttribute.AddMember("ApplicationMetrics", smithyprelude.Unit)
-
-	InstancesHealthAttribute_RefreshedAt = InstancesHealthAttribute.AddMember("RefreshedAt", smithyprelude.Unit)
-
-	InstancesHealthAttribute_LaunchedAt = InstancesHealthAttribute.AddMember("LaunchedAt", smithyprelude.Unit)
-
-	InstancesHealthAttribute_System = InstancesHealthAttribute.AddMember("System", smithyprelude.Unit)
-
-	InstancesHealthAttribute_Deployment = InstancesHealthAttribute.AddMember("Deployment", smithyprelude.Unit)
-
-	InstancesHealthAttribute_AvailabilityZone = InstancesHealthAttribute.AddMember("AvailabilityZone", smithyprelude.Unit)
-
-	InstancesHealthAttribute_InstanceType = InstancesHealthAttribute.AddMember("InstanceType", smithyprelude.Unit)
-
-	InstancesHealthAttribute_All = InstancesHealthAttribute.AddMember("All", smithyprelude.Unit)
-
-	_InstancesHealthAttributes_member = _InstancesHealthAttributes.AddMember("member", InstancesHealthAttribute)
-
-	InsufficientPrivilegesException_message = InsufficientPrivilegesException.AddMember("message", _ExceptionMessage)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _ExceptionMessage)
-
-	ManagedAction_ActionId = ManagedAction.AddMember("ActionId", _String)
-
-	ManagedAction_ActionDescription = ManagedAction.AddMember("ActionDescription", _String)
-
-	ManagedAction_ActionType = ManagedAction.AddMember("ActionType", ActionType)
-
-	ManagedAction_Status = ManagedAction.AddMember("Status", ActionStatus)
-
-	ManagedAction_WindowStartTime = ManagedAction.AddMember("WindowStartTime", _Timestamp)
-
-	ManagedActionHistoryItem_ActionId = ManagedActionHistoryItem.AddMember("ActionId", _String)
-
-	ManagedActionHistoryItem_ActionType = ManagedActionHistoryItem.AddMember("ActionType", ActionType)
-
-	ManagedActionHistoryItem_ActionDescription = ManagedActionHistoryItem.AddMember("ActionDescription", _String)
-
-	ManagedActionHistoryItem_FailureType = ManagedActionHistoryItem.AddMember("FailureType", FailureType)
-
-	ManagedActionHistoryItem_Status = ManagedActionHistoryItem.AddMember("Status", ActionHistoryStatus)
-
-	ManagedActionHistoryItem_FailureDescription = ManagedActionHistoryItem.AddMember("FailureDescription", _String)
-
-	ManagedActionHistoryItem_ExecutedTime = ManagedActionHistoryItem.AddMember("ExecutedTime", _Timestamp)
-
-	ManagedActionHistoryItem_FinishedTime = ManagedActionHistoryItem.AddMember("FinishedTime", _Timestamp)
-
-	_ManagedActionHistoryItems_member = _ManagedActionHistoryItems.AddMember("member", ManagedActionHistoryItem)
-
-	ManagedActionInvalidStateException_message = ManagedActionInvalidStateException.AddMember("message", _ExceptionMessage)
-
-	_ManagedActions_member = _ManagedActions.AddMember("member", ManagedAction)
-
-	OperationInProgressException_message = OperationInProgressException.AddMember("message", _ExceptionMessage)
-
-	OptionSpecification_ResourceName = OptionSpecification.AddMember("ResourceName", _ResourceName)
-
-	OptionSpecification_Namespace = OptionSpecification.AddMember("Namespace", _OptionNamespace)
-
-	OptionSpecification_OptionName = OptionSpecification.AddMember("OptionName", _ConfigurationOptionName)
-
-	_OptionsSpecifierList_member = _OptionsSpecifierList.AddMember("member", OptionSpecification)
-
-	_SupportedTierList_member = _SupportedTierList.AddMember("member", _SupportedTier)
-
-	PlatformBranchSummary_PlatformName = PlatformBranchSummary.AddMember("PlatformName", _PlatformName)
-
-	PlatformBranchSummary_BranchName = PlatformBranchSummary.AddMember("BranchName", _BranchName)
-
-	PlatformBranchSummary_LifecycleState = PlatformBranchSummary.AddMember("LifecycleState", _PlatformBranchLifecycleState)
-
-	PlatformBranchSummary_BranchOrder = PlatformBranchSummary.AddMember("BranchOrder", _BranchOrder)
-
-	PlatformBranchSummary_SupportedTierList = PlatformBranchSummary.AddMember("SupportedTierList", _SupportedTierList)
-
-	_PlatformBranchSummaryList_member = _PlatformBranchSummaryList.AddMember("member", PlatformBranchSummary)
-
-	PlatformStatus_Creating = PlatformStatus.AddMember("Creating", smithyprelude.Unit)
-
-	PlatformStatus_Failed = PlatformStatus.AddMember("Failed", smithyprelude.Unit)
-
-	PlatformStatus_Ready = PlatformStatus.AddMember("Ready", smithyprelude.Unit)
-
-	PlatformStatus_Deleting = PlatformStatus.AddMember("Deleting", smithyprelude.Unit)
-
-	PlatformStatus_Deleted = PlatformStatus.AddMember("Deleted", smithyprelude.Unit)
-
-	PlatformProgrammingLanguage_Name = PlatformProgrammingLanguage.AddMember("Name", _String)
-
-	PlatformProgrammingLanguage_Version = PlatformProgrammingLanguage.AddMember("Version", _String)
-
-	_PlatformProgrammingLanguages_member = _PlatformProgrammingLanguages.AddMember("member", PlatformProgrammingLanguage)
-
-	PlatformFramework_Name = PlatformFramework.AddMember("Name", _String)
-
-	PlatformFramework_Version = PlatformFramework.AddMember("Version", _String)
-
-	_PlatformFrameworks_member = _PlatformFrameworks.AddMember("member", PlatformFramework)
-
-	_SupportedAddonList_member = _SupportedAddonList.AddMember("member", _SupportedAddon)
-
-	PlatformDescription_PlatformArn = PlatformDescription.AddMember("PlatformArn", _PlatformArn)
-
-	PlatformDescription_PlatformOwner = PlatformDescription.AddMember("PlatformOwner", _PlatformOwner)
-
-	PlatformDescription_PlatformName = PlatformDescription.AddMember("PlatformName", _PlatformName)
-
-	PlatformDescription_PlatformVersion = PlatformDescription.AddMember("PlatformVersion", _PlatformVersion)
-
-	PlatformDescription_SolutionStackName = PlatformDescription.AddMember("SolutionStackName", _SolutionStackName)
-
-	PlatformDescription_PlatformStatus = PlatformDescription.AddMember("PlatformStatus", PlatformStatus)
-
-	PlatformDescription_DateCreated = PlatformDescription.AddMember("DateCreated", _CreationDate)
-
-	PlatformDescription_DateUpdated = PlatformDescription.AddMember("DateUpdated", _UpdateDate)
-
-	PlatformDescription_PlatformCategory = PlatformDescription.AddMember("PlatformCategory", _PlatformCategory)
-
-	PlatformDescription_Description = PlatformDescription.AddMember("Description", _Description)
-
-	PlatformDescription_Maintainer = PlatformDescription.AddMember("Maintainer", _Maintainer)
-
-	PlatformDescription_OperatingSystemName = PlatformDescription.AddMember("OperatingSystemName", _OperatingSystemName)
-
-	PlatformDescription_OperatingSystemVersion = PlatformDescription.AddMember("OperatingSystemVersion", _OperatingSystemVersion)
-
-	PlatformDescription_ProgrammingLanguages = PlatformDescription.AddMember("ProgrammingLanguages", _PlatformProgrammingLanguages)
-
-	PlatformDescription_Frameworks = PlatformDescription.AddMember("Frameworks", _PlatformFrameworks)
-
-	PlatformDescription_CustomAmiList = PlatformDescription.AddMember("CustomAmiList", _CustomAmiList)
-
-	PlatformDescription_DefaultAmiList = PlatformDescription.AddMember("DefaultAmiList", _DefaultAmiList)
-
-	PlatformDescription_SupportedTierList = PlatformDescription.AddMember("SupportedTierList", _SupportedTierList)
-
-	PlatformDescription_SupportedAddonList = PlatformDescription.AddMember("SupportedAddonList", _SupportedAddonList)
-
-	PlatformDescription_PlatformLifecycleState = PlatformDescription.AddMember("PlatformLifecycleState", _PlatformLifecycleState)
-
-	PlatformDescription_PlatformBranchName = PlatformDescription.AddMember("PlatformBranchName", _BranchName)
-
-	PlatformDescription_PlatformBranchLifecycleState = PlatformDescription.AddMember("PlatformBranchLifecycleState", _PlatformBranchLifecycleState)
-
-	_PlatformFilterValueList_member = _PlatformFilterValueList.AddMember("member", _PlatformFilterValue)
-
-	PlatformFilter_Type = PlatformFilter.AddMember("Type", _PlatformFilterType)
-
-	PlatformFilter_Operator = PlatformFilter.AddMember("Operator", _PlatformFilterOperator)
-
-	PlatformFilter_Values = PlatformFilter.AddMember("Values", _PlatformFilterValueList)
-
-	_PlatformFilters_member = _PlatformFilters.AddMember("member", PlatformFilter)
-
-	PlatformSummary_PlatformArn = PlatformSummary.AddMember("PlatformArn", _PlatformArn)
-
-	PlatformSummary_PlatformOwner = PlatformSummary.AddMember("PlatformOwner", _PlatformOwner)
-
-	PlatformSummary_PlatformStatus = PlatformSummary.AddMember("PlatformStatus", PlatformStatus)
-
-	PlatformSummary_PlatformCategory = PlatformSummary.AddMember("PlatformCategory", _PlatformCategory)
-
-	PlatformSummary_OperatingSystemName = PlatformSummary.AddMember("OperatingSystemName", _OperatingSystemName)
-
-	PlatformSummary_OperatingSystemVersion = PlatformSummary.AddMember("OperatingSystemVersion", _OperatingSystemVersion)
-
-	PlatformSummary_SupportedTierList = PlatformSummary.AddMember("SupportedTierList", _SupportedTierList)
-
-	PlatformSummary_SupportedAddonList = PlatformSummary.AddMember("SupportedAddonList", _SupportedAddonList)
-
-	PlatformSummary_PlatformLifecycleState = PlatformSummary.AddMember("PlatformLifecycleState", _PlatformLifecycleState)
-
-	PlatformSummary_PlatformVersion = PlatformSummary.AddMember("PlatformVersion", _PlatformVersion)
-
-	PlatformSummary_PlatformBranchName = PlatformSummary.AddMember("PlatformBranchName", _BranchName)
-
-	PlatformSummary_PlatformBranchLifecycleState = PlatformSummary.AddMember("PlatformBranchLifecycleState", _PlatformBranchLifecycleState)
-
-	_PlatformSummaryList_member = _PlatformSummaryList.AddMember("member", PlatformSummary)
-
-	PlatformVersionStillReferencedException_message = PlatformVersionStillReferencedException.AddMember("message", _ExceptionMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ExceptionMessage)
-
-	ResourceQuota_Maximum = ResourceQuota.AddMember("Maximum", _BoxedInt)
-
-	ResourceQuotas_ApplicationQuota = ResourceQuotas.AddMember("ApplicationQuota", ResourceQuota)
-
-	ResourceQuotas_ApplicationVersionQuota = ResourceQuotas.AddMember("ApplicationVersionQuota", ResourceQuota)
-
-	ResourceQuotas_EnvironmentQuota = ResourceQuotas.AddMember("EnvironmentQuota", ResourceQuota)
-
-	ResourceQuotas_ConfigurationTemplateQuota = ResourceQuotas.AddMember("ConfigurationTemplateQuota", ResourceQuota)
-
-	ResourceQuotas_CustomPlatformQuota = ResourceQuotas.AddMember("CustomPlatformQuota", ResourceQuota)
-
-	ResourceTypeNotSupportedException_message = ResourceTypeNotSupportedException.AddMember("message", _ExceptionMessage)
-
-	S3LocationNotInServiceRegionException_message = S3LocationNotInServiceRegionException.AddMember("message", _ExceptionMessage)
-
-	S3SubscriptionRequiredException_message = S3SubscriptionRequiredException.AddMember("message", _ExceptionMessage)
-
-	_SearchFilterValues_member = _SearchFilterValues.AddMember("member", _SearchFilterValue)
-
-	SearchFilter_Attribute = SearchFilter.AddMember("Attribute", _SearchFilterAttribute)
-
-	SearchFilter_Operator = SearchFilter.AddMember("Operator", _SearchFilterOperator)
-
-	SearchFilter_Values = SearchFilter.AddMember("Values", _SearchFilterValues)
-
-	_SearchFilters_member = _SearchFilters.AddMember("member", SearchFilter)
-
-	SourceBundleDeletionException_message = SourceBundleDeletionException.AddMember("message", _ExceptionMessage)
-
-	SourceConfiguration_ApplicationName = SourceConfiguration.AddMember("ApplicationName", _ApplicationName)
-
-	SourceConfiguration_TemplateName = SourceConfiguration.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	TooManyApplicationsException_message = TooManyApplicationsException.AddMember("message", _ExceptionMessage)
-
-	TooManyApplicationVersionsException_message = TooManyApplicationVersionsException.AddMember("message", _ExceptionMessage)
-
-	TooManyBucketsException_message = TooManyBucketsException.AddMember("message", _ExceptionMessage)
-
-	TooManyConfigurationTemplatesException_message = TooManyConfigurationTemplatesException.AddMember("message", _ExceptionMessage)
-
-	TooManyEnvironmentsException_message = TooManyEnvironmentsException.AddMember("message", _ExceptionMessage)
-
-	TooManyPlatformsException_message = TooManyPlatformsException.AddMember("message", _ExceptionMessage)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _ExceptionMessage)
-
-	ValidationSeverity_error = ValidationSeverity.AddMember("error", smithyprelude.Unit)
-
-	ValidationSeverity_warning = ValidationSeverity.AddMember("warning", smithyprelude.Unit)
-
-	ValidationMessage_Message = ValidationMessage.AddMember("Message", _ValidationMessageString)
-
-	ValidationMessage_Severity = ValidationMessage.AddMember("Severity", ValidationSeverity)
-
-	ValidationMessage_Namespace = ValidationMessage.AddMember("Namespace", _OptionNamespace)
-
-	ValidationMessage_OptionName = ValidationMessage.AddMember("OptionName", _ConfigurationOptionName)
-
-	_ValidationMessagesList_member = _ValidationMessagesList.AddMember("member", ValidationMessage)
-
-	_VersionLabels_member = _VersionLabels.AddMember("member", _VersionLabel)
-
-	AbortEnvironmentUpdateMessage_EnvironmentId = AbortEnvironmentUpdateMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	AbortEnvironmentUpdateMessage_EnvironmentName = AbortEnvironmentUpdateMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	ApplyEnvironmentManagedActionRequest_EnvironmentName = ApplyEnvironmentManagedActionRequest.AddMember("EnvironmentName", _String)
-
-	ApplyEnvironmentManagedActionRequest_EnvironmentId = ApplyEnvironmentManagedActionRequest.AddMember("EnvironmentId", _String)
-
-	ApplyEnvironmentManagedActionRequest_ActionId = ApplyEnvironmentManagedActionRequest.AddMember("ActionId", _String)
-
-	ApplyEnvironmentManagedActionResult_ActionId = ApplyEnvironmentManagedActionResult.AddMember("ActionId", _String)
-
-	ApplyEnvironmentManagedActionResult_ActionDescription = ApplyEnvironmentManagedActionResult.AddMember("ActionDescription", _String)
-
-	ApplyEnvironmentManagedActionResult_ActionType = ApplyEnvironmentManagedActionResult.AddMember("ActionType", ActionType)
-
-	ApplyEnvironmentManagedActionResult_Status = ApplyEnvironmentManagedActionResult.AddMember("Status", _String)
-
-	AssociateEnvironmentOperationsRoleMessage_EnvironmentName = AssociateEnvironmentOperationsRoleMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	AssociateEnvironmentOperationsRoleMessage_OperationsRole = AssociateEnvironmentOperationsRoleMessage.AddMember("OperationsRole", _OperationsRole)
-
-	CheckDNSAvailabilityMessage_CNAMEPrefix = CheckDNSAvailabilityMessage.AddMember("CNAMEPrefix", _DNSCnamePrefix)
-
-	CheckDNSAvailabilityResultMessage_Available = CheckDNSAvailabilityResultMessage.AddMember("Available", _CnameAvailability)
-
-	CheckDNSAvailabilityResultMessage_FullyQualifiedCNAME = CheckDNSAvailabilityResultMessage.AddMember("FullyQualifiedCNAME", _DNSCname)
-
-	ComposeEnvironmentsMessage_ApplicationName = ComposeEnvironmentsMessage.AddMember("ApplicationName", _ApplicationName)
-
-	ComposeEnvironmentsMessage_GroupName = ComposeEnvironmentsMessage.AddMember("GroupName", _GroupName)
-
-	ComposeEnvironmentsMessage_VersionLabels = ComposeEnvironmentsMessage.AddMember("VersionLabels", _VersionLabels)
-
-	EnvironmentDescriptionsMessage_Environments = EnvironmentDescriptionsMessage.AddMember("Environments", _EnvironmentDescriptionsList)
-
-	EnvironmentDescriptionsMessage_NextToken = EnvironmentDescriptionsMessage.AddMember("NextToken", _Token)
-
-	CreateApplicationMessage_ApplicationName = CreateApplicationMessage.AddMember("ApplicationName", _ApplicationName)
-
-	CreateApplicationMessage_Description = CreateApplicationMessage.AddMember("Description", _Description)
-
-	CreateApplicationMessage_ResourceLifecycleConfig = CreateApplicationMessage.AddMember("ResourceLifecycleConfig", ApplicationResourceLifecycleConfig)
-
-	CreateApplicationMessage_Tags = CreateApplicationMessage.AddMember("Tags", _Tags)
-
-	ApplicationDescriptionMessage_Application = ApplicationDescriptionMessage.AddMember("Application", ApplicationDescription)
-
-	CreateApplicationVersionMessage_ApplicationName = CreateApplicationVersionMessage.AddMember("ApplicationName", _ApplicationName)
-
-	CreateApplicationVersionMessage_VersionLabel = CreateApplicationVersionMessage.AddMember("VersionLabel", _VersionLabel)
-
-	CreateApplicationVersionMessage_Description = CreateApplicationVersionMessage.AddMember("Description", _Description)
-
-	CreateApplicationVersionMessage_SourceBuildInformation = CreateApplicationVersionMessage.AddMember("SourceBuildInformation", SourceBuildInformation)
-
-	CreateApplicationVersionMessage_SourceBundle = CreateApplicationVersionMessage.AddMember("SourceBundle", S3Location)
-
-	CreateApplicationVersionMessage_BuildConfiguration = CreateApplicationVersionMessage.AddMember("BuildConfiguration", BuildConfiguration)
-
-	CreateApplicationVersionMessage_AutoCreateApplication = CreateApplicationVersionMessage.AddMember("AutoCreateApplication", _AutoCreateApplication)
-
-	CreateApplicationVersionMessage_Process = CreateApplicationVersionMessage.AddMember("Process", _ApplicationVersionProccess)
-
-	CreateApplicationVersionMessage_Tags = CreateApplicationVersionMessage.AddMember("Tags", _Tags)
-
-	CreateApplicationVersionMessage_ImageConfiguration = CreateApplicationVersionMessage.AddMember("ImageConfiguration", ImageConfiguration)
-
-	ApplicationVersionDescriptionMessage_ApplicationVersion = ApplicationVersionDescriptionMessage.AddMember("ApplicationVersion", ApplicationVersionDescription)
-
-	CreateConfigurationTemplateMessage_ApplicationName = CreateConfigurationTemplateMessage.AddMember("ApplicationName", _ApplicationName)
-
-	CreateConfigurationTemplateMessage_TemplateName = CreateConfigurationTemplateMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	CreateConfigurationTemplateMessage_SolutionStackName = CreateConfigurationTemplateMessage.AddMember("SolutionStackName", _SolutionStackName)
-
-	CreateConfigurationTemplateMessage_PlatformArn = CreateConfigurationTemplateMessage.AddMember("PlatformArn", _PlatformArn)
-
-	CreateConfigurationTemplateMessage_SourceConfiguration = CreateConfigurationTemplateMessage.AddMember("SourceConfiguration", SourceConfiguration)
-
-	CreateConfigurationTemplateMessage_EnvironmentId = CreateConfigurationTemplateMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	CreateConfigurationTemplateMessage_Description = CreateConfigurationTemplateMessage.AddMember("Description", _Description)
-
-	CreateConfigurationTemplateMessage_OptionSettings = CreateConfigurationTemplateMessage.AddMember("OptionSettings", _ConfigurationOptionSettingsList)
-
-	CreateConfigurationTemplateMessage_Tags = CreateConfigurationTemplateMessage.AddMember("Tags", _Tags)
-
-	CreateEnvironmentMessage_ApplicationName = CreateEnvironmentMessage.AddMember("ApplicationName", _ApplicationName)
-
-	CreateEnvironmentMessage_EnvironmentName = CreateEnvironmentMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	CreateEnvironmentMessage_GroupName = CreateEnvironmentMessage.AddMember("GroupName", _GroupName)
-
-	CreateEnvironmentMessage_Description = CreateEnvironmentMessage.AddMember("Description", _Description)
-
-	CreateEnvironmentMessage_CNAMEPrefix = CreateEnvironmentMessage.AddMember("CNAMEPrefix", _DNSCnamePrefix)
-
-	CreateEnvironmentMessage_Tier = CreateEnvironmentMessage.AddMember("Tier", EnvironmentTier)
-
-	CreateEnvironmentMessage_Tags = CreateEnvironmentMessage.AddMember("Tags", _Tags)
-
-	CreateEnvironmentMessage_VersionLabel = CreateEnvironmentMessage.AddMember("VersionLabel", _VersionLabel)
-
-	CreateEnvironmentMessage_TemplateName = CreateEnvironmentMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	CreateEnvironmentMessage_SolutionStackName = CreateEnvironmentMessage.AddMember("SolutionStackName", _SolutionStackName)
-
-	CreateEnvironmentMessage_PlatformArn = CreateEnvironmentMessage.AddMember("PlatformArn", _PlatformArn)
-
-	CreateEnvironmentMessage_OptionSettings = CreateEnvironmentMessage.AddMember("OptionSettings", _ConfigurationOptionSettingsList)
-
-	CreateEnvironmentMessage_OptionsToRemove = CreateEnvironmentMessage.AddMember("OptionsToRemove", _OptionsSpecifierList)
-
-	CreateEnvironmentMessage_OperationsRole = CreateEnvironmentMessage.AddMember("OperationsRole", _OperationsRole)
-
-	CreatePlatformVersionRequest_PlatformName = CreatePlatformVersionRequest.AddMember("PlatformName", _PlatformName)
-
-	CreatePlatformVersionRequest_PlatformVersion = CreatePlatformVersionRequest.AddMember("PlatformVersion", _PlatformVersion)
-
-	CreatePlatformVersionRequest_PlatformDefinitionBundle = CreatePlatformVersionRequest.AddMember("PlatformDefinitionBundle", S3Location)
-
-	CreatePlatformVersionRequest_EnvironmentName = CreatePlatformVersionRequest.AddMember("EnvironmentName", _EnvironmentName)
-
-	CreatePlatformVersionRequest_OptionSettings = CreatePlatformVersionRequest.AddMember("OptionSettings", _ConfigurationOptionSettingsList)
-
-	CreatePlatformVersionRequest_Tags = CreatePlatformVersionRequest.AddMember("Tags", _Tags)
-
-	CreatePlatformVersionResult_PlatformSummary = CreatePlatformVersionResult.AddMember("PlatformSummary", PlatformSummary)
-
-	CreatePlatformVersionResult_Builder = CreatePlatformVersionResult.AddMember("Builder", Builder)
-
-	CreateStorageLocationResultMessage_S3Bucket = CreateStorageLocationResultMessage.AddMember("S3Bucket", _S3Bucket)
-
-	DeleteApplicationMessage_ApplicationName = DeleteApplicationMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DeleteApplicationMessage_TerminateEnvByForce = DeleteApplicationMessage.AddMember("TerminateEnvByForce", _TerminateEnvForce)
-
-	DeleteApplicationVersionMessage_ApplicationName = DeleteApplicationVersionMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DeleteApplicationVersionMessage_VersionLabel = DeleteApplicationVersionMessage.AddMember("VersionLabel", _VersionLabel)
-
-	DeleteApplicationVersionMessage_DeleteSourceBundle = DeleteApplicationVersionMessage.AddMember("DeleteSourceBundle", _DeleteSourceBundle)
-
-	DeleteConfigurationTemplateMessage_ApplicationName = DeleteConfigurationTemplateMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DeleteConfigurationTemplateMessage_TemplateName = DeleteConfigurationTemplateMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	DeleteEnvironmentConfigurationMessage_ApplicationName = DeleteEnvironmentConfigurationMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DeleteEnvironmentConfigurationMessage_EnvironmentName = DeleteEnvironmentConfigurationMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	DeletePlatformVersionRequest_PlatformArn = DeletePlatformVersionRequest.AddMember("PlatformArn", _PlatformArn)
-
-	DeletePlatformVersionResult_PlatformSummary = DeletePlatformVersionResult.AddMember("PlatformSummary", PlatformSummary)
-
-	DescribeAccountAttributesResult_ResourceQuotas = DescribeAccountAttributesResult.AddMember("ResourceQuotas", ResourceQuotas)
-
-	DescribeApplicationsMessage_ApplicationNames = DescribeApplicationsMessage.AddMember("ApplicationNames", _ApplicationNamesList)
-
-	ApplicationDescriptionsMessage_Applications = ApplicationDescriptionsMessage.AddMember("Applications", _ApplicationDescriptionList)
-
-	DescribeApplicationVersionsMessage_ApplicationName = DescribeApplicationVersionsMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DescribeApplicationVersionsMessage_VersionLabels = DescribeApplicationVersionsMessage.AddMember("VersionLabels", _VersionLabelsList)
-
-	DescribeApplicationVersionsMessage_MaxRecords = DescribeApplicationVersionsMessage.AddMember("MaxRecords", _MaxRecords)
-
-	DescribeApplicationVersionsMessage_NextToken = DescribeApplicationVersionsMessage.AddMember("NextToken", _Token)
-
-	ApplicationVersionDescriptionsMessage_ApplicationVersions = ApplicationVersionDescriptionsMessage.AddMember("ApplicationVersions", _ApplicationVersionDescriptionList)
-
-	ApplicationVersionDescriptionsMessage_NextToken = ApplicationVersionDescriptionsMessage.AddMember("NextToken", _Token)
-
-	DescribeConfigurationOptionsMessage_ApplicationName = DescribeConfigurationOptionsMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DescribeConfigurationOptionsMessage_TemplateName = DescribeConfigurationOptionsMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	DescribeConfigurationOptionsMessage_EnvironmentName = DescribeConfigurationOptionsMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	DescribeConfigurationOptionsMessage_SolutionStackName = DescribeConfigurationOptionsMessage.AddMember("SolutionStackName", _SolutionStackName)
-
-	DescribeConfigurationOptionsMessage_PlatformArn = DescribeConfigurationOptionsMessage.AddMember("PlatformArn", _PlatformArn)
-
-	DescribeConfigurationOptionsMessage_Options = DescribeConfigurationOptionsMessage.AddMember("Options", _OptionsSpecifierList)
-
-	ConfigurationOptionsDescription_SolutionStackName = ConfigurationOptionsDescription.AddMember("SolutionStackName", _SolutionStackName)
-
-	ConfigurationOptionsDescription_PlatformArn = ConfigurationOptionsDescription.AddMember("PlatformArn", _PlatformArn)
-
-	ConfigurationOptionsDescription_Options = ConfigurationOptionsDescription.AddMember("Options", _ConfigurationOptionDescriptionsList)
-
-	DescribeConfigurationSettingsMessage_ApplicationName = DescribeConfigurationSettingsMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DescribeConfigurationSettingsMessage_TemplateName = DescribeConfigurationSettingsMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	DescribeConfigurationSettingsMessage_EnvironmentName = DescribeConfigurationSettingsMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	ConfigurationSettingsDescriptions_ConfigurationSettings = ConfigurationSettingsDescriptions.AddMember("ConfigurationSettings", _ConfigurationSettingsDescriptionList)
-
-	DescribeEnvironmentHealthRequest_EnvironmentName = DescribeEnvironmentHealthRequest.AddMember("EnvironmentName", _EnvironmentName)
-
-	DescribeEnvironmentHealthRequest_EnvironmentId = DescribeEnvironmentHealthRequest.AddMember("EnvironmentId", _EnvironmentId)
-
-	DescribeEnvironmentHealthRequest_AttributeNames = DescribeEnvironmentHealthRequest.AddMember("AttributeNames", _EnvironmentHealthAttributes)
-
-	DescribeEnvironmentHealthResult_EnvironmentName = DescribeEnvironmentHealthResult.AddMember("EnvironmentName", _EnvironmentName)
-
-	DescribeEnvironmentHealthResult_HealthStatus = DescribeEnvironmentHealthResult.AddMember("HealthStatus", _String)
-
-	DescribeEnvironmentHealthResult_Status = DescribeEnvironmentHealthResult.AddMember("Status", EnvironmentHealth)
-
-	DescribeEnvironmentHealthResult_Color = DescribeEnvironmentHealthResult.AddMember("Color", _String)
-
-	DescribeEnvironmentHealthResult_Causes = DescribeEnvironmentHealthResult.AddMember("Causes", _Causes)
-
-	DescribeEnvironmentHealthResult_ApplicationMetrics = DescribeEnvironmentHealthResult.AddMember("ApplicationMetrics", ApplicationMetrics)
-
-	DescribeEnvironmentHealthResult_InstancesHealth = DescribeEnvironmentHealthResult.AddMember("InstancesHealth", InstanceHealthSummary)
-
-	DescribeEnvironmentHealthResult_RefreshedAt = DescribeEnvironmentHealthResult.AddMember("RefreshedAt", _RefreshedAt)
-
-	DescribeEnvironmentManagedActionHistoryRequest_EnvironmentId = DescribeEnvironmentManagedActionHistoryRequest.AddMember("EnvironmentId", _EnvironmentId)
-
-	DescribeEnvironmentManagedActionHistoryRequest_EnvironmentName = DescribeEnvironmentManagedActionHistoryRequest.AddMember("EnvironmentName", _EnvironmentName)
-
-	DescribeEnvironmentManagedActionHistoryRequest_NextToken = DescribeEnvironmentManagedActionHistoryRequest.AddMember("NextToken", _String)
-
-	DescribeEnvironmentManagedActionHistoryRequest_MaxItems = DescribeEnvironmentManagedActionHistoryRequest.AddMember("MaxItems", _ManagedActionHistoryMaxItems)
-
-	DescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems = DescribeEnvironmentManagedActionHistoryResult.AddMember("ManagedActionHistoryItems", _ManagedActionHistoryItems)
-
-	DescribeEnvironmentManagedActionHistoryResult_NextToken = DescribeEnvironmentManagedActionHistoryResult.AddMember("NextToken", _String)
-
-	DescribeEnvironmentManagedActionsRequest_EnvironmentName = DescribeEnvironmentManagedActionsRequest.AddMember("EnvironmentName", _String)
-
-	DescribeEnvironmentManagedActionsRequest_EnvironmentId = DescribeEnvironmentManagedActionsRequest.AddMember("EnvironmentId", _String)
-
-	DescribeEnvironmentManagedActionsRequest_Status = DescribeEnvironmentManagedActionsRequest.AddMember("Status", ActionStatus)
-
-	DescribeEnvironmentManagedActionsResult_ManagedActions = DescribeEnvironmentManagedActionsResult.AddMember("ManagedActions", _ManagedActions)
-
-	DescribeEnvironmentResourcesMessage_EnvironmentId = DescribeEnvironmentResourcesMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	DescribeEnvironmentResourcesMessage_EnvironmentName = DescribeEnvironmentResourcesMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	EnvironmentResourceDescriptionsMessage_EnvironmentResources = EnvironmentResourceDescriptionsMessage.AddMember("EnvironmentResources", EnvironmentResourceDescription)
-
-	DescribeEnvironmentsMessage_ApplicationName = DescribeEnvironmentsMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DescribeEnvironmentsMessage_VersionLabel = DescribeEnvironmentsMessage.AddMember("VersionLabel", _VersionLabel)
-
-	DescribeEnvironmentsMessage_EnvironmentIds = DescribeEnvironmentsMessage.AddMember("EnvironmentIds", _EnvironmentIdList)
-
-	DescribeEnvironmentsMessage_EnvironmentNames = DescribeEnvironmentsMessage.AddMember("EnvironmentNames", _EnvironmentNamesList)
-
-	DescribeEnvironmentsMessage_IncludeDeleted = DescribeEnvironmentsMessage.AddMember("IncludeDeleted", _IncludeDeleted)
-
-	DescribeEnvironmentsMessage_IncludedDeletedBackTo = DescribeEnvironmentsMessage.AddMember("IncludedDeletedBackTo", _IncludeDeletedBackTo)
-
-	DescribeEnvironmentsMessage_MaxRecords = DescribeEnvironmentsMessage.AddMember("MaxRecords", _MaxRecords)
-
-	DescribeEnvironmentsMessage_NextToken = DescribeEnvironmentsMessage.AddMember("NextToken", _Token)
-
-	DescribeEventsMessage_ApplicationName = DescribeEventsMessage.AddMember("ApplicationName", _ApplicationName)
-
-	DescribeEventsMessage_VersionLabel = DescribeEventsMessage.AddMember("VersionLabel", _VersionLabel)
-
-	DescribeEventsMessage_TemplateName = DescribeEventsMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	DescribeEventsMessage_EnvironmentId = DescribeEventsMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	DescribeEventsMessage_EnvironmentName = DescribeEventsMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	DescribeEventsMessage_PlatformArn = DescribeEventsMessage.AddMember("PlatformArn", _PlatformArn)
-
-	DescribeEventsMessage_RequestId = DescribeEventsMessage.AddMember("RequestId", _RequestId)
-
-	DescribeEventsMessage_Severity = DescribeEventsMessage.AddMember("Severity", EventSeverity)
-
-	DescribeEventsMessage_StartTime = DescribeEventsMessage.AddMember("StartTime", _TimeFilterStart)
-
-	DescribeEventsMessage_EndTime = DescribeEventsMessage.AddMember("EndTime", _TimeFilterEnd)
-
-	DescribeEventsMessage_MaxRecords = DescribeEventsMessage.AddMember("MaxRecords", _MaxRecords)
-
-	DescribeEventsMessage_NextToken = DescribeEventsMessage.AddMember("NextToken", _Token)
-
-	EventDescriptionsMessage_Events = EventDescriptionsMessage.AddMember("Events", _EventDescriptionList)
-
-	EventDescriptionsMessage_NextToken = EventDescriptionsMessage.AddMember("NextToken", _Token)
-
-	DescribeInstancesHealthRequest_EnvironmentName = DescribeInstancesHealthRequest.AddMember("EnvironmentName", _EnvironmentName)
-
-	DescribeInstancesHealthRequest_EnvironmentId = DescribeInstancesHealthRequest.AddMember("EnvironmentId", _EnvironmentId)
-
-	DescribeInstancesHealthRequest_AttributeNames = DescribeInstancesHealthRequest.AddMember("AttributeNames", _InstancesHealthAttributes)
-
-	DescribeInstancesHealthRequest_NextToken = DescribeInstancesHealthRequest.AddMember("NextToken", _NextToken)
-
-	DescribeInstancesHealthResult_InstanceHealthList = DescribeInstancesHealthResult.AddMember("InstanceHealthList", _InstanceHealthList)
-
-	DescribeInstancesHealthResult_RefreshedAt = DescribeInstancesHealthResult.AddMember("RefreshedAt", _RefreshedAt)
-
-	DescribeInstancesHealthResult_NextToken = DescribeInstancesHealthResult.AddMember("NextToken", _NextToken)
-
-	DescribePlatformVersionRequest_PlatformArn = DescribePlatformVersionRequest.AddMember("PlatformArn", _PlatformArn)
-
-	DescribePlatformVersionResult_PlatformDescription = DescribePlatformVersionResult.AddMember("PlatformDescription", PlatformDescription)
-
-	DisassociateEnvironmentOperationsRoleMessage_EnvironmentName = DisassociateEnvironmentOperationsRoleMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	ListAvailableSolutionStacksResultMessage_SolutionStacks = ListAvailableSolutionStacksResultMessage.AddMember("SolutionStacks", _AvailableSolutionStackNamesList)
-
-	ListAvailableSolutionStacksResultMessage_SolutionStackDetails = ListAvailableSolutionStacksResultMessage.AddMember("SolutionStackDetails", _AvailableSolutionStackDetailsList)
-
-	ListPlatformBranchesRequest_Filters = ListPlatformBranchesRequest.AddMember("Filters", _SearchFilters)
-
-	ListPlatformBranchesRequest_MaxRecords = ListPlatformBranchesRequest.AddMember("MaxRecords", _PlatformBranchMaxRecords)
-
-	ListPlatformBranchesRequest_NextToken = ListPlatformBranchesRequest.AddMember("NextToken", _Token)
-
-	ListPlatformBranchesResult_PlatformBranchSummaryList = ListPlatformBranchesResult.AddMember("PlatformBranchSummaryList", _PlatformBranchSummaryList)
-
-	ListPlatformBranchesResult_NextToken = ListPlatformBranchesResult.AddMember("NextToken", _Token)
-
-	ListPlatformVersionsRequest_Filters = ListPlatformVersionsRequest.AddMember("Filters", _PlatformFilters)
-
-	ListPlatformVersionsRequest_MaxRecords = ListPlatformVersionsRequest.AddMember("MaxRecords", _PlatformMaxRecords)
-
-	ListPlatformVersionsRequest_NextToken = ListPlatformVersionsRequest.AddMember("NextToken", _Token)
-
-	ListPlatformVersionsResult_PlatformSummaryList = ListPlatformVersionsResult.AddMember("PlatformSummaryList", _PlatformSummaryList)
-
-	ListPlatformVersionsResult_NextToken = ListPlatformVersionsResult.AddMember("NextToken", _Token)
-
-	ListTagsForResourceMessage_ResourceArn = ListTagsForResourceMessage.AddMember("ResourceArn", _ResourceArn)
-
-	ResourceTagsDescriptionMessage_ResourceArn = ResourceTagsDescriptionMessage.AddMember("ResourceArn", _ResourceArn)
-
-	ResourceTagsDescriptionMessage_ResourceTags = ResourceTagsDescriptionMessage.AddMember("ResourceTags", _TagList)
-
-	RebuildEnvironmentMessage_EnvironmentId = RebuildEnvironmentMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	RebuildEnvironmentMessage_EnvironmentName = RebuildEnvironmentMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	RequestEnvironmentInfoMessage_EnvironmentId = RequestEnvironmentInfoMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	RequestEnvironmentInfoMessage_EnvironmentName = RequestEnvironmentInfoMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	RequestEnvironmentInfoMessage_InfoType = RequestEnvironmentInfoMessage.AddMember("InfoType", EnvironmentInfoType)
-
-	RestartAppServerMessage_EnvironmentId = RestartAppServerMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	RestartAppServerMessage_EnvironmentName = RestartAppServerMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	RetrieveEnvironmentInfoMessage_EnvironmentId = RetrieveEnvironmentInfoMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	RetrieveEnvironmentInfoMessage_EnvironmentName = RetrieveEnvironmentInfoMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	RetrieveEnvironmentInfoMessage_InfoType = RetrieveEnvironmentInfoMessage.AddMember("InfoType", EnvironmentInfoType)
-
-	RetrieveEnvironmentInfoResultMessage_EnvironmentInfo = RetrieveEnvironmentInfoResultMessage.AddMember("EnvironmentInfo", _EnvironmentInfoDescriptionList)
-
-	SwapEnvironmentCNAMEsMessage_SourceEnvironmentId = SwapEnvironmentCNAMEsMessage.AddMember("SourceEnvironmentId", _EnvironmentId)
-
-	SwapEnvironmentCNAMEsMessage_SourceEnvironmentName = SwapEnvironmentCNAMEsMessage.AddMember("SourceEnvironmentName", _EnvironmentName)
-
-	SwapEnvironmentCNAMEsMessage_DestinationEnvironmentId = SwapEnvironmentCNAMEsMessage.AddMember("DestinationEnvironmentId", _EnvironmentId)
-
-	SwapEnvironmentCNAMEsMessage_DestinationEnvironmentName = SwapEnvironmentCNAMEsMessage.AddMember("DestinationEnvironmentName", _EnvironmentName)
-
-	TerminateEnvironmentMessage_EnvironmentId = TerminateEnvironmentMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	TerminateEnvironmentMessage_EnvironmentName = TerminateEnvironmentMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	TerminateEnvironmentMessage_TerminateResources = TerminateEnvironmentMessage.AddMember("TerminateResources", _TerminateEnvironmentResources)
-
-	TerminateEnvironmentMessage_ForceTerminate = TerminateEnvironmentMessage.AddMember("ForceTerminate", _ForceTerminate)
-
-	UpdateApplicationMessage_ApplicationName = UpdateApplicationMessage.AddMember("ApplicationName", _ApplicationName)
-
-	UpdateApplicationMessage_Description = UpdateApplicationMessage.AddMember("Description", _Description)
-
-	UpdateApplicationResourceLifecycleMessage_ApplicationName = UpdateApplicationResourceLifecycleMessage.AddMember("ApplicationName", _ApplicationName)
-
-	UpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig = UpdateApplicationResourceLifecycleMessage.AddMember("ResourceLifecycleConfig", ApplicationResourceLifecycleConfig)
-
-	ApplicationResourceLifecycleDescriptionMessage_ApplicationName = ApplicationResourceLifecycleDescriptionMessage.AddMember("ApplicationName", _ApplicationName)
-
-	ApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig = ApplicationResourceLifecycleDescriptionMessage.AddMember("ResourceLifecycleConfig", ApplicationResourceLifecycleConfig)
-
-	UpdateApplicationVersionMessage_ApplicationName = UpdateApplicationVersionMessage.AddMember("ApplicationName", _ApplicationName)
-
-	UpdateApplicationVersionMessage_VersionLabel = UpdateApplicationVersionMessage.AddMember("VersionLabel", _VersionLabel)
-
-	UpdateApplicationVersionMessage_Description = UpdateApplicationVersionMessage.AddMember("Description", _Description)
-
-	UpdateConfigurationTemplateMessage_ApplicationName = UpdateConfigurationTemplateMessage.AddMember("ApplicationName", _ApplicationName)
-
-	UpdateConfigurationTemplateMessage_TemplateName = UpdateConfigurationTemplateMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	UpdateConfigurationTemplateMessage_Description = UpdateConfigurationTemplateMessage.AddMember("Description", _Description)
-
-	UpdateConfigurationTemplateMessage_OptionSettings = UpdateConfigurationTemplateMessage.AddMember("OptionSettings", _ConfigurationOptionSettingsList)
-
-	UpdateConfigurationTemplateMessage_OptionsToRemove = UpdateConfigurationTemplateMessage.AddMember("OptionsToRemove", _OptionsSpecifierList)
-
-	UpdateEnvironmentMessage_ApplicationName = UpdateEnvironmentMessage.AddMember("ApplicationName", _ApplicationName)
-
-	UpdateEnvironmentMessage_EnvironmentId = UpdateEnvironmentMessage.AddMember("EnvironmentId", _EnvironmentId)
-
-	UpdateEnvironmentMessage_EnvironmentName = UpdateEnvironmentMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	UpdateEnvironmentMessage_GroupName = UpdateEnvironmentMessage.AddMember("GroupName", _GroupName)
-
-	UpdateEnvironmentMessage_Description = UpdateEnvironmentMessage.AddMember("Description", _Description)
-
-	UpdateEnvironmentMessage_Tier = UpdateEnvironmentMessage.AddMember("Tier", EnvironmentTier)
-
-	UpdateEnvironmentMessage_VersionLabel = UpdateEnvironmentMessage.AddMember("VersionLabel", _VersionLabel)
-
-	UpdateEnvironmentMessage_TemplateName = UpdateEnvironmentMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	UpdateEnvironmentMessage_SolutionStackName = UpdateEnvironmentMessage.AddMember("SolutionStackName", _SolutionStackName)
-
-	UpdateEnvironmentMessage_PlatformArn = UpdateEnvironmentMessage.AddMember("PlatformArn", _PlatformArn)
-
-	UpdateEnvironmentMessage_OptionSettings = UpdateEnvironmentMessage.AddMember("OptionSettings", _ConfigurationOptionSettingsList)
-
-	UpdateEnvironmentMessage_OptionsToRemove = UpdateEnvironmentMessage.AddMember("OptionsToRemove", _OptionsSpecifierList)
-
-	UpdateTagsForResourceMessage_ResourceArn = UpdateTagsForResourceMessage.AddMember("ResourceArn", _ResourceArn)
-
-	UpdateTagsForResourceMessage_TagsToAdd = UpdateTagsForResourceMessage.AddMember("TagsToAdd", _TagList)
-
-	UpdateTagsForResourceMessage_TagsToRemove = UpdateTagsForResourceMessage.AddMember("TagsToRemove", _TagKeyList)
-
-	ValidateConfigurationSettingsMessage_ApplicationName = ValidateConfigurationSettingsMessage.AddMember("ApplicationName", _ApplicationName)
-
-	ValidateConfigurationSettingsMessage_TemplateName = ValidateConfigurationSettingsMessage.AddMember("TemplateName", _ConfigurationTemplateName)
-
-	ValidateConfigurationSettingsMessage_EnvironmentName = ValidateConfigurationSettingsMessage.AddMember("EnvironmentName", _EnvironmentName)
-
-	ValidateConfigurationSettingsMessage_OptionSettings = ValidateConfigurationSettingsMessage.AddMember("OptionSettings", _ConfigurationOptionSettingsList)
-
-	ConfigurationSettingsValidationMessages_Messages = ConfigurationSettingsValidationMessages.AddMember("Messages", _ValidationMessagesList)
-
-}
+var (
+	eAbortEnvironmentUpdate                                                  smithy.SchemaExtensions
+	eApplyEnvironmentManagedAction                                           smithy.SchemaExtensions
+	eAssociateEnvironmentOperationsRole                                      smithy.SchemaExtensions
+	eCheckDNSAvailability                                                    smithy.SchemaExtensions
+	eComposeEnvironments                                                     smithy.SchemaExtensions
+	eCreateApplication                                                       smithy.SchemaExtensions
+	eCreateApplicationVersion                                                smithy.SchemaExtensions
+	eCreateConfigurationTemplate                                             smithy.SchemaExtensions
+	eCreateEnvironment                                                       smithy.SchemaExtensions
+	eCreatePlatformVersion                                                   smithy.SchemaExtensions
+	eCreateStorageLocation                                                   smithy.SchemaExtensions
+	eDeleteApplication                                                       smithy.SchemaExtensions
+	eDeleteApplicationVersion                                                smithy.SchemaExtensions
+	eDeleteConfigurationTemplate                                             smithy.SchemaExtensions
+	eDeleteEnvironmentConfiguration                                          smithy.SchemaExtensions
+	eDeletePlatformVersion                                                   smithy.SchemaExtensions
+	eDescribeAccountAttributes                                               smithy.SchemaExtensions
+	eDescribeApplications                                                    smithy.SchemaExtensions
+	eDescribeApplicationVersions                                             smithy.SchemaExtensions
+	eDescribeConfigurationOptions                                            smithy.SchemaExtensions
+	eDescribeConfigurationSettings                                           smithy.SchemaExtensions
+	eDescribeEnvironmentHealth                                               smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistory                                 smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActions                                       smithy.SchemaExtensions
+	eDescribeEnvironmentResources                                            smithy.SchemaExtensions
+	eDescribeEnvironments                                                    smithy.SchemaExtensions
+	eDescribeEvents                                                          smithy.SchemaExtensions
+	eDescribeInstancesHealth                                                 smithy.SchemaExtensions
+	eDescribePlatformVersion                                                 smithy.SchemaExtensions
+	eDisassociateEnvironmentOperationsRole                                   smithy.SchemaExtensions
+	eListAvailableSolutionStacks                                             smithy.SchemaExtensions
+	eListPlatformBranches                                                    smithy.SchemaExtensions
+	eListPlatformVersions                                                    smithy.SchemaExtensions
+	eListTagsForResource                                                     smithy.SchemaExtensions
+	eRebuildEnvironment                                                      smithy.SchemaExtensions
+	eRequestEnvironmentInfo                                                  smithy.SchemaExtensions
+	eRestartAppServer                                                        smithy.SchemaExtensions
+	eRetrieveEnvironmentInfo                                                 smithy.SchemaExtensions
+	eSwapEnvironmentCNAMEs                                                   smithy.SchemaExtensions
+	eTerminateEnvironment                                                    smithy.SchemaExtensions
+	eUpdateApplication                                                       smithy.SchemaExtensions
+	eUpdateApplicationResourceLifecycle                                      smithy.SchemaExtensions
+	eUpdateApplicationVersion                                                smithy.SchemaExtensions
+	eUpdateConfigurationTemplate                                             smithy.SchemaExtensions
+	eUpdateEnvironment                                                       smithy.SchemaExtensions
+	eUpdateTagsForResource                                                   smithy.SchemaExtensions
+	eValidateConfigurationSettings                                           smithy.SchemaExtensions
+	e_AWSElasticBeanstalkService                                             smithy.SchemaExtensions
+	e_AbortableOperationInProgress                                           smithy.SchemaExtensions
+	eActionHistoryStatus                                                     smithy.SchemaExtensions
+	eActionHistoryStatus_Completed                                           smithy.SchemaExtensions
+	eActionHistoryStatus_Failed                                              smithy.SchemaExtensions
+	eActionHistoryStatus_Unknown                                             smithy.SchemaExtensions
+	eActionStatus                                                            smithy.SchemaExtensions
+	eActionStatus_Scheduled                                                  smithy.SchemaExtensions
+	eActionStatus_Pending                                                    smithy.SchemaExtensions
+	eActionStatus_Running                                                    smithy.SchemaExtensions
+	eActionStatus_Unknown                                                    smithy.SchemaExtensions
+	eActionType                                                              smithy.SchemaExtensions
+	eActionType_InstanceRefresh                                              smithy.SchemaExtensions
+	eActionType_PlatformUpdate                                               smithy.SchemaExtensions
+	eActionType_Unknown                                                      smithy.SchemaExtensions
+	eAmiArchitecture                                                         smithy.SchemaExtensions
+	eAmiArchitecture_X86_64                                                  smithy.SchemaExtensions
+	eAmiArchitecture_ARM64                                                   smithy.SchemaExtensions
+	e_ApplicationArn                                                         smithy.SchemaExtensions
+	eApplicationDescription                                                  smithy.SchemaExtensions
+	eApplicationDescription_ApplicationArn                                   smithy.SchemaExtensions
+	eApplicationDescription_ApplicationName                                  smithy.SchemaExtensions
+	eApplicationDescription_Description                                      smithy.SchemaExtensions
+	eApplicationDescription_DateCreated                                      smithy.SchemaExtensions
+	eApplicationDescription_DateUpdated                                      smithy.SchemaExtensions
+	eApplicationDescription_Versions                                         smithy.SchemaExtensions
+	eApplicationDescription_ConfigurationTemplates                           smithy.SchemaExtensions
+	eApplicationDescription_ResourceLifecycleConfig                          smithy.SchemaExtensions
+	e_ApplicationDescriptionList                                             smithy.SchemaExtensions
+	e_ApplicationDescriptionList_member                                      smithy.SchemaExtensions
+	eApplicationMetrics                                                      smithy.SchemaExtensions
+	eApplicationMetrics_Duration                                             smithy.SchemaExtensions
+	eApplicationMetrics_RequestCount                                         smithy.SchemaExtensions
+	eApplicationMetrics_StatusCodes                                          smithy.SchemaExtensions
+	eApplicationMetrics_Latency                                              smithy.SchemaExtensions
+	e_ApplicationName                                                        smithy.SchemaExtensions
+	e_ApplicationNamesList                                                   smithy.SchemaExtensions
+	e_ApplicationNamesList_member                                            smithy.SchemaExtensions
+	eApplicationResourceLifecycleConfig                                      smithy.SchemaExtensions
+	eApplicationResourceLifecycleConfig_ServiceRole                          smithy.SchemaExtensions
+	eApplicationResourceLifecycleConfig_VersionLifecycleConfig               smithy.SchemaExtensions
+	e_ApplicationVersionArn                                                  smithy.SchemaExtensions
+	eApplicationVersionDescription                                           smithy.SchemaExtensions
+	eApplicationVersionDescription_ApplicationVersionArn                     smithy.SchemaExtensions
+	eApplicationVersionDescription_ApplicationName                           smithy.SchemaExtensions
+	eApplicationVersionDescription_Description                               smithy.SchemaExtensions
+	eApplicationVersionDescription_VersionLabel                              smithy.SchemaExtensions
+	eApplicationVersionDescription_SourceBuildInformation                    smithy.SchemaExtensions
+	eApplicationVersionDescription_BuildArn                                  smithy.SchemaExtensions
+	eApplicationVersionDescription_SourceBundle                              smithy.SchemaExtensions
+	eApplicationVersionDescription_ImageSource                               smithy.SchemaExtensions
+	eApplicationVersionDescription_ImageBuildConfiguration                   smithy.SchemaExtensions
+	eApplicationVersionDescription_Process                                   smithy.SchemaExtensions
+	eApplicationVersionDescription_DateCreated                               smithy.SchemaExtensions
+	eApplicationVersionDescription_DateUpdated                               smithy.SchemaExtensions
+	eApplicationVersionDescription_Status                                    smithy.SchemaExtensions
+	e_ApplicationVersionDescriptionList                                      smithy.SchemaExtensions
+	e_ApplicationVersionDescriptionList_member                               smithy.SchemaExtensions
+	eApplicationVersionLifecycleConfig                                       smithy.SchemaExtensions
+	eApplicationVersionLifecycleConfig_MaxCountRule                          smithy.SchemaExtensions
+	eApplicationVersionLifecycleConfig_MaxAgeRule                            smithy.SchemaExtensions
+	e_ApplicationVersionProccess                                             smithy.SchemaExtensions
+	eApplicationVersionStatus                                                smithy.SchemaExtensions
+	eApplicationVersionStatus_Processed                                      smithy.SchemaExtensions
+	eApplicationVersionStatus_Unprocessed                                    smithy.SchemaExtensions
+	eApplicationVersionStatus_Failed                                         smithy.SchemaExtensions
+	eApplicationVersionStatus_Processing                                     smithy.SchemaExtensions
+	eApplicationVersionStatus_Building                                       smithy.SchemaExtensions
+	eArchitectureType                                                        smithy.SchemaExtensions
+	eArchitectureType_amd64                                                  smithy.SchemaExtensions
+	eArchitectureType_arm64                                                  smithy.SchemaExtensions
+	e_ARN                                                                    smithy.SchemaExtensions
+	e_AutoCreateApplication                                                  smithy.SchemaExtensions
+	eAutoScalingGroup                                                        smithy.SchemaExtensions
+	eAutoScalingGroup_Name                                                   smithy.SchemaExtensions
+	e_AutoScalingGroupList                                                   smithy.SchemaExtensions
+	e_AutoScalingGroupList_member                                            smithy.SchemaExtensions
+	e_AvailableSolutionStackDetailsList                                      smithy.SchemaExtensions
+	e_AvailableSolutionStackDetailsList_member                               smithy.SchemaExtensions
+	e_AvailableSolutionStackNamesList                                        smithy.SchemaExtensions
+	e_AvailableSolutionStackNamesList_member                                 smithy.SchemaExtensions
+	e_BoxedBoolean                                                           smithy.SchemaExtensions
+	e_BoxedInt                                                               smithy.SchemaExtensions
+	e_BranchName                                                             smithy.SchemaExtensions
+	e_BranchOrder                                                            smithy.SchemaExtensions
+	eBuildConfiguration                                                      smithy.SchemaExtensions
+	eBuildConfiguration_ArtifactName                                         smithy.SchemaExtensions
+	eBuildConfiguration_CodeBuildServiceRole                                 smithy.SchemaExtensions
+	eBuildConfiguration_ComputeType                                          smithy.SchemaExtensions
+	eBuildConfiguration_Image                                                smithy.SchemaExtensions
+	eBuildConfiguration_TimeoutInMinutes                                     smithy.SchemaExtensions
+	eBuilder                                                                 smithy.SchemaExtensions
+	eBuilder_ARN                                                             smithy.SchemaExtensions
+	e_Cause                                                                  smithy.SchemaExtensions
+	e_Causes                                                                 smithy.SchemaExtensions
+	e_Causes_member                                                          smithy.SchemaExtensions
+	eCluster                                                                 smithy.SchemaExtensions
+	eCluster_ClusterArn                                                      smithy.SchemaExtensions
+	e_CnameAvailability                                                      smithy.SchemaExtensions
+	eCodeBuildNotInServiceRegionException                                    smithy.SchemaExtensions
+	eCodeBuildNotInServiceRegionException_message                            smithy.SchemaExtensions
+	eComputeType                                                             smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_SMALL                                        smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_MEDIUM                                       smithy.SchemaExtensions
+	eComputeType_BUILD_GENERAL1_LARGE                                        smithy.SchemaExtensions
+	eConfigurationDeploymentStatus                                           smithy.SchemaExtensions
+	eConfigurationDeploymentStatus_deployed                                  smithy.SchemaExtensions
+	eConfigurationDeploymentStatus_pending                                   smithy.SchemaExtensions
+	eConfigurationDeploymentStatus_failed                                    smithy.SchemaExtensions
+	e_ConfigurationOptionDefaultValue                                        smithy.SchemaExtensions
+	eConfigurationOptionDescription                                          smithy.SchemaExtensions
+	eConfigurationOptionDescription_Namespace                                smithy.SchemaExtensions
+	eConfigurationOptionDescription_Name                                     smithy.SchemaExtensions
+	eConfigurationOptionDescription_DefaultValue                             smithy.SchemaExtensions
+	eConfigurationOptionDescription_ChangeSeverity                           smithy.SchemaExtensions
+	eConfigurationOptionDescription_UserDefined                              smithy.SchemaExtensions
+	eConfigurationOptionDescription_ValueType                                smithy.SchemaExtensions
+	eConfigurationOptionDescription_ValueOptions                             smithy.SchemaExtensions
+	eConfigurationOptionDescription_MinValue                                 smithy.SchemaExtensions
+	eConfigurationOptionDescription_MaxValue                                 smithy.SchemaExtensions
+	eConfigurationOptionDescription_MaxLength                                smithy.SchemaExtensions
+	eConfigurationOptionDescription_Regex                                    smithy.SchemaExtensions
+	e_ConfigurationOptionDescriptionsList                                    smithy.SchemaExtensions
+	e_ConfigurationOptionDescriptionsList_member                             smithy.SchemaExtensions
+	e_ConfigurationOptionName                                                smithy.SchemaExtensions
+	e_ConfigurationOptionPossibleValue                                       smithy.SchemaExtensions
+	e_ConfigurationOptionPossibleValues                                      smithy.SchemaExtensions
+	e_ConfigurationOptionPossibleValues_member                               smithy.SchemaExtensions
+	eConfigurationOptionSetting                                              smithy.SchemaExtensions
+	eConfigurationOptionSetting_ResourceName                                 smithy.SchemaExtensions
+	eConfigurationOptionSetting_Namespace                                    smithy.SchemaExtensions
+	eConfigurationOptionSetting_OptionName                                   smithy.SchemaExtensions
+	eConfigurationOptionSetting_Value                                        smithy.SchemaExtensions
+	e_ConfigurationOptionSettingsList                                        smithy.SchemaExtensions
+	e_ConfigurationOptionSettingsList_member                                 smithy.SchemaExtensions
+	e_ConfigurationOptionSeverity                                            smithy.SchemaExtensions
+	e_ConfigurationOptionValue                                               smithy.SchemaExtensions
+	eConfigurationOptionValueType                                            smithy.SchemaExtensions
+	eConfigurationOptionValueType_Scalar                                     smithy.SchemaExtensions
+	eConfigurationOptionValueType_List                                       smithy.SchemaExtensions
+	eConfigurationSettingsDescription                                        smithy.SchemaExtensions
+	eConfigurationSettingsDescription_SolutionStackName                      smithy.SchemaExtensions
+	eConfigurationSettingsDescription_PlatformArn                            smithy.SchemaExtensions
+	eConfigurationSettingsDescription_ApplicationName                        smithy.SchemaExtensions
+	eConfigurationSettingsDescription_TemplateName                           smithy.SchemaExtensions
+	eConfigurationSettingsDescription_Description                            smithy.SchemaExtensions
+	eConfigurationSettingsDescription_EnvironmentName                        smithy.SchemaExtensions
+	eConfigurationSettingsDescription_DeploymentStatus                       smithy.SchemaExtensions
+	eConfigurationSettingsDescription_DateCreated                            smithy.SchemaExtensions
+	eConfigurationSettingsDescription_DateUpdated                            smithy.SchemaExtensions
+	eConfigurationSettingsDescription_OptionSettings                         smithy.SchemaExtensions
+	e_ConfigurationSettingsDescriptionList                                   smithy.SchemaExtensions
+	e_ConfigurationSettingsDescriptionList_member                            smithy.SchemaExtensions
+	e_ConfigurationTemplateName                                              smithy.SchemaExtensions
+	e_ConfigurationTemplateNamesList                                         smithy.SchemaExtensions
+	e_ConfigurationTemplateNamesList_member                                  smithy.SchemaExtensions
+	eCPUUtilization                                                          smithy.SchemaExtensions
+	eCPUUtilization_User                                                     smithy.SchemaExtensions
+	eCPUUtilization_Nice                                                     smithy.SchemaExtensions
+	eCPUUtilization_System                                                   smithy.SchemaExtensions
+	eCPUUtilization_Idle                                                     smithy.SchemaExtensions
+	eCPUUtilization_IOWait                                                   smithy.SchemaExtensions
+	eCPUUtilization_IRQ                                                      smithy.SchemaExtensions
+	eCPUUtilization_SoftIRQ                                                  smithy.SchemaExtensions
+	eCPUUtilization_Privileged                                               smithy.SchemaExtensions
+	e_CreationDate                                                           smithy.SchemaExtensions
+	eCustomAmi                                                               smithy.SchemaExtensions
+	eCustomAmi_VirtualizationType                                            smithy.SchemaExtensions
+	eCustomAmi_ImageId                                                       smithy.SchemaExtensions
+	e_CustomAmiList                                                          smithy.SchemaExtensions
+	e_CustomAmiList_member                                                   smithy.SchemaExtensions
+	eDefaultAmi                                                              smithy.SchemaExtensions
+	eDefaultAmi_Architecture                                                 smithy.SchemaExtensions
+	eDefaultAmi_ImageId                                                      smithy.SchemaExtensions
+	e_DefaultAmiList                                                         smithy.SchemaExtensions
+	e_DefaultAmiList_member                                                  smithy.SchemaExtensions
+	e_DeleteSourceBundle                                                     smithy.SchemaExtensions
+	eDeployment                                                              smithy.SchemaExtensions
+	eDeployment_VersionLabel                                                 smithy.SchemaExtensions
+	eDeployment_DeploymentId                                                 smithy.SchemaExtensions
+	eDeployment_Status                                                       smithy.SchemaExtensions
+	eDeployment_DeploymentTime                                               smithy.SchemaExtensions
+	e_DeploymentTimestamp                                                    smithy.SchemaExtensions
+	e_Description                                                            smithy.SchemaExtensions
+	e_DNSCname                                                               smithy.SchemaExtensions
+	e_DNSCnamePrefix                                                         smithy.SchemaExtensions
+	e_Ec2InstanceId                                                          smithy.SchemaExtensions
+	eElasticBeanstalkServiceException                                        smithy.SchemaExtensions
+	eElasticBeanstalkServiceException_message                                smithy.SchemaExtensions
+	e_EndpointURL                                                            smithy.SchemaExtensions
+	e_EnvironmentArn                                                         smithy.SchemaExtensions
+	eEnvironmentDescription                                                  smithy.SchemaExtensions
+	eEnvironmentDescription_EnvironmentName                                  smithy.SchemaExtensions
+	eEnvironmentDescription_EnvironmentId                                    smithy.SchemaExtensions
+	eEnvironmentDescription_ApplicationName                                  smithy.SchemaExtensions
+	eEnvironmentDescription_VersionLabel                                     smithy.SchemaExtensions
+	eEnvironmentDescription_SolutionStackName                                smithy.SchemaExtensions
+	eEnvironmentDescription_PlatformArn                                      smithy.SchemaExtensions
+	eEnvironmentDescription_TemplateName                                     smithy.SchemaExtensions
+	eEnvironmentDescription_Description                                      smithy.SchemaExtensions
+	eEnvironmentDescription_EndpointURL                                      smithy.SchemaExtensions
+	eEnvironmentDescription_CNAME                                            smithy.SchemaExtensions
+	eEnvironmentDescription_DateCreated                                      smithy.SchemaExtensions
+	eEnvironmentDescription_DateUpdated                                      smithy.SchemaExtensions
+	eEnvironmentDescription_Status                                           smithy.SchemaExtensions
+	eEnvironmentDescription_AbortableOperationInProgress                     smithy.SchemaExtensions
+	eEnvironmentDescription_Health                                           smithy.SchemaExtensions
+	eEnvironmentDescription_HealthStatus                                     smithy.SchemaExtensions
+	eEnvironmentDescription_Resources                                        smithy.SchemaExtensions
+	eEnvironmentDescription_Tier                                             smithy.SchemaExtensions
+	eEnvironmentDescription_EnvironmentLinks                                 smithy.SchemaExtensions
+	eEnvironmentDescription_EnvironmentArn                                   smithy.SchemaExtensions
+	eEnvironmentDescription_OperationsRole                                   smithy.SchemaExtensions
+	e_EnvironmentDescriptionsList                                            smithy.SchemaExtensions
+	e_EnvironmentDescriptionsList_member                                     smithy.SchemaExtensions
+	eEnvironmentHealth                                                       smithy.SchemaExtensions
+	eEnvironmentHealth_Green                                                 smithy.SchemaExtensions
+	eEnvironmentHealth_Yellow                                                smithy.SchemaExtensions
+	eEnvironmentHealth_Red                                                   smithy.SchemaExtensions
+	eEnvironmentHealth_Grey                                                  smithy.SchemaExtensions
+	eEnvironmentHealthAttribute                                              smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_Status                                       smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_Color                                        smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_Causes                                       smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_ApplicationMetrics                           smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_InstancesHealth                              smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_All                                          smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_HealthStatus                                 smithy.SchemaExtensions
+	eEnvironmentHealthAttribute_RefreshedAt                                  smithy.SchemaExtensions
+	e_EnvironmentHealthAttributes                                            smithy.SchemaExtensions
+	e_EnvironmentHealthAttributes_member                                     smithy.SchemaExtensions
+	eEnvironmentHealthStatus                                                 smithy.SchemaExtensions
+	eEnvironmentHealthStatus_NoData                                          smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Unknown                                         smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Pending                                         smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Ok                                              smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Info                                            smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Warning                                         smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Degraded                                        smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Severe                                          smithy.SchemaExtensions
+	eEnvironmentHealthStatus_Suspended                                       smithy.SchemaExtensions
+	e_EnvironmentId                                                          smithy.SchemaExtensions
+	e_EnvironmentIdList                                                      smithy.SchemaExtensions
+	e_EnvironmentIdList_member                                               smithy.SchemaExtensions
+	eEnvironmentInfoDescription                                              smithy.SchemaExtensions
+	eEnvironmentInfoDescription_InfoType                                     smithy.SchemaExtensions
+	eEnvironmentInfoDescription_Ec2InstanceId                                smithy.SchemaExtensions
+	eEnvironmentInfoDescription_SampleTimestamp                              smithy.SchemaExtensions
+	eEnvironmentInfoDescription_Message                                      smithy.SchemaExtensions
+	e_EnvironmentInfoDescriptionList                                         smithy.SchemaExtensions
+	e_EnvironmentInfoDescriptionList_member                                  smithy.SchemaExtensions
+	eEnvironmentInfoType                                                     smithy.SchemaExtensions
+	eEnvironmentInfoType_tail                                                smithy.SchemaExtensions
+	eEnvironmentInfoType_bundle                                              smithy.SchemaExtensions
+	eEnvironmentInfoType_analyze                                             smithy.SchemaExtensions
+	eEnvironmentLink                                                         smithy.SchemaExtensions
+	eEnvironmentLink_LinkName                                                smithy.SchemaExtensions
+	eEnvironmentLink_EnvironmentName                                         smithy.SchemaExtensions
+	e_EnvironmentLinks                                                       smithy.SchemaExtensions
+	e_EnvironmentLinks_member                                                smithy.SchemaExtensions
+	e_EnvironmentName                                                        smithy.SchemaExtensions
+	e_EnvironmentNamesList                                                   smithy.SchemaExtensions
+	e_EnvironmentNamesList_member                                            smithy.SchemaExtensions
+	eEnvironmentResourceDescription                                          smithy.SchemaExtensions
+	eEnvironmentResourceDescription_EnvironmentName                          smithy.SchemaExtensions
+	eEnvironmentResourceDescription_AutoScalingGroups                        smithy.SchemaExtensions
+	eEnvironmentResourceDescription_Cluster                                  smithy.SchemaExtensions
+	eEnvironmentResourceDescription_Instances                                smithy.SchemaExtensions
+	eEnvironmentResourceDescription_LaunchConfigurations                     smithy.SchemaExtensions
+	eEnvironmentResourceDescription_LaunchTemplates                          smithy.SchemaExtensions
+	eEnvironmentResourceDescription_LoadBalancers                            smithy.SchemaExtensions
+	eEnvironmentResourceDescription_Triggers                                 smithy.SchemaExtensions
+	eEnvironmentResourceDescription_Queues                                   smithy.SchemaExtensions
+	eEnvironmentResourcesDescription                                         smithy.SchemaExtensions
+	eEnvironmentResourcesDescription_LoadBalancer                            smithy.SchemaExtensions
+	eEnvironmentStatus                                                       smithy.SchemaExtensions
+	eEnvironmentStatus_Aborting                                              smithy.SchemaExtensions
+	eEnvironmentStatus_Launching                                             smithy.SchemaExtensions
+	eEnvironmentStatus_Updating                                              smithy.SchemaExtensions
+	eEnvironmentStatus_LinkingFrom                                           smithy.SchemaExtensions
+	eEnvironmentStatus_LinkingTo                                             smithy.SchemaExtensions
+	eEnvironmentStatus_Ready                                                 smithy.SchemaExtensions
+	eEnvironmentStatus_Terminating                                           smithy.SchemaExtensions
+	eEnvironmentStatus_Terminated                                            smithy.SchemaExtensions
+	eEnvironmentTier                                                         smithy.SchemaExtensions
+	eEnvironmentTier_Name                                                    smithy.SchemaExtensions
+	eEnvironmentTier_Type                                                    smithy.SchemaExtensions
+	eEnvironmentTier_Version                                                 smithy.SchemaExtensions
+	e_EventDate                                                              smithy.SchemaExtensions
+	eEventDescription                                                        smithy.SchemaExtensions
+	eEventDescription_EventDate                                              smithy.SchemaExtensions
+	eEventDescription_Message                                                smithy.SchemaExtensions
+	eEventDescription_ApplicationName                                        smithy.SchemaExtensions
+	eEventDescription_VersionLabel                                           smithy.SchemaExtensions
+	eEventDescription_TemplateName                                           smithy.SchemaExtensions
+	eEventDescription_EnvironmentName                                        smithy.SchemaExtensions
+	eEventDescription_PlatformArn                                            smithy.SchemaExtensions
+	eEventDescription_RequestId                                              smithy.SchemaExtensions
+	eEventDescription_Severity                                               smithy.SchemaExtensions
+	e_EventDescriptionList                                                   smithy.SchemaExtensions
+	e_EventDescriptionList_member                                            smithy.SchemaExtensions
+	e_EventMessage                                                           smithy.SchemaExtensions
+	eEventSeverity                                                           smithy.SchemaExtensions
+	eEventSeverity_TRACE                                                     smithy.SchemaExtensions
+	eEventSeverity_DEBUG                                                     smithy.SchemaExtensions
+	eEventSeverity_INFO                                                      smithy.SchemaExtensions
+	eEventSeverity_WARN                                                      smithy.SchemaExtensions
+	eEventSeverity_ERROR                                                     smithy.SchemaExtensions
+	eEventSeverity_FATAL                                                     smithy.SchemaExtensions
+	e_ExceptionMessage                                                       smithy.SchemaExtensions
+	eFailureType                                                             smithy.SchemaExtensions
+	eFailureType_UpdateCancelled                                             smithy.SchemaExtensions
+	eFailureType_CancellationFailed                                          smithy.SchemaExtensions
+	eFailureType_RollbackFailed                                              smithy.SchemaExtensions
+	eFailureType_RollbackSuccessful                                          smithy.SchemaExtensions
+	eFailureType_InternalFailure                                             smithy.SchemaExtensions
+	eFailureType_InvalidEnvironmentState                                     smithy.SchemaExtensions
+	eFailureType_PermissionsError                                            smithy.SchemaExtensions
+	e_FileTypeExtension                                                      smithy.SchemaExtensions
+	e_ForceTerminate                                                         smithy.SchemaExtensions
+	e_GroupName                                                              smithy.SchemaExtensions
+	eImageBuildConfiguration                                                 smithy.SchemaExtensions
+	eImageBuildConfiguration_Type                                            smithy.SchemaExtensions
+	eImageBuildConfiguration_DockerfileLocation                              smithy.SchemaExtensions
+	eImageBuildConfiguration_Buildpack                                       smithy.SchemaExtensions
+	eImageBuildConfiguration_Architecture                                    smithy.SchemaExtensions
+	eImageBuildConfiguration_CodeBuildServiceRole                            smithy.SchemaExtensions
+	eImageBuildConfiguration_ComputeType                                     smithy.SchemaExtensions
+	eImageBuildConfiguration_TimeoutInMinutes                                smithy.SchemaExtensions
+	eImageBuildType                                                          smithy.SchemaExtensions
+	eImageBuildType_docker                                                   smithy.SchemaExtensions
+	eImageBuildType_buildpack                                                smithy.SchemaExtensions
+	eImageConfiguration                                                      smithy.SchemaExtensions
+	eImageConfiguration_Source                                               smithy.SchemaExtensions
+	eImageConfiguration_Build                                                smithy.SchemaExtensions
+	e_ImageId                                                                smithy.SchemaExtensions
+	eImageSource                                                             smithy.SchemaExtensions
+	eImageSource_Uri                                                         smithy.SchemaExtensions
+	e_IncludeDeleted                                                         smithy.SchemaExtensions
+	e_IncludeDeletedBackTo                                                   smithy.SchemaExtensions
+	eInstance                                                                smithy.SchemaExtensions
+	eInstance_Id                                                             smithy.SchemaExtensions
+	e_InstanceHealthList                                                     smithy.SchemaExtensions
+	e_InstanceHealthList_member                                              smithy.SchemaExtensions
+	eInstanceHealthSummary                                                   smithy.SchemaExtensions
+	eInstanceHealthSummary_NoData                                            smithy.SchemaExtensions
+	eInstanceHealthSummary_Unknown                                           smithy.SchemaExtensions
+	eInstanceHealthSummary_Pending                                           smithy.SchemaExtensions
+	eInstanceHealthSummary_Ok                                                smithy.SchemaExtensions
+	eInstanceHealthSummary_Info                                              smithy.SchemaExtensions
+	eInstanceHealthSummary_Warning                                           smithy.SchemaExtensions
+	eInstanceHealthSummary_Degraded                                          smithy.SchemaExtensions
+	eInstanceHealthSummary_Severe                                            smithy.SchemaExtensions
+	e_InstanceId                                                             smithy.SchemaExtensions
+	e_InstanceList                                                           smithy.SchemaExtensions
+	e_InstanceList_member                                                    smithy.SchemaExtensions
+	eInstancesHealthAttribute                                                smithy.SchemaExtensions
+	eInstancesHealthAttribute_HealthStatus                                   smithy.SchemaExtensions
+	eInstancesHealthAttribute_Color                                          smithy.SchemaExtensions
+	eInstancesHealthAttribute_Causes                                         smithy.SchemaExtensions
+	eInstancesHealthAttribute_ApplicationMetrics                             smithy.SchemaExtensions
+	eInstancesHealthAttribute_RefreshedAt                                    smithy.SchemaExtensions
+	eInstancesHealthAttribute_LaunchedAt                                     smithy.SchemaExtensions
+	eInstancesHealthAttribute_System                                         smithy.SchemaExtensions
+	eInstancesHealthAttribute_Deployment                                     smithy.SchemaExtensions
+	eInstancesHealthAttribute_AvailabilityZone                               smithy.SchemaExtensions
+	eInstancesHealthAttribute_InstanceType                                   smithy.SchemaExtensions
+	eInstancesHealthAttribute_All                                            smithy.SchemaExtensions
+	e_InstancesHealthAttributes                                              smithy.SchemaExtensions
+	e_InstancesHealthAttributes_member                                       smithy.SchemaExtensions
+	eInsufficientPrivilegesException                                         smithy.SchemaExtensions
+	eInsufficientPrivilegesException_message                                 smithy.SchemaExtensions
+	e_Integer                                                                smithy.SchemaExtensions
+	eInvalidRequestException                                                 smithy.SchemaExtensions
+	eInvalidRequestException_message                                         smithy.SchemaExtensions
+	eLatency                                                                 smithy.SchemaExtensions
+	eLatency_P999                                                            smithy.SchemaExtensions
+	eLatency_P99                                                             smithy.SchemaExtensions
+	eLatency_P95                                                             smithy.SchemaExtensions
+	eLatency_P90                                                             smithy.SchemaExtensions
+	eLatency_P85                                                             smithy.SchemaExtensions
+	eLatency_P75                                                             smithy.SchemaExtensions
+	eLatency_P50                                                             smithy.SchemaExtensions
+	eLatency_P10                                                             smithy.SchemaExtensions
+	eLaunchConfiguration                                                     smithy.SchemaExtensions
+	eLaunchConfiguration_Name                                                smithy.SchemaExtensions
+	e_LaunchConfigurationList                                                smithy.SchemaExtensions
+	e_LaunchConfigurationList_member                                         smithy.SchemaExtensions
+	e_LaunchedAt                                                             smithy.SchemaExtensions
+	eLaunchTemplate                                                          smithy.SchemaExtensions
+	eLaunchTemplate_Id                                                       smithy.SchemaExtensions
+	e_LaunchTemplateList                                                     smithy.SchemaExtensions
+	e_LaunchTemplateList_member                                              smithy.SchemaExtensions
+	eListener                                                                smithy.SchemaExtensions
+	eListener_Protocol                                                       smithy.SchemaExtensions
+	eListener_Port                                                           smithy.SchemaExtensions
+	e_LoadAverage                                                            smithy.SchemaExtensions
+	e_LoadAverage_member                                                     smithy.SchemaExtensions
+	e_LoadAverageValue                                                       smithy.SchemaExtensions
+	eLoadBalancer                                                            smithy.SchemaExtensions
+	eLoadBalancer_Name                                                       smithy.SchemaExtensions
+	eLoadBalancerDescription                                                 smithy.SchemaExtensions
+	eLoadBalancerDescription_LoadBalancerName                                smithy.SchemaExtensions
+	eLoadBalancerDescription_Domain                                          smithy.SchemaExtensions
+	eLoadBalancerDescription_Listeners                                       smithy.SchemaExtensions
+	e_LoadBalancerList                                                       smithy.SchemaExtensions
+	e_LoadBalancerList_member                                                smithy.SchemaExtensions
+	e_LoadBalancerListenersDescription                                       smithy.SchemaExtensions
+	e_LoadBalancerListenersDescription_member                                smithy.SchemaExtensions
+	e_Maintainer                                                             smithy.SchemaExtensions
+	eManagedAction                                                           smithy.SchemaExtensions
+	eManagedAction_ActionId                                                  smithy.SchemaExtensions
+	eManagedAction_ActionDescription                                         smithy.SchemaExtensions
+	eManagedAction_ActionType                                                smithy.SchemaExtensions
+	eManagedAction_Status                                                    smithy.SchemaExtensions
+	eManagedAction_WindowStartTime                                           smithy.SchemaExtensions
+	eManagedActionHistoryItem                                                smithy.SchemaExtensions
+	eManagedActionHistoryItem_ActionId                                       smithy.SchemaExtensions
+	eManagedActionHistoryItem_ActionType                                     smithy.SchemaExtensions
+	eManagedActionHistoryItem_ActionDescription                              smithy.SchemaExtensions
+	eManagedActionHistoryItem_FailureType                                    smithy.SchemaExtensions
+	eManagedActionHistoryItem_Status                                         smithy.SchemaExtensions
+	eManagedActionHistoryItem_FailureDescription                             smithy.SchemaExtensions
+	eManagedActionHistoryItem_ExecutedTime                                   smithy.SchemaExtensions
+	eManagedActionHistoryItem_FinishedTime                                   smithy.SchemaExtensions
+	e_ManagedActionHistoryItems                                              smithy.SchemaExtensions
+	e_ManagedActionHistoryItems_member                                       smithy.SchemaExtensions
+	e_ManagedActionHistoryMaxItems                                           smithy.SchemaExtensions
+	eManagedActionInvalidStateException                                      smithy.SchemaExtensions
+	eManagedActionInvalidStateException_message                              smithy.SchemaExtensions
+	e_ManagedActions                                                         smithy.SchemaExtensions
+	e_ManagedActions_member                                                  smithy.SchemaExtensions
+	eMaxAgeRule                                                              smithy.SchemaExtensions
+	eMaxAgeRule_Enabled                                                      smithy.SchemaExtensions
+	eMaxAgeRule_MaxAgeInDays                                                 smithy.SchemaExtensions
+	eMaxAgeRule_DeleteSourceFromS3                                           smithy.SchemaExtensions
+	eMaxCountRule                                                            smithy.SchemaExtensions
+	eMaxCountRule_Enabled                                                    smithy.SchemaExtensions
+	eMaxCountRule_MaxCount                                                   smithy.SchemaExtensions
+	eMaxCountRule_DeleteSourceFromS3                                         smithy.SchemaExtensions
+	e_MaxRecords                                                             smithy.SchemaExtensions
+	e_Message                                                                smithy.SchemaExtensions
+	e_NextToken                                                              smithy.SchemaExtensions
+	e_NonEmptyString                                                         smithy.SchemaExtensions
+	e_NullableDouble                                                         smithy.SchemaExtensions
+	e_NullableInteger                                                        smithy.SchemaExtensions
+	e_NullableLong                                                           smithy.SchemaExtensions
+	e_OperatingSystemName                                                    smithy.SchemaExtensions
+	e_OperatingSystemVersion                                                 smithy.SchemaExtensions
+	eOperationInProgressException                                            smithy.SchemaExtensions
+	eOperationInProgressException_message                                    smithy.SchemaExtensions
+	e_OperationsRole                                                         smithy.SchemaExtensions
+	e_OptionNamespace                                                        smithy.SchemaExtensions
+	e_OptionRestrictionMaxLength                                             smithy.SchemaExtensions
+	e_OptionRestrictionMaxValue                                              smithy.SchemaExtensions
+	e_OptionRestrictionMinValue                                              smithy.SchemaExtensions
+	eOptionRestrictionRegex                                                  smithy.SchemaExtensions
+	eOptionRestrictionRegex_Pattern                                          smithy.SchemaExtensions
+	eOptionRestrictionRegex_Label                                            smithy.SchemaExtensions
+	eOptionSpecification                                                     smithy.SchemaExtensions
+	eOptionSpecification_ResourceName                                        smithy.SchemaExtensions
+	eOptionSpecification_Namespace                                           smithy.SchemaExtensions
+	eOptionSpecification_OptionName                                          smithy.SchemaExtensions
+	e_OptionsSpecifierList                                                   smithy.SchemaExtensions
+	e_OptionsSpecifierList_member                                            smithy.SchemaExtensions
+	e_PlatformArn                                                            smithy.SchemaExtensions
+	e_PlatformBranchLifecycleState                                           smithy.SchemaExtensions
+	e_PlatformBranchMaxRecords                                               smithy.SchemaExtensions
+	ePlatformBranchSummary                                                   smithy.SchemaExtensions
+	ePlatformBranchSummary_PlatformName                                      smithy.SchemaExtensions
+	ePlatformBranchSummary_BranchName                                        smithy.SchemaExtensions
+	ePlatformBranchSummary_LifecycleState                                    smithy.SchemaExtensions
+	ePlatformBranchSummary_BranchOrder                                       smithy.SchemaExtensions
+	ePlatformBranchSummary_SupportedTierList                                 smithy.SchemaExtensions
+	e_PlatformBranchSummaryList                                              smithy.SchemaExtensions
+	e_PlatformBranchSummaryList_member                                       smithy.SchemaExtensions
+	e_PlatformCategory                                                       smithy.SchemaExtensions
+	ePlatformDescription                                                     smithy.SchemaExtensions
+	ePlatformDescription_PlatformArn                                         smithy.SchemaExtensions
+	ePlatformDescription_PlatformOwner                                       smithy.SchemaExtensions
+	ePlatformDescription_PlatformName                                        smithy.SchemaExtensions
+	ePlatformDescription_PlatformVersion                                     smithy.SchemaExtensions
+	ePlatformDescription_SolutionStackName                                   smithy.SchemaExtensions
+	ePlatformDescription_PlatformStatus                                      smithy.SchemaExtensions
+	ePlatformDescription_DateCreated                                         smithy.SchemaExtensions
+	ePlatformDescription_DateUpdated                                         smithy.SchemaExtensions
+	ePlatformDescription_PlatformCategory                                    smithy.SchemaExtensions
+	ePlatformDescription_Description                                         smithy.SchemaExtensions
+	ePlatformDescription_Maintainer                                          smithy.SchemaExtensions
+	ePlatformDescription_OperatingSystemName                                 smithy.SchemaExtensions
+	ePlatformDescription_OperatingSystemVersion                              smithy.SchemaExtensions
+	ePlatformDescription_ProgrammingLanguages                                smithy.SchemaExtensions
+	ePlatformDescription_Frameworks                                          smithy.SchemaExtensions
+	ePlatformDescription_CustomAmiList                                       smithy.SchemaExtensions
+	ePlatformDescription_DefaultAmiList                                      smithy.SchemaExtensions
+	ePlatformDescription_SupportedTierList                                   smithy.SchemaExtensions
+	ePlatformDescription_SupportedAddonList                                  smithy.SchemaExtensions
+	ePlatformDescription_PlatformLifecycleState                              smithy.SchemaExtensions
+	ePlatformDescription_PlatformBranchName                                  smithy.SchemaExtensions
+	ePlatformDescription_PlatformBranchLifecycleState                        smithy.SchemaExtensions
+	ePlatformFilter                                                          smithy.SchemaExtensions
+	ePlatformFilter_Type                                                     smithy.SchemaExtensions
+	ePlatformFilter_Operator                                                 smithy.SchemaExtensions
+	ePlatformFilter_Values                                                   smithy.SchemaExtensions
+	e_PlatformFilterOperator                                                 smithy.SchemaExtensions
+	e_PlatformFilters                                                        smithy.SchemaExtensions
+	e_PlatformFilters_member                                                 smithy.SchemaExtensions
+	e_PlatformFilterType                                                     smithy.SchemaExtensions
+	e_PlatformFilterValue                                                    smithy.SchemaExtensions
+	e_PlatformFilterValueList                                                smithy.SchemaExtensions
+	e_PlatformFilterValueList_member                                         smithy.SchemaExtensions
+	ePlatformFramework                                                       smithy.SchemaExtensions
+	ePlatformFramework_Name                                                  smithy.SchemaExtensions
+	ePlatformFramework_Version                                               smithy.SchemaExtensions
+	e_PlatformFrameworks                                                     smithy.SchemaExtensions
+	e_PlatformFrameworks_member                                              smithy.SchemaExtensions
+	e_PlatformLifecycleState                                                 smithy.SchemaExtensions
+	e_PlatformMaxRecords                                                     smithy.SchemaExtensions
+	e_PlatformName                                                           smithy.SchemaExtensions
+	e_PlatformOwner                                                          smithy.SchemaExtensions
+	ePlatformProgrammingLanguage                                             smithy.SchemaExtensions
+	ePlatformProgrammingLanguage_Name                                        smithy.SchemaExtensions
+	ePlatformProgrammingLanguage_Version                                     smithy.SchemaExtensions
+	e_PlatformProgrammingLanguages                                           smithy.SchemaExtensions
+	e_PlatformProgrammingLanguages_member                                    smithy.SchemaExtensions
+	ePlatformStatus                                                          smithy.SchemaExtensions
+	ePlatformStatus_Creating                                                 smithy.SchemaExtensions
+	ePlatformStatus_Failed                                                   smithy.SchemaExtensions
+	ePlatformStatus_Ready                                                    smithy.SchemaExtensions
+	ePlatformStatus_Deleting                                                 smithy.SchemaExtensions
+	ePlatformStatus_Deleted                                                  smithy.SchemaExtensions
+	ePlatformSummary                                                         smithy.SchemaExtensions
+	ePlatformSummary_PlatformArn                                             smithy.SchemaExtensions
+	ePlatformSummary_PlatformOwner                                           smithy.SchemaExtensions
+	ePlatformSummary_PlatformStatus                                          smithy.SchemaExtensions
+	ePlatformSummary_PlatformCategory                                        smithy.SchemaExtensions
+	ePlatformSummary_OperatingSystemName                                     smithy.SchemaExtensions
+	ePlatformSummary_OperatingSystemVersion                                  smithy.SchemaExtensions
+	ePlatformSummary_SupportedTierList                                       smithy.SchemaExtensions
+	ePlatformSummary_SupportedAddonList                                      smithy.SchemaExtensions
+	ePlatformSummary_PlatformLifecycleState                                  smithy.SchemaExtensions
+	ePlatformSummary_PlatformVersion                                         smithy.SchemaExtensions
+	ePlatformSummary_PlatformBranchName                                      smithy.SchemaExtensions
+	ePlatformSummary_PlatformBranchLifecycleState                            smithy.SchemaExtensions
+	e_PlatformSummaryList                                                    smithy.SchemaExtensions
+	e_PlatformSummaryList_member                                             smithy.SchemaExtensions
+	e_PlatformVersion                                                        smithy.SchemaExtensions
+	ePlatformVersionStillReferencedException                                 smithy.SchemaExtensions
+	ePlatformVersionStillReferencedException_message                         smithy.SchemaExtensions
+	eQueue                                                                   smithy.SchemaExtensions
+	eQueue_Name                                                              smithy.SchemaExtensions
+	eQueue_URL                                                               smithy.SchemaExtensions
+	e_QueueList                                                              smithy.SchemaExtensions
+	e_QueueList_member                                                       smithy.SchemaExtensions
+	e_RefreshedAt                                                            smithy.SchemaExtensions
+	e_RegexLabel                                                             smithy.SchemaExtensions
+	e_RegexPattern                                                           smithy.SchemaExtensions
+	e_RequestCount                                                           smithy.SchemaExtensions
+	e_RequestId                                                              smithy.SchemaExtensions
+	e_ResourceArn                                                            smithy.SchemaExtensions
+	e_ResourceId                                                             smithy.SchemaExtensions
+	e_ResourceName                                                           smithy.SchemaExtensions
+	eResourceNotFoundException                                               smithy.SchemaExtensions
+	eResourceNotFoundException_message                                       smithy.SchemaExtensions
+	eResourceQuota                                                           smithy.SchemaExtensions
+	eResourceQuota_Maximum                                                   smithy.SchemaExtensions
+	eResourceQuotas                                                          smithy.SchemaExtensions
+	eResourceQuotas_ApplicationQuota                                         smithy.SchemaExtensions
+	eResourceQuotas_ApplicationVersionQuota                                  smithy.SchemaExtensions
+	eResourceQuotas_EnvironmentQuota                                         smithy.SchemaExtensions
+	eResourceQuotas_ConfigurationTemplateQuota                               smithy.SchemaExtensions
+	eResourceQuotas_CustomPlatformQuota                                      smithy.SchemaExtensions
+	eResourceTypeNotSupportedException                                       smithy.SchemaExtensions
+	eResourceTypeNotSupportedException_message                               smithy.SchemaExtensions
+	e_S3Bucket                                                               smithy.SchemaExtensions
+	e_S3Key                                                                  smithy.SchemaExtensions
+	eS3Location                                                              smithy.SchemaExtensions
+	eS3Location_S3Bucket                                                     smithy.SchemaExtensions
+	eS3Location_S3Key                                                        smithy.SchemaExtensions
+	eS3LocationNotInServiceRegionException                                   smithy.SchemaExtensions
+	eS3LocationNotInServiceRegionException_message                           smithy.SchemaExtensions
+	eS3SubscriptionRequiredException                                         smithy.SchemaExtensions
+	eS3SubscriptionRequiredException_message                                 smithy.SchemaExtensions
+	e_SampleTimestamp                                                        smithy.SchemaExtensions
+	eSearchFilter                                                            smithy.SchemaExtensions
+	eSearchFilter_Attribute                                                  smithy.SchemaExtensions
+	eSearchFilter_Operator                                                   smithy.SchemaExtensions
+	eSearchFilter_Values                                                     smithy.SchemaExtensions
+	e_SearchFilterAttribute                                                  smithy.SchemaExtensions
+	e_SearchFilterOperator                                                   smithy.SchemaExtensions
+	e_SearchFilters                                                          smithy.SchemaExtensions
+	e_SearchFilters_member                                                   smithy.SchemaExtensions
+	e_SearchFilterValue                                                      smithy.SchemaExtensions
+	e_SearchFilterValues                                                     smithy.SchemaExtensions
+	e_SearchFilterValues_member                                              smithy.SchemaExtensions
+	eSingleInstanceHealth                                                    smithy.SchemaExtensions
+	eSingleInstanceHealth_InstanceId                                         smithy.SchemaExtensions
+	eSingleInstanceHealth_HealthStatus                                       smithy.SchemaExtensions
+	eSingleInstanceHealth_Color                                              smithy.SchemaExtensions
+	eSingleInstanceHealth_Causes                                             smithy.SchemaExtensions
+	eSingleInstanceHealth_LaunchedAt                                         smithy.SchemaExtensions
+	eSingleInstanceHealth_ApplicationMetrics                                 smithy.SchemaExtensions
+	eSingleInstanceHealth_System                                             smithy.SchemaExtensions
+	eSingleInstanceHealth_Deployment                                         smithy.SchemaExtensions
+	eSingleInstanceHealth_AvailabilityZone                                   smithy.SchemaExtensions
+	eSingleInstanceHealth_InstanceType                                       smithy.SchemaExtensions
+	eSolutionStackDescription                                                smithy.SchemaExtensions
+	eSolutionStackDescription_SolutionStackName                              smithy.SchemaExtensions
+	eSolutionStackDescription_PermittedFileTypes                             smithy.SchemaExtensions
+	e_SolutionStackFileTypeList                                              smithy.SchemaExtensions
+	e_SolutionStackFileTypeList_member                                       smithy.SchemaExtensions
+	e_SolutionStackName                                                      smithy.SchemaExtensions
+	eSourceBuildInformation                                                  smithy.SchemaExtensions
+	eSourceBuildInformation_SourceType                                       smithy.SchemaExtensions
+	eSourceBuildInformation_SourceRepository                                 smithy.SchemaExtensions
+	eSourceBuildInformation_SourceLocation                                   smithy.SchemaExtensions
+	eSourceBundleDeletionException                                           smithy.SchemaExtensions
+	eSourceBundleDeletionException_message                                   smithy.SchemaExtensions
+	eSourceConfiguration                                                     smithy.SchemaExtensions
+	eSourceConfiguration_ApplicationName                                     smithy.SchemaExtensions
+	eSourceConfiguration_TemplateName                                        smithy.SchemaExtensions
+	e_SourceLocation                                                         smithy.SchemaExtensions
+	eSourceRepository                                                        smithy.SchemaExtensions
+	eSourceRepository_CodeCommit                                             smithy.SchemaExtensions
+	eSourceRepository_S3                                                     smithy.SchemaExtensions
+	eSourceType                                                              smithy.SchemaExtensions
+	eSourceType_Git                                                          smithy.SchemaExtensions
+	eSourceType_Zip                                                          smithy.SchemaExtensions
+	eStatusCodes                                                             smithy.SchemaExtensions
+	eStatusCodes_Status2xx                                                   smithy.SchemaExtensions
+	eStatusCodes_Status3xx                                                   smithy.SchemaExtensions
+	eStatusCodes_Status4xx                                                   smithy.SchemaExtensions
+	eStatusCodes_Status5xx                                                   smithy.SchemaExtensions
+	e_String                                                                 smithy.SchemaExtensions
+	e_SupportedAddon                                                         smithy.SchemaExtensions
+	e_SupportedAddonList                                                     smithy.SchemaExtensions
+	e_SupportedAddonList_member                                              smithy.SchemaExtensions
+	e_SupportedTier                                                          smithy.SchemaExtensions
+	e_SupportedTierList                                                      smithy.SchemaExtensions
+	e_SupportedTierList_member                                               smithy.SchemaExtensions
+	eSystemStatus                                                            smithy.SchemaExtensions
+	eSystemStatus_CPUUtilization                                             smithy.SchemaExtensions
+	eSystemStatus_LoadAverage                                                smithy.SchemaExtensions
+	eTag                                                                     smithy.SchemaExtensions
+	eTag_Key                                                                 smithy.SchemaExtensions
+	eTag_Value                                                               smithy.SchemaExtensions
+	e_TagKey                                                                 smithy.SchemaExtensions
+	e_TagKeyList                                                             smithy.SchemaExtensions
+	e_TagKeyList_member                                                      smithy.SchemaExtensions
+	e_TagList                                                                smithy.SchemaExtensions
+	e_TagList_member                                                         smithy.SchemaExtensions
+	e_Tags                                                                   smithy.SchemaExtensions
+	e_Tags_member                                                            smithy.SchemaExtensions
+	e_TagValue                                                               smithy.SchemaExtensions
+	e_TerminateEnvForce                                                      smithy.SchemaExtensions
+	e_TerminateEnvironmentResources                                          smithy.SchemaExtensions
+	e_TimeFilterEnd                                                          smithy.SchemaExtensions
+	e_TimeFilterStart                                                        smithy.SchemaExtensions
+	e_Timestamp                                                              smithy.SchemaExtensions
+	e_Token                                                                  smithy.SchemaExtensions
+	eTooManyApplicationsException                                            smithy.SchemaExtensions
+	eTooManyApplicationsException_message                                    smithy.SchemaExtensions
+	eTooManyApplicationVersionsException                                     smithy.SchemaExtensions
+	eTooManyApplicationVersionsException_message                             smithy.SchemaExtensions
+	eTooManyBucketsException                                                 smithy.SchemaExtensions
+	eTooManyBucketsException_message                                         smithy.SchemaExtensions
+	eTooManyConfigurationTemplatesException                                  smithy.SchemaExtensions
+	eTooManyConfigurationTemplatesException_message                          smithy.SchemaExtensions
+	eTooManyEnvironmentsException                                            smithy.SchemaExtensions
+	eTooManyEnvironmentsException_message                                    smithy.SchemaExtensions
+	eTooManyPlatformsException                                               smithy.SchemaExtensions
+	eTooManyPlatformsException_message                                       smithy.SchemaExtensions
+	eTooManyTagsException                                                    smithy.SchemaExtensions
+	eTooManyTagsException_message                                            smithy.SchemaExtensions
+	eTrigger                                                                 smithy.SchemaExtensions
+	eTrigger_Name                                                            smithy.SchemaExtensions
+	e_TriggerList                                                            smithy.SchemaExtensions
+	e_TriggerList_member                                                     smithy.SchemaExtensions
+	e_UpdateDate                                                             smithy.SchemaExtensions
+	e_UserDefinedOption                                                      smithy.SchemaExtensions
+	eValidationMessage                                                       smithy.SchemaExtensions
+	eValidationMessage_Message                                               smithy.SchemaExtensions
+	eValidationMessage_Severity                                              smithy.SchemaExtensions
+	eValidationMessage_Namespace                                             smithy.SchemaExtensions
+	eValidationMessage_OptionName                                            smithy.SchemaExtensions
+	e_ValidationMessagesList                                                 smithy.SchemaExtensions
+	e_ValidationMessagesList_member                                          smithy.SchemaExtensions
+	e_ValidationMessageString                                                smithy.SchemaExtensions
+	eValidationSeverity                                                      smithy.SchemaExtensions
+	eValidationSeverity_error                                                smithy.SchemaExtensions
+	eValidationSeverity_warning                                              smithy.SchemaExtensions
+	e_VersionLabel                                                           smithy.SchemaExtensions
+	e_VersionLabels                                                          smithy.SchemaExtensions
+	e_VersionLabels_member                                                   smithy.SchemaExtensions
+	e_VersionLabelsList                                                      smithy.SchemaExtensions
+	e_VersionLabelsList_member                                               smithy.SchemaExtensions
+	e_VirtualizationType                                                     smithy.SchemaExtensions
+	eAbortEnvironmentUpdateMessage                                           smithy.SchemaExtensions
+	eAbortEnvironmentUpdateMessage_EnvironmentId                             smithy.SchemaExtensions
+	eAbortEnvironmentUpdateMessage_EnvironmentName                           smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionRequest                                    smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionRequest_EnvironmentName                    smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionRequest_EnvironmentId                      smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionRequest_ActionId                           smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionResult                                     smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionResult_ActionId                            smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionResult_ActionDescription                   smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionResult_ActionType                          smithy.SchemaExtensions
+	eApplyEnvironmentManagedActionResult_Status                              smithy.SchemaExtensions
+	eAssociateEnvironmentOperationsRoleMessage                               smithy.SchemaExtensions
+	eAssociateEnvironmentOperationsRoleMessage_EnvironmentName               smithy.SchemaExtensions
+	eAssociateEnvironmentOperationsRoleMessage_OperationsRole                smithy.SchemaExtensions
+	eCheckDNSAvailabilityMessage                                             smithy.SchemaExtensions
+	eCheckDNSAvailabilityMessage_CNAMEPrefix                                 smithy.SchemaExtensions
+	eCheckDNSAvailabilityResultMessage                                       smithy.SchemaExtensions
+	eCheckDNSAvailabilityResultMessage_Available                             smithy.SchemaExtensions
+	eCheckDNSAvailabilityResultMessage_FullyQualifiedCNAME                   smithy.SchemaExtensions
+	eComposeEnvironmentsMessage                                              smithy.SchemaExtensions
+	eComposeEnvironmentsMessage_ApplicationName                              smithy.SchemaExtensions
+	eComposeEnvironmentsMessage_GroupName                                    smithy.SchemaExtensions
+	eComposeEnvironmentsMessage_VersionLabels                                smithy.SchemaExtensions
+	eEnvironmentDescriptionsMessage                                          smithy.SchemaExtensions
+	eEnvironmentDescriptionsMessage_Environments                             smithy.SchemaExtensions
+	eEnvironmentDescriptionsMessage_NextToken                                smithy.SchemaExtensions
+	eCreateApplicationMessage                                                smithy.SchemaExtensions
+	eCreateApplicationMessage_ApplicationName                                smithy.SchemaExtensions
+	eCreateApplicationMessage_Description                                    smithy.SchemaExtensions
+	eCreateApplicationMessage_ResourceLifecycleConfig                        smithy.SchemaExtensions
+	eCreateApplicationMessage_Tags                                           smithy.SchemaExtensions
+	eApplicationDescriptionMessage                                           smithy.SchemaExtensions
+	eApplicationDescriptionMessage_Application                               smithy.SchemaExtensions
+	eCreateApplicationVersionMessage                                         smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_ApplicationName                         smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_VersionLabel                            smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_Description                             smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_SourceBuildInformation                  smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_SourceBundle                            smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_BuildConfiguration                      smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_AutoCreateApplication                   smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_Process                                 smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_Tags                                    smithy.SchemaExtensions
+	eCreateApplicationVersionMessage_ImageConfiguration                      smithy.SchemaExtensions
+	eApplicationVersionDescriptionMessage                                    smithy.SchemaExtensions
+	eApplicationVersionDescriptionMessage_ApplicationVersion                 smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage                                      smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_ApplicationName                      smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_TemplateName                         smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_SolutionStackName                    smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_PlatformArn                          smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_SourceConfiguration                  smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_EnvironmentId                        smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_Description                          smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_OptionSettings                       smithy.SchemaExtensions
+	eCreateConfigurationTemplateMessage_Tags                                 smithy.SchemaExtensions
+	eCreateEnvironmentMessage                                                smithy.SchemaExtensions
+	eCreateEnvironmentMessage_ApplicationName                                smithy.SchemaExtensions
+	eCreateEnvironmentMessage_EnvironmentName                                smithy.SchemaExtensions
+	eCreateEnvironmentMessage_GroupName                                      smithy.SchemaExtensions
+	eCreateEnvironmentMessage_Description                                    smithy.SchemaExtensions
+	eCreateEnvironmentMessage_CNAMEPrefix                                    smithy.SchemaExtensions
+	eCreateEnvironmentMessage_Tier                                           smithy.SchemaExtensions
+	eCreateEnvironmentMessage_Tags                                           smithy.SchemaExtensions
+	eCreateEnvironmentMessage_VersionLabel                                   smithy.SchemaExtensions
+	eCreateEnvironmentMessage_TemplateName                                   smithy.SchemaExtensions
+	eCreateEnvironmentMessage_SolutionStackName                              smithy.SchemaExtensions
+	eCreateEnvironmentMessage_PlatformArn                                    smithy.SchemaExtensions
+	eCreateEnvironmentMessage_OptionSettings                                 smithy.SchemaExtensions
+	eCreateEnvironmentMessage_OptionsToRemove                                smithy.SchemaExtensions
+	eCreateEnvironmentMessage_OperationsRole                                 smithy.SchemaExtensions
+	eCreatePlatformVersionRequest                                            smithy.SchemaExtensions
+	eCreatePlatformVersionRequest_PlatformName                               smithy.SchemaExtensions
+	eCreatePlatformVersionRequest_PlatformVersion                            smithy.SchemaExtensions
+	eCreatePlatformVersionRequest_PlatformDefinitionBundle                   smithy.SchemaExtensions
+	eCreatePlatformVersionRequest_EnvironmentName                            smithy.SchemaExtensions
+	eCreatePlatformVersionRequest_OptionSettings                             smithy.SchemaExtensions
+	eCreatePlatformVersionRequest_Tags                                       smithy.SchemaExtensions
+	eCreatePlatformVersionResult                                             smithy.SchemaExtensions
+	eCreatePlatformVersionResult_PlatformSummary                             smithy.SchemaExtensions
+	eCreatePlatformVersionResult_Builder                                     smithy.SchemaExtensions
+	eCreateStorageLocationResultMessage                                      smithy.SchemaExtensions
+	eCreateStorageLocationResultMessage_S3Bucket                             smithy.SchemaExtensions
+	eDeleteApplicationMessage                                                smithy.SchemaExtensions
+	eDeleteApplicationMessage_ApplicationName                                smithy.SchemaExtensions
+	eDeleteApplicationMessage_TerminateEnvByForce                            smithy.SchemaExtensions
+	eDeleteApplicationVersionMessage                                         smithy.SchemaExtensions
+	eDeleteApplicationVersionMessage_ApplicationName                         smithy.SchemaExtensions
+	eDeleteApplicationVersionMessage_VersionLabel                            smithy.SchemaExtensions
+	eDeleteApplicationVersionMessage_DeleteSourceBundle                      smithy.SchemaExtensions
+	eDeleteConfigurationTemplateMessage                                      smithy.SchemaExtensions
+	eDeleteConfigurationTemplateMessage_ApplicationName                      smithy.SchemaExtensions
+	eDeleteConfigurationTemplateMessage_TemplateName                         smithy.SchemaExtensions
+	eDeleteEnvironmentConfigurationMessage                                   smithy.SchemaExtensions
+	eDeleteEnvironmentConfigurationMessage_ApplicationName                   smithy.SchemaExtensions
+	eDeleteEnvironmentConfigurationMessage_EnvironmentName                   smithy.SchemaExtensions
+	eDeletePlatformVersionRequest                                            smithy.SchemaExtensions
+	eDeletePlatformVersionRequest_PlatformArn                                smithy.SchemaExtensions
+	eDeletePlatformVersionResult                                             smithy.SchemaExtensions
+	eDeletePlatformVersionResult_PlatformSummary                             smithy.SchemaExtensions
+	eDescribeAccountAttributesResult                                         smithy.SchemaExtensions
+	eDescribeAccountAttributesResult_ResourceQuotas                          smithy.SchemaExtensions
+	eDescribeApplicationsMessage                                             smithy.SchemaExtensions
+	eDescribeApplicationsMessage_ApplicationNames                            smithy.SchemaExtensions
+	eApplicationDescriptionsMessage                                          smithy.SchemaExtensions
+	eApplicationDescriptionsMessage_Applications                             smithy.SchemaExtensions
+	eDescribeApplicationVersionsMessage                                      smithy.SchemaExtensions
+	eDescribeApplicationVersionsMessage_ApplicationName                      smithy.SchemaExtensions
+	eDescribeApplicationVersionsMessage_VersionLabels                        smithy.SchemaExtensions
+	eDescribeApplicationVersionsMessage_MaxRecords                           smithy.SchemaExtensions
+	eDescribeApplicationVersionsMessage_NextToken                            smithy.SchemaExtensions
+	eApplicationVersionDescriptionsMessage                                   smithy.SchemaExtensions
+	eApplicationVersionDescriptionsMessage_ApplicationVersions               smithy.SchemaExtensions
+	eApplicationVersionDescriptionsMessage_NextToken                         smithy.SchemaExtensions
+	eDescribeConfigurationOptionsMessage                                     smithy.SchemaExtensions
+	eDescribeConfigurationOptionsMessage_ApplicationName                     smithy.SchemaExtensions
+	eDescribeConfigurationOptionsMessage_TemplateName                        smithy.SchemaExtensions
+	eDescribeConfigurationOptionsMessage_EnvironmentName                     smithy.SchemaExtensions
+	eDescribeConfigurationOptionsMessage_SolutionStackName                   smithy.SchemaExtensions
+	eDescribeConfigurationOptionsMessage_PlatformArn                         smithy.SchemaExtensions
+	eDescribeConfigurationOptionsMessage_Options                             smithy.SchemaExtensions
+	eConfigurationOptionsDescription                                         smithy.SchemaExtensions
+	eConfigurationOptionsDescription_SolutionStackName                       smithy.SchemaExtensions
+	eConfigurationOptionsDescription_PlatformArn                             smithy.SchemaExtensions
+	eConfigurationOptionsDescription_Options                                 smithy.SchemaExtensions
+	eDescribeConfigurationSettingsMessage                                    smithy.SchemaExtensions
+	eDescribeConfigurationSettingsMessage_ApplicationName                    smithy.SchemaExtensions
+	eDescribeConfigurationSettingsMessage_TemplateName                       smithy.SchemaExtensions
+	eDescribeConfigurationSettingsMessage_EnvironmentName                    smithy.SchemaExtensions
+	eConfigurationSettingsDescriptions                                       smithy.SchemaExtensions
+	eConfigurationSettingsDescriptions_ConfigurationSettings                 smithy.SchemaExtensions
+	eDescribeEnvironmentHealthRequest                                        smithy.SchemaExtensions
+	eDescribeEnvironmentHealthRequest_EnvironmentName                        smithy.SchemaExtensions
+	eDescribeEnvironmentHealthRequest_EnvironmentId                          smithy.SchemaExtensions
+	eDescribeEnvironmentHealthRequest_AttributeNames                         smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult                                         smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_EnvironmentName                         smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_HealthStatus                            smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_Status                                  smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_Color                                   smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_Causes                                  smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_ApplicationMetrics                      smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_InstancesHealth                         smithy.SchemaExtensions
+	eDescribeEnvironmentHealthResult_RefreshedAt                             smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryRequest                          smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryRequest_EnvironmentId            smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryRequest_EnvironmentName          smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryRequest_NextToken                smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryRequest_MaxItems                 smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryResult                           smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionHistoryResult_NextToken                 smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionsRequest                                smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionsRequest_EnvironmentName                smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionsRequest_EnvironmentId                  smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionsRequest_Status                         smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionsResult                                 smithy.SchemaExtensions
+	eDescribeEnvironmentManagedActionsResult_ManagedActions                  smithy.SchemaExtensions
+	eDescribeEnvironmentResourcesMessage                                     smithy.SchemaExtensions
+	eDescribeEnvironmentResourcesMessage_EnvironmentId                       smithy.SchemaExtensions
+	eDescribeEnvironmentResourcesMessage_EnvironmentName                     smithy.SchemaExtensions
+	eEnvironmentResourceDescriptionsMessage                                  smithy.SchemaExtensions
+	eEnvironmentResourceDescriptionsMessage_EnvironmentResources             smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage                                             smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_ApplicationName                             smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_VersionLabel                                smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_EnvironmentIds                              smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_EnvironmentNames                            smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_IncludeDeleted                              smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_IncludedDeletedBackTo                       smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_MaxRecords                                  smithy.SchemaExtensions
+	eDescribeEnvironmentsMessage_NextToken                                   smithy.SchemaExtensions
+	eDescribeEventsMessage                                                   smithy.SchemaExtensions
+	eDescribeEventsMessage_ApplicationName                                   smithy.SchemaExtensions
+	eDescribeEventsMessage_VersionLabel                                      smithy.SchemaExtensions
+	eDescribeEventsMessage_TemplateName                                      smithy.SchemaExtensions
+	eDescribeEventsMessage_EnvironmentId                                     smithy.SchemaExtensions
+	eDescribeEventsMessage_EnvironmentName                                   smithy.SchemaExtensions
+	eDescribeEventsMessage_PlatformArn                                       smithy.SchemaExtensions
+	eDescribeEventsMessage_RequestId                                         smithy.SchemaExtensions
+	eDescribeEventsMessage_Severity                                          smithy.SchemaExtensions
+	eDescribeEventsMessage_StartTime                                         smithy.SchemaExtensions
+	eDescribeEventsMessage_EndTime                                           smithy.SchemaExtensions
+	eDescribeEventsMessage_MaxRecords                                        smithy.SchemaExtensions
+	eDescribeEventsMessage_NextToken                                         smithy.SchemaExtensions
+	eEventDescriptionsMessage                                                smithy.SchemaExtensions
+	eEventDescriptionsMessage_Events                                         smithy.SchemaExtensions
+	eEventDescriptionsMessage_NextToken                                      smithy.SchemaExtensions
+	eDescribeInstancesHealthRequest                                          smithy.SchemaExtensions
+	eDescribeInstancesHealthRequest_EnvironmentName                          smithy.SchemaExtensions
+	eDescribeInstancesHealthRequest_EnvironmentId                            smithy.SchemaExtensions
+	eDescribeInstancesHealthRequest_AttributeNames                           smithy.SchemaExtensions
+	eDescribeInstancesHealthRequest_NextToken                                smithy.SchemaExtensions
+	eDescribeInstancesHealthResult                                           smithy.SchemaExtensions
+	eDescribeInstancesHealthResult_InstanceHealthList                        smithy.SchemaExtensions
+	eDescribeInstancesHealthResult_RefreshedAt                               smithy.SchemaExtensions
+	eDescribeInstancesHealthResult_NextToken                                 smithy.SchemaExtensions
+	eDescribePlatformVersionRequest                                          smithy.SchemaExtensions
+	eDescribePlatformVersionRequest_PlatformArn                              smithy.SchemaExtensions
+	eDescribePlatformVersionResult                                           smithy.SchemaExtensions
+	eDescribePlatformVersionResult_PlatformDescription                       smithy.SchemaExtensions
+	eDisassociateEnvironmentOperationsRoleMessage                            smithy.SchemaExtensions
+	eDisassociateEnvironmentOperationsRoleMessage_EnvironmentName            smithy.SchemaExtensions
+	eListAvailableSolutionStacksResultMessage                                smithy.SchemaExtensions
+	eListAvailableSolutionStacksResultMessage_SolutionStacks                 smithy.SchemaExtensions
+	eListAvailableSolutionStacksResultMessage_SolutionStackDetails           smithy.SchemaExtensions
+	eListPlatformBranchesRequest                                             smithy.SchemaExtensions
+	eListPlatformBranchesRequest_Filters                                     smithy.SchemaExtensions
+	eListPlatformBranchesRequest_MaxRecords                                  smithy.SchemaExtensions
+	eListPlatformBranchesRequest_NextToken                                   smithy.SchemaExtensions
+	eListPlatformBranchesResult                                              smithy.SchemaExtensions
+	eListPlatformBranchesResult_PlatformBranchSummaryList                    smithy.SchemaExtensions
+	eListPlatformBranchesResult_NextToken                                    smithy.SchemaExtensions
+	eListPlatformVersionsRequest                                             smithy.SchemaExtensions
+	eListPlatformVersionsRequest_Filters                                     smithy.SchemaExtensions
+	eListPlatformVersionsRequest_MaxRecords                                  smithy.SchemaExtensions
+	eListPlatformVersionsRequest_NextToken                                   smithy.SchemaExtensions
+	eListPlatformVersionsResult                                              smithy.SchemaExtensions
+	eListPlatformVersionsResult_PlatformSummaryList                          smithy.SchemaExtensions
+	eListPlatformVersionsResult_NextToken                                    smithy.SchemaExtensions
+	eListTagsForResourceMessage                                              smithy.SchemaExtensions
+	eListTagsForResourceMessage_ResourceArn                                  smithy.SchemaExtensions
+	eResourceTagsDescriptionMessage                                          smithy.SchemaExtensions
+	eResourceTagsDescriptionMessage_ResourceArn                              smithy.SchemaExtensions
+	eResourceTagsDescriptionMessage_ResourceTags                             smithy.SchemaExtensions
+	eRebuildEnvironmentMessage                                               smithy.SchemaExtensions
+	eRebuildEnvironmentMessage_EnvironmentId                                 smithy.SchemaExtensions
+	eRebuildEnvironmentMessage_EnvironmentName                               smithy.SchemaExtensions
+	eRequestEnvironmentInfoMessage                                           smithy.SchemaExtensions
+	eRequestEnvironmentInfoMessage_EnvironmentId                             smithy.SchemaExtensions
+	eRequestEnvironmentInfoMessage_EnvironmentName                           smithy.SchemaExtensions
+	eRequestEnvironmentInfoMessage_InfoType                                  smithy.SchemaExtensions
+	eRestartAppServerMessage                                                 smithy.SchemaExtensions
+	eRestartAppServerMessage_EnvironmentId                                   smithy.SchemaExtensions
+	eRestartAppServerMessage_EnvironmentName                                 smithy.SchemaExtensions
+	eRetrieveEnvironmentInfoMessage                                          smithy.SchemaExtensions
+	eRetrieveEnvironmentInfoMessage_EnvironmentId                            smithy.SchemaExtensions
+	eRetrieveEnvironmentInfoMessage_EnvironmentName                          smithy.SchemaExtensions
+	eRetrieveEnvironmentInfoMessage_InfoType                                 smithy.SchemaExtensions
+	eRetrieveEnvironmentInfoResultMessage                                    smithy.SchemaExtensions
+	eRetrieveEnvironmentInfoResultMessage_EnvironmentInfo                    smithy.SchemaExtensions
+	eSwapEnvironmentCNAMEsMessage                                            smithy.SchemaExtensions
+	eSwapEnvironmentCNAMEsMessage_SourceEnvironmentId                        smithy.SchemaExtensions
+	eSwapEnvironmentCNAMEsMessage_SourceEnvironmentName                      smithy.SchemaExtensions
+	eSwapEnvironmentCNAMEsMessage_DestinationEnvironmentId                   smithy.SchemaExtensions
+	eSwapEnvironmentCNAMEsMessage_DestinationEnvironmentName                 smithy.SchemaExtensions
+	eTerminateEnvironmentMessage                                             smithy.SchemaExtensions
+	eTerminateEnvironmentMessage_EnvironmentId                               smithy.SchemaExtensions
+	eTerminateEnvironmentMessage_EnvironmentName                             smithy.SchemaExtensions
+	eTerminateEnvironmentMessage_TerminateResources                          smithy.SchemaExtensions
+	eTerminateEnvironmentMessage_ForceTerminate                              smithy.SchemaExtensions
+	eUpdateApplicationMessage                                                smithy.SchemaExtensions
+	eUpdateApplicationMessage_ApplicationName                                smithy.SchemaExtensions
+	eUpdateApplicationMessage_Description                                    smithy.SchemaExtensions
+	eUpdateApplicationResourceLifecycleMessage                               smithy.SchemaExtensions
+	eUpdateApplicationResourceLifecycleMessage_ApplicationName               smithy.SchemaExtensions
+	eUpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig       smithy.SchemaExtensions
+	eApplicationResourceLifecycleDescriptionMessage                          smithy.SchemaExtensions
+	eApplicationResourceLifecycleDescriptionMessage_ApplicationName          smithy.SchemaExtensions
+	eApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig  smithy.SchemaExtensions
+	eUpdateApplicationVersionMessage                                         smithy.SchemaExtensions
+	eUpdateApplicationVersionMessage_ApplicationName                         smithy.SchemaExtensions
+	eUpdateApplicationVersionMessage_VersionLabel                            smithy.SchemaExtensions
+	eUpdateApplicationVersionMessage_Description                             smithy.SchemaExtensions
+	eUpdateConfigurationTemplateMessage                                      smithy.SchemaExtensions
+	eUpdateConfigurationTemplateMessage_ApplicationName                      smithy.SchemaExtensions
+	eUpdateConfigurationTemplateMessage_TemplateName                         smithy.SchemaExtensions
+	eUpdateConfigurationTemplateMessage_Description                          smithy.SchemaExtensions
+	eUpdateConfigurationTemplateMessage_OptionSettings                       smithy.SchemaExtensions
+	eUpdateConfigurationTemplateMessage_OptionsToRemove                      smithy.SchemaExtensions
+	eUpdateEnvironmentMessage                                                smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_ApplicationName                                smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_EnvironmentId                                  smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_EnvironmentName                                smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_GroupName                                      smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_Description                                    smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_Tier                                           smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_VersionLabel                                   smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_TemplateName                                   smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_SolutionStackName                              smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_PlatformArn                                    smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_OptionSettings                                 smithy.SchemaExtensions
+	eUpdateEnvironmentMessage_OptionsToRemove                                smithy.SchemaExtensions
+	eUpdateTagsForResourceMessage                                            smithy.SchemaExtensions
+	eUpdateTagsForResourceMessage_ResourceArn                                smithy.SchemaExtensions
+	eUpdateTagsForResourceMessage_TagsToAdd                                  smithy.SchemaExtensions
+	eUpdateTagsForResourceMessage_TagsToRemove                               smithy.SchemaExtensions
+	eValidateConfigurationSettingsMessage                                    smithy.SchemaExtensions
+	eValidateConfigurationSettingsMessage_ApplicationName                    smithy.SchemaExtensions
+	eValidateConfigurationSettingsMessage_TemplateName                       smithy.SchemaExtensions
+	eValidateConfigurationSettingsMessage_EnvironmentName                    smithy.SchemaExtensions
+	eValidateConfigurationSettingsMessage_OptionSettings                     smithy.SchemaExtensions
+	eConfigurationSettingsValidationMessages                                 smithy.SchemaExtensions
+	eConfigurationSettingsValidationMessages_Messages                        smithy.SchemaExtensions
+)
+
+var (
+	iAbortEnvironmentUpdate                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AbortEnvironmentUpdate"}
+	iApplyEnvironmentManagedAction                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplyEnvironmentManagedAction"}
+	iAssociateEnvironmentOperationsRole             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AssociateEnvironmentOperationsRole"}
+	iCheckDNSAvailability                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CheckDNSAvailability"}
+	iComposeEnvironments                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ComposeEnvironments"}
+	iCreateApplication                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateApplication"}
+	iCreateApplicationVersion                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateApplicationVersion"}
+	iCreateConfigurationTemplate                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateConfigurationTemplate"}
+	iCreateEnvironment                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateEnvironment"}
+	iCreatePlatformVersion                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreatePlatformVersion"}
+	iCreateStorageLocation                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateStorageLocation"}
+	iDeleteApplication                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteApplication"}
+	iDeleteApplicationVersion                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteApplicationVersion"}
+	iDeleteConfigurationTemplate                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteConfigurationTemplate"}
+	iDeleteEnvironmentConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteEnvironmentConfiguration"}
+	iDeletePlatformVersion                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeletePlatformVersion"}
+	iDescribeAccountAttributes                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeAccountAttributes"}
+	iDescribeApplications                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeApplications"}
+	iDescribeApplicationVersions                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeApplicationVersions"}
+	iDescribeConfigurationOptions                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeConfigurationOptions"}
+	iDescribeConfigurationSettings                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeConfigurationSettings"}
+	iDescribeEnvironmentHealth                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentHealth"}
+	iDescribeEnvironmentManagedActionHistory        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentManagedActionHistory"}
+	iDescribeEnvironmentManagedActions              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentManagedActions"}
+	iDescribeEnvironmentResources                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentResources"}
+	iDescribeEnvironments                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironments"}
+	iDescribeEvents                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEvents"}
+	iDescribeInstancesHealth                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeInstancesHealth"}
+	iDescribePlatformVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribePlatformVersion"}
+	iDisassociateEnvironmentOperationsRole          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DisassociateEnvironmentOperationsRole"}
+	iListAvailableSolutionStacks                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListAvailableSolutionStacks"}
+	iListPlatformBranches                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListPlatformBranches"}
+	iListPlatformVersions                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListPlatformVersions"}
+	iListTagsForResource                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListTagsForResource"}
+	iRebuildEnvironment                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RebuildEnvironment"}
+	iRequestEnvironmentInfo                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RequestEnvironmentInfo"}
+	iRestartAppServer                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RestartAppServer"}
+	iRetrieveEnvironmentInfo                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RetrieveEnvironmentInfo"}
+	iSwapEnvironmentCNAMEs                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SwapEnvironmentCNAMEs"}
+	iTerminateEnvironment                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TerminateEnvironment"}
+	iUpdateApplication                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateApplication"}
+	iUpdateApplicationResourceLifecycle             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateApplicationResourceLifecycle"}
+	iUpdateApplicationVersion                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateApplicationVersion"}
+	iUpdateConfigurationTemplate                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateConfigurationTemplate"}
+	iUpdateEnvironment                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateEnvironment"}
+	iUpdateTagsForResource                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateTagsForResource"}
+	iValidateConfigurationSettings                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ValidateConfigurationSettings"}
+	i_AWSElasticBeanstalkService                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AWSElasticBeanstalkService"}
+	i_AbortableOperationInProgress                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AbortableOperationInProgress"}
+	iActionHistoryStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ActionHistoryStatus"}
+	iActionStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ActionStatus"}
+	iActionType                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ActionType"}
+	iAmiArchitecture                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AmiArchitecture"}
+	i_ApplicationArn                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationArn"}
+	iApplicationDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationDescription"}
+	i_ApplicationDescriptionList                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationDescriptionList"}
+	iApplicationMetrics                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationMetrics"}
+	i_ApplicationName                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationName"}
+	i_ApplicationNamesList                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationNamesList"}
+	iApplicationResourceLifecycleConfig             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationResourceLifecycleConfig"}
+	i_ApplicationVersionArn                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionArn"}
+	iApplicationVersionDescription                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionDescription"}
+	i_ApplicationVersionDescriptionList             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionDescriptionList"}
+	iApplicationVersionLifecycleConfig              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionLifecycleConfig"}
+	i_ApplicationVersionProccess                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionProccess"}
+	iApplicationVersionStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionStatus"}
+	iArchitectureType                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ArchitectureType"}
+	i_ARN                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ARN"}
+	i_AutoCreateApplication                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AutoCreateApplication"}
+	iAutoScalingGroup                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AutoScalingGroup"}
+	i_AutoScalingGroupList                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AutoScalingGroupList"}
+	i_AvailableSolutionStackDetailsList             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AvailableSolutionStackDetailsList"}
+	i_AvailableSolutionStackNamesList               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AvailableSolutionStackNamesList"}
+	i_BoxedBoolean                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "BoxedBoolean"}
+	i_BoxedInt                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "BoxedInt"}
+	i_BranchName                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "BranchName"}
+	i_BranchOrder                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "BranchOrder"}
+	iBuildConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "BuildConfiguration"}
+	iBuilder                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Builder"}
+	i_Cause                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Cause"}
+	i_Causes                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Causes"}
+	iCluster                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Cluster"}
+	i_CnameAvailability                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CnameAvailability"}
+	iCodeBuildNotInServiceRegionException           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CodeBuildNotInServiceRegionException"}
+	iComputeType                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ComputeType"}
+	iConfigurationDeploymentStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationDeploymentStatus"}
+	i_ConfigurationOptionDefaultValue               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionDefaultValue"}
+	iConfigurationOptionDescription                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionDescription"}
+	i_ConfigurationOptionDescriptionsList           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionDescriptionsList"}
+	i_ConfigurationOptionName                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionName"}
+	i_ConfigurationOptionPossibleValue              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionPossibleValue"}
+	i_ConfigurationOptionPossibleValues             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionPossibleValues"}
+	iConfigurationOptionSetting                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionSetting"}
+	i_ConfigurationOptionSettingsList               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionSettingsList"}
+	i_ConfigurationOptionSeverity                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionSeverity"}
+	i_ConfigurationOptionValue                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionValue"}
+	iConfigurationOptionValueType                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionValueType"}
+	iConfigurationSettingsDescription               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationSettingsDescription"}
+	i_ConfigurationSettingsDescriptionList          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationSettingsDescriptionList"}
+	i_ConfigurationTemplateName                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationTemplateName"}
+	i_ConfigurationTemplateNamesList                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationTemplateNamesList"}
+	iCPUUtilization                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CPUUtilization"}
+	i_CreationDate                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreationDate"}
+	iCustomAmi                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CustomAmi"}
+	i_CustomAmiList                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CustomAmiList"}
+	iDefaultAmi                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DefaultAmi"}
+	i_DefaultAmiList                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DefaultAmiList"}
+	i_DeleteSourceBundle                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteSourceBundle"}
+	iDeployment                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Deployment"}
+	i_DeploymentTimestamp                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeploymentTimestamp"}
+	i_Description                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Description"}
+	i_DNSCname                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DNSCname"}
+	i_DNSCnamePrefix                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DNSCnamePrefix"}
+	i_Ec2InstanceId                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Ec2InstanceId"}
+	iElasticBeanstalkServiceException               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ElasticBeanstalkServiceException"}
+	i_EndpointURL                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EndpointURL"}
+	i_EnvironmentArn                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentArn"}
+	iEnvironmentDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentDescription"}
+	i_EnvironmentDescriptionsList                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentDescriptionsList"}
+	iEnvironmentHealth                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentHealth"}
+	iEnvironmentHealthAttribute                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentHealthAttribute"}
+	i_EnvironmentHealthAttributes                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentHealthAttributes"}
+	iEnvironmentHealthStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentHealthStatus"}
+	i_EnvironmentId                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentId"}
+	i_EnvironmentIdList                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentIdList"}
+	iEnvironmentInfoDescription                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentInfoDescription"}
+	i_EnvironmentInfoDescriptionList                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentInfoDescriptionList"}
+	iEnvironmentInfoType                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentInfoType"}
+	iEnvironmentLink                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentLink"}
+	i_EnvironmentLinks                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentLinks"}
+	i_EnvironmentName                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentName"}
+	i_EnvironmentNamesList                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentNamesList"}
+	iEnvironmentResourceDescription                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentResourceDescription"}
+	iEnvironmentResourcesDescription                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentResourcesDescription"}
+	iEnvironmentStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentStatus"}
+	iEnvironmentTier                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentTier"}
+	i_EventDate                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EventDate"}
+	iEventDescription                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EventDescription"}
+	i_EventDescriptionList                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EventDescriptionList"}
+	i_EventMessage                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EventMessage"}
+	iEventSeverity                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EventSeverity"}
+	i_ExceptionMessage                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ExceptionMessage"}
+	iFailureType                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "FailureType"}
+	i_FileTypeExtension                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "FileTypeExtension"}
+	i_ForceTerminate                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ForceTerminate"}
+	i_GroupName                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "GroupName"}
+	iImageBuildConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ImageBuildConfiguration"}
+	iImageBuildType                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ImageBuildType"}
+	iImageConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ImageConfiguration"}
+	i_ImageId                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ImageId"}
+	iImageSource                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ImageSource"}
+	i_IncludeDeleted                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "IncludeDeleted"}
+	i_IncludeDeletedBackTo                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "IncludeDeletedBackTo"}
+	iInstance                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Instance"}
+	i_InstanceHealthList                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InstanceHealthList"}
+	iInstanceHealthSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InstanceHealthSummary"}
+	i_InstanceId                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InstanceId"}
+	i_InstanceList                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InstanceList"}
+	iInstancesHealthAttribute                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InstancesHealthAttribute"}
+	i_InstancesHealthAttributes                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InstancesHealthAttributes"}
+	iInsufficientPrivilegesException                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InsufficientPrivilegesException"}
+	i_Integer                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Integer"}
+	iInvalidRequestException                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "InvalidRequestException"}
+	iLatency                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Latency"}
+	iLaunchConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LaunchConfiguration"}
+	i_LaunchConfigurationList                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LaunchConfigurationList"}
+	i_LaunchedAt                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LaunchedAt"}
+	iLaunchTemplate                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LaunchTemplate"}
+	i_LaunchTemplateList                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LaunchTemplateList"}
+	iListener                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Listener"}
+	i_LoadAverage                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LoadAverage"}
+	i_LoadAverageValue                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LoadAverageValue"}
+	iLoadBalancer                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LoadBalancer"}
+	iLoadBalancerDescription                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LoadBalancerDescription"}
+	i_LoadBalancerList                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LoadBalancerList"}
+	i_LoadBalancerListenersDescription              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "LoadBalancerListenersDescription"}
+	i_Maintainer                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Maintainer"}
+	iManagedAction                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ManagedAction"}
+	iManagedActionHistoryItem                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ManagedActionHistoryItem"}
+	i_ManagedActionHistoryItems                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ManagedActionHistoryItems"}
+	i_ManagedActionHistoryMaxItems                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ManagedActionHistoryMaxItems"}
+	iManagedActionInvalidStateException             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ManagedActionInvalidStateException"}
+	i_ManagedActions                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ManagedActions"}
+	iMaxAgeRule                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "MaxAgeRule"}
+	iMaxCountRule                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "MaxCountRule"}
+	i_MaxRecords                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "MaxRecords"}
+	i_Message                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Message"}
+	i_NextToken                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "NextToken"}
+	i_NonEmptyString                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "NonEmptyString"}
+	i_NullableDouble                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "NullableDouble"}
+	i_NullableInteger                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "NullableInteger"}
+	i_NullableLong                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "NullableLong"}
+	i_OperatingSystemName                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OperatingSystemName"}
+	i_OperatingSystemVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OperatingSystemVersion"}
+	iOperationInProgressException                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OperationInProgressException"}
+	i_OperationsRole                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OperationsRole"}
+	i_OptionNamespace                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OptionNamespace"}
+	i_OptionRestrictionMaxLength                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OptionRestrictionMaxLength"}
+	i_OptionRestrictionMaxValue                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OptionRestrictionMaxValue"}
+	i_OptionRestrictionMinValue                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OptionRestrictionMinValue"}
+	iOptionRestrictionRegex                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OptionRestrictionRegex"}
+	iOptionSpecification                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OptionSpecification"}
+	i_OptionsSpecifierList                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "OptionsSpecifierList"}
+	i_PlatformArn                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformArn"}
+	i_PlatformBranchLifecycleState                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformBranchLifecycleState"}
+	i_PlatformBranchMaxRecords                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformBranchMaxRecords"}
+	iPlatformBranchSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformBranchSummary"}
+	i_PlatformBranchSummaryList                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformBranchSummaryList"}
+	i_PlatformCategory                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformCategory"}
+	iPlatformDescription                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformDescription"}
+	iPlatformFilter                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFilter"}
+	i_PlatformFilterOperator                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFilterOperator"}
+	i_PlatformFilters                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFilters"}
+	i_PlatformFilterType                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFilterType"}
+	i_PlatformFilterValue                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFilterValue"}
+	i_PlatformFilterValueList                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFilterValueList"}
+	iPlatformFramework                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFramework"}
+	i_PlatformFrameworks                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformFrameworks"}
+	i_PlatformLifecycleState                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformLifecycleState"}
+	i_PlatformMaxRecords                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformMaxRecords"}
+	i_PlatformName                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformName"}
+	i_PlatformOwner                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformOwner"}
+	iPlatformProgrammingLanguage                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformProgrammingLanguage"}
+	i_PlatformProgrammingLanguages                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformProgrammingLanguages"}
+	iPlatformStatus                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformStatus"}
+	iPlatformSummary                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformSummary"}
+	i_PlatformSummaryList                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformSummaryList"}
+	i_PlatformVersion                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformVersion"}
+	iPlatformVersionStillReferencedException        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "PlatformVersionStillReferencedException"}
+	iQueue                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Queue"}
+	i_QueueList                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "QueueList"}
+	i_RefreshedAt                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RefreshedAt"}
+	i_RegexLabel                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RegexLabel"}
+	i_RegexPattern                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RegexPattern"}
+	i_RequestCount                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RequestCount"}
+	i_RequestId                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RequestId"}
+	i_ResourceArn                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceArn"}
+	i_ResourceId                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceId"}
+	i_ResourceName                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceName"}
+	iResourceNotFoundException                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceNotFoundException"}
+	iResourceQuota                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceQuota"}
+	iResourceQuotas                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceQuotas"}
+	iResourceTypeNotSupportedException              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceTypeNotSupportedException"}
+	i_S3Bucket                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "S3Bucket"}
+	i_S3Key                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "S3Key"}
+	iS3Location                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "S3Location"}
+	iS3LocationNotInServiceRegionException          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "S3LocationNotInServiceRegionException"}
+	iS3SubscriptionRequiredException                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "S3SubscriptionRequiredException"}
+	i_SampleTimestamp                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SampleTimestamp"}
+	iSearchFilter                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SearchFilter"}
+	i_SearchFilterAttribute                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SearchFilterAttribute"}
+	i_SearchFilterOperator                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SearchFilterOperator"}
+	i_SearchFilters                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SearchFilters"}
+	i_SearchFilterValue                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SearchFilterValue"}
+	i_SearchFilterValues                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SearchFilterValues"}
+	iSingleInstanceHealth                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SingleInstanceHealth"}
+	iSolutionStackDescription                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SolutionStackDescription"}
+	i_SolutionStackFileTypeList                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SolutionStackFileTypeList"}
+	i_SolutionStackName                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SolutionStackName"}
+	iSourceBuildInformation                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SourceBuildInformation"}
+	iSourceBundleDeletionException                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SourceBundleDeletionException"}
+	iSourceConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SourceConfiguration"}
+	i_SourceLocation                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SourceLocation"}
+	iSourceRepository                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SourceRepository"}
+	iSourceType                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SourceType"}
+	iStatusCodes                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "StatusCodes"}
+	i_String                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "String"}
+	i_SupportedAddon                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SupportedAddon"}
+	i_SupportedAddonList                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SupportedAddonList"}
+	i_SupportedTier                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SupportedTier"}
+	i_SupportedTierList                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SupportedTierList"}
+	iSystemStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SystemStatus"}
+	iTag                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Tag"}
+	i_TagKey                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TagKey"}
+	i_TagKeyList                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TagKeyList"}
+	i_TagList                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TagList"}
+	i_Tags                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Tags"}
+	i_TagValue                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TagValue"}
+	i_TerminateEnvForce                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TerminateEnvForce"}
+	i_TerminateEnvironmentResources                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TerminateEnvironmentResources"}
+	i_TimeFilterEnd                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TimeFilterEnd"}
+	i_TimeFilterStart                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TimeFilterStart"}
+	i_Timestamp                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Timestamp"}
+	i_Token                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Token"}
+	iTooManyApplicationsException                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TooManyApplicationsException"}
+	iTooManyApplicationVersionsException            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TooManyApplicationVersionsException"}
+	iTooManyBucketsException                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TooManyBucketsException"}
+	iTooManyConfigurationTemplatesException         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TooManyConfigurationTemplatesException"}
+	iTooManyEnvironmentsException                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TooManyEnvironmentsException"}
+	iTooManyPlatformsException                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TooManyPlatformsException"}
+	iTooManyTagsException                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TooManyTagsException"}
+	iTrigger                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "Trigger"}
+	i_TriggerList                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TriggerList"}
+	i_UpdateDate                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateDate"}
+	i_UserDefinedOption                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UserDefinedOption"}
+	iValidationMessage                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ValidationMessage"}
+	i_ValidationMessagesList                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ValidationMessagesList"}
+	i_ValidationMessageString                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ValidationMessageString"}
+	iValidationSeverity                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ValidationSeverity"}
+	i_VersionLabel                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "VersionLabel"}
+	i_VersionLabels                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "VersionLabels"}
+	i_VersionLabelsList                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "VersionLabelsList"}
+	i_VirtualizationType                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "VirtualizationType"}
+	iAbortEnvironmentUpdateMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AbortEnvironmentUpdateMessage"}
+	iApplyEnvironmentManagedActionRequest           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplyEnvironmentManagedActionRequest"}
+	iApplyEnvironmentManagedActionResult            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplyEnvironmentManagedActionResult"}
+	iAssociateEnvironmentOperationsRoleMessage      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "AssociateEnvironmentOperationsRoleMessage"}
+	iCheckDNSAvailabilityMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CheckDNSAvailabilityMessage"}
+	iCheckDNSAvailabilityResultMessage              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CheckDNSAvailabilityResultMessage"}
+	iComposeEnvironmentsMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ComposeEnvironmentsMessage"}
+	iEnvironmentDescriptionsMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentDescriptionsMessage"}
+	iCreateApplicationMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateApplicationMessage"}
+	iApplicationDescriptionMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationDescriptionMessage"}
+	iCreateApplicationVersionMessage                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateApplicationVersionMessage"}
+	iApplicationVersionDescriptionMessage           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionDescriptionMessage"}
+	iCreateConfigurationTemplateMessage             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateConfigurationTemplateMessage"}
+	iCreateEnvironmentMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateEnvironmentMessage"}
+	iCreatePlatformVersionRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreatePlatformVersionRequest"}
+	iCreatePlatformVersionResult                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreatePlatformVersionResult"}
+	iCreateStorageLocationResultMessage             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "CreateStorageLocationResultMessage"}
+	iDeleteApplicationMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteApplicationMessage"}
+	iDeleteApplicationVersionMessage                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteApplicationVersionMessage"}
+	iDeleteConfigurationTemplateMessage             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteConfigurationTemplateMessage"}
+	iDeleteEnvironmentConfigurationMessage          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeleteEnvironmentConfigurationMessage"}
+	iDeletePlatformVersionRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeletePlatformVersionRequest"}
+	iDeletePlatformVersionResult                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DeletePlatformVersionResult"}
+	iDescribeAccountAttributesResult                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeAccountAttributesResult"}
+	iDescribeApplicationsMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeApplicationsMessage"}
+	iApplicationDescriptionsMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationDescriptionsMessage"}
+	iDescribeApplicationVersionsMessage             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeApplicationVersionsMessage"}
+	iApplicationVersionDescriptionsMessage          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationVersionDescriptionsMessage"}
+	iDescribeConfigurationOptionsMessage            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeConfigurationOptionsMessage"}
+	iConfigurationOptionsDescription                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationOptionsDescription"}
+	iDescribeConfigurationSettingsMessage           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeConfigurationSettingsMessage"}
+	iConfigurationSettingsDescriptions              = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationSettingsDescriptions"}
+	iDescribeEnvironmentHealthRequest               = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentHealthRequest"}
+	iDescribeEnvironmentHealthResult                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentHealthResult"}
+	iDescribeEnvironmentManagedActionHistoryRequest = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentManagedActionHistoryRequest"}
+	iDescribeEnvironmentManagedActionHistoryResult  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentManagedActionHistoryResult"}
+	iDescribeEnvironmentManagedActionsRequest       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentManagedActionsRequest"}
+	iDescribeEnvironmentManagedActionsResult        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentManagedActionsResult"}
+	iDescribeEnvironmentResourcesMessage            = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentResourcesMessage"}
+	iEnvironmentResourceDescriptionsMessage         = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EnvironmentResourceDescriptionsMessage"}
+	iDescribeEnvironmentsMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEnvironmentsMessage"}
+	iDescribeEventsMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeEventsMessage"}
+	iEventDescriptionsMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "EventDescriptionsMessage"}
+	iDescribeInstancesHealthRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeInstancesHealthRequest"}
+	iDescribeInstancesHealthResult                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribeInstancesHealthResult"}
+	iDescribePlatformVersionRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribePlatformVersionRequest"}
+	iDescribePlatformVersionResult                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DescribePlatformVersionResult"}
+	iDisassociateEnvironmentOperationsRoleMessage   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "DisassociateEnvironmentOperationsRoleMessage"}
+	iListAvailableSolutionStacksResultMessage       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListAvailableSolutionStacksResultMessage"}
+	iListPlatformBranchesRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListPlatformBranchesRequest"}
+	iListPlatformBranchesResult                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListPlatformBranchesResult"}
+	iListPlatformVersionsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListPlatformVersionsRequest"}
+	iListPlatformVersionsResult                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListPlatformVersionsResult"}
+	iListTagsForResourceMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ListTagsForResourceMessage"}
+	iResourceTagsDescriptionMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ResourceTagsDescriptionMessage"}
+	iRebuildEnvironmentMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RebuildEnvironmentMessage"}
+	iRequestEnvironmentInfoMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RequestEnvironmentInfoMessage"}
+	iRestartAppServerMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RestartAppServerMessage"}
+	iRetrieveEnvironmentInfoMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RetrieveEnvironmentInfoMessage"}
+	iRetrieveEnvironmentInfoResultMessage           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "RetrieveEnvironmentInfoResultMessage"}
+	iSwapEnvironmentCNAMEsMessage                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "SwapEnvironmentCNAMEsMessage"}
+	iTerminateEnvironmentMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "TerminateEnvironmentMessage"}
+	iUpdateApplicationMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateApplicationMessage"}
+	iUpdateApplicationResourceLifecycleMessage      = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateApplicationResourceLifecycleMessage"}
+	iApplicationResourceLifecycleDescriptionMessage = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ApplicationResourceLifecycleDescriptionMessage"}
+	iUpdateApplicationVersionMessage                = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateApplicationVersionMessage"}
+	iUpdateConfigurationTemplateMessage             = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateConfigurationTemplateMessage"}
+	iUpdateEnvironmentMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateEnvironmentMessage"}
+	iUpdateTagsForResourceMessage                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "UpdateTagsForResourceMessage"}
+	iValidateConfigurationSettingsMessage           = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ValidateConfigurationSettingsMessage"}
+	iConfigurationSettingsValidationMessages        = smithy.ShapeName{Namespace: "com.amazonaws.elasticbeanstalk", Name: "ConfigurationSettingsValidationMessages"}
+	pUnit                                           = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CodeBuildNotInServiceRegionException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientPrivilegesException",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidRequestException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ManagedActionInvalidStateException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OperationInProgressFailure",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PlatformVersionStillReferencedException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceTypeNotSupportedException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "S3LocationNotInServiceRegionException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "S3SubscriptionRequiredException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SourceBundleDeletionFailure",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyApplicationsException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyBucketsException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyConfigurationTemplatesException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyEnvironmentsException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyPlatformsException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyTagsException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mActionHistoryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sActionHistoryStatus_Completed, &sActionHistoryStatus_Failed, &sActionHistoryStatus_Unknown}}
+var mActionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sActionStatus_Scheduled, &sActionStatus_Pending, &sActionStatus_Running, &sActionStatus_Unknown}}
+var mActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sActionType_InstanceRefresh, &sActionType_PlatformUpdate, &sActionType_Unknown}}
+var mAmiArchitecture = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiArchitecture_X86_64, &sAmiArchitecture_ARM64}}
+var mApplicationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationDescription_ApplicationArn, &sApplicationDescription_ApplicationName, &sApplicationDescription_Description, &sApplicationDescription_DateCreated, &sApplicationDescription_DateUpdated, &sApplicationDescription_Versions, &sApplicationDescription_ConfigurationTemplates, &sApplicationDescription_ResourceLifecycleConfig}}
+var m_ApplicationDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationDescriptionList_member}}
+var mApplicationMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationMetrics_Duration, &sApplicationMetrics_RequestCount, &sApplicationMetrics_StatusCodes, &sApplicationMetrics_Latency}}
+var m_ApplicationNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationNamesList_member}}
+var mApplicationResourceLifecycleConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationResourceLifecycleConfig_ServiceRole, &sApplicationResourceLifecycleConfig_VersionLifecycleConfig}}
+var mApplicationVersionDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationVersionDescription_ApplicationVersionArn, &sApplicationVersionDescription_ApplicationName, &sApplicationVersionDescription_Description, &sApplicationVersionDescription_VersionLabel, &sApplicationVersionDescription_SourceBuildInformation, &sApplicationVersionDescription_BuildArn, &sApplicationVersionDescription_SourceBundle, &sApplicationVersionDescription_ImageSource, &sApplicationVersionDescription_ImageBuildConfiguration, &sApplicationVersionDescription_Process, &sApplicationVersionDescription_DateCreated, &sApplicationVersionDescription_DateUpdated, &sApplicationVersionDescription_Status}, Hash: &hApplicationVersionDescription}
+var m_ApplicationVersionDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationVersionDescriptionList_member}}
+var mApplicationVersionLifecycleConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationVersionLifecycleConfig_MaxCountRule, &sApplicationVersionLifecycleConfig_MaxAgeRule}}
+var mApplicationVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationVersionStatus_Processed, &sApplicationVersionStatus_Unprocessed, &sApplicationVersionStatus_Failed, &sApplicationVersionStatus_Processing, &sApplicationVersionStatus_Building}}
+var mArchitectureType = smithy.SchemaMembers{List: []*smithy.Schema{&sArchitectureType_amd64, &sArchitectureType_arm64}}
+var mAutoScalingGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingGroup_Name}}
+var m_AutoScalingGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutoScalingGroupList_member}}
+var m_AvailableSolutionStackDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailableSolutionStackDetailsList_member}}
+var m_AvailableSolutionStackNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailableSolutionStackNamesList_member}}
+var mBuildConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildConfiguration_ArtifactName, &sBuildConfiguration_CodeBuildServiceRole, &sBuildConfiguration_ComputeType, &sBuildConfiguration_Image, &sBuildConfiguration_TimeoutInMinutes}}
+var mBuilder = smithy.SchemaMembers{List: []*smithy.Schema{&sBuilder_ARN}}
+var m_Causes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Causes_member}}
+var mCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sCluster_ClusterArn}}
+var mCodeBuildNotInServiceRegionException = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeBuildNotInServiceRegionException_message}}
+var mComputeType = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeType_BUILD_GENERAL1_SMALL, &sComputeType_BUILD_GENERAL1_MEDIUM, &sComputeType_BUILD_GENERAL1_LARGE}}
+var mConfigurationDeploymentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationDeploymentStatus_deployed, &sConfigurationDeploymentStatus_pending, &sConfigurationDeploymentStatus_failed}}
+var mConfigurationOptionDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationOptionDescription_Namespace, &sConfigurationOptionDescription_Name, &sConfigurationOptionDescription_DefaultValue, &sConfigurationOptionDescription_ChangeSeverity, &sConfigurationOptionDescription_UserDefined, &sConfigurationOptionDescription_ValueType, &sConfigurationOptionDescription_ValueOptions, &sConfigurationOptionDescription_MinValue, &sConfigurationOptionDescription_MaxValue, &sConfigurationOptionDescription_MaxLength, &sConfigurationOptionDescription_Regex}, Hash: &hConfigurationOptionDescription}
+var m_ConfigurationOptionDescriptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationOptionDescriptionsList_member}}
+var m_ConfigurationOptionPossibleValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationOptionPossibleValues_member}}
+var mConfigurationOptionSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationOptionSetting_ResourceName, &sConfigurationOptionSetting_Namespace, &sConfigurationOptionSetting_OptionName, &sConfigurationOptionSetting_Value}}
+var m_ConfigurationOptionSettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationOptionSettingsList_member}}
+var mConfigurationOptionValueType = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationOptionValueType_Scalar, &sConfigurationOptionValueType_List}}
+var mConfigurationSettingsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationSettingsDescription_SolutionStackName, &sConfigurationSettingsDescription_PlatformArn, &sConfigurationSettingsDescription_ApplicationName, &sConfigurationSettingsDescription_TemplateName, &sConfigurationSettingsDescription_Description, &sConfigurationSettingsDescription_EnvironmentName, &sConfigurationSettingsDescription_DeploymentStatus, &sConfigurationSettingsDescription_DateCreated, &sConfigurationSettingsDescription_DateUpdated, &sConfigurationSettingsDescription_OptionSettings}, Hash: &hConfigurationSettingsDescription}
+var m_ConfigurationSettingsDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationSettingsDescriptionList_member}}
+var m_ConfigurationTemplateNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationTemplateNamesList_member}}
+var mCPUUtilization = smithy.SchemaMembers{List: []*smithy.Schema{&sCPUUtilization_User, &sCPUUtilization_Nice, &sCPUUtilization_System, &sCPUUtilization_Idle, &sCPUUtilization_IOWait, &sCPUUtilization_IRQ, &sCPUUtilization_SoftIRQ, &sCPUUtilization_Privileged}}
+var mCustomAmi = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomAmi_VirtualizationType, &sCustomAmi_ImageId}}
+var m_CustomAmiList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomAmiList_member}}
+var mDefaultAmi = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultAmi_Architecture, &sDefaultAmi_ImageId}}
+var m_DefaultAmiList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DefaultAmiList_member}}
+var mDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&sDeployment_VersionLabel, &sDeployment_DeploymentId, &sDeployment_Status, &sDeployment_DeploymentTime}}
+var mElasticBeanstalkServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticBeanstalkServiceException_message}}
+var mEnvironmentDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentDescription_EnvironmentName, &sEnvironmentDescription_EnvironmentId, &sEnvironmentDescription_ApplicationName, &sEnvironmentDescription_VersionLabel, &sEnvironmentDescription_SolutionStackName, &sEnvironmentDescription_PlatformArn, &sEnvironmentDescription_TemplateName, &sEnvironmentDescription_Description, &sEnvironmentDescription_EndpointURL, &sEnvironmentDescription_CNAME, &sEnvironmentDescription_DateCreated, &sEnvironmentDescription_DateUpdated, &sEnvironmentDescription_Status, &sEnvironmentDescription_AbortableOperationInProgress, &sEnvironmentDescription_Health, &sEnvironmentDescription_HealthStatus, &sEnvironmentDescription_Resources, &sEnvironmentDescription_Tier, &sEnvironmentDescription_EnvironmentLinks, &sEnvironmentDescription_EnvironmentArn, &sEnvironmentDescription_OperationsRole}, Hash: &hEnvironmentDescription}
+var m_EnvironmentDescriptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentDescriptionsList_member}}
+var mEnvironmentHealth = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentHealth_Green, &sEnvironmentHealth_Yellow, &sEnvironmentHealth_Red, &sEnvironmentHealth_Grey}}
+var mEnvironmentHealthAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentHealthAttribute_Status, &sEnvironmentHealthAttribute_Color, &sEnvironmentHealthAttribute_Causes, &sEnvironmentHealthAttribute_ApplicationMetrics, &sEnvironmentHealthAttribute_InstancesHealth, &sEnvironmentHealthAttribute_All, &sEnvironmentHealthAttribute_HealthStatus, &sEnvironmentHealthAttribute_RefreshedAt}}
+var m_EnvironmentHealthAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentHealthAttributes_member}}
+var mEnvironmentHealthStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentHealthStatus_NoData, &sEnvironmentHealthStatus_Unknown, &sEnvironmentHealthStatus_Pending, &sEnvironmentHealthStatus_Ok, &sEnvironmentHealthStatus_Info, &sEnvironmentHealthStatus_Warning, &sEnvironmentHealthStatus_Degraded, &sEnvironmentHealthStatus_Severe, &sEnvironmentHealthStatus_Suspended}, Hash: &hEnvironmentHealthStatus}
+var m_EnvironmentIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentIdList_member}}
+var mEnvironmentInfoDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentInfoDescription_InfoType, &sEnvironmentInfoDescription_Ec2InstanceId, &sEnvironmentInfoDescription_SampleTimestamp, &sEnvironmentInfoDescription_Message}}
+var m_EnvironmentInfoDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentInfoDescriptionList_member}}
+var mEnvironmentInfoType = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentInfoType_tail, &sEnvironmentInfoType_bundle, &sEnvironmentInfoType_analyze}}
+var mEnvironmentLink = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentLink_LinkName, &sEnvironmentLink_EnvironmentName}}
+var m_EnvironmentLinks = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentLinks_member}}
+var m_EnvironmentNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentNamesList_member}}
+var mEnvironmentResourceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentResourceDescription_EnvironmentName, &sEnvironmentResourceDescription_AutoScalingGroups, &sEnvironmentResourceDescription_Cluster, &sEnvironmentResourceDescription_Instances, &sEnvironmentResourceDescription_LaunchConfigurations, &sEnvironmentResourceDescription_LaunchTemplates, &sEnvironmentResourceDescription_LoadBalancers, &sEnvironmentResourceDescription_Triggers, &sEnvironmentResourceDescription_Queues}, Hash: &hEnvironmentResourceDescription}
+var mEnvironmentResourcesDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentResourcesDescription_LoadBalancer}}
+var mEnvironmentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentStatus_Aborting, &sEnvironmentStatus_Launching, &sEnvironmentStatus_Updating, &sEnvironmentStatus_LinkingFrom, &sEnvironmentStatus_LinkingTo, &sEnvironmentStatus_Ready, &sEnvironmentStatus_Terminating, &sEnvironmentStatus_Terminated}}
+var mEnvironmentTier = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentTier_Name, &sEnvironmentTier_Type, &sEnvironmentTier_Version}}
+var mEventDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDescription_EventDate, &sEventDescription_Message, &sEventDescription_ApplicationName, &sEventDescription_VersionLabel, &sEventDescription_TemplateName, &sEventDescription_EnvironmentName, &sEventDescription_PlatformArn, &sEventDescription_RequestId, &sEventDescription_Severity}, Hash: &hEventDescription}
+var m_EventDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventDescriptionList_member}}
+var mEventSeverity = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSeverity_TRACE, &sEventSeverity_DEBUG, &sEventSeverity_INFO, &sEventSeverity_WARN, &sEventSeverity_ERROR, &sEventSeverity_FATAL}}
+var mFailureType = smithy.SchemaMembers{List: []*smithy.Schema{&sFailureType_UpdateCancelled, &sFailureType_CancellationFailed, &sFailureType_RollbackFailed, &sFailureType_RollbackSuccessful, &sFailureType_InternalFailure, &sFailureType_InvalidEnvironmentState, &sFailureType_PermissionsError}}
+var mImageBuildConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBuildConfiguration_Type, &sImageBuildConfiguration_DockerfileLocation, &sImageBuildConfiguration_Buildpack, &sImageBuildConfiguration_Architecture, &sImageBuildConfiguration_CodeBuildServiceRole, &sImageBuildConfiguration_ComputeType, &sImageBuildConfiguration_TimeoutInMinutes}}
+var mImageBuildType = smithy.SchemaMembers{List: []*smithy.Schema{&sImageBuildType_docker, &sImageBuildType_buildpack}}
+var mImageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sImageConfiguration_Source, &sImageConfiguration_Build}}
+var mImageSource = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSource_Uri}}
+var mInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sInstance_Id}}
+var m_InstanceHealthList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceHealthList_member}}
+var mInstanceHealthSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceHealthSummary_NoData, &sInstanceHealthSummary_Unknown, &sInstanceHealthSummary_Pending, &sInstanceHealthSummary_Ok, &sInstanceHealthSummary_Info, &sInstanceHealthSummary_Warning, &sInstanceHealthSummary_Degraded, &sInstanceHealthSummary_Severe}}
+var m_InstanceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceList_member}}
+var mInstancesHealthAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sInstancesHealthAttribute_HealthStatus, &sInstancesHealthAttribute_Color, &sInstancesHealthAttribute_Causes, &sInstancesHealthAttribute_ApplicationMetrics, &sInstancesHealthAttribute_RefreshedAt, &sInstancesHealthAttribute_LaunchedAt, &sInstancesHealthAttribute_System, &sInstancesHealthAttribute_Deployment, &sInstancesHealthAttribute_AvailabilityZone, &sInstancesHealthAttribute_InstanceType, &sInstancesHealthAttribute_All}, Hash: &hInstancesHealthAttribute}
+var m_InstancesHealthAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstancesHealthAttributes_member}}
+var mInsufficientPrivilegesException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientPrivilegesException_message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_message}}
+var mLatency = smithy.SchemaMembers{List: []*smithy.Schema{&sLatency_P999, &sLatency_P99, &sLatency_P95, &sLatency_P90, &sLatency_P85, &sLatency_P75, &sLatency_P50, &sLatency_P10}}
+var mLaunchConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchConfiguration_Name}}
+var m_LaunchConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchConfigurationList_member}}
+var mLaunchTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchTemplate_Id}}
+var m_LaunchTemplateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchTemplateList_member}}
+var mListener = smithy.SchemaMembers{List: []*smithy.Schema{&sListener_Protocol, &sListener_Port}}
+var m_LoadAverage = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadAverage_member}}
+var mLoadBalancer = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancer_Name}}
+var mLoadBalancerDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerDescription_LoadBalancerName, &sLoadBalancerDescription_Domain, &sLoadBalancerDescription_Listeners}}
+var m_LoadBalancerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerList_member}}
+var m_LoadBalancerListenersDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerListenersDescription_member}}
+var mManagedAction = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedAction_ActionId, &sManagedAction_ActionDescription, &sManagedAction_ActionType, &sManagedAction_Status, &sManagedAction_WindowStartTime}}
+var mManagedActionHistoryItem = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedActionHistoryItem_ActionId, &sManagedActionHistoryItem_ActionType, &sManagedActionHistoryItem_ActionDescription, &sManagedActionHistoryItem_FailureType, &sManagedActionHistoryItem_Status, &sManagedActionHistoryItem_FailureDescription, &sManagedActionHistoryItem_ExecutedTime, &sManagedActionHistoryItem_FinishedTime}}
+var m_ManagedActionHistoryItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedActionHistoryItems_member}}
+var mManagedActionInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedActionInvalidStateException_message}}
+var m_ManagedActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedActions_member}}
+var mMaxAgeRule = smithy.SchemaMembers{List: []*smithy.Schema{&sMaxAgeRule_Enabled, &sMaxAgeRule_MaxAgeInDays, &sMaxAgeRule_DeleteSourceFromS3}}
+var mMaxCountRule = smithy.SchemaMembers{List: []*smithy.Schema{&sMaxCountRule_Enabled, &sMaxCountRule_MaxCount, &sMaxCountRule_DeleteSourceFromS3}}
+var mOperationInProgressException = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationInProgressException_message}}
+var mOptionRestrictionRegex = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionRestrictionRegex_Pattern, &sOptionRestrictionRegex_Label}}
+var mOptionSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionSpecification_ResourceName, &sOptionSpecification_Namespace, &sOptionSpecification_OptionName}}
+var m_OptionsSpecifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OptionsSpecifierList_member}}
+var mPlatformBranchSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformBranchSummary_PlatformName, &sPlatformBranchSummary_BranchName, &sPlatformBranchSummary_LifecycleState, &sPlatformBranchSummary_BranchOrder, &sPlatformBranchSummary_SupportedTierList}}
+var m_PlatformBranchSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformBranchSummaryList_member}}
+var mPlatformDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformDescription_PlatformArn, &sPlatformDescription_PlatformOwner, &sPlatformDescription_PlatformName, &sPlatformDescription_PlatformVersion, &sPlatformDescription_SolutionStackName, &sPlatformDescription_PlatformStatus, &sPlatformDescription_DateCreated, &sPlatformDescription_DateUpdated, &sPlatformDescription_PlatformCategory, &sPlatformDescription_Description, &sPlatformDescription_Maintainer, &sPlatformDescription_OperatingSystemName, &sPlatformDescription_OperatingSystemVersion, &sPlatformDescription_ProgrammingLanguages, &sPlatformDescription_Frameworks, &sPlatformDescription_CustomAmiList, &sPlatformDescription_DefaultAmiList, &sPlatformDescription_SupportedTierList, &sPlatformDescription_SupportedAddonList, &sPlatformDescription_PlatformLifecycleState, &sPlatformDescription_PlatformBranchName, &sPlatformDescription_PlatformBranchLifecycleState}, Hash: &hPlatformDescription}
+var mPlatformFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformFilter_Type, &sPlatformFilter_Operator, &sPlatformFilter_Values}}
+var m_PlatformFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformFilters_member}}
+var m_PlatformFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformFilterValueList_member}}
+var mPlatformFramework = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformFramework_Name, &sPlatformFramework_Version}}
+var m_PlatformFrameworks = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformFrameworks_member}}
+var mPlatformProgrammingLanguage = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformProgrammingLanguage_Name, &sPlatformProgrammingLanguage_Version}}
+var m_PlatformProgrammingLanguages = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformProgrammingLanguages_member}}
+var mPlatformStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformStatus_Creating, &sPlatformStatus_Failed, &sPlatformStatus_Ready, &sPlatformStatus_Deleting, &sPlatformStatus_Deleted}}
+var mPlatformSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformSummary_PlatformArn, &sPlatformSummary_PlatformOwner, &sPlatformSummary_PlatformStatus, &sPlatformSummary_PlatformCategory, &sPlatformSummary_OperatingSystemName, &sPlatformSummary_OperatingSystemVersion, &sPlatformSummary_SupportedTierList, &sPlatformSummary_SupportedAddonList, &sPlatformSummary_PlatformLifecycleState, &sPlatformSummary_PlatformVersion, &sPlatformSummary_PlatformBranchName, &sPlatformSummary_PlatformBranchLifecycleState}, Hash: &hPlatformSummary}
+var m_PlatformSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformSummaryList_member}}
+var mPlatformVersionStillReferencedException = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformVersionStillReferencedException_message}}
+var mQueue = smithy.SchemaMembers{List: []*smithy.Schema{&sQueue_Name, &sQueue_URL}}
+var m_QueueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueueList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceQuota = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceQuota_Maximum}}
+var mResourceQuotas = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceQuotas_ApplicationQuota, &sResourceQuotas_ApplicationVersionQuota, &sResourceQuotas_EnvironmentQuota, &sResourceQuotas_ConfigurationTemplateQuota, &sResourceQuotas_CustomPlatformQuota}}
+var mResourceTypeNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTypeNotSupportedException_message}}
+var mS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Location_S3Bucket, &sS3Location_S3Key}}
+var mS3LocationNotInServiceRegionException = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LocationNotInServiceRegionException_message}}
+var mS3SubscriptionRequiredException = smithy.SchemaMembers{List: []*smithy.Schema{&sS3SubscriptionRequiredException_message}}
+var mSearchFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFilter_Attribute, &sSearchFilter_Operator, &sSearchFilter_Values}}
+var m_SearchFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchFilters_member}}
+var m_SearchFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchFilterValues_member}}
+var mSingleInstanceHealth = smithy.SchemaMembers{List: []*smithy.Schema{&sSingleInstanceHealth_InstanceId, &sSingleInstanceHealth_HealthStatus, &sSingleInstanceHealth_Color, &sSingleInstanceHealth_Causes, &sSingleInstanceHealth_LaunchedAt, &sSingleInstanceHealth_ApplicationMetrics, &sSingleInstanceHealth_System, &sSingleInstanceHealth_Deployment, &sSingleInstanceHealth_AvailabilityZone, &sSingleInstanceHealth_InstanceType}, Hash: &hSingleInstanceHealth}
+var mSolutionStackDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSolutionStackDescription_SolutionStackName, &sSolutionStackDescription_PermittedFileTypes}}
+var m_SolutionStackFileTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SolutionStackFileTypeList_member}}
+var mSourceBuildInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceBuildInformation_SourceType, &sSourceBuildInformation_SourceRepository, &sSourceBuildInformation_SourceLocation}}
+var mSourceBundleDeletionException = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceBundleDeletionException_message}}
+var mSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceConfiguration_ApplicationName, &sSourceConfiguration_TemplateName}}
+var mSourceRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceRepository_CodeCommit, &sSourceRepository_S3}}
+var mSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceType_Git, &sSourceType_Zip}}
+var mStatusCodes = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusCodes_Status2xx, &sStatusCodes_Status3xx, &sStatusCodes_Status4xx, &sStatusCodes_Status5xx}}
+var m_SupportedAddonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedAddonList_member}}
+var m_SupportedTierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedTierList_member}}
+var mSystemStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSystemStatus_CPUUtilization, &sSystemStatus_LoadAverage}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mTooManyApplicationsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyApplicationsException_message}}
+var mTooManyApplicationVersionsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyApplicationVersionsException_message}}
+var mTooManyBucketsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyBucketsException_message}}
+var mTooManyConfigurationTemplatesException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyConfigurationTemplatesException_message}}
+var mTooManyEnvironmentsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyEnvironmentsException_message}}
+var mTooManyPlatformsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyPlatformsException_message}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mTrigger = smithy.SchemaMembers{List: []*smithy.Schema{&sTrigger_Name}}
+var m_TriggerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TriggerList_member}}
+var mValidationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationMessage_Message, &sValidationMessage_Severity, &sValidationMessage_Namespace, &sValidationMessage_OptionName}}
+var m_ValidationMessagesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationMessagesList_member}}
+var mValidationSeverity = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationSeverity_error, &sValidationSeverity_warning}}
+var m_VersionLabels = smithy.SchemaMembers{List: []*smithy.Schema{&s_VersionLabels_member}}
+var m_VersionLabelsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VersionLabelsList_member}}
+var mAbortEnvironmentUpdateMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sAbortEnvironmentUpdateMessage_EnvironmentId, &sAbortEnvironmentUpdateMessage_EnvironmentName}}
+var mApplyEnvironmentManagedActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyEnvironmentManagedActionRequest_EnvironmentName, &sApplyEnvironmentManagedActionRequest_EnvironmentId, &sApplyEnvironmentManagedActionRequest_ActionId}}
+var mApplyEnvironmentManagedActionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyEnvironmentManagedActionResult_ActionId, &sApplyEnvironmentManagedActionResult_ActionDescription, &sApplyEnvironmentManagedActionResult_ActionType, &sApplyEnvironmentManagedActionResult_Status}}
+var mAssociateEnvironmentOperationsRoleMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateEnvironmentOperationsRoleMessage_EnvironmentName, &sAssociateEnvironmentOperationsRoleMessage_OperationsRole}}
+var mCheckDNSAvailabilityMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCheckDNSAvailabilityMessage_CNAMEPrefix}}
+var mCheckDNSAvailabilityResultMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCheckDNSAvailabilityResultMessage_Available, &sCheckDNSAvailabilityResultMessage_FullyQualifiedCNAME}}
+var mComposeEnvironmentsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sComposeEnvironmentsMessage_ApplicationName, &sComposeEnvironmentsMessage_GroupName, &sComposeEnvironmentsMessage_VersionLabels}}
+var mEnvironmentDescriptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentDescriptionsMessage_Environments, &sEnvironmentDescriptionsMessage_NextToken}}
+var mCreateApplicationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationMessage_ApplicationName, &sCreateApplicationMessage_Description, &sCreateApplicationMessage_ResourceLifecycleConfig, &sCreateApplicationMessage_Tags}}
+var mApplicationDescriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationDescriptionMessage_Application}}
+var mCreateApplicationVersionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationVersionMessage_ApplicationName, &sCreateApplicationVersionMessage_VersionLabel, &sCreateApplicationVersionMessage_Description, &sCreateApplicationVersionMessage_SourceBuildInformation, &sCreateApplicationVersionMessage_SourceBundle, &sCreateApplicationVersionMessage_BuildConfiguration, &sCreateApplicationVersionMessage_AutoCreateApplication, &sCreateApplicationVersionMessage_Process, &sCreateApplicationVersionMessage_Tags, &sCreateApplicationVersionMessage_ImageConfiguration}, Hash: &hCreateApplicationVersionMessage}
+var mApplicationVersionDescriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationVersionDescriptionMessage_ApplicationVersion}}
+var mCreateConfigurationTemplateMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationTemplateMessage_ApplicationName, &sCreateConfigurationTemplateMessage_TemplateName, &sCreateConfigurationTemplateMessage_SolutionStackName, &sCreateConfigurationTemplateMessage_PlatformArn, &sCreateConfigurationTemplateMessage_SourceConfiguration, &sCreateConfigurationTemplateMessage_EnvironmentId, &sCreateConfigurationTemplateMessage_Description, &sCreateConfigurationTemplateMessage_OptionSettings, &sCreateConfigurationTemplateMessage_Tags}, Hash: &hCreateConfigurationTemplateMessage}
+var mCreateEnvironmentMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentMessage_ApplicationName, &sCreateEnvironmentMessage_EnvironmentName, &sCreateEnvironmentMessage_GroupName, &sCreateEnvironmentMessage_Description, &sCreateEnvironmentMessage_CNAMEPrefix, &sCreateEnvironmentMessage_Tier, &sCreateEnvironmentMessage_Tags, &sCreateEnvironmentMessage_VersionLabel, &sCreateEnvironmentMessage_TemplateName, &sCreateEnvironmentMessage_SolutionStackName, &sCreateEnvironmentMessage_PlatformArn, &sCreateEnvironmentMessage_OptionSettings, &sCreateEnvironmentMessage_OptionsToRemove, &sCreateEnvironmentMessage_OperationsRole}, Hash: &hCreateEnvironmentMessage}
+var mCreatePlatformVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePlatformVersionRequest_PlatformName, &sCreatePlatformVersionRequest_PlatformVersion, &sCreatePlatformVersionRequest_PlatformDefinitionBundle, &sCreatePlatformVersionRequest_EnvironmentName, &sCreatePlatformVersionRequest_OptionSettings, &sCreatePlatformVersionRequest_Tags}}
+var mCreatePlatformVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePlatformVersionResult_PlatformSummary, &sCreatePlatformVersionResult_Builder}}
+var mCreateStorageLocationResultMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStorageLocationResultMessage_S3Bucket}}
+var mDeleteApplicationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApplicationMessage_ApplicationName, &sDeleteApplicationMessage_TerminateEnvByForce}}
+var mDeleteApplicationVersionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApplicationVersionMessage_ApplicationName, &sDeleteApplicationVersionMessage_VersionLabel, &sDeleteApplicationVersionMessage_DeleteSourceBundle}}
+var mDeleteConfigurationTemplateMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationTemplateMessage_ApplicationName, &sDeleteConfigurationTemplateMessage_TemplateName}}
+var mDeleteEnvironmentConfigurationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentConfigurationMessage_ApplicationName, &sDeleteEnvironmentConfigurationMessage_EnvironmentName}}
+var mDeletePlatformVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePlatformVersionRequest_PlatformArn}}
+var mDeletePlatformVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePlatformVersionResult_PlatformSummary}}
+var mDescribeAccountAttributesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccountAttributesResult_ResourceQuotas}}
+var mDescribeApplicationsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationsMessage_ApplicationNames}}
+var mApplicationDescriptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationDescriptionsMessage_Applications}}
+var mDescribeApplicationVersionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationVersionsMessage_ApplicationName, &sDescribeApplicationVersionsMessage_VersionLabels, &sDescribeApplicationVersionsMessage_MaxRecords, &sDescribeApplicationVersionsMessage_NextToken}}
+var mApplicationVersionDescriptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationVersionDescriptionsMessage_ApplicationVersions, &sApplicationVersionDescriptionsMessage_NextToken}}
+var mDescribeConfigurationOptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationOptionsMessage_ApplicationName, &sDescribeConfigurationOptionsMessage_TemplateName, &sDescribeConfigurationOptionsMessage_EnvironmentName, &sDescribeConfigurationOptionsMessage_SolutionStackName, &sDescribeConfigurationOptionsMessage_PlatformArn, &sDescribeConfigurationOptionsMessage_Options}}
+var mConfigurationOptionsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationOptionsDescription_SolutionStackName, &sConfigurationOptionsDescription_PlatformArn, &sConfigurationOptionsDescription_Options}}
+var mDescribeConfigurationSettingsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationSettingsMessage_ApplicationName, &sDescribeConfigurationSettingsMessage_TemplateName, &sDescribeConfigurationSettingsMessage_EnvironmentName}}
+var mConfigurationSettingsDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationSettingsDescriptions_ConfigurationSettings}}
+var mDescribeEnvironmentHealthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentHealthRequest_EnvironmentName, &sDescribeEnvironmentHealthRequest_EnvironmentId, &sDescribeEnvironmentHealthRequest_AttributeNames}}
+var mDescribeEnvironmentHealthResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentHealthResult_EnvironmentName, &sDescribeEnvironmentHealthResult_HealthStatus, &sDescribeEnvironmentHealthResult_Status, &sDescribeEnvironmentHealthResult_Color, &sDescribeEnvironmentHealthResult_Causes, &sDescribeEnvironmentHealthResult_ApplicationMetrics, &sDescribeEnvironmentHealthResult_InstancesHealth, &sDescribeEnvironmentHealthResult_RefreshedAt}}
+var mDescribeEnvironmentManagedActionHistoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentManagedActionHistoryRequest_EnvironmentId, &sDescribeEnvironmentManagedActionHistoryRequest_EnvironmentName, &sDescribeEnvironmentManagedActionHistoryRequest_NextToken, &sDescribeEnvironmentManagedActionHistoryRequest_MaxItems}}
+var mDescribeEnvironmentManagedActionHistoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems, &sDescribeEnvironmentManagedActionHistoryResult_NextToken}}
+var mDescribeEnvironmentManagedActionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentManagedActionsRequest_EnvironmentName, &sDescribeEnvironmentManagedActionsRequest_EnvironmentId, &sDescribeEnvironmentManagedActionsRequest_Status}}
+var mDescribeEnvironmentManagedActionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentManagedActionsResult_ManagedActions}}
+var mDescribeEnvironmentResourcesMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentResourcesMessage_EnvironmentId, &sDescribeEnvironmentResourcesMessage_EnvironmentName}}
+var mEnvironmentResourceDescriptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentResourceDescriptionsMessage_EnvironmentResources}}
+var mDescribeEnvironmentsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEnvironmentsMessage_ApplicationName, &sDescribeEnvironmentsMessage_VersionLabel, &sDescribeEnvironmentsMessage_EnvironmentIds, &sDescribeEnvironmentsMessage_EnvironmentNames, &sDescribeEnvironmentsMessage_IncludeDeleted, &sDescribeEnvironmentsMessage_IncludedDeletedBackTo, &sDescribeEnvironmentsMessage_MaxRecords, &sDescribeEnvironmentsMessage_NextToken}}
+var mDescribeEventsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventsMessage_ApplicationName, &sDescribeEventsMessage_VersionLabel, &sDescribeEventsMessage_TemplateName, &sDescribeEventsMessage_EnvironmentId, &sDescribeEventsMessage_EnvironmentName, &sDescribeEventsMessage_PlatformArn, &sDescribeEventsMessage_RequestId, &sDescribeEventsMessage_Severity, &sDescribeEventsMessage_StartTime, &sDescribeEventsMessage_EndTime, &sDescribeEventsMessage_MaxRecords, &sDescribeEventsMessage_NextToken}, Hash: &hDescribeEventsMessage}
+var mEventDescriptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDescriptionsMessage_Events, &sEventDescriptionsMessage_NextToken}}
+var mDescribeInstancesHealthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInstancesHealthRequest_EnvironmentName, &sDescribeInstancesHealthRequest_EnvironmentId, &sDescribeInstancesHealthRequest_AttributeNames, &sDescribeInstancesHealthRequest_NextToken}}
+var mDescribeInstancesHealthResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInstancesHealthResult_InstanceHealthList, &sDescribeInstancesHealthResult_RefreshedAt, &sDescribeInstancesHealthResult_NextToken}}
+var mDescribePlatformVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePlatformVersionRequest_PlatformArn}}
+var mDescribePlatformVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePlatformVersionResult_PlatformDescription}}
+var mDisassociateEnvironmentOperationsRoleMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateEnvironmentOperationsRoleMessage_EnvironmentName}}
+var mListAvailableSolutionStacksResultMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sListAvailableSolutionStacksResultMessage_SolutionStacks, &sListAvailableSolutionStacksResultMessage_SolutionStackDetails}}
+var mListPlatformBranchesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlatformBranchesRequest_Filters, &sListPlatformBranchesRequest_MaxRecords, &sListPlatformBranchesRequest_NextToken}}
+var mListPlatformBranchesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlatformBranchesResult_PlatformBranchSummaryList, &sListPlatformBranchesResult_NextToken}}
+var mListPlatformVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlatformVersionsRequest_Filters, &sListPlatformVersionsRequest_MaxRecords, &sListPlatformVersionsRequest_NextToken}}
+var mListPlatformVersionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlatformVersionsResult_PlatformSummaryList, &sListPlatformVersionsResult_NextToken}}
+var mListTagsForResourceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceMessage_ResourceArn}}
+var mResourceTagsDescriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTagsDescriptionMessage_ResourceArn, &sResourceTagsDescriptionMessage_ResourceTags}}
+var mRebuildEnvironmentMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRebuildEnvironmentMessage_EnvironmentId, &sRebuildEnvironmentMessage_EnvironmentName}}
+var mRequestEnvironmentInfoMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestEnvironmentInfoMessage_EnvironmentId, &sRequestEnvironmentInfoMessage_EnvironmentName, &sRequestEnvironmentInfoMessage_InfoType}}
+var mRestartAppServerMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRestartAppServerMessage_EnvironmentId, &sRestartAppServerMessage_EnvironmentName}}
+var mRetrieveEnvironmentInfoMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrieveEnvironmentInfoMessage_EnvironmentId, &sRetrieveEnvironmentInfoMessage_EnvironmentName, &sRetrieveEnvironmentInfoMessage_InfoType}}
+var mRetrieveEnvironmentInfoResultMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrieveEnvironmentInfoResultMessage_EnvironmentInfo}}
+var mSwapEnvironmentCNAMEsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sSwapEnvironmentCNAMEsMessage_SourceEnvironmentId, &sSwapEnvironmentCNAMEsMessage_SourceEnvironmentName, &sSwapEnvironmentCNAMEsMessage_DestinationEnvironmentId, &sSwapEnvironmentCNAMEsMessage_DestinationEnvironmentName}}
+var mTerminateEnvironmentMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateEnvironmentMessage_EnvironmentId, &sTerminateEnvironmentMessage_EnvironmentName, &sTerminateEnvironmentMessage_TerminateResources, &sTerminateEnvironmentMessage_ForceTerminate}}
+var mUpdateApplicationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationMessage_ApplicationName, &sUpdateApplicationMessage_Description}}
+var mUpdateApplicationResourceLifecycleMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationResourceLifecycleMessage_ApplicationName, &sUpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig}}
+var mApplicationResourceLifecycleDescriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationResourceLifecycleDescriptionMessage_ApplicationName, &sApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig}}
+var mUpdateApplicationVersionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationVersionMessage_ApplicationName, &sUpdateApplicationVersionMessage_VersionLabel, &sUpdateApplicationVersionMessage_Description}}
+var mUpdateConfigurationTemplateMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationTemplateMessage_ApplicationName, &sUpdateConfigurationTemplateMessage_TemplateName, &sUpdateConfigurationTemplateMessage_Description, &sUpdateConfigurationTemplateMessage_OptionSettings, &sUpdateConfigurationTemplateMessage_OptionsToRemove}}
+var mUpdateEnvironmentMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentMessage_ApplicationName, &sUpdateEnvironmentMessage_EnvironmentId, &sUpdateEnvironmentMessage_EnvironmentName, &sUpdateEnvironmentMessage_GroupName, &sUpdateEnvironmentMessage_Description, &sUpdateEnvironmentMessage_Tier, &sUpdateEnvironmentMessage_VersionLabel, &sUpdateEnvironmentMessage_TemplateName, &sUpdateEnvironmentMessage_SolutionStackName, &sUpdateEnvironmentMessage_PlatformArn, &sUpdateEnvironmentMessage_OptionSettings, &sUpdateEnvironmentMessage_OptionsToRemove}, Hash: &hUpdateEnvironmentMessage}
+var mUpdateTagsForResourceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTagsForResourceMessage_ResourceArn, &sUpdateTagsForResourceMessage_TagsToAdd, &sUpdateTagsForResourceMessage_TagsToRemove}}
+var mValidateConfigurationSettingsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateConfigurationSettingsMessage_ApplicationName, &sValidateConfigurationSettingsMessage_TemplateName, &sValidateConfigurationSettingsMessage_EnvironmentName, &sValidateConfigurationSettingsMessage_OptionSettings}}
+var mConfigurationSettingsValidationMessages = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationSettingsValidationMessages_Messages}}
+
+var hApplicationVersionDescription = smithy.MemberHash{Seed: 47, Slots: []uint16{
+	13, 0, 0, 0, 0, 8, 0, 0, 0, 0, 10, 0, 11, 12, 2, 1, 0, 7, 4, 6, 0, 0, 5, 0,
+	0, 9, 0, 3, 0, 0, 0, 0,
+}}
+var hConfigurationOptionDescription = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 2, 0, 8, 0, 0, 6, 7, 3, 5, 0, 0, 0, 0, 0, 0, 4, 10, 0, 0, 11, 0, 0, 0,
+	0, 1, 9, 0, 0, 0, 0, 0,
+}}
+var hConfigurationSettingsDescription = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 2, 3, 0, 1, 8, 0, 10, 0, 0, 0, 6, 9, 0, 0, 0, 0, 0, 0, 5, 7,
+	4, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hEnvironmentDescription = smithy.MemberHash{Seed: 12, Slots: []uint16{
+	0, 0, 0, 0, 21, 0, 10, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 11, 1, 20, 0, 0, 0, 9,
+	0, 5, 13, 7, 0, 8, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0,
+	15, 12, 0, 17, 0, 2, 6, 0, 14, 0, 0, 0, 3, 0, 18, 0,
+}}
+var hEnvironmentHealthStatus = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 3, 0, 8, 0, 0, 0, 5, 2, 0,
+	0, 0, 0, 0, 6, 7, 0, 1,
+}}
+var hEnvironmentResourceDescription = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 7, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 4, 0,
+	0, 0, 0, 3, 5, 8, 0, 9,
+}}
+var hEventDescription = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 5, 0, 7, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0,
+	0, 0, 6, 9, 0, 0, 0, 0,
+}}
+var hInstancesHealthAttribute = smithy.MemberHash{Seed: 35, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 3, 9, 6, 0, 0, 2, 0, 0, 0, 7, 0, 11,
+	1, 0, 0, 5, 4, 0, 0, 8,
+}}
+var hPlatformDescription = smithy.MemberHash{Seed: 33, Slots: []uint16{
+	22, 0, 15, 0, 0, 6, 0, 0, 4, 0, 0, 0, 13, 0, 0, 19, 9, 12, 2, 0, 21, 0, 0, 5,
+	0, 0, 8, 0, 3, 0, 0, 14, 20, 0, 17, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0, 0, 0,
+	0, 0, 0, 18, 0, 16, 0, 0, 0, 0, 7, 0, 0, 0, 0, 11,
+}}
+var hPlatformSummary = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	0, 4, 11, 5, 0, 0, 0, 0, 0, 2, 10, 0, 7, 0, 6, 0, 9, 0, 0, 0, 0, 0, 0, 0,
+	0, 1, 0, 3, 0, 8, 0, 12,
+}}
+var hSingleInstanceHealth = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 0, 6, 0, 0, 1, 8, 0, 0, 4, 0, 0, 0, 0, 9, 0, 0, 0, 0, 2, 0, 0, 5,
+	0, 0, 0, 3, 0, 10, 0, 7,
+}}
+var hCreateApplicationVersionMessage = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	3, 0, 0, 9, 0, 6, 10, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0, 2, 0, 8, 0, 7, 0, 0,
+	0, 0, 0, 0, 0, 5, 0, 0,
+}}
+var hCreateConfigurationTemplateMessage = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 9, 4, 0, 0, 0, 0, 0, 0, 5, 0, 8, 0, 2, 0, 0, 3, 0, 0, 0, 7, 0, 0, 0,
+	0, 0, 0, 1, 0, 6, 0, 0,
+}}
+var hCreateEnvironmentMessage = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	5, 0, 0, 0, 0, 14, 3, 0, 7, 13, 0, 0, 0, 0, 4, 1, 8, 0, 12, 6, 0, 0, 0, 9,
+	0, 11, 0, 2, 0, 10, 0, 0,
+}}
+var hDescribeEventsMessage = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 3, 0, 6, 0, 12, 0, 2, 0, 1, 7, 0, 0, 0, 0, 0, 10, 4, 0, 11, 9, 0, 0, 0,
+	0, 0, 5, 8, 0, 0, 0, 0,
+}}
+var hUpdateEnvironmentMessage = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 7, 10, 0, 0, 0, 0, 0, 6, 0, 0, 11, 0, 8, 0, 0, 9, 0, 3, 12, 5, 0, 0, 0,
+	0, 0, 0, 1, 0, 2, 4, 0,
+}}
+
+var sAbortEnvironmentUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAbortEnvironmentUpdate, Type: smithy.ShapeTypeOperation, Ext: &eAbortEnvironmentUpdate})
+var sApplyEnvironmentManagedAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyEnvironmentManagedAction, Type: smithy.ShapeTypeOperation, Ext: &eApplyEnvironmentManagedAction})
+var sAssociateEnvironmentOperationsRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateEnvironmentOperationsRole, Type: smithy.ShapeTypeOperation, Ext: &eAssociateEnvironmentOperationsRole})
+var sCheckDNSAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDNSAvailability, Type: smithy.ShapeTypeOperation, Ext: &eCheckDNSAvailability})
+var sComposeEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComposeEnvironments, Type: smithy.ShapeTypeOperation, Ext: &eComposeEnvironments})
+var sCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplication, Type: smithy.ShapeTypeOperation, Ext: &eCreateApplication})
+var sCreateApplicationVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationVersion, Type: smithy.ShapeTypeOperation, Ext: &eCreateApplicationVersion})
+var sCreateConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationTemplate, Type: smithy.ShapeTypeOperation, Ext: &eCreateConfigurationTemplate})
+var sCreateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironment, Type: smithy.ShapeTypeOperation, Ext: &eCreateEnvironment})
+var sCreatePlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformVersion, Type: smithy.ShapeTypeOperation, Ext: &eCreatePlatformVersion})
+var sCreateStorageLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorageLocation, Type: smithy.ShapeTypeOperation, Ext: &eCreateStorageLocation})
+var sDeleteApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplication, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApplication})
+var sDeleteApplicationVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationVersion, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApplicationVersion})
+var sDeleteConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationTemplate, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConfigurationTemplate})
+var sDeleteEnvironmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEnvironmentConfiguration})
+var sDeletePlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlatformVersion, Type: smithy.ShapeTypeOperation, Ext: &eDeletePlatformVersion})
+var sDescribeAccountAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountAttributes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAccountAttributes})
+var sDescribeApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplications, Type: smithy.ShapeTypeOperation, Ext: &eDescribeApplications})
+var sDescribeApplicationVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationVersions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeApplicationVersions})
+var sDescribeConfigurationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationOptions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConfigurationOptions})
+var sDescribeConfigurationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationSettings, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConfigurationSettings})
+var sDescribeEnvironmentHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentHealth, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEnvironmentHealth})
+var sDescribeEnvironmentManagedActionHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentManagedActionHistory, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEnvironmentManagedActionHistory})
+var sDescribeEnvironmentManagedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentManagedActions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEnvironmentManagedActions})
+var sDescribeEnvironmentResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentResources, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEnvironmentResources})
+var sDescribeEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironments, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEnvironments})
+var sDescribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvents, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEvents})
+var sDescribeInstancesHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInstancesHealth, Type: smithy.ShapeTypeOperation, Ext: &eDescribeInstancesHealth})
+var sDescribePlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePlatformVersion, Type: smithy.ShapeTypeOperation, Ext: &eDescribePlatformVersion})
+var sDisassociateEnvironmentOperationsRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateEnvironmentOperationsRole, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateEnvironmentOperationsRole})
+var sListAvailableSolutionStacks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableSolutionStacks, Type: smithy.ShapeTypeOperation, Ext: &eListAvailableSolutionStacks})
+var sListPlatformBranches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformBranches, Type: smithy.ShapeTypeOperation, Ext: &eListPlatformBranches})
+var sListPlatformVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformVersions, Type: smithy.ShapeTypeOperation, Ext: &eListPlatformVersions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRebuildEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebuildEnvironment, Type: smithy.ShapeTypeOperation, Ext: &eRebuildEnvironment})
+var sRequestEnvironmentInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestEnvironmentInfo, Type: smithy.ShapeTypeOperation, Ext: &eRequestEnvironmentInfo})
+var sRestartAppServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestartAppServer, Type: smithy.ShapeTypeOperation, Ext: &eRestartAppServer})
+var sRetrieveEnvironmentInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveEnvironmentInfo, Type: smithy.ShapeTypeOperation, Ext: &eRetrieveEnvironmentInfo})
+var sSwapEnvironmentCNAMEs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSwapEnvironmentCNAMEs, Type: smithy.ShapeTypeOperation, Ext: &eSwapEnvironmentCNAMEs})
+var sTerminateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateEnvironment, Type: smithy.ShapeTypeOperation, Ext: &eTerminateEnvironment})
+var sUpdateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplication, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApplication})
+var sUpdateApplicationResourceLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationResourceLifecycle, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApplicationResourceLifecycle})
+var sUpdateApplicationVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationVersion, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApplicationVersion})
+var sUpdateConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationTemplate, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConfigurationTemplate})
+var sUpdateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironment, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEnvironment})
+var sUpdateTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTagsForResource})
+var sValidateConfigurationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateConfigurationSettings, Type: smithy.ShapeTypeOperation, Ext: &eValidateConfigurationSettings})
+var s_AWSElasticBeanstalkService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSElasticBeanstalkService, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_AWSElasticBeanstalkService})
+var s_AbortableOperationInProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AbortableOperationInProgress, Type: smithy.ShapeTypeBoolean, Ext: &e_AbortableOperationInProgress})
+var sActionHistoryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionHistoryStatus, Members: &mActionHistoryStatus, Type: smithy.ShapeTypeEnum, Ext: &eActionHistoryStatus})
+var sActionHistoryStatus_Completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Completed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionHistoryStatus_Completed})
+var sActionHistoryStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionHistoryStatus_Failed})
+var sActionHistoryStatus_Unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionHistoryStatus_Unknown})
+var sActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eActionStatus})
+var sActionStatus_Scheduled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scheduled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Scheduled})
+var sActionStatus_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Pending})
+var sActionStatus_Running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Running", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Running})
+var sActionStatus_Unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Unknown})
+var sActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eActionType})
+var sActionType_InstanceRefresh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceRefresh", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_InstanceRefresh})
+var sActionType_PlatformUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformUpdate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_PlatformUpdate})
+var sActionType_Unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_Unknown})
+var sAmiArchitecture = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiArchitecture, Members: &mAmiArchitecture, Type: smithy.ShapeTypeEnum, Ext: &eAmiArchitecture})
+var sAmiArchitecture_X86_64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "X86_64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmiArchitecture_X86_64})
+var sAmiArchitecture_ARM64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARM64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmiArchitecture_ARM64})
+var s_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationArn, Type: smithy.ShapeTypeString, Ext: &e_ApplicationArn})
+var sApplicationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationDescription, Members: &mApplicationDescription, Type: smithy.ShapeTypeStructure, Ext: &eApplicationDescription})
+var sApplicationDescription_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString, Ext: &eApplicationDescription_ApplicationArn})
+var sApplicationDescription_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eApplicationDescription_ApplicationName})
+var sApplicationDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eApplicationDescription_Description})
+var sApplicationDescription_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApplicationDescription_DateCreated})
+var sApplicationDescription_DateUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateUpdated", ID: &i_UpdateDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApplicationDescription_DateUpdated})
+var sApplicationDescription_Versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Versions", ID: &i_VersionLabelsList, Members: &m_VersionLabelsList, Type: smithy.ShapeTypeList, Ext: &eApplicationDescription_Versions})
+var sApplicationDescription_ConfigurationTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationTemplates", ID: &i_ConfigurationTemplateNamesList, Members: &m_ConfigurationTemplateNamesList, Type: smithy.ShapeTypeList, Ext: &eApplicationDescription_ConfigurationTemplates})
+var sApplicationDescription_ResourceLifecycleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLifecycleConfig", ID: &iApplicationResourceLifecycleConfig, Members: &mApplicationResourceLifecycleConfig, Type: smithy.ShapeTypeStructure, Ext: &eApplicationDescription_ResourceLifecycleConfig})
+var s_ApplicationDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationDescriptionList, Members: &m_ApplicationDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationDescriptionList})
+var s_ApplicationDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationDescription, Members: &mApplicationDescription, Type: smithy.ShapeTypeStructure, Ext: &e_ApplicationDescriptionList_member})
+var sApplicationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationMetrics, Members: &mApplicationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eApplicationMetrics})
+var sApplicationMetrics_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eApplicationMetrics_Duration})
+var sApplicationMetrics_RequestCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCount", ID: &i_RequestCount, Type: smithy.ShapeTypeInteger, Ext: &eApplicationMetrics_RequestCount})
+var sApplicationMetrics_StatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCodes", ID: &iStatusCodes, Members: &mStatusCodes, Type: smithy.ShapeTypeStructure, Ext: &eApplicationMetrics_StatusCodes})
+var sApplicationMetrics_Latency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latency", ID: &iLatency, Members: &mLatency, Type: smithy.ShapeTypeStructure, Ext: &eApplicationMetrics_Latency})
+var s_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &e_ApplicationName})
+var s_ApplicationNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationNamesList, Members: &m_ApplicationNamesList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationNamesList})
+var s_ApplicationNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &e_ApplicationNamesList_member})
+var sApplicationResourceLifecycleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationResourceLifecycleConfig, Members: &mApplicationResourceLifecycleConfig, Type: smithy.ShapeTypeStructure, Ext: &eApplicationResourceLifecycleConfig})
+var sApplicationResourceLifecycleConfig_ServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceRole", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplicationResourceLifecycleConfig_ServiceRole})
+var sApplicationResourceLifecycleConfig_VersionLifecycleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLifecycleConfig", ID: &iApplicationVersionLifecycleConfig, Members: &mApplicationVersionLifecycleConfig, Type: smithy.ShapeTypeStructure, Ext: &eApplicationResourceLifecycleConfig_VersionLifecycleConfig})
+var s_ApplicationVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationVersionArn, Type: smithy.ShapeTypeString, Ext: &e_ApplicationVersionArn})
+var sApplicationVersionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationVersionDescription, Members: &mApplicationVersionDescription, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescription})
+var sApplicationVersionDescription_ApplicationVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationVersionArn", ID: &i_ApplicationVersionArn, Type: smithy.ShapeTypeString, Ext: &eApplicationVersionDescription_ApplicationVersionArn})
+var sApplicationVersionDescription_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eApplicationVersionDescription_ApplicationName})
+var sApplicationVersionDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eApplicationVersionDescription_Description})
+var sApplicationVersionDescription_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eApplicationVersionDescription_VersionLabel})
+var sApplicationVersionDescription_SourceBuildInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBuildInformation", ID: &iSourceBuildInformation, Members: &mSourceBuildInformation, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescription_SourceBuildInformation})
+var sApplicationVersionDescription_BuildArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuildArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplicationVersionDescription_BuildArn})
+var sApplicationVersionDescription_SourceBundle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBundle", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescription_SourceBundle})
+var sApplicationVersionDescription_ImageSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSource", ID: &iImageSource, Members: &mImageSource, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescription_ImageSource})
+var sApplicationVersionDescription_ImageBuildConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageBuildConfiguration", ID: &iImageBuildConfiguration, Members: &mImageBuildConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescription_ImageBuildConfiguration})
+var sApplicationVersionDescription_Process = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Process", ID: &i_ApplicationVersionProccess, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationVersionDescription_Process})
+var sApplicationVersionDescription_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApplicationVersionDescription_DateCreated})
+var sApplicationVersionDescription_DateUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateUpdated", ID: &i_UpdateDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApplicationVersionDescription_DateUpdated})
+var sApplicationVersionDescription_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationVersionStatus, Members: &mApplicationVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eApplicationVersionDescription_Status})
+var s_ApplicationVersionDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationVersionDescriptionList, Members: &m_ApplicationVersionDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationVersionDescriptionList})
+var s_ApplicationVersionDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationVersionDescription, Members: &mApplicationVersionDescription, Type: smithy.ShapeTypeStructure, Ext: &e_ApplicationVersionDescriptionList_member})
+var sApplicationVersionLifecycleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationVersionLifecycleConfig, Members: &mApplicationVersionLifecycleConfig, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionLifecycleConfig})
+var sApplicationVersionLifecycleConfig_MaxCountRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCountRule", ID: &iMaxCountRule, Members: &mMaxCountRule, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionLifecycleConfig_MaxCountRule})
+var sApplicationVersionLifecycleConfig_MaxAgeRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAgeRule", ID: &iMaxAgeRule, Members: &mMaxAgeRule, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionLifecycleConfig_MaxAgeRule})
+var s_ApplicationVersionProccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationVersionProccess, Type: smithy.ShapeTypeBoolean, Ext: &e_ApplicationVersionProccess})
+var sApplicationVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationVersionStatus, Members: &mApplicationVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eApplicationVersionStatus})
+var sApplicationVersionStatus_Processed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionStatus_Processed})
+var sApplicationVersionStatus_Unprocessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unprocessed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionStatus_Unprocessed})
+var sApplicationVersionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionStatus_Failed})
+var sApplicationVersionStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionStatus_Processing})
+var sApplicationVersionStatus_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionStatus_Building})
+var sArchitectureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchitectureType, Members: &mArchitectureType, Type: smithy.ShapeTypeEnum, Ext: &eArchitectureType})
+var sArchitectureType_amd64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amd64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchitectureType_amd64})
+var sArchitectureType_arm64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arm64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchitectureType_arm64})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &e_ARN})
+var s_AutoCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoCreateApplication, Type: smithy.ShapeTypeBoolean, Ext: &e_AutoCreateApplication})
+var sAutoScalingGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingGroup, Members: &mAutoScalingGroup, Type: smithy.ShapeTypeStructure, Ext: &eAutoScalingGroup})
+var sAutoScalingGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eAutoScalingGroup_Name})
+var s_AutoScalingGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoScalingGroupList, Members: &m_AutoScalingGroupList, Type: smithy.ShapeTypeList, Ext: &e_AutoScalingGroupList})
+var s_AutoScalingGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoScalingGroup, Members: &mAutoScalingGroup, Type: smithy.ShapeTypeStructure, Ext: &e_AutoScalingGroupList_member})
+var s_AvailableSolutionStackDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailableSolutionStackDetailsList, Members: &m_AvailableSolutionStackDetailsList, Type: smithy.ShapeTypeList, Ext: &e_AvailableSolutionStackDetailsList})
+var s_AvailableSolutionStackDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSolutionStackDescription, Members: &mSolutionStackDescription, Type: smithy.ShapeTypeStructure, Ext: &e_AvailableSolutionStackDetailsList_member})
+var s_AvailableSolutionStackNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailableSolutionStackNamesList, Members: &m_AvailableSolutionStackNamesList, Type: smithy.ShapeTypeList, Ext: &e_AvailableSolutionStackNamesList})
+var s_AvailableSolutionStackNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &e_AvailableSolutionStackNamesList_member})
+var s_BoxedBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_BoxedBoolean})
+var s_BoxedInt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedInt, Type: smithy.ShapeTypeInteger, Ext: &e_BoxedInt})
+var s_BranchName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &e_BranchName})
+var s_BranchOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchOrder, Type: smithy.ShapeTypeInteger, Ext: &e_BranchOrder})
+var sBuildConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildConfiguration, Members: &mBuildConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eBuildConfiguration})
+var sBuildConfiguration_ArtifactName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuildConfiguration_ArtifactName})
+var sBuildConfiguration_CodeBuildServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeBuildServiceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildConfiguration_CodeBuildServiceRole})
+var sBuildConfiguration_ComputeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeType", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eBuildConfiguration_ComputeType})
+var sBuildConfiguration_Image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Image", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eBuildConfiguration_Image})
+var sBuildConfiguration_TimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMinutes", ID: &i_BoxedInt, Type: smithy.ShapeTypeInteger, Ext: &eBuildConfiguration_TimeoutInMinutes})
+var sBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuilder, Members: &mBuilder, Type: smithy.ShapeTypeStructure, Ext: &eBuilder})
+var sBuilder_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eBuilder_ARN})
+var s_Cause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cause, Type: smithy.ShapeTypeString, Ext: &e_Cause})
+var s_Causes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Causes, Members: &m_Causes, Type: smithy.ShapeTypeList, Ext: &e_Causes})
+var s_Causes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Cause, Type: smithy.ShapeTypeString, Ext: &e_Causes_member})
+var sCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eCluster})
+var sCluster_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCluster_ClusterArn})
+var s_CnameAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CnameAvailability, Type: smithy.ShapeTypeBoolean, Ext: &e_CnameAvailability})
+var sCodeBuildNotInServiceRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeBuildNotInServiceRegionException, Members: &mCodeBuildNotInServiceRegionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCodeBuildNotInServiceRegionException})
+var sCodeBuildNotInServiceRegionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eCodeBuildNotInServiceRegionException_message})
+var sComputeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eComputeType})
+var sComputeType_BUILD_GENERAL1_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_SMALL})
+var sComputeType_BUILD_GENERAL1_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_MEDIUM})
+var sComputeType_BUILD_GENERAL1_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_GENERAL1_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeType_BUILD_GENERAL1_LARGE})
+var sConfigurationDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationDeploymentStatus, Members: &mConfigurationDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationDeploymentStatus})
+var sConfigurationDeploymentStatus_deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationDeploymentStatus_deployed})
+var sConfigurationDeploymentStatus_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationDeploymentStatus_pending})
+var sConfigurationDeploymentStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationDeploymentStatus_failed})
+var s_ConfigurationOptionDefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionDefaultValue, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationOptionDefaultValue})
+var sConfigurationOptionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationOptionDescription, Members: &mConfigurationOptionDescription, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationOptionDescription})
+var sConfigurationOptionDescription_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_OptionNamespace, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionDescription_Namespace})
+var sConfigurationOptionDescription_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConfigurationOptionName, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionDescription_Name})
+var sConfigurationOptionDescription_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_ConfigurationOptionDefaultValue, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionDescription_DefaultValue})
+var sConfigurationOptionDescription_ChangeSeverity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSeverity", ID: &i_ConfigurationOptionSeverity, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionDescription_ChangeSeverity})
+var sConfigurationOptionDescription_UserDefined = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserDefined", ID: &i_UserDefinedOption, Type: smithy.ShapeTypeBoolean, Ext: &eConfigurationOptionDescription_UserDefined})
+var sConfigurationOptionDescription_ValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueType", ID: &iConfigurationOptionValueType, Members: &mConfigurationOptionValueType, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationOptionDescription_ValueType})
+var sConfigurationOptionDescription_ValueOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueOptions", ID: &i_ConfigurationOptionPossibleValues, Members: &m_ConfigurationOptionPossibleValues, Type: smithy.ShapeTypeList, Ext: &eConfigurationOptionDescription_ValueOptions})
+var sConfigurationOptionDescription_MinValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinValue", ID: &i_OptionRestrictionMinValue, Type: smithy.ShapeTypeInteger, Ext: &eConfigurationOptionDescription_MinValue})
+var sConfigurationOptionDescription_MaxValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxValue", ID: &i_OptionRestrictionMaxValue, Type: smithy.ShapeTypeInteger, Ext: &eConfigurationOptionDescription_MaxValue})
+var sConfigurationOptionDescription_MaxLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxLength", ID: &i_OptionRestrictionMaxLength, Type: smithy.ShapeTypeInteger, Ext: &eConfigurationOptionDescription_MaxLength})
+var sConfigurationOptionDescription_Regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regex", ID: &iOptionRestrictionRegex, Members: &mOptionRestrictionRegex, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationOptionDescription_Regex})
+var s_ConfigurationOptionDescriptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionDescriptionsList, Members: &m_ConfigurationOptionDescriptionsList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationOptionDescriptionsList})
+var s_ConfigurationOptionDescriptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationOptionDescription, Members: &mConfigurationOptionDescription, Type: smithy.ShapeTypeStructure, Ext: &e_ConfigurationOptionDescriptionsList_member})
+var s_ConfigurationOptionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionName, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationOptionName})
+var s_ConfigurationOptionPossibleValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionPossibleValue, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationOptionPossibleValue})
+var s_ConfigurationOptionPossibleValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionPossibleValues, Members: &m_ConfigurationOptionPossibleValues, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationOptionPossibleValues})
+var s_ConfigurationOptionPossibleValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfigurationOptionPossibleValue, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationOptionPossibleValues_member})
+var sConfigurationOptionSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationOptionSetting, Members: &mConfigurationOptionSetting, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationOptionSetting})
+var sConfigurationOptionSetting_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionSetting_ResourceName})
+var sConfigurationOptionSetting_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_OptionNamespace, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionSetting_Namespace})
+var sConfigurationOptionSetting_OptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionName", ID: &i_ConfigurationOptionName, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionSetting_OptionName})
+var sConfigurationOptionSetting_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ConfigurationOptionValue, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionSetting_Value})
+var s_ConfigurationOptionSettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationOptionSettingsList})
+var s_ConfigurationOptionSettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationOptionSetting, Members: &mConfigurationOptionSetting, Type: smithy.ShapeTypeStructure, Ext: &e_ConfigurationOptionSettingsList_member})
+var s_ConfigurationOptionSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionSeverity, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationOptionSeverity})
+var s_ConfigurationOptionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationOptionValue, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationOptionValue})
+var sConfigurationOptionValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationOptionValueType, Members: &mConfigurationOptionValueType, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationOptionValueType})
+var sConfigurationOptionValueType_Scalar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scalar", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationOptionValueType_Scalar})
+var sConfigurationOptionValueType_List = smithy.NewStaticSchema(smithy.StaticSchema{Member: "List", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationOptionValueType_List})
+var sConfigurationSettingsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSettingsDescription, Members: &mConfigurationSettingsDescription, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationSettingsDescription})
+var sConfigurationSettingsDescription_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eConfigurationSettingsDescription_SolutionStackName})
+var sConfigurationSettingsDescription_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eConfigurationSettingsDescription_PlatformArn})
+var sConfigurationSettingsDescription_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eConfigurationSettingsDescription_ApplicationName})
+var sConfigurationSettingsDescription_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eConfigurationSettingsDescription_TemplateName})
+var sConfigurationSettingsDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eConfigurationSettingsDescription_Description})
+var sConfigurationSettingsDescription_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eConfigurationSettingsDescription_EnvironmentName})
+var sConfigurationSettingsDescription_DeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatus", ID: &iConfigurationDeploymentStatus, Members: &mConfigurationDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationSettingsDescription_DeploymentStatus})
+var sConfigurationSettingsDescription_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eConfigurationSettingsDescription_DateCreated})
+var sConfigurationSettingsDescription_DateUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateUpdated", ID: &i_UpdateDate, Type: smithy.ShapeTypeTimestamp, Ext: &eConfigurationSettingsDescription_DateUpdated})
+var sConfigurationSettingsDescription_OptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionSettings", ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &eConfigurationSettingsDescription_OptionSettings})
+var s_ConfigurationSettingsDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSettingsDescriptionList, Members: &m_ConfigurationSettingsDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationSettingsDescriptionList})
+var s_ConfigurationSettingsDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationSettingsDescription, Members: &mConfigurationSettingsDescription, Type: smithy.ShapeTypeStructure, Ext: &e_ConfigurationSettingsDescriptionList_member})
+var s_ConfigurationTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationTemplateName})
+var s_ConfigurationTemplateNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationTemplateNamesList, Members: &m_ConfigurationTemplateNamesList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationTemplateNamesList})
+var s_ConfigurationTemplateNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationTemplateNamesList_member})
+var sCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCPUUtilization, Members: &mCPUUtilization, Type: smithy.ShapeTypeStructure, Ext: &eCPUUtilization})
+var sCPUUtilization_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_User})
+var sCPUUtilization_Nice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nice", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_Nice})
+var sCPUUtilization_System = smithy.NewStaticSchema(smithy.StaticSchema{Member: "System", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_System})
+var sCPUUtilization_Idle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Idle", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_Idle})
+var sCPUUtilization_IOWait = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IOWait", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_IOWait})
+var sCPUUtilization_IRQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IRQ", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_IRQ})
+var sCPUUtilization_SoftIRQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftIRQ", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_SoftIRQ})
+var sCPUUtilization_Privileged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Privileged", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eCPUUtilization_Privileged})
+var s_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreationDate})
+var sCustomAmi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAmi, Members: &mCustomAmi, Type: smithy.ShapeTypeStructure, Ext: &eCustomAmi})
+var sCustomAmi_VirtualizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VirtualizationType", ID: &i_VirtualizationType, Type: smithy.ShapeTypeString, Ext: &eCustomAmi_VirtualizationType})
+var sCustomAmi_ImageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageId", ID: &i_ImageId, Type: smithy.ShapeTypeString, Ext: &eCustomAmi_ImageId})
+var s_CustomAmiList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomAmiList, Members: &m_CustomAmiList, Type: smithy.ShapeTypeList, Ext: &e_CustomAmiList})
+var s_CustomAmiList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomAmi, Members: &mCustomAmi, Type: smithy.ShapeTypeStructure, Ext: &e_CustomAmiList_member})
+var sDefaultAmi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultAmi, Members: &mDefaultAmi, Type: smithy.ShapeTypeStructure, Ext: &eDefaultAmi})
+var sDefaultAmi_Architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Architecture", ID: &iAmiArchitecture, Members: &mAmiArchitecture, Type: smithy.ShapeTypeEnum, Ext: &eDefaultAmi_Architecture})
+var sDefaultAmi_ImageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageId", ID: &i_ImageId, Type: smithy.ShapeTypeString, Ext: &eDefaultAmi_ImageId})
+var s_DefaultAmiList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultAmiList, Members: &m_DefaultAmiList, Type: smithy.ShapeTypeList, Ext: &e_DefaultAmiList})
+var s_DefaultAmiList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDefaultAmi, Members: &mDefaultAmi, Type: smithy.ShapeTypeStructure, Ext: &e_DefaultAmiList_member})
+var s_DeleteSourceBundle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteSourceBundle, Type: smithy.ShapeTypeBoolean, Ext: &e_DeleteSourceBundle})
+var sDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure, Ext: &eDeployment})
+var sDeployment_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployment_VersionLabel})
+var sDeployment_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_NullableLong, Type: smithy.ShapeTypeLong, Ext: &eDeployment_DeploymentId})
+var sDeployment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployment_Status})
+var sDeployment_DeploymentTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentTime", ID: &i_DeploymentTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeployment_DeploymentTime})
+var s_DeploymentTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_DeploymentTimestamp})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_DNSCname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSCname, Type: smithy.ShapeTypeString, Ext: &e_DNSCname})
+var s_DNSCnamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSCnamePrefix, Type: smithy.ShapeTypeString, Ext: &e_DNSCnamePrefix})
+var s_Ec2InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2InstanceId, Type: smithy.ShapeTypeString, Ext: &e_Ec2InstanceId})
+var sElasticBeanstalkServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticBeanstalkServiceException, Members: &mElasticBeanstalkServiceException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eElasticBeanstalkServiceException})
+var sElasticBeanstalkServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eElasticBeanstalkServiceException_message})
+var s_EndpointURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointURL, Type: smithy.ShapeTypeString, Ext: &e_EndpointURL})
+var s_EnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentArn})
+var sEnvironmentDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentDescription, Members: &mEnvironmentDescription, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentDescription})
+var sEnvironmentDescription_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_EnvironmentName})
+var sEnvironmentDescription_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_EnvironmentId})
+var sEnvironmentDescription_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_ApplicationName})
+var sEnvironmentDescription_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_VersionLabel})
+var sEnvironmentDescription_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_SolutionStackName})
+var sEnvironmentDescription_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_PlatformArn})
+var sEnvironmentDescription_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_TemplateName})
+var sEnvironmentDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_Description})
+var sEnvironmentDescription_EndpointURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointURL", ID: &i_EndpointURL, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_EndpointURL})
+var sEnvironmentDescription_CNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNAME", ID: &i_DNSCname, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_CNAME})
+var sEnvironmentDescription_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eEnvironmentDescription_DateCreated})
+var sEnvironmentDescription_DateUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateUpdated", ID: &i_UpdateDate, Type: smithy.ShapeTypeTimestamp, Ext: &eEnvironmentDescription_DateUpdated})
+var sEnvironmentDescription_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentDescription_Status})
+var sEnvironmentDescription_AbortableOperationInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbortableOperationInProgress", ID: &i_AbortableOperationInProgress, Type: smithy.ShapeTypeBoolean, Ext: &eEnvironmentDescription_AbortableOperationInProgress})
+var sEnvironmentDescription_Health = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Health", ID: &iEnvironmentHealth, Members: &mEnvironmentHealth, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentDescription_Health})
+var sEnvironmentDescription_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &iEnvironmentHealthStatus, Members: &mEnvironmentHealthStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentDescription_HealthStatus})
+var sEnvironmentDescription_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &iEnvironmentResourcesDescription, Members: &mEnvironmentResourcesDescription, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentDescription_Resources})
+var sEnvironmentDescription_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iEnvironmentTier, Members: &mEnvironmentTier, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentDescription_Tier})
+var sEnvironmentDescription_EnvironmentLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentLinks", ID: &i_EnvironmentLinks, Members: &m_EnvironmentLinks, Type: smithy.ShapeTypeList, Ext: &eEnvironmentDescription_EnvironmentLinks})
+var sEnvironmentDescription_EnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentArn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_EnvironmentArn})
+var sEnvironmentDescription_OperationsRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationsRole", ID: &i_OperationsRole, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescription_OperationsRole})
+var s_EnvironmentDescriptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentDescriptionsList, Members: &m_EnvironmentDescriptionsList, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentDescriptionsList})
+var s_EnvironmentDescriptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentDescription, Members: &mEnvironmentDescription, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentDescriptionsList_member})
+var sEnvironmentHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentHealth, Members: &mEnvironmentHealth, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentHealth})
+var sEnvironmentHealth_Green = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Green", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealth_Green})
+var sEnvironmentHealth_Yellow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Yellow", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealth_Yellow})
+var sEnvironmentHealth_Red = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Red", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealth_Red})
+var sEnvironmentHealth_Grey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Grey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealth_Grey})
+var sEnvironmentHealthAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentHealthAttribute, Members: &mEnvironmentHealthAttribute, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentHealthAttribute})
+var sEnvironmentHealthAttribute_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_Status})
+var sEnvironmentHealthAttribute_Color = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Color", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_Color})
+var sEnvironmentHealthAttribute_Causes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Causes", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_Causes})
+var sEnvironmentHealthAttribute_ApplicationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationMetrics", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_ApplicationMetrics})
+var sEnvironmentHealthAttribute_InstancesHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstancesHealth", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_InstancesHealth})
+var sEnvironmentHealthAttribute_All = smithy.NewStaticSchema(smithy.StaticSchema{Member: "All", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_All})
+var sEnvironmentHealthAttribute_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_HealthStatus})
+var sEnvironmentHealthAttribute_RefreshedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshedAt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthAttribute_RefreshedAt})
+var s_EnvironmentHealthAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentHealthAttributes, Members: &m_EnvironmentHealthAttributes, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentHealthAttributes})
+var s_EnvironmentHealthAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentHealthAttribute, Members: &mEnvironmentHealthAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_EnvironmentHealthAttributes_member})
+var sEnvironmentHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentHealthStatus, Members: &mEnvironmentHealthStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentHealthStatus})
+var sEnvironmentHealthStatus_NoData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoData", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_NoData})
+var sEnvironmentHealthStatus_Unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Unknown})
+var sEnvironmentHealthStatus_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Pending})
+var sEnvironmentHealthStatus_Ok = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ok", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Ok})
+var sEnvironmentHealthStatus_Info = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Info", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Info})
+var sEnvironmentHealthStatus_Warning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warning", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Warning})
+var sEnvironmentHealthStatus_Degraded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Degraded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Degraded})
+var sEnvironmentHealthStatus_Severe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severe", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Severe})
+var sEnvironmentHealthStatus_Suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suspended", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentHealthStatus_Suspended})
+var s_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentId})
+var s_EnvironmentIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentIdList, Members: &m_EnvironmentIdList, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentIdList})
+var s_EnvironmentIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentIdList_member})
+var sEnvironmentInfoDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentInfoDescription, Members: &mEnvironmentInfoDescription, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentInfoDescription})
+var sEnvironmentInfoDescription_InfoType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InfoType", ID: &iEnvironmentInfoType, Members: &mEnvironmentInfoType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentInfoDescription_InfoType})
+var sEnvironmentInfoDescription_Ec2InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2InstanceId", ID: &i_Ec2InstanceId, Type: smithy.ShapeTypeString, Ext: &eEnvironmentInfoDescription_Ec2InstanceId})
+var sEnvironmentInfoDescription_SampleTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleTimestamp", ID: &i_SampleTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEnvironmentInfoDescription_SampleTimestamp})
+var sEnvironmentInfoDescription_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEnvironmentInfoDescription_Message})
+var s_EnvironmentInfoDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentInfoDescriptionList, Members: &m_EnvironmentInfoDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentInfoDescriptionList})
+var s_EnvironmentInfoDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentInfoDescription, Members: &mEnvironmentInfoDescription, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentInfoDescriptionList_member})
+var sEnvironmentInfoType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentInfoType, Members: &mEnvironmentInfoType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentInfoType})
+var sEnvironmentInfoType_tail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tail", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentInfoType_tail})
+var sEnvironmentInfoType_bundle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bundle", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentInfoType_bundle})
+var sEnvironmentInfoType_analyze = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analyze", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentInfoType_analyze})
+var sEnvironmentLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentLink, Members: &mEnvironmentLink, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentLink})
+var sEnvironmentLink_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentLink_LinkName})
+var sEnvironmentLink_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentLink_EnvironmentName})
+var s_EnvironmentLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentLinks, Members: &m_EnvironmentLinks, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentLinks})
+var s_EnvironmentLinks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentLink, Members: &mEnvironmentLink, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentLinks_member})
+var s_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentName})
+var s_EnvironmentNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentNamesList, Members: &m_EnvironmentNamesList, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentNamesList})
+var s_EnvironmentNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentNamesList_member})
+var sEnvironmentResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentResourceDescription, Members: &mEnvironmentResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentResourceDescription})
+var sEnvironmentResourceDescription_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eEnvironmentResourceDescription_EnvironmentName})
+var sEnvironmentResourceDescription_AutoScalingGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingGroups", ID: &i_AutoScalingGroupList, Members: &m_AutoScalingGroupList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentResourceDescription_AutoScalingGroups})
+var sEnvironmentResourceDescription_Cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentResourceDescription_Cluster})
+var sEnvironmentResourceDescription_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentResourceDescription_Instances})
+var sEnvironmentResourceDescription_LaunchConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchConfigurations", ID: &i_LaunchConfigurationList, Members: &m_LaunchConfigurationList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentResourceDescription_LaunchConfigurations})
+var sEnvironmentResourceDescription_LaunchTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchTemplates", ID: &i_LaunchTemplateList, Members: &m_LaunchTemplateList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentResourceDescription_LaunchTemplates})
+var sEnvironmentResourceDescription_LoadBalancers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancers", ID: &i_LoadBalancerList, Members: &m_LoadBalancerList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentResourceDescription_LoadBalancers})
+var sEnvironmentResourceDescription_Triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Triggers", ID: &i_TriggerList, Members: &m_TriggerList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentResourceDescription_Triggers})
+var sEnvironmentResourceDescription_Queues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Queues", ID: &i_QueueList, Members: &m_QueueList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentResourceDescription_Queues})
+var sEnvironmentResourcesDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentResourcesDescription, Members: &mEnvironmentResourcesDescription, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentResourcesDescription})
+var sEnvironmentResourcesDescription_LoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancer", ID: &iLoadBalancerDescription, Members: &mLoadBalancerDescription, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentResourcesDescription_LoadBalancer})
+var sEnvironmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentStatus})
+var sEnvironmentStatus_Aborting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aborting", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_Aborting})
+var sEnvironmentStatus_Launching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Launching", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_Launching})
+var sEnvironmentStatus_Updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_Updating})
+var sEnvironmentStatus_LinkingFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkingFrom", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_LinkingFrom})
+var sEnvironmentStatus_LinkingTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkingTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_LinkingTo})
+var sEnvironmentStatus_Ready = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ready", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_Ready})
+var sEnvironmentStatus_Terminating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terminating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_Terminating})
+var sEnvironmentStatus_Terminated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terminated", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentStatus_Terminated})
+var sEnvironmentTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentTier, Members: &mEnvironmentTier, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentTier})
+var sEnvironmentTier_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentTier_Name})
+var sEnvironmentTier_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentTier_Type})
+var sEnvironmentTier_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEnvironmentTier_Version})
+var s_EventDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_EventDate})
+var sEventDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &eEventDescription})
+var sEventDescription_EventDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDate", ID: &i_EventDate, Type: smithy.ShapeTypeTimestamp, Ext: &eEventDescription_EventDate})
+var sEventDescription_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_EventMessage, Type: smithy.ShapeTypeString, Ext: &eEventDescription_Message})
+var sEventDescription_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eEventDescription_ApplicationName})
+var sEventDescription_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eEventDescription_VersionLabel})
+var sEventDescription_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eEventDescription_TemplateName})
+var sEventDescription_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eEventDescription_EnvironmentName})
+var sEventDescription_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eEventDescription_PlatformArn})
+var sEventDescription_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eEventDescription_RequestId})
+var sEventDescription_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iEventSeverity, Members: &mEventSeverity, Type: smithy.ShapeTypeEnum, Ext: &eEventDescription_Severity})
+var s_EventDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDescriptionList, Members: &m_EventDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_EventDescriptionList})
+var s_EventDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &e_EventDescriptionList_member})
+var s_EventMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventMessage, Type: smithy.ShapeTypeString, Ext: &e_EventMessage})
+var sEventSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSeverity, Members: &mEventSeverity, Type: smithy.ShapeTypeEnum, Ext: &eEventSeverity})
+var sEventSeverity_TRACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventSeverity_TRACE})
+var sEventSeverity_DEBUG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEBUG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventSeverity_DEBUG})
+var sEventSeverity_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventSeverity_INFO})
+var sEventSeverity_WARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventSeverity_WARN})
+var sEventSeverity_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventSeverity_ERROR})
+var sEventSeverity_FATAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FATAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventSeverity_FATAL})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sFailureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureType, Members: &mFailureType, Type: smithy.ShapeTypeEnum, Ext: &eFailureType})
+var sFailureType_UpdateCancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateCancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_UpdateCancelled})
+var sFailureType_CancellationFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancellationFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_CancellationFailed})
+var sFailureType_RollbackFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RollbackFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_RollbackFailed})
+var sFailureType_RollbackSuccessful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RollbackSuccessful", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_RollbackSuccessful})
+var sFailureType_InternalFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_InternalFailure})
+var sFailureType_InvalidEnvironmentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidEnvironmentState", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_InvalidEnvironmentState})
+var sFailureType_PermissionsError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PermissionsError", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_PermissionsError})
+var s_FileTypeExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileTypeExtension, Type: smithy.ShapeTypeString, Ext: &e_FileTypeExtension})
+var s_ForceTerminate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ForceTerminate, Type: smithy.ShapeTypeBoolean, Ext: &e_ForceTerminate})
+var s_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &e_GroupName})
+var sImageBuildConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBuildConfiguration, Members: &mImageBuildConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eImageBuildConfiguration})
+var sImageBuildConfiguration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iImageBuildType, Members: &mImageBuildType, Type: smithy.ShapeTypeEnum, Ext: &eImageBuildConfiguration_Type})
+var sImageBuildConfiguration_DockerfileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DockerfileLocation", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageBuildConfiguration_DockerfileLocation})
+var sImageBuildConfiguration_Buildpack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Buildpack", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageBuildConfiguration_Buildpack})
+var sImageBuildConfiguration_Architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Architecture", ID: &iArchitectureType, Members: &mArchitectureType, Type: smithy.ShapeTypeEnum, Ext: &eImageBuildConfiguration_Architecture})
+var sImageBuildConfiguration_CodeBuildServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeBuildServiceRole", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eImageBuildConfiguration_CodeBuildServiceRole})
+var sImageBuildConfiguration_ComputeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeType", ID: &iComputeType, Members: &mComputeType, Type: smithy.ShapeTypeEnum, Ext: &eImageBuildConfiguration_ComputeType})
+var sImageBuildConfiguration_TimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMinutes", ID: &i_BoxedInt, Type: smithy.ShapeTypeInteger, Ext: &eImageBuildConfiguration_TimeoutInMinutes})
+var sImageBuildType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageBuildType, Members: &mImageBuildType, Type: smithy.ShapeTypeEnum, Ext: &eImageBuildType})
+var sImageBuildType_docker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "docker", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuildType_docker})
+var sImageBuildType_buildpack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildpack", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageBuildType_buildpack})
+var sImageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageConfiguration, Members: &mImageConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eImageConfiguration})
+var sImageConfiguration_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iImageSource, Members: &mImageSource, Type: smithy.ShapeTypeStructure, Ext: &eImageConfiguration_Source})
+var sImageConfiguration_Build = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Build", ID: &iImageBuildConfiguration, Members: &mImageBuildConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eImageConfiguration_Build})
+var s_ImageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageId, Type: smithy.ShapeTypeString, Ext: &e_ImageId})
+var sImageSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSource, Members: &mImageSource, Type: smithy.ShapeTypeStructure, Ext: &eImageSource})
+var sImageSource_Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uri", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eImageSource_Uri})
+var s_IncludeDeleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeDeleted, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeDeleted})
+var s_IncludeDeletedBackTo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeDeletedBackTo, Type: smithy.ShapeTypeTimestamp, Ext: &e_IncludeDeletedBackTo})
+var sInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &eInstance})
+var sInstance_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eInstance_Id})
+var s_InstanceHealthList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceHealthList, Members: &m_InstanceHealthList, Type: smithy.ShapeTypeList, Ext: &e_InstanceHealthList})
+var s_InstanceHealthList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSingleInstanceHealth, Members: &mSingleInstanceHealth, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceHealthList_member})
+var sInstanceHealthSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceHealthSummary, Members: &mInstanceHealthSummary, Type: smithy.ShapeTypeStructure, Ext: &eInstanceHealthSummary})
+var sInstanceHealthSummary_NoData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoData", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_NoData})
+var sInstanceHealthSummary_Unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unknown", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_Unknown})
+var sInstanceHealthSummary_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_Pending})
+var sInstanceHealthSummary_Ok = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ok", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_Ok})
+var sInstanceHealthSummary_Info = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Info", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_Info})
+var sInstanceHealthSummary_Warning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warning", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_Warning})
+var sInstanceHealthSummary_Degraded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Degraded", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_Degraded})
+var sInstanceHealthSummary_Severe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severe", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceHealthSummary_Severe})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var s_InstanceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &e_InstanceList})
+var s_InstanceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceList_member})
+var sInstancesHealthAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstancesHealthAttribute, Members: &mInstancesHealthAttribute, Type: smithy.ShapeTypeEnum, Ext: &eInstancesHealthAttribute})
+var sInstancesHealthAttribute_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_HealthStatus})
+var sInstancesHealthAttribute_Color = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Color", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_Color})
+var sInstancesHealthAttribute_Causes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Causes", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_Causes})
+var sInstancesHealthAttribute_ApplicationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationMetrics", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_ApplicationMetrics})
+var sInstancesHealthAttribute_RefreshedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshedAt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_RefreshedAt})
+var sInstancesHealthAttribute_LaunchedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchedAt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_LaunchedAt})
+var sInstancesHealthAttribute_System = smithy.NewStaticSchema(smithy.StaticSchema{Member: "System", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_System})
+var sInstancesHealthAttribute_Deployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployment", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_Deployment})
+var sInstancesHealthAttribute_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_AvailabilityZone})
+var sInstancesHealthAttribute_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_InstanceType})
+var sInstancesHealthAttribute_All = smithy.NewStaticSchema(smithy.StaticSchema{Member: "All", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstancesHealthAttribute_All})
+var s_InstancesHealthAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstancesHealthAttributes, Members: &m_InstancesHealthAttributes, Type: smithy.ShapeTypeList, Ext: &e_InstancesHealthAttributes})
+var s_InstancesHealthAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstancesHealthAttribute, Members: &mInstancesHealthAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_InstancesHealthAttributes_member})
+var sInsufficientPrivilegesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientPrivilegesException, Members: &mInsufficientPrivilegesException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInsufficientPrivilegesException})
+var sInsufficientPrivilegesException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInsufficientPrivilegesException_message})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var sLatency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLatency, Members: &mLatency, Type: smithy.ShapeTypeStructure, Ext: &eLatency})
+var sLatency_P999 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P999", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P999})
+var sLatency_P99 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P99", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P99})
+var sLatency_P95 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P95", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P95})
+var sLatency_P90 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P90", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P90})
+var sLatency_P85 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P85", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P85})
+var sLatency_P75 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P75", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P75})
+var sLatency_P50 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P50", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P50})
+var sLatency_P10 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P10", ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &eLatency_P10})
+var sLaunchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchConfiguration, Members: &mLaunchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLaunchConfiguration})
+var sLaunchConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eLaunchConfiguration_Name})
+var s_LaunchConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchConfigurationList, Members: &m_LaunchConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_LaunchConfigurationList})
+var s_LaunchConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLaunchConfiguration, Members: &mLaunchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_LaunchConfigurationList_member})
+var s_LaunchedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchedAt, Type: smithy.ShapeTypeTimestamp, Ext: &e_LaunchedAt})
+var sLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchTemplate, Members: &mLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &eLaunchTemplate})
+var sLaunchTemplate_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eLaunchTemplate_Id})
+var s_LaunchTemplateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchTemplateList, Members: &m_LaunchTemplateList, Type: smithy.ShapeTypeList, Ext: &e_LaunchTemplateList})
+var s_LaunchTemplateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLaunchTemplate, Members: &mLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &e_LaunchTemplateList_member})
+var sListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &eListener})
+var sListener_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListener_Protocol})
+var sListener_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListener_Port})
+var s_LoadAverage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadAverage, Members: &m_LoadAverage, Type: smithy.ShapeTypeList, Ext: &e_LoadAverage})
+var s_LoadAverage_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LoadAverageValue, Type: smithy.ShapeTypeDouble, Ext: &e_LoadAverage_member})
+var s_LoadAverageValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadAverageValue, Type: smithy.ShapeTypeDouble, Ext: &e_LoadAverageValue})
+var sLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancer, Members: &mLoadBalancer, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancer})
+var sLoadBalancer_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_Name})
+var sLoadBalancerDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerDescription, Members: &mLoadBalancerDescription, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerDescription})
+var sLoadBalancerDescription_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_LoadBalancerName})
+var sLoadBalancerDescription_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerDescription_Domain})
+var sLoadBalancerDescription_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_LoadBalancerListenersDescription, Members: &m_LoadBalancerListenersDescription, Type: smithy.ShapeTypeList, Ext: &eLoadBalancerDescription_Listeners})
+var s_LoadBalancerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerList, Members: &m_LoadBalancerList, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerList})
+var s_LoadBalancerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoadBalancer, Members: &mLoadBalancer, Type: smithy.ShapeTypeStructure, Ext: &e_LoadBalancerList_member})
+var s_LoadBalancerListenersDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerListenersDescription, Members: &m_LoadBalancerListenersDescription, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerListenersDescription})
+var s_LoadBalancerListenersDescription_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &e_LoadBalancerListenersDescription_member})
+var s_Maintainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Maintainer, Type: smithy.ShapeTypeString, Ext: &e_Maintainer})
+var sManagedAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedAction, Members: &mManagedAction, Type: smithy.ShapeTypeStructure, Ext: &eManagedAction})
+var sManagedAction_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eManagedAction_ActionId})
+var sManagedAction_ActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eManagedAction_ActionDescription})
+var sManagedAction_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eManagedAction_ActionType})
+var sManagedAction_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eManagedAction_Status})
+var sManagedAction_WindowStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedAction_WindowStartTime})
+var sManagedActionHistoryItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedActionHistoryItem, Members: &mManagedActionHistoryItem, Type: smithy.ShapeTypeStructure, Ext: &eManagedActionHistoryItem})
+var sManagedActionHistoryItem_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eManagedActionHistoryItem_ActionId})
+var sManagedActionHistoryItem_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eManagedActionHistoryItem_ActionType})
+var sManagedActionHistoryItem_ActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eManagedActionHistoryItem_ActionDescription})
+var sManagedActionHistoryItem_FailureType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureType", ID: &iFailureType, Members: &mFailureType, Type: smithy.ShapeTypeEnum, Ext: &eManagedActionHistoryItem_FailureType})
+var sManagedActionHistoryItem_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iActionHistoryStatus, Members: &mActionHistoryStatus, Type: smithy.ShapeTypeEnum, Ext: &eManagedActionHistoryItem_Status})
+var sManagedActionHistoryItem_FailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eManagedActionHistoryItem_FailureDescription})
+var sManagedActionHistoryItem_ExecutedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedActionHistoryItem_ExecutedTime})
+var sManagedActionHistoryItem_FinishedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedActionHistoryItem_FinishedTime})
+var s_ManagedActionHistoryItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedActionHistoryItems, Members: &m_ManagedActionHistoryItems, Type: smithy.ShapeTypeList, Ext: &e_ManagedActionHistoryItems})
+var s_ManagedActionHistoryItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedActionHistoryItem, Members: &mManagedActionHistoryItem, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedActionHistoryItems_member})
+var s_ManagedActionHistoryMaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedActionHistoryMaxItems, Type: smithy.ShapeTypeInteger, Ext: &e_ManagedActionHistoryMaxItems})
+var sManagedActionInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedActionInvalidStateException, Members: &mManagedActionInvalidStateException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eManagedActionInvalidStateException})
+var sManagedActionInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eManagedActionInvalidStateException_message})
+var s_ManagedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedActions, Members: &m_ManagedActions, Type: smithy.ShapeTypeList, Ext: &e_ManagedActions})
+var s_ManagedActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedAction, Members: &mManagedAction, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedActions_member})
+var sMaxAgeRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaxAgeRule, Members: &mMaxAgeRule, Type: smithy.ShapeTypeStructure, Ext: &eMaxAgeRule})
+var sMaxAgeRule_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMaxAgeRule_Enabled})
+var sMaxAgeRule_MaxAgeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAgeInDays", ID: &i_BoxedInt, Type: smithy.ShapeTypeInteger, Ext: &eMaxAgeRule_MaxAgeInDays})
+var sMaxAgeRule_DeleteSourceFromS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteSourceFromS3", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMaxAgeRule_DeleteSourceFromS3})
+var sMaxCountRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaxCountRule, Members: &mMaxCountRule, Type: smithy.ShapeTypeStructure, Ext: &eMaxCountRule})
+var sMaxCountRule_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMaxCountRule_Enabled})
+var sMaxCountRule_MaxCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCount", ID: &i_BoxedInt, Type: smithy.ShapeTypeInteger, Ext: &eMaxCountRule_MaxCount})
+var sMaxCountRule_DeleteSourceFromS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteSourceFromS3", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMaxCountRule_DeleteSourceFromS3})
+var s_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &e_MaxRecords})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_NullableDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableDouble, Type: smithy.ShapeTypeDouble, Ext: &e_NullableDouble})
+var s_NullableInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &e_NullableInteger})
+var s_NullableLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableLong, Type: smithy.ShapeTypeLong, Ext: &e_NullableLong})
+var s_OperatingSystemName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperatingSystemName, Type: smithy.ShapeTypeString, Ext: &e_OperatingSystemName})
+var s_OperatingSystemVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperatingSystemVersion, Type: smithy.ShapeTypeString, Ext: &e_OperatingSystemVersion})
+var sOperationInProgressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationInProgressException, Members: &mOperationInProgressException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eOperationInProgressException})
+var sOperationInProgressException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eOperationInProgressException_message})
+var s_OperationsRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationsRole, Type: smithy.ShapeTypeString, Ext: &e_OperationsRole})
+var s_OptionNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionNamespace, Type: smithy.ShapeTypeString, Ext: &e_OptionNamespace})
+var s_OptionRestrictionMaxLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionRestrictionMaxLength, Type: smithy.ShapeTypeInteger, Ext: &e_OptionRestrictionMaxLength})
+var s_OptionRestrictionMaxValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionRestrictionMaxValue, Type: smithy.ShapeTypeInteger, Ext: &e_OptionRestrictionMaxValue})
+var s_OptionRestrictionMinValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionRestrictionMinValue, Type: smithy.ShapeTypeInteger, Ext: &e_OptionRestrictionMinValue})
+var sOptionRestrictionRegex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionRestrictionRegex, Members: &mOptionRestrictionRegex, Type: smithy.ShapeTypeStructure, Ext: &eOptionRestrictionRegex})
+var sOptionRestrictionRegex_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_RegexPattern, Type: smithy.ShapeTypeString, Ext: &eOptionRestrictionRegex_Pattern})
+var sOptionRestrictionRegex_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_RegexLabel, Type: smithy.ShapeTypeString, Ext: &eOptionRestrictionRegex_Label})
+var sOptionSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionSpecification, Members: &mOptionSpecification, Type: smithy.ShapeTypeStructure, Ext: &eOptionSpecification})
+var sOptionSpecification_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eOptionSpecification_ResourceName})
+var sOptionSpecification_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_OptionNamespace, Type: smithy.ShapeTypeString, Ext: &eOptionSpecification_Namespace})
+var sOptionSpecification_OptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionName", ID: &i_ConfigurationOptionName, Type: smithy.ShapeTypeString, Ext: &eOptionSpecification_OptionName})
+var s_OptionsSpecifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionsSpecifierList, Members: &m_OptionsSpecifierList, Type: smithy.ShapeTypeList, Ext: &e_OptionsSpecifierList})
+var s_OptionsSpecifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOptionSpecification, Members: &mOptionSpecification, Type: smithy.ShapeTypeStructure, Ext: &e_OptionsSpecifierList_member})
+var s_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &e_PlatformArn})
+var s_PlatformBranchLifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformBranchLifecycleState, Type: smithy.ShapeTypeString, Ext: &e_PlatformBranchLifecycleState})
+var s_PlatformBranchMaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformBranchMaxRecords, Type: smithy.ShapeTypeInteger, Ext: &e_PlatformBranchMaxRecords})
+var sPlatformBranchSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformBranchSummary, Members: &mPlatformBranchSummary, Type: smithy.ShapeTypeStructure, Ext: &ePlatformBranchSummary})
+var sPlatformBranchSummary_PlatformName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformName", ID: &i_PlatformName, Type: smithy.ShapeTypeString, Ext: &ePlatformBranchSummary_PlatformName})
+var sPlatformBranchSummary_BranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ePlatformBranchSummary_BranchName})
+var sPlatformBranchSummary_LifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecycleState", ID: &i_PlatformBranchLifecycleState, Type: smithy.ShapeTypeString, Ext: &ePlatformBranchSummary_LifecycleState})
+var sPlatformBranchSummary_BranchOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BranchOrder", ID: &i_BranchOrder, Type: smithy.ShapeTypeInteger, Ext: &ePlatformBranchSummary_BranchOrder})
+var sPlatformBranchSummary_SupportedTierList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedTierList", ID: &i_SupportedTierList, Members: &m_SupportedTierList, Type: smithy.ShapeTypeList, Ext: &ePlatformBranchSummary_SupportedTierList})
+var s_PlatformBranchSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformBranchSummaryList, Members: &m_PlatformBranchSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PlatformBranchSummaryList})
+var s_PlatformBranchSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformBranchSummary, Members: &mPlatformBranchSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PlatformBranchSummaryList_member})
+var s_PlatformCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformCategory, Type: smithy.ShapeTypeString, Ext: &e_PlatformCategory})
+var sPlatformDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformDescription, Members: &mPlatformDescription, Type: smithy.ShapeTypeStructure, Ext: &ePlatformDescription})
+var sPlatformDescription_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformArn})
+var sPlatformDescription_PlatformOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformOwner", ID: &i_PlatformOwner, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformOwner})
+var sPlatformDescription_PlatformName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformName", ID: &i_PlatformName, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformName})
+var sPlatformDescription_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformVersion", ID: &i_PlatformVersion, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformVersion})
+var sPlatformDescription_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_SolutionStackName})
+var sPlatformDescription_PlatformStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformStatus", ID: &iPlatformStatus, Members: &mPlatformStatus, Type: smithy.ShapeTypeEnum, Ext: &ePlatformDescription_PlatformStatus})
+var sPlatformDescription_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ePlatformDescription_DateCreated})
+var sPlatformDescription_DateUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateUpdated", ID: &i_UpdateDate, Type: smithy.ShapeTypeTimestamp, Ext: &ePlatformDescription_DateUpdated})
+var sPlatformDescription_PlatformCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformCategory", ID: &i_PlatformCategory, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformCategory})
+var sPlatformDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_Description})
+var sPlatformDescription_Maintainer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maintainer", ID: &i_Maintainer, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_Maintainer})
+var sPlatformDescription_OperatingSystemName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatingSystemName", ID: &i_OperatingSystemName, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_OperatingSystemName})
+var sPlatformDescription_OperatingSystemVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatingSystemVersion", ID: &i_OperatingSystemVersion, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_OperatingSystemVersion})
+var sPlatformDescription_ProgrammingLanguages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgrammingLanguages", ID: &i_PlatformProgrammingLanguages, Members: &m_PlatformProgrammingLanguages, Type: smithy.ShapeTypeList, Ext: &ePlatformDescription_ProgrammingLanguages})
+var sPlatformDescription_Frameworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Frameworks", ID: &i_PlatformFrameworks, Members: &m_PlatformFrameworks, Type: smithy.ShapeTypeList, Ext: &ePlatformDescription_Frameworks})
+var sPlatformDescription_CustomAmiList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAmiList", ID: &i_CustomAmiList, Members: &m_CustomAmiList, Type: smithy.ShapeTypeList, Ext: &ePlatformDescription_CustomAmiList})
+var sPlatformDescription_DefaultAmiList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAmiList", ID: &i_DefaultAmiList, Members: &m_DefaultAmiList, Type: smithy.ShapeTypeList, Ext: &ePlatformDescription_DefaultAmiList})
+var sPlatformDescription_SupportedTierList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedTierList", ID: &i_SupportedTierList, Members: &m_SupportedTierList, Type: smithy.ShapeTypeList, Ext: &ePlatformDescription_SupportedTierList})
+var sPlatformDescription_SupportedAddonList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedAddonList", ID: &i_SupportedAddonList, Members: &m_SupportedAddonList, Type: smithy.ShapeTypeList, Ext: &ePlatformDescription_SupportedAddonList})
+var sPlatformDescription_PlatformLifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformLifecycleState", ID: &i_PlatformLifecycleState, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformLifecycleState})
+var sPlatformDescription_PlatformBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformBranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformBranchName})
+var sPlatformDescription_PlatformBranchLifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformBranchLifecycleState", ID: &i_PlatformBranchLifecycleState, Type: smithy.ShapeTypeString, Ext: &ePlatformDescription_PlatformBranchLifecycleState})
+var sPlatformFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformFilter, Members: &mPlatformFilter, Type: smithy.ShapeTypeStructure, Ext: &ePlatformFilter})
+var sPlatformFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_PlatformFilterType, Type: smithy.ShapeTypeString, Ext: &ePlatformFilter_Type})
+var sPlatformFilter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &i_PlatformFilterOperator, Type: smithy.ShapeTypeString, Ext: &ePlatformFilter_Operator})
+var sPlatformFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_PlatformFilterValueList, Members: &m_PlatformFilterValueList, Type: smithy.ShapeTypeList, Ext: &ePlatformFilter_Values})
+var s_PlatformFilterOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformFilterOperator, Type: smithy.ShapeTypeString, Ext: &e_PlatformFilterOperator})
+var s_PlatformFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformFilters, Members: &m_PlatformFilters, Type: smithy.ShapeTypeList, Ext: &e_PlatformFilters})
+var s_PlatformFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformFilter, Members: &mPlatformFilter, Type: smithy.ShapeTypeStructure, Ext: &e_PlatformFilters_member})
+var s_PlatformFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformFilterType, Type: smithy.ShapeTypeString, Ext: &e_PlatformFilterType})
+var s_PlatformFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformFilterValue, Type: smithy.ShapeTypeString, Ext: &e_PlatformFilterValue})
+var s_PlatformFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformFilterValueList, Members: &m_PlatformFilterValueList, Type: smithy.ShapeTypeList, Ext: &e_PlatformFilterValueList})
+var s_PlatformFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PlatformFilterValue, Type: smithy.ShapeTypeString, Ext: &e_PlatformFilterValueList_member})
+var sPlatformFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformFramework, Members: &mPlatformFramework, Type: smithy.ShapeTypeStructure, Ext: &ePlatformFramework})
+var sPlatformFramework_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePlatformFramework_Name})
+var sPlatformFramework_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePlatformFramework_Version})
+var s_PlatformFrameworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformFrameworks, Members: &m_PlatformFrameworks, Type: smithy.ShapeTypeList, Ext: &e_PlatformFrameworks})
+var s_PlatformFrameworks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformFramework, Members: &mPlatformFramework, Type: smithy.ShapeTypeStructure, Ext: &e_PlatformFrameworks_member})
+var s_PlatformLifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformLifecycleState, Type: smithy.ShapeTypeString, Ext: &e_PlatformLifecycleState})
+var s_PlatformMaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformMaxRecords, Type: smithy.ShapeTypeInteger, Ext: &e_PlatformMaxRecords})
+var s_PlatformName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformName, Type: smithy.ShapeTypeString, Ext: &e_PlatformName})
+var s_PlatformOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformOwner, Type: smithy.ShapeTypeString, Ext: &e_PlatformOwner})
+var sPlatformProgrammingLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformProgrammingLanguage, Members: &mPlatformProgrammingLanguage, Type: smithy.ShapeTypeStructure, Ext: &ePlatformProgrammingLanguage})
+var sPlatformProgrammingLanguage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePlatformProgrammingLanguage_Name})
+var sPlatformProgrammingLanguage_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePlatformProgrammingLanguage_Version})
+var s_PlatformProgrammingLanguages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformProgrammingLanguages, Members: &m_PlatformProgrammingLanguages, Type: smithy.ShapeTypeList, Ext: &e_PlatformProgrammingLanguages})
+var s_PlatformProgrammingLanguages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformProgrammingLanguage, Members: &mPlatformProgrammingLanguage, Type: smithy.ShapeTypeStructure, Ext: &e_PlatformProgrammingLanguages_member})
+var sPlatformStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformStatus, Members: &mPlatformStatus, Type: smithy.ShapeTypeEnum, Ext: &ePlatformStatus})
+var sPlatformStatus_Creating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Creating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformStatus_Creating})
+var sPlatformStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformStatus_Failed})
+var sPlatformStatus_Ready = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ready", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformStatus_Ready})
+var sPlatformStatus_Deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformStatus_Deleting})
+var sPlatformStatus_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatformStatus_Deleted})
+var sPlatformSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformSummary, Members: &mPlatformSummary, Type: smithy.ShapeTypeStructure, Ext: &ePlatformSummary})
+var sPlatformSummary_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_PlatformArn})
+var sPlatformSummary_PlatformOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformOwner", ID: &i_PlatformOwner, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_PlatformOwner})
+var sPlatformSummary_PlatformStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformStatus", ID: &iPlatformStatus, Members: &mPlatformStatus, Type: smithy.ShapeTypeEnum, Ext: &ePlatformSummary_PlatformStatus})
+var sPlatformSummary_PlatformCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformCategory", ID: &i_PlatformCategory, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_PlatformCategory})
+var sPlatformSummary_OperatingSystemName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatingSystemName", ID: &i_OperatingSystemName, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_OperatingSystemName})
+var sPlatformSummary_OperatingSystemVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatingSystemVersion", ID: &i_OperatingSystemVersion, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_OperatingSystemVersion})
+var sPlatformSummary_SupportedTierList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedTierList", ID: &i_SupportedTierList, Members: &m_SupportedTierList, Type: smithy.ShapeTypeList, Ext: &ePlatformSummary_SupportedTierList})
+var sPlatformSummary_SupportedAddonList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedAddonList", ID: &i_SupportedAddonList, Members: &m_SupportedAddonList, Type: smithy.ShapeTypeList, Ext: &ePlatformSummary_SupportedAddonList})
+var sPlatformSummary_PlatformLifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformLifecycleState", ID: &i_PlatformLifecycleState, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_PlatformLifecycleState})
+var sPlatformSummary_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformVersion", ID: &i_PlatformVersion, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_PlatformVersion})
+var sPlatformSummary_PlatformBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformBranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_PlatformBranchName})
+var sPlatformSummary_PlatformBranchLifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformBranchLifecycleState", ID: &i_PlatformBranchLifecycleState, Type: smithy.ShapeTypeString, Ext: &ePlatformSummary_PlatformBranchLifecycleState})
+var s_PlatformSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformSummaryList, Members: &m_PlatformSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PlatformSummaryList})
+var s_PlatformSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformSummary, Members: &mPlatformSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PlatformSummaryList_member})
+var s_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformVersion, Type: smithy.ShapeTypeString, Ext: &e_PlatformVersion})
+var sPlatformVersionStillReferencedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformVersionStillReferencedException, Members: &mPlatformVersionStillReferencedException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ePlatformVersionStillReferencedException})
+var sPlatformVersionStillReferencedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ePlatformVersionStillReferencedException_message})
+var sQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &eQueue})
+var sQueue_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQueue_Name})
+var sQueue_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQueue_URL})
+var s_QueueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueList, Members: &m_QueueList, Type: smithy.ShapeTypeList, Ext: &e_QueueList})
+var s_QueueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &e_QueueList_member})
+var s_RefreshedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshedAt, Type: smithy.ShapeTypeTimestamp, Ext: &e_RefreshedAt})
+var s_RegexLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexLabel, Type: smithy.ShapeTypeString, Ext: &e_RegexLabel})
+var s_RegexPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexPattern, Type: smithy.ShapeTypeString, Ext: &e_RegexPattern})
+var s_RequestCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestCount, Type: smithy.ShapeTypeInteger, Ext: &e_RequestCount})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &e_RequestId})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceQuota, Members: &mResourceQuota, Type: smithy.ShapeTypeStructure, Ext: &eResourceQuota})
+var sResourceQuota_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &i_BoxedInt, Type: smithy.ShapeTypeInteger, Ext: &eResourceQuota_Maximum})
+var sResourceQuotas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceQuotas, Members: &mResourceQuotas, Type: smithy.ShapeTypeStructure, Ext: &eResourceQuotas})
+var sResourceQuotas_ApplicationQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationQuota", ID: &iResourceQuota, Members: &mResourceQuota, Type: smithy.ShapeTypeStructure, Ext: &eResourceQuotas_ApplicationQuota})
+var sResourceQuotas_ApplicationVersionQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationVersionQuota", ID: &iResourceQuota, Members: &mResourceQuota, Type: smithy.ShapeTypeStructure, Ext: &eResourceQuotas_ApplicationVersionQuota})
+var sResourceQuotas_EnvironmentQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentQuota", ID: &iResourceQuota, Members: &mResourceQuota, Type: smithy.ShapeTypeStructure, Ext: &eResourceQuotas_EnvironmentQuota})
+var sResourceQuotas_ConfigurationTemplateQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationTemplateQuota", ID: &iResourceQuota, Members: &mResourceQuota, Type: smithy.ShapeTypeStructure, Ext: &eResourceQuotas_ConfigurationTemplateQuota})
+var sResourceQuotas_CustomPlatformQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomPlatformQuota", ID: &iResourceQuota, Members: &mResourceQuota, Type: smithy.ShapeTypeStructure, Ext: &eResourceQuotas_CustomPlatformQuota})
+var sResourceTypeNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTypeNotSupportedException, Members: &mResourceTypeNotSupportedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eResourceTypeNotSupportedException})
+var sResourceTypeNotSupportedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceTypeNotSupportedException_message})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eS3Location})
+var sS3Location_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eS3Location_S3Bucket})
+var sS3Location_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eS3Location_S3Key})
+var sS3LocationNotInServiceRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LocationNotInServiceRegionException, Members: &mS3LocationNotInServiceRegionException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eS3LocationNotInServiceRegionException})
+var sS3LocationNotInServiceRegionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eS3LocationNotInServiceRegionException_message})
+var sS3SubscriptionRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3SubscriptionRequiredException, Members: &mS3SubscriptionRequiredException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eS3SubscriptionRequiredException})
+var sS3SubscriptionRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eS3SubscriptionRequiredException_message})
+var s_SampleTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_SampleTimestamp})
+var sSearchFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFilter, Members: &mSearchFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilter})
+var sSearchFilter_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &i_SearchFilterAttribute, Type: smithy.ShapeTypeString, Ext: &eSearchFilter_Attribute})
+var sSearchFilter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &i_SearchFilterOperator, Type: smithy.ShapeTypeString, Ext: &eSearchFilter_Operator})
+var sSearchFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_SearchFilterValues, Members: &m_SearchFilterValues, Type: smithy.ShapeTypeList, Ext: &eSearchFilter_Values})
+var s_SearchFilterAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilterAttribute, Type: smithy.ShapeTypeString, Ext: &e_SearchFilterAttribute})
+var s_SearchFilterOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilterOperator, Type: smithy.ShapeTypeString, Ext: &e_SearchFilterOperator})
+var s_SearchFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilters, Members: &m_SearchFilters, Type: smithy.ShapeTypeList, Ext: &e_SearchFilters})
+var s_SearchFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchFilter, Members: &mSearchFilter, Type: smithy.ShapeTypeStructure, Ext: &e_SearchFilters_member})
+var s_SearchFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilterValue, Type: smithy.ShapeTypeString, Ext: &e_SearchFilterValue})
+var s_SearchFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilterValues, Members: &m_SearchFilterValues, Type: smithy.ShapeTypeList, Ext: &e_SearchFilterValues})
+var s_SearchFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SearchFilterValue, Type: smithy.ShapeTypeString, Ext: &e_SearchFilterValues_member})
+var sSingleInstanceHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingleInstanceHealth, Members: &mSingleInstanceHealth, Type: smithy.ShapeTypeStructure, Ext: &eSingleInstanceHealth})
+var sSingleInstanceHealth_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eSingleInstanceHealth_InstanceId})
+var sSingleInstanceHealth_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSingleInstanceHealth_HealthStatus})
+var sSingleInstanceHealth_Color = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Color", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSingleInstanceHealth_Color})
+var sSingleInstanceHealth_Causes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Causes", ID: &i_Causes, Members: &m_Causes, Type: smithy.ShapeTypeList, Ext: &eSingleInstanceHealth_Causes})
+var sSingleInstanceHealth_LaunchedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchedAt", ID: &i_LaunchedAt, Type: smithy.ShapeTypeTimestamp, Ext: &eSingleInstanceHealth_LaunchedAt})
+var sSingleInstanceHealth_ApplicationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationMetrics", ID: &iApplicationMetrics, Members: &mApplicationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eSingleInstanceHealth_ApplicationMetrics})
+var sSingleInstanceHealth_System = smithy.NewStaticSchema(smithy.StaticSchema{Member: "System", ID: &iSystemStatus, Members: &mSystemStatus, Type: smithy.ShapeTypeStructure, Ext: &eSingleInstanceHealth_System})
+var sSingleInstanceHealth_Deployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployment", ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure, Ext: &eSingleInstanceHealth_Deployment})
+var sSingleInstanceHealth_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSingleInstanceHealth_AvailabilityZone})
+var sSingleInstanceHealth_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSingleInstanceHealth_InstanceType})
+var sSolutionStackDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSolutionStackDescription, Members: &mSolutionStackDescription, Type: smithy.ShapeTypeStructure, Ext: &eSolutionStackDescription})
+var sSolutionStackDescription_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eSolutionStackDescription_SolutionStackName})
+var sSolutionStackDescription_PermittedFileTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PermittedFileTypes", ID: &i_SolutionStackFileTypeList, Members: &m_SolutionStackFileTypeList, Type: smithy.ShapeTypeList, Ext: &eSolutionStackDescription_PermittedFileTypes})
+var s_SolutionStackFileTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SolutionStackFileTypeList, Members: &m_SolutionStackFileTypeList, Type: smithy.ShapeTypeList, Ext: &e_SolutionStackFileTypeList})
+var s_SolutionStackFileTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FileTypeExtension, Type: smithy.ShapeTypeString, Ext: &e_SolutionStackFileTypeList_member})
+var s_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &e_SolutionStackName})
+var sSourceBuildInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceBuildInformation, Members: &mSourceBuildInformation, Type: smithy.ShapeTypeStructure, Ext: &eSourceBuildInformation})
+var sSourceBuildInformation_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eSourceBuildInformation_SourceType})
+var sSourceBuildInformation_SourceRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceRepository", ID: &iSourceRepository, Members: &mSourceRepository, Type: smithy.ShapeTypeEnum, Ext: &eSourceBuildInformation_SourceRepository})
+var sSourceBuildInformation_SourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocation", ID: &i_SourceLocation, Type: smithy.ShapeTypeString, Ext: &eSourceBuildInformation_SourceLocation})
+var sSourceBundleDeletionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceBundleDeletionException, Members: &mSourceBundleDeletionException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eSourceBundleDeletionException})
+var sSourceBundleDeletionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSourceBundleDeletionException_message})
+var sSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSourceConfiguration})
+var sSourceConfiguration_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eSourceConfiguration_ApplicationName})
+var sSourceConfiguration_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eSourceConfiguration_TemplateName})
+var s_SourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceLocation, Type: smithy.ShapeTypeString, Ext: &e_SourceLocation})
+var sSourceRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceRepository, Members: &mSourceRepository, Type: smithy.ShapeTypeEnum, Ext: &eSourceRepository})
+var sSourceRepository_CodeCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeCommit", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceRepository_CodeCommit})
+var sSourceRepository_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceRepository_S3})
+var sSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eSourceType})
+var sSourceType_Git = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Git", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_Git})
+var sSourceType_Zip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zip", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_Zip})
+var sStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusCodes, Members: &mStatusCodes, Type: smithy.ShapeTypeStructure, Ext: &eStatusCodes})
+var sStatusCodes_Status2xx = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status2xx", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eStatusCodes_Status2xx})
+var sStatusCodes_Status3xx = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status3xx", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eStatusCodes_Status3xx})
+var sStatusCodes_Status4xx = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status4xx", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eStatusCodes_Status4xx})
+var sStatusCodes_Status5xx = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status5xx", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eStatusCodes_Status5xx})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_SupportedAddon = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedAddon, Type: smithy.ShapeTypeString, Ext: &e_SupportedAddon})
+var s_SupportedAddonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedAddonList, Members: &m_SupportedAddonList, Type: smithy.ShapeTypeList, Ext: &e_SupportedAddonList})
+var s_SupportedAddonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SupportedAddon, Type: smithy.ShapeTypeString, Ext: &e_SupportedAddonList_member})
+var s_SupportedTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedTier, Type: smithy.ShapeTypeString, Ext: &e_SupportedTier})
+var s_SupportedTierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedTierList, Members: &m_SupportedTierList, Type: smithy.ShapeTypeList, Ext: &e_SupportedTierList})
+var s_SupportedTierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SupportedTier, Type: smithy.ShapeTypeString, Ext: &e_SupportedTierList_member})
+var sSystemStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSystemStatus, Members: &mSystemStatus, Type: smithy.ShapeTypeStructure, Ext: &eSystemStatus})
+var sSystemStatus_CPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CPUUtilization", ID: &iCPUUtilization, Members: &mCPUUtilization, Type: smithy.ShapeTypeStructure, Ext: &eSystemStatus_CPUUtilization})
+var sSystemStatus_LoadAverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadAverage", ID: &i_LoadAverage, Members: &m_LoadAverage, Type: smithy.ShapeTypeList, Ext: &eSystemStatus_LoadAverage})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &e_Tags})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_Tags_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TerminateEnvForce = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminateEnvForce, Type: smithy.ShapeTypeBoolean, Ext: &e_TerminateEnvForce})
+var s_TerminateEnvironmentResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminateEnvironmentResources, Type: smithy.ShapeTypeBoolean, Ext: &e_TerminateEnvironmentResources})
+var s_TimeFilterEnd = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeFilterEnd, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeFilterEnd})
+var s_TimeFilterStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeFilterStart, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeFilterStart})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var sTooManyApplicationsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyApplicationsException, Members: &mTooManyApplicationsException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eTooManyApplicationsException})
+var sTooManyApplicationsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyApplicationsException_message})
+var sTooManyApplicationVersionsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyApplicationVersionsException, Members: &mTooManyApplicationVersionsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTooManyApplicationVersionsException})
+var sTooManyApplicationVersionsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyApplicationVersionsException_message})
+var sTooManyBucketsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyBucketsException, Members: &mTooManyBucketsException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eTooManyBucketsException})
+var sTooManyBucketsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyBucketsException_message})
+var sTooManyConfigurationTemplatesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyConfigurationTemplatesException, Members: &mTooManyConfigurationTemplatesException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eTooManyConfigurationTemplatesException})
+var sTooManyConfigurationTemplatesException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyConfigurationTemplatesException_message})
+var sTooManyEnvironmentsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyEnvironmentsException, Members: &mTooManyEnvironmentsException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eTooManyEnvironmentsException})
+var sTooManyEnvironmentsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyEnvironmentsException_message})
+var sTooManyPlatformsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyPlatformsException, Members: &mTooManyPlatformsException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eTooManyPlatformsException})
+var sTooManyPlatformsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyPlatformsException_message})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var sTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrigger, Members: &mTrigger, Type: smithy.ShapeTypeStructure, Ext: &eTrigger})
+var sTrigger_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eTrigger_Name})
+var s_TriggerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TriggerList, Members: &m_TriggerList, Type: smithy.ShapeTypeList, Ext: &e_TriggerList})
+var s_TriggerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrigger, Members: &mTrigger, Type: smithy.ShapeTypeStructure, Ext: &e_TriggerList_member})
+var s_UpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_UpdateDate})
+var s_UserDefinedOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserDefinedOption, Type: smithy.ShapeTypeBoolean, Ext: &e_UserDefinedOption})
+var sValidationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationMessage, Members: &mValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &eValidationMessage})
+var sValidationMessage_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ValidationMessageString, Type: smithy.ShapeTypeString, Ext: &eValidationMessage_Message})
+var sValidationMessage_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iValidationSeverity, Members: &mValidationSeverity, Type: smithy.ShapeTypeEnum, Ext: &eValidationMessage_Severity})
+var sValidationMessage_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_OptionNamespace, Type: smithy.ShapeTypeString, Ext: &eValidationMessage_Namespace})
+var sValidationMessage_OptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionName", ID: &i_ConfigurationOptionName, Type: smithy.ShapeTypeString, Ext: &eValidationMessage_OptionName})
+var s_ValidationMessagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationMessagesList, Members: &m_ValidationMessagesList, Type: smithy.ShapeTypeList, Ext: &e_ValidationMessagesList})
+var s_ValidationMessagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationMessage, Members: &mValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationMessagesList_member})
+var s_ValidationMessageString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationMessageString, Type: smithy.ShapeTypeString, Ext: &e_ValidationMessageString})
+var sValidationSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationSeverity, Members: &mValidationSeverity, Type: smithy.ShapeTypeEnum, Ext: &eValidationSeverity})
+var sValidationSeverity_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationSeverity_error})
+var sValidationSeverity_warning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warning", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationSeverity_warning})
+var s_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &e_VersionLabel})
+var s_VersionLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionLabels, Members: &m_VersionLabels, Type: smithy.ShapeTypeList, Ext: &e_VersionLabels})
+var s_VersionLabels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &e_VersionLabels_member})
+var s_VersionLabelsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionLabelsList, Members: &m_VersionLabelsList, Type: smithy.ShapeTypeList, Ext: &e_VersionLabelsList})
+var s_VersionLabelsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &e_VersionLabelsList_member})
+var s_VirtualizationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualizationType, Type: smithy.ShapeTypeString, Ext: &e_VirtualizationType})
+var sAbortEnvironmentUpdateMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAbortEnvironmentUpdateMessage, Members: &mAbortEnvironmentUpdateMessage, Type: smithy.ShapeTypeStructure, Ext: &eAbortEnvironmentUpdateMessage})
+var sAbortEnvironmentUpdateMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eAbortEnvironmentUpdateMessage_EnvironmentId})
+var sAbortEnvironmentUpdateMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eAbortEnvironmentUpdateMessage_EnvironmentName})
+var sApplyEnvironmentManagedActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyEnvironmentManagedActionRequest, Members: &mApplyEnvironmentManagedActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eApplyEnvironmentManagedActionRequest})
+var sApplyEnvironmentManagedActionRequest_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyEnvironmentManagedActionRequest_EnvironmentName})
+var sApplyEnvironmentManagedActionRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyEnvironmentManagedActionRequest_EnvironmentId})
+var sApplyEnvironmentManagedActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyEnvironmentManagedActionRequest_ActionId})
+var sApplyEnvironmentManagedActionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyEnvironmentManagedActionResult, Members: &mApplyEnvironmentManagedActionResult, Type: smithy.ShapeTypeStructure, Ext: &eApplyEnvironmentManagedActionResult})
+var sApplyEnvironmentManagedActionResult_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyEnvironmentManagedActionResult_ActionId})
+var sApplyEnvironmentManagedActionResult_ActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyEnvironmentManagedActionResult_ActionDescription})
+var sApplyEnvironmentManagedActionResult_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eApplyEnvironmentManagedActionResult_ActionType})
+var sApplyEnvironmentManagedActionResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyEnvironmentManagedActionResult_Status})
+var sAssociateEnvironmentOperationsRoleMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateEnvironmentOperationsRoleMessage, Members: &mAssociateEnvironmentOperationsRoleMessage, Type: smithy.ShapeTypeStructure, Ext: &eAssociateEnvironmentOperationsRoleMessage})
+var sAssociateEnvironmentOperationsRoleMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eAssociateEnvironmentOperationsRoleMessage_EnvironmentName})
+var sAssociateEnvironmentOperationsRoleMessage_OperationsRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationsRole", ID: &i_OperationsRole, Type: smithy.ShapeTypeString, Ext: &eAssociateEnvironmentOperationsRoleMessage_OperationsRole})
+var sCheckDNSAvailabilityMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDNSAvailabilityMessage, Members: &mCheckDNSAvailabilityMessage, Type: smithy.ShapeTypeStructure, Ext: &eCheckDNSAvailabilityMessage})
+var sCheckDNSAvailabilityMessage_CNAMEPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNAMEPrefix", ID: &i_DNSCnamePrefix, Type: smithy.ShapeTypeString, Ext: &eCheckDNSAvailabilityMessage_CNAMEPrefix})
+var sCheckDNSAvailabilityResultMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDNSAvailabilityResultMessage, Members: &mCheckDNSAvailabilityResultMessage, Type: smithy.ShapeTypeStructure, Ext: &eCheckDNSAvailabilityResultMessage})
+var sCheckDNSAvailabilityResultMessage_Available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Available", ID: &i_CnameAvailability, Type: smithy.ShapeTypeBoolean, Ext: &eCheckDNSAvailabilityResultMessage_Available})
+var sCheckDNSAvailabilityResultMessage_FullyQualifiedCNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FullyQualifiedCNAME", ID: &i_DNSCname, Type: smithy.ShapeTypeString, Ext: &eCheckDNSAvailabilityResultMessage_FullyQualifiedCNAME})
+var sComposeEnvironmentsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComposeEnvironmentsMessage, Members: &mComposeEnvironmentsMessage, Type: smithy.ShapeTypeStructure, Ext: &eComposeEnvironmentsMessage})
+var sComposeEnvironmentsMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eComposeEnvironmentsMessage_ApplicationName})
+var sComposeEnvironmentsMessage_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eComposeEnvironmentsMessage_GroupName})
+var sComposeEnvironmentsMessage_VersionLabels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabels", ID: &i_VersionLabels, Members: &m_VersionLabels, Type: smithy.ShapeTypeList, Ext: &eComposeEnvironmentsMessage_VersionLabels})
+var sEnvironmentDescriptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentDescriptionsMessage, Members: &mEnvironmentDescriptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentDescriptionsMessage})
+var sEnvironmentDescriptionsMessage_Environments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environments", ID: &i_EnvironmentDescriptionsList, Members: &m_EnvironmentDescriptionsList, Type: smithy.ShapeTypeList, Ext: &eEnvironmentDescriptionsMessage_Environments})
+var sEnvironmentDescriptionsMessage_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eEnvironmentDescriptionsMessage_NextToken})
+var sCreateApplicationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationMessage, Members: &mCreateApplicationMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationMessage})
+var sCreateApplicationMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationMessage_ApplicationName})
+var sCreateApplicationMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationMessage_Description})
+var sCreateApplicationMessage_ResourceLifecycleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLifecycleConfig", ID: &iApplicationResourceLifecycleConfig, Members: &mApplicationResourceLifecycleConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationMessage_ResourceLifecycleConfig})
+var sCreateApplicationMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationMessage_Tags})
+var sApplicationDescriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationDescriptionMessage, Members: &mApplicationDescriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eApplicationDescriptionMessage})
+var sApplicationDescriptionMessage_Application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Application", ID: &iApplicationDescription, Members: &mApplicationDescription, Type: smithy.ShapeTypeStructure, Ext: &eApplicationDescriptionMessage_Application})
+var sCreateApplicationVersionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationVersionMessage, Members: &mCreateApplicationVersionMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationVersionMessage})
+var sCreateApplicationVersionMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationVersionMessage_ApplicationName})
+var sCreateApplicationVersionMessage_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationVersionMessage_VersionLabel})
+var sCreateApplicationVersionMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationVersionMessage_Description})
+var sCreateApplicationVersionMessage_SourceBuildInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBuildInformation", ID: &iSourceBuildInformation, Members: &mSourceBuildInformation, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationVersionMessage_SourceBuildInformation})
+var sCreateApplicationVersionMessage_SourceBundle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBundle", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationVersionMessage_SourceBundle})
+var sCreateApplicationVersionMessage_BuildConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuildConfiguration", ID: &iBuildConfiguration, Members: &mBuildConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationVersionMessage_BuildConfiguration})
+var sCreateApplicationVersionMessage_AutoCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoCreateApplication", ID: &i_AutoCreateApplication, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApplicationVersionMessage_AutoCreateApplication})
+var sCreateApplicationVersionMessage_Process = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Process", ID: &i_ApplicationVersionProccess, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApplicationVersionMessage_Process})
+var sCreateApplicationVersionMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationVersionMessage_Tags})
+var sCreateApplicationVersionMessage_ImageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageConfiguration", ID: &iImageConfiguration, Members: &mImageConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationVersionMessage_ImageConfiguration})
+var sApplicationVersionDescriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationVersionDescriptionMessage, Members: &mApplicationVersionDescriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescriptionMessage})
+var sApplicationVersionDescriptionMessage_ApplicationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationVersion", ID: &iApplicationVersionDescription, Members: &mApplicationVersionDescription, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescriptionMessage_ApplicationVersion})
+var sCreateConfigurationTemplateMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationTemplateMessage, Members: &mCreateConfigurationTemplateMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationTemplateMessage})
+var sCreateConfigurationTemplateMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationTemplateMessage_ApplicationName})
+var sCreateConfigurationTemplateMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationTemplateMessage_TemplateName})
+var sCreateConfigurationTemplateMessage_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationTemplateMessage_SolutionStackName})
+var sCreateConfigurationTemplateMessage_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationTemplateMessage_PlatformArn})
+var sCreateConfigurationTemplateMessage_SourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceConfiguration", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationTemplateMessage_SourceConfiguration})
+var sCreateConfigurationTemplateMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationTemplateMessage_EnvironmentId})
+var sCreateConfigurationTemplateMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationTemplateMessage_Description})
+var sCreateConfigurationTemplateMessage_OptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionSettings", ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &eCreateConfigurationTemplateMessage_OptionSettings})
+var sCreateConfigurationTemplateMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateConfigurationTemplateMessage_Tags})
+var sCreateEnvironmentMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentMessage, Members: &mCreateEnvironmentMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateEnvironmentMessage})
+var sCreateEnvironmentMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_ApplicationName})
+var sCreateEnvironmentMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_EnvironmentName})
+var sCreateEnvironmentMessage_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_GroupName})
+var sCreateEnvironmentMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_Description})
+var sCreateEnvironmentMessage_CNAMEPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNAMEPrefix", ID: &i_DNSCnamePrefix, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_CNAMEPrefix})
+var sCreateEnvironmentMessage_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iEnvironmentTier, Members: &mEnvironmentTier, Type: smithy.ShapeTypeStructure, Ext: &eCreateEnvironmentMessage_Tier})
+var sCreateEnvironmentMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateEnvironmentMessage_Tags})
+var sCreateEnvironmentMessage_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_VersionLabel})
+var sCreateEnvironmentMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_TemplateName})
+var sCreateEnvironmentMessage_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_SolutionStackName})
+var sCreateEnvironmentMessage_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_PlatformArn})
+var sCreateEnvironmentMessage_OptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionSettings", ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &eCreateEnvironmentMessage_OptionSettings})
+var sCreateEnvironmentMessage_OptionsToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionsToRemove", ID: &i_OptionsSpecifierList, Members: &m_OptionsSpecifierList, Type: smithy.ShapeTypeList, Ext: &eCreateEnvironmentMessage_OptionsToRemove})
+var sCreateEnvironmentMessage_OperationsRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationsRole", ID: &i_OperationsRole, Type: smithy.ShapeTypeString, Ext: &eCreateEnvironmentMessage_OperationsRole})
+var sCreatePlatformVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformVersionRequest, Members: &mCreatePlatformVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformVersionRequest})
+var sCreatePlatformVersionRequest_PlatformName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformName", ID: &i_PlatformName, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformVersionRequest_PlatformName})
+var sCreatePlatformVersionRequest_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformVersion", ID: &i_PlatformVersion, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformVersionRequest_PlatformVersion})
+var sCreatePlatformVersionRequest_PlatformDefinitionBundle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformDefinitionBundle", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformVersionRequest_PlatformDefinitionBundle})
+var sCreatePlatformVersionRequest_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformVersionRequest_EnvironmentName})
+var sCreatePlatformVersionRequest_OptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionSettings", ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &eCreatePlatformVersionRequest_OptionSettings})
+var sCreatePlatformVersionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreatePlatformVersionRequest_Tags})
+var sCreatePlatformVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformVersionResult, Members: &mCreatePlatformVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformVersionResult})
+var sCreatePlatformVersionResult_PlatformSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformSummary", ID: &iPlatformSummary, Members: &mPlatformSummary, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformVersionResult_PlatformSummary})
+var sCreatePlatformVersionResult_Builder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Builder", ID: &iBuilder, Members: &mBuilder, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformVersionResult_Builder})
+var sCreateStorageLocationResultMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorageLocationResultMessage, Members: &mCreateStorageLocationResultMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateStorageLocationResultMessage})
+var sCreateStorageLocationResultMessage_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eCreateStorageLocationResultMessage_S3Bucket})
+var sDeleteApplicationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationMessage, Members: &mDeleteApplicationMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationMessage})
+var sDeleteApplicationMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDeleteApplicationMessage_ApplicationName})
+var sDeleteApplicationMessage_TerminateEnvByForce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminateEnvByForce", ID: &i_TerminateEnvForce, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteApplicationMessage_TerminateEnvByForce})
+var sDeleteApplicationVersionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationVersionMessage, Members: &mDeleteApplicationVersionMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationVersionMessage})
+var sDeleteApplicationVersionMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDeleteApplicationVersionMessage_ApplicationName})
+var sDeleteApplicationVersionMessage_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eDeleteApplicationVersionMessage_VersionLabel})
+var sDeleteApplicationVersionMessage_DeleteSourceBundle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteSourceBundle", ID: &i_DeleteSourceBundle, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteApplicationVersionMessage_DeleteSourceBundle})
+var sDeleteConfigurationTemplateMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationTemplateMessage, Members: &mDeleteConfigurationTemplateMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationTemplateMessage})
+var sDeleteConfigurationTemplateMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationTemplateMessage_ApplicationName})
+var sDeleteConfigurationTemplateMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationTemplateMessage_TemplateName})
+var sDeleteEnvironmentConfigurationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentConfigurationMessage, Members: &mDeleteEnvironmentConfigurationMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEnvironmentConfigurationMessage})
+var sDeleteEnvironmentConfigurationMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDeleteEnvironmentConfigurationMessage_ApplicationName})
+var sDeleteEnvironmentConfigurationMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDeleteEnvironmentConfigurationMessage_EnvironmentName})
+var sDeletePlatformVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlatformVersionRequest, Members: &mDeletePlatformVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlatformVersionRequest})
+var sDeletePlatformVersionRequest_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eDeletePlatformVersionRequest_PlatformArn})
+var sDeletePlatformVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlatformVersionResult, Members: &mDeletePlatformVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlatformVersionResult})
+var sDeletePlatformVersionResult_PlatformSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformSummary", ID: &iPlatformSummary, Members: &mPlatformSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlatformVersionResult_PlatformSummary})
+var sDescribeAccountAttributesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountAttributesResult, Members: &mDescribeAccountAttributesResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccountAttributesResult})
+var sDescribeAccountAttributesResult_ResourceQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceQuotas", ID: &iResourceQuotas, Members: &mResourceQuotas, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccountAttributesResult_ResourceQuotas})
+var sDescribeApplicationsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationsMessage, Members: &mDescribeApplicationsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationsMessage})
+var sDescribeApplicationsMessage_ApplicationNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationNames", ID: &i_ApplicationNamesList, Members: &m_ApplicationNamesList, Type: smithy.ShapeTypeList, Ext: &eDescribeApplicationsMessage_ApplicationNames})
+var sApplicationDescriptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationDescriptionsMessage, Members: &mApplicationDescriptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eApplicationDescriptionsMessage})
+var sApplicationDescriptionsMessage_Applications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Applications", ID: &i_ApplicationDescriptionList, Members: &m_ApplicationDescriptionList, Type: smithy.ShapeTypeList, Ext: &eApplicationDescriptionsMessage_Applications})
+var sDescribeApplicationVersionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationVersionsMessage, Members: &mDescribeApplicationVersionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationVersionsMessage})
+var sDescribeApplicationVersionsMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationVersionsMessage_ApplicationName})
+var sDescribeApplicationVersionsMessage_VersionLabels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabels", ID: &i_VersionLabelsList, Members: &m_VersionLabelsList, Type: smithy.ShapeTypeList, Ext: &eDescribeApplicationVersionsMessage_VersionLabels})
+var sDescribeApplicationVersionsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eDescribeApplicationVersionsMessage_MaxRecords})
+var sDescribeApplicationVersionsMessage_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationVersionsMessage_NextToken})
+var sApplicationVersionDescriptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationVersionDescriptionsMessage, Members: &mApplicationVersionDescriptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eApplicationVersionDescriptionsMessage})
+var sApplicationVersionDescriptionsMessage_ApplicationVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationVersions", ID: &i_ApplicationVersionDescriptionList, Members: &m_ApplicationVersionDescriptionList, Type: smithy.ShapeTypeList, Ext: &eApplicationVersionDescriptionsMessage_ApplicationVersions})
+var sApplicationVersionDescriptionsMessage_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eApplicationVersionDescriptionsMessage_NextToken})
+var sDescribeConfigurationOptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationOptionsMessage, Members: &mDescribeConfigurationOptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationOptionsMessage})
+var sDescribeConfigurationOptionsMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationOptionsMessage_ApplicationName})
+var sDescribeConfigurationOptionsMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationOptionsMessage_TemplateName})
+var sDescribeConfigurationOptionsMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationOptionsMessage_EnvironmentName})
+var sDescribeConfigurationOptionsMessage_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationOptionsMessage_SolutionStackName})
+var sDescribeConfigurationOptionsMessage_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationOptionsMessage_PlatformArn})
+var sDescribeConfigurationOptionsMessage_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_OptionsSpecifierList, Members: &m_OptionsSpecifierList, Type: smithy.ShapeTypeList, Ext: &eDescribeConfigurationOptionsMessage_Options})
+var sConfigurationOptionsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationOptionsDescription, Members: &mConfigurationOptionsDescription, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationOptionsDescription})
+var sConfigurationOptionsDescription_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionsDescription_SolutionStackName})
+var sConfigurationOptionsDescription_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eConfigurationOptionsDescription_PlatformArn})
+var sConfigurationOptionsDescription_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_ConfigurationOptionDescriptionsList, Members: &m_ConfigurationOptionDescriptionsList, Type: smithy.ShapeTypeList, Ext: &eConfigurationOptionsDescription_Options})
+var sDescribeConfigurationSettingsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationSettingsMessage, Members: &mDescribeConfigurationSettingsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationSettingsMessage})
+var sDescribeConfigurationSettingsMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationSettingsMessage_ApplicationName})
+var sDescribeConfigurationSettingsMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationSettingsMessage_TemplateName})
+var sDescribeConfigurationSettingsMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationSettingsMessage_EnvironmentName})
+var sConfigurationSettingsDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSettingsDescriptions, Members: &mConfigurationSettingsDescriptions, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationSettingsDescriptions})
+var sConfigurationSettingsDescriptions_ConfigurationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSettings", ID: &i_ConfigurationSettingsDescriptionList, Members: &m_ConfigurationSettingsDescriptionList, Type: smithy.ShapeTypeList, Ext: &eConfigurationSettingsDescriptions_ConfigurationSettings})
+var sDescribeEnvironmentHealthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentHealthRequest, Members: &mDescribeEnvironmentHealthRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentHealthRequest})
+var sDescribeEnvironmentHealthRequest_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentHealthRequest_EnvironmentName})
+var sDescribeEnvironmentHealthRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentHealthRequest_EnvironmentId})
+var sDescribeEnvironmentHealthRequest_AttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeNames", ID: &i_EnvironmentHealthAttributes, Members: &m_EnvironmentHealthAttributes, Type: smithy.ShapeTypeList, Ext: &eDescribeEnvironmentHealthRequest_AttributeNames})
+var sDescribeEnvironmentHealthResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentHealthResult, Members: &mDescribeEnvironmentHealthResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentHealthResult})
+var sDescribeEnvironmentHealthResult_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentHealthResult_EnvironmentName})
+var sDescribeEnvironmentHealthResult_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentHealthResult_HealthStatus})
+var sDescribeEnvironmentHealthResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEnvironmentHealth, Members: &mEnvironmentHealth, Type: smithy.ShapeTypeEnum, Ext: &eDescribeEnvironmentHealthResult_Status})
+var sDescribeEnvironmentHealthResult_Color = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Color", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentHealthResult_Color})
+var sDescribeEnvironmentHealthResult_Causes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Causes", ID: &i_Causes, Members: &m_Causes, Type: smithy.ShapeTypeList, Ext: &eDescribeEnvironmentHealthResult_Causes})
+var sDescribeEnvironmentHealthResult_ApplicationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationMetrics", ID: &iApplicationMetrics, Members: &mApplicationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentHealthResult_ApplicationMetrics})
+var sDescribeEnvironmentHealthResult_InstancesHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstancesHealth", ID: &iInstanceHealthSummary, Members: &mInstanceHealthSummary, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentHealthResult_InstancesHealth})
+var sDescribeEnvironmentHealthResult_RefreshedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshedAt", ID: &i_RefreshedAt, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEnvironmentHealthResult_RefreshedAt})
+var sDescribeEnvironmentManagedActionHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentManagedActionHistoryRequest, Members: &mDescribeEnvironmentManagedActionHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentManagedActionHistoryRequest})
+var sDescribeEnvironmentManagedActionHistoryRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentManagedActionHistoryRequest_EnvironmentId})
+var sDescribeEnvironmentManagedActionHistoryRequest_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentManagedActionHistoryRequest_EnvironmentName})
+var sDescribeEnvironmentManagedActionHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentManagedActionHistoryRequest_NextToken})
+var sDescribeEnvironmentManagedActionHistoryRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_ManagedActionHistoryMaxItems, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEnvironmentManagedActionHistoryRequest_MaxItems})
+var sDescribeEnvironmentManagedActionHistoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentManagedActionHistoryResult, Members: &mDescribeEnvironmentManagedActionHistoryResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentManagedActionHistoryResult})
+var sDescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedActionHistoryItems", ID: &i_ManagedActionHistoryItems, Members: &m_ManagedActionHistoryItems, Type: smithy.ShapeTypeList, Ext: &eDescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems})
+var sDescribeEnvironmentManagedActionHistoryResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentManagedActionHistoryResult_NextToken})
+var sDescribeEnvironmentManagedActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentManagedActionsRequest, Members: &mDescribeEnvironmentManagedActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentManagedActionsRequest})
+var sDescribeEnvironmentManagedActionsRequest_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentManagedActionsRequest_EnvironmentName})
+var sDescribeEnvironmentManagedActionsRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentManagedActionsRequest_EnvironmentId})
+var sDescribeEnvironmentManagedActionsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeEnvironmentManagedActionsRequest_Status})
+var sDescribeEnvironmentManagedActionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentManagedActionsResult, Members: &mDescribeEnvironmentManagedActionsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentManagedActionsResult})
+var sDescribeEnvironmentManagedActionsResult_ManagedActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedActions", ID: &i_ManagedActions, Members: &m_ManagedActions, Type: smithy.ShapeTypeList, Ext: &eDescribeEnvironmentManagedActionsResult_ManagedActions})
+var sDescribeEnvironmentResourcesMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentResourcesMessage, Members: &mDescribeEnvironmentResourcesMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentResourcesMessage})
+var sDescribeEnvironmentResourcesMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentResourcesMessage_EnvironmentId})
+var sDescribeEnvironmentResourcesMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentResourcesMessage_EnvironmentName})
+var sEnvironmentResourceDescriptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentResourceDescriptionsMessage, Members: &mEnvironmentResourceDescriptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentResourceDescriptionsMessage})
+var sEnvironmentResourceDescriptionsMessage_EnvironmentResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentResources", ID: &iEnvironmentResourceDescription, Members: &mEnvironmentResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentResourceDescriptionsMessage_EnvironmentResources})
+var sDescribeEnvironmentsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEnvironmentsMessage, Members: &mDescribeEnvironmentsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEnvironmentsMessage})
+var sDescribeEnvironmentsMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentsMessage_ApplicationName})
+var sDescribeEnvironmentsMessage_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentsMessage_VersionLabel})
+var sDescribeEnvironmentsMessage_EnvironmentIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentIds", ID: &i_EnvironmentIdList, Members: &m_EnvironmentIdList, Type: smithy.ShapeTypeList, Ext: &eDescribeEnvironmentsMessage_EnvironmentIds})
+var sDescribeEnvironmentsMessage_EnvironmentNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentNames", ID: &i_EnvironmentNamesList, Members: &m_EnvironmentNamesList, Type: smithy.ShapeTypeList, Ext: &eDescribeEnvironmentsMessage_EnvironmentNames})
+var sDescribeEnvironmentsMessage_IncludeDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeDeleted", ID: &i_IncludeDeleted, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeEnvironmentsMessage_IncludeDeleted})
+var sDescribeEnvironmentsMessage_IncludedDeletedBackTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedDeletedBackTo", ID: &i_IncludeDeletedBackTo, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEnvironmentsMessage_IncludedDeletedBackTo})
+var sDescribeEnvironmentsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEnvironmentsMessage_MaxRecords})
+var sDescribeEnvironmentsMessage_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeEnvironmentsMessage_NextToken})
+var sDescribeEventsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsMessage, Members: &mDescribeEventsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsMessage})
+var sDescribeEventsMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_ApplicationName})
+var sDescribeEventsMessage_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_VersionLabel})
+var sDescribeEventsMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_TemplateName})
+var sDescribeEventsMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_EnvironmentId})
+var sDescribeEventsMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_EnvironmentName})
+var sDescribeEventsMessage_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_PlatformArn})
+var sDescribeEventsMessage_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_RequestId})
+var sDescribeEventsMessage_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iEventSeverity, Members: &mEventSeverity, Type: smithy.ShapeTypeEnum, Ext: &eDescribeEventsMessage_Severity})
+var sDescribeEventsMessage_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimeFilterStart, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEventsMessage_StartTime})
+var sDescribeEventsMessage_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_TimeFilterEnd, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEventsMessage_EndTime})
+var sDescribeEventsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventsMessage_MaxRecords})
+var sDescribeEventsMessage_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_NextToken})
+var sEventDescriptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDescriptionsMessage, Members: &mEventDescriptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eEventDescriptionsMessage})
+var sEventDescriptionsMessage_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_EventDescriptionList, Members: &m_EventDescriptionList, Type: smithy.ShapeTypeList, Ext: &eEventDescriptionsMessage_Events})
+var sEventDescriptionsMessage_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eEventDescriptionsMessage_NextToken})
+var sDescribeInstancesHealthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInstancesHealthRequest, Members: &mDescribeInstancesHealthRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeInstancesHealthRequest})
+var sDescribeInstancesHealthRequest_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDescribeInstancesHealthRequest_EnvironmentName})
+var sDescribeInstancesHealthRequest_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeInstancesHealthRequest_EnvironmentId})
+var sDescribeInstancesHealthRequest_AttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeNames", ID: &i_InstancesHealthAttributes, Members: &m_InstancesHealthAttributes, Type: smithy.ShapeTypeList, Ext: &eDescribeInstancesHealthRequest_AttributeNames})
+var sDescribeInstancesHealthRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeInstancesHealthRequest_NextToken})
+var sDescribeInstancesHealthResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInstancesHealthResult, Members: &mDescribeInstancesHealthResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeInstancesHealthResult})
+var sDescribeInstancesHealthResult_InstanceHealthList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceHealthList", ID: &i_InstanceHealthList, Members: &m_InstanceHealthList, Type: smithy.ShapeTypeList, Ext: &eDescribeInstancesHealthResult_InstanceHealthList})
+var sDescribeInstancesHealthResult_RefreshedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshedAt", ID: &i_RefreshedAt, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeInstancesHealthResult_RefreshedAt})
+var sDescribeInstancesHealthResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeInstancesHealthResult_NextToken})
+var sDescribePlatformVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePlatformVersionRequest, Members: &mDescribePlatformVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribePlatformVersionRequest})
+var sDescribePlatformVersionRequest_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eDescribePlatformVersionRequest_PlatformArn})
+var sDescribePlatformVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePlatformVersionResult, Members: &mDescribePlatformVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribePlatformVersionResult})
+var sDescribePlatformVersionResult_PlatformDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformDescription", ID: &iPlatformDescription, Members: &mPlatformDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribePlatformVersionResult_PlatformDescription})
+var sDisassociateEnvironmentOperationsRoleMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateEnvironmentOperationsRoleMessage, Members: &mDisassociateEnvironmentOperationsRoleMessage, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateEnvironmentOperationsRoleMessage})
+var sDisassociateEnvironmentOperationsRoleMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eDisassociateEnvironmentOperationsRoleMessage_EnvironmentName})
+var sListAvailableSolutionStacksResultMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableSolutionStacksResultMessage, Members: &mListAvailableSolutionStacksResultMessage, Type: smithy.ShapeTypeStructure, Ext: &eListAvailableSolutionStacksResultMessage})
+var sListAvailableSolutionStacksResultMessage_SolutionStacks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStacks", ID: &i_AvailableSolutionStackNamesList, Members: &m_AvailableSolutionStackNamesList, Type: smithy.ShapeTypeList, Ext: &eListAvailableSolutionStacksResultMessage_SolutionStacks})
+var sListAvailableSolutionStacksResultMessage_SolutionStackDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackDetails", ID: &i_AvailableSolutionStackDetailsList, Members: &m_AvailableSolutionStackDetailsList, Type: smithy.ShapeTypeList, Ext: &eListAvailableSolutionStacksResultMessage_SolutionStackDetails})
+var sListPlatformBranchesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformBranchesRequest, Members: &mListPlatformBranchesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPlatformBranchesRequest})
+var sListPlatformBranchesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_SearchFilters, Members: &m_SearchFilters, Type: smithy.ShapeTypeList, Ext: &eListPlatformBranchesRequest_Filters})
+var sListPlatformBranchesRequest_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_PlatformBranchMaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eListPlatformBranchesRequest_MaxRecords})
+var sListPlatformBranchesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPlatformBranchesRequest_NextToken})
+var sListPlatformBranchesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformBranchesResult, Members: &mListPlatformBranchesResult, Type: smithy.ShapeTypeStructure, Ext: &eListPlatformBranchesResult})
+var sListPlatformBranchesResult_PlatformBranchSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformBranchSummaryList", ID: &i_PlatformBranchSummaryList, Members: &m_PlatformBranchSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPlatformBranchesResult_PlatformBranchSummaryList})
+var sListPlatformBranchesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPlatformBranchesResult_NextToken})
+var sListPlatformVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformVersionsRequest, Members: &mListPlatformVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPlatformVersionsRequest})
+var sListPlatformVersionsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_PlatformFilters, Members: &m_PlatformFilters, Type: smithy.ShapeTypeList, Ext: &eListPlatformVersionsRequest_Filters})
+var sListPlatformVersionsRequest_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_PlatformMaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eListPlatformVersionsRequest_MaxRecords})
+var sListPlatformVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPlatformVersionsRequest_NextToken})
+var sListPlatformVersionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformVersionsResult, Members: &mListPlatformVersionsResult, Type: smithy.ShapeTypeStructure, Ext: &eListPlatformVersionsResult})
+var sListPlatformVersionsResult_PlatformSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformSummaryList", ID: &i_PlatformSummaryList, Members: &m_PlatformSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPlatformVersionsResult_PlatformSummaryList})
+var sListPlatformVersionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPlatformVersionsResult_NextToken})
+var sListTagsForResourceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceMessage, Members: &mListTagsForResourceMessage, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceMessage})
+var sListTagsForResourceMessage_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceMessage_ResourceArn})
+var sResourceTagsDescriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTagsDescriptionMessage, Members: &mResourceTagsDescriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eResourceTagsDescriptionMessage})
+var sResourceTagsDescriptionMessage_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eResourceTagsDescriptionMessage_ResourceArn})
+var sResourceTagsDescriptionMessage_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eResourceTagsDescriptionMessage_ResourceTags})
+var sRebuildEnvironmentMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebuildEnvironmentMessage, Members: &mRebuildEnvironmentMessage, Type: smithy.ShapeTypeStructure, Ext: &eRebuildEnvironmentMessage})
+var sRebuildEnvironmentMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eRebuildEnvironmentMessage_EnvironmentId})
+var sRebuildEnvironmentMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eRebuildEnvironmentMessage_EnvironmentName})
+var sRequestEnvironmentInfoMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestEnvironmentInfoMessage, Members: &mRequestEnvironmentInfoMessage, Type: smithy.ShapeTypeStructure, Ext: &eRequestEnvironmentInfoMessage})
+var sRequestEnvironmentInfoMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eRequestEnvironmentInfoMessage_EnvironmentId})
+var sRequestEnvironmentInfoMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eRequestEnvironmentInfoMessage_EnvironmentName})
+var sRequestEnvironmentInfoMessage_InfoType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InfoType", ID: &iEnvironmentInfoType, Members: &mEnvironmentInfoType, Type: smithy.ShapeTypeEnum, Ext: &eRequestEnvironmentInfoMessage_InfoType})
+var sRestartAppServerMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestartAppServerMessage, Members: &mRestartAppServerMessage, Type: smithy.ShapeTypeStructure, Ext: &eRestartAppServerMessage})
+var sRestartAppServerMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eRestartAppServerMessage_EnvironmentId})
+var sRestartAppServerMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eRestartAppServerMessage_EnvironmentName})
+var sRetrieveEnvironmentInfoMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveEnvironmentInfoMessage, Members: &mRetrieveEnvironmentInfoMessage, Type: smithy.ShapeTypeStructure, Ext: &eRetrieveEnvironmentInfoMessage})
+var sRetrieveEnvironmentInfoMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eRetrieveEnvironmentInfoMessage_EnvironmentId})
+var sRetrieveEnvironmentInfoMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eRetrieveEnvironmentInfoMessage_EnvironmentName})
+var sRetrieveEnvironmentInfoMessage_InfoType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InfoType", ID: &iEnvironmentInfoType, Members: &mEnvironmentInfoType, Type: smithy.ShapeTypeEnum, Ext: &eRetrieveEnvironmentInfoMessage_InfoType})
+var sRetrieveEnvironmentInfoResultMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveEnvironmentInfoResultMessage, Members: &mRetrieveEnvironmentInfoResultMessage, Type: smithy.ShapeTypeStructure, Ext: &eRetrieveEnvironmentInfoResultMessage})
+var sRetrieveEnvironmentInfoResultMessage_EnvironmentInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentInfo", ID: &i_EnvironmentInfoDescriptionList, Members: &m_EnvironmentInfoDescriptionList, Type: smithy.ShapeTypeList, Ext: &eRetrieveEnvironmentInfoResultMessage_EnvironmentInfo})
+var sSwapEnvironmentCNAMEsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSwapEnvironmentCNAMEsMessage, Members: &mSwapEnvironmentCNAMEsMessage, Type: smithy.ShapeTypeStructure, Ext: &eSwapEnvironmentCNAMEsMessage})
+var sSwapEnvironmentCNAMEsMessage_SourceEnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eSwapEnvironmentCNAMEsMessage_SourceEnvironmentId})
+var sSwapEnvironmentCNAMEsMessage_SourceEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eSwapEnvironmentCNAMEsMessage_SourceEnvironmentName})
+var sSwapEnvironmentCNAMEsMessage_DestinationEnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eSwapEnvironmentCNAMEsMessage_DestinationEnvironmentId})
+var sSwapEnvironmentCNAMEsMessage_DestinationEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eSwapEnvironmentCNAMEsMessage_DestinationEnvironmentName})
+var sTerminateEnvironmentMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateEnvironmentMessage, Members: &mTerminateEnvironmentMessage, Type: smithy.ShapeTypeStructure, Ext: &eTerminateEnvironmentMessage})
+var sTerminateEnvironmentMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eTerminateEnvironmentMessage_EnvironmentId})
+var sTerminateEnvironmentMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eTerminateEnvironmentMessage_EnvironmentName})
+var sTerminateEnvironmentMessage_TerminateResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminateResources", ID: &i_TerminateEnvironmentResources, Type: smithy.ShapeTypeBoolean, Ext: &eTerminateEnvironmentMessage_TerminateResources})
+var sTerminateEnvironmentMessage_ForceTerminate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceTerminate", ID: &i_ForceTerminate, Type: smithy.ShapeTypeBoolean, Ext: &eTerminateEnvironmentMessage_ForceTerminate})
+var sUpdateApplicationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationMessage, Members: &mUpdateApplicationMessage, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationMessage})
+var sUpdateApplicationMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationMessage_ApplicationName})
+var sUpdateApplicationMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationMessage_Description})
+var sUpdateApplicationResourceLifecycleMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationResourceLifecycleMessage, Members: &mUpdateApplicationResourceLifecycleMessage, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationResourceLifecycleMessage})
+var sUpdateApplicationResourceLifecycleMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationResourceLifecycleMessage_ApplicationName})
+var sUpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLifecycleConfig", ID: &iApplicationResourceLifecycleConfig, Members: &mApplicationResourceLifecycleConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig})
+var sApplicationResourceLifecycleDescriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationResourceLifecycleDescriptionMessage, Members: &mApplicationResourceLifecycleDescriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eApplicationResourceLifecycleDescriptionMessage})
+var sApplicationResourceLifecycleDescriptionMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eApplicationResourceLifecycleDescriptionMessage_ApplicationName})
+var sApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLifecycleConfig", ID: &iApplicationResourceLifecycleConfig, Members: &mApplicationResourceLifecycleConfig, Type: smithy.ShapeTypeStructure, Ext: &eApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig})
+var sUpdateApplicationVersionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationVersionMessage, Members: &mUpdateApplicationVersionMessage, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationVersionMessage})
+var sUpdateApplicationVersionMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationVersionMessage_ApplicationName})
+var sUpdateApplicationVersionMessage_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationVersionMessage_VersionLabel})
+var sUpdateApplicationVersionMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationVersionMessage_Description})
+var sUpdateConfigurationTemplateMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationTemplateMessage, Members: &mUpdateConfigurationTemplateMessage, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationTemplateMessage})
+var sUpdateConfigurationTemplateMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationTemplateMessage_ApplicationName})
+var sUpdateConfigurationTemplateMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationTemplateMessage_TemplateName})
+var sUpdateConfigurationTemplateMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationTemplateMessage_Description})
+var sUpdateConfigurationTemplateMessage_OptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionSettings", ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &eUpdateConfigurationTemplateMessage_OptionSettings})
+var sUpdateConfigurationTemplateMessage_OptionsToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionsToRemove", ID: &i_OptionsSpecifierList, Members: &m_OptionsSpecifierList, Type: smithy.ShapeTypeList, Ext: &eUpdateConfigurationTemplateMessage_OptionsToRemove})
+var sUpdateEnvironmentMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentMessage, Members: &mUpdateEnvironmentMessage, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEnvironmentMessage})
+var sUpdateEnvironmentMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_ApplicationName})
+var sUpdateEnvironmentMessage_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_EnvironmentId})
+var sUpdateEnvironmentMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_EnvironmentName})
+var sUpdateEnvironmentMessage_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_GroupName})
+var sUpdateEnvironmentMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_Description})
+var sUpdateEnvironmentMessage_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iEnvironmentTier, Members: &mEnvironmentTier, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEnvironmentMessage_Tier})
+var sUpdateEnvironmentMessage_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_VersionLabel, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_VersionLabel})
+var sUpdateEnvironmentMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_TemplateName})
+var sUpdateEnvironmentMessage_SolutionStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionStackName", ID: &i_SolutionStackName, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_SolutionStackName})
+var sUpdateEnvironmentMessage_PlatformArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformArn", ID: &i_PlatformArn, Type: smithy.ShapeTypeString, Ext: &eUpdateEnvironmentMessage_PlatformArn})
+var sUpdateEnvironmentMessage_OptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionSettings", ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &eUpdateEnvironmentMessage_OptionSettings})
+var sUpdateEnvironmentMessage_OptionsToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionsToRemove", ID: &i_OptionsSpecifierList, Members: &m_OptionsSpecifierList, Type: smithy.ShapeTypeList, Ext: &eUpdateEnvironmentMessage_OptionsToRemove})
+var sUpdateTagsForResourceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForResourceMessage, Members: &mUpdateTagsForResourceMessage, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTagsForResourceMessage})
+var sUpdateTagsForResourceMessage_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateTagsForResourceMessage_ResourceArn})
+var sUpdateTagsForResourceMessage_TagsToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToAdd", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUpdateTagsForResourceMessage_TagsToAdd})
+var sUpdateTagsForResourceMessage_TagsToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToRemove", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUpdateTagsForResourceMessage_TagsToRemove})
+var sValidateConfigurationSettingsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateConfigurationSettingsMessage, Members: &mValidateConfigurationSettingsMessage, Type: smithy.ShapeTypeStructure, Ext: &eValidateConfigurationSettingsMessage})
+var sValidateConfigurationSettingsMessage_ApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationName", ID: &i_ApplicationName, Type: smithy.ShapeTypeString, Ext: &eValidateConfigurationSettingsMessage_ApplicationName})
+var sValidateConfigurationSettingsMessage_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_ConfigurationTemplateName, Type: smithy.ShapeTypeString, Ext: &eValidateConfigurationSettingsMessage_TemplateName})
+var sValidateConfigurationSettingsMessage_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString, Ext: &eValidateConfigurationSettingsMessage_EnvironmentName})
+var sValidateConfigurationSettingsMessage_OptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionSettings", ID: &i_ConfigurationOptionSettingsList, Members: &m_ConfigurationOptionSettingsList, Type: smithy.ShapeTypeList, Ext: &eValidateConfigurationSettingsMessage_OptionSettings})
+var sConfigurationSettingsValidationMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSettingsValidationMessages, Members: &mConfigurationSettingsValidationMessages, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationSettingsValidationMessages})
+var sConfigurationSettingsValidationMessages_Messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Messages", ID: &i_ValidationMessagesList, Members: &m_ValidationMessagesList, Type: smithy.ShapeTypeList, Ext: &eConfigurationSettingsValidationMessages_Messages})
+
+var AbortEnvironmentUpdate = &sAbortEnvironmentUpdate
+
+var ApplyEnvironmentManagedAction = &sApplyEnvironmentManagedAction
+
+var AssociateEnvironmentOperationsRole = &sAssociateEnvironmentOperationsRole
+
+var CheckDNSAvailability = &sCheckDNSAvailability
+
+var ComposeEnvironments = &sComposeEnvironments
+
+var CreateApplication = &sCreateApplication
+
+var CreateApplicationVersion = &sCreateApplicationVersion
+
+var CreateConfigurationTemplate = &sCreateConfigurationTemplate
+
+var CreateEnvironment = &sCreateEnvironment
+
+var CreatePlatformVersion = &sCreatePlatformVersion
+
+var CreateStorageLocation = &sCreateStorageLocation
+
+var DeleteApplication = &sDeleteApplication
+
+var DeleteApplicationVersion = &sDeleteApplicationVersion
+
+var DeleteConfigurationTemplate = &sDeleteConfigurationTemplate
+
+var DeleteEnvironmentConfiguration = &sDeleteEnvironmentConfiguration
+
+var DeletePlatformVersion = &sDeletePlatformVersion
+
+var DescribeAccountAttributes = &sDescribeAccountAttributes
+
+var DescribeApplications = &sDescribeApplications
+
+var DescribeApplicationVersions = &sDescribeApplicationVersions
+
+var DescribeConfigurationOptions = &sDescribeConfigurationOptions
+
+var DescribeConfigurationSettings = &sDescribeConfigurationSettings
+
+var DescribeEnvironmentHealth = &sDescribeEnvironmentHealth
+
+var DescribeEnvironmentManagedActionHistory = &sDescribeEnvironmentManagedActionHistory
+
+var DescribeEnvironmentManagedActions = &sDescribeEnvironmentManagedActions
+
+var DescribeEnvironmentResources = &sDescribeEnvironmentResources
+
+var DescribeEnvironments = &sDescribeEnvironments
+
+var DescribeEvents = &sDescribeEvents
+
+var DescribeInstancesHealth = &sDescribeInstancesHealth
+
+var DescribePlatformVersion = &sDescribePlatformVersion
+
+var DisassociateEnvironmentOperationsRole = &sDisassociateEnvironmentOperationsRole
+
+var ListAvailableSolutionStacks = &sListAvailableSolutionStacks
+
+var ListPlatformBranches = &sListPlatformBranches
+
+var ListPlatformVersions = &sListPlatformVersions
+
+var ListTagsForResource = &sListTagsForResource
+
+var RebuildEnvironment = &sRebuildEnvironment
+
+var RequestEnvironmentInfo = &sRequestEnvironmentInfo
+
+var RestartAppServer = &sRestartAppServer
+
+var RetrieveEnvironmentInfo = &sRetrieveEnvironmentInfo
+
+var SwapEnvironmentCNAMEs = &sSwapEnvironmentCNAMEs
+
+var TerminateEnvironment = &sTerminateEnvironment
+
+var UpdateApplication = &sUpdateApplication
+
+var UpdateApplicationResourceLifecycle = &sUpdateApplicationResourceLifecycle
+
+var UpdateApplicationVersion = &sUpdateApplicationVersion
+
+var UpdateConfigurationTemplate = &sUpdateConfigurationTemplate
+
+var UpdateEnvironment = &sUpdateEnvironment
+
+var UpdateTagsForResource = &sUpdateTagsForResource
+
+var ValidateConfigurationSettings = &sValidateConfigurationSettings
+
+var _AWSElasticBeanstalkService = &s_AWSElasticBeanstalkService
+
+var _AbortableOperationInProgress = &s_AbortableOperationInProgress
+
+var ActionHistoryStatus = &sActionHistoryStatus
+var ActionHistoryStatus_Completed = &sActionHistoryStatus_Completed
+var ActionHistoryStatus_Failed = &sActionHistoryStatus_Failed
+var ActionHistoryStatus_Unknown = &sActionHistoryStatus_Unknown
+
+var ActionStatus = &sActionStatus
+var ActionStatus_Scheduled = &sActionStatus_Scheduled
+var ActionStatus_Pending = &sActionStatus_Pending
+var ActionStatus_Running = &sActionStatus_Running
+var ActionStatus_Unknown = &sActionStatus_Unknown
+
+var ActionType = &sActionType
+var ActionType_InstanceRefresh = &sActionType_InstanceRefresh
+var ActionType_PlatformUpdate = &sActionType_PlatformUpdate
+var ActionType_Unknown = &sActionType_Unknown
+
+var AmiArchitecture = &sAmiArchitecture
+var AmiArchitecture_X86_64 = &sAmiArchitecture_X86_64
+var AmiArchitecture_ARM64 = &sAmiArchitecture_ARM64
+
+var _ApplicationArn = &s_ApplicationArn
+
+var ApplicationDescription = &sApplicationDescription
+var ApplicationDescription_ApplicationArn = &sApplicationDescription_ApplicationArn
+var ApplicationDescription_ApplicationName = &sApplicationDescription_ApplicationName
+var ApplicationDescription_Description = &sApplicationDescription_Description
+var ApplicationDescription_DateCreated = &sApplicationDescription_DateCreated
+var ApplicationDescription_DateUpdated = &sApplicationDescription_DateUpdated
+var ApplicationDescription_Versions = &sApplicationDescription_Versions
+var ApplicationDescription_ConfigurationTemplates = &sApplicationDescription_ConfigurationTemplates
+var ApplicationDescription_ResourceLifecycleConfig = &sApplicationDescription_ResourceLifecycleConfig
+
+var _ApplicationDescriptionList = &s_ApplicationDescriptionList
+var _ApplicationDescriptionList_member = &s_ApplicationDescriptionList_member
+
+var ApplicationMetrics = &sApplicationMetrics
+var ApplicationMetrics_Duration = &sApplicationMetrics_Duration
+var ApplicationMetrics_RequestCount = &sApplicationMetrics_RequestCount
+var ApplicationMetrics_StatusCodes = &sApplicationMetrics_StatusCodes
+var ApplicationMetrics_Latency = &sApplicationMetrics_Latency
+
+var _ApplicationName = &s_ApplicationName
+
+var _ApplicationNamesList = &s_ApplicationNamesList
+var _ApplicationNamesList_member = &s_ApplicationNamesList_member
+
+var ApplicationResourceLifecycleConfig = &sApplicationResourceLifecycleConfig
+var ApplicationResourceLifecycleConfig_ServiceRole = &sApplicationResourceLifecycleConfig_ServiceRole
+var ApplicationResourceLifecycleConfig_VersionLifecycleConfig = &sApplicationResourceLifecycleConfig_VersionLifecycleConfig
+
+var _ApplicationVersionArn = &s_ApplicationVersionArn
+
+var ApplicationVersionDescription = &sApplicationVersionDescription
+var ApplicationVersionDescription_ApplicationVersionArn = &sApplicationVersionDescription_ApplicationVersionArn
+var ApplicationVersionDescription_ApplicationName = &sApplicationVersionDescription_ApplicationName
+var ApplicationVersionDescription_Description = &sApplicationVersionDescription_Description
+var ApplicationVersionDescription_VersionLabel = &sApplicationVersionDescription_VersionLabel
+var ApplicationVersionDescription_SourceBuildInformation = &sApplicationVersionDescription_SourceBuildInformation
+var ApplicationVersionDescription_BuildArn = &sApplicationVersionDescription_BuildArn
+var ApplicationVersionDescription_SourceBundle = &sApplicationVersionDescription_SourceBundle
+var ApplicationVersionDescription_ImageSource = &sApplicationVersionDescription_ImageSource
+var ApplicationVersionDescription_ImageBuildConfiguration = &sApplicationVersionDescription_ImageBuildConfiguration
+var ApplicationVersionDescription_Process = &sApplicationVersionDescription_Process
+var ApplicationVersionDescription_DateCreated = &sApplicationVersionDescription_DateCreated
+var ApplicationVersionDescription_DateUpdated = &sApplicationVersionDescription_DateUpdated
+var ApplicationVersionDescription_Status = &sApplicationVersionDescription_Status
+
+var _ApplicationVersionDescriptionList = &s_ApplicationVersionDescriptionList
+var _ApplicationVersionDescriptionList_member = &s_ApplicationVersionDescriptionList_member
+
+var ApplicationVersionLifecycleConfig = &sApplicationVersionLifecycleConfig
+var ApplicationVersionLifecycleConfig_MaxCountRule = &sApplicationVersionLifecycleConfig_MaxCountRule
+var ApplicationVersionLifecycleConfig_MaxAgeRule = &sApplicationVersionLifecycleConfig_MaxAgeRule
+
+var _ApplicationVersionProccess = &s_ApplicationVersionProccess
+
+var ApplicationVersionStatus = &sApplicationVersionStatus
+var ApplicationVersionStatus_Processed = &sApplicationVersionStatus_Processed
+var ApplicationVersionStatus_Unprocessed = &sApplicationVersionStatus_Unprocessed
+var ApplicationVersionStatus_Failed = &sApplicationVersionStatus_Failed
+var ApplicationVersionStatus_Processing = &sApplicationVersionStatus_Processing
+var ApplicationVersionStatus_Building = &sApplicationVersionStatus_Building
+
+var ArchitectureType = &sArchitectureType
+var ArchitectureType_amd64 = &sArchitectureType_amd64
+var ArchitectureType_arm64 = &sArchitectureType_arm64
+
+var _ARN = &s_ARN
+
+var _AutoCreateApplication = &s_AutoCreateApplication
+
+var AutoScalingGroup = &sAutoScalingGroup
+var AutoScalingGroup_Name = &sAutoScalingGroup_Name
+
+var _AutoScalingGroupList = &s_AutoScalingGroupList
+var _AutoScalingGroupList_member = &s_AutoScalingGroupList_member
+
+var _AvailableSolutionStackDetailsList = &s_AvailableSolutionStackDetailsList
+var _AvailableSolutionStackDetailsList_member = &s_AvailableSolutionStackDetailsList_member
+
+var _AvailableSolutionStackNamesList = &s_AvailableSolutionStackNamesList
+var _AvailableSolutionStackNamesList_member = &s_AvailableSolutionStackNamesList_member
+
+var _BoxedBoolean = &s_BoxedBoolean
+
+var _BoxedInt = &s_BoxedInt
+
+var _BranchName = &s_BranchName
+
+var _BranchOrder = &s_BranchOrder
+
+var BuildConfiguration = &sBuildConfiguration
+var BuildConfiguration_ArtifactName = &sBuildConfiguration_ArtifactName
+var BuildConfiguration_CodeBuildServiceRole = &sBuildConfiguration_CodeBuildServiceRole
+var BuildConfiguration_ComputeType = &sBuildConfiguration_ComputeType
+var BuildConfiguration_Image = &sBuildConfiguration_Image
+var BuildConfiguration_TimeoutInMinutes = &sBuildConfiguration_TimeoutInMinutes
+
+var Builder = &sBuilder
+var Builder_ARN = &sBuilder_ARN
+
+var _Cause = &s_Cause
+
+var _Causes = &s_Causes
+var _Causes_member = &s_Causes_member
+
+var Cluster = &sCluster
+var Cluster_ClusterArn = &sCluster_ClusterArn
+
+var _CnameAvailability = &s_CnameAvailability
+
+var CodeBuildNotInServiceRegionException = &sCodeBuildNotInServiceRegionException
+var CodeBuildNotInServiceRegionException_message = &sCodeBuildNotInServiceRegionException_message
+
+var ComputeType = &sComputeType
+var ComputeType_BUILD_GENERAL1_SMALL = &sComputeType_BUILD_GENERAL1_SMALL
+var ComputeType_BUILD_GENERAL1_MEDIUM = &sComputeType_BUILD_GENERAL1_MEDIUM
+var ComputeType_BUILD_GENERAL1_LARGE = &sComputeType_BUILD_GENERAL1_LARGE
+
+var ConfigurationDeploymentStatus = &sConfigurationDeploymentStatus
+var ConfigurationDeploymentStatus_deployed = &sConfigurationDeploymentStatus_deployed
+var ConfigurationDeploymentStatus_pending = &sConfigurationDeploymentStatus_pending
+var ConfigurationDeploymentStatus_failed = &sConfigurationDeploymentStatus_failed
+
+var _ConfigurationOptionDefaultValue = &s_ConfigurationOptionDefaultValue
+
+var ConfigurationOptionDescription = &sConfigurationOptionDescription
+var ConfigurationOptionDescription_Namespace = &sConfigurationOptionDescription_Namespace
+var ConfigurationOptionDescription_Name = &sConfigurationOptionDescription_Name
+var ConfigurationOptionDescription_DefaultValue = &sConfigurationOptionDescription_DefaultValue
+var ConfigurationOptionDescription_ChangeSeverity = &sConfigurationOptionDescription_ChangeSeverity
+var ConfigurationOptionDescription_UserDefined = &sConfigurationOptionDescription_UserDefined
+var ConfigurationOptionDescription_ValueType = &sConfigurationOptionDescription_ValueType
+var ConfigurationOptionDescription_ValueOptions = &sConfigurationOptionDescription_ValueOptions
+var ConfigurationOptionDescription_MinValue = &sConfigurationOptionDescription_MinValue
+var ConfigurationOptionDescription_MaxValue = &sConfigurationOptionDescription_MaxValue
+var ConfigurationOptionDescription_MaxLength = &sConfigurationOptionDescription_MaxLength
+var ConfigurationOptionDescription_Regex = &sConfigurationOptionDescription_Regex
+
+var _ConfigurationOptionDescriptionsList = &s_ConfigurationOptionDescriptionsList
+var _ConfigurationOptionDescriptionsList_member = &s_ConfigurationOptionDescriptionsList_member
+
+var _ConfigurationOptionName = &s_ConfigurationOptionName
+
+var _ConfigurationOptionPossibleValue = &s_ConfigurationOptionPossibleValue
+
+var _ConfigurationOptionPossibleValues = &s_ConfigurationOptionPossibleValues
+var _ConfigurationOptionPossibleValues_member = &s_ConfigurationOptionPossibleValues_member
+
+var ConfigurationOptionSetting = &sConfigurationOptionSetting
+var ConfigurationOptionSetting_ResourceName = &sConfigurationOptionSetting_ResourceName
+var ConfigurationOptionSetting_Namespace = &sConfigurationOptionSetting_Namespace
+var ConfigurationOptionSetting_OptionName = &sConfigurationOptionSetting_OptionName
+var ConfigurationOptionSetting_Value = &sConfigurationOptionSetting_Value
+
+var _ConfigurationOptionSettingsList = &s_ConfigurationOptionSettingsList
+var _ConfigurationOptionSettingsList_member = &s_ConfigurationOptionSettingsList_member
+
+var _ConfigurationOptionSeverity = &s_ConfigurationOptionSeverity
+
+var _ConfigurationOptionValue = &s_ConfigurationOptionValue
+
+var ConfigurationOptionValueType = &sConfigurationOptionValueType
+var ConfigurationOptionValueType_Scalar = &sConfigurationOptionValueType_Scalar
+var ConfigurationOptionValueType_List = &sConfigurationOptionValueType_List
+
+var ConfigurationSettingsDescription = &sConfigurationSettingsDescription
+var ConfigurationSettingsDescription_SolutionStackName = &sConfigurationSettingsDescription_SolutionStackName
+var ConfigurationSettingsDescription_PlatformArn = &sConfigurationSettingsDescription_PlatformArn
+var ConfigurationSettingsDescription_ApplicationName = &sConfigurationSettingsDescription_ApplicationName
+var ConfigurationSettingsDescription_TemplateName = &sConfigurationSettingsDescription_TemplateName
+var ConfigurationSettingsDescription_Description = &sConfigurationSettingsDescription_Description
+var ConfigurationSettingsDescription_EnvironmentName = &sConfigurationSettingsDescription_EnvironmentName
+var ConfigurationSettingsDescription_DeploymentStatus = &sConfigurationSettingsDescription_DeploymentStatus
+var ConfigurationSettingsDescription_DateCreated = &sConfigurationSettingsDescription_DateCreated
+var ConfigurationSettingsDescription_DateUpdated = &sConfigurationSettingsDescription_DateUpdated
+var ConfigurationSettingsDescription_OptionSettings = &sConfigurationSettingsDescription_OptionSettings
+
+var _ConfigurationSettingsDescriptionList = &s_ConfigurationSettingsDescriptionList
+var _ConfigurationSettingsDescriptionList_member = &s_ConfigurationSettingsDescriptionList_member
+
+var _ConfigurationTemplateName = &s_ConfigurationTemplateName
+
+var _ConfigurationTemplateNamesList = &s_ConfigurationTemplateNamesList
+var _ConfigurationTemplateNamesList_member = &s_ConfigurationTemplateNamesList_member
+
+var CPUUtilization = &sCPUUtilization
+var CPUUtilization_User = &sCPUUtilization_User
+var CPUUtilization_Nice = &sCPUUtilization_Nice
+var CPUUtilization_System = &sCPUUtilization_System
+var CPUUtilization_Idle = &sCPUUtilization_Idle
+var CPUUtilization_IOWait = &sCPUUtilization_IOWait
+var CPUUtilization_IRQ = &sCPUUtilization_IRQ
+var CPUUtilization_SoftIRQ = &sCPUUtilization_SoftIRQ
+var CPUUtilization_Privileged = &sCPUUtilization_Privileged
+
+var _CreationDate = &s_CreationDate
+
+var CustomAmi = &sCustomAmi
+var CustomAmi_VirtualizationType = &sCustomAmi_VirtualizationType
+var CustomAmi_ImageId = &sCustomAmi_ImageId
+
+var _CustomAmiList = &s_CustomAmiList
+var _CustomAmiList_member = &s_CustomAmiList_member
+
+var DefaultAmi = &sDefaultAmi
+var DefaultAmi_Architecture = &sDefaultAmi_Architecture
+var DefaultAmi_ImageId = &sDefaultAmi_ImageId
+
+var _DefaultAmiList = &s_DefaultAmiList
+var _DefaultAmiList_member = &s_DefaultAmiList_member
+
+var _DeleteSourceBundle = &s_DeleteSourceBundle
+
+var Deployment = &sDeployment
+var Deployment_VersionLabel = &sDeployment_VersionLabel
+var Deployment_DeploymentId = &sDeployment_DeploymentId
+var Deployment_Status = &sDeployment_Status
+var Deployment_DeploymentTime = &sDeployment_DeploymentTime
+
+var _DeploymentTimestamp = &s_DeploymentTimestamp
+
+var _Description = &s_Description
+
+var _DNSCname = &s_DNSCname
+
+var _DNSCnamePrefix = &s_DNSCnamePrefix
+
+var _Ec2InstanceId = &s_Ec2InstanceId
+
+var ElasticBeanstalkServiceException = &sElasticBeanstalkServiceException
+var ElasticBeanstalkServiceException_message = &sElasticBeanstalkServiceException_message
+
+var _EndpointURL = &s_EndpointURL
+
+var _EnvironmentArn = &s_EnvironmentArn
+
+var EnvironmentDescription = &sEnvironmentDescription
+var EnvironmentDescription_EnvironmentName = &sEnvironmentDescription_EnvironmentName
+var EnvironmentDescription_EnvironmentId = &sEnvironmentDescription_EnvironmentId
+var EnvironmentDescription_ApplicationName = &sEnvironmentDescription_ApplicationName
+var EnvironmentDescription_VersionLabel = &sEnvironmentDescription_VersionLabel
+var EnvironmentDescription_SolutionStackName = &sEnvironmentDescription_SolutionStackName
+var EnvironmentDescription_PlatformArn = &sEnvironmentDescription_PlatformArn
+var EnvironmentDescription_TemplateName = &sEnvironmentDescription_TemplateName
+var EnvironmentDescription_Description = &sEnvironmentDescription_Description
+var EnvironmentDescription_EndpointURL = &sEnvironmentDescription_EndpointURL
+var EnvironmentDescription_CNAME = &sEnvironmentDescription_CNAME
+var EnvironmentDescription_DateCreated = &sEnvironmentDescription_DateCreated
+var EnvironmentDescription_DateUpdated = &sEnvironmentDescription_DateUpdated
+var EnvironmentDescription_Status = &sEnvironmentDescription_Status
+var EnvironmentDescription_AbortableOperationInProgress = &sEnvironmentDescription_AbortableOperationInProgress
+var EnvironmentDescription_Health = &sEnvironmentDescription_Health
+var EnvironmentDescription_HealthStatus = &sEnvironmentDescription_HealthStatus
+var EnvironmentDescription_Resources = &sEnvironmentDescription_Resources
+var EnvironmentDescription_Tier = &sEnvironmentDescription_Tier
+var EnvironmentDescription_EnvironmentLinks = &sEnvironmentDescription_EnvironmentLinks
+var EnvironmentDescription_EnvironmentArn = &sEnvironmentDescription_EnvironmentArn
+var EnvironmentDescription_OperationsRole = &sEnvironmentDescription_OperationsRole
+
+var _EnvironmentDescriptionsList = &s_EnvironmentDescriptionsList
+var _EnvironmentDescriptionsList_member = &s_EnvironmentDescriptionsList_member
+
+var EnvironmentHealth = &sEnvironmentHealth
+var EnvironmentHealth_Green = &sEnvironmentHealth_Green
+var EnvironmentHealth_Yellow = &sEnvironmentHealth_Yellow
+var EnvironmentHealth_Red = &sEnvironmentHealth_Red
+var EnvironmentHealth_Grey = &sEnvironmentHealth_Grey
+
+var EnvironmentHealthAttribute = &sEnvironmentHealthAttribute
+var EnvironmentHealthAttribute_Status = &sEnvironmentHealthAttribute_Status
+var EnvironmentHealthAttribute_Color = &sEnvironmentHealthAttribute_Color
+var EnvironmentHealthAttribute_Causes = &sEnvironmentHealthAttribute_Causes
+var EnvironmentHealthAttribute_ApplicationMetrics = &sEnvironmentHealthAttribute_ApplicationMetrics
+var EnvironmentHealthAttribute_InstancesHealth = &sEnvironmentHealthAttribute_InstancesHealth
+var EnvironmentHealthAttribute_All = &sEnvironmentHealthAttribute_All
+var EnvironmentHealthAttribute_HealthStatus = &sEnvironmentHealthAttribute_HealthStatus
+var EnvironmentHealthAttribute_RefreshedAt = &sEnvironmentHealthAttribute_RefreshedAt
+
+var _EnvironmentHealthAttributes = &s_EnvironmentHealthAttributes
+var _EnvironmentHealthAttributes_member = &s_EnvironmentHealthAttributes_member
+
+var EnvironmentHealthStatus = &sEnvironmentHealthStatus
+var EnvironmentHealthStatus_NoData = &sEnvironmentHealthStatus_NoData
+var EnvironmentHealthStatus_Unknown = &sEnvironmentHealthStatus_Unknown
+var EnvironmentHealthStatus_Pending = &sEnvironmentHealthStatus_Pending
+var EnvironmentHealthStatus_Ok = &sEnvironmentHealthStatus_Ok
+var EnvironmentHealthStatus_Info = &sEnvironmentHealthStatus_Info
+var EnvironmentHealthStatus_Warning = &sEnvironmentHealthStatus_Warning
+var EnvironmentHealthStatus_Degraded = &sEnvironmentHealthStatus_Degraded
+var EnvironmentHealthStatus_Severe = &sEnvironmentHealthStatus_Severe
+var EnvironmentHealthStatus_Suspended = &sEnvironmentHealthStatus_Suspended
+
+var _EnvironmentId = &s_EnvironmentId
+
+var _EnvironmentIdList = &s_EnvironmentIdList
+var _EnvironmentIdList_member = &s_EnvironmentIdList_member
+
+var EnvironmentInfoDescription = &sEnvironmentInfoDescription
+var EnvironmentInfoDescription_InfoType = &sEnvironmentInfoDescription_InfoType
+var EnvironmentInfoDescription_Ec2InstanceId = &sEnvironmentInfoDescription_Ec2InstanceId
+var EnvironmentInfoDescription_SampleTimestamp = &sEnvironmentInfoDescription_SampleTimestamp
+var EnvironmentInfoDescription_Message = &sEnvironmentInfoDescription_Message
+
+var _EnvironmentInfoDescriptionList = &s_EnvironmentInfoDescriptionList
+var _EnvironmentInfoDescriptionList_member = &s_EnvironmentInfoDescriptionList_member
+
+var EnvironmentInfoType = &sEnvironmentInfoType
+var EnvironmentInfoType_tail = &sEnvironmentInfoType_tail
+var EnvironmentInfoType_bundle = &sEnvironmentInfoType_bundle
+var EnvironmentInfoType_analyze = &sEnvironmentInfoType_analyze
+
+var EnvironmentLink = &sEnvironmentLink
+var EnvironmentLink_LinkName = &sEnvironmentLink_LinkName
+var EnvironmentLink_EnvironmentName = &sEnvironmentLink_EnvironmentName
+
+var _EnvironmentLinks = &s_EnvironmentLinks
+var _EnvironmentLinks_member = &s_EnvironmentLinks_member
+
+var _EnvironmentName = &s_EnvironmentName
+
+var _EnvironmentNamesList = &s_EnvironmentNamesList
+var _EnvironmentNamesList_member = &s_EnvironmentNamesList_member
+
+var EnvironmentResourceDescription = &sEnvironmentResourceDescription
+var EnvironmentResourceDescription_EnvironmentName = &sEnvironmentResourceDescription_EnvironmentName
+var EnvironmentResourceDescription_AutoScalingGroups = &sEnvironmentResourceDescription_AutoScalingGroups
+var EnvironmentResourceDescription_Cluster = &sEnvironmentResourceDescription_Cluster
+var EnvironmentResourceDescription_Instances = &sEnvironmentResourceDescription_Instances
+var EnvironmentResourceDescription_LaunchConfigurations = &sEnvironmentResourceDescription_LaunchConfigurations
+var EnvironmentResourceDescription_LaunchTemplates = &sEnvironmentResourceDescription_LaunchTemplates
+var EnvironmentResourceDescription_LoadBalancers = &sEnvironmentResourceDescription_LoadBalancers
+var EnvironmentResourceDescription_Triggers = &sEnvironmentResourceDescription_Triggers
+var EnvironmentResourceDescription_Queues = &sEnvironmentResourceDescription_Queues
+
+var EnvironmentResourcesDescription = &sEnvironmentResourcesDescription
+var EnvironmentResourcesDescription_LoadBalancer = &sEnvironmentResourcesDescription_LoadBalancer
+
+var EnvironmentStatus = &sEnvironmentStatus
+var EnvironmentStatus_Aborting = &sEnvironmentStatus_Aborting
+var EnvironmentStatus_Launching = &sEnvironmentStatus_Launching
+var EnvironmentStatus_Updating = &sEnvironmentStatus_Updating
+var EnvironmentStatus_LinkingFrom = &sEnvironmentStatus_LinkingFrom
+var EnvironmentStatus_LinkingTo = &sEnvironmentStatus_LinkingTo
+var EnvironmentStatus_Ready = &sEnvironmentStatus_Ready
+var EnvironmentStatus_Terminating = &sEnvironmentStatus_Terminating
+var EnvironmentStatus_Terminated = &sEnvironmentStatus_Terminated
+
+var EnvironmentTier = &sEnvironmentTier
+var EnvironmentTier_Name = &sEnvironmentTier_Name
+var EnvironmentTier_Type = &sEnvironmentTier_Type
+var EnvironmentTier_Version = &sEnvironmentTier_Version
+
+var _EventDate = &s_EventDate
+
+var EventDescription = &sEventDescription
+var EventDescription_EventDate = &sEventDescription_EventDate
+var EventDescription_Message = &sEventDescription_Message
+var EventDescription_ApplicationName = &sEventDescription_ApplicationName
+var EventDescription_VersionLabel = &sEventDescription_VersionLabel
+var EventDescription_TemplateName = &sEventDescription_TemplateName
+var EventDescription_EnvironmentName = &sEventDescription_EnvironmentName
+var EventDescription_PlatformArn = &sEventDescription_PlatformArn
+var EventDescription_RequestId = &sEventDescription_RequestId
+var EventDescription_Severity = &sEventDescription_Severity
+
+var _EventDescriptionList = &s_EventDescriptionList
+var _EventDescriptionList_member = &s_EventDescriptionList_member
+
+var _EventMessage = &s_EventMessage
+
+var EventSeverity = &sEventSeverity
+var EventSeverity_TRACE = &sEventSeverity_TRACE
+var EventSeverity_DEBUG = &sEventSeverity_DEBUG
+var EventSeverity_INFO = &sEventSeverity_INFO
+var EventSeverity_WARN = &sEventSeverity_WARN
+var EventSeverity_ERROR = &sEventSeverity_ERROR
+var EventSeverity_FATAL = &sEventSeverity_FATAL
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var FailureType = &sFailureType
+var FailureType_UpdateCancelled = &sFailureType_UpdateCancelled
+var FailureType_CancellationFailed = &sFailureType_CancellationFailed
+var FailureType_RollbackFailed = &sFailureType_RollbackFailed
+var FailureType_RollbackSuccessful = &sFailureType_RollbackSuccessful
+var FailureType_InternalFailure = &sFailureType_InternalFailure
+var FailureType_InvalidEnvironmentState = &sFailureType_InvalidEnvironmentState
+var FailureType_PermissionsError = &sFailureType_PermissionsError
+
+var _FileTypeExtension = &s_FileTypeExtension
+
+var _ForceTerminate = &s_ForceTerminate
+
+var _GroupName = &s_GroupName
+
+var ImageBuildConfiguration = &sImageBuildConfiguration
+var ImageBuildConfiguration_Type = &sImageBuildConfiguration_Type
+var ImageBuildConfiguration_DockerfileLocation = &sImageBuildConfiguration_DockerfileLocation
+var ImageBuildConfiguration_Buildpack = &sImageBuildConfiguration_Buildpack
+var ImageBuildConfiguration_Architecture = &sImageBuildConfiguration_Architecture
+var ImageBuildConfiguration_CodeBuildServiceRole = &sImageBuildConfiguration_CodeBuildServiceRole
+var ImageBuildConfiguration_ComputeType = &sImageBuildConfiguration_ComputeType
+var ImageBuildConfiguration_TimeoutInMinutes = &sImageBuildConfiguration_TimeoutInMinutes
+
+var ImageBuildType = &sImageBuildType
+var ImageBuildType_docker = &sImageBuildType_docker
+var ImageBuildType_buildpack = &sImageBuildType_buildpack
+
+var ImageConfiguration = &sImageConfiguration
+var ImageConfiguration_Source = &sImageConfiguration_Source
+var ImageConfiguration_Build = &sImageConfiguration_Build
+
+var _ImageId = &s_ImageId
+
+var ImageSource = &sImageSource
+var ImageSource_Uri = &sImageSource_Uri
+
+var _IncludeDeleted = &s_IncludeDeleted
+
+var _IncludeDeletedBackTo = &s_IncludeDeletedBackTo
+
+var Instance = &sInstance
+var Instance_Id = &sInstance_Id
+
+var _InstanceHealthList = &s_InstanceHealthList
+var _InstanceHealthList_member = &s_InstanceHealthList_member
+
+var InstanceHealthSummary = &sInstanceHealthSummary
+var InstanceHealthSummary_NoData = &sInstanceHealthSummary_NoData
+var InstanceHealthSummary_Unknown = &sInstanceHealthSummary_Unknown
+var InstanceHealthSummary_Pending = &sInstanceHealthSummary_Pending
+var InstanceHealthSummary_Ok = &sInstanceHealthSummary_Ok
+var InstanceHealthSummary_Info = &sInstanceHealthSummary_Info
+var InstanceHealthSummary_Warning = &sInstanceHealthSummary_Warning
+var InstanceHealthSummary_Degraded = &sInstanceHealthSummary_Degraded
+var InstanceHealthSummary_Severe = &sInstanceHealthSummary_Severe
+
+var _InstanceId = &s_InstanceId
+
+var _InstanceList = &s_InstanceList
+var _InstanceList_member = &s_InstanceList_member
+
+var InstancesHealthAttribute = &sInstancesHealthAttribute
+var InstancesHealthAttribute_HealthStatus = &sInstancesHealthAttribute_HealthStatus
+var InstancesHealthAttribute_Color = &sInstancesHealthAttribute_Color
+var InstancesHealthAttribute_Causes = &sInstancesHealthAttribute_Causes
+var InstancesHealthAttribute_ApplicationMetrics = &sInstancesHealthAttribute_ApplicationMetrics
+var InstancesHealthAttribute_RefreshedAt = &sInstancesHealthAttribute_RefreshedAt
+var InstancesHealthAttribute_LaunchedAt = &sInstancesHealthAttribute_LaunchedAt
+var InstancesHealthAttribute_System = &sInstancesHealthAttribute_System
+var InstancesHealthAttribute_Deployment = &sInstancesHealthAttribute_Deployment
+var InstancesHealthAttribute_AvailabilityZone = &sInstancesHealthAttribute_AvailabilityZone
+var InstancesHealthAttribute_InstanceType = &sInstancesHealthAttribute_InstanceType
+var InstancesHealthAttribute_All = &sInstancesHealthAttribute_All
+
+var _InstancesHealthAttributes = &s_InstancesHealthAttributes
+var _InstancesHealthAttributes_member = &s_InstancesHealthAttributes_member
+
+var InsufficientPrivilegesException = &sInsufficientPrivilegesException
+var InsufficientPrivilegesException_message = &sInsufficientPrivilegesException_message
+
+var _Integer = &s_Integer
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_message = &sInvalidRequestException_message
+
+var Latency = &sLatency
+var Latency_P999 = &sLatency_P999
+var Latency_P99 = &sLatency_P99
+var Latency_P95 = &sLatency_P95
+var Latency_P90 = &sLatency_P90
+var Latency_P85 = &sLatency_P85
+var Latency_P75 = &sLatency_P75
+var Latency_P50 = &sLatency_P50
+var Latency_P10 = &sLatency_P10
+
+var LaunchConfiguration = &sLaunchConfiguration
+var LaunchConfiguration_Name = &sLaunchConfiguration_Name
+
+var _LaunchConfigurationList = &s_LaunchConfigurationList
+var _LaunchConfigurationList_member = &s_LaunchConfigurationList_member
+
+var _LaunchedAt = &s_LaunchedAt
+
+var LaunchTemplate = &sLaunchTemplate
+var LaunchTemplate_Id = &sLaunchTemplate_Id
+
+var _LaunchTemplateList = &s_LaunchTemplateList
+var _LaunchTemplateList_member = &s_LaunchTemplateList_member
+
+var Listener = &sListener
+var Listener_Protocol = &sListener_Protocol
+var Listener_Port = &sListener_Port
+
+var _LoadAverage = &s_LoadAverage
+var _LoadAverage_member = &s_LoadAverage_member
+
+var _LoadAverageValue = &s_LoadAverageValue
+
+var LoadBalancer = &sLoadBalancer
+var LoadBalancer_Name = &sLoadBalancer_Name
+
+var LoadBalancerDescription = &sLoadBalancerDescription
+var LoadBalancerDescription_LoadBalancerName = &sLoadBalancerDescription_LoadBalancerName
+var LoadBalancerDescription_Domain = &sLoadBalancerDescription_Domain
+var LoadBalancerDescription_Listeners = &sLoadBalancerDescription_Listeners
+
+var _LoadBalancerList = &s_LoadBalancerList
+var _LoadBalancerList_member = &s_LoadBalancerList_member
+
+var _LoadBalancerListenersDescription = &s_LoadBalancerListenersDescription
+var _LoadBalancerListenersDescription_member = &s_LoadBalancerListenersDescription_member
+
+var _Maintainer = &s_Maintainer
+
+var ManagedAction = &sManagedAction
+var ManagedAction_ActionId = &sManagedAction_ActionId
+var ManagedAction_ActionDescription = &sManagedAction_ActionDescription
+var ManagedAction_ActionType = &sManagedAction_ActionType
+var ManagedAction_Status = &sManagedAction_Status
+var ManagedAction_WindowStartTime = &sManagedAction_WindowStartTime
+
+var ManagedActionHistoryItem = &sManagedActionHistoryItem
+var ManagedActionHistoryItem_ActionId = &sManagedActionHistoryItem_ActionId
+var ManagedActionHistoryItem_ActionType = &sManagedActionHistoryItem_ActionType
+var ManagedActionHistoryItem_ActionDescription = &sManagedActionHistoryItem_ActionDescription
+var ManagedActionHistoryItem_FailureType = &sManagedActionHistoryItem_FailureType
+var ManagedActionHistoryItem_Status = &sManagedActionHistoryItem_Status
+var ManagedActionHistoryItem_FailureDescription = &sManagedActionHistoryItem_FailureDescription
+var ManagedActionHistoryItem_ExecutedTime = &sManagedActionHistoryItem_ExecutedTime
+var ManagedActionHistoryItem_FinishedTime = &sManagedActionHistoryItem_FinishedTime
+
+var _ManagedActionHistoryItems = &s_ManagedActionHistoryItems
+var _ManagedActionHistoryItems_member = &s_ManagedActionHistoryItems_member
+
+var _ManagedActionHistoryMaxItems = &s_ManagedActionHistoryMaxItems
+
+var ManagedActionInvalidStateException = &sManagedActionInvalidStateException
+var ManagedActionInvalidStateException_message = &sManagedActionInvalidStateException_message
+
+var _ManagedActions = &s_ManagedActions
+var _ManagedActions_member = &s_ManagedActions_member
+
+var MaxAgeRule = &sMaxAgeRule
+var MaxAgeRule_Enabled = &sMaxAgeRule_Enabled
+var MaxAgeRule_MaxAgeInDays = &sMaxAgeRule_MaxAgeInDays
+var MaxAgeRule_DeleteSourceFromS3 = &sMaxAgeRule_DeleteSourceFromS3
+
+var MaxCountRule = &sMaxCountRule
+var MaxCountRule_Enabled = &sMaxCountRule_Enabled
+var MaxCountRule_MaxCount = &sMaxCountRule_MaxCount
+var MaxCountRule_DeleteSourceFromS3 = &sMaxCountRule_DeleteSourceFromS3
+
+var _MaxRecords = &s_MaxRecords
+
+var _Message = &s_Message
+
+var _NextToken = &s_NextToken
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _NullableDouble = &s_NullableDouble
+
+var _NullableInteger = &s_NullableInteger
+
+var _NullableLong = &s_NullableLong
+
+var _OperatingSystemName = &s_OperatingSystemName
+
+var _OperatingSystemVersion = &s_OperatingSystemVersion
+
+var OperationInProgressException = &sOperationInProgressException
+var OperationInProgressException_message = &sOperationInProgressException_message
+
+var _OperationsRole = &s_OperationsRole
+
+var _OptionNamespace = &s_OptionNamespace
+
+var _OptionRestrictionMaxLength = &s_OptionRestrictionMaxLength
+
+var _OptionRestrictionMaxValue = &s_OptionRestrictionMaxValue
+
+var _OptionRestrictionMinValue = &s_OptionRestrictionMinValue
+
+var OptionRestrictionRegex = &sOptionRestrictionRegex
+var OptionRestrictionRegex_Pattern = &sOptionRestrictionRegex_Pattern
+var OptionRestrictionRegex_Label = &sOptionRestrictionRegex_Label
+
+var OptionSpecification = &sOptionSpecification
+var OptionSpecification_ResourceName = &sOptionSpecification_ResourceName
+var OptionSpecification_Namespace = &sOptionSpecification_Namespace
+var OptionSpecification_OptionName = &sOptionSpecification_OptionName
+
+var _OptionsSpecifierList = &s_OptionsSpecifierList
+var _OptionsSpecifierList_member = &s_OptionsSpecifierList_member
+
+var _PlatformArn = &s_PlatformArn
+
+var _PlatformBranchLifecycleState = &s_PlatformBranchLifecycleState
+
+var _PlatformBranchMaxRecords = &s_PlatformBranchMaxRecords
+
+var PlatformBranchSummary = &sPlatformBranchSummary
+var PlatformBranchSummary_PlatformName = &sPlatformBranchSummary_PlatformName
+var PlatformBranchSummary_BranchName = &sPlatformBranchSummary_BranchName
+var PlatformBranchSummary_LifecycleState = &sPlatformBranchSummary_LifecycleState
+var PlatformBranchSummary_BranchOrder = &sPlatformBranchSummary_BranchOrder
+var PlatformBranchSummary_SupportedTierList = &sPlatformBranchSummary_SupportedTierList
+
+var _PlatformBranchSummaryList = &s_PlatformBranchSummaryList
+var _PlatformBranchSummaryList_member = &s_PlatformBranchSummaryList_member
+
+var _PlatformCategory = &s_PlatformCategory
+
+var PlatformDescription = &sPlatformDescription
+var PlatformDescription_PlatformArn = &sPlatformDescription_PlatformArn
+var PlatformDescription_PlatformOwner = &sPlatformDescription_PlatformOwner
+var PlatformDescription_PlatformName = &sPlatformDescription_PlatformName
+var PlatformDescription_PlatformVersion = &sPlatformDescription_PlatformVersion
+var PlatformDescription_SolutionStackName = &sPlatformDescription_SolutionStackName
+var PlatformDescription_PlatformStatus = &sPlatformDescription_PlatformStatus
+var PlatformDescription_DateCreated = &sPlatformDescription_DateCreated
+var PlatformDescription_DateUpdated = &sPlatformDescription_DateUpdated
+var PlatformDescription_PlatformCategory = &sPlatformDescription_PlatformCategory
+var PlatformDescription_Description = &sPlatformDescription_Description
+var PlatformDescription_Maintainer = &sPlatformDescription_Maintainer
+var PlatformDescription_OperatingSystemName = &sPlatformDescription_OperatingSystemName
+var PlatformDescription_OperatingSystemVersion = &sPlatformDescription_OperatingSystemVersion
+var PlatformDescription_ProgrammingLanguages = &sPlatformDescription_ProgrammingLanguages
+var PlatformDescription_Frameworks = &sPlatformDescription_Frameworks
+var PlatformDescription_CustomAmiList = &sPlatformDescription_CustomAmiList
+var PlatformDescription_DefaultAmiList = &sPlatformDescription_DefaultAmiList
+var PlatformDescription_SupportedTierList = &sPlatformDescription_SupportedTierList
+var PlatformDescription_SupportedAddonList = &sPlatformDescription_SupportedAddonList
+var PlatformDescription_PlatformLifecycleState = &sPlatformDescription_PlatformLifecycleState
+var PlatformDescription_PlatformBranchName = &sPlatformDescription_PlatformBranchName
+var PlatformDescription_PlatformBranchLifecycleState = &sPlatformDescription_PlatformBranchLifecycleState
+
+var PlatformFilter = &sPlatformFilter
+var PlatformFilter_Type = &sPlatformFilter_Type
+var PlatformFilter_Operator = &sPlatformFilter_Operator
+var PlatformFilter_Values = &sPlatformFilter_Values
+
+var _PlatformFilterOperator = &s_PlatformFilterOperator
+
+var _PlatformFilters = &s_PlatformFilters
+var _PlatformFilters_member = &s_PlatformFilters_member
+
+var _PlatformFilterType = &s_PlatformFilterType
+
+var _PlatformFilterValue = &s_PlatformFilterValue
+
+var _PlatformFilterValueList = &s_PlatformFilterValueList
+var _PlatformFilterValueList_member = &s_PlatformFilterValueList_member
+
+var PlatformFramework = &sPlatformFramework
+var PlatformFramework_Name = &sPlatformFramework_Name
+var PlatformFramework_Version = &sPlatformFramework_Version
+
+var _PlatformFrameworks = &s_PlatformFrameworks
+var _PlatformFrameworks_member = &s_PlatformFrameworks_member
+
+var _PlatformLifecycleState = &s_PlatformLifecycleState
+
+var _PlatformMaxRecords = &s_PlatformMaxRecords
+
+var _PlatformName = &s_PlatformName
+
+var _PlatformOwner = &s_PlatformOwner
+
+var PlatformProgrammingLanguage = &sPlatformProgrammingLanguage
+var PlatformProgrammingLanguage_Name = &sPlatformProgrammingLanguage_Name
+var PlatformProgrammingLanguage_Version = &sPlatformProgrammingLanguage_Version
+
+var _PlatformProgrammingLanguages = &s_PlatformProgrammingLanguages
+var _PlatformProgrammingLanguages_member = &s_PlatformProgrammingLanguages_member
+
+var PlatformStatus = &sPlatformStatus
+var PlatformStatus_Creating = &sPlatformStatus_Creating
+var PlatformStatus_Failed = &sPlatformStatus_Failed
+var PlatformStatus_Ready = &sPlatformStatus_Ready
+var PlatformStatus_Deleting = &sPlatformStatus_Deleting
+var PlatformStatus_Deleted = &sPlatformStatus_Deleted
+
+var PlatformSummary = &sPlatformSummary
+var PlatformSummary_PlatformArn = &sPlatformSummary_PlatformArn
+var PlatformSummary_PlatformOwner = &sPlatformSummary_PlatformOwner
+var PlatformSummary_PlatformStatus = &sPlatformSummary_PlatformStatus
+var PlatformSummary_PlatformCategory = &sPlatformSummary_PlatformCategory
+var PlatformSummary_OperatingSystemName = &sPlatformSummary_OperatingSystemName
+var PlatformSummary_OperatingSystemVersion = &sPlatformSummary_OperatingSystemVersion
+var PlatformSummary_SupportedTierList = &sPlatformSummary_SupportedTierList
+var PlatformSummary_SupportedAddonList = &sPlatformSummary_SupportedAddonList
+var PlatformSummary_PlatformLifecycleState = &sPlatformSummary_PlatformLifecycleState
+var PlatformSummary_PlatformVersion = &sPlatformSummary_PlatformVersion
+var PlatformSummary_PlatformBranchName = &sPlatformSummary_PlatformBranchName
+var PlatformSummary_PlatformBranchLifecycleState = &sPlatformSummary_PlatformBranchLifecycleState
+
+var _PlatformSummaryList = &s_PlatformSummaryList
+var _PlatformSummaryList_member = &s_PlatformSummaryList_member
+
+var _PlatformVersion = &s_PlatformVersion
+
+var PlatformVersionStillReferencedException = &sPlatformVersionStillReferencedException
+var PlatformVersionStillReferencedException_message = &sPlatformVersionStillReferencedException_message
+
+var Queue = &sQueue
+var Queue_Name = &sQueue_Name
+var Queue_URL = &sQueue_URL
+
+var _QueueList = &s_QueueList
+var _QueueList_member = &s_QueueList_member
+
+var _RefreshedAt = &s_RefreshedAt
+
+var _RegexLabel = &s_RegexLabel
+
+var _RegexPattern = &s_RegexPattern
+
+var _RequestCount = &s_RequestCount
+
+var _RequestId = &s_RequestId
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceQuota = &sResourceQuota
+var ResourceQuota_Maximum = &sResourceQuota_Maximum
+
+var ResourceQuotas = &sResourceQuotas
+var ResourceQuotas_ApplicationQuota = &sResourceQuotas_ApplicationQuota
+var ResourceQuotas_ApplicationVersionQuota = &sResourceQuotas_ApplicationVersionQuota
+var ResourceQuotas_EnvironmentQuota = &sResourceQuotas_EnvironmentQuota
+var ResourceQuotas_ConfigurationTemplateQuota = &sResourceQuotas_ConfigurationTemplateQuota
+var ResourceQuotas_CustomPlatformQuota = &sResourceQuotas_CustomPlatformQuota
+
+var ResourceTypeNotSupportedException = &sResourceTypeNotSupportedException
+var ResourceTypeNotSupportedException_message = &sResourceTypeNotSupportedException_message
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Key = &s_S3Key
+
+var S3Location = &sS3Location
+var S3Location_S3Bucket = &sS3Location_S3Bucket
+var S3Location_S3Key = &sS3Location_S3Key
+
+var S3LocationNotInServiceRegionException = &sS3LocationNotInServiceRegionException
+var S3LocationNotInServiceRegionException_message = &sS3LocationNotInServiceRegionException_message
+
+var S3SubscriptionRequiredException = &sS3SubscriptionRequiredException
+var S3SubscriptionRequiredException_message = &sS3SubscriptionRequiredException_message
+
+var _SampleTimestamp = &s_SampleTimestamp
+
+var SearchFilter = &sSearchFilter
+var SearchFilter_Attribute = &sSearchFilter_Attribute
+var SearchFilter_Operator = &sSearchFilter_Operator
+var SearchFilter_Values = &sSearchFilter_Values
+
+var _SearchFilterAttribute = &s_SearchFilterAttribute
+
+var _SearchFilterOperator = &s_SearchFilterOperator
+
+var _SearchFilters = &s_SearchFilters
+var _SearchFilters_member = &s_SearchFilters_member
+
+var _SearchFilterValue = &s_SearchFilterValue
+
+var _SearchFilterValues = &s_SearchFilterValues
+var _SearchFilterValues_member = &s_SearchFilterValues_member
+
+var SingleInstanceHealth = &sSingleInstanceHealth
+var SingleInstanceHealth_InstanceId = &sSingleInstanceHealth_InstanceId
+var SingleInstanceHealth_HealthStatus = &sSingleInstanceHealth_HealthStatus
+var SingleInstanceHealth_Color = &sSingleInstanceHealth_Color
+var SingleInstanceHealth_Causes = &sSingleInstanceHealth_Causes
+var SingleInstanceHealth_LaunchedAt = &sSingleInstanceHealth_LaunchedAt
+var SingleInstanceHealth_ApplicationMetrics = &sSingleInstanceHealth_ApplicationMetrics
+var SingleInstanceHealth_System = &sSingleInstanceHealth_System
+var SingleInstanceHealth_Deployment = &sSingleInstanceHealth_Deployment
+var SingleInstanceHealth_AvailabilityZone = &sSingleInstanceHealth_AvailabilityZone
+var SingleInstanceHealth_InstanceType = &sSingleInstanceHealth_InstanceType
+
+var SolutionStackDescription = &sSolutionStackDescription
+var SolutionStackDescription_SolutionStackName = &sSolutionStackDescription_SolutionStackName
+var SolutionStackDescription_PermittedFileTypes = &sSolutionStackDescription_PermittedFileTypes
+
+var _SolutionStackFileTypeList = &s_SolutionStackFileTypeList
+var _SolutionStackFileTypeList_member = &s_SolutionStackFileTypeList_member
+
+var _SolutionStackName = &s_SolutionStackName
+
+var SourceBuildInformation = &sSourceBuildInformation
+var SourceBuildInformation_SourceType = &sSourceBuildInformation_SourceType
+var SourceBuildInformation_SourceRepository = &sSourceBuildInformation_SourceRepository
+var SourceBuildInformation_SourceLocation = &sSourceBuildInformation_SourceLocation
+
+var SourceBundleDeletionException = &sSourceBundleDeletionException
+var SourceBundleDeletionException_message = &sSourceBundleDeletionException_message
+
+var SourceConfiguration = &sSourceConfiguration
+var SourceConfiguration_ApplicationName = &sSourceConfiguration_ApplicationName
+var SourceConfiguration_TemplateName = &sSourceConfiguration_TemplateName
+
+var _SourceLocation = &s_SourceLocation
+
+var SourceRepository = &sSourceRepository
+var SourceRepository_CodeCommit = &sSourceRepository_CodeCommit
+var SourceRepository_S3 = &sSourceRepository_S3
+
+var SourceType = &sSourceType
+var SourceType_Git = &sSourceType_Git
+var SourceType_Zip = &sSourceType_Zip
+
+var StatusCodes = &sStatusCodes
+var StatusCodes_Status2xx = &sStatusCodes_Status2xx
+var StatusCodes_Status3xx = &sStatusCodes_Status3xx
+var StatusCodes_Status4xx = &sStatusCodes_Status4xx
+var StatusCodes_Status5xx = &sStatusCodes_Status5xx
+
+var _String = &s_String
+
+var _SupportedAddon = &s_SupportedAddon
+
+var _SupportedAddonList = &s_SupportedAddonList
+var _SupportedAddonList_member = &s_SupportedAddonList_member
+
+var _SupportedTier = &s_SupportedTier
+
+var _SupportedTierList = &s_SupportedTierList
+var _SupportedTierList_member = &s_SupportedTierList_member
+
+var SystemStatus = &sSystemStatus
+var SystemStatus_CPUUtilization = &sSystemStatus_CPUUtilization
+var SystemStatus_LoadAverage = &sSystemStatus_LoadAverage
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var _TerminateEnvForce = &s_TerminateEnvForce
+
+var _TerminateEnvironmentResources = &s_TerminateEnvironmentResources
+
+var _TimeFilterEnd = &s_TimeFilterEnd
+
+var _TimeFilterStart = &s_TimeFilterStart
+
+var _Timestamp = &s_Timestamp
+
+var _Token = &s_Token
+
+var TooManyApplicationsException = &sTooManyApplicationsException
+var TooManyApplicationsException_message = &sTooManyApplicationsException_message
+
+var TooManyApplicationVersionsException = &sTooManyApplicationVersionsException
+var TooManyApplicationVersionsException_message = &sTooManyApplicationVersionsException_message
+
+var TooManyBucketsException = &sTooManyBucketsException
+var TooManyBucketsException_message = &sTooManyBucketsException_message
+
+var TooManyConfigurationTemplatesException = &sTooManyConfigurationTemplatesException
+var TooManyConfigurationTemplatesException_message = &sTooManyConfigurationTemplatesException_message
+
+var TooManyEnvironmentsException = &sTooManyEnvironmentsException
+var TooManyEnvironmentsException_message = &sTooManyEnvironmentsException_message
+
+var TooManyPlatformsException = &sTooManyPlatformsException
+var TooManyPlatformsException_message = &sTooManyPlatformsException_message
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var Trigger = &sTrigger
+var Trigger_Name = &sTrigger_Name
+
+var _TriggerList = &s_TriggerList
+var _TriggerList_member = &s_TriggerList_member
+
+var _UpdateDate = &s_UpdateDate
+
+var _UserDefinedOption = &s_UserDefinedOption
+
+var ValidationMessage = &sValidationMessage
+var ValidationMessage_Message = &sValidationMessage_Message
+var ValidationMessage_Severity = &sValidationMessage_Severity
+var ValidationMessage_Namespace = &sValidationMessage_Namespace
+var ValidationMessage_OptionName = &sValidationMessage_OptionName
+
+var _ValidationMessagesList = &s_ValidationMessagesList
+var _ValidationMessagesList_member = &s_ValidationMessagesList_member
+
+var _ValidationMessageString = &s_ValidationMessageString
+
+var ValidationSeverity = &sValidationSeverity
+var ValidationSeverity_error = &sValidationSeverity_error
+var ValidationSeverity_warning = &sValidationSeverity_warning
+
+var _VersionLabel = &s_VersionLabel
+
+var _VersionLabels = &s_VersionLabels
+var _VersionLabels_member = &s_VersionLabels_member
+
+var _VersionLabelsList = &s_VersionLabelsList
+var _VersionLabelsList_member = &s_VersionLabelsList_member
+
+var _VirtualizationType = &s_VirtualizationType
+
+var AbortEnvironmentUpdateMessage = &sAbortEnvironmentUpdateMessage
+var AbortEnvironmentUpdateMessage_EnvironmentId = &sAbortEnvironmentUpdateMessage_EnvironmentId
+var AbortEnvironmentUpdateMessage_EnvironmentName = &sAbortEnvironmentUpdateMessage_EnvironmentName
+
+var ApplyEnvironmentManagedActionRequest = &sApplyEnvironmentManagedActionRequest
+var ApplyEnvironmentManagedActionRequest_EnvironmentName = &sApplyEnvironmentManagedActionRequest_EnvironmentName
+var ApplyEnvironmentManagedActionRequest_EnvironmentId = &sApplyEnvironmentManagedActionRequest_EnvironmentId
+var ApplyEnvironmentManagedActionRequest_ActionId = &sApplyEnvironmentManagedActionRequest_ActionId
+
+var ApplyEnvironmentManagedActionResult = &sApplyEnvironmentManagedActionResult
+var ApplyEnvironmentManagedActionResult_ActionId = &sApplyEnvironmentManagedActionResult_ActionId
+var ApplyEnvironmentManagedActionResult_ActionDescription = &sApplyEnvironmentManagedActionResult_ActionDescription
+var ApplyEnvironmentManagedActionResult_ActionType = &sApplyEnvironmentManagedActionResult_ActionType
+var ApplyEnvironmentManagedActionResult_Status = &sApplyEnvironmentManagedActionResult_Status
+
+var AssociateEnvironmentOperationsRoleMessage = &sAssociateEnvironmentOperationsRoleMessage
+var AssociateEnvironmentOperationsRoleMessage_EnvironmentName = &sAssociateEnvironmentOperationsRoleMessage_EnvironmentName
+var AssociateEnvironmentOperationsRoleMessage_OperationsRole = &sAssociateEnvironmentOperationsRoleMessage_OperationsRole
+
+var CheckDNSAvailabilityMessage = &sCheckDNSAvailabilityMessage
+var CheckDNSAvailabilityMessage_CNAMEPrefix = &sCheckDNSAvailabilityMessage_CNAMEPrefix
+
+var CheckDNSAvailabilityResultMessage = &sCheckDNSAvailabilityResultMessage
+var CheckDNSAvailabilityResultMessage_Available = &sCheckDNSAvailabilityResultMessage_Available
+var CheckDNSAvailabilityResultMessage_FullyQualifiedCNAME = &sCheckDNSAvailabilityResultMessage_FullyQualifiedCNAME
+
+var ComposeEnvironmentsMessage = &sComposeEnvironmentsMessage
+var ComposeEnvironmentsMessage_ApplicationName = &sComposeEnvironmentsMessage_ApplicationName
+var ComposeEnvironmentsMessage_GroupName = &sComposeEnvironmentsMessage_GroupName
+var ComposeEnvironmentsMessage_VersionLabels = &sComposeEnvironmentsMessage_VersionLabels
+
+var EnvironmentDescriptionsMessage = &sEnvironmentDescriptionsMessage
+var EnvironmentDescriptionsMessage_Environments = &sEnvironmentDescriptionsMessage_Environments
+var EnvironmentDescriptionsMessage_NextToken = &sEnvironmentDescriptionsMessage_NextToken
+
+var CreateApplicationMessage = &sCreateApplicationMessage
+var CreateApplicationMessage_ApplicationName = &sCreateApplicationMessage_ApplicationName
+var CreateApplicationMessage_Description = &sCreateApplicationMessage_Description
+var CreateApplicationMessage_ResourceLifecycleConfig = &sCreateApplicationMessage_ResourceLifecycleConfig
+var CreateApplicationMessage_Tags = &sCreateApplicationMessage_Tags
+
+var ApplicationDescriptionMessage = &sApplicationDescriptionMessage
+var ApplicationDescriptionMessage_Application = &sApplicationDescriptionMessage_Application
+
+var CreateApplicationVersionMessage = &sCreateApplicationVersionMessage
+var CreateApplicationVersionMessage_ApplicationName = &sCreateApplicationVersionMessage_ApplicationName
+var CreateApplicationVersionMessage_VersionLabel = &sCreateApplicationVersionMessage_VersionLabel
+var CreateApplicationVersionMessage_Description = &sCreateApplicationVersionMessage_Description
+var CreateApplicationVersionMessage_SourceBuildInformation = &sCreateApplicationVersionMessage_SourceBuildInformation
+var CreateApplicationVersionMessage_SourceBundle = &sCreateApplicationVersionMessage_SourceBundle
+var CreateApplicationVersionMessage_BuildConfiguration = &sCreateApplicationVersionMessage_BuildConfiguration
+var CreateApplicationVersionMessage_AutoCreateApplication = &sCreateApplicationVersionMessage_AutoCreateApplication
+var CreateApplicationVersionMessage_Process = &sCreateApplicationVersionMessage_Process
+var CreateApplicationVersionMessage_Tags = &sCreateApplicationVersionMessage_Tags
+var CreateApplicationVersionMessage_ImageConfiguration = &sCreateApplicationVersionMessage_ImageConfiguration
+
+var ApplicationVersionDescriptionMessage = &sApplicationVersionDescriptionMessage
+var ApplicationVersionDescriptionMessage_ApplicationVersion = &sApplicationVersionDescriptionMessage_ApplicationVersion
+
+var CreateConfigurationTemplateMessage = &sCreateConfigurationTemplateMessage
+var CreateConfigurationTemplateMessage_ApplicationName = &sCreateConfigurationTemplateMessage_ApplicationName
+var CreateConfigurationTemplateMessage_TemplateName = &sCreateConfigurationTemplateMessage_TemplateName
+var CreateConfigurationTemplateMessage_SolutionStackName = &sCreateConfigurationTemplateMessage_SolutionStackName
+var CreateConfigurationTemplateMessage_PlatformArn = &sCreateConfigurationTemplateMessage_PlatformArn
+var CreateConfigurationTemplateMessage_SourceConfiguration = &sCreateConfigurationTemplateMessage_SourceConfiguration
+var CreateConfigurationTemplateMessage_EnvironmentId = &sCreateConfigurationTemplateMessage_EnvironmentId
+var CreateConfigurationTemplateMessage_Description = &sCreateConfigurationTemplateMessage_Description
+var CreateConfigurationTemplateMessage_OptionSettings = &sCreateConfigurationTemplateMessage_OptionSettings
+var CreateConfigurationTemplateMessage_Tags = &sCreateConfigurationTemplateMessage_Tags
+
+var CreateEnvironmentMessage = &sCreateEnvironmentMessage
+var CreateEnvironmentMessage_ApplicationName = &sCreateEnvironmentMessage_ApplicationName
+var CreateEnvironmentMessage_EnvironmentName = &sCreateEnvironmentMessage_EnvironmentName
+var CreateEnvironmentMessage_GroupName = &sCreateEnvironmentMessage_GroupName
+var CreateEnvironmentMessage_Description = &sCreateEnvironmentMessage_Description
+var CreateEnvironmentMessage_CNAMEPrefix = &sCreateEnvironmentMessage_CNAMEPrefix
+var CreateEnvironmentMessage_Tier = &sCreateEnvironmentMessage_Tier
+var CreateEnvironmentMessage_Tags = &sCreateEnvironmentMessage_Tags
+var CreateEnvironmentMessage_VersionLabel = &sCreateEnvironmentMessage_VersionLabel
+var CreateEnvironmentMessage_TemplateName = &sCreateEnvironmentMessage_TemplateName
+var CreateEnvironmentMessage_SolutionStackName = &sCreateEnvironmentMessage_SolutionStackName
+var CreateEnvironmentMessage_PlatformArn = &sCreateEnvironmentMessage_PlatformArn
+var CreateEnvironmentMessage_OptionSettings = &sCreateEnvironmentMessage_OptionSettings
+var CreateEnvironmentMessage_OptionsToRemove = &sCreateEnvironmentMessage_OptionsToRemove
+var CreateEnvironmentMessage_OperationsRole = &sCreateEnvironmentMessage_OperationsRole
+
+var CreatePlatformVersionRequest = &sCreatePlatformVersionRequest
+var CreatePlatformVersionRequest_PlatformName = &sCreatePlatformVersionRequest_PlatformName
+var CreatePlatformVersionRequest_PlatformVersion = &sCreatePlatformVersionRequest_PlatformVersion
+var CreatePlatformVersionRequest_PlatformDefinitionBundle = &sCreatePlatformVersionRequest_PlatformDefinitionBundle
+var CreatePlatformVersionRequest_EnvironmentName = &sCreatePlatformVersionRequest_EnvironmentName
+var CreatePlatformVersionRequest_OptionSettings = &sCreatePlatformVersionRequest_OptionSettings
+var CreatePlatformVersionRequest_Tags = &sCreatePlatformVersionRequest_Tags
+
+var CreatePlatformVersionResult = &sCreatePlatformVersionResult
+var CreatePlatformVersionResult_PlatformSummary = &sCreatePlatformVersionResult_PlatformSummary
+var CreatePlatformVersionResult_Builder = &sCreatePlatformVersionResult_Builder
+
+var CreateStorageLocationResultMessage = &sCreateStorageLocationResultMessage
+var CreateStorageLocationResultMessage_S3Bucket = &sCreateStorageLocationResultMessage_S3Bucket
+
+var DeleteApplicationMessage = &sDeleteApplicationMessage
+var DeleteApplicationMessage_ApplicationName = &sDeleteApplicationMessage_ApplicationName
+var DeleteApplicationMessage_TerminateEnvByForce = &sDeleteApplicationMessage_TerminateEnvByForce
+
+var DeleteApplicationVersionMessage = &sDeleteApplicationVersionMessage
+var DeleteApplicationVersionMessage_ApplicationName = &sDeleteApplicationVersionMessage_ApplicationName
+var DeleteApplicationVersionMessage_VersionLabel = &sDeleteApplicationVersionMessage_VersionLabel
+var DeleteApplicationVersionMessage_DeleteSourceBundle = &sDeleteApplicationVersionMessage_DeleteSourceBundle
+
+var DeleteConfigurationTemplateMessage = &sDeleteConfigurationTemplateMessage
+var DeleteConfigurationTemplateMessage_ApplicationName = &sDeleteConfigurationTemplateMessage_ApplicationName
+var DeleteConfigurationTemplateMessage_TemplateName = &sDeleteConfigurationTemplateMessage_TemplateName
+
+var DeleteEnvironmentConfigurationMessage = &sDeleteEnvironmentConfigurationMessage
+var DeleteEnvironmentConfigurationMessage_ApplicationName = &sDeleteEnvironmentConfigurationMessage_ApplicationName
+var DeleteEnvironmentConfigurationMessage_EnvironmentName = &sDeleteEnvironmentConfigurationMessage_EnvironmentName
+
+var DeletePlatformVersionRequest = &sDeletePlatformVersionRequest
+var DeletePlatformVersionRequest_PlatformArn = &sDeletePlatformVersionRequest_PlatformArn
+
+var DeletePlatformVersionResult = &sDeletePlatformVersionResult
+var DeletePlatformVersionResult_PlatformSummary = &sDeletePlatformVersionResult_PlatformSummary
+
+var DescribeAccountAttributesResult = &sDescribeAccountAttributesResult
+var DescribeAccountAttributesResult_ResourceQuotas = &sDescribeAccountAttributesResult_ResourceQuotas
+
+var DescribeApplicationsMessage = &sDescribeApplicationsMessage
+var DescribeApplicationsMessage_ApplicationNames = &sDescribeApplicationsMessage_ApplicationNames
+
+var ApplicationDescriptionsMessage = &sApplicationDescriptionsMessage
+var ApplicationDescriptionsMessage_Applications = &sApplicationDescriptionsMessage_Applications
+
+var DescribeApplicationVersionsMessage = &sDescribeApplicationVersionsMessage
+var DescribeApplicationVersionsMessage_ApplicationName = &sDescribeApplicationVersionsMessage_ApplicationName
+var DescribeApplicationVersionsMessage_VersionLabels = &sDescribeApplicationVersionsMessage_VersionLabels
+var DescribeApplicationVersionsMessage_MaxRecords = &sDescribeApplicationVersionsMessage_MaxRecords
+var DescribeApplicationVersionsMessage_NextToken = &sDescribeApplicationVersionsMessage_NextToken
+
+var ApplicationVersionDescriptionsMessage = &sApplicationVersionDescriptionsMessage
+var ApplicationVersionDescriptionsMessage_ApplicationVersions = &sApplicationVersionDescriptionsMessage_ApplicationVersions
+var ApplicationVersionDescriptionsMessage_NextToken = &sApplicationVersionDescriptionsMessage_NextToken
+
+var DescribeConfigurationOptionsMessage = &sDescribeConfigurationOptionsMessage
+var DescribeConfigurationOptionsMessage_ApplicationName = &sDescribeConfigurationOptionsMessage_ApplicationName
+var DescribeConfigurationOptionsMessage_TemplateName = &sDescribeConfigurationOptionsMessage_TemplateName
+var DescribeConfigurationOptionsMessage_EnvironmentName = &sDescribeConfigurationOptionsMessage_EnvironmentName
+var DescribeConfigurationOptionsMessage_SolutionStackName = &sDescribeConfigurationOptionsMessage_SolutionStackName
+var DescribeConfigurationOptionsMessage_PlatformArn = &sDescribeConfigurationOptionsMessage_PlatformArn
+var DescribeConfigurationOptionsMessage_Options = &sDescribeConfigurationOptionsMessage_Options
+
+var ConfigurationOptionsDescription = &sConfigurationOptionsDescription
+var ConfigurationOptionsDescription_SolutionStackName = &sConfigurationOptionsDescription_SolutionStackName
+var ConfigurationOptionsDescription_PlatformArn = &sConfigurationOptionsDescription_PlatformArn
+var ConfigurationOptionsDescription_Options = &sConfigurationOptionsDescription_Options
+
+var DescribeConfigurationSettingsMessage = &sDescribeConfigurationSettingsMessage
+var DescribeConfigurationSettingsMessage_ApplicationName = &sDescribeConfigurationSettingsMessage_ApplicationName
+var DescribeConfigurationSettingsMessage_TemplateName = &sDescribeConfigurationSettingsMessage_TemplateName
+var DescribeConfigurationSettingsMessage_EnvironmentName = &sDescribeConfigurationSettingsMessage_EnvironmentName
+
+var ConfigurationSettingsDescriptions = &sConfigurationSettingsDescriptions
+var ConfigurationSettingsDescriptions_ConfigurationSettings = &sConfigurationSettingsDescriptions_ConfigurationSettings
+
+var DescribeEnvironmentHealthRequest = &sDescribeEnvironmentHealthRequest
+var DescribeEnvironmentHealthRequest_EnvironmentName = &sDescribeEnvironmentHealthRequest_EnvironmentName
+var DescribeEnvironmentHealthRequest_EnvironmentId = &sDescribeEnvironmentHealthRequest_EnvironmentId
+var DescribeEnvironmentHealthRequest_AttributeNames = &sDescribeEnvironmentHealthRequest_AttributeNames
+
+var DescribeEnvironmentHealthResult = &sDescribeEnvironmentHealthResult
+var DescribeEnvironmentHealthResult_EnvironmentName = &sDescribeEnvironmentHealthResult_EnvironmentName
+var DescribeEnvironmentHealthResult_HealthStatus = &sDescribeEnvironmentHealthResult_HealthStatus
+var DescribeEnvironmentHealthResult_Status = &sDescribeEnvironmentHealthResult_Status
+var DescribeEnvironmentHealthResult_Color = &sDescribeEnvironmentHealthResult_Color
+var DescribeEnvironmentHealthResult_Causes = &sDescribeEnvironmentHealthResult_Causes
+var DescribeEnvironmentHealthResult_ApplicationMetrics = &sDescribeEnvironmentHealthResult_ApplicationMetrics
+var DescribeEnvironmentHealthResult_InstancesHealth = &sDescribeEnvironmentHealthResult_InstancesHealth
+var DescribeEnvironmentHealthResult_RefreshedAt = &sDescribeEnvironmentHealthResult_RefreshedAt
+
+var DescribeEnvironmentManagedActionHistoryRequest = &sDescribeEnvironmentManagedActionHistoryRequest
+var DescribeEnvironmentManagedActionHistoryRequest_EnvironmentId = &sDescribeEnvironmentManagedActionHistoryRequest_EnvironmentId
+var DescribeEnvironmentManagedActionHistoryRequest_EnvironmentName = &sDescribeEnvironmentManagedActionHistoryRequest_EnvironmentName
+var DescribeEnvironmentManagedActionHistoryRequest_NextToken = &sDescribeEnvironmentManagedActionHistoryRequest_NextToken
+var DescribeEnvironmentManagedActionHistoryRequest_MaxItems = &sDescribeEnvironmentManagedActionHistoryRequest_MaxItems
+
+var DescribeEnvironmentManagedActionHistoryResult = &sDescribeEnvironmentManagedActionHistoryResult
+var DescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems = &sDescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems
+var DescribeEnvironmentManagedActionHistoryResult_NextToken = &sDescribeEnvironmentManagedActionHistoryResult_NextToken
+
+var DescribeEnvironmentManagedActionsRequest = &sDescribeEnvironmentManagedActionsRequest
+var DescribeEnvironmentManagedActionsRequest_EnvironmentName = &sDescribeEnvironmentManagedActionsRequest_EnvironmentName
+var DescribeEnvironmentManagedActionsRequest_EnvironmentId = &sDescribeEnvironmentManagedActionsRequest_EnvironmentId
+var DescribeEnvironmentManagedActionsRequest_Status = &sDescribeEnvironmentManagedActionsRequest_Status
+
+var DescribeEnvironmentManagedActionsResult = &sDescribeEnvironmentManagedActionsResult
+var DescribeEnvironmentManagedActionsResult_ManagedActions = &sDescribeEnvironmentManagedActionsResult_ManagedActions
+
+var DescribeEnvironmentResourcesMessage = &sDescribeEnvironmentResourcesMessage
+var DescribeEnvironmentResourcesMessage_EnvironmentId = &sDescribeEnvironmentResourcesMessage_EnvironmentId
+var DescribeEnvironmentResourcesMessage_EnvironmentName = &sDescribeEnvironmentResourcesMessage_EnvironmentName
+
+var EnvironmentResourceDescriptionsMessage = &sEnvironmentResourceDescriptionsMessage
+var EnvironmentResourceDescriptionsMessage_EnvironmentResources = &sEnvironmentResourceDescriptionsMessage_EnvironmentResources
+
+var DescribeEnvironmentsMessage = &sDescribeEnvironmentsMessage
+var DescribeEnvironmentsMessage_ApplicationName = &sDescribeEnvironmentsMessage_ApplicationName
+var DescribeEnvironmentsMessage_VersionLabel = &sDescribeEnvironmentsMessage_VersionLabel
+var DescribeEnvironmentsMessage_EnvironmentIds = &sDescribeEnvironmentsMessage_EnvironmentIds
+var DescribeEnvironmentsMessage_EnvironmentNames = &sDescribeEnvironmentsMessage_EnvironmentNames
+var DescribeEnvironmentsMessage_IncludeDeleted = &sDescribeEnvironmentsMessage_IncludeDeleted
+var DescribeEnvironmentsMessage_IncludedDeletedBackTo = &sDescribeEnvironmentsMessage_IncludedDeletedBackTo
+var DescribeEnvironmentsMessage_MaxRecords = &sDescribeEnvironmentsMessage_MaxRecords
+var DescribeEnvironmentsMessage_NextToken = &sDescribeEnvironmentsMessage_NextToken
+
+var DescribeEventsMessage = &sDescribeEventsMessage
+var DescribeEventsMessage_ApplicationName = &sDescribeEventsMessage_ApplicationName
+var DescribeEventsMessage_VersionLabel = &sDescribeEventsMessage_VersionLabel
+var DescribeEventsMessage_TemplateName = &sDescribeEventsMessage_TemplateName
+var DescribeEventsMessage_EnvironmentId = &sDescribeEventsMessage_EnvironmentId
+var DescribeEventsMessage_EnvironmentName = &sDescribeEventsMessage_EnvironmentName
+var DescribeEventsMessage_PlatformArn = &sDescribeEventsMessage_PlatformArn
+var DescribeEventsMessage_RequestId = &sDescribeEventsMessage_RequestId
+var DescribeEventsMessage_Severity = &sDescribeEventsMessage_Severity
+var DescribeEventsMessage_StartTime = &sDescribeEventsMessage_StartTime
+var DescribeEventsMessage_EndTime = &sDescribeEventsMessage_EndTime
+var DescribeEventsMessage_MaxRecords = &sDescribeEventsMessage_MaxRecords
+var DescribeEventsMessage_NextToken = &sDescribeEventsMessage_NextToken
+
+var EventDescriptionsMessage = &sEventDescriptionsMessage
+var EventDescriptionsMessage_Events = &sEventDescriptionsMessage_Events
+var EventDescriptionsMessage_NextToken = &sEventDescriptionsMessage_NextToken
+
+var DescribeInstancesHealthRequest = &sDescribeInstancesHealthRequest
+var DescribeInstancesHealthRequest_EnvironmentName = &sDescribeInstancesHealthRequest_EnvironmentName
+var DescribeInstancesHealthRequest_EnvironmentId = &sDescribeInstancesHealthRequest_EnvironmentId
+var DescribeInstancesHealthRequest_AttributeNames = &sDescribeInstancesHealthRequest_AttributeNames
+var DescribeInstancesHealthRequest_NextToken = &sDescribeInstancesHealthRequest_NextToken
+
+var DescribeInstancesHealthResult = &sDescribeInstancesHealthResult
+var DescribeInstancesHealthResult_InstanceHealthList = &sDescribeInstancesHealthResult_InstanceHealthList
+var DescribeInstancesHealthResult_RefreshedAt = &sDescribeInstancesHealthResult_RefreshedAt
+var DescribeInstancesHealthResult_NextToken = &sDescribeInstancesHealthResult_NextToken
+
+var DescribePlatformVersionRequest = &sDescribePlatformVersionRequest
+var DescribePlatformVersionRequest_PlatformArn = &sDescribePlatformVersionRequest_PlatformArn
+
+var DescribePlatformVersionResult = &sDescribePlatformVersionResult
+var DescribePlatformVersionResult_PlatformDescription = &sDescribePlatformVersionResult_PlatformDescription
+
+var DisassociateEnvironmentOperationsRoleMessage = &sDisassociateEnvironmentOperationsRoleMessage
+var DisassociateEnvironmentOperationsRoleMessage_EnvironmentName = &sDisassociateEnvironmentOperationsRoleMessage_EnvironmentName
+
+var ListAvailableSolutionStacksResultMessage = &sListAvailableSolutionStacksResultMessage
+var ListAvailableSolutionStacksResultMessage_SolutionStacks = &sListAvailableSolutionStacksResultMessage_SolutionStacks
+var ListAvailableSolutionStacksResultMessage_SolutionStackDetails = &sListAvailableSolutionStacksResultMessage_SolutionStackDetails
+
+var ListPlatformBranchesRequest = &sListPlatformBranchesRequest
+var ListPlatformBranchesRequest_Filters = &sListPlatformBranchesRequest_Filters
+var ListPlatformBranchesRequest_MaxRecords = &sListPlatformBranchesRequest_MaxRecords
+var ListPlatformBranchesRequest_NextToken = &sListPlatformBranchesRequest_NextToken
+
+var ListPlatformBranchesResult = &sListPlatformBranchesResult
+var ListPlatformBranchesResult_PlatformBranchSummaryList = &sListPlatformBranchesResult_PlatformBranchSummaryList
+var ListPlatformBranchesResult_NextToken = &sListPlatformBranchesResult_NextToken
+
+var ListPlatformVersionsRequest = &sListPlatformVersionsRequest
+var ListPlatformVersionsRequest_Filters = &sListPlatformVersionsRequest_Filters
+var ListPlatformVersionsRequest_MaxRecords = &sListPlatformVersionsRequest_MaxRecords
+var ListPlatformVersionsRequest_NextToken = &sListPlatformVersionsRequest_NextToken
+
+var ListPlatformVersionsResult = &sListPlatformVersionsResult
+var ListPlatformVersionsResult_PlatformSummaryList = &sListPlatformVersionsResult_PlatformSummaryList
+var ListPlatformVersionsResult_NextToken = &sListPlatformVersionsResult_NextToken
+
+var ListTagsForResourceMessage = &sListTagsForResourceMessage
+var ListTagsForResourceMessage_ResourceArn = &sListTagsForResourceMessage_ResourceArn
+
+var ResourceTagsDescriptionMessage = &sResourceTagsDescriptionMessage
+var ResourceTagsDescriptionMessage_ResourceArn = &sResourceTagsDescriptionMessage_ResourceArn
+var ResourceTagsDescriptionMessage_ResourceTags = &sResourceTagsDescriptionMessage_ResourceTags
+
+var RebuildEnvironmentMessage = &sRebuildEnvironmentMessage
+var RebuildEnvironmentMessage_EnvironmentId = &sRebuildEnvironmentMessage_EnvironmentId
+var RebuildEnvironmentMessage_EnvironmentName = &sRebuildEnvironmentMessage_EnvironmentName
+
+var RequestEnvironmentInfoMessage = &sRequestEnvironmentInfoMessage
+var RequestEnvironmentInfoMessage_EnvironmentId = &sRequestEnvironmentInfoMessage_EnvironmentId
+var RequestEnvironmentInfoMessage_EnvironmentName = &sRequestEnvironmentInfoMessage_EnvironmentName
+var RequestEnvironmentInfoMessage_InfoType = &sRequestEnvironmentInfoMessage_InfoType
+
+var RestartAppServerMessage = &sRestartAppServerMessage
+var RestartAppServerMessage_EnvironmentId = &sRestartAppServerMessage_EnvironmentId
+var RestartAppServerMessage_EnvironmentName = &sRestartAppServerMessage_EnvironmentName
+
+var RetrieveEnvironmentInfoMessage = &sRetrieveEnvironmentInfoMessage
+var RetrieveEnvironmentInfoMessage_EnvironmentId = &sRetrieveEnvironmentInfoMessage_EnvironmentId
+var RetrieveEnvironmentInfoMessage_EnvironmentName = &sRetrieveEnvironmentInfoMessage_EnvironmentName
+var RetrieveEnvironmentInfoMessage_InfoType = &sRetrieveEnvironmentInfoMessage_InfoType
+
+var RetrieveEnvironmentInfoResultMessage = &sRetrieveEnvironmentInfoResultMessage
+var RetrieveEnvironmentInfoResultMessage_EnvironmentInfo = &sRetrieveEnvironmentInfoResultMessage_EnvironmentInfo
+
+var SwapEnvironmentCNAMEsMessage = &sSwapEnvironmentCNAMEsMessage
+var SwapEnvironmentCNAMEsMessage_SourceEnvironmentId = &sSwapEnvironmentCNAMEsMessage_SourceEnvironmentId
+var SwapEnvironmentCNAMEsMessage_SourceEnvironmentName = &sSwapEnvironmentCNAMEsMessage_SourceEnvironmentName
+var SwapEnvironmentCNAMEsMessage_DestinationEnvironmentId = &sSwapEnvironmentCNAMEsMessage_DestinationEnvironmentId
+var SwapEnvironmentCNAMEsMessage_DestinationEnvironmentName = &sSwapEnvironmentCNAMEsMessage_DestinationEnvironmentName
+
+var TerminateEnvironmentMessage = &sTerminateEnvironmentMessage
+var TerminateEnvironmentMessage_EnvironmentId = &sTerminateEnvironmentMessage_EnvironmentId
+var TerminateEnvironmentMessage_EnvironmentName = &sTerminateEnvironmentMessage_EnvironmentName
+var TerminateEnvironmentMessage_TerminateResources = &sTerminateEnvironmentMessage_TerminateResources
+var TerminateEnvironmentMessage_ForceTerminate = &sTerminateEnvironmentMessage_ForceTerminate
+
+var UpdateApplicationMessage = &sUpdateApplicationMessage
+var UpdateApplicationMessage_ApplicationName = &sUpdateApplicationMessage_ApplicationName
+var UpdateApplicationMessage_Description = &sUpdateApplicationMessage_Description
+
+var UpdateApplicationResourceLifecycleMessage = &sUpdateApplicationResourceLifecycleMessage
+var UpdateApplicationResourceLifecycleMessage_ApplicationName = &sUpdateApplicationResourceLifecycleMessage_ApplicationName
+var UpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig = &sUpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig
+
+var ApplicationResourceLifecycleDescriptionMessage = &sApplicationResourceLifecycleDescriptionMessage
+var ApplicationResourceLifecycleDescriptionMessage_ApplicationName = &sApplicationResourceLifecycleDescriptionMessage_ApplicationName
+var ApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig = &sApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig
+
+var UpdateApplicationVersionMessage = &sUpdateApplicationVersionMessage
+var UpdateApplicationVersionMessage_ApplicationName = &sUpdateApplicationVersionMessage_ApplicationName
+var UpdateApplicationVersionMessage_VersionLabel = &sUpdateApplicationVersionMessage_VersionLabel
+var UpdateApplicationVersionMessage_Description = &sUpdateApplicationVersionMessage_Description
+
+var UpdateConfigurationTemplateMessage = &sUpdateConfigurationTemplateMessage
+var UpdateConfigurationTemplateMessage_ApplicationName = &sUpdateConfigurationTemplateMessage_ApplicationName
+var UpdateConfigurationTemplateMessage_TemplateName = &sUpdateConfigurationTemplateMessage_TemplateName
+var UpdateConfigurationTemplateMessage_Description = &sUpdateConfigurationTemplateMessage_Description
+var UpdateConfigurationTemplateMessage_OptionSettings = &sUpdateConfigurationTemplateMessage_OptionSettings
+var UpdateConfigurationTemplateMessage_OptionsToRemove = &sUpdateConfigurationTemplateMessage_OptionsToRemove
+
+var UpdateEnvironmentMessage = &sUpdateEnvironmentMessage
+var UpdateEnvironmentMessage_ApplicationName = &sUpdateEnvironmentMessage_ApplicationName
+var UpdateEnvironmentMessage_EnvironmentId = &sUpdateEnvironmentMessage_EnvironmentId
+var UpdateEnvironmentMessage_EnvironmentName = &sUpdateEnvironmentMessage_EnvironmentName
+var UpdateEnvironmentMessage_GroupName = &sUpdateEnvironmentMessage_GroupName
+var UpdateEnvironmentMessage_Description = &sUpdateEnvironmentMessage_Description
+var UpdateEnvironmentMessage_Tier = &sUpdateEnvironmentMessage_Tier
+var UpdateEnvironmentMessage_VersionLabel = &sUpdateEnvironmentMessage_VersionLabel
+var UpdateEnvironmentMessage_TemplateName = &sUpdateEnvironmentMessage_TemplateName
+var UpdateEnvironmentMessage_SolutionStackName = &sUpdateEnvironmentMessage_SolutionStackName
+var UpdateEnvironmentMessage_PlatformArn = &sUpdateEnvironmentMessage_PlatformArn
+var UpdateEnvironmentMessage_OptionSettings = &sUpdateEnvironmentMessage_OptionSettings
+var UpdateEnvironmentMessage_OptionsToRemove = &sUpdateEnvironmentMessage_OptionsToRemove
+
+var UpdateTagsForResourceMessage = &sUpdateTagsForResourceMessage
+var UpdateTagsForResourceMessage_ResourceArn = &sUpdateTagsForResourceMessage_ResourceArn
+var UpdateTagsForResourceMessage_TagsToAdd = &sUpdateTagsForResourceMessage_TagsToAdd
+var UpdateTagsForResourceMessage_TagsToRemove = &sUpdateTagsForResourceMessage_TagsToRemove
+
+var ValidateConfigurationSettingsMessage = &sValidateConfigurationSettingsMessage
+var ValidateConfigurationSettingsMessage_ApplicationName = &sValidateConfigurationSettingsMessage_ApplicationName
+var ValidateConfigurationSettingsMessage_TemplateName = &sValidateConfigurationSettingsMessage_TemplateName
+var ValidateConfigurationSettingsMessage_EnvironmentName = &sValidateConfigurationSettingsMessage_EnvironmentName
+var ValidateConfigurationSettingsMessage_OptionSettings = &sValidateConfigurationSettingsMessage_OptionSettings
+
+var ConfigurationSettingsValidationMessages = &sConfigurationSettingsValidationMessages
+var ConfigurationSettingsValidationMessages_Messages = &sConfigurationSettingsValidationMessages_Messages
+
+var AWSElasticBeanstalkService = &smithy.ServiceSchema{Schema: &s_AWSElasticBeanstalkService, Version: "2010-12-01"}

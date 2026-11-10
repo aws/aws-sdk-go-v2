@@ -4,4930 +4,4854 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/domainnames/{domainName}/apiassociation",
-	Code: 200})
+var (
+	eAssociateApi                                                    smithy.SchemaExtensions
+	eAssociateMergedGraphqlApi                                       smithy.SchemaExtensions
+	eAssociateSourceGraphqlApi                                       smithy.SchemaExtensions
+	eCreateApi                                                       smithy.SchemaExtensions
+	eCreateApiCache                                                  smithy.SchemaExtensions
+	eCreateApiKey                                                    smithy.SchemaExtensions
+	eCreateChannelNamespace                                          smithy.SchemaExtensions
+	eCreateDataSource                                                smithy.SchemaExtensions
+	eCreateDomainName                                                smithy.SchemaExtensions
+	eCreateFunction                                                  smithy.SchemaExtensions
+	eCreateGraphqlApi                                                smithy.SchemaExtensions
+	eCreateResolver                                                  smithy.SchemaExtensions
+	eCreateType                                                      smithy.SchemaExtensions
+	eDeleteApi                                                       smithy.SchemaExtensions
+	eDeleteApiCache                                                  smithy.SchemaExtensions
+	eDeleteApiKey                                                    smithy.SchemaExtensions
+	eDeleteChannelNamespace                                          smithy.SchemaExtensions
+	eDeleteDataSource                                                smithy.SchemaExtensions
+	eDeleteDomainName                                                smithy.SchemaExtensions
+	eDeleteFunction                                                  smithy.SchemaExtensions
+	eDeleteGraphqlApi                                                smithy.SchemaExtensions
+	eDeleteResolver                                                  smithy.SchemaExtensions
+	eDeleteType                                                      smithy.SchemaExtensions
+	eDisassociateApi                                                 smithy.SchemaExtensions
+	eDisassociateMergedGraphqlApi                                    smithy.SchemaExtensions
+	eDisassociateSourceGraphqlApi                                    smithy.SchemaExtensions
+	eEvaluateCode                                                    smithy.SchemaExtensions
+	eEvaluateMappingTemplate                                         smithy.SchemaExtensions
+	eFlushApiCache                                                   smithy.SchemaExtensions
+	eGetApi                                                          smithy.SchemaExtensions
+	eGetApiAssociation                                               smithy.SchemaExtensions
+	eGetApiCache                                                     smithy.SchemaExtensions
+	eGetChannelNamespace                                             smithy.SchemaExtensions
+	eGetDataSource                                                   smithy.SchemaExtensions
+	eGetDataSourceIntrospection                                      smithy.SchemaExtensions
+	eGetDomainName                                                   smithy.SchemaExtensions
+	eGetFunction                                                     smithy.SchemaExtensions
+	eGetGraphqlApi                                                   smithy.SchemaExtensions
+	eGetGraphqlApiEnvironmentVariables                               smithy.SchemaExtensions
+	eGetIntrospectionSchema                                          smithy.SchemaExtensions
+	eGetResolver                                                     smithy.SchemaExtensions
+	eGetSchemaCreationStatus                                         smithy.SchemaExtensions
+	eGetSourceApiAssociation                                         smithy.SchemaExtensions
+	eGetType                                                         smithy.SchemaExtensions
+	eListApiKeys                                                     smithy.SchemaExtensions
+	eListApis                                                        smithy.SchemaExtensions
+	eListChannelNamespaces                                           smithy.SchemaExtensions
+	eListDataSources                                                 smithy.SchemaExtensions
+	eListDomainNames                                                 smithy.SchemaExtensions
+	eListFunctions                                                   smithy.SchemaExtensions
+	eListGraphqlApis                                                 smithy.SchemaExtensions
+	eListResolvers                                                   smithy.SchemaExtensions
+	eListResolversByFunction                                         smithy.SchemaExtensions
+	eListSourceApiAssociations                                       smithy.SchemaExtensions
+	eListTagsForResource                                             smithy.SchemaExtensions
+	eListTypes                                                       smithy.SchemaExtensions
+	eListTypesByAssociation                                          smithy.SchemaExtensions
+	ePutGraphqlApiEnvironmentVariables                               smithy.SchemaExtensions
+	eStartDataSourceIntrospection                                    smithy.SchemaExtensions
+	eStartSchemaCreation                                             smithy.SchemaExtensions
+	eStartSchemaMerge                                                smithy.SchemaExtensions
+	eTagResource                                                     smithy.SchemaExtensions
+	eUntagResource                                                   smithy.SchemaExtensions
+	eUpdateApi                                                       smithy.SchemaExtensions
+	eUpdateApiCache                                                  smithy.SchemaExtensions
+	eUpdateApiKey                                                    smithy.SchemaExtensions
+	eUpdateChannelNamespace                                          smithy.SchemaExtensions
+	eUpdateDataSource                                                smithy.SchemaExtensions
+	eUpdateDomainName                                                smithy.SchemaExtensions
+	eUpdateFunction                                                  smithy.SchemaExtensions
+	eUpdateGraphqlApi                                                smithy.SchemaExtensions
+	eUpdateResolver                                                  smithy.SchemaExtensions
+	eUpdateSourceApiAssociation                                      smithy.SchemaExtensions
+	eUpdateType                                                      smithy.SchemaExtensions
+	e_AWSDeepdishControlPlaneService                                 smithy.SchemaExtensions
+	eAccessDeniedException                                           smithy.SchemaExtensions
+	eAccessDeniedException_message                                   smithy.SchemaExtensions
+	eAdditionalAuthenticationProvider                                smithy.SchemaExtensions
+	eAdditionalAuthenticationProvider_authenticationType             smithy.SchemaExtensions
+	eAdditionalAuthenticationProvider_openIDConnectConfig            smithy.SchemaExtensions
+	eAdditionalAuthenticationProvider_userPoolConfig                 smithy.SchemaExtensions
+	eAdditionalAuthenticationProvider_lambdaAuthorizerConfig         smithy.SchemaExtensions
+	e_AdditionalAuthenticationProviders                              smithy.SchemaExtensions
+	e_AdditionalAuthenticationProviders_member                       smithy.SchemaExtensions
+	eApi                                                             smithy.SchemaExtensions
+	eApi_apiId                                                       smithy.SchemaExtensions
+	eApi_name                                                        smithy.SchemaExtensions
+	eApi_ownerContact                                                smithy.SchemaExtensions
+	eApi_tags                                                        smithy.SchemaExtensions
+	eApi_dns                                                         smithy.SchemaExtensions
+	eApi_apiArn                                                      smithy.SchemaExtensions
+	eApi_created                                                     smithy.SchemaExtensions
+	eApi_xrayEnabled                                                 smithy.SchemaExtensions
+	eApi_wafWebAclArn                                                smithy.SchemaExtensions
+	eApi_eventConfig                                                 smithy.SchemaExtensions
+	eApiAssociation                                                  smithy.SchemaExtensions
+	eApiAssociation_domainName                                       smithy.SchemaExtensions
+	eApiAssociation_apiId                                            smithy.SchemaExtensions
+	eApiAssociation_associationStatus                                smithy.SchemaExtensions
+	eApiAssociation_deploymentDetail                                 smithy.SchemaExtensions
+	eApiCache                                                        smithy.SchemaExtensions
+	eApiCache_ttl                                                    smithy.SchemaExtensions
+	eApiCache_apiCachingBehavior                                     smithy.SchemaExtensions
+	eApiCache_transitEncryptionEnabled                               smithy.SchemaExtensions
+	eApiCache_atRestEncryptionEnabled                                smithy.SchemaExtensions
+	eApiCache_type                                                   smithy.SchemaExtensions
+	eApiCache_status                                                 smithy.SchemaExtensions
+	eApiCache_healthMetricsConfig                                    smithy.SchemaExtensions
+	eApiCacheStatus                                                  smithy.SchemaExtensions
+	eApiCacheStatus_AVAILABLE                                        smithy.SchemaExtensions
+	eApiCacheStatus_CREATING                                         smithy.SchemaExtensions
+	eApiCacheStatus_DELETING                                         smithy.SchemaExtensions
+	eApiCacheStatus_MODIFYING                                        smithy.SchemaExtensions
+	eApiCacheStatus_FAILED                                           smithy.SchemaExtensions
+	eApiCacheType                                                    smithy.SchemaExtensions
+	eApiCacheType_T2_SMALL                                           smithy.SchemaExtensions
+	eApiCacheType_T2_MEDIUM                                          smithy.SchemaExtensions
+	eApiCacheType_R4_LARGE                                           smithy.SchemaExtensions
+	eApiCacheType_R4_XLARGE                                          smithy.SchemaExtensions
+	eApiCacheType_R4_2XLARGE                                         smithy.SchemaExtensions
+	eApiCacheType_R4_4XLARGE                                         smithy.SchemaExtensions
+	eApiCacheType_R4_8XLARGE                                         smithy.SchemaExtensions
+	eApiCacheType_SMALL                                              smithy.SchemaExtensions
+	eApiCacheType_MEDIUM                                             smithy.SchemaExtensions
+	eApiCacheType_LARGE                                              smithy.SchemaExtensions
+	eApiCacheType_XLARGE                                             smithy.SchemaExtensions
+	eApiCacheType_LARGE_2X                                           smithy.SchemaExtensions
+	eApiCacheType_LARGE_4X                                           smithy.SchemaExtensions
+	eApiCacheType_LARGE_8X                                           smithy.SchemaExtensions
+	eApiCacheType_LARGE_12X                                          smithy.SchemaExtensions
+	eApiCachingBehavior                                              smithy.SchemaExtensions
+	eApiCachingBehavior_FULL_REQUEST_CACHING                         smithy.SchemaExtensions
+	eApiCachingBehavior_PER_RESOLVER_CACHING                         smithy.SchemaExtensions
+	eApiCachingBehavior_OPERATION_LEVEL_CACHING                      smithy.SchemaExtensions
+	eApiKey                                                          smithy.SchemaExtensions
+	eApiKey_id                                                       smithy.SchemaExtensions
+	eApiKey_description                                              smithy.SchemaExtensions
+	eApiKey_expires                                                  smithy.SchemaExtensions
+	eApiKey_deletes                                                  smithy.SchemaExtensions
+	eApiKeyLimitExceededException                                    smithy.SchemaExtensions
+	eApiKeyLimitExceededException_message                            smithy.SchemaExtensions
+	e_ApiKeys                                                        smithy.SchemaExtensions
+	e_ApiKeys_member                                                 smithy.SchemaExtensions
+	eApiKeyValidityOutOfBoundsException                              smithy.SchemaExtensions
+	eApiKeyValidityOutOfBoundsException_message                      smithy.SchemaExtensions
+	eApiLimitExceededException                                       smithy.SchemaExtensions
+	eApiLimitExceededException_message                               smithy.SchemaExtensions
+	e_ApiName                                                        smithy.SchemaExtensions
+	e_Apis                                                           smithy.SchemaExtensions
+	e_Apis_member                                                    smithy.SchemaExtensions
+	eAppSyncRuntime                                                  smithy.SchemaExtensions
+	eAppSyncRuntime_name                                             smithy.SchemaExtensions
+	eAppSyncRuntime_runtimeVersion                                   smithy.SchemaExtensions
+	eAssociationStatus                                               smithy.SchemaExtensions
+	eAssociationStatus_Processing                                    smithy.SchemaExtensions
+	eAssociationStatus_Failed                                        smithy.SchemaExtensions
+	eAssociationStatus_Success                                       smithy.SchemaExtensions
+	eAuthenticationType                                              smithy.SchemaExtensions
+	eAuthenticationType_API_KEY                                      smithy.SchemaExtensions
+	eAuthenticationType_AWS_IAM                                      smithy.SchemaExtensions
+	eAuthenticationType_AMAZON_COGNITO_USER_POOLS                    smithy.SchemaExtensions
+	eAuthenticationType_OPENID_CONNECT                               smithy.SchemaExtensions
+	eAuthenticationType_AWS_LAMBDA                                   smithy.SchemaExtensions
+	eAuthMode                                                        smithy.SchemaExtensions
+	eAuthMode_authType                                               smithy.SchemaExtensions
+	e_AuthModes                                                      smithy.SchemaExtensions
+	e_AuthModes_member                                               smithy.SchemaExtensions
+	eAuthorizationConfig                                             smithy.SchemaExtensions
+	eAuthorizationConfig_authorizationType                           smithy.SchemaExtensions
+	eAuthorizationConfig_awsIamConfig                                smithy.SchemaExtensions
+	eAuthorizationType                                               smithy.SchemaExtensions
+	eAuthorizationType_AWS_IAM                                       smithy.SchemaExtensions
+	eAuthProvider                                                    smithy.SchemaExtensions
+	eAuthProvider_authType                                           smithy.SchemaExtensions
+	eAuthProvider_cognitoConfig                                      smithy.SchemaExtensions
+	eAuthProvider_openIDConnectConfig                                smithy.SchemaExtensions
+	eAuthProvider_lambdaAuthorizerConfig                             smithy.SchemaExtensions
+	e_AuthProviders                                                  smithy.SchemaExtensions
+	e_AuthProviders_member                                           smithy.SchemaExtensions
+	eAwsIamConfig                                                    smithy.SchemaExtensions
+	eAwsIamConfig_signingRegion                                      smithy.SchemaExtensions
+	eAwsIamConfig_signingServiceName                                 smithy.SchemaExtensions
+	eBadRequestDetail                                                smithy.SchemaExtensions
+	eBadRequestDetail_codeErrors                                     smithy.SchemaExtensions
+	eBadRequestException                                             smithy.SchemaExtensions
+	eBadRequestException_message                                     smithy.SchemaExtensions
+	eBadRequestException_reason                                      smithy.SchemaExtensions
+	eBadRequestException_detail                                      smithy.SchemaExtensions
+	eBadRequestReason                                                smithy.SchemaExtensions
+	eBadRequestReason_CODE_ERROR                                     smithy.SchemaExtensions
+	e_Blob                                                           smithy.SchemaExtensions
+	e_Boolean                                                        smithy.SchemaExtensions
+	e_BooleanValue                                                   smithy.SchemaExtensions
+	eCacheHealthMetricsConfig                                        smithy.SchemaExtensions
+	eCacheHealthMetricsConfig_ENABLED                                smithy.SchemaExtensions
+	eCacheHealthMetricsConfig_DISABLED                               smithy.SchemaExtensions
+	eCachingConfig                                                   smithy.SchemaExtensions
+	eCachingConfig_ttl                                               smithy.SchemaExtensions
+	eCachingConfig_cachingKeys                                       smithy.SchemaExtensions
+	e_CachingKeys                                                    smithy.SchemaExtensions
+	e_CachingKeys_member                                             smithy.SchemaExtensions
+	e_CertificateArn                                                 smithy.SchemaExtensions
+	eChannelNamespace                                                smithy.SchemaExtensions
+	eChannelNamespace_apiId                                          smithy.SchemaExtensions
+	eChannelNamespace_name                                           smithy.SchemaExtensions
+	eChannelNamespace_subscribeAuthModes                             smithy.SchemaExtensions
+	eChannelNamespace_publishAuthModes                               smithy.SchemaExtensions
+	eChannelNamespace_codeHandlers                                   smithy.SchemaExtensions
+	eChannelNamespace_tags                                           smithy.SchemaExtensions
+	eChannelNamespace_channelNamespaceArn                            smithy.SchemaExtensions
+	eChannelNamespace_created                                        smithy.SchemaExtensions
+	eChannelNamespace_lastModified                                   smithy.SchemaExtensions
+	eChannelNamespace_handlerConfigs                                 smithy.SchemaExtensions
+	e_ChannelNamespaces                                              smithy.SchemaExtensions
+	e_ChannelNamespaces_member                                       smithy.SchemaExtensions
+	e_Code                                                           smithy.SchemaExtensions
+	eCodeError                                                       smithy.SchemaExtensions
+	eCodeError_errorType                                             smithy.SchemaExtensions
+	eCodeError_value                                                 smithy.SchemaExtensions
+	eCodeError_location                                              smithy.SchemaExtensions
+	e_CodeErrorColumn                                                smithy.SchemaExtensions
+	e_CodeErrorLine                                                  smithy.SchemaExtensions
+	eCodeErrorLocation                                               smithy.SchemaExtensions
+	eCodeErrorLocation_line                                          smithy.SchemaExtensions
+	eCodeErrorLocation_column                                        smithy.SchemaExtensions
+	eCodeErrorLocation_span                                          smithy.SchemaExtensions
+	e_CodeErrors                                                     smithy.SchemaExtensions
+	e_CodeErrors_member                                              smithy.SchemaExtensions
+	e_CodeErrorSpan                                                  smithy.SchemaExtensions
+	eCognitoConfig                                                   smithy.SchemaExtensions
+	eCognitoConfig_userPoolId                                        smithy.SchemaExtensions
+	eCognitoConfig_awsRegion                                         smithy.SchemaExtensions
+	eCognitoConfig_appIdClientRegex                                  smithy.SchemaExtensions
+	eCognitoUserPoolConfig                                           smithy.SchemaExtensions
+	eCognitoUserPoolConfig_userPoolId                                smithy.SchemaExtensions
+	eCognitoUserPoolConfig_awsRegion                                 smithy.SchemaExtensions
+	eCognitoUserPoolConfig_appIdClientRegex                          smithy.SchemaExtensions
+	eConcurrentModificationException                                 smithy.SchemaExtensions
+	eConcurrentModificationException_message                         smithy.SchemaExtensions
+	eConflictDetectionType                                           smithy.SchemaExtensions
+	eConflictDetectionType_VERSION                                   smithy.SchemaExtensions
+	eConflictDetectionType_NONE                                      smithy.SchemaExtensions
+	eConflictException                                               smithy.SchemaExtensions
+	eConflictException_message                                       smithy.SchemaExtensions
+	eConflictHandlerType                                             smithy.SchemaExtensions
+	eConflictHandlerType_OPTIMISTIC_CONCURRENCY                      smithy.SchemaExtensions
+	eConflictHandlerType_LAMBDA                                      smithy.SchemaExtensions
+	eConflictHandlerType_AUTOMERGE                                   smithy.SchemaExtensions
+	eConflictHandlerType_NONE                                        smithy.SchemaExtensions
+	e_Context                                                        smithy.SchemaExtensions
+	eDataSource                                                      smithy.SchemaExtensions
+	eDataSource_dataSourceArn                                        smithy.SchemaExtensions
+	eDataSource_name                                                 smithy.SchemaExtensions
+	eDataSource_description                                          smithy.SchemaExtensions
+	eDataSource_type                                                 smithy.SchemaExtensions
+	eDataSource_serviceRoleArn                                       smithy.SchemaExtensions
+	eDataSource_dynamodbConfig                                       smithy.SchemaExtensions
+	eDataSource_lambdaConfig                                         smithy.SchemaExtensions
+	eDataSource_elasticsearchConfig                                  smithy.SchemaExtensions
+	eDataSource_openSearchServiceConfig                              smithy.SchemaExtensions
+	eDataSource_httpConfig                                           smithy.SchemaExtensions
+	eDataSource_relationalDatabaseConfig                             smithy.SchemaExtensions
+	eDataSource_eventBridgeConfig                                    smithy.SchemaExtensions
+	eDataSource_metricsConfig                                        smithy.SchemaExtensions
+	eDataSourceIntrospectionModel                                    smithy.SchemaExtensions
+	eDataSourceIntrospectionModel_name                               smithy.SchemaExtensions
+	eDataSourceIntrospectionModel_fields                             smithy.SchemaExtensions
+	eDataSourceIntrospectionModel_primaryKey                         smithy.SchemaExtensions
+	eDataSourceIntrospectionModel_indexes                            smithy.SchemaExtensions
+	eDataSourceIntrospectionModel_sdl                                smithy.SchemaExtensions
+	eDataSourceIntrospectionModelField                               smithy.SchemaExtensions
+	eDataSourceIntrospectionModelField_name                          smithy.SchemaExtensions
+	eDataSourceIntrospectionModelField_type                          smithy.SchemaExtensions
+	eDataSourceIntrospectionModelField_length                        smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelFields                             smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelFields_member                      smithy.SchemaExtensions
+	eDataSourceIntrospectionModelFieldType                           smithy.SchemaExtensions
+	eDataSourceIntrospectionModelFieldType_kind                      smithy.SchemaExtensions
+	eDataSourceIntrospectionModelFieldType_name                      smithy.SchemaExtensions
+	eDataSourceIntrospectionModelFieldType_type                      smithy.SchemaExtensions
+	eDataSourceIntrospectionModelFieldType_values                    smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelFieldTypeValues                    smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelFieldTypeValues_member             smithy.SchemaExtensions
+	eDataSourceIntrospectionModelIndex                               smithy.SchemaExtensions
+	eDataSourceIntrospectionModelIndex_name                          smithy.SchemaExtensions
+	eDataSourceIntrospectionModelIndex_fields                        smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelIndexes                            smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelIndexes_member                     smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelIndexFields                        smithy.SchemaExtensions
+	e_DataSourceIntrospectionModelIndexFields_member                 smithy.SchemaExtensions
+	e_DataSourceIntrospectionModels                                  smithy.SchemaExtensions
+	e_DataSourceIntrospectionModels_member                           smithy.SchemaExtensions
+	eDataSourceIntrospectionResult                                   smithy.SchemaExtensions
+	eDataSourceIntrospectionResult_models                            smithy.SchemaExtensions
+	eDataSourceIntrospectionResult_nextToken                         smithy.SchemaExtensions
+	eDataSourceIntrospectionStatus                                   smithy.SchemaExtensions
+	eDataSourceIntrospectionStatus_PROCESSING                        smithy.SchemaExtensions
+	eDataSourceIntrospectionStatus_FAILED                            smithy.SchemaExtensions
+	eDataSourceIntrospectionStatus_SUCCESS                           smithy.SchemaExtensions
+	eDataSourceLevelMetricsBehavior                                  smithy.SchemaExtensions
+	eDataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS smithy.SchemaExtensions
+	eDataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS          smithy.SchemaExtensions
+	eDataSourceLevelMetricsConfig                                    smithy.SchemaExtensions
+	eDataSourceLevelMetricsConfig_ENABLED                            smithy.SchemaExtensions
+	eDataSourceLevelMetricsConfig_DISABLED                           smithy.SchemaExtensions
+	e_DataSources                                                    smithy.SchemaExtensions
+	e_DataSources_member                                             smithy.SchemaExtensions
+	eDataSourceType                                                  smithy.SchemaExtensions
+	eDataSourceType_AWS_LAMBDA                                       smithy.SchemaExtensions
+	eDataSourceType_AMAZON_DYNAMODB                                  smithy.SchemaExtensions
+	eDataSourceType_AMAZON_ELASTICSEARCH                             smithy.SchemaExtensions
+	eDataSourceType_NONE                                             smithy.SchemaExtensions
+	eDataSourceType_HTTP                                             smithy.SchemaExtensions
+	eDataSourceType_RELATIONAL_DATABASE                              smithy.SchemaExtensions
+	eDataSourceType_AMAZON_OPENSEARCH_SERVICE                        smithy.SchemaExtensions
+	eDataSourceType_AMAZON_EVENTBRIDGE                               smithy.SchemaExtensions
+	eDataSourceType_AMAZON_BEDROCK_RUNTIME                           smithy.SchemaExtensions
+	e_Date                                                           smithy.SchemaExtensions
+	eDefaultAction                                                   smithy.SchemaExtensions
+	eDefaultAction_ALLOW                                             smithy.SchemaExtensions
+	eDefaultAction_DENY                                              smithy.SchemaExtensions
+	eDeltaSyncConfig                                                 smithy.SchemaExtensions
+	eDeltaSyncConfig_baseTableTTL                                    smithy.SchemaExtensions
+	eDeltaSyncConfig_deltaSyncTableName                              smithy.SchemaExtensions
+	eDeltaSyncConfig_deltaSyncTableTTL                               smithy.SchemaExtensions
+	e_Description                                                    smithy.SchemaExtensions
+	e_DomainName                                                     smithy.SchemaExtensions
+	eDomainNameConfig                                                smithy.SchemaExtensions
+	eDomainNameConfig_domainName                                     smithy.SchemaExtensions
+	eDomainNameConfig_description                                    smithy.SchemaExtensions
+	eDomainNameConfig_certificateArn                                 smithy.SchemaExtensions
+	eDomainNameConfig_appsyncDomainName                              smithy.SchemaExtensions
+	eDomainNameConfig_hostedZoneId                                   smithy.SchemaExtensions
+	eDomainNameConfig_tags                                           smithy.SchemaExtensions
+	eDomainNameConfig_domainNameArn                                  smithy.SchemaExtensions
+	e_DomainNameConfigs                                              smithy.SchemaExtensions
+	e_DomainNameConfigs_member                                       smithy.SchemaExtensions
+	eDynamodbDataSourceConfig                                        smithy.SchemaExtensions
+	eDynamodbDataSourceConfig_tableName                              smithy.SchemaExtensions
+	eDynamodbDataSourceConfig_awsRegion                              smithy.SchemaExtensions
+	eDynamodbDataSourceConfig_useCallerCredentials                   smithy.SchemaExtensions
+	eDynamodbDataSourceConfig_deltaSyncConfig                        smithy.SchemaExtensions
+	eDynamodbDataSourceConfig_versioned                              smithy.SchemaExtensions
+	eElasticsearchDataSourceConfig                                   smithy.SchemaExtensions
+	eElasticsearchDataSourceConfig_endpoint                          smithy.SchemaExtensions
+	eElasticsearchDataSourceConfig_awsRegion                         smithy.SchemaExtensions
+	eEnhancedMetricsConfig                                           smithy.SchemaExtensions
+	eEnhancedMetricsConfig_resolverLevelMetricsBehavior              smithy.SchemaExtensions
+	eEnhancedMetricsConfig_dataSourceLevelMetricsBehavior            smithy.SchemaExtensions
+	eEnhancedMetricsConfig_operationLevelMetricsConfig               smithy.SchemaExtensions
+	e_EnvironmentVariableKey                                         smithy.SchemaExtensions
+	e_EnvironmentVariableMap                                         smithy.SchemaExtensions
+	e_EnvironmentVariableMap_key                                     smithy.SchemaExtensions
+	e_EnvironmentVariableMap_value                                   smithy.SchemaExtensions
+	e_EnvironmentVariableValue                                       smithy.SchemaExtensions
+	eErrorDetail                                                     smithy.SchemaExtensions
+	eErrorDetail_message                                             smithy.SchemaExtensions
+	e_ErrorMessage                                                   smithy.SchemaExtensions
+	eEvaluateCodeErrorDetail                                         smithy.SchemaExtensions
+	eEvaluateCodeErrorDetail_message                                 smithy.SchemaExtensions
+	eEvaluateCodeErrorDetail_codeErrors                              smithy.SchemaExtensions
+	e_EvaluationResult                                               smithy.SchemaExtensions
+	eEventBridgeDataSourceConfig                                     smithy.SchemaExtensions
+	eEventBridgeDataSourceConfig_eventBusArn                         smithy.SchemaExtensions
+	eEventConfig                                                     smithy.SchemaExtensions
+	eEventConfig_authProviders                                       smithy.SchemaExtensions
+	eEventConfig_connectionAuthModes                                 smithy.SchemaExtensions
+	eEventConfig_defaultPublishAuthModes                             smithy.SchemaExtensions
+	eEventConfig_defaultSubscribeAuthModes                           smithy.SchemaExtensions
+	eEventConfig_logConfig                                           smithy.SchemaExtensions
+	eEventLogConfig                                                  smithy.SchemaExtensions
+	eEventLogConfig_logLevel                                         smithy.SchemaExtensions
+	eEventLogConfig_cloudWatchLogsRoleArn                            smithy.SchemaExtensions
+	eEventLogLevel                                                   smithy.SchemaExtensions
+	eEventLogLevel_NONE                                              smithy.SchemaExtensions
+	eEventLogLevel_ERROR                                             smithy.SchemaExtensions
+	eEventLogLevel_ALL                                               smithy.SchemaExtensions
+	eEventLogLevel_INFO                                              smithy.SchemaExtensions
+	eEventLogLevel_DEBUG                                             smithy.SchemaExtensions
+	eFieldLogLevel                                                   smithy.SchemaExtensions
+	eFieldLogLevel_NONE                                              smithy.SchemaExtensions
+	eFieldLogLevel_ERROR                                             smithy.SchemaExtensions
+	eFieldLogLevel_ALL                                               smithy.SchemaExtensions
+	eFieldLogLevel_INFO                                              smithy.SchemaExtensions
+	eFieldLogLevel_DEBUG                                             smithy.SchemaExtensions
+	eFunctionConfiguration                                           smithy.SchemaExtensions
+	eFunctionConfiguration_functionId                                smithy.SchemaExtensions
+	eFunctionConfiguration_functionArn                               smithy.SchemaExtensions
+	eFunctionConfiguration_name                                      smithy.SchemaExtensions
+	eFunctionConfiguration_description                               smithy.SchemaExtensions
+	eFunctionConfiguration_dataSourceName                            smithy.SchemaExtensions
+	eFunctionConfiguration_requestMappingTemplate                    smithy.SchemaExtensions
+	eFunctionConfiguration_responseMappingTemplate                   smithy.SchemaExtensions
+	eFunctionConfiguration_functionVersion                           smithy.SchemaExtensions
+	eFunctionConfiguration_syncConfig                                smithy.SchemaExtensions
+	eFunctionConfiguration_maxBatchSize                              smithy.SchemaExtensions
+	eFunctionConfiguration_runtime                                   smithy.SchemaExtensions
+	eFunctionConfiguration_code                                      smithy.SchemaExtensions
+	e_Functions                                                      smithy.SchemaExtensions
+	e_Functions_member                                               smithy.SchemaExtensions
+	e_FunctionsIds                                                   smithy.SchemaExtensions
+	e_FunctionsIds_member                                            smithy.SchemaExtensions
+	eGraphqlApi                                                      smithy.SchemaExtensions
+	eGraphqlApi_name                                                 smithy.SchemaExtensions
+	eGraphqlApi_apiId                                                smithy.SchemaExtensions
+	eGraphqlApi_authenticationType                                   smithy.SchemaExtensions
+	eGraphqlApi_logConfig                                            smithy.SchemaExtensions
+	eGraphqlApi_userPoolConfig                                       smithy.SchemaExtensions
+	eGraphqlApi_openIDConnectConfig                                  smithy.SchemaExtensions
+	eGraphqlApi_arn                                                  smithy.SchemaExtensions
+	eGraphqlApi_uris                                                 smithy.SchemaExtensions
+	eGraphqlApi_tags                                                 smithy.SchemaExtensions
+	eGraphqlApi_additionalAuthenticationProviders                    smithy.SchemaExtensions
+	eGraphqlApi_xrayEnabled                                          smithy.SchemaExtensions
+	eGraphqlApi_wafWebAclArn                                         smithy.SchemaExtensions
+	eGraphqlApi_lambdaAuthorizerConfig                               smithy.SchemaExtensions
+	eGraphqlApi_dns                                                  smithy.SchemaExtensions
+	eGraphqlApi_visibility                                           smithy.SchemaExtensions
+	eGraphqlApi_apiType                                              smithy.SchemaExtensions
+	eGraphqlApi_mergedApiExecutionRoleArn                            smithy.SchemaExtensions
+	eGraphqlApi_owner                                                smithy.SchemaExtensions
+	eGraphqlApi_ownerContact                                         smithy.SchemaExtensions
+	eGraphqlApi_introspectionConfig                                  smithy.SchemaExtensions
+	eGraphqlApi_queryDepthLimit                                      smithy.SchemaExtensions
+	eGraphqlApi_resolverCountLimit                                   smithy.SchemaExtensions
+	eGraphqlApi_enhancedMetricsConfig                                smithy.SchemaExtensions
+	eGraphQLApiIntrospectionConfig                                   smithy.SchemaExtensions
+	eGraphQLApiIntrospectionConfig_ENABLED                           smithy.SchemaExtensions
+	eGraphQLApiIntrospectionConfig_DISABLED                          smithy.SchemaExtensions
+	e_GraphqlApis                                                    smithy.SchemaExtensions
+	e_GraphqlApis_member                                             smithy.SchemaExtensions
+	eGraphQLApiType                                                  smithy.SchemaExtensions
+	eGraphQLApiType_GRAPHQL                                          smithy.SchemaExtensions
+	eGraphQLApiType_MERGED                                           smithy.SchemaExtensions
+	eGraphQLApiVisibility                                            smithy.SchemaExtensions
+	eGraphQLApiVisibility_GLOBAL                                     smithy.SchemaExtensions
+	eGraphQLApiVisibility_PRIVATE                                    smithy.SchemaExtensions
+	eGraphQLSchemaException                                          smithy.SchemaExtensions
+	eGraphQLSchemaException_message                                  smithy.SchemaExtensions
+	eHandlerBehavior                                                 smithy.SchemaExtensions
+	eHandlerBehavior_CODE                                            smithy.SchemaExtensions
+	eHandlerBehavior_DIRECT                                          smithy.SchemaExtensions
+	eHandlerConfig                                                   smithy.SchemaExtensions
+	eHandlerConfig_behavior                                          smithy.SchemaExtensions
+	eHandlerConfig_integration                                       smithy.SchemaExtensions
+	eHandlerConfigs                                                  smithy.SchemaExtensions
+	eHandlerConfigs_onPublish                                        smithy.SchemaExtensions
+	eHandlerConfigs_onSubscribe                                      smithy.SchemaExtensions
+	eHttpDataSourceConfig                                            smithy.SchemaExtensions
+	eHttpDataSourceConfig_endpoint                                   smithy.SchemaExtensions
+	eHttpDataSourceConfig_authorizationConfig                        smithy.SchemaExtensions
+	eIntegration                                                     smithy.SchemaExtensions
+	eIntegration_dataSourceName                                      smithy.SchemaExtensions
+	eIntegration_lambdaConfig                                        smithy.SchemaExtensions
+	eInternalFailureException                                        smithy.SchemaExtensions
+	eInternalFailureException_message                                smithy.SchemaExtensions
+	eInvokeType                                                      smithy.SchemaExtensions
+	eInvokeType_REQUEST_RESPONSE                                     smithy.SchemaExtensions
+	eInvokeType_EVENT                                                smithy.SchemaExtensions
+	eLambdaAuthorizerConfig                                          smithy.SchemaExtensions
+	eLambdaAuthorizerConfig_authorizerResultTtlInSeconds             smithy.SchemaExtensions
+	eLambdaAuthorizerConfig_authorizerUri                            smithy.SchemaExtensions
+	eLambdaAuthorizerConfig_identityValidationExpression             smithy.SchemaExtensions
+	eLambdaConfig                                                    smithy.SchemaExtensions
+	eLambdaConfig_invokeType                                         smithy.SchemaExtensions
+	eLambdaConflictHandlerConfig                                     smithy.SchemaExtensions
+	eLambdaConflictHandlerConfig_lambdaConflictHandlerArn            smithy.SchemaExtensions
+	eLambdaDataSourceConfig                                          smithy.SchemaExtensions
+	eLambdaDataSourceConfig_lambdaFunctionArn                        smithy.SchemaExtensions
+	eLimitExceededException                                          smithy.SchemaExtensions
+	eLimitExceededException_message                                  smithy.SchemaExtensions
+	eLogConfig                                                       smithy.SchemaExtensions
+	eLogConfig_fieldLogLevel                                         smithy.SchemaExtensions
+	eLogConfig_cloudWatchLogsRoleArn                                 smithy.SchemaExtensions
+	eLogConfig_excludeVerboseContent                                 smithy.SchemaExtensions
+	e_Logs                                                           smithy.SchemaExtensions
+	e_Logs_member                                                    smithy.SchemaExtensions
+	e_Long                                                           smithy.SchemaExtensions
+	e_MapOfStringToString                                            smithy.SchemaExtensions
+	e_MapOfStringToString_key                                        smithy.SchemaExtensions
+	e_MapOfStringToString_value                                      smithy.SchemaExtensions
+	e_MappingTemplate                                                smithy.SchemaExtensions
+	e_MaxBatchSize                                                   smithy.SchemaExtensions
+	e_MaxResults                                                     smithy.SchemaExtensions
+	eMergeType                                                       smithy.SchemaExtensions
+	eMergeType_MANUAL_MERGE                                          smithy.SchemaExtensions
+	eMergeType_AUTO_MERGE                                            smithy.SchemaExtensions
+	e_Namespace                                                      smithy.SchemaExtensions
+	eNotFoundException                                               smithy.SchemaExtensions
+	eNotFoundException_message                                       smithy.SchemaExtensions
+	eOpenIDConnectConfig                                             smithy.SchemaExtensions
+	eOpenIDConnectConfig_issuer                                      smithy.SchemaExtensions
+	eOpenIDConnectConfig_clientId                                    smithy.SchemaExtensions
+	eOpenIDConnectConfig_iatTTL                                      smithy.SchemaExtensions
+	eOpenIDConnectConfig_authTTL                                     smithy.SchemaExtensions
+	eOpenSearchServiceDataSourceConfig                               smithy.SchemaExtensions
+	eOpenSearchServiceDataSourceConfig_endpoint                      smithy.SchemaExtensions
+	eOpenSearchServiceDataSourceConfig_awsRegion                     smithy.SchemaExtensions
+	eOperationLevelMetricsConfig                                     smithy.SchemaExtensions
+	eOperationLevelMetricsConfig_ENABLED                             smithy.SchemaExtensions
+	eOperationLevelMetricsConfig_DISABLED                            smithy.SchemaExtensions
+	e_OutErrors                                                      smithy.SchemaExtensions
+	eOutputType                                                      smithy.SchemaExtensions
+	eOutputType_SDL                                                  smithy.SchemaExtensions
+	eOutputType_JSON                                                 smithy.SchemaExtensions
+	e_OwnerContact                                                   smithy.SchemaExtensions
+	eOwnership                                                       smithy.SchemaExtensions
+	eOwnership_CURRENT_ACCOUNT                                       smithy.SchemaExtensions
+	eOwnership_OTHER_ACCOUNTS                                        smithy.SchemaExtensions
+	e_PaginationToken                                                smithy.SchemaExtensions
+	ePipelineConfig                                                  smithy.SchemaExtensions
+	ePipelineConfig_functions                                        smithy.SchemaExtensions
+	e_QueryDepthLimit                                                smithy.SchemaExtensions
+	eRdsDataApiConfig                                                smithy.SchemaExtensions
+	eRdsDataApiConfig_resourceArn                                    smithy.SchemaExtensions
+	eRdsDataApiConfig_secretArn                                      smithy.SchemaExtensions
+	eRdsDataApiConfig_databaseName                                   smithy.SchemaExtensions
+	e_RdsDataApiConfigDatabaseName                                   smithy.SchemaExtensions
+	e_RdsDataApiConfigResourceArn                                    smithy.SchemaExtensions
+	e_RdsDataApiConfigSecretArn                                      smithy.SchemaExtensions
+	eRdsHttpEndpointConfig                                           smithy.SchemaExtensions
+	eRdsHttpEndpointConfig_awsRegion                                 smithy.SchemaExtensions
+	eRdsHttpEndpointConfig_dbClusterIdentifier                       smithy.SchemaExtensions
+	eRdsHttpEndpointConfig_databaseName                              smithy.SchemaExtensions
+	eRdsHttpEndpointConfig_schema                                    smithy.SchemaExtensions
+	eRdsHttpEndpointConfig_awsSecretStoreArn                         smithy.SchemaExtensions
+	eRelationalDatabaseDataSourceConfig                              smithy.SchemaExtensions
+	eRelationalDatabaseDataSourceConfig_relationalDatabaseSourceType smithy.SchemaExtensions
+	eRelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig        smithy.SchemaExtensions
+	eRelationalDatabaseSourceType                                    smithy.SchemaExtensions
+	eRelationalDatabaseSourceType_RDS_HTTP_ENDPOINT                  smithy.SchemaExtensions
+	eResolver                                                        smithy.SchemaExtensions
+	eResolver_typeName                                               smithy.SchemaExtensions
+	eResolver_fieldName                                              smithy.SchemaExtensions
+	eResolver_dataSourceName                                         smithy.SchemaExtensions
+	eResolver_resolverArn                                            smithy.SchemaExtensions
+	eResolver_requestMappingTemplate                                 smithy.SchemaExtensions
+	eResolver_responseMappingTemplate                                smithy.SchemaExtensions
+	eResolver_kind                                                   smithy.SchemaExtensions
+	eResolver_pipelineConfig                                         smithy.SchemaExtensions
+	eResolver_syncConfig                                             smithy.SchemaExtensions
+	eResolver_cachingConfig                                          smithy.SchemaExtensions
+	eResolver_maxBatchSize                                           smithy.SchemaExtensions
+	eResolver_runtime                                                smithy.SchemaExtensions
+	eResolver_code                                                   smithy.SchemaExtensions
+	eResolver_metricsConfig                                          smithy.SchemaExtensions
+	e_ResolverCountLimit                                             smithy.SchemaExtensions
+	eResolverKind                                                    smithy.SchemaExtensions
+	eResolverKind_UNIT                                               smithy.SchemaExtensions
+	eResolverKind_PIPELINE                                           smithy.SchemaExtensions
+	eResolverLevelMetricsBehavior                                    smithy.SchemaExtensions
+	eResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS      smithy.SchemaExtensions
+	eResolverLevelMetricsBehavior_PER_RESOLVER_METRICS               smithy.SchemaExtensions
+	eResolverLevelMetricsConfig                                      smithy.SchemaExtensions
+	eResolverLevelMetricsConfig_ENABLED                              smithy.SchemaExtensions
+	eResolverLevelMetricsConfig_DISABLED                             smithy.SchemaExtensions
+	e_Resolvers                                                      smithy.SchemaExtensions
+	e_Resolvers_member                                               smithy.SchemaExtensions
+	e_ResourceArn                                                    smithy.SchemaExtensions
+	e_ResourceName                                                   smithy.SchemaExtensions
+	eRuntimeName                                                     smithy.SchemaExtensions
+	eRuntimeName_APPSYNC_JS                                          smithy.SchemaExtensions
+	eSchemaStatus                                                    smithy.SchemaExtensions
+	eSchemaStatus_Processing                                         smithy.SchemaExtensions
+	eSchemaStatus_Active                                             smithy.SchemaExtensions
+	eSchemaStatus_Deleting                                           smithy.SchemaExtensions
+	eSchemaStatus_Failed                                             smithy.SchemaExtensions
+	eSchemaStatus_Success                                            smithy.SchemaExtensions
+	eSchemaStatus_NotApplicable                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                           smithy.SchemaExtensions
+	eSourceApiAssociation                                            smithy.SchemaExtensions
+	eSourceApiAssociation_associationId                              smithy.SchemaExtensions
+	eSourceApiAssociation_associationArn                             smithy.SchemaExtensions
+	eSourceApiAssociation_sourceApiId                                smithy.SchemaExtensions
+	eSourceApiAssociation_sourceApiArn                               smithy.SchemaExtensions
+	eSourceApiAssociation_mergedApiArn                               smithy.SchemaExtensions
+	eSourceApiAssociation_mergedApiId                                smithy.SchemaExtensions
+	eSourceApiAssociation_description                                smithy.SchemaExtensions
+	eSourceApiAssociation_sourceApiAssociationConfig                 smithy.SchemaExtensions
+	eSourceApiAssociation_sourceApiAssociationStatus                 smithy.SchemaExtensions
+	eSourceApiAssociation_sourceApiAssociationStatusDetail           smithy.SchemaExtensions
+	eSourceApiAssociation_lastSuccessfulMergeDate                    smithy.SchemaExtensions
+	eSourceApiAssociationConfig                                      smithy.SchemaExtensions
+	eSourceApiAssociationConfig_mergeType                            smithy.SchemaExtensions
+	eSourceApiAssociationStatus                                      smithy.SchemaExtensions
+	eSourceApiAssociationStatus_MERGE_SCHEDULED                      smithy.SchemaExtensions
+	eSourceApiAssociationStatus_MERGE_FAILED                         smithy.SchemaExtensions
+	eSourceApiAssociationStatus_MERGE_SUCCESS                        smithy.SchemaExtensions
+	eSourceApiAssociationStatus_MERGE_IN_PROGRESS                    smithy.SchemaExtensions
+	eSourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED           smithy.SchemaExtensions
+	eSourceApiAssociationStatus_DELETION_SCHEDULED                   smithy.SchemaExtensions
+	eSourceApiAssociationStatus_DELETION_IN_PROGRESS                 smithy.SchemaExtensions
+	eSourceApiAssociationStatus_DELETION_FAILED                      smithy.SchemaExtensions
+	eSourceApiAssociationSummary                                     smithy.SchemaExtensions
+	eSourceApiAssociationSummary_associationId                       smithy.SchemaExtensions
+	eSourceApiAssociationSummary_associationArn                      smithy.SchemaExtensions
+	eSourceApiAssociationSummary_sourceApiId                         smithy.SchemaExtensions
+	eSourceApiAssociationSummary_sourceApiArn                        smithy.SchemaExtensions
+	eSourceApiAssociationSummary_mergedApiId                         smithy.SchemaExtensions
+	eSourceApiAssociationSummary_mergedApiArn                        smithy.SchemaExtensions
+	eSourceApiAssociationSummary_description                         smithy.SchemaExtensions
+	e_SourceApiAssociationSummaryList                                smithy.SchemaExtensions
+	e_SourceApiAssociationSummaryList_member                         smithy.SchemaExtensions
+	e_Stash                                                          smithy.SchemaExtensions
+	e_String                                                         smithy.SchemaExtensions
+	eSyncConfig                                                      smithy.SchemaExtensions
+	eSyncConfig_conflictHandler                                      smithy.SchemaExtensions
+	eSyncConfig_conflictDetection                                    smithy.SchemaExtensions
+	eSyncConfig_lambdaConflictHandlerConfig                          smithy.SchemaExtensions
+	e_TagKey                                                         smithy.SchemaExtensions
+	e_TagKeyList                                                     smithy.SchemaExtensions
+	e_TagKeyList_member                                              smithy.SchemaExtensions
+	e_TagMap                                                         smithy.SchemaExtensions
+	e_TagMap_key                                                     smithy.SchemaExtensions
+	e_TagMap_value                                                   smithy.SchemaExtensions
+	e_TagValue                                                       smithy.SchemaExtensions
+	e_Template                                                       smithy.SchemaExtensions
+	e_Timestamp                                                      smithy.SchemaExtensions
+	e_TTL                                                            smithy.SchemaExtensions
+	eType                                                            smithy.SchemaExtensions
+	eType_name                                                       smithy.SchemaExtensions
+	eType_description                                                smithy.SchemaExtensions
+	eType_arn                                                        smithy.SchemaExtensions
+	eType_definition                                                 smithy.SchemaExtensions
+	eType_format                                                     smithy.SchemaExtensions
+	eTypeDefinitionFormat                                            smithy.SchemaExtensions
+	eTypeDefinitionFormat_SDL                                        smithy.SchemaExtensions
+	eTypeDefinitionFormat_JSON                                       smithy.SchemaExtensions
+	e_TypeList                                                       smithy.SchemaExtensions
+	e_TypeList_member                                                smithy.SchemaExtensions
+	eUnauthorizedException                                           smithy.SchemaExtensions
+	eUnauthorizedException_message                                   smithy.SchemaExtensions
+	eUserPoolConfig                                                  smithy.SchemaExtensions
+	eUserPoolConfig_userPoolId                                       smithy.SchemaExtensions
+	eUserPoolConfig_awsRegion                                        smithy.SchemaExtensions
+	eUserPoolConfig_defaultAction                                    smithy.SchemaExtensions
+	eUserPoolConfig_appIdClientRegex                                 smithy.SchemaExtensions
+	eAssociateApiRequest                                             smithy.SchemaExtensions
+	eAssociateApiRequest_domainName                                  smithy.SchemaExtensions
+	eAssociateApiRequest_apiId                                       smithy.SchemaExtensions
+	eAssociateApiResponse                                            smithy.SchemaExtensions
+	eAssociateApiResponse_apiAssociation                             smithy.SchemaExtensions
+	eAssociateMergedGraphqlApiRequest                                smithy.SchemaExtensions
+	eAssociateMergedGraphqlApiRequest_sourceApiIdentifier            smithy.SchemaExtensions
+	eAssociateMergedGraphqlApiRequest_mergedApiIdentifier            smithy.SchemaExtensions
+	eAssociateMergedGraphqlApiRequest_description                    smithy.SchemaExtensions
+	eAssociateMergedGraphqlApiRequest_sourceApiAssociationConfig     smithy.SchemaExtensions
+	eAssociateMergedGraphqlApiResponse                               smithy.SchemaExtensions
+	eAssociateMergedGraphqlApiResponse_sourceApiAssociation          smithy.SchemaExtensions
+	eAssociateSourceGraphqlApiRequest                                smithy.SchemaExtensions
+	eAssociateSourceGraphqlApiRequest_mergedApiIdentifier            smithy.SchemaExtensions
+	eAssociateSourceGraphqlApiRequest_sourceApiIdentifier            smithy.SchemaExtensions
+	eAssociateSourceGraphqlApiRequest_description                    smithy.SchemaExtensions
+	eAssociateSourceGraphqlApiRequest_sourceApiAssociationConfig     smithy.SchemaExtensions
+	eAssociateSourceGraphqlApiResponse                               smithy.SchemaExtensions
+	eAssociateSourceGraphqlApiResponse_sourceApiAssociation          smithy.SchemaExtensions
+	eCreateApiCacheRequest                                           smithy.SchemaExtensions
+	eCreateApiCacheRequest_apiId                                     smithy.SchemaExtensions
+	eCreateApiCacheRequest_ttl                                       smithy.SchemaExtensions
+	eCreateApiCacheRequest_transitEncryptionEnabled                  smithy.SchemaExtensions
+	eCreateApiCacheRequest_atRestEncryptionEnabled                   smithy.SchemaExtensions
+	eCreateApiCacheRequest_apiCachingBehavior                        smithy.SchemaExtensions
+	eCreateApiCacheRequest_type                                      smithy.SchemaExtensions
+	eCreateApiCacheRequest_healthMetricsConfig                       smithy.SchemaExtensions
+	eCreateApiCacheResponse                                          smithy.SchemaExtensions
+	eCreateApiCacheResponse_apiCache                                 smithy.SchemaExtensions
+	eCreateApiRequest                                                smithy.SchemaExtensions
+	eCreateApiRequest_name                                           smithy.SchemaExtensions
+	eCreateApiRequest_ownerContact                                   smithy.SchemaExtensions
+	eCreateApiRequest_tags                                           smithy.SchemaExtensions
+	eCreateApiRequest_eventConfig                                    smithy.SchemaExtensions
+	eCreateApiKeyRequest                                             smithy.SchemaExtensions
+	eCreateApiKeyRequest_apiId                                       smithy.SchemaExtensions
+	eCreateApiKeyRequest_description                                 smithy.SchemaExtensions
+	eCreateApiKeyRequest_expires                                     smithy.SchemaExtensions
+	eCreateApiKeyResponse                                            smithy.SchemaExtensions
+	eCreateApiKeyResponse_apiKey                                     smithy.SchemaExtensions
+	eCreateApiResponse                                               smithy.SchemaExtensions
+	eCreateApiResponse_api                                           smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest                                   smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest_apiId                             smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest_name                              smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest_subscribeAuthModes                smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest_publishAuthModes                  smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest_codeHandlers                      smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest_tags                              smithy.SchemaExtensions
+	eCreateChannelNamespaceRequest_handlerConfigs                    smithy.SchemaExtensions
+	eCreateChannelNamespaceResponse                                  smithy.SchemaExtensions
+	eCreateChannelNamespaceResponse_channelNamespace                 smithy.SchemaExtensions
+	eCreateDataSourceRequest                                         smithy.SchemaExtensions
+	eCreateDataSourceRequest_apiId                                   smithy.SchemaExtensions
+	eCreateDataSourceRequest_name                                    smithy.SchemaExtensions
+	eCreateDataSourceRequest_description                             smithy.SchemaExtensions
+	eCreateDataSourceRequest_type                                    smithy.SchemaExtensions
+	eCreateDataSourceRequest_serviceRoleArn                          smithy.SchemaExtensions
+	eCreateDataSourceRequest_dynamodbConfig                          smithy.SchemaExtensions
+	eCreateDataSourceRequest_lambdaConfig                            smithy.SchemaExtensions
+	eCreateDataSourceRequest_elasticsearchConfig                     smithy.SchemaExtensions
+	eCreateDataSourceRequest_openSearchServiceConfig                 smithy.SchemaExtensions
+	eCreateDataSourceRequest_httpConfig                              smithy.SchemaExtensions
+	eCreateDataSourceRequest_relationalDatabaseConfig                smithy.SchemaExtensions
+	eCreateDataSourceRequest_eventBridgeConfig                       smithy.SchemaExtensions
+	eCreateDataSourceRequest_metricsConfig                           smithy.SchemaExtensions
+	eCreateDataSourceResponse                                        smithy.SchemaExtensions
+	eCreateDataSourceResponse_dataSource                             smithy.SchemaExtensions
+	eCreateDomainNameRequest                                         smithy.SchemaExtensions
+	eCreateDomainNameRequest_domainName                              smithy.SchemaExtensions
+	eCreateDomainNameRequest_certificateArn                          smithy.SchemaExtensions
+	eCreateDomainNameRequest_description                             smithy.SchemaExtensions
+	eCreateDomainNameRequest_tags                                    smithy.SchemaExtensions
+	eCreateDomainNameResponse                                        smithy.SchemaExtensions
+	eCreateDomainNameResponse_domainNameConfig                       smithy.SchemaExtensions
+	eCreateFunctionRequest                                           smithy.SchemaExtensions
+	eCreateFunctionRequest_apiId                                     smithy.SchemaExtensions
+	eCreateFunctionRequest_name                                      smithy.SchemaExtensions
+	eCreateFunctionRequest_description                               smithy.SchemaExtensions
+	eCreateFunctionRequest_dataSourceName                            smithy.SchemaExtensions
+	eCreateFunctionRequest_requestMappingTemplate                    smithy.SchemaExtensions
+	eCreateFunctionRequest_responseMappingTemplate                   smithy.SchemaExtensions
+	eCreateFunctionRequest_functionVersion                           smithy.SchemaExtensions
+	eCreateFunctionRequest_syncConfig                                smithy.SchemaExtensions
+	eCreateFunctionRequest_maxBatchSize                              smithy.SchemaExtensions
+	eCreateFunctionRequest_runtime                                   smithy.SchemaExtensions
+	eCreateFunctionRequest_code                                      smithy.SchemaExtensions
+	eCreateFunctionResponse                                          smithy.SchemaExtensions
+	eCreateFunctionResponse_functionConfiguration                    smithy.SchemaExtensions
+	eCreateGraphqlApiRequest                                         smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_name                                    smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_logConfig                               smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_authenticationType                      smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_userPoolConfig                          smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_openIDConnectConfig                     smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_tags                                    smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_additionalAuthenticationProviders       smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_xrayEnabled                             smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_lambdaAuthorizerConfig                  smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_apiType                                 smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_mergedApiExecutionRoleArn               smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_visibility                              smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_ownerContact                            smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_introspectionConfig                     smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_queryDepthLimit                         smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_resolverCountLimit                      smithy.SchemaExtensions
+	eCreateGraphqlApiRequest_enhancedMetricsConfig                   smithy.SchemaExtensions
+	eCreateGraphqlApiResponse                                        smithy.SchemaExtensions
+	eCreateGraphqlApiResponse_graphqlApi                             smithy.SchemaExtensions
+	eCreateResolverRequest                                           smithy.SchemaExtensions
+	eCreateResolverRequest_apiId                                     smithy.SchemaExtensions
+	eCreateResolverRequest_typeName                                  smithy.SchemaExtensions
+	eCreateResolverRequest_fieldName                                 smithy.SchemaExtensions
+	eCreateResolverRequest_dataSourceName                            smithy.SchemaExtensions
+	eCreateResolverRequest_requestMappingTemplate                    smithy.SchemaExtensions
+	eCreateResolverRequest_responseMappingTemplate                   smithy.SchemaExtensions
+	eCreateResolverRequest_kind                                      smithy.SchemaExtensions
+	eCreateResolverRequest_pipelineConfig                            smithy.SchemaExtensions
+	eCreateResolverRequest_syncConfig                                smithy.SchemaExtensions
+	eCreateResolverRequest_cachingConfig                             smithy.SchemaExtensions
+	eCreateResolverRequest_maxBatchSize                              smithy.SchemaExtensions
+	eCreateResolverRequest_runtime                                   smithy.SchemaExtensions
+	eCreateResolverRequest_code                                      smithy.SchemaExtensions
+	eCreateResolverRequest_metricsConfig                             smithy.SchemaExtensions
+	eCreateResolverResponse                                          smithy.SchemaExtensions
+	eCreateResolverResponse_resolver                                 smithy.SchemaExtensions
+	eCreateTypeRequest                                               smithy.SchemaExtensions
+	eCreateTypeRequest_apiId                                         smithy.SchemaExtensions
+	eCreateTypeRequest_definition                                    smithy.SchemaExtensions
+	eCreateTypeRequest_format                                        smithy.SchemaExtensions
+	eCreateTypeResponse                                              smithy.SchemaExtensions
+	eCreateTypeResponse_type                                         smithy.SchemaExtensions
+	eDeleteApiCacheRequest                                           smithy.SchemaExtensions
+	eDeleteApiCacheRequest_apiId                                     smithy.SchemaExtensions
+	eDeleteApiCacheResponse                                          smithy.SchemaExtensions
+	eDeleteApiRequest                                                smithy.SchemaExtensions
+	eDeleteApiRequest_apiId                                          smithy.SchemaExtensions
+	eDeleteApiKeyRequest                                             smithy.SchemaExtensions
+	eDeleteApiKeyRequest_apiId                                       smithy.SchemaExtensions
+	eDeleteApiKeyRequest_id                                          smithy.SchemaExtensions
+	eDeleteApiKeyResponse                                            smithy.SchemaExtensions
+	eDeleteApiResponse                                               smithy.SchemaExtensions
+	eDeleteChannelNamespaceRequest                                   smithy.SchemaExtensions
+	eDeleteChannelNamespaceRequest_apiId                             smithy.SchemaExtensions
+	eDeleteChannelNamespaceRequest_name                              smithy.SchemaExtensions
+	eDeleteChannelNamespaceResponse                                  smithy.SchemaExtensions
+	eDeleteDataSourceRequest                                         smithy.SchemaExtensions
+	eDeleteDataSourceRequest_apiId                                   smithy.SchemaExtensions
+	eDeleteDataSourceRequest_name                                    smithy.SchemaExtensions
+	eDeleteDataSourceResponse                                        smithy.SchemaExtensions
+	eDeleteDomainNameRequest                                         smithy.SchemaExtensions
+	eDeleteDomainNameRequest_domainName                              smithy.SchemaExtensions
+	eDeleteDomainNameResponse                                        smithy.SchemaExtensions
+	eDeleteFunctionRequest                                           smithy.SchemaExtensions
+	eDeleteFunctionRequest_apiId                                     smithy.SchemaExtensions
+	eDeleteFunctionRequest_functionId                                smithy.SchemaExtensions
+	eDeleteFunctionResponse                                          smithy.SchemaExtensions
+	eDeleteGraphqlApiRequest                                         smithy.SchemaExtensions
+	eDeleteGraphqlApiRequest_apiId                                   smithy.SchemaExtensions
+	eDeleteGraphqlApiResponse                                        smithy.SchemaExtensions
+	eDeleteResolverRequest                                           smithy.SchemaExtensions
+	eDeleteResolverRequest_apiId                                     smithy.SchemaExtensions
+	eDeleteResolverRequest_typeName                                  smithy.SchemaExtensions
+	eDeleteResolverRequest_fieldName                                 smithy.SchemaExtensions
+	eDeleteResolverResponse                                          smithy.SchemaExtensions
+	eDeleteTypeRequest                                               smithy.SchemaExtensions
+	eDeleteTypeRequest_apiId                                         smithy.SchemaExtensions
+	eDeleteTypeRequest_typeName                                      smithy.SchemaExtensions
+	eDeleteTypeResponse                                              smithy.SchemaExtensions
+	eDisassociateApiRequest                                          smithy.SchemaExtensions
+	eDisassociateApiRequest_domainName                               smithy.SchemaExtensions
+	eDisassociateApiResponse                                         smithy.SchemaExtensions
+	eDisassociateMergedGraphqlApiRequest                             smithy.SchemaExtensions
+	eDisassociateMergedGraphqlApiRequest_sourceApiIdentifier         smithy.SchemaExtensions
+	eDisassociateMergedGraphqlApiRequest_associationId               smithy.SchemaExtensions
+	eDisassociateMergedGraphqlApiResponse                            smithy.SchemaExtensions
+	eDisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus smithy.SchemaExtensions
+	eDisassociateSourceGraphqlApiRequest                             smithy.SchemaExtensions
+	eDisassociateSourceGraphqlApiRequest_mergedApiIdentifier         smithy.SchemaExtensions
+	eDisassociateSourceGraphqlApiRequest_associationId               smithy.SchemaExtensions
+	eDisassociateSourceGraphqlApiResponse                            smithy.SchemaExtensions
+	eDisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus smithy.SchemaExtensions
+	eEvaluateCodeRequest                                             smithy.SchemaExtensions
+	eEvaluateCodeRequest_runtime                                     smithy.SchemaExtensions
+	eEvaluateCodeRequest_code                                        smithy.SchemaExtensions
+	eEvaluateCodeRequest_context                                     smithy.SchemaExtensions
+	eEvaluateCodeRequest_function                                    smithy.SchemaExtensions
+	eEvaluateCodeResponse                                            smithy.SchemaExtensions
+	eEvaluateCodeResponse_evaluationResult                           smithy.SchemaExtensions
+	eEvaluateCodeResponse_error                                      smithy.SchemaExtensions
+	eEvaluateCodeResponse_logs                                       smithy.SchemaExtensions
+	eEvaluateCodeResponse_stash                                      smithy.SchemaExtensions
+	eEvaluateCodeResponse_outErrors                                  smithy.SchemaExtensions
+	eEvaluateMappingTemplateRequest                                  smithy.SchemaExtensions
+	eEvaluateMappingTemplateRequest_template                         smithy.SchemaExtensions
+	eEvaluateMappingTemplateRequest_context                          smithy.SchemaExtensions
+	eEvaluateMappingTemplateResponse                                 smithy.SchemaExtensions
+	eEvaluateMappingTemplateResponse_evaluationResult                smithy.SchemaExtensions
+	eEvaluateMappingTemplateResponse_error                           smithy.SchemaExtensions
+	eEvaluateMappingTemplateResponse_logs                            smithy.SchemaExtensions
+	eEvaluateMappingTemplateResponse_stash                           smithy.SchemaExtensions
+	eEvaluateMappingTemplateResponse_outErrors                       smithy.SchemaExtensions
+	eFlushApiCacheRequest                                            smithy.SchemaExtensions
+	eFlushApiCacheRequest_apiId                                      smithy.SchemaExtensions
+	eFlushApiCacheResponse                                           smithy.SchemaExtensions
+	eGetApiAssociationRequest                                        smithy.SchemaExtensions
+	eGetApiAssociationRequest_domainName                             smithy.SchemaExtensions
+	eGetApiAssociationResponse                                       smithy.SchemaExtensions
+	eGetApiAssociationResponse_apiAssociation                        smithy.SchemaExtensions
+	eGetApiCacheRequest                                              smithy.SchemaExtensions
+	eGetApiCacheRequest_apiId                                        smithy.SchemaExtensions
+	eGetApiCacheResponse                                             smithy.SchemaExtensions
+	eGetApiCacheResponse_apiCache                                    smithy.SchemaExtensions
+	eGetApiRequest                                                   smithy.SchemaExtensions
+	eGetApiRequest_apiId                                             smithy.SchemaExtensions
+	eGetApiResponse                                                  smithy.SchemaExtensions
+	eGetApiResponse_api                                              smithy.SchemaExtensions
+	eGetChannelNamespaceRequest                                      smithy.SchemaExtensions
+	eGetChannelNamespaceRequest_apiId                                smithy.SchemaExtensions
+	eGetChannelNamespaceRequest_name                                 smithy.SchemaExtensions
+	eGetChannelNamespaceResponse                                     smithy.SchemaExtensions
+	eGetChannelNamespaceResponse_channelNamespace                    smithy.SchemaExtensions
+	eGetDataSourceRequest                                            smithy.SchemaExtensions
+	eGetDataSourceRequest_apiId                                      smithy.SchemaExtensions
+	eGetDataSourceRequest_name                                       smithy.SchemaExtensions
+	eGetDataSourceIntrospectionRequest                               smithy.SchemaExtensions
+	eGetDataSourceIntrospectionRequest_introspectionId               smithy.SchemaExtensions
+	eGetDataSourceIntrospectionRequest_includeModelsSDL              smithy.SchemaExtensions
+	eGetDataSourceIntrospectionRequest_nextToken                     smithy.SchemaExtensions
+	eGetDataSourceIntrospectionRequest_maxResults                    smithy.SchemaExtensions
+	eGetDataSourceIntrospectionResponse                              smithy.SchemaExtensions
+	eGetDataSourceIntrospectionResponse_introspectionId              smithy.SchemaExtensions
+	eGetDataSourceIntrospectionResponse_introspectionStatus          smithy.SchemaExtensions
+	eGetDataSourceIntrospectionResponse_introspectionStatusDetail    smithy.SchemaExtensions
+	eGetDataSourceIntrospectionResponse_introspectionResult          smithy.SchemaExtensions
+	eGetDataSourceResponse                                           smithy.SchemaExtensions
+	eGetDataSourceResponse_dataSource                                smithy.SchemaExtensions
+	eGetDomainNameRequest                                            smithy.SchemaExtensions
+	eGetDomainNameRequest_domainName                                 smithy.SchemaExtensions
+	eGetDomainNameResponse                                           smithy.SchemaExtensions
+	eGetDomainNameResponse_domainNameConfig                          smithy.SchemaExtensions
+	eGetFunctionRequest                                              smithy.SchemaExtensions
+	eGetFunctionRequest_apiId                                        smithy.SchemaExtensions
+	eGetFunctionRequest_functionId                                   smithy.SchemaExtensions
+	eGetFunctionResponse                                             smithy.SchemaExtensions
+	eGetFunctionResponse_functionConfiguration                       smithy.SchemaExtensions
+	eGetGraphqlApiEnvironmentVariablesRequest                        smithy.SchemaExtensions
+	eGetGraphqlApiEnvironmentVariablesRequest_apiId                  smithy.SchemaExtensions
+	eGetGraphqlApiEnvironmentVariablesResponse                       smithy.SchemaExtensions
+	eGetGraphqlApiEnvironmentVariablesResponse_environmentVariables  smithy.SchemaExtensions
+	eGetGraphqlApiRequest                                            smithy.SchemaExtensions
+	eGetGraphqlApiRequest_apiId                                      smithy.SchemaExtensions
+	eGetGraphqlApiResponse                                           smithy.SchemaExtensions
+	eGetGraphqlApiResponse_graphqlApi                                smithy.SchemaExtensions
+	eGetIntrospectionSchemaRequest                                   smithy.SchemaExtensions
+	eGetIntrospectionSchemaRequest_apiId                             smithy.SchemaExtensions
+	eGetIntrospectionSchemaRequest_format                            smithy.SchemaExtensions
+	eGetIntrospectionSchemaRequest_includeDirectives                 smithy.SchemaExtensions
+	eGetIntrospectionSchemaResponse                                  smithy.SchemaExtensions
+	eGetIntrospectionSchemaResponse_schema                           smithy.SchemaExtensions
+	eGetResolverRequest                                              smithy.SchemaExtensions
+	eGetResolverRequest_apiId                                        smithy.SchemaExtensions
+	eGetResolverRequest_typeName                                     smithy.SchemaExtensions
+	eGetResolverRequest_fieldName                                    smithy.SchemaExtensions
+	eGetResolverResponse                                             smithy.SchemaExtensions
+	eGetResolverResponse_resolver                                    smithy.SchemaExtensions
+	eGetSchemaCreationStatusRequest                                  smithy.SchemaExtensions
+	eGetSchemaCreationStatusRequest_apiId                            smithy.SchemaExtensions
+	eGetSchemaCreationStatusResponse                                 smithy.SchemaExtensions
+	eGetSchemaCreationStatusResponse_status                          smithy.SchemaExtensions
+	eGetSchemaCreationStatusResponse_details                         smithy.SchemaExtensions
+	eGetSourceApiAssociationRequest                                  smithy.SchemaExtensions
+	eGetSourceApiAssociationRequest_mergedApiIdentifier              smithy.SchemaExtensions
+	eGetSourceApiAssociationRequest_associationId                    smithy.SchemaExtensions
+	eGetSourceApiAssociationResponse                                 smithy.SchemaExtensions
+	eGetSourceApiAssociationResponse_sourceApiAssociation            smithy.SchemaExtensions
+	eGetTypeRequest                                                  smithy.SchemaExtensions
+	eGetTypeRequest_apiId                                            smithy.SchemaExtensions
+	eGetTypeRequest_typeName                                         smithy.SchemaExtensions
+	eGetTypeRequest_format                                           smithy.SchemaExtensions
+	eGetTypeResponse                                                 smithy.SchemaExtensions
+	eGetTypeResponse_type                                            smithy.SchemaExtensions
+	eListApiKeysRequest                                              smithy.SchemaExtensions
+	eListApiKeysRequest_apiId                                        smithy.SchemaExtensions
+	eListApiKeysRequest_nextToken                                    smithy.SchemaExtensions
+	eListApiKeysRequest_maxResults                                   smithy.SchemaExtensions
+	eListApiKeysResponse                                             smithy.SchemaExtensions
+	eListApiKeysResponse_apiKeys                                     smithy.SchemaExtensions
+	eListApiKeysResponse_nextToken                                   smithy.SchemaExtensions
+	eListApisRequest                                                 smithy.SchemaExtensions
+	eListApisRequest_nextToken                                       smithy.SchemaExtensions
+	eListApisRequest_maxResults                                      smithy.SchemaExtensions
+	eListApisResponse                                                smithy.SchemaExtensions
+	eListApisResponse_apis                                           smithy.SchemaExtensions
+	eListApisResponse_nextToken                                      smithy.SchemaExtensions
+	eListChannelNamespacesRequest                                    smithy.SchemaExtensions
+	eListChannelNamespacesRequest_apiId                              smithy.SchemaExtensions
+	eListChannelNamespacesRequest_nextToken                          smithy.SchemaExtensions
+	eListChannelNamespacesRequest_maxResults                         smithy.SchemaExtensions
+	eListChannelNamespacesResponse                                   smithy.SchemaExtensions
+	eListChannelNamespacesResponse_channelNamespaces                 smithy.SchemaExtensions
+	eListChannelNamespacesResponse_nextToken                         smithy.SchemaExtensions
+	eListDataSourcesRequest                                          smithy.SchemaExtensions
+	eListDataSourcesRequest_apiId                                    smithy.SchemaExtensions
+	eListDataSourcesRequest_nextToken                                smithy.SchemaExtensions
+	eListDataSourcesRequest_maxResults                               smithy.SchemaExtensions
+	eListDataSourcesResponse                                         smithy.SchemaExtensions
+	eListDataSourcesResponse_dataSources                             smithy.SchemaExtensions
+	eListDataSourcesResponse_nextToken                               smithy.SchemaExtensions
+	eListDomainNamesRequest                                          smithy.SchemaExtensions
+	eListDomainNamesRequest_nextToken                                smithy.SchemaExtensions
+	eListDomainNamesRequest_maxResults                               smithy.SchemaExtensions
+	eListDomainNamesResponse                                         smithy.SchemaExtensions
+	eListDomainNamesResponse_domainNameConfigs                       smithy.SchemaExtensions
+	eListDomainNamesResponse_nextToken                               smithy.SchemaExtensions
+	eListFunctionsRequest                                            smithy.SchemaExtensions
+	eListFunctionsRequest_apiId                                      smithy.SchemaExtensions
+	eListFunctionsRequest_nextToken                                  smithy.SchemaExtensions
+	eListFunctionsRequest_maxResults                                 smithy.SchemaExtensions
+	eListFunctionsResponse                                           smithy.SchemaExtensions
+	eListFunctionsResponse_functions                                 smithy.SchemaExtensions
+	eListFunctionsResponse_nextToken                                 smithy.SchemaExtensions
+	eListGraphqlApisRequest                                          smithy.SchemaExtensions
+	eListGraphqlApisRequest_nextToken                                smithy.SchemaExtensions
+	eListGraphqlApisRequest_maxResults                               smithy.SchemaExtensions
+	eListGraphqlApisRequest_apiType                                  smithy.SchemaExtensions
+	eListGraphqlApisRequest_owner                                    smithy.SchemaExtensions
+	eListGraphqlApisResponse                                         smithy.SchemaExtensions
+	eListGraphqlApisResponse_graphqlApis                             smithy.SchemaExtensions
+	eListGraphqlApisResponse_nextToken                               smithy.SchemaExtensions
+	eListResolversByFunctionRequest                                  smithy.SchemaExtensions
+	eListResolversByFunctionRequest_apiId                            smithy.SchemaExtensions
+	eListResolversByFunctionRequest_functionId                       smithy.SchemaExtensions
+	eListResolversByFunctionRequest_nextToken                        smithy.SchemaExtensions
+	eListResolversByFunctionRequest_maxResults                       smithy.SchemaExtensions
+	eListResolversByFunctionResponse                                 smithy.SchemaExtensions
+	eListResolversByFunctionResponse_resolvers                       smithy.SchemaExtensions
+	eListResolversByFunctionResponse_nextToken                       smithy.SchemaExtensions
+	eListResolversRequest                                            smithy.SchemaExtensions
+	eListResolversRequest_apiId                                      smithy.SchemaExtensions
+	eListResolversRequest_typeName                                   smithy.SchemaExtensions
+	eListResolversRequest_nextToken                                  smithy.SchemaExtensions
+	eListResolversRequest_maxResults                                 smithy.SchemaExtensions
+	eListResolversResponse                                           smithy.SchemaExtensions
+	eListResolversResponse_resolvers                                 smithy.SchemaExtensions
+	eListResolversResponse_nextToken                                 smithy.SchemaExtensions
+	eListSourceApiAssociationsRequest                                smithy.SchemaExtensions
+	eListSourceApiAssociationsRequest_apiId                          smithy.SchemaExtensions
+	eListSourceApiAssociationsRequest_nextToken                      smithy.SchemaExtensions
+	eListSourceApiAssociationsRequest_maxResults                     smithy.SchemaExtensions
+	eListSourceApiAssociationsResponse                               smithy.SchemaExtensions
+	eListSourceApiAssociationsResponse_sourceApiAssociationSummaries smithy.SchemaExtensions
+	eListSourceApiAssociationsResponse_nextToken                     smithy.SchemaExtensions
+	eListTagsForResourceRequest                                      smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                          smithy.SchemaExtensions
+	eListTagsForResourceResponse                                     smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                smithy.SchemaExtensions
+	eListTypesByAssociationRequest                                   smithy.SchemaExtensions
+	eListTypesByAssociationRequest_mergedApiIdentifier               smithy.SchemaExtensions
+	eListTypesByAssociationRequest_associationId                     smithy.SchemaExtensions
+	eListTypesByAssociationRequest_format                            smithy.SchemaExtensions
+	eListTypesByAssociationRequest_nextToken                         smithy.SchemaExtensions
+	eListTypesByAssociationRequest_maxResults                        smithy.SchemaExtensions
+	eListTypesByAssociationResponse                                  smithy.SchemaExtensions
+	eListTypesByAssociationResponse_types                            smithy.SchemaExtensions
+	eListTypesByAssociationResponse_nextToken                        smithy.SchemaExtensions
+	eListTypesRequest                                                smithy.SchemaExtensions
+	eListTypesRequest_apiId                                          smithy.SchemaExtensions
+	eListTypesRequest_format                                         smithy.SchemaExtensions
+	eListTypesRequest_nextToken                                      smithy.SchemaExtensions
+	eListTypesRequest_maxResults                                     smithy.SchemaExtensions
+	eListTypesResponse                                               smithy.SchemaExtensions
+	eListTypesResponse_types                                         smithy.SchemaExtensions
+	eListTypesResponse_nextToken                                     smithy.SchemaExtensions
+	ePutGraphqlApiEnvironmentVariablesRequest                        smithy.SchemaExtensions
+	ePutGraphqlApiEnvironmentVariablesRequest_apiId                  smithy.SchemaExtensions
+	ePutGraphqlApiEnvironmentVariablesRequest_environmentVariables   smithy.SchemaExtensions
+	ePutGraphqlApiEnvironmentVariablesResponse                       smithy.SchemaExtensions
+	ePutGraphqlApiEnvironmentVariablesResponse_environmentVariables  smithy.SchemaExtensions
+	eStartDataSourceIntrospectionRequest                             smithy.SchemaExtensions
+	eStartDataSourceIntrospectionRequest_rdsDataApiConfig            smithy.SchemaExtensions
+	eStartDataSourceIntrospectionResponse                            smithy.SchemaExtensions
+	eStartDataSourceIntrospectionResponse_introspectionId            smithy.SchemaExtensions
+	eStartDataSourceIntrospectionResponse_introspectionStatus        smithy.SchemaExtensions
+	eStartDataSourceIntrospectionResponse_introspectionStatusDetail  smithy.SchemaExtensions
+	eStartSchemaCreationRequest                                      smithy.SchemaExtensions
+	eStartSchemaCreationRequest_apiId                                smithy.SchemaExtensions
+	eStartSchemaCreationRequest_definition                           smithy.SchemaExtensions
+	eStartSchemaCreationResponse                                     smithy.SchemaExtensions
+	eStartSchemaCreationResponse_status                              smithy.SchemaExtensions
+	eStartSchemaMergeRequest                                         smithy.SchemaExtensions
+	eStartSchemaMergeRequest_associationId                           smithy.SchemaExtensions
+	eStartSchemaMergeRequest_mergedApiIdentifier                     smithy.SchemaExtensions
+	eStartSchemaMergeResponse                                        smithy.SchemaExtensions
+	eStartSchemaMergeResponse_sourceApiAssociationStatus             smithy.SchemaExtensions
+	eTagResourceRequest                                              smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                  smithy.SchemaExtensions
+	eTagResourceRequest_tags                                         smithy.SchemaExtensions
+	eTagResourceResponse                                             smithy.SchemaExtensions
+	eUntagResourceRequest                                            smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                    smithy.SchemaExtensions
+	eUntagResourceResponse                                           smithy.SchemaExtensions
+	eUpdateApiCacheRequest                                           smithy.SchemaExtensions
+	eUpdateApiCacheRequest_apiId                                     smithy.SchemaExtensions
+	eUpdateApiCacheRequest_ttl                                       smithy.SchemaExtensions
+	eUpdateApiCacheRequest_apiCachingBehavior                        smithy.SchemaExtensions
+	eUpdateApiCacheRequest_type                                      smithy.SchemaExtensions
+	eUpdateApiCacheRequest_healthMetricsConfig                       smithy.SchemaExtensions
+	eUpdateApiCacheResponse                                          smithy.SchemaExtensions
+	eUpdateApiCacheResponse_apiCache                                 smithy.SchemaExtensions
+	eUpdateApiRequest                                                smithy.SchemaExtensions
+	eUpdateApiRequest_apiId                                          smithy.SchemaExtensions
+	eUpdateApiRequest_name                                           smithy.SchemaExtensions
+	eUpdateApiRequest_ownerContact                                   smithy.SchemaExtensions
+	eUpdateApiRequest_eventConfig                                    smithy.SchemaExtensions
+	eUpdateApiKeyRequest                                             smithy.SchemaExtensions
+	eUpdateApiKeyRequest_apiId                                       smithy.SchemaExtensions
+	eUpdateApiKeyRequest_id                                          smithy.SchemaExtensions
+	eUpdateApiKeyRequest_description                                 smithy.SchemaExtensions
+	eUpdateApiKeyRequest_expires                                     smithy.SchemaExtensions
+	eUpdateApiKeyResponse                                            smithy.SchemaExtensions
+	eUpdateApiKeyResponse_apiKey                                     smithy.SchemaExtensions
+	eUpdateApiResponse                                               smithy.SchemaExtensions
+	eUpdateApiResponse_api                                           smithy.SchemaExtensions
+	eUpdateChannelNamespaceRequest                                   smithy.SchemaExtensions
+	eUpdateChannelNamespaceRequest_apiId                             smithy.SchemaExtensions
+	eUpdateChannelNamespaceRequest_name                              smithy.SchemaExtensions
+	eUpdateChannelNamespaceRequest_subscribeAuthModes                smithy.SchemaExtensions
+	eUpdateChannelNamespaceRequest_publishAuthModes                  smithy.SchemaExtensions
+	eUpdateChannelNamespaceRequest_codeHandlers                      smithy.SchemaExtensions
+	eUpdateChannelNamespaceRequest_handlerConfigs                    smithy.SchemaExtensions
+	eUpdateChannelNamespaceResponse                                  smithy.SchemaExtensions
+	eUpdateChannelNamespaceResponse_channelNamespace                 smithy.SchemaExtensions
+	eUpdateDataSourceRequest                                         smithy.SchemaExtensions
+	eUpdateDataSourceRequest_apiId                                   smithy.SchemaExtensions
+	eUpdateDataSourceRequest_name                                    smithy.SchemaExtensions
+	eUpdateDataSourceRequest_description                             smithy.SchemaExtensions
+	eUpdateDataSourceRequest_type                                    smithy.SchemaExtensions
+	eUpdateDataSourceRequest_serviceRoleArn                          smithy.SchemaExtensions
+	eUpdateDataSourceRequest_dynamodbConfig                          smithy.SchemaExtensions
+	eUpdateDataSourceRequest_lambdaConfig                            smithy.SchemaExtensions
+	eUpdateDataSourceRequest_elasticsearchConfig                     smithy.SchemaExtensions
+	eUpdateDataSourceRequest_openSearchServiceConfig                 smithy.SchemaExtensions
+	eUpdateDataSourceRequest_httpConfig                              smithy.SchemaExtensions
+	eUpdateDataSourceRequest_relationalDatabaseConfig                smithy.SchemaExtensions
+	eUpdateDataSourceRequest_eventBridgeConfig                       smithy.SchemaExtensions
+	eUpdateDataSourceRequest_metricsConfig                           smithy.SchemaExtensions
+	eUpdateDataSourceResponse                                        smithy.SchemaExtensions
+	eUpdateDataSourceResponse_dataSource                             smithy.SchemaExtensions
+	eUpdateDomainNameRequest                                         smithy.SchemaExtensions
+	eUpdateDomainNameRequest_domainName                              smithy.SchemaExtensions
+	eUpdateDomainNameRequest_description                             smithy.SchemaExtensions
+	eUpdateDomainNameResponse                                        smithy.SchemaExtensions
+	eUpdateDomainNameResponse_domainNameConfig                       smithy.SchemaExtensions
+	eUpdateFunctionRequest                                           smithy.SchemaExtensions
+	eUpdateFunctionRequest_apiId                                     smithy.SchemaExtensions
+	eUpdateFunctionRequest_name                                      smithy.SchemaExtensions
+	eUpdateFunctionRequest_description                               smithy.SchemaExtensions
+	eUpdateFunctionRequest_functionId                                smithy.SchemaExtensions
+	eUpdateFunctionRequest_dataSourceName                            smithy.SchemaExtensions
+	eUpdateFunctionRequest_requestMappingTemplate                    smithy.SchemaExtensions
+	eUpdateFunctionRequest_responseMappingTemplate                   smithy.SchemaExtensions
+	eUpdateFunctionRequest_functionVersion                           smithy.SchemaExtensions
+	eUpdateFunctionRequest_syncConfig                                smithy.SchemaExtensions
+	eUpdateFunctionRequest_maxBatchSize                              smithy.SchemaExtensions
+	eUpdateFunctionRequest_runtime                                   smithy.SchemaExtensions
+	eUpdateFunctionRequest_code                                      smithy.SchemaExtensions
+	eUpdateFunctionResponse                                          smithy.SchemaExtensions
+	eUpdateFunctionResponse_functionConfiguration                    smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest                                         smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_apiId                                   smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_name                                    smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_logConfig                               smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_authenticationType                      smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_userPoolConfig                          smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_openIDConnectConfig                     smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_additionalAuthenticationProviders       smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_xrayEnabled                             smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_lambdaAuthorizerConfig                  smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_mergedApiExecutionRoleArn               smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_ownerContact                            smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_introspectionConfig                     smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_queryDepthLimit                         smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_resolverCountLimit                      smithy.SchemaExtensions
+	eUpdateGraphqlApiRequest_enhancedMetricsConfig                   smithy.SchemaExtensions
+	eUpdateGraphqlApiResponse                                        smithy.SchemaExtensions
+	eUpdateGraphqlApiResponse_graphqlApi                             smithy.SchemaExtensions
+	eUpdateResolverRequest                                           smithy.SchemaExtensions
+	eUpdateResolverRequest_apiId                                     smithy.SchemaExtensions
+	eUpdateResolverRequest_typeName                                  smithy.SchemaExtensions
+	eUpdateResolverRequest_fieldName                                 smithy.SchemaExtensions
+	eUpdateResolverRequest_dataSourceName                            smithy.SchemaExtensions
+	eUpdateResolverRequest_requestMappingTemplate                    smithy.SchemaExtensions
+	eUpdateResolverRequest_responseMappingTemplate                   smithy.SchemaExtensions
+	eUpdateResolverRequest_kind                                      smithy.SchemaExtensions
+	eUpdateResolverRequest_pipelineConfig                            smithy.SchemaExtensions
+	eUpdateResolverRequest_syncConfig                                smithy.SchemaExtensions
+	eUpdateResolverRequest_cachingConfig                             smithy.SchemaExtensions
+	eUpdateResolverRequest_maxBatchSize                              smithy.SchemaExtensions
+	eUpdateResolverRequest_runtime                                   smithy.SchemaExtensions
+	eUpdateResolverRequest_code                                      smithy.SchemaExtensions
+	eUpdateResolverRequest_metricsConfig                             smithy.SchemaExtensions
+	eUpdateResolverResponse                                          smithy.SchemaExtensions
+	eUpdateResolverResponse_resolver                                 smithy.SchemaExtensions
+	eUpdateSourceApiAssociationRequest                               smithy.SchemaExtensions
+	eUpdateSourceApiAssociationRequest_associationId                 smithy.SchemaExtensions
+	eUpdateSourceApiAssociationRequest_mergedApiIdentifier           smithy.SchemaExtensions
+	eUpdateSourceApiAssociationRequest_description                   smithy.SchemaExtensions
+	eUpdateSourceApiAssociationRequest_sourceApiAssociationConfig    smithy.SchemaExtensions
+	eUpdateSourceApiAssociationResponse                              smithy.SchemaExtensions
+	eUpdateSourceApiAssociationResponse_sourceApiAssociation         smithy.SchemaExtensions
+	eUpdateTypeRequest                                               smithy.SchemaExtensions
+	eUpdateTypeRequest_apiId                                         smithy.SchemaExtensions
+	eUpdateTypeRequest_typeName                                      smithy.SchemaExtensions
+	eUpdateTypeRequest_definition                                    smithy.SchemaExtensions
+	eUpdateTypeRequest_format                                        smithy.SchemaExtensions
+	eUpdateTypeResponse                                              smithy.SchemaExtensions
+	eUpdateTypeResponse_type                                         smithy.SchemaExtensions
+)
 
-var AssociateMergedGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateMergedGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAssociateApi                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateApi"}
+	iAssociateMergedGraphqlApi                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateMergedGraphqlApi"}
+	iAssociateSourceGraphqlApi                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateSourceGraphqlApi"}
+	iCreateApi                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApi"}
+	iCreateApiCache                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiCache"}
+	iCreateApiKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiKey"}
+	iCreateChannelNamespace                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateChannelNamespace"}
+	iCreateDataSource                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateDataSource"}
+	iCreateDomainName                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateDomainName"}
+	iCreateFunction                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateFunction"}
+	iCreateGraphqlApi                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateGraphqlApi"}
+	iCreateResolver                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateResolver"}
+	iCreateType                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateType"}
+	iDeleteApi                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApi"}
+	iDeleteApiCache                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiCache"}
+	iDeleteApiKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiKey"}
+	iDeleteChannelNamespace                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteChannelNamespace"}
+	iDeleteDataSource                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteDataSource"}
+	iDeleteDomainName                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteDomainName"}
+	iDeleteFunction                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteFunction"}
+	iDeleteGraphqlApi                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteGraphqlApi"}
+	iDeleteResolver                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteResolver"}
+	iDeleteType                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteType"}
+	iDisassociateApi                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateApi"}
+	iDisassociateMergedGraphqlApi                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateMergedGraphqlApi"}
+	iDisassociateSourceGraphqlApi                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateSourceGraphqlApi"}
+	iEvaluateCode                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluateCode"}
+	iEvaluateMappingTemplate                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluateMappingTemplate"}
+	iFlushApiCache                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "FlushApiCache"}
+	iGetApi                                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApi"}
+	iGetApiAssociation                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiAssociation"}
+	iGetApiCache                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiCache"}
+	iGetChannelNamespace                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetChannelNamespace"}
+	iGetDataSource                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDataSource"}
+	iGetDataSourceIntrospection                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDataSourceIntrospection"}
+	iGetDomainName                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDomainName"}
+	iGetFunction                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetFunction"}
+	iGetGraphqlApi                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetGraphqlApi"}
+	iGetGraphqlApiEnvironmentVariables            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetGraphqlApiEnvironmentVariables"}
+	iGetIntrospectionSchema                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetIntrospectionSchema"}
+	iGetResolver                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetResolver"}
+	iGetSchemaCreationStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetSchemaCreationStatus"}
+	iGetSourceApiAssociation                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetSourceApiAssociation"}
+	iGetType                                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetType"}
+	iListApiKeys                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListApiKeys"}
+	iListApis                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListApis"}
+	iListChannelNamespaces                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListChannelNamespaces"}
+	iListDataSources                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListDataSources"}
+	iListDomainNames                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListDomainNames"}
+	iListFunctions                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListFunctions"}
+	iListGraphqlApis                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListGraphqlApis"}
+	iListResolvers                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListResolvers"}
+	iListResolversByFunction                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListResolversByFunction"}
+	iListSourceApiAssociations                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListSourceApiAssociations"}
+	iListTagsForResource                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTagsForResource"}
+	iListTypes                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTypes"}
+	iListTypesByAssociation                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTypesByAssociation"}
+	iPutGraphqlApiEnvironmentVariables            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "PutGraphqlApiEnvironmentVariables"}
+	iStartDataSourceIntrospection                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartDataSourceIntrospection"}
+	iStartSchemaCreation                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartSchemaCreation"}
+	iStartSchemaMerge                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartSchemaMerge"}
+	iTagResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TagResource"}
+	iUntagResource                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UntagResource"}
+	iUpdateApi                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApi"}
+	iUpdateApiCache                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiCache"}
+	iUpdateApiKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiKey"}
+	iUpdateChannelNamespace                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateChannelNamespace"}
+	iUpdateDataSource                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateDataSource"}
+	iUpdateDomainName                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateDomainName"}
+	iUpdateFunction                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateFunction"}
+	iUpdateGraphqlApi                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateGraphqlApi"}
+	iUpdateResolver                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateResolver"}
+	iUpdateSourceApiAssociation                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateSourceApiAssociation"}
+	iUpdateType                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateType"}
+	i_AWSDeepdishControlPlaneService              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AWSDeepdishControlPlaneService"}
+	iAccessDeniedException                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AccessDeniedException"}
+	iAdditionalAuthenticationProvider             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AdditionalAuthenticationProvider"}
+	i_AdditionalAuthenticationProviders           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AdditionalAuthenticationProviders"}
+	iApi                                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Api"}
+	iApiAssociation                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiAssociation"}
+	iApiCache                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiCache"}
+	iApiCacheStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiCacheStatus"}
+	iApiCacheType                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiCacheType"}
+	iApiCachingBehavior                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiCachingBehavior"}
+	iApiKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiKey"}
+	iApiKeyLimitExceededException                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiKeyLimitExceededException"}
+	i_ApiKeys                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiKeys"}
+	iApiKeyValidityOutOfBoundsException           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiKeyValidityOutOfBoundsException"}
+	iApiLimitExceededException                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiLimitExceededException"}
+	i_ApiName                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ApiName"}
+	i_Apis                                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Apis"}
+	iAppSyncRuntime                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AppSyncRuntime"}
+	iAssociationStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociationStatus"}
+	iAuthenticationType                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AuthenticationType"}
+	iAuthMode                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AuthMode"}
+	i_AuthModes                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AuthModes"}
+	iAuthorizationConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AuthorizationConfig"}
+	iAuthorizationType                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AuthorizationType"}
+	iAuthProvider                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AuthProvider"}
+	i_AuthProviders                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AuthProviders"}
+	iAwsIamConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AwsIamConfig"}
+	iBadRequestDetail                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "BadRequestDetail"}
+	iBadRequestException                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "BadRequestException"}
+	iBadRequestReason                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "BadRequestReason"}
+	i_Blob                                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Blob"}
+	i_Boolean                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Boolean"}
+	i_BooleanValue                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "BooleanValue"}
+	iCacheHealthMetricsConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CacheHealthMetricsConfig"}
+	iCachingConfig                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CachingConfig"}
+	i_CachingKeys                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CachingKeys"}
+	i_CertificateArn                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CertificateArn"}
+	iChannelNamespace                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ChannelNamespace"}
+	i_ChannelNamespaces                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ChannelNamespaces"}
+	i_Code                                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Code"}
+	iCodeError                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CodeError"}
+	i_CodeErrorColumn                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CodeErrorColumn"}
+	i_CodeErrorLine                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CodeErrorLine"}
+	iCodeErrorLocation                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CodeErrorLocation"}
+	i_CodeErrors                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CodeErrors"}
+	i_CodeErrorSpan                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CodeErrorSpan"}
+	iCognitoConfig                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CognitoConfig"}
+	iCognitoUserPoolConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CognitoUserPoolConfig"}
+	iConcurrentModificationException              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ConcurrentModificationException"}
+	iConflictDetectionType                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ConflictDetectionType"}
+	iConflictException                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ConflictException"}
+	iConflictHandlerType                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ConflictHandlerType"}
+	i_Context                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Context"}
+	iDataSource                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSource"}
+	iDataSourceIntrospectionModel                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModel"}
+	iDataSourceIntrospectionModelField            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModelField"}
+	i_DataSourceIntrospectionModelFields          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModelFields"}
+	iDataSourceIntrospectionModelFieldType        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModelFieldType"}
+	i_DataSourceIntrospectionModelFieldTypeValues = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModelFieldTypeValues"}
+	iDataSourceIntrospectionModelIndex            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModelIndex"}
+	i_DataSourceIntrospectionModelIndexes         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModelIndexes"}
+	i_DataSourceIntrospectionModelIndexFields     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModelIndexFields"}
+	i_DataSourceIntrospectionModels               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionModels"}
+	iDataSourceIntrospectionResult                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionResult"}
+	iDataSourceIntrospectionStatus                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceIntrospectionStatus"}
+	iDataSourceLevelMetricsBehavior               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceLevelMetricsBehavior"}
+	iDataSourceLevelMetricsConfig                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceLevelMetricsConfig"}
+	i_DataSources                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSources"}
+	iDataSourceType                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DataSourceType"}
+	i_Date                                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Date"}
+	iDefaultAction                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DefaultAction"}
+	iDeltaSyncConfig                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeltaSyncConfig"}
+	i_Description                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Description"}
+	i_DomainName                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DomainName"}
+	iDomainNameConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DomainNameConfig"}
+	i_DomainNameConfigs                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DomainNameConfigs"}
+	iDynamodbDataSourceConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DynamodbDataSourceConfig"}
+	iElasticsearchDataSourceConfig                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ElasticsearchDataSourceConfig"}
+	iEnhancedMetricsConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EnhancedMetricsConfig"}
+	i_EnvironmentVariableKey                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EnvironmentVariableKey"}
+	i_EnvironmentVariableMap                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EnvironmentVariableMap"}
+	i_EnvironmentVariableValue                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EnvironmentVariableValue"}
+	iErrorDetail                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ErrorDetail"}
+	i_ErrorMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ErrorMessage"}
+	iEvaluateCodeErrorDetail                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluateCodeErrorDetail"}
+	i_EvaluationResult                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluationResult"}
+	iEventBridgeDataSourceConfig                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EventBridgeDataSourceConfig"}
+	iEventConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EventConfig"}
+	iEventLogConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EventLogConfig"}
+	iEventLogLevel                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EventLogLevel"}
+	iFieldLogLevel                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "FieldLogLevel"}
+	iFunctionConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "FunctionConfiguration"}
+	i_Functions                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Functions"}
+	i_FunctionsIds                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "FunctionsIds"}
+	iGraphqlApi                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GraphqlApi"}
+	iGraphQLApiIntrospectionConfig                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GraphQLApiIntrospectionConfig"}
+	i_GraphqlApis                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GraphqlApis"}
+	iGraphQLApiType                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GraphQLApiType"}
+	iGraphQLApiVisibility                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GraphQLApiVisibility"}
+	iGraphQLSchemaException                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GraphQLSchemaException"}
+	iHandlerBehavior                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "HandlerBehavior"}
+	iHandlerConfig                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "HandlerConfig"}
+	iHandlerConfigs                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "HandlerConfigs"}
+	iHttpDataSourceConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "HttpDataSourceConfig"}
+	iIntegration                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Integration"}
+	iInternalFailureException                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "InternalFailureException"}
+	iInvokeType                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "InvokeType"}
+	iLambdaAuthorizerConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "LambdaAuthorizerConfig"}
+	iLambdaConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "LambdaConfig"}
+	iLambdaConflictHandlerConfig                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "LambdaConflictHandlerConfig"}
+	iLambdaDataSourceConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "LambdaDataSourceConfig"}
+	iLimitExceededException                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "LimitExceededException"}
+	iLogConfig                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "LogConfig"}
+	i_Logs                                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Logs"}
+	i_Long                                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Long"}
+	i_MapOfStringToString                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "MapOfStringToString"}
+	i_MappingTemplate                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "MappingTemplate"}
+	i_MaxBatchSize                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "MaxBatchSize"}
+	i_MaxResults                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "MaxResults"}
+	iMergeType                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "MergeType"}
+	i_Namespace                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Namespace"}
+	iNotFoundException                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "NotFoundException"}
+	iOpenIDConnectConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "OpenIDConnectConfig"}
+	iOpenSearchServiceDataSourceConfig            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "OpenSearchServiceDataSourceConfig"}
+	iOperationLevelMetricsConfig                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "OperationLevelMetricsConfig"}
+	i_OutErrors                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "OutErrors"}
+	iOutputType                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "OutputType"}
+	i_OwnerContact                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "OwnerContact"}
+	iOwnership                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Ownership"}
+	i_PaginationToken                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "PaginationToken"}
+	iPipelineConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "PipelineConfig"}
+	i_QueryDepthLimit                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "QueryDepthLimit"}
+	iRdsDataApiConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RdsDataApiConfig"}
+	i_RdsDataApiConfigDatabaseName                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RdsDataApiConfigDatabaseName"}
+	i_RdsDataApiConfigResourceArn                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RdsDataApiConfigResourceArn"}
+	i_RdsDataApiConfigSecretArn                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RdsDataApiConfigSecretArn"}
+	iRdsHttpEndpointConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RdsHttpEndpointConfig"}
+	iRelationalDatabaseDataSourceConfig           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RelationalDatabaseDataSourceConfig"}
+	iRelationalDatabaseSourceType                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RelationalDatabaseSourceType"}
+	iResolver                                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Resolver"}
+	i_ResolverCountLimit                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ResolverCountLimit"}
+	iResolverKind                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ResolverKind"}
+	iResolverLevelMetricsBehavior                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ResolverLevelMetricsBehavior"}
+	iResolverLevelMetricsConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ResolverLevelMetricsConfig"}
+	i_Resolvers                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Resolvers"}
+	i_ResourceArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ResourceArn"}
+	i_ResourceName                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ResourceName"}
+	iRuntimeName                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "RuntimeName"}
+	iSchemaStatus                                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "SchemaStatus"}
+	iServiceQuotaExceededException                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ServiceQuotaExceededException"}
+	iSourceApiAssociation                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "SourceApiAssociation"}
+	iSourceApiAssociationConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "SourceApiAssociationConfig"}
+	iSourceApiAssociationStatus                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "SourceApiAssociationStatus"}
+	iSourceApiAssociationSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "SourceApiAssociationSummary"}
+	i_SourceApiAssociationSummaryList             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "SourceApiAssociationSummaryList"}
+	i_Stash                                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Stash"}
+	i_String                                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "String"}
+	iSyncConfig                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "SyncConfig"}
+	i_TagKey                                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TagKey"}
+	i_TagKeyList                                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TagKeyList"}
+	i_TagMap                                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TagMap"}
+	i_TagValue                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TagValue"}
+	i_Template                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Template"}
+	i_Timestamp                                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Timestamp"}
+	i_TTL                                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TTL"}
+	iType                                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "Type"}
+	iTypeDefinitionFormat                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TypeDefinitionFormat"}
+	i_TypeList                                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TypeList"}
+	iUnauthorizedException                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UnauthorizedException"}
+	iUserPoolConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UserPoolConfig"}
+	iAssociateApiRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateApiRequest"}
+	iAssociateApiResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateApiResponse"}
+	iAssociateMergedGraphqlApiRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateMergedGraphqlApiRequest"}
+	iAssociateMergedGraphqlApiResponse            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateMergedGraphqlApiResponse"}
+	iAssociateSourceGraphqlApiRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateSourceGraphqlApiRequest"}
+	iAssociateSourceGraphqlApiResponse            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "AssociateSourceGraphqlApiResponse"}
+	iCreateApiCacheRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiCacheRequest"}
+	iCreateApiCacheResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiCacheResponse"}
+	iCreateApiRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiRequest"}
+	iCreateApiKeyRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiKeyRequest"}
+	iCreateApiKeyResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiKeyResponse"}
+	iCreateApiResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateApiResponse"}
+	iCreateChannelNamespaceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateChannelNamespaceRequest"}
+	iCreateChannelNamespaceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateChannelNamespaceResponse"}
+	iCreateDataSourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateDataSourceRequest"}
+	iCreateDataSourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateDataSourceResponse"}
+	iCreateDomainNameRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateDomainNameRequest"}
+	iCreateDomainNameResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateDomainNameResponse"}
+	iCreateFunctionRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateFunctionRequest"}
+	iCreateFunctionResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateFunctionResponse"}
+	iCreateGraphqlApiRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateGraphqlApiRequest"}
+	iCreateGraphqlApiResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateGraphqlApiResponse"}
+	iCreateResolverRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateResolverRequest"}
+	iCreateResolverResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateResolverResponse"}
+	iCreateTypeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateTypeRequest"}
+	iCreateTypeResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "CreateTypeResponse"}
+	iDeleteApiCacheRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiCacheRequest"}
+	iDeleteApiCacheResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiCacheResponse"}
+	iDeleteApiRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiRequest"}
+	iDeleteApiKeyRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiKeyRequest"}
+	iDeleteApiKeyResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiKeyResponse"}
+	iDeleteApiResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteApiResponse"}
+	iDeleteChannelNamespaceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteChannelNamespaceRequest"}
+	iDeleteChannelNamespaceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteChannelNamespaceResponse"}
+	iDeleteDataSourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteDataSourceRequest"}
+	iDeleteDataSourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteDataSourceResponse"}
+	iDeleteDomainNameRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteDomainNameRequest"}
+	iDeleteDomainNameResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteDomainNameResponse"}
+	iDeleteFunctionRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteFunctionRequest"}
+	iDeleteFunctionResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteFunctionResponse"}
+	iDeleteGraphqlApiRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteGraphqlApiRequest"}
+	iDeleteGraphqlApiResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteGraphqlApiResponse"}
+	iDeleteResolverRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteResolverRequest"}
+	iDeleteResolverResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteResolverResponse"}
+	iDeleteTypeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteTypeRequest"}
+	iDeleteTypeResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DeleteTypeResponse"}
+	iDisassociateApiRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateApiRequest"}
+	iDisassociateApiResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateApiResponse"}
+	iDisassociateMergedGraphqlApiRequest          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateMergedGraphqlApiRequest"}
+	iDisassociateMergedGraphqlApiResponse         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateMergedGraphqlApiResponse"}
+	iDisassociateSourceGraphqlApiRequest          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateSourceGraphqlApiRequest"}
+	iDisassociateSourceGraphqlApiResponse         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "DisassociateSourceGraphqlApiResponse"}
+	iEvaluateCodeRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluateCodeRequest"}
+	iEvaluateCodeResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluateCodeResponse"}
+	iEvaluateMappingTemplateRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluateMappingTemplateRequest"}
+	iEvaluateMappingTemplateResponse              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "EvaluateMappingTemplateResponse"}
+	iFlushApiCacheRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "FlushApiCacheRequest"}
+	iFlushApiCacheResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "FlushApiCacheResponse"}
+	iGetApiAssociationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiAssociationRequest"}
+	iGetApiAssociationResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiAssociationResponse"}
+	iGetApiCacheRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiCacheRequest"}
+	iGetApiCacheResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiCacheResponse"}
+	iGetApiRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiRequest"}
+	iGetApiResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetApiResponse"}
+	iGetChannelNamespaceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetChannelNamespaceRequest"}
+	iGetChannelNamespaceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetChannelNamespaceResponse"}
+	iGetDataSourceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDataSourceRequest"}
+	iGetDataSourceIntrospectionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDataSourceIntrospectionRequest"}
+	iGetDataSourceIntrospectionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDataSourceIntrospectionResponse"}
+	iGetDataSourceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDataSourceResponse"}
+	iGetDomainNameRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDomainNameRequest"}
+	iGetDomainNameResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetDomainNameResponse"}
+	iGetFunctionRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetFunctionRequest"}
+	iGetFunctionResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetFunctionResponse"}
+	iGetGraphqlApiEnvironmentVariablesRequest     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetGraphqlApiEnvironmentVariablesRequest"}
+	iGetGraphqlApiEnvironmentVariablesResponse    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetGraphqlApiEnvironmentVariablesResponse"}
+	iGetGraphqlApiRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetGraphqlApiRequest"}
+	iGetGraphqlApiResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetGraphqlApiResponse"}
+	iGetIntrospectionSchemaRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetIntrospectionSchemaRequest"}
+	iGetIntrospectionSchemaResponse               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetIntrospectionSchemaResponse"}
+	iGetResolverRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetResolverRequest"}
+	iGetResolverResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetResolverResponse"}
+	iGetSchemaCreationStatusRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetSchemaCreationStatusRequest"}
+	iGetSchemaCreationStatusResponse              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetSchemaCreationStatusResponse"}
+	iGetSourceApiAssociationRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetSourceApiAssociationRequest"}
+	iGetSourceApiAssociationResponse              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetSourceApiAssociationResponse"}
+	iGetTypeRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetTypeRequest"}
+	iGetTypeResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "GetTypeResponse"}
+	iListApiKeysRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListApiKeysRequest"}
+	iListApiKeysResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListApiKeysResponse"}
+	iListApisRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListApisRequest"}
+	iListApisResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListApisResponse"}
+	iListChannelNamespacesRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListChannelNamespacesRequest"}
+	iListChannelNamespacesResponse                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListChannelNamespacesResponse"}
+	iListDataSourcesRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListDataSourcesRequest"}
+	iListDataSourcesResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListDataSourcesResponse"}
+	iListDomainNamesRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListDomainNamesRequest"}
+	iListDomainNamesResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListDomainNamesResponse"}
+	iListFunctionsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListFunctionsRequest"}
+	iListFunctionsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListFunctionsResponse"}
+	iListGraphqlApisRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListGraphqlApisRequest"}
+	iListGraphqlApisResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListGraphqlApisResponse"}
+	iListResolversByFunctionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListResolversByFunctionRequest"}
+	iListResolversByFunctionResponse              = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListResolversByFunctionResponse"}
+	iListResolversRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListResolversRequest"}
+	iListResolversResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListResolversResponse"}
+	iListSourceApiAssociationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListSourceApiAssociationsRequest"}
+	iListSourceApiAssociationsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListSourceApiAssociationsResponse"}
+	iListTagsForResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTagsForResourceResponse"}
+	iListTypesByAssociationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTypesByAssociationRequest"}
+	iListTypesByAssociationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTypesByAssociationResponse"}
+	iListTypesRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTypesRequest"}
+	iListTypesResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "ListTypesResponse"}
+	iPutGraphqlApiEnvironmentVariablesRequest     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "PutGraphqlApiEnvironmentVariablesRequest"}
+	iPutGraphqlApiEnvironmentVariablesResponse    = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "PutGraphqlApiEnvironmentVariablesResponse"}
+	iStartDataSourceIntrospectionRequest          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartDataSourceIntrospectionRequest"}
+	iStartDataSourceIntrospectionResponse         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartDataSourceIntrospectionResponse"}
+	iStartSchemaCreationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartSchemaCreationRequest"}
+	iStartSchemaCreationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartSchemaCreationResponse"}
+	iStartSchemaMergeRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartSchemaMergeRequest"}
+	iStartSchemaMergeResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "StartSchemaMergeResponse"}
+	iTagResourceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TagResourceRequest"}
+	iTagResourceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "TagResourceResponse"}
+	iUntagResourceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UntagResourceResponse"}
+	iUpdateApiCacheRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiCacheRequest"}
+	iUpdateApiCacheResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiCacheResponse"}
+	iUpdateApiRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiRequest"}
+	iUpdateApiKeyRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiKeyRequest"}
+	iUpdateApiKeyResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiKeyResponse"}
+	iUpdateApiResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateApiResponse"}
+	iUpdateChannelNamespaceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateChannelNamespaceRequest"}
+	iUpdateChannelNamespaceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateChannelNamespaceResponse"}
+	iUpdateDataSourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateDataSourceRequest"}
+	iUpdateDataSourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateDataSourceResponse"}
+	iUpdateDomainNameRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateDomainNameRequest"}
+	iUpdateDomainNameResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateDomainNameResponse"}
+	iUpdateFunctionRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateFunctionRequest"}
+	iUpdateFunctionResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateFunctionResponse"}
+	iUpdateGraphqlApiRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateGraphqlApiRequest"}
+	iUpdateGraphqlApiResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateGraphqlApiResponse"}
+	iUpdateResolverRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateResolverRequest"}
+	iUpdateResolverResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateResolverResponse"}
+	iUpdateSourceApiAssociationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateSourceApiAssociationRequest"}
+	iUpdateSourceApiAssociationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateSourceApiAssociationResponse"}
+	iUpdateTypeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateTypeRequest"}
+	iUpdateTypeResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.appsync", Name: "UpdateTypeResponse"}
+	pUnit                                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/domainnames/{domainName}/apiassociation",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/sourceApis/{sourceApiIdentifier}/mergedApiAssociations",
-	Code: 200})
-
-var AssociateSourceGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateSourceGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations",
-	Code: 200})
-
-var CreateApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis",
-	Code: 200})
-
-var CreateApiCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiCache",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/ApiCaches",
-	Code: 200})
-
-var CreateApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/apikeys",
-	Code: 200})
-
-var CreateChannelNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateChannelNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{apiId}/channelNamespaces",
-	Code: 200})
-
-var CreateDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateDataSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/datasources",
-	Code: 200})
-
-var CreateDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/domainnames",
-	Code: 200})
-
-var CreateFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/functions",
-	Code: 200})
-
-var CreateGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis",
-	Code: 200})
-
-var CreateResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/types/{typeName}/resolvers",
-	Code: 200})
-
-var CreateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/types",
-	Code: 200})
-
-var DeleteApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{apiId}",
-	Code: 200})
-
-var DeleteApiCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiCache",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}/ApiCaches",
-	Code: 200})
-
-var DeleteApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}/apikeys/{id}",
-	Code: 200})
-
-var DeleteChannelNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteChannelNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{apiId}/channelNamespaces/{name}",
-	Code: 200})
-
-var DeleteDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteDataSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}/datasources/{name}",
-	Code: 200})
-
-var DeleteDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/domainnames/{domainName}",
-	Code: 200})
-
-var DeleteFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}/functions/{functionId}",
-	Code: 200})
-
-var DeleteGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}",
-	Code: 200})
-
-var DeleteResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
-	Code: 200})
-
-var DeleteType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}/types/{typeName}",
-	Code: 200})
-
-var DisassociateApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/domainnames/{domainName}/apiassociation",
-	Code: 200})
-
-var DisassociateMergedGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateMergedGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/sourceApis/{sourceApiIdentifier}/mergedApiAssociations/{associationId}",
-	Code: 200})
-
-var DisassociateSourceGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateSourceGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}",
-	Code: 200})
-
-var EvaluateCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluateCode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/dataplane-evaluatecode",
-	Code: 200})
-
-var EvaluateMappingTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluateMappingTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/dataplane-evaluatetemplate",
-	Code: 200})
-
-var FlushApiCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "FlushApiCache",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/apis/{apiId}/FlushCache",
-	Code: 200})
-
-var GetApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{apiId}",
-	Code: 200})
-
-var GetApiAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/domainnames/{domainName}/apiassociation",
-	Code: 200})
-
-var GetApiCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiCache",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/ApiCaches",
-	Code: 200})
-
-var GetChannelNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetChannelNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{apiId}/channelNamespaces/{name}",
-	Code: 200})
-
-var GetDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDataSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/datasources/{name}",
-	Code: 200})
-
-var GetDataSourceIntrospection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDataSourceIntrospection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/datasources/introspections/{introspectionId}",
-	Code: 200})
-
-var GetDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/domainnames/{domainName}",
-	Code: 200})
-
-var GetFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/functions/{functionId}",
-	Code: 200})
-
-var GetGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}",
-	Code: 200})
-
-var GetGraphqlApiEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetGraphqlApiEnvironmentVariables",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/environmentVariables",
-	Code: 200})
-
-var GetIntrospectionSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetIntrospectionSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/schema",
-	Code: 200})
-
-var GetResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
-	Code: 200})
-
-var GetSchemaCreationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetSchemaCreationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/schemacreation",
-	Code: 200})
-
-var GetSourceApiAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetSourceApiAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}",
-	Code: 200})
-
-var GetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/types/{typeName}",
-	Code: 200})
-
-var ListApiKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListApiKeys",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/apikeys",
-	Code: 200})
-
-var ListApis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListApis",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis",
-	Code: 200})
-
-var ListChannelNamespaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListChannelNamespaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{apiId}/channelNamespaces",
-	Code: 200})
-
-var ListDataSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListDataSources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/datasources",
-	Code: 200})
-
-var ListDomainNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListDomainNames",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/domainnames",
-	Code: 200})
-
-var ListFunctions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListFunctions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/functions",
-	Code: 200})
-
-var ListGraphqlApis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListGraphqlApis",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis",
-	Code: 200})
-
-var ListResolvers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListResolvers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/types/{typeName}/resolvers",
-	Code: 200})
-
-var ListResolversByFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListResolversByFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/functions/{functionId}/resolvers",
-	Code: 200})
-
-var ListSourceApiAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListSourceApiAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/sourceApiAssociations",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var ListTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/apis/{apiId}/types",
-	Code: 200})
-
-var ListTypesByAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTypesByAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/types",
-	Code: 200})
-
-var PutGraphqlApiEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "PutGraphqlApiEnvironmentVariables",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/apis/{apiId}/environmentVariables",
-	Code: 200})
-
-var StartDataSourceIntrospection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartDataSourceIntrospection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datasources/introspections",
-	Code: 200})
-
-var StartSchemaCreation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartSchemaCreation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/schemacreation",
-	Code: 200})
-
-var StartSchemaMerge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartSchemaMerge",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/merge",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{apiId}",
-	Code: 200})
-
-var UpdateApiCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiCache",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/ApiCaches/update",
-	Code: 200})
-
-var UpdateApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/apikeys/{id}",
-	Code: 200})
-
-var UpdateChannelNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateChannelNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{apiId}/channelNamespaces/{name}",
-	Code: 200})
-
-var UpdateDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateDataSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/datasources/{name}",
-	Code: 200})
-
-var UpdateDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/domainnames/{domainName}",
-	Code: 200})
-
-var UpdateFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/functions/{functionId}",
-	Code: 200})
-
-var UpdateGraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateGraphqlApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}",
-	Code: 200})
-
-var UpdateResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
-	Code: 200})
-
-var UpdateSourceApiAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateSourceApiAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}",
-	Code: 200})
-
-var UpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/apis/{apiId}/types/{typeName}",
-	Code: 200})
-
-var _AWSDeepdishControlPlaneService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AWSDeepdishControlPlaneService",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://appsync.amazonaws.com"})
-
-var AWSDeepdishControlPlaneService = smithy.NewServiceSchema(_AWSDeepdishControlPlaneService, "2017-07-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AdditionalAuthenticationProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AdditionalAuthenticationProvider",
-}, smithy.ShapeTypeStructure, 4)
-var AdditionalAuthenticationProvider_authenticationType *smithy.Schema
-
-var AdditionalAuthenticationProvider_openIDConnectConfig *smithy.Schema
-
-var AdditionalAuthenticationProvider_userPoolConfig *smithy.Schema
-
-var AdditionalAuthenticationProvider_lambdaAuthorizerConfig *smithy.Schema
-
-var _AdditionalAuthenticationProviders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AdditionalAuthenticationProviders",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalAuthenticationProviders_member *smithy.Schema
-
-var Api = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Api",
-}, smithy.ShapeTypeStructure, 10)
-var Api_apiId *smithy.Schema
-
-var Api_name *smithy.Schema
-
-var Api_ownerContact *smithy.Schema
-
-var Api_tags *smithy.Schema
-
-var Api_dns *smithy.Schema
-
-var Api_apiArn *smithy.Schema
-
-var Api_created *smithy.Schema
-
-var Api_xrayEnabled *smithy.Schema
-
-var Api_wafWebAclArn *smithy.Schema
-
-var Api_eventConfig *smithy.Schema
-
-var ApiAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiAssociation",
-}, smithy.ShapeTypeStructure, 4)
-var ApiAssociation_domainName *smithy.Schema
-
-var ApiAssociation_apiId *smithy.Schema
-
-var ApiAssociation_associationStatus *smithy.Schema
-
-var ApiAssociation_deploymentDetail *smithy.Schema
-
-var ApiCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiCache",
-}, smithy.ShapeTypeStructure, 7)
-var ApiCache_ttl *smithy.Schema
-
-var ApiCache_apiCachingBehavior *smithy.Schema
-
-var ApiCache_transitEncryptionEnabled *smithy.Schema
-
-var ApiCache_atRestEncryptionEnabled *smithy.Schema
-
-var ApiCache_type *smithy.Schema
-
-var ApiCache_status *smithy.Schema
-
-var ApiCache_healthMetricsConfig *smithy.Schema
-
-var ApiCacheStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiCacheStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ApiCacheStatus_AVAILABLE *smithy.Schema
-
-var ApiCacheStatus_CREATING *smithy.Schema
-
-var ApiCacheStatus_DELETING *smithy.Schema
-
-var ApiCacheStatus_MODIFYING *smithy.Schema
-
-var ApiCacheStatus_FAILED *smithy.Schema
-
-var ApiCacheType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiCacheType",
-}, smithy.ShapeTypeEnum, 15)
-var ApiCacheType_T2_SMALL *smithy.Schema
-
-var ApiCacheType_T2_MEDIUM *smithy.Schema
-
-var ApiCacheType_R4_LARGE *smithy.Schema
-
-var ApiCacheType_R4_XLARGE *smithy.Schema
-
-var ApiCacheType_R4_2XLARGE *smithy.Schema
-
-var ApiCacheType_R4_4XLARGE *smithy.Schema
-
-var ApiCacheType_R4_8XLARGE *smithy.Schema
-
-var ApiCacheType_SMALL *smithy.Schema
-
-var ApiCacheType_MEDIUM *smithy.Schema
-
-var ApiCacheType_LARGE *smithy.Schema
-
-var ApiCacheType_XLARGE *smithy.Schema
-
-var ApiCacheType_LARGE_2X *smithy.Schema
-
-var ApiCacheType_LARGE_4X *smithy.Schema
-
-var ApiCacheType_LARGE_8X *smithy.Schema
-
-var ApiCacheType_LARGE_12X *smithy.Schema
-
-var ApiCachingBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiCachingBehavior",
-}, smithy.ShapeTypeEnum, 3)
-var ApiCachingBehavior_FULL_REQUEST_CACHING *smithy.Schema
-
-var ApiCachingBehavior_PER_RESOLVER_CACHING *smithy.Schema
-
-var ApiCachingBehavior_OPERATION_LEVEL_CACHING *smithy.Schema
-
-var ApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiKey",
-}, smithy.ShapeTypeStructure, 4)
-var ApiKey_id *smithy.Schema
-
-var ApiKey_description *smithy.Schema
-
-var ApiKey_expires *smithy.Schema
-
-var ApiKey_deletes *smithy.Schema
-
-var ApiKeyLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiKeyLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ApiKeyLimitExceededException_message *smithy.Schema
-
-var _ApiKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiKeys",
-}, smithy.ShapeTypeList, 1)
-var _ApiKeys_member *smithy.Schema
-
-var ApiKeyValidityOutOfBoundsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiKeyValidityOutOfBoundsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ApiKeyValidityOutOfBoundsException_message *smithy.Schema
-
-var ApiLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ApiLimitExceededException_message *smithy.Schema
-
-var _ApiName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ApiName",
-}, smithy.ShapeTypeString, 0)
-
-var _Apis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Apis",
-}, smithy.ShapeTypeList, 1)
-var _Apis_member *smithy.Schema
-
-var AppSyncRuntime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AppSyncRuntime",
-}, smithy.ShapeTypeStructure, 2)
-var AppSyncRuntime_name *smithy.Schema
-
-var AppSyncRuntime_runtimeVersion *smithy.Schema
-
-var AssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AssociationStatus_Processing *smithy.Schema
-
-var AssociationStatus_Failed *smithy.Schema
-
-var AssociationStatus_Success *smithy.Schema
-
-var AuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AuthenticationType",
-}, smithy.ShapeTypeEnum, 5)
-var AuthenticationType_API_KEY *smithy.Schema
-
-var AuthenticationType_AWS_IAM *smithy.Schema
-
-var AuthenticationType_AMAZON_COGNITO_USER_POOLS *smithy.Schema
-
-var AuthenticationType_OPENID_CONNECT *smithy.Schema
-
-var AuthenticationType_AWS_LAMBDA *smithy.Schema
-
-var AuthMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AuthMode",
-}, smithy.ShapeTypeStructure, 1)
-var AuthMode_authType *smithy.Schema
-
-var _AuthModes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AuthModes",
-}, smithy.ShapeTypeList, 1)
-var _AuthModes_member *smithy.Schema
-
-var AuthorizationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AuthorizationConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AuthorizationConfig_authorizationType *smithy.Schema
-
-var AuthorizationConfig_awsIamConfig *smithy.Schema
-
-var AuthorizationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AuthorizationType",
-}, smithy.ShapeTypeEnum, 1)
-var AuthorizationType_AWS_IAM *smithy.Schema
-
-var AuthProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AuthProvider",
-}, smithy.ShapeTypeStructure, 4)
-var AuthProvider_authType *smithy.Schema
-
-var AuthProvider_cognitoConfig *smithy.Schema
-
-var AuthProvider_openIDConnectConfig *smithy.Schema
-
-var AuthProvider_lambdaAuthorizerConfig *smithy.Schema
-
-var _AuthProviders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AuthProviders",
-}, smithy.ShapeTypeList, 1)
-var _AuthProviders_member *smithy.Schema
-
-var AwsIamConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AwsIamConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AwsIamConfig_signingRegion *smithy.Schema
-
-var AwsIamConfig_signingServiceName *smithy.Schema
-
-var BadRequestDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "BadRequestDetail",
-}, smithy.ShapeTypeStructure, 1)
-var BadRequestDetail_codeErrors *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var BadRequestException_reason *smithy.Schema
-
-var BadRequestException_detail *smithy.Schema
-
-var BadRequestReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "BadRequestReason",
-}, smithy.ShapeTypeEnum, 1)
-var BadRequestReason_CODE_ERROR *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BooleanValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "BooleanValue",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CacheHealthMetricsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CacheHealthMetricsConfig",
-}, smithy.ShapeTypeEnum, 2)
-var CacheHealthMetricsConfig_ENABLED *smithy.Schema
-
-var CacheHealthMetricsConfig_DISABLED *smithy.Schema
-
-var CachingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CachingConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CachingConfig_ttl *smithy.Schema
-
-var CachingConfig_cachingKeys *smithy.Schema
-
-var _CachingKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CachingKeys",
-}, smithy.ShapeTypeList, 1)
-var _CachingKeys_member *smithy.Schema
-
-var _CertificateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CertificateArn",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ChannelNamespace",
-}, smithy.ShapeTypeStructure, 10)
-var ChannelNamespace_apiId *smithy.Schema
-
-var ChannelNamespace_name *smithy.Schema
-
-var ChannelNamespace_subscribeAuthModes *smithy.Schema
-
-var ChannelNamespace_publishAuthModes *smithy.Schema
-
-var ChannelNamespace_codeHandlers *smithy.Schema
-
-var ChannelNamespace_tags *smithy.Schema
-
-var ChannelNamespace_channelNamespaceArn *smithy.Schema
-
-var ChannelNamespace_created *smithy.Schema
-
-var ChannelNamespace_lastModified *smithy.Schema
-
-var ChannelNamespace_handlerConfigs *smithy.Schema
-
-var _ChannelNamespaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ChannelNamespaces",
-}, smithy.ShapeTypeList, 1)
-var _ChannelNamespaces_member *smithy.Schema
-
-var _Code = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Code",
-}, smithy.ShapeTypeString, 0)
-
-var CodeError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CodeError",
-}, smithy.ShapeTypeStructure, 3)
-var CodeError_errorType *smithy.Schema
-
-var CodeError_value *smithy.Schema
-
-var CodeError_location *smithy.Schema
-
-var _CodeErrorColumn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CodeErrorColumn",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CodeErrorLine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CodeErrorLine",
-}, smithy.ShapeTypeInteger, 0)
-
-var CodeErrorLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CodeErrorLocation",
-}, smithy.ShapeTypeStructure, 3)
-var CodeErrorLocation_line *smithy.Schema
-
-var CodeErrorLocation_column *smithy.Schema
-
-var CodeErrorLocation_span *smithy.Schema
-
-var _CodeErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CodeErrors",
-}, smithy.ShapeTypeList, 1)
-var _CodeErrors_member *smithy.Schema
-
-var _CodeErrorSpan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CodeErrorSpan",
-}, smithy.ShapeTypeInteger, 0)
-
-var CognitoConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CognitoConfig",
-}, smithy.ShapeTypeStructure, 3)
-var CognitoConfig_userPoolId *smithy.Schema
-
-var CognitoConfig_awsRegion *smithy.Schema
-
-var CognitoConfig_appIdClientRegex *smithy.Schema
-
-var CognitoUserPoolConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CognitoUserPoolConfig",
-}, smithy.ShapeTypeStructure, 3)
-var CognitoUserPoolConfig_userPoolId *smithy.Schema
-
-var CognitoUserPoolConfig_awsRegion *smithy.Schema
-
-var CognitoUserPoolConfig_appIdClientRegex *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConcurrentModificationException_message *smithy.Schema
-
-var ConflictDetectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ConflictDetectionType",
-}, smithy.ShapeTypeEnum, 2)
-var ConflictDetectionType_VERSION *smithy.Schema
-
-var ConflictDetectionType_NONE *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictHandlerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ConflictHandlerType",
-}, smithy.ShapeTypeEnum, 4)
-var ConflictHandlerType_OPTIMISTIC_CONCURRENCY *smithy.Schema
-
-var ConflictHandlerType_LAMBDA *smithy.Schema
-
-var ConflictHandlerType_AUTOMERGE *smithy.Schema
-
-var ConflictHandlerType_NONE *smithy.Schema
-
-var _Context = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Context",
-}, smithy.ShapeTypeString, 0)
-
-var DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSource",
-}, smithy.ShapeTypeStructure, 13)
-var DataSource_dataSourceArn *smithy.Schema
-
-var DataSource_name *smithy.Schema
-
-var DataSource_description *smithy.Schema
-
-var DataSource_type *smithy.Schema
-
-var DataSource_serviceRoleArn *smithy.Schema
-
-var DataSource_dynamodbConfig *smithy.Schema
-
-var DataSource_lambdaConfig *smithy.Schema
-
-var DataSource_elasticsearchConfig *smithy.Schema
-
-var DataSource_openSearchServiceConfig *smithy.Schema
-
-var DataSource_httpConfig *smithy.Schema
-
-var DataSource_relationalDatabaseConfig *smithy.Schema
-
-var DataSource_eventBridgeConfig *smithy.Schema
-
-var DataSource_metricsConfig *smithy.Schema
-
-var DataSourceIntrospectionModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModel",
-}, smithy.ShapeTypeStructure, 5)
-var DataSourceIntrospectionModel_name *smithy.Schema
-
-var DataSourceIntrospectionModel_fields *smithy.Schema
-
-var DataSourceIntrospectionModel_primaryKey *smithy.Schema
-
-var DataSourceIntrospectionModel_indexes *smithy.Schema
-
-var DataSourceIntrospectionModel_sdl *smithy.Schema
-
-var DataSourceIntrospectionModelField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModelField",
-}, smithy.ShapeTypeStructure, 3)
-var DataSourceIntrospectionModelField_name *smithy.Schema
-
-var DataSourceIntrospectionModelField_type *smithy.Schema
-
-var DataSourceIntrospectionModelField_length *smithy.Schema
-
-var _DataSourceIntrospectionModelFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModelFields",
-}, smithy.ShapeTypeList, 1)
-var _DataSourceIntrospectionModelFields_member *smithy.Schema
-
-var DataSourceIntrospectionModelFieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModelFieldType",
-}, smithy.ShapeTypeStructure, 4)
-var DataSourceIntrospectionModelFieldType_kind *smithy.Schema
-
-var DataSourceIntrospectionModelFieldType_name *smithy.Schema
-
-var DataSourceIntrospectionModelFieldType_type *smithy.Schema
-
-var DataSourceIntrospectionModelFieldType_values *smithy.Schema
-
-var _DataSourceIntrospectionModelFieldTypeValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModelFieldTypeValues",
-}, smithy.ShapeTypeList, 1)
-var _DataSourceIntrospectionModelFieldTypeValues_member *smithy.Schema
-
-var DataSourceIntrospectionModelIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModelIndex",
-}, smithy.ShapeTypeStructure, 2)
-var DataSourceIntrospectionModelIndex_name *smithy.Schema
-
-var DataSourceIntrospectionModelIndex_fields *smithy.Schema
-
-var _DataSourceIntrospectionModelIndexes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModelIndexes",
-}, smithy.ShapeTypeList, 1)
-var _DataSourceIntrospectionModelIndexes_member *smithy.Schema
-
-var _DataSourceIntrospectionModelIndexFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModelIndexFields",
-}, smithy.ShapeTypeList, 1)
-var _DataSourceIntrospectionModelIndexFields_member *smithy.Schema
-
-var _DataSourceIntrospectionModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionModels",
-}, smithy.ShapeTypeList, 1)
-var _DataSourceIntrospectionModels_member *smithy.Schema
-
-var DataSourceIntrospectionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionResult",
-}, smithy.ShapeTypeStructure, 2)
-var DataSourceIntrospectionResult_models *smithy.Schema
-
-var DataSourceIntrospectionResult_nextToken *smithy.Schema
-
-var DataSourceIntrospectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceIntrospectionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DataSourceIntrospectionStatus_PROCESSING *smithy.Schema
-
-var DataSourceIntrospectionStatus_FAILED *smithy.Schema
-
-var DataSourceIntrospectionStatus_SUCCESS *smithy.Schema
-
-var DataSourceLevelMetricsBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceLevelMetricsBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var DataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS *smithy.Schema
-
-var DataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS *smithy.Schema
-
-var DataSourceLevelMetricsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceLevelMetricsConfig",
-}, smithy.ShapeTypeEnum, 2)
-var DataSourceLevelMetricsConfig_ENABLED *smithy.Schema
-
-var DataSourceLevelMetricsConfig_DISABLED *smithy.Schema
-
-var _DataSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSources",
-}, smithy.ShapeTypeList, 1)
-var _DataSources_member *smithy.Schema
-
-var DataSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DataSourceType",
-}, smithy.ShapeTypeEnum, 9)
-var DataSourceType_AWS_LAMBDA *smithy.Schema
-
-var DataSourceType_AMAZON_DYNAMODB *smithy.Schema
-
-var DataSourceType_AMAZON_ELASTICSEARCH *smithy.Schema
-
-var DataSourceType_NONE *smithy.Schema
-
-var DataSourceType_HTTP *smithy.Schema
-
-var DataSourceType_RELATIONAL_DATABASE *smithy.Schema
-
-var DataSourceType_AMAZON_OPENSEARCH_SERVICE *smithy.Schema
-
-var DataSourceType_AMAZON_EVENTBRIDGE *smithy.Schema
-
-var DataSourceType_AMAZON_BEDROCK_RUNTIME *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DefaultAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DefaultAction",
-}, smithy.ShapeTypeEnum, 2)
-var DefaultAction_ALLOW *smithy.Schema
-
-var DefaultAction_DENY *smithy.Schema
-
-var DeltaSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeltaSyncConfig",
-}, smithy.ShapeTypeStructure, 3)
-var DeltaSyncConfig_baseTableTTL *smithy.Schema
-
-var DeltaSyncConfig_deltaSyncTableName *smithy.Schema
-
-var DeltaSyncConfig_deltaSyncTableTTL *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var DomainNameConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DomainNameConfig",
-}, smithy.ShapeTypeStructure, 7)
-var DomainNameConfig_domainName *smithy.Schema
-
-var DomainNameConfig_description *smithy.Schema
-
-var DomainNameConfig_certificateArn *smithy.Schema
-
-var DomainNameConfig_appsyncDomainName *smithy.Schema
-
-var DomainNameConfig_hostedZoneId *smithy.Schema
-
-var DomainNameConfig_tags *smithy.Schema
-
-var DomainNameConfig_domainNameArn *smithy.Schema
-
-var _DomainNameConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DomainNameConfigs",
-}, smithy.ShapeTypeList, 1)
-var _DomainNameConfigs_member *smithy.Schema
-
-var DynamodbDataSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DynamodbDataSourceConfig",
-}, smithy.ShapeTypeStructure, 5)
-var DynamodbDataSourceConfig_tableName *smithy.Schema
-
-var DynamodbDataSourceConfig_awsRegion *smithy.Schema
-
-var DynamodbDataSourceConfig_useCallerCredentials *smithy.Schema
-
-var DynamodbDataSourceConfig_deltaSyncConfig *smithy.Schema
-
-var DynamodbDataSourceConfig_versioned *smithy.Schema
-
-var ElasticsearchDataSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ElasticsearchDataSourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ElasticsearchDataSourceConfig_endpoint *smithy.Schema
-
-var ElasticsearchDataSourceConfig_awsRegion *smithy.Schema
-
-var EnhancedMetricsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EnhancedMetricsConfig",
-}, smithy.ShapeTypeStructure, 3)
-var EnhancedMetricsConfig_resolverLevelMetricsBehavior *smithy.Schema
-
-var EnhancedMetricsConfig_dataSourceLevelMetricsBehavior *smithy.Schema
-
-var EnhancedMetricsConfig_operationLevelMetricsConfig *smithy.Schema
-
-var _EnvironmentVariableKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EnvironmentVariableKey",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentVariableMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EnvironmentVariableMap",
-}, smithy.ShapeTypeMap, 2)
-var _EnvironmentVariableMap_key *smithy.Schema
-
-var _EnvironmentVariableMap_value *smithy.Schema
-
-var _EnvironmentVariableValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EnvironmentVariableValue",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ErrorDetail",
-}, smithy.ShapeTypeStructure, 1)
-var ErrorDetail_message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EvaluateCodeErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluateCodeErrorDetail",
-}, smithy.ShapeTypeStructure, 2)
-var EvaluateCodeErrorDetail_message *smithy.Schema
-
-var EvaluateCodeErrorDetail_codeErrors *smithy.Schema
-
-var _EvaluationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluationResult",
-}, smithy.ShapeTypeString, 0)
-
-var EventBridgeDataSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EventBridgeDataSourceConfig",
-}, smithy.ShapeTypeStructure, 1)
-var EventBridgeDataSourceConfig_eventBusArn *smithy.Schema
-
-var EventConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EventConfig",
-}, smithy.ShapeTypeStructure, 5)
-var EventConfig_authProviders *smithy.Schema
-
-var EventConfig_connectionAuthModes *smithy.Schema
-
-var EventConfig_defaultPublishAuthModes *smithy.Schema
-
-var EventConfig_defaultSubscribeAuthModes *smithy.Schema
-
-var EventConfig_logConfig *smithy.Schema
-
-var EventLogConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EventLogConfig",
-}, smithy.ShapeTypeStructure, 2)
-var EventLogConfig_logLevel *smithy.Schema
-
-var EventLogConfig_cloudWatchLogsRoleArn *smithy.Schema
-
-var EventLogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EventLogLevel",
-}, smithy.ShapeTypeEnum, 5)
-var EventLogLevel_NONE *smithy.Schema
-
-var EventLogLevel_ERROR *smithy.Schema
-
-var EventLogLevel_ALL *smithy.Schema
-
-var EventLogLevel_INFO *smithy.Schema
-
-var EventLogLevel_DEBUG *smithy.Schema
-
-var FieldLogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "FieldLogLevel",
-}, smithy.ShapeTypeEnum, 5)
-var FieldLogLevel_NONE *smithy.Schema
-
-var FieldLogLevel_ERROR *smithy.Schema
-
-var FieldLogLevel_ALL *smithy.Schema
-
-var FieldLogLevel_INFO *smithy.Schema
-
-var FieldLogLevel_DEBUG *smithy.Schema
-
-var FunctionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "FunctionConfiguration",
-}, smithy.ShapeTypeStructure, 12)
-var FunctionConfiguration_functionId *smithy.Schema
-
-var FunctionConfiguration_functionArn *smithy.Schema
-
-var FunctionConfiguration_name *smithy.Schema
-
-var FunctionConfiguration_description *smithy.Schema
-
-var FunctionConfiguration_dataSourceName *smithy.Schema
-
-var FunctionConfiguration_requestMappingTemplate *smithy.Schema
-
-var FunctionConfiguration_responseMappingTemplate *smithy.Schema
-
-var FunctionConfiguration_functionVersion *smithy.Schema
-
-var FunctionConfiguration_syncConfig *smithy.Schema
-
-var FunctionConfiguration_maxBatchSize *smithy.Schema
-
-var FunctionConfiguration_runtime *smithy.Schema
-
-var FunctionConfiguration_code *smithy.Schema
-
-var _Functions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Functions",
-}, smithy.ShapeTypeList, 1)
-var _Functions_member *smithy.Schema
-
-var _FunctionsIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "FunctionsIds",
-}, smithy.ShapeTypeList, 1)
-var _FunctionsIds_member *smithy.Schema
-
-var GraphqlApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GraphqlApi",
-}, smithy.ShapeTypeStructure, 23)
-var GraphqlApi_name *smithy.Schema
-
-var GraphqlApi_apiId *smithy.Schema
-
-var GraphqlApi_authenticationType *smithy.Schema
-
-var GraphqlApi_logConfig *smithy.Schema
-
-var GraphqlApi_userPoolConfig *smithy.Schema
-
-var GraphqlApi_openIDConnectConfig *smithy.Schema
-
-var GraphqlApi_arn *smithy.Schema
-
-var GraphqlApi_uris *smithy.Schema
-
-var GraphqlApi_tags *smithy.Schema
-
-var GraphqlApi_additionalAuthenticationProviders *smithy.Schema
-
-var GraphqlApi_xrayEnabled *smithy.Schema
-
-var GraphqlApi_wafWebAclArn *smithy.Schema
-
-var GraphqlApi_lambdaAuthorizerConfig *smithy.Schema
-
-var GraphqlApi_dns *smithy.Schema
-
-var GraphqlApi_visibility *smithy.Schema
-
-var GraphqlApi_apiType *smithy.Schema
-
-var GraphqlApi_mergedApiExecutionRoleArn *smithy.Schema
-
-var GraphqlApi_owner *smithy.Schema
-
-var GraphqlApi_ownerContact *smithy.Schema
-
-var GraphqlApi_introspectionConfig *smithy.Schema
-
-var GraphqlApi_queryDepthLimit *smithy.Schema
-
-var GraphqlApi_resolverCountLimit *smithy.Schema
-
-var GraphqlApi_enhancedMetricsConfig *smithy.Schema
-
-var GraphQLApiIntrospectionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GraphQLApiIntrospectionConfig",
-}, smithy.ShapeTypeEnum, 2)
-var GraphQLApiIntrospectionConfig_ENABLED *smithy.Schema
-
-var GraphQLApiIntrospectionConfig_DISABLED *smithy.Schema
-
-var _GraphqlApis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GraphqlApis",
-}, smithy.ShapeTypeList, 1)
-var _GraphqlApis_member *smithy.Schema
-
-var GraphQLApiType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GraphQLApiType",
-}, smithy.ShapeTypeEnum, 2)
-var GraphQLApiType_GRAPHQL *smithy.Schema
-
-var GraphQLApiType_MERGED *smithy.Schema
-
-var GraphQLApiVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GraphQLApiVisibility",
-}, smithy.ShapeTypeEnum, 2)
-var GraphQLApiVisibility_GLOBAL *smithy.Schema
-
-var GraphQLApiVisibility_PRIVATE *smithy.Schema
-
-var GraphQLSchemaException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GraphQLSchemaException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var GraphQLSchemaException_message *smithy.Schema
-
-var HandlerBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "HandlerBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var HandlerBehavior_CODE *smithy.Schema
-
-var HandlerBehavior_DIRECT *smithy.Schema
-
-var HandlerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "HandlerConfig",
-}, smithy.ShapeTypeStructure, 2)
-var HandlerConfig_behavior *smithy.Schema
-
-var HandlerConfig_integration *smithy.Schema
-
-var HandlerConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "HandlerConfigs",
-}, smithy.ShapeTypeStructure, 2)
-var HandlerConfigs_onPublish *smithy.Schema
-
-var HandlerConfigs_onSubscribe *smithy.Schema
-
-var HttpDataSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "HttpDataSourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var HttpDataSourceConfig_endpoint *smithy.Schema
-
-var HttpDataSourceConfig_authorizationConfig *smithy.Schema
-
-var Integration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Integration",
-}, smithy.ShapeTypeStructure, 2)
-var Integration_dataSourceName *smithy.Schema
-
-var Integration_lambdaConfig *smithy.Schema
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_message *smithy.Schema
-
-var InvokeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "InvokeType",
-}, smithy.ShapeTypeEnum, 2)
-var InvokeType_REQUEST_RESPONSE *smithy.Schema
-
-var InvokeType_EVENT *smithy.Schema
-
-var LambdaAuthorizerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "LambdaAuthorizerConfig",
-}, smithy.ShapeTypeStructure, 3)
-var LambdaAuthorizerConfig_authorizerResultTtlInSeconds *smithy.Schema
-
-var LambdaAuthorizerConfig_authorizerUri *smithy.Schema
-
-var LambdaAuthorizerConfig_identityValidationExpression *smithy.Schema
-
-var LambdaConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "LambdaConfig",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaConfig_invokeType *smithy.Schema
-
-var LambdaConflictHandlerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "LambdaConflictHandlerConfig",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaConflictHandlerConfig_lambdaConflictHandlerArn *smithy.Schema
-
-var LambdaDataSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "LambdaDataSourceConfig",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaDataSourceConfig_lambdaFunctionArn *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var LimitExceededException_message *smithy.Schema
-
-var LogConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "LogConfig",
-}, smithy.ShapeTypeStructure, 3)
-var LogConfig_fieldLogLevel *smithy.Schema
-
-var LogConfig_cloudWatchLogsRoleArn *smithy.Schema
-
-var LogConfig_excludeVerboseContent *smithy.Schema
-
-var _Logs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Logs",
-}, smithy.ShapeTypeList, 1)
-var _Logs_member *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MapOfStringToString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "MapOfStringToString",
-}, smithy.ShapeTypeMap, 2)
-var _MapOfStringToString_key *smithy.Schema
-
-var _MapOfStringToString_value *smithy.Schema
-
-var _MappingTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "MappingTemplate",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxBatchSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "MaxBatchSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MergeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "MergeType",
-}, smithy.ShapeTypeEnum, 2)
-var MergeType_MANUAL_MERGE *smithy.Schema
-
-var MergeType_AUTO_MERGE *smithy.Schema
-
-var _Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Namespace",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var OpenIDConnectConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "OpenIDConnectConfig",
-}, smithy.ShapeTypeStructure, 4)
-var OpenIDConnectConfig_issuer *smithy.Schema
-
-var OpenIDConnectConfig_clientId *smithy.Schema
-
-var OpenIDConnectConfig_iatTTL *smithy.Schema
-
-var OpenIDConnectConfig_authTTL *smithy.Schema
-
-var OpenSearchServiceDataSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "OpenSearchServiceDataSourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OpenSearchServiceDataSourceConfig_endpoint *smithy.Schema
-
-var OpenSearchServiceDataSourceConfig_awsRegion *smithy.Schema
-
-var OperationLevelMetricsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "OperationLevelMetricsConfig",
-}, smithy.ShapeTypeEnum, 2)
-var OperationLevelMetricsConfig_ENABLED *smithy.Schema
-
-var OperationLevelMetricsConfig_DISABLED *smithy.Schema
-
-var _OutErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "OutErrors",
-}, smithy.ShapeTypeString, 0)
-
-var OutputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "OutputType",
-}, smithy.ShapeTypeEnum, 2)
-var OutputType_SDL *smithy.Schema
-
-var OutputType_JSON *smithy.Schema
-
-var _OwnerContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "OwnerContact",
-}, smithy.ShapeTypeString, 0)
-
-var Ownership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Ownership",
-}, smithy.ShapeTypeEnum, 2)
-var Ownership_CURRENT_ACCOUNT *smithy.Schema
-
-var Ownership_OTHER_ACCOUNTS *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var PipelineConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "PipelineConfig",
-}, smithy.ShapeTypeStructure, 1)
-var PipelineConfig_functions *smithy.Schema
-
-var _QueryDepthLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "QueryDepthLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var RdsDataApiConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RdsDataApiConfig",
-}, smithy.ShapeTypeStructure, 3)
-var RdsDataApiConfig_resourceArn *smithy.Schema
-
-var RdsDataApiConfig_secretArn *smithy.Schema
-
-var RdsDataApiConfig_databaseName *smithy.Schema
-
-var _RdsDataApiConfigDatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RdsDataApiConfigDatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var _RdsDataApiConfigResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RdsDataApiConfigResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RdsDataApiConfigSecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RdsDataApiConfigSecretArn",
-}, smithy.ShapeTypeString, 0)
-
-var RdsHttpEndpointConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RdsHttpEndpointConfig",
-}, smithy.ShapeTypeStructure, 5)
-var RdsHttpEndpointConfig_awsRegion *smithy.Schema
-
-var RdsHttpEndpointConfig_dbClusterIdentifier *smithy.Schema
-
-var RdsHttpEndpointConfig_databaseName *smithy.Schema
-
-var RdsHttpEndpointConfig_schema *smithy.Schema
-
-var RdsHttpEndpointConfig_awsSecretStoreArn *smithy.Schema
-
-var RelationalDatabaseDataSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RelationalDatabaseDataSourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var RelationalDatabaseDataSourceConfig_relationalDatabaseSourceType *smithy.Schema
-
-var RelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig *smithy.Schema
-
-var RelationalDatabaseSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RelationalDatabaseSourceType",
-}, smithy.ShapeTypeEnum, 1)
-var RelationalDatabaseSourceType_RDS_HTTP_ENDPOINT *smithy.Schema
-
-var Resolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Resolver",
-}, smithy.ShapeTypeStructure, 14)
-var Resolver_typeName *smithy.Schema
-
-var Resolver_fieldName *smithy.Schema
-
-var Resolver_dataSourceName *smithy.Schema
-
-var Resolver_resolverArn *smithy.Schema
-
-var Resolver_requestMappingTemplate *smithy.Schema
-
-var Resolver_responseMappingTemplate *smithy.Schema
-
-var Resolver_kind *smithy.Schema
-
-var Resolver_pipelineConfig *smithy.Schema
-
-var Resolver_syncConfig *smithy.Schema
-
-var Resolver_cachingConfig *smithy.Schema
-
-var Resolver_maxBatchSize *smithy.Schema
-
-var Resolver_runtime *smithy.Schema
-
-var Resolver_code *smithy.Schema
-
-var Resolver_metricsConfig *smithy.Schema
-
-var _ResolverCountLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ResolverCountLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var ResolverKind = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ResolverKind",
-}, smithy.ShapeTypeEnum, 2)
-var ResolverKind_UNIT *smithy.Schema
-
-var ResolverKind_PIPELINE *smithy.Schema
-
-var ResolverLevelMetricsBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ResolverLevelMetricsBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var ResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS *smithy.Schema
-
-var ResolverLevelMetricsBehavior_PER_RESOLVER_METRICS *smithy.Schema
-
-var ResolverLevelMetricsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ResolverLevelMetricsConfig",
-}, smithy.ShapeTypeEnum, 2)
-var ResolverLevelMetricsConfig_ENABLED *smithy.Schema
-
-var ResolverLevelMetricsConfig_DISABLED *smithy.Schema
-
-var _Resolvers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Resolvers",
-}, smithy.ShapeTypeList, 1)
-var _Resolvers_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var RuntimeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "RuntimeName",
-}, smithy.ShapeTypeEnum, 1)
-var RuntimeName_APPSYNC_JS *smithy.Schema
-
-var SchemaStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "SchemaStatus",
-}, smithy.ShapeTypeEnum, 6)
-var SchemaStatus_Processing *smithy.Schema
-
-var SchemaStatus_Active *smithy.Schema
-
-var SchemaStatus_Deleting *smithy.Schema
-
-var SchemaStatus_Failed *smithy.Schema
-
-var SchemaStatus_Success *smithy.Schema
-
-var SchemaStatus_NotApplicable *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SourceApiAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "SourceApiAssociation",
-}, smithy.ShapeTypeStructure, 11)
-var SourceApiAssociation_associationId *smithy.Schema
-
-var SourceApiAssociation_associationArn *smithy.Schema
-
-var SourceApiAssociation_sourceApiId *smithy.Schema
-
-var SourceApiAssociation_sourceApiArn *smithy.Schema
-
-var SourceApiAssociation_mergedApiArn *smithy.Schema
-
-var SourceApiAssociation_mergedApiId *smithy.Schema
-
-var SourceApiAssociation_description *smithy.Schema
-
-var SourceApiAssociation_sourceApiAssociationConfig *smithy.Schema
-
-var SourceApiAssociation_sourceApiAssociationStatus *smithy.Schema
-
-var SourceApiAssociation_sourceApiAssociationStatusDetail *smithy.Schema
-
-var SourceApiAssociation_lastSuccessfulMergeDate *smithy.Schema
-
-var SourceApiAssociationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "SourceApiAssociationConfig",
-}, smithy.ShapeTypeStructure, 1)
-var SourceApiAssociationConfig_mergeType *smithy.Schema
-
-var SourceApiAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "SourceApiAssociationStatus",
-}, smithy.ShapeTypeEnum, 8)
-var SourceApiAssociationStatus_MERGE_SCHEDULED *smithy.Schema
-
-var SourceApiAssociationStatus_MERGE_FAILED *smithy.Schema
-
-var SourceApiAssociationStatus_MERGE_SUCCESS *smithy.Schema
-
-var SourceApiAssociationStatus_MERGE_IN_PROGRESS *smithy.Schema
-
-var SourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED *smithy.Schema
-
-var SourceApiAssociationStatus_DELETION_SCHEDULED *smithy.Schema
-
-var SourceApiAssociationStatus_DELETION_IN_PROGRESS *smithy.Schema
-
-var SourceApiAssociationStatus_DELETION_FAILED *smithy.Schema
-
-var SourceApiAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "SourceApiAssociationSummary",
-}, smithy.ShapeTypeStructure, 7)
-var SourceApiAssociationSummary_associationId *smithy.Schema
-
-var SourceApiAssociationSummary_associationArn *smithy.Schema
-
-var SourceApiAssociationSummary_sourceApiId *smithy.Schema
-
-var SourceApiAssociationSummary_sourceApiArn *smithy.Schema
-
-var SourceApiAssociationSummary_mergedApiId *smithy.Schema
-
-var SourceApiAssociationSummary_mergedApiArn *smithy.Schema
-
-var SourceApiAssociationSummary_description *smithy.Schema
-
-var _SourceApiAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "SourceApiAssociationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SourceApiAssociationSummaryList_member *smithy.Schema
-
-var _Stash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Stash",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var SyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "SyncConfig",
-}, smithy.ShapeTypeStructure, 3)
-var SyncConfig_conflictHandler *smithy.Schema
-
-var SyncConfig_conflictDetection *smithy.Schema
-
-var SyncConfig_lambdaConflictHandlerConfig *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Template = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Template",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TTL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TTL",
-}, smithy.ShapeTypeInteger, 0)
-
-var Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "Type",
-}, smithy.ShapeTypeStructure, 5)
-var Type_name *smithy.Schema
-
-var Type_description *smithy.Schema
-
-var Type_arn *smithy.Schema
-
-var Type_definition *smithy.Schema
-
-var Type_format *smithy.Schema
-
-var TypeDefinitionFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TypeDefinitionFormat",
-}, smithy.ShapeTypeEnum, 2)
-var TypeDefinitionFormat_SDL *smithy.Schema
-
-var TypeDefinitionFormat_JSON *smithy.Schema
-
-var _TypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TypeList",
-}, smithy.ShapeTypeList, 1)
-var _TypeList_member *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var UserPoolConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UserPoolConfig",
-}, smithy.ShapeTypeStructure, 4)
-var UserPoolConfig_userPoolId *smithy.Schema
-
-var UserPoolConfig_awsRegion *smithy.Schema
-
-var UserPoolConfig_defaultAction *smithy.Schema
-
-var UserPoolConfig_appIdClientRegex *smithy.Schema
-
-var AssociateApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateApiRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateApiRequest_domainName *smithy.Schema
-
-var AssociateApiRequest_apiId *smithy.Schema
-
-var AssociateApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateApiResponse_apiAssociation *smithy.Schema
-
-var AssociateMergedGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateMergedGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateMergedGraphqlApiRequest_sourceApiIdentifier *smithy.Schema
-
-var AssociateMergedGraphqlApiRequest_mergedApiIdentifier *smithy.Schema
-
-var AssociateMergedGraphqlApiRequest_description *smithy.Schema
-
-var AssociateMergedGraphqlApiRequest_sourceApiAssociationConfig *smithy.Schema
-
-var AssociateMergedGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateMergedGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateMergedGraphqlApiResponse_sourceApiAssociation *smithy.Schema
-
-var AssociateSourceGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateSourceGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateSourceGraphqlApiRequest_mergedApiIdentifier *smithy.Schema
-
-var AssociateSourceGraphqlApiRequest_sourceApiIdentifier *smithy.Schema
-
-var AssociateSourceGraphqlApiRequest_description *smithy.Schema
-
-var AssociateSourceGraphqlApiRequest_sourceApiAssociationConfig *smithy.Schema
-
-var AssociateSourceGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "AssociateSourceGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateSourceGraphqlApiResponse_sourceApiAssociation *smithy.Schema
-
-var CreateApiCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiCacheRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateApiCacheRequest_apiId *smithy.Schema
-
-var CreateApiCacheRequest_ttl *smithy.Schema
-
-var CreateApiCacheRequest_transitEncryptionEnabled *smithy.Schema
-
-var CreateApiCacheRequest_atRestEncryptionEnabled *smithy.Schema
-
-var CreateApiCacheRequest_apiCachingBehavior *smithy.Schema
-
-var CreateApiCacheRequest_type *smithy.Schema
-
-var CreateApiCacheRequest_healthMetricsConfig *smithy.Schema
-
-var CreateApiCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiCacheResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateApiCacheResponse_apiCache *smithy.Schema
-
-var CreateApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateApiRequest_name *smithy.Schema
-
-var CreateApiRequest_ownerContact *smithy.Schema
-
-var CreateApiRequest_tags *smithy.Schema
-
-var CreateApiRequest_eventConfig *smithy.Schema
-
-var CreateApiKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiKeyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateApiKeyRequest_apiId *smithy.Schema
-
-var CreateApiKeyRequest_description *smithy.Schema
-
-var CreateApiKeyRequest_expires *smithy.Schema
-
-var CreateApiKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiKeyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateApiKeyResponse_apiKey *smithy.Schema
-
-var CreateApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateApiResponse_api *smithy.Schema
-
-var CreateChannelNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateChannelNamespaceRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateChannelNamespaceRequest_apiId *smithy.Schema
-
-var CreateChannelNamespaceRequest_name *smithy.Schema
-
-var CreateChannelNamespaceRequest_subscribeAuthModes *smithy.Schema
-
-var CreateChannelNamespaceRequest_publishAuthModes *smithy.Schema
-
-var CreateChannelNamespaceRequest_codeHandlers *smithy.Schema
-
-var CreateChannelNamespaceRequest_tags *smithy.Schema
-
-var CreateChannelNamespaceRequest_handlerConfigs *smithy.Schema
-
-var CreateChannelNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateChannelNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChannelNamespaceResponse_channelNamespace *smithy.Schema
-
-var CreateDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateDataSourceRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateDataSourceRequest_apiId *smithy.Schema
-
-var CreateDataSourceRequest_name *smithy.Schema
-
-var CreateDataSourceRequest_description *smithy.Schema
-
-var CreateDataSourceRequest_type *smithy.Schema
-
-var CreateDataSourceRequest_serviceRoleArn *smithy.Schema
-
-var CreateDataSourceRequest_dynamodbConfig *smithy.Schema
-
-var CreateDataSourceRequest_lambdaConfig *smithy.Schema
-
-var CreateDataSourceRequest_elasticsearchConfig *smithy.Schema
-
-var CreateDataSourceRequest_openSearchServiceConfig *smithy.Schema
-
-var CreateDataSourceRequest_httpConfig *smithy.Schema
-
-var CreateDataSourceRequest_relationalDatabaseConfig *smithy.Schema
-
-var CreateDataSourceRequest_eventBridgeConfig *smithy.Schema
-
-var CreateDataSourceRequest_metricsConfig *smithy.Schema
-
-var CreateDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateDataSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataSourceResponse_dataSource *smithy.Schema
-
-var CreateDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateDomainNameRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDomainNameRequest_domainName *smithy.Schema
-
-var CreateDomainNameRequest_certificateArn *smithy.Schema
-
-var CreateDomainNameRequest_description *smithy.Schema
-
-var CreateDomainNameRequest_tags *smithy.Schema
-
-var CreateDomainNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateDomainNameResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDomainNameResponse_domainNameConfig *smithy.Schema
-
-var CreateFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateFunctionRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateFunctionRequest_apiId *smithy.Schema
-
-var CreateFunctionRequest_name *smithy.Schema
-
-var CreateFunctionRequest_description *smithy.Schema
-
-var CreateFunctionRequest_dataSourceName *smithy.Schema
-
-var CreateFunctionRequest_requestMappingTemplate *smithy.Schema
-
-var CreateFunctionRequest_responseMappingTemplate *smithy.Schema
-
-var CreateFunctionRequest_functionVersion *smithy.Schema
-
-var CreateFunctionRequest_syncConfig *smithy.Schema
-
-var CreateFunctionRequest_maxBatchSize *smithy.Schema
-
-var CreateFunctionRequest_runtime *smithy.Schema
-
-var CreateFunctionRequest_code *smithy.Schema
-
-var CreateFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateFunctionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFunctionResponse_functionConfiguration *smithy.Schema
-
-var CreateGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 17)
-var CreateGraphqlApiRequest_name *smithy.Schema
-
-var CreateGraphqlApiRequest_logConfig *smithy.Schema
-
-var CreateGraphqlApiRequest_authenticationType *smithy.Schema
-
-var CreateGraphqlApiRequest_userPoolConfig *smithy.Schema
-
-var CreateGraphqlApiRequest_openIDConnectConfig *smithy.Schema
-
-var CreateGraphqlApiRequest_tags *smithy.Schema
-
-var CreateGraphqlApiRequest_additionalAuthenticationProviders *smithy.Schema
-
-var CreateGraphqlApiRequest_xrayEnabled *smithy.Schema
-
-var CreateGraphqlApiRequest_lambdaAuthorizerConfig *smithy.Schema
-
-var CreateGraphqlApiRequest_apiType *smithy.Schema
-
-var CreateGraphqlApiRequest_mergedApiExecutionRoleArn *smithy.Schema
-
-var CreateGraphqlApiRequest_visibility *smithy.Schema
-
-var CreateGraphqlApiRequest_ownerContact *smithy.Schema
-
-var CreateGraphqlApiRequest_introspectionConfig *smithy.Schema
-
-var CreateGraphqlApiRequest_queryDepthLimit *smithy.Schema
-
-var CreateGraphqlApiRequest_resolverCountLimit *smithy.Schema
-
-var CreateGraphqlApiRequest_enhancedMetricsConfig *smithy.Schema
-
-var CreateGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGraphqlApiResponse_graphqlApi *smithy.Schema
-
-var CreateResolverRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateResolverRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateResolverRequest_apiId *smithy.Schema
-
-var CreateResolverRequest_typeName *smithy.Schema
-
-var CreateResolverRequest_fieldName *smithy.Schema
-
-var CreateResolverRequest_dataSourceName *smithy.Schema
-
-var CreateResolverRequest_requestMappingTemplate *smithy.Schema
-
-var CreateResolverRequest_responseMappingTemplate *smithy.Schema
-
-var CreateResolverRequest_kind *smithy.Schema
-
-var CreateResolverRequest_pipelineConfig *smithy.Schema
-
-var CreateResolverRequest_syncConfig *smithy.Schema
-
-var CreateResolverRequest_cachingConfig *smithy.Schema
-
-var CreateResolverRequest_maxBatchSize *smithy.Schema
-
-var CreateResolverRequest_runtime *smithy.Schema
-
-var CreateResolverRequest_code *smithy.Schema
-
-var CreateResolverRequest_metricsConfig *smithy.Schema
-
-var CreateResolverResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateResolverResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResolverResponse_resolver *smithy.Schema
-
-var CreateTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateTypeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTypeRequest_apiId *smithy.Schema
-
-var CreateTypeRequest_definition *smithy.Schema
-
-var CreateTypeRequest_format *smithy.Schema
-
-var CreateTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "CreateTypeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTypeResponse_type *smithy.Schema
-
-var DeleteApiCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiCacheRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApiCacheRequest_apiId *smithy.Schema
-
-var DeleteApiCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiCacheResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApiRequest_apiId *smithy.Schema
-
-var DeleteApiKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiKeyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteApiKeyRequest_apiId *smithy.Schema
-
-var DeleteApiKeyRequest_id *smithy.Schema
-
-var DeleteApiKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiKeyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteApiResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteChannelNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteChannelNamespaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChannelNamespaceRequest_apiId *smithy.Schema
-
-var DeleteChannelNamespaceRequest_name *smithy.Schema
-
-var DeleteChannelNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteChannelNamespaceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteDataSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDataSourceRequest_apiId *smithy.Schema
-
-var DeleteDataSourceRequest_name *smithy.Schema
-
-var DeleteDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteDataSourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteDomainNameRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainNameRequest_domainName *smithy.Schema
-
-var DeleteDomainNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteDomainNameResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteFunctionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFunctionRequest_apiId *smithy.Schema
-
-var DeleteFunctionRequest_functionId *smithy.Schema
-
-var DeleteFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteFunctionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGraphqlApiRequest_apiId *smithy.Schema
-
-var DeleteGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResolverRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteResolverRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteResolverRequest_apiId *smithy.Schema
-
-var DeleteResolverRequest_typeName *smithy.Schema
-
-var DeleteResolverRequest_fieldName *smithy.Schema
-
-var DeleteResolverResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteResolverResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteTypeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTypeRequest_apiId *smithy.Schema
-
-var DeleteTypeRequest_typeName *smithy.Schema
-
-var DeleteTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DeleteTypeResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateApiRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateApiRequest_domainName *smithy.Schema
-
-var DisassociateApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateApiResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateMergedGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateMergedGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateMergedGraphqlApiRequest_sourceApiIdentifier *smithy.Schema
-
-var DisassociateMergedGraphqlApiRequest_associationId *smithy.Schema
-
-var DisassociateMergedGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateMergedGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus *smithy.Schema
-
-var DisassociateSourceGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateSourceGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateSourceGraphqlApiRequest_mergedApiIdentifier *smithy.Schema
-
-var DisassociateSourceGraphqlApiRequest_associationId *smithy.Schema
-
-var DisassociateSourceGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "DisassociateSourceGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus *smithy.Schema
-
-var EvaluateCodeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluateCodeRequest",
-}, smithy.ShapeTypeStructure, 4)
-var EvaluateCodeRequest_runtime *smithy.Schema
-
-var EvaluateCodeRequest_code *smithy.Schema
-
-var EvaluateCodeRequest_context *smithy.Schema
-
-var EvaluateCodeRequest_function *smithy.Schema
-
-var EvaluateCodeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluateCodeResponse",
-}, smithy.ShapeTypeStructure, 5)
-var EvaluateCodeResponse_evaluationResult *smithy.Schema
-
-var EvaluateCodeResponse_error *smithy.Schema
-
-var EvaluateCodeResponse_logs *smithy.Schema
-
-var EvaluateCodeResponse_stash *smithy.Schema
-
-var EvaluateCodeResponse_outErrors *smithy.Schema
-
-var EvaluateMappingTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluateMappingTemplateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EvaluateMappingTemplateRequest_template *smithy.Schema
-
-var EvaluateMappingTemplateRequest_context *smithy.Schema
-
-var EvaluateMappingTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "EvaluateMappingTemplateResponse",
-}, smithy.ShapeTypeStructure, 5)
-var EvaluateMappingTemplateResponse_evaluationResult *smithy.Schema
-
-var EvaluateMappingTemplateResponse_error *smithy.Schema
-
-var EvaluateMappingTemplateResponse_logs *smithy.Schema
-
-var EvaluateMappingTemplateResponse_stash *smithy.Schema
-
-var EvaluateMappingTemplateResponse_outErrors *smithy.Schema
-
-var FlushApiCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "FlushApiCacheRequest",
-}, smithy.ShapeTypeStructure, 1)
-var FlushApiCacheRequest_apiId *smithy.Schema
-
-var FlushApiCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "FlushApiCacheResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetApiAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiAssociationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApiAssociationRequest_domainName *smithy.Schema
-
-var GetApiAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiAssociationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetApiAssociationResponse_apiAssociation *smithy.Schema
-
-var GetApiCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiCacheRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApiCacheRequest_apiId *smithy.Schema
-
-var GetApiCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiCacheResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetApiCacheResponse_apiCache *smithy.Schema
-
-var GetApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApiRequest_apiId *smithy.Schema
-
-var GetApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetApiResponse_api *smithy.Schema
-
-var GetChannelNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetChannelNamespaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetChannelNamespaceRequest_apiId *smithy.Schema
-
-var GetChannelNamespaceRequest_name *smithy.Schema
-
-var GetChannelNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetChannelNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelNamespaceResponse_channelNamespace *smithy.Schema
-
-var GetDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDataSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDataSourceRequest_apiId *smithy.Schema
-
-var GetDataSourceRequest_name *smithy.Schema
-
-var GetDataSourceIntrospectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDataSourceIntrospectionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetDataSourceIntrospectionRequest_introspectionId *smithy.Schema
-
-var GetDataSourceIntrospectionRequest_includeModelsSDL *smithy.Schema
-
-var GetDataSourceIntrospectionRequest_nextToken *smithy.Schema
-
-var GetDataSourceIntrospectionRequest_maxResults *smithy.Schema
-
-var GetDataSourceIntrospectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDataSourceIntrospectionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetDataSourceIntrospectionResponse_introspectionId *smithy.Schema
-
-var GetDataSourceIntrospectionResponse_introspectionStatus *smithy.Schema
-
-var GetDataSourceIntrospectionResponse_introspectionStatusDetail *smithy.Schema
-
-var GetDataSourceIntrospectionResponse_introspectionResult *smithy.Schema
-
-var GetDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDataSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataSourceResponse_dataSource *smithy.Schema
-
-var GetDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDomainNameRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainNameRequest_domainName *smithy.Schema
-
-var GetDomainNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetDomainNameResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainNameResponse_domainNameConfig *smithy.Schema
-
-var GetFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetFunctionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetFunctionRequest_apiId *smithy.Schema
-
-var GetFunctionRequest_functionId *smithy.Schema
-
-var GetFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetFunctionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetFunctionResponse_functionConfiguration *smithy.Schema
-
-var GetGraphqlApiEnvironmentVariablesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetGraphqlApiEnvironmentVariablesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetGraphqlApiEnvironmentVariablesRequest_apiId *smithy.Schema
-
-var GetGraphqlApiEnvironmentVariablesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetGraphqlApiEnvironmentVariablesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetGraphqlApiEnvironmentVariablesResponse_environmentVariables *smithy.Schema
-
-var GetGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetGraphqlApiRequest_apiId *smithy.Schema
-
-var GetGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetGraphqlApiResponse_graphqlApi *smithy.Schema
-
-var GetIntrospectionSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetIntrospectionSchemaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIntrospectionSchemaRequest_apiId *smithy.Schema
-
-var GetIntrospectionSchemaRequest_format *smithy.Schema
-
-var GetIntrospectionSchemaRequest_includeDirectives *smithy.Schema
-
-var GetIntrospectionSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetIntrospectionSchemaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIntrospectionSchemaResponse_schema *smithy.Schema
-
-var GetResolverRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetResolverRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetResolverRequest_apiId *smithy.Schema
-
-var GetResolverRequest_typeName *smithy.Schema
-
-var GetResolverRequest_fieldName *smithy.Schema
-
-var GetResolverResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetResolverResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetResolverResponse_resolver *smithy.Schema
-
-var GetSchemaCreationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetSchemaCreationStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSchemaCreationStatusRequest_apiId *smithy.Schema
-
-var GetSchemaCreationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetSchemaCreationStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSchemaCreationStatusResponse_status *smithy.Schema
-
-var GetSchemaCreationStatusResponse_details *smithy.Schema
-
-var GetSourceApiAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetSourceApiAssociationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSourceApiAssociationRequest_mergedApiIdentifier *smithy.Schema
-
-var GetSourceApiAssociationRequest_associationId *smithy.Schema
-
-var GetSourceApiAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetSourceApiAssociationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSourceApiAssociationResponse_sourceApiAssociation *smithy.Schema
-
-var GetTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetTypeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTypeRequest_apiId *smithy.Schema
-
-var GetTypeRequest_typeName *smithy.Schema
-
-var GetTypeRequest_format *smithy.Schema
-
-var GetTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "GetTypeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTypeResponse_type *smithy.Schema
-
-var ListApiKeysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListApiKeysRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListApiKeysRequest_apiId *smithy.Schema
-
-var ListApiKeysRequest_nextToken *smithy.Schema
-
-var ListApiKeysRequest_maxResults *smithy.Schema
-
-var ListApiKeysResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListApiKeysResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListApiKeysResponse_apiKeys *smithy.Schema
-
-var ListApiKeysResponse_nextToken *smithy.Schema
-
-var ListApisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListApisRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListApisRequest_nextToken *smithy.Schema
-
-var ListApisRequest_maxResults *smithy.Schema
-
-var ListApisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListApisResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListApisResponse_apis *smithy.Schema
-
-var ListApisResponse_nextToken *smithy.Schema
-
-var ListChannelNamespacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListChannelNamespacesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelNamespacesRequest_apiId *smithy.Schema
-
-var ListChannelNamespacesRequest_nextToken *smithy.Schema
-
-var ListChannelNamespacesRequest_maxResults *smithy.Schema
-
-var ListChannelNamespacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListChannelNamespacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelNamespacesResponse_channelNamespaces *smithy.Schema
-
-var ListChannelNamespacesResponse_nextToken *smithy.Schema
-
-var ListDataSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListDataSourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDataSourcesRequest_apiId *smithy.Schema
-
-var ListDataSourcesRequest_nextToken *smithy.Schema
-
-var ListDataSourcesRequest_maxResults *smithy.Schema
-
-var ListDataSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListDataSourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataSourcesResponse_dataSources *smithy.Schema
-
-var ListDataSourcesResponse_nextToken *smithy.Schema
-
-var ListDomainNamesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListDomainNamesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainNamesRequest_nextToken *smithy.Schema
-
-var ListDomainNamesRequest_maxResults *smithy.Schema
-
-var ListDomainNamesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListDomainNamesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainNamesResponse_domainNameConfigs *smithy.Schema
-
-var ListDomainNamesResponse_nextToken *smithy.Schema
-
-var ListFunctionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListFunctionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListFunctionsRequest_apiId *smithy.Schema
-
-var ListFunctionsRequest_nextToken *smithy.Schema
-
-var ListFunctionsRequest_maxResults *smithy.Schema
-
-var ListFunctionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListFunctionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFunctionsResponse_functions *smithy.Schema
-
-var ListFunctionsResponse_nextToken *smithy.Schema
-
-var ListGraphqlApisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListGraphqlApisRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListGraphqlApisRequest_nextToken *smithy.Schema
-
-var ListGraphqlApisRequest_maxResults *smithy.Schema
-
-var ListGraphqlApisRequest_apiType *smithy.Schema
-
-var ListGraphqlApisRequest_owner *smithy.Schema
-
-var ListGraphqlApisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListGraphqlApisResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGraphqlApisResponse_graphqlApis *smithy.Schema
-
-var ListGraphqlApisResponse_nextToken *smithy.Schema
-
-var ListResolversByFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListResolversByFunctionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListResolversByFunctionRequest_apiId *smithy.Schema
-
-var ListResolversByFunctionRequest_functionId *smithy.Schema
-
-var ListResolversByFunctionRequest_nextToken *smithy.Schema
-
-var ListResolversByFunctionRequest_maxResults *smithy.Schema
-
-var ListResolversByFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListResolversByFunctionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResolversByFunctionResponse_resolvers *smithy.Schema
-
-var ListResolversByFunctionResponse_nextToken *smithy.Schema
-
-var ListResolversRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListResolversRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListResolversRequest_apiId *smithy.Schema
-
-var ListResolversRequest_typeName *smithy.Schema
-
-var ListResolversRequest_nextToken *smithy.Schema
-
-var ListResolversRequest_maxResults *smithy.Schema
-
-var ListResolversResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListResolversResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResolversResponse_resolvers *smithy.Schema
-
-var ListResolversResponse_nextToken *smithy.Schema
-
-var ListSourceApiAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListSourceApiAssociationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSourceApiAssociationsRequest_apiId *smithy.Schema
-
-var ListSourceApiAssociationsRequest_nextToken *smithy.Schema
-
-var ListSourceApiAssociationsRequest_maxResults *smithy.Schema
-
-var ListSourceApiAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListSourceApiAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSourceApiAssociationsResponse_sourceApiAssociationSummaries *smithy.Schema
-
-var ListSourceApiAssociationsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTypesByAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTypesByAssociationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListTypesByAssociationRequest_mergedApiIdentifier *smithy.Schema
-
-var ListTypesByAssociationRequest_associationId *smithy.Schema
-
-var ListTypesByAssociationRequest_format *smithy.Schema
-
-var ListTypesByAssociationRequest_nextToken *smithy.Schema
-
-var ListTypesByAssociationRequest_maxResults *smithy.Schema
-
-var ListTypesByAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTypesByAssociationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTypesByAssociationResponse_types *smithy.Schema
-
-var ListTypesByAssociationResponse_nextToken *smithy.Schema
-
-var ListTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTypesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTypesRequest_apiId *smithy.Schema
-
-var ListTypesRequest_format *smithy.Schema
-
-var ListTypesRequest_nextToken *smithy.Schema
-
-var ListTypesRequest_maxResults *smithy.Schema
-
-var ListTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "ListTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTypesResponse_types *smithy.Schema
-
-var ListTypesResponse_nextToken *smithy.Schema
-
-var PutGraphqlApiEnvironmentVariablesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "PutGraphqlApiEnvironmentVariablesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutGraphqlApiEnvironmentVariablesRequest_apiId *smithy.Schema
-
-var PutGraphqlApiEnvironmentVariablesRequest_environmentVariables *smithy.Schema
-
-var PutGraphqlApiEnvironmentVariablesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "PutGraphqlApiEnvironmentVariablesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutGraphqlApiEnvironmentVariablesResponse_environmentVariables *smithy.Schema
-
-var StartDataSourceIntrospectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartDataSourceIntrospectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartDataSourceIntrospectionRequest_rdsDataApiConfig *smithy.Schema
-
-var StartDataSourceIntrospectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartDataSourceIntrospectionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartDataSourceIntrospectionResponse_introspectionId *smithy.Schema
-
-var StartDataSourceIntrospectionResponse_introspectionStatus *smithy.Schema
-
-var StartDataSourceIntrospectionResponse_introspectionStatusDetail *smithy.Schema
-
-var StartSchemaCreationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartSchemaCreationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartSchemaCreationRequest_apiId *smithy.Schema
-
-var StartSchemaCreationRequest_definition *smithy.Schema
-
-var StartSchemaCreationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartSchemaCreationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSchemaCreationResponse_status *smithy.Schema
-
-var StartSchemaMergeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartSchemaMergeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartSchemaMergeRequest_associationId *smithy.Schema
-
-var StartSchemaMergeRequest_mergedApiIdentifier *smithy.Schema
-
-var StartSchemaMergeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "StartSchemaMergeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSchemaMergeResponse_sourceApiAssociationStatus *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateApiCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiCacheRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateApiCacheRequest_apiId *smithy.Schema
-
-var UpdateApiCacheRequest_ttl *smithy.Schema
-
-var UpdateApiCacheRequest_apiCachingBehavior *smithy.Schema
-
-var UpdateApiCacheRequest_type *smithy.Schema
-
-var UpdateApiCacheRequest_healthMetricsConfig *smithy.Schema
-
-var UpdateApiCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiCacheResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateApiCacheResponse_apiCache *smithy.Schema
-
-var UpdateApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateApiRequest_apiId *smithy.Schema
-
-var UpdateApiRequest_name *smithy.Schema
-
-var UpdateApiRequest_ownerContact *smithy.Schema
-
-var UpdateApiRequest_eventConfig *smithy.Schema
-
-var UpdateApiKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiKeyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateApiKeyRequest_apiId *smithy.Schema
-
-var UpdateApiKeyRequest_id *smithy.Schema
-
-var UpdateApiKeyRequest_description *smithy.Schema
-
-var UpdateApiKeyRequest_expires *smithy.Schema
-
-var UpdateApiKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiKeyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateApiKeyResponse_apiKey *smithy.Schema
-
-var UpdateApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateApiResponse_api *smithy.Schema
-
-var UpdateChannelNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateChannelNamespaceRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateChannelNamespaceRequest_apiId *smithy.Schema
-
-var UpdateChannelNamespaceRequest_name *smithy.Schema
-
-var UpdateChannelNamespaceRequest_subscribeAuthModes *smithy.Schema
-
-var UpdateChannelNamespaceRequest_publishAuthModes *smithy.Schema
-
-var UpdateChannelNamespaceRequest_codeHandlers *smithy.Schema
-
-var UpdateChannelNamespaceRequest_handlerConfigs *smithy.Schema
-
-var UpdateChannelNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateChannelNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateChannelNamespaceResponse_channelNamespace *smithy.Schema
-
-var UpdateDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateDataSourceRequest",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateDataSourceRequest_apiId *smithy.Schema
-
-var UpdateDataSourceRequest_name *smithy.Schema
-
-var UpdateDataSourceRequest_description *smithy.Schema
-
-var UpdateDataSourceRequest_type *smithy.Schema
-
-var UpdateDataSourceRequest_serviceRoleArn *smithy.Schema
-
-var UpdateDataSourceRequest_dynamodbConfig *smithy.Schema
-
-var UpdateDataSourceRequest_lambdaConfig *smithy.Schema
-
-var UpdateDataSourceRequest_elasticsearchConfig *smithy.Schema
-
-var UpdateDataSourceRequest_openSearchServiceConfig *smithy.Schema
-
-var UpdateDataSourceRequest_httpConfig *smithy.Schema
-
-var UpdateDataSourceRequest_relationalDatabaseConfig *smithy.Schema
-
-var UpdateDataSourceRequest_eventBridgeConfig *smithy.Schema
-
-var UpdateDataSourceRequest_metricsConfig *smithy.Schema
-
-var UpdateDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateDataSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDataSourceResponse_dataSource *smithy.Schema
-
-var UpdateDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateDomainNameRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDomainNameRequest_domainName *smithy.Schema
-
-var UpdateDomainNameRequest_description *smithy.Schema
-
-var UpdateDomainNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateDomainNameResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDomainNameResponse_domainNameConfig *smithy.Schema
-
-var UpdateFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateFunctionRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateFunctionRequest_apiId *smithy.Schema
-
-var UpdateFunctionRequest_name *smithy.Schema
-
-var UpdateFunctionRequest_description *smithy.Schema
-
-var UpdateFunctionRequest_functionId *smithy.Schema
-
-var UpdateFunctionRequest_dataSourceName *smithy.Schema
-
-var UpdateFunctionRequest_requestMappingTemplate *smithy.Schema
-
-var UpdateFunctionRequest_responseMappingTemplate *smithy.Schema
-
-var UpdateFunctionRequest_functionVersion *smithy.Schema
-
-var UpdateFunctionRequest_syncConfig *smithy.Schema
-
-var UpdateFunctionRequest_maxBatchSize *smithy.Schema
-
-var UpdateFunctionRequest_runtime *smithy.Schema
-
-var UpdateFunctionRequest_code *smithy.Schema
-
-var UpdateFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateFunctionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFunctionResponse_functionConfiguration *smithy.Schema
-
-var UpdateGraphqlApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateGraphqlApiRequest",
-}, smithy.ShapeTypeStructure, 15)
-var UpdateGraphqlApiRequest_apiId *smithy.Schema
-
-var UpdateGraphqlApiRequest_name *smithy.Schema
-
-var UpdateGraphqlApiRequest_logConfig *smithy.Schema
-
-var UpdateGraphqlApiRequest_authenticationType *smithy.Schema
-
-var UpdateGraphqlApiRequest_userPoolConfig *smithy.Schema
-
-var UpdateGraphqlApiRequest_openIDConnectConfig *smithy.Schema
-
-var UpdateGraphqlApiRequest_additionalAuthenticationProviders *smithy.Schema
-
-var UpdateGraphqlApiRequest_xrayEnabled *smithy.Schema
-
-var UpdateGraphqlApiRequest_lambdaAuthorizerConfig *smithy.Schema
-
-var UpdateGraphqlApiRequest_mergedApiExecutionRoleArn *smithy.Schema
-
-var UpdateGraphqlApiRequest_ownerContact *smithy.Schema
-
-var UpdateGraphqlApiRequest_introspectionConfig *smithy.Schema
-
-var UpdateGraphqlApiRequest_queryDepthLimit *smithy.Schema
-
-var UpdateGraphqlApiRequest_resolverCountLimit *smithy.Schema
-
-var UpdateGraphqlApiRequest_enhancedMetricsConfig *smithy.Schema
-
-var UpdateGraphqlApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateGraphqlApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGraphqlApiResponse_graphqlApi *smithy.Schema
-
-var UpdateResolverRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateResolverRequest",
-}, smithy.ShapeTypeStructure, 14)
-var UpdateResolverRequest_apiId *smithy.Schema
-
-var UpdateResolverRequest_typeName *smithy.Schema
-
-var UpdateResolverRequest_fieldName *smithy.Schema
-
-var UpdateResolverRequest_dataSourceName *smithy.Schema
-
-var UpdateResolverRequest_requestMappingTemplate *smithy.Schema
-
-var UpdateResolverRequest_responseMappingTemplate *smithy.Schema
-
-var UpdateResolverRequest_kind *smithy.Schema
-
-var UpdateResolverRequest_pipelineConfig *smithy.Schema
-
-var UpdateResolverRequest_syncConfig *smithy.Schema
-
-var UpdateResolverRequest_cachingConfig *smithy.Schema
-
-var UpdateResolverRequest_maxBatchSize *smithy.Schema
-
-var UpdateResolverRequest_runtime *smithy.Schema
-
-var UpdateResolverRequest_code *smithy.Schema
-
-var UpdateResolverRequest_metricsConfig *smithy.Schema
-
-var UpdateResolverResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateResolverResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateResolverResponse_resolver *smithy.Schema
-
-var UpdateSourceApiAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateSourceApiAssociationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSourceApiAssociationRequest_associationId *smithy.Schema
-
-var UpdateSourceApiAssociationRequest_mergedApiIdentifier *smithy.Schema
-
-var UpdateSourceApiAssociationRequest_description *smithy.Schema
-
-var UpdateSourceApiAssociationRequest_sourceApiAssociationConfig *smithy.Schema
-
-var UpdateSourceApiAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateSourceApiAssociationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSourceApiAssociationResponse_sourceApiAssociation *smithy.Schema
-
-var UpdateTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateTypeRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTypeRequest_apiId *smithy.Schema
-
-var UpdateTypeRequest_typeName *smithy.Schema
-
-var UpdateTypeRequest_definition *smithy.Schema
-
-var UpdateTypeRequest_format *smithy.Schema
-
-var UpdateTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appsync",
-	Name:      "UpdateTypeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTypeResponse_type *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+	Code: 200}}, DirectMask: 0x2}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://appsync.amazonaws.com"}}, DirectMask: 0x8000}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeModelsSDL"}}, DirectMask: 0x10}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "format"}}, DirectMask: 0x10}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeDirectives"}}, DirectMask: 0x10}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "apiType"}}, DirectMask: 0x10}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "owner"}}, DirectMask: 0x10}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAdditionalAuthenticationProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalAuthenticationProvider_authenticationType, &sAdditionalAuthenticationProvider_openIDConnectConfig, &sAdditionalAuthenticationProvider_userPoolConfig, &sAdditionalAuthenticationProvider_lambdaAuthorizerConfig}}
+var m_AdditionalAuthenticationProviders = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalAuthenticationProviders_member}}
+var mApi = smithy.SchemaMembers{List: []*smithy.Schema{&sApi_apiId, &sApi_name, &sApi_ownerContact, &sApi_tags, &sApi_dns, &sApi_apiArn, &sApi_created, &sApi_xrayEnabled, &sApi_wafWebAclArn, &sApi_eventConfig}, Hash: &hApi}
+var mApiAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sApiAssociation_domainName, &sApiAssociation_apiId, &sApiAssociation_associationStatus, &sApiAssociation_deploymentDetail}}
+var mApiCache = smithy.SchemaMembers{List: []*smithy.Schema{&sApiCache_ttl, &sApiCache_apiCachingBehavior, &sApiCache_transitEncryptionEnabled, &sApiCache_atRestEncryptionEnabled, &sApiCache_type, &sApiCache_status, &sApiCache_healthMetricsConfig}}
+var mApiCacheStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sApiCacheStatus_AVAILABLE, &sApiCacheStatus_CREATING, &sApiCacheStatus_DELETING, &sApiCacheStatus_MODIFYING, &sApiCacheStatus_FAILED}}
+var mApiCacheType = smithy.SchemaMembers{List: []*smithy.Schema{&sApiCacheType_T2_SMALL, &sApiCacheType_T2_MEDIUM, &sApiCacheType_R4_LARGE, &sApiCacheType_R4_XLARGE, &sApiCacheType_R4_2XLARGE, &sApiCacheType_R4_4XLARGE, &sApiCacheType_R4_8XLARGE, &sApiCacheType_SMALL, &sApiCacheType_MEDIUM, &sApiCacheType_LARGE, &sApiCacheType_XLARGE, &sApiCacheType_LARGE_2X, &sApiCacheType_LARGE_4X, &sApiCacheType_LARGE_8X, &sApiCacheType_LARGE_12X}, Hash: &hApiCacheType}
+var mApiCachingBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sApiCachingBehavior_FULL_REQUEST_CACHING, &sApiCachingBehavior_PER_RESOLVER_CACHING, &sApiCachingBehavior_OPERATION_LEVEL_CACHING}}
+var mApiKey = smithy.SchemaMembers{List: []*smithy.Schema{&sApiKey_id, &sApiKey_description, &sApiKey_expires, &sApiKey_deletes}}
+var mApiKeyLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sApiKeyLimitExceededException_message}}
+var m_ApiKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApiKeys_member}}
+var mApiKeyValidityOutOfBoundsException = smithy.SchemaMembers{List: []*smithy.Schema{&sApiKeyValidityOutOfBoundsException_message}}
+var mApiLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sApiLimitExceededException_message}}
+var m_Apis = smithy.SchemaMembers{List: []*smithy.Schema{&s_Apis_member}}
+var mAppSyncRuntime = smithy.SchemaMembers{List: []*smithy.Schema{&sAppSyncRuntime_name, &sAppSyncRuntime_runtimeVersion}}
+var mAssociationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociationStatus_Processing, &sAssociationStatus_Failed, &sAssociationStatus_Success}}
+var mAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationType_API_KEY, &sAuthenticationType_AWS_IAM, &sAuthenticationType_AMAZON_COGNITO_USER_POOLS, &sAuthenticationType_OPENID_CONNECT, &sAuthenticationType_AWS_LAMBDA}}
+var mAuthMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthMode_authType}}
+var m_AuthModes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthModes_member}}
+var mAuthorizationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizationConfig_authorizationType, &sAuthorizationConfig_awsIamConfig}}
+var mAuthorizationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizationType_AWS_IAM}}
+var mAuthProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthProvider_authType, &sAuthProvider_cognitoConfig, &sAuthProvider_openIDConnectConfig, &sAuthProvider_lambdaAuthorizerConfig}}
+var m_AuthProviders = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthProviders_member}}
+var mAwsIamConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsIamConfig_signingRegion, &sAwsIamConfig_signingServiceName}}
+var mBadRequestDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestDetail_codeErrors}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message, &sBadRequestException_reason, &sBadRequestException_detail}}
+var mBadRequestReason = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestReason_CODE_ERROR}}
+var mCacheHealthMetricsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheHealthMetricsConfig_ENABLED, &sCacheHealthMetricsConfig_DISABLED}}
+var mCachingConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCachingConfig_ttl, &sCachingConfig_cachingKeys}}
+var m_CachingKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_CachingKeys_member}}
+var mChannelNamespace = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelNamespace_apiId, &sChannelNamespace_name, &sChannelNamespace_subscribeAuthModes, &sChannelNamespace_publishAuthModes, &sChannelNamespace_codeHandlers, &sChannelNamespace_tags, &sChannelNamespace_channelNamespaceArn, &sChannelNamespace_created, &sChannelNamespace_lastModified, &sChannelNamespace_handlerConfigs}, Hash: &hChannelNamespace}
+var m_ChannelNamespaces = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelNamespaces_member}}
+var mCodeError = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeError_errorType, &sCodeError_value, &sCodeError_location}}
+var mCodeErrorLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeErrorLocation_line, &sCodeErrorLocation_column, &sCodeErrorLocation_span}}
+var m_CodeErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodeErrors_member}}
+var mCognitoConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoConfig_userPoolId, &sCognitoConfig_awsRegion, &sCognitoConfig_appIdClientRegex}}
+var mCognitoUserPoolConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoUserPoolConfig_userPoolId, &sCognitoUserPoolConfig_awsRegion, &sCognitoUserPoolConfig_appIdClientRegex}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_message}}
+var mConflictDetectionType = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictDetectionType_VERSION, &sConflictDetectionType_NONE}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mConflictHandlerType = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictHandlerType_OPTIMISTIC_CONCURRENCY, &sConflictHandlerType_LAMBDA, &sConflictHandlerType_AUTOMERGE, &sConflictHandlerType_NONE}}
+var mDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSource_dataSourceArn, &sDataSource_name, &sDataSource_description, &sDataSource_type, &sDataSource_serviceRoleArn, &sDataSource_dynamodbConfig, &sDataSource_lambdaConfig, &sDataSource_elasticsearchConfig, &sDataSource_openSearchServiceConfig, &sDataSource_httpConfig, &sDataSource_relationalDatabaseConfig, &sDataSource_eventBridgeConfig, &sDataSource_metricsConfig}, Hash: &hDataSource}
+var mDataSourceIntrospectionModel = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceIntrospectionModel_name, &sDataSourceIntrospectionModel_fields, &sDataSourceIntrospectionModel_primaryKey, &sDataSourceIntrospectionModel_indexes, &sDataSourceIntrospectionModel_sdl}}
+var mDataSourceIntrospectionModelField = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceIntrospectionModelField_name, &sDataSourceIntrospectionModelField_type, &sDataSourceIntrospectionModelField_length}}
+var m_DataSourceIntrospectionModelFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSourceIntrospectionModelFields_member}}
+var mDataSourceIntrospectionModelFieldType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceIntrospectionModelFieldType_kind, &sDataSourceIntrospectionModelFieldType_name, &sDataSourceIntrospectionModelFieldType_type, &sDataSourceIntrospectionModelFieldType_values}}
+var m_DataSourceIntrospectionModelFieldTypeValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSourceIntrospectionModelFieldTypeValues_member}}
+var mDataSourceIntrospectionModelIndex = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceIntrospectionModelIndex_name, &sDataSourceIntrospectionModelIndex_fields}}
+var m_DataSourceIntrospectionModelIndexes = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSourceIntrospectionModelIndexes_member}}
+var m_DataSourceIntrospectionModelIndexFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSourceIntrospectionModelIndexFields_member}}
+var m_DataSourceIntrospectionModels = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSourceIntrospectionModels_member}}
+var mDataSourceIntrospectionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceIntrospectionResult_models, &sDataSourceIntrospectionResult_nextToken}}
+var mDataSourceIntrospectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceIntrospectionStatus_PROCESSING, &sDataSourceIntrospectionStatus_FAILED, &sDataSourceIntrospectionStatus_SUCCESS}}
+var mDataSourceLevelMetricsBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS, &sDataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS}}
+var mDataSourceLevelMetricsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceLevelMetricsConfig_ENABLED, &sDataSourceLevelMetricsConfig_DISABLED}}
+var m_DataSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSources_member}}
+var mDataSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceType_AWS_LAMBDA, &sDataSourceType_AMAZON_DYNAMODB, &sDataSourceType_AMAZON_ELASTICSEARCH, &sDataSourceType_NONE, &sDataSourceType_HTTP, &sDataSourceType_RELATIONAL_DATABASE, &sDataSourceType_AMAZON_OPENSEARCH_SERVICE, &sDataSourceType_AMAZON_EVENTBRIDGE, &sDataSourceType_AMAZON_BEDROCK_RUNTIME}, Hash: &hDataSourceType}
+var mDefaultAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultAction_ALLOW, &sDefaultAction_DENY}}
+var mDeltaSyncConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDeltaSyncConfig_baseTableTTL, &sDeltaSyncConfig_deltaSyncTableName, &sDeltaSyncConfig_deltaSyncTableTTL}}
+var mDomainNameConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainNameConfig_domainName, &sDomainNameConfig_description, &sDomainNameConfig_certificateArn, &sDomainNameConfig_appsyncDomainName, &sDomainNameConfig_hostedZoneId, &sDomainNameConfig_tags, &sDomainNameConfig_domainNameArn}}
+var m_DomainNameConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainNameConfigs_member}}
+var mDynamodbDataSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDynamodbDataSourceConfig_tableName, &sDynamodbDataSourceConfig_awsRegion, &sDynamodbDataSourceConfig_useCallerCredentials, &sDynamodbDataSourceConfig_deltaSyncConfig, &sDynamodbDataSourceConfig_versioned}}
+var mElasticsearchDataSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDataSourceConfig_endpoint, &sElasticsearchDataSourceConfig_awsRegion}}
+var mEnhancedMetricsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEnhancedMetricsConfig_resolverLevelMetricsBehavior, &sEnhancedMetricsConfig_dataSourceLevelMetricsBehavior, &sEnhancedMetricsConfig_operationLevelMetricsConfig}}
+var m_EnvironmentVariableMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentVariableMap_key, &s_EnvironmentVariableMap_value}}
+var mErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetail_message}}
+var mEvaluateCodeErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateCodeErrorDetail_message, &sEvaluateCodeErrorDetail_codeErrors}}
+var mEventBridgeDataSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBridgeDataSourceConfig_eventBusArn}}
+var mEventConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEventConfig_authProviders, &sEventConfig_connectionAuthModes, &sEventConfig_defaultPublishAuthModes, &sEventConfig_defaultSubscribeAuthModes, &sEventConfig_logConfig}}
+var mEventLogConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEventLogConfig_logLevel, &sEventLogConfig_cloudWatchLogsRoleArn}}
+var mEventLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sEventLogLevel_NONE, &sEventLogLevel_ERROR, &sEventLogLevel_ALL, &sEventLogLevel_INFO, &sEventLogLevel_DEBUG}}
+var mFieldLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldLogLevel_NONE, &sFieldLogLevel_ERROR, &sFieldLogLevel_ALL, &sFieldLogLevel_INFO, &sFieldLogLevel_DEBUG}}
+var mFunctionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionConfiguration_functionId, &sFunctionConfiguration_functionArn, &sFunctionConfiguration_name, &sFunctionConfiguration_description, &sFunctionConfiguration_dataSourceName, &sFunctionConfiguration_requestMappingTemplate, &sFunctionConfiguration_responseMappingTemplate, &sFunctionConfiguration_functionVersion, &sFunctionConfiguration_syncConfig, &sFunctionConfiguration_maxBatchSize, &sFunctionConfiguration_runtime, &sFunctionConfiguration_code}, Hash: &hFunctionConfiguration}
+var m_Functions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Functions_member}}
+var m_FunctionsIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_FunctionsIds_member}}
+var mGraphqlApi = smithy.SchemaMembers{List: []*smithy.Schema{&sGraphqlApi_name, &sGraphqlApi_apiId, &sGraphqlApi_authenticationType, &sGraphqlApi_logConfig, &sGraphqlApi_userPoolConfig, &sGraphqlApi_openIDConnectConfig, &sGraphqlApi_arn, &sGraphqlApi_uris, &sGraphqlApi_tags, &sGraphqlApi_additionalAuthenticationProviders, &sGraphqlApi_xrayEnabled, &sGraphqlApi_wafWebAclArn, &sGraphqlApi_lambdaAuthorizerConfig, &sGraphqlApi_dns, &sGraphqlApi_visibility, &sGraphqlApi_apiType, &sGraphqlApi_mergedApiExecutionRoleArn, &sGraphqlApi_owner, &sGraphqlApi_ownerContact, &sGraphqlApi_introspectionConfig, &sGraphqlApi_queryDepthLimit, &sGraphqlApi_resolverCountLimit, &sGraphqlApi_enhancedMetricsConfig}, Hash: &hGraphqlApi}
+var mGraphQLApiIntrospectionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGraphQLApiIntrospectionConfig_ENABLED, &sGraphQLApiIntrospectionConfig_DISABLED}}
+var m_GraphqlApis = smithy.SchemaMembers{List: []*smithy.Schema{&s_GraphqlApis_member}}
+var mGraphQLApiType = smithy.SchemaMembers{List: []*smithy.Schema{&sGraphQLApiType_GRAPHQL, &sGraphQLApiType_MERGED}}
+var mGraphQLApiVisibility = smithy.SchemaMembers{List: []*smithy.Schema{&sGraphQLApiVisibility_GLOBAL, &sGraphQLApiVisibility_PRIVATE}}
+var mGraphQLSchemaException = smithy.SchemaMembers{List: []*smithy.Schema{&sGraphQLSchemaException_message}}
+var mHandlerBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sHandlerBehavior_CODE, &sHandlerBehavior_DIRECT}}
+var mHandlerConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHandlerConfig_behavior, &sHandlerConfig_integration}}
+var mHandlerConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&sHandlerConfigs_onPublish, &sHandlerConfigs_onSubscribe}}
+var mHttpDataSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpDataSourceConfig_endpoint, &sHttpDataSourceConfig_authorizationConfig}}
+var mIntegration = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegration_dataSourceName, &sIntegration_lambdaConfig}}
+var mInternalFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalFailureException_message}}
+var mInvokeType = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeType_REQUEST_RESPONSE, &sInvokeType_EVENT}}
+var mLambdaAuthorizerConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaAuthorizerConfig_authorizerResultTtlInSeconds, &sLambdaAuthorizerConfig_authorizerUri, &sLambdaAuthorizerConfig_identityValidationExpression}}
+var mLambdaConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaConfig_invokeType}}
+var mLambdaConflictHandlerConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaConflictHandlerConfig_lambdaConflictHandlerArn}}
+var mLambdaDataSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaDataSourceConfig_lambdaFunctionArn}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mLogConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfig_fieldLogLevel, &sLogConfig_cloudWatchLogsRoleArn, &sLogConfig_excludeVerboseContent}}
+var m_Logs = smithy.SchemaMembers{List: []*smithy.Schema{&s_Logs_member}}
+var m_MapOfStringToString = smithy.SchemaMembers{List: []*smithy.Schema{&s_MapOfStringToString_key, &s_MapOfStringToString_value}}
+var mMergeType = smithy.SchemaMembers{List: []*smithy.Schema{&sMergeType_MANUAL_MERGE, &sMergeType_AUTO_MERGE}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mOpenIDConnectConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIDConnectConfig_issuer, &sOpenIDConnectConfig_clientId, &sOpenIDConnectConfig_iatTTL, &sOpenIDConnectConfig_authTTL}}
+var mOpenSearchServiceDataSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenSearchServiceDataSourceConfig_endpoint, &sOpenSearchServiceDataSourceConfig_awsRegion}}
+var mOperationLevelMetricsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationLevelMetricsConfig_ENABLED, &sOperationLevelMetricsConfig_DISABLED}}
+var mOutputType = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputType_SDL, &sOutputType_JSON}}
+var mOwnership = smithy.SchemaMembers{List: []*smithy.Schema{&sOwnership_CURRENT_ACCOUNT, &sOwnership_OTHER_ACCOUNTS}}
+var mPipelineConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineConfig_functions}}
+var mRdsDataApiConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRdsDataApiConfig_resourceArn, &sRdsDataApiConfig_secretArn, &sRdsDataApiConfig_databaseName}}
+var mRdsHttpEndpointConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRdsHttpEndpointConfig_awsRegion, &sRdsHttpEndpointConfig_dbClusterIdentifier, &sRdsHttpEndpointConfig_databaseName, &sRdsHttpEndpointConfig_schema, &sRdsHttpEndpointConfig_awsSecretStoreArn}}
+var mRelationalDatabaseDataSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationalDatabaseDataSourceConfig_relationalDatabaseSourceType, &sRelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig}}
+var mRelationalDatabaseSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationalDatabaseSourceType_RDS_HTTP_ENDPOINT}}
+var mResolver = smithy.SchemaMembers{List: []*smithy.Schema{&sResolver_typeName, &sResolver_fieldName, &sResolver_dataSourceName, &sResolver_resolverArn, &sResolver_requestMappingTemplate, &sResolver_responseMappingTemplate, &sResolver_kind, &sResolver_pipelineConfig, &sResolver_syncConfig, &sResolver_cachingConfig, &sResolver_maxBatchSize, &sResolver_runtime, &sResolver_code, &sResolver_metricsConfig}, Hash: &hResolver}
+var mResolverKind = smithy.SchemaMembers{List: []*smithy.Schema{&sResolverKind_UNIT, &sResolverKind_PIPELINE}}
+var mResolverLevelMetricsBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS, &sResolverLevelMetricsBehavior_PER_RESOLVER_METRICS}}
+var mResolverLevelMetricsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sResolverLevelMetricsConfig_ENABLED, &sResolverLevelMetricsConfig_DISABLED}}
+var m_Resolvers = smithy.SchemaMembers{List: []*smithy.Schema{&s_Resolvers_member}}
+var mRuntimeName = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeName_APPSYNC_JS}}
+var mSchemaStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaStatus_Processing, &sSchemaStatus_Active, &sSchemaStatus_Deleting, &sSchemaStatus_Failed, &sSchemaStatus_Success, &sSchemaStatus_NotApplicable}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSourceApiAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceApiAssociation_associationId, &sSourceApiAssociation_associationArn, &sSourceApiAssociation_sourceApiId, &sSourceApiAssociation_sourceApiArn, &sSourceApiAssociation_mergedApiArn, &sSourceApiAssociation_mergedApiId, &sSourceApiAssociation_description, &sSourceApiAssociation_sourceApiAssociationConfig, &sSourceApiAssociation_sourceApiAssociationStatus, &sSourceApiAssociation_sourceApiAssociationStatusDetail, &sSourceApiAssociation_lastSuccessfulMergeDate}, Hash: &hSourceApiAssociation}
+var mSourceApiAssociationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceApiAssociationConfig_mergeType}}
+var mSourceApiAssociationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceApiAssociationStatus_MERGE_SCHEDULED, &sSourceApiAssociationStatus_MERGE_FAILED, &sSourceApiAssociationStatus_MERGE_SUCCESS, &sSourceApiAssociationStatus_MERGE_IN_PROGRESS, &sSourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED, &sSourceApiAssociationStatus_DELETION_SCHEDULED, &sSourceApiAssociationStatus_DELETION_IN_PROGRESS, &sSourceApiAssociationStatus_DELETION_FAILED}}
+var mSourceApiAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceApiAssociationSummary_associationId, &sSourceApiAssociationSummary_associationArn, &sSourceApiAssociationSummary_sourceApiId, &sSourceApiAssociationSummary_sourceApiArn, &sSourceApiAssociationSummary_mergedApiId, &sSourceApiAssociationSummary_mergedApiArn, &sSourceApiAssociationSummary_description}}
+var m_SourceApiAssociationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceApiAssociationSummaryList_member}}
+var mSyncConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncConfig_conflictHandler, &sSyncConfig_conflictDetection, &sSyncConfig_lambdaConflictHandlerConfig}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mType = smithy.SchemaMembers{List: []*smithy.Schema{&sType_name, &sType_description, &sType_arn, &sType_definition, &sType_format}}
+var mTypeDefinitionFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sTypeDefinitionFormat_SDL, &sTypeDefinitionFormat_JSON}}
+var m_TypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypeList_member}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mUserPoolConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUserPoolConfig_userPoolId, &sUserPoolConfig_awsRegion, &sUserPoolConfig_defaultAction, &sUserPoolConfig_appIdClientRegex}}
+var mAssociateApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateApiRequest_domainName, &sAssociateApiRequest_apiId}}
+var mAssociateApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateApiResponse_apiAssociation}}
+var mAssociateMergedGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateMergedGraphqlApiRequest_sourceApiIdentifier, &sAssociateMergedGraphqlApiRequest_mergedApiIdentifier, &sAssociateMergedGraphqlApiRequest_description, &sAssociateMergedGraphqlApiRequest_sourceApiAssociationConfig}}
+var mAssociateMergedGraphqlApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateMergedGraphqlApiResponse_sourceApiAssociation}}
+var mAssociateSourceGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSourceGraphqlApiRequest_mergedApiIdentifier, &sAssociateSourceGraphqlApiRequest_sourceApiIdentifier, &sAssociateSourceGraphqlApiRequest_description, &sAssociateSourceGraphqlApiRequest_sourceApiAssociationConfig}}
+var mAssociateSourceGraphqlApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSourceGraphqlApiResponse_sourceApiAssociation}}
+var mCreateApiCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiCacheRequest_apiId, &sCreateApiCacheRequest_ttl, &sCreateApiCacheRequest_transitEncryptionEnabled, &sCreateApiCacheRequest_atRestEncryptionEnabled, &sCreateApiCacheRequest_apiCachingBehavior, &sCreateApiCacheRequest_type, &sCreateApiCacheRequest_healthMetricsConfig}}
+var mCreateApiCacheResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiCacheResponse_apiCache}}
+var mCreateApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiRequest_name, &sCreateApiRequest_ownerContact, &sCreateApiRequest_tags, &sCreateApiRequest_eventConfig}}
+var mCreateApiKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiKeyRequest_apiId, &sCreateApiKeyRequest_description, &sCreateApiKeyRequest_expires}}
+var mCreateApiKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiKeyResponse_apiKey}}
+var mCreateApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiResponse_api}}
+var mCreateChannelNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelNamespaceRequest_apiId, &sCreateChannelNamespaceRequest_name, &sCreateChannelNamespaceRequest_subscribeAuthModes, &sCreateChannelNamespaceRequest_publishAuthModes, &sCreateChannelNamespaceRequest_codeHandlers, &sCreateChannelNamespaceRequest_tags, &sCreateChannelNamespaceRequest_handlerConfigs}}
+var mCreateChannelNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelNamespaceResponse_channelNamespace}}
+var mCreateDataSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceRequest_apiId, &sCreateDataSourceRequest_name, &sCreateDataSourceRequest_description, &sCreateDataSourceRequest_type, &sCreateDataSourceRequest_serviceRoleArn, &sCreateDataSourceRequest_dynamodbConfig, &sCreateDataSourceRequest_lambdaConfig, &sCreateDataSourceRequest_elasticsearchConfig, &sCreateDataSourceRequest_openSearchServiceConfig, &sCreateDataSourceRequest_httpConfig, &sCreateDataSourceRequest_relationalDatabaseConfig, &sCreateDataSourceRequest_eventBridgeConfig, &sCreateDataSourceRequest_metricsConfig}, Hash: &hCreateDataSourceRequest}
+var mCreateDataSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceResponse_dataSource}}
+var mCreateDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainNameRequest_domainName, &sCreateDomainNameRequest_certificateArn, &sCreateDomainNameRequest_description, &sCreateDomainNameRequest_tags}}
+var mCreateDomainNameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainNameResponse_domainNameConfig}}
+var mCreateFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFunctionRequest_apiId, &sCreateFunctionRequest_name, &sCreateFunctionRequest_description, &sCreateFunctionRequest_dataSourceName, &sCreateFunctionRequest_requestMappingTemplate, &sCreateFunctionRequest_responseMappingTemplate, &sCreateFunctionRequest_functionVersion, &sCreateFunctionRequest_syncConfig, &sCreateFunctionRequest_maxBatchSize, &sCreateFunctionRequest_runtime, &sCreateFunctionRequest_code}, Hash: &hCreateFunctionRequest}
+var mCreateFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFunctionResponse_functionConfiguration}}
+var mCreateGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGraphqlApiRequest_name, &sCreateGraphqlApiRequest_logConfig, &sCreateGraphqlApiRequest_authenticationType, &sCreateGraphqlApiRequest_userPoolConfig, &sCreateGraphqlApiRequest_openIDConnectConfig, &sCreateGraphqlApiRequest_tags, &sCreateGraphqlApiRequest_additionalAuthenticationProviders, &sCreateGraphqlApiRequest_xrayEnabled, &sCreateGraphqlApiRequest_lambdaAuthorizerConfig, &sCreateGraphqlApiRequest_apiType, &sCreateGraphqlApiRequest_mergedApiExecutionRoleArn, &sCreateGraphqlApiRequest_visibility, &sCreateGraphqlApiRequest_ownerContact, &sCreateGraphqlApiRequest_introspectionConfig, &sCreateGraphqlApiRequest_queryDepthLimit, &sCreateGraphqlApiRequest_resolverCountLimit, &sCreateGraphqlApiRequest_enhancedMetricsConfig}, Hash: &hCreateGraphqlApiRequest}
+var mCreateGraphqlApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGraphqlApiResponse_graphqlApi}}
+var mCreateResolverRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResolverRequest_apiId, &sCreateResolverRequest_typeName, &sCreateResolverRequest_fieldName, &sCreateResolverRequest_dataSourceName, &sCreateResolverRequest_requestMappingTemplate, &sCreateResolverRequest_responseMappingTemplate, &sCreateResolverRequest_kind, &sCreateResolverRequest_pipelineConfig, &sCreateResolverRequest_syncConfig, &sCreateResolverRequest_cachingConfig, &sCreateResolverRequest_maxBatchSize, &sCreateResolverRequest_runtime, &sCreateResolverRequest_code, &sCreateResolverRequest_metricsConfig}, Hash: &hCreateResolverRequest}
+var mCreateResolverResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResolverResponse_resolver}}
+var mCreateTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTypeRequest_apiId, &sCreateTypeRequest_definition, &sCreateTypeRequest_format}}
+var mCreateTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTypeResponse_type}}
+var mDeleteApiCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApiCacheRequest_apiId}}
+var mDeleteApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApiRequest_apiId}}
+var mDeleteApiKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApiKeyRequest_apiId, &sDeleteApiKeyRequest_id}}
+var mDeleteChannelNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelNamespaceRequest_apiId, &sDeleteChannelNamespaceRequest_name}}
+var mDeleteDataSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataSourceRequest_apiId, &sDeleteDataSourceRequest_name}}
+var mDeleteDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainNameRequest_domainName}}
+var mDeleteFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFunctionRequest_apiId, &sDeleteFunctionRequest_functionId}}
+var mDeleteGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGraphqlApiRequest_apiId}}
+var mDeleteResolverRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResolverRequest_apiId, &sDeleteResolverRequest_typeName, &sDeleteResolverRequest_fieldName}}
+var mDeleteTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTypeRequest_apiId, &sDeleteTypeRequest_typeName}}
+var mDisassociateApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateApiRequest_domainName}}
+var mDisassociateMergedGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMergedGraphqlApiRequest_sourceApiIdentifier, &sDisassociateMergedGraphqlApiRequest_associationId}}
+var mDisassociateMergedGraphqlApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus}}
+var mDisassociateSourceGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateSourceGraphqlApiRequest_mergedApiIdentifier, &sDisassociateSourceGraphqlApiRequest_associationId}}
+var mDisassociateSourceGraphqlApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus}}
+var mEvaluateCodeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateCodeRequest_runtime, &sEvaluateCodeRequest_code, &sEvaluateCodeRequest_context, &sEvaluateCodeRequest_function}}
+var mEvaluateCodeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateCodeResponse_evaluationResult, &sEvaluateCodeResponse_error, &sEvaluateCodeResponse_logs, &sEvaluateCodeResponse_stash, &sEvaluateCodeResponse_outErrors}}
+var mEvaluateMappingTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateMappingTemplateRequest_template, &sEvaluateMappingTemplateRequest_context}}
+var mEvaluateMappingTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateMappingTemplateResponse_evaluationResult, &sEvaluateMappingTemplateResponse_error, &sEvaluateMappingTemplateResponse_logs, &sEvaluateMappingTemplateResponse_stash, &sEvaluateMappingTemplateResponse_outErrors}}
+var mFlushApiCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sFlushApiCacheRequest_apiId}}
+var mGetApiAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiAssociationRequest_domainName}}
+var mGetApiAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiAssociationResponse_apiAssociation}}
+var mGetApiCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiCacheRequest_apiId}}
+var mGetApiCacheResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiCacheResponse_apiCache}}
+var mGetApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiRequest_apiId}}
+var mGetApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiResponse_api}}
+var mGetChannelNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelNamespaceRequest_apiId, &sGetChannelNamespaceRequest_name}}
+var mGetChannelNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelNamespaceResponse_channelNamespace}}
+var mGetDataSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataSourceRequest_apiId, &sGetDataSourceRequest_name}}
+var mGetDataSourceIntrospectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataSourceIntrospectionRequest_introspectionId, &sGetDataSourceIntrospectionRequest_includeModelsSDL, &sGetDataSourceIntrospectionRequest_nextToken, &sGetDataSourceIntrospectionRequest_maxResults}}
+var mGetDataSourceIntrospectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataSourceIntrospectionResponse_introspectionId, &sGetDataSourceIntrospectionResponse_introspectionStatus, &sGetDataSourceIntrospectionResponse_introspectionStatusDetail, &sGetDataSourceIntrospectionResponse_introspectionResult}}
+var mGetDataSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataSourceResponse_dataSource}}
+var mGetDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainNameRequest_domainName}}
+var mGetDomainNameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainNameResponse_domainNameConfig}}
+var mGetFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFunctionRequest_apiId, &sGetFunctionRequest_functionId}}
+var mGetFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFunctionResponse_functionConfiguration}}
+var mGetGraphqlApiEnvironmentVariablesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGraphqlApiEnvironmentVariablesRequest_apiId}}
+var mGetGraphqlApiEnvironmentVariablesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGraphqlApiEnvironmentVariablesResponse_environmentVariables}}
+var mGetGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGraphqlApiRequest_apiId}}
+var mGetGraphqlApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGraphqlApiResponse_graphqlApi}}
+var mGetIntrospectionSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntrospectionSchemaRequest_apiId, &sGetIntrospectionSchemaRequest_format, &sGetIntrospectionSchemaRequest_includeDirectives}}
+var mGetIntrospectionSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntrospectionSchemaResponse_schema}}
+var mGetResolverRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResolverRequest_apiId, &sGetResolverRequest_typeName, &sGetResolverRequest_fieldName}}
+var mGetResolverResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResolverResponse_resolver}}
+var mGetSchemaCreationStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSchemaCreationStatusRequest_apiId}}
+var mGetSchemaCreationStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSchemaCreationStatusResponse_status, &sGetSchemaCreationStatusResponse_details}}
+var mGetSourceApiAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSourceApiAssociationRequest_mergedApiIdentifier, &sGetSourceApiAssociationRequest_associationId}}
+var mGetSourceApiAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSourceApiAssociationResponse_sourceApiAssociation}}
+var mGetTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTypeRequest_apiId, &sGetTypeRequest_typeName, &sGetTypeRequest_format}}
+var mGetTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTypeResponse_type}}
+var mListApiKeysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApiKeysRequest_apiId, &sListApiKeysRequest_nextToken, &sListApiKeysRequest_maxResults}}
+var mListApiKeysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListApiKeysResponse_apiKeys, &sListApiKeysResponse_nextToken}}
+var mListApisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApisRequest_nextToken, &sListApisRequest_maxResults}}
+var mListApisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListApisResponse_apis, &sListApisResponse_nextToken}}
+var mListChannelNamespacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelNamespacesRequest_apiId, &sListChannelNamespacesRequest_nextToken, &sListChannelNamespacesRequest_maxResults}}
+var mListChannelNamespacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelNamespacesResponse_channelNamespaces, &sListChannelNamespacesResponse_nextToken}}
+var mListDataSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataSourcesRequest_apiId, &sListDataSourcesRequest_nextToken, &sListDataSourcesRequest_maxResults}}
+var mListDataSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataSourcesResponse_dataSources, &sListDataSourcesResponse_nextToken}}
+var mListDomainNamesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainNamesRequest_nextToken, &sListDomainNamesRequest_maxResults}}
+var mListDomainNamesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainNamesResponse_domainNameConfigs, &sListDomainNamesResponse_nextToken}}
+var mListFunctionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFunctionsRequest_apiId, &sListFunctionsRequest_nextToken, &sListFunctionsRequest_maxResults}}
+var mListFunctionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFunctionsResponse_functions, &sListFunctionsResponse_nextToken}}
+var mListGraphqlApisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGraphqlApisRequest_nextToken, &sListGraphqlApisRequest_maxResults, &sListGraphqlApisRequest_apiType, &sListGraphqlApisRequest_owner}}
+var mListGraphqlApisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGraphqlApisResponse_graphqlApis, &sListGraphqlApisResponse_nextToken}}
+var mListResolversByFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResolversByFunctionRequest_apiId, &sListResolversByFunctionRequest_functionId, &sListResolversByFunctionRequest_nextToken, &sListResolversByFunctionRequest_maxResults}}
+var mListResolversByFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResolversByFunctionResponse_resolvers, &sListResolversByFunctionResponse_nextToken}}
+var mListResolversRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResolversRequest_apiId, &sListResolversRequest_typeName, &sListResolversRequest_nextToken, &sListResolversRequest_maxResults}}
+var mListResolversResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResolversResponse_resolvers, &sListResolversResponse_nextToken}}
+var mListSourceApiAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceApiAssociationsRequest_apiId, &sListSourceApiAssociationsRequest_nextToken, &sListSourceApiAssociationsRequest_maxResults}}
+var mListSourceApiAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceApiAssociationsResponse_sourceApiAssociationSummaries, &sListSourceApiAssociationsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListTypesByAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypesByAssociationRequest_mergedApiIdentifier, &sListTypesByAssociationRequest_associationId, &sListTypesByAssociationRequest_format, &sListTypesByAssociationRequest_nextToken, &sListTypesByAssociationRequest_maxResults}}
+var mListTypesByAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypesByAssociationResponse_types, &sListTypesByAssociationResponse_nextToken}}
+var mListTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypesRequest_apiId, &sListTypesRequest_format, &sListTypesRequest_nextToken, &sListTypesRequest_maxResults}}
+var mListTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypesResponse_types, &sListTypesResponse_nextToken}}
+var mPutGraphqlApiEnvironmentVariablesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutGraphqlApiEnvironmentVariablesRequest_apiId, &sPutGraphqlApiEnvironmentVariablesRequest_environmentVariables}}
+var mPutGraphqlApiEnvironmentVariablesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutGraphqlApiEnvironmentVariablesResponse_environmentVariables}}
+var mStartDataSourceIntrospectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDataSourceIntrospectionRequest_rdsDataApiConfig}}
+var mStartDataSourceIntrospectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDataSourceIntrospectionResponse_introspectionId, &sStartDataSourceIntrospectionResponse_introspectionStatus, &sStartDataSourceIntrospectionResponse_introspectionStatusDetail}}
+var mStartSchemaCreationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSchemaCreationRequest_apiId, &sStartSchemaCreationRequest_definition}}
+var mStartSchemaCreationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSchemaCreationResponse_status}}
+var mStartSchemaMergeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSchemaMergeRequest_associationId, &sStartSchemaMergeRequest_mergedApiIdentifier}}
+var mStartSchemaMergeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSchemaMergeResponse_sourceApiAssociationStatus}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateApiCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiCacheRequest_apiId, &sUpdateApiCacheRequest_ttl, &sUpdateApiCacheRequest_apiCachingBehavior, &sUpdateApiCacheRequest_type, &sUpdateApiCacheRequest_healthMetricsConfig}}
+var mUpdateApiCacheResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiCacheResponse_apiCache}}
+var mUpdateApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiRequest_apiId, &sUpdateApiRequest_name, &sUpdateApiRequest_ownerContact, &sUpdateApiRequest_eventConfig}}
+var mUpdateApiKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiKeyRequest_apiId, &sUpdateApiKeyRequest_id, &sUpdateApiKeyRequest_description, &sUpdateApiKeyRequest_expires}}
+var mUpdateApiKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiKeyResponse_apiKey}}
+var mUpdateApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiResponse_api}}
+var mUpdateChannelNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelNamespaceRequest_apiId, &sUpdateChannelNamespaceRequest_name, &sUpdateChannelNamespaceRequest_subscribeAuthModes, &sUpdateChannelNamespaceRequest_publishAuthModes, &sUpdateChannelNamespaceRequest_codeHandlers, &sUpdateChannelNamespaceRequest_handlerConfigs}}
+var mUpdateChannelNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelNamespaceResponse_channelNamespace}}
+var mUpdateDataSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataSourceRequest_apiId, &sUpdateDataSourceRequest_name, &sUpdateDataSourceRequest_description, &sUpdateDataSourceRequest_type, &sUpdateDataSourceRequest_serviceRoleArn, &sUpdateDataSourceRequest_dynamodbConfig, &sUpdateDataSourceRequest_lambdaConfig, &sUpdateDataSourceRequest_elasticsearchConfig, &sUpdateDataSourceRequest_openSearchServiceConfig, &sUpdateDataSourceRequest_httpConfig, &sUpdateDataSourceRequest_relationalDatabaseConfig, &sUpdateDataSourceRequest_eventBridgeConfig, &sUpdateDataSourceRequest_metricsConfig}, Hash: &hUpdateDataSourceRequest}
+var mUpdateDataSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataSourceResponse_dataSource}}
+var mUpdateDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDomainNameRequest_domainName, &sUpdateDomainNameRequest_description}}
+var mUpdateDomainNameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDomainNameResponse_domainNameConfig}}
+var mUpdateFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFunctionRequest_apiId, &sUpdateFunctionRequest_name, &sUpdateFunctionRequest_description, &sUpdateFunctionRequest_functionId, &sUpdateFunctionRequest_dataSourceName, &sUpdateFunctionRequest_requestMappingTemplate, &sUpdateFunctionRequest_responseMappingTemplate, &sUpdateFunctionRequest_functionVersion, &sUpdateFunctionRequest_syncConfig, &sUpdateFunctionRequest_maxBatchSize, &sUpdateFunctionRequest_runtime, &sUpdateFunctionRequest_code}, Hash: &hUpdateFunctionRequest}
+var mUpdateFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFunctionResponse_functionConfiguration}}
+var mUpdateGraphqlApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGraphqlApiRequest_apiId, &sUpdateGraphqlApiRequest_name, &sUpdateGraphqlApiRequest_logConfig, &sUpdateGraphqlApiRequest_authenticationType, &sUpdateGraphqlApiRequest_userPoolConfig, &sUpdateGraphqlApiRequest_openIDConnectConfig, &sUpdateGraphqlApiRequest_additionalAuthenticationProviders, &sUpdateGraphqlApiRequest_xrayEnabled, &sUpdateGraphqlApiRequest_lambdaAuthorizerConfig, &sUpdateGraphqlApiRequest_mergedApiExecutionRoleArn, &sUpdateGraphqlApiRequest_ownerContact, &sUpdateGraphqlApiRequest_introspectionConfig, &sUpdateGraphqlApiRequest_queryDepthLimit, &sUpdateGraphqlApiRequest_resolverCountLimit, &sUpdateGraphqlApiRequest_enhancedMetricsConfig}, Hash: &hUpdateGraphqlApiRequest}
+var mUpdateGraphqlApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGraphqlApiResponse_graphqlApi}}
+var mUpdateResolverRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResolverRequest_apiId, &sUpdateResolverRequest_typeName, &sUpdateResolverRequest_fieldName, &sUpdateResolverRequest_dataSourceName, &sUpdateResolverRequest_requestMappingTemplate, &sUpdateResolverRequest_responseMappingTemplate, &sUpdateResolverRequest_kind, &sUpdateResolverRequest_pipelineConfig, &sUpdateResolverRequest_syncConfig, &sUpdateResolverRequest_cachingConfig, &sUpdateResolverRequest_maxBatchSize, &sUpdateResolverRequest_runtime, &sUpdateResolverRequest_code, &sUpdateResolverRequest_metricsConfig}, Hash: &hUpdateResolverRequest}
+var mUpdateResolverResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResolverResponse_resolver}}
+var mUpdateSourceApiAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSourceApiAssociationRequest_associationId, &sUpdateSourceApiAssociationRequest_mergedApiIdentifier, &sUpdateSourceApiAssociationRequest_description, &sUpdateSourceApiAssociationRequest_sourceApiAssociationConfig}}
+var mUpdateSourceApiAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSourceApiAssociationResponse_sourceApiAssociation}}
+var mUpdateTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTypeRequest_apiId, &sUpdateTypeRequest_typeName, &sUpdateTypeRequest_definition, &sUpdateTypeRequest_format}}
+var mUpdateTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTypeResponse_type}}
+
+var hApi = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	4, 3, 2, 5, 0, 0, 0, 0, 0, 0, 8, 0, 0, 1, 0, 0, 10, 0, 9, 0, 0, 0, 0, 0,
+	0, 6, 0, 0, 0, 0, 7, 0,
+}}
+var hApiCacheType = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 14, 0, 13, 0, 5, 0, 0, 0, 0, 7, 12, 0, 0, 6, 9, 15, 4, 0, 0, 0, 3, 0, 0,
+	0, 2, 0, 10, 0, 11, 8, 1,
+}}
+var hChannelNamespace = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 8, 6, 0, 3, 0, 0, 5, 0, 0, 0, 0, 9, 0, 0, 0, 0, 4, 1, 0, 0,
+	0, 0, 0, 10, 7, 0, 0, 2,
+}}
+var hDataSource = smithy.MemberHash{Seed: 55, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 0, 0, 7, 0, 5, 11, 0, 2, 0, 0, 0, 12, 0, 0, 1, 0, 4, 9,
+	0, 8, 0, 13, 0, 10, 0, 6,
+}}
+var hDataSourceType = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	3, 0, 0, 0, 0, 0, 0, 2, 5, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+	6, 0, 0, 9, 0, 8, 7, 0,
+}}
+var hFunctionConfiguration = smithy.MemberHash{Seed: 15, Slots: []uint16{
+	2, 0, 0, 0, 5, 8, 0, 0, 11, 0, 0, 7, 3, 4, 0, 0, 12, 0, 1, 9, 0, 0, 0, 0,
+	0, 0, 0, 0, 10, 0, 0, 6,
+}}
+var hGraphqlApi = smithy.MemberHash{Seed: 105, Slots: []uint16{
+	0, 0, 0, 23, 0, 0, 6, 0, 0, 0, 0, 9, 21, 0, 19, 0, 22, 0, 2, 0, 16, 0, 0, 4,
+	12, 14, 10, 7, 0, 5, 0, 1, 0, 0, 0, 0, 0, 17, 0, 18, 0, 0, 0, 0, 20, 0, 0, 0,
+	0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 13, 15, 8, 0,
+}}
+var hResolver = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	8, 13, 4, 0, 0, 7, 3, 0, 0, 0, 0, 10, 0, 6, 0, 2, 0, 11, 0, 0, 14, 0, 12, 9,
+	0, 0, 0, 1, 0, 0, 5, 0,
+}}
+var hSourceApiAssociation = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	9, 0, 0, 0, 2, 0, 0, 0, 8, 0, 0, 3, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 1, 0,
+	5, 10, 0, 0, 0, 4, 0, 11,
+}}
+var hCreateDataSourceRequest = smithy.MemberHash{Seed: 36, Slots: []uint16{
+	0, 0, 0, 4, 1, 3, 0, 9, 0, 0, 5, 0, 13, 0, 6, 11, 0, 10, 0, 12, 0, 2, 0, 0,
+	0, 0, 0, 7, 0, 0, 8, 0,
+}}
+var hCreateFunctionRequest = smithy.MemberHash{Seed: 35, Slots: []uint16{
+	7, 0, 0, 0, 6, 0, 3, 9, 0, 5, 11, 0, 0, 0, 0, 0, 4, 2, 0, 8, 0, 0, 0, 0,
+	0, 0, 0, 0, 1, 0, 10, 0,
+}}
+var hCreateGraphqlApiRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	2, 0, 0, 0, 0, 0, 1, 13, 0, 0, 0, 10, 0, 0, 8, 0, 0, 0, 0, 14, 0, 0, 0, 0,
+	0, 0, 0, 11, 3, 0, 0, 5, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0,
+	7, 0, 0, 0, 0, 9, 12, 0, 0, 0, 0, 0, 0, 15, 16, 17,
+}}
+var hCreateResolverRequest = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	8, 13, 0, 0, 0, 7, 4, 0, 0, 0, 0, 10, 0, 6, 0, 3, 0, 11, 0, 0, 14, 0, 12, 9,
+	1, 0, 0, 2, 0, 0, 5, 0,
+}}
+var hUpdateDataSourceRequest = smithy.MemberHash{Seed: 36, Slots: []uint16{
+	0, 0, 0, 4, 1, 3, 0, 9, 0, 0, 5, 0, 13, 0, 6, 11, 0, 10, 0, 12, 0, 2, 0, 0,
+	0, 0, 0, 7, 0, 0, 8, 0,
+}}
+var hUpdateFunctionRequest = smithy.MemberHash{Seed: 40, Slots: []uint16{
+	5, 0, 11, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 8, 0, 0, 6, 0, 0, 4, 12, 2, 0,
+	0, 0, 0, 7, 0, 0, 10, 9,
+}}
+var hUpdateGraphqlApiRequest = smithy.MemberHash{Seed: 257, Slots: []uint16{
+	0, 5, 0, 0, 0, 0, 2, 0, 0, 3, 1, 0, 8, 13, 0, 0, 0, 15, 0, 0, 12, 7, 0, 0,
+	6, 11, 0, 9, 10, 4, 0, 14,
+}}
+var hUpdateResolverRequest = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	8, 13, 0, 0, 0, 7, 4, 0, 0, 0, 0, 10, 0, 6, 0, 3, 0, 11, 0, 0, 14, 0, 12, 9,
+	1, 0, 0, 2, 0, 0, 5, 0,
+}}
+
+var sAssociateApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApi, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateApi})
+var sAssociateMergedGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMergedGraphqlApi, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociateMergedGraphqlApi})
+var sAssociateSourceGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceGraphqlApi, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eAssociateSourceGraphqlApi})
+var sCreateApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApi, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateApi})
+var sCreateApiCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiCache, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateApiCache})
+var sCreateApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiKey, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateApiKey})
+var sCreateChannelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelNamespace, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannelNamespace})
+var sCreateDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateDataSource})
+var sCreateDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainName, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreateDomainName})
+var sCreateFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFunction, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eCreateFunction})
+var sCreateGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGraphqlApi, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eCreateGraphqlApi})
+var sCreateResolver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResolver, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eCreateResolver})
+var sCreateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateType, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eCreateType})
+var sDeleteApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApi, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApi})
+var sDeleteApiCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiCache, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApiCache})
+var sDeleteApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiKey, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApiKey})
+var sDeleteChannelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelNamespace, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannelNamespace})
+var sDeleteDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataSource, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDataSource})
+var sDeleteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainName, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDomainName})
+var sDeleteFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFunction, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFunction})
+var sDeleteGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGraphqlApi, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGraphqlApi})
+var sDeleteResolver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResolver, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResolver})
+var sDeleteType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteType, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDeleteType})
+var sDisassociateApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApi, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateApi})
+var sDisassociateMergedGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMergedGraphqlApi, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateMergedGraphqlApi})
+var sDisassociateSourceGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSourceGraphqlApi, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateSourceGraphqlApi})
+var sEvaluateCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateCode, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eEvaluateCode})
+var sEvaluateMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateMappingTemplate, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eEvaluateMappingTemplate})
+var sFlushApiCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlushApiCache, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eFlushApiCache})
+var sGetApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApi, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetApi})
+var sGetApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiAssociation, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetApiAssociation})
+var sGetApiCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiCache, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetApiCache})
+var sGetChannelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelNamespace, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetChannelNamespace})
+var sGetDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSource, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eGetDataSource})
+var sGetDataSourceIntrospection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSourceIntrospection, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eGetDataSourceIntrospection})
+var sGetDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainName, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eGetDomainName})
+var sGetFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFunction, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eGetFunction})
+var sGetGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGraphqlApi, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eGetGraphqlApi})
+var sGetGraphqlApiEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGraphqlApiEnvironmentVariables, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eGetGraphqlApiEnvironmentVariables})
+var sGetIntrospectionSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntrospectionSchema, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eGetIntrospectionSchema})
+var sGetResolver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResolver, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eGetResolver})
+var sGetSchemaCreationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaCreationStatus, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eGetSchemaCreationStatus})
+var sGetSourceApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceApiAssociation, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eGetSourceApiAssociation})
+var sGetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetType, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eGetType})
+var sListApiKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApiKeys, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eListApiKeys})
+var sListApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApis, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eListApis})
+var sListChannelNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelNamespaces, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eListChannelNamespaces})
+var sListDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataSources, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eListDataSources})
+var sListDomainNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNames, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eListDomainNames})
+var sListFunctions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFunctions, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eListFunctions})
+var sListGraphqlApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGraphqlApis, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eListGraphqlApis})
+var sListResolvers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResolvers, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eListResolvers})
+var sListResolversByFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResolversByFunction, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eListResolversByFunction})
+var sListSourceApiAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceApiAssociations, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eListSourceApiAssociations})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypes, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eListTypes})
+var sListTypesByAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypesByAssociation, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eListTypesByAssociation})
+var sPutGraphqlApiEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutGraphqlApiEnvironmentVariables, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &ePutGraphqlApiEnvironmentVariables})
+var sStartDataSourceIntrospection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDataSourceIntrospection, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &eStartDataSourceIntrospection})
+var sStartSchemaCreation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaCreation, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &eStartSchemaCreation})
+var sStartSchemaMerge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaMerge, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &eStartSchemaMerge})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApi, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApi})
+var sUpdateApiCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiCache, Traits: &t64, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApiCache})
+var sUpdateApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiKey, Traits: &t65, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApiKey})
+var sUpdateChannelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelNamespace, Traits: &t66, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannelNamespace})
+var sUpdateDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataSource, Traits: &t67, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDataSource})
+var sUpdateDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainName, Traits: &t68, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDomainName})
+var sUpdateFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFunction, Traits: &t69, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFunction})
+var sUpdateGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGraphqlApi, Traits: &t70, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGraphqlApi})
+var sUpdateResolver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResolver, Traits: &t71, Type: smithy.ShapeTypeOperation, Ext: &eUpdateResolver})
+var sUpdateSourceApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSourceApiAssociation, Traits: &t72, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSourceApiAssociation})
+var sUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateType, Traits: &t73, Type: smithy.ShapeTypeOperation, Ext: &eUpdateType})
+var s_AWSDeepdishControlPlaneService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSDeepdishControlPlaneService, Traits: &t74, Type: smithy.ShapeTypeService, Ext: &e_AWSDeepdishControlPlaneService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t75, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAdditionalAuthenticationProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalAuthenticationProvider, Members: &mAdditionalAuthenticationProvider, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalAuthenticationProvider})
+var sAdditionalAuthenticationProvider_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eAdditionalAuthenticationProvider_authenticationType})
+var sAdditionalAuthenticationProvider_openIDConnectConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIDConnectConfig", ID: &iOpenIDConnectConfig, Members: &mOpenIDConnectConfig, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalAuthenticationProvider_openIDConnectConfig})
+var sAdditionalAuthenticationProvider_userPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolConfig", ID: &iCognitoUserPoolConfig, Members: &mCognitoUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalAuthenticationProvider_userPoolConfig})
+var sAdditionalAuthenticationProvider_lambdaAuthorizerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaAuthorizerConfig", ID: &iLambdaAuthorizerConfig, Members: &mLambdaAuthorizerConfig, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalAuthenticationProvider_lambdaAuthorizerConfig})
+var s_AdditionalAuthenticationProviders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalAuthenticationProviders, Members: &m_AdditionalAuthenticationProviders, Type: smithy.ShapeTypeList, Ext: &e_AdditionalAuthenticationProviders})
+var s_AdditionalAuthenticationProviders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdditionalAuthenticationProvider, Members: &mAdditionalAuthenticationProvider, Type: smithy.ShapeTypeStructure, Ext: &e_AdditionalAuthenticationProviders_member})
+var sApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApi, Members: &mApi, Type: smithy.ShapeTypeStructure, Ext: &eApi})
+var sApi_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApi_apiId})
+var sApi_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ApiName, Type: smithy.ShapeTypeString, Ext: &eApi_name})
+var sApi_ownerContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerContact", ID: &i_OwnerContact, Type: smithy.ShapeTypeString, Ext: &eApi_ownerContact})
+var sApi_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eApi_tags})
+var sApi_dns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dns", ID: &i_MapOfStringToString, Members: &m_MapOfStringToString, Type: smithy.ShapeTypeMap, Ext: &eApi_dns})
+var sApi_apiArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApi_apiArn})
+var sApi_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eApi_created})
+var sApi_xrayEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xrayEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eApi_xrayEnabled})
+var sApi_wafWebAclArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wafWebAclArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApi_wafWebAclArn})
+var sApi_eventConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventConfig", ID: &iEventConfig, Members: &mEventConfig, Type: smithy.ShapeTypeStructure, Ext: &eApi_eventConfig})
+var sApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiAssociation, Members: &mApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eApiAssociation})
+var sApiAssociation_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eApiAssociation_domainName})
+var sApiAssociation_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApiAssociation_apiId})
+var sApiAssociation_associationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationStatus", ID: &iAssociationStatus, Members: &mAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eApiAssociation_associationStatus})
+var sApiAssociation_deploymentDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentDetail", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApiAssociation_deploymentDetail})
+var sApiCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiCache, Members: &mApiCache, Type: smithy.ShapeTypeStructure, Ext: &eApiCache})
+var sApiCache_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eApiCache_ttl})
+var sApiCache_apiCachingBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCachingBehavior", ID: &iApiCachingBehavior, Members: &mApiCachingBehavior, Type: smithy.ShapeTypeEnum, Ext: &eApiCache_apiCachingBehavior})
+var sApiCache_transitEncryptionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitEncryptionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eApiCache_transitEncryptionEnabled})
+var sApiCache_atRestEncryptionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atRestEncryptionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eApiCache_atRestEncryptionEnabled})
+var sApiCache_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iApiCacheType, Members: &mApiCacheType, Type: smithy.ShapeTypeEnum, Ext: &eApiCache_type})
+var sApiCache_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iApiCacheStatus, Members: &mApiCacheStatus, Type: smithy.ShapeTypeEnum, Ext: &eApiCache_status})
+var sApiCache_healthMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthMetricsConfig", ID: &iCacheHealthMetricsConfig, Members: &mCacheHealthMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eApiCache_healthMetricsConfig})
+var sApiCacheStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiCacheStatus, Members: &mApiCacheStatus, Type: smithy.ShapeTypeEnum, Ext: &eApiCacheStatus})
+var sApiCacheStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheStatus_AVAILABLE})
+var sApiCacheStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheStatus_CREATING})
+var sApiCacheStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheStatus_DELETING})
+var sApiCacheStatus_MODIFYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheStatus_MODIFYING})
+var sApiCacheStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheStatus_FAILED})
+var sApiCacheType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiCacheType, Members: &mApiCacheType, Type: smithy.ShapeTypeEnum, Ext: &eApiCacheType})
+var sApiCacheType_T2_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T2_SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_T2_SMALL})
+var sApiCacheType_T2_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T2_MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_T2_MEDIUM})
+var sApiCacheType_R4_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "R4_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_R4_LARGE})
+var sApiCacheType_R4_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "R4_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_R4_XLARGE})
+var sApiCacheType_R4_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "R4_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_R4_2XLARGE})
+var sApiCacheType_R4_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "R4_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_R4_4XLARGE})
+var sApiCacheType_R4_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "R4_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_R4_8XLARGE})
+var sApiCacheType_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_SMALL})
+var sApiCacheType_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_MEDIUM})
+var sApiCacheType_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_LARGE})
+var sApiCacheType_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_XLARGE})
+var sApiCacheType_LARGE_2X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE_2X", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_LARGE_2X})
+var sApiCacheType_LARGE_4X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE_4X", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_LARGE_4X})
+var sApiCacheType_LARGE_8X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE_8X", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_LARGE_8X})
+var sApiCacheType_LARGE_12X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE_12X", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCacheType_LARGE_12X})
+var sApiCachingBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiCachingBehavior, Members: &mApiCachingBehavior, Type: smithy.ShapeTypeEnum, Ext: &eApiCachingBehavior})
+var sApiCachingBehavior_FULL_REQUEST_CACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_REQUEST_CACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCachingBehavior_FULL_REQUEST_CACHING})
+var sApiCachingBehavior_PER_RESOLVER_CACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_RESOLVER_CACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCachingBehavior_PER_RESOLVER_CACHING})
+var sApiCachingBehavior_OPERATION_LEVEL_CACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_LEVEL_CACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApiCachingBehavior_OPERATION_LEVEL_CACHING})
+var sApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiKey, Members: &mApiKey, Type: smithy.ShapeTypeStructure, Ext: &eApiKey})
+var sApiKey_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApiKey_id})
+var sApiKey_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApiKey_description})
+var sApiKey_expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expires", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eApiKey_expires})
+var sApiKey_deletes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eApiKey_deletes})
+var sApiKeyLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiKeyLimitExceededException, Members: &mApiKeyLimitExceededException, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eApiKeyLimitExceededException})
+var sApiKeyLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApiKeyLimitExceededException_message})
+var s_ApiKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiKeys, Members: &m_ApiKeys, Type: smithy.ShapeTypeList, Ext: &e_ApiKeys})
+var s_ApiKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApiKey, Members: &mApiKey, Type: smithy.ShapeTypeStructure, Ext: &e_ApiKeys_member})
+var sApiKeyValidityOutOfBoundsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiKeyValidityOutOfBoundsException, Members: &mApiKeyValidityOutOfBoundsException, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eApiKeyValidityOutOfBoundsException})
+var sApiKeyValidityOutOfBoundsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApiKeyValidityOutOfBoundsException_message})
+var sApiLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiLimitExceededException, Members: &mApiLimitExceededException, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eApiLimitExceededException})
+var sApiLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApiLimitExceededException_message})
+var s_ApiName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiName, Type: smithy.ShapeTypeString, Ext: &e_ApiName})
+var s_Apis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Apis, Members: &m_Apis, Type: smithy.ShapeTypeList, Ext: &e_Apis})
+var s_Apis_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApi, Members: &mApi, Type: smithy.ShapeTypeStructure, Ext: &e_Apis_member})
+var sAppSyncRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eAppSyncRuntime})
+var sAppSyncRuntime_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iRuntimeName, Members: &mRuntimeName, Type: smithy.ShapeTypeEnum, Ext: &eAppSyncRuntime_name})
+var sAppSyncRuntime_runtimeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimeVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAppSyncRuntime_runtimeVersion})
+var sAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociationStatus, Members: &mAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssociationStatus})
+var sAssociationStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociationStatus_Processing})
+var sAssociationStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociationStatus_Failed})
+var sAssociationStatus_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Success", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociationStatus_Success})
+var sAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticationType})
+var sAuthenticationType_API_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_API_KEY})
+var sAuthenticationType_AWS_IAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_IAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_AWS_IAM})
+var sAuthenticationType_AMAZON_COGNITO_USER_POOLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_COGNITO_USER_POOLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_AMAZON_COGNITO_USER_POOLS})
+var sAuthenticationType_OPENID_CONNECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENID_CONNECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_OPENID_CONNECT})
+var sAuthenticationType_AWS_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationType_AWS_LAMBDA})
+var sAuthMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthMode, Members: &mAuthMode, Type: smithy.ShapeTypeStructure, Ext: &eAuthMode})
+var sAuthMode_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eAuthMode_authType})
+var s_AuthModes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &e_AuthModes})
+var s_AuthModes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuthMode, Members: &mAuthMode, Type: smithy.ShapeTypeStructure, Ext: &e_AuthModes_member})
+var sAuthorizationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizationConfig, Members: &mAuthorizationConfig, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizationConfig})
+var sAuthorizationConfig_authorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationType", ID: &iAuthorizationType, Members: &mAuthorizationType, Type: smithy.ShapeTypeEnum, Ext: &eAuthorizationConfig_authorizationType})
+var sAuthorizationConfig_awsIamConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsIamConfig", ID: &iAwsIamConfig, Members: &mAwsIamConfig, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizationConfig_awsIamConfig})
+var sAuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizationType, Members: &mAuthorizationType, Type: smithy.ShapeTypeEnum, Ext: &eAuthorizationType})
+var sAuthorizationType_AWS_IAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_IAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizationType_AWS_IAM})
+var sAuthProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthProvider, Members: &mAuthProvider, Type: smithy.ShapeTypeStructure, Ext: &eAuthProvider})
+var sAuthProvider_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eAuthProvider_authType})
+var sAuthProvider_cognitoConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cognitoConfig", ID: &iCognitoConfig, Members: &mCognitoConfig, Type: smithy.ShapeTypeStructure, Ext: &eAuthProvider_cognitoConfig})
+var sAuthProvider_openIDConnectConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIDConnectConfig", ID: &iOpenIDConnectConfig, Members: &mOpenIDConnectConfig, Type: smithy.ShapeTypeStructure, Ext: &eAuthProvider_openIDConnectConfig})
+var sAuthProvider_lambdaAuthorizerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaAuthorizerConfig", ID: &iLambdaAuthorizerConfig, Members: &mLambdaAuthorizerConfig, Type: smithy.ShapeTypeStructure, Ext: &eAuthProvider_lambdaAuthorizerConfig})
+var s_AuthProviders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthProviders, Members: &m_AuthProviders, Type: smithy.ShapeTypeList, Ext: &e_AuthProviders})
+var s_AuthProviders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuthProvider, Members: &mAuthProvider, Type: smithy.ShapeTypeStructure, Ext: &e_AuthProviders_member})
+var sAwsIamConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsIamConfig, Members: &mAwsIamConfig, Type: smithy.ShapeTypeStructure, Ext: &eAwsIamConfig})
+var sAwsIamConfig_signingRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAwsIamConfig_signingRegion})
+var sAwsIamConfig_signingServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingServiceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAwsIamConfig_signingServiceName})
+var sBadRequestDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestDetail, Members: &mBadRequestDetail, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestDetail})
+var sBadRequestDetail_codeErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeErrors", ID: &i_CodeErrors, Members: &m_CodeErrors, Type: smithy.ShapeTypeList, Ext: &eBadRequestDetail_codeErrors})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var sBadRequestException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iBadRequestReason, Members: &mBadRequestReason, Type: smithy.ShapeTypeEnum, Ext: &eBadRequestException_reason})
+var sBadRequestException_detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detail", ID: &iBadRequestDetail, Members: &mBadRequestDetail, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException_detail})
+var sBadRequestReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestReason, Members: &mBadRequestReason, Type: smithy.ShapeTypeEnum, Ext: &eBadRequestReason})
+var sBadRequestReason_CODE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestReason_CODE_ERROR})
+var s_Blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blob, Type: smithy.ShapeTypeBlob, Ext: &e_Blob})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_BooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanValue, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanValue})
+var sCacheHealthMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheHealthMetricsConfig, Members: &mCacheHealthMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eCacheHealthMetricsConfig})
+var sCacheHealthMetricsConfig_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheHealthMetricsConfig_ENABLED})
+var sCacheHealthMetricsConfig_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCacheHealthMetricsConfig_DISABLED})
+var sCachingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCachingConfig, Members: &mCachingConfig, Type: smithy.ShapeTypeStructure, Ext: &eCachingConfig})
+var sCachingConfig_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCachingConfig_ttl})
+var sCachingConfig_cachingKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cachingKeys", ID: &i_CachingKeys, Members: &m_CachingKeys, Type: smithy.ShapeTypeList, Ext: &eCachingConfig_cachingKeys})
+var s_CachingKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CachingKeys, Members: &m_CachingKeys, Type: smithy.ShapeTypeList, Ext: &e_CachingKeys})
+var s_CachingKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_CachingKeys_member})
+var s_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateArn, Type: smithy.ShapeTypeString, Ext: &e_CertificateArn})
+var sChannelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelNamespace, Members: &mChannelNamespace, Type: smithy.ShapeTypeStructure, Ext: &eChannelNamespace})
+var sChannelNamespace_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eChannelNamespace_apiId})
+var sChannelNamespace_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eChannelNamespace_name})
+var sChannelNamespace_subscribeAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscribeAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eChannelNamespace_subscribeAuthModes})
+var sChannelNamespace_publishAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publishAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eChannelNamespace_publishAuthModes})
+var sChannelNamespace_codeHandlers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeHandlers", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eChannelNamespace_codeHandlers})
+var sChannelNamespace_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eChannelNamespace_tags})
+var sChannelNamespace_channelNamespaceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelNamespaceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eChannelNamespace_channelNamespaceArn})
+var sChannelNamespace_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelNamespace_created})
+var sChannelNamespace_lastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelNamespace_lastModified})
+var sChannelNamespace_handlerConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handlerConfigs", ID: &iHandlerConfigs, Members: &mHandlerConfigs, Type: smithy.ShapeTypeStructure, Ext: &eChannelNamespace_handlerConfigs})
+var s_ChannelNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelNamespaces, Members: &m_ChannelNamespaces, Type: smithy.ShapeTypeList, Ext: &e_ChannelNamespaces})
+var s_ChannelNamespaces_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelNamespace, Members: &mChannelNamespace, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelNamespaces_member})
+var s_Code = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &e_Code})
+var sCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeError, Members: &mCodeError, Type: smithy.ShapeTypeStructure, Ext: &eCodeError})
+var sCodeError_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCodeError_errorType})
+var sCodeError_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCodeError_value})
+var sCodeError_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iCodeErrorLocation, Members: &mCodeErrorLocation, Type: smithy.ShapeTypeStructure, Ext: &eCodeError_location})
+var s_CodeErrorColumn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeErrorColumn, Type: smithy.ShapeTypeInteger, Ext: &e_CodeErrorColumn})
+var s_CodeErrorLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeErrorLine, Type: smithy.ShapeTypeInteger, Ext: &e_CodeErrorLine})
+var sCodeErrorLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeErrorLocation, Members: &mCodeErrorLocation, Type: smithy.ShapeTypeStructure, Ext: &eCodeErrorLocation})
+var sCodeErrorLocation_line = smithy.NewStaticSchema(smithy.StaticSchema{Member: "line", ID: &i_CodeErrorLine, Type: smithy.ShapeTypeInteger, Ext: &eCodeErrorLocation_line})
+var sCodeErrorLocation_column = smithy.NewStaticSchema(smithy.StaticSchema{Member: "column", ID: &i_CodeErrorColumn, Type: smithy.ShapeTypeInteger, Ext: &eCodeErrorLocation_column})
+var sCodeErrorLocation_span = smithy.NewStaticSchema(smithy.StaticSchema{Member: "span", ID: &i_CodeErrorSpan, Type: smithy.ShapeTypeInteger, Ext: &eCodeErrorLocation_span})
+var s_CodeErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeErrors, Members: &m_CodeErrors, Type: smithy.ShapeTypeList, Ext: &e_CodeErrors})
+var s_CodeErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodeError, Members: &mCodeError, Type: smithy.ShapeTypeStructure, Ext: &e_CodeErrors_member})
+var s_CodeErrorSpan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeErrorSpan, Type: smithy.ShapeTypeInteger, Ext: &e_CodeErrorSpan})
+var sCognitoConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoConfig, Members: &mCognitoConfig, Type: smithy.ShapeTypeStructure, Ext: &eCognitoConfig})
+var sCognitoConfig_userPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCognitoConfig_userPoolId})
+var sCognitoConfig_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCognitoConfig_awsRegion})
+var sCognitoConfig_appIdClientRegex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appIdClientRegex", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCognitoConfig_appIdClientRegex})
+var sCognitoUserPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoUserPoolConfig, Members: &mCognitoUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eCognitoUserPoolConfig})
+var sCognitoUserPoolConfig_userPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfig_userPoolId})
+var sCognitoUserPoolConfig_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfig_awsRegion})
+var sCognitoUserPoolConfig_appIdClientRegex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appIdClientRegex", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfig_appIdClientRegex})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_message})
+var sConflictDetectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictDetectionType, Members: &mConflictDetectionType, Type: smithy.ShapeTypeEnum, Ext: &eConflictDetectionType})
+var sConflictDetectionType_VERSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictDetectionType_VERSION})
+var sConflictDetectionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictDetectionType_NONE})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictHandlerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictHandlerType, Members: &mConflictHandlerType, Type: smithy.ShapeTypeEnum, Ext: &eConflictHandlerType})
+var sConflictHandlerType_OPTIMISTIC_CONCURRENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIMISTIC_CONCURRENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictHandlerType_OPTIMISTIC_CONCURRENCY})
+var sConflictHandlerType_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictHandlerType_LAMBDA})
+var sConflictHandlerType_AUTOMERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictHandlerType_AUTOMERGE})
+var sConflictHandlerType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictHandlerType_NONE})
+var s_Context = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Context, Type: smithy.ShapeTypeString, Ext: &e_Context})
+var sDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eDataSource})
+var sDataSource_dataSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSource_dataSourceArn})
+var sDataSource_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDataSource_name})
+var sDataSource_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSource_description})
+var sDataSource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDataSourceType, Members: &mDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &eDataSource_type})
+var sDataSource_serviceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSource_serviceRoleArn})
+var sDataSource_dynamodbConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dynamodbConfig", ID: &iDynamodbDataSourceConfig, Members: &mDynamodbDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_dynamodbConfig})
+var sDataSource_lambdaConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaConfig", ID: &iLambdaDataSourceConfig, Members: &mLambdaDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_lambdaConfig})
+var sDataSource_elasticsearchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elasticsearchConfig", ID: &iElasticsearchDataSourceConfig, Members: &mElasticsearchDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_elasticsearchConfig})
+var sDataSource_openSearchServiceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openSearchServiceConfig", ID: &iOpenSearchServiceDataSourceConfig, Members: &mOpenSearchServiceDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_openSearchServiceConfig})
+var sDataSource_httpConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpConfig", ID: &iHttpDataSourceConfig, Members: &mHttpDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_httpConfig})
+var sDataSource_relationalDatabaseConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationalDatabaseConfig", ID: &iRelationalDatabaseDataSourceConfig, Members: &mRelationalDatabaseDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_relationalDatabaseConfig})
+var sDataSource_eventBridgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeConfig", ID: &iEventBridgeDataSourceConfig, Members: &mEventBridgeDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_eventBridgeConfig})
+var sDataSource_metricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsConfig", ID: &iDataSourceLevelMetricsConfig, Members: &mDataSourceLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eDataSource_metricsConfig})
+var sDataSourceIntrospectionModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceIntrospectionModel, Members: &mDataSourceIntrospectionModel, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModel})
+var sDataSourceIntrospectionModel_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSourceIntrospectionModel_name})
+var sDataSourceIntrospectionModel_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_DataSourceIntrospectionModelFields, Members: &m_DataSourceIntrospectionModelFields, Type: smithy.ShapeTypeList, Ext: &eDataSourceIntrospectionModel_fields})
+var sDataSourceIntrospectionModel_primaryKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primaryKey", ID: &iDataSourceIntrospectionModelIndex, Members: &mDataSourceIntrospectionModelIndex, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModel_primaryKey})
+var sDataSourceIntrospectionModel_indexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexes", ID: &i_DataSourceIntrospectionModelIndexes, Members: &m_DataSourceIntrospectionModelIndexes, Type: smithy.ShapeTypeList, Ext: &eDataSourceIntrospectionModel_indexes})
+var sDataSourceIntrospectionModel_sdl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sdl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSourceIntrospectionModel_sdl})
+var sDataSourceIntrospectionModelField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceIntrospectionModelField, Members: &mDataSourceIntrospectionModelField, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModelField})
+var sDataSourceIntrospectionModelField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSourceIntrospectionModelField_name})
+var sDataSourceIntrospectionModelField_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDataSourceIntrospectionModelFieldType, Members: &mDataSourceIntrospectionModelFieldType, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModelField_type})
+var sDataSourceIntrospectionModelField_length = smithy.NewStaticSchema(smithy.StaticSchema{Member: "length", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDataSourceIntrospectionModelField_length})
+var s_DataSourceIntrospectionModelFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSourceIntrospectionModelFields, Members: &m_DataSourceIntrospectionModelFields, Type: smithy.ShapeTypeList, Ext: &e_DataSourceIntrospectionModelFields})
+var s_DataSourceIntrospectionModelFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataSourceIntrospectionModelField, Members: &mDataSourceIntrospectionModelField, Type: smithy.ShapeTypeStructure, Ext: &e_DataSourceIntrospectionModelFields_member})
+var sDataSourceIntrospectionModelFieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceIntrospectionModelFieldType, Members: &mDataSourceIntrospectionModelFieldType, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModelFieldType})
+var sDataSourceIntrospectionModelFieldType_kind = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kind", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSourceIntrospectionModelFieldType_kind})
+var sDataSourceIntrospectionModelFieldType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSourceIntrospectionModelFieldType_name})
+var sDataSourceIntrospectionModelFieldType_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDataSourceIntrospectionModelFieldType, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModelFieldType_type})
+var sDataSourceIntrospectionModelFieldType_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_DataSourceIntrospectionModelFieldTypeValues, Members: &m_DataSourceIntrospectionModelFieldTypeValues, Type: smithy.ShapeTypeList, Ext: &eDataSourceIntrospectionModelFieldType_values})
+var s_DataSourceIntrospectionModelFieldTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSourceIntrospectionModelFieldTypeValues, Members: &m_DataSourceIntrospectionModelFieldTypeValues, Type: smithy.ShapeTypeList, Ext: &e_DataSourceIntrospectionModelFieldTypeValues})
+var s_DataSourceIntrospectionModelFieldTypeValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_DataSourceIntrospectionModelFieldTypeValues_member})
+var sDataSourceIntrospectionModelIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceIntrospectionModelIndex, Members: &mDataSourceIntrospectionModelIndex, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModelIndex})
+var sDataSourceIntrospectionModelIndex_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataSourceIntrospectionModelIndex_name})
+var sDataSourceIntrospectionModelIndex_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_DataSourceIntrospectionModelIndexFields, Members: &m_DataSourceIntrospectionModelIndexFields, Type: smithy.ShapeTypeList, Ext: &eDataSourceIntrospectionModelIndex_fields})
+var s_DataSourceIntrospectionModelIndexes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSourceIntrospectionModelIndexes, Members: &m_DataSourceIntrospectionModelIndexes, Type: smithy.ShapeTypeList, Ext: &e_DataSourceIntrospectionModelIndexes})
+var s_DataSourceIntrospectionModelIndexes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataSourceIntrospectionModelIndex, Members: &mDataSourceIntrospectionModelIndex, Type: smithy.ShapeTypeStructure, Ext: &e_DataSourceIntrospectionModelIndexes_member})
+var s_DataSourceIntrospectionModelIndexFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSourceIntrospectionModelIndexFields, Members: &m_DataSourceIntrospectionModelIndexFields, Type: smithy.ShapeTypeList, Ext: &e_DataSourceIntrospectionModelIndexFields})
+var s_DataSourceIntrospectionModelIndexFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_DataSourceIntrospectionModelIndexFields_member})
+var s_DataSourceIntrospectionModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSourceIntrospectionModels, Members: &m_DataSourceIntrospectionModels, Type: smithy.ShapeTypeList, Ext: &e_DataSourceIntrospectionModels})
+var s_DataSourceIntrospectionModels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataSourceIntrospectionModel, Members: &mDataSourceIntrospectionModel, Type: smithy.ShapeTypeStructure, Ext: &e_DataSourceIntrospectionModels_member})
+var sDataSourceIntrospectionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceIntrospectionResult, Members: &mDataSourceIntrospectionResult, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionResult})
+var sDataSourceIntrospectionResult_models = smithy.NewStaticSchema(smithy.StaticSchema{Member: "models", ID: &i_DataSourceIntrospectionModels, Members: &m_DataSourceIntrospectionModels, Type: smithy.ShapeTypeList, Ext: &eDataSourceIntrospectionResult_models})
+var sDataSourceIntrospectionResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDataSourceIntrospectionResult_nextToken})
+var sDataSourceIntrospectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceIntrospectionStatus, Members: &mDataSourceIntrospectionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDataSourceIntrospectionStatus})
+var sDataSourceIntrospectionStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionStatus_PROCESSING})
+var sDataSourceIntrospectionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionStatus_FAILED})
+var sDataSourceIntrospectionStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionStatus_SUCCESS})
+var sDataSourceLevelMetricsBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceLevelMetricsBehavior, Members: &mDataSourceLevelMetricsBehavior, Type: smithy.ShapeTypeEnum, Ext: &eDataSourceLevelMetricsBehavior})
+var sDataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_REQUEST_DATA_SOURCE_METRICS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS})
+var sDataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_DATA_SOURCE_METRICS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS})
+var sDataSourceLevelMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceLevelMetricsConfig, Members: &mDataSourceLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eDataSourceLevelMetricsConfig})
+var sDataSourceLevelMetricsConfig_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceLevelMetricsConfig_ENABLED})
+var sDataSourceLevelMetricsConfig_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceLevelMetricsConfig_DISABLED})
+var s_DataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSources, Members: &m_DataSources, Type: smithy.ShapeTypeList, Ext: &e_DataSources})
+var s_DataSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &e_DataSources_member})
+var sDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceType, Members: &mDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &eDataSourceType})
+var sDataSourceType_AWS_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AWS_LAMBDA})
+var sDataSourceType_AMAZON_DYNAMODB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_DYNAMODB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AMAZON_DYNAMODB})
+var sDataSourceType_AMAZON_ELASTICSEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_ELASTICSEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AMAZON_ELASTICSEARCH})
+var sDataSourceType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_NONE})
+var sDataSourceType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_HTTP})
+var sDataSourceType_RELATIONAL_DATABASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELATIONAL_DATABASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_RELATIONAL_DATABASE})
+var sDataSourceType_AMAZON_OPENSEARCH_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_OPENSEARCH_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AMAZON_OPENSEARCH_SERVICE})
+var sDataSourceType_AMAZON_EVENTBRIDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_EVENTBRIDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AMAZON_EVENTBRIDGE})
+var sDataSourceType_AMAZON_BEDROCK_RUNTIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_BEDROCK_RUNTIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AMAZON_BEDROCK_RUNTIME})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var sDefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultAction, Members: &mDefaultAction, Type: smithy.ShapeTypeEnum, Ext: &eDefaultAction})
+var sDefaultAction_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultAction_ALLOW})
+var sDefaultAction_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultAction_DENY})
+var sDeltaSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeltaSyncConfig, Members: &mDeltaSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eDeltaSyncConfig})
+var sDeltaSyncConfig_baseTableTTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseTableTTL", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDeltaSyncConfig_baseTableTTL})
+var sDeltaSyncConfig_deltaSyncTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deltaSyncTableName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeltaSyncConfig_deltaSyncTableName})
+var sDeltaSyncConfig_deltaSyncTableTTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deltaSyncTableTTL", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDeltaSyncConfig_deltaSyncTableTTL})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var sDomainNameConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainNameConfig, Members: &mDomainNameConfig, Type: smithy.ShapeTypeStructure, Ext: &eDomainNameConfig})
+var sDomainNameConfig_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainNameConfig_domainName})
+var sDomainNameConfig_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDomainNameConfig_description})
+var sDomainNameConfig_certificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateArn", ID: &i_CertificateArn, Type: smithy.ShapeTypeString, Ext: &eDomainNameConfig_certificateArn})
+var sDomainNameConfig_appsyncDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appsyncDomainName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainNameConfig_appsyncDomainName})
+var sDomainNameConfig_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainNameConfig_hostedZoneId})
+var sDomainNameConfig_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eDomainNameConfig_tags})
+var sDomainNameConfig_domainNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainNameArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainNameConfig_domainNameArn})
+var s_DomainNameConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNameConfigs, Members: &m_DomainNameConfigs, Type: smithy.ShapeTypeList, Ext: &e_DomainNameConfigs})
+var s_DomainNameConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainNameConfig, Members: &mDomainNameConfig, Type: smithy.ShapeTypeStructure, Ext: &e_DomainNameConfigs_member})
+var sDynamodbDataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynamodbDataSourceConfig, Members: &mDynamodbDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDynamodbDataSourceConfig})
+var sDynamodbDataSourceConfig_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDynamodbDataSourceConfig_tableName})
+var sDynamodbDataSourceConfig_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDynamodbDataSourceConfig_awsRegion})
+var sDynamodbDataSourceConfig_useCallerCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useCallerCredentials", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDynamodbDataSourceConfig_useCallerCredentials})
+var sDynamodbDataSourceConfig_deltaSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deltaSyncConfig", ID: &iDeltaSyncConfig, Members: &mDeltaSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eDynamodbDataSourceConfig_deltaSyncConfig})
+var sDynamodbDataSourceConfig_versioned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versioned", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDynamodbDataSourceConfig_versioned})
+var sElasticsearchDataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDataSourceConfig, Members: &mElasticsearchDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDataSourceConfig})
+var sElasticsearchDataSourceConfig_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDataSourceConfig_endpoint})
+var sElasticsearchDataSourceConfig_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDataSourceConfig_awsRegion})
+var sEnhancedMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnhancedMetricsConfig, Members: &mEnhancedMetricsConfig, Type: smithy.ShapeTypeStructure, Ext: &eEnhancedMetricsConfig})
+var sEnhancedMetricsConfig_resolverLevelMetricsBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolverLevelMetricsBehavior", ID: &iResolverLevelMetricsBehavior, Members: &mResolverLevelMetricsBehavior, Type: smithy.ShapeTypeEnum, Ext: &eEnhancedMetricsConfig_resolverLevelMetricsBehavior})
+var sEnhancedMetricsConfig_dataSourceLevelMetricsBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceLevelMetricsBehavior", ID: &iDataSourceLevelMetricsBehavior, Members: &mDataSourceLevelMetricsBehavior, Type: smithy.ShapeTypeEnum, Ext: &eEnhancedMetricsConfig_dataSourceLevelMetricsBehavior})
+var sEnhancedMetricsConfig_operationLevelMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationLevelMetricsConfig", ID: &iOperationLevelMetricsConfig, Members: &mOperationLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eEnhancedMetricsConfig_operationLevelMetricsConfig})
+var s_EnvironmentVariableKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableKey, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableKey})
+var s_EnvironmentVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &e_EnvironmentVariableMap})
+var s_EnvironmentVariableMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EnvironmentVariableKey, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableMap_key})
+var s_EnvironmentVariableMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableMap_value})
+var s_EnvironmentVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableValue})
+var sErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eErrorDetail})
+var sErrorDetail_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eErrorDetail_message})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sEvaluateCodeErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateCodeErrorDetail, Members: &mEvaluateCodeErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateCodeErrorDetail})
+var sEvaluateCodeErrorDetail_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eEvaluateCodeErrorDetail_message})
+var sEvaluateCodeErrorDetail_codeErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeErrors", ID: &i_CodeErrors, Members: &m_CodeErrors, Type: smithy.ShapeTypeList, Ext: &eEvaluateCodeErrorDetail_codeErrors})
+var s_EvaluationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluationResult, Type: smithy.ShapeTypeString, Ext: &e_EvaluationResult})
+var sEventBridgeDataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBridgeDataSourceConfig, Members: &mEventBridgeDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eEventBridgeDataSourceConfig})
+var sEventBridgeDataSourceConfig_eventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBusArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventBridgeDataSourceConfig_eventBusArn})
+var sEventConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventConfig, Members: &mEventConfig, Type: smithy.ShapeTypeStructure, Ext: &eEventConfig})
+var sEventConfig_authProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authProviders", ID: &i_AuthProviders, Members: &m_AuthProviders, Type: smithy.ShapeTypeList, Ext: &eEventConfig_authProviders})
+var sEventConfig_connectionAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eEventConfig_connectionAuthModes})
+var sEventConfig_defaultPublishAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPublishAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eEventConfig_defaultPublishAuthModes})
+var sEventConfig_defaultSubscribeAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultSubscribeAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eEventConfig_defaultSubscribeAuthModes})
+var sEventConfig_logConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfig", ID: &iEventLogConfig, Members: &mEventLogConfig, Type: smithy.ShapeTypeStructure, Ext: &eEventConfig_logConfig})
+var sEventLogConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventLogConfig, Members: &mEventLogConfig, Type: smithy.ShapeTypeStructure, Ext: &eEventLogConfig})
+var sEventLogConfig_logLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logLevel", ID: &iEventLogLevel, Members: &mEventLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eEventLogConfig_logLevel})
+var sEventLogConfig_cloudWatchLogsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventLogConfig_cloudWatchLogsRoleArn})
+var sEventLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventLogLevel, Members: &mEventLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eEventLogLevel})
+var sEventLogLevel_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventLogLevel_NONE})
+var sEventLogLevel_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventLogLevel_ERROR})
+var sEventLogLevel_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventLogLevel_ALL})
+var sEventLogLevel_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventLogLevel_INFO})
+var sEventLogLevel_DEBUG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEBUG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventLogLevel_DEBUG})
+var sFieldLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldLogLevel, Members: &mFieldLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eFieldLogLevel})
+var sFieldLogLevel_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldLogLevel_NONE})
+var sFieldLogLevel_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldLogLevel_ERROR})
+var sFieldLogLevel_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldLogLevel_ALL})
+var sFieldLogLevel_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldLogLevel_INFO})
+var sFieldLogLevel_DEBUG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEBUG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldLogLevel_DEBUG})
+var sFunctionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionConfiguration, Members: &mFunctionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFunctionConfiguration})
+var sFunctionConfiguration_functionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_functionId})
+var sFunctionConfiguration_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_functionArn})
+var sFunctionConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_name})
+var sFunctionConfiguration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_description})
+var sFunctionConfiguration_dataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_dataSourceName})
+var sFunctionConfiguration_requestMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_requestMappingTemplate})
+var sFunctionConfiguration_responseMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_responseMappingTemplate})
+var sFunctionConfiguration_functionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_functionVersion})
+var sFunctionConfiguration_syncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncConfig", ID: &iSyncConfig, Members: &mSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eFunctionConfiguration_syncConfig})
+var sFunctionConfiguration_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &eFunctionConfiguration_maxBatchSize})
+var sFunctionConfiguration_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eFunctionConfiguration_runtime})
+var sFunctionConfiguration_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eFunctionConfiguration_code})
+var s_Functions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Functions, Members: &m_Functions, Type: smithy.ShapeTypeList, Ext: &e_Functions})
+var s_Functions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFunctionConfiguration, Members: &mFunctionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_Functions_member})
+var s_FunctionsIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionsIds, Members: &m_FunctionsIds, Type: smithy.ShapeTypeList, Ext: &e_FunctionsIds})
+var s_FunctionsIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_FunctionsIds_member})
+var sGraphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraphqlApi, Members: &mGraphqlApi, Type: smithy.ShapeTypeStructure, Ext: &eGraphqlApi})
+var sGraphqlApi_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGraphqlApi_name})
+var sGraphqlApi_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGraphqlApi_apiId})
+var sGraphqlApi_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eGraphqlApi_authenticationType})
+var sGraphqlApi_logConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfig", ID: &iLogConfig, Members: &mLogConfig, Type: smithy.ShapeTypeStructure, Ext: &eGraphqlApi_logConfig})
+var sGraphqlApi_userPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolConfig", ID: &iUserPoolConfig, Members: &mUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eGraphqlApi_userPoolConfig})
+var sGraphqlApi_openIDConnectConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIDConnectConfig", ID: &iOpenIDConnectConfig, Members: &mOpenIDConnectConfig, Type: smithy.ShapeTypeStructure, Ext: &eGraphqlApi_openIDConnectConfig})
+var sGraphqlApi_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGraphqlApi_arn})
+var sGraphqlApi_uris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uris", ID: &i_MapOfStringToString, Members: &m_MapOfStringToString, Type: smithy.ShapeTypeMap, Ext: &eGraphqlApi_uris})
+var sGraphqlApi_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGraphqlApi_tags})
+var sGraphqlApi_additionalAuthenticationProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalAuthenticationProviders", ID: &i_AdditionalAuthenticationProviders, Members: &m_AdditionalAuthenticationProviders, Type: smithy.ShapeTypeList, Ext: &eGraphqlApi_additionalAuthenticationProviders})
+var sGraphqlApi_xrayEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xrayEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGraphqlApi_xrayEnabled})
+var sGraphqlApi_wafWebAclArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wafWebAclArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGraphqlApi_wafWebAclArn})
+var sGraphqlApi_lambdaAuthorizerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaAuthorizerConfig", ID: &iLambdaAuthorizerConfig, Members: &mLambdaAuthorizerConfig, Type: smithy.ShapeTypeStructure, Ext: &eGraphqlApi_lambdaAuthorizerConfig})
+var sGraphqlApi_dns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dns", ID: &i_MapOfStringToString, Members: &m_MapOfStringToString, Type: smithy.ShapeTypeMap, Ext: &eGraphqlApi_dns})
+var sGraphqlApi_visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibility", ID: &iGraphQLApiVisibility, Members: &mGraphQLApiVisibility, Type: smithy.ShapeTypeEnum, Ext: &eGraphqlApi_visibility})
+var sGraphqlApi_apiType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiType", ID: &iGraphQLApiType, Members: &mGraphQLApiType, Type: smithy.ShapeTypeEnum, Ext: &eGraphqlApi_apiType})
+var sGraphqlApi_mergedApiExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiExecutionRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGraphqlApi_mergedApiExecutionRoleArn})
+var sGraphqlApi_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGraphqlApi_owner})
+var sGraphqlApi_ownerContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerContact", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGraphqlApi_ownerContact})
+var sGraphqlApi_introspectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionConfig", ID: &iGraphQLApiIntrospectionConfig, Members: &mGraphQLApiIntrospectionConfig, Type: smithy.ShapeTypeEnum, Ext: &eGraphqlApi_introspectionConfig})
+var sGraphqlApi_queryDepthLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDepthLimit", ID: &i_QueryDepthLimit, Type: smithy.ShapeTypeInteger, Ext: &eGraphqlApi_queryDepthLimit})
+var sGraphqlApi_resolverCountLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolverCountLimit", ID: &i_ResolverCountLimit, Type: smithy.ShapeTypeInteger, Ext: &eGraphqlApi_resolverCountLimit})
+var sGraphqlApi_enhancedMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enhancedMetricsConfig", ID: &iEnhancedMetricsConfig, Members: &mEnhancedMetricsConfig, Type: smithy.ShapeTypeStructure, Ext: &eGraphqlApi_enhancedMetricsConfig})
+var sGraphQLApiIntrospectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraphQLApiIntrospectionConfig, Members: &mGraphQLApiIntrospectionConfig, Type: smithy.ShapeTypeEnum, Ext: &eGraphQLApiIntrospectionConfig})
+var sGraphQLApiIntrospectionConfig_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLApiIntrospectionConfig_ENABLED})
+var sGraphQLApiIntrospectionConfig_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLApiIntrospectionConfig_DISABLED})
+var s_GraphqlApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GraphqlApis, Members: &m_GraphqlApis, Type: smithy.ShapeTypeList, Ext: &e_GraphqlApis})
+var s_GraphqlApis_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGraphqlApi, Members: &mGraphqlApi, Type: smithy.ShapeTypeStructure, Ext: &e_GraphqlApis_member})
+var sGraphQLApiType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraphQLApiType, Members: &mGraphQLApiType, Type: smithy.ShapeTypeEnum, Ext: &eGraphQLApiType})
+var sGraphQLApiType_GRAPHQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRAPHQL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLApiType_GRAPHQL})
+var sGraphQLApiType_MERGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLApiType_MERGED})
+var sGraphQLApiVisibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraphQLApiVisibility, Members: &mGraphQLApiVisibility, Type: smithy.ShapeTypeEnum, Ext: &eGraphQLApiVisibility})
+var sGraphQLApiVisibility_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLApiVisibility_GLOBAL})
+var sGraphQLApiVisibility_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLApiVisibility_PRIVATE})
+var sGraphQLSchemaException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraphQLSchemaException, Members: &mGraphQLSchemaException, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLSchemaException})
+var sGraphQLSchemaException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eGraphQLSchemaException_message})
+var sHandlerBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerBehavior, Members: &mHandlerBehavior, Type: smithy.ShapeTypeEnum, Ext: &eHandlerBehavior})
+var sHandlerBehavior_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandlerBehavior_CODE})
+var sHandlerBehavior_DIRECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandlerBehavior_DIRECT})
+var sHandlerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerConfig, Members: &mHandlerConfig, Type: smithy.ShapeTypeStructure, Ext: &eHandlerConfig})
+var sHandlerConfig_behavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "behavior", ID: &iHandlerBehavior, Members: &mHandlerBehavior, Type: smithy.ShapeTypeEnum, Ext: &eHandlerConfig_behavior})
+var sHandlerConfig_integration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integration", ID: &iIntegration, Members: &mIntegration, Type: smithy.ShapeTypeStructure, Ext: &eHandlerConfig_integration})
+var sHandlerConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerConfigs, Members: &mHandlerConfigs, Type: smithy.ShapeTypeStructure, Ext: &eHandlerConfigs})
+var sHandlerConfigs_onPublish = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onPublish", ID: &iHandlerConfig, Members: &mHandlerConfig, Type: smithy.ShapeTypeStructure, Ext: &eHandlerConfigs_onPublish})
+var sHandlerConfigs_onSubscribe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onSubscribe", ID: &iHandlerConfig, Members: &mHandlerConfig, Type: smithy.ShapeTypeStructure, Ext: &eHandlerConfigs_onSubscribe})
+var sHttpDataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpDataSourceConfig, Members: &mHttpDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eHttpDataSourceConfig})
+var sHttpDataSourceConfig_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHttpDataSourceConfig_endpoint})
+var sHttpDataSourceConfig_authorizationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationConfig", ID: &iAuthorizationConfig, Members: &mAuthorizationConfig, Type: smithy.ShapeTypeStructure, Ext: &eHttpDataSourceConfig_authorizationConfig})
+var sIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegration, Members: &mIntegration, Type: smithy.ShapeTypeStructure, Ext: &eIntegration})
+var sIntegration_dataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eIntegration_dataSourceName})
+var sIntegration_lambdaConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaConfig", ID: &iLambdaConfig, Members: &mLambdaConfig, Type: smithy.ShapeTypeStructure, Ext: &eIntegration_lambdaConfig})
+var sInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailureException, Members: &mInternalFailureException, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eInternalFailureException})
+var sInternalFailureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalFailureException_message})
+var sInvokeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeType, Members: &mInvokeType, Type: smithy.ShapeTypeEnum, Ext: &eInvokeType})
+var sInvokeType_REQUEST_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvokeType_REQUEST_RESPONSE})
+var sInvokeType_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvokeType_EVENT})
+var sLambdaAuthorizerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaAuthorizerConfig, Members: &mLambdaAuthorizerConfig, Type: smithy.ShapeTypeStructure, Ext: &eLambdaAuthorizerConfig})
+var sLambdaAuthorizerConfig_authorizerResultTtlInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizerResultTtlInSeconds", ID: &i_TTL, Type: smithy.ShapeTypeInteger, Ext: &eLambdaAuthorizerConfig_authorizerResultTtlInSeconds})
+var sLambdaAuthorizerConfig_authorizerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizerUri", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLambdaAuthorizerConfig_authorizerUri})
+var sLambdaAuthorizerConfig_identityValidationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityValidationExpression", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLambdaAuthorizerConfig_identityValidationExpression})
+var sLambdaConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaConfig, Members: &mLambdaConfig, Type: smithy.ShapeTypeStructure, Ext: &eLambdaConfig})
+var sLambdaConfig_invokeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invokeType", ID: &iInvokeType, Members: &mInvokeType, Type: smithy.ShapeTypeEnum, Ext: &eLambdaConfig_invokeType})
+var sLambdaConflictHandlerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaConflictHandlerConfig, Members: &mLambdaConflictHandlerConfig, Type: smithy.ShapeTypeStructure, Ext: &eLambdaConflictHandlerConfig})
+var sLambdaConflictHandlerConfig_lambdaConflictHandlerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaConflictHandlerArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLambdaConflictHandlerConfig_lambdaConflictHandlerArn})
+var sLambdaDataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaDataSourceConfig, Members: &mLambdaDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eLambdaDataSourceConfig})
+var sLambdaDataSourceConfig_lambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLambdaDataSourceConfig_lambdaFunctionArn})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sLogConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfig, Members: &mLogConfig, Type: smithy.ShapeTypeStructure, Ext: &eLogConfig})
+var sLogConfig_fieldLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldLogLevel", ID: &iFieldLogLevel, Members: &mFieldLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eLogConfig_fieldLogLevel})
+var sLogConfig_cloudWatchLogsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLogConfig_cloudWatchLogsRoleArn})
+var sLogConfig_excludeVerboseContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludeVerboseContent", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLogConfig_excludeVerboseContent})
+var s_Logs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Logs, Members: &m_Logs, Type: smithy.ShapeTypeList, Ext: &e_Logs})
+var s_Logs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Logs_member})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_MapOfStringToString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapOfStringToString, Members: &m_MapOfStringToString, Type: smithy.ShapeTypeMap, Ext: &e_MapOfStringToString})
+var s_MapOfStringToString_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_MapOfStringToString_key})
+var s_MapOfStringToString_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_MapOfStringToString_value})
+var s_MappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &e_MappingTemplate})
+var s_MaxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &e_MaxBatchSize})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMergeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeType, Members: &mMergeType, Type: smithy.ShapeTypeEnum, Ext: &eMergeType})
+var sMergeType_MANUAL_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeType_MANUAL_MERGE})
+var sMergeType_AUTO_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeType_AUTO_MERGE})
+var s_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &e_Namespace})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sOpenIDConnectConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIDConnectConfig, Members: &mOpenIDConnectConfig, Type: smithy.ShapeTypeStructure, Ext: &eOpenIDConnectConfig})
+var sOpenIDConnectConfig_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOpenIDConnectConfig_issuer})
+var sOpenIDConnectConfig_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOpenIDConnectConfig_clientId})
+var sOpenIDConnectConfig_iatTTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iatTTL", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eOpenIDConnectConfig_iatTTL})
+var sOpenIDConnectConfig_authTTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authTTL", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eOpenIDConnectConfig_authTTL})
+var sOpenSearchServiceDataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenSearchServiceDataSourceConfig, Members: &mOpenSearchServiceDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eOpenSearchServiceDataSourceConfig})
+var sOpenSearchServiceDataSourceConfig_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOpenSearchServiceDataSourceConfig_endpoint})
+var sOpenSearchServiceDataSourceConfig_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOpenSearchServiceDataSourceConfig_awsRegion})
+var sOperationLevelMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationLevelMetricsConfig, Members: &mOperationLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eOperationLevelMetricsConfig})
+var sOperationLevelMetricsConfig_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationLevelMetricsConfig_ENABLED})
+var sOperationLevelMetricsConfig_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationLevelMetricsConfig_DISABLED})
+var s_OutErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutErrors, Type: smithy.ShapeTypeString, Ext: &e_OutErrors})
+var sOutputType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputType, Members: &mOutputType, Type: smithy.ShapeTypeEnum, Ext: &eOutputType})
+var sOutputType_SDL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SDL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputType_SDL})
+var sOutputType_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOutputType_JSON})
+var s_OwnerContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerContact, Type: smithy.ShapeTypeString, Ext: &e_OwnerContact})
+var sOwnership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOwnership, Members: &mOwnership, Type: smithy.ShapeTypeEnum, Ext: &eOwnership})
+var sOwnership_CURRENT_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CURRENT_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOwnership_CURRENT_ACCOUNT})
+var sOwnership_OTHER_ACCOUNTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER_ACCOUNTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOwnership_OTHER_ACCOUNTS})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPipelineConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineConfig, Members: &mPipelineConfig, Type: smithy.ShapeTypeStructure, Ext: &ePipelineConfig})
+var sPipelineConfig_functions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functions", ID: &i_FunctionsIds, Members: &m_FunctionsIds, Type: smithy.ShapeTypeList, Ext: &ePipelineConfig_functions})
+var s_QueryDepthLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryDepthLimit, Type: smithy.ShapeTypeInteger, Ext: &e_QueryDepthLimit})
+var sRdsDataApiConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRdsDataApiConfig, Members: &mRdsDataApiConfig, Type: smithy.ShapeTypeStructure, Ext: &eRdsDataApiConfig})
+var sRdsDataApiConfig_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_RdsDataApiConfigResourceArn, Type: smithy.ShapeTypeString, Ext: &eRdsDataApiConfig_resourceArn})
+var sRdsDataApiConfig_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &i_RdsDataApiConfigSecretArn, Type: smithy.ShapeTypeString, Ext: &eRdsDataApiConfig_secretArn})
+var sRdsDataApiConfig_databaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseName", ID: &i_RdsDataApiConfigDatabaseName, Type: smithy.ShapeTypeString, Ext: &eRdsDataApiConfig_databaseName})
+var s_RdsDataApiConfigDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RdsDataApiConfigDatabaseName, Type: smithy.ShapeTypeString, Ext: &e_RdsDataApiConfigDatabaseName})
+var s_RdsDataApiConfigResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RdsDataApiConfigResourceArn, Type: smithy.ShapeTypeString, Ext: &e_RdsDataApiConfigResourceArn})
+var s_RdsDataApiConfigSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RdsDataApiConfigSecretArn, Type: smithy.ShapeTypeString, Ext: &e_RdsDataApiConfigSecretArn})
+var sRdsHttpEndpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRdsHttpEndpointConfig, Members: &mRdsHttpEndpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eRdsHttpEndpointConfig})
+var sRdsHttpEndpointConfig_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRdsHttpEndpointConfig_awsRegion})
+var sRdsHttpEndpointConfig_dbClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dbClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRdsHttpEndpointConfig_dbClusterIdentifier})
+var sRdsHttpEndpointConfig_databaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRdsHttpEndpointConfig_databaseName})
+var sRdsHttpEndpointConfig_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRdsHttpEndpointConfig_schema})
+var sRdsHttpEndpointConfig_awsSecretStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsSecretStoreArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRdsHttpEndpointConfig_awsSecretStoreArn})
+var sRelationalDatabaseDataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationalDatabaseDataSourceConfig, Members: &mRelationalDatabaseDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eRelationalDatabaseDataSourceConfig})
+var sRelationalDatabaseDataSourceConfig_relationalDatabaseSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationalDatabaseSourceType", ID: &iRelationalDatabaseSourceType, Members: &mRelationalDatabaseSourceType, Type: smithy.ShapeTypeEnum, Ext: &eRelationalDatabaseDataSourceConfig_relationalDatabaseSourceType})
+var sRelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rdsHttpEndpointConfig", ID: &iRdsHttpEndpointConfig, Members: &mRdsHttpEndpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eRelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig})
+var sRelationalDatabaseSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationalDatabaseSourceType, Members: &mRelationalDatabaseSourceType, Type: smithy.ShapeTypeEnum, Ext: &eRelationalDatabaseSourceType})
+var sRelationalDatabaseSourceType_RDS_HTTP_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDS_HTTP_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRelationalDatabaseSourceType_RDS_HTTP_ENDPOINT})
+var sResolver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolver, Members: &mResolver, Type: smithy.ShapeTypeStructure, Ext: &eResolver})
+var sResolver_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eResolver_typeName})
+var sResolver_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eResolver_fieldName})
+var sResolver_dataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eResolver_dataSourceName})
+var sResolver_resolverArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolverArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResolver_resolverArn})
+var sResolver_requestMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eResolver_requestMappingTemplate})
+var sResolver_responseMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eResolver_responseMappingTemplate})
+var sResolver_kind = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kind", ID: &iResolverKind, Members: &mResolverKind, Type: smithy.ShapeTypeEnum, Ext: &eResolver_kind})
+var sResolver_pipelineConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineConfig", ID: &iPipelineConfig, Members: &mPipelineConfig, Type: smithy.ShapeTypeStructure, Ext: &eResolver_pipelineConfig})
+var sResolver_syncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncConfig", ID: &iSyncConfig, Members: &mSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eResolver_syncConfig})
+var sResolver_cachingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cachingConfig", ID: &iCachingConfig, Members: &mCachingConfig, Type: smithy.ShapeTypeStructure, Ext: &eResolver_cachingConfig})
+var sResolver_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &eResolver_maxBatchSize})
+var sResolver_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eResolver_runtime})
+var sResolver_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eResolver_code})
+var sResolver_metricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsConfig", ID: &iResolverLevelMetricsConfig, Members: &mResolverLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eResolver_metricsConfig})
+var s_ResolverCountLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolverCountLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ResolverCountLimit})
+var sResolverKind = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolverKind, Members: &mResolverKind, Type: smithy.ShapeTypeEnum, Ext: &eResolverKind})
+var sResolverKind_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolverKind_UNIT})
+var sResolverKind_PIPELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PIPELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolverKind_PIPELINE})
+var sResolverLevelMetricsBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolverLevelMetricsBehavior, Members: &mResolverLevelMetricsBehavior, Type: smithy.ShapeTypeEnum, Ext: &eResolverLevelMetricsBehavior})
+var sResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_REQUEST_RESOLVER_METRICS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS})
+var sResolverLevelMetricsBehavior_PER_RESOLVER_METRICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_RESOLVER_METRICS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolverLevelMetricsBehavior_PER_RESOLVER_METRICS})
+var sResolverLevelMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolverLevelMetricsConfig, Members: &mResolverLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eResolverLevelMetricsConfig})
+var sResolverLevelMetricsConfig_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolverLevelMetricsConfig_ENABLED})
+var sResolverLevelMetricsConfig_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolverLevelMetricsConfig_DISABLED})
+var s_Resolvers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resolvers, Members: &m_Resolvers, Type: smithy.ShapeTypeList, Ext: &e_Resolvers})
+var s_Resolvers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolver, Members: &mResolver, Type: smithy.ShapeTypeStructure, Ext: &e_Resolvers_member})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sRuntimeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeName, Members: &mRuntimeName, Type: smithy.ShapeTypeEnum, Ext: &eRuntimeName})
+var sRuntimeName_APPSYNC_JS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPSYNC_JS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeName_APPSYNC_JS})
+var sSchemaStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaStatus, Members: &mSchemaStatus, Type: smithy.ShapeTypeEnum, Ext: &eSchemaStatus})
+var sSchemaStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaStatus_Processing})
+var sSchemaStatus_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaStatus_Active})
+var sSchemaStatus_Deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaStatus_Deleting})
+var sSchemaStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaStatus_Failed})
+var sSchemaStatus_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Success", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaStatus_Success})
+var sSchemaStatus_NotApplicable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotApplicable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaStatus_NotApplicable})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t81, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSourceApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceApiAssociation, Members: &mSourceApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociation})
+var sSourceApiAssociation_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_associationId})
+var sSourceApiAssociation_associationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_associationArn})
+var sSourceApiAssociation_sourceApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_sourceApiId})
+var sSourceApiAssociation_sourceApiArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_sourceApiArn})
+var sSourceApiAssociation_mergedApiArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_mergedApiArn})
+var sSourceApiAssociation_mergedApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_mergedApiId})
+var sSourceApiAssociation_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_description})
+var sSourceApiAssociation_sourceApiAssociationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationConfig", ID: &iSourceApiAssociationConfig, Members: &mSourceApiAssociationConfig, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociation_sourceApiAssociationConfig})
+var sSourceApiAssociation_sourceApiAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationStatus", ID: &iSourceApiAssociationStatus, Members: &mSourceApiAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eSourceApiAssociation_sourceApiAssociationStatus})
+var sSourceApiAssociation_sourceApiAssociationStatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationStatusDetail", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociation_sourceApiAssociationStatusDetail})
+var sSourceApiAssociation_lastSuccessfulMergeDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSuccessfulMergeDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eSourceApiAssociation_lastSuccessfulMergeDate})
+var sSourceApiAssociationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceApiAssociationConfig, Members: &mSourceApiAssociationConfig, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationConfig})
+var sSourceApiAssociationConfig_mergeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeType", ID: &iMergeType, Members: &mMergeType, Type: smithy.ShapeTypeEnum, Ext: &eSourceApiAssociationConfig_mergeType})
+var sSourceApiAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceApiAssociationStatus, Members: &mSourceApiAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eSourceApiAssociationStatus})
+var sSourceApiAssociationStatus_MERGE_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE_SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_MERGE_SCHEDULED})
+var sSourceApiAssociationStatus_MERGE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_MERGE_FAILED})
+var sSourceApiAssociationStatus_MERGE_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_MERGE_SUCCESS})
+var sSourceApiAssociationStatus_MERGE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_MERGE_IN_PROGRESS})
+var sSourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO_MERGE_SCHEDULE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED})
+var sSourceApiAssociationStatus_DELETION_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_DELETION_SCHEDULED})
+var sSourceApiAssociationStatus_DELETION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_DELETION_IN_PROGRESS})
+var sSourceApiAssociationStatus_DELETION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationStatus_DELETION_FAILED})
+var sSourceApiAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceApiAssociationSummary, Members: &mSourceApiAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eSourceApiAssociationSummary})
+var sSourceApiAssociationSummary_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociationSummary_associationId})
+var sSourceApiAssociationSummary_associationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociationSummary_associationArn})
+var sSourceApiAssociationSummary_sourceApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociationSummary_sourceApiId})
+var sSourceApiAssociationSummary_sourceApiArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociationSummary_sourceApiArn})
+var sSourceApiAssociationSummary_mergedApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociationSummary_mergedApiId})
+var sSourceApiAssociationSummary_mergedApiArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociationSummary_mergedApiArn})
+var sSourceApiAssociationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSourceApiAssociationSummary_description})
+var s_SourceApiAssociationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceApiAssociationSummaryList, Members: &m_SourceApiAssociationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_SourceApiAssociationSummaryList})
+var s_SourceApiAssociationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceApiAssociationSummary, Members: &mSourceApiAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SourceApiAssociationSummaryList_member})
+var s_Stash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stash, Type: smithy.ShapeTypeString, Ext: &e_Stash})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncConfig, Members: &mSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eSyncConfig})
+var sSyncConfig_conflictHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictHandler", ID: &iConflictHandlerType, Members: &mConflictHandlerType, Type: smithy.ShapeTypeEnum, Ext: &eSyncConfig_conflictHandler})
+var sSyncConfig_conflictDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetection", ID: &iConflictDetectionType, Members: &mConflictDetectionType, Type: smithy.ShapeTypeEnum, Ext: &eSyncConfig_conflictDetection})
+var sSyncConfig_lambdaConflictHandlerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaConflictHandlerConfig", ID: &iLambdaConflictHandlerConfig, Members: &mLambdaConflictHandlerConfig, Type: smithy.ShapeTypeStructure, Ext: &eSyncConfig_lambdaConflictHandlerConfig})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Template = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Template, Type: smithy.ShapeTypeString, Ext: &e_Template})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_TTL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TTL, Type: smithy.ShapeTypeInteger, Ext: &e_TTL})
+var sType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iType, Members: &mType, Type: smithy.ShapeTypeStructure, Ext: &eType})
+var sType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eType_name})
+var sType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eType_description})
+var sType_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eType_arn})
+var sType_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eType_definition})
+var sType_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iTypeDefinitionFormat, Members: &mTypeDefinitionFormat, Type: smithy.ShapeTypeEnum, Ext: &eType_format})
+var sTypeDefinitionFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeDefinitionFormat, Members: &mTypeDefinitionFormat, Type: smithy.ShapeTypeEnum, Ext: &eTypeDefinitionFormat})
+var sTypeDefinitionFormat_SDL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SDL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTypeDefinitionFormat_SDL})
+var sTypeDefinitionFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTypeDefinitionFormat_JSON})
+var s_TypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeList, Members: &m_TypeList, Type: smithy.ShapeTypeList, Ext: &e_TypeList})
+var s_TypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iType, Members: &mType, Type: smithy.ShapeTypeStructure, Ext: &e_TypeList_member})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t82, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sUserPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserPoolConfig, Members: &mUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eUserPoolConfig})
+var sUserPoolConfig_userPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUserPoolConfig_userPoolId})
+var sUserPoolConfig_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUserPoolConfig_awsRegion})
+var sUserPoolConfig_defaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultAction", ID: &iDefaultAction, Members: &mDefaultAction, Type: smithy.ShapeTypeEnum, Ext: &eUserPoolConfig_defaultAction})
+var sUserPoolConfig_appIdClientRegex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appIdClientRegex", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUserPoolConfig_appIdClientRegex})
+var sAssociateApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApiRequest, Members: &mAssociateApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApiRequest})
+var sAssociateApiRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eAssociateApiRequest_domainName})
+var sAssociateApiRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateApiRequest_apiId})
+var sAssociateApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApiResponse, Members: &mAssociateApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApiResponse})
+var sAssociateApiResponse_apiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiAssociation", ID: &iApiAssociation, Members: &mApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApiResponse_apiAssociation})
+var sAssociateMergedGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMergedGraphqlApiRequest, Members: &mAssociateMergedGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateMergedGraphqlApiRequest})
+var sAssociateMergedGraphqlApiRequest_sourceApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eAssociateMergedGraphqlApiRequest_sourceApiIdentifier})
+var sAssociateMergedGraphqlApiRequest_mergedApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateMergedGraphqlApiRequest_mergedApiIdentifier})
+var sAssociateMergedGraphqlApiRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateMergedGraphqlApiRequest_description})
+var sAssociateMergedGraphqlApiRequest_sourceApiAssociationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationConfig", ID: &iSourceApiAssociationConfig, Members: &mSourceApiAssociationConfig, Type: smithy.ShapeTypeStructure, Ext: &eAssociateMergedGraphqlApiRequest_sourceApiAssociationConfig})
+var sAssociateMergedGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMergedGraphqlApiResponse, Members: &mAssociateMergedGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateMergedGraphqlApiResponse})
+var sAssociateMergedGraphqlApiResponse_sourceApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociation", ID: &iSourceApiAssociation, Members: &mSourceApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssociateMergedGraphqlApiResponse_sourceApiAssociation})
+var sAssociateSourceGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceGraphqlApiRequest, Members: &mAssociateSourceGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSourceGraphqlApiRequest})
+var sAssociateSourceGraphqlApiRequest_mergedApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eAssociateSourceGraphqlApiRequest_mergedApiIdentifier})
+var sAssociateSourceGraphqlApiRequest_sourceApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateSourceGraphqlApiRequest_sourceApiIdentifier})
+var sAssociateSourceGraphqlApiRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateSourceGraphqlApiRequest_description})
+var sAssociateSourceGraphqlApiRequest_sourceApiAssociationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationConfig", ID: &iSourceApiAssociationConfig, Members: &mSourceApiAssociationConfig, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSourceGraphqlApiRequest_sourceApiAssociationConfig})
+var sAssociateSourceGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceGraphqlApiResponse, Members: &mAssociateSourceGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSourceGraphqlApiResponse})
+var sAssociateSourceGraphqlApiResponse_sourceApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociation", ID: &iSourceApiAssociation, Members: &mSourceApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSourceGraphqlApiResponse_sourceApiAssociation})
+var sCreateApiCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiCacheRequest, Members: &mCreateApiCacheRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiCacheRequest})
+var sCreateApiCacheRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateApiCacheRequest_apiId})
+var sCreateApiCacheRequest_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateApiCacheRequest_ttl})
+var sCreateApiCacheRequest_transitEncryptionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitEncryptionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApiCacheRequest_transitEncryptionEnabled})
+var sCreateApiCacheRequest_atRestEncryptionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atRestEncryptionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApiCacheRequest_atRestEncryptionEnabled})
+var sCreateApiCacheRequest_apiCachingBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCachingBehavior", ID: &iApiCachingBehavior, Members: &mApiCachingBehavior, Type: smithy.ShapeTypeEnum, Ext: &eCreateApiCacheRequest_apiCachingBehavior})
+var sCreateApiCacheRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iApiCacheType, Members: &mApiCacheType, Type: smithy.ShapeTypeEnum, Ext: &eCreateApiCacheRequest_type})
+var sCreateApiCacheRequest_healthMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthMetricsConfig", ID: &iCacheHealthMetricsConfig, Members: &mCacheHealthMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eCreateApiCacheRequest_healthMetricsConfig})
+var sCreateApiCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiCacheResponse, Members: &mCreateApiCacheResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiCacheResponse})
+var sCreateApiCacheResponse_apiCache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCache", ID: &iApiCache, Members: &mApiCache, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiCacheResponse_apiCache})
+var sCreateApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiRequest, Members: &mCreateApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiRequest})
+var sCreateApiRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ApiName, Type: smithy.ShapeTypeString, Ext: &eCreateApiRequest_name})
+var sCreateApiRequest_ownerContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerContact", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateApiRequest_ownerContact})
+var sCreateApiRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateApiRequest_tags})
+var sCreateApiRequest_eventConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventConfig", ID: &iEventConfig, Members: &mEventConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiRequest_eventConfig})
+var sCreateApiKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiKeyRequest, Members: &mCreateApiKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiKeyRequest})
+var sCreateApiKeyRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateApiKeyRequest_apiId})
+var sCreateApiKeyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateApiKeyRequest_description})
+var sCreateApiKeyRequest_expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expires", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateApiKeyRequest_expires})
+var sCreateApiKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiKeyResponse, Members: &mCreateApiKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiKeyResponse})
+var sCreateApiKeyResponse_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &iApiKey, Members: &mApiKey, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiKeyResponse_apiKey})
+var sCreateApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiResponse, Members: &mCreateApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiResponse})
+var sCreateApiResponse_api = smithy.NewStaticSchema(smithy.StaticSchema{Member: "api", ID: &iApi, Members: &mApi, Type: smithy.ShapeTypeStructure, Ext: &eCreateApiResponse_api})
+var sCreateChannelNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelNamespaceRequest, Members: &mCreateChannelNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelNamespaceRequest})
+var sCreateChannelNamespaceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateChannelNamespaceRequest_apiId})
+var sCreateChannelNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eCreateChannelNamespaceRequest_name})
+var sCreateChannelNamespaceRequest_subscribeAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscribeAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eCreateChannelNamespaceRequest_subscribeAuthModes})
+var sCreateChannelNamespaceRequest_publishAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publishAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eCreateChannelNamespaceRequest_publishAuthModes})
+var sCreateChannelNamespaceRequest_codeHandlers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeHandlers", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eCreateChannelNamespaceRequest_codeHandlers})
+var sCreateChannelNamespaceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateChannelNamespaceRequest_tags})
+var sCreateChannelNamespaceRequest_handlerConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handlerConfigs", ID: &iHandlerConfigs, Members: &mHandlerConfigs, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelNamespaceRequest_handlerConfigs})
+var sCreateChannelNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelNamespaceResponse, Members: &mCreateChannelNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelNamespaceResponse})
+var sCreateChannelNamespaceResponse_channelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelNamespace", ID: &iChannelNamespace, Members: &mChannelNamespace, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelNamespaceResponse_channelNamespace})
+var sCreateDataSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceRequest, Members: &mCreateDataSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest})
+var sCreateDataSourceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateDataSourceRequest_apiId})
+var sCreateDataSourceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateDataSourceRequest_name})
+var sCreateDataSourceRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDataSourceRequest_description})
+var sCreateDataSourceRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDataSourceType, Members: &mDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &eCreateDataSourceRequest_type})
+var sCreateDataSourceRequest_serviceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDataSourceRequest_serviceRoleArn})
+var sCreateDataSourceRequest_dynamodbConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dynamodbConfig", ID: &iDynamodbDataSourceConfig, Members: &mDynamodbDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest_dynamodbConfig})
+var sCreateDataSourceRequest_lambdaConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaConfig", ID: &iLambdaDataSourceConfig, Members: &mLambdaDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest_lambdaConfig})
+var sCreateDataSourceRequest_elasticsearchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elasticsearchConfig", ID: &iElasticsearchDataSourceConfig, Members: &mElasticsearchDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest_elasticsearchConfig})
+var sCreateDataSourceRequest_openSearchServiceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openSearchServiceConfig", ID: &iOpenSearchServiceDataSourceConfig, Members: &mOpenSearchServiceDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest_openSearchServiceConfig})
+var sCreateDataSourceRequest_httpConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpConfig", ID: &iHttpDataSourceConfig, Members: &mHttpDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest_httpConfig})
+var sCreateDataSourceRequest_relationalDatabaseConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationalDatabaseConfig", ID: &iRelationalDatabaseDataSourceConfig, Members: &mRelationalDatabaseDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest_relationalDatabaseConfig})
+var sCreateDataSourceRequest_eventBridgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeConfig", ID: &iEventBridgeDataSourceConfig, Members: &mEventBridgeDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceRequest_eventBridgeConfig})
+var sCreateDataSourceRequest_metricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsConfig", ID: &iDataSourceLevelMetricsConfig, Members: &mDataSourceLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eCreateDataSourceRequest_metricsConfig})
+var sCreateDataSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceResponse, Members: &mCreateDataSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceResponse})
+var sCreateDataSourceResponse_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataSourceResponse_dataSource})
+var sCreateDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainNameRequest, Members: &mCreateDomainNameRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainNameRequest})
+var sCreateDomainNameRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCreateDomainNameRequest_domainName})
+var sCreateDomainNameRequest_certificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateArn", ID: &i_CertificateArn, Type: smithy.ShapeTypeString, Ext: &eCreateDomainNameRequest_certificateArn})
+var sCreateDomainNameRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateDomainNameRequest_description})
+var sCreateDomainNameRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateDomainNameRequest_tags})
+var sCreateDomainNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainNameResponse, Members: &mCreateDomainNameResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainNameResponse})
+var sCreateDomainNameResponse_domainNameConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainNameConfig", ID: &iDomainNameConfig, Members: &mDomainNameConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainNameResponse_domainNameConfig})
+var sCreateFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFunctionRequest, Members: &mCreateFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFunctionRequest})
+var sCreateFunctionRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_apiId})
+var sCreateFunctionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_name})
+var sCreateFunctionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_description})
+var sCreateFunctionRequest_dataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_dataSourceName})
+var sCreateFunctionRequest_requestMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_requestMappingTemplate})
+var sCreateFunctionRequest_responseMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_responseMappingTemplate})
+var sCreateFunctionRequest_functionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_functionVersion})
+var sCreateFunctionRequest_syncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncConfig", ID: &iSyncConfig, Members: &mSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateFunctionRequest_syncConfig})
+var sCreateFunctionRequest_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &eCreateFunctionRequest_maxBatchSize})
+var sCreateFunctionRequest_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eCreateFunctionRequest_runtime})
+var sCreateFunctionRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eCreateFunctionRequest_code})
+var sCreateFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFunctionResponse, Members: &mCreateFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFunctionResponse})
+var sCreateFunctionResponse_functionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionConfiguration", ID: &iFunctionConfiguration, Members: &mFunctionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateFunctionResponse_functionConfiguration})
+var sCreateGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGraphqlApiRequest, Members: &mCreateGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiRequest})
+var sCreateGraphqlApiRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateGraphqlApiRequest_name})
+var sCreateGraphqlApiRequest_logConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfig", ID: &iLogConfig, Members: &mLogConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiRequest_logConfig})
+var sCreateGraphqlApiRequest_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateGraphqlApiRequest_authenticationType})
+var sCreateGraphqlApiRequest_userPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolConfig", ID: &iUserPoolConfig, Members: &mUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiRequest_userPoolConfig})
+var sCreateGraphqlApiRequest_openIDConnectConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIDConnectConfig", ID: &iOpenIDConnectConfig, Members: &mOpenIDConnectConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiRequest_openIDConnectConfig})
+var sCreateGraphqlApiRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateGraphqlApiRequest_tags})
+var sCreateGraphqlApiRequest_additionalAuthenticationProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalAuthenticationProviders", ID: &i_AdditionalAuthenticationProviders, Members: &m_AdditionalAuthenticationProviders, Type: smithy.ShapeTypeList, Ext: &eCreateGraphqlApiRequest_additionalAuthenticationProviders})
+var sCreateGraphqlApiRequest_xrayEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xrayEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateGraphqlApiRequest_xrayEnabled})
+var sCreateGraphqlApiRequest_lambdaAuthorizerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaAuthorizerConfig", ID: &iLambdaAuthorizerConfig, Members: &mLambdaAuthorizerConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiRequest_lambdaAuthorizerConfig})
+var sCreateGraphqlApiRequest_apiType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiType", ID: &iGraphQLApiType, Members: &mGraphQLApiType, Type: smithy.ShapeTypeEnum, Ext: &eCreateGraphqlApiRequest_apiType})
+var sCreateGraphqlApiRequest_mergedApiExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiExecutionRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateGraphqlApiRequest_mergedApiExecutionRoleArn})
+var sCreateGraphqlApiRequest_visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibility", ID: &iGraphQLApiVisibility, Members: &mGraphQLApiVisibility, Type: smithy.ShapeTypeEnum, Ext: &eCreateGraphqlApiRequest_visibility})
+var sCreateGraphqlApiRequest_ownerContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerContact", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateGraphqlApiRequest_ownerContact})
+var sCreateGraphqlApiRequest_introspectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionConfig", ID: &iGraphQLApiIntrospectionConfig, Members: &mGraphQLApiIntrospectionConfig, Type: smithy.ShapeTypeEnum, Ext: &eCreateGraphqlApiRequest_introspectionConfig})
+var sCreateGraphqlApiRequest_queryDepthLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDepthLimit", ID: &i_QueryDepthLimit, Type: smithy.ShapeTypeInteger, Ext: &eCreateGraphqlApiRequest_queryDepthLimit})
+var sCreateGraphqlApiRequest_resolverCountLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolverCountLimit", ID: &i_ResolverCountLimit, Type: smithy.ShapeTypeInteger, Ext: &eCreateGraphqlApiRequest_resolverCountLimit})
+var sCreateGraphqlApiRequest_enhancedMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enhancedMetricsConfig", ID: &iEnhancedMetricsConfig, Members: &mEnhancedMetricsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiRequest_enhancedMetricsConfig})
+var sCreateGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGraphqlApiResponse, Members: &mCreateGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiResponse})
+var sCreateGraphqlApiResponse_graphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "graphqlApi", ID: &iGraphqlApi, Members: &mGraphqlApi, Type: smithy.ShapeTypeStructure, Ext: &eCreateGraphqlApiResponse_graphqlApi})
+var sCreateResolverRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResolverRequest, Members: &mCreateResolverRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateResolverRequest})
+var sCreateResolverRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateResolverRequest_apiId})
+var sCreateResolverRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateResolverRequest_typeName})
+var sCreateResolverRequest_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateResolverRequest_fieldName})
+var sCreateResolverRequest_dataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateResolverRequest_dataSourceName})
+var sCreateResolverRequest_requestMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eCreateResolverRequest_requestMappingTemplate})
+var sCreateResolverRequest_responseMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eCreateResolverRequest_responseMappingTemplate})
+var sCreateResolverRequest_kind = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kind", ID: &iResolverKind, Members: &mResolverKind, Type: smithy.ShapeTypeEnum, Ext: &eCreateResolverRequest_kind})
+var sCreateResolverRequest_pipelineConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineConfig", ID: &iPipelineConfig, Members: &mPipelineConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateResolverRequest_pipelineConfig})
+var sCreateResolverRequest_syncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncConfig", ID: &iSyncConfig, Members: &mSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateResolverRequest_syncConfig})
+var sCreateResolverRequest_cachingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cachingConfig", ID: &iCachingConfig, Members: &mCachingConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateResolverRequest_cachingConfig})
+var sCreateResolverRequest_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &eCreateResolverRequest_maxBatchSize})
+var sCreateResolverRequest_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eCreateResolverRequest_runtime})
+var sCreateResolverRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eCreateResolverRequest_code})
+var sCreateResolverRequest_metricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsConfig", ID: &iResolverLevelMetricsConfig, Members: &mResolverLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eCreateResolverRequest_metricsConfig})
+var sCreateResolverResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResolverResponse, Members: &mCreateResolverResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateResolverResponse})
+var sCreateResolverResponse_resolver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolver", ID: &iResolver, Members: &mResolver, Type: smithy.ShapeTypeStructure, Ext: &eCreateResolverResponse_resolver})
+var sCreateTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTypeRequest, Members: &mCreateTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTypeRequest})
+var sCreateTypeRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eCreateTypeRequest_apiId})
+var sCreateTypeRequest_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateTypeRequest_definition})
+var sCreateTypeRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iTypeDefinitionFormat, Members: &mTypeDefinitionFormat, Type: smithy.ShapeTypeEnum, Ext: &eCreateTypeRequest_format})
+var sCreateTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTypeResponse, Members: &mCreateTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTypeResponse})
+var sCreateTypeResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeStructure, Ext: &eCreateTypeResponse_type})
+var sDeleteApiCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiCacheRequest, Members: &mDeleteApiCacheRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApiCacheRequest})
+var sDeleteApiCacheRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteApiCacheRequest_apiId})
+var sDeleteApiCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiCacheResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApiCacheResponse})
+var sDeleteApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiRequest, Members: &mDeleteApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApiRequest})
+var sDeleteApiRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteApiRequest_apiId})
+var sDeleteApiKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiKeyRequest, Members: &mDeleteApiKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApiKeyRequest})
+var sDeleteApiKeyRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteApiKeyRequest_apiId})
+var sDeleteApiKeyRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteApiKeyRequest_id})
+var sDeleteApiKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApiKeyResponse})
+var sDeleteApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApiResponse})
+var sDeleteChannelNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelNamespaceRequest, Members: &mDeleteChannelNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelNamespaceRequest})
+var sDeleteChannelNamespaceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelNamespaceRequest_apiId})
+var sDeleteChannelNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Namespace, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelNamespaceRequest_name})
+var sDeleteChannelNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelNamespaceResponse})
+var sDeleteDataSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataSourceRequest, Members: &mDeleteDataSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataSourceRequest})
+var sDeleteDataSourceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteDataSourceRequest_apiId})
+var sDeleteDataSourceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteDataSourceRequest_name})
+var sDeleteDataSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataSourceResponse})
+var sDeleteDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainNameRequest, Members: &mDeleteDomainNameRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainNameRequest})
+var sDeleteDomainNameRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainNameRequest_domainName})
+var sDeleteDomainNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainNameResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainNameResponse})
+var sDeleteFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFunctionRequest, Members: &mDeleteFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFunctionRequest})
+var sDeleteFunctionRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteFunctionRequest_apiId})
+var sDeleteFunctionRequest_functionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionId", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteFunctionRequest_functionId})
+var sDeleteFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFunctionResponse})
+var sDeleteGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGraphqlApiRequest, Members: &mDeleteGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGraphqlApiRequest})
+var sDeleteGraphqlApiRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteGraphqlApiRequest_apiId})
+var sDeleteGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGraphqlApiResponse})
+var sDeleteResolverRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResolverRequest, Members: &mDeleteResolverRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResolverRequest})
+var sDeleteResolverRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteResolverRequest_apiId})
+var sDeleteResolverRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteResolverRequest_typeName})
+var sDeleteResolverRequest_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteResolverRequest_fieldName})
+var sDeleteResolverResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResolverResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResolverResponse})
+var sDeleteTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTypeRequest, Members: &mDeleteTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTypeRequest})
+var sDeleteTypeRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteTypeRequest_apiId})
+var sDeleteTypeRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDeleteTypeRequest_typeName})
+var sDeleteTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTypeResponse})
+var sDisassociateApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApiRequest, Members: &mDisassociateApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApiRequest})
+var sDisassociateApiRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDisassociateApiRequest_domainName})
+var sDisassociateApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApiResponse})
+var sDisassociateMergedGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMergedGraphqlApiRequest, Members: &mDisassociateMergedGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateMergedGraphqlApiRequest})
+var sDisassociateMergedGraphqlApiRequest_sourceApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDisassociateMergedGraphqlApiRequest_sourceApiIdentifier})
+var sDisassociateMergedGraphqlApiRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDisassociateMergedGraphqlApiRequest_associationId})
+var sDisassociateMergedGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMergedGraphqlApiResponse, Members: &mDisassociateMergedGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateMergedGraphqlApiResponse})
+var sDisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationStatus", ID: &iSourceApiAssociationStatus, Members: &mSourceApiAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus})
+var sDisassociateSourceGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSourceGraphqlApiRequest, Members: &mDisassociateSourceGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateSourceGraphqlApiRequest})
+var sDisassociateSourceGraphqlApiRequest_mergedApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDisassociateSourceGraphqlApiRequest_mergedApiIdentifier})
+var sDisassociateSourceGraphqlApiRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eDisassociateSourceGraphqlApiRequest_associationId})
+var sDisassociateSourceGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSourceGraphqlApiResponse, Members: &mDisassociateSourceGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateSourceGraphqlApiResponse})
+var sDisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationStatus", ID: &iSourceApiAssociationStatus, Members: &mSourceApiAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus})
+var sEvaluateCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateCodeRequest, Members: &mEvaluateCodeRequest, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateCodeRequest})
+var sEvaluateCodeRequest_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateCodeRequest_runtime})
+var sEvaluateCodeRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eEvaluateCodeRequest_code})
+var sEvaluateCodeRequest_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_Context, Type: smithy.ShapeTypeString, Ext: &eEvaluateCodeRequest_context})
+var sEvaluateCodeRequest_function = smithy.NewStaticSchema(smithy.StaticSchema{Member: "function", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvaluateCodeRequest_function})
+var sEvaluateCodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateCodeResponse, Members: &mEvaluateCodeResponse, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateCodeResponse})
+var sEvaluateCodeResponse_evaluationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluationResult", ID: &i_EvaluationResult, Type: smithy.ShapeTypeString, Ext: &eEvaluateCodeResponse_evaluationResult})
+var sEvaluateCodeResponse_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iEvaluateCodeErrorDetail, Members: &mEvaluateCodeErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateCodeResponse_error})
+var sEvaluateCodeResponse_logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logs", ID: &i_Logs, Members: &m_Logs, Type: smithy.ShapeTypeList, Ext: &eEvaluateCodeResponse_logs})
+var sEvaluateCodeResponse_stash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stash", ID: &i_Stash, Type: smithy.ShapeTypeString, Ext: &eEvaluateCodeResponse_stash})
+var sEvaluateCodeResponse_outErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outErrors", ID: &i_OutErrors, Type: smithy.ShapeTypeString, Ext: &eEvaluateCodeResponse_outErrors})
+var sEvaluateMappingTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateMappingTemplateRequest, Members: &mEvaluateMappingTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateMappingTemplateRequest})
+var sEvaluateMappingTemplateRequest_template = smithy.NewStaticSchema(smithy.StaticSchema{Member: "template", ID: &i_Template, Type: smithy.ShapeTypeString, Ext: &eEvaluateMappingTemplateRequest_template})
+var sEvaluateMappingTemplateRequest_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_Context, Type: smithy.ShapeTypeString, Ext: &eEvaluateMappingTemplateRequest_context})
+var sEvaluateMappingTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateMappingTemplateResponse, Members: &mEvaluateMappingTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateMappingTemplateResponse})
+var sEvaluateMappingTemplateResponse_evaluationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluationResult", ID: &i_EvaluationResult, Type: smithy.ShapeTypeString, Ext: &eEvaluateMappingTemplateResponse_evaluationResult})
+var sEvaluateMappingTemplateResponse_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateMappingTemplateResponse_error})
+var sEvaluateMappingTemplateResponse_logs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logs", ID: &i_Logs, Members: &m_Logs, Type: smithy.ShapeTypeList, Ext: &eEvaluateMappingTemplateResponse_logs})
+var sEvaluateMappingTemplateResponse_stash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stash", ID: &i_Stash, Type: smithy.ShapeTypeString, Ext: &eEvaluateMappingTemplateResponse_stash})
+var sEvaluateMappingTemplateResponse_outErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outErrors", ID: &i_OutErrors, Type: smithy.ShapeTypeString, Ext: &eEvaluateMappingTemplateResponse_outErrors})
+var sFlushApiCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlushApiCacheRequest, Members: &mFlushApiCacheRequest, Type: smithy.ShapeTypeStructure, Ext: &eFlushApiCacheRequest})
+var sFlushApiCacheRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eFlushApiCacheRequest_apiId})
+var sFlushApiCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlushApiCacheResponse, Type: smithy.ShapeTypeStructure, Ext: &eFlushApiCacheResponse})
+var sGetApiAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiAssociationRequest, Members: &mGetApiAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetApiAssociationRequest})
+var sGetApiAssociationRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetApiAssociationRequest_domainName})
+var sGetApiAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiAssociationResponse, Members: &mGetApiAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetApiAssociationResponse})
+var sGetApiAssociationResponse_apiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiAssociation", ID: &iApiAssociation, Members: &mApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eGetApiAssociationResponse_apiAssociation})
+var sGetApiCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiCacheRequest, Members: &mGetApiCacheRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetApiCacheRequest})
+var sGetApiCacheRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetApiCacheRequest_apiId})
+var sGetApiCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiCacheResponse, Members: &mGetApiCacheResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetApiCacheResponse})
+var sGetApiCacheResponse_apiCache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCache", ID: &iApiCache, Members: &mApiCache, Type: smithy.ShapeTypeStructure, Ext: &eGetApiCacheResponse_apiCache})
+var sGetApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiRequest, Members: &mGetApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetApiRequest})
+var sGetApiRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetApiRequest_apiId})
+var sGetApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiResponse, Members: &mGetApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetApiResponse})
+var sGetApiResponse_api = smithy.NewStaticSchema(smithy.StaticSchema{Member: "api", ID: &iApi, Members: &mApi, Type: smithy.ShapeTypeStructure, Ext: &eGetApiResponse_api})
+var sGetChannelNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelNamespaceRequest, Members: &mGetChannelNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelNamespaceRequest})
+var sGetChannelNamespaceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetChannelNamespaceRequest_apiId})
+var sGetChannelNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Namespace, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetChannelNamespaceRequest_name})
+var sGetChannelNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelNamespaceResponse, Members: &mGetChannelNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelNamespaceResponse})
+var sGetChannelNamespaceResponse_channelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelNamespace", ID: &iChannelNamespace, Members: &mChannelNamespace, Type: smithy.ShapeTypeStructure, Ext: &eGetChannelNamespaceResponse_channelNamespace})
+var sGetDataSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSourceRequest, Members: &mGetDataSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDataSourceRequest})
+var sGetDataSourceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetDataSourceRequest_apiId})
+var sGetDataSourceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetDataSourceRequest_name})
+var sGetDataSourceIntrospectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSourceIntrospectionRequest, Members: &mGetDataSourceIntrospectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDataSourceIntrospectionRequest})
+var sGetDataSourceIntrospectionRequest_introspectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetDataSourceIntrospectionRequest_introspectionId})
+var sGetDataSourceIntrospectionRequest_includeModelsSDL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeModelsSDL", ID: &i_Boolean, Traits: &t84, Type: smithy.ShapeTypeBoolean, Ext: &eGetDataSourceIntrospectionRequest_includeModelsSDL})
+var sGetDataSourceIntrospectionRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eGetDataSourceIntrospectionRequest_nextToken})
+var sGetDataSourceIntrospectionRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eGetDataSourceIntrospectionRequest_maxResults})
+var sGetDataSourceIntrospectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSourceIntrospectionResponse, Members: &mGetDataSourceIntrospectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataSourceIntrospectionResponse})
+var sGetDataSourceIntrospectionResponse_introspectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetDataSourceIntrospectionResponse_introspectionId})
+var sGetDataSourceIntrospectionResponse_introspectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionStatus", ID: &iDataSourceIntrospectionStatus, Members: &mDataSourceIntrospectionStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDataSourceIntrospectionResponse_introspectionStatus})
+var sGetDataSourceIntrospectionResponse_introspectionStatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionStatusDetail", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetDataSourceIntrospectionResponse_introspectionStatusDetail})
+var sGetDataSourceIntrospectionResponse_introspectionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionResult", ID: &iDataSourceIntrospectionResult, Members: &mDataSourceIntrospectionResult, Type: smithy.ShapeTypeStructure, Ext: &eGetDataSourceIntrospectionResponse_introspectionResult})
+var sGetDataSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSourceResponse, Members: &mGetDataSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataSourceResponse})
+var sGetDataSourceResponse_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eGetDataSourceResponse_dataSource})
+var sGetDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainNameRequest, Members: &mGetDomainNameRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainNameRequest})
+var sGetDomainNameRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetDomainNameRequest_domainName})
+var sGetDomainNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainNameResponse, Members: &mGetDomainNameResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainNameResponse})
+var sGetDomainNameResponse_domainNameConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainNameConfig", ID: &iDomainNameConfig, Members: &mDomainNameConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainNameResponse_domainNameConfig})
+var sGetFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFunctionRequest, Members: &mGetFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionRequest})
+var sGetFunctionRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetFunctionRequest_apiId})
+var sGetFunctionRequest_functionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionId", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetFunctionRequest_functionId})
+var sGetFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFunctionResponse, Members: &mGetFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse})
+var sGetFunctionResponse_functionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionConfiguration", ID: &iFunctionConfiguration, Members: &mFunctionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetFunctionResponse_functionConfiguration})
+var sGetGraphqlApiEnvironmentVariablesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGraphqlApiEnvironmentVariablesRequest, Members: &mGetGraphqlApiEnvironmentVariablesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetGraphqlApiEnvironmentVariablesRequest})
+var sGetGraphqlApiEnvironmentVariablesRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetGraphqlApiEnvironmentVariablesRequest_apiId})
+var sGetGraphqlApiEnvironmentVariablesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGraphqlApiEnvironmentVariablesResponse, Members: &mGetGraphqlApiEnvironmentVariablesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGraphqlApiEnvironmentVariablesResponse})
+var sGetGraphqlApiEnvironmentVariablesResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eGetGraphqlApiEnvironmentVariablesResponse_environmentVariables})
+var sGetGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGraphqlApiRequest, Members: &mGetGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetGraphqlApiRequest})
+var sGetGraphqlApiRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetGraphqlApiRequest_apiId})
+var sGetGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGraphqlApiResponse, Members: &mGetGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGraphqlApiResponse})
+var sGetGraphqlApiResponse_graphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "graphqlApi", ID: &iGraphqlApi, Members: &mGraphqlApi, Type: smithy.ShapeTypeStructure, Ext: &eGetGraphqlApiResponse_graphqlApi})
+var sGetIntrospectionSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntrospectionSchemaRequest, Members: &mGetIntrospectionSchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIntrospectionSchemaRequest})
+var sGetIntrospectionSchemaRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetIntrospectionSchemaRequest_apiId})
+var sGetIntrospectionSchemaRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iOutputType, Members: &mOutputType, Traits: &t87, Type: smithy.ShapeTypeEnum, Ext: &eGetIntrospectionSchemaRequest_format})
+var sGetIntrospectionSchemaRequest_includeDirectives = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeDirectives", ID: &i_BooleanValue, Traits: &t88, Type: smithy.ShapeTypeBoolean, Ext: &eGetIntrospectionSchemaRequest_includeDirectives})
+var sGetIntrospectionSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntrospectionSchemaResponse, Members: &mGetIntrospectionSchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIntrospectionSchemaResponse})
+var sGetIntrospectionSchemaResponse_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_Blob, Traits: &t89, Type: smithy.ShapeTypeBlob, Ext: &eGetIntrospectionSchemaResponse_schema})
+var sGetResolverRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResolverRequest, Members: &mGetResolverRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResolverRequest})
+var sGetResolverRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetResolverRequest_apiId})
+var sGetResolverRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetResolverRequest_typeName})
+var sGetResolverRequest_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetResolverRequest_fieldName})
+var sGetResolverResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResolverResponse, Members: &mGetResolverResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResolverResponse})
+var sGetResolverResponse_resolver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolver", ID: &iResolver, Members: &mResolver, Type: smithy.ShapeTypeStructure, Ext: &eGetResolverResponse_resolver})
+var sGetSchemaCreationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaCreationStatusRequest, Members: &mGetSchemaCreationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSchemaCreationStatusRequest})
+var sGetSchemaCreationStatusRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetSchemaCreationStatusRequest_apiId})
+var sGetSchemaCreationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaCreationStatusResponse, Members: &mGetSchemaCreationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSchemaCreationStatusResponse})
+var sGetSchemaCreationStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSchemaStatus, Members: &mSchemaStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetSchemaCreationStatusResponse_status})
+var sGetSchemaCreationStatusResponse_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetSchemaCreationStatusResponse_details})
+var sGetSourceApiAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceApiAssociationRequest, Members: &mGetSourceApiAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSourceApiAssociationRequest})
+var sGetSourceApiAssociationRequest_mergedApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetSourceApiAssociationRequest_mergedApiIdentifier})
+var sGetSourceApiAssociationRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetSourceApiAssociationRequest_associationId})
+var sGetSourceApiAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceApiAssociationResponse, Members: &mGetSourceApiAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSourceApiAssociationResponse})
+var sGetSourceApiAssociationResponse_sourceApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociation", ID: &iSourceApiAssociation, Members: &mSourceApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eGetSourceApiAssociationResponse_sourceApiAssociation})
+var sGetTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTypeRequest, Members: &mGetTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTypeRequest})
+var sGetTypeRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetTypeRequest_apiId})
+var sGetTypeRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eGetTypeRequest_typeName})
+var sGetTypeRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iTypeDefinitionFormat, Members: &mTypeDefinitionFormat, Traits: &t87, Type: smithy.ShapeTypeEnum, Ext: &eGetTypeRequest_format})
+var sGetTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTypeResponse, Members: &mGetTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTypeResponse})
+var sGetTypeResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeStructure, Ext: &eGetTypeResponse_type})
+var sListApiKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApiKeysRequest, Members: &mListApiKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &eListApiKeysRequest})
+var sListApiKeysRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListApiKeysRequest_apiId})
+var sListApiKeysRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListApiKeysRequest_nextToken})
+var sListApiKeysRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListApiKeysRequest_maxResults})
+var sListApiKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApiKeysResponse, Members: &mListApiKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &eListApiKeysResponse})
+var sListApiKeysResponse_apiKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKeys", ID: &i_ApiKeys, Members: &m_ApiKeys, Type: smithy.ShapeTypeList, Ext: &eListApiKeysResponse_apiKeys})
+var sListApiKeysResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListApiKeysResponse_nextToken})
+var sListApisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApisRequest, Members: &mListApisRequest, Type: smithy.ShapeTypeStructure, Ext: &eListApisRequest})
+var sListApisRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListApisRequest_nextToken})
+var sListApisRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListApisRequest_maxResults})
+var sListApisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApisResponse, Members: &mListApisResponse, Type: smithy.ShapeTypeStructure, Ext: &eListApisResponse})
+var sListApisResponse_apis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apis", ID: &i_Apis, Members: &m_Apis, Type: smithy.ShapeTypeList, Ext: &eListApisResponse_apis})
+var sListApisResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListApisResponse_nextToken})
+var sListChannelNamespacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelNamespacesRequest, Members: &mListChannelNamespacesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelNamespacesRequest})
+var sListChannelNamespacesRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListChannelNamespacesRequest_apiId})
+var sListChannelNamespacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListChannelNamespacesRequest_nextToken})
+var sListChannelNamespacesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListChannelNamespacesRequest_maxResults})
+var sListChannelNamespacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelNamespacesResponse, Members: &mListChannelNamespacesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelNamespacesResponse})
+var sListChannelNamespacesResponse_channelNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelNamespaces", ID: &i_ChannelNamespaces, Members: &m_ChannelNamespaces, Type: smithy.ShapeTypeList, Ext: &eListChannelNamespacesResponse_channelNamespaces})
+var sListChannelNamespacesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListChannelNamespacesResponse_nextToken})
+var sListDataSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataSourcesRequest, Members: &mListDataSourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDataSourcesRequest})
+var sListDataSourcesRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListDataSourcesRequest_apiId})
+var sListDataSourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListDataSourcesRequest_nextToken})
+var sListDataSourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListDataSourcesRequest_maxResults})
+var sListDataSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataSourcesResponse, Members: &mListDataSourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDataSourcesResponse})
+var sListDataSourcesResponse_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &i_DataSources, Members: &m_DataSources, Type: smithy.ShapeTypeList, Ext: &eListDataSourcesResponse_dataSources})
+var sListDataSourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListDataSourcesResponse_nextToken})
+var sListDomainNamesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNamesRequest, Members: &mListDomainNamesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDomainNamesRequest})
+var sListDomainNamesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListDomainNamesRequest_nextToken})
+var sListDomainNamesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListDomainNamesRequest_maxResults})
+var sListDomainNamesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNamesResponse, Members: &mListDomainNamesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDomainNamesResponse})
+var sListDomainNamesResponse_domainNameConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainNameConfigs", ID: &i_DomainNameConfigs, Members: &m_DomainNameConfigs, Type: smithy.ShapeTypeList, Ext: &eListDomainNamesResponse_domainNameConfigs})
+var sListDomainNamesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListDomainNamesResponse_nextToken})
+var sListFunctionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFunctionsRequest, Members: &mListFunctionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFunctionsRequest})
+var sListFunctionsRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListFunctionsRequest_apiId})
+var sListFunctionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListFunctionsRequest_nextToken})
+var sListFunctionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListFunctionsRequest_maxResults})
+var sListFunctionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFunctionsResponse, Members: &mListFunctionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFunctionsResponse})
+var sListFunctionsResponse_functions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functions", ID: &i_Functions, Members: &m_Functions, Type: smithy.ShapeTypeList, Ext: &eListFunctionsResponse_functions})
+var sListFunctionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFunctionsResponse_nextToken})
+var sListGraphqlApisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGraphqlApisRequest, Members: &mListGraphqlApisRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGraphqlApisRequest})
+var sListGraphqlApisRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListGraphqlApisRequest_nextToken})
+var sListGraphqlApisRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListGraphqlApisRequest_maxResults})
+var sListGraphqlApisRequest_apiType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiType", ID: &iGraphQLApiType, Members: &mGraphQLApiType, Traits: &t90, Type: smithy.ShapeTypeEnum, Ext: &eListGraphqlApisRequest_apiType})
+var sListGraphqlApisRequest_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &iOwnership, Members: &mOwnership, Traits: &t91, Type: smithy.ShapeTypeEnum, Ext: &eListGraphqlApisRequest_owner})
+var sListGraphqlApisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGraphqlApisResponse, Members: &mListGraphqlApisResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGraphqlApisResponse})
+var sListGraphqlApisResponse_graphqlApis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "graphqlApis", ID: &i_GraphqlApis, Members: &m_GraphqlApis, Type: smithy.ShapeTypeList, Ext: &eListGraphqlApisResponse_graphqlApis})
+var sListGraphqlApisResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListGraphqlApisResponse_nextToken})
+var sListResolversByFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResolversByFunctionRequest, Members: &mListResolversByFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResolversByFunctionRequest})
+var sListResolversByFunctionRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListResolversByFunctionRequest_apiId})
+var sListResolversByFunctionRequest_functionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListResolversByFunctionRequest_functionId})
+var sListResolversByFunctionRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListResolversByFunctionRequest_nextToken})
+var sListResolversByFunctionRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListResolversByFunctionRequest_maxResults})
+var sListResolversByFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResolversByFunctionResponse, Members: &mListResolversByFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResolversByFunctionResponse})
+var sListResolversByFunctionResponse_resolvers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvers", ID: &i_Resolvers, Members: &m_Resolvers, Type: smithy.ShapeTypeList, Ext: &eListResolversByFunctionResponse_resolvers})
+var sListResolversByFunctionResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListResolversByFunctionResponse_nextToken})
+var sListResolversRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResolversRequest, Members: &mListResolversRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResolversRequest})
+var sListResolversRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListResolversRequest_apiId})
+var sListResolversRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListResolversRequest_typeName})
+var sListResolversRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListResolversRequest_nextToken})
+var sListResolversRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListResolversRequest_maxResults})
+var sListResolversResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResolversResponse, Members: &mListResolversResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResolversResponse})
+var sListResolversResponse_resolvers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvers", ID: &i_Resolvers, Members: &m_Resolvers, Type: smithy.ShapeTypeList, Ext: &eListResolversResponse_resolvers})
+var sListResolversResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListResolversResponse_nextToken})
+var sListSourceApiAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceApiAssociationsRequest, Members: &mListSourceApiAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSourceApiAssociationsRequest})
+var sListSourceApiAssociationsRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListSourceApiAssociationsRequest_apiId})
+var sListSourceApiAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListSourceApiAssociationsRequest_nextToken})
+var sListSourceApiAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListSourceApiAssociationsRequest_maxResults})
+var sListSourceApiAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceApiAssociationsResponse, Members: &mListSourceApiAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSourceApiAssociationsResponse})
+var sListSourceApiAssociationsResponse_sourceApiAssociationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationSummaries", ID: &i_SourceApiAssociationSummaryList, Members: &m_SourceApiAssociationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListSourceApiAssociationsResponse_sourceApiAssociationSummaries})
+var sListSourceApiAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListSourceApiAssociationsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sListTypesByAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypesByAssociationRequest, Members: &mListTypesByAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTypesByAssociationRequest})
+var sListTypesByAssociationRequest_mergedApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListTypesByAssociationRequest_mergedApiIdentifier})
+var sListTypesByAssociationRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListTypesByAssociationRequest_associationId})
+var sListTypesByAssociationRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iTypeDefinitionFormat, Members: &mTypeDefinitionFormat, Traits: &t87, Type: smithy.ShapeTypeEnum, Ext: &eListTypesByAssociationRequest_format})
+var sListTypesByAssociationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListTypesByAssociationRequest_nextToken})
+var sListTypesByAssociationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListTypesByAssociationRequest_maxResults})
+var sListTypesByAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypesByAssociationResponse, Members: &mListTypesByAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTypesByAssociationResponse})
+var sListTypesByAssociationResponse_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &i_TypeList, Members: &m_TypeList, Type: smithy.ShapeTypeList, Ext: &eListTypesByAssociationResponse_types})
+var sListTypesByAssociationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTypesByAssociationResponse_nextToken})
+var sListTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypesRequest, Members: &mListTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTypesRequest})
+var sListTypesRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListTypesRequest_apiId})
+var sListTypesRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iTypeDefinitionFormat, Members: &mTypeDefinitionFormat, Traits: &t87, Type: smithy.ShapeTypeEnum, Ext: &eListTypesRequest_format})
+var sListTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eListTypesRequest_nextToken})
+var sListTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t86, Type: smithy.ShapeTypeInteger, Ext: &eListTypesRequest_maxResults})
+var sListTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypesResponse, Members: &mListTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTypesResponse})
+var sListTypesResponse_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &i_TypeList, Members: &m_TypeList, Type: smithy.ShapeTypeList, Ext: &eListTypesResponse_types})
+var sListTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTypesResponse_nextToken})
+var sPutGraphqlApiEnvironmentVariablesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutGraphqlApiEnvironmentVariablesRequest, Members: &mPutGraphqlApiEnvironmentVariablesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutGraphqlApiEnvironmentVariablesRequest})
+var sPutGraphqlApiEnvironmentVariablesRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &ePutGraphqlApiEnvironmentVariablesRequest_apiId})
+var sPutGraphqlApiEnvironmentVariablesRequest_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ePutGraphqlApiEnvironmentVariablesRequest_environmentVariables})
+var sPutGraphqlApiEnvironmentVariablesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutGraphqlApiEnvironmentVariablesResponse, Members: &mPutGraphqlApiEnvironmentVariablesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutGraphqlApiEnvironmentVariablesResponse})
+var sPutGraphqlApiEnvironmentVariablesResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ePutGraphqlApiEnvironmentVariablesResponse_environmentVariables})
+var sStartDataSourceIntrospectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDataSourceIntrospectionRequest, Members: &mStartDataSourceIntrospectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartDataSourceIntrospectionRequest})
+var sStartDataSourceIntrospectionRequest_rdsDataApiConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rdsDataApiConfig", ID: &iRdsDataApiConfig, Members: &mRdsDataApiConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartDataSourceIntrospectionRequest_rdsDataApiConfig})
+var sStartDataSourceIntrospectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDataSourceIntrospectionResponse, Members: &mStartDataSourceIntrospectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartDataSourceIntrospectionResponse})
+var sStartDataSourceIntrospectionResponse_introspectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartDataSourceIntrospectionResponse_introspectionId})
+var sStartDataSourceIntrospectionResponse_introspectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionStatus", ID: &iDataSourceIntrospectionStatus, Members: &mDataSourceIntrospectionStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartDataSourceIntrospectionResponse_introspectionStatus})
+var sStartDataSourceIntrospectionResponse_introspectionStatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionStatusDetail", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartDataSourceIntrospectionResponse_introspectionStatusDetail})
+var sStartSchemaCreationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaCreationRequest, Members: &mStartSchemaCreationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSchemaCreationRequest})
+var sStartSchemaCreationRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eStartSchemaCreationRequest_apiId})
+var sStartSchemaCreationRequest_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &i_Blob, Type: smithy.ShapeTypeBlob, Ext: &eStartSchemaCreationRequest_definition})
+var sStartSchemaCreationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaCreationResponse, Members: &mStartSchemaCreationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartSchemaCreationResponse})
+var sStartSchemaCreationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSchemaStatus, Members: &mSchemaStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartSchemaCreationResponse_status})
+var sStartSchemaMergeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaMergeRequest, Members: &mStartSchemaMergeRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSchemaMergeRequest})
+var sStartSchemaMergeRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eStartSchemaMergeRequest_associationId})
+var sStartSchemaMergeRequest_mergedApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eStartSchemaMergeRequest_mergedApiIdentifier})
+var sStartSchemaMergeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaMergeResponse, Members: &mStartSchemaMergeResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartSchemaMergeResponse})
+var sStartSchemaMergeResponse_sourceApiAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationStatus", ID: &iSourceApiAssociationStatus, Members: &mSourceApiAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartSchemaMergeResponse_sourceApiAssociationStatus})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t92, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateApiCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiCacheRequest, Members: &mUpdateApiCacheRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiCacheRequest})
+var sUpdateApiCacheRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateApiCacheRequest_apiId})
+var sUpdateApiCacheRequest_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eUpdateApiCacheRequest_ttl})
+var sUpdateApiCacheRequest_apiCachingBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCachingBehavior", ID: &iApiCachingBehavior, Members: &mApiCachingBehavior, Type: smithy.ShapeTypeEnum, Ext: &eUpdateApiCacheRequest_apiCachingBehavior})
+var sUpdateApiCacheRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iApiCacheType, Members: &mApiCacheType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateApiCacheRequest_type})
+var sUpdateApiCacheRequest_healthMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthMetricsConfig", ID: &iCacheHealthMetricsConfig, Members: &mCacheHealthMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eUpdateApiCacheRequest_healthMetricsConfig})
+var sUpdateApiCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiCacheResponse, Members: &mUpdateApiCacheResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiCacheResponse})
+var sUpdateApiCacheResponse_apiCache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCache", ID: &iApiCache, Members: &mApiCache, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiCacheResponse_apiCache})
+var sUpdateApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiRequest, Members: &mUpdateApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiRequest})
+var sUpdateApiRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateApiRequest_apiId})
+var sUpdateApiRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ApiName, Type: smithy.ShapeTypeString, Ext: &eUpdateApiRequest_name})
+var sUpdateApiRequest_ownerContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerContact", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateApiRequest_ownerContact})
+var sUpdateApiRequest_eventConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventConfig", ID: &iEventConfig, Members: &mEventConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiRequest_eventConfig})
+var sUpdateApiKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiKeyRequest, Members: &mUpdateApiKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiKeyRequest})
+var sUpdateApiKeyRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateApiKeyRequest_apiId})
+var sUpdateApiKeyRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateApiKeyRequest_id})
+var sUpdateApiKeyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateApiKeyRequest_description})
+var sUpdateApiKeyRequest_expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expires", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eUpdateApiKeyRequest_expires})
+var sUpdateApiKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiKeyResponse, Members: &mUpdateApiKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiKeyResponse})
+var sUpdateApiKeyResponse_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &iApiKey, Members: &mApiKey, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiKeyResponse_apiKey})
+var sUpdateApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiResponse, Members: &mUpdateApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiResponse})
+var sUpdateApiResponse_api = smithy.NewStaticSchema(smithy.StaticSchema{Member: "api", ID: &iApi, Members: &mApi, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApiResponse_api})
+var sUpdateChannelNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelNamespaceRequest, Members: &mUpdateChannelNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelNamespaceRequest})
+var sUpdateChannelNamespaceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelNamespaceRequest_apiId})
+var sUpdateChannelNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Namespace, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelNamespaceRequest_name})
+var sUpdateChannelNamespaceRequest_subscribeAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscribeAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eUpdateChannelNamespaceRequest_subscribeAuthModes})
+var sUpdateChannelNamespaceRequest_publishAuthModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publishAuthModes", ID: &i_AuthModes, Members: &m_AuthModes, Type: smithy.ShapeTypeList, Ext: &eUpdateChannelNamespaceRequest_publishAuthModes})
+var sUpdateChannelNamespaceRequest_codeHandlers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeHandlers", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelNamespaceRequest_codeHandlers})
+var sUpdateChannelNamespaceRequest_handlerConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handlerConfigs", ID: &iHandlerConfigs, Members: &mHandlerConfigs, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelNamespaceRequest_handlerConfigs})
+var sUpdateChannelNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelNamespaceResponse, Members: &mUpdateChannelNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelNamespaceResponse})
+var sUpdateChannelNamespaceResponse_channelNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelNamespace", ID: &iChannelNamespace, Members: &mChannelNamespace, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelNamespaceResponse_channelNamespace})
+var sUpdateDataSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataSourceRequest, Members: &mUpdateDataSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest})
+var sUpdateDataSourceRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateDataSourceRequest_apiId})
+var sUpdateDataSourceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateDataSourceRequest_name})
+var sUpdateDataSourceRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateDataSourceRequest_description})
+var sUpdateDataSourceRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDataSourceType, Members: &mDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDataSourceRequest_type})
+var sUpdateDataSourceRequest_serviceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateDataSourceRequest_serviceRoleArn})
+var sUpdateDataSourceRequest_dynamodbConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dynamodbConfig", ID: &iDynamodbDataSourceConfig, Members: &mDynamodbDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest_dynamodbConfig})
+var sUpdateDataSourceRequest_lambdaConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaConfig", ID: &iLambdaDataSourceConfig, Members: &mLambdaDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest_lambdaConfig})
+var sUpdateDataSourceRequest_elasticsearchConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elasticsearchConfig", ID: &iElasticsearchDataSourceConfig, Members: &mElasticsearchDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest_elasticsearchConfig})
+var sUpdateDataSourceRequest_openSearchServiceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openSearchServiceConfig", ID: &iOpenSearchServiceDataSourceConfig, Members: &mOpenSearchServiceDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest_openSearchServiceConfig})
+var sUpdateDataSourceRequest_httpConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpConfig", ID: &iHttpDataSourceConfig, Members: &mHttpDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest_httpConfig})
+var sUpdateDataSourceRequest_relationalDatabaseConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationalDatabaseConfig", ID: &iRelationalDatabaseDataSourceConfig, Members: &mRelationalDatabaseDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest_relationalDatabaseConfig})
+var sUpdateDataSourceRequest_eventBridgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeConfig", ID: &iEventBridgeDataSourceConfig, Members: &mEventBridgeDataSourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceRequest_eventBridgeConfig})
+var sUpdateDataSourceRequest_metricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsConfig", ID: &iDataSourceLevelMetricsConfig, Members: &mDataSourceLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDataSourceRequest_metricsConfig})
+var sUpdateDataSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataSourceResponse, Members: &mUpdateDataSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceResponse})
+var sUpdateDataSourceResponse_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataSourceResponse_dataSource})
+var sUpdateDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameRequest, Members: &mUpdateDomainNameRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainNameRequest})
+var sUpdateDomainNameRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainNameRequest_domainName})
+var sUpdateDomainNameRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainNameRequest_description})
+var sUpdateDomainNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameResponse, Members: &mUpdateDomainNameResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainNameResponse})
+var sUpdateDomainNameResponse_domainNameConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainNameConfig", ID: &iDomainNameConfig, Members: &mDomainNameConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainNameResponse_domainNameConfig})
+var sUpdateFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFunctionRequest, Members: &mUpdateFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFunctionRequest})
+var sUpdateFunctionRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_apiId})
+var sUpdateFunctionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_name})
+var sUpdateFunctionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_description})
+var sUpdateFunctionRequest_functionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionId", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_functionId})
+var sUpdateFunctionRequest_dataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_dataSourceName})
+var sUpdateFunctionRequest_requestMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_requestMappingTemplate})
+var sUpdateFunctionRequest_responseMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_responseMappingTemplate})
+var sUpdateFunctionRequest_functionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_functionVersion})
+var sUpdateFunctionRequest_syncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncConfig", ID: &iSyncConfig, Members: &mSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFunctionRequest_syncConfig})
+var sUpdateFunctionRequest_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &eUpdateFunctionRequest_maxBatchSize})
+var sUpdateFunctionRequest_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFunctionRequest_runtime})
+var sUpdateFunctionRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eUpdateFunctionRequest_code})
+var sUpdateFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFunctionResponse, Members: &mUpdateFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFunctionResponse})
+var sUpdateFunctionResponse_functionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionConfiguration", ID: &iFunctionConfiguration, Members: &mFunctionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFunctionResponse_functionConfiguration})
+var sUpdateGraphqlApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGraphqlApiRequest, Members: &mUpdateGraphqlApiRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiRequest})
+var sUpdateGraphqlApiRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateGraphqlApiRequest_apiId})
+var sUpdateGraphqlApiRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateGraphqlApiRequest_name})
+var sUpdateGraphqlApiRequest_logConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfig", ID: &iLogConfig, Members: &mLogConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiRequest_logConfig})
+var sUpdateGraphqlApiRequest_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateGraphqlApiRequest_authenticationType})
+var sUpdateGraphqlApiRequest_userPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolConfig", ID: &iUserPoolConfig, Members: &mUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiRequest_userPoolConfig})
+var sUpdateGraphqlApiRequest_openIDConnectConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIDConnectConfig", ID: &iOpenIDConnectConfig, Members: &mOpenIDConnectConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiRequest_openIDConnectConfig})
+var sUpdateGraphqlApiRequest_additionalAuthenticationProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalAuthenticationProviders", ID: &i_AdditionalAuthenticationProviders, Members: &m_AdditionalAuthenticationProviders, Type: smithy.ShapeTypeList, Ext: &eUpdateGraphqlApiRequest_additionalAuthenticationProviders})
+var sUpdateGraphqlApiRequest_xrayEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xrayEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateGraphqlApiRequest_xrayEnabled})
+var sUpdateGraphqlApiRequest_lambdaAuthorizerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaAuthorizerConfig", ID: &iLambdaAuthorizerConfig, Members: &mLambdaAuthorizerConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiRequest_lambdaAuthorizerConfig})
+var sUpdateGraphqlApiRequest_mergedApiExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiExecutionRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateGraphqlApiRequest_mergedApiExecutionRoleArn})
+var sUpdateGraphqlApiRequest_ownerContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerContact", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateGraphqlApiRequest_ownerContact})
+var sUpdateGraphqlApiRequest_introspectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "introspectionConfig", ID: &iGraphQLApiIntrospectionConfig, Members: &mGraphQLApiIntrospectionConfig, Type: smithy.ShapeTypeEnum, Ext: &eUpdateGraphqlApiRequest_introspectionConfig})
+var sUpdateGraphqlApiRequest_queryDepthLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDepthLimit", ID: &i_QueryDepthLimit, Type: smithy.ShapeTypeInteger, Ext: &eUpdateGraphqlApiRequest_queryDepthLimit})
+var sUpdateGraphqlApiRequest_resolverCountLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolverCountLimit", ID: &i_ResolverCountLimit, Type: smithy.ShapeTypeInteger, Ext: &eUpdateGraphqlApiRequest_resolverCountLimit})
+var sUpdateGraphqlApiRequest_enhancedMetricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enhancedMetricsConfig", ID: &iEnhancedMetricsConfig, Members: &mEnhancedMetricsConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiRequest_enhancedMetricsConfig})
+var sUpdateGraphqlApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGraphqlApiResponse, Members: &mUpdateGraphqlApiResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiResponse})
+var sUpdateGraphqlApiResponse_graphqlApi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "graphqlApi", ID: &iGraphqlApi, Members: &mGraphqlApi, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGraphqlApiResponse_graphqlApi})
+var sUpdateResolverRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResolverRequest, Members: &mUpdateResolverRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResolverRequest})
+var sUpdateResolverRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateResolverRequest_apiId})
+var sUpdateResolverRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateResolverRequest_typeName})
+var sUpdateResolverRequest_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateResolverRequest_fieldName})
+var sUpdateResolverRequest_dataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateResolverRequest_dataSourceName})
+var sUpdateResolverRequest_requestMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eUpdateResolverRequest_requestMappingTemplate})
+var sUpdateResolverRequest_responseMappingTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseMappingTemplate", ID: &i_MappingTemplate, Type: smithy.ShapeTypeString, Ext: &eUpdateResolverRequest_responseMappingTemplate})
+var sUpdateResolverRequest_kind = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kind", ID: &iResolverKind, Members: &mResolverKind, Type: smithy.ShapeTypeEnum, Ext: &eUpdateResolverRequest_kind})
+var sUpdateResolverRequest_pipelineConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineConfig", ID: &iPipelineConfig, Members: &mPipelineConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResolverRequest_pipelineConfig})
+var sUpdateResolverRequest_syncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncConfig", ID: &iSyncConfig, Members: &mSyncConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResolverRequest_syncConfig})
+var sUpdateResolverRequest_cachingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cachingConfig", ID: &iCachingConfig, Members: &mCachingConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResolverRequest_cachingConfig})
+var sUpdateResolverRequest_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &eUpdateResolverRequest_maxBatchSize})
+var sUpdateResolverRequest_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &iAppSyncRuntime, Members: &mAppSyncRuntime, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResolverRequest_runtime})
+var sUpdateResolverRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eUpdateResolverRequest_code})
+var sUpdateResolverRequest_metricsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsConfig", ID: &iResolverLevelMetricsConfig, Members: &mResolverLevelMetricsConfig, Type: smithy.ShapeTypeEnum, Ext: &eUpdateResolverRequest_metricsConfig})
+var sUpdateResolverResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResolverResponse, Members: &mUpdateResolverResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResolverResponse})
+var sUpdateResolverResponse_resolver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolver", ID: &iResolver, Members: &mResolver, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResolverResponse_resolver})
+var sUpdateSourceApiAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSourceApiAssociationRequest, Members: &mUpdateSourceApiAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceApiAssociationRequest})
+var sUpdateSourceApiAssociationRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateSourceApiAssociationRequest_associationId})
+var sUpdateSourceApiAssociationRequest_mergedApiIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedApiIdentifier", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateSourceApiAssociationRequest_mergedApiIdentifier})
+var sUpdateSourceApiAssociationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateSourceApiAssociationRequest_description})
+var sUpdateSourceApiAssociationRequest_sourceApiAssociationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociationConfig", ID: &iSourceApiAssociationConfig, Members: &mSourceApiAssociationConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceApiAssociationRequest_sourceApiAssociationConfig})
+var sUpdateSourceApiAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSourceApiAssociationResponse, Members: &mUpdateSourceApiAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceApiAssociationResponse})
+var sUpdateSourceApiAssociationResponse_sourceApiAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceApiAssociation", ID: &iSourceApiAssociation, Members: &mSourceApiAssociation, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSourceApiAssociationResponse_sourceApiAssociation})
+var sUpdateTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTypeRequest, Members: &mUpdateTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTypeRequest})
+var sUpdateTypeRequest_apiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiId", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateTypeRequest_apiId})
+var sUpdateTypeRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_ResourceName, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUpdateTypeRequest_typeName})
+var sUpdateTypeRequest_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateTypeRequest_definition})
+var sUpdateTypeRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iTypeDefinitionFormat, Members: &mTypeDefinitionFormat, Type: smithy.ShapeTypeEnum, Ext: &eUpdateTypeRequest_format})
+var sUpdateTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTypeResponse, Members: &mUpdateTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTypeResponse})
+var sUpdateTypeResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTypeResponse_type})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	AuthenticationType_API_KEY = AuthenticationType.AddMember("API_KEY", smithyprelude.Unit)
-
-	AuthenticationType_AWS_IAM = AuthenticationType.AddMember("AWS_IAM", smithyprelude.Unit)
-
-	AuthenticationType_AMAZON_COGNITO_USER_POOLS = AuthenticationType.AddMember("AMAZON_COGNITO_USER_POOLS", smithyprelude.Unit)
-
-	AuthenticationType_OPENID_CONNECT = AuthenticationType.AddMember("OPENID_CONNECT", smithyprelude.Unit)
-
-	AuthenticationType_AWS_LAMBDA = AuthenticationType.AddMember("AWS_LAMBDA", smithyprelude.Unit)
-
-	OpenIDConnectConfig_issuer = OpenIDConnectConfig.AddMember("issuer", _String)
-
-	OpenIDConnectConfig_clientId = OpenIDConnectConfig.AddMember("clientId", _String)
-
-	OpenIDConnectConfig_iatTTL = OpenIDConnectConfig.AddMember("iatTTL", _Long)
-
-	OpenIDConnectConfig_authTTL = OpenIDConnectConfig.AddMember("authTTL", _Long)
-
-	CognitoUserPoolConfig_userPoolId = CognitoUserPoolConfig.AddMember("userPoolId", _String)
-
-	CognitoUserPoolConfig_awsRegion = CognitoUserPoolConfig.AddMember("awsRegion", _String)
-
-	CognitoUserPoolConfig_appIdClientRegex = CognitoUserPoolConfig.AddMember("appIdClientRegex", _String)
-
-	LambdaAuthorizerConfig_authorizerResultTtlInSeconds = LambdaAuthorizerConfig.AddMember("authorizerResultTtlInSeconds", _TTL)
-
-	LambdaAuthorizerConfig_authorizerUri = LambdaAuthorizerConfig.AddMember("authorizerUri", _String)
-
-	LambdaAuthorizerConfig_identityValidationExpression = LambdaAuthorizerConfig.AddMember("identityValidationExpression", _String)
-
-	AdditionalAuthenticationProvider_authenticationType = AdditionalAuthenticationProvider.AddMember("authenticationType", AuthenticationType)
-
-	AdditionalAuthenticationProvider_openIDConnectConfig = AdditionalAuthenticationProvider.AddMember("openIDConnectConfig", OpenIDConnectConfig)
-
-	AdditionalAuthenticationProvider_userPoolConfig = AdditionalAuthenticationProvider.AddMember("userPoolConfig", CognitoUserPoolConfig)
-
-	AdditionalAuthenticationProvider_lambdaAuthorizerConfig = AdditionalAuthenticationProvider.AddMember("lambdaAuthorizerConfig", LambdaAuthorizerConfig)
-
-	_AdditionalAuthenticationProviders_member = _AdditionalAuthenticationProviders.AddMember("member", AdditionalAuthenticationProvider)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	_MapOfStringToString_key = _MapOfStringToString.AddMember("key", _String)
-
-	_MapOfStringToString_value = _MapOfStringToString.AddMember("value", _String)
-
-	CognitoConfig_userPoolId = CognitoConfig.AddMember("userPoolId", _String)
-
-	CognitoConfig_awsRegion = CognitoConfig.AddMember("awsRegion", _String)
-
-	CognitoConfig_appIdClientRegex = CognitoConfig.AddMember("appIdClientRegex", _String)
-
-	AuthProvider_authType = AuthProvider.AddMember("authType", AuthenticationType)
-
-	AuthProvider_cognitoConfig = AuthProvider.AddMember("cognitoConfig", CognitoConfig)
-
-	AuthProvider_openIDConnectConfig = AuthProvider.AddMember("openIDConnectConfig", OpenIDConnectConfig)
-
-	AuthProvider_lambdaAuthorizerConfig = AuthProvider.AddMember("lambdaAuthorizerConfig", LambdaAuthorizerConfig)
-
-	_AuthProviders_member = _AuthProviders.AddMember("member", AuthProvider)
-
-	AuthMode_authType = AuthMode.AddMember("authType", AuthenticationType)
-
-	_AuthModes_member = _AuthModes.AddMember("member", AuthMode)
-
-	EventLogLevel_NONE = EventLogLevel.AddMember("NONE", smithyprelude.Unit)
-
-	EventLogLevel_ERROR = EventLogLevel.AddMember("ERROR", smithyprelude.Unit)
-
-	EventLogLevel_ALL = EventLogLevel.AddMember("ALL", smithyprelude.Unit)
-
-	EventLogLevel_INFO = EventLogLevel.AddMember("INFO", smithyprelude.Unit)
-
-	EventLogLevel_DEBUG = EventLogLevel.AddMember("DEBUG", smithyprelude.Unit)
-
-	EventLogConfig_logLevel = EventLogConfig.AddMember("logLevel", EventLogLevel)
-
-	EventLogConfig_cloudWatchLogsRoleArn = EventLogConfig.AddMember("cloudWatchLogsRoleArn", _String)
-
-	EventConfig_authProviders = EventConfig.AddMember("authProviders", _AuthProviders)
-
-	EventConfig_connectionAuthModes = EventConfig.AddMember("connectionAuthModes", _AuthModes)
-
-	EventConfig_defaultPublishAuthModes = EventConfig.AddMember("defaultPublishAuthModes", _AuthModes)
-
-	EventConfig_defaultSubscribeAuthModes = EventConfig.AddMember("defaultSubscribeAuthModes", _AuthModes)
-
-	EventConfig_logConfig = EventConfig.AddMember("logConfig", EventLogConfig)
-
-	Api_apiId = Api.AddMember("apiId", _String)
-
-	Api_name = Api.AddMember("name", _ApiName)
-
-	Api_ownerContact = Api.AddMember("ownerContact", _OwnerContact)
-
-	Api_tags = Api.AddMember("tags", _TagMap)
-
-	Api_dns = Api.AddMember("dns", _MapOfStringToString)
-
-	Api_apiArn = Api.AddMember("apiArn", _String)
-
-	Api_created = Api.AddMember("created", _Timestamp)
-
-	Api_xrayEnabled = Api.AddMember("xrayEnabled", _Boolean)
-
-	Api_wafWebAclArn = Api.AddMember("wafWebAclArn", _String)
-
-	Api_eventConfig = Api.AddMember("eventConfig", EventConfig)
-
-	AssociationStatus_Processing = AssociationStatus.AddMember("Processing", smithyprelude.Unit)
-
-	AssociationStatus_Failed = AssociationStatus.AddMember("Failed", smithyprelude.Unit)
-
-	AssociationStatus_Success = AssociationStatus.AddMember("Success", smithyprelude.Unit)
-
-	ApiAssociation_domainName = ApiAssociation.AddMember("domainName", _DomainName)
-
-	ApiAssociation_apiId = ApiAssociation.AddMember("apiId", _String)
-
-	ApiAssociation_associationStatus = ApiAssociation.AddMember("associationStatus", AssociationStatus)
-
-	ApiAssociation_deploymentDetail = ApiAssociation.AddMember("deploymentDetail", _String)
-
-	ApiCachingBehavior_FULL_REQUEST_CACHING = ApiCachingBehavior.AddMember("FULL_REQUEST_CACHING", smithyprelude.Unit)
-
-	ApiCachingBehavior_PER_RESOLVER_CACHING = ApiCachingBehavior.AddMember("PER_RESOLVER_CACHING", smithyprelude.Unit)
-
-	ApiCachingBehavior_OPERATION_LEVEL_CACHING = ApiCachingBehavior.AddMember("OPERATION_LEVEL_CACHING", smithyprelude.Unit)
-
-	ApiCacheType_T2_SMALL = ApiCacheType.AddMember("T2_SMALL", smithyprelude.Unit)
-
-	ApiCacheType_T2_MEDIUM = ApiCacheType.AddMember("T2_MEDIUM", smithyprelude.Unit)
-
-	ApiCacheType_R4_LARGE = ApiCacheType.AddMember("R4_LARGE", smithyprelude.Unit)
-
-	ApiCacheType_R4_XLARGE = ApiCacheType.AddMember("R4_XLARGE", smithyprelude.Unit)
-
-	ApiCacheType_R4_2XLARGE = ApiCacheType.AddMember("R4_2XLARGE", smithyprelude.Unit)
-
-	ApiCacheType_R4_4XLARGE = ApiCacheType.AddMember("R4_4XLARGE", smithyprelude.Unit)
-
-	ApiCacheType_R4_8XLARGE = ApiCacheType.AddMember("R4_8XLARGE", smithyprelude.Unit)
-
-	ApiCacheType_SMALL = ApiCacheType.AddMember("SMALL", smithyprelude.Unit)
-
-	ApiCacheType_MEDIUM = ApiCacheType.AddMember("MEDIUM", smithyprelude.Unit)
-
-	ApiCacheType_LARGE = ApiCacheType.AddMember("LARGE", smithyprelude.Unit)
-
-	ApiCacheType_XLARGE = ApiCacheType.AddMember("XLARGE", smithyprelude.Unit)
-
-	ApiCacheType_LARGE_2X = ApiCacheType.AddMember("LARGE_2X", smithyprelude.Unit)
-
-	ApiCacheType_LARGE_4X = ApiCacheType.AddMember("LARGE_4X", smithyprelude.Unit)
-
-	ApiCacheType_LARGE_8X = ApiCacheType.AddMember("LARGE_8X", smithyprelude.Unit)
-
-	ApiCacheType_LARGE_12X = ApiCacheType.AddMember("LARGE_12X", smithyprelude.Unit)
-
-	ApiCacheStatus_AVAILABLE = ApiCacheStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ApiCacheStatus_CREATING = ApiCacheStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ApiCacheStatus_DELETING = ApiCacheStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ApiCacheStatus_MODIFYING = ApiCacheStatus.AddMember("MODIFYING", smithyprelude.Unit)
-
-	ApiCacheStatus_FAILED = ApiCacheStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CacheHealthMetricsConfig_ENABLED = CacheHealthMetricsConfig.AddMember("ENABLED", smithyprelude.Unit)
-
-	CacheHealthMetricsConfig_DISABLED = CacheHealthMetricsConfig.AddMember("DISABLED", smithyprelude.Unit)
-
-	ApiCache_ttl = ApiCache.AddMember("ttl", _Long)
-
-	ApiCache_apiCachingBehavior = ApiCache.AddMember("apiCachingBehavior", ApiCachingBehavior)
-
-	ApiCache_transitEncryptionEnabled = ApiCache.AddMember("transitEncryptionEnabled", _Boolean)
-
-	ApiCache_atRestEncryptionEnabled = ApiCache.AddMember("atRestEncryptionEnabled", _Boolean)
-
-	ApiCache_type = ApiCache.AddMember("type", ApiCacheType)
-
-	ApiCache_status = ApiCache.AddMember("status", ApiCacheStatus)
-
-	ApiCache_healthMetricsConfig = ApiCache.AddMember("healthMetricsConfig", CacheHealthMetricsConfig)
-
-	ApiKey_id = ApiKey.AddMember("id", _String)
-
-	ApiKey_description = ApiKey.AddMember("description", _String)
-
-	ApiKey_expires = ApiKey.AddMember("expires", _Long)
-
-	ApiKey_deletes = ApiKey.AddMember("deletes", _Long)
-
-	ApiKeyLimitExceededException_message = ApiKeyLimitExceededException.AddMember("message", _String)
-
-	_ApiKeys_member = _ApiKeys.AddMember("member", ApiKey)
-
-	ApiKeyValidityOutOfBoundsException_message = ApiKeyValidityOutOfBoundsException.AddMember("message", _String)
-
-	ApiLimitExceededException_message = ApiLimitExceededException.AddMember("message", _String)
-
-	_Apis_member = _Apis.AddMember("member", Api)
-
-	RuntimeName_APPSYNC_JS = RuntimeName.AddMember("APPSYNC_JS", smithyprelude.Unit)
-
-	AppSyncRuntime_name = AppSyncRuntime.AddMember("name", RuntimeName)
-
-	AppSyncRuntime_runtimeVersion = AppSyncRuntime.AddMember("runtimeVersion", _String)
-
-	AuthorizationType_AWS_IAM = AuthorizationType.AddMember("AWS_IAM", smithyprelude.Unit)
-
-	AwsIamConfig_signingRegion = AwsIamConfig.AddMember("signingRegion", _String)
-
-	AwsIamConfig_signingServiceName = AwsIamConfig.AddMember("signingServiceName", _String)
-
-	AuthorizationConfig_authorizationType = AuthorizationConfig.AddMember("authorizationType", AuthorizationType)
-
-	AuthorizationConfig_awsIamConfig = AuthorizationConfig.AddMember("awsIamConfig", AwsIamConfig)
-
-	CodeErrorLocation_line = CodeErrorLocation.AddMember("line", _CodeErrorLine)
-
-	CodeErrorLocation_column = CodeErrorLocation.AddMember("column", _CodeErrorColumn)
-
-	CodeErrorLocation_span = CodeErrorLocation.AddMember("span", _CodeErrorSpan)
-
-	CodeError_errorType = CodeError.AddMember("errorType", _String)
-
-	CodeError_value = CodeError.AddMember("value", _String)
-
-	CodeError_location = CodeError.AddMember("location", CodeErrorLocation)
-
-	_CodeErrors_member = _CodeErrors.AddMember("member", CodeError)
-
-	BadRequestDetail_codeErrors = BadRequestDetail.AddMember("codeErrors", _CodeErrors)
-
-	BadRequestReason_CODE_ERROR = BadRequestReason.AddMember("CODE_ERROR", smithyprelude.Unit)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _ErrorMessage)
-
-	BadRequestException_reason = BadRequestException.AddMember("reason", BadRequestReason)
-
-	BadRequestException_detail = BadRequestException.AddMember("detail", BadRequestDetail)
-
-	_CachingKeys_member = _CachingKeys.AddMember("member", _String)
-
-	CachingConfig_ttl = CachingConfig.AddMember("ttl", _Long)
-
-	CachingConfig_cachingKeys = CachingConfig.AddMember("cachingKeys", _CachingKeys)
-
-	HandlerBehavior_CODE = HandlerBehavior.AddMember("CODE", smithyprelude.Unit)
-
-	HandlerBehavior_DIRECT = HandlerBehavior.AddMember("DIRECT", smithyprelude.Unit)
-
-	InvokeType_REQUEST_RESPONSE = InvokeType.AddMember("REQUEST_RESPONSE", smithyprelude.Unit)
-
-	InvokeType_EVENT = InvokeType.AddMember("EVENT", smithyprelude.Unit)
-
-	LambdaConfig_invokeType = LambdaConfig.AddMember("invokeType", InvokeType)
-
-	Integration_dataSourceName = Integration.AddMember("dataSourceName", _String)
-
-	Integration_lambdaConfig = Integration.AddMember("lambdaConfig", LambdaConfig)
-
-	HandlerConfig_behavior = HandlerConfig.AddMember("behavior", HandlerBehavior)
-
-	HandlerConfig_integration = HandlerConfig.AddMember("integration", Integration)
-
-	HandlerConfigs_onPublish = HandlerConfigs.AddMember("onPublish", HandlerConfig)
-
-	HandlerConfigs_onSubscribe = HandlerConfigs.AddMember("onSubscribe", HandlerConfig)
-
-	ChannelNamespace_apiId = ChannelNamespace.AddMember("apiId", _String)
-
-	ChannelNamespace_name = ChannelNamespace.AddMember("name", _Namespace)
-
-	ChannelNamespace_subscribeAuthModes = ChannelNamespace.AddMember("subscribeAuthModes", _AuthModes)
-
-	ChannelNamespace_publishAuthModes = ChannelNamespace.AddMember("publishAuthModes", _AuthModes)
-
-	ChannelNamespace_codeHandlers = ChannelNamespace.AddMember("codeHandlers", _Code)
-
-	ChannelNamespace_tags = ChannelNamespace.AddMember("tags", _TagMap)
-
-	ChannelNamespace_channelNamespaceArn = ChannelNamespace.AddMember("channelNamespaceArn", _String)
-
-	ChannelNamespace_created = ChannelNamespace.AddMember("created", _Timestamp)
-
-	ChannelNamespace_lastModified = ChannelNamespace.AddMember("lastModified", _Timestamp)
-
-	ChannelNamespace_handlerConfigs = ChannelNamespace.AddMember("handlerConfigs", HandlerConfigs)
-
-	_ChannelNamespaces_member = _ChannelNamespaces.AddMember("member", ChannelNamespace)
-
-	ConcurrentModificationException_message = ConcurrentModificationException.AddMember("message", _ErrorMessage)
-
-	ConflictDetectionType_VERSION = ConflictDetectionType.AddMember("VERSION", smithyprelude.Unit)
-
-	ConflictDetectionType_NONE = ConflictDetectionType.AddMember("NONE", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ConflictHandlerType_OPTIMISTIC_CONCURRENCY = ConflictHandlerType.AddMember("OPTIMISTIC_CONCURRENCY", smithyprelude.Unit)
-
-	ConflictHandlerType_LAMBDA = ConflictHandlerType.AddMember("LAMBDA", smithyprelude.Unit)
-
-	ConflictHandlerType_AUTOMERGE = ConflictHandlerType.AddMember("AUTOMERGE", smithyprelude.Unit)
-
-	ConflictHandlerType_NONE = ConflictHandlerType.AddMember("NONE", smithyprelude.Unit)
-
-	DataSourceType_AWS_LAMBDA = DataSourceType.AddMember("AWS_LAMBDA", smithyprelude.Unit)
-
-	DataSourceType_AMAZON_DYNAMODB = DataSourceType.AddMember("AMAZON_DYNAMODB", smithyprelude.Unit)
-
-	DataSourceType_AMAZON_ELASTICSEARCH = DataSourceType.AddMember("AMAZON_ELASTICSEARCH", smithyprelude.Unit)
-
-	DataSourceType_NONE = DataSourceType.AddMember("NONE", smithyprelude.Unit)
-
-	DataSourceType_HTTP = DataSourceType.AddMember("HTTP", smithyprelude.Unit)
-
-	DataSourceType_RELATIONAL_DATABASE = DataSourceType.AddMember("RELATIONAL_DATABASE", smithyprelude.Unit)
-
-	DataSourceType_AMAZON_OPENSEARCH_SERVICE = DataSourceType.AddMember("AMAZON_OPENSEARCH_SERVICE", smithyprelude.Unit)
-
-	DataSourceType_AMAZON_EVENTBRIDGE = DataSourceType.AddMember("AMAZON_EVENTBRIDGE", smithyprelude.Unit)
-
-	DataSourceType_AMAZON_BEDROCK_RUNTIME = DataSourceType.AddMember("AMAZON_BEDROCK_RUNTIME", smithyprelude.Unit)
-
-	DeltaSyncConfig_baseTableTTL = DeltaSyncConfig.AddMember("baseTableTTL", _Long)
-
-	DeltaSyncConfig_deltaSyncTableName = DeltaSyncConfig.AddMember("deltaSyncTableName", _String)
-
-	DeltaSyncConfig_deltaSyncTableTTL = DeltaSyncConfig.AddMember("deltaSyncTableTTL", _Long)
-
-	DynamodbDataSourceConfig_tableName = DynamodbDataSourceConfig.AddMember("tableName", _String)
-
-	DynamodbDataSourceConfig_awsRegion = DynamodbDataSourceConfig.AddMember("awsRegion", _String)
-
-	DynamodbDataSourceConfig_useCallerCredentials = DynamodbDataSourceConfig.AddMember("useCallerCredentials", _Boolean)
-
-	DynamodbDataSourceConfig_deltaSyncConfig = DynamodbDataSourceConfig.AddMember("deltaSyncConfig", DeltaSyncConfig)
-
-	DynamodbDataSourceConfig_versioned = DynamodbDataSourceConfig.AddMember("versioned", _Boolean)
-
-	LambdaDataSourceConfig_lambdaFunctionArn = LambdaDataSourceConfig.AddMember("lambdaFunctionArn", _String)
-
-	ElasticsearchDataSourceConfig_endpoint = ElasticsearchDataSourceConfig.AddMember("endpoint", _String)
-
-	ElasticsearchDataSourceConfig_awsRegion = ElasticsearchDataSourceConfig.AddMember("awsRegion", _String)
-
-	OpenSearchServiceDataSourceConfig_endpoint = OpenSearchServiceDataSourceConfig.AddMember("endpoint", _String)
-
-	OpenSearchServiceDataSourceConfig_awsRegion = OpenSearchServiceDataSourceConfig.AddMember("awsRegion", _String)
-
-	HttpDataSourceConfig_endpoint = HttpDataSourceConfig.AddMember("endpoint", _String)
-
-	HttpDataSourceConfig_authorizationConfig = HttpDataSourceConfig.AddMember("authorizationConfig", AuthorizationConfig)
-
-	RelationalDatabaseSourceType_RDS_HTTP_ENDPOINT = RelationalDatabaseSourceType.AddMember("RDS_HTTP_ENDPOINT", smithyprelude.Unit)
-
-	RdsHttpEndpointConfig_awsRegion = RdsHttpEndpointConfig.AddMember("awsRegion", _String)
-
-	RdsHttpEndpointConfig_dbClusterIdentifier = RdsHttpEndpointConfig.AddMember("dbClusterIdentifier", _String)
-
-	RdsHttpEndpointConfig_databaseName = RdsHttpEndpointConfig.AddMember("databaseName", _String)
-
-	RdsHttpEndpointConfig_schema = RdsHttpEndpointConfig.AddMember("schema", _String)
-
-	RdsHttpEndpointConfig_awsSecretStoreArn = RdsHttpEndpointConfig.AddMember("awsSecretStoreArn", _String)
-
-	RelationalDatabaseDataSourceConfig_relationalDatabaseSourceType = RelationalDatabaseDataSourceConfig.AddMember("relationalDatabaseSourceType", RelationalDatabaseSourceType)
-
-	RelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig = RelationalDatabaseDataSourceConfig.AddMember("rdsHttpEndpointConfig", RdsHttpEndpointConfig)
-
-	EventBridgeDataSourceConfig_eventBusArn = EventBridgeDataSourceConfig.AddMember("eventBusArn", _String)
-
-	DataSourceLevelMetricsConfig_ENABLED = DataSourceLevelMetricsConfig.AddMember("ENABLED", smithyprelude.Unit)
-
-	DataSourceLevelMetricsConfig_DISABLED = DataSourceLevelMetricsConfig.AddMember("DISABLED", smithyprelude.Unit)
-
-	DataSource_dataSourceArn = DataSource.AddMember("dataSourceArn", _String)
-
-	DataSource_name = DataSource.AddMember("name", _ResourceName)
-
-	DataSource_description = DataSource.AddMember("description", _String)
-
-	DataSource_type = DataSource.AddMember("type", DataSourceType)
-
-	DataSource_serviceRoleArn = DataSource.AddMember("serviceRoleArn", _String)
-
-	DataSource_dynamodbConfig = DataSource.AddMember("dynamodbConfig", DynamodbDataSourceConfig)
-
-	DataSource_lambdaConfig = DataSource.AddMember("lambdaConfig", LambdaDataSourceConfig)
-
-	DataSource_elasticsearchConfig = DataSource.AddMember("elasticsearchConfig", ElasticsearchDataSourceConfig)
-
-	DataSource_openSearchServiceConfig = DataSource.AddMember("openSearchServiceConfig", OpenSearchServiceDataSourceConfig)
-
-	DataSource_httpConfig = DataSource.AddMember("httpConfig", HttpDataSourceConfig)
-
-	DataSource_relationalDatabaseConfig = DataSource.AddMember("relationalDatabaseConfig", RelationalDatabaseDataSourceConfig)
-
-	DataSource_eventBridgeConfig = DataSource.AddMember("eventBridgeConfig", EventBridgeDataSourceConfig)
-
-	DataSource_metricsConfig = DataSource.AddMember("metricsConfig", DataSourceLevelMetricsConfig)
-
-	_DataSourceIntrospectionModelFieldTypeValues_member = _DataSourceIntrospectionModelFieldTypeValues.AddMember("member", _String)
-
-	DataSourceIntrospectionModelFieldType_kind = DataSourceIntrospectionModelFieldType.AddMember("kind", _String)
-
-	DataSourceIntrospectionModelFieldType_name = DataSourceIntrospectionModelFieldType.AddMember("name", _String)
-
-	DataSourceIntrospectionModelFieldType_type = DataSourceIntrospectionModelFieldType.AddMember("type", DataSourceIntrospectionModelFieldType)
-
-	DataSourceIntrospectionModelFieldType_values = DataSourceIntrospectionModelFieldType.AddMember("values", _DataSourceIntrospectionModelFieldTypeValues)
-
-	DataSourceIntrospectionModelField_name = DataSourceIntrospectionModelField.AddMember("name", _String)
-
-	DataSourceIntrospectionModelField_type = DataSourceIntrospectionModelField.AddMember("type", DataSourceIntrospectionModelFieldType)
-
-	DataSourceIntrospectionModelField_length = DataSourceIntrospectionModelField.AddMember("length", _Long)
-
-	_DataSourceIntrospectionModelFields_member = _DataSourceIntrospectionModelFields.AddMember("member", DataSourceIntrospectionModelField)
-
-	_DataSourceIntrospectionModelIndexFields_member = _DataSourceIntrospectionModelIndexFields.AddMember("member", _String)
-
-	DataSourceIntrospectionModelIndex_name = DataSourceIntrospectionModelIndex.AddMember("name", _String)
-
-	DataSourceIntrospectionModelIndex_fields = DataSourceIntrospectionModelIndex.AddMember("fields", _DataSourceIntrospectionModelIndexFields)
-
-	_DataSourceIntrospectionModelIndexes_member = _DataSourceIntrospectionModelIndexes.AddMember("member", DataSourceIntrospectionModelIndex)
-
-	DataSourceIntrospectionModel_name = DataSourceIntrospectionModel.AddMember("name", _String)
-
-	DataSourceIntrospectionModel_fields = DataSourceIntrospectionModel.AddMember("fields", _DataSourceIntrospectionModelFields)
-
-	DataSourceIntrospectionModel_primaryKey = DataSourceIntrospectionModel.AddMember("primaryKey", DataSourceIntrospectionModelIndex)
-
-	DataSourceIntrospectionModel_indexes = DataSourceIntrospectionModel.AddMember("indexes", _DataSourceIntrospectionModelIndexes)
-
-	DataSourceIntrospectionModel_sdl = DataSourceIntrospectionModel.AddMember("sdl", _String)
-
-	_DataSourceIntrospectionModels_member = _DataSourceIntrospectionModels.AddMember("member", DataSourceIntrospectionModel)
-
-	DataSourceIntrospectionResult_models = DataSourceIntrospectionResult.AddMember("models", _DataSourceIntrospectionModels)
-
-	DataSourceIntrospectionResult_nextToken = DataSourceIntrospectionResult.AddMember("nextToken", _PaginationToken)
-
-	DataSourceIntrospectionStatus_PROCESSING = DataSourceIntrospectionStatus.AddMember("PROCESSING", smithyprelude.Unit)
-
-	DataSourceIntrospectionStatus_FAILED = DataSourceIntrospectionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DataSourceIntrospectionStatus_SUCCESS = DataSourceIntrospectionStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	DataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS = DataSourceLevelMetricsBehavior.AddMember("FULL_REQUEST_DATA_SOURCE_METRICS", smithyprelude.Unit)
-
-	DataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS = DataSourceLevelMetricsBehavior.AddMember("PER_DATA_SOURCE_METRICS", smithyprelude.Unit)
-
-	_DataSources_member = _DataSources.AddMember("member", DataSource)
-
-	DefaultAction_ALLOW = DefaultAction.AddMember("ALLOW", smithyprelude.Unit)
-
-	DefaultAction_DENY = DefaultAction.AddMember("DENY", smithyprelude.Unit)
-
-	DomainNameConfig_domainName = DomainNameConfig.AddMember("domainName", _DomainName)
-
-	DomainNameConfig_description = DomainNameConfig.AddMember("description", _Description)
-
-	DomainNameConfig_certificateArn = DomainNameConfig.AddMember("certificateArn", _CertificateArn)
-
-	DomainNameConfig_appsyncDomainName = DomainNameConfig.AddMember("appsyncDomainName", _String)
-
-	DomainNameConfig_hostedZoneId = DomainNameConfig.AddMember("hostedZoneId", _String)
-
-	DomainNameConfig_tags = DomainNameConfig.AddMember("tags", _TagMap)
-
-	DomainNameConfig_domainNameArn = DomainNameConfig.AddMember("domainNameArn", _String)
-
-	_DomainNameConfigs_member = _DomainNameConfigs.AddMember("member", DomainNameConfig)
-
-	ResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS = ResolverLevelMetricsBehavior.AddMember("FULL_REQUEST_RESOLVER_METRICS", smithyprelude.Unit)
-
-	ResolverLevelMetricsBehavior_PER_RESOLVER_METRICS = ResolverLevelMetricsBehavior.AddMember("PER_RESOLVER_METRICS", smithyprelude.Unit)
-
-	OperationLevelMetricsConfig_ENABLED = OperationLevelMetricsConfig.AddMember("ENABLED", smithyprelude.Unit)
-
-	OperationLevelMetricsConfig_DISABLED = OperationLevelMetricsConfig.AddMember("DISABLED", smithyprelude.Unit)
-
-	EnhancedMetricsConfig_resolverLevelMetricsBehavior = EnhancedMetricsConfig.AddMember("resolverLevelMetricsBehavior", ResolverLevelMetricsBehavior)
-
-	EnhancedMetricsConfig_dataSourceLevelMetricsBehavior = EnhancedMetricsConfig.AddMember("dataSourceLevelMetricsBehavior", DataSourceLevelMetricsBehavior)
-
-	EnhancedMetricsConfig_operationLevelMetricsConfig = EnhancedMetricsConfig.AddMember("operationLevelMetricsConfig", OperationLevelMetricsConfig)
-
-	_EnvironmentVariableMap_key = _EnvironmentVariableMap.AddMember("key", _EnvironmentVariableKey)
-
-	_EnvironmentVariableMap_value = _EnvironmentVariableMap.AddMember("value", _EnvironmentVariableValue)
-
-	ErrorDetail_message = ErrorDetail.AddMember("message", _ErrorMessage)
-
-	EvaluateCodeErrorDetail_message = EvaluateCodeErrorDetail.AddMember("message", _ErrorMessage)
-
-	EvaluateCodeErrorDetail_codeErrors = EvaluateCodeErrorDetail.AddMember("codeErrors", _CodeErrors)
-
-	FieldLogLevel_NONE = FieldLogLevel.AddMember("NONE", smithyprelude.Unit)
-
-	FieldLogLevel_ERROR = FieldLogLevel.AddMember("ERROR", smithyprelude.Unit)
-
-	FieldLogLevel_ALL = FieldLogLevel.AddMember("ALL", smithyprelude.Unit)
-
-	FieldLogLevel_INFO = FieldLogLevel.AddMember("INFO", smithyprelude.Unit)
-
-	FieldLogLevel_DEBUG = FieldLogLevel.AddMember("DEBUG", smithyprelude.Unit)
-
-	LambdaConflictHandlerConfig_lambdaConflictHandlerArn = LambdaConflictHandlerConfig.AddMember("lambdaConflictHandlerArn", _String)
-
-	SyncConfig_conflictHandler = SyncConfig.AddMember("conflictHandler", ConflictHandlerType)
-
-	SyncConfig_conflictDetection = SyncConfig.AddMember("conflictDetection", ConflictDetectionType)
-
-	SyncConfig_lambdaConflictHandlerConfig = SyncConfig.AddMember("lambdaConflictHandlerConfig", LambdaConflictHandlerConfig)
-
-	FunctionConfiguration_functionId = FunctionConfiguration.AddMember("functionId", _String)
-
-	FunctionConfiguration_functionArn = FunctionConfiguration.AddMember("functionArn", _String)
-
-	FunctionConfiguration_name = FunctionConfiguration.AddMember("name", _ResourceName)
-
-	FunctionConfiguration_description = FunctionConfiguration.AddMember("description", _String)
-
-	FunctionConfiguration_dataSourceName = FunctionConfiguration.AddMember("dataSourceName", _ResourceName)
-
-	FunctionConfiguration_requestMappingTemplate = FunctionConfiguration.AddMember("requestMappingTemplate", _MappingTemplate)
-
-	FunctionConfiguration_responseMappingTemplate = FunctionConfiguration.AddMember("responseMappingTemplate", _MappingTemplate)
-
-	FunctionConfiguration_functionVersion = FunctionConfiguration.AddMember("functionVersion", _String)
-
-	FunctionConfiguration_syncConfig = FunctionConfiguration.AddMember("syncConfig", SyncConfig)
-
-	FunctionConfiguration_maxBatchSize = FunctionConfiguration.AddMember("maxBatchSize", _MaxBatchSize)
-
-	FunctionConfiguration_runtime = FunctionConfiguration.AddMember("runtime", AppSyncRuntime)
-
-	FunctionConfiguration_code = FunctionConfiguration.AddMember("code", _Code)
-
-	_Functions_member = _Functions.AddMember("member", FunctionConfiguration)
-
-	_FunctionsIds_member = _FunctionsIds.AddMember("member", _String)
-
-	LogConfig_fieldLogLevel = LogConfig.AddMember("fieldLogLevel", FieldLogLevel)
-
-	LogConfig_cloudWatchLogsRoleArn = LogConfig.AddMember("cloudWatchLogsRoleArn", _String)
-
-	LogConfig_excludeVerboseContent = LogConfig.AddMember("excludeVerboseContent", _Boolean)
-
-	UserPoolConfig_userPoolId = UserPoolConfig.AddMember("userPoolId", _String)
-
-	UserPoolConfig_awsRegion = UserPoolConfig.AddMember("awsRegion", _String)
-
-	UserPoolConfig_defaultAction = UserPoolConfig.AddMember("defaultAction", DefaultAction)
-
-	UserPoolConfig_appIdClientRegex = UserPoolConfig.AddMember("appIdClientRegex", _String)
-
-	GraphQLApiVisibility_GLOBAL = GraphQLApiVisibility.AddMember("GLOBAL", smithyprelude.Unit)
-
-	GraphQLApiVisibility_PRIVATE = GraphQLApiVisibility.AddMember("PRIVATE", smithyprelude.Unit)
-
-	GraphQLApiType_GRAPHQL = GraphQLApiType.AddMember("GRAPHQL", smithyprelude.Unit)
-
-	GraphQLApiType_MERGED = GraphQLApiType.AddMember("MERGED", smithyprelude.Unit)
-
-	GraphQLApiIntrospectionConfig_ENABLED = GraphQLApiIntrospectionConfig.AddMember("ENABLED", smithyprelude.Unit)
-
-	GraphQLApiIntrospectionConfig_DISABLED = GraphQLApiIntrospectionConfig.AddMember("DISABLED", smithyprelude.Unit)
-
-	GraphqlApi_name = GraphqlApi.AddMember("name", _ResourceName)
-
-	GraphqlApi_apiId = GraphqlApi.AddMember("apiId", _String)
-
-	GraphqlApi_authenticationType = GraphqlApi.AddMember("authenticationType", AuthenticationType)
-
-	GraphqlApi_logConfig = GraphqlApi.AddMember("logConfig", LogConfig)
-
-	GraphqlApi_userPoolConfig = GraphqlApi.AddMember("userPoolConfig", UserPoolConfig)
-
-	GraphqlApi_openIDConnectConfig = GraphqlApi.AddMember("openIDConnectConfig", OpenIDConnectConfig)
-
-	GraphqlApi_arn = GraphqlApi.AddMember("arn", _String)
-
-	GraphqlApi_uris = GraphqlApi.AddMember("uris", _MapOfStringToString)
-
-	GraphqlApi_tags = GraphqlApi.AddMember("tags", _TagMap)
-
-	GraphqlApi_additionalAuthenticationProviders = GraphqlApi.AddMember("additionalAuthenticationProviders", _AdditionalAuthenticationProviders)
-
-	GraphqlApi_xrayEnabled = GraphqlApi.AddMember("xrayEnabled", _Boolean)
-
-	GraphqlApi_wafWebAclArn = GraphqlApi.AddMember("wafWebAclArn", _String)
-
-	GraphqlApi_lambdaAuthorizerConfig = GraphqlApi.AddMember("lambdaAuthorizerConfig", LambdaAuthorizerConfig)
-
-	GraphqlApi_dns = GraphqlApi.AddMember("dns", _MapOfStringToString)
-
-	GraphqlApi_visibility = GraphqlApi.AddMember("visibility", GraphQLApiVisibility)
-
-	GraphqlApi_apiType = GraphqlApi.AddMember("apiType", GraphQLApiType)
-
-	GraphqlApi_mergedApiExecutionRoleArn = GraphqlApi.AddMember("mergedApiExecutionRoleArn", _String)
-
-	GraphqlApi_owner = GraphqlApi.AddMember("owner", _String)
-
-	GraphqlApi_ownerContact = GraphqlApi.AddMember("ownerContact", _String)
-
-	GraphqlApi_introspectionConfig = GraphqlApi.AddMember("introspectionConfig", GraphQLApiIntrospectionConfig)
-
-	GraphqlApi_queryDepthLimit = GraphqlApi.AddMember("queryDepthLimit", _QueryDepthLimit)
-
-	GraphqlApi_resolverCountLimit = GraphqlApi.AddMember("resolverCountLimit", _ResolverCountLimit)
-
-	GraphqlApi_enhancedMetricsConfig = GraphqlApi.AddMember("enhancedMetricsConfig", EnhancedMetricsConfig)
-
-	_GraphqlApis_member = _GraphqlApis.AddMember("member", GraphqlApi)
-
-	GraphQLSchemaException_message = GraphQLSchemaException.AddMember("message", _ErrorMessage)
-
-	InternalFailureException_message = InternalFailureException.AddMember("message", _String)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _String)
-
-	_Logs_member = _Logs.AddMember("member", _String)
-
-	MergeType_MANUAL_MERGE = MergeType.AddMember("MANUAL_MERGE", smithyprelude.Unit)
-
-	MergeType_AUTO_MERGE = MergeType.AddMember("AUTO_MERGE", smithyprelude.Unit)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _String)
-
-	OutputType_SDL = OutputType.AddMember("SDL", smithyprelude.Unit)
-
-	OutputType_JSON = OutputType.AddMember("JSON", smithyprelude.Unit)
-
-	Ownership_CURRENT_ACCOUNT = Ownership.AddMember("CURRENT_ACCOUNT", smithyprelude.Unit)
-
-	Ownership_OTHER_ACCOUNTS = Ownership.AddMember("OTHER_ACCOUNTS", smithyprelude.Unit)
-
-	PipelineConfig_functions = PipelineConfig.AddMember("functions", _FunctionsIds)
-
-	RdsDataApiConfig_resourceArn = RdsDataApiConfig.AddMember("resourceArn", _RdsDataApiConfigResourceArn)
-
-	RdsDataApiConfig_secretArn = RdsDataApiConfig.AddMember("secretArn", _RdsDataApiConfigSecretArn)
-
-	RdsDataApiConfig_databaseName = RdsDataApiConfig.AddMember("databaseName", _RdsDataApiConfigDatabaseName)
-
-	ResolverKind_UNIT = ResolverKind.AddMember("UNIT", smithyprelude.Unit)
-
-	ResolverKind_PIPELINE = ResolverKind.AddMember("PIPELINE", smithyprelude.Unit)
-
-	ResolverLevelMetricsConfig_ENABLED = ResolverLevelMetricsConfig.AddMember("ENABLED", smithyprelude.Unit)
-
-	ResolverLevelMetricsConfig_DISABLED = ResolverLevelMetricsConfig.AddMember("DISABLED", smithyprelude.Unit)
-
-	Resolver_typeName = Resolver.AddMember("typeName", _ResourceName)
-
-	Resolver_fieldName = Resolver.AddMember("fieldName", _ResourceName)
-
-	Resolver_dataSourceName = Resolver.AddMember("dataSourceName", _ResourceName)
-
-	Resolver_resolverArn = Resolver.AddMember("resolverArn", _String)
-
-	Resolver_requestMappingTemplate = Resolver.AddMember("requestMappingTemplate", _MappingTemplate)
-
-	Resolver_responseMappingTemplate = Resolver.AddMember("responseMappingTemplate", _MappingTemplate)
-
-	Resolver_kind = Resolver.AddMember("kind", ResolverKind)
-
-	Resolver_pipelineConfig = Resolver.AddMember("pipelineConfig", PipelineConfig)
-
-	Resolver_syncConfig = Resolver.AddMember("syncConfig", SyncConfig)
-
-	Resolver_cachingConfig = Resolver.AddMember("cachingConfig", CachingConfig)
-
-	Resolver_maxBatchSize = Resolver.AddMember("maxBatchSize", _MaxBatchSize)
-
-	Resolver_runtime = Resolver.AddMember("runtime", AppSyncRuntime)
-
-	Resolver_code = Resolver.AddMember("code", _Code)
-
-	Resolver_metricsConfig = Resolver.AddMember("metricsConfig", ResolverLevelMetricsConfig)
-
-	_Resolvers_member = _Resolvers.AddMember("member", Resolver)
-
-	SchemaStatus_Processing = SchemaStatus.AddMember("Processing", smithyprelude.Unit)
-
-	SchemaStatus_Active = SchemaStatus.AddMember("Active", smithyprelude.Unit)
-
-	SchemaStatus_Deleting = SchemaStatus.AddMember("Deleting", smithyprelude.Unit)
-
-	SchemaStatus_Failed = SchemaStatus.AddMember("Failed", smithyprelude.Unit)
-
-	SchemaStatus_Success = SchemaStatus.AddMember("Success", smithyprelude.Unit)
-
-	SchemaStatus_NotApplicable = SchemaStatus.AddMember("NotApplicable", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	SourceApiAssociationConfig_mergeType = SourceApiAssociationConfig.AddMember("mergeType", MergeType)
-
-	SourceApiAssociationStatus_MERGE_SCHEDULED = SourceApiAssociationStatus.AddMember("MERGE_SCHEDULED", smithyprelude.Unit)
-
-	SourceApiAssociationStatus_MERGE_FAILED = SourceApiAssociationStatus.AddMember("MERGE_FAILED", smithyprelude.Unit)
-
-	SourceApiAssociationStatus_MERGE_SUCCESS = SourceApiAssociationStatus.AddMember("MERGE_SUCCESS", smithyprelude.Unit)
-
-	SourceApiAssociationStatus_MERGE_IN_PROGRESS = SourceApiAssociationStatus.AddMember("MERGE_IN_PROGRESS", smithyprelude.Unit)
-
-	SourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED = SourceApiAssociationStatus.AddMember("AUTO_MERGE_SCHEDULE_FAILED", smithyprelude.Unit)
-
-	SourceApiAssociationStatus_DELETION_SCHEDULED = SourceApiAssociationStatus.AddMember("DELETION_SCHEDULED", smithyprelude.Unit)
-
-	SourceApiAssociationStatus_DELETION_IN_PROGRESS = SourceApiAssociationStatus.AddMember("DELETION_IN_PROGRESS", smithyprelude.Unit)
-
-	SourceApiAssociationStatus_DELETION_FAILED = SourceApiAssociationStatus.AddMember("DELETION_FAILED", smithyprelude.Unit)
-
-	SourceApiAssociation_associationId = SourceApiAssociation.AddMember("associationId", _String)
-
-	SourceApiAssociation_associationArn = SourceApiAssociation.AddMember("associationArn", _String)
-
-	SourceApiAssociation_sourceApiId = SourceApiAssociation.AddMember("sourceApiId", _String)
-
-	SourceApiAssociation_sourceApiArn = SourceApiAssociation.AddMember("sourceApiArn", _String)
-
-	SourceApiAssociation_mergedApiArn = SourceApiAssociation.AddMember("mergedApiArn", _String)
-
-	SourceApiAssociation_mergedApiId = SourceApiAssociation.AddMember("mergedApiId", _String)
-
-	SourceApiAssociation_description = SourceApiAssociation.AddMember("description", _String)
-
-	SourceApiAssociation_sourceApiAssociationConfig = SourceApiAssociation.AddMember("sourceApiAssociationConfig", SourceApiAssociationConfig)
-
-	SourceApiAssociation_sourceApiAssociationStatus = SourceApiAssociation.AddMember("sourceApiAssociationStatus", SourceApiAssociationStatus)
-
-	SourceApiAssociation_sourceApiAssociationStatusDetail = SourceApiAssociation.AddMember("sourceApiAssociationStatusDetail", _String)
-
-	SourceApiAssociation_lastSuccessfulMergeDate = SourceApiAssociation.AddMember("lastSuccessfulMergeDate", _Date)
-
-	SourceApiAssociationSummary_associationId = SourceApiAssociationSummary.AddMember("associationId", _String)
-
-	SourceApiAssociationSummary_associationArn = SourceApiAssociationSummary.AddMember("associationArn", _String)
-
-	SourceApiAssociationSummary_sourceApiId = SourceApiAssociationSummary.AddMember("sourceApiId", _String)
-
-	SourceApiAssociationSummary_sourceApiArn = SourceApiAssociationSummary.AddMember("sourceApiArn", _String)
-
-	SourceApiAssociationSummary_mergedApiId = SourceApiAssociationSummary.AddMember("mergedApiId", _String)
-
-	SourceApiAssociationSummary_mergedApiArn = SourceApiAssociationSummary.AddMember("mergedApiArn", _String)
-
-	SourceApiAssociationSummary_description = SourceApiAssociationSummary.AddMember("description", _String)
-
-	_SourceApiAssociationSummaryList_member = _SourceApiAssociationSummaryList.AddMember("member", SourceApiAssociationSummary)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TypeDefinitionFormat_SDL = TypeDefinitionFormat.AddMember("SDL", smithyprelude.Unit)
-
-	TypeDefinitionFormat_JSON = TypeDefinitionFormat.AddMember("JSON", smithyprelude.Unit)
-
-	Type_name = Type.AddMember("name", _ResourceName)
-
-	Type_description = Type.AddMember("description", _String)
-
-	Type_arn = Type.AddMember("arn", _String)
-
-	Type_definition = Type.AddMember("definition", _String)
-
-	Type_format = Type.AddMember("format", TypeDefinitionFormat)
-
-	_TypeList_member = _TypeList.AddMember("member", Type)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", _String)
-
-	AssociateApiRequest_domainName = AssociateApiRequest.AddMember("domainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	AssociateApiRequest_apiId = AssociateApiRequest.AddMember("apiId", _String)
-
-	AssociateApiResponse_apiAssociation = AssociateApiResponse.AddMember("apiAssociation", ApiAssociation)
-
-	AssociateMergedGraphqlApiRequest_sourceApiIdentifier = AssociateMergedGraphqlApiRequest.AddMember("sourceApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	AssociateMergedGraphqlApiRequest_mergedApiIdentifier = AssociateMergedGraphqlApiRequest.AddMember("mergedApiIdentifier", _String)
-
-	AssociateMergedGraphqlApiRequest_description = AssociateMergedGraphqlApiRequest.AddMember("description", _String)
-
-	AssociateMergedGraphqlApiRequest_sourceApiAssociationConfig = AssociateMergedGraphqlApiRequest.AddMember("sourceApiAssociationConfig", SourceApiAssociationConfig)
-
-	AssociateMergedGraphqlApiResponse_sourceApiAssociation = AssociateMergedGraphqlApiResponse.AddMember("sourceApiAssociation", SourceApiAssociation)
-
-	AssociateSourceGraphqlApiRequest_mergedApiIdentifier = AssociateSourceGraphqlApiRequest.AddMember("mergedApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	AssociateSourceGraphqlApiRequest_sourceApiIdentifier = AssociateSourceGraphqlApiRequest.AddMember("sourceApiIdentifier", _String)
-
-	AssociateSourceGraphqlApiRequest_description = AssociateSourceGraphqlApiRequest.AddMember("description", _String)
-
-	AssociateSourceGraphqlApiRequest_sourceApiAssociationConfig = AssociateSourceGraphqlApiRequest.AddMember("sourceApiAssociationConfig", SourceApiAssociationConfig)
-
-	AssociateSourceGraphqlApiResponse_sourceApiAssociation = AssociateSourceGraphqlApiResponse.AddMember("sourceApiAssociation", SourceApiAssociation)
-
-	CreateApiCacheRequest_apiId = CreateApiCacheRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	CreateApiCacheRequest_ttl = CreateApiCacheRequest.AddMember("ttl", _Long)
-
-	CreateApiCacheRequest_transitEncryptionEnabled = CreateApiCacheRequest.AddMember("transitEncryptionEnabled", _Boolean)
-
-	CreateApiCacheRequest_atRestEncryptionEnabled = CreateApiCacheRequest.AddMember("atRestEncryptionEnabled", _Boolean)
-
-	CreateApiCacheRequest_apiCachingBehavior = CreateApiCacheRequest.AddMember("apiCachingBehavior", ApiCachingBehavior)
-
-	CreateApiCacheRequest_type = CreateApiCacheRequest.AddMember("type", ApiCacheType)
-
-	CreateApiCacheRequest_healthMetricsConfig = CreateApiCacheRequest.AddMember("healthMetricsConfig", CacheHealthMetricsConfig)
-
-	CreateApiCacheResponse_apiCache = CreateApiCacheResponse.AddMember("apiCache", ApiCache)
-
-	CreateApiRequest_name = CreateApiRequest.AddMember("name", _ApiName)
-
-	CreateApiRequest_ownerContact = CreateApiRequest.AddMember("ownerContact", _String)
-
-	CreateApiRequest_tags = CreateApiRequest.AddMember("tags", _TagMap)
-
-	CreateApiRequest_eventConfig = CreateApiRequest.AddMember("eventConfig", EventConfig)
-
-	CreateApiKeyRequest_apiId = CreateApiKeyRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	CreateApiKeyRequest_description = CreateApiKeyRequest.AddMember("description", _String)
-
-	CreateApiKeyRequest_expires = CreateApiKeyRequest.AddMember("expires", _Long)
-
-	CreateApiKeyResponse_apiKey = CreateApiKeyResponse.AddMember("apiKey", ApiKey)
-
-	CreateApiResponse_api = CreateApiResponse.AddMember("api", Api)
-
-	CreateChannelNamespaceRequest_apiId = CreateChannelNamespaceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	CreateChannelNamespaceRequest_name = CreateChannelNamespaceRequest.AddMember("name", _Namespace)
-
-	CreateChannelNamespaceRequest_subscribeAuthModes = CreateChannelNamespaceRequest.AddMember("subscribeAuthModes", _AuthModes)
-
-	CreateChannelNamespaceRequest_publishAuthModes = CreateChannelNamespaceRequest.AddMember("publishAuthModes", _AuthModes)
-
-	CreateChannelNamespaceRequest_codeHandlers = CreateChannelNamespaceRequest.AddMember("codeHandlers", _Code)
-
-	CreateChannelNamespaceRequest_tags = CreateChannelNamespaceRequest.AddMember("tags", _TagMap)
-
-	CreateChannelNamespaceRequest_handlerConfigs = CreateChannelNamespaceRequest.AddMember("handlerConfigs", HandlerConfigs)
-
-	CreateChannelNamespaceResponse_channelNamespace = CreateChannelNamespaceResponse.AddMember("channelNamespace", ChannelNamespace)
-
-	CreateDataSourceRequest_apiId = CreateDataSourceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	CreateDataSourceRequest_name = CreateDataSourceRequest.AddMember("name", _ResourceName)
-
-	CreateDataSourceRequest_description = CreateDataSourceRequest.AddMember("description", _String)
-
-	CreateDataSourceRequest_type = CreateDataSourceRequest.AddMember("type", DataSourceType)
-
-	CreateDataSourceRequest_serviceRoleArn = CreateDataSourceRequest.AddMember("serviceRoleArn", _String)
-
-	CreateDataSourceRequest_dynamodbConfig = CreateDataSourceRequest.AddMember("dynamodbConfig", DynamodbDataSourceConfig)
-
-	CreateDataSourceRequest_lambdaConfig = CreateDataSourceRequest.AddMember("lambdaConfig", LambdaDataSourceConfig)
-
-	CreateDataSourceRequest_elasticsearchConfig = CreateDataSourceRequest.AddMember("elasticsearchConfig", ElasticsearchDataSourceConfig)
-
-	CreateDataSourceRequest_openSearchServiceConfig = CreateDataSourceRequest.AddMember("openSearchServiceConfig", OpenSearchServiceDataSourceConfig)
-
-	CreateDataSourceRequest_httpConfig = CreateDataSourceRequest.AddMember("httpConfig", HttpDataSourceConfig)
-
-	CreateDataSourceRequest_relationalDatabaseConfig = CreateDataSourceRequest.AddMember("relationalDatabaseConfig", RelationalDatabaseDataSourceConfig)
-
-	CreateDataSourceRequest_eventBridgeConfig = CreateDataSourceRequest.AddMember("eventBridgeConfig", EventBridgeDataSourceConfig)
-
-	CreateDataSourceRequest_metricsConfig = CreateDataSourceRequest.AddMember("metricsConfig", DataSourceLevelMetricsConfig)
-
-	CreateDataSourceResponse_dataSource = CreateDataSourceResponse.AddMember("dataSource", DataSource)
-
-	CreateDomainNameRequest_domainName = CreateDomainNameRequest.AddMember("domainName", _DomainName)
-
-	CreateDomainNameRequest_certificateArn = CreateDomainNameRequest.AddMember("certificateArn", _CertificateArn)
-
-	CreateDomainNameRequest_description = CreateDomainNameRequest.AddMember("description", _Description)
-
-	CreateDomainNameRequest_tags = CreateDomainNameRequest.AddMember("tags", _TagMap)
-
-	CreateDomainNameResponse_domainNameConfig = CreateDomainNameResponse.AddMember("domainNameConfig", DomainNameConfig)
-
-	CreateFunctionRequest_apiId = CreateFunctionRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	CreateFunctionRequest_name = CreateFunctionRequest.AddMember("name", _ResourceName)
-
-	CreateFunctionRequest_description = CreateFunctionRequest.AddMember("description", _String)
-
-	CreateFunctionRequest_dataSourceName = CreateFunctionRequest.AddMember("dataSourceName", _ResourceName)
-
-	CreateFunctionRequest_requestMappingTemplate = CreateFunctionRequest.AddMember("requestMappingTemplate", _MappingTemplate)
-
-	CreateFunctionRequest_responseMappingTemplate = CreateFunctionRequest.AddMember("responseMappingTemplate", _MappingTemplate)
-
-	CreateFunctionRequest_functionVersion = CreateFunctionRequest.AddMember("functionVersion", _String)
-
-	CreateFunctionRequest_syncConfig = CreateFunctionRequest.AddMember("syncConfig", SyncConfig)
-
-	CreateFunctionRequest_maxBatchSize = CreateFunctionRequest.AddMember("maxBatchSize", _MaxBatchSize)
-
-	CreateFunctionRequest_runtime = CreateFunctionRequest.AddMember("runtime", AppSyncRuntime)
-
-	CreateFunctionRequest_code = CreateFunctionRequest.AddMember("code", _Code)
-
-	CreateFunctionResponse_functionConfiguration = CreateFunctionResponse.AddMember("functionConfiguration", FunctionConfiguration)
-
-	CreateGraphqlApiRequest_name = CreateGraphqlApiRequest.AddMember("name", _String)
-
-	CreateGraphqlApiRequest_logConfig = CreateGraphqlApiRequest.AddMember("logConfig", LogConfig)
-
-	CreateGraphqlApiRequest_authenticationType = CreateGraphqlApiRequest.AddMember("authenticationType", AuthenticationType)
-
-	CreateGraphqlApiRequest_userPoolConfig = CreateGraphqlApiRequest.AddMember("userPoolConfig", UserPoolConfig)
-
-	CreateGraphqlApiRequest_openIDConnectConfig = CreateGraphqlApiRequest.AddMember("openIDConnectConfig", OpenIDConnectConfig)
-
-	CreateGraphqlApiRequest_tags = CreateGraphqlApiRequest.AddMember("tags", _TagMap)
-
-	CreateGraphqlApiRequest_additionalAuthenticationProviders = CreateGraphqlApiRequest.AddMember("additionalAuthenticationProviders", _AdditionalAuthenticationProviders)
-
-	CreateGraphqlApiRequest_xrayEnabled = CreateGraphqlApiRequest.AddMember("xrayEnabled", _Boolean)
-
-	CreateGraphqlApiRequest_lambdaAuthorizerConfig = CreateGraphqlApiRequest.AddMember("lambdaAuthorizerConfig", LambdaAuthorizerConfig)
-
-	CreateGraphqlApiRequest_apiType = CreateGraphqlApiRequest.AddMember("apiType", GraphQLApiType)
-
-	CreateGraphqlApiRequest_mergedApiExecutionRoleArn = CreateGraphqlApiRequest.AddMember("mergedApiExecutionRoleArn", _String)
-
-	CreateGraphqlApiRequest_visibility = CreateGraphqlApiRequest.AddMember("visibility", GraphQLApiVisibility)
-
-	CreateGraphqlApiRequest_ownerContact = CreateGraphqlApiRequest.AddMember("ownerContact", _String)
-
-	CreateGraphqlApiRequest_introspectionConfig = CreateGraphqlApiRequest.AddMember("introspectionConfig", GraphQLApiIntrospectionConfig)
-
-	CreateGraphqlApiRequest_queryDepthLimit = CreateGraphqlApiRequest.AddMember("queryDepthLimit", _QueryDepthLimit)
-
-	CreateGraphqlApiRequest_resolverCountLimit = CreateGraphqlApiRequest.AddMember("resolverCountLimit", _ResolverCountLimit)
-
-	CreateGraphqlApiRequest_enhancedMetricsConfig = CreateGraphqlApiRequest.AddMember("enhancedMetricsConfig", EnhancedMetricsConfig)
-
-	CreateGraphqlApiResponse_graphqlApi = CreateGraphqlApiResponse.AddMember("graphqlApi", GraphqlApi)
-
-	CreateResolverRequest_apiId = CreateResolverRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	CreateResolverRequest_typeName = CreateResolverRequest.AddMember("typeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateResolverRequest_fieldName = CreateResolverRequest.AddMember("fieldName", _ResourceName)
-
-	CreateResolverRequest_dataSourceName = CreateResolverRequest.AddMember("dataSourceName", _ResourceName)
-
-	CreateResolverRequest_requestMappingTemplate = CreateResolverRequest.AddMember("requestMappingTemplate", _MappingTemplate)
-
-	CreateResolverRequest_responseMappingTemplate = CreateResolverRequest.AddMember("responseMappingTemplate", _MappingTemplate)
-
-	CreateResolverRequest_kind = CreateResolverRequest.AddMember("kind", ResolverKind)
-
-	CreateResolverRequest_pipelineConfig = CreateResolverRequest.AddMember("pipelineConfig", PipelineConfig)
-
-	CreateResolverRequest_syncConfig = CreateResolverRequest.AddMember("syncConfig", SyncConfig)
-
-	CreateResolverRequest_cachingConfig = CreateResolverRequest.AddMember("cachingConfig", CachingConfig)
-
-	CreateResolverRequest_maxBatchSize = CreateResolverRequest.AddMember("maxBatchSize", _MaxBatchSize)
-
-	CreateResolverRequest_runtime = CreateResolverRequest.AddMember("runtime", AppSyncRuntime)
-
-	CreateResolverRequest_code = CreateResolverRequest.AddMember("code", _Code)
-
-	CreateResolverRequest_metricsConfig = CreateResolverRequest.AddMember("metricsConfig", ResolverLevelMetricsConfig)
-
-	CreateResolverResponse_resolver = CreateResolverResponse.AddMember("resolver", Resolver)
-
-	CreateTypeRequest_apiId = CreateTypeRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	CreateTypeRequest_definition = CreateTypeRequest.AddMember("definition", _String)
-
-	CreateTypeRequest_format = CreateTypeRequest.AddMember("format", TypeDefinitionFormat)
-
-	CreateTypeResponse_type = CreateTypeResponse.AddMember("type", Type)
-
-	DeleteApiCacheRequest_apiId = DeleteApiCacheRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteApiRequest_apiId = DeleteApiRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteApiKeyRequest_apiId = DeleteApiKeyRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteApiKeyRequest_id = DeleteApiKeyRequest.AddMember("id", _String, &smithytraits.HTTPLabel{})
-
-	DeleteChannelNamespaceRequest_apiId = DeleteChannelNamespaceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteChannelNamespaceRequest_name = DeleteChannelNamespaceRequest.AddMember("name", _Namespace, &smithytraits.HTTPLabel{})
-
-	DeleteDataSourceRequest_apiId = DeleteDataSourceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteDataSourceRequest_name = DeleteDataSourceRequest.AddMember("name", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteDomainNameRequest_domainName = DeleteDomainNameRequest.AddMember("domainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DeleteFunctionRequest_apiId = DeleteFunctionRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteFunctionRequest_functionId = DeleteFunctionRequest.AddMember("functionId", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteGraphqlApiRequest_apiId = DeleteGraphqlApiRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteResolverRequest_apiId = DeleteResolverRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteResolverRequest_typeName = DeleteResolverRequest.AddMember("typeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteResolverRequest_fieldName = DeleteResolverRequest.AddMember("fieldName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteTypeRequest_apiId = DeleteTypeRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteTypeRequest_typeName = DeleteTypeRequest.AddMember("typeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DisassociateApiRequest_domainName = DisassociateApiRequest.AddMember("domainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	DisassociateMergedGraphqlApiRequest_sourceApiIdentifier = DisassociateMergedGraphqlApiRequest.AddMember("sourceApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	DisassociateMergedGraphqlApiRequest_associationId = DisassociateMergedGraphqlApiRequest.AddMember("associationId", _String, &smithytraits.HTTPLabel{})
-
-	DisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus = DisassociateMergedGraphqlApiResponse.AddMember("sourceApiAssociationStatus", SourceApiAssociationStatus)
-
-	DisassociateSourceGraphqlApiRequest_mergedApiIdentifier = DisassociateSourceGraphqlApiRequest.AddMember("mergedApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	DisassociateSourceGraphqlApiRequest_associationId = DisassociateSourceGraphqlApiRequest.AddMember("associationId", _String, &smithytraits.HTTPLabel{})
-
-	DisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus = DisassociateSourceGraphqlApiResponse.AddMember("sourceApiAssociationStatus", SourceApiAssociationStatus)
-
-	EvaluateCodeRequest_runtime = EvaluateCodeRequest.AddMember("runtime", AppSyncRuntime)
-
-	EvaluateCodeRequest_code = EvaluateCodeRequest.AddMember("code", _Code)
-
-	EvaluateCodeRequest_context = EvaluateCodeRequest.AddMember("context", _Context)
-
-	EvaluateCodeRequest_function = EvaluateCodeRequest.AddMember("function", _String)
-
-	EvaluateCodeResponse_evaluationResult = EvaluateCodeResponse.AddMember("evaluationResult", _EvaluationResult)
-
-	EvaluateCodeResponse_error = EvaluateCodeResponse.AddMember("error", EvaluateCodeErrorDetail)
-
-	EvaluateCodeResponse_logs = EvaluateCodeResponse.AddMember("logs", _Logs)
-
-	EvaluateCodeResponse_stash = EvaluateCodeResponse.AddMember("stash", _Stash)
-
-	EvaluateCodeResponse_outErrors = EvaluateCodeResponse.AddMember("outErrors", _OutErrors)
-
-	EvaluateMappingTemplateRequest_template = EvaluateMappingTemplateRequest.AddMember("template", _Template)
-
-	EvaluateMappingTemplateRequest_context = EvaluateMappingTemplateRequest.AddMember("context", _Context)
-
-	EvaluateMappingTemplateResponse_evaluationResult = EvaluateMappingTemplateResponse.AddMember("evaluationResult", _EvaluationResult)
-
-	EvaluateMappingTemplateResponse_error = EvaluateMappingTemplateResponse.AddMember("error", ErrorDetail)
-
-	EvaluateMappingTemplateResponse_logs = EvaluateMappingTemplateResponse.AddMember("logs", _Logs)
-
-	EvaluateMappingTemplateResponse_stash = EvaluateMappingTemplateResponse.AddMember("stash", _Stash)
-
-	EvaluateMappingTemplateResponse_outErrors = EvaluateMappingTemplateResponse.AddMember("outErrors", _OutErrors)
-
-	FlushApiCacheRequest_apiId = FlushApiCacheRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetApiAssociationRequest_domainName = GetApiAssociationRequest.AddMember("domainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	GetApiAssociationResponse_apiAssociation = GetApiAssociationResponse.AddMember("apiAssociation", ApiAssociation)
-
-	GetApiCacheRequest_apiId = GetApiCacheRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetApiCacheResponse_apiCache = GetApiCacheResponse.AddMember("apiCache", ApiCache)
-
-	GetApiRequest_apiId = GetApiRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetApiResponse_api = GetApiResponse.AddMember("api", Api)
-
-	GetChannelNamespaceRequest_apiId = GetChannelNamespaceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetChannelNamespaceRequest_name = GetChannelNamespaceRequest.AddMember("name", _Namespace, &smithytraits.HTTPLabel{})
-
-	GetChannelNamespaceResponse_channelNamespace = GetChannelNamespaceResponse.AddMember("channelNamespace", ChannelNamespace)
-
-	GetDataSourceRequest_apiId = GetDataSourceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetDataSourceRequest_name = GetDataSourceRequest.AddMember("name", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetDataSourceIntrospectionRequest_introspectionId = GetDataSourceIntrospectionRequest.AddMember("introspectionId", _String, &smithytraits.HTTPLabel{})
-
-	GetDataSourceIntrospectionRequest_includeModelsSDL = GetDataSourceIntrospectionRequest.AddMember("includeModelsSDL", _Boolean, &smithytraits.HTTPQuery{Name: "includeModelsSDL"})
-
-	GetDataSourceIntrospectionRequest_nextToken = GetDataSourceIntrospectionRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetDataSourceIntrospectionRequest_maxResults = GetDataSourceIntrospectionRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetDataSourceIntrospectionResponse_introspectionId = GetDataSourceIntrospectionResponse.AddMember("introspectionId", _String)
-
-	GetDataSourceIntrospectionResponse_introspectionStatus = GetDataSourceIntrospectionResponse.AddMember("introspectionStatus", DataSourceIntrospectionStatus)
-
-	GetDataSourceIntrospectionResponse_introspectionStatusDetail = GetDataSourceIntrospectionResponse.AddMember("introspectionStatusDetail", _String)
-
-	GetDataSourceIntrospectionResponse_introspectionResult = GetDataSourceIntrospectionResponse.AddMember("introspectionResult", DataSourceIntrospectionResult)
-
-	GetDataSourceResponse_dataSource = GetDataSourceResponse.AddMember("dataSource", DataSource)
-
-	GetDomainNameRequest_domainName = GetDomainNameRequest.AddMember("domainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	GetDomainNameResponse_domainNameConfig = GetDomainNameResponse.AddMember("domainNameConfig", DomainNameConfig)
-
-	GetFunctionRequest_apiId = GetFunctionRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetFunctionRequest_functionId = GetFunctionRequest.AddMember("functionId", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetFunctionResponse_functionConfiguration = GetFunctionResponse.AddMember("functionConfiguration", FunctionConfiguration)
-
-	GetGraphqlApiEnvironmentVariablesRequest_apiId = GetGraphqlApiEnvironmentVariablesRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetGraphqlApiEnvironmentVariablesResponse_environmentVariables = GetGraphqlApiEnvironmentVariablesResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	GetGraphqlApiRequest_apiId = GetGraphqlApiRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetGraphqlApiResponse_graphqlApi = GetGraphqlApiResponse.AddMember("graphqlApi", GraphqlApi)
-
-	GetIntrospectionSchemaRequest_apiId = GetIntrospectionSchemaRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetIntrospectionSchemaRequest_format = GetIntrospectionSchemaRequest.AddMember("format", OutputType, &smithytraits.HTTPQuery{Name: "format"})
-
-	GetIntrospectionSchemaRequest_includeDirectives = GetIntrospectionSchemaRequest.AddMember("includeDirectives", _BooleanValue, &smithytraits.HTTPQuery{Name: "includeDirectives"})
-
-	GetIntrospectionSchemaResponse_schema = GetIntrospectionSchemaResponse.AddMember("schema", _Blob, &smithytraits.HTTPPayload{})
-
-	GetResolverRequest_apiId = GetResolverRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetResolverRequest_typeName = GetResolverRequest.AddMember("typeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetResolverRequest_fieldName = GetResolverRequest.AddMember("fieldName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetResolverResponse_resolver = GetResolverResponse.AddMember("resolver", Resolver)
-
-	GetSchemaCreationStatusRequest_apiId = GetSchemaCreationStatusRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetSchemaCreationStatusResponse_status = GetSchemaCreationStatusResponse.AddMember("status", SchemaStatus)
-
-	GetSchemaCreationStatusResponse_details = GetSchemaCreationStatusResponse.AddMember("details", _String)
-
-	GetSourceApiAssociationRequest_mergedApiIdentifier = GetSourceApiAssociationRequest.AddMember("mergedApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	GetSourceApiAssociationRequest_associationId = GetSourceApiAssociationRequest.AddMember("associationId", _String, &smithytraits.HTTPLabel{})
-
-	GetSourceApiAssociationResponse_sourceApiAssociation = GetSourceApiAssociationResponse.AddMember("sourceApiAssociation", SourceApiAssociation)
-
-	GetTypeRequest_apiId = GetTypeRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	GetTypeRequest_typeName = GetTypeRequest.AddMember("typeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetTypeRequest_format = GetTypeRequest.AddMember("format", TypeDefinitionFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	GetTypeResponse_type = GetTypeResponse.AddMember("type", Type)
-
-	ListApiKeysRequest_apiId = ListApiKeysRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListApiKeysRequest_nextToken = ListApiKeysRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListApiKeysRequest_maxResults = ListApiKeysRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListApiKeysResponse_apiKeys = ListApiKeysResponse.AddMember("apiKeys", _ApiKeys)
-
-	ListApiKeysResponse_nextToken = ListApiKeysResponse.AddMember("nextToken", _PaginationToken)
-
-	ListApisRequest_nextToken = ListApisRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListApisRequest_maxResults = ListApisRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListApisResponse_apis = ListApisResponse.AddMember("apis", _Apis)
-
-	ListApisResponse_nextToken = ListApisResponse.AddMember("nextToken", _PaginationToken)
-
-	ListChannelNamespacesRequest_apiId = ListChannelNamespacesRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListChannelNamespacesRequest_nextToken = ListChannelNamespacesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelNamespacesRequest_maxResults = ListChannelNamespacesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelNamespacesResponse_channelNamespaces = ListChannelNamespacesResponse.AddMember("channelNamespaces", _ChannelNamespaces)
-
-	ListChannelNamespacesResponse_nextToken = ListChannelNamespacesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListDataSourcesRequest_apiId = ListDataSourcesRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListDataSourcesRequest_nextToken = ListDataSourcesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDataSourcesRequest_maxResults = ListDataSourcesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDataSourcesResponse_dataSources = ListDataSourcesResponse.AddMember("dataSources", _DataSources)
-
-	ListDataSourcesResponse_nextToken = ListDataSourcesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListDomainNamesRequest_nextToken = ListDomainNamesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDomainNamesRequest_maxResults = ListDomainNamesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDomainNamesResponse_domainNameConfigs = ListDomainNamesResponse.AddMember("domainNameConfigs", _DomainNameConfigs)
-
-	ListDomainNamesResponse_nextToken = ListDomainNamesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListFunctionsRequest_apiId = ListFunctionsRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListFunctionsRequest_nextToken = ListFunctionsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFunctionsRequest_maxResults = ListFunctionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFunctionsResponse_functions = ListFunctionsResponse.AddMember("functions", _Functions)
-
-	ListFunctionsResponse_nextToken = ListFunctionsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListGraphqlApisRequest_nextToken = ListGraphqlApisRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListGraphqlApisRequest_maxResults = ListGraphqlApisRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListGraphqlApisRequest_apiType = ListGraphqlApisRequest.AddMember("apiType", GraphQLApiType, &smithytraits.HTTPQuery{Name: "apiType"})
-
-	ListGraphqlApisRequest_owner = ListGraphqlApisRequest.AddMember("owner", Ownership, &smithytraits.HTTPQuery{Name: "owner"})
-
-	ListGraphqlApisResponse_graphqlApis = ListGraphqlApisResponse.AddMember("graphqlApis", _GraphqlApis)
-
-	ListGraphqlApisResponse_nextToken = ListGraphqlApisResponse.AddMember("nextToken", _PaginationToken)
-
-	ListResolversByFunctionRequest_apiId = ListResolversByFunctionRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListResolversByFunctionRequest_functionId = ListResolversByFunctionRequest.AddMember("functionId", _String, &smithytraits.HTTPLabel{})
-
-	ListResolversByFunctionRequest_nextToken = ListResolversByFunctionRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListResolversByFunctionRequest_maxResults = ListResolversByFunctionRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListResolversByFunctionResponse_resolvers = ListResolversByFunctionResponse.AddMember("resolvers", _Resolvers)
-
-	ListResolversByFunctionResponse_nextToken = ListResolversByFunctionResponse.AddMember("nextToken", _PaginationToken)
-
-	ListResolversRequest_apiId = ListResolversRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListResolversRequest_typeName = ListResolversRequest.AddMember("typeName", _String, &smithytraits.HTTPLabel{})
-
-	ListResolversRequest_nextToken = ListResolversRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListResolversRequest_maxResults = ListResolversRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListResolversResponse_resolvers = ListResolversResponse.AddMember("resolvers", _Resolvers)
-
-	ListResolversResponse_nextToken = ListResolversResponse.AddMember("nextToken", _PaginationToken)
-
-	ListSourceApiAssociationsRequest_apiId = ListSourceApiAssociationsRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListSourceApiAssociationsRequest_nextToken = ListSourceApiAssociationsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSourceApiAssociationsRequest_maxResults = ListSourceApiAssociationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSourceApiAssociationsResponse_sourceApiAssociationSummaries = ListSourceApiAssociationsResponse.AddMember("sourceApiAssociationSummaries", _SourceApiAssociationSummaryList)
-
-	ListSourceApiAssociationsResponse_nextToken = ListSourceApiAssociationsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ListTypesByAssociationRequest_mergedApiIdentifier = ListTypesByAssociationRequest.AddMember("mergedApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	ListTypesByAssociationRequest_associationId = ListTypesByAssociationRequest.AddMember("associationId", _String, &smithytraits.HTTPLabel{})
-
-	ListTypesByAssociationRequest_format = ListTypesByAssociationRequest.AddMember("format", TypeDefinitionFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	ListTypesByAssociationRequest_nextToken = ListTypesByAssociationRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTypesByAssociationRequest_maxResults = ListTypesByAssociationRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTypesByAssociationResponse_types = ListTypesByAssociationResponse.AddMember("types", _TypeList)
-
-	ListTypesByAssociationResponse_nextToken = ListTypesByAssociationResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTypesRequest_apiId = ListTypesRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	ListTypesRequest_format = ListTypesRequest.AddMember("format", TypeDefinitionFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	ListTypesRequest_nextToken = ListTypesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTypesRequest_maxResults = ListTypesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTypesResponse_types = ListTypesResponse.AddMember("types", _TypeList)
-
-	ListTypesResponse_nextToken = ListTypesResponse.AddMember("nextToken", _PaginationToken)
-
-	PutGraphqlApiEnvironmentVariablesRequest_apiId = PutGraphqlApiEnvironmentVariablesRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	PutGraphqlApiEnvironmentVariablesRequest_environmentVariables = PutGraphqlApiEnvironmentVariablesRequest.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	PutGraphqlApiEnvironmentVariablesResponse_environmentVariables = PutGraphqlApiEnvironmentVariablesResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	StartDataSourceIntrospectionRequest_rdsDataApiConfig = StartDataSourceIntrospectionRequest.AddMember("rdsDataApiConfig", RdsDataApiConfig)
-
-	StartDataSourceIntrospectionResponse_introspectionId = StartDataSourceIntrospectionResponse.AddMember("introspectionId", _String)
-
-	StartDataSourceIntrospectionResponse_introspectionStatus = StartDataSourceIntrospectionResponse.AddMember("introspectionStatus", DataSourceIntrospectionStatus)
-
-	StartDataSourceIntrospectionResponse_introspectionStatusDetail = StartDataSourceIntrospectionResponse.AddMember("introspectionStatusDetail", _String)
-
-	StartSchemaCreationRequest_apiId = StartSchemaCreationRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	StartSchemaCreationRequest_definition = StartSchemaCreationRequest.AddMember("definition", _Blob)
-
-	StartSchemaCreationResponse_status = StartSchemaCreationResponse.AddMember("status", SchemaStatus)
-
-	StartSchemaMergeRequest_associationId = StartSchemaMergeRequest.AddMember("associationId", _String, &smithytraits.HTTPLabel{})
-
-	StartSchemaMergeRequest_mergedApiIdentifier = StartSchemaMergeRequest.AddMember("mergedApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	StartSchemaMergeResponse_sourceApiAssociationStatus = StartSchemaMergeResponse.AddMember("sourceApiAssociationStatus", SourceApiAssociationStatus)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateApiCacheRequest_apiId = UpdateApiCacheRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateApiCacheRequest_ttl = UpdateApiCacheRequest.AddMember("ttl", _Long)
-
-	UpdateApiCacheRequest_apiCachingBehavior = UpdateApiCacheRequest.AddMember("apiCachingBehavior", ApiCachingBehavior)
-
-	UpdateApiCacheRequest_type = UpdateApiCacheRequest.AddMember("type", ApiCacheType)
-
-	UpdateApiCacheRequest_healthMetricsConfig = UpdateApiCacheRequest.AddMember("healthMetricsConfig", CacheHealthMetricsConfig)
-
-	UpdateApiCacheResponse_apiCache = UpdateApiCacheResponse.AddMember("apiCache", ApiCache)
-
-	UpdateApiRequest_apiId = UpdateApiRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateApiRequest_name = UpdateApiRequest.AddMember("name", _ApiName)
-
-	UpdateApiRequest_ownerContact = UpdateApiRequest.AddMember("ownerContact", _String)
-
-	UpdateApiRequest_eventConfig = UpdateApiRequest.AddMember("eventConfig", EventConfig)
-
-	UpdateApiKeyRequest_apiId = UpdateApiKeyRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateApiKeyRequest_id = UpdateApiKeyRequest.AddMember("id", _String, &smithytraits.HTTPLabel{})
-
-	UpdateApiKeyRequest_description = UpdateApiKeyRequest.AddMember("description", _String)
-
-	UpdateApiKeyRequest_expires = UpdateApiKeyRequest.AddMember("expires", _Long)
-
-	UpdateApiKeyResponse_apiKey = UpdateApiKeyResponse.AddMember("apiKey", ApiKey)
-
-	UpdateApiResponse_api = UpdateApiResponse.AddMember("api", Api)
-
-	UpdateChannelNamespaceRequest_apiId = UpdateChannelNamespaceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateChannelNamespaceRequest_name = UpdateChannelNamespaceRequest.AddMember("name", _Namespace, &smithytraits.HTTPLabel{})
-
-	UpdateChannelNamespaceRequest_subscribeAuthModes = UpdateChannelNamespaceRequest.AddMember("subscribeAuthModes", _AuthModes)
-
-	UpdateChannelNamespaceRequest_publishAuthModes = UpdateChannelNamespaceRequest.AddMember("publishAuthModes", _AuthModes)
-
-	UpdateChannelNamespaceRequest_codeHandlers = UpdateChannelNamespaceRequest.AddMember("codeHandlers", _Code)
-
-	UpdateChannelNamespaceRequest_handlerConfigs = UpdateChannelNamespaceRequest.AddMember("handlerConfigs", HandlerConfigs)
-
-	UpdateChannelNamespaceResponse_channelNamespace = UpdateChannelNamespaceResponse.AddMember("channelNamespace", ChannelNamespace)
-
-	UpdateDataSourceRequest_apiId = UpdateDataSourceRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateDataSourceRequest_name = UpdateDataSourceRequest.AddMember("name", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateDataSourceRequest_description = UpdateDataSourceRequest.AddMember("description", _String)
-
-	UpdateDataSourceRequest_type = UpdateDataSourceRequest.AddMember("type", DataSourceType)
-
-	UpdateDataSourceRequest_serviceRoleArn = UpdateDataSourceRequest.AddMember("serviceRoleArn", _String)
-
-	UpdateDataSourceRequest_dynamodbConfig = UpdateDataSourceRequest.AddMember("dynamodbConfig", DynamodbDataSourceConfig)
-
-	UpdateDataSourceRequest_lambdaConfig = UpdateDataSourceRequest.AddMember("lambdaConfig", LambdaDataSourceConfig)
-
-	UpdateDataSourceRequest_elasticsearchConfig = UpdateDataSourceRequest.AddMember("elasticsearchConfig", ElasticsearchDataSourceConfig)
-
-	UpdateDataSourceRequest_openSearchServiceConfig = UpdateDataSourceRequest.AddMember("openSearchServiceConfig", OpenSearchServiceDataSourceConfig)
-
-	UpdateDataSourceRequest_httpConfig = UpdateDataSourceRequest.AddMember("httpConfig", HttpDataSourceConfig)
-
-	UpdateDataSourceRequest_relationalDatabaseConfig = UpdateDataSourceRequest.AddMember("relationalDatabaseConfig", RelationalDatabaseDataSourceConfig)
-
-	UpdateDataSourceRequest_eventBridgeConfig = UpdateDataSourceRequest.AddMember("eventBridgeConfig", EventBridgeDataSourceConfig)
-
-	UpdateDataSourceRequest_metricsConfig = UpdateDataSourceRequest.AddMember("metricsConfig", DataSourceLevelMetricsConfig)
-
-	UpdateDataSourceResponse_dataSource = UpdateDataSourceResponse.AddMember("dataSource", DataSource)
-
-	UpdateDomainNameRequest_domainName = UpdateDomainNameRequest.AddMember("domainName", _DomainName, &smithytraits.HTTPLabel{})
-
-	UpdateDomainNameRequest_description = UpdateDomainNameRequest.AddMember("description", _Description)
-
-	UpdateDomainNameResponse_domainNameConfig = UpdateDomainNameResponse.AddMember("domainNameConfig", DomainNameConfig)
-
-	UpdateFunctionRequest_apiId = UpdateFunctionRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateFunctionRequest_name = UpdateFunctionRequest.AddMember("name", _ResourceName)
-
-	UpdateFunctionRequest_description = UpdateFunctionRequest.AddMember("description", _String)
-
-	UpdateFunctionRequest_functionId = UpdateFunctionRequest.AddMember("functionId", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateFunctionRequest_dataSourceName = UpdateFunctionRequest.AddMember("dataSourceName", _ResourceName)
-
-	UpdateFunctionRequest_requestMappingTemplate = UpdateFunctionRequest.AddMember("requestMappingTemplate", _MappingTemplate)
-
-	UpdateFunctionRequest_responseMappingTemplate = UpdateFunctionRequest.AddMember("responseMappingTemplate", _MappingTemplate)
-
-	UpdateFunctionRequest_functionVersion = UpdateFunctionRequest.AddMember("functionVersion", _String)
-
-	UpdateFunctionRequest_syncConfig = UpdateFunctionRequest.AddMember("syncConfig", SyncConfig)
-
-	UpdateFunctionRequest_maxBatchSize = UpdateFunctionRequest.AddMember("maxBatchSize", _MaxBatchSize)
-
-	UpdateFunctionRequest_runtime = UpdateFunctionRequest.AddMember("runtime", AppSyncRuntime)
-
-	UpdateFunctionRequest_code = UpdateFunctionRequest.AddMember("code", _Code)
-
-	UpdateFunctionResponse_functionConfiguration = UpdateFunctionResponse.AddMember("functionConfiguration", FunctionConfiguration)
-
-	UpdateGraphqlApiRequest_apiId = UpdateGraphqlApiRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateGraphqlApiRequest_name = UpdateGraphqlApiRequest.AddMember("name", _String)
-
-	UpdateGraphqlApiRequest_logConfig = UpdateGraphqlApiRequest.AddMember("logConfig", LogConfig)
-
-	UpdateGraphqlApiRequest_authenticationType = UpdateGraphqlApiRequest.AddMember("authenticationType", AuthenticationType)
-
-	UpdateGraphqlApiRequest_userPoolConfig = UpdateGraphqlApiRequest.AddMember("userPoolConfig", UserPoolConfig)
-
-	UpdateGraphqlApiRequest_openIDConnectConfig = UpdateGraphqlApiRequest.AddMember("openIDConnectConfig", OpenIDConnectConfig)
-
-	UpdateGraphqlApiRequest_additionalAuthenticationProviders = UpdateGraphqlApiRequest.AddMember("additionalAuthenticationProviders", _AdditionalAuthenticationProviders)
-
-	UpdateGraphqlApiRequest_xrayEnabled = UpdateGraphqlApiRequest.AddMember("xrayEnabled", _Boolean)
-
-	UpdateGraphqlApiRequest_lambdaAuthorizerConfig = UpdateGraphqlApiRequest.AddMember("lambdaAuthorizerConfig", LambdaAuthorizerConfig)
-
-	UpdateGraphqlApiRequest_mergedApiExecutionRoleArn = UpdateGraphqlApiRequest.AddMember("mergedApiExecutionRoleArn", _String)
-
-	UpdateGraphqlApiRequest_ownerContact = UpdateGraphqlApiRequest.AddMember("ownerContact", _String)
-
-	UpdateGraphqlApiRequest_introspectionConfig = UpdateGraphqlApiRequest.AddMember("introspectionConfig", GraphQLApiIntrospectionConfig)
-
-	UpdateGraphqlApiRequest_queryDepthLimit = UpdateGraphqlApiRequest.AddMember("queryDepthLimit", _QueryDepthLimit)
-
-	UpdateGraphqlApiRequest_resolverCountLimit = UpdateGraphqlApiRequest.AddMember("resolverCountLimit", _ResolverCountLimit)
-
-	UpdateGraphqlApiRequest_enhancedMetricsConfig = UpdateGraphqlApiRequest.AddMember("enhancedMetricsConfig", EnhancedMetricsConfig)
-
-	UpdateGraphqlApiResponse_graphqlApi = UpdateGraphqlApiResponse.AddMember("graphqlApi", GraphqlApi)
-
-	UpdateResolverRequest_apiId = UpdateResolverRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateResolverRequest_typeName = UpdateResolverRequest.AddMember("typeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateResolverRequest_fieldName = UpdateResolverRequest.AddMember("fieldName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateResolverRequest_dataSourceName = UpdateResolverRequest.AddMember("dataSourceName", _ResourceName)
-
-	UpdateResolverRequest_requestMappingTemplate = UpdateResolverRequest.AddMember("requestMappingTemplate", _MappingTemplate)
-
-	UpdateResolverRequest_responseMappingTemplate = UpdateResolverRequest.AddMember("responseMappingTemplate", _MappingTemplate)
-
-	UpdateResolverRequest_kind = UpdateResolverRequest.AddMember("kind", ResolverKind)
-
-	UpdateResolverRequest_pipelineConfig = UpdateResolverRequest.AddMember("pipelineConfig", PipelineConfig)
-
-	UpdateResolverRequest_syncConfig = UpdateResolverRequest.AddMember("syncConfig", SyncConfig)
-
-	UpdateResolverRequest_cachingConfig = UpdateResolverRequest.AddMember("cachingConfig", CachingConfig)
-
-	UpdateResolverRequest_maxBatchSize = UpdateResolverRequest.AddMember("maxBatchSize", _MaxBatchSize)
-
-	UpdateResolverRequest_runtime = UpdateResolverRequest.AddMember("runtime", AppSyncRuntime)
-
-	UpdateResolverRequest_code = UpdateResolverRequest.AddMember("code", _Code)
-
-	UpdateResolverRequest_metricsConfig = UpdateResolverRequest.AddMember("metricsConfig", ResolverLevelMetricsConfig)
-
-	UpdateResolverResponse_resolver = UpdateResolverResponse.AddMember("resolver", Resolver)
-
-	UpdateSourceApiAssociationRequest_associationId = UpdateSourceApiAssociationRequest.AddMember("associationId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateSourceApiAssociationRequest_mergedApiIdentifier = UpdateSourceApiAssociationRequest.AddMember("mergedApiIdentifier", _String, &smithytraits.HTTPLabel{})
-
-	UpdateSourceApiAssociationRequest_description = UpdateSourceApiAssociationRequest.AddMember("description", _String)
-
-	UpdateSourceApiAssociationRequest_sourceApiAssociationConfig = UpdateSourceApiAssociationRequest.AddMember("sourceApiAssociationConfig", SourceApiAssociationConfig)
-
-	UpdateSourceApiAssociationResponse_sourceApiAssociation = UpdateSourceApiAssociationResponse.AddMember("sourceApiAssociation", SourceApiAssociation)
-
-	UpdateTypeRequest_apiId = UpdateTypeRequest.AddMember("apiId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateTypeRequest_typeName = UpdateTypeRequest.AddMember("typeName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateTypeRequest_definition = UpdateTypeRequest.AddMember("definition", _String)
-
-	UpdateTypeRequest_format = UpdateTypeRequest.AddMember("format", TypeDefinitionFormat)
-
-	UpdateTypeResponse_type = UpdateTypeResponse.AddMember("type", Type)
-
+	sDataSourceIntrospectionModelFieldType_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDataSourceIntrospectionModelFieldType, Members: &mDataSourceIntrospectionModelFieldType, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceIntrospectionModelFieldType_type})
 }
+
+var AssociateApi = &sAssociateApi
+
+var AssociateMergedGraphqlApi = &sAssociateMergedGraphqlApi
+
+var AssociateSourceGraphqlApi = &sAssociateSourceGraphqlApi
+
+var CreateApi = &sCreateApi
+
+var CreateApiCache = &sCreateApiCache
+
+var CreateApiKey = &sCreateApiKey
+
+var CreateChannelNamespace = &sCreateChannelNamespace
+
+var CreateDataSource = &sCreateDataSource
+
+var CreateDomainName = &sCreateDomainName
+
+var CreateFunction = &sCreateFunction
+
+var CreateGraphqlApi = &sCreateGraphqlApi
+
+var CreateResolver = &sCreateResolver
+
+var CreateType = &sCreateType
+
+var DeleteApi = &sDeleteApi
+
+var DeleteApiCache = &sDeleteApiCache
+
+var DeleteApiKey = &sDeleteApiKey
+
+var DeleteChannelNamespace = &sDeleteChannelNamespace
+
+var DeleteDataSource = &sDeleteDataSource
+
+var DeleteDomainName = &sDeleteDomainName
+
+var DeleteFunction = &sDeleteFunction
+
+var DeleteGraphqlApi = &sDeleteGraphqlApi
+
+var DeleteResolver = &sDeleteResolver
+
+var DeleteType = &sDeleteType
+
+var DisassociateApi = &sDisassociateApi
+
+var DisassociateMergedGraphqlApi = &sDisassociateMergedGraphqlApi
+
+var DisassociateSourceGraphqlApi = &sDisassociateSourceGraphqlApi
+
+var EvaluateCode = &sEvaluateCode
+
+var EvaluateMappingTemplate = &sEvaluateMappingTemplate
+
+var FlushApiCache = &sFlushApiCache
+
+var GetApi = &sGetApi
+
+var GetApiAssociation = &sGetApiAssociation
+
+var GetApiCache = &sGetApiCache
+
+var GetChannelNamespace = &sGetChannelNamespace
+
+var GetDataSource = &sGetDataSource
+
+var GetDataSourceIntrospection = &sGetDataSourceIntrospection
+
+var GetDomainName = &sGetDomainName
+
+var GetFunction = &sGetFunction
+
+var GetGraphqlApi = &sGetGraphqlApi
+
+var GetGraphqlApiEnvironmentVariables = &sGetGraphqlApiEnvironmentVariables
+
+var GetIntrospectionSchema = &sGetIntrospectionSchema
+
+var GetResolver = &sGetResolver
+
+var GetSchemaCreationStatus = &sGetSchemaCreationStatus
+
+var GetSourceApiAssociation = &sGetSourceApiAssociation
+
+var GetType = &sGetType
+
+var ListApiKeys = &sListApiKeys
+
+var ListApis = &sListApis
+
+var ListChannelNamespaces = &sListChannelNamespaces
+
+var ListDataSources = &sListDataSources
+
+var ListDomainNames = &sListDomainNames
+
+var ListFunctions = &sListFunctions
+
+var ListGraphqlApis = &sListGraphqlApis
+
+var ListResolvers = &sListResolvers
+
+var ListResolversByFunction = &sListResolversByFunction
+
+var ListSourceApiAssociations = &sListSourceApiAssociations
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTypes = &sListTypes
+
+var ListTypesByAssociation = &sListTypesByAssociation
+
+var PutGraphqlApiEnvironmentVariables = &sPutGraphqlApiEnvironmentVariables
+
+var StartDataSourceIntrospection = &sStartDataSourceIntrospection
+
+var StartSchemaCreation = &sStartSchemaCreation
+
+var StartSchemaMerge = &sStartSchemaMerge
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateApi = &sUpdateApi
+
+var UpdateApiCache = &sUpdateApiCache
+
+var UpdateApiKey = &sUpdateApiKey
+
+var UpdateChannelNamespace = &sUpdateChannelNamespace
+
+var UpdateDataSource = &sUpdateDataSource
+
+var UpdateDomainName = &sUpdateDomainName
+
+var UpdateFunction = &sUpdateFunction
+
+var UpdateGraphqlApi = &sUpdateGraphqlApi
+
+var UpdateResolver = &sUpdateResolver
+
+var UpdateSourceApiAssociation = &sUpdateSourceApiAssociation
+
+var UpdateType = &sUpdateType
+
+var _AWSDeepdishControlPlaneService = &s_AWSDeepdishControlPlaneService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AdditionalAuthenticationProvider = &sAdditionalAuthenticationProvider
+var AdditionalAuthenticationProvider_authenticationType = &sAdditionalAuthenticationProvider_authenticationType
+var AdditionalAuthenticationProvider_openIDConnectConfig = &sAdditionalAuthenticationProvider_openIDConnectConfig
+var AdditionalAuthenticationProvider_userPoolConfig = &sAdditionalAuthenticationProvider_userPoolConfig
+var AdditionalAuthenticationProvider_lambdaAuthorizerConfig = &sAdditionalAuthenticationProvider_lambdaAuthorizerConfig
+
+var _AdditionalAuthenticationProviders = &s_AdditionalAuthenticationProviders
+var _AdditionalAuthenticationProviders_member = &s_AdditionalAuthenticationProviders_member
+
+var Api = &sApi
+var Api_apiId = &sApi_apiId
+var Api_name = &sApi_name
+var Api_ownerContact = &sApi_ownerContact
+var Api_tags = &sApi_tags
+var Api_dns = &sApi_dns
+var Api_apiArn = &sApi_apiArn
+var Api_created = &sApi_created
+var Api_xrayEnabled = &sApi_xrayEnabled
+var Api_wafWebAclArn = &sApi_wafWebAclArn
+var Api_eventConfig = &sApi_eventConfig
+
+var ApiAssociation = &sApiAssociation
+var ApiAssociation_domainName = &sApiAssociation_domainName
+var ApiAssociation_apiId = &sApiAssociation_apiId
+var ApiAssociation_associationStatus = &sApiAssociation_associationStatus
+var ApiAssociation_deploymentDetail = &sApiAssociation_deploymentDetail
+
+var ApiCache = &sApiCache
+var ApiCache_ttl = &sApiCache_ttl
+var ApiCache_apiCachingBehavior = &sApiCache_apiCachingBehavior
+var ApiCache_transitEncryptionEnabled = &sApiCache_transitEncryptionEnabled
+var ApiCache_atRestEncryptionEnabled = &sApiCache_atRestEncryptionEnabled
+var ApiCache_type = &sApiCache_type
+var ApiCache_status = &sApiCache_status
+var ApiCache_healthMetricsConfig = &sApiCache_healthMetricsConfig
+
+var ApiCacheStatus = &sApiCacheStatus
+var ApiCacheStatus_AVAILABLE = &sApiCacheStatus_AVAILABLE
+var ApiCacheStatus_CREATING = &sApiCacheStatus_CREATING
+var ApiCacheStatus_DELETING = &sApiCacheStatus_DELETING
+var ApiCacheStatus_MODIFYING = &sApiCacheStatus_MODIFYING
+var ApiCacheStatus_FAILED = &sApiCacheStatus_FAILED
+
+var ApiCacheType = &sApiCacheType
+var ApiCacheType_T2_SMALL = &sApiCacheType_T2_SMALL
+var ApiCacheType_T2_MEDIUM = &sApiCacheType_T2_MEDIUM
+var ApiCacheType_R4_LARGE = &sApiCacheType_R4_LARGE
+var ApiCacheType_R4_XLARGE = &sApiCacheType_R4_XLARGE
+var ApiCacheType_R4_2XLARGE = &sApiCacheType_R4_2XLARGE
+var ApiCacheType_R4_4XLARGE = &sApiCacheType_R4_4XLARGE
+var ApiCacheType_R4_8XLARGE = &sApiCacheType_R4_8XLARGE
+var ApiCacheType_SMALL = &sApiCacheType_SMALL
+var ApiCacheType_MEDIUM = &sApiCacheType_MEDIUM
+var ApiCacheType_LARGE = &sApiCacheType_LARGE
+var ApiCacheType_XLARGE = &sApiCacheType_XLARGE
+var ApiCacheType_LARGE_2X = &sApiCacheType_LARGE_2X
+var ApiCacheType_LARGE_4X = &sApiCacheType_LARGE_4X
+var ApiCacheType_LARGE_8X = &sApiCacheType_LARGE_8X
+var ApiCacheType_LARGE_12X = &sApiCacheType_LARGE_12X
+
+var ApiCachingBehavior = &sApiCachingBehavior
+var ApiCachingBehavior_FULL_REQUEST_CACHING = &sApiCachingBehavior_FULL_REQUEST_CACHING
+var ApiCachingBehavior_PER_RESOLVER_CACHING = &sApiCachingBehavior_PER_RESOLVER_CACHING
+var ApiCachingBehavior_OPERATION_LEVEL_CACHING = &sApiCachingBehavior_OPERATION_LEVEL_CACHING
+
+var ApiKey = &sApiKey
+var ApiKey_id = &sApiKey_id
+var ApiKey_description = &sApiKey_description
+var ApiKey_expires = &sApiKey_expires
+var ApiKey_deletes = &sApiKey_deletes
+
+var ApiKeyLimitExceededException = &sApiKeyLimitExceededException
+var ApiKeyLimitExceededException_message = &sApiKeyLimitExceededException_message
+
+var _ApiKeys = &s_ApiKeys
+var _ApiKeys_member = &s_ApiKeys_member
+
+var ApiKeyValidityOutOfBoundsException = &sApiKeyValidityOutOfBoundsException
+var ApiKeyValidityOutOfBoundsException_message = &sApiKeyValidityOutOfBoundsException_message
+
+var ApiLimitExceededException = &sApiLimitExceededException
+var ApiLimitExceededException_message = &sApiLimitExceededException_message
+
+var _ApiName = &s_ApiName
+
+var _Apis = &s_Apis
+var _Apis_member = &s_Apis_member
+
+var AppSyncRuntime = &sAppSyncRuntime
+var AppSyncRuntime_name = &sAppSyncRuntime_name
+var AppSyncRuntime_runtimeVersion = &sAppSyncRuntime_runtimeVersion
+
+var AssociationStatus = &sAssociationStatus
+var AssociationStatus_Processing = &sAssociationStatus_Processing
+var AssociationStatus_Failed = &sAssociationStatus_Failed
+var AssociationStatus_Success = &sAssociationStatus_Success
+
+var AuthenticationType = &sAuthenticationType
+var AuthenticationType_API_KEY = &sAuthenticationType_API_KEY
+var AuthenticationType_AWS_IAM = &sAuthenticationType_AWS_IAM
+var AuthenticationType_AMAZON_COGNITO_USER_POOLS = &sAuthenticationType_AMAZON_COGNITO_USER_POOLS
+var AuthenticationType_OPENID_CONNECT = &sAuthenticationType_OPENID_CONNECT
+var AuthenticationType_AWS_LAMBDA = &sAuthenticationType_AWS_LAMBDA
+
+var AuthMode = &sAuthMode
+var AuthMode_authType = &sAuthMode_authType
+
+var _AuthModes = &s_AuthModes
+var _AuthModes_member = &s_AuthModes_member
+
+var AuthorizationConfig = &sAuthorizationConfig
+var AuthorizationConfig_authorizationType = &sAuthorizationConfig_authorizationType
+var AuthorizationConfig_awsIamConfig = &sAuthorizationConfig_awsIamConfig
+
+var AuthorizationType = &sAuthorizationType
+var AuthorizationType_AWS_IAM = &sAuthorizationType_AWS_IAM
+
+var AuthProvider = &sAuthProvider
+var AuthProvider_authType = &sAuthProvider_authType
+var AuthProvider_cognitoConfig = &sAuthProvider_cognitoConfig
+var AuthProvider_openIDConnectConfig = &sAuthProvider_openIDConnectConfig
+var AuthProvider_lambdaAuthorizerConfig = &sAuthProvider_lambdaAuthorizerConfig
+
+var _AuthProviders = &s_AuthProviders
+var _AuthProviders_member = &s_AuthProviders_member
+
+var AwsIamConfig = &sAwsIamConfig
+var AwsIamConfig_signingRegion = &sAwsIamConfig_signingRegion
+var AwsIamConfig_signingServiceName = &sAwsIamConfig_signingServiceName
+
+var BadRequestDetail = &sBadRequestDetail
+var BadRequestDetail_codeErrors = &sBadRequestDetail_codeErrors
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+var BadRequestException_reason = &sBadRequestException_reason
+var BadRequestException_detail = &sBadRequestException_detail
+
+var BadRequestReason = &sBadRequestReason
+var BadRequestReason_CODE_ERROR = &sBadRequestReason_CODE_ERROR
+
+var _Blob = &s_Blob
+
+var _Boolean = &s_Boolean
+
+var _BooleanValue = &s_BooleanValue
+
+var CacheHealthMetricsConfig = &sCacheHealthMetricsConfig
+var CacheHealthMetricsConfig_ENABLED = &sCacheHealthMetricsConfig_ENABLED
+var CacheHealthMetricsConfig_DISABLED = &sCacheHealthMetricsConfig_DISABLED
+
+var CachingConfig = &sCachingConfig
+var CachingConfig_ttl = &sCachingConfig_ttl
+var CachingConfig_cachingKeys = &sCachingConfig_cachingKeys
+
+var _CachingKeys = &s_CachingKeys
+var _CachingKeys_member = &s_CachingKeys_member
+
+var _CertificateArn = &s_CertificateArn
+
+var ChannelNamespace = &sChannelNamespace
+var ChannelNamespace_apiId = &sChannelNamespace_apiId
+var ChannelNamespace_name = &sChannelNamespace_name
+var ChannelNamespace_subscribeAuthModes = &sChannelNamespace_subscribeAuthModes
+var ChannelNamespace_publishAuthModes = &sChannelNamespace_publishAuthModes
+var ChannelNamespace_codeHandlers = &sChannelNamespace_codeHandlers
+var ChannelNamespace_tags = &sChannelNamespace_tags
+var ChannelNamespace_channelNamespaceArn = &sChannelNamespace_channelNamespaceArn
+var ChannelNamespace_created = &sChannelNamespace_created
+var ChannelNamespace_lastModified = &sChannelNamespace_lastModified
+var ChannelNamespace_handlerConfigs = &sChannelNamespace_handlerConfigs
+
+var _ChannelNamespaces = &s_ChannelNamespaces
+var _ChannelNamespaces_member = &s_ChannelNamespaces_member
+
+var _Code = &s_Code
+
+var CodeError = &sCodeError
+var CodeError_errorType = &sCodeError_errorType
+var CodeError_value = &sCodeError_value
+var CodeError_location = &sCodeError_location
+
+var _CodeErrorColumn = &s_CodeErrorColumn
+
+var _CodeErrorLine = &s_CodeErrorLine
+
+var CodeErrorLocation = &sCodeErrorLocation
+var CodeErrorLocation_line = &sCodeErrorLocation_line
+var CodeErrorLocation_column = &sCodeErrorLocation_column
+var CodeErrorLocation_span = &sCodeErrorLocation_span
+
+var _CodeErrors = &s_CodeErrors
+var _CodeErrors_member = &s_CodeErrors_member
+
+var _CodeErrorSpan = &s_CodeErrorSpan
+
+var CognitoConfig = &sCognitoConfig
+var CognitoConfig_userPoolId = &sCognitoConfig_userPoolId
+var CognitoConfig_awsRegion = &sCognitoConfig_awsRegion
+var CognitoConfig_appIdClientRegex = &sCognitoConfig_appIdClientRegex
+
+var CognitoUserPoolConfig = &sCognitoUserPoolConfig
+var CognitoUserPoolConfig_userPoolId = &sCognitoUserPoolConfig_userPoolId
+var CognitoUserPoolConfig_awsRegion = &sCognitoUserPoolConfig_awsRegion
+var CognitoUserPoolConfig_appIdClientRegex = &sCognitoUserPoolConfig_appIdClientRegex
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_message = &sConcurrentModificationException_message
+
+var ConflictDetectionType = &sConflictDetectionType
+var ConflictDetectionType_VERSION = &sConflictDetectionType_VERSION
+var ConflictDetectionType_NONE = &sConflictDetectionType_NONE
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ConflictHandlerType = &sConflictHandlerType
+var ConflictHandlerType_OPTIMISTIC_CONCURRENCY = &sConflictHandlerType_OPTIMISTIC_CONCURRENCY
+var ConflictHandlerType_LAMBDA = &sConflictHandlerType_LAMBDA
+var ConflictHandlerType_AUTOMERGE = &sConflictHandlerType_AUTOMERGE
+var ConflictHandlerType_NONE = &sConflictHandlerType_NONE
+
+var _Context = &s_Context
+
+var DataSource = &sDataSource
+var DataSource_dataSourceArn = &sDataSource_dataSourceArn
+var DataSource_name = &sDataSource_name
+var DataSource_description = &sDataSource_description
+var DataSource_type = &sDataSource_type
+var DataSource_serviceRoleArn = &sDataSource_serviceRoleArn
+var DataSource_dynamodbConfig = &sDataSource_dynamodbConfig
+var DataSource_lambdaConfig = &sDataSource_lambdaConfig
+var DataSource_elasticsearchConfig = &sDataSource_elasticsearchConfig
+var DataSource_openSearchServiceConfig = &sDataSource_openSearchServiceConfig
+var DataSource_httpConfig = &sDataSource_httpConfig
+var DataSource_relationalDatabaseConfig = &sDataSource_relationalDatabaseConfig
+var DataSource_eventBridgeConfig = &sDataSource_eventBridgeConfig
+var DataSource_metricsConfig = &sDataSource_metricsConfig
+
+var DataSourceIntrospectionModel = &sDataSourceIntrospectionModel
+var DataSourceIntrospectionModel_name = &sDataSourceIntrospectionModel_name
+var DataSourceIntrospectionModel_fields = &sDataSourceIntrospectionModel_fields
+var DataSourceIntrospectionModel_primaryKey = &sDataSourceIntrospectionModel_primaryKey
+var DataSourceIntrospectionModel_indexes = &sDataSourceIntrospectionModel_indexes
+var DataSourceIntrospectionModel_sdl = &sDataSourceIntrospectionModel_sdl
+
+var DataSourceIntrospectionModelField = &sDataSourceIntrospectionModelField
+var DataSourceIntrospectionModelField_name = &sDataSourceIntrospectionModelField_name
+var DataSourceIntrospectionModelField_type = &sDataSourceIntrospectionModelField_type
+var DataSourceIntrospectionModelField_length = &sDataSourceIntrospectionModelField_length
+
+var _DataSourceIntrospectionModelFields = &s_DataSourceIntrospectionModelFields
+var _DataSourceIntrospectionModelFields_member = &s_DataSourceIntrospectionModelFields_member
+
+var DataSourceIntrospectionModelFieldType = &sDataSourceIntrospectionModelFieldType
+var DataSourceIntrospectionModelFieldType_kind = &sDataSourceIntrospectionModelFieldType_kind
+var DataSourceIntrospectionModelFieldType_name = &sDataSourceIntrospectionModelFieldType_name
+var DataSourceIntrospectionModelFieldType_type = &sDataSourceIntrospectionModelFieldType_type
+var DataSourceIntrospectionModelFieldType_values = &sDataSourceIntrospectionModelFieldType_values
+
+var _DataSourceIntrospectionModelFieldTypeValues = &s_DataSourceIntrospectionModelFieldTypeValues
+var _DataSourceIntrospectionModelFieldTypeValues_member = &s_DataSourceIntrospectionModelFieldTypeValues_member
+
+var DataSourceIntrospectionModelIndex = &sDataSourceIntrospectionModelIndex
+var DataSourceIntrospectionModelIndex_name = &sDataSourceIntrospectionModelIndex_name
+var DataSourceIntrospectionModelIndex_fields = &sDataSourceIntrospectionModelIndex_fields
+
+var _DataSourceIntrospectionModelIndexes = &s_DataSourceIntrospectionModelIndexes
+var _DataSourceIntrospectionModelIndexes_member = &s_DataSourceIntrospectionModelIndexes_member
+
+var _DataSourceIntrospectionModelIndexFields = &s_DataSourceIntrospectionModelIndexFields
+var _DataSourceIntrospectionModelIndexFields_member = &s_DataSourceIntrospectionModelIndexFields_member
+
+var _DataSourceIntrospectionModels = &s_DataSourceIntrospectionModels
+var _DataSourceIntrospectionModels_member = &s_DataSourceIntrospectionModels_member
+
+var DataSourceIntrospectionResult = &sDataSourceIntrospectionResult
+var DataSourceIntrospectionResult_models = &sDataSourceIntrospectionResult_models
+var DataSourceIntrospectionResult_nextToken = &sDataSourceIntrospectionResult_nextToken
+
+var DataSourceIntrospectionStatus = &sDataSourceIntrospectionStatus
+var DataSourceIntrospectionStatus_PROCESSING = &sDataSourceIntrospectionStatus_PROCESSING
+var DataSourceIntrospectionStatus_FAILED = &sDataSourceIntrospectionStatus_FAILED
+var DataSourceIntrospectionStatus_SUCCESS = &sDataSourceIntrospectionStatus_SUCCESS
+
+var DataSourceLevelMetricsBehavior = &sDataSourceLevelMetricsBehavior
+var DataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS = &sDataSourceLevelMetricsBehavior_FULL_REQUEST_DATA_SOURCE_METRICS
+var DataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS = &sDataSourceLevelMetricsBehavior_PER_DATA_SOURCE_METRICS
+
+var DataSourceLevelMetricsConfig = &sDataSourceLevelMetricsConfig
+var DataSourceLevelMetricsConfig_ENABLED = &sDataSourceLevelMetricsConfig_ENABLED
+var DataSourceLevelMetricsConfig_DISABLED = &sDataSourceLevelMetricsConfig_DISABLED
+
+var _DataSources = &s_DataSources
+var _DataSources_member = &s_DataSources_member
+
+var DataSourceType = &sDataSourceType
+var DataSourceType_AWS_LAMBDA = &sDataSourceType_AWS_LAMBDA
+var DataSourceType_AMAZON_DYNAMODB = &sDataSourceType_AMAZON_DYNAMODB
+var DataSourceType_AMAZON_ELASTICSEARCH = &sDataSourceType_AMAZON_ELASTICSEARCH
+var DataSourceType_NONE = &sDataSourceType_NONE
+var DataSourceType_HTTP = &sDataSourceType_HTTP
+var DataSourceType_RELATIONAL_DATABASE = &sDataSourceType_RELATIONAL_DATABASE
+var DataSourceType_AMAZON_OPENSEARCH_SERVICE = &sDataSourceType_AMAZON_OPENSEARCH_SERVICE
+var DataSourceType_AMAZON_EVENTBRIDGE = &sDataSourceType_AMAZON_EVENTBRIDGE
+var DataSourceType_AMAZON_BEDROCK_RUNTIME = &sDataSourceType_AMAZON_BEDROCK_RUNTIME
+
+var _Date = &s_Date
+
+var DefaultAction = &sDefaultAction
+var DefaultAction_ALLOW = &sDefaultAction_ALLOW
+var DefaultAction_DENY = &sDefaultAction_DENY
+
+var DeltaSyncConfig = &sDeltaSyncConfig
+var DeltaSyncConfig_baseTableTTL = &sDeltaSyncConfig_baseTableTTL
+var DeltaSyncConfig_deltaSyncTableName = &sDeltaSyncConfig_deltaSyncTableName
+var DeltaSyncConfig_deltaSyncTableTTL = &sDeltaSyncConfig_deltaSyncTableTTL
+
+var _Description = &s_Description
+
+var _DomainName = &s_DomainName
+
+var DomainNameConfig = &sDomainNameConfig
+var DomainNameConfig_domainName = &sDomainNameConfig_domainName
+var DomainNameConfig_description = &sDomainNameConfig_description
+var DomainNameConfig_certificateArn = &sDomainNameConfig_certificateArn
+var DomainNameConfig_appsyncDomainName = &sDomainNameConfig_appsyncDomainName
+var DomainNameConfig_hostedZoneId = &sDomainNameConfig_hostedZoneId
+var DomainNameConfig_tags = &sDomainNameConfig_tags
+var DomainNameConfig_domainNameArn = &sDomainNameConfig_domainNameArn
+
+var _DomainNameConfigs = &s_DomainNameConfigs
+var _DomainNameConfigs_member = &s_DomainNameConfigs_member
+
+var DynamodbDataSourceConfig = &sDynamodbDataSourceConfig
+var DynamodbDataSourceConfig_tableName = &sDynamodbDataSourceConfig_tableName
+var DynamodbDataSourceConfig_awsRegion = &sDynamodbDataSourceConfig_awsRegion
+var DynamodbDataSourceConfig_useCallerCredentials = &sDynamodbDataSourceConfig_useCallerCredentials
+var DynamodbDataSourceConfig_deltaSyncConfig = &sDynamodbDataSourceConfig_deltaSyncConfig
+var DynamodbDataSourceConfig_versioned = &sDynamodbDataSourceConfig_versioned
+
+var ElasticsearchDataSourceConfig = &sElasticsearchDataSourceConfig
+var ElasticsearchDataSourceConfig_endpoint = &sElasticsearchDataSourceConfig_endpoint
+var ElasticsearchDataSourceConfig_awsRegion = &sElasticsearchDataSourceConfig_awsRegion
+
+var EnhancedMetricsConfig = &sEnhancedMetricsConfig
+var EnhancedMetricsConfig_resolverLevelMetricsBehavior = &sEnhancedMetricsConfig_resolverLevelMetricsBehavior
+var EnhancedMetricsConfig_dataSourceLevelMetricsBehavior = &sEnhancedMetricsConfig_dataSourceLevelMetricsBehavior
+var EnhancedMetricsConfig_operationLevelMetricsConfig = &sEnhancedMetricsConfig_operationLevelMetricsConfig
+
+var _EnvironmentVariableKey = &s_EnvironmentVariableKey
+
+var _EnvironmentVariableMap = &s_EnvironmentVariableMap
+var _EnvironmentVariableMap_key = &s_EnvironmentVariableMap_key
+var _EnvironmentVariableMap_value = &s_EnvironmentVariableMap_value
+
+var _EnvironmentVariableValue = &s_EnvironmentVariableValue
+
+var ErrorDetail = &sErrorDetail
+var ErrorDetail_message = &sErrorDetail_message
+
+var _ErrorMessage = &s_ErrorMessage
+
+var EvaluateCodeErrorDetail = &sEvaluateCodeErrorDetail
+var EvaluateCodeErrorDetail_message = &sEvaluateCodeErrorDetail_message
+var EvaluateCodeErrorDetail_codeErrors = &sEvaluateCodeErrorDetail_codeErrors
+
+var _EvaluationResult = &s_EvaluationResult
+
+var EventBridgeDataSourceConfig = &sEventBridgeDataSourceConfig
+var EventBridgeDataSourceConfig_eventBusArn = &sEventBridgeDataSourceConfig_eventBusArn
+
+var EventConfig = &sEventConfig
+var EventConfig_authProviders = &sEventConfig_authProviders
+var EventConfig_connectionAuthModes = &sEventConfig_connectionAuthModes
+var EventConfig_defaultPublishAuthModes = &sEventConfig_defaultPublishAuthModes
+var EventConfig_defaultSubscribeAuthModes = &sEventConfig_defaultSubscribeAuthModes
+var EventConfig_logConfig = &sEventConfig_logConfig
+
+var EventLogConfig = &sEventLogConfig
+var EventLogConfig_logLevel = &sEventLogConfig_logLevel
+var EventLogConfig_cloudWatchLogsRoleArn = &sEventLogConfig_cloudWatchLogsRoleArn
+
+var EventLogLevel = &sEventLogLevel
+var EventLogLevel_NONE = &sEventLogLevel_NONE
+var EventLogLevel_ERROR = &sEventLogLevel_ERROR
+var EventLogLevel_ALL = &sEventLogLevel_ALL
+var EventLogLevel_INFO = &sEventLogLevel_INFO
+var EventLogLevel_DEBUG = &sEventLogLevel_DEBUG
+
+var FieldLogLevel = &sFieldLogLevel
+var FieldLogLevel_NONE = &sFieldLogLevel_NONE
+var FieldLogLevel_ERROR = &sFieldLogLevel_ERROR
+var FieldLogLevel_ALL = &sFieldLogLevel_ALL
+var FieldLogLevel_INFO = &sFieldLogLevel_INFO
+var FieldLogLevel_DEBUG = &sFieldLogLevel_DEBUG
+
+var FunctionConfiguration = &sFunctionConfiguration
+var FunctionConfiguration_functionId = &sFunctionConfiguration_functionId
+var FunctionConfiguration_functionArn = &sFunctionConfiguration_functionArn
+var FunctionConfiguration_name = &sFunctionConfiguration_name
+var FunctionConfiguration_description = &sFunctionConfiguration_description
+var FunctionConfiguration_dataSourceName = &sFunctionConfiguration_dataSourceName
+var FunctionConfiguration_requestMappingTemplate = &sFunctionConfiguration_requestMappingTemplate
+var FunctionConfiguration_responseMappingTemplate = &sFunctionConfiguration_responseMappingTemplate
+var FunctionConfiguration_functionVersion = &sFunctionConfiguration_functionVersion
+var FunctionConfiguration_syncConfig = &sFunctionConfiguration_syncConfig
+var FunctionConfiguration_maxBatchSize = &sFunctionConfiguration_maxBatchSize
+var FunctionConfiguration_runtime = &sFunctionConfiguration_runtime
+var FunctionConfiguration_code = &sFunctionConfiguration_code
+
+var _Functions = &s_Functions
+var _Functions_member = &s_Functions_member
+
+var _FunctionsIds = &s_FunctionsIds
+var _FunctionsIds_member = &s_FunctionsIds_member
+
+var GraphqlApi = &sGraphqlApi
+var GraphqlApi_name = &sGraphqlApi_name
+var GraphqlApi_apiId = &sGraphqlApi_apiId
+var GraphqlApi_authenticationType = &sGraphqlApi_authenticationType
+var GraphqlApi_logConfig = &sGraphqlApi_logConfig
+var GraphqlApi_userPoolConfig = &sGraphqlApi_userPoolConfig
+var GraphqlApi_openIDConnectConfig = &sGraphqlApi_openIDConnectConfig
+var GraphqlApi_arn = &sGraphqlApi_arn
+var GraphqlApi_uris = &sGraphqlApi_uris
+var GraphqlApi_tags = &sGraphqlApi_tags
+var GraphqlApi_additionalAuthenticationProviders = &sGraphqlApi_additionalAuthenticationProviders
+var GraphqlApi_xrayEnabled = &sGraphqlApi_xrayEnabled
+var GraphqlApi_wafWebAclArn = &sGraphqlApi_wafWebAclArn
+var GraphqlApi_lambdaAuthorizerConfig = &sGraphqlApi_lambdaAuthorizerConfig
+var GraphqlApi_dns = &sGraphqlApi_dns
+var GraphqlApi_visibility = &sGraphqlApi_visibility
+var GraphqlApi_apiType = &sGraphqlApi_apiType
+var GraphqlApi_mergedApiExecutionRoleArn = &sGraphqlApi_mergedApiExecutionRoleArn
+var GraphqlApi_owner = &sGraphqlApi_owner
+var GraphqlApi_ownerContact = &sGraphqlApi_ownerContact
+var GraphqlApi_introspectionConfig = &sGraphqlApi_introspectionConfig
+var GraphqlApi_queryDepthLimit = &sGraphqlApi_queryDepthLimit
+var GraphqlApi_resolverCountLimit = &sGraphqlApi_resolverCountLimit
+var GraphqlApi_enhancedMetricsConfig = &sGraphqlApi_enhancedMetricsConfig
+
+var GraphQLApiIntrospectionConfig = &sGraphQLApiIntrospectionConfig
+var GraphQLApiIntrospectionConfig_ENABLED = &sGraphQLApiIntrospectionConfig_ENABLED
+var GraphQLApiIntrospectionConfig_DISABLED = &sGraphQLApiIntrospectionConfig_DISABLED
+
+var _GraphqlApis = &s_GraphqlApis
+var _GraphqlApis_member = &s_GraphqlApis_member
+
+var GraphQLApiType = &sGraphQLApiType
+var GraphQLApiType_GRAPHQL = &sGraphQLApiType_GRAPHQL
+var GraphQLApiType_MERGED = &sGraphQLApiType_MERGED
+
+var GraphQLApiVisibility = &sGraphQLApiVisibility
+var GraphQLApiVisibility_GLOBAL = &sGraphQLApiVisibility_GLOBAL
+var GraphQLApiVisibility_PRIVATE = &sGraphQLApiVisibility_PRIVATE
+
+var GraphQLSchemaException = &sGraphQLSchemaException
+var GraphQLSchemaException_message = &sGraphQLSchemaException_message
+
+var HandlerBehavior = &sHandlerBehavior
+var HandlerBehavior_CODE = &sHandlerBehavior_CODE
+var HandlerBehavior_DIRECT = &sHandlerBehavior_DIRECT
+
+var HandlerConfig = &sHandlerConfig
+var HandlerConfig_behavior = &sHandlerConfig_behavior
+var HandlerConfig_integration = &sHandlerConfig_integration
+
+var HandlerConfigs = &sHandlerConfigs
+var HandlerConfigs_onPublish = &sHandlerConfigs_onPublish
+var HandlerConfigs_onSubscribe = &sHandlerConfigs_onSubscribe
+
+var HttpDataSourceConfig = &sHttpDataSourceConfig
+var HttpDataSourceConfig_endpoint = &sHttpDataSourceConfig_endpoint
+var HttpDataSourceConfig_authorizationConfig = &sHttpDataSourceConfig_authorizationConfig
+
+var Integration = &sIntegration
+var Integration_dataSourceName = &sIntegration_dataSourceName
+var Integration_lambdaConfig = &sIntegration_lambdaConfig
+
+var InternalFailureException = &sInternalFailureException
+var InternalFailureException_message = &sInternalFailureException_message
+
+var InvokeType = &sInvokeType
+var InvokeType_REQUEST_RESPONSE = &sInvokeType_REQUEST_RESPONSE
+var InvokeType_EVENT = &sInvokeType_EVENT
+
+var LambdaAuthorizerConfig = &sLambdaAuthorizerConfig
+var LambdaAuthorizerConfig_authorizerResultTtlInSeconds = &sLambdaAuthorizerConfig_authorizerResultTtlInSeconds
+var LambdaAuthorizerConfig_authorizerUri = &sLambdaAuthorizerConfig_authorizerUri
+var LambdaAuthorizerConfig_identityValidationExpression = &sLambdaAuthorizerConfig_identityValidationExpression
+
+var LambdaConfig = &sLambdaConfig
+var LambdaConfig_invokeType = &sLambdaConfig_invokeType
+
+var LambdaConflictHandlerConfig = &sLambdaConflictHandlerConfig
+var LambdaConflictHandlerConfig_lambdaConflictHandlerArn = &sLambdaConflictHandlerConfig_lambdaConflictHandlerArn
+
+var LambdaDataSourceConfig = &sLambdaDataSourceConfig
+var LambdaDataSourceConfig_lambdaFunctionArn = &sLambdaDataSourceConfig_lambdaFunctionArn
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var LogConfig = &sLogConfig
+var LogConfig_fieldLogLevel = &sLogConfig_fieldLogLevel
+var LogConfig_cloudWatchLogsRoleArn = &sLogConfig_cloudWatchLogsRoleArn
+var LogConfig_excludeVerboseContent = &sLogConfig_excludeVerboseContent
+
+var _Logs = &s_Logs
+var _Logs_member = &s_Logs_member
+
+var _Long = &s_Long
+
+var _MapOfStringToString = &s_MapOfStringToString
+var _MapOfStringToString_key = &s_MapOfStringToString_key
+var _MapOfStringToString_value = &s_MapOfStringToString_value
+
+var _MappingTemplate = &s_MappingTemplate
+
+var _MaxBatchSize = &s_MaxBatchSize
+
+var _MaxResults = &s_MaxResults
+
+var MergeType = &sMergeType
+var MergeType_MANUAL_MERGE = &sMergeType_MANUAL_MERGE
+var MergeType_AUTO_MERGE = &sMergeType_AUTO_MERGE
+
+var _Namespace = &s_Namespace
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var OpenIDConnectConfig = &sOpenIDConnectConfig
+var OpenIDConnectConfig_issuer = &sOpenIDConnectConfig_issuer
+var OpenIDConnectConfig_clientId = &sOpenIDConnectConfig_clientId
+var OpenIDConnectConfig_iatTTL = &sOpenIDConnectConfig_iatTTL
+var OpenIDConnectConfig_authTTL = &sOpenIDConnectConfig_authTTL
+
+var OpenSearchServiceDataSourceConfig = &sOpenSearchServiceDataSourceConfig
+var OpenSearchServiceDataSourceConfig_endpoint = &sOpenSearchServiceDataSourceConfig_endpoint
+var OpenSearchServiceDataSourceConfig_awsRegion = &sOpenSearchServiceDataSourceConfig_awsRegion
+
+var OperationLevelMetricsConfig = &sOperationLevelMetricsConfig
+var OperationLevelMetricsConfig_ENABLED = &sOperationLevelMetricsConfig_ENABLED
+var OperationLevelMetricsConfig_DISABLED = &sOperationLevelMetricsConfig_DISABLED
+
+var _OutErrors = &s_OutErrors
+
+var OutputType = &sOutputType
+var OutputType_SDL = &sOutputType_SDL
+var OutputType_JSON = &sOutputType_JSON
+
+var _OwnerContact = &s_OwnerContact
+
+var Ownership = &sOwnership
+var Ownership_CURRENT_ACCOUNT = &sOwnership_CURRENT_ACCOUNT
+var Ownership_OTHER_ACCOUNTS = &sOwnership_OTHER_ACCOUNTS
+
+var _PaginationToken = &s_PaginationToken
+
+var PipelineConfig = &sPipelineConfig
+var PipelineConfig_functions = &sPipelineConfig_functions
+
+var _QueryDepthLimit = &s_QueryDepthLimit
+
+var RdsDataApiConfig = &sRdsDataApiConfig
+var RdsDataApiConfig_resourceArn = &sRdsDataApiConfig_resourceArn
+var RdsDataApiConfig_secretArn = &sRdsDataApiConfig_secretArn
+var RdsDataApiConfig_databaseName = &sRdsDataApiConfig_databaseName
+
+var _RdsDataApiConfigDatabaseName = &s_RdsDataApiConfigDatabaseName
+
+var _RdsDataApiConfigResourceArn = &s_RdsDataApiConfigResourceArn
+
+var _RdsDataApiConfigSecretArn = &s_RdsDataApiConfigSecretArn
+
+var RdsHttpEndpointConfig = &sRdsHttpEndpointConfig
+var RdsHttpEndpointConfig_awsRegion = &sRdsHttpEndpointConfig_awsRegion
+var RdsHttpEndpointConfig_dbClusterIdentifier = &sRdsHttpEndpointConfig_dbClusterIdentifier
+var RdsHttpEndpointConfig_databaseName = &sRdsHttpEndpointConfig_databaseName
+var RdsHttpEndpointConfig_schema = &sRdsHttpEndpointConfig_schema
+var RdsHttpEndpointConfig_awsSecretStoreArn = &sRdsHttpEndpointConfig_awsSecretStoreArn
+
+var RelationalDatabaseDataSourceConfig = &sRelationalDatabaseDataSourceConfig
+var RelationalDatabaseDataSourceConfig_relationalDatabaseSourceType = &sRelationalDatabaseDataSourceConfig_relationalDatabaseSourceType
+var RelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig = &sRelationalDatabaseDataSourceConfig_rdsHttpEndpointConfig
+
+var RelationalDatabaseSourceType = &sRelationalDatabaseSourceType
+var RelationalDatabaseSourceType_RDS_HTTP_ENDPOINT = &sRelationalDatabaseSourceType_RDS_HTTP_ENDPOINT
+
+var Resolver = &sResolver
+var Resolver_typeName = &sResolver_typeName
+var Resolver_fieldName = &sResolver_fieldName
+var Resolver_dataSourceName = &sResolver_dataSourceName
+var Resolver_resolverArn = &sResolver_resolverArn
+var Resolver_requestMappingTemplate = &sResolver_requestMappingTemplate
+var Resolver_responseMappingTemplate = &sResolver_responseMappingTemplate
+var Resolver_kind = &sResolver_kind
+var Resolver_pipelineConfig = &sResolver_pipelineConfig
+var Resolver_syncConfig = &sResolver_syncConfig
+var Resolver_cachingConfig = &sResolver_cachingConfig
+var Resolver_maxBatchSize = &sResolver_maxBatchSize
+var Resolver_runtime = &sResolver_runtime
+var Resolver_code = &sResolver_code
+var Resolver_metricsConfig = &sResolver_metricsConfig
+
+var _ResolverCountLimit = &s_ResolverCountLimit
+
+var ResolverKind = &sResolverKind
+var ResolverKind_UNIT = &sResolverKind_UNIT
+var ResolverKind_PIPELINE = &sResolverKind_PIPELINE
+
+var ResolverLevelMetricsBehavior = &sResolverLevelMetricsBehavior
+var ResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS = &sResolverLevelMetricsBehavior_FULL_REQUEST_RESOLVER_METRICS
+var ResolverLevelMetricsBehavior_PER_RESOLVER_METRICS = &sResolverLevelMetricsBehavior_PER_RESOLVER_METRICS
+
+var ResolverLevelMetricsConfig = &sResolverLevelMetricsConfig
+var ResolverLevelMetricsConfig_ENABLED = &sResolverLevelMetricsConfig_ENABLED
+var ResolverLevelMetricsConfig_DISABLED = &sResolverLevelMetricsConfig_DISABLED
+
+var _Resolvers = &s_Resolvers
+var _Resolvers_member = &s_Resolvers_member
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceName = &s_ResourceName
+
+var RuntimeName = &sRuntimeName
+var RuntimeName_APPSYNC_JS = &sRuntimeName_APPSYNC_JS
+
+var SchemaStatus = &sSchemaStatus
+var SchemaStatus_Processing = &sSchemaStatus_Processing
+var SchemaStatus_Active = &sSchemaStatus_Active
+var SchemaStatus_Deleting = &sSchemaStatus_Deleting
+var SchemaStatus_Failed = &sSchemaStatus_Failed
+var SchemaStatus_Success = &sSchemaStatus_Success
+var SchemaStatus_NotApplicable = &sSchemaStatus_NotApplicable
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var SourceApiAssociation = &sSourceApiAssociation
+var SourceApiAssociation_associationId = &sSourceApiAssociation_associationId
+var SourceApiAssociation_associationArn = &sSourceApiAssociation_associationArn
+var SourceApiAssociation_sourceApiId = &sSourceApiAssociation_sourceApiId
+var SourceApiAssociation_sourceApiArn = &sSourceApiAssociation_sourceApiArn
+var SourceApiAssociation_mergedApiArn = &sSourceApiAssociation_mergedApiArn
+var SourceApiAssociation_mergedApiId = &sSourceApiAssociation_mergedApiId
+var SourceApiAssociation_description = &sSourceApiAssociation_description
+var SourceApiAssociation_sourceApiAssociationConfig = &sSourceApiAssociation_sourceApiAssociationConfig
+var SourceApiAssociation_sourceApiAssociationStatus = &sSourceApiAssociation_sourceApiAssociationStatus
+var SourceApiAssociation_sourceApiAssociationStatusDetail = &sSourceApiAssociation_sourceApiAssociationStatusDetail
+var SourceApiAssociation_lastSuccessfulMergeDate = &sSourceApiAssociation_lastSuccessfulMergeDate
+
+var SourceApiAssociationConfig = &sSourceApiAssociationConfig
+var SourceApiAssociationConfig_mergeType = &sSourceApiAssociationConfig_mergeType
+
+var SourceApiAssociationStatus = &sSourceApiAssociationStatus
+var SourceApiAssociationStatus_MERGE_SCHEDULED = &sSourceApiAssociationStatus_MERGE_SCHEDULED
+var SourceApiAssociationStatus_MERGE_FAILED = &sSourceApiAssociationStatus_MERGE_FAILED
+var SourceApiAssociationStatus_MERGE_SUCCESS = &sSourceApiAssociationStatus_MERGE_SUCCESS
+var SourceApiAssociationStatus_MERGE_IN_PROGRESS = &sSourceApiAssociationStatus_MERGE_IN_PROGRESS
+var SourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED = &sSourceApiAssociationStatus_AUTO_MERGE_SCHEDULE_FAILED
+var SourceApiAssociationStatus_DELETION_SCHEDULED = &sSourceApiAssociationStatus_DELETION_SCHEDULED
+var SourceApiAssociationStatus_DELETION_IN_PROGRESS = &sSourceApiAssociationStatus_DELETION_IN_PROGRESS
+var SourceApiAssociationStatus_DELETION_FAILED = &sSourceApiAssociationStatus_DELETION_FAILED
+
+var SourceApiAssociationSummary = &sSourceApiAssociationSummary
+var SourceApiAssociationSummary_associationId = &sSourceApiAssociationSummary_associationId
+var SourceApiAssociationSummary_associationArn = &sSourceApiAssociationSummary_associationArn
+var SourceApiAssociationSummary_sourceApiId = &sSourceApiAssociationSummary_sourceApiId
+var SourceApiAssociationSummary_sourceApiArn = &sSourceApiAssociationSummary_sourceApiArn
+var SourceApiAssociationSummary_mergedApiId = &sSourceApiAssociationSummary_mergedApiId
+var SourceApiAssociationSummary_mergedApiArn = &sSourceApiAssociationSummary_mergedApiArn
+var SourceApiAssociationSummary_description = &sSourceApiAssociationSummary_description
+
+var _SourceApiAssociationSummaryList = &s_SourceApiAssociationSummaryList
+var _SourceApiAssociationSummaryList_member = &s_SourceApiAssociationSummaryList_member
+
+var _Stash = &s_Stash
+
+var _String = &s_String
+
+var SyncConfig = &sSyncConfig
+var SyncConfig_conflictHandler = &sSyncConfig_conflictHandler
+var SyncConfig_conflictDetection = &sSyncConfig_conflictDetection
+var SyncConfig_lambdaConflictHandlerConfig = &sSyncConfig_lambdaConflictHandlerConfig
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _Template = &s_Template
+
+var _Timestamp = &s_Timestamp
+
+var _TTL = &s_TTL
+
+var Type = &sType
+var Type_name = &sType_name
+var Type_description = &sType_description
+var Type_arn = &sType_arn
+var Type_definition = &sType_definition
+var Type_format = &sType_format
+
+var TypeDefinitionFormat = &sTypeDefinitionFormat
+var TypeDefinitionFormat_SDL = &sTypeDefinitionFormat_SDL
+var TypeDefinitionFormat_JSON = &sTypeDefinitionFormat_JSON
+
+var _TypeList = &s_TypeList
+var _TypeList_member = &s_TypeList_member
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
+
+var UserPoolConfig = &sUserPoolConfig
+var UserPoolConfig_userPoolId = &sUserPoolConfig_userPoolId
+var UserPoolConfig_awsRegion = &sUserPoolConfig_awsRegion
+var UserPoolConfig_defaultAction = &sUserPoolConfig_defaultAction
+var UserPoolConfig_appIdClientRegex = &sUserPoolConfig_appIdClientRegex
+
+var AssociateApiRequest = &sAssociateApiRequest
+var AssociateApiRequest_domainName = &sAssociateApiRequest_domainName
+var AssociateApiRequest_apiId = &sAssociateApiRequest_apiId
+
+var AssociateApiResponse = &sAssociateApiResponse
+var AssociateApiResponse_apiAssociation = &sAssociateApiResponse_apiAssociation
+
+var AssociateMergedGraphqlApiRequest = &sAssociateMergedGraphqlApiRequest
+var AssociateMergedGraphqlApiRequest_sourceApiIdentifier = &sAssociateMergedGraphqlApiRequest_sourceApiIdentifier
+var AssociateMergedGraphqlApiRequest_mergedApiIdentifier = &sAssociateMergedGraphqlApiRequest_mergedApiIdentifier
+var AssociateMergedGraphqlApiRequest_description = &sAssociateMergedGraphqlApiRequest_description
+var AssociateMergedGraphqlApiRequest_sourceApiAssociationConfig = &sAssociateMergedGraphqlApiRequest_sourceApiAssociationConfig
+
+var AssociateMergedGraphqlApiResponse = &sAssociateMergedGraphqlApiResponse
+var AssociateMergedGraphqlApiResponse_sourceApiAssociation = &sAssociateMergedGraphqlApiResponse_sourceApiAssociation
+
+var AssociateSourceGraphqlApiRequest = &sAssociateSourceGraphqlApiRequest
+var AssociateSourceGraphqlApiRequest_mergedApiIdentifier = &sAssociateSourceGraphqlApiRequest_mergedApiIdentifier
+var AssociateSourceGraphqlApiRequest_sourceApiIdentifier = &sAssociateSourceGraphqlApiRequest_sourceApiIdentifier
+var AssociateSourceGraphqlApiRequest_description = &sAssociateSourceGraphqlApiRequest_description
+var AssociateSourceGraphqlApiRequest_sourceApiAssociationConfig = &sAssociateSourceGraphqlApiRequest_sourceApiAssociationConfig
+
+var AssociateSourceGraphqlApiResponse = &sAssociateSourceGraphqlApiResponse
+var AssociateSourceGraphqlApiResponse_sourceApiAssociation = &sAssociateSourceGraphqlApiResponse_sourceApiAssociation
+
+var CreateApiCacheRequest = &sCreateApiCacheRequest
+var CreateApiCacheRequest_apiId = &sCreateApiCacheRequest_apiId
+var CreateApiCacheRequest_ttl = &sCreateApiCacheRequest_ttl
+var CreateApiCacheRequest_transitEncryptionEnabled = &sCreateApiCacheRequest_transitEncryptionEnabled
+var CreateApiCacheRequest_atRestEncryptionEnabled = &sCreateApiCacheRequest_atRestEncryptionEnabled
+var CreateApiCacheRequest_apiCachingBehavior = &sCreateApiCacheRequest_apiCachingBehavior
+var CreateApiCacheRequest_type = &sCreateApiCacheRequest_type
+var CreateApiCacheRequest_healthMetricsConfig = &sCreateApiCacheRequest_healthMetricsConfig
+
+var CreateApiCacheResponse = &sCreateApiCacheResponse
+var CreateApiCacheResponse_apiCache = &sCreateApiCacheResponse_apiCache
+
+var CreateApiRequest = &sCreateApiRequest
+var CreateApiRequest_name = &sCreateApiRequest_name
+var CreateApiRequest_ownerContact = &sCreateApiRequest_ownerContact
+var CreateApiRequest_tags = &sCreateApiRequest_tags
+var CreateApiRequest_eventConfig = &sCreateApiRequest_eventConfig
+
+var CreateApiKeyRequest = &sCreateApiKeyRequest
+var CreateApiKeyRequest_apiId = &sCreateApiKeyRequest_apiId
+var CreateApiKeyRequest_description = &sCreateApiKeyRequest_description
+var CreateApiKeyRequest_expires = &sCreateApiKeyRequest_expires
+
+var CreateApiKeyResponse = &sCreateApiKeyResponse
+var CreateApiKeyResponse_apiKey = &sCreateApiKeyResponse_apiKey
+
+var CreateApiResponse = &sCreateApiResponse
+var CreateApiResponse_api = &sCreateApiResponse_api
+
+var CreateChannelNamespaceRequest = &sCreateChannelNamespaceRequest
+var CreateChannelNamespaceRequest_apiId = &sCreateChannelNamespaceRequest_apiId
+var CreateChannelNamespaceRequest_name = &sCreateChannelNamespaceRequest_name
+var CreateChannelNamespaceRequest_subscribeAuthModes = &sCreateChannelNamespaceRequest_subscribeAuthModes
+var CreateChannelNamespaceRequest_publishAuthModes = &sCreateChannelNamespaceRequest_publishAuthModes
+var CreateChannelNamespaceRequest_codeHandlers = &sCreateChannelNamespaceRequest_codeHandlers
+var CreateChannelNamespaceRequest_tags = &sCreateChannelNamespaceRequest_tags
+var CreateChannelNamespaceRequest_handlerConfigs = &sCreateChannelNamespaceRequest_handlerConfigs
+
+var CreateChannelNamespaceResponse = &sCreateChannelNamespaceResponse
+var CreateChannelNamespaceResponse_channelNamespace = &sCreateChannelNamespaceResponse_channelNamespace
+
+var CreateDataSourceRequest = &sCreateDataSourceRequest
+var CreateDataSourceRequest_apiId = &sCreateDataSourceRequest_apiId
+var CreateDataSourceRequest_name = &sCreateDataSourceRequest_name
+var CreateDataSourceRequest_description = &sCreateDataSourceRequest_description
+var CreateDataSourceRequest_type = &sCreateDataSourceRequest_type
+var CreateDataSourceRequest_serviceRoleArn = &sCreateDataSourceRequest_serviceRoleArn
+var CreateDataSourceRequest_dynamodbConfig = &sCreateDataSourceRequest_dynamodbConfig
+var CreateDataSourceRequest_lambdaConfig = &sCreateDataSourceRequest_lambdaConfig
+var CreateDataSourceRequest_elasticsearchConfig = &sCreateDataSourceRequest_elasticsearchConfig
+var CreateDataSourceRequest_openSearchServiceConfig = &sCreateDataSourceRequest_openSearchServiceConfig
+var CreateDataSourceRequest_httpConfig = &sCreateDataSourceRequest_httpConfig
+var CreateDataSourceRequest_relationalDatabaseConfig = &sCreateDataSourceRequest_relationalDatabaseConfig
+var CreateDataSourceRequest_eventBridgeConfig = &sCreateDataSourceRequest_eventBridgeConfig
+var CreateDataSourceRequest_metricsConfig = &sCreateDataSourceRequest_metricsConfig
+
+var CreateDataSourceResponse = &sCreateDataSourceResponse
+var CreateDataSourceResponse_dataSource = &sCreateDataSourceResponse_dataSource
+
+var CreateDomainNameRequest = &sCreateDomainNameRequest
+var CreateDomainNameRequest_domainName = &sCreateDomainNameRequest_domainName
+var CreateDomainNameRequest_certificateArn = &sCreateDomainNameRequest_certificateArn
+var CreateDomainNameRequest_description = &sCreateDomainNameRequest_description
+var CreateDomainNameRequest_tags = &sCreateDomainNameRequest_tags
+
+var CreateDomainNameResponse = &sCreateDomainNameResponse
+var CreateDomainNameResponse_domainNameConfig = &sCreateDomainNameResponse_domainNameConfig
+
+var CreateFunctionRequest = &sCreateFunctionRequest
+var CreateFunctionRequest_apiId = &sCreateFunctionRequest_apiId
+var CreateFunctionRequest_name = &sCreateFunctionRequest_name
+var CreateFunctionRequest_description = &sCreateFunctionRequest_description
+var CreateFunctionRequest_dataSourceName = &sCreateFunctionRequest_dataSourceName
+var CreateFunctionRequest_requestMappingTemplate = &sCreateFunctionRequest_requestMappingTemplate
+var CreateFunctionRequest_responseMappingTemplate = &sCreateFunctionRequest_responseMappingTemplate
+var CreateFunctionRequest_functionVersion = &sCreateFunctionRequest_functionVersion
+var CreateFunctionRequest_syncConfig = &sCreateFunctionRequest_syncConfig
+var CreateFunctionRequest_maxBatchSize = &sCreateFunctionRequest_maxBatchSize
+var CreateFunctionRequest_runtime = &sCreateFunctionRequest_runtime
+var CreateFunctionRequest_code = &sCreateFunctionRequest_code
+
+var CreateFunctionResponse = &sCreateFunctionResponse
+var CreateFunctionResponse_functionConfiguration = &sCreateFunctionResponse_functionConfiguration
+
+var CreateGraphqlApiRequest = &sCreateGraphqlApiRequest
+var CreateGraphqlApiRequest_name = &sCreateGraphqlApiRequest_name
+var CreateGraphqlApiRequest_logConfig = &sCreateGraphqlApiRequest_logConfig
+var CreateGraphqlApiRequest_authenticationType = &sCreateGraphqlApiRequest_authenticationType
+var CreateGraphqlApiRequest_userPoolConfig = &sCreateGraphqlApiRequest_userPoolConfig
+var CreateGraphqlApiRequest_openIDConnectConfig = &sCreateGraphqlApiRequest_openIDConnectConfig
+var CreateGraphqlApiRequest_tags = &sCreateGraphqlApiRequest_tags
+var CreateGraphqlApiRequest_additionalAuthenticationProviders = &sCreateGraphqlApiRequest_additionalAuthenticationProviders
+var CreateGraphqlApiRequest_xrayEnabled = &sCreateGraphqlApiRequest_xrayEnabled
+var CreateGraphqlApiRequest_lambdaAuthorizerConfig = &sCreateGraphqlApiRequest_lambdaAuthorizerConfig
+var CreateGraphqlApiRequest_apiType = &sCreateGraphqlApiRequest_apiType
+var CreateGraphqlApiRequest_mergedApiExecutionRoleArn = &sCreateGraphqlApiRequest_mergedApiExecutionRoleArn
+var CreateGraphqlApiRequest_visibility = &sCreateGraphqlApiRequest_visibility
+var CreateGraphqlApiRequest_ownerContact = &sCreateGraphqlApiRequest_ownerContact
+var CreateGraphqlApiRequest_introspectionConfig = &sCreateGraphqlApiRequest_introspectionConfig
+var CreateGraphqlApiRequest_queryDepthLimit = &sCreateGraphqlApiRequest_queryDepthLimit
+var CreateGraphqlApiRequest_resolverCountLimit = &sCreateGraphqlApiRequest_resolverCountLimit
+var CreateGraphqlApiRequest_enhancedMetricsConfig = &sCreateGraphqlApiRequest_enhancedMetricsConfig
+
+var CreateGraphqlApiResponse = &sCreateGraphqlApiResponse
+var CreateGraphqlApiResponse_graphqlApi = &sCreateGraphqlApiResponse_graphqlApi
+
+var CreateResolverRequest = &sCreateResolverRequest
+var CreateResolverRequest_apiId = &sCreateResolverRequest_apiId
+var CreateResolverRequest_typeName = &sCreateResolverRequest_typeName
+var CreateResolverRequest_fieldName = &sCreateResolverRequest_fieldName
+var CreateResolverRequest_dataSourceName = &sCreateResolverRequest_dataSourceName
+var CreateResolverRequest_requestMappingTemplate = &sCreateResolverRequest_requestMappingTemplate
+var CreateResolverRequest_responseMappingTemplate = &sCreateResolverRequest_responseMappingTemplate
+var CreateResolverRequest_kind = &sCreateResolverRequest_kind
+var CreateResolverRequest_pipelineConfig = &sCreateResolverRequest_pipelineConfig
+var CreateResolverRequest_syncConfig = &sCreateResolverRequest_syncConfig
+var CreateResolverRequest_cachingConfig = &sCreateResolverRequest_cachingConfig
+var CreateResolverRequest_maxBatchSize = &sCreateResolverRequest_maxBatchSize
+var CreateResolverRequest_runtime = &sCreateResolverRequest_runtime
+var CreateResolverRequest_code = &sCreateResolverRequest_code
+var CreateResolverRequest_metricsConfig = &sCreateResolverRequest_metricsConfig
+
+var CreateResolverResponse = &sCreateResolverResponse
+var CreateResolverResponse_resolver = &sCreateResolverResponse_resolver
+
+var CreateTypeRequest = &sCreateTypeRequest
+var CreateTypeRequest_apiId = &sCreateTypeRequest_apiId
+var CreateTypeRequest_definition = &sCreateTypeRequest_definition
+var CreateTypeRequest_format = &sCreateTypeRequest_format
+
+var CreateTypeResponse = &sCreateTypeResponse
+var CreateTypeResponse_type = &sCreateTypeResponse_type
+
+var DeleteApiCacheRequest = &sDeleteApiCacheRequest
+var DeleteApiCacheRequest_apiId = &sDeleteApiCacheRequest_apiId
+
+var DeleteApiCacheResponse = &sDeleteApiCacheResponse
+
+var DeleteApiRequest = &sDeleteApiRequest
+var DeleteApiRequest_apiId = &sDeleteApiRequest_apiId
+
+var DeleteApiKeyRequest = &sDeleteApiKeyRequest
+var DeleteApiKeyRequest_apiId = &sDeleteApiKeyRequest_apiId
+var DeleteApiKeyRequest_id = &sDeleteApiKeyRequest_id
+
+var DeleteApiKeyResponse = &sDeleteApiKeyResponse
+
+var DeleteApiResponse = &sDeleteApiResponse
+
+var DeleteChannelNamespaceRequest = &sDeleteChannelNamespaceRequest
+var DeleteChannelNamespaceRequest_apiId = &sDeleteChannelNamespaceRequest_apiId
+var DeleteChannelNamespaceRequest_name = &sDeleteChannelNamespaceRequest_name
+
+var DeleteChannelNamespaceResponse = &sDeleteChannelNamespaceResponse
+
+var DeleteDataSourceRequest = &sDeleteDataSourceRequest
+var DeleteDataSourceRequest_apiId = &sDeleteDataSourceRequest_apiId
+var DeleteDataSourceRequest_name = &sDeleteDataSourceRequest_name
+
+var DeleteDataSourceResponse = &sDeleteDataSourceResponse
+
+var DeleteDomainNameRequest = &sDeleteDomainNameRequest
+var DeleteDomainNameRequest_domainName = &sDeleteDomainNameRequest_domainName
+
+var DeleteDomainNameResponse = &sDeleteDomainNameResponse
+
+var DeleteFunctionRequest = &sDeleteFunctionRequest
+var DeleteFunctionRequest_apiId = &sDeleteFunctionRequest_apiId
+var DeleteFunctionRequest_functionId = &sDeleteFunctionRequest_functionId
+
+var DeleteFunctionResponse = &sDeleteFunctionResponse
+
+var DeleteGraphqlApiRequest = &sDeleteGraphqlApiRequest
+var DeleteGraphqlApiRequest_apiId = &sDeleteGraphqlApiRequest_apiId
+
+var DeleteGraphqlApiResponse = &sDeleteGraphqlApiResponse
+
+var DeleteResolverRequest = &sDeleteResolverRequest
+var DeleteResolverRequest_apiId = &sDeleteResolverRequest_apiId
+var DeleteResolverRequest_typeName = &sDeleteResolverRequest_typeName
+var DeleteResolverRequest_fieldName = &sDeleteResolverRequest_fieldName
+
+var DeleteResolverResponse = &sDeleteResolverResponse
+
+var DeleteTypeRequest = &sDeleteTypeRequest
+var DeleteTypeRequest_apiId = &sDeleteTypeRequest_apiId
+var DeleteTypeRequest_typeName = &sDeleteTypeRequest_typeName
+
+var DeleteTypeResponse = &sDeleteTypeResponse
+
+var DisassociateApiRequest = &sDisassociateApiRequest
+var DisassociateApiRequest_domainName = &sDisassociateApiRequest_domainName
+
+var DisassociateApiResponse = &sDisassociateApiResponse
+
+var DisassociateMergedGraphqlApiRequest = &sDisassociateMergedGraphqlApiRequest
+var DisassociateMergedGraphqlApiRequest_sourceApiIdentifier = &sDisassociateMergedGraphqlApiRequest_sourceApiIdentifier
+var DisassociateMergedGraphqlApiRequest_associationId = &sDisassociateMergedGraphqlApiRequest_associationId
+
+var DisassociateMergedGraphqlApiResponse = &sDisassociateMergedGraphqlApiResponse
+var DisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus = &sDisassociateMergedGraphqlApiResponse_sourceApiAssociationStatus
+
+var DisassociateSourceGraphqlApiRequest = &sDisassociateSourceGraphqlApiRequest
+var DisassociateSourceGraphqlApiRequest_mergedApiIdentifier = &sDisassociateSourceGraphqlApiRequest_mergedApiIdentifier
+var DisassociateSourceGraphqlApiRequest_associationId = &sDisassociateSourceGraphqlApiRequest_associationId
+
+var DisassociateSourceGraphqlApiResponse = &sDisassociateSourceGraphqlApiResponse
+var DisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus = &sDisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus
+
+var EvaluateCodeRequest = &sEvaluateCodeRequest
+var EvaluateCodeRequest_runtime = &sEvaluateCodeRequest_runtime
+var EvaluateCodeRequest_code = &sEvaluateCodeRequest_code
+var EvaluateCodeRequest_context = &sEvaluateCodeRequest_context
+var EvaluateCodeRequest_function = &sEvaluateCodeRequest_function
+
+var EvaluateCodeResponse = &sEvaluateCodeResponse
+var EvaluateCodeResponse_evaluationResult = &sEvaluateCodeResponse_evaluationResult
+var EvaluateCodeResponse_error = &sEvaluateCodeResponse_error
+var EvaluateCodeResponse_logs = &sEvaluateCodeResponse_logs
+var EvaluateCodeResponse_stash = &sEvaluateCodeResponse_stash
+var EvaluateCodeResponse_outErrors = &sEvaluateCodeResponse_outErrors
+
+var EvaluateMappingTemplateRequest = &sEvaluateMappingTemplateRequest
+var EvaluateMappingTemplateRequest_template = &sEvaluateMappingTemplateRequest_template
+var EvaluateMappingTemplateRequest_context = &sEvaluateMappingTemplateRequest_context
+
+var EvaluateMappingTemplateResponse = &sEvaluateMappingTemplateResponse
+var EvaluateMappingTemplateResponse_evaluationResult = &sEvaluateMappingTemplateResponse_evaluationResult
+var EvaluateMappingTemplateResponse_error = &sEvaluateMappingTemplateResponse_error
+var EvaluateMappingTemplateResponse_logs = &sEvaluateMappingTemplateResponse_logs
+var EvaluateMappingTemplateResponse_stash = &sEvaluateMappingTemplateResponse_stash
+var EvaluateMappingTemplateResponse_outErrors = &sEvaluateMappingTemplateResponse_outErrors
+
+var FlushApiCacheRequest = &sFlushApiCacheRequest
+var FlushApiCacheRequest_apiId = &sFlushApiCacheRequest_apiId
+
+var FlushApiCacheResponse = &sFlushApiCacheResponse
+
+var GetApiAssociationRequest = &sGetApiAssociationRequest
+var GetApiAssociationRequest_domainName = &sGetApiAssociationRequest_domainName
+
+var GetApiAssociationResponse = &sGetApiAssociationResponse
+var GetApiAssociationResponse_apiAssociation = &sGetApiAssociationResponse_apiAssociation
+
+var GetApiCacheRequest = &sGetApiCacheRequest
+var GetApiCacheRequest_apiId = &sGetApiCacheRequest_apiId
+
+var GetApiCacheResponse = &sGetApiCacheResponse
+var GetApiCacheResponse_apiCache = &sGetApiCacheResponse_apiCache
+
+var GetApiRequest = &sGetApiRequest
+var GetApiRequest_apiId = &sGetApiRequest_apiId
+
+var GetApiResponse = &sGetApiResponse
+var GetApiResponse_api = &sGetApiResponse_api
+
+var GetChannelNamespaceRequest = &sGetChannelNamespaceRequest
+var GetChannelNamespaceRequest_apiId = &sGetChannelNamespaceRequest_apiId
+var GetChannelNamespaceRequest_name = &sGetChannelNamespaceRequest_name
+
+var GetChannelNamespaceResponse = &sGetChannelNamespaceResponse
+var GetChannelNamespaceResponse_channelNamespace = &sGetChannelNamespaceResponse_channelNamespace
+
+var GetDataSourceRequest = &sGetDataSourceRequest
+var GetDataSourceRequest_apiId = &sGetDataSourceRequest_apiId
+var GetDataSourceRequest_name = &sGetDataSourceRequest_name
+
+var GetDataSourceIntrospectionRequest = &sGetDataSourceIntrospectionRequest
+var GetDataSourceIntrospectionRequest_introspectionId = &sGetDataSourceIntrospectionRequest_introspectionId
+var GetDataSourceIntrospectionRequest_includeModelsSDL = &sGetDataSourceIntrospectionRequest_includeModelsSDL
+var GetDataSourceIntrospectionRequest_nextToken = &sGetDataSourceIntrospectionRequest_nextToken
+var GetDataSourceIntrospectionRequest_maxResults = &sGetDataSourceIntrospectionRequest_maxResults
+
+var GetDataSourceIntrospectionResponse = &sGetDataSourceIntrospectionResponse
+var GetDataSourceIntrospectionResponse_introspectionId = &sGetDataSourceIntrospectionResponse_introspectionId
+var GetDataSourceIntrospectionResponse_introspectionStatus = &sGetDataSourceIntrospectionResponse_introspectionStatus
+var GetDataSourceIntrospectionResponse_introspectionStatusDetail = &sGetDataSourceIntrospectionResponse_introspectionStatusDetail
+var GetDataSourceIntrospectionResponse_introspectionResult = &sGetDataSourceIntrospectionResponse_introspectionResult
+
+var GetDataSourceResponse = &sGetDataSourceResponse
+var GetDataSourceResponse_dataSource = &sGetDataSourceResponse_dataSource
+
+var GetDomainNameRequest = &sGetDomainNameRequest
+var GetDomainNameRequest_domainName = &sGetDomainNameRequest_domainName
+
+var GetDomainNameResponse = &sGetDomainNameResponse
+var GetDomainNameResponse_domainNameConfig = &sGetDomainNameResponse_domainNameConfig
+
+var GetFunctionRequest = &sGetFunctionRequest
+var GetFunctionRequest_apiId = &sGetFunctionRequest_apiId
+var GetFunctionRequest_functionId = &sGetFunctionRequest_functionId
+
+var GetFunctionResponse = &sGetFunctionResponse
+var GetFunctionResponse_functionConfiguration = &sGetFunctionResponse_functionConfiguration
+
+var GetGraphqlApiEnvironmentVariablesRequest = &sGetGraphqlApiEnvironmentVariablesRequest
+var GetGraphqlApiEnvironmentVariablesRequest_apiId = &sGetGraphqlApiEnvironmentVariablesRequest_apiId
+
+var GetGraphqlApiEnvironmentVariablesResponse = &sGetGraphqlApiEnvironmentVariablesResponse
+var GetGraphqlApiEnvironmentVariablesResponse_environmentVariables = &sGetGraphqlApiEnvironmentVariablesResponse_environmentVariables
+
+var GetGraphqlApiRequest = &sGetGraphqlApiRequest
+var GetGraphqlApiRequest_apiId = &sGetGraphqlApiRequest_apiId
+
+var GetGraphqlApiResponse = &sGetGraphqlApiResponse
+var GetGraphqlApiResponse_graphqlApi = &sGetGraphqlApiResponse_graphqlApi
+
+var GetIntrospectionSchemaRequest = &sGetIntrospectionSchemaRequest
+var GetIntrospectionSchemaRequest_apiId = &sGetIntrospectionSchemaRequest_apiId
+var GetIntrospectionSchemaRequest_format = &sGetIntrospectionSchemaRequest_format
+var GetIntrospectionSchemaRequest_includeDirectives = &sGetIntrospectionSchemaRequest_includeDirectives
+
+var GetIntrospectionSchemaResponse = &sGetIntrospectionSchemaResponse
+var GetIntrospectionSchemaResponse_schema = &sGetIntrospectionSchemaResponse_schema
+
+var GetResolverRequest = &sGetResolverRequest
+var GetResolverRequest_apiId = &sGetResolverRequest_apiId
+var GetResolverRequest_typeName = &sGetResolverRequest_typeName
+var GetResolverRequest_fieldName = &sGetResolverRequest_fieldName
+
+var GetResolverResponse = &sGetResolverResponse
+var GetResolverResponse_resolver = &sGetResolverResponse_resolver
+
+var GetSchemaCreationStatusRequest = &sGetSchemaCreationStatusRequest
+var GetSchemaCreationStatusRequest_apiId = &sGetSchemaCreationStatusRequest_apiId
+
+var GetSchemaCreationStatusResponse = &sGetSchemaCreationStatusResponse
+var GetSchemaCreationStatusResponse_status = &sGetSchemaCreationStatusResponse_status
+var GetSchemaCreationStatusResponse_details = &sGetSchemaCreationStatusResponse_details
+
+var GetSourceApiAssociationRequest = &sGetSourceApiAssociationRequest
+var GetSourceApiAssociationRequest_mergedApiIdentifier = &sGetSourceApiAssociationRequest_mergedApiIdentifier
+var GetSourceApiAssociationRequest_associationId = &sGetSourceApiAssociationRequest_associationId
+
+var GetSourceApiAssociationResponse = &sGetSourceApiAssociationResponse
+var GetSourceApiAssociationResponse_sourceApiAssociation = &sGetSourceApiAssociationResponse_sourceApiAssociation
+
+var GetTypeRequest = &sGetTypeRequest
+var GetTypeRequest_apiId = &sGetTypeRequest_apiId
+var GetTypeRequest_typeName = &sGetTypeRequest_typeName
+var GetTypeRequest_format = &sGetTypeRequest_format
+
+var GetTypeResponse = &sGetTypeResponse
+var GetTypeResponse_type = &sGetTypeResponse_type
+
+var ListApiKeysRequest = &sListApiKeysRequest
+var ListApiKeysRequest_apiId = &sListApiKeysRequest_apiId
+var ListApiKeysRequest_nextToken = &sListApiKeysRequest_nextToken
+var ListApiKeysRequest_maxResults = &sListApiKeysRequest_maxResults
+
+var ListApiKeysResponse = &sListApiKeysResponse
+var ListApiKeysResponse_apiKeys = &sListApiKeysResponse_apiKeys
+var ListApiKeysResponse_nextToken = &sListApiKeysResponse_nextToken
+
+var ListApisRequest = &sListApisRequest
+var ListApisRequest_nextToken = &sListApisRequest_nextToken
+var ListApisRequest_maxResults = &sListApisRequest_maxResults
+
+var ListApisResponse = &sListApisResponse
+var ListApisResponse_apis = &sListApisResponse_apis
+var ListApisResponse_nextToken = &sListApisResponse_nextToken
+
+var ListChannelNamespacesRequest = &sListChannelNamespacesRequest
+var ListChannelNamespacesRequest_apiId = &sListChannelNamespacesRequest_apiId
+var ListChannelNamespacesRequest_nextToken = &sListChannelNamespacesRequest_nextToken
+var ListChannelNamespacesRequest_maxResults = &sListChannelNamespacesRequest_maxResults
+
+var ListChannelNamespacesResponse = &sListChannelNamespacesResponse
+var ListChannelNamespacesResponse_channelNamespaces = &sListChannelNamespacesResponse_channelNamespaces
+var ListChannelNamespacesResponse_nextToken = &sListChannelNamespacesResponse_nextToken
+
+var ListDataSourcesRequest = &sListDataSourcesRequest
+var ListDataSourcesRequest_apiId = &sListDataSourcesRequest_apiId
+var ListDataSourcesRequest_nextToken = &sListDataSourcesRequest_nextToken
+var ListDataSourcesRequest_maxResults = &sListDataSourcesRequest_maxResults
+
+var ListDataSourcesResponse = &sListDataSourcesResponse
+var ListDataSourcesResponse_dataSources = &sListDataSourcesResponse_dataSources
+var ListDataSourcesResponse_nextToken = &sListDataSourcesResponse_nextToken
+
+var ListDomainNamesRequest = &sListDomainNamesRequest
+var ListDomainNamesRequest_nextToken = &sListDomainNamesRequest_nextToken
+var ListDomainNamesRequest_maxResults = &sListDomainNamesRequest_maxResults
+
+var ListDomainNamesResponse = &sListDomainNamesResponse
+var ListDomainNamesResponse_domainNameConfigs = &sListDomainNamesResponse_domainNameConfigs
+var ListDomainNamesResponse_nextToken = &sListDomainNamesResponse_nextToken
+
+var ListFunctionsRequest = &sListFunctionsRequest
+var ListFunctionsRequest_apiId = &sListFunctionsRequest_apiId
+var ListFunctionsRequest_nextToken = &sListFunctionsRequest_nextToken
+var ListFunctionsRequest_maxResults = &sListFunctionsRequest_maxResults
+
+var ListFunctionsResponse = &sListFunctionsResponse
+var ListFunctionsResponse_functions = &sListFunctionsResponse_functions
+var ListFunctionsResponse_nextToken = &sListFunctionsResponse_nextToken
+
+var ListGraphqlApisRequest = &sListGraphqlApisRequest
+var ListGraphqlApisRequest_nextToken = &sListGraphqlApisRequest_nextToken
+var ListGraphqlApisRequest_maxResults = &sListGraphqlApisRequest_maxResults
+var ListGraphqlApisRequest_apiType = &sListGraphqlApisRequest_apiType
+var ListGraphqlApisRequest_owner = &sListGraphqlApisRequest_owner
+
+var ListGraphqlApisResponse = &sListGraphqlApisResponse
+var ListGraphqlApisResponse_graphqlApis = &sListGraphqlApisResponse_graphqlApis
+var ListGraphqlApisResponse_nextToken = &sListGraphqlApisResponse_nextToken
+
+var ListResolversByFunctionRequest = &sListResolversByFunctionRequest
+var ListResolversByFunctionRequest_apiId = &sListResolversByFunctionRequest_apiId
+var ListResolversByFunctionRequest_functionId = &sListResolversByFunctionRequest_functionId
+var ListResolversByFunctionRequest_nextToken = &sListResolversByFunctionRequest_nextToken
+var ListResolversByFunctionRequest_maxResults = &sListResolversByFunctionRequest_maxResults
+
+var ListResolversByFunctionResponse = &sListResolversByFunctionResponse
+var ListResolversByFunctionResponse_resolvers = &sListResolversByFunctionResponse_resolvers
+var ListResolversByFunctionResponse_nextToken = &sListResolversByFunctionResponse_nextToken
+
+var ListResolversRequest = &sListResolversRequest
+var ListResolversRequest_apiId = &sListResolversRequest_apiId
+var ListResolversRequest_typeName = &sListResolversRequest_typeName
+var ListResolversRequest_nextToken = &sListResolversRequest_nextToken
+var ListResolversRequest_maxResults = &sListResolversRequest_maxResults
+
+var ListResolversResponse = &sListResolversResponse
+var ListResolversResponse_resolvers = &sListResolversResponse_resolvers
+var ListResolversResponse_nextToken = &sListResolversResponse_nextToken
+
+var ListSourceApiAssociationsRequest = &sListSourceApiAssociationsRequest
+var ListSourceApiAssociationsRequest_apiId = &sListSourceApiAssociationsRequest_apiId
+var ListSourceApiAssociationsRequest_nextToken = &sListSourceApiAssociationsRequest_nextToken
+var ListSourceApiAssociationsRequest_maxResults = &sListSourceApiAssociationsRequest_maxResults
+
+var ListSourceApiAssociationsResponse = &sListSourceApiAssociationsResponse
+var ListSourceApiAssociationsResponse_sourceApiAssociationSummaries = &sListSourceApiAssociationsResponse_sourceApiAssociationSummaries
+var ListSourceApiAssociationsResponse_nextToken = &sListSourceApiAssociationsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListTypesByAssociationRequest = &sListTypesByAssociationRequest
+var ListTypesByAssociationRequest_mergedApiIdentifier = &sListTypesByAssociationRequest_mergedApiIdentifier
+var ListTypesByAssociationRequest_associationId = &sListTypesByAssociationRequest_associationId
+var ListTypesByAssociationRequest_format = &sListTypesByAssociationRequest_format
+var ListTypesByAssociationRequest_nextToken = &sListTypesByAssociationRequest_nextToken
+var ListTypesByAssociationRequest_maxResults = &sListTypesByAssociationRequest_maxResults
+
+var ListTypesByAssociationResponse = &sListTypesByAssociationResponse
+var ListTypesByAssociationResponse_types = &sListTypesByAssociationResponse_types
+var ListTypesByAssociationResponse_nextToken = &sListTypesByAssociationResponse_nextToken
+
+var ListTypesRequest = &sListTypesRequest
+var ListTypesRequest_apiId = &sListTypesRequest_apiId
+var ListTypesRequest_format = &sListTypesRequest_format
+var ListTypesRequest_nextToken = &sListTypesRequest_nextToken
+var ListTypesRequest_maxResults = &sListTypesRequest_maxResults
+
+var ListTypesResponse = &sListTypesResponse
+var ListTypesResponse_types = &sListTypesResponse_types
+var ListTypesResponse_nextToken = &sListTypesResponse_nextToken
+
+var PutGraphqlApiEnvironmentVariablesRequest = &sPutGraphqlApiEnvironmentVariablesRequest
+var PutGraphqlApiEnvironmentVariablesRequest_apiId = &sPutGraphqlApiEnvironmentVariablesRequest_apiId
+var PutGraphqlApiEnvironmentVariablesRequest_environmentVariables = &sPutGraphqlApiEnvironmentVariablesRequest_environmentVariables
+
+var PutGraphqlApiEnvironmentVariablesResponse = &sPutGraphqlApiEnvironmentVariablesResponse
+var PutGraphqlApiEnvironmentVariablesResponse_environmentVariables = &sPutGraphqlApiEnvironmentVariablesResponse_environmentVariables
+
+var StartDataSourceIntrospectionRequest = &sStartDataSourceIntrospectionRequest
+var StartDataSourceIntrospectionRequest_rdsDataApiConfig = &sStartDataSourceIntrospectionRequest_rdsDataApiConfig
+
+var StartDataSourceIntrospectionResponse = &sStartDataSourceIntrospectionResponse
+var StartDataSourceIntrospectionResponse_introspectionId = &sStartDataSourceIntrospectionResponse_introspectionId
+var StartDataSourceIntrospectionResponse_introspectionStatus = &sStartDataSourceIntrospectionResponse_introspectionStatus
+var StartDataSourceIntrospectionResponse_introspectionStatusDetail = &sStartDataSourceIntrospectionResponse_introspectionStatusDetail
+
+var StartSchemaCreationRequest = &sStartSchemaCreationRequest
+var StartSchemaCreationRequest_apiId = &sStartSchemaCreationRequest_apiId
+var StartSchemaCreationRequest_definition = &sStartSchemaCreationRequest_definition
+
+var StartSchemaCreationResponse = &sStartSchemaCreationResponse
+var StartSchemaCreationResponse_status = &sStartSchemaCreationResponse_status
+
+var StartSchemaMergeRequest = &sStartSchemaMergeRequest
+var StartSchemaMergeRequest_associationId = &sStartSchemaMergeRequest_associationId
+var StartSchemaMergeRequest_mergedApiIdentifier = &sStartSchemaMergeRequest_mergedApiIdentifier
+
+var StartSchemaMergeResponse = &sStartSchemaMergeResponse
+var StartSchemaMergeResponse_sourceApiAssociationStatus = &sStartSchemaMergeResponse_sourceApiAssociationStatus
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateApiCacheRequest = &sUpdateApiCacheRequest
+var UpdateApiCacheRequest_apiId = &sUpdateApiCacheRequest_apiId
+var UpdateApiCacheRequest_ttl = &sUpdateApiCacheRequest_ttl
+var UpdateApiCacheRequest_apiCachingBehavior = &sUpdateApiCacheRequest_apiCachingBehavior
+var UpdateApiCacheRequest_type = &sUpdateApiCacheRequest_type
+var UpdateApiCacheRequest_healthMetricsConfig = &sUpdateApiCacheRequest_healthMetricsConfig
+
+var UpdateApiCacheResponse = &sUpdateApiCacheResponse
+var UpdateApiCacheResponse_apiCache = &sUpdateApiCacheResponse_apiCache
+
+var UpdateApiRequest = &sUpdateApiRequest
+var UpdateApiRequest_apiId = &sUpdateApiRequest_apiId
+var UpdateApiRequest_name = &sUpdateApiRequest_name
+var UpdateApiRequest_ownerContact = &sUpdateApiRequest_ownerContact
+var UpdateApiRequest_eventConfig = &sUpdateApiRequest_eventConfig
+
+var UpdateApiKeyRequest = &sUpdateApiKeyRequest
+var UpdateApiKeyRequest_apiId = &sUpdateApiKeyRequest_apiId
+var UpdateApiKeyRequest_id = &sUpdateApiKeyRequest_id
+var UpdateApiKeyRequest_description = &sUpdateApiKeyRequest_description
+var UpdateApiKeyRequest_expires = &sUpdateApiKeyRequest_expires
+
+var UpdateApiKeyResponse = &sUpdateApiKeyResponse
+var UpdateApiKeyResponse_apiKey = &sUpdateApiKeyResponse_apiKey
+
+var UpdateApiResponse = &sUpdateApiResponse
+var UpdateApiResponse_api = &sUpdateApiResponse_api
+
+var UpdateChannelNamespaceRequest = &sUpdateChannelNamespaceRequest
+var UpdateChannelNamespaceRequest_apiId = &sUpdateChannelNamespaceRequest_apiId
+var UpdateChannelNamespaceRequest_name = &sUpdateChannelNamespaceRequest_name
+var UpdateChannelNamespaceRequest_subscribeAuthModes = &sUpdateChannelNamespaceRequest_subscribeAuthModes
+var UpdateChannelNamespaceRequest_publishAuthModes = &sUpdateChannelNamespaceRequest_publishAuthModes
+var UpdateChannelNamespaceRequest_codeHandlers = &sUpdateChannelNamespaceRequest_codeHandlers
+var UpdateChannelNamespaceRequest_handlerConfigs = &sUpdateChannelNamespaceRequest_handlerConfigs
+
+var UpdateChannelNamespaceResponse = &sUpdateChannelNamespaceResponse
+var UpdateChannelNamespaceResponse_channelNamespace = &sUpdateChannelNamespaceResponse_channelNamespace
+
+var UpdateDataSourceRequest = &sUpdateDataSourceRequest
+var UpdateDataSourceRequest_apiId = &sUpdateDataSourceRequest_apiId
+var UpdateDataSourceRequest_name = &sUpdateDataSourceRequest_name
+var UpdateDataSourceRequest_description = &sUpdateDataSourceRequest_description
+var UpdateDataSourceRequest_type = &sUpdateDataSourceRequest_type
+var UpdateDataSourceRequest_serviceRoleArn = &sUpdateDataSourceRequest_serviceRoleArn
+var UpdateDataSourceRequest_dynamodbConfig = &sUpdateDataSourceRequest_dynamodbConfig
+var UpdateDataSourceRequest_lambdaConfig = &sUpdateDataSourceRequest_lambdaConfig
+var UpdateDataSourceRequest_elasticsearchConfig = &sUpdateDataSourceRequest_elasticsearchConfig
+var UpdateDataSourceRequest_openSearchServiceConfig = &sUpdateDataSourceRequest_openSearchServiceConfig
+var UpdateDataSourceRequest_httpConfig = &sUpdateDataSourceRequest_httpConfig
+var UpdateDataSourceRequest_relationalDatabaseConfig = &sUpdateDataSourceRequest_relationalDatabaseConfig
+var UpdateDataSourceRequest_eventBridgeConfig = &sUpdateDataSourceRequest_eventBridgeConfig
+var UpdateDataSourceRequest_metricsConfig = &sUpdateDataSourceRequest_metricsConfig
+
+var UpdateDataSourceResponse = &sUpdateDataSourceResponse
+var UpdateDataSourceResponse_dataSource = &sUpdateDataSourceResponse_dataSource
+
+var UpdateDomainNameRequest = &sUpdateDomainNameRequest
+var UpdateDomainNameRequest_domainName = &sUpdateDomainNameRequest_domainName
+var UpdateDomainNameRequest_description = &sUpdateDomainNameRequest_description
+
+var UpdateDomainNameResponse = &sUpdateDomainNameResponse
+var UpdateDomainNameResponse_domainNameConfig = &sUpdateDomainNameResponse_domainNameConfig
+
+var UpdateFunctionRequest = &sUpdateFunctionRequest
+var UpdateFunctionRequest_apiId = &sUpdateFunctionRequest_apiId
+var UpdateFunctionRequest_name = &sUpdateFunctionRequest_name
+var UpdateFunctionRequest_description = &sUpdateFunctionRequest_description
+var UpdateFunctionRequest_functionId = &sUpdateFunctionRequest_functionId
+var UpdateFunctionRequest_dataSourceName = &sUpdateFunctionRequest_dataSourceName
+var UpdateFunctionRequest_requestMappingTemplate = &sUpdateFunctionRequest_requestMappingTemplate
+var UpdateFunctionRequest_responseMappingTemplate = &sUpdateFunctionRequest_responseMappingTemplate
+var UpdateFunctionRequest_functionVersion = &sUpdateFunctionRequest_functionVersion
+var UpdateFunctionRequest_syncConfig = &sUpdateFunctionRequest_syncConfig
+var UpdateFunctionRequest_maxBatchSize = &sUpdateFunctionRequest_maxBatchSize
+var UpdateFunctionRequest_runtime = &sUpdateFunctionRequest_runtime
+var UpdateFunctionRequest_code = &sUpdateFunctionRequest_code
+
+var UpdateFunctionResponse = &sUpdateFunctionResponse
+var UpdateFunctionResponse_functionConfiguration = &sUpdateFunctionResponse_functionConfiguration
+
+var UpdateGraphqlApiRequest = &sUpdateGraphqlApiRequest
+var UpdateGraphqlApiRequest_apiId = &sUpdateGraphqlApiRequest_apiId
+var UpdateGraphqlApiRequest_name = &sUpdateGraphqlApiRequest_name
+var UpdateGraphqlApiRequest_logConfig = &sUpdateGraphqlApiRequest_logConfig
+var UpdateGraphqlApiRequest_authenticationType = &sUpdateGraphqlApiRequest_authenticationType
+var UpdateGraphqlApiRequest_userPoolConfig = &sUpdateGraphqlApiRequest_userPoolConfig
+var UpdateGraphqlApiRequest_openIDConnectConfig = &sUpdateGraphqlApiRequest_openIDConnectConfig
+var UpdateGraphqlApiRequest_additionalAuthenticationProviders = &sUpdateGraphqlApiRequest_additionalAuthenticationProviders
+var UpdateGraphqlApiRequest_xrayEnabled = &sUpdateGraphqlApiRequest_xrayEnabled
+var UpdateGraphqlApiRequest_lambdaAuthorizerConfig = &sUpdateGraphqlApiRequest_lambdaAuthorizerConfig
+var UpdateGraphqlApiRequest_mergedApiExecutionRoleArn = &sUpdateGraphqlApiRequest_mergedApiExecutionRoleArn
+var UpdateGraphqlApiRequest_ownerContact = &sUpdateGraphqlApiRequest_ownerContact
+var UpdateGraphqlApiRequest_introspectionConfig = &sUpdateGraphqlApiRequest_introspectionConfig
+var UpdateGraphqlApiRequest_queryDepthLimit = &sUpdateGraphqlApiRequest_queryDepthLimit
+var UpdateGraphqlApiRequest_resolverCountLimit = &sUpdateGraphqlApiRequest_resolverCountLimit
+var UpdateGraphqlApiRequest_enhancedMetricsConfig = &sUpdateGraphqlApiRequest_enhancedMetricsConfig
+
+var UpdateGraphqlApiResponse = &sUpdateGraphqlApiResponse
+var UpdateGraphqlApiResponse_graphqlApi = &sUpdateGraphqlApiResponse_graphqlApi
+
+var UpdateResolverRequest = &sUpdateResolverRequest
+var UpdateResolverRequest_apiId = &sUpdateResolverRequest_apiId
+var UpdateResolverRequest_typeName = &sUpdateResolverRequest_typeName
+var UpdateResolverRequest_fieldName = &sUpdateResolverRequest_fieldName
+var UpdateResolverRequest_dataSourceName = &sUpdateResolverRequest_dataSourceName
+var UpdateResolverRequest_requestMappingTemplate = &sUpdateResolverRequest_requestMappingTemplate
+var UpdateResolverRequest_responseMappingTemplate = &sUpdateResolverRequest_responseMappingTemplate
+var UpdateResolverRequest_kind = &sUpdateResolverRequest_kind
+var UpdateResolverRequest_pipelineConfig = &sUpdateResolverRequest_pipelineConfig
+var UpdateResolverRequest_syncConfig = &sUpdateResolverRequest_syncConfig
+var UpdateResolverRequest_cachingConfig = &sUpdateResolverRequest_cachingConfig
+var UpdateResolverRequest_maxBatchSize = &sUpdateResolverRequest_maxBatchSize
+var UpdateResolverRequest_runtime = &sUpdateResolverRequest_runtime
+var UpdateResolverRequest_code = &sUpdateResolverRequest_code
+var UpdateResolverRequest_metricsConfig = &sUpdateResolverRequest_metricsConfig
+
+var UpdateResolverResponse = &sUpdateResolverResponse
+var UpdateResolverResponse_resolver = &sUpdateResolverResponse_resolver
+
+var UpdateSourceApiAssociationRequest = &sUpdateSourceApiAssociationRequest
+var UpdateSourceApiAssociationRequest_associationId = &sUpdateSourceApiAssociationRequest_associationId
+var UpdateSourceApiAssociationRequest_mergedApiIdentifier = &sUpdateSourceApiAssociationRequest_mergedApiIdentifier
+var UpdateSourceApiAssociationRequest_description = &sUpdateSourceApiAssociationRequest_description
+var UpdateSourceApiAssociationRequest_sourceApiAssociationConfig = &sUpdateSourceApiAssociationRequest_sourceApiAssociationConfig
+
+var UpdateSourceApiAssociationResponse = &sUpdateSourceApiAssociationResponse
+var UpdateSourceApiAssociationResponse_sourceApiAssociation = &sUpdateSourceApiAssociationResponse_sourceApiAssociation
+
+var UpdateTypeRequest = &sUpdateTypeRequest
+var UpdateTypeRequest_apiId = &sUpdateTypeRequest_apiId
+var UpdateTypeRequest_typeName = &sUpdateTypeRequest_typeName
+var UpdateTypeRequest_definition = &sUpdateTypeRequest_definition
+var UpdateTypeRequest_format = &sUpdateTypeRequest_format
+
+var UpdateTypeResponse = &sUpdateTypeResponse
+var UpdateTypeResponse_type = &sUpdateTypeResponse_type
+
+var AWSDeepdishControlPlaneService = &smithy.ServiceSchema{Schema: &s_AWSDeepdishControlPlaneService, Version: "2017-07-25"}

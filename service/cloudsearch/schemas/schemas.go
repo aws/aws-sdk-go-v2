@@ -4,1962 +4,1894 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BuildSuggesters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "BuildSuggesters",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "CreateDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var DefineAnalysisScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineAnalysisScheme",
-}, smithy.ShapeTypeOperation, 0)
-
-var DefineExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineExpression",
-}, smithy.ShapeTypeOperation, 0)
-
-var DefineIndexField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineIndexField",
-}, smithy.ShapeTypeOperation, 0)
-
-var DefineSuggester = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineSuggester",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAnalysisScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteAnalysisScheme",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteExpression",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIndexField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteIndexField",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSuggester = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteSuggester",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAnalysisSchemes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeAnalysisSchemes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAvailabilityOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeAvailabilityOptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDomainEndpointOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeDomainEndpointOptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeDomains",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeExpressions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeExpressions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeIndexFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeIndexFields",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeScalingParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeScalingParameters",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeServiceAccessPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeServiceAccessPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSuggesters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeSuggesters",
-}, smithy.ShapeTypeOperation, 0)
-
-var IndexDocuments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IndexDocuments",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDomainNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ListDomainNames",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAvailabilityOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateAvailabilityOptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDomainEndpointOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateDomainEndpointOptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateScalingParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateScalingParameters",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServiceAccessPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateServiceAccessPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var _A9SearchCloudConfigService2013 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "A9SearchCloudConfigService2013",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://cloudsearch.amazonaws.com/doc/2013-01-01/"})
-
-var A9SearchCloudConfigService2013 = smithy.NewServiceSchema(_A9SearchCloudConfigService2013, "2013-01-01")
-
-var AccessPoliciesStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AccessPoliciesStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AccessPoliciesStatus_Options *smithy.Schema
-
-var AccessPoliciesStatus_Status *smithy.Schema
-
-var AlgorithmicStemming = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AlgorithmicStemming",
-}, smithy.ShapeTypeEnum, 4)
-var AlgorithmicStemming_none *smithy.Schema
-
-var AlgorithmicStemming_minimal *smithy.Schema
-
-var AlgorithmicStemming_light *smithy.Schema
-
-var AlgorithmicStemming_full *smithy.Schema
-
-var AnalysisOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AnalysisOptions",
-}, smithy.ShapeTypeStructure, 5)
-var AnalysisOptions_Synonyms *smithy.Schema
-
-var AnalysisOptions_Stopwords *smithy.Schema
-
-var AnalysisOptions_StemmingDictionary *smithy.Schema
-
-var AnalysisOptions_JapaneseTokenizationDictionary *smithy.Schema
-
-var AnalysisOptions_AlgorithmicStemming *smithy.Schema
-
-var AnalysisScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AnalysisScheme",
-}, smithy.ShapeTypeStructure, 3)
-var AnalysisScheme_AnalysisSchemeName *smithy.Schema
-
-var AnalysisScheme_AnalysisSchemeLanguage *smithy.Schema
-
-var AnalysisScheme_AnalysisOptions *smithy.Schema
-
-var AnalysisSchemeLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AnalysisSchemeLanguage",
-}, smithy.ShapeTypeEnum, 35)
-var AnalysisSchemeLanguage_ar *smithy.Schema
-
-var AnalysisSchemeLanguage_bg *smithy.Schema
-
-var AnalysisSchemeLanguage_ca *smithy.Schema
-
-var AnalysisSchemeLanguage_cs *smithy.Schema
-
-var AnalysisSchemeLanguage_da *smithy.Schema
-
-var AnalysisSchemeLanguage_de *smithy.Schema
-
-var AnalysisSchemeLanguage_el *smithy.Schema
-
-var AnalysisSchemeLanguage_en *smithy.Schema
-
-var AnalysisSchemeLanguage_es *smithy.Schema
-
-var AnalysisSchemeLanguage_eu *smithy.Schema
-
-var AnalysisSchemeLanguage_fa *smithy.Schema
-
-var AnalysisSchemeLanguage_fi *smithy.Schema
-
-var AnalysisSchemeLanguage_fr *smithy.Schema
-
-var AnalysisSchemeLanguage_ga *smithy.Schema
-
-var AnalysisSchemeLanguage_gl *smithy.Schema
-
-var AnalysisSchemeLanguage_he *smithy.Schema
-
-var AnalysisSchemeLanguage_hi *smithy.Schema
-
-var AnalysisSchemeLanguage_hu *smithy.Schema
-
-var AnalysisSchemeLanguage_hy *smithy.Schema
-
-var AnalysisSchemeLanguage_id *smithy.Schema
-
-var AnalysisSchemeLanguage_it *smithy.Schema
-
-var AnalysisSchemeLanguage_ja *smithy.Schema
-
-var AnalysisSchemeLanguage_ko *smithy.Schema
-
-var AnalysisSchemeLanguage_lv *smithy.Schema
-
-var AnalysisSchemeLanguage_mul *smithy.Schema
-
-var AnalysisSchemeLanguage_nl *smithy.Schema
-
-var AnalysisSchemeLanguage_no *smithy.Schema
-
-var AnalysisSchemeLanguage_pt *smithy.Schema
-
-var AnalysisSchemeLanguage_ro *smithy.Schema
-
-var AnalysisSchemeLanguage_ru *smithy.Schema
-
-var AnalysisSchemeLanguage_sv *smithy.Schema
-
-var AnalysisSchemeLanguage_th *smithy.Schema
-
-var AnalysisSchemeLanguage_tr *smithy.Schema
-
-var AnalysisSchemeLanguage_zh_Hans *smithy.Schema
-
-var AnalysisSchemeLanguage_zh_Hant *smithy.Schema
-
-var AnalysisSchemeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AnalysisSchemeStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AnalysisSchemeStatus_Options *smithy.Schema
-
-var AnalysisSchemeStatus_Status *smithy.Schema
-
-var _AnalysisSchemeStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AnalysisSchemeStatusList",
-}, smithy.ShapeTypeList, 1)
-var _AnalysisSchemeStatusList_member *smithy.Schema
-
-var _APIVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "APIVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var AvailabilityOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "AvailabilityOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AvailabilityOptionsStatus_Options *smithy.Schema
-
-var AvailabilityOptionsStatus_Status *smithy.Schema
-
-var BaseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "BaseException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var BaseException_Code *smithy.Schema
-
-var BaseException_Message *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DateArrayOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DateArrayOptions",
-}, smithy.ShapeTypeStructure, 5)
-var DateArrayOptions_DefaultValue *smithy.Schema
-
-var DateArrayOptions_SourceFields *smithy.Schema
-
-var DateArrayOptions_FacetEnabled *smithy.Schema
-
-var DateArrayOptions_SearchEnabled *smithy.Schema
-
-var DateArrayOptions_ReturnEnabled *smithy.Schema
-
-var DateOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DateOptions",
-}, smithy.ShapeTypeStructure, 6)
-var DateOptions_DefaultValue *smithy.Schema
-
-var DateOptions_SourceField *smithy.Schema
-
-var DateOptions_FacetEnabled *smithy.Schema
-
-var DateOptions_SearchEnabled *smithy.Schema
-
-var DateOptions_ReturnEnabled *smithy.Schema
-
-var DateOptions_SortEnabled *smithy.Schema
-
-var DisabledOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DisabledOperationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "DisabledAction",
-		StatusCode: 409})
-var DisabledOperationException_Code *smithy.Schema
-
-var DisabledOperationException_Message *smithy.Schema
-
-var DocumentSuggesterOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DocumentSuggesterOptions",
-}, smithy.ShapeTypeStructure, 3)
-var DocumentSuggesterOptions_SourceField *smithy.Schema
-
-var DocumentSuggesterOptions_FuzzyMatching *smithy.Schema
-
-var DocumentSuggesterOptions_SortExpression *smithy.Schema
-
-var DomainEndpointOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainEndpointOptions",
-}, smithy.ShapeTypeStructure, 2)
-var DomainEndpointOptions_EnforceHTTPS *smithy.Schema
-
-var DomainEndpointOptions_TLSSecurityPolicy *smithy.Schema
-
-var DomainEndpointOptionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainEndpointOptionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var DomainEndpointOptionsStatus_Options *smithy.Schema
-
-var DomainEndpointOptionsStatus_Status *smithy.Schema
-
-var _DomainId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainId",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainNameList",
-}, smithy.ShapeTypeList, 1)
-var _DomainNameList_member *smithy.Schema
-
-var _DomainNameMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainNameMap",
-}, smithy.ShapeTypeMap, 2)
-var _DomainNameMap_key *smithy.Schema
-
-var _DomainNameMap_value *smithy.Schema
-
-var DomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainStatus",
-}, smithy.ShapeTypeStructure, 13)
-var DomainStatus_DomainId *smithy.Schema
-
-var DomainStatus_DomainName *smithy.Schema
-
-var DomainStatus_ARN *smithy.Schema
-
-var DomainStatus_Created *smithy.Schema
-
-var DomainStatus_Deleted *smithy.Schema
-
-var DomainStatus_DocService *smithy.Schema
-
-var DomainStatus_SearchService *smithy.Schema
-
-var DomainStatus_RequiresIndexDocuments *smithy.Schema
-
-var DomainStatus_Processing *smithy.Schema
-
-var DomainStatus_SearchInstanceType *smithy.Schema
-
-var DomainStatus_SearchPartitionCount *smithy.Schema
-
-var DomainStatus_SearchInstanceCount *smithy.Schema
-
-var DomainStatus_Limits *smithy.Schema
-
-var _DomainStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DomainStatusList",
-}, smithy.ShapeTypeList, 1)
-var _DomainStatusList_member *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var DoubleArrayOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DoubleArrayOptions",
-}, smithy.ShapeTypeStructure, 5)
-var DoubleArrayOptions_DefaultValue *smithy.Schema
-
-var DoubleArrayOptions_SourceFields *smithy.Schema
-
-var DoubleArrayOptions_FacetEnabled *smithy.Schema
-
-var DoubleArrayOptions_SearchEnabled *smithy.Schema
-
-var DoubleArrayOptions_ReturnEnabled *smithy.Schema
-
-var DoubleOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DoubleOptions",
-}, smithy.ShapeTypeStructure, 6)
-var DoubleOptions_DefaultValue *smithy.Schema
-
-var DoubleOptions_SourceField *smithy.Schema
-
-var DoubleOptions_FacetEnabled *smithy.Schema
-
-var DoubleOptions_SearchEnabled *smithy.Schema
-
-var DoubleOptions_ReturnEnabled *smithy.Schema
-
-var DoubleOptions_SortEnabled *smithy.Schema
-
-var _DynamicFieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DynamicFieldName",
-}, smithy.ShapeTypeString, 0)
-
-var _DynamicFieldNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DynamicFieldNameList",
-}, smithy.ShapeTypeList, 1)
-var _DynamicFieldNameList_member *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "Expression",
-}, smithy.ShapeTypeStructure, 2)
-var Expression_ExpressionName *smithy.Schema
-
-var Expression_ExpressionValue *smithy.Schema
-
-var ExpressionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ExpressionStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ExpressionStatus_Options *smithy.Schema
-
-var ExpressionStatus_Status *smithy.Schema
-
-var _ExpressionStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ExpressionStatusList",
-}, smithy.ShapeTypeList, 1)
-var _ExpressionStatusList_member *smithy.Schema
-
-var _ExpressionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ExpressionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var _FieldNameCommaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "FieldNameCommaList",
-}, smithy.ShapeTypeString, 0)
-
-var _FieldNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "FieldNameList",
-}, smithy.ShapeTypeList, 1)
-var _FieldNameList_member *smithy.Schema
-
-var _FieldValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "FieldValue",
-}, smithy.ShapeTypeString, 0)
-
-var IndexField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IndexField",
-}, smithy.ShapeTypeStructure, 13)
-var IndexField_IndexFieldName *smithy.Schema
-
-var IndexField_IndexFieldType *smithy.Schema
-
-var IndexField_IntOptions *smithy.Schema
-
-var IndexField_DoubleOptions *smithy.Schema
-
-var IndexField_LiteralOptions *smithy.Schema
-
-var IndexField_TextOptions *smithy.Schema
-
-var IndexField_DateOptions *smithy.Schema
-
-var IndexField_LatLonOptions *smithy.Schema
-
-var IndexField_IntArrayOptions *smithy.Schema
-
-var IndexField_DoubleArrayOptions *smithy.Schema
-
-var IndexField_LiteralArrayOptions *smithy.Schema
-
-var IndexField_TextArrayOptions *smithy.Schema
-
-var IndexField_DateArrayOptions *smithy.Schema
-
-var IndexFieldStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IndexFieldStatus",
-}, smithy.ShapeTypeStructure, 2)
-var IndexFieldStatus_Options *smithy.Schema
-
-var IndexFieldStatus_Status *smithy.Schema
-
-var _IndexFieldStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IndexFieldStatusList",
-}, smithy.ShapeTypeList, 1)
-var _IndexFieldStatusList_member *smithy.Schema
-
-var IndexFieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IndexFieldType",
-}, smithy.ShapeTypeEnum, 11)
-var IndexFieldType_int *smithy.Schema
-
-var IndexFieldType_double *smithy.Schema
-
-var IndexFieldType_literal *smithy.Schema
-
-var IndexFieldType_text *smithy.Schema
-
-var IndexFieldType_date *smithy.Schema
-
-var IndexFieldType_latlon *smithy.Schema
-
-var IndexFieldType_int_array *smithy.Schema
-
-var IndexFieldType_double_array *smithy.Schema
-
-var IndexFieldType_literal_array *smithy.Schema
-
-var IndexFieldType_text_array *smithy.Schema
-
-var IndexFieldType_date_array *smithy.Schema
-
-var _InstanceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "InstanceCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var IntArrayOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IntArrayOptions",
-}, smithy.ShapeTypeStructure, 5)
-var IntArrayOptions_DefaultValue *smithy.Schema
-
-var IntArrayOptions_SourceFields *smithy.Schema
-
-var IntArrayOptions_FacetEnabled *smithy.Schema
-
-var IntArrayOptions_SearchEnabled *smithy.Schema
-
-var IntArrayOptions_ReturnEnabled *smithy.Schema
-
-var InternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalException",
-		StatusCode: 500})
-var InternalException_Code *smithy.Schema
-
-var InternalException_Message *smithy.Schema
-
-var IntOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IntOptions",
-}, smithy.ShapeTypeStructure, 6)
-var IntOptions_DefaultValue *smithy.Schema
-
-var IntOptions_SourceField *smithy.Schema
-
-var IntOptions_FacetEnabled *smithy.Schema
-
-var IntOptions_SearchEnabled *smithy.Schema
-
-var IntOptions_ReturnEnabled *smithy.Schema
-
-var IntOptions_SortEnabled *smithy.Schema
-
-var InvalidTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "InvalidTypeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidType",
-		StatusCode: 409})
-var InvalidTypeException_Code *smithy.Schema
-
-var InvalidTypeException_Message *smithy.Schema
-
-var LatLonOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "LatLonOptions",
-}, smithy.ShapeTypeStructure, 6)
-var LatLonOptions_DefaultValue *smithy.Schema
-
-var LatLonOptions_SourceField *smithy.Schema
-
-var LatLonOptions_FacetEnabled *smithy.Schema
-
-var LatLonOptions_SearchEnabled *smithy.Schema
-
-var LatLonOptions_ReturnEnabled *smithy.Schema
-
-var LatLonOptions_SortEnabled *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
-		StatusCode: 409})
-var LimitExceededException_Code *smithy.Schema
-
-var LimitExceededException_Message *smithy.Schema
-
-var Limits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "Limits",
-}, smithy.ShapeTypeStructure, 2)
-var Limits_MaximumReplicationCount *smithy.Schema
-
-var Limits_MaximumPartitionCount *smithy.Schema
-
-var LiteralArrayOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "LiteralArrayOptions",
-}, smithy.ShapeTypeStructure, 5)
-var LiteralArrayOptions_DefaultValue *smithy.Schema
-
-var LiteralArrayOptions_SourceFields *smithy.Schema
-
-var LiteralArrayOptions_FacetEnabled *smithy.Schema
-
-var LiteralArrayOptions_SearchEnabled *smithy.Schema
-
-var LiteralArrayOptions_ReturnEnabled *smithy.Schema
-
-var LiteralOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "LiteralOptions",
-}, smithy.ShapeTypeStructure, 6)
-var LiteralOptions_DefaultValue *smithy.Schema
-
-var LiteralOptions_SourceField *smithy.Schema
-
-var LiteralOptions_FacetEnabled *smithy.Schema
-
-var LiteralOptions_SearchEnabled *smithy.Schema
-
-var LiteralOptions_ReturnEnabled *smithy.Schema
-
-var LiteralOptions_SortEnabled *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaximumPartitionCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "MaximumPartitionCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaximumReplicationCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "MaximumReplicationCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MultiAZ = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "MultiAZ",
-}, smithy.ShapeTypeBoolean, 0)
-
-var OptionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "OptionState",
-}, smithy.ShapeTypeEnum, 4)
-var OptionState_RequiresIndexDocuments *smithy.Schema
-
-var OptionState_Processing *smithy.Schema
-
-var OptionState_Active *smithy.Schema
-
-var OptionState_FailedToValidate *smithy.Schema
-
-var OptionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "OptionStatus",
-}, smithy.ShapeTypeStructure, 5)
-var OptionStatus_CreationDate *smithy.Schema
-
-var OptionStatus_UpdateDate *smithy.Schema
-
-var OptionStatus_UpdateVersion *smithy.Schema
-
-var OptionStatus_State *smithy.Schema
-
-var OptionStatus_PendingDeletion *smithy.Schema
-
-var _PartitionCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "PartitionCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var PartitionInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "PartitionInstanceType",
-}, smithy.ShapeTypeEnum, 17)
-var PartitionInstanceType_search_m1_small *smithy.Schema
-
-var PartitionInstanceType_search_m1_large *smithy.Schema
-
-var PartitionInstanceType_search_m2_xlarge *smithy.Schema
-
-var PartitionInstanceType_search_m2_2xlarge *smithy.Schema
-
-var PartitionInstanceType_search_m3_medium *smithy.Schema
-
-var PartitionInstanceType_search_m3_large *smithy.Schema
-
-var PartitionInstanceType_search_m3_xlarge *smithy.Schema
-
-var PartitionInstanceType_search_m3_2xlarge *smithy.Schema
-
-var PartitionInstanceType_search_small *smithy.Schema
-
-var PartitionInstanceType_search_medium *smithy.Schema
-
-var PartitionInstanceType_search_large *smithy.Schema
-
-var PartitionInstanceType_search_xlarge *smithy.Schema
-
-var PartitionInstanceType_search_2xlarge *smithy.Schema
-
-var PartitionInstanceType_search_previousgeneration_small *smithy.Schema
-
-var PartitionInstanceType_search_previousgeneration_large *smithy.Schema
-
-var PartitionInstanceType_search_previousgeneration_xlarge *smithy.Schema
-
-var PartitionInstanceType_search_previousgeneration_2xlarge *smithy.Schema
-
-var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "PolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceAlreadyExists",
-		StatusCode: 409})
-var ResourceAlreadyExistsException_Code *smithy.Schema
-
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
-		StatusCode: 409})
-var ResourceNotFoundException_Code *smithy.Schema
-
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ScalingParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ScalingParameters",
-}, smithy.ShapeTypeStructure, 3)
-var ScalingParameters_DesiredInstanceType *smithy.Schema
-
-var ScalingParameters_DesiredReplicationCount *smithy.Schema
-
-var ScalingParameters_DesiredPartitionCount *smithy.Schema
-
-var ScalingParametersStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ScalingParametersStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ScalingParametersStatus_Options *smithy.Schema
-
-var ScalingParametersStatus_Status *smithy.Schema
-
-var _SearchInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "SearchInstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ServiceEndpoint",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceEndpoint_Endpoint *smithy.Schema
-
-var _ServiceUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ServiceUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _StandardName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "StandardName",
-}, smithy.ShapeTypeString, 0)
-
-var _StandardNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "StandardNameList",
-}, smithy.ShapeTypeList, 1)
-var _StandardNameList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Suggester = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "Suggester",
-}, smithy.ShapeTypeStructure, 2)
-var Suggester_SuggesterName *smithy.Schema
-
-var Suggester_DocumentSuggesterOptions *smithy.Schema
-
-var SuggesterFuzzyMatching = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "SuggesterFuzzyMatching",
-}, smithy.ShapeTypeEnum, 3)
-var SuggesterFuzzyMatching_none *smithy.Schema
-
-var SuggesterFuzzyMatching_low *smithy.Schema
-
-var SuggesterFuzzyMatching_high *smithy.Schema
-
-var SuggesterStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "SuggesterStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SuggesterStatus_Options *smithy.Schema
-
-var SuggesterStatus_Status *smithy.Schema
-
-var _SuggesterStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "SuggesterStatusList",
-}, smithy.ShapeTypeList, 1)
-var _SuggesterStatusList_member *smithy.Schema
-
-var TextArrayOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "TextArrayOptions",
-}, smithy.ShapeTypeStructure, 5)
-var TextArrayOptions_DefaultValue *smithy.Schema
-
-var TextArrayOptions_SourceFields *smithy.Schema
-
-var TextArrayOptions_ReturnEnabled *smithy.Schema
-
-var TextArrayOptions_HighlightEnabled *smithy.Schema
-
-var TextArrayOptions_AnalysisScheme *smithy.Schema
-
-var TextOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "TextOptions",
-}, smithy.ShapeTypeStructure, 6)
-var TextOptions_DefaultValue *smithy.Schema
-
-var TextOptions_SourceField *smithy.Schema
-
-var TextOptions_ReturnEnabled *smithy.Schema
-
-var TextOptions_SortEnabled *smithy.Schema
-
-var TextOptions_HighlightEnabled *smithy.Schema
-
-var TextOptions_AnalysisScheme *smithy.Schema
-
-var TLSSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "TLSSecurityPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var TLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 *smithy.Schema
-
-var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 *smithy.Schema
-
-var _UIntValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UIntValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _UpdateTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Code *smithy.Schema
-
-var ValidationException_Message *smithy.Schema
-
-var _Word = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "Word",
-}, smithy.ShapeTypeString, 0)
-
-var BuildSuggestersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "BuildSuggestersRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BuildSuggestersRequest_DomainName *smithy.Schema
-
-var BuildSuggestersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "BuildSuggestersResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BuildSuggestersResponse_FieldNames *smithy.Schema
-
-var CreateDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "CreateDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDomainRequest_DomainName *smithy.Schema
-
-var CreateDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "CreateDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDomainResponse_DomainStatus *smithy.Schema
-
-var DefineAnalysisSchemeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineAnalysisSchemeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DefineAnalysisSchemeRequest_DomainName *smithy.Schema
-
-var DefineAnalysisSchemeRequest_AnalysisScheme *smithy.Schema
-
-var DefineAnalysisSchemeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineAnalysisSchemeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DefineAnalysisSchemeResponse_AnalysisScheme *smithy.Schema
-
-var DefineExpressionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineExpressionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DefineExpressionRequest_DomainName *smithy.Schema
-
-var DefineExpressionRequest_Expression *smithy.Schema
-
-var DefineExpressionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineExpressionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DefineExpressionResponse_Expression *smithy.Schema
-
-var DefineIndexFieldRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineIndexFieldRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DefineIndexFieldRequest_DomainName *smithy.Schema
-
-var DefineIndexFieldRequest_IndexField *smithy.Schema
-
-var DefineIndexFieldResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineIndexFieldResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DefineIndexFieldResponse_IndexField *smithy.Schema
-
-var DefineSuggesterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineSuggesterRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DefineSuggesterRequest_DomainName *smithy.Schema
-
-var DefineSuggesterRequest_Suggester *smithy.Schema
-
-var DefineSuggesterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DefineSuggesterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DefineSuggesterResponse_Suggester *smithy.Schema
-
-var DeleteAnalysisSchemeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteAnalysisSchemeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAnalysisSchemeRequest_DomainName *smithy.Schema
-
-var DeleteAnalysisSchemeRequest_AnalysisSchemeName *smithy.Schema
-
-var DeleteAnalysisSchemeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteAnalysisSchemeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAnalysisSchemeResponse_AnalysisScheme *smithy.Schema
-
-var DeleteDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainRequest_DomainName *smithy.Schema
-
-var DeleteDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainResponse_DomainStatus *smithy.Schema
-
-var DeleteExpressionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteExpressionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteExpressionRequest_DomainName *smithy.Schema
-
-var DeleteExpressionRequest_ExpressionName *smithy.Schema
-
-var DeleteExpressionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteExpressionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExpressionResponse_Expression *smithy.Schema
-
-var DeleteIndexFieldRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteIndexFieldRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIndexFieldRequest_DomainName *smithy.Schema
-
-var DeleteIndexFieldRequest_IndexFieldName *smithy.Schema
-
-var DeleteIndexFieldResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteIndexFieldResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIndexFieldResponse_IndexField *smithy.Schema
-
-var DeleteSuggesterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteSuggesterRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSuggesterRequest_DomainName *smithy.Schema
-
-var DeleteSuggesterRequest_SuggesterName *smithy.Schema
-
-var DeleteSuggesterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DeleteSuggesterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSuggesterResponse_Suggester *smithy.Schema
-
-var DescribeAnalysisSchemesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeAnalysisSchemesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAnalysisSchemesRequest_DomainName *smithy.Schema
-
-var DescribeAnalysisSchemesRequest_AnalysisSchemeNames *smithy.Schema
-
-var DescribeAnalysisSchemesRequest_Deployed *smithy.Schema
-
-var DescribeAnalysisSchemesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeAnalysisSchemesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAnalysisSchemesResponse_AnalysisSchemes *smithy.Schema
-
-var DescribeAvailabilityOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeAvailabilityOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAvailabilityOptionsRequest_DomainName *smithy.Schema
-
-var DescribeAvailabilityOptionsRequest_Deployed *smithy.Schema
-
-var DescribeAvailabilityOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeAvailabilityOptionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAvailabilityOptionsResponse_AvailabilityOptions *smithy.Schema
-
-var DescribeDomainEndpointOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeDomainEndpointOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDomainEndpointOptionsRequest_DomainName *smithy.Schema
-
-var DescribeDomainEndpointOptionsRequest_Deployed *smithy.Schema
-
-var DescribeDomainEndpointOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeDomainEndpointOptionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainEndpointOptionsResponse_DomainEndpointOptions *smithy.Schema
-
-var DescribeDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeDomainsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainsRequest_DomainNames *smithy.Schema
-
-var DescribeDomainsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeDomainsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainsResponse_DomainStatusList *smithy.Schema
-
-var DescribeExpressionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeExpressionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeExpressionsRequest_DomainName *smithy.Schema
-
-var DescribeExpressionsRequest_ExpressionNames *smithy.Schema
-
-var DescribeExpressionsRequest_Deployed *smithy.Schema
-
-var DescribeExpressionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeExpressionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeExpressionsResponse_Expressions *smithy.Schema
-
-var DescribeIndexFieldsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeIndexFieldsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeIndexFieldsRequest_DomainName *smithy.Schema
-
-var DescribeIndexFieldsRequest_FieldNames *smithy.Schema
-
-var DescribeIndexFieldsRequest_Deployed *smithy.Schema
-
-var DescribeIndexFieldsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeIndexFieldsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeIndexFieldsResponse_IndexFields *smithy.Schema
-
-var DescribeScalingParametersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeScalingParametersRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeScalingParametersRequest_DomainName *smithy.Schema
-
-var DescribeScalingParametersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeScalingParametersResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeScalingParametersResponse_ScalingParameters *smithy.Schema
-
-var DescribeServiceAccessPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeServiceAccessPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeServiceAccessPoliciesRequest_DomainName *smithy.Schema
-
-var DescribeServiceAccessPoliciesRequest_Deployed *smithy.Schema
-
-var DescribeServiceAccessPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeServiceAccessPoliciesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeServiceAccessPoliciesResponse_AccessPolicies *smithy.Schema
-
-var DescribeSuggestersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeSuggestersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSuggestersRequest_DomainName *smithy.Schema
-
-var DescribeSuggestersRequest_SuggesterNames *smithy.Schema
-
-var DescribeSuggestersRequest_Deployed *smithy.Schema
-
-var DescribeSuggestersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "DescribeSuggestersResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSuggestersResponse_Suggesters *smithy.Schema
-
-var IndexDocumentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IndexDocumentsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var IndexDocumentsRequest_DomainName *smithy.Schema
-
-var IndexDocumentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "IndexDocumentsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var IndexDocumentsResponse_FieldNames *smithy.Schema
-
-var ListDomainNamesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "ListDomainNamesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListDomainNamesResponse_DomainNames *smithy.Schema
-
-var UpdateAvailabilityOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateAvailabilityOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAvailabilityOptionsRequest_DomainName *smithy.Schema
-
-var UpdateAvailabilityOptionsRequest_MultiAZ *smithy.Schema
-
-var UpdateAvailabilityOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateAvailabilityOptionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAvailabilityOptionsResponse_AvailabilityOptions *smithy.Schema
-
-var UpdateDomainEndpointOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateDomainEndpointOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDomainEndpointOptionsRequest_DomainName *smithy.Schema
-
-var UpdateDomainEndpointOptionsRequest_DomainEndpointOptions *smithy.Schema
-
-var UpdateDomainEndpointOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateDomainEndpointOptionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDomainEndpointOptionsResponse_DomainEndpointOptions *smithy.Schema
-
-var UpdateScalingParametersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateScalingParametersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateScalingParametersRequest_DomainName *smithy.Schema
-
-var UpdateScalingParametersRequest_ScalingParameters *smithy.Schema
-
-var UpdateScalingParametersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateScalingParametersResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateScalingParametersResponse_ScalingParameters *smithy.Schema
-
-var UpdateServiceAccessPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateServiceAccessPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServiceAccessPoliciesRequest_DomainName *smithy.Schema
-
-var UpdateServiceAccessPoliciesRequest_AccessPolicies *smithy.Schema
-
-var UpdateServiceAccessPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearch",
-	Name:      "UpdateServiceAccessPoliciesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceAccessPoliciesResponse_AccessPolicies *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	OptionState_RequiresIndexDocuments = OptionState.AddMember("RequiresIndexDocuments", smithyprelude.Unit)
-
-	OptionState_Processing = OptionState.AddMember("Processing", smithyprelude.Unit)
-
-	OptionState_Active = OptionState.AddMember("Active", smithyprelude.Unit)
-
-	OptionState_FailedToValidate = OptionState.AddMember("FailedToValidate", smithyprelude.Unit)
-
-	OptionStatus_CreationDate = OptionStatus.AddMember("CreationDate", _UpdateTimestamp)
-
-	OptionStatus_UpdateDate = OptionStatus.AddMember("UpdateDate", _UpdateTimestamp)
-
-	OptionStatus_UpdateVersion = OptionStatus.AddMember("UpdateVersion", _UIntValue)
-
-	OptionStatus_State = OptionStatus.AddMember("State", OptionState)
-
-	OptionStatus_PendingDeletion = OptionStatus.AddMember("PendingDeletion", _Boolean)
-
-	AccessPoliciesStatus_Options = AccessPoliciesStatus.AddMember("Options", _PolicyDocument)
-
-	AccessPoliciesStatus_Status = AccessPoliciesStatus.AddMember("Status", OptionStatus)
-
-	AlgorithmicStemming_none = AlgorithmicStemming.AddMember("none", smithyprelude.Unit)
-
-	AlgorithmicStemming_minimal = AlgorithmicStemming.AddMember("minimal", smithyprelude.Unit)
-
-	AlgorithmicStemming_light = AlgorithmicStemming.AddMember("light", smithyprelude.Unit)
-
-	AlgorithmicStemming_full = AlgorithmicStemming.AddMember("full", smithyprelude.Unit)
-
-	AnalysisOptions_Synonyms = AnalysisOptions.AddMember("Synonyms", _String)
-
-	AnalysisOptions_Stopwords = AnalysisOptions.AddMember("Stopwords", _String)
-
-	AnalysisOptions_StemmingDictionary = AnalysisOptions.AddMember("StemmingDictionary", _String)
-
-	AnalysisOptions_JapaneseTokenizationDictionary = AnalysisOptions.AddMember("JapaneseTokenizationDictionary", _String)
-
-	AnalysisOptions_AlgorithmicStemming = AnalysisOptions.AddMember("AlgorithmicStemming", AlgorithmicStemming)
-
-	AnalysisSchemeLanguage_ar = AnalysisSchemeLanguage.AddMember("ar", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_bg = AnalysisSchemeLanguage.AddMember("bg", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_ca = AnalysisSchemeLanguage.AddMember("ca", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_cs = AnalysisSchemeLanguage.AddMember("cs", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_da = AnalysisSchemeLanguage.AddMember("da", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_de = AnalysisSchemeLanguage.AddMember("de", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_el = AnalysisSchemeLanguage.AddMember("el", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_en = AnalysisSchemeLanguage.AddMember("en", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_es = AnalysisSchemeLanguage.AddMember("es", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_eu = AnalysisSchemeLanguage.AddMember("eu", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_fa = AnalysisSchemeLanguage.AddMember("fa", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_fi = AnalysisSchemeLanguage.AddMember("fi", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_fr = AnalysisSchemeLanguage.AddMember("fr", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_ga = AnalysisSchemeLanguage.AddMember("ga", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_gl = AnalysisSchemeLanguage.AddMember("gl", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_he = AnalysisSchemeLanguage.AddMember("he", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_hi = AnalysisSchemeLanguage.AddMember("hi", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_hu = AnalysisSchemeLanguage.AddMember("hu", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_hy = AnalysisSchemeLanguage.AddMember("hy", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_id = AnalysisSchemeLanguage.AddMember("id", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_it = AnalysisSchemeLanguage.AddMember("it", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_ja = AnalysisSchemeLanguage.AddMember("ja", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_ko = AnalysisSchemeLanguage.AddMember("ko", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_lv = AnalysisSchemeLanguage.AddMember("lv", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_mul = AnalysisSchemeLanguage.AddMember("mul", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_nl = AnalysisSchemeLanguage.AddMember("nl", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_no = AnalysisSchemeLanguage.AddMember("no", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_pt = AnalysisSchemeLanguage.AddMember("pt", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_ro = AnalysisSchemeLanguage.AddMember("ro", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_ru = AnalysisSchemeLanguage.AddMember("ru", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_sv = AnalysisSchemeLanguage.AddMember("sv", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_th = AnalysisSchemeLanguage.AddMember("th", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_tr = AnalysisSchemeLanguage.AddMember("tr", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_zh_Hans = AnalysisSchemeLanguage.AddMember("zh_Hans", smithyprelude.Unit)
-
-	AnalysisSchemeLanguage_zh_Hant = AnalysisSchemeLanguage.AddMember("zh_Hant", smithyprelude.Unit)
-
-	AnalysisScheme_AnalysisSchemeName = AnalysisScheme.AddMember("AnalysisSchemeName", _StandardName)
-
-	AnalysisScheme_AnalysisSchemeLanguage = AnalysisScheme.AddMember("AnalysisSchemeLanguage", AnalysisSchemeLanguage)
-
-	AnalysisScheme_AnalysisOptions = AnalysisScheme.AddMember("AnalysisOptions", AnalysisOptions)
-
-	AnalysisSchemeStatus_Options = AnalysisSchemeStatus.AddMember("Options", AnalysisScheme)
-
-	AnalysisSchemeStatus_Status = AnalysisSchemeStatus.AddMember("Status", OptionStatus)
-
-	_AnalysisSchemeStatusList_member = _AnalysisSchemeStatusList.AddMember("member", AnalysisSchemeStatus)
-
-	AvailabilityOptionsStatus_Options = AvailabilityOptionsStatus.AddMember("Options", _MultiAZ)
-
-	AvailabilityOptionsStatus_Status = AvailabilityOptionsStatus.AddMember("Status", OptionStatus)
-
-	BaseException_Code = BaseException.AddMember("Code", _ErrorCode)
-
-	BaseException_Message = BaseException.AddMember("Message", _ErrorMessage)
-
-	DateArrayOptions_DefaultValue = DateArrayOptions.AddMember("DefaultValue", _FieldValue)
-
-	DateArrayOptions_SourceFields = DateArrayOptions.AddMember("SourceFields", _FieldNameCommaList)
-
-	DateArrayOptions_FacetEnabled = DateArrayOptions.AddMember("FacetEnabled", _Boolean)
-
-	DateArrayOptions_SearchEnabled = DateArrayOptions.AddMember("SearchEnabled", _Boolean)
-
-	DateArrayOptions_ReturnEnabled = DateArrayOptions.AddMember("ReturnEnabled", _Boolean)
-
-	DateOptions_DefaultValue = DateOptions.AddMember("DefaultValue", _FieldValue)
-
-	DateOptions_SourceField = DateOptions.AddMember("SourceField", _FieldName)
-
-	DateOptions_FacetEnabled = DateOptions.AddMember("FacetEnabled", _Boolean)
-
-	DateOptions_SearchEnabled = DateOptions.AddMember("SearchEnabled", _Boolean)
-
-	DateOptions_ReturnEnabled = DateOptions.AddMember("ReturnEnabled", _Boolean)
-
-	DateOptions_SortEnabled = DateOptions.AddMember("SortEnabled", _Boolean)
-
-	DisabledOperationException_Code = DisabledOperationException.AddMember("Code", _ErrorCode)
-
-	DisabledOperationException_Message = DisabledOperationException.AddMember("Message", _ErrorMessage)
-
-	SuggesterFuzzyMatching_none = SuggesterFuzzyMatching.AddMember("none", smithyprelude.Unit)
-
-	SuggesterFuzzyMatching_low = SuggesterFuzzyMatching.AddMember("low", smithyprelude.Unit)
-
-	SuggesterFuzzyMatching_high = SuggesterFuzzyMatching.AddMember("high", smithyprelude.Unit)
-
-	DocumentSuggesterOptions_SourceField = DocumentSuggesterOptions.AddMember("SourceField", _FieldName)
-
-	DocumentSuggesterOptions_FuzzyMatching = DocumentSuggesterOptions.AddMember("FuzzyMatching", SuggesterFuzzyMatching)
-
-	DocumentSuggesterOptions_SortExpression = DocumentSuggesterOptions.AddMember("SortExpression", _String)
-
-	TLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_0_2019_07", smithyprelude.Unit)
-
-	TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_2_2019_07", smithyprelude.Unit)
-
-	DomainEndpointOptions_EnforceHTTPS = DomainEndpointOptions.AddMember("EnforceHTTPS", _Boolean)
-
-	DomainEndpointOptions_TLSSecurityPolicy = DomainEndpointOptions.AddMember("TLSSecurityPolicy", TLSSecurityPolicy)
-
-	DomainEndpointOptionsStatus_Options = DomainEndpointOptionsStatus.AddMember("Options", DomainEndpointOptions)
-
-	DomainEndpointOptionsStatus_Status = DomainEndpointOptionsStatus.AddMember("Status", OptionStatus)
-
-	_DomainNameList_member = _DomainNameList.AddMember("member", _DomainName)
-
-	_DomainNameMap_key = _DomainNameMap.AddMember("key", _DomainName)
-
-	_DomainNameMap_value = _DomainNameMap.AddMember("value", _APIVersion)
-
-	ServiceEndpoint_Endpoint = ServiceEndpoint.AddMember("Endpoint", _ServiceUrl)
-
-	Limits_MaximumReplicationCount = Limits.AddMember("MaximumReplicationCount", _MaximumReplicationCount)
-
-	Limits_MaximumPartitionCount = Limits.AddMember("MaximumPartitionCount", _MaximumPartitionCount)
-
-	DomainStatus_DomainId = DomainStatus.AddMember("DomainId", _DomainId)
-
-	DomainStatus_DomainName = DomainStatus.AddMember("DomainName", _DomainName)
-
-	DomainStatus_ARN = DomainStatus.AddMember("ARN", _ARN)
-
-	DomainStatus_Created = DomainStatus.AddMember("Created", _Boolean)
-
-	DomainStatus_Deleted = DomainStatus.AddMember("Deleted", _Boolean)
-
-	DomainStatus_DocService = DomainStatus.AddMember("DocService", ServiceEndpoint)
-
-	DomainStatus_SearchService = DomainStatus.AddMember("SearchService", ServiceEndpoint)
-
-	DomainStatus_RequiresIndexDocuments = DomainStatus.AddMember("RequiresIndexDocuments", _Boolean)
-
-	DomainStatus_Processing = DomainStatus.AddMember("Processing", _Boolean)
-
-	DomainStatus_SearchInstanceType = DomainStatus.AddMember("SearchInstanceType", _SearchInstanceType)
-
-	DomainStatus_SearchPartitionCount = DomainStatus.AddMember("SearchPartitionCount", _PartitionCount)
-
-	DomainStatus_SearchInstanceCount = DomainStatus.AddMember("SearchInstanceCount", _InstanceCount)
-
-	DomainStatus_Limits = DomainStatus.AddMember("Limits", Limits)
-
-	_DomainStatusList_member = _DomainStatusList.AddMember("member", DomainStatus)
-
-	DoubleArrayOptions_DefaultValue = DoubleArrayOptions.AddMember("DefaultValue", _Double)
-
-	DoubleArrayOptions_SourceFields = DoubleArrayOptions.AddMember("SourceFields", _FieldNameCommaList)
-
-	DoubleArrayOptions_FacetEnabled = DoubleArrayOptions.AddMember("FacetEnabled", _Boolean)
-
-	DoubleArrayOptions_SearchEnabled = DoubleArrayOptions.AddMember("SearchEnabled", _Boolean)
-
-	DoubleArrayOptions_ReturnEnabled = DoubleArrayOptions.AddMember("ReturnEnabled", _Boolean)
-
-	DoubleOptions_DefaultValue = DoubleOptions.AddMember("DefaultValue", _Double)
-
-	DoubleOptions_SourceField = DoubleOptions.AddMember("SourceField", _FieldName)
-
-	DoubleOptions_FacetEnabled = DoubleOptions.AddMember("FacetEnabled", _Boolean)
-
-	DoubleOptions_SearchEnabled = DoubleOptions.AddMember("SearchEnabled", _Boolean)
-
-	DoubleOptions_ReturnEnabled = DoubleOptions.AddMember("ReturnEnabled", _Boolean)
-
-	DoubleOptions_SortEnabled = DoubleOptions.AddMember("SortEnabled", _Boolean)
-
-	_DynamicFieldNameList_member = _DynamicFieldNameList.AddMember("member", _DynamicFieldName)
-
-	Expression_ExpressionName = Expression.AddMember("ExpressionName", _StandardName)
-
-	Expression_ExpressionValue = Expression.AddMember("ExpressionValue", _ExpressionValue)
-
-	ExpressionStatus_Options = ExpressionStatus.AddMember("Options", Expression)
-
-	ExpressionStatus_Status = ExpressionStatus.AddMember("Status", OptionStatus)
-
-	_ExpressionStatusList_member = _ExpressionStatusList.AddMember("member", ExpressionStatus)
-
-	_FieldNameList_member = _FieldNameList.AddMember("member", _FieldName)
-
-	IndexFieldType_int = IndexFieldType.AddMember("int", smithyprelude.Unit)
-
-	IndexFieldType_double = IndexFieldType.AddMember("double", smithyprelude.Unit)
-
-	IndexFieldType_literal = IndexFieldType.AddMember("literal", smithyprelude.Unit)
-
-	IndexFieldType_text = IndexFieldType.AddMember("text", smithyprelude.Unit)
-
-	IndexFieldType_date = IndexFieldType.AddMember("date", smithyprelude.Unit)
-
-	IndexFieldType_latlon = IndexFieldType.AddMember("latlon", smithyprelude.Unit)
-
-	IndexFieldType_int_array = IndexFieldType.AddMember("int_array", smithyprelude.Unit)
-
-	IndexFieldType_double_array = IndexFieldType.AddMember("double_array", smithyprelude.Unit)
-
-	IndexFieldType_literal_array = IndexFieldType.AddMember("literal_array", smithyprelude.Unit)
-
-	IndexFieldType_text_array = IndexFieldType.AddMember("text_array", smithyprelude.Unit)
-
-	IndexFieldType_date_array = IndexFieldType.AddMember("date_array", smithyprelude.Unit)
-
-	IntOptions_DefaultValue = IntOptions.AddMember("DefaultValue", _Long)
-
-	IntOptions_SourceField = IntOptions.AddMember("SourceField", _FieldName)
-
-	IntOptions_FacetEnabled = IntOptions.AddMember("FacetEnabled", _Boolean)
-
-	IntOptions_SearchEnabled = IntOptions.AddMember("SearchEnabled", _Boolean)
-
-	IntOptions_ReturnEnabled = IntOptions.AddMember("ReturnEnabled", _Boolean)
-
-	IntOptions_SortEnabled = IntOptions.AddMember("SortEnabled", _Boolean)
-
-	LiteralOptions_DefaultValue = LiteralOptions.AddMember("DefaultValue", _FieldValue)
-
-	LiteralOptions_SourceField = LiteralOptions.AddMember("SourceField", _FieldName)
-
-	LiteralOptions_FacetEnabled = LiteralOptions.AddMember("FacetEnabled", _Boolean)
-
-	LiteralOptions_SearchEnabled = LiteralOptions.AddMember("SearchEnabled", _Boolean)
-
-	LiteralOptions_ReturnEnabled = LiteralOptions.AddMember("ReturnEnabled", _Boolean)
-
-	LiteralOptions_SortEnabled = LiteralOptions.AddMember("SortEnabled", _Boolean)
-
-	TextOptions_DefaultValue = TextOptions.AddMember("DefaultValue", _FieldValue)
-
-	TextOptions_SourceField = TextOptions.AddMember("SourceField", _FieldName)
-
-	TextOptions_ReturnEnabled = TextOptions.AddMember("ReturnEnabled", _Boolean)
-
-	TextOptions_SortEnabled = TextOptions.AddMember("SortEnabled", _Boolean)
-
-	TextOptions_HighlightEnabled = TextOptions.AddMember("HighlightEnabled", _Boolean)
-
-	TextOptions_AnalysisScheme = TextOptions.AddMember("AnalysisScheme", _Word)
-
-	LatLonOptions_DefaultValue = LatLonOptions.AddMember("DefaultValue", _FieldValue)
-
-	LatLonOptions_SourceField = LatLonOptions.AddMember("SourceField", _FieldName)
-
-	LatLonOptions_FacetEnabled = LatLonOptions.AddMember("FacetEnabled", _Boolean)
-
-	LatLonOptions_SearchEnabled = LatLonOptions.AddMember("SearchEnabled", _Boolean)
-
-	LatLonOptions_ReturnEnabled = LatLonOptions.AddMember("ReturnEnabled", _Boolean)
-
-	LatLonOptions_SortEnabled = LatLonOptions.AddMember("SortEnabled", _Boolean)
-
-	IntArrayOptions_DefaultValue = IntArrayOptions.AddMember("DefaultValue", _Long)
-
-	IntArrayOptions_SourceFields = IntArrayOptions.AddMember("SourceFields", _FieldNameCommaList)
-
-	IntArrayOptions_FacetEnabled = IntArrayOptions.AddMember("FacetEnabled", _Boolean)
-
-	IntArrayOptions_SearchEnabled = IntArrayOptions.AddMember("SearchEnabled", _Boolean)
-
-	IntArrayOptions_ReturnEnabled = IntArrayOptions.AddMember("ReturnEnabled", _Boolean)
-
-	LiteralArrayOptions_DefaultValue = LiteralArrayOptions.AddMember("DefaultValue", _FieldValue)
-
-	LiteralArrayOptions_SourceFields = LiteralArrayOptions.AddMember("SourceFields", _FieldNameCommaList)
-
-	LiteralArrayOptions_FacetEnabled = LiteralArrayOptions.AddMember("FacetEnabled", _Boolean)
-
-	LiteralArrayOptions_SearchEnabled = LiteralArrayOptions.AddMember("SearchEnabled", _Boolean)
-
-	LiteralArrayOptions_ReturnEnabled = LiteralArrayOptions.AddMember("ReturnEnabled", _Boolean)
-
-	TextArrayOptions_DefaultValue = TextArrayOptions.AddMember("DefaultValue", _FieldValue)
-
-	TextArrayOptions_SourceFields = TextArrayOptions.AddMember("SourceFields", _FieldNameCommaList)
-
-	TextArrayOptions_ReturnEnabled = TextArrayOptions.AddMember("ReturnEnabled", _Boolean)
-
-	TextArrayOptions_HighlightEnabled = TextArrayOptions.AddMember("HighlightEnabled", _Boolean)
-
-	TextArrayOptions_AnalysisScheme = TextArrayOptions.AddMember("AnalysisScheme", _Word)
-
-	IndexField_IndexFieldName = IndexField.AddMember("IndexFieldName", _DynamicFieldName)
-
-	IndexField_IndexFieldType = IndexField.AddMember("IndexFieldType", IndexFieldType)
-
-	IndexField_IntOptions = IndexField.AddMember("IntOptions", IntOptions)
-
-	IndexField_DoubleOptions = IndexField.AddMember("DoubleOptions", DoubleOptions)
-
-	IndexField_LiteralOptions = IndexField.AddMember("LiteralOptions", LiteralOptions)
-
-	IndexField_TextOptions = IndexField.AddMember("TextOptions", TextOptions)
-
-	IndexField_DateOptions = IndexField.AddMember("DateOptions", DateOptions)
-
-	IndexField_LatLonOptions = IndexField.AddMember("LatLonOptions", LatLonOptions)
-
-	IndexField_IntArrayOptions = IndexField.AddMember("IntArrayOptions", IntArrayOptions)
-
-	IndexField_DoubleArrayOptions = IndexField.AddMember("DoubleArrayOptions", DoubleArrayOptions)
-
-	IndexField_LiteralArrayOptions = IndexField.AddMember("LiteralArrayOptions", LiteralArrayOptions)
-
-	IndexField_TextArrayOptions = IndexField.AddMember("TextArrayOptions", TextArrayOptions)
-
-	IndexField_DateArrayOptions = IndexField.AddMember("DateArrayOptions", DateArrayOptions)
-
-	IndexFieldStatus_Options = IndexFieldStatus.AddMember("Options", IndexField)
-
-	IndexFieldStatus_Status = IndexFieldStatus.AddMember("Status", OptionStatus)
-
-	_IndexFieldStatusList_member = _IndexFieldStatusList.AddMember("member", IndexFieldStatus)
-
-	InternalException_Code = InternalException.AddMember("Code", _ErrorCode)
-
-	InternalException_Message = InternalException.AddMember("Message", _ErrorMessage)
-
-	InvalidTypeException_Code = InvalidTypeException.AddMember("Code", _ErrorCode)
-
-	InvalidTypeException_Message = InvalidTypeException.AddMember("Message", _ErrorMessage)
-
-	LimitExceededException_Code = LimitExceededException.AddMember("Code", _ErrorCode)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	PartitionInstanceType_search_m1_small = PartitionInstanceType.AddMember("search_m1_small", smithyprelude.Unit)
-
-	PartitionInstanceType_search_m1_large = PartitionInstanceType.AddMember("search_m1_large", smithyprelude.Unit)
-
-	PartitionInstanceType_search_m2_xlarge = PartitionInstanceType.AddMember("search_m2_xlarge", smithyprelude.Unit)
-
-	PartitionInstanceType_search_m2_2xlarge = PartitionInstanceType.AddMember("search_m2_2xlarge", smithyprelude.Unit)
-
-	PartitionInstanceType_search_m3_medium = PartitionInstanceType.AddMember("search_m3_medium", smithyprelude.Unit)
-
-	PartitionInstanceType_search_m3_large = PartitionInstanceType.AddMember("search_m3_large", smithyprelude.Unit)
-
-	PartitionInstanceType_search_m3_xlarge = PartitionInstanceType.AddMember("search_m3_xlarge", smithyprelude.Unit)
-
-	PartitionInstanceType_search_m3_2xlarge = PartitionInstanceType.AddMember("search_m3_2xlarge", smithyprelude.Unit)
-
-	PartitionInstanceType_search_small = PartitionInstanceType.AddMember("search_small", smithyprelude.Unit)
-
-	PartitionInstanceType_search_medium = PartitionInstanceType.AddMember("search_medium", smithyprelude.Unit)
-
-	PartitionInstanceType_search_large = PartitionInstanceType.AddMember("search_large", smithyprelude.Unit)
-
-	PartitionInstanceType_search_xlarge = PartitionInstanceType.AddMember("search_xlarge", smithyprelude.Unit)
-
-	PartitionInstanceType_search_2xlarge = PartitionInstanceType.AddMember("search_2xlarge", smithyprelude.Unit)
-
-	PartitionInstanceType_search_previousgeneration_small = PartitionInstanceType.AddMember("search_previousgeneration_small", smithyprelude.Unit)
-
-	PartitionInstanceType_search_previousgeneration_large = PartitionInstanceType.AddMember("search_previousgeneration_large", smithyprelude.Unit)
-
-	PartitionInstanceType_search_previousgeneration_xlarge = PartitionInstanceType.AddMember("search_previousgeneration_xlarge", smithyprelude.Unit)
-
-	PartitionInstanceType_search_previousgeneration_2xlarge = PartitionInstanceType.AddMember("search_previousgeneration_2xlarge", smithyprelude.Unit)
-
-	ResourceAlreadyExistsException_Code = ResourceAlreadyExistsException.AddMember("Code", _ErrorCode)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Code = ResourceNotFoundException.AddMember("Code", _ErrorCode)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ScalingParameters_DesiredInstanceType = ScalingParameters.AddMember("DesiredInstanceType", PartitionInstanceType)
-
-	ScalingParameters_DesiredReplicationCount = ScalingParameters.AddMember("DesiredReplicationCount", _UIntValue)
-
-	ScalingParameters_DesiredPartitionCount = ScalingParameters.AddMember("DesiredPartitionCount", _UIntValue)
-
-	ScalingParametersStatus_Options = ScalingParametersStatus.AddMember("Options", ScalingParameters)
-
-	ScalingParametersStatus_Status = ScalingParametersStatus.AddMember("Status", OptionStatus)
-
-	_StandardNameList_member = _StandardNameList.AddMember("member", _StandardName)
-
-	Suggester_SuggesterName = Suggester.AddMember("SuggesterName", _StandardName)
-
-	Suggester_DocumentSuggesterOptions = Suggester.AddMember("DocumentSuggesterOptions", DocumentSuggesterOptions)
-
-	SuggesterStatus_Options = SuggesterStatus.AddMember("Options", Suggester)
-
-	SuggesterStatus_Status = SuggesterStatus.AddMember("Status", OptionStatus)
-
-	_SuggesterStatusList_member = _SuggesterStatusList.AddMember("member", SuggesterStatus)
-
-	ValidationException_Code = ValidationException.AddMember("Code", _ErrorCode)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	BuildSuggestersRequest_DomainName = BuildSuggestersRequest.AddMember("DomainName", _DomainName)
-
-	BuildSuggestersResponse_FieldNames = BuildSuggestersResponse.AddMember("FieldNames", _FieldNameList)
-
-	CreateDomainRequest_DomainName = CreateDomainRequest.AddMember("DomainName", _DomainName)
-
-	CreateDomainResponse_DomainStatus = CreateDomainResponse.AddMember("DomainStatus", DomainStatus)
-
-	DefineAnalysisSchemeRequest_DomainName = DefineAnalysisSchemeRequest.AddMember("DomainName", _DomainName)
-
-	DefineAnalysisSchemeRequest_AnalysisScheme = DefineAnalysisSchemeRequest.AddMember("AnalysisScheme", AnalysisScheme)
-
-	DefineAnalysisSchemeResponse_AnalysisScheme = DefineAnalysisSchemeResponse.AddMember("AnalysisScheme", AnalysisSchemeStatus)
-
-	DefineExpressionRequest_DomainName = DefineExpressionRequest.AddMember("DomainName", _DomainName)
-
-	DefineExpressionRequest_Expression = DefineExpressionRequest.AddMember("Expression", Expression)
-
-	DefineExpressionResponse_Expression = DefineExpressionResponse.AddMember("Expression", ExpressionStatus)
-
-	DefineIndexFieldRequest_DomainName = DefineIndexFieldRequest.AddMember("DomainName", _DomainName)
-
-	DefineIndexFieldRequest_IndexField = DefineIndexFieldRequest.AddMember("IndexField", IndexField)
-
-	DefineIndexFieldResponse_IndexField = DefineIndexFieldResponse.AddMember("IndexField", IndexFieldStatus)
-
-	DefineSuggesterRequest_DomainName = DefineSuggesterRequest.AddMember("DomainName", _DomainName)
-
-	DefineSuggesterRequest_Suggester = DefineSuggesterRequest.AddMember("Suggester", Suggester)
-
-	DefineSuggesterResponse_Suggester = DefineSuggesterResponse.AddMember("Suggester", SuggesterStatus)
-
-	DeleteAnalysisSchemeRequest_DomainName = DeleteAnalysisSchemeRequest.AddMember("DomainName", _DomainName)
-
-	DeleteAnalysisSchemeRequest_AnalysisSchemeName = DeleteAnalysisSchemeRequest.AddMember("AnalysisSchemeName", _StandardName)
-
-	DeleteAnalysisSchemeResponse_AnalysisScheme = DeleteAnalysisSchemeResponse.AddMember("AnalysisScheme", AnalysisSchemeStatus)
-
-	DeleteDomainRequest_DomainName = DeleteDomainRequest.AddMember("DomainName", _DomainName)
-
-	DeleteDomainResponse_DomainStatus = DeleteDomainResponse.AddMember("DomainStatus", DomainStatus)
-
-	DeleteExpressionRequest_DomainName = DeleteExpressionRequest.AddMember("DomainName", _DomainName)
-
-	DeleteExpressionRequest_ExpressionName = DeleteExpressionRequest.AddMember("ExpressionName", _StandardName)
-
-	DeleteExpressionResponse_Expression = DeleteExpressionResponse.AddMember("Expression", ExpressionStatus)
-
-	DeleteIndexFieldRequest_DomainName = DeleteIndexFieldRequest.AddMember("DomainName", _DomainName)
-
-	DeleteIndexFieldRequest_IndexFieldName = DeleteIndexFieldRequest.AddMember("IndexFieldName", _DynamicFieldName)
-
-	DeleteIndexFieldResponse_IndexField = DeleteIndexFieldResponse.AddMember("IndexField", IndexFieldStatus)
-
-	DeleteSuggesterRequest_DomainName = DeleteSuggesterRequest.AddMember("DomainName", _DomainName)
-
-	DeleteSuggesterRequest_SuggesterName = DeleteSuggesterRequest.AddMember("SuggesterName", _StandardName)
-
-	DeleteSuggesterResponse_Suggester = DeleteSuggesterResponse.AddMember("Suggester", SuggesterStatus)
-
-	DescribeAnalysisSchemesRequest_DomainName = DescribeAnalysisSchemesRequest.AddMember("DomainName", _DomainName)
-
-	DescribeAnalysisSchemesRequest_AnalysisSchemeNames = DescribeAnalysisSchemesRequest.AddMember("AnalysisSchemeNames", _StandardNameList)
-
-	DescribeAnalysisSchemesRequest_Deployed = DescribeAnalysisSchemesRequest.AddMember("Deployed", _Boolean)
-
-	DescribeAnalysisSchemesResponse_AnalysisSchemes = DescribeAnalysisSchemesResponse.AddMember("AnalysisSchemes", _AnalysisSchemeStatusList)
-
-	DescribeAvailabilityOptionsRequest_DomainName = DescribeAvailabilityOptionsRequest.AddMember("DomainName", _DomainName)
-
-	DescribeAvailabilityOptionsRequest_Deployed = DescribeAvailabilityOptionsRequest.AddMember("Deployed", _Boolean)
-
-	DescribeAvailabilityOptionsResponse_AvailabilityOptions = DescribeAvailabilityOptionsResponse.AddMember("AvailabilityOptions", AvailabilityOptionsStatus)
-
-	DescribeDomainEndpointOptionsRequest_DomainName = DescribeDomainEndpointOptionsRequest.AddMember("DomainName", _DomainName)
-
-	DescribeDomainEndpointOptionsRequest_Deployed = DescribeDomainEndpointOptionsRequest.AddMember("Deployed", _Boolean)
-
-	DescribeDomainEndpointOptionsResponse_DomainEndpointOptions = DescribeDomainEndpointOptionsResponse.AddMember("DomainEndpointOptions", DomainEndpointOptionsStatus)
-
-	DescribeDomainsRequest_DomainNames = DescribeDomainsRequest.AddMember("DomainNames", _DomainNameList)
-
-	DescribeDomainsResponse_DomainStatusList = DescribeDomainsResponse.AddMember("DomainStatusList", _DomainStatusList)
-
-	DescribeExpressionsRequest_DomainName = DescribeExpressionsRequest.AddMember("DomainName", _DomainName)
-
-	DescribeExpressionsRequest_ExpressionNames = DescribeExpressionsRequest.AddMember("ExpressionNames", _StandardNameList)
-
-	DescribeExpressionsRequest_Deployed = DescribeExpressionsRequest.AddMember("Deployed", _Boolean)
-
-	DescribeExpressionsResponse_Expressions = DescribeExpressionsResponse.AddMember("Expressions", _ExpressionStatusList)
-
-	DescribeIndexFieldsRequest_DomainName = DescribeIndexFieldsRequest.AddMember("DomainName", _DomainName)
-
-	DescribeIndexFieldsRequest_FieldNames = DescribeIndexFieldsRequest.AddMember("FieldNames", _DynamicFieldNameList)
-
-	DescribeIndexFieldsRequest_Deployed = DescribeIndexFieldsRequest.AddMember("Deployed", _Boolean)
-
-	DescribeIndexFieldsResponse_IndexFields = DescribeIndexFieldsResponse.AddMember("IndexFields", _IndexFieldStatusList)
-
-	DescribeScalingParametersRequest_DomainName = DescribeScalingParametersRequest.AddMember("DomainName", _DomainName)
-
-	DescribeScalingParametersResponse_ScalingParameters = DescribeScalingParametersResponse.AddMember("ScalingParameters", ScalingParametersStatus)
-
-	DescribeServiceAccessPoliciesRequest_DomainName = DescribeServiceAccessPoliciesRequest.AddMember("DomainName", _DomainName)
-
-	DescribeServiceAccessPoliciesRequest_Deployed = DescribeServiceAccessPoliciesRequest.AddMember("Deployed", _Boolean)
-
-	DescribeServiceAccessPoliciesResponse_AccessPolicies = DescribeServiceAccessPoliciesResponse.AddMember("AccessPolicies", AccessPoliciesStatus)
-
-	DescribeSuggestersRequest_DomainName = DescribeSuggestersRequest.AddMember("DomainName", _DomainName)
-
-	DescribeSuggestersRequest_SuggesterNames = DescribeSuggestersRequest.AddMember("SuggesterNames", _StandardNameList)
-
-	DescribeSuggestersRequest_Deployed = DescribeSuggestersRequest.AddMember("Deployed", _Boolean)
-
-	DescribeSuggestersResponse_Suggesters = DescribeSuggestersResponse.AddMember("Suggesters", _SuggesterStatusList)
-
-	IndexDocumentsRequest_DomainName = IndexDocumentsRequest.AddMember("DomainName", _DomainName)
-
-	IndexDocumentsResponse_FieldNames = IndexDocumentsResponse.AddMember("FieldNames", _FieldNameList)
-
-	ListDomainNamesResponse_DomainNames = ListDomainNamesResponse.AddMember("DomainNames", _DomainNameMap)
-
-	UpdateAvailabilityOptionsRequest_DomainName = UpdateAvailabilityOptionsRequest.AddMember("DomainName", _DomainName)
-
-	UpdateAvailabilityOptionsRequest_MultiAZ = UpdateAvailabilityOptionsRequest.AddMember("MultiAZ", _Boolean)
-
-	UpdateAvailabilityOptionsResponse_AvailabilityOptions = UpdateAvailabilityOptionsResponse.AddMember("AvailabilityOptions", AvailabilityOptionsStatus)
-
-	UpdateDomainEndpointOptionsRequest_DomainName = UpdateDomainEndpointOptionsRequest.AddMember("DomainName", _DomainName)
-
-	UpdateDomainEndpointOptionsRequest_DomainEndpointOptions = UpdateDomainEndpointOptionsRequest.AddMember("DomainEndpointOptions", DomainEndpointOptions)
-
-	UpdateDomainEndpointOptionsResponse_DomainEndpointOptions = UpdateDomainEndpointOptionsResponse.AddMember("DomainEndpointOptions", DomainEndpointOptionsStatus)
-
-	UpdateScalingParametersRequest_DomainName = UpdateScalingParametersRequest.AddMember("DomainName", _DomainName)
-
-	UpdateScalingParametersRequest_ScalingParameters = UpdateScalingParametersRequest.AddMember("ScalingParameters", ScalingParameters)
-
-	UpdateScalingParametersResponse_ScalingParameters = UpdateScalingParametersResponse.AddMember("ScalingParameters", ScalingParametersStatus)
-
-	UpdateServiceAccessPoliciesRequest_DomainName = UpdateServiceAccessPoliciesRequest.AddMember("DomainName", _DomainName)
-
-	UpdateServiceAccessPoliciesRequest_AccessPolicies = UpdateServiceAccessPoliciesRequest.AddMember("AccessPolicies", _PolicyDocument)
-
-	UpdateServiceAccessPoliciesResponse_AccessPolicies = UpdateServiceAccessPoliciesResponse.AddMember("AccessPolicies", AccessPoliciesStatus)
-
-}
+var (
+	eBuildSuggesters                                             smithy.SchemaExtensions
+	eCreateDomain                                                smithy.SchemaExtensions
+	eDefineAnalysisScheme                                        smithy.SchemaExtensions
+	eDefineExpression                                            smithy.SchemaExtensions
+	eDefineIndexField                                            smithy.SchemaExtensions
+	eDefineSuggester                                             smithy.SchemaExtensions
+	eDeleteAnalysisScheme                                        smithy.SchemaExtensions
+	eDeleteDomain                                                smithy.SchemaExtensions
+	eDeleteExpression                                            smithy.SchemaExtensions
+	eDeleteIndexField                                            smithy.SchemaExtensions
+	eDeleteSuggester                                             smithy.SchemaExtensions
+	eDescribeAnalysisSchemes                                     smithy.SchemaExtensions
+	eDescribeAvailabilityOptions                                 smithy.SchemaExtensions
+	eDescribeDomainEndpointOptions                               smithy.SchemaExtensions
+	eDescribeDomains                                             smithy.SchemaExtensions
+	eDescribeExpressions                                         smithy.SchemaExtensions
+	eDescribeIndexFields                                         smithy.SchemaExtensions
+	eDescribeScalingParameters                                   smithy.SchemaExtensions
+	eDescribeServiceAccessPolicies                               smithy.SchemaExtensions
+	eDescribeSuggesters                                          smithy.SchemaExtensions
+	eIndexDocuments                                              smithy.SchemaExtensions
+	eListDomainNames                                             smithy.SchemaExtensions
+	eUpdateAvailabilityOptions                                   smithy.SchemaExtensions
+	eUpdateDomainEndpointOptions                                 smithy.SchemaExtensions
+	eUpdateScalingParameters                                     smithy.SchemaExtensions
+	eUpdateServiceAccessPolicies                                 smithy.SchemaExtensions
+	e_A9SearchCloudConfigService2013                             smithy.SchemaExtensions
+	eAccessPoliciesStatus                                        smithy.SchemaExtensions
+	eAccessPoliciesStatus_Options                                smithy.SchemaExtensions
+	eAccessPoliciesStatus_Status                                 smithy.SchemaExtensions
+	eAlgorithmicStemming                                         smithy.SchemaExtensions
+	eAlgorithmicStemming_none                                    smithy.SchemaExtensions
+	eAlgorithmicStemming_minimal                                 smithy.SchemaExtensions
+	eAlgorithmicStemming_light                                   smithy.SchemaExtensions
+	eAlgorithmicStemming_full                                    smithy.SchemaExtensions
+	eAnalysisOptions                                             smithy.SchemaExtensions
+	eAnalysisOptions_Synonyms                                    smithy.SchemaExtensions
+	eAnalysisOptions_Stopwords                                   smithy.SchemaExtensions
+	eAnalysisOptions_StemmingDictionary                          smithy.SchemaExtensions
+	eAnalysisOptions_JapaneseTokenizationDictionary              smithy.SchemaExtensions
+	eAnalysisOptions_AlgorithmicStemming                         smithy.SchemaExtensions
+	eAnalysisScheme                                              smithy.SchemaExtensions
+	eAnalysisScheme_AnalysisSchemeName                           smithy.SchemaExtensions
+	eAnalysisScheme_AnalysisSchemeLanguage                       smithy.SchemaExtensions
+	eAnalysisScheme_AnalysisOptions                              smithy.SchemaExtensions
+	eAnalysisSchemeLanguage                                      smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_ar                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_bg                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_ca                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_cs                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_da                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_de                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_el                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_en                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_es                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_eu                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_fa                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_fi                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_fr                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_ga                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_gl                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_he                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_hi                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_hu                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_hy                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_id                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_it                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_ja                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_ko                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_lv                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_mul                                  smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_nl                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_no                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_pt                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_ro                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_ru                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_sv                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_th                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_tr                                   smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_zh_Hans                              smithy.SchemaExtensions
+	eAnalysisSchemeLanguage_zh_Hant                              smithy.SchemaExtensions
+	eAnalysisSchemeStatus                                        smithy.SchemaExtensions
+	eAnalysisSchemeStatus_Options                                smithy.SchemaExtensions
+	eAnalysisSchemeStatus_Status                                 smithy.SchemaExtensions
+	e_AnalysisSchemeStatusList                                   smithy.SchemaExtensions
+	e_AnalysisSchemeStatusList_member                            smithy.SchemaExtensions
+	e_APIVersion                                                 smithy.SchemaExtensions
+	e_ARN                                                        smithy.SchemaExtensions
+	eAvailabilityOptionsStatus                                   smithy.SchemaExtensions
+	eAvailabilityOptionsStatus_Options                           smithy.SchemaExtensions
+	eAvailabilityOptionsStatus_Status                            smithy.SchemaExtensions
+	eBaseException                                               smithy.SchemaExtensions
+	eBaseException_Code                                          smithy.SchemaExtensions
+	eBaseException_Message                                       smithy.SchemaExtensions
+	e_Boolean                                                    smithy.SchemaExtensions
+	eDateArrayOptions                                            smithy.SchemaExtensions
+	eDateArrayOptions_DefaultValue                               smithy.SchemaExtensions
+	eDateArrayOptions_SourceFields                               smithy.SchemaExtensions
+	eDateArrayOptions_FacetEnabled                               smithy.SchemaExtensions
+	eDateArrayOptions_SearchEnabled                              smithy.SchemaExtensions
+	eDateArrayOptions_ReturnEnabled                              smithy.SchemaExtensions
+	eDateOptions                                                 smithy.SchemaExtensions
+	eDateOptions_DefaultValue                                    smithy.SchemaExtensions
+	eDateOptions_SourceField                                     smithy.SchemaExtensions
+	eDateOptions_FacetEnabled                                    smithy.SchemaExtensions
+	eDateOptions_SearchEnabled                                   smithy.SchemaExtensions
+	eDateOptions_ReturnEnabled                                   smithy.SchemaExtensions
+	eDateOptions_SortEnabled                                     smithy.SchemaExtensions
+	eDisabledOperationException                                  smithy.SchemaExtensions
+	eDisabledOperationException_Code                             smithy.SchemaExtensions
+	eDisabledOperationException_Message                          smithy.SchemaExtensions
+	eDocumentSuggesterOptions                                    smithy.SchemaExtensions
+	eDocumentSuggesterOptions_SourceField                        smithy.SchemaExtensions
+	eDocumentSuggesterOptions_FuzzyMatching                      smithy.SchemaExtensions
+	eDocumentSuggesterOptions_SortExpression                     smithy.SchemaExtensions
+	eDomainEndpointOptions                                       smithy.SchemaExtensions
+	eDomainEndpointOptions_EnforceHTTPS                          smithy.SchemaExtensions
+	eDomainEndpointOptions_TLSSecurityPolicy                     smithy.SchemaExtensions
+	eDomainEndpointOptionsStatus                                 smithy.SchemaExtensions
+	eDomainEndpointOptionsStatus_Options                         smithy.SchemaExtensions
+	eDomainEndpointOptionsStatus_Status                          smithy.SchemaExtensions
+	e_DomainId                                                   smithy.SchemaExtensions
+	e_DomainName                                                 smithy.SchemaExtensions
+	e_DomainNameList                                             smithy.SchemaExtensions
+	e_DomainNameList_member                                      smithy.SchemaExtensions
+	e_DomainNameMap                                              smithy.SchemaExtensions
+	e_DomainNameMap_key                                          smithy.SchemaExtensions
+	e_DomainNameMap_value                                        smithy.SchemaExtensions
+	eDomainStatus                                                smithy.SchemaExtensions
+	eDomainStatus_DomainId                                       smithy.SchemaExtensions
+	eDomainStatus_DomainName                                     smithy.SchemaExtensions
+	eDomainStatus_ARN                                            smithy.SchemaExtensions
+	eDomainStatus_Created                                        smithy.SchemaExtensions
+	eDomainStatus_Deleted                                        smithy.SchemaExtensions
+	eDomainStatus_DocService                                     smithy.SchemaExtensions
+	eDomainStatus_SearchService                                  smithy.SchemaExtensions
+	eDomainStatus_RequiresIndexDocuments                         smithy.SchemaExtensions
+	eDomainStatus_Processing                                     smithy.SchemaExtensions
+	eDomainStatus_SearchInstanceType                             smithy.SchemaExtensions
+	eDomainStatus_SearchPartitionCount                           smithy.SchemaExtensions
+	eDomainStatus_SearchInstanceCount                            smithy.SchemaExtensions
+	eDomainStatus_Limits                                         smithy.SchemaExtensions
+	e_DomainStatusList                                           smithy.SchemaExtensions
+	e_DomainStatusList_member                                    smithy.SchemaExtensions
+	e_Double                                                     smithy.SchemaExtensions
+	eDoubleArrayOptions                                          smithy.SchemaExtensions
+	eDoubleArrayOptions_DefaultValue                             smithy.SchemaExtensions
+	eDoubleArrayOptions_SourceFields                             smithy.SchemaExtensions
+	eDoubleArrayOptions_FacetEnabled                             smithy.SchemaExtensions
+	eDoubleArrayOptions_SearchEnabled                            smithy.SchemaExtensions
+	eDoubleArrayOptions_ReturnEnabled                            smithy.SchemaExtensions
+	eDoubleOptions                                               smithy.SchemaExtensions
+	eDoubleOptions_DefaultValue                                  smithy.SchemaExtensions
+	eDoubleOptions_SourceField                                   smithy.SchemaExtensions
+	eDoubleOptions_FacetEnabled                                  smithy.SchemaExtensions
+	eDoubleOptions_SearchEnabled                                 smithy.SchemaExtensions
+	eDoubleOptions_ReturnEnabled                                 smithy.SchemaExtensions
+	eDoubleOptions_SortEnabled                                   smithy.SchemaExtensions
+	e_DynamicFieldName                                           smithy.SchemaExtensions
+	e_DynamicFieldNameList                                       smithy.SchemaExtensions
+	e_DynamicFieldNameList_member                                smithy.SchemaExtensions
+	e_ErrorCode                                                  smithy.SchemaExtensions
+	e_ErrorMessage                                               smithy.SchemaExtensions
+	eExpression                                                  smithy.SchemaExtensions
+	eExpression_ExpressionName                                   smithy.SchemaExtensions
+	eExpression_ExpressionValue                                  smithy.SchemaExtensions
+	eExpressionStatus                                            smithy.SchemaExtensions
+	eExpressionStatus_Options                                    smithy.SchemaExtensions
+	eExpressionStatus_Status                                     smithy.SchemaExtensions
+	e_ExpressionStatusList                                       smithy.SchemaExtensions
+	e_ExpressionStatusList_member                                smithy.SchemaExtensions
+	e_ExpressionValue                                            smithy.SchemaExtensions
+	e_FieldName                                                  smithy.SchemaExtensions
+	e_FieldNameCommaList                                         smithy.SchemaExtensions
+	e_FieldNameList                                              smithy.SchemaExtensions
+	e_FieldNameList_member                                       smithy.SchemaExtensions
+	e_FieldValue                                                 smithy.SchemaExtensions
+	eIndexField                                                  smithy.SchemaExtensions
+	eIndexField_IndexFieldName                                   smithy.SchemaExtensions
+	eIndexField_IndexFieldType                                   smithy.SchemaExtensions
+	eIndexField_IntOptions                                       smithy.SchemaExtensions
+	eIndexField_DoubleOptions                                    smithy.SchemaExtensions
+	eIndexField_LiteralOptions                                   smithy.SchemaExtensions
+	eIndexField_TextOptions                                      smithy.SchemaExtensions
+	eIndexField_DateOptions                                      smithy.SchemaExtensions
+	eIndexField_LatLonOptions                                    smithy.SchemaExtensions
+	eIndexField_IntArrayOptions                                  smithy.SchemaExtensions
+	eIndexField_DoubleArrayOptions                               smithy.SchemaExtensions
+	eIndexField_LiteralArrayOptions                              smithy.SchemaExtensions
+	eIndexField_TextArrayOptions                                 smithy.SchemaExtensions
+	eIndexField_DateArrayOptions                                 smithy.SchemaExtensions
+	eIndexFieldStatus                                            smithy.SchemaExtensions
+	eIndexFieldStatus_Options                                    smithy.SchemaExtensions
+	eIndexFieldStatus_Status                                     smithy.SchemaExtensions
+	e_IndexFieldStatusList                                       smithy.SchemaExtensions
+	e_IndexFieldStatusList_member                                smithy.SchemaExtensions
+	eIndexFieldType                                              smithy.SchemaExtensions
+	eIndexFieldType_int                                          smithy.SchemaExtensions
+	eIndexFieldType_double                                       smithy.SchemaExtensions
+	eIndexFieldType_literal                                      smithy.SchemaExtensions
+	eIndexFieldType_text                                         smithy.SchemaExtensions
+	eIndexFieldType_date                                         smithy.SchemaExtensions
+	eIndexFieldType_latlon                                       smithy.SchemaExtensions
+	eIndexFieldType_int_array                                    smithy.SchemaExtensions
+	eIndexFieldType_double_array                                 smithy.SchemaExtensions
+	eIndexFieldType_literal_array                                smithy.SchemaExtensions
+	eIndexFieldType_text_array                                   smithy.SchemaExtensions
+	eIndexFieldType_date_array                                   smithy.SchemaExtensions
+	e_InstanceCount                                              smithy.SchemaExtensions
+	eIntArrayOptions                                             smithy.SchemaExtensions
+	eIntArrayOptions_DefaultValue                                smithy.SchemaExtensions
+	eIntArrayOptions_SourceFields                                smithy.SchemaExtensions
+	eIntArrayOptions_FacetEnabled                                smithy.SchemaExtensions
+	eIntArrayOptions_SearchEnabled                               smithy.SchemaExtensions
+	eIntArrayOptions_ReturnEnabled                               smithy.SchemaExtensions
+	eInternalException                                           smithy.SchemaExtensions
+	eInternalException_Code                                      smithy.SchemaExtensions
+	eInternalException_Message                                   smithy.SchemaExtensions
+	eIntOptions                                                  smithy.SchemaExtensions
+	eIntOptions_DefaultValue                                     smithy.SchemaExtensions
+	eIntOptions_SourceField                                      smithy.SchemaExtensions
+	eIntOptions_FacetEnabled                                     smithy.SchemaExtensions
+	eIntOptions_SearchEnabled                                    smithy.SchemaExtensions
+	eIntOptions_ReturnEnabled                                    smithy.SchemaExtensions
+	eIntOptions_SortEnabled                                      smithy.SchemaExtensions
+	eInvalidTypeException                                        smithy.SchemaExtensions
+	eInvalidTypeException_Code                                   smithy.SchemaExtensions
+	eInvalidTypeException_Message                                smithy.SchemaExtensions
+	eLatLonOptions                                               smithy.SchemaExtensions
+	eLatLonOptions_DefaultValue                                  smithy.SchemaExtensions
+	eLatLonOptions_SourceField                                   smithy.SchemaExtensions
+	eLatLonOptions_FacetEnabled                                  smithy.SchemaExtensions
+	eLatLonOptions_SearchEnabled                                 smithy.SchemaExtensions
+	eLatLonOptions_ReturnEnabled                                 smithy.SchemaExtensions
+	eLatLonOptions_SortEnabled                                   smithy.SchemaExtensions
+	eLimitExceededException                                      smithy.SchemaExtensions
+	eLimitExceededException_Code                                 smithy.SchemaExtensions
+	eLimitExceededException_Message                              smithy.SchemaExtensions
+	eLimits                                                      smithy.SchemaExtensions
+	eLimits_MaximumReplicationCount                              smithy.SchemaExtensions
+	eLimits_MaximumPartitionCount                                smithy.SchemaExtensions
+	eLiteralArrayOptions                                         smithy.SchemaExtensions
+	eLiteralArrayOptions_DefaultValue                            smithy.SchemaExtensions
+	eLiteralArrayOptions_SourceFields                            smithy.SchemaExtensions
+	eLiteralArrayOptions_FacetEnabled                            smithy.SchemaExtensions
+	eLiteralArrayOptions_SearchEnabled                           smithy.SchemaExtensions
+	eLiteralArrayOptions_ReturnEnabled                           smithy.SchemaExtensions
+	eLiteralOptions                                              smithy.SchemaExtensions
+	eLiteralOptions_DefaultValue                                 smithy.SchemaExtensions
+	eLiteralOptions_SourceField                                  smithy.SchemaExtensions
+	eLiteralOptions_FacetEnabled                                 smithy.SchemaExtensions
+	eLiteralOptions_SearchEnabled                                smithy.SchemaExtensions
+	eLiteralOptions_ReturnEnabled                                smithy.SchemaExtensions
+	eLiteralOptions_SortEnabled                                  smithy.SchemaExtensions
+	e_Long                                                       smithy.SchemaExtensions
+	e_MaximumPartitionCount                                      smithy.SchemaExtensions
+	e_MaximumReplicationCount                                    smithy.SchemaExtensions
+	e_MultiAZ                                                    smithy.SchemaExtensions
+	eOptionState                                                 smithy.SchemaExtensions
+	eOptionState_RequiresIndexDocuments                          smithy.SchemaExtensions
+	eOptionState_Processing                                      smithy.SchemaExtensions
+	eOptionState_Active                                          smithy.SchemaExtensions
+	eOptionState_FailedToValidate                                smithy.SchemaExtensions
+	eOptionStatus                                                smithy.SchemaExtensions
+	eOptionStatus_CreationDate                                   smithy.SchemaExtensions
+	eOptionStatus_UpdateDate                                     smithy.SchemaExtensions
+	eOptionStatus_UpdateVersion                                  smithy.SchemaExtensions
+	eOptionStatus_State                                          smithy.SchemaExtensions
+	eOptionStatus_PendingDeletion                                smithy.SchemaExtensions
+	e_PartitionCount                                             smithy.SchemaExtensions
+	ePartitionInstanceType                                       smithy.SchemaExtensions
+	ePartitionInstanceType_search_m1_small                       smithy.SchemaExtensions
+	ePartitionInstanceType_search_m1_large                       smithy.SchemaExtensions
+	ePartitionInstanceType_search_m2_xlarge                      smithy.SchemaExtensions
+	ePartitionInstanceType_search_m2_2xlarge                     smithy.SchemaExtensions
+	ePartitionInstanceType_search_m3_medium                      smithy.SchemaExtensions
+	ePartitionInstanceType_search_m3_large                       smithy.SchemaExtensions
+	ePartitionInstanceType_search_m3_xlarge                      smithy.SchemaExtensions
+	ePartitionInstanceType_search_m3_2xlarge                     smithy.SchemaExtensions
+	ePartitionInstanceType_search_small                          smithy.SchemaExtensions
+	ePartitionInstanceType_search_medium                         smithy.SchemaExtensions
+	ePartitionInstanceType_search_large                          smithy.SchemaExtensions
+	ePartitionInstanceType_search_xlarge                         smithy.SchemaExtensions
+	ePartitionInstanceType_search_2xlarge                        smithy.SchemaExtensions
+	ePartitionInstanceType_search_previousgeneration_small       smithy.SchemaExtensions
+	ePartitionInstanceType_search_previousgeneration_large       smithy.SchemaExtensions
+	ePartitionInstanceType_search_previousgeneration_xlarge      smithy.SchemaExtensions
+	ePartitionInstanceType_search_previousgeneration_2xlarge     smithy.SchemaExtensions
+	e_PolicyDocument                                             smithy.SchemaExtensions
+	eResourceAlreadyExistsException                              smithy.SchemaExtensions
+	eResourceAlreadyExistsException_Code                         smithy.SchemaExtensions
+	eResourceAlreadyExistsException_Message                      smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_Code                              smithy.SchemaExtensions
+	eResourceNotFoundException_Message                           smithy.SchemaExtensions
+	eScalingParameters                                           smithy.SchemaExtensions
+	eScalingParameters_DesiredInstanceType                       smithy.SchemaExtensions
+	eScalingParameters_DesiredReplicationCount                   smithy.SchemaExtensions
+	eScalingParameters_DesiredPartitionCount                     smithy.SchemaExtensions
+	eScalingParametersStatus                                     smithy.SchemaExtensions
+	eScalingParametersStatus_Options                             smithy.SchemaExtensions
+	eScalingParametersStatus_Status                              smithy.SchemaExtensions
+	e_SearchInstanceType                                         smithy.SchemaExtensions
+	eServiceEndpoint                                             smithy.SchemaExtensions
+	eServiceEndpoint_Endpoint                                    smithy.SchemaExtensions
+	e_ServiceUrl                                                 smithy.SchemaExtensions
+	e_StandardName                                               smithy.SchemaExtensions
+	e_StandardNameList                                           smithy.SchemaExtensions
+	e_StandardNameList_member                                    smithy.SchemaExtensions
+	e_String                                                     smithy.SchemaExtensions
+	eSuggester                                                   smithy.SchemaExtensions
+	eSuggester_SuggesterName                                     smithy.SchemaExtensions
+	eSuggester_DocumentSuggesterOptions                          smithy.SchemaExtensions
+	eSuggesterFuzzyMatching                                      smithy.SchemaExtensions
+	eSuggesterFuzzyMatching_none                                 smithy.SchemaExtensions
+	eSuggesterFuzzyMatching_low                                  smithy.SchemaExtensions
+	eSuggesterFuzzyMatching_high                                 smithy.SchemaExtensions
+	eSuggesterStatus                                             smithy.SchemaExtensions
+	eSuggesterStatus_Options                                     smithy.SchemaExtensions
+	eSuggesterStatus_Status                                      smithy.SchemaExtensions
+	e_SuggesterStatusList                                        smithy.SchemaExtensions
+	e_SuggesterStatusList_member                                 smithy.SchemaExtensions
+	eTextArrayOptions                                            smithy.SchemaExtensions
+	eTextArrayOptions_DefaultValue                               smithy.SchemaExtensions
+	eTextArrayOptions_SourceFields                               smithy.SchemaExtensions
+	eTextArrayOptions_ReturnEnabled                              smithy.SchemaExtensions
+	eTextArrayOptions_HighlightEnabled                           smithy.SchemaExtensions
+	eTextArrayOptions_AnalysisScheme                             smithy.SchemaExtensions
+	eTextOptions                                                 smithy.SchemaExtensions
+	eTextOptions_DefaultValue                                    smithy.SchemaExtensions
+	eTextOptions_SourceField                                     smithy.SchemaExtensions
+	eTextOptions_ReturnEnabled                                   smithy.SchemaExtensions
+	eTextOptions_SortEnabled                                     smithy.SchemaExtensions
+	eTextOptions_HighlightEnabled                                smithy.SchemaExtensions
+	eTextOptions_AnalysisScheme                                  smithy.SchemaExtensions
+	eTLSSecurityPolicy                                           smithy.SchemaExtensions
+	eTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07                smithy.SchemaExtensions
+	eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07                smithy.SchemaExtensions
+	e_UIntValue                                                  smithy.SchemaExtensions
+	e_UpdateTimestamp                                            smithy.SchemaExtensions
+	eValidationException                                         smithy.SchemaExtensions
+	eValidationException_Code                                    smithy.SchemaExtensions
+	eValidationException_Message                                 smithy.SchemaExtensions
+	e_Word                                                       smithy.SchemaExtensions
+	eBuildSuggestersRequest                                      smithy.SchemaExtensions
+	eBuildSuggestersRequest_DomainName                           smithy.SchemaExtensions
+	eBuildSuggestersResponse                                     smithy.SchemaExtensions
+	eBuildSuggestersResponse_FieldNames                          smithy.SchemaExtensions
+	eCreateDomainRequest                                         smithy.SchemaExtensions
+	eCreateDomainRequest_DomainName                              smithy.SchemaExtensions
+	eCreateDomainResponse                                        smithy.SchemaExtensions
+	eCreateDomainResponse_DomainStatus                           smithy.SchemaExtensions
+	eDefineAnalysisSchemeRequest                                 smithy.SchemaExtensions
+	eDefineAnalysisSchemeRequest_DomainName                      smithy.SchemaExtensions
+	eDefineAnalysisSchemeRequest_AnalysisScheme                  smithy.SchemaExtensions
+	eDefineAnalysisSchemeResponse                                smithy.SchemaExtensions
+	eDefineAnalysisSchemeResponse_AnalysisScheme                 smithy.SchemaExtensions
+	eDefineExpressionRequest                                     smithy.SchemaExtensions
+	eDefineExpressionRequest_DomainName                          smithy.SchemaExtensions
+	eDefineExpressionRequest_Expression                          smithy.SchemaExtensions
+	eDefineExpressionResponse                                    smithy.SchemaExtensions
+	eDefineExpressionResponse_Expression                         smithy.SchemaExtensions
+	eDefineIndexFieldRequest                                     smithy.SchemaExtensions
+	eDefineIndexFieldRequest_DomainName                          smithy.SchemaExtensions
+	eDefineIndexFieldRequest_IndexField                          smithy.SchemaExtensions
+	eDefineIndexFieldResponse                                    smithy.SchemaExtensions
+	eDefineIndexFieldResponse_IndexField                         smithy.SchemaExtensions
+	eDefineSuggesterRequest                                      smithy.SchemaExtensions
+	eDefineSuggesterRequest_DomainName                           smithy.SchemaExtensions
+	eDefineSuggesterRequest_Suggester                            smithy.SchemaExtensions
+	eDefineSuggesterResponse                                     smithy.SchemaExtensions
+	eDefineSuggesterResponse_Suggester                           smithy.SchemaExtensions
+	eDeleteAnalysisSchemeRequest                                 smithy.SchemaExtensions
+	eDeleteAnalysisSchemeRequest_DomainName                      smithy.SchemaExtensions
+	eDeleteAnalysisSchemeRequest_AnalysisSchemeName              smithy.SchemaExtensions
+	eDeleteAnalysisSchemeResponse                                smithy.SchemaExtensions
+	eDeleteAnalysisSchemeResponse_AnalysisScheme                 smithy.SchemaExtensions
+	eDeleteDomainRequest                                         smithy.SchemaExtensions
+	eDeleteDomainRequest_DomainName                              smithy.SchemaExtensions
+	eDeleteDomainResponse                                        smithy.SchemaExtensions
+	eDeleteDomainResponse_DomainStatus                           smithy.SchemaExtensions
+	eDeleteExpressionRequest                                     smithy.SchemaExtensions
+	eDeleteExpressionRequest_DomainName                          smithy.SchemaExtensions
+	eDeleteExpressionRequest_ExpressionName                      smithy.SchemaExtensions
+	eDeleteExpressionResponse                                    smithy.SchemaExtensions
+	eDeleteExpressionResponse_Expression                         smithy.SchemaExtensions
+	eDeleteIndexFieldRequest                                     smithy.SchemaExtensions
+	eDeleteIndexFieldRequest_DomainName                          smithy.SchemaExtensions
+	eDeleteIndexFieldRequest_IndexFieldName                      smithy.SchemaExtensions
+	eDeleteIndexFieldResponse                                    smithy.SchemaExtensions
+	eDeleteIndexFieldResponse_IndexField                         smithy.SchemaExtensions
+	eDeleteSuggesterRequest                                      smithy.SchemaExtensions
+	eDeleteSuggesterRequest_DomainName                           smithy.SchemaExtensions
+	eDeleteSuggesterRequest_SuggesterName                        smithy.SchemaExtensions
+	eDeleteSuggesterResponse                                     smithy.SchemaExtensions
+	eDeleteSuggesterResponse_Suggester                           smithy.SchemaExtensions
+	eDescribeAnalysisSchemesRequest                              smithy.SchemaExtensions
+	eDescribeAnalysisSchemesRequest_DomainName                   smithy.SchemaExtensions
+	eDescribeAnalysisSchemesRequest_AnalysisSchemeNames          smithy.SchemaExtensions
+	eDescribeAnalysisSchemesRequest_Deployed                     smithy.SchemaExtensions
+	eDescribeAnalysisSchemesResponse                             smithy.SchemaExtensions
+	eDescribeAnalysisSchemesResponse_AnalysisSchemes             smithy.SchemaExtensions
+	eDescribeAvailabilityOptionsRequest                          smithy.SchemaExtensions
+	eDescribeAvailabilityOptionsRequest_DomainName               smithy.SchemaExtensions
+	eDescribeAvailabilityOptionsRequest_Deployed                 smithy.SchemaExtensions
+	eDescribeAvailabilityOptionsResponse                         smithy.SchemaExtensions
+	eDescribeAvailabilityOptionsResponse_AvailabilityOptions     smithy.SchemaExtensions
+	eDescribeDomainEndpointOptionsRequest                        smithy.SchemaExtensions
+	eDescribeDomainEndpointOptionsRequest_DomainName             smithy.SchemaExtensions
+	eDescribeDomainEndpointOptionsRequest_Deployed               smithy.SchemaExtensions
+	eDescribeDomainEndpointOptionsResponse                       smithy.SchemaExtensions
+	eDescribeDomainEndpointOptionsResponse_DomainEndpointOptions smithy.SchemaExtensions
+	eDescribeDomainsRequest                                      smithy.SchemaExtensions
+	eDescribeDomainsRequest_DomainNames                          smithy.SchemaExtensions
+	eDescribeDomainsResponse                                     smithy.SchemaExtensions
+	eDescribeDomainsResponse_DomainStatusList                    smithy.SchemaExtensions
+	eDescribeExpressionsRequest                                  smithy.SchemaExtensions
+	eDescribeExpressionsRequest_DomainName                       smithy.SchemaExtensions
+	eDescribeExpressionsRequest_ExpressionNames                  smithy.SchemaExtensions
+	eDescribeExpressionsRequest_Deployed                         smithy.SchemaExtensions
+	eDescribeExpressionsResponse                                 smithy.SchemaExtensions
+	eDescribeExpressionsResponse_Expressions                     smithy.SchemaExtensions
+	eDescribeIndexFieldsRequest                                  smithy.SchemaExtensions
+	eDescribeIndexFieldsRequest_DomainName                       smithy.SchemaExtensions
+	eDescribeIndexFieldsRequest_FieldNames                       smithy.SchemaExtensions
+	eDescribeIndexFieldsRequest_Deployed                         smithy.SchemaExtensions
+	eDescribeIndexFieldsResponse                                 smithy.SchemaExtensions
+	eDescribeIndexFieldsResponse_IndexFields                     smithy.SchemaExtensions
+	eDescribeScalingParametersRequest                            smithy.SchemaExtensions
+	eDescribeScalingParametersRequest_DomainName                 smithy.SchemaExtensions
+	eDescribeScalingParametersResponse                           smithy.SchemaExtensions
+	eDescribeScalingParametersResponse_ScalingParameters         smithy.SchemaExtensions
+	eDescribeServiceAccessPoliciesRequest                        smithy.SchemaExtensions
+	eDescribeServiceAccessPoliciesRequest_DomainName             smithy.SchemaExtensions
+	eDescribeServiceAccessPoliciesRequest_Deployed               smithy.SchemaExtensions
+	eDescribeServiceAccessPoliciesResponse                       smithy.SchemaExtensions
+	eDescribeServiceAccessPoliciesResponse_AccessPolicies        smithy.SchemaExtensions
+	eDescribeSuggestersRequest                                   smithy.SchemaExtensions
+	eDescribeSuggestersRequest_DomainName                        smithy.SchemaExtensions
+	eDescribeSuggestersRequest_SuggesterNames                    smithy.SchemaExtensions
+	eDescribeSuggestersRequest_Deployed                          smithy.SchemaExtensions
+	eDescribeSuggestersResponse                                  smithy.SchemaExtensions
+	eDescribeSuggestersResponse_Suggesters                       smithy.SchemaExtensions
+	eIndexDocumentsRequest                                       smithy.SchemaExtensions
+	eIndexDocumentsRequest_DomainName                            smithy.SchemaExtensions
+	eIndexDocumentsResponse                                      smithy.SchemaExtensions
+	eIndexDocumentsResponse_FieldNames                           smithy.SchemaExtensions
+	eListDomainNamesResponse                                     smithy.SchemaExtensions
+	eListDomainNamesResponse_DomainNames                         smithy.SchemaExtensions
+	eUpdateAvailabilityOptionsRequest                            smithy.SchemaExtensions
+	eUpdateAvailabilityOptionsRequest_DomainName                 smithy.SchemaExtensions
+	eUpdateAvailabilityOptionsRequest_MultiAZ                    smithy.SchemaExtensions
+	eUpdateAvailabilityOptionsResponse                           smithy.SchemaExtensions
+	eUpdateAvailabilityOptionsResponse_AvailabilityOptions       smithy.SchemaExtensions
+	eUpdateDomainEndpointOptionsRequest                          smithy.SchemaExtensions
+	eUpdateDomainEndpointOptionsRequest_DomainName               smithy.SchemaExtensions
+	eUpdateDomainEndpointOptionsRequest_DomainEndpointOptions    smithy.SchemaExtensions
+	eUpdateDomainEndpointOptionsResponse                         smithy.SchemaExtensions
+	eUpdateDomainEndpointOptionsResponse_DomainEndpointOptions   smithy.SchemaExtensions
+	eUpdateScalingParametersRequest                              smithy.SchemaExtensions
+	eUpdateScalingParametersRequest_DomainName                   smithy.SchemaExtensions
+	eUpdateScalingParametersRequest_ScalingParameters            smithy.SchemaExtensions
+	eUpdateScalingParametersResponse                             smithy.SchemaExtensions
+	eUpdateScalingParametersResponse_ScalingParameters           smithy.SchemaExtensions
+	eUpdateServiceAccessPoliciesRequest                          smithy.SchemaExtensions
+	eUpdateServiceAccessPoliciesRequest_DomainName               smithy.SchemaExtensions
+	eUpdateServiceAccessPoliciesRequest_AccessPolicies           smithy.SchemaExtensions
+	eUpdateServiceAccessPoliciesResponse                         smithy.SchemaExtensions
+	eUpdateServiceAccessPoliciesResponse_AccessPolicies          smithy.SchemaExtensions
+)
+
+var (
+	iBuildSuggesters                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "BuildSuggesters"}
+	iCreateDomain                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "CreateDomain"}
+	iDefineAnalysisScheme                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineAnalysisScheme"}
+	iDefineExpression                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineExpression"}
+	iDefineIndexField                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineIndexField"}
+	iDefineSuggester                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineSuggester"}
+	iDeleteAnalysisScheme                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteAnalysisScheme"}
+	iDeleteDomain                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteDomain"}
+	iDeleteExpression                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteExpression"}
+	iDeleteIndexField                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteIndexField"}
+	iDeleteSuggester                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteSuggester"}
+	iDescribeAnalysisSchemes               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeAnalysisSchemes"}
+	iDescribeAvailabilityOptions           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeAvailabilityOptions"}
+	iDescribeDomainEndpointOptions         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeDomainEndpointOptions"}
+	iDescribeDomains                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeDomains"}
+	iDescribeExpressions                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeExpressions"}
+	iDescribeIndexFields                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeIndexFields"}
+	iDescribeScalingParameters             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeScalingParameters"}
+	iDescribeServiceAccessPolicies         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeServiceAccessPolicies"}
+	iDescribeSuggesters                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeSuggesters"}
+	iIndexDocuments                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IndexDocuments"}
+	iListDomainNames                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ListDomainNames"}
+	iUpdateAvailabilityOptions             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateAvailabilityOptions"}
+	iUpdateDomainEndpointOptions           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateDomainEndpointOptions"}
+	iUpdateScalingParameters               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateScalingParameters"}
+	iUpdateServiceAccessPolicies           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateServiceAccessPolicies"}
+	i_A9SearchCloudConfigService2013       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "A9SearchCloudConfigService2013"}
+	iAccessPoliciesStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AccessPoliciesStatus"}
+	iAlgorithmicStemming                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AlgorithmicStemming"}
+	iAnalysisOptions                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AnalysisOptions"}
+	iAnalysisScheme                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AnalysisScheme"}
+	iAnalysisSchemeLanguage                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AnalysisSchemeLanguage"}
+	iAnalysisSchemeStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AnalysisSchemeStatus"}
+	i_AnalysisSchemeStatusList             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AnalysisSchemeStatusList"}
+	i_APIVersion                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "APIVersion"}
+	i_ARN                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ARN"}
+	iAvailabilityOptionsStatus             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "AvailabilityOptionsStatus"}
+	iBaseException                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "BaseException"}
+	i_Boolean                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "Boolean"}
+	iDateArrayOptions                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DateArrayOptions"}
+	iDateOptions                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DateOptions"}
+	iDisabledOperationException            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DisabledOperationException"}
+	iDocumentSuggesterOptions              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DocumentSuggesterOptions"}
+	iDomainEndpointOptions                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainEndpointOptions"}
+	iDomainEndpointOptionsStatus           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainEndpointOptionsStatus"}
+	i_DomainId                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainId"}
+	i_DomainName                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainName"}
+	i_DomainNameList                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainNameList"}
+	i_DomainNameMap                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainNameMap"}
+	iDomainStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainStatus"}
+	i_DomainStatusList                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DomainStatusList"}
+	i_Double                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "Double"}
+	iDoubleArrayOptions                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DoubleArrayOptions"}
+	iDoubleOptions                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DoubleOptions"}
+	i_DynamicFieldName                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DynamicFieldName"}
+	i_DynamicFieldNameList                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DynamicFieldNameList"}
+	i_ErrorCode                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ErrorCode"}
+	i_ErrorMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ErrorMessage"}
+	iExpression                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "Expression"}
+	iExpressionStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ExpressionStatus"}
+	i_ExpressionStatusList                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ExpressionStatusList"}
+	i_ExpressionValue                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ExpressionValue"}
+	i_FieldName                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "FieldName"}
+	i_FieldNameCommaList                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "FieldNameCommaList"}
+	i_FieldNameList                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "FieldNameList"}
+	i_FieldValue                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "FieldValue"}
+	iIndexField                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IndexField"}
+	iIndexFieldStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IndexFieldStatus"}
+	i_IndexFieldStatusList                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IndexFieldStatusList"}
+	iIndexFieldType                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IndexFieldType"}
+	i_InstanceCount                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "InstanceCount"}
+	iIntArrayOptions                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IntArrayOptions"}
+	iInternalException                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "InternalException"}
+	iIntOptions                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IntOptions"}
+	iInvalidTypeException                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "InvalidTypeException"}
+	iLatLonOptions                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "LatLonOptions"}
+	iLimitExceededException                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "LimitExceededException"}
+	iLimits                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "Limits"}
+	iLiteralArrayOptions                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "LiteralArrayOptions"}
+	iLiteralOptions                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "LiteralOptions"}
+	i_Long                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "Long"}
+	i_MaximumPartitionCount                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "MaximumPartitionCount"}
+	i_MaximumReplicationCount              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "MaximumReplicationCount"}
+	i_MultiAZ                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "MultiAZ"}
+	iOptionState                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "OptionState"}
+	iOptionStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "OptionStatus"}
+	i_PartitionCount                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "PartitionCount"}
+	iPartitionInstanceType                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "PartitionInstanceType"}
+	i_PolicyDocument                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "PolicyDocument"}
+	iResourceAlreadyExistsException        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ResourceAlreadyExistsException"}
+	iResourceNotFoundException             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ResourceNotFoundException"}
+	iScalingParameters                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ScalingParameters"}
+	iScalingParametersStatus               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ScalingParametersStatus"}
+	i_SearchInstanceType                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "SearchInstanceType"}
+	iServiceEndpoint                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ServiceEndpoint"}
+	i_ServiceUrl                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ServiceUrl"}
+	i_StandardName                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "StandardName"}
+	i_StandardNameList                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "StandardNameList"}
+	i_String                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "String"}
+	iSuggester                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "Suggester"}
+	iSuggesterFuzzyMatching                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "SuggesterFuzzyMatching"}
+	iSuggesterStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "SuggesterStatus"}
+	i_SuggesterStatusList                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "SuggesterStatusList"}
+	iTextArrayOptions                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "TextArrayOptions"}
+	iTextOptions                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "TextOptions"}
+	iTLSSecurityPolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "TLSSecurityPolicy"}
+	i_UIntValue                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UIntValue"}
+	i_UpdateTimestamp                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateTimestamp"}
+	iValidationException                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ValidationException"}
+	i_Word                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "Word"}
+	iBuildSuggestersRequest                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "BuildSuggestersRequest"}
+	iBuildSuggestersResponse               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "BuildSuggestersResponse"}
+	iCreateDomainRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "CreateDomainRequest"}
+	iCreateDomainResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "CreateDomainResponse"}
+	iDefineAnalysisSchemeRequest           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineAnalysisSchemeRequest"}
+	iDefineAnalysisSchemeResponse          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineAnalysisSchemeResponse"}
+	iDefineExpressionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineExpressionRequest"}
+	iDefineExpressionResponse              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineExpressionResponse"}
+	iDefineIndexFieldRequest               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineIndexFieldRequest"}
+	iDefineIndexFieldResponse              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineIndexFieldResponse"}
+	iDefineSuggesterRequest                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineSuggesterRequest"}
+	iDefineSuggesterResponse               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DefineSuggesterResponse"}
+	iDeleteAnalysisSchemeRequest           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteAnalysisSchemeRequest"}
+	iDeleteAnalysisSchemeResponse          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteAnalysisSchemeResponse"}
+	iDeleteDomainRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteDomainRequest"}
+	iDeleteDomainResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteDomainResponse"}
+	iDeleteExpressionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteExpressionRequest"}
+	iDeleteExpressionResponse              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteExpressionResponse"}
+	iDeleteIndexFieldRequest               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteIndexFieldRequest"}
+	iDeleteIndexFieldResponse              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteIndexFieldResponse"}
+	iDeleteSuggesterRequest                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteSuggesterRequest"}
+	iDeleteSuggesterResponse               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DeleteSuggesterResponse"}
+	iDescribeAnalysisSchemesRequest        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeAnalysisSchemesRequest"}
+	iDescribeAnalysisSchemesResponse       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeAnalysisSchemesResponse"}
+	iDescribeAvailabilityOptionsRequest    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeAvailabilityOptionsRequest"}
+	iDescribeAvailabilityOptionsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeAvailabilityOptionsResponse"}
+	iDescribeDomainEndpointOptionsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeDomainEndpointOptionsRequest"}
+	iDescribeDomainEndpointOptionsResponse = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeDomainEndpointOptionsResponse"}
+	iDescribeDomainsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeDomainsRequest"}
+	iDescribeDomainsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeDomainsResponse"}
+	iDescribeExpressionsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeExpressionsRequest"}
+	iDescribeExpressionsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeExpressionsResponse"}
+	iDescribeIndexFieldsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeIndexFieldsRequest"}
+	iDescribeIndexFieldsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeIndexFieldsResponse"}
+	iDescribeScalingParametersRequest      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeScalingParametersRequest"}
+	iDescribeScalingParametersResponse     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeScalingParametersResponse"}
+	iDescribeServiceAccessPoliciesRequest  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeServiceAccessPoliciesRequest"}
+	iDescribeServiceAccessPoliciesResponse = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeServiceAccessPoliciesResponse"}
+	iDescribeSuggestersRequest             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeSuggestersRequest"}
+	iDescribeSuggestersResponse            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "DescribeSuggestersResponse"}
+	iIndexDocumentsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IndexDocumentsRequest"}
+	iIndexDocumentsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "IndexDocumentsResponse"}
+	iListDomainNamesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "ListDomainNamesResponse"}
+	iUpdateAvailabilityOptionsRequest      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateAvailabilityOptionsRequest"}
+	iUpdateAvailabilityOptionsResponse     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateAvailabilityOptionsResponse"}
+	iUpdateDomainEndpointOptionsRequest    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateDomainEndpointOptionsRequest"}
+	iUpdateDomainEndpointOptionsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateDomainEndpointOptionsResponse"}
+	iUpdateScalingParametersRequest        = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateScalingParametersRequest"}
+	iUpdateScalingParametersResponse       = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateScalingParametersResponse"}
+	iUpdateServiceAccessPoliciesRequest    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateServiceAccessPoliciesRequest"}
+	iUpdateServiceAccessPoliciesResponse   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearch", Name: "UpdateServiceAccessPoliciesResponse"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://cloudsearch.amazonaws.com/doc/2013-01-01/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DisabledAction",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidType",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceAlreadyExists",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessPoliciesStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessPoliciesStatus_Options, &sAccessPoliciesStatus_Status}}
+var mAlgorithmicStemming = smithy.SchemaMembers{List: []*smithy.Schema{&sAlgorithmicStemming_none, &sAlgorithmicStemming_minimal, &sAlgorithmicStemming_light, &sAlgorithmicStemming_full}}
+var mAnalysisOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalysisOptions_Synonyms, &sAnalysisOptions_Stopwords, &sAnalysisOptions_StemmingDictionary, &sAnalysisOptions_JapaneseTokenizationDictionary, &sAnalysisOptions_AlgorithmicStemming}}
+var mAnalysisScheme = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalysisScheme_AnalysisSchemeName, &sAnalysisScheme_AnalysisSchemeLanguage, &sAnalysisScheme_AnalysisOptions}}
+var mAnalysisSchemeLanguage = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalysisSchemeLanguage_ar, &sAnalysisSchemeLanguage_bg, &sAnalysisSchemeLanguage_ca, &sAnalysisSchemeLanguage_cs, &sAnalysisSchemeLanguage_da, &sAnalysisSchemeLanguage_de, &sAnalysisSchemeLanguage_el, &sAnalysisSchemeLanguage_en, &sAnalysisSchemeLanguage_es, &sAnalysisSchemeLanguage_eu, &sAnalysisSchemeLanguage_fa, &sAnalysisSchemeLanguage_fi, &sAnalysisSchemeLanguage_fr, &sAnalysisSchemeLanguage_ga, &sAnalysisSchemeLanguage_gl, &sAnalysisSchemeLanguage_he, &sAnalysisSchemeLanguage_hi, &sAnalysisSchemeLanguage_hu, &sAnalysisSchemeLanguage_hy, &sAnalysisSchemeLanguage_id, &sAnalysisSchemeLanguage_it, &sAnalysisSchemeLanguage_ja, &sAnalysisSchemeLanguage_ko, &sAnalysisSchemeLanguage_lv, &sAnalysisSchemeLanguage_mul, &sAnalysisSchemeLanguage_nl, &sAnalysisSchemeLanguage_no, &sAnalysisSchemeLanguage_pt, &sAnalysisSchemeLanguage_ro, &sAnalysisSchemeLanguage_ru, &sAnalysisSchemeLanguage_sv, &sAnalysisSchemeLanguage_th, &sAnalysisSchemeLanguage_tr, &sAnalysisSchemeLanguage_zh_Hans, &sAnalysisSchemeLanguage_zh_Hant}, Hash: &hAnalysisSchemeLanguage}
+var mAnalysisSchemeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalysisSchemeStatus_Options, &sAnalysisSchemeStatus_Status}}
+var m_AnalysisSchemeStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnalysisSchemeStatusList_member}}
+var mAvailabilityOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityOptionsStatus_Options, &sAvailabilityOptionsStatus_Status}}
+var mBaseException = smithy.SchemaMembers{List: []*smithy.Schema{&sBaseException_Code, &sBaseException_Message}}
+var mDateArrayOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDateArrayOptions_DefaultValue, &sDateArrayOptions_SourceFields, &sDateArrayOptions_FacetEnabled, &sDateArrayOptions_SearchEnabled, &sDateArrayOptions_ReturnEnabled}}
+var mDateOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDateOptions_DefaultValue, &sDateOptions_SourceField, &sDateOptions_FacetEnabled, &sDateOptions_SearchEnabled, &sDateOptions_ReturnEnabled, &sDateOptions_SortEnabled}}
+var mDisabledOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDisabledOperationException_Code, &sDisabledOperationException_Message}}
+var mDocumentSuggesterOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentSuggesterOptions_SourceField, &sDocumentSuggesterOptions_FuzzyMatching, &sDocumentSuggesterOptions_SortExpression}}
+var mDomainEndpointOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainEndpointOptions_EnforceHTTPS, &sDomainEndpointOptions_TLSSecurityPolicy}}
+var mDomainEndpointOptionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainEndpointOptionsStatus_Options, &sDomainEndpointOptionsStatus_Status}}
+var m_DomainNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainNameList_member}}
+var m_DomainNameMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainNameMap_key, &s_DomainNameMap_value}}
+var mDomainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainStatus_DomainId, &sDomainStatus_DomainName, &sDomainStatus_ARN, &sDomainStatus_Created, &sDomainStatus_Deleted, &sDomainStatus_DocService, &sDomainStatus_SearchService, &sDomainStatus_RequiresIndexDocuments, &sDomainStatus_Processing, &sDomainStatus_SearchInstanceType, &sDomainStatus_SearchPartitionCount, &sDomainStatus_SearchInstanceCount, &sDomainStatus_Limits}, Hash: &hDomainStatus}
+var m_DomainStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainStatusList_member}}
+var mDoubleArrayOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDoubleArrayOptions_DefaultValue, &sDoubleArrayOptions_SourceFields, &sDoubleArrayOptions_FacetEnabled, &sDoubleArrayOptions_SearchEnabled, &sDoubleArrayOptions_ReturnEnabled}}
+var mDoubleOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDoubleOptions_DefaultValue, &sDoubleOptions_SourceField, &sDoubleOptions_FacetEnabled, &sDoubleOptions_SearchEnabled, &sDoubleOptions_ReturnEnabled, &sDoubleOptions_SortEnabled}}
+var m_DynamicFieldNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DynamicFieldNameList_member}}
+var mExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sExpression_ExpressionName, &sExpression_ExpressionValue}}
+var mExpressionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressionStatus_Options, &sExpressionStatus_Status}}
+var m_ExpressionStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpressionStatusList_member}}
+var m_FieldNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldNameList_member}}
+var mIndexField = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexField_IndexFieldName, &sIndexField_IndexFieldType, &sIndexField_IntOptions, &sIndexField_DoubleOptions, &sIndexField_LiteralOptions, &sIndexField_TextOptions, &sIndexField_DateOptions, &sIndexField_LatLonOptions, &sIndexField_IntArrayOptions, &sIndexField_DoubleArrayOptions, &sIndexField_LiteralArrayOptions, &sIndexField_TextArrayOptions, &sIndexField_DateArrayOptions}, Hash: &hIndexField}
+var mIndexFieldStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexFieldStatus_Options, &sIndexFieldStatus_Status}}
+var m_IndexFieldStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IndexFieldStatusList_member}}
+var mIndexFieldType = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexFieldType_int, &sIndexFieldType_double, &sIndexFieldType_literal, &sIndexFieldType_text, &sIndexFieldType_date, &sIndexFieldType_latlon, &sIndexFieldType_int_array, &sIndexFieldType_double_array, &sIndexFieldType_literal_array, &sIndexFieldType_text_array, &sIndexFieldType_date_array}, Hash: &hIndexFieldType}
+var mIntArrayOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sIntArrayOptions_DefaultValue, &sIntArrayOptions_SourceFields, &sIntArrayOptions_FacetEnabled, &sIntArrayOptions_SearchEnabled, &sIntArrayOptions_ReturnEnabled}}
+var mInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalException_Code, &sInternalException_Message}}
+var mIntOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sIntOptions_DefaultValue, &sIntOptions_SourceField, &sIntOptions_FacetEnabled, &sIntOptions_SearchEnabled, &sIntOptions_ReturnEnabled, &sIntOptions_SortEnabled}}
+var mInvalidTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTypeException_Code, &sInvalidTypeException_Message}}
+var mLatLonOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sLatLonOptions_DefaultValue, &sLatLonOptions_SourceField, &sLatLonOptions_FacetEnabled, &sLatLonOptions_SearchEnabled, &sLatLonOptions_ReturnEnabled, &sLatLonOptions_SortEnabled}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Code, &sLimitExceededException_Message}}
+var mLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sLimits_MaximumReplicationCount, &sLimits_MaximumPartitionCount}}
+var mLiteralArrayOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sLiteralArrayOptions_DefaultValue, &sLiteralArrayOptions_SourceFields, &sLiteralArrayOptions_FacetEnabled, &sLiteralArrayOptions_SearchEnabled, &sLiteralArrayOptions_ReturnEnabled}}
+var mLiteralOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sLiteralOptions_DefaultValue, &sLiteralOptions_SourceField, &sLiteralOptions_FacetEnabled, &sLiteralOptions_SearchEnabled, &sLiteralOptions_ReturnEnabled, &sLiteralOptions_SortEnabled}}
+var mOptionState = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionState_RequiresIndexDocuments, &sOptionState_Processing, &sOptionState_Active, &sOptionState_FailedToValidate}}
+var mOptionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionStatus_CreationDate, &sOptionStatus_UpdateDate, &sOptionStatus_UpdateVersion, &sOptionStatus_State, &sOptionStatus_PendingDeletion}}
+var mPartitionInstanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionInstanceType_search_m1_small, &sPartitionInstanceType_search_m1_large, &sPartitionInstanceType_search_m2_xlarge, &sPartitionInstanceType_search_m2_2xlarge, &sPartitionInstanceType_search_m3_medium, &sPartitionInstanceType_search_m3_large, &sPartitionInstanceType_search_m3_xlarge, &sPartitionInstanceType_search_m3_2xlarge, &sPartitionInstanceType_search_small, &sPartitionInstanceType_search_medium, &sPartitionInstanceType_search_large, &sPartitionInstanceType_search_xlarge, &sPartitionInstanceType_search_2xlarge, &sPartitionInstanceType_search_previousgeneration_small, &sPartitionInstanceType_search_previousgeneration_large, &sPartitionInstanceType_search_previousgeneration_xlarge, &sPartitionInstanceType_search_previousgeneration_2xlarge}, Hash: &hPartitionInstanceType}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_Code, &sResourceAlreadyExistsException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Code, &sResourceNotFoundException_Message}}
+var mScalingParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingParameters_DesiredInstanceType, &sScalingParameters_DesiredReplicationCount, &sScalingParameters_DesiredPartitionCount}}
+var mScalingParametersStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingParametersStatus_Options, &sScalingParametersStatus_Status}}
+var mServiceEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceEndpoint_Endpoint}}
+var m_StandardNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StandardNameList_member}}
+var mSuggester = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggester_SuggesterName, &sSuggester_DocumentSuggesterOptions}}
+var mSuggesterFuzzyMatching = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggesterFuzzyMatching_none, &sSuggesterFuzzyMatching_low, &sSuggesterFuzzyMatching_high}}
+var mSuggesterStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggesterStatus_Options, &sSuggesterStatus_Status}}
+var m_SuggesterStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SuggesterStatusList_member}}
+var mTextArrayOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sTextArrayOptions_DefaultValue, &sTextArrayOptions_SourceFields, &sTextArrayOptions_ReturnEnabled, &sTextArrayOptions_HighlightEnabled, &sTextArrayOptions_AnalysisScheme}}
+var mTextOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sTextOptions_DefaultValue, &sTextOptions_SourceField, &sTextOptions_ReturnEnabled, &sTextOptions_SortEnabled, &sTextOptions_HighlightEnabled, &sTextOptions_AnalysisScheme}}
+var mTLSSecurityPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07, &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Code, &sValidationException_Message}}
+var mBuildSuggestersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildSuggestersRequest_DomainName}}
+var mBuildSuggestersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildSuggestersResponse_FieldNames}}
+var mCreateDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainRequest_DomainName}}
+var mCreateDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainResponse_DomainStatus}}
+var mDefineAnalysisSchemeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineAnalysisSchemeRequest_DomainName, &sDefineAnalysisSchemeRequest_AnalysisScheme}}
+var mDefineAnalysisSchemeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineAnalysisSchemeResponse_AnalysisScheme}}
+var mDefineExpressionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineExpressionRequest_DomainName, &sDefineExpressionRequest_Expression}}
+var mDefineExpressionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineExpressionResponse_Expression}}
+var mDefineIndexFieldRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineIndexFieldRequest_DomainName, &sDefineIndexFieldRequest_IndexField}}
+var mDefineIndexFieldResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineIndexFieldResponse_IndexField}}
+var mDefineSuggesterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineSuggesterRequest_DomainName, &sDefineSuggesterRequest_Suggester}}
+var mDefineSuggesterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDefineSuggesterResponse_Suggester}}
+var mDeleteAnalysisSchemeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAnalysisSchemeRequest_DomainName, &sDeleteAnalysisSchemeRequest_AnalysisSchemeName}}
+var mDeleteAnalysisSchemeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAnalysisSchemeResponse_AnalysisScheme}}
+var mDeleteDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainRequest_DomainName}}
+var mDeleteDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainResponse_DomainStatus}}
+var mDeleteExpressionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExpressionRequest_DomainName, &sDeleteExpressionRequest_ExpressionName}}
+var mDeleteExpressionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExpressionResponse_Expression}}
+var mDeleteIndexFieldRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIndexFieldRequest_DomainName, &sDeleteIndexFieldRequest_IndexFieldName}}
+var mDeleteIndexFieldResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIndexFieldResponse_IndexField}}
+var mDeleteSuggesterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSuggesterRequest_DomainName, &sDeleteSuggesterRequest_SuggesterName}}
+var mDeleteSuggesterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSuggesterResponse_Suggester}}
+var mDescribeAnalysisSchemesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAnalysisSchemesRequest_DomainName, &sDescribeAnalysisSchemesRequest_AnalysisSchemeNames, &sDescribeAnalysisSchemesRequest_Deployed}}
+var mDescribeAnalysisSchemesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAnalysisSchemesResponse_AnalysisSchemes}}
+var mDescribeAvailabilityOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAvailabilityOptionsRequest_DomainName, &sDescribeAvailabilityOptionsRequest_Deployed}}
+var mDescribeAvailabilityOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAvailabilityOptionsResponse_AvailabilityOptions}}
+var mDescribeDomainEndpointOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainEndpointOptionsRequest_DomainName, &sDescribeDomainEndpointOptionsRequest_Deployed}}
+var mDescribeDomainEndpointOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainEndpointOptionsResponse_DomainEndpointOptions}}
+var mDescribeDomainsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainsRequest_DomainNames}}
+var mDescribeDomainsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainsResponse_DomainStatusList}}
+var mDescribeExpressionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExpressionsRequest_DomainName, &sDescribeExpressionsRequest_ExpressionNames, &sDescribeExpressionsRequest_Deployed}}
+var mDescribeExpressionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExpressionsResponse_Expressions}}
+var mDescribeIndexFieldsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeIndexFieldsRequest_DomainName, &sDescribeIndexFieldsRequest_FieldNames, &sDescribeIndexFieldsRequest_Deployed}}
+var mDescribeIndexFieldsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeIndexFieldsResponse_IndexFields}}
+var mDescribeScalingParametersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalingParametersRequest_DomainName}}
+var mDescribeScalingParametersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalingParametersResponse_ScalingParameters}}
+var mDescribeServiceAccessPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceAccessPoliciesRequest_DomainName, &sDescribeServiceAccessPoliciesRequest_Deployed}}
+var mDescribeServiceAccessPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceAccessPoliciesResponse_AccessPolicies}}
+var mDescribeSuggestersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSuggestersRequest_DomainName, &sDescribeSuggestersRequest_SuggesterNames, &sDescribeSuggestersRequest_Deployed}}
+var mDescribeSuggestersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSuggestersResponse_Suggesters}}
+var mIndexDocumentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexDocumentsRequest_DomainName}}
+var mIndexDocumentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexDocumentsResponse_FieldNames}}
+var mListDomainNamesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainNamesResponse_DomainNames}}
+var mUpdateAvailabilityOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAvailabilityOptionsRequest_DomainName, &sUpdateAvailabilityOptionsRequest_MultiAZ}}
+var mUpdateAvailabilityOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAvailabilityOptionsResponse_AvailabilityOptions}}
+var mUpdateDomainEndpointOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDomainEndpointOptionsRequest_DomainName, &sUpdateDomainEndpointOptionsRequest_DomainEndpointOptions}}
+var mUpdateDomainEndpointOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDomainEndpointOptionsResponse_DomainEndpointOptions}}
+var mUpdateScalingParametersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScalingParametersRequest_DomainName, &sUpdateScalingParametersRequest_ScalingParameters}}
+var mUpdateScalingParametersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScalingParametersResponse_ScalingParameters}}
+var mUpdateServiceAccessPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceAccessPoliciesRequest_DomainName, &sUpdateServiceAccessPoliciesRequest_AccessPolicies}}
+var mUpdateServiceAccessPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceAccessPoliciesResponse_AccessPolicies}}
+
+var hAnalysisSchemeLanguage = smithy.MemberHash{Seed: 49, Slots: []uint16{
+	0, 0, 13, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 30, 0, 0, 0,
+	0, 0, 0, 15, 0, 0, 0, 2, 0, 0, 0, 0, 0, 35, 0, 0, 0, 3, 0, 0, 0, 0, 0, 10,
+	22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 6, 0, 7, 0, 0, 21, 0, 23, 0, 0, 12, 0, 0,
+	0, 28, 19, 0, 0, 0, 0, 33, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0,
+	0, 0, 4, 32, 0, 25, 24, 20, 0, 0, 0, 0, 17, 14, 0, 0, 0, 0, 0, 1, 0, 27, 0, 16,
+	0, 0, 18, 34, 11, 0, 0, 8,
+}}
+var hDomainStatus = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	0, 0, 0, 0, 4, 3, 0, 5, 2, 13, 0, 7, 11, 0, 0, 0, 12, 0, 0, 6, 0, 0, 0, 0,
+	0, 0, 9, 0, 0, 1, 8, 10,
+}}
+var hIndexField = smithy.MemberHash{Seed: 54, Slots: []uint16{
+	8, 0, 9, 0, 0, 0, 0, 0, 0, 0, 2, 0, 6, 13, 0, 0, 0, 12, 0, 0, 3, 5, 0, 10,
+	4, 0, 0, 7, 0, 0, 11, 1,
+}}
+var hIndexFieldType = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 10, 0, 7, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 5, 6, 0, 11, 3, 4,
+	0, 0, 0, 0, 9, 8, 0, 0,
+}}
+var hPartitionInstanceType = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 15, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 1, 0, 3, 16, 0, 0, 4, 13, 8, 0, 2,
+	0, 5, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 17, 0, 11, 0, 0, 0, 0, 0, 7, 0, 0, 0,
+	0, 6, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0,
+}}
+
+var sBuildSuggesters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildSuggesters, Type: smithy.ShapeTypeOperation, Ext: &eBuildSuggesters})
+var sCreateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomain, Type: smithy.ShapeTypeOperation, Ext: &eCreateDomain})
+var sDefineAnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineAnalysisScheme, Type: smithy.ShapeTypeOperation, Ext: &eDefineAnalysisScheme})
+var sDefineExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineExpression, Type: smithy.ShapeTypeOperation, Ext: &eDefineExpression})
+var sDefineIndexField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineIndexField, Type: smithy.ShapeTypeOperation, Ext: &eDefineIndexField})
+var sDefineSuggester = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineSuggester, Type: smithy.ShapeTypeOperation, Ext: &eDefineSuggester})
+var sDeleteAnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnalysisScheme, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAnalysisScheme})
+var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDomain})
+var sDeleteExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExpression, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExpression})
+var sDeleteIndexField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexField, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIndexField})
+var sDeleteSuggester = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSuggester, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSuggester})
+var sDescribeAnalysisSchemes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnalysisSchemes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAnalysisSchemes})
+var sDescribeAvailabilityOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAvailabilityOptions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAvailabilityOptions})
+var sDescribeDomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainEndpointOptions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDomainEndpointOptions})
+var sDescribeDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomains, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDomains})
+var sDescribeExpressions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExpressions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeExpressions})
+var sDescribeIndexFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIndexFields, Type: smithy.ShapeTypeOperation, Ext: &eDescribeIndexFields})
+var sDescribeScalingParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingParameters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeScalingParameters})
+var sDescribeServiceAccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceAccessPolicies, Type: smithy.ShapeTypeOperation, Ext: &eDescribeServiceAccessPolicies})
+var sDescribeSuggesters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSuggesters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSuggesters})
+var sIndexDocuments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexDocuments, Type: smithy.ShapeTypeOperation, Ext: &eIndexDocuments})
+var sListDomainNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNames, Type: smithy.ShapeTypeOperation, Ext: &eListDomainNames})
+var sUpdateAvailabilityOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityOptions, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAvailabilityOptions})
+var sUpdateDomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainEndpointOptions, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDomainEndpointOptions})
+var sUpdateScalingParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScalingParameters, Type: smithy.ShapeTypeOperation, Ext: &eUpdateScalingParameters})
+var sUpdateServiceAccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceAccessPolicies, Type: smithy.ShapeTypeOperation, Ext: &eUpdateServiceAccessPolicies})
+var s_A9SearchCloudConfigService2013 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_A9SearchCloudConfigService2013, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_A9SearchCloudConfigService2013})
+var sAccessPoliciesStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPoliciesStatus, Members: &mAccessPoliciesStatus, Type: smithy.ShapeTypeStructure, Ext: &eAccessPoliciesStatus})
+var sAccessPoliciesStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &eAccessPoliciesStatus_Options})
+var sAccessPoliciesStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAccessPoliciesStatus_Status})
+var sAlgorithmicStemming = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlgorithmicStemming, Members: &mAlgorithmicStemming, Type: smithy.ShapeTypeEnum, Ext: &eAlgorithmicStemming})
+var sAlgorithmicStemming_none = smithy.NewStaticSchema(smithy.StaticSchema{Member: "none", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmicStemming_none})
+var sAlgorithmicStemming_minimal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimal", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmicStemming_minimal})
+var sAlgorithmicStemming_light = smithy.NewStaticSchema(smithy.StaticSchema{Member: "light", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmicStemming_light})
+var sAlgorithmicStemming_full = smithy.NewStaticSchema(smithy.StaticSchema{Member: "full", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmicStemming_full})
+var sAnalysisOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisOptions, Members: &mAnalysisOptions, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisOptions})
+var sAnalysisOptions_Synonyms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Synonyms", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAnalysisOptions_Synonyms})
+var sAnalysisOptions_Stopwords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopwords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAnalysisOptions_Stopwords})
+var sAnalysisOptions_StemmingDictionary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StemmingDictionary", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAnalysisOptions_StemmingDictionary})
+var sAnalysisOptions_JapaneseTokenizationDictionary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JapaneseTokenizationDictionary", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAnalysisOptions_JapaneseTokenizationDictionary})
+var sAnalysisOptions_AlgorithmicStemming = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmicStemming", ID: &iAlgorithmicStemming, Members: &mAlgorithmicStemming, Type: smithy.ShapeTypeEnum, Ext: &eAnalysisOptions_AlgorithmicStemming})
+var sAnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisScheme, Members: &mAnalysisScheme, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisScheme})
+var sAnalysisScheme_AnalysisSchemeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisSchemeName", ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &eAnalysisScheme_AnalysisSchemeName})
+var sAnalysisScheme_AnalysisSchemeLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisSchemeLanguage", ID: &iAnalysisSchemeLanguage, Members: &mAnalysisSchemeLanguage, Type: smithy.ShapeTypeEnum, Ext: &eAnalysisScheme_AnalysisSchemeLanguage})
+var sAnalysisScheme_AnalysisOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisOptions", ID: &iAnalysisOptions, Members: &mAnalysisOptions, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisScheme_AnalysisOptions})
+var sAnalysisSchemeLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisSchemeLanguage, Members: &mAnalysisSchemeLanguage, Type: smithy.ShapeTypeEnum, Ext: &eAnalysisSchemeLanguage})
+var sAnalysisSchemeLanguage_ar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ar", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_ar})
+var sAnalysisSchemeLanguage_bg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bg", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_bg})
+var sAnalysisSchemeLanguage_ca = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ca", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_ca})
+var sAnalysisSchemeLanguage_cs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cs", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_cs})
+var sAnalysisSchemeLanguage_da = smithy.NewStaticSchema(smithy.StaticSchema{Member: "da", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_da})
+var sAnalysisSchemeLanguage_de = smithy.NewStaticSchema(smithy.StaticSchema{Member: "de", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_de})
+var sAnalysisSchemeLanguage_el = smithy.NewStaticSchema(smithy.StaticSchema{Member: "el", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_el})
+var sAnalysisSchemeLanguage_en = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_en})
+var sAnalysisSchemeLanguage_es = smithy.NewStaticSchema(smithy.StaticSchema{Member: "es", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_es})
+var sAnalysisSchemeLanguage_eu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eu", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_eu})
+var sAnalysisSchemeLanguage_fa = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fa", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_fa})
+var sAnalysisSchemeLanguage_fi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fi", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_fi})
+var sAnalysisSchemeLanguage_fr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fr", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_fr})
+var sAnalysisSchemeLanguage_ga = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ga", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_ga})
+var sAnalysisSchemeLanguage_gl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gl", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_gl})
+var sAnalysisSchemeLanguage_he = smithy.NewStaticSchema(smithy.StaticSchema{Member: "he", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_he})
+var sAnalysisSchemeLanguage_hi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hi", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_hi})
+var sAnalysisSchemeLanguage_hu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hu", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_hu})
+var sAnalysisSchemeLanguage_hy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hy", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_hy})
+var sAnalysisSchemeLanguage_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_id})
+var sAnalysisSchemeLanguage_it = smithy.NewStaticSchema(smithy.StaticSchema{Member: "it", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_it})
+var sAnalysisSchemeLanguage_ja = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ja", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_ja})
+var sAnalysisSchemeLanguage_ko = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ko", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_ko})
+var sAnalysisSchemeLanguage_lv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lv", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_lv})
+var sAnalysisSchemeLanguage_mul = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mul", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_mul})
+var sAnalysisSchemeLanguage_nl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nl", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_nl})
+var sAnalysisSchemeLanguage_no = smithy.NewStaticSchema(smithy.StaticSchema{Member: "no", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_no})
+var sAnalysisSchemeLanguage_pt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_pt})
+var sAnalysisSchemeLanguage_ro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ro", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_ro})
+var sAnalysisSchemeLanguage_ru = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ru", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_ru})
+var sAnalysisSchemeLanguage_sv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sv", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_sv})
+var sAnalysisSchemeLanguage_th = smithy.NewStaticSchema(smithy.StaticSchema{Member: "th", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_th})
+var sAnalysisSchemeLanguage_tr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tr", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_tr})
+var sAnalysisSchemeLanguage_zh_Hans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zh_Hans", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_zh_Hans})
+var sAnalysisSchemeLanguage_zh_Hant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zh_Hant", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeLanguage_zh_Hant})
+var sAnalysisSchemeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisSchemeStatus, Members: &mAnalysisSchemeStatus, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeStatus})
+var sAnalysisSchemeStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iAnalysisScheme, Members: &mAnalysisScheme, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeStatus_Options})
+var sAnalysisSchemeStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisSchemeStatus_Status})
+var s_AnalysisSchemeStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisSchemeStatusList, Members: &m_AnalysisSchemeStatusList, Type: smithy.ShapeTypeList, Ext: &e_AnalysisSchemeStatusList})
+var s_AnalysisSchemeStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisSchemeStatus, Members: &mAnalysisSchemeStatus, Type: smithy.ShapeTypeStructure, Ext: &e_AnalysisSchemeStatusList_member})
+var s_APIVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_APIVersion, Type: smithy.ShapeTypeString, Ext: &e_APIVersion})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &e_ARN})
+var sAvailabilityOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityOptionsStatus, Members: &mAvailabilityOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityOptionsStatus})
+var sAvailabilityOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_MultiAZ, Type: smithy.ShapeTypeBoolean, Ext: &eAvailabilityOptionsStatus_Options})
+var sAvailabilityOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityOptionsStatus_Status})
+var sBaseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaseException, Members: &mBaseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBaseException})
+var sBaseException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBaseException_Code})
+var sBaseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBaseException_Message})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sDateArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateArrayOptions, Members: &mDateArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eDateArrayOptions})
+var sDateArrayOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &eDateArrayOptions_DefaultValue})
+var sDateArrayOptions_SourceFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFields", ID: &i_FieldNameCommaList, Type: smithy.ShapeTypeString, Ext: &eDateArrayOptions_SourceFields})
+var sDateArrayOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDateArrayOptions_FacetEnabled})
+var sDateArrayOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDateArrayOptions_SearchEnabled})
+var sDateArrayOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDateArrayOptions_ReturnEnabled})
+var sDateOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateOptions, Members: &mDateOptions, Type: smithy.ShapeTypeStructure, Ext: &eDateOptions})
+var sDateOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &eDateOptions_DefaultValue})
+var sDateOptions_SourceField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceField", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eDateOptions_SourceField})
+var sDateOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDateOptions_FacetEnabled})
+var sDateOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDateOptions_SearchEnabled})
+var sDateOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDateOptions_ReturnEnabled})
+var sDateOptions_SortEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDateOptions_SortEnabled})
+var sDisabledOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisabledOperationException, Members: &mDisabledOperationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eDisabledOperationException})
+var sDisabledOperationException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eDisabledOperationException_Code})
+var sDisabledOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDisabledOperationException_Message})
+var sDocumentSuggesterOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentSuggesterOptions, Members: &mDocumentSuggesterOptions, Type: smithy.ShapeTypeStructure, Ext: &eDocumentSuggesterOptions})
+var sDocumentSuggesterOptions_SourceField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceField", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eDocumentSuggesterOptions_SourceField})
+var sDocumentSuggesterOptions_FuzzyMatching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FuzzyMatching", ID: &iSuggesterFuzzyMatching, Members: &mSuggesterFuzzyMatching, Type: smithy.ShapeTypeEnum, Ext: &eDocumentSuggesterOptions_FuzzyMatching})
+var sDocumentSuggesterOptions_SortExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortExpression", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDocumentSuggesterOptions_SortExpression})
+var sDomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptions})
+var sDomainEndpointOptions_EnforceHTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceHTTPS", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainEndpointOptions_EnforceHTTPS})
+var sDomainEndpointOptions_TLSSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSSecurityPolicy", ID: &iTLSSecurityPolicy, Members: &mTLSSecurityPolicy, Type: smithy.ShapeTypeEnum, Ext: &eDomainEndpointOptions_TLSSecurityPolicy})
+var sDomainEndpointOptionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainEndpointOptionsStatus, Members: &mDomainEndpointOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptionsStatus})
+var sDomainEndpointOptionsStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptionsStatus_Options})
+var sDomainEndpointOptionsStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eDomainEndpointOptionsStatus_Status})
+var s_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &e_DomainId})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var s_DomainNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNameList, Members: &m_DomainNameList, Type: smithy.ShapeTypeList, Ext: &e_DomainNameList})
+var s_DomainNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainNameList_member})
+var s_DomainNameMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNameMap, Members: &m_DomainNameMap, Type: smithy.ShapeTypeMap, Ext: &e_DomainNameMap})
+var s_DomainNameMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainNameMap_key})
+var s_DomainNameMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_APIVersion, Type: smithy.ShapeTypeString, Ext: &e_DomainNameMap_value})
+var sDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus})
+var sDomainStatus_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDomainStatus_DomainId})
+var sDomainStatus_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainStatus_DomainName})
+var sDomainStatus_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eDomainStatus_ARN})
+var sDomainStatus_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainStatus_Created})
+var sDomainStatus_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainStatus_Deleted})
+var sDomainStatus_DocService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocService", ID: &iServiceEndpoint, Members: &mServiceEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_DocService})
+var sDomainStatus_SearchService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchService", ID: &iServiceEndpoint, Members: &mServiceEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_SearchService})
+var sDomainStatus_RequiresIndexDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiresIndexDocuments", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainStatus_RequiresIndexDocuments})
+var sDomainStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainStatus_Processing})
+var sDomainStatus_SearchInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchInstanceType", ID: &i_SearchInstanceType, Type: smithy.ShapeTypeString, Ext: &eDomainStatus_SearchInstanceType})
+var sDomainStatus_SearchPartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchPartitionCount", ID: &i_PartitionCount, Type: smithy.ShapeTypeInteger, Ext: &eDomainStatus_SearchPartitionCount})
+var sDomainStatus_SearchInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchInstanceCount", ID: &i_InstanceCount, Type: smithy.ShapeTypeInteger, Ext: &eDomainStatus_SearchInstanceCount})
+var sDomainStatus_Limits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limits", ID: &iLimits, Members: &mLimits, Type: smithy.ShapeTypeStructure, Ext: &eDomainStatus_Limits})
+var s_DomainStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatusList, Members: &m_DomainStatusList, Type: smithy.ShapeTypeList, Ext: &e_DomainStatusList})
+var s_DomainStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &e_DomainStatusList_member})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var sDoubleArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDoubleArrayOptions, Members: &mDoubleArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eDoubleArrayOptions})
+var sDoubleArrayOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eDoubleArrayOptions_DefaultValue})
+var sDoubleArrayOptions_SourceFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFields", ID: &i_FieldNameCommaList, Type: smithy.ShapeTypeString, Ext: &eDoubleArrayOptions_SourceFields})
+var sDoubleArrayOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDoubleArrayOptions_FacetEnabled})
+var sDoubleArrayOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDoubleArrayOptions_SearchEnabled})
+var sDoubleArrayOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDoubleArrayOptions_ReturnEnabled})
+var sDoubleOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDoubleOptions, Members: &mDoubleOptions, Type: smithy.ShapeTypeStructure, Ext: &eDoubleOptions})
+var sDoubleOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eDoubleOptions_DefaultValue})
+var sDoubleOptions_SourceField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceField", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eDoubleOptions_SourceField})
+var sDoubleOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDoubleOptions_FacetEnabled})
+var sDoubleOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDoubleOptions_SearchEnabled})
+var sDoubleOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDoubleOptions_ReturnEnabled})
+var sDoubleOptions_SortEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDoubleOptions_SortEnabled})
+var s_DynamicFieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamicFieldName, Type: smithy.ShapeTypeString, Ext: &e_DynamicFieldName})
+var s_DynamicFieldNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamicFieldNameList, Members: &m_DynamicFieldNameList, Type: smithy.ShapeTypeList, Ext: &e_DynamicFieldNameList})
+var s_DynamicFieldNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DynamicFieldName, Type: smithy.ShapeTypeString, Ext: &e_DynamicFieldNameList_member})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpression})
+var sExpression_ExpressionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpressionName", ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &eExpression_ExpressionName})
+var sExpression_ExpressionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpressionValue", ID: &i_ExpressionValue, Type: smithy.ShapeTypeString, Ext: &eExpression_ExpressionValue})
+var sExpressionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressionStatus, Members: &mExpressionStatus, Type: smithy.ShapeTypeStructure, Ext: &eExpressionStatus})
+var sExpressionStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpressionStatus_Options})
+var sExpressionStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eExpressionStatus_Status})
+var s_ExpressionStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressionStatusList, Members: &m_ExpressionStatusList, Type: smithy.ShapeTypeList, Ext: &e_ExpressionStatusList})
+var s_ExpressionStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpressionStatus, Members: &mExpressionStatus, Type: smithy.ShapeTypeStructure, Ext: &e_ExpressionStatusList_member})
+var s_ExpressionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressionValue, Type: smithy.ShapeTypeString, Ext: &e_ExpressionValue})
+var s_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &e_FieldName})
+var s_FieldNameCommaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldNameCommaList, Type: smithy.ShapeTypeString, Ext: &e_FieldNameCommaList})
+var s_FieldNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldNameList, Members: &m_FieldNameList, Type: smithy.ShapeTypeList, Ext: &e_FieldNameList})
+var s_FieldNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &e_FieldNameList_member})
+var s_FieldValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &e_FieldValue})
+var sIndexField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexField, Members: &mIndexField, Type: smithy.ShapeTypeStructure, Ext: &eIndexField})
+var sIndexField_IndexFieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexFieldName", ID: &i_DynamicFieldName, Type: smithy.ShapeTypeString, Ext: &eIndexField_IndexFieldName})
+var sIndexField_IndexFieldType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexFieldType", ID: &iIndexFieldType, Members: &mIndexFieldType, Type: smithy.ShapeTypeEnum, Ext: &eIndexField_IndexFieldType})
+var sIndexField_IntOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntOptions", ID: &iIntOptions, Members: &mIntOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_IntOptions})
+var sIndexField_DoubleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DoubleOptions", ID: &iDoubleOptions, Members: &mDoubleOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_DoubleOptions})
+var sIndexField_LiteralOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiteralOptions", ID: &iLiteralOptions, Members: &mLiteralOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_LiteralOptions})
+var sIndexField_TextOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextOptions", ID: &iTextOptions, Members: &mTextOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_TextOptions})
+var sIndexField_DateOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateOptions", ID: &iDateOptions, Members: &mDateOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_DateOptions})
+var sIndexField_LatLonOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatLonOptions", ID: &iLatLonOptions, Members: &mLatLonOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_LatLonOptions})
+var sIndexField_IntArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntArrayOptions", ID: &iIntArrayOptions, Members: &mIntArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_IntArrayOptions})
+var sIndexField_DoubleArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DoubleArrayOptions", ID: &iDoubleArrayOptions, Members: &mDoubleArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_DoubleArrayOptions})
+var sIndexField_LiteralArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LiteralArrayOptions", ID: &iLiteralArrayOptions, Members: &mLiteralArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_LiteralArrayOptions})
+var sIndexField_TextArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextArrayOptions", ID: &iTextArrayOptions, Members: &mTextArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_TextArrayOptions})
+var sIndexField_DateArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateArrayOptions", ID: &iDateArrayOptions, Members: &mDateArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eIndexField_DateArrayOptions})
+var sIndexFieldStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexFieldStatus, Members: &mIndexFieldStatus, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldStatus})
+var sIndexFieldStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iIndexField, Members: &mIndexField, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldStatus_Options})
+var sIndexFieldStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldStatus_Status})
+var s_IndexFieldStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexFieldStatusList, Members: &m_IndexFieldStatusList, Type: smithy.ShapeTypeList, Ext: &e_IndexFieldStatusList})
+var s_IndexFieldStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIndexFieldStatus, Members: &mIndexFieldStatus, Type: smithy.ShapeTypeStructure, Ext: &e_IndexFieldStatusList_member})
+var sIndexFieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexFieldType, Members: &mIndexFieldType, Type: smithy.ShapeTypeEnum, Ext: &eIndexFieldType})
+var sIndexFieldType_int = smithy.NewStaticSchema(smithy.StaticSchema{Member: "int", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_int})
+var sIndexFieldType_double = smithy.NewStaticSchema(smithy.StaticSchema{Member: "double", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_double})
+var sIndexFieldType_literal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "literal", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_literal})
+var sIndexFieldType_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_text})
+var sIndexFieldType_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_date})
+var sIndexFieldType_latlon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latlon", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_latlon})
+var sIndexFieldType_int_array = smithy.NewStaticSchema(smithy.StaticSchema{Member: "int_array", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_int_array})
+var sIndexFieldType_double_array = smithy.NewStaticSchema(smithy.StaticSchema{Member: "double_array", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_double_array})
+var sIndexFieldType_literal_array = smithy.NewStaticSchema(smithy.StaticSchema{Member: "literal_array", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_literal_array})
+var sIndexFieldType_text_array = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text_array", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_text_array})
+var sIndexFieldType_date_array = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date_array", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexFieldType_date_array})
+var s_InstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceCount, Type: smithy.ShapeTypeInteger, Ext: &e_InstanceCount})
+var sIntArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntArrayOptions, Members: &mIntArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eIntArrayOptions})
+var sIntArrayOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eIntArrayOptions_DefaultValue})
+var sIntArrayOptions_SourceFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFields", ID: &i_FieldNameCommaList, Type: smithy.ShapeTypeString, Ext: &eIntArrayOptions_SourceFields})
+var sIntArrayOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntArrayOptions_FacetEnabled})
+var sIntArrayOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntArrayOptions_SearchEnabled})
+var sIntArrayOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntArrayOptions_ReturnEnabled})
+var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInternalException})
+var sInternalException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInternalException_Code})
+var sInternalException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalException_Message})
+var sIntOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntOptions, Members: &mIntOptions, Type: smithy.ShapeTypeStructure, Ext: &eIntOptions})
+var sIntOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eIntOptions_DefaultValue})
+var sIntOptions_SourceField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceField", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eIntOptions_SourceField})
+var sIntOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntOptions_FacetEnabled})
+var sIntOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntOptions_SearchEnabled})
+var sIntOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntOptions_ReturnEnabled})
+var sIntOptions_SortEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntOptions_SortEnabled})
+var sInvalidTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTypeException, Members: &mInvalidTypeException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTypeException})
+var sInvalidTypeException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInvalidTypeException_Code})
+var sInvalidTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTypeException_Message})
+var sLatLonOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLatLonOptions, Members: &mLatLonOptions, Type: smithy.ShapeTypeStructure, Ext: &eLatLonOptions})
+var sLatLonOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &eLatLonOptions_DefaultValue})
+var sLatLonOptions_SourceField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceField", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eLatLonOptions_SourceField})
+var sLatLonOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLatLonOptions_FacetEnabled})
+var sLatLonOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLatLonOptions_SearchEnabled})
+var sLatLonOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLatLonOptions_ReturnEnabled})
+var sLatLonOptions_SortEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLatLonOptions_SortEnabled})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Code})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var sLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimits, Members: &mLimits, Type: smithy.ShapeTypeStructure, Ext: &eLimits})
+var sLimits_MaximumReplicationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumReplicationCount", ID: &i_MaximumReplicationCount, Type: smithy.ShapeTypeInteger, Ext: &eLimits_MaximumReplicationCount})
+var sLimits_MaximumPartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumPartitionCount", ID: &i_MaximumPartitionCount, Type: smithy.ShapeTypeInteger, Ext: &eLimits_MaximumPartitionCount})
+var sLiteralArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiteralArrayOptions, Members: &mLiteralArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eLiteralArrayOptions})
+var sLiteralArrayOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &eLiteralArrayOptions_DefaultValue})
+var sLiteralArrayOptions_SourceFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFields", ID: &i_FieldNameCommaList, Type: smithy.ShapeTypeString, Ext: &eLiteralArrayOptions_SourceFields})
+var sLiteralArrayOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLiteralArrayOptions_FacetEnabled})
+var sLiteralArrayOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLiteralArrayOptions_SearchEnabled})
+var sLiteralArrayOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLiteralArrayOptions_ReturnEnabled})
+var sLiteralOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiteralOptions, Members: &mLiteralOptions, Type: smithy.ShapeTypeStructure, Ext: &eLiteralOptions})
+var sLiteralOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &eLiteralOptions_DefaultValue})
+var sLiteralOptions_SourceField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceField", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eLiteralOptions_SourceField})
+var sLiteralOptions_FacetEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLiteralOptions_FacetEnabled})
+var sLiteralOptions_SearchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLiteralOptions_SearchEnabled})
+var sLiteralOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLiteralOptions_ReturnEnabled})
+var sLiteralOptions_SortEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLiteralOptions_SortEnabled})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_MaximumPartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumPartitionCount, Type: smithy.ShapeTypeInteger, Ext: &e_MaximumPartitionCount})
+var s_MaximumReplicationCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumReplicationCount, Type: smithy.ShapeTypeInteger, Ext: &e_MaximumReplicationCount})
+var s_MultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiAZ, Type: smithy.ShapeTypeBoolean, Ext: &e_MultiAZ})
+var sOptionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionState, Members: &mOptionState, Type: smithy.ShapeTypeEnum, Ext: &eOptionState})
+var sOptionState_RequiresIndexDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiresIndexDocuments", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptionState_RequiresIndexDocuments})
+var sOptionState_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptionState_Processing})
+var sOptionState_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptionState_Active})
+var sOptionState_FailedToValidate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedToValidate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptionState_FailedToValidate})
+var sOptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eOptionStatus})
+var sOptionStatus_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOptionStatus_CreationDate})
+var sOptionStatus_UpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDate", ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOptionStatus_UpdateDate})
+var sOptionStatus_UpdateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateVersion", ID: &i_UIntValue, Type: smithy.ShapeTypeInteger, Ext: &eOptionStatus_UpdateVersion})
+var sOptionStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iOptionState, Members: &mOptionState, Type: smithy.ShapeTypeEnum, Ext: &eOptionStatus_State})
+var sOptionStatus_PendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOptionStatus_PendingDeletion})
+var s_PartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionCount, Type: smithy.ShapeTypeInteger, Ext: &e_PartitionCount})
+var sPartitionInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionInstanceType, Members: &mPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &ePartitionInstanceType})
+var sPartitionInstanceType_search_m1_small = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m1_small", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m1_small})
+var sPartitionInstanceType_search_m1_large = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m1_large", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m1_large})
+var sPartitionInstanceType_search_m2_xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m2_xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m2_xlarge})
+var sPartitionInstanceType_search_m2_2xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m2_2xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m2_2xlarge})
+var sPartitionInstanceType_search_m3_medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m3_medium", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m3_medium})
+var sPartitionInstanceType_search_m3_large = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m3_large", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m3_large})
+var sPartitionInstanceType_search_m3_xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m3_xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m3_xlarge})
+var sPartitionInstanceType_search_m3_2xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_m3_2xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_m3_2xlarge})
+var sPartitionInstanceType_search_small = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_small", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_small})
+var sPartitionInstanceType_search_medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_medium", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_medium})
+var sPartitionInstanceType_search_large = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_large", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_large})
+var sPartitionInstanceType_search_xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_xlarge})
+var sPartitionInstanceType_search_2xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_2xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_2xlarge})
+var sPartitionInstanceType_search_previousgeneration_small = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_previousgeneration_small", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_previousgeneration_small})
+var sPartitionInstanceType_search_previousgeneration_large = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_previousgeneration_large", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_previousgeneration_large})
+var sPartitionInstanceType_search_previousgeneration_xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_previousgeneration_xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_previousgeneration_xlarge})
+var sPartitionInstanceType_search_previousgeneration_2xlarge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search_previousgeneration_2xlarge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionInstanceType_search_previousgeneration_2xlarge})
+var s_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &e_PolicyDocument})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceAlreadyExistsException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_Code})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_Message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Code})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sScalingParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingParameters, Members: &mScalingParameters, Type: smithy.ShapeTypeStructure, Ext: &eScalingParameters})
+var sScalingParameters_DesiredInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredInstanceType", ID: &iPartitionInstanceType, Members: &mPartitionInstanceType, Type: smithy.ShapeTypeEnum, Ext: &eScalingParameters_DesiredInstanceType})
+var sScalingParameters_DesiredReplicationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredReplicationCount", ID: &i_UIntValue, Type: smithy.ShapeTypeInteger, Ext: &eScalingParameters_DesiredReplicationCount})
+var sScalingParameters_DesiredPartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredPartitionCount", ID: &i_UIntValue, Type: smithy.ShapeTypeInteger, Ext: &eScalingParameters_DesiredPartitionCount})
+var sScalingParametersStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingParametersStatus, Members: &mScalingParametersStatus, Type: smithy.ShapeTypeStructure, Ext: &eScalingParametersStatus})
+var sScalingParametersStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iScalingParameters, Members: &mScalingParameters, Type: smithy.ShapeTypeStructure, Ext: &eScalingParametersStatus_Options})
+var sScalingParametersStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eScalingParametersStatus_Status})
+var s_SearchInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchInstanceType, Type: smithy.ShapeTypeString, Ext: &e_SearchInstanceType})
+var sServiceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceEndpoint, Members: &mServiceEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eServiceEndpoint})
+var sServiceEndpoint_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_ServiceUrl, Type: smithy.ShapeTypeString, Ext: &eServiceEndpoint_Endpoint})
+var s_ServiceUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceUrl, Type: smithy.ShapeTypeString, Ext: &e_ServiceUrl})
+var s_StandardName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &e_StandardName})
+var s_StandardNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StandardNameList, Members: &m_StandardNameList, Type: smithy.ShapeTypeList, Ext: &e_StandardNameList})
+var s_StandardNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &e_StandardNameList_member})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sSuggester = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggester, Members: &mSuggester, Type: smithy.ShapeTypeStructure, Ext: &eSuggester})
+var sSuggester_SuggesterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggesterName", ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &eSuggester_SuggesterName})
+var sSuggester_DocumentSuggesterOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentSuggesterOptions", ID: &iDocumentSuggesterOptions, Members: &mDocumentSuggesterOptions, Type: smithy.ShapeTypeStructure, Ext: &eSuggester_DocumentSuggesterOptions})
+var sSuggesterFuzzyMatching = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggesterFuzzyMatching, Members: &mSuggesterFuzzyMatching, Type: smithy.ShapeTypeEnum, Ext: &eSuggesterFuzzyMatching})
+var sSuggesterFuzzyMatching_none = smithy.NewStaticSchema(smithy.StaticSchema{Member: "none", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggesterFuzzyMatching_none})
+var sSuggesterFuzzyMatching_low = smithy.NewStaticSchema(smithy.StaticSchema{Member: "low", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggesterFuzzyMatching_low})
+var sSuggesterFuzzyMatching_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "high", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggesterFuzzyMatching_high})
+var sSuggesterStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggesterStatus, Members: &mSuggesterStatus, Type: smithy.ShapeTypeStructure, Ext: &eSuggesterStatus})
+var sSuggesterStatus_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iSuggester, Members: &mSuggester, Type: smithy.ShapeTypeStructure, Ext: &eSuggesterStatus_Options})
+var sSuggesterStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOptionStatus, Members: &mOptionStatus, Type: smithy.ShapeTypeStructure, Ext: &eSuggesterStatus_Status})
+var s_SuggesterStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggesterStatusList, Members: &m_SuggesterStatusList, Type: smithy.ShapeTypeList, Ext: &e_SuggesterStatusList})
+var s_SuggesterStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggesterStatus, Members: &mSuggesterStatus, Type: smithy.ShapeTypeStructure, Ext: &e_SuggesterStatusList_member})
+var sTextArrayOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextArrayOptions, Members: &mTextArrayOptions, Type: smithy.ShapeTypeStructure, Ext: &eTextArrayOptions})
+var sTextArrayOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &eTextArrayOptions_DefaultValue})
+var sTextArrayOptions_SourceFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFields", ID: &i_FieldNameCommaList, Type: smithy.ShapeTypeString, Ext: &eTextArrayOptions_SourceFields})
+var sTextArrayOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTextArrayOptions_ReturnEnabled})
+var sTextArrayOptions_HighlightEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HighlightEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTextArrayOptions_HighlightEnabled})
+var sTextArrayOptions_AnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisScheme", ID: &i_Word, Type: smithy.ShapeTypeString, Ext: &eTextArrayOptions_AnalysisScheme})
+var sTextOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextOptions, Members: &mTextOptions, Type: smithy.ShapeTypeStructure, Ext: &eTextOptions})
+var sTextOptions_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_FieldValue, Type: smithy.ShapeTypeString, Ext: &eTextOptions_DefaultValue})
+var sTextOptions_SourceField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceField", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eTextOptions_SourceField})
+var sTextOptions_ReturnEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTextOptions_ReturnEnabled})
+var sTextOptions_SortEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTextOptions_SortEnabled})
+var sTextOptions_HighlightEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HighlightEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTextOptions_HighlightEnabled})
+var sTextOptions_AnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisScheme", ID: &i_Word, Type: smithy.ShapeTypeString, Ext: &eTextOptions_AnalysisScheme})
+var sTLSSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSSecurityPolicy, Members: &mTLSSecurityPolicy, Type: smithy.ShapeTypeEnum, Ext: &eTLSSecurityPolicy})
+var sTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MIN_TLS_1_0_2019_07", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07})
+var sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MIN_TLS_1_2_2019_07", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07})
+var s_UIntValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UIntValue, Type: smithy.ShapeTypeInteger, Ext: &e_UIntValue})
+var s_UpdateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_UpdateTimestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eValidationException_Code})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var s_Word = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Word, Type: smithy.ShapeTypeString, Ext: &e_Word})
+var sBuildSuggestersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildSuggestersRequest, Members: &mBuildSuggestersRequest, Type: smithy.ShapeTypeStructure, Ext: &eBuildSuggestersRequest})
+var sBuildSuggestersRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eBuildSuggestersRequest_DomainName})
+var sBuildSuggestersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildSuggestersResponse, Members: &mBuildSuggestersResponse, Type: smithy.ShapeTypeStructure, Ext: &eBuildSuggestersResponse})
+var sBuildSuggestersResponse_FieldNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldNames", ID: &i_FieldNameList, Members: &m_FieldNameList, Type: smithy.ShapeTypeList, Ext: &eBuildSuggestersResponse_FieldNames})
+var sCreateDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainRequest, Members: &mCreateDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainRequest})
+var sCreateDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCreateDomainRequest_DomainName})
+var sCreateDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainResponse, Members: &mCreateDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainResponse})
+var sCreateDomainResponse_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainResponse_DomainStatus})
+var sDefineAnalysisSchemeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineAnalysisSchemeRequest, Members: &mDefineAnalysisSchemeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDefineAnalysisSchemeRequest})
+var sDefineAnalysisSchemeRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDefineAnalysisSchemeRequest_DomainName})
+var sDefineAnalysisSchemeRequest_AnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisScheme", ID: &iAnalysisScheme, Members: &mAnalysisScheme, Type: smithy.ShapeTypeStructure, Ext: &eDefineAnalysisSchemeRequest_AnalysisScheme})
+var sDefineAnalysisSchemeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineAnalysisSchemeResponse, Members: &mDefineAnalysisSchemeResponse, Type: smithy.ShapeTypeStructure, Ext: &eDefineAnalysisSchemeResponse})
+var sDefineAnalysisSchemeResponse_AnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisScheme", ID: &iAnalysisSchemeStatus, Members: &mAnalysisSchemeStatus, Type: smithy.ShapeTypeStructure, Ext: &eDefineAnalysisSchemeResponse_AnalysisScheme})
+var sDefineExpressionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineExpressionRequest, Members: &mDefineExpressionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDefineExpressionRequest})
+var sDefineExpressionRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDefineExpressionRequest_DomainName})
+var sDefineExpressionRequest_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eDefineExpressionRequest_Expression})
+var sDefineExpressionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineExpressionResponse, Members: &mDefineExpressionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDefineExpressionResponse})
+var sDefineExpressionResponse_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &iExpressionStatus, Members: &mExpressionStatus, Type: smithy.ShapeTypeStructure, Ext: &eDefineExpressionResponse_Expression})
+var sDefineIndexFieldRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineIndexFieldRequest, Members: &mDefineIndexFieldRequest, Type: smithy.ShapeTypeStructure, Ext: &eDefineIndexFieldRequest})
+var sDefineIndexFieldRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDefineIndexFieldRequest_DomainName})
+var sDefineIndexFieldRequest_IndexField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexField", ID: &iIndexField, Members: &mIndexField, Type: smithy.ShapeTypeStructure, Ext: &eDefineIndexFieldRequest_IndexField})
+var sDefineIndexFieldResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineIndexFieldResponse, Members: &mDefineIndexFieldResponse, Type: smithy.ShapeTypeStructure, Ext: &eDefineIndexFieldResponse})
+var sDefineIndexFieldResponse_IndexField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexField", ID: &iIndexFieldStatus, Members: &mIndexFieldStatus, Type: smithy.ShapeTypeStructure, Ext: &eDefineIndexFieldResponse_IndexField})
+var sDefineSuggesterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineSuggesterRequest, Members: &mDefineSuggesterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDefineSuggesterRequest})
+var sDefineSuggesterRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDefineSuggesterRequest_DomainName})
+var sDefineSuggesterRequest_Suggester = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suggester", ID: &iSuggester, Members: &mSuggester, Type: smithy.ShapeTypeStructure, Ext: &eDefineSuggesterRequest_Suggester})
+var sDefineSuggesterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefineSuggesterResponse, Members: &mDefineSuggesterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDefineSuggesterResponse})
+var sDefineSuggesterResponse_Suggester = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suggester", ID: &iSuggesterStatus, Members: &mSuggesterStatus, Type: smithy.ShapeTypeStructure, Ext: &eDefineSuggesterResponse_Suggester})
+var sDeleteAnalysisSchemeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnalysisSchemeRequest, Members: &mDeleteAnalysisSchemeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnalysisSchemeRequest})
+var sDeleteAnalysisSchemeRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDeleteAnalysisSchemeRequest_DomainName})
+var sDeleteAnalysisSchemeRequest_AnalysisSchemeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisSchemeName", ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &eDeleteAnalysisSchemeRequest_AnalysisSchemeName})
+var sDeleteAnalysisSchemeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnalysisSchemeResponse, Members: &mDeleteAnalysisSchemeResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnalysisSchemeResponse})
+var sDeleteAnalysisSchemeResponse_AnalysisScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisScheme", ID: &iAnalysisSchemeStatus, Members: &mAnalysisSchemeStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnalysisSchemeResponse_AnalysisScheme})
+var sDeleteDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainRequest, Members: &mDeleteDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainRequest})
+var sDeleteDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainRequest_DomainName})
+var sDeleteDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainResponse, Members: &mDeleteDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainResponse})
+var sDeleteDomainResponse_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainResponse_DomainStatus})
+var sDeleteExpressionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExpressionRequest, Members: &mDeleteExpressionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExpressionRequest})
+var sDeleteExpressionRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDeleteExpressionRequest_DomainName})
+var sDeleteExpressionRequest_ExpressionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpressionName", ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &eDeleteExpressionRequest_ExpressionName})
+var sDeleteExpressionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExpressionResponse, Members: &mDeleteExpressionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExpressionResponse})
+var sDeleteExpressionResponse_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &iExpressionStatus, Members: &mExpressionStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExpressionResponse_Expression})
+var sDeleteIndexFieldRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexFieldRequest, Members: &mDeleteIndexFieldRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIndexFieldRequest})
+var sDeleteIndexFieldRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDeleteIndexFieldRequest_DomainName})
+var sDeleteIndexFieldRequest_IndexFieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexFieldName", ID: &i_DynamicFieldName, Type: smithy.ShapeTypeString, Ext: &eDeleteIndexFieldRequest_IndexFieldName})
+var sDeleteIndexFieldResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexFieldResponse, Members: &mDeleteIndexFieldResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIndexFieldResponse})
+var sDeleteIndexFieldResponse_IndexField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexField", ID: &iIndexFieldStatus, Members: &mIndexFieldStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIndexFieldResponse_IndexField})
+var sDeleteSuggesterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSuggesterRequest, Members: &mDeleteSuggesterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSuggesterRequest})
+var sDeleteSuggesterRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDeleteSuggesterRequest_DomainName})
+var sDeleteSuggesterRequest_SuggesterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggesterName", ID: &i_StandardName, Type: smithy.ShapeTypeString, Ext: &eDeleteSuggesterRequest_SuggesterName})
+var sDeleteSuggesterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSuggesterResponse, Members: &mDeleteSuggesterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSuggesterResponse})
+var sDeleteSuggesterResponse_Suggester = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suggester", ID: &iSuggesterStatus, Members: &mSuggesterStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSuggesterResponse_Suggester})
+var sDescribeAnalysisSchemesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnalysisSchemesRequest, Members: &mDescribeAnalysisSchemesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAnalysisSchemesRequest})
+var sDescribeAnalysisSchemesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeAnalysisSchemesRequest_DomainName})
+var sDescribeAnalysisSchemesRequest_AnalysisSchemeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisSchemeNames", ID: &i_StandardNameList, Members: &m_StandardNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeAnalysisSchemesRequest_AnalysisSchemeNames})
+var sDescribeAnalysisSchemesRequest_Deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeAnalysisSchemesRequest_Deployed})
+var sDescribeAnalysisSchemesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnalysisSchemesResponse, Members: &mDescribeAnalysisSchemesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAnalysisSchemesResponse})
+var sDescribeAnalysisSchemesResponse_AnalysisSchemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisSchemes", ID: &i_AnalysisSchemeStatusList, Members: &m_AnalysisSchemeStatusList, Type: smithy.ShapeTypeList, Ext: &eDescribeAnalysisSchemesResponse_AnalysisSchemes})
+var sDescribeAvailabilityOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAvailabilityOptionsRequest, Members: &mDescribeAvailabilityOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAvailabilityOptionsRequest})
+var sDescribeAvailabilityOptionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeAvailabilityOptionsRequest_DomainName})
+var sDescribeAvailabilityOptionsRequest_Deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeAvailabilityOptionsRequest_Deployed})
+var sDescribeAvailabilityOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAvailabilityOptionsResponse, Members: &mDescribeAvailabilityOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAvailabilityOptionsResponse})
+var sDescribeAvailabilityOptionsResponse_AvailabilityOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityOptions", ID: &iAvailabilityOptionsStatus, Members: &mAvailabilityOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAvailabilityOptionsResponse_AvailabilityOptions})
+var sDescribeDomainEndpointOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainEndpointOptionsRequest, Members: &mDescribeDomainEndpointOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainEndpointOptionsRequest})
+var sDescribeDomainEndpointOptionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeDomainEndpointOptionsRequest_DomainName})
+var sDescribeDomainEndpointOptionsRequest_Deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeDomainEndpointOptionsRequest_Deployed})
+var sDescribeDomainEndpointOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainEndpointOptionsResponse, Members: &mDescribeDomainEndpointOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainEndpointOptionsResponse})
+var sDescribeDomainEndpointOptionsResponse_DomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainEndpointOptions", ID: &iDomainEndpointOptionsStatus, Members: &mDomainEndpointOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainEndpointOptionsResponse_DomainEndpointOptions})
+var sDescribeDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainsRequest, Members: &mDescribeDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainsRequest})
+var sDescribeDomainsRequest_DomainNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNames", ID: &i_DomainNameList, Members: &m_DomainNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeDomainsRequest_DomainNames})
+var sDescribeDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainsResponse, Members: &mDescribeDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainsResponse})
+var sDescribeDomainsResponse_DomainStatusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatusList", ID: &i_DomainStatusList, Members: &m_DomainStatusList, Type: smithy.ShapeTypeList, Ext: &eDescribeDomainsResponse_DomainStatusList})
+var sDescribeExpressionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExpressionsRequest, Members: &mDescribeExpressionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExpressionsRequest})
+var sDescribeExpressionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeExpressionsRequest_DomainName})
+var sDescribeExpressionsRequest_ExpressionNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpressionNames", ID: &i_StandardNameList, Members: &m_StandardNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeExpressionsRequest_ExpressionNames})
+var sDescribeExpressionsRequest_Deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeExpressionsRequest_Deployed})
+var sDescribeExpressionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExpressionsResponse, Members: &mDescribeExpressionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExpressionsResponse})
+var sDescribeExpressionsResponse_Expressions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expressions", ID: &i_ExpressionStatusList, Members: &m_ExpressionStatusList, Type: smithy.ShapeTypeList, Ext: &eDescribeExpressionsResponse_Expressions})
+var sDescribeIndexFieldsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIndexFieldsRequest, Members: &mDescribeIndexFieldsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIndexFieldsRequest})
+var sDescribeIndexFieldsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeIndexFieldsRequest_DomainName})
+var sDescribeIndexFieldsRequest_FieldNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldNames", ID: &i_DynamicFieldNameList, Members: &m_DynamicFieldNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeIndexFieldsRequest_FieldNames})
+var sDescribeIndexFieldsRequest_Deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeIndexFieldsRequest_Deployed})
+var sDescribeIndexFieldsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIndexFieldsResponse, Members: &mDescribeIndexFieldsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIndexFieldsResponse})
+var sDescribeIndexFieldsResponse_IndexFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexFields", ID: &i_IndexFieldStatusList, Members: &m_IndexFieldStatusList, Type: smithy.ShapeTypeList, Ext: &eDescribeIndexFieldsResponse_IndexFields})
+var sDescribeScalingParametersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingParametersRequest, Members: &mDescribeScalingParametersRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScalingParametersRequest})
+var sDescribeScalingParametersRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeScalingParametersRequest_DomainName})
+var sDescribeScalingParametersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingParametersResponse, Members: &mDescribeScalingParametersResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScalingParametersResponse})
+var sDescribeScalingParametersResponse_ScalingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingParameters", ID: &iScalingParametersStatus, Members: &mScalingParametersStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScalingParametersResponse_ScalingParameters})
+var sDescribeServiceAccessPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceAccessPoliciesRequest, Members: &mDescribeServiceAccessPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServiceAccessPoliciesRequest})
+var sDescribeServiceAccessPoliciesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeServiceAccessPoliciesRequest_DomainName})
+var sDescribeServiceAccessPoliciesRequest_Deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeServiceAccessPoliciesRequest_Deployed})
+var sDescribeServiceAccessPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceAccessPoliciesResponse, Members: &mDescribeServiceAccessPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServiceAccessPoliciesResponse})
+var sDescribeServiceAccessPoliciesResponse_AccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicies", ID: &iAccessPoliciesStatus, Members: &mAccessPoliciesStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServiceAccessPoliciesResponse_AccessPolicies})
+var sDescribeSuggestersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSuggestersRequest, Members: &mDescribeSuggestersRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSuggestersRequest})
+var sDescribeSuggestersRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDescribeSuggestersRequest_DomainName})
+var sDescribeSuggestersRequest_SuggesterNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggesterNames", ID: &i_StandardNameList, Members: &m_StandardNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeSuggestersRequest_SuggesterNames})
+var sDescribeSuggestersRequest_Deployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deployed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeSuggestersRequest_Deployed})
+var sDescribeSuggestersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSuggestersResponse, Members: &mDescribeSuggestersResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSuggestersResponse})
+var sDescribeSuggestersResponse_Suggesters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suggesters", ID: &i_SuggesterStatusList, Members: &m_SuggesterStatusList, Type: smithy.ShapeTypeList, Ext: &eDescribeSuggestersResponse_Suggesters})
+var sIndexDocumentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexDocumentsRequest, Members: &mIndexDocumentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eIndexDocumentsRequest})
+var sIndexDocumentsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eIndexDocumentsRequest_DomainName})
+var sIndexDocumentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexDocumentsResponse, Members: &mIndexDocumentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eIndexDocumentsResponse})
+var sIndexDocumentsResponse_FieldNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldNames", ID: &i_FieldNameList, Members: &m_FieldNameList, Type: smithy.ShapeTypeList, Ext: &eIndexDocumentsResponse_FieldNames})
+var sListDomainNamesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainNamesResponse, Members: &mListDomainNamesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDomainNamesResponse})
+var sListDomainNamesResponse_DomainNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNames", ID: &i_DomainNameMap, Members: &m_DomainNameMap, Type: smithy.ShapeTypeMap, Ext: &eListDomainNamesResponse_DomainNames})
+var sUpdateAvailabilityOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityOptionsRequest, Members: &mUpdateAvailabilityOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAvailabilityOptionsRequest})
+var sUpdateAvailabilityOptionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateAvailabilityOptionsRequest_DomainName})
+var sUpdateAvailabilityOptionsRequest_MultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiAZ", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateAvailabilityOptionsRequest_MultiAZ})
+var sUpdateAvailabilityOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityOptionsResponse, Members: &mUpdateAvailabilityOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAvailabilityOptionsResponse})
+var sUpdateAvailabilityOptionsResponse_AvailabilityOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityOptions", ID: &iAvailabilityOptionsStatus, Members: &mAvailabilityOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAvailabilityOptionsResponse_AvailabilityOptions})
+var sUpdateDomainEndpointOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainEndpointOptionsRequest, Members: &mUpdateDomainEndpointOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainEndpointOptionsRequest})
+var sUpdateDomainEndpointOptionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainEndpointOptionsRequest_DomainName})
+var sUpdateDomainEndpointOptionsRequest_DomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainEndpointOptions", ID: &iDomainEndpointOptions, Members: &mDomainEndpointOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainEndpointOptionsRequest_DomainEndpointOptions})
+var sUpdateDomainEndpointOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainEndpointOptionsResponse, Members: &mUpdateDomainEndpointOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainEndpointOptionsResponse})
+var sUpdateDomainEndpointOptionsResponse_DomainEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainEndpointOptions", ID: &iDomainEndpointOptionsStatus, Members: &mDomainEndpointOptionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainEndpointOptionsResponse_DomainEndpointOptions})
+var sUpdateScalingParametersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScalingParametersRequest, Members: &mUpdateScalingParametersRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScalingParametersRequest})
+var sUpdateScalingParametersRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateScalingParametersRequest_DomainName})
+var sUpdateScalingParametersRequest_ScalingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingParameters", ID: &iScalingParameters, Members: &mScalingParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScalingParametersRequest_ScalingParameters})
+var sUpdateScalingParametersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScalingParametersResponse, Members: &mUpdateScalingParametersResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScalingParametersResponse})
+var sUpdateScalingParametersResponse_ScalingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingParameters", ID: &iScalingParametersStatus, Members: &mScalingParametersStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScalingParametersResponse_ScalingParameters})
+var sUpdateServiceAccessPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceAccessPoliciesRequest, Members: &mUpdateServiceAccessPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceAccessPoliciesRequest})
+var sUpdateServiceAccessPoliciesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateServiceAccessPoliciesRequest_DomainName})
+var sUpdateServiceAccessPoliciesRequest_AccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicies", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString, Ext: &eUpdateServiceAccessPoliciesRequest_AccessPolicies})
+var sUpdateServiceAccessPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceAccessPoliciesResponse, Members: &mUpdateServiceAccessPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceAccessPoliciesResponse})
+var sUpdateServiceAccessPoliciesResponse_AccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicies", ID: &iAccessPoliciesStatus, Members: &mAccessPoliciesStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceAccessPoliciesResponse_AccessPolicies})
+
+var BuildSuggesters = &sBuildSuggesters
+
+var CreateDomain = &sCreateDomain
+
+var DefineAnalysisScheme = &sDefineAnalysisScheme
+
+var DefineExpression = &sDefineExpression
+
+var DefineIndexField = &sDefineIndexField
+
+var DefineSuggester = &sDefineSuggester
+
+var DeleteAnalysisScheme = &sDeleteAnalysisScheme
+
+var DeleteDomain = &sDeleteDomain
+
+var DeleteExpression = &sDeleteExpression
+
+var DeleteIndexField = &sDeleteIndexField
+
+var DeleteSuggester = &sDeleteSuggester
+
+var DescribeAnalysisSchemes = &sDescribeAnalysisSchemes
+
+var DescribeAvailabilityOptions = &sDescribeAvailabilityOptions
+
+var DescribeDomainEndpointOptions = &sDescribeDomainEndpointOptions
+
+var DescribeDomains = &sDescribeDomains
+
+var DescribeExpressions = &sDescribeExpressions
+
+var DescribeIndexFields = &sDescribeIndexFields
+
+var DescribeScalingParameters = &sDescribeScalingParameters
+
+var DescribeServiceAccessPolicies = &sDescribeServiceAccessPolicies
+
+var DescribeSuggesters = &sDescribeSuggesters
+
+var IndexDocuments = &sIndexDocuments
+
+var ListDomainNames = &sListDomainNames
+
+var UpdateAvailabilityOptions = &sUpdateAvailabilityOptions
+
+var UpdateDomainEndpointOptions = &sUpdateDomainEndpointOptions
+
+var UpdateScalingParameters = &sUpdateScalingParameters
+
+var UpdateServiceAccessPolicies = &sUpdateServiceAccessPolicies
+
+var _A9SearchCloudConfigService2013 = &s_A9SearchCloudConfigService2013
+
+var AccessPoliciesStatus = &sAccessPoliciesStatus
+var AccessPoliciesStatus_Options = &sAccessPoliciesStatus_Options
+var AccessPoliciesStatus_Status = &sAccessPoliciesStatus_Status
+
+var AlgorithmicStemming = &sAlgorithmicStemming
+var AlgorithmicStemming_none = &sAlgorithmicStemming_none
+var AlgorithmicStemming_minimal = &sAlgorithmicStemming_minimal
+var AlgorithmicStemming_light = &sAlgorithmicStemming_light
+var AlgorithmicStemming_full = &sAlgorithmicStemming_full
+
+var AnalysisOptions = &sAnalysisOptions
+var AnalysisOptions_Synonyms = &sAnalysisOptions_Synonyms
+var AnalysisOptions_Stopwords = &sAnalysisOptions_Stopwords
+var AnalysisOptions_StemmingDictionary = &sAnalysisOptions_StemmingDictionary
+var AnalysisOptions_JapaneseTokenizationDictionary = &sAnalysisOptions_JapaneseTokenizationDictionary
+var AnalysisOptions_AlgorithmicStemming = &sAnalysisOptions_AlgorithmicStemming
+
+var AnalysisScheme = &sAnalysisScheme
+var AnalysisScheme_AnalysisSchemeName = &sAnalysisScheme_AnalysisSchemeName
+var AnalysisScheme_AnalysisSchemeLanguage = &sAnalysisScheme_AnalysisSchemeLanguage
+var AnalysisScheme_AnalysisOptions = &sAnalysisScheme_AnalysisOptions
+
+var AnalysisSchemeLanguage = &sAnalysisSchemeLanguage
+var AnalysisSchemeLanguage_ar = &sAnalysisSchemeLanguage_ar
+var AnalysisSchemeLanguage_bg = &sAnalysisSchemeLanguage_bg
+var AnalysisSchemeLanguage_ca = &sAnalysisSchemeLanguage_ca
+var AnalysisSchemeLanguage_cs = &sAnalysisSchemeLanguage_cs
+var AnalysisSchemeLanguage_da = &sAnalysisSchemeLanguage_da
+var AnalysisSchemeLanguage_de = &sAnalysisSchemeLanguage_de
+var AnalysisSchemeLanguage_el = &sAnalysisSchemeLanguage_el
+var AnalysisSchemeLanguage_en = &sAnalysisSchemeLanguage_en
+var AnalysisSchemeLanguage_es = &sAnalysisSchemeLanguage_es
+var AnalysisSchemeLanguage_eu = &sAnalysisSchemeLanguage_eu
+var AnalysisSchemeLanguage_fa = &sAnalysisSchemeLanguage_fa
+var AnalysisSchemeLanguage_fi = &sAnalysisSchemeLanguage_fi
+var AnalysisSchemeLanguage_fr = &sAnalysisSchemeLanguage_fr
+var AnalysisSchemeLanguage_ga = &sAnalysisSchemeLanguage_ga
+var AnalysisSchemeLanguage_gl = &sAnalysisSchemeLanguage_gl
+var AnalysisSchemeLanguage_he = &sAnalysisSchemeLanguage_he
+var AnalysisSchemeLanguage_hi = &sAnalysisSchemeLanguage_hi
+var AnalysisSchemeLanguage_hu = &sAnalysisSchemeLanguage_hu
+var AnalysisSchemeLanguage_hy = &sAnalysisSchemeLanguage_hy
+var AnalysisSchemeLanguage_id = &sAnalysisSchemeLanguage_id
+var AnalysisSchemeLanguage_it = &sAnalysisSchemeLanguage_it
+var AnalysisSchemeLanguage_ja = &sAnalysisSchemeLanguage_ja
+var AnalysisSchemeLanguage_ko = &sAnalysisSchemeLanguage_ko
+var AnalysisSchemeLanguage_lv = &sAnalysisSchemeLanguage_lv
+var AnalysisSchemeLanguage_mul = &sAnalysisSchemeLanguage_mul
+var AnalysisSchemeLanguage_nl = &sAnalysisSchemeLanguage_nl
+var AnalysisSchemeLanguage_no = &sAnalysisSchemeLanguage_no
+var AnalysisSchemeLanguage_pt = &sAnalysisSchemeLanguage_pt
+var AnalysisSchemeLanguage_ro = &sAnalysisSchemeLanguage_ro
+var AnalysisSchemeLanguage_ru = &sAnalysisSchemeLanguage_ru
+var AnalysisSchemeLanguage_sv = &sAnalysisSchemeLanguage_sv
+var AnalysisSchemeLanguage_th = &sAnalysisSchemeLanguage_th
+var AnalysisSchemeLanguage_tr = &sAnalysisSchemeLanguage_tr
+var AnalysisSchemeLanguage_zh_Hans = &sAnalysisSchemeLanguage_zh_Hans
+var AnalysisSchemeLanguage_zh_Hant = &sAnalysisSchemeLanguage_zh_Hant
+
+var AnalysisSchemeStatus = &sAnalysisSchemeStatus
+var AnalysisSchemeStatus_Options = &sAnalysisSchemeStatus_Options
+var AnalysisSchemeStatus_Status = &sAnalysisSchemeStatus_Status
+
+var _AnalysisSchemeStatusList = &s_AnalysisSchemeStatusList
+var _AnalysisSchemeStatusList_member = &s_AnalysisSchemeStatusList_member
+
+var _APIVersion = &s_APIVersion
+
+var _ARN = &s_ARN
+
+var AvailabilityOptionsStatus = &sAvailabilityOptionsStatus
+var AvailabilityOptionsStatus_Options = &sAvailabilityOptionsStatus_Options
+var AvailabilityOptionsStatus_Status = &sAvailabilityOptionsStatus_Status
+
+var BaseException = &sBaseException
+var BaseException_Code = &sBaseException_Code
+var BaseException_Message = &sBaseException_Message
+
+var _Boolean = &s_Boolean
+
+var DateArrayOptions = &sDateArrayOptions
+var DateArrayOptions_DefaultValue = &sDateArrayOptions_DefaultValue
+var DateArrayOptions_SourceFields = &sDateArrayOptions_SourceFields
+var DateArrayOptions_FacetEnabled = &sDateArrayOptions_FacetEnabled
+var DateArrayOptions_SearchEnabled = &sDateArrayOptions_SearchEnabled
+var DateArrayOptions_ReturnEnabled = &sDateArrayOptions_ReturnEnabled
+
+var DateOptions = &sDateOptions
+var DateOptions_DefaultValue = &sDateOptions_DefaultValue
+var DateOptions_SourceField = &sDateOptions_SourceField
+var DateOptions_FacetEnabled = &sDateOptions_FacetEnabled
+var DateOptions_SearchEnabled = &sDateOptions_SearchEnabled
+var DateOptions_ReturnEnabled = &sDateOptions_ReturnEnabled
+var DateOptions_SortEnabled = &sDateOptions_SortEnabled
+
+var DisabledOperationException = &sDisabledOperationException
+var DisabledOperationException_Code = &sDisabledOperationException_Code
+var DisabledOperationException_Message = &sDisabledOperationException_Message
+
+var DocumentSuggesterOptions = &sDocumentSuggesterOptions
+var DocumentSuggesterOptions_SourceField = &sDocumentSuggesterOptions_SourceField
+var DocumentSuggesterOptions_FuzzyMatching = &sDocumentSuggesterOptions_FuzzyMatching
+var DocumentSuggesterOptions_SortExpression = &sDocumentSuggesterOptions_SortExpression
+
+var DomainEndpointOptions = &sDomainEndpointOptions
+var DomainEndpointOptions_EnforceHTTPS = &sDomainEndpointOptions_EnforceHTTPS
+var DomainEndpointOptions_TLSSecurityPolicy = &sDomainEndpointOptions_TLSSecurityPolicy
+
+var DomainEndpointOptionsStatus = &sDomainEndpointOptionsStatus
+var DomainEndpointOptionsStatus_Options = &sDomainEndpointOptionsStatus_Options
+var DomainEndpointOptionsStatus_Status = &sDomainEndpointOptionsStatus_Status
+
+var _DomainId = &s_DomainId
+
+var _DomainName = &s_DomainName
+
+var _DomainNameList = &s_DomainNameList
+var _DomainNameList_member = &s_DomainNameList_member
+
+var _DomainNameMap = &s_DomainNameMap
+var _DomainNameMap_key = &s_DomainNameMap_key
+var _DomainNameMap_value = &s_DomainNameMap_value
+
+var DomainStatus = &sDomainStatus
+var DomainStatus_DomainId = &sDomainStatus_DomainId
+var DomainStatus_DomainName = &sDomainStatus_DomainName
+var DomainStatus_ARN = &sDomainStatus_ARN
+var DomainStatus_Created = &sDomainStatus_Created
+var DomainStatus_Deleted = &sDomainStatus_Deleted
+var DomainStatus_DocService = &sDomainStatus_DocService
+var DomainStatus_SearchService = &sDomainStatus_SearchService
+var DomainStatus_RequiresIndexDocuments = &sDomainStatus_RequiresIndexDocuments
+var DomainStatus_Processing = &sDomainStatus_Processing
+var DomainStatus_SearchInstanceType = &sDomainStatus_SearchInstanceType
+var DomainStatus_SearchPartitionCount = &sDomainStatus_SearchPartitionCount
+var DomainStatus_SearchInstanceCount = &sDomainStatus_SearchInstanceCount
+var DomainStatus_Limits = &sDomainStatus_Limits
+
+var _DomainStatusList = &s_DomainStatusList
+var _DomainStatusList_member = &s_DomainStatusList_member
+
+var _Double = &s_Double
+
+var DoubleArrayOptions = &sDoubleArrayOptions
+var DoubleArrayOptions_DefaultValue = &sDoubleArrayOptions_DefaultValue
+var DoubleArrayOptions_SourceFields = &sDoubleArrayOptions_SourceFields
+var DoubleArrayOptions_FacetEnabled = &sDoubleArrayOptions_FacetEnabled
+var DoubleArrayOptions_SearchEnabled = &sDoubleArrayOptions_SearchEnabled
+var DoubleArrayOptions_ReturnEnabled = &sDoubleArrayOptions_ReturnEnabled
+
+var DoubleOptions = &sDoubleOptions
+var DoubleOptions_DefaultValue = &sDoubleOptions_DefaultValue
+var DoubleOptions_SourceField = &sDoubleOptions_SourceField
+var DoubleOptions_FacetEnabled = &sDoubleOptions_FacetEnabled
+var DoubleOptions_SearchEnabled = &sDoubleOptions_SearchEnabled
+var DoubleOptions_ReturnEnabled = &sDoubleOptions_ReturnEnabled
+var DoubleOptions_SortEnabled = &sDoubleOptions_SortEnabled
+
+var _DynamicFieldName = &s_DynamicFieldName
+
+var _DynamicFieldNameList = &s_DynamicFieldNameList
+var _DynamicFieldNameList_member = &s_DynamicFieldNameList_member
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var Expression = &sExpression
+var Expression_ExpressionName = &sExpression_ExpressionName
+var Expression_ExpressionValue = &sExpression_ExpressionValue
+
+var ExpressionStatus = &sExpressionStatus
+var ExpressionStatus_Options = &sExpressionStatus_Options
+var ExpressionStatus_Status = &sExpressionStatus_Status
+
+var _ExpressionStatusList = &s_ExpressionStatusList
+var _ExpressionStatusList_member = &s_ExpressionStatusList_member
+
+var _ExpressionValue = &s_ExpressionValue
+
+var _FieldName = &s_FieldName
+
+var _FieldNameCommaList = &s_FieldNameCommaList
+
+var _FieldNameList = &s_FieldNameList
+var _FieldNameList_member = &s_FieldNameList_member
+
+var _FieldValue = &s_FieldValue
+
+var IndexField = &sIndexField
+var IndexField_IndexFieldName = &sIndexField_IndexFieldName
+var IndexField_IndexFieldType = &sIndexField_IndexFieldType
+var IndexField_IntOptions = &sIndexField_IntOptions
+var IndexField_DoubleOptions = &sIndexField_DoubleOptions
+var IndexField_LiteralOptions = &sIndexField_LiteralOptions
+var IndexField_TextOptions = &sIndexField_TextOptions
+var IndexField_DateOptions = &sIndexField_DateOptions
+var IndexField_LatLonOptions = &sIndexField_LatLonOptions
+var IndexField_IntArrayOptions = &sIndexField_IntArrayOptions
+var IndexField_DoubleArrayOptions = &sIndexField_DoubleArrayOptions
+var IndexField_LiteralArrayOptions = &sIndexField_LiteralArrayOptions
+var IndexField_TextArrayOptions = &sIndexField_TextArrayOptions
+var IndexField_DateArrayOptions = &sIndexField_DateArrayOptions
+
+var IndexFieldStatus = &sIndexFieldStatus
+var IndexFieldStatus_Options = &sIndexFieldStatus_Options
+var IndexFieldStatus_Status = &sIndexFieldStatus_Status
+
+var _IndexFieldStatusList = &s_IndexFieldStatusList
+var _IndexFieldStatusList_member = &s_IndexFieldStatusList_member
+
+var IndexFieldType = &sIndexFieldType
+var IndexFieldType_int = &sIndexFieldType_int
+var IndexFieldType_double = &sIndexFieldType_double
+var IndexFieldType_literal = &sIndexFieldType_literal
+var IndexFieldType_text = &sIndexFieldType_text
+var IndexFieldType_date = &sIndexFieldType_date
+var IndexFieldType_latlon = &sIndexFieldType_latlon
+var IndexFieldType_int_array = &sIndexFieldType_int_array
+var IndexFieldType_double_array = &sIndexFieldType_double_array
+var IndexFieldType_literal_array = &sIndexFieldType_literal_array
+var IndexFieldType_text_array = &sIndexFieldType_text_array
+var IndexFieldType_date_array = &sIndexFieldType_date_array
+
+var _InstanceCount = &s_InstanceCount
+
+var IntArrayOptions = &sIntArrayOptions
+var IntArrayOptions_DefaultValue = &sIntArrayOptions_DefaultValue
+var IntArrayOptions_SourceFields = &sIntArrayOptions_SourceFields
+var IntArrayOptions_FacetEnabled = &sIntArrayOptions_FacetEnabled
+var IntArrayOptions_SearchEnabled = &sIntArrayOptions_SearchEnabled
+var IntArrayOptions_ReturnEnabled = &sIntArrayOptions_ReturnEnabled
+
+var InternalException = &sInternalException
+var InternalException_Code = &sInternalException_Code
+var InternalException_Message = &sInternalException_Message
+
+var IntOptions = &sIntOptions
+var IntOptions_DefaultValue = &sIntOptions_DefaultValue
+var IntOptions_SourceField = &sIntOptions_SourceField
+var IntOptions_FacetEnabled = &sIntOptions_FacetEnabled
+var IntOptions_SearchEnabled = &sIntOptions_SearchEnabled
+var IntOptions_ReturnEnabled = &sIntOptions_ReturnEnabled
+var IntOptions_SortEnabled = &sIntOptions_SortEnabled
+
+var InvalidTypeException = &sInvalidTypeException
+var InvalidTypeException_Code = &sInvalidTypeException_Code
+var InvalidTypeException_Message = &sInvalidTypeException_Message
+
+var LatLonOptions = &sLatLonOptions
+var LatLonOptions_DefaultValue = &sLatLonOptions_DefaultValue
+var LatLonOptions_SourceField = &sLatLonOptions_SourceField
+var LatLonOptions_FacetEnabled = &sLatLonOptions_FacetEnabled
+var LatLonOptions_SearchEnabled = &sLatLonOptions_SearchEnabled
+var LatLonOptions_ReturnEnabled = &sLatLonOptions_ReturnEnabled
+var LatLonOptions_SortEnabled = &sLatLonOptions_SortEnabled
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Code = &sLimitExceededException_Code
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var Limits = &sLimits
+var Limits_MaximumReplicationCount = &sLimits_MaximumReplicationCount
+var Limits_MaximumPartitionCount = &sLimits_MaximumPartitionCount
+
+var LiteralArrayOptions = &sLiteralArrayOptions
+var LiteralArrayOptions_DefaultValue = &sLiteralArrayOptions_DefaultValue
+var LiteralArrayOptions_SourceFields = &sLiteralArrayOptions_SourceFields
+var LiteralArrayOptions_FacetEnabled = &sLiteralArrayOptions_FacetEnabled
+var LiteralArrayOptions_SearchEnabled = &sLiteralArrayOptions_SearchEnabled
+var LiteralArrayOptions_ReturnEnabled = &sLiteralArrayOptions_ReturnEnabled
+
+var LiteralOptions = &sLiteralOptions
+var LiteralOptions_DefaultValue = &sLiteralOptions_DefaultValue
+var LiteralOptions_SourceField = &sLiteralOptions_SourceField
+var LiteralOptions_FacetEnabled = &sLiteralOptions_FacetEnabled
+var LiteralOptions_SearchEnabled = &sLiteralOptions_SearchEnabled
+var LiteralOptions_ReturnEnabled = &sLiteralOptions_ReturnEnabled
+var LiteralOptions_SortEnabled = &sLiteralOptions_SortEnabled
+
+var _Long = &s_Long
+
+var _MaximumPartitionCount = &s_MaximumPartitionCount
+
+var _MaximumReplicationCount = &s_MaximumReplicationCount
+
+var _MultiAZ = &s_MultiAZ
+
+var OptionState = &sOptionState
+var OptionState_RequiresIndexDocuments = &sOptionState_RequiresIndexDocuments
+var OptionState_Processing = &sOptionState_Processing
+var OptionState_Active = &sOptionState_Active
+var OptionState_FailedToValidate = &sOptionState_FailedToValidate
+
+var OptionStatus = &sOptionStatus
+var OptionStatus_CreationDate = &sOptionStatus_CreationDate
+var OptionStatus_UpdateDate = &sOptionStatus_UpdateDate
+var OptionStatus_UpdateVersion = &sOptionStatus_UpdateVersion
+var OptionStatus_State = &sOptionStatus_State
+var OptionStatus_PendingDeletion = &sOptionStatus_PendingDeletion
+
+var _PartitionCount = &s_PartitionCount
+
+var PartitionInstanceType = &sPartitionInstanceType
+var PartitionInstanceType_search_m1_small = &sPartitionInstanceType_search_m1_small
+var PartitionInstanceType_search_m1_large = &sPartitionInstanceType_search_m1_large
+var PartitionInstanceType_search_m2_xlarge = &sPartitionInstanceType_search_m2_xlarge
+var PartitionInstanceType_search_m2_2xlarge = &sPartitionInstanceType_search_m2_2xlarge
+var PartitionInstanceType_search_m3_medium = &sPartitionInstanceType_search_m3_medium
+var PartitionInstanceType_search_m3_large = &sPartitionInstanceType_search_m3_large
+var PartitionInstanceType_search_m3_xlarge = &sPartitionInstanceType_search_m3_xlarge
+var PartitionInstanceType_search_m3_2xlarge = &sPartitionInstanceType_search_m3_2xlarge
+var PartitionInstanceType_search_small = &sPartitionInstanceType_search_small
+var PartitionInstanceType_search_medium = &sPartitionInstanceType_search_medium
+var PartitionInstanceType_search_large = &sPartitionInstanceType_search_large
+var PartitionInstanceType_search_xlarge = &sPartitionInstanceType_search_xlarge
+var PartitionInstanceType_search_2xlarge = &sPartitionInstanceType_search_2xlarge
+var PartitionInstanceType_search_previousgeneration_small = &sPartitionInstanceType_search_previousgeneration_small
+var PartitionInstanceType_search_previousgeneration_large = &sPartitionInstanceType_search_previousgeneration_large
+var PartitionInstanceType_search_previousgeneration_xlarge = &sPartitionInstanceType_search_previousgeneration_xlarge
+var PartitionInstanceType_search_previousgeneration_2xlarge = &sPartitionInstanceType_search_previousgeneration_2xlarge
+
+var _PolicyDocument = &s_PolicyDocument
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_Code = &sResourceAlreadyExistsException_Code
+var ResourceAlreadyExistsException_Message = &sResourceAlreadyExistsException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Code = &sResourceNotFoundException_Code
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ScalingParameters = &sScalingParameters
+var ScalingParameters_DesiredInstanceType = &sScalingParameters_DesiredInstanceType
+var ScalingParameters_DesiredReplicationCount = &sScalingParameters_DesiredReplicationCount
+var ScalingParameters_DesiredPartitionCount = &sScalingParameters_DesiredPartitionCount
+
+var ScalingParametersStatus = &sScalingParametersStatus
+var ScalingParametersStatus_Options = &sScalingParametersStatus_Options
+var ScalingParametersStatus_Status = &sScalingParametersStatus_Status
+
+var _SearchInstanceType = &s_SearchInstanceType
+
+var ServiceEndpoint = &sServiceEndpoint
+var ServiceEndpoint_Endpoint = &sServiceEndpoint_Endpoint
+
+var _ServiceUrl = &s_ServiceUrl
+
+var _StandardName = &s_StandardName
+
+var _StandardNameList = &s_StandardNameList
+var _StandardNameList_member = &s_StandardNameList_member
+
+var _String = &s_String
+
+var Suggester = &sSuggester
+var Suggester_SuggesterName = &sSuggester_SuggesterName
+var Suggester_DocumentSuggesterOptions = &sSuggester_DocumentSuggesterOptions
+
+var SuggesterFuzzyMatching = &sSuggesterFuzzyMatching
+var SuggesterFuzzyMatching_none = &sSuggesterFuzzyMatching_none
+var SuggesterFuzzyMatching_low = &sSuggesterFuzzyMatching_low
+var SuggesterFuzzyMatching_high = &sSuggesterFuzzyMatching_high
+
+var SuggesterStatus = &sSuggesterStatus
+var SuggesterStatus_Options = &sSuggesterStatus_Options
+var SuggesterStatus_Status = &sSuggesterStatus_Status
+
+var _SuggesterStatusList = &s_SuggesterStatusList
+var _SuggesterStatusList_member = &s_SuggesterStatusList_member
+
+var TextArrayOptions = &sTextArrayOptions
+var TextArrayOptions_DefaultValue = &sTextArrayOptions_DefaultValue
+var TextArrayOptions_SourceFields = &sTextArrayOptions_SourceFields
+var TextArrayOptions_ReturnEnabled = &sTextArrayOptions_ReturnEnabled
+var TextArrayOptions_HighlightEnabled = &sTextArrayOptions_HighlightEnabled
+var TextArrayOptions_AnalysisScheme = &sTextArrayOptions_AnalysisScheme
+
+var TextOptions = &sTextOptions
+var TextOptions_DefaultValue = &sTextOptions_DefaultValue
+var TextOptions_SourceField = &sTextOptions_SourceField
+var TextOptions_ReturnEnabled = &sTextOptions_ReturnEnabled
+var TextOptions_SortEnabled = &sTextOptions_SortEnabled
+var TextOptions_HighlightEnabled = &sTextOptions_HighlightEnabled
+var TextOptions_AnalysisScheme = &sTextOptions_AnalysisScheme
+
+var TLSSecurityPolicy = &sTLSSecurityPolicy
+var TLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 = &sTLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07
+var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 = &sTLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07
+
+var _UIntValue = &s_UIntValue
+
+var _UpdateTimestamp = &s_UpdateTimestamp
+
+var ValidationException = &sValidationException
+var ValidationException_Code = &sValidationException_Code
+var ValidationException_Message = &sValidationException_Message
+
+var _Word = &s_Word
+
+var BuildSuggestersRequest = &sBuildSuggestersRequest
+var BuildSuggestersRequest_DomainName = &sBuildSuggestersRequest_DomainName
+
+var BuildSuggestersResponse = &sBuildSuggestersResponse
+var BuildSuggestersResponse_FieldNames = &sBuildSuggestersResponse_FieldNames
+
+var CreateDomainRequest = &sCreateDomainRequest
+var CreateDomainRequest_DomainName = &sCreateDomainRequest_DomainName
+
+var CreateDomainResponse = &sCreateDomainResponse
+var CreateDomainResponse_DomainStatus = &sCreateDomainResponse_DomainStatus
+
+var DefineAnalysisSchemeRequest = &sDefineAnalysisSchemeRequest
+var DefineAnalysisSchemeRequest_DomainName = &sDefineAnalysisSchemeRequest_DomainName
+var DefineAnalysisSchemeRequest_AnalysisScheme = &sDefineAnalysisSchemeRequest_AnalysisScheme
+
+var DefineAnalysisSchemeResponse = &sDefineAnalysisSchemeResponse
+var DefineAnalysisSchemeResponse_AnalysisScheme = &sDefineAnalysisSchemeResponse_AnalysisScheme
+
+var DefineExpressionRequest = &sDefineExpressionRequest
+var DefineExpressionRequest_DomainName = &sDefineExpressionRequest_DomainName
+var DefineExpressionRequest_Expression = &sDefineExpressionRequest_Expression
+
+var DefineExpressionResponse = &sDefineExpressionResponse
+var DefineExpressionResponse_Expression = &sDefineExpressionResponse_Expression
+
+var DefineIndexFieldRequest = &sDefineIndexFieldRequest
+var DefineIndexFieldRequest_DomainName = &sDefineIndexFieldRequest_DomainName
+var DefineIndexFieldRequest_IndexField = &sDefineIndexFieldRequest_IndexField
+
+var DefineIndexFieldResponse = &sDefineIndexFieldResponse
+var DefineIndexFieldResponse_IndexField = &sDefineIndexFieldResponse_IndexField
+
+var DefineSuggesterRequest = &sDefineSuggesterRequest
+var DefineSuggesterRequest_DomainName = &sDefineSuggesterRequest_DomainName
+var DefineSuggesterRequest_Suggester = &sDefineSuggesterRequest_Suggester
+
+var DefineSuggesterResponse = &sDefineSuggesterResponse
+var DefineSuggesterResponse_Suggester = &sDefineSuggesterResponse_Suggester
+
+var DeleteAnalysisSchemeRequest = &sDeleteAnalysisSchemeRequest
+var DeleteAnalysisSchemeRequest_DomainName = &sDeleteAnalysisSchemeRequest_DomainName
+var DeleteAnalysisSchemeRequest_AnalysisSchemeName = &sDeleteAnalysisSchemeRequest_AnalysisSchemeName
+
+var DeleteAnalysisSchemeResponse = &sDeleteAnalysisSchemeResponse
+var DeleteAnalysisSchemeResponse_AnalysisScheme = &sDeleteAnalysisSchemeResponse_AnalysisScheme
+
+var DeleteDomainRequest = &sDeleteDomainRequest
+var DeleteDomainRequest_DomainName = &sDeleteDomainRequest_DomainName
+
+var DeleteDomainResponse = &sDeleteDomainResponse
+var DeleteDomainResponse_DomainStatus = &sDeleteDomainResponse_DomainStatus
+
+var DeleteExpressionRequest = &sDeleteExpressionRequest
+var DeleteExpressionRequest_DomainName = &sDeleteExpressionRequest_DomainName
+var DeleteExpressionRequest_ExpressionName = &sDeleteExpressionRequest_ExpressionName
+
+var DeleteExpressionResponse = &sDeleteExpressionResponse
+var DeleteExpressionResponse_Expression = &sDeleteExpressionResponse_Expression
+
+var DeleteIndexFieldRequest = &sDeleteIndexFieldRequest
+var DeleteIndexFieldRequest_DomainName = &sDeleteIndexFieldRequest_DomainName
+var DeleteIndexFieldRequest_IndexFieldName = &sDeleteIndexFieldRequest_IndexFieldName
+
+var DeleteIndexFieldResponse = &sDeleteIndexFieldResponse
+var DeleteIndexFieldResponse_IndexField = &sDeleteIndexFieldResponse_IndexField
+
+var DeleteSuggesterRequest = &sDeleteSuggesterRequest
+var DeleteSuggesterRequest_DomainName = &sDeleteSuggesterRequest_DomainName
+var DeleteSuggesterRequest_SuggesterName = &sDeleteSuggesterRequest_SuggesterName
+
+var DeleteSuggesterResponse = &sDeleteSuggesterResponse
+var DeleteSuggesterResponse_Suggester = &sDeleteSuggesterResponse_Suggester
+
+var DescribeAnalysisSchemesRequest = &sDescribeAnalysisSchemesRequest
+var DescribeAnalysisSchemesRequest_DomainName = &sDescribeAnalysisSchemesRequest_DomainName
+var DescribeAnalysisSchemesRequest_AnalysisSchemeNames = &sDescribeAnalysisSchemesRequest_AnalysisSchemeNames
+var DescribeAnalysisSchemesRequest_Deployed = &sDescribeAnalysisSchemesRequest_Deployed
+
+var DescribeAnalysisSchemesResponse = &sDescribeAnalysisSchemesResponse
+var DescribeAnalysisSchemesResponse_AnalysisSchemes = &sDescribeAnalysisSchemesResponse_AnalysisSchemes
+
+var DescribeAvailabilityOptionsRequest = &sDescribeAvailabilityOptionsRequest
+var DescribeAvailabilityOptionsRequest_DomainName = &sDescribeAvailabilityOptionsRequest_DomainName
+var DescribeAvailabilityOptionsRequest_Deployed = &sDescribeAvailabilityOptionsRequest_Deployed
+
+var DescribeAvailabilityOptionsResponse = &sDescribeAvailabilityOptionsResponse
+var DescribeAvailabilityOptionsResponse_AvailabilityOptions = &sDescribeAvailabilityOptionsResponse_AvailabilityOptions
+
+var DescribeDomainEndpointOptionsRequest = &sDescribeDomainEndpointOptionsRequest
+var DescribeDomainEndpointOptionsRequest_DomainName = &sDescribeDomainEndpointOptionsRequest_DomainName
+var DescribeDomainEndpointOptionsRequest_Deployed = &sDescribeDomainEndpointOptionsRequest_Deployed
+
+var DescribeDomainEndpointOptionsResponse = &sDescribeDomainEndpointOptionsResponse
+var DescribeDomainEndpointOptionsResponse_DomainEndpointOptions = &sDescribeDomainEndpointOptionsResponse_DomainEndpointOptions
+
+var DescribeDomainsRequest = &sDescribeDomainsRequest
+var DescribeDomainsRequest_DomainNames = &sDescribeDomainsRequest_DomainNames
+
+var DescribeDomainsResponse = &sDescribeDomainsResponse
+var DescribeDomainsResponse_DomainStatusList = &sDescribeDomainsResponse_DomainStatusList
+
+var DescribeExpressionsRequest = &sDescribeExpressionsRequest
+var DescribeExpressionsRequest_DomainName = &sDescribeExpressionsRequest_DomainName
+var DescribeExpressionsRequest_ExpressionNames = &sDescribeExpressionsRequest_ExpressionNames
+var DescribeExpressionsRequest_Deployed = &sDescribeExpressionsRequest_Deployed
+
+var DescribeExpressionsResponse = &sDescribeExpressionsResponse
+var DescribeExpressionsResponse_Expressions = &sDescribeExpressionsResponse_Expressions
+
+var DescribeIndexFieldsRequest = &sDescribeIndexFieldsRequest
+var DescribeIndexFieldsRequest_DomainName = &sDescribeIndexFieldsRequest_DomainName
+var DescribeIndexFieldsRequest_FieldNames = &sDescribeIndexFieldsRequest_FieldNames
+var DescribeIndexFieldsRequest_Deployed = &sDescribeIndexFieldsRequest_Deployed
+
+var DescribeIndexFieldsResponse = &sDescribeIndexFieldsResponse
+var DescribeIndexFieldsResponse_IndexFields = &sDescribeIndexFieldsResponse_IndexFields
+
+var DescribeScalingParametersRequest = &sDescribeScalingParametersRequest
+var DescribeScalingParametersRequest_DomainName = &sDescribeScalingParametersRequest_DomainName
+
+var DescribeScalingParametersResponse = &sDescribeScalingParametersResponse
+var DescribeScalingParametersResponse_ScalingParameters = &sDescribeScalingParametersResponse_ScalingParameters
+
+var DescribeServiceAccessPoliciesRequest = &sDescribeServiceAccessPoliciesRequest
+var DescribeServiceAccessPoliciesRequest_DomainName = &sDescribeServiceAccessPoliciesRequest_DomainName
+var DescribeServiceAccessPoliciesRequest_Deployed = &sDescribeServiceAccessPoliciesRequest_Deployed
+
+var DescribeServiceAccessPoliciesResponse = &sDescribeServiceAccessPoliciesResponse
+var DescribeServiceAccessPoliciesResponse_AccessPolicies = &sDescribeServiceAccessPoliciesResponse_AccessPolicies
+
+var DescribeSuggestersRequest = &sDescribeSuggestersRequest
+var DescribeSuggestersRequest_DomainName = &sDescribeSuggestersRequest_DomainName
+var DescribeSuggestersRequest_SuggesterNames = &sDescribeSuggestersRequest_SuggesterNames
+var DescribeSuggestersRequest_Deployed = &sDescribeSuggestersRequest_Deployed
+
+var DescribeSuggestersResponse = &sDescribeSuggestersResponse
+var DescribeSuggestersResponse_Suggesters = &sDescribeSuggestersResponse_Suggesters
+
+var IndexDocumentsRequest = &sIndexDocumentsRequest
+var IndexDocumentsRequest_DomainName = &sIndexDocumentsRequest_DomainName
+
+var IndexDocumentsResponse = &sIndexDocumentsResponse
+var IndexDocumentsResponse_FieldNames = &sIndexDocumentsResponse_FieldNames
+
+var ListDomainNamesResponse = &sListDomainNamesResponse
+var ListDomainNamesResponse_DomainNames = &sListDomainNamesResponse_DomainNames
+
+var UpdateAvailabilityOptionsRequest = &sUpdateAvailabilityOptionsRequest
+var UpdateAvailabilityOptionsRequest_DomainName = &sUpdateAvailabilityOptionsRequest_DomainName
+var UpdateAvailabilityOptionsRequest_MultiAZ = &sUpdateAvailabilityOptionsRequest_MultiAZ
+
+var UpdateAvailabilityOptionsResponse = &sUpdateAvailabilityOptionsResponse
+var UpdateAvailabilityOptionsResponse_AvailabilityOptions = &sUpdateAvailabilityOptionsResponse_AvailabilityOptions
+
+var UpdateDomainEndpointOptionsRequest = &sUpdateDomainEndpointOptionsRequest
+var UpdateDomainEndpointOptionsRequest_DomainName = &sUpdateDomainEndpointOptionsRequest_DomainName
+var UpdateDomainEndpointOptionsRequest_DomainEndpointOptions = &sUpdateDomainEndpointOptionsRequest_DomainEndpointOptions
+
+var UpdateDomainEndpointOptionsResponse = &sUpdateDomainEndpointOptionsResponse
+var UpdateDomainEndpointOptionsResponse_DomainEndpointOptions = &sUpdateDomainEndpointOptionsResponse_DomainEndpointOptions
+
+var UpdateScalingParametersRequest = &sUpdateScalingParametersRequest
+var UpdateScalingParametersRequest_DomainName = &sUpdateScalingParametersRequest_DomainName
+var UpdateScalingParametersRequest_ScalingParameters = &sUpdateScalingParametersRequest_ScalingParameters
+
+var UpdateScalingParametersResponse = &sUpdateScalingParametersResponse
+var UpdateScalingParametersResponse_ScalingParameters = &sUpdateScalingParametersResponse_ScalingParameters
+
+var UpdateServiceAccessPoliciesRequest = &sUpdateServiceAccessPoliciesRequest
+var UpdateServiceAccessPoliciesRequest_DomainName = &sUpdateServiceAccessPoliciesRequest_DomainName
+var UpdateServiceAccessPoliciesRequest_AccessPolicies = &sUpdateServiceAccessPoliciesRequest_AccessPolicies
+
+var UpdateServiceAccessPoliciesResponse = &sUpdateServiceAccessPoliciesResponse
+var UpdateServiceAccessPoliciesResponse_AccessPolicies = &sUpdateServiceAccessPoliciesResponse_AccessPolicies
+
+var A9SearchCloudConfigService2013 = &smithy.ServiceSchema{Schema: &s_A9SearchCloudConfigService2013, Version: "2013-01-01"}

@@ -4,3738 +4,3616 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateBotVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateBotVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateBotVersion                                         smithy.SchemaExtensions
+	eCreateIntentVersion                                      smithy.SchemaExtensions
+	eCreateSlotTypeVersion                                    smithy.SchemaExtensions
+	eDeleteBot                                                smithy.SchemaExtensions
+	eDeleteBotAlias                                           smithy.SchemaExtensions
+	eDeleteBotChannelAssociation                              smithy.SchemaExtensions
+	eDeleteBotVersion                                         smithy.SchemaExtensions
+	eDeleteIntent                                             smithy.SchemaExtensions
+	eDeleteIntentVersion                                      smithy.SchemaExtensions
+	eDeleteSlotType                                           smithy.SchemaExtensions
+	eDeleteSlotTypeVersion                                    smithy.SchemaExtensions
+	eDeleteUtterances                                         smithy.SchemaExtensions
+	eGetBot                                                   smithy.SchemaExtensions
+	eGetBotAlias                                              smithy.SchemaExtensions
+	eGetBotAliases                                            smithy.SchemaExtensions
+	eGetBotChannelAssociation                                 smithy.SchemaExtensions
+	eGetBotChannelAssociations                                smithy.SchemaExtensions
+	eGetBots                                                  smithy.SchemaExtensions
+	eGetBotVersions                                           smithy.SchemaExtensions
+	eGetBuiltinIntent                                         smithy.SchemaExtensions
+	eGetBuiltinIntents                                        smithy.SchemaExtensions
+	eGetBuiltinSlotTypes                                      smithy.SchemaExtensions
+	eGetExport                                                smithy.SchemaExtensions
+	eGetImport                                                smithy.SchemaExtensions
+	eGetIntent                                                smithy.SchemaExtensions
+	eGetIntents                                               smithy.SchemaExtensions
+	eGetIntentVersions                                        smithy.SchemaExtensions
+	eGetMigration                                             smithy.SchemaExtensions
+	eGetMigrations                                            smithy.SchemaExtensions
+	eGetSlotType                                              smithy.SchemaExtensions
+	eGetSlotTypes                                             smithy.SchemaExtensions
+	eGetSlotTypeVersions                                      smithy.SchemaExtensions
+	eGetUtterancesView                                        smithy.SchemaExtensions
+	eListTagsForResource                                      smithy.SchemaExtensions
+	ePutBot                                                   smithy.SchemaExtensions
+	ePutBotAlias                                              smithy.SchemaExtensions
+	ePutIntent                                                smithy.SchemaExtensions
+	ePutSlotType                                              smithy.SchemaExtensions
+	eStartImport                                              smithy.SchemaExtensions
+	eStartMigration                                           smithy.SchemaExtensions
+	eTagResource                                              smithy.SchemaExtensions
+	eUntagResource                                            smithy.SchemaExtensions
+	e_AWSDeepSenseModelBuildingService                        smithy.SchemaExtensions
+	eAccessDeniedException                                    smithy.SchemaExtensions
+	eAccessDeniedException_message                            smithy.SchemaExtensions
+	e_AliasName                                               smithy.SchemaExtensions
+	e_AliasNameOrListAll                                      smithy.SchemaExtensions
+	e_AmazonResourceName                                      smithy.SchemaExtensions
+	eBadRequestException                                      smithy.SchemaExtensions
+	eBadRequestException_message                              smithy.SchemaExtensions
+	e_Blob                                                    smithy.SchemaExtensions
+	e_Boolean                                                 smithy.SchemaExtensions
+	eBotAliasMetadata                                         smithy.SchemaExtensions
+	eBotAliasMetadata_name                                    smithy.SchemaExtensions
+	eBotAliasMetadata_description                             smithy.SchemaExtensions
+	eBotAliasMetadata_botVersion                              smithy.SchemaExtensions
+	eBotAliasMetadata_botName                                 smithy.SchemaExtensions
+	eBotAliasMetadata_lastUpdatedDate                         smithy.SchemaExtensions
+	eBotAliasMetadata_createdDate                             smithy.SchemaExtensions
+	eBotAliasMetadata_checksum                                smithy.SchemaExtensions
+	eBotAliasMetadata_conversationLogs                        smithy.SchemaExtensions
+	e_BotAliasMetadataList                                    smithy.SchemaExtensions
+	e_BotAliasMetadataList_member                             smithy.SchemaExtensions
+	eBotChannelAssociation                                    smithy.SchemaExtensions
+	eBotChannelAssociation_name                               smithy.SchemaExtensions
+	eBotChannelAssociation_description                        smithy.SchemaExtensions
+	eBotChannelAssociation_botAlias                           smithy.SchemaExtensions
+	eBotChannelAssociation_botName                            smithy.SchemaExtensions
+	eBotChannelAssociation_createdDate                        smithy.SchemaExtensions
+	eBotChannelAssociation_type                               smithy.SchemaExtensions
+	eBotChannelAssociation_botConfiguration                   smithy.SchemaExtensions
+	eBotChannelAssociation_status                             smithy.SchemaExtensions
+	eBotChannelAssociation_failureReason                      smithy.SchemaExtensions
+	e_BotChannelAssociationList                               smithy.SchemaExtensions
+	e_BotChannelAssociationList_member                        smithy.SchemaExtensions
+	e_BotChannelName                                          smithy.SchemaExtensions
+	eBotMetadata                                              smithy.SchemaExtensions
+	eBotMetadata_name                                         smithy.SchemaExtensions
+	eBotMetadata_description                                  smithy.SchemaExtensions
+	eBotMetadata_status                                       smithy.SchemaExtensions
+	eBotMetadata_lastUpdatedDate                              smithy.SchemaExtensions
+	eBotMetadata_createdDate                                  smithy.SchemaExtensions
+	eBotMetadata_version                                      smithy.SchemaExtensions
+	e_BotMetadataList                                         smithy.SchemaExtensions
+	e_BotMetadataList_member                                  smithy.SchemaExtensions
+	e_BotName                                                 smithy.SchemaExtensions
+	e_BotVersions                                             smithy.SchemaExtensions
+	e_BotVersions_member                                      smithy.SchemaExtensions
+	eBuiltinIntentMetadata                                    smithy.SchemaExtensions
+	eBuiltinIntentMetadata_signature                          smithy.SchemaExtensions
+	eBuiltinIntentMetadata_supportedLocales                   smithy.SchemaExtensions
+	e_BuiltinIntentMetadataList                               smithy.SchemaExtensions
+	e_BuiltinIntentMetadataList_member                        smithy.SchemaExtensions
+	e_BuiltinIntentSignature                                  smithy.SchemaExtensions
+	eBuiltinIntentSlot                                        smithy.SchemaExtensions
+	eBuiltinIntentSlot_name                                   smithy.SchemaExtensions
+	e_BuiltinIntentSlotList                                   smithy.SchemaExtensions
+	e_BuiltinIntentSlotList_member                            smithy.SchemaExtensions
+	eBuiltinSlotTypeMetadata                                  smithy.SchemaExtensions
+	eBuiltinSlotTypeMetadata_signature                        smithy.SchemaExtensions
+	eBuiltinSlotTypeMetadata_supportedLocales                 smithy.SchemaExtensions
+	e_BuiltinSlotTypeMetadataList                             smithy.SchemaExtensions
+	e_BuiltinSlotTypeMetadataList_member                      smithy.SchemaExtensions
+	e_BuiltinSlotTypeSignature                                smithy.SchemaExtensions
+	e_ChannelConfigurationMap                                 smithy.SchemaExtensions
+	e_ChannelConfigurationMap_key                             smithy.SchemaExtensions
+	e_ChannelConfigurationMap_value                           smithy.SchemaExtensions
+	eChannelStatus                                            smithy.SchemaExtensions
+	eChannelStatus_IN_PROGRESS                                smithy.SchemaExtensions
+	eChannelStatus_CREATED                                    smithy.SchemaExtensions
+	eChannelStatus_FAILED                                     smithy.SchemaExtensions
+	eChannelType                                              smithy.SchemaExtensions
+	eChannelType_FACEBOOK                                     smithy.SchemaExtensions
+	eChannelType_SLACK                                        smithy.SchemaExtensions
+	eChannelType_TWILIO_SMS                                   smithy.SchemaExtensions
+	eChannelType_KIK                                          smithy.SchemaExtensions
+	eCodeHook                                                 smithy.SchemaExtensions
+	eCodeHook_uri                                             smithy.SchemaExtensions
+	eCodeHook_messageVersion                                  smithy.SchemaExtensions
+	e_ConfidenceThreshold                                     smithy.SchemaExtensions
+	eConflictException                                        smithy.SchemaExtensions
+	eConflictException_message                                smithy.SchemaExtensions
+	e_ContentString                                           smithy.SchemaExtensions
+	eContentType                                              smithy.SchemaExtensions
+	eContentType_PLAIN_TEXT                                   smithy.SchemaExtensions
+	eContentType_SSML                                         smithy.SchemaExtensions
+	eContentType_CUSTOM_PAYLOAD                               smithy.SchemaExtensions
+	e_ContextTimeToLiveInSeconds                              smithy.SchemaExtensions
+	e_ContextTurnsToLive                                      smithy.SchemaExtensions
+	eConversationLogsRequest                                  smithy.SchemaExtensions
+	eConversationLogsRequest_logSettings                      smithy.SchemaExtensions
+	eConversationLogsRequest_iamRoleArn                       smithy.SchemaExtensions
+	eConversationLogsResponse                                 smithy.SchemaExtensions
+	eConversationLogsResponse_logSettings                     smithy.SchemaExtensions
+	eConversationLogsResponse_iamRoleArn                      smithy.SchemaExtensions
+	e_Count                                                   smithy.SchemaExtensions
+	e_CustomOrBuiltinSlotTypeName                             smithy.SchemaExtensions
+	e_Description                                             smithy.SchemaExtensions
+	eDestination                                              smithy.SchemaExtensions
+	eDestination_CLOUDWATCH_LOGS                              smithy.SchemaExtensions
+	eDestination_S3                                           smithy.SchemaExtensions
+	eEnumerationValue                                         smithy.SchemaExtensions
+	eEnumerationValue_value                                   smithy.SchemaExtensions
+	eEnumerationValue_synonyms                                smithy.SchemaExtensions
+	e_EnumerationValues                                       smithy.SchemaExtensions
+	e_EnumerationValues_member                                smithy.SchemaExtensions
+	eExportStatus                                             smithy.SchemaExtensions
+	eExportStatus_IN_PROGRESS                                 smithy.SchemaExtensions
+	eExportStatus_READY                                       smithy.SchemaExtensions
+	eExportStatus_FAILED                                      smithy.SchemaExtensions
+	eExportType                                               smithy.SchemaExtensions
+	eExportType_ALEXA_SKILLS_KIT                              smithy.SchemaExtensions
+	eExportType_LEX                                           smithy.SchemaExtensions
+	eFollowUpPrompt                                           smithy.SchemaExtensions
+	eFollowUpPrompt_prompt                                    smithy.SchemaExtensions
+	eFollowUpPrompt_rejectionStatement                        smithy.SchemaExtensions
+	eFulfillmentActivity                                      smithy.SchemaExtensions
+	eFulfillmentActivity_type                                 smithy.SchemaExtensions
+	eFulfillmentActivity_codeHook                             smithy.SchemaExtensions
+	eFulfillmentActivityType                                  smithy.SchemaExtensions
+	eFulfillmentActivityType_RETURN_INTENT                    smithy.SchemaExtensions
+	eFulfillmentActivityType_CODE_HOOK                        smithy.SchemaExtensions
+	e_GroupNumber                                             smithy.SchemaExtensions
+	e_IamRoleArn                                              smithy.SchemaExtensions
+	eImportStatus                                             smithy.SchemaExtensions
+	eImportStatus_IN_PROGRESS                                 smithy.SchemaExtensions
+	eImportStatus_COMPLETE                                    smithy.SchemaExtensions
+	eImportStatus_FAILED                                      smithy.SchemaExtensions
+	eInputContext                                             smithy.SchemaExtensions
+	eInputContext_name                                        smithy.SchemaExtensions
+	e_InputContextList                                        smithy.SchemaExtensions
+	e_InputContextList_member                                 smithy.SchemaExtensions
+	e_InputContextName                                        smithy.SchemaExtensions
+	eIntent                                                   smithy.SchemaExtensions
+	eIntent_intentName                                        smithy.SchemaExtensions
+	eIntent_intentVersion                                     smithy.SchemaExtensions
+	e_IntentList                                              smithy.SchemaExtensions
+	e_IntentList_member                                       smithy.SchemaExtensions
+	eIntentMetadata                                           smithy.SchemaExtensions
+	eIntentMetadata_name                                      smithy.SchemaExtensions
+	eIntentMetadata_description                               smithy.SchemaExtensions
+	eIntentMetadata_lastUpdatedDate                           smithy.SchemaExtensions
+	eIntentMetadata_createdDate                               smithy.SchemaExtensions
+	eIntentMetadata_version                                   smithy.SchemaExtensions
+	e_IntentMetadataList                                      smithy.SchemaExtensions
+	e_IntentMetadataList_member                               smithy.SchemaExtensions
+	e_IntentName                                              smithy.SchemaExtensions
+	e_IntentUtteranceList                                     smithy.SchemaExtensions
+	e_IntentUtteranceList_member                              smithy.SchemaExtensions
+	eInternalFailureException                                 smithy.SchemaExtensions
+	eInternalFailureException_message                         smithy.SchemaExtensions
+	eKendraConfiguration                                      smithy.SchemaExtensions
+	eKendraConfiguration_kendraIndex                          smithy.SchemaExtensions
+	eKendraConfiguration_queryFilterString                    smithy.SchemaExtensions
+	eKendraConfiguration_role                                 smithy.SchemaExtensions
+	e_KendraIndexArn                                          smithy.SchemaExtensions
+	e_KmsKeyArn                                               smithy.SchemaExtensions
+	e_LambdaARN                                               smithy.SchemaExtensions
+	eLimitExceededException                                   smithy.SchemaExtensions
+	eLimitExceededException_retryAfterSeconds                 smithy.SchemaExtensions
+	eLimitExceededException_message                           smithy.SchemaExtensions
+	e_ListOfUtterance                                         smithy.SchemaExtensions
+	e_ListOfUtterance_member                                  smithy.SchemaExtensions
+	e_ListsOfUtterances                                       smithy.SchemaExtensions
+	e_ListsOfUtterances_member                                smithy.SchemaExtensions
+	eLocale                                                   smithy.SchemaExtensions
+	eLocale_DE_DE                                             smithy.SchemaExtensions
+	eLocale_EN_AU                                             smithy.SchemaExtensions
+	eLocale_EN_GB                                             smithy.SchemaExtensions
+	eLocale_EN_IN                                             smithy.SchemaExtensions
+	eLocale_EN_US                                             smithy.SchemaExtensions
+	eLocale_ES_419                                            smithy.SchemaExtensions
+	eLocale_ES_ES                                             smithy.SchemaExtensions
+	eLocale_ES_US                                             smithy.SchemaExtensions
+	eLocale_FR_FR                                             smithy.SchemaExtensions
+	eLocale_FR_CA                                             smithy.SchemaExtensions
+	eLocale_IT_IT                                             smithy.SchemaExtensions
+	eLocale_JA_JP                                             smithy.SchemaExtensions
+	eLocale_KO_KR                                             smithy.SchemaExtensions
+	e_LocaleList                                              smithy.SchemaExtensions
+	e_LocaleList_member                                       smithy.SchemaExtensions
+	eLogSettingsRequest                                       smithy.SchemaExtensions
+	eLogSettingsRequest_logType                               smithy.SchemaExtensions
+	eLogSettingsRequest_destination                           smithy.SchemaExtensions
+	eLogSettingsRequest_kmsKeyArn                             smithy.SchemaExtensions
+	eLogSettingsRequest_resourceArn                           smithy.SchemaExtensions
+	e_LogSettingsRequestList                                  smithy.SchemaExtensions
+	e_LogSettingsRequestList_member                           smithy.SchemaExtensions
+	eLogSettingsResponse                                      smithy.SchemaExtensions
+	eLogSettingsResponse_logType                              smithy.SchemaExtensions
+	eLogSettingsResponse_destination                          smithy.SchemaExtensions
+	eLogSettingsResponse_kmsKeyArn                            smithy.SchemaExtensions
+	eLogSettingsResponse_resourceArn                          smithy.SchemaExtensions
+	eLogSettingsResponse_resourcePrefix                       smithy.SchemaExtensions
+	e_LogSettingsResponseList                                 smithy.SchemaExtensions
+	e_LogSettingsResponseList_member                          smithy.SchemaExtensions
+	eLogType                                                  smithy.SchemaExtensions
+	eLogType_AUDIO                                            smithy.SchemaExtensions
+	eLogType_TEXT                                             smithy.SchemaExtensions
+	e_MaxResults                                              smithy.SchemaExtensions
+	eMergeStrategy                                            smithy.SchemaExtensions
+	eMergeStrategy_OVERWRITE_LATEST                           smithy.SchemaExtensions
+	eMergeStrategy_FAIL_ON_CONFLICT                           smithy.SchemaExtensions
+	eMessage                                                  smithy.SchemaExtensions
+	eMessage_contentType                                      smithy.SchemaExtensions
+	eMessage_content                                          smithy.SchemaExtensions
+	eMessage_groupNumber                                      smithy.SchemaExtensions
+	e_MessageList                                             smithy.SchemaExtensions
+	e_MessageList_member                                      smithy.SchemaExtensions
+	e_MessageVersion                                          smithy.SchemaExtensions
+	eMigrationAlert                                           smithy.SchemaExtensions
+	eMigrationAlert_type                                      smithy.SchemaExtensions
+	eMigrationAlert_message                                   smithy.SchemaExtensions
+	eMigrationAlert_details                                   smithy.SchemaExtensions
+	eMigrationAlert_referenceURLs                             smithy.SchemaExtensions
+	e_MigrationAlertDetail                                    smithy.SchemaExtensions
+	e_MigrationAlertDetails                                   smithy.SchemaExtensions
+	e_MigrationAlertDetails_member                            smithy.SchemaExtensions
+	e_MigrationAlertMessage                                   smithy.SchemaExtensions
+	e_MigrationAlertReferenceURL                              smithy.SchemaExtensions
+	e_MigrationAlertReferenceURLs                             smithy.SchemaExtensions
+	e_MigrationAlertReferenceURLs_member                      smithy.SchemaExtensions
+	e_MigrationAlerts                                         smithy.SchemaExtensions
+	e_MigrationAlerts_member                                  smithy.SchemaExtensions
+	eMigrationAlertType                                       smithy.SchemaExtensions
+	eMigrationAlertType_ERROR                                 smithy.SchemaExtensions
+	eMigrationAlertType_WARN                                  smithy.SchemaExtensions
+	e_MigrationId                                             smithy.SchemaExtensions
+	eMigrationSortAttribute                                   smithy.SchemaExtensions
+	eMigrationSortAttribute_V1_BOT_NAME                       smithy.SchemaExtensions
+	eMigrationSortAttribute_MIGRATION_DATE_TIME               smithy.SchemaExtensions
+	eMigrationStatus                                          smithy.SchemaExtensions
+	eMigrationStatus_IN_PROGRESS                              smithy.SchemaExtensions
+	eMigrationStatus_COMPLETED                                smithy.SchemaExtensions
+	eMigrationStatus_FAILED                                   smithy.SchemaExtensions
+	eMigrationStrategy                                        smithy.SchemaExtensions
+	eMigrationStrategy_CREATE_NEW                             smithy.SchemaExtensions
+	eMigrationStrategy_UPDATE_EXISTING                        smithy.SchemaExtensions
+	eMigrationSummary                                         smithy.SchemaExtensions
+	eMigrationSummary_migrationId                             smithy.SchemaExtensions
+	eMigrationSummary_v1BotName                               smithy.SchemaExtensions
+	eMigrationSummary_v1BotVersion                            smithy.SchemaExtensions
+	eMigrationSummary_v1BotLocale                             smithy.SchemaExtensions
+	eMigrationSummary_v2BotId                                 smithy.SchemaExtensions
+	eMigrationSummary_v2BotRole                               smithy.SchemaExtensions
+	eMigrationSummary_migrationStatus                         smithy.SchemaExtensions
+	eMigrationSummary_migrationStrategy                       smithy.SchemaExtensions
+	eMigrationSummary_migrationTimestamp                      smithy.SchemaExtensions
+	e_MigrationSummaryList                                    smithy.SchemaExtensions
+	e_MigrationSummaryList_member                             smithy.SchemaExtensions
+	e_Name                                                    smithy.SchemaExtensions
+	e_NextToken                                               smithy.SchemaExtensions
+	eNotFoundException                                        smithy.SchemaExtensions
+	eNotFoundException_message                                smithy.SchemaExtensions
+	e_NumericalVersion                                        smithy.SchemaExtensions
+	eObfuscationSetting                                       smithy.SchemaExtensions
+	eObfuscationSetting_NONE                                  smithy.SchemaExtensions
+	eObfuscationSetting_DEFAULT_OBFUSCATION                   smithy.SchemaExtensions
+	eOutputContext                                            smithy.SchemaExtensions
+	eOutputContext_name                                       smithy.SchemaExtensions
+	eOutputContext_timeToLiveInSeconds                        smithy.SchemaExtensions
+	eOutputContext_turnsToLive                                smithy.SchemaExtensions
+	e_OutputContextList                                       smithy.SchemaExtensions
+	e_OutputContextList_member                                smithy.SchemaExtensions
+	e_OutputContextName                                       smithy.SchemaExtensions
+	ePreconditionFailedException                              smithy.SchemaExtensions
+	ePreconditionFailedException_message                      smithy.SchemaExtensions
+	e_Priority                                                smithy.SchemaExtensions
+	eProcessBehavior                                          smithy.SchemaExtensions
+	eProcessBehavior_SAVE                                     smithy.SchemaExtensions
+	eProcessBehavior_BUILD                                    smithy.SchemaExtensions
+	ePrompt                                                   smithy.SchemaExtensions
+	ePrompt_messages                                          smithy.SchemaExtensions
+	ePrompt_maxAttempts                                       smithy.SchemaExtensions
+	ePrompt_responseCard                                      smithy.SchemaExtensions
+	e_PromptMaxAttempts                                       smithy.SchemaExtensions
+	e_QueryFilterString                                       smithy.SchemaExtensions
+	eReferenceType                                            smithy.SchemaExtensions
+	eReferenceType_INTENT                                     smithy.SchemaExtensions
+	eReferenceType_BOT                                        smithy.SchemaExtensions
+	eReferenceType_BOTALIAS                                   smithy.SchemaExtensions
+	eReferenceType_BOTCHANNEL                                 smithy.SchemaExtensions
+	e_RegexPattern                                            smithy.SchemaExtensions
+	e_ResourceArn                                             smithy.SchemaExtensions
+	eResourceInUseException                                   smithy.SchemaExtensions
+	eResourceInUseException_referenceType                     smithy.SchemaExtensions
+	eResourceInUseException_exampleReference                  smithy.SchemaExtensions
+	e_ResourcePrefix                                          smithy.SchemaExtensions
+	eResourceReference                                        smithy.SchemaExtensions
+	eResourceReference_name                                   smithy.SchemaExtensions
+	eResourceReference_version                                smithy.SchemaExtensions
+	eResourceType                                             smithy.SchemaExtensions
+	eResourceType_BOT                                         smithy.SchemaExtensions
+	eResourceType_INTENT                                      smithy.SchemaExtensions
+	eResourceType_SLOT_TYPE                                   smithy.SchemaExtensions
+	e_ResponseCard                                            smithy.SchemaExtensions
+	e_roleArn                                                 smithy.SchemaExtensions
+	e_SessionTTL                                              smithy.SchemaExtensions
+	eSlot                                                     smithy.SchemaExtensions
+	eSlot_name                                                smithy.SchemaExtensions
+	eSlot_description                                         smithy.SchemaExtensions
+	eSlot_slotConstraint                                      smithy.SchemaExtensions
+	eSlot_slotType                                            smithy.SchemaExtensions
+	eSlot_slotTypeVersion                                     smithy.SchemaExtensions
+	eSlot_valueElicitationPrompt                              smithy.SchemaExtensions
+	eSlot_priority                                            smithy.SchemaExtensions
+	eSlot_sampleUtterances                                    smithy.SchemaExtensions
+	eSlot_responseCard                                        smithy.SchemaExtensions
+	eSlot_obfuscationSetting                                  smithy.SchemaExtensions
+	eSlot_defaultValueSpec                                    smithy.SchemaExtensions
+	eSlotConstraint                                           smithy.SchemaExtensions
+	eSlotConstraint_REQUIRED                                  smithy.SchemaExtensions
+	eSlotConstraint_OPTIONAL                                  smithy.SchemaExtensions
+	eSlotDefaultValue                                         smithy.SchemaExtensions
+	eSlotDefaultValue_defaultValue                            smithy.SchemaExtensions
+	e_SlotDefaultValueList                                    smithy.SchemaExtensions
+	e_SlotDefaultValueList_member                             smithy.SchemaExtensions
+	eSlotDefaultValueSpec                                     smithy.SchemaExtensions
+	eSlotDefaultValueSpec_defaultValueList                    smithy.SchemaExtensions
+	e_SlotDefaultValueString                                  smithy.SchemaExtensions
+	e_SlotList                                                smithy.SchemaExtensions
+	e_SlotList_member                                         smithy.SchemaExtensions
+	e_SlotName                                                smithy.SchemaExtensions
+	eSlotTypeConfiguration                                    smithy.SchemaExtensions
+	eSlotTypeConfiguration_regexConfiguration                 smithy.SchemaExtensions
+	e_SlotTypeConfigurations                                  smithy.SchemaExtensions
+	e_SlotTypeConfigurations_member                           smithy.SchemaExtensions
+	eSlotTypeMetadata                                         smithy.SchemaExtensions
+	eSlotTypeMetadata_name                                    smithy.SchemaExtensions
+	eSlotTypeMetadata_description                             smithy.SchemaExtensions
+	eSlotTypeMetadata_lastUpdatedDate                         smithy.SchemaExtensions
+	eSlotTypeMetadata_createdDate                             smithy.SchemaExtensions
+	eSlotTypeMetadata_version                                 smithy.SchemaExtensions
+	e_SlotTypeMetadataList                                    smithy.SchemaExtensions
+	e_SlotTypeMetadataList_member                             smithy.SchemaExtensions
+	e_SlotTypeName                                            smithy.SchemaExtensions
+	eSlotTypeRegexConfiguration                               smithy.SchemaExtensions
+	eSlotTypeRegexConfiguration_pattern                       smithy.SchemaExtensions
+	e_SlotUtteranceList                                       smithy.SchemaExtensions
+	e_SlotUtteranceList_member                                smithy.SchemaExtensions
+	eSlotValueSelectionStrategy                               smithy.SchemaExtensions
+	eSlotValueSelectionStrategy_ORIGINAL_VALUE                smithy.SchemaExtensions
+	eSlotValueSelectionStrategy_TOP_RESOLUTION                smithy.SchemaExtensions
+	eSortOrder                                                smithy.SchemaExtensions
+	eSortOrder_ASCENDING                                      smithy.SchemaExtensions
+	eSortOrder_DESCENDING                                     smithy.SchemaExtensions
+	eStatement                                                smithy.SchemaExtensions
+	eStatement_messages                                       smithy.SchemaExtensions
+	eStatement_responseCard                                   smithy.SchemaExtensions
+	eStatus                                                   smithy.SchemaExtensions
+	eStatus_BUILDING                                          smithy.SchemaExtensions
+	eStatus_READY                                             smithy.SchemaExtensions
+	eStatus_READY_BASIC_TESTING                               smithy.SchemaExtensions
+	eStatus_FAILED                                            smithy.SchemaExtensions
+	eStatus_NOT_BUILT                                         smithy.SchemaExtensions
+	eStatusType                                               smithy.SchemaExtensions
+	eStatusType_DETECTED                                      smithy.SchemaExtensions
+	eStatusType_MISSED                                        smithy.SchemaExtensions
+	e_String                                                  smithy.SchemaExtensions
+	e_StringList                                              smithy.SchemaExtensions
+	e_StringList_member                                       smithy.SchemaExtensions
+	e_SynonymList                                             smithy.SchemaExtensions
+	e_SynonymList_member                                      smithy.SchemaExtensions
+	eTag                                                      smithy.SchemaExtensions
+	eTag_key                                                  smithy.SchemaExtensions
+	eTag_value                                                smithy.SchemaExtensions
+	e_TagKey                                                  smithy.SchemaExtensions
+	e_TagKeyList                                              smithy.SchemaExtensions
+	e_TagKeyList_member                                       smithy.SchemaExtensions
+	e_TagList                                                 smithy.SchemaExtensions
+	e_TagList_member                                          smithy.SchemaExtensions
+	e_TagValue                                                smithy.SchemaExtensions
+	e_Timestamp                                               smithy.SchemaExtensions
+	e_UserId                                                  smithy.SchemaExtensions
+	e_Utterance                                               smithy.SchemaExtensions
+	eUtteranceData                                            smithy.SchemaExtensions
+	eUtteranceData_utteranceString                            smithy.SchemaExtensions
+	eUtteranceData_count                                      smithy.SchemaExtensions
+	eUtteranceData_distinctUsers                              smithy.SchemaExtensions
+	eUtteranceData_firstUtteredDate                           smithy.SchemaExtensions
+	eUtteranceData_lastUtteredDate                            smithy.SchemaExtensions
+	eUtteranceList                                            smithy.SchemaExtensions
+	eUtteranceList_botVersion                                 smithy.SchemaExtensions
+	eUtteranceList_utterances                                 smithy.SchemaExtensions
+	e_UtteranceString                                         smithy.SchemaExtensions
+	e_V2BotId                                                 smithy.SchemaExtensions
+	e_V2BotName                                               smithy.SchemaExtensions
+	e_Value                                                   smithy.SchemaExtensions
+	e_Version                                                 smithy.SchemaExtensions
+	eCreateBotVersionRequest                                  smithy.SchemaExtensions
+	eCreateBotVersionRequest_name                             smithy.SchemaExtensions
+	eCreateBotVersionRequest_checksum                         smithy.SchemaExtensions
+	eCreateBotVersionResponse                                 smithy.SchemaExtensions
+	eCreateBotVersionResponse_name                            smithy.SchemaExtensions
+	eCreateBotVersionResponse_description                     smithy.SchemaExtensions
+	eCreateBotVersionResponse_intents                         smithy.SchemaExtensions
+	eCreateBotVersionResponse_clarificationPrompt             smithy.SchemaExtensions
+	eCreateBotVersionResponse_abortStatement                  smithy.SchemaExtensions
+	eCreateBotVersionResponse_status                          smithy.SchemaExtensions
+	eCreateBotVersionResponse_failureReason                   smithy.SchemaExtensions
+	eCreateBotVersionResponse_lastUpdatedDate                 smithy.SchemaExtensions
+	eCreateBotVersionResponse_createdDate                     smithy.SchemaExtensions
+	eCreateBotVersionResponse_idleSessionTTLInSeconds         smithy.SchemaExtensions
+	eCreateBotVersionResponse_voiceId                         smithy.SchemaExtensions
+	eCreateBotVersionResponse_checksum                        smithy.SchemaExtensions
+	eCreateBotVersionResponse_version                         smithy.SchemaExtensions
+	eCreateBotVersionResponse_locale                          smithy.SchemaExtensions
+	eCreateBotVersionResponse_childDirected                   smithy.SchemaExtensions
+	eCreateBotVersionResponse_enableModelImprovements         smithy.SchemaExtensions
+	eCreateBotVersionResponse_detectSentiment                 smithy.SchemaExtensions
+	eCreateIntentVersionRequest                               smithy.SchemaExtensions
+	eCreateIntentVersionRequest_name                          smithy.SchemaExtensions
+	eCreateIntentVersionRequest_checksum                      smithy.SchemaExtensions
+	eCreateIntentVersionResponse                              smithy.SchemaExtensions
+	eCreateIntentVersionResponse_name                         smithy.SchemaExtensions
+	eCreateIntentVersionResponse_description                  smithy.SchemaExtensions
+	eCreateIntentVersionResponse_slots                        smithy.SchemaExtensions
+	eCreateIntentVersionResponse_sampleUtterances             smithy.SchemaExtensions
+	eCreateIntentVersionResponse_confirmationPrompt           smithy.SchemaExtensions
+	eCreateIntentVersionResponse_rejectionStatement           smithy.SchemaExtensions
+	eCreateIntentVersionResponse_followUpPrompt               smithy.SchemaExtensions
+	eCreateIntentVersionResponse_conclusionStatement          smithy.SchemaExtensions
+	eCreateIntentVersionResponse_dialogCodeHook               smithy.SchemaExtensions
+	eCreateIntentVersionResponse_fulfillmentActivity          smithy.SchemaExtensions
+	eCreateIntentVersionResponse_parentIntentSignature        smithy.SchemaExtensions
+	eCreateIntentVersionResponse_lastUpdatedDate              smithy.SchemaExtensions
+	eCreateIntentVersionResponse_createdDate                  smithy.SchemaExtensions
+	eCreateIntentVersionResponse_version                      smithy.SchemaExtensions
+	eCreateIntentVersionResponse_checksum                     smithy.SchemaExtensions
+	eCreateIntentVersionResponse_kendraConfiguration          smithy.SchemaExtensions
+	eCreateIntentVersionResponse_inputContexts                smithy.SchemaExtensions
+	eCreateIntentVersionResponse_outputContexts               smithy.SchemaExtensions
+	eCreateSlotTypeVersionRequest                             smithy.SchemaExtensions
+	eCreateSlotTypeVersionRequest_name                        smithy.SchemaExtensions
+	eCreateSlotTypeVersionRequest_checksum                    smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse                            smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_name                       smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_description                smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_enumerationValues          smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_lastUpdatedDate            smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_createdDate                smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_version                    smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_checksum                   smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_valueSelectionStrategy     smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_parentSlotTypeSignature    smithy.SchemaExtensions
+	eCreateSlotTypeVersionResponse_slotTypeConfigurations     smithy.SchemaExtensions
+	eDeleteBotAliasRequest                                    smithy.SchemaExtensions
+	eDeleteBotAliasRequest_name                               smithy.SchemaExtensions
+	eDeleteBotAliasRequest_botName                            smithy.SchemaExtensions
+	eDeleteBotChannelAssociationRequest                       smithy.SchemaExtensions
+	eDeleteBotChannelAssociationRequest_name                  smithy.SchemaExtensions
+	eDeleteBotChannelAssociationRequest_botName               smithy.SchemaExtensions
+	eDeleteBotChannelAssociationRequest_botAlias              smithy.SchemaExtensions
+	eDeleteBotRequest                                         smithy.SchemaExtensions
+	eDeleteBotRequest_name                                    smithy.SchemaExtensions
+	eDeleteBotVersionRequest                                  smithy.SchemaExtensions
+	eDeleteBotVersionRequest_name                             smithy.SchemaExtensions
+	eDeleteBotVersionRequest_version                          smithy.SchemaExtensions
+	eDeleteIntentRequest                                      smithy.SchemaExtensions
+	eDeleteIntentRequest_name                                 smithy.SchemaExtensions
+	eDeleteIntentVersionRequest                               smithy.SchemaExtensions
+	eDeleteIntentVersionRequest_name                          smithy.SchemaExtensions
+	eDeleteIntentVersionRequest_version                       smithy.SchemaExtensions
+	eDeleteSlotTypeRequest                                    smithy.SchemaExtensions
+	eDeleteSlotTypeRequest_name                               smithy.SchemaExtensions
+	eDeleteSlotTypeVersionRequest                             smithy.SchemaExtensions
+	eDeleteSlotTypeVersionRequest_name                        smithy.SchemaExtensions
+	eDeleteSlotTypeVersionRequest_version                     smithy.SchemaExtensions
+	eDeleteUtterancesRequest                                  smithy.SchemaExtensions
+	eDeleteUtterancesRequest_botName                          smithy.SchemaExtensions
+	eDeleteUtterancesRequest_userId                           smithy.SchemaExtensions
+	eGetBotAliasesRequest                                     smithy.SchemaExtensions
+	eGetBotAliasesRequest_botName                             smithy.SchemaExtensions
+	eGetBotAliasesRequest_nextToken                           smithy.SchemaExtensions
+	eGetBotAliasesRequest_maxResults                          smithy.SchemaExtensions
+	eGetBotAliasesRequest_nameContains                        smithy.SchemaExtensions
+	eGetBotAliasesResponse                                    smithy.SchemaExtensions
+	eGetBotAliasesResponse_BotAliases                         smithy.SchemaExtensions
+	eGetBotAliasesResponse_nextToken                          smithy.SchemaExtensions
+	eGetBotAliasRequest                                       smithy.SchemaExtensions
+	eGetBotAliasRequest_name                                  smithy.SchemaExtensions
+	eGetBotAliasRequest_botName                               smithy.SchemaExtensions
+	eGetBotAliasResponse                                      smithy.SchemaExtensions
+	eGetBotAliasResponse_name                                 smithy.SchemaExtensions
+	eGetBotAliasResponse_description                          smithy.SchemaExtensions
+	eGetBotAliasResponse_botVersion                           smithy.SchemaExtensions
+	eGetBotAliasResponse_botName                              smithy.SchemaExtensions
+	eGetBotAliasResponse_lastUpdatedDate                      smithy.SchemaExtensions
+	eGetBotAliasResponse_createdDate                          smithy.SchemaExtensions
+	eGetBotAliasResponse_checksum                             smithy.SchemaExtensions
+	eGetBotAliasResponse_conversationLogs                     smithy.SchemaExtensions
+	eGetBotChannelAssociationRequest                          smithy.SchemaExtensions
+	eGetBotChannelAssociationRequest_name                     smithy.SchemaExtensions
+	eGetBotChannelAssociationRequest_botName                  smithy.SchemaExtensions
+	eGetBotChannelAssociationRequest_botAlias                 smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse                         smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_name                    smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_description             smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_botAlias                smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_botName                 smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_createdDate             smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_type                    smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_botConfiguration        smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_status                  smithy.SchemaExtensions
+	eGetBotChannelAssociationResponse_failureReason           smithy.SchemaExtensions
+	eGetBotChannelAssociationsRequest                         smithy.SchemaExtensions
+	eGetBotChannelAssociationsRequest_botName                 smithy.SchemaExtensions
+	eGetBotChannelAssociationsRequest_botAlias                smithy.SchemaExtensions
+	eGetBotChannelAssociationsRequest_nextToken               smithy.SchemaExtensions
+	eGetBotChannelAssociationsRequest_maxResults              smithy.SchemaExtensions
+	eGetBotChannelAssociationsRequest_nameContains            smithy.SchemaExtensions
+	eGetBotChannelAssociationsResponse                        smithy.SchemaExtensions
+	eGetBotChannelAssociationsResponse_botChannelAssociations smithy.SchemaExtensions
+	eGetBotChannelAssociationsResponse_nextToken              smithy.SchemaExtensions
+	eGetBotRequest                                            smithy.SchemaExtensions
+	eGetBotRequest_name                                       smithy.SchemaExtensions
+	eGetBotRequest_versionOrAlias                             smithy.SchemaExtensions
+	eGetBotResponse                                           smithy.SchemaExtensions
+	eGetBotResponse_name                                      smithy.SchemaExtensions
+	eGetBotResponse_description                               smithy.SchemaExtensions
+	eGetBotResponse_intents                                   smithy.SchemaExtensions
+	eGetBotResponse_enableModelImprovements                   smithy.SchemaExtensions
+	eGetBotResponse_nluIntentConfidenceThreshold              smithy.SchemaExtensions
+	eGetBotResponse_clarificationPrompt                       smithy.SchemaExtensions
+	eGetBotResponse_abortStatement                            smithy.SchemaExtensions
+	eGetBotResponse_status                                    smithy.SchemaExtensions
+	eGetBotResponse_failureReason                             smithy.SchemaExtensions
+	eGetBotResponse_lastUpdatedDate                           smithy.SchemaExtensions
+	eGetBotResponse_createdDate                               smithy.SchemaExtensions
+	eGetBotResponse_idleSessionTTLInSeconds                   smithy.SchemaExtensions
+	eGetBotResponse_voiceId                                   smithy.SchemaExtensions
+	eGetBotResponse_checksum                                  smithy.SchemaExtensions
+	eGetBotResponse_version                                   smithy.SchemaExtensions
+	eGetBotResponse_locale                                    smithy.SchemaExtensions
+	eGetBotResponse_childDirected                             smithy.SchemaExtensions
+	eGetBotResponse_detectSentiment                           smithy.SchemaExtensions
+	eGetBotsRequest                                           smithy.SchemaExtensions
+	eGetBotsRequest_nextToken                                 smithy.SchemaExtensions
+	eGetBotsRequest_maxResults                                smithy.SchemaExtensions
+	eGetBotsRequest_nameContains                              smithy.SchemaExtensions
+	eGetBotsResponse                                          smithy.SchemaExtensions
+	eGetBotsResponse_bots                                     smithy.SchemaExtensions
+	eGetBotsResponse_nextToken                                smithy.SchemaExtensions
+	eGetBotVersionsRequest                                    smithy.SchemaExtensions
+	eGetBotVersionsRequest_name                               smithy.SchemaExtensions
+	eGetBotVersionsRequest_nextToken                          smithy.SchemaExtensions
+	eGetBotVersionsRequest_maxResults                         smithy.SchemaExtensions
+	eGetBotVersionsResponse                                   smithy.SchemaExtensions
+	eGetBotVersionsResponse_bots                              smithy.SchemaExtensions
+	eGetBotVersionsResponse_nextToken                         smithy.SchemaExtensions
+	eGetBuiltinIntentRequest                                  smithy.SchemaExtensions
+	eGetBuiltinIntentRequest_signature                        smithy.SchemaExtensions
+	eGetBuiltinIntentResponse                                 smithy.SchemaExtensions
+	eGetBuiltinIntentResponse_signature                       smithy.SchemaExtensions
+	eGetBuiltinIntentResponse_supportedLocales                smithy.SchemaExtensions
+	eGetBuiltinIntentResponse_slots                           smithy.SchemaExtensions
+	eGetBuiltinIntentsRequest                                 smithy.SchemaExtensions
+	eGetBuiltinIntentsRequest_locale                          smithy.SchemaExtensions
+	eGetBuiltinIntentsRequest_signatureContains               smithy.SchemaExtensions
+	eGetBuiltinIntentsRequest_nextToken                       smithy.SchemaExtensions
+	eGetBuiltinIntentsRequest_maxResults                      smithy.SchemaExtensions
+	eGetBuiltinIntentsResponse                                smithy.SchemaExtensions
+	eGetBuiltinIntentsResponse_intents                        smithy.SchemaExtensions
+	eGetBuiltinIntentsResponse_nextToken                      smithy.SchemaExtensions
+	eGetBuiltinSlotTypesRequest                               smithy.SchemaExtensions
+	eGetBuiltinSlotTypesRequest_locale                        smithy.SchemaExtensions
+	eGetBuiltinSlotTypesRequest_signatureContains             smithy.SchemaExtensions
+	eGetBuiltinSlotTypesRequest_nextToken                     smithy.SchemaExtensions
+	eGetBuiltinSlotTypesRequest_maxResults                    smithy.SchemaExtensions
+	eGetBuiltinSlotTypesResponse                              smithy.SchemaExtensions
+	eGetBuiltinSlotTypesResponse_slotTypes                    smithy.SchemaExtensions
+	eGetBuiltinSlotTypesResponse_nextToken                    smithy.SchemaExtensions
+	eGetExportRequest                                         smithy.SchemaExtensions
+	eGetExportRequest_name                                    smithy.SchemaExtensions
+	eGetExportRequest_version                                 smithy.SchemaExtensions
+	eGetExportRequest_resourceType                            smithy.SchemaExtensions
+	eGetExportRequest_exportType                              smithy.SchemaExtensions
+	eGetExportResponse                                        smithy.SchemaExtensions
+	eGetExportResponse_name                                   smithy.SchemaExtensions
+	eGetExportResponse_version                                smithy.SchemaExtensions
+	eGetExportResponse_resourceType                           smithy.SchemaExtensions
+	eGetExportResponse_exportType                             smithy.SchemaExtensions
+	eGetExportResponse_exportStatus                           smithy.SchemaExtensions
+	eGetExportResponse_failureReason                          smithy.SchemaExtensions
+	eGetExportResponse_url                                    smithy.SchemaExtensions
+	eGetImportRequest                                         smithy.SchemaExtensions
+	eGetImportRequest_importId                                smithy.SchemaExtensions
+	eGetImportResponse                                        smithy.SchemaExtensions
+	eGetImportResponse_name                                   smithy.SchemaExtensions
+	eGetImportResponse_resourceType                           smithy.SchemaExtensions
+	eGetImportResponse_mergeStrategy                          smithy.SchemaExtensions
+	eGetImportResponse_importId                               smithy.SchemaExtensions
+	eGetImportResponse_importStatus                           smithy.SchemaExtensions
+	eGetImportResponse_failureReason                          smithy.SchemaExtensions
+	eGetImportResponse_createdDate                            smithy.SchemaExtensions
+	eGetIntentRequest                                         smithy.SchemaExtensions
+	eGetIntentRequest_name                                    smithy.SchemaExtensions
+	eGetIntentRequest_version                                 smithy.SchemaExtensions
+	eGetIntentResponse                                        smithy.SchemaExtensions
+	eGetIntentResponse_name                                   smithy.SchemaExtensions
+	eGetIntentResponse_description                            smithy.SchemaExtensions
+	eGetIntentResponse_slots                                  smithy.SchemaExtensions
+	eGetIntentResponse_sampleUtterances                       smithy.SchemaExtensions
+	eGetIntentResponse_confirmationPrompt                     smithy.SchemaExtensions
+	eGetIntentResponse_rejectionStatement                     smithy.SchemaExtensions
+	eGetIntentResponse_followUpPrompt                         smithy.SchemaExtensions
+	eGetIntentResponse_conclusionStatement                    smithy.SchemaExtensions
+	eGetIntentResponse_dialogCodeHook                         smithy.SchemaExtensions
+	eGetIntentResponse_fulfillmentActivity                    smithy.SchemaExtensions
+	eGetIntentResponse_parentIntentSignature                  smithy.SchemaExtensions
+	eGetIntentResponse_lastUpdatedDate                        smithy.SchemaExtensions
+	eGetIntentResponse_createdDate                            smithy.SchemaExtensions
+	eGetIntentResponse_version                                smithy.SchemaExtensions
+	eGetIntentResponse_checksum                               smithy.SchemaExtensions
+	eGetIntentResponse_kendraConfiguration                    smithy.SchemaExtensions
+	eGetIntentResponse_inputContexts                          smithy.SchemaExtensions
+	eGetIntentResponse_outputContexts                         smithy.SchemaExtensions
+	eGetIntentsRequest                                        smithy.SchemaExtensions
+	eGetIntentsRequest_nextToken                              smithy.SchemaExtensions
+	eGetIntentsRequest_maxResults                             smithy.SchemaExtensions
+	eGetIntentsRequest_nameContains                           smithy.SchemaExtensions
+	eGetIntentsResponse                                       smithy.SchemaExtensions
+	eGetIntentsResponse_intents                               smithy.SchemaExtensions
+	eGetIntentsResponse_nextToken                             smithy.SchemaExtensions
+	eGetIntentVersionsRequest                                 smithy.SchemaExtensions
+	eGetIntentVersionsRequest_name                            smithy.SchemaExtensions
+	eGetIntentVersionsRequest_nextToken                       smithy.SchemaExtensions
+	eGetIntentVersionsRequest_maxResults                      smithy.SchemaExtensions
+	eGetIntentVersionsResponse                                smithy.SchemaExtensions
+	eGetIntentVersionsResponse_intents                        smithy.SchemaExtensions
+	eGetIntentVersionsResponse_nextToken                      smithy.SchemaExtensions
+	eGetMigrationRequest                                      smithy.SchemaExtensions
+	eGetMigrationRequest_migrationId                          smithy.SchemaExtensions
+	eGetMigrationResponse                                     smithy.SchemaExtensions
+	eGetMigrationResponse_migrationId                         smithy.SchemaExtensions
+	eGetMigrationResponse_v1BotName                           smithy.SchemaExtensions
+	eGetMigrationResponse_v1BotVersion                        smithy.SchemaExtensions
+	eGetMigrationResponse_v1BotLocale                         smithy.SchemaExtensions
+	eGetMigrationResponse_v2BotId                             smithy.SchemaExtensions
+	eGetMigrationResponse_v2BotRole                           smithy.SchemaExtensions
+	eGetMigrationResponse_migrationStatus                     smithy.SchemaExtensions
+	eGetMigrationResponse_migrationStrategy                   smithy.SchemaExtensions
+	eGetMigrationResponse_migrationTimestamp                  smithy.SchemaExtensions
+	eGetMigrationResponse_alerts                              smithy.SchemaExtensions
+	eGetMigrationsRequest                                     smithy.SchemaExtensions
+	eGetMigrationsRequest_sortByAttribute                     smithy.SchemaExtensions
+	eGetMigrationsRequest_sortByOrder                         smithy.SchemaExtensions
+	eGetMigrationsRequest_v1BotNameContains                   smithy.SchemaExtensions
+	eGetMigrationsRequest_migrationStatusEquals               smithy.SchemaExtensions
+	eGetMigrationsRequest_maxResults                          smithy.SchemaExtensions
+	eGetMigrationsRequest_nextToken                           smithy.SchemaExtensions
+	eGetMigrationsResponse                                    smithy.SchemaExtensions
+	eGetMigrationsResponse_migrationSummaries                 smithy.SchemaExtensions
+	eGetMigrationsResponse_nextToken                          smithy.SchemaExtensions
+	eGetSlotTypeRequest                                       smithy.SchemaExtensions
+	eGetSlotTypeRequest_name                                  smithy.SchemaExtensions
+	eGetSlotTypeRequest_version                               smithy.SchemaExtensions
+	eGetSlotTypeResponse                                      smithy.SchemaExtensions
+	eGetSlotTypeResponse_name                                 smithy.SchemaExtensions
+	eGetSlotTypeResponse_description                          smithy.SchemaExtensions
+	eGetSlotTypeResponse_enumerationValues                    smithy.SchemaExtensions
+	eGetSlotTypeResponse_lastUpdatedDate                      smithy.SchemaExtensions
+	eGetSlotTypeResponse_createdDate                          smithy.SchemaExtensions
+	eGetSlotTypeResponse_version                              smithy.SchemaExtensions
+	eGetSlotTypeResponse_checksum                             smithy.SchemaExtensions
+	eGetSlotTypeResponse_valueSelectionStrategy               smithy.SchemaExtensions
+	eGetSlotTypeResponse_parentSlotTypeSignature              smithy.SchemaExtensions
+	eGetSlotTypeResponse_slotTypeConfigurations               smithy.SchemaExtensions
+	eGetSlotTypesRequest                                      smithy.SchemaExtensions
+	eGetSlotTypesRequest_nextToken                            smithy.SchemaExtensions
+	eGetSlotTypesRequest_maxResults                           smithy.SchemaExtensions
+	eGetSlotTypesRequest_nameContains                         smithy.SchemaExtensions
+	eGetSlotTypesResponse                                     smithy.SchemaExtensions
+	eGetSlotTypesResponse_slotTypes                           smithy.SchemaExtensions
+	eGetSlotTypesResponse_nextToken                           smithy.SchemaExtensions
+	eGetSlotTypeVersionsRequest                               smithy.SchemaExtensions
+	eGetSlotTypeVersionsRequest_name                          smithy.SchemaExtensions
+	eGetSlotTypeVersionsRequest_nextToken                     smithy.SchemaExtensions
+	eGetSlotTypeVersionsRequest_maxResults                    smithy.SchemaExtensions
+	eGetSlotTypeVersionsResponse                              smithy.SchemaExtensions
+	eGetSlotTypeVersionsResponse_slotTypes                    smithy.SchemaExtensions
+	eGetSlotTypeVersionsResponse_nextToken                    smithy.SchemaExtensions
+	eGetUtterancesViewRequest                                 smithy.SchemaExtensions
+	eGetUtterancesViewRequest_botName                         smithy.SchemaExtensions
+	eGetUtterancesViewRequest_botVersions                     smithy.SchemaExtensions
+	eGetUtterancesViewRequest_statusType                      smithy.SchemaExtensions
+	eGetUtterancesViewResponse                                smithy.SchemaExtensions
+	eGetUtterancesViewResponse_botName                        smithy.SchemaExtensions
+	eGetUtterancesViewResponse_utterances                     smithy.SchemaExtensions
+	eListTagsForResourceRequest                               smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                   smithy.SchemaExtensions
+	eListTagsForResourceResponse                              smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                         smithy.SchemaExtensions
+	ePutBotAliasRequest                                       smithy.SchemaExtensions
+	ePutBotAliasRequest_name                                  smithy.SchemaExtensions
+	ePutBotAliasRequest_description                           smithy.SchemaExtensions
+	ePutBotAliasRequest_botVersion                            smithy.SchemaExtensions
+	ePutBotAliasRequest_botName                               smithy.SchemaExtensions
+	ePutBotAliasRequest_checksum                              smithy.SchemaExtensions
+	ePutBotAliasRequest_conversationLogs                      smithy.SchemaExtensions
+	ePutBotAliasRequest_tags                                  smithy.SchemaExtensions
+	ePutBotAliasResponse                                      smithy.SchemaExtensions
+	ePutBotAliasResponse_name                                 smithy.SchemaExtensions
+	ePutBotAliasResponse_description                          smithy.SchemaExtensions
+	ePutBotAliasResponse_botVersion                           smithy.SchemaExtensions
+	ePutBotAliasResponse_botName                              smithy.SchemaExtensions
+	ePutBotAliasResponse_lastUpdatedDate                      smithy.SchemaExtensions
+	ePutBotAliasResponse_createdDate                          smithy.SchemaExtensions
+	ePutBotAliasResponse_checksum                             smithy.SchemaExtensions
+	ePutBotAliasResponse_conversationLogs                     smithy.SchemaExtensions
+	ePutBotAliasResponse_tags                                 smithy.SchemaExtensions
+	ePutBotRequest                                            smithy.SchemaExtensions
+	ePutBotRequest_name                                       smithy.SchemaExtensions
+	ePutBotRequest_description                                smithy.SchemaExtensions
+	ePutBotRequest_intents                                    smithy.SchemaExtensions
+	ePutBotRequest_enableModelImprovements                    smithy.SchemaExtensions
+	ePutBotRequest_nluIntentConfidenceThreshold               smithy.SchemaExtensions
+	ePutBotRequest_clarificationPrompt                        smithy.SchemaExtensions
+	ePutBotRequest_abortStatement                             smithy.SchemaExtensions
+	ePutBotRequest_idleSessionTTLInSeconds                    smithy.SchemaExtensions
+	ePutBotRequest_voiceId                                    smithy.SchemaExtensions
+	ePutBotRequest_checksum                                   smithy.SchemaExtensions
+	ePutBotRequest_processBehavior                            smithy.SchemaExtensions
+	ePutBotRequest_locale                                     smithy.SchemaExtensions
+	ePutBotRequest_childDirected                              smithy.SchemaExtensions
+	ePutBotRequest_detectSentiment                            smithy.SchemaExtensions
+	ePutBotRequest_createVersion                              smithy.SchemaExtensions
+	ePutBotRequest_tags                                       smithy.SchemaExtensions
+	ePutBotResponse                                           smithy.SchemaExtensions
+	ePutBotResponse_name                                      smithy.SchemaExtensions
+	ePutBotResponse_description                               smithy.SchemaExtensions
+	ePutBotResponse_intents                                   smithy.SchemaExtensions
+	ePutBotResponse_enableModelImprovements                   smithy.SchemaExtensions
+	ePutBotResponse_nluIntentConfidenceThreshold              smithy.SchemaExtensions
+	ePutBotResponse_clarificationPrompt                       smithy.SchemaExtensions
+	ePutBotResponse_abortStatement                            smithy.SchemaExtensions
+	ePutBotResponse_status                                    smithy.SchemaExtensions
+	ePutBotResponse_failureReason                             smithy.SchemaExtensions
+	ePutBotResponse_lastUpdatedDate                           smithy.SchemaExtensions
+	ePutBotResponse_createdDate                               smithy.SchemaExtensions
+	ePutBotResponse_idleSessionTTLInSeconds                   smithy.SchemaExtensions
+	ePutBotResponse_voiceId                                   smithy.SchemaExtensions
+	ePutBotResponse_checksum                                  smithy.SchemaExtensions
+	ePutBotResponse_version                                   smithy.SchemaExtensions
+	ePutBotResponse_locale                                    smithy.SchemaExtensions
+	ePutBotResponse_childDirected                             smithy.SchemaExtensions
+	ePutBotResponse_createVersion                             smithy.SchemaExtensions
+	ePutBotResponse_detectSentiment                           smithy.SchemaExtensions
+	ePutBotResponse_tags                                      smithy.SchemaExtensions
+	ePutIntentRequest                                         smithy.SchemaExtensions
+	ePutIntentRequest_name                                    smithy.SchemaExtensions
+	ePutIntentRequest_description                             smithy.SchemaExtensions
+	ePutIntentRequest_slots                                   smithy.SchemaExtensions
+	ePutIntentRequest_sampleUtterances                        smithy.SchemaExtensions
+	ePutIntentRequest_confirmationPrompt                      smithy.SchemaExtensions
+	ePutIntentRequest_rejectionStatement                      smithy.SchemaExtensions
+	ePutIntentRequest_followUpPrompt                          smithy.SchemaExtensions
+	ePutIntentRequest_conclusionStatement                     smithy.SchemaExtensions
+	ePutIntentRequest_dialogCodeHook                          smithy.SchemaExtensions
+	ePutIntentRequest_fulfillmentActivity                     smithy.SchemaExtensions
+	ePutIntentRequest_parentIntentSignature                   smithy.SchemaExtensions
+	ePutIntentRequest_checksum                                smithy.SchemaExtensions
+	ePutIntentRequest_createVersion                           smithy.SchemaExtensions
+	ePutIntentRequest_kendraConfiguration                     smithy.SchemaExtensions
+	ePutIntentRequest_inputContexts                           smithy.SchemaExtensions
+	ePutIntentRequest_outputContexts                          smithy.SchemaExtensions
+	ePutIntentResponse                                        smithy.SchemaExtensions
+	ePutIntentResponse_name                                   smithy.SchemaExtensions
+	ePutIntentResponse_description                            smithy.SchemaExtensions
+	ePutIntentResponse_slots                                  smithy.SchemaExtensions
+	ePutIntentResponse_sampleUtterances                       smithy.SchemaExtensions
+	ePutIntentResponse_confirmationPrompt                     smithy.SchemaExtensions
+	ePutIntentResponse_rejectionStatement                     smithy.SchemaExtensions
+	ePutIntentResponse_followUpPrompt                         smithy.SchemaExtensions
+	ePutIntentResponse_conclusionStatement                    smithy.SchemaExtensions
+	ePutIntentResponse_dialogCodeHook                         smithy.SchemaExtensions
+	ePutIntentResponse_fulfillmentActivity                    smithy.SchemaExtensions
+	ePutIntentResponse_parentIntentSignature                  smithy.SchemaExtensions
+	ePutIntentResponse_lastUpdatedDate                        smithy.SchemaExtensions
+	ePutIntentResponse_createdDate                            smithy.SchemaExtensions
+	ePutIntentResponse_version                                smithy.SchemaExtensions
+	ePutIntentResponse_checksum                               smithy.SchemaExtensions
+	ePutIntentResponse_createVersion                          smithy.SchemaExtensions
+	ePutIntentResponse_kendraConfiguration                    smithy.SchemaExtensions
+	ePutIntentResponse_inputContexts                          smithy.SchemaExtensions
+	ePutIntentResponse_outputContexts                         smithy.SchemaExtensions
+	ePutSlotTypeRequest                                       smithy.SchemaExtensions
+	ePutSlotTypeRequest_name                                  smithy.SchemaExtensions
+	ePutSlotTypeRequest_description                           smithy.SchemaExtensions
+	ePutSlotTypeRequest_enumerationValues                     smithy.SchemaExtensions
+	ePutSlotTypeRequest_checksum                              smithy.SchemaExtensions
+	ePutSlotTypeRequest_valueSelectionStrategy                smithy.SchemaExtensions
+	ePutSlotTypeRequest_createVersion                         smithy.SchemaExtensions
+	ePutSlotTypeRequest_parentSlotTypeSignature               smithy.SchemaExtensions
+	ePutSlotTypeRequest_slotTypeConfigurations                smithy.SchemaExtensions
+	ePutSlotTypeResponse                                      smithy.SchemaExtensions
+	ePutSlotTypeResponse_name                                 smithy.SchemaExtensions
+	ePutSlotTypeResponse_description                          smithy.SchemaExtensions
+	ePutSlotTypeResponse_enumerationValues                    smithy.SchemaExtensions
+	ePutSlotTypeResponse_lastUpdatedDate                      smithy.SchemaExtensions
+	ePutSlotTypeResponse_createdDate                          smithy.SchemaExtensions
+	ePutSlotTypeResponse_version                              smithy.SchemaExtensions
+	ePutSlotTypeResponse_checksum                             smithy.SchemaExtensions
+	ePutSlotTypeResponse_valueSelectionStrategy               smithy.SchemaExtensions
+	ePutSlotTypeResponse_createVersion                        smithy.SchemaExtensions
+	ePutSlotTypeResponse_parentSlotTypeSignature              smithy.SchemaExtensions
+	ePutSlotTypeResponse_slotTypeConfigurations               smithy.SchemaExtensions
+	eStartImportRequest                                       smithy.SchemaExtensions
+	eStartImportRequest_payload                               smithy.SchemaExtensions
+	eStartImportRequest_resourceType                          smithy.SchemaExtensions
+	eStartImportRequest_mergeStrategy                         smithy.SchemaExtensions
+	eStartImportRequest_tags                                  smithy.SchemaExtensions
+	eStartImportResponse                                      smithy.SchemaExtensions
+	eStartImportResponse_name                                 smithy.SchemaExtensions
+	eStartImportResponse_resourceType                         smithy.SchemaExtensions
+	eStartImportResponse_mergeStrategy                        smithy.SchemaExtensions
+	eStartImportResponse_importId                             smithy.SchemaExtensions
+	eStartImportResponse_importStatus                         smithy.SchemaExtensions
+	eStartImportResponse_tags                                 smithy.SchemaExtensions
+	eStartImportResponse_createdDate                          smithy.SchemaExtensions
+	eStartMigrationRequest                                    smithy.SchemaExtensions
+	eStartMigrationRequest_v1BotName                          smithy.SchemaExtensions
+	eStartMigrationRequest_v1BotVersion                       smithy.SchemaExtensions
+	eStartMigrationRequest_v2BotName                          smithy.SchemaExtensions
+	eStartMigrationRequest_v2BotRole                          smithy.SchemaExtensions
+	eStartMigrationRequest_migrationStrategy                  smithy.SchemaExtensions
+	eStartMigrationResponse                                   smithy.SchemaExtensions
+	eStartMigrationResponse_v1BotName                         smithy.SchemaExtensions
+	eStartMigrationResponse_v1BotVersion                      smithy.SchemaExtensions
+	eStartMigrationResponse_v1BotLocale                       smithy.SchemaExtensions
+	eStartMigrationResponse_v2BotId                           smithy.SchemaExtensions
+	eStartMigrationResponse_v2BotRole                         smithy.SchemaExtensions
+	eStartMigrationResponse_migrationId                       smithy.SchemaExtensions
+	eStartMigrationResponse_migrationStrategy                 smithy.SchemaExtensions
+	eStartMigrationResponse_migrationTimestamp                smithy.SchemaExtensions
+	eTagResourceRequest                                       smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                           smithy.SchemaExtensions
+	eTagResourceRequest_tags                                  smithy.SchemaExtensions
+	eTagResourceResponse                                      smithy.SchemaExtensions
+	eUntagResourceRequest                                     smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                         smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                             smithy.SchemaExtensions
+	eUntagResourceResponse                                    smithy.SchemaExtensions
+)
+
+var (
+	iCreateBotVersion                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateBotVersion"}
+	iCreateIntentVersion                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateIntentVersion"}
+	iCreateSlotTypeVersion              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateSlotTypeVersion"}
+	iDeleteBot                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBot"}
+	iDeleteBotAlias                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBotAlias"}
+	iDeleteBotChannelAssociation        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBotChannelAssociation"}
+	iDeleteBotVersion                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBotVersion"}
+	iDeleteIntent                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteIntent"}
+	iDeleteIntentVersion                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteIntentVersion"}
+	iDeleteSlotType                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteSlotType"}
+	iDeleteSlotTypeVersion              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteSlotTypeVersion"}
+	iDeleteUtterances                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteUtterances"}
+	iGetBot                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBot"}
+	iGetBotAlias                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotAlias"}
+	iGetBotAliases                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotAliases"}
+	iGetBotChannelAssociation           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotChannelAssociation"}
+	iGetBotChannelAssociations          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotChannelAssociations"}
+	iGetBots                            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBots"}
+	iGetBotVersions                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotVersions"}
+	iGetBuiltinIntent                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinIntent"}
+	iGetBuiltinIntents                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinIntents"}
+	iGetBuiltinSlotTypes                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinSlotTypes"}
+	iGetExport                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetExport"}
+	iGetImport                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetImport"}
+	iGetIntent                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntent"}
+	iGetIntents                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntents"}
+	iGetIntentVersions                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntentVersions"}
+	iGetMigration                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetMigration"}
+	iGetMigrations                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetMigrations"}
+	iGetSlotType                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotType"}
+	iGetSlotTypes                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypes"}
+	iGetSlotTypeVersions                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypeVersions"}
+	iGetUtterancesView                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetUtterancesView"}
+	iListTagsForResource                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ListTagsForResource"}
+	iPutBot                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutBot"}
+	iPutBotAlias                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutBotAlias"}
+	iPutIntent                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutIntent"}
+	iPutSlotType                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutSlotType"}
+	iStartImport                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StartImport"}
+	iStartMigration                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StartMigration"}
+	iTagResource                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "TagResource"}
+	iUntagResource                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "UntagResource"}
+	i_AWSDeepSenseModelBuildingService  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "AWSDeepSenseModelBuildingService"}
+	iAccessDeniedException              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "AccessDeniedException"}
+	i_AliasName                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "AliasName"}
+	i_AliasNameOrListAll                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "AliasNameOrListAll"}
+	i_AmazonResourceName                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "AmazonResourceName"}
+	iBadRequestException                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BadRequestException"}
+	i_Blob                              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Blob"}
+	i_Boolean                           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Boolean"}
+	iBotAliasMetadata                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotAliasMetadata"}
+	i_BotAliasMetadataList              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotAliasMetadataList"}
+	iBotChannelAssociation              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotChannelAssociation"}
+	i_BotChannelAssociationList         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotChannelAssociationList"}
+	i_BotChannelName                    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotChannelName"}
+	iBotMetadata                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotMetadata"}
+	i_BotMetadataList                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotMetadataList"}
+	i_BotName                           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotName"}
+	i_BotVersions                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BotVersions"}
+	iBuiltinIntentMetadata              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinIntentMetadata"}
+	i_BuiltinIntentMetadataList         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinIntentMetadataList"}
+	i_BuiltinIntentSignature            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinIntentSignature"}
+	iBuiltinIntentSlot                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinIntentSlot"}
+	i_BuiltinIntentSlotList             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinIntentSlotList"}
+	iBuiltinSlotTypeMetadata            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinSlotTypeMetadata"}
+	i_BuiltinSlotTypeMetadataList       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinSlotTypeMetadataList"}
+	i_BuiltinSlotTypeSignature          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "BuiltinSlotTypeSignature"}
+	i_ChannelConfigurationMap           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ChannelConfigurationMap"}
+	iChannelStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ChannelStatus"}
+	iChannelType                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ChannelType"}
+	iCodeHook                           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CodeHook"}
+	i_ConfidenceThreshold               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ConfidenceThreshold"}
+	iConflictException                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ConflictException"}
+	i_ContentString                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ContentString"}
+	iContentType                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ContentType"}
+	i_ContextTimeToLiveInSeconds        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ContextTimeToLiveInSeconds"}
+	i_ContextTurnsToLive                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ContextTurnsToLive"}
+	iConversationLogsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ConversationLogsRequest"}
+	iConversationLogsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ConversationLogsResponse"}
+	i_Count                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Count"}
+	i_CustomOrBuiltinSlotTypeName       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CustomOrBuiltinSlotTypeName"}
+	i_Description                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Description"}
+	iDestination                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Destination"}
+	iEnumerationValue                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "EnumerationValue"}
+	i_EnumerationValues                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "EnumerationValues"}
+	iExportStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ExportStatus"}
+	iExportType                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ExportType"}
+	iFollowUpPrompt                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "FollowUpPrompt"}
+	iFulfillmentActivity                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "FulfillmentActivity"}
+	iFulfillmentActivityType            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "FulfillmentActivityType"}
+	i_GroupNumber                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GroupNumber"}
+	i_IamRoleArn                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "IamRoleArn"}
+	iImportStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ImportStatus"}
+	iInputContext                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "InputContext"}
+	i_InputContextList                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "InputContextList"}
+	i_InputContextName                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "InputContextName"}
+	iIntent                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Intent"}
+	i_IntentList                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "IntentList"}
+	iIntentMetadata                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "IntentMetadata"}
+	i_IntentMetadataList                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "IntentMetadataList"}
+	i_IntentName                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "IntentName"}
+	i_IntentUtteranceList               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "IntentUtteranceList"}
+	iInternalFailureException           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "InternalFailureException"}
+	iKendraConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "KendraConfiguration"}
+	i_KendraIndexArn                    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "KendraIndexArn"}
+	i_KmsKeyArn                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "KmsKeyArn"}
+	i_LambdaARN                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LambdaARN"}
+	iLimitExceededException             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LimitExceededException"}
+	i_ListOfUtterance                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ListOfUtterance"}
+	i_ListsOfUtterances                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ListsOfUtterances"}
+	iLocale                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Locale"}
+	i_LocaleList                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LocaleList"}
+	iLogSettingsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LogSettingsRequest"}
+	i_LogSettingsRequestList            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LogSettingsRequestList"}
+	iLogSettingsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LogSettingsResponse"}
+	i_LogSettingsResponseList           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LogSettingsResponseList"}
+	iLogType                            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "LogType"}
+	i_MaxResults                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MaxResults"}
+	iMergeStrategy                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MergeStrategy"}
+	iMessage                            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Message"}
+	i_MessageList                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MessageList"}
+	i_MessageVersion                    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MessageVersion"}
+	iMigrationAlert                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlert"}
+	i_MigrationAlertDetail              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlertDetail"}
+	i_MigrationAlertDetails             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlertDetails"}
+	i_MigrationAlertMessage             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlertMessage"}
+	i_MigrationAlertReferenceURL        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlertReferenceURL"}
+	i_MigrationAlertReferenceURLs       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlertReferenceURLs"}
+	i_MigrationAlerts                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlerts"}
+	iMigrationAlertType                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationAlertType"}
+	i_MigrationId                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationId"}
+	iMigrationSortAttribute             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationSortAttribute"}
+	iMigrationStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationStatus"}
+	iMigrationStrategy                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationStrategy"}
+	iMigrationSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationSummary"}
+	i_MigrationSummaryList              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "MigrationSummaryList"}
+	i_Name                              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Name"}
+	i_NextToken                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "NextToken"}
+	iNotFoundException                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "NotFoundException"}
+	i_NumericalVersion                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "NumericalVersion"}
+	iObfuscationSetting                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ObfuscationSetting"}
+	iOutputContext                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "OutputContext"}
+	i_OutputContextList                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "OutputContextList"}
+	i_OutputContextName                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "OutputContextName"}
+	iPreconditionFailedException        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PreconditionFailedException"}
+	i_Priority                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Priority"}
+	iProcessBehavior                    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ProcessBehavior"}
+	iPrompt                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Prompt"}
+	i_PromptMaxAttempts                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PromptMaxAttempts"}
+	i_QueryFilterString                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "QueryFilterString"}
+	iReferenceType                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ReferenceType"}
+	i_RegexPattern                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "RegexPattern"}
+	i_ResourceArn                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ResourceArn"}
+	iResourceInUseException             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ResourceInUseException"}
+	i_ResourcePrefix                    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ResourcePrefix"}
+	iResourceReference                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ResourceReference"}
+	iResourceType                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ResourceType"}
+	i_ResponseCard                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ResponseCard"}
+	i_roleArn                           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "roleArn"}
+	i_SessionTTL                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SessionTTL"}
+	iSlot                               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Slot"}
+	iSlotConstraint                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotConstraint"}
+	iSlotDefaultValue                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotDefaultValue"}
+	i_SlotDefaultValueList              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotDefaultValueList"}
+	iSlotDefaultValueSpec               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotDefaultValueSpec"}
+	i_SlotDefaultValueString            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotDefaultValueString"}
+	i_SlotList                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotList"}
+	i_SlotName                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotName"}
+	iSlotTypeConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotTypeConfiguration"}
+	i_SlotTypeConfigurations            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotTypeConfigurations"}
+	iSlotTypeMetadata                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotTypeMetadata"}
+	i_SlotTypeMetadataList              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotTypeMetadataList"}
+	i_SlotTypeName                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotTypeName"}
+	iSlotTypeRegexConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotTypeRegexConfiguration"}
+	i_SlotUtteranceList                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotUtteranceList"}
+	iSlotValueSelectionStrategy         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SlotValueSelectionStrategy"}
+	iSortOrder                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SortOrder"}
+	iStatement                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Statement"}
+	iStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Status"}
+	iStatusType                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StatusType"}
+	i_String                            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "String"}
+	i_StringList                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StringList"}
+	i_SynonymList                       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "SynonymList"}
+	iTag                                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Tag"}
+	i_TagKey                            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "TagKey"}
+	i_TagKeyList                        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "TagKeyList"}
+	i_TagList                           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "TagList"}
+	i_TagValue                          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "TagValue"}
+	i_Timestamp                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Timestamp"}
+	i_UserId                            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "UserId"}
+	i_Utterance                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Utterance"}
+	iUtteranceData                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "UtteranceData"}
+	iUtteranceList                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "UtteranceList"}
+	i_UtteranceString                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "UtteranceString"}
+	i_V2BotId                           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "V2BotId"}
+	i_V2BotName                         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "V2BotName"}
+	i_Value                             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Value"}
+	i_Version                           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "Version"}
+	iCreateBotVersionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateBotVersionRequest"}
+	iCreateBotVersionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateBotVersionResponse"}
+	iCreateIntentVersionRequest         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateIntentVersionRequest"}
+	iCreateIntentVersionResponse        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateIntentVersionResponse"}
+	iCreateSlotTypeVersionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateSlotTypeVersionRequest"}
+	iCreateSlotTypeVersionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "CreateSlotTypeVersionResponse"}
+	iDeleteBotAliasRequest              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBotAliasRequest"}
+	iDeleteBotChannelAssociationRequest = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBotChannelAssociationRequest"}
+	iDeleteBotRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBotRequest"}
+	iDeleteBotVersionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteBotVersionRequest"}
+	iDeleteIntentRequest                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteIntentRequest"}
+	iDeleteIntentVersionRequest         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteIntentVersionRequest"}
+	iDeleteSlotTypeRequest              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteSlotTypeRequest"}
+	iDeleteSlotTypeVersionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteSlotTypeVersionRequest"}
+	iDeleteUtterancesRequest            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "DeleteUtterancesRequest"}
+	iGetBotAliasesRequest               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotAliasesRequest"}
+	iGetBotAliasesResponse              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotAliasesResponse"}
+	iGetBotAliasRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotAliasRequest"}
+	iGetBotAliasResponse                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotAliasResponse"}
+	iGetBotChannelAssociationRequest    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotChannelAssociationRequest"}
+	iGetBotChannelAssociationResponse   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotChannelAssociationResponse"}
+	iGetBotChannelAssociationsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotChannelAssociationsRequest"}
+	iGetBotChannelAssociationsResponse  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotChannelAssociationsResponse"}
+	iGetBotRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotRequest"}
+	iGetBotResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotResponse"}
+	iGetBotsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotsRequest"}
+	iGetBotsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotsResponse"}
+	iGetBotVersionsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotVersionsRequest"}
+	iGetBotVersionsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBotVersionsResponse"}
+	iGetBuiltinIntentRequest            = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinIntentRequest"}
+	iGetBuiltinIntentResponse           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinIntentResponse"}
+	iGetBuiltinIntentsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinIntentsRequest"}
+	iGetBuiltinIntentsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinIntentsResponse"}
+	iGetBuiltinSlotTypesRequest         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinSlotTypesRequest"}
+	iGetBuiltinSlotTypesResponse        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetBuiltinSlotTypesResponse"}
+	iGetExportRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetExportRequest"}
+	iGetExportResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetExportResponse"}
+	iGetImportRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetImportRequest"}
+	iGetImportResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetImportResponse"}
+	iGetIntentRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntentRequest"}
+	iGetIntentResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntentResponse"}
+	iGetIntentsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntentsRequest"}
+	iGetIntentsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntentsResponse"}
+	iGetIntentVersionsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntentVersionsRequest"}
+	iGetIntentVersionsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetIntentVersionsResponse"}
+	iGetMigrationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetMigrationRequest"}
+	iGetMigrationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetMigrationResponse"}
+	iGetMigrationsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetMigrationsRequest"}
+	iGetMigrationsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetMigrationsResponse"}
+	iGetSlotTypeRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypeRequest"}
+	iGetSlotTypeResponse                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypeResponse"}
+	iGetSlotTypesRequest                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypesRequest"}
+	iGetSlotTypesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypesResponse"}
+	iGetSlotTypeVersionsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypeVersionsRequest"}
+	iGetSlotTypeVersionsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetSlotTypeVersionsResponse"}
+	iGetUtterancesViewRequest           = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetUtterancesViewRequest"}
+	iGetUtterancesViewResponse          = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "GetUtterancesViewResponse"}
+	iListTagsForResourceRequest         = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse        = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "ListTagsForResourceResponse"}
+	iPutBotAliasRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutBotAliasRequest"}
+	iPutBotAliasResponse                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutBotAliasResponse"}
+	iPutBotRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutBotRequest"}
+	iPutBotResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutBotResponse"}
+	iPutIntentRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutIntentRequest"}
+	iPutIntentResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutIntentResponse"}
+	iPutSlotTypeRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutSlotTypeRequest"}
+	iPutSlotTypeResponse                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "PutSlotTypeResponse"}
+	iStartImportRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StartImportRequest"}
+	iStartImportResponse                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StartImportResponse"}
+	iStartMigrationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StartMigrationRequest"}
+	iStartMigrationResponse             = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "StartMigrationResponse"}
+	iTagResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "TagResourceRequest"}
+	iTagResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "TagResourceResponse"}
+	iUntagResourceRequest               = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "UntagResourceRequest"}
+	iUntagResourceResponse              = smithy.ShapeName{Namespace: "com.amazonaws.lexmodelbuildingservice", Name: "UntagResourceResponse"}
+	pUnit                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/bots/{name}/versions",
-	Code: 201})
-
-var CreateIntentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateIntentVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/intents/{name}/versions",
-	Code: 201})
-
-var CreateSlotTypeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateSlotTypeVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/slottypes/{name}/versions",
-	Code: 201})
-
-var DeleteBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/bots/{name}",
-	Code: 204})
-
-var DeleteBotAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/bots/{botName}/aliases/{name}",
-	Code: 204})
-
-var DeleteBotChannelAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotChannelAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/bots/{botName}/aliases/{botAlias}/channels/{name}",
-	Code: 204})
-
-var DeleteBotVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/bots/{name}/versions/{version}",
-	Code: 204})
-
-var DeleteIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/intents/{name}",
-	Code: 204})
-
-var DeleteIntentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntentVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/intents/{name}/versions/{version}",
-	Code: 204})
-
-var DeleteSlotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/slottypes/{name}",
-	Code: 204})
-
-var DeleteSlotTypeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotTypeVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/slottypes/{name}/version/{version}",
-	Code: 204})
-
-var DeleteUtterances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteUtterances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/bots/{botName}/utterances/{userId}",
-	Code: 204})
-
-var GetBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{name}/versions/{versionOrAlias}",
-	Code: 200})
-
-var GetBotAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{botName}/aliases/{name}",
-	Code: 200})
-
-var GetBotAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliases",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{botName}/aliases",
-	Code: 200})
-
-var GetBotChannelAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{botName}/aliases/{botAlias}/channels/{name}",
-	Code: 200})
-
-var GetBotChannelAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{botName}/aliases/{botAlias}/channels",
-	Code: 200})
-
-var GetBots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBots",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots",
-	Code: 200})
-
-var GetBotVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{name}/versions",
-	Code: 200})
-
-var GetBuiltinIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/builtins/intents/{signature}",
-	Code: 200})
-
-var GetBuiltinIntents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/builtins/intents",
-	Code: 200})
-
-var GetBuiltinSlotTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinSlotTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/builtins/slottypes",
-	Code: 200})
-
-var GetExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetExport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/exports",
-	Code: 200})
-
-var GetImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetImport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/imports/{importId}",
-	Code: 200})
-
-var GetIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/intents/{name}/versions/{version}",
-	Code: 200})
-
-var GetIntents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/intents",
-	Code: 200})
-
-var GetIntentVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/intents/{name}/versions",
-	Code: 200})
-
-var GetMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/migrations/{migrationId}",
-	Code: 200})
-
-var GetMigrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/migrations",
-	Code: 200})
-
-var GetSlotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/slottypes/{name}/versions/{version}",
-	Code: 200})
-
-var GetSlotTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/slottypes",
-	Code: 200})
-
-var GetSlotTypeVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/slottypes/{name}/versions",
-	Code: 200})
-
-var GetUtterancesView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetUtterancesView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{botName}/utterances?view=aggregation",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/bots/{name}/versions/$LATEST",
-	Code: 200})
-
-var PutBotAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/bots/{botName}/aliases/{name}",
-	Code: 200})
-
-var PutIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/intents/{name}/versions/$LATEST",
-	Code: 200})
-
-var PutSlotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutSlotType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/slottypes/{name}/versions/$LATEST",
-	Code: 200})
-
-var StartImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartImport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/imports",
-	Code: 201})
-
-var StartMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/migrations",
-	Code: 202})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var _AWSDeepSenseModelBuildingService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AWSDeepSenseModelBuildingService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSDeepSenseModelBuildingService = smithy.NewServiceSchema(_AWSDeepSenseModelBuildingService, "2017-04-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AliasName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AliasName",
-}, smithy.ShapeTypeString, 0)
-
-var _AliasNameOrListAll = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AliasNameOrListAll",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BotAliasMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotAliasMetadata",
-}, smithy.ShapeTypeStructure, 8)
-var BotAliasMetadata_name *smithy.Schema
-
-var BotAliasMetadata_description *smithy.Schema
-
-var BotAliasMetadata_botVersion *smithy.Schema
-
-var BotAliasMetadata_botName *smithy.Schema
-
-var BotAliasMetadata_lastUpdatedDate *smithy.Schema
-
-var BotAliasMetadata_createdDate *smithy.Schema
-
-var BotAliasMetadata_checksum *smithy.Schema
-
-var BotAliasMetadata_conversationLogs *smithy.Schema
-
-var _BotAliasMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotAliasMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BotAliasMetadataList_member *smithy.Schema
-
-var BotChannelAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotChannelAssociation",
-}, smithy.ShapeTypeStructure, 9)
-var BotChannelAssociation_name *smithy.Schema
-
-var BotChannelAssociation_description *smithy.Schema
-
-var BotChannelAssociation_botAlias *smithy.Schema
-
-var BotChannelAssociation_botName *smithy.Schema
-
-var BotChannelAssociation_createdDate *smithy.Schema
-
-var BotChannelAssociation_type *smithy.Schema
-
-var BotChannelAssociation_botConfiguration *smithy.Schema
-
-var BotChannelAssociation_status *smithy.Schema
-
-var BotChannelAssociation_failureReason *smithy.Schema
-
-var _BotChannelAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotChannelAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _BotChannelAssociationList_member *smithy.Schema
-
-var _BotChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var BotMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotMetadata",
-}, smithy.ShapeTypeStructure, 6)
-var BotMetadata_name *smithy.Schema
-
-var BotMetadata_description *smithy.Schema
-
-var BotMetadata_status *smithy.Schema
-
-var BotMetadata_lastUpdatedDate *smithy.Schema
-
-var BotMetadata_createdDate *smithy.Schema
-
-var BotMetadata_version *smithy.Schema
-
-var _BotMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BotMetadataList_member *smithy.Schema
-
-var _BotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotName",
-}, smithy.ShapeTypeString, 0)
-
-var _BotVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotVersions",
-}, smithy.ShapeTypeList, 1)
-var _BotVersions_member *smithy.Schema
-
-var BuiltinIntentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var BuiltinIntentMetadata_signature *smithy.Schema
-
-var BuiltinIntentMetadata_supportedLocales *smithy.Schema
-
-var _BuiltinIntentMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BuiltinIntentMetadataList_member *smithy.Schema
-
-var _BuiltinIntentSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentSignature",
-}, smithy.ShapeTypeString, 0)
-
-var BuiltinIntentSlot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentSlot",
-}, smithy.ShapeTypeStructure, 1)
-var BuiltinIntentSlot_name *smithy.Schema
-
-var _BuiltinIntentSlotList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentSlotList",
-}, smithy.ShapeTypeList, 1)
-var _BuiltinIntentSlotList_member *smithy.Schema
-
-var BuiltinSlotTypeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinSlotTypeMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var BuiltinSlotTypeMetadata_signature *smithy.Schema
-
-var BuiltinSlotTypeMetadata_supportedLocales *smithy.Schema
-
-var _BuiltinSlotTypeMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinSlotTypeMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BuiltinSlotTypeMetadataList_member *smithy.Schema
-
-var _BuiltinSlotTypeSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinSlotTypeSignature",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelConfigurationMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ChannelConfigurationMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ChannelConfigurationMap_key *smithy.Schema
-
-var _ChannelConfigurationMap_value *smithy.Schema
-
-var ChannelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ChannelStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ChannelStatus_IN_PROGRESS *smithy.Schema
-
-var ChannelStatus_CREATED *smithy.Schema
-
-var ChannelStatus_FAILED *smithy.Schema
-
-var ChannelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ChannelType",
-}, smithy.ShapeTypeEnum, 4)
-var ChannelType_FACEBOOK *smithy.Schema
-
-var ChannelType_SLACK *smithy.Schema
-
-var ChannelType_TWILIO_SMS *smithy.Schema
-
-var ChannelType_KIK *smithy.Schema
-
-var CodeHook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CodeHook",
-}, smithy.ShapeTypeStructure, 2)
-var CodeHook_uri *smithy.Schema
-
-var CodeHook_messageVersion *smithy.Schema
-
-var _ConfidenceThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConfidenceThreshold",
-}, smithy.ShapeTypeDouble, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _ContentString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContentString",
-}, smithy.ShapeTypeString, 0)
-
-var ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContentType",
-}, smithy.ShapeTypeEnum, 3)
-var ContentType_PLAIN_TEXT *smithy.Schema
-
-var ContentType_SSML *smithy.Schema
-
-var ContentType_CUSTOM_PAYLOAD *smithy.Schema
-
-var _ContextTimeToLiveInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContextTimeToLiveInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ContextTurnsToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContextTurnsToLive",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConversationLogsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConversationLogsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ConversationLogsRequest_logSettings *smithy.Schema
-
-var ConversationLogsRequest_iamRoleArn *smithy.Schema
-
-var ConversationLogsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConversationLogsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ConversationLogsResponse_logSettings *smithy.Schema
-
-var ConversationLogsResponse_iamRoleArn *smithy.Schema
-
-var _Count = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Count",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CustomOrBuiltinSlotTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CustomOrBuiltinSlotTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Destination",
-}, smithy.ShapeTypeEnum, 2)
-var Destination_CLOUDWATCH_LOGS *smithy.Schema
-
-var Destination_S3 *smithy.Schema
-
-var EnumerationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "EnumerationValue",
-}, smithy.ShapeTypeStructure, 2)
-var EnumerationValue_value *smithy.Schema
-
-var EnumerationValue_synonyms *smithy.Schema
-
-var _EnumerationValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "EnumerationValues",
-}, smithy.ShapeTypeList, 1)
-var _EnumerationValues_member *smithy.Schema
-
-var ExportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ExportStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ExportStatus_IN_PROGRESS *smithy.Schema
-
-var ExportStatus_READY *smithy.Schema
-
-var ExportStatus_FAILED *smithy.Schema
-
-var ExportType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ExportType",
-}, smithy.ShapeTypeEnum, 2)
-var ExportType_ALEXA_SKILLS_KIT *smithy.Schema
-
-var ExportType_LEX *smithy.Schema
-
-var FollowUpPrompt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "FollowUpPrompt",
-}, smithy.ShapeTypeStructure, 2)
-var FollowUpPrompt_prompt *smithy.Schema
-
-var FollowUpPrompt_rejectionStatement *smithy.Schema
-
-var FulfillmentActivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "FulfillmentActivity",
-}, smithy.ShapeTypeStructure, 2)
-var FulfillmentActivity_type *smithy.Schema
-
-var FulfillmentActivity_codeHook *smithy.Schema
-
-var FulfillmentActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "FulfillmentActivityType",
-}, smithy.ShapeTypeEnum, 2)
-var FulfillmentActivityType_RETURN_INTENT *smithy.Schema
-
-var FulfillmentActivityType_CODE_HOOK *smithy.Schema
-
-var _GroupNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GroupNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ImportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ImportStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ImportStatus_IN_PROGRESS *smithy.Schema
-
-var ImportStatus_COMPLETE *smithy.Schema
-
-var ImportStatus_FAILED *smithy.Schema
-
-var InputContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InputContext",
-}, smithy.ShapeTypeStructure, 1)
-var InputContext_name *smithy.Schema
-
-var _InputContextList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InputContextList",
-}, smithy.ShapeTypeList, 1)
-var _InputContextList_member *smithy.Schema
-
-var _InputContextName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InputContextName",
-}, smithy.ShapeTypeString, 0)
-
-var Intent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Intent",
-}, smithy.ShapeTypeStructure, 2)
-var Intent_intentName *smithy.Schema
-
-var Intent_intentVersion *smithy.Schema
-
-var _IntentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentList",
-}, smithy.ShapeTypeList, 1)
-var _IntentList_member *smithy.Schema
-
-var IntentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var IntentMetadata_name *smithy.Schema
-
-var IntentMetadata_description *smithy.Schema
-
-var IntentMetadata_lastUpdatedDate *smithy.Schema
-
-var IntentMetadata_createdDate *smithy.Schema
-
-var IntentMetadata_version *smithy.Schema
-
-var _IntentMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _IntentMetadataList_member *smithy.Schema
-
-var _IntentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentName",
-}, smithy.ShapeTypeString, 0)
-
-var _IntentUtteranceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentUtteranceList",
-}, smithy.ShapeTypeList, 1)
-var _IntentUtteranceList_member *smithy.Schema
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_message *smithy.Schema
-
-var KendraConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "KendraConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var KendraConfiguration_kendraIndex *smithy.Schema
-
-var KendraConfiguration_queryFilterString *smithy.Schema
-
-var KendraConfiguration_role *smithy.Schema
-
-var _KendraIndexArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "KendraIndexArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LambdaARN",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var LimitExceededException_retryAfterSeconds *smithy.Schema
-
-var LimitExceededException_message *smithy.Schema
-
-var _ListOfUtterance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListOfUtterance",
-}, smithy.ShapeTypeList, 1)
-var _ListOfUtterance_member *smithy.Schema
-
-var _ListsOfUtterances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListsOfUtterances",
-}, smithy.ShapeTypeList, 1)
-var _ListsOfUtterances_member *smithy.Schema
-
-var Locale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Locale",
-}, smithy.ShapeTypeEnum, 13)
-var Locale_DE_DE *smithy.Schema
-
-var Locale_EN_AU *smithy.Schema
-
-var Locale_EN_GB *smithy.Schema
-
-var Locale_EN_IN *smithy.Schema
-
-var Locale_EN_US *smithy.Schema
-
-var Locale_ES_419 *smithy.Schema
-
-var Locale_ES_ES *smithy.Schema
-
-var Locale_ES_US *smithy.Schema
-
-var Locale_FR_FR *smithy.Schema
-
-var Locale_FR_CA *smithy.Schema
-
-var Locale_IT_IT *smithy.Schema
-
-var Locale_JA_JP *smithy.Schema
-
-var Locale_KO_KR *smithy.Schema
-
-var _LocaleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LocaleList",
-}, smithy.ShapeTypeList, 1)
-var _LocaleList_member *smithy.Schema
-
-var LogSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var LogSettingsRequest_logType *smithy.Schema
-
-var LogSettingsRequest_destination *smithy.Schema
-
-var LogSettingsRequest_kmsKeyArn *smithy.Schema
-
-var LogSettingsRequest_resourceArn *smithy.Schema
-
-var _LogSettingsRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsRequestList",
-}, smithy.ShapeTypeList, 1)
-var _LogSettingsRequestList_member *smithy.Schema
-
-var LogSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var LogSettingsResponse_logType *smithy.Schema
-
-var LogSettingsResponse_destination *smithy.Schema
-
-var LogSettingsResponse_kmsKeyArn *smithy.Schema
-
-var LogSettingsResponse_resourceArn *smithy.Schema
-
-var LogSettingsResponse_resourcePrefix *smithy.Schema
-
-var _LogSettingsResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsResponseList",
-}, smithy.ShapeTypeList, 1)
-var _LogSettingsResponseList_member *smithy.Schema
-
-var LogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 2)
-var LogType_AUDIO *smithy.Schema
-
-var LogType_TEXT *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MergeStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MergeStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var MergeStrategy_OVERWRITE_LATEST *smithy.Schema
-
-var MergeStrategy_FAIL_ON_CONFLICT *smithy.Schema
-
-var Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Message",
-}, smithy.ShapeTypeStructure, 3)
-var Message_contentType *smithy.Schema
-
-var Message_content *smithy.Schema
-
-var Message_groupNumber *smithy.Schema
-
-var _MessageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MessageList",
-}, smithy.ShapeTypeList, 1)
-var _MessageList_member *smithy.Schema
-
-var _MessageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MessageVersion",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationAlert = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlert",
-}, smithy.ShapeTypeStructure, 4)
-var MigrationAlert_type *smithy.Schema
-
-var MigrationAlert_message *smithy.Schema
-
-var MigrationAlert_details *smithy.Schema
-
-var MigrationAlert_referenceURLs *smithy.Schema
-
-var _MigrationAlertDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertDetail",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationAlertDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertDetails",
-}, smithy.ShapeTypeList, 1)
-var _MigrationAlertDetails_member *smithy.Schema
-
-var _MigrationAlertMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationAlertReferenceURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertReferenceURL",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationAlertReferenceURLs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertReferenceURLs",
-}, smithy.ShapeTypeList, 1)
-var _MigrationAlertReferenceURLs_member *smithy.Schema
-
-var _MigrationAlerts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlerts",
-}, smithy.ShapeTypeList, 1)
-var _MigrationAlerts_member *smithy.Schema
-
-var MigrationAlertType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertType",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationAlertType_ERROR *smithy.Schema
-
-var MigrationAlertType_WARN *smithy.Schema
-
-var _MigrationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationId",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationSortAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationSortAttribute",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationSortAttribute_V1_BOT_NAME *smithy.Schema
-
-var MigrationSortAttribute_MIGRATION_DATE_TIME *smithy.Schema
-
-var MigrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var MigrationStatus_IN_PROGRESS *smithy.Schema
-
-var MigrationStatus_COMPLETED *smithy.Schema
-
-var MigrationStatus_FAILED *smithy.Schema
-
-var MigrationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationStrategy_CREATE_NEW *smithy.Schema
-
-var MigrationStrategy_UPDATE_EXISTING *smithy.Schema
-
-var MigrationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationSummary",
-}, smithy.ShapeTypeStructure, 9)
-var MigrationSummary_migrationId *smithy.Schema
-
-var MigrationSummary_v1BotName *smithy.Schema
-
-var MigrationSummary_v1BotVersion *smithy.Schema
-
-var MigrationSummary_v1BotLocale *smithy.Schema
-
-var MigrationSummary_v2BotId *smithy.Schema
-
-var MigrationSummary_v2BotRole *smithy.Schema
-
-var MigrationSummary_migrationStatus *smithy.Schema
-
-var MigrationSummary_migrationStrategy *smithy.Schema
-
-var MigrationSummary_migrationTimestamp *smithy.Schema
-
-var _MigrationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MigrationSummaryList_member *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var _NumericalVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "NumericalVersion",
-}, smithy.ShapeTypeString, 0)
-
-var ObfuscationSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ObfuscationSetting",
-}, smithy.ShapeTypeEnum, 2)
-var ObfuscationSetting_NONE *smithy.Schema
-
-var ObfuscationSetting_DEFAULT_OBFUSCATION *smithy.Schema
-
-var OutputContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "OutputContext",
-}, smithy.ShapeTypeStructure, 3)
-var OutputContext_name *smithy.Schema
-
-var OutputContext_timeToLiveInSeconds *smithy.Schema
-
-var OutputContext_turnsToLive *smithy.Schema
-
-var _OutputContextList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "OutputContextList",
-}, smithy.ShapeTypeList, 1)
-var _OutputContextList_member *smithy.Schema
-
-var _OutputContextName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "OutputContextName",
-}, smithy.ShapeTypeString, 0)
-
-var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 412})
-var PreconditionFailedException_message *smithy.Schema
-
-var _Priority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Priority",
-}, smithy.ShapeTypeInteger, 0)
-
-var ProcessBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ProcessBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var ProcessBehavior_SAVE *smithy.Schema
-
-var ProcessBehavior_BUILD *smithy.Schema
-
-var Prompt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Prompt",
-}, smithy.ShapeTypeStructure, 3)
-var Prompt_messages *smithy.Schema
-
-var Prompt_maxAttempts *smithy.Schema
-
-var Prompt_responseCard *smithy.Schema
-
-var _PromptMaxAttempts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PromptMaxAttempts",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QueryFilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "QueryFilterString",
-}, smithy.ShapeTypeString, 0)
-
-var ReferenceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ReferenceType",
-}, smithy.ShapeTypeEnum, 4)
-var ReferenceType_INTENT *smithy.Schema
-
-var ReferenceType_BOT *smithy.Schema
-
-var ReferenceType_BOTALIAS *smithy.Schema
-
-var ReferenceType_BOTCHANNEL *smithy.Schema
-
-var _RegexPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "RegexPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceInUseException_referenceType *smithy.Schema
-
-var ResourceInUseException_exampleReference *smithy.Schema
-
-var _ResourcePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourcePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceReference",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceReference_name *smithy.Schema
-
-var ResourceReference_version *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 3)
-var ResourceType_BOT *smithy.Schema
-
-var ResourceType_INTENT *smithy.Schema
-
-var ResourceType_SLOT_TYPE *smithy.Schema
-
-var _ResponseCard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResponseCard",
-}, smithy.ShapeTypeString, 0)
-
-var _roleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "roleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SessionTTL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SessionTTL",
-}, smithy.ShapeTypeInteger, 0)
-
-var Slot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Slot",
-}, smithy.ShapeTypeStructure, 11)
-var Slot_name *smithy.Schema
-
-var Slot_description *smithy.Schema
-
-var Slot_slotConstraint *smithy.Schema
-
-var Slot_slotType *smithy.Schema
-
-var Slot_slotTypeVersion *smithy.Schema
-
-var Slot_valueElicitationPrompt *smithy.Schema
-
-var Slot_priority *smithy.Schema
-
-var Slot_sampleUtterances *smithy.Schema
-
-var Slot_responseCard *smithy.Schema
-
-var Slot_obfuscationSetting *smithy.Schema
-
-var Slot_defaultValueSpec *smithy.Schema
-
-var SlotConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotConstraint",
-}, smithy.ShapeTypeEnum, 2)
-var SlotConstraint_REQUIRED *smithy.Schema
-
-var SlotConstraint_OPTIONAL *smithy.Schema
-
-var SlotDefaultValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValue",
-}, smithy.ShapeTypeStructure, 1)
-var SlotDefaultValue_defaultValue *smithy.Schema
-
-var _SlotDefaultValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValueList",
-}, smithy.ShapeTypeList, 1)
-var _SlotDefaultValueList_member *smithy.Schema
-
-var SlotDefaultValueSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValueSpec",
-}, smithy.ShapeTypeStructure, 1)
-var SlotDefaultValueSpec_defaultValueList *smithy.Schema
-
-var _SlotDefaultValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValueString",
-}, smithy.ShapeTypeString, 0)
-
-var _SlotList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotList",
-}, smithy.ShapeTypeList, 1)
-var _SlotList_member *smithy.Schema
-
-var _SlotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotName",
-}, smithy.ShapeTypeString, 0)
-
-var SlotTypeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SlotTypeConfiguration_regexConfiguration *smithy.Schema
-
-var _SlotTypeConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _SlotTypeConfigurations_member *smithy.Schema
-
-var SlotTypeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var SlotTypeMetadata_name *smithy.Schema
-
-var SlotTypeMetadata_description *smithy.Schema
-
-var SlotTypeMetadata_lastUpdatedDate *smithy.Schema
-
-var SlotTypeMetadata_createdDate *smithy.Schema
-
-var SlotTypeMetadata_version *smithy.Schema
-
-var _SlotTypeMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _SlotTypeMetadataList_member *smithy.Schema
-
-var _SlotTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var SlotTypeRegexConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeRegexConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SlotTypeRegexConfiguration_pattern *smithy.Schema
-
-var _SlotUtteranceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotUtteranceList",
-}, smithy.ShapeTypeList, 1)
-var _SlotUtteranceList_member *smithy.Schema
-
-var SlotValueSelectionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotValueSelectionStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var SlotValueSelectionStrategy_ORIGINAL_VALUE *smithy.Schema
-
-var SlotValueSelectionStrategy_TOP_RESOLUTION *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var Statement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Statement",
-}, smithy.ShapeTypeStructure, 2)
-var Statement_messages *smithy.Schema
-
-var Statement_responseCard *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 5)
-var Status_BUILDING *smithy.Schema
-
-var Status_READY *smithy.Schema
-
-var Status_READY_BASIC_TESTING *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var Status_NOT_BUILT *smithy.Schema
-
-var StatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StatusType",
-}, smithy.ShapeTypeEnum, 2)
-var StatusType_DETECTED *smithy.Schema
-
-var StatusType_MISSED *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SynonymList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SynonymList",
-}, smithy.ShapeTypeList, 1)
-var _SynonymList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0)
-
-var _Utterance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Utterance",
-}, smithy.ShapeTypeString, 0)
-
-var UtteranceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UtteranceData",
-}, smithy.ShapeTypeStructure, 5)
-var UtteranceData_utteranceString *smithy.Schema
-
-var UtteranceData_count *smithy.Schema
-
-var UtteranceData_distinctUsers *smithy.Schema
-
-var UtteranceData_firstUtteredDate *smithy.Schema
-
-var UtteranceData_lastUtteredDate *smithy.Schema
-
-var UtteranceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UtteranceList",
-}, smithy.ShapeTypeStructure, 2)
-var UtteranceList_botVersion *smithy.Schema
-
-var UtteranceList_utterances *smithy.Schema
-
-var _UtteranceString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UtteranceString",
-}, smithy.ShapeTypeString, 0)
-
-var _V2BotId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "V2BotId",
-}, smithy.ShapeTypeString, 0)
-
-var _V2BotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "V2BotName",
-}, smithy.ShapeTypeString, 0)
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var CreateBotVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateBotVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBotVersionRequest_name *smithy.Schema
-
-var CreateBotVersionRequest_checksum *smithy.Schema
-
-var CreateBotVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateBotVersionResponse",
-}, smithy.ShapeTypeStructure, 17)
-var CreateBotVersionResponse_name *smithy.Schema
-
-var CreateBotVersionResponse_description *smithy.Schema
-
-var CreateBotVersionResponse_intents *smithy.Schema
-
-var CreateBotVersionResponse_clarificationPrompt *smithy.Schema
-
-var CreateBotVersionResponse_abortStatement *smithy.Schema
-
-var CreateBotVersionResponse_status *smithy.Schema
-
-var CreateBotVersionResponse_failureReason *smithy.Schema
-
-var CreateBotVersionResponse_lastUpdatedDate *smithy.Schema
-
-var CreateBotVersionResponse_createdDate *smithy.Schema
-
-var CreateBotVersionResponse_idleSessionTTLInSeconds *smithy.Schema
-
-var CreateBotVersionResponse_voiceId *smithy.Schema
-
-var CreateBotVersionResponse_checksum *smithy.Schema
-
-var CreateBotVersionResponse_version *smithy.Schema
-
-var CreateBotVersionResponse_locale *smithy.Schema
-
-var CreateBotVersionResponse_childDirected *smithy.Schema
-
-var CreateBotVersionResponse_enableModelImprovements *smithy.Schema
-
-var CreateBotVersionResponse_detectSentiment *smithy.Schema
-
-var CreateIntentVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateIntentVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateIntentVersionRequest_name *smithy.Schema
-
-var CreateIntentVersionRequest_checksum *smithy.Schema
-
-var CreateIntentVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateIntentVersionResponse",
-}, smithy.ShapeTypeStructure, 18)
-var CreateIntentVersionResponse_name *smithy.Schema
-
-var CreateIntentVersionResponse_description *smithy.Schema
-
-var CreateIntentVersionResponse_slots *smithy.Schema
-
-var CreateIntentVersionResponse_sampleUtterances *smithy.Schema
-
-var CreateIntentVersionResponse_confirmationPrompt *smithy.Schema
-
-var CreateIntentVersionResponse_rejectionStatement *smithy.Schema
-
-var CreateIntentVersionResponse_followUpPrompt *smithy.Schema
-
-var CreateIntentVersionResponse_conclusionStatement *smithy.Schema
-
-var CreateIntentVersionResponse_dialogCodeHook *smithy.Schema
-
-var CreateIntentVersionResponse_fulfillmentActivity *smithy.Schema
-
-var CreateIntentVersionResponse_parentIntentSignature *smithy.Schema
-
-var CreateIntentVersionResponse_lastUpdatedDate *smithy.Schema
-
-var CreateIntentVersionResponse_createdDate *smithy.Schema
-
-var CreateIntentVersionResponse_version *smithy.Schema
-
-var CreateIntentVersionResponse_checksum *smithy.Schema
-
-var CreateIntentVersionResponse_kendraConfiguration *smithy.Schema
-
-var CreateIntentVersionResponse_inputContexts *smithy.Schema
-
-var CreateIntentVersionResponse_outputContexts *smithy.Schema
-
-var CreateSlotTypeVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateSlotTypeVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSlotTypeVersionRequest_name *smithy.Schema
-
-var CreateSlotTypeVersionRequest_checksum *smithy.Schema
-
-var CreateSlotTypeVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateSlotTypeVersionResponse",
-}, smithy.ShapeTypeStructure, 10)
-var CreateSlotTypeVersionResponse_name *smithy.Schema
-
-var CreateSlotTypeVersionResponse_description *smithy.Schema
-
-var CreateSlotTypeVersionResponse_enumerationValues *smithy.Schema
-
-var CreateSlotTypeVersionResponse_lastUpdatedDate *smithy.Schema
-
-var CreateSlotTypeVersionResponse_createdDate *smithy.Schema
-
-var CreateSlotTypeVersionResponse_version *smithy.Schema
-
-var CreateSlotTypeVersionResponse_checksum *smithy.Schema
-
-var CreateSlotTypeVersionResponse_valueSelectionStrategy *smithy.Schema
-
-var CreateSlotTypeVersionResponse_parentSlotTypeSignature *smithy.Schema
-
-var CreateSlotTypeVersionResponse_slotTypeConfigurations *smithy.Schema
-
-var DeleteBotAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotAliasRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBotAliasRequest_name *smithy.Schema
-
-var DeleteBotAliasRequest_botName *smithy.Schema
-
-var DeleteBotChannelAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotChannelAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteBotChannelAssociationRequest_name *smithy.Schema
-
-var DeleteBotChannelAssociationRequest_botName *smithy.Schema
-
-var DeleteBotChannelAssociationRequest_botAlias *smithy.Schema
-
-var DeleteBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBotRequest_name *smithy.Schema
-
-var DeleteBotVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBotVersionRequest_name *smithy.Schema
-
-var DeleteBotVersionRequest_version *smithy.Schema
-
-var DeleteIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIntentRequest_name *smithy.Schema
-
-var DeleteIntentVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntentVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIntentVersionRequest_name *smithy.Schema
-
-var DeleteIntentVersionRequest_version *smithy.Schema
-
-var DeleteSlotTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotTypeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSlotTypeRequest_name *smithy.Schema
-
-var DeleteSlotTypeVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotTypeVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSlotTypeVersionRequest_name *smithy.Schema
-
-var DeleteSlotTypeVersionRequest_version *smithy.Schema
-
-var DeleteUtterancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteUtterancesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteUtterancesRequest_botName *smithy.Schema
-
-var DeleteUtterancesRequest_userId *smithy.Schema
-
-var GetBotAliasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetBotAliasesRequest_botName *smithy.Schema
-
-var GetBotAliasesRequest_nextToken *smithy.Schema
-
-var GetBotAliasesRequest_maxResults *smithy.Schema
-
-var GetBotAliasesRequest_nameContains *smithy.Schema
-
-var GetBotAliasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotAliasesResponse_BotAliases *smithy.Schema
-
-var GetBotAliasesResponse_nextToken *smithy.Schema
-
-var GetBotAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotAliasRequest_name *smithy.Schema
-
-var GetBotAliasRequest_botName *smithy.Schema
-
-var GetBotAliasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetBotAliasResponse_name *smithy.Schema
-
-var GetBotAliasResponse_description *smithy.Schema
-
-var GetBotAliasResponse_botVersion *smithy.Schema
-
-var GetBotAliasResponse_botName *smithy.Schema
-
-var GetBotAliasResponse_lastUpdatedDate *smithy.Schema
-
-var GetBotAliasResponse_createdDate *smithy.Schema
-
-var GetBotAliasResponse_checksum *smithy.Schema
-
-var GetBotAliasResponse_conversationLogs *smithy.Schema
-
-var GetBotChannelAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBotChannelAssociationRequest_name *smithy.Schema
-
-var GetBotChannelAssociationRequest_botName *smithy.Schema
-
-var GetBotChannelAssociationRequest_botAlias *smithy.Schema
-
-var GetBotChannelAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetBotChannelAssociationResponse_name *smithy.Schema
-
-var GetBotChannelAssociationResponse_description *smithy.Schema
-
-var GetBotChannelAssociationResponse_botAlias *smithy.Schema
-
-var GetBotChannelAssociationResponse_botName *smithy.Schema
-
-var GetBotChannelAssociationResponse_createdDate *smithy.Schema
-
-var GetBotChannelAssociationResponse_type *smithy.Schema
-
-var GetBotChannelAssociationResponse_botConfiguration *smithy.Schema
-
-var GetBotChannelAssociationResponse_status *smithy.Schema
-
-var GetBotChannelAssociationResponse_failureReason *smithy.Schema
-
-var GetBotChannelAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetBotChannelAssociationsRequest_botName *smithy.Schema
-
-var GetBotChannelAssociationsRequest_botAlias *smithy.Schema
-
-var GetBotChannelAssociationsRequest_nextToken *smithy.Schema
-
-var GetBotChannelAssociationsRequest_maxResults *smithy.Schema
-
-var GetBotChannelAssociationsRequest_nameContains *smithy.Schema
-
-var GetBotChannelAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotChannelAssociationsResponse_botChannelAssociations *smithy.Schema
-
-var GetBotChannelAssociationsResponse_nextToken *smithy.Schema
-
-var GetBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotRequest_name *smithy.Schema
-
-var GetBotRequest_versionOrAlias *smithy.Schema
-
-var GetBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotResponse",
-}, smithy.ShapeTypeStructure, 18)
-var GetBotResponse_name *smithy.Schema
-
-var GetBotResponse_description *smithy.Schema
-
-var GetBotResponse_intents *smithy.Schema
-
-var GetBotResponse_enableModelImprovements *smithy.Schema
-
-var GetBotResponse_nluIntentConfidenceThreshold *smithy.Schema
-
-var GetBotResponse_clarificationPrompt *smithy.Schema
-
-var GetBotResponse_abortStatement *smithy.Schema
-
-var GetBotResponse_status *smithy.Schema
-
-var GetBotResponse_failureReason *smithy.Schema
-
-var GetBotResponse_lastUpdatedDate *smithy.Schema
-
-var GetBotResponse_createdDate *smithy.Schema
-
-var GetBotResponse_idleSessionTTLInSeconds *smithy.Schema
-
-var GetBotResponse_voiceId *smithy.Schema
-
-var GetBotResponse_checksum *smithy.Schema
-
-var GetBotResponse_version *smithy.Schema
-
-var GetBotResponse_locale *smithy.Schema
-
-var GetBotResponse_childDirected *smithy.Schema
-
-var GetBotResponse_detectSentiment *smithy.Schema
-
-var GetBotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBotsRequest_nextToken *smithy.Schema
-
-var GetBotsRequest_maxResults *smithy.Schema
-
-var GetBotsRequest_nameContains *smithy.Schema
-
-var GetBotsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotsResponse_bots *smithy.Schema
-
-var GetBotsResponse_nextToken *smithy.Schema
-
-var GetBotVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBotVersionsRequest_name *smithy.Schema
-
-var GetBotVersionsRequest_nextToken *smithy.Schema
-
-var GetBotVersionsRequest_maxResults *smithy.Schema
-
-var GetBotVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotVersionsResponse_bots *smithy.Schema
-
-var GetBotVersionsResponse_nextToken *smithy.Schema
-
-var GetBuiltinIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetBuiltinIntentRequest_signature *smithy.Schema
-
-var GetBuiltinIntentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetBuiltinIntentResponse_signature *smithy.Schema
-
-var GetBuiltinIntentResponse_supportedLocales *smithy.Schema
-
-var GetBuiltinIntentResponse_slots *smithy.Schema
-
-var GetBuiltinIntentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetBuiltinIntentsRequest_locale *smithy.Schema
-
-var GetBuiltinIntentsRequest_signatureContains *smithy.Schema
-
-var GetBuiltinIntentsRequest_nextToken *smithy.Schema
-
-var GetBuiltinIntentsRequest_maxResults *smithy.Schema
-
-var GetBuiltinIntentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBuiltinIntentsResponse_intents *smithy.Schema
-
-var GetBuiltinIntentsResponse_nextToken *smithy.Schema
-
-var GetBuiltinSlotTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinSlotTypesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetBuiltinSlotTypesRequest_locale *smithy.Schema
-
-var GetBuiltinSlotTypesRequest_signatureContains *smithy.Schema
-
-var GetBuiltinSlotTypesRequest_nextToken *smithy.Schema
-
-var GetBuiltinSlotTypesRequest_maxResults *smithy.Schema
-
-var GetBuiltinSlotTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinSlotTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBuiltinSlotTypesResponse_slotTypes *smithy.Schema
-
-var GetBuiltinSlotTypesResponse_nextToken *smithy.Schema
-
-var GetExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetExportRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetExportRequest_name *smithy.Schema
-
-var GetExportRequest_version *smithy.Schema
-
-var GetExportRequest_resourceType *smithy.Schema
-
-var GetExportRequest_exportType *smithy.Schema
-
-var GetExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetExportResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetExportResponse_name *smithy.Schema
-
-var GetExportResponse_version *smithy.Schema
-
-var GetExportResponse_resourceType *smithy.Schema
-
-var GetExportResponse_exportType *smithy.Schema
-
-var GetExportResponse_exportStatus *smithy.Schema
-
-var GetExportResponse_failureReason *smithy.Schema
-
-var GetExportResponse_url *smithy.Schema
-
-var GetImportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetImportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetImportRequest_importId *smithy.Schema
-
-var GetImportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetImportResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetImportResponse_name *smithy.Schema
-
-var GetImportResponse_resourceType *smithy.Schema
-
-var GetImportResponse_mergeStrategy *smithy.Schema
-
-var GetImportResponse_importId *smithy.Schema
-
-var GetImportResponse_importStatus *smithy.Schema
-
-var GetImportResponse_failureReason *smithy.Schema
-
-var GetImportResponse_createdDate *smithy.Schema
-
-var GetIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntentRequest_name *smithy.Schema
-
-var GetIntentRequest_version *smithy.Schema
-
-var GetIntentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentResponse",
-}, smithy.ShapeTypeStructure, 18)
-var GetIntentResponse_name *smithy.Schema
-
-var GetIntentResponse_description *smithy.Schema
-
-var GetIntentResponse_slots *smithy.Schema
-
-var GetIntentResponse_sampleUtterances *smithy.Schema
-
-var GetIntentResponse_confirmationPrompt *smithy.Schema
-
-var GetIntentResponse_rejectionStatement *smithy.Schema
-
-var GetIntentResponse_followUpPrompt *smithy.Schema
-
-var GetIntentResponse_conclusionStatement *smithy.Schema
-
-var GetIntentResponse_dialogCodeHook *smithy.Schema
-
-var GetIntentResponse_fulfillmentActivity *smithy.Schema
-
-var GetIntentResponse_parentIntentSignature *smithy.Schema
-
-var GetIntentResponse_lastUpdatedDate *smithy.Schema
-
-var GetIntentResponse_createdDate *smithy.Schema
-
-var GetIntentResponse_version *smithy.Schema
-
-var GetIntentResponse_checksum *smithy.Schema
-
-var GetIntentResponse_kendraConfiguration *smithy.Schema
-
-var GetIntentResponse_inputContexts *smithy.Schema
-
-var GetIntentResponse_outputContexts *smithy.Schema
-
-var GetIntentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIntentsRequest_nextToken *smithy.Schema
-
-var GetIntentsRequest_maxResults *smithy.Schema
-
-var GetIntentsRequest_nameContains *smithy.Schema
-
-var GetIntentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntentsResponse_intents *smithy.Schema
-
-var GetIntentsResponse_nextToken *smithy.Schema
-
-var GetIntentVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIntentVersionsRequest_name *smithy.Schema
-
-var GetIntentVersionsRequest_nextToken *smithy.Schema
-
-var GetIntentVersionsRequest_maxResults *smithy.Schema
-
-var GetIntentVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntentVersionsResponse_intents *smithy.Schema
-
-var GetIntentVersionsResponse_nextToken *smithy.Schema
-
-var GetMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMigrationRequest_migrationId *smithy.Schema
-
-var GetMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetMigrationResponse_migrationId *smithy.Schema
-
-var GetMigrationResponse_v1BotName *smithy.Schema
-
-var GetMigrationResponse_v1BotVersion *smithy.Schema
-
-var GetMigrationResponse_v1BotLocale *smithy.Schema
-
-var GetMigrationResponse_v2BotId *smithy.Schema
-
-var GetMigrationResponse_v2BotRole *smithy.Schema
-
-var GetMigrationResponse_migrationStatus *smithy.Schema
-
-var GetMigrationResponse_migrationStrategy *smithy.Schema
-
-var GetMigrationResponse_migrationTimestamp *smithy.Schema
-
-var GetMigrationResponse_alerts *smithy.Schema
-
-var GetMigrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetMigrationsRequest_sortByAttribute *smithy.Schema
-
-var GetMigrationsRequest_sortByOrder *smithy.Schema
-
-var GetMigrationsRequest_v1BotNameContains *smithy.Schema
-
-var GetMigrationsRequest_migrationStatusEquals *smithy.Schema
-
-var GetMigrationsRequest_maxResults *smithy.Schema
-
-var GetMigrationsRequest_nextToken *smithy.Schema
-
-var GetMigrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetMigrationsResponse_migrationSummaries *smithy.Schema
-
-var GetMigrationsResponse_nextToken *smithy.Schema
-
-var GetSlotTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSlotTypeRequest_name *smithy.Schema
-
-var GetSlotTypeRequest_version *smithy.Schema
-
-var GetSlotTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetSlotTypeResponse_name *smithy.Schema
-
-var GetSlotTypeResponse_description *smithy.Schema
-
-var GetSlotTypeResponse_enumerationValues *smithy.Schema
-
-var GetSlotTypeResponse_lastUpdatedDate *smithy.Schema
-
-var GetSlotTypeResponse_createdDate *smithy.Schema
-
-var GetSlotTypeResponse_version *smithy.Schema
-
-var GetSlotTypeResponse_checksum *smithy.Schema
-
-var GetSlotTypeResponse_valueSelectionStrategy *smithy.Schema
-
-var GetSlotTypeResponse_parentSlotTypeSignature *smithy.Schema
-
-var GetSlotTypeResponse_slotTypeConfigurations *smithy.Schema
-
-var GetSlotTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetSlotTypesRequest_nextToken *smithy.Schema
-
-var GetSlotTypesRequest_maxResults *smithy.Schema
-
-var GetSlotTypesRequest_nameContains *smithy.Schema
-
-var GetSlotTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSlotTypesResponse_slotTypes *smithy.Schema
-
-var GetSlotTypesResponse_nextToken *smithy.Schema
-
-var GetSlotTypeVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetSlotTypeVersionsRequest_name *smithy.Schema
-
-var GetSlotTypeVersionsRequest_nextToken *smithy.Schema
-
-var GetSlotTypeVersionsRequest_maxResults *smithy.Schema
-
-var GetSlotTypeVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSlotTypeVersionsResponse_slotTypes *smithy.Schema
-
-var GetSlotTypeVersionsResponse_nextToken *smithy.Schema
-
-var GetUtterancesViewRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetUtterancesViewRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetUtterancesViewRequest_botName *smithy.Schema
-
-var GetUtterancesViewRequest_botVersions *smithy.Schema
-
-var GetUtterancesViewRequest_statusType *smithy.Schema
-
-var GetUtterancesViewResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetUtterancesViewResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetUtterancesViewResponse_botName *smithy.Schema
-
-var GetUtterancesViewResponse_utterances *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutBotAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotAliasRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutBotAliasRequest_name *smithy.Schema
-
-var PutBotAliasRequest_description *smithy.Schema
-
-var PutBotAliasRequest_botVersion *smithy.Schema
-
-var PutBotAliasRequest_botName *smithy.Schema
-
-var PutBotAliasRequest_checksum *smithy.Schema
-
-var PutBotAliasRequest_conversationLogs *smithy.Schema
-
-var PutBotAliasRequest_tags *smithy.Schema
-
-var PutBotAliasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotAliasResponse",
-}, smithy.ShapeTypeStructure, 9)
-var PutBotAliasResponse_name *smithy.Schema
-
-var PutBotAliasResponse_description *smithy.Schema
-
-var PutBotAliasResponse_botVersion *smithy.Schema
-
-var PutBotAliasResponse_botName *smithy.Schema
-
-var PutBotAliasResponse_lastUpdatedDate *smithy.Schema
-
-var PutBotAliasResponse_createdDate *smithy.Schema
-
-var PutBotAliasResponse_checksum *smithy.Schema
-
-var PutBotAliasResponse_conversationLogs *smithy.Schema
-
-var PutBotAliasResponse_tags *smithy.Schema
-
-var PutBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotRequest",
-}, smithy.ShapeTypeStructure, 16)
-var PutBotRequest_name *smithy.Schema
-
-var PutBotRequest_description *smithy.Schema
-
-var PutBotRequest_intents *smithy.Schema
-
-var PutBotRequest_enableModelImprovements *smithy.Schema
-
-var PutBotRequest_nluIntentConfidenceThreshold *smithy.Schema
-
-var PutBotRequest_clarificationPrompt *smithy.Schema
-
-var PutBotRequest_abortStatement *smithy.Schema
-
-var PutBotRequest_idleSessionTTLInSeconds *smithy.Schema
-
-var PutBotRequest_voiceId *smithy.Schema
-
-var PutBotRequest_checksum *smithy.Schema
-
-var PutBotRequest_processBehavior *smithy.Schema
-
-var PutBotRequest_locale *smithy.Schema
-
-var PutBotRequest_childDirected *smithy.Schema
-
-var PutBotRequest_detectSentiment *smithy.Schema
-
-var PutBotRequest_createVersion *smithy.Schema
-
-var PutBotRequest_tags *smithy.Schema
-
-var PutBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotResponse",
-}, smithy.ShapeTypeStructure, 20)
-var PutBotResponse_name *smithy.Schema
-
-var PutBotResponse_description *smithy.Schema
-
-var PutBotResponse_intents *smithy.Schema
-
-var PutBotResponse_enableModelImprovements *smithy.Schema
-
-var PutBotResponse_nluIntentConfidenceThreshold *smithy.Schema
-
-var PutBotResponse_clarificationPrompt *smithy.Schema
-
-var PutBotResponse_abortStatement *smithy.Schema
-
-var PutBotResponse_status *smithy.Schema
-
-var PutBotResponse_failureReason *smithy.Schema
-
-var PutBotResponse_lastUpdatedDate *smithy.Schema
-
-var PutBotResponse_createdDate *smithy.Schema
-
-var PutBotResponse_idleSessionTTLInSeconds *smithy.Schema
-
-var PutBotResponse_voiceId *smithy.Schema
-
-var PutBotResponse_checksum *smithy.Schema
-
-var PutBotResponse_version *smithy.Schema
-
-var PutBotResponse_locale *smithy.Schema
-
-var PutBotResponse_childDirected *smithy.Schema
-
-var PutBotResponse_createVersion *smithy.Schema
-
-var PutBotResponse_detectSentiment *smithy.Schema
-
-var PutBotResponse_tags *smithy.Schema
-
-var PutIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutIntentRequest",
-}, smithy.ShapeTypeStructure, 16)
-var PutIntentRequest_name *smithy.Schema
-
-var PutIntentRequest_description *smithy.Schema
-
-var PutIntentRequest_slots *smithy.Schema
-
-var PutIntentRequest_sampleUtterances *smithy.Schema
-
-var PutIntentRequest_confirmationPrompt *smithy.Schema
-
-var PutIntentRequest_rejectionStatement *smithy.Schema
-
-var PutIntentRequest_followUpPrompt *smithy.Schema
-
-var PutIntentRequest_conclusionStatement *smithy.Schema
-
-var PutIntentRequest_dialogCodeHook *smithy.Schema
-
-var PutIntentRequest_fulfillmentActivity *smithy.Schema
-
-var PutIntentRequest_parentIntentSignature *smithy.Schema
-
-var PutIntentRequest_checksum *smithy.Schema
-
-var PutIntentRequest_createVersion *smithy.Schema
-
-var PutIntentRequest_kendraConfiguration *smithy.Schema
-
-var PutIntentRequest_inputContexts *smithy.Schema
-
-var PutIntentRequest_outputContexts *smithy.Schema
-
-var PutIntentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutIntentResponse",
-}, smithy.ShapeTypeStructure, 19)
-var PutIntentResponse_name *smithy.Schema
-
-var PutIntentResponse_description *smithy.Schema
-
-var PutIntentResponse_slots *smithy.Schema
-
-var PutIntentResponse_sampleUtterances *smithy.Schema
-
-var PutIntentResponse_confirmationPrompt *smithy.Schema
-
-var PutIntentResponse_rejectionStatement *smithy.Schema
-
-var PutIntentResponse_followUpPrompt *smithy.Schema
-
-var PutIntentResponse_conclusionStatement *smithy.Schema
-
-var PutIntentResponse_dialogCodeHook *smithy.Schema
-
-var PutIntentResponse_fulfillmentActivity *smithy.Schema
-
-var PutIntentResponse_parentIntentSignature *smithy.Schema
-
-var PutIntentResponse_lastUpdatedDate *smithy.Schema
-
-var PutIntentResponse_createdDate *smithy.Schema
-
-var PutIntentResponse_version *smithy.Schema
-
-var PutIntentResponse_checksum *smithy.Schema
-
-var PutIntentResponse_createVersion *smithy.Schema
-
-var PutIntentResponse_kendraConfiguration *smithy.Schema
-
-var PutIntentResponse_inputContexts *smithy.Schema
-
-var PutIntentResponse_outputContexts *smithy.Schema
-
-var PutSlotTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutSlotTypeRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PutSlotTypeRequest_name *smithy.Schema
-
-var PutSlotTypeRequest_description *smithy.Schema
-
-var PutSlotTypeRequest_enumerationValues *smithy.Schema
-
-var PutSlotTypeRequest_checksum *smithy.Schema
-
-var PutSlotTypeRequest_valueSelectionStrategy *smithy.Schema
-
-var PutSlotTypeRequest_createVersion *smithy.Schema
-
-var PutSlotTypeRequest_parentSlotTypeSignature *smithy.Schema
-
-var PutSlotTypeRequest_slotTypeConfigurations *smithy.Schema
-
-var PutSlotTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutSlotTypeResponse",
-}, smithy.ShapeTypeStructure, 11)
-var PutSlotTypeResponse_name *smithy.Schema
-
-var PutSlotTypeResponse_description *smithy.Schema
-
-var PutSlotTypeResponse_enumerationValues *smithy.Schema
-
-var PutSlotTypeResponse_lastUpdatedDate *smithy.Schema
-
-var PutSlotTypeResponse_createdDate *smithy.Schema
-
-var PutSlotTypeResponse_version *smithy.Schema
-
-var PutSlotTypeResponse_checksum *smithy.Schema
-
-var PutSlotTypeResponse_valueSelectionStrategy *smithy.Schema
-
-var PutSlotTypeResponse_createVersion *smithy.Schema
-
-var PutSlotTypeResponse_parentSlotTypeSignature *smithy.Schema
-
-var PutSlotTypeResponse_slotTypeConfigurations *smithy.Schema
-
-var StartImportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartImportRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartImportRequest_payload *smithy.Schema
-
-var StartImportRequest_resourceType *smithy.Schema
-
-var StartImportRequest_mergeStrategy *smithy.Schema
-
-var StartImportRequest_tags *smithy.Schema
-
-var StartImportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartImportResponse",
-}, smithy.ShapeTypeStructure, 7)
-var StartImportResponse_name *smithy.Schema
-
-var StartImportResponse_resourceType *smithy.Schema
-
-var StartImportResponse_mergeStrategy *smithy.Schema
-
-var StartImportResponse_importId *smithy.Schema
-
-var StartImportResponse_importStatus *smithy.Schema
-
-var StartImportResponse_tags *smithy.Schema
-
-var StartImportResponse_createdDate *smithy.Schema
-
-var StartMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartMigrationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartMigrationRequest_v1BotName *smithy.Schema
-
-var StartMigrationRequest_v1BotVersion *smithy.Schema
-
-var StartMigrationRequest_v2BotName *smithy.Schema
-
-var StartMigrationRequest_v2BotRole *smithy.Schema
-
-var StartMigrationRequest_migrationStrategy *smithy.Schema
-
-var StartMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartMigrationResponse",
-}, smithy.ShapeTypeStructure, 8)
-var StartMigrationResponse_v1BotName *smithy.Schema
-
-var StartMigrationResponse_v1BotVersion *smithy.Schema
-
-var StartMigrationResponse_v1BotLocale *smithy.Schema
-
-var StartMigrationResponse_v2BotId *smithy.Schema
-
-var StartMigrationResponse_v2BotRole *smithy.Schema
-
-var StartMigrationResponse_migrationId *smithy.Schema
-
-var StartMigrationResponse_migrationStrategy *smithy.Schema
-
-var StartMigrationResponse_migrationTimestamp *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _String)
-
-	LogType_AUDIO = LogType.AddMember("AUDIO", smithyprelude.Unit)
-
-	LogType_TEXT = LogType.AddMember("TEXT", smithyprelude.Unit)
-
-	Destination_CLOUDWATCH_LOGS = Destination.AddMember("CLOUDWATCH_LOGS", smithyprelude.Unit)
-
-	Destination_S3 = Destination.AddMember("S3", smithyprelude.Unit)
-
-	LogSettingsResponse_logType = LogSettingsResponse.AddMember("logType", LogType)
-
-	LogSettingsResponse_destination = LogSettingsResponse.AddMember("destination", Destination)
-
-	LogSettingsResponse_kmsKeyArn = LogSettingsResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	LogSettingsResponse_resourceArn = LogSettingsResponse.AddMember("resourceArn", _ResourceArn)
-
-	LogSettingsResponse_resourcePrefix = LogSettingsResponse.AddMember("resourcePrefix", _ResourcePrefix)
-
-	_LogSettingsResponseList_member = _LogSettingsResponseList.AddMember("member", LogSettingsResponse)
-
-	ConversationLogsResponse_logSettings = ConversationLogsResponse.AddMember("logSettings", _LogSettingsResponseList)
-
-	ConversationLogsResponse_iamRoleArn = ConversationLogsResponse.AddMember("iamRoleArn", _IamRoleArn)
-
-	BotAliasMetadata_name = BotAliasMetadata.AddMember("name", _AliasName)
-
-	BotAliasMetadata_description = BotAliasMetadata.AddMember("description", _Description)
-
-	BotAliasMetadata_botVersion = BotAliasMetadata.AddMember("botVersion", _Version)
-
-	BotAliasMetadata_botName = BotAliasMetadata.AddMember("botName", _BotName)
-
-	BotAliasMetadata_lastUpdatedDate = BotAliasMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	BotAliasMetadata_createdDate = BotAliasMetadata.AddMember("createdDate", _Timestamp)
-
-	BotAliasMetadata_checksum = BotAliasMetadata.AddMember("checksum", _String)
-
-	BotAliasMetadata_conversationLogs = BotAliasMetadata.AddMember("conversationLogs", ConversationLogsResponse)
-
-	_BotAliasMetadataList_member = _BotAliasMetadataList.AddMember("member", BotAliasMetadata)
-
-	ChannelType_FACEBOOK = ChannelType.AddMember("FACEBOOK", smithyprelude.Unit)
-
-	ChannelType_SLACK = ChannelType.AddMember("SLACK", smithyprelude.Unit)
-
-	ChannelType_TWILIO_SMS = ChannelType.AddMember("TWILIO_SMS", smithyprelude.Unit)
-
-	ChannelType_KIK = ChannelType.AddMember("KIK", smithyprelude.Unit)
-
-	_ChannelConfigurationMap_key = _ChannelConfigurationMap.AddMember("key", _String)
-
-	_ChannelConfigurationMap_value = _ChannelConfigurationMap.AddMember("value", _String)
-
-	ChannelStatus_IN_PROGRESS = ChannelStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ChannelStatus_CREATED = ChannelStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	ChannelStatus_FAILED = ChannelStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	BotChannelAssociation_name = BotChannelAssociation.AddMember("name", _BotChannelName)
-
-	BotChannelAssociation_description = BotChannelAssociation.AddMember("description", _Description)
-
-	BotChannelAssociation_botAlias = BotChannelAssociation.AddMember("botAlias", _AliasName)
-
-	BotChannelAssociation_botName = BotChannelAssociation.AddMember("botName", _BotName)
-
-	BotChannelAssociation_createdDate = BotChannelAssociation.AddMember("createdDate", _Timestamp)
-
-	BotChannelAssociation_type = BotChannelAssociation.AddMember("type", ChannelType)
-
-	BotChannelAssociation_botConfiguration = BotChannelAssociation.AddMember("botConfiguration", _ChannelConfigurationMap)
-
-	BotChannelAssociation_status = BotChannelAssociation.AddMember("status", ChannelStatus)
-
-	BotChannelAssociation_failureReason = BotChannelAssociation.AddMember("failureReason", _String)
-
-	_BotChannelAssociationList_member = _BotChannelAssociationList.AddMember("member", BotChannelAssociation)
-
-	Status_BUILDING = Status.AddMember("BUILDING", smithyprelude.Unit)
-
-	Status_READY = Status.AddMember("READY", smithyprelude.Unit)
-
-	Status_READY_BASIC_TESTING = Status.AddMember("READY_BASIC_TESTING", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	Status_NOT_BUILT = Status.AddMember("NOT_BUILT", smithyprelude.Unit)
-
-	BotMetadata_name = BotMetadata.AddMember("name", _BotName)
-
-	BotMetadata_description = BotMetadata.AddMember("description", _Description)
-
-	BotMetadata_status = BotMetadata.AddMember("status", Status)
-
-	BotMetadata_lastUpdatedDate = BotMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	BotMetadata_createdDate = BotMetadata.AddMember("createdDate", _Timestamp)
-
-	BotMetadata_version = BotMetadata.AddMember("version", _Version)
-
-	_BotMetadataList_member = _BotMetadataList.AddMember("member", BotMetadata)
-
-	_BotVersions_member = _BotVersions.AddMember("member", _Version)
-
-	Locale_DE_DE = Locale.AddMember("DE_DE", smithyprelude.Unit)
-
-	Locale_EN_AU = Locale.AddMember("EN_AU", smithyprelude.Unit)
-
-	Locale_EN_GB = Locale.AddMember("EN_GB", smithyprelude.Unit)
-
-	Locale_EN_IN = Locale.AddMember("EN_IN", smithyprelude.Unit)
-
-	Locale_EN_US = Locale.AddMember("EN_US", smithyprelude.Unit)
-
-	Locale_ES_419 = Locale.AddMember("ES_419", smithyprelude.Unit)
-
-	Locale_ES_ES = Locale.AddMember("ES_ES", smithyprelude.Unit)
-
-	Locale_ES_US = Locale.AddMember("ES_US", smithyprelude.Unit)
-
-	Locale_FR_FR = Locale.AddMember("FR_FR", smithyprelude.Unit)
-
-	Locale_FR_CA = Locale.AddMember("FR_CA", smithyprelude.Unit)
-
-	Locale_IT_IT = Locale.AddMember("IT_IT", smithyprelude.Unit)
-
-	Locale_JA_JP = Locale.AddMember("JA_JP", smithyprelude.Unit)
-
-	Locale_KO_KR = Locale.AddMember("KO_KR", smithyprelude.Unit)
-
-	_LocaleList_member = _LocaleList.AddMember("member", Locale)
-
-	BuiltinIntentMetadata_signature = BuiltinIntentMetadata.AddMember("signature", _BuiltinIntentSignature)
-
-	BuiltinIntentMetadata_supportedLocales = BuiltinIntentMetadata.AddMember("supportedLocales", _LocaleList)
-
-	_BuiltinIntentMetadataList_member = _BuiltinIntentMetadataList.AddMember("member", BuiltinIntentMetadata)
-
-	BuiltinIntentSlot_name = BuiltinIntentSlot.AddMember("name", _String)
-
-	_BuiltinIntentSlotList_member = _BuiltinIntentSlotList.AddMember("member", BuiltinIntentSlot)
-
-	BuiltinSlotTypeMetadata_signature = BuiltinSlotTypeMetadata.AddMember("signature", _BuiltinSlotTypeSignature)
-
-	BuiltinSlotTypeMetadata_supportedLocales = BuiltinSlotTypeMetadata.AddMember("supportedLocales", _LocaleList)
-
-	_BuiltinSlotTypeMetadataList_member = _BuiltinSlotTypeMetadataList.AddMember("member", BuiltinSlotTypeMetadata)
-
-	CodeHook_uri = CodeHook.AddMember("uri", _LambdaARN)
-
-	CodeHook_messageVersion = CodeHook.AddMember("messageVersion", _MessageVersion)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ContentType_PLAIN_TEXT = ContentType.AddMember("PLAIN_TEXT", smithyprelude.Unit)
-
-	ContentType_SSML = ContentType.AddMember("SSML", smithyprelude.Unit)
-
-	ContentType_CUSTOM_PAYLOAD = ContentType.AddMember("CUSTOM_PAYLOAD", smithyprelude.Unit)
-
-	LogSettingsRequest_logType = LogSettingsRequest.AddMember("logType", LogType)
-
-	LogSettingsRequest_destination = LogSettingsRequest.AddMember("destination", Destination)
-
-	LogSettingsRequest_kmsKeyArn = LogSettingsRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	LogSettingsRequest_resourceArn = LogSettingsRequest.AddMember("resourceArn", _ResourceArn)
-
-	_LogSettingsRequestList_member = _LogSettingsRequestList.AddMember("member", LogSettingsRequest)
-
-	ConversationLogsRequest_logSettings = ConversationLogsRequest.AddMember("logSettings", _LogSettingsRequestList)
-
-	ConversationLogsRequest_iamRoleArn = ConversationLogsRequest.AddMember("iamRoleArn", _IamRoleArn)
-
-	_SynonymList_member = _SynonymList.AddMember("member", _Value)
-
-	EnumerationValue_value = EnumerationValue.AddMember("value", _Value)
-
-	EnumerationValue_synonyms = EnumerationValue.AddMember("synonyms", _SynonymList)
-
-	_EnumerationValues_member = _EnumerationValues.AddMember("member", EnumerationValue)
-
-	ExportStatus_IN_PROGRESS = ExportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ExportStatus_READY = ExportStatus.AddMember("READY", smithyprelude.Unit)
-
-	ExportStatus_FAILED = ExportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ExportType_ALEXA_SKILLS_KIT = ExportType.AddMember("ALEXA_SKILLS_KIT", smithyprelude.Unit)
-
-	ExportType_LEX = ExportType.AddMember("LEX", smithyprelude.Unit)
-
-	Message_contentType = Message.AddMember("contentType", ContentType)
-
-	Message_content = Message.AddMember("content", _ContentString)
-
-	Message_groupNumber = Message.AddMember("groupNumber", _GroupNumber)
-
-	_MessageList_member = _MessageList.AddMember("member", Message)
-
-	Prompt_messages = Prompt.AddMember("messages", _MessageList)
-
-	Prompt_maxAttempts = Prompt.AddMember("maxAttempts", _PromptMaxAttempts)
-
-	Prompt_responseCard = Prompt.AddMember("responseCard", _ResponseCard)
-
-	Statement_messages = Statement.AddMember("messages", _MessageList)
-
-	Statement_responseCard = Statement.AddMember("responseCard", _ResponseCard)
-
-	FollowUpPrompt_prompt = FollowUpPrompt.AddMember("prompt", Prompt)
-
-	FollowUpPrompt_rejectionStatement = FollowUpPrompt.AddMember("rejectionStatement", Statement)
-
-	FulfillmentActivityType_RETURN_INTENT = FulfillmentActivityType.AddMember("RETURN_INTENT", smithyprelude.Unit)
-
-	FulfillmentActivityType_CODE_HOOK = FulfillmentActivityType.AddMember("CODE_HOOK", smithyprelude.Unit)
-
-	FulfillmentActivity_type = FulfillmentActivity.AddMember("type", FulfillmentActivityType)
-
-	FulfillmentActivity_codeHook = FulfillmentActivity.AddMember("codeHook", CodeHook)
-
-	ImportStatus_IN_PROGRESS = ImportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ImportStatus_COMPLETE = ImportStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	ImportStatus_FAILED = ImportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	InputContext_name = InputContext.AddMember("name", _InputContextName)
-
-	_InputContextList_member = _InputContextList.AddMember("member", InputContext)
-
-	Intent_intentName = Intent.AddMember("intentName", _IntentName)
-
-	Intent_intentVersion = Intent.AddMember("intentVersion", _Version)
-
-	_IntentList_member = _IntentList.AddMember("member", Intent)
-
-	IntentMetadata_name = IntentMetadata.AddMember("name", _IntentName)
-
-	IntentMetadata_description = IntentMetadata.AddMember("description", _Description)
-
-	IntentMetadata_lastUpdatedDate = IntentMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	IntentMetadata_createdDate = IntentMetadata.AddMember("createdDate", _Timestamp)
-
-	IntentMetadata_version = IntentMetadata.AddMember("version", _Version)
-
-	_IntentMetadataList_member = _IntentMetadataList.AddMember("member", IntentMetadata)
-
-	_IntentUtteranceList_member = _IntentUtteranceList.AddMember("member", _Utterance)
-
-	InternalFailureException_message = InternalFailureException.AddMember("message", _String)
-
-	KendraConfiguration_kendraIndex = KendraConfiguration.AddMember("kendraIndex", _KendraIndexArn)
-
-	KendraConfiguration_queryFilterString = KendraConfiguration.AddMember("queryFilterString", _QueryFilterString)
-
-	KendraConfiguration_role = KendraConfiguration.AddMember("role", _roleArn)
-
-	LimitExceededException_retryAfterSeconds = LimitExceededException.AddMember("retryAfterSeconds", _String, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _String)
-
-	UtteranceData_utteranceString = UtteranceData.AddMember("utteranceString", _UtteranceString)
-
-	UtteranceData_count = UtteranceData.AddMember("count", _Count)
-
-	UtteranceData_distinctUsers = UtteranceData.AddMember("distinctUsers", _Count)
-
-	UtteranceData_firstUtteredDate = UtteranceData.AddMember("firstUtteredDate", _Timestamp)
-
-	UtteranceData_lastUtteredDate = UtteranceData.AddMember("lastUtteredDate", _Timestamp)
-
-	_ListOfUtterance_member = _ListOfUtterance.AddMember("member", UtteranceData)
-
-	UtteranceList_botVersion = UtteranceList.AddMember("botVersion", _Version)
-
-	UtteranceList_utterances = UtteranceList.AddMember("utterances", _ListOfUtterance)
-
-	_ListsOfUtterances_member = _ListsOfUtterances.AddMember("member", UtteranceList)
-
-	MergeStrategy_OVERWRITE_LATEST = MergeStrategy.AddMember("OVERWRITE_LATEST", smithyprelude.Unit)
-
-	MergeStrategy_FAIL_ON_CONFLICT = MergeStrategy.AddMember("FAIL_ON_CONFLICT", smithyprelude.Unit)
-
-	MigrationAlertType_ERROR = MigrationAlertType.AddMember("ERROR", smithyprelude.Unit)
-
-	MigrationAlertType_WARN = MigrationAlertType.AddMember("WARN", smithyprelude.Unit)
-
-	_MigrationAlertDetails_member = _MigrationAlertDetails.AddMember("member", _MigrationAlertDetail)
-
-	_MigrationAlertReferenceURLs_member = _MigrationAlertReferenceURLs.AddMember("member", _MigrationAlertReferenceURL)
-
-	MigrationAlert_type = MigrationAlert.AddMember("type", MigrationAlertType)
-
-	MigrationAlert_message = MigrationAlert.AddMember("message", _MigrationAlertMessage)
-
-	MigrationAlert_details = MigrationAlert.AddMember("details", _MigrationAlertDetails)
-
-	MigrationAlert_referenceURLs = MigrationAlert.AddMember("referenceURLs", _MigrationAlertReferenceURLs)
-
-	_MigrationAlerts_member = _MigrationAlerts.AddMember("member", MigrationAlert)
-
-	MigrationSortAttribute_V1_BOT_NAME = MigrationSortAttribute.AddMember("V1_BOT_NAME", smithyprelude.Unit)
-
-	MigrationSortAttribute_MIGRATION_DATE_TIME = MigrationSortAttribute.AddMember("MIGRATION_DATE_TIME", smithyprelude.Unit)
-
-	MigrationStatus_IN_PROGRESS = MigrationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	MigrationStatus_COMPLETED = MigrationStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	MigrationStatus_FAILED = MigrationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	MigrationStrategy_CREATE_NEW = MigrationStrategy.AddMember("CREATE_NEW", smithyprelude.Unit)
-
-	MigrationStrategy_UPDATE_EXISTING = MigrationStrategy.AddMember("UPDATE_EXISTING", smithyprelude.Unit)
-
-	MigrationSummary_migrationId = MigrationSummary.AddMember("migrationId", _MigrationId)
-
-	MigrationSummary_v1BotName = MigrationSummary.AddMember("v1BotName", _BotName)
-
-	MigrationSummary_v1BotVersion = MigrationSummary.AddMember("v1BotVersion", _Version)
-
-	MigrationSummary_v1BotLocale = MigrationSummary.AddMember("v1BotLocale", Locale)
-
-	MigrationSummary_v2BotId = MigrationSummary.AddMember("v2BotId", _V2BotId)
-
-	MigrationSummary_v2BotRole = MigrationSummary.AddMember("v2BotRole", _IamRoleArn)
-
-	MigrationSummary_migrationStatus = MigrationSummary.AddMember("migrationStatus", MigrationStatus)
-
-	MigrationSummary_migrationStrategy = MigrationSummary.AddMember("migrationStrategy", MigrationStrategy)
-
-	MigrationSummary_migrationTimestamp = MigrationSummary.AddMember("migrationTimestamp", _Timestamp)
-
-	_MigrationSummaryList_member = _MigrationSummaryList.AddMember("member", MigrationSummary)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _String)
-
-	ObfuscationSetting_NONE = ObfuscationSetting.AddMember("NONE", smithyprelude.Unit)
-
-	ObfuscationSetting_DEFAULT_OBFUSCATION = ObfuscationSetting.AddMember("DEFAULT_OBFUSCATION", smithyprelude.Unit)
-
-	OutputContext_name = OutputContext.AddMember("name", _OutputContextName)
-
-	OutputContext_timeToLiveInSeconds = OutputContext.AddMember("timeToLiveInSeconds", _ContextTimeToLiveInSeconds)
-
-	OutputContext_turnsToLive = OutputContext.AddMember("turnsToLive", _ContextTurnsToLive)
-
-	_OutputContextList_member = _OutputContextList.AddMember("member", OutputContext)
-
-	PreconditionFailedException_message = PreconditionFailedException.AddMember("message", _String)
-
-	ProcessBehavior_SAVE = ProcessBehavior.AddMember("SAVE", smithyprelude.Unit)
-
-	ProcessBehavior_BUILD = ProcessBehavior.AddMember("BUILD", smithyprelude.Unit)
-
-	ReferenceType_INTENT = ReferenceType.AddMember("INTENT", smithyprelude.Unit)
-
-	ReferenceType_BOT = ReferenceType.AddMember("BOT", smithyprelude.Unit)
-
-	ReferenceType_BOTALIAS = ReferenceType.AddMember("BOTALIAS", smithyprelude.Unit)
-
-	ReferenceType_BOTCHANNEL = ReferenceType.AddMember("BOTCHANNEL", smithyprelude.Unit)
-
-	ResourceReference_name = ResourceReference.AddMember("name", _Name)
-
-	ResourceReference_version = ResourceReference.AddMember("version", _Version)
-
-	ResourceInUseException_referenceType = ResourceInUseException.AddMember("referenceType", ReferenceType)
-
-	ResourceInUseException_exampleReference = ResourceInUseException.AddMember("exampleReference", ResourceReference)
-
-	ResourceType_BOT = ResourceType.AddMember("BOT", smithyprelude.Unit)
-
-	ResourceType_INTENT = ResourceType.AddMember("INTENT", smithyprelude.Unit)
-
-	ResourceType_SLOT_TYPE = ResourceType.AddMember("SLOT_TYPE", smithyprelude.Unit)
-
-	SlotConstraint_REQUIRED = SlotConstraint.AddMember("REQUIRED", smithyprelude.Unit)
-
-	SlotConstraint_OPTIONAL = SlotConstraint.AddMember("OPTIONAL", smithyprelude.Unit)
-
-	_SlotUtteranceList_member = _SlotUtteranceList.AddMember("member", _Utterance)
-
-	SlotDefaultValue_defaultValue = SlotDefaultValue.AddMember("defaultValue", _SlotDefaultValueString)
-
-	_SlotDefaultValueList_member = _SlotDefaultValueList.AddMember("member", SlotDefaultValue)
-
-	SlotDefaultValueSpec_defaultValueList = SlotDefaultValueSpec.AddMember("defaultValueList", _SlotDefaultValueList)
-
-	Slot_name = Slot.AddMember("name", _SlotName)
-
-	Slot_description = Slot.AddMember("description", _Description)
-
-	Slot_slotConstraint = Slot.AddMember("slotConstraint", SlotConstraint)
-
-	Slot_slotType = Slot.AddMember("slotType", _CustomOrBuiltinSlotTypeName)
-
-	Slot_slotTypeVersion = Slot.AddMember("slotTypeVersion", _Version)
-
-	Slot_valueElicitationPrompt = Slot.AddMember("valueElicitationPrompt", Prompt)
-
-	Slot_priority = Slot.AddMember("priority", _Priority)
-
-	Slot_sampleUtterances = Slot.AddMember("sampleUtterances", _SlotUtteranceList)
-
-	Slot_responseCard = Slot.AddMember("responseCard", _ResponseCard)
-
-	Slot_obfuscationSetting = Slot.AddMember("obfuscationSetting", ObfuscationSetting)
-
-	Slot_defaultValueSpec = Slot.AddMember("defaultValueSpec", SlotDefaultValueSpec)
-
-	_SlotList_member = _SlotList.AddMember("member", Slot)
-
-	SlotTypeRegexConfiguration_pattern = SlotTypeRegexConfiguration.AddMember("pattern", _RegexPattern)
-
-	SlotTypeConfiguration_regexConfiguration = SlotTypeConfiguration.AddMember("regexConfiguration", SlotTypeRegexConfiguration)
-
-	_SlotTypeConfigurations_member = _SlotTypeConfigurations.AddMember("member", SlotTypeConfiguration)
-
-	SlotTypeMetadata_name = SlotTypeMetadata.AddMember("name", _SlotTypeName)
-
-	SlotTypeMetadata_description = SlotTypeMetadata.AddMember("description", _Description)
-
-	SlotTypeMetadata_lastUpdatedDate = SlotTypeMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	SlotTypeMetadata_createdDate = SlotTypeMetadata.AddMember("createdDate", _Timestamp)
-
-	SlotTypeMetadata_version = SlotTypeMetadata.AddMember("version", _Version)
-
-	_SlotTypeMetadataList_member = _SlotTypeMetadataList.AddMember("member", SlotTypeMetadata)
-
-	SlotValueSelectionStrategy_ORIGINAL_VALUE = SlotValueSelectionStrategy.AddMember("ORIGINAL_VALUE", smithyprelude.Unit)
-
-	SlotValueSelectionStrategy_TOP_RESOLUTION = SlotValueSelectionStrategy.AddMember("TOP_RESOLUTION", smithyprelude.Unit)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	StatusType_DETECTED = StatusType.AddMember("DETECTED", smithyprelude.Unit)
-
-	StatusType_MISSED = StatusType.AddMember("MISSED", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	CreateBotVersionRequest_name = CreateBotVersionRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	CreateBotVersionRequest_checksum = CreateBotVersionRequest.AddMember("checksum", _String)
-
-	CreateBotVersionResponse_name = CreateBotVersionResponse.AddMember("name", _BotName)
-
-	CreateBotVersionResponse_description = CreateBotVersionResponse.AddMember("description", _Description)
-
-	CreateBotVersionResponse_intents = CreateBotVersionResponse.AddMember("intents", _IntentList)
-
-	CreateBotVersionResponse_clarificationPrompt = CreateBotVersionResponse.AddMember("clarificationPrompt", Prompt)
-
-	CreateBotVersionResponse_abortStatement = CreateBotVersionResponse.AddMember("abortStatement", Statement)
-
-	CreateBotVersionResponse_status = CreateBotVersionResponse.AddMember("status", Status)
-
-	CreateBotVersionResponse_failureReason = CreateBotVersionResponse.AddMember("failureReason", _String)
-
-	CreateBotVersionResponse_lastUpdatedDate = CreateBotVersionResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	CreateBotVersionResponse_createdDate = CreateBotVersionResponse.AddMember("createdDate", _Timestamp)
-
-	CreateBotVersionResponse_idleSessionTTLInSeconds = CreateBotVersionResponse.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	CreateBotVersionResponse_voiceId = CreateBotVersionResponse.AddMember("voiceId", _String)
-
-	CreateBotVersionResponse_checksum = CreateBotVersionResponse.AddMember("checksum", _String)
-
-	CreateBotVersionResponse_version = CreateBotVersionResponse.AddMember("version", _Version)
-
-	CreateBotVersionResponse_locale = CreateBotVersionResponse.AddMember("locale", Locale)
-
-	CreateBotVersionResponse_childDirected = CreateBotVersionResponse.AddMember("childDirected", _Boolean)
-
-	CreateBotVersionResponse_enableModelImprovements = CreateBotVersionResponse.AddMember("enableModelImprovements", _Boolean)
-
-	CreateBotVersionResponse_detectSentiment = CreateBotVersionResponse.AddMember("detectSentiment", _Boolean)
-
-	CreateIntentVersionRequest_name = CreateIntentVersionRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	CreateIntentVersionRequest_checksum = CreateIntentVersionRequest.AddMember("checksum", _String)
-
-	CreateIntentVersionResponse_name = CreateIntentVersionResponse.AddMember("name", _IntentName)
-
-	CreateIntentVersionResponse_description = CreateIntentVersionResponse.AddMember("description", _Description)
-
-	CreateIntentVersionResponse_slots = CreateIntentVersionResponse.AddMember("slots", _SlotList)
-
-	CreateIntentVersionResponse_sampleUtterances = CreateIntentVersionResponse.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	CreateIntentVersionResponse_confirmationPrompt = CreateIntentVersionResponse.AddMember("confirmationPrompt", Prompt)
-
-	CreateIntentVersionResponse_rejectionStatement = CreateIntentVersionResponse.AddMember("rejectionStatement", Statement)
-
-	CreateIntentVersionResponse_followUpPrompt = CreateIntentVersionResponse.AddMember("followUpPrompt", FollowUpPrompt)
-
-	CreateIntentVersionResponse_conclusionStatement = CreateIntentVersionResponse.AddMember("conclusionStatement", Statement)
-
-	CreateIntentVersionResponse_dialogCodeHook = CreateIntentVersionResponse.AddMember("dialogCodeHook", CodeHook)
-
-	CreateIntentVersionResponse_fulfillmentActivity = CreateIntentVersionResponse.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	CreateIntentVersionResponse_parentIntentSignature = CreateIntentVersionResponse.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	CreateIntentVersionResponse_lastUpdatedDate = CreateIntentVersionResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	CreateIntentVersionResponse_createdDate = CreateIntentVersionResponse.AddMember("createdDate", _Timestamp)
-
-	CreateIntentVersionResponse_version = CreateIntentVersionResponse.AddMember("version", _Version)
-
-	CreateIntentVersionResponse_checksum = CreateIntentVersionResponse.AddMember("checksum", _String)
-
-	CreateIntentVersionResponse_kendraConfiguration = CreateIntentVersionResponse.AddMember("kendraConfiguration", KendraConfiguration)
-
-	CreateIntentVersionResponse_inputContexts = CreateIntentVersionResponse.AddMember("inputContexts", _InputContextList)
-
-	CreateIntentVersionResponse_outputContexts = CreateIntentVersionResponse.AddMember("outputContexts", _OutputContextList)
-
-	CreateSlotTypeVersionRequest_name = CreateSlotTypeVersionRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	CreateSlotTypeVersionRequest_checksum = CreateSlotTypeVersionRequest.AddMember("checksum", _String)
-
-	CreateSlotTypeVersionResponse_name = CreateSlotTypeVersionResponse.AddMember("name", _SlotTypeName)
-
-	CreateSlotTypeVersionResponse_description = CreateSlotTypeVersionResponse.AddMember("description", _Description)
-
-	CreateSlotTypeVersionResponse_enumerationValues = CreateSlotTypeVersionResponse.AddMember("enumerationValues", _EnumerationValues)
-
-	CreateSlotTypeVersionResponse_lastUpdatedDate = CreateSlotTypeVersionResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	CreateSlotTypeVersionResponse_createdDate = CreateSlotTypeVersionResponse.AddMember("createdDate", _Timestamp)
-
-	CreateSlotTypeVersionResponse_version = CreateSlotTypeVersionResponse.AddMember("version", _Version)
-
-	CreateSlotTypeVersionResponse_checksum = CreateSlotTypeVersionResponse.AddMember("checksum", _String)
-
-	CreateSlotTypeVersionResponse_valueSelectionStrategy = CreateSlotTypeVersionResponse.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	CreateSlotTypeVersionResponse_parentSlotTypeSignature = CreateSlotTypeVersionResponse.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	CreateSlotTypeVersionResponse_slotTypeConfigurations = CreateSlotTypeVersionResponse.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	DeleteBotAliasRequest_name = DeleteBotAliasRequest.AddMember("name", _AliasName, &smithytraits.HTTPLabel{})
-
-	DeleteBotAliasRequest_botName = DeleteBotAliasRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotChannelAssociationRequest_name = DeleteBotChannelAssociationRequest.AddMember("name", _BotChannelName, &smithytraits.HTTPLabel{})
-
-	DeleteBotChannelAssociationRequest_botName = DeleteBotChannelAssociationRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotChannelAssociationRequest_botAlias = DeleteBotChannelAssociationRequest.AddMember("botAlias", _AliasName, &smithytraits.HTTPLabel{})
-
-	DeleteBotRequest_name = DeleteBotRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotVersionRequest_name = DeleteBotVersionRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotVersionRequest_version = DeleteBotVersionRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPLabel{})
-
-	DeleteIntentRequest_name = DeleteIntentRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	DeleteIntentVersionRequest_name = DeleteIntentVersionRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	DeleteIntentVersionRequest_version = DeleteIntentVersionRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPLabel{})
-
-	DeleteSlotTypeRequest_name = DeleteSlotTypeRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	DeleteSlotTypeVersionRequest_name = DeleteSlotTypeVersionRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	DeleteSlotTypeVersionRequest_version = DeleteSlotTypeVersionRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPLabel{})
-
-	DeleteUtterancesRequest_botName = DeleteUtterancesRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteUtterancesRequest_userId = DeleteUtterancesRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	GetBotAliasesRequest_botName = GetBotAliasesRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotAliasesRequest_nextToken = GetBotAliasesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotAliasesRequest_maxResults = GetBotAliasesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotAliasesRequest_nameContains = GetBotAliasesRequest.AddMember("nameContains", _AliasName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetBotAliasesResponse_BotAliases = GetBotAliasesResponse.AddMember("BotAliases", _BotAliasMetadataList)
-
-	GetBotAliasesResponse_nextToken = GetBotAliasesResponse.AddMember("nextToken", _NextToken)
-
-	GetBotAliasRequest_name = GetBotAliasRequest.AddMember("name", _AliasName, &smithytraits.HTTPLabel{})
-
-	GetBotAliasRequest_botName = GetBotAliasRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotAliasResponse_name = GetBotAliasResponse.AddMember("name", _AliasName)
-
-	GetBotAliasResponse_description = GetBotAliasResponse.AddMember("description", _Description)
-
-	GetBotAliasResponse_botVersion = GetBotAliasResponse.AddMember("botVersion", _Version)
-
-	GetBotAliasResponse_botName = GetBotAliasResponse.AddMember("botName", _BotName)
-
-	GetBotAliasResponse_lastUpdatedDate = GetBotAliasResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetBotAliasResponse_createdDate = GetBotAliasResponse.AddMember("createdDate", _Timestamp)
-
-	GetBotAliasResponse_checksum = GetBotAliasResponse.AddMember("checksum", _String)
-
-	GetBotAliasResponse_conversationLogs = GetBotAliasResponse.AddMember("conversationLogs", ConversationLogsResponse)
-
-	GetBotChannelAssociationRequest_name = GetBotChannelAssociationRequest.AddMember("name", _BotChannelName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationRequest_botName = GetBotChannelAssociationRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationRequest_botAlias = GetBotChannelAssociationRequest.AddMember("botAlias", _AliasName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationResponse_name = GetBotChannelAssociationResponse.AddMember("name", _BotChannelName)
-
-	GetBotChannelAssociationResponse_description = GetBotChannelAssociationResponse.AddMember("description", _Description)
-
-	GetBotChannelAssociationResponse_botAlias = GetBotChannelAssociationResponse.AddMember("botAlias", _AliasName)
-
-	GetBotChannelAssociationResponse_botName = GetBotChannelAssociationResponse.AddMember("botName", _BotName)
-
-	GetBotChannelAssociationResponse_createdDate = GetBotChannelAssociationResponse.AddMember("createdDate", _Timestamp)
-
-	GetBotChannelAssociationResponse_type = GetBotChannelAssociationResponse.AddMember("type", ChannelType)
-
-	GetBotChannelAssociationResponse_botConfiguration = GetBotChannelAssociationResponse.AddMember("botConfiguration", _ChannelConfigurationMap)
-
-	GetBotChannelAssociationResponse_status = GetBotChannelAssociationResponse.AddMember("status", ChannelStatus)
-
-	GetBotChannelAssociationResponse_failureReason = GetBotChannelAssociationResponse.AddMember("failureReason", _String)
-
-	GetBotChannelAssociationsRequest_botName = GetBotChannelAssociationsRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationsRequest_botAlias = GetBotChannelAssociationsRequest.AddMember("botAlias", _AliasNameOrListAll, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationsRequest_nextToken = GetBotChannelAssociationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotChannelAssociationsRequest_maxResults = GetBotChannelAssociationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotChannelAssociationsRequest_nameContains = GetBotChannelAssociationsRequest.AddMember("nameContains", _BotChannelName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetBotChannelAssociationsResponse_botChannelAssociations = GetBotChannelAssociationsResponse.AddMember("botChannelAssociations", _BotChannelAssociationList)
-
-	GetBotChannelAssociationsResponse_nextToken = GetBotChannelAssociationsResponse.AddMember("nextToken", _NextToken)
-
-	GetBotRequest_name = GetBotRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotRequest_versionOrAlias = GetBotRequest.AddMember("versionOrAlias", _String, &smithytraits.HTTPLabel{})
-
-	GetBotResponse_name = GetBotResponse.AddMember("name", _BotName)
-
-	GetBotResponse_description = GetBotResponse.AddMember("description", _Description)
-
-	GetBotResponse_intents = GetBotResponse.AddMember("intents", _IntentList)
-
-	GetBotResponse_enableModelImprovements = GetBotResponse.AddMember("enableModelImprovements", _Boolean)
-
-	GetBotResponse_nluIntentConfidenceThreshold = GetBotResponse.AddMember("nluIntentConfidenceThreshold", _ConfidenceThreshold)
-
-	GetBotResponse_clarificationPrompt = GetBotResponse.AddMember("clarificationPrompt", Prompt)
-
-	GetBotResponse_abortStatement = GetBotResponse.AddMember("abortStatement", Statement)
-
-	GetBotResponse_status = GetBotResponse.AddMember("status", Status)
-
-	GetBotResponse_failureReason = GetBotResponse.AddMember("failureReason", _String)
-
-	GetBotResponse_lastUpdatedDate = GetBotResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetBotResponse_createdDate = GetBotResponse.AddMember("createdDate", _Timestamp)
-
-	GetBotResponse_idleSessionTTLInSeconds = GetBotResponse.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	GetBotResponse_voiceId = GetBotResponse.AddMember("voiceId", _String)
-
-	GetBotResponse_checksum = GetBotResponse.AddMember("checksum", _String)
-
-	GetBotResponse_version = GetBotResponse.AddMember("version", _Version)
-
-	GetBotResponse_locale = GetBotResponse.AddMember("locale", Locale)
-
-	GetBotResponse_childDirected = GetBotResponse.AddMember("childDirected", _Boolean)
-
-	GetBotResponse_detectSentiment = GetBotResponse.AddMember("detectSentiment", _Boolean)
-
-	GetBotsRequest_nextToken = GetBotsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotsRequest_maxResults = GetBotsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotsRequest_nameContains = GetBotsRequest.AddMember("nameContains", _BotName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetBotsResponse_bots = GetBotsResponse.AddMember("bots", _BotMetadataList)
-
-	GetBotsResponse_nextToken = GetBotsResponse.AddMember("nextToken", _NextToken)
-
-	GetBotVersionsRequest_name = GetBotVersionsRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotVersionsRequest_nextToken = GetBotVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotVersionsRequest_maxResults = GetBotVersionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotVersionsResponse_bots = GetBotVersionsResponse.AddMember("bots", _BotMetadataList)
-
-	GetBotVersionsResponse_nextToken = GetBotVersionsResponse.AddMember("nextToken", _NextToken)
-
-	GetBuiltinIntentRequest_signature = GetBuiltinIntentRequest.AddMember("signature", _BuiltinIntentSignature, &smithytraits.HTTPLabel{})
-
-	GetBuiltinIntentResponse_signature = GetBuiltinIntentResponse.AddMember("signature", _BuiltinIntentSignature)
-
-	GetBuiltinIntentResponse_supportedLocales = GetBuiltinIntentResponse.AddMember("supportedLocales", _LocaleList)
-
-	GetBuiltinIntentResponse_slots = GetBuiltinIntentResponse.AddMember("slots", _BuiltinIntentSlotList)
-
-	GetBuiltinIntentsRequest_locale = GetBuiltinIntentsRequest.AddMember("locale", Locale, &smithytraits.HTTPQuery{Name: "locale"})
-
-	GetBuiltinIntentsRequest_signatureContains = GetBuiltinIntentsRequest.AddMember("signatureContains", _String, &smithytraits.HTTPQuery{Name: "signatureContains"})
-
-	GetBuiltinIntentsRequest_nextToken = GetBuiltinIntentsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBuiltinIntentsRequest_maxResults = GetBuiltinIntentsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBuiltinIntentsResponse_intents = GetBuiltinIntentsResponse.AddMember("intents", _BuiltinIntentMetadataList)
-
-	GetBuiltinIntentsResponse_nextToken = GetBuiltinIntentsResponse.AddMember("nextToken", _NextToken)
-
-	GetBuiltinSlotTypesRequest_locale = GetBuiltinSlotTypesRequest.AddMember("locale", Locale, &smithytraits.HTTPQuery{Name: "locale"})
-
-	GetBuiltinSlotTypesRequest_signatureContains = GetBuiltinSlotTypesRequest.AddMember("signatureContains", _String, &smithytraits.HTTPQuery{Name: "signatureContains"})
-
-	GetBuiltinSlotTypesRequest_nextToken = GetBuiltinSlotTypesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBuiltinSlotTypesRequest_maxResults = GetBuiltinSlotTypesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBuiltinSlotTypesResponse_slotTypes = GetBuiltinSlotTypesResponse.AddMember("slotTypes", _BuiltinSlotTypeMetadataList)
-
-	GetBuiltinSlotTypesResponse_nextToken = GetBuiltinSlotTypesResponse.AddMember("nextToken", _NextToken)
-
-	GetExportRequest_name = GetExportRequest.AddMember("name", _Name, &smithytraits.HTTPQuery{Name: "name"})
-
-	GetExportRequest_version = GetExportRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	GetExportRequest_resourceType = GetExportRequest.AddMember("resourceType", ResourceType, &smithytraits.HTTPQuery{Name: "resourceType"})
-
-	GetExportRequest_exportType = GetExportRequest.AddMember("exportType", ExportType, &smithytraits.HTTPQuery{Name: "exportType"})
-
-	GetExportResponse_name = GetExportResponse.AddMember("name", _Name)
-
-	GetExportResponse_version = GetExportResponse.AddMember("version", _NumericalVersion)
-
-	GetExportResponse_resourceType = GetExportResponse.AddMember("resourceType", ResourceType)
-
-	GetExportResponse_exportType = GetExportResponse.AddMember("exportType", ExportType)
-
-	GetExportResponse_exportStatus = GetExportResponse.AddMember("exportStatus", ExportStatus)
-
-	GetExportResponse_failureReason = GetExportResponse.AddMember("failureReason", _String)
-
-	GetExportResponse_url = GetExportResponse.AddMember("url", _String)
-
-	GetImportRequest_importId = GetImportRequest.AddMember("importId", _String, &smithytraits.HTTPLabel{})
-
-	GetImportResponse_name = GetImportResponse.AddMember("name", _Name)
-
-	GetImportResponse_resourceType = GetImportResponse.AddMember("resourceType", ResourceType)
-
-	GetImportResponse_mergeStrategy = GetImportResponse.AddMember("mergeStrategy", MergeStrategy)
-
-	GetImportResponse_importId = GetImportResponse.AddMember("importId", _String)
-
-	GetImportResponse_importStatus = GetImportResponse.AddMember("importStatus", ImportStatus)
-
-	GetImportResponse_failureReason = GetImportResponse.AddMember("failureReason", _StringList)
-
-	GetImportResponse_createdDate = GetImportResponse.AddMember("createdDate", _Timestamp)
-
-	GetIntentRequest_name = GetIntentRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	GetIntentRequest_version = GetIntentRequest.AddMember("version", _Version, &smithytraits.HTTPLabel{})
-
-	GetIntentResponse_name = GetIntentResponse.AddMember("name", _IntentName)
-
-	GetIntentResponse_description = GetIntentResponse.AddMember("description", _Description)
-
-	GetIntentResponse_slots = GetIntentResponse.AddMember("slots", _SlotList)
-
-	GetIntentResponse_sampleUtterances = GetIntentResponse.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	GetIntentResponse_confirmationPrompt = GetIntentResponse.AddMember("confirmationPrompt", Prompt)
-
-	GetIntentResponse_rejectionStatement = GetIntentResponse.AddMember("rejectionStatement", Statement)
-
-	GetIntentResponse_followUpPrompt = GetIntentResponse.AddMember("followUpPrompt", FollowUpPrompt)
-
-	GetIntentResponse_conclusionStatement = GetIntentResponse.AddMember("conclusionStatement", Statement)
-
-	GetIntentResponse_dialogCodeHook = GetIntentResponse.AddMember("dialogCodeHook", CodeHook)
-
-	GetIntentResponse_fulfillmentActivity = GetIntentResponse.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	GetIntentResponse_parentIntentSignature = GetIntentResponse.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	GetIntentResponse_lastUpdatedDate = GetIntentResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetIntentResponse_createdDate = GetIntentResponse.AddMember("createdDate", _Timestamp)
-
-	GetIntentResponse_version = GetIntentResponse.AddMember("version", _Version)
-
-	GetIntentResponse_checksum = GetIntentResponse.AddMember("checksum", _String)
-
-	GetIntentResponse_kendraConfiguration = GetIntentResponse.AddMember("kendraConfiguration", KendraConfiguration)
-
-	GetIntentResponse_inputContexts = GetIntentResponse.AddMember("inputContexts", _InputContextList)
-
-	GetIntentResponse_outputContexts = GetIntentResponse.AddMember("outputContexts", _OutputContextList)
-
-	GetIntentsRequest_nextToken = GetIntentsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetIntentsRequest_maxResults = GetIntentsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetIntentsRequest_nameContains = GetIntentsRequest.AddMember("nameContains", _IntentName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetIntentsResponse_intents = GetIntentsResponse.AddMember("intents", _IntentMetadataList)
-
-	GetIntentsResponse_nextToken = GetIntentsResponse.AddMember("nextToken", _NextToken)
-
-	GetIntentVersionsRequest_name = GetIntentVersionsRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	GetIntentVersionsRequest_nextToken = GetIntentVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetIntentVersionsRequest_maxResults = GetIntentVersionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetIntentVersionsResponse_intents = GetIntentVersionsResponse.AddMember("intents", _IntentMetadataList)
-
-	GetIntentVersionsResponse_nextToken = GetIntentVersionsResponse.AddMember("nextToken", _NextToken)
-
-	GetMigrationRequest_migrationId = GetMigrationRequest.AddMember("migrationId", _MigrationId, &smithytraits.HTTPLabel{})
-
-	GetMigrationResponse_migrationId = GetMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	GetMigrationResponse_v1BotName = GetMigrationResponse.AddMember("v1BotName", _BotName)
-
-	GetMigrationResponse_v1BotVersion = GetMigrationResponse.AddMember("v1BotVersion", _Version)
-
-	GetMigrationResponse_v1BotLocale = GetMigrationResponse.AddMember("v1BotLocale", Locale)
-
-	GetMigrationResponse_v2BotId = GetMigrationResponse.AddMember("v2BotId", _V2BotId)
-
-	GetMigrationResponse_v2BotRole = GetMigrationResponse.AddMember("v2BotRole", _IamRoleArn)
-
-	GetMigrationResponse_migrationStatus = GetMigrationResponse.AddMember("migrationStatus", MigrationStatus)
-
-	GetMigrationResponse_migrationStrategy = GetMigrationResponse.AddMember("migrationStrategy", MigrationStrategy)
-
-	GetMigrationResponse_migrationTimestamp = GetMigrationResponse.AddMember("migrationTimestamp", _Timestamp)
-
-	GetMigrationResponse_alerts = GetMigrationResponse.AddMember("alerts", _MigrationAlerts)
-
-	GetMigrationsRequest_sortByAttribute = GetMigrationsRequest.AddMember("sortByAttribute", MigrationSortAttribute, &smithytraits.HTTPQuery{Name: "sortByAttribute"})
-
-	GetMigrationsRequest_sortByOrder = GetMigrationsRequest.AddMember("sortByOrder", SortOrder, &smithytraits.HTTPQuery{Name: "sortByOrder"})
-
-	GetMigrationsRequest_v1BotNameContains = GetMigrationsRequest.AddMember("v1BotNameContains", _BotName, &smithytraits.HTTPQuery{Name: "v1BotNameContains"})
-
-	GetMigrationsRequest_migrationStatusEquals = GetMigrationsRequest.AddMember("migrationStatusEquals", MigrationStatus, &smithytraits.HTTPQuery{Name: "migrationStatusEquals"})
-
-	GetMigrationsRequest_maxResults = GetMigrationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetMigrationsRequest_nextToken = GetMigrationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetMigrationsResponse_migrationSummaries = GetMigrationsResponse.AddMember("migrationSummaries", _MigrationSummaryList)
-
-	GetMigrationsResponse_nextToken = GetMigrationsResponse.AddMember("nextToken", _NextToken)
-
-	GetSlotTypeRequest_name = GetSlotTypeRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	GetSlotTypeRequest_version = GetSlotTypeRequest.AddMember("version", _Version, &smithytraits.HTTPLabel{})
-
-	GetSlotTypeResponse_name = GetSlotTypeResponse.AddMember("name", _SlotTypeName)
-
-	GetSlotTypeResponse_description = GetSlotTypeResponse.AddMember("description", _Description)
-
-	GetSlotTypeResponse_enumerationValues = GetSlotTypeResponse.AddMember("enumerationValues", _EnumerationValues)
-
-	GetSlotTypeResponse_lastUpdatedDate = GetSlotTypeResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetSlotTypeResponse_createdDate = GetSlotTypeResponse.AddMember("createdDate", _Timestamp)
-
-	GetSlotTypeResponse_version = GetSlotTypeResponse.AddMember("version", _Version)
-
-	GetSlotTypeResponse_checksum = GetSlotTypeResponse.AddMember("checksum", _String)
-
-	GetSlotTypeResponse_valueSelectionStrategy = GetSlotTypeResponse.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	GetSlotTypeResponse_parentSlotTypeSignature = GetSlotTypeResponse.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	GetSlotTypeResponse_slotTypeConfigurations = GetSlotTypeResponse.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	GetSlotTypesRequest_nextToken = GetSlotTypesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetSlotTypesRequest_maxResults = GetSlotTypesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetSlotTypesRequest_nameContains = GetSlotTypesRequest.AddMember("nameContains", _SlotTypeName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetSlotTypesResponse_slotTypes = GetSlotTypesResponse.AddMember("slotTypes", _SlotTypeMetadataList)
-
-	GetSlotTypesResponse_nextToken = GetSlotTypesResponse.AddMember("nextToken", _NextToken)
-
-	GetSlotTypeVersionsRequest_name = GetSlotTypeVersionsRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	GetSlotTypeVersionsRequest_nextToken = GetSlotTypeVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetSlotTypeVersionsRequest_maxResults = GetSlotTypeVersionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetSlotTypeVersionsResponse_slotTypes = GetSlotTypeVersionsResponse.AddMember("slotTypes", _SlotTypeMetadataList)
-
-	GetSlotTypeVersionsResponse_nextToken = GetSlotTypeVersionsResponse.AddMember("nextToken", _NextToken)
-
-	GetUtterancesViewRequest_botName = GetUtterancesViewRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetUtterancesViewRequest_botVersions = GetUtterancesViewRequest.AddMember("botVersions", _BotVersions, &smithytraits.HTTPQuery{Name: "bot_versions"})
-
-	GetUtterancesViewRequest_statusType = GetUtterancesViewRequest.AddMember("statusType", StatusType, &smithytraits.HTTPQuery{Name: "status_type"})
-
-	GetUtterancesViewResponse_botName = GetUtterancesViewResponse.AddMember("botName", _BotName)
-
-	GetUtterancesViewResponse_utterances = GetUtterancesViewResponse.AddMember("utterances", _ListsOfUtterances)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	PutBotAliasRequest_name = PutBotAliasRequest.AddMember("name", _AliasName, &smithytraits.HTTPLabel{})
-
-	PutBotAliasRequest_description = PutBotAliasRequest.AddMember("description", _Description)
-
-	PutBotAliasRequest_botVersion = PutBotAliasRequest.AddMember("botVersion", _Version)
-
-	PutBotAliasRequest_botName = PutBotAliasRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	PutBotAliasRequest_checksum = PutBotAliasRequest.AddMember("checksum", _String)
-
-	PutBotAliasRequest_conversationLogs = PutBotAliasRequest.AddMember("conversationLogs", ConversationLogsRequest)
-
-	PutBotAliasRequest_tags = PutBotAliasRequest.AddMember("tags", _TagList)
-
-	PutBotAliasResponse_name = PutBotAliasResponse.AddMember("name", _AliasName)
-
-	PutBotAliasResponse_description = PutBotAliasResponse.AddMember("description", _Description)
-
-	PutBotAliasResponse_botVersion = PutBotAliasResponse.AddMember("botVersion", _Version)
-
-	PutBotAliasResponse_botName = PutBotAliasResponse.AddMember("botName", _BotName)
-
-	PutBotAliasResponse_lastUpdatedDate = PutBotAliasResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutBotAliasResponse_createdDate = PutBotAliasResponse.AddMember("createdDate", _Timestamp)
-
-	PutBotAliasResponse_checksum = PutBotAliasResponse.AddMember("checksum", _String)
-
-	PutBotAliasResponse_conversationLogs = PutBotAliasResponse.AddMember("conversationLogs", ConversationLogsResponse)
-
-	PutBotAliasResponse_tags = PutBotAliasResponse.AddMember("tags", _TagList)
-
-	PutBotRequest_name = PutBotRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	PutBotRequest_description = PutBotRequest.AddMember("description", _Description)
-
-	PutBotRequest_intents = PutBotRequest.AddMember("intents", _IntentList)
-
-	PutBotRequest_enableModelImprovements = PutBotRequest.AddMember("enableModelImprovements", _Boolean)
-
-	PutBotRequest_nluIntentConfidenceThreshold = PutBotRequest.AddMember("nluIntentConfidenceThreshold", _ConfidenceThreshold)
-
-	PutBotRequest_clarificationPrompt = PutBotRequest.AddMember("clarificationPrompt", Prompt)
-
-	PutBotRequest_abortStatement = PutBotRequest.AddMember("abortStatement", Statement)
-
-	PutBotRequest_idleSessionTTLInSeconds = PutBotRequest.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	PutBotRequest_voiceId = PutBotRequest.AddMember("voiceId", _String)
-
-	PutBotRequest_checksum = PutBotRequest.AddMember("checksum", _String)
-
-	PutBotRequest_processBehavior = PutBotRequest.AddMember("processBehavior", ProcessBehavior)
-
-	PutBotRequest_locale = PutBotRequest.AddMember("locale", Locale)
-
-	PutBotRequest_childDirected = PutBotRequest.AddMember("childDirected", _Boolean)
-
-	PutBotRequest_detectSentiment = PutBotRequest.AddMember("detectSentiment", _Boolean)
-
-	PutBotRequest_createVersion = PutBotRequest.AddMember("createVersion", _Boolean)
-
-	PutBotRequest_tags = PutBotRequest.AddMember("tags", _TagList)
-
-	PutBotResponse_name = PutBotResponse.AddMember("name", _BotName)
-
-	PutBotResponse_description = PutBotResponse.AddMember("description", _Description)
-
-	PutBotResponse_intents = PutBotResponse.AddMember("intents", _IntentList)
-
-	PutBotResponse_enableModelImprovements = PutBotResponse.AddMember("enableModelImprovements", _Boolean)
-
-	PutBotResponse_nluIntentConfidenceThreshold = PutBotResponse.AddMember("nluIntentConfidenceThreshold", _ConfidenceThreshold)
-
-	PutBotResponse_clarificationPrompt = PutBotResponse.AddMember("clarificationPrompt", Prompt)
-
-	PutBotResponse_abortStatement = PutBotResponse.AddMember("abortStatement", Statement)
-
-	PutBotResponse_status = PutBotResponse.AddMember("status", Status)
-
-	PutBotResponse_failureReason = PutBotResponse.AddMember("failureReason", _String)
-
-	PutBotResponse_lastUpdatedDate = PutBotResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutBotResponse_createdDate = PutBotResponse.AddMember("createdDate", _Timestamp)
-
-	PutBotResponse_idleSessionTTLInSeconds = PutBotResponse.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	PutBotResponse_voiceId = PutBotResponse.AddMember("voiceId", _String)
-
-	PutBotResponse_checksum = PutBotResponse.AddMember("checksum", _String)
-
-	PutBotResponse_version = PutBotResponse.AddMember("version", _Version)
-
-	PutBotResponse_locale = PutBotResponse.AddMember("locale", Locale)
-
-	PutBotResponse_childDirected = PutBotResponse.AddMember("childDirected", _Boolean)
-
-	PutBotResponse_createVersion = PutBotResponse.AddMember("createVersion", _Boolean)
-
-	PutBotResponse_detectSentiment = PutBotResponse.AddMember("detectSentiment", _Boolean)
-
-	PutBotResponse_tags = PutBotResponse.AddMember("tags", _TagList)
-
-	PutIntentRequest_name = PutIntentRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	PutIntentRequest_description = PutIntentRequest.AddMember("description", _Description)
-
-	PutIntentRequest_slots = PutIntentRequest.AddMember("slots", _SlotList)
-
-	PutIntentRequest_sampleUtterances = PutIntentRequest.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	PutIntentRequest_confirmationPrompt = PutIntentRequest.AddMember("confirmationPrompt", Prompt)
-
-	PutIntentRequest_rejectionStatement = PutIntentRequest.AddMember("rejectionStatement", Statement)
-
-	PutIntentRequest_followUpPrompt = PutIntentRequest.AddMember("followUpPrompt", FollowUpPrompt)
-
-	PutIntentRequest_conclusionStatement = PutIntentRequest.AddMember("conclusionStatement", Statement)
-
-	PutIntentRequest_dialogCodeHook = PutIntentRequest.AddMember("dialogCodeHook", CodeHook)
-
-	PutIntentRequest_fulfillmentActivity = PutIntentRequest.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	PutIntentRequest_parentIntentSignature = PutIntentRequest.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	PutIntentRequest_checksum = PutIntentRequest.AddMember("checksum", _String)
-
-	PutIntentRequest_createVersion = PutIntentRequest.AddMember("createVersion", _Boolean)
-
-	PutIntentRequest_kendraConfiguration = PutIntentRequest.AddMember("kendraConfiguration", KendraConfiguration)
-
-	PutIntentRequest_inputContexts = PutIntentRequest.AddMember("inputContexts", _InputContextList)
-
-	PutIntentRequest_outputContexts = PutIntentRequest.AddMember("outputContexts", _OutputContextList)
-
-	PutIntentResponse_name = PutIntentResponse.AddMember("name", _IntentName)
-
-	PutIntentResponse_description = PutIntentResponse.AddMember("description", _Description)
-
-	PutIntentResponse_slots = PutIntentResponse.AddMember("slots", _SlotList)
-
-	PutIntentResponse_sampleUtterances = PutIntentResponse.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	PutIntentResponse_confirmationPrompt = PutIntentResponse.AddMember("confirmationPrompt", Prompt)
-
-	PutIntentResponse_rejectionStatement = PutIntentResponse.AddMember("rejectionStatement", Statement)
-
-	PutIntentResponse_followUpPrompt = PutIntentResponse.AddMember("followUpPrompt", FollowUpPrompt)
-
-	PutIntentResponse_conclusionStatement = PutIntentResponse.AddMember("conclusionStatement", Statement)
-
-	PutIntentResponse_dialogCodeHook = PutIntentResponse.AddMember("dialogCodeHook", CodeHook)
-
-	PutIntentResponse_fulfillmentActivity = PutIntentResponse.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	PutIntentResponse_parentIntentSignature = PutIntentResponse.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	PutIntentResponse_lastUpdatedDate = PutIntentResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutIntentResponse_createdDate = PutIntentResponse.AddMember("createdDate", _Timestamp)
-
-	PutIntentResponse_version = PutIntentResponse.AddMember("version", _Version)
-
-	PutIntentResponse_checksum = PutIntentResponse.AddMember("checksum", _String)
-
-	PutIntentResponse_createVersion = PutIntentResponse.AddMember("createVersion", _Boolean)
-
-	PutIntentResponse_kendraConfiguration = PutIntentResponse.AddMember("kendraConfiguration", KendraConfiguration)
-
-	PutIntentResponse_inputContexts = PutIntentResponse.AddMember("inputContexts", _InputContextList)
-
-	PutIntentResponse_outputContexts = PutIntentResponse.AddMember("outputContexts", _OutputContextList)
-
-	PutSlotTypeRequest_name = PutSlotTypeRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	PutSlotTypeRequest_description = PutSlotTypeRequest.AddMember("description", _Description)
-
-	PutSlotTypeRequest_enumerationValues = PutSlotTypeRequest.AddMember("enumerationValues", _EnumerationValues)
-
-	PutSlotTypeRequest_checksum = PutSlotTypeRequest.AddMember("checksum", _String)
-
-	PutSlotTypeRequest_valueSelectionStrategy = PutSlotTypeRequest.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	PutSlotTypeRequest_createVersion = PutSlotTypeRequest.AddMember("createVersion", _Boolean)
-
-	PutSlotTypeRequest_parentSlotTypeSignature = PutSlotTypeRequest.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	PutSlotTypeRequest_slotTypeConfigurations = PutSlotTypeRequest.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	PutSlotTypeResponse_name = PutSlotTypeResponse.AddMember("name", _SlotTypeName)
-
-	PutSlotTypeResponse_description = PutSlotTypeResponse.AddMember("description", _Description)
-
-	PutSlotTypeResponse_enumerationValues = PutSlotTypeResponse.AddMember("enumerationValues", _EnumerationValues)
-
-	PutSlotTypeResponse_lastUpdatedDate = PutSlotTypeResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutSlotTypeResponse_createdDate = PutSlotTypeResponse.AddMember("createdDate", _Timestamp)
-
-	PutSlotTypeResponse_version = PutSlotTypeResponse.AddMember("version", _Version)
-
-	PutSlotTypeResponse_checksum = PutSlotTypeResponse.AddMember("checksum", _String)
-
-	PutSlotTypeResponse_valueSelectionStrategy = PutSlotTypeResponse.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	PutSlotTypeResponse_createVersion = PutSlotTypeResponse.AddMember("createVersion", _Boolean)
-
-	PutSlotTypeResponse_parentSlotTypeSignature = PutSlotTypeResponse.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	PutSlotTypeResponse_slotTypeConfigurations = PutSlotTypeResponse.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	StartImportRequest_payload = StartImportRequest.AddMember("payload", _Blob)
-
-	StartImportRequest_resourceType = StartImportRequest.AddMember("resourceType", ResourceType)
-
-	StartImportRequest_mergeStrategy = StartImportRequest.AddMember("mergeStrategy", MergeStrategy)
-
-	StartImportRequest_tags = StartImportRequest.AddMember("tags", _TagList)
-
-	StartImportResponse_name = StartImportResponse.AddMember("name", _Name)
-
-	StartImportResponse_resourceType = StartImportResponse.AddMember("resourceType", ResourceType)
-
-	StartImportResponse_mergeStrategy = StartImportResponse.AddMember("mergeStrategy", MergeStrategy)
-
-	StartImportResponse_importId = StartImportResponse.AddMember("importId", _String)
-
-	StartImportResponse_importStatus = StartImportResponse.AddMember("importStatus", ImportStatus)
-
-	StartImportResponse_tags = StartImportResponse.AddMember("tags", _TagList)
-
-	StartImportResponse_createdDate = StartImportResponse.AddMember("createdDate", _Timestamp)
-
-	StartMigrationRequest_v1BotName = StartMigrationRequest.AddMember("v1BotName", _BotName)
-
-	StartMigrationRequest_v1BotVersion = StartMigrationRequest.AddMember("v1BotVersion", _Version)
-
-	StartMigrationRequest_v2BotName = StartMigrationRequest.AddMember("v2BotName", _V2BotName)
-
-	StartMigrationRequest_v2BotRole = StartMigrationRequest.AddMember("v2BotRole", _IamRoleArn)
-
-	StartMigrationRequest_migrationStrategy = StartMigrationRequest.AddMember("migrationStrategy", MigrationStrategy)
-
-	StartMigrationResponse_v1BotName = StartMigrationResponse.AddMember("v1BotName", _BotName)
-
-	StartMigrationResponse_v1BotVersion = StartMigrationResponse.AddMember("v1BotVersion", _Version)
-
-	StartMigrationResponse_v1BotLocale = StartMigrationResponse.AddMember("v1BotLocale", Locale)
-
-	StartMigrationResponse_v2BotId = StartMigrationResponse.AddMember("v2BotId", _V2BotId)
-
-	StartMigrationResponse_v2BotRole = StartMigrationResponse.AddMember("v2BotRole", _IamRoleArn)
-
-	StartMigrationResponse_migrationId = StartMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	StartMigrationResponse_migrationStrategy = StartMigrationResponse.AddMember("migrationStrategy", MigrationStrategy)
-
-	StartMigrationResponse_migrationTimestamp = StartMigrationResponse.AddMember("migrationTimestamp", _Timestamp)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-}
+	Code: 204}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 412}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nameContains"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "locale"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureContains"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceType"}}, DirectMask: 0x10}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "exportType"}}, DirectMask: 0x10}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortByAttribute"}}, DirectMask: 0x10}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortByOrder"}}, DirectMask: 0x10}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "v1BotNameContains"}}, DirectMask: 0x10}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "migrationStatusEquals"}}, DirectMask: 0x10}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "bot_versions"}}, DirectMask: 0x10}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status_type"}}, DirectMask: 0x10}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mBotAliasMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sBotAliasMetadata_name, &sBotAliasMetadata_description, &sBotAliasMetadata_botVersion, &sBotAliasMetadata_botName, &sBotAliasMetadata_lastUpdatedDate, &sBotAliasMetadata_createdDate, &sBotAliasMetadata_checksum, &sBotAliasMetadata_conversationLogs}}
+var m_BotAliasMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BotAliasMetadataList_member}}
+var mBotChannelAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sBotChannelAssociation_name, &sBotChannelAssociation_description, &sBotChannelAssociation_botAlias, &sBotChannelAssociation_botName, &sBotChannelAssociation_createdDate, &sBotChannelAssociation_type, &sBotChannelAssociation_botConfiguration, &sBotChannelAssociation_status, &sBotChannelAssociation_failureReason}, Hash: &hBotChannelAssociation}
+var m_BotChannelAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BotChannelAssociationList_member}}
+var mBotMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sBotMetadata_name, &sBotMetadata_description, &sBotMetadata_status, &sBotMetadata_lastUpdatedDate, &sBotMetadata_createdDate, &sBotMetadata_version}}
+var m_BotMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BotMetadataList_member}}
+var m_BotVersions = smithy.SchemaMembers{List: []*smithy.Schema{&s_BotVersions_member}}
+var mBuiltinIntentMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sBuiltinIntentMetadata_signature, &sBuiltinIntentMetadata_supportedLocales}}
+var m_BuiltinIntentMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuiltinIntentMetadataList_member}}
+var mBuiltinIntentSlot = smithy.SchemaMembers{List: []*smithy.Schema{&sBuiltinIntentSlot_name}}
+var m_BuiltinIntentSlotList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuiltinIntentSlotList_member}}
+var mBuiltinSlotTypeMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sBuiltinSlotTypeMetadata_signature, &sBuiltinSlotTypeMetadata_supportedLocales}}
+var m_BuiltinSlotTypeMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BuiltinSlotTypeMetadataList_member}}
+var m_ChannelConfigurationMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelConfigurationMap_key, &s_ChannelConfigurationMap_value}}
+var mChannelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStatus_IN_PROGRESS, &sChannelStatus_CREATED, &sChannelStatus_FAILED}}
+var mChannelType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelType_FACEBOOK, &sChannelType_SLACK, &sChannelType_TWILIO_SMS, &sChannelType_KIK}}
+var mCodeHook = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeHook_uri, &sCodeHook_messageVersion}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sContentType_PLAIN_TEXT, &sContentType_SSML, &sContentType_CUSTOM_PAYLOAD}}
+var mConversationLogsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConversationLogsRequest_logSettings, &sConversationLogsRequest_iamRoleArn}}
+var mConversationLogsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConversationLogsResponse_logSettings, &sConversationLogsResponse_iamRoleArn}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_CLOUDWATCH_LOGS, &sDestination_S3}}
+var mEnumerationValue = smithy.SchemaMembers{List: []*smithy.Schema{&sEnumerationValue_value, &sEnumerationValue_synonyms}}
+var m_EnumerationValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnumerationValues_member}}
+var mExportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExportStatus_IN_PROGRESS, &sExportStatus_READY, &sExportStatus_FAILED}}
+var mExportType = smithy.SchemaMembers{List: []*smithy.Schema{&sExportType_ALEXA_SKILLS_KIT, &sExportType_LEX}}
+var mFollowUpPrompt = smithy.SchemaMembers{List: []*smithy.Schema{&sFollowUpPrompt_prompt, &sFollowUpPrompt_rejectionStatement}}
+var mFulfillmentActivity = smithy.SchemaMembers{List: []*smithy.Schema{&sFulfillmentActivity_type, &sFulfillmentActivity_codeHook}}
+var mFulfillmentActivityType = smithy.SchemaMembers{List: []*smithy.Schema{&sFulfillmentActivityType_RETURN_INTENT, &sFulfillmentActivityType_CODE_HOOK}}
+var mImportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sImportStatus_IN_PROGRESS, &sImportStatus_COMPLETE, &sImportStatus_FAILED}}
+var mInputContext = smithy.SchemaMembers{List: []*smithy.Schema{&sInputContext_name}}
+var m_InputContextList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InputContextList_member}}
+var mIntent = smithy.SchemaMembers{List: []*smithy.Schema{&sIntent_intentName, &sIntent_intentVersion}}
+var m_IntentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntentList_member}}
+var mIntentMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sIntentMetadata_name, &sIntentMetadata_description, &sIntentMetadata_lastUpdatedDate, &sIntentMetadata_createdDate, &sIntentMetadata_version}}
+var m_IntentMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntentMetadataList_member}}
+var m_IntentUtteranceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntentUtteranceList_member}}
+var mInternalFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalFailureException_message}}
+var mKendraConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKendraConfiguration_kendraIndex, &sKendraConfiguration_queryFilterString, &sKendraConfiguration_role}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_retryAfterSeconds, &sLimitExceededException_message}}
+var m_ListOfUtterance = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfUtterance_member}}
+var m_ListsOfUtterances = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListsOfUtterances_member}}
+var mLocale = smithy.SchemaMembers{List: []*smithy.Schema{&sLocale_DE_DE, &sLocale_EN_AU, &sLocale_EN_GB, &sLocale_EN_IN, &sLocale_EN_US, &sLocale_ES_419, &sLocale_ES_ES, &sLocale_ES_US, &sLocale_FR_FR, &sLocale_FR_CA, &sLocale_IT_IT, &sLocale_JA_JP, &sLocale_KO_KR}, Hash: &hLocale}
+var m_LocaleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LocaleList_member}}
+var mLogSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sLogSettingsRequest_logType, &sLogSettingsRequest_destination, &sLogSettingsRequest_kmsKeyArn, &sLogSettingsRequest_resourceArn}}
+var m_LogSettingsRequestList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogSettingsRequestList_member}}
+var mLogSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sLogSettingsResponse_logType, &sLogSettingsResponse_destination, &sLogSettingsResponse_kmsKeyArn, &sLogSettingsResponse_resourceArn, &sLogSettingsResponse_resourcePrefix}}
+var m_LogSettingsResponseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogSettingsResponseList_member}}
+var mLogType = smithy.SchemaMembers{List: []*smithy.Schema{&sLogType_AUDIO, &sLogType_TEXT}}
+var mMergeStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sMergeStrategy_OVERWRITE_LATEST, &sMergeStrategy_FAIL_ON_CONFLICT}}
+var mMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sMessage_contentType, &sMessage_content, &sMessage_groupNumber}}
+var m_MessageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MessageList_member}}
+var mMigrationAlert = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationAlert_type, &sMigrationAlert_message, &sMigrationAlert_details, &sMigrationAlert_referenceURLs}}
+var m_MigrationAlertDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_MigrationAlertDetails_member}}
+var m_MigrationAlertReferenceURLs = smithy.SchemaMembers{List: []*smithy.Schema{&s_MigrationAlertReferenceURLs_member}}
+var m_MigrationAlerts = smithy.SchemaMembers{List: []*smithy.Schema{&s_MigrationAlerts_member}}
+var mMigrationAlertType = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationAlertType_ERROR, &sMigrationAlertType_WARN}}
+var mMigrationSortAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationSortAttribute_V1_BOT_NAME, &sMigrationSortAttribute_MIGRATION_DATE_TIME}}
+var mMigrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationStatus_IN_PROGRESS, &sMigrationStatus_COMPLETED, &sMigrationStatus_FAILED}}
+var mMigrationStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationStrategy_CREATE_NEW, &sMigrationStrategy_UPDATE_EXISTING}}
+var mMigrationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationSummary_migrationId, &sMigrationSummary_v1BotName, &sMigrationSummary_v1BotVersion, &sMigrationSummary_v1BotLocale, &sMigrationSummary_v2BotId, &sMigrationSummary_v2BotRole, &sMigrationSummary_migrationStatus, &sMigrationSummary_migrationStrategy, &sMigrationSummary_migrationTimestamp}, Hash: &hMigrationSummary}
+var m_MigrationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MigrationSummaryList_member}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mObfuscationSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sObfuscationSetting_NONE, &sObfuscationSetting_DEFAULT_OBFUSCATION}}
+var mOutputContext = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputContext_name, &sOutputContext_timeToLiveInSeconds, &sOutputContext_turnsToLive}}
+var m_OutputContextList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OutputContextList_member}}
+var mPreconditionFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sPreconditionFailedException_message}}
+var mProcessBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessBehavior_SAVE, &sProcessBehavior_BUILD}}
+var mPrompt = smithy.SchemaMembers{List: []*smithy.Schema{&sPrompt_messages, &sPrompt_maxAttempts, &sPrompt_responseCard}}
+var mReferenceType = smithy.SchemaMembers{List: []*smithy.Schema{&sReferenceType_INTENT, &sReferenceType_BOT, &sReferenceType_BOTALIAS, &sReferenceType_BOTCHANNEL}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_referenceType, &sResourceInUseException_exampleReference}}
+var mResourceReference = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceReference_name, &sResourceReference_version}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_BOT, &sResourceType_INTENT, &sResourceType_SLOT_TYPE}}
+var mSlot = smithy.SchemaMembers{List: []*smithy.Schema{&sSlot_name, &sSlot_description, &sSlot_slotConstraint, &sSlot_slotType, &sSlot_slotTypeVersion, &sSlot_valueElicitationPrompt, &sSlot_priority, &sSlot_sampleUtterances, &sSlot_responseCard, &sSlot_obfuscationSetting, &sSlot_defaultValueSpec}, Hash: &hSlot}
+var mSlotConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sSlotConstraint_REQUIRED, &sSlotConstraint_OPTIONAL}}
+var mSlotDefaultValue = smithy.SchemaMembers{List: []*smithy.Schema{&sSlotDefaultValue_defaultValue}}
+var m_SlotDefaultValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlotDefaultValueList_member}}
+var mSlotDefaultValueSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sSlotDefaultValueSpec_defaultValueList}}
+var m_SlotList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlotList_member}}
+var mSlotTypeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSlotTypeConfiguration_regexConfiguration}}
+var m_SlotTypeConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlotTypeConfigurations_member}}
+var mSlotTypeMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sSlotTypeMetadata_name, &sSlotTypeMetadata_description, &sSlotTypeMetadata_lastUpdatedDate, &sSlotTypeMetadata_createdDate, &sSlotTypeMetadata_version}}
+var m_SlotTypeMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlotTypeMetadataList_member}}
+var mSlotTypeRegexConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSlotTypeRegexConfiguration_pattern}}
+var m_SlotUtteranceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlotUtteranceList_member}}
+var mSlotValueSelectionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sSlotValueSelectionStrategy_ORIGINAL_VALUE, &sSlotValueSelectionStrategy_TOP_RESOLUTION}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASCENDING, &sSortOrder_DESCENDING}}
+var mStatement = smithy.SchemaMembers{List: []*smithy.Schema{&sStatement_messages, &sStatement_responseCard}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_BUILDING, &sStatus_READY, &sStatus_READY_BASIC_TESTING, &sStatus_FAILED, &sStatus_NOT_BUILT}}
+var mStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusType_DETECTED, &sStatusType_MISSED}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_SynonymList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SynonymList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mUtteranceData = smithy.SchemaMembers{List: []*smithy.Schema{&sUtteranceData_utteranceString, &sUtteranceData_count, &sUtteranceData_distinctUsers, &sUtteranceData_firstUtteredDate, &sUtteranceData_lastUtteredDate}}
+var mUtteranceList = smithy.SchemaMembers{List: []*smithy.Schema{&sUtteranceList_botVersion, &sUtteranceList_utterances}}
+var mCreateBotVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBotVersionRequest_name, &sCreateBotVersionRequest_checksum}}
+var mCreateBotVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBotVersionResponse_name, &sCreateBotVersionResponse_description, &sCreateBotVersionResponse_intents, &sCreateBotVersionResponse_clarificationPrompt, &sCreateBotVersionResponse_abortStatement, &sCreateBotVersionResponse_status, &sCreateBotVersionResponse_failureReason, &sCreateBotVersionResponse_lastUpdatedDate, &sCreateBotVersionResponse_createdDate, &sCreateBotVersionResponse_idleSessionTTLInSeconds, &sCreateBotVersionResponse_voiceId, &sCreateBotVersionResponse_checksum, &sCreateBotVersionResponse_version, &sCreateBotVersionResponse_locale, &sCreateBotVersionResponse_childDirected, &sCreateBotVersionResponse_enableModelImprovements, &sCreateBotVersionResponse_detectSentiment}, Hash: &hCreateBotVersionResponse}
+var mCreateIntentVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntentVersionRequest_name, &sCreateIntentVersionRequest_checksum}}
+var mCreateIntentVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntentVersionResponse_name, &sCreateIntentVersionResponse_description, &sCreateIntentVersionResponse_slots, &sCreateIntentVersionResponse_sampleUtterances, &sCreateIntentVersionResponse_confirmationPrompt, &sCreateIntentVersionResponse_rejectionStatement, &sCreateIntentVersionResponse_followUpPrompt, &sCreateIntentVersionResponse_conclusionStatement, &sCreateIntentVersionResponse_dialogCodeHook, &sCreateIntentVersionResponse_fulfillmentActivity, &sCreateIntentVersionResponse_parentIntentSignature, &sCreateIntentVersionResponse_lastUpdatedDate, &sCreateIntentVersionResponse_createdDate, &sCreateIntentVersionResponse_version, &sCreateIntentVersionResponse_checksum, &sCreateIntentVersionResponse_kendraConfiguration, &sCreateIntentVersionResponse_inputContexts, &sCreateIntentVersionResponse_outputContexts}, Hash: &hCreateIntentVersionResponse}
+var mCreateSlotTypeVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSlotTypeVersionRequest_name, &sCreateSlotTypeVersionRequest_checksum}}
+var mCreateSlotTypeVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSlotTypeVersionResponse_name, &sCreateSlotTypeVersionResponse_description, &sCreateSlotTypeVersionResponse_enumerationValues, &sCreateSlotTypeVersionResponse_lastUpdatedDate, &sCreateSlotTypeVersionResponse_createdDate, &sCreateSlotTypeVersionResponse_version, &sCreateSlotTypeVersionResponse_checksum, &sCreateSlotTypeVersionResponse_valueSelectionStrategy, &sCreateSlotTypeVersionResponse_parentSlotTypeSignature, &sCreateSlotTypeVersionResponse_slotTypeConfigurations}, Hash: &hCreateSlotTypeVersionResponse}
+var mDeleteBotAliasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBotAliasRequest_name, &sDeleteBotAliasRequest_botName}}
+var mDeleteBotChannelAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBotChannelAssociationRequest_name, &sDeleteBotChannelAssociationRequest_botName, &sDeleteBotChannelAssociationRequest_botAlias}}
+var mDeleteBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBotRequest_name}}
+var mDeleteBotVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBotVersionRequest_name, &sDeleteBotVersionRequest_version}}
+var mDeleteIntentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIntentRequest_name}}
+var mDeleteIntentVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIntentVersionRequest_name, &sDeleteIntentVersionRequest_version}}
+var mDeleteSlotTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlotTypeRequest_name}}
+var mDeleteSlotTypeVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlotTypeVersionRequest_name, &sDeleteSlotTypeVersionRequest_version}}
+var mDeleteUtterancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUtterancesRequest_botName, &sDeleteUtterancesRequest_userId}}
+var mGetBotAliasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotAliasesRequest_botName, &sGetBotAliasesRequest_nextToken, &sGetBotAliasesRequest_maxResults, &sGetBotAliasesRequest_nameContains}}
+var mGetBotAliasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotAliasesResponse_BotAliases, &sGetBotAliasesResponse_nextToken}}
+var mGetBotAliasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotAliasRequest_name, &sGetBotAliasRequest_botName}}
+var mGetBotAliasResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotAliasResponse_name, &sGetBotAliasResponse_description, &sGetBotAliasResponse_botVersion, &sGetBotAliasResponse_botName, &sGetBotAliasResponse_lastUpdatedDate, &sGetBotAliasResponse_createdDate, &sGetBotAliasResponse_checksum, &sGetBotAliasResponse_conversationLogs}}
+var mGetBotChannelAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotChannelAssociationRequest_name, &sGetBotChannelAssociationRequest_botName, &sGetBotChannelAssociationRequest_botAlias}}
+var mGetBotChannelAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotChannelAssociationResponse_name, &sGetBotChannelAssociationResponse_description, &sGetBotChannelAssociationResponse_botAlias, &sGetBotChannelAssociationResponse_botName, &sGetBotChannelAssociationResponse_createdDate, &sGetBotChannelAssociationResponse_type, &sGetBotChannelAssociationResponse_botConfiguration, &sGetBotChannelAssociationResponse_status, &sGetBotChannelAssociationResponse_failureReason}, Hash: &hGetBotChannelAssociationResponse}
+var mGetBotChannelAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotChannelAssociationsRequest_botName, &sGetBotChannelAssociationsRequest_botAlias, &sGetBotChannelAssociationsRequest_nextToken, &sGetBotChannelAssociationsRequest_maxResults, &sGetBotChannelAssociationsRequest_nameContains}}
+var mGetBotChannelAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotChannelAssociationsResponse_botChannelAssociations, &sGetBotChannelAssociationsResponse_nextToken}}
+var mGetBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotRequest_name, &sGetBotRequest_versionOrAlias}}
+var mGetBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotResponse_name, &sGetBotResponse_description, &sGetBotResponse_intents, &sGetBotResponse_enableModelImprovements, &sGetBotResponse_nluIntentConfidenceThreshold, &sGetBotResponse_clarificationPrompt, &sGetBotResponse_abortStatement, &sGetBotResponse_status, &sGetBotResponse_failureReason, &sGetBotResponse_lastUpdatedDate, &sGetBotResponse_createdDate, &sGetBotResponse_idleSessionTTLInSeconds, &sGetBotResponse_voiceId, &sGetBotResponse_checksum, &sGetBotResponse_version, &sGetBotResponse_locale, &sGetBotResponse_childDirected, &sGetBotResponse_detectSentiment}, Hash: &hGetBotResponse}
+var mGetBotsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotsRequest_nextToken, &sGetBotsRequest_maxResults, &sGetBotsRequest_nameContains}}
+var mGetBotsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotsResponse_bots, &sGetBotsResponse_nextToken}}
+var mGetBotVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotVersionsRequest_name, &sGetBotVersionsRequest_nextToken, &sGetBotVersionsRequest_maxResults}}
+var mGetBotVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotVersionsResponse_bots, &sGetBotVersionsResponse_nextToken}}
+var mGetBuiltinIntentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuiltinIntentRequest_signature}}
+var mGetBuiltinIntentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuiltinIntentResponse_signature, &sGetBuiltinIntentResponse_supportedLocales, &sGetBuiltinIntentResponse_slots}}
+var mGetBuiltinIntentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuiltinIntentsRequest_locale, &sGetBuiltinIntentsRequest_signatureContains, &sGetBuiltinIntentsRequest_nextToken, &sGetBuiltinIntentsRequest_maxResults}}
+var mGetBuiltinIntentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuiltinIntentsResponse_intents, &sGetBuiltinIntentsResponse_nextToken}}
+var mGetBuiltinSlotTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuiltinSlotTypesRequest_locale, &sGetBuiltinSlotTypesRequest_signatureContains, &sGetBuiltinSlotTypesRequest_nextToken, &sGetBuiltinSlotTypesRequest_maxResults}}
+var mGetBuiltinSlotTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuiltinSlotTypesResponse_slotTypes, &sGetBuiltinSlotTypesResponse_nextToken}}
+var mGetExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExportRequest_name, &sGetExportRequest_version, &sGetExportRequest_resourceType, &sGetExportRequest_exportType}}
+var mGetExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExportResponse_name, &sGetExportResponse_version, &sGetExportResponse_resourceType, &sGetExportResponse_exportType, &sGetExportResponse_exportStatus, &sGetExportResponse_failureReason, &sGetExportResponse_url}}
+var mGetImportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImportRequest_importId}}
+var mGetImportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImportResponse_name, &sGetImportResponse_resourceType, &sGetImportResponse_mergeStrategy, &sGetImportResponse_importId, &sGetImportResponse_importStatus, &sGetImportResponse_failureReason, &sGetImportResponse_createdDate}}
+var mGetIntentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntentRequest_name, &sGetIntentRequest_version}}
+var mGetIntentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntentResponse_name, &sGetIntentResponse_description, &sGetIntentResponse_slots, &sGetIntentResponse_sampleUtterances, &sGetIntentResponse_confirmationPrompt, &sGetIntentResponse_rejectionStatement, &sGetIntentResponse_followUpPrompt, &sGetIntentResponse_conclusionStatement, &sGetIntentResponse_dialogCodeHook, &sGetIntentResponse_fulfillmentActivity, &sGetIntentResponse_parentIntentSignature, &sGetIntentResponse_lastUpdatedDate, &sGetIntentResponse_createdDate, &sGetIntentResponse_version, &sGetIntentResponse_checksum, &sGetIntentResponse_kendraConfiguration, &sGetIntentResponse_inputContexts, &sGetIntentResponse_outputContexts}, Hash: &hGetIntentResponse}
+var mGetIntentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntentsRequest_nextToken, &sGetIntentsRequest_maxResults, &sGetIntentsRequest_nameContains}}
+var mGetIntentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntentsResponse_intents, &sGetIntentsResponse_nextToken}}
+var mGetIntentVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntentVersionsRequest_name, &sGetIntentVersionsRequest_nextToken, &sGetIntentVersionsRequest_maxResults}}
+var mGetIntentVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntentVersionsResponse_intents, &sGetIntentVersionsResponse_nextToken}}
+var mGetMigrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMigrationRequest_migrationId}}
+var mGetMigrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMigrationResponse_migrationId, &sGetMigrationResponse_v1BotName, &sGetMigrationResponse_v1BotVersion, &sGetMigrationResponse_v1BotLocale, &sGetMigrationResponse_v2BotId, &sGetMigrationResponse_v2BotRole, &sGetMigrationResponse_migrationStatus, &sGetMigrationResponse_migrationStrategy, &sGetMigrationResponse_migrationTimestamp, &sGetMigrationResponse_alerts}, Hash: &hGetMigrationResponse}
+var mGetMigrationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMigrationsRequest_sortByAttribute, &sGetMigrationsRequest_sortByOrder, &sGetMigrationsRequest_v1BotNameContains, &sGetMigrationsRequest_migrationStatusEquals, &sGetMigrationsRequest_maxResults, &sGetMigrationsRequest_nextToken}}
+var mGetMigrationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMigrationsResponse_migrationSummaries, &sGetMigrationsResponse_nextToken}}
+var mGetSlotTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSlotTypeRequest_name, &sGetSlotTypeRequest_version}}
+var mGetSlotTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSlotTypeResponse_name, &sGetSlotTypeResponse_description, &sGetSlotTypeResponse_enumerationValues, &sGetSlotTypeResponse_lastUpdatedDate, &sGetSlotTypeResponse_createdDate, &sGetSlotTypeResponse_version, &sGetSlotTypeResponse_checksum, &sGetSlotTypeResponse_valueSelectionStrategy, &sGetSlotTypeResponse_parentSlotTypeSignature, &sGetSlotTypeResponse_slotTypeConfigurations}, Hash: &hGetSlotTypeResponse}
+var mGetSlotTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSlotTypesRequest_nextToken, &sGetSlotTypesRequest_maxResults, &sGetSlotTypesRequest_nameContains}}
+var mGetSlotTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSlotTypesResponse_slotTypes, &sGetSlotTypesResponse_nextToken}}
+var mGetSlotTypeVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSlotTypeVersionsRequest_name, &sGetSlotTypeVersionsRequest_nextToken, &sGetSlotTypeVersionsRequest_maxResults}}
+var mGetSlotTypeVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSlotTypeVersionsResponse_slotTypes, &sGetSlotTypeVersionsResponse_nextToken}}
+var mGetUtterancesViewRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUtterancesViewRequest_botName, &sGetUtterancesViewRequest_botVersions, &sGetUtterancesViewRequest_statusType}}
+var mGetUtterancesViewResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUtterancesViewResponse_botName, &sGetUtterancesViewResponse_utterances}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mPutBotAliasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutBotAliasRequest_name, &sPutBotAliasRequest_description, &sPutBotAliasRequest_botVersion, &sPutBotAliasRequest_botName, &sPutBotAliasRequest_checksum, &sPutBotAliasRequest_conversationLogs, &sPutBotAliasRequest_tags}}
+var mPutBotAliasResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutBotAliasResponse_name, &sPutBotAliasResponse_description, &sPutBotAliasResponse_botVersion, &sPutBotAliasResponse_botName, &sPutBotAliasResponse_lastUpdatedDate, &sPutBotAliasResponse_createdDate, &sPutBotAliasResponse_checksum, &sPutBotAliasResponse_conversationLogs, &sPutBotAliasResponse_tags}, Hash: &hPutBotAliasResponse}
+var mPutBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutBotRequest_name, &sPutBotRequest_description, &sPutBotRequest_intents, &sPutBotRequest_enableModelImprovements, &sPutBotRequest_nluIntentConfidenceThreshold, &sPutBotRequest_clarificationPrompt, &sPutBotRequest_abortStatement, &sPutBotRequest_idleSessionTTLInSeconds, &sPutBotRequest_voiceId, &sPutBotRequest_checksum, &sPutBotRequest_processBehavior, &sPutBotRequest_locale, &sPutBotRequest_childDirected, &sPutBotRequest_detectSentiment, &sPutBotRequest_createVersion, &sPutBotRequest_tags}, Hash: &hPutBotRequest}
+var mPutBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutBotResponse_name, &sPutBotResponse_description, &sPutBotResponse_intents, &sPutBotResponse_enableModelImprovements, &sPutBotResponse_nluIntentConfidenceThreshold, &sPutBotResponse_clarificationPrompt, &sPutBotResponse_abortStatement, &sPutBotResponse_status, &sPutBotResponse_failureReason, &sPutBotResponse_lastUpdatedDate, &sPutBotResponse_createdDate, &sPutBotResponse_idleSessionTTLInSeconds, &sPutBotResponse_voiceId, &sPutBotResponse_checksum, &sPutBotResponse_version, &sPutBotResponse_locale, &sPutBotResponse_childDirected, &sPutBotResponse_createVersion, &sPutBotResponse_detectSentiment, &sPutBotResponse_tags}, Hash: &hPutBotResponse}
+var mPutIntentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutIntentRequest_name, &sPutIntentRequest_description, &sPutIntentRequest_slots, &sPutIntentRequest_sampleUtterances, &sPutIntentRequest_confirmationPrompt, &sPutIntentRequest_rejectionStatement, &sPutIntentRequest_followUpPrompt, &sPutIntentRequest_conclusionStatement, &sPutIntentRequest_dialogCodeHook, &sPutIntentRequest_fulfillmentActivity, &sPutIntentRequest_parentIntentSignature, &sPutIntentRequest_checksum, &sPutIntentRequest_createVersion, &sPutIntentRequest_kendraConfiguration, &sPutIntentRequest_inputContexts, &sPutIntentRequest_outputContexts}, Hash: &hPutIntentRequest}
+var mPutIntentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutIntentResponse_name, &sPutIntentResponse_description, &sPutIntentResponse_slots, &sPutIntentResponse_sampleUtterances, &sPutIntentResponse_confirmationPrompt, &sPutIntentResponse_rejectionStatement, &sPutIntentResponse_followUpPrompt, &sPutIntentResponse_conclusionStatement, &sPutIntentResponse_dialogCodeHook, &sPutIntentResponse_fulfillmentActivity, &sPutIntentResponse_parentIntentSignature, &sPutIntentResponse_lastUpdatedDate, &sPutIntentResponse_createdDate, &sPutIntentResponse_version, &sPutIntentResponse_checksum, &sPutIntentResponse_createVersion, &sPutIntentResponse_kendraConfiguration, &sPutIntentResponse_inputContexts, &sPutIntentResponse_outputContexts}, Hash: &hPutIntentResponse}
+var mPutSlotTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSlotTypeRequest_name, &sPutSlotTypeRequest_description, &sPutSlotTypeRequest_enumerationValues, &sPutSlotTypeRequest_checksum, &sPutSlotTypeRequest_valueSelectionStrategy, &sPutSlotTypeRequest_createVersion, &sPutSlotTypeRequest_parentSlotTypeSignature, &sPutSlotTypeRequest_slotTypeConfigurations}}
+var mPutSlotTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSlotTypeResponse_name, &sPutSlotTypeResponse_description, &sPutSlotTypeResponse_enumerationValues, &sPutSlotTypeResponse_lastUpdatedDate, &sPutSlotTypeResponse_createdDate, &sPutSlotTypeResponse_version, &sPutSlotTypeResponse_checksum, &sPutSlotTypeResponse_valueSelectionStrategy, &sPutSlotTypeResponse_createVersion, &sPutSlotTypeResponse_parentSlotTypeSignature, &sPutSlotTypeResponse_slotTypeConfigurations}, Hash: &hPutSlotTypeResponse}
+var mStartImportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImportRequest_payload, &sStartImportRequest_resourceType, &sStartImportRequest_mergeStrategy, &sStartImportRequest_tags}}
+var mStartImportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImportResponse_name, &sStartImportResponse_resourceType, &sStartImportResponse_mergeStrategy, &sStartImportResponse_importId, &sStartImportResponse_importStatus, &sStartImportResponse_tags, &sStartImportResponse_createdDate}}
+var mStartMigrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMigrationRequest_v1BotName, &sStartMigrationRequest_v1BotVersion, &sStartMigrationRequest_v2BotName, &sStartMigrationRequest_v2BotRole, &sStartMigrationRequest_migrationStrategy}}
+var mStartMigrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMigrationResponse_v1BotName, &sStartMigrationResponse_v1BotVersion, &sStartMigrationResponse_v1BotLocale, &sStartMigrationResponse_v2BotId, &sStartMigrationResponse_v2BotRole, &sStartMigrationResponse_migrationId, &sStartMigrationResponse_migrationStrategy, &sStartMigrationResponse_migrationTimestamp}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+
+var hBotChannelAssociation = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5, 7, 0, 2, 0, 4, 0, 0, 8, 0, 6, 0, 0, 0,
+	0, 9, 0, 0, 0, 0, 3, 0,
+}}
+var hLocale = smithy.MemberHash{Seed: 24, Slots: []uint16{
+	0, 0, 0, 0, 13, 0, 0, 12, 0, 6, 9, 0, 3, 10, 0, 2, 1, 0, 0, 0, 0, 0, 8, 0,
+	4, 0, 7, 0, 11, 0, 5, 0,
+}}
+var hMigrationSummary = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	1, 0, 0, 0, 0, 0, 0, 2, 0, 8, 6, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 4, 0,
+	0, 7, 0, 0, 0, 0, 3, 9,
+}}
+var hSlot = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	8, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 10, 0, 0, 0, 3, 0, 9, 7, 0, 0, 4, 6, 0,
+	0, 5, 0, 0, 11, 2, 0, 0,
+}}
+var hCreateBotVersionResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 1, 0, 15, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 4, 14, 12, 13, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 9, 17, 0, 2, 0, 0,
+	0, 0, 6, 0, 0, 0, 0, 0, 0, 7, 0, 3, 0, 8, 10, 0,
+}}
+var hCreateIntentVersionResponse = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 15, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 6, 4, 0, 0, 0, 8, 0, 9, 1, 0,
+	0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 11, 0, 0, 13, 2, 0, 5, 0,
+	0, 0, 17, 0, 0, 10, 3, 0, 0, 0, 0, 0, 0, 12, 7, 0,
+}}
+var hCreateSlotTypeVersionResponse = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 10, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 6, 8, 0, 3, 9, 5,
+	0, 0, 2, 0, 0, 0, 7, 0,
+}}
+var hGetBotChannelAssociationResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5, 7, 0, 2, 0, 4, 0, 0, 8, 0, 6, 0, 0, 0,
+	0, 9, 0, 0, 0, 0, 3, 0,
+}}
+var hGetBotResponse = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 0, 16, 0, 0, 18, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 6, 0,
+	7, 0, 4, 0, 15, 0, 0, 10, 3, 0, 12, 17, 0, 0, 0, 0, 13, 9, 0, 0, 2, 0, 0, 5,
+	0, 0, 11, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hGetIntentResponse = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 15, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 6, 4, 0, 0, 0, 8, 0, 9, 1, 0,
+	0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 11, 0, 0, 13, 2, 0, 5, 0,
+	0, 0, 17, 0, 0, 10, 3, 0, 0, 0, 0, 0, 0, 12, 7, 0,
+}}
+var hGetMigrationResponse = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 1, 6, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 10, 0, 2, 0, 0, 8, 0, 3, 0,
+	7, 0, 0, 5, 0, 0, 0, 4,
+}}
+var hGetSlotTypeResponse = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 10, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 6, 8, 0, 3, 9, 5,
+	0, 0, 2, 0, 0, 0, 7, 0,
+}}
+var hPutBotAliasResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 0, 0, 0, 8, 6, 0, 0, 2, 0, 4, 0, 0, 7, 0, 0, 0, 9, 0,
+	0, 0, 0, 0, 3, 5, 0, 0,
+}}
+var hPutBotRequest = smithy.MemberHash{Seed: 83, Slots: []uint16{
+	0, 0, 0, 12, 0, 0, 13, 9, 7, 4, 0, 0, 6, 14, 2, 3, 8, 0, 16, 1, 0, 0, 0, 10,
+	0, 0, 0, 0, 0, 11, 15, 5,
+}}
+var hPutBotResponse = smithy.MemberHash{Seed: 27, Slots: []uint16{
+	0, 0, 7, 0, 14, 0, 0, 0, 0, 20, 13, 0, 1, 0, 0, 0, 4, 2, 15, 0, 0, 18, 0, 0,
+	0, 0, 0, 12, 0, 0, 9, 0, 0, 0, 17, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 16, 6,
+	3, 0, 0, 0, 0, 0, 5, 0, 0, 0, 19, 0, 0, 0, 8, 0,
+}}
+var hPutIntentRequest = smithy.MemberHash{Seed: 172, Slots: []uint16{
+	1, 15, 0, 14, 12, 10, 0, 0, 0, 11, 0, 7, 5, 3, 0, 0, 8, 0, 13, 6, 0, 4, 0, 0,
+	0, 0, 2, 0, 16, 9, 0, 0,
+}}
+var hPutIntentResponse = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 15, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 6, 4, 0, 0, 0, 8, 0, 9, 1, 0,
+	0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 11, 0, 0, 13, 2, 0, 5, 0,
+	16, 0, 18, 0, 0, 10, 3, 0, 0, 0, 0, 0, 0, 12, 7, 0,
+}}
+var hPutSlotTypeResponse = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 11, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 6, 8, 0, 3, 10, 5,
+	0, 0, 2, 9, 0, 0, 7, 0,
+}}
+
+var sCreateBotVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBotVersion, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateBotVersion})
+var sCreateIntentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntentVersion, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateIntentVersion})
+var sCreateSlotTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSlotTypeVersion, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateSlotTypeVersion})
+var sDeleteBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBot, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBot})
+var sDeleteBotAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotAlias, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBotAlias})
+var sDeleteBotChannelAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotChannelAssociation, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBotChannelAssociation})
+var sDeleteBotVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotVersion, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBotVersion})
+var sDeleteIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntent, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIntent})
+var sDeleteIntentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntentVersion, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIntentVersion})
+var sDeleteSlotType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlotType, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSlotType})
+var sDeleteSlotTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlotTypeVersion, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSlotTypeVersion})
+var sDeleteUtterances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUtterances, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteUtterances})
+var sGetBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBot, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetBot})
+var sGetBotAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotAlias, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetBotAlias})
+var sGetBotAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotAliases, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetBotAliases})
+var sGetBotChannelAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotChannelAssociation, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetBotChannelAssociation})
+var sGetBotChannelAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotChannelAssociations, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetBotChannelAssociations})
+var sGetBots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBots, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetBots})
+var sGetBotVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotVersions, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetBotVersions})
+var sGetBuiltinIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinIntent, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetBuiltinIntent})
+var sGetBuiltinIntents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinIntents, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eGetBuiltinIntents})
+var sGetBuiltinSlotTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinSlotTypes, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eGetBuiltinSlotTypes})
+var sGetExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExport, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eGetExport})
+var sGetImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImport, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetImport})
+var sGetIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntent, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetIntent})
+var sGetIntents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntents, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetIntents})
+var sGetIntentVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntentVersions, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetIntentVersions})
+var sGetMigration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigration, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetMigration})
+var sGetMigrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrations, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eGetMigrations})
+var sGetSlotType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotType, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetSlotType})
+var sGetSlotTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypes, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetSlotTypes})
+var sGetSlotTypeVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypeVersions, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetSlotTypeVersions})
+var sGetUtterancesView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUtterancesView, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetUtterancesView})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBot, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &ePutBot})
+var sPutBotAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBotAlias, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &ePutBotAlias})
+var sPutIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutIntent, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &ePutIntent})
+var sPutSlotType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSlotType, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &ePutSlotType})
+var sStartImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImport, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eStartImport})
+var sStartMigration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMigration, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eStartMigration})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_AWSDeepSenseModelBuildingService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSDeepSenseModelBuildingService, Type: smithy.ShapeTypeService, Ext: &e_AWSDeepSenseModelBuildingService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasName, Type: smithy.ShapeTypeString, Ext: &e_AliasName})
+var s_AliasNameOrListAll = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasNameOrListAll, Type: smithy.ShapeTypeString, Ext: &e_AliasNameOrListAll})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var s_Blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blob, Type: smithy.ShapeTypeBlob, Ext: &e_Blob})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sBotAliasMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBotAliasMetadata, Members: &mBotAliasMetadata, Type: smithy.ShapeTypeStructure, Ext: &eBotAliasMetadata})
+var sBotAliasMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AliasName, Type: smithy.ShapeTypeString, Ext: &eBotAliasMetadata_name})
+var sBotAliasMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eBotAliasMetadata_description})
+var sBotAliasMetadata_botVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eBotAliasMetadata_botVersion})
+var sBotAliasMetadata_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eBotAliasMetadata_botName})
+var sBotAliasMetadata_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBotAliasMetadata_lastUpdatedDate})
+var sBotAliasMetadata_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBotAliasMetadata_createdDate})
+var sBotAliasMetadata_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBotAliasMetadata_checksum})
+var sBotAliasMetadata_conversationLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conversationLogs", ID: &iConversationLogsResponse, Members: &mConversationLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBotAliasMetadata_conversationLogs})
+var s_BotAliasMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotAliasMetadataList, Members: &m_BotAliasMetadataList, Type: smithy.ShapeTypeList, Ext: &e_BotAliasMetadataList})
+var s_BotAliasMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBotAliasMetadata, Members: &mBotAliasMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_BotAliasMetadataList_member})
+var sBotChannelAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBotChannelAssociation, Members: &mBotChannelAssociation, Type: smithy.ShapeTypeStructure, Ext: &eBotChannelAssociation})
+var sBotChannelAssociation_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotChannelName, Type: smithy.ShapeTypeString, Ext: &eBotChannelAssociation_name})
+var sBotChannelAssociation_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eBotChannelAssociation_description})
+var sBotChannelAssociation_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_AliasName, Type: smithy.ShapeTypeString, Ext: &eBotChannelAssociation_botAlias})
+var sBotChannelAssociation_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eBotChannelAssociation_botName})
+var sBotChannelAssociation_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBotChannelAssociation_createdDate})
+var sBotChannelAssociation_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eBotChannelAssociation_type})
+var sBotChannelAssociation_botConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botConfiguration", ID: &i_ChannelConfigurationMap, Members: &m_ChannelConfigurationMap, Traits: &t44, Type: smithy.ShapeTypeMap, Ext: &eBotChannelAssociation_botConfiguration})
+var sBotChannelAssociation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum, Ext: &eBotChannelAssociation_status})
+var sBotChannelAssociation_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBotChannelAssociation_failureReason})
+var s_BotChannelAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotChannelAssociationList, Members: &m_BotChannelAssociationList, Type: smithy.ShapeTypeList, Ext: &e_BotChannelAssociationList})
+var s_BotChannelAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBotChannelAssociation, Members: &mBotChannelAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_BotChannelAssociationList_member})
+var s_BotChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotChannelName, Type: smithy.ShapeTypeString, Ext: &e_BotChannelName})
+var sBotMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBotMetadata, Members: &mBotMetadata, Type: smithy.ShapeTypeStructure, Ext: &eBotMetadata})
+var sBotMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eBotMetadata_name})
+var sBotMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eBotMetadata_description})
+var sBotMetadata_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eBotMetadata_status})
+var sBotMetadata_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBotMetadata_lastUpdatedDate})
+var sBotMetadata_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBotMetadata_createdDate})
+var sBotMetadata_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eBotMetadata_version})
+var s_BotMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotMetadataList, Members: &m_BotMetadataList, Type: smithy.ShapeTypeList, Ext: &e_BotMetadataList})
+var s_BotMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBotMetadata, Members: &mBotMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_BotMetadataList_member})
+var s_BotName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &e_BotName})
+var s_BotVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotVersions, Members: &m_BotVersions, Type: smithy.ShapeTypeList, Ext: &e_BotVersions})
+var s_BotVersions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &e_BotVersions_member})
+var sBuiltinIntentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuiltinIntentMetadata, Members: &mBuiltinIntentMetadata, Type: smithy.ShapeTypeStructure, Ext: &eBuiltinIntentMetadata})
+var sBuiltinIntentMetadata_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &i_BuiltinIntentSignature, Type: smithy.ShapeTypeString, Ext: &eBuiltinIntentMetadata_signature})
+var sBuiltinIntentMetadata_supportedLocales = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedLocales", ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &eBuiltinIntentMetadata_supportedLocales})
+var s_BuiltinIntentMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuiltinIntentMetadataList, Members: &m_BuiltinIntentMetadataList, Type: smithy.ShapeTypeList, Ext: &e_BuiltinIntentMetadataList})
+var s_BuiltinIntentMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuiltinIntentMetadata, Members: &mBuiltinIntentMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_BuiltinIntentMetadataList_member})
+var s_BuiltinIntentSignature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuiltinIntentSignature, Type: smithy.ShapeTypeString, Ext: &e_BuiltinIntentSignature})
+var sBuiltinIntentSlot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuiltinIntentSlot, Members: &mBuiltinIntentSlot, Type: smithy.ShapeTypeStructure, Ext: &eBuiltinIntentSlot})
+var sBuiltinIntentSlot_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBuiltinIntentSlot_name})
+var s_BuiltinIntentSlotList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuiltinIntentSlotList, Members: &m_BuiltinIntentSlotList, Type: smithy.ShapeTypeList, Ext: &e_BuiltinIntentSlotList})
+var s_BuiltinIntentSlotList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuiltinIntentSlot, Members: &mBuiltinIntentSlot, Type: smithy.ShapeTypeStructure, Ext: &e_BuiltinIntentSlotList_member})
+var sBuiltinSlotTypeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuiltinSlotTypeMetadata, Members: &mBuiltinSlotTypeMetadata, Type: smithy.ShapeTypeStructure, Ext: &eBuiltinSlotTypeMetadata})
+var sBuiltinSlotTypeMetadata_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &i_BuiltinSlotTypeSignature, Type: smithy.ShapeTypeString, Ext: &eBuiltinSlotTypeMetadata_signature})
+var sBuiltinSlotTypeMetadata_supportedLocales = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedLocales", ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &eBuiltinSlotTypeMetadata_supportedLocales})
+var s_BuiltinSlotTypeMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuiltinSlotTypeMetadataList, Members: &m_BuiltinSlotTypeMetadataList, Type: smithy.ShapeTypeList, Ext: &e_BuiltinSlotTypeMetadataList})
+var s_BuiltinSlotTypeMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBuiltinSlotTypeMetadata, Members: &mBuiltinSlotTypeMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_BuiltinSlotTypeMetadataList_member})
+var s_BuiltinSlotTypeSignature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuiltinSlotTypeSignature, Type: smithy.ShapeTypeString, Ext: &e_BuiltinSlotTypeSignature})
+var s_ChannelConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelConfigurationMap, Members: &m_ChannelConfigurationMap, Traits: &t45, Type: smithy.ShapeTypeMap, Ext: &e_ChannelConfigurationMap})
+var s_ChannelConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ChannelConfigurationMap_key})
+var s_ChannelConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ChannelConfigurationMap_value})
+var sChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum, Ext: &eChannelStatus})
+var sChannelStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_IN_PROGRESS})
+var sChannelStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_CREATED})
+var sChannelStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_FAILED})
+var sChannelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eChannelType})
+var sChannelType_FACEBOOK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FACEBOOK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_FACEBOOK})
+var sChannelType_SLACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_SLACK})
+var sChannelType_TWILIO_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWILIO_SMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_TWILIO_SMS})
+var sChannelType_KIK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KIK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_KIK})
+var sCodeHook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeHook, Members: &mCodeHook, Type: smithy.ShapeTypeStructure, Ext: &eCodeHook})
+var sCodeHook_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_LambdaARN, Type: smithy.ShapeTypeString, Ext: &eCodeHook_uri})
+var sCodeHook_messageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageVersion", ID: &i_MessageVersion, Type: smithy.ShapeTypeString, Ext: &eCodeHook_messageVersion})
+var s_ConfidenceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfidenceThreshold, Type: smithy.ShapeTypeDouble, Ext: &e_ConfidenceThreshold})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_ContentString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentString, Type: smithy.ShapeTypeString, Ext: &e_ContentString})
+var sContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum, Ext: &eContentType})
+var sContentType_PLAIN_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAIN_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContentType_PLAIN_TEXT})
+var sContentType_SSML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContentType_SSML})
+var sContentType_CUSTOM_PAYLOAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_PAYLOAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContentType_CUSTOM_PAYLOAD})
+var s_ContextTimeToLiveInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextTimeToLiveInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_ContextTimeToLiveInSeconds})
+var s_ContextTurnsToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextTurnsToLive, Type: smithy.ShapeTypeInteger, Ext: &e_ContextTurnsToLive})
+var sConversationLogsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConversationLogsRequest, Members: &mConversationLogsRequest, Type: smithy.ShapeTypeStructure, Ext: &eConversationLogsRequest})
+var sConversationLogsRequest_logSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSettings", ID: &i_LogSettingsRequestList, Members: &m_LogSettingsRequestList, Type: smithy.ShapeTypeList, Ext: &eConversationLogsRequest_logSettings})
+var sConversationLogsRequest_iamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eConversationLogsRequest_iamRoleArn})
+var sConversationLogsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConversationLogsResponse, Members: &mConversationLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &eConversationLogsResponse})
+var sConversationLogsResponse_logSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSettings", ID: &i_LogSettingsResponseList, Members: &m_LogSettingsResponseList, Type: smithy.ShapeTypeList, Ext: &eConversationLogsResponse_logSettings})
+var sConversationLogsResponse_iamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eConversationLogsResponse_iamRoleArn})
+var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &e_Count})
+var s_CustomOrBuiltinSlotTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomOrBuiltinSlotTypeName, Type: smithy.ShapeTypeString, Ext: &e_CustomOrBuiltinSlotTypeName})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeEnum, Ext: &eDestination})
+var sDestination_CLOUDWATCH_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestination_CLOUDWATCH_LOGS})
+var sDestination_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestination_S3})
+var sEnumerationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnumerationValue, Members: &mEnumerationValue, Type: smithy.ShapeTypeStructure, Ext: &eEnumerationValue})
+var sEnumerationValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &eEnumerationValue_value})
+var sEnumerationValue_synonyms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "synonyms", ID: &i_SynonymList, Members: &m_SynonymList, Type: smithy.ShapeTypeList, Ext: &eEnumerationValue_synonyms})
+var s_EnumerationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnumerationValues, Members: &m_EnumerationValues, Type: smithy.ShapeTypeList, Ext: &e_EnumerationValues})
+var s_EnumerationValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnumerationValue, Members: &mEnumerationValue, Type: smithy.ShapeTypeStructure, Ext: &e_EnumerationValues_member})
+var sExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeEnum, Ext: &eExportStatus})
+var sExportStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportStatus_IN_PROGRESS})
+var sExportStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportStatus_READY})
+var sExportStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportStatus_FAILED})
+var sExportType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportType, Members: &mExportType, Type: smithy.ShapeTypeEnum, Ext: &eExportType})
+var sExportType_ALEXA_SKILLS_KIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALEXA_SKILLS_KIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportType_ALEXA_SKILLS_KIT})
+var sExportType_LEX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportType_LEX})
+var sFollowUpPrompt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFollowUpPrompt, Members: &mFollowUpPrompt, Type: smithy.ShapeTypeStructure, Ext: &eFollowUpPrompt})
+var sFollowUpPrompt_prompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &eFollowUpPrompt_prompt})
+var sFollowUpPrompt_rejectionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejectionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eFollowUpPrompt_rejectionStatement})
+var sFulfillmentActivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentActivity, Members: &mFulfillmentActivity, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentActivity})
+var sFulfillmentActivity_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFulfillmentActivityType, Members: &mFulfillmentActivityType, Type: smithy.ShapeTypeEnum, Ext: &eFulfillmentActivity_type})
+var sFulfillmentActivity_codeHook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeHook", ID: &iCodeHook, Members: &mCodeHook, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentActivity_codeHook})
+var sFulfillmentActivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentActivityType, Members: &mFulfillmentActivityType, Type: smithy.ShapeTypeEnum, Ext: &eFulfillmentActivityType})
+var sFulfillmentActivityType_RETURN_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETURN_INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentActivityType_RETURN_INTENT})
+var sFulfillmentActivityType_CODE_HOOK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_HOOK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentActivityType_CODE_HOOK})
+var s_GroupNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupNumber, Type: smithy.ShapeTypeInteger, Ext: &e_GroupNumber})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var sImportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum, Ext: &eImportStatus})
+var sImportStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportStatus_IN_PROGRESS})
+var sImportStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportStatus_COMPLETE})
+var sImportStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportStatus_FAILED})
+var sInputContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputContext, Members: &mInputContext, Type: smithy.ShapeTypeStructure, Ext: &eInputContext})
+var sInputContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_InputContextName, Type: smithy.ShapeTypeString, Ext: &eInputContext_name})
+var s_InputContextList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputContextList, Members: &m_InputContextList, Type: smithy.ShapeTypeList, Ext: &e_InputContextList})
+var s_InputContextList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInputContext, Members: &mInputContext, Type: smithy.ShapeTypeStructure, Ext: &e_InputContextList_member})
+var s_InputContextName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputContextName, Type: smithy.ShapeTypeString, Ext: &e_InputContextName})
+var sIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeStructure, Ext: &eIntent})
+var sIntent_intentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentName", ID: &i_IntentName, Type: smithy.ShapeTypeString, Ext: &eIntent_intentName})
+var sIntent_intentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eIntent_intentVersion})
+var s_IntentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentList, Members: &m_IntentList, Type: smithy.ShapeTypeList, Ext: &e_IntentList})
+var s_IntentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeStructure, Ext: &e_IntentList_member})
+var sIntentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntentMetadata, Members: &mIntentMetadata, Type: smithy.ShapeTypeStructure, Ext: &eIntentMetadata})
+var sIntentMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Type: smithy.ShapeTypeString, Ext: &eIntentMetadata_name})
+var sIntentMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eIntentMetadata_description})
+var sIntentMetadata_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIntentMetadata_lastUpdatedDate})
+var sIntentMetadata_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIntentMetadata_createdDate})
+var sIntentMetadata_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eIntentMetadata_version})
+var s_IntentMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentMetadataList, Members: &m_IntentMetadataList, Type: smithy.ShapeTypeList, Ext: &e_IntentMetadataList})
+var s_IntentMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntentMetadata, Members: &mIntentMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_IntentMetadataList_member})
+var s_IntentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentName, Type: smithy.ShapeTypeString, Ext: &e_IntentName})
+var s_IntentUtteranceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentUtteranceList, Members: &m_IntentUtteranceList, Type: smithy.ShapeTypeList, Ext: &e_IntentUtteranceList})
+var s_IntentUtteranceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Utterance, Type: smithy.ShapeTypeString, Ext: &e_IntentUtteranceList_member})
+var sInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailureException, Members: &mInternalFailureException, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eInternalFailureException})
+var sInternalFailureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalFailureException_message})
+var sKendraConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKendraConfiguration, Members: &mKendraConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eKendraConfiguration})
+var sKendraConfiguration_kendraIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kendraIndex", ID: &i_KendraIndexArn, Type: smithy.ShapeTypeString, Ext: &eKendraConfiguration_kendraIndex})
+var sKendraConfiguration_queryFilterString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryFilterString", ID: &i_QueryFilterString, Type: smithy.ShapeTypeString, Ext: &eKendraConfiguration_queryFilterString})
+var sKendraConfiguration_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &i_roleArn, Type: smithy.ShapeTypeString, Ext: &eKendraConfiguration_role})
+var s_KendraIndexArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KendraIndexArn, Type: smithy.ShapeTypeString, Ext: &e_KendraIndexArn})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_LambdaARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaARN, Type: smithy.ShapeTypeString, Ext: &e_LambdaARN})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_retryAfterSeconds})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var s_ListOfUtterance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfUtterance, Members: &m_ListOfUtterance, Type: smithy.ShapeTypeList, Ext: &e_ListOfUtterance})
+var s_ListOfUtterance_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUtteranceData, Members: &mUtteranceData, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfUtterance_member})
+var s_ListsOfUtterances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListsOfUtterances, Members: &m_ListsOfUtterances, Type: smithy.ShapeTypeList, Ext: &e_ListsOfUtterances})
+var s_ListsOfUtterances_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUtteranceList, Members: &mUtteranceList, Type: smithy.ShapeTypeStructure, Ext: &e_ListsOfUtterances_member})
+var sLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &eLocale})
+var sLocale_DE_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE_DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_DE_DE})
+var sLocale_EN_AU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_AU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_EN_AU})
+var sLocale_EN_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_EN_GB})
+var sLocale_EN_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_EN_IN})
+var sLocale_EN_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_EN_US})
+var sLocale_ES_419 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_419", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_ES_419})
+var sLocale_ES_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_ES_ES})
+var sLocale_ES_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_ES_US})
+var sLocale_FR_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR_FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_FR_FR})
+var sLocale_FR_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR_CA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_FR_CA})
+var sLocale_IT_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_IT_IT})
+var sLocale_JA_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JA_JP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_JA_JP})
+var sLocale_KO_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KO_KR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocale_KO_KR})
+var s_LocaleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &e_LocaleList})
+var s_LocaleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &e_LocaleList_member})
+var sLogSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogSettingsRequest, Members: &mLogSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eLogSettingsRequest})
+var sLogSettingsRequest_logType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logType", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogSettingsRequest_logType})
+var sLogSettingsRequest_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeEnum, Ext: &eLogSettingsRequest_destination})
+var sLogSettingsRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eLogSettingsRequest_kmsKeyArn})
+var sLogSettingsRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eLogSettingsRequest_resourceArn})
+var s_LogSettingsRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogSettingsRequestList, Members: &m_LogSettingsRequestList, Type: smithy.ShapeTypeList, Ext: &e_LogSettingsRequestList})
+var s_LogSettingsRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogSettingsRequest, Members: &mLogSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &e_LogSettingsRequestList_member})
+var sLogSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogSettingsResponse, Members: &mLogSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eLogSettingsResponse})
+var sLogSettingsResponse_logType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logType", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogSettingsResponse_logType})
+var sLogSettingsResponse_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeEnum, Ext: &eLogSettingsResponse_destination})
+var sLogSettingsResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eLogSettingsResponse_kmsKeyArn})
+var sLogSettingsResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eLogSettingsResponse_resourceArn})
+var sLogSettingsResponse_resourcePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePrefix", ID: &i_ResourcePrefix, Type: smithy.ShapeTypeString, Ext: &eLogSettingsResponse_resourcePrefix})
+var s_LogSettingsResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogSettingsResponseList, Members: &m_LogSettingsResponseList, Type: smithy.ShapeTypeList, Ext: &e_LogSettingsResponseList})
+var s_LogSettingsResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogSettingsResponse, Members: &mLogSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &e_LogSettingsResponseList_member})
+var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogType})
+var sLogType_AUDIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_AUDIO})
+var sLogType_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_TEXT})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMergeStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeStrategy, Members: &mMergeStrategy, Type: smithy.ShapeTypeEnum, Ext: &eMergeStrategy})
+var sMergeStrategy_OVERWRITE_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERWRITE_LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeStrategy_OVERWRITE_LATEST})
+var sMergeStrategy_FAIL_ON_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL_ON_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeStrategy_FAIL_ON_CONFLICT})
+var sMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &eMessage})
+var sMessage_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum, Ext: &eMessage_contentType})
+var sMessage_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_ContentString, Type: smithy.ShapeTypeString, Ext: &eMessage_content})
+var sMessage_groupNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupNumber", ID: &i_GroupNumber, Type: smithy.ShapeTypeInteger, Ext: &eMessage_groupNumber})
+var s_MessageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageList, Members: &m_MessageList, Type: smithy.ShapeTypeList, Ext: &e_MessageList})
+var s_MessageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &e_MessageList_member})
+var s_MessageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageVersion, Type: smithy.ShapeTypeString, Ext: &e_MessageVersion})
+var sMigrationAlert = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationAlert, Members: &mMigrationAlert, Type: smithy.ShapeTypeStructure, Ext: &eMigrationAlert})
+var sMigrationAlert_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMigrationAlertType, Members: &mMigrationAlertType, Type: smithy.ShapeTypeEnum, Ext: &eMigrationAlert_type})
+var sMigrationAlert_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_MigrationAlertMessage, Type: smithy.ShapeTypeString, Ext: &eMigrationAlert_message})
+var sMigrationAlert_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_MigrationAlertDetails, Members: &m_MigrationAlertDetails, Type: smithy.ShapeTypeList, Ext: &eMigrationAlert_details})
+var sMigrationAlert_referenceURLs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "referenceURLs", ID: &i_MigrationAlertReferenceURLs, Members: &m_MigrationAlertReferenceURLs, Type: smithy.ShapeTypeList, Ext: &eMigrationAlert_referenceURLs})
+var s_MigrationAlertDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationAlertDetail, Type: smithy.ShapeTypeString, Ext: &e_MigrationAlertDetail})
+var s_MigrationAlertDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationAlertDetails, Members: &m_MigrationAlertDetails, Type: smithy.ShapeTypeList, Ext: &e_MigrationAlertDetails})
+var s_MigrationAlertDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MigrationAlertDetail, Type: smithy.ShapeTypeString, Ext: &e_MigrationAlertDetails_member})
+var s_MigrationAlertMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationAlertMessage, Type: smithy.ShapeTypeString, Ext: &e_MigrationAlertMessage})
+var s_MigrationAlertReferenceURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationAlertReferenceURL, Type: smithy.ShapeTypeString, Ext: &e_MigrationAlertReferenceURL})
+var s_MigrationAlertReferenceURLs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationAlertReferenceURLs, Members: &m_MigrationAlertReferenceURLs, Type: smithy.ShapeTypeList, Ext: &e_MigrationAlertReferenceURLs})
+var s_MigrationAlertReferenceURLs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MigrationAlertReferenceURL, Type: smithy.ShapeTypeString, Ext: &e_MigrationAlertReferenceURLs_member})
+var s_MigrationAlerts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationAlerts, Members: &m_MigrationAlerts, Type: smithy.ShapeTypeList, Ext: &e_MigrationAlerts})
+var s_MigrationAlerts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMigrationAlert, Members: &mMigrationAlert, Type: smithy.ShapeTypeStructure, Ext: &e_MigrationAlerts_member})
+var sMigrationAlertType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationAlertType, Members: &mMigrationAlertType, Type: smithy.ShapeTypeEnum, Ext: &eMigrationAlertType})
+var sMigrationAlertType_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationAlertType_ERROR})
+var sMigrationAlertType_WARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationAlertType_WARN})
+var s_MigrationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &e_MigrationId})
+var sMigrationSortAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationSortAttribute, Members: &mMigrationSortAttribute, Type: smithy.ShapeTypeEnum, Ext: &eMigrationSortAttribute})
+var sMigrationSortAttribute_V1_BOT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V1_BOT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationSortAttribute_V1_BOT_NAME})
+var sMigrationSortAttribute_MIGRATION_DATE_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIGRATION_DATE_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationSortAttribute_MIGRATION_DATE_TIME})
+var sMigrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationStatus, Members: &mMigrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eMigrationStatus})
+var sMigrationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationStatus_IN_PROGRESS})
+var sMigrationStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationStatus_COMPLETED})
+var sMigrationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationStatus_FAILED})
+var sMigrationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationStrategy, Members: &mMigrationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eMigrationStrategy})
+var sMigrationStrategy_CREATE_NEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_NEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationStrategy_CREATE_NEW})
+var sMigrationStrategy_UPDATE_EXISTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_EXISTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMigrationStrategy_UPDATE_EXISTING})
+var sMigrationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationSummary, Members: &mMigrationSummary, Type: smithy.ShapeTypeStructure, Ext: &eMigrationSummary})
+var sMigrationSummary_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_migrationId})
+var sMigrationSummary_v1BotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_v1BotName})
+var sMigrationSummary_v1BotVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_v1BotVersion})
+var sMigrationSummary_v1BotLocale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotLocale", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &eMigrationSummary_v1BotLocale})
+var sMigrationSummary_v2BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotId", ID: &i_V2BotId, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_v2BotId})
+var sMigrationSummary_v2BotRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotRole", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eMigrationSummary_v2BotRole})
+var sMigrationSummary_migrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStatus", ID: &iMigrationStatus, Members: &mMigrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eMigrationSummary_migrationStatus})
+var sMigrationSummary_migrationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStrategy", ID: &iMigrationStrategy, Members: &mMigrationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eMigrationSummary_migrationStrategy})
+var sMigrationSummary_migrationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMigrationSummary_migrationTimestamp})
+var s_MigrationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationSummaryList, Members: &m_MigrationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_MigrationSummaryList})
+var s_MigrationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMigrationSummary, Members: &mMigrationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MigrationSummaryList_member})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var s_NumericalVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumericalVersion, Type: smithy.ShapeTypeString, Ext: &e_NumericalVersion})
+var sObfuscationSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObfuscationSetting, Members: &mObfuscationSetting, Type: smithy.ShapeTypeEnum, Ext: &eObfuscationSetting})
+var sObfuscationSetting_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObfuscationSetting_NONE})
+var sObfuscationSetting_DEFAULT_OBFUSCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_OBFUSCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObfuscationSetting_DEFAULT_OBFUSCATION})
+var sOutputContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputContext, Members: &mOutputContext, Type: smithy.ShapeTypeStructure, Ext: &eOutputContext})
+var sOutputContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_OutputContextName, Type: smithy.ShapeTypeString, Ext: &eOutputContext_name})
+var sOutputContext_timeToLiveInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeToLiveInSeconds", ID: &i_ContextTimeToLiveInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eOutputContext_timeToLiveInSeconds})
+var sOutputContext_turnsToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "turnsToLive", ID: &i_ContextTurnsToLive, Type: smithy.ShapeTypeInteger, Ext: &eOutputContext_turnsToLive})
+var s_OutputContextList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputContextList, Members: &m_OutputContextList, Type: smithy.ShapeTypeList, Ext: &e_OutputContextList})
+var s_OutputContextList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutputContext, Members: &mOutputContext, Type: smithy.ShapeTypeStructure, Ext: &e_OutputContextList_member})
+var s_OutputContextName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputContextName, Type: smithy.ShapeTypeString, Ext: &e_OutputContextName})
+var sPreconditionFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreconditionFailedException, Members: &mPreconditionFailedException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &ePreconditionFailedException})
+var sPreconditionFailedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePreconditionFailedException_message})
+var s_Priority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &e_Priority})
+var sProcessBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessBehavior, Members: &mProcessBehavior, Type: smithy.ShapeTypeEnum, Ext: &eProcessBehavior})
+var sProcessBehavior_SAVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessBehavior_SAVE})
+var sProcessBehavior_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessBehavior_BUILD})
+var sPrompt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &ePrompt})
+var sPrompt_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_MessageList, Members: &m_MessageList, Type: smithy.ShapeTypeList, Ext: &ePrompt_messages})
+var sPrompt_maxAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAttempts", ID: &i_PromptMaxAttempts, Type: smithy.ShapeTypeInteger, Ext: &ePrompt_maxAttempts})
+var sPrompt_responseCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseCard", ID: &i_ResponseCard, Type: smithy.ShapeTypeString, Ext: &ePrompt_responseCard})
+var s_PromptMaxAttempts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PromptMaxAttempts, Type: smithy.ShapeTypeInteger, Ext: &e_PromptMaxAttempts})
+var s_QueryFilterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFilterString, Type: smithy.ShapeTypeString, Ext: &e_QueryFilterString})
+var sReferenceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceType, Members: &mReferenceType, Type: smithy.ShapeTypeEnum, Ext: &eReferenceType})
+var sReferenceType_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReferenceType_INTENT})
+var sReferenceType_BOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReferenceType_BOT})
+var sReferenceType_BOTALIAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOTALIAS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReferenceType_BOTALIAS})
+var sReferenceType_BOTCHANNEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOTCHANNEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReferenceType_BOTCHANNEL})
+var s_RegexPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegexPattern, Type: smithy.ShapeTypeString, Ext: &e_RegexPattern})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_referenceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "referenceType", ID: &iReferenceType, Members: &mReferenceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceInUseException_referenceType})
+var sResourceInUseException_exampleReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exampleReference", ID: &iResourceReference, Members: &mResourceReference, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException_exampleReference})
+var s_ResourcePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePrefix, Type: smithy.ShapeTypeString, Ext: &e_ResourcePrefix})
+var sResourceReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceReference, Members: &mResourceReference, Type: smithy.ShapeTypeStructure, Ext: &eResourceReference})
+var sResourceReference_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eResourceReference_name})
+var sResourceReference_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eResourceReference_version})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sResourceType_BOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_BOT})
+var sResourceType_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_INTENT})
+var sResourceType_SLOT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLOT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_SLOT_TYPE})
+var s_ResponseCard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseCard, Type: smithy.ShapeTypeString, Ext: &e_ResponseCard})
+var s_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_roleArn, Type: smithy.ShapeTypeString, Ext: &e_roleArn})
+var s_SessionTTL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionTTL, Type: smithy.ShapeTypeInteger, Ext: &e_SessionTTL})
+var sSlot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlot, Members: &mSlot, Type: smithy.ShapeTypeStructure, Ext: &eSlot})
+var sSlot_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotName, Type: smithy.ShapeTypeString, Ext: &eSlot_name})
+var sSlot_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eSlot_description})
+var sSlot_slotConstraint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotConstraint", ID: &iSlotConstraint, Members: &mSlotConstraint, Type: smithy.ShapeTypeEnum, Ext: &eSlot_slotConstraint})
+var sSlot_slotType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotType", ID: &i_CustomOrBuiltinSlotTypeName, Type: smithy.ShapeTypeString, Ext: &eSlot_slotType})
+var sSlot_slotTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypeVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eSlot_slotTypeVersion})
+var sSlot_valueElicitationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueElicitationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &eSlot_valueElicitationPrompt})
+var sSlot_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &eSlot_priority})
+var sSlot_sampleUtterances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleUtterances", ID: &i_SlotUtteranceList, Members: &m_SlotUtteranceList, Type: smithy.ShapeTypeList, Ext: &eSlot_sampleUtterances})
+var sSlot_responseCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseCard", ID: &i_ResponseCard, Type: smithy.ShapeTypeString, Ext: &eSlot_responseCard})
+var sSlot_obfuscationSetting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "obfuscationSetting", ID: &iObfuscationSetting, Members: &mObfuscationSetting, Type: smithy.ShapeTypeEnum, Ext: &eSlot_obfuscationSetting})
+var sSlot_defaultValueSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValueSpec", ID: &iSlotDefaultValueSpec, Members: &mSlotDefaultValueSpec, Type: smithy.ShapeTypeStructure, Ext: &eSlot_defaultValueSpec})
+var sSlotConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlotConstraint, Members: &mSlotConstraint, Type: smithy.ShapeTypeEnum, Ext: &eSlotConstraint})
+var sSlotConstraint_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSlotConstraint_REQUIRED})
+var sSlotConstraint_OPTIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSlotConstraint_OPTIONAL})
+var sSlotDefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlotDefaultValue, Members: &mSlotDefaultValue, Type: smithy.ShapeTypeStructure, Ext: &eSlotDefaultValue})
+var sSlotDefaultValue_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_SlotDefaultValueString, Type: smithy.ShapeTypeString, Ext: &eSlotDefaultValue_defaultValue})
+var s_SlotDefaultValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotDefaultValueList, Members: &m_SlotDefaultValueList, Type: smithy.ShapeTypeList, Ext: &e_SlotDefaultValueList})
+var s_SlotDefaultValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlotDefaultValue, Members: &mSlotDefaultValue, Type: smithy.ShapeTypeStructure, Ext: &e_SlotDefaultValueList_member})
+var sSlotDefaultValueSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlotDefaultValueSpec, Members: &mSlotDefaultValueSpec, Type: smithy.ShapeTypeStructure, Ext: &eSlotDefaultValueSpec})
+var sSlotDefaultValueSpec_defaultValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValueList", ID: &i_SlotDefaultValueList, Members: &m_SlotDefaultValueList, Type: smithy.ShapeTypeList, Ext: &eSlotDefaultValueSpec_defaultValueList})
+var s_SlotDefaultValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotDefaultValueString, Type: smithy.ShapeTypeString, Ext: &e_SlotDefaultValueString})
+var s_SlotList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotList, Members: &m_SlotList, Type: smithy.ShapeTypeList, Ext: &e_SlotList})
+var s_SlotList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlot, Members: &mSlot, Type: smithy.ShapeTypeStructure, Ext: &e_SlotList_member})
+var s_SlotName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotName, Type: smithy.ShapeTypeString, Ext: &e_SlotName})
+var sSlotTypeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlotTypeConfiguration, Members: &mSlotTypeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSlotTypeConfiguration})
+var sSlotTypeConfiguration_regexConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regexConfiguration", ID: &iSlotTypeRegexConfiguration, Members: &mSlotTypeRegexConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSlotTypeConfiguration_regexConfiguration})
+var s_SlotTypeConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotTypeConfigurations, Members: &m_SlotTypeConfigurations, Type: smithy.ShapeTypeList, Ext: &e_SlotTypeConfigurations})
+var s_SlotTypeConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlotTypeConfiguration, Members: &mSlotTypeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_SlotTypeConfigurations_member})
+var sSlotTypeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlotTypeMetadata, Members: &mSlotTypeMetadata, Type: smithy.ShapeTypeStructure, Ext: &eSlotTypeMetadata})
+var sSlotTypeMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Type: smithy.ShapeTypeString, Ext: &eSlotTypeMetadata_name})
+var sSlotTypeMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eSlotTypeMetadata_description})
+var sSlotTypeMetadata_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSlotTypeMetadata_lastUpdatedDate})
+var sSlotTypeMetadata_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSlotTypeMetadata_createdDate})
+var sSlotTypeMetadata_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eSlotTypeMetadata_version})
+var s_SlotTypeMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotTypeMetadataList, Members: &m_SlotTypeMetadataList, Type: smithy.ShapeTypeList, Ext: &e_SlotTypeMetadataList})
+var s_SlotTypeMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlotTypeMetadata, Members: &mSlotTypeMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_SlotTypeMetadataList_member})
+var s_SlotTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotTypeName, Type: smithy.ShapeTypeString, Ext: &e_SlotTypeName})
+var sSlotTypeRegexConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlotTypeRegexConfiguration, Members: &mSlotTypeRegexConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSlotTypeRegexConfiguration})
+var sSlotTypeRegexConfiguration_pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pattern", ID: &i_RegexPattern, Type: smithy.ShapeTypeString, Ext: &eSlotTypeRegexConfiguration_pattern})
+var s_SlotUtteranceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotUtteranceList, Members: &m_SlotUtteranceList, Type: smithy.ShapeTypeList, Ext: &e_SlotUtteranceList})
+var s_SlotUtteranceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Utterance, Type: smithy.ShapeTypeString, Ext: &e_SlotUtteranceList_member})
+var sSlotValueSelectionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlotValueSelectionStrategy, Members: &mSlotValueSelectionStrategy, Type: smithy.ShapeTypeEnum, Ext: &eSlotValueSelectionStrategy})
+var sSlotValueSelectionStrategy_ORIGINAL_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORIGINAL_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSlotValueSelectionStrategy_ORIGINAL_VALUE})
+var sSlotValueSelectionStrategy_TOP_RESOLUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOP_RESOLUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSlotValueSelectionStrategy_TOP_RESOLUTION})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASCENDING})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESCENDING})
+var sStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eStatement})
+var sStatement_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_MessageList, Members: &m_MessageList, Type: smithy.ShapeTypeList, Ext: &eStatement_messages})
+var sStatement_responseCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseCard", ID: &i_ResponseCard, Type: smithy.ShapeTypeString, Ext: &eStatement_responseCard})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sStatus_BUILDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_BUILDING})
+var sStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_READY})
+var sStatus_READY_BASIC_TESTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY_BASIC_TESTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_READY_BASIC_TESTING})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_FAILED})
+var sStatus_NOT_BUILT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_BUILT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_NOT_BUILT})
+var sStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eStatusType})
+var sStatusType_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_DETECTED})
+var sStatusType_MISSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_MISSED})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_SynonymList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynonymList, Members: &m_SynonymList, Type: smithy.ShapeTypeList, Ext: &e_SynonymList})
+var s_SynonymList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_SynonymList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &e_UserId})
+var s_Utterance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Utterance, Type: smithy.ShapeTypeString, Ext: &e_Utterance})
+var sUtteranceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUtteranceData, Members: &mUtteranceData, Type: smithy.ShapeTypeStructure, Ext: &eUtteranceData})
+var sUtteranceData_utteranceString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "utteranceString", ID: &i_UtteranceString, Type: smithy.ShapeTypeString, Ext: &eUtteranceData_utteranceString})
+var sUtteranceData_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eUtteranceData_count})
+var sUtteranceData_distinctUsers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distinctUsers", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eUtteranceData_distinctUsers})
+var sUtteranceData_firstUtteredDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstUtteredDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUtteranceData_firstUtteredDate})
+var sUtteranceData_lastUtteredDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUtteredDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUtteranceData_lastUtteredDate})
+var sUtteranceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUtteranceList, Members: &mUtteranceList, Type: smithy.ShapeTypeStructure, Ext: &eUtteranceList})
+var sUtteranceList_botVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eUtteranceList_botVersion})
+var sUtteranceList_utterances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "utterances", ID: &i_ListOfUtterance, Members: &m_ListOfUtterance, Type: smithy.ShapeTypeList, Ext: &eUtteranceList_utterances})
+var s_UtteranceString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UtteranceString, Type: smithy.ShapeTypeString, Ext: &e_UtteranceString})
+var s_V2BotId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_V2BotId, Type: smithy.ShapeTypeString, Ext: &e_V2BotId})
+var s_V2BotName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_V2BotName, Type: smithy.ShapeTypeString, Ext: &e_V2BotName})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Value})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &e_Version})
+var sCreateBotVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBotVersionRequest, Members: &mCreateBotVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBotVersionRequest})
+var sCreateBotVersionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionRequest_name})
+var sCreateBotVersionRequest_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionRequest_checksum})
+var sCreateBotVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBotVersionResponse, Members: &mCreateBotVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBotVersionResponse})
+var sCreateBotVersionResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionResponse_name})
+var sCreateBotVersionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionResponse_description})
+var sCreateBotVersionResponse_intents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intents", ID: &i_IntentList, Members: &m_IntentList, Type: smithy.ShapeTypeList, Ext: &eCreateBotVersionResponse_intents})
+var sCreateBotVersionResponse_clarificationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clarificationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &eCreateBotVersionResponse_clarificationPrompt})
+var sCreateBotVersionResponse_abortStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "abortStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eCreateBotVersionResponse_abortStatement})
+var sCreateBotVersionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateBotVersionResponse_status})
+var sCreateBotVersionResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionResponse_failureReason})
+var sCreateBotVersionResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateBotVersionResponse_lastUpdatedDate})
+var sCreateBotVersionResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateBotVersionResponse_createdDate})
+var sCreateBotVersionResponse_idleSessionTTLInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleSessionTTLInSeconds", ID: &i_SessionTTL, Type: smithy.ShapeTypeInteger, Ext: &eCreateBotVersionResponse_idleSessionTTLInSeconds})
+var sCreateBotVersionResponse_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionResponse_voiceId})
+var sCreateBotVersionResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionResponse_checksum})
+var sCreateBotVersionResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eCreateBotVersionResponse_version})
+var sCreateBotVersionResponse_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &eCreateBotVersionResponse_locale})
+var sCreateBotVersionResponse_childDirected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childDirected", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBotVersionResponse_childDirected})
+var sCreateBotVersionResponse_enableModelImprovements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableModelImprovements", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBotVersionResponse_enableModelImprovements})
+var sCreateBotVersionResponse_detectSentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectSentiment", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBotVersionResponse_detectSentiment})
+var sCreateIntentVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntentVersionRequest, Members: &mCreateIntentVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionRequest})
+var sCreateIntentVersionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateIntentVersionRequest_name})
+var sCreateIntentVersionRequest_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateIntentVersionRequest_checksum})
+var sCreateIntentVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntentVersionResponse, Members: &mCreateIntentVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse})
+var sCreateIntentVersionResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Type: smithy.ShapeTypeString, Ext: &eCreateIntentVersionResponse_name})
+var sCreateIntentVersionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateIntentVersionResponse_description})
+var sCreateIntentVersionResponse_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_SlotList, Members: &m_SlotList, Type: smithy.ShapeTypeList, Ext: &eCreateIntentVersionResponse_slots})
+var sCreateIntentVersionResponse_sampleUtterances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleUtterances", ID: &i_IntentUtteranceList, Members: &m_IntentUtteranceList, Type: smithy.ShapeTypeList, Ext: &eCreateIntentVersionResponse_sampleUtterances})
+var sCreateIntentVersionResponse_confirmationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse_confirmationPrompt})
+var sCreateIntentVersionResponse_rejectionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejectionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse_rejectionStatement})
+var sCreateIntentVersionResponse_followUpPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "followUpPrompt", ID: &iFollowUpPrompt, Members: &mFollowUpPrompt, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse_followUpPrompt})
+var sCreateIntentVersionResponse_conclusionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conclusionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse_conclusionStatement})
+var sCreateIntentVersionResponse_dialogCodeHook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogCodeHook", ID: &iCodeHook, Members: &mCodeHook, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse_dialogCodeHook})
+var sCreateIntentVersionResponse_fulfillmentActivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentActivity", ID: &iFulfillmentActivity, Members: &mFulfillmentActivity, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse_fulfillmentActivity})
+var sCreateIntentVersionResponse_parentIntentSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIntentSignature", ID: &i_BuiltinIntentSignature, Type: smithy.ShapeTypeString, Ext: &eCreateIntentVersionResponse_parentIntentSignature})
+var sCreateIntentVersionResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateIntentVersionResponse_lastUpdatedDate})
+var sCreateIntentVersionResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateIntentVersionResponse_createdDate})
+var sCreateIntentVersionResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eCreateIntentVersionResponse_version})
+var sCreateIntentVersionResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateIntentVersionResponse_checksum})
+var sCreateIntentVersionResponse_kendraConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kendraConfiguration", ID: &iKendraConfiguration, Members: &mKendraConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateIntentVersionResponse_kendraConfiguration})
+var sCreateIntentVersionResponse_inputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputContexts", ID: &i_InputContextList, Members: &m_InputContextList, Type: smithy.ShapeTypeList, Ext: &eCreateIntentVersionResponse_inputContexts})
+var sCreateIntentVersionResponse_outputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputContexts", ID: &i_OutputContextList, Members: &m_OutputContextList, Type: smithy.ShapeTypeList, Ext: &eCreateIntentVersionResponse_outputContexts})
+var sCreateSlotTypeVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSlotTypeVersionRequest, Members: &mCreateSlotTypeVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSlotTypeVersionRequest})
+var sCreateSlotTypeVersionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateSlotTypeVersionRequest_name})
+var sCreateSlotTypeVersionRequest_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateSlotTypeVersionRequest_checksum})
+var sCreateSlotTypeVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSlotTypeVersionResponse, Members: &mCreateSlotTypeVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSlotTypeVersionResponse})
+var sCreateSlotTypeVersionResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Type: smithy.ShapeTypeString, Ext: &eCreateSlotTypeVersionResponse_name})
+var sCreateSlotTypeVersionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateSlotTypeVersionResponse_description})
+var sCreateSlotTypeVersionResponse_enumerationValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumerationValues", ID: &i_EnumerationValues, Members: &m_EnumerationValues, Type: smithy.ShapeTypeList, Ext: &eCreateSlotTypeVersionResponse_enumerationValues})
+var sCreateSlotTypeVersionResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSlotTypeVersionResponse_lastUpdatedDate})
+var sCreateSlotTypeVersionResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSlotTypeVersionResponse_createdDate})
+var sCreateSlotTypeVersionResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eCreateSlotTypeVersionResponse_version})
+var sCreateSlotTypeVersionResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateSlotTypeVersionResponse_checksum})
+var sCreateSlotTypeVersionResponse_valueSelectionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueSelectionStrategy", ID: &iSlotValueSelectionStrategy, Members: &mSlotValueSelectionStrategy, Type: smithy.ShapeTypeEnum, Ext: &eCreateSlotTypeVersionResponse_valueSelectionStrategy})
+var sCreateSlotTypeVersionResponse_parentSlotTypeSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentSlotTypeSignature", ID: &i_CustomOrBuiltinSlotTypeName, Type: smithy.ShapeTypeString, Ext: &eCreateSlotTypeVersionResponse_parentSlotTypeSignature})
+var sCreateSlotTypeVersionResponse_slotTypeConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypeConfigurations", ID: &i_SlotTypeConfigurations, Members: &m_SlotTypeConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateSlotTypeVersionResponse_slotTypeConfigurations})
+var sDeleteBotAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotAliasRequest, Members: &mDeleteBotAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBotAliasRequest})
+var sDeleteBotAliasRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AliasName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotAliasRequest_name})
+var sDeleteBotAliasRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotAliasRequest_botName})
+var sDeleteBotChannelAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotChannelAssociationRequest, Members: &mDeleteBotChannelAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBotChannelAssociationRequest})
+var sDeleteBotChannelAssociationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotChannelName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotChannelAssociationRequest_name})
+var sDeleteBotChannelAssociationRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotChannelAssociationRequest_botName})
+var sDeleteBotChannelAssociationRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_AliasName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotChannelAssociationRequest_botAlias})
+var sDeleteBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotRequest, Members: &mDeleteBotRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBotRequest})
+var sDeleteBotRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotRequest_name})
+var sDeleteBotVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotVersionRequest, Members: &mDeleteBotVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBotVersionRequest})
+var sDeleteBotVersionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotVersionRequest_name})
+var sDeleteBotVersionRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_NumericalVersion, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteBotVersionRequest_version})
+var sDeleteIntentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntentRequest, Members: &mDeleteIntentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIntentRequest})
+var sDeleteIntentRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteIntentRequest_name})
+var sDeleteIntentVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntentVersionRequest, Members: &mDeleteIntentVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIntentVersionRequest})
+var sDeleteIntentVersionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteIntentVersionRequest_name})
+var sDeleteIntentVersionRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_NumericalVersion, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteIntentVersionRequest_version})
+var sDeleteSlotTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlotTypeRequest, Members: &mDeleteSlotTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSlotTypeRequest})
+var sDeleteSlotTypeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteSlotTypeRequest_name})
+var sDeleteSlotTypeVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlotTypeVersionRequest, Members: &mDeleteSlotTypeVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSlotTypeVersionRequest})
+var sDeleteSlotTypeVersionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteSlotTypeVersionRequest_name})
+var sDeleteSlotTypeVersionRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_NumericalVersion, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteSlotTypeVersionRequest_version})
+var sDeleteUtterancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUtterancesRequest, Members: &mDeleteUtterancesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUtterancesRequest})
+var sDeleteUtterancesRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteUtterancesRequest_botName})
+var sDeleteUtterancesRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteUtterancesRequest_userId})
+var sGetBotAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotAliasesRequest, Members: &mGetBotAliasesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBotAliasesRequest})
+var sGetBotAliasesRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasesRequest_botName})
+var sGetBotAliasesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasesRequest_nextToken})
+var sGetBotAliasesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetBotAliasesRequest_maxResults})
+var sGetBotAliasesRequest_nameContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nameContains", ID: &i_AliasName, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasesRequest_nameContains})
+var sGetBotAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotAliasesResponse, Members: &mGetBotAliasesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotAliasesResponse})
+var sGetBotAliasesResponse_BotAliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotAliases", ID: &i_BotAliasMetadataList, Members: &m_BotAliasMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetBotAliasesResponse_BotAliases})
+var sGetBotAliasesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasesResponse_nextToken})
+var sGetBotAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotAliasRequest, Members: &mGetBotAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBotAliasRequest})
+var sGetBotAliasRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AliasName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasRequest_name})
+var sGetBotAliasRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasRequest_botName})
+var sGetBotAliasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotAliasResponse, Members: &mGetBotAliasResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotAliasResponse})
+var sGetBotAliasResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AliasName, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasResponse_name})
+var sGetBotAliasResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasResponse_description})
+var sGetBotAliasResponse_botVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasResponse_botVersion})
+var sGetBotAliasResponse_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasResponse_botName})
+var sGetBotAliasResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBotAliasResponse_lastUpdatedDate})
+var sGetBotAliasResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBotAliasResponse_createdDate})
+var sGetBotAliasResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetBotAliasResponse_checksum})
+var sGetBotAliasResponse_conversationLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conversationLogs", ID: &iConversationLogsResponse, Members: &mConversationLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotAliasResponse_conversationLogs})
+var sGetBotChannelAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotChannelAssociationRequest, Members: &mGetBotChannelAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBotChannelAssociationRequest})
+var sGetBotChannelAssociationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotChannelName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationRequest_name})
+var sGetBotChannelAssociationRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationRequest_botName})
+var sGetBotChannelAssociationRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_AliasName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationRequest_botAlias})
+var sGetBotChannelAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotChannelAssociationResponse, Members: &mGetBotChannelAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotChannelAssociationResponse})
+var sGetBotChannelAssociationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotChannelName, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationResponse_name})
+var sGetBotChannelAssociationResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationResponse_description})
+var sGetBotChannelAssociationResponse_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_AliasName, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationResponse_botAlias})
+var sGetBotChannelAssociationResponse_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationResponse_botName})
+var sGetBotChannelAssociationResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBotChannelAssociationResponse_createdDate})
+var sGetBotChannelAssociationResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eGetBotChannelAssociationResponse_type})
+var sGetBotChannelAssociationResponse_botConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botConfiguration", ID: &i_ChannelConfigurationMap, Members: &m_ChannelConfigurationMap, Traits: &t44, Type: smithy.ShapeTypeMap, Ext: &eGetBotChannelAssociationResponse_botConfiguration})
+var sGetBotChannelAssociationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetBotChannelAssociationResponse_status})
+var sGetBotChannelAssociationResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationResponse_failureReason})
+var sGetBotChannelAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotChannelAssociationsRequest, Members: &mGetBotChannelAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBotChannelAssociationsRequest})
+var sGetBotChannelAssociationsRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationsRequest_botName})
+var sGetBotChannelAssociationsRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_AliasNameOrListAll, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationsRequest_botAlias})
+var sGetBotChannelAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationsRequest_nextToken})
+var sGetBotChannelAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetBotChannelAssociationsRequest_maxResults})
+var sGetBotChannelAssociationsRequest_nameContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nameContains", ID: &i_BotChannelName, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationsRequest_nameContains})
+var sGetBotChannelAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotChannelAssociationsResponse, Members: &mGetBotChannelAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotChannelAssociationsResponse})
+var sGetBotChannelAssociationsResponse_botChannelAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botChannelAssociations", ID: &i_BotChannelAssociationList, Members: &m_BotChannelAssociationList, Type: smithy.ShapeTypeList, Ext: &eGetBotChannelAssociationsResponse_botChannelAssociations})
+var sGetBotChannelAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBotChannelAssociationsResponse_nextToken})
+var sGetBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotRequest, Members: &mGetBotRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBotRequest})
+var sGetBotRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotRequest_name})
+var sGetBotRequest_versionOrAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionOrAlias", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotRequest_versionOrAlias})
+var sGetBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotResponse, Members: &mGetBotResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotResponse})
+var sGetBotResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eGetBotResponse_name})
+var sGetBotResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetBotResponse_description})
+var sGetBotResponse_intents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intents", ID: &i_IntentList, Members: &m_IntentList, Type: smithy.ShapeTypeList, Ext: &eGetBotResponse_intents})
+var sGetBotResponse_enableModelImprovements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableModelImprovements", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetBotResponse_enableModelImprovements})
+var sGetBotResponse_nluIntentConfidenceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nluIntentConfidenceThreshold", ID: &i_ConfidenceThreshold, Type: smithy.ShapeTypeDouble, Ext: &eGetBotResponse_nluIntentConfidenceThreshold})
+var sGetBotResponse_clarificationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clarificationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &eGetBotResponse_clarificationPrompt})
+var sGetBotResponse_abortStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "abortStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eGetBotResponse_abortStatement})
+var sGetBotResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetBotResponse_status})
+var sGetBotResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetBotResponse_failureReason})
+var sGetBotResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBotResponse_lastUpdatedDate})
+var sGetBotResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBotResponse_createdDate})
+var sGetBotResponse_idleSessionTTLInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleSessionTTLInSeconds", ID: &i_SessionTTL, Type: smithy.ShapeTypeInteger, Ext: &eGetBotResponse_idleSessionTTLInSeconds})
+var sGetBotResponse_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetBotResponse_voiceId})
+var sGetBotResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetBotResponse_checksum})
+var sGetBotResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetBotResponse_version})
+var sGetBotResponse_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &eGetBotResponse_locale})
+var sGetBotResponse_childDirected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childDirected", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetBotResponse_childDirected})
+var sGetBotResponse_detectSentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectSentiment", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetBotResponse_detectSentiment})
+var sGetBotsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotsRequest, Members: &mGetBotsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBotsRequest})
+var sGetBotsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetBotsRequest_nextToken})
+var sGetBotsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetBotsRequest_maxResults})
+var sGetBotsRequest_nameContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nameContains", ID: &i_BotName, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBotsRequest_nameContains})
+var sGetBotsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotsResponse, Members: &mGetBotsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotsResponse})
+var sGetBotsResponse_bots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bots", ID: &i_BotMetadataList, Members: &m_BotMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetBotsResponse_bots})
+var sGetBotsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBotsResponse_nextToken})
+var sGetBotVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotVersionsRequest, Members: &mGetBotVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBotVersionsRequest})
+var sGetBotVersionsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBotVersionsRequest_name})
+var sGetBotVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetBotVersionsRequest_nextToken})
+var sGetBotVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetBotVersionsRequest_maxResults})
+var sGetBotVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotVersionsResponse, Members: &mGetBotVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBotVersionsResponse})
+var sGetBotVersionsResponse_bots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bots", ID: &i_BotMetadataList, Members: &m_BotMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetBotVersionsResponse_bots})
+var sGetBotVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBotVersionsResponse_nextToken})
+var sGetBuiltinIntentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinIntentRequest, Members: &mGetBuiltinIntentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBuiltinIntentRequest})
+var sGetBuiltinIntentRequest_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &i_BuiltinIntentSignature, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinIntentRequest_signature})
+var sGetBuiltinIntentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinIntentResponse, Members: &mGetBuiltinIntentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBuiltinIntentResponse})
+var sGetBuiltinIntentResponse_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &i_BuiltinIntentSignature, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinIntentResponse_signature})
+var sGetBuiltinIntentResponse_supportedLocales = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedLocales", ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &eGetBuiltinIntentResponse_supportedLocales})
+var sGetBuiltinIntentResponse_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_BuiltinIntentSlotList, Members: &m_BuiltinIntentSlotList, Type: smithy.ShapeTypeList, Ext: &eGetBuiltinIntentResponse_slots})
+var sGetBuiltinIntentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinIntentsRequest, Members: &mGetBuiltinIntentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBuiltinIntentsRequest})
+var sGetBuiltinIntentsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &iLocale, Members: &mLocale, Traits: &t56, Type: smithy.ShapeTypeEnum, Ext: &eGetBuiltinIntentsRequest_locale})
+var sGetBuiltinIntentsRequest_signatureContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureContains", ID: &i_String, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinIntentsRequest_signatureContains})
+var sGetBuiltinIntentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinIntentsRequest_nextToken})
+var sGetBuiltinIntentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetBuiltinIntentsRequest_maxResults})
+var sGetBuiltinIntentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinIntentsResponse, Members: &mGetBuiltinIntentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBuiltinIntentsResponse})
+var sGetBuiltinIntentsResponse_intents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intents", ID: &i_BuiltinIntentMetadataList, Members: &m_BuiltinIntentMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetBuiltinIntentsResponse_intents})
+var sGetBuiltinIntentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinIntentsResponse_nextToken})
+var sGetBuiltinSlotTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinSlotTypesRequest, Members: &mGetBuiltinSlotTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBuiltinSlotTypesRequest})
+var sGetBuiltinSlotTypesRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &iLocale, Members: &mLocale, Traits: &t56, Type: smithy.ShapeTypeEnum, Ext: &eGetBuiltinSlotTypesRequest_locale})
+var sGetBuiltinSlotTypesRequest_signatureContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureContains", ID: &i_String, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinSlotTypesRequest_signatureContains})
+var sGetBuiltinSlotTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinSlotTypesRequest_nextToken})
+var sGetBuiltinSlotTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetBuiltinSlotTypesRequest_maxResults})
+var sGetBuiltinSlotTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuiltinSlotTypesResponse, Members: &mGetBuiltinSlotTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBuiltinSlotTypesResponse})
+var sGetBuiltinSlotTypesResponse_slotTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypes", ID: &i_BuiltinSlotTypeMetadataList, Members: &m_BuiltinSlotTypeMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetBuiltinSlotTypesResponse_slotTypes})
+var sGetBuiltinSlotTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBuiltinSlotTypesResponse_nextToken})
+var sGetExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExportRequest, Members: &mGetExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExportRequest})
+var sGetExportRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eGetExportRequest_name})
+var sGetExportRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_NumericalVersion, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetExportRequest_version})
+var sGetExportRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Traits: &t60, Type: smithy.ShapeTypeEnum, Ext: &eGetExportRequest_resourceType})
+var sGetExportRequest_exportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportType", ID: &iExportType, Members: &mExportType, Traits: &t61, Type: smithy.ShapeTypeEnum, Ext: &eGetExportRequest_exportType})
+var sGetExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExportResponse, Members: &mGetExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetExportResponse})
+var sGetExportResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGetExportResponse_name})
+var sGetExportResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_NumericalVersion, Type: smithy.ShapeTypeString, Ext: &eGetExportResponse_version})
+var sGetExportResponse_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eGetExportResponse_resourceType})
+var sGetExportResponse_exportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportType", ID: &iExportType, Members: &mExportType, Type: smithy.ShapeTypeEnum, Ext: &eGetExportResponse_exportType})
+var sGetExportResponse_exportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportStatus", ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetExportResponse_exportStatus})
+var sGetExportResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetExportResponse_failureReason})
+var sGetExportResponse_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetExportResponse_url})
+var sGetImportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImportRequest, Members: &mGetImportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetImportRequest})
+var sGetImportRequest_importId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importId", ID: &i_String, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetImportRequest_importId})
+var sGetImportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImportResponse, Members: &mGetImportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetImportResponse})
+var sGetImportResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGetImportResponse_name})
+var sGetImportResponse_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eGetImportResponse_resourceType})
+var sGetImportResponse_mergeStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeStrategy", ID: &iMergeStrategy, Members: &mMergeStrategy, Type: smithy.ShapeTypeEnum, Ext: &eGetImportResponse_mergeStrategy})
+var sGetImportResponse_importId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetImportResponse_importId})
+var sGetImportResponse_importStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importStatus", ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetImportResponse_importStatus})
+var sGetImportResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetImportResponse_failureReason})
+var sGetImportResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetImportResponse_createdDate})
+var sGetIntentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntentRequest, Members: &mGetIntentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentRequest})
+var sGetIntentRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetIntentRequest_name})
+var sGetIntentRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetIntentRequest_version})
+var sGetIntentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntentResponse, Members: &mGetIntentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse})
+var sGetIntentResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Type: smithy.ShapeTypeString, Ext: &eGetIntentResponse_name})
+var sGetIntentResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetIntentResponse_description})
+var sGetIntentResponse_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_SlotList, Members: &m_SlotList, Type: smithy.ShapeTypeList, Ext: &eGetIntentResponse_slots})
+var sGetIntentResponse_sampleUtterances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleUtterances", ID: &i_IntentUtteranceList, Members: &m_IntentUtteranceList, Type: smithy.ShapeTypeList, Ext: &eGetIntentResponse_sampleUtterances})
+var sGetIntentResponse_confirmationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse_confirmationPrompt})
+var sGetIntentResponse_rejectionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejectionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse_rejectionStatement})
+var sGetIntentResponse_followUpPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "followUpPrompt", ID: &iFollowUpPrompt, Members: &mFollowUpPrompt, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse_followUpPrompt})
+var sGetIntentResponse_conclusionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conclusionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse_conclusionStatement})
+var sGetIntentResponse_dialogCodeHook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogCodeHook", ID: &iCodeHook, Members: &mCodeHook, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse_dialogCodeHook})
+var sGetIntentResponse_fulfillmentActivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentActivity", ID: &iFulfillmentActivity, Members: &mFulfillmentActivity, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse_fulfillmentActivity})
+var sGetIntentResponse_parentIntentSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIntentSignature", ID: &i_BuiltinIntentSignature, Type: smithy.ShapeTypeString, Ext: &eGetIntentResponse_parentIntentSignature})
+var sGetIntentResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetIntentResponse_lastUpdatedDate})
+var sGetIntentResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetIntentResponse_createdDate})
+var sGetIntentResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetIntentResponse_version})
+var sGetIntentResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetIntentResponse_checksum})
+var sGetIntentResponse_kendraConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kendraConfiguration", ID: &iKendraConfiguration, Members: &mKendraConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentResponse_kendraConfiguration})
+var sGetIntentResponse_inputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputContexts", ID: &i_InputContextList, Members: &m_InputContextList, Type: smithy.ShapeTypeList, Ext: &eGetIntentResponse_inputContexts})
+var sGetIntentResponse_outputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputContexts", ID: &i_OutputContextList, Members: &m_OutputContextList, Type: smithy.ShapeTypeList, Ext: &eGetIntentResponse_outputContexts})
+var sGetIntentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntentsRequest, Members: &mGetIntentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentsRequest})
+var sGetIntentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetIntentsRequest_nextToken})
+var sGetIntentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetIntentsRequest_maxResults})
+var sGetIntentsRequest_nameContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nameContains", ID: &i_IntentName, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetIntentsRequest_nameContains})
+var sGetIntentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntentsResponse, Members: &mGetIntentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentsResponse})
+var sGetIntentsResponse_intents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intents", ID: &i_IntentMetadataList, Members: &m_IntentMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetIntentsResponse_intents})
+var sGetIntentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetIntentsResponse_nextToken})
+var sGetIntentVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntentVersionsRequest, Members: &mGetIntentVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentVersionsRequest})
+var sGetIntentVersionsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetIntentVersionsRequest_name})
+var sGetIntentVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetIntentVersionsRequest_nextToken})
+var sGetIntentVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetIntentVersionsRequest_maxResults})
+var sGetIntentVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntentVersionsResponse, Members: &mGetIntentVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIntentVersionsResponse})
+var sGetIntentVersionsResponse_intents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intents", ID: &i_IntentMetadataList, Members: &m_IntentMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetIntentVersionsResponse_intents})
+var sGetIntentVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetIntentVersionsResponse_nextToken})
+var sGetMigrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationRequest, Members: &mGetMigrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationRequest})
+var sGetMigrationRequest_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetMigrationRequest_migrationId})
+var sGetMigrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationResponse, Members: &mGetMigrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationResponse})
+var sGetMigrationResponse_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eGetMigrationResponse_migrationId})
+var sGetMigrationResponse_v1BotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eGetMigrationResponse_v1BotName})
+var sGetMigrationResponse_v1BotVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetMigrationResponse_v1BotVersion})
+var sGetMigrationResponse_v1BotLocale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotLocale", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &eGetMigrationResponse_v1BotLocale})
+var sGetMigrationResponse_v2BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotId", ID: &i_V2BotId, Type: smithy.ShapeTypeString, Ext: &eGetMigrationResponse_v2BotId})
+var sGetMigrationResponse_v2BotRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotRole", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eGetMigrationResponse_v2BotRole})
+var sGetMigrationResponse_migrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStatus", ID: &iMigrationStatus, Members: &mMigrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetMigrationResponse_migrationStatus})
+var sGetMigrationResponse_migrationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStrategy", ID: &iMigrationStrategy, Members: &mMigrationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eGetMigrationResponse_migrationStrategy})
+var sGetMigrationResponse_migrationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMigrationResponse_migrationTimestamp})
+var sGetMigrationResponse_alerts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alerts", ID: &i_MigrationAlerts, Members: &m_MigrationAlerts, Type: smithy.ShapeTypeList, Ext: &eGetMigrationResponse_alerts})
+var sGetMigrationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationsRequest, Members: &mGetMigrationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationsRequest})
+var sGetMigrationsRequest_sortByAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortByAttribute", ID: &iMigrationSortAttribute, Members: &mMigrationSortAttribute, Traits: &t62, Type: smithy.ShapeTypeEnum, Ext: &eGetMigrationsRequest_sortByAttribute})
+var sGetMigrationsRequest_sortByOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortByOrder", ID: &iSortOrder, Members: &mSortOrder, Traits: &t63, Type: smithy.ShapeTypeEnum, Ext: &eGetMigrationsRequest_sortByOrder})
+var sGetMigrationsRequest_v1BotNameContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotNameContains", ID: &i_BotName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eGetMigrationsRequest_v1BotNameContains})
+var sGetMigrationsRequest_migrationStatusEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStatusEquals", ID: &iMigrationStatus, Members: &mMigrationStatus, Traits: &t65, Type: smithy.ShapeTypeEnum, Ext: &eGetMigrationsRequest_migrationStatusEquals})
+var sGetMigrationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetMigrationsRequest_maxResults})
+var sGetMigrationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetMigrationsRequest_nextToken})
+var sGetMigrationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationsResponse, Members: &mGetMigrationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationsResponse})
+var sGetMigrationsResponse_migrationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationSummaries", ID: &i_MigrationSummaryList, Members: &m_MigrationSummaryList, Type: smithy.ShapeTypeList, Ext: &eGetMigrationsResponse_migrationSummaries})
+var sGetMigrationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetMigrationsResponse_nextToken})
+var sGetSlotTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypeRequest, Members: &mGetSlotTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSlotTypeRequest})
+var sGetSlotTypeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeRequest_name})
+var sGetSlotTypeRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeRequest_version})
+var sGetSlotTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypeResponse, Members: &mGetSlotTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSlotTypeResponse})
+var sGetSlotTypeResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeResponse_name})
+var sGetSlotTypeResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeResponse_description})
+var sGetSlotTypeResponse_enumerationValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumerationValues", ID: &i_EnumerationValues, Members: &m_EnumerationValues, Type: smithy.ShapeTypeList, Ext: &eGetSlotTypeResponse_enumerationValues})
+var sGetSlotTypeResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSlotTypeResponse_lastUpdatedDate})
+var sGetSlotTypeResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSlotTypeResponse_createdDate})
+var sGetSlotTypeResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeResponse_version})
+var sGetSlotTypeResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeResponse_checksum})
+var sGetSlotTypeResponse_valueSelectionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueSelectionStrategy", ID: &iSlotValueSelectionStrategy, Members: &mSlotValueSelectionStrategy, Type: smithy.ShapeTypeEnum, Ext: &eGetSlotTypeResponse_valueSelectionStrategy})
+var sGetSlotTypeResponse_parentSlotTypeSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentSlotTypeSignature", ID: &i_CustomOrBuiltinSlotTypeName, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeResponse_parentSlotTypeSignature})
+var sGetSlotTypeResponse_slotTypeConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypeConfigurations", ID: &i_SlotTypeConfigurations, Members: &m_SlotTypeConfigurations, Type: smithy.ShapeTypeList, Ext: &eGetSlotTypeResponse_slotTypeConfigurations})
+var sGetSlotTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypesRequest, Members: &mGetSlotTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSlotTypesRequest})
+var sGetSlotTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypesRequest_nextToken})
+var sGetSlotTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetSlotTypesRequest_maxResults})
+var sGetSlotTypesRequest_nameContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nameContains", ID: &i_SlotTypeName, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypesRequest_nameContains})
+var sGetSlotTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypesResponse, Members: &mGetSlotTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSlotTypesResponse})
+var sGetSlotTypesResponse_slotTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypes", ID: &i_SlotTypeMetadataList, Members: &m_SlotTypeMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetSlotTypesResponse_slotTypes})
+var sGetSlotTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypesResponse_nextToken})
+var sGetSlotTypeVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypeVersionsRequest, Members: &mGetSlotTypeVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSlotTypeVersionsRequest})
+var sGetSlotTypeVersionsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeVersionsRequest_name})
+var sGetSlotTypeVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeVersionsRequest_nextToken})
+var sGetSlotTypeVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t54, Type: smithy.ShapeTypeInteger, Ext: &eGetSlotTypeVersionsRequest_maxResults})
+var sGetSlotTypeVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSlotTypeVersionsResponse, Members: &mGetSlotTypeVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSlotTypeVersionsResponse})
+var sGetSlotTypeVersionsResponse_slotTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypes", ID: &i_SlotTypeMetadataList, Members: &m_SlotTypeMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetSlotTypeVersionsResponse_slotTypes})
+var sGetSlotTypeVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetSlotTypeVersionsResponse_nextToken})
+var sGetUtterancesViewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUtterancesViewRequest, Members: &mGetUtterancesViewRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetUtterancesViewRequest})
+var sGetUtterancesViewRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetUtterancesViewRequest_botName})
+var sGetUtterancesViewRequest_botVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersions", ID: &i_BotVersions, Members: &m_BotVersions, Traits: &t66, Type: smithy.ShapeTypeList, Ext: &eGetUtterancesViewRequest_botVersions})
+var sGetUtterancesViewRequest_statusType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusType", ID: &iStatusType, Members: &mStatusType, Traits: &t67, Type: smithy.ShapeTypeEnum, Ext: &eGetUtterancesViewRequest_statusType})
+var sGetUtterancesViewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUtterancesViewResponse, Members: &mGetUtterancesViewResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetUtterancesViewResponse})
+var sGetUtterancesViewResponse_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eGetUtterancesViewResponse_botName})
+var sGetUtterancesViewResponse_utterances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "utterances", ID: &i_ListsOfUtterances, Members: &m_ListsOfUtterances, Type: smithy.ShapeTypeList, Ext: &eGetUtterancesViewResponse_utterances})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sPutBotAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBotAliasRequest, Members: &mPutBotAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutBotAliasRequest})
+var sPutBotAliasRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AliasName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasRequest_name})
+var sPutBotAliasRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasRequest_description})
+var sPutBotAliasRequest_botVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasRequest_botVersion})
+var sPutBotAliasRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasRequest_botName})
+var sPutBotAliasRequest_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasRequest_checksum})
+var sPutBotAliasRequest_conversationLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conversationLogs", ID: &iConversationLogsRequest, Members: &mConversationLogsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutBotAliasRequest_conversationLogs})
+var sPutBotAliasRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutBotAliasRequest_tags})
+var sPutBotAliasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBotAliasResponse, Members: &mPutBotAliasResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutBotAliasResponse})
+var sPutBotAliasResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AliasName, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasResponse_name})
+var sPutBotAliasResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasResponse_description})
+var sPutBotAliasResponse_botVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasResponse_botVersion})
+var sPutBotAliasResponse_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasResponse_botName})
+var sPutBotAliasResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutBotAliasResponse_lastUpdatedDate})
+var sPutBotAliasResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutBotAliasResponse_createdDate})
+var sPutBotAliasResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutBotAliasResponse_checksum})
+var sPutBotAliasResponse_conversationLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conversationLogs", ID: &iConversationLogsResponse, Members: &mConversationLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutBotAliasResponse_conversationLogs})
+var sPutBotAliasResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutBotAliasResponse_tags})
+var sPutBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBotRequest, Members: &mPutBotRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutBotRequest})
+var sPutBotRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutBotRequest_name})
+var sPutBotRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutBotRequest_description})
+var sPutBotRequest_intents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intents", ID: &i_IntentList, Members: &m_IntentList, Type: smithy.ShapeTypeList, Ext: &ePutBotRequest_intents})
+var sPutBotRequest_enableModelImprovements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableModelImprovements", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotRequest_enableModelImprovements})
+var sPutBotRequest_nluIntentConfidenceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nluIntentConfidenceThreshold", ID: &i_ConfidenceThreshold, Type: smithy.ShapeTypeDouble, Ext: &ePutBotRequest_nluIntentConfidenceThreshold})
+var sPutBotRequest_clarificationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clarificationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &ePutBotRequest_clarificationPrompt})
+var sPutBotRequest_abortStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "abortStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &ePutBotRequest_abortStatement})
+var sPutBotRequest_idleSessionTTLInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleSessionTTLInSeconds", ID: &i_SessionTTL, Type: smithy.ShapeTypeInteger, Ext: &ePutBotRequest_idleSessionTTLInSeconds})
+var sPutBotRequest_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutBotRequest_voiceId})
+var sPutBotRequest_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutBotRequest_checksum})
+var sPutBotRequest_processBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "processBehavior", ID: &iProcessBehavior, Members: &mProcessBehavior, Type: smithy.ShapeTypeEnum, Ext: &ePutBotRequest_processBehavior})
+var sPutBotRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &ePutBotRequest_locale})
+var sPutBotRequest_childDirected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childDirected", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotRequest_childDirected})
+var sPutBotRequest_detectSentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectSentiment", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotRequest_detectSentiment})
+var sPutBotRequest_createVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotRequest_createVersion})
+var sPutBotRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutBotRequest_tags})
+var sPutBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutBotResponse, Members: &mPutBotResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutBotResponse})
+var sPutBotResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &ePutBotResponse_name})
+var sPutBotResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutBotResponse_description})
+var sPutBotResponse_intents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intents", ID: &i_IntentList, Members: &m_IntentList, Type: smithy.ShapeTypeList, Ext: &ePutBotResponse_intents})
+var sPutBotResponse_enableModelImprovements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableModelImprovements", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotResponse_enableModelImprovements})
+var sPutBotResponse_nluIntentConfidenceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nluIntentConfidenceThreshold", ID: &i_ConfidenceThreshold, Type: smithy.ShapeTypeDouble, Ext: &ePutBotResponse_nluIntentConfidenceThreshold})
+var sPutBotResponse_clarificationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clarificationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &ePutBotResponse_clarificationPrompt})
+var sPutBotResponse_abortStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "abortStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &ePutBotResponse_abortStatement})
+var sPutBotResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ePutBotResponse_status})
+var sPutBotResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutBotResponse_failureReason})
+var sPutBotResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutBotResponse_lastUpdatedDate})
+var sPutBotResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutBotResponse_createdDate})
+var sPutBotResponse_idleSessionTTLInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleSessionTTLInSeconds", ID: &i_SessionTTL, Type: smithy.ShapeTypeInteger, Ext: &ePutBotResponse_idleSessionTTLInSeconds})
+var sPutBotResponse_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutBotResponse_voiceId})
+var sPutBotResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutBotResponse_checksum})
+var sPutBotResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ePutBotResponse_version})
+var sPutBotResponse_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &ePutBotResponse_locale})
+var sPutBotResponse_childDirected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childDirected", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotResponse_childDirected})
+var sPutBotResponse_createVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotResponse_createVersion})
+var sPutBotResponse_detectSentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectSentiment", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutBotResponse_detectSentiment})
+var sPutBotResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutBotResponse_tags})
+var sPutIntentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutIntentRequest, Members: &mPutIntentRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest})
+var sPutIntentRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutIntentRequest_name})
+var sPutIntentRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutIntentRequest_description})
+var sPutIntentRequest_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_SlotList, Members: &m_SlotList, Type: smithy.ShapeTypeList, Ext: &ePutIntentRequest_slots})
+var sPutIntentRequest_sampleUtterances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleUtterances", ID: &i_IntentUtteranceList, Members: &m_IntentUtteranceList, Type: smithy.ShapeTypeList, Ext: &ePutIntentRequest_sampleUtterances})
+var sPutIntentRequest_confirmationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest_confirmationPrompt})
+var sPutIntentRequest_rejectionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejectionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest_rejectionStatement})
+var sPutIntentRequest_followUpPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "followUpPrompt", ID: &iFollowUpPrompt, Members: &mFollowUpPrompt, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest_followUpPrompt})
+var sPutIntentRequest_conclusionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conclusionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest_conclusionStatement})
+var sPutIntentRequest_dialogCodeHook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogCodeHook", ID: &iCodeHook, Members: &mCodeHook, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest_dialogCodeHook})
+var sPutIntentRequest_fulfillmentActivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentActivity", ID: &iFulfillmentActivity, Members: &mFulfillmentActivity, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest_fulfillmentActivity})
+var sPutIntentRequest_parentIntentSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIntentSignature", ID: &i_BuiltinIntentSignature, Type: smithy.ShapeTypeString, Ext: &ePutIntentRequest_parentIntentSignature})
+var sPutIntentRequest_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutIntentRequest_checksum})
+var sPutIntentRequest_createVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutIntentRequest_createVersion})
+var sPutIntentRequest_kendraConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kendraConfiguration", ID: &iKendraConfiguration, Members: &mKendraConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentRequest_kendraConfiguration})
+var sPutIntentRequest_inputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputContexts", ID: &i_InputContextList, Members: &m_InputContextList, Type: smithy.ShapeTypeList, Ext: &ePutIntentRequest_inputContexts})
+var sPutIntentRequest_outputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputContexts", ID: &i_OutputContextList, Members: &m_OutputContextList, Type: smithy.ShapeTypeList, Ext: &ePutIntentRequest_outputContexts})
+var sPutIntentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutIntentResponse, Members: &mPutIntentResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse})
+var sPutIntentResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntentName, Type: smithy.ShapeTypeString, Ext: &ePutIntentResponse_name})
+var sPutIntentResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutIntentResponse_description})
+var sPutIntentResponse_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_SlotList, Members: &m_SlotList, Type: smithy.ShapeTypeList, Ext: &ePutIntentResponse_slots})
+var sPutIntentResponse_sampleUtterances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleUtterances", ID: &i_IntentUtteranceList, Members: &m_IntentUtteranceList, Type: smithy.ShapeTypeList, Ext: &ePutIntentResponse_sampleUtterances})
+var sPutIntentResponse_confirmationPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationPrompt", ID: &iPrompt, Members: &mPrompt, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse_confirmationPrompt})
+var sPutIntentResponse_rejectionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejectionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse_rejectionStatement})
+var sPutIntentResponse_followUpPrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "followUpPrompt", ID: &iFollowUpPrompt, Members: &mFollowUpPrompt, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse_followUpPrompt})
+var sPutIntentResponse_conclusionStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conclusionStatement", ID: &iStatement, Members: &mStatement, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse_conclusionStatement})
+var sPutIntentResponse_dialogCodeHook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogCodeHook", ID: &iCodeHook, Members: &mCodeHook, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse_dialogCodeHook})
+var sPutIntentResponse_fulfillmentActivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentActivity", ID: &iFulfillmentActivity, Members: &mFulfillmentActivity, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse_fulfillmentActivity})
+var sPutIntentResponse_parentIntentSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIntentSignature", ID: &i_BuiltinIntentSignature, Type: smithy.ShapeTypeString, Ext: &ePutIntentResponse_parentIntentSignature})
+var sPutIntentResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutIntentResponse_lastUpdatedDate})
+var sPutIntentResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutIntentResponse_createdDate})
+var sPutIntentResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ePutIntentResponse_version})
+var sPutIntentResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutIntentResponse_checksum})
+var sPutIntentResponse_createVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutIntentResponse_createVersion})
+var sPutIntentResponse_kendraConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kendraConfiguration", ID: &iKendraConfiguration, Members: &mKendraConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutIntentResponse_kendraConfiguration})
+var sPutIntentResponse_inputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputContexts", ID: &i_InputContextList, Members: &m_InputContextList, Type: smithy.ShapeTypeList, Ext: &ePutIntentResponse_inputContexts})
+var sPutIntentResponse_outputContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputContexts", ID: &i_OutputContextList, Members: &m_OutputContextList, Type: smithy.ShapeTypeList, Ext: &ePutIntentResponse_outputContexts})
+var sPutSlotTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSlotTypeRequest, Members: &mPutSlotTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSlotTypeRequest})
+var sPutSlotTypeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeRequest_name})
+var sPutSlotTypeRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeRequest_description})
+var sPutSlotTypeRequest_enumerationValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumerationValues", ID: &i_EnumerationValues, Members: &m_EnumerationValues, Type: smithy.ShapeTypeList, Ext: &ePutSlotTypeRequest_enumerationValues})
+var sPutSlotTypeRequest_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeRequest_checksum})
+var sPutSlotTypeRequest_valueSelectionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueSelectionStrategy", ID: &iSlotValueSelectionStrategy, Members: &mSlotValueSelectionStrategy, Type: smithy.ShapeTypeEnum, Ext: &ePutSlotTypeRequest_valueSelectionStrategy})
+var sPutSlotTypeRequest_createVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutSlotTypeRequest_createVersion})
+var sPutSlotTypeRequest_parentSlotTypeSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentSlotTypeSignature", ID: &i_CustomOrBuiltinSlotTypeName, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeRequest_parentSlotTypeSignature})
+var sPutSlotTypeRequest_slotTypeConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypeConfigurations", ID: &i_SlotTypeConfigurations, Members: &m_SlotTypeConfigurations, Type: smithy.ShapeTypeList, Ext: &ePutSlotTypeRequest_slotTypeConfigurations})
+var sPutSlotTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSlotTypeResponse, Members: &mPutSlotTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSlotTypeResponse})
+var sPutSlotTypeResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlotTypeName, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeResponse_name})
+var sPutSlotTypeResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeResponse_description})
+var sPutSlotTypeResponse_enumerationValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumerationValues", ID: &i_EnumerationValues, Members: &m_EnumerationValues, Type: smithy.ShapeTypeList, Ext: &ePutSlotTypeResponse_enumerationValues})
+var sPutSlotTypeResponse_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutSlotTypeResponse_lastUpdatedDate})
+var sPutSlotTypeResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutSlotTypeResponse_createdDate})
+var sPutSlotTypeResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeResponse_version})
+var sPutSlotTypeResponse_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeResponse_checksum})
+var sPutSlotTypeResponse_valueSelectionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueSelectionStrategy", ID: &iSlotValueSelectionStrategy, Members: &mSlotValueSelectionStrategy, Type: smithy.ShapeTypeEnum, Ext: &ePutSlotTypeResponse_valueSelectionStrategy})
+var sPutSlotTypeResponse_createVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutSlotTypeResponse_createVersion})
+var sPutSlotTypeResponse_parentSlotTypeSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentSlotTypeSignature", ID: &i_CustomOrBuiltinSlotTypeName, Type: smithy.ShapeTypeString, Ext: &ePutSlotTypeResponse_parentSlotTypeSignature})
+var sPutSlotTypeResponse_slotTypeConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotTypeConfigurations", ID: &i_SlotTypeConfigurations, Members: &m_SlotTypeConfigurations, Type: smithy.ShapeTypeList, Ext: &ePutSlotTypeResponse_slotTypeConfigurations})
+var sStartImportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImportRequest, Members: &mStartImportRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartImportRequest})
+var sStartImportRequest_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_Blob, Type: smithy.ShapeTypeBlob, Ext: &eStartImportRequest_payload})
+var sStartImportRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eStartImportRequest_resourceType})
+var sStartImportRequest_mergeStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeStrategy", ID: &iMergeStrategy, Members: &mMergeStrategy, Type: smithy.ShapeTypeEnum, Ext: &eStartImportRequest_mergeStrategy})
+var sStartImportRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eStartImportRequest_tags})
+var sStartImportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImportResponse, Members: &mStartImportResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartImportResponse})
+var sStartImportResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eStartImportResponse_name})
+var sStartImportResponse_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eStartImportResponse_resourceType})
+var sStartImportResponse_mergeStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeStrategy", ID: &iMergeStrategy, Members: &mMergeStrategy, Type: smithy.ShapeTypeEnum, Ext: &eStartImportResponse_mergeStrategy})
+var sStartImportResponse_importId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartImportResponse_importId})
+var sStartImportResponse_importStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importStatus", ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartImportResponse_importStatus})
+var sStartImportResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eStartImportResponse_tags})
+var sStartImportResponse_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartImportResponse_createdDate})
+var sStartMigrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMigrationRequest, Members: &mStartMigrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartMigrationRequest})
+var sStartMigrationRequest_v1BotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eStartMigrationRequest_v1BotName})
+var sStartMigrationRequest_v1BotVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eStartMigrationRequest_v1BotVersion})
+var sStartMigrationRequest_v2BotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotName", ID: &i_V2BotName, Type: smithy.ShapeTypeString, Ext: &eStartMigrationRequest_v2BotName})
+var sStartMigrationRequest_v2BotRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotRole", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartMigrationRequest_v2BotRole})
+var sStartMigrationRequest_migrationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStrategy", ID: &iMigrationStrategy, Members: &mMigrationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eStartMigrationRequest_migrationStrategy})
+var sStartMigrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMigrationResponse, Members: &mStartMigrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartMigrationResponse})
+var sStartMigrationResponse_v1BotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotName", ID: &i_BotName, Type: smithy.ShapeTypeString, Ext: &eStartMigrationResponse_v1BotName})
+var sStartMigrationResponse_v1BotVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eStartMigrationResponse_v1BotVersion})
+var sStartMigrationResponse_v1BotLocale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1BotLocale", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum, Ext: &eStartMigrationResponse_v1BotLocale})
+var sStartMigrationResponse_v2BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotId", ID: &i_V2BotId, Type: smithy.ShapeTypeString, Ext: &eStartMigrationResponse_v2BotId})
+var sStartMigrationResponse_v2BotRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v2BotRole", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartMigrationResponse_v2BotRole})
+var sStartMigrationResponse_migrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationId", ID: &i_MigrationId, Type: smithy.ShapeTypeString, Ext: &eStartMigrationResponse_migrationId})
+var sStartMigrationResponse_migrationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationStrategy", ID: &iMigrationStrategy, Members: &mMigrationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eStartMigrationResponse_migrationStrategy})
+var sStartMigrationResponse_migrationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartMigrationResponse_migrationTimestamp})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t68, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+
+var CreateBotVersion = &sCreateBotVersion
+
+var CreateIntentVersion = &sCreateIntentVersion
+
+var CreateSlotTypeVersion = &sCreateSlotTypeVersion
+
+var DeleteBot = &sDeleteBot
+
+var DeleteBotAlias = &sDeleteBotAlias
+
+var DeleteBotChannelAssociation = &sDeleteBotChannelAssociation
+
+var DeleteBotVersion = &sDeleteBotVersion
+
+var DeleteIntent = &sDeleteIntent
+
+var DeleteIntentVersion = &sDeleteIntentVersion
+
+var DeleteSlotType = &sDeleteSlotType
+
+var DeleteSlotTypeVersion = &sDeleteSlotTypeVersion
+
+var DeleteUtterances = &sDeleteUtterances
+
+var GetBot = &sGetBot
+
+var GetBotAlias = &sGetBotAlias
+
+var GetBotAliases = &sGetBotAliases
+
+var GetBotChannelAssociation = &sGetBotChannelAssociation
+
+var GetBotChannelAssociations = &sGetBotChannelAssociations
+
+var GetBots = &sGetBots
+
+var GetBotVersions = &sGetBotVersions
+
+var GetBuiltinIntent = &sGetBuiltinIntent
+
+var GetBuiltinIntents = &sGetBuiltinIntents
+
+var GetBuiltinSlotTypes = &sGetBuiltinSlotTypes
+
+var GetExport = &sGetExport
+
+var GetImport = &sGetImport
+
+var GetIntent = &sGetIntent
+
+var GetIntents = &sGetIntents
+
+var GetIntentVersions = &sGetIntentVersions
+
+var GetMigration = &sGetMigration
+
+var GetMigrations = &sGetMigrations
+
+var GetSlotType = &sGetSlotType
+
+var GetSlotTypes = &sGetSlotTypes
+
+var GetSlotTypeVersions = &sGetSlotTypeVersions
+
+var GetUtterancesView = &sGetUtterancesView
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutBot = &sPutBot
+
+var PutBotAlias = &sPutBotAlias
+
+var PutIntent = &sPutIntent
+
+var PutSlotType = &sPutSlotType
+
+var StartImport = &sStartImport
+
+var StartMigration = &sStartMigration
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _AWSDeepSenseModelBuildingService = &s_AWSDeepSenseModelBuildingService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AliasName = &s_AliasName
+
+var _AliasNameOrListAll = &s_AliasNameOrListAll
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var _Blob = &s_Blob
+
+var _Boolean = &s_Boolean
+
+var BotAliasMetadata = &sBotAliasMetadata
+var BotAliasMetadata_name = &sBotAliasMetadata_name
+var BotAliasMetadata_description = &sBotAliasMetadata_description
+var BotAliasMetadata_botVersion = &sBotAliasMetadata_botVersion
+var BotAliasMetadata_botName = &sBotAliasMetadata_botName
+var BotAliasMetadata_lastUpdatedDate = &sBotAliasMetadata_lastUpdatedDate
+var BotAliasMetadata_createdDate = &sBotAliasMetadata_createdDate
+var BotAliasMetadata_checksum = &sBotAliasMetadata_checksum
+var BotAliasMetadata_conversationLogs = &sBotAliasMetadata_conversationLogs
+
+var _BotAliasMetadataList = &s_BotAliasMetadataList
+var _BotAliasMetadataList_member = &s_BotAliasMetadataList_member
+
+var BotChannelAssociation = &sBotChannelAssociation
+var BotChannelAssociation_name = &sBotChannelAssociation_name
+var BotChannelAssociation_description = &sBotChannelAssociation_description
+var BotChannelAssociation_botAlias = &sBotChannelAssociation_botAlias
+var BotChannelAssociation_botName = &sBotChannelAssociation_botName
+var BotChannelAssociation_createdDate = &sBotChannelAssociation_createdDate
+var BotChannelAssociation_type = &sBotChannelAssociation_type
+var BotChannelAssociation_botConfiguration = &sBotChannelAssociation_botConfiguration
+var BotChannelAssociation_status = &sBotChannelAssociation_status
+var BotChannelAssociation_failureReason = &sBotChannelAssociation_failureReason
+
+var _BotChannelAssociationList = &s_BotChannelAssociationList
+var _BotChannelAssociationList_member = &s_BotChannelAssociationList_member
+
+var _BotChannelName = &s_BotChannelName
+
+var BotMetadata = &sBotMetadata
+var BotMetadata_name = &sBotMetadata_name
+var BotMetadata_description = &sBotMetadata_description
+var BotMetadata_status = &sBotMetadata_status
+var BotMetadata_lastUpdatedDate = &sBotMetadata_lastUpdatedDate
+var BotMetadata_createdDate = &sBotMetadata_createdDate
+var BotMetadata_version = &sBotMetadata_version
+
+var _BotMetadataList = &s_BotMetadataList
+var _BotMetadataList_member = &s_BotMetadataList_member
+
+var _BotName = &s_BotName
+
+var _BotVersions = &s_BotVersions
+var _BotVersions_member = &s_BotVersions_member
+
+var BuiltinIntentMetadata = &sBuiltinIntentMetadata
+var BuiltinIntentMetadata_signature = &sBuiltinIntentMetadata_signature
+var BuiltinIntentMetadata_supportedLocales = &sBuiltinIntentMetadata_supportedLocales
+
+var _BuiltinIntentMetadataList = &s_BuiltinIntentMetadataList
+var _BuiltinIntentMetadataList_member = &s_BuiltinIntentMetadataList_member
+
+var _BuiltinIntentSignature = &s_BuiltinIntentSignature
+
+var BuiltinIntentSlot = &sBuiltinIntentSlot
+var BuiltinIntentSlot_name = &sBuiltinIntentSlot_name
+
+var _BuiltinIntentSlotList = &s_BuiltinIntentSlotList
+var _BuiltinIntentSlotList_member = &s_BuiltinIntentSlotList_member
+
+var BuiltinSlotTypeMetadata = &sBuiltinSlotTypeMetadata
+var BuiltinSlotTypeMetadata_signature = &sBuiltinSlotTypeMetadata_signature
+var BuiltinSlotTypeMetadata_supportedLocales = &sBuiltinSlotTypeMetadata_supportedLocales
+
+var _BuiltinSlotTypeMetadataList = &s_BuiltinSlotTypeMetadataList
+var _BuiltinSlotTypeMetadataList_member = &s_BuiltinSlotTypeMetadataList_member
+
+var _BuiltinSlotTypeSignature = &s_BuiltinSlotTypeSignature
+
+var _ChannelConfigurationMap = &s_ChannelConfigurationMap
+var _ChannelConfigurationMap_key = &s_ChannelConfigurationMap_key
+var _ChannelConfigurationMap_value = &s_ChannelConfigurationMap_value
+
+var ChannelStatus = &sChannelStatus
+var ChannelStatus_IN_PROGRESS = &sChannelStatus_IN_PROGRESS
+var ChannelStatus_CREATED = &sChannelStatus_CREATED
+var ChannelStatus_FAILED = &sChannelStatus_FAILED
+
+var ChannelType = &sChannelType
+var ChannelType_FACEBOOK = &sChannelType_FACEBOOK
+var ChannelType_SLACK = &sChannelType_SLACK
+var ChannelType_TWILIO_SMS = &sChannelType_TWILIO_SMS
+var ChannelType_KIK = &sChannelType_KIK
+
+var CodeHook = &sCodeHook
+var CodeHook_uri = &sCodeHook_uri
+var CodeHook_messageVersion = &sCodeHook_messageVersion
+
+var _ConfidenceThreshold = &s_ConfidenceThreshold
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _ContentString = &s_ContentString
+
+var ContentType = &sContentType
+var ContentType_PLAIN_TEXT = &sContentType_PLAIN_TEXT
+var ContentType_SSML = &sContentType_SSML
+var ContentType_CUSTOM_PAYLOAD = &sContentType_CUSTOM_PAYLOAD
+
+var _ContextTimeToLiveInSeconds = &s_ContextTimeToLiveInSeconds
+
+var _ContextTurnsToLive = &s_ContextTurnsToLive
+
+var ConversationLogsRequest = &sConversationLogsRequest
+var ConversationLogsRequest_logSettings = &sConversationLogsRequest_logSettings
+var ConversationLogsRequest_iamRoleArn = &sConversationLogsRequest_iamRoleArn
+
+var ConversationLogsResponse = &sConversationLogsResponse
+var ConversationLogsResponse_logSettings = &sConversationLogsResponse_logSettings
+var ConversationLogsResponse_iamRoleArn = &sConversationLogsResponse_iamRoleArn
+
+var _Count = &s_Count
+
+var _CustomOrBuiltinSlotTypeName = &s_CustomOrBuiltinSlotTypeName
+
+var _Description = &s_Description
+
+var Destination = &sDestination
+var Destination_CLOUDWATCH_LOGS = &sDestination_CLOUDWATCH_LOGS
+var Destination_S3 = &sDestination_S3
+
+var EnumerationValue = &sEnumerationValue
+var EnumerationValue_value = &sEnumerationValue_value
+var EnumerationValue_synonyms = &sEnumerationValue_synonyms
+
+var _EnumerationValues = &s_EnumerationValues
+var _EnumerationValues_member = &s_EnumerationValues_member
+
+var ExportStatus = &sExportStatus
+var ExportStatus_IN_PROGRESS = &sExportStatus_IN_PROGRESS
+var ExportStatus_READY = &sExportStatus_READY
+var ExportStatus_FAILED = &sExportStatus_FAILED
+
+var ExportType = &sExportType
+var ExportType_ALEXA_SKILLS_KIT = &sExportType_ALEXA_SKILLS_KIT
+var ExportType_LEX = &sExportType_LEX
+
+var FollowUpPrompt = &sFollowUpPrompt
+var FollowUpPrompt_prompt = &sFollowUpPrompt_prompt
+var FollowUpPrompt_rejectionStatement = &sFollowUpPrompt_rejectionStatement
+
+var FulfillmentActivity = &sFulfillmentActivity
+var FulfillmentActivity_type = &sFulfillmentActivity_type
+var FulfillmentActivity_codeHook = &sFulfillmentActivity_codeHook
+
+var FulfillmentActivityType = &sFulfillmentActivityType
+var FulfillmentActivityType_RETURN_INTENT = &sFulfillmentActivityType_RETURN_INTENT
+var FulfillmentActivityType_CODE_HOOK = &sFulfillmentActivityType_CODE_HOOK
+
+var _GroupNumber = &s_GroupNumber
+
+var _IamRoleArn = &s_IamRoleArn
+
+var ImportStatus = &sImportStatus
+var ImportStatus_IN_PROGRESS = &sImportStatus_IN_PROGRESS
+var ImportStatus_COMPLETE = &sImportStatus_COMPLETE
+var ImportStatus_FAILED = &sImportStatus_FAILED
+
+var InputContext = &sInputContext
+var InputContext_name = &sInputContext_name
+
+var _InputContextList = &s_InputContextList
+var _InputContextList_member = &s_InputContextList_member
+
+var _InputContextName = &s_InputContextName
+
+var Intent = &sIntent
+var Intent_intentName = &sIntent_intentName
+var Intent_intentVersion = &sIntent_intentVersion
+
+var _IntentList = &s_IntentList
+var _IntentList_member = &s_IntentList_member
+
+var IntentMetadata = &sIntentMetadata
+var IntentMetadata_name = &sIntentMetadata_name
+var IntentMetadata_description = &sIntentMetadata_description
+var IntentMetadata_lastUpdatedDate = &sIntentMetadata_lastUpdatedDate
+var IntentMetadata_createdDate = &sIntentMetadata_createdDate
+var IntentMetadata_version = &sIntentMetadata_version
+
+var _IntentMetadataList = &s_IntentMetadataList
+var _IntentMetadataList_member = &s_IntentMetadataList_member
+
+var _IntentName = &s_IntentName
+
+var _IntentUtteranceList = &s_IntentUtteranceList
+var _IntentUtteranceList_member = &s_IntentUtteranceList_member
+
+var InternalFailureException = &sInternalFailureException
+var InternalFailureException_message = &sInternalFailureException_message
+
+var KendraConfiguration = &sKendraConfiguration
+var KendraConfiguration_kendraIndex = &sKendraConfiguration_kendraIndex
+var KendraConfiguration_queryFilterString = &sKendraConfiguration_queryFilterString
+var KendraConfiguration_role = &sKendraConfiguration_role
+
+var _KendraIndexArn = &s_KendraIndexArn
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LambdaARN = &s_LambdaARN
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_retryAfterSeconds = &sLimitExceededException_retryAfterSeconds
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _ListOfUtterance = &s_ListOfUtterance
+var _ListOfUtterance_member = &s_ListOfUtterance_member
+
+var _ListsOfUtterances = &s_ListsOfUtterances
+var _ListsOfUtterances_member = &s_ListsOfUtterances_member
+
+var Locale = &sLocale
+var Locale_DE_DE = &sLocale_DE_DE
+var Locale_EN_AU = &sLocale_EN_AU
+var Locale_EN_GB = &sLocale_EN_GB
+var Locale_EN_IN = &sLocale_EN_IN
+var Locale_EN_US = &sLocale_EN_US
+var Locale_ES_419 = &sLocale_ES_419
+var Locale_ES_ES = &sLocale_ES_ES
+var Locale_ES_US = &sLocale_ES_US
+var Locale_FR_FR = &sLocale_FR_FR
+var Locale_FR_CA = &sLocale_FR_CA
+var Locale_IT_IT = &sLocale_IT_IT
+var Locale_JA_JP = &sLocale_JA_JP
+var Locale_KO_KR = &sLocale_KO_KR
+
+var _LocaleList = &s_LocaleList
+var _LocaleList_member = &s_LocaleList_member
+
+var LogSettingsRequest = &sLogSettingsRequest
+var LogSettingsRequest_logType = &sLogSettingsRequest_logType
+var LogSettingsRequest_destination = &sLogSettingsRequest_destination
+var LogSettingsRequest_kmsKeyArn = &sLogSettingsRequest_kmsKeyArn
+var LogSettingsRequest_resourceArn = &sLogSettingsRequest_resourceArn
+
+var _LogSettingsRequestList = &s_LogSettingsRequestList
+var _LogSettingsRequestList_member = &s_LogSettingsRequestList_member
+
+var LogSettingsResponse = &sLogSettingsResponse
+var LogSettingsResponse_logType = &sLogSettingsResponse_logType
+var LogSettingsResponse_destination = &sLogSettingsResponse_destination
+var LogSettingsResponse_kmsKeyArn = &sLogSettingsResponse_kmsKeyArn
+var LogSettingsResponse_resourceArn = &sLogSettingsResponse_resourceArn
+var LogSettingsResponse_resourcePrefix = &sLogSettingsResponse_resourcePrefix
+
+var _LogSettingsResponseList = &s_LogSettingsResponseList
+var _LogSettingsResponseList_member = &s_LogSettingsResponseList_member
+
+var LogType = &sLogType
+var LogType_AUDIO = &sLogType_AUDIO
+var LogType_TEXT = &sLogType_TEXT
+
+var _MaxResults = &s_MaxResults
+
+var MergeStrategy = &sMergeStrategy
+var MergeStrategy_OVERWRITE_LATEST = &sMergeStrategy_OVERWRITE_LATEST
+var MergeStrategy_FAIL_ON_CONFLICT = &sMergeStrategy_FAIL_ON_CONFLICT
+
+var Message = &sMessage
+var Message_contentType = &sMessage_contentType
+var Message_content = &sMessage_content
+var Message_groupNumber = &sMessage_groupNumber
+
+var _MessageList = &s_MessageList
+var _MessageList_member = &s_MessageList_member
+
+var _MessageVersion = &s_MessageVersion
+
+var MigrationAlert = &sMigrationAlert
+var MigrationAlert_type = &sMigrationAlert_type
+var MigrationAlert_message = &sMigrationAlert_message
+var MigrationAlert_details = &sMigrationAlert_details
+var MigrationAlert_referenceURLs = &sMigrationAlert_referenceURLs
+
+var _MigrationAlertDetail = &s_MigrationAlertDetail
+
+var _MigrationAlertDetails = &s_MigrationAlertDetails
+var _MigrationAlertDetails_member = &s_MigrationAlertDetails_member
+
+var _MigrationAlertMessage = &s_MigrationAlertMessage
+
+var _MigrationAlertReferenceURL = &s_MigrationAlertReferenceURL
+
+var _MigrationAlertReferenceURLs = &s_MigrationAlertReferenceURLs
+var _MigrationAlertReferenceURLs_member = &s_MigrationAlertReferenceURLs_member
+
+var _MigrationAlerts = &s_MigrationAlerts
+var _MigrationAlerts_member = &s_MigrationAlerts_member
+
+var MigrationAlertType = &sMigrationAlertType
+var MigrationAlertType_ERROR = &sMigrationAlertType_ERROR
+var MigrationAlertType_WARN = &sMigrationAlertType_WARN
+
+var _MigrationId = &s_MigrationId
+
+var MigrationSortAttribute = &sMigrationSortAttribute
+var MigrationSortAttribute_V1_BOT_NAME = &sMigrationSortAttribute_V1_BOT_NAME
+var MigrationSortAttribute_MIGRATION_DATE_TIME = &sMigrationSortAttribute_MIGRATION_DATE_TIME
+
+var MigrationStatus = &sMigrationStatus
+var MigrationStatus_IN_PROGRESS = &sMigrationStatus_IN_PROGRESS
+var MigrationStatus_COMPLETED = &sMigrationStatus_COMPLETED
+var MigrationStatus_FAILED = &sMigrationStatus_FAILED
+
+var MigrationStrategy = &sMigrationStrategy
+var MigrationStrategy_CREATE_NEW = &sMigrationStrategy_CREATE_NEW
+var MigrationStrategy_UPDATE_EXISTING = &sMigrationStrategy_UPDATE_EXISTING
+
+var MigrationSummary = &sMigrationSummary
+var MigrationSummary_migrationId = &sMigrationSummary_migrationId
+var MigrationSummary_v1BotName = &sMigrationSummary_v1BotName
+var MigrationSummary_v1BotVersion = &sMigrationSummary_v1BotVersion
+var MigrationSummary_v1BotLocale = &sMigrationSummary_v1BotLocale
+var MigrationSummary_v2BotId = &sMigrationSummary_v2BotId
+var MigrationSummary_v2BotRole = &sMigrationSummary_v2BotRole
+var MigrationSummary_migrationStatus = &sMigrationSummary_migrationStatus
+var MigrationSummary_migrationStrategy = &sMigrationSummary_migrationStrategy
+var MigrationSummary_migrationTimestamp = &sMigrationSummary_migrationTimestamp
+
+var _MigrationSummaryList = &s_MigrationSummaryList
+var _MigrationSummaryList_member = &s_MigrationSummaryList_member
+
+var _Name = &s_Name
+
+var _NextToken = &s_NextToken
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var _NumericalVersion = &s_NumericalVersion
+
+var ObfuscationSetting = &sObfuscationSetting
+var ObfuscationSetting_NONE = &sObfuscationSetting_NONE
+var ObfuscationSetting_DEFAULT_OBFUSCATION = &sObfuscationSetting_DEFAULT_OBFUSCATION
+
+var OutputContext = &sOutputContext
+var OutputContext_name = &sOutputContext_name
+var OutputContext_timeToLiveInSeconds = &sOutputContext_timeToLiveInSeconds
+var OutputContext_turnsToLive = &sOutputContext_turnsToLive
+
+var _OutputContextList = &s_OutputContextList
+var _OutputContextList_member = &s_OutputContextList_member
+
+var _OutputContextName = &s_OutputContextName
+
+var PreconditionFailedException = &sPreconditionFailedException
+var PreconditionFailedException_message = &sPreconditionFailedException_message
+
+var _Priority = &s_Priority
+
+var ProcessBehavior = &sProcessBehavior
+var ProcessBehavior_SAVE = &sProcessBehavior_SAVE
+var ProcessBehavior_BUILD = &sProcessBehavior_BUILD
+
+var Prompt = &sPrompt
+var Prompt_messages = &sPrompt_messages
+var Prompt_maxAttempts = &sPrompt_maxAttempts
+var Prompt_responseCard = &sPrompt_responseCard
+
+var _PromptMaxAttempts = &s_PromptMaxAttempts
+
+var _QueryFilterString = &s_QueryFilterString
+
+var ReferenceType = &sReferenceType
+var ReferenceType_INTENT = &sReferenceType_INTENT
+var ReferenceType_BOT = &sReferenceType_BOT
+var ReferenceType_BOTALIAS = &sReferenceType_BOTALIAS
+var ReferenceType_BOTCHANNEL = &sReferenceType_BOTCHANNEL
+
+var _RegexPattern = &s_RegexPattern
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_referenceType = &sResourceInUseException_referenceType
+var ResourceInUseException_exampleReference = &sResourceInUseException_exampleReference
+
+var _ResourcePrefix = &s_ResourcePrefix
+
+var ResourceReference = &sResourceReference
+var ResourceReference_name = &sResourceReference_name
+var ResourceReference_version = &sResourceReference_version
+
+var ResourceType = &sResourceType
+var ResourceType_BOT = &sResourceType_BOT
+var ResourceType_INTENT = &sResourceType_INTENT
+var ResourceType_SLOT_TYPE = &sResourceType_SLOT_TYPE
+
+var _ResponseCard = &s_ResponseCard
+
+var _roleArn = &s_roleArn
+
+var _SessionTTL = &s_SessionTTL
+
+var Slot = &sSlot
+var Slot_name = &sSlot_name
+var Slot_description = &sSlot_description
+var Slot_slotConstraint = &sSlot_slotConstraint
+var Slot_slotType = &sSlot_slotType
+var Slot_slotTypeVersion = &sSlot_slotTypeVersion
+var Slot_valueElicitationPrompt = &sSlot_valueElicitationPrompt
+var Slot_priority = &sSlot_priority
+var Slot_sampleUtterances = &sSlot_sampleUtterances
+var Slot_responseCard = &sSlot_responseCard
+var Slot_obfuscationSetting = &sSlot_obfuscationSetting
+var Slot_defaultValueSpec = &sSlot_defaultValueSpec
+
+var SlotConstraint = &sSlotConstraint
+var SlotConstraint_REQUIRED = &sSlotConstraint_REQUIRED
+var SlotConstraint_OPTIONAL = &sSlotConstraint_OPTIONAL
+
+var SlotDefaultValue = &sSlotDefaultValue
+var SlotDefaultValue_defaultValue = &sSlotDefaultValue_defaultValue
+
+var _SlotDefaultValueList = &s_SlotDefaultValueList
+var _SlotDefaultValueList_member = &s_SlotDefaultValueList_member
+
+var SlotDefaultValueSpec = &sSlotDefaultValueSpec
+var SlotDefaultValueSpec_defaultValueList = &sSlotDefaultValueSpec_defaultValueList
+
+var _SlotDefaultValueString = &s_SlotDefaultValueString
+
+var _SlotList = &s_SlotList
+var _SlotList_member = &s_SlotList_member
+
+var _SlotName = &s_SlotName
+
+var SlotTypeConfiguration = &sSlotTypeConfiguration
+var SlotTypeConfiguration_regexConfiguration = &sSlotTypeConfiguration_regexConfiguration
+
+var _SlotTypeConfigurations = &s_SlotTypeConfigurations
+var _SlotTypeConfigurations_member = &s_SlotTypeConfigurations_member
+
+var SlotTypeMetadata = &sSlotTypeMetadata
+var SlotTypeMetadata_name = &sSlotTypeMetadata_name
+var SlotTypeMetadata_description = &sSlotTypeMetadata_description
+var SlotTypeMetadata_lastUpdatedDate = &sSlotTypeMetadata_lastUpdatedDate
+var SlotTypeMetadata_createdDate = &sSlotTypeMetadata_createdDate
+var SlotTypeMetadata_version = &sSlotTypeMetadata_version
+
+var _SlotTypeMetadataList = &s_SlotTypeMetadataList
+var _SlotTypeMetadataList_member = &s_SlotTypeMetadataList_member
+
+var _SlotTypeName = &s_SlotTypeName
+
+var SlotTypeRegexConfiguration = &sSlotTypeRegexConfiguration
+var SlotTypeRegexConfiguration_pattern = &sSlotTypeRegexConfiguration_pattern
+
+var _SlotUtteranceList = &s_SlotUtteranceList
+var _SlotUtteranceList_member = &s_SlotUtteranceList_member
+
+var SlotValueSelectionStrategy = &sSlotValueSelectionStrategy
+var SlotValueSelectionStrategy_ORIGINAL_VALUE = &sSlotValueSelectionStrategy_ORIGINAL_VALUE
+var SlotValueSelectionStrategy_TOP_RESOLUTION = &sSlotValueSelectionStrategy_TOP_RESOLUTION
+
+var SortOrder = &sSortOrder
+var SortOrder_ASCENDING = &sSortOrder_ASCENDING
+var SortOrder_DESCENDING = &sSortOrder_DESCENDING
+
+var Statement = &sStatement
+var Statement_messages = &sStatement_messages
+var Statement_responseCard = &sStatement_responseCard
+
+var Status = &sStatus
+var Status_BUILDING = &sStatus_BUILDING
+var Status_READY = &sStatus_READY
+var Status_READY_BASIC_TESTING = &sStatus_READY_BASIC_TESTING
+var Status_FAILED = &sStatus_FAILED
+var Status_NOT_BUILT = &sStatus_NOT_BUILT
+
+var StatusType = &sStatusType
+var StatusType_DETECTED = &sStatusType_DETECTED
+var StatusType_MISSED = &sStatusType_MISSED
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _SynonymList = &s_SynonymList
+var _SynonymList_member = &s_SynonymList_member
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _Timestamp = &s_Timestamp
+
+var _UserId = &s_UserId
+
+var _Utterance = &s_Utterance
+
+var UtteranceData = &sUtteranceData
+var UtteranceData_utteranceString = &sUtteranceData_utteranceString
+var UtteranceData_count = &sUtteranceData_count
+var UtteranceData_distinctUsers = &sUtteranceData_distinctUsers
+var UtteranceData_firstUtteredDate = &sUtteranceData_firstUtteredDate
+var UtteranceData_lastUtteredDate = &sUtteranceData_lastUtteredDate
+
+var UtteranceList = &sUtteranceList
+var UtteranceList_botVersion = &sUtteranceList_botVersion
+var UtteranceList_utterances = &sUtteranceList_utterances
+
+var _UtteranceString = &s_UtteranceString
+
+var _V2BotId = &s_V2BotId
+
+var _V2BotName = &s_V2BotName
+
+var _Value = &s_Value
+
+var _Version = &s_Version
+
+var CreateBotVersionRequest = &sCreateBotVersionRequest
+var CreateBotVersionRequest_name = &sCreateBotVersionRequest_name
+var CreateBotVersionRequest_checksum = &sCreateBotVersionRequest_checksum
+
+var CreateBotVersionResponse = &sCreateBotVersionResponse
+var CreateBotVersionResponse_name = &sCreateBotVersionResponse_name
+var CreateBotVersionResponse_description = &sCreateBotVersionResponse_description
+var CreateBotVersionResponse_intents = &sCreateBotVersionResponse_intents
+var CreateBotVersionResponse_clarificationPrompt = &sCreateBotVersionResponse_clarificationPrompt
+var CreateBotVersionResponse_abortStatement = &sCreateBotVersionResponse_abortStatement
+var CreateBotVersionResponse_status = &sCreateBotVersionResponse_status
+var CreateBotVersionResponse_failureReason = &sCreateBotVersionResponse_failureReason
+var CreateBotVersionResponse_lastUpdatedDate = &sCreateBotVersionResponse_lastUpdatedDate
+var CreateBotVersionResponse_createdDate = &sCreateBotVersionResponse_createdDate
+var CreateBotVersionResponse_idleSessionTTLInSeconds = &sCreateBotVersionResponse_idleSessionTTLInSeconds
+var CreateBotVersionResponse_voiceId = &sCreateBotVersionResponse_voiceId
+var CreateBotVersionResponse_checksum = &sCreateBotVersionResponse_checksum
+var CreateBotVersionResponse_version = &sCreateBotVersionResponse_version
+var CreateBotVersionResponse_locale = &sCreateBotVersionResponse_locale
+var CreateBotVersionResponse_childDirected = &sCreateBotVersionResponse_childDirected
+var CreateBotVersionResponse_enableModelImprovements = &sCreateBotVersionResponse_enableModelImprovements
+var CreateBotVersionResponse_detectSentiment = &sCreateBotVersionResponse_detectSentiment
+
+var CreateIntentVersionRequest = &sCreateIntentVersionRequest
+var CreateIntentVersionRequest_name = &sCreateIntentVersionRequest_name
+var CreateIntentVersionRequest_checksum = &sCreateIntentVersionRequest_checksum
+
+var CreateIntentVersionResponse = &sCreateIntentVersionResponse
+var CreateIntentVersionResponse_name = &sCreateIntentVersionResponse_name
+var CreateIntentVersionResponse_description = &sCreateIntentVersionResponse_description
+var CreateIntentVersionResponse_slots = &sCreateIntentVersionResponse_slots
+var CreateIntentVersionResponse_sampleUtterances = &sCreateIntentVersionResponse_sampleUtterances
+var CreateIntentVersionResponse_confirmationPrompt = &sCreateIntentVersionResponse_confirmationPrompt
+var CreateIntentVersionResponse_rejectionStatement = &sCreateIntentVersionResponse_rejectionStatement
+var CreateIntentVersionResponse_followUpPrompt = &sCreateIntentVersionResponse_followUpPrompt
+var CreateIntentVersionResponse_conclusionStatement = &sCreateIntentVersionResponse_conclusionStatement
+var CreateIntentVersionResponse_dialogCodeHook = &sCreateIntentVersionResponse_dialogCodeHook
+var CreateIntentVersionResponse_fulfillmentActivity = &sCreateIntentVersionResponse_fulfillmentActivity
+var CreateIntentVersionResponse_parentIntentSignature = &sCreateIntentVersionResponse_parentIntentSignature
+var CreateIntentVersionResponse_lastUpdatedDate = &sCreateIntentVersionResponse_lastUpdatedDate
+var CreateIntentVersionResponse_createdDate = &sCreateIntentVersionResponse_createdDate
+var CreateIntentVersionResponse_version = &sCreateIntentVersionResponse_version
+var CreateIntentVersionResponse_checksum = &sCreateIntentVersionResponse_checksum
+var CreateIntentVersionResponse_kendraConfiguration = &sCreateIntentVersionResponse_kendraConfiguration
+var CreateIntentVersionResponse_inputContexts = &sCreateIntentVersionResponse_inputContexts
+var CreateIntentVersionResponse_outputContexts = &sCreateIntentVersionResponse_outputContexts
+
+var CreateSlotTypeVersionRequest = &sCreateSlotTypeVersionRequest
+var CreateSlotTypeVersionRequest_name = &sCreateSlotTypeVersionRequest_name
+var CreateSlotTypeVersionRequest_checksum = &sCreateSlotTypeVersionRequest_checksum
+
+var CreateSlotTypeVersionResponse = &sCreateSlotTypeVersionResponse
+var CreateSlotTypeVersionResponse_name = &sCreateSlotTypeVersionResponse_name
+var CreateSlotTypeVersionResponse_description = &sCreateSlotTypeVersionResponse_description
+var CreateSlotTypeVersionResponse_enumerationValues = &sCreateSlotTypeVersionResponse_enumerationValues
+var CreateSlotTypeVersionResponse_lastUpdatedDate = &sCreateSlotTypeVersionResponse_lastUpdatedDate
+var CreateSlotTypeVersionResponse_createdDate = &sCreateSlotTypeVersionResponse_createdDate
+var CreateSlotTypeVersionResponse_version = &sCreateSlotTypeVersionResponse_version
+var CreateSlotTypeVersionResponse_checksum = &sCreateSlotTypeVersionResponse_checksum
+var CreateSlotTypeVersionResponse_valueSelectionStrategy = &sCreateSlotTypeVersionResponse_valueSelectionStrategy
+var CreateSlotTypeVersionResponse_parentSlotTypeSignature = &sCreateSlotTypeVersionResponse_parentSlotTypeSignature
+var CreateSlotTypeVersionResponse_slotTypeConfigurations = &sCreateSlotTypeVersionResponse_slotTypeConfigurations
+
+var DeleteBotAliasRequest = &sDeleteBotAliasRequest
+var DeleteBotAliasRequest_name = &sDeleteBotAliasRequest_name
+var DeleteBotAliasRequest_botName = &sDeleteBotAliasRequest_botName
+
+var DeleteBotChannelAssociationRequest = &sDeleteBotChannelAssociationRequest
+var DeleteBotChannelAssociationRequest_name = &sDeleteBotChannelAssociationRequest_name
+var DeleteBotChannelAssociationRequest_botName = &sDeleteBotChannelAssociationRequest_botName
+var DeleteBotChannelAssociationRequest_botAlias = &sDeleteBotChannelAssociationRequest_botAlias
+
+var DeleteBotRequest = &sDeleteBotRequest
+var DeleteBotRequest_name = &sDeleteBotRequest_name
+
+var DeleteBotVersionRequest = &sDeleteBotVersionRequest
+var DeleteBotVersionRequest_name = &sDeleteBotVersionRequest_name
+var DeleteBotVersionRequest_version = &sDeleteBotVersionRequest_version
+
+var DeleteIntentRequest = &sDeleteIntentRequest
+var DeleteIntentRequest_name = &sDeleteIntentRequest_name
+
+var DeleteIntentVersionRequest = &sDeleteIntentVersionRequest
+var DeleteIntentVersionRequest_name = &sDeleteIntentVersionRequest_name
+var DeleteIntentVersionRequest_version = &sDeleteIntentVersionRequest_version
+
+var DeleteSlotTypeRequest = &sDeleteSlotTypeRequest
+var DeleteSlotTypeRequest_name = &sDeleteSlotTypeRequest_name
+
+var DeleteSlotTypeVersionRequest = &sDeleteSlotTypeVersionRequest
+var DeleteSlotTypeVersionRequest_name = &sDeleteSlotTypeVersionRequest_name
+var DeleteSlotTypeVersionRequest_version = &sDeleteSlotTypeVersionRequest_version
+
+var DeleteUtterancesRequest = &sDeleteUtterancesRequest
+var DeleteUtterancesRequest_botName = &sDeleteUtterancesRequest_botName
+var DeleteUtterancesRequest_userId = &sDeleteUtterancesRequest_userId
+
+var GetBotAliasesRequest = &sGetBotAliasesRequest
+var GetBotAliasesRequest_botName = &sGetBotAliasesRequest_botName
+var GetBotAliasesRequest_nextToken = &sGetBotAliasesRequest_nextToken
+var GetBotAliasesRequest_maxResults = &sGetBotAliasesRequest_maxResults
+var GetBotAliasesRequest_nameContains = &sGetBotAliasesRequest_nameContains
+
+var GetBotAliasesResponse = &sGetBotAliasesResponse
+var GetBotAliasesResponse_BotAliases = &sGetBotAliasesResponse_BotAliases
+var GetBotAliasesResponse_nextToken = &sGetBotAliasesResponse_nextToken
+
+var GetBotAliasRequest = &sGetBotAliasRequest
+var GetBotAliasRequest_name = &sGetBotAliasRequest_name
+var GetBotAliasRequest_botName = &sGetBotAliasRequest_botName
+
+var GetBotAliasResponse = &sGetBotAliasResponse
+var GetBotAliasResponse_name = &sGetBotAliasResponse_name
+var GetBotAliasResponse_description = &sGetBotAliasResponse_description
+var GetBotAliasResponse_botVersion = &sGetBotAliasResponse_botVersion
+var GetBotAliasResponse_botName = &sGetBotAliasResponse_botName
+var GetBotAliasResponse_lastUpdatedDate = &sGetBotAliasResponse_lastUpdatedDate
+var GetBotAliasResponse_createdDate = &sGetBotAliasResponse_createdDate
+var GetBotAliasResponse_checksum = &sGetBotAliasResponse_checksum
+var GetBotAliasResponse_conversationLogs = &sGetBotAliasResponse_conversationLogs
+
+var GetBotChannelAssociationRequest = &sGetBotChannelAssociationRequest
+var GetBotChannelAssociationRequest_name = &sGetBotChannelAssociationRequest_name
+var GetBotChannelAssociationRequest_botName = &sGetBotChannelAssociationRequest_botName
+var GetBotChannelAssociationRequest_botAlias = &sGetBotChannelAssociationRequest_botAlias
+
+var GetBotChannelAssociationResponse = &sGetBotChannelAssociationResponse
+var GetBotChannelAssociationResponse_name = &sGetBotChannelAssociationResponse_name
+var GetBotChannelAssociationResponse_description = &sGetBotChannelAssociationResponse_description
+var GetBotChannelAssociationResponse_botAlias = &sGetBotChannelAssociationResponse_botAlias
+var GetBotChannelAssociationResponse_botName = &sGetBotChannelAssociationResponse_botName
+var GetBotChannelAssociationResponse_createdDate = &sGetBotChannelAssociationResponse_createdDate
+var GetBotChannelAssociationResponse_type = &sGetBotChannelAssociationResponse_type
+var GetBotChannelAssociationResponse_botConfiguration = &sGetBotChannelAssociationResponse_botConfiguration
+var GetBotChannelAssociationResponse_status = &sGetBotChannelAssociationResponse_status
+var GetBotChannelAssociationResponse_failureReason = &sGetBotChannelAssociationResponse_failureReason
+
+var GetBotChannelAssociationsRequest = &sGetBotChannelAssociationsRequest
+var GetBotChannelAssociationsRequest_botName = &sGetBotChannelAssociationsRequest_botName
+var GetBotChannelAssociationsRequest_botAlias = &sGetBotChannelAssociationsRequest_botAlias
+var GetBotChannelAssociationsRequest_nextToken = &sGetBotChannelAssociationsRequest_nextToken
+var GetBotChannelAssociationsRequest_maxResults = &sGetBotChannelAssociationsRequest_maxResults
+var GetBotChannelAssociationsRequest_nameContains = &sGetBotChannelAssociationsRequest_nameContains
+
+var GetBotChannelAssociationsResponse = &sGetBotChannelAssociationsResponse
+var GetBotChannelAssociationsResponse_botChannelAssociations = &sGetBotChannelAssociationsResponse_botChannelAssociations
+var GetBotChannelAssociationsResponse_nextToken = &sGetBotChannelAssociationsResponse_nextToken
+
+var GetBotRequest = &sGetBotRequest
+var GetBotRequest_name = &sGetBotRequest_name
+var GetBotRequest_versionOrAlias = &sGetBotRequest_versionOrAlias
+
+var GetBotResponse = &sGetBotResponse
+var GetBotResponse_name = &sGetBotResponse_name
+var GetBotResponse_description = &sGetBotResponse_description
+var GetBotResponse_intents = &sGetBotResponse_intents
+var GetBotResponse_enableModelImprovements = &sGetBotResponse_enableModelImprovements
+var GetBotResponse_nluIntentConfidenceThreshold = &sGetBotResponse_nluIntentConfidenceThreshold
+var GetBotResponse_clarificationPrompt = &sGetBotResponse_clarificationPrompt
+var GetBotResponse_abortStatement = &sGetBotResponse_abortStatement
+var GetBotResponse_status = &sGetBotResponse_status
+var GetBotResponse_failureReason = &sGetBotResponse_failureReason
+var GetBotResponse_lastUpdatedDate = &sGetBotResponse_lastUpdatedDate
+var GetBotResponse_createdDate = &sGetBotResponse_createdDate
+var GetBotResponse_idleSessionTTLInSeconds = &sGetBotResponse_idleSessionTTLInSeconds
+var GetBotResponse_voiceId = &sGetBotResponse_voiceId
+var GetBotResponse_checksum = &sGetBotResponse_checksum
+var GetBotResponse_version = &sGetBotResponse_version
+var GetBotResponse_locale = &sGetBotResponse_locale
+var GetBotResponse_childDirected = &sGetBotResponse_childDirected
+var GetBotResponse_detectSentiment = &sGetBotResponse_detectSentiment
+
+var GetBotsRequest = &sGetBotsRequest
+var GetBotsRequest_nextToken = &sGetBotsRequest_nextToken
+var GetBotsRequest_maxResults = &sGetBotsRequest_maxResults
+var GetBotsRequest_nameContains = &sGetBotsRequest_nameContains
+
+var GetBotsResponse = &sGetBotsResponse
+var GetBotsResponse_bots = &sGetBotsResponse_bots
+var GetBotsResponse_nextToken = &sGetBotsResponse_nextToken
+
+var GetBotVersionsRequest = &sGetBotVersionsRequest
+var GetBotVersionsRequest_name = &sGetBotVersionsRequest_name
+var GetBotVersionsRequest_nextToken = &sGetBotVersionsRequest_nextToken
+var GetBotVersionsRequest_maxResults = &sGetBotVersionsRequest_maxResults
+
+var GetBotVersionsResponse = &sGetBotVersionsResponse
+var GetBotVersionsResponse_bots = &sGetBotVersionsResponse_bots
+var GetBotVersionsResponse_nextToken = &sGetBotVersionsResponse_nextToken
+
+var GetBuiltinIntentRequest = &sGetBuiltinIntentRequest
+var GetBuiltinIntentRequest_signature = &sGetBuiltinIntentRequest_signature
+
+var GetBuiltinIntentResponse = &sGetBuiltinIntentResponse
+var GetBuiltinIntentResponse_signature = &sGetBuiltinIntentResponse_signature
+var GetBuiltinIntentResponse_supportedLocales = &sGetBuiltinIntentResponse_supportedLocales
+var GetBuiltinIntentResponse_slots = &sGetBuiltinIntentResponse_slots
+
+var GetBuiltinIntentsRequest = &sGetBuiltinIntentsRequest
+var GetBuiltinIntentsRequest_locale = &sGetBuiltinIntentsRequest_locale
+var GetBuiltinIntentsRequest_signatureContains = &sGetBuiltinIntentsRequest_signatureContains
+var GetBuiltinIntentsRequest_nextToken = &sGetBuiltinIntentsRequest_nextToken
+var GetBuiltinIntentsRequest_maxResults = &sGetBuiltinIntentsRequest_maxResults
+
+var GetBuiltinIntentsResponse = &sGetBuiltinIntentsResponse
+var GetBuiltinIntentsResponse_intents = &sGetBuiltinIntentsResponse_intents
+var GetBuiltinIntentsResponse_nextToken = &sGetBuiltinIntentsResponse_nextToken
+
+var GetBuiltinSlotTypesRequest = &sGetBuiltinSlotTypesRequest
+var GetBuiltinSlotTypesRequest_locale = &sGetBuiltinSlotTypesRequest_locale
+var GetBuiltinSlotTypesRequest_signatureContains = &sGetBuiltinSlotTypesRequest_signatureContains
+var GetBuiltinSlotTypesRequest_nextToken = &sGetBuiltinSlotTypesRequest_nextToken
+var GetBuiltinSlotTypesRequest_maxResults = &sGetBuiltinSlotTypesRequest_maxResults
+
+var GetBuiltinSlotTypesResponse = &sGetBuiltinSlotTypesResponse
+var GetBuiltinSlotTypesResponse_slotTypes = &sGetBuiltinSlotTypesResponse_slotTypes
+var GetBuiltinSlotTypesResponse_nextToken = &sGetBuiltinSlotTypesResponse_nextToken
+
+var GetExportRequest = &sGetExportRequest
+var GetExportRequest_name = &sGetExportRequest_name
+var GetExportRequest_version = &sGetExportRequest_version
+var GetExportRequest_resourceType = &sGetExportRequest_resourceType
+var GetExportRequest_exportType = &sGetExportRequest_exportType
+
+var GetExportResponse = &sGetExportResponse
+var GetExportResponse_name = &sGetExportResponse_name
+var GetExportResponse_version = &sGetExportResponse_version
+var GetExportResponse_resourceType = &sGetExportResponse_resourceType
+var GetExportResponse_exportType = &sGetExportResponse_exportType
+var GetExportResponse_exportStatus = &sGetExportResponse_exportStatus
+var GetExportResponse_failureReason = &sGetExportResponse_failureReason
+var GetExportResponse_url = &sGetExportResponse_url
+
+var GetImportRequest = &sGetImportRequest
+var GetImportRequest_importId = &sGetImportRequest_importId
+
+var GetImportResponse = &sGetImportResponse
+var GetImportResponse_name = &sGetImportResponse_name
+var GetImportResponse_resourceType = &sGetImportResponse_resourceType
+var GetImportResponse_mergeStrategy = &sGetImportResponse_mergeStrategy
+var GetImportResponse_importId = &sGetImportResponse_importId
+var GetImportResponse_importStatus = &sGetImportResponse_importStatus
+var GetImportResponse_failureReason = &sGetImportResponse_failureReason
+var GetImportResponse_createdDate = &sGetImportResponse_createdDate
+
+var GetIntentRequest = &sGetIntentRequest
+var GetIntentRequest_name = &sGetIntentRequest_name
+var GetIntentRequest_version = &sGetIntentRequest_version
+
+var GetIntentResponse = &sGetIntentResponse
+var GetIntentResponse_name = &sGetIntentResponse_name
+var GetIntentResponse_description = &sGetIntentResponse_description
+var GetIntentResponse_slots = &sGetIntentResponse_slots
+var GetIntentResponse_sampleUtterances = &sGetIntentResponse_sampleUtterances
+var GetIntentResponse_confirmationPrompt = &sGetIntentResponse_confirmationPrompt
+var GetIntentResponse_rejectionStatement = &sGetIntentResponse_rejectionStatement
+var GetIntentResponse_followUpPrompt = &sGetIntentResponse_followUpPrompt
+var GetIntentResponse_conclusionStatement = &sGetIntentResponse_conclusionStatement
+var GetIntentResponse_dialogCodeHook = &sGetIntentResponse_dialogCodeHook
+var GetIntentResponse_fulfillmentActivity = &sGetIntentResponse_fulfillmentActivity
+var GetIntentResponse_parentIntentSignature = &sGetIntentResponse_parentIntentSignature
+var GetIntentResponse_lastUpdatedDate = &sGetIntentResponse_lastUpdatedDate
+var GetIntentResponse_createdDate = &sGetIntentResponse_createdDate
+var GetIntentResponse_version = &sGetIntentResponse_version
+var GetIntentResponse_checksum = &sGetIntentResponse_checksum
+var GetIntentResponse_kendraConfiguration = &sGetIntentResponse_kendraConfiguration
+var GetIntentResponse_inputContexts = &sGetIntentResponse_inputContexts
+var GetIntentResponse_outputContexts = &sGetIntentResponse_outputContexts
+
+var GetIntentsRequest = &sGetIntentsRequest
+var GetIntentsRequest_nextToken = &sGetIntentsRequest_nextToken
+var GetIntentsRequest_maxResults = &sGetIntentsRequest_maxResults
+var GetIntentsRequest_nameContains = &sGetIntentsRequest_nameContains
+
+var GetIntentsResponse = &sGetIntentsResponse
+var GetIntentsResponse_intents = &sGetIntentsResponse_intents
+var GetIntentsResponse_nextToken = &sGetIntentsResponse_nextToken
+
+var GetIntentVersionsRequest = &sGetIntentVersionsRequest
+var GetIntentVersionsRequest_name = &sGetIntentVersionsRequest_name
+var GetIntentVersionsRequest_nextToken = &sGetIntentVersionsRequest_nextToken
+var GetIntentVersionsRequest_maxResults = &sGetIntentVersionsRequest_maxResults
+
+var GetIntentVersionsResponse = &sGetIntentVersionsResponse
+var GetIntentVersionsResponse_intents = &sGetIntentVersionsResponse_intents
+var GetIntentVersionsResponse_nextToken = &sGetIntentVersionsResponse_nextToken
+
+var GetMigrationRequest = &sGetMigrationRequest
+var GetMigrationRequest_migrationId = &sGetMigrationRequest_migrationId
+
+var GetMigrationResponse = &sGetMigrationResponse
+var GetMigrationResponse_migrationId = &sGetMigrationResponse_migrationId
+var GetMigrationResponse_v1BotName = &sGetMigrationResponse_v1BotName
+var GetMigrationResponse_v1BotVersion = &sGetMigrationResponse_v1BotVersion
+var GetMigrationResponse_v1BotLocale = &sGetMigrationResponse_v1BotLocale
+var GetMigrationResponse_v2BotId = &sGetMigrationResponse_v2BotId
+var GetMigrationResponse_v2BotRole = &sGetMigrationResponse_v2BotRole
+var GetMigrationResponse_migrationStatus = &sGetMigrationResponse_migrationStatus
+var GetMigrationResponse_migrationStrategy = &sGetMigrationResponse_migrationStrategy
+var GetMigrationResponse_migrationTimestamp = &sGetMigrationResponse_migrationTimestamp
+var GetMigrationResponse_alerts = &sGetMigrationResponse_alerts
+
+var GetMigrationsRequest = &sGetMigrationsRequest
+var GetMigrationsRequest_sortByAttribute = &sGetMigrationsRequest_sortByAttribute
+var GetMigrationsRequest_sortByOrder = &sGetMigrationsRequest_sortByOrder
+var GetMigrationsRequest_v1BotNameContains = &sGetMigrationsRequest_v1BotNameContains
+var GetMigrationsRequest_migrationStatusEquals = &sGetMigrationsRequest_migrationStatusEquals
+var GetMigrationsRequest_maxResults = &sGetMigrationsRequest_maxResults
+var GetMigrationsRequest_nextToken = &sGetMigrationsRequest_nextToken
+
+var GetMigrationsResponse = &sGetMigrationsResponse
+var GetMigrationsResponse_migrationSummaries = &sGetMigrationsResponse_migrationSummaries
+var GetMigrationsResponse_nextToken = &sGetMigrationsResponse_nextToken
+
+var GetSlotTypeRequest = &sGetSlotTypeRequest
+var GetSlotTypeRequest_name = &sGetSlotTypeRequest_name
+var GetSlotTypeRequest_version = &sGetSlotTypeRequest_version
+
+var GetSlotTypeResponse = &sGetSlotTypeResponse
+var GetSlotTypeResponse_name = &sGetSlotTypeResponse_name
+var GetSlotTypeResponse_description = &sGetSlotTypeResponse_description
+var GetSlotTypeResponse_enumerationValues = &sGetSlotTypeResponse_enumerationValues
+var GetSlotTypeResponse_lastUpdatedDate = &sGetSlotTypeResponse_lastUpdatedDate
+var GetSlotTypeResponse_createdDate = &sGetSlotTypeResponse_createdDate
+var GetSlotTypeResponse_version = &sGetSlotTypeResponse_version
+var GetSlotTypeResponse_checksum = &sGetSlotTypeResponse_checksum
+var GetSlotTypeResponse_valueSelectionStrategy = &sGetSlotTypeResponse_valueSelectionStrategy
+var GetSlotTypeResponse_parentSlotTypeSignature = &sGetSlotTypeResponse_parentSlotTypeSignature
+var GetSlotTypeResponse_slotTypeConfigurations = &sGetSlotTypeResponse_slotTypeConfigurations
+
+var GetSlotTypesRequest = &sGetSlotTypesRequest
+var GetSlotTypesRequest_nextToken = &sGetSlotTypesRequest_nextToken
+var GetSlotTypesRequest_maxResults = &sGetSlotTypesRequest_maxResults
+var GetSlotTypesRequest_nameContains = &sGetSlotTypesRequest_nameContains
+
+var GetSlotTypesResponse = &sGetSlotTypesResponse
+var GetSlotTypesResponse_slotTypes = &sGetSlotTypesResponse_slotTypes
+var GetSlotTypesResponse_nextToken = &sGetSlotTypesResponse_nextToken
+
+var GetSlotTypeVersionsRequest = &sGetSlotTypeVersionsRequest
+var GetSlotTypeVersionsRequest_name = &sGetSlotTypeVersionsRequest_name
+var GetSlotTypeVersionsRequest_nextToken = &sGetSlotTypeVersionsRequest_nextToken
+var GetSlotTypeVersionsRequest_maxResults = &sGetSlotTypeVersionsRequest_maxResults
+
+var GetSlotTypeVersionsResponse = &sGetSlotTypeVersionsResponse
+var GetSlotTypeVersionsResponse_slotTypes = &sGetSlotTypeVersionsResponse_slotTypes
+var GetSlotTypeVersionsResponse_nextToken = &sGetSlotTypeVersionsResponse_nextToken
+
+var GetUtterancesViewRequest = &sGetUtterancesViewRequest
+var GetUtterancesViewRequest_botName = &sGetUtterancesViewRequest_botName
+var GetUtterancesViewRequest_botVersions = &sGetUtterancesViewRequest_botVersions
+var GetUtterancesViewRequest_statusType = &sGetUtterancesViewRequest_statusType
+
+var GetUtterancesViewResponse = &sGetUtterancesViewResponse
+var GetUtterancesViewResponse_botName = &sGetUtterancesViewResponse_botName
+var GetUtterancesViewResponse_utterances = &sGetUtterancesViewResponse_utterances
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var PutBotAliasRequest = &sPutBotAliasRequest
+var PutBotAliasRequest_name = &sPutBotAliasRequest_name
+var PutBotAliasRequest_description = &sPutBotAliasRequest_description
+var PutBotAliasRequest_botVersion = &sPutBotAliasRequest_botVersion
+var PutBotAliasRequest_botName = &sPutBotAliasRequest_botName
+var PutBotAliasRequest_checksum = &sPutBotAliasRequest_checksum
+var PutBotAliasRequest_conversationLogs = &sPutBotAliasRequest_conversationLogs
+var PutBotAliasRequest_tags = &sPutBotAliasRequest_tags
+
+var PutBotAliasResponse = &sPutBotAliasResponse
+var PutBotAliasResponse_name = &sPutBotAliasResponse_name
+var PutBotAliasResponse_description = &sPutBotAliasResponse_description
+var PutBotAliasResponse_botVersion = &sPutBotAliasResponse_botVersion
+var PutBotAliasResponse_botName = &sPutBotAliasResponse_botName
+var PutBotAliasResponse_lastUpdatedDate = &sPutBotAliasResponse_lastUpdatedDate
+var PutBotAliasResponse_createdDate = &sPutBotAliasResponse_createdDate
+var PutBotAliasResponse_checksum = &sPutBotAliasResponse_checksum
+var PutBotAliasResponse_conversationLogs = &sPutBotAliasResponse_conversationLogs
+var PutBotAliasResponse_tags = &sPutBotAliasResponse_tags
+
+var PutBotRequest = &sPutBotRequest
+var PutBotRequest_name = &sPutBotRequest_name
+var PutBotRequest_description = &sPutBotRequest_description
+var PutBotRequest_intents = &sPutBotRequest_intents
+var PutBotRequest_enableModelImprovements = &sPutBotRequest_enableModelImprovements
+var PutBotRequest_nluIntentConfidenceThreshold = &sPutBotRequest_nluIntentConfidenceThreshold
+var PutBotRequest_clarificationPrompt = &sPutBotRequest_clarificationPrompt
+var PutBotRequest_abortStatement = &sPutBotRequest_abortStatement
+var PutBotRequest_idleSessionTTLInSeconds = &sPutBotRequest_idleSessionTTLInSeconds
+var PutBotRequest_voiceId = &sPutBotRequest_voiceId
+var PutBotRequest_checksum = &sPutBotRequest_checksum
+var PutBotRequest_processBehavior = &sPutBotRequest_processBehavior
+var PutBotRequest_locale = &sPutBotRequest_locale
+var PutBotRequest_childDirected = &sPutBotRequest_childDirected
+var PutBotRequest_detectSentiment = &sPutBotRequest_detectSentiment
+var PutBotRequest_createVersion = &sPutBotRequest_createVersion
+var PutBotRequest_tags = &sPutBotRequest_tags
+
+var PutBotResponse = &sPutBotResponse
+var PutBotResponse_name = &sPutBotResponse_name
+var PutBotResponse_description = &sPutBotResponse_description
+var PutBotResponse_intents = &sPutBotResponse_intents
+var PutBotResponse_enableModelImprovements = &sPutBotResponse_enableModelImprovements
+var PutBotResponse_nluIntentConfidenceThreshold = &sPutBotResponse_nluIntentConfidenceThreshold
+var PutBotResponse_clarificationPrompt = &sPutBotResponse_clarificationPrompt
+var PutBotResponse_abortStatement = &sPutBotResponse_abortStatement
+var PutBotResponse_status = &sPutBotResponse_status
+var PutBotResponse_failureReason = &sPutBotResponse_failureReason
+var PutBotResponse_lastUpdatedDate = &sPutBotResponse_lastUpdatedDate
+var PutBotResponse_createdDate = &sPutBotResponse_createdDate
+var PutBotResponse_idleSessionTTLInSeconds = &sPutBotResponse_idleSessionTTLInSeconds
+var PutBotResponse_voiceId = &sPutBotResponse_voiceId
+var PutBotResponse_checksum = &sPutBotResponse_checksum
+var PutBotResponse_version = &sPutBotResponse_version
+var PutBotResponse_locale = &sPutBotResponse_locale
+var PutBotResponse_childDirected = &sPutBotResponse_childDirected
+var PutBotResponse_createVersion = &sPutBotResponse_createVersion
+var PutBotResponse_detectSentiment = &sPutBotResponse_detectSentiment
+var PutBotResponse_tags = &sPutBotResponse_tags
+
+var PutIntentRequest = &sPutIntentRequest
+var PutIntentRequest_name = &sPutIntentRequest_name
+var PutIntentRequest_description = &sPutIntentRequest_description
+var PutIntentRequest_slots = &sPutIntentRequest_slots
+var PutIntentRequest_sampleUtterances = &sPutIntentRequest_sampleUtterances
+var PutIntentRequest_confirmationPrompt = &sPutIntentRequest_confirmationPrompt
+var PutIntentRequest_rejectionStatement = &sPutIntentRequest_rejectionStatement
+var PutIntentRequest_followUpPrompt = &sPutIntentRequest_followUpPrompt
+var PutIntentRequest_conclusionStatement = &sPutIntentRequest_conclusionStatement
+var PutIntentRequest_dialogCodeHook = &sPutIntentRequest_dialogCodeHook
+var PutIntentRequest_fulfillmentActivity = &sPutIntentRequest_fulfillmentActivity
+var PutIntentRequest_parentIntentSignature = &sPutIntentRequest_parentIntentSignature
+var PutIntentRequest_checksum = &sPutIntentRequest_checksum
+var PutIntentRequest_createVersion = &sPutIntentRequest_createVersion
+var PutIntentRequest_kendraConfiguration = &sPutIntentRequest_kendraConfiguration
+var PutIntentRequest_inputContexts = &sPutIntentRequest_inputContexts
+var PutIntentRequest_outputContexts = &sPutIntentRequest_outputContexts
+
+var PutIntentResponse = &sPutIntentResponse
+var PutIntentResponse_name = &sPutIntentResponse_name
+var PutIntentResponse_description = &sPutIntentResponse_description
+var PutIntentResponse_slots = &sPutIntentResponse_slots
+var PutIntentResponse_sampleUtterances = &sPutIntentResponse_sampleUtterances
+var PutIntentResponse_confirmationPrompt = &sPutIntentResponse_confirmationPrompt
+var PutIntentResponse_rejectionStatement = &sPutIntentResponse_rejectionStatement
+var PutIntentResponse_followUpPrompt = &sPutIntentResponse_followUpPrompt
+var PutIntentResponse_conclusionStatement = &sPutIntentResponse_conclusionStatement
+var PutIntentResponse_dialogCodeHook = &sPutIntentResponse_dialogCodeHook
+var PutIntentResponse_fulfillmentActivity = &sPutIntentResponse_fulfillmentActivity
+var PutIntentResponse_parentIntentSignature = &sPutIntentResponse_parentIntentSignature
+var PutIntentResponse_lastUpdatedDate = &sPutIntentResponse_lastUpdatedDate
+var PutIntentResponse_createdDate = &sPutIntentResponse_createdDate
+var PutIntentResponse_version = &sPutIntentResponse_version
+var PutIntentResponse_checksum = &sPutIntentResponse_checksum
+var PutIntentResponse_createVersion = &sPutIntentResponse_createVersion
+var PutIntentResponse_kendraConfiguration = &sPutIntentResponse_kendraConfiguration
+var PutIntentResponse_inputContexts = &sPutIntentResponse_inputContexts
+var PutIntentResponse_outputContexts = &sPutIntentResponse_outputContexts
+
+var PutSlotTypeRequest = &sPutSlotTypeRequest
+var PutSlotTypeRequest_name = &sPutSlotTypeRequest_name
+var PutSlotTypeRequest_description = &sPutSlotTypeRequest_description
+var PutSlotTypeRequest_enumerationValues = &sPutSlotTypeRequest_enumerationValues
+var PutSlotTypeRequest_checksum = &sPutSlotTypeRequest_checksum
+var PutSlotTypeRequest_valueSelectionStrategy = &sPutSlotTypeRequest_valueSelectionStrategy
+var PutSlotTypeRequest_createVersion = &sPutSlotTypeRequest_createVersion
+var PutSlotTypeRequest_parentSlotTypeSignature = &sPutSlotTypeRequest_parentSlotTypeSignature
+var PutSlotTypeRequest_slotTypeConfigurations = &sPutSlotTypeRequest_slotTypeConfigurations
+
+var PutSlotTypeResponse = &sPutSlotTypeResponse
+var PutSlotTypeResponse_name = &sPutSlotTypeResponse_name
+var PutSlotTypeResponse_description = &sPutSlotTypeResponse_description
+var PutSlotTypeResponse_enumerationValues = &sPutSlotTypeResponse_enumerationValues
+var PutSlotTypeResponse_lastUpdatedDate = &sPutSlotTypeResponse_lastUpdatedDate
+var PutSlotTypeResponse_createdDate = &sPutSlotTypeResponse_createdDate
+var PutSlotTypeResponse_version = &sPutSlotTypeResponse_version
+var PutSlotTypeResponse_checksum = &sPutSlotTypeResponse_checksum
+var PutSlotTypeResponse_valueSelectionStrategy = &sPutSlotTypeResponse_valueSelectionStrategy
+var PutSlotTypeResponse_createVersion = &sPutSlotTypeResponse_createVersion
+var PutSlotTypeResponse_parentSlotTypeSignature = &sPutSlotTypeResponse_parentSlotTypeSignature
+var PutSlotTypeResponse_slotTypeConfigurations = &sPutSlotTypeResponse_slotTypeConfigurations
+
+var StartImportRequest = &sStartImportRequest
+var StartImportRequest_payload = &sStartImportRequest_payload
+var StartImportRequest_resourceType = &sStartImportRequest_resourceType
+var StartImportRequest_mergeStrategy = &sStartImportRequest_mergeStrategy
+var StartImportRequest_tags = &sStartImportRequest_tags
+
+var StartImportResponse = &sStartImportResponse
+var StartImportResponse_name = &sStartImportResponse_name
+var StartImportResponse_resourceType = &sStartImportResponse_resourceType
+var StartImportResponse_mergeStrategy = &sStartImportResponse_mergeStrategy
+var StartImportResponse_importId = &sStartImportResponse_importId
+var StartImportResponse_importStatus = &sStartImportResponse_importStatus
+var StartImportResponse_tags = &sStartImportResponse_tags
+var StartImportResponse_createdDate = &sStartImportResponse_createdDate
+
+var StartMigrationRequest = &sStartMigrationRequest
+var StartMigrationRequest_v1BotName = &sStartMigrationRequest_v1BotName
+var StartMigrationRequest_v1BotVersion = &sStartMigrationRequest_v1BotVersion
+var StartMigrationRequest_v2BotName = &sStartMigrationRequest_v2BotName
+var StartMigrationRequest_v2BotRole = &sStartMigrationRequest_v2BotRole
+var StartMigrationRequest_migrationStrategy = &sStartMigrationRequest_migrationStrategy
+
+var StartMigrationResponse = &sStartMigrationResponse
+var StartMigrationResponse_v1BotName = &sStartMigrationResponse_v1BotName
+var StartMigrationResponse_v1BotVersion = &sStartMigrationResponse_v1BotVersion
+var StartMigrationResponse_v1BotLocale = &sStartMigrationResponse_v1BotLocale
+var StartMigrationResponse_v2BotId = &sStartMigrationResponse_v2BotId
+var StartMigrationResponse_v2BotRole = &sStartMigrationResponse_v2BotRole
+var StartMigrationResponse_migrationId = &sStartMigrationResponse_migrationId
+var StartMigrationResponse_migrationStrategy = &sStartMigrationResponse_migrationStrategy
+var StartMigrationResponse_migrationTimestamp = &sStartMigrationResponse_migrationTimestamp
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var AWSDeepSenseModelBuildingService = &smithy.ServiceSchema{Schema: &s_AWSDeepSenseModelBuildingService, Version: "2017-04-19"}

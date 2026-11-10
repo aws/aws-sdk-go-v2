@@ -4,1635 +4,1628 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CancelJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eCancelJob                                         smithy.SchemaExtensions
+	eCancelQuantumTask                                 smithy.SchemaExtensions
+	eCreateJob                                         smithy.SchemaExtensions
+	eCreateQuantumTask                                 smithy.SchemaExtensions
+	eCreateSpendingLimit                               smithy.SchemaExtensions
+	eDeleteSpendingLimit                               smithy.SchemaExtensions
+	eGetDevice                                         smithy.SchemaExtensions
+	eGetJob                                            smithy.SchemaExtensions
+	eGetQuantumTask                                    smithy.SchemaExtensions
+	eListTagsForResource                               smithy.SchemaExtensions
+	eSearchDevices                                     smithy.SchemaExtensions
+	eSearchJobs                                        smithy.SchemaExtensions
+	eSearchQuantumTasks                                smithy.SchemaExtensions
+	eSearchSpendingLimits                              smithy.SchemaExtensions
+	eTagResource                                       smithy.SchemaExtensions
+	eUntagResource                                     smithy.SchemaExtensions
+	eUpdateSpendingLimit                               smithy.SchemaExtensions
+	e_Braket                                           smithy.SchemaExtensions
+	eAccessDeniedException                             smithy.SchemaExtensions
+	eAccessDeniedException_message                     smithy.SchemaExtensions
+	eActionMetadata                                    smithy.SchemaExtensions
+	eActionMetadata_actionType                         smithy.SchemaExtensions
+	eActionMetadata_programCount                       smithy.SchemaExtensions
+	eActionMetadata_executableCount                    smithy.SchemaExtensions
+	eAlgorithmSpecification                            smithy.SchemaExtensions
+	eAlgorithmSpecification_scriptModeConfig           smithy.SchemaExtensions
+	eAlgorithmSpecification_containerImage             smithy.SchemaExtensions
+	eAssociation                                       smithy.SchemaExtensions
+	eAssociation_arn                                   smithy.SchemaExtensions
+	eAssociation_type                                  smithy.SchemaExtensions
+	e_Associations                                     smithy.SchemaExtensions
+	e_Associations_member                              smithy.SchemaExtensions
+	e_AssociationType                                  smithy.SchemaExtensions
+	e_BraketResourceArn                                smithy.SchemaExtensions
+	e_CancellationStatus                               smithy.SchemaExtensions
+	e_CompressionType                                  smithy.SchemaExtensions
+	eConflictException                                 smithy.SchemaExtensions
+	eConflictException_message                         smithy.SchemaExtensions
+	eContainerImage                                    smithy.SchemaExtensions
+	eContainerImage_uri                                smithy.SchemaExtensions
+	eDataSource                                        smithy.SchemaExtensions
+	eDataSource_s3DataSource                           smithy.SchemaExtensions
+	e_DeviceArn                                        smithy.SchemaExtensions
+	eDeviceConfig                                      smithy.SchemaExtensions
+	eDeviceConfig_device                               smithy.SchemaExtensions
+	eDeviceOfflineException                            smithy.SchemaExtensions
+	eDeviceOfflineException_message                    smithy.SchemaExtensions
+	eDeviceQueueInfo                                   smithy.SchemaExtensions
+	eDeviceQueueInfo_queue                             smithy.SchemaExtensions
+	eDeviceQueueInfo_queueSize                         smithy.SchemaExtensions
+	eDeviceQueueInfo_queuePriority                     smithy.SchemaExtensions
+	e_DeviceQueueInfoList                              smithy.SchemaExtensions
+	e_DeviceQueueInfoList_member                       smithy.SchemaExtensions
+	eDeviceRetiredException                            smithy.SchemaExtensions
+	eDeviceRetiredException_message                    smithy.SchemaExtensions
+	e_DeviceStatus                                     smithy.SchemaExtensions
+	eDeviceSummary                                     smithy.SchemaExtensions
+	eDeviceSummary_deviceArn                           smithy.SchemaExtensions
+	eDeviceSummary_deviceName                          smithy.SchemaExtensions
+	eDeviceSummary_providerName                        smithy.SchemaExtensions
+	eDeviceSummary_deviceType                          smithy.SchemaExtensions
+	eDeviceSummary_deviceStatus                        smithy.SchemaExtensions
+	e_DeviceSummaryList                                smithy.SchemaExtensions
+	e_DeviceSummaryList_member                         smithy.SchemaExtensions
+	e_DeviceType                                       smithy.SchemaExtensions
+	eExperimentalCapabilities                          smithy.SchemaExtensions
+	eExperimentalCapabilities_enabled                  smithy.SchemaExtensions
+	e_ExperimentalCapabilitiesEnablementType           smithy.SchemaExtensions
+	e_HybridJobAdditionalAttributeName                 smithy.SchemaExtensions
+	e_HybridJobAdditionalAttributeNamesList            smithy.SchemaExtensions
+	e_HybridJobAdditionalAttributeNamesList_member     smithy.SchemaExtensions
+	eHybridJobQueueInfo                                smithy.SchemaExtensions
+	eHybridJobQueueInfo_queue                          smithy.SchemaExtensions
+	eHybridJobQueueInfo_position                       smithy.SchemaExtensions
+	eHybridJobQueueInfo_message                        smithy.SchemaExtensions
+	e_HyperParameters                                  smithy.SchemaExtensions
+	e_HyperParameters_key                              smithy.SchemaExtensions
+	e_HyperParameters_value                            smithy.SchemaExtensions
+	e_InputConfigList                                  smithy.SchemaExtensions
+	e_InputConfigList_member                           smithy.SchemaExtensions
+	eInputFileConfig                                   smithy.SchemaExtensions
+	eInputFileConfig_channelName                       smithy.SchemaExtensions
+	eInputFileConfig_contentType                       smithy.SchemaExtensions
+	eInputFileConfig_dataSource                        smithy.SchemaExtensions
+	eInstanceConfig                                    smithy.SchemaExtensions
+	eInstanceConfig_instanceType                       smithy.SchemaExtensions
+	eInstanceConfig_volumeSizeInGb                     smithy.SchemaExtensions
+	eInstanceConfig_instanceCount                      smithy.SchemaExtensions
+	e_InstanceType                                     smithy.SchemaExtensions
+	eInternalServiceException                          smithy.SchemaExtensions
+	eInternalServiceException_message                  smithy.SchemaExtensions
+	e_JobArn                                           smithy.SchemaExtensions
+	eJobCheckpointConfig                               smithy.SchemaExtensions
+	eJobCheckpointConfig_localPath                     smithy.SchemaExtensions
+	eJobCheckpointConfig_s3Uri                         smithy.SchemaExtensions
+	eJobEventDetails                                   smithy.SchemaExtensions
+	eJobEventDetails_eventType                         smithy.SchemaExtensions
+	eJobEventDetails_timeOfEvent                       smithy.SchemaExtensions
+	eJobEventDetails_message                           smithy.SchemaExtensions
+	e_JobEvents                                        smithy.SchemaExtensions
+	e_JobEvents_member                                 smithy.SchemaExtensions
+	e_JobEventType                                     smithy.SchemaExtensions
+	eJobOutputDataConfig                               smithy.SchemaExtensions
+	eJobOutputDataConfig_kmsKeyId                      smithy.SchemaExtensions
+	eJobOutputDataConfig_s3Path                        smithy.SchemaExtensions
+	e_JobPrimaryStatus                                 smithy.SchemaExtensions
+	eJobStoppingCondition                              smithy.SchemaExtensions
+	eJobStoppingCondition_maxRuntimeInSeconds          smithy.SchemaExtensions
+	eJobSummary                                        smithy.SchemaExtensions
+	eJobSummary_status                                 smithy.SchemaExtensions
+	eJobSummary_jobArn                                 smithy.SchemaExtensions
+	eJobSummary_jobName                                smithy.SchemaExtensions
+	eJobSummary_device                                 smithy.SchemaExtensions
+	eJobSummary_createdAt                              smithy.SchemaExtensions
+	eJobSummary_startedAt                              smithy.SchemaExtensions
+	eJobSummary_endedAt                                smithy.SchemaExtensions
+	eJobSummary_tags                                   smithy.SchemaExtensions
+	e_JobSummaryList                                   smithy.SchemaExtensions
+	e_JobSummaryList_member                            smithy.SchemaExtensions
+	e_JobToken                                         smithy.SchemaExtensions
+	e_JsonValue                                        smithy.SchemaExtensions
+	eProgramSetValidationFailure                       smithy.SchemaExtensions
+	eProgramSetValidationFailure_programIndex          smithy.SchemaExtensions
+	eProgramSetValidationFailure_inputsIndex           smithy.SchemaExtensions
+	eProgramSetValidationFailure_errors                smithy.SchemaExtensions
+	e_ProgramSetValidationFailuresList                 smithy.SchemaExtensions
+	e_ProgramSetValidationFailuresList_member          smithy.SchemaExtensions
+	e_ProgramValidationFailuresList                    smithy.SchemaExtensions
+	e_ProgramValidationFailuresList_member             smithy.SchemaExtensions
+	e_QuantumTaskAdditionalAttributeName               smithy.SchemaExtensions
+	e_QuantumTaskAdditionalAttributeNamesList          smithy.SchemaExtensions
+	e_QuantumTaskAdditionalAttributeNamesList_member   smithy.SchemaExtensions
+	e_QuantumTaskArn                                   smithy.SchemaExtensions
+	eQuantumTaskQueueInfo                              smithy.SchemaExtensions
+	eQuantumTaskQueueInfo_queue                        smithy.SchemaExtensions
+	eQuantumTaskQueueInfo_position                     smithy.SchemaExtensions
+	eQuantumTaskQueueInfo_queuePriority                smithy.SchemaExtensions
+	eQuantumTaskQueueInfo_message                      smithy.SchemaExtensions
+	e_QuantumTaskStatus                                smithy.SchemaExtensions
+	eQuantumTaskSummary                                smithy.SchemaExtensions
+	eQuantumTaskSummary_quantumTaskArn                 smithy.SchemaExtensions
+	eQuantumTaskSummary_status                         smithy.SchemaExtensions
+	eQuantumTaskSummary_deviceArn                      smithy.SchemaExtensions
+	eQuantumTaskSummary_shots                          smithy.SchemaExtensions
+	eQuantumTaskSummary_outputS3Bucket                 smithy.SchemaExtensions
+	eQuantumTaskSummary_outputS3Directory              smithy.SchemaExtensions
+	eQuantumTaskSummary_createdAt                      smithy.SchemaExtensions
+	eQuantumTaskSummary_endedAt                        smithy.SchemaExtensions
+	eQuantumTaskSummary_tags                           smithy.SchemaExtensions
+	e_QuantumTaskSummaryList                           smithy.SchemaExtensions
+	e_QuantumTaskSummaryList_member                    smithy.SchemaExtensions
+	e_QueueName                                        smithy.SchemaExtensions
+	e_QueuePriority                                    smithy.SchemaExtensions
+	eResourceNotFoundException                         smithy.SchemaExtensions
+	eResourceNotFoundException_message                 smithy.SchemaExtensions
+	e_RoleArn                                          smithy.SchemaExtensions
+	eS3DataSource                                      smithy.SchemaExtensions
+	eS3DataSource_s3Uri                                smithy.SchemaExtensions
+	e_S3Path                                           smithy.SchemaExtensions
+	eScriptModeConfig                                  smithy.SchemaExtensions
+	eScriptModeConfig_entryPoint                       smithy.SchemaExtensions
+	eScriptModeConfig_s3Uri                            smithy.SchemaExtensions
+	eScriptModeConfig_compressionType                  smithy.SchemaExtensions
+	eSearchDevicesFilter                               smithy.SchemaExtensions
+	eSearchDevicesFilter_name                          smithy.SchemaExtensions
+	eSearchDevicesFilter_values                        smithy.SchemaExtensions
+	e_SearchDevicesFilterList                          smithy.SchemaExtensions
+	e_SearchDevicesFilterList_member                   smithy.SchemaExtensions
+	eSearchJobsFilter                                  smithy.SchemaExtensions
+	eSearchJobsFilter_name                             smithy.SchemaExtensions
+	eSearchJobsFilter_values                           smithy.SchemaExtensions
+	eSearchJobsFilter_operator                         smithy.SchemaExtensions
+	e_SearchJobsFilterList                             smithy.SchemaExtensions
+	e_SearchJobsFilterList_member                      smithy.SchemaExtensions
+	e_SearchJobsFilterOperator                         smithy.SchemaExtensions
+	eSearchQuantumTasksFilter                          smithy.SchemaExtensions
+	eSearchQuantumTasksFilter_name                     smithy.SchemaExtensions
+	eSearchQuantumTasksFilter_values                   smithy.SchemaExtensions
+	eSearchQuantumTasksFilter_operator                 smithy.SchemaExtensions
+	e_SearchQuantumTasksFilterList                     smithy.SchemaExtensions
+	e_SearchQuantumTasksFilterList_member              smithy.SchemaExtensions
+	e_SearchQuantumTasksFilterOperator                 smithy.SchemaExtensions
+	eSearchSpendingLimitsFilter                        smithy.SchemaExtensions
+	eSearchSpendingLimitsFilter_name                   smithy.SchemaExtensions
+	eSearchSpendingLimitsFilter_values                 smithy.SchemaExtensions
+	eSearchSpendingLimitsFilter_operator               smithy.SchemaExtensions
+	e_SearchSpendingLimitsFilterList                   smithy.SchemaExtensions
+	e_SearchSpendingLimitsFilterList_member            smithy.SchemaExtensions
+	e_SearchSpendingLimitsFilterOperator               smithy.SchemaExtensions
+	eServiceQuotaExceededException                     smithy.SchemaExtensions
+	eServiceQuotaExceededException_message             smithy.SchemaExtensions
+	e_SpendingLimitArn                                 smithy.SchemaExtensions
+	eSpendingLimitSummary                              smithy.SchemaExtensions
+	eSpendingLimitSummary_spendingLimitArn             smithy.SchemaExtensions
+	eSpendingLimitSummary_deviceArn                    smithy.SchemaExtensions
+	eSpendingLimitSummary_timePeriod                   smithy.SchemaExtensions
+	eSpendingLimitSummary_spendingLimit                smithy.SchemaExtensions
+	eSpendingLimitSummary_queuedSpend                  smithy.SchemaExtensions
+	eSpendingLimitSummary_totalSpend                   smithy.SchemaExtensions
+	eSpendingLimitSummary_createdAt                    smithy.SchemaExtensions
+	eSpendingLimitSummary_updatedAt                    smithy.SchemaExtensions
+	eSpendingLimitSummary_tags                         smithy.SchemaExtensions
+	e_SpendingLimitSummaryList                         smithy.SchemaExtensions
+	e_SpendingLimitSummaryList_member                  smithy.SchemaExtensions
+	e_String1024                                       smithy.SchemaExtensions
+	e_String2048                                       smithy.SchemaExtensions
+	e_String256                                        smithy.SchemaExtensions
+	e_String256List                                    smithy.SchemaExtensions
+	e_String256List_member                             smithy.SchemaExtensions
+	e_String4096                                       smithy.SchemaExtensions
+	e_String64                                         smithy.SchemaExtensions
+	e_TagKeys                                          smithy.SchemaExtensions
+	e_TagKeys_member                                   smithy.SchemaExtensions
+	e_TagsMap                                          smithy.SchemaExtensions
+	e_TagsMap_key                                      smithy.SchemaExtensions
+	e_TagsMap_value                                    smithy.SchemaExtensions
+	eThrottlingException                               smithy.SchemaExtensions
+	eThrottlingException_message                       smithy.SchemaExtensions
+	eTimePeriod                                        smithy.SchemaExtensions
+	eTimePeriod_startAt                                smithy.SchemaExtensions
+	eTimePeriod_endAt                                  smithy.SchemaExtensions
+	e_Uri                                              smithy.SchemaExtensions
+	eValidationException                               smithy.SchemaExtensions
+	eValidationException_message                       smithy.SchemaExtensions
+	eValidationException_reason                        smithy.SchemaExtensions
+	eValidationException_programSetValidationFailures  smithy.SchemaExtensions
+	e_ValidationExceptionReason                        smithy.SchemaExtensions
+	eCancelJobRequest                                  smithy.SchemaExtensions
+	eCancelJobRequest_jobArn                           smithy.SchemaExtensions
+	eCancelJobResponse                                 smithy.SchemaExtensions
+	eCancelJobResponse_jobArn                          smithy.SchemaExtensions
+	eCancelJobResponse_cancellationStatus              smithy.SchemaExtensions
+	eCancelQuantumTaskRequest                          smithy.SchemaExtensions
+	eCancelQuantumTaskRequest_quantumTaskArn           smithy.SchemaExtensions
+	eCancelQuantumTaskRequest_clientToken              smithy.SchemaExtensions
+	eCancelQuantumTaskResponse                         smithy.SchemaExtensions
+	eCancelQuantumTaskResponse_quantumTaskArn          smithy.SchemaExtensions
+	eCancelQuantumTaskResponse_cancellationStatus      smithy.SchemaExtensions
+	eCreateJobRequest                                  smithy.SchemaExtensions
+	eCreateJobRequest_clientToken                      smithy.SchemaExtensions
+	eCreateJobRequest_algorithmSpecification           smithy.SchemaExtensions
+	eCreateJobRequest_inputDataConfig                  smithy.SchemaExtensions
+	eCreateJobRequest_outputDataConfig                 smithy.SchemaExtensions
+	eCreateJobRequest_checkpointConfig                 smithy.SchemaExtensions
+	eCreateJobRequest_jobName                          smithy.SchemaExtensions
+	eCreateJobRequest_roleArn                          smithy.SchemaExtensions
+	eCreateJobRequest_stoppingCondition                smithy.SchemaExtensions
+	eCreateJobRequest_instanceConfig                   smithy.SchemaExtensions
+	eCreateJobRequest_hyperParameters                  smithy.SchemaExtensions
+	eCreateJobRequest_deviceConfig                     smithy.SchemaExtensions
+	eCreateJobRequest_tags                             smithy.SchemaExtensions
+	eCreateJobRequest_associations                     smithy.SchemaExtensions
+	eCreateJobResponse                                 smithy.SchemaExtensions
+	eCreateJobResponse_jobArn                          smithy.SchemaExtensions
+	eCreateQuantumTaskRequest                          smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_clientToken              smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_deviceArn                smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_deviceParameters         smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_shots                    smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_outputS3Bucket           smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_outputS3KeyPrefix        smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_action                   smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_tags                     smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_jobToken                 smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_associations             smithy.SchemaExtensions
+	eCreateQuantumTaskRequest_experimentalCapabilities smithy.SchemaExtensions
+	eCreateQuantumTaskResponse                         smithy.SchemaExtensions
+	eCreateQuantumTaskResponse_quantumTaskArn          smithy.SchemaExtensions
+	eCreateSpendingLimitRequest                        smithy.SchemaExtensions
+	eCreateSpendingLimitRequest_clientToken            smithy.SchemaExtensions
+	eCreateSpendingLimitRequest_deviceArn              smithy.SchemaExtensions
+	eCreateSpendingLimitRequest_spendingLimit          smithy.SchemaExtensions
+	eCreateSpendingLimitRequest_timePeriod             smithy.SchemaExtensions
+	eCreateSpendingLimitRequest_tags                   smithy.SchemaExtensions
+	eCreateSpendingLimitResponse                       smithy.SchemaExtensions
+	eCreateSpendingLimitResponse_spendingLimitArn      smithy.SchemaExtensions
+	eDeleteSpendingLimitRequest                        smithy.SchemaExtensions
+	eDeleteSpendingLimitRequest_spendingLimitArn       smithy.SchemaExtensions
+	eDeleteSpendingLimitResponse                       smithy.SchemaExtensions
+	eGetDeviceRequest                                  smithy.SchemaExtensions
+	eGetDeviceRequest_deviceArn                        smithy.SchemaExtensions
+	eGetDeviceResponse                                 smithy.SchemaExtensions
+	eGetDeviceResponse_deviceArn                       smithy.SchemaExtensions
+	eGetDeviceResponse_deviceName                      smithy.SchemaExtensions
+	eGetDeviceResponse_providerName                    smithy.SchemaExtensions
+	eGetDeviceResponse_deviceType                      smithy.SchemaExtensions
+	eGetDeviceResponse_deviceStatus                    smithy.SchemaExtensions
+	eGetDeviceResponse_deviceCapabilities              smithy.SchemaExtensions
+	eGetDeviceResponse_deviceQueueInfo                 smithy.SchemaExtensions
+	eGetJobRequest                                     smithy.SchemaExtensions
+	eGetJobRequest_jobArn                              smithy.SchemaExtensions
+	eGetJobRequest_additionalAttributeNames            smithy.SchemaExtensions
+	eGetJobResponse                                    smithy.SchemaExtensions
+	eGetJobResponse_status                             smithy.SchemaExtensions
+	eGetJobResponse_jobArn                             smithy.SchemaExtensions
+	eGetJobResponse_roleArn                            smithy.SchemaExtensions
+	eGetJobResponse_failureReason                      smithy.SchemaExtensions
+	eGetJobResponse_jobName                            smithy.SchemaExtensions
+	eGetJobResponse_hyperParameters                    smithy.SchemaExtensions
+	eGetJobResponse_inputDataConfig                    smithy.SchemaExtensions
+	eGetJobResponse_outputDataConfig                   smithy.SchemaExtensions
+	eGetJobResponse_stoppingCondition                  smithy.SchemaExtensions
+	eGetJobResponse_checkpointConfig                   smithy.SchemaExtensions
+	eGetJobResponse_algorithmSpecification             smithy.SchemaExtensions
+	eGetJobResponse_instanceConfig                     smithy.SchemaExtensions
+	eGetJobResponse_createdAt                          smithy.SchemaExtensions
+	eGetJobResponse_startedAt                          smithy.SchemaExtensions
+	eGetJobResponse_endedAt                            smithy.SchemaExtensions
+	eGetJobResponse_billableDuration                   smithy.SchemaExtensions
+	eGetJobResponse_deviceConfig                       smithy.SchemaExtensions
+	eGetJobResponse_events                             smithy.SchemaExtensions
+	eGetJobResponse_tags                               smithy.SchemaExtensions
+	eGetJobResponse_queueInfo                          smithy.SchemaExtensions
+	eGetJobResponse_associations                       smithy.SchemaExtensions
+	eGetQuantumTaskRequest                             smithy.SchemaExtensions
+	eGetQuantumTaskRequest_quantumTaskArn              smithy.SchemaExtensions
+	eGetQuantumTaskRequest_additionalAttributeNames    smithy.SchemaExtensions
+	eGetQuantumTaskResponse                            smithy.SchemaExtensions
+	eGetQuantumTaskResponse_quantumTaskArn             smithy.SchemaExtensions
+	eGetQuantumTaskResponse_status                     smithy.SchemaExtensions
+	eGetQuantumTaskResponse_failureReason              smithy.SchemaExtensions
+	eGetQuantumTaskResponse_deviceArn                  smithy.SchemaExtensions
+	eGetQuantumTaskResponse_deviceParameters           smithy.SchemaExtensions
+	eGetQuantumTaskResponse_shots                      smithy.SchemaExtensions
+	eGetQuantumTaskResponse_outputS3Bucket             smithy.SchemaExtensions
+	eGetQuantumTaskResponse_outputS3Directory          smithy.SchemaExtensions
+	eGetQuantumTaskResponse_createdAt                  smithy.SchemaExtensions
+	eGetQuantumTaskResponse_endedAt                    smithy.SchemaExtensions
+	eGetQuantumTaskResponse_tags                       smithy.SchemaExtensions
+	eGetQuantumTaskResponse_jobArn                     smithy.SchemaExtensions
+	eGetQuantumTaskResponse_queueInfo                  smithy.SchemaExtensions
+	eGetQuantumTaskResponse_associations               smithy.SchemaExtensions
+	eGetQuantumTaskResponse_numSuccessfulShots         smithy.SchemaExtensions
+	eGetQuantumTaskResponse_actionMetadata             smithy.SchemaExtensions
+	eGetQuantumTaskResponse_experimentalCapabilities   smithy.SchemaExtensions
+	eListTagsForResourceRequest                        smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn            smithy.SchemaExtensions
+	eListTagsForResourceResponse                       smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                  smithy.SchemaExtensions
+	eSearchDevicesRequest                              smithy.SchemaExtensions
+	eSearchDevicesRequest_nextToken                    smithy.SchemaExtensions
+	eSearchDevicesRequest_maxResults                   smithy.SchemaExtensions
+	eSearchDevicesRequest_filters                      smithy.SchemaExtensions
+	eSearchDevicesResponse                             smithy.SchemaExtensions
+	eSearchDevicesResponse_devices                     smithy.SchemaExtensions
+	eSearchDevicesResponse_nextToken                   smithy.SchemaExtensions
+	eSearchJobsRequest                                 smithy.SchemaExtensions
+	eSearchJobsRequest_nextToken                       smithy.SchemaExtensions
+	eSearchJobsRequest_maxResults                      smithy.SchemaExtensions
+	eSearchJobsRequest_filters                         smithy.SchemaExtensions
+	eSearchJobsResponse                                smithy.SchemaExtensions
+	eSearchJobsResponse_jobs                           smithy.SchemaExtensions
+	eSearchJobsResponse_nextToken                      smithy.SchemaExtensions
+	eSearchQuantumTasksRequest                         smithy.SchemaExtensions
+	eSearchQuantumTasksRequest_nextToken               smithy.SchemaExtensions
+	eSearchQuantumTasksRequest_maxResults              smithy.SchemaExtensions
+	eSearchQuantumTasksRequest_filters                 smithy.SchemaExtensions
+	eSearchQuantumTasksResponse                        smithy.SchemaExtensions
+	eSearchQuantumTasksResponse_quantumTasks           smithy.SchemaExtensions
+	eSearchQuantumTasksResponse_nextToken              smithy.SchemaExtensions
+	eSearchSpendingLimitsRequest                       smithy.SchemaExtensions
+	eSearchSpendingLimitsRequest_nextToken             smithy.SchemaExtensions
+	eSearchSpendingLimitsRequest_maxResults            smithy.SchemaExtensions
+	eSearchSpendingLimitsRequest_filters               smithy.SchemaExtensions
+	eSearchSpendingLimitsResponse                      smithy.SchemaExtensions
+	eSearchSpendingLimitsResponse_spendingLimits       smithy.SchemaExtensions
+	eSearchSpendingLimitsResponse_nextToken            smithy.SchemaExtensions
+	eTagResourceRequest                                smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                    smithy.SchemaExtensions
+	eTagResourceRequest_tags                           smithy.SchemaExtensions
+	eTagResourceResponse                               smithy.SchemaExtensions
+	eUntagResourceRequest                              smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                  smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                      smithy.SchemaExtensions
+	eUntagResourceResponse                             smithy.SchemaExtensions
+	eUpdateSpendingLimitRequest                        smithy.SchemaExtensions
+	eUpdateSpendingLimitRequest_spendingLimitArn       smithy.SchemaExtensions
+	eUpdateSpendingLimitRequest_clientToken            smithy.SchemaExtensions
+	eUpdateSpendingLimitRequest_spendingLimit          smithy.SchemaExtensions
+	eUpdateSpendingLimitRequest_timePeriod             smithy.SchemaExtensions
+	eUpdateSpendingLimitResponse                       smithy.SchemaExtensions
+)
+
+var (
+	iCancelJob                                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CancelJob"}
+	iCancelQuantumTask                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CancelQuantumTask"}
+	iCreateJob                                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateJob"}
+	iCreateQuantumTask                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateQuantumTask"}
+	iCreateSpendingLimit                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateSpendingLimit"}
+	iDeleteSpendingLimit                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeleteSpendingLimit"}
+	iGetDevice                                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetDevice"}
+	iGetJob                                   = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetJob"}
+	iGetQuantumTask                           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetQuantumTask"}
+	iListTagsForResource                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ListTagsForResource"}
+	iSearchDevices                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchDevices"}
+	iSearchJobs                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchJobs"}
+	iSearchQuantumTasks                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchQuantumTasks"}
+	iSearchSpendingLimits                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchSpendingLimits"}
+	iTagResource                              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "TagResource"}
+	iUntagResource                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "UntagResource"}
+	iUpdateSpendingLimit                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "UpdateSpendingLimit"}
+	i_Braket                                  = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "Braket"}
+	iAccessDeniedException                    = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "AccessDeniedException"}
+	iActionMetadata                           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ActionMetadata"}
+	iAlgorithmSpecification                   = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "AlgorithmSpecification"}
+	iAssociation                              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "Association"}
+	i_Associations                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "Associations"}
+	i_AssociationType                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "AssociationType"}
+	i_BraketResourceArn                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "BraketResourceArn"}
+	i_CancellationStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CancellationStatus"}
+	i_CompressionType                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CompressionType"}
+	iConflictException                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ConflictException"}
+	iContainerImage                           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ContainerImage"}
+	iDataSource                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DataSource"}
+	i_DeviceArn                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceArn"}
+	iDeviceConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceConfig"}
+	iDeviceOfflineException                   = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceOfflineException"}
+	iDeviceQueueInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceQueueInfo"}
+	i_DeviceQueueInfoList                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceQueueInfoList"}
+	iDeviceRetiredException                   = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceRetiredException"}
+	i_DeviceStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceStatus"}
+	iDeviceSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceSummary"}
+	i_DeviceSummaryList                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceSummaryList"}
+	i_DeviceType                              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeviceType"}
+	iExperimentalCapabilities                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ExperimentalCapabilities"}
+	i_ExperimentalCapabilitiesEnablementType  = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ExperimentalCapabilitiesEnablementType"}
+	i_HybridJobAdditionalAttributeName        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "HybridJobAdditionalAttributeName"}
+	i_HybridJobAdditionalAttributeNamesList   = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "HybridJobAdditionalAttributeNamesList"}
+	iHybridJobQueueInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "HybridJobQueueInfo"}
+	i_HyperParameters                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "HyperParameters"}
+	i_InputConfigList                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "InputConfigList"}
+	iInputFileConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "InputFileConfig"}
+	iInstanceConfig                           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "InstanceConfig"}
+	i_InstanceType                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "InstanceType"}
+	iInternalServiceException                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "InternalServiceException"}
+	i_JobArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobArn"}
+	iJobCheckpointConfig                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobCheckpointConfig"}
+	iJobEventDetails                          = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobEventDetails"}
+	i_JobEvents                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobEvents"}
+	i_JobEventType                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobEventType"}
+	iJobOutputDataConfig                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobOutputDataConfig"}
+	i_JobPrimaryStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobPrimaryStatus"}
+	iJobStoppingCondition                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobStoppingCondition"}
+	iJobSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobSummary"}
+	i_JobSummaryList                          = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobSummaryList"}
+	i_JobToken                                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JobToken"}
+	i_JsonValue                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "JsonValue"}
+	iProgramSetValidationFailure              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ProgramSetValidationFailure"}
+	i_ProgramSetValidationFailuresList        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ProgramSetValidationFailuresList"}
+	i_ProgramValidationFailuresList           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ProgramValidationFailuresList"}
+	i_QuantumTaskAdditionalAttributeName      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QuantumTaskAdditionalAttributeName"}
+	i_QuantumTaskAdditionalAttributeNamesList = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QuantumTaskAdditionalAttributeNamesList"}
+	i_QuantumTaskArn                          = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QuantumTaskArn"}
+	iQuantumTaskQueueInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QuantumTaskQueueInfo"}
+	i_QuantumTaskStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QuantumTaskStatus"}
+	iQuantumTaskSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QuantumTaskSummary"}
+	i_QuantumTaskSummaryList                  = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QuantumTaskSummaryList"}
+	i_QueueName                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QueueName"}
+	i_QueuePriority                           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "QueuePriority"}
+	iResourceNotFoundException                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ResourceNotFoundException"}
+	i_RoleArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "RoleArn"}
+	iS3DataSource                             = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "S3DataSource"}
+	i_S3Path                                  = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "S3Path"}
+	iScriptModeConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ScriptModeConfig"}
+	iSearchDevicesFilter                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchDevicesFilter"}
+	i_SearchDevicesFilterList                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchDevicesFilterList"}
+	iSearchJobsFilter                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchJobsFilter"}
+	i_SearchJobsFilterList                    = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchJobsFilterList"}
+	i_SearchJobsFilterOperator                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchJobsFilterOperator"}
+	iSearchQuantumTasksFilter                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchQuantumTasksFilter"}
+	i_SearchQuantumTasksFilterList            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchQuantumTasksFilterList"}
+	i_SearchQuantumTasksFilterOperator        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchQuantumTasksFilterOperator"}
+	iSearchSpendingLimitsFilter               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchSpendingLimitsFilter"}
+	i_SearchSpendingLimitsFilterList          = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchSpendingLimitsFilterList"}
+	i_SearchSpendingLimitsFilterOperator      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchSpendingLimitsFilterOperator"}
+	iServiceQuotaExceededException            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ServiceQuotaExceededException"}
+	i_SpendingLimitArn                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SpendingLimitArn"}
+	iSpendingLimitSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SpendingLimitSummary"}
+	i_SpendingLimitSummaryList                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SpendingLimitSummaryList"}
+	i_String1024                              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "String1024"}
+	i_String2048                              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "String2048"}
+	i_String256                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "String256"}
+	i_String256List                           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "String256List"}
+	i_String4096                              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "String4096"}
+	i_String64                                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "String64"}
+	i_TagKeys                                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "TagKeys"}
+	i_TagsMap                                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "TagsMap"}
+	iThrottlingException                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ThrottlingException"}
+	iTimePeriod                               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "TimePeriod"}
+	i_Uri                                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "Uri"}
+	iValidationException                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ValidationException"}
+	i_ValidationExceptionReason               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ValidationExceptionReason"}
+	iCancelJobRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CancelJobRequest"}
+	iCancelJobResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CancelJobResponse"}
+	iCancelQuantumTaskRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CancelQuantumTaskRequest"}
+	iCancelQuantumTaskResponse                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CancelQuantumTaskResponse"}
+	iCreateJobRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateJobRequest"}
+	iCreateJobResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateJobResponse"}
+	iCreateQuantumTaskRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateQuantumTaskRequest"}
+	iCreateQuantumTaskResponse                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateQuantumTaskResponse"}
+	iCreateSpendingLimitRequest               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateSpendingLimitRequest"}
+	iCreateSpendingLimitResponse              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "CreateSpendingLimitResponse"}
+	iDeleteSpendingLimitRequest               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeleteSpendingLimitRequest"}
+	iDeleteSpendingLimitResponse              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "DeleteSpendingLimitResponse"}
+	iGetDeviceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetDeviceRequest"}
+	iGetDeviceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetDeviceResponse"}
+	iGetJobRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetJobRequest"}
+	iGetJobResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetJobResponse"}
+	iGetQuantumTaskRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetQuantumTaskRequest"}
+	iGetQuantumTaskResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "GetQuantumTaskResponse"}
+	iListTagsForResourceRequest               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "ListTagsForResourceResponse"}
+	iSearchDevicesRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchDevicesRequest"}
+	iSearchDevicesResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchDevicesResponse"}
+	iSearchJobsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchJobsRequest"}
+	iSearchJobsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchJobsResponse"}
+	iSearchQuantumTasksRequest                = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchQuantumTasksRequest"}
+	iSearchQuantumTasksResponse               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchQuantumTasksResponse"}
+	iSearchSpendingLimitsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchSpendingLimitsRequest"}
+	iSearchSpendingLimitsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "SearchSpendingLimitsResponse"}
+	iTagResourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "TagResourceRequest"}
+	iTagResourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "TagResourceResponse"}
+	iUntagResourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "UntagResourceResponse"}
+	iUpdateSpendingLimitRequest               = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "UpdateSpendingLimitRequest"}
+	iUpdateSpendingLimitResponse              = smithy.ShapeName{Namespace: "com.amazonaws.braket", Name: "UpdateSpendingLimitResponse"}
+	pString                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pLong                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pInteger                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                                = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/job/{jobArn}/cancel",
-	Code: 200})
-
-var CancelQuantumTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CancelQuantumTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/quantum-task/{quantumTaskArn}/cancel",
-	Code: 200})
-
-var CreateJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/job",
-	Code: 201})
-
-var CreateQuantumTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateQuantumTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/quantum-task",
-	Code: 201})
-
-var CreateSpendingLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateSpendingLimit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spending-limit",
-	Code: 201})
-
-var DeleteSpendingLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeleteSpendingLimit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/spending-limit/{spendingLimitArn}/delete",
-	Code: 200})
-
-var GetDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/device/{deviceArn}",
-	Code: 200})
-
-var GetJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/job/{jobArn}",
-	Code: 200})
-
-var GetQuantumTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetQuantumTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/quantum-task/{quantumTaskArn}",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var SearchDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchDevices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/devices",
-	Code: 200})
-
-var SearchJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/jobs",
-	Code: 200})
-
-var SearchQuantumTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchQuantumTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/quantum-tasks",
-	Code: 200})
-
-var SearchSpendingLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchSpendingLimits",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spending-limits",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateSpendingLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "UpdateSpendingLimit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/spending-limit/{spendingLimitArn}/update",
-	Code: 200})
-
-var _Braket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "Braket",
-}, smithy.ShapeTypeService, 0)
-
-var Braket = smithy.NewServiceSchema(_Braket, "2019-09-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var ActionMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ActionMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var ActionMetadata_actionType *smithy.Schema
-
-var ActionMetadata_programCount *smithy.Schema
-
-var ActionMetadata_executableCount *smithy.Schema
-
-var AlgorithmSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "AlgorithmSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var AlgorithmSpecification_scriptModeConfig *smithy.Schema
-
-var AlgorithmSpecification_containerImage *smithy.Schema
-
-var Association = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "Association",
-}, smithy.ShapeTypeStructure, 2)
-var Association_arn *smithy.Schema
-
-var Association_type *smithy.Schema
-
-var _Associations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "Associations",
-}, smithy.ShapeTypeList, 1)
-var _Associations_member *smithy.Schema
-
-var _AssociationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "AssociationType",
-}, smithy.ShapeTypeString, 0)
-
-var _BraketResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "BraketResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CancellationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CancellationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _CompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CompressionType",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ContainerImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ContainerImage",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerImage_uri *smithy.Schema
-
-var DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DataSource",
-}, smithy.ShapeTypeStructure, 1)
-var DataSource_s3DataSource *smithy.Schema
-
-var _DeviceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceArn",
-}, smithy.ShapeTypeString, 0)
-
-var DeviceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceConfig",
-}, smithy.ShapeTypeStructure, 1)
-var DeviceConfig_device *smithy.Schema
-
-var DeviceOfflineException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceOfflineException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var DeviceOfflineException_message *smithy.Schema
-
-var DeviceQueueInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceQueueInfo",
-}, smithy.ShapeTypeStructure, 3)
-var DeviceQueueInfo_queue *smithy.Schema
-
-var DeviceQueueInfo_queueSize *smithy.Schema
-
-var DeviceQueueInfo_queuePriority *smithy.Schema
-
-var _DeviceQueueInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceQueueInfoList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceQueueInfoList_member *smithy.Schema
-
-var DeviceRetiredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceRetiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 410})
-var DeviceRetiredException_message *smithy.Schema
-
-var _DeviceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceStatus",
-}, smithy.ShapeTypeString, 0)
-
-var DeviceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceSummary",
-}, smithy.ShapeTypeStructure, 5)
-var DeviceSummary_deviceArn *smithy.Schema
-
-var DeviceSummary_deviceName *smithy.Schema
-
-var DeviceSummary_providerName *smithy.Schema
-
-var DeviceSummary_deviceType *smithy.Schema
-
-var DeviceSummary_deviceStatus *smithy.Schema
-
-var _DeviceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceSummaryList_member *smithy.Schema
-
-var _DeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeviceType",
-}, smithy.ShapeTypeString, 0)
-
-var ExperimentalCapabilities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ExperimentalCapabilities",
-}, smithy.ShapeTypeUnion, 1)
-var ExperimentalCapabilities_enabled *smithy.Schema
-
-var _ExperimentalCapabilitiesEnablementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ExperimentalCapabilitiesEnablementType",
-}, smithy.ShapeTypeString, 0)
-
-var _HybridJobAdditionalAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "HybridJobAdditionalAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _HybridJobAdditionalAttributeNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "HybridJobAdditionalAttributeNamesList",
-}, smithy.ShapeTypeList, 1)
-var _HybridJobAdditionalAttributeNamesList_member *smithy.Schema
-
-var HybridJobQueueInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "HybridJobQueueInfo",
-}, smithy.ShapeTypeStructure, 3)
-var HybridJobQueueInfo_queue *smithy.Schema
-
-var HybridJobQueueInfo_position *smithy.Schema
-
-var HybridJobQueueInfo_message *smithy.Schema
-
-var _HyperParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "HyperParameters",
-}, smithy.ShapeTypeMap, 2)
-var _HyperParameters_key *smithy.Schema
-
-var _HyperParameters_value *smithy.Schema
-
-var _InputConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "InputConfigList",
-}, smithy.ShapeTypeList, 1)
-var _InputConfigList_member *smithy.Schema
-
-var InputFileConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "InputFileConfig",
-}, smithy.ShapeTypeStructure, 3)
-var InputFileConfig_channelName *smithy.Schema
-
-var InputFileConfig_contentType *smithy.Schema
-
-var InputFileConfig_dataSource *smithy.Schema
-
-var InstanceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "InstanceConfig",
-}, smithy.ShapeTypeStructure, 3)
-var InstanceConfig_instanceType *smithy.Schema
-
-var InstanceConfig_volumeSizeInGb *smithy.Schema
-
-var InstanceConfig_instanceCount *smithy.Schema
-
-var _InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "InstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_message *smithy.Schema
-
-var _JobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobArn",
-}, smithy.ShapeTypeString, 0)
-
-var JobCheckpointConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobCheckpointConfig",
-}, smithy.ShapeTypeStructure, 2)
-var JobCheckpointConfig_localPath *smithy.Schema
-
-var JobCheckpointConfig_s3Uri *smithy.Schema
-
-var JobEventDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobEventDetails",
-}, smithy.ShapeTypeStructure, 3)
-var JobEventDetails_eventType *smithy.Schema
-
-var JobEventDetails_timeOfEvent *smithy.Schema
-
-var JobEventDetails_message *smithy.Schema
-
-var _JobEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobEvents",
-}, smithy.ShapeTypeList, 1)
-var _JobEvents_member *smithy.Schema
-
-var _JobEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobEventType",
-}, smithy.ShapeTypeString, 0)
-
-var JobOutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobOutputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var JobOutputDataConfig_kmsKeyId *smithy.Schema
-
-var JobOutputDataConfig_s3Path *smithy.Schema
-
-var _JobPrimaryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobPrimaryStatus",
-}, smithy.ShapeTypeString, 0)
-
-var JobStoppingCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobStoppingCondition",
-}, smithy.ShapeTypeStructure, 1)
-var JobStoppingCondition_maxRuntimeInSeconds *smithy.Schema
-
-var JobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobSummary",
-}, smithy.ShapeTypeStructure, 8)
-var JobSummary_status *smithy.Schema
-
-var JobSummary_jobArn *smithy.Schema
-
-var JobSummary_jobName *smithy.Schema
-
-var JobSummary_device *smithy.Schema
-
-var JobSummary_createdAt *smithy.Schema
-
-var JobSummary_startedAt *smithy.Schema
-
-var JobSummary_endedAt *smithy.Schema
-
-var JobSummary_tags *smithy.Schema
-
-var _JobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _JobSummaryList_member *smithy.Schema
-
-var _JobToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JobToken",
-}, smithy.ShapeTypeString, 0)
-
-var _JsonValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "JsonValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var ProgramSetValidationFailure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ProgramSetValidationFailure",
-}, smithy.ShapeTypeStructure, 3)
-var ProgramSetValidationFailure_programIndex *smithy.Schema
-
-var ProgramSetValidationFailure_inputsIndex *smithy.Schema
-
-var ProgramSetValidationFailure_errors *smithy.Schema
-
-var _ProgramSetValidationFailuresList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ProgramSetValidationFailuresList",
-}, smithy.ShapeTypeList, 1)
-var _ProgramSetValidationFailuresList_member *smithy.Schema
-
-var _ProgramValidationFailuresList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ProgramValidationFailuresList",
-}, smithy.ShapeTypeList, 1)
-var _ProgramValidationFailuresList_member *smithy.Schema
-
-var _QuantumTaskAdditionalAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QuantumTaskAdditionalAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _QuantumTaskAdditionalAttributeNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QuantumTaskAdditionalAttributeNamesList",
-}, smithy.ShapeTypeList, 1)
-var _QuantumTaskAdditionalAttributeNamesList_member *smithy.Schema
-
-var _QuantumTaskArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QuantumTaskArn",
-}, smithy.ShapeTypeString, 0)
-
-var QuantumTaskQueueInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QuantumTaskQueueInfo",
-}, smithy.ShapeTypeStructure, 4)
-var QuantumTaskQueueInfo_queue *smithy.Schema
-
-var QuantumTaskQueueInfo_position *smithy.Schema
-
-var QuantumTaskQueueInfo_queuePriority *smithy.Schema
-
-var QuantumTaskQueueInfo_message *smithy.Schema
-
-var _QuantumTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QuantumTaskStatus",
-}, smithy.ShapeTypeString, 0)
-
-var QuantumTaskSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QuantumTaskSummary",
-}, smithy.ShapeTypeStructure, 9)
-var QuantumTaskSummary_quantumTaskArn *smithy.Schema
-
-var QuantumTaskSummary_status *smithy.Schema
-
-var QuantumTaskSummary_deviceArn *smithy.Schema
-
-var QuantumTaskSummary_shots *smithy.Schema
-
-var QuantumTaskSummary_outputS3Bucket *smithy.Schema
-
-var QuantumTaskSummary_outputS3Directory *smithy.Schema
-
-var QuantumTaskSummary_createdAt *smithy.Schema
-
-var QuantumTaskSummary_endedAt *smithy.Schema
-
-var QuantumTaskSummary_tags *smithy.Schema
-
-var _QuantumTaskSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QuantumTaskSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _QuantumTaskSummaryList_member *smithy.Schema
-
-var _QueueName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QueueName",
-}, smithy.ShapeTypeString, 0)
-
-var _QueuePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "QueuePriority",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "S3DataSource",
-}, smithy.ShapeTypeStructure, 1)
-var S3DataSource_s3Uri *smithy.Schema
-
-var _S3Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "S3Path",
-}, smithy.ShapeTypeString, 0)
-
-var ScriptModeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ScriptModeConfig",
-}, smithy.ShapeTypeStructure, 3)
-var ScriptModeConfig_entryPoint *smithy.Schema
-
-var ScriptModeConfig_s3Uri *smithy.Schema
-
-var ScriptModeConfig_compressionType *smithy.Schema
-
-var SearchDevicesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchDevicesFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SearchDevicesFilter_name *smithy.Schema
-
-var SearchDevicesFilter_values *smithy.Schema
-
-var _SearchDevicesFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchDevicesFilterList",
-}, smithy.ShapeTypeList, 1)
-var _SearchDevicesFilterList_member *smithy.Schema
-
-var SearchJobsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchJobsFilter",
-}, smithy.ShapeTypeStructure, 3)
-var SearchJobsFilter_name *smithy.Schema
-
-var SearchJobsFilter_values *smithy.Schema
-
-var SearchJobsFilter_operator *smithy.Schema
-
-var _SearchJobsFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchJobsFilterList",
-}, smithy.ShapeTypeList, 1)
-var _SearchJobsFilterList_member *smithy.Schema
-
-var _SearchJobsFilterOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchJobsFilterOperator",
-}, smithy.ShapeTypeString, 0)
-
-var SearchQuantumTasksFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchQuantumTasksFilter",
-}, smithy.ShapeTypeStructure, 3)
-var SearchQuantumTasksFilter_name *smithy.Schema
-
-var SearchQuantumTasksFilter_values *smithy.Schema
-
-var SearchQuantumTasksFilter_operator *smithy.Schema
-
-var _SearchQuantumTasksFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchQuantumTasksFilterList",
-}, smithy.ShapeTypeList, 1)
-var _SearchQuantumTasksFilterList_member *smithy.Schema
-
-var _SearchQuantumTasksFilterOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchQuantumTasksFilterOperator",
-}, smithy.ShapeTypeString, 0)
-
-var SearchSpendingLimitsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchSpendingLimitsFilter",
-}, smithy.ShapeTypeStructure, 3)
-var SearchSpendingLimitsFilter_name *smithy.Schema
-
-var SearchSpendingLimitsFilter_values *smithy.Schema
-
-var SearchSpendingLimitsFilter_operator *smithy.Schema
-
-var _SearchSpendingLimitsFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchSpendingLimitsFilterList",
-}, smithy.ShapeTypeList, 1)
-var _SearchSpendingLimitsFilterList_member *smithy.Schema
-
-var _SearchSpendingLimitsFilterOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchSpendingLimitsFilterOperator",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _SpendingLimitArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SpendingLimitArn",
-}, smithy.ShapeTypeString, 0)
-
-var SpendingLimitSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SpendingLimitSummary",
-}, smithy.ShapeTypeStructure, 9)
-var SpendingLimitSummary_spendingLimitArn *smithy.Schema
-
-var SpendingLimitSummary_deviceArn *smithy.Schema
-
-var SpendingLimitSummary_timePeriod *smithy.Schema
-
-var SpendingLimitSummary_spendingLimit *smithy.Schema
-
-var SpendingLimitSummary_queuedSpend *smithy.Schema
-
-var SpendingLimitSummary_totalSpend *smithy.Schema
-
-var SpendingLimitSummary_createdAt *smithy.Schema
-
-var SpendingLimitSummary_updatedAt *smithy.Schema
-
-var SpendingLimitSummary_tags *smithy.Schema
-
-var _SpendingLimitSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SpendingLimitSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SpendingLimitSummaryList_member *smithy.Schema
-
-var _String1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "String1024",
-}, smithy.ShapeTypeString, 0)
-
-var _String2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "String2048",
-}, smithy.ShapeTypeString, 0)
-
-var _String256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "String256",
-}, smithy.ShapeTypeString, 0)
-
-var _String256List = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "String256List",
-}, smithy.ShapeTypeList, 1)
-var _String256List_member *smithy.Schema
-
-var _String4096 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "String4096",
-}, smithy.ShapeTypeString, 0)
-
-var _String64 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "String64",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "TagsMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagsMap_key *smithy.Schema
-
-var _TagsMap_value *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var TimePeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "TimePeriod",
-}, smithy.ShapeTypeStructure, 2)
-var TimePeriod_startAt *smithy.Schema
-
-var TimePeriod_endAt *smithy.Schema
-
-var _Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "Uri",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_programSetValidationFailures *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var CancelJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CancelJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelJobRequest_jobArn *smithy.Schema
-
-var CancelJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CancelJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CancelJobResponse_jobArn *smithy.Schema
-
-var CancelJobResponse_cancellationStatus *smithy.Schema
-
-var CancelQuantumTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CancelQuantumTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelQuantumTaskRequest_quantumTaskArn *smithy.Schema
-
-var CancelQuantumTaskRequest_clientToken *smithy.Schema
-
-var CancelQuantumTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CancelQuantumTaskResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CancelQuantumTaskResponse_quantumTaskArn *smithy.Schema
-
-var CancelQuantumTaskResponse_cancellationStatus *smithy.Schema
-
-var CreateJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateJobRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateJobRequest_clientToken *smithy.Schema
-
-var CreateJobRequest_algorithmSpecification *smithy.Schema
-
-var CreateJobRequest_inputDataConfig *smithy.Schema
-
-var CreateJobRequest_outputDataConfig *smithy.Schema
-
-var CreateJobRequest_checkpointConfig *smithy.Schema
-
-var CreateJobRequest_jobName *smithy.Schema
-
-var CreateJobRequest_roleArn *smithy.Schema
-
-var CreateJobRequest_stoppingCondition *smithy.Schema
-
-var CreateJobRequest_instanceConfig *smithy.Schema
-
-var CreateJobRequest_hyperParameters *smithy.Schema
-
-var CreateJobRequest_deviceConfig *smithy.Schema
-
-var CreateJobRequest_tags *smithy.Schema
-
-var CreateJobRequest_associations *smithy.Schema
-
-var CreateJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateJobResponse_jobArn *smithy.Schema
-
-var CreateQuantumTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateQuantumTaskRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateQuantumTaskRequest_clientToken *smithy.Schema
-
-var CreateQuantumTaskRequest_deviceArn *smithy.Schema
-
-var CreateQuantumTaskRequest_deviceParameters *smithy.Schema
-
-var CreateQuantumTaskRequest_shots *smithy.Schema
-
-var CreateQuantumTaskRequest_outputS3Bucket *smithy.Schema
-
-var CreateQuantumTaskRequest_outputS3KeyPrefix *smithy.Schema
-
-var CreateQuantumTaskRequest_action *smithy.Schema
-
-var CreateQuantumTaskRequest_tags *smithy.Schema
-
-var CreateQuantumTaskRequest_jobToken *smithy.Schema
-
-var CreateQuantumTaskRequest_associations *smithy.Schema
-
-var CreateQuantumTaskRequest_experimentalCapabilities *smithy.Schema
-
-var CreateQuantumTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateQuantumTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateQuantumTaskResponse_quantumTaskArn *smithy.Schema
-
-var CreateSpendingLimitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateSpendingLimitRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateSpendingLimitRequest_clientToken *smithy.Schema
-
-var CreateSpendingLimitRequest_deviceArn *smithy.Schema
-
-var CreateSpendingLimitRequest_spendingLimit *smithy.Schema
-
-var CreateSpendingLimitRequest_timePeriod *smithy.Schema
-
-var CreateSpendingLimitRequest_tags *smithy.Schema
-
-var CreateSpendingLimitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "CreateSpendingLimitResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSpendingLimitResponse_spendingLimitArn *smithy.Schema
-
-var DeleteSpendingLimitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeleteSpendingLimitRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSpendingLimitRequest_spendingLimitArn *smithy.Schema
-
-var DeleteSpendingLimitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "DeleteSpendingLimitResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetDeviceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeviceRequest_deviceArn *smithy.Schema
-
-var GetDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetDeviceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetDeviceResponse_deviceArn *smithy.Schema
-
-var GetDeviceResponse_deviceName *smithy.Schema
-
-var GetDeviceResponse_providerName *smithy.Schema
-
-var GetDeviceResponse_deviceType *smithy.Schema
-
-var GetDeviceResponse_deviceStatus *smithy.Schema
-
-var GetDeviceResponse_deviceCapabilities *smithy.Schema
-
-var GetDeviceResponse_deviceQueueInfo *smithy.Schema
-
-var GetJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetJobRequest_jobArn *smithy.Schema
-
-var GetJobRequest_additionalAttributeNames *smithy.Schema
-
-var GetJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetJobResponse",
-}, smithy.ShapeTypeStructure, 21)
-var GetJobResponse_status *smithy.Schema
-
-var GetJobResponse_jobArn *smithy.Schema
-
-var GetJobResponse_roleArn *smithy.Schema
-
-var GetJobResponse_failureReason *smithy.Schema
-
-var GetJobResponse_jobName *smithy.Schema
-
-var GetJobResponse_hyperParameters *smithy.Schema
-
-var GetJobResponse_inputDataConfig *smithy.Schema
-
-var GetJobResponse_outputDataConfig *smithy.Schema
-
-var GetJobResponse_stoppingCondition *smithy.Schema
-
-var GetJobResponse_checkpointConfig *smithy.Schema
-
-var GetJobResponse_algorithmSpecification *smithy.Schema
-
-var GetJobResponse_instanceConfig *smithy.Schema
-
-var GetJobResponse_createdAt *smithy.Schema
-
-var GetJobResponse_startedAt *smithy.Schema
-
-var GetJobResponse_endedAt *smithy.Schema
-
-var GetJobResponse_billableDuration *smithy.Schema
-
-var GetJobResponse_deviceConfig *smithy.Schema
-
-var GetJobResponse_events *smithy.Schema
-
-var GetJobResponse_tags *smithy.Schema
-
-var GetJobResponse_queueInfo *smithy.Schema
-
-var GetJobResponse_associations *smithy.Schema
-
-var GetQuantumTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetQuantumTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetQuantumTaskRequest_quantumTaskArn *smithy.Schema
-
-var GetQuantumTaskRequest_additionalAttributeNames *smithy.Schema
-
-var GetQuantumTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "GetQuantumTaskResponse",
-}, smithy.ShapeTypeStructure, 17)
-var GetQuantumTaskResponse_quantumTaskArn *smithy.Schema
-
-var GetQuantumTaskResponse_status *smithy.Schema
-
-var GetQuantumTaskResponse_failureReason *smithy.Schema
-
-var GetQuantumTaskResponse_deviceArn *smithy.Schema
-
-var GetQuantumTaskResponse_deviceParameters *smithy.Schema
-
-var GetQuantumTaskResponse_shots *smithy.Schema
-
-var GetQuantumTaskResponse_outputS3Bucket *smithy.Schema
-
-var GetQuantumTaskResponse_outputS3Directory *smithy.Schema
-
-var GetQuantumTaskResponse_createdAt *smithy.Schema
-
-var GetQuantumTaskResponse_endedAt *smithy.Schema
-
-var GetQuantumTaskResponse_tags *smithy.Schema
-
-var GetQuantumTaskResponse_jobArn *smithy.Schema
-
-var GetQuantumTaskResponse_queueInfo *smithy.Schema
-
-var GetQuantumTaskResponse_associations *smithy.Schema
-
-var GetQuantumTaskResponse_numSuccessfulShots *smithy.Schema
-
-var GetQuantumTaskResponse_actionMetadata *smithy.Schema
-
-var GetQuantumTaskResponse_experimentalCapabilities *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var SearchDevicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchDevicesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SearchDevicesRequest_nextToken *smithy.Schema
-
-var SearchDevicesRequest_maxResults *smithy.Schema
-
-var SearchDevicesRequest_filters *smithy.Schema
-
-var SearchDevicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchDevicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchDevicesResponse_devices *smithy.Schema
-
-var SearchDevicesResponse_nextToken *smithy.Schema
-
-var SearchJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SearchJobsRequest_nextToken *smithy.Schema
-
-var SearchJobsRequest_maxResults *smithy.Schema
-
-var SearchJobsRequest_filters *smithy.Schema
-
-var SearchJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchJobsResponse_jobs *smithy.Schema
-
-var SearchJobsResponse_nextToken *smithy.Schema
-
-var SearchQuantumTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchQuantumTasksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SearchQuantumTasksRequest_nextToken *smithy.Schema
-
-var SearchQuantumTasksRequest_maxResults *smithy.Schema
-
-var SearchQuantumTasksRequest_filters *smithy.Schema
-
-var SearchQuantumTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchQuantumTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchQuantumTasksResponse_quantumTasks *smithy.Schema
-
-var SearchQuantumTasksResponse_nextToken *smithy.Schema
-
-var SearchSpendingLimitsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchSpendingLimitsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SearchSpendingLimitsRequest_nextToken *smithy.Schema
-
-var SearchSpendingLimitsRequest_maxResults *smithy.Schema
-
-var SearchSpendingLimitsRequest_filters *smithy.Schema
-
-var SearchSpendingLimitsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "SearchSpendingLimitsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchSpendingLimitsResponse_spendingLimits *smithy.Schema
-
-var SearchSpendingLimitsResponse_nextToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateSpendingLimitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "UpdateSpendingLimitRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSpendingLimitRequest_spendingLimitArn *smithy.Schema
-
-var UpdateSpendingLimitRequest_clientToken *smithy.Schema
-
-var UpdateSpendingLimitRequest_spendingLimit *smithy.Schema
-
-var UpdateSpendingLimitRequest_timePeriod *smithy.Schema
-
-var UpdateSpendingLimitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.braket",
-	Name:      "UpdateSpendingLimitResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	ActionMetadata_actionType = ActionMetadata.AddMember("actionType", smithyprelude.String)
-
-	ActionMetadata_programCount = ActionMetadata.AddMember("programCount", smithyprelude.Long)
-
-	ActionMetadata_executableCount = ActionMetadata.AddMember("executableCount", smithyprelude.Long)
-
-	ScriptModeConfig_entryPoint = ScriptModeConfig.AddMember("entryPoint", smithyprelude.String)
-
-	ScriptModeConfig_s3Uri = ScriptModeConfig.AddMember("s3Uri", _S3Path)
-
-	ScriptModeConfig_compressionType = ScriptModeConfig.AddMember("compressionType", _CompressionType)
-
-	ContainerImage_uri = ContainerImage.AddMember("uri", _Uri)
-
-	AlgorithmSpecification_scriptModeConfig = AlgorithmSpecification.AddMember("scriptModeConfig", ScriptModeConfig)
-
-	AlgorithmSpecification_containerImage = AlgorithmSpecification.AddMember("containerImage", ContainerImage)
-
-	Association_arn = Association.AddMember("arn", _BraketResourceArn)
-
-	Association_type = Association.AddMember("type", _AssociationType)
-
-	_Associations_member = _Associations.AddMember("member", Association)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	S3DataSource_s3Uri = S3DataSource.AddMember("s3Uri", _S3Path)
-
-	DataSource_s3DataSource = DataSource.AddMember("s3DataSource", S3DataSource)
-
-	DeviceConfig_device = DeviceConfig.AddMember("device", _String256)
-
-	DeviceOfflineException_message = DeviceOfflineException.AddMember("message", smithyprelude.String)
-
-	DeviceQueueInfo_queue = DeviceQueueInfo.AddMember("queue", _QueueName)
-
-	DeviceQueueInfo_queueSize = DeviceQueueInfo.AddMember("queueSize", smithyprelude.String)
-
-	DeviceQueueInfo_queuePriority = DeviceQueueInfo.AddMember("queuePriority", _QueuePriority)
-
-	_DeviceQueueInfoList_member = _DeviceQueueInfoList.AddMember("member", DeviceQueueInfo)
-
-	DeviceRetiredException_message = DeviceRetiredException.AddMember("message", smithyprelude.String)
-
-	DeviceSummary_deviceArn = DeviceSummary.AddMember("deviceArn", _DeviceArn)
-
-	DeviceSummary_deviceName = DeviceSummary.AddMember("deviceName", smithyprelude.String)
-
-	DeviceSummary_providerName = DeviceSummary.AddMember("providerName", smithyprelude.String)
-
-	DeviceSummary_deviceType = DeviceSummary.AddMember("deviceType", _DeviceType)
-
-	DeviceSummary_deviceStatus = DeviceSummary.AddMember("deviceStatus", _DeviceStatus)
-
-	_DeviceSummaryList_member = _DeviceSummaryList.AddMember("member", DeviceSummary)
-
-	ExperimentalCapabilities_enabled = ExperimentalCapabilities.AddMember("enabled", _ExperimentalCapabilitiesEnablementType)
-
-	_HybridJobAdditionalAttributeNamesList_member = _HybridJobAdditionalAttributeNamesList.AddMember("member", _HybridJobAdditionalAttributeName)
-
-	HybridJobQueueInfo_queue = HybridJobQueueInfo.AddMember("queue", _QueueName)
-
-	HybridJobQueueInfo_position = HybridJobQueueInfo.AddMember("position", smithyprelude.String)
-
-	HybridJobQueueInfo_message = HybridJobQueueInfo.AddMember("message", smithyprelude.String)
-
-	_HyperParameters_key = _HyperParameters.AddMember("key", _String256)
-
-	_HyperParameters_value = _HyperParameters.AddMember("value", smithyprelude.String)
-
-	InputFileConfig_channelName = InputFileConfig.AddMember("channelName", _String64)
-
-	InputFileConfig_contentType = InputFileConfig.AddMember("contentType", _String256)
-
-	InputFileConfig_dataSource = InputFileConfig.AddMember("dataSource", DataSource)
-
-	_InputConfigList_member = _InputConfigList.AddMember("member", InputFileConfig)
-
-	InstanceConfig_instanceType = InstanceConfig.AddMember("instanceType", _InstanceType)
-
-	InstanceConfig_volumeSizeInGb = InstanceConfig.AddMember("volumeSizeInGb", smithyprelude.Integer)
-
-	InstanceConfig_instanceCount = InstanceConfig.AddMember("instanceCount", smithyprelude.Integer)
-
-	InternalServiceException_message = InternalServiceException.AddMember("message", smithyprelude.String)
-
-	JobCheckpointConfig_localPath = JobCheckpointConfig.AddMember("localPath", _String4096)
-
-	JobCheckpointConfig_s3Uri = JobCheckpointConfig.AddMember("s3Uri", _S3Path)
-
-	JobEventDetails_eventType = JobEventDetails.AddMember("eventType", _JobEventType)
-
-	JobEventDetails_timeOfEvent = JobEventDetails.AddMember("timeOfEvent", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	JobEventDetails_message = JobEventDetails.AddMember("message", smithyprelude.String)
-
-	_JobEvents_member = _JobEvents.AddMember("member", JobEventDetails)
-
-	JobOutputDataConfig_kmsKeyId = JobOutputDataConfig.AddMember("kmsKeyId", _String2048)
-
-	JobOutputDataConfig_s3Path = JobOutputDataConfig.AddMember("s3Path", _S3Path)
-
-	JobStoppingCondition_maxRuntimeInSeconds = JobStoppingCondition.AddMember("maxRuntimeInSeconds", smithyprelude.Integer)
-
-	_TagsMap_key = _TagsMap.AddMember("key", smithyprelude.String)
-
-	_TagsMap_value = _TagsMap.AddMember("value", smithyprelude.String)
-
-	JobSummary_status = JobSummary.AddMember("status", _JobPrimaryStatus)
-
-	JobSummary_jobArn = JobSummary.AddMember("jobArn", _JobArn)
-
-	JobSummary_jobName = JobSummary.AddMember("jobName", smithyprelude.String)
-
-	JobSummary_device = JobSummary.AddMember("device", _String256)
-
-	JobSummary_createdAt = JobSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	JobSummary_startedAt = JobSummary.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	JobSummary_endedAt = JobSummary.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	JobSummary_tags = JobSummary.AddMember("tags", _TagsMap)
-
-	_JobSummaryList_member = _JobSummaryList.AddMember("member", JobSummary)
-
-	_ProgramValidationFailuresList_member = _ProgramValidationFailuresList.AddMember("member", smithyprelude.String)
-
-	ProgramSetValidationFailure_programIndex = ProgramSetValidationFailure.AddMember("programIndex", smithyprelude.Long)
-
-	ProgramSetValidationFailure_inputsIndex = ProgramSetValidationFailure.AddMember("inputsIndex", smithyprelude.Long)
-
-	ProgramSetValidationFailure_errors = ProgramSetValidationFailure.AddMember("errors", _ProgramValidationFailuresList)
-
-	_ProgramSetValidationFailuresList_member = _ProgramSetValidationFailuresList.AddMember("member", ProgramSetValidationFailure)
-
-	_QuantumTaskAdditionalAttributeNamesList_member = _QuantumTaskAdditionalAttributeNamesList.AddMember("member", _QuantumTaskAdditionalAttributeName)
-
-	QuantumTaskQueueInfo_queue = QuantumTaskQueueInfo.AddMember("queue", _QueueName)
-
-	QuantumTaskQueueInfo_position = QuantumTaskQueueInfo.AddMember("position", smithyprelude.String)
-
-	QuantumTaskQueueInfo_queuePriority = QuantumTaskQueueInfo.AddMember("queuePriority", _QueuePriority)
-
-	QuantumTaskQueueInfo_message = QuantumTaskQueueInfo.AddMember("message", smithyprelude.String)
-
-	QuantumTaskSummary_quantumTaskArn = QuantumTaskSummary.AddMember("quantumTaskArn", _QuantumTaskArn)
-
-	QuantumTaskSummary_status = QuantumTaskSummary.AddMember("status", _QuantumTaskStatus)
-
-	QuantumTaskSummary_deviceArn = QuantumTaskSummary.AddMember("deviceArn", _DeviceArn)
-
-	QuantumTaskSummary_shots = QuantumTaskSummary.AddMember("shots", smithyprelude.Long)
-
-	QuantumTaskSummary_outputS3Bucket = QuantumTaskSummary.AddMember("outputS3Bucket", smithyprelude.String)
-
-	QuantumTaskSummary_outputS3Directory = QuantumTaskSummary.AddMember("outputS3Directory", smithyprelude.String)
-
-	QuantumTaskSummary_createdAt = QuantumTaskSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	QuantumTaskSummary_endedAt = QuantumTaskSummary.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	QuantumTaskSummary_tags = QuantumTaskSummary.AddMember("tags", _TagsMap)
-
-	_QuantumTaskSummaryList_member = _QuantumTaskSummaryList.AddMember("member", QuantumTaskSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	_String256List_member = _String256List.AddMember("member", _String256)
-
-	SearchDevicesFilter_name = SearchDevicesFilter.AddMember("name", smithyprelude.String)
-
-	SearchDevicesFilter_values = SearchDevicesFilter.AddMember("values", _String256List)
-
-	_SearchDevicesFilterList_member = _SearchDevicesFilterList.AddMember("member", SearchDevicesFilter)
-
-	SearchJobsFilter_name = SearchJobsFilter.AddMember("name", _String64)
-
-	SearchJobsFilter_values = SearchJobsFilter.AddMember("values", _String256List)
-
-	SearchJobsFilter_operator = SearchJobsFilter.AddMember("operator", _SearchJobsFilterOperator)
-
-	_SearchJobsFilterList_member = _SearchJobsFilterList.AddMember("member", SearchJobsFilter)
-
-	SearchQuantumTasksFilter_name = SearchQuantumTasksFilter.AddMember("name", _String64)
-
-	SearchQuantumTasksFilter_values = SearchQuantumTasksFilter.AddMember("values", _String256List)
-
-	SearchQuantumTasksFilter_operator = SearchQuantumTasksFilter.AddMember("operator", _SearchQuantumTasksFilterOperator)
-
-	_SearchQuantumTasksFilterList_member = _SearchQuantumTasksFilterList.AddMember("member", SearchQuantumTasksFilter)
-
-	SearchSpendingLimitsFilter_name = SearchSpendingLimitsFilter.AddMember("name", _String64)
-
-	SearchSpendingLimitsFilter_values = SearchSpendingLimitsFilter.AddMember("values", _String256List)
-
-	SearchSpendingLimitsFilter_operator = SearchSpendingLimitsFilter.AddMember("operator", _SearchSpendingLimitsFilterOperator)
-
-	_SearchSpendingLimitsFilterList_member = _SearchSpendingLimitsFilterList.AddMember("member", SearchSpendingLimitsFilter)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	TimePeriod_startAt = TimePeriod.AddMember("startAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
-
-	TimePeriod_endAt = TimePeriod.AddMember("endAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
-
-	SpendingLimitSummary_spendingLimitArn = SpendingLimitSummary.AddMember("spendingLimitArn", _SpendingLimitArn)
-
-	SpendingLimitSummary_deviceArn = SpendingLimitSummary.AddMember("deviceArn", _DeviceArn)
-
-	SpendingLimitSummary_timePeriod = SpendingLimitSummary.AddMember("timePeriod", TimePeriod)
-
-	SpendingLimitSummary_spendingLimit = SpendingLimitSummary.AddMember("spendingLimit", smithyprelude.String)
-
-	SpendingLimitSummary_queuedSpend = SpendingLimitSummary.AddMember("queuedSpend", smithyprelude.String)
-
-	SpendingLimitSummary_totalSpend = SpendingLimitSummary.AddMember("totalSpend", smithyprelude.String)
-
-	SpendingLimitSummary_createdAt = SpendingLimitSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SpendingLimitSummary_updatedAt = SpendingLimitSummary.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SpendingLimitSummary_tags = SpendingLimitSummary.AddMember("tags", _TagsMap)
-
-	_SpendingLimitSummaryList_member = _SpendingLimitSummaryList.AddMember("member", SpendingLimitSummary)
-
-	_TagKeys_member = _TagKeys.AddMember("member", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_programSetValidationFailures = ValidationException.AddMember("programSetValidationFailures", _ProgramSetValidationFailuresList)
-
-	CancelJobRequest_jobArn = CancelJobRequest.AddMember("jobArn", _JobArn, &smithytraits.HTTPLabel{})
-
-	CancelJobResponse_jobArn = CancelJobResponse.AddMember("jobArn", _JobArn)
-
-	CancelJobResponse_cancellationStatus = CancelJobResponse.AddMember("cancellationStatus", _CancellationStatus)
-
-	CancelQuantumTaskRequest_quantumTaskArn = CancelQuantumTaskRequest.AddMember("quantumTaskArn", _QuantumTaskArn, &smithytraits.HTTPLabel{})
-
-	CancelQuantumTaskRequest_clientToken = CancelQuantumTaskRequest.AddMember("clientToken", _String64)
-
-	CancelQuantumTaskResponse_quantumTaskArn = CancelQuantumTaskResponse.AddMember("quantumTaskArn", _QuantumTaskArn)
-
-	CancelQuantumTaskResponse_cancellationStatus = CancelQuantumTaskResponse.AddMember("cancellationStatus", _CancellationStatus)
-
-	CreateJobRequest_clientToken = CreateJobRequest.AddMember("clientToken", _String64)
-
-	CreateJobRequest_algorithmSpecification = CreateJobRequest.AddMember("algorithmSpecification", AlgorithmSpecification)
-
-	CreateJobRequest_inputDataConfig = CreateJobRequest.AddMember("inputDataConfig", _InputConfigList)
-
-	CreateJobRequest_outputDataConfig = CreateJobRequest.AddMember("outputDataConfig", JobOutputDataConfig)
-
-	CreateJobRequest_checkpointConfig = CreateJobRequest.AddMember("checkpointConfig", JobCheckpointConfig)
-
-	CreateJobRequest_jobName = CreateJobRequest.AddMember("jobName", smithyprelude.String)
-
-	CreateJobRequest_roleArn = CreateJobRequest.AddMember("roleArn", _RoleArn)
-
-	CreateJobRequest_stoppingCondition = CreateJobRequest.AddMember("stoppingCondition", JobStoppingCondition)
-
-	CreateJobRequest_instanceConfig = CreateJobRequest.AddMember("instanceConfig", InstanceConfig)
-
-	CreateJobRequest_hyperParameters = CreateJobRequest.AddMember("hyperParameters", _HyperParameters)
-
-	CreateJobRequest_deviceConfig = CreateJobRequest.AddMember("deviceConfig", DeviceConfig)
-
-	CreateJobRequest_tags = CreateJobRequest.AddMember("tags", _TagsMap)
-
-	CreateJobRequest_associations = CreateJobRequest.AddMember("associations", _Associations)
-
-	CreateJobResponse_jobArn = CreateJobResponse.AddMember("jobArn", _JobArn)
-
-	CreateQuantumTaskRequest_clientToken = CreateQuantumTaskRequest.AddMember("clientToken", _String64)
-
-	CreateQuantumTaskRequest_deviceArn = CreateQuantumTaskRequest.AddMember("deviceArn", _DeviceArn)
-
-	CreateQuantumTaskRequest_deviceParameters = CreateQuantumTaskRequest.AddMember("deviceParameters", _JsonValue)
-
-	CreateQuantumTaskRequest_shots = CreateQuantumTaskRequest.AddMember("shots", smithyprelude.Long)
-
-	CreateQuantumTaskRequest_outputS3Bucket = CreateQuantumTaskRequest.AddMember("outputS3Bucket", smithyprelude.String)
-
-	CreateQuantumTaskRequest_outputS3KeyPrefix = CreateQuantumTaskRequest.AddMember("outputS3KeyPrefix", smithyprelude.String)
-
-	CreateQuantumTaskRequest_action = CreateQuantumTaskRequest.AddMember("action", _JsonValue)
-
-	CreateQuantumTaskRequest_tags = CreateQuantumTaskRequest.AddMember("tags", _TagsMap)
-
-	CreateQuantumTaskRequest_jobToken = CreateQuantumTaskRequest.AddMember("jobToken", _JobToken)
-
-	CreateQuantumTaskRequest_associations = CreateQuantumTaskRequest.AddMember("associations", _Associations)
-
-	CreateQuantumTaskRequest_experimentalCapabilities = CreateQuantumTaskRequest.AddMember("experimentalCapabilities", ExperimentalCapabilities)
-
-	CreateQuantumTaskResponse_quantumTaskArn = CreateQuantumTaskResponse.AddMember("quantumTaskArn", _QuantumTaskArn)
-
-	CreateSpendingLimitRequest_clientToken = CreateSpendingLimitRequest.AddMember("clientToken", _String64)
-
-	CreateSpendingLimitRequest_deviceArn = CreateSpendingLimitRequest.AddMember("deviceArn", _DeviceArn)
-
-	CreateSpendingLimitRequest_spendingLimit = CreateSpendingLimitRequest.AddMember("spendingLimit", smithyprelude.String)
-
-	CreateSpendingLimitRequest_timePeriod = CreateSpendingLimitRequest.AddMember("timePeriod", TimePeriod)
-
-	CreateSpendingLimitRequest_tags = CreateSpendingLimitRequest.AddMember("tags", _TagsMap)
-
-	CreateSpendingLimitResponse_spendingLimitArn = CreateSpendingLimitResponse.AddMember("spendingLimitArn", _SpendingLimitArn)
-
-	DeleteSpendingLimitRequest_spendingLimitArn = DeleteSpendingLimitRequest.AddMember("spendingLimitArn", _SpendingLimitArn, &smithytraits.HTTPLabel{})
-
-	GetDeviceRequest_deviceArn = GetDeviceRequest.AddMember("deviceArn", _DeviceArn, &smithytraits.HTTPLabel{})
-
-	GetDeviceResponse_deviceArn = GetDeviceResponse.AddMember("deviceArn", _DeviceArn)
-
-	GetDeviceResponse_deviceName = GetDeviceResponse.AddMember("deviceName", smithyprelude.String)
-
-	GetDeviceResponse_providerName = GetDeviceResponse.AddMember("providerName", smithyprelude.String)
-
-	GetDeviceResponse_deviceType = GetDeviceResponse.AddMember("deviceType", _DeviceType)
-
-	GetDeviceResponse_deviceStatus = GetDeviceResponse.AddMember("deviceStatus", _DeviceStatus)
-
-	GetDeviceResponse_deviceCapabilities = GetDeviceResponse.AddMember("deviceCapabilities", _JsonValue)
-
-	GetDeviceResponse_deviceQueueInfo = GetDeviceResponse.AddMember("deviceQueueInfo", _DeviceQueueInfoList)
-
-	GetJobRequest_jobArn = GetJobRequest.AddMember("jobArn", _JobArn, &smithytraits.HTTPLabel{})
-
-	GetJobRequest_additionalAttributeNames = GetJobRequest.AddMember("additionalAttributeNames", _HybridJobAdditionalAttributeNamesList, &smithytraits.HTTPQuery{Name: "additionalAttributeNames"})
-
-	GetJobResponse_status = GetJobResponse.AddMember("status", _JobPrimaryStatus)
-
-	GetJobResponse_jobArn = GetJobResponse.AddMember("jobArn", _JobArn)
-
-	GetJobResponse_roleArn = GetJobResponse.AddMember("roleArn", _RoleArn)
-
-	GetJobResponse_failureReason = GetJobResponse.AddMember("failureReason", _String1024)
-
-	GetJobResponse_jobName = GetJobResponse.AddMember("jobName", smithyprelude.String)
-
-	GetJobResponse_hyperParameters = GetJobResponse.AddMember("hyperParameters", _HyperParameters)
-
-	GetJobResponse_inputDataConfig = GetJobResponse.AddMember("inputDataConfig", _InputConfigList)
-
-	GetJobResponse_outputDataConfig = GetJobResponse.AddMember("outputDataConfig", JobOutputDataConfig)
-
-	GetJobResponse_stoppingCondition = GetJobResponse.AddMember("stoppingCondition", JobStoppingCondition)
-
-	GetJobResponse_checkpointConfig = GetJobResponse.AddMember("checkpointConfig", JobCheckpointConfig)
-
-	GetJobResponse_algorithmSpecification = GetJobResponse.AddMember("algorithmSpecification", AlgorithmSpecification)
-
-	GetJobResponse_instanceConfig = GetJobResponse.AddMember("instanceConfig", InstanceConfig)
-
-	GetJobResponse_createdAt = GetJobResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetJobResponse_startedAt = GetJobResponse.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetJobResponse_endedAt = GetJobResponse.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetJobResponse_billableDuration = GetJobResponse.AddMember("billableDuration", smithyprelude.Integer)
-
-	GetJobResponse_deviceConfig = GetJobResponse.AddMember("deviceConfig", DeviceConfig)
-
-	GetJobResponse_events = GetJobResponse.AddMember("events", _JobEvents)
-
-	GetJobResponse_tags = GetJobResponse.AddMember("tags", _TagsMap)
-
-	GetJobResponse_queueInfo = GetJobResponse.AddMember("queueInfo", HybridJobQueueInfo)
-
-	GetJobResponse_associations = GetJobResponse.AddMember("associations", _Associations)
-
-	GetQuantumTaskRequest_quantumTaskArn = GetQuantumTaskRequest.AddMember("quantumTaskArn", _QuantumTaskArn, &smithytraits.HTTPLabel{})
-
-	GetQuantumTaskRequest_additionalAttributeNames = GetQuantumTaskRequest.AddMember("additionalAttributeNames", _QuantumTaskAdditionalAttributeNamesList, &smithytraits.HTTPQuery{Name: "additionalAttributeNames"})
-
-	GetQuantumTaskResponse_quantumTaskArn = GetQuantumTaskResponse.AddMember("quantumTaskArn", _QuantumTaskArn)
-
-	GetQuantumTaskResponse_status = GetQuantumTaskResponse.AddMember("status", _QuantumTaskStatus)
-
-	GetQuantumTaskResponse_failureReason = GetQuantumTaskResponse.AddMember("failureReason", smithyprelude.String)
-
-	GetQuantumTaskResponse_deviceArn = GetQuantumTaskResponse.AddMember("deviceArn", _DeviceArn)
-
-	GetQuantumTaskResponse_deviceParameters = GetQuantumTaskResponse.AddMember("deviceParameters", _JsonValue)
-
-	GetQuantumTaskResponse_shots = GetQuantumTaskResponse.AddMember("shots", smithyprelude.Long)
-
-	GetQuantumTaskResponse_outputS3Bucket = GetQuantumTaskResponse.AddMember("outputS3Bucket", smithyprelude.String)
-
-	GetQuantumTaskResponse_outputS3Directory = GetQuantumTaskResponse.AddMember("outputS3Directory", smithyprelude.String)
-
-	GetQuantumTaskResponse_createdAt = GetQuantumTaskResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetQuantumTaskResponse_endedAt = GetQuantumTaskResponse.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetQuantumTaskResponse_tags = GetQuantumTaskResponse.AddMember("tags", _TagsMap)
-
-	GetQuantumTaskResponse_jobArn = GetQuantumTaskResponse.AddMember("jobArn", _JobArn)
-
-	GetQuantumTaskResponse_queueInfo = GetQuantumTaskResponse.AddMember("queueInfo", QuantumTaskQueueInfo)
-
-	GetQuantumTaskResponse_associations = GetQuantumTaskResponse.AddMember("associations", _Associations)
-
-	GetQuantumTaskResponse_numSuccessfulShots = GetQuantumTaskResponse.AddMember("numSuccessfulShots", smithyprelude.Long)
-
-	GetQuantumTaskResponse_actionMetadata = GetQuantumTaskResponse.AddMember("actionMetadata", ActionMetadata)
-
-	GetQuantumTaskResponse_experimentalCapabilities = GetQuantumTaskResponse.AddMember("experimentalCapabilities", ExperimentalCapabilities)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagsMap)
-
-	SearchDevicesRequest_nextToken = SearchDevicesRequest.AddMember("nextToken", smithyprelude.String)
-
-	SearchDevicesRequest_maxResults = SearchDevicesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchDevicesRequest_filters = SearchDevicesRequest.AddMember("filters", _SearchDevicesFilterList)
-
-	SearchDevicesResponse_devices = SearchDevicesResponse.AddMember("devices", _DeviceSummaryList)
-
-	SearchDevicesResponse_nextToken = SearchDevicesResponse.AddMember("nextToken", smithyprelude.String)
-
-	SearchJobsRequest_nextToken = SearchJobsRequest.AddMember("nextToken", smithyprelude.String)
-
-	SearchJobsRequest_maxResults = SearchJobsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchJobsRequest_filters = SearchJobsRequest.AddMember("filters", _SearchJobsFilterList)
-
-	SearchJobsResponse_jobs = SearchJobsResponse.AddMember("jobs", _JobSummaryList)
-
-	SearchJobsResponse_nextToken = SearchJobsResponse.AddMember("nextToken", smithyprelude.String)
-
-	SearchQuantumTasksRequest_nextToken = SearchQuantumTasksRequest.AddMember("nextToken", smithyprelude.String)
-
-	SearchQuantumTasksRequest_maxResults = SearchQuantumTasksRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchQuantumTasksRequest_filters = SearchQuantumTasksRequest.AddMember("filters", _SearchQuantumTasksFilterList)
-
-	SearchQuantumTasksResponse_quantumTasks = SearchQuantumTasksResponse.AddMember("quantumTasks", _QuantumTaskSummaryList)
-
-	SearchQuantumTasksResponse_nextToken = SearchQuantumTasksResponse.AddMember("nextToken", smithyprelude.String)
-
-	SearchSpendingLimitsRequest_nextToken = SearchSpendingLimitsRequest.AddMember("nextToken", smithyprelude.String)
-
-	SearchSpendingLimitsRequest_maxResults = SearchSpendingLimitsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchSpendingLimitsRequest_filters = SearchSpendingLimitsRequest.AddMember("filters", _SearchSpendingLimitsFilterList)
-
-	SearchSpendingLimitsResponse_spendingLimits = SearchSpendingLimitsResponse.AddMember("spendingLimits", _SpendingLimitSummaryList)
-
-	SearchSpendingLimitsResponse_nextToken = SearchSpendingLimitsResponse.AddMember("nextToken", smithyprelude.String)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagsMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateSpendingLimitRequest_spendingLimitArn = UpdateSpendingLimitRequest.AddMember("spendingLimitArn", _SpendingLimitArn, &smithytraits.HTTPLabel{})
-
-	UpdateSpendingLimitRequest_clientToken = UpdateSpendingLimitRequest.AddMember("clientToken", _String64)
-
-	UpdateSpendingLimitRequest_spendingLimit = UpdateSpendingLimitRequest.AddMember("spendingLimit", smithyprelude.String)
-
-	UpdateSpendingLimitRequest_timePeriod = UpdateSpendingLimitRequest.AddMember("timePeriod", TimePeriod)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 410}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}, DirectMask: 0x400}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "additionalAttributeNames"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mActionMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sActionMetadata_actionType, &sActionMetadata_programCount, &sActionMetadata_executableCount}}
+var mAlgorithmSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sAlgorithmSpecification_scriptModeConfig, &sAlgorithmSpecification_containerImage}}
+var mAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociation_arn, &sAssociation_type}}
+var m_Associations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Associations_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mContainerImage = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerImage_uri}}
+var mDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSource_s3DataSource}}
+var mDeviceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceConfig_device}}
+var mDeviceOfflineException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceOfflineException_message}}
+var mDeviceQueueInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceQueueInfo_queue, &sDeviceQueueInfo_queueSize, &sDeviceQueueInfo_queuePriority}}
+var m_DeviceQueueInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceQueueInfoList_member}}
+var mDeviceRetiredException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceRetiredException_message}}
+var mDeviceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceSummary_deviceArn, &sDeviceSummary_deviceName, &sDeviceSummary_providerName, &sDeviceSummary_deviceType, &sDeviceSummary_deviceStatus}}
+var m_DeviceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceSummaryList_member}}
+var mExperimentalCapabilities = smithy.SchemaMembers{List: []*smithy.Schema{&sExperimentalCapabilities_enabled}}
+var m_HybridJobAdditionalAttributeNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HybridJobAdditionalAttributeNamesList_member}}
+var mHybridJobQueueInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridJobQueueInfo_queue, &sHybridJobQueueInfo_position, &sHybridJobQueueInfo_message}}
+var m_HyperParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_HyperParameters_key, &s_HyperParameters_value}}
+var m_InputConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InputConfigList_member}}
+var mInputFileConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInputFileConfig_channelName, &sInputFileConfig_contentType, &sInputFileConfig_dataSource}}
+var mInstanceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceConfig_instanceType, &sInstanceConfig_volumeSizeInGb, &sInstanceConfig_instanceCount}}
+var mInternalServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceException_message}}
+var mJobCheckpointConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sJobCheckpointConfig_localPath, &sJobCheckpointConfig_s3Uri}}
+var mJobEventDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sJobEventDetails_eventType, &sJobEventDetails_timeOfEvent, &sJobEventDetails_message}}
+var m_JobEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobEvents_member}}
+var mJobOutputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sJobOutputDataConfig_kmsKeyId, &sJobOutputDataConfig_s3Path}}
+var mJobStoppingCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStoppingCondition_maxRuntimeInSeconds}}
+var mJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sJobSummary_status, &sJobSummary_jobArn, &sJobSummary_jobName, &sJobSummary_device, &sJobSummary_createdAt, &sJobSummary_startedAt, &sJobSummary_endedAt, &sJobSummary_tags}}
+var m_JobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobSummaryList_member}}
+var mProgramSetValidationFailure = smithy.SchemaMembers{List: []*smithy.Schema{&sProgramSetValidationFailure_programIndex, &sProgramSetValidationFailure_inputsIndex, &sProgramSetValidationFailure_errors}}
+var m_ProgramSetValidationFailuresList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProgramSetValidationFailuresList_member}}
+var m_ProgramValidationFailuresList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProgramValidationFailuresList_member}}
+var m_QuantumTaskAdditionalAttributeNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QuantumTaskAdditionalAttributeNamesList_member}}
+var mQuantumTaskQueueInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sQuantumTaskQueueInfo_queue, &sQuantumTaskQueueInfo_position, &sQuantumTaskQueueInfo_queuePriority, &sQuantumTaskQueueInfo_message}}
+var mQuantumTaskSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sQuantumTaskSummary_quantumTaskArn, &sQuantumTaskSummary_status, &sQuantumTaskSummary_deviceArn, &sQuantumTaskSummary_shots, &sQuantumTaskSummary_outputS3Bucket, &sQuantumTaskSummary_outputS3Directory, &sQuantumTaskSummary_createdAt, &sQuantumTaskSummary_endedAt, &sQuantumTaskSummary_tags}, Hash: &hQuantumTaskSummary}
+var m_QuantumTaskSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QuantumTaskSummaryList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3DataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DataSource_s3Uri}}
+var mScriptModeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sScriptModeConfig_entryPoint, &sScriptModeConfig_s3Uri, &sScriptModeConfig_compressionType}}
+var mSearchDevicesFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchDevicesFilter_name, &sSearchDevicesFilter_values}}
+var m_SearchDevicesFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchDevicesFilterList_member}}
+var mSearchJobsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchJobsFilter_name, &sSearchJobsFilter_values, &sSearchJobsFilter_operator}}
+var m_SearchJobsFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchJobsFilterList_member}}
+var mSearchQuantumTasksFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchQuantumTasksFilter_name, &sSearchQuantumTasksFilter_values, &sSearchQuantumTasksFilter_operator}}
+var m_SearchQuantumTasksFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchQuantumTasksFilterList_member}}
+var mSearchSpendingLimitsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSpendingLimitsFilter_name, &sSearchSpendingLimitsFilter_values, &sSearchSpendingLimitsFilter_operator}}
+var m_SearchSpendingLimitsFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchSpendingLimitsFilterList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSpendingLimitSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSpendingLimitSummary_spendingLimitArn, &sSpendingLimitSummary_deviceArn, &sSpendingLimitSummary_timePeriod, &sSpendingLimitSummary_spendingLimit, &sSpendingLimitSummary_queuedSpend, &sSpendingLimitSummary_totalSpend, &sSpendingLimitSummary_createdAt, &sSpendingLimitSummary_updatedAt, &sSpendingLimitSummary_tags}, Hash: &hSpendingLimitSummary}
+var m_SpendingLimitSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SpendingLimitSummaryList_member}}
+var m_String256List = smithy.SchemaMembers{List: []*smithy.Schema{&s_String256List_member}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagsMap_key, &s_TagsMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTimePeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sTimePeriod_startAt, &sTimePeriod_endAt}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_programSetValidationFailures}}
+var mCancelJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelJobRequest_jobArn}}
+var mCancelJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelJobResponse_jobArn, &sCancelJobResponse_cancellationStatus}}
+var mCancelQuantumTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelQuantumTaskRequest_quantumTaskArn, &sCancelQuantumTaskRequest_clientToken}}
+var mCancelQuantumTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelQuantumTaskResponse_quantumTaskArn, &sCancelQuantumTaskResponse_cancellationStatus}}
+var mCreateJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateJobRequest_clientToken, &sCreateJobRequest_algorithmSpecification, &sCreateJobRequest_inputDataConfig, &sCreateJobRequest_outputDataConfig, &sCreateJobRequest_checkpointConfig, &sCreateJobRequest_jobName, &sCreateJobRequest_roleArn, &sCreateJobRequest_stoppingCondition, &sCreateJobRequest_instanceConfig, &sCreateJobRequest_hyperParameters, &sCreateJobRequest_deviceConfig, &sCreateJobRequest_tags, &sCreateJobRequest_associations}, Hash: &hCreateJobRequest}
+var mCreateJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateJobResponse_jobArn}}
+var mCreateQuantumTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateQuantumTaskRequest_clientToken, &sCreateQuantumTaskRequest_deviceArn, &sCreateQuantumTaskRequest_deviceParameters, &sCreateQuantumTaskRequest_shots, &sCreateQuantumTaskRequest_outputS3Bucket, &sCreateQuantumTaskRequest_outputS3KeyPrefix, &sCreateQuantumTaskRequest_action, &sCreateQuantumTaskRequest_tags, &sCreateQuantumTaskRequest_jobToken, &sCreateQuantumTaskRequest_associations, &sCreateQuantumTaskRequest_experimentalCapabilities}, Hash: &hCreateQuantumTaskRequest}
+var mCreateQuantumTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateQuantumTaskResponse_quantumTaskArn}}
+var mCreateSpendingLimitRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSpendingLimitRequest_clientToken, &sCreateSpendingLimitRequest_deviceArn, &sCreateSpendingLimitRequest_spendingLimit, &sCreateSpendingLimitRequest_timePeriod, &sCreateSpendingLimitRequest_tags}}
+var mCreateSpendingLimitResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSpendingLimitResponse_spendingLimitArn}}
+var mDeleteSpendingLimitRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSpendingLimitRequest_spendingLimitArn}}
+var mGetDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeviceRequest_deviceArn}}
+var mGetDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeviceResponse_deviceArn, &sGetDeviceResponse_deviceName, &sGetDeviceResponse_providerName, &sGetDeviceResponse_deviceType, &sGetDeviceResponse_deviceStatus, &sGetDeviceResponse_deviceCapabilities, &sGetDeviceResponse_deviceQueueInfo}}
+var mGetJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobRequest_jobArn, &sGetJobRequest_additionalAttributeNames}}
+var mGetJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobResponse_status, &sGetJobResponse_jobArn, &sGetJobResponse_roleArn, &sGetJobResponse_failureReason, &sGetJobResponse_jobName, &sGetJobResponse_hyperParameters, &sGetJobResponse_inputDataConfig, &sGetJobResponse_outputDataConfig, &sGetJobResponse_stoppingCondition, &sGetJobResponse_checkpointConfig, &sGetJobResponse_algorithmSpecification, &sGetJobResponse_instanceConfig, &sGetJobResponse_createdAt, &sGetJobResponse_startedAt, &sGetJobResponse_endedAt, &sGetJobResponse_billableDuration, &sGetJobResponse_deviceConfig, &sGetJobResponse_events, &sGetJobResponse_tags, &sGetJobResponse_queueInfo, &sGetJobResponse_associations}, Hash: &hGetJobResponse}
+var mGetQuantumTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQuantumTaskRequest_quantumTaskArn, &sGetQuantumTaskRequest_additionalAttributeNames}}
+var mGetQuantumTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQuantumTaskResponse_quantumTaskArn, &sGetQuantumTaskResponse_status, &sGetQuantumTaskResponse_failureReason, &sGetQuantumTaskResponse_deviceArn, &sGetQuantumTaskResponse_deviceParameters, &sGetQuantumTaskResponse_shots, &sGetQuantumTaskResponse_outputS3Bucket, &sGetQuantumTaskResponse_outputS3Directory, &sGetQuantumTaskResponse_createdAt, &sGetQuantumTaskResponse_endedAt, &sGetQuantumTaskResponse_tags, &sGetQuantumTaskResponse_jobArn, &sGetQuantumTaskResponse_queueInfo, &sGetQuantumTaskResponse_associations, &sGetQuantumTaskResponse_numSuccessfulShots, &sGetQuantumTaskResponse_actionMetadata, &sGetQuantumTaskResponse_experimentalCapabilities}, Hash: &hGetQuantumTaskResponse}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mSearchDevicesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchDevicesRequest_nextToken, &sSearchDevicesRequest_maxResults, &sSearchDevicesRequest_filters}}
+var mSearchDevicesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchDevicesResponse_devices, &sSearchDevicesResponse_nextToken}}
+var mSearchJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchJobsRequest_nextToken, &sSearchJobsRequest_maxResults, &sSearchJobsRequest_filters}}
+var mSearchJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchJobsResponse_jobs, &sSearchJobsResponse_nextToken}}
+var mSearchQuantumTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchQuantumTasksRequest_nextToken, &sSearchQuantumTasksRequest_maxResults, &sSearchQuantumTasksRequest_filters}}
+var mSearchQuantumTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchQuantumTasksResponse_quantumTasks, &sSearchQuantumTasksResponse_nextToken}}
+var mSearchSpendingLimitsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSpendingLimitsRequest_nextToken, &sSearchSpendingLimitsRequest_maxResults, &sSearchSpendingLimitsRequest_filters}}
+var mSearchSpendingLimitsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSpendingLimitsResponse_spendingLimits, &sSearchSpendingLimitsResponse_nextToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateSpendingLimitRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSpendingLimitRequest_spendingLimitArn, &sUpdateSpendingLimitRequest_clientToken, &sUpdateSpendingLimitRequest_spendingLimit, &sUpdateSpendingLimitRequest_timePeriod}}
+
+var hQuantumTaskSummary = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 0, 0, 1, 2, 9, 5, 6, 0, 0, 0, 0, 0, 0, 0, 3, 7, 0, 0, 0, 0, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hSpendingLimitSummary = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 0, 0, 5, 0, 0, 0, 0, 0, 0, 2, 7, 0, 4, 0, 0, 0, 0, 0,
+	0, 0, 0, 6, 0, 8, 1, 3,
+}}
+var hCreateJobRequest = smithy.MemberHash{Seed: 43, Slots: []uint16{
+	0, 0, 4, 0, 9, 0, 8, 3, 0, 6, 0, 0, 10, 0, 0, 1, 11, 0, 2, 0, 0, 0, 0, 5,
+	0, 7, 13, 12, 0, 0, 0, 0,
+}}
+var hCreateQuantumTaskRequest = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	9, 0, 0, 0, 2, 0, 5, 0, 6, 0, 3, 4, 0, 8, 0, 1, 11, 0, 0, 0, 10, 7, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hGetJobResponse = smithy.MemberHash{Seed: 40, Slots: []uint16{
+	8, 12, 0, 0, 10, 14, 6, 21, 19, 0, 0, 0, 0, 0, 5, 0, 20, 0, 0, 0, 0, 0, 16, 3,
+	4, 0, 0, 0, 11, 0, 0, 0, 9, 0, 0, 18, 0, 0, 0, 0, 0, 0, 1, 7, 0, 0, 0, 0,
+	2, 0, 17, 0, 0, 13, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0,
+}}
+var hGetQuantumTaskResponse = smithy.MemberHash{Seed: 23, Slots: []uint16{
+	4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 5, 0, 0, 0, 0,
+	10, 0, 6, 0, 0, 0, 7, 15, 11, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 12, 14, 0,
+	0, 2, 13, 0, 9, 0, 3, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+}}
+
+var sCancelJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJob, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCancelJob})
+var sCancelQuantumTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelQuantumTask, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCancelQuantumTask})
+var sCreateJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJob, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateJob})
+var sCreateQuantumTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQuantumTask, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateQuantumTask})
+var sCreateSpendingLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSpendingLimit, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateSpendingLimit})
+var sDeleteSpendingLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpendingLimit, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSpendingLimit})
+var sGetDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDevice, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetDevice})
+var sGetJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJob, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetJob})
+var sGetQuantumTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuantumTask, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetQuantumTask})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sSearchDevices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDevices, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eSearchDevices})
+var sSearchJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchJobs, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eSearchJobs})
+var sSearchQuantumTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchQuantumTasks, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eSearchQuantumTasks})
+var sSearchSpendingLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSpendingLimits, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eSearchSpendingLimits})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateSpendingLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpendingLimit, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSpendingLimit})
+var s_Braket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Braket, Type: smithy.ShapeTypeService, Ext: &e_Braket})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sActionMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionMetadata, Members: &mActionMetadata, Type: smithy.ShapeTypeStructure, Ext: &eActionMetadata})
+var sActionMetadata_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eActionMetadata_actionType})
+var sActionMetadata_programCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programCount", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eActionMetadata_programCount})
+var sActionMetadata_executableCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executableCount", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eActionMetadata_executableCount})
+var sAlgorithmSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlgorithmSpecification, Members: &mAlgorithmSpecification, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpecification})
+var sAlgorithmSpecification_scriptModeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptModeConfig", ID: &iScriptModeConfig, Members: &mScriptModeConfig, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpecification_scriptModeConfig})
+var sAlgorithmSpecification_containerImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerImage", ID: &iContainerImage, Members: &mContainerImage, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpecification_containerImage})
+var sAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociation, Members: &mAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssociation})
+var sAssociation_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_BraketResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociation_arn})
+var sAssociation_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AssociationType, Type: smithy.ShapeTypeString, Ext: &eAssociation_type})
+var s_Associations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Associations, Members: &m_Associations, Type: smithy.ShapeTypeList, Ext: &e_Associations})
+var s_Associations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociation, Members: &mAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_Associations_member})
+var s_AssociationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationType, Type: smithy.ShapeTypeString, Ext: &e_AssociationType})
+var s_BraketResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BraketResourceArn, Type: smithy.ShapeTypeString, Ext: &e_BraketResourceArn})
+var s_CancellationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CancellationStatus, Type: smithy.ShapeTypeString, Ext: &e_CancellationStatus})
+var s_CompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompressionType, Type: smithy.ShapeTypeString, Ext: &e_CompressionType})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sContainerImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerImage, Members: &mContainerImage, Type: smithy.ShapeTypeStructure, Ext: &eContainerImage})
+var sContainerImage_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eContainerImage_uri})
+var sDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eDataSource})
+var sDataSource_s3DataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3DataSource", ID: &iS3DataSource, Members: &mS3DataSource, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_s3DataSource})
+var s_DeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &e_DeviceArn})
+var sDeviceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceConfig, Members: &mDeviceConfig, Type: smithy.ShapeTypeStructure, Ext: &eDeviceConfig})
+var sDeviceConfig_device = smithy.NewStaticSchema(smithy.StaticSchema{Member: "device", ID: &i_String256, Type: smithy.ShapeTypeString, Ext: &eDeviceConfig_device})
+var sDeviceOfflineException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceOfflineException, Members: &mDeviceOfflineException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eDeviceOfflineException})
+var sDeviceOfflineException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeviceOfflineException_message})
+var sDeviceQueueInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceQueueInfo, Members: &mDeviceQueueInfo, Type: smithy.ShapeTypeStructure, Ext: &eDeviceQueueInfo})
+var sDeviceQueueInfo_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &eDeviceQueueInfo_queue})
+var sDeviceQueueInfo_queueSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueSize", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeviceQueueInfo_queueSize})
+var sDeviceQueueInfo_queuePriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuePriority", ID: &i_QueuePriority, Type: smithy.ShapeTypeString, Ext: &eDeviceQueueInfo_queuePriority})
+var s_DeviceQueueInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceQueueInfoList, Members: &m_DeviceQueueInfoList, Type: smithy.ShapeTypeList, Ext: &e_DeviceQueueInfoList})
+var s_DeviceQueueInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeviceQueueInfo, Members: &mDeviceQueueInfo, Type: smithy.ShapeTypeStructure, Ext: &e_DeviceQueueInfoList_member})
+var sDeviceRetiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceRetiredException, Members: &mDeviceRetiredException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eDeviceRetiredException})
+var sDeviceRetiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeviceRetiredException_message})
+var s_DeviceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceStatus, Type: smithy.ShapeTypeString, Ext: &e_DeviceStatus})
+var sDeviceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceSummary, Members: &mDeviceSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeviceSummary})
+var sDeviceSummary_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_deviceArn})
+var sDeviceSummary_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_deviceName})
+var sDeviceSummary_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_providerName})
+var sDeviceSummary_deviceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceType", ID: &i_DeviceType, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_deviceType})
+var sDeviceSummary_deviceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceStatus", ID: &i_DeviceStatus, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_deviceStatus})
+var s_DeviceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceSummaryList, Members: &m_DeviceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DeviceSummaryList})
+var s_DeviceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeviceSummary, Members: &mDeviceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DeviceSummaryList_member})
+var s_DeviceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceType, Type: smithy.ShapeTypeString, Ext: &e_DeviceType})
+var sExperimentalCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentalCapabilities, Members: &mExperimentalCapabilities, Type: smithy.ShapeTypeUnion, Ext: &eExperimentalCapabilities})
+var sExperimentalCapabilities_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i_ExperimentalCapabilitiesEnablementType, Type: smithy.ShapeTypeString, Ext: &eExperimentalCapabilities_enabled})
+var s_ExperimentalCapabilitiesEnablementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentalCapabilitiesEnablementType, Type: smithy.ShapeTypeString, Ext: &e_ExperimentalCapabilitiesEnablementType})
+var s_HybridJobAdditionalAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HybridJobAdditionalAttributeName, Type: smithy.ShapeTypeString, Ext: &e_HybridJobAdditionalAttributeName})
+var s_HybridJobAdditionalAttributeNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HybridJobAdditionalAttributeNamesList, Members: &m_HybridJobAdditionalAttributeNamesList, Type: smithy.ShapeTypeList, Ext: &e_HybridJobAdditionalAttributeNamesList})
+var s_HybridJobAdditionalAttributeNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HybridJobAdditionalAttributeName, Type: smithy.ShapeTypeString, Ext: &e_HybridJobAdditionalAttributeNamesList_member})
+var sHybridJobQueueInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridJobQueueInfo, Members: &mHybridJobQueueInfo, Type: smithy.ShapeTypeStructure, Ext: &eHybridJobQueueInfo})
+var sHybridJobQueueInfo_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &eHybridJobQueueInfo_queue})
+var sHybridJobQueueInfo_position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "position", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHybridJobQueueInfo_position})
+var sHybridJobQueueInfo_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHybridJobQueueInfo_message})
+var s_HyperParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HyperParameters, Members: &m_HyperParameters, Type: smithy.ShapeTypeMap, Ext: &e_HyperParameters})
+var s_HyperParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String256, Type: smithy.ShapeTypeString, Ext: &e_HyperParameters_key})
+var s_HyperParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_HyperParameters_value})
+var s_InputConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputConfigList, Members: &m_InputConfigList, Type: smithy.ShapeTypeList, Ext: &e_InputConfigList})
+var s_InputConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInputFileConfig, Members: &mInputFileConfig, Type: smithy.ShapeTypeStructure, Ext: &e_InputConfigList_member})
+var sInputFileConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputFileConfig, Members: &mInputFileConfig, Type: smithy.ShapeTypeStructure, Ext: &eInputFileConfig})
+var sInputFileConfig_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eInputFileConfig_channelName})
+var sInputFileConfig_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_String256, Type: smithy.ShapeTypeString, Ext: &eInputFileConfig_contentType})
+var sInputFileConfig_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eInputFileConfig_dataSource})
+var sInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &eInstanceConfig})
+var sInstanceConfig_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eInstanceConfig_instanceType})
+var sInstanceConfig_volumeSizeInGb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeSizeInGb", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceConfig_volumeSizeInGb})
+var sInstanceConfig_instanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceConfig_instanceCount})
+var s_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &e_InstanceType})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceException})
+var sInternalServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServiceException_message})
+var s_JobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &e_JobArn})
+var sJobCheckpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobCheckpointConfig, Members: &mJobCheckpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eJobCheckpointConfig})
+var sJobCheckpointConfig_localPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localPath", ID: &i_String4096, Type: smithy.ShapeTypeString, Ext: &eJobCheckpointConfig_localPath})
+var sJobCheckpointConfig_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Path, Type: smithy.ShapeTypeString, Ext: &eJobCheckpointConfig_s3Uri})
+var sJobEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobEventDetails, Members: &mJobEventDetails, Type: smithy.ShapeTypeStructure, Ext: &eJobEventDetails})
+var sJobEventDetails_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_JobEventType, Type: smithy.ShapeTypeString, Ext: &eJobEventDetails_eventType})
+var sJobEventDetails_timeOfEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeOfEvent", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eJobEventDetails_timeOfEvent})
+var sJobEventDetails_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eJobEventDetails_message})
+var s_JobEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobEvents, Members: &m_JobEvents, Type: smithy.ShapeTypeList, Ext: &e_JobEvents})
+var s_JobEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobEventDetails, Members: &mJobEventDetails, Type: smithy.ShapeTypeStructure, Ext: &e_JobEvents_member})
+var s_JobEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobEventType, Type: smithy.ShapeTypeString, Ext: &e_JobEventType})
+var sJobOutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobOutputDataConfig, Members: &mJobOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eJobOutputDataConfig})
+var sJobOutputDataConfig_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &eJobOutputDataConfig_kmsKeyId})
+var sJobOutputDataConfig_s3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Path", ID: &i_S3Path, Type: smithy.ShapeTypeString, Ext: &eJobOutputDataConfig_s3Path})
+var s_JobPrimaryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobPrimaryStatus, Type: smithy.ShapeTypeString, Ext: &e_JobPrimaryStatus})
+var sJobStoppingCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStoppingCondition, Members: &mJobStoppingCondition, Type: smithy.ShapeTypeStructure, Ext: &eJobStoppingCondition})
+var sJobStoppingCondition_maxRuntimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRuntimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eJobStoppingCondition_maxRuntimeInSeconds})
+var sJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobSummary, Members: &mJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eJobSummary})
+var sJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_JobPrimaryStatus, Type: smithy.ShapeTypeString, Ext: &eJobSummary_status})
+var sJobSummary_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &eJobSummary_jobArn})
+var sJobSummary_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eJobSummary_jobName})
+var sJobSummary_device = smithy.NewStaticSchema(smithy.StaticSchema{Member: "device", ID: &i_String256, Type: smithy.ShapeTypeString, Ext: &eJobSummary_device})
+var sJobSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eJobSummary_createdAt})
+var sJobSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eJobSummary_startedAt})
+var sJobSummary_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eJobSummary_endedAt})
+var sJobSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eJobSummary_tags})
+var s_JobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobSummaryList, Members: &m_JobSummaryList, Type: smithy.ShapeTypeList, Ext: &e_JobSummaryList})
+var s_JobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobSummary, Members: &mJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_JobSummaryList_member})
+var s_JobToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobToken, Type: smithy.ShapeTypeString, Ext: &e_JobToken})
+var s_JsonValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonValue, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &e_JsonValue})
+var sProgramSetValidationFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramSetValidationFailure, Members: &mProgramSetValidationFailure, Type: smithy.ShapeTypeStructure, Ext: &eProgramSetValidationFailure})
+var sProgramSetValidationFailure_programIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programIndex", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eProgramSetValidationFailure_programIndex})
+var sProgramSetValidationFailure_inputsIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputsIndex", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eProgramSetValidationFailure_inputsIndex})
+var sProgramSetValidationFailure_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_ProgramValidationFailuresList, Members: &m_ProgramValidationFailuresList, Type: smithy.ShapeTypeList, Ext: &eProgramSetValidationFailure_errors})
+var s_ProgramSetValidationFailuresList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramSetValidationFailuresList, Members: &m_ProgramSetValidationFailuresList, Type: smithy.ShapeTypeList, Ext: &e_ProgramSetValidationFailuresList})
+var s_ProgramSetValidationFailuresList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgramSetValidationFailure, Members: &mProgramSetValidationFailure, Type: smithy.ShapeTypeStructure, Ext: &e_ProgramSetValidationFailuresList_member})
+var s_ProgramValidationFailuresList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramValidationFailuresList, Members: &m_ProgramValidationFailuresList, Type: smithy.ShapeTypeList, Ext: &e_ProgramValidationFailuresList})
+var s_ProgramValidationFailuresList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ProgramValidationFailuresList_member})
+var s_QuantumTaskAdditionalAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuantumTaskAdditionalAttributeName, Type: smithy.ShapeTypeString, Ext: &e_QuantumTaskAdditionalAttributeName})
+var s_QuantumTaskAdditionalAttributeNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuantumTaskAdditionalAttributeNamesList, Members: &m_QuantumTaskAdditionalAttributeNamesList, Type: smithy.ShapeTypeList, Ext: &e_QuantumTaskAdditionalAttributeNamesList})
+var s_QuantumTaskAdditionalAttributeNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QuantumTaskAdditionalAttributeName, Type: smithy.ShapeTypeString, Ext: &e_QuantumTaskAdditionalAttributeNamesList_member})
+var s_QuantumTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuantumTaskArn, Type: smithy.ShapeTypeString, Ext: &e_QuantumTaskArn})
+var sQuantumTaskQueueInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuantumTaskQueueInfo, Members: &mQuantumTaskQueueInfo, Type: smithy.ShapeTypeStructure, Ext: &eQuantumTaskQueueInfo})
+var sQuantumTaskQueueInfo_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskQueueInfo_queue})
+var sQuantumTaskQueueInfo_position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "position", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskQueueInfo_position})
+var sQuantumTaskQueueInfo_queuePriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuePriority", ID: &i_QueuePriority, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskQueueInfo_queuePriority})
+var sQuantumTaskQueueInfo_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskQueueInfo_message})
+var s_QuantumTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuantumTaskStatus, Type: smithy.ShapeTypeString, Ext: &e_QuantumTaskStatus})
+var sQuantumTaskSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuantumTaskSummary, Members: &mQuantumTaskSummary, Type: smithy.ShapeTypeStructure, Ext: &eQuantumTaskSummary})
+var sQuantumTaskSummary_quantumTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantumTaskArn", ID: &i_QuantumTaskArn, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskSummary_quantumTaskArn})
+var sQuantumTaskSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_QuantumTaskStatus, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskSummary_status})
+var sQuantumTaskSummary_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskSummary_deviceArn})
+var sQuantumTaskSummary_shots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shots", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eQuantumTaskSummary_shots})
+var sQuantumTaskSummary_outputS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Bucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskSummary_outputS3Bucket})
+var sQuantumTaskSummary_outputS3Directory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Directory", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQuantumTaskSummary_outputS3Directory})
+var sQuantumTaskSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eQuantumTaskSummary_createdAt})
+var sQuantumTaskSummary_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eQuantumTaskSummary_endedAt})
+var sQuantumTaskSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eQuantumTaskSummary_tags})
+var s_QuantumTaskSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuantumTaskSummaryList, Members: &m_QuantumTaskSummaryList, Type: smithy.ShapeTypeList, Ext: &e_QuantumTaskSummaryList})
+var s_QuantumTaskSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuantumTaskSummary, Members: &mQuantumTaskSummary, Type: smithy.ShapeTypeStructure, Ext: &e_QuantumTaskSummaryList_member})
+var s_QueueName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &e_QueueName})
+var s_QueuePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueuePriority, Type: smithy.ShapeTypeString, Ext: &e_QueuePriority})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sS3DataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DataSource, Members: &mS3DataSource, Type: smithy.ShapeTypeStructure, Ext: &eS3DataSource})
+var sS3DataSource_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Path, Type: smithy.ShapeTypeString, Ext: &eS3DataSource_s3Uri})
+var s_S3Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Path, Type: smithy.ShapeTypeString, Ext: &e_S3Path})
+var sScriptModeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScriptModeConfig, Members: &mScriptModeConfig, Type: smithy.ShapeTypeStructure, Ext: &eScriptModeConfig})
+var sScriptModeConfig_entryPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entryPoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScriptModeConfig_entryPoint})
+var sScriptModeConfig_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Path, Type: smithy.ShapeTypeString, Ext: &eScriptModeConfig_s3Uri})
+var sScriptModeConfig_compressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compressionType", ID: &i_CompressionType, Type: smithy.ShapeTypeString, Ext: &eScriptModeConfig_compressionType})
+var sSearchDevicesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDevicesFilter, Members: &mSearchDevicesFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchDevicesFilter})
+var sSearchDevicesFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchDevicesFilter_name})
+var sSearchDevicesFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_String256List, Members: &m_String256List, Type: smithy.ShapeTypeList, Ext: &eSearchDevicesFilter_values})
+var s_SearchDevicesFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchDevicesFilterList, Members: &m_SearchDevicesFilterList, Type: smithy.ShapeTypeList, Ext: &e_SearchDevicesFilterList})
+var s_SearchDevicesFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchDevicesFilter, Members: &mSearchDevicesFilter, Type: smithy.ShapeTypeStructure, Ext: &e_SearchDevicesFilterList_member})
+var sSearchJobsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchJobsFilter, Members: &mSearchJobsFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchJobsFilter})
+var sSearchJobsFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eSearchJobsFilter_name})
+var sSearchJobsFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_String256List, Members: &m_String256List, Type: smithy.ShapeTypeList, Ext: &eSearchJobsFilter_values})
+var sSearchJobsFilter_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &i_SearchJobsFilterOperator, Type: smithy.ShapeTypeString, Ext: &eSearchJobsFilter_operator})
+var s_SearchJobsFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchJobsFilterList, Members: &m_SearchJobsFilterList, Type: smithy.ShapeTypeList, Ext: &e_SearchJobsFilterList})
+var s_SearchJobsFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchJobsFilter, Members: &mSearchJobsFilter, Type: smithy.ShapeTypeStructure, Ext: &e_SearchJobsFilterList_member})
+var s_SearchJobsFilterOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchJobsFilterOperator, Type: smithy.ShapeTypeString, Ext: &e_SearchJobsFilterOperator})
+var sSearchQuantumTasksFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchQuantumTasksFilter, Members: &mSearchQuantumTasksFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchQuantumTasksFilter})
+var sSearchQuantumTasksFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eSearchQuantumTasksFilter_name})
+var sSearchQuantumTasksFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_String256List, Members: &m_String256List, Type: smithy.ShapeTypeList, Ext: &eSearchQuantumTasksFilter_values})
+var sSearchQuantumTasksFilter_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &i_SearchQuantumTasksFilterOperator, Type: smithy.ShapeTypeString, Ext: &eSearchQuantumTasksFilter_operator})
+var s_SearchQuantumTasksFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuantumTasksFilterList, Members: &m_SearchQuantumTasksFilterList, Type: smithy.ShapeTypeList, Ext: &e_SearchQuantumTasksFilterList})
+var s_SearchQuantumTasksFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchQuantumTasksFilter, Members: &mSearchQuantumTasksFilter, Type: smithy.ShapeTypeStructure, Ext: &e_SearchQuantumTasksFilterList_member})
+var s_SearchQuantumTasksFilterOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuantumTasksFilterOperator, Type: smithy.ShapeTypeString, Ext: &e_SearchQuantumTasksFilterOperator})
+var sSearchSpendingLimitsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSpendingLimitsFilter, Members: &mSearchSpendingLimitsFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchSpendingLimitsFilter})
+var sSearchSpendingLimitsFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eSearchSpendingLimitsFilter_name})
+var sSearchSpendingLimitsFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_String256List, Members: &m_String256List, Type: smithy.ShapeTypeList, Ext: &eSearchSpendingLimitsFilter_values})
+var sSearchSpendingLimitsFilter_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &i_SearchSpendingLimitsFilterOperator, Type: smithy.ShapeTypeString, Ext: &eSearchSpendingLimitsFilter_operator})
+var s_SearchSpendingLimitsFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchSpendingLimitsFilterList, Members: &m_SearchSpendingLimitsFilterList, Type: smithy.ShapeTypeList, Ext: &e_SearchSpendingLimitsFilterList})
+var s_SearchSpendingLimitsFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchSpendingLimitsFilter, Members: &mSearchSpendingLimitsFilter, Type: smithy.ShapeTypeStructure, Ext: &e_SearchSpendingLimitsFilterList_member})
+var s_SearchSpendingLimitsFilterOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchSpendingLimitsFilterOperator, Type: smithy.ShapeTypeString, Ext: &e_SearchSpendingLimitsFilterOperator})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var s_SpendingLimitArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpendingLimitArn, Type: smithy.ShapeTypeString, Ext: &e_SpendingLimitArn})
+var sSpendingLimitSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpendingLimitSummary, Members: &mSpendingLimitSummary, Type: smithy.ShapeTypeStructure, Ext: &eSpendingLimitSummary})
+var sSpendingLimitSummary_spendingLimitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimitArn", ID: &i_SpendingLimitArn, Type: smithy.ShapeTypeString, Ext: &eSpendingLimitSummary_spendingLimitArn})
+var sSpendingLimitSummary_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &eSpendingLimitSummary_deviceArn})
+var sSpendingLimitSummary_timePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eSpendingLimitSummary_timePeriod})
+var sSpendingLimitSummary_spendingLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimit", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSpendingLimitSummary_spendingLimit})
+var sSpendingLimitSummary_queuedSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedSpend", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSpendingLimitSummary_queuedSpend})
+var sSpendingLimitSummary_totalSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalSpend", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSpendingLimitSummary_totalSpend})
+var sSpendingLimitSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eSpendingLimitSummary_createdAt})
+var sSpendingLimitSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eSpendingLimitSummary_updatedAt})
+var sSpendingLimitSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eSpendingLimitSummary_tags})
+var s_SpendingLimitSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpendingLimitSummaryList, Members: &m_SpendingLimitSummaryList, Type: smithy.ShapeTypeList, Ext: &e_SpendingLimitSummaryList})
+var s_SpendingLimitSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpendingLimitSummary, Members: &mSpendingLimitSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SpendingLimitSummaryList_member})
+var s_String1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String1024, Type: smithy.ShapeTypeString, Ext: &e_String1024})
+var s_String2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &e_String2048})
+var s_String256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String256, Type: smithy.ShapeTypeString, Ext: &e_String256})
+var s_String256List = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String256List, Members: &m_String256List, Type: smithy.ShapeTypeList, Ext: &e_String256List})
+var s_String256List_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String256, Type: smithy.ShapeTypeString, Ext: &e_String256List_member})
+var s_String4096 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String4096, Type: smithy.ShapeTypeString, Ext: &e_String4096})
+var s_String64 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &e_String64})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &e_TagsMap})
+var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_key})
+var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_value})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sTimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eTimePeriod})
+var sTimePeriod_startAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAt", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eTimePeriod_startAt})
+var sTimePeriod_endAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endAt", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eTimePeriod_endAt})
+var s_Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &e_Uri})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &eValidationException_reason})
+var sValidationException_programSetValidationFailures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programSetValidationFailures", ID: &i_ProgramSetValidationFailuresList, Members: &m_ProgramSetValidationFailuresList, Type: smithy.ShapeTypeList, Ext: &eValidationException_programSetValidationFailures})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionReason})
+var sCancelJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobRequest, Members: &mCancelJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelJobRequest})
+var sCancelJobRequest_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCancelJobRequest_jobArn})
+var sCancelJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobResponse, Members: &mCancelJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelJobResponse})
+var sCancelJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &eCancelJobResponse_jobArn})
+var sCancelJobResponse_cancellationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancellationStatus", ID: &i_CancellationStatus, Type: smithy.ShapeTypeString, Ext: &eCancelJobResponse_cancellationStatus})
+var sCancelQuantumTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelQuantumTaskRequest, Members: &mCancelQuantumTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelQuantumTaskRequest})
+var sCancelQuantumTaskRequest_quantumTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantumTaskArn", ID: &i_QuantumTaskArn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCancelQuantumTaskRequest_quantumTaskArn})
+var sCancelQuantumTaskRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eCancelQuantumTaskRequest_clientToken})
+var sCancelQuantumTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelQuantumTaskResponse, Members: &mCancelQuantumTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelQuantumTaskResponse})
+var sCancelQuantumTaskResponse_quantumTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantumTaskArn", ID: &i_QuantumTaskArn, Type: smithy.ShapeTypeString, Ext: &eCancelQuantumTaskResponse_quantumTaskArn})
+var sCancelQuantumTaskResponse_cancellationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancellationStatus", ID: &i_CancellationStatus, Type: smithy.ShapeTypeString, Ext: &eCancelQuantumTaskResponse_cancellationStatus})
+var sCreateJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJobRequest, Members: &mCreateJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest})
+var sCreateJobRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_clientToken})
+var sCreateJobRequest_algorithmSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "algorithmSpecification", ID: &iAlgorithmSpecification, Members: &mAlgorithmSpecification, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_algorithmSpecification})
+var sCreateJobRequest_inputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputDataConfig", ID: &i_InputConfigList, Members: &m_InputConfigList, Type: smithy.ShapeTypeList, Ext: &eCreateJobRequest_inputDataConfig})
+var sCreateJobRequest_outputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputDataConfig", ID: &iJobOutputDataConfig, Members: &mJobOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_outputDataConfig})
+var sCreateJobRequest_checkpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkpointConfig", ID: &iJobCheckpointConfig, Members: &mJobCheckpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_checkpointConfig})
+var sCreateJobRequest_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_jobName})
+var sCreateJobRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_roleArn})
+var sCreateJobRequest_stoppingCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppingCondition", ID: &iJobStoppingCondition, Members: &mJobStoppingCondition, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_stoppingCondition})
+var sCreateJobRequest_instanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceConfig", ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_instanceConfig})
+var sCreateJobRequest_hyperParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hyperParameters", ID: &i_HyperParameters, Members: &m_HyperParameters, Type: smithy.ShapeTypeMap, Ext: &eCreateJobRequest_hyperParameters})
+var sCreateJobRequest_deviceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceConfig", ID: &iDeviceConfig, Members: &mDeviceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_deviceConfig})
+var sCreateJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateJobRequest_tags})
+var sCreateJobRequest_associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associations", ID: &i_Associations, Members: &m_Associations, Type: smithy.ShapeTypeList, Ext: &eCreateJobRequest_associations})
+var sCreateJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJobResponse, Members: &mCreateJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobResponse})
+var sCreateJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &eCreateJobResponse_jobArn})
+var sCreateQuantumTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQuantumTaskRequest, Members: &mCreateQuantumTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateQuantumTaskRequest})
+var sCreateQuantumTaskRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskRequest_clientToken})
+var sCreateQuantumTaskRequest_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskRequest_deviceArn})
+var sCreateQuantumTaskRequest_deviceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceParameters", ID: &i_JsonValue, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskRequest_deviceParameters})
+var sCreateQuantumTaskRequest_shots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shots", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eCreateQuantumTaskRequest_shots})
+var sCreateQuantumTaskRequest_outputS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Bucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskRequest_outputS3Bucket})
+var sCreateQuantumTaskRequest_outputS3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3KeyPrefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskRequest_outputS3KeyPrefix})
+var sCreateQuantumTaskRequest_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_JsonValue, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskRequest_action})
+var sCreateQuantumTaskRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateQuantumTaskRequest_tags})
+var sCreateQuantumTaskRequest_jobToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobToken", ID: &i_JobToken, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskRequest_jobToken})
+var sCreateQuantumTaskRequest_associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associations", ID: &i_Associations, Members: &m_Associations, Type: smithy.ShapeTypeList, Ext: &eCreateQuantumTaskRequest_associations})
+var sCreateQuantumTaskRequest_experimentalCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentalCapabilities", ID: &iExperimentalCapabilities, Members: &mExperimentalCapabilities, Type: smithy.ShapeTypeUnion, Ext: &eCreateQuantumTaskRequest_experimentalCapabilities})
+var sCreateQuantumTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQuantumTaskResponse, Members: &mCreateQuantumTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateQuantumTaskResponse})
+var sCreateQuantumTaskResponse_quantumTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantumTaskArn", ID: &i_QuantumTaskArn, Type: smithy.ShapeTypeString, Ext: &eCreateQuantumTaskResponse_quantumTaskArn})
+var sCreateSpendingLimitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSpendingLimitRequest, Members: &mCreateSpendingLimitRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSpendingLimitRequest})
+var sCreateSpendingLimitRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eCreateSpendingLimitRequest_clientToken})
+var sCreateSpendingLimitRequest_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &eCreateSpendingLimitRequest_deviceArn})
+var sCreateSpendingLimitRequest_spendingLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimit", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateSpendingLimitRequest_spendingLimit})
+var sCreateSpendingLimitRequest_timePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eCreateSpendingLimitRequest_timePeriod})
+var sCreateSpendingLimitRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateSpendingLimitRequest_tags})
+var sCreateSpendingLimitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSpendingLimitResponse, Members: &mCreateSpendingLimitResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSpendingLimitResponse})
+var sCreateSpendingLimitResponse_spendingLimitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimitArn", ID: &i_SpendingLimitArn, Type: smithy.ShapeTypeString, Ext: &eCreateSpendingLimitResponse_spendingLimitArn})
+var sDeleteSpendingLimitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpendingLimitRequest, Members: &mDeleteSpendingLimitRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSpendingLimitRequest})
+var sDeleteSpendingLimitRequest_spendingLimitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimitArn", ID: &i_SpendingLimitArn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeleteSpendingLimitRequest_spendingLimitArn})
+var sDeleteSpendingLimitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpendingLimitResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSpendingLimitResponse})
+var sGetDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeviceRequest, Members: &mGetDeviceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDeviceRequest})
+var sGetDeviceRequest_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetDeviceRequest_deviceArn})
+var sGetDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeviceResponse, Members: &mGetDeviceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDeviceResponse})
+var sGetDeviceResponse_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &eGetDeviceResponse_deviceArn})
+var sGetDeviceResponse_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetDeviceResponse_deviceName})
+var sGetDeviceResponse_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetDeviceResponse_providerName})
+var sGetDeviceResponse_deviceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceType", ID: &i_DeviceType, Type: smithy.ShapeTypeString, Ext: &eGetDeviceResponse_deviceType})
+var sGetDeviceResponse_deviceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceStatus", ID: &i_DeviceStatus, Type: smithy.ShapeTypeString, Ext: &eGetDeviceResponse_deviceStatus})
+var sGetDeviceResponse_deviceCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceCapabilities", ID: &i_JsonValue, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetDeviceResponse_deviceCapabilities})
+var sGetDeviceResponse_deviceQueueInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceQueueInfo", ID: &i_DeviceQueueInfoList, Members: &m_DeviceQueueInfoList, Type: smithy.ShapeTypeList, Ext: &eGetDeviceResponse_deviceQueueInfo})
+var sGetJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobRequest, Members: &mGetJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetJobRequest})
+var sGetJobRequest_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetJobRequest_jobArn})
+var sGetJobRequest_additionalAttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalAttributeNames", ID: &i_HybridJobAdditionalAttributeNamesList, Members: &m_HybridJobAdditionalAttributeNamesList, Traits: &t31, Type: smithy.ShapeTypeList, Ext: &eGetJobRequest_additionalAttributeNames})
+var sGetJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobResponse, Members: &mGetJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse})
+var sGetJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_JobPrimaryStatus, Type: smithy.ShapeTypeString, Ext: &eGetJobResponse_status})
+var sGetJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &eGetJobResponse_jobArn})
+var sGetJobResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetJobResponse_roleArn})
+var sGetJobResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_String1024, Type: smithy.ShapeTypeString, Ext: &eGetJobResponse_failureReason})
+var sGetJobResponse_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetJobResponse_jobName})
+var sGetJobResponse_hyperParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hyperParameters", ID: &i_HyperParameters, Members: &m_HyperParameters, Type: smithy.ShapeTypeMap, Ext: &eGetJobResponse_hyperParameters})
+var sGetJobResponse_inputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputDataConfig", ID: &i_InputConfigList, Members: &m_InputConfigList, Type: smithy.ShapeTypeList, Ext: &eGetJobResponse_inputDataConfig})
+var sGetJobResponse_outputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputDataConfig", ID: &iJobOutputDataConfig, Members: &mJobOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse_outputDataConfig})
+var sGetJobResponse_stoppingCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppingCondition", ID: &iJobStoppingCondition, Members: &mJobStoppingCondition, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse_stoppingCondition})
+var sGetJobResponse_checkpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkpointConfig", ID: &iJobCheckpointConfig, Members: &mJobCheckpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse_checkpointConfig})
+var sGetJobResponse_algorithmSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "algorithmSpecification", ID: &iAlgorithmSpecification, Members: &mAlgorithmSpecification, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse_algorithmSpecification})
+var sGetJobResponse_instanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceConfig", ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse_instanceConfig})
+var sGetJobResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eGetJobResponse_createdAt})
+var sGetJobResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eGetJobResponse_startedAt})
+var sGetJobResponse_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eGetJobResponse_endedAt})
+var sGetJobResponse_billableDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billableDuration", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetJobResponse_billableDuration})
+var sGetJobResponse_deviceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceConfig", ID: &iDeviceConfig, Members: &mDeviceConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse_deviceConfig})
+var sGetJobResponse_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_JobEvents, Members: &m_JobEvents, Type: smithy.ShapeTypeList, Ext: &eGetJobResponse_events})
+var sGetJobResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eGetJobResponse_tags})
+var sGetJobResponse_queueInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueInfo", ID: &iHybridJobQueueInfo, Members: &mHybridJobQueueInfo, Type: smithy.ShapeTypeStructure, Ext: &eGetJobResponse_queueInfo})
+var sGetJobResponse_associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associations", ID: &i_Associations, Members: &m_Associations, Type: smithy.ShapeTypeList, Ext: &eGetJobResponse_associations})
+var sGetQuantumTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuantumTaskRequest, Members: &mGetQuantumTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetQuantumTaskRequest})
+var sGetQuantumTaskRequest_quantumTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantumTaskArn", ID: &i_QuantumTaskArn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskRequest_quantumTaskArn})
+var sGetQuantumTaskRequest_additionalAttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalAttributeNames", ID: &i_QuantumTaskAdditionalAttributeNamesList, Members: &m_QuantumTaskAdditionalAttributeNamesList, Traits: &t31, Type: smithy.ShapeTypeList, Ext: &eGetQuantumTaskRequest_additionalAttributeNames})
+var sGetQuantumTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuantumTaskResponse, Members: &mGetQuantumTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetQuantumTaskResponse})
+var sGetQuantumTaskResponse_quantumTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantumTaskArn", ID: &i_QuantumTaskArn, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_quantumTaskArn})
+var sGetQuantumTaskResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_QuantumTaskStatus, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_status})
+var sGetQuantumTaskResponse_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_failureReason})
+var sGetQuantumTaskResponse_deviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_deviceArn})
+var sGetQuantumTaskResponse_deviceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceParameters", ID: &i_JsonValue, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_deviceParameters})
+var sGetQuantumTaskResponse_shots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shots", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetQuantumTaskResponse_shots})
+var sGetQuantumTaskResponse_outputS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Bucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_outputS3Bucket})
+var sGetQuantumTaskResponse_outputS3Directory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Directory", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_outputS3Directory})
+var sGetQuantumTaskResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eGetQuantumTaskResponse_createdAt})
+var sGetQuantumTaskResponse_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &pTimestamp, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &eGetQuantumTaskResponse_endedAt})
+var sGetQuantumTaskResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eGetQuantumTaskResponse_tags})
+var sGetQuantumTaskResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_JobArn, Type: smithy.ShapeTypeString, Ext: &eGetQuantumTaskResponse_jobArn})
+var sGetQuantumTaskResponse_queueInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueInfo", ID: &iQuantumTaskQueueInfo, Members: &mQuantumTaskQueueInfo, Type: smithy.ShapeTypeStructure, Ext: &eGetQuantumTaskResponse_queueInfo})
+var sGetQuantumTaskResponse_associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associations", ID: &i_Associations, Members: &m_Associations, Type: smithy.ShapeTypeList, Ext: &eGetQuantumTaskResponse_associations})
+var sGetQuantumTaskResponse_numSuccessfulShots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numSuccessfulShots", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetQuantumTaskResponse_numSuccessfulShots})
+var sGetQuantumTaskResponse_actionMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionMetadata", ID: &iActionMetadata, Members: &mActionMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetQuantumTaskResponse_actionMetadata})
+var sGetQuantumTaskResponse_experimentalCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentalCapabilities", ID: &iExperimentalCapabilities, Members: &mExperimentalCapabilities, Type: smithy.ShapeTypeUnion, Ext: &eGetQuantumTaskResponse_experimentalCapabilities})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sSearchDevicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDevicesRequest, Members: &mSearchDevicesRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchDevicesRequest})
+var sSearchDevicesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchDevicesRequest_nextToken})
+var sSearchDevicesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchDevicesRequest_maxResults})
+var sSearchDevicesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SearchDevicesFilterList, Members: &m_SearchDevicesFilterList, Type: smithy.ShapeTypeList, Ext: &eSearchDevicesRequest_filters})
+var sSearchDevicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDevicesResponse, Members: &mSearchDevicesResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchDevicesResponse})
+var sSearchDevicesResponse_devices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "devices", ID: &i_DeviceSummaryList, Members: &m_DeviceSummaryList, Type: smithy.ShapeTypeList, Ext: &eSearchDevicesResponse_devices})
+var sSearchDevicesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchDevicesResponse_nextToken})
+var sSearchJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchJobsRequest, Members: &mSearchJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchJobsRequest})
+var sSearchJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchJobsRequest_nextToken})
+var sSearchJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchJobsRequest_maxResults})
+var sSearchJobsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SearchJobsFilterList, Members: &m_SearchJobsFilterList, Type: smithy.ShapeTypeList, Ext: &eSearchJobsRequest_filters})
+var sSearchJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchJobsResponse, Members: &mSearchJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchJobsResponse})
+var sSearchJobsResponse_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_JobSummaryList, Members: &m_JobSummaryList, Type: smithy.ShapeTypeList, Ext: &eSearchJobsResponse_jobs})
+var sSearchJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchJobsResponse_nextToken})
+var sSearchQuantumTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchQuantumTasksRequest, Members: &mSearchQuantumTasksRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchQuantumTasksRequest})
+var sSearchQuantumTasksRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchQuantumTasksRequest_nextToken})
+var sSearchQuantumTasksRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchQuantumTasksRequest_maxResults})
+var sSearchQuantumTasksRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SearchQuantumTasksFilterList, Members: &m_SearchQuantumTasksFilterList, Type: smithy.ShapeTypeList, Ext: &eSearchQuantumTasksRequest_filters})
+var sSearchQuantumTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchQuantumTasksResponse, Members: &mSearchQuantumTasksResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchQuantumTasksResponse})
+var sSearchQuantumTasksResponse_quantumTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantumTasks", ID: &i_QuantumTaskSummaryList, Members: &m_QuantumTaskSummaryList, Type: smithy.ShapeTypeList, Ext: &eSearchQuantumTasksResponse_quantumTasks})
+var sSearchQuantumTasksResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchQuantumTasksResponse_nextToken})
+var sSearchSpendingLimitsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSpendingLimitsRequest, Members: &mSearchSpendingLimitsRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchSpendingLimitsRequest})
+var sSearchSpendingLimitsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchSpendingLimitsRequest_nextToken})
+var sSearchSpendingLimitsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchSpendingLimitsRequest_maxResults})
+var sSearchSpendingLimitsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SearchSpendingLimitsFilterList, Members: &m_SearchSpendingLimitsFilterList, Type: smithy.ShapeTypeList, Ext: &eSearchSpendingLimitsRequest_filters})
+var sSearchSpendingLimitsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSpendingLimitsResponse, Members: &mSearchSpendingLimitsResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchSpendingLimitsResponse})
+var sSearchSpendingLimitsResponse_spendingLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimits", ID: &i_SpendingLimitSummaryList, Members: &m_SpendingLimitSummaryList, Type: smithy.ShapeTypeList, Ext: &eSearchSpendingLimitsResponse_spendingLimits})
+var sSearchSpendingLimitsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSearchSpendingLimitsResponse_nextToken})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateSpendingLimitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpendingLimitRequest, Members: &mUpdateSpendingLimitRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSpendingLimitRequest})
+var sUpdateSpendingLimitRequest_spendingLimitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimitArn", ID: &i_SpendingLimitArn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateSpendingLimitRequest_spendingLimitArn})
+var sUpdateSpendingLimitRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eUpdateSpendingLimitRequest_clientToken})
+var sUpdateSpendingLimitRequest_spendingLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spendingLimit", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateSpendingLimitRequest_spendingLimit})
+var sUpdateSpendingLimitRequest_timePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSpendingLimitRequest_timePeriod})
+var sUpdateSpendingLimitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpendingLimitResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSpendingLimitResponse})
+
+var CancelJob = &sCancelJob
+
+var CancelQuantumTask = &sCancelQuantumTask
+
+var CreateJob = &sCreateJob
+
+var CreateQuantumTask = &sCreateQuantumTask
+
+var CreateSpendingLimit = &sCreateSpendingLimit
+
+var DeleteSpendingLimit = &sDeleteSpendingLimit
+
+var GetDevice = &sGetDevice
+
+var GetJob = &sGetJob
+
+var GetQuantumTask = &sGetQuantumTask
+
+var ListTagsForResource = &sListTagsForResource
+
+var SearchDevices = &sSearchDevices
+
+var SearchJobs = &sSearchJobs
+
+var SearchQuantumTasks = &sSearchQuantumTasks
+
+var SearchSpendingLimits = &sSearchSpendingLimits
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateSpendingLimit = &sUpdateSpendingLimit
+
+var _Braket = &s_Braket
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var ActionMetadata = &sActionMetadata
+var ActionMetadata_actionType = &sActionMetadata_actionType
+var ActionMetadata_programCount = &sActionMetadata_programCount
+var ActionMetadata_executableCount = &sActionMetadata_executableCount
+
+var AlgorithmSpecification = &sAlgorithmSpecification
+var AlgorithmSpecification_scriptModeConfig = &sAlgorithmSpecification_scriptModeConfig
+var AlgorithmSpecification_containerImage = &sAlgorithmSpecification_containerImage
+
+var Association = &sAssociation
+var Association_arn = &sAssociation_arn
+var Association_type = &sAssociation_type
+
+var _Associations = &s_Associations
+var _Associations_member = &s_Associations_member
+
+var _AssociationType = &s_AssociationType
+
+var _BraketResourceArn = &s_BraketResourceArn
+
+var _CancellationStatus = &s_CancellationStatus
+
+var _CompressionType = &s_CompressionType
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ContainerImage = &sContainerImage
+var ContainerImage_uri = &sContainerImage_uri
+
+var DataSource = &sDataSource
+var DataSource_s3DataSource = &sDataSource_s3DataSource
+
+var _DeviceArn = &s_DeviceArn
+
+var DeviceConfig = &sDeviceConfig
+var DeviceConfig_device = &sDeviceConfig_device
+
+var DeviceOfflineException = &sDeviceOfflineException
+var DeviceOfflineException_message = &sDeviceOfflineException_message
+
+var DeviceQueueInfo = &sDeviceQueueInfo
+var DeviceQueueInfo_queue = &sDeviceQueueInfo_queue
+var DeviceQueueInfo_queueSize = &sDeviceQueueInfo_queueSize
+var DeviceQueueInfo_queuePriority = &sDeviceQueueInfo_queuePriority
+
+var _DeviceQueueInfoList = &s_DeviceQueueInfoList
+var _DeviceQueueInfoList_member = &s_DeviceQueueInfoList_member
+
+var DeviceRetiredException = &sDeviceRetiredException
+var DeviceRetiredException_message = &sDeviceRetiredException_message
+
+var _DeviceStatus = &s_DeviceStatus
+
+var DeviceSummary = &sDeviceSummary
+var DeviceSummary_deviceArn = &sDeviceSummary_deviceArn
+var DeviceSummary_deviceName = &sDeviceSummary_deviceName
+var DeviceSummary_providerName = &sDeviceSummary_providerName
+var DeviceSummary_deviceType = &sDeviceSummary_deviceType
+var DeviceSummary_deviceStatus = &sDeviceSummary_deviceStatus
+
+var _DeviceSummaryList = &s_DeviceSummaryList
+var _DeviceSummaryList_member = &s_DeviceSummaryList_member
+
+var _DeviceType = &s_DeviceType
+
+var ExperimentalCapabilities = &sExperimentalCapabilities
+var ExperimentalCapabilities_enabled = &sExperimentalCapabilities_enabled
+
+var _ExperimentalCapabilitiesEnablementType = &s_ExperimentalCapabilitiesEnablementType
+
+var _HybridJobAdditionalAttributeName = &s_HybridJobAdditionalAttributeName
+
+var _HybridJobAdditionalAttributeNamesList = &s_HybridJobAdditionalAttributeNamesList
+var _HybridJobAdditionalAttributeNamesList_member = &s_HybridJobAdditionalAttributeNamesList_member
+
+var HybridJobQueueInfo = &sHybridJobQueueInfo
+var HybridJobQueueInfo_queue = &sHybridJobQueueInfo_queue
+var HybridJobQueueInfo_position = &sHybridJobQueueInfo_position
+var HybridJobQueueInfo_message = &sHybridJobQueueInfo_message
+
+var _HyperParameters = &s_HyperParameters
+var _HyperParameters_key = &s_HyperParameters_key
+var _HyperParameters_value = &s_HyperParameters_value
+
+var _InputConfigList = &s_InputConfigList
+var _InputConfigList_member = &s_InputConfigList_member
+
+var InputFileConfig = &sInputFileConfig
+var InputFileConfig_channelName = &sInputFileConfig_channelName
+var InputFileConfig_contentType = &sInputFileConfig_contentType
+var InputFileConfig_dataSource = &sInputFileConfig_dataSource
+
+var InstanceConfig = &sInstanceConfig
+var InstanceConfig_instanceType = &sInstanceConfig_instanceType
+var InstanceConfig_volumeSizeInGb = &sInstanceConfig_volumeSizeInGb
+var InstanceConfig_instanceCount = &sInstanceConfig_instanceCount
+
+var _InstanceType = &s_InstanceType
+
+var InternalServiceException = &sInternalServiceException
+var InternalServiceException_message = &sInternalServiceException_message
+
+var _JobArn = &s_JobArn
+
+var JobCheckpointConfig = &sJobCheckpointConfig
+var JobCheckpointConfig_localPath = &sJobCheckpointConfig_localPath
+var JobCheckpointConfig_s3Uri = &sJobCheckpointConfig_s3Uri
+
+var JobEventDetails = &sJobEventDetails
+var JobEventDetails_eventType = &sJobEventDetails_eventType
+var JobEventDetails_timeOfEvent = &sJobEventDetails_timeOfEvent
+var JobEventDetails_message = &sJobEventDetails_message
+
+var _JobEvents = &s_JobEvents
+var _JobEvents_member = &s_JobEvents_member
+
+var _JobEventType = &s_JobEventType
+
+var JobOutputDataConfig = &sJobOutputDataConfig
+var JobOutputDataConfig_kmsKeyId = &sJobOutputDataConfig_kmsKeyId
+var JobOutputDataConfig_s3Path = &sJobOutputDataConfig_s3Path
+
+var _JobPrimaryStatus = &s_JobPrimaryStatus
+
+var JobStoppingCondition = &sJobStoppingCondition
+var JobStoppingCondition_maxRuntimeInSeconds = &sJobStoppingCondition_maxRuntimeInSeconds
+
+var JobSummary = &sJobSummary
+var JobSummary_status = &sJobSummary_status
+var JobSummary_jobArn = &sJobSummary_jobArn
+var JobSummary_jobName = &sJobSummary_jobName
+var JobSummary_device = &sJobSummary_device
+var JobSummary_createdAt = &sJobSummary_createdAt
+var JobSummary_startedAt = &sJobSummary_startedAt
+var JobSummary_endedAt = &sJobSummary_endedAt
+var JobSummary_tags = &sJobSummary_tags
+
+var _JobSummaryList = &s_JobSummaryList
+var _JobSummaryList_member = &s_JobSummaryList_member
+
+var _JobToken = &s_JobToken
+
+var _JsonValue = &s_JsonValue
+
+var ProgramSetValidationFailure = &sProgramSetValidationFailure
+var ProgramSetValidationFailure_programIndex = &sProgramSetValidationFailure_programIndex
+var ProgramSetValidationFailure_inputsIndex = &sProgramSetValidationFailure_inputsIndex
+var ProgramSetValidationFailure_errors = &sProgramSetValidationFailure_errors
+
+var _ProgramSetValidationFailuresList = &s_ProgramSetValidationFailuresList
+var _ProgramSetValidationFailuresList_member = &s_ProgramSetValidationFailuresList_member
+
+var _ProgramValidationFailuresList = &s_ProgramValidationFailuresList
+var _ProgramValidationFailuresList_member = &s_ProgramValidationFailuresList_member
+
+var _QuantumTaskAdditionalAttributeName = &s_QuantumTaskAdditionalAttributeName
+
+var _QuantumTaskAdditionalAttributeNamesList = &s_QuantumTaskAdditionalAttributeNamesList
+var _QuantumTaskAdditionalAttributeNamesList_member = &s_QuantumTaskAdditionalAttributeNamesList_member
+
+var _QuantumTaskArn = &s_QuantumTaskArn
+
+var QuantumTaskQueueInfo = &sQuantumTaskQueueInfo
+var QuantumTaskQueueInfo_queue = &sQuantumTaskQueueInfo_queue
+var QuantumTaskQueueInfo_position = &sQuantumTaskQueueInfo_position
+var QuantumTaskQueueInfo_queuePriority = &sQuantumTaskQueueInfo_queuePriority
+var QuantumTaskQueueInfo_message = &sQuantumTaskQueueInfo_message
+
+var _QuantumTaskStatus = &s_QuantumTaskStatus
+
+var QuantumTaskSummary = &sQuantumTaskSummary
+var QuantumTaskSummary_quantumTaskArn = &sQuantumTaskSummary_quantumTaskArn
+var QuantumTaskSummary_status = &sQuantumTaskSummary_status
+var QuantumTaskSummary_deviceArn = &sQuantumTaskSummary_deviceArn
+var QuantumTaskSummary_shots = &sQuantumTaskSummary_shots
+var QuantumTaskSummary_outputS3Bucket = &sQuantumTaskSummary_outputS3Bucket
+var QuantumTaskSummary_outputS3Directory = &sQuantumTaskSummary_outputS3Directory
+var QuantumTaskSummary_createdAt = &sQuantumTaskSummary_createdAt
+var QuantumTaskSummary_endedAt = &sQuantumTaskSummary_endedAt
+var QuantumTaskSummary_tags = &sQuantumTaskSummary_tags
+
+var _QuantumTaskSummaryList = &s_QuantumTaskSummaryList
+var _QuantumTaskSummaryList_member = &s_QuantumTaskSummaryList_member
+
+var _QueueName = &s_QueueName
+
+var _QueuePriority = &s_QueuePriority
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var S3DataSource = &sS3DataSource
+var S3DataSource_s3Uri = &sS3DataSource_s3Uri
+
+var _S3Path = &s_S3Path
+
+var ScriptModeConfig = &sScriptModeConfig
+var ScriptModeConfig_entryPoint = &sScriptModeConfig_entryPoint
+var ScriptModeConfig_s3Uri = &sScriptModeConfig_s3Uri
+var ScriptModeConfig_compressionType = &sScriptModeConfig_compressionType
+
+var SearchDevicesFilter = &sSearchDevicesFilter
+var SearchDevicesFilter_name = &sSearchDevicesFilter_name
+var SearchDevicesFilter_values = &sSearchDevicesFilter_values
+
+var _SearchDevicesFilterList = &s_SearchDevicesFilterList
+var _SearchDevicesFilterList_member = &s_SearchDevicesFilterList_member
+
+var SearchJobsFilter = &sSearchJobsFilter
+var SearchJobsFilter_name = &sSearchJobsFilter_name
+var SearchJobsFilter_values = &sSearchJobsFilter_values
+var SearchJobsFilter_operator = &sSearchJobsFilter_operator
+
+var _SearchJobsFilterList = &s_SearchJobsFilterList
+var _SearchJobsFilterList_member = &s_SearchJobsFilterList_member
+
+var _SearchJobsFilterOperator = &s_SearchJobsFilterOperator
+
+var SearchQuantumTasksFilter = &sSearchQuantumTasksFilter
+var SearchQuantumTasksFilter_name = &sSearchQuantumTasksFilter_name
+var SearchQuantumTasksFilter_values = &sSearchQuantumTasksFilter_values
+var SearchQuantumTasksFilter_operator = &sSearchQuantumTasksFilter_operator
+
+var _SearchQuantumTasksFilterList = &s_SearchQuantumTasksFilterList
+var _SearchQuantumTasksFilterList_member = &s_SearchQuantumTasksFilterList_member
+
+var _SearchQuantumTasksFilterOperator = &s_SearchQuantumTasksFilterOperator
+
+var SearchSpendingLimitsFilter = &sSearchSpendingLimitsFilter
+var SearchSpendingLimitsFilter_name = &sSearchSpendingLimitsFilter_name
+var SearchSpendingLimitsFilter_values = &sSearchSpendingLimitsFilter_values
+var SearchSpendingLimitsFilter_operator = &sSearchSpendingLimitsFilter_operator
+
+var _SearchSpendingLimitsFilterList = &s_SearchSpendingLimitsFilterList
+var _SearchSpendingLimitsFilterList_member = &s_SearchSpendingLimitsFilterList_member
+
+var _SearchSpendingLimitsFilterOperator = &s_SearchSpendingLimitsFilterOperator
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _SpendingLimitArn = &s_SpendingLimitArn
+
+var SpendingLimitSummary = &sSpendingLimitSummary
+var SpendingLimitSummary_spendingLimitArn = &sSpendingLimitSummary_spendingLimitArn
+var SpendingLimitSummary_deviceArn = &sSpendingLimitSummary_deviceArn
+var SpendingLimitSummary_timePeriod = &sSpendingLimitSummary_timePeriod
+var SpendingLimitSummary_spendingLimit = &sSpendingLimitSummary_spendingLimit
+var SpendingLimitSummary_queuedSpend = &sSpendingLimitSummary_queuedSpend
+var SpendingLimitSummary_totalSpend = &sSpendingLimitSummary_totalSpend
+var SpendingLimitSummary_createdAt = &sSpendingLimitSummary_createdAt
+var SpendingLimitSummary_updatedAt = &sSpendingLimitSummary_updatedAt
+var SpendingLimitSummary_tags = &sSpendingLimitSummary_tags
+
+var _SpendingLimitSummaryList = &s_SpendingLimitSummaryList
+var _SpendingLimitSummaryList_member = &s_SpendingLimitSummaryList_member
+
+var _String1024 = &s_String1024
+
+var _String2048 = &s_String2048
+
+var _String256 = &s_String256
+
+var _String256List = &s_String256List
+var _String256List_member = &s_String256List_member
+
+var _String4096 = &s_String4096
+
+var _String64 = &s_String64
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagsMap = &s_TagsMap
+var _TagsMap_key = &s_TagsMap_key
+var _TagsMap_value = &s_TagsMap_value
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var TimePeriod = &sTimePeriod
+var TimePeriod_startAt = &sTimePeriod_startAt
+var TimePeriod_endAt = &sTimePeriod_endAt
+
+var _Uri = &s_Uri
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_programSetValidationFailures = &sValidationException_programSetValidationFailures
+
+var _ValidationExceptionReason = &s_ValidationExceptionReason
+
+var CancelJobRequest = &sCancelJobRequest
+var CancelJobRequest_jobArn = &sCancelJobRequest_jobArn
+
+var CancelJobResponse = &sCancelJobResponse
+var CancelJobResponse_jobArn = &sCancelJobResponse_jobArn
+var CancelJobResponse_cancellationStatus = &sCancelJobResponse_cancellationStatus
+
+var CancelQuantumTaskRequest = &sCancelQuantumTaskRequest
+var CancelQuantumTaskRequest_quantumTaskArn = &sCancelQuantumTaskRequest_quantumTaskArn
+var CancelQuantumTaskRequest_clientToken = &sCancelQuantumTaskRequest_clientToken
+
+var CancelQuantumTaskResponse = &sCancelQuantumTaskResponse
+var CancelQuantumTaskResponse_quantumTaskArn = &sCancelQuantumTaskResponse_quantumTaskArn
+var CancelQuantumTaskResponse_cancellationStatus = &sCancelQuantumTaskResponse_cancellationStatus
+
+var CreateJobRequest = &sCreateJobRequest
+var CreateJobRequest_clientToken = &sCreateJobRequest_clientToken
+var CreateJobRequest_algorithmSpecification = &sCreateJobRequest_algorithmSpecification
+var CreateJobRequest_inputDataConfig = &sCreateJobRequest_inputDataConfig
+var CreateJobRequest_outputDataConfig = &sCreateJobRequest_outputDataConfig
+var CreateJobRequest_checkpointConfig = &sCreateJobRequest_checkpointConfig
+var CreateJobRequest_jobName = &sCreateJobRequest_jobName
+var CreateJobRequest_roleArn = &sCreateJobRequest_roleArn
+var CreateJobRequest_stoppingCondition = &sCreateJobRequest_stoppingCondition
+var CreateJobRequest_instanceConfig = &sCreateJobRequest_instanceConfig
+var CreateJobRequest_hyperParameters = &sCreateJobRequest_hyperParameters
+var CreateJobRequest_deviceConfig = &sCreateJobRequest_deviceConfig
+var CreateJobRequest_tags = &sCreateJobRequest_tags
+var CreateJobRequest_associations = &sCreateJobRequest_associations
+
+var CreateJobResponse = &sCreateJobResponse
+var CreateJobResponse_jobArn = &sCreateJobResponse_jobArn
+
+var CreateQuantumTaskRequest = &sCreateQuantumTaskRequest
+var CreateQuantumTaskRequest_clientToken = &sCreateQuantumTaskRequest_clientToken
+var CreateQuantumTaskRequest_deviceArn = &sCreateQuantumTaskRequest_deviceArn
+var CreateQuantumTaskRequest_deviceParameters = &sCreateQuantumTaskRequest_deviceParameters
+var CreateQuantumTaskRequest_shots = &sCreateQuantumTaskRequest_shots
+var CreateQuantumTaskRequest_outputS3Bucket = &sCreateQuantumTaskRequest_outputS3Bucket
+var CreateQuantumTaskRequest_outputS3KeyPrefix = &sCreateQuantumTaskRequest_outputS3KeyPrefix
+var CreateQuantumTaskRequest_action = &sCreateQuantumTaskRequest_action
+var CreateQuantumTaskRequest_tags = &sCreateQuantumTaskRequest_tags
+var CreateQuantumTaskRequest_jobToken = &sCreateQuantumTaskRequest_jobToken
+var CreateQuantumTaskRequest_associations = &sCreateQuantumTaskRequest_associations
+var CreateQuantumTaskRequest_experimentalCapabilities = &sCreateQuantumTaskRequest_experimentalCapabilities
+
+var CreateQuantumTaskResponse = &sCreateQuantumTaskResponse
+var CreateQuantumTaskResponse_quantumTaskArn = &sCreateQuantumTaskResponse_quantumTaskArn
+
+var CreateSpendingLimitRequest = &sCreateSpendingLimitRequest
+var CreateSpendingLimitRequest_clientToken = &sCreateSpendingLimitRequest_clientToken
+var CreateSpendingLimitRequest_deviceArn = &sCreateSpendingLimitRequest_deviceArn
+var CreateSpendingLimitRequest_spendingLimit = &sCreateSpendingLimitRequest_spendingLimit
+var CreateSpendingLimitRequest_timePeriod = &sCreateSpendingLimitRequest_timePeriod
+var CreateSpendingLimitRequest_tags = &sCreateSpendingLimitRequest_tags
+
+var CreateSpendingLimitResponse = &sCreateSpendingLimitResponse
+var CreateSpendingLimitResponse_spendingLimitArn = &sCreateSpendingLimitResponse_spendingLimitArn
+
+var DeleteSpendingLimitRequest = &sDeleteSpendingLimitRequest
+var DeleteSpendingLimitRequest_spendingLimitArn = &sDeleteSpendingLimitRequest_spendingLimitArn
+
+var DeleteSpendingLimitResponse = &sDeleteSpendingLimitResponse
+
+var GetDeviceRequest = &sGetDeviceRequest
+var GetDeviceRequest_deviceArn = &sGetDeviceRequest_deviceArn
+
+var GetDeviceResponse = &sGetDeviceResponse
+var GetDeviceResponse_deviceArn = &sGetDeviceResponse_deviceArn
+var GetDeviceResponse_deviceName = &sGetDeviceResponse_deviceName
+var GetDeviceResponse_providerName = &sGetDeviceResponse_providerName
+var GetDeviceResponse_deviceType = &sGetDeviceResponse_deviceType
+var GetDeviceResponse_deviceStatus = &sGetDeviceResponse_deviceStatus
+var GetDeviceResponse_deviceCapabilities = &sGetDeviceResponse_deviceCapabilities
+var GetDeviceResponse_deviceQueueInfo = &sGetDeviceResponse_deviceQueueInfo
+
+var GetJobRequest = &sGetJobRequest
+var GetJobRequest_jobArn = &sGetJobRequest_jobArn
+var GetJobRequest_additionalAttributeNames = &sGetJobRequest_additionalAttributeNames
+
+var GetJobResponse = &sGetJobResponse
+var GetJobResponse_status = &sGetJobResponse_status
+var GetJobResponse_jobArn = &sGetJobResponse_jobArn
+var GetJobResponse_roleArn = &sGetJobResponse_roleArn
+var GetJobResponse_failureReason = &sGetJobResponse_failureReason
+var GetJobResponse_jobName = &sGetJobResponse_jobName
+var GetJobResponse_hyperParameters = &sGetJobResponse_hyperParameters
+var GetJobResponse_inputDataConfig = &sGetJobResponse_inputDataConfig
+var GetJobResponse_outputDataConfig = &sGetJobResponse_outputDataConfig
+var GetJobResponse_stoppingCondition = &sGetJobResponse_stoppingCondition
+var GetJobResponse_checkpointConfig = &sGetJobResponse_checkpointConfig
+var GetJobResponse_algorithmSpecification = &sGetJobResponse_algorithmSpecification
+var GetJobResponse_instanceConfig = &sGetJobResponse_instanceConfig
+var GetJobResponse_createdAt = &sGetJobResponse_createdAt
+var GetJobResponse_startedAt = &sGetJobResponse_startedAt
+var GetJobResponse_endedAt = &sGetJobResponse_endedAt
+var GetJobResponse_billableDuration = &sGetJobResponse_billableDuration
+var GetJobResponse_deviceConfig = &sGetJobResponse_deviceConfig
+var GetJobResponse_events = &sGetJobResponse_events
+var GetJobResponse_tags = &sGetJobResponse_tags
+var GetJobResponse_queueInfo = &sGetJobResponse_queueInfo
+var GetJobResponse_associations = &sGetJobResponse_associations
+
+var GetQuantumTaskRequest = &sGetQuantumTaskRequest
+var GetQuantumTaskRequest_quantumTaskArn = &sGetQuantumTaskRequest_quantumTaskArn
+var GetQuantumTaskRequest_additionalAttributeNames = &sGetQuantumTaskRequest_additionalAttributeNames
+
+var GetQuantumTaskResponse = &sGetQuantumTaskResponse
+var GetQuantumTaskResponse_quantumTaskArn = &sGetQuantumTaskResponse_quantumTaskArn
+var GetQuantumTaskResponse_status = &sGetQuantumTaskResponse_status
+var GetQuantumTaskResponse_failureReason = &sGetQuantumTaskResponse_failureReason
+var GetQuantumTaskResponse_deviceArn = &sGetQuantumTaskResponse_deviceArn
+var GetQuantumTaskResponse_deviceParameters = &sGetQuantumTaskResponse_deviceParameters
+var GetQuantumTaskResponse_shots = &sGetQuantumTaskResponse_shots
+var GetQuantumTaskResponse_outputS3Bucket = &sGetQuantumTaskResponse_outputS3Bucket
+var GetQuantumTaskResponse_outputS3Directory = &sGetQuantumTaskResponse_outputS3Directory
+var GetQuantumTaskResponse_createdAt = &sGetQuantumTaskResponse_createdAt
+var GetQuantumTaskResponse_endedAt = &sGetQuantumTaskResponse_endedAt
+var GetQuantumTaskResponse_tags = &sGetQuantumTaskResponse_tags
+var GetQuantumTaskResponse_jobArn = &sGetQuantumTaskResponse_jobArn
+var GetQuantumTaskResponse_queueInfo = &sGetQuantumTaskResponse_queueInfo
+var GetQuantumTaskResponse_associations = &sGetQuantumTaskResponse_associations
+var GetQuantumTaskResponse_numSuccessfulShots = &sGetQuantumTaskResponse_numSuccessfulShots
+var GetQuantumTaskResponse_actionMetadata = &sGetQuantumTaskResponse_actionMetadata
+var GetQuantumTaskResponse_experimentalCapabilities = &sGetQuantumTaskResponse_experimentalCapabilities
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var SearchDevicesRequest = &sSearchDevicesRequest
+var SearchDevicesRequest_nextToken = &sSearchDevicesRequest_nextToken
+var SearchDevicesRequest_maxResults = &sSearchDevicesRequest_maxResults
+var SearchDevicesRequest_filters = &sSearchDevicesRequest_filters
+
+var SearchDevicesResponse = &sSearchDevicesResponse
+var SearchDevicesResponse_devices = &sSearchDevicesResponse_devices
+var SearchDevicesResponse_nextToken = &sSearchDevicesResponse_nextToken
+
+var SearchJobsRequest = &sSearchJobsRequest
+var SearchJobsRequest_nextToken = &sSearchJobsRequest_nextToken
+var SearchJobsRequest_maxResults = &sSearchJobsRequest_maxResults
+var SearchJobsRequest_filters = &sSearchJobsRequest_filters
+
+var SearchJobsResponse = &sSearchJobsResponse
+var SearchJobsResponse_jobs = &sSearchJobsResponse_jobs
+var SearchJobsResponse_nextToken = &sSearchJobsResponse_nextToken
+
+var SearchQuantumTasksRequest = &sSearchQuantumTasksRequest
+var SearchQuantumTasksRequest_nextToken = &sSearchQuantumTasksRequest_nextToken
+var SearchQuantumTasksRequest_maxResults = &sSearchQuantumTasksRequest_maxResults
+var SearchQuantumTasksRequest_filters = &sSearchQuantumTasksRequest_filters
+
+var SearchQuantumTasksResponse = &sSearchQuantumTasksResponse
+var SearchQuantumTasksResponse_quantumTasks = &sSearchQuantumTasksResponse_quantumTasks
+var SearchQuantumTasksResponse_nextToken = &sSearchQuantumTasksResponse_nextToken
+
+var SearchSpendingLimitsRequest = &sSearchSpendingLimitsRequest
+var SearchSpendingLimitsRequest_nextToken = &sSearchSpendingLimitsRequest_nextToken
+var SearchSpendingLimitsRequest_maxResults = &sSearchSpendingLimitsRequest_maxResults
+var SearchSpendingLimitsRequest_filters = &sSearchSpendingLimitsRequest_filters
+
+var SearchSpendingLimitsResponse = &sSearchSpendingLimitsResponse
+var SearchSpendingLimitsResponse_spendingLimits = &sSearchSpendingLimitsResponse_spendingLimits
+var SearchSpendingLimitsResponse_nextToken = &sSearchSpendingLimitsResponse_nextToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateSpendingLimitRequest = &sUpdateSpendingLimitRequest
+var UpdateSpendingLimitRequest_spendingLimitArn = &sUpdateSpendingLimitRequest_spendingLimitArn
+var UpdateSpendingLimitRequest_clientToken = &sUpdateSpendingLimitRequest_clientToken
+var UpdateSpendingLimitRequest_spendingLimit = &sUpdateSpendingLimitRequest_spendingLimit
+var UpdateSpendingLimitRequest_timePeriod = &sUpdateSpendingLimitRequest_timePeriod
+
+var UpdateSpendingLimitResponse = &sUpdateSpendingLimitResponse
+
+var Braket = &smithy.ServiceSchema{Schema: &s_Braket, Version: "2019-09-01"}
